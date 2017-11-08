@@ -1,0 +1,2 @@
+To download all the files from de CVS repository without using TortoiseCVS, open your favorite Internet browser and visit http://oohg.cvs.sourceforge.net/viewvc/oohg/, once the page is loaded click on "Download GNU tarball" link and save the file to your hard disk.
+The download file can be opened with any gzip file manager (like 7-zip).

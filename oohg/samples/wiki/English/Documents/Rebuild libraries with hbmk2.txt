@@ -1,0 +1,6 @@
+To build the ooHG libraries (liboohg.a, libhbprinter.a and libminiprint.a) for Harbour 3.x and MinGW (the compilers included in the official distro, available at http://sourceforge.net/projects/oohg/files/) using Harbour's 'hbmk2' tool:
+
+1. Update your working copy of OOHG, see How to update ooHG distro with the CVS changes.
+2. Switch to SOURCE folder.
+3. Create a text file named ML.BAT and paste the code included below.
+4. Execute ML.BAT (if everything went well, 'hbmk2' will create the libraries in C:\OOHG\LIB folder, along with a hidden folder named .hbmk).

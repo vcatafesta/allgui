@@ -1,0 +1,24 @@
+To download, for the first time, the ooHG sources from the CVS in SourceForge, follow this procedure:
+
+1. Install TortoiseCVS from http://www.tortoisecvs.org/download.shtml
+2. Open Windows Explorer, select C:\ and create a folder named OOHGCVS.
+3. Right click the new folder and select "CVS Checkout".
+   A new window will open.
+4. Click on the CVSROOT field and write:
+   :pserver:anonymous@oohg.cvs.sourceforge.net:/cvsroot/oohg
+5. Click on the Module field and write:
+   oohg
+6. Click on the OK button, wait for the download to finish and close the window.
+7. The folder C:\OOHGCVS now contains a new folder called OOHG, which holds a local copy of all the files in the CVS repository.
+   This folder is associated with the CVS in SourceForge in such a way that TortoiseCVS can keep track of changes.
+8. Move the OOHG folder to C:\ and, when Windows Explorer asks if you want to overwrite existing files, answer Yes.
+9. When the operation is finished, delete the no longer needed C:\OOHGCVS folder.
+10. Rebuild the libraries (see How to rebuild ooHG libraries).
+
+The next time you want to update your local copy with the latest version of the files in the CVS, follow this procedure:
+
+1. Open Windows Explorer and locate the C:\OOHG folder.
+2. Right click on it and select "CVS Update". A new window will open.
+3. Wait for the update to finish.
+4. The window will display the details of the processed files and the actions taken.
+5. To rebuild the libraries, see How to rebuild ooHG libraries .

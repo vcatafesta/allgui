@@ -1,0 +1,22 @@
+En este artículo asumo que se utiliza la distribución oficial de OOGH, que la misma está instalada en la carpeta C:\OOHG, y que se utilizan los compiladores Harbour y MinGW (opciones por defecto).
+
+Antes que nada, asegúrese que el PATH de su sistema incluye la carpeta C:\OOHG, en caso contrario deberá agregarla.
+
+Para construir un aplicación, siga el siguiente procedimiento:
+
+1. Abra una ventana de comandos y cámbiese a la carpeta que contiene el código fuente (archivos .prg).
+2. Ingrese el siguiente comando:
+   compile myApp
+3. Para generar un archivo de preprocesador utilice:
+   compile myApp /p
+4. Si la aplicación está programada en modo consola utilice:
+   compile myApp /c
+5. Si desea añadir el debugger de Harbour utilice:
+   compile myApp /d
+
+Notas:
+1. Si la aplicación tiene más de un archivo fuente (ej.: myApp.prg y myFuncs.prg), para construirla con éxito necesitará agregar al final de myApp.prg:
+   #include "myFuncs.prg"
+2. Para incluir un archivo de recursos (.rc) deberá nombrarlo myApp.rc y colocarlo en la misma carpeta donde está ubicado myApp.prg.
+   Para utilizar un archivo de recursos adicionales deberá agregar al final de myApp.rc: #include "another.rc".
+3. Por defecto, el proceso de construcción del ejecutable incluye automáticamente el archivo de recursos de ooHG (archivo oohg.rc de la carpeta include).

@@ -1,0 +1,40 @@
+/*
+ * Este archivo de recursos es una parte del Ejemplo Button n° 3
+ * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+ * Licenciado bajo The Code Project Open License (CPOL) 1.02
+ * Ver <http://www.codeproject.com/info/cpol10.aspx>
+ *
+ * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+ * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+ *
+ * El archivo de recursos y las imágenes pueden descargarse desde:
+ * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Button
+ */
+
+I_CHECK   ICON    CHECK.ICO
+I_EXIT    ICON    EXIT.ICO
+I_FREE    ICON    FREE.ICO
+I_INFO2   ICON    INFO2.ICO
+I_OTRO    ICON    OTRO.ICO
+I_GLOBE   ICON    GLOBE.ICO
+I_OOHG    ICON    OOHG.ICO
+I_LED1    ICON    LED_ON.ICO
+I_LED2    ICON    LED_ON2.ICO
+INTL_NO   ICON    INTL_NO.ico
+I_INFO1   ICON    INFO1.ICO
+I_ALBAR   ICON    ALBARAN.ICO
+
+B_CHECK   BITMAP  CHECK.BMP
+B_EXIT    BITMAP  EXIT.BMP
+B_FREE    BITMAP  FREE.BMP
+B_INFO    BITMAP  INFO2.BMP
+B_OOHG    BITMAP  OOHG.BMP
+B_ALBAR   BITMAP  ALBARAN.BMP
+
+J_OOHG    JPG     OOHG.JPG
+P_OOHG    JPEG    OOHG.JPEG
+G_OOHG    GIF     OOHG.GIF
+
+/*
+ * EOF
+ */
