@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<designer>
+  <widgetset>resource/widgets.xml</widgetset>
+  <format name="Plain text format" ext="frm" file="resource/f_text.prg" rdscr="read" cnvtable="table"/>
+  <format name="Hwgui source file" ext="prg" file="resource/f_hwgprg.prg" wrscr="write"/>
+  <editor>editor.iml</editor>
+  <rep_widgetset>resource/repwidg.xml</rep_widgetset>
+  <rep_format name="Plain text format" ext="rpt" file="resource/r_text.prg" rdscr="read"/>
+  <dirpath default="c:\docume~1\maurizio\desktop\designer7\designer\"/>
+  <recent>
+    <file>c:\docume~1\maurizio\desktop\designer7\designer\tela03.xml</file>
+    <file>c:\cvs\xhsys\resource\test.xml</file>
+    <file>c:\cvs\xhsys\resource\formenginesample.xml</file>
+  </recent>
+  <grid default="5"/>
+</designer>
