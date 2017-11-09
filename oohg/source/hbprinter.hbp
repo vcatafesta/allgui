@@ -1,27 +1,8 @@
-#
-# $Id: hbprinter.hbp,v 1.7 2016/12/10 18:52:26 fyurisich Exp $
-#
-
-# build a static library
 -hblib
-
-# compilation is incremental (hidden .hmk folder is created)
-# to make a full compilation add '-rebuild' flag to command line
 -inc
+-o${hb_install_prefix}/addons/oohg/lib/win/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/oohg/${hb_name}_funcs
+-i../include
+-n -q0 -w0 -es0
 
-# name of output file
--o${HG_ROOT}\${LIB_GUI}\${hb_name}
-
-# path to headers files (.ch)
--i${HG_ROOT}\include
-
-# harbour compiler flags
--n -q0 -ko -w3 -es2
-
-# uncomment this line to build .ppo files
-#-p${HG_ROOT}\source\ppo\
-
-# files to compile
 winprint.prg
-
-# EOF
