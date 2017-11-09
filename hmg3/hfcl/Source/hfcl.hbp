@@ -1,9 +1,10 @@
 -hblib
--o../../lib/hfcl
+-o${hb_install_prefix}/addons/hmg3/lib/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/hmg3/${hb_name}.hbx
 
--Iinclude
+hmg3.hbc
 -I../include
-
+-beep
 -D__HBIDE__
 
 -w0 -es2

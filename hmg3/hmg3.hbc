@@ -1,0 +1,28 @@
+# paths
+
+incpaths=${hb_curdir}
+incpaths=include
+libpaths=${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}
+
+# main hmg libs
+
+libs=hmg3 crypt editex graph ini report
+
+#error
+
+#libs=edit hfcl
+
+# system libs
+
+libs=msvfw32 vfw32
+
+# harbour contrib libs
+
+libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc hbvpdf
+#libs=sqlite3 hbsqlit3 sddodbc rddsql sddmy hbodbc odbc32 hbmysql mysql hbmemio
+#libs=hbhpdf hbfimage hbpgsql hbnetio png hbvpdf hbzebra
+#libs=xhb
+
+# link compiled resources
+
+sources=resources\hmg3.rc

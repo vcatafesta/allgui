@@ -1,24 +1,11 @@
-#
-# hmg.hbp
-#
-
 -hblib
-
--inc
-
--o../lib/minigui
-
--I../include
+-o${hb_install_prefix}/addons/hmge/lib/win/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/hmge/${hb_name}.hbx
+hmge.hbc
 
 -w3 -es2 -ko -q0
 
-{mingw}-l
-
--warn=yes
-
 {msvc}-cflag=-D_CRT_SECURE_NO_WARNINGS
-
-{bcc}-hbx=../include/hmg.hbx
 
 c_bitmap.c
 c_browse.c

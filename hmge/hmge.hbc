@@ -1,0 +1,2 @@
+incpaths=include
+libpaths=${hb_install_prefix}/addons/hmge/lib/win/${hb_name}

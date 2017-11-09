@@ -1,8 +1,9 @@
 -hblib
 
--o../../lib/ini
+-o${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/hmg3/${hb_name}.hbx
 
--Iinclude
+hmg3.hbc
 
 -D__HBIDE__
 

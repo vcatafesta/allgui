@@ -1,0 +1,11 @@
+-hbcontainer
+source/hmg3.hbp
+source/crypt/crypt.hbp
+source/edit/edit.hbp
+source/editex/editex.hbp
+source/graph/graph.hbp
+source/hbvpdf/hbvpdf.hbp
+source/ini/ini.hbp
+source/report/report.hbp
+hfcl/source/hfcl.hbp
+-beep
