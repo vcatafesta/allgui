@@ -6,11 +6,7 @@ libpaths=${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}
 
 # main hmg libs
 
-libs=hmg3 crypt editex graph ini report
-
-#error
-
-#libs=edit hfcl
+libs=hmg3_core hmg3_crypt hmg3_edit hmg3_editex hmg3_graph hmg3_ini hmg3_report hmg3_hfcl
 
 # system libs
 

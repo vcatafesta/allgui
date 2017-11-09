@@ -1,2 +1,4 @@
 -hbcontainer
-source\hmge.hbp
+source\hmge_core.hbp
+source\propgrid\hmge_propgrid.hbp
+source\propsheet\hmge_propsheet.hbp

@@ -145,3 +145,5 @@ h_winapimisc.prg
 h_windows.prg
 h_windowsMDI.prg
 h_winprop.prg
+tget\tget.prg
+tget\tgetint.prg

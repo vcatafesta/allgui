@@ -1,2 +1,3 @@
 incpaths=include
 libpaths=${hb_install_prefix}/addons/hmge/lib/win/${hb_comp}/${hb_name}
+libs=hmge_core hmge_propgrid hmge_propsheet
