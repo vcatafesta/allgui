@@ -4,6 +4,5 @@
 -beep
 hmge.hbc
 
-h_pglang.prg
-h_propgrid.prg
-c_propgrid.c
+hxmldoc.prg
+xmlparse.c

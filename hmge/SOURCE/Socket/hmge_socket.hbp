@@ -4,6 +4,12 @@
 -beep
 hmge.hbc
 
-h_pglang.prg
-h_propgrid.prg
-c_propgrid.c
+md5c.c
+socket.c
+tdecode.prg
+tftp.prg
+thttp.prg
+tpair.prg
+tpop3.prg
+tsmtp.prg
+tsocket.prg

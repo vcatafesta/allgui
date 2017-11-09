@@ -4,6 +4,8 @@
 -beep
 hmge.hbc
 
-h_pglang.prg
-h_propgrid.prg
-c_propgrid.c
+SQLiteFacade.prg
+SQLiteFacadeHelper.prg
+SQLiteFacadeRecordSet.prg
+SQLiteFacadeRecordSetMockup.prg
+SQLiteFacadeStatement.prg

@@ -1,9 +1,10 @@
+{mingw}-stop
 -hblib
 -o${hb_install_prefix}/addons/hmge/lib/win/${hb_comp}/${hb_name}
 -hbx=${hb_install_prefix}/addons/hmge/${hb_name}.hbx
 -beep
 hmge.hbc
 
-h_pglang.prg
-h_propgrid.prg
-c_propgrid.c
+postgres.c
+rddcopy.c
+tpostgre.prg
