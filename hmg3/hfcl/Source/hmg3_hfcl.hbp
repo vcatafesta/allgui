@@ -1,5 +1,5 @@
 -hblib
--o${hb_install_prefix}/addons/hmg3/lib/${hb_comp}/${hb_name}
+-o${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}/${hb_name}
 -hbx=${hb_install_prefix}/addons/hmg3/${hb_name}.hbx
 
 hmg3.hbc
