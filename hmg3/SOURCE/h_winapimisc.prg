@@ -1,61 +1,61 @@
 /*----------------------------------------------------------------------------
- HMG - Harbour Windows GUI library source code
+HMG - Harbour Windows GUI library source code
 
- Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
- http://sites.google.com/site/hmgweb/
+Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
- Head of HMG project:
+Head of HMG project:
 
-      2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
-      http://sites.google.com/site/hmgweb/
+2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
-      2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
-      http://srvet.blogspot.com
+2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
+http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
- contained in this release of HMG.
+As a special exception, you have permission for additional uses of the text
+contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- HMG library code into it.
+The exception is that, if you link the HMG library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+HMG library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+"Harbour Project"
+Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 MEMVAR _HMG_SYSDATA
+
 #include "hmg.ch"
 #include "common.ch"
-
 
 /*
 #define CSIDL_DESKTOP                   0x0000    // ok    // <desktop>
@@ -119,114 +119,107 @@ MEMVAR _HMG_SYSDATA
 #define CSIDL_FLAG_MASK                 0xFF00  // ok      // mask for all possible flag values
 */
 
+FUNCTION GetWindowsFolder()
 
-*-----------------------------------------------------------------------------*
-Function GetWindowsFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-    lFolder := GETWINDOWSDIR()
-return lfolder
+   LOCAL lfolder
 
+   lFolder := GETWINDOWSDIR()
 
-*-----------------------------------------------------------------------------*
-Function GetSystemFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-  lfolder:=GETSYSTEMDIR()
-return lfolder
+   RETURN lfolder
 
+FUNCTION GetSystemFolder()
 
-*-----------------------------------------------------------------------------*
-Function GetTempFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-  lfolder:=GETTEMPDIR()
-return lfolder
+   LOCAL lfolder
 
+   lfolder:=GETSYSTEMDIR()
 
-*-----------------------------------------------------------------------------*
-Function GetMyDocumentsFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-  lfolder:=getspecialfolder(CSIDL_PERSONAL)
-return lfolder
+   RETURN lfolder
 
+FUNCTION GetTempFolder()
 
-*-----------------------------------------------------------------------------*
-Function GetDesktopFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-  lfolder:=getspecialfolder(CSIDL_DESKTOPDIRECTORY)
-return lfolder
+   LOCAL lfolder
 
+   lfolder:=GETTEMPDIR()
 
-*-----------------------------------------------------------------------------*
-Function GetProgramFilesFolder()
-*-----------------------------------------------------------------------------*
-local lfolder
-  lfolder:=getspecialfolder(CSIDL_PROGRAM_FILES)
-return lfolder
-*-----------------------------------------------------------------------------*
+   RETURN lfolder
 
+FUNCTION GetMyDocumentsFolder()
 
-*-----------------------------------------------------------------------------*
-Function GETSPECIALFOLDER(nCSIDL) // Contributed By Ryszard Rylko
-*-----------------------------------------------------------------------------*
-Local   RetVal
-	RetVal:=C_getspecialfolder(nCSIDL)
-return RetVal
+   LOCAL lfolder
 
+   lfolder:=getspecialfolder(CSIDL_PERSONAL)
 
-*-----------------------------------------------------------------------------*
-Function WindowsVersion()
-*-----------------------------------------------------------------------------*
-LOCAL   aRetVal
-aRetVal := WinVersion()
-RETURN { aRetVal [1] + aRetVal [4] , aRetVal [2] , 'Build ' + aRetVal [3] }
+   RETURN lfolder
 
+FUNCTION GetDesktopFolder()
 
-*-----------------------------------------------------------------------------*
-Function _Execute( nActiveWindowhandle , cOperation , cFile , cParaMeters , cDefault , nState )
-*-----------------------------------------------------------------------------*
+   LOCAL lfolder
 
-	If ValType ( nActiveWindowhandle ) == 'U'
-		nActiveWindowhandle := 0
-	EndIf
+   lfolder:=getspecialfolder(CSIDL_DESKTOPDIRECTORY)
 
-	If ValType ( cOperation ) == 'U'
-		cOperation := Nil
-	EndIf
+   RETURN lfolder
 
-	If ValType ( cFile ) == 'U'
-		cFile := ""
-	EndIf
+FUNCTION GetProgramFilesFolder()
 
-	If ValType ( cParaMeters ) == 'U'
-		cParaMeters := Nil
-	EndIf
+   LOCAL lfolder
 
-	If ValType ( cDefault ) == 'U'
-		 cDefault := Nil
-	EndIf
+   lfolder:=getspecialfolder(CSIDL_PROGRAM_FILES)
 
-	If ValType ( nState ) == 'U'
-		 nState := 10 // SW_SHOWDEFAULT
-	EndIf
+   RETURN lfolder
 
-	ShellExecute ( nActiveWindowhandle , cOperation , cFile , cParaMeters , cDefault , nState )
+FUNCTION GETSPECIALFOLDER(nCSIDL) // Contributed By Ryszard Rylko
 
-RETURN Nil
+   LOCAL   RetVal
 
+   RetVal:=C_getspecialfolder(nCSIDL)
 
+   RETURN RetVal
 
-*****************************************************************
-* by Dr. Claudio Soto (June 2014)
-*****************************************************************
+FUNCTION WindowsVersion()
 
+   LOCAL   aRetVal
 
-//       HMG_GetOnKeyControlIndex ( [ @nSubIndex ] ) --> nIndex
+   aRetVal := WinVersion()
+
+   RETURN { aRetVal [1] + aRetVal [4] , aRetVal [2] , 'Build ' + aRetVal [3] }
+
+FUNCTION _Execute( nActiveWindowhandle , cOperation , cFile , cParaMeters , cDefault , nState )
+
+   IF ValType ( nActiveWindowhandle ) == 'U'
+      nActiveWindowhandle := 0
+   ENDIF
+
+   IF ValType ( cOperation ) == 'U'
+      cOperation := Nil
+   ENDIF
+
+   IF ValType ( cFile ) == 'U'
+      cFile := ""
+   ENDIF
+
+   IF ValType ( cParaMeters ) == 'U'
+      cParaMeters := Nil
+   ENDIF
+
+   IF ValType ( cDefault ) == 'U'
+      cDefault := Nil
+   ENDIF
+
+   IF ValType ( nState ) == 'U'
+      nState := 10 // SW_SHOWDEFAULT
+   ENDIF
+
+   ShellExecute ( nActiveWindowhandle , cOperation , cFile , cParaMeters , cDefault , nState )
+
+   RETURN NIL
+
+   * by Dr. Claudio Soto (June 2014)
+
+   //       HMG_GetOnKeyControlIndex ( [ @nSubIndex ] ) --> nIndex
+
 FUNCTION HMG_GetOnKeyControlIndex (VarRef, i, k)
-STATIC nIndex := 0, nSubIndex := 0
+
+   STATIC nIndex := 0, nSubIndex := 0
    IF ValType (i) == "N"
       nIndex := i
    ENDIF
@@ -234,12 +227,14 @@ STATIC nIndex := 0, nSubIndex := 0
       nSubIndex := k
    ENDIF
    VarRef := nSubIndex
-RETURN nIndex
 
+   RETURN nIndex
 
-//       HMG_GetOnMouseControlIndex ( [ @nSubIndex ] ) --> nIndex
+   //       HMG_GetOnMouseControlIndex ( [ @nSubIndex ] ) --> nIndex
+
 FUNCTION HMG_GetOnMouseControlIndex (VarRef, i, k)
-STATIC nIndex := 0, nSubIndex := 0
+
+   STATIC nIndex := 0, nSubIndex := 0
    IF ValType (i) == "N"
       nIndex := i
    ENDIF
@@ -247,11 +242,12 @@ STATIC nIndex := 0, nSubIndex := 0
       nSubIndex := k
    ENDIF
    VarRef := nSubIndex
-RETURN nIndex
 
+   RETURN nIndex
 
 FUNCTION _HMG_OnKey_OnMouse_Controls
-LOCAL i:=0, k:=0, nSubIndex1:=0, ret := NIL
+
+   LOCAL i:=0, k:=0, nSubIndex1:=0, ret := NIL
 
    IF ( EventIsKeyboardMessage() == .T. .OR. EventIsMouseMessage() == .T. ) .AND.  EventIsHMGWindowsMessage() == .F.
 
@@ -280,42 +276,51 @@ LOCAL i:=0, k:=0, nSubIndex1:=0, ret := NIL
       HMG_GetOnMouseControlIndex (NIL, 0, 0)
 
    ENDIF
-RETURN ret
 
+   RETURN ret
 
 FUNCTION _HMG_SetControlData (cControlName, cFormName, nIndex, nSubIndex, xData)
-LOCAL i := GetControlIndex (cControlName, cFormName)
-   IF i > 0 
+
+   LOCAL i := GetControlIndex (cControlName, cFormName)
+
+   IF i > 0
       IF ValType (nSubIndex) == "N" .AND. nSubIndex > 0
          _HMG_SYSDATA [nIndex] [i] [nSubIndex] := xData
       ELSE
          _HMG_SYSDATA [nIndex] [i] := xData
       ENDIF
    ELSE
+
       RETURN .F.
    ENDIF
-RETURN .T.
 
+   RETURN .T.
 
 FUNCTION _HMG_GetControlData (cControlName, cFormName, nIndex, nSubIndex, xData)
-LOCAL i := GetControlIndex (cControlName, cFormName)
-   IF i > 0 
+
+   LOCAL i := GetControlIndex (cControlName, cFormName)
+
+   IF i > 0
       IF ValType (nSubIndex) == "N" .AND. nSubIndex > 0
          _HMG_SYSDATA [nIndex] [i] [nSubIndex] := xData
       ELSE
          _HMG_SYSDATA [nIndex] [i] := xData
       ENDIF
    ELSE
+
       RETURN .F.
    ENDIF
-RETURN .T.
 
+   RETURN .T.
 
 PROCEDURE HMG_GarbageCall( lAll )
+
    DEFAULT lAll TO .T.
-   IF lAll == .T. 
+   IF lAll == .T.
       hb_GCall()    // Check all memory blocks if they can be released
    ELSE
       hb_GCStep()   // Check a single memory block if it can be released
    ENDIF
-RETURN
+
+   RETURN
+

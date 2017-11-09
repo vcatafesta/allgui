@@ -1,32 +1,31 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <roblez@ciudad.com.ar>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <roblez@ciudad.com.ar>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
 *Set Procedure To Other.Prg
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'Harbour MiniGUI Demo' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Harbour MiniGUI Demo' ;
+         MAIN
 
-	END WINDOW
+   END WINDOW
 
-	InOtherPrg()
+   InOtherPrg()
 
-	Form_1.Center
+   Form_1.Center
 
-	Form_1.Activate
+   Form_1.Activate
 
-Return Nil
+   RETURN NIL
 
 STATIC PROCEDURE TEST
 
-RETURN
+   RETURN

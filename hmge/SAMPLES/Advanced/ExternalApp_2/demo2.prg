@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2014 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2014 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "hmg.ch"
@@ -34,120 +33,117 @@
 #xtranslate ExternalApp.WIDTH  := <arg> => _SetWindowSizePos ( ExternalApp.HANDLE,      ,      , <arg>,       )
 #xtranslate ExternalApp.HEIGHT := <arg> => _SetWindowSizePos ( ExternalApp.HANDLE,      ,      ,      , <arg> )
 
-
 FUNCTION Main()
 
-	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 400 HEIGHT 200 ;
-		TITLE "External Application Control" ;
-		MAIN ;
-		ON INIT StartIt() ;
-		ON RELEASE CloseIt()
+   DEFINE WINDOW Form_Main ;
+         AT 0,0 ;
+         WIDTH 400 HEIGHT 200 ;
+         TITLE "External Application Control" ;
+         MAIN ;
+         ON INIT StartIt() ;
+         ON RELEASE CloseIt()
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	180
-			CAPTION 'Minimize/Maximize Notepad' 
-			ACTION MinimizeIt()
-			DEFAULT .T.
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   180
+         CAPTION 'Minimize/Maximize Notepad'
+         ACTION MinimizeIt()
+         DEFAULT .T.
+      END BUTTON
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	180
-			CAPTION 'Hide/Show Notepad' 
-			ACTION OnOff_ExternalApp()
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   180
+         CAPTION 'Hide/Show Notepad'
+         ACTION OnOff_ExternalApp()
+      END BUTTON
 
-		DEFINE BUTTON Button_3
-			ROW	70
-			COL	10
-			WIDTH	180
-			CAPTION 'Set New Width of Notepad' 
-			ACTION iif (ExternalApp.IsOpen == .T., ExternalApp.WIDTH := 400, NIL)
-		END BUTTON
+      DEFINE BUTTON Button_3
+         ROW   70
+         COL   10
+         WIDTH   180
+         CAPTION 'Set New Width of Notepad'
+         ACTION iif (ExternalApp.IsOpen == .T., ExternalApp.WIDTH := 400, NIL)
+      END BUTTON
 
-		DEFINE BUTTON Button_4
-			ROW	100
-			COL	10
-			WIDTH	180
-			CAPTION 'Set New Height of Notepad' 
-			ACTION iif (ExternalApp.IsOpen == .T., ExternalApp.HEIGHT := 400, NIL)
-		END BUTTON
+      DEFINE BUTTON Button_4
+         ROW   100
+         COL   10
+         WIDTH   180
+         CAPTION 'Set New Height of Notepad'
+         ACTION iif (ExternalApp.IsOpen == .T., ExternalApp.HEIGHT := 400, NIL)
+      END BUTTON
 
-		DEFINE BUTTON Button_5
-			ROW	130
-			COL	10
-			WIDTH	180
-			CAPTION 'Cancel'
-			ACTION ThisWindow.Release
-		END BUTTON
+      DEFINE BUTTON Button_5
+         ROW   130
+         COL   10
+         WIDTH   180
+         CAPTION 'Cancel'
+         ACTION ThisWindow.Release
+      END BUTTON
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_Main
+   CENTER WINDOW Form_Main
 
-	ACTIVATE WINDOW Form_Main
+   ACTIVATE WINDOW Form_Main
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION StartIt()
 
    IF ExternalApp.IsOpen == .F.
 
       IF .NOT. FILE (ExternalApp.FULLFILENAME)
-         RETURN Nil
+
+         RETURN NIL
       ENDIF
 
-      ExternalApp.OPEN   HIDE
+      EXTERNALApp.OPEN   HIDE
 
       Inkey (1)   // Wait until the application is loaded
 
-      ExternalApp.TITLE := "Notepad - Untitled"
-      ExternalApp.SHOW
+      EXTERNALApp.TITLE := "Notepad - Untitled"
+      EXTERNALApp.SHOW
 
    ENDIF
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION CloseIt()
 
-    IF ExternalApp.IsOpen == .T.
-	ExternalApp.RELEASE
-    ENDIF
+   IF ExternalApp.IsOpen == .T.
+      EXTERNALApp.RELEASE
+   ENDIF
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION MinimizeIt()
 
    IF ExternalApp.IsOpen == .T.
 
-	IF ExternalApp.IsMinimize == .T.
+      IF ExternalApp.IsMinimize == .T.
 
-		_Maximize( ExternalApp.HANDLE )
+         _Maximize( ExternalApp.HANDLE )
 
-	ELSE
+      ELSE
 
-		_Minimize( ExternalApp.HANDLE )
+         _Minimize( ExternalApp.HANDLE )
 
-	ENDIF
+      ENDIF
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-
-#define GW_OWNER		4
+   #define GW_OWNER      4
 
 FUNCTION _HMG_ExternalAppGetHandle
-STATIC hWnd := 0
-LOCAL aWin, i, cFullFileName := ""
+
+   STATIC hWnd := 0
+   LOCAL aWin, i, cFullFileName := ""
 
    IF IsValidWindowHandle (hWnd) == .F.
 
@@ -169,21 +165,19 @@ LOCAL aWin, i, cFullFileName := ""
 
    ENDIF
 
-RETURN hWnd
-
+   RETURN hWnd
 
 PROCEDURE OnOff_ExternalApp
 
    StartIt()
 
    IF ExternalApp.IsVisible == .F.
-      ExternalApp.SHOW
+      EXTERNALApp.SHOW
    ELSE
-      ExternalApp.HIDE
+      EXTERNALApp.HIDE
    ENDIF
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -235,7 +229,7 @@ void GetExeName(HWND hWnd, char *szFileName)
    lpfnEnumProcessModules(hProc,ahMods,sizeof(ahMods),&dwSize);
 
    lpfnGetModuleFileNameEx(hProc,ahMods[0],szFileName,_MAX_PATH);
-		
+
    CloseHandle(hProc);
 
    FreeLibrary(hInstLib);
@@ -260,7 +254,7 @@ static PHB_ITEM pArray;
 
 BOOL CALLBACK EnumWindowsProc( HWND hWnd, LPARAM lParam )
 {
-  PHB_ITEM pHWnd = hb_itemPutNL( NULL, ( LONG ) hWnd ); 
+  PHB_ITEM pHWnd = hb_itemPutNL( NULL, ( LONG ) hWnd );
 #if defined( __MINGW32__ )
    UNREFERENCED_PARAMETER( lParam );
 #endif
@@ -287,3 +281,4 @@ HB_FUNC ( ISMAXIMIZED )
 }
 
 #pragma ENDDUMP
+

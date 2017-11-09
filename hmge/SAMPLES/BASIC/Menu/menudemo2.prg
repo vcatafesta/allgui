@@ -1,5 +1,5 @@
 /*
- * MiniGUI Menu Demo
+* MiniGUI Menu Demo
 */
 
 #include "minigui.ch"
@@ -10,29 +10,28 @@ PROCEDURE Main
    LOCAL m_char
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'Menu Demo 2' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Menu Demo 2' ;
+         MAIN
 
-   DEFINE MAIN MENU
-      POPUP "&Option"
+      DEFINE MAIN MENU
+         POPUP "&Option"
 
-      FOR n := 1 TO 3
-         m_char := StrZero( n, 2 )
-         MENUITEM 'EXE ' + m_char ACTION MenuProc() NAME &m_char
-      NEXT
+            FOR n := 1 TO 3
+               m_char := StrZero( n, 2 )
+               MENUITEM 'EXE ' + m_char ACTION MenuProc() NAME &m_char
+            NEXT
 
-      END POPUP
-   END MENU
+         END POPUP
+      END MENU
 
    END WINDOW
 
    ACTIVATE WINDOW Win_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE MenuProc()
 
@@ -44,4 +43,5 @@ PROCEDURE MenuProc()
       MsgInfo ( 'Action 03' )
    ENDIF
 
-RETURN
+   RETURN
+

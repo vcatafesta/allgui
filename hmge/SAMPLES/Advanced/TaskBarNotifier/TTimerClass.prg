@@ -1,9 +1,7 @@
 /*
- * Harbour TTimer Class v1.0
- * Copyright 2007 P.Chornyj <myorg63@mail.ru>
- *
- * Last revision 18.09.2007
- *
+* Harbour TTimer Class v1.0
+* Copyright 2007 P.Chornyj <myorg63@mail.ru>
+* Last revision 18.09.2007
 */
 
 ANNOUNCE CLASS_TTIMER
@@ -14,46 +12,54 @@ ANNOUNCE CLASS_TTIMER
 #define UNDECLARED
 
 /* ------------------------- CLASS TIMER ---------------------- */
+
 CLASS TTimer
 
-PROTECTED:
-   CLASSDATA aTimers    INIT {}
+   PROTECTED:
+CLASSDATA aTimers    INIT {}
 
    DATA Name            INIT ""
    DATA ID              INIT 0
    DATA lEnabled        INIT FALSE
    DATA nInterval       INIT 500
-   DATA pTimerProc      INIT NIL 
+   DATA pTimerProc      INIT NIL
    DATA WndHandle       INIT Nil   //0
 
-EXPORTED:
+   EXPORTED:
    DATA cargo           INIT NIL
 
-   ACCESS Interval 
+   ACCESS Interval
    ASSIGN Interval( n ) INLINE ::Interval( n )
 
-   METHOD Init( nHandle, nInterval, bBlock, lStart ) CONSTRUCTOR
-   DESTRUCTOR Destroy 
+METHOD Init( nHandle, nInterval, bBlock, lStart ) CONSTRUCTOR
 
-   METHOD Enabled()     INLINE ::lEnabled    
-   METHOD ExecTimerProc( hWnd, Msg, TimerId, Time )
-   METHOD OnTimer( b ) 
-   METHOD Start()
-   METHOD Stop()
+   DESTRUCTOR Destroy
 
-//   UNDECLARED METHOD ClassName()  INLINE ( "TTimer" )
-   UNDECLARED METHOD GetById( nId ) 
-   UNDECLARED METHOD GetByName( sName ) 
+METHOD Enabled()     INLINE ::lEnabled
+
+METHOD ExecTimerProc( hWnd, Msg, TimerId, Time )
+
+METHOD OnTimer( b )
+
+METHOD Start()
+
+METHOD Stop()
+
+   //   UNDECLARED METHOD ClassName()  INLINE ( "TTimer" )
+   UNDECLARED METHOD GetById( nId )
+   UNDECLARED METHOD GetByName( sName )
    UNDECLARED METHOD ObjectName() INLINE ::Name
+
 ENDCLASS
 
 /*
 */
+
 METHOD Init( nHandle, nInterval, bBlock, lStart ) CLASS TTimer
 
    DEFAULT nInterval TO 500
    DEFAULT lStart    TO FALSE
-   
+
    ::Name := "Timer_" + AllTRim( Str( _GetId() ) )
    ::WndHandle  := nHandle
    ::nInterval  := nInterval
@@ -68,43 +74,51 @@ METHOD Init( nHandle, nInterval, bBlock, lStart ) CLASS TTimer
 
    //register object
    AAdd( ::aTimers, @Self )
-RETURN Self
 
-/*
-*/
+   RETURN Self
+
+   /*
+   */
+
 PROCEDURE Destroy() CLASS TTimer
-LOCAL nPos := 0
-LOCAL TimerName := ::Name
+
+   LOCAL nPos := 0
+   LOCAL TimerName := ::Name
 
    ::Stop()
 
    nPos := AScan( ::aTimers, { |o| o:Name == TimerName } )
-   IF nPos <> 0  
-      ADel( ::aTimers, nPos ) 
+   IF nPos <> 0
+      ADel( ::aTimers, nPos )
       ASize( ::aTimers, Len( ::aTimers ) - 1 )
    ENDIF
-RETURN 
 
-/*
-*/
+   RETURN
+
+   /*
+   */
+
 METHOD Start() CLASS TTimer
-LOCAL lTimerProc := Hb_IsBlock( ::pTimerProc ) 
+
+   LOCAL lTimerProc := Hb_IsBlock( ::pTimerProc )
 
    IF ( !::lEnabled )
-                 ::ID := _GetId() 
+      ::ID := _GetId()
 
       IF ( Hb_IsNil( ::WndHandle ) )
          ::ID := _InitTimer( ::WndHandle, ::ID, ::nInterval, lTimerProc )
       ELSE
-         _InitTimer( ::WndHandle, ::ID, ::nInterval, lTimerProc )               
+         _InitTimer( ::WndHandle, ::ID, ::nInterval, lTimerProc )
       ENDIF
 
       ::lEnabled := TRUE
-   ENDIF   
-RETURN Self
+   ENDIF
 
-/*
-*/
+   RETURN Self
+
+   /*
+   */
+
 METHOD Stop() CLASS TTimer
 
    IF ::lEnabled
@@ -112,75 +126,91 @@ METHOD Stop() CLASS TTimer
 
       ::lEnabled := FALSE
    ENDIF
-RETURN Self
 
-/*
-*/
+   RETURN Self
+
+   /*
+   */
+
 METHOD Interval( nValue ) CLASS TTimer
-LOCAL nOldValue := ::nInterval
+
+   LOCAL nOldValue := ::nInterval
 
    IF ( ( PCOUNT() > 0 ) .AND. Hb_IsNumeric( nValue ) )
       ::Stop()
       ::nInterval := nValue
       ::Start()
    ENDIF
-RETURN nOldValue
 
-/*
-*/
+   RETURN nOldValue
+
+   /*
+   */
+
 METHOD OnTimer( b ) CLASS TTimer
-LOCAL pOldProc := ::pTimerProc
+
+   LOCAL pOldProc := ::pTimerProc
 
    IF ( ( PCOUNT() > 0 ) .AND. Hb_IsBlock( b ) )
       ::Stop()
       ::pTimerProc := b
       ::Start()
    ENDIF
-RETURN pOldProc
 
-/*
-*/
+   RETURN pOldProc
+
+   /*
+   */
+
 METHOD ExecTimerProc( ... )
 
    IF ( Hb_IsBlock( ::pTimerProc ) )
       Hb_ExecFromArray( ::pTimerProc, { ... } )
    ENDIF
-RETURN Self
 
-/*
- UTILYZE
-*/
+   RETURN Self
+
+   /*
+   UTILYZE
+   */
+
 METHOD GetById( nTimerId ) CLASS TTimer
-LOCAL oResult := NIL, nPos := 0
+
+   LOCAL oResult := NIL, nPos := 0
 
    IF Hb_IsNumeric( nTimerId ) .AND. ( ( nPos := AScan( ::aTimers, {|o| o:ID == nTimerId } ) ) > 0 )
-      oResult := ::aTimers[ nPos ]      
+      oResult := ::aTimers[ nPos ]
    ENDIF
-RETURN oResult
+
+   RETURN oResult
 
 METHOD GetByName( sName ) CLASS TTimer
-LOCAL oResult := NIL, nPos := 0
+
+   LOCAL oResult := NIL, nPos := 0
 
    IF Hb_IsString( sName ) .AND. ( ( nPos := AScan( ::aTimers, {|o| o:Name == sName } ) ) > 0 )
-      oResult := ::aTimers[ nPos ]   
+      oResult := ::aTimers[ nPos ]
    ENDIF
-RETURN oResult
 
-/* ---------------------- END CLASS TIMER --------------------- */
+   RETURN oResult
 
-/*
- (TIMERPROC) _OnTimerEvents  
-*/
+   /* ---------------------- END CLASS TIMER --------------------- */
+
+   /*
+   (TIMERPROC) _OnTimerEvents
+   */
 
 PROCEDURE _OnTimerEvents( hWnd, Msg, TimerId, Time )
-LOCAL T := TTimer():GetById( TimerId )
+
+   LOCAL T := TTimer():GetById( TimerId )
 
    IF Hb_IsObject( T )
       T:ExecTimerProc( hWnd, Msg, TimerId, Time )
    ENDIF
-RETURN 
 
-/* ------------------------------------------------------------ */
+   RETURN
+
+   /* ------------------------------------------------------------ */
 #pragma BEGINDUMP
 
 #include <windows.h>
@@ -198,15 +228,15 @@ VOID CALLBACK TTimerProc( HWND, UINT, UINT_PTR, DWORD );
 HB_FUNC ( _INITTIMER )
 {
    if ( hb_parl( 4 ) )
-   {     
-   hb_retni( SetTimer ( (HWND) hb_parnl(1), (UINT) hb_parni(2), 
-                        (UINT) hb_parni(3),          
-                        (TIMERPROC) TTimerProc)) ;  
-   }       
+   {
+   hb_retni( SetTimer ( (HWND) hb_parnl(1), (UINT) hb_parni(2),
+                        (UINT) hb_parni(3),
+                        (TIMERPROC) TTimerProc)) ;
+   }
    else
-      hb_retni( SetTimer ( (HWND) hb_parnl(1), (UINT) hb_parni(2), 
-                   (UINT) hb_parni(3),          
-                        (TIMERPROC) NULL)) ;  
+      hb_retni( SetTimer ( (HWND) hb_parnl(1), (UINT) hb_parni(2),
+                   (UINT) hb_parni(3),
+                        (TIMERPROC) NULL)) ;
 }
 
 /*

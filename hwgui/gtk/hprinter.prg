@@ -1,11 +1,9 @@
 /*
- *$Id: hprinter.prg,v 1.2 2005/09/16 11:13:29 alkresin Exp $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HPrinter class
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+*$Id: hprinter.prg,v 1.2 2005/09/16 11:13:29 alkresin Exp $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HPrinter class
+* Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -26,26 +24,41 @@ CLASS HPrinter INHERIT HObject
    DATA nCurrPage, oTrackV, oTrackH
    DATA nZoom, xOffset, yOffset, x1, y1, x2, y2
 
-   METHOD New( cPrinter,lmm )
-   METHOD SetMode( nOrientation )
-   METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline )
-   METHOD SetFont( oFont )
-   METHOD StartDoc( lPreview, cFileName )
-   METHOD EndDoc()
-   METHOD StartPage()
-   METHOD EndPage()
-   METHOD End()
-   METHOD Box( x1,y1,x2,y2,oPen )
-   METHOD Line( x1,y1,x2,y2,oPen )
-   METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont )
-   METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap )
-   METHOD Preview()  INLINE Nil
-   METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC,cString,Iif(oFont==Nil,Nil,oFont:handle) )
+METHOD New( cPrinter,lmm )
+
+METHOD SetMode( nOrientation )
+
+METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline )
+
+METHOD SetFont( oFont )
+
+METHOD StartDoc( lPreview, cFileName )
+
+METHOD EndDoc()
+
+METHOD StartPage()
+
+METHOD EndPage()
+
+METHOD End()
+
+METHOD Box( x1,y1,x2,y2,oPen )
+
+METHOD Line( x1,y1,x2,y2,oPen )
+
+METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont )
+
+METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap )
+
+METHOD Preview()  INLINE Nil
+
+METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC,cString,Iif(oFont==Nil,Nil,oFont:handle) )
 
 ENDCLASS
 
 METHOD New( cPrinter,lmm ) CLASS HPrinter
-Local aPrnCoors
+
+   LOCAL aPrnCoors
 
    IF lmm != Nil
       ::lmm := lmm
@@ -60,7 +73,8 @@ Local aPrnCoors
       ::cPrinterName := cPrinter
    ENDIF
    IF ::hDC == 0
-      Return Nil
+
+      RETURN NIL
    ELSE
       aPrnCoors := hwg_gp_GetDeviceArea( ::hDC )
       ::nWidth  := Iif( ::lmm, aPrnCoors[3], aPrnCoors[1] )
@@ -72,10 +86,11 @@ Local aPrnCoors
       // writelog( ::cPrinterName + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]) )
    ENDIF
 
-Return Self
+   RETURN Self
 
 METHOD SetMode( nOrientation ) CLASS HPrinter
-Local aPrnCoors
+
+   LOCAL aPrnCoors
 
    SetPrinterMode( ::hDC, nOrientation )
    aPrnCoors := hwg_gp_GetDeviceArea( ::hDC )
@@ -87,44 +102,49 @@ Local aPrnCoors
    ::nVRes   := aPrnCoors[2] / aPrnCoors[4]
    // writelog( ":"+str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6])+str(aPrnCoors[8])+str(aPrnCoors[9]) )
 
-Return .T.
+   RETURN .T.
 
 METHOD AddFont( fontName, nHeight ,lBold, lItalic, lUnderline, nCharset ) CLASS HPrinter
-Local oFont
+
+   LOCAL oFont
 
    IF ::lmm .AND. nHeight != Nil
       nHeight *= ::nVRes
    ENDIF
    oFont := HGP_Font():Add( fontName, nHeight, ;
-       Iif( lBold!=Nil.AND.lBold,700,400 ),    ;
-       Iif( lItalic!=Nil.AND.lItalic,255,0 ), Iif( lUnderline!=Nil.AND.lUnderline,1,0 ) )
+      Iif( lBold!=Nil.AND.lBold,700,400 ),    ;
+      Iif( lItalic!=Nil.AND.lItalic,255,0 ), Iif( lUnderline!=Nil.AND.lUnderline,1,0 ) )
 
-Return oFont
+   RETURN oFont
 
 METHOD SetFont( oFont )  CLASS HPrinter
-Local oFontOld := ::oFont
+
+   LOCAL oFontOld := ::oFont
 
    hwg_gp_SetFont( ::hDC,oFont:handle )
    ::oFont := oFont
-Return oFontOld
+
+   RETURN oFontOld
 
 METHOD End() CLASS HPrinter
 
    IF ::hDC != 0
-     hwg_UnrefPrinter( ::hDC )
-     ::hDC := 0
+      hwg_UnrefPrinter( ::hDC )
+      ::hDC := 0
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
 
-/*
+   /*
    IF oPen != Nil
-      SelectObject( ::hDC,oPen:handle )
+   SelectObject( ::hDC,oPen:handle )
    ENDIF
-*/
+   */
    IF y2 > ::nHeight
-      Return Nil
+
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -134,19 +154,20 @@ METHOD Box( x1,y1,x2,y2,oPen ) CLASS HPrinter
       y1 *= ::nVRes
       y2 *= ::nVRes
    ENDIF
-   hwg_gp_Rectangle( ::hDC,x1,y2,x2,y1 )   
+   hwg_gp_Rectangle( ::hDC,x1,y2,x2,y1 )
 
-Return Nil
+   RETURN NIL
 
 METHOD Line( x1,y1,x2,y2,oPen ) CLASS HPrinter
 
-/*
+   /*
    IF oPen != Nil
-      SelectObject( ::hDC,oPen:handle )
+   SelectObject( ::hDC,oPen:handle )
    ENDIF
-*/
+   */
    IF y2 > ::nHeight
-      Return Nil
+
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -159,13 +180,15 @@ METHOD Line( x1,y1,x2,y2,oPen ) CLASS HPrinter
 
    hwg_gp_DrawLine( ::hDC,x1,y2,x2,y1 )
 
-Return Nil
+   RETURN NIL
 
 METHOD Say( cString,x1,y1,x2,y2,nOpt,oFont ) CLASS HPrinter
-Local oFontOld
+
+   LOCAL oFontOld
 
    IF y2 > ::nHeight
-      Return Nil
+
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -175,22 +198,23 @@ Local oFontOld
       y1 *= ::nVRes
       y2 *= ::nVRes
    ENDIF
-   
+
    IF oFont != Nil
       oFontOld := ::SetFont( oFont )
    ENDIF
-   
+
    hwg_gp_DrawText( ::hDC,cString,x1,y2,x2,y1,Iif(nOpt==Nil,DT_LEFT,nOpt) )
    IF oFont != Nil
       ::SetFont( oFontOld )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
 
    IF y2 > ::nHeight
-      Return Nil
+
+      RETURN NIL
    ENDIF
    y1 := ::nHeight - y1
    y2 := ::nHeight - y2
@@ -199,11 +223,11 @@ METHOD Bitmap( x1,y1,x2,y2,nOpt,hBitmap ) CLASS HPrinter
       x2 *= ::nHRes
       y1 *= ::nVRes
       y2 *= ::nVRes
-   ENDIF 
+   ENDIF
 
    DrawBitmap( ::hDC,hBitmap,Iif(nOpt==Nil,SRCAND,nOpt),x1,y1,x2-x1+1,y2-y1+1 )
 
-Return Nil
+   RETURN NIL
 
 METHOD StartDoc( lPreview, cFileName ) CLASS HPrinter
 
@@ -212,59 +236,66 @@ METHOD StartDoc( lPreview, cFileName ) CLASS HPrinter
       hwg_gp_ToFile( ::hDC,cFileName )
    ENDIF
    ::nPage := 0
-Return Nil
+
+   RETURN NIL
 
 METHOD EndDoc() CLASS HPrinter
 
    Hwg_EndDoc( ::hDC )
-Return Nil
+
+   RETURN NIL
 
 METHOD StartPage() CLASS HPrinter
 
    Hwg_StartPage( ::hDC )
    ::nPage ++
-Return Nil
+
+   RETURN NIL
 
 METHOD EndPage() CLASS HPrinter
 
    Hwg_EndPage( ::hDC )
-Return Nil
 
+   RETURN NIL
 
-/*
- *  CLASS HGP_Font
- */
+   /*
+   *  CLASS HGP_Font
+   */
 
 CLASS HGP_Font INHERIT HObject
 
-   CLASS VAR aFonts   INIT {}
+CLASS VAR aFonts   INIT {}
+
    DATA handle
    DATA name, height ,weight
    DATA italic, Underline
    DATA nCounter   INIT 1
 
-   METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwItalic, fdwUnderline )
-   METHOD Release()
+METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwItalic, fdwUnderline )
+
+METHOD Release()
 
 ENDCLASS
 
 METHOD Add( fontName, nHeight ,fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Font
-Local i, nlen := Len( ::aFonts )
+
+   LOCAL i, nlen := Len( ::aFonts )
 
    nHeight  := Iif( nHeight==Nil,-13,nHeight )
    fnWeight := Iif( fnWeight==Nil,0,fnWeight )
    fdwItalic := Iif( fdwItalic==Nil,0,fdwItalic )
    fdwUnderline := Iif( fdwUnderline==Nil,0,fdwUnderline )
 
-   For i := 1 TO nlen
+   FOR i := 1 TO nlen
       IF ::aFonts[i]:name == fontName .AND.          ;
-         ::aFonts[i]:height == nHeight .AND.         ;
-         ::aFonts[i]:weight == fnWeight .AND.        ;
-         ::aFonts[i]:Italic == fdwItalic .AND.       ;
-         ::aFonts[i]:Underline == fdwUnderline
+            ::aFonts[i]:height == nHeight .AND.         ;
+            ::aFonts[i]:weight == fnWeight .AND.        ;
+            ::aFonts[i]:Italic == fdwItalic .AND.       ;
+            ::aFonts[i]:Underline == fdwUnderline
 
          ::aFonts[i]:nCounter ++
-         Return ::aFonts[i]
+
+         RETURN ::aFonts[i]
       ENDIF
    NEXT
 
@@ -278,19 +309,22 @@ Local i, nlen := Len( ::aFonts )
 
    Aadd( ::aFonts,Self )
 
-Return Self
+   RETURN Self
 
 METHOD Release() CLASS HGP_Font
-Local i, nlen := Len( ::aFonts )
+
+   LOCAL i, nlen := Len( ::aFonts )
 
    ::nCounter --
    IF ::nCounter == 0
-      For i := 1 TO nlen
+      FOR i := 1 TO nlen
          IF ::aFonts[i]:handle == ::handle
             Adel( ::aFonts,i )
             Asize( ::aFonts,nlen-1 )
-            Exit
+            EXIT
          ENDIF
       NEXT
    ENDIF
-Return Nil
+
+   RETURN NIL
+

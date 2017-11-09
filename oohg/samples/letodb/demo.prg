@@ -1,44 +1,44 @@
 /*
- * To build, use:
- *  SET THR_LIB=-lrddleto
- *  COMPILE demo
- */
+* To build, use:
+*  SET THR_LIB=-lrddleto
+*  COMPILE demo
+*/
 
 #include "oohg.ch"
 
-Function Main
-Local cTable, arr
-Local i, n1, n2
+FUNCTION Main
 
-REQUEST LETO
-RDDSETDEFAULT( "LETO" )
+   LOCAL cTable, arr
+   LOCAL i, n1, n2
 
-set language to spanish
+   REQUEST LETO
+   RDDSETDEFAULT( "LETO" )
 
-cTable := "//192.168.0.10:2812/ciro.dbf"
+   SET language to spanish
 
-arr := { { "FirstName", "C", 20, 0 }, ;
-{ "LastName", "C", 20, 0 }, ;
-{ "Age", "N", 3, 0 }, ;
-{ "Date", "D", 8, 0 }, ;
-{ "Rate", "N", 6, 2 }, ;
-{ "Student", "L", 1, 0 } }
+   cTable := "//192.168.0.10:2812/ciro.dbf"
 
-dbCreate( cTable, arr )
-use (cTable) alias letoex
+   arr := { { "FirstName", "C", 20, 0 }, ;
+      { "LastName", "C", 20, 0 }, ;
+      { "Age", "N", 3, 0 }, ;
+      { "Date", "D", 8, 0 }, ;
+      { "Rate", "N", 6, 2 }, ;
+      { "Student", "L", 1, 0 } }
 
-for i := 1 to 100
-append blank
-n1 := hb_RandomInt( 80 )
-n2 := hb_RandomInt( 50 )
-replace Age with n1, Date with Date() - 365*n2 + n1, Rate with 56.5 - n1/2
-replace FirstName with "A"+Chr(64+n2)+Padl(i,10,'0'), LastName with "B"+Chr(70+n2)+Padl(i,12,'0'), Student with ( (field->Age % 2) == 1 )
-next
+   dbCreate( cTable, arr )
+   USE (cTable) alias letoex
 
-go top
+   FOR i := 1 to 100
+      APPEND BLANK
+      n1 := hb_RandomInt( 80 )
+      n2 := hb_RandomInt( 50 )
+      REPLACE Age with n1, Date with Date() - 365*n2 + n1, Rate with 56.5 - n1/2
+      REPLACE FirstName with "A"+Chr(64+n2)+Padl(i,10,'0'), LastName with "B"+Chr(70+n2)+Padl(i,12,'0'), Student with ( (field->Age % 2) == 1 )
+   NEXT
 
-edit workarea letoex
+   GO TOP
 
+   edit workarea letoex
 
-Return Nil
+   RETURN NIL
 

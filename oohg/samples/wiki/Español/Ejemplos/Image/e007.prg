@@ -1,35 +1,34 @@
 /*
- * Ejemplo Image n° 7
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo pintar una imagen sobre otra y
- * cómo simular una imagen móvil, utilizando los métodos Copy
- * y Blend. Dese por avisado que bajo XP el flicker es horrible.
- * Vea en el Changelog la nota relacionada.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Image n° 7
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo pintar una imagen sobre otra y
+* cómo simular una imagen móvil, utilizando los métodos Copy
+* y Blend. Dese por avisado que bajo XP el flicker es horrible.
+* Vea en el Changelog la nota relacionada.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
+
    PUBLIC oImage, oSprite, wB, hB, wS, hS, hImage
 
    DEFINE WINDOW frm_Main ;
-      AT 0, 0 ;
-      MAIN ;
-      TITLE "Imagen Móvil" ;
-      CLIENTAREA ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      ON INIT ( wS := _OOHG_BitMapWidth( oSprite:HBitMap ), ;
-                hS := _OOHG_BitMapHeight( oSprite:HBitMap ), ;
-                wB := _OOHG_BitMapWidth( oImage:HBitMap ), ;
-                hB := _OOHG_BitMapHeight( oImage:HBitMap ), ;
-                hImage := oImage:Copy() )
+         AT 0, 0 ;
+         MAIN ;
+         TITLE "Imagen Móvil" ;
+         CLIENTAREA ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         ON INIT ( wS := _OOHG_BitMapWidth( oSprite:HBitMap ), ;
+         hS := _OOHG_BitMapHeight( oSprite:HBitMap ), ;
+         wB := _OOHG_BitMapWidth( oImage:HBitMap ), ;
+         hB := _OOHG_BitMapHeight( oImage:HBitMap ), ;
+         hImage := oImage:Copy() )
 
       @ 20, 20 IMAGE img_Back ;
          OBJ oImage ;
@@ -54,25 +53,27 @@ FUNCTION Main
    CENTER WINDOW frm_Main
    ACTIVATE WINDOW frm_Main
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION MoverImagen
+
    LOCAL hAux
+
    STATIC lX := .T., lY := .T., x := 0, y := 0
 
    hAux := oImage:hImage
    oImage:hImage := hImage
    hImage := oImage:Copy()
    oImage:Blend( oSprite:HBitMap, x, y )
-   DeleteObject( hAux )
+   DELETEObject( hAux )
 
    IF lX
       IF x + wS + 10 > wB
-        lX := ! lX
+         lX := ! lX
       ENDIF
    ELSE
       IF x - 10 < 0
-        lX := ! lX
+         lX := ! lX
       ENDIF
    ENDIF
 
@@ -84,11 +85,11 @@ FUNCTION MoverImagen
 
    IF lY
       IF y + hS + 15 > hB
-        lY := ! lY
+         lY := ! lY
       ENDIF
    ELSE
       IF y - 15 < 0
-        lY := ! lY
+         lY := ! lY
       ENDIF
    ENDIF
 
@@ -98,8 +99,9 @@ FUNCTION MoverImagen
       y -= 15
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

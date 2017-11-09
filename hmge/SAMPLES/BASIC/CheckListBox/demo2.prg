@@ -1,22 +1,22 @@
 #include "MiniGUI.ch"
 
 #xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
+   => ;
+   _DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
 
+FUNCTION Main()
 
-Function Main()
-   Local aItems_1 := {}, i
-   Local aItems_2 := {"Item 1","Item 2","Item 3","Item 4","Item 5"}
+   LOCAL aItems_1 := {}, i
+   LOCAL aItems_2 := {"Item 1","Item 2","Item 3","Item 4","Item 5"}
 
    FOR i:=1 TO 5
       AAdd( aItems_1, {"Item "+hb_ntos(i), (i==1)} )
    NEXT
 
    DEFINE WINDOW Form_1 AT 97,62 WIDTH 402 HEIGHT 449 ;
-      TITLE "Checked ListBox - By Janusz Pora" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         TITLE "Checked ListBox - By Janusz Pora" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE CHECKLISTBOX ListBox_1
          ROW 10
@@ -61,141 +61,178 @@ Function Main()
    END WINDOW
 
    Form_1.Center ; Form_1.Activate
-Return Nil
 
-*.....................................................*
+   RETURN NIL
 
-proc clb_add
-   local nn := form_1.ListBox_1.ItemCount + 1
-   form_1.ListBox_1.AddItem( 'ITEM_' + alltrim(str( nn )) )
-   form_1.ListBox_1.value := nn
-return
+   *.....................................................*
 
-*.....................................................*
+   proc clb_add
 
-proc clb_del
-   local n1
-   local nn := form_1.ListBox_1.value
-   form_1.ListBox_1.DeleteItem( nn )
-   n1 := form_1.ListBox_1.ItemCount
-   if nn <= n1
+      LOCAL nn := form_1.ListBox_1.ItemCount + 1
+
+      form_1.ListBox_1.AddItem( 'ITEM_' + alltrim(str( nn )) )
       form_1.ListBox_1.value := nn
-   else
-      form_1.ListBox_1.value := n1
-   endif
-return
 
-*.....................................................*
+      RETURN
 
-proc clb_delete_all
-   form_1.ListBox_1.DeleteAllItems
-   form_1.ListBox_1.value := 1
-return
+      *.....................................................*
 
-*.....................................................*
+      proc clb_del
 
-proc clb_modify
-   local nn := form_1.ListBox_1.value
-   if nn > 0
-      form_1.ListBox_1.item( nn ) := 'New ' + alltrim( str(nn) )
-   endif
-   form_1.ListBox_1.Setfocus
-return
+         LOCAL n1
+         LOCAL nn := form_1.ListBox_1.value
 
-*.....................................................*
+         form_1.ListBox_1.DeleteItem( nn )
+         n1 := form_1.ListBox_1.ItemCount
+         IF nn <= n1
+            form_1.ListBox_1.value := nn
+         ELSE
+            form_1.ListBox_1.value := n1
+         ENDIF
 
-Function clb_Check(nn)
-   Local lCheck
-   Default nn := form_1.ListBox_1.value
-   if nn > 0
+         RETURN
+
+         *.....................................................*
+
+         proc clb_delete_all
+
+            form_1.ListBox_1.DeleteAllItems
+            form_1.ListBox_1.value := 1
+
+            RETURN
+
+            *.....................................................*
+
+            proc clb_modify
+
+               LOCAL nn := form_1.ListBox_1.value
+
+               IF nn > 0
+                  form_1.ListBox_1.item( nn ) := 'New ' + alltrim( str(nn) )
+               ENDIF
+               form_1.ListBox_1.Setfocus
+
+               RETURN
+
+               *.....................................................*
+
+FUNCTION clb_Check(nn)
+
+   LOCAL lCheck
+
+   DEFAULT nn := form_1.ListBox_1.value
+   IF nn > 0
       lCheck :=  clb_getCheck(nn)
       setproperty('form_1','ListBox_1',"CHECKBOXITEM",nn,!lCheck)
-   endif
+   ENDIF
    form_1.ListBox_1.Setfocus
 
-return nil
+   RETURN NIL
 
-*.....................................................*
+   *.....................................................*
 
-function clb_getCheck(nn)
-   local lCheck
+FUNCTION clb_getCheck(nn)
+
+   LOCAL lCheck
+
    lCheck := GetProperty('form_1','ListBox_1',"CHECKBOXITEM",nn)
-return lCheck
 
-*.....................................................*
+   RETURN lCheck
 
-proc OnPressSpacebar()
-   if GetProperty('form_1',"FOCUSEDCONTROL") == "ListBox_1"
-      clb_Check()
-   else
-      cmlb_Check()
-   endif
-return
+   *.....................................................*
 
-*.....................................................*
+   proc OnPressSpacebar()
 
-proc cmlb_add
-   local nn := form_1.ListBox_2.ItemCount + 1
-   form_1.ListBox_2.AddItem( 'ITEM_' + alltrim(str( nn )) )
-   form_1.ListBox_2.value := {nn}
-return
+      IF GetProperty('form_1',"FOCUSEDCONTROL") == "ListBox_1"
+         clb_Check()
+      ELSE
+         cmlb_Check()
+      ENDIF
 
-*.....................................................*
+      RETURN
 
-proc cmlb_del
-   local n1, i
-   local nn := form_1.ListBox_2.value
-   if len (nn) > 0
-      for i:= len(nn) to 1 step -1
-         form_1.ListBox_2.DeleteItem( nn[i] )
-      next
-      n1 := form_1.ListBox_2.ItemCount
-      if nn[1] <= n1
-         form_1.ListBox_2.value := {nn[1]}
-      else
-         form_1.ListBox_2.value := {n1}
-      endif
-   endif
-return
+      *.....................................................*
 
-*.....................................................*
+      proc cmlb_add
 
-proc cmlb_delete_all
-   form_1.ListBox_2.DeleteAllItems
-   form_1.ListBox_2.value := 1
-return
+         LOCAL nn := form_1.ListBox_2.ItemCount + 1
 
-*.....................................................*
+         form_1.ListBox_2.AddItem( 'ITEM_' + alltrim(str( nn )) )
+         form_1.ListBox_2.value := {nn}
 
-proc cmlb_modify
-   local i, nn := form_1.ListBox_2.value
-   for i := 1 to len(nn)
-      form_1.ListBox_2.item( nn[i] ) := 'New ' + alltrim( str(nn[i]) )
-   next
-   form_1.ListBox_2.Setfocus
-return
+         RETURN
 
-*.....................................................*
+         *.....................................................*
 
-function cmlb_Check(n)
-   Local lCheck, i
-   Local nn := form_1.ListBox_2.value
-   Default n := 0
-   if n == 0
-      for i :=1 to len(nn)
+         proc cmlb_del
+
+            LOCAL n1, i
+            LOCAL nn := form_1.ListBox_2.value
+
+            IF len (nn) > 0
+               FOR i:= len(nn) to 1 step -1
+                  form_1.ListBox_2.DeleteItem( nn[i] )
+               NEXT
+               n1 := form_1.ListBox_2.ItemCount
+               IF nn[1] <= n1
+                  form_1.ListBox_2.value := {nn[1]}
+               ELSE
+                  form_1.ListBox_2.value := {n1}
+               ENDIF
+            ENDIF
+
+            RETURN
+
+            *.....................................................*
+
+            proc cmlb_delete_all
+
+               form_1.ListBox_2.DeleteAllItems
+               form_1.ListBox_2.value := 1
+
+               RETURN
+
+               *.....................................................*
+
+               proc cmlb_modify
+
+                  LOCAL i, nn := form_1.ListBox_2.value
+
+                  FOR i := 1 to len(nn)
+                     form_1.ListBox_2.item( nn[i] ) := 'New ' + alltrim( str(nn[i]) )
+                  NEXT
+                  form_1.ListBox_2.Setfocus
+
+                  RETURN
+
+                  *.....................................................*
+
+FUNCTION cmlb_Check(n)
+
+   LOCAL lCheck, i
+   LOCAL nn := form_1.ListBox_2.value
+
+   DEFAULT n := 0
+   IF n == 0
+      FOR i :=1 to len(nn)
          lCheck :=  cmlb_getCheck(nn[i])
          setproperty('form_1','ListBox_2',"CHECKBOXITEM",nn[i],!lCheck)
-      next
-   else
+      NEXT
+   ELSE
       lCheck :=  cmlb_getCheck(n)
       setproperty('form_1','ListBox_2',"CHECKBOXITEM",n,!lCheck)
-   endif
+   ENDIF
    form_1.ListBox_2.Setfocus
-return nil
 
-*.....................................................*
+   RETURN NIL
 
-function cmlb_getCheck(nn)
-   local lCheck
+   *.....................................................*
+
+FUNCTION cmlb_getCheck(nn)
+
+   LOCAL lCheck
+
    lCheck := GetProperty('form_1','ListBox_2',"CHECKBOXITEM",nn)
-return lCheck
+
+   RETURN lCheck
+

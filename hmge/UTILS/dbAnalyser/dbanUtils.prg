@@ -3,7 +3,6 @@
 * System : <unkown>
 * Author : Phil Ide
 * Created: 18/02/2004
-*
 * Purpose:
 * ----------------------------
 * History:
@@ -18,6 +17,7 @@
 #define COL_SIZE 14
 
 STATIC FUNCTION MakeCol( cTxt )
+
    DEFAULT cTxt TO ''
 
    RETURN PadR( cTxt, COL_SIZE ) + iif( Empty( cTxt ), '  ', ': ' )
@@ -82,7 +82,6 @@ FUNCTION idByte()
 
    i := AScan( aType, {| e| e[ 1 ] == n } )
 
-
    ? MakeCol( 'FileType' ) + '0x' + hex( n, 2 )
    IF i > 0
       FOR v := 1 TO Len( aType[ i ][ 2 ] )
@@ -131,7 +130,6 @@ FUNCTION NumRecsReported()
 
    RETURN TRUE
 
-
 FUNCTION ReportHeaderSize()
 
    LOCAL nH := FHandle()
@@ -162,7 +160,6 @@ FUNCTION IsEncrypted()
    ? MakeCol( 'Encrypted' ) + iif( Asc( cBuff ) > 0, 'Yes', 'No' )
 
    RETURN TRUE
-
 
 FUNCTION RecordDetails()
 
@@ -227,3 +224,4 @@ FUNCTION RecordDetails()
    ENDIF
 
    RETURN TRUE
+

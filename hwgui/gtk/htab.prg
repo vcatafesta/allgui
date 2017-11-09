@@ -1,11 +1,9 @@
 /*
- *$Id: htab.prg,v 1.6 2008/04/28 01:20:20 lculik Exp $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HTab class
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+*$Id: htab.prg,v 1.6 2008/04/28 01:20:20 lculik Exp $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HTab class
+* Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "hwgui.ch"
@@ -21,37 +19,47 @@
 
 CLASS HTab INHERIT HControl
 
-   CLASS VAR winclass   INIT "SysTabControl32"
+CLASS VAR winclass   INIT "SysTabControl32"
+
    DATA  aTabs
    DATA  aPages  INIT {}
    DATA  bChange, bChange2
    DATA  oTemp
    DATA  bAction
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,;
-                  bClick, bGetFocus, bLostFocus )
-   METHOD Activate()
-   METHOD Init()
-   METHOD SetTab( n )
-   METHOD StartPage( cname )
-   METHOD EndPage()
-   METHOD ChangePage( nPage )
-   METHOD HidePage( nPage )
-   METHOD ShowPage( nPage )
-   METHOD GetActivePage( nFirst,nEnd )
+METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
+      oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,;
+      bClick, bGetFocus, bLostFocus )
+
+METHOD Activate()
+
+METHOD Init()
+
+METHOD SetTab( n )
+
+METHOD StartPage( cname )
+
+METHOD EndPage()
+
+METHOD ChangePage( nPage )
+
+METHOD HidePage( nPage )
+
+METHOD ShowPage( nPage )
+
+METHOD GetActivePage( nFirst,nEnd )
 
    HIDDEN:
-     DATA  nActive  INIT 0         // Active Page
+   DATA  nActive  INIT 0         // Active Page
 
 ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,bClick, bGetFocus, bLostFocus  ) CLASS HTab
-LOCAL i, aBmpSize
+      oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,bClick, bGetFocus, bLostFocus  ) CLASS HTab
+   LOCAL i, aBmpSize
 
    Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, ;
-                  bSize,bPaint )
+      bSize,bPaint )
 
    ::title   := ""
    ::oFont   := Iif( oFont==Nil, ::oParent:oFont, oFont )
@@ -66,28 +74,30 @@ LOCAL i, aBmpSize
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD Activate CLASS HTab
 
    IF !Empty(::oParent:handle )
       ::handle := CreateTabControl( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
 
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Init() CLASS HTab
-Local i, h
+
+   LOCAL i, h
 
    IF !::lInit
       Super:Init()
       FOR i := 1 TO Len( ::aTabs )
          h := AddTab( ::handle, ::aTabs[i] )
-	 Aadd( ::aPages, { 0,0,.F.,h } )
+         Aadd( ::aPages, { 0,0,.F.,h } )
       NEXT
-      
+
       SetWindowObject( ::handle,Self )
 
       FOR i := 2 TO Len( ::aPages )
@@ -95,15 +105,18 @@ Local i, h
       NEXT
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD SetTab( n ) CLASS HTab
+
    SendMessage( ::handle, TCM_SETCURFOCUS, n-1, 0 )
-Return Nil
+
+   RETURN NIL
 
 METHOD StartPage( cname ) CLASS HTab
-Local i := Iif( cName==Nil, Len(::aPages)+1, Ascan( ::aTabs,cname ) )
-Local lNew := ( i == 0 )
+
+   LOCAL i := Iif( cName==Nil, Len(::aPages)+1, Ascan( ::aTabs,cname ) )
+   LOCAL lNew := ( i == 0 )
 
    ::oTemp := ::oDefaultParent
    ::oDefaultParent := Self
@@ -117,7 +130,7 @@ Local lNew := ( i == 0 )
    ::nActive := i
    ::aPages[ i,4 ] := AddTab( ::handle,::aTabs[i] )
 
-Return Nil
+   RETURN NIL
 
 METHOD EndPage() CLASS HTab
 
@@ -132,7 +145,7 @@ METHOD EndPage() CLASS HTab
 
    ::bChange = {|o,n|o:ChangePage(n)}
 
-Return Nil
+   RETURN NIL
 
 METHOD ChangePage( nPage ) CLASS HTab
 
@@ -150,10 +163,11 @@ METHOD ChangePage( nPage ) CLASS HTab
       Eval( ::bChange2,Self,nPage )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD HidePage( nPage ) CLASS HTab
-Local i, nFirst, nEnd
+
+   LOCAL i, nFirst, nEnd
 
    nFirst := ::aPages[ nPage,1 ] + 1
    nEnd   := ::aPages[ nPage,1 ] + ::aPages[ nPage,2 ]
@@ -161,10 +175,11 @@ Local i, nFirst, nEnd
       ::aControls[i]:Hide()
    NEXT
 
-Return Nil
+   RETURN NIL
 
 METHOD ShowPage( nPage ) CLASS HTab
-Local i, nFirst, nEnd
+
+   LOCAL i, nFirst, nEnd
 
    nFirst := ::aPages[ nPage,1 ] + 1
    nEnd   := ::aPages[ nPage,1 ] + ::aPages[ nPage,2 ]
@@ -174,11 +189,11 @@ Local i, nFirst, nEnd
    FOR i := nFirst TO nEnd
       IF __ObjHasMsg( ::aControls[i],"BSETGET" ) .AND. ::aControls[i]:bSetGet != Nil
          SetFocus( ::aControls[i]:handle )
-         Exit
+         EXIT
       ENDIF
    NEXT
 
-Return Nil
+   RETURN NIL
 
 METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
 
@@ -190,5 +205,5 @@ METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
       nEnd   := Len( ::aControls )
    ENDIF
 
-Return ::nActive
+   RETURN ::nActive
 

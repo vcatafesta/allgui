@@ -1,30 +1,30 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- * (c) 2017 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* (c) 2017 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include <hmg.ch>
 
 FUNCTION Main
 
-   define window win_1 ;
-      main ;
-      clientarea 400, 300 ;
-      title "Reading PNG Image from a File" ;
-      backcolor { 204, 220, 240 } nosize
+   DEFINE WINDOW win_1 ;
+         main ;
+         clientarea 400, 300 ;
+         title "Reading PNG Image from a File" ;
+         backcolor { 204, 220, 240 } nosize
 
       ON KEY ESCAPE ACTION win_1.Release()
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 48,18 FLAT BORDER
 
-	BUTTON Button_1 ;
-		CAPTION 'File' ;
-		ACTION LoadImage() ;
-		TOOLTIP 'Load PNG Image From File'
+         BUTTON Button_1 ;
+            CAPTION 'File' ;
+            ACTION LoadImage() ;
+            TOOLTIP 'Load PNG Image From File'
 
       END TOOLBAR
 
-   end window
+   END WINDOW
 
    win_1.minbutton := .F.
    win_1.maxbutton := .F.
@@ -32,15 +32,16 @@ FUNCTION Main
    win_1.Center()
    win_1.Activate()
 
-RETURN NIL
-
+   RETURN NIL
 
 PROCEDURE LoadImage()
+
    LOCAL IsThemed := IsThemed()
    LOCAL cFile, aSize, n := iif(IsThemed, 0, 2)
 
    cFile := GetFile( { {'Select PNG File (*.png)', '*.png'} }, 'Open a File', GetCurrentFolder(), .F., .T. )
    IF Empty (cFile)
+
       RETURN
    ENDIF
 
@@ -71,12 +72,13 @@ PROCEDURE LoadImage()
    @ (Win_1.Image_1.Row - n), (Win_1.Image_1.Col - n) FRAME Frame_1 OF Win_1 ;
       WIDTH  (Win_1.Image_1.Width  + n + n) ;
       HEIGHT (Win_1.Image_1.Height + n + n) ;
-      TRANSPARENT 
+      TRANSPARENT
 
-RETURN
-
+   RETURN
 
 STATIC FUNCTION GetToolBarHeight()
+
    LOCAL h := win_1.ToolBar_1.Handle
 
-RETURN (LoWord( GetSizeToolBar( h ) ) + iif(IsThemed(), 1, 2) * GetBorderHeight())
+   RETURN (LoWord( GetSizeToolBar( h ) ) + iif(IsThemed(), 1, 2) * GetBorderHeight())
+

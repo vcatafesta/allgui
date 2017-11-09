@@ -1,29 +1,26 @@
 /*
- * Ejemplo Tree n° 3
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo:
- *    Arrastrar y soltar entre dos controles TREE (uno con
- *    ITEMDIDS y el otro sin ITEMIDS).
- *    Utilizar las cláusulas AutoID y ON DROP.
- *    Utilizar los métodos FirstVisible, GetChildren, IsItemVisible,
- *    ItemCount, ItemHeight, ItemVisible, LastVisible,
- *    NextVisible, SelectionID, Value y VisibleCount.
- *    Obtener los elementos visibles y los elementos que
- *    actualmente se muestran en la ventana del control.
- *    Obtener los números de referencia de los elementos
- *    visibles y los números de referencia de los elementos
- *    que actualmente se muestran en la ventana del control.
- *    Obtener y establecer el ID del elemento seleccionado.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * El archivo de recursos y las imágenes pueden descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Tree
- */
+* Ejemplo Tree n° 3
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo:
+*    Arrastrar y soltar entre dos controles TREE (uno con
+*    ITEMDIDS y el otro sin ITEMIDS).
+*    Utilizar las cláusulas AutoID y ON DROP.
+*    Utilizar los métodos FirstVisible, GetChildren, IsItemVisible,
+*    ItemCount, ItemHeight, ItemVisible, LastVisible,
+*    NextVisible, SelectionID, Value y VisibleCount.
+*    Obtener los elementos visibles y los elementos que
+*    actualmente se muestran en la ventana del control.
+*    Obtener los números de referencia de los elementos
+*    visibles y los números de referencia de los elementos
+*    que actualmente se muestran en la ventana del control.
+*    Obtener y establecer el ID del elemento seleccionado.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* El archivo de recursos y las imágenes pueden descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Tree
+*/
 
 #include "oohg.ch"
 
@@ -32,39 +29,39 @@ FUNCTION Main()
    LOCAL oForm, oTree1, oTree2, aIDs := {}, oTree
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 410 ;
-      TITLE 'Control Tree con ITEMIDS' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 410 ;
+         TITLE 'Control Tree con ITEMIDS' ;
+         MAIN
 
       DEFINE TREE Tree_1 OBJ oTree1 ;
-         AT 10,10 ;
-         WIDTH 300 ;
-         HEIGHT 202 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WINDOW", "WATCH"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         SELBOLD ;
-         INDENT 25 ;
-         ITEMIDS ;
-         VALUE "NODO1" ;
-         ON DROP {|uNewItem| Tree1_Drop( oTree1, uNewItem )}
+            AT 10,10 ;
+            WIDTH 300 ;
+            HEIGHT 202 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WINDOW", "WATCH"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            SELBOLD ;
+            INDENT 25 ;
+            ITEMIDS ;
+            VALUE "NODO1" ;
+            ON DROP {|uNewItem| Tree1_Drop( oTree1, uNewItem )}
 
          FOR i := 1 TO 4
             NODE 'T1 Item ' + LTRIM(STR(i)) ID "NODO" + LTRIM(STR(i))
                FOR j := 1 TO 3
                   NODE 'T1 Item ' + ;
-                       LTRIM(STR(i)) + ;
-                       '.' + ;
-                       LTRIM(STR(j)) AUTOID
+                        LTRIM(STR(i)) + ;
+                        '.' + ;
+                        LTRIM(STR(j)) AUTOID
                      FOR k := 1 TO 5
                         TREEITEM 'T1 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k)) AUTOID
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k)) AUTOID
                      NEXT
                   END NODE
                NEXT
@@ -79,18 +76,18 @@ FUNCTION Main()
       oTree1:ItemVisible(oTree1:Value)
 
       DEFINE TREE Tree_2 OBJ oTree2 ;
-         AT 10,320 ;
-         WIDTH 300 ;
-         HEIGHT 200 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WATCH", "WINDOW"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         VALUE 1 ;
-         SELBOLD ;
-         INDENT 25 ;
-         ON DROP {|uNewItem| Tree2_Drop(oTree2, uNewItem)}
+            AT 10,320 ;
+            WIDTH 300 ;
+            HEIGHT 200 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WATCH", "WINDOW"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            VALUE 1 ;
+            SELBOLD ;
+            INDENT 25 ;
+            ON DROP {|uNewItem| Tree2_Drop(oTree2, uNewItem)}
 
          FOR i := 1 TO 4
             NODE 'T2 Item ' + LTRIM(STR(i))
@@ -98,9 +95,9 @@ FUNCTION Main()
                   NODE 'T2 Item ' + LTRIM(STR(i)) + '.' + LTRIM(STR(j))
                      FOR k := 1 TO 5
                         TREEITEM 'T2 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k))
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k))
                      NEXT
                   END NODE
                NEXT
@@ -165,8 +162,8 @@ FUNCTION Main()
       @ 310,310 BUTTON Button_11 ;
          CAPTION 'Alto del Item' ;
          ACTION AutoMsgBox(;
-                oTree:ItemHeight(;
-                   VAL(InputBox('New Item Height')))) ;
+         oTree:ItemHeight(;
+         VAL(InputBox('New Item Height')))) ;
          WIDTH 140
 
       @ 340,10 BUTTON Button_12 ;
@@ -192,13 +189,15 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * Items que son visibles ahora o que pueden ser visibles
- * cuando se navegue por el control.
- */
+   /*
+   * Items que son visibles ahora o que pueden ser visibles
+   * cuando se navegue por el control.
+   */
+
 FUNCTION VisibleItems( oTree )
+
    LOCAL i, Item, lFound
 
    i := 1
@@ -218,13 +217,15 @@ FUNCTION VisibleItems( oTree )
       MsgBox("No hay items visibles !!!")
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/* Items que son visibles ahora
- * El segundo parámetro en IsItemVisible indica si el método
- * considerará visible a un item parcialmente mostrado.
- */
+   /* Items que son visibles ahora
+   * El segundo parámetro en IsItemVisible indica si el método
+   * considerará visible a un item parcialmente mostrado.
+   */
+
 FUNCTION ItemsInWindow( oTree )
+
    LOCAL i, Item, Partial, lFound
 
    i := 1
@@ -232,9 +233,9 @@ FUNCTION ItemsInWindow( oTree )
    lFound := .F.
 
    DO WHILE Item #  IF( oTRee:ItemIds, NIL, 0) .AND. ;
-            oTree:IsItemVisible(Item, .F.)
+         oTree:IsItemVisible(Item, .F.)
       AutoMsgBox({Item, IF(oTree:IsItemVisible(Item, .T.), ;
-                           "completo", "parcial")})
+         "completo", "parcial")})
       i ++
       lFound := .T.
 
@@ -245,9 +246,10 @@ FUNCTION ItemsInWindow( oTree )
       MsgBox("Tree's window shows no item !!!")
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION MostrarItem( oTree )
+
    LOCAL uItem
 
    uItem := InputBox('Item To Show')
@@ -258,22 +260,22 @@ FUNCTION MostrarItem( oTree )
       MsgStop( "Invalid item !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/* En controles TREE sin la claúsula ITEMID se puede usar
- * oTree:SelectionID := Nil para borrar el ID del item.
- *
- * Hacer eso en controles con la claúsula ITEMID generará un error.
- *
- * Note que oTree:SelectionID() devuelve el ID del item seleccionado,
- * mientras que oTree:SelectionID(Nil) tratará de borrar el mismo.
- */
+   /* En controles TREE sin la claúsula ITEMID se puede usar
+   * oTree:SelectionID := Nil para borrar el ID del item.
+   * Hacer eso en controles con la claúsula ITEMID generará un error.
+   * Note que oTree:SelectionID() devuelve el ID del item seleccionado,
+   * mientras que oTree:SelectionID(Nil) tratará de borrar el mismo.
+   */
+
 FUNCTION ChangeID(oTree)
+
    LOCAL newID
 
    // se asumen IDs de tipo Character
    newID := InputBox('Cambiar ID de ' + ;
-                     AutoType( oTree:SelectionID() ) + ' a:')
+      AutoType( oTree:SelectionID() ) + ' a:')
    // para IDs numéricos habilite la siguiente línea y adapte la validacion
    // newID := VAL(newID)
    // para IDs mixtos desarrollo y use su propia función de captura
@@ -284,9 +286,10 @@ FUNCTION ChangeID(oTree)
       AutoMsgBox(oTree:SelectionID(newID))
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION EstaVisible( oTree )
+
    LOCAL uItem
 
    uItem := InputBox('Item a verificar')
@@ -300,31 +303,33 @@ FUNCTION EstaVisible( oTree )
       MsgStop( "Item inválido !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/* Estas funciones son llamadas siempre que un item es soltado sobre
- * los controles por los codeblocks de las cláusulas ON DROP.
- * Estos codeblocks reciben, cómo primer parámetro, una referencia al
- * nuevo item agregado o movido (después que la operación ha terminado).
- * Puede utilizar estos codeblocks para hacer cualquier operación,
- * incluyendo cambiar cualquiera de las propiedas del item (incluso
- * asignar un nuevo ID).
- */
+   /* Estas funciones son llamadas siempre que un item es soltado sobre
+   * los controles por los codeblocks de las cláusulas ON DROP.
+   * Estos codeblocks reciben, cómo primer parámetro, una referencia al
+   * nuevo item agregado o movido (después que la operación ha terminado).
+   * Puede utilizar estos codeblocks para hacer cualquier operación,
+   * incluyendo cambiar cualquiera de las propiedas del item (incluso
+   * asignar un nuevo ID).
+   */
+
 FUNCTION Tree1_Drop(oTree, uNewItem)
 
    MsgBox("Nuevo Item: " + AutoType(uNewItem) + hb_OsNewLine() + ;
-          "Hijos: " + AutoType(oTree:GetChildren(uNewItem)))
+      "Hijos: " + AutoType(oTree:GetChildren(uNewItem)))
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Tree2_Drop(oTree, uNewItem)
 
    MsgBox("Nuevo Item: " + LTRIM(STR(uNewItem)) + hb_OsNewLine() + ;
-          "Hijos: " + AutoType(oTree:GetChildren(uNewItem)))
+      "Hijos: " + AutoType(oTree:GetChildren(uNewItem)))
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION MoverItem( oTree )
+
    LOCAL uItem
 
    uItem := InputBox('Item a mover')
@@ -338,7 +343,7 @@ FUNCTION MoverItem( oTree )
       MsgStop( "Item inválido !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION MostrarHijos( oTree )
 
@@ -348,8 +353,9 @@ FUNCTION MostrarHijos( oTree )
       AutoMsgBox(oTree:GetChildren(oTree:Value))
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

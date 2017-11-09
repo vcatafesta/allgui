@@ -1,23 +1,24 @@
 #include 'minigui.ch'
 
-Declare Window Test_1
-Declare Window Andy1
+DECLARE Window Test_1
+DECLARE Window Andy1
 
-Procedure Opentest
+PROCEDURE Opentest
 
-	IF !IsWindowDefined(Test_1) .And. !IsWindowDefined(Andy1)
+   IF !IsWindowDefined(Test_1) .And. !IsWindowDefined(Andy1)
 
-		Load Window Test_1
-		Load Window Andy1
+      LOAD WINDOW Test_1
+      LOAD WINDOW Andy1
 
-		Test_1.Row := 30
-		Test_1.Col := 30
+      Test_1.Row := 30
+      Test_1.Col := 30
 
-		Andy1.Row := 200
-		Andy1.Col := 200
+      Andy1.Row := 200
+      Andy1.Col := 200
 
-		Activate Window Andy1 , Test_1
+      ACTIVATE WINDOW Andy1 , Test_1
 
-	EndIf
+   ENDIF
 
-Return
+   RETURN
+

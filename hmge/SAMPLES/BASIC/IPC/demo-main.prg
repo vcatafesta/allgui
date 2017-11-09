@@ -1,13 +1,9 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Reception data from another program / Прием данных из другой программы 
- *
- * Copyright 2016 Verchenko Andrey <verchenkoag@gmail.com>
- *
- * Transmission of messages between applications / processes using the WM_COPYDATA
- * Передача сообщений между приложениями/процессами при помощи сообщения WM_COPYDATA 
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Reception data from another program / Прием данных из другой программы
+* Copyright 2016 Verchenko Andrey <verchenkoag@gmail.com>
+* Transmission of messages between applications / processes using the WM_COPYDATA
+* Передача сообщений между приложениями/процессами при помощи сообщения WM_COPYDATA
 */
 
 ANNOUNCE RDDSYS
@@ -23,7 +19,7 @@ FUNCTION Main()
    SET DATE FORMAT "DD.MM.YYYY"
 
    IF hb_FileExists( "test.exe" )
-      FErase( "test.exe" ) 
+      FErase( "test.exe" )
    ENDIF
 
    s_cStaticMsg := "Start program - " + DtoC( Date() ) + " " + Time() + CRLF + CRLF
@@ -31,63 +27,61 @@ FUNCTION Main()
    SET EVENTS FUNCTION TO MyEventsHandler
 
    DEFINE WINDOW Form_Main ;
-      AT 20,700 ;
-      WIDTH 500 HEIGHT 400 ;
-      TITLE APPSERVER_TITLE ;
-      MAIN ;
-      TOPMOST ;
-      BACKCOLOR ORANGE ;
-      ON INIT RunNewExe( App.Handle ) ;
-      ON RELEASE CloseClient()
+         AT 20,700 ;
+         WIDTH 500 HEIGHT 400 ;
+         TITLE APPSERVER_TITLE ;
+         MAIN ;
+         TOPMOST ;
+         BACKCOLOR ORANGE ;
+         ON INIT RunNewExe( App.Handle ) ;
+         ON RELEASE CloseClient()
 
-      @ 0, 0 LABEL Label_1 VALUE "Reception data from another program: " + APPCLIENT_TITLE ; 
-        WIDTH 500 HEIGHT 32 SIZE 11 BOLD ;
-        TRANSPARENT CENTERALIGN VCENTERALIGN
+      @ 0, 0 LABEL Label_1 VALUE "Reception data from another program: " + APPCLIENT_TITLE ;
+         WIDTH 500 HEIGHT 32 SIZE 11 BOLD ;
+         TRANSPARENT CENTERALIGN VCENTERALIGN
 
-      @ 30, 10 LABEL Label_2 VALUE "Handle this window - " + hb_NtoS( App.Handle ) ; 
-        WIDTH 480 HEIGHT 18 SIZE 10 BOLD  ;
-        FONTCOLOR WHITE TRANSPARENT CENTERALIGN VCENTERALIGN
+      @ 30, 10 LABEL Label_2 VALUE "Handle this window - " + hb_NtoS( App.Handle ) ;
+         WIDTH 480 HEIGHT 18 SIZE 10 BOLD  ;
+         FONTCOLOR WHITE TRANSPARENT CENTERALIGN VCENTERALIGN
 
       @ 60, 20 EDITBOX Edit_Result WIDTH 450 HEIGHT 250 ;
-        VALUE s_cStaticMsg  NOHSCROLL READONLY        
+         VALUE s_cStaticMsg  NOHSCROLL READONLY
 
       @ 320, 280  BUTTONEX Button_3  WIDTH 190 ;
-        CAPTION 'Exit' BACKCOLOR MAROON FONTCOLOR WHITE ;
-        SIZE 11 BOLD NOXPSTYLE HANDCURSOR ACTION ThisWindow.Release
+         CAPTION 'Exit' BACKCOLOR MAROON FONTCOLOR WHITE ;
+         SIZE 11 BOLD NOXPSTYLE HANDCURSOR ACTION ThisWindow.Release
 
    END WINDOW
 
    //CENTER WINDOW Form_Main
    ACTIVATE WINDOW Form_Main
 
-RETURN 0
+   RETURN 0
 
-////////////////////////////////////////////////////////////////////////////////
 PROCEDURE RunNewExe( hHandleMain )
 
-     LOCAL cParamStr
+   LOCAL cParamStr
 
-     IF 0 == FindWindowEx( ,,, APPCLIENT_TITLE )
-         // hHandleMain transfer option in the new program, to return of his message SendMessage()
-         cParamStr := hb_NtoS( hHandleMain ) + ' ' + APPSERVER_TITLE + ' ' + hb_NtoS( APP_ID )
+   IF 0 == FindWindowEx( ,,, APPCLIENT_TITLE )
+      // hHandleMain transfer option in the new program, to return of his message SendMessage()
+      cParamStr := hb_NtoS( hHandleMain ) + ' ' + APPSERVER_TITLE + ' ' + hb_NtoS( APP_ID )
 
-         ShellExecute( 0, "open", APPCLIENT, cParamStr,, 1 )
-     ENDIF
+      ShellExecute( 0, "open", APPCLIENT, cParamStr,, 1 )
+   ENDIF
 
-     INKEYGUI( 1000 )
+   INKEYGUI( 1000 )
 
-     IF 0 == FindWindowEx( ,,, APPCLIENT_TITLE )
-        s_cStaticMsg += "Can not found the window: " + APPCLIENT_TITLE + "  (" + APPCLIENT + ")" + CRLF
-     ELSE
-        s_cStaticMsg += "The client is running, the window: " + APPCLIENT_TITLE + CRLF
-     ENDIF
+   IF 0 == FindWindowEx( ,,, APPCLIENT_TITLE )
+      s_cStaticMsg += "Can not found the window: " + APPCLIENT_TITLE + "  (" + APPCLIENT + ")" + CRLF
+   ELSE
+      s_cStaticMsg += "The client is running, the window: " + APPCLIENT_TITLE + CRLF
+   ENDIF
 
-     Form_Main.Edit_Result.Value := s_cStaticMsg
+   Form_Main.Edit_Result.Value := s_cStaticMsg
 
-RETURN
+   RETURN
 
-////////////////////////////////////////////////////////////////////////////////
-#define WM_CLOSE 0x0010
+   #define WM_CLOSE 0x0010
 
 PROCEDURE CloseClient()
 
@@ -97,11 +91,10 @@ PROCEDURE CloseClient()
       PostMessage( hWnd, WM_CLOSE, 0, 0 )
    ENDIF
 
-RETURN
+   RETURN
 
-#define WM_COPYDATA 74
+   #define WM_COPYDATA 74
 
-///////////////////////////////////////////////////////////////////////////////
 FUNCTION MyEventsHandler( hWnd, nMsg, wParam, lParam )
 
    LOCAL cData, nDataID := 0
@@ -122,7 +115,7 @@ FUNCTION MyEventsHandler( hWnd, nMsg, wParam, lParam )
                // Decoding the received binary data protocol for text
                cBuff := hb_Base64Decode( cBuff )
 
-               StrFile( cBuff, "test.exe", .F.)  // write to a file 
+               StrFile( cBuff, "test.exe", .F.)  // write to a file
 
                s_cStaticMsg += cMsg + "-> reception and recording file: test.exe " + CRLF
             ELSE
@@ -139,9 +132,8 @@ FUNCTION MyEventsHandler( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN Events( hWnd, nMsg, wParam, lParam )
+   RETURN Events( hWnd, nMsg, wParam, lParam )
 
-/////////////////////////////////////////////////////////////////
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -150,7 +142,7 @@ HB_FUNC( SENDMESSAGEDATA )
 {
    HWND hwnd = ( HWND ) HB_PARNL( 1 );
 
-   if( IsWindow( hwnd ) )  
+   if( IsWindow( hwnd ) )
    {
       COPYDATASTRUCT cds;
 
@@ -183,3 +175,4 @@ HB_FUNC( GETMESSAGEDATA )
 }
 
 #pragma ENDDUMP
+

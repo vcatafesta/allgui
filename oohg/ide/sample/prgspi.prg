@@ -9,13 +9,14 @@
 
 #include 'minigui.ch'
 
-*-------------------------
-Function prgspi()
-*-------------------------
-local i
-declare window fp
-for i:=1 to 65000 step 15
-    fp.progressbar_101.value := i
-next i
-Return Nil
-
+FUNCTION prgspi()
+
+   LOCAL i
+
+   DECLARE window fp
+   FOR i:=1 to 65000 step 15
+      fp.progressbar_101.value := i
+   NEXT i
+
+   RETURN NIL
+

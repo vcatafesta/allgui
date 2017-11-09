@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2005-2007 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2005-2007 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -14,146 +12,141 @@ ANNOUNCE RDDSYS
 #define VERSION ' version 1.0'
 #define COPYRIGHT ' 2005-2007 Grigory Filatov'
 
-Static lMove := .F.
+STATIC lMove := .F.
 
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
+PROCEDURE Main()
 
-	SET MULTIPLE OFF
+   SET MULTIPLE OFF
 
-	Set InteractiveClose Off
+   SET InteractiveClose Off
 
-	DEFINE WINDOW Form_0 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		ICON 'MAIN' ;
-		MAIN NOSHOW ;
-		ON INIT CreateSkinedForm(0, 0, .F.) ;
-		NOTIFYICON 'MAIN' ;
-		NOTIFYTOOLTIP PROGRAM ;
-		ON NOTIFYCLICK HideShow()
+   DEFINE WINDOW Form_0 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         ICON 'MAIN' ;
+         MAIN NOSHOW ;
+         ON INIT CreateSkinedForm(0, 0, .F.) ;
+         NOTIFYICON 'MAIN' ;
+         NOTIFYTOOLTIP PROGRAM ;
+         ON NOTIFYCLICK HideShow()
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_0
+   ACTIVATE WINDOW Form_0
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure CreateSkinedForm( nTop, nLeft, lMinimized )
-*--------------------------------------------------------*
-Local cFileSkin := GetStartupFolder() + "\Bitmaps\logo.bmp", aWinSize
+STATIC PROCEDURE CreateSkinedForm( nTop, nLeft, lMinimized )
 
-	IF !FILE(cFileSkin)
-		MsgStop( "Can not find the skin!", PROGRAM )
-		Quit
-	ENDIF
+   LOCAL cFileSkin := GetStartupFolder() + "\Bitmaps\logo.bmp", aWinSize
 
-	aWinSize := BmpSize( cFileSkin )
+   IF !FILE(cFileSkin)
+      MsgStop( "Can not find the skin!", PROGRAM )
+      QUIT
+   ENDIF
 
-	DEFINE WINDOW Form_1 ;
-		AT nTop, nLeft ;
-		WIDTH aWinSize[1] HEIGHT aWinSize[2] ;
-		CHILD ;
-		TOPMOST NOCAPTION ;
-		NOMINIMIZE NOMAXIMIZE NOSIZE ;
-		ON INIT ( ( SET REGION OF Form_1 BITMAP &cFileSkin TRANSPARENT COLOR { 255, 0, 255 } ), ;
-				Form_1.Topmost := .f., r_menu(), IF(lMinimized, Form_1.Hide, ) ) ;
-		ON MOUSEMOVE CheckRect() ;
-		ON MOUSECLICK MoveActiveWindow()
+   aWinSize := BmpSize( cFileSkin )
 
-		@ 0,0 IMAGE Image_1 ;
-			PICTURE cFileSkin ;
-			WIDTH Form_1.Width HEIGHT Form_1.Height
+   DEFINE WINDOW Form_1 ;
+         AT nTop, nLeft ;
+         WIDTH aWinSize[1] HEIGHT aWinSize[2] ;
+         CHILD ;
+         TOPMOST NOCAPTION ;
+         NOMINIMIZE NOMAXIMIZE NOSIZE ;
+         ON INIT ( ( SET REGION OF Form_1 BITMAP &cFileSkin TRANSPARENT COLOR { 255, 0, 255 } ), ;
+         Form_1.Topmost := .f., r_menu(), IF(lMinimized, Form_1.Hide, ) ) ;
+         ON MOUSEMOVE CheckRect() ;
+         ON MOUSECLICK MoveActiveWindow()
 
-	END WINDOW
+      @ 0,0 IMAGE Image_1 ;
+         PICTURE cFileSkin ;
+         WIDTH Form_1.Width HEIGHT Form_1.Height
 
-	IF EMPTY(nTop) .AND. EMPTY(nLeft)
-		CENTER WINDOW Form_1
-	ENDIF
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   IF EMPTY(nTop) .AND. EMPTY(nLeft)
+      CENTER WINDOW Form_1
+   ENDIF
 
-Return
+   ACTIVATE WINDOW Form_1
 
-Procedure CheckRect()
+   RETURN
 
-	if CheckExit( { 009, 287, 028, 300 } )
-		if  !lMove
-			lMove := .t.
-			SetHandCursor( GetActiveWindow() )
-		endif
-	elseif lMove == .t.
-		lMove := .f.
-		SetArrowCursor( GetActiveWindow() )
-	endif
-Return
+PROCEDURE CheckRect()
 
-#define HTCAPTION          2
-#define WM_NCLBUTTONDOWN   161
-*--------------------------------------------------------*
-Procedure MoveActiveWindow(hWnd)
-*--------------------------------------------------------*
-	default hWnd := GetActiveWindow()
+   IF CheckExit( { 009, 287, 028, 300 } )
+      IF  !lMove
+         lMove := .t.
+         SetHandCursor( GetActiveWindow() )
+      ENDIF
+   ELSEIF lMove == .t.
+      lMove := .f.
+      SetArrowCursor( GetActiveWindow() )
+   ENDIF
 
-	if CheckExit( { 009, 287, 028, 300 } )
-		Form_1.Hide
-		r_menu()
-	else
-		PostMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
-		RC_Cursor("CATCH")
-	endif
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure HideShow()
-*--------------------------------------------------------*
+   #define HTCAPTION          2
+   #define WM_NCLBUTTONDOWN   161
+
+PROCEDURE MoveActiveWindow(hWnd)
+
+   DEFAULT hWnd := GetActiveWindow()
+
+   IF CheckExit( { 009, 287, 028, 300 } )
+      Form_1.Hide
+      r_menu()
+   ELSE
+      PostMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
+      RC_Cursor("CATCH")
+   ENDIF
+
+   RETURN
+
+STATIC PROCEDURE HideShow()
 
    IF IsWindowVisible( GetFormHandle( "Form_1" ) )
-	Form_1.Hide
+      Form_1.Hide
    ELSE
-	Form_1.Topmost := .t.
-	Form_1.Show
-	Form_1.Topmost := .f.
+      Form_1.Topmost := .t.
+      Form_1.Show
+      Form_1.Topmost := .f.
    ENDIF
 
    r_menu()
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure r_menu()
-*--------------------------------------------------------*
+STATIC PROCEDURE r_menu()
 
-	DEFINE NOTIFY MENU OF Form_0
-		ITEM IF( IsWindowVisible( GetFormHandle( "Form_1" ) ), '&Hide', '&Show' ) ;
-					ACTION HideShow()
-		ITEM '&About...'	ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
-			"Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
-		SEPARATOR	
-		ITEM '&Exit'		ACTION Form_0.Release
-	END MENU
+   DEFINE NOTIFY MENU OF Form_0
+      ITEM IF( IsWindowVisible( GetFormHandle( "Form_1" ) ), '&Hide', '&Show' ) ;
+         ACTION HideShow()
+      ITEM '&About...'   ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
+         "Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
+      SEPARATOR
+      ITEM '&Exit'      ACTION Form_0.Release
+   END MENU
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Function CheckExit( aRowCol )
-*--------------------------------------------------------*
-Local nY1 := aRowCol[ 1 ], ;
+STATIC FUNCTION CheckExit( aRowCol )
+
+   LOCAL nY1 := aRowCol[ 1 ], ;
       nX1 := aRowCol[ 2 ], ;
       nY2 := aRowCol[ 3 ], ;
       nX2 := aRowCol[ 4 ]
-Local nRow, nCol, aCursor := GetCursorPos(), lExit
+   LOCAL nRow, nCol, aCursor := GetCursorPos(), lExit
 
-	nRow := aCursor[1] - Form_1.Row
-	nCol := aCursor[2] - Form_1.Col
+   nRow := aCursor[1] - Form_1.Row
+   nCol := aCursor[2] - Form_1.Col
 
-	if nRow > nY1 .and. nRow < nY2 .and. nCol > nX1 .and. nCol < nX2
-		lExit := .T.
-	else
-		lExit := .F.
-	endif
+   IF nRow > nY1 .and. nRow < nY2 .and. nCol > nX1 .and. nCol < nX2
+      lExit := .T.
+   ELSE
+      lExit := .F.
+   ENDIF
 
-Return lExit
+   RETURN lExit
+

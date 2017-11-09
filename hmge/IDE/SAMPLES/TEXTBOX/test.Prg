@@ -1,8 +1,8 @@
 #include <minigui.ch>
 
-Function Main
+FUNCTION Main
 
-	load window test
-	activate window test
+   LOAD WINDOW test
+   ACTIVATE WINDOW test
 
-Return
+   RETURN

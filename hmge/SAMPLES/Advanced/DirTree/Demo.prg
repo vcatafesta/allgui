@@ -1,15 +1,9 @@
 /******
-*
 * MINIGUI - Harbour Win32 GUI library Demo
-*
 * Build tree of folders, files and archives
-* 
 * (c) 2008-2009 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
-*
 * Revised by Grigory Filatov <gfilatov@inbox.ru>
-* 
 */
-
 
 /*
 История изменений.
@@ -21,23 +15,22 @@
 Август 2009 г.
 
 * файлы из Zip-архива извлекаются и открываются нормально.
-  Решено заменой библиотеки hbzlib.lib на ziparchive.lib и вызовом
-  процедуры HB_OEMtoANSI() во время обработки строк файла технической
-  информации, созданного 7-Zip
-* для получения оглавления Zip-архивов вместо функции ZipIndex() 
-  используется типовая HB_GetFilesInZip(). ZipIndex() оставлена в
-  тексте программы в закомментированном виде (на всякий случай).
+Решено заменой библиотеки hbzlib.lib на ziparchive.lib и вызовом
+процедуры HB_OEMtoANSI() во время обработки строк файла технической
+информации, созданного 7-Zip
+* для получения оглавления Zip-архивов вместо функции ZipIndex()
+используется типовая HB_GetFilesInZip(). ZipIndex() оставлена в
+тексте программы в закомментированном виде (на всякий случай).
 + последние версии 7-Zip вносят в файл технической информации о
-  содержимом архива имя самого архива, вследствии чего в дереве
-  создаются лишние элементы. Поэтому при обработке строки, содержащие
-  имя обрабатываемого архива игнорируются.
+содержимом архива имя самого архива, вследствии чего в дереве
+создаются лишние элементы. Поэтому при обработке строки, содержащие
+имя обрабатываемого архива игнорируются.
 + прерывание операции формирования дерева
 
 Октябрь 2008 г.
 
 Начальная версия.
 */
-
 
 #include "HBCompat.ch"
 #include "Directry.ch"
@@ -46,630 +39,602 @@
 // Программные файлы архиватора 7-Zip
 
 #define FULL_7Z             '7z.exe'         // Полная версия
-#define DLL_7Z              '7z.dll'         // Библиотека к полной версии  
-#define ALONE_7Z            '7za.exe'        // Консольный вариант  
+#define DLL_7Z              '7z.dll'         // Библиотека к полной версии
+#define ALONE_7Z            '7za.exe'        // Консольный вариант
 
 #define TEMP_FOLDER         ( GetTempFolder() + '\' )
 #define TMP_ARC_INDEX       ( TEMP_FOLDER + '_Arc_.lst' )     // Временный файл для вывода содержания архива
-                                               
+
 // Прерывание обработки
 
 #translate BREAK_ACTION_()                                                                                 ;
-           =>                   lBreak := MsgYesNo( 'Stop operation?', 'Confirm action', .T., , .F., .F. )
+   =>                   lBreak := MsgYesNo( 'Stop operation?', 'Confirm action', .T., , .F., .F. )
 
 // Изменение кнопки обработки
 
 // 1) Исходное значение: запуск сканирования
 #translate SET_DOSCAN_()                                                           ;
-           =>                   wMain.ButtonEX_1.Caption     := 'Scan'             ;
-                                ; wMain.ButtonEX_1.Picture   := 'OK'               ;
-                                ; wMain.ButtonEX_1.Action    := { || BuildTree() } 
+   =>                   wMain.ButtonEX_1.Caption     := 'Scan'             ;
+   ; wMain.ButtonEX_1.Picture   := 'OK'               ;
+   ; wMain.ButtonEX_1.Action    := { || BuildTree() }
 // 2) Построение дерева: прерывание обработки
 #translate SET_STOP_SCAN_()                                                        ;
-           =>                   wMain.ButtonEX_1.Caption   := '[Esc] Stop'         ;
-                                ; wMain.ButtonEX_1.Picture := 'STOP'               ;
-                                ; wMain.ButtonEX_1.Action  := { || BREAK_ACTION_() }
+   =>                   wMain.ButtonEX_1.Caption   := '[Esc] Stop'         ;
+   ; wMain.ButtonEX_1.Picture := 'STOP'               ;
+   ; wMain.ButtonEX_1.Action  := { || BREAK_ACTION_() }
 
+STATIC cApp7z   := ''         // Архиватор 7-Zip
+STATIC cOSPaths := ''         // Значения системной переменной PATH (используется только для полной версии 7-Zip)
 
-Static cApp7z   := ''         // Архиватор 7-Zip
-Static cOSPaths := ''         // Значения системной переменной PATH (используется только для полной версии 7-Zip)
-
-Memvar lBreak                 // Прервать обработку
-
+MEMVAR lBreak                 // Прервать обработку
 
 /******
-*
 *    Дерево каталогов и файлов
-*
 */
 
-Procedure Main
-Local cSysPath := Upper( GetEnv( 'PATH' ) ), ;
+PROCEDURE Main
+
+   LOCAL cSysPath := Upper( GetEnv( 'PATH' ) ), ;
       cPath7z  := ''                       , ;
       oReg
 
-Set font to 'Tahoma', 9
+   SET font to 'Tahoma', 9
 
-// Для работы с архивами (кроме Zip) используем 7-Zip. Проверяем один из вариантов:
-// - архиватор инсталлирован (полная версия);
-// - в каталог с программой помещены файлы 7z.exe и 7z.dll (архиватор не инсталлирован, но
-//   функциональность практически та же, что и в установочной версии);
-// - в каталоге с программой размещена консольная версия (7za.exe)
-// Выбираем лучший из вариантов. Для этого проверяем доступность необходимых программ. Размещение
-// полной версии 7-Zip (предпочтительное использование) ищем через запись реестра
-// Кроме того, при использовании 7-Zip, размещённого в Program Files, проявляются некоторые недостатки
-// командной строки - не выполняется команда, в которой и в имени программы, и файле-параметре 
-// используются имена с пробелами:
-// %COMSPEC% /C "%\ProgramFiles%\7-Zip\7z.exe" L -slt "Some data.7z"
-// Для обхода такой ситуации в системную переменную PATH добавляем маршрут поиска 7z.exe, а после
-// завершения обработки - восстанавливаем исходное значение PATH.
-// Если 7z.exe и 7z.dll находятся в каталоге программы, значение PATH не изменяется.
- 
-// Для архивов Zip всегда используем встроенные возможности.
+   // Для работы с архивами (кроме Zip) используем 7-Zip. Проверяем один из вариантов:
+   // - архиватор инсталлирован (полная версия);
+   // - в каталог с программой помещены файлы 7z.exe и 7z.dll (архиватор не инсталлирован, но
+   //   функциональность практически та же, что и в установочной версии);
+   // - в каталоге с программой размещена консольная версия (7za.exe)
+   // Выбираем лучший из вариантов. Для этого проверяем доступность необходимых программ. Размещение
+   // полной версии 7-Zip (предпочтительное использование) ищем через запись реестра
+   // Кроме того, при использовании 7-Zip, размещённого в Program Files, проявляются некоторые недостатки
+   // командной строки - не выполняется команда, в которой и в имени программы, и файле-параметре
+   // используются имена с пробелами:
+   // %COMSPEC% /C "%\ProgramFiles%\7-Zip\7z.exe" L -slt "Some data.7z"
+   // Для обхода такой ситуации в системную переменную PATH добавляем маршрут поиска 7z.exe, а после
+   // завершения обработки - восстанавливаем исходное значение PATH.
+   // Если 7z.exe и 7z.dll находятся в каталоге программы, значение PATH не изменяется.
 
-Open registry oReg key HKEY_LOCAL_MACHINE Section 'Software\7-Zip'
-Get value cPath7z Name 'Path' of oReg 
-Close registry oReg
+   // Для архивов Zip всегда используем встроенные возможности.
 
-If !Empty( cPath7z )                              // Инсталлированная версия
+   Open registry oReg key HKEY_LOCAL_MACHINE Section 'Software\7-Zip'
+   GET value cPath7z Name 'Path' of oReg
+   CLOSE registry oReg
 
-   cPath7z := Upper( cPath7z )
-   
-   If !( cPath7z $ cSysPath )
-      
-      cOSPaths := cSysPath
-      
-      If !( Right( cOSPaths, 1 ) == ';' )
-         cOSPaths += ';'
-      Endif
-      
-      cOSPaths += ( cPath7z + '\' ) 
+   IF !Empty( cPath7z )                              // Инсталлированная версия
+
+      cPath7z := Upper( cPath7z )
+
+      IF !( cPath7z $ cSysPath )
+
+         cOSPaths := cSysPath
+
+         IF !( Right( cOSPaths, 1 ) == ';' )
+            cOSPaths += ';'
+         ENDIF
+
+         cOSPaths += ( cPath7z + '\' )
+         cApp7z := FULL_7Z
+
+      ENDIF
+
+   ELSEIF ( File( FULL_7Z ) .and. File( DLL_7Z ) )   // В каталоге с программой находится 7z.exe и 7z.dll
       cApp7z := FULL_7Z
-            
-   Endif
-   
-ElseIf ( File( FULL_7Z ) .and. File( DLL_7Z ) )   // В каталоге с программой находится 7z.exe и 7z.dll
-   cApp7z := FULL_7Z
-   
-ElseIf File( ALONE_7Z )                           // В каталоге с программой находится 7za.exe
-   cApp7z := ALONE_7Z
 
-Endif
+   ELSEIF File( ALONE_7Z )                           // В каталоге с программой находится 7za.exe
+      cApp7z := ALONE_7Z
 
-Load window Demo as wMain
+   ENDIF
 
-wMain.BtnTextBox_1.Value := GetMyDocumentsFolder()   // Каталог для сканирования по умолчанию
+   LOAD WINDOW Demo as wMain
 
-// При обнаружении консольной версии 7-Zip расширяем список доступных архивных форматов,
-// хотя, например, для обработки RAR нужно использовать полную версию 7-Zip 
+   wMain.BtnTextBox_1.Value := GetMyDocumentsFolder()   // Каталог для сканирования по умолчанию
 
-If !Empty( cApp7z )
-   
-   // Поддерживаемые типы архивов для полной и консольной версии
-   
-   If ( cApp7z == FULL_7Z )
-      wMain.Combo_1.AddItem( 'ZIP; 7Z; RAR; CAB; ARJ; LZH' )
-   Else
-      wMain.Combo_1.AddItem( 'ZIP; 7Z' )
-   Endif
-   
-   wMain.Combo_1.Value := 2
-   
-Endif
+   // При обнаружении консольной версии 7-Zip расширяем список доступных архивных форматов,
+   // хотя, например, для обработки RAR нужно использовать полную версию 7-Zip
 
-SET_DOSCAN_()
+   IF !Empty( cApp7z )
 
-wMain.ButtonEX_2.Enabled := .F.
-wMain.ButtonEX_3.Enabled := .F.
-wMain.ButtonEX_4.Enabled := .F.
+      // Поддерживаемые типы архивов для полной и консольной версии
 
-Center window wMain
-Activate window wMain 
+      IF ( cApp7z == FULL_7Z )
+         wMain.Combo_1.AddItem( 'ZIP; 7Z; RAR; CAB; ARJ; LZH' )
+      ELSE
+         wMain.Combo_1.AddItem( 'ZIP; 7Z' )
+      ENDIF
 
-Return
+      wMain.Combo_1.Value := 2
 
-****** End of Main ******
+   ENDIF
 
+   SET_DOSCAN_()
 
-/******
-*
-*       SelectDir()
-*
-*       Выбор каталога для сканирования
-*
-*/
+   wMain.ButtonEX_2.Enabled := .F.
+   wMain.ButtonEX_3.Enabled := .F.
+   wMain.ButtonEX_4.Enabled := .F.
 
-Static Procedure SelectDir
-Local cPath := AllTrim( wMain.BtnTextBox_1.Value )
+   CENTER WINDOW wMain
+   ACTIVATE WINDOW wMain
 
-If !Empty( cPath := GetFolder( 'Select folder', cPath ) )
-   wMain.BtnTextBox_1.Value := cPath
-Endif
+   RETURN
 
-Return
+   ****** End of Main ******
 
-****** End of SelectDir ******
+   /******
+   *       SelectDir()
+   *       Выбор каталога для сканирования
+   */
 
- 
-/******
-*
-*       BuildTree()
-*
-*       Построение дерева
-*
-*/
+STATIC PROCEDURE SelectDir
 
-Static Procedure BuildTree
-Local cPath     := wMain.BtnTextBox_1.Value, ;
+   LOCAL cPath := AllTrim( wMain.BtnTextBox_1.Value )
+
+   IF !Empty( cPath := GetFolder( 'Select folder', cPath ) )
+      wMain.BtnTextBox_1.Value := cPath
+   ENDIF
+
+   RETURN
+
+   ****** End of SelectDir ******
+
+   /******
+   *       BuildTree()
+   *       Построение дерева
+   */
+
+STATIC PROCEDURE BuildTree
+
+   LOCAL cPath     := wMain.BtnTextBox_1.Value, ;
       cSavePath := ''
 
-Private lBreak := .F.          // Прервать обработку
-SET_STOP_SCAN_()
-On key Escape of wMain Action BREAK_ACTION_()
+   PRIVATE lBreak := .F.          // Прервать обработку
 
-If !Empty( cPath )
+   SET_STOP_SCAN_()
+   On key Escape of wMain Action BREAK_ACTION_()
 
-   // Для использования установочной версии 7-Zip изменяем системную
-   // переменную PATH
-   
-   If !Empty( cOSPaths )
-      cSavePath := GetEnv( 'PATH' )
-      SetEnvironmentVariable( 'PATH', cOSPaths )
-   Endif
-   
-   wMain.Tree_1.DeleteAllItems
-   wMain.Tree_1.DisableUpdate
+   IF !Empty( cPath )
 
-   // Вначале добавим узел корневого каталога
+      // Для использования установочной версии 7-Zip изменяем системную
+      // переменную PATH
 
-   Node wMain.BtnTextBox_1.Value Images { 'STRUCTURE' }
-      ScanDir( cPath )
-   End Node
-   wMain.StatusBar.Item( 1 ) := ''
-   
-   // Восстановить исходное значение системной переменной PATH (если она
-   // была изменена).
-   
-   If !Empty( cSavePath )
-      SetEnvironmentVariable( 'PATH', cSavePath )
-   Endif
-   
-   wMain.Tree_1.Expand( 1 )
-   wMain.Tree_1.EnableUpdate
-   
-   wMain.Tree_1.Value := 1
-   wMain.Tree_1.SetFocus
-   
-   If ( wMain.Tree_1.ItemCount > 1 )
-      wMain.ButtonEX_2.Enabled := .T.
-      wMain.ButtonEX_3.Enabled := .T.
-      wMain.ButtonEX_4.Enabled := .T.
-   Else
-      wMain.ButtonEX_2.Enabled := .F.
-      wMain.ButtonEX_3.Enabled := .F.
-      wMain.ButtonEX_4.Enabled := .T.
-   Endif
-   
-Endif
+      IF !Empty( cOSPaths )
+         cSavePath := GetEnv( 'PATH' )
+         SetEnvironmentVariable( 'PATH', cOSPaths )
+      ENDIF
 
-SET_DOSCAN_()
-Release key Escape of wMain
+      wMain.Tree_1.DeleteAllItems
+      wMain.Tree_1.DisableUpdate
 
-Return
+      // Вначале добавим узел корневого каталога
 
-****** End of BuildTree ******
+      Node wMain.BtnTextBox_1.Value Images { 'STRUCTURE' }
+         ScanDir( cPath )
+      End Node
+      wMain.StatusBar.Item( 1 ) := ''
 
+      // Восстановить исходное значение системной переменной PATH (если она
+      // была изменена).
 
-/******
-*
-*       ScanDir( cPath )
-*
-*       Сканирование каталога
-*
-*/
+      IF !Empty( cSavePath )
+         SetEnvironmentVariable( 'PATH', cSavePath )
+      ENDIF
 
-Static Procedure ScanDir( cPath )
-Local cMask     := AllTrim( wMain.Text_1.Value )      , ;
+      wMain.Tree_1.Expand( 1 )
+      wMain.Tree_1.EnableUpdate
+
+      wMain.Tree_1.Value := 1
+      wMain.Tree_1.SetFocus
+
+      IF ( wMain.Tree_1.ItemCount > 1 )
+         wMain.ButtonEX_2.Enabled := .T.
+         wMain.ButtonEX_3.Enabled := .T.
+         wMain.ButtonEX_4.Enabled := .T.
+      ELSE
+         wMain.ButtonEX_2.Enabled := .F.
+         wMain.ButtonEX_3.Enabled := .F.
+         wMain.ButtonEX_4.Enabled := .T.
+      ENDIF
+
+   ENDIF
+
+   SET_DOSCAN_()
+   RELEASE key Escape of wMain
+
+   RETURN
+
+   ****** End of BuildTree ******
+
+   /******
+   *       ScanDir( cPath )
+   *       Сканирование каталога
+   */
+
+STATIC PROCEDURE ScanDir( cPath )
+
+   LOCAL cMask     := AllTrim( wMain.Text_1.Value )      , ;
       cAttr     := Iif( wMain.Check_1.Value, 'H', '' ), ;
       aFullList                                       , ;
       aDir      := {}                                 , ;
       aFiles                                          , ;
       xItem
 
-If !( Right( cPath, 1 ) == '\' )
-   cPath += '\'
-Endif
+   IF !( Right( cPath, 1 ) == '\' )
+      cPath += '\'
+   ENDIF
 
-Begin Sequence
+   BEGIN Sequence
 
-   // Поскольку для выборки может использоваться маска, поступаем следующим образом.
-   // 1) Получаем список ВСЕХ подкаталогов выбранной директории (маска не учитывается,
-   //    поскольку при этом могут игнорироваться сами подкаталоги)
-   // 2) Для каждого подкаталога формируется список принадлежащих ему файлов
-   //    С УЧЕТОМ ШАБЛОНА
-   // 3) Подкаталог не добавляется в дерево, если требуемых файлов нет и не разрешено
-   //    добавление пустых каталогов
- 
-   If !Empty( aFullList := ASort( Directory( cPath, ( 'D' + cAttr ) ),,, ;
-                                  { | x, y | Upper( x[ F_NAME ] ) < Upper( y[ F_NAME ] ) } ) )
+      // Поскольку для выборки может использоваться маска, поступаем следующим образом.
+      // 1) Получаем список ВСЕХ подкаталогов выбранной директории (маска не учитывается,
+      //    поскольку при этом могут игнорироваться сами подкаталоги)
+      // 2) Для каждого подкаталога формируется список принадлежащих ему файлов
+      //    С УЧЕТОМ ШАБЛОНА
+      // 3) Подкаталог не добавляется в дерево, если требуемых файлов нет и не разрешено
+      //    добавление пустых каталогов
 
-      For each xItem in aFullList
+      IF !Empty( aFullList := ASort( Directory( cPath, ( 'D' + cAttr ) ),,, ;
+            { | x, y | Upper( x[ F_NAME ] ) < Upper( y[ F_NAME ] ) } ) )
 
-        If ( 'D' $ xItem[ F_ATTR ] )
-           If ( !( xItem[ F_NAME ] == '.' ) .and. !( xItem[ F_NAME ] == '..' ) )
-              AAdd( aDir, xItem[ F_NAME ] )
-           Endif 
-        Endif 
+         FOR EACH xItem in aFullList
 
-        Do Events
-        
-        If lBreak
-           Break
-        Endif 
+            IF ( 'D' $ xItem[ F_ATTR ] )
+               IF ( !( xItem[ F_NAME ] == '.' ) .and. !( xItem[ F_NAME ] == '..' ) )
+                  AAdd( aDir, xItem[ F_NAME ] )
+               ENDIF
+            ENDIF
 
-      Next
+            Do Events
 
-   Endif
+            IF lBreak
+               Break
+            ENDIF
 
-   // Обрабатываем полученный список каталогов. При этом выполняется рекурсивный
-   // вызов процедуры для сканирования более глубоких уровней
+         NEXT
 
-   If !Empty( aDir )
+      ENDIF
 
-      For each xItem in aDir
+      // Обрабатываем полученный список каталогов. При этом выполняется рекурсивный
+      // вызов процедуры для сканирования более глубоких уровней
 
-        // Перед добавлением узла каталога проверяем наличие в нём
-        // файлов, совпадающих с шаблоном или подкаталогов. Имена самих файлов пока
-        // не важны.
-     
-        // Хотя можно проверять только наличие файлов:
-        // If !Empty( Directory( ( cPath + xItem + '\' + cMask ), cAttr ) )
-        // Только в этом случае каталоги, в которых нет файлов (по заданной маске), 
-        // но есть подкаталоги, в построение включены не будут, как и файлы, находящиеся
-        // в них. 
-     
-        If ( !Empty( Directory( ( cPath + xItem + '\' + cMask ), cAttr ) ) .or.  ;
-             ( wMain.Check_3.Value                                         .and. ;
-               !Empty( Directory( ( cPath + xItem ), ( 'D' + cAttr ) ) )         ;
-             )                                                                   ;
-           )
+      IF !Empty( aDir )
 
-           Node xItem   
-             ScanDir( cPath + xItem )
-           End Node
+         FOR EACH xItem in aDir
 
-           Do Events
+            // Перед добавлением узла каталога проверяем наличие в нём
+            // файлов, совпадающих с шаблоном или подкаталогов. Имена самих файлов пока
+            // не важны.
 
-           If lBreak
-              Break
-           Endif 
-     
-        Endif
-     
-      Next
-   
-   Endif
+            // Хотя можно проверять только наличие файлов:
+            // If !Empty( Directory( ( cPath + xItem + '\' + cMask ), cAttr ) )
+            // Только в этом случае каталоги, в которых нет файлов (по заданной маске),
+            // но есть подкаталоги, в построение включены не будут, как и файлы, находящиеся
+            // в них.
 
-   // Добавляем список файлов
+            IF ( !Empty( Directory( ( cPath + xItem + '\' + cMask ), cAttr ) ) .or.  ;
+                  ( wMain.Check_3.Value                                         .and. ;
+                  !Empty( Directory( ( cPath + xItem ), ( 'D' + cAttr ) ) )         ;
+                  )                                                                   ;
+                  )
 
-   If !Empty( aFiles := ASort( Directory( ( cPath + cMask ), cAttr ),,, ;
-                               { | x, y | Upper( x[ F_NAME ] ) < Upper( y[ F_NAME ] ) } ) )
+               Node xItem
+                  ScanDir( cPath + xItem )
+               End Node
 
-      For each xItem in aFiles
-      
-         wMain.StatusBar.Item( 1 ) := ( cPath + xItem[ F_NAME ] )
-         
-         Do Events
-      
-         If !wMain.Check_2.Value         // Не расскрывать архивы
-            TreeItem xItem[ F_NAME ]
-         Else
-            GetArc( cPath, xItem[ F_NAME ] )
-         Endif   
+               Do Events
 
-         If lBreak
-            Break
-         Endif   
-   
-      Next
-   
-   Endif
+               IF lBreak
+                  Break
+               ENDIF
 
-End
- 
-Return
+            ENDIF
 
-****** End of ScanDir ******
+         NEXT
 
+      ENDIF
 
-/******
-*
-*       GetArc( cPath, cFile )
-*
-*       Обработка архивного файла
-*
-*/
+      // Добавляем список файлов
 
-Static Procedure GetArc( cPath, cFile )
-Local cArcTypes := wMain.Combo_1.DisplayValue, ;
+      IF !Empty( aFiles := ASort( Directory( ( cPath + cMask ), cAttr ),,, ;
+            { | x, y | Upper( x[ F_NAME ] ) < Upper( y[ F_NAME ] ) } ) )
+
+         FOR EACH xItem in aFiles
+
+            wMain.StatusBar.Item( 1 ) := ( cPath + xItem[ F_NAME ] )
+
+            Do Events
+
+            IF !wMain.Check_2.Value         // Не расскрывать архивы
+               TreeItem xItem[ F_NAME ]
+            ELSE
+               GetArc( cPath, xItem[ F_NAME ] )
+            ENDIF
+
+            IF lBreak
+               Break
+            ENDIF
+
+         NEXT
+
+      ENDIF
+
+   End
+
+   RETURN
+
+   ****** End of ScanDir ******
+
+   /******
+   *       GetArc( cPath, cFile )
+   *       Обработка архивного файла
+   */
+
+STATIC PROCEDURE GetArc( cPath, cFile )
+
+   LOCAL cArcTypes := wMain.Combo_1.DisplayValue, ;
       cExt                                   , ;
       aFileList                              , ;
       cItem
 
-HB_FNameSplit( cFile, , , @cExt )
+   HB_FNameSplit( cFile, , , @cExt )
 
-If !Empty( cExt := Upper( cExt ) )
+   IF !Empty( cExt := Upper( cExt ) )
 
-   If ( Left( cExt, 1 ) == '.' )
-      cExt := Substr( cExt, 2 )
-   Endif
-   
-   // Если расширение принадлежит архивному типу, получаем содержание
-   // архива. При этом архивы ZIP обрабатываются собственными средствами.
-   // а остальные - внешним архиватором
-   
-   If !( cExt $ cArcTypes )
-      TreeItem cFile
-      
-   Else
-   
-      // Оглавление архива получаем 2-я способами: собственной обработкой
-      // ZIP и запуском 7-Zip. Список файлов в Zip-архиве можно получить и
-      // готовой функцией HB_GetFilesInZip( cPath + cFile ).
-      // В предыдущих версиях Harbour замечалось падение программы с системной
-      // ошибкой при выполнении этой функции на большом количестве архивов, 
-      // поэтому была создана функция ZipIndex(). Но в настоящее время все вроде 
-      // нормально, поэтому ZipIndex() оставлена в тексте программы, но не используется.
-      
-      Try
-        //aFileList := Iif( ( cExt == 'ZIP' ), ZipIndex( cPath + cFile ), ArcIndex( cPath + cFile ) )
-        aFileList := Iif( ( cExt == 'ZIP' ), HB_GetFilesInZip( cPath + cFile ), ArcIndex( cPath + cFile ) )
-      Catch
-        aFileList := {}
-      End
-            
-      If !Empty( aFileList )
-         
-         Node cFile Images Iif( ( cExt == 'ZIP' ), { 'ARC_ZIP' }, { 'ARC_7ZIP' } )
-            For each cItem in aFileList
-               TreeItem cItem
-             Next   
-         End Node
-         
-      Else
+      IF ( Left( cExt, 1 ) == '.' )
+         cExt := Substr( cExt, 2 )
+      ENDIF
+
+      // Если расширение принадлежит архивному типу, получаем содержание
+      // архива. При этом архивы ZIP обрабатываются собственными средствами.
+      // а остальные - внешним архиватором
+
+      IF !( cExt $ cArcTypes )
          TreeItem cFile
-         
-      Endif
-         
+
+      ELSE
+
+         // Оглавление архива получаем 2-я способами: собственной обработкой
+         // ZIP и запуском 7-Zip. Список файлов в Zip-архиве можно получить и
+         // готовой функцией HB_GetFilesInZip( cPath + cFile ).
+         // В предыдущих версиях Harbour замечалось падение программы с системной
+         // ошибкой при выполнении этой функции на большом количестве архивов,
+         // поэтому была создана функция ZipIndex(). Но в настоящее время все вроде
+         // нормально, поэтому ZipIndex() оставлена в тексте программы, но не используется.
+
+         Try
+            //aFileList := Iif( ( cExt == 'ZIP' ), ZipIndex( cPath + cFile ), ArcIndex( cPath + cFile ) )
+            aFileList := Iif( ( cExt == 'ZIP' ), HB_GetFilesInZip( cPath + cFile ), ArcIndex( cPath + cFile ) )
+         CATCH
+            aFileList := {}
+         End
+
+         IF !Empty( aFileList )
+
+            Node cFile Images Iif( ( cExt == 'ZIP' ), { 'ARC_ZIP' }, { 'ARC_7ZIP' } )
+               FOR EACH cItem in aFileList
+                  TreeItem cItem
+               NEXT
+            End Node
+
+         ELSE
+            TreeItem cFile
+
+         ENDIF
+
+      ENDIF
+
+   ELSE
+      TreeItem cFile
+
+   ENDIF
+
+   RETURN
+
+   ****** End of GetArc ******
+
+   // Функция ZipIndex() использовалась как аналог HB_GetFilesInZip(), но в последних
+   // версиях Harbour необходимость в ней отпала. Оставлена для истории.
+
+   /******
+   *       ZipIndex( cArcFile ) --> aFiles
+   *       Список файлов в архиве ZIP
+   */
+
+   /*
+
+   Static Function ZipIndex( cArcFile )
+
+   Local aFiles := {}                      , ;
+   hUnzip := HB_UnZipOpen( cArcFile ), ;
+   nError                            , ;
+   cFile
+
+   If !Empty( hUnzip )
+
+   nError := HB_UnZipFileFirst( hUnzip )
+
+   Do while Empty( nError )
+
+   HB_UnZipFileInfo( hUnzip, @cFile )
+
+   AAdd( aFiles, cFile )
+
+   nError := HB_UnZipFileNext( hUnzip )
+
+   Enddo
+
+   HB_UnZipClose( hUnzip )
+
    Endif
 
-Else
-   TreeItem cFile
-   
-Endif
-     
-Return
+   Return aFiles
+   */
 
-****** End of GetArc ******
+   ****** End of ZipIndex ******
 
+   /******
+   *       ArcIndex( cArcFile ) --> aFiles
+   *       Список файлов в архиве не ZIP-типа
+   */
 
-// Функция ZipIndex() использовалась как аналог HB_GetFilesInZip(), но в последних
-// версиях Harbour необходимость в ней отпала. Оставлена для истории.
-  
-/******
-*
-*       ZipIndex( cArcFile ) --> aFiles
-*
-*       Список файлов в архиве ZIP
-*
-*/
+STATIC FUNCTION ArcIndex( cArcFile )
 
-/*
-Static Function ZipIndex( cArcFile )
-Local aFiles := {}                      , ;
-      hUnzip := HB_UnZipOpen( cArcFile ), ;
-      nError                            , ;
-      cFile
-
-If !Empty( hUnzip )
-
-    nError := HB_UnZipFileFirst( hUnzip )
-
-    Do while Empty( nError )
-
-       HB_UnZipFileInfo( hUnzip, @cFile )
-       
-       AAdd( aFiles, cFile )
-
-       nError := HB_UnZipFileNext( hUnzip )
-
-    Enddo
-
-    HB_UnZipClose( hUnzip )
-
-Endif
-
-Return aFiles
-*/
-
-****** End of ZipIndex ******
-
-
-/******
-*
-*       ArcIndex( cArcFile ) --> aFiles
-*
-*       Список файлов в архиве не ZIP-типа
-*
-*/
-
-Static Function ArcIndex( cArcFile )
-Local aFiles   := {}                                       , ;
+   LOCAL aFiles   := {}                                       , ;
       cCommand := ( GetEnv( 'COMSPEC' ) + ' /C ' + cApp7z ), ;
       cString, oFile
 
-// Оглавление архива выводим во временный файл и далее считываем для показа в
-// программе.
+   // Оглавление архива выводим во временный файл и далее считываем для показа в
+   // программе.
 
-// А информацию будем выводить не в табличном, а в техническом режиме (переключатель
-// -slt). Тогда каждый файл файл будет описываться в несколько строчек примерно так
-// (варируется в зависиомости от типа архива):
-// Path = Наш файл архива
-// Size = 
-// Packed Size = 
-// Modified = 
-// Attributes = 
-// CRC =
-// Method =
-// Block =
-// а имя элемента архива будет выводиться в строке маркированой Path = 
+   // А информацию будем выводить не в табличном, а в техническом режиме (переключатель
+   // -slt). Тогда каждый файл файл будет описываться в несколько строчек примерно так
+   // (варируется в зависиомости от типа архива):
+   // Path = Наш файл архива
+   // Size =
+   // Packed Size =
+   // Modified =
+   // Attributes =
+   // CRC =
+   // Method =
+   // Block =
+   // а имя элемента архива будет выводиться в строке маркированой Path =
 
-cCommand += ( ' L -slt "' + cArcFile + '" > ' + TMP_ARC_INDEX )
-Execute file ( cCommand ) Wait Hide
+   cCommand += ( ' L -slt "' + cArcFile + '" > ' + TMP_ARC_INDEX )
+   EXECUTE FILE ( cCommand ) Wait Hide
 
-If File( TMP_ARC_INDEX )
+   IF File( TMP_ARC_INDEX )
 
-   // Временный файл может и не создаться, например, вследствие ошибок
-   // в строке команды. Дополнительно не мешало бы проверить и его размер.
-   // Если нулевой - то в нём нет ничего.
+      // Временный файл может и не создаться, например, вследствие ошибок
+      // в строке команды. Дополнительно не мешало бы проверить и его размер.
+      // Если нулевой - то в нём нет ничего.
 
-   // Заполняем массив
-  
-   oFile := TFileRead() : New( TMP_ARC_INDEX )
-   oFile : Open()
+      // Заполняем массив
 
-   If !oFile : Error()
+      oFile := TFileRead() : New( TMP_ARC_INDEX )
+      oFile : Open()
 
-      Do while oFile : MoreToRead()
-   
-         If !Empty( cString := oFile : ReadLine() )
-   
-            // Несколько упрощённая обработка. Просто проверяем, не начинается
-            // ли строка с "Path =" и, если да - то это имя файла. При
-            // необходимости, можно сделать посложнее. Например, игнорировать
-            // имена каталогов (строка "Attributes = D...." для файлов .7z)
-          
-            If ( Left( cString, 7 ) == 'Path = ' )
-            
-               cString := HB_OEMtoANSI( AllTrim( Substr( cString, 8 ) ) )
+      IF !oFile : Error()
 
-               // Последние версии 7-Zip в отчет о содержимом архива добавляют
-               // наименование самого архива (также в строке "Path =").
-               // Поэтому вводим проверку.
-               
-               If !( Upper( cArcFile ) == Upper( cString ) )
-                  AAdd( aFiles, cString )
-               Endif
-               
-            Endif
-         
-         Endif
-      
-      Enddo
+         DO WHILE oFile : MoreToRead()
 
-      oFile : Close()
+            IF !Empty( cString := oFile : ReadLine() )
 
-   Endif
+               // Несколько упрощённая обработка. Просто проверяем, не начинается
+               // ли строка с "Path =" и, если да - то это имя файла. При
+               // необходимости, можно сделать посложнее. Например, игнорировать
+               // имена каталогов (строка "Attributes = D...." для файлов .7z)
 
-Endif
+               IF ( Left( cString, 7 ) == 'Path = ' )
 
-// Временный файл сыграл свою роль и м.б. удалён.
+                  cString := HB_OEMtoANSI( AllTrim( Substr( cString, 8 ) ) )
 
-Erase ( TMP_ARC_INDEX )
- 
-Return aFiles
+                  // Последние версии 7-Zip в отчет о содержимом архива добавляют
+                  // наименование самого архива (также в строке "Path =").
+                  // Поэтому вводим проверку.
 
-****** End of ArcIndex ******
+                  IF !( Upper( cArcFile ) == Upper( cString ) )
+                     AAdd( aFiles, cString )
+                  ENDIF
 
+               ENDIF
 
-/******
-*
-*       ShowTreeNode( nMode )
-*
-*       Развернуть (1) или свернуть (0) все узлы дерева
-*
-*/
+            ENDIF
 
-Static Procedure ShowTreeNode( nMode )
-Local nCount := wMain.Tree_1.ItemCount, ;
+         ENDDO
+
+         oFile : Close()
+
+      ENDIF
+
+   ENDIF
+
+   // Временный файл сыграл свою роль и м.б. удалён.
+
+   ERASE ( TMP_ARC_INDEX )
+
+   RETURN aFiles
+
+   ****** End of ArcIndex ******
+
+   /******
+   *       ShowTreeNode( nMode )
+   *       Развернуть (1) или свернуть (0) все узлы дерева
+   */
+
+STATIC PROCEDURE ShowTreeNode( nMode )
+
+   LOCAL nCount := wMain.Tree_1.ItemCount, ;
       Cycle
 
-If !Empty( nCount )
+   IF !Empty( nCount )
 
-   wMain.Tree_1.DisableUpdate
+      wMain.Tree_1.DisableUpdate
 
-   For Cycle := 1 to nCount
-   
-     // Обрабатываем только элементы, не имеющие дочерних ветвей (узлы)
+      FOR Cycle := 1 to nCount
 
-     If IsTreeNode( 'wMain', 'Tree_1', Cycle )
+         // Обрабатываем только элементы, не имеющие дочерних ветвей (узлы)
 
-        If ( nMode == 1 )
-           wMain.Tree_1.Expand( Cycle )
-        Else
-           wMain.Tree_1.Collapse( Cycle )
-        Endif
-        
-     Endif
-     
-   Next
+         IF IsTreeNode( 'wMain', 'Tree_1', Cycle )
 
-   If ( nMode == 1 )
-      wMain.Tree_1.Value := 1
-   Endif
-   
-   wMain.Tree_1.EnableUpdate
-   wMain.Tree_1.SetFocus
-   
-Endif
+            IF ( nMode == 1 )
+               wMain.Tree_1.Expand( Cycle )
+            ELSE
+               wMain.Tree_1.Collapse( Cycle )
+            ENDIF
 
-Return
+         ENDIF
 
-****** End of ShowTreeNode ******
+      NEXT
 
+      IF ( nMode == 1 )
+         wMain.Tree_1.Value := 1
+      ENDIF
 
-/******
-*
-*       IsTreeNode( cFormName, cTreeName, nPos ) --> lIsNode
-*
-*       Проверка, является ли элемент дерева узлом
-*
-*/
+      wMain.Tree_1.EnableUpdate
+      wMain.Tree_1.SetFocus
 
-Static Function IsTreeNode( cFormName, cTreeName, nPos )
-Local nVal            := GetProperty( cFormName, cTreeName, 'Value' )    , ;
+   ENDIF
+
+   RETURN
+
+   ****** End of ShowTreeNode ******
+
+   /******
+   *       IsTreeNode( cFormName, cTreeName, nPos ) --> lIsNode
+   *       Проверка, является ли элемент дерева узлом
+   */
+
+STATIC FUNCTION IsTreeNode( cFormName, cTreeName, nPos )
+
+   LOCAL nVal            := GetProperty( cFormName, cTreeName, 'Value' )    , ;
       nAmount         := GetProperty( cFormName, cTreeName, 'ItemCount' ), ;
       nIndex                                                             , ;
       nHandle                                                            , ;
       nTreeItemHandle
 
-If ( Valtype( nPos ) == 'N' )
-   If ( ( nPos > 0 ) .and. ( nPos <= nAmount ) )
-      nVal := nPos
-   Endif
-Endif
+   IF ( Valtype( nPos ) == 'N' )
+      IF ( ( nPos > 0 ) .and. ( nPos <= nAmount ) )
+         nVal := nPos
+      ENDIF
+   ENDIF
 
-nIndex          := GetControlIndex( cTreeName, cFormName )
-nHandle         := _HMG_aControlHandles[ nIndex ]
-nTreeItemHandle := _HMG_aControlPageMap[ nIndex, nVal ]
+   nIndex          := GetControlIndex( cTreeName, cFormName )
+   nHandle         := _HMG_aControlHandles[ nIndex ]
+   nTreeItemHandle := _HMG_aControlPageMap[ nIndex, nVal ]
 
-// Элемент дерева считается узлом, если имеет подчинённые элементы
+   // Элемент дерева считается узлом, если имеет подчинённые элементы
 
-Return !Empty( TreeView_GetChild( nHandle, nTreeItemHandle ) )
+   RETURN !Empty( TreeView_GetChild( nHandle, nTreeItemHandle ) )
 
-****** End of IsTreeNode ******
+   ****** End of IsTreeNode ******
 
+   /******
+   *       OpenObj( cFormName, cTreeName )
+   *       Открыть текущий объект, представленный элементом дерева
+   */
 
-/******
-*
-*       OpenObj( cFormName, cTreeName )
-*
-*       Открыть текущий объект, представленный элементом дерева
-*
-*/
+STATIC PROCEDURE OpenObj( cFormName, cTreeName )
 
-Static Procedure OpenObj( cFormName, cTreeName )
-Local nVal            := GetProperty( cFormName, cTreeName, 'Value' ), ;
+   LOCAL nVal            := GetProperty( cFormName, cTreeName, 'Value' ), ;
       nIndex                                                         , ;
       nHandle                                                        , ;
       nTreeHandle                                                    , ;
@@ -683,283 +648,273 @@ Local nVal            := GetProperty( cFormName, cTreeName, 'Value' ), ;
       cSavePath       := ''                                          , ;
       cCommand        := ( GetEnv( 'COMSPEC' ) + ' /C ' + cApp7z )
 
-If Empty( nVal )
-   Return
-Endif
+   IF Empty( nVal )
 
-// Обрабатываем ветвь в обратном порядке для определения маршрута к файлу
+      RETURN
+   ENDIF
 
-nTreeHandle := GetControlHandle( cTreeName, cFormName ) 
+   // Обрабатываем ветвь в обратном порядке для определения маршрута к файлу
 
-nIndex  := GetControlIndex( cTreeName, cFormName )
-nHandle := _HMG_aControlHandles[ nIndex ]
+   nTreeHandle := GetControlHandle( cTreeName, cFormName )
 
-nTreeItemHandle := _HMG_aControlPageMap[ nIndex, nVal ]
+   nIndex  := GetControlIndex( cTreeName, cFormName )
+   nHandle := _HMG_aControlHandles[ nIndex ]
 
-cChain      := TreeView_GetItem( nTreeHandle, nTreeItemHandle )
-nTempHandle := TreeView_GetParent( nHandle, nTreeItemHandle )
+   nTreeItemHandle := _HMG_aControlPageMap[ nIndex, nVal ]
 
-Do while !Empty( nTempHandle )
-   nTreeItemHandle := nTempHandle 
-   nTempHandle     := TreeView_GetParent( nHandle, nTreeItemHandle )
-   cChain          := ( TreeView_GetItem( nTreeHandle, nTreeItemHandle ) + ;
-                      Iif( Right( TreeView_GetItem( nTreeHandle, nTreeItemHandle ), 1 ) == '\', '', '\' ) + cChain )
-Enddo
+   cChain      := TreeView_GetItem( nTreeHandle, nTreeItemHandle )
+   nTempHandle := TreeView_GetParent( nHandle, nTreeItemHandle )
 
-// Полученное значение м.б. каталогом, файлом или файлом в архиве. В последнем случае
-// файл может располагаться внутри подкаталога, занесённого в архив. 
+   DO WHILE !Empty( nTempHandle )
+      nTreeItemHandle := nTempHandle
+      nTempHandle     := TreeView_GetParent( nHandle, nTreeItemHandle )
+      cChain          := ( TreeView_GetItem( nTreeHandle, nTreeItemHandle ) + ;
+         Iif( Right( TreeView_GetItem( nTreeHandle, nTreeItemHandle ), 1 ) == '\', '', '\' ) + cChain )
+   ENDDO
 
-If ( HB_DirExists( cChain ) .or. File( cChain ) )
+   // Полученное значение м.б. каталогом, файлом или файлом в архиве. В последнем случае
+   // файл может располагаться внутри подкаталога, занесённого в архив.
 
-   // Каталог или файл. Для каталога открываем обзор, для файла - запускаем ассоциированную программу.
-   // !!! Файлы с атрибутом "Скрытый" в эту ветвь не попадают.
-   
-   Execute operation 'Open' file ( '"' + cChain + '"' )
+   IF ( HB_DirExists( cChain ) .or. File( cChain ) )
 
-Else
+      // Каталог или файл. Для каталога открываем обзор, для файла - запускаем ассоциированную программу.
+      // !!! Файлы с атрибутом "Скрытый" в эту ветвь не попадают.
 
-  // Файл в архиве. Разбиваем полное имя и определяем наименование самого архива.
-  
-  aTokens := HB_ATokens( cChain, '\' )
-  
-  For each cElem in aTokens
-  
-    If !Empty( cArcName )
-       cArcName += '\'
-    Endif
-    
-    cArcName += cElem
-    
-    If File( cArcName )
-       Exit
-    Endif
-    
-  Next
+      Execute operation 'Open' file ( '"' + cChain + '"' )
 
-  // Имя архива исключаем из полученной строки описания. 
-  
-  cChain := Substr( cChain, ( Len( cArcName ) + 1 ) )  // Теперь это имя файла в архиве
-  
-  If ( Left( cChain, 1 ) == '\' )
-     cChain := Substr( cChain, 2 )
-  Endif
-  
-  // Ещё раз выполнить проверку существования файла, поскольку в эту
-  // ветвь попадает обработка файлов с атрибутом "Скрытый".
-  
-  If File( cArcName )
-  
-     HB_FNameSplit( cArcName, , , @cExt )
+   ELSE
 
-     If !Empty( cExt := Upper( cExt ) )
+      // Файл в архиве. Разбиваем полное имя и определяем наименование самого архива.
 
-        If ( Left( cExt, 1 ) == '.' )
-           cExt := Substr( cExt, 2 )
-        Endif
-        
-        If ( cExt == 'ZIP' )
-           
-           // Архивы ZIP обрабатываются собственными средствами.
-           
-           // !!! Файлы в архиве с кириллицей в имени внутренним ZIP не извлекаются.
-           // Лучше воспользоваться 7-Zip
+      aTokens := HB_ATokens( cChain, '\' )
 
-           If HB_UnZipFile( cArcName,,,, TEMP_FOLDER, cChain )
+      FOR EACH cElem in aTokens
 
-              // Подкаталоги в Zip-архиве могут разделяться прямым слэшем, поэтому
-              // путь преобразовываем.
+         IF !Empty( cArcName )
+            cArcName += '\'
+         ENDIF
 
-              cChain := Slashs( cChain )
+         cArcName += cElem
 
-              // Запускаем ассоциированную программу просмотра, ожидаем её завершения
-              // и удаляем извлечённый файл (при необходимости - и каталог).
-              
-              // !!! Данные в архиве не обновляются.
-           
-              ShowFile( cChain )
-           
-              If !Empty( nVal := At( '\', cChain ) )
-                 
-                 cChain := Left( cChain, ( nVal - 1 ) )
-                 
-                 If HB_DirExists( TEMP_FOLDER + cChain )
-                    DirRemove( TEMP_FOLDER + cChain )
-                 Endif
-                 
-              Endif
-              
-           Endif
-                      
-        Else
-        
-           // Обработка 7-Zip
-         
-           If !Empty( cOSPaths )
-              cSavePath := GetEnv( 'PATH' )
-              SetEnvironmentVariable( 'PATH', cOSPaths )
-           Endif
+         IF File( cArcName )
+            EXIT
+         ENDIF
 
-           cCommand += ( ' E -y -o' + TEMP_FOLDER + ' "' + cArcName + '" "' + cChain + '"' )
-           
-           Execute file ( cCommand ) Wait Hide
-             
-           If !Empty( cSavePath )
-              SetEnvironmentVariable( 'PATH', cSavePath )
-           Endif
+      NEXT
 
-           cChain := Slashs( cChain )
-           
-           // Здесь выполнять просмотр нужно только по имени файла.
-           
-           If !Empty( nVal := ( RAt( '\', cChain ) ) )
-              cChain := Substr( cChain, ( nVal + 1 ) )
-           Endif
-           
-           ShowFile( cChain )
-                      
-        Endif
-        
-     Endif
-  
-  Endif
-  
-Endif
+      // Имя архива исключаем из полученной строки описания.
 
-Return
+      cChain := Substr( cChain, ( Len( cArcName ) + 1 ) )  // Теперь это имя файла в архиве
 
-****** End of OpenObj ******
+      IF ( Left( cChain, 1 ) == '\' )
+         cChain := Substr( cChain, 2 )
+      ENDIF
 
+      // Ещё раз выполнить проверку существования файла, поскольку в эту
+      // ветвь попадает обработка файлов с атрибутом "Скрытый".
 
-/******
-*
-*       Slashs( cPath ) --> cPath
-*
-*       Изменение разделителей каталогов, используемых в
-*       архивах, на системные
-*
-*/
+      IF File( cArcName )
 
-Static Function Slashs( cPath )
+         HB_FNameSplit( cArcName, , , @cExt )
 
-If !Empty( At( '/', cPath ) )
-   cPath := StrTran( cPath, '/', '\' )
-Endif
+         IF !Empty( cExt := Upper( cExt ) )
 
-Return cPath
+            IF ( Left( cExt, 1 ) == '.' )
+               cExt := Substr( cExt, 2 )
+            ENDIF
 
-****** End of Slashs ******
+            IF ( cExt == 'ZIP' )
 
+               // Архивы ZIP обрабатываются собственными средствами.
 
-/******
-*
-*       ShowFile( cChain )
-*
-*       Открыть извлечённый из архива файл.
-*       После завершения просмотра файл удаляется.
-*
-*/
+               // !!! Файлы в архиве с кириллицей в имени внутренним ZIP не извлекаются.
+               // Лучше воспользоваться 7-Zip
 
-Static Procedure ShowFile( cChain )
-Local cExt, ;
+               IF HB_UnZipFile( cArcName,,,, TEMP_FOLDER, cChain )
+
+                  // Подкаталоги в Zip-архиве могут разделяться прямым слэшем, поэтому
+                  // путь преобразовываем.
+
+                  cChain := Slashs( cChain )
+
+                  // Запускаем ассоциированную программу просмотра, ожидаем её завершения
+                  // и удаляем извлечённый файл (при необходимости - и каталог).
+
+                  // !!! Данные в архиве не обновляются.
+
+                  ShowFile( cChain )
+
+                  IF !Empty( nVal := At( '\', cChain ) )
+
+                     cChain := Left( cChain, ( nVal - 1 ) )
+
+                     IF HB_DirExists( TEMP_FOLDER + cChain )
+                        DirRemove( TEMP_FOLDER + cChain )
+                     ENDIF
+
+                  ENDIF
+
+               ENDIF
+
+            ELSE
+
+               // Обработка 7-Zip
+
+               IF !Empty( cOSPaths )
+                  cSavePath := GetEnv( 'PATH' )
+                  SetEnvironmentVariable( 'PATH', cOSPaths )
+               ENDIF
+
+               cCommand += ( ' E -y -o' + TEMP_FOLDER + ' "' + cArcName + '" "' + cChain + '"' )
+
+               EXECUTE FILE ( cCommand ) Wait Hide
+
+               IF !Empty( cSavePath )
+                  SetEnvironmentVariable( 'PATH', cSavePath )
+               ENDIF
+
+               cChain := Slashs( cChain )
+
+               // Здесь выполнять просмотр нужно только по имени файла.
+
+               IF !Empty( nVal := ( RAt( '\', cChain ) ) )
+                  cChain := Substr( cChain, ( nVal + 1 ) )
+               ENDIF
+
+               ShowFile( cChain )
+
+            ENDIF
+
+         ENDIF
+
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+   ****** End of OpenObj ******
+
+   /******
+   *       Slashs( cPath ) --> cPath
+   *       Изменение разделителей каталогов, используемых в
+   *       архивах, на системные
+   */
+
+STATIC FUNCTION Slashs( cPath )
+
+   IF !Empty( At( '/', cPath ) )
+      cPath := StrTran( cPath, '/', '\' )
+   ENDIF
+
+   RETURN cPath
+
+   ****** End of Slashs ******
+
+   /******
+   *       ShowFile( cChain )
+   *       Открыть извлечённый из архива файл.
+   *       После завершения просмотра файл удаляется.
+   */
+
+STATIC PROCEDURE ShowFile( cChain )
+
+   LOCAL cExt, ;
       cApp, ;
       nPos
 
-// Если в полученном имени файла содержится часть пути (сохранённая в архиве),
-// необходимо избавиться от неё.
+   // Если в полученном имени файла содержится часть пути (сохранённая в архиве),
+   // необходимо избавиться от неё.
 
-If ( ( nPos := RAt( '\', cChain ) ) > 0 )
-   cChain := Substr( cChain, ( nPos + 1 ) )
-Endif
+   IF ( ( nPos := RAt( '\', cChain ) ) > 0 )
+      cChain := Substr( cChain, ( nPos + 1 ) )
+   ENDIF
 
-If File( TEMP_FOLDER + cChain  )
+   IF File( TEMP_FOLDER + cChain  )
 
-   HB_FNameSplit( cChain, , , @cExt )
-                  
-   // Определить ассоциированную программу и открыть в ней файл.
-   // Если программа не будет сопоставлена, попробовать просто
-   // выполнить извлечённый файл (как вариант, можно назначить
-   // программу, в которой будут открываться все файлы).
-                  
-   If !Empty( cApp := GetOpenCommand( cExt ) )
-      Execute file ( cApp + ' "' + TEMP_FOLDER + cChain + '"' ) Wait
-   Else
-      Execute file ( TEMP_FOLDER + cChain ) Wait
-   Endif
+      HB_FNameSplit( cChain, , , @cExt )
 
-   Erase( TEMP_FOLDER + cChain )
-                    
-Endif
+      // Определить ассоциированную программу и открыть в ней файл.
+      // Если программа не будет сопоставлена, попробовать просто
+      // выполнить извлечённый файл (как вариант, можно назначить
+      // программу, в которой будут открываться все файлы).
 
-Return
+      IF !Empty( cApp := GetOpenCommand( cExt ) )
+         EXECUTE FILE ( cApp + ' "' + TEMP_FOLDER + cChain + '"' ) Wait
+      ELSE
+         EXECUTE FILE ( TEMP_FOLDER + cChain ) Wait
+      ENDIF
 
-****** End of ShowFile ******
+      ERASE( TEMP_FOLDER + cChain )
 
+   ENDIF
 
-/******
-*
-*       GetOpenCommand( cExt )
-*
-*       Определение программы, связанной с расширением.
-*
-*/
+   RETURN
 
-Static Function GetOpenCommand( cExt )
-Local oReg       , ;
+   ****** End of ShowFile ******
+
+   /******
+   *       GetOpenCommand( cExt )
+   *       Определение программы, связанной с расширением.
+   */
+
+STATIC FUNCTION GetOpenCommand( cExt )
+
+   LOCAL oReg       , ;
       cVar1      , ;
       cVar2 := '', ;
       nPos
 
-If !IsChar( cExt )
-   Return ''
-Endif
+   IF !IsChar( cExt )
 
-// Принцип действия. В HKEY_CLASSES_ROOT ищем ветвь, соответсвующую переданному
-// расширению (с ведущей точкой) и определяем наименование типа файла (параметр
-// "(По умолчанию)". Например, для расширения "jpg" ищем HKEY_CLASSES_ROOT\.jpg
-// и получаем имя ассоциации - "jpegfile".
-// В этой же ветке HKEY_CLASSES_ROOT ищем строку запуска программы, связанной с
-// этим типом файла (HKEY_CLASSES_ROOT\<имя ассоциации>\shell\open\command)
-// Например, HKEY_CLASSES_ROOT\jpegfile\shell\open\command
-// В значении параметра "(По умолчанию)" находится команда открытия этого типа
-// файла: "C:\\Program Files\\Internet Explorer\\iexplore.exe\" -nohome
+      RETURN ''
+   ENDIF
 
-If ( !Left( cExt, 1 ) == '.' )
-   cExt := ( '.' + cExt )
-Endif
+   // Принцип действия. В HKEY_CLASSES_ROOT ищем ветвь, соответсвующую переданному
+   // расширению (с ведущей точкой) и определяем наименование типа файла (параметр
+   // "(По умолчанию)". Например, для расширения "jpg" ищем HKEY_CLASSES_ROOT\.jpg
+   // и получаем имя ассоциации - "jpegfile".
+   // В этой же ветке HKEY_CLASSES_ROOT ищем строку запуска программы, связанной с
+   // этим типом файла (HKEY_CLASSES_ROOT\<имя ассоциации>\shell\open\command)
+   // Например, HKEY_CLASSES_ROOT\jpegfile\shell\open\command
+   // В значении параметра "(По умолчанию)" находится команда открытия этого типа
+   // файла: "C:\\Program Files\\Internet Explorer\\iexplore.exe\" -nohome
 
-oReg  := TReg32() : New( HKEY_CLASSES_ROOT, cExt, .F. )
-cVar1 := RTrim( StrTran( oReg : Get( Nil, '' ), Chr( 0 ), ' ' ) )   // Значение ключа "(По умолчанию)"
-oReg : Close()
+   IF ( !Left( cExt, 1 ) == '.' )
+      cExt := ( '.' + cExt )
+   ENDIF
 
-If !Empty( cVar1 )
-
-   oReg  := TReg32() : New( HKEY_CLASSES_ROOT, ( cVar1 + '\shell\open\command' ), .F. )
-   cVar2 := RTrim( StrTran( oReg : Get( Nil, '' ), Chr( 0 ), ' ' ) )  // Значение ключа "(По умолчанию)"
+   oReg  := TReg32() : New( HKEY_CLASSES_ROOT, cExt, .F. )
+   cVar1 := RTrim( StrTran( oReg : Get( Nil, '' ), Chr( 0 ), ' ' ) )   // Значение ключа "(По умолчанию)"
    oReg : Close()
 
-   // Обработка указаний на передачу параметров ассоциированной программе
-   
-   If ( nPos := RAt( ' %1', cVar2 ) ) > 0        // Параметр не обрамляется кавычками (Блокнот)
-      cVar2 := SubStr( cVar2, 1, nPos )
-      
-   Elseif ( nPos := RAt( '"%', cVar2 ) ) > 0     // Параметры вида "%1", "%L" и т.д. (с кавычками)
-      cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
-      
-   Elseif ( nPos := RAt( '%', cVar2 ) ) > 0      // Параметры вида "%1", "%L" и т.д. (без кавычек)
-      cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
-      
-   Elseif ( nPos := RAt( ' /', cVar2 ) ) > 0     // Вставка "/"
-      cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
-      
-   Endif
+   IF !Empty( cVar1 )
 
-Endif
+      oReg  := TReg32() : New( HKEY_CLASSES_ROOT, ( cVar1 + '\shell\open\command' ), .F. )
+      cVar2 := RTrim( StrTran( oReg : Get( Nil, '' ), Chr( 0 ), ' ' ) )  // Значение ключа "(По умолчанию)"
+      oReg : Close()
 
-Return RTrim( cVar2 )
+      // Обработка указаний на передачу параметров ассоциированной программе
 
-****** End of GetOpenCommand ******
+      IF ( nPos := RAt( ' %1', cVar2 ) ) > 0        // Параметр не обрамляется кавычками (Блокнот)
+         cVar2 := SubStr( cVar2, 1, nPos )
 
+      ELSEIF ( nPos := RAt( '"%', cVar2 ) ) > 0     // Параметры вида "%1", "%L" и т.д. (с кавычками)
+         cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
 
+      ELSEIF ( nPos := RAt( '%', cVar2 ) ) > 0      // Параметры вида "%1", "%L" и т.д. (без кавычек)
+         cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
+
+      ELSEIF ( nPos := RAt( ' /', cVar2 ) ) > 0     // Вставка "/"
+         cVar2 := SubStr( cVar2, 1, ( nPos - 1 ) )
+
+      ENDIF
+
+   ENDIF
+
+   RETURN RTrim( cVar2 )
+
+   ****** End of GetOpenCommand ******
 
 #pragma BEGINDUMP
 
@@ -968,8 +923,8 @@ Return RTrim( cVar2 )
 #include "hbapiitm.h"
 
 // Данная функция есть в библиотеках Harbour/xHarbour
-// Harbour - VWN_SETENVIRONMENTVARIABLE в CONTRIB\HBWHAT\whtmisc.c 
-// xHarbour - SETENVIRONMENTVARIABLE в CONTRIB\WHAT32\SOURCE\_winmisc.c 
+// Harbour - VWN_SETENVIRONMENTVARIABLE в CONTRIB\HBWHAT\whtmisc.c
+// xHarbour - SETENVIRONMENTVARIABLE в CONTRIB\WHAT32\SOURCE\_winmisc.c
 
 HB_FUNC_STATIC( SETENVIRONMENTVARIABLE )
 {
@@ -979,3 +934,4 @@ HB_FUNC_STATIC( SETENVIRONMENTVARIABLE )
 }
 
 #pragma ENDDUMP
+

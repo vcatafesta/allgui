@@ -13,48 +13,46 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       fontname, fontsize, bold, BORDER, CLIENTEDGE, HSCROLL, VSCROLL, ;
       TRANSPARENT, aRGB_bk, aRGB_font, ProcedureName, tooltip, HelpId, invisible, ;
       italic, underline, strikeout, autosize, rightalign, centeralign, ;
       blink, mouseover, mouseleave, VCenterAlign, NoPrefix, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle, mVar, k := 0, Style, blInit
    LOCAL ControlHandle, FontHandle
    LOCAL lDialogInMemory
@@ -183,7 +181,7 @@ FUNCTION _DefineLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  "LABEL"
    _HMG_aControlNames  [k] :=  ControlName
@@ -241,11 +239,10 @@ FUNCTION _DefineLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       _SetControlHeight ( ControlName , ParentFormName , FontSize + iif( FontSize < 12, 12, 16 ) )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogLabel( ParentFormName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL ControlName := _HMG_aControlNames [k]
 
    IF _HMG_aControlMiscData1 [k] [2] == .T.
@@ -259,16 +256,15 @@ FUNCTION InitDialogLabel( ParentFormName, ControlHandle, k )
       _SetControlHeight ( ControlName , ParentFormName , _HMG_aControlFontSize [k] + iif( _HMG_aControlFontSize [k] < 12, 12, 16 ) )
       RedrawWindow ( ControlHandle )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION OLABELEVENTS( hWnd, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aControlHandles, hWnd )
 
    HB_SYMBOL_UNUSED( wParam )
@@ -285,4 +281,5 @@ FUNCTION OLABELEVENTS( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN 0
+   RETURN 0
+

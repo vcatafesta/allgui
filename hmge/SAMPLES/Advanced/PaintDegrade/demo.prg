@@ -1,13 +1,10 @@
 /*
- * PaintDegrade() v1.0
- *
- * Degradado de Colores en Ventanas / Dialogos
- * Basado en un trabajo de TheFull
- *
- * Daniel Andrade - 19/03/2003
- * Código FREE
- *
- */
+* PaintDegrade() v1.0
+* Degradado de Colores en Ventanas / Dialogos
+* Basado en un trabajo de TheFull
+* Daniel Andrade - 19/03/2003
+* Código FREE
+*/
 // ------------------------------------------------------------------*
 // Translated for MiniGUI by Grigory Filatov <gfilatov@inbox.ru>
 
@@ -32,47 +29,47 @@ FUNCTION Main()
    nDegColor := aColor[ nPos ]
 
    DEFINE WINDOW Form_Main ;
-      AT 0, 0 ;
-      WIDTH 600 HEIGHT 400 ;
-      TITLE 'Ejemplo Degradado en Ventanas' ;
-      MAIN ;
-      ON PAINT paint_it( This.Handle )
+         AT 0, 0 ;
+         WIDTH 600 HEIGHT 400 ;
+         TITLE 'Ejemplo Degradado en Ventanas' ;
+         MAIN ;
+         ON PAINT paint_it( This.Handle )
 
-   DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-      DEFINE POPUP "&Opciones"
+         DEFINE POPUP "&Opciones"
 
-         MENUITEM "Color &Puro" NAME Item_1 ;
-            ACTION ( Form_Main.Item_1.Checked := ( lDegPure := ! lDegPure ), refresh_it( ThisWindow.Handle ) )
+            MENUITEM "Color &Puro" NAME Item_1 ;
+               ACTION ( Form_Main.Item_1.Checked := ( lDegPure := ! lDegPure ), refresh_it( ThisWindow.Handle ) )
 
-         Form_Main.Item_1.Checked := lDegPure
+            Form_Main.Item_1.Checked := lDegPure
 
-         MENUITEM "Pintado &Invertido" NAME Item_2 ;
-            ACTION ( Form_Main.Item_2.Checked := ( lDegInvert := ! lDegInvert ), refresh_it( ThisWindow.Handle ) )
+            MENUITEM "Pintado &Invertido" NAME Item_2 ;
+               ACTION ( Form_Main.Item_2.Checked := ( lDegInvert := ! lDegInvert ), refresh_it( ThisWindow.Handle ) )
 
-         Form_Main.Item_2.Checked := lDegInvert
+            Form_Main.Item_2.Checked := lDegInvert
 
-         MENUITEM "Pintado &ZigZag" NAME Item_3 ;
-            ACTION ( Form_Main.Item_3.Checked := ( lDegZigZag := ! lDegZigZag ), refresh_it( ThisWindow.Handle ) )
+            MENUITEM "Pintado &ZigZag" NAME Item_3 ;
+               ACTION ( Form_Main.Item_3.Checked := ( lDegZigZag := ! lDegZigZag ), refresh_it( ThisWindow.Handle ) )
 
-         Form_Main.Item_3.Checked := lDegZigZag
+            Form_Main.Item_3.Checked := lDegZigZag
 
-         MENUITEM "Cambiar &Color" ;
-            ACTION ( nPos := iif( nPos >= 7, 1, nPos + 1 ), nDegColor := aColor[ nPos ], refresh_it( ThisWindow.Handle ) )
+            MENUITEM "Cambiar &Color" ;
+               ACTION ( nPos := iif( nPos >= 7, 1, nPos + 1 ), nDegColor := aColor[ nPos ], refresh_it( ThisWindow.Handle ) )
 
-         SEPARATOR
+            SEPARATOR
 
-         MENUITEM "&Salir" ACTION Form_Main.Release
+            MENUITEM "&Salir" ACTION Form_Main.Release
 
-      END POPUP
+         END POPUP
 
-      DEFINE POPUP 'H&elp'
+         DEFINE POPUP 'H&elp'
 
-         ITEM 'About' ACTION MsgInfo ( "Free GUI Library For Harbour", "MiniGUI PaintDegrade() Demo" )
+            ITEM 'About' ACTION MsgInfo ( "Free GUI Library For Harbour", "MiniGUI PaintDegrade() Demo" )
 
-      END POPUP
+         END POPUP
 
-   END MENU
+      END MENU
 
    END WINDOW
 
@@ -80,29 +77,31 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Form_Main
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 FUNCTION paint_it( hWnd )
 
    PaintDegrade( hWnd, nDegColor, 4, lDegPure, lDegInvert, lDegZigZag )
 
-RETURN NIL
+   RETURN NIL
 
-#define WM_PAINT 15
+   #define WM_PAINT 15
 
-/*
-*/
+   /*
+   */
+
 FUNCTION refresh_it( hWnd )
 
    SendMessage( hWnd, WM_PAINT, 0, 0 )
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * C-level
-*/
+   /*
+   * C-level
+   */
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -178,3 +177,4 @@ HB_FUNC( PAINTDEGRADE )
 }
 
 #pragma ENDDUMP
+

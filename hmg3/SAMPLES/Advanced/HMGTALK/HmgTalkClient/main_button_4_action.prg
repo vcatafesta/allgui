@@ -1,8 +1,10 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
-Function main_button_4_action
-	c_RingTone := Getfile ( { {'WAV Files','*.*'} } , 'Open File' , 'Media\' , .f. , .t. )
-Return Nil
-
+FUNCTION main_button_4_action
+
+   c_RingTone := Getfile ( { {'WAV Files','*.*'} } , 'Open File' , 'Media\' , .f. , .t. )
+
+   RETURN NIL
+

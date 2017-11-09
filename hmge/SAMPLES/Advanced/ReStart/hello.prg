@@ -1,43 +1,41 @@
 /*
- * MiniGUI Hello World Demo
+* MiniGUI Hello World Demo
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 ;
-		TITLE 'Hello World!' ;
-		MAIN ;
-		ON INTERACTIVECLOSE MsgYesNo( "Are you sure?", "Do you want to exit?" )
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Hello World!' ;
+         MAIN ;
+         ON INTERACTIVECLOSE MsgYesNo( "Are you sure?", "Do you want to exit?" )
 
-		DEFINE HYPERLINK Label_1
-			ROW	40
-			COL	50
-			VALUE	"Restart  This  Application"
-			ADDRESS	"proc:\\RestartApp('hello.exe')"
-			AUTOSIZE .T.
-			HANDCURSOR .T.
-		END HYPERLINK
+      DEFINE HYPERLINK Label_1
+         ROW   40
+         COL   50
+         VALUE   "Restart  This  Application"
+         ADDRESS   "proc:\\RestartApp('hello.exe')"
+         AUTOSIZE .T.
+         HANDCURSOR .T.
+      END HYPERLINK
 
-		ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
+FUNCTION RestartApp( cAppName )
 
-Function RestartApp( cAppName )
-
-Return WinExec( "restart " + cAppName + " " + hb_ntos(Application.Handle) )
-
+   RETURN WinExec( "restart " + cAppName + " " + hb_ntos(Application.Handle) )
 
 #pragma BEGINDUMP
 
@@ -58,3 +56,4 @@ HB_FUNC( WINEXEC )
 }
 
 #pragma ENDDUMP
+

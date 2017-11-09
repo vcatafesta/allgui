@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -54,59 +52,59 @@ PROCEDURE Main
    ENDIF
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 338 ;
-      HEIGHT 153 - IF( IsXPThemeActive(), 0, 6 ) ;
-      TITLE PROGRAM + VERSION ;
-      ICON "MAIN" ;
-      MAIN ;
-      NOMAXIMIZE NOMINIMIZE NOSIZE ;
-      ON PAINT ONPaint() ;
-      FONT 'MS Sans Serif' SIZE 9
+         AT 0, 0 ;
+         WIDTH 338 ;
+         HEIGHT 153 - IF( IsXPThemeActive(), 0, 6 ) ;
+         TITLE PROGRAM + VERSION ;
+         ICON "MAIN" ;
+         MAIN ;
+         NOMAXIMIZE NOMINIMIZE NOSIZE ;
+         ON PAINT ONPaint() ;
+         FONT 'MS Sans Serif' SIZE 9
 
-   @ 90, 223 BUTTON Button_1 ;
-      CAPTION 'Quit' ;
-      ACTION ThisWindow.Release ;
-      WIDTH 98 ;
-      HEIGHT 23 DEFAULT
+      @ 90, 223 BUTTON Button_1 ;
+         CAPTION 'Quit' ;
+         ACTION ThisWindow.Release ;
+         WIDTH 98 ;
+         HEIGHT 23 DEFAULT
 
-   @ 12, 12 BUTTON Button_2 ;
-      CAPTION 'GO TO --->' ;
-      ACTION ExploreWinObjects( aCLSIDs[ Form_1.Combo_1.Value ], Form_1.Check_1.Value, Form_1.Check_2.Value ) ;
-      WIDTH 98 ;
-      HEIGHT 21
+      @ 12, 12 BUTTON Button_2 ;
+         CAPTION 'GO TO --->' ;
+         ACTION ExploreWinObjects( aCLSIDs[ Form_1.Combo_1.Value ], Form_1.Check_1.Value, Form_1.Check_2.Value ) ;
+         WIDTH 98 ;
+         HEIGHT 21
 
-   @ 12, 118 COMBOBOX Combo_1 ;
-      WIDTH 204 ;
-      ITEMS aCombo ;
-      VALUE 1 ;
-      ON ENTER ExploreWinObjects( aCLSIDs[ Form_1.Combo_1.Value ], Form_1.Check_1.Value, Form_1.Check_2.Value )
+      @ 12, 118 COMBOBOX Combo_1 ;
+         WIDTH 204 ;
+         ITEMS aCombo ;
+         VALUE 1 ;
+         ON ENTER ExploreWinObjects( aCLSIDs[ Form_1.Combo_1.Value ], Form_1.Check_1.Value, Form_1.Check_2.Value )
 
-   @ 39, 12 CHECKBOX Check_1 ;
-      CAPTION "Don't show left Explorer pane" ;
-      WIDTH 160 ;
-      HEIGHT 21 ;
-      VALUE .F.
+      @ 39, 12 CHECKBOX Check_1 ;
+         CAPTION "Don't show left Explorer pane" ;
+         WIDTH 160 ;
+         HEIGHT 21 ;
+         VALUE .F.
 
-   @ 60, 12 CHECKBOX Check_2 ;
-      CAPTION "Start Exploring at the object root" ;
-      WIDTH 170 ;
-      HEIGHT 21 ;
-      VALUE .F.
+      @ 60, 12 CHECKBOX Check_2 ;
+         CAPTION "Start Exploring at the object root" ;
+         WIDTH 170 ;
+         HEIGHT 21 ;
+         VALUE .F.
 
-   @ 48, 289 LABEL Label_1 ;
-      VALUE 'EXP' ;
-      WIDTH 32 ;
-      HEIGHT 28 ;
-      FONT 'Tahoma' SIZE 12 BOLD ;
-      FONTCOLOR GRAY TRANSPARENT RIGHTALIGN
+      @ 48, 289 LABEL Label_1 ;
+         VALUE 'EXP' ;
+         WIDTH 32 ;
+         HEIGHT 28 ;
+         FONT 'Tahoma' SIZE 12 BOLD ;
+         FONTCOLOR GRAY TRANSPARENT RIGHTALIGN
 
-   @ 92, 12 LABEL Label_2 ;
-      VALUE 'Copyright ' + Chr( 169 ) + COPYRIGHT ;
-      WIDTH 160 ;
-      HEIGHT 21
+      @ 92, 12 LABEL Label_2 ;
+         VALUE 'Copyright ' + Chr( 169 ) + COPYRIGHT ;
+         WIDTH 160 ;
+         HEIGHT 21
 
-   ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
    END WINDOW
 
@@ -116,8 +114,7 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE ExploreWinObjects( cObject, lDoNotShowLeftPane, lStartExplAtRoot )
 
@@ -125,8 +122,7 @@ STATIC PROCEDURE ExploreWinObjects( cObject, lDoNotShowLeftPane, lStartExplAtRoo
       IF( lDoNotShowLeftPane, "/N", "/E" ) + "," + IF( lStartExplAtRoot, "/Root,", "" ) + ;
       "::" + cObject, , 1 )
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE OnPaint()
 
@@ -142,4 +138,5 @@ STATIC PROCEDURE OnPaint()
       AT 84, 0 TO 84, 331 ;
       PENCOLOR GRAY
 
-RETURN
+   RETURN
+

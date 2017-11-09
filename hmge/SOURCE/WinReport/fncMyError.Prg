@@ -1,8 +1,6 @@
-*****
 * Manejo de Errores
 * Extraido de ErrorSys.prg
 * Adalberto del Rosario
-*****
 
 #define __SYSDATA__
 
@@ -10,31 +8,31 @@
 #include "error.ch"
 
 FUNCTION MyErrorFunc( MyObjError )
-    LOCAL cErrorMsg, HtmArch, cText, i := 2
 
-    cErrorMsg := MyErrorMessage( MyObjError )
-    
-    HtmArch := Html_ErrorLog()
-    Html_LineText( HtmArch, '<p class="updated">Date: ' + Dtoc(Date()) + "  " + "Time: " + Time() )
-    Html_LineText( HtmArch, cErrorMsg + "</p>" )
-    
-    cErrorMsg += CRLF + CRLF
-    
-    WHILE ! Empty( ProcName( i ) )
-        cText := "Called from " + ProcName( i ) + "(" + AllTrim( Str( ProcLine( i++ ) ) ) + ")" + CRLF
-        cErrorMsg += cText
-        Html_LineText( HtmArch, cText )
-    ENDDO
-    Html_Line( HtmArch )
-    Html_End( HtmArch )
+   LOCAL cErrorMsg, HtmArch, cText, i := 2
 
-    MsgStop( cErrorMsg, 'Program Error...' )
+   cErrorMsg := MyErrorMessage( MyObjError )
 
-RETURN .T.
+   HtmArch := Html_ErrorLog()
+   Html_LineText( HtmArch, '<p class="updated">Date: ' + Dtoc(Date()) + "  " + "Time: " + Time() )
+   Html_LineText( HtmArch, cErrorMsg + "</p>" )
 
+   cErrorMsg += CRLF + CRLF
 
+   WHILE ! Empty( ProcName( i ) )
+      cText := "Called from " + ProcName( i ) + "(" + AllTrim( Str( ProcLine( i++ ) ) ) + ")" + CRLF
+      cErrorMsg += cText
+      Html_LineText( HtmArch, cText )
+   ENDDO
+   Html_Line( HtmArch )
+   Html_End( HtmArch )
+
+   MsgStop( cErrorMsg, 'Program Error...' )
+
+   RETURN .T.
 
 STATIC FUNCTION MyErrorMessage( oError )
+
    LOCAL cMessage
 
    // start error message
@@ -67,4 +65,5 @@ STATIC FUNCTION MyErrorMessage( oError )
       cMessage += ": " + oError:operation
    ENDCASE
 
-RETURN cMessage
+   RETURN cMessage
+

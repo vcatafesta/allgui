@@ -1,2399 +1,2399 @@
 /*----------------------------------------------------------------------------
- HMG - Harbour Windows GUI library source code
+HMG - Harbour Windows GUI library source code
 
- Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
- http://sites.google.com/site/hmgweb/
+Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
- Head of HMG project:
+Head of HMG project:
 
-      2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
-      http://sites.google.com/site/hmgweb/
+2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
-      2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
-      http://srvet.blogspot.com
+2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
+http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of HMG.
+As a special exception, you have permission for additional uses of the text
+contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- HMG library code into it.
+The exception is that, if you link the HMG library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+HMG library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+"Harbour Project"
+Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
 MEMVAR _HMG_SYSDATA
+
 #include 'hmg.ch'
 #define SB_CTL          2  // ok
 #define CB_SHOWDROPDOWN 335  // ok
-memvar aresult
-*-----------------------------------------------------------------------------*
+MEMVAR aresult
 
 #include "SETCompileBrowse.ch"
 #ifdef COMPILEBROWSE
 
-Function _DefineBrowse ( ControlName, ;
-			ParentForm, ;
-			x, ;
-			y, ;
-			w, ;
-			h, ;
-			aHeaders, ;
-			aWidths, ;
-			aFields , ;
-			value, ;
-			fontname, ;
-			fontsize , ;
-			tooltip , ;
-			change , ;
-			dblclick , ;
-			aHeadClick , ;
-			gotfocus , ;
-			lostfocus , ;
-			WorkArea , ;
-			Delete, ;
-			nogrid, ;
-			aImage, ;
-			aJust , ;
-			HelpId , ;
-			bold , ;
-			italic , ;
-			underline , ;
-			strikeout , ;
-			break , ;
-			backcolor , ;
-			fontcolor , ;
-			lock , ;
-			inplace , ;
-			novscroll , ;
-			appendable , ;
-			readonly , ;
-			valid , ;
-			validmessages , ;
-			edit , ;
-			dynamicbackcolor , ;
-			aWhenFields , ;
-			dynamicforecolor , ;
-			inputmask , ;
-			format , ;
-			inputitems , displayitems , aHeaderImages, ;
-			NoTrans, NoTransHeader)
-*-----------------------------------------------------------------------------*
-Local i , cParentForm , mVar , ix, wBitmap , z , ScrollBarHandle , DeltaWidth , k := 0
-Local cParentTabName
-
-Local ControlHandle
-Local FontHandle
-Local hsum := 0
-Local ScrollBarButtonHandle
-Local nHeaderImageListHandle
-
-	InPlace := .T.
-
-	if _HMG_SYSDATA [ 264 ] = .T.
-		ParentForm := _HMG_SYSDATA [ 223 ]
-		if .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-			FontName := _HMG_SYSDATA [ 224 ]
-		EndIf
-		if .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-			FontSize := _HMG_SYSDATA [ 182 ]
-		EndIf
-	endif
-	if _HMG_SYSDATA [ 183 ] > 0
-		IF _HMG_SYSDATA [ 240 ] == .F.
-		x 	:= x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-		y 	:= y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
-		ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-		cParentTabName := _HMG_SYSDATA [ 225 ] 
-		ENDIF
-	EndIf
-
-	If .Not. _IsWindowDefined (ParentForm)
-		MsgHMGError("Window: "+ ParentForm + " is not defined. Program terminated" )
-	Endif
-
-	If _IsControlDefined (ControlName,ParentForm)
-		MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " Already defined. Program Terminated" )
-	endif
-
-	ix := GetFormIndex (ParentForm)
-
-	mVar := '_' + ParentForm + '_' + ControlName
-
-	cParentForm = ParentForm
-
-	ParentForm = GetFormHandle (ParentForm)
-
-	if valtype(w) == "U"
-		w := 240
-	endif
-	if valtype(h) == "U"
-		h := 120
-	endif
-	if valtype(value) == "U"
-		value := 0
-	endif
-	if valtype(aFields) == "U"
-		aFields := {}
-	endif
-	if valtype(aJust) == "U"		// Browse+
-		aJust := Array( HMG_LEN( aFields ) )
-		aFill( aJust, 0 )
-	else
-		aSize( aJust, HMG_LEN( aFields) )
-		aEval( aJust, { |x| x := iif( x == NIL, 0, x ) } )
-	endif
-	if valtype(aImage) == "U"
-		aImage := {}
-	endif
-
-	// If splitboxed force no vertical scrollbar
-
-	if valtype(x) == "U" .or. valtype(y) == "U" 
-		novscroll := .T.
-	endif
-
-	if novscroll == .F.
-		DeltaWidth := GETVSCROLLBARWIDTH() 
-	Else
-		DeltaWidth := 0
-	EndIf
-
-	if valtype(x) == "U" .or. valtype(y) == "U" 
-
-		If _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
-			Break := .T.
-		EndIf
-
-		_HMG_SYSDATA [ 216 ]	:= 'GRID'
-
-		i := GetFormIndex ( cParentForm )
-
-		if i > 0 
-
-			ControlHandle := InitBrowse ( ParentForm, 0, x, y, w - DeltaWidth , h , '', 0, iif( nogrid, 0, 1 ) ) // Browse+	
-
-			x := GetWindowCol ( Controlhandle )
-			y := GetWindowRow ( Controlhandle )
-
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
-				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
-			Else
-				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)		
-			endif
-
-			AddSplitBoxItem ( Controlhandle, _HMG_SYSDATA [ 87 ] [i] , w , break , , , , _HMG_SYSDATA [ 258 ] )
-		EndIf
-
-	Else
-
-		ControlHandle := InitBrowse ( ParentForm, 0, x, y, w - DeltaWidth , h , '', 0, iif( nogrid, 0, 1 ) ) // Browse+	
-
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
-			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
-		Else
-			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)		
-		endif
-
-	endif
-
-	If ValType (backcolor) != 'U'
-		ListView_SetBkColor ( ControlHandle , backcolor[1] , backcolor[2] , backcolor[3] )
-		ListView_SetTextBkColor ( ControlHandle , backcolor[1] , backcolor[2] , backcolor[3]  )
-	EndIf
-
-	If ValType (fontcolor) != 'U'
-		ListView_SetTextColor ( ControlHandle , fontcolor[1] , fontcolor[2] , fontcolor[3]  )
-	EndIf
-
-	wBitmap := iif( HMG_LEN( aImage ) > 0, AddListViewBitmap( ControlHandle, aImage, NoTrans ), 0 ) //Add Bitmap Column
-	aWidths[1] := max ( aWidths[1], wBitmap + 2 ) // Set Column 1 witth to Bitmap width
-
-	if valtype(aHeadClick) == "U"
-		aHeadClick := {}
-	endif
-
-	if valtype(change) == "U"
-		change := ""
-	endif
-
-	if valtype(dblclick) == "U"
-		dblclick := ""
-	endif
-
-	if valtype(tooltip) != "U"
-	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
-	endif
-
-	k := _GetControlFree()
-
-	Public &mVar. := k
-
-	_HMG_SYSDATA [  1 ] [k] := "BROWSE" 
-	_HMG_SYSDATA [  2 ] [k] := ControlName 
-	_HMG_SYSDATA [  3 ] [k] := ControlHandle 
-	_HMG_SYSDATA [  4 ] [k] := ParentForm 
-	_HMG_SYSDATA [  5 ] [k] := 0 
-	_HMG_SYSDATA [  6 ] [k] := aWidths 
-	_HMG_SYSDATA [  7 ] [k] := aHeaders
-	_HMG_SYSDATA [  8 ] [k] := Value 
-	_HMG_SYSDATA [  9 ] [k] := Lock 
-	_HMG_SYSDATA [ 10 ] [k] := lostfocus 
-	_HMG_SYSDATA [ 11 ] [k] := gotfocus 
-	_HMG_SYSDATA [ 12 ] [k] := change 
-	_HMG_SYSDATA [ 13 ] [k] := .F. 	
-	_HMG_SYSDATA [ 14 ] [k] := aImage // Browse+
-	_HMG_SYSDATA [ 15 ] [k] := inplace 
-	_HMG_SYSDATA [ 16 ] [k] := dblclick 
-	_HMG_SYSDATA [ 17 ] [k] := aHeadClick 
-	_HMG_SYSDATA [ 18 ] [k] := y 
-	_HMG_SYSDATA [ 19 ] [k] := x 
-	_HMG_SYSDATA [ 20 ] [k] := w 
-	_HMG_SYSDATA [ 21 ] [k] := h 
-	_HMG_SYSDATA [ 22 ] [k] := WorkArea 
-	_HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 25 ] [k] := Delete 
-	_HMG_SYSDATA [ 26 ] [k] := 0 
-	_HMG_SYSDATA [ 27 ] [k] := fontname 
-	_HMG_SYSDATA [ 28 ] [k] := fontsize 
-	_HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout} 
-	_HMG_SYSDATA [ 30 ] [k] := tooltip  
-	_HMG_SYSDATA [ 31 ] [k] := aFields  
-	_HMG_SYSDATA [ 32 ] [k] := {}  
-	_HMG_SYSDATA [ 33 ] [k] := aHeaders  
-	_HMG_SYSDATA [ 34 ] [k] := .t. 
-	_HMG_SYSDATA [ 35 ] [k] := HelpId 
-	_HMG_SYSDATA [ 36 ] [k] := FontHandle 
-	_HMG_SYSDATA [ 37 ] [k] := cParentTabName
-	_HMG_SYSDATA [ 38 ] [k] := .T. 
-	_HMG_SYSDATA [ 39 ] [k] := { 0 , appendable , readonly , valid , validmessages , edit , inputitems , displayitems , Nil , Nil , Nil }
-	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
-
-	InitListViewColumns ( ControlHandle , aHeaders , aWidths, aJust ) // Browse+
-
-	// Add to browselist array to update on window activation
-
-	i := k
-	aAdd ( _HMG_SYSDATA [ 89 ]	[ GetFormIndex ( cParentForm ) ] , k )
-
-	For z := 1 To HMG_LEN ( _HMG_SYSDATA [  6 ] [i] )
-		hsum := hsum + ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , z - 1 )
-		_HMG_SYSDATA [  6 ] [i] [z] := ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , z - 1 )
-	Next z
-
-	// Add Vertical scrollbar 
-
-	if novscroll == .F.
-
-		if hsum > w - GETVSCROLLBARWIDTH() - 4
-			ScrollBarHandle := InitVScrollBar (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y , GETVSCROLLBARWIDTH() , h - GETHSCROLLBARHEIGHT() )		
-			ScrollBarButtonHandle := InitVScrollBarButton (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y + h - GETHSCROLLBARHEIGHT() , GETVSCROLLBARWIDTH() , GETHSCROLLBARHEIGHT() )		
-		Else
-			ScrollBarHandle := InitVScrollBar (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y , GETVSCROLLBARWIDTH() , h )		
-			ScrollBarButtonHandle := InitVScrollBarButton (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y + h - GETHSCROLLBARHEIGHT() , 0 , 0 )					
-		EndIf
-
-		If _HMG_SYSDATA [ 265 ] = .T.
-			aAdd ( _HMG_SYSDATA [ 142 ] , { ControlHandle , ScrollBarHandle , ScrollBarButtonHandle } )
-		EndIf
-
-	Else
-
-		ScrollBarHandle := 0
-
-		If _HMG_SYSDATA [ 265 ] = .T.
-			aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
-		EndIf
-
-	EndIf
-
-	_HMG_SYSDATA [  5 ] [i] := ScrollBarHandle
-	_HMG_SYSDATA [ 39 ] [i] [1] := ScrollBarButtonHandle
-
-	
-	_HMG_SYSDATA [ 40 ] [k] [1] := dynamicbackcolor
-	_HMG_SYSDATA [ 40 ] [k] [2] := dynamicforecolor
-	_HMG_SYSDATA [ 40 ] [k] [3] := aWhenFields
-	_HMG_SYSDATA [ 40 ] [k] [4] := inputmask
-	_HMG_SYSDATA [ 40 ] [k] [5] := format
-
-	If ValType(aHeaderImages) <> "U"
-		nHeaderImageListHandle := SetListViewHeaderImages ( ControlHandle , aHeaderImages , aJust, NoTransHeader )
-		_HMG_SYSDATA [ 39 ] [k] [9] := aHeaderImages
-		_HMG_SYSDATA [ 39 ] [k] [10] := nHeaderImageListHandle
-		_HMG_SYSDATA [ 39 ] [k] [11] := aJust
-	EndIf
-
-Return Nil
-*-----------------------------------------------------------------------------*
-Procedure _BrowseUpdate( ControlName,ParentName , z )
-*-----------------------------------------------------------------------------*
-Local PageLength , aTemp := {} , cTemp , Fields , _BrowseRecMap := {} , i , x , j , First , Image , _Rec , ColorMap , ColorRow , processdbc , processdfc , k
-Local dbc
-Local dFc 
-
-local fcolormap
-local fcolorrow
-
-Local dim
-Local processdim
-
-Local dft
-Local processdft
-
-Local teval
-
-Local aDisplayItems
-Local aDisplayItemsLengths
-Local aProcessDisplayItems
-Local lFound
-Local p
-
-
-	If pcount() == 2
-		i := GetControlIndex(ControlName,ParentName)
-	Else
-		i := z
-	EndIf
+FUNCTION _DefineBrowse ( ControlName, ;
+      ParentForm, ;
+      x, ;
+      y, ;
+      w, ;
+      h, ;
+      aHeaders, ;
+      aWidths, ;
+      aFields , ;
+      value, ;
+      fontname, ;
+      fontsize , ;
+      tooltip , ;
+      change , ;
+      dblclick , ;
+      aHeadClick , ;
+      gotfocus , ;
+      lostfocus , ;
+      WorkArea , ;
+      DELETE, ;
+      nogrid, ;
+      aImage, ;
+      aJust , ;
+      HelpId , ;
+      bold , ;
+      italic , ;
+      underline , ;
+      strikeout , ;
+      break , ;
+      backcolor , ;
+      fontcolor , ;
+      lock , ;
+      inplace , ;
+      novscroll , ;
+      APPENDable , ;
+      READonly , ;
+      valid , ;
+      validmessages , ;
+      edit , ;
+      DYNAMICbackcolor , ;
+      aWhenFields , ;
+      DYNAMICforecolor , ;
+      inputmask , ;
+      format , ;
+      inputitems , displayitems , aHeaderImages, ;
+      NoTrans, NoTransHeader)
+   LOCAL i , cParentForm , mVar , ix, wBitmap , z , ScrollBarHandle , DeltaWidth , k := 0
+   LOCAL cParentTabName
+
+   LOCAL ControlHandle
+   LOCAL FontHandle
+   LOCAL hsum := 0
+   LOCAL ScrollBarButtonHandle
+   LOCAL nHeaderImageListHandle
+
+   InPlace := .T.
+
+   IF _HMG_SYSDATA [ 264 ] = .T.
+      ParentForm := _HMG_SYSDATA [ 223 ]
+      IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
+         FontName := _HMG_SYSDATA [ 224 ]
+      ENDIF
+      IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
+         FontSize := _HMG_SYSDATA [ 182 ]
+      ENDIF
+   ENDIF
+   IF _HMG_SYSDATA [ 183 ] > 0
+      IF _HMG_SYSDATA [ 240 ] == .F.
+         x    := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+         y    := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+         ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
+         cParentTabName := _HMG_SYSDATA [ 225 ]
+      ENDIF
+   ENDIF
+
+   IF .Not. _IsWindowDefined (ParentForm)
+      MsgHMGError("Window: "+ ParentForm + " is not defined. Program terminated" )
+   ENDIF
+
+   IF _IsControlDefined (ControlName,ParentForm)
+      MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " Already defined. Program Terminated" )
+   ENDIF
+
+   ix := GetFormIndex (ParentForm)
+
+   mVar := '_' + ParentForm + '_' + ControlName
+
+   cParentForm = ParentForm
+
+   ParentForm = GetFormHandle (ParentForm)
+
+   IF valtype(w) == "U"
+      w := 240
+   ENDIF
+   IF valtype(h) == "U"
+      h := 120
+   ENDIF
+   IF valtype(value) == "U"
+      value := 0
+   ENDIF
+   IF valtype(aFields) == "U"
+      aFields := {}
+   ENDIF
+   IF valtype(aJust) == "U"      // Browse+
+      aJust := Array( HMG_LEN( aFields ) )
+      aFill( aJust, 0 )
+   ELSE
+      aSize( aJust, HMG_LEN( aFields) )
+      aEval( aJust, { |x| x := iif( x == NIL, 0, x ) } )
+   ENDIF
+   IF valtype(aImage) == "U"
+      aImage := {}
+   ENDIF
+
+   // If splitboxed force no vertical scrollbar
+
+   IF valtype(x) == "U" .or. valtype(y) == "U"
+      novscroll := .T.
+   ENDIF
+
+   IF novscroll == .F.
+      DeltaWidth := GETVSCROLLBARWIDTH()
+   ELSE
+      DeltaWidth := 0
+   ENDIF
+
+   IF valtype(x) == "U" .or. valtype(y) == "U"
+
+      IF _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
+         Break := .T.
+      ENDIF
+
+      _HMG_SYSDATA [ 216 ]   := 'GRID'
+
+      i := GetFormIndex ( cParentForm )
+
+      IF i > 0
+
+         ControlHandle := InitBrowse ( ParentForm, 0, x, y, w - DeltaWidth , h , '', 0, iif( nogrid, 0, 1 ) ) // Browse+
+
+         x := GetWindowCol ( Controlhandle )
+         y := GetWindowRow ( Controlhandle )
+
+         IF valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+            FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
+         ELSE
+            FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
+         ENDIF
+
+         AddSplitBoxItem ( Controlhandle, _HMG_SYSDATA [ 87 ] [i] , w , break , , , , _HMG_SYSDATA [ 258 ] )
+      ENDIF
+
+   ELSE
+
+      ControlHandle := InitBrowse ( ParentForm, 0, x, y, w - DeltaWidth , h , '', 0, iif( nogrid, 0, 1 ) ) // Browse+
+
+      IF valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+         FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
+      ELSE
+         FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
+      ENDIF
+
+   ENDIF
+
+   IF ValType (backcolor) != 'U'
+      ListView_SetBkColor ( ControlHandle , backcolor[1] , backcolor[2] , backcolor[3] )
+      ListView_SetTextBkColor ( ControlHandle , backcolor[1] , backcolor[2] , backcolor[3]  )
+   ENDIF
+
+   IF ValType (fontcolor) != 'U'
+      ListView_SetTextColor ( ControlHandle , fontcolor[1] , fontcolor[2] , fontcolor[3]  )
+   ENDIF
+
+   wBitmap := iif( HMG_LEN( aImage ) > 0, AddListViewBitmap( ControlHandle, aImage, NoTrans ), 0 ) //Add Bitmap Column
+   aWidths[1] := max ( aWidths[1], wBitmap + 2 ) // Set Column 1 witth to Bitmap width
+
+   IF valtype(aHeadClick) == "U"
+      aHeadClick := {}
+   ENDIF
+
+   IF valtype(change) == "U"
+      change := ""
+   ENDIF
+
+   IF valtype(dblclick) == "U"
+      dblclick := ""
+   ENDIF
+
+   IF valtype(tooltip) != "U"
+      SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
+   ENDIF
+
+   k := _GetControlFree()
+
+   PUBLIC &mVar. := k
+
+   _HMG_SYSDATA [  1 ] [k] := "BROWSE"
+   _HMG_SYSDATA [  2 ] [k] := ControlName
+   _HMG_SYSDATA [  3 ] [k] := ControlHandle
+   _HMG_SYSDATA [  4 ] [k] := ParentForm
+   _HMG_SYSDATA [  5 ] [k] := 0
+   _HMG_SYSDATA [  6 ] [k] := aWidths
+   _HMG_SYSDATA [  7 ] [k] := aHeaders
+   _HMG_SYSDATA [  8 ] [k] := Value
+   _HMG_SYSDATA [  9 ] [k] := Lock
+   _HMG_SYSDATA [ 10 ] [k] := lostfocus
+   _HMG_SYSDATA [ 11 ] [k] := gotfocus
+   _HMG_SYSDATA [ 12 ] [k] := change
+   _HMG_SYSDATA [ 13 ] [k] := .F.
+   _HMG_SYSDATA [ 14 ] [k] := aImage // Browse+
+   _HMG_SYSDATA [ 15 ] [k] := inplace
+   _HMG_SYSDATA [ 16 ] [k] := dblclick
+   _HMG_SYSDATA [ 17 ] [k] := aHeadClick
+   _HMG_SYSDATA [ 18 ] [k] := y
+   _HMG_SYSDATA [ 19 ] [k] := x
+   _HMG_SYSDATA [ 20 ] [k] := w
+   _HMG_SYSDATA [ 21 ] [k] := h
+   _HMG_SYSDATA [ 22 ] [k] := WorkArea
+   _HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 25 ] [k] := Delete
+   _HMG_SYSDATA [ 26 ] [k] := 0
+   _HMG_SYSDATA [ 27 ] [k] := fontname
+   _HMG_SYSDATA [ 28 ] [k] := fontsize
+   _HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout}
+   _HMG_SYSDATA [ 30 ] [k] := tooltip
+   _HMG_SYSDATA [ 31 ] [k] := aFields
+   _HMG_SYSDATA [ 32 ] [k] := {}
+   _HMG_SYSDATA [ 33 ] [k] := aHeaders
+   _HMG_SYSDATA [ 34 ] [k] := .t.
+   _HMG_SYSDATA [ 35 ] [k] := HelpId
+   _HMG_SYSDATA [ 36 ] [k] := FontHandle
+   _HMG_SYSDATA [ 37 ] [k] := cParentTabName
+   _HMG_SYSDATA [ 38 ] [k] := .T.
+   _HMG_SYSDATA [ 39 ] [k] := { 0 , appendable , readonly , valid , validmessages , edit , inputitems , displayitems , Nil , Nil , Nil }
+   _HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
+
+   InitListViewColumns ( ControlHandle , aHeaders , aWidths, aJust ) // Browse+
+
+   // Add to browselist array to update on window activation
+
+   i := k
+   aAdd ( _HMG_SYSDATA [ 89 ]   [ GetFormIndex ( cParentForm ) ] , k )
+
+   FOR z := 1 To HMG_LEN ( _HMG_SYSDATA [  6 ] [i] )
+      hsum := hsum + ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , z - 1 )
+      _HMG_SYSDATA [  6 ] [i] [z] := ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , z - 1 )
+   NEXT z
+
+   // Add Vertical scrollbar
+
+   IF novscroll == .F.
+
+      IF hsum > w - GETVSCROLLBARWIDTH() - 4
+         ScrollBarHandle := InitVScrollBar (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y , GETVSCROLLBARWIDTH() , h - GETHSCROLLBARHEIGHT() )
+         ScrollBarButtonHandle := InitVScrollBarButton (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y + h - GETHSCROLLBARHEIGHT() , GETVSCROLLBARWIDTH() , GETHSCROLLBARHEIGHT() )
+      ELSE
+         ScrollBarHandle := InitVScrollBar (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y , GETVSCROLLBARWIDTH() , h )
+         ScrollBarButtonHandle := InitVScrollBarButton (  ParentForm , x + w - GETVSCROLLBARWIDTH() , y + h - GETHSCROLLBARHEIGHT() , 0 , 0 )
+      ENDIF
+
+      IF _HMG_SYSDATA [ 265 ] = .T.
+         aAdd ( _HMG_SYSDATA [ 142 ] , { ControlHandle , ScrollBarHandle , ScrollBarButtonHandle } )
+      ENDIF
+
+   ELSE
+
+      ScrollBarHandle := 0
+
+      IF _HMG_SYSDATA [ 265 ] = .T.
+         aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
+      ENDIF
+
+   ENDIF
+
+   _HMG_SYSDATA [  5 ] [i] := ScrollBarHandle
+   _HMG_SYSDATA [ 39 ] [i] [1] := ScrollBarButtonHandle
+
+   _HMG_SYSDATA [ 40 ] [k] [1] := dynamicbackcolor
+   _HMG_SYSDATA [ 40 ] [k] [2] := dynamicforecolor
+   _HMG_SYSDATA [ 40 ] [k] [3] := aWhenFields
+   _HMG_SYSDATA [ 40 ] [k] [4] := inputmask
+   _HMG_SYSDATA [ 40 ] [k] [5] := format
+
+   IF ValType(aHeaderImages) <> "U"
+      nHeaderImageListHandle := SetListViewHeaderImages ( ControlHandle , aHeaderImages , aJust, NoTransHeader )
+      _HMG_SYSDATA [ 39 ] [k] [9] := aHeaderImages
+      _HMG_SYSDATA [ 39 ] [k] [10] := nHeaderImageListHandle
+      _HMG_SYSDATA [ 39 ] [k] [11] := aJust
+   ENDIF
+
+   RETURN NIL
+
+PROCEDURE _BrowseUpdate( ControlName,ParentName , z )
+
+   LOCAL PageLength , aTemp := {} , cTemp , Fields , _BrowseRecMap := {} , i , x , j , First , Image , _Rec , ColorMap , ColorRow , processdbc , processdfc , k
+   LOCAL dbc
+   LOCAL dFc
+
+   LOCAL fcolormap
+   LOCAL fcolorrow
+
+   LOCAL dim
+   LOCAL processdim
+
+   LOCAL dft
+   LOCAL processdft
+
+   LOCAL teval
+
+   LOCAL aDisplayItems
+   LOCAL aDisplayItemsLengths
+   LOCAL aProcessDisplayItems
+   LOCAL lFound
+   LOCAL p
 
-	If Select() == 0
-		Return
-	EndIf
+   IF pcount() == 2
+      i := GetControlIndex(ControlName,ParentName)
+   ELSE
+      i := z
+   ENDIF
 
-	*
+   IF Select() == 0
 
-	aDisplayItems := _HMG_SYSDATA [39] [I] [8]
+      RETURN
+   ENDIF
 
-	aProcessDisplayItems := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
-	aDisplayItemsLengths := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
+   aDisplayItems := _HMG_SYSDATA [39] [I] [8]
 
-	if valtype (aDisplayItems) = 'A' 
+   aProcessDisplayItems := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
+   aDisplayItemsLengths := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
 
-		For k := 1 To HMG_LEN ( aProcessDisplayItems )
+   IF valtype (aDisplayItems) = 'A'
 
-			if valtype ( aDisplayItems [k] ) = 'A'
-				aProcessDisplayItems [k] := .T.
-				aDisplayItemsLengths [k] := HMG_LEN ( aDisplayItems [k] )
-			else
-				aProcessDisplayItems [k] := .F.
-				aDisplayItemsLengths [k] := 0
-			endif
+      FOR k := 1 To HMG_LEN ( aProcessDisplayItems )
 
-		Next k
+         IF valtype ( aDisplayItems [k] ) = 'A'
+            aProcessDisplayItems [k] := .T.
+            aDisplayItemsLengths [k] := HMG_LEN ( aDisplayItems [k] )
+         ELSE
+            aProcessDisplayItems [k] := .F.
+            aDisplayItemsLengths [k] := 0
+         ENDIF
 
-	else
+      NEXT k
 
-		For k := 1 To HMG_LEN ( aProcessDisplayItems )
-			aProcessDisplayItems [k] := .F.
-			aDisplayItemsLengths [k] := 0
-		Next k
+   ELSE
 
-	endif
-
-	*
+      FOR k := 1 To HMG_LEN ( aProcessDisplayItems )
+         aProcessDisplayItems [k] := .F.
+         aDisplayItemsLengths [k] := 0
+      NEXT k
 
-	dim := 	_HMG_SYSDATA [40] [I] [4]
-
-	processdim := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
-
-	if valtype (dim) = 'A' 
-
-		For k := 1 To HMG_LEN ( processdim )
-			if valtype ( dim [k] ) = 'C'
-				if .not. empty ( dim [k] )
-					processdim [k] := .T.
-				else
-					processdim [k] := .F.
-				endif
-			else
-				processdim [k] := .F.
-			endif
-		Next k
-
-	else
-
-		For k := 1 To HMG_LEN ( processdim )
-			processdim [k] := .F.
-		Next k
-
-	endif
-
-	dft := 	_HMG_SYSDATA [40] [I] [5]
-
-	processdft := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
-
-	if valtype (dft) = 'A' 
-
-		For k := 1 To HMG_LEN ( processdft )
-			if valtype ( dft [k] ) = 'C'
-				if .not. empty ( dft [k] )
-					processdft [k] := .T.
-				else
-					processdft [k] := .F.
-				endif
-			else
-				processdft [k] := .F.
-			endif
-		Next k
-
-	else
-
-		For k := 1 To HMG_LEN ( processdft )
-			processdft [k] := .F.
-		Next k
-
-	endif
+   ENDIF
 
-	dbc := 	_HMG_SYSDATA [ 40 ] [i] [1]
+   dim :=    _HMG_SYSDATA [40] [I] [4]
 
-	processdbc := if ( valtype (dbc) = 'A' , .t. , .f. )
+   processdim := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
 
-	dfc := 	_HMG_SYSDATA [ 40 ] [i] [2]
+   IF valtype (dim) = 'A'
 
-	processdFc := if ( valtype (dFc) = 'A' , .t. , .f. )
+      FOR k := 1 To HMG_LEN ( processdim )
+         IF valtype ( dim [k] ) = 'C'
+            IF .not. empty ( dim [k] )
+               processdim [k] := .T.
+            ELSE
+               processdim [k] := .F.
+            ENDIF
+         ELSE
+            processdim [k] := .F.
+         ENDIF
+      NEXT k
 
-	_HMG_SYSDATA [ 26 ] [i] := 0
+   ELSE
 
-	First   := iif( HMG_LEN( _HMG_SYSDATA [ 14 ][i] ) == 0, 1, 2 ) // Browse+ ( 2= bitmap definido, se cargan campos a partir de 2º )
+      FOR k := 1 To HMG_LEN ( processdim )
+         processdim [k] := .F.
+      NEXT k
 
-	Fields := _HMG_SYSDATA [ 31 ] [i]
+   ENDIF
 
-	ListViewReset ( _HMG_SYSDATA [3][i] )
-	PageLength := ListViewGetCountPerPage ( _HMG_SYSDATA [3][i] ) 
+   dft :=    _HMG_SYSDATA [40] [I] [5]
 
+   processdft := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
 
-	if processdbc == .t.
-		colormap := {}
-		colorrow := {}
-	endif
+   IF valtype (dft) = 'A'
 
-	if processdfc == .t.
-		fcolormap := {}
-		fcolorrow := {}
-	endif
+      FOR k := 1 To HMG_LEN ( processdft )
+         IF valtype ( dft [k] ) = 'C'
+            IF .not. empty ( dft [k] )
+               processdft [k] := .T.
+            ELSE
+               processdft [k] := .F.
+            ENDIF
+         ELSE
+            processdft [k] := .F.
+         ENDIF
+      NEXT k
 
-	for x := 1 to PageLength 
+   ELSE
 
-		aTemp := {}
+      FOR k := 1 To HMG_LEN ( processdft )
+         processdft [k] := .F.
+      NEXT k
 
-		If First == 2						// Browse+
-			cTemp := Fields [1]
-		
-			if Type (cTemp) == 'N'				// ..
-				image := &cTemp
-			
-			elseif Type (cTemp) == 'L'			// ..
-				image := iif( &cTemp, 1, 0 )
-		
-			else						// ..
-				image := 0
-	
-			endif						// ..
-			aadd ( aTemp , NIL )
+   ENDIF
 
-			if processdbc == .t.
-				if valtype ( dbc ) = 'A'
-					if HMG_LEN ( dbc ) = HMG_LEN ( Fields ) 
-						aadd ( colorrow , -1 )
-					endif
-				endif
-			endif
-			if processdfc == .t.
-				if valtype ( dfc ) = 'A'
-					if HMG_LEN ( dfc ) = HMG_LEN ( Fields ) 
-						aadd ( fcolorrow , -1 )
-					endif
-				endif
-			endif
+   dbc :=    _HMG_SYSDATA [ 40 ] [i] [1]
 
-		EndIf							// Browse+
+   processdbc := if ( valtype (dbc) = 'A' , .t. , .f. )
 
-		For j := First To HMG_LEN (Fields)
+   dfc :=    _HMG_SYSDATA [ 40 ] [i] [2]
 
-			cTemp := Fields [j]
+   processdFc := if ( valtype (dFc) = 'A' , .t. , .f. )
 
-			If aProcessDisplayItems [ j ] == .T.
+   _HMG_SYSDATA [ 26 ] [i] := 0
 
-				lFound := .F. 
+   First   := iif( HMG_LEN( _HMG_SYSDATA [ 14 ][i] ) == 0, 1, 2 ) // Browse+ ( 2= bitmap definido, se cargan campos a partir de 2º )
 
-				For p := 1 To aDisplayItemsLengths [ j ] 
-					If aDisplayItems [ j ] [ p ] [ 2 ] = &cTemp
-						aadd ( aTemp , RTRIM ( aDisplayItems [ j ] [ p ] [ 1 ] ) )
-						lFound := .T. 
-						Exit
-					EndIf
-				Next p
+   Fields := _HMG_SYSDATA [ 31 ] [i]
 
-				If lFound == .F.
-					aadd ( aTemp , '' )
-				EndIf
-			
-			ElseIf Type (cTemp) == 'N'
+   ListViewReset ( _HMG_SYSDATA [3][i] )
+   PageLength := ListViewGetCountPerPage ( _HMG_SYSDATA [3][i] )
 
-				if	processdim [j] == .f. .and. processdft [j] == .f.
+   IF processdbc == .t.
+      colormap := {}
+      colorrow := {}
+   ENDIF
 
-					aadd ( aTemp , LTRIM ( STR (&cTemp) ) )
-				
-				elseif	processdim [j] == .t. .and. processdft [j] == .f.
+   IF processdfc == .t.
+      fcolormap := {}
+      fcolorrow := {}
+   ENDIF
 
-					aadd ( aTemp , TransForm ( &cTemp , dim [j] ) ) 
+   FOR x := 1 to PageLength
 
-				elseif	processdim [j] == .f. .and. processdft [j] == .t.
+      aTemp := {}
 
-					aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] ) ) 
+      IF First == 2                  // Browse+
+         cTemp := Fields [1]
 
-				elseif	processdim [j] == .t. .and. processdft [j] == .t.
+         IF Type (cTemp) == 'N'            // ..
+            image := &cTemp
 
-					aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] + ' ' + dim [j] ) ) 
+         ELSEIF Type (cTemp) == 'L'         // ..
+            image := iif( &cTemp, 1, 0 )
 
-				endif
-                                
-			ElseIf Type (cTemp) == 'D'
+         ELSE                  // ..
+            image := 0
 
-				aadd ( aTemp , Dtoc(&cTemp) )
+         ENDIF                  // ..
+         aadd ( aTemp , NIL )
 
-			ElseIf Type (cTemp) == 'L'
+         IF processdbc == .t.
+            IF valtype ( dbc ) = 'A'
+               IF HMG_LEN ( dbc ) = HMG_LEN ( Fields )
+                  aadd ( colorrow , -1 )
+               ENDIF
+            ENDIF
+         ENDIF
+         IF processdfc == .t.
+            IF valtype ( dfc ) = 'A'
+               IF HMG_LEN ( dfc ) = HMG_LEN ( Fields )
+                  aadd ( fcolorrow , -1 )
+               ENDIF
+            ENDIF
+         ENDIF
 
-				aadd ( aTemp , IIF ( &cTemp == .T. , '.T.' , '.F.' ) )
-				
-			ElseIf Type (cTemp) == 'C'
+      ENDIF                     // Browse+
 
-				if processdim [j] == .t.
-					aadd ( aTemp , RTRIM ( _BrowseCharMaskDisplay ( &cTemp , dim [j] ) ) )
-				else
-					aadd ( aTemp , RTRIM ( &cTemp ) )
-				endif
+      FOR j := First To HMG_LEN (Fields)
 
-			ElseIf Type (cTemp) == 'M'
+         cTemp := Fields [j]
 
-				aadd ( aTemp , '<Memo>' )
+         IF aProcessDisplayItems [ j ] == .T.
 
-			ElseIf ValType (cTemp) == 'N'
+            lFound := .F.
 
-				if	processdim [j] == .f. .and. processdft [j] == .f.
+            FOR p := 1 To aDisplayItemsLengths [ j ]
+               IF aDisplayItems [ j ] [ p ] [ 2 ] = &cTemp
+                  aadd ( aTemp , RTRIM ( aDisplayItems [ j ] [ p ] [ 1 ] ) )
+                  lFound := .T.
+                  EXIT
+               ENDIF
+            NEXT p
 
-					aadd ( aTemp , LTRIM ( STR (&cTemp) ) )
-				
-				elseif	processdim [j] == .t. .and. processdft [j] == .f.
+            IF lFound == .F.
+               aadd ( aTemp , '' )
+            ENDIF
 
-					aadd ( aTemp , TransForm ( &cTemp , dim [j] ) ) 
+         ELSEIF Type (cTemp) == 'N'
 
-				elseif	processdim [j] == .f. .and. processdft [j] == .t.
+            IF   processdim [j] == .f. .and. processdft [j] == .f.
 
-					aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] ) ) 
+               aadd ( aTemp , LTRIM ( STR (&cTemp) ) )
 
-				elseif	processdim [j] == .t. .and. processdft [j] == .t.
+            ELSEIF   processdim [j] == .t. .and. processdft [j] == .f.
 
-					aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] + ' ' + dim [j] ) ) 
-                                
-				endif
-                                
-			ElseIf ValType (cTemp) == 'D'
+               aadd ( aTemp , TransForm ( &cTemp , dim [j] ) )
 
-				aadd ( aTemp , Dtoc(&cTemp) )
+            ELSEIF   processdim [j] == .f. .and. processdft [j] == .t.
 
-			ElseIf ValType (cTemp) == 'L'
+               aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] ) )
 
-				aadd ( aTemp , IIF ( &cTemp == .T. , '.T.' , '.F.' ) )
+            ELSEIF   processdim [j] == .t. .and. processdft [j] == .t.
 
-			ElseIf ValType (cTemp) == 'C'
+               aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] + ' ' + dim [j] ) )
 
-				if processdim [j] == .t.
-					aadd ( aTemp , RTRIM ( _BrowseCharMaskDisplay ( &cTemp , dim [j] ) ) )
-				else
-					aadd ( aTemp , RTRIM ( &cTemp ) )
-				endif
+            ENDIF
 
-			ElseIf ValType (cTemp) == 'M'
+         ELSEIF Type (cTemp) == 'D'
 
-				aadd ( aTemp , '<Memo>' )
+            aadd ( aTemp , Dtoc(&cTemp) )
 
-			Else
-				aadd ( aTemp , 'Nil' )				
+         ELSEIF Type (cTemp) == 'L'
 
-			EndIf
+            aadd ( aTemp , IIF ( &cTemp == .T. , '.T.' , '.F.' ) )
 
-			if processdbc == .t.
+         ELSEIF Type (cTemp) == 'C'
 
-				if valtype ( dbc ) = 'A'
+            IF processdim [j] == .t.
+               aadd ( aTemp , RTRIM ( _BrowseCharMaskDisplay ( &cTemp , dim [j] ) ) )
+            ELSE
+               aadd ( aTemp , RTRIM ( &cTemp ) )
+            ENDIF
 
-					if HMG_LEN ( dbc ) = HMG_LEN ( Fields ) 
+         ELSEIF Type (cTemp) == 'M'
 
-						if valtype ( dbc [j] ) = 'B'
+            aadd ( aTemp , '<Memo>' )
 
-							tEval := eval ( dbc [j] )
+         ELSEIF ValType (cTemp) == 'N'
 
-							IF VALTYPE ( TEVAL ) == 'A'
-								IF HMG_LEN ( TEVAL ) == 3
-									TEVAL := RGB ( TEVAL [1] , TEVAL [2] , TEVAL [3] )
-								ENDIF
-							ENDIF
+            IF   processdim [j] == .f. .and. processdft [j] == .f.
 
-							aadd ( colorrow , tEval )
+               aadd ( aTemp , LTRIM ( STR (&cTemp) ) )
 
-						else
-							aadd ( colorrow , -1 )
-						endif
+            ELSEIF   processdim [j] == .t. .and. processdft [j] == .f.
 
-					endif
-			
-				endif
+               aadd ( aTemp , TransForm ( &cTemp , dim [j] ) )
 
-			endif
+            ELSEIF   processdim [j] == .f. .and. processdft [j] == .t.
 
-			if processdfc == .t.
+               aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] ) )
 
-				if valtype ( dfc ) = 'A'
+            ELSEIF   processdim [j] == .t. .and. processdft [j] == .t.
 
-					if HMG_LEN ( dfc ) = HMG_LEN ( Fields ) 
+               aadd ( aTemp , TransForm ( &cTemp , '@' + dft [j] + ' ' + dim [j] ) )
 
-						if valtype ( dfc [j] ) = 'B'
+            ENDIF
 
-							tEval := eval ( dfc [j] )
+         ELSEIF ValType (cTemp) == 'D'
 
-							IF VALTYPE ( TEVAL ) == 'A'
-								IF HMG_LEN ( TEVAL ) == 3
-									TEVAL := RGB ( TEVAL [1] , TEVAL [2] , TEVAL [3] )
-								ENDIF
-							ENDIF
+            aadd ( aTemp , Dtoc(&cTemp) )
 
-							aadd ( fcolorrow , tEval )
+         ELSEIF ValType (cTemp) == 'L'
 
-						else
-							aadd ( fcolorrow , -1 )
-						endif
+            aadd ( aTemp , IIF ( &cTemp == .T. , '.T.' , '.F.' ) )
 
-					endif
-			
-				endif
+         ELSEIF ValType (cTemp) == 'C'
 
-			endif
-                        
-		Next j
+            IF processdim [j] == .t.
+               aadd ( aTemp , RTRIM ( _BrowseCharMaskDisplay ( &cTemp , dim [j] ) ) )
+            ELSE
+               aadd ( aTemp , RTRIM ( &cTemp ) )
+            ENDIF
 
-		AddListViewItems ( _HMG_SYSDATA [3][i] , aTemp , Image )
+         ELSEIF ValType (cTemp) == 'M'
 
-		_Rec := RecNo()
+            aadd ( aTemp , '<Memo>' )
 
-		aadd ( _BrowseRecMap , _Rec )
+         ELSE
+            aadd ( aTemp , 'Nil' )
 
-		if processdbc == .t.
-			aadd ( colormap , colorrow )
-			colorrow := {}
-		endif
+         ENDIF
 
-		if processdfc == .t.
-			aadd ( fcolormap , fcolorrow )
-			fcolorrow := {}
-		endif
+         IF processdbc == .t.
 
-		Skip
+            IF valtype ( dbc ) = 'A'
 
-		If Eof()
-			_HMG_SYSDATA [ 26 ] [i] := 1
-			Go Bottom
-			Exit
-		EndIf
+               IF HMG_LEN ( dbc ) = HMG_LEN ( Fields )
 
-	Next x
+                  IF valtype ( dbc [j] ) = 'B'
 
-	if processdbc == .t.
+                     tEval := eval ( dbc [j] )
 
-		_HMG_SYSDATA [ 40 ] [ I ] [ 6 ] := colormap
+                     IF VALTYPE ( TEVAL ) == 'A'
+                        IF HMG_LEN ( TEVAL ) == 3
+                           TEVAL := RGB ( TEVAL [1] , TEVAL [2] , TEVAL [3] )
+                        ENDIF
+                     ENDIF
 
-	else
+                     aadd ( colorrow , tEval )
 
-		_HMG_SYSDATA [ 40 ] [ I ] [ 6 ] := Nil
+                  ELSE
+                     aadd ( colorrow , -1 )
+                  ENDIF
 
-	endif
+               ENDIF
 
-	if processdfc == .t.
+            ENDIF
 
-		_HMG_SYSDATA [ 40 ] [ I ] [ 7 ] := fcolormap
+         ENDIF
 
-	else
+         IF processdfc == .t.
 
-		_HMG_SYSDATA [ 40 ] [ I ] [ 7 ] := Nil
+            IF valtype ( dfc ) = 'A'
 
-	endif
+               IF HMG_LEN ( dfc ) = HMG_LEN ( Fields )
 
-	_HMG_SYSDATA [ 32 ] [i] := _BrowseRecMap
+                  IF valtype ( dfc [j] ) = 'B'
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseNext ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , PageLength , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil } , s 
+                     tEval := eval ( dfc [j] )
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+                     IF VALTYPE ( TEVAL ) == 'A'
+                        IF HMG_LEN ( TEVAL ) == 3
+                           TEVAL := RGB ( TEVAL [1] , TEVAL [2] , TEVAL [3] )
+                        ENDIF
+                     ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+                     aadd ( fcolorrow , tEval )
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+                  ELSE
+                     aadd ( fcolorrow , -1 )
+                  ENDIF
 
-	PageLength := LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) 
+               ENDIF
 
-	s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
+            ENDIF
 
-	If  s == PageLength 
+         ENDIF
 
-		if _HMG_SYSDATA [ 26 ] [i] != 0
-			Return
-		EndIf
+      NEXT j
 
-		_Alias := Alias()
-		_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-		If Select (_BrowseArea) == 0
-			Return
-		EndIf
-		Select &_BrowseArea
-		_RecNo := RecNo()
+      AddListViewItems ( _HMG_SYSDATA [3][i] , aTemp , Image )
 
-		Go _BrowseRecMap [PageLength] 
-		_BrowseUpdate( ControlName , ParentForm , i )
-		_BrowseVscrollUpdate( i )
-		ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_HMG_SYSDATA [ 32 ] [i] ) )
-		Go _RecNo
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
+      _Rec := RecNo()
 
-	Else
+      aadd ( _BrowseRecMap , _Rec )
 
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_BrowseRecMap) )
-		_BrowseVscrollFastUpdate ( i , PageLength - s )
+      IF processdbc == .t.
+         aadd ( colormap , colorrow )
+         colorrow := {}
+      ENDIF
 
-	EndIf
+      IF processdfc == .t.
+         aadd ( fcolormap , fcolorrow )
+         fcolorrow := {}
+      ENDIF
 
-	_BrowseOnChange (i)
+      SKIP
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowsePrior ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
+      IF Eof()
+         _HMG_SYSDATA [ 26 ] [i] := 1
+         Go Bottom
+         EXIT
+      ENDIF
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   NEXT x
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   IF processdbc == .t.
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+      _HMG_SYSDATA [ 40 ] [ I ] [ 6 ] := colormap
 
-	If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 1
-		_Alias := Alias()
-		_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-		If Select (_BrowseArea) == 0
-			Return
-		EndIf
-		Select &_BrowseArea
-		_RecNo := RecNo()
-		Go _BrowseRecMap [1]
-		Skip - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 1 
-		_BrowseVscrollUpdate( i )
-		_BrowseUpdate(ControlName , ParentForm , i )
-		ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-		Go _RecNo
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
+   ELSE
 
-	Else
+      _HMG_SYSDATA [ 40 ] [ I ] [ 6 ] := Nil
 
-		_BrowseVscrollFastUpdate ( i , 1 - LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
+   ENDIF
 
-	EndIf
+   IF processdfc == .t.
 
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )		
+      _HMG_SYSDATA [ 40 ] [ I ] [ 7 ] := fcolormap
 
-	_BrowseOnChange (i)
+   ELSE
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseHome ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
+      _HMG_SYSDATA [ 40 ] [ I ] [ 7 ] := Nil
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   _HMG_SYSDATA [ 32 ] [i] := _BrowseRecMap
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+   RETURN
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-	If Select (_BrowseArea) == 0
-		Return
-	EndIf
-	Select &_BrowseArea
-	_RecNo := RecNo()
-	Go Top
-	_BrowseVscrollUpdate( i )
-	_BrowseUpdate( ControlName , ParentForm , i )
-	ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+PROCEDURE _BrowseNext ( ControlName , ParentForm , z )
 
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )		
+   LOCAL i , PageLength , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil } , s
 
-	_BrowseOnChange (i)
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseEnd ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap   , _DeltaScroll := { Nil , Nil , Nil , Nil } , _BottomRec
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   PageLength := LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] )
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+   s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-	If Select (_BrowseArea) == 0
-		Return
-	EndIf
-	Select &_BrowseArea
-	_RecNo := RecNo()
-	Go Bottom
-	_BottomRec := RecNo()
+   IF  s == PageLength
 
-	_BrowseVscrollUpdate( i )
-	Skip - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 1 
-	_BrowseUpdate(ControlName , ParentForm , i )
-	ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+      IF _HMG_SYSDATA [ 26 ] [i] != 0
 
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , _BottomRec ) )
+         RETURN
+      ENDIF
 
-	_BrowseOnChange (i)
+      _Alias := Alias()
+      _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      IF Select (_BrowseArea) == 0
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseUp ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , s  , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
+         RETURN
+      ENDIF
+      SELECT &_BrowseArea
+      _RecNo := RecNo()
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+      Go _BrowseRecMap [PageLength]
+      _BrowseUpdate( ControlName , ParentForm , i )
+      _BrowseVscrollUpdate( i )
+      ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_HMG_SYSDATA [ 32 ] [i] ) )
+      Go _RecNo
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   ELSE
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_BrowseRecMap) )
+      _BrowseVscrollFastUpdate ( i , PageLength - s )
 
-	s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) 
+   ENDIF
 
-	If s == 1
-		_Alias := Alias()
-		_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-		If Select (_BrowseArea) == 0
-			Return
-		EndIf
-		Select &_BrowseArea
-		_RecNo := RecNo()
-		Go _BrowseRecMap [1]
-		Skip - 1
-		_BrowseVscrollUpdate( i )
-		_BrowseUpdate(ControlName , ParentForm , i )
-		ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-		Go _RecNo
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )		
+   _BrowseOnChange (i)
 
-	Else
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , s - 1 )		
-		_BrowseVscrollFastUpdate ( i , -1 )
-	EndIf
+   RETURN
 
-	_BrowseOnChange (i)
+PROCEDURE _BrowsePrior ( ControlName , ParentForm , z )
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseDown ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , PageLength , s , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
+   LOCAL i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) 
+   IF LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 1
+      _Alias := Alias()
+      _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      IF Select (_BrowseArea) == 0
 
-	PageLength := LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) 
+         RETURN
+      ENDIF
+      SELECT &_BrowseArea
+      _RecNo := RecNo()
+      Go _BrowseRecMap [1]
+      SKIP - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 1
+      _BrowseVscrollUpdate( i )
+      _BrowseUpdate(ControlName , ParentForm , i )
+      ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+      Go _RecNo
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
 
-	If s == PageLength
+   ELSE
 
-		if _HMG_SYSDATA [ 26 ] [i] != 0
-			Return
-		EndIf
+      _BrowseVscrollFastUpdate ( i , 1 - LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
 
-		_Alias := Alias()
-		_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-		If Select (_BrowseArea) == 0
-			Return
-		EndIf
-		Select &_BrowseArea
-		_RecNo := RecNo()
+   ENDIF
 
-		Go _BrowseRecMap [1] 
-		Skip
-		_BrowseUpdate( ControlName , ParentForm , i )
-		_BrowseVscrollUpdate( i )
-		ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-		Go _RecNo
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )
 
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_HMG_SYSDATA [ 32 ] [i]) )		
+   _BrowseOnChange (i)
 
-	Else
+   RETURN
 
-		ListView_SetCursel ( _HMG_SYSDATA [3] [i] , s+1 )		
-		_BrowseVscrollFastUpdate ( i , 1 )
+PROCEDURE _BrowseHome ( ControlName , ParentForm , z )
 
-	EndIf
+   LOCAL i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
 
-	_BrowseOnChange (i)
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseRefresh ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , s , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
-Local v
-MEMVAR cMacroVar
-Private cMacroVar
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+   IF Select (_BrowseArea) == 0
 
-	v := _BrowseGetValue ( '','' , i )
+      RETURN
+   ENDIF
+   SELECT &_BrowseArea
+   _RecNo := RecNo()
+   GO TOP
+   _BrowseVscrollUpdate( i )
+   _BrowseUpdate( ControlName , ParentForm , i )
+   ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+   _BrowseOnChange (i)
 
-	s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) 
+   RETURN
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+PROCEDURE _BrowseEnd ( ControlName , ParentForm , z )
 
+   LOCAL i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap   , _DeltaScroll := { Nil , Nil , Nil , Nil } , _BottomRec
 
-	If Select (_BrowseArea) == 0
-		ListViewReset ( _HMG_SYSDATA [3][i] )
-		Return
-	EndIf
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-	Select &_BrowseArea
-	_RecNo := RecNo()
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	if v <= 0
-		v := _RecNo
-	EndIf
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	Go v
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+   IF Select (_BrowseArea) == 0
 
-	if s == 1 .or. s == 0
-		cMacroVar := dbfilter()
-		If HMG_LEN (cMacroVar) > 0
-			If ! &cMacroVar
-				Skip
-			EndIf
-		EndIf
-	EndIf
+      RETURN
+   ENDIF
+   SELECT &_BrowseArea
+   _RecNo := RecNo()
+   Go Bottom
+   _BottomRec := RecNo()
 
-	if s == 0 .or. s == 1
-		if INDEXORD() != 0
-			if ORDKEYVAL() == Nil
-				Go Top
-			endif
-		EndIf
-	endif
+   _BrowseVscrollUpdate( i )
+   SKIP - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 1
+   _BrowseUpdate(ControlName , ParentForm , i )
+   ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
 
-	if s == 0 .or. s == 1
-		if Set ( _SET_DELETED ) == .T.
-			if Deleted() == .T.
-				Go Top
-			endif
-		EndIf
-	endif
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , _BottomRec ) )
 
+   _BrowseOnChange (i)
 
-	If Eof()
+   RETURN
 
-		ListViewReset ( _HMG_SYSDATA [3][i] )
+PROCEDURE _BrowseUp ( ControlName , ParentForm , z )
 
-		Go _RecNo 
+   LOCAL i , s  , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
 
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-		Return
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	EndIf
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
+   s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
 
-	_BrowseVscrollUpdate( i )
+   IF s == 1
+      _Alias := Alias()
+      _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      IF Select (_BrowseArea) == 0
 
-	if s != 0
-		Skip -s+1
-	EndIf
+         RETURN
+      ENDIF
+      SELECT &_BrowseArea
+      _RecNo := RecNo()
+      Go _BrowseRecMap [1]
+      SKIP - 1
+      _BrowseVscrollUpdate( i )
+      _BrowseUpdate(ControlName , ParentForm , i )
+      ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+      Go _RecNo
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , 1 )
 
+   ELSE
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , s - 1 )
+      _BrowseVscrollFastUpdate ( i , -1 )
+   ENDIF
 
-	_BrowseUpdate( '' , '' , i )
+   _BrowseOnChange (i)
 
+   RETURN
 
-	ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , v ) )		
+PROCEDURE _BrowseDown ( ControlName , ParentForm , z )
 
+   LOCAL i , PageLength , s , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
 
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure _BrowseSetValue ( ControlName , ParentForm , Value , z , mp )
-*-----------------------------------------------------------------------------*
-Local i  , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , NewPos := 50  , _DeltaScroll := { Nil , Nil , Nil , Nil } , m
-MEMVAR cMacroVar
-Private cMacroVar
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	If Value <= 0 
-		Return
-	EndIf
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	If valtype ( z ) == 'U'
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
 
-	If _HMG_SYSDATA [ 232 ] == 'BROWSE_ONCHANGE'
-		If i == _HMG_SYSDATA [ 203 ]
-			MsgHMGError ("BROWSE: Value property can't be changed inside ONCHANGE event. Program Terminated" )
-		EndIf
-	EndIf
+   PageLength := LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] )
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+   IF s == PageLength
 
-	If Select (_BrowseArea) == 0
-		Return
-	EndIf
+      IF _HMG_SYSDATA [ 26 ] [i] != 0
 
-	If Value == (_BrowseArea)->(RecCount()) + 1
-		_HMG_SYSDATA [  8 ] [i] := Value
-		ListViewReset ( _HMG_SYSDATA [3][i] )
-		_BrowseOnChange (i)
-		Return
-	EndIf
+         RETURN
+      ENDIF
 
-	If Value > (_BrowseArea)->(RecCount()) + 1
-		Return
-	EndIf
+      _Alias := Alias()
+      _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      IF Select (_BrowseArea) == 0
 
-	If Select (_BrowseArea) == 0
-		Return
-	EndIf
+         RETURN
+      ENDIF
+      SELECT &_BrowseArea
+      _RecNo := RecNo()
 
-	If valtype ( mp ) == 'U'
-		m := int ( ListViewGetCountPerPage ( _HMG_SYSDATA [3][i] ) / 2 )
-	else
-		m := mp
-	endif
+      Go _BrowseRecMap [1]
+      SKIP
+      _BrowseUpdate( ControlName , ParentForm , i )
+      _BrowseVscrollUpdate( i )
+      ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+      Go _RecNo
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
 
-	_DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 ) 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN(_HMG_SYSDATA [ 32 ] [i]) )
 
-	Select &_BrowseArea
-	
-	_RecNo := RecNo()
+   ELSE
 
-	Go Value
+      ListView_SetCursel ( _HMG_SYSDATA [3] [i] , s+1 )
+      _BrowseVscrollFastUpdate ( i , 1 )
 
-	cMacroVar := dbfilter()
+   ENDIF
 
-	If HMG_LEN (cMacroVar) > 0
+   _BrowseOnChange (i)
 
-		If ! &cMacroVar
+   RETURN
 
-			Go _RecNo
-			if Select( _Alias ) != 0
-				Select &_Alias
-			Else
-				Select 0
-			Endif
+PROCEDURE _BrowseRefresh ( ControlName , ParentForm , z )
 
-			Return
-			
-		EndIf
+   LOCAL i , s , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll := { Nil , Nil , Nil , Nil }
+   LOCAL v
+   MEMVAR cMacroVar
+   PRIVATE cMacroVar
 
-	EndIf
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-	If Eof()
-		Go _RecNo
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
-		Return
-	Else
-		if pcount() < 5
-			_BrowseVscrollUpdate( i )
-		EndIf
-		Skip -m + 1
-	EndIf
+   v := _BrowseGetValue ( '','' , i )
 
-	_HMG_SYSDATA [  8 ] [i] := Value
-	_BrowseUpdate( '' , '' , i )
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
 
-	ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , Value ) )		
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	_HMG_SYSDATA [ 232 ] := 'BROWSE_ONCHANGE'
-	_BrowseOnChange (i)
-	_HMG_SYSDATA [ 232 ] := ''
+   s := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
 
-Return
-*-----------------------------------------------------------------------------*
-Function _BrowseGetValue ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , RetVal , _BrowseRecMap , _Alias , _BrowseArea
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   IF Select (_BrowseArea) == 0
+      ListViewReset ( _HMG_SYSDATA [3][i] )
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      RETURN
+   ENDIF
 
-	If Select (_BrowseArea) == 0
-		Return 0
-	EndIf
+   SELECT &_BrowseArea
+   _RecNo := RecNo()
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+   IF v <= 0
+      v := _RecNo
+   ENDIF
 
-	If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) != 0
-		RetVal := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
-	Else
-		RetVal := 0
-	EndIf
+   Go v
 
-Return ( RetVal )
+   IF s == 1 .or. s == 0
+      cMacroVar := dbfilter()
+      IF HMG_LEN (cMacroVar) > 0
+         IF ! &cMacroVar
+            SKIP
+         ENDIF
+      ENDIF
+   ENDIF
 
-*-----------------------------------------------------------------------------*
-Function  _BrowseDelete (  ControlName , ParentForm , z  )
-*-----------------------------------------------------------------------------*
-Local i , _BrowseRecMap , Value , _Alias , _RecNo , _BrowseArea 
+   IF s == 0 .or. s == 1
+      IF INDEXORD() != 0
+         IF ORDKEYVAL() == Nil
+            GO TOP
+         ENDIF
+      ENDIF
+   ENDIF
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+   IF s == 0 .or. s == 1
+      IF Set ( _SET_DELETED ) == .T.
+         IF Deleted() == .T.
+            GO TOP
+         ENDIF
+      ENDIF
+   ENDIF
 
-	If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 0
-		Return Nil
-	EndIf
+   IF Eof()
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+      ListViewReset ( _HMG_SYSDATA [3][i] )
 
-	Value := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
+      Go _RecNo
 
-	If Value == 0
-		Return Nil
-	EndIf
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-	If Select (_BrowseArea) == 0
-		Return Nil
-	EndIf
-	Select &_BrowseArea
-	_RecNo := RecNo()
+      RETURN
 
-	Go Value
+   ENDIF
 
-	If _HMG_SYSDATA [  9 ] [i] == .t.
-		If Rlock()
-			Delete
-			Skip
-			if eof()
-				Go Bottom
-			EndIf
+   _BrowseVscrollUpdate( i )
 
-			If Set ( _SET_DELETED ) == .T.
-				_BrowseSetValue( '' , '' , RecNo() , i , LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
-			EndIf
+   IF s != 0
+      SKIP -s+1
+   ENDIF
 
-		Else
+   _BrowseUpdate( '' , '' , i )
 
-			MsgStop('Record is being editied by another user. Retry later','Delete Record')
+   ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , v ) )
 
-		EndIf
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
 
-	Else
+   RETURN
 
-		Delete
-		Skip
-		if eof()
-			Go Bottom
-		EndIf
-		If Set ( _SET_DELETED ) == .T.
-			_BrowseSetValue( '' , '' , RecNo() , i  , LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
-		EndIf
+PROCEDURE _BrowseSetValue ( ControlName , ParentForm , Value , z , mp )
 
-	EndIf
+   LOCAL i  , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , NewPos := 50  , _DeltaScroll := { Nil , Nil , Nil , Nil } , m
+   MEMVAR cMacroVar
+   PRIVATE cMacroVar
 
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+   IF Value <= 0
 
-Return Nil
-*------------------------------------------------------------------------------*
-Function _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , inplace , INPUTITEMS )
-*------------------------------------------------------------------------------*
-Local actpos:={0,0,0,0}
-Local aInitValues := {} , aFormats := {} , TmpNames := {} , NewRec := 0 , MixedFields := .f.
-Private aWhen
-Private aWhenVarNames
+      RETURN
+   ENDIF
 
-	InPlace := .T.
+   IF valtype ( z ) == 'U'
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-	If LISTVIEW_GETFIRSTITEM (GridHandle) == 0
-		If Valtype (append) != 'U'
-			If append == .f.
-				Return Nil
-			EndIf
-		EndIf
-	EndIf
+   IF _HMG_SYSDATA [ 232 ] == 'BROWSE_ONCHANGE'
+      IF i == _HMG_SYSDATA [ 203 ]
+         MsgHMGError ("BROWSE: Value property can't be changed inside ONCHANGE event. Program Terminated" )
+      ENDIF
+   ENDIF
 
-	If InPlace
-		_BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , INPUTITEMS )
-		Return Nil
-	EndIf
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
 
-Return Nil
+   IF Select (_BrowseArea) == 0
 
-*------------------------------------------------------------------------------*
-Function _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , aInputItems )
-*------------------------------------------------------------------------------*
-Local GridCol , GridRow , i , nrec , _GridWorkArea , BackArea , BackRec , _GridFields , FieldName , CellData  := '' , CellColIndex , x
-Local aFieldNames
-Local aTypes
-Local aWidths
-Local aDecimals
-Local Type
-Local Width
-Local Decimals
-Local sFieldname
-Local r
-Local ControlType
-Local Ldelta := 0
-Local aTemp
-Local E
-LOCAL aInputMask
-LOCAL aFormat
-LOCAL BFN
-LOCAL BFS
-Local lInputItems := .F.
-Local aItems := {}
-Local p
-Local aValues := {}
-Local ii
-Local ba
-Local br
+      RETURN
+   ENDIF
 
-	If _HMG_SYSDATA [ 232 ] == 'BROWSE_WHEN' 
-		MsgHMGError("BROWSE: Editing within a browse 'when' event procedure is not allowed. Program terminated" )
-	EndIf
-	If _HMG_SYSDATA [ 232 ] == 'BROWSE_VALID' 
-		MsgHMGError("BROWSE: Editing within a browse 'valid' event procedure is not allowed. Program terminated" )
-	EndIf
+   IF Value == (_BrowseArea)->(RecCount()) + 1
+      _HMG_SYSDATA [  8 ] [i] := Value
+      ListViewReset ( _HMG_SYSDATA [3][i] )
+      _BrowseOnChange (i)
 
+      RETURN
+   ENDIF
 
-	If append
+   IF Value > (_BrowseArea)->(RecCount()) + 1
 
-		I := ascan ( _HMG_SYSDATA [3] , GridHandle )
+      RETURN
+   ENDIF
 
-		_BrowseInPlaceAppend ( '' , '' , i )
+   IF Select (_BrowseArea) == 0
 
-		Return Nil
+      RETURN
+   ENDIF
 
-	EndIf
+   IF valtype ( mp ) == 'U'
+      m := int ( ListViewGetCountPerPage ( _HMG_SYSDATA [3][i] ) / 2 )
+   ELSE
+      m := mp
+   ENDIF
 
-	If This.CellRowIndex != LISTVIEW_GETFIRSTITEM ( GridHandle )
-		Return Nil
-	EndIf
+   _DeltaScroll := ListView_GetSubItemRect ( _HMG_SYSDATA [3][i] , 0 , 0 )
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-	I := ascan ( _HMG_SYSDATA [3] , GridHandle )
+   SELECT &_BrowseArea
 
-	BFN := _HMG_SYSDATA [ 27 ] [i]
-	BFS := _HMG_SYSDATA [ 28 ] [i]
+   _RecNo := RecNo()
 
-	aInputMask := _HMG_SYSDATA [ 40 ] [ I ] [ 4 ]
+   Go Value
 
-	aFormat := _HMG_SYSDATA [40] [I] [5]
+   cMacroVar := dbfilter()
 
-	_GridWorkArea := _HMG_SYSDATA [ 22 ] [i]
+   IF HMG_LEN (cMacroVar) > 0
 
-	_GridFields := _HMG_SYSDATA [ 31 ] [i]
+      IF ! &cMacroVar
 
-	CellColIndex := This.CellColIndex
+         Go _RecNo
+         IF Select( _Alias ) != 0
+            SELECT &_Alias
+         ELSE
+            SELECT 0
+         ENDIF
 
-	If CellColIndex < 1 .or. CellColIndex > HMG_LEN (_GridFields)
-		Return Nil
-	EndIf
+         RETURN
 
-	if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 .And. CellColIndex == 1
-		PlayHand()
-		Return Nil
-	EndIf
+      ENDIF
 
-	If valType ( aInputItems ) == 'A'
-		If HMG_LEN ( aInputItems ) >= CellColIndex
-			If ValType ( aInputItems [ CellColIndex ] ) == 'A'
-				lInputItems := .T.				
-			EndIf
-		EndIf
-	EndIf
+   ENDIF
 
-	If ValType ( aReadOnly ) == 'A'
-		If HMG_LEN ( aReadOnly ) >= CellColIndex
-			If aReadOnly [ CellColIndex ] != Nil
-				If aReadOnly [ CellColIndex ] == .T.
-					_HMG_SYSDATA [ 256 ] := .F.
-					Return Nil
-				EndIf
-			EndIf
-		EndIf
-	EndIf
+   IF Eof()
+      Go _RecNo
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
 
-	FieldName := _GridFields [  CellColIndex ]
+      RETURN
+   ELSE
+      IF pcount() < 5
+         _BrowseVscrollUpdate( i )
+      ENDIF
+      SKIP -m + 1
+   ENDIF
 
-	// If the specified area does not exists, set recorcount to 0 and
-	// return
+   _HMG_SYSDATA [  8 ] [i] := Value
+   _BrowseUpdate( '' , '' , i )
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
 
-	If Select (_GridWorkArea) == 0
-		Return Nil
-	EndIf
+   ListView_Scroll( _HMG_SYSDATA [3][i] , _DeltaScroll[2] * (-1) , 0 )
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , ascan ( _HMG_SYSDATA [ 32 ] [i] , Value ) )
 
-	// Save Original WorkArea
-	BackArea := Alias()
-
-	// Save Original Record Pointer
-	BackRec := RecNo()
-
-	// Selects Grid's WorkArea
-
-	Select &_GridWorkArea
-
-	nRec := _GetValue ( '','',i )
-	Go nRec
-
-	// If LOCK clause is present, try to lock.
-
-	If lock == .T.
-		If Rlock() == .F.
-			MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
-			// Restore Original Record Pointer
-			Go BackRec
-			// Restore Original WorkArea
-			If Select (BackArea) != 0
-				Select &BackArea
-			Else
-				Select 0
-			EndIf
-			Return Nil
-		EndIf
-	EndIf
-
-	aTemp := _HMG_SYSDATA [40] [i] [3]
+   _HMG_SYSDATA [ 232 ] := 'BROWSE_ONCHANGE'
+   _BrowseOnChange (i)
+   _HMG_SYSDATA [ 232 ] := ''
 
-	IF VALTYPE ( aTemp ) = 'A'
-		IF HMG_LEN (aTemp) == HMG_LEN (_GridFields)
-			IF VALTYPE ( aTemp [CellColIndex] ) = 'B'
-				ba := Alias()
-				br := recno()
-				_HMG_SYSDATA [ 232 ] := 'BROWSE_WHEN'
-				E := EVAL ( aTemp [CellColIndex] )
-				_HMG_SYSDATA [ 232 ] := ''
-				IF E == .F.
-					PlayHand()
-					// Restore Original Record Pointer
-					Go BackRec
-					// Restore Original WorkArea
-					If Select (BackArea) != 0
-						Select &BackArea
-					Else
-						Select 0
-					EndIf
-					_HMG_SYSDATA [ 256 ] := .F.
-					Return Nil
-				ENDIF
-				Select (ba) 
-				Go br 
-			ENDIF
-		ENDIF
-	ENDIF
+   RETURN
 
-	CellData := &FieldName
-
-        aFieldNames	:= ARRAY(FCOUNT())
-        aTypes		:= ARRAY(FCOUNT())
-        aWidths		:= ARRAY(FCOUNT())
-        aDecimals	:= ARRAY(FCOUNT())
-
-        AFIELDS(aFieldNames, aTypes, aWidths, aDecimals)
-
-	r := HB_UAT ('>',FieldName)
-
-	if r != 0
-		sFieldName := HB_URIGHT ( FieldName, HMG_LEN(Fieldname) - r )
-	Else
-		sFieldName := FieldName
-	EndIf
-
-	x := FieldPos ( sFieldName )
-
-	If x > 0
-        	Type		:= aTypes [x]
-	        Width		:= aWidths [x]
-        	Decimals	:= aDecimals [x]
-	EndIf
-
-	GridRow := GetWIndowRow (GridHandle)
-	GridCol := GetWIndowCol (GridHandle)
-
-	If lInputItems == .T.
-		ControlType := 'X'
-		Ldelta := 1
-	ElseIf Type (FieldName) == 'C'
-		ControlType := 'C'
-	ElseIf Type (FieldName) == 'D'
-		ControlType := 'D'
-	ElseIf Type (FieldName) == 'L'
-		ControlType := 'L'
-		Ldelta := 1
-	ElseIf Type (FieldName) == 'M'
-		ControlType := 'M'
-	ElseIf Type (FieldName) == 'N'
-		If Decimals == 0
-			ControlType := 'I'
-		Else
-			ControlType := 'F'
-		EndIf
-	EndIf
-
-	If ControlType == 'M'
-
-		r := InputBox ( '' , _HMG_SYSDATA [ 33 ] [I] [CellColIndex] , HB_UTF8STRTRAN(CellData,CHR(141),' ') , , , .T. )
-
-		If _HMG_SYSDATA [ 257 ] == .F.
-			Replace &FieldName With r
-			_HMG_SYSDATA [ 256 ] := .F.
-		Else
-			_HMG_SYSDATA [ 256 ] := .T.
-		EndIf
-
-	Else
-
-		_HMG_SYSDATA [ 109 ] := GetActiveWindow()
-
-		DEFINE WINDOW _InPlaceEdit ;
-			AT This.CellRow + GridRow - _HMG_SYSDATA [ 18 ] [i] - 1 , This.CellCol + GridCol - _HMG_SYSDATA [ 19 ] [i] + 2 ;
-			WIDTH This.CellWidth ;
-			HEIGHT This.CellHeight + 6 + Ldelta ;
-			MODAL ;
-			NOCAPTION ;
-			NOSIZE
-
-
-			ON KEY CONTROL+W ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
-			ON KEY RETURN ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
-			ON KEY ESCAPE ACTION ( _HMG_SYSDATA [ 256 ] := .T. , dbrunlock() , _InPlaceEdit.Release , setfocus ( _HMG_SYSDATA [3] [i] ) )
-
-			If lInputItems == .T.
-
-				* Fill Items Array
-
-				For p := 1 To HMG_LEN ( aInputItems [ CellColIndex ] )
-					aadd ( aItems , aInputItems [ CellColIndex ] [p] [1] )
-				Next p
-				
-				* Fill Values Array
-
-				For p := 1 To HMG_LEN ( aInputItems [ CellColIndex ] )
-					aadd ( aValues , aInputItems [ CellColIndex ] [p] [2] )
-				Next p
-
-				ii := aScan ( aValues , CellData )
-
-				if ii == 0
-					ii := 1
-				endif
-
-				DEFINE COMBOBOX Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-					ROW 0
-					COL 0
-					ITEMS aItems
-					WIDTH This.CellWidth 
-					VALUE ii
-				END COMBOBOX
-
-			ElseIf ControlType == 'C'
-				CellData := RTRIM ( CellData )
-
-				DEFINE TEXTBOX Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-
-					ROW 0
-					COL 0
-					WIDTH This.CellWidth 
-					HEIGHT This.CellHeight + 6
-					VALUE CellData
-					MAXLENGTH Width 
-
-					IF VALTYPE ( AINPUTMASK ) == 'A'
-						IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
-							IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
-								IF ! EMPTY ( AINPUTMASK [CellColIndex] )
-									INPUTMASK AINPUTMASK [CellColIndex]
-								ENDIF
-							ENDIF
-						ENDIF
-					ENDIF
-
-				END TEXTBOX
-
-			ElseIf ControlType == 'D'
-
-				DEFINE DATEPICKER Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-					ROW 0
-					COL 0
-					HEIGHT This.CellHeight + 6
-					WIDTH This.CellWidth 
-					VALUE CellData
-					UPDOWN .T.
-					SHOWNONE .T.
-				END DATEPICKER
-
-			ElseIf ControlType == 'L'
-
-				DEFINE COMBOBOX Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-					ROW 0
-					COL 0
-					ITEMS { '.T.','.F.' }
-					WIDTH This.CellWidth 
-					VALUE If ( CellData , 1 , 2 )
-				END COMBOBOX
-
-			ElseIf ControlType == 'I'
-
-				DEFINE TEXTBOX Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-					ROW 0
-					COL 0
-					NUMERIC	.T.
-					WIDTH This.CellWidth 
-					HEIGHT This.CellHeight + 6
-					VALUE CellData
-
-					IF VALTYPE ( AINPUTMASK ) == 'A'
-						IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
-							IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
-								IF ! EMPTY ( AINPUTMASK [CellColIndex] )
-									INPUTMASK AINPUTMASK [CellColIndex]
-								ELSE
-									MAXLENGTH Width
-								ENDIF
-							ELSE
-								MAXLENGTH Width
-							ENDIF
-						ELSE
-							MAXLENGTH Width
-						ENDIF
-					ELSE
-						MAXLENGTH Width
-					ENDIF
-
-					IF VALTYPE ( AFORMAT ) == 'A'
-						IF HMG_LEN ( AFORMAT ) >= CellColIndex
-							IF VALTYPE ( AFORMAT [CellColIndex] ) == 'C'
-								IF ! EMPTY ( AFORMAT [CellColIndex] )
-									FORMAT AFORMAT [CellColIndex]
-								ENDIF
-							ENDIF
-						ENDIF
-					ENDIF
-
-				END TEXTBOX
-
-			ElseIf ControlType == 'F'
-
-				DEFINE TEXTBOX Control_1
-					FONTNAME BFN
-					FONTSIZE BFS
-					ROW 0
-					COL 0
-					NUMERIC	.T.
-					WIDTH This.CellWidth 
-					HEIGHT This.CellHeight + 6
-					VALUE CellData
-
-					IF VALTYPE ( AINPUTMASK ) == 'A'
-						IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
-							IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
-								IF ! EMPTY ( AINPUTMASK [CellColIndex] )
-									INPUTMASK AINPUTMASK [CellColIndex]
-								ELSE
-									INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals ) 
-								ENDIF
-							ELSE
-								INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals ) 
-							ENDIF
-						ELSE
-							INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals ) 
-						ENDIF
-					ELSE
-						INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals ) 
-					ENDIF
-
-					IF VALTYPE ( AFORMAT ) == 'A'
-						IF HMG_LEN ( AFORMAT ) >= CellColIndex
-							IF VALTYPE ( AFORMAT [CellColIndex] ) == 'C'
-								IF ! EMPTY ( AFORMAT [CellColIndex] )
-									FORMAT AFORMAT [CellColIndex]
-								ENDIF
-							ENDIF
-						ENDIF
-					ENDIF
-
-				END TEXTBOX
-
-			EndIf
-
-		END WINDOW
-
-		ACTIVATE WINDOW _InPlaceEdit
-
-		_HMG_SYSDATA [ 109 ] := 0
-
-	EndIf
-
-	// Restore Original Record Pointer
-	Go BackRec
-
-	// Restore Original WorkArea
-	If Select (BackArea) != 0
-		Select &BackArea
-	Else
-		Select 0
-	EndIf
+FUNCTION _BrowseGetValue ( ControlName , ParentForm , z )
 
-Return Nil
-///////////////////////////////////////////////////////////////////////////////
-Procedure _InPlaceEditOk ( i , Fieldname , r , ControlType , aValid , CellColIndex , sFieldName , AreaName , aValidMessages , lock , aInputItems )
-///////////////////////////////////////////////////////////////////////////////
-Local b , Result , mVar , TmpName 
+   LOCAL i , RetVal , _BrowseRecMap , _Alias , _BrowseArea
 
-	If ControlType == 'X' .Or. ControlType == 'L'
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-		If GetDroppedState ( GetControlHandle ('Control_1' , '_InPlaceEdit' ) ) == 1
-			SendMessage ( GetControlHandle ('Control_1' , '_InPlaceEdit' ) , CB_SHOWDROPDOWN , 0 , 0 )
-			InsertReturn()
-			Return
-		EndIf
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
 
-	EndIf
+   IF Select (_BrowseArea) == 0
 
-	If ValType ( aValid ) == 'A'
-		If HMG_LEN ( aValid ) >= CellColIndex
-			If aValid [ CellColIndex ] != Nil
-				Result := _GetValue ( 'Control_1' , '_InPlaceEdit' )
+      RETURN 0
+   ENDIF
 
-				If ControlType == 'L'
-					Result := if ( Result == 0 .or. Result == 2 , .F. , .T. )
-				EndIf
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-				TmpName := 'MemVar' + AreaName + sFieldname
-				mVar := TmpName
-				&mVar := Result
+   IF LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) != 0
+      RetVal := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
+   ELSE
+      RetVal := 0
+   ENDIF
 
-				_HMG_SYSDATA [ 232 ] := 'BROWSE_VALID'
+   RETURN ( RetVal )
 
-				b := Eval ( aValid [ CellColIndex ] )
+FUNCTION  _BrowseDelete (  ControlName , ParentForm , z  )
 
-				_HMG_SYSDATA [ 232 ] := ''
+   LOCAL i , _BrowseRecMap , Value , _Alias , _RecNo , _BrowseArea
 
-				If b == .f.
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
 
-					If ValType ( aValidMessages ) == 'A'
+   IF LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 0
 
-						If HMG_LEN ( aValidMessages ) >= CellColIndex
+      RETURN NIL
+   ENDIF
 
-							If aValidMessages [CellColIndex] != Nil
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
 
-								MsgExclamation ( aValidMessages [CellColIndex] )
+   Value := _BrowseRecMap [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
 
-							Else
+   IF Value == 0
 
-								MsgExclamation (_HMG_SYSDATA [ 136 ][11])
+      RETURN NIL
+   ENDIF
 
-							EndIf
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+   IF Select (_BrowseArea) == 0
 
-						Else
+      RETURN NIL
+   ENDIF
+   SELECT &_BrowseArea
+   _RecNo := RecNo()
 
-							MsgExclamation (_HMG_SYSDATA [ 136 ][11])
+   Go Value
 
-						EndIf
+   IF _HMG_SYSDATA [  9 ] [i] == .t.
+      IF Rlock()
+         DELETE
+         SKIP
+         IF eof()
+            Go Bottom
+         ENDIF
 
-					Else
+         IF Set ( _SET_DELETED ) == .T.
+            _BrowseSetValue( '' , '' , RecNo() , i , LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
+         ENDIF
 
-						MsgExclamation (_HMG_SYSDATA [ 136 ][11])
+      ELSE
 
-					EndIf
+         MsgStop('Record is being editied by another user. Retry later','Delete Record')
 
-				Else
+      ENDIF
 
-					If ControlType == 'L'
-						r := if ( r == 0 .or. r == 2 , .F. , .T. )
+   ELSE
 
-					ElseIf ControlType == 'X'
+      DELETE
+      SKIP
+      IF eof()
+         Go Bottom
+      ENDIF
+      IF Set ( _SET_DELETED ) == .T.
+         _BrowseSetValue( '' , '' , RecNo() , i  , LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) )
+      ENDIF
 
-						r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
+   ENDIF
 
-					EndIf
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
 
-					If lock == .t.
-						Replace &FieldName With r
-						Unlock
+   RETURN NIL
 
-						_BrowseRefresh ( '' , '' , i )
+FUNCTION _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , inplace , INPUTITEMS )
 
-						_InPlaceEdit.Release
-					Else
-						Replace &FieldName With r
+   LOCAL actpos:={0,0,0,0}
+   LOCAL aInitValues := {} , aFormats := {} , TmpNames := {} , NewRec := 0 , MixedFields := .f.
+   PRIVATE aWhen
+   PRIVATE aWhenVarNames
 
-						_BrowseRefresh ( '' , '' , i )
+   InPlace := .T.
 
-						_InPlaceEdit.Release
-					EndIf
+   IF LISTVIEW_GETFIRSTITEM (GridHandle) == 0
+      IF Valtype (append) != 'U'
+         IF append == .f.
 
-				EndIf
+            RETURN NIL
+         ENDIF
+      ENDIF
+   ENDIF
 
-			Else
+   IF InPlace
+      _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , INPUTITEMS )
 
-				If ControlType == 'L'
+      RETURN NIL
+   ENDIF
 
-					r := if ( r == 0 .or. r == 2 , .F. , .T. )
+   RETURN NIL
 
-				ElseIf ControlType == 'X'
+FUNCTION _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , aInputItems )
 
-					r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
+   LOCAL GridCol , GridRow , i , nrec , _GridWorkArea , BackArea , BackRec , _GridFields , FieldName , CellData  := '' , CellColIndex , x
+   LOCAL aFieldNames
+   LOCAL aTypes
+   LOCAL aWidths
+   LOCAL aDecimals
+   LOCAL Type
+   LOCAL Width
+   LOCAL Decimals
+   LOCAL sFieldname
+   LOCAL r
+   LOCAL ControlType
+   LOCAL Ldelta := 0
+   LOCAL aTemp
+   LOCAL E
+   LOCAL aInputMask
+   LOCAL aFormat
+   LOCAL BFN
+   LOCAL BFS
+   LOCAL lInputItems := .F.
+   LOCAL aItems := {}
+   LOCAL p
+   LOCAL aValues := {}
+   LOCAL ii
+   LOCAL ba
+   LOCAL br
 
-				EndIf
+   IF _HMG_SYSDATA [ 232 ] == 'BROWSE_WHEN'
+      MsgHMGError("BROWSE: Editing within a browse 'when' event procedure is not allowed. Program terminated" )
+   ENDIF
+   IF _HMG_SYSDATA [ 232 ] == 'BROWSE_VALID'
+      MsgHMGError("BROWSE: Editing within a browse 'valid' event procedure is not allowed. Program terminated" )
+   ENDIF
 
-				If lock == .t.
+   IF append
 
-					Replace &FieldName With r
-					Unlock
+      I := ascan ( _HMG_SYSDATA [3] , GridHandle )
 
-					_BrowseRefresh ( '' , '' , i )
+      _BrowseInPlaceAppend ( '' , '' , i )
 
-					_InPlaceEdit.Release
+      RETURN NIL
 
-				Else
+   ENDIF
 
-					Replace &FieldName With r
+   IF This.CellRowIndex != LISTVIEW_GETFIRSTITEM ( GridHandle )
 
-					_BrowseRefresh ( '' , '' , i )
+      RETURN NIL
+   ENDIF
 
-					_InPlaceEdit.Release
+   I := ascan ( _HMG_SYSDATA [3] , GridHandle )
 
-				EndIf
+   BFN := _HMG_SYSDATA [ 27 ] [i]
+   BFS := _HMG_SYSDATA [ 28 ] [i]
 
-			EndIf
+   aInputMask := _HMG_SYSDATA [ 40 ] [ I ] [ 4 ]
 
-		EndIf
+   aFormat := _HMG_SYSDATA [40] [I] [5]
 
-	Else
+   _GridWorkArea := _HMG_SYSDATA [ 22 ] [i]
 
-		If ControlType == 'L'
+   _GridFields := _HMG_SYSDATA [ 31 ] [i]
 
-			r := if ( r == 0 .or. r == 2 , .F. , .T. )
+   CellColIndex := This.CellColIndex
 
-		ElseIf ControlType == 'X'
+   IF CellColIndex < 1 .or. CellColIndex > HMG_LEN (_GridFields)
 
-			r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
+      RETURN NIL
+   ENDIF
 
-		EndIf
+   IF HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 .And. CellColIndex == 1
+      PlayHand()
 
-		If lock == .t.
+      RETURN NIL
+   ENDIF
 
-			Replace &FieldName With r
-			Unlock
+   IF valType ( aInputItems ) == 'A'
+      IF HMG_LEN ( aInputItems ) >= CellColIndex
+         IF ValType ( aInputItems [ CellColIndex ] ) == 'A'
+            lInputItems := .T.
+         ENDIF
+      ENDIF
+   ENDIF
 
-			_BrowseRefresh ( '' , '' , i )
+   IF ValType ( aReadOnly ) == 'A'
+      IF HMG_LEN ( aReadOnly ) >= CellColIndex
+         IF aReadOnly [ CellColIndex ] != Nil
+            IF aReadOnly [ CellColIndex ] == .T.
+               _HMG_SYSDATA [ 256 ] := .F.
 
-			_InPlaceEdit.Release
+               RETURN NIL
+            ENDIF
+         ENDIF
+      ENDIF
+   ENDIF
 
-		Else
+   FieldName := _GridFields [  CellColIndex ]
 
-			Replace &FieldName With r
+   // If the specified area does not exists, set recorcount to 0 and
+   // return
 
-			_BrowseRefresh ( '' , '' , i )
+   IF Select (_GridWorkArea) == 0
 
-			_InPlaceEdit.Release
+      RETURN NIL
+   ENDIF
 
-		EndIf
+   // Save Original WorkArea
+   BackArea := Alias()
 
-	EndIf
+   // Save Original Record Pointer
+   BackRec := RecNo()
 
+   // Selects Grid's WorkArea
 
-	_HMG_SYSDATA [ 256 ] := .F.
+   SELECT &_GridWorkArea
 
-	setfocus ( _HMG_SYSDATA [3] [i] )
+   nRec := _GetValue ( '','',i )
+   Go nRec
 
-Return
-*------------------------------------------------------------------------------*
-Procedure ProcessInPlaceKbdEdit(i)
-*------------------------------------------------------------------------------*
-Local r
-Local IPE_MAXCOL
-Local TmpRow
-Local xs,xd
+   // If LOCK clause is present, try to lock.
 
-	If _HMG_SYSDATA [ 15 ] [ i ] == .F.
-		Return
-	EndIf
+   IF lock == .T.
+      IF Rlock() == .F.
+         MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
+         // Restore Original Record Pointer
+         Go BackRec
+         // Restore Original WorkArea
+         IF Select (BackArea) != 0
+            SELECT &BackArea
+         ELSE
+            SELECT 0
+         ENDIF
 
-	if LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 0
-		Return
-	EndIf
+         RETURN NIL
+      ENDIF
+   ENDIF
 
-	IPE_MAXCOL := HMG_LEN ( _HMG_SYSDATA [ 31 ] [i] )
+   aTemp := _HMG_SYSDATA [40] [i] [3]
 
-	Do While .T.
+   IF VALTYPE ( aTemp ) = 'A'
+      IF HMG_LEN (aTemp) == HMG_LEN (_GridFields)
+         IF VALTYPE ( aTemp [CellColIndex] ) = 'B'
+            ba := Alias()
+            br := recno()
+            _HMG_SYSDATA [ 232 ] := 'BROWSE_WHEN'
+            E := EVAL ( aTemp [CellColIndex] )
+            _HMG_SYSDATA [ 232 ] := ''
+            IF E == .F.
+               PlayHand()
+               // Restore Original Record Pointer
+               Go BackRec
+               // Restore Original WorkArea
+               IF Select (BackArea) != 0
+                  SELECT &BackArea
+               ELSE
+                  SELECT 0
+               ENDIF
+               _HMG_SYSDATA [ 256 ] := .F.
 
-		TmpRow := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
+               RETURN NIL
+            ENDIF
+            SELECT (ba)
+            Go br
+         ENDIF
+      ENDIF
+   ENDIF
 
-		If TmpRow != _HMG_SYSDATA [ 341 ] 
+   CellData := &FieldName
 
-			_HMG_SYSDATA [ 341 ] := TmpRow
+   aFieldNames   := ARRAY(FCOUNT())
+   aTypes      := ARRAY(FCOUNT())
+   aWidths      := ARRAY(FCOUNT())
+   aDecimals   := ARRAY(FCOUNT())
 
-			if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 
-				_HMG_SYSDATA [ 340 ] := 2
-			Else
-				_HMG_SYSDATA [ 340 ] := 1
-			EndIf
+   AFIELDS(aFieldNames, aTypes, aWidths, aDecimals)
 
-		EndIf
+   r := HB_UAT ('>',FieldName)
 
-		_HMG_SYSDATA [ 195 ] := _HMG_SYSDATA [ 341 ]
-		_HMG_SYSDATA [ 196 ] := _HMG_SYSDATA [ 340 ]
+   IF r != 0
+      sFieldName := HB_URIGHT ( FieldName, HMG_LEN(Fieldname) - r )
+   ELSE
+      sFieldName := FieldName
+   ENDIF
 
-		If _HMG_SYSDATA [ 340 ] == 1
-			r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 )
-		Else
-			r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 , _HMG_SYSDATA [ 340 ] - 1 )
-		EndIf
+   x := FieldPos ( sFieldName )
 
-		xs :=	( ( _HMG_SYSDATA [ 19 ] [i] + r [2] ) +( r[3] ))  -  ( _HMG_SYSDATA [ 19 ] [i] + _HMG_SYSDATA [ 20 ] [i] )
+   IF x > 0
+      Type      := aTypes [x]
+      Width      := aWidths [x]
+      Decimals   := aDecimals [x]
+   ENDIF
 
-		xd := 20
+   GridRow := GetWIndowRow (GridHandle)
+   GridCol := GetWIndowCol (GridHandle)
 
-		If xs > -xd 
-			ListView_Scroll( _HMG_SYSDATA [3] [i] ,	xs + xd , 0 ) 
-		Else
+   IF lInputItems == .T.
+      ControlType := 'X'
+      Ldelta := 1
+   ELSEIF Type (FieldName) == 'C'
+      ControlType := 'C'
+   ELSEIF Type (FieldName) == 'D'
+      ControlType := 'D'
+   ELSEIF Type (FieldName) == 'L'
+      ControlType := 'L'
+      Ldelta := 1
+   ELSEIF Type (FieldName) == 'M'
+      ControlType := 'M'
+   ELSEIF Type (FieldName) == 'N'
+      IF Decimals == 0
+         ControlType := 'I'
+      ELSE
+         ControlType := 'F'
+      ENDIF
+   ENDIF
 
-        		If r [2] < 0
-                	     ListView_Scroll( _HMG_SYSDATA [3] [i] , r[2]	, 0 )
-	                EndIf
+   IF ControlType == 'M'
 
-		endIf
+      r := InputBox ( '' , _HMG_SYSDATA [ 33 ] [I] [CellColIndex] , HB_UTF8STRTRAN(CellData,CHR(141),' ') , , , .T. )
 
-		If _HMG_SYSDATA [ 340 ] == 1
-			r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 )
-		Else
-			r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 , _HMG_SYSDATA [ 340 ] - 1 )
-		EndIf
+      IF _HMG_SYSDATA [ 257 ] == .F.
+         REPLACE &FieldName With r
+         _HMG_SYSDATA [ 256 ] := .F.
+      ELSE
+         _HMG_SYSDATA [ 256 ] := .T.
+      ENDIF
 
-		_HMG_SYSDATA [ 197 ] := _HMG_SYSDATA [ 18 ] [i] + r [1]
-		_HMG_SYSDATA [ 198 ] := _HMG_SYSDATA [ 19 ] [i] + r [2]
-		_HMG_SYSDATA [ 199 ] := r[3]
-		_HMG_SYSDATA [ 200 ] := r[4]
-		_BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .f. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )  
-		_HMG_SYSDATA [ 203 ] := 0
-		_HMG_SYSDATA [ 231 ] := ''
+   ELSE
 
-		_HMG_SYSDATA [ 195 ] := 0
-		_HMG_SYSDATA [ 196 ] := 0
-		_HMG_SYSDATA [ 197 ] := 0
-		_HMG_SYSDATA [ 198 ] := 0
-		_HMG_SYSDATA [ 199 ] := 0
-		_HMG_SYSDATA [ 200 ] := 0
+      _HMG_SYSDATA [ 109 ] := GetActiveWindow()
 
-		If _HMG_SYSDATA [ 256 ] == .T.
+      DEFINE WINDOW _InPlaceEdit ;
+            AT This.CellRow + GridRow - _HMG_SYSDATA [ 18 ] [i] - 1 , This.CellCol + GridCol - _HMG_SYSDATA [ 19 ] [i] + 2 ;
+            WIDTH This.CellWidth ;
+            HEIGHT This.CellHeight + 6 + Ldelta ;
+            MODAL ;
+            NOCAPTION ;
+            NOSIZE
 
-			If _HMG_SYSDATA [ 340 ] == IPE_MAXCOL
+         ON KEY CONTROL+W ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
+         ON KEY RETURN ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
+         ON KEY ESCAPE ACTION ( _HMG_SYSDATA [ 256 ] := .T. , dbrunlock() , _InPlaceEdit.Release , setfocus ( _HMG_SYSDATA [3] [i] ) )
 
-				if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 
-					_HMG_SYSDATA [ 340 ] := 2
-				Else
-					_HMG_SYSDATA [ 340 ] := 1
-				EndIf
+         IF lInputItems == .T.
 
-				ListView_Scroll( _HMG_SYSDATA [3] [i] ,	-10000  , 0 ) 
-			EndIf
+            * Fill Items Array
 
-			Exit
+            FOR p := 1 To HMG_LEN ( aInputItems [ CellColIndex ] )
+               aadd ( aItems , aInputItems [ CellColIndex ] [p] [1] )
+            NEXT p
 
-		Else
+            * Fill Values Array
 
-			_HMG_SYSDATA [ 340 ]++
+            FOR p := 1 To HMG_LEN ( aInputItems [ CellColIndex ] )
+               aadd ( aValues , aInputItems [ CellColIndex ] [p] [2] )
+            NEXT p
 
-			If _HMG_SYSDATA [ 340 ] > IPE_MAXCOL
+            ii := aScan ( aValues , CellData )
 
-				if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 
-					_HMG_SYSDATA [ 340 ] := 2
-				Else
-					_HMG_SYSDATA [ 340 ] := 1
-				EndIf
+            IF ii == 0
+               ii := 1
+            ENDIF
 
-				ListView_Scroll( _HMG_SYSDATA [3] [i] ,	-10000  , 0 ) 
-				Exit
-			EndIf
+            DEFINE COMBOBOX Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
+               ROW 0
+               COL 0
+               ITEMS aItems
+               WIDTH This.CellWidth
+               VALUE ii
+            END COMBOBOX
 
-		EndIf		
+         ELSEIF ControlType == 'C'
+            CellData := RTRIM ( CellData )
 
-	EndDo
+            DEFINE TEXTBOX Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
 
-Return
-*------------------------------------------------------------------------------*
-Procedure _BrowseSync (i)
-*------------------------------------------------------------------------------*
-Local _Alias
-Local _BrowseArea
-Local _RecNo
-Local _CurrentValue
+               ROW 0
+               COL 0
+               WIDTH This.CellWidth
+               HEIGHT This.CellHeight + 6
+               VALUE CellData
+               MAXLENGTH Width
 
-	If _HMG_SYSDATA [ 254 ] == .T.
+               IF VALTYPE ( AINPUTMASK ) == 'A'
+                  IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
+                     IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
+                        IF ! EMPTY ( AINPUTMASK [CellColIndex] )
+                           INPUTMASK AINPUTMASK [CellColIndex]
+                        ENDIF
+                     ENDIF
+                  ENDIF
+               ENDIF
 
-		_Alias := Alias()
-		_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-		If Select (_BrowseArea) == 0
-			Return
-		EndIf
-		Select &_BrowseArea
-		_RecNo := RecNo()
+            END TEXTBOX
 
-                _CurrentValue := _BrowseGetValue ( '' , '' , i )
+         ELSEIF ControlType == 'D'
 
-		If _RecNo != _CurrentValue
-			Go _CurrentValue
-		EndIf
+            DEFINE DATEPICKER Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
+               ROW 0
+               COL 0
+               HEIGHT This.CellHeight + 6
+               WIDTH This.CellWidth
+               VALUE CellData
+               UPDOWN .T.
+               SHOWNONE .T.
+            END DATEPICKER
 
-		if Select( _Alias ) != 0
-			Select &_Alias
-		Else
-			Select 0
-		Endif
+         ELSEIF ControlType == 'L'
 
-	EndIf
+            DEFINE COMBOBOX Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
+               ROW 0
+               COL 0
+               ITEMS { '.T.','.F.' }
+               WIDTH This.CellWidth
+               VALUE If ( CellData , 1 , 2 )
+            END COMBOBOX
 
-Return
-*------------------------------------------------------------------------------*
-Procedure _BrowseOnChange (i)
-*------------------------------------------------------------------------------*
+         ELSEIF ControlType == 'I'
 
-	_BrowseSync (i)
+            DEFINE TEXTBOX Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
+               ROW 0
+               COL 0
+               NUMERIC   .T.
+               WIDTH This.CellWidth
+               HEIGHT This.CellHeight + 6
+               VALUE CellData
 
-	_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+               IF VALTYPE ( AINPUTMASK ) == 'A'
+                  IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
+                     IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
+                        IF ! EMPTY ( AINPUTMASK [CellColIndex] )
+                           INPUTMASK AINPUTMASK [CellColIndex]
+                        ELSE
+                           MAXLENGTH Width
+                        ENDIF
+                     ELSE
+                        MAXLENGTH Width
+                     ENDIF
+                  ELSE
+                     MAXLENGTH Width
+                  ENDIF
+               ELSE
+                  MAXLENGTH Width
+               ENDIF
 
-Return
+               IF VALTYPE ( AFORMAT ) == 'A'
+                  IF HMG_LEN ( AFORMAT ) >= CellColIndex
+                     IF VALTYPE ( AFORMAT [CellColIndex] ) == 'C'
+                        IF ! EMPTY ( AFORMAT [CellColIndex] )
+                           FORMAT AFORMAT [CellColIndex]
+                        ENDIF
+                     ENDIF
+                  ENDIF
+               ENDIF
 
-*-----------------------------------------------------------------------------*
-Procedure _BrowseInPlaceAppend ( ControlName , ParentForm , z )
-*-----------------------------------------------------------------------------*
-Local i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap   , _DeltaScroll := { Nil , Nil , Nil , Nil } , _NewRec , aTemp
+            END TEXTBOX
 
-	If pcount() == 2
-		i := GetControlIndex ( ControlName , ParentForm )
-	Else
-		i := z
-	EndIf
+         ELSEIF ControlType == 'F'
 
-	_BrowseRecMap := _HMG_SYSDATA [ 32 ] [i] 
+            DEFINE TEXTBOX Control_1
+               FONTNAME BFN
+               FONTSIZE BFS
+               ROW 0
+               COL 0
+               NUMERIC   .T.
+               WIDTH This.CellWidth
+               HEIGHT This.CellHeight + 6
+               VALUE CellData
 
-	_Alias := Alias()
-	_BrowseArea := _HMG_SYSDATA [ 22 ] [i]
-	If Select (_BrowseArea) == 0
-		Return
-	EndIf
-	Select &_BrowseArea
-	_RecNo := RecNo()
-	Go Bottom
+               IF VALTYPE ( AINPUTMASK ) == 'A'
+                  IF HMG_LEN ( AINPUTMASK ) >= CellColIndex
+                     IF VALTYPE ( AINPUTMASK [CellColIndex] ) == 'C'
+                        IF ! EMPTY ( AINPUTMASK [CellColIndex] )
+                           INPUTMASK AINPUTMASK [CellColIndex]
+                        ELSE
+                           INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals )
+                        ENDIF
+                     ELSE
+                        INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals )
+                     ENDIF
+                  ELSE
+                     INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals )
+                  ENDIF
+               ELSE
+                  INPUTMASK REPLICATE ( '9', Width - Decimals - 1 ) + '.' + REPLICATE ( '9', Decimals )
+               ENDIF
 
-	_NewRec := RecCount() + 1
+               IF VALTYPE ( AFORMAT ) == 'A'
+                  IF HMG_LEN ( AFORMAT ) >= CellColIndex
+                     IF VALTYPE ( AFORMAT [CellColIndex] ) == 'C'
+                        IF ! EMPTY ( AFORMAT [CellColIndex] )
+                           FORMAT AFORMAT [CellColIndex]
+                        ENDIF
+                     ENDIF
+                  ENDIF
+               ENDIF
 
-	if ListView_GetItemCount(_HMG_SYSDATA [3][i] ) != 0
-		_BrowseVscrollUpdate( i )
-		Skip - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 2 
-		_BrowseUpdate(ControlName , ParentForm , i )
-	endif
+            END TEXTBOX
 
-	append blank
+         ENDIF
 
-	Go _RecNo
-	if Select( _Alias ) != 0
-		Select &_Alias
-	Else
-		Select 0
-	Endif
+      END WINDOW
 
-	aTemp := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
-	afill ( aTemp , '' )
-	aadd ( _HMG_SYSDATA [ 32 ] [i] , _NewRec )
+      ACTIVATE WINDOW _InPlaceEdit
 
-	AddListViewItems ( _HMG_SYSDATA [3][i] , aTemp , 0 )
+      _HMG_SYSDATA [ 109 ] := 0
 
-	ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN ( _HMG_SYSDATA [ 32 ] [i] ) )
+   ENDIF
 
-	_BrowseOnChange (i)
+   // Restore Original Record Pointer
+   Go BackRec
 
-	_HMG_SYSDATA [ 341 ] := 1
-	_HMG_SYSDATA [ 340 ] := 1
+   // Restore Original WorkArea
+   IF Select (BackArea) != 0
+      SELECT &BackArea
+   ELSE
+      SELECT 0
+   ENDIF
 
-Return
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
-Procedure _BrowseVscrollUpdate (i)
-*------------------------------------------------------------------------------*
-Local ActualRecord , RecordCount , KeyCount 
+PROCEDURE _InPlaceEditOk ( i , Fieldname , r , ControlType , aValid , CellColIndex , sFieldName , AreaName , aValidMessages , lock , aInputItems )
 
-	// If vertical scrollbar is used it must be updated
-	If _HMG_SYSDATA [  5 ] [i] != 0
+   LOCAL b , Result , mVar , TmpName
 
-		KeyCount := OrdKeyCount()
-		If KeyCount > 0
-			ActualRecord := OrdKeyNo()
-			RecordCount := KeyCount
-		Else
-			ActualRecord := RecNo()
-			RecordCount := RecCount()
-		EndIf
+   IF ControlType == 'X' .Or. ControlType == 'L'
 
-		_HMG_SYSDATA [ 37 ] [i] := RecordCount
+      IF GetDroppedState ( GetControlHandle ('Control_1' , '_InPlaceEdit' ) ) == 1
+         SendMessage ( GetControlHandle ('Control_1' , '_InPlaceEdit' ) , CB_SHOWDROPDOWN , 0 , 0 )
+         InsertReturn()
 
-		If RecordCount < 100
-			SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , RecordCount , .t. )
-			SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , ActualRecord , .T. )
-		Else
-			SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , 100 , .t. )
-			SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , Int ( ActualRecord * 100 / RecordCount ) , .T. )
-		EndIf
+         RETURN
+      ENDIF
 
-	EndIf
+   ENDIF
 
-Return
+   IF ValType ( aValid ) == 'A'
+      IF HMG_LEN ( aValid ) >= CellColIndex
+         IF aValid [ CellColIndex ] != Nil
+            Result := _GetValue ( 'Control_1' , '_InPlaceEdit' )
 
-*------------------------------------------------------------------------------*
-Procedure _BrowseVscrollFastUpdate ( i , d )
-*------------------------------------------------------------------------------*
-Local ActualRecord , RecordCount
+            IF ControlType == 'L'
+               Result := if ( Result == 0 .or. Result == 2 , .F. , .T. )
+            ENDIF
 
-	// If vertical scrollbar is used it must be updated
-	If _HMG_SYSDATA [  5 ] [i] != 0
+            TmpName := 'MemVar' + AreaName + sFieldname
+            mVar := TmpName
+            &mVar := Result
 
-		RecordCount := _HMG_SYSDATA [ 37 ] [i]
+            _HMG_SYSDATA [ 232 ] := 'BROWSE_VALID'
 
-                If ValType(RecordCount) <> 'N'
-			Return
-		EndIf
+            b := Eval ( aValid [ CellColIndex ] )
 
-		If RecordCount == 0
-			Return
-		EndIf
+            _HMG_SYSDATA [ 232 ] := ''
 
-		If RecordCount < 100
-	                ActualRecord := GetScrollPos(_HMG_SYSDATA [  5 ] [i],2)
-	                ActualRecord := ActualRecord + d
-			SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , RecordCount , .t. )
-			SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , ActualRecord , .T. )
-		EndIf
+            IF b == .f.
 
-	EndIf
+               IF ValType ( aValidMessages ) == 'A'
 
-Return
+                  IF HMG_LEN ( aValidMessages ) >= CellColIndex
 
-*------------------------------------------------------------------------------*
-Function _SetBrowseAllowEdit ( cControlName , cWindowName , lValue )
-*------------------------------------------------------------------------------*
-Local i
+                     IF aValidMessages [CellColIndex] != Nil
 
-	If ValType ( lValue ) <> 'L'
-		MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
-	Endif
-	
-	i := GetControlIndex ( cControlName , cWindowName )
+                        MsgExclamation ( aValidMessages [CellColIndex] )
 
-	_HMG_SYSDATA [ 39 ] [i] [6] := lValue
+                     ELSE
 
-Return Nil
+                        MsgExclamation (_HMG_SYSDATA [ 136 ][11])
 
-*------------------------------------------------------------------------------*
-Function _SetBrowseAllowAppend ( cControlName , cWindowName , lValue )	
-*------------------------------------------------------------------------------*
-Local i
+                     ENDIF
 
-	If ValType ( lValue ) <> 'L'
-		MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
-	Endif
-	
-	i := GetControlIndex ( cControlName , cWindowName )
+                  ELSE
 
-	_HMG_SYSDATA [ 39 ] [i] [2] := lValue
+                     MsgExclamation (_HMG_SYSDATA [ 136 ][11])
 
-Return Nil
+                  ENDIF
 
-*------------------------------------------------------------------------------*
-Function _SetBrowseAllowDelete ( cControlName , cWindowName , lValue )	
-*------------------------------------------------------------------------------*
-Local i
+               ELSE
 
-	If ValType ( lValue ) <> 'L'
-		MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
-	Endif
-	
-	i := GetControlIndex ( cControlName , cWindowName )
+                  MsgExclamation (_HMG_SYSDATA [ 136 ][11])
 
-	_HMG_SYSDATA [ 25 ] [i] := lValue
+               ENDIF
 
-Return Nil
+            ELSE
 
-*------------------------------------------------------------------------------*
-Function _SetBrowseInputItems ( cControlName , cWindowName , aValue ) 
-*------------------------------------------------------------------------------*
-Local i
-	If ValType ( aValue ) <> 'A'
-		MsgHMGError("Wrong Parameter Type (Array Required). Program terminated" )
-	Endif
+               IF ControlType == 'L'
+                  r := if ( r == 0 .or. r == 2 , .F. , .T. )
 
-	i := GetControlIndex ( cControlName , cWindowName )
+               ELSEIF ControlType == 'X'
 
-	_HMG_SYSDATA [ 39 ] [ i ] [ 7 ] := aValue
+                  r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
 
-Return Nil
+               ENDIF
 
-*------------------------------------------------------------------------------*
-Function _SetBrowseDisplayItems ( cControlName , cWindowName , aValue ) 
-*------------------------------------------------------------------------------*
-Local i
-	If ValType ( aValue ) <> 'A'
-		MsgHMGError("Wrong Parameter Type (Array Required). Program terminated" )
-	Endif
+               IF lock == .t.
+                  REPLACE &FieldName With r
+                  UNLOCK
 
-	i := GetControlIndex ( cControlName , cWindowName )
+                  _BrowseRefresh ( '' , '' , i )
 
-	_HMG_SYSDATA [ 39 ] [ i ] [ 8 ] := aValue
+                  _InPlaceEdit.Release
+               ELSE
+                  REPLACE &FieldName With r
 
-Return Nil
+                  _BrowseRefresh ( '' , '' , i )
 
-*------------------------------------------------------------------------------*
-Function _GetBrowseInputItems ( cControlName , cWindowName )	
-*------------------------------------------------------------------------------*
-Local i
+                  _InPlaceEdit.Release
+               ENDIF
 
-	i := GetControlIndex ( cControlName , cWindowName )
+            ENDIF
 
-Return _HMG_SYSDATA [ 39 ] [i] [7] 
+         ELSE
 
-*------------------------------------------------------------------------------*
-Function _GetBrowseDisplayItems ( cControlName , cWindowName )	
-*------------------------------------------------------------------------------*
-Local i
+            IF ControlType == 'L'
 
-	i := GetControlIndex ( cControlName , cWindowName )
+               r := if ( r == 0 .or. r == 2 , .F. , .T. )
 
-Return _HMG_SYSDATA [ 39 ] [i] [8] 
+            ELSEIF ControlType == 'X'
 
-*------------------------------------------------------------------------------*
-Function _GetBrowseAllowEdit ( cControlName , cWindowName )	
-*------------------------------------------------------------------------------*
-Local i
+               r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
 
-	i := GetControlIndex ( cControlName , cWindowName )
+            ENDIF
 
-Return _HMG_SYSDATA [ 39 ] [i] [6] 
+            IF lock == .t.
 
-*------------------------------------------------------------------------------*
-Function _GetBrowseAllowAppend ( cControlName , cWindowName , lValue )
-*------------------------------------------------------------------------------*
-Local i
+               REPLACE &FieldName With r
+               UNLOCK
 
-lValue := NIL   // ADD
+               _BrowseRefresh ( '' , '' , i )
 
-	i := GetControlIndex ( cControlName , cWindowName )
+               _InPlaceEdit.Release
 
-Return _HMG_SYSDATA [ 39 ] [i] [2] 
+            ELSE
 
-*------------------------------------------------------------------------------*
-Function _GetBrowseAllowDelete ( cControlName , cWindowName , lValue )
-*------------------------------------------------------------------------------*
-Local i
+               REPLACE &FieldName With r
 
-lValue := NIL   // ADD
+               _BrowseRefresh ( '' , '' , i )
 
-	i := GetControlIndex ( cControlName , cWindowName )
+               _InPlaceEdit.Release
 
-Return _HMG_SYSDATA [ 25 ] [i]
+            ENDIF
 
-*------------------------------------------------------------------------------*
-Function _BrowseCharMaskDisplay ( cText , cMask )
-*------------------------------------------------------------------------------*
-Local i
-Local Out
-Local m
-Local t
+         ENDIF
 
-	Out := ''
+      ENDIF
 
-	For i := 1 To HMG_LEN ( cMask )
+   ELSE
 
-		t := HB_USUBSTR ( cText , i , 1 )	
-		m := HB_USUBSTR ( cMask , i , 1 )
+      IF ControlType == 'L'
 
-		if	m = '!'
+         r := if ( r == 0 .or. r == 2 , .F. , .T. )
 
-			Out := Out + HMG_UPPER (t)
+      ELSEIF ControlType == 'X'
 
-		elseif	m = 'A' .or. m = '9'
+         r := aInputItems [ CellColIndex ] [ r ] [ 2 ]
 
-			Out := Out + t
+      ENDIF
 
-		else
+      IF lock == .t.
 
-			Out := Out + m
+         REPLACE &FieldName With r
+         UNLOCK
 
-		endif
+         _BrowseRefresh ( '' , '' , i )
 
-	Next i
+         _InPlaceEdit.Release
 
-Return Out
+      ELSE
 
+         REPLACE &FieldName With r
 
-#endif
+         _BrowseRefresh ( '' , '' , i )
 
+         _InPlaceEdit.Release
+
+      ENDIF
+
+   ENDIF
+
+   _HMG_SYSDATA [ 256 ] := .F.
+
+   setfocus ( _HMG_SYSDATA [3] [i] )
+
+   RETURN
+
+PROCEDURE ProcessInPlaceKbdEdit(i)
+
+   LOCAL r
+   LOCAL IPE_MAXCOL
+   LOCAL TmpRow
+   LOCAL xs,xd
+
+   IF _HMG_SYSDATA [ 15 ] [ i ] == .F.
+
+      RETURN
+   ENDIF
+
+   IF LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) == 0
+
+      RETURN
+   ENDIF
+
+   IPE_MAXCOL := HMG_LEN ( _HMG_SYSDATA [ 31 ] [i] )
+
+   DO WHILE .T.
+
+      TmpRow := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] )
+
+      IF TmpRow != _HMG_SYSDATA [ 341 ]
+
+         _HMG_SYSDATA [ 341 ] := TmpRow
+
+         IF HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0
+            _HMG_SYSDATA [ 340 ] := 2
+         ELSE
+            _HMG_SYSDATA [ 340 ] := 1
+         ENDIF
+
+      ENDIF
+
+      _HMG_SYSDATA [ 195 ] := _HMG_SYSDATA [ 341 ]
+      _HMG_SYSDATA [ 196 ] := _HMG_SYSDATA [ 340 ]
+
+      IF _HMG_SYSDATA [ 340 ] == 1
+         r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 )
+      ELSE
+         r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 , _HMG_SYSDATA [ 340 ] - 1 )
+      ENDIF
+
+      xs :=   ( ( _HMG_SYSDATA [ 19 ] [i] + r [2] ) +( r[3] ))  -  ( _HMG_SYSDATA [ 19 ] [i] + _HMG_SYSDATA [ 20 ] [i] )
+
+      xd := 20
+
+      IF xs > -xd
+         ListView_Scroll( _HMG_SYSDATA [3] [i] ,   xs + xd , 0 )
+      ELSE
+
+         IF r [2] < 0
+            ListView_Scroll( _HMG_SYSDATA [3] [i] , r[2]   , 0 )
+         ENDIF
+
+      ENDIF
+
+      IF _HMG_SYSDATA [ 340 ] == 1
+         r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 )
+      ELSE
+         r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 341 ] - 1 , _HMG_SYSDATA [ 340 ] - 1 )
+      ENDIF
+
+      _HMG_SYSDATA [ 197 ] := _HMG_SYSDATA [ 18 ] [i] + r [1]
+      _HMG_SYSDATA [ 198 ] := _HMG_SYSDATA [ 19 ] [i] + r [2]
+      _HMG_SYSDATA [ 199 ] := r[3]
+      _HMG_SYSDATA [ 200 ] := r[4]
+      _BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .f. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
+      _HMG_SYSDATA [ 203 ] := 0
+      _HMG_SYSDATA [ 231 ] := ''
+
+      _HMG_SYSDATA [ 195 ] := 0
+      _HMG_SYSDATA [ 196 ] := 0
+      _HMG_SYSDATA [ 197 ] := 0
+      _HMG_SYSDATA [ 198 ] := 0
+      _HMG_SYSDATA [ 199 ] := 0
+      _HMG_SYSDATA [ 200 ] := 0
+
+      IF _HMG_SYSDATA [ 256 ] == .T.
+
+         IF _HMG_SYSDATA [ 340 ] == IPE_MAXCOL
+
+            IF HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0
+               _HMG_SYSDATA [ 340 ] := 2
+            ELSE
+               _HMG_SYSDATA [ 340 ] := 1
+            ENDIF
+
+            ListView_Scroll( _HMG_SYSDATA [3] [i] ,   -10000  , 0 )
+         ENDIF
+
+         EXIT
+
+      ELSE
+
+         _HMG_SYSDATA [ 340 ]++
+
+         IF _HMG_SYSDATA [ 340 ] > IPE_MAXCOL
+
+            IF HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0
+               _HMG_SYSDATA [ 340 ] := 2
+            ELSE
+               _HMG_SYSDATA [ 340 ] := 1
+            ENDIF
+
+            ListView_Scroll( _HMG_SYSDATA [3] [i] ,   -10000  , 0 )
+            EXIT
+         ENDIF
+
+      ENDIF
+
+   ENDDO
+
+   RETURN
+
+PROCEDURE _BrowseSync (i)
+
+   LOCAL _Alias
+   LOCAL _BrowseArea
+   LOCAL _RecNo
+   LOCAL _CurrentValue
+
+   IF _HMG_SYSDATA [ 254 ] == .T.
+
+      _Alias := Alias()
+      _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+      IF Select (_BrowseArea) == 0
+
+         RETURN
+      ENDIF
+      SELECT &_BrowseArea
+      _RecNo := RecNo()
+
+      _CurrentValue := _BrowseGetValue ( '' , '' , i )
+
+      IF _RecNo != _CurrentValue
+         Go _CurrentValue
+      ENDIF
+
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+PROCEDURE _BrowseOnChange (i)
+
+   _BrowseSync (i)
+
+   _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+
+   RETURN
+
+PROCEDURE _BrowseInPlaceAppend ( ControlName , ParentForm , z )
+
+   LOCAL i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap   , _DeltaScroll := { Nil , Nil , Nil , Nil } , _NewRec , aTemp
+
+   IF pcount() == 2
+      i := GetControlIndex ( ControlName , ParentForm )
+   ELSE
+      i := z
+   ENDIF
+
+   _BrowseRecMap := _HMG_SYSDATA [ 32 ] [i]
+
+   _Alias := Alias()
+   _BrowseArea := _HMG_SYSDATA [ 22 ] [i]
+   IF Select (_BrowseArea) == 0
+
+      RETURN
+   ENDIF
+   SELECT &_BrowseArea
+   _RecNo := RecNo()
+   Go Bottom
+
+   _NewRec := RecCount() + 1
+
+   IF ListView_GetItemCount(_HMG_SYSDATA [3][i] ) != 0
+      _BrowseVscrollUpdate( i )
+      SKIP - LISTVIEWGETCOUNTPERPAGE ( _HMG_SYSDATA [3][i] ) + 2
+      _BrowseUpdate(ControlName , ParentForm , i )
+   ENDIF
+
+   APPEND BLANK
+
+   Go _RecNo
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
+
+   aTemp := array ( HMG_LEN (_HMG_SYSDATA [ 31 ] [i]) )
+   afill ( aTemp , '' )
+   aadd ( _HMG_SYSDATA [ 32 ] [i] , _NewRec )
+
+   AddListViewItems ( _HMG_SYSDATA [3][i] , aTemp , 0 )
+
+   ListView_SetCursel ( _HMG_SYSDATA [3] [i] , HMG_LEN ( _HMG_SYSDATA [ 32 ] [i] ) )
+
+   _BrowseOnChange (i)
+
+   _HMG_SYSDATA [ 341 ] := 1
+   _HMG_SYSDATA [ 340 ] := 1
+
+   RETURN
+
+PROCEDURE _BrowseVscrollUpdate (i)
+
+   LOCAL ActualRecord , RecordCount , KeyCount
+
+   // If vertical scrollbar is used it must be updated
+   IF _HMG_SYSDATA [  5 ] [i] != 0
+
+      KeyCount := OrdKeyCount()
+      IF KeyCount > 0
+         ActualRecord := OrdKeyNo()
+         RecordCount := KeyCount
+      ELSE
+         ActualRecord := RecNo()
+         RecordCount := RecCount()
+      ENDIF
+
+      _HMG_SYSDATA [ 37 ] [i] := RecordCount
+
+      IF RecordCount < 100
+         SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , RecordCount , .t. )
+         SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , ActualRecord , .T. )
+      ELSE
+         SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , 100 , .t. )
+         SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , Int ( ActualRecord * 100 / RecordCount ) , .T. )
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+PROCEDURE _BrowseVscrollFastUpdate ( i , d )
+
+   LOCAL ActualRecord , RecordCount
+
+   // If vertical scrollbar is used it must be updated
+   IF _HMG_SYSDATA [  5 ] [i] != 0
+
+      RecordCount := _HMG_SYSDATA [ 37 ] [i]
+
+      IF ValType(RecordCount) <> 'N'
+
+         RETURN
+      ENDIF
+
+      IF RecordCount == 0
+
+         RETURN
+      ENDIF
+
+      IF RecordCount < 100
+         ActualRecord := GetScrollPos(_HMG_SYSDATA [  5 ] [i],2)
+         ActualRecord := ActualRecord + d
+         SetScrollRange (_HMG_SYSDATA [  5 ] [i] , 2 , 1 , RecordCount , .t. )
+         SetScrollPos ( _HMG_SYSDATA [  5 ] [i] , 2 , ActualRecord , .T. )
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+FUNCTION _SetBrowseAllowEdit ( cControlName , cWindowName , lValue )
+
+   LOCAL i
+
+   IF ValType ( lValue ) <> 'L'
+      MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
+   ENDIF
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   _HMG_SYSDATA [ 39 ] [i] [6] := lValue
+
+   RETURN NIL
+
+FUNCTION _SetBrowseAllowAppend ( cControlName , cWindowName , lValue )
+
+   LOCAL i
+
+   IF ValType ( lValue ) <> 'L'
+      MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
+   ENDIF
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   _HMG_SYSDATA [ 39 ] [i] [2] := lValue
+
+   RETURN NIL
+
+FUNCTION _SetBrowseAllowDelete ( cControlName , cWindowName , lValue )
+
+   LOCAL i
+
+   IF ValType ( lValue ) <> 'L'
+      MsgHMGError("Wrong Parameter Type (Logical Required). Program terminated" )
+   ENDIF
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   _HMG_SYSDATA [ 25 ] [i] := lValue
+
+   RETURN NIL
+
+FUNCTION _SetBrowseInputItems ( cControlName , cWindowName , aValue )
+
+   LOCAL i
+
+   IF ValType ( aValue ) <> 'A'
+      MsgHMGError("Wrong Parameter Type (Array Required). Program terminated" )
+   ENDIF
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   _HMG_SYSDATA [ 39 ] [ i ] [ 7 ] := aValue
+
+   RETURN NIL
+
+FUNCTION _SetBrowseDisplayItems ( cControlName , cWindowName , aValue )
+
+   LOCAL i
+
+   IF ValType ( aValue ) <> 'A'
+      MsgHMGError("Wrong Parameter Type (Array Required). Program terminated" )
+   ENDIF
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   _HMG_SYSDATA [ 39 ] [ i ] [ 8 ] := aValue
+
+   RETURN NIL
+
+FUNCTION _GetBrowseInputItems ( cControlName , cWindowName )
+
+   LOCAL i
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   RETURN _HMG_SYSDATA [ 39 ] [i] [7]
+
+FUNCTION _GetBrowseDisplayItems ( cControlName , cWindowName )
+
+   LOCAL i
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   RETURN _HMG_SYSDATA [ 39 ] [i] [8]
+
+FUNCTION _GetBrowseAllowEdit ( cControlName , cWindowName )
+
+   LOCAL i
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   RETURN _HMG_SYSDATA [ 39 ] [i] [6]
+
+FUNCTION _GetBrowseAllowAppend ( cControlName , cWindowName , lValue )
+
+   LOCAL i
+
+   lValue := NIL   // ADD
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   RETURN _HMG_SYSDATA [ 39 ] [i] [2]
+
+FUNCTION _GetBrowseAllowDelete ( cControlName , cWindowName , lValue )
+
+   LOCAL i
+
+   lValue := NIL   // ADD
+
+   i := GetControlIndex ( cControlName , cWindowName )
+
+   RETURN _HMG_SYSDATA [ 25 ] [i]
+
+FUNCTION _BrowseCharMaskDisplay ( cText , cMask )
+
+   LOCAL i
+   LOCAL Out
+   LOCAL m
+   LOCAL t
+
+   Out := ''
+
+   FOR i := 1 To HMG_LEN ( cMask )
+
+      t := HB_USUBSTR ( cText , i , 1 )
+      m := HB_USUBSTR ( cMask , i , 1 )
+
+      IF   m = '!'
+
+         Out := Out + HMG_UPPER (t)
+
+      ELSEIF   m = 'A' .or. m = '9'
+
+         Out := Out + t
+
+      ELSE
+
+         Out := Out + m
+
+      ENDIF
+
+   NEXT i
+
+   RETURN Out
+
+   #endif
 

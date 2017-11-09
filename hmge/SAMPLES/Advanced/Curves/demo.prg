@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -17,60 +15,57 @@ ANNOUNCE RDDSYS
 
 STATIC lBusy := .F.
 
-//////////////////////////////////////////////////////////////////////////////
 PROCEDURE Main()
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 800 HEIGHT 600 ;
-      TITLE "Draw Curves - Contributed by Grigory Filatov" ;
-      MAIN ;
-      ICON "demo.ico" ;
-      NOMAXIMIZE NOMINIMIZE NOSIZE ;
-      ON INIT OnInit() ;
-      ON PAINT DrawCurves() ;
-      ON GOTFOCUS RefreshPaint() ;
-      BACKCOLOR WHITE ;
-      FONT "MS Sans Serif" SIZE 8
+         AT 0, 0 ;
+         WIDTH 800 HEIGHT 600 ;
+         TITLE "Draw Curves - Contributed by Grigory Filatov" ;
+         MAIN ;
+         ICON "demo.ico" ;
+         NOMAXIMIZE NOMINIMIZE NOSIZE ;
+         ON INIT OnInit() ;
+         ON PAINT DrawCurves() ;
+         ON GOTFOCUS RefreshPaint() ;
+         BACKCOLOR WHITE ;
+         FONT "MS Sans Serif" SIZE 8
 
-   DEFINE MAIN MENU
-      DEFINE POPUP "Test"
-         MENUITEM "Do it!" ACTION RefreshPaint()
-         MENUITEM "Exit" ACTION ThisWindow.Release()
-      END POPUP
-   END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP "Test"
+            MENUITEM "Do it!" ACTION RefreshPaint()
+            MENUITEM "Exit" ACTION ThisWindow.Release()
+         END POPUP
+      END MENU
 
-   @ 10, Form_1.Width - 120 BUTTON Button_1 ;
-      CAPTION 'Close' ;
-      ACTION Form_1.Release
+      @ 10, Form_1.Width - 120 BUTTON Button_1 ;
+         CAPTION 'Close' ;
+         ACTION Form_1.Release
 
    END WINDOW
 
    CENTER   WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
 STATIC PROCEDURE OnInit
 
    Form_1 .Button_1. Setfocus()
 
    CLEAN MEMORY
 
-RETURN
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
 STATIC PROCEDURE RefreshPaint()
 
    lBusy := .F.
 
    ERASE WINDOW Form_1 /* RedrawWindow( _HMG_MainHandle ) */
 
-RETURN
+   RETURN
 
-#define PS_SOLID  0
-//////////////////////////////////////////////////////////////////////////////
+   #define PS_SOLID  0
+
 STATIC FUNCTION DrawCurves()
 
    STATIC nHeight, nWidth
@@ -104,21 +99,20 @@ STATIC FUNCTION DrawCurves()
          PolyBezier( hDC, cPoints, 4 )
          SelectObject( hDC, hOldPen )
 
-         DeleteObject( hPen )
+         DELETEObject( hPen )
       NEXT
 
-      EndPaint( hWnd, pPS )
+   EndPaint( hWnd, pPS )
 
-      lBusy := .T.
-   ENDIF
+   lBusy := .T.
+ENDIF
 
 RETURN NIL
 
-//////////////////////////////////////////////////////////////////////////////
 #ifdef __XHARBOUR__
 /*
- Declaration of DLLs using syntax in CallDll.Lib borrowed from HMG official
- Carlos Britos
+Declaration of DLLs using syntax in CallDll.Lib borrowed from HMG official
+Carlos Britos
 */
 
 DECLARE PolyBezier( hDC, Points, Amount ) IN GDI32.DLL
@@ -128,9 +122,10 @@ DECLARE CreatePen( Style, Width, Color ) IN GDI32.DLL
 #else
 
 DECLARE DLL_TYPE_LONG PolyBezier( DLL_TYPE_LONG hDC, DLL_TYPE_LPSTR Points, DLL_TYPE_LONG Amount ) ;
-      IN GDI32.DLL
+   IN GDI32.DLL
 
 DECLARE DLL_TYPE_LONG CreatePen( DLL_TYPE_LONG Style, DLL_TYPE_LONG Width, DLL_TYPE_LONG Color ) ;
-      IN GDI32.DLL
+   IN GDI32.DLL
 
 #endif
+

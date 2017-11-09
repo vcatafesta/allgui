@@ -1,10 +1,6 @@
-*
 * MINIGUI - HARBOUR - Win32
-* 
 * Based on a free source code for the Phantom Desktop Screen Saver
 * Copyright (c) 1996-2005 by Gregory Braun. All rights reserved.
-* 
-*------------------------------------------------------------------*
 * Translated for MiniGUI by Grigory Filatov <gfilatov@inbox.ru>
 
 ANNOUNCE RDDSYS
@@ -12,408 +8,404 @@ ANNOUNCE RDDSYS
 #define __SCRSAVERDATA__
 #include "minigui.ch"
 
-#define PROGRAM			"Phantom Desktop Screen Saver"
-#define VERSION			" v.1.01"
-#define COPYRIGHT		" 2003-2006 Grigory Filatov"
+#define PROGRAM         "Phantom Desktop Screen Saver"
+#define VERSION         " v.1.01"
+#define COPYRIGHT      " 2003-2006 Grigory Filatov"
 
-#define ICON_1			1001
+#define ICON_1         1001
 
-#define COLOR_DESKTOP		1
-#define CLR_HGRAY		{192, 192, 192}
+#define COLOR_DESKTOP      1
+#define CLR_HGRAY      {192, 192, 192}
 
-#define DISSOLVE_MIN		1
-#define DISSOLVE_MAX		100
-#define DISSOLVE_DEFAULT	75
+#define DISSOLVE_MIN      1
+#define DISSOLVE_MAX      100
+#define DISSOLVE_DEFAULT   75
 
-#define FADE_COUNT		15
-#define FADE_RATE		16
+#define FADE_COUNT      15
+#define FADE_RATE      16
 
-Static lInit := .T., lBusy := .F.
+STATIC lInit := .T., lBusy := .F.
 
-Memvar cIniFile
-Memvar nWidth, nHeight
-Memvar nCustom, nDisplay, nDissolve, nFade, ;
-	cPicture, nSpeed
-Memvar nBackground, ;
-	cWallpaper, ;
-	nStyle
-*--------------------------------------------------------*
-Procedure Main( cParameters )
-*--------------------------------------------------------*
-Local lTile := ( GetRegVar( , "Control Panel\Desktop", "TileWallpaper" ) == "1" )
+MEMVAR cIniFile
+MEMVAR nWidth, nHeight
+MEMVAR nCustom, nDisplay, nDissolve, nFade, ;
+   cPicture, nSpeed
+MEMVAR nBackground, ;
+   cWallpaper, ;
+   nStyle
 
-	PUBLIC cIniFile := GetWindowsFolder() + "\control.ini"
+PROCEDURE Main( cParameters )
 
-	PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
-	PRIVATE nCustom := 0, nDisplay := 0, nDissolve := 1, nFade := 0, ;
-		cPicture := "", nSpeed := DISSOLVE_DEFAULT
-	PRIVATE nBackground := GetSysColor( COLOR_DESKTOP ), ;
-		cWallpaper := GetRegVar( , "Control Panel\Desktop", "Wallpaper" ), ;
-		nStyle := Val( GetRegVar( , "Control Panel\Desktop", "WallpaperStyle" ) )
+   LOCAL lTile := ( GetRegVar( , "Control Panel\Desktop", "TileWallpaper" ) == "1" )
 
-	nStyle := IF( lTile, 1, nStyle )
+   PUBLIC cIniFile := GetWindowsFolder() + "\control.ini"
 
-	BEGIN INI FILE cIniFile
+   PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
+   PRIVATE nCustom := 0, nDisplay := 0, nDissolve := 1, nFade := 0, ;
+      cPicture := "", nSpeed := DISSOLVE_DEFAULT
+   PRIVATE nBackground := GetSysColor( COLOR_DESKTOP ), ;
+      cWallpaper := GetRegVar( , "Control Panel\Desktop", "Wallpaper" ), ;
+      nStyle := Val( GetRegVar( , "Control Panel\Desktop", "WallpaperStyle" ) )
 
-		GET nCustom SECTION "Screen Saver.Phantom Desktop" ENTRY "Custom" DEFAULT nCustom
+   nStyle := IF( lTile, 1, nStyle )
 
-		GET nDisplay SECTION "Screen Saver.Phantom Desktop" ENTRY "Display" DEFAULT nDisplay
+   BEGIN INI FILE cIniFile
 
-		GET nDissolve SECTION "Screen Saver.Phantom Desktop" ENTRY "Dissolve" DEFAULT nDissolve
+      GET nCustom SECTION "Screen Saver.Phantom Desktop" ENTRY "Custom" DEFAULT nCustom
 
-		GET nFade SECTION "Screen Saver.Phantom Desktop" ENTRY "Fade" DEFAULT nFade
+      GET nDisplay SECTION "Screen Saver.Phantom Desktop" ENTRY "Display" DEFAULT nDisplay
 
-		GET cPicture SECTION "Screen Saver.Phantom Desktop" ENTRY "Image" DEFAULT cPicture
+      GET nDissolve SECTION "Screen Saver.Phantom Desktop" ENTRY "Dissolve" DEFAULT nDissolve
 
-		GET nSpeed SECTION "Screen Saver.Phantom Desktop" ENTRY "Speed" DEFAULT nSpeed
+      GET nFade SECTION "Screen Saver.Phantom Desktop" ENTRY "Fade" DEFAULT nFade
 
-	END INI
+      GET cPicture SECTION "Screen Saver.Phantom Desktop" ENTRY "Image" DEFAULT cPicture
 
-	IF nSpeed < DISSOLVE_MIN .OR. nSpeed > DISSOLVE_MAX
-		nSpeed := DISSOLVE_DEFAULT
-	ENDIF
+      GET nSpeed SECTION "Screen Saver.Phantom Desktop" ENTRY "Speed" DEFAULT nSpeed
 
-	IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
-		LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
-		LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
+   END INI
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			NOSHOW
-	ELSE
+   IF nSpeed < DISSOLVE_MIN .OR. nSpeed > DISSOLVE_MAX
+      nSpeed := DISSOLVE_DEFAULT
+   ENDIF
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			ON PAINT DoPhantom() ;
-			INTERVAL .05 ;
-			BACKCOLOR BLACK
-	ENDIF
+   IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
+         LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
+         LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
 
-	INSTALL SCREENSAVER TO FILE PhantomDesktop.scr
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         NOSHOW
+   ELSE
 
-	CONFIGURE SCREENSAVER ConfigureSaver()
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         ON PAINT DoPhantom() ;
+         INTERVAL .05 ;
+         BACKCOLOR BLACK
+   ENDIF
 
-	ACTIVATE SCREENSAVER ;
-		WINDOW Form_SSaver ;
-		PARAMETERS cParameters
+   INSTALL SCREENSAVER TO FILE PhantomDesktop.scr
 
-Return
+   CONFIGURE SCREENSAVER ConfigureSaver()
 
-*--------------------------------------------------------*
-Procedure DoPhantom()
-*--------------------------------------------------------*
-  local hDC, hOld, hbrush, aRect := {0, 0, 0, 0, _hmg_MainHandle}, i, x, y
+   ACTIVATE SCREENSAVER ;
+      WINDOW Form_SSaver ;
+      PARAMETERS cParameters
 
-  if lInit
+   RETURN
 
-	C_Seed()
+PROCEDURE DoPhantom()
 
-	hdc	:= GetDC( _hmg_MainHandle )
-	hbrush	:= CreateSolidBrush( GetRed(nBackground), GetGreen(nBackground), GetBlue(nBackground) )
-	hold	:= SelectObject ( hdc, hbrush )
+   LOCAL hDC, hOld, hbrush, aRect := {0, 0, 0, 0, _hmg_MainHandle}, i, x, y
 
-	C_GetClientRect( @aRect )
+   IF lInit
 
-	C_FillRect( hdc, aRect, hbrush )
+      C_Seed()
 
-	SelectObject( hdc, hold )
-	DeleteObject( hbrush )
+      hdc   := GetDC( _hmg_MainHandle )
+      hbrush   := CreateSolidBrush( GetRed(nBackground), GetGreen(nBackground), GetBlue(nBackground) )
+      hold   := SelectObject ( hdc, hbrush )
 
-	DrawPicture( hdc, IF(EMPTY( nCustom ), cWallpaper, cPicture), IF(EMPTY( nCustom ), nStyle, nDisplay) )
+      C_GetClientRect( @aRect )
 
-	ReleaseDC( _hmg_MainHandle, hdc )
+      C_FillRect( hdc, aRect, hbrush )
 
-	lInit := .F.
+      SelectObject( hdc, hold )
+      DELETEObject( hbrush )
 
-  endif
+      DrawPicture( hdc, IF(EMPTY( nCustom ), cWallpaper, cPicture), IF(EMPTY( nCustom ), nStyle, nDisplay) )
 
-  if lBusy
-	return
-  endif
+      ReleaseDC( _hmg_MainHandle, hdc )
 
-  IF !EMPTY(nDissolve)
+      lInit := .F.
 
-	lBusy := .T.
+   ENDIF
 
-	hdc := GetDC( _hmg_MainHandle )
+   IF lBusy
 
-	For i := 1 To IF(!EMPTY( nFade ), nSpeed * FADE_COUNT, nSpeed)
+      RETURN
+   ENDIF
 
-		x := C_Random( nWidth )
-		y := C_Random( nHeight )
+   IF !EMPTY(nDissolve)
 
-		if !EMPTY( nFade )
-			Fade( hdc, x, y, FADE_RATE )
-		else
-			SetPixel( hdc, x, y, 0 )
-		endif
+      lBusy := .T.
 
-	Next
+      hdc := GetDC( _hmg_MainHandle )
 
-	ReleaseDC( _hmg_MainHandle, hdc )
+      FOR i := 1 To IF(!EMPTY( nFade ), nSpeed * FADE_COUNT, nSpeed)
 
-	lBusy := .F.
+         x := C_Random( nWidth )
+         y := C_Random( nHeight )
 
-  ENDIF
+         IF !EMPTY( nFade )
+            Fade( hdc, x, y, FADE_RATE )
+         ELSE
+            SetPixel( hdc, x, y, 0 )
+         ENDIF
 
-Return
+      NEXT
 
-*--------------------------------------------------------*
-static Procedure Fade( hdc, x, y, nrate )
-*--------------------------------------------------------*
-Local nColor := GetPixel( hdc, x, y )
-Local nRed   := GetRed(nColor), ;
+      ReleaseDC( _hmg_MainHandle, hdc )
+
+      lBusy := .F.
+
+   ENDIF
+
+   RETURN
+
+STATIC PROCEDURE Fade( hdc, x, y, nrate )
+
+   LOCAL nColor := GetPixel( hdc, x, y )
+   LOCAL nRed   := GetRed(nColor), ;
       nGreen := GetGreen(nColor), ;
       nBlue  := GetBlue(nColor)
 
-    if EMPTY(nColor)
-	return
-    endif
+   IF EMPTY(nColor)
 
-    if (nred > nrate)
-        nred -= nrate
-    else
-        nred := 0
-    endif
+      RETURN
+   ENDIF
 
-    if (ngreen > nrate)
-        ngreen -= nrate
-    else
-        ngreen := 0
-    endif
+   IF (nred > nrate)
+      nred -= nrate
+   ELSE
+      nred := 0
+   ENDIF
 
-    if (nblue > nrate)
-        nblue -= nrate
-    else
-        nblue := 0
-    endif
+   IF (ngreen > nrate)
+      ngreen -= nrate
+   ELSE
+      ngreen := 0
+   ENDIF
 
-    nColor := RGB( nred, ngreen, nblue )
+   IF (nblue > nrate)
+      nblue -= nrate
+   ELSE
+      nblue := 0
+   ENDIF
 
-    SetPixel( hdc, x, y, nColor )
+   nColor := RGB( nred, ngreen, nblue )
 
-return
+   SetPixel( hdc, x, y, nColor )
 
-*--------------------------------------------------------*
-Procedure ConfigureSaver()
-*--------------------------------------------------------*
-Local cFile := "", aDisplay := { "Center", "Tile", "Stretch" }
+   RETURN
 
-	DEFINE WINDOW Form_Config ; 
-		AT 0,0 ; 
-		WIDTH 486 ;
-		HEIGHT 348 ;
-		TITLE LEFT(PROGRAM, 15) ; 
-		ICON ICON_1 ;
-		CHILD ;
-		NOMINIMIZE NOMAXIMIZE NOSIZE ;
-		ON INIT ShowCursor(.T.) ;
-		BACKCOLOR CLR_HGRAY ;
-		FONT 'MS Sans Serif' ; 
-		SIZE 9
+PROCEDURE ConfigureSaver()
 
-		@ 15,15 IMAGE Image_1 PICTURE "Wizard" ;
-			WIDTH 153 ;
-			HEIGHT 255
+   LOCAL cFile := "", aDisplay := { "Center", "Tile", "Stretch" }
 
-		@ 15,188 IMAGE Image_2 PICTURE "Display" ;
-			WIDTH 32 ;
-			HEIGHT 32
+   DEFINE WINDOW Form_Config ;
+         AT 0,0 ;
+         WIDTH 486 ;
+         HEIGHT 348 ;
+         TITLE LEFT(PROGRAM, 15) ;
+         ICON ICON_1 ;
+         CHILD ;
+         NOMINIMIZE NOMAXIMIZE NOSIZE ;
+         ON INIT ShowCursor(.T.) ;
+         BACKCOLOR CLR_HGRAY ;
+         FONT 'MS Sans Serif' ;
+         SIZE 9
 
-		@ 15,232 LABEL Label_1 ; 
-			VALUE 'Use the settings provided below to specify the speed at which the desktop image will dissolve.' ; 
-			WIDTH 230 ; 
-			HEIGHT 28 ;
-			BACKCOLOR CLR_HGRAY
+      @ 15,15 IMAGE Image_1 PICTURE "Wizard" ;
+         WIDTH 153 ;
+         HEIGHT 255
 
-		@ 46,236 CHECKBOX Check_1 ; 
-			CAPTION 'Dissolve to a &Black Background' ; 
-			WIDTH 180 ;
-			HEIGHT 21 ;
-			VALUE IF(EMPTY(nDissolve), .F., .T.) ;
-			BACKCOLOR CLR_HGRAY ;
-			ON CHANGE ( nDissolve := IF(Form_Config.Check_1.Value, 1, 0), ;
-				Form_Config.Check_2.Enabled := !EMPTY(nDissolve), ;
-				Form_Config.Label_3.Enabled := !EMPTY(nDissolve), ;
-				Form_Config.Label_4.Enabled := !EMPTY(nDissolve), ;
-				Form_Config.Slider_1.Enabled := !EMPTY(nDissolve) )
+      @ 15,188 IMAGE Image_2 PICTURE "Display" ;
+         WIDTH 32 ;
+         HEIGHT 32
 
-		@ 66,258 CHECKBOX Check_2 ; 
-			CAPTION '&Fade to Black' ; 
-			WIDTH 140 ;
-			HEIGHT 21 ;
-			VALUE IF(EMPTY(nFade), .F., .T.) ;
-			BACKCOLOR CLR_HGRAY ;
-			ON CHANGE ( nFade := IF(Form_Config.Check_2.Value, 1, 0) )
+      @ 15,232 LABEL Label_1 ;
+         VALUE 'Use the settings provided below to specify the speed at which the desktop image will dissolve.' ;
+         WIDTH 230 ;
+         HEIGHT 28 ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 120,188 LABEL Label_2 VALUE '&Speed' AUTOSIZE ;
-			BACKCOLOR CLR_HGRAY
+      @ 46,236 CHECKBOX Check_1 ;
+         CAPTION 'Dissolve to a &Black Background' ;
+         WIDTH 180 ;
+         HEIGHT 21 ;
+         VALUE IF(EMPTY(nDissolve), .F., .T.) ;
+         BACKCOLOR CLR_HGRAY ;
+         ON CHANGE ( nDissolve := IF(Form_Config.Check_1.Value, 1, 0), ;
+         Form_Config.Check_2.Enabled := !EMPTY(nDissolve), ;
+         Form_Config.Label_3.Enabled := !EMPTY(nDissolve), ;
+         Form_Config.Label_4.Enabled := !EMPTY(nDissolve), ;
+         Form_Config.Slider_1.Enabled := !EMPTY(nDissolve) )
 
-		@ 90,239 LABEL Label_3 VALUE '1' AUTOSIZE ;
-			BACKCOLOR CLR_HGRAY
+      @ 66,258 CHECKBOX Check_2 ;
+         CAPTION '&Fade to Black' ;
+         WIDTH 140 ;
+         HEIGHT 21 ;
+         VALUE IF(EMPTY(nFade), .F., .T.) ;
+         BACKCOLOR CLR_HGRAY ;
+         ON CHANGE ( nFade := IF(Form_Config.Check_2.Value, 1, 0) )
 
-		@ 90,408 LABEL Label_4 VALUE '100' AUTOSIZE ;
-			BACKCOLOR CLR_HGRAY
+      @ 120,188 LABEL Label_2 VALUE '&Speed' AUTOSIZE ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 108,240 IMAGE Image_3 PICTURE "Tick" ;
-			WIDTH 181 ;
-			HEIGHT 8
+      @ 90,239 LABEL Label_3 VALUE '1' AUTOSIZE ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 115,229 SLIDER Slider_1 ;
-			RANGE DISSOLVE_MIN, DISSOLVE_MAX ;
-			VALUE nSpeed ;
-			WIDTH 204 ;
-			HEIGHT 24 ;
-			NOTICKS ;
-			BACKCOLOR CLR_HGRAY ;
-			ON CHANGE ( nSpeed := Form_Config.Slider_1.Value ) TOP
+      @ 90,408 LABEL Label_4 VALUE '100' AUTOSIZE ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 156,188 IMAGE Image_4 PICTURE "Bitmap" ;
-			WIDTH 32 ;
-			HEIGHT 32
+      @ 108,240 IMAGE Image_3 PICTURE "Tick" ;
+         WIDTH 181 ;
+         HEIGHT 8
 
-		@ 156,232 LABEL Label_5 ; 
-			VALUE 'Use the settings provided below to specify a custom wallpaper image to be used instead of the default Windows desktop wallpaper.' ; 
-			WIDTH 230 ; 
-			HEIGHT 42 ;
-			BACKCOLOR CLR_HGRAY
+      @ 115,229 SLIDER Slider_1 ;
+         RANGE DISSOLVE_MIN, DISSOLVE_MAX ;
+         VALUE nSpeed ;
+         WIDTH 204 ;
+         HEIGHT 24 ;
+         NOTICKS ;
+         BACKCOLOR CLR_HGRAY ;
+         ON CHANGE ( nSpeed := Form_Config.Slider_1.Value ) TOP
 
-		@ 205,188 LABEL Label_6 VALUE '&Wallpaper' AUTOSIZE ;
-			BACKCOLOR CLR_HGRAY
+      @ 156,188 IMAGE Image_4 PICTURE "Bitmap" ;
+         WIDTH 32 ;
+         HEIGHT 32
 
-		@ 220, 188 TEXTBOX Textbox_1 ;
-			VALUE IF( EMPTY(nCustom), cWallpaper, cPicture ) ;
-			WIDTH 250 ;
-			HEIGHT 20 ;
-			ON CHANGE IF( EMPTY(nCustom), , cPicture := Form_Config.Textbox_1.Value )
+      @ 156,232 LABEL Label_5 ;
+         VALUE 'Use the settings provided below to specify a custom wallpaper image to be used instead of the default Windows desktop wallpaper.' ;
+         WIDTH 230 ;
+         HEIGHT 42 ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 220, 444 BUTTON Button_Select ;
-			CAPTION "..." ;
-			ACTION ( cFile := Getfile( { {"Bitmap Images", "*.bmp"}, {"All Files", "*.*"} }, ;
-				"Select a Bitmap Image", cFilePath(cPicture), .f., .t. ), IF( EMPTY(cFile), , Form_Config.Textbox_1.Value := cFile ) ) ;
-			WIDTH 18 HEIGHT 20
+      @ 205,188 LABEL Label_6 VALUE '&Wallpaper' AUTOSIZE ;
+         BACKCOLOR CLR_HGRAY
 
-		@ 249,188 CHECKBOX Check_3 ; 
-			CAPTION '&Use Custom Wallpaper' ; 
-			WIDTH 130 ;
-			HEIGHT 21 ;
-			VALUE IF( EMPTY(nCustom), .F., .T. ) ;
-			BACKCOLOR CLR_HGRAY ;
-			ON CHANGE ( nCustom := IF(Form_Config.Check_3.Value, 1, 0), ;
-				Form_Config.Textbox_1.Value := IF(EMPTY(nCustom), cWallpaper, cPicture), ;
-				Form_Config.Textbox_1.Enabled := !EMPTY(nCustom), ;
-				Form_Config.Button_Select.Enabled := !EMPTY(nCustom), ;
-				Form_Config.Combo_1.Value := IF(EMPTY(nCustom), nStyle, nDisplay) + 1, ;
-				Form_Config.Combo_1.Enabled := !EMPTY(nCustom) )
+      @ 220, 188 TEXTBOX Textbox_1 ;
+         VALUE IF( EMPTY(nCustom), cWallpaper, cPicture ) ;
+         WIDTH 250 ;
+         HEIGHT 20 ;
+         ON CHANGE IF( EMPTY(nCustom), , cPicture := Form_Config.Textbox_1.Value )
 
-		@ 253,332 LABEL Label_7 VALUE '&Display' AUTOSIZE ;
-			BACKCOLOR CLR_HGRAY
+      @ 220, 444 BUTTON Button_Select ;
+         CAPTION "..." ;
+         ACTION ( cFile := Getfile( { {"Bitmap Images", "*.bmp"}, {"All Files", "*.*"} }, ;
+         "Select a Bitmap Image", cFilePath(cPicture), .f., .t. ), IF( EMPTY(cFile), , Form_Config.Textbox_1.Value := cFile ) ) ;
+         WIDTH 18 HEIGHT 20
 
-		@ 250,374 COMBOBOX Combo_1 ;
-			WIDTH 64 HEIGHT 120 ;
-			ITEMS aDisplay VALUE IF( EMPTY(nCustom), nStyle, nDisplay ) + 1 ;
-			ON CHANGE IF( EMPTY(nCustom), , nDisplay := Form_Config.Combo_1.Value - 1 )
+      @ 249,188 CHECKBOX Check_3 ;
+         CAPTION '&Use Custom Wallpaper' ;
+         WIDTH 130 ;
+         HEIGHT 21 ;
+         VALUE IF( EMPTY(nCustom), .F., .T. ) ;
+         BACKCOLOR CLR_HGRAY ;
+         ON CHANGE ( nCustom := IF(Form_Config.Check_3.Value, 1, 0), ;
+         Form_Config.Textbox_1.Value := IF(EMPTY(nCustom), cWallpaper, cPicture), ;
+         Form_Config.Textbox_1.Enabled := !EMPTY(nCustom), ;
+         Form_Config.Button_Select.Enabled := !EMPTY(nCustom), ;
+         Form_Config.Combo_1.Value := IF(EMPTY(nCustom), nStyle, nDisplay) + 1, ;
+         Form_Config.Combo_1.Enabled := !EMPTY(nCustom) )
 
-		DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 94, 24 FLAT BOTTOM RIGHTTEXT
+      @ 253,332 LABEL Label_7 VALUE '&Display' AUTOSIZE ;
+         BACKCOLOR CLR_HGRAY
 
-			BUTTON Button_dummy1  ;
-				CAPTION ' ' ;
-				PICTURE 'Dummy' ;
-				ACTION _dummy()
+      @ 250,374 COMBOBOX Combo_1 ;
+         WIDTH 64 HEIGHT 120 ;
+         ITEMS aDisplay VALUE IF( EMPTY(nCustom), nStyle, nDisplay ) + 1 ;
+         ON CHANGE IF( EMPTY(nCustom), , nDisplay := Form_Config.Combo_1.Value - 1 )
 
-			BUTTON Button_dummy2  ;
-				CAPTION ' ' ;
-				PICTURE 'Dummy' ;
-				ACTION _dummy()
+      DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 94, 24 FLAT BOTTOM RIGHTTEXT
 
-			BUTTON Button_1  ;
-				CAPTION padl('A&bout', 10) ;
-				PICTURE 'About' ;
-				ACTION MsgAbout() SEPARATOR
+         BUTTON Button_dummy1  ;
+            CAPTION ' ' ;
+            PICTURE 'Dummy' ;
+            ACTION _dummy()
 
-			BUTTON Button_2 ;
-				CAPTION padl('&Save', 10) ;
-				PICTURE 'Save' ;
-				ACTION IF( SaveConfig(), ReleaseAllWindows(), Form_Config.Textbox_1.SetFocus )
+         BUTTON Button_dummy2  ;
+            CAPTION ' ' ;
+            PICTURE 'Dummy' ;
+            ACTION _dummy()
 
-			BUTTON Button_3 ;
-				CAPTION padl('C&ancel', 10) ;
-				PICTURE 'Cancel' ;
-				ACTION ReleaseAllWindows()
+         BUTTON Button_1  ;
+            CAPTION padl('A&bout', 10) ;
+            PICTURE 'About' ;
+            ACTION MsgAbout() SEPARATOR
 
-		END TOOLBAR
+         BUTTON Button_2 ;
+            CAPTION padl('&Save', 10) ;
+            PICTURE 'Save' ;
+            ACTION IF( SaveConfig(), ReleaseAllWindows(), Form_Config.Textbox_1.SetFocus )
 
-		Form_Config.Check_2.Enabled := !EMPTY(nDissolve)
-		Form_Config.Label_3.Enabled := !EMPTY(nDissolve)
-		Form_Config.Label_4.Enabled := !EMPTY(nDissolve)
-		Form_Config.Slider_1.Enabled := !EMPTY(nDissolve)
-		Form_Config.Textbox_1.Enabled := !EMPTY(nCustom)
-		Form_Config.Button_Select.Enabled := !EMPTY(nCustom)
-		Form_Config.Combo_1.Enabled := !EMPTY(nCustom)
+         BUTTON Button_3 ;
+            CAPTION padl('C&ancel', 10) ;
+            PICTURE 'Cancel' ;
+            ACTION ReleaseAllWindows()
 
-	END WINDOW
+      END TOOLBAR
 
-	CENTER WINDOW Form_Config
+      Form_Config.Check_2.Enabled := !EMPTY(nDissolve)
+      Form_Config.Label_3.Enabled := !EMPTY(nDissolve)
+      Form_Config.Label_4.Enabled := !EMPTY(nDissolve)
+      Form_Config.Slider_1.Enabled := !EMPTY(nDissolve)
+      Form_Config.Textbox_1.Enabled := !EMPTY(nCustom)
+      Form_Config.Button_Select.Enabled := !EMPTY(nCustom)
+      Form_Config.Combo_1.Enabled := !EMPTY(nCustom)
 
-	ACTIVATE WINDOW Form_Config, Form_SSaver
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_Config
 
-*--------------------------------------------------------*
-Function SaveConfig()
-*--------------------------------------------------------*
-Local lRet := .t.
+   ACTIVATE WINDOW Form_Config, Form_SSaver
 
-  IF !EMPTY(nCustom)
+   RETURN
 
-    IF EMPTY(cPicture)
+FUNCTION SaveConfig()
 
-	MsgStop("A Wallpaper image file is required, but not defined." + CRLF + CRLF + ;
-		"You have specified a custom wallpaper bitmap image." + CRLF + ;
-		"Please specify the wallpaper bitmap image file to be used.", "Alert")
+   LOCAL lRet := .t.
 
-	lRet := .f.
+   IF !EMPTY(nCustom)
 
-    ENDIF
+      IF EMPTY(cPicture)
 
-  ENDIF
+         MsgStop("A Wallpaper image file is required, but not defined." + CRLF + CRLF + ;
+            "You have specified a custom wallpaper bitmap image." + CRLF + ;
+            "Please specify the wallpaper bitmap image file to be used.", "Alert")
 
-  IF lRet
+         lRet := .f.
 
-    BEGIN INI FILE cIniFile
+      ENDIF
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Custom" TO nCustom
+   ENDIF
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Display" TO nDisplay
+   IF lRet
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Dissolve" TO nDissolve
+      BEGIN INI FILE cIniFile
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Fade" TO nFade
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Custom" TO nCustom
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Image" TO cPicture
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Display" TO nDisplay
 
-	SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Speed" TO nSpeed
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Dissolve" TO nDissolve
 
-    END INI
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Fade" TO nFade
 
-  ENDIF
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Image" TO cPicture
 
-Return lRet
+         SET SECTION "Screen Saver.Phantom Desktop" ENTRY "Speed" TO nSpeed
 
-*--------------------------------------------------------*
-Function MsgAbout()
-*--------------------------------------------------------*
-return MsgInfo( PROGRAM + VERSION + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	padc("eMail: gfilatov@inbox.ru", 40) + CRLF + CRLF + ;
-	padc("This Screen Saver is Freeware!", 34) + CRLF + ;
-	padc("Copying is allowed!", 38), "About", ICON_1, .f. )
+      END INI
 
-*--------------------------------------------------------*
-Static Function GetRegVar(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+   ENDIF
+
+   RETURN lRet
+
+FUNCTION MsgAbout()
+
+   RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      padc("eMail: gfilatov@inbox.ru", 40) + CRLF + CRLF + ;
+      padc("This Screen Saver is Freeware!", 34) + CRLF + ;
+      padc("Copying is allowed!", 38), "About", ICON_1, .f. )
+
+STATIC FUNCTION GetRegVar(nKey, cRegKey, cSubKey, uValue)
+
    LOCAL oReg, cValue
 
    DEFAULT nKey := HKEY_CURRENT_USER
@@ -423,8 +415,7 @@ Static Function GetRegVar(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
-
+   RETURN cValue
 
 #pragma BEGINDUMP
 
@@ -444,6 +435,7 @@ RETURN cValue
 
 extern int far Random (int limit)
 {
+
     return (rand () % limit);
 }
 
@@ -499,7 +491,7 @@ HB_FUNC( SETPIXEL )
 HB_FUNC( GETPIXEL )
 {
   hb_retnl( (ULONG) GetPixel( (HDC) hb_parnl( 1 ), hb_parni( 2 ), hb_parni( 3 ) ) ) ;
-} 
+}
 
 #define NIL                        (0)  // Nothing...
 //  Drawing styles
@@ -509,13 +501,13 @@ HB_FUNC( GETPIXEL )
 #define STRETCH                     2
 
 HB_FUNC ( DRAWPICTURE )
-{    
+{
     HDC        dc = ( HDC ) hb_parnl( 1 );
     HANDLE     picture;
     BITMAP     bitmap;
     HDC        bits;
     HANDLE     old;
-    
+
     POINT      size;
     POINT      origin = { NIL,NIL };
 
@@ -540,9 +532,9 @@ HB_FUNC ( DRAWPICTURE )
         DeleteDC (bits);
         hb_retl (FALSE);
         }
-    
+
     SetMapMode (bits,GetMapMode (dc));
-    
+
     if (!GetObject (picture,sizeof (BITMAP), (LPSTR) &bitmap)) {
         SelectObject (bits,old);
         DeleteObject (picture);
@@ -553,7 +545,7 @@ HB_FUNC ( DRAWPICTURE )
     size.x = bitmap.bmWidth;
     size.y = bitmap.bmHeight;
     DPtoLP (dc,&size,1);
-    
+
     origin.x = NIL;
     origin.y = NIL;
     DPtoLP (bits,&origin,1);
@@ -584,7 +576,7 @@ HB_FUNC ( DRAWPICTURE )
 
                      box.left = col * size.x;
                      box.top = row * size.y;
-    
+
                      BitBlt (dc,
                              box.left,
                              box.top,
@@ -614,7 +606,7 @@ HB_FUNC ( DRAWPICTURE )
               break;
               }
 
-    SelectObject (bits,old);    
+    SelectObject (bits,old);
     DeleteDC     (bits);
     DeleteObject (picture);
 
@@ -622,3 +614,4 @@ HB_FUNC ( DRAWPICTURE )
 }
 
 #pragma ENDDUMP
+

@@ -1,15 +1,13 @@
 /*
- * Ejemplo Textbox n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestro cómo autocompletar un TextBox con
- * la cláusula DATE, utilizando la cláusula DEFAULTYEAR.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Textbox n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestro cómo autocompletar un TextBox con
+* la cláusula DATE, utilizando la cláusula DEFAULTYEAR.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -22,10 +20,10 @@ FUNCTION Main
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Win_1 OBJ oWnd ;
-      AT 0,0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE 'OOHG - Control Textbox con Autocompletado de Fechas'
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'OOHG - Control Textbox con Autocompletado de Fechas'
 
       ON KEY ESCAPE ACTION oWnd:Release()
 
@@ -57,8 +55,9 @@ FUNCTION Main
    oWnd:Center()
    oWnd:Activate()
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

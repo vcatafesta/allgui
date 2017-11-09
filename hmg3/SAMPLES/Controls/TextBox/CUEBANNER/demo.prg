@@ -1,81 +1,83 @@
 /* SetCueBanner Demo2.prg which works in ANSI and UNICODE
-   
-     Author: Carlos Britos
-Contributor: Pablo César
-   
-  Important: SetCueBanner() does not show aAnything in Win XP (any Service Pack).
-             On some configurations of WinXP, there is a known problem with SetCueBanner().
 
-   Solution: In the Control Panel/Regional and Language Options (On the Languages tab)
-         
-             The removal of Operating System support for Complex Scripts
-             The removal of Operating System support for East Asian languages
+Author: Carlos Britos
+Contributor: Pablo César
+
+Important: SetCueBanner() does not show aAnything in Win XP (any Service Pack).
+On some configurations of WinXP, there is a known problem with SetCueBanner().
+
+Solution: In the Control Panel/Regional and Language Options (On the Languages tab)
+
+The removal of Operating System support for Complex Scripts
+The removal of Operating System support for East Asian languages
 */
 
 #include <hmg.ch>
 
-Function Main
-Define window Form_1 at 0, 0 width 400 height 300 main Title "CueBanner Sample"
-   DEFINE TEXTBOX Text_1
-        ROW    10
-        COL    10
-        WIDTH  200
-      TOOLTIP "Put your name"
-    END TEXTBOX
+FUNCTION Main
 
-    DEFINE TEXTBOX Text_2
-        ROW    40
-        COL    10
-        WIDTH  200
-      TOOLTIP "Put your address"
-    END TEXTBOX
+   DEFINE WINDOW Form_1 at 0, 0 width 400 height 300 main Title "CueBanner Sample"
+      DEFINE TEXTBOX Text_1
+         ROW    10
+         COL    10
+         WIDTH  200
+         TOOLTIP "Put your name"
+      END TEXTBOX
 
-    DEFINE EDITBOX Edit_1
-        ROW    10
-        COL    230
-        WIDTH  120
-        HEIGHT 110
-        VALUE ""
-    END EDITBOX
+      DEFINE TEXTBOX Text_2
+         ROW    40
+         COL    10
+         WIDTH  200
+         TOOLTIP "Put your address"
+      END TEXTBOX
 
-    DEFINE COMBOBOX Combo_1
-        ROW    70
-        COL    10
-        WIDTH  200
-        HEIGHT 100
-        ITEMS {"Item 1","Item 2","Item 3"}
-        VALUE 0
-      DISPLAYEDIT .T.      // must be .T. for cuebanner
-    END COMBOBOX
+      DEFINE EDITBOX Edit_1
+         ROW    10
+         COL    230
+         WIDTH  120
+         HEIGHT 110
+         VALUE ""
+      END EDITBOX
 
-    DEFINE SPINNER Spinner_1
-        ROW    100
-        COL    10
-        WIDTH  200
-        HEIGHT 24
-        RANGEMIN 1
-        RANGEMAX 10
-        VALUE ""             // must be "" for cuebanner
-    END SPINNER
+      DEFINE COMBOBOX Combo_1
+         ROW    70
+         COL    10
+         WIDTH  200
+         HEIGHT 100
+         ITEMS {"Item 1","Item 2","Item 3"}
+         VALUE 0
+         DISPLAYEDIT .T.      // must be .T. for cuebanner
+      END COMBOBOX
 
-    DEFINE RICHEDITBOX RichEdit_1
-        ROW    130
-        COL    230
-        WIDTH  120
-        HEIGHT 90
-        VALUE ""
-    END RICHEDITBOX
-End window
-SetCueBanner(GetControlHandle("Text_1","Form_1"),"Enter your name here",.t.) // Third parameter is for not dissapear when getfocus
-SetCueBanner(GetControlHandle("Text_2","Form_1"),"Enter address here",.t.)
-SetCueBanner(GetControlHandle("Spinner_1","Form_1")[1],"Spinner CueBanner",.t.)
-SetCueBanner(FindWindowEx(GetControlHandle("Combo_1","Form_1"),0,"Edit",Nil),"ComboBox CueBanner",.t.)
-     
-SetCueBanner(GetControlHandle("Edit_1","Form_1"),"EditBox CueBanner",.t.)
-SetCueBanner(GetControlHandle("RichEdit_1","Form_1"),"RichEditBox CueBanner",.t.)
-Form_1.center
-Form_1.activate
-Return Nil
+      DEFINE SPINNER Spinner_1
+         ROW    100
+         COL    10
+         WIDTH  200
+         HEIGHT 24
+         RANGEMIN 1
+         RANGEMAX 10
+         VALUE ""             // must be "" for cuebanner
+      END SPINNER
+
+      DEFINE RICHEDITBOX RichEdit_1
+         ROW    130
+         COL    230
+         WIDTH  120
+         HEIGHT 90
+         VALUE ""
+      END RICHEDITBOX
+   END WINDOW
+   SetCueBanner(GetControlHandle("Text_1","Form_1"),"Enter your name here",.t.) // Third parameter is for not dissapear when getfocus
+   SetCueBanner(GetControlHandle("Text_2","Form_1"),"Enter address here",.t.)
+   SetCueBanner(GetControlHandle("Spinner_1","Form_1")[1],"Spinner CueBanner",.t.)
+   SetCueBanner(FindWindowEx(GetControlHandle("Combo_1","Form_1"),0,"Edit",Nil),"ComboBox CueBanner",.t.)
+
+   SetCueBanner(GetControlHandle("Edit_1","Form_1"),"EditBox CueBanner",.t.)
+   SetCueBanner(GetControlHandle("RichEdit_1","Form_1"),"RichEditBox CueBanner",.t.)
+   Form_1.center
+   Form_1.activate
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 

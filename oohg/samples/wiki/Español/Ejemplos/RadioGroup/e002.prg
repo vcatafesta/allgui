@@ -1,19 +1,16 @@
 /*
- * Ejemplo RadioGroup n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo es un caso de prueba para las cláusulas THEMED,
- * NOTHEME, BACKCOLOR, BACKGROUND y TRANSPARENT del control
- * RadioGroup.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * El archivo fondo.bmp puede descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/RadioGroup
- */
+* Ejemplo RadioGroup n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo es un caso de prueba para las cláusulas THEMED,
+* NOTHEME, BACKCOLOR, BACKGROUND y TRANSPARENT del control
+* RadioGroup.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* El archivo fondo.bmp puede descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/RadioGroup
+*/
 
 #include "oohg.ch"
 
@@ -22,14 +19,14 @@ FUNCTION Main
    LOCAL oForm1, nBack := 1
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0,0 ;
-      WIDTH 900 ;
-      HEIGHT 600 ;
-      CLIENTAREA ;
-      TITLE 'RadioGroup - Caso de Prueba' ;
-      BACKCOLOR PINK ;
-      MAIN
+         OBJ oForm1 ;
+         AT 0,0 ;
+         WIDTH 900 ;
+         HEIGHT 600 ;
+         CLIENTAREA ;
+         TITLE 'RadioGroup - Caso de Prueba' ;
+         BACKCOLOR PINK ;
+         MAIN
 
       @ 10, 10 LABEL lbl_111 WIDTH 100 HEIGHT 15 TRANSPARENT VALUE "THEMED"
       @ 25, 10 LABEL lbl_112 WIDTH 100 HEIGHT 15 TRANSPARENT VALUE "BACKGROUND"
@@ -274,20 +271,20 @@ FUNCTION Main
 
       @ 410, 10 LABEL lbl_Notes WIDTH 500 HEIGHT 200 TRANSPARENT ;
          VALUE "BACKGROUND fuerza THEMED." + hb_OsNewLine() + ;
-               "TRANSPARENT y BACKCOLOR son ignoradas cuando BACKGROUND está presente." + hb_OsNewLine() + ;
-               "BACKCOLOR es ignorada cuando TRANSPARENT está presente." + hb_OsNewLine() + ;
-               "TRANSPARENT pinta el fondo del control usando un NULL BRUSH." + hb_OsNewLine() + ;
-               "THEMED pinta el conntrol usando funciones de Temas de Windows si un tema está habilitado y sino utiliza la rutina por defecto de Windows" + hb_OsNewLine() + ;
-               "NOTHEME pinta el control utilizando la rutina por defecto de Windows" + hb_OsNewLine() + ;
-               "Si no se especifica THEMED o NOTHEME se asume THEMED si la applicación tiene tema o NOTHEME en caso contrario" + hb_OsNewLine() + ;
-               "BACKGROUND pinta el fondo del control usando un BRUSH derivado del área cliente de otro control."
+         "TRANSPARENT y BACKCOLOR son ignoradas cuando BACKGROUND está presente." + hb_OsNewLine() + ;
+         "BACKCOLOR es ignorada cuando TRANSPARENT está presente." + hb_OsNewLine() + ;
+         "TRANSPARENT pinta el fondo del control usando un NULL BRUSH." + hb_OsNewLine() + ;
+         "THEMED pinta el conntrol usando funciones de Temas de Windows si un tema está habilitado y sino utiliza la rutina por defecto de Windows" + hb_OsNewLine() + ;
+         "NOTHEME pinta el control utilizando la rutina por defecto de Windows" + hb_OsNewLine() + ;
+         "Si no se especifica THEMED o NOTHEME se asume THEMED si la applicación tiene tema o NOTHEME en caso contrario" + hb_OsNewLine() + ;
+         "BACKGROUND pinta el fondo del control usando un BRUSH derivado del área cliente de otro control."
 
       @ 500, 700 BUTTON btn_Change OBJ oBut CAPTION "Usar BackImage" WIDTH 170 ;
          ACTION { || Eval( If( nBack == 1, ;
-                               { || oForm1:BackColor := NIL, oForm1:BackImage := "fondo.bmp", oBut:Caption := "Ni BackColor ni BackImage", nBack := 2 }, ;
-                               If( nBack == 2, ;
-                                   { || oForm1:BackColor := NIL, oForm1:BackImage := NIL, oBut:Caption := "Usar BackColor", nBack := 3 }, ;
-                                   { || oForm1:BackColor := PINK, oForm1:BackImage := NIL, oBut:Caption := "Usar BackImage", nBack := 1 } ) ) ) }
+         { || oForm1:BackColor := NIL, oForm1:BackImage := "fondo.bmp", oBut:Caption := "Ni BackColor ni BackImage", nBack := 2 }, ;
+         If( nBack == 2, ;
+         { || oForm1:BackColor := NIL, oForm1:BackImage := NIL, oBut:Caption := "Usar BackColor", nBack := 3 }, ;
+         { || oForm1:BackColor := PINK, oForm1:BackImage := NIL, oBut:Caption := "Usar BackImage", nBack := 1 } ) ) ) }
 
       ON KEY ESCAPE ACTION oForm1:Release()
    END WINDOW
@@ -295,8 +292,9 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

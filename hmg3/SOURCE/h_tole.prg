@@ -1,10 +1,8 @@
 /*
 * Harbour Project source code:
 * Compatibility calls.
-*
 * Copyright 2009 Viktor Szakats (harbour.01 syenar.hu)
 * www - http://harbour-project.org
-*
 */
 
 #define HB_CLS_NOTOBJECT  /* avoid definition of method: INIT */
@@ -19,13 +17,16 @@
 STATIC s_bBreak := { | oError | Break( oError ) }
 
 STATIC PROCEDURE Throw( oError )
+
    LOCAL lError := Eval( ErrorBlock(), oError )
+
    IF ! ISLOGICAL( lError ) .OR. lError
       __ErrInHandler()
    ENDIF
    Break( oError )
 
 STATIC FUNCTION ThrowOpError( nSubCode, cOperator, ... )
+
    LOCAL oError
 
    oError := ErrorNew()
@@ -43,22 +44,36 @@ STATIC FUNCTION ThrowOpError( nSubCode, cOperator, ... )
    RETURN Throw( oError )
 
 CREATE CLASS TOLEAUTO FROM WIN_OLEAUTO
+
    /* TODO: Implement compatibility to the required extent */
    VAR cClassName
-   METHOD New( xOle, cClass )
-   METHOD hObj( xOle )
 
-   METHOD OleValuePlus( xArg )            OPERATOR "+"
-   METHOD OleValueMinus( xArg )           OPERATOR "-"
-   METHOD OleValueMultiply( xArg )        OPERATOR "*"
-   METHOD OleValueDivide( xArg )          OPERATOR "/"
-   METHOD OleValueModulus( xArg )         OPERATOR "%"
-   METHOD OleValuePower( xArg )           OPERATOR "^"
-   METHOD OleValueInc()                   OPERATOR "++"
-   METHOD OleValueDec()                   OPERATOR "--"
-   METHOD OleValueEqual( xArg )           OPERATOR "="
-   METHOD OleValueExactEqual( xArg )      OPERATOR "=="
-   METHOD OleValueNotEqual( xArg )        OPERATOR "!="
+METHOD New( xOle, cClass )
+
+METHOD hObj( xOle )
+
+METHOD OleValuePlus( xArg )            OPERATOR "+"
+
+METHOD OleValueMinus( xArg )           OPERATOR "-"
+
+METHOD OleValueMultiply( xArg )        OPERATOR "*"
+
+METHOD OleValueDivide( xArg )          OPERATOR "/"
+
+METHOD OleValueModulus( xArg )         OPERATOR "%"
+
+METHOD OleValuePower( xArg )           OPERATOR "^"
+
+METHOD OleValueInc()                   OPERATOR "++"
+
+METHOD OleValueDec()                   OPERATOR "--"
+
+METHOD OleValueEqual( xArg )           OPERATOR "="
+
+METHOD OleValueExactEqual( xArg )      OPERATOR "=="
+
+METHOD OleValueNotEqual( xArg )        OPERATOR "!="
+
 ENDCLASS
 
 METHOD hObj( xOle ) CLASS TOLEAUTO
@@ -75,6 +90,7 @@ METHOD hObj( xOle ) CLASS TOLEAUTO
    RETURN ::__hObj
 
 METHOD New( xOle, cClass ) CLASS TOLEAUTO
+
    LOCAL hOle
    LOCAL oError
 
@@ -114,9 +130,11 @@ METHOD New( xOle, cClass ) CLASS TOLEAUTO
    RETURN Self
 
 FUNCTION CreateObject( xOle, cClass )
+
    RETURN TOleAuto():New( xOle, cClass )
 
 FUNCTION GetActiveObject( xOle, cClass )
+
    LOCAL o := TOleAuto():New()
    LOCAL hOle
    LOCAL oError
@@ -157,66 +175,78 @@ FUNCTION GetActiveObject( xOle, cClass )
    RETURN o
 
 METHOD OleValuePlus( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue + xArg
    RECOVER
+
       RETURN ThrowOpError( 1081, "+", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueMinus( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue - xArg
    RECOVER
+
       RETURN ThrowOpError( 1082, "-", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueMultiply( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue * xArg
    RECOVER
+
       RETURN ThrowOpError( 1083, "*", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueDivide( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue / xArg
    RECOVER
+
       RETURN ThrowOpError( 1084, "/", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueModulus( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue % xArg
    RECOVER
+
       RETURN ThrowOpError( 1085, "%", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValuePower( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ::OleValue ^ xArg
    RECOVER
+
       RETURN ThrowOpError( 1088, "^", Self, xArg )
    END SEQUENCE
 
@@ -227,6 +257,7 @@ METHOD OleValueInc() CLASS TOLEAUTO
    BEGIN SEQUENCE WITH s_bBreak
       ++::OleValue
    RECOVER
+
       RETURN ThrowOpError( 1086, "++", Self )
    END SEQUENCE
 
@@ -237,40 +268,48 @@ METHOD OleValueDec() CLASS TOLEAUTO
    BEGIN SEQUENCE WITH s_bBreak
       --::OleValue
    RECOVER
+
       RETURN ThrowOpError( 1087, "--", Self )
    END SEQUENCE
 
    RETURN Self
 
 METHOD OleValueEqual( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ( ::OleValue = xArg ) /* NOTE: Intentionally using '=' operator. */
    RECOVER
+
       RETURN ThrowOpError( 1089, "=", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueExactEqual( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ( ::OleValue == xArg )
    RECOVER
+
       RETURN ThrowOpError( 1090, "==", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
 
 METHOD OleValueNotEqual( xArg ) CLASS TOLEAUTO
+
    LOCAL xRet
 
    BEGIN SEQUENCE WITH s_bBreak
       xRet := ( ::OleValue != xArg )
    RECOVER
+
       RETURN ThrowOpError( 1091, "!=", Self, xArg )
    END SEQUENCE
 
    RETURN xRet
+

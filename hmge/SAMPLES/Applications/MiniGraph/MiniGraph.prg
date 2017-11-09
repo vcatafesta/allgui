@@ -26,7 +26,7 @@ FUNCTION MAIN
    LOCAL aConst := { 'Pi', 'Pi/2', 'Pi/3', 'Pi/4', '2*Pi/3', '2*Pi' }
    LOCAL FileUserF, cStr, nTok, i
    LOCAL nColbut, nWBut, cBut
- 
+
    SET CENTURY ON
    SET DATE GERMAN
 
@@ -59,155 +59,155 @@ FUNCTION MAIN
    NEXT
 
    DEFINE WINDOW WinMain ;
-      AT 0, 0 WIDTH 505 HEIGHT 540 ;
-      TITLE cNameApp + ' ' + cVer ;
-      ICON 'MAIN' ;
-      MAIN ;
-      NOSIZE NOMAXIMIZE NOCAPTION ;
-      FONT 'Courier' SIZE 12 ;
-      BACKCOLOR aClr[2]
-         
-   @ 1, 2  LABEL btnHelp1 WIDTH 25 HEIGHT 30 VALUE '?' ;
-      FONT 'Verdana' SIZE 18 BOLD FONTCOLOR BLACK BACKCOLOR aClr[3] RIGHTALIGN ;
-      ACTION _Execute ( GetActiveWindow() , "open" , "minigraph.txt" ,  ,  , 1 ) ;
-      TOOLTIP 'Description of program'
-   @ 0, 1  LABEL btnHelp2 WIDTH 25 HEIGHT 30 VALUE '?' ;
-      FONT 'Verdana' SIZE 18 BOLD FONTCOLOR { 255, 255, 128 } TRANSPARENT RIGHTALIGN ;
-      ACTION _Execute ( GetActiveWindow() , "open" , "minigraph.txt" ,  ,  , 1 ) ;
-      TOOLTIP 'Description of program'
+         AT 0, 0 WIDTH 505 HEIGHT 540 ;
+         TITLE cNameApp + ' ' + cVer ;
+         ICON 'MAIN' ;
+         MAIN ;
+         NOSIZE NOMAXIMIZE NOCAPTION ;
+         FONT 'Courier' SIZE 12 ;
+         BACKCOLOR aClr[2]
 
-   @ 1, 25 LABEL lblTop1 WIDTH WinMain.Width - 55 HEIGHT 5 VALUE '' ;
-      BACKCOLOR aClr[3] ;
-      ACTION MoveActiveWindow()
-   @ 6, 25 LABEL lblTop2 WIDTH WinMain.Width - 55 HEIGHT 25 VALUE '    ' + cNameApp + ' ' + cVer ;
-      FONT 'Times' SIZE 14  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
-      ACTION MoveActiveWindow()
+      @ 1, 2  LABEL btnHelp1 WIDTH 25 HEIGHT 30 VALUE '?' ;
+         FONT 'Verdana' SIZE 18 BOLD FONTCOLOR BLACK BACKCOLOR aClr[3] RIGHTALIGN ;
+         ACTION _Execute ( GetActiveWindow() , "open" , "minigraph.txt" ,  ,  , 1 ) ;
+         TOOLTIP 'Description of program'
+      @ 0, 1  LABEL btnHelp2 WIDTH 25 HEIGHT 30 VALUE '?' ;
+         FONT 'Verdana' SIZE 18 BOLD FONTCOLOR { 255, 255, 128 } TRANSPARENT RIGHTALIGN ;
+         ACTION _Execute ( GetActiveWindow() , "open" , "minigraph.txt" ,  ,  , 1 ) ;
+         TOOLTIP 'Description of program'
 
-   @ 1, WinMain.Width - 30  LABEL btnCancel WIDTH 30 HEIGHT 30 VALUE Chr( 120 ) ;
-      FONT 'Wingdings' SIZE 18  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
-      ACTION DoMethod ( 'WinMain', 'RELEASE' ) ;
-      TOOLTIP 'Close'
-   @ 28, 0 LABEL  lblTop3 WIDTH WinMain.Width HEIGHT 1 VALUE " " BACKCOLOR WHITE
+      @ 1, 25 LABEL lblTop1 WIDTH WinMain.Width - 55 HEIGHT 5 VALUE '' ;
+         BACKCOLOR aClr[3] ;
+         ACTION MoveActiveWindow()
+      @ 6, 25 LABEL lblTop2 WIDTH WinMain.Width - 55 HEIGHT 25 VALUE '    ' + cNameApp + ' ' + cVer ;
+         FONT 'Times' SIZE 14  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
+         ACTION MoveActiveWindow()
 
-   LblBox( 'lblB1', 50, 10, 180, 490 , 1, { aClr[3], aClr[3] } )
+      @ 1, WinMain.Width - 30  LABEL btnCancel WIDTH 30 HEIGHT 30 VALUE Chr( 120 ) ;
+         FONT 'Wingdings' SIZE 18  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
+         ACTION DoMethod ( 'WinMain', 'RELEASE' ) ;
+         TOOLTIP 'Close'
+      @ 28, 0 LABEL  lblTop3 WIDTH WinMain.Width HEIGHT 1 VALUE " " BACKCOLOR WHITE
 
-   @ 40, 30 LABEL  lblV AUTOSIZE VALUE ' Select ' ;
-      FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
-   @ 65, 30 LABEL lbUFu WIDTH 120 HEIGHT 40 VALUE 'User functions' ;
-      FONT 'Arial' SIZE 10 TRANSPARENT
-   @ 70, 150  COMBOBOX  cboFun1 WIDTH 330 HEIGHT 160 ITEMS aUserF  VALUE 1 FONT 'Arial' SIZE 10 ;
-      ON CHANGE InsertStr( This.Item( This.Value ), 1 ) ;
-      TOOLTIP 'Select user function'
+      LblBox( 'lblB1', 50, 10, 180, 490 , 1, { aClr[3], aClr[3] } )
 
-   @ 105, 30 LABEL lblFu WIDTH 120 HEIGHT 40 VALUE 'Standard functions' ;
-      FONT 'Arial' SIZE 10 TRANSPARENT
+      @ 40, 30 LABEL  lblV AUTOSIZE VALUE ' Select ' ;
+         FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
+      @ 65, 30 LABEL lbUFu WIDTH 120 HEIGHT 40 VALUE 'User functions' ;
+         FONT 'Arial' SIZE 10 TRANSPARENT
+      @ 70, 150  COMBOBOX  cboFun1 WIDTH 330 HEIGHT 160 ITEMS aUserF  VALUE 1 FONT 'Arial' SIZE 10 ;
+         ON CHANGE InsertStr( This.Item( This.Value ), 1 ) ;
+         TOOLTIP 'Select user function'
 
-   nColbut := 150
-   nWBut := 55
-   FOR i = 1 TO 6
-      cBut := 'butF_' + AllTrim( Str( i ) )
-      @ 100, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
-         ACTION InsertStr( This.Caption, 1 );
-         FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
-      nColbut += nWBut
-   NEXT
+      @ 105, 30 LABEL lblFu WIDTH 120 HEIGHT 40 VALUE 'Standard functions' ;
+         FONT 'Arial' SIZE 10 TRANSPARENT
 
-   nColbut := 150
-   FOR i = 7 TO 12
-      cBut := 'butF_' + AllTrim( Str( i ) )
-      @ 120, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
-         ACTION InsertStr( This.Caption, 1 );
-         FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
-      nColbut += nWBut
-   NEXT
+      nColbut := 150
+      nWBut := 55
+      FOR i = 1 TO 6
+         cBut := 'butF_' + AllTrim( Str( i ) )
+         @ 100, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
+            ACTION InsertStr( This.Caption, 1 );
+            FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
+         nColbut += nWBut
+      NEXT
 
-   @ 145, 30 LABEL lblCo WIDTH 120 HEIGHT 20 VALUE 'Constants' ;
-      FONT 'Arial' SIZE 10 TRANSPARENT
+      nColbut := 150
+      FOR i = 7 TO 12
+         cBut := 'butF_' + AllTrim( Str( i ) )
+         @ 120, nColBut BUTTONEX &cBut  CAPTION aFun[i]  WIDTH nWBut HEIGHT 20 ;
+            ACTION InsertStr( This.Caption, 1 );
+            FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
+         nColbut += nWBut
+      NEXT
 
-   nColbut := 150
-   FOR i = 1 TO 6
-      cBut := 'butC_' + AllTrim( Str( i ) )
-      @ 145, nColBut BUTTONEX &cBut  CAPTION aConst[i] WIDTH nWBut HEIGHT 20 ;
-         ACTION InsertStr( This.Caption, 1 ) ;
-         FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
-      nColbut += nWBut
-   NEXT
+      @ 145, 30 LABEL lblCo WIDTH 120 HEIGHT 20 VALUE 'Constants' ;
+         FONT 'Arial' SIZE 10 TRANSPARENT
 
-   LblBox( 'lblB2', 200, 10, 290, 490 , 1, { aClr[3], aClr[3] } )
+      nColbut := 150
+      FOR i = 1 TO 6
+         cBut := 'butC_' + AllTrim( Str( i ) )
+         @ 145, nColBut BUTTONEX &cBut  CAPTION aConst[i] WIDTH nWBut HEIGHT 20 ;
+            ACTION InsertStr( This.Caption, 1 ) ;
+            FONT 'Arial' SIZE 9 BACKCOLOR WHITE NOXPSTYLE FLAT
+         nColbut += nWBut
+      NEXT
 
-   @ 190, 30 LABEL  lblF AUTOSIZE VALUE ' Functions ' ;
-      FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
-   @ 221, 30 LABEL  L_Y1  WIDTH 50  VALUE 'Y1=' ;
-      FONT 'Courier' SIZE 16  FONTCOLOR RED TRANSPARENT
-   @ 220, 80 TEXTBOX  txtCalc1 WIDTH 400  VALUE '' FONTCOLOR { 196, 0, 0 } ;
-      ON GOTFOCUS nFun := SetnFun( This.Name ) ;
-      TOOLTIP 'Function expression 1'
-   @ 251, 30 LABEL  L_Y2 WIDTH 50  VALUE 'Y2=' FONT 'Courier' SIZE 16 FONTCOLOR BLUE TRANSPARENT
-   @ 250, 80 TEXTBOX  txtCalc2 WIDTH 400  VALUE '' FONTCOLOR { 0, 0, 196 } ;
-      ON GOTFOCUS nFun := SetnFun( This.Name ) ;
-      TOOLTIP 'Function expression 2'
+      LblBox( 'lblB2', 200, 10, 290, 490 , 1, { aClr[3], aClr[3] } )
 
-   LblBox( 'lblB3', 310, 10, 370, 490 , 1, { aClr[3], aClr[3] } )
-   @ 300, 30 LABEL  lblA AUTOSIZE VALUE ' Argument ' ;
-      FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
-   @ 325, 30 LABEL  Label_A1 WIDTH 80 HEIGHT 40  VALUE 'Definitional domain' ;
-      FONT 'Arial' SIZE 10    TRANSPARENT
+      @ 190, 30 LABEL  lblF AUTOSIZE VALUE ' Functions ' ;
+         FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
+      @ 221, 30 LABEL  L_Y1  WIDTH 50  VALUE 'Y1=' ;
+         FONT 'Courier' SIZE 16  FONTCOLOR RED TRANSPARENT
+      @ 220, 80 TEXTBOX  txtCalc1 WIDTH 400  VALUE '' FONTCOLOR { 196, 0, 0 } ;
+         ON GOTFOCUS nFun := SetnFun( This.Name ) ;
+         TOOLTIP 'Function expression 1'
+      @ 251, 30 LABEL  L_Y2 WIDTH 50  VALUE 'Y2=' FONT 'Courier' SIZE 16 FONTCOLOR BLUE TRANSPARENT
+      @ 250, 80 TEXTBOX  txtCalc2 WIDTH 400  VALUE '' FONTCOLOR { 0, 0, 196 } ;
+         ON GOTFOCUS nFun := SetnFun( This.Name ) ;
+         TOOLTIP 'Function expression 2'
 
-   DEFINE TEXTBOX txtDia1
-      ROW 330
-      COL 110
-      WIDTH 90
-      VALUE ''
-      NUMERIC .T.
-      INPUTMASK '99999.99'
-      TOOLTIP 'Bottom border of argument'
-      ON GOTFOCUS This.CARETPOS := 0
-   END TEXTBOX
-   @ 333, 205 LABEL  Label_7 WIDTH 50  VALUE Chr( 163 ) + '  ' + Chr( 67 ) + '  ' + Chr( 163 ) FONT 'Symbol' SIZE 10 TRANSPARENT
-   DEFINE TEXTBOX txtDia2
-      ROW 330
-      COL 245
-      WIDTH 90
-      VALUE 0
-      NUMERIC .T.
-      INPUTMASK '99999.99'
-      TOOLTIP 'Top border of argument'
-      ON GOTFOCUS This.CARETPOS := 0
-   END TEXTBOX
-   @ 332, 370 LABEL  Label_8 WIDTH 30  VALUE 'Step' FONT 'Arial' SIZE 10 TRANSPARENT
-   DEFINE TEXTBOX txtStep
-      ROW 330
-      COL 400
-      WIDTH 80
-      VALUE 0
-      NUMERIC .T.
-      INPUTMASK '999.99'
-      TOOLTIP 'Step of argument changing'
-      ON GOTFOCUS This.CARETPOS := 0
-   END TEXTBOX
+      LblBox( 'lblB3', 310, 10, 370, 490 , 1, { aClr[3], aClr[3] } )
+      @ 300, 30 LABEL  lblA AUTOSIZE VALUE ' Argument ' ;
+         FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
+      @ 325, 30 LABEL  Label_A1 WIDTH 80 HEIGHT 40  VALUE 'Definitional domain' ;
+         FONT 'Arial' SIZE 10    TRANSPARENT
 
-   LblBox( 'lblB4', 390, 10, 490, 490 , 1, { aClr[3], aClr[3] } )
-   @ 380, 30 LABEL  lblU AUTOSIZE VALUE ' Settings ' ;
-      FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
-   @ 404, 30 RADIOGROUP rgUg ;
-      OPTIONS { 'Angles in degree', 'Angles in radians' } ;
-      VALUE 2 WIDTH 120 Spacing 24 FONT 'Arial' SIZE 10 ;
-      BACKCOLOR aClr[2] ;
-      TOOLTIP 'For trigonometric functions'
-   @ 458, 30 TEXTBOX  txtnPen WIDTH 15 HEIGHT 18 VALUE 1 ;
-      FONT 'Courier' SIZE 11 NUMERIC ;
-      TOOLTIP 'Thickness from 1 to 5 points'
-   @ 460, 50 LABEL  Label_9 WIDTH 150  VALUE 'Thickness of line' FONT 'Arial' SIZE 10 TRANSPARENT
+      DEFINE TEXTBOX txtDia1
+         ROW 330
+         COL 110
+         WIDTH 90
+         VALUE ''
+         NUMERIC .T.
+         INPUTMASK '99999.99'
+         TOOLTIP 'Bottom border of argument'
+         ON GOTFOCUS This.CARETPOS := 0
+      END TEXTBOX
+      @ 333, 205 LABEL  Label_7 WIDTH 50  VALUE Chr( 163 ) + '  ' + Chr( 67 ) + '  ' + Chr( 163 ) FONT 'Symbol' SIZE 10 TRANSPARENT
+      DEFINE TEXTBOX txtDia2
+         ROW 330
+         COL 245
+         WIDTH 90
+         VALUE 0
+         NUMERIC .T.
+         INPUTMASK '99999.99'
+         TOOLTIP 'Top border of argument'
+         ON GOTFOCUS This.CARETPOS := 0
+      END TEXTBOX
+      @ 332, 370 LABEL  Label_8 WIDTH 30  VALUE 'Step' FONT 'Arial' SIZE 10 TRANSPARENT
+      DEFINE TEXTBOX txtStep
+         ROW 330
+         COL 400
+         WIDTH 80
+         VALUE 0
+         NUMERIC .T.
+         INPUTMASK '999.99'
+         TOOLTIP 'Step of argument changing'
+         ON GOTFOCUS This.CARETPOS := 0
+      END TEXTBOX
 
-   @ 405, 250 CHECKBOX Chk1 CAPTION 'Show vertical grid line'     VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
-   @ 430, 250 CHECKBOX Chk2 CAPTION 'Show horizontal grid line'   VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
-   @ 455, 250 CHECKBOX Chk3 CAPTION 'Show mark of value on graph' VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
+      LblBox( 'lblB4', 390, 10, 490, 490 , 1, { aClr[3], aClr[3] } )
+      @ 380, 30 LABEL  lblU AUTOSIZE VALUE ' Settings ' ;
+         FONT 'Times' SIZE 11 BOLD FONTCOLOR aClr[3] BACKCOLOR aClr[2]
+      @ 404, 30 RADIOGROUP rgUg ;
+         OPTIONS { 'Angles in degree', 'Angles in radians' } ;
+         VALUE 2 WIDTH 120 Spacing 24 FONT 'Arial' SIZE 10 ;
+         BACKCOLOR aClr[2] ;
+         TOOLTIP 'For trigonometric functions'
+      @ 458, 30 TEXTBOX  txtnPen WIDTH 15 HEIGHT 18 VALUE 1 ;
+         FONT 'Courier' SIZE 11 NUMERIC ;
+         TOOLTIP 'Thickness from 1 to 5 points'
+      @ 460, 50 LABEL  Label_9 WIDTH 150  VALUE 'Thickness of line' FONT 'Arial' SIZE 10 TRANSPARENT
 
-   @ 505, 150 BUTTONEX But_3  CAPTION 'To build the graph'  WIDTH 200 HEIGHT 25 ;
-      FONT 'Arial' SIZE 11 FONTCOLOR WHITE BACKCOLOR aClr[3] NOXPSTYLE ;
-      ACTION CreateGra()
+      @ 405, 250 CHECKBOX Chk1 CAPTION 'Show vertical grid line'     VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
+      @ 430, 250 CHECKBOX Chk2 CAPTION 'Show horizontal grid line'   VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
+      @ 455, 250 CHECKBOX Chk3 CAPTION 'Show mark of value on graph' VALUE .T.  HEIGHT 25  WIDTH 230 FONT 'Arial' SIZE 10 BACKCOLOR aClr[2]
 
-   LblBox( 'lblW', 0, 0, WinMain.Height - 1, WinMain.Width - 1 , 1, { WHITE, GRAY } )
+      @ 505, 150 BUTTONEX But_3  CAPTION 'To build the graph'  WIDTH 200 HEIGHT 25 ;
+         FONT 'Arial' SIZE 11 FONTCOLOR WHITE BACKCOLOR aClr[3] NOXPSTYLE ;
+         ACTION CreateGra()
+
+      LblBox( 'lblW', 0, 0, WinMain.Height - 1, WinMain.Width - 1 , 1, { WHITE, GRAY } )
 
    END WINDOW
    SET TOOLTIP BACKCOLOR TO aClr[1] OF WinMain
@@ -216,9 +216,9 @@ FUNCTION MAIN
    WinMain.Center
    ACTIVATE WINDOW WinMain
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION SetnFun( txtName )
 
@@ -232,9 +232,9 @@ FUNCTION SetnFun( txtName )
       SetProperty( 'WinMain', 'txtCalc1', 'BackColor', aClr[2] )
    ENDIF
 
-RETURN nFun
+   RETURN nFun
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION InsertStr( Str2, nMod )
 
@@ -259,9 +259,9 @@ FUNCTION InsertStr( Str2, nMod )
       WinMain .txtcalc2. SetFocus
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION CreateGra()
 
@@ -280,12 +280,14 @@ FUNCTION CreateGra()
 
    IF Empty( cExpF1 ) .AND. Empty( cExpF2 )
       Msg2( cNameApp, "Function is absent", , 1 )
+
       RETURN .F.
    ENDIF
 
    IF Empty( cExpF1 ) = .F.
       cExpTran1 = TransFun( cExpF1, 1 )
       IF Empty( cExpTran1 )
+
          RETURN .F.
       ENDIF
    ENDIF
@@ -293,100 +295,104 @@ FUNCTION CreateGra()
    IF Empty( cExpF2 ) = .F.
       cExpTran2 = TransFun( cExpF2, 2 )
       IF Empty( cExpTran2 )
+
          RETURN .F.
       ENDIF
    ENDIF
 
    IF nStep <= 0 .OR. nStep >= nDia2
       Msg2( cNameApp, "Invalid step select" )
+
       RETURN .F.
    ENDIF
 
    IF nDia2 <= nDia1
       Msg2( cNameApp, "Invalid range select", , 1 )
+
       RETURN .F.
    ENDIF
 
    nArg = Abs( ( nDia2 - nDia1 )/nStep )
    IF nArg > 1000
       Msg2( cNameApp, "Overranging argument amount", , 1 )
+
       RETURN .F.
    ENDIF
 
    DEFINE WINDOW WinGra ;
-      At 0, 0 Width 800 Height 530 ;
-      Title cNameApp ;
-      MODAL ;
-      NOSIZE NOCAPTION ;
-      BACKCOLOR aClr[1] ;
-      ON INIT DrawGra( 'WinGra', .F. )
+         At 0, 0 Width 800 Height 530 ;
+         Title cNameApp ;
+         MODAL ;
+         NOSIZE NOCAPTION ;
+         BACKCOLOR aClr[1] ;
+         ON INIT DrawGra( 'WinGra', .F. )
 
-   @ 1, 0 LABEL lblTop1 WIDTH WinGra.Width - 30 HEIGHT 5 VALUE '' ;
-      BACKCOLOR aClr[3] ;
-      ACTION MoveActiveWindow()
-   @ 6, 0 LABEL lblTop2 WIDTH WinGra.Width - 30 HEIGHT 25 VALUE Space( 50 ) + cNameApp ;
-      FONT 'Times' SIZE 14  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
-      ACTION MoveActiveWindow()
-   @ 1, WinGra.Width - 30  LABEL btnCancel WIDTH 30 HEIGHT 30  VALUE Chr( 120 ) ;
-      FONT 'Wingdings' SIZE 18  FONTCOLOR WHITE  BACKCOLOR aClr[3]  ;
-      ACTION DoMethod ( 'WinGra', 'RELEASE' )
-   @ 28, 0 LABEL  lblTop3 WIDTH WinGra.Width HEIGHT 1 VALUE " " BACKCOLOR WHITE
+      @ 1, 0 LABEL lblTop1 WIDTH WinGra.Width - 30 HEIGHT 5 VALUE '' ;
+         BACKCOLOR aClr[3] ;
+         ACTION MoveActiveWindow()
+      @ 6, 0 LABEL lblTop2 WIDTH WinGra.Width - 30 HEIGHT 25 VALUE Space( 50 ) + cNameApp ;
+         FONT 'Times' SIZE 14  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
+         ACTION MoveActiveWindow()
+      @ 1, WinGra.Width - 30  LABEL btnCancel WIDTH 30 HEIGHT 30  VALUE Chr( 120 ) ;
+         FONT 'Wingdings' SIZE 18  FONTCOLOR WHITE  BACKCOLOR aClr[3]  ;
+         ACTION DoMethod ( 'WinGra', 'RELEASE' )
+      @ 28, 0 LABEL  lblTop3 WIDTH WinGra.Width HEIGHT 1 VALUE " " BACKCOLOR WHITE
 
-   LblBox( 'lblB1', 40, 10, 520, 600 , 1, { aClr[3], aClr[3] } )
+      LblBox( 'lblB1', 40, 10, 520, 600 , 1, { aClr[3], aClr[3] } )
 
-   @ 1, 800 LABEL  LblPoint1 HEIGHT 4 WIDTH 4  VALUE '' BACKCOLOR  RED INVISIBLE
-   @ 1, 800 LABEL  LblPoint2 HEIGHT 4 WIDTH 4  VALUE '' BACKCOLOR  BLUE INVISIBLE
-   @ 35, 615 LABEL  Label_5 HEIGHT  18 WIDTH 175  VALUE 'Tables of values' ;
-      FONT 'Arial' SIZE 11 TRANSPARENT CENTERALIGN
- 
-   @ 73, 615 GRID Grid1 WIDTH 175 HEIGHT 200 NOHEADER ;
-      HEADERS { ' ¹', 'X   ', 'Y1   ' } WIDTHS aW VALUE 1 JUSTIFY { 1, 1, 1 } ;
-      FONT 'Arial' SIZE 9 FONTCOLOR RED BACKCOLOR WHITE ;
-      ON CHANGE MovePoint( This.Name )
-   nC := 0
-   FOR i = 1 TO Len( aHr1 )
-      lblHH := 'lblH1' + AllTrim( Str( i ) )
-      @ 53, 615 + nc LABEL &lblHH WIDTH aW[i] + 2 HEIGHT 20 VALUE aHr1[i] ;
-         FONT 'Arial' SIZE 11 BOLD FONTCOLOR WHITE BACKCOLOR RED CENTERALIGN  CLIENTEDGE
-      nC += aW[i] + 1
-   NEXT
+      @ 1, 800 LABEL  LblPoint1 HEIGHT 4 WIDTH 4  VALUE '' BACKCOLOR  RED INVISIBLE
+      @ 1, 800 LABEL  LblPoint2 HEIGHT 4 WIDTH 4  VALUE '' BACKCOLOR  BLUE INVISIBLE
+      @ 35, 615 LABEL  Label_5 HEIGHT  18 WIDTH 175  VALUE 'Tables of values' ;
+         FONT 'Arial' SIZE 11 TRANSPARENT CENTERALIGN
 
-   @ 53, 615 + nc LABEL lblE1 WIDTH WinGra .Grid1. Width - nc - 1 HEIGHT 20 VALUE '' ;
-      BACKCOLOR RED CLIENTEDGE
+      @ 73, 615 GRID Grid1 WIDTH 175 HEIGHT 200 NOHEADER ;
+         HEADERS { ' ¹', 'X   ', 'Y1   ' } WIDTHS aW VALUE 1 JUSTIFY { 1, 1, 1 } ;
+         FONT 'Arial' SIZE 9 FONTCOLOR RED BACKCOLOR WHITE ;
+         ON CHANGE MovePoint( This.Name )
+      nC := 0
+      FOR i = 1 TO Len( aHr1 )
+         lblHH := 'lblH1' + AllTrim( Str( i ) )
+         @ 53, 615 + nc LABEL &lblHH WIDTH aW[i] + 2 HEIGHT 20 VALUE aHr1[i] ;
+            FONT 'Arial' SIZE 11 BOLD FONTCOLOR WHITE BACKCOLOR RED CENTERALIGN  CLIENTEDGE
+         nC += aW[i] + 1
+      NEXT
 
-   @ 297, 615 GRID Grid2 WIDTH 175 HEIGHT 200 NOHEADER ;
-      HEADERS { ' ¹', 'X   ', 'Y1   ' } WIDTHS aW VALUE 1 JUSTIFY { 1, 1, 1 } ;
-      FONT 'Arial' SIZE 9 FONTCOLOR BLUE BACKCOLOR WHITE ;
-      ON CHANGE MovePoint( This.Name )
+      @ 53, 615 + nc LABEL lblE1 WIDTH WinGra .Grid1. Width - nc - 1 HEIGHT 20 VALUE '' ;
+         BACKCOLOR RED CLIENTEDGE
 
-   nC := 0
-   FOR i = 1 TO Len( aHr2 )
-      lblHH := 'lblH2' + AllTrim( Str( i ) )
-      @ 277, 615 + nc LABEL &lblHH WIDTH aW[i] + 2 HEIGHT 20 VALUE aHr2[i] ;
-         FONT 'Arial' SIZE 11 BOLD FONTCOLOR WHITE BACKCOLOR BLUE CENTERALIGN  CLIENTEDGE
-      nC += aW[i] + 1
-   NEXT
+      @ 297, 615 GRID Grid2 WIDTH 175 HEIGHT 200 NOHEADER ;
+         HEADERS { ' ¹', 'X   ', 'Y1   ' } WIDTHS aW VALUE 1 JUSTIFY { 1, 1, 1 } ;
+         FONT 'Arial' SIZE 9 FONTCOLOR BLUE BACKCOLOR WHITE ;
+         ON CHANGE MovePoint( This.Name )
 
-   @ 277, 615 + nC LABEL lblE2 WIDTH WinGra .Grid2. Width - nc HEIGHT 20 VALUE '' ;
-      BACKCOLOR BLUE CENTERALIGN CLIENTEDGE
+      nC := 0
+      FOR i = 1 TO Len( aHr2 )
+         lblHH := 'lblH2' + AllTrim( Str( i ) )
+         @ 277, 615 + nc LABEL &lblHH WIDTH aW[i] + 2 HEIGHT 20 VALUE aHr2[i] ;
+            FONT 'Arial' SIZE 11 BOLD FONTCOLOR WHITE BACKCOLOR BLUE CENTERALIGN  CLIENTEDGE
+         nC += aW[i] + 1
+      NEXT
 
-   @ 500, 615 BUTTONEX But1 CAPTION 'RTF' WIDTH 85 HEIGHT 22 ;
-      ACTION Gra2File( 'RTF' ) ;
-      FONTCOLOR WHITE BACKCOLOR aClr[3]  NOXPSTYLE ;
-      TOOLTIP 'Save graph and table on hard disk'
-   @ 500, 705 BUTTONEX But2 CAPTION 'XLS' WIDTH 85 HEIGHT 22 ;
-      ACTION Gra2File( 'XLS' ) ;
-      FONTCOLOR WHITE BACKCOLOR aClr[3]  NOXPSTYLE ;
-      TOOLTIP 'Save graph and table on hard disk'
+      @ 277, 615 + nC LABEL lblE2 WIDTH WinGra .Grid2. Width - nc HEIGHT 20 VALUE '' ;
+         BACKCOLOR BLUE CENTERALIGN CLIENTEDGE
+
+      @ 500, 615 BUTTONEX But1 CAPTION 'RTF' WIDTH 85 HEIGHT 22 ;
+         ACTION Gra2File( 'RTF' ) ;
+         FONTCOLOR WHITE BACKCOLOR aClr[3]  NOXPSTYLE ;
+         TOOLTIP 'Save graph and table on hard disk'
+      @ 500, 705 BUTTONEX But2 CAPTION 'XLS' WIDTH 85 HEIGHT 22 ;
+         ACTION Gra2File( 'XLS' ) ;
+         FONTCOLOR WHITE BACKCOLOR aClr[3]  NOXPSTYLE ;
+         TOOLTIP 'Save graph and table on hard disk'
 
    END WINDOW
 
    WinGra.Center
    WinGra.Activate
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION TransFun( cExp, nExp )
 
@@ -400,6 +406,7 @@ FUNCTION TransFun( cExp, nExp )
 
    IF At( 'X', cExpTran ) = 0
       Msg2( cNameApp, cExpErr + "Function's argument is absent", , 1 )
+
       RETURN ''
    ENDIF
 
@@ -425,12 +432,13 @@ FUNCTION TransFun( cExp, nExp )
 
    IF Type( cExpC ) $ "UE"
       Msg2( cNameApp, cExpErr + "Invalid expression" + cExpTran, , 1 )
+
       RETURN ''
    ENDIF
 
-RETURN cExpTran
+   RETURN cExpTran
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 PROCEDURE DrawGra( cWinGra, lFile )
 
@@ -580,15 +588,16 @@ PROCEDURE DrawGra( cWinGra, lFile )
    SetProperty( 'WinGra', 'LblPoint2', 'Width' , GetProperty( 'WinGra','LblPoint2','Width' ) + nPen )
    SetProperty( 'WinGra', 'LblPoint2', 'Height', GetProperty( 'WinGra','LblPoint2','Height' ) + nPen )
 
-RETURN
+   RETURN
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION MovePoint( NameGrid )
 
    LOCAL nRow := GetProperty ( 'WinGra', NameGrid, 'VALUE' )
 
    IF GetProperty ( 'WinMain', 'Chk3', 'VALUE' ) = .F.
+
       RETURN NIL
    ENDIF
 
@@ -603,9 +612,9 @@ FUNCTION MovePoint( NameGrid )
    RedrawWindow( GetControlHandle( 'LblPoint1', 'WinGra' ) )
    RedrawWindow( GetControlHandle( 'LblPoint2', 'WinGra' ) )
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 PROCEDURE Gra2File( cType )
 
@@ -636,9 +645,9 @@ PROCEDURE Gra2File( cType )
    WinGra.width := 800
    Msg2( cNameApp, cMsg, , 1 )
 
-RETURN
+   RETURN
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 PROCEDURE Gra2rtf( cFileT, cFun1, cFun2 )
 
@@ -669,8 +678,7 @@ PROCEDURE Gra2rtf( cFileT, cFun1, cFun2 )
    cRtf := cRtf + '\pard\nowidctlpar\par}'
    hb_MemoWrit( cFileT, cRtf, .F. )
 
-RETURN
-
+   RETURN
 
 FUNCTION InitRowRTF( aCol, hRow )
 
@@ -682,9 +690,9 @@ FUNCTION InitRowRTF( aCol, hRow )
       cRow := cRow + iCel + AllTrim( Str( aCol[i,2] ) ) + CRLF
    NEXT
 
-RETURN cRow + '\pard\intbl\nowidctlpar'
+   RETURN cRow + '\pard\intbl\nowidctlpar'
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION Gra2XLS( FileT, cTit1, cTit2 )
 
@@ -695,6 +703,7 @@ FUNCTION Gra2XLS( FileT, cTit1, cTit2 )
 
    oExcel := TOleAuto():New( "Excel.Application" )
    IF Ole2TxtError() != 'S_OK'
+
       RETURN .F.
    ENDIF
 
@@ -725,7 +734,7 @@ FUNCTION Gra2XLS( FileT, cTit1, cTit2 )
    oRange:Font:Bold := .T.
    oRange:Font:Size := 10
    cEndT = AllTrim( Str( nCount + 5 ) )
-// table framing overshadow
+   // table framing overshadow
    oRange := oSheet:Range( "A5:D" + cEndT )
    oRange:Borders():LineStyle := 1
    oRange:Set( "HorizontalAlignment", 7 )
@@ -742,23 +751,22 @@ FUNCTION Gra2XLS( FileT, cTit1, cTit2 )
    oSheet:SaveAS( FileT )
    oExcel:Quit()
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION SinF( x )
 
-RETURN iif( WinMain .rgUg. Value = 1, Sin( DTOR(x ) ), Sin( x ) )
-
+   RETURN iif( WinMain .rgUg. Value = 1, Sin( DTOR(x ) ), Sin( x ) )
 
 FUNCTION CosF( x )
 
-RETURN iif( WinMain .rgUg. Value = 1, Cos( DTOR(x ) ), Cos( x ) )
-
+   RETURN iif( WinMain .rgUg. Value = 1, Cos( DTOR(x ) ), Cos( x ) )
 
 FUNCTION Tg( x )
 
    LOCAL nZ := iif( x < 0, - 1, 1 )
+
    IF WinMain .rgUg. Value = 1
       x := DToR( x )
    ENDIF
@@ -774,10 +782,10 @@ FUNCTION Tg( x )
       x := 0.5 * Pi - 0.02
    ENDIF
 
-RETURN Tan( nZ * x )
-
+   RETURN Tan( nZ * x )
 
 FUNCTION ArcSinF( x )
+
    IF x > 1 .OR. x <- 1
       IF At( 'ArcSin', cMess ) = 0
          cMess := cMess + 'ArcSin - Invalid argument' + CRLF
@@ -785,10 +793,10 @@ FUNCTION ArcSinF( x )
       x := 1
    ENDIF
 
-RETURN iif ( WinMain .rgUg. Value = 1, RToD( ASin(x ) ), ASin( x ) )
-
+   RETURN iif ( WinMain .rgUg. Value = 1, RToD( ASin(x ) ), ASin( x ) )
 
 FUNCTION ArcCosF( x )
+
    IF x > 1 .OR. x <- 1
       IF At( 'ArcCos', cMess ) = 0
          cMess := cMess + 'ArcCos - Invalid argument' + CRLF
@@ -796,55 +804,55 @@ FUNCTION ArcCosF( x )
       x := 1
    ENDIF
 
-RETURN iif( WinMain .rgUg. Value = 1, RToD( ACos(x ) ), ACos( x ) )
-
+   RETURN iif( WinMain .rgUg. Value = 1, RToD( ACos(x ) ), ACos( x ) )
 
 FUNCTION ArcTg( x )
 
-RETURN iif( WinMain .rgUg. Value = 1, RToD( ATan(x ) ), ATan( x ) )
-
+   RETURN iif( WinMain .rgUg. Value = 1, RToD( ATan(x ) ), ATan( x ) )
 
 FUNCTION RD( x )
 
-RETURN RToD( x )
-
+   RETURN RToD( x )
 
 FUNCTION DR( x )
 
-RETURN DToR( x )
-
+   RETURN DToR( x )
 
 FUNCTION Lg( x )
+
    IF x <= 0
       IF At( 'Lg', cMess ) == 0
          cMess := cMess + 'Lg - Invalid argument' + CRLF
       ENDIF
+
       RETURN 0
    ENDIF
 
-RETURN Log10( x )
-
+   RETURN Log10( x )
 
 FUNCTION Ln( x )
+
    IF x <= 0
       IF At( 'Ln', cMess ) == 0
          cMess := cMess + 'Ln - Invalid argument' + CRLF
       ENDIF
+
       RETURN 0
    ENDIF
 
-RETURN Log( x )
-
+   RETURN Log( x )
 
 FUNCTION Sqr( x )
+
    IF x < 0
       cMess := cMess + 'Sqr - Invalid argument' + CRLF
+
       RETURN 0
    ENDIF
 
-RETURN Sqrt( x )
+   RETURN Sqrt( x )
 
-//--------------------------------------------------------------------------------\
+   //--------------------------------------------------------------------------------\
 
 FUNCTION Msg2( cTitle, cMess, aButCap, nMod )
 
@@ -864,52 +872,49 @@ FUNCTION Msg2( cTitle, cMess, aButCap, nMod )
    nWinW := iif( nLenMess < 300, 320, nLenMess )
 
    DEFINE WINDOW WinMsg AT 0, 0 WIDTH nWinW HEIGHT nWinH ;
-      MODAL NOSIZE NOCAPTION NOSYSMENU  FONT 'Arial' SIZE 11 BACKCOLOR aCLR[2]
-   @ 1, 0   LABEL LblTit WIDTH nWinW - 25 HEIGHT 25  VALUE '  ' + cTitle ;
-      FONT 'Times' SIZE 12 BOLD FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
-      ACTION MoveActiveWindow()
-   @ 1, nWinW - 25  LABEL btnCancel WIDTH 25 HEIGHT 25  VALUE Chr( 120 ) ;
-      FONT 'Wingdings' SIZE 16  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
-      ACTION DoMethod ( 'WinMsg', 'RELEASE' )
-   @ 24, 0 LABEL Line1 WIDTH nWinW HEIGHT 1 VALUE "" BACKCOLOR WHITE
-   @ 40, 0  LABEL lblMess VALUE cMess WIDTH nWinW HEIGHT nLblH ;
-      CENTERALIGN TRANSPARENT
+         MODAL NOSIZE NOCAPTION NOSYSMENU  FONT 'Arial' SIZE 11 BACKCOLOR aCLR[2]
+      @ 1, 0   LABEL LblTit WIDTH nWinW - 25 HEIGHT 25  VALUE '  ' + cTitle ;
+         FONT 'Times' SIZE 12 BOLD FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
+         ACTION MoveActiveWindow()
+      @ 1, nWinW - 25  LABEL btnCancel WIDTH 25 HEIGHT 25  VALUE Chr( 120 ) ;
+         FONT 'Wingdings' SIZE 16  FONTCOLOR WHITE  BACKCOLOR aClr[3] ;
+         ACTION DoMethod ( 'WinMsg', 'RELEASE' )
+      @ 24, 0 LABEL Line1 WIDTH nWinW HEIGHT 1 VALUE "" BACKCOLOR WHITE
+      @ 40, 0  LABEL lblMess VALUE cMess WIDTH nWinW HEIGHT nLblH ;
+         CENTERALIGN TRANSPARENT
 
-   IF Len( aButCap ) = 2
-      @ nRowBut, nWinW/2 - 125 BUTTONEx But1  CAPTION aButCap[1] ;
-         WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
-         ACTION ( nRet := 1 , WinMsg.Release  )
-      @ nRowBut, nWinW/2 + 5 BUTTONEx But2  CAPTION aButCap[2];
-         WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
-         ACTION ( nRet := 2 , WinMsg.Release  )
-   ELSE
-      @ nRowBut, nWinW/2 - 60 BUTTONEX But1  CAPTION aButCap[1];
-         WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
-         ACTION WinMsg.Release
-   ENDIF
-   IF nMod <> 0
-      LblBox( 'lblW', 0, 0, WinMsg.Height - 1, WinMsg.Width - 1 , 1, { WHITE, GRAY } )
-   ENDIF
+      IF Len( aButCap ) = 2
+         @ nRowBut, nWinW/2 - 125 BUTTONEx But1  CAPTION aButCap[1] ;
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+            ACTION ( nRet := 1 , WinMsg.Release  )
+         @ nRowBut, nWinW/2 + 5 BUTTONEx But2  CAPTION aButCap[2];
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+            ACTION ( nRet := 2 , WinMsg.Release  )
+      ELSE
+         @ nRowBut, nWinW/2 - 60 BUTTONEX But1  CAPTION aButCap[1];
+            WIDTH 120 HEIGHT 25 FONTCOLOR WHITE BACKCOLOR aCLR[3] NOXPSTYLE;
+            ACTION WinMsg.Release
+      ENDIF
+      IF nMod <> 0
+         LblBox( 'lblW', 0, 0, WinMsg.Height - 1, WinMsg.Width - 1 , 1, { WHITE, GRAY } )
+      ENDIF
    END WINDOW
    _SetFocus ( 'LblMess', 'WinMsg' )
 
    CENTER WINDOW WinMsg
    ACTIVATE WINDOW WinMsg
 
-RETURN nRet
+   RETURN nRet
 
-//------------------------------------------------------------------------------*
-
-#define HTCAPTION          2
-#define WM_NCLBUTTONDOWN   161
+   #define HTCAPTION          2
+   #define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow( hWnd )
+
    DEFAULT hWnd := GetActiveWindow()
    PostMessage( hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0 )
 
-RETURN
-
-//------------------------------------------------------------------------------*
+   RETURN
 
 FUNCTION LblBox( cLbl, nR1, nC1, nR2, nC2, nT, aClrB )
 
@@ -918,12 +923,9 @@ FUNCTION LblBox( cLbl, nR1, nC1, nR2, nC2, nT, aClrB )
    @ nR2, nC1  LABEL  &( cLbl + '3' )  WIDTH  nC2 - nC1 HEIGHT nT         VALUE ''  BACKCOLOR aClrB[2]
    @ nR1, nC2  LABEL  &( cLbl + '4' )  WIDTH  nT      HEIGHT nR2 - nR1 + nT VALUE ''  BACKCOLOR aClrB[2]
 
-RETURN NIL
+   RETURN NIL
 
-
-//------------------------------------------------------------------------------*
-// Functions from h_graph.prg
-//------------------------------------------------------------------------------*
+   // Functions from h_graph.prg
 
 FUNCTION GraShow( parent, nTop, nLeft, nBottom, nRight, aData, cTitle, aYVals, nBarD, nWideB, nXRanges, ;
       lxGrid, lyGrid, aSeries, aColors, lFile, nGra, nPen )
@@ -936,6 +938,7 @@ FUNCTION GraShow( parent, nTop, nLeft, nBottom, nRight, aData, cTitle, aYVals, n
 
    IF ( Len ( aSeries ) != Len ( aData ) ) .OR. ( Len ( aSeries ) != Len ( aColors ) )
       MsgInfo( "DRAW GRAPH: 'Series' / 'SerieNames' / 'Colors' arrays size mismatch.", cNameApp )
+
       RETURN NIL
    ENDIF
    nBottom -=  42
@@ -1057,7 +1060,6 @@ FUNCTION GraShow( parent, nTop, nLeft, nBottom, nRight, aData, cTitle, aYVals, n
    nMin := nMax / nMaxBar
 
    // Lines
-   //
    nWideB  := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
    nPos := nLeft + nWideB
    FOR nI := 1 TO Len( aData[1] )
@@ -1079,9 +1081,7 @@ FUNCTION GraShow( parent, nTop, nLeft, nBottom, nRight, aData, cTitle, aYVals, n
       NEXT nI
    NEXT nI
 
-RETURN aPoint
-
-//------------------------------------------------------------------------------*
+   RETURN aPoint
 
 STATIC FUNCTION nMax( aData )
 
@@ -1091,9 +1091,7 @@ STATIC FUNCTION nMax( aData )
       nMax := Max( Len( aData[nI] ), nMax )
    NEXT nI
 
-RETURN( nMax )
-
-//------------------------------------------------------------------------------*
+   RETURN( nMax )
 
 STATIC FUNCTION DetMaxVal( nNum )
 
@@ -1124,4 +1122,5 @@ STATIC FUNCTION DetMaxVal( nNum )
 
    ENDDO
 
-RETURN ( nVal )
+   RETURN ( nVal )
+

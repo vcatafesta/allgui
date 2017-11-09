@@ -1,11 +1,9 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Win32 Framework for SDI Applications
- * Copyright 2006-2014 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Win32 Framework for SDI Applications
+* Copyright 2006-2014 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -25,71 +23,70 @@
 
 #xtranslate GetResStr( <nID> )  =>  hb_LoadString( <nID> )
 
-//-------------------------------------------------------------
 PROCEDURE Main
-//-------------------------------------------------------------
+
    LOCAL aDesk := GetDesktopArea()
    LOCAL nWidth  := aDesk[3] * 0.75
    LOCAL nHeight := aDesk[4] * 0.72
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH nWidth ;
-      HEIGHT nHeight ;
-      TITLE 'Frame Window' ;
-      ICON ID_MAIN ;
-      MAIN ;
-      ON INIT ( _ExtDisableControl( 'Edit_1', 'Form_1' ), ResizeEdit() ) ;
-      ON PAINT PaintChildWindow( GetControlHandle( 'Edit_1', 'Form_1' ), "Client Window" ) ;
-      ON SIZE ResizeEdit() ;
-      ON MAXIMIZE ResizeEdit()
+         AT 0, 0 ;
+         WIDTH nWidth ;
+         HEIGHT nHeight ;
+         TITLE 'Frame Window' ;
+         ICON ID_MAIN ;
+         MAIN ;
+         ON INIT ( _ExtDisableControl( 'Edit_1', 'Form_1' ), ResizeEdit() ) ;
+         ON PAINT PaintChildWindow( GetControlHandle( 'Edit_1', 'Form_1' ), "Client Window" ) ;
+         ON SIZE ResizeEdit() ;
+         ON MAXIMIZE ResizeEdit()
 
-   DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-   POPUP "&File"
-      MENUITEM "New..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_NEW )
-      MENUITEM "&Open..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_OPEN )
-      MENUITEM "&Save" ACTION _dummy() MESSAGE GetResStr( ID_FILE_SAVE )
-      MENUITEM "Save &As..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_SAVEAS )
-      SEPARATOR
-      MENUITEM "&Print" ACTION _dummy() MESSAGE GetResStr( ID_FILE_PRINT )
-      SEPARATOR
-      MENUITEM "E&xit" ACTION ThisWindow.Release() MESSAGE GetResStr( ID_FILE_EXIT )
-   END POPUP
-   POPUP "&Edit"
-      MENUITEM "Undo" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_UNDO )
-      MENUITEM "Redo" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_REDO )
-      SEPARATOR
-      MENUITEM "Cu&t" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_CUT )
-      MENUITEM "&Copy" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_COPY )
-      MENUITEM "&Paste" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_PASTE )
-      MENUITEM "De&lete" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_DELETE )
-   END POPUP
-   POPUP "&View"
-      MENUITEM "&Tool Bar" ACTION ( Form_1.VIEW_TOOLBAR.Checked := ! Form_1.VIEW_TOOLBAR.Checked, ;
-         BuildToolBar( Form_1.VIEW_TOOLBAR.Checked ), ResizeEdit() ) ;
-         NAME VIEW_TOOLBAR MESSAGE GetResStr( ID_VIEW_TOOLBAR ) CHECKED
-      MENUITEM "&Status Bar" ACTION ( Form_1.VIEW_STATUSBAR.Checked := ! Form_1.VIEW_STATUSBAR.Checked, ;
-         BuildStatusBar( Form_1.VIEW_STATUSBAR.Checked ), ResizeEdit() ) ;
-         NAME VIEW_STATUSBAR MESSAGE GetResStr( ID_VIEW_STATUSBAR ) CHECKED
-   END POPUP
-   POPUP "&Help"
-      MENUITEM "&About" ACTION dlg_about() MESSAGE GetResStr( ID_HELP_ABOUT )
-   END POPUP
+         POPUP "&File"
+            MENUITEM "New..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_NEW )
+            MENUITEM "&Open..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_OPEN )
+            MENUITEM "&Save" ACTION _dummy() MESSAGE GetResStr( ID_FILE_SAVE )
+            MENUITEM "Save &As..." ACTION _dummy() MESSAGE GetResStr( ID_FILE_SAVEAS )
+            SEPARATOR
+            MENUITEM "&Print" ACTION _dummy() MESSAGE GetResStr( ID_FILE_PRINT )
+            SEPARATOR
+            MENUITEM "E&xit" ACTION ThisWindow.Release() MESSAGE GetResStr( ID_FILE_EXIT )
+         END POPUP
+         POPUP "&Edit"
+            MENUITEM "Undo" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_UNDO )
+            MENUITEM "Redo" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_REDO )
+            SEPARATOR
+            MENUITEM "Cu&t" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_CUT )
+            MENUITEM "&Copy" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_COPY )
+            MENUITEM "&Paste" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_PASTE )
+            MENUITEM "De&lete" ACTION _dummy() MESSAGE GetResStr( ID_EDIT_DELETE )
+         END POPUP
+         POPUP "&View"
+            MENUITEM "&Tool Bar" ACTION ( Form_1.VIEW_TOOLBAR.Checked := ! Form_1.VIEW_TOOLBAR.Checked, ;
+               BuildToolBar( Form_1.VIEW_TOOLBAR.Checked ), ResizeEdit() ) ;
+               NAME VIEW_TOOLBAR MESSAGE GetResStr( ID_VIEW_TOOLBAR ) CHECKED
+            MENUITEM "&Status Bar" ACTION ( Form_1.VIEW_STATUSBAR.Checked := ! Form_1.VIEW_STATUSBAR.Checked, ;
+               BuildStatusBar( Form_1.VIEW_STATUSBAR.Checked ), ResizeEdit() ) ;
+               NAME VIEW_STATUSBAR MESSAGE GetResStr( ID_VIEW_STATUSBAR ) CHECKED
+         END POPUP
+         POPUP "&Help"
+            MENUITEM "&About" ACTION dlg_about() MESSAGE GetResStr( ID_HELP_ABOUT )
+         END POPUP
 
-   END MENU
+      END MENU
 
-   BuildToolBar( .T. )
+      BuildToolBar( .T. )
 
-   @ 28, 0 EDITBOX Edit_1 ;
-      WIDTH 0 ;
-      HEIGHT 0 ;
-      VALUE '' ;
-      FONT 'Arial' SIZE 11 BOLD ;
-      BACKCOLOR WHITE ;
-      NOHSCROLL NOVSCROLL
+      @ 28, 0 EDITBOX Edit_1 ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         VALUE '' ;
+         FONT 'Arial' SIZE 11 BOLD ;
+         BACKCOLOR WHITE ;
+         NOHSCROLL NOVSCROLL
 
-   BuildStatusBar( .T. )
+      BuildStatusBar( .T. )
 
    END WINDOW
 
@@ -97,83 +94,80 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-//-------------------------------------------------------------
 PROCEDURE BuildToolBar( lShow )
-//-------------------------------------------------------------
+
    LOCAL mVar
 
    IF lShow
 
       DEFINE IMAGELIST ImageList_1 ;
-         OF Form_1 ;
-         BUTTONSIZE 16, 15 ;
-         IMAGE { 'ID_TOOLBAR' } ;
-         COLORMASK CLR_DEFAULT ;
-         IMAGECOUNT 8 ;
-         MASK
+            OF Form_1 ;
+            BUTTONSIZE 16, 15 ;
+            IMAGE { 'ID_TOOLBAR' } ;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 8 ;
+            MASK
 
-      DEFINE TOOLBAREX ToolBar_1 OF Form_1 BUTTONSIZE 20, 20 IMAGELIST 'ImageList_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 OF Form_1 BUTTONSIZE 20, 20 IMAGELIST 'ImageList_1' FLAT
 
-      BUTTON Button_1 ;
-         PICTUREINDEX IDX_FILE_NEW ;
-         TOOLTIP GetResStr( ID_FILE_NEW ) ;
-         ACTION _dummy()
+            BUTTON Button_1 ;
+               PICTUREINDEX IDX_FILE_NEW ;
+               TOOLTIP GetResStr( ID_FILE_NEW ) ;
+               ACTION _dummy()
 
-      BUTTON Button_2 ;
-         PICTUREINDEX IDX_FILE_OPEN ;
-         TOOLTIP GetResStr( ID_FILE_OPEN ) ;
-         ACTION _dummy()
+            BUTTON Button_2 ;
+               PICTUREINDEX IDX_FILE_OPEN ;
+               TOOLTIP GetResStr( ID_FILE_OPEN ) ;
+               ACTION _dummy()
 
-      BUTTON Button_3 ;
-         PICTUREINDEX IDX_FILE_SAVE ;
-         TOOLTIP GetResStr( ID_FILE_SAVE ) ;
-         ACTION _dummy() ;
-         SEPARATOR
+            BUTTON Button_3 ;
+               PICTUREINDEX IDX_FILE_SAVE ;
+               TOOLTIP GetResStr( ID_FILE_SAVE ) ;
+               ACTION _dummy() ;
+               SEPARATOR
 
-      BUTTON Button_4 ;
-         PICTUREINDEX IDX_EDIT_CUT ;
-         TOOLTIP GetResStr( ID_EDIT_CUT ) ;
-         ACTION _dummy()
+            BUTTON Button_4 ;
+               PICTUREINDEX IDX_EDIT_CUT ;
+               TOOLTIP GetResStr( ID_EDIT_CUT ) ;
+               ACTION _dummy()
 
-      BUTTON Button_5 ;
-         PICTUREINDEX IDX_EDIT_COPY ;
-         TOOLTIP GetResStr( ID_EDIT_COPY ) ;
-         ACTION _dummy()
+            BUTTON Button_5 ;
+               PICTUREINDEX IDX_EDIT_COPY ;
+               TOOLTIP GetResStr( ID_EDIT_COPY ) ;
+               ACTION _dummy()
 
-      BUTTON Button_6 ;
-         PICTUREINDEX IDX_EDIT_PASTE ;
-         TOOLTIP GetResStr( ID_EDIT_PASTE ) ;
-         ACTION _dummy() ;
-         SEPARATOR
+            BUTTON Button_6 ;
+               PICTUREINDEX IDX_EDIT_PASTE ;
+               TOOLTIP GetResStr( ID_EDIT_PASTE ) ;
+               ACTION _dummy() ;
+               SEPARATOR
 
-      BUTTON Button_7 ;
-         PICTUREINDEX IDX_FILE_PRINT ;
-         TOOLTIP GetResStr( ID_FILE_PRINT ) ;
-         ACTION _dummy() ;
-         SEPARATOR
+            BUTTON Button_7 ;
+               PICTUREINDEX IDX_FILE_PRINT ;
+               TOOLTIP GetResStr( ID_FILE_PRINT ) ;
+               ACTION _dummy() ;
+               SEPARATOR
 
-      BUTTON Button_8 ;
-         PICTUREINDEX IDX_HELP_ABOUT ;
-         TOOLTIP GetResStr( ID_HELP_ABOUT ) ;
-         ACTION dlg_about()
+            BUTTON Button_8 ;
+               PICTUREINDEX IDX_HELP_ABOUT ;
+               TOOLTIP GetResStr( ID_HELP_ABOUT ) ;
+               ACTION dlg_about()
 
-      END TOOLBAR
+         END TOOLBAR
 
-   ELSE
+      ELSE
 
-      Form_1.ToolBar_1.Release
+         Form_1.ToolBar_1.Release
 
-      RELEASE IMAGELIST ImageList_1 OF Form_1
+         RELEASE IMAGELIST ImageList_1 OF Form_1
 
-   ENDIF
+      ENDIF
 
-RETURN
+      RETURN
 
-//-------------------------------------------------------------
 PROCEDURE BuildStatusBar( lShow )
-//-------------------------------------------------------------
 
    IF lShow
 
@@ -195,11 +189,9 @@ PROCEDURE BuildStatusBar( lShow )
 
    ENDIF
 
-RETURN
+   RETURN
 
-//-------------------------------------------------------------
 PROCEDURE ResizeEdit
-//-------------------------------------------------------------
 
    Form_1.Edit_1.Row := IF( IsControlDefined( ToolBar_1, Form_1 ), 28, 0 )
 
@@ -210,26 +202,23 @@ PROCEDURE ResizeEdit
       iif( Form_1.VIEW_TOOLBAR.Checked, 28, 0 ) + ;
       iif( Form_1.VIEW_STATUSBAR.Checked, Form_1.StatusBar.Height, 0 ) )
 
-RETURN
+   RETURN
 
-//-------------------------------------------------------------
 PROCEDURE dlg_about
-//-------------------------------------------------------------
 
    DEFINE DIALOG f_dialog ;
       OF Form_1 ;
       RESOURCE IDD_DIALOG1 ;
       ON INIT { |DialogHandle| C_Center( DialogHandle ) }
 
-      REDEFINE BUTTON Btn_1 ID IDOK ;
-         ACTION ThisWindow.Release
+   REDEFINE BUTTON Btn_1 ID IDOK ;
+      ACTION ThisWindow.Release
 
-      ON KEY ESCAPE OF f_dialog ACTION ThisWindow.Release
+   ON KEY ESCAPE OF f_dialog ACTION ThisWindow.Release
 
-   END DIALOG
+END DIALOG
 
 RETURN
-
 
 #pragma BEGINDUMP
 
@@ -272,3 +261,4 @@ HB_FUNC( GETDESKTOPAREA )
 }
 
 #pragma ENDDUMP
+

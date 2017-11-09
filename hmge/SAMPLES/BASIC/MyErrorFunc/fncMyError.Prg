@@ -1,39 +1,38 @@
-*****
 * Manejo de Errores
 * Extraido de ErrorSys.prg
 * Adalberto del Rosario
-*****
 
 #include <minigui.ch>
 #include "error.ch"
 
 FUNCTION MyErrorFunc( MyObjError )
-    LOCAL cErrorMsg, HtmArch, cText, i := 2
 
-    cErrorMsg := MyErrorMessage( MyObjError )
+   LOCAL cErrorMsg, HtmArch, cText, i := 2
 
-    SET ERRORLOG TO GetStartupFolder() + "\MyErrors.htm"
+   cErrorMsg := MyErrorMessage( MyObjError )
 
-    HtmArch := Html_ErrorLog()
-    Html_LineText( HtmArch, '<p class="updated">Date: ' + Dtoc(Date()) + "  " + "Time: " + Time() )
-    Html_LineText( HtmArch, cErrorMsg + "</p>" )
-    
-    cErrorMsg += CRLF + CRLF
-    
-    WHILE ! Empty( ProcName( i ) )
-        cText := "Called from " + ProcName( i ) + "(" + AllTrim( Str( ProcLine( i++ ) ) ) + ")" + CRLF
-        cErrorMsg += cText
-        Html_LineText( HtmArch, cText )
-    ENDDO
-    Html_Line( HtmArch )
-    Html_End( HtmArch )
+   SET ERRORLOG TO GetStartupFolder() + "\MyErrors.htm"
 
-    MsgStop( cErrorMsg, 'Program Error...' )
+   HtmArch := Html_ErrorLog()
+   Html_LineText( HtmArch, '<p class="updated">Date: ' + Dtoc(Date()) + "  " + "Time: " + Time() )
+   Html_LineText( HtmArch, cErrorMsg + "</p>" )
 
-RETURN .T.
+   cErrorMsg += CRLF + CRLF
 
+   WHILE ! Empty( ProcName( i ) )
+      cText := "Called from " + ProcName( i ) + "(" + AllTrim( Str( ProcLine( i++ ) ) ) + ")" + CRLF
+      cErrorMsg += cText
+      Html_LineText( HtmArch, cText )
+   ENDDO
+   Html_Line( HtmArch )
+   Html_End( HtmArch )
+
+   MsgStop( cErrorMsg, 'Program Error...' )
+
+   RETURN .T.
 
 STATIC FUNCTION MyErrorMessage( oError )
+
    LOCAL cMessage
 
    // start error message
@@ -66,4 +65,5 @@ STATIC FUNCTION MyErrorMessage( oError )
       cMessage += ": " + oError:operation
    ENDCASE
 
-RETURN cMessage
+   RETURN cMessage
+

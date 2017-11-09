@@ -22,8 +22,7 @@ FUNCTION Main()
 
    Demo_2.Activate
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION IfNotFoundImg( cFormName, cControlName, aRGBcolor_Fill_Bk )
 
@@ -44,15 +43,13 @@ FUNCTION IfNotFoundImg( cFormName, cControlName, aRGBcolor_Fill_Bk )
       BT_HMGSetImage ( cFormName, cControlName, hBitmap, .T. )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Proc_ON_RELEASE
 
    BT_BitmapRelease ( hBitmap ) // Very important
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Submit()
 
@@ -61,8 +58,7 @@ FUNCTION Submit()
    SetNewImage( "Image_3", "AVAILABLE" )
    SetNewImage( "Image_4", "PRODUCT" )
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION SetNewImage( cControl, cFileName )
 
@@ -77,4 +73,5 @@ FUNCTION SetNewImage( cControl, cFileName )
    BT_BitmapRelease ( hBitmap_aux )
    BT_HMGSetImage ( cForm, cControl, hBitmap, .F. )
 
-RETURN NIL
+   RETURN NIL
+

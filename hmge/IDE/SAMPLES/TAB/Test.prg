@@ -4,10 +4,10 @@
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	Load Window Test
-	Activate Window Test
+   LOAD WINDOW Test
+   ACTIVATE WINDOW Test
 
-Return
+   RETURN
 

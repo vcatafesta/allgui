@@ -1,11 +1,9 @@
 /*
- * $Id: hpanel.prg,v 1.6 2006/12/19 11:10:50 alkresin Exp $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HPanel class 
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hpanel.prg,v 1.6 2006/12/19 11:10:50 alkresin Exp $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HPanel class
+* Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -16,50 +14,56 @@ CLASS HPanel INHERIT HControl
 
    DATA winclass   INIT "PANEL"
 
-   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  bInit,bSize,bPaint,lDocked )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Paint()
-   METHOD Move( x1,y1,width,height )
+METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
+      bInit,bSize,bPaint,lDocked )
+
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Paint()
+
+METHOD Move( x1,y1,width,height )
 
 ENDCLASS
 
-
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  bInit,bSize,bPaint,lDocked ) CLASS HPanel
-Local oParent:=iif(oWndParent==Nil, ::oDefaultParent, oWndParent)
+      bInit,bSize,bPaint,lDocked ) CLASS HPanel
+   LOCAL oParent:=iif(oWndParent==Nil, ::oDefaultParent, oWndParent)
 
    nStyle := SS_OWNERDRAW
    Super:New( oWndParent,nId,nStyle,nLeft,nTop,Iif( nWidth==Nil,0,nWidth ), ;
-                  nHeight,oParent:oFont,bInit, ;
-                  bSize,bPaint )
+      nHeight,oParent:oFont,bInit, ;
+      bSize,bPaint )
 
    ::bPaint  := bPaint
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD Activate CLASS HPanel
 
    IF !Empty( ::oParent:handle )
       ::handle := CreatePanel( ::oParent:handle, ::id, ;
-                   ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HPanel
 
    IF msg == WM_PAINT
       ::Paint()
    ELSE
-      Return Super:onEvent( msg, wParam, lParam )
+
+      RETURN Super:onEvent( msg, wParam, lParam )
    ENDIF
 
-Return 0
+   RETURN 0
 
 METHOD Init CLASS HPanel
 
@@ -76,10 +80,11 @@ METHOD Init CLASS HPanel
       SetWindowObject( ::handle,Self )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Paint() CLASS HPanel
-Local hDC, aCoors, oPenLight, oPenGray
+
+   LOCAL hDC, aCoors, oPenLight, oPenGray
 
    IF ::bPaint != Nil
       Eval( ::bPaint,Self )
@@ -89,15 +94,16 @@ Local hDC, aCoors, oPenLight, oPenGray
       releaseDC( ::handle, hDC )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Move( x1,y1,width,height )  CLASS HPanel
-Local lMove := .F., lSize := .F.
+
+   LOCAL lMove := .F., lSize := .F.
 
    IF x1 != Nil .AND. x1 != ::nLeft
       ::nLeft := x1
       lMove := .T.
-   ENDIF   
+   ENDIF
    IF y1 != Nil .AND. y1 != ::nTop
       ::nTop := y1
       lMove := .T.
@@ -105,14 +111,15 @@ Local lMove := .F., lSize := .F.
    IF width != Nil .AND. width != ::nWidth
       ::nWidth := width
       lSize := .T.
-   ENDIF   
+   ENDIF
    IF height != Nil .AND. height != ::nHeight
       ::nHeight := height
       lSize := .T.
    ENDIF
    IF lMove .OR. lSize
       hwg_MoveWidget( ::handle, Iif(lMove,::nLeft,Nil), Iif(lMove,::nTop,Nil), ;
-          Iif(lSize,::nWidth,Nil), Iif(lSize,::nHeight,Nil), .T. )
+         Iif(lSize,::nWidth,Nil), Iif(lSize,::nHeight,Nil), .T. )
    ENDIF
-Return Nil
+
+   RETURN NIL
 

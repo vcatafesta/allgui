@@ -1,11 +1,9 @@
 /*
- * $Id: hgraph.prg,v 1.7 2008/05/27 12:10:52 lculik Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGraph class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hgraph.prg,v 1.7 2008/05/27 12:10:52 lculik Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HGraph class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -14,7 +12,8 @@
 
 CLASS HGraph INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
+
    DATA aValues
    DATA nGraphs INIT 1
    DATA nType
@@ -26,24 +25,30 @@ CLASS HGraph INHERIT HControl
    DATA oPen, oPenCoor
    DATA xmax, ymax, xmin, ymin PROTECTED
 
-   METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
-                  bSize,ctooltip,tcolor,bcolor )
-   METHOD Activate()
-   METHOD Redefine( oWndParent,nId,aValues,oFont, ;
-                  bSize,ctooltip,tcolor,bcolor )
-   METHOD Init()
-   METHOD CalcMinMax()
-   METHOD Paint()
-   METHOD Rebuild( aValues )
+METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
+      bSize,ctooltip,tcolor,bcolor )
+
+METHOD Activate()
+
+METHOD Redefine( oWndParent,nId,aValues,oFont, ;
+      bSize,ctooltip,tcolor,bcolor )
+
+METHOD Init()
+
+METHOD CalcMinMax()
+
+METHOD Paint()
+
+METHOD Rebuild( aValues )
 
 ENDCLASS
 
 METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
-                  bSize,ctooltip,tcolor,bcolor ) CLASS HGraph
+      bSize,ctooltip,tcolor,bcolor ) CLASS HGraph
 
    Super:New( oWndParent,nId,SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,oFont,, ;
-                  bSize,{|o,lpdis|o:Paint(lpdis)},ctooltip, ;
-                  Iif( tcolor==Nil,Vcolor("FFFFFF"),tcolor ),Iif( bcolor==Nil,0,bcolor ) )
+      bSize,{|o,lpdis|o:Paint(lpdis)},ctooltip, ;
+      Iif( tcolor==Nil,Vcolor("FFFFFF"),tcolor ),Iif( bcolor==Nil,0,bcolor ) )
 
    ::aValues := aValues
    ::nType   := 1
@@ -51,36 +56,42 @@ METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD Redefine( oWndParent,nId,aValues,oFont, ;
-                  bSize,ctooltip,tcolor,bcolor )  CLASS HGraph
+      bSize,ctooltip,tcolor,bcolor )  CLASS HGraph
 
    Super:New( oWndParent,nId,SS_OWNERDRAW,0,0,0,0,oFont,, ;
-                  bSize,{|o,lpdis|o:Paint(lpdis)},ctooltip, ;
-                  Iif( tcolor==Nil,Vcolor("FFFFFF"),tcolor ),Iif( bcolor==Nil,0,bcolor ) )
+      bSize,{|o,lpdis|o:Paint(lpdis)},ctooltip, ;
+      Iif( tcolor==Nil,Vcolor("FFFFFF"),tcolor ),Iif( bcolor==Nil,0,bcolor ) )
 
    ::aValues := aValues
 
-Return Self
+   RETURN Self
 
 METHOD Activate CLASS HGraph
-   IF !empty( ::oParent:handle ) 
+
+   IF !empty( ::oParent:handle )
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Init()  CLASS HGraph
+
    IF !::lInit
       Super:Init()
       ::CalcMinMax()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD CalcMinMax() CLASS HGraph
-Local i, j, nLen
+
+   LOCAL i, j, nLen
+
    ::xmax := ::xmin := ::ymax := ::ymin := 0
    IF ::ymaxSet != Nil .AND. ::ymaxSet != 0
       ::ymax := ::ymaxSet
@@ -107,13 +118,14 @@ Local i, j, nLen
       ENDIF
    NEXT
 
-Return Nil
+   RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HGraph
-Local drawInfo := GetDrawItemInfo( lpdis )
-Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
-Local i, j, nLen
-Local px1, px2, py1, py2, nWidth
+
+   LOCAL drawInfo := GetDrawItemInfo( lpdis )
+   LOCAL hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
+   LOCAL i, j, nLen
+   LOCAL px1, px2, py1, py2, nWidth
 
    i := Round( (x2-x1)/10,0 )
    x1 += i
@@ -142,7 +154,8 @@ Local px1, px2, py1, py2, nWidth
    ENDIF
 
    IF ::ymax == ::ymin .AND. ::ymax == 0
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    SelectObject( hDC, ::oPen:handle )
@@ -178,7 +191,7 @@ Local px1, px2, py1, py2, nWidth
       ENDIF
    NEXT
 
-Return Nil
+   RETURN NIL
 
 METHOD Rebuild( aValues, nType ) CLASS HGraph
 
@@ -189,4 +202,5 @@ METHOD Rebuild( aValues, nType ) CLASS HGraph
    ::CalcMinMax()
    RedrawWindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
 
-Return Nil
+   RETURN NIL
+

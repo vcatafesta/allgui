@@ -1,51 +1,47 @@
-**************************************************************************
 *                                                                        *
-*  MiniGUI OLE Demo					                 *
+*  MiniGUI OLE Demo                                *
 *  (c) 2003 Roberto Lopez <harbourminigui@gmail.com>                     *
-*									 *
+*                            *
 *  Based upon 'TestOle.Prg'                                              *
-*									 *
+*                            *
 *  Author: Jose F. Gimenez (JFG) - jfgimenez@wanadoo.es                  *
 *                                  tecnico.sireinsa@ctv.es               *
 *                                                                        *
 *  Updated for HMG Extended Edition by MiniGUI Team                      *
 *                                                                        *
-**************************************************************************
 
 #include "minigui.ch"
 
 PROCEDURE Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 334 ;
-		HEIGHT 276 ;
-		TITLE 'OLE Test' ;
-		MAIN
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 334 ;
+         HEIGHT 276 ;
+         TITLE 'OLE Test' ;
+         MAIN
 
-		DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-			DEFINE POPUP "Tests"
-				MENUITEM 'Word Test' ACTION MSWORD()
-				MENUITEM 'IE Test' ACTION IEXPLORER()
-				MENUITEM 'OutLook Test' ACTION OUTLOOK()
-				MENUITEM 'Excel Test' ACTION EXCEL()
-				MENUITEM 'Excel Enum' ACTION EXCEL2()
-				MENUITEM 'Excel Chart' ACTION EXCEL3()
-				SEPARATOR
-                                ITEM 'Exit' ACTION Form_1.Release()
-			END POPUP
+         DEFINE POPUP "Tests"
+            MENUITEM 'Word Test' ACTION MSWORD()
+            MENUITEM 'IE Test' ACTION IEXPLORER()
+            MENUITEM 'OutLook Test' ACTION OUTLOOK()
+            MENUITEM 'Excel Test' ACTION EXCEL()
+            MENUITEM 'Excel Enum' ACTION EXCEL2()
+            MENUITEM 'Excel Chart' ACTION EXCEL3()
+            SEPARATOR
+            ITEM 'Exit' ACTION Form_1.Release()
+         END POPUP
 
-		END MENU
+      END MENU
 
-	END WINDOW 
+   END WINDOW
 
-	Form_1.Center()
-	Form_1.Activate()
+   Form_1.Center()
+   Form_1.Activate()
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE MSWORD()
 
@@ -65,9 +61,7 @@ STATIC PROCEDURE MSWORD()
    oWord:Visible := .T.
    oWord:WindowState := 1  // Maximizado
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE IEXPLORER()
 
@@ -79,9 +73,7 @@ STATIC PROCEDURE IEXPLORER()
 
    oIE:Navigate( "http://hmgextended.com/" )
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE OUTLOOK()
 
@@ -99,7 +91,7 @@ STATIC PROCEDURE OUTLOOK()
 
       FOR i := 1 TO 10
          oMail:Recipients:Add( "Contacto" + LTRIM( STR( i, 2 ) ) + ;
-               "<contacto" + LTRIM( STR( i, 2 ) ) + "@servidor.com>" )
+            "<contacto" + LTRIM( STR( i, 2 ) ) + "@servidor.com>" )
       NEXT
 
       oLista := oOL:CreateItem( 7 )  // olDistributionListItem
@@ -111,9 +103,7 @@ STATIC PROCEDURE OUTLOOK()
 
    ENDIF
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE EXCEL()
 
@@ -151,19 +141,15 @@ STATIC PROCEDURE EXCEL()
    oHoja:Cells( 1, 1 ):Select()
    oExcel:Visible := .T.
 
-RETURN
+   RETURN
 
-//--------------------------------------------------------------------
-
-/*
- * Harbour Project source code:
- *    demonstration code for FOR EACH used for OLE objects
- *    this code needs HBOLE library
- *
- * Copyright 2007 Enrico Maria Giordano e.m.giordano at emagsoftware.it
- * www - http://harbour-project.org
- *
- */
+   /*
+   * Harbour Project source code:
+   *    demonstration code for FOR EACH used for OLE objects
+   *    this code needs HBOLE library
+   * Copyright 2007 Enrico Maria Giordano e.m.giordano at emagsoftware.it
+   * www - http://harbour-project.org
+   */
 
 STATIC PROCEDURE EXCEL2()
 
@@ -176,22 +162,21 @@ STATIC PROCEDURE EXCEL2()
    NEXT
    oExcel:Quit()
 
-RETURN
+   RETURN
 
-//--------------------------------------------------------------------
+   /*
+   El ejemplo utiliza la libreria de minigui y Automatizacion OLE pero es muy
+   rapido e incluso genera una Grafico de Barras y, lo mas importante, lo graba
+   como XLS.
 
-/*
- El ejemplo utiliza la libreria de minigui y Automatizacion OLE pero es muy
- rapido e incluso genera una Grafico de Barras y, lo mas importante, lo graba
- como XLS.
-
- Espero les sirva (saludos).
- Julio Cesar Manzano Ascanio 
- */
+   Espero les sirva (saludos).
+   Julio Cesar Manzano Ascanio
+   */
 
 STATIC PROCEDURE EXCEL3()
-   Local oExcel, oHoja, oChart
-   Local aDbf := {}
+
+   LOCAL oExcel, oHoja, oChart
+   LOCAL aDbf := {}
 
    // Creamos el archivo DBF de prueba
    AADD(Adbf,{"ENE","N",7,0})
@@ -200,23 +185,24 @@ STATIC PROCEDURE EXCEL3()
    dbcreate("PRU",aDbf)
 
    // Lo cargamos con datos de prueba
-   use PRU
-   append blank
-   Replace ENE with 34, FEB with 24, MAR with 78
-   append blank
-   Replace ENE with 8, FEB with 16, MAR with 5
-   append blank
-   Replace ENE with 28, FEB with 12, MAR with 33
+   USE PRU
+   APPEND BLANK
+   REPLACE ENE with 34, FEB with 24, MAR with 78
+   APPEND BLANK
+   REPLACE ENE with 8, FEB with 16, MAR with 5
+   APPEND BLANK
+   REPLACE ENE with 28, FEB with 12, MAR with 33
    USE // Cerramos el archivo DBF
 
    // Abrimos Excel
    oExcel:= CreateObject( "Excel.Application" )
 
    // Verificamos si hay error
-   if Ole2TxtError() != 'S_OK'
-	MsgInfo('Excel no esta disponible','Advertencia')
-	Return
-   endif
+   IF Ole2TxtError() != 'S_OK'
+      MsgInfo('Excel no esta disponible','Advertencia')
+
+      RETURN
+   ENDIF
 
    oExcel:Visible := .T. // Hacemos visibles los ca,bios
 
@@ -244,4 +230,5 @@ STATIC PROCEDURE EXCEL3()
 
    MsgInfo("Quedo grabado como: PRU.XLS"+chr(13)+"En: "+GetCurrentFolder())
 
-RETURN
+   RETURN
+

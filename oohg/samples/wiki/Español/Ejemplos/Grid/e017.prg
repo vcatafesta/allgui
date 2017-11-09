@@ -1,17 +1,15 @@
 /*
- * Ejemplo Grid n° 17
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar las cláusulas VIRTUAL
- * y ON QUERYDATA del control Grid, y cómo modificar el
- * color de fondo de los ítems después de la definición
- * del control.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 17
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar las cláusulas VIRTUAL
+* y ON QUERYDATA del control Grid, y cómo modificar el
+* color de fondo de los ítems después de la definición
+* del control.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 
@@ -25,15 +23,15 @@ FUNCTION Main()
    SET CENTURY ON
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 500 ;
-      TITLE "Grid Virtual con DynamicBackColor" ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 500 ;
+         TITLE "Grid Virtual con DynamicBackColor" ;
+         MAIN
 
       FOR k := 1 TO 30
-          aRows[ k ] := { Str(HB_RandomInt( 99 ), 2, 0), ;
-                          'Refer ' + Str( HB_RandomInt( 10 ), 2 ) }
+         aRows[ k ] := { Str(HB_RandomInt( 99 ), 2, 0), ;
+            'Refer ' + Str( HB_RandomInt( 10 ), 2 ) }
       NEXT k
 
       @ 20, 20 GRID Grid_1 OBJ oGrid ;
@@ -56,22 +54,23 @@ FUNCTION Main()
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION DeterminarValor( oGrid, aRows )
 
    _OOHG_ThisQueryData := aRows[ _OOHG_ThisQueryRowIndex, _OOHG_ThisQueryColIndex ]
    oGrid:SetItemColor( _OOHG_ThisQueryRowIndex, NIL, bColor, aRows[ _OOHG_ThisQueryRowIndex ], .F. )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CambiarDatos( oGrid, aRows )
 
-  aRows[ oGrid:Value, 1 ] := Str( ( Val( aRows[ oGrid:Value, 1 ] ) + 1 ) % 100, 2, 0 )
-  oGrid:Refresh()
+   aRows[ oGrid:Value, 1 ] := Str( ( Val( aRows[ oGrid:Value, 1 ] ) + 1 ) % 100, 2, 0 )
+   oGrid:Refresh()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

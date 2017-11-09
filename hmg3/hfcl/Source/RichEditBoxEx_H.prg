@@ -5,101 +5,93 @@ MEMVAR _HMG_SYSDATA
 #include "common.ch"
 #include "fileio.ch"
 
-
 /*
-    GetPropertyEx()
-    Enhancement of GetProperty()
+GetPropertyEx()
+Enhancement of GetProperty()
 */
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetPropertyEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8 )
-*-----------------------------------------------------------------------------*
 
-LOCAL RetVal, hWnd, cType
+   LOCAL RetVal, hWnd, cType
 
-IF VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. ;
-   _IsControlDefined( Arg2 , Arg1 )
+   IF VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. ;
+         _IsControlDefined( Arg2 , Arg1 )
 
-   hWnd  := GetControlHandle( Arg2, Arg1 )
-   cType := GetControlType( Arg2 , Arg1 )
-   Arg3  := HMG_UPPER( ALLTRIM( Arg3 ))
+      hWnd  := GetControlHandle( Arg2, Arg1 )
+      cType := GetControlType( Arg2 , Arg1 )
+      Arg3  := HMG_UPPER( ALLTRIM( Arg3 ))
 
-   DO CASE
+      DO CASE
       CASE cType == "RICHEDIT"
 
          DO CASE
-            CASE Arg3 == "HASNONASCIICHARS"
-               RetVal := RichEditBox_HasNonAsciiChars( hWnd )
-   
-            CASE Arg3 == "HASNONANSICHARS"
-               RetVal := RichEditBox_HasNonAnsiChars( hWnd )
+         CASE Arg3 == "HASNONASCIICHARS"
+            RetVal := RichEditBox_HasNonAsciiChars( hWnd )
 
-        ENDCASE
-
-     ENDCASE
-
-ENDIF
-
-RETURN RetVal
-
-
-/*
-    DoMethodEx()
-    Enhancement of DoMethod()
-*/
-
-*-----------------------------------------------------------------------------*
-FUNCTION DoMethodEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9 )
-*-----------------------------------------------------------------------------*
-
-LOCAL RetVal, hWnd, cType
-
-IF VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. ;
-   _IsControlDefined( Arg2 , Arg1 )
-
-   hWnd  := GetControlHandle( Arg2, Arg1 )
-   cType := GetControlType( Arg2 , Arg1 )
-   Arg3  := HMG_UPPER( ALLTRIM( Arg3 ))
-
-   DO CASE
-      CASE cType == "RICHEDIT"
-
-         DO CASE
-            CASE Arg3 == "LOADFILE"
-               RetVal := RichEditBox_LoadFileEx( hWnd, Arg4, Arg5, Arg6 )
-
-            CASE Arg3 == "SAVEFILE"
-               RetVal := RichEditBox_SaveFileEx( hWnd, Arg4, Arg5, Arg6 )
+         CASE Arg3 == "HASNONANSICHARS"
+            RetVal := RichEditBox_HasNonAnsiChars( hWnd )
 
          ENDCASE
 
-     ENDCASE
+      ENDCASE
 
-ENDIF
+   ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
+   /*
+   DoMethodEx()
+   Enhancement of DoMethod()
+   */
 
-/*
-    RichEditBox_LoadFileEx()
-    Enhancement of RichEditBox_LoadFile()
+FUNCTION DoMethodEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9 )
 
-    Skips over byte order marks in Unicode text files.
-    This function supports UTF-16 BE text files by using HMG_UTF16ByteSwap() 
-    to first convert it a UTF-16 BE file to UTF-16 LE and then calling 
-    RichEditBox_StreamInEx() on the UTF-16 LE file.
-*/ 
+   LOCAL RetVal, hWnd, cType
 
-*-----------------------------------------------------------------------------*
+   IF VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. ;
+         _IsControlDefined( Arg2 , Arg1 )
+
+      hWnd  := GetControlHandle( Arg2, Arg1 )
+      cType := GetControlType( Arg2 , Arg1 )
+      Arg3  := HMG_UPPER( ALLTRIM( Arg3 ))
+
+      DO CASE
+      CASE cType == "RICHEDIT"
+
+         DO CASE
+         CASE Arg3 == "LOADFILE"
+            RetVal := RichEditBox_LoadFileEx( hWnd, Arg4, Arg5, Arg6 )
+
+         CASE Arg3 == "SAVEFILE"
+            RetVal := RichEditBox_SaveFileEx( hWnd, Arg4, Arg5, Arg6 )
+
+         ENDCASE
+
+      ENDCASE
+
+   ENDIF
+
+   RETURN RetVal
+
+   /*
+   RichEditBox_LoadFileEx()
+   Enhancement of RichEditBox_LoadFile()
+
+   Skips over byte order marks in Unicode text files.
+   This function supports UTF-16 BE text files by using HMG_UTF16ByteSwap()
+   to first convert it a UTF-16 BE file to UTF-16 LE and then calling
+   RichEditBox_StreamInEx() on the UTF-16 LE file.
+   */
+
 FUNCTION RichEditBox_LoadFileEx( hWndControl, cFile, lSelection, nType )
-*-----------------------------------------------------------------------------*
-LOCAL lSuccess := .F.
-LOCAL cTempFile
+
+   LOCAL lSuccess := .F.
+   LOCAL cTempFile
 
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILEEX_RTF
    ENDIF
@@ -121,30 +113,27 @@ LOCAL cTempFile
       ENDIF
    ENDIF
 
-RETURN lSuccess
+   RETURN lSuccess
 
+   /*
+   RichEditBox_SaveFileEx()
+   Enhancement of RichEditBox_SaveFile()
 
+   Writes byte order marks to Unicode text files.
+   This function supports UTF-16 BE text files by first calling
+   RichEditBox_StreamOutEx() to generate a UTF-16 LE file and then calling
+   HMG_UTF16ByteSwap() to convert the UTF-16 LE file to UTF-16 BE.
+   */
 
-/*
-    RichEditBox_SaveFileEx()
-    Enhancement of RichEditBox_SaveFile()
-
-    Writes byte order marks to Unicode text files.
-    This function supports UTF-16 BE text files by first calling 
-    RichEditBox_StreamOutEx() to generate a UTF-16 LE file and then calling 
-    HMG_UTF16ByteSwap() to convert the UTF-16 LE file to UTF-16 BE.
-*/ 
-
-*-----------------------------------------------------------------------------*
 FUNCTION RichEditBox_SaveFileEx( hWndControl, cFile, lSelection, nType )
-*-----------------------------------------------------------------------------*
-LOCAL lSuccess := .N.
-LOCAL cTempFile
+
+   LOCAL lSuccess := .N.
+   LOCAL cTempFile
 
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILEEX_RTF
    ENDIF
@@ -160,87 +149,78 @@ LOCAL cTempFile
       lSuccess := RichEditBox_StreamOutEx( hWndControl, cFile, lSelection, nType )
    ENDIF
 
-RETURN lSuccess
+   RETURN lSuccess
 
+   /*
+   RichEditBox_HasNonAsciiChars()
 
+   This function tests for the presence of non-ASCII characters in a rich
+   edit control.  For efficiency, it does not distinguish between non-ASCII
+   ANSI and non-ASCII Unicode.
+   */
 
-/*
-    RichEditBox_HasNonAsciiChars()
-
-    This function tests for the presence of non-ASCII characters in a rich 
-    edit control.  For efficiency, it does not distinguish between non-ASCII 
-    ANSI and non-ASCII Unicode.
-*/
-
-*-----------------------------------------------------------------------------*
 FUNCTION RichEditBox_HasNonAsciiChars( hWndControl )
-*-----------------------------------------------------------------------------*
 
-LOCAL cBuffer := RichEditBox_GetText( hWndControl, .N. )
+   LOCAL cBuffer := RichEditBox_GetText( hWndControl, .N. )
 
-RETURN HMG_IsNonASCII( cBuffer, .N. )
+   RETURN HMG_IsNonASCII( cBuffer, .N. )
 
+   /*
+   RichEditBox_HasNonAnsiChars()
 
+   This function tests for the presence of non-ANSI characters in a rich
+   edit control.  It is slower than RichEditBox_HasNonAsciiChars but does
+   not reject any Unicode characters that are in ANSI.
+   */
 
-/*
-    RichEditBox_HasNonAnsiChars()
-
-    This function tests for the presence of non-ANSI characters in a rich 
-    edit control.  It is slower than RichEditBox_HasNonAsciiChars but does 
-    not reject any Unicode characters that are in ANSI.
-*/
-
-*-----------------------------------------------------------------------------*
 FUNCTION RichEditBox_HasNonAnsiChars( hWndControl )
-*-----------------------------------------------------------------------------*
 
-LOCAL cBuffer := RichEditBox_GetText( hWndControl, .N. )
+   LOCAL cBuffer := RichEditBox_GetText( hWndControl, .N. )
 
-RETURN HMG_UTF8IsNonANSI( cBuffer )
+   RETURN HMG_UTF8IsNonANSI( cBuffer )
 
+   /*
+   GetRichEditFileType()
 
-/*
-    GetRichEditFileType()
+   This function returns the file type of an RTF file or text file, which
+   can be used as the file type parameter in the LoadFile, RtfLoadFile,
+   SaveFile, and RtfSaveFile methods.  This function examines the first few
+   bytes of the file to see if there is an RTF header or Unicode byte order
+   mark.
 
-    This function returns the file type of an RTF file or text file, which 
-    can be used as the file type parameter in the LoadFile, RtfLoadFile, 
-    SaveFile, and RtfSaveFile methods.  This function examines the first few 
-    bytes of the file to see if there is an RTF header or Unicode byte order 
-    mark.
-      
-    When there is no RTF header or byte order mark:  If the optional 
-    lUtf8Test argument is .T., then the whole file is scanned to see if it is 
-    in UTF-8 format.  If so, then the file type is returned as UTF-8.  
-    Otherwise the file type is returned as ANSI.
+   When there is no RTF header or byte order mark:  If the optional
+   lUtf8Test argument is .T., then the whole file is scanned to see if it is
+   in UTF-8 format.  If so, then the file type is returned as UTF-8.
+   Otherwise the file type is returned as ANSI.
 
-*/ 
+   */
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetRichEditFileType( cFile, lUtf8Test )
-*-----------------------------------------------------------------------------*
 
-LOCAL hFile    := FOPEN( cFile, FO_READ )
-LOCAL cBuffer  := SPACE( 5 )
-LOCAL nBufRead := 0
-LOCAL nType    := 0
+   LOCAL hFile    := FOPEN( cFile, FO_READ )
+   LOCAL cBuffer  := SPACE( 5 )
+   LOCAL nBufRead := 0
+   LOCAL nType    := 0
 
-LOCAL bIsUtf8NonAscii := {||
+   LOCAL bIsUtf8NonAscii := {||
    LOCAL lUtf8NonAscii := .N.
    LOCAL cPartial := ''
-      cBuffer  := SPACE( 0x400 )
-      nBufRead := 1
-      BEGIN SEQUENCE
-         WHILE nBufRead > 0
-            nBufRead := FREAD( hFile, @cBuffer, 0x400 )
-            IF nBufRead > 0 .AND. HMG_IsUtf8Ex( cPartial + cBuffer, .N., .Y., @cPartial )
-               lUtf8NonAscii := .Y.
-               BREAK
-            ENDIF
-         ENDDO
-         IF ! EMPTY( cPartial )
-            lUtf8NonAscii := .N.
+
+   cBuffer  := SPACE( 0x400 )
+   nBufRead := 1
+   BEGIN SEQUENCE
+      WHILE nBufRead > 0
+         nBufRead := FREAD( hFile, @cBuffer, 0x400 )
+         IF nBufRead > 0 .AND. HMG_IsUtf8Ex( cPartial + cBuffer, .N., .Y., @cPartial )
+            lUtf8NonAscii := .Y.
+            BREAK
          ENDIF
-      END SEQUENCE
+      ENDDO
+      IF ! EMPTY( cPartial )
+         lUtf8NonAscii := .N.
+      ENDIF
+   END SEQUENCE
+
    RETURN lUtf8NonAscii
    }
 
@@ -269,39 +249,37 @@ LOCAL bIsUtf8NonAscii := {||
 
    FCLOSE( hFile )
 
-RETURN nType   
+   RETURN nType
 
-/*
-    HMG_IsUTF8Ex()
-    Enhancement of HMG_IsUTF8()
+   /*
+   HMG_IsUTF8Ex()
+   Enhancement of HMG_IsUTF8()
 
-    Tests whether input string is UTF8.
-    When cString is the empty string or is all ASCII:  If the optional 
-      lAllowASCII argument is .T., then the return value is .T.  Otherwise 
-      the return value is .F.
-    When cString is valid UTF-8 except that it ends with an incomplete 
-      UTF-8 byte sequence:  If the optional lAllowPartial argument is .T., 
-      then the return value is .T. and the incomplete byte sequence is 
-      passed back through the cPartial argument.  Otherwise the return 
-      value is .F.  This is useful when cString is a file buffer.
-    The return value is .F. if cString encodes any code point greater than 
-      the Unicode limit of 0x10FFFF, or if it encodes any surrogate 
-      character, or if it contains an overlong UTF-8 byte sequence.  One 
-      overlong sequnce is accepted, the 2-byte overlong sequence for the 
-      null character (0xC0 0x80), which is commonly accepted by UTF-8 
-      parsers.
-*/ 
+   Tests whether input string is UTF8.
+   When cString is the empty string or is all ASCII:  If the optional
+   lAllowASCII argument is .T., then the return value is .T.  Otherwise
+   the return value is .F.
+   When cString is valid UTF-8 except that it ends with an incomplete
+   UTF-8 byte sequence:  If the optional lAllowPartial argument is .T.,
+   then the return value is .T. and the incomplete byte sequence is
+   passed back through the cPartial argument.  Otherwise the return
+   value is .F.  This is useful when cString is a file buffer.
+   The return value is .F. if cString encodes any code point greater than
+   the Unicode limit of 0x10FFFF, or if it encodes any surrogate
+   character, or if it contains an overlong UTF-8 byte sequence.  One
+   overlong sequnce is accepted, the 2-byte overlong sequence for the
+   null character (0xC0 0x80), which is commonly accepted by UTF-8
+   parsers.
+   */
 
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_IsUTF8Ex( cString, lAllowASCII, lAllowPartial, cPartial )
-*-----------------------------------------------------------------------------*
 
-LOCAL lASCII  := .T.
-LOCAL lCheck  := .F.
-LOCAL lUTF8   := .T.
-LOCAL nCBytes := 0
-LOCAL nRBytes := 0
-LOCAL cChar, nChar, nLead
+   LOCAL lASCII  := .T.
+   LOCAL lCheck  := .F.
+   LOCAL lUTF8   := .T.
+   LOCAL nCBytes := 0
+   LOCAL nRBytes := 0
+   LOCAL cChar, nChar, nLead
 
    IF lAllowASCII == NIL
       lAllowASCII := .F.
@@ -362,15 +340,15 @@ LOCAL cChar, nChar, nLead
                BREAK
             ENDIF
             lCheck := ( nLead == 0xC0 .OR. nLead == 0xE0 .OR. nLead == 0xED .OR. ;
-              nLead == 0xF0 .OR. nLead == 0xF4 ) // partially valid lead bytes
+               nLead == 0xF0 .OR. nLead == 0xF4 ) // partially valid lead bytes
 
             DO CASE // compute number of continuation bytes
             CASE nLead <= 0xDF
-              nCBytes := 1
+               nCBytes := 1
             CASE nLead <= 0xEF
-              nCBytes := 2
+               nCBytes := 2
             OTHERWISE
-              nCBytes := 3
+               nCBytes := 3
             ENDCASE
             nRBytes := 1
 
@@ -400,21 +378,18 @@ LOCAL cChar, nChar, nLead
       lUTF8 := .F.
    ENDIF
 
-RETURN lUTF8
+   RETURN lUTF8
 
+   /*
+   HMG_IsNonASCII()
 
-/*
-    HMG_IsNonASCII()
+   Tests whether a string contains any non-ASCII characters.
+   */
 
-    Tests whether a string contains any non-ASCII characters.
-*/
-
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_IsNonASCII( cString )
-*-----------------------------------------------------------------------------*
 
-LOCAL lNonASCII := .F.
-LOCAL cChar
+   LOCAL lNonASCII := .F.
+   LOCAL cChar
 
    BEGIN SEQUENCE
       FOR EACH cChar IN cString
@@ -425,22 +400,19 @@ LOCAL cChar
       NEXT
    END SEQUENCE
 
-RETURN lNonASCII
+   RETURN lNonASCII
 
+   /*
+   HMG_UTF8IsNonANSI()
 
-/*
-    HMG_UTF8IsNonANSI()
+   Determines whether a UTF-8 string contains any non-ANSI characters.
+   It does not check whether the string is valid UTF-8.
+   */
 
-    Determines whether a UTF-8 string contains any non-ANSI characters.
-    It does not check whether the string is valid UTF-8.
-*/
-
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_UTF8IsNonANSI( cUtf8Str )
-*-----------------------------------------------------------------------------*
 
-LOCAL aAnsiTrans := { ;
-   0x20AC, ; // ANSI 0x80 - EURO SIGN
+   LOCAL aAnsiTrans := { ;
+      0x20AC, ; // ANSI 0x80 - EURO SIGN
    0x201A, ; // ANSI 0x82 - SINGLE LOW-9 QUOTATION MARK
    0x0192, ; // ANSI 0x83 - LATIN SMALL LETTER F WITH HOOK
    0x201E, ; // ANSI 0x84 - DOUBLE LOW-9 QUOTATION MARK
@@ -467,16 +439,16 @@ LOCAL aAnsiTrans := { ;
    0x0153, ; // ANSI 0x9C - LATIN SMALL LIGATURE OE
    0x017E, ; // ANSI 0x9E - LATIN SMALL LETTER Z WITH CARON
    0x0178  } // ANSI 0x9F - LATIN CAPITAL LETTER Y WITH DIAERESIS
-LOCAL aAnsiSkip  := { ;
-   0x81, ;
-   0x8D, ;
-   0x8F, ;
-   0x90, ;
-   0x9D  }
+   LOCAL aAnsiSkip  := { ;
+      0x81, ;
+      0x8D, ;
+      0x8F, ;
+      0x90, ;
+      0x9D  }
 
-LOCAL lNonANSI := .F.
-LOCAL nOctets  := 0
-LOCAL cChar, nChar, nCode
+   LOCAL lNonANSI := .F.
+   LOCAL nOctets  := 0
+   LOCAL cChar, nChar, nCode
 
    BEGIN SEQUENCE
 
@@ -498,7 +470,7 @@ LOCAL cChar, nChar, nCode
                CASE nCode >= 0x80
                   IF ASCAN( aAnsiSkip, nCode ) == 0
                      lNonANSI := .T.
-                  ENDIF                  
+                  ENDIF
                ENDCASE
             ENDIF
 
@@ -517,25 +489,22 @@ LOCAL cChar, nChar, nCode
 
    END SEQUENCE
 
-RETURN lNonANSI
+   RETURN lNonANSI
 
+   /*
+   HMG_UTF16ByteSwap()
 
-/*
-    HMG_UTF16ByteSwap()
+   Converts between UTF-16 LE and UTF-16 BE file contents.
+   */
 
-    Converts between UTF-16 LE and UTF-16 BE file contents.
-*/
-
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_UTF16ByteSwap( cInFile, cOutFile )
-*-----------------------------------------------------------------------------*
 
-LOCAL hInFile   := FOPEN( cInFile , FO_READ )
-LOCAL hOutFile  := FCREATE( cOutFile )
-LOCAL cInBuffer := SPACE( 0x400 )
-LOCAL nBufRead  := 1
-LOCAL lSuccess  := .N.
-LOCAL cOutBuffer, cBytePair, nBufWrite, nByte
+   LOCAL hInFile   := FOPEN( cInFile , FO_READ )
+   LOCAL hOutFile  := FCREATE( cOutFile )
+   LOCAL cInBuffer := SPACE( 0x400 )
+   LOCAL nBufRead  := 1
+   LOCAL lSuccess  := .N.
+   LOCAL cOutBuffer, cBytePair, nBufWrite, nByte
 
    BEGIN SEQUENCE
 
@@ -564,11 +533,11 @@ LOCAL cOutBuffer, cBytePair, nBufWrite, nByte
       ENDDO
 
       lSuccess := .Y.
-    
+
    END SEQUENCE
 
    FCLOSE( hInFile )
    FCLOSE( hOutFile )
 
-RETURN lSuccess
+   RETURN lSuccess
 

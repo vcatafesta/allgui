@@ -1,28 +1,28 @@
 /*
- * MiniGUI Grid to Text Demo
- * (c) 2009 Pierpaolo Martinello <pier.martinello[at]alice.it>
+* MiniGUI Grid to Text Demo
+* (c) 2009 Pierpaolo Martinello <pier.martinello[at]alice.it>
 */
 
 #include "minigui.ch"
 #include "fileio.ch"
 
-Function Main
+FUNCTION Main
 
-Local aRows [40] [3]
+   LOCAL aRows [40] [3]
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 400 ;
-      TITLE 'Grid to Text Test' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 400 ;
+         TITLE 'Grid to Text Test' ;
+         MAIN
 
       DEFINE MAIN MENU
-             DEFINE POPUP 'File'
-                    ITEM "Grid to Txt" Action Grid2Txt( "Form_1", "Grid_1", "Test.txt", 10 )
-                    SEPARATOR
-                    ITEM "Exit" ACTION ThisWindow.Release()
-             END POPUP
+         DEFINE POPUP 'File'
+            ITEM "Grid to Txt" Action Grid2Txt( "Form_1", "Grid_1", "Test.txt", 10 )
+            SEPARATOR
+            ITEM "Exit" ACTION ThisWindow.Release()
+         END POPUP
       END MENU
 
       aRows [1]   := {'Simpson','Homer','555-5555'}
@@ -70,15 +70,15 @@ Local aRows [40] [3]
       aRows [40]   := {'Reyes','Monica','432-5836'}
 
       @ 10,10 GRID Grid_1 ;
-              WIDTH 500 ;
-              HEIGHT 322 ;
-              HEADERS {'Column 1','Column 2','Column 3'} ;
-              WIDTHS {100,100,100} ;
-              ITEMS aRows ;
-              VALUE 1 ;
-              EDIT ;
-              INPLACE {} ;
-              CELLNAVIGATION
+         WIDTH 500 ;
+         HEIGHT 322 ;
+         HEADERS {'Column 1','Column 2','Column 3'} ;
+         WIDTHS {100,100,100} ;
+         ITEMS aRows ;
+         VALUE 1 ;
+         EDIT ;
+         INPLACE {} ;
+         CELLNAVIGATION
 
    END WINDOW
 
@@ -88,17 +88,16 @@ Local aRows [40] [3]
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Function Grid2Txt( cParentForm , cControlName , cOutputFileName , nLen , sP )
-*-----------------------------------------------------------------------------*
-   Local i, nColIndex
-   Local nOutfile, mLen := 0
-   Local atemp := {}, Col, Row, aSc, StringList := ""
-   Local ic := GetProperty ( cParentForm , cControlName , "ItemCount" )
+FUNCTION Grid2Txt( cParentForm , cControlName , cOutputFileName , nLen , sP )
 
-   Default nLen := 0, Sp := " | "
+   LOCAL i, nColIndex
+   LOCAL nOutfile, mLen := 0
+   LOCAL atemp := {}, Col, Row, aSc, StringList := ""
+   LOCAL ic := GetProperty ( cParentForm , cControlName , "ItemCount" )
+
+   DEFAULT nLen := 0, Sp := " | "
 
    i := GetControlIndex ( cControlName , cParentForm )
 
@@ -106,43 +105,43 @@ Function Grid2Txt( cParentForm , cControlName , cOutputFileName , nLen , sP )
 
    aSc := array(nColIndex)
 
-   If nLen == 0
+   IF nLen == 0
 
       * retrieve a max column length
 
-      For Col = 1 to nColIndex
+      FOR Col = 1 to nColIndex
 
-          For Row := 1 To iC
+         FOR Row := 1 To iC
 
-              mlen:= max ( mlen, len(_GetGridCellValue ( cControlName , cParentForm , Row , Col ) ) )
+            mlen:= max ( mlen, len(_GetGridCellValue ( cControlName , cParentForm , Row , Col ) ) )
 
-              asc[col] := mlen
+            asc[col] := mlen
 
-          Next Row
+         NEXT Row
 
-          mlen := 0
+         mlen := 0
 
-      Next Col
+      NEXT Col
 
-    Else
+   ELSE
 
       * adapt a colum's length to nLen Parameter
 
-      For Col = 1 to nColIndex
+      FOR Col = 1 to nColIndex
 
-          aSc[ col ] := nLen
+         aSc[ col ] := nLen
 
-      Next Col
+      NEXT Col
 
-    Endif
+   ENDIF
 
    * add a colum description Header
 
-   For Col = 1 to nColIndex
+   FOR Col = 1 to nColIndex
 
-       stringList += addspace( _HMG_aControlPageMap [ i ][ col ], aSc[ col ] )+ if( col < nColIndex, sp, CRLF )
+      stringList += addspace( _HMG_aControlPageMap [ i ][ col ], aSc[ col ] )+ if( col < nColIndex, sp, CRLF )
 
-   Next
+   NEXT
 
    aadd( atemp, stringList )
 
@@ -150,70 +149,68 @@ Function Grid2Txt( cParentForm , cControlName , cOutputFileName , nLen , sP )
 
    * add a colum's details
 
-   For Row := 1 to ic
+   FOR Row := 1 to ic
 
-        For Col := 1 To nColIndex
+      FOR Col := 1 To nColIndex
 
-            StringList += addspace(_GetGridCellValue ( cControlName , cParentForm , Row , Col ), aSc[ col ] ) ;
-                       + if( col < nColIndex , sp, CRLF )
+         StringList += addspace(_GetGridCellValue ( cControlName , cParentForm , Row , Col ), aSc[ col ] ) ;
+            + if( col < nColIndex , sp, CRLF )
 
-        Next Col
+      NEXT Col
 
-        aadd ( atemp, StringList )
+      aadd ( atemp, StringList )
 
-        StringList := ''
+      StringList := ''
 
-   Next Row
+   NEXT Row
 
    nOutfile := FCREATE( cOutputFileName , FC_NORMAL )
 
-   For Row := 1 to len ( aTemp )
+   FOR Row := 1 to len ( aTemp )
 
-       FWRITE( nOutfile , aTemp [Row] )
+      FWRITE( nOutfile , aTemp [Row] )
 
-   Next
+   NEXT
 
    FCLOSE( nOutfile )
 
-   If File( cOutputFileName )
+   IF File( cOutputFileName )
       ShowTxt ( MemoRead( cOutputFileName ) )
-   Else
+   ELSE
       msgExclamation( "Error at creating " + cOutputFileName )
-   Endif
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION addspace(string,final_len)
-*-----------------------------------------------------------------------------*
-RETURN SUBST(string+REPL(' ',final_len-LEN(string)),1,final_len)
 
-*-----------------------------------------------------------------------------*
-Procedure ShowTxt( cText )
-*-----------------------------------------------------------------------------*
+   RETURN SUBST(string+REPL(' ',final_len-LEN(string)),1,final_len)
 
-  DEFINE WINDOW Form_2 ;
+PROCEDURE ShowTxt( cText )
+
+   DEFINE WINDOW Form_2 ;
          AT 0,0 ;
          WIDTH 640 ;
          HEIGHT 400 ;
          TITLE 'List Grid to Text Demo' ;
          MODAL
 
-        DEFINE EDITBOX Edit_1
-               COL 10
-               ROW 10
-               WIDTH 610
-               HEIGHT 330
-               VALUE cText
-               READONLY .T.
-               HSCROLLBAR .F.
-               FONTNAME "Courier New"
-               FONTSIZE 10
-        END EDITBOX
+      DEFINE EDITBOX Edit_1
+         COL 10
+         ROW 10
+         WIDTH 610
+         HEIGHT 330
+         VALUE cText
+         READONLY .T.
+         HSCROLLBAR .F.
+         FONTNAME "Courier New"
+         FONTSIZE 10
+      END EDITBOX
 
-  END WINDOW
+   END WINDOW
 
-  CENTER WINDOW Form_2
-  ACTIVATE WINDOW Form_2
+   CENTER WINDOW Form_2
+   ACTIVATE WINDOW Form_2
 
-Return
+   RETURN
+

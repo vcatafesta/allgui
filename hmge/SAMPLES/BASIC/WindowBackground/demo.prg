@@ -1,20 +1,19 @@
 /*
- * Author: P.Chornyj <myorg63@mail.ru>
- *
- * Make Your Project Look Great!
+* Author: P.Chornyj <myorg63@mail.ru>
+* Make Your Project Look Great!
 */
 
 #include "minigui.ch"
 
-#define COLOR_WINDOW	5
+#define COLOR_WINDOW   5
 
 PROCEDURE Main()
 
    DEFINE WINDOW Form_Main ;
-      CLIENTAREA 640, 480 ;
-      TITLE 'How to set a Window background' ;
-      BKBRUSH iif(IsThemed(), nRGB2Arr( GetSysColor( COLOR_WINDOW ) ), ) ;
-      MAIN
+         CLIENTAREA 640, 480 ;
+         TITLE 'How to set a Window background' ;
+         BKBRUSH iif(IsThemed(), nRGB2Arr( GetSysColor( COLOR_WINDOW ) ), ) ;
+         MAIN
 
       DEFINE MAIN MENU
 
@@ -59,15 +58,14 @@ PROCEDURE Main()
 
    ACTIVATE WINDOW Form_Main
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE SetBKBrush( nBrushStyle )
 
    LOCAL hBrush
 
    SWITCH nBrushStyle
-   CASE  1 ; ADD BKBRUSH hBrush SOLID COLOR RED   TO FORM Form_Main 
+   CASE  1 ; ADD BKBRUSH hBrush SOLID COLOR RED   TO FORM Form_Main
       EXIT
 
    CASE  2 ; ADD BKBRUSH hBrush SOLID COLOR GREEN TO Form_Main
@@ -112,4 +110,5 @@ STATIC PROCEDURE SetBKBrush( nBrushStyle )
 
    ERASE WINDOW Form_Main
 
-RETURN
+   RETURN
+

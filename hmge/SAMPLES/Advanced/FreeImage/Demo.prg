@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Joint usage of FreeImage & SQLite3 demo
- * (c) 2008 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Joint usage of FreeImage & SQLite3 demo
+* (c) 2008 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "Directry.ch"
@@ -14,7 +12,7 @@
 
 #define DB_NAME            'PicBase.s3db'   // Рабочая база
 
-#define WM_PAINT	     15             // Для принудительной перерисовки окна
+#define WM_PAINT        15             // Для принудительной перерисовки окна
 
 // Область вывода графического изображения фиксирована
 
@@ -30,353 +28,330 @@
 #define FI_WIDTH            ( FI_RIGHT - FI_LEFT )
 #define FI_HEIGHT           ( FI_BOTTOM - FI_TOP )
 
-
-
-Static lCreateBase := .T.   // Признак: автоматически создавать новую базу
-Static aParams              // Массив рабочих параметров 
-
+STATIC lCreateBase := .T.   // Признак: автоматически создавать новую базу
+STATIC aParams              // Массив рабочих параметров
 
 /******
-*
-*       Демонстрация рисунков, хранящихся в графических файлах 
+*       Демонстрация рисунков, хранящихся в графических файлах
 *       и в базе SQLite
-*
 */
 
-Procedure Main
+PROCEDURE Main
 
-aParams := { 'StartDir'  => GetCurrentFolder(), ;        // Текущий каталог
-             'pDB'       => nil               , ;        // Дескриптор базы
-             'ReadFiles' => .T.               , ;        // Перечитать список файлов
-             'SavePos'   => .F.               , ;        // Сохранять позицию в списке файлов 
-             'Reload'    => .T.                 ;        // Признак необходимости перечитать БД
-           }
+   aParams := { 'StartDir'  => GetCurrentFolder(), ;        // Текущий каталог
+   'pDB'       => nil               , ;        // Дескриптор базы
+   'ReadFiles' => .T.               , ;        // Перечитать список файлов
+   'SavePos'   => .F.               , ;        // Сохранять позицию в списке файлов
+   'Reload'    => .T.                 ;        // Признак необходимости перечитать БД
+   }
 
-If Empty( aParams[ 'pDB' ] := OpenBase() )
-   MsgStop( "Can't open/create " + DB_NAME, "Error" )
-   Quit
-Endif
+   IF Empty( aParams[ 'pDB' ] := OpenBase() )
+      MsgStop( "Can't open/create " + DB_NAME, "Error" )
+      QUIT
+   ENDIF
 
-FI_Initialise()          // Инициализация библиотеки FreeImage
+   FI_Initialise()          // Инициализация библиотеки FreeImage
 
-Set font to 'Tahoma', 9
+   SET font to 'Tahoma', 9
 
-Define window wMain                   ;
-       At 0, 0                        ;
-       Width 780                      ;
-       Height 525                     ;
-       Title 'FreeImage & SQLite3 Usage Demo' ;
-       NoMaximize                     ;
-       NoSize                         ;
-       Icon 'main.ico'                ;
-       Main                           ;
-       On Release FI_DeInitialise()   ;
-       On Paint ShowMe()
+   DEFINE WINDOW wMain                   ;
+         At 0, 0                        ;
+         Width 780                      ;
+         Height 525                     ;
+         Title 'FreeImage & SQLite3 Usage Demo' ;
+         NoMaximize                     ;
+         NoSize                         ;
+         Icon 'main.ico'                ;
+         Main                           ;
+         On Release FI_DeInitialise()   ;
+         On Paint ShowMe()
 
-   // ShowMe() - процедура вывода изображения. В описании окна её лучше
-   // указать только в On paint. Это позволит обновлять содержимое
-   // главного окна при всякой перерисовке. Дополнительное указание
-   // On init ShowMe() приводит к мерцанию окна программы при запуске.
-   
-   Define tab tbData ;
-          at 5, 5    ;
-          Width 250  ;
-          Height 470 ;
-          On Change SwitchTab()
-          
-      Page 'Files'
-      
-         @ 32, 5 Grid grdFiles   ;
-                 Width 235       ;
-                 Height 340      ;
-                 Widths { 200 }  ;
-                 NoHeaders       ;
-                 On Change ShowMe()
+      // ShowMe() - процедура вывода изображения. В описании окна её лучше
+      // указать только в On paint. Это позволит обновлять содержимое
+      // главного окна при всякой перерисовке. Дополнительное указание
+      // On init ShowMe() приводит к мерцанию окна программы при запуске.
 
-         @ 385, 5 ButtonEx btnChDir       ;
-                  Caption 'Change folder' ;
-                  Width 235               ;
-                  Picture 'DIR'           ;
-                  Action ChangeFolder()
+      DEFINE TAB tbData ;
+            at 5, 5    ;
+            Width 250  ;
+            Height 470 ;
+            On Change SwitchTab()
 
-         @ 430, 5 ButtonEx btnAdd        ;
-                  Caption 'Copy to base' ;
-                  Width 235              ;
-                  Picture 'COPY'         ;          
-                  Action AddToBase()
+         Page 'Files'
 
-      End Page
-      
-      Page 'Records'
+            @ 32, 5 Grid grdFiles   ;
+               Width 235       ;
+               Height 340      ;
+               Widths { 200 }  ;
+               NoHeaders       ;
+               On Change ShowMe()
 
-        @ 32, 5 Grid grdRecords          ;
-                Width 235                ;
-                Height 340               ;
-                Widths { 50, 180 }       ;
-                Headers { 'ID', 'Name' } ;
-                On Change ShowMe()      
+            @ 385, 5 ButtonEx btnChDir       ;
+               Caption 'Change folder' ;
+               Width 235               ;
+               Picture 'DIR'           ;
+               Action ChangeFolder()
 
-         @ 385, 5 ButtonEx btnDelete      ;
-                  Caption 'Delete record' ;
-                  Width 235               ;
-                  Picture 'DELETE'        ;
-                  Action DelRecord()
+            @ 430, 5 ButtonEx btnAdd        ;
+               Caption 'Copy to base' ;
+               Width 235              ;
+               Picture 'COPY'         ;
+               Action AddToBase()
 
-         @ 430, 5 ButtonEx btnSave       ;
-                  Caption 'Save to file' ;
-                  Width 235              ;
-                  Picture 'SAVE'         ;
-                  Action SaveToFile()
-      
-      End Page    
-      
-   End Tab
+         END PAGE
 
-   Define StatusBar
-      StatusItem aParams[ 'StartDir' ]
-      StatusItem 'Exit Alt+X' Width 70
-   End StatusBar
-             
-End window
+         Page 'Records'
 
-On Key Alt+X of wMain Action ReleaseAllWindows()
+            @ 32, 5 Grid grdRecords          ;
+               Width 235                ;
+               Height 340               ;
+               Widths { 50, 180 }       ;
+               Headers { 'ID', 'Name' } ;
+               On Change ShowMe()
 
-ListFiles()     // Заполняем список файлов
+            @ 385, 5 ButtonEx btnDelete      ;
+               Caption 'Delete record' ;
+               Width 235               ;
+               Picture 'DELETE'        ;
+               Action DelRecord()
 
-Center window wMain
-Activate window wMain
+            @ 430, 5 ButtonEx btnSave       ;
+               Caption 'Save to file' ;
+               Width 235              ;
+               Picture 'SAVE'         ;
+               Action SaveToFile()
 
-Return
+         END PAGE
 
-****** End of Main ******
+      END TAB
 
+      DEFINE STATUSBAR
+         StatusItem aParams[ 'StartDir' ]
+         StatusItem 'Exit Alt+X' Width 70
+      END STATUSBAR
 
-/*****
-*
-*       OpenBase() --> pHandleDB
-*
-*       Открытие/создание БД
-*
-*/
+   END WINDOW
 
-Static Function OpenBase
-Local lExistDB  := File( DB_NAME )                     , ;
+   On Key Alt+X of wMain Action ReleaseAllWindows()
+
+   ListFiles()     // Заполняем список файлов
+
+   CENTER WINDOW wMain
+   ACTIVATE WINDOW wMain
+
+   RETURN
+
+   ****** End of Main ******
+
+   /*****
+   *       OpenBase() --> pHandleDB
+   *       Открытие/создание БД
+   */
+
+STATIC FUNCTION OpenBase
+
+   LOCAL lExistDB  := File( DB_NAME )                     , ;
       pHandleDB := SQLite3_Open( DB_NAME, lCreateBase ), ;
       cCommand
 
-If !Empty( pHandleDB )
-   
-   // При auto_vacuum = 0 после завершения операций удаления данных размер файла БД не изменяется.
-   // Освобождённые блоки помечаются как "свободные" и могут повторно использоваться в 
-   // последующих операциях добавления новых записей.
-   // Для уменьшения размера файла необходимо выполнить команду Vacuum
-   
-   SQLite3_Exec( pHandleDB, 'PRAGMA auto_vacuum = 0' )
+   IF !Empty( pHandleDB )
 
-   If !lExistDB
-      
-      // Создаём таблицу
-    
-      cCommand := 'Create table if not exists Picts( Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Image BLOB );'
-      SQLite3_Exec( pHandleDB, cCommand )
+      // При auto_vacuum = 0 после завершения операций удаления данных размер файла БД не изменяется.
+      // Освобождённые блоки помечаются как "свободные" и могут повторно использоваться в
+      // последующих операциях добавления новых записей.
+      // Для уменьшения размера файла необходимо выполнить команду Vacuum
 
-   Endif
-   
-Endif
+      SQLite3_Exec( pHandleDB, 'PRAGMA auto_vacuum = 0' )
 
-Return pHandleDB
+      IF !lExistDB
 
-****** End of OpenBase ******
+         // Создаём таблицу
 
+         cCommand := 'Create table if not exists Picts( Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Image BLOB );'
+         SQLite3_Exec( pHandleDB, cCommand )
 
-/******
-*
-*      SwitchTab()
-*
-*      Обработка переключения между списками (файлы-записи)
-*
-*/
+      ENDIF
 
-Static Procedure SwitchTab
-Local nValue := wMain.tbData.Value
+   ENDIF
 
-// Установка активного элемента
+   RETURN pHandleDB
 
-If ( nValue == 1 )
-   ListFiles()
-   wMain.grdFiles.SetFocus       // Вкладка файлов
-   
-ElseIf( nValue == 2 )
+   ****** End of OpenBase ******
 
-   ListRecords()
-   wMain.grdRecords.SetFocus     // Вкладка записей
-   
-Endif
+   /******
+   *      SwitchTab()
+   *      Обработка переключения между списками (файлы-записи)
+   */
 
-RefreshMe()
+STATIC PROCEDURE SwitchTab
 
-Return
+   LOCAL nValue := wMain.tbData.Value
 
-****** End of SwitchTab ******
+   // Установка активного элемента
 
+   IF ( nValue == 1 )
+      ListFiles()
+      wMain.grdFiles.SetFocus       // Вкладка файлов
 
-/******
-*
-*       ListFiles()
-*
-*       Формирование списка графических файлов
-*
-*/
-    
-Static Procedure ListFiles
-Local nPos   := wMain.grdFiles.Value, ; 
+   ELSEIF( nValue == 2 )
+
+      ListRecords()
+      wMain.grdRecords.SetFocus     // Вкладка записей
+
+   ENDIF
+
+   RefreshMe()
+
+   RETURN
+
+   ****** End of SwitchTab ******
+
+   /******
+   *       ListFiles()
+   *       Формирование списка графических файлов
+   */
+
+STATIC PROCEDURE ListFiles
+
+   LOCAL nPos   := wMain.grdFiles.Value, ;
       aFiles := {}
 
-If aParams[ 'ReadFiles' ]
- 
-   // Из поддерживаемых FreeImage типов файлов используем только часть
+   IF aParams[ 'ReadFiles' ]
 
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.jpg'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.jpeg' ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.png'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.gif'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.bmp'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
-   AEval( Directory( aParams[ 'StartDir' ] + '\*.ico'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      // Из поддерживаемых FreeImage типов файлов используем только часть
 
-   wMain.grdFiles.DeleteAllItems
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.jpg'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.jpeg' ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.png'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.gif'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.bmp'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
+      AEval( Directory( aParams[ 'StartDir' ] + '\*.ico'  ), { | elem | AAdd( aFiles, Lower( elem[ F_NAME ] ) ) } )
 
-   If !Empty( aFiles )
-   
-      ASort( aFiles, { | x, y | x < y } )       // Сортируем список
+      wMain.grdFiles.DeleteAllItems
 
-      wMain.grdFiles.DisableUpdate              // Запрет на обновление грида (актуально при большом количестве графических файлов в папке)
+      IF !Empty( aFiles )
 
-      AEval( aFiles, { | elem | wMain.grdFiles.AddItem( { elem } ) } )
+         ASort( aFiles, { | x, y | x < y } )       // Сортируем список
 
-      wMain.grdFiles.EnableUpdate               // Разрешаем показать выполненные изменения в гриде
+         wMain.grdFiles.DisableUpdate              // Запрет на обновление грида (актуально при большом количестве графических файлов в папке)
 
-      // При обновлении списка текущего каталога позицию указателя сохраняем
-   
-      If !aParams[ 'SavePos' ]    
-         
-         wMain.grdFiles.Value := 1
-         wMain.grdFiles.SetFocus
-         
-         aParams[ 'SavePos' ] := .T.
-   
-      Else
-      
-         If ( nPos > 0 )
-            wMain.grdFiles.Value := nPos
-         Endif
-               
-      Endif
-      
-   Endif
-   
-   aParams[ 'ReadFiles' ] := .F.
+         AEval( aFiles, { | elem | wMain.grdFiles.AddItem( { elem } ) } )
 
-Endif
+         wMain.grdFiles.EnableUpdate               // Разрешаем показать выполненные изменения в гриде
 
-Return
+         // При обновлении списка текущего каталога позицию указателя сохраняем
 
-****** End of ListFiles ******
+         IF !aParams[ 'SavePos' ]
 
+            wMain.grdFiles.Value := 1
+            wMain.grdFiles.SetFocus
 
-/******
-*
-*       ListRecords()
-*       
-*       Заполнение таблицы имеющихся в БД записей
-*
-*/
+            aParams[ 'SavePos' ] := .T.
 
-Static Procedure ListRecords
-Local aData, ;
+         ELSE
+
+            IF ( nPos > 0 )
+               wMain.grdFiles.Value := nPos
+            ENDIF
+
+         ENDIF
+
+      ENDIF
+
+      aParams[ 'ReadFiles' ] := .F.
+
+   ENDIF
+
+   RETURN
+
+   ****** End of ListFiles ******
+
+   /******
+   *       ListRecords()
+   *       Заполнение таблицы имеющихся в БД записей
+   */
+
+STATIC PROCEDURE ListRecords
+
+   LOCAL aData, ;
       aItem
 
-If aParams[ 'Reload' ]
+   IF aParams[ 'Reload' ]
 
-   wMain.grdRecords.DeleteAllItems
+      wMain.grdRecords.DeleteAllItems
 
-   aData := Do_SQL_Query( 'Select Id, Name from Picts Order by Name;' )
+      aData := Do_SQL_Query( 'Select Id, Name from Picts Order by Name;' )
 
-   If !Empty( aData )
-   
-      For each aItem in aData
-         // В выборке только 2 поля: идентификатор и имя файла
-         wMain.grdRecords.AddItem( { aItem[ 1 ], aItem[ 2 ] } )
-      Next
-   
-      wMain.grdRecords.Value := 1
-   
-   Endif
+      IF !Empty( aData )
 
-   // Необходимо переформирование списка записей, имеющихся в БД
-   // Признак устанавливается при инициализации или после добавления и
-   // удаления записей
-   
-   aParams[ 'Reload' ] := .F.
-   
-   If ( wMain.grdRecords.ItemCount > 0 )
-      wMain.btnDelete.Enabled := .T.
-   Else
-      wMain.btnDelete.Enabled := .F.
-   Endif
-      
-Endif
+         FOR EACH aItem in aData
+            // В выборке только 2 поля: идентификатор и имя файла
+            wMain.grdRecords.AddItem( { aItem[ 1 ], aItem[ 2 ] } )
+         NEXT
 
-Return
+         wMain.grdRecords.Value := 1
 
-****** End of ListRecords ******
+      ENDIF
 
+      // Необходимо переформирование списка записей, имеющихся в БД
+      // Признак устанавливается при инициализации или после добавления и
+      // удаления записей
 
-/******
-*
-*       ChangeFolder()
-*
-*       Смена текущего каталога
-*
-*/
+      aParams[ 'Reload' ] := .F.
 
-Static Procedure ChangeFolder
-Local cFolder := GetFolder( 'Select folder', aParams[ 'StartDir' ] )
+      IF ( wMain.grdRecords.ItemCount > 0 )
+         wMain.btnDelete.Enabled := .T.
+      ELSE
+         wMain.btnDelete.Enabled := .F.
+      ENDIF
 
-If !Empty( cFolder )
+   ENDIF
 
-   aParams[ 'StartDir'  ] := cFolder
-   aParams[ 'ReadFiles' ] := .T.
-   aParams[ 'SavePos'   ] := .F.
-   
-   ListFiles()
-   
-   wMain.StatusBar.Item( 1 ) := aParams[ 'StartDir' ]
-   
-   ShowMe()
-   
-Endif
+   RETURN
 
-Return
+   ****** End of ListRecords ******
 
-****** End of ChangeFolder ******
+   /******
+   *       ChangeFolder()
+   *       Смена текущего каталога
+   */
 
+STATIC PROCEDURE ChangeFolder
 
-/******
-*
-*       ShowMe()
-*
-*       Вывод изображения
-*
-*/
+   LOCAL cFolder := GetFolder( 'Select folder', aParams[ 'StartDir' ] )
 
-Static Procedure ShowMe
-Static nHandleImg
-Local nTabValue := wMain.tbData.Value, ;
+   IF !Empty( cFolder )
+
+      aParams[ 'StartDir'  ] := cFolder
+      aParams[ 'ReadFiles' ] := .T.
+      aParams[ 'SavePos'   ] := .F.
+
+      ListFiles()
+
+      wMain.StatusBar.Item( 1 ) := aParams[ 'StartDir' ]
+
+      ShowMe()
+
+   ENDIF
+
+   RETURN
+
+   ****** End of ChangeFolder ******
+
+   /******
+   *       ShowMe()
+   *       Вывод изображения
+   */
+
+STATIC PROCEDURE ShowMe
+
+   STATIC nHandleImg
+   LOCAL nTabValue := wMain.tbData.Value, ;
       nTop      := FI_TOP            , ;
       nLeft     := FI_LEFT           , ;
       nBottom   := FI_BOTTOM         , ;
       nRight    := FI_RIGHT          , ;
-      nPos                           , ; 
+      nPos                           , ;
       cFile                          , ;
       cImage                         , ;
       pps                            , ;
@@ -388,339 +363,329 @@ Local nTabValue := wMain.tbData.Value, ;
       nKoeff                         , ;
       nHandleClone
 
-If !( nHandleImg == nil )
-   
-   FI_Unload( nHandleImg )
-   
-   // Вывод изображения меньшего размера после большого приводит к 
-   // наложению картинок. Поэтому нужно очистить область, объявив
-   // её "недействительной".
-   // Рациональнее обрабатывать не всё окно программы, а только часть,
-   // в которой показывается картинка.
-     
-   // Подгонка очистки: при перемещении окна за пределы экрана от изображения
-   // остаются артефакты.
-   
-   InvalidateRect( Application.Handle, 1, FI_LEFT, 0, ( wMain.Width - 1 ), ( wMain.Height - 15 ) )
-      
-   nHandleImg := nil
-   
-Endif
+   IF !( nHandleImg == nil )
 
-If ( nTabValue == 1 )
-   nPos := wMain.grdFiles.Value
-Else
-   nPos := wMain.grdRecords.Value
-Endif
+      FI_Unload( nHandleImg )
 
-If Empty( nPos )
-   Return
-Endif
+      // Вывод изображения меньшего размера после большого приводит к
+      // наложению картинок. Поэтому нужно очистить область, объявив
+      // её "недействительной".
+      // Рациональнее обрабатывать не всё окно программы, а только часть,
+      // в которой показывается картинка.
+
+      // Подгонка очистки: при перемещении окна за пределы экрана от изображения
+      // остаются артефакты.
+
+      InvalidateRect( Application.Handle, 1, FI_LEFT, 0, ( wMain.Width - 1 ), ( wMain.Height - 15 ) )
+
+      nHandleImg := nil
+
+   ENDIF
+
+   IF ( nTabValue == 1 )
+      nPos := wMain.grdFiles.Value
+   ELSE
+      nPos := wMain.grdRecords.Value
+   ENDIF
+
+   IF Empty( nPos )
+
+      RETURN
+   ENDIF
 
    // Рисунок получаем из разных источников, в зависимости от текущей вкладки
-   
-   If ( nTabValue == 1 )
-   
+
+   IF ( nTabValue == 1 )
+
       // Из файла
-      
-      If !File( cFile := aParams[ 'StartDir' ] + '\' + wMain.grdFiles.Item( nPos )[ 1 ] )
-         Return
-      Endif
+
+      IF !File( cFile := aParams[ 'StartDir' ] + '\' + wMain.grdFiles.Item( nPos )[ 1 ] )
+
+         RETURN
+      ENDIF
 
       cImage := MemoRead( cFile )         // Загрузка в память
-      
-  Else
-  
-     cID := wMain.grdRecords.Item( nPos )[ 1 ]
-     aData := Do_SQL_Query( 'Select Image from Picts Where Id = ' + cId + ';' )
 
-     If !Empty( aData )
-        cImage := aData[ 1, 1 ]
-     Else
-        Return
-     Endif
-  
-  Endif
-   
-If Empty( cImage )
-   Return
-Endif
+   ELSE
 
-// Это загрузка рисунка непосредственно из файла
-// nHandleImg := FI_Load( FI_GetFileType( cFile ), cFile, 0 )
+      cID := wMain.grdRecords.Item( nPos )[ 1 ]
+      aData := Do_SQL_Query( 'Select Image from Picts Where Id = ' + cId + ';' )
 
-// Рисунок предварительно загружается в память и выводится оттуда
+      IF !Empty( aData )
+         cImage := aData[ 1, 1 ]
+      ELSE
 
-nHandleImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cImage, Len( cImage ) ), cImage, 0 )
+         RETURN
+      ENDIF
 
-// Оригинальный размер изображения
+   ENDIF
 
-nWidth  := FI_GetWidth( nHandleImg )
-nHeight := FI_GetHeight( nHandleImg )
+   IF Empty( cImage )
 
-// FreeImage будет стараться вписать изображение в заданную область, но
-// при этом будут искажения. Поэтому для больших рисунков рассчитываем
-// коэффициент уменьшения (масштабирования).
+      RETURN
+   ENDIF
 
-// ! ВНИМАНИЕ
-// Расчет и изменение пропорций больших рисунков замедляет вывод изображения
+   // Это загрузка рисунка непосредственно из файла
+   // nHandleImg := FI_Load( FI_GetFileType( cFile ), cFile, 0 )
 
-If ( ( nHeight > FI_HEIGHT ) .or. ( nWidth > FI_WIDTH )  )
+   // Рисунок предварительно загружается в память и выводится оттуда
 
-   // Коэффициент выводим по наибольшему превышению размера.
-   // Изображение подгоняется пропорционально.
-   
-   If ( ( nHeight - FI_HEIGHT ) > ( nWidth - FI_WIDTH ) )
-      
-      // Превышение области по высоте. Расчёт выполняется по этому
-      // параметру.
-      
-      nKoeff := ( FI_HEIGHT / nHeight )
-   Else
-      nKoeff := ( FI_WIDTH / nWidth )
-   Endif
-   
-   nHeight := Round( ( nHeight * nKoeff ), 0 )
-   nWidth  := Round( ( nWidth  * nKoeff ), 0 )
-   
-   nHandleClone := FI_Clone( nHandleImg )
-   FI_Unload( nHandleImg )
-   
-   nHandleImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
-   FI_Unload( nHandleClone )
-   
-Endif
+   nHandleImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cImage, Len( cImage ) ), cImage, 0 )
 
-// Позиционирование изображения. Если размер меньше заданной области
-// вывода, рисунок центрируется по этой оси.
+   // Оригинальный размер изображения
 
-If ( nWidth < FI_WIDTH )
-   nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
-   nRight := ( nLeft + nWidth )
-Endif
+   nWidth  := FI_GetWidth( nHandleImg )
+   nHeight := FI_GetHeight( nHandleImg )
 
-If ( nHeight < FI_HEIGHT )
-   nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
-   nBottom := ( nTop + nHeight )
-Endif
+   // FreeImage будет стараться вписать изображение в заданную область, но
+   // при этом будут искажения. Поэтому для больших рисунков рассчитываем
+   // коэффициент уменьшения (масштабирования).
 
-// Вывод изображения
+   // ! ВНИМАНИЕ
+   // Расчет и изменение пропорций больших рисунков замедляет вывод изображения
 
-hDC := BeginPaint( Application.Handle, @pps )
+   IF ( ( nHeight > FI_HEIGHT ) .or. ( nWidth > FI_WIDTH )  )
 
-FI_WinDraw( nHandleImg, hDC, nTop, nLeft, nBottom, nRight )
+      // Коэффициент выводим по наибольшему превышению размера.
+      // Изображение подгоняется пропорционально.
+
+      IF ( ( nHeight - FI_HEIGHT ) > ( nWidth - FI_WIDTH ) )
+
+         // Превышение области по высоте. Расчёт выполняется по этому
+         // параметру.
+
+         nKoeff := ( FI_HEIGHT / nHeight )
+      ELSE
+         nKoeff := ( FI_WIDTH / nWidth )
+      ENDIF
+
+      nHeight := Round( ( nHeight * nKoeff ), 0 )
+      nWidth  := Round( ( nWidth  * nKoeff ), 0 )
+
+      nHandleClone := FI_Clone( nHandleImg )
+      FI_Unload( nHandleImg )
+
+      nHandleImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
+      FI_Unload( nHandleClone )
+
+   ENDIF
+
+   // Позиционирование изображения. Если размер меньше заданной области
+   // вывода, рисунок центрируется по этой оси.
+
+   IF ( nWidth < FI_WIDTH )
+      nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
+      nRight := ( nLeft + nWidth )
+   ENDIF
+
+   IF ( nHeight < FI_HEIGHT )
+      nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
+      nBottom := ( nTop + nHeight )
+   ENDIF
+
+   // Вывод изображения
+
+   hDC := BeginPaint( Application.Handle, @pps )
+
+   FI_WinDraw( nHandleImg, hDC, nTop, nLeft, nBottom, nRight )
 
 EndPaint( Application.Handle, pps )
 
-Return
+RETURN
 
 ****** End of ShowMe ******
 
-
 /******
-*
 *       RefreshMe()
-*
 *       Перерисовка изображения
-*
 */
 
-Static Procedure RefreshMe
-   
-	DO EVENTS
+STATIC PROCEDURE RefreshMe
 
-	SendMessage( _HMG_MainHandle, WM_PAINT, 0, 0 )
+   DO EVENTS
 
-Return
+   SendMessage( _HMG_MainHandle, WM_PAINT, 0, 0 )
 
-****** End of RefreshMe ******
+   RETURN
 
+   ****** End of RefreshMe ******
 
-/******
-*
-*       Do_SQL_Query( cQuery ) --> aResult
-*
-*       Выполнение выборки
-*
-*/
+   /******
+   *       Do_SQL_Query( cQuery ) --> aResult
+   *       Выполнение выборки
+   */
 
-Static Function Do_SQL_Query( cQuery )
-Local pStatement := SQLite3_Prepare( aParams[ 'pDB' ], cQuery ), ;
+STATIC FUNCTION Do_SQL_Query( cQuery )
+
+   LOCAL pStatement := SQLite3_Prepare( aParams[ 'pDB' ], cQuery ), ;
       aResult    := {}                                         , ;
       aTmp                                                     , ;
       nColAmount                                               , ;
       Cycle                                                    , ;
       nType
 
-If !Empty( pStatement )
+   IF !Empty( pStatement )
 
-   Do while ( SQlite3_Step( pStatement ) == SQLITE_ROW )
-   
-      If ( ( nColAmount := SQLite3_Column_Count( pStatement ) ) > 0 )
-      
-         aTmp := Array( nColAmount )
-         AFill( aTmp, '' )
-      
-         For Cycle := 1 to nColAmount
-            
-            nType := SQLite3_Column_Type( pStatement, Cycle )
-            
-            Do case
-               Case ( nType == SQLITE_NULL )
-               Case ( nType == SQLITE_FLOAT )
-               Case ( nType == SQLITE_INTEGER )
+      DO WHILE ( SQlite3_Step( pStatement ) == SQLITE_ROW )
+
+         IF ( ( nColAmount := SQLite3_Column_Count( pStatement ) ) > 0 )
+
+            aTmp := Array( nColAmount )
+            AFill( aTmp, '' )
+
+            FOR Cycle := 1 to nColAmount
+
+               nType := SQLite3_Column_Type( pStatement, Cycle )
+
+               DO CASE
+               CASE ( nType == SQLITE_NULL )
+               CASE ( nType == SQLITE_FLOAT )
+               CASE ( nType == SQLITE_INTEGER )
                   aTmp[ Cycle ] := LTrim( Str( SQLite3_Column_Int( pStatement, Cycle ) ) )
-                  
-               Case ( nType == SQLITE_TEXT )
+
+               CASE ( nType == SQLITE_TEXT )
                   aTmp[ Cycle ] := SQLite3_Column_Text( pStatement, Cycle )
-                  
-               Case ( nType == SQLITE_BLOB )
+
+               CASE ( nType == SQLITE_BLOB )
                   aTmp[ Cycle ] := SQLite3_Column_Blob( pStatement, Cycle )
-                  
-            Endcase
-            
-         Next
-         
-         AAdd( aResult, aTmp )
-          
-      Endif
-      
-   Enddo
-   
-   SQLite3_Finalize( pStatement )
-   
-Endif
-                
-Return aResult
 
-****** End of Do_SQL_Query ******
+               ENDCASE
 
+            NEXT
 
-/******
-*
-*       AddToBase()
-*
-*       Добавление рисунка в базу
-*
-*/
+            AAdd( aResult, aTmp )
 
-Static Procedure AddToBase
-Local nPos       := wMain.grdFiles.Value, ;
+         ENDIF
+
+      ENDDO
+
+      SQLite3_Finalize( pStatement )
+
+   ENDIF
+
+   RETURN aResult
+
+   ****** End of Do_SQL_Query ******
+
+   /******
+   *       AddToBase()
+   *       Добавление рисунка в базу
+   */
+
+STATIC PROCEDURE AddToBase
+
+   LOCAL nPos       := wMain.grdFiles.Value, ;
       cFile                             , ;
       cImage                            , ;
       pStatement
 
-If !Empty( nPos )
+   IF !Empty( nPos )
 
-   cFile := wMain.grdFiles.Item( nPos )[ 1 ]
-   
-   If !File( aParams[ 'StartDir' ] + '\' + cFile )
-      Return
-   Endif
-   
-Else
-   Return
-      
-Endif
+      cFile := wMain.grdFiles.Item( nPos )[ 1 ]
 
-pStatement := SQLite3_Prepare( aParams[ 'pDB' ], 'Insert into Picts( Name, Image ) Values( :Name, :Image )' )
+      IF !File( aParams[ 'StartDir' ] + '\' + cFile )
 
-If !Empty( pStatement )
-   
-   cImage := SQLite3_File_to_buff( aParams[ 'StartDir' ] + '\' + cFile )
+         RETURN
+      ENDIF
 
-   If ( ( SQLite3_Bind_text( pStatement, 1, cFile   ) == SQLITE_OK ) .and. ;
-        ( SQLite3_Bind_blob( pStatement, 2, @cImage ) == SQLITE_OK )       ;
-      )
-      
-     If ( SQLite3_Step( pStatement ) == SQLITE_DONE )
-        aParams[ 'Reload' ] := .T.
-        MsgInfo( ( 'File' + CRLF + cFile + CRLF + 'is copied in a base.' ), ;
-                 'Success', , .F., .F. )
-     Endif 
+   ELSE
 
-   Endif
+      RETURN
 
-   SQLite3_Clear_bindings( pStatement )
-   SQLite3_Finalize( pStatement )
+   ENDIF
 
-Endif
+   pStatement := SQLite3_Prepare( aParams[ 'pDB' ], 'Insert into Picts( Name, Image ) Values( :Name, :Image )' )
 
-wMain.grdFiles.SetFocus
+   IF !Empty( pStatement )
 
-Return
+      cImage := SQLite3_File_to_buff( aParams[ 'StartDir' ] + '\' + cFile )
 
-****** End of AddToBase ******
+      IF ( ( SQLite3_Bind_text( pStatement, 1, cFile   ) == SQLITE_OK ) .and. ;
+            ( SQLite3_Bind_blob( pStatement, 2, @cImage ) == SQLITE_OK )       ;
+            )
 
+         IF ( SQLite3_Step( pStatement ) == SQLITE_DONE )
+            aParams[ 'Reload' ] := .T.
+            MsgInfo( ( 'File' + CRLF + cFile + CRLF + 'is copied in a base.' ), ;
+               'Success', , .F., .F. )
+         ENDIF
 
-/******
-*
-*       DelRecord()
-*
-*       Удаление записи из базы
-*
-*/
+      ENDIF
 
-Static Procedure DelRecord
-Local nPos     := wMain.grdRecords.Value, ;
+      SQLite3_Clear_bindings( pStatement )
+      SQLite3_Finalize( pStatement )
+
+   ENDIF
+
+   wMain.grdFiles.SetFocus
+
+   RETURN
+
+   ****** End of AddToBase ******
+
+   /******
+   *       DelRecord()
+   *       Удаление записи из базы
+   */
+
+STATIC PROCEDURE DelRecord
+
+   LOCAL nPos     := wMain.grdRecords.Value, ;
       cID                               , ;
       cCommand                          , ;
       nCount
 
-If !Empty( nPos )
+   IF !Empty( nPos )
 
-  If MsgYesNo( 'Delete current record?', 'Confirm', .T., , .F., .F.  )
+      IF MsgYesNo( 'Delete current record?', 'Confirm', .T., , .F., .F.  )
 
-     cID := wMain.grdRecords.Item( nPos )[ 1 ]
-     cCommand := ( 'Delete from Picts Where Id = ' + cId + ';' )
+         cID := wMain.grdRecords.Item( nPos )[ 1 ]
+         cCommand := ( 'Delete from Picts Where Id = ' + cId + ';' )
 
-     If ( SQLite3_Exec( aParams[ 'pDB' ], cCommand ) == SQLITE_OK )
+         IF ( SQLite3_Exec( aParams[ 'pDB' ], cCommand ) == SQLITE_OK )
 
-        // Для уменьшения размера файла БД необходимо выполняем команду
-        // Vacuum. Но при большой БД на это может потребоваться
-        // некоторое время.
-        
-        If ( SQLite3_exec( aParams[ 'pDB' ], 'Vacuum' ) == SQLITE_OK )
-        
-           // Перечитать список
-     
-           aParams[ 'Reload' ] := .T.
-           ListRecords()
+            // Для уменьшения размера файла БД необходимо выполняем команду
+            // Vacuum. Но при большой БД на это может потребоваться
+            // некоторое время.
 
-           // По возможности, указатель оставить на той же позиции
-     
-           nCount := wMain.grdRecords.ItemCount
-     
-           nPos := Iif( ( nPos >= nCount ), nCount, nPos )
-           wMain.grdRecords.Value := nPos
+            IF ( SQLite3_exec( aParams[ 'pDB' ], 'Vacuum' ) == SQLITE_OK )
 
-           RefreshMe()
-           
-        Endif
-        
-     Endif
-     
-  EndIf
+               // Перечитать список
 
-Endif
+               aParams[ 'Reload' ] := .T.
+               ListRecords()
 
-wMain.grdRecords.SetFocus
+               // По возможности, указатель оставить на той же позиции
 
-Return
+               nCount := wMain.grdRecords.ItemCount
 
-****** End of DelRecord ******
+               nPos := Iif( ( nPos >= nCount ), nCount, nPos )
+               wMain.grdRecords.Value := nPos
 
+               RefreshMe()
 
-/******
-*
-*       SaveToFile()
-*
-*       Экспорт рисунка из БД в файл
-*
-*/
+            ENDIF
 
-Static Procedure SaveToFile
-Local nPos       := wMain.grdRecords.Value, ;
+         ENDIF
+
+      ENDIF
+
+   ENDIF
+
+   wMain.grdRecords.SetFocus
+
+   RETURN
+
+   ****** End of DelRecord ******
+
+   /******
+   *       SaveToFile()
+   *       Экспорт рисунка из БД в файл
+   */
+
+STATIC PROCEDURE SaveToFile
+
+   LOCAL nPos       := wMain.grdRecords.Value, ;
       cID                                 , ;
       aData                               , ;
       cImage                              , ;
@@ -731,103 +696,108 @@ Local nPos       := wMain.grdRecords.Value, ;
       nFormat                             , ;
       lSuccess
 
-If !Empty( nPos )
+   IF !Empty( nPos )
 
-   cID   := wMain.grdRecords.Item( nPos )[ 1 ]
-   cFile := wMain.grdRecords.Item( nPos )[ 2 ]
-   aData := Do_SQL_Query( 'Select Image from Picts Where Id = ' + cId + ';' )
-   
-   If Empty( aData )
-      Return
-   Endif
+      cID   := wMain.grdRecords.Item( nPos )[ 1 ]
+      cFile := wMain.grdRecords.Item( nPos )[ 2 ]
+      aData := Do_SQL_Query( 'Select Image from Picts Where Id = ' + cId + ';' )
 
-   cImage := aData[ 1, 1 ]
+      IF Empty( aData )
 
-   // Т.к. по расширению файла определяем новый формат изображения,
-   // то при операции сохранения необходимо явно указывать расширение файла
-   // (по умолчанию используется его текущий формат)
+         RETURN
+      ENDIF
 
-   cFile := PutFile( { { 'JPG files', '*.jpg' }, { 'JPEG files', '*.jpeg' }, ; 
-                       { 'PNG files', '*.png' }, { 'GIF files' , '*.gif'  }, ;
-                       { 'BMP files', '*.bmp' }, { 'ICO files', '*.ico'   }  ;
-                     }                                                     , ;
-                     'Save image'                                          , ;
-                     aParams[ 'StartDir' ]                                 , ;
-                     .T.                                                   , ;
-                     cFile                                                   ;
-                   )
-                   
-   If Empty( cFile )
-      Return
-      
-   Else
-      If File( cFile )
-         If !MsgYesNo( ( 'File' + CRLF + ;
-                         cFile  + CRLF + ;
-                         'already exist. Rewrite it?' ;
-                       ), 'Confirm', .T., , .F., .F.  )
-            Return
-         Endif
-      Endif
-   
-   Endif
+      cImage := aData[ 1, 1 ]
 
-   nHandleImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cImage, Len( cImage ) ), cImage, 0 )
-   
-   If Empty( nHandleImg )
-      Return
-   Endif
+      // Т.к. по расширению файла определяем новый формат изображения,
+      // то при операции сохранения необходимо явно указывать расширение файла
+      // (по умолчанию используется его текущий формат)
 
-   // По расширению файла определяем идентификатор изображения и
-   // константу для операции сохранения
-   
-   HB_FNameSplit( cFile, , , @cExt )
-   cExt := Lower( cExt )
-   
-   Do case
-      Case ( cExt == '.png' )
-        nFIF    := FIF_PNG            // Идентификатор изображения для ввода/вывода
-        nFormat := PNG_DEFAULT 
+      cFile := PutFile( { { 'JPG files', '*.jpg' }, { 'JPEG files', '*.jpeg' }, ;
+         { 'PNG files', '*.png' }, { 'GIF files' , '*.gif'  }, ;
+         { 'BMP files', '*.bmp' }, { 'ICO files', '*.ico'   }  ;
+         }                                                     , ;
+         'Save image'                                          , ;
+         aParams[ 'StartDir' ]                                 , ;
+         .T.                                                   , ;
+         cFile                                                   ;
+         )
 
-      Case ( cExt == '.gif' )
-        nFIF    := FIF_GIF
-        nFormat := GIF_DEFAULT 
-         
-      Case ( cExt == '.bmp' )
-        nFIF    := BMP_DEFAULT
-        nFormat := GIF_DEFAULT 
+      IF Empty( cFile )
 
-      Case ( cExt == '.ico' )
-        nFIF    := FIF_ICO
-        nFormat := ICO_DEFAULT 
+         RETURN
 
-      Otherwise
-      
-        // По умолчанию JPG или JPEG
-        nFIF    := FIF_JPEG
-        nFormat := JPEG_DEFAULT 
+      ELSE
+         IF File( cFile )
+            IF !MsgYesNo( ( 'File' + CRLF + ;
+                  cFile  + CRLF + ;
+                  'already exist. Rewrite it?' ;
+                  ), 'Confirm', .T., , .F., .F.  )
 
-   Endcase
- 
-   lSuccess := FI_Save( nFIF, nHandleImg, cFile, nFormat )
-   
-   If !lSuccess
-      MsgStop( ( "Can't save a file" + HB_OSNewLine() + cFile ), 'Error', , .F., .F. )
-   Endif
-   
-   FI_Unload( nHandleImg )
+               RETURN
+            ENDIF
+         ENDIF
 
-   // Если запись выполнена успешно, необходимо перечитать список файлов.
-   // Позицию указателя не изменяем (для упрощения), хотя список упорядочен
-   // по именам файлов и здесь можно запоминать текущий файл и искать его
-   // положение в переформированном списке.
-   
-   If lSuccess
-      aParams[ 'ReadFiles' ] := .T.
-   Endif
-   
-Endif
+      ENDIF
 
-Return
+      nHandleImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cImage, Len( cImage ) ), cImage, 0 )
 
-****** End of SaveToFile ******
+      IF Empty( nHandleImg )
+
+         RETURN
+      ENDIF
+
+      // По расширению файла определяем идентификатор изображения и
+      // константу для операции сохранения
+
+      HB_FNameSplit( cFile, , , @cExt )
+      cExt := Lower( cExt )
+
+      DO CASE
+      CASE ( cExt == '.png' )
+         nFIF    := FIF_PNG            // Идентификатор изображения для ввода/вывода
+         nFormat := PNG_DEFAULT
+
+      CASE ( cExt == '.gif' )
+         nFIF    := FIF_GIF
+         nFormat := GIF_DEFAULT
+
+      CASE ( cExt == '.bmp' )
+         nFIF    := BMP_DEFAULT
+         nFormat := GIF_DEFAULT
+
+      CASE ( cExt == '.ico' )
+         nFIF    := FIF_ICO
+         nFormat := ICO_DEFAULT
+
+      OTHERWISE
+
+         // По умолчанию JPG или JPEG
+         nFIF    := FIF_JPEG
+         nFormat := JPEG_DEFAULT
+
+      ENDCASE
+
+      lSuccess := FI_Save( nFIF, nHandleImg, cFile, nFormat )
+
+      IF !lSuccess
+         MsgStop( ( "Can't save a file" + HB_OSNewLine() + cFile ), 'Error', , .F., .F. )
+      ENDIF
+
+      FI_Unload( nHandleImg )
+
+      // Если запись выполнена успешно, необходимо перечитать список файлов.
+      // Позицию указателя не изменяем (для упрощения), хотя список упорядочен
+      // по именам файлов и здесь можно запоминать текущий файл и искать его
+      // положение в переформированном списке.
+
+      IF lSuccess
+         aParams[ 'ReadFiles' ] := .T.
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+   ****** End of SaveToFile ******
+

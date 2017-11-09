@@ -2,14 +2,14 @@
 #include <hmg.ch>
 
 #xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
-      => ;
-      _DefineHotKey ( <"parent">, 0, VK_SPACE, <{action}> )
+   => ;
+   _DefineHotKey ( <"parent">, 0, VK_SPACE, <{action}> )
 // ------------------------------------------------------------ //
 STATIC aRecs := {}
 
 FUNCTION Main()
 
-REQUEST DBFNSX
+   REQUEST DBFNSX
 
    SET BROWSESYNC ON
 
@@ -18,27 +18,27 @@ REQUEST DBFNSX
    dbGoTop()
 
    DEFINE WINDOW wndMain;
-      AT 0, 0;
-      WIDTH 675;
-      HEIGHT 403;
-      TITLE "Selection of records Demo";
-      ON RELEASE dbCloseArea();
-      MAIN
+         AT 0, 0;
+         WIDTH 675;
+         HEIGHT 403;
+         TITLE "Selection of records Demo";
+         ON RELEASE dbCloseArea();
+         MAIN
 
-   DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-      DEFINE POPUP 'Tests'
-         MENUITEM 'Select\unselect the current record' ACTION ( SelectRecord( @aRecs, wndMain.brsDemo.Value ), wndMain.brsDemo.Refresh() )
-         MENUITEM 'Show number of selected records' ACTION MsgInfo( hb_ntos( Len( aRecs ) ) + ' records selected' )
-         MENUITEM 'Show record numbers of selected records' ACTION MsgDebug( aRecs )
-         MENUITEM 'Unselect all records'  ACTION ( aRecs := {}, wndMain.brsDemo.Refresh() )
-      END POPUP
+         DEFINE POPUP 'Tests'
+            MENUITEM 'Select\unselect the current record' ACTION ( SelectRecord( @aRecs, wndMain.brsDemo.Value ), wndMain.brsDemo.Refresh() )
+            MENUITEM 'Show number of selected records' ACTION MsgInfo( hb_ntos( Len( aRecs ) ) + ' records selected' )
+            MENUITEM 'Show record numbers of selected records' ACTION MsgDebug( aRecs )
+            MENUITEM 'Unselect all records'  ACTION ( aRecs := {}, wndMain.brsDemo.Refresh() )
+         END POPUP
 
-   END MENU
+      END MENU
 
-   DEFINE STATUSBAR
-      STATUSITEM "Double click on a checkbox or use <SpaceBar> key to select\unselect the current record"
-   END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM "Double click on a checkbox or use <SpaceBar> key to select\unselect the current record"
+      END STATUSBAR
 
    END WINDOW
 
@@ -59,8 +59,9 @@ REQUEST DBFNSX
    wndMain.Center
    wndMain.Activate
 
-RETURN NIL
-// ------------------------------------------------------------ //
+   RETURN NIL
+   // ------------------------------------------------------------ //
+
 STATIC FUNCTION DblClickBrowseScreen
 
    IF This.CellColIndex == 1
@@ -70,8 +71,9 @@ STATIC FUNCTION DblClickBrowseScreen
       MsgInfo( "Record number " + hb_ntos( This.Value ) + " was double clicked" )
    ENDIF
 
-RETURN( NIL )
-// ------------------------------------------------------------ //
+   RETURN( NIL )
+   // ------------------------------------------------------------ //
+
 FUNCTION SelectRecord( aRecs, nRecord )
 
    LOCAL nKey
@@ -91,7 +93,10 @@ FUNCTION SelectRecord( aRecs, nRecord )
       ADel( aRecs, nKey, .T. )
    ENDIF
 
-RETURN( NIL )
-// ------------------------------------------------------------ //
+   RETURN( NIL )
+   // ------------------------------------------------------------ //
+
 FUNCTION ChkSelectStatus()
-RETURN( AScan( aRecs, RecNo() ) <> 0 )
+
+   RETURN( AScan( aRecs, RecNo() ) <> 0 )
+

@@ -1,6 +1,6 @@
 /*
- * $Id: tstpdf.prg 12734 2009-10-19 23:21:43Z vszakats $
- */
+* $Id: tstpdf.prg 12734 2009-10-19 23:21:43Z vszakats $
+*/
 
 //ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
 
@@ -8,30 +8,30 @@
 
 //ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
 
-function Main()
+FUNCTION Main()
 
-   local nWidth, nTab, nI, nJ, nK, nCol, nRow, aStyle, aFonts
-   local nTop, nLeft, nBottom, nRight, cText, oPdf
-   local aColor := { ;
-   "FF0000", "8B0000", "800000", "FF4500", "D2691E", "B8860B", "FF8C00", "FFA500", "DAA520", "808000", "FFD700", "FFFF00", "ADFF2F", "9ACD32", "7FFF00", "7CFC00", "00FF00", "32CD32", "008000", "006400",;
-   "66CDAA", "7FFFD4", "87CEFA", "87CEEB", "F0F8FF", "E0FFFF", "B0C4DE", "B0E0E6", "AFEEEE", "ADD8E6", "8FBC8F", "90EE90", "98FB98", "00FA9A", "00FF7F", "3CB371", "2E8B57", "228B22", "556B2F", "6B8E23",;
-   "5F9EA0", "40E0D0", "48D1CC", "00CED1", "20B2AA", "008B8B", "008080", "2F4F4F", "00BFFF", "00FFFF", "00FFFF", "0000FF", "0000CD", "00008B", "000080", "1E90FF", "4169E1", "4682B4", "6495ED", "7B68EE",;
-   "C71585", "FF1493", "FF00FF", "FF00FF", "9370DB", "DDADDD", "DB7093", "FF69B4", "DA70D6", "EE82EE", "BA55D3", "9932CC", "8A2BE2", "9400D3", "8B008B", "800080", "4B0082", "191970", "483D8B", "6A5ACD",;
-   "DC143C", "B22222", "A52A2A", "CD5C5C", "FA8072", "E9967A", "FFA07A", "F5DEB3", "FFDEAD", "EEE8AA", "FFDAB9", "FFE4C4", "FFEFD5", "FFE4E1", "FFE4B5", "D2B48C", "DEB887", "F0E68C", "BDB76B", "F4A460",;
-   "FDF5E6", "FFF8DC", "FAF0E6", "FAFAD2", "FFFACD", "FFEBCD", "FFFFE0", "FAEBD7", "FFF5EE", "FFF0F5", "D8BFD8", "FFC0CB", "FFB6C1", "BC8F8F", "F08080", "FF7F50", "FF6347", "8B4513", "A0522D", "CD853F",;
-   "FFFAFA", "FFFFF0", "E6E6FA", "FFFAF0", "F8F8FF", "F0FFF0", "F5F5DC", "F0FFFF", "F5FFFA", "708090", "778899", "F5F5F5", "DCDCDC", "D3D3D3", "C0C0C0", "A9A9A9", "808080", "696969", "000000", "FFFFFF"}
+   LOCAL nWidth, nTab, nI, nJ, nK, nCol, nRow, aStyle, aFonts
+   LOCAL nTop, nLeft, nBottom, nRight, cText, oPdf
+   LOCAL aColor := { ;
+      "FF0000", "8B0000", "800000", "FF4500", "D2691E", "B8860B", "FF8C00", "FFA500", "DAA520", "808000", "FFD700", "FFFF00", "ADFF2F", "9ACD32", "7FFF00", "7CFC00", "00FF00", "32CD32", "008000", "006400",;
+      "66CDAA", "7FFFD4", "87CEFA", "87CEEB", "F0F8FF", "E0FFFF", "B0C4DE", "B0E0E6", "AFEEEE", "ADD8E6", "8FBC8F", "90EE90", "98FB98", "00FA9A", "00FF7F", "3CB371", "2E8B57", "228B22", "556B2F", "6B8E23",;
+      "5F9EA0", "40E0D0", "48D1CC", "00CED1", "20B2AA", "008B8B", "008080", "2F4F4F", "00BFFF", "00FFFF", "00FFFF", "0000FF", "0000CD", "00008B", "000080", "1E90FF", "4169E1", "4682B4", "6495ED", "7B68EE",;
+      "C71585", "FF1493", "FF00FF", "FF00FF", "9370DB", "DDADDD", "DB7093", "FF69B4", "DA70D6", "EE82EE", "BA55D3", "9932CC", "8A2BE2", "9400D3", "8B008B", "800080", "4B0082", "191970", "483D8B", "6A5ACD",;
+      "DC143C", "B22222", "A52A2A", "CD5C5C", "FA8072", "E9967A", "FFA07A", "F5DEB3", "FFDEAD", "EEE8AA", "FFDAB9", "FFE4C4", "FFEFD5", "FFE4E1", "FFE4B5", "D2B48C", "DEB887", "F0E68C", "BDB76B", "F4A460",;
+      "FDF5E6", "FFF8DC", "FAF0E6", "FAFAD2", "FFFACD", "FFEBCD", "FFFFE0", "FAEBD7", "FFF5EE", "FFF0F5", "D8BFD8", "FFC0CB", "FFB6C1", "BC8F8F", "F08080", "FF7F50", "FF6347", "8B4513", "A0522D", "CD853F",;
+      "FFFAFA", "FFFFF0", "E6E6FA", "FFFAF0", "F8F8FF", "F0FFF0", "F5F5DC", "F0FFFF", "F5FFFA", "708090", "778899", "F5F5F5", "DCDCDC", "D3D3D3", "C0C0C0", "A9A9A9", "808080", "696969", "000000", "FFFFFF"}
 
-   set date format "YYYY/MM/DD"
+   SET DATE format "YYYY/MM/DD"
 
    aStyle := { "Normal", "Bold", "Italic", "BoldItalic" }
 
    aFonts := { { "Times",     .t., .t., .t., .t. }, ;
-               { "Helvetica", .t., .t., .t., .t. }, ;
-               { "Courier",   .t., .t., .t., .t. }  }
+      { "Helvetica", .t., .t., .t., .t. }, ;
+      { "Courier",   .t., .t., .t., .t. }  }
 
    oPdf := tPdf():New( 'test.pdf', 200, .t. )
    oPdf:EditOnHeader()
-   oPdf:Image( 'files\color.tif', 0, 0, "M" ) 
+   oPdf:Image( 'files\color.tif', 0, 0, "M" )
    oPdf:EditOffHeader()
    oPdf:SaveHeader( 'test.hea' )
    oPdf:CloseHeader()
@@ -40,13 +40,12 @@ function Main()
    oPdf:BookAdd( "Grids & Borders", 1, oPdf:aReport[ REPORTPAGE ], 0 )
    oPdf:BookAdd( "Simple Grid",     2, oPdf:aReport[ REPORTPAGE ], 0 )
 
-   for nI := 0 to 792 step 36
-       oPdf:Box( nI, 0, nI, 612, 0.01, , "D" )
-   next
-   for nI := 0 to 612 step 36
-       oPdf:Box( 0, nI, 792, nI, 0.01, , "D" )
-   next
-
+   FOR nI := 0 to 792 step 36
+      oPdf:Box( nI, 0, nI, 612, 0.01, , "D" )
+   NEXT
+   FOR nI := 0 to 612 step 36
+      oPdf:Box( 0, nI, 792, nI, 0.01, , "D" )
+   NEXT
 
    oPdf:NewPage( "LETTER", "P", 6 )
    oPdf:BookAdd( "10 dots border ", 2, 2, 0 )
@@ -69,23 +68,23 @@ function Main()
    oPdf:Box( nRow + 80, ( nCol * 2 ) + 80, ( nRow * 3 ) + 80, ( nCol * 4 ) + 80, 0.01,  95, "D" )
    oPdf:Box( nRow + 90, ( nCol * 2 ) + 90, ( nRow * 3 ) + 90, ( nCol * 4 ) + 90, 0.01, 100, "D" )
 
-   for nI := 1 to 7
+   FOR nI := 1 to 7
       nRow := 150 + nI * 10
-      for nJ := 1 to 20
-          nCol := nJ * 10 - 3
-          oPdf:Box( nRow, nCol, nRow + 10, nCol + 10, 0.01, nI * 10,"M", CHR(253) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 1, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 3, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 5, 2 ), 16) ) )
-      next
-   next
+      FOR nJ := 1 to 20
+         nCol := nJ * 10 - 3
+         oPdf:Box( nRow, nCol, nRow + 10, nCol + 10, 0.01, nI * 10,"M", CHR(253) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 1, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 3, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ ( nI - 1 ) * 20 + nJ ], 5, 2 ), 16) ) )
+      NEXT
+   NEXT
 
    oPdf:NewPage( "LETTER", "P", 6 )
    oPdf:BookAdd( "Color Boxes ", 2, oPdf:aReport[ REPORTPAGE ], 0 )
-   for nI := 1 to 140
-       nTop    := ( nI - 1 ) * 2.4
-       nLeft   := ( nI - 1 ) * 2.1
-       nBottom := oPdf:aReport[ PAGEY ] - ( nI - 1 ) * 2.47
-       nRight  := oPdf:aReport[ PAGEX ] - ( nI - 1 ) * 2.18
-       oPdf:Box1( nTop, nLeft, nBottom, nRight, 10, CHR( cton( HB_USUBSTR( aColor[ nI ], 1, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ nI ], 3, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ nI ], 5, 2 ), 16) ))
-   next
+   FOR nI := 1 to 140
+      nTop    := ( nI - 1 ) * 2.4
+      nLeft   := ( nI - 1 ) * 2.1
+      nBottom := oPdf:aReport[ PAGEY ] - ( nI - 1 ) * 2.47
+      nRight  := oPdf:aReport[ PAGEX ] - ( nI - 1 ) * 2.18
+      oPdf:Box1( nTop, nLeft, nBottom, nRight, 10, CHR( cton( HB_USUBSTR( aColor[ nI ], 1, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ nI ], 3, 2 ), 16) ) + CHR( cton( HB_USUBSTR( aColor[ nI ], 5, 2 ), 16) ))
+   NEXT
 
    oPdf:NewPage( "LETTER", "P", 6 )
    oPdf:BookAdd( "Memos", 1, oPdf:aReport[ REPORTPAGE ], 0 )
@@ -108,24 +107,24 @@ function Main()
    oPdf:BookAdd( "Fonts", 1, oPdf:aReport[ REPORTPAGE ], 0 )
    oPdf:BookAdd( "Different Styles", 2, oPdf:aReport[ REPORTPAGE ], 0 )
    nK := 6
-   for nI := 1 to HMG_LEN( aFonts )  // Fonts
+   FOR nI := 1 to HMG_LEN( aFonts )  // Fonts
       ++nk
-      for nJ := 1 to 4           // Styles
-         if aFonts[ nI ][ nJ + 1 ]
+      FOR nJ := 1 to 4           // Styles
+         IF aFonts[ nI ][ nJ + 1 ]
             oPdf:SetFont( aFonts[ nI ][ 1 ], nJ - 1, oPdf:aReport[ FONTSIZE ] )
             oPdf:RJust("This is a test for " + aFonts[ nI ][ 1 ] + " " + ;
-                       aStyle[ nJ ], nK++, oPdf:aReport[ REPORTWIDTH ], "R")
-         endif
-      next
-    oPdf:RJust(oPdf:Underline("Underline"), nK++, oPdf:aReport[ REPORTWIDTH ], "R")
-    oPdf:RJust(oPdf:Reverse("Test"), nK, oPdf:aReport[ REPORTWIDTH ], "R")
-   next
+               aStyle[ nJ ], nK++, oPdf:aReport[ REPORTWIDTH ], "R")
+         ENDIF
+      NEXT
+      oPdf:RJust(oPdf:Underline("Underline"), nK++, oPdf:aReport[ REPORTWIDTH ], "R")
+      oPdf:RJust(oPdf:Reverse("Test"), nK, oPdf:aReport[ REPORTWIDTH ], "R")
+   NEXT
 
    oPdf:NewPage( "LETTER", "P", 6 )
    oPdf:BookAdd( "Pictures", 1, oPdf:aReport[ REPORTPAGE ], 0 )
    oPdf:BookAdd( "TIFF", 2, oPdf:aReport[ REPORTPAGE ], 0 )
    //             file,    row, col, units, height, width
-   oPdf:Image( 'files\color.tif', 0,   0,   "M" ) 
+   oPdf:Image( 'files\color.tif', 0,   0,   "M" )
    oPdf:RJust( oPdf:Underline("TIFF"), nK++, oPdf:aReport[ REPORTWIDTH ], "R")
 
    oPdf:NewPage( "LETTER", "P", 6 )
@@ -153,37 +152,38 @@ function Main()
 
    oPdf:Close()
 
-#ifndef __XPP__
+   #ifndef __XPP__
    oPdf:Execute( 'test.pdf' )
-#endif
+   #endif
 
    // oPdf:FilePrint()
 
-return nil
+   RETURN NIL
 
-//ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
-//
-// This function called only used in tstPdf.prg
-//
-static function cton( cString, nBase ) 
-local cTemp, nI, cChar, n := 0, nLen
+   //ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
+   // This function called only used in tstPdf.prg
+
+STATIC FUNCTION cton( cString, nBase )
+
+   LOCAL cTemp, nI, cChar, n := 0, nLen
 
    nLen := HMG_LEN( cString )
    cTemp := ""
-   for nI := nLen to 1 step -1
-       cTemp += HB_USUBSTR( cString, nI, 1 )
-   next
+   FOR nI := nLen to 1 step -1
+      cTemp += HB_USUBSTR( cString, nI, 1 )
+   NEXT
    cTemp := HMG_UPPER( cTemp )
 
-   for nI := 1 to nLen
+   FOR nI := 1 to nLen
       cChar := HB_USUBSTR( cTemp, nI, 1 )
-      if .not. HMG_ISDIGIT( cChar )
+      IF .not. HMG_ISDIGIT( cChar )
          n := n + ((ASC( cChar ) - 65) + 10) * ( nBase ^ ( nI - 1 ) )
-      else
+      ELSE
          n := n + (( nBase ^ ( nI - 1 )) * val( cChar ))
-      endif
-   next
+      ENDIF
+   NEXT
 
-return n
+   RETURN n
 
-//ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
+   //ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ\\
+

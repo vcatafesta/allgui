@@ -1,15 +1,17 @@
-procedure main( nPort, cIfAddr, cRootDir, xRPC, ... )
 
-local pListenSocket
+PROCEDURE main( nPort, cIfAddr, cRootDir, xRPC, ... )
 
-	pListenSocket := netio_mtserver( nPort, cIfAddr, cRootDir, xRPC, ... )
+   LOCAL pListenSocket
 
-	if empty( pListenSocket )
-		? "Cannot start server."
-	else
-		wait "Press any key to stop NETIO server."
-		netio_serverstop( pListenSocket )
-		pListenSocket := NIL
-	endif
+   pListenSocket := netio_mtserver( nPort, cIfAddr, cRootDir, xRPC, ... )
 
-return
+   IF empty( pListenSocket )
+      ? "Cannot start server."
+   ELSE
+      WAIT "Press any key to stop NETIO server."
+      netio_serverstop( pListenSocket )
+      pListenSocket := NIL
+   ENDIF
+
+   RETURN
+

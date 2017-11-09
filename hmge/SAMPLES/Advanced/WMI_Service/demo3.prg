@@ -1,54 +1,52 @@
 /*
- * MiniGUI WMI Service Demo
- *
- * (c) 2010 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI WMI Service Demo
+* (c) 2010 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Procedure Main
-  
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 ;
-		TITLE 'WMI Service Demo' ;
-		MAIN ;
-		ON INTERACTIVECLOSE MsgYesNo ( 'Are You Sure ?', 'Exit' )
+PROCEDURE Main
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	120
-			CAPTION 'Shell Info'
-			ACTION WMIShell( Getfile() )
-		END BUTTON
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'WMI Service Demo' ;
+         MAIN ;
+         ON INTERACTIVECLOSE MsgYesNo ( 'Are You Sure ?', 'Exit' )
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	120
-			CAPTION 'Cancel'
-			ACTION ThisWindow.Release
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   120
+         CAPTION 'Shell Info'
+         ACTION WMIShell( Getfile() )
+      END BUTTON
 
-	END WINDOW
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   120
+         CAPTION 'Cancel'
+         ACTION ThisWindow.Release
+      END BUTTON
 
-	CENTER WINDOW Form_1
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
+   RETURN
 
 FUNCTION WMIShell(cFullPath)
 
-   Local oShell
-   Local oFolder
-   Local cPath, cFile, cFileNoExt
-   Local cFileName, cName
-   Local aHeaders := array(35)
+   LOCAL oShell
+   LOCAL oFolder
+   LOCAL cPath, cFile, cFileNoExt
+   LOCAL cFileName, cName
+   LOCAL aHeaders := array(35)
 
-   if !Empty(cFullPath)
+   IF !Empty(cFullPath)
 
       cPath      := cFilePath(cFullPath)
       cFile      := cFileNoPath(cFullPath)
@@ -57,23 +55,23 @@ FUNCTION WMIShell(cFullPath)
       oShell     := CreateObject( "Shell.Application" )
       oFolder    := oShell:Namespace( cPath )
 
-      For i = 1 to 35
+      FOR i = 1 to 35
          aHeaders[i] := oFolder:GetDetailsOf( oFolder:Items, i-1 )
-      Next
+      NEXT
 
       FOR EACH cFileName IN oFolder:Items
 
          cName := oFolder:GetDetailsOf(cFileName, 0)
 
-         if cName == iif(at(".", cName) == 0, cFileNoExt, cFile)
+         IF cName == iif(at(".", cName) == 0, cFileNoExt, cFile)
 
             cInfo := ""
-            For i = 1 to 35
+            FOR i = 1 to 35
                cName := oFolder:GetDetailsOf( cFileName, i-1 )
-               if !Empty(aHeaders[i]) .and. !Empty(cName)
+               IF !Empty(aHeaders[i]) .and. !Empty(cName)
                   cInfo += str(i-1) + Chr(9) + aHeaders[i] + ": " + cName +CRLF
-               endif
-            Next
+               ENDIF
+            NEXT
 
             cInfo += CRLF
             cInfo += Chr(9) + "md5: " + Upper( hb_ValToStr( hb_md5file(cFullPath) ) ) +CRLF
@@ -81,10 +79,11 @@ FUNCTION WMIShell(cFullPath)
 
             MsgInfo( cInfo, "Extended File Properties" )
 
-         endif
+         ENDIF
 
       NEXT
 
-   endif
+   ENDIF
 
-Return nil 
+   RETURN NIL
+

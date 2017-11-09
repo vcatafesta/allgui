@@ -1,45 +1,44 @@
 /*
- * DO REPORT DEMO
- * (c) 2016 Grigory Filatov <gfilatov@inbox.ru>
- */
+* DO REPORT DEMO
+* (c) 2016 Grigory Filatov <gfilatov@inbox.ru>
+*/
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	use country alias test
-	index on padr(field->CONTINENT,20)+padr(field->NAME,28) to test
+   USE country alias test
+   INDEX ON padr(field->CONTINENT,20)+padr(field->NAME,28) to test
 
-	Define Window Win1			;
-		Row	10			;
-		Col	10			;
-		Width	400			;
-		Height	400			;
-		Title	'Do Report Demo'	;
-		MAIN				;
-		On Init	Win1.Center()  
+   DEFINE WINDOW Win1         ;
+         Row   10         ;
+         Col   10         ;
+         Width   400         ;
+         Height   400         ;
+         Title   'Do Report Demo'   ;
+         MAIN            ;
+         On Init   Win1.Center()
 
-		@ 40 , 40 Button Button1	;
-			Caption 'Create Report'	;
-			Width	120		;
-			On Click ButtonClick()	;
-			Default
+      @ 40 , 40 Button Button1   ;
+         Caption 'Create Report'   ;
+         Width   120      ;
+         On Click ButtonClick()   ;
+         DEFAULT
 
-	End Window
+   END WINDOW
 
-	Activate Window Win1
+   ACTIVATE WINDOW Win1
 
-Return Nil
+   RETURN NIL
 
-
-Procedure ButtonClick()
+PROCEDURE ButtonClick()
 
    DbGoTop()
 
    do report ;
       title  'COUNTRIES SUMMARY'                                   ;
       headers  {} , { padc('Name',28), padc('Capital',15),         ;
-                      padc('Area',11), padc('Population',14) }     ;
+      padc('Area',11), padc('Population',14) }     ;
       fields   {'Name', 'Capital', 'Area', 'Population'}           ;
       widths   {28,15,11,14}                                       ;
       totals   {.F.,.F.,.T.,.T.}                                   ;
@@ -51,10 +50,11 @@ Procedure ButtonClick()
       tmargin  4                                                   ;
       papersize DMPAPER_A4                                         ;
       preview                                                      ;
-      select                                                       ;
+      SELECT                                                       ;
       multiple                                                     ;
       grouped by 'CONTINENT'                                       ;
       headrgrp padc('Continent',23)                                ;
       nodatetimestamp
 
-Return
+   RETURN
+

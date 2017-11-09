@@ -9,9 +9,9 @@
 
 #include 'minigui.ch'
 
-*-------------------------
-Function p1()
-*-------------------------
-msginfo('This is one of many future versions of ooHG IDE plus','enjoy this program')
-Return Nil
-
+FUNCTION p1()
+
+   msginfo('This is one of many future versions of ooHG IDE plus','enjoy this program')
+
+   RETURN NIL
+

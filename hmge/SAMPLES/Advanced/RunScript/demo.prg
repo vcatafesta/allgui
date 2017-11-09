@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2012 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2012 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -12,23 +10,23 @@
 PROCEDURE Main
 
    DEFINE WINDOW Win_Main ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE 'Harbour Script Usage Demo' ;
-      MAIN ;
-      FONT 'Times New Roman' SIZE 12
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'Harbour Script Usage Demo' ;
+         MAIN ;
+         FONT 'Times New Roman' SIZE 12
 
-   DEFINE STATUSBAR ;
-      FONT 'Times New Roman' SIZE 12
-      STATUSITEM ''
-   END STATUSBAR
+      DEFINE STATUSBAR ;
+            FONT 'Times New Roman' SIZE 12
+         STATUSITEM ''
+      END STATUSBAR
 
-   @ 10, 10 BUTTON Btn_1 ;
-      CAPTION 'Run Script' ;
-      WIDTH 200 ;
-      HEIGHT 25 ;
-      ONCLICK RunScript()
+      @ 10, 10 BUTTON Btn_1 ;
+         CAPTION 'Run Script' ;
+         WIDTH 200 ;
+         HEIGHT 25 ;
+         ONCLICK RunScript()
 
    END WINDOW
 
@@ -37,8 +35,7 @@ PROCEDURE Main
    CENTER WINDOW Win_Main
    ACTIVATE WINDOW Win_Main
 
-RETURN
-
+   RETURN
 
 PROCEDURE RunScript
 
@@ -67,4 +64,5 @@ PROCEDURE RunScript
 
    hb_hrbUnload( hHandle_Hrb )
 
-RETURN
+   RETURN
+

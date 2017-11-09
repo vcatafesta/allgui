@@ -1,38 +1,38 @@
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		ROW 0 ;
-		COL 0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN  
+   DEFINE WINDOW Win_1 ;
+         ROW 0 ;
+         COL 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-		DEFINE MAIN MENU
-			POPUP 'File'
-				ITEM 'Test'	ACTION Test()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Test'   ACTION Test()
+         END POPUP
+      END MENU
 
+   END WINDOW
 
-	END WINDOW
+   Win_1.Center
 
-	Win_1.Center
+   Win_1.Activate
 
-	Win_1.Activate
+   RETURN
 
-Return
+FUNCTION Test
 
-Function Test
+   USE Test
 
-	Use Test
+   LOAD REPORT Test
 
-	LOAD REPORT Test
+   EXECUTE REPORT Test PREVIEW SELECTPRINTER
 
-	EXECUTE REPORT Test PREVIEW SELECTPRINTER
+   USE
 
-	Use
+   RETURN
 
-Return

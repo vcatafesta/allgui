@@ -7,10 +7,10 @@ FUNCTION Main()
    SET CENTURY ON
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 WIDTH 600 HEIGHT 450 ;
-      BACKCOLOR BLUE ;
-      TITLE "Get's WAIT WINDOW Demo" ;
-      MAIN
+         AT 0, 0 WIDTH 600 HEIGHT 450 ;
+         BACKCOLOR BLUE ;
+         TITLE "Get's WAIT WINDOW Demo" ;
+         MAIN
 
       ON KEY ESCAPE ACTION ThisWindow.Release ()
 
@@ -27,11 +27,11 @@ FUNCTION Main()
    END WINDOW
 
    DEFINE WINDOW Win_Wait ;
-      AT 0, 0 WIDTH 400 HEIGHT 64 ;
-      TOPMOST NOSHOW ;
-      NOCAPTION NOSYSMENU ;
-      NOAUTORELEASE ;
-      BACKCOLOR CLR_LIGHTBLUE
+         AT 0, 0 WIDTH 400 HEIGHT 64 ;
+         TOPMOST NOSHOW ;
+         NOCAPTION NOSYSMENU ;
+         NOAUTORELEASE ;
+         BACKCOLOR CLR_LIGHTBLUE
 
       @ 16, 10 LABEL L1 VALUE 'Please wait...' WIDTH 380 HEIGHT 24 FONT 'Arial' SIZE 14 ;
          FONTCOLOR BLUE BOLD BACKCOLOR CLR_LIGHTBLUE CENTERALIGN
@@ -42,8 +42,7 @@ FUNCTION Main()
    CENTER WINDOW Win_Wait
    ACTIVATE WINDOW Win_Wait, Win_1
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Test1()
 
@@ -66,8 +65,7 @@ FUNCTION Test1()
    Win_1.Button_2.Enabled := .T.
    Win_1.Button_3.Enabled := .T.
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Test2()
 
@@ -75,12 +73,12 @@ FUNCTION Test2()
    Win_Wait.Show
    Win_Wait.L1.Value := 'Processing...'
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Test3()
 
    Win_1.Button_1.Enabled := .T.
    Win_Wait.Hide
 
-RETURN NIL
+   RETURN NIL
+

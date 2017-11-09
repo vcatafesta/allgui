@@ -1,36 +1,34 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	SET DATE GERMAN
+   SET DATE GERMAN
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 ;
-		HEIGHT 400 ;
-		TITLE 'Statusbar Keyboard Demo' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 400 ;
+         TITLE 'Statusbar Keyboard Demo' ;
+         MAIN
 
+      DEFINE STATUSBAR FONT 'Arial' SIZE 9
 
-		DEFINE STATUSBAR FONT 'Arial' SIZE 9
+         STATUSITEM "Statusbar Demo"
 
-			STATUSITEM "Statusbar Demo" 
+         KEYBOARD
 
-			KEYBOARD
+         DATE
 
-			DATE 
+         CLOCK
 
-			CLOCK 
+      END STATUSBAR
 
-		END STATUSBAR
- 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
-
+   RETURN
 

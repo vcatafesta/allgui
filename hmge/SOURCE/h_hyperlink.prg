@@ -13,43 +13,42 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetAddress ( ControlName , ParentForm , url )
-*-----------------------------------------------------------------------------*
+
    LOCAL i
 
    i := GetControlIndex ( ControlName , ParentForm )
@@ -65,11 +64,9 @@ PROCEDURE _SetAddress ( ControlName , ParentForm , url )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetAddressControlProcedure ( ControlName , url , i )
-*-----------------------------------------------------------------------------*
 
    DO CASE
    CASE At( "@", url ) > 0
@@ -92,20 +89,21 @@ PROCEDURE _SetAddressControlProcedure ( ControlName , url , i )
    CASE At( "proc:\\", url ) > 0
 
       url := StrTran( url, "proc:\\", "" )
-#if defined( __XHARBOUR__ ) || ( ( __HARBOUR__ - 0 ) < 0x030200 )
-      IF ( Type( SubStr( url, 1, At( "(", url ) - 1 ) + "()" ) == "UI" ) 
-#else
-      IF hb_IsFunction( SubStr( url, 1, At( "(", url ) - 1 ) )
-#endif
-         _HMG_aControlProcedures [i] := &( '{||' + url + '}' )
-      ELSE
-         MsgMiniGuiError ( "Control " + ControlName + " Of " + GetParentFormName( i ) + " must have a valid procedure name defined." )
-      ENDIF
+      #if defined( __XHARBOUR__ ) || ( ( __HARBOUR__ - 0 ) < 0x030200 )
+      IF ( Type( SubStr( url, 1, At( "(", url ) - 1 ) + "()" ) == "UI" )
+         #else
+         IF hb_IsFunction( SubStr( url, 1, At( "(", url ) - 1 ) )
+            #endif
+            _HMG_aControlProcedures [i] := &( '{||' + url + '}' )
+         ELSE
+            MsgMiniGuiError ( "Control " + ControlName + " Of " + GetParentFormName( i ) + " must have a valid procedure name defined." )
+         ENDIF
 
-   OTHERWISE
+      OTHERWISE
 
-      MsgMiniGuiError ( "Control " + ControlName + " Of " + GetParentFormName( i ) + " must have a valid email, url or file defined." )
+         MsgMiniGuiError ( "Control " + ControlName + " Of " + GetParentFormName( i ) + " must have a valid email, url or file defined." )
 
-   ENDCASE
+      ENDCASE
 
-RETURN
+      RETURN
+

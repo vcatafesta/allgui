@@ -1,110 +1,103 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Based on freeware Zip Component by Belus Technology
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Based on freeware Zip Component by Belus Technology
 */
 
 #include <minigui.ch>
 
 #command COMPRESS [ FILES ] <afiles> ;
-      TO <zipfile> ;
-      BLOCK <block>  ;
-      [ LEVEL <level> ] ;
-      [ <ovr: OVERWRITE> ] ;
-      [ <spt: STOREPATH> ] ;
+   TO <zipfile> ;
+   BLOCK <block>  ;
+   [ LEVEL <level> ] ;
+   [ <ovr: OVERWRITE> ] ;
+   [ <spt: STOREPATH> ] ;
    => ;
-      COMPRESSFILES ( <zipfile>, <afiles>, <level>, <block>, <.ovr.>, <.spt.> )
-
+   COMPRESSFILES ( <zipfile>, <afiles>, <level>, <block>, <.ovr.>, <.spt.> )
 
 #command UNCOMPRESS [ FILE ] <zipfile> ;
-      EXTRACTPATH <extractpath> ;
-      [ BLOCK <block> ] ;
-      [ <createdir: CREATEDIR> ] ;
-      [ PASSWORD <password> ] ;
+   EXTRACTPATH <extractpath> ;
+   [ BLOCK <block> ] ;
+   [ <createdir: CREATEDIR> ] ;
+   [ PASSWORD <password> ] ;
    => ;
-      UNCOMPRESSFILES ( <zipfile>, <block>, <extractpath> )
-
+   UNCOMPRESSFILES ( <zipfile>, <block>, <extractpath> )
 
 STATIC ObjZip
 
-*------------------------------------------------------------------------------*
 PROCEDURE Main
-*------------------------------------------------------------------------------*
 
    IF IsWinNT() .AND. ! wapi_IsUserAnAdmin()
       MsgStop( 'This Program Runs In An Admin Mode Only!', 'Stop' )
+
       RETURN
    ENDIF
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 400 HEIGHT 215 ;
-      TITLE "Backup" ;
-      ICON "demo.ico" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      ON INIT RegActiveX() ;
-      ON RELEASE UnRegActiveX() ;
-      FONT "Arial" SIZE 9
+         AT 0, 0 ;
+         WIDTH 400 HEIGHT 215 ;
+         TITLE "Backup" ;
+         ICON "demo.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INIT RegActiveX() ;
+         ON RELEASE UnRegActiveX() ;
+         FONT "Arial" SIZE 9
 
-   DEFINE BUTTON Button_1
-      ROW 140
-      COL 45
-      WIDTH 150
-      HEIGHT 30
-      CAPTION "&Create Backup"
-      ACTION CreateZip()
-   END BUTTON
+      DEFINE BUTTON Button_1
+         ROW 140
+         COL 45
+         WIDTH 150
+         HEIGHT 30
+         CAPTION "&Create Backup"
+         ACTION CreateZip()
+      END BUTTON
 
-   DEFINE BUTTON Button_2
-      ROW 140
-      COL 205
-      WIDTH 150
-      HEIGHT 28
-      CAPTION "&Recover Backup"
-      ACTION UnZip()
-   END BUTTON
+      DEFINE BUTTON Button_2
+         ROW 140
+         COL 205
+         WIDTH 150
+         HEIGHT 28
+         CAPTION "&Recover Backup"
+         ACTION UnZip()
+      END BUTTON
 
-   DEFINE PROGRESSBAR ProgressBar_1
-      ROW 60
-      COL 45
-      WIDTH 310
-      HEIGHT 30
-      RANGEMIN 0
-      RANGEMAX 10
-      VALUE 0
-      FORECOLOR { 0, 130, 0 }
-   END PROGRESSBAR
+      DEFINE PROGRESSBAR ProgressBar_1
+         ROW 60
+         COL 45
+         WIDTH 310
+         HEIGHT 30
+         RANGEMIN 0
+         RANGEMAX 10
+         VALUE 0
+         FORECOLOR { 0, 130, 0 }
+      END PROGRESSBAR
 
-   DEFINE LABEL Label_1
-      ROW 100
-      COL 25
-      WIDTH 350
-      HEIGHT 20
-      VALUE ""
-      FONTNAME "Arial"
-      FONTSIZE 10
-      TOOLTIP ""
-      FONTBOLD .T.
-      TRANSPARENT .T.
-      CENTERALIGN .T.
-   END LABEL
+      DEFINE LABEL Label_1
+         ROW 100
+         COL 25
+         WIDTH 350
+         HEIGHT 20
+         VALUE ""
+         FONTNAME "Arial"
+         FONTSIZE 10
+         TOOLTIP ""
+         FONTBOLD .T.
+         TRANSPARENT .T.
+         CENTERALIGN .T.
+      END LABEL
 
-   ON KEY ESCAPE ACTION Form_1.Release
+      ON KEY ESCAPE ACTION Form_1.Release
 
    END WINDOW
 
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION CreateZip()
-*------------------------------------------------------------------------------*
 
    LOCAL aDir := Directory( "xzip.*", "D" ), aFiles := {}, nLen
    LOCAL cPath := CurDrive() + ":\" + CurDir() + "\"
@@ -127,11 +120,9 @@ FUNCTION CreateZip()
       Form_1.Label_1.Value := 'Backup is finished'
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION ProgressUpdate( nPos, cFile, lShowFileName )
-*------------------------------------------------------------------------------*
 
    DEFAULT lShowFileName := .F.
 
@@ -142,11 +133,9 @@ FUNCTION ProgressUpdate( nPos, cFile, lShowFileName )
       InkeyGUI( 250 )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION UnZip()
-*------------------------------------------------------------------------------*
 
    LOCAL cCurDir := GetCurrentFolder(), cArchive
 
@@ -167,11 +156,9 @@ FUNCTION UnZip()
       Form_1.Label_1.Value := 'Restoration of Backup is finished'
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION FillFiles( aFiles, cDir, cPath )
-*------------------------------------------------------------------------------*
 
    LOCAL aSubDir, cItem
 
@@ -184,27 +171,21 @@ FUNCTION FillFiles( aFiles, cDir, cPath )
       ENDIF
    NEXT
 
-RETURN aFiles
+   RETURN aFiles
 
-*------------------------------------------------------------------------------*
 FUNCTION GetFilesCountInZip ( zipfile )
-*------------------------------------------------------------------------------*
 
-RETURN GetZipObject():Contents( zipfile ):Count
+   RETURN GetZipObject():Contents( zipfile ):Count
 
-*------------------------------------------------------------------------------*
 STATIC FUNCTION GetZipObject()
-*------------------------------------------------------------------------------*
 
    IF ObjZip == NIL
       objZip := CreateObject( "XStandard.Zip" )
    ENDIF
 
-RETURN ObjZip
+   RETURN ObjZip
 
-*------------------------------------------------------------------------------*
 PROCEDURE UNCOMPRESSFILES ( zipfile, block, extractpath )
-*------------------------------------------------------------------------------*
 
    LOCAL oZip
    LOCAL COUNT
@@ -213,7 +194,7 @@ PROCEDURE UNCOMPRESSFILES ( zipfile, block, extractpath )
 
    oZip := GetZipObject ()
 
-   Count := oZip:Contents( zipfile ):Count
+   COUNT := oZip:Contents( zipfile ):Count
 
    FOR i := 1 TO Count
 
@@ -227,11 +208,9 @@ PROCEDURE UNCOMPRESSFILES ( zipfile, block, extractpath )
 
    NEXT i
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE COMPRESSFILES ( zipfile, afiles, level, block, ovr, lStorePath )
-*------------------------------------------------------------------------------*
 
    LOCAL oZip
    LOCAL i
@@ -254,24 +233,21 @@ PROCEDURE COMPRESSFILES ( zipfile, afiles, level, block, ovr, lStorePath )
 
    NEXT i
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE RegActiveX()
-*------------------------------------------------------------------------------*
 
    IF File ( GetStartUpFolder() + '\xzip.dll' )
       EXECUTE FILE "regsvr32" PARAMETERS "/s XZip.dll" HIDE
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE UnRegActiveX()
-*------------------------------------------------------------------------------*
 
    IF File ( GetStartUpFolder() + '\xzip.dll' )
       EXECUTE FILE "regsvr32" PARAMETERS "/u /s XZip.dll" HIDE
    ENDIF
 
-RETURN
+   RETURN
+

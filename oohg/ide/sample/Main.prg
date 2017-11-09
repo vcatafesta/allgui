@@ -8,52 +8,50 @@
 */
 
 #include 'oohg.ch'
-*--------------------------
-Function Main()
-*-------------------------
-set century on
-set date ansi
-msginfo("Welcome ooHG users.","The ooHG IDE+ world")
-p1()
-LOAD WINDOW fp
-center window fp
-activate window fp
-Return nil
 
+FUNCTION Main()
 
-*-------------------------
-function toolbar()
-*-------------------------
-/*
-load window tbarsamp
-center window tbarsamp
-activate window tbarsamp
-*/
-return nil
+   SET CENTURY ON
+   SET DATE ANSI
+   msginfo("Welcome ooHG users.","The ooHG IDE+ world")
+   p1()
+   LOAD WINDOW fp
+   CENTER WINDOW fp
+   ACTIVATE WINDOW fp
 
+   RETURN NIL
 
-*-------------------------
-Function rep()
-*-------------------------
-local wempresa
-set language to english
-wempresa:="hollywood"
-USe test
-DO REPORT FORM repdemo
-close data
-return Nil
+FUNCTION toolbar()
 
+   /*
+   load window tbarsamp
+   center window tbarsamp
+   activate window tbarsamp
+   */
 
-*-------------------------
-function abre()
-*-------------------------
-use test
-return nil
+   RETURN NIL
 
+FUNCTION rep()
 
-*-------------------------
-function cierra()
-*-------------------------
-close data
-return nil
-
+   LOCAL wempresa
+
+   SET language to english
+   wempresa:="hollywood"
+   USE test
+   DO REPORT FORM repdemo
+   CLOSE data
+
+   RETURN NIL
+
+FUNCTION abre()
+
+   USE test
+
+   RETURN NIL
+
+FUNCTION cierra()
+
+   CLOSE data
+
+   RETURN NIL
+

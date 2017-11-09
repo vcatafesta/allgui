@@ -1,36 +1,34 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
-
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'MiniGUI Customizable ToolBar Demo' ;
-      ICON 'DEMO.ICO' ;
-      MAIN ;
-      FONT 'Arial' SIZE 10
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI Customizable ToolBar Demo' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         FONT 'Arial' SIZE 10
 
       DEFINE STATUSBAR
          STATUSITEM 'HMG Power Ready!'
       END STATUSBAR
 
       DEFINE MAIN MENU
-      POPUP '&File'
+         POPUP '&File'
             ITEM "Customize ToolBar 1" ACTION CustomToolbar('ToolBar_a')
             ITEM "Customize ToolBar 3" ACTION CustomToolbar('ToolBar_c')
             SEPARATOR
-            ITEM '&Exit'	ACTION Form_1.Release
+            ITEM '&Exit'   ACTION Form_1.Release
          END POPUP
          POPUP '&Help'
-            ITEM '&About'	ACTION MsgInfo ("MiniGUI Customizable ToolBar demo")
+            ITEM '&About'   ACTION MsgInfo ("MiniGUI Customizable ToolBar demo")
          END POPUP
       END MENU
 
@@ -71,7 +69,6 @@ Function Main
                CAPTION 'Copy' ;
                PICTURE 'Copy.bmp' ;
                ACTION MsgInfo('Click! 2');
-
 
             BUTTON Button_3b ;
                CAPTION '&Paste' ;
@@ -140,10 +137,11 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
+FUNCTION CustomToolbar( cToolbar )
 
-Function CustomToolbar( cToolbar )
-         CustomizeToolbar( _HMG_aControlHandles[ GetControlIndex( cToolbar, 'Form_1' ) ] )
-Return Nil
+   CustomizeToolbar( _HMG_aControlHandles[ GetControlIndex( cToolbar, 'Form_1' ) ] )
+
+   RETURN NIL
 

@@ -1,31 +1,30 @@
 /*
- * Ejemplo Grid n° 25
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo asignar valores por defecto a
- * las celdas de un nuevo item utilizando el evento ON INSERT.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 25
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo asignar valores por defecto a
+* las celdas de un nuevo item utilizando el evento ON INSERT.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
+
    LOCAL aRows[ 10, 3 ]
 
    SET DATE BRITISH
    SET EPOCH TO 1960
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0, 0 ;
-      WIDTH 640 ;
-      HEIGHT 540 ;
-      TITLE 'Valores por defecto en control Grid' ;
-      MAIN ;
-      ON SIZE oGrid:Width := oForm:ClientWidth - 20
+         AT 0, 0 ;
+         WIDTH 640 ;
+         HEIGHT 540 ;
+         TITLE 'Valores por defecto en control Grid' ;
+         MAIN ;
+         ON SIZE oGrid:Width := oForm:ClientWidth - 20
 
       DEFINE STATUSBAR
          STATUSITEM "Use Alt-A para agregar un nuevo item y vea que pasa"
@@ -62,17 +61,18 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
 FUNCTION ValoresPorDefecto( nItem )
 
    oGrid:Item( nItem, ;
-               {"Smith", "John", "234-4567", "14/03/61", "250"}, ;
-               {WHITE, WHITE, WHITE, WHITE, WHITE}, ;
-               {BLUE, BLUE, BLUE, BLUE, BLUE} )
+      {"Smith", "John", "234-4567", "14/03/61", "250"}, ;
+      {WHITE, WHITE, WHITE, WHITE, WHITE}, ;
+      {BLUE, BLUE, BLUE, BLUE, BLUE} )
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

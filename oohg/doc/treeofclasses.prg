@@ -1,9 +1,9 @@
 /*
- * $Id: treeofclasses.prg,v 1.3 2015/03/10 23:58:19 fyurisich Exp $
- */
+* $Id: treeofclasses.prg,v 1.3 2015/03/10 23:58:19 fyurisich Exp $
+*/
 /*
- * Reads classes.txt and shows the tree of classes in a a Tree control
- */
+* Reads classes.txt and shows the tree of classes in a a Tree control
+*/
 
 #include "oohg.ch"
 
@@ -12,17 +12,17 @@ FUNCTION Main()
    SET EXACT ON
 
    DEFINE WINDOW MainForm ;
-      OBJ oMainForm ;
-      AT 0,0 ;
-      WIDTH 648 ;
-      HEIGHT 188 ;
-      TITLE "Tree of ooHG's Classes" ;
-      MAIN ;
-      ON SIZE MainFormResize( oMainForm ) ;
-      ON INIT {|| MainFormResize( oMainForm ), ;
-                  Populate( oMainForm ), ;
-                  oMainForm:lbl_wait:Visible := .F. , ;
-                  oMainForm:Classes:Visible := .T. }
+         OBJ oMainForm ;
+         AT 0,0 ;
+         WIDTH 648 ;
+         HEIGHT 188 ;
+         TITLE "Tree of ooHG's Classes" ;
+         MAIN ;
+         ON SIZE MainFormResize( oMainForm ) ;
+         ON INIT {|| MainFormResize( oMainForm ), ;
+         Populate( oMainForm ), ;
+         oMainForm:lbl_wait:Visible := .F. , ;
+         oMainForm:Classes:Visible := .T. }
 
       @ 80, 10 LABEL lbl_wait ;
          VALUE "Working, please wait ..." ;
@@ -34,12 +34,12 @@ FUNCTION Main()
          WIDTH oMainForm:ClientWidth - 20
 
       DEFINE TREE Classes ;
-         AT 20,20 ;
-         WIDTH 600 ;
-         HEIGHT 400 ;
-         ITEMIDS ;
-         INVISIBLE ;
-         FONT "Courier New"
+            AT 20,20 ;
+            WIDTH 600 ;
+            HEIGHT 400 ;
+            ITEMIDS ;
+            INVISIBLE ;
+            FONT "Courier New"
 
       END TREE
 
@@ -50,11 +50,12 @@ FUNCTION Main()
    oMainForm:Center()
    oMainForm:activate()
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * Size and place controls whenever the form's size is changed
- */
+   /*
+   * Size and place controls whenever the form's size is changed
+   */
+
 FUNCTION MainFormResize( oMainForm )
 
    LOCAL TitleHeight  := GetTitleheight()
@@ -63,7 +64,7 @@ FUNCTION MainFormResize( oMainForm )
 
    WITH OBJECT oMainForm
       IF :WIDTH < INT(388 * ScreenDPI / 96)
-        :WIDTH := INT(388 * ScreenDPI / 96)
+         :WIDTH := INT(388 * ScreenDPI / 96)
       ENDIF
 
       IF :HEIGHT < INT(388 * ScreenDPI / 96)
@@ -74,16 +75,17 @@ FUNCTION MainFormResize( oMainForm )
       :Classes:HEIGHT := :HEIGHT - TitleHeight - ( BorderHeight * 2 ) - INT(40 * ScreenDPI / 96)
    END WITH
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * Populate tree with classes' information from docs/classes.txt file
- */
+   /*
+   * Populate tree with classes' information from docs/classes.txt file
+   */
+
 FUNCTION Populate( oMainForm )
 
    LOCAL oFile, cLine, cRest, i, j, cClassName, cParentClass
    LOCAL nClassId, nParentId, aTreeItems, aOrphans, nPos
-   local cDataName, cMethodName, lNew, cOthers, aItems
+   LOCAL cDataName, cMethodName, lNew, cOthers, aItems
 
    oFile := TFileRead():New( "CLASSES.TXT" )
 
@@ -101,23 +103,23 @@ FUNCTION Populate( oMainForm )
 
       DO WHILE oFile:MoreToRead()
          cLine := ALLTRIM( oFile:ReadLine() )
-         
+
          /*
-          * Just process the lines with the the following structures:
-          *    CLASS <ClassName>
-          *    CLASS <ClassName> FROM <ParentClassName>
-          *    DATA <DataName> [ <Additional information> ]
-          *    METHOD <MethodName> [ <Additional information> ]
-          *    ENDCLASS
-          */
+         * Just process the lines with the the following structures:
+         *    CLASS <ClassName>
+         *    CLASS <ClassName> FROM <ParentClassName>
+         *    DATA <DataName> [ <Additional information> ]
+         *    METHOD <MethodName> [ <Additional information> ]
+         *    ENDCLASS
+         */
 
          IF UPPER( LEFT( cLine, 6 ) ) == "CLASS "
             cRest := LTRIM( SUBSTR( cLine, 7 ) )
 
             i := AT( " ", cRest )
             IF i > 0
-              cClassName := LEFT( cRest, i - 1 )
-              cRest      := SUBSTR( cRest, i + 1 )
+               cClassName := LEFT( cRest, i - 1 )
+               cRest      := SUBSTR( cRest, i + 1 )
             ELSE
                cClassName := cRest
                cRest      := ""
@@ -126,7 +128,8 @@ FUNCTION Populate( oMainForm )
             IF ASCAN( aTreeItems, cClassName ) > 0
                MSGSTOP( "CLASS " + cClassName + " already defined.", "Tree of ooHG's Classes, msg #2" )
                oMainForm:Release()
-               RETURN Nil
+
+               RETURN NIL
             ENDIF
 
             IF UPPER( LEFT( cRest, 5 ) ) == "FROM "
@@ -139,8 +142,8 @@ FUNCTION Populate( oMainForm )
                nPos := AT( ",", cParentClass )
                IF nPos > 0
                   /*
-                   * Class has more than one parent
-                   */
+                  * Class has more than one parent
+                  */
                   cOthers := ALLTRIM( SUBSTR( cParentClass, nPos + 1 ) )
                   aItems  := {}
 
@@ -155,12 +158,12 @@ FUNCTION Populate( oMainForm )
                   oMainForm:Classes:AddItem( cClassName, nParentId, nClassId )
                ELSE
                   /*
-                   * When class parent isn't defined yet
-                   * add class to the orphaned list.
-                   * This list contains class' name, class' parent,
-                   * an array of class' datas and methods and a flag
-                   * indicating if cClassName must be unique.
-                   */
+                  * When class parent isn't defined yet
+                  * add class to the orphaned list.
+                  * This list contains class' name, class' parent,
+                  * an array of class' datas and methods and a flag
+                  * indicating if cClassName must be unique.
+                  */
                   AADD( aOrphans, { cClassName, cParentClass, {}, Empty( cOthers ) } )
                   nClassId := 0
                ENDIF
@@ -171,19 +174,21 @@ FUNCTION Populate( oMainForm )
                oMainForm:Classes:AddItem( cClassName, nil, nClassId )
             ENDIF
          ELSEIF UPPER( LEFT( cLine, 5 ) ) == "DATA " .OR. ;
-                UPPER( LEFT( cLine, 7 ) ) == "METHOD " .OR. ;
-                UPPER( LEFT( cLine, 8 ) ) == "MESSAGE " .OR. ;
-                UPPER( LEFT( cLine, 9 ) ) == "DELEGATE " .OR. ;
-                ( UPPER( LEFT( cLine, 6 ) ) == "ERROR " .AND. UPPER( LEFT( LTRIM( SUBSTR( cLine, 7 ) ), 8 ) ) == "HANDLER " )
+               UPPER( LEFT( cLine, 7 ) ) == "METHOD " .OR. ;
+               UPPER( LEFT( cLine, 8 ) ) == "MESSAGE " .OR. ;
+               UPPER( LEFT( cLine, 9 ) ) == "DELEGATE " .OR. ;
+               ( UPPER( LEFT( cLine, 6 ) ) == "ERROR " .AND. UPPER( LEFT( LTRIM( SUBSTR( cLine, 7 ) ), 8 ) ) == "HANDLER " )
             IF EMPTY( cClassName )
                MSGSTOP( "Found " + HB_OSNewLine() + cLine + HB_OSNewLine() + "without associated class.", "Tree of ooHG's Classes, msg #3" )
                oMainForm:Release()
-               RETURN Nil
+
+               RETURN NIL
             ELSE
                IF ASCAN( aTreeItems, cClassName + cLine ) > 0
                   MSGSTOP( cLine + HB_OSNewLine() + " already defined in CLASS " + HB_OSNewLine() + cClassName + ".", "Tree of ooHG's Classes, msg #4" )
                   oMainForm:Release()
-                  RETURN Nil
+
+                  RETURN NIL
                ENDIF
 
                IF nClassId > 0
@@ -217,12 +222,12 @@ FUNCTION Populate( oMainForm )
                   oMainForm:Classes:AddItem( cClassName, nParentId, nClassId )
                ELSE
                   /*
-                   * When class parent isn't defined yet
-                   * add class to the orphaned list.
-                   * This list contains class' name, class' parent,
-                   * an array of class' datas and methods and a flag
-                   * indicating if cClassName must be unique.
-                   */
+                  * When class parent isn't defined yet
+                  * add class to the orphaned list.
+                  * This list contains class' name, class' parent,
+                  * an array of class' datas and methods and a flag
+                  * indicating if cClassName must be unique.
+                  */
                   AADD( aOrphans, { cClassName, cParentClass, {}, .F. } )
                   nClassId := 0
                ENDIF
@@ -243,12 +248,12 @@ FUNCTION Populate( oMainForm )
             aItems     := {}
          ENDIF
       ENDDO
-      
+
       oFile:Close()
-      
+
       /*
-       * Add orphaned classes
-       */
+      * Add orphaned classes
+      */
       DO WHILE LEN( aOrphans ) > 0
          i := 1
          lNew := .F.
@@ -257,30 +262,32 @@ FUNCTION Populate( oMainForm )
             IF aOrphans[i][4] .AND. ASCAN( aTreeItems, aOrphans[i][1] ) > 0
                MSGSTOP( "CLASS " + aOrphans[i][1] + " already defined.", "Tree of ooHG's Classes, msg #5" )
                oMainForm:Release()
-               RETURN Nil
+
+               RETURN NIL
             ENDIF
 
             /*
-             * Check if parent is in the tree control
-             */
+            * Check if parent is in the tree control
+            */
             nParentId := ASCAN( aTreeItems, aOrphans[i][2] )
             IF nParentId > 0
                /*
-                * If it is, add class to tree
-                */
+               * If it is, add class to tree
+               */
                AADD( aTreeItems, aOrphans[i][1] )
                nClassId := LEN( aTreeItems )
 
                oMainForm:Classes:AddItem( aOrphans[i][1], nParentId, nClassId )
-               
+
                /*
-                * Add datas and methods
-                */
+               * Add datas and methods
+               */
                FOR j := 1 to LEN( aOrphans[i][3] )
                   IF aOrphans[i][4] .AND. ASCAN( aTreeItems, aOrphans[i][1] + aOrphans[i][3][j] ) > 0
                      MSGSTOP( aOrphans[i][3][j] + HB_OSNewLine() + " already defined in CLASS " + HB_OSNewLine() + aOrphans[i][1] + ".", "Tree of ooHG's Classes, msg #6" )
                      oMainForm:Release()
-                     RETURN Nil
+
+                     RETURN NIL
                   ENDIF
 
                   AADD( aTreeItems, aOrphans[i][1] + aOrphans[i][3][j] )
@@ -289,29 +296,30 @@ FUNCTION Populate( oMainForm )
                NEXT
 
                lNew := .T.
-               
+
                /*
-                * Delete orphan
-                */
+               * Delete orphan
+               */
                ADEL( aOrphans, i )
                ASIZE( aOrphans, LEN( aOrphans ) - 1 )
-               
+
                /*
-                * Restart from the first item in aOrphans
-                */
+               * Restart from the first item in aOrphans
+               */
                EXIT
             ELSE
                /*
-                * If it's not, process next item in aOrphans
-                */
+               * If it's not, process next item in aOrphans
+               */
                i ++
             ENDIF
          ENDDO
-         
+
          IF ! lNew
             MSGSTOP( "CLASS " + aOrphans[1][2] + " not defined.", "Tree of ooHG's Classes, msg #7" )
             oMainForm:Release()
-            RETURN Nil
+
+            RETURN NIL
          ENDIF
       ENDDO
 
@@ -321,11 +329,11 @@ FUNCTION Populate( oMainForm )
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * C functions
- */
+   /*
+   * C functions
+   */
 #pragma BEGINDUMP
 
 #include <windows.h>
@@ -353,6 +361,7 @@ HB_FUNC( GETSCREENDPI )
 
 #pragma ENDDUMP
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

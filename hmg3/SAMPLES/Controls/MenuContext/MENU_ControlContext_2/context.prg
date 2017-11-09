@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window Context
-	Activate Window Context
+   LOAD WINDOW Context
+   ACTIVATE WINDOW Context
 
-Return
-
+   RETURN
 

@@ -1,22 +1,22 @@
 #include "minigui.ch"
 
 /*
-      Autor : Francisco Garc¡a Fernandez
-   Objetivo : Simular el alert de clipper
-            : Alert( cTexto, [<aOpciones>], [<cTitulo>], [<nTipo>] )
+Autor : Francisco Garc¡a Fernandez
+Objetivo : Simular el alert de clipper
+: Alert( cTexto, [<aOpciones>], [<cTitulo>], [<nTipo>] )
 
-             cTexto -> igual que en clipper, separamemos las lineas con ;
-             aOpciones -> igual que en clipper
-                       -> si se le pasa un valor num‚rico
-                          espera tantos segundos y cancela solo
-                          si se pulsa un boton deja de esperar y termina
-             cTitulo -> el titulo de la ventana, por defecto sale "Atenci¢n"
+cTexto -> igual que en clipper, separamemos las lineas con ;
+aOpciones -> igual que en clipper
+-> si se le pasa un valor num‚rico
+espera tantos segundos y cancela solo
+si se pulsa un boton deja de esperar y termina
+cTitulo -> el titulo de la ventana, por defecto sale "Atenci¢n"
 
-             nTipo   -> 1, 2, 3, 4
-                        si aOpciones tiene solo una y no se pasa nTipo
-                        este vale 1
-                        si aOpciones tiene 2 o mas y no se pasa nTipo
-                        este vale 2
+nTipo   -> 1, 2, 3, 4
+si aOpciones tiene solo una y no se pasa nTipo
+este vale 1
+si aOpciones tiene 2 o mas y no se pasa nTipo
+este vale 2
 */
 
 #define MARGEN 50
@@ -58,13 +58,13 @@ FUNCTION _Alert( cMsg, aOpciones, cTitle, nTipo )
    nLineas := MLCount( cMsg, 254 )
 
    DEFINE WINDOW oDlg ;
-      At 0, 0 ;
-      WIDTH 0 ;
-      HEIGHT 0 ;
-      TITLE cTitle ;
-      MODAL ;
-      NOSIZE ;
-      ON INIT FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
+         At 0, 0 ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         TITLE cTitle ;
+         MODAL ;
+         NOSIZE ;
+         ON INIT FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
 
    END WINDOW
 
@@ -72,9 +72,9 @@ FUNCTION _Alert( cMsg, aOpciones, cTitle, nTipo )
 
    RELEASE FONT DlgFont
 
-RETURN iif( lEmpty, 0, _HMG_ModalDialogReturn )
+   RETURN iif( lEmpty, 0, _HMG_ModalDialogReturn )
 
-// -----------------------------------------------------------------//
+   // -----------------------------------------------------------------//
 
 STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
 
@@ -196,4 +196,5 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
       oDlg.oTimer.Enabled := .T.
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

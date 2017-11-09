@@ -1,10 +1,8 @@
 /*
- * FileCopy with Progressbar HMG - Demo
- *
- * Copyright 2004 Jacek Kubica <kubica@wssk.wroc.pl>
- * http://www.wssk.wroc.pl/~kubica
- *
- * Revised by Grigory Filatov, June 2013
+* FileCopy with Progressbar HMG - Demo
+* Copyright 2004 Jacek Kubica <kubica@wssk.wroc.pl>
+* http://www.wssk.wroc.pl/~kubica
+* Revised by Grigory Filatov, June 2013
 */
 
 #include "minigui.ch"
@@ -17,41 +15,39 @@
 #define _DEFAULT_BLOCK 4096
 #define _LARGE_BLOCK 8192
 
-
-***********************************
 FUNCTION Main()
-***********************************
+
    LOCAL WybFol
 
    DEFINE WINDOW Form_1 AT 0, 0 WIDTH 483 HEIGHT 230 ;
-      MAIN ;
-      TITLE "HMG FileCopy Demo" ;
-      NOSIZE NOMAXIMIZE
+         MAIN ;
+         TITLE "HMG FileCopy Demo" ;
+         NOSIZE NOMAXIMIZE
 
-   @ 6, 1     FRAME Frame_1 CAPTION "" WIDTH 474 HEIGHT 128
+      @ 6, 1     FRAME Frame_1 CAPTION "" WIDTH 474 HEIGHT 128
 
-   @ 29, 20   LABEL Label_1 VALUE "Source file:" HEIGHT 19 FONT "Arial" SIZE 9 AUTOSIZE
-   @ 28, 110  TEXTBOX TextBox_1 WIDTH 298 HEIGHT 19
-   @ 26, 414  BUTTON Button_1 CAPTION "..." WIDTH 39 HEIGHT 23 ;
-              ACTION  {|| Form_1.TextBox_1.Value := Getfile ( { { 'All files ', '*.*' } }, 'Select file to copy' ) }
+      @ 29, 20   LABEL Label_1 VALUE "Source file:" HEIGHT 19 FONT "Arial" SIZE 9 AUTOSIZE
+      @ 28, 110  TEXTBOX TextBox_1 WIDTH 298 HEIGHT 19
+      @ 26, 414  BUTTON Button_1 CAPTION "..." WIDTH 39 HEIGHT 23 ;
+         ACTION  {|| Form_1.TextBox_1.Value := Getfile ( { { 'All files ', '*.*' } }, 'Select file to copy' ) }
 
-   @ 62, 20   LABEL Label_2 VALUE "Destination:" WIDTH 86 HEIGHT 18
-   @ 61, 110  TEXTBOX TextBox_2 WIDTH 298 HEIGHT 19
-   @ 59, 414  BUTTON Button_2 CAPTION "..." WIDTH 39 HEIGHT 23 ;
-              ACTION  {|| WybFol := GetFolder(), ;
-                 Form_1.TextBox_2.Value := WybFol + iif( Right( WybFol, 1 ) $ "\/", "", "\" ) + MyGetFileName( Form_1.TextBox_1.Value ) }
+      @ 62, 20   LABEL Label_2 VALUE "Destination:" WIDTH 86 HEIGHT 18
+      @ 61, 110  TEXTBOX TextBox_2 WIDTH 298 HEIGHT 19
+      @ 59, 414  BUTTON Button_2 CAPTION "..." WIDTH 39 HEIGHT 23 ;
+         ACTION  {|| WybFol := GetFolder(), ;
+         Form_1.TextBox_2.Value := WybFol + iif( Right( WybFol, 1 ) $ "\/", "", "\" ) + MyGetFileName( Form_1.TextBox_1.Value ) }
 
-   @ 84, 200  LABEL Label_3 VALUE "" WIDTH 271 HEIGHT 16
-   @ 103, 20  PROGRESSBAR ProgressBar_1 RANGE 0, 100 WIDTH 435 HEIGHT 21
+      @ 84, 200  LABEL Label_3 VALUE "" WIDTH 271 HEIGHT 16
+      @ 103, 20  PROGRESSBAR ProgressBar_1 RANGE 0, 100 WIDTH 435 HEIGHT 21
 
-   @ 146, 96  BUTTON Button_3 CAPTION "Copy" WIDTH 100 HEIGHT 24 ;
-      ACTION  FILECOPY( Form_1.TextBox_1.Value, Form_1.TextBox_2.Value, _LARGE_BLOCK, {| nArg| show_it( nArg ) } )
+      @ 146, 96  BUTTON Button_3 CAPTION "Copy" WIDTH 100 HEIGHT 24 ;
+         ACTION  FILECOPY( Form_1.TextBox_1.Value, Form_1.TextBox_2.Value, _LARGE_BLOCK, {| nArg| show_it( nArg ) } )
 
-   @ 146, 292 BUTTON Button_4 CAPTION "Exit" WIDTH 100 HEIGHT 24 ACTION ThisWindow.Release
+      @ 146, 292 BUTTON Button_4 CAPTION "Exit" WIDTH 100 HEIGHT 24 ACTION ThisWindow.Release
 
-   DEFINE STATUSBAR FONT "Arial" SIZE 9
-      STATUSITEM _TITLE
-   END STATUSBAR
+      DEFINE STATUSBAR FONT "Arial" SIZE 9
+         STATUSITEM _TITLE
+      END STATUSBAR
 
    END WINDOW
 
@@ -60,9 +56,8 @@ FUNCTION Main()
 
    RETURN NIL
 
-*******************************************************************
 FUNCTION FILECOPY( cSource, cDestination, nBuffer, bBlock )
-*******************************************************************
+
    LOCAL sourceHandle, destHandle, lSuccess := .F., TmpBuff, LastPos
    LOCAL BuffPos, ByteCount, cBType := ValType( bBlock )
 
@@ -70,6 +65,7 @@ FUNCTION FILECOPY( cSource, cDestination, nBuffer, bBlock )
 
    IF File( cDestination )
       IF !MsgYesNo( "Destination file already exist. Overwrite ?", "Warning" )
+
          RETURN lSuccess
       ENDIF
    ENDIF
@@ -108,9 +104,8 @@ FUNCTION FILECOPY( cSource, cDestination, nBuffer, bBlock )
 
    RETURN lSuccess
 
-***********************************
 FUNCTION SHOW_IT( nDl )
-***********************************
+
    LOCAL nPos := Int( nDl * 100 )
 
    IF ( nPos % _SHOW_PERCENT == 0 )
@@ -124,9 +119,8 @@ FUNCTION SHOW_IT( nDl )
 
    RETURN NIL
 
-***********************************
 FUNCTION MyGetFileName( rsFileName )
-***********************************
+
    LOCAL i
 
    FOR i = Len( rsFileName ) TO 1 STEP -1
@@ -136,3 +130,4 @@ FUNCTION MyGetFileName( rsFileName )
    NEXT
 
    RETURN SubStr( rsFileName, i + 1 )
+

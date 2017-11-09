@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Demo was contributed to HMG forum by Dragancesu 14/Jan/2015
- *
- * Adapted and enhanced for MiniGUI Extended Edition by Pierpaolo Martinello and Grigory Filatov
- */
+* MINIGUI - Harbour Win32 GUI library Demo
+* Demo was contributed to HMG forum by Dragancesu 14/Jan/2015
+* Adapted and enhanced for MiniGUI Extended Edition by Pierpaolo Martinello and Grigory Filatov
+*/
 
 #include <hmg.ch>
 #include "Directry.ch"
@@ -23,7 +21,7 @@
 #define GCEN      GRID_JTFY_CENTER
 
 #define NTrim( n ) LTRIM( STR( n,20, IF( n == INT( n ), 0, set(_SET_DECIMALS) ) ))
-#TRANSLATE ZAPS(<X>) => ALLTRIM(STR(<X>))
+#translate ZAPS(<X>) => ALLTRIM(STR(<X>))
 #define msgtest( c ) MSGSTOP( "Procedura: "+Procname()+CRLF+c, hb_ntos(procline()))
 
 MEMVAR cShortAlias, cDbF, aFilesDBF, aControlsOrder, nTextBox, nWidth, nLabel
@@ -39,26 +37,28 @@ MEMVAR _OPTIONS, _PICTURE ,_CASECONVER,_AITEMS, _AOPTIONS,_NSPACING,CFILE
 MEMVAR _InputMask, _CaseConvert,_SPACING, NGROWGRID ,AWIDTHSCOL,CFIELDS
 MEMVAR nLongDbf, nLongField,aControlsAct,nrowgrid,cpropiedad,acampospos
 
-Set procedure to tReport.prg
+SET procedure to tReport.prg
 
 FUNCTION MAIN()
-    LOCAL aDirectory
 
-    PUBLIC aColorWinB, aColorWinF, aItems , aInputMask , aCaseConvert
-    PUBLIC aControlList, aProperties , aControlsOrder 
-    PRIVATE aFilesDBF := {}
-    M->aItems :={} ; m->aInputMask :={} ; m->aCaseConvert :={}; m->aControlList :={}
-    m->aProperties := {}; m->aControlsOrder := {}
-    m->aColorWinB := {0,255,255} ; m->aColorWinF := {0,0,0}
+   LOCAL aDirectory
 
-//    SET CODEPAGE TO SPANISH   // Put here your codepage
-    SET TOOLTIPSTYLE BALLOON
-    SET DATE FORMAT "dd/mm/yyyy"
+   PUBLIC aColorWinB, aColorWinF, aItems , aInputMask , aCaseConvert
+   PUBLIC aControlList, aProperties , aControlsOrder
+   PRIVATE aFilesDBF := {}
 
-    aDirectory := DIRECTORY("*.DBF")
-    AEVAL( aDirectory, {|aFile| AADD(aFilesDBF,SUBSTR(aFile[F_NAME],1,AT(".",aFile[F_NAME])-1))} )
+   M->aItems :={} ; m->aInputMask :={} ; m->aCaseConvert :={}; m->aControlList :={}
+   m->aProperties := {}; m->aControlsOrder := {}
+   m->aColorWinB := {0,255,255} ; m->aColorWinF := {0,0,0}
 
-    DEFINE WINDOW Form_1 AT 0,0 WIDTH 160 HEIGHT 180 TITLE 'Quick Browse Generator';
+   //    SET CODEPAGE TO SPANISH   // Put here your codepage
+   SET TOOLTIPSTYLE BALLOON
+   SET DATE FORMAT "dd/mm/yyyy"
+
+   aDirectory := DIRECTORY("*.DBF")
+   AEVAL( aDirectory, {|aFile| AADD(aFilesDBF,SUBSTR(aFile[F_NAME],1,AT(".",aFile[F_NAME])-1))} )
+
+   DEFINE WINDOW Form_1 AT 0,0 WIDTH 160 HEIGHT 180 TITLE 'Quick Browse Generator';
          MAIN ;
          ON MOUSECLICK nil ;
          ICON '1Register' ;
@@ -67,483 +67,486 @@ FUNCTION MAIN()
          ON RELEASE dbCloseAll() ;
          NOMINIMIZE NOMAXIMIZE NOSIZE
 
-        DEFINE COMBOBOX Combo_1
-            ROW    20
-            COL    10
-            WIDTH  120
-            HEIGHT 100
-            ITEMS aFilesDBF
-            VALUE 0
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            ONCHANGE MyScreen(This.Value)
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            TABSTOP .T.
-            VISIBLE .T.
-            SORT .F.
-            ONENTER Nil
-            ONDISPLAYCHANGE Nil
-            DISPLAYEDIT .F.
-            IMAGE Nil
-            DROPPEDWIDTH Nil
-            ONDROPDOWN Nil
-            ONCLOSEUP Nil
-        END COMBOBOX
+      DEFINE COMBOBOX Combo_1
+         ROW    20
+         COL    10
+         WIDTH  120
+         HEIGHT 100
+         ITEMS aFilesDBF
+         VALUE 0
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         ONCHANGE MyScreen(This.Value)
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         TABSTOP .T.
+         VISIBLE .T.
+         SORT .F.
+         ONENTER Nil
+         ONDISPLAYCHANGE Nil
+         DISPLAYEDIT .F.
+         IMAGE Nil
+         DROPPEDWIDTH Nil
+         ONDROPDOWN Nil
+         ONCLOSEUP Nil
+      END COMBOBOX
 
-        DEFINE BUTTON Button_1
-            ROW    80
-            COL    10
-            WIDTH  120
-            HEIGHT 30
-            ACTION CreatePRG()
-            CAPTION "MAKE Prg"
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            HELPID Nil
-            FLAT .F.
-            TABSTOP .T.
-            VISIBLE .F.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE Nil
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_1
+         ROW    80
+         COL    10
+         WIDTH  120
+         HEIGHT 30
+         ACTION CreatePRG()
+         CAPTION "MAKE Prg"
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         HELPID Nil
+         FLAT .F.
+         TABSTOP .T.
+         VISIBLE .F.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE Nil
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE COMBOBOX Combo_2
-            ROW    180
-            COL    10
-            WIDTH  120
-            HEIGHT 180
-            ITEMS m->aControlList
-            VALUE 0
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            ONCHANGE ConfigValores(This.Value)
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            TABSTOP .T.
-            VISIBLE .T.
-            SORT .F.
-            ONENTER Nil
-            ONDISPLAYCHANGE Nil
-            DISPLAYEDIT .F.
-            IMAGE Nil
-            DROPPEDWIDTH Nil
-            ONDROPDOWN Nil
-            ONCLOSEUP Nil
-        END COMBOBOX
+      DEFINE COMBOBOX Combo_2
+         ROW    180
+         COL    10
+         WIDTH  120
+         HEIGHT 180
+         ITEMS m->aControlList
+         VALUE 0
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         ONCHANGE ConfigValores(This.Value)
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         TABSTOP .T.
+         VISIBLE .T.
+         SORT .F.
+         ONENTER Nil
+         ONDISPLAYCHANGE Nil
+         DISPLAYEDIT .F.
+         IMAGE Nil
+         DROPPEDWIDTH Nil
+         ONDROPDOWN Nil
+         ONCLOSEUP Nil
+      END COMBOBOX
 
-        DEFINE LABEL Label_3
-            ROW    220
-            COL    10
-            WIDTH  120
-            HEIGHT 24
-            VALUE "F5 = Move  -  F9 = Resize  -  F2 = About"
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            VISIBLE .T.
-            TRANSPARENT .T.
-            ACTION Nil
-            AUTOSIZE .T.
-            BACKCOLOR Nil
-            FONTCOLOR Nil
-        END LABEL
+      DEFINE LABEL Label_3
+         ROW    220
+         COL    10
+         WIDTH  120
+         HEIGHT 24
+         VALUE "F5 = Move  -  F9 = Resize  -  F2 = About"
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         VISIBLE .T.
+         TRANSPARENT .T.
+         ACTION Nil
+         AUTOSIZE .T.
+         BACKCOLOR Nil
+         FONTCOLOR Nil
+      END LABEL
 
-        DEFINE CheckBox Check1
-               ROW    277
-               COL     85
-               VALUE  .F.
-               CAPTION 'Snap        Grid'
-               WIDTH   90
-               VALUE  .T.
-        END CHECKBOX
+      DEFINE CHECKBOX Check1
+         ROW    277
+         COL     85
+         VALUE  .F.
+         CAPTION 'Snap        Grid'
+         WIDTH   90
+         VALUE  .T.
+      END CHECKBOX
 
-        DEFINE SPINNER GridSpinner
-            ROW    280 //218
-            COL    180
-            WIDTH  40
-            HEIGHT 23
-            RANGEMIN 0
-            RANGEMAX 50
-            INCREMENT 5
-            ONCHANGE DrawGrid()
-            VALUE 10
-        END SPINNER
+      DEFINE SPINNER GridSpinner
+         ROW    280 //218
+         COL    180
+         WIDTH  40
+         HEIGHT 23
+         RANGEMIN 0
+         RANGEMAX 50
+         INCREMENT 5
+         ONCHANGE DrawGrid()
+         VALUE 10
+      END SPINNER
 
-        DEFINE BUTTON Button_2
-            ROW    179
-            COL    135
-            WIDTH  25
-            HEIGHT 25
-            ACTION KillControl()
-            CAPTION ""
-            TOOLTIP "Delete the selected control from the list"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "TRASH"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_2
+         ROW    179
+         COL    135
+         WIDTH  25
+         HEIGHT 25
+         ACTION KillControl()
+         CAPTION ""
+         TOOLTIP "Delete the selected control from the list"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "TRASH"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_3
-            ROW    245
-            COL    45
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddLabel()
-            CAPTION ""
-            TOOLTIP "Create a Control Label"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "label"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_3
+         ROW    245
+         COL    45
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddLabel()
+         CAPTION ""
+         TOOLTIP "Create a Control Label"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "label"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_4
-            ROW    245
-            COL    75
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddTextC()
-            CAPTION ""
-            TOOLTIP "Create a Control TextBox Type Character"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "tc"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_4
+         ROW    245
+         COL    75
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddTextC()
+         CAPTION ""
+         TOOLTIP "Create a Control TextBox Type Character"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "tc"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_5
-            ROW    245
-            COL    10
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddTextN()
-            CAPTION ""
-            TOOLTIP "Create a Control TextBox Type Numeric"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "TN"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_5
+         ROW    245
+         COL    10
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddTextN()
+         CAPTION ""
+         TOOLTIP "Create a Control TextBox Type Numeric"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "TN"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_6
-            ROW    245
-            COL    105
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddCombo()
-            CAPTION ""
-            TOOLTIP "Create a Control Combobox"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "Combo"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_6
+         ROW    245
+         COL    105
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddCombo()
+         CAPTION ""
+         TOOLTIP "Create a Control Combobox"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "Combo"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_7
-            ROW    245
-            COL    135
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddRadio()
-            CAPTION ""
-            TOOLTIP "Create a Control RadioGroup"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .t.
-            MULTILINE .F.
-            PICTURE "Radio"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_7
+         ROW    245
+         COL    135
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddRadio()
+         CAPTION ""
+         TOOLTIP "Create a Control RadioGroup"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .t.
+         MULTILINE .F.
+         PICTURE "Radio"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_8
-            ROW    245
-            COL    165
-            WIDTH  25
-            HEIGHT 25
-            ACTION Addcheck()
-            CAPTION ""
-            TOOLTIP "Create a Control CheckBox"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .t.
-            MULTILINE .F.
-            PICTURE "checkbox"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_8
+         ROW    245
+         COL    165
+         WIDTH  25
+         HEIGHT 25
+         ACTION Addcheck()
+         CAPTION ""
+         TOOLTIP "Create a Control CheckBox"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .t.
+         MULTILINE .F.
+         PICTURE "checkbox"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_9
-            ROW    245
-            COL    195
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddDate()
-            CAPTION ""
-            TOOLTIP "Create a Control DatePicker"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .t.
-            MULTILINE .F.
-            PICTURE "datepicker"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_9
+         ROW    245
+         COL    195
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddDate()
+         CAPTION ""
+         TOOLTIP "Create a Control DatePicker"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .t.
+         MULTILINE .F.
+         PICTURE "datepicker"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE BUTTON Button_10
-            ROW    279
-            COL    10
-            WIDTH  25
-            HEIGHT 25
-            ACTION AddBtn()
-            CAPTION ""
-            TOOLTIP "Create a Control Button"
-            ONGOTFOCUS Nil
-            ONLOSTFOCUS Nil
-            FLAT .F.
-            TABSTOP .F.
-            VISIBLE .T.
-            TRANSPARENT .F.
-            MULTILINE .F.
-            PICTURE "Button"
-            PICTALIGNMENT TOP
-        END BUTTON
+      DEFINE BUTTON Button_10
+         ROW    279
+         COL    10
+         WIDTH  25
+         HEIGHT 25
+         ACTION AddBtn()
+         CAPTION ""
+         TOOLTIP "Create a Control Button"
+         ONGOTFOCUS Nil
+         ONLOSTFOCUS Nil
+         FLAT .F.
+         TABSTOP .F.
+         VISIBLE .T.
+         TRANSPARENT .F.
+         MULTILINE .F.
+         PICTURE "Button"
+         PICTALIGNMENT TOP
+      END BUTTON
 
-        DEFINE GRID Grid_1
-            ROW    330
-            COL      7
-            WIDTH  222
-            HEIGHT 370
-            HEADERS {'     Propierties','           Value'}
-            WIDTHS {107,110}
-            FONTCOLOR {0,0,0}
-            FONTNAME 'Arial'
-            FONTSIZE 9
-            VALUE 1
-            Tooltip ''
-            BACKCOLOR {0,255,255}
-            ITEMS m->aProperties
-            ON DBLCLICK  AssignProperties()
-        END GRID
+      DEFINE GRID Grid_1
+         ROW    330
+         COL      7
+         WIDTH  222
+         HEIGHT 370
+         HEADERS {'     Propierties','           Value'}
+         WIDTHS {107,110}
+         FONTCOLOR {0,0,0}
+         FONTNAME 'Arial'
+         FONTSIZE 9
+         VALUE 1
+         Tooltip ''
+         BACKCOLOR {0,255,255}
+         ITEMS m->aProperties
+         ON DBLCLICK  AssignProperties()
+      END GRID
 
-        DEFINE LABEL Label_1
-            ROW    155
-            COL    10
-            WIDTH  120
-            HEIGHT 24
-            VALUE "Controls"
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            VISIBLE .T.
-            TRANSPARENT .F.
-            ACTION Nil
-            AUTOSIZE .F.
-            BACKCOLOR Nil
-            FONTCOLOR Nil
-        END LABEL
+      DEFINE LABEL Label_1
+         ROW    155
+         COL    10
+         WIDTH  120
+         HEIGHT 24
+         VALUE "Controls"
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         VISIBLE .T.
+         TRANSPARENT .F.
+         ACTION Nil
+         AUTOSIZE .F.
+         BACKCOLOR Nil
+         FONTCOLOR Nil
+      END LABEL
 
-        DEFINE LABEL Label_2
-            ROW    310
-            COL    10
-            WIDTH  120
-            HEIGHT 20
-            VALUE "Properties"
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            VISIBLE .T.
-            TRANSPARENT .F.
-            ACTION Nil
-            AUTOSIZE .F.
-            BACKCOLOR Nil
-            FONTCOLOR Nil
-        END LABEL
+      DEFINE LABEL Label_2
+         ROW    310
+         COL    10
+         WIDTH  120
+         HEIGHT 20
+         VALUE "Properties"
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         VISIBLE .T.
+         TRANSPARENT .F.
+         ACTION Nil
+         AUTOSIZE .F.
+         BACKCOLOR Nil
+         FONTCOLOR Nil
+      END LABEL
 
-        DEFINE LABEL Label_D   // This label is used for diagnostic info
-            ROW    130
-            COL    10
-            WIDTH  20
-            HEIGHT 24
-            VALUE ""
-            FONTNAME "Arial"
-            FONTSIZE 9
-            TOOLTIP ""
-            FONTBOLD .F.
-            FONTITALIC .F.
-            FONTUNDERLINE .F.
-            FONTSTRIKEOUT .F.
-            HELPID Nil
-            VISIBLE .T.
-            TRANSPARENT .T.
-            ACTION Nil
-            AUTOSIZE .T.
-            BACKCOLOR Nil
-            FONTCOLOR Nil
-        END LABEL
+      DEFINE LABEL Label_D   // This label is used for diagnostic info
+         ROW    130
+         COL    10
+         WIDTH  20
+         HEIGHT 24
+         VALUE ""
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         FONTBOLD .F.
+         FONTITALIC .F.
+         FONTUNDERLINE .F.
+         FONTSTRIKEOUT .F.
+         HELPID Nil
+         VISIBLE .T.
+         TRANSPARENT .T.
+         ACTION Nil
+         AUTOSIZE .T.
+         BACKCOLOR Nil
+         FONTCOLOR Nil
+      END LABEL
 
-        ON KEY ESCAPE ACTION ThisWindow.Release
-        ON KEY F2 OF Form_1 ACTION m_about( )
+      ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY F2 OF Form_1 ACTION m_about( )
 
-    END WINDOW    //Form_1
-    ACTIVATE WINDOW Form_1
-Return NIL
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function MyScreen(nOption)
-*-----------------------------------------------------------------------------*
-LOCAL aStruc,lstruct, n, i, nwF,  vtt := {} , vtl := {} , vtd := {}
-PRIVATE cDBF, Field_Name , Field_Type , Field_Len , Field_Dec , nFields , aWidthsCol
-PRIVATE aPLen := {}, aJustify := {} , aColorP := {0,255,255}
-PRIVATE aColorBackGrid:= {0,255,255} , aColorFontGrid := {0,0,0}
+   END WINDOW    //Form_1
+   ACTIVATE WINDOW Form_1
 
-     if nOption = 0
-        return nil
-     Endif
+   RETURN NIL
+   /*
+   */
 
-    IF IsWindowDefined("Win_1")
-       Form_1.Combo_2.DeleteAllItems
-       m->aControlList := {}
-       DBCOMMITALL()
-       Domethod( 'Win_1', 'Release')
-       do events
-    Endif
+FUNCTION MyScreen(nOption)
 
-    dbCloseAll()
+   LOCAL aStruc,lstruct, n, i, nwF,  vtt := {} , vtl := {} , vtd := {}
+   PRIVATE cDBF, Field_Name , Field_Type , Field_Len , Field_Dec , nFields , aWidthsCol
+   PRIVATE aPLen := {}, aJustify := {} , aColorP := {0,255,255}
+   PRIVATE aColorBackGrid:= {0,255,255} , aColorFontGrid := {0,0,0}
 
-    set navigation extended
-    set deleted on
+   IF nOption = 0
 
-    cDbF := aFilesDBF[nOption]
+      RETURN NIL
+   ENDIF
 
-    USE &cDBF NEW SHARED
+   IF IsWindowDefined("Win_1")
+      Form_1.Combo_2.DeleteAllItems
+      m->aControlList := {}
+      DBCOMMITALL()
+      Domethod( 'Win_1', 'Release')
+      do events
+   ENDIF
 
-    aStruc     := dbStruct()
-    lstruct    := Len(aStruc)
-    Field_Name := Array(lstruct)
-    Field_Type := Array(lstruct)
-    Field_Len  := Array(lstruct)
-    Field_Dec  := Array(lstruct)
-    aWidthsCol := Array(lstruct)
+   dbCloseAll()
 
-    nFields := &cDBF->(AFIELDS(Field_Name, Field_Type, Field_Len, Field_Dec))
+   SET navigation extended
+   SET DELETED ON
 
-    nwF := PickField(Field_name)
+   cDbF := aFilesDBF[nOption]
 
-    if len( nwF ) < 1
-       MessageBoxTimeout (padc('Action aborted by user!',50 ),"", MB_ICONSTOP, 2300 )
-       return nil
-    Endif
+   USE &cDBF NEW SHARED
 
-    nfields := len( nwf )
-    FOR n = 1 to nfields
-        i := ascan( field_name,nwf[n] )
-        if i > 0
-           aadd( vtt,Field_type[i] )
-           aadd( vtl,Field_Len[i]  )
-           aadd( vtd,Field_Dec[i]  )
-           aadd(aPlen,Max(100,Min(160,Field_Len[i]*14)))
-        Endif
-    NEXT
-    Field_name := aclone( nWf )
-    Field_type := aclone( Vtt )
-    Field_len  := aclone( Vtl )
-    Field_Dec  := aclone( Vtd )
+   aStruc     := dbStruct()
+   lstruct    := Len(aStruc)
+   Field_Name := Array(lstruct)
+   Field_Type := Array(lstruct)
+   Field_Len  := Array(lstruct)
+   Field_Dec  := Array(lstruct)
+   aWidthsCol := Array(lstruct)
 
-    FOR i = 1 TO nfields //&cDBF->( FCount() )
-        aWidthsCol[i] := IIF(Field_Len[i]<=2 , Field_Len[i]* 30, Field_Len[i]* 10)
-        IF Field_Type[i] = 'N'
-            AAdd( aJustify , 'GDER' )
-        ELSEIF Field_Type[i] = 'D' .OR. Field_Type[i] = 'L'
-            AAdd( aJustify , 'GCEN' )
-        ELSE
-            AAdd( aJustify , 'GIZQ' )
-        Endif
-    NEXT i
+   nFields := &cDBF->(AFIELDS(Field_Name, Field_Type, Field_Len, Field_Dec))
 
-    DEFINE WINDOW Win_1  ;
-        AT 0,250  ;
-        WIDTH 950  ;
-        HEIGHT 750  ;
-        TITLE m->cDbF ;
-        WINDOWTYPE STANDARD ;
-        NOMAXIMIZE ;
-        FONT 'Arial' ;
-        SIZE 9 ;
-        BACKCOLOR m->aColorWinB ;
-        ON MOUSECLICK SelectControl(This.Name) ;
-        ON INIT (AddControls(),AddFields() ) ;
-        ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F. );
-        ON PAINT ReDrawgrid()
+   nwF := PickField(Field_name)
+
+   IF len( nwF ) < 1
+      MessageBoxTimeout (padc('Action aborted by user!',50 ),"", MB_ICONSTOP, 2300 )
+
+      RETURN NIL
+   ENDIF
+
+   nfields := len( nwf )
+   FOR n = 1 to nfields
+      i := ascan( field_name,nwf[n] )
+      IF i > 0
+         aadd( vtt,Field_type[i] )
+         aadd( vtl,Field_Len[i]  )
+         aadd( vtd,Field_Dec[i]  )
+         aadd(aPlen,Max(100,Min(160,Field_Len[i]*14)))
+      ENDIF
+   NEXT
+   Field_name := aclone( nWf )
+   Field_type := aclone( Vtt )
+   Field_len  := aclone( Vtl )
+   Field_Dec  := aclone( Vtd )
+
+   FOR i = 1 TO nfields //&cDBF->( FCount() )
+      aWidthsCol[i] := IIF(Field_Len[i]<=2 , Field_Len[i]* 30, Field_Len[i]* 10)
+      IF Field_Type[i] = 'N'
+         AAdd( aJustify , 'GDER' )
+      ELSEIF Field_Type[i] = 'D' .OR. Field_Type[i] = 'L'
+         AAdd( aJustify , 'GCEN' )
+      ELSE
+         AAdd( aJustify , 'GIZQ' )
+      ENDIF
+   NEXT i
+
+   DEFINE WINDOW Win_1  ;
+         AT 0,250  ;
+         WIDTH 950  ;
+         HEIGHT 750  ;
+         TITLE m->cDbF ;
+         WINDOWTYPE STANDARD ;
+         NOMAXIMIZE ;
+         FONT 'Arial' ;
+         SIZE 9 ;
+         BACKCOLOR m->aColorWinB ;
+         ON MOUSECLICK SelectControl(This.Name) ;
+         ON INIT (AddControls(),AddFields() ) ;
+         ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F. );
+         ON PAINT ReDrawgrid()
 
       DEFINE STATUSBAR FONT 'Arial' SIZE 12
          STATUSITEM 'Table Clientes'
@@ -557,1193 +560,1229 @@ PRIVATE aColorBackGrid:= {0,255,255} , aColorFontGrid := {0,0,0}
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 60,40 FLAT BORDER
 
-          BUTTON FIRST ;
-             CAPTION '&First' ;
-             PICTURE 'go_first' ;
-             ACTION NIL
+         BUTTON FIRST ;
+            CAPTION '&First' ;
+            PICTURE 'go_first' ;
+            ACTION NIL
 
-          BUTTON PREV ;
-             CAPTION '&Prev' ;
-             PICTURE 'go_prev' ;
-             ACTION NIL AUTOSIZE
+         BUTTON PREV ;
+            CAPTION '&Prev' ;
+            PICTURE 'go_prev' ;
+            ACTION NIL AUTOSIZE
 
-          BUTTON NEXT ;
-             CAPTION '&Next' ;
-             PICTURE 'go_next' ;
-             ACTION NIL AUTOSIZE
+         BUTTON NEXT ;
+            CAPTION '&Next' ;
+            PICTURE 'go_next' ;
+            ACTION NIL AUTOSIZE
 
-          BUTTON LAST ;
-             CAPTION '&Last' ;
-             PICTURE 'go_last' ;
-             ACTION NIL   SEPARATOR
+         BUTTON LAST ;
+            CAPTION '&Last' ;
+            PICTURE 'go_last' ;
+            ACTION NIL   SEPARATOR
 
-          BUTTON NEW ;
-             CAPTION '&New' ;
-             PICTURE 'edit_new' ;
-             ACTION NIL
+         BUTTON NEW ;
+            CAPTION '&New' ;
+            PICTURE 'edit_new' ;
+            ACTION NIL
 
-          BUTTON EDIT ;
-             CAPTION '&Edit' ;
-             PICTURE 'edit_edit' ;
-             ACTION NIL
+         BUTTON EDIT ;
+            CAPTION '&Edit' ;
+            PICTURE 'edit_edit' ;
+            ACTION NIL
 
-          BUTTON SAVE ;
-             CAPTION '&Save' ;
-             PICTURE 'ok' ;
-             ACTION NIL
+         BUTTON SAVE ;
+            CAPTION '&Save' ;
+            PICTURE 'ok' ;
+            ACTION NIL
 
-          BUTTON CANCEL ;
-             CAPTION '&Cancel' ;
-             PICTURE 'cancel' ;
-             ACTION NIL
+         BUTTON CANCEL ;
+            CAPTION '&Cancel' ;
+            PICTURE 'cancel' ;
+            ACTION NIL
 
-          BUTTON DELETE ;
-             CAPTION '&Delete' ;
-             PICTURE 'edit_delete' ;
-             ACTION  NIL  SEPARATOR
+         BUTTON DELETE ;
+            CAPTION '&Delete' ;
+            PICTURE 'edit_delete' ;
+            ACTION  NIL  SEPARATOR
 
-          BUTTON FIND ;
-             CAPTION 'F&ind' ;
-             PICTURE 'edit_find' ;
-             ACTION NIL
+         BUTTON FIND ;
+            CAPTION 'F&ind' ;
+            PICTURE 'edit_find' ;
+            ACTION NIL
 
-          BUTTON QUERY  ;
-             CAPTION '&Query' ;
-             PICTURE 'edit_find' ;
-             ACTION NIL
+         BUTTON QUERY  ;
+            CAPTION '&Query' ;
+            PICTURE 'edit_find' ;
+            ACTION NIL
 
-          BUTTON Print_1 ;
-             CAPTION 'P&rint' ;
-             PICTURE 'edit_print' ;
-             ACTION PrintList(m->cDbf, Field_name, aPlen) SEPARATOR DROPDOWN
+         BUTTON Print_1 ;
+            CAPTION 'P&rint' ;
+            PICTURE 'edit_print' ;
+            ACTION PrintList(m->cDbf, Field_name, aPlen) SEPARATOR DROPDOWN
 
-             DEFINE DROPDOWN MENU BUTTON Print_1
-                    ITEM 'Register'    ACTION MsgBox('Print Register')
-                    ITEM 'Catalog'     ACTION MsgBox('Print Catalog')
-                    ITEM 'For selected fields' ACTION MsgBox('Print for selected fields')
-             END MENU
+         DEFINE DROPDOWN MENU BUTTON Print_1
+            ITEM 'Register'    ACTION MsgBox('Print Register')
+            ITEM 'Catalog'     ACTION MsgBox('Print Catalog')
+            ITEM 'For selected fields' ACTION MsgBox('Print for selected fields')
+         END MENU
 
-          BUTTON Tools ;
-             CAPTION '&Tools' ;
-             PICTURE 'options' ;
-             ACTION nil SEPARATOR AUTOSIZE DROPDOWN
+         BUTTON Tools ;
+            CAPTION '&Tools' ;
+            PICTURE 'options' ;
+            ACTION nil SEPARATOR AUTOSIZE DROPDOWN
 
-             DEFINE DROPDOWN MENU BUTTON TOOLS
-                    ITEM "Background color" Action Msgbox("Save_color()") image "Raimbow"
-                    ITEM 'User Report Editor' ACTION PrintList(m->cDbf, Field_name, aPlen, .T.) IMAGE 'edit_print'
-             END MENU
+         DEFINE DROPDOWN MENU BUTTON TOOLS
+            ITEM "Background color" Action Msgbox("Save_color()") image "Raimbow"
+            ITEM 'User Report Editor' ACTION PrintList(m->cDbf, Field_name, aPlen, .T.) IMAGE 'edit_print'
+         END MENU
 
-          BUTTON EXIT ;
-             CAPTION 'E&xit' ;
-             PICTURE 'edit_close' ;
-             ACTION  Win_1.Release
+         BUTTON EXIT ;
+            CAPTION 'E&xit' ;
+            PICTURE 'edit_close' ;
+            ACTION  Win_1.Release
 
       END TOOLBAR
 
-     @ 430, 720 IMAGE Image_1 PICTURE 'Logo.jpg' WIDTH 200 HEIGHT 200 ACTION SelectControl('Image_1') ToolTip 'Demo Image' TRANSPARENT
+      @ 430, 720 IMAGE Image_1 PICTURE 'Logo.jpg' WIDTH 200 HEIGHT 200 ACTION SelectControl('Image_1') ToolTip 'Demo Image' TRANSPARENT
 
-     AddMnC("Image_1")
+      AddMnC("Image_1")
 
-        DEFINE GRID Grid_1
-            ROW  75
-            COL 10
-            WIDTH 915
-            HEIGHT 235
-            HEADERS Field_Name
-            WIDTHS aWidthsCol
-            VALUE 1
-            FONTNAME 'Arial'
-            FONTSIZE 9
-            Tooltip ''
-            BACKCOLOR {0,255,255}
-            FONTCOLOR {0,0,0}
-            ON CHANGE SelectControl('Grid_1')
-            ON GOTFOCUS SelectControl('Grid_1')
-            ON DBLCLICK nil
-            JUSTIFY aJustify
-            DYNAMICBACKCOLOR {{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()} }
-        END GRID
+      DEFINE GRID Grid_1
+         ROW  75
+         COL 10
+         WIDTH 915
+         HEIGHT 235
+         HEADERS Field_Name
+         WIDTHS aWidthsCol
+         VALUE 1
+         FONTNAME 'Arial'
+         FONTSIZE 9
+         Tooltip ''
+         BACKCOLOR {0,255,255}
+         FONTCOLOR {0,0,0}
+         ON CHANGE SelectControl('Grid_1')
+         ON GOTFOCUS SelectControl('Grid_1')
+         ON DBLCLICK nil
+         JUSTIFY aJustify
+         DYNAMICBACKCOLOR {{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()},{||GridBackColor()} }
+      END GRID
 
-    END WINDOW
+   END WINDOW
 
-    ACTIVATE WINDOW Win_1 
-    form_1.combo_2.value := 1
+   ACTIVATE WINDOW Win_1
+   form_1.combo_2.value := 1
 
-Return Nil
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure AddFields()
-*-----------------------------------------------------------------------------*
-dbgotop()
-Win_1.grid_1.disableupdate
-Win_1.grid_1.deleteallitems
-While !Eof()
-  Win_1.grid_1.additem(scatter())
-  dbskip()
-End
-Win_1.grid_1.enableupdate
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Static Function Scatter()
-*-----------------------------------------------------------------------------*
-Local aRecord[len(m->field_name)],dummy
-aEval( m->field_name, {|x,n| aRecord[n] := Any2Strg( FIELDGet( n ) ),dummy := x } )
-return arecord
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+   /*
+   */
+
+PROCEDURE AddFields()
+
+   dbgotop()
+   Win_1.grid_1.disableupdate
+   Win_1.grid_1.deleteallitems
+   WHILE !Eof()
+      Win_1.grid_1.additem(scatter())
+      dbskip()
+   End
+   Win_1.grid_1.enableupdate
+
+   RETURN
+   /*
+   */
+
+STATIC FUNCTION Scatter()
+
+   LOCAL aRecord[len(m->field_name)],dummy
+
+   aEval( m->field_name, {|x,n| aRecord[n] := Any2Strg( FIELDGet( n ) ),dummy := x } )
+
+   RETURN arecord
+   /*
+   */
+
 FUNCTION Any2Strg( xAny )
-*-----------------------------------------------------------------------------*
-Local  cRVal  := '???', nType ;
-       ,aCases := { { "A", { |  | "{...}" } },;
-                    { "B", { |  | "{||}" } },;
-                    { "C", { | x | x }},;
-                    { "M", { | x | x   } },;
-                    { "D", { | x | DTOC( x ) } },;
-                    { "L", { | x | IF( x,"On","Off") } },;
-                    { "N", { | x | NTrim( x )  } },;
-                    { "O", { |  | ":Object:" } },;
-                    { "U", { |  | "<NIL>" } } }
+
+   LOCAL  cRVal  := '???', nType ;
+      ,aCases := { { "A", { |  | "{...}" } },;
+      { "B", { |  | "{||}" } },;
+      { "C", { | x | x }},;
+      { "M", { | x | x   } },;
+      { "D", { | x | DTOC( x ) } },;
+      { "L", { | x | IF( x,"On","Off") } },;
+      { "N", { | x | NTrim( x )  } },;
+      { "O", { |  | ":Object:" } },;
+      { "U", { |  | "<NIL>" } } }
 
    IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0
       cRVal := EVAL( aCases[ nType, 2 ], xAny )
-   Endif
+   ENDIF
 
-Return cRVal
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN cRVal
+   /*
+   */
+
 PROCEDURE AddControls()
-*-----------------------------------------------------------------------------*
-LOCAL cLabel,cText,cCheck,cDate,cEdit,nCol, n
-LOCAL aRows := {330,360,390,420,450,480,510,540,570,600,630,330,360,390,420,450,480,510,540,570,600,630} , m := 1 , aVal
-PUBLIC nLabel:= 0,nTextBox,nDatePicker,nCheckBox,nEditBox,nRadioGroup:=1,nComboBox:=1,nDatePicker,nComboBox,nRadioGroup,nButton
-PUBLIC aControlsAct := {} 
 
-    Win_1.SetFocus
-    nLabel := 1
-*    nRow := 330
-    nCol := 20
-    FOR n := 1 TO nFields
-        IF n <= 9 .AND. Field_Type[n] = 'M'
-        ELSEIF n = 10 .AND. Field_Type[n] = 'M'
-            m:= 12
-            nCol := 500
-        ELSEIF n = 11 .AND. Field_Type[n] = 'M'
-            m:= 12
-            nCol := 500
-        ELSEIF n > 11
-            nCol := 500
-        Endif
-        cLabel := "Label_"+ ZAPS(n)
-        @ aRows[m], nCol LABEL &(cLabel) PARENT Win_1 VALUE Field_Name[n] FONTCOLOR WHITE BACKCOLOR BLUE ACTION SelectControl(This.Name) FONT 'Arial' SIZE 9 TOOLTIP '' //TRANSPARENT //BOLD ITALIC UNDERLINE STRIKEOUT
-        Win_1.&(cLabel).Refresh
-        nLabel++
-        AddMnC(cLabel)
-        
-        IF Field_Type[n] = 'M'
-            m := m+3
-        ELSE
-            m := m+1
-        Endif
-    NEXT n
-    nLabel := nLabel-1
+   LOCAL cLabel,cText,cCheck,cDate,cEdit,nCol, n
+   LOCAL aRows := {330,360,390,420,450,480,510,540,570,600,630,330,360,390,420,450,480,510,540,570,600,630} , m := 1 , aVal
+   PUBLIC nLabel:= 0,nTextBox,nDatePicker,nCheckBox,nEditBox,nRadioGroup:=1,nComboBox:=1,nDatePicker,nComboBox,nRadioGroup,nButton
+   PUBLIC aControlsAct := {}
 
-    &cDBF->(DBGOTOP())
+   Win_1.SetFocus
+   nLabel := 1
+   *    nRow := 330
+   nCol := 20
+   FOR n := 1 TO nFields
+      IF n <= 9 .AND. Field_Type[n] = 'M'
+      ELSEIF n = 10 .AND. Field_Type[n] = 'M'
+         m:= 12
+         nCol := 500
+      ELSEIF n = 11 .AND. Field_Type[n] = 'M'
+         m:= 12
+         nCol := 500
+      ELSEIF n > 11
+         nCol := 500
+      ENDIF
+      cLabel := "Label_"+ ZAPS(n)
+      @ aRows[m], nCol LABEL &(cLabel) PARENT Win_1 VALUE Field_Name[n] FONTCOLOR WHITE BACKCOLOR BLUE ACTION SelectControl(This.Name) FONT 'Arial' SIZE 9 TOOLTIP '' //TRANSPARENT //BOLD ITALIC UNDERLINE STRIKEOUT
+      Win_1.&(cLabel).Refresh
+      nLabel++
+      AddMnC(cLabel)
 
-    nTextBox    := 1
-    nDatePicker := 1
-    nCheckBox   := 1
-    nEditBox    := 1
-    nButton     := 1
+      IF Field_Type[n] = 'M'
+         m := m+3
+      ELSE
+         m := m+1
+      ENDIF
+   NEXT n
+   nLabel := nLabel-1
 
-    nCol := 150
-    m := 1
-    FOR n := 1 TO nFields
-        IF n <= 9 .AND. Field_Type[n] = 'M'
-        ELSEIF n = 10 .AND. Field_Type[n] = 'M'
-            m:= 12
-            nCol := 630
-        ELSEIF n = 11 .AND. Field_Type[n] = 'M'
-            m:= 12
-            nCol := 630
-        ELSEIF n > 11
-            nCol := 630
-        Endif
-        nWidth := Field_Len[n] * 10 + 20
-        DO CASE
-            CASE Field_Type[n] = 'C'
-                cText := "TextBox_"+ ZAPS(nTextBox)
-                @ aRows[m], nCol TEXTBOX &(cText) PARENT Win_1 WIDTH nWidth VALUE cText BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
-                Win_1.&(cText).VALUE := &cDBF->&(Field_Name[n])
-                AADD(m->aCaseConvert,{cText,"NONE"})
-                nTextBox++
-                AddMnC(cText)
+   &cDBF->(DBGOTOP())
 
-            CASE Field_Type[n] = 'N'
-                cText := "TextBox_"+ ZAPS(nTextBox)
-                @ aRows[m], nCol TEXTBOX &(cText) PARENT Win_1 WIDTH nWidth VALUE 1 NUMERIC BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' RIGHTALIGN
-                Win_1.&(cText).VALUE := &cDBF->&(Field_Name[n])
-                AADD(m->aInputMask,{cText,""})
-                nTextBox++
-                AddMnC(cText)  
+   nTextBox    := 1
+   nDatePicker := 1
+   nCheckBox   := 1
+   nEditBox    := 1
+   nButton     := 1
 
-            CASE Field_Type[n] = 'D'
-                cDate := "DatePicker_"+ ZAPS(nDatePicker)
-                @ aRows[m], nCol DATEPICKER &(cDate) PARENT Win_1 VALUE Date() ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
-                Win_1.&(cDate).VALUE := &cDBF->&(Field_Name[n])
-                nDatePicker++
-                AddMnC(cDate)
+   nCol := 150
+   m := 1
+   FOR n := 1 TO nFields
+      IF n <= 9 .AND. Field_Type[n] = 'M'
+      ELSEIF n = 10 .AND. Field_Type[n] = 'M'
+         m:= 12
+         nCol := 630
+      ELSEIF n = 11 .AND. Field_Type[n] = 'M'
+         m:= 12
+         nCol := 630
+      ELSEIF n > 11
+         nCol := 630
+      ENDIF
+      nWidth := Field_Len[n] * 10 + 20
+      DO CASE
+      CASE Field_Type[n] = 'C'
+         cText := "TextBox_"+ ZAPS(nTextBox)
+         @ aRows[m], nCol TEXTBOX &(cText) PARENT Win_1 WIDTH nWidth VALUE cText BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
+         Win_1.&(cText).VALUE := &cDBF->&(Field_Name[n])
+         AADD(m->aCaseConvert,{cText,"NONE"})
+         nTextBox++
+         AddMnC(cText)
 
-            CASE Field_Type[n] = 'L'
-                cCheck := "CheckBox_"+ ZAPS(nCheckBox)
-                @ aRows[m], nCol CHECKBOX &(cCheck) PARENT Win_1 CAPTION '' HEIGHT 24 BACKCOLOR aColorP FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' TRANSPARENT
-                Win_1.&(cCheck).VALUE := &cDBF->&(Field_Name[n])
-                nCheckBox++
-                AddMnC(cCheck)
+      CASE Field_Type[n] = 'N'
+         cText := "TextBox_"+ ZAPS(nTextBox)
+         @ aRows[m], nCol TEXTBOX &(cText) PARENT Win_1 WIDTH nWidth VALUE 1 NUMERIC BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' RIGHTALIGN
+         Win_1.&(cText).VALUE := &cDBF->&(Field_Name[n])
+         AADD(m->aInputMask,{cText,""})
+         nTextBox++
+         AddMnC(cText)
 
-            CASE Field_Type[n] = 'M'
-                cEdit := "EditBox_"+ ZAPS(nEditBox)
-                @ aRows[m], nCol EDITBOX &(cEdit) PARENT Win_1 WIDTH 300 HEIGHT 82 VALUE 'THIS IS ONLY FOR TEST' BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
-                Win_1.&(cEdit).VALUE := &cDBF->&(Field_Name[n])
-                nEditBox++
-                AddMnC(cEdit)
+      CASE Field_Type[n] = 'D'
+         cDate := "DatePicker_"+ ZAPS(nDatePicker)
+         @ aRows[m], nCol DATEPICKER &(cDate) PARENT Win_1 VALUE Date() ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
+         Win_1.&(cDate).VALUE := &cDBF->&(Field_Name[n])
+         nDatePicker++
+         AddMnC(cDate)
 
-        END CASE
-        IF Field_Type[n] = 'M'
-            m := m+3
-        ELSE
-            m := m+1
-        Endif
-    NEXT n
-    nTextBox    := nTextBox - 1
-    nDatePicker := nDatePicker - 1
-    nCheckBox   := nCheckBox - 1
-    nEditBox    := nEditBox - 1
-    nButton     := nButton - 1
+      CASE Field_Type[n] = 'L'
+         cCheck := "CheckBox_"+ ZAPS(nCheckBox)
+         @ aRows[m], nCol CHECKBOX &(cCheck) PARENT Win_1 CAPTION '' HEIGHT 24 BACKCOLOR aColorP FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' TRANSPARENT
+         Win_1.&(cCheck).VALUE := &cDBF->&(Field_Name[n])
+         nCheckBox++
+         AddMnC(cCheck)
 
-    Form_1.Combo_2.AddItem('Win_1')
-    AAdd(m->aControlList,'Win_1')
-    aVal := GetAllControlsByForm('Win_1')
-    FOR n = 1 To Len(aVal)
-        Form_1.Combo_2.AddItem(aVal[n])
-        AAdd(m->aControlList,aVal[n])
-    Next
-    Form_1.Button_1.Visible:= .T.
-    Form_1.HEIGHT := 745
-    Form_1.WIDTH  := 245
+      CASE Field_Type[n] = 'M'
+         cEdit := "EditBox_"+ ZAPS(nEditBox)
+         @ aRows[m], nCol EDITBOX &(cEdit) PARENT Win_1 WIDTH 300 HEIGHT 82 VALUE 'THIS IS ONLY FOR TEST' BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
+         Win_1.&(cEdit).VALUE := &cDBF->&(Field_Name[n])
+         nEditBox++
+         AddMnC(cEdit)
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+      END CASE
+      IF Field_Type[n] = 'M'
+         m := m+3
+      ELSE
+         m := m+1
+      ENDIF
+   NEXT n
+   nTextBox    := nTextBox - 1
+   nDatePicker := nDatePicker - 1
+   nCheckBox   := nCheckBox - 1
+   nEditBox    := nEditBox - 1
+   nButton     := nButton - 1
+
+   Form_1.Combo_2.AddItem('Win_1')
+   AAdd(m->aControlList,'Win_1')
+   aVal := GetAllControlsByForm('Win_1')
+   FOR n = 1 To Len(aVal)
+      Form_1.Combo_2.AddItem(aVal[n])
+      AAdd(m->aControlList,aVal[n])
+   NEXT
+   Form_1.Button_1.Visible:= .T.
+   Form_1.HEIGHT := 745
+   Form_1.WIDTH  := 245
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddLabel()
-*-----------------------------------------------------------------------------*
-LOCAL cLabel := "Label_"+ ZAPS(nLabel+1)
-    Win_1.SetFocus
-    @ 600, 500 LABEL &(cLabel) PARENT Win_1 VALUE cLabel FONTCOLOR WHITE BACKCOLOR BLUE ACTION SelectControl(This.Name) FONT 'Arial' SIZE 9 TOOLTIP ''
-    AAdd(m->aControlList, cLabel)
-    Form_1.Combo_2.AddItem(cLabel)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    AddMnC(cLabel)
-    Win_1.&(cLabel).Refresh
-    nLabel++
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cLabel := "Label_"+ ZAPS(nLabel+1)
+
+   Win_1.SetFocus
+   @ 600, 500 LABEL &(cLabel) PARENT Win_1 VALUE cLabel FONTCOLOR WHITE BACKCOLOR BLUE ACTION SelectControl(This.Name) FONT 'Arial' SIZE 9 TOOLTIP ''
+   AAdd(m->aControlList, cLabel)
+   Form_1.Combo_2.AddItem(cLabel)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   AddMnC(cLabel)
+   Win_1.&(cLabel).Refresh
+   nLabel++
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddTextC()
-*-----------------------------------------------------------------------------*
-LOCAL cText := "TextBox_"+ ZAPS(nTextBox+1)
-    @ 600, 500 TEXTBOX &(cText) PARENT Win_1 WIDTH 100 VALUE cText BACKCOLOR WHITE FONTCOLOR BLACK UPPERCASE ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
-    AADD(m->aCaseConvert,{cText,"NONE"})
-    AAdd(m->aControlList, cText)
-    Form_1.Combo_2.AddItem(cText)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    nTextBox++
-    AddMnC(cText)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cText := "TextBox_"+ ZAPS(nTextBox+1)
+
+   @ 600, 500 TEXTBOX &(cText) PARENT Win_1 WIDTH 100 VALUE cText BACKCOLOR WHITE FONTCOLOR BLACK UPPERCASE ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip ''
+   AADD(m->aCaseConvert,{cText,"NONE"})
+   AAdd(m->aControlList, cText)
+   Form_1.Combo_2.AddItem(cText)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   nTextBox++
+   AddMnC(cText)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddTextN()
-*-----------------------------------------------------------------------------*
-LOCAL cText := "TextBox_"+ ZAPS(nTextBox+1)
-    @ 600, 500 TEXTBOX &(cText) PARENT Win_1 WIDTH 100 VALUE 1 NUMERIC BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' RIGHTALIGN
-    AADD(m->aInputMask,{cText,""})
-    AAdd(m->aControlList, cText)
-    Form_1.Combo_2.AddItem(cText)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    nTextBox++
-    AddMnC(cText)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cText := "TextBox_"+ ZAPS(nTextBox+1)
+
+   @ 600, 500 TEXTBOX &(cText) PARENT Win_1 WIDTH 100 VALUE 1 NUMERIC BACKCOLOR WHITE FONTCOLOR BLACK ON GOTFOCUS SelectControl(This.Name) FONT 'Arial' SIZE 9 ToolTip '' RIGHTALIGN
+   AADD(m->aInputMask,{cText,""})
+   AAdd(m->aControlList, cText)
+   Form_1.Combo_2.AddItem(cText)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   nTextBox++
+   AddMnC(cText)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddRadio()
-*-----------------------------------------------------------------------------*
-    LOCAL cRadio, cVarRadio
-    PUBLIC aRadio1 := aRadio2 := aRadio3 := aRadio4 := aRadio5 := {'Uno','Dos','Tres'}
-    cRadio    := 'RadioGroup_'+ ZAPS(m->nRadioGroup)
-    cVarRadio := 'aRadio'+ ZAPS(m->nRadioGroup)
-    @600,500 RADIOGROUP &(cRadio) PARENT Win_1 OPTIONS &(cVarRadio) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} TOOLTIP 'RadioGroup' ON CHANGE SelectControl(This.Name) HORIZONTAL SPACING 60 TRANSPARENT
-    AAdd(m->aControlList, cRadio)
-    AADD(M->aItems,{cRadio,"{'Uno','Dos','Tres'}",'60',cVarRadio})
-    Form_1.Combo_2.AddItem(cRadio)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    m->nRadioGroup ++
-    AddMnC(cRadio)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cRadio, cVarRadio
+   PUBLIC aRadio1 := aRadio2 := aRadio3 := aRadio4 := aRadio5 := {'Uno','Dos','Tres'}
+
+   cRadio    := 'RadioGroup_'+ ZAPS(m->nRadioGroup)
+   cVarRadio := 'aRadio'+ ZAPS(m->nRadioGroup)
+   @600,500 RADIOGROUP &(cRadio) PARENT Win_1 OPTIONS &(cVarRadio) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} TOOLTIP 'RadioGroup' ON CHANGE SelectControl(This.Name) HORIZONTAL SPACING 60 TRANSPARENT
+   AAdd(m->aControlList, cRadio)
+   AADD(M->aItems,{cRadio,"{'Uno','Dos','Tres'}",'60',cVarRadio})
+   Form_1.Combo_2.AddItem(cRadio)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   m->nRadioGroup ++
+   AddMnC(cRadio)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddCombo()
-*-----------------------------------------------------------------------------*
-    LOCAL cCombo, cVarCombo
-    PUBLIC aCombo1 := aCombo2 := aCombo3 := aCombo4 := aCombo5 := {'A','B','C','D','E'}
-    cCombo := 'ComboBox_'+ ZAPS(m->nComboBox)
-    cVarCombo := 'aCombo'+ ZAPS(m->nComboBox)
-    @ 600,500 COMBOBOX &(cCombo) PARENT Win_1 VALUE 1 WIDTH 100 ITEMS &(cVarCombo) ON ENTER MsgInfo ( Str(Form_1.Combo_1.value) ) ON GOTFOCUS SelectControl(This.Name) FONT 'Courier' SIZE 12
-    AAdd(m->aControlList, cCombo)
-    AADD(M->aItems,{cCombo,"{'A','B','C','D','E'}",,cVarCombo})
-    Form_1.Combo_2.AddItem(cCombo)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    m->nComboBox++
-    AddMnC(cCombo) 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cCombo, cVarCombo
+   PUBLIC aCombo1 := aCombo2 := aCombo3 := aCombo4 := aCombo5 := {'A','B','C','D','E'}
+
+   cCombo := 'ComboBox_'+ ZAPS(m->nComboBox)
+   cVarCombo := 'aCombo'+ ZAPS(m->nComboBox)
+   @ 600,500 COMBOBOX &(cCombo) PARENT Win_1 VALUE 1 WIDTH 100 ITEMS &(cVarCombo) ON ENTER MsgInfo ( Str(Form_1.Combo_1.value) ) ON GOTFOCUS SelectControl(This.Name) FONT 'Courier' SIZE 12
+   AAdd(m->aControlList, cCombo)
+   AADD(M->aItems,{cCombo,"{'A','B','C','D','E'}",,cVarCombo})
+   Form_1.Combo_2.AddItem(cCombo)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   m->nComboBox++
+   AddMnC(cCombo)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddCheck()
-*-----------------------------------------------------------------------------*
-LOCAL cText := "CheckBox_"+ ZAPS(nCheckBox+1)
-    @ 600, 500 Checkbox &(cText) PARENT Win_1 CAPTION " " WIDTH 24 HEIGHT 24 BACKCOLOR m->aColorWinB FONTCOLOR { 0,0,0 }  FONT "Arial" SIZE 9  ToolTip "" TRANSPARENT ON GOTFOCUS SelectControl(This.Name)
-    AADD(m->aInputMask,{cText,""})
-    AAdd(m->aControlList, cText)
-    Form_1.Combo_2.AddItem(cText)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    nCheckBox++
-    AddMnC(cText)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cText := "CheckBox_"+ ZAPS(nCheckBox+1)
+
+   @ 600, 500 Checkbox &(cText) PARENT Win_1 CAPTION " " WIDTH 24 HEIGHT 24 BACKCOLOR m->aColorWinB FONTCOLOR { 0,0,0 }  FONT "Arial" SIZE 9  ToolTip "" TRANSPARENT ON GOTFOCUS SelectControl(This.Name)
+   AADD(m->aInputMask,{cText,""})
+   AAdd(m->aControlList, cText)
+   Form_1.Combo_2.AddItem(cText)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   nCheckBox++
+   AddMnC(cText)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddDate()
-*-----------------------------------------------------------------------------*
-LOCAL cText := "DatePicker_"+ ZAPS(nDatePicker+1)
-    @ 600, 500 DatePicker &(cText) PARENT Win_1 WIDTH 124  BACKCOLOR m->aColorWinB FONTCOLOR { 0,0,0 }  FONT "Arial" SIZE 9  ToolTip "" ON GOTFOCUS SelectControl(This.Name)
-    AADD(m->aInputMask,{cText,""})
-    AAdd(m->aControlList, cText)
-    Form_1.Combo_2.AddItem(cText)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    nDatepicker++
-    AddMnC(cText)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cText := "DatePicker_"+ ZAPS(nDatePicker+1)
+
+   @ 600, 500 DatePicker &(cText) PARENT Win_1 WIDTH 124  BACKCOLOR m->aColorWinB FONTCOLOR { 0,0,0 }  FONT "Arial" SIZE 9  ToolTip "" ON GOTFOCUS SelectControl(This.Name)
+   AADD(m->aInputMask,{cText,""})
+   AAdd(m->aControlList, cText)
+   Form_1.Combo_2.AddItem(cText)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   nDatepicker++
+   AddMnC(cText)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddBtn()
-*-----------------------------------------------------------------------------*
-LOCAL cText := "Button_"+ ZAPS(nButton+1)
 
-    @ 590, 300 Button &(cText) PARENT Win_1 CAPTION cText ACTION msgbox("Action For "+cText) FONT 'Arial' SIZE 9 ON GOTFOCUS SelectControl(This.Name) TOOLTIP "" 
-    AAdd(m->aControlList, cText)
-    Form_1.Combo_2.AddItem(cText)
-    Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
-    nButton++
-    AddMnC(cText)
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   LOCAL cText := "Button_"+ ZAPS(nButton+1)
+
+   @ 590, 300 Button &(cText) PARENT Win_1 CAPTION cText ACTION msgbox("Action For "+cText) FONT 'Arial' SIZE 9 ON GOTFOCUS SelectControl(This.Name) TOOLTIP ""
+   AAdd(m->aControlList, cText)
+   Form_1.Combo_2.AddItem(cText)
+   Form_1.Combo_2.VALUE := Form_1.Combo_2.ItemCount
+   nButton++
+   AddMnC(cText)
+
+   RETURN
+   /*
+   */
+
 PROCEDURE AddMnc(cText)
-*-----------------------------------------------------------------------------*
-    DEFINE CONTEXT MENU CONTROL &(cText) of  Win_1
-           MENUITEM "Move" ACTION OnKeyPress( VK_F5, .T. )
-           MENUITEM "Size" ACTION OnKeyPress( VK_F9, .T. )
-    END MENU
-    Do Events
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   DEFINE CONTEXT MENU CONTROL &(cText) of  Win_1
+      MENUITEM "Move" ACTION OnKeyPress( VK_F5, .T. )
+      MENUITEM "Size" ACTION OnKeyPress( VK_F9, .T. )
+   END MENU
+   Do Events
+
+   RETURN
+   /*
+   */
+
 PROCEDURE KillControl()
-*-----------------------------------------------------------------------------*
-    LOCAL cControl := m->aControlList[Form_1.Combo_2.VALUE]
-    LOCAL nControl := ASCAN(m->aControlList, cControl)
-    IF ascan({'Win_1','Grid_1'},cControl) > 0
-       MessageBoxTimeout (padc(upper(cControl),50)+CRLF+CRLF;
-              +"This control CANNOT be Erased !!","Error", MB_ICONSTOP, 1500 )
-    ELSE
-        Win_1.&(cControl).Release
-        HB_ADel(m->aControlList,nControl,.T.)
-        Form_1.Combo_2.DeleteItem ( nControl )
-        DoMethod ( "Win_1" , 'Refresh')
-        IF nControl <= Form_1.Combo_2.ItemCount
-            Form_1.Combo_2.Value := nControl
-        ELSE
-            Form_1.Combo_2.Value := nControl-1
-        Endif
-    Endif
-Return
-#if 0
-*----------------------------------------------------------------------------------------------------------------------------------
+
+   LOCAL cControl := m->aControlList[Form_1.Combo_2.VALUE]
+   LOCAL nControl := ASCAN(m->aControlList, cControl)
+
+   IF ascan({'Win_1','Grid_1'},cControl) > 0
+      MessageBoxTimeout (padc(upper(cControl),50)+CRLF+CRLF;
+         +"This control CANNOT be Erased !!","Error", MB_ICONSTOP, 1500 )
+   ELSE
+      Win_1.&(cControl).Release
+      HB_ADel(m->aControlList,nControl,.T.)
+      Form_1.Combo_2.DeleteItem ( nControl )
+      DoMethod ( "Win_1" , 'Refresh')
+      IF nControl <= Form_1.Combo_2.ItemCount
+         Form_1.Combo_2.Value := nControl
+      ELSE
+         Form_1.Combo_2.Value := nControl-1
+      ENDIF
+   ENDIF
+
+   RETURN
+   #if 0
+
 PROCEDURE VerControls()
-*-----------------------------------------------------------------------------*
-LOCAL aVal
-    IF IsWindowDefined("Win_1")  // to prevent exit program whit f3 pressed and no form available
-       aVal := GetAllControlsByForm('Win_1')
-       MsgBox('Total controls: '+STR(Len(aVal)))
-    Endif
-Return
-#endif
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function GetAllControlsByForm ( cFormName )
-*-----------------------------------------------------------------------------*
-Local h , i , nControlCount , aRetVal := {}
 
-    h := GetFormHandle ( cFormName )
+   LOCAL aVal
 
-    nControlCount := Len( _HMG_aControlNames )
+   IF IsWindowDefined("Win_1")  // to prevent exit program whit f3 pressed and no form available
+      aVal := GetAllControlsByForm('Win_1')
+      MsgBox('Total controls: '+STR(Len(aVal)))
+   ENDIF
 
-    FOR i := 1 TO nControlCount
-       IF _HMG_aControlParentHandles[i] == h
-          IF !("@"+Upper(_HMG_aControlType[i])+"@" $ "@HOTKEY@@MENU@@POPUP@@TOOLBAR@@TOOLBUTTON@@MESSAGEBAR@@ITEMMESSAGE@@TIMER@")
-             aAdd( aRetVal, _HMG_aControlNames[i] )
-          Endif
-       Endif
-    NEXT
+   RETURN
+   #endif
+   /*
+   */
 
-Return aRetVal
-/*
-*/
-*-----------------------------------------------------------------------------*
+FUNCTION GetAllControlsByForm ( cFormName )
+
+   LOCAL h , i , nControlCount , aRetVal := {}
+
+   h := GetFormHandle ( cFormName )
+
+   nControlCount := Len( _HMG_aControlNames )
+
+   FOR i := 1 TO nControlCount
+      IF _HMG_aControlParentHandles[i] == h
+         IF !("@"+Upper(_HMG_aControlType[i])+"@" $ "@HOTKEY@@MENU@@POPUP@@TOOLBAR@@TOOLBUTTON@@MESSAGEBAR@@ITEMMESSAGE@@TIMER@")
+            aAdd( aRetVal, _HMG_aControlNames[i] )
+         ENDIF
+      ENDIF
+   NEXT
+
+   RETURN aRetVal
+   /*
+   */
+
 PROCEDURE AssignProperties()
-*-----------------------------------------------------------------------------*
-LOCAL cProperty, cControl, aColor, nValor , cValor, aValor_IW
-Local aCase := {'UPPER','LOWER','NONE'} ,caCombo := '', n
-LOCAL nRowGrid , nRowCR , nColCR //dBcolor
 
-//    dbcolor   :={}
-    nRowGrid  := Form_1.Grid_1.value
-    cControl  := m->aControlList[Form_1.Combo_2.VALUE]
-    cProperty := m->aProperties[ nRowGrid,1 ]
+   LOCAL cProperty, cControl, aColor, nValor , cValor, aValor_IW
+   LOCAL aCase := {'UPPER','LOWER','NONE'} ,caCombo := '', n
+   LOCAL nRowGrid , nRowCR , nColCR //dBcolor
 
-    IF cControl == 'Win_1'
-        IF cProperty = 'BackColor'
-            aColor := GetColor()
-            IF ValType(aColor[1]) = 'U'
-                Return
-            ELSE
-                m->aColorWinB := aColor
-                ChangeBackGround('Win_1',aColor)
-            Endif
-        ELSEIF cProperty = 'Width' .OR. cProperty = 'Height' .OR. cProperty = 'Row' .OR. cProperty = 'Col'
-            nValor:= GetProperty("Win_1",cProperty)
-            aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {nValor}, {'9999'} )
-            If aValor_IW [1] != Nil
-               SetProperty ( "Win_1", cProperty , aValor_IW[1] )
-            Endif
-        ELSEIF cProperty = 'Title'
-            cValor := GetProperty('Win_1',cProperty)
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-            If aValor_IW [1] != Nil
-               SetProperty ( "Win_1", cProperty , aValor_IW[1] )
-            Endif
-        Endif
-    ELSE
-        Do Case
-           CASE cProperty = 'FontColor' .OR. cProperty = 'BackColor'
-            aColor := GetColor()
-            IF ValType(aColor[1]) = 'U'
-                Return
-            Endif
-            IF cControl = 'Grid_1' .AND. cProperty = 'BackColor'
-                aColorBackGrid := aColor
-                Win_1.Grid_1.Refresh
-            ELSEIF cControl = 'Grid_1' .AND. cProperty = 'FontColor'
-/*
-                FOR n:= 1 TO nFields
-                    aadd(dbcolor,acolor)
-                    //Win_1.Grid_1.DYNAMICFORECOLOR (n) := {|| aColor}
-                NEXT n
-                //Win_1.Grid_1.DYNAMICFORECOLOR := {||dbcolor}
-*/
-            Endif
-            SetProperty ( "Win_1", cControl , cProperty , aColor )
+   //    dbcolor   :={}
+   nRowGrid  := Form_1.Grid_1.value
+   cControl  := m->aControlList[Form_1.Combo_2.VALUE]
+   cProperty := m->aProperties[ nRowGrid,1 ]
 
-            CASE cProperty = 'Width' .OR. cProperty = 'Height' .OR. cProperty = 'Row' .OR. cProperty = 'Col' .OR. cProperty = 'FontSize'
-                 nValor:= GetProperty("Win_1",cControl,cProperty)
-                 aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {nValor}, {'9999'} )
-                 If aValor_IW [1] != Nil
-                    SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-                 Endif
+   IF cControl == 'Win_1'
+      IF cProperty = 'BackColor'
+         aColor := GetColor()
+         IF ValType(aColor[1]) = 'U'
 
-        CASE cProperty = 'FontName'
-            cValor := GetProperty('Win_1',cControl,cProperty)
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-            If aValor_IW [1] != Nil
-               SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-            Endif
+            RETURN
+         ELSE
+            m->aColorWinB := aColor
+            ChangeBackGround('Win_1',aColor)
+         ENDIF
+      ELSEIF cProperty = 'Width' .OR. cProperty = 'Height' .OR. cProperty = 'Row' .OR. cProperty = 'Col'
+         nValor:= GetProperty("Win_1",cProperty)
+         aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {nValor}, {'9999'} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cProperty , aValor_IW[1] )
+         ENDIF
+      ELSEIF cProperty = 'Title'
+         cValor := GetProperty('Win_1',cProperty)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cProperty , aValor_IW[1] )
+         ENDIF
+      ENDIF
+   ELSE
+      DO CASE
+      CASE cProperty = 'FontColor' .OR. cProperty = 'BackColor'
+         aColor := GetColor()
+         IF ValType(aColor[1]) = 'U'
 
-        CASE cProperty = 'FontBold' .OR. cProperty = 'FontItalic' .OR. cProperty = 'FontUnderline' .OR. cProperty = 'FontStrikeOut' .OR. cProperty = 'Transparent'
-            aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {0}, {{ Space(15)+'.T.' , Space(15)+'.F.'}} )
-            If aValor_IW [1] != Nil
-               IIF(aValor_IW[1] = 1 , aValor_IW := .T. , aValor_IW := .F.)
-               SetProperty ( "Win_1", cControl , cProperty , aValor_IW )
-            Endif
-
-        CASE cProperty = 'ToolTip'
-            cValor := GetProperty('Win_1',cControl,cProperty)
-            IIF(cValor = Nil , cValor := "" , )
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {100} )
-            If aValor_IW [1] != Nil
-               SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-            Endif
-
-        CASE cProperty = 'Value'
-            IF cControl != 'Grid_1'
-                cValor := GetProperty('Win_1',cControl,cProperty)
-
-                IF GETCONTROLTYPE(cControl,'Win_1') = 'TEXT' //ValType(cValor) = 'C'
-                    aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-                ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'EDIT'//ValType(cValor) = 'M'
-                    aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor} , {500} )
-                ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'NUMTEXT'//ValType(cValor) = 'N'
-                    aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {cValor}, {'9999999999'} )
-                ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'DATEPICK' //ValType(cValor) = 'D'
-                    aValor_IW := InputWindow ( 'Enter value for :',  {cProperty +' :'}, {cValor},{} )
-                ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'CHECKBOX'//ValType(cValor) = 'L'
-                    aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {0}, {{ Space(15)+'.T.' , Space(15)+'.F.'}} )
-                ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'COMBO'//ValType(cValor) = 'L'
-                    aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {cValor}, {'9999'} )
-                ELSE
-                    aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-                Endif
-                If aValor_IW [1] != Nil
-                   IF ValType(cValor) = 'L'
-                       IIF(aValor_IW[1] = 1 , aValor_IW := .T. , aValor_IW := .F.)
-                       SetProperty ( "Win_1", cControl , cProperty , aValor_IW )
-                   ELSE
-                       SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-                   Endif
-               Endif
-            Endif
-
-        CASE cProperty = 'Items' .OR. cProperty = 'Options'
-            nRowCR := GetProperty('Win_1',cControl,'Row')
-            nColCR := GetProperty('Win_1',cControl,'Col')
-            FOR n := 1 TO Len(M->aItems)
-                IF M->aItems[n,1] = cControl
-                    EXIT
-                Endif
+            RETURN
+         ENDIF
+         IF cControl = 'Grid_1' .AND. cProperty = 'BackColor'
+            aColorBackGrid := aColor
+            Win_1.Grid_1.Refresh
+         ELSEIF cControl = 'Grid_1' .AND. cProperty = 'FontColor'
+            /*
+            FOR n:= 1 TO nFields
+            aadd(dbcolor,acolor)
+            //Win_1.Grid_1.DYNAMICFORECOLOR (n) := {|| aColor}
             NEXT n
-            cValor := M->aItems[n,2]
-            IIF(cValor == Nil , cValor := "",)
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {100} )
-            If aValor_IW [1] != Nil
-               FOR n := 1 TO Len(M->aItems)
-                   IF M->aItems[n,1] = cControl
-                      EXIT
-                   Endif
-               NEXT n
-               caCombo := M->aItems[n,2] := aValor_IW[1]
-            Endif
+            //Win_1.Grid_1.DYNAMICFORECOLOR := {||dbcolor}
+            */
+         ENDIF
+         SetProperty ( "Win_1", cControl , cProperty , aColor )
+
+      CASE cProperty = 'Width' .OR. cProperty = 'Height' .OR. cProperty = 'Row' .OR. cProperty = 'Col' .OR. cProperty = 'FontSize'
+         nValor:= GetProperty("Win_1",cControl,cProperty)
+         aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {nValor}, {'9999'} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
+         ENDIF
+
+      CASE cProperty = 'FontName'
+         cValor := GetProperty('Win_1',cControl,cProperty)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
+         ENDIF
+
+      CASE cProperty = 'FontBold' .OR. cProperty = 'FontItalic' .OR. cProperty = 'FontUnderline' .OR. cProperty = 'FontStrikeOut' .OR. cProperty = 'Transparent'
+         aValor_IW := InputWindow ( 'Enter value for :', {cProperty+' :'}, {0}, {{ Space(15)+'.T.' , Space(15)+'.F.'}} )
+         IF aValor_IW [1] != Nil
+            IIF(aValor_IW[1] = 1 , aValor_IW := .T. , aValor_IW := .F.)
+            SetProperty ( "Win_1", cControl , cProperty , aValor_IW )
+         ENDIF
+
+      CASE cProperty = 'ToolTip'
+         cValor := GetProperty('Win_1',cControl,cProperty)
+         IIF(cValor = Nil , cValor := "" , )
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {100} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
+         ENDIF
+
+      CASE cProperty = 'Value'
+         IF cControl != 'Grid_1'
+            cValor := GetProperty('Win_1',cControl,cProperty)
+
+            IF GETCONTROLTYPE(cControl,'Win_1') = 'TEXT' //ValType(cValor) = 'C'
+               aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+            ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'EDIT'//ValType(cValor) = 'M'
+               aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor} , {500} )
+            ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'NUMTEXT'//ValType(cValor) = 'N'
+               aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {cValor}, {'9999999999'} )
+            ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'DATEPICK' //ValType(cValor) = 'D'
+               aValor_IW := InputWindow ( 'Enter value for :',  {cProperty +' :'}, {cValor},{} )
+            ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'CHECKBOX'//ValType(cValor) = 'L'
+               aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {0}, {{ Space(15)+'.T.' , Space(15)+'.F.'}} )
+            ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'COMBO'//ValType(cValor) = 'L'
+               aValor_IW := InputWindow ( 'Enter value for :', {cProperty +' :'}, {cValor}, {'9999'} )
+            ELSE
+               aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+            ENDIF
+            IF aValor_IW [1] != Nil
+               IF ValType(cValor) = 'L'
+                  IIF(aValor_IW[1] = 1 , aValor_IW := .T. , aValor_IW := .F.)
+                  SetProperty ( "Win_1", cControl , cProperty , aValor_IW )
+               ELSE
+                  SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
+               ENDIF
+            ENDIF
+         ENDIF
+
+      CASE cProperty = 'Items' .OR. cProperty = 'Options'
+         nRowCR := GetProperty('Win_1',cControl,'Row')
+         nColCR := GetProperty('Win_1',cControl,'Col')
+         FOR n := 1 TO Len(M->aItems)
+            IF M->aItems[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         cValor := M->aItems[n,2]
+         IIF(cValor == Nil , cValor := "",)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {100} )
+         IF aValor_IW [1] != Nil
+            FOR n := 1 TO Len(M->aItems)
+               IF M->aItems[n,1] = cControl
+                  EXIT
+               ENDIF
+            NEXT n
+            caCombo := M->aItems[n,2] := aValor_IW[1]
+         ENDIF
+         Win_1.&(cControl).Release
+         IF cProperty = 'Items'
+            @ nRowCR,nColCR COMBOBOX &(cControl) PARENT Win_1 VALUE 1 WIDTH 100 ITEMS &(caCombo) ON GOTFOCUS SelectControl(This.Name) FONT 'Courier' SIZE 12
+         ELSE
+            @ nRowCR,nColCR RADIOGROUP &(cControl) PARENT Win_1 OPTIONS &(caCombo) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} ON CHANGE SelectControl(This.Name) TOOLTIP 'RadioGroup' HORIZONTAL
+         ENDIF
+
+      CASE cProperty = 'Spacing'
+         nRowCR := GetProperty('Win_1',cControl,'Row')
+         nColCR := GetProperty('Win_1',cControl,'Col')
+         FOR n := 1 TO Len(M->aItems)
+            IF M->aItems[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         caCombo := M->aItems[n,2]
+         nValor := M->aItems[n,3]
+         IIF(cValor == Nil , nValor := 0,)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {nValor}, {'9999'} )
+         IF aValor_IW [1] != Nil
+            M->aItems[n,3] := ZAPS(aValor_IW[1])
             Win_1.&(cControl).Release
-            IF cProperty = 'Items'
-                @ nRowCR,nColCR COMBOBOX &(cControl) PARENT Win_1 VALUE 1 WIDTH 100 ITEMS &(caCombo) ON GOTFOCUS SelectControl(This.Name) FONT 'Courier' SIZE 12
-            ELSE
-                @ nRowCR,nColCR RADIOGROUP &(cControl) PARENT Win_1 OPTIONS &(caCombo) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} ON CHANGE SelectControl(This.Name) TOOLTIP 'RadioGroup' HORIZONTAL
-            Endif
+            @ nRowCR,nColCR RADIOGROUP &(cControl) PARENT Win_1 OPTIONS &(caCombo) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} ON CHANGE SelectControl(This.Name) TOOLTIP 'RadioGroup' HORIZONTAL    SPACING aValor_IW[1]
+         ENDIF
 
-        CASE cProperty = 'Spacing'
-            nRowCR := GetProperty('Win_1',cControl,'Row')
-            nColCR := GetProperty('Win_1',cControl,'Col')
-            FOR n := 1 TO Len(M->aItems)
-                IF M->aItems[n,1] = cControl
-                    EXIT
-                Endif
-            NEXT n
-            caCombo := M->aItems[n,2]
-            nValor := M->aItems[n,3]
-            IIF(cValor == Nil , nValor := 0,)
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {nValor}, {'9999'} )
-            If aValor_IW [1] != Nil
-               M->aItems[n,3] := ZAPS(aValor_IW[1])
-               Win_1.&(cControl).Release
-               @ nRowCR,nColCR RADIOGROUP &(cControl) PARENT Win_1 OPTIONS &(caCombo) FONT 'Arial' Size 9 FONTCOLOR {0,0,0} BACKCOLOR {0,255,255} ON CHANGE SelectControl(This.Name) TOOLTIP 'RadioGroup' HORIZONTAL    SPACING aValor_IW[1]
-            Endif
-
-        CASE cProperty = 'Caption'
-            IF GETCONTROLTYPE(cControl,'Win_1') = 'CHECKBOX' .or.  GETCONTROLTYPE(cControl,'Win_1') = 'BUTTON'
-                cValor := GetProperty('Win_1',cControl,cProperty)
-                aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-                If aValor_IW [1] != Nil
-                   SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-                Endif
-            Endif
-
-        CASE cProperty = 'InputMask'
-            FOR n := 1 TO Len(m->aInputMask)
-                IF m->aInputMask[n,1] = cControl
-                    EXIT
-                Endif
-            NEXT n
-            cValor := m->aInputMask[n,2]
-            IIF(cValor == Nil , cValor := "",)
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-            If aValor_IW [1] != Nil
-               FOR n := 1 TO Len(m->aInputMask)
-                   IF m->aInputMask[n,1] = cControl
-                      EXIT
-                   Endif
-               NEXT n
-               m->aInputMask[n,2] := aValor_IW[1]
-            Endif
-
-        CASE cProperty = 'CaseConvert'
-            FOR n := 1 TO Len(m->aCaseConvert)
-                IF m->aCaseConvert[n,1] = cControl
-                    EXIT
-                Endif
-            NEXT n
-            cValor :=  ascan(aCase, m->aCaseConvert[n,2])
-            aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor} , {{ Space(10)+'UPPER' , Space(10)+'LOWER' , Space(10)+'NONE' }} )
-            If aValor_IW [1] != Nil
-               FOR n := 1 TO Len(m->aCaseConvert)
-                   IF m->aCaseConvert[n,1] = cControl
-                      EXIT
-                   Endif
-               NEXT n
-               m->aCaseConvert[n,2] := aCase[aValor_IW[1]]
-            Endif
-
-        CASE cProperty = 'Picture'
+      CASE cProperty = 'Caption'
+         IF GETCONTROLTYPE(cControl,'Win_1') = 'CHECKBOX' .or.  GETCONTROLTYPE(cControl,'Win_1') = 'BUTTON'
             cValor := GetProperty('Win_1',cControl,cProperty)
             aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
-            If aValor_IW [1] != Nil
+            IF aValor_IW [1] != Nil
                SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
-            Endif
+            ENDIF
+         ENDIF
 
-        CASE cProperty = 'Action'
-                   MessageBoxTimeout (padc(upper(cproperty),40)+CRLF+CRLF;
-              +"This property CANNOT be Edited !!","Error", MB_ICONSTOP, 2500 )
-        EndCase
-    Endif
-    DoMethod ( "Win_1" , 'Refresh')
-    ConfigValores()
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-PROCEDURE ConfigValores()
-*-----------------------------------------------------------------------------*
-LOCAL cControl
-LOCAL aVariables, n
-PUBLIC _nRow           := ''
-PUBLIC _nCol           := ''
-PUBLIC _nwidth         := ''
-PUBLIC _nheight        := ''
-PUBLIC aColorB         := {}
-PUBLIC aColorF         := {}
-PUBLIC _ColorB         := ''
-PUBLIC _ColorF         := ''
-PUBLIC _FontSize       := ''
-PUBLIC _FontName       := ''
-PUBLIC _FontBold       := ''
-PUBLIC _FontItalic     := ''
-PUBLIC _FontUnderLine  := ''
-PUBLIC _FontStrikeOut  := ''
-PUBLIC _Transparent    := ''
-PUBLIC _Value          := ''
-PUBLIC _ToolTip        := ''
-PUBLIC _Caption        := ''
-PUBLIC _Act            := ''
-PUBLIC _aItems         := ''
-PUBLIC _Title          := ''
-PUBLIC _InputMask      := ''
-PUBLIC _CaseConvert    := ''
-PUBLIC _Options        := ''
-PUBLIC _Picture        := ''
-PUBLIC nRowGrid        := Form_1.Grid_1.VALUE
-
-    cControl  := m->aControlList[Form_1.Combo_2.VALUE]
-
-    IF !IsWindowDefined("Win_1")
-       return
-    Endif
-
-    IF cControl == 'Win_1'
-        m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Title",""},{"BackColor",""}}
-        * aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Title,_ColorB}
-        Form_1.Grid_1.DeleteAllItems
-        aeval(m->aProperties,{|x|Form_1.Grid_1.AddItem(x)})
-        Form_1.Grid_1.Refresh
-        _nRow    := ZAPS(GetProperty ('Win_1' ,'Row'))
-        _nCol    := ZAPS(GetProperty ('Win_1' ,'Col'))
-        _nWidth  := ZAPS(GetProperty ('Win_1' ,'Width'))
-        _nHeight := ZAPS(GetProperty ('Win_1' ,'Height'))
-        _Title   := GetProperty ('Win_1' ,'Title')
-        _ColorB  := '{'+ ZAPS(m->aColorWinB[1])+','+ ZAPS(m->aColorWinB[2])+','+ ZAPS(m->aColorWinB[3])+'}'
-        Form_1.Grid_1.Cell(1,2) := _nRow
-        Form_1.Grid_1.Cell(2,2) := _nCol
-        Form_1.Grid_1.Cell(3,2) := _nWidth
-        Form_1.Grid_1.Cell(4,2) := _nHeight
-        Form_1.Grid_1.Cell(5,2) := _Title
-        Form_1.Grid_1.Cell(6,2) := _ColorB
-    ELSE
-   // msginfo(GETCONTROLTYPE(cControl,'Win_1'),ccontrol+" 1258")
-        SWITCH GETCONTROLTYPE(cControl,'Win_1')
-        CASE 'LABEL'
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         :=  GetProperty ('Win_1' ,cControl ,'Value')
-            _FontName      :=  GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
-            EXIT
-
-        CASE 'TEXT' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"CaseConvert",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         := GetProperty ('Win_1' ,cControl ,'Value')
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            FOR n := 1 TO Len(m->aCaseConvert)
-                IF m->aCaseConvert[n,1] = cControl
-                    EXIT
-                Endif
-            NEXT n
-            _CaseConvert   := m->aCaseConvert[n,2]
-            aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_CaseConvert}
-            EXIT
-
-        CASE 'NUMTEXT' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"InputMask",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+      CASE cProperty = 'InputMask'
+         FOR n := 1 TO Len(m->aInputMask)
+            IF m->aInputMask[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         cValor := m->aInputMask[n,2]
+         IIF(cValor == Nil , cValor := "",)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+         IF aValor_IW [1] != Nil
             FOR n := 1 TO Len(m->aInputMask)
-                IF m->aInputMask[n,1] = cControl
-                    EXIT
-                Endif
+               IF m->aInputMask[n,1] = cControl
+                  EXIT
+               ENDIF
             NEXT n
-            _InputMask     := m->aInputMask[n,2]
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_InputMask}
-            EXIT
+            m->aInputMask[n,2] := aValor_IW[1]
+         ENDIF
 
-        CASE 'DATEPICK' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""}}
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         := DTOC(GetProperty ('Win_1' ,cControl ,'Value'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
-            EXIT
-
-        CASE 'CHECKBOX' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"Caption",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         := IIF(GetProperty ('Win_1' ,cControl ,'Value') , '.T.' , '.F.' )
-            _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_Caption,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
-            EXIT
-
-        CASE 'EDIT' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Value         := GetProperty ('Win_1' ,cControl ,'Value')
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
-            EXIT
-
-        CASE 'COMBO' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Items",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""}}
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            FOR n := 1 TO Len(M->aItems)
-                IF M->aItems[n,1] = cControl
-                    EXIT
-                Endif
+      CASE cProperty = 'CaseConvert'
+         FOR n := 1 TO Len(m->aCaseConvert)
+            IF m->aCaseConvert[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         cValor :=  ascan(aCase, m->aCaseConvert[n,2])
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor} , {{ Space(10)+'UPPER' , Space(10)+'LOWER' , Space(10)+'NONE' }} )
+         IF aValor_IW [1] != Nil
+            FOR n := 1 TO Len(m->aCaseConvert)
+               IF m->aCaseConvert[n,1] = cControl
+                  EXIT
+               ENDIF
             NEXT n
-            _aItems     := M->aItems[n,2]
-            _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_aItems,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
-            EXIT
-            
-        CASE 'RADIOGROUP' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Options",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"Spacing",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            FOR n := 1 TO Len(M->aItems)
-                IF M->aItems[n,1] = cControl
-                    EXIT
-                Endif
-            NEXT n
-            _Options       := M->aItems[n,2]
-            _Spacing       := M->aItems[n,3]
-            _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_Options,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_Spacing}
-            EXIT
+            m->aCaseConvert[n,2] := aCase[aValor_IW[1]]
+         ENDIF
 
-        CASE 'IMAGE' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Picture",""},{"ToolTip",""}}
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _Picture       := GetProperty ('Win_1' ,cControl ,'Picture')
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Picture,_ToolTip}
-            EXIT
+      CASE cProperty = 'Picture'
+         cValor := GetProperty('Win_1',cControl,cProperty)
+         aValor_IW := InputWindow ( 'Enter value for :' , {cProperty +' :'} , {cValor}, {30} )
+         IF aValor_IW [1] != Nil
+            SetProperty ( "Win_1", cControl , cProperty , aValor_IW[1] )
+         ENDIF
 
-        CASE 'GRID' //
-            m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
-            aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
-            EXIT
-            
-        CASE 'BUTTON' //
+      CASE cProperty = 'Action'
+         MessageBoxTimeout (padc(upper(cproperty),40)+CRLF+CRLF;
+            +"This property CANNOT be Edited !!","Error", MB_ICONSTOP, 2500 )
+      ENDCASE
+   ENDIF
+   DoMethod ( "Win_1" , 'Refresh')
+   ConfigValores()
 
-            m->aProperties :={{"Row",""},{"Col",""},{"Caption",""},{"Action",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""};
+   RETURN
+   /*
+   */
+
+PROCEDURE ConfigValores()
+
+   LOCAL cControl
+   LOCAL aVariables, n
+   PUBLIC _nRow           := ''
+   PUBLIC _nCol           := ''
+   PUBLIC _nwidth         := ''
+   PUBLIC _nheight        := ''
+   PUBLIC aColorB         := {}
+   PUBLIC aColorF         := {}
+   PUBLIC _ColorB         := ''
+   PUBLIC _ColorF         := ''
+   PUBLIC _FontSize       := ''
+   PUBLIC _FontName       := ''
+   PUBLIC _FontBold       := ''
+   PUBLIC _FontItalic     := ''
+   PUBLIC _FontUnderLine  := ''
+   PUBLIC _FontStrikeOut  := ''
+   PUBLIC _Transparent    := ''
+   PUBLIC _Value          := ''
+   PUBLIC _ToolTip        := ''
+   PUBLIC _Caption        := ''
+   PUBLIC _Act            := ''
+   PUBLIC _aItems         := ''
+   PUBLIC _Title          := ''
+   PUBLIC _InputMask      := ''
+   PUBLIC _CaseConvert    := ''
+   PUBLIC _Options        := ''
+   PUBLIC _Picture        := ''
+   PUBLIC nRowGrid        := Form_1.Grid_1.VALUE
+
+   cControl  := m->aControlList[Form_1.Combo_2.VALUE]
+
+   IF !IsWindowDefined("Win_1")
+
+      RETURN
+   ENDIF
+
+   IF cControl == 'Win_1'
+      m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Title",""},{"BackColor",""}}
+      * aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Title,_ColorB}
+      Form_1.Grid_1.DeleteAllItems
+      aeval(m->aProperties,{|x|Form_1.Grid_1.AddItem(x)})
+      Form_1.Grid_1.Refresh
+      _nRow    := ZAPS(GetProperty ('Win_1' ,'Row'))
+      _nCol    := ZAPS(GetProperty ('Win_1' ,'Col'))
+      _nWidth  := ZAPS(GetProperty ('Win_1' ,'Width'))
+      _nHeight := ZAPS(GetProperty ('Win_1' ,'Height'))
+      _Title   := GetProperty ('Win_1' ,'Title')
+      _ColorB  := '{'+ ZAPS(m->aColorWinB[1])+','+ ZAPS(m->aColorWinB[2])+','+ ZAPS(m->aColorWinB[3])+'}'
+      Form_1.Grid_1.Cell(1,2) := _nRow
+      Form_1.Grid_1.Cell(2,2) := _nCol
+      Form_1.Grid_1.Cell(3,2) := _nWidth
+      Form_1.Grid_1.Cell(4,2) := _nHeight
+      Form_1.Grid_1.Cell(5,2) := _Title
+      Form_1.Grid_1.Cell(6,2) := _ColorB
+   ELSE
+      // msginfo(GETCONTROLTYPE(cControl,'Win_1'),ccontrol+" 1258")
+      SWITCH GETCONTROLTYPE(cControl,'Win_1')
+      CASE 'LABEL'
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         :=  GetProperty ('Win_1' ,cControl ,'Value')
+         _FontName      :=  GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
+         EXIT
+
+      CASE 'TEXT' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"CaseConvert",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         := GetProperty ('Win_1' ,cControl ,'Value')
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         FOR n := 1 TO Len(m->aCaseConvert)
+            IF m->aCaseConvert[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         _CaseConvert   := m->aCaseConvert[n,2]
+         aVariables     := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_CaseConvert}
+         EXIT
+
+      CASE 'NUMTEXT' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"InputMask",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         FOR n := 1 TO Len(m->aInputMask)
+            IF m->aInputMask[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         _InputMask     := m->aInputMask[n,2]
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_InputMask}
+         EXIT
+
+      CASE 'DATEPICK' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""}}
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         := DTOC(GetProperty ('Win_1' ,cControl ,'Value'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
+         EXIT
+
+      CASE 'CHECKBOX' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"Caption",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         := IIF(GetProperty ('Win_1' ,cControl ,'Value') , '.T.' , '.F.' )
+         _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_Caption,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
+         EXIT
+
+      CASE 'EDIT' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Value         := GetProperty ('Win_1' ,cControl ,'Value')
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
+         EXIT
+
+      CASE 'COMBO' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Items",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""}}
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         FOR n := 1 TO Len(M->aItems)
+            IF M->aItems[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         _aItems     := M->aItems[n,2]
+         _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_aItems,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
+         EXIT
+
+      CASE 'RADIOGROUP' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Options",""},{"Value",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""},{"Spacing",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         FOR n := 1 TO Len(M->aItems)
+            IF M->aItems[n,1] = cControl
+               EXIT
+            ENDIF
+         NEXT n
+         _Options       := M->aItems[n,2]
+         _Spacing       := M->aItems[n,3]
+         _Value         := ZAPS(GetProperty ('Win_1' ,cControl ,'Value'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_Options,_Value,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip,_Spacing}
+         EXIT
+
+      CASE 'IMAGE' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"Picture",""},{"ToolTip",""}}
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _Picture       := GetProperty ('Win_1' ,cControl ,'Picture')
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_Picture,_ToolTip}
+         EXIT
+
+      CASE 'GRID' //
+         m->aProperties :={{"Row",""},{"Col",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""},{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"FontColor",""},{"BackColor",""},{"ToolTip",""}}
+         aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         _ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         _ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         aVariables  := {_nRow,_nCol,_nWidth,_nHeight,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ColorF,_ColorB,_ToolTip}
+         EXIT
+
+      CASE 'BUTTON' //
+
+         m->aProperties :={{"Row",""},{"Col",""},{"Caption",""},{"Action",""},{"Width",""},{"Height",""},{"FontName",""},{"FontSize",""};
             ,{"FontBold",""},{"FontItalic",""},{"FontUnderline",""},{"FontStrikeOut",""},{"ToolTip",""} }
 
-            Form_1.Grid_1.DeleteAllItems
-            aeval(m->aProperties,{|x|Form_1.Grid_1.AddItem(x)})
-            Form_1.Grid_1.Refresh
+         Form_1.Grid_1.DeleteAllItems
+         aeval(m->aProperties,{|x|Form_1.Grid_1.AddItem(x)})
+         Form_1.Grid_1.Refresh
 
-            *aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-            *aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-            _nRow          := ZAPS(GetProperty ('Win_1', cControl ,'Row'))
-            _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-            _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')
-            _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-            _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-            _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-            _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-            _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
-            _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
-            _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
-            _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
-            *_ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
-            *_ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
-            _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-            _Act           := 'Msgbox ("Action For "+cControl+")"' // 
-           // _Act           :=  valtype(GetProperty ('Win_1' ,cControl ,'Action')  )
-            aVariables  := {_nRow,_nCol,_Caption,_Act,_nWidth,_nHeight,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
+         *aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+         *aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+         _nRow          := ZAPS(GetProperty ('Win_1', cControl ,'Row'))
+         _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+         _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')
+         _nWidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+         _nHeight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+         _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+         _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+         _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , '.T.' , '.F.')
+         _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , '.T.' , '.F.')
+         _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , '.T.' , '.F.')
+         _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , '.T.' , '.F.')
+         *_ColorF        := '{'+ ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])+'}'
+         *_ColorB        := '{'+ ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])+'}'
+         _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+         _Act           := 'Msgbox ("Action For "+cControl+")"' //
+         // _Act           :=  valtype(GetProperty ('Win_1' ,cControl ,'Action')  )
+         aVariables  := {_nRow,_nCol,_Caption,_Act,_nWidth,_nHeight,_FontName,_FontSize,_FontBold,_FontItalic,_FontUnderLine,_FontStrikeOut,_ToolTip}
 
-        EndSwitch
+      ENDSWITCH
 
-        Form_1.Grid_1.DeleteAllItems
-        FOR n:= 1 TO LEN(m->aProperties)
-            Form_1.Grid_1.AddItem(m->aProperties[n])
-        NEXT n
-        Form_1.Grid_1.Refresh
+      Form_1.Grid_1.DeleteAllItems
+      FOR n:= 1 TO LEN(m->aProperties)
+         Form_1.Grid_1.AddItem(m->aProperties[n])
+      NEXT n
+      Form_1.Grid_1.Refresh
 
-        FOR n:= 1 TO LEN(m->aProperties)
-            * msgbox(n,aVariables)
-            cPropiedad := '_' + m->aProperties[n,1]
-            Form_1.Grid_1.Cell(n,2) := aVariables[n]
-        NEXT n
-    Endif
-    Drawgrid()
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+      FOR n:= 1 TO LEN(m->aProperties)
+         * msgbox(n,aVariables)
+         cPropiedad := '_' + m->aProperties[n,1]
+         Form_1.Grid_1.Cell(n,2) := aVariables[n]
+      NEXT n
+   ENDIF
+   Drawgrid()
+
+   RETURN
+   /*
+   */
+
 FUNCTION ChangeBackGround(cWindow,aColor)
-*-----------------------------------------------------------------------------*
-Local hWnd, oldBrush, Brush
-    hWnd := GetFormHandle (cWindow)
-    IF IsWindowHandle( hWnd )
-       Brush := CreateSolidBrush( aColor[1], aColor[2], aColor[3] )
-       oldBrush := SetWindowBrush( hWnd, Brush )
-       DeleteObject( oldBrush )
-    Endif
-    erasewindow(cWindow)
-Return NIL
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL hWnd, oldBrush, Brush
+
+   hWnd := GetFormHandle (cWindow)
+   IF IsWindowHandle( hWnd )
+      Brush := CreateSolidBrush( aColor[1], aColor[2], aColor[3] )
+      oldBrush := SetWindowBrush( hWnd, Brush )
+      DELETEObject( oldBrush )
+   ENDIF
+   ERASEwindow(cWindow)
+
+   RETURN NIL
+   /*
+   */
+
 PROCEDURE SelectControl(cControl)
-*-----------------------------------------------------------------------------*
-LOCAL nControl
-    nControl := ASCAN(m->aControlList, cControl)
-    Form_1.Combo_2.VALUE := nControl 
-    if cControl !="Win_1"
-       DoMethod( "Win_1", cControl, "SetFocus" )
-    Endif
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL nControl
+
+   nControl := ASCAN(m->aControlList, cControl)
+   Form_1.Combo_2.VALUE := nControl
+   IF cControl !="Win_1"
+      DoMethod( "Win_1", cControl, "SetFocus" )
+   ENDIF
+
+   RETURN
+   /*
+   */
+
 FUNCTION GridBackColor()
-*-----------------------------------------------------------------------------*
-    LOCAL aColors := {{ aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-                      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-                      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-                      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-                      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
-                      , aColorBackGrid, aColorBackGrid, aColorBackGrid }}
-Return aColors [1] [ This.CellColIndex ]
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL aColors := {{ aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid, aColorBackGrid;
+      , aColorBackGrid, aColorBackGrid, aColorBackGrid }}
+
+   RETURN aColors [1] [ This.CellColIndex ]
+   /*
+   */
+
 PROCEDURE GetControlProperty(cControl)
-*-----------------------------------------------------------------------------*
-    PUBLIC  _nRow          := ''
-    PUBLIC  _nCol          := ''
-    PUBLIC  _nwidth        := ''
-    PUBLIC  _nheight       := ''
-    PUBLIC  aColorB        := {}
-    PUBLIC  aColorF        := {}
-    PUBLIC  _ColorB        := ''
-    PUBLIC  _ColorF        := ''
-    PUBLIC  _FontSize      := ''
-    PUBLIC  _FontName      := ''
-    PUBLIC  _FontBold      := ''
-    PUBLIC  _FontItalic    := ''
-    PUBLIC  _FontUnderLine := ''
-    PUBLIC  _FontStrikeOut := ''
-    PUBLIC  _Transparent   := ''
-    PUBLIC  _Value         := ''
-    PUBLIC  _ToolTip       := ''
-    PUBLIC  _aItems        := ''
-    PUBLIC  _aOptions      := ''
-    PUBLIC  _nSpacing      := ''
 
-    _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-    _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-    _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-    _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-    _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-    _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-    _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
-    _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
-    _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
-    _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
-    _Value         := GetProperty ('Win_1' ,cControl ,'Value')
-    _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+   PUBLIC  _nRow          := ''
+   PUBLIC  _nCol          := ''
+   PUBLIC  _nwidth        := ''
+   PUBLIC  _nheight       := ''
+   PUBLIC  aColorB        := {}
+   PUBLIC  aColorF        := {}
+   PUBLIC  _ColorB        := ''
+   PUBLIC  _ColorF        := ''
+   PUBLIC  _FontSize      := ''
+   PUBLIC  _FontName      := ''
+   PUBLIC  _FontBold      := ''
+   PUBLIC  _FontItalic    := ''
+   PUBLIC  _FontUnderLine := ''
+   PUBLIC  _FontStrikeOut := ''
+   PUBLIC  _Transparent   := ''
+   PUBLIC  _Value         := ''
+   PUBLIC  _ToolTip       := ''
+   PUBLIC  _aItems        := ''
+   PUBLIC  _aOptions      := ''
+   PUBLIC  _nSpacing      := ''
 
-    aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
-    aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
-    _ColorB := ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])
-    _ColorF := ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])
+   _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+   _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+   _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+   _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+   _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+   _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+   _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
+   _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
+   _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
+   _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
+   _Value         := GetProperty ('Win_1' ,cControl ,'Value')
+   _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   aColorB := GetProperty ('Win_1' , cControl ,'BACKCOLOR')
+   aColorF := GetProperty ('Win_1' ,cControl ,'FONTCOLOR')
+   _ColorB := ZAPS(aColorB[1])+','+ ZAPS(aColorB[2])+','+ ZAPS(aColorB[3])
+   _ColorF := ZAPS(aColorF[1])+','+ ZAPS(aColorF[2])+','+ ZAPS(aColorF[3])
+
+   RETURN
+   /*
+   */
+
 PROCEDURE GetControlPropertyDate(cControl)
-*-----------------------------------------------------------------------------*
-    PUBLIC  _nRow   := ''
-    PUBLIC  _nCol   := ''
-    PUBLIC  _nwidth := ''
-    PUBLIC  _nheight:= ''
-    PUBLIC  _FontSize      := ''
-    PUBLIC  _FontName      := ''
-    PUBLIC  _FontBold      := ''
-    PUBLIC  _FontItalic    := ''
-    PUBLIC  _FontUnderLine := ''
-    PUBLIC  _FontStrikeOut := ''
-    PUBLIC  _Transparent   := ''
-    PUBLIC  _Value         := ''
-    PUBLIC  _ToolTip       := ''
 
-    _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-    _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-    _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-    _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-    _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-    _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-    _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
-    _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
-    _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
-    _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
-    _Value         := GetProperty ('Win_1' ,cControl ,'Value') // CHECAR
-    _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   PUBLIC  _nRow   := ''
+   PUBLIC  _nCol   := ''
+   PUBLIC  _nwidth := ''
+   PUBLIC  _nheight:= ''
+   PUBLIC  _FontSize      := ''
+   PUBLIC  _FontName      := ''
+   PUBLIC  _FontBold      := ''
+   PUBLIC  _FontItalic    := ''
+   PUBLIC  _FontUnderLine := ''
+   PUBLIC  _FontStrikeOut := ''
+   PUBLIC  _Transparent   := ''
+   PUBLIC  _Value         := ''
+   PUBLIC  _ToolTip       := ''
+
+   _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+   _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+   _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+   _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+   _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+   _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+   _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
+   _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
+   _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
+   _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
+   _Value         := GetProperty ('Win_1' ,cControl ,'Value') // CHECAR
+   _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+
+   RETURN
+   /*
+   */
+
 PROCEDURE GetControlPropertyImage(cControl)
-*-----------------------------------------------------------------------------*
-    _Picture  := GetProperty ('Win_1' ,cControl ,'Picture')
-    _nRow     := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-    _nCol     := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-    _nWidth   := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-    _nHeight  := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-    _ToolTip  := GetProperty ('Win_1' ,cControl ,'ToolTip')
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   _Picture  := GetProperty ('Win_1' ,cControl ,'Picture')
+   _nRow     := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+   _nCol     := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+   _nWidth   := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+   _nHeight  := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+   _ToolTip  := GetProperty ('Win_1' ,cControl ,'ToolTip')
+
+   RETURN
+   /*
+   */
+
 PROCEDURE GetControlPropertyButt(cControl)
-*-----------------------------------------------------------------------------*
-    PUBLIC  _nRow   := ''
-    PUBLIC  _nCol   := ''
-    PUBLIC  _nwidth := ''
-    PUBLIC  _nheight:= ''
-    PUBLIC  _FontSize      := ''
-    PUBLIC  _FontName      := ''
-    PUBLIC  _FontBold      := ''
-    PUBLIC  _FontItalic    := ''
-    PUBLIC  _FontUnderLine := ''
-    PUBLIC  _FontStrikeOut := ''
-    PUBLIC  _Transparent   := ''
-    PUBLIC  _Value         := ''
-    PUBLIC  _ToolTip       := ''                    
-    PUBLIC  _Caption       := ''
-    PUBLIC  _Act           := ''
 
-    _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
-    _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
-    _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
-    _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
-    _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
-    _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
-    _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
-    _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
-    _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
-    _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
-    _Value         := GetProperty ('Win_1' ,cControl ,'Value') // CHECAR
-    _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
-    _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')  
-    _Act           := 'Msgbox ("Action For '+cControl+'","Demo")'  
-    
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure PrintList(cBase, aNomb, aLong, lEdit)
-*-----------------------------------------------------------------------------*
-   Local aHdr  := aClone(aNomb)
-   Local aLen  := aClone(aLong)
-   Local aHdr1 , aTot , aFmt, mlen := 0
+   PUBLIC  _nRow   := ''
+   PUBLIC  _nCol   := ''
+   PUBLIC  _nwidth := ''
+   PUBLIC  _nheight:= ''
+   PUBLIC  _FontSize      := ''
+   PUBLIC  _FontName      := ''
+   PUBLIC  _FontBold      := ''
+   PUBLIC  _FontItalic    := ''
+   PUBLIC  _FontUnderLine := ''
+   PUBLIC  _FontStrikeOut := ''
+   PUBLIC  _Transparent   := ''
+   PUBLIC  _Value         := ''
+   PUBLIC  _ToolTip       := ''
+   PUBLIC  _Caption       := ''
+   PUBLIC  _Act           := ''
 
-   Default lEdit to .f.
+   _nRow          := ZAPS(GetProperty ('Win_1' ,cControl ,'Row'))
+   _nCol          := ZAPS(GetProperty ('Win_1' ,cControl ,'Col'))
+   _nwidth        := ZAPS(GetProperty ('Win_1' ,cControl ,'Width'))
+   _nheight       := ZAPS(GetProperty ('Win_1' ,cControl ,'Height'))
+   _FontSize      := ZAPS(GetProperty ('Win_1' ,cControl ,'FontSize'))
+   _FontName      := GetProperty ('Win_1' ,cControl ,'FontName')
+   _FontBold      := IIF( GetProperty ('Win_1' ,cControl ,'FontBold') , ' BOLD ' , '')
+   _FontItalic    := IIF( GetProperty ('Win_1' ,cControl ,'FontItalic') , ' ITALIC ' , '')
+   _FontUnderLine := IIF( GetProperty ('Win_1' ,cControl ,'FontUnderLine') , ' UNDERLINE ' , '')
+   _FontStrikeOut := IIF( GetProperty ('Win_1' ,cControl ,'FontStrikeOut') , ' STRIKEOUT ' , '')
+   _Value         := GetProperty ('Win_1' ,cControl ,'Value') // CHECAR
+   _ToolTip       := GetProperty ('Win_1' ,cControl ,'ToolTip')
+   _Caption       := GetProperty ('Win_1' ,cControl ,'Caption')
+   _Act           := 'Msgbox ("Action For '+cControl+'","Demo")'
 
-   if !used()
+   RETURN
+   /*
+   */
+
+PROCEDURE PrintList(cBase, aNomb, aLong, lEdit)
+
+   LOCAL aHdr  := aClone(aNomb)
+   LOCAL aLen  := aClone(aLong)
+   LOCAL aHdr1 , aTot , aFmt, mlen := 0
+
+   DEFAULT lEdit to .f.
+
+   IF !used()
       USE &cDBF NEW SHARED
-   Endif
+   ENDIF
 
-   if lEdit
+   IF lEdit
       URE(aHdr,alen)
-      return
-   Endif
+
+      RETURN
+   ENDIF
 
    /*
    adel(aLen, 1)
@@ -1762,7 +1801,7 @@ Procedure PrintList(cBase, aNomb, aLong, lEdit)
    aeval(alen,{|x|mlen += x })
 
    ( cBase )->( dbgotop() )
-   if mlen > 150       // Require sheet rotation
+   IF mlen > 150       // Require sheet rotation
       DO REPORT ;
          TITLE  "Print List"      ;
          HEADERS  aHdr1, aHdr     ;
@@ -1776,7 +1815,7 @@ Procedure PrintList(cBase, aNomb, aLong, lEdit)
          PAPERSIZE DMPAPER_A4     ;
          PREVIEW  ;
          LANDSCAPE
-   Else
+   ELSE
       DO REPORT ;
          TITLE  "Print List"      ;
          HEADERS  aHdr1, aHdr     ;
@@ -1789,247 +1828,249 @@ Procedure PrintList(cBase, aNomb, aLong, lEdit)
          TMARGIN  3               ;
          PAPERSIZE DMPAPER_A4     ;
          PREVIEW
-   Endif
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   ENDIF
+
+   RETURN
+   /*
+   */
+
 PROCEDURE CreatePRG()
-*-----------------------------------------------------------------------------*
-    LOCAL cSep, cControl, n
-    PUBLIC aControlsQ , cControlsQ , cHeadClick
-    PUBLIC cAlias, cShortAlias, cFile
-    PUBLIC cFields, cWidths, cJustify
-    PUBLIC anCamposM, nDatePicker, acCamposM
-    PUBLIC aCamposPos, aControlPos, aControlsPos // Para Form Posicion
-    PRIVATE nLongDBF, nLongField, nLongControl, nLongControlQ, nLong:=0
 
-    m->cAlias  := '' ; m->cShortAlias := '' ; m->cFile    := ''
-    m->cFields := '' ; m->cWidths     := '' ; m->cJustify := ''
-    m->anCamposM  :={} ; m->nDatePicker := 0 ; m->acCamposM := ''
-    m->aCamposPos :={} ; m->aControlPos := {}; m->aControlsPos := {}
+   LOCAL cSep, cControl, n
+   PUBLIC aControlsQ , cControlsQ , cHeadClick
+   PUBLIC cAlias, cShortAlias, cFile
+   PUBLIC cFields, cWidths, cJustify
+   PUBLIC anCamposM, nDatePicker, acCamposM
+   PUBLIC aCamposPos, aControlPos, aControlsPos // Para Form Posicion
+   PRIVATE nLongDBF, nLongField, nLongControl, nLongControlQ, nLong:=0
 
-    IF Form_1.Combo_2.ItemCount = 0
-       msgexclamation("Please select a dbf before...")
-       Return
-    Endif
+   m->cAlias  := '' ; m->cShortAlias := '' ; m->cFile    := ''
+   m->cFields := '' ; m->cWidths     := '' ; m->cJustify := ''
+   m->anCamposM  :={} ; m->nDatePicker := 0 ; m->acCamposM := ''
+   m->aCamposPos :={} ; m->aControlPos := {}; m->aControlsPos := {}
 
-    nLongDBF := Len(cDBF)
-    nLongField := 0
-    nLongControl := 0
+   IF Form_1.Combo_2.ItemCount = 0
+      msgexclamation("Please select a dbf before...")
 
-    aCamposPos := {}
-    FOR n:= 1 To Len(Field_Name)
-        AAdd(aCamposPos,{Field_Name[n],Field_Type[n],Str(Field_Len[n],2,0),Str(Field_Dec[n],2,0)})
-        IIF(Len(Field_Name[n])> nLongField , nLongField := Len(Field_Name[n]) ,)
-    NEXT n
+      RETURN
+   ENDIF
 
-    aControlsOrder := m->aControlList
-    HB_ADel(aControlsOrder,1,.T.)
-    lImage := .F.
-    FOR n := 1 TO Len(aControlsOrder)
-        cControl := aControlsOrder[n]
-        IF GETCONTROLTYPE(cControl,'Win_1') = 'GRID' .OR. GETCONTROLTYPE(cControl,'Win_1') = 'LABEL'
-        ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'IMAGE'
-            lImage := .T.
-        ELSE
-            AAdd(m->aControlPos,{aControlsOrder[n],GETCONTROLTYPE(cControl,'Win_1')})
-        Endif
-    NEXT n
+   nLongDBF := Len(cDBF)
+   nLongField := 0
+   nLongControl := 0
 
-*------------------------------------------------------------------------------*
-    Load Window Posicion
-    Posicion.Center
-    Posicion.Activate
-*------------------------------------------------------------------------------*
+   aCamposPos := {}
+   FOR n:= 1 To Len(Field_Name)
+      AAdd(aCamposPos,{Field_Name[n],Field_Type[n],Str(Field_Len[n],2,0),Str(Field_Dec[n],2,0)})
+      IIF(Len(Field_Name[n])> nLongField , nLongField := Len(Field_Name[n]) ,)
+   NEXT n
 
-    m->cAlias := Upper(SubStr(cDBF,1,1)) + Alltrim(Lower(SubStr(cDBF,2)))
-    cShortAlias := SubStr(m->cAlias,1,4)   
-    cFile := cFilePath(GetExeFileName())+ "\" + m->cAlias + '.prg'
+   aControlsOrder := m->aControlList
+   HB_ADel(aControlsOrder,1,.T.)
+   lImage := .F.
+   FOR n := 1 TO Len(aControlsOrder)
+      cControl := aControlsOrder[n]
+      IF GETCONTROLTYPE(cControl,'Win_1') = 'GRID' .OR. GETCONTROLTYPE(cControl,'Win_1') = 'LABEL'
+      ELSEIF GETCONTROLTYPE(cControl,'Win_1') = 'IMAGE'
+         lImage := .T.
+      ELSE
+         AAdd(m->aControlPos,{aControlsOrder[n],GETCONTROLTYPE(cControl,'Win_1')})
+      ENDIF
+   NEXT n
 
-    IF File(cFile)
-        DELETE FILE &(cFile)
-    Endif
+   LOAD WINDOW Posicion
+   Posicion.Center
+   Posicion.Activate
 
-    cSep := ', '
-    FOR n = 1 TO nFields
-        IIF(n = nFields , cSep := '', )
-        cFields = cFields + '"' + Field_Name[n] + '"' + cSep
-        m->cWidths = m->cWidths + ZAPS(Field_Len[n]*10+10) + cSep
-        IF Field_Type[n] = 'N'
-            m->cJustify := m->cJustify + 'BROWSE_JTFY_RIGHT' + cSep
-        ELSEIF Field_Type[n] = 'D' .OR. Field_Type[n] = 'L'
-            m->cJustify := m->cJustify + 'BROWSE_JTFY_CENTER' + cSep
-        ELSE
-            m->cJustify := m->cJustify + ' ' + cSep
-        Endif
-    NEXT n
+   m->cAlias := Upper(SubStr(cDBF,1,1)) + Alltrim(Lower(SubStr(cDBF,2)))
+   cShortAlias := SubStr(m->cAlias,1,4)
+   cFile := cFilePath(GetExeFileName())+ "\" + m->cAlias + '.prg'
 
-    cSep := ', '
-    m->aControles  := {}
-    m->aControlsQ  := {}
-    m->cControlsQ  := ""
-    nTextBox    := 1
-    nDatePicker := 1
-    nCheckBox   := 1
-    nEditBox    := 1
-    m->nComboBox   := 1
-    m->nRadioGroup := 1
-    m->cHeadClick  := ""
+   IF File(cFile)
+      DELETE FILE &(cFile)
+   ENDIF
 
-    FOR n:=1 To nFields //Len(aControlsOrder)
-        IIF(n = nFields , cSep := '', )
-        SWITCH GETCONTROLTYPE(aControlsOrder[n],'Win_1')
-        CASE 'TEXT'
-            AADD(m->aControlsQ,aControlsOrder[n])
-            m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
-            nTextBox++
-            EXIT
+   cSep := ', '
+   FOR n = 1 TO nFields
+      IIF(n = nFields , cSep := '', )
+      cFields = cFields + '"' + Field_Name[n] + '"' + cSep
+      m->cWidths = m->cWidths + ZAPS(Field_Len[n]*10+10) + cSep
+      IF Field_Type[n] = 'N'
+         m->cJustify := m->cJustify + 'BROWSE_JTFY_RIGHT' + cSep
+      ELSEIF Field_Type[n] = 'D' .OR. Field_Type[n] = 'L'
+         m->cJustify := m->cJustify + 'BROWSE_JTFY_CENTER' + cSep
+      ELSE
+         m->cJustify := m->cJustify + ' ' + cSep
+      ENDIF
+   NEXT n
 
-        CASE 'NUMTEXT'
-            AADD(m->aControlsQ,aControlsOrder[n])
-            m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
-            nTextBox++
-            EXIT
+   cSep := ', '
+   m->aControles  := {}
+   m->aControlsQ  := {}
+   m->cControlsQ  := ""
+   nTextBox    := 1
+   nDatePicker := 1
+   nCheckBox   := 1
+   nEditBox    := 1
+   m->nComboBox   := 1
+   m->nRadioGroup := 1
+   m->cHeadClick  := ""
 
-        CASE 'RADIOGROUP'
-            cControl := 'TextRadio_' + ZAPS(m->nRadioGroup)
-            AADD(m->aControlsQ,cControl)
-            m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
-            m->nRadioGroup++
-            EXIT
+   FOR n:=1 To nFields //Len(aControlsOrder)
+      IIF(n = nFields , cSep := '', )
+      SWITCH GETCONTROLTYPE(aControlsOrder[n],'Win_1')
+      CASE 'TEXT'
+         AADD(m->aControlsQ,aControlsOrder[n])
+         m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
+         nTextBox++
+         EXIT
 
-        CASE 'COMBO'
-            cControl := 'TextCombo_' + ZAPS(m->nComboBox)
-            AADD(m->aControlsQ,cControl)
-            m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
-            m->nComboBox++
-            EXIT
+      CASE 'NUMTEXT'
+         AADD(m->aControlsQ,aControlsOrder[n])
+         m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
+         nTextBox++
+         EXIT
 
-        CASE 'DATEPICK'
-            cControl := 'TextDate_' + ZAPS(nDatePicker)
-            AADD(m->aControlsQ,cControl)
-            m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
-            nDatePicker++
-            EXIT
+      CASE 'RADIOGROUP'
+         cControl := 'TextRadio_' + ZAPS(m->nRadioGroup)
+         AADD(m->aControlsQ,cControl)
+         m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
+         m->nRadioGroup++
+         EXIT
 
-        CASE 'CHECKBOX'
-            AADD(m->aControlsQ,aControlsOrder[n])
-            m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
-            nCheckBox++
-            EXIT
+      CASE 'COMBO'
+         cControl := 'TextCombo_' + ZAPS(m->nComboBox)
+         AADD(m->aControlsQ,cControl)
+         m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
+         m->nComboBox++
+         EXIT
 
-        CASE 'EDIT'
-            AADD(m->aControlsQ,aControlsOrder[n])
-            m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
-            AADD(m->anCamposM,n)
-            IIF( nEditBox = 1 , m->acCamposM := m->acCamposM + ZAPS(n) , m->acCamposM := m->acCamposM + ", " + ZAPS(n) )
-            nEditBox++
-            EXIT
+      CASE 'DATEPICK'
+         cControl := 'TextDate_' + ZAPS(nDatePicker)
+         AADD(m->aControlsQ,cControl)
+         m->cControlsQ := m->cControlsQ + "'"+ cControl + "'" + cSep
+         nDatePicker++
+         EXIT
 
-        EndSwitch
-        m->cHeadClick := m->cHeadClick + "{|| Head_" + cShortAlias + "(" + ZAPS(n) + ")}" + cSep
-    NEXT n
+      CASE 'CHECKBOX'
+         AADD(m->aControlsQ,aControlsOrder[n])
+         m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
+         nCheckBox++
+         EXIT
 
-    nTextBox --
-    nDatePicker --
-    nCheckBox --
-    nEditBox --
-    m->nComboBox --
-    m->nRadioGroup --
-    m->nLongControlQ := 0
+      CASE 'EDIT'
+         AADD(m->aControlsQ,aControlsOrder[n])
+         m->cControlsQ := m->cControlsQ + "'"+ aControlsOrder[n] + "'" + cSep
+         AADD(m->anCamposM,n)
+         IIF( nEditBox = 1 , m->acCamposM := m->acCamposM + ZAPS(n) , m->acCamposM := m->acCamposM + ", " + ZAPS(n) )
+         nEditBox++
+         EXIT
 
-    FOR n:= 1 To Len(aControlsOrder)
-        IIF(Len(aControlsOrder[n])> nLongControl , nLongControl := Len(aControlsOrder[n]) ,)
-    NEXT
-    FOR n:= 1 TO Len(m->aControlsQ)
-        IIF(Len(m->aControlsQ[n])> m->nLongControlQ , m->nLongControlQ := Len(m->aControlsQ[n]) ,)
-    NEXT
+      ENDSWITCH
+      m->cHeadClick := m->cHeadClick + "{|| Head_" + cShortAlias + "(" + ZAPS(n) + ")}" + cSep
+   NEXT n
 
-    BuildFile()
+   nTextBox --
+   nDatePicker --
+   nCheckBox --
+   nEditBox --
+   m->nComboBox --
+   m->nRadioGroup --
+   m->nLongControlQ := 0
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   FOR n:= 1 To Len(aControlsOrder)
+      IIF(Len(aControlsOrder[n])> nLongControl , nLongControl := Len(aControlsOrder[n]) ,)
+   NEXT
+   FOR n:= 1 TO Len(m->aControlsQ)
+      IIF(Len(m->aControlsQ[n])> m->nLongControlQ , m->nLongControlQ := Len(m->aControlsQ[n]) ,)
+   NEXT
+
+   BuildFile()
+
+   RETURN
+   /*
+   */
+
 PROCEDURE GuardarCtrlPos()
-*-----------------------------------------------------------------------------*
-LOCAL n
-    aControlsOrder := {}
-    FOR n := 1 TO Posicion.Grid_2.ItemCount
-        AADD(aControlsOrder,Posicion.Grid_2.Cell(n,1) )
-    NEXT n
-    Posicion.Release
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL n
+
+   aControlsOrder := {}
+   FOR n := 1 TO Posicion.Grid_2.ItemCount
+      AADD(aControlsOrder,Posicion.Grid_2.Cell(n,1) )
+   NEXT n
+   Posicion.Release
+
+   RETURN
+   /*
+   */
+
 PROCEDURE BuildFile()
-*-----------------------------------------------------------------------------*
-    LOCAL nPos, nLargo
-    LOCAL cControl, cControlSF, cSep ,aSrc := {}
-    LOCAL m ,n ,i ,j ,k , _caCombo, _InputMask , _CaseConvert
-    LOCAL aVal, aControlsWin_1 := {}, cFileBat, cFileRc
-    LOCAL W_Name := '"Win_'+m->cShortAlias+'"'  
-    LOCAL cPos := cFilePath(GetExeFileName())+"\"
 
-    IF Field_Type[1] = "N"
-        cControlSF := aControlsOrder[2]
-    ELSE
-        cControlSF := aControlsOrder[1]
-    Endif
+   LOCAL nPos, nLargo
+   LOCAL cControl, cControlSF, cSep ,aSrc := {}
+   LOCAL m ,n ,i ,j ,k , _caCombo, _InputMask , _CaseConvert
+   LOCAL aVal, aControlsWin_1 := {}, cFileBat, cFileRc
+   LOCAL W_Name := '"Win_'+m->cShortAlias+'"'
+   LOCAL cPos := cFilePath(GetExeFileName())+"\"
 
-    aVal := GetAllControlsByForm('Win_1')
+   IF Field_Type[1] = "N"
+      cControlSF := aControlsOrder[2]
+   ELSE
+      cControlSF := aControlsOrder[1]
+   ENDIF
 
-    FOR i=1 To Len(aVal)
-        AAdd(aControlsWin_1,aVal[i])
-    Next
+   aVal := GetAllControlsByForm('Win_1')
 
-    cFileBat := cPos + "0C_"+m->cAlias + '.bat'
+   FOR i=1 To Len(aVal)
+      AAdd(aControlsWin_1,aVal[i])
+   NEXT
 
-    IF File(cFileBat)
-        DELETE FILE &(cFileBat)
-    Endif
+   cFileBat := cPos + "0C_"+m->cAlias + '.bat'
 
-    Writefile(cFilebat,"call c:\Minigui\batch\compile.bat " + m->cAlias )
+   IF File(cFileBat)
+      DELETE FILE &(cFileBat)
+   ENDIF
 
-    cFileRc := cPos + m->cAlias + '.Rc'
+   Writefile(cFilebat,"call c:\Minigui\batch\compile.bat " + m->cAlias )
 
-    IF File(cFileRc)
-        DELETE FILE &(cFileRc)
-    Endif
+   cFileRc := cPos + m->cAlias + '.Rc'
 
-    aadd(aSrc,'AAAAZZZZ    ICON    "Res\QbG.ico" ' )
-    aadd(aSrc,'1Register   ICON    "Res\QbG.ico" ' )
-    aadd(aSrc,'Tools       BITMAP  "Res\Tools.bmp" ' )
-    aadd(aSrc,'OPTIONS     BITMAP  "Res\Options.bmp" ' )
-    aadd(aSrc,'CANCEL      BITMAP  "Res\cancel.bmp" ' )
-    aadd(aSrc,'EDIT_CLOSE  BITMAP  "Res\EDIT_CLOSE.bmp" ' )
-    aadd(aSrc,'EDIT_DELETE BITMAP  "Res\EDIT_DELETE.bmp" ' )
-    aadd(aSrc,'EDIT_EDIT   BITMAP  "Res\EDIT_EDIT.bmp" ' )
-    aadd(aSrc,'EDIT_FIND   BITMAP  "Res\EDIT_FIND.bmp" ' )
-    aadd(aSrc,'EDIT_NEW    BITMAP  "Res\EDIT_NEW.bmp" ' )
-    aadd(aSrc,'EDIT_PRINT  BITMAP  "Res\EDIT_PRINT.bmp" ' )
-    aadd(aSrc,'GO_FIRST    BITMAP  "Res\GO_FIRST.bmp" ' )
-    aadd(aSrc,'GO_LAST     BITMAP  "Res\GO_LAST.bmp" ' )
-    aadd(aSrc,'GO_NEXT     BITMAP  "Res\GO_NEXT.bmp" ' )
-    aadd(aSrc,'GO_PREV     BITMAP  "Res\GO_PREV.bmp" ' )
-    aadd(aSrc,'OK          BITMAP  "Res\OK.bmp" ' )
-    aadd(aSrc,'RAImBOW     BITMAP  "RES\RAImBOW.bmp" ' )
-    aadd(aSrc,'REINDEX     BITMAP  "Res\REINDEX.bmp" ' )
-    aadd(aSrc,'TRASH       BITMAP  "Res\trash.bmp" ' )
-    aadd(aSrc,'TN          BITMAP  "Res\tn.bmp" ' )
-    aadd(aSrc,'TC          BITMAP  "Res\tc.bmp" ' )
-    /*
-    aadd(aSrc,'DATEPICKER  BITMAP  "Res\DATEPICKER.bmp" ' )
-    aadd(aSrc,'CHECKBOX    BITMAP  "Res\CHECKBOX.bmp" ' )
-    aadd(aSrc,'RADIO       BITMAP  "Res\RADIO.bmp" ' )
-    aadd(aSrc,'COMBO       BITMAP  "Res\Combo.bmp" ' )
-    aadd(aSrc,'LABEL       BITMAP  "Res\LABEL.bmp" ' )
-    aadd(aSrc,'BUTTON      BITMAP  "Res\Button.bmp" ' )
-    */
-    Writefile(cFileRc ,aSrc )
-    asize (asrc, 0)
+   IF File(cFileRc)
+      DELETE FILE &(cFileRc)
+   ENDIF
+
+   aadd(aSrc,'AAAAZZZZ    ICON    "Res\QbG.ico" ' )
+   aadd(aSrc,'1Register   ICON    "Res\QbG.ico" ' )
+   aadd(aSrc,'Tools       BITMAP  "Res\Tools.bmp" ' )
+   aadd(aSrc,'OPTIONS     BITMAP  "Res\Options.bmp" ' )
+   aadd(aSrc,'CANCEL      BITMAP  "Res\cancel.bmp" ' )
+   aadd(aSrc,'EDIT_CLOSE  BITMAP  "Res\EDIT_CLOSE.bmp" ' )
+   aadd(aSrc,'EDIT_DELETE BITMAP  "Res\EDIT_DELETE.bmp" ' )
+   aadd(aSrc,'EDIT_EDIT   BITMAP  "Res\EDIT_EDIT.bmp" ' )
+   aadd(aSrc,'EDIT_FIND   BITMAP  "Res\EDIT_FIND.bmp" ' )
+   aadd(aSrc,'EDIT_NEW    BITMAP  "Res\EDIT_NEW.bmp" ' )
+   aadd(aSrc,'EDIT_PRINT  BITMAP  "Res\EDIT_PRINT.bmp" ' )
+   aadd(aSrc,'GO_FIRST    BITMAP  "Res\GO_FIRST.bmp" ' )
+   aadd(aSrc,'GO_LAST     BITMAP  "Res\GO_LAST.bmp" ' )
+   aadd(aSrc,'GO_NEXT     BITMAP  "Res\GO_NEXT.bmp" ' )
+   aadd(aSrc,'GO_PREV     BITMAP  "Res\GO_PREV.bmp" ' )
+   aadd(aSrc,'OK          BITMAP  "Res\OK.bmp" ' )
+   aadd(aSrc,'RAImBOW     BITMAP  "RES\RAImBOW.bmp" ' )
+   aadd(aSrc,'REINDEX     BITMAP  "Res\REINDEX.bmp" ' )
+   aadd(aSrc,'TRASH       BITMAP  "Res\trash.bmp" ' )
+   aadd(aSrc,'TN          BITMAP  "Res\tn.bmp" ' )
+   aadd(aSrc,'TC          BITMAP  "Res\tc.bmp" ' )
+   /*
+   aadd(aSrc,'DATEPICKER  BITMAP  "Res\DATEPICKER.bmp" ' )
+   aadd(aSrc,'CHECKBOX    BITMAP  "Res\CHECKBOX.bmp" ' )
+   aadd(aSrc,'RADIO       BITMAP  "Res\RADIO.bmp" ' )
+   aadd(aSrc,'COMBO       BITMAP  "Res\Combo.bmp" ' )
+   aadd(aSrc,'LABEL       BITMAP  "Res\LABEL.bmp" ' )
+   aadd(aSrc,'BUTTON      BITMAP  "Res\Button.bmp" ' )
+   */
+   Writefile(cFileRc ,aSrc )
+   asize (asrc, 0)
 
    aadd(aSrc,"#include <minigui.ch>" )
    aadd(aSrc,"")
@@ -2052,14 +2093,14 @@ PROCEDURE BuildFile()
    aadd(aSrc,"   PRIVATE aControlsQ:={"+ m->cControlsQ +"}" )
 
    FOR m := 1 TO Len(M->aItems)
-       aadd(aSrc,'   PRIVATE ' + M->aItems[m,4] + ' := ' + M->aItems[m,2] )
+      aadd(aSrc,'   PRIVATE ' + M->aItems[m,4] + ' := ' + M->aItems[m,2] )
    NEXT m
 
    aadd(aSrc,"   PRIVATE aMiDB, sfondo := {0,255,255}" )
    aadd(aSrc,"" )
    aadd(aSrc,"   SET NAVIGATION EXTENDED" )
    aadd(aSrc,"   SET CENTURY ON" )
-//    aadd(aSrc,"   SET AUTOPEN OFF" )     && If you need it, take your comment to this line
+   //    aadd(aSrc,"   SET AUTOPEN OFF" )     && If you need it, take your comment to this line
    aadd(aSrc,"// SET CODEPAGE TO  (your choice)" )
    aadd(aSrc,"   SET DATE ITALIAN" )
    aadd(aSrc,"   SET DELETED ON" )
@@ -2112,7 +2153,7 @@ PROCEDURE BuildFile()
       aadd(aSrc, "      ON INIT ( Win_" + cShortAlias + ".Image_1.picture := '"+ _Picture +"' ,Esc_Quit(), Win_" + cShortAlias + ".Image_1.Refresh) ; " )
    ELSE
       aadd(aSrc, "      ON INIT Esc_Quit() ; ")
-   Endif
+   ENDIF
 
    aadd(aSrc, "      MAIN ")
    aadd(aSrc, "      ON KEY ESCAPE ACTION Win_" + cShortAlias + ".Release")
@@ -2210,10 +2251,10 @@ PROCEDURE BuildFile()
    aadd(aSrc, "")
    aadd(aSrc, "      PaintDisplay_" + cShortAlias + "()")
    aadd(aSrc,"" )
-    IF lImage
-       GetControlPropertyImage('Image_1')
-       aadd(aSrc, "      @ " + _nRow + ","+ _nCol + " IMAGE Image_1 PICTURE '"+ _Picture + "'" + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' STRETCH TRANSPARENT' + " ToolTip '" + _ToolTip + "'")
-   Endif
+   IF lImage
+      GetControlPropertyImage('Image_1')
+      aadd(aSrc, "      @ " + _nRow + ","+ _nCol + " IMAGE Image_1 PICTURE '"+ _Picture + "'" + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' STRETCH TRANSPARENT' + " ToolTip '" + _ToolTip + "'")
+   ENDIF
    aadd(aSrc,"" )
    GetControlProperty('Grid_1')
    aadd(aSrc, "      @ "+ _nRow + ","+ _nCol + " BROWSE Browse_1 ;")
@@ -2226,10 +2267,10 @@ PROCEDURE BuildFile()
 
    cSep := ', '
    m->cWidths := ''
-   For n:= 1 TO nFields 
-        IIF( n = nFields , cSep := '' , )
-        m->cWidths := m->cWidths + ZAPS( Win_1.Grid_1.ColumnWIDTH(n) )+ cSep
-    Next
+   FOR n:= 1 TO nFields
+      IIF( n = nFields , cSep := '' , )
+      m->cWidths := m->cWidths + ZAPS( Win_1.Grid_1.ColumnWIDTH(n) )+ cSep
+   NEXT
 
    aadd(aSrc, "              WIDTHS { " + m->cWidths + "} ;")
    aadd(aSrc, '              BACKCOLOR Sfondo ; ')
@@ -2246,17 +2287,17 @@ PROCEDURE BuildFile()
    aadd(aSrc, "")
    aadd(aSrc, "   DisableField_" + cShortAlias + "()")
 
-    FOR n:= 1 TO nDatePicker
-        aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(n)+ ".Hide")
-    NEXT
+   FOR n:= 1 TO nDatePicker
+      aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(n)+ ".Hide")
+   NEXT
 
-    FOR n:= 1 TO m->nComboBox
-        aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(n)+ ".Hide")
-    NEXT
+   FOR n:= 1 TO m->nComboBox
+      aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(n)+ ".Hide")
+   NEXT
 
-    FOR n:= 1 TO m->nRadioGroup
-        aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(n)+ ".Hide")
-    NEXT
+   FOR n:= 1 TO m->nRadioGroup
+      aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(n)+ ".Hide")
+   NEXT
 
    aadd(aSrc, "")
    aadd(aSrc, "   Win_" + cShortAlias + ".Browse_1.Value := " +m->cAlias+ "->( RecNo() )")
@@ -2276,11 +2317,11 @@ PROCEDURE BuildFile()
 
    aadd(aSrc, "        aMiDB := {;")
 
-    cSep := ",;"
-    FOR n:=1 To nFields
-        IIF( n = nFields , cSep := "}",)
-        aadd(aSrc, "                 " + "{'" + SpaceFix(Field_Name[n] + "',",12) + "'" +Field_Type[n]+ "' , " + StrZero(Field_Len[n],3) + " , "+StrZero(Field_Dec[n],1) + "}" + cSep)
-    NEXT n
+   cSep := ",;"
+   FOR n:=1 To nFields
+      IIF( n = nFields , cSep := "}",)
+      aadd(aSrc, "                 " + "{'" + SpaceFix(Field_Name[n] + "',",12) + "'" +Field_Type[n]+ "' , " + StrZero(Field_Len[n],3) + " , "+StrZero(Field_Dec[n],1) + "}" + cSep)
+   NEXT n
 
    aadd(aSrc, "")
    aadd(aSrc, "   IF nArea == 0")
@@ -2291,32 +2332,32 @@ PROCEDURE BuildFile()
    aadd(aSrc, "")
    aadd(aSrc, "   IF ! FILE( '" + m->cAlias + ".CDX' )")
    aadd(aSrc, "      USE " + m->cAlias + " ALIAS " + m->cAlias + " EXCLUSIVE")
-    FOR n:=1 To nFields
-        IF Field_Type[n] = "C"
-            aadd(aSrc, "      INDEX ON " + SpaceFix( "_field->"+Field_Name[n],25) + "TAG I"+Field_Name[n])
-        ELSEIF Field_Type[n] = "N"
-            aadd(aSrc, "      INDEX ON " + SpaceFix( "STR(_field->"+Field_Name[n] + "," + StrZero(Field_Len[n],3)+")",25) + "TAG I"+Field_Name[n])
-        ELSEIF Field_Type[n] = "D"
-            aadd(aSrc, "      INDEX ON " + SpaceFix( "DTOC(_field->"+Field_Name[n]+")",25) + "TAG I"+Field_Name[n])
-        ELSEIF Field_Type[n] = "L"
-            aadd(aSrc, "      INDEX ON " + SpaceFix("field->"+Field_Name[n],25) + "TAG I"+Field_Name[n])
-*        ELSEIF Field_Type[n] = "M"
-*             nLine--
-        Endif
+   FOR n:=1 To nFields
+      IF Field_Type[n] = "C"
+         aadd(aSrc, "      INDEX ON " + SpaceFix( "_field->"+Field_Name[n],25) + "TAG I"+Field_Name[n])
+      ELSEIF Field_Type[n] = "N"
+         aadd(aSrc, "      INDEX ON " + SpaceFix( "STR(_field->"+Field_Name[n] + "," + StrZero(Field_Len[n],3)+")",25) + "TAG I"+Field_Name[n])
+      ELSEIF Field_Type[n] = "D"
+         aadd(aSrc, "      INDEX ON " + SpaceFix( "DTOC(_field->"+Field_Name[n]+")",25) + "TAG I"+Field_Name[n])
+      ELSEIF Field_Type[n] = "L"
+         aadd(aSrc, "      INDEX ON " + SpaceFix("field->"+Field_Name[n],25) + "TAG I"+Field_Name[n])
+         *        ELSEIF Field_Type[n] = "M"
+         *             nLine--
+      ENDIF
 
-    NEXT n
+   NEXT n
    aadd(aSrc, "      DBCLOSEAREA()")
    aadd(aSrc, "   Endif")
    aadd(aSrc, "")
    aadd(aSrc, "   USE " + m->cAlias + " ALIAS " + m->cAlias + " NEW SHARED")
    aadd(aSrc, "")
 
-    FOR n:=1 To nFields
-        IF Field_Type[n] = "M"
-        ELSE
-            aadd(aSrc, "   " + m->cAlias + "->(ORDSETFOCUS('I" + Field_Name[n] + "'))")
-        Endif
-    NEXT n
+   FOR n:=1 To nFields
+      IF Field_Type[n] = "M"
+      ELSE
+         aadd(aSrc, "   " + m->cAlias + "->(ORDSETFOCUS('I" + Field_Name[n] + "'))")
+      ENDIF
+   NEXT n
 
    aadd(aSrc, "Return")
    aadd(aSrc, '/*')
@@ -2326,10 +2367,10 @@ PROCEDURE BuildFile()
    aadd(aSrc, "*--------------------------------------------------------*")
    aadd(aSrc, "   Win_" + cShortAlias + ".Browse_1.Enabled     := .T.")
    aadd(aSrc, "")
-   
-    FOR n:=1 To nFields
-        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Enabled"),17+nLongControl+1) + ":= .F.")
-    NEXT n
+
+   FOR n:=1 To nFields
+      aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Enabled"),17+nLongControl+1) + ":= .F.")
+   NEXT n
    aadd(aSrc, "")
    aadd(aSrc, "   EnableToolbar_" + cShortAlias + "()")
    aadd(aSrc, "   Win_" + cShortAlias + ".Browse_1.SetFocus")
@@ -2342,10 +2383,10 @@ PROCEDURE BuildFile()
    aadd(aSrc, "   _DefineHotKey("+ W_name + ",0,27,{|| iif(GetProperty ( "+W_Name+', "Toolbar_1" , "SAVE" , "Enabled" ), Canceledit_'+cShortAlias+'(),NIL)} )')
    aadd(aSrc, "   Win_" + cShortAlias + ".Browse_1.Enabled     := .F.")
 
-    nLong := 17+nLongControl+1
-    FOR n:=1 To nFields
-        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Enabled"),nLong) + ":= .T.")
-    NEXT n
+   nLong := 17+nLongControl+1
+   FOR n:=1 To nFields
+      aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Enabled"),nLong) + ":= .T.")
+   NEXT n
 
    aadd(aSrc, "")
    aadd(aSrc, "   Win_" + cShortAlias + ".SAVE.Enabled         := .T.")
@@ -2418,40 +2459,40 @@ PROCEDURE BuildFile()
    aadd(aSrc, "")
 
    nLong := 15+nLongControl+1
-   FOR n = 1 To nFields                              
+   FOR n = 1 To nFields
 
-        IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
-            IF Field_Type[n] = 'C'
-                FOR m := 1 TO Len(M->aItems)
-                    IF M->aItems[m,1] = aControlsOrder[n]
-                        EXIT
-                    Endif
-                NEXT m
-                _caCombo := M->aItems[m,4]
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= AScan(" + _caCombo + ','+m->cAlias+ "->" + Field_Name[n] + ')')
-            ELSE
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= " +m->cAlias+ "->" + Field_Name[n])
-            Endif  
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-            IF Field_Type[n] = 'C'
-                FOR m := 1 TO Len(M->aItems)
-                    IF M->aItems[m,1] = aControlsOrder[n]
-                        EXIT
-                    Endif
-                NEXT m
-                _caCombo := M->aItems[m,4]
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= AScan("+ _caCombo + ','+m->cAlias+ "->" + Field_Name[n] + ')')
-            ELSE
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= " +m->cAlias+ "->" + Field_Name[n])
-            Endif
-        ELSE
+      IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
+         IF Field_Type[n] = 'C'
+            FOR m := 1 TO Len(M->aItems)
+               IF M->aItems[m,1] = aControlsOrder[n]
+                  EXIT
+               ENDIF
+            NEXT m
+            _caCombo := M->aItems[m,4]
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= AScan(" + _caCombo + ','+m->cAlias+ "->" + Field_Name[n] + ')')
+         ELSE
             aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= " +m->cAlias+ "->" + Field_Name[n])
-        Endif
+         ENDIF
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+         IF Field_Type[n] = 'C'
+            FOR m := 1 TO Len(M->aItems)
+               IF M->aItems[m,1] = aControlsOrder[n]
+                  EXIT
+               ENDIF
+            NEXT m
+            _caCombo := M->aItems[m,4]
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= AScan("+ _caCombo + ','+m->cAlias+ "->" + Field_Name[n] + ')')
+         ELSE
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= " +m->cAlias+ "->" + Field_Name[n])
+         ENDIF
+      ELSE
+         aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),nLong) + ":= " +m->cAlias+ "->" + Field_Name[n])
+      ENDIF
    NEXT n
 
    IF lImage
       aadd(aSrc, "   Foto" + cShortAlias + "()")
-   Endif
+   ENDIF
 
    aadd(aSrc, "Return")
    aadd(aSrc, '/*')
@@ -2460,25 +2501,25 @@ PROCEDURE BuildFile()
    aadd(aSrc, "PROCEDURE CancelEDIT_" + cShortAlias)
    aadd(aSrc, "*--------------------------------------------------------*")
 
-    i := 1
-    j := 1
-    k := 1
+   i := 1
+   j := 1
+   k := 1
 
-    FOR n:=1 To nFields //Len(aControlsOrder)
-        IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Hide")
-            i++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Hide")
-            j++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Hide")
-            k++
-        Endif
-    NEXT n
+   FOR n:=1 To nFields //Len(aControlsOrder)
+      IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Hide")
+         i++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Hide")
+         j++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Hide")
+         k++
+      ENDIF
+   NEXT n
 
    aadd(aSrc, "   DisableField_" + cShortAlias + "()")
    aadd(aSrc, "   LoadData_" + cShortAlias + "()")
@@ -2506,33 +2547,33 @@ PROCEDURE BuildFile()
 
    nLong := nLongDBF+2+nLongField+1
    FOR n:=1 To nFields
-        IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
-            IF Field_Type[n] = 'C'
-                FOR m := 1 TO Len(M->aItems)
-                    IF M->aItems[m,1] = aControlsOrder[n]
-                        EXIT
-                    Endif
-                NEXT m
-                _caCombo := M->aItems[m,4]
-                aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= "+ _caCombo +"["+ "Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value" + "]")
-            ELSE
-                aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value")
-            Endif
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-            IF Field_Type[n] = 'C'
-                FOR m := 1 TO Len(M->aItems)
-                    IF M->aItems[m,1] = aControlsOrder[n]
-                        EXIT
-                    Endif
-                NEXT m
-                _caCombo := M->aItems[m,4]
-                aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= "+ _caCombo +"["+ "Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value" + "]")
-            ELSE
-                aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value")
-            Endif
-        ELSE
+      IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
+         IF Field_Type[n] = 'C'
+            FOR m := 1 TO Len(M->aItems)
+               IF M->aItems[m,1] = aControlsOrder[n]
+                  EXIT
+               ENDIF
+            NEXT m
+            _caCombo := M->aItems[m,4]
+            aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= "+ _caCombo +"["+ "Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value" + "]")
+         ELSE
             aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value")
-        Endif
+         ENDIF
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+         IF Field_Type[n] = 'C'
+            FOR m := 1 TO Len(M->aItems)
+               IF M->aItems[m,1] = aControlsOrder[n]
+                  EXIT
+               ENDIF
+            NEXT m
+            _caCombo := M->aItems[m,4]
+            aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= "+ _caCombo +"["+ "Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value" + "]")
+         ELSE
+            aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value")
+         ENDIF
+      ELSE
+         aadd(aSrc, "   " + SpaceFix(m->cAlias + "->" + Field_Name[n],nLong) + ":= Win_" + cShortAlias + "."+ aControlsOrder[n] +".Value")
+      ENDIF
    NEXT n
 
    aadd(aSrc, "")
@@ -2554,32 +2595,32 @@ PROCEDURE BuildFile()
    aadd(aSrc, "")
 
    FOR n:=1 To nFields
-        IF n = 1
-            IF Field_Type[n] = "C"
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= '' ")
-            ELSEIF Field_Type[n] = "N"
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= " + m->cAlias+ "->" +  Field_Name[n] + " + 1")
-            Endif
-        ELSE
-            IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO' .OR. GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-                aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= 1")
-            ELSE
-                DO CASE
-                   CASE Field_Type[n] = "C" .OR. Field_Type[n] = "M"
-                        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= ''")
-                        
-                   CASE Field_Type[n] = "N"
-                        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= 0")
-                
-                   CASE Field_Type[n] = "D"
-                        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= CTOD('00/00/00')")
-                   
-                   CASE Field_Type[n] = "L"
-                        aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= .T.")
-                EndCase
-            Endif
-        Endif
-    NEXT n
+      IF n = 1
+         IF Field_Type[n] = "C"
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= '' ")
+         ELSEIF Field_Type[n] = "N"
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= " + m->cAlias+ "->" +  Field_Name[n] + " + 1")
+         ENDIF
+      ELSE
+         IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO' .OR. GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+            aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= 1")
+         ELSE
+            DO CASE
+            CASE Field_Type[n] = "C" .OR. Field_Type[n] = "M"
+               aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= ''")
+
+            CASE Field_Type[n] = "N"
+               aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= 0")
+
+            CASE Field_Type[n] = "D"
+               aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= CTOD('00/00/00')")
+
+            CASE Field_Type[n] = "L"
+               aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + aControlsOrder[n] + ".Value"),15+nLongControl+1) + ":= .T.")
+            ENDCASE
+         ENDIF
+      ENDIF
+   NEXT n
    aadd(aSrc, "")
    aadd(aSrc, "   EnableField_" + cShortAlias + "()")
    aadd(aSrc, "   Win_" + cShortAlias + "." + cControlSF + ".SetFocus")
@@ -2607,36 +2648,36 @@ PROCEDURE BuildFile()
    aadd(aSrc, "*--------------------------------------------------------*")
    aadd(aSrc, "   Win_" + cShortAlias + ".StatusBar.Item(1) := 'Query.' ")
 
-    j := 1
-    k := 1
-    FOR n:=1 To nFields //LEN(aControlsOrder)
-        IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Show")
-            i++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Show")
-            j++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Show")
-            k++
-        Endif
-    NEXT n
+   j := 1
+   k := 1
+   FOR n:=1 To nFields //LEN(aControlsOrder)
+      IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Show")
+         i++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Show")
+         j++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Hide")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Show")
+         k++
+      ENDIF
+   NEXT n
 
    aadd(aSrc, "")
    nLong := 15+m->nLongControlQ+1
    FOR n:=1 To nFields
-        IF Field_Type[n] = "C" .OR. Field_Type[n] = "M"
-           aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= ''")
-        ELSEIF Field_Type[n] = "N"
-           aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= 0")
-        ELSEIF Field_Type[n] = "D"
-           aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= CTOD('00/00/00')")
-        ELSEIF Field_Type[n] = "L"
-           aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= .F.")
-        Endif
+      IF Field_Type[n] = "C" .OR. Field_Type[n] = "M"
+         aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= ''")
+      ELSEIF Field_Type[n] = "N"
+         aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= 0")
+      ELSEIF Field_Type[n] = "D"
+         aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= CTOD('00/00/00')")
+      ELSEIF Field_Type[n] = "L"
+         aadd(aSrc, "   "+ SpaceFix(("Win_" + cShortAlias + "." + m->aControlsQ[n] + ".Value"),nLong) + ":= .F.")
+      ENDIF
    NEXT n
    aadd(aSrc, "")
    aadd(aSrc, "   EnableField_" + cShortAlias + "()")
@@ -2661,123 +2702,123 @@ PROCEDURE BuildFile()
    aadd(aSrc, "PROCEDURE PaintDisplay_" + cShortAlias)
    aadd(aSrc, "*--------------------------------------------------------*")
 
-    FOR n := 1 TO Len(aControlsWin_1)
-        IF GETCONTROLTYPE(aControlsWin_1[n],'Win_1') = 'LABEL'
-            GetControlProperty(aControlsWin_1[n])
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol+ ' LABEL ' + aControlsWin_1[n] + ' VALUE ' + '"' + _Value + '"'+ ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"')
-        Endif
-    NEXT
+   FOR n := 1 TO Len(aControlsWin_1)
+      IF GETCONTROLTYPE(aControlsWin_1[n],'Win_1') = 'LABEL'
+         GetControlProperty(aControlsWin_1[n])
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol+ ' LABEL ' + aControlsWin_1[n] + ' VALUE ' + '"' + _Value + '"'+ ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"')
+      ENDIF
+   NEXT
 
-    i := 1
-    j := 1
-    k := 1
-    FOR n := 1 TO Len(aControlsOrder)
+   i := 1
+   j := 1
+   k := 1
+   FOR n := 1 TO Len(aControlsOrder)
 
-        SWITCH GETCONTROLTYPE(aControlsOrder[n],'Win_1')
-            case 'TEXT'
-            cControl := aControlsOrder[n]
-            GetControlProperty(aControlsOrder[n])
-            FOR m := 1 TO Len(m->aCaseConvert)
-                IF m->aCaseConvert[m,1] = cControl
-                    EXIT
-                Endif
-            NEXT m
-            _CaseConvert         := m->aCaseConvert[m,2]
-            IF Len(_CaseConvert) > 0
-                IF _CaseConvert = 'NONE'
-                    _CaseConvert:= ''
-                ELSE
-                    _CaseConvert :=  _CaseConvert + 'CASE'
-                Endif
-            Endif
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" ' + _CaseConvert)
-            EXIT
+      SWITCH GETCONTROLTYPE(aControlsOrder[n],'Win_1')
+      CASE 'TEXT'
+         cControl := aControlsOrder[n]
+         GetControlProperty(aControlsOrder[n])
+         FOR m := 1 TO Len(m->aCaseConvert)
+            IF m->aCaseConvert[m,1] = cControl
+               EXIT
+            ENDIF
+         NEXT m
+         _CaseConvert         := m->aCaseConvert[m,2]
+         IF Len(_CaseConvert) > 0
+            IF _CaseConvert = 'NONE'
+               _CaseConvert:= ''
+            ELSE
+               _CaseConvert :=  _CaseConvert + 'CASE'
+            ENDIF
+         ENDIF
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" ' + _CaseConvert)
+         EXIT
 
-        CASE 'NUMTEXT'
-            cControl:= aControlsOrder[n]
-            GetControlProperty(aControlsOrder[n])
-            FOR m := 1 TO Len(m->aInputMask)
-                IF m->aInputMask[m,1] = cControl
-                   EXIT
-                Endif
-            NEXT m
-            _InputMask     := m->aInputMask[m,2]
-            IF Len(_InputMask) > 0
-               _InputMask := 'INPUTMASK ' + _InputMask
-            Endif
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX ' + aControlsOrder[n] + ' WIDTH ' + _nWidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' NUMERIC ' + _InputMask + ' RIGHTALIGN')
-            EXIT
+      CASE 'NUMTEXT'
+         cControl:= aControlsOrder[n]
+         GetControlProperty(aControlsOrder[n])
+         FOR m := 1 TO Len(m->aInputMask)
+            IF m->aInputMask[m,1] = cControl
+               EXIT
+            ENDIF
+         NEXT m
+         _InputMask     := m->aInputMask[m,2]
+         IF Len(_InputMask) > 0
+            _InputMask := 'INPUTMASK ' + _InputMask
+         ENDIF
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX ' + aControlsOrder[n] + ' WIDTH ' + _nWidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' NUMERIC ' + _InputMask + ' RIGHTALIGN')
+         EXIT
 
-        CASE 'RADIOGROUP'
-            GetControlProperty(aControlsOrder[n])
-            FOR m := 1 TO Len(M->aItems)
-                IF M->aItems[m,1] = aControlsOrder[n]
-                   EXIT
-                Endif
-            NEXT m
-            _caCombo  := M->aItems[m,4]
-            _nSpacing := M->aItems[m,3]
-            aadd(aSrc, '   @ ' + _nRow + ',' + _nCol +' RADIOGROUP ' + aControlsOrder[n] + ' OPTIONS ' + _caCombo + ' WIDTH ' + _nwidth + ' SPACING ' + _nSpacing + ' BACKCOLOR sfondo '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' TRANSPARENT HORIZONTAL ')
-            IF n <= Len(Field_Len)
-               nPos := AScan(aControlsOrder,aControlsOrder[n])
-               *  MsgInfo(nPos)
-               nLargo := Field_Len[nPos] * 10 + 10
-               IF Field_Type[nPos] = "C"
-                   aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextRadio_' + ZAPS(j) + ' WIDTH ' + _nwidth + ' HEIGHT 24'  + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut)
-               ELSEIF Field_Type[nPos] = "N"
-                   aadd(aSrc, '   @ ' + _nRow + ','+ _nCol  + ' TEXTBOX TextRadio_' + ZAPS(j) + ' WIDTH ' + ZAPS(nLargo) + ' HEIGHT 24' + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + 'NUMERIC' + ' RIGHTALIGN')
-               Endif
-               j++
-            Endif
-            EXIT
+      CASE 'RADIOGROUP'
+         GetControlProperty(aControlsOrder[n])
+         FOR m := 1 TO Len(M->aItems)
+            IF M->aItems[m,1] = aControlsOrder[n]
+               EXIT
+            ENDIF
+         NEXT m
+         _caCombo  := M->aItems[m,4]
+         _nSpacing := M->aItems[m,3]
+         aadd(aSrc, '   @ ' + _nRow + ',' + _nCol +' RADIOGROUP ' + aControlsOrder[n] + ' OPTIONS ' + _caCombo + ' WIDTH ' + _nwidth + ' SPACING ' + _nSpacing + ' BACKCOLOR sfondo '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' TRANSPARENT HORIZONTAL ')
+         IF n <= Len(Field_Len)
+            nPos := AScan(aControlsOrder,aControlsOrder[n])
+            *  MsgInfo(nPos)
+            nLargo := Field_Len[nPos] * 10 + 10
+            IF Field_Type[nPos] = "C"
+               aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextRadio_' + ZAPS(j) + ' WIDTH ' + _nwidth + ' HEIGHT 24'  + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut)
+            ELSEIF Field_Type[nPos] = "N"
+               aadd(aSrc, '   @ ' + _nRow + ','+ _nCol  + ' TEXTBOX TextRadio_' + ZAPS(j) + ' WIDTH ' + ZAPS(nLargo) + ' HEIGHT 24' + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + 'NUMERIC' + ' RIGHTALIGN')
+            ENDIF
+            j++
+         ENDIF
+         EXIT
 
-        CASE 'COMBO'
-            GetControlPropertyDate(aControlsOrder[n])
-            FOR m := 1 TO Len(M->aItems)
-                IF M->aItems[m,1] = aControlsOrder[n]
-                    EXIT
-                Endif
-            NEXT m
-            _caCombo := M->aItems[m,4]
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' COMBOBOX ' + aControlsOrder[n] + ' VALUE 1 ' + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight +' ITEMS '+ _caCombo + ' FONT ' + '"' + _FontName  + '"' + ' SIZE ' + _FontSize)
-            IF n <= Len(Field_Len)
-                nPos := AScan(aControlsOrder,aControlsOrder[n])
-                nLargo := Field_Len[nPos] * 10 + 10
-                IF Field_Type[nPos] = "C"
-                    aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextCombo_' + ZAPS(i) + ' WIDTH ' + _nwidth + ' HEIGHT 24' + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut)
-                ELSEIF Field_Type[nPos] = "N"
-                    aadd(aSrc, '   @ ' + _nRow + ','+ _nCol + ' TEXTBOX TextCombo_' + ZAPS(i) + ' WIDTH ' + ZAPS(nLargo) + ' HEIGHT 24' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + 'NUMERIC' + ' RIGHTALIGN')
-                Endif
-                i++
-            Endif
-            EXIT
+      CASE 'COMBO'
+         GetControlPropertyDate(aControlsOrder[n])
+         FOR m := 1 TO Len(M->aItems)
+            IF M->aItems[m,1] = aControlsOrder[n]
+               EXIT
+            ENDIF
+         NEXT m
+         _caCombo := M->aItems[m,4]
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' COMBOBOX ' + aControlsOrder[n] + ' VALUE 1 ' + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight +' ITEMS '+ _caCombo + ' FONT ' + '"' + _FontName  + '"' + ' SIZE ' + _FontSize)
+         IF n <= Len(Field_Len)
+            nPos := AScan(aControlsOrder,aControlsOrder[n])
+            nLargo := Field_Len[nPos] * 10 + 10
+            IF Field_Type[nPos] = "C"
+               aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextCombo_' + ZAPS(i) + ' WIDTH ' + _nwidth + ' HEIGHT 24' + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut)
+            ELSEIF Field_Type[nPos] = "N"
+               aadd(aSrc, '   @ ' + _nRow + ','+ _nCol + ' TEXTBOX TextCombo_' + ZAPS(i) + ' WIDTH ' + ZAPS(nLargo) + ' HEIGHT 24' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + 'NUMERIC' + ' RIGHTALIGN')
+            ENDIF
+            i++
+         ENDIF
+         EXIT
 
-        CASE 'DATEPICK'
-            GetControlPropertyDate(aControlsOrder[n])
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' DATEPICKER ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" BACKCOLOR sfondo')
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextDate_' + ZAPS(k) + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR sfondo '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' DATE ')
-            k++
-            EXIT
+      CASE 'DATEPICK'
+         GetControlPropertyDate(aControlsOrder[n])
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' DATEPICKER ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" BACKCOLOR sfondo')
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' TEXTBOX TextDate_' + ZAPS(k) + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR sfondo '+ ' FONTCOLOR { ' + _ColorF + ' } ' + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"' + ' DATE ')
+         k++
+         EXIT
 
-        CASE 'CHECKBOX'
-            GetControlProperty(aControlsOrder[n])
-            _Caption       := GetProperty ('Win_1' ,aControlsOrder[n] ,'Caption')
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' CHECKBOX ' + aControlsOrder[n] + ' CAPTION '+'"'+  _Caption +'"'+ ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" ' + ' TRANSPARENT ')
-            EXIT
+      CASE 'CHECKBOX'
+         GetControlProperty(aControlsOrder[n])
+         _Caption       := GetProperty ('Win_1' ,aControlsOrder[n] ,'Caption')
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' CHECKBOX ' + aControlsOrder[n] + ' CAPTION '+'"'+  _Caption +'"'+ ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '" ' + ' TRANSPARENT ')
+         EXIT
 
-        CASE 'EDIT'
-            GetControlProperty(aControlsOrder[n])
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' EDITBOX ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"')
-            EXIT
+      CASE 'EDIT'
+         GetControlProperty(aControlsOrder[n])
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' EDITBOX ' + aControlsOrder[n] + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight + ' BACKCOLOR { ' + _ColorB + ' } '+ ' FONTCOLOR { ' + _ColorF + ' } '  + ' FONT '  + '"' + _FontName  + '"' + ' SIZE ' + _FontSize + ' ' + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' +_ToolTip + '"')
+         EXIT
 
-        CASE 'BUTTON'
-            GetControlPropertyButt(aControlsOrder[n])
-            aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' BUTTON ' + aControlsOrder[n] +' CAPTION '+ '"'+ _Caption + '"' + ' ACTION ' + _Act + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight  +  ' FONT ' +'"'+ _FontName  +'"'+ ' SIZE ' + _FontSize  + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' + _ToolTip + '"')
-            EXIT
+      CASE 'BUTTON'
+         GetControlPropertyButt(aControlsOrder[n])
+         aadd(aSrc, '   @ ' + _nRow + ','+ _nCol +' BUTTON ' + aControlsOrder[n] +' CAPTION '+ '"'+ _Caption + '"' + ' ACTION ' + _Act + ' WIDTH ' + _nwidth + ' HEIGHT ' + _nheight  +  ' FONT ' +'"'+ _FontName  +'"'+ ' SIZE ' + _FontSize  + _FontBold + _FontItalic + _FontUnderLine + _FontStrikeOut + ' ToolTip ' + '"' + _ToolTip + '"')
+         EXIT
 
-        EndSwitch
+      ENDSWITCH
 
-    NEXT n
+   NEXT n
 
    aadd(aSrc, "Return")
    aadd(aSrc, '/*')
@@ -2826,23 +2867,23 @@ PROCEDURE BuildFile()
    aadd(aSrc, "      Endif")
    aadd(aSrc, "   Endif")
 
-    i := 1
-    j := 1
-    k := 1
-    FOR n:=1 To nFields //Len(aControlsOrder)
-        IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Hide")
-            i++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Hide")
-            j++
-        ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
-            aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
-            aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Hide")
-        Endif
-    NEXT n
+   i := 1
+   j := 1
+   k := 1
+   FOR n:=1 To nFields //Len(aControlsOrder)
+      IF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'RADIOGROUP'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextRadio_" + ZAPS(i)+ ".Hide")
+         i++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'COMBO'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextCombo_" + ZAPS(j)+ ".Hide")
+         j++
+      ELSEIF GETCONTROLTYPE(aControlsOrder[n],'Win_1') = 'DATEPICK'
+         aadd(aSrc, "   Win_" + cShortAlias + "." + aControlsOrder[n] + ".Show")
+         aadd(aSrc, "   Win_" + cShortAlias + ".TextDate_" + ZAPS(k)+ ".Hide")
+      ENDIF
+   NEXT n
 
    aadd(aSrc, "   DisableField_" + cShortAlias + "()")
    aadd(aSrc, "   Win_" + cShortAlias + ".Browse_1.Value := RecNo()")
@@ -2899,7 +2940,7 @@ PROCEDURE BuildFile()
       aadd(aSrc, "    Endif")
       aadd(aSrc, "    Win_" + cShortAlias + ".Image_1.Picture := Foto" + cShortAlias + "")
       aadd(aSrc, "Return")
-   Endif)
+   ENDIF)
    aadd(aSrc, '/*')
    aadd(aSrc, "*/")
    aadd(aSrc, "*--------------------------------------------------------*")
@@ -3011,13 +3052,13 @@ PROCEDURE BuildFile()
    aadd(aSrc, "      sfondo := m_cor")
    aadd(aSrc, '      SetProperty ( '+W_Name+', "BROWSE_1" , "backcolor" ,sfondo)')
    aadd(aSrc, "")
-   FOR each n in m->aControlList
-       if "CheckBox" $ N
-          aadd(aSrc, '      SetProperty ( '+W_Name+', "'+n+'" , "backcolor" ,sfondo)')
-       elseif "RadioGroup" $ n
-          aadd(aSrc, '      SetProperty ( '+W_Name+', "'+n+'" , "backcolor" ,sfondo)')
-       Endif
-   Next
+   FOR EACH n in m->aControlList
+      IF "CheckBox" $ N
+         aadd(aSrc, '      SetProperty ( '+W_Name+', "'+n+'" , "backcolor" ,sfondo)')
+      ELSEIF "RadioGroup" $ n
+         aadd(aSrc, '      SetProperty ( '+W_Name+', "'+n+'" , "backcolor" ,sfondo)')
+      ENDIF
+   NEXT
    aadd(aSrc, '      SetProperty ( '+W_Name+', "BackColor" , Sfondo )')
    aadd(aSrc, '      DoMethod ( '+W_Name+', "Hide" )')
    aadd(aSrc, '      DoMethod ( '+W_Name+', "show" )')
@@ -3031,104 +3072,106 @@ PROCEDURE BuildFile()
    dbCommitAll()
    dbCloseAll()
 
-   execute file(cfilebat) Minimize
+   EXECUTE FILE(cfilebat) Minimize
 
    MessageBoxTimeout ('Working in progress !!', 'Please wait ...', MB_OK, 1500 )
 
    asize(m->aControlList,0)
    FOR n:=1 TO Form_1.Combo_2.ItemCount
-       Aadd(m->aControlList,Form_1.Combo_2.Item(n))
-   Next
+      Aadd(m->aControlList,Form_1.Combo_2.Item(n))
+   NEXT
 
    Ferase(cFileBat)
 
-Return
+   RETURN
 
-/*
-*/
-*-----------------------------------------------------------------------------*
+   /*
+   */
+
 FUNCTION SpaceFix(cStr,n)
-*-----------------------------------------------------------------------------*
-LOCAL cSpace, nLong
-      nLong  := Len(AllTrim(cStr))
-      cSpace := cStr + Space(n-nLong)
-Return cSpace
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL cSpace, nLong
+
+   nLong  := Len(AllTrim(cStr))
+   cSpace := cStr + Space(n-nLong)
+
+   RETURN cSpace
+   /*
+   */
+
 PROCEDURE Arriba(lArriba)
-*-----------------------------------------------------------------------------*
-    LOCAL nRow    := Posicion.Grid_2.Value
-    LOCAL n1Rows  := nRow
-    LOCAL n2Rows, c2Type, c2Control
-    LOCAL c1Control :=  Posicion.Grid_2.Cell(n1Rows,1)
-    LOCAL c1Type    :=  Posicion.Grid_2.Cell(n1Rows,2)
 
-    IF nRow == 0
-       msgbox('There is no item selected !')
-       Return
-    Endif
+   LOCAL nRow    := Posicion.Grid_2.Value
+   LOCAL n1Rows  := nRow
+   LOCAL n2Rows, c2Type, c2Control
+   LOCAL c1Control :=  Posicion.Grid_2.Cell(n1Rows,1)
+   LOCAL c1Type    :=  Posicion.Grid_2.Cell(n1Rows,2)
 
-    IF lArriba = .T.
-       IF nRow == 1
-          msgStop('CAN NOT MOVE MORE !')
-          Return
-       ELSE
-          n2Rows   := n1Rows - 1
-       Endif
-    ELSE
-       IF nRow == Posicion.Grid_2.ItemCount
-          msgStop('CAN NOT MOVE MORE !')
-          Posicion.Grid_2.SetFocus
-          Return
-       ELSE
-          n2Rows   := n1Rows + 1
-       Endif
-    Endif
+   IF nRow == 0
+      msgbox('There is no item selected !')
 
-    c2Control := Posicion.Grid_2.Cell(n2Rows,1)
-    c2Type    := Posicion.Grid_2.Cell(n2Rows,2)
+      RETURN
+   ENDIF
 
-    Posicion.Grid_2.Cell(n1Rows,1) := c2Control
-    Posicion.Grid_2.Cell(n1Rows,2) := c2Type
+   IF lArriba = .T.
+      IF nRow == 1
+         msgStop('CAN NOT MOVE MORE !')
 
-    Posicion.Grid_2.Cell(n2Rows,1) := c1Control
-    Posicion.Grid_2.Cell(n2Rows,2) := c1Type
+         RETURN
+      ELSE
+         n2Rows   := n1Rows - 1
+      ENDIF
+   ELSE
+      IF nRow == Posicion.Grid_2.ItemCount
+         msgStop('CAN NOT MOVE MORE !')
+         Posicion.Grid_2.SetFocus
 
-    Posicion.Grid_1.VALUE := n2Rows
-    Posicion.Grid_2.VALUE := n2Rows
-    Posicion.Grid_2.SetFocus
+         RETURN
+      ELSE
+         n2Rows   := n1Rows + 1
+      ENDIF
+   ENDIF
 
-Return
-*-----------------------------------------------------------------------------*
-****************************************************************
-*   GENERAL FUNCTIONS for Move and Resize Control With Cursor  *
-****************************************************************
-/*
-*/
-*-----------------------------------------------------------------------------*
-PROCEDURE OnKeyPress( nVKey,GF ) 
-*-----------------------------------------------------------------------------*
+   c2Control := Posicion.Grid_2.Cell(n2Rows,1)
+   c2Type    := Posicion.Grid_2.Cell(n2Rows,2)
+
+   Posicion.Grid_2.Cell(n1Rows,1) := c2Control
+   Posicion.Grid_2.Cell(n1Rows,2) := c2Type
+
+   Posicion.Grid_2.Cell(n2Rows,1) := c1Control
+   Posicion.Grid_2.Cell(n2Rows,2) := c1Type
+
+   Posicion.Grid_1.VALUE := n2Rows
+   Posicion.Grid_2.VALUE := n2Rows
+   Posicion.Grid_2.SetFocus
+
+   RETURN
+   *   GENERAL FUNCTIONS for Move and Resize Control With Cursor  *
+   /*
+   */
+
+PROCEDURE OnKeyPress( nVKey,GF )
+
    DEFAULT GF TO .F.
 
-   do case
-      case nVKey == VK_F3   // Info
-           HMG_InfoControlWithCursor()
+   DO CASE
+   CASE nVKey == VK_F3   // Info
+      HMG_InfoControlWithCursor()
 
-      case nVKey == VK_F5   // Move
-           HMG_MoveControlWithCursor( GF )
+   CASE nVKey == VK_F5   // Move
+      HMG_MoveControlWithCursor( GF )
 
-      case nVKey == VK_F9   // Resize
-           HMG_ResizeControlWithCursor( Gf )
+   CASE nVKey == VK_F9   // Resize
+      HMG_ResizeControlWithCursor( Gf )
 
-   Endcase
+   ENDCASE
 
-RETURN
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
 PROCEDURE HMG_InfoControlWithCursor
-*-----------------------------------------------------------------------------*
+
    LOCAL hWnd, aPos
    LOCAL cFormName, cControlName
 
@@ -3142,29 +3185,31 @@ PROCEDURE HMG_InfoControlWithCursor
          "Row     : ",padl( GetProperty ( cFormName, cControlName, "Row" ),10),hb_osNewLine(), ;
          "Col       : ", padl(GetProperty ( cFormName, cControlName, "Col" ),10),hb_osNewLine(), ;
          "Width  : ", padl(GetProperty ( cFormName, cControlName, "Width" ),10),hb_osNewLine(), ;
-         "Height : ", padl(GetProperty ( cFormName, cControlName, "Height" ),10) },"Control Info" ) 
-   Endif
+         "Height : ", padl(GetProperty ( cFormName, cControlName, "Height" ),10) },"Control Info" )
+   ENDIF
 
-Return
-/*
-*/
-#If 0
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+   #If 0
+
 PROCEDURE MyControl()
-*-----------------------------------------------------------------------------*
-LOCAL hWnd, nCol, nRow
-LOCAL cFormName, cControlName
-    GetCursorPos (@nCol, @nRow)
-    hWnd := WindowFromPoint (nCol, nRow)
-    GetControlNameByHandle (hWnd, @cControlName, @cFormName)
-    SetProperty (  "Form_1", "Label_d", "VALUE", cControlName )
-Return
-#Endif
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   LOCAL hWnd, nCol, nRow
+   LOCAL cFormName, cControlName
+
+   GetCursorPos (@nCol, @nRow)
+   hWnd := WindowFromPoint (nCol, nRow)
+   GetControlNameByHandle (hWnd, @cControlName, @cFormName)
+   SetProperty (  "Form_1", "Label_d", "VALUE", cControlName )
+
+   RETURN
+   #endif
+   /*
+   */
+
 PROCEDURE HMG_MoveControlWithCursor ( Gf )
-*-----------------------------------------------------------------------------*
+
    LOCAL hWnd, aPos ,SnapR, SnapC
    LOCAL cFormName, cControlName
    LOCAL nGrid := Form_1.GridSpinner.Value
@@ -3172,9 +3217,9 @@ PROCEDURE HMG_MoveControlWithCursor ( Gf )
 
    DEFAULT Gf TO .F.
 
-   if gf
+   IF gf
       PutMouse()   // Clear action when CONTEXT MENU is used
-   Endif
+   ENDIF
 
    aPos := GetCursorPos ()
    hWnd := WindowFromPoint ( { aPos[ 2 ], aPos[ 1 ] } )
@@ -3182,28 +3227,29 @@ PROCEDURE HMG_MoveControlWithCursor ( Gf )
       GetControlNameByHandle ( hWnd, @cControlName, @cFormName )
       DoMethod( cFormName, cControlName, "SetFocus" )
       HMG_InterActiveMove  ( hWnd )
-      aPos := ScreenToClient ( GetFormHandle( cFormName ), GetWindowCol (hWnd ), GetWindowRow ( hWnd ) ) 
+      aPos := ScreenToClient ( GetFormHandle( cFormName ), GetWindowCol (hWnd ), GetWindowRow ( hWnd ) )
       SetProperty ( cFormName, cControlName, "Col", aPos[ 1 ] )
       SetProperty ( cFormName, cControlName, "Row", aPos[ 2 ] )
 
-      if nGrid > 0 .and. Snap
+      IF nGrid > 0 .and. Snap
          SnapR := Round(_GetControlRow( cControlName, cFormName )/nGrid,0) * nGrid
          SnapC := Round(_GetControlCol( cControlName, cFormName )/nGrid,0) * nGrid
 
          _SetControlSizePos( cControlName, cFormName ;
-                             , SnapR ; //, _GetControlRow( cControlName, cFormName ) ;
-                             , SnapC ; //, _GetControlCol( cControlName, cFormName ) ;
-                             , _GetControlWidth( cControlName, cFormName ) ;
-                             , _GetControlHeight( cControlName, cFormName )  )
-      Endif
-   Endif
+            , SnapR ; //, _GetControlRow( cControlName, cFormName ) ;
+            , SnapC ; //, _GetControlCol( cControlName, cFormName ) ;
+            , _GetControlWidth( cControlName, cFormName ) ;
+            , _GetControlHeight( cControlName, cFormName )  )
+      ENDIF
+   ENDIF
    ConfigValores()
-RETURN
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   RETURN
+   /*
+   */
+
 PROCEDURE HMG_ResizeControlWithCursor ( Gf )
-*-----------------------------------------------------------------------------*
+
    LOCAL hWnd, aPos ,snapW,snapH
    LOCAL nWidth, nHeight
    LOCAL cFormName, cControlName
@@ -3212,9 +3258,9 @@ PROCEDURE HMG_ResizeControlWithCursor ( Gf )
 
    DEFAULT Gf TO .F.
 
-   if gf
+   IF gf
       PutMouse()    // Clear action when CONTEXT MENU is used
-   Endif
+   ENDIF
 
    aPos := GetCursorPos ()
    hWnd := WindowFromPoint ( { aPos[ 2 ], aPos[ 1 ] } )
@@ -3227,27 +3273,28 @@ PROCEDURE HMG_ResizeControlWithCursor ( Gf )
       nHeight  := GetWindowHeight ( hWnd )
       SetProperty ( cFormName, cControlName, "Width",  nWidth )
       SetProperty ( cFormName, cControlName, "Height", nHeight )
-      
-      if nGrid > 0  .and. Snap
+
+      IF nGrid > 0  .and. Snap
          SnapW := Round(_GetControlWidth( cControlName, cFormName )/nGrid,0) * nGrid
          SnapH := Round(_GetControlHeight( cControlName, cFormName )/nGrid,0) * nGrid
-         
-         _SetControlSizePos( cControlName, cFormName ;
-                             , _GetControlRow( cControlName, cFormName ) ;
-                             , _GetControlCol( cControlName, cFormName ) ;
-                             , SnapW ;
-                             , SnapH  )     
-      Endif
 
-   Endif
+         _SetControlSizePos( cControlName, cFormName ;
+            , _GetControlRow( cControlName, cFormName ) ;
+            , _GetControlCol( cControlName, cFormName ) ;
+            , SnapW ;
+            , SnapH  )
+      ENDIF
+
+   ENDIF
    ConfigValores()
-RETURN
-/*
-*/
-*------------------------------------------------------------------------------*
-Procedure PutMouse( obj, form, rect )
-*------------------------------------------------------------------------------*
-   Local ocol, orow  
+
+   RETURN
+   /*
+   */
+
+PROCEDURE PutMouse( obj, form, rect )
+
+   LOCAL ocol, orow
 
    DEFAULT form TO "Win_1", rect TO {20,40} , obj to m->aControlList[Form_1.Combo_2.VALUE]
 
@@ -3257,54 +3304,57 @@ Procedure PutMouse( obj, form, rect )
    _SETFOCUS( obj, FORM )
    SETCURSORPOS( ocol, orow )
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
 PROCEDURE DrawGrid()
-*-----------------------------------------------------------------------------*
+
    LOCAL hWnd2, nGrid := Form_1.GridSpinner.Value
 
    IF !IsWindowDefined("Win_1")
-      Return
-   Endif
+
+      RETURN
+   ENDIF
    hWnd2 := GetFormHandle("Win_1")
-   if nGrid > 0
+   IF nGrid > 0
       RedrawWindow( hWnd2 )
       _ControlPos_C_DrawGrid_(hWnd2,nGrid,0,0)
-   Else
+   ELSE
       RedrawWindow( hWnd2 )
-   Endif
-RETURN
-/*
-*/
-*-----------------------------------------------------------------------------*
-PROCEDURE RedrawGrid ()
-*-----------------------------------------------------------------------------*
-LOCAL Width  := BT_ClientAreaWidth  ("Win_1")
-LOCAL Height := BT_ClientAreaHeight ("Win_1")
-LOCAL hDC, BTstruct, nPx := Form_1.GridSpinner.Value, i, j
+   ENDIF
 
-if nPx < 1
-   nPx := Width
-Endif
+   RETURN
+   /*
+   */
+
+PROCEDURE RedrawGrid ()
+
+   LOCAL Width  := BT_ClientAreaWidth  ("Win_1")
+   LOCAL Height := BT_ClientAreaHeight ("Win_1")
+   LOCAL hDC, BTstruct, nPx := Form_1.GridSpinner.Value, i, j
+
+   IF nPx < 1
+      nPx := Width
+   ENDIF
 
    hDC := BT_CreateDC ("Win_1", BT_HDC_INVALIDCLIENTAREA, @BTstruct)
-      FOR i := nPx TO Width STEP nPx
-          FOR j := nPx TO Height STEP nPx
-             BT_DrawSetPixel (hDC, j, i, BLACK)
-          Next
-      Next
+   FOR i := nPx TO Width STEP nPx
+      FOR j := nPx TO Height STEP nPx
+         BT_DrawSetPixel (hDC, j, i, BLACK)
+      NEXT
+   NEXT
    BT_DeleteDC (BTstruct)
 
-RETURN
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function GetControlNameByHandle (hWnd, cControlName, cFormParentName)
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
+FUNCTION GetControlNameByHandle (hWnd, cControlName, cFormParentName)
+
    LOCAL nIndexControlParent, ControlParentHandle
    LOCAL nIndexControl := GetControlIndexByHandle (hWnd)
+
    cControlName := cFormParentName := ""
    IF nIndexControl > 0
       cControlName := GetControlNameByIndex (nIndexControl)
@@ -3312,14 +3362,15 @@ Function GetControlNameByHandle (hWnd, cControlName, cFormParentName)
       IF ControlParentHandle <> 0
          nIndexControlParent := GetFormIndexByHandle (ControlParentHandle)
          cFormParentName     := GetFormNameByIndex (nIndexControlParent)
-      Endif
-   Endif
-Return nIndexControl
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function GetControlIndexByHandle ( hWnd, nControlSubIndex1, nControlSubIndex2)
-*-----------------------------------------------------------------------------*
+      ENDIF
+   ENDIF
+
+   RETURN nIndexControl
+   /*
+   */
+
+FUNCTION GetControlIndexByHandle ( hWnd, nControlSubIndex1, nControlSubIndex2)
+
    LOCAL i, ControlHandle, nIndex := 0
 
    FOR i = 1 TO Len ( _HMG_aControlHandles )
@@ -3327,90 +3378,100 @@ Function GetControlIndexByHandle ( hWnd, nControlSubIndex1, nControlSubIndex2)
       IF HMG_CompareHandle ( hWnd, ControlHandle, @nControlSubIndex1,@nControlSubIndex2 ) == .T.
          nIndex := i
          EXIT
-      Endif
+      ENDIF
    NEXT
 
-RETURN nIndex
-/*
-*/
-*-----------------------------------------------------------------------------*
- FUNCTION HMG_LEN (x)
-*-----------------------------------------------------------------------------*
-    IF HB_ISSTRING(x) .OR. HB_ISCHAR(x) .OR. HB_ISMEMO(x)
-       Return HB_ULEN (x)
-    ELSE
-       Return LEN (x)
-    Endif
-Return NIL
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function HMG_CompareHandle (Handle1, Handle2, nSubIndex1, nSubIndex2)
-*-----------------------------------------------------------------------------*
+   RETURN nIndex
+   /*
+   */
+
+FUNCTION HMG_LEN (x)
+
+   IF HB_ISSTRING(x) .OR. HB_ISCHAR(x) .OR. HB_ISMEMO(x)
+
+      RETURN HB_ULEN (x)
+   ELSE
+
+      RETURN LEN (x)
+   ENDIF
+
+   RETURN NIL
+   /*
+   */
+
+FUNCTION HMG_CompareHandle (Handle1, Handle2, nSubIndex1, nSubIndex2)
+
    LOCAL i,k
-      nSubIndex1 := nSubIndex2 := 0
 
-      IF ValType (Handle1) == "N" .AND. ValType (Handle2) == "N"
-         IF Handle1 == Handle2
-            Return .T.
-         Endif
+   nSubIndex1 := nSubIndex2 := 0
 
-      ELSEIF ValType (Handle1) == "A" .AND. ValType (Handle2) == "N"
-         FOR i = 1 TO HMG_LEN (Handle1)
-            IF Handle1 [i] == Handle2
-               nSubIndex1 := i
-               Return .T.
-            Endif
-         NEXT
+   IF ValType (Handle1) == "N" .AND. ValType (Handle2) == "N"
+      IF Handle1 == Handle2
 
-      ELSEIF ValType (Handle1) == "N" .AND. ValType (Handle2) == "A"
+         RETURN .T.
+      ENDIF
+
+   ELSEIF ValType (Handle1) == "A" .AND. ValType (Handle2) == "N"
+      FOR i = 1 TO HMG_LEN (Handle1)
+         IF Handle1 [i] == Handle2
+            nSubIndex1 := i
+
+            RETURN .T.
+         ENDIF
+      NEXT
+
+   ELSEIF ValType (Handle1) == "N" .AND. ValType (Handle2) == "A"
+      FOR k = 1 TO HMG_LEN (Handle2)
+         IF Handle1 == Handle2 [k]
+            nSubIndex2 := k
+
+            RETURN .T.
+         ENDIF
+      NEXT
+
+   ELSEIF ValType (Handle1) == "A" .AND. ValType (Handle2) == "A"
+      FOR i = 1 TO HMG_LEN (Handle1)
          FOR k = 1 TO HMG_LEN (Handle2)
-            IF Handle1 == Handle2 [k]
+            IF Handle1 [i] == Handle2 [k]
+               nSubIndex1 := i
                nSubIndex2 := k
-               Return .T.
-            Endif
-         NEXT
 
-      ELSEIF ValType (Handle1) == "A" .AND. ValType (Handle2) == "A"
-         FOR i = 1 TO HMG_LEN (Handle1)
-            FOR k = 1 TO HMG_LEN (Handle2)
-               IF Handle1 [i] == Handle2 [k]
-                  nSubIndex1 := i
-                  nSubIndex2 := k
-                  Return .T.
-               Endif
-            NEXT
+               RETURN .T.
+            ENDIF
          NEXT
-      Endif
-Return .F.
-/*
-*/
-*-----------------------------------------------------------------------------*
+      NEXT
+   ENDIF
+
+   RETURN .F.
+   /*
+   */
+
 PROCEDURE Writefile(filename,arrayname)
-*-----------------------------------------------------------------------------*
-   Local f_handle
+
+   LOCAL f_handle
+
    //filename := cFilePath( GetModuleFileName( GetInstance() ) )+filename
    * open file and position pointer at the end of file
    IF VALTYPE(filename) == "C"
-     f_handle := FOPEN(filename,2)
-     *- if not joy opening file, create one
-     IF Ferror() <> 0
-        f_handle := Fcreate(filename,0)
-     ENDIF
-     FSEEK(f_handle,0,2)
+      f_handle := FOPEN(filename,2)
+      *- if not joy opening file, create one
+      IF Ferror() <> 0
+         f_handle := Fcreate(filename,0)
+      ENDIF
+      FSEEK(f_handle,0,2)
    ELSE
-     f_handle := filename
-     FSEEK(f_handle,0,2)
+      f_handle := filename
+      FSEEK(f_handle,0,2)
    ENDIF
 
    IF VALTYPE(arrayname) == "A"
-     * if its an array, do a loop to write it out
-     * msginfo(str(len(arrayname)),"FKF")
-     aeval( Arrayname,{|x|FWRITE(f_handle,x+CRLF )} )
+      * if its an array, do a loop to write it out
+      * msginfo(str(len(arrayname)),"FKF")
+      aeval( Arrayname,{|x|FWRITE(f_handle,x+CRLF )} )
    ELSE
-     * must be a character string - just write it
-     FWRITE(f_handle,arrayname+CRLF )
-     //msgbox(Arrayname,"Array")
+      * must be a character string - just write it
+      FWRITE(f_handle,arrayname+CRLF )
+      //msgbox(Arrayname,"Array")
    ENDIF
 
    * close the file
@@ -3418,32 +3479,33 @@ PROCEDURE Writefile(filename,arrayname)
       Fclose(f_handle)
    ENDIF
 
-RETURN
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
 STATIC FUNCTION m_about()
-*-----------------------------------------------------------------------------*
-Return MsgInfo(padc("Quick Browse Generator" + " - Freeware", 40) + CRLF + ;
-   padc("Copyright (c) 2015 dragancesu",40) + CRLF + CRLF + ;
-   "Improved by Pierpaolo Martinello 2017"+ CRLF + CRLF + ;
-   hb_compiler() + CRLF + ;
-   version() + CRLF + ;
-   substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
-/*
-*/
 
-#xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
+   RETURN MsgInfo(padc("Quick Browse Generator" + " - Freeware", 40) + CRLF + ;
+      padc("Copyright (c) 2015 dragancesu",40) + CRLF + CRLF + ;
+      "Improved by Pierpaolo Martinello 2017"+ CRLF + CRLF + ;
+      hb_compiler() + CRLF + ;
+      version() + CRLF + ;
+      substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
+   /*
+   */
 
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function PickField(aitems,AllF)
-*-----------------------------------------------------------------------------*
-   local aChk := {}, nChk := 0 , rtv := {}, ctitle
-   Private clItem
+   #xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
+      => ;
+      _DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
+
+   /*
+   */
+
+FUNCTION PickField(aitems,AllF)
+
+   LOCAL aChk := {}, nChk := 0 , rtv := {}, ctitle
+   PRIVATE clItem
+
    DEFAULT aItems TO {"Item 1","Item 2","Item 3","Item 4","Item 5"}
    DEFAULT allF TO .F.
    m->clItem := aclone(aitems)
@@ -3452,8 +3514,8 @@ Function PickField(aitems,AllF)
    cTitle := "Field Wizard - Select fields to use"+ iif(allF =.T.,[.],[ ( Max 22 ).] )
 
    DEFINE WINDOW Form_PF AT 97,62 WIDTH 390 HEIGHT 300 ;
-      TITLE ctitle ;
-      WINDOWTYPE MODAL NOSIZE  ON RELEASE rtv:= outVal()
+         TITLE ctitle ;
+         WINDOWTYPE MODAL NOSIZE  ON RELEASE rtv:= outVal()
 
       DEFINE STATUSBAR FONT 'Arial' SIZE 12
          STATUSITEM  '  No Field(s) selected.'
@@ -3468,68 +3530,68 @@ Function PickField(aitems,AllF)
          ITEMHEIGHT 19 ;
          FONT 'Arial' SIZE 9
 
-        DEFINE BUTTONEX BtnAdd
-                        ROW     40
-                        COL     167
-                        WIDTH   25
-                        HEIGHT  21
-                        Caption ">"
-                        FONTBOLD .T.
-                        TOOLTIP 'Add Selected Field'
-                        ONCLICK Fld_add()
-                        Backcolor  {204,255,0}
-                        NOXPSTYLE .T.
-        END BUTTONEX
+      DEFINE BUTTONEX BtnAdd
+         ROW     40
+         COL     167
+         WIDTH   25
+         HEIGHT  21
+         Caption ">"
+         FONTBOLD .T.
+         TOOLTIP 'Add Selected Field'
+         ONCLICK Fld_add()
+         Backcolor  {204,255,0}
+         NOXPSTYLE .T.
+      END BUTTONEX
 
-        DEFINE BUTTONEX BtnAddAll
-                        ROW     80
-                        COL     167
-                        WIDTH   25
-                        HEIGHT  21
-                        Caption ">>"
-                        FONTBOLD .T.
-                        TOOLTIP 'Add all checked fields'
-                        ONCLICK Fld_add(.T.)
-        END BUTTONEX
+      DEFINE BUTTONEX BtnAddAll
+         ROW     80
+         COL     167
+         WIDTH   25
+         HEIGHT  21
+         Caption ">>"
+         FONTBOLD .T.
+         TOOLTIP 'Add all checked fields'
+         ONCLICK Fld_add(.T.)
+      END BUTTONEX
 
       @ 10,200 Listbox ListBox_2 ;
          WIDTH 150 HEIGHT 160 ;
          ITEMS {} ;
          FONT 'Arial' SIZE 9 ;
          NOTABSTOP
- 
-        DEFINE BUTTONEX BtnErase
-                        ROW     120
-                        COL     167
-                        WIDTH   25
-                        HEIGHT  21
-                        Caption "<"
-                        FONTBOLD .T.
-                        TOOLTIP 'Remove Selected Field'
-                        ONCLICK  Fld_del()
-                        Backcolor RED
-                        NOXPSTYLE .T.
-        END BUTTONEX
 
-        DEFINE BUTTONEX BUpPrg2
-                         ROW     20
-                         COL     360
-                         WIDTH   16
-                         HEIGHT  21
-                         PICTURE 'UP'
-                         TOOLTIP 'Up Field in List'
-                         ONCLICK  UpFld()
-        END BUTTONEX
+      DEFINE BUTTONEX BtnErase
+         ROW     120
+         COL     167
+         WIDTH   25
+         HEIGHT  21
+         Caption "<"
+         FONTBOLD .T.
+         TOOLTIP 'Remove Selected Field'
+         ONCLICK  Fld_del()
+         Backcolor RED
+         NOXPSTYLE .T.
+      END BUTTONEX
 
-        DEFINE BUTTONEX BDownPrg
-                        ROW     50
-                        COL     360
-                        WIDTH   16
-                        HEIGHT  21
-                        PICTURE 'DOWN'
-                        TOOLTIP 'Down Field in List'
-                        ONCLICK  DownFld()
-        END BUTTONEX
+      DEFINE BUTTONEX BUpPrg2
+         ROW     20
+         COL     360
+         WIDTH   16
+         HEIGHT  21
+         PICTURE 'UP'
+         TOOLTIP 'Up Field in List'
+         ONCLICK  UpFld()
+      END BUTTONEX
+
+      DEFINE BUTTONEX BDownPrg
+         ROW     50
+         COL     360
+         WIDTH   16
+         HEIGHT  21
+         PICTURE 'DOWN'
+         TOOLTIP 'Down Field in List'
+         ONCLICK  DownFld()
+      END BUTTONEX
 
       @ 190,35 buttonEx bt1 caption 'Unselect all' height 35 picture "EDIT_DELETE" action Clr_Fld()
 
@@ -3541,184 +3603,196 @@ Function PickField(aitems,AllF)
 
    Form_PF.Center ; Form_PF.Activate
 
-Return rtv
-/*
-*/
-*-----------------------------------------------------------------------------*
-function OutVal()
-*-----------------------------------------------------------------------------*
-   Local ni, retv := {}
+   RETURN rtv
+   /*
+   */
+
+FUNCTION OutVal()
+
+   LOCAL ni, retv := {}
+
    FOR ni = 1 to Form_PF.ListBox_2.ItemCount
-       AADD ( retv, GetProperty( 'Form_PF', 'ListBox_2', 'Item' , ni )  )
+      AADD ( retv, GetProperty( 'Form_PF', 'ListBox_2', 'Item' , ni )  )
    NEXT
 
-Return retv
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure  Fld_add(All)
-*-----------------------------------------------------------------------------*
-   local nn    := Form_PF.ListBox_2.ItemCount, ni, aCmp := {}
-   local nList := Form_PF.ListBox_1.value, adFld := {}
+   RETURN retv
+   /*
+   */
+
+PROCEDURE  Fld_add(All)
+
+   LOCAL nn    := Form_PF.ListBox_2.ItemCount, ni, aCmp := {}
+   LOCAL nList := Form_PF.ListBox_1.value, adFld := {}
 
    DEFAULT All TO .F.
 
-   if all
+   IF all
       FOR ni = 1 to Form_PF.ListBox_1.ItemCount
-          if clb_getCheck( ni )
-             AADD ( adFld, GetProperty( 'Form_PF', 'ListBox_1', 'Item' , ni )  )
-          Endif
+         IF clb_getCheck( ni )
+            AADD ( adFld, GetProperty( 'Form_PF', 'ListBox_1', 'Item' , ni )  )
+         ENDIF
       NEXT
-   Else
+   ELSE
 
       adFld := { cmlb_getItem( nList ) }
 
-   Endif
+   ENDIF
 
-   If nn > 21
+   IF nn > 21
       MessageBoxTimeout (padc("Too many Fields",50 )+CRLF+CRLF;
-              +padc("This Field CANNOT be add !!",50),"Error Max 22 Fields !", MB_ICONSTOP, 2000 )
-      Return
-   Endif 
+         +padc("This Field CANNOT be add !!",50),"Error Max 22 Fields !", MB_ICONSTOP, 2000 )
+
+      RETURN
+   ENDIF
 
    FOR ni = 1 to nn
-       AADD (aCmp, Form_PF.ListBox_2.item(ni))
-   next
+      AADD (aCmp, Form_PF.ListBox_2.item(ni))
+   NEXT
 
    aeval( adfld,{|x| Fld_addVal ( nn, nlist, aCmp, x ) } )
    Form_PF.StatusBar.Item(1) := "  "+ZAPS(Form_PF.ListBox_2.ItemCount)+ " Field(s) selected."
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure Fld_addVal( nn, nlist, aCmp, AdFld )
-*-----------------------------------------------------------------------------*
-Local no := ascan(m->clItem,Adfld)
-   if ascan(aCmp,Adfld) < 1
+   RETURN
+   /*
+   */
+
+PROCEDURE Fld_addVal( nn, nlist, aCmp, AdFld )
+
+   LOCAL no := ascan(m->clItem,Adfld)
+
+   IF ascan(aCmp,Adfld) < 1
       Form_PF.ListBox_2.AddItem( adFld )
       Form_PF.ListBox_2.value := nn + 1
       Form_PF.ListBox_1.value := nList + 1
       setproperty('Form_PF','ListBox_1',"CHECKBOXITEM",no,.F.)
-   Endif
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure Fld_addAll()
-*-----------------------------------------------------------------------------*
-   local nn := Form_PF.ListBox_2.ItemCount + 1
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+PROCEDURE Fld_addAll()
+
+   LOCAL nn := Form_PF.ListBox_2.ItemCount + 1
+
    Form_PF.ListBox_2.AddItem( cmlb_getItem(nn)  )
    Form_PF.ListBox_2.value := {nn}
    Form_PF.StatusBar.Item(1) := "  "+ZAPS(Form_PF.ListBox_2.ItemCount)+ " Field(s) selected."
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure Clr_Fld
-*-----------------------------------------------------------------------------*
+
+   RETURN
+   /*
+   */
+
+PROCEDURE Clr_Fld
+
    Form_PF.ListBox_1.DeleteAllItems
    aeval(m->clItem,{|x|Form_PF.ListBox_1.AddItem( x ) } )
    Form_PF.ListBox_1.value := 1
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure Fld_del
-*-----------------------------------------------------------------------------*
-   local n1 , vs, no
-   local nn := Form_PF.ListBox_2.value
+
+   RETURN
+   /*
+   */
+
+PROCEDURE Fld_del
+
+   LOCAL n1 , vs, no
+   LOCAL nn := Form_PF.ListBox_2.value
 
    vs := Form_PF.ListBox_2.item( nn )
    Form_PF.ListBox_2.DeleteItem( nn )
    n1 := Form_PF.ListBox_2.ItemCount
-   if nn <= n1
+   IF nn <= n1
       Form_PF.ListBox_2.value := nn
-   else
+   ELSE
       Form_PF.ListBox_2.value := n1
-   endif
+   ENDIF
    no := ascan(m->clItem,vs)
-   if no > 0
+   IF no > 0
       setproperty('Form_PF','ListBox_1',"CHECKBOXITEM",no ,.T.)
-   Endif
+   ENDIF
    Form_PF.StatusBar.Item(1) := "  "+ZAPS(Form_PF.ListBox_2.ItemCount)+ " Field(s) selected."
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function UpFld()
-*-----------------------------------------------------------------------------*
-   Local i := GetProperty( 'Form_PF', 'ListBox_2', 'value' )
-   Local cAux := GetProperty( 'Form_PF', 'ListBox_2', 'item', i )
-   Local cAux2 := GetProperty( 'Form_PF', 'ListBox_2', 'item', i - 1 )
-   if i = 1
+   RETURN
+   /*
+   */
+
+FUNCTION UpFld()
+
+   LOCAL i := GetProperty( 'Form_PF', 'ListBox_2', 'value' )
+   LOCAL cAux := GetProperty( 'Form_PF', 'ListBox_2', 'item', i )
+   LOCAL cAux2 := GetProperty( 'Form_PF', 'ListBox_2', 'item', i - 1 )
+
+   IF i = 1
       MessageBoxTimeout (padc('Use the DOWN button !',50 )+CRLF+CRLF;
-              +padc("You have reached the top of list !!",50),"Error Top of list !", MB_ICONSTOP, 2300 )
-   endif
-   if i > 1
+         +padc("You have reached the top of list !!",50),"Error Top of list !", MB_ICONSTOP, 2300 )
+   ENDIF
+   IF i > 1
       SetProperty( 'Form_PF', 'ListBox_2', 'item', i, cAux2 )
       SetProperty( 'Form_PF', 'ListBox_2', 'item', i - 1, cAux )
       SetProperty( 'Form_PF', 'ListBox_2', 'value', i - 1 )
       DoMethod( 'Form_PF', 'ListBox_2', 'setfocus' )
-   endif
-Return .T.
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function DownFld()
-*-----------------------------------------------------------------------------*
-   Local i := GetProperty( 'Form_PF', 'ListBox_2', 'value' )
-   Local cAux := GetProperty( 'Form_PF', 'ListBox_2', 'item', i )
-   Local cAux2 := GetProperty( 'Form_PF', 'ListBox_2', 'item', i + 1 )
+   ENDIF
 
-   if i < GetProperty( 'Form_PF', 'ListBox_2', 'itemcount' )
+   RETURN .T.
+   /*
+   */
+
+FUNCTION DownFld()
+
+   LOCAL i := GetProperty( 'Form_PF', 'ListBox_2', 'value' )
+   LOCAL cAux := GetProperty( 'Form_PF', 'ListBox_2', 'item', i )
+   LOCAL cAux2 := GetProperty( 'Form_PF', 'ListBox_2', 'item', i + 1 )
+
+   IF i < GetProperty( 'Form_PF', 'ListBox_2', 'itemcount' )
       SetProperty( 'Form_PF', 'ListBox_2', 'item', i, cAux2 )
       SetProperty( 'Form_PF', 'ListBox_2', 'item', i + 1, cAux )
       SetProperty( 'Form_PF', 'ListBox_2', 'value', i + 1 )
       DoMethod( 'Form_PF', 'ListBox_2', 'setfocus' )
-   Else
+   ELSE
       MessageBoxTimeout (padc('Use the UP button !',50 )+CRLF+CRLF;
-              +padc("You have reached the bottom of list !!",50),"Error Bottom of list !", MB_ICONSTOP, 2300 )
-   endif
-Return .T.
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function clb_Check(nn)
-*-----------------------------------------------------------------------------*
-   Local lCheck
-   Default nn := Form_PF.ListBox_1.value
-   if nn > 0
+         +padc("You have reached the bottom of list !!",50),"Error Bottom of list !", MB_ICONSTOP, 2300 )
+   ENDIF
+
+   RETURN .T.
+   /*
+   */
+
+FUNCTION clb_Check(nn)
+
+   LOCAL lCheck
+
+   DEFAULT nn := Form_PF.ListBox_1.value
+   IF nn > 0
       lCheck :=  clb_getCheck(nn)
       setproperty('Form_PF','ListBox_1',"CHECKBOXITEM",nn,!lCheck)
-   endif
+   ENDIF
    Form_PF.ListBox_1.Setfocus
 
-return nil
-/*
-*/
-*-----------------------------------------------------------------------------*
-function clb_getCheck(nn)
-*-----------------------------------------------------------------------------*
-return GetProperty('Form_PF','ListBox_1',"CHECKBOXITEM",nn)
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure  OnPressSpacebar()
-*-----------------------------------------------------------------------------*
-   if GetProperty('Form_PF',"FOCUSEDCONTROL") == "ListBox_1"
+   RETURN NIL
+   /*
+   */
+
+FUNCTION clb_getCheck(nn)
+
+   RETURN GetProperty('Form_PF','ListBox_1',"CHECKBOXITEM",nn)
+   /*
+   */
+
+PROCEDURE  OnPressSpacebar()
+
+   IF GetProperty('Form_PF',"FOCUSEDCONTROL") == "ListBox_1"
       clb_Check()
-   endif
-return
-/*
-*/
-*-----------------------------------------------------------------------------*
-function cmlb_getItem(nn)
-*-----------------------------------------------------------------------------*
-return GetProperty('Form_PF','ListBox_1',"ITEM",nn)
-/*
-*/
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+FUNCTION cmlb_getItem(nn)
+
+   RETURN GetProperty('Form_PF','ListBox_1',"ITEM",nn)
+   /*
+   */
 
 #pragma BEGINDUMP
 
@@ -3786,3 +3860,4 @@ HB_FUNC ( SETWINDOWBRUSH )
 }
 
 #pragma ENDDUMP
+

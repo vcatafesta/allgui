@@ -1,82 +1,76 @@
 /*
- * HMG - Harbour Win32 GUI library
- * 
- * MiniSql (a Simple MySql Access Layer)
- *
- * Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
+* HMG - Harbour Win32 GUI library
+* MiniSql (a Simple MySql Access Layer)
+* Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
-*------------------------------------------------------------------------------*
-Function SqlDoQuery( nHandle , cQuery )
-*------------------------------------------------------------------------------*
-Local nNumRows
-Local nNumFields
-Local nQueryResultHandle
-Local aQuery := {}
-Local aRow := {}
-Local i
+FUNCTION SqlDoQuery( nHandle , cQuery )
 
-	if __mvexist ('SqlTrace')
-		If SqlTrace
-			MsgInfo (cQuery)
-		EndIf
-	endif
+   LOCAL nNumRows
+   LOCAL nNumFields
+   LOCAL nQueryResultHandle
+   LOCAL aQuery := {}
+   LOCAL aRow := {}
+   LOCAL i
 
-	SqlQuery ( nHandle , cQuery ) ; SqlErrorCheck ( nHandle )
+   IF __mvexist ('SqlTrace')
+      IF SqlTrace
+         MsgInfo (cQuery)
+      ENDIF
+   ENDIF
 
-	nQueryResultHandle := sqlStoreR( nHandle ) ; SqlErrorCheck ( nHandle )
+   SqlQuery ( nHandle , cQuery ) ; SqlErrorCheck ( nHandle )
 
-	nNumRows := sqlNRows( nQueryResultHandle ) ; SqlErrorCheck ( nHandle )
-	nNumFields := sqlNumFi( nQueryResultHandle ) ; SqlErrorCheck ( nHandle )
+   nQueryResultHandle := sqlStoreR( nHandle ) ; SqlErrorCheck ( nHandle )
 
-	For i := 1 To nNumRows
+   nNumRows := sqlNRows( nQueryResultHandle ) ; SqlErrorCheck ( nHandle )
+   nNumFields := sqlNumFi( nQueryResultHandle ) ; SqlErrorCheck ( nHandle )
 
-		aRow := sqlFetchR(nQueryResultHandle) ; SqlErrorCheck ( nHandle )
+   FOR i := 1 To nNumRows
 
-		aadd ( aQuery , aRow )
+      aRow := sqlFetchR(nQueryResultHandle) ; SqlErrorCheck ( nHandle )
 
-	Next i
+      aadd ( aQuery , aRow )
 
-Return aQuery
+   NEXT i
 
-*------------------------------------------------------------------------------*
-Function SqlDoCommand ( nHandle , cQuery )
-*------------------------------------------------------------------------------*
-Local ar
+   RETURN aQuery
 
-	if __mvexist ('SqlTrace')
-		If SqlTrace
-			msginfo(cQuery)
-		EndIf
-	endif
+FUNCTION SqlDoCommand ( nHandle , cQuery )
 
-	SqlQuery ( nHandle , cQuery ) ; SqlErrorCheck ( nHandle )
+   LOCAL ar
 
-	ar := SqlAffRows(nHandle)  ; SqlErrorCheck ( nHandle )
+   IF __mvexist ('SqlTrace')
+      IF SqlTrace
+         msginfo(cQuery)
+      ENDIF
+   ENDIF
 
-Return ar
+   SqlQuery ( nHandle , cQuery ) ; SqlErrorCheck ( nHandle )
 
-*------------------------------------------------------------------------------*
-Procedure SqlErrorCheck ( nHandle )
-*------------------------------------------------------------------------------*
-Local SqlCurrentError
+   ar := SqlAffRows(nHandle)  ; SqlErrorCheck ( nHandle )
 
-	SqlCurrentError := SqlGetErr ( nHandle )
+   RETURN ar
 
-	If .Not. Empty ( SqlCurrentError )
+PROCEDURE SqlErrorCheck ( nHandle )
 
-		SqlQuery ( nHandle , 'UNLOCK TABLES' )
-		nHandle := NIL
+   LOCAL SqlCurrentError
 
-		MsgStop ( SqlCurrentError , "MiniSql" )		
+   SqlCurrentError := SqlGetErr ( nHandle )
 
-	EndIf
+   IF .Not. Empty ( SqlCurrentError )
 
-Return
+      SqlQuery ( nHandle , 'UNLOCK TABLES' )
+      nHandle := NIL
 
-#ifndef __XHARBOUR__
+      MsgStop ( SqlCurrentError , "MiniSql" )
+
+   ENDIF
+
+   RETURN
+
+   #ifndef __XHARBOUR__
 
 #pragma BEGINDUMP
 
@@ -109,4 +103,5 @@ HB_FUNC_EXTERN( MYSQL_ESCAPE_STRING_FROM_FILE ); HB_FUNC( FILETOSQLBINARY ) { HB
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

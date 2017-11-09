@@ -1,148 +1,146 @@
 /*
- * $Id: demo.prg,v 1.4 2017/08/25 19:28:45 fyurisich Exp $
- */
+* $Id: demo.prg,v 1.4 2017/08/25 19:28:45 fyurisich Exp $
+*/
 /*
- * This demo shows how to use DRAW GRAPH.
- * Copyright (c)2007-2017 MigSoft <migsoft/at/oohg.org>
- *
- */
-
+* This demo shows how to use DRAW GRAPH.
+* Copyright (c)2007-2017 MigSoft <migsoft/at/oohg.org>
+*/
 
 #include "oohg.ch"
 
-Static aSer, aClr, aSern, aYVal, cTit
+STATIC aSer, aClr, aSern, aYVal, cTit
 
-Function Main
-   Set Navigation extended
-   Load Window Grafico
-   Center Window Grafico
-   Activate Window Grafico
-Return Nil
+FUNCTION Main
 
-*-----------------------------------------------------------------------------*
-Procedure Presenta(nTipo)
-*-----------------------------------------------------------------------------*
-   Do Case
-      Case nTipo = 0       //  Histogram
+   SET Navigation extended
+   LOAD WINDOW Grafico
+   CENTER WINDOW Grafico
+   ACTIVATE WINDOW Grafico
 
-           aSer:= {{Grafico.Text_5.value,Grafico.Text_9.value,Grafico.Text_13.value}, ;
-                   {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value},;
-                   {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value},;
-                   {Grafico.Text_8.value,Grafico.Text_12.value,Grafico.Text_16.value} }
+   RETURN NIL
 
-           aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor, ;
-                   Grafico.Label_7.Fontcolor,Grafico.Label_8.Fontcolor}
+PROCEDURE Presenta(nTipo)
 
-           aSern:={Grafico.Text_1.value,Grafico.Text_2.value, ;
-                   Grafico.Text_3.value,Grafico.Text_4.value }
+   DO CASE
+   CASE nTipo = 0       //  Histogram
 
-           aYVal:={Grafico.Text_17.value,Grafico.Text_18.value,Grafico.Text_19.value }
+      aSer:= {{Grafico.Text_5.value,Grafico.Text_9.value,Grafico.Text_13.value}, ;
+         {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value},;
+         {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value},;
+         {Grafico.Text_8.value,Grafico.Text_12.value,Grafico.Text_16.value} }
 
-           cTit:= Grafico.Text_20.value
+      aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor, ;
+         Grafico.Label_7.Fontcolor,Grafico.Label_8.Fontcolor}
 
-           Load Window Veamos
-           Center Window Veamos
-           Activate Window Veamos
+      aSern:={Grafico.Text_1.value,Grafico.Text_2.value, ;
+         Grafico.Text_3.value,Grafico.Text_4.value }
 
-      Case nTipo = 1       //  Pie 1
+      aYVal:={Grafico.Text_17.value,Grafico.Text_18.value,Grafico.Text_19.value }
 
-           cTit:= Grafico.Text_1.value
-           aSer:= {Grafico.Text_5.value,Grafico.Text_9.value,Grafico.Text_13.value}
+      cTit:= Grafico.Text_20.value
 
-      Case nTipo = 2       //  Pie 2
+      LOAD WINDOW Veamos
+      CENTER WINDOW Veamos
+      ACTIVATE WINDOW Veamos
 
-           cTit:= Grafico.Text_2.value
-           aSer:= {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value}
+   CASE nTipo = 1       //  Pie 1
 
-      Case nTipo = 3       //  Pie 3
+      cTit:= Grafico.Text_1.value
+      aSer:= {Grafico.Text_5.value,Grafico.Text_9.value,Grafico.Text_13.value}
 
-           cTit:= Grafico.Text_3.value
-           aSer:= {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value}
+   CASE nTipo = 2       //  Pie 2
 
-      Case nTipo = 4       //  Pie 4
+      cTit:= Grafico.Text_2.value
+      aSer:= {Grafico.Text_6.value,Grafico.Text_10.value,Grafico.Text_14.value}
 
-           cTit:= Grafico.Text_4.value
-           aSer:= {Grafico.Text_8.value,Grafico.Text_12.value,Grafico.Text_16.value}
+   CASE nTipo = 3       //  Pie 3
 
-      Case nTipo = 5       //  Pie 5
+      cTit:= Grafico.Text_3.value
+      aSer:= {Grafico.Text_7.value,Grafico.Text_11.value,Grafico.Text_15.value}
 
-           cTit:= Grafico.Text_17.value
-           aSer:= {Grafico.Text_5.value,Grafico.Text_6.value,;
-                   Grafico.Text_7.value,Grafico.Text_8.value }
+   CASE nTipo = 4       //  Pie 4
 
-      Case nTipo = 6       //  Pie 6
+      cTit:= Grafico.Text_4.value
+      aSer:= {Grafico.Text_8.value,Grafico.Text_12.value,Grafico.Text_16.value}
 
-           cTit:= Grafico.Text_18.value
-           aSer:= {Grafico.Text_9.value ,Grafico.Text_10.value,;
-                   Grafico.Text_11.value,Grafico.Text_12.value }
+   CASE nTipo = 5       //  Pie 5
 
-      Case nTipo = 7       //  Pie 7
+      cTit:= Grafico.Text_17.value
+      aSer:= {Grafico.Text_5.value,Grafico.Text_6.value,;
+         Grafico.Text_7.value,Grafico.Text_8.value }
 
-           cTit:= Grafico.Text_19.value
-           aSer:= {Grafico.Text_13.value,Grafico.Text_14.value,;
-                   Grafico.Text_15.value,Grafico.Text_16.value }
+   CASE nTipo = 6       //  Pie 6
 
-   EndCase
+      cTit:= Grafico.Text_18.value
+      aSer:= {Grafico.Text_9.value ,Grafico.Text_10.value,;
+         Grafico.Text_11.value,Grafico.Text_12.value }
 
-   If nTipo > 0 .and. nTipo < 8
+   CASE nTipo = 7       //  Pie 7
+
+      cTit:= Grafico.Text_19.value
+      aSer:= {Grafico.Text_13.value,Grafico.Text_14.value,;
+         Grafico.Text_15.value,Grafico.Text_16.value }
+
+   ENDCASE
+
+   IF nTipo > 0 .and. nTipo < 8
       IF nTipo < 5
          aYVal:={Grafico.Text_17.value,Grafico.Text_18.value,Grafico.Text_19.value}
          aClr:= {Grafico.Label_3.Fontcolor,Grafico.Label_4.Fontcolor, ;
-                                           Grafico.Label_11.Fontcolor }
-      Else
-          aYVal:={Grafico.Text_1.value,Grafico.Text_2.value,;
-                  Grafico.Text_3.value,Grafico.Text_4.value }
-          aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor,;
-                  Grafico.Label_7.Fontcolor,Grafico.Label_8.Fontcolor }
-      Endif
-      Load Window Veamos2
-      Center Window Veamos2
-      Activate Window Veamos2
-   Endif
+            Grafico.Label_11.Fontcolor }
+      ELSE
+         aYVal:={Grafico.Text_1.value,Grafico.Text_2.value,;
+            Grafico.Text_3.value,Grafico.Text_4.value }
+         aClr:= {Grafico.Label_5.Fontcolor,Grafico.Label_6.Fontcolor,;
+            Grafico.Label_7.Fontcolor,Grafico.Label_8.Fontcolor }
+      ENDIF
+      LOAD WINDOW Veamos2
+      CENTER WINDOW Veamos2
+      ACTIVATE WINDOW Veamos2
+   ENDIF
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure elGrafico()
-*-----------------------------------------------------------------------------*
+   RETURN
 
-	ERASE WINDOW Veamos
+PROCEDURE elGrafico()
 
-	DRAW GRAPH							;
-		IN WINDOW Veamos                                        ;
-		AT 20,20						;
-		TO 400,610						;
-		TITLE cTit                                              ;
-		TYPE BARS						;
-		SERIES aSer                                             ;
-  		YVALUES aYval                                           ;
-		DEPTH 15						;
-		BARWIDTH 15						;
-		HVALUES 5						;
-		SERIENAMES aSern                                        ;
-		COLORS aClr                                             ;
-		3DVIEW    						;
-		SHOWGRID                        			;
-		SHOWXVALUES                     			;
-		SHOWYVALUES                     			;
-		SHOWLEGENDS 						;
-		NOBORDER
+   ERASE WINDOW Veamos
 
-Return
-*-----------------------------------------------------------------------------*
-Procedure PieGraph()
-*-----------------------------------------------------------------------------*
+   DRAW GRAPH                     ;
+      IN WINDOW Veamos                                        ;
+      AT 20,20                  ;
+      TO 400,610                  ;
+      TITLE cTit                                              ;
+      TYPE BARS                  ;
+      SERIES aSer                                             ;
+      YVALUES aYval                                           ;
+      DEPTH 15                  ;
+      BARWIDTH 15                  ;
+      HVALUES 5                  ;
+      SERIENAMES aSern                                        ;
+      COLORS aClr                                             ;
+      3DVIEW                      ;
+      SHOWGRID                                 ;
+      SHOWXVALUES                              ;
+      SHOWYVALUES                              ;
+      SHOWLEGENDS                   ;
+      NOBORDER
+
+   RETURN
+
+PROCEDURE PieGraph()
 
    ERASE Window Veamos2
 
-   DRAW GRAPH IN WINDOW Veamos2 AT 20,20 TO 400,610	;
-        TITLE cTit TYPE PIE				;
-        SERIES aSer					;
-        DEPTH 15					;
-        SERIENAMES aYVal				;
-        COLORS aClr					;
-        3DVIEW						;
-        SHOWXVALUES					;
-        SHOWLEGENDS					;
-	NOBORDER
+   DRAW GRAPH IN WINDOW Veamos2 AT 20,20 TO 400,610   ;
+      TITLE cTit TYPE PIE            ;
+      SERIES aSer               ;
+      DEPTH 15               ;
+      SERIENAMES aYVal            ;
+      COLORS aClr               ;
+      3DVIEW                  ;
+      SHOWXVALUES               ;
+      SHOWLEGENDS               ;
+      NOBORDER
 
-Return
+   RETURN
+

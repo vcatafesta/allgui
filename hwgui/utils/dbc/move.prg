@@ -1,9 +1,8 @@
 /*
- * DBCHW - DBC ( Harbour + HWGUI )
- * Move functions ( Locate, seek, ... )
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* DBCHW - DBC ( Harbour + HWGUI )
+* Move functions ( Locate, seek, ... )
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -13,22 +12,25 @@
 #include "ads.ch"
 #endif
 
-Static cLocate := "", cFilter := "", cSeek := ""
-Static klrecf := 200
+STATIC cLocate := "", cFilter := "", cSeek := ""
+STATIC klrecf := 200
 
-Function Move( nMove )
-Local aModDlg
+FUNCTION Move( nMove )
+
+   LOCAL aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_MOVE" ON INIT {|| InitMove( nMove ) }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDOK         ACTION {|| EndMove(.T., nMove)}   ;
-        ON 0,IDCANCEL     ACTION {|| EndMove(.F., nMove) }
+      ON 0,IDOK         ACTION {|| EndMove(.T., nMove)}   ;
+      ON 0,IDCANCEL     ACTION {|| EndMove(.F., nMove) }
    aModDlg:Activate()
 
-Return Nil
+   RETURN NIL
 
-Static Function InitMove( nMove )
-Local hDlg := getmodalhandle(), cTitle
+STATIC FUNCTION InitMove( nMove )
+
+   LOCAL hDlg := getmodalhandle(), cTitle
+
    WriteStatus( HMainWindow():GetMdiActive(),3,"" )
    IF nMove == 1
       cTitle := "Input locate expression"
@@ -44,18 +46,21 @@ Local hDlg := getmodalhandle(), cTitle
    ENDIF
    SetDlgItemText( hDlg, IDC_TEXTHEAD, cTitle )
    SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
-Return Nil
 
-Static Function EndMove( lOk, nMove )
-Local hDlg := getmodalhandle()
-Local cExpres, nrec, key
-Local hWnd, oWindow, aControls, iCont
+   RETURN NIL
+
+STATIC FUNCTION EndMove( lOk, nMove )
+
+   LOCAL hDlg := getmodalhandle()
+   LOCAL cExpres, nrec, key
+   LOCAL hWnd, oWindow, aControls, iCont
 
    IF lOk
       cExpres := GetDlgItemText( hDlg, IDC_EDIT6, 80 )
       IF Empty( cExpres )
          SetFocus( GetDlgItem( hDlg, IDC_EDIT6 ) )
-         Return Nil
+
+         RETURN NIL
       ENDIF
 
       oWindow := HMainWindow():GetMdiActive()
@@ -95,11 +100,14 @@ Local hWnd, oWindow, aControls, iCont
       ENDIF
    ENDIF
 
-   EndDialog( hDlg )
-Return Nil
+EndDialog( hDlg )
 
-Function F_Locate( oBrw, cExpres )
-Local nrec, i, res, block
+RETURN NIL
+
+FUNCTION F_Locate( oBrw, cExpres )
+
+   LOCAL nrec, i, res, block
+
    cLocate := cExpres
    IF VALTYPE( &cLocate ) == "L"
       nrec := RECNO()
@@ -138,10 +146,13 @@ Local nrec, i, res, block
    ELSE
       MsgInfo( "Wrong expression" )
    ENDIF
-Return Nil
 
-Function F_Filter( oBrw, cExpres )
-Local i, nrec
+   RETURN NIL
+
+FUNCTION F_Filter( oBrw, cExpres )
+
+   LOCAL i, nrec
+
    cFilter := cExpres
    IF VALTYPE( &cFilter ) == "L"
       nrec := RECNO()
@@ -189,23 +200,31 @@ Local i, nrec
    ELSE
       MsgInfo( "Wrong expression" )
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 FUNCTION FGOTOP( oBrw )
+
    IF oBrw:nRecords > 0
       oBrw:nCurrent := 1
       GO oBrw:aArray[ 1 ]
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 FUNCTION FGOBOT( oBrw )
+
    oBrw:nCurrent := oBrw:nRecords
    GO IIF( oBrw:nRecords < klrecf, oBrw:aArray[ oBrw:nRecords ], oBrw:aArray[ klrecf ] )
-RETURN Nil
+
+   RETURN NIL
 
 PROCEDURE FSKIP( oBrw, kolskip )
-LOCAL tekzp1
+
+   LOCAL tekzp1
+
    IF oBrw:nRecords = 0
+
       RETURN
    ENDIF
    tekzp1   := oBrw:nCurrent
@@ -223,10 +242,14 @@ LOCAL tekzp1
          GO oBrw:aArray[ oBrw:nCurrent ]
       ENDIF
    ENDIF
-RETURN
+
+   RETURN
 
 FUNCTION FBOF( oBrw )
-RETURN IIF( oBrw:nCurrent = 0, .T., .F. )
+
+   RETURN IIF( oBrw:nCurrent = 0, .T., .F. )
 
 FUNCTION FEOF( oBrw )
-RETURN IIF( oBrw:nCurrent > oBrw:nRecords, .T., .F. )
+
+   RETURN IIF( oBrw:nCurrent > oBrw:nRecords, .T., .F. )
+

@@ -1,16 +1,14 @@
 /*
- * Ejemplo Grid n° 13
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar varias cláusulas y 
- * métodos relacionados con los cabezales de columna de los
- * controles Grid, XBrowse y Browse.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 13
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar varias cláusulas y
+* métodos relacionados con los cabezales de columna de los
+* controles Grid, XBrowse y Browse.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -28,12 +26,12 @@ FUNCTION Main
    OpenTable()
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Cabezales de Columnas en Grid/XBrowse/Browse' ;
-      MAIN ;
-      ON RELEASE CleanUp()
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Cabezales de Columnas en Grid/XBrowse/Browse' ;
+         MAIN ;
+         ON RELEASE CleanUp()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw ;
          WIDTH 400 ;
@@ -52,14 +50,14 @@ FUNCTION Main
          WIDTH 190 ;
          CAPTION "Mostrar orden de columnas" ;
          ACTION oLbl:Value := "Orden de columnas: " + ;
-                              AUTOTYPE( oBrw:ColumnOrder )
+         AUTOTYPE( oBrw:ColumnOrder )
 
       @ 220, 220 BUTTON btn_SetOrder OBJ oBtn2 ;
          WIDTH 190 ;
          CAPTION "Cambiar orden de columnas" ;
          ACTION ( oBrw:ColumnOrder := {3, 1, 2}, ;
-                  oLbl:Value := "Orden de columnas: " + ;
-                                AUTOTYPE( oBrw:ColumnOrder ) )
+         oLbl:Value := "Orden de columnas: " + ;
+         AUTOTYPE( oBrw:ColumnOrder ) )
 
       @ 260, 10 LABEL lbl_Order OBJ oLbl ;
          WIDTH 400 ;
@@ -69,9 +67,9 @@ FUNCTION Main
          WIDTH 400 ;
          HEIGHT 55 ;
          VALUE "Mover o cambiar el tamaño del cabezal, o hacer doble clic " + ;
-               "en un divisor de columna. No se permite mover la columna 1, " + ;
-               "ni cambiar su tamaño (ya sea por arrastre o con autofit). " + ;
-               "El tamaño mínimo de las columnas 2 y 3 debe ser 50." ;
+         "en un divisor de columna. No se permite mover la columna 1, " + ;
+         "ni cambiar su tamaño (ya sea por arrastre o con autofit). " + ;
+         "El tamaño mínimo de las columnas 2 y 3 debe ser 50." ;
          FONTCOLOR RED
 
       @ 360, 220 BUTTON btn_Widths OBJ oBtn3 ;
@@ -85,9 +83,8 @@ FUNCTION Main
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OpenTable()
 
    LOCAL aDbf1[ 3 ][ 4 ]
@@ -156,67 +153,66 @@ FUNCTION OpenTable()
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CleanUp()
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Data.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION BeforeColMove( nCol )
 
    IF nCol == 1
       MSGBOX("No se permite mover la columna 1 !!!")
+
       RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION AfterColMove( nCol, nPosicion )
 
    AUTOMSGBOX( "La columna " + LTRIM(STR(nCol)) + ;
-               " se moverá a la posición " + LTRIM(STR(nPosicion)) )
+      " se moverá a la posición " + LTRIM(STR(nPosicion)) )
 
    oLbl:Value := "Haga clic en el botón para ver el orden de las columnas."
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION BeforeColSize( nCol )
 
    IF nCol == 1
-     // No se permite cambiar el ancho de la columnas 1
-     RETURN .F.
+      // No se permite cambiar el ancho de la columnas 1
+
+      RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION AfterColSize( nCol, nSize )
 
    IF nSize < 50
       // El ancho mínimo de la columna debe ser 50
+
       RETURN 50
    ENDIF
 
-RETURN nSize
+   RETURN nSize
 
-//--------------------------------------------------------------------------//
 FUNCTION BeforeAutoFit( nCol )
 
    IF nCol == 1
-     // No se permite hacer autofit de la columna 1
-     RETURN .F.
+      // No se permite hacer autofit de la columna 1
+
+      RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

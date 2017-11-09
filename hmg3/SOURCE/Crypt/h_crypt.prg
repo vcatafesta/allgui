@@ -1,36 +1,39 @@
 
 /*
-File:		MyCrypt.prg
-Author:		Grigory Filatov
-Description:	Crypto Library for HMG
-Status:		Public Domain
-Notes:		This is very simple crypt algorithm based on XOR encryption.
+File:      MyCrypt.prg
+Author:      Grigory Filatov
+Description:   Crypto Library for HMG
+Status:      Public Domain
+Notes:      This is very simple crypt algorithm based on XOR encryption.
 */
 MEMVAR _HMG_SYSDATA
+
 #define MSGALERT( c ) MsgEXCLAMATION( c, "Attention" )
 #define MSGSTOP( c ) MsgStop( c, "Stop!" )
 /*
 */
+
 FUNCTION _ENCRYPT(cStr, cPass)
 
    LOCAL cXorStr := CHARXOR( cStr, "<ORIGINAL>" )
 
    IF !EMPTY(cPass)
 
-	cXorStr := CHARXOR( cXorStr, cPass )
+      cXorStr := CHARXOR( cXorStr, cPass )
 
    ENDIF
 
-RETURN cXorStr
+   RETURN cXorStr
 
 FUNCTION _DECRYPT(cStr, cPass)
 
    LOCAL cXorStr := CHARXOR( cStr, cPass )
 
-RETURN CHARXOR( cXorStr, "<ORIGINAL>" )
+   RETURN CHARXOR( cXorStr, "<ORIGINAL>" )
 
-/*
-*/
+   /*
+   */
+
 FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
 
    LOCAL nHandle, cBuffer, cStr, nRead := 1
@@ -39,6 +42,7 @@ FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
    IF EMPTY(cInFile) .OR. .NOT. FILE(cInFile)
 
       MSGSTOP("No such file")
+
       RETURN NIL
 
    ENDIF
@@ -46,6 +50,7 @@ FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
    IF ALLTRIM(HMG_UPPER(cInFile)) == ALLTRIM(HMG_UPPER(cOutFile))
 
       MSGALERT("New and old filenames must not be the same")
+
       RETURN NIL
 
    ENDIF
@@ -87,6 +92,7 @@ FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
 
       MSGSTOP("File already encrypted")
       FCLOSE(nHandle)
+
       RETURN NIL
 
    ENDIF
@@ -98,6 +104,7 @@ FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
 
       MSGSTOP("File I/O error, cannot proceed")
       FCLOSE(nHandle)
+
       RETURN NIL
 
    ENDIF
@@ -131,10 +138,11 @@ FUNCTION FI_CODE(cInFile, cPass, cOutFile, lDelete)
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
 
    LOCAL nHandle, cBuffer, cStr, nRead := 1
@@ -143,6 +151,7 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
    IF EMPTY(cInFile) .OR. .NOT. FILE(cInFile)
 
       MSGSTOP("No such file")
+
       RETURN NIL
 
    ENDIF
@@ -150,6 +159,7 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
    IF ALLTRIM(HMG_UPPER(cInFile)) == ALLTRIM(HMG_UPPER(cOutFile))
 
       MSGALERT("New and old filenames must not be the same")
+
       RETURN NIL
 
    ENDIF
@@ -191,6 +201,7 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
 
       MSGSTOP("File is not encrypted")
       FCLOSE(nHandle)
+
       RETURN NIL
 
    ENDIF
@@ -202,6 +213,7 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
 
       MSGALERT("You have entered the wrong password")
       FCLOSE(nHandle)
+
       RETURN NIL
 
    ENDIF
@@ -212,6 +224,7 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
 
       MSGSTOP("File I/O error, cannot proceed")
       FCLOSE(nHandle)
+
       RETURN NIL
 
    ENDIF
@@ -242,10 +255,11 @@ FUNCTION FI_DECODE(cInFile, cPass, cOutFile, lDelete)
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 FUNCTION DB_ENCRYPT(cFile, cPass)
 
    LOCAL nHandle, cBuffer := SPACE(4), cFlag := SPACE(3)
@@ -285,6 +299,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
       IF FERROR() <> 0
 
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -295,6 +310,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          MSGSTOP("File I/O error, cannot encrypt file")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -303,6 +319,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          MSGSTOP("File I/O error, cannot encrypt file")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -311,6 +328,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          MSGSTOP("This database already encrypted!")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -321,6 +339,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -329,6 +348,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -340,6 +360,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -348,6 +369,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -358,6 +380,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -368,6 +391,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -378,6 +402,7 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot encrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -390,11 +415,11 @@ FUNCTION DB_ENCRYPT(cFile, cPass)
 
    ENDIF
 
+   RETURN NIL
 
-RETURN NIL
+   /*
+   */
 
-/*
-*/
 FUNCTION DB_UNENCRYPT(cFile, cPass)
 
    LOCAL nHandle, cBuffer := SPACE(4), cSavePass := SPACE(10), cFlag := SPACE(3)
@@ -434,6 +459,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
       IF FERROR() <> 0
 
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -444,6 +470,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          MSGSTOP("File I/O error, cannot unencrypt file")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -452,6 +479,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          MSGSTOP("File I/O error, cannot unencrypt file")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -460,6 +488,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          MSGSTOP("This database is not encrypted!")
          FCLOSE(nHandle)
+
          RETURN NIL
 
       ENDIF
@@ -470,6 +499,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -480,6 +510,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -488,6 +519,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGALERT("You have entered the wrong password")
+
          RETURN NIL
 
       ENDIF
@@ -499,6 +531,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -507,6 +540,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -518,6 +552,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -526,6 +561,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -536,6 +572,7 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
          FCLOSE(nHandle)
          MSGSTOP("File I/O error, cannot unencrypt file")
+
          RETURN NIL
 
       ENDIF
@@ -548,102 +585,105 @@ FUNCTION DB_UNENCRYPT(cFile, cPass)
 
    ENDIF
 
+   RETURN NIL
 
-RETURN NIL
+   /*
+   */
 
-/*
-*/
-Static Function cFileName( cMask )
+STATIC FUNCTION cFileName( cMask )
 
-   Local cName := ALLTRIM( cMask )
-   Local n     := HB_UAT( ".", cName )
+   LOCAL cName := ALLTRIM( cMask )
+   LOCAL n     := HB_UAT( ".", cName )
 
-Return ALLTRIM( If( n > 0, HB_ULEFT( cName, n - 1 ), cName ) )
+   RETURN ALLTRIM( If( n > 0, HB_ULEFT( cName, n - 1 ), cName ) )
 
-/*
-*/
+   /*
+   */
+
 FUNCTION DB_CODE(cData, cKey, aFields, cPass, cFor, cWhile)
-local cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf 
 
-Local aString[HMG_LEN(aFields)] , nFields , cSeek , i , cAlias , cTmpAlias // RL
+   LOCAL cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf
 
-cData:=If(cData=nil,Alias()+".DBF",cData)
-cData:=If(HB_UAT(".",cData)=0,cData+".DBF",cData)
-cWhile:=If(cWhile=nil, ".t.",cWhile)
-cFor:=If(cFor=nil,".t.",cFor)
-cSeek:=cKey
+   LOCAL aString[HMG_LEN(aFields)] , nFields , cSeek , i , cAlias , cTmpAlias // RL
 
-IF cPass == NIL
+   cData:=If(cData=nil,Alias()+".DBF",cData)
+   cData:=If(HB_UAT(".",cData)=0,cData+".DBF",cData)
+   cWhile:=If(cWhile=nil, ".t.",cWhile)
+   cFor:=If(cFor=nil,".t.",cFor)
+   cSeek:=cKey
 
-   cPass := "<PRIMARY>"
+   IF cPass == NIL
 
-ENDIF
+      cPass := "<PRIMARY>"
 
-Copy Stru to &(cTmpFile)
-cAlias:=Alias()
-nFields:=FCount()
+   ENDIF
 
-Use (cTmpFile) New Exclusive
-cTmpAlias:=Alias()
+   COPY Stru to &(cTmpFile)
+   cAlias:=Alias()
+   nFields:=FCount()
 
-Select &cAlias
-Do while .not. eof() .and. &(cWhile)
-   If !&(cFor)                         && Select records that meet for condition
-      Skip
-      Loop
-   Endif
+   USE (cTmpFile) New Exclusive
+   cTmpAlias:=Alias()
 
-   Select &cTmpAlias
-   dbAppend()                          && Create record at target file
+   SELECT &cAlias
+   DO WHILE .not. eof() .and. &(cWhile)
+      IF !&(cFor)                         && Select records that meet for condition
+         SKIP
+         LOOP
+      ENDIF
 
-   For i=1 to nFields
-       FieldPut(i, &cAlias->(FieldGet(i)))
-   Next
+      SELECT &cTmpAlias
+      dbAppend()                          && Create record at target file
 
-   Select &cAlias
-   afill(aString, '')
+      FOR i=1 to nFields
+         FieldPut(i, &cAlias->(FieldGet(i)))
+      NEXT
 
-   cBuf:=&cSeek
-   cVal:=cBuf
-   Do while cBuf=cVal .and. !Eof()    && Evaluate records with same key
-      If !&(cFor)                     && Evaluate For condition within
-         Skip
-         Loop
-      Endif
+      SELECT &cAlias
+      afill(aString, '')
 
-      For i=1 to HMG_LEN(aString)         && Crypt values
-          aString[i]:=_ENCRYPT(FieldGet(FieldPos(aFields[i])), cPass)
-      Next
+      cBuf:=&cSeek
+      cVal:=cBuf
+      DO WHILE cBuf=cVal .and. !Eof()    && Evaluate records with same key
+         IF !&(cFor)                     && Evaluate For condition within
+            SKIP
+            LOOP
+         ENDIF
 
-      skip                            && Evaluate condition in next record
+         FOR i=1 to HMG_LEN(aString)         && Crypt values
+            aString[i]:=_ENCRYPT(FieldGet(FieldPos(aFields[i])), cPass)
+         NEXT
+
+         SKIP                            && Evaluate condition in next record
+         cVal:=&cSeek
+      ENDDO
+
+      SELECT &cTmpAlias
+      FOR i=1 to HMG_LEN(aString)            && Place Crypts in target file
+         FieldPut(FieldPos(aFields[i]), aString[i])
+      NEXT
+
+      SELECT &cAlias
+   ENDDO
+
+   SELECT &cTmpAlias
+   GO TOP
+   DO WHILE .not. eof()
       cVal:=&cSeek
-   Enddo
-
-   Select &cTmpAlias
-   For i=1 to HMG_LEN(aString)            && Place Crypts in target file
-       FieldPut(FieldPos(aFields[i]), aString[i])
-   Next
-
-   Select &cAlias
-Enddo
-
-Select &cTmpAlias
-go top
-Do while .not. eof()
-      cVal:=&cSeek
-      Select &cAlias
-      seek cVal
-	rlock()
-      For i=1 to nFields
+      SELECT &cAlias
+      SEEK cVal
+      rlock()
+      FOR i=1 to nFields
          FieldPut(i, &cTmpAlias->(FieldGet(i)))
-      Next
-	dbunlock()
-      Select &cTmpAlias
-      skip
-Enddo
-use                                   && Close target file
-ferase(cTmpFile)
-Select &cAlias                        && Select prior file
-go nRecno
+      NEXT
+      dbunlock()
+      SELECT &cTmpAlias
+      SKIP
+   ENDDO
+   USE                                   && Close target file
+   ferase(cTmpFile)
+   SELECT &cAlias                        && Select prior file
+   go nRecno
 
-RETURN NIL
+   RETURN NIL
+

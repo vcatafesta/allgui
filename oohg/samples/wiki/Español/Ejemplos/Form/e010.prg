@@ -1,28 +1,26 @@
 /*
- * Ejemplo Form n° 10
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo setear el value del control que
- * tiene el foco en un formulario desde un formulario diferente.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Form n° 10
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo setear el value del control que
+* tiene el foco en un formulario desde un formulario diferente.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW FormMain ;
-      AT 0, 0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE "Setear el control con el foco" ;
-      MAIN ;
-      NOMAXIMIZE ;
-      NOSIZE
+         AT 0, 0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Setear el control con el foco" ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE
 
       @ 20, 20 BUTTON btn1 ;
          CAPTION "Haz clic"
@@ -47,24 +45,25 @@ FUNCTION Main
 
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION AbrirSegundo( oCtrl )
 
    LOCAL lSetear := .F.
 
    IF ! ( oCtrl:Type == "NUMTEXT" .OR. ( oCtrl:Type == "TEXTPICTURE" .AND. oCtrl:DataType == "N" ) )
+
       RETURN NIL
    ENDIF
 
    DEFINE WINDOW SegundoForm ;
-      AT 100, 400 ;
-      WIDTH 640 ;
-      HEIGHT 220 ;
-      TITLE "Segundo Formulario" ;
-      NOMAXIMIZE ;
-      NOSIZE ;
-      ON RELEASE IIF( lSetear, oCtrl:Value := oNuevoValor:Value, NIL )
+         AT 100, 400 ;
+         WIDTH 640 ;
+         HEIGHT 220 ;
+         TITLE "Segundo Formulario" ;
+         NOMAXIMIZE ;
+         NOSIZE ;
+         ON RELEASE IIF( lSetear, oCtrl:Value := oNuevoValor:Value, NIL )
 
       @ 20, 20 TEXTBOX txt3 OBJ oNuevoValor ;
          NUMERIC ;
@@ -85,8 +84,9 @@ FUNCTION AbrirSegundo( oCtrl )
 
    ACTIVATE WINDOW SegundoForm
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

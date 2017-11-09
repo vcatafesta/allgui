@@ -2,47 +2,49 @@
 * HMG Hello World Demo
 */
 
-
 #include "hmg.ch"
 
-Function Main
-Public x := 1
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN 
+   PUBLIC x := 1
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'File'
-				MENUITEM 'Test 1' ACTION Test1()
-				MENUITEM 'Test 2' ACTION Test2()
-			END POPUP
-		END MENU
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-	END WINDOW
+      DEFINE MAIN MENU
+         DEFINE POPUP 'File'
+            MENUITEM 'Test 1' ACTION Test1()
+            MENUITEM 'Test 2' ACTION Test2()
+         END POPUP
+      END MENU
 
-	ACTIVATE WINDOW Win_1
+   END WINDOW
 
-Return
+   ACTIVATE WINDOW Win_1
 
-Procedure Test1()
-Local x
+   RETURN
 
-	x := Getfile ( { {'All Files','*.*'} } , 'Open File' , 'c:\' , .f. , .t. )
-	msginfo (x)
+PROCEDURE Test1()
 
-Return
+   LOCAL x
 
-Procedure Test2()
-Local x , i
+   x := Getfile ( { {'All Files','*.*'} } , 'Open File' , 'c:\' , .f. , .t. )
+   msginfo (x)
 
-	x := Getfile ( { {'All Files','*.*'} } , 'Open File' , 'c:\' , .t. , .t. )
+   RETURN
 
-	For i := 1 To len (x)
-		msginfo (x [i])
-	Next x
+PROCEDURE Test2()
 
-Return
+   LOCAL x , i
+
+   x := Getfile ( { {'All Files','*.*'} } , 'Open File' , 'c:\' , .t. , .t. )
+
+   FOR i := 1 To len (x)
+      msginfo (x [i])
+   NEXT x
+
+   RETURN

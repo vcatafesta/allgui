@@ -1,88 +1,78 @@
 /*
- * $Id: h_frame.prg,v 1.22 2017/08/25 19:42:18 fyurisich Exp $
- */
+* $Id: h_frame.prg,v 1.22 2017/08/25 19:42:18 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * Frame control
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* Frame control
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "hbclass.ch"
 
 CLASS TFrame FROM TControl
+
    DATA Type      INIT "FRAME" READONLY
    DATA nWidth    INIT 140
    DATA nHeight   INIT 140
    DATA TabHandle INIT 0
 
-   METHOD Caption SETGET
-   METHOD Define
-   METHOD Events_Color
+METHOD Caption SETGET
+
+METHOD Define
+
+METHOD Events_Color
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, y, x, w, h, caption, fontname, ;
-               fontsize, opaque, bold, italic, underline, strikeout, ;
-               backcolor, fontcolor, transparent, lRtl, invisible, lDisabled ) CLASS TFrame
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle
-Local oTab
+      fontsize, opaque, bold, italic, underline, strikeout, ;
+      backcolor, fontcolor, transparent, lRtl, invisible, lDisabled ) CLASS TFrame
+   LOCAL ControlHandle, nStyle
+   LOCAL oTab
 
    ASSIGN ::nCol      VALUE x           TYPE "N"
    ASSIGN ::nRow      VALUE y           TYPE "N"
@@ -92,15 +82,15 @@ Local oTab
    ASSIGN opaque      VALUE opaque      TYPE "L"  DEFAULT .F.
    ASSIGN transparent VALUE transparent TYPE "L"  DEFAULT .T.
 
-   If opaque .AND. transparent
+   IF opaque .AND. transparent
       MsgOOHGError( "OPAQUE and TRANSPARENT clauses can't be used simultaneously. Program Terminated." )
-   EndIf
+   ENDIF
 
-   If valtype( caption ) == 'U'
+   IF valtype( caption ) == 'U'
       caption := ""
       fontname := "Arial"
       fontsize := 1
-	EndIf
+   ENDIF
 
    ::SetForm( ControlName, ParentForm, FontName, FontSize, FontColor, BackColor, , lRtl )
 
@@ -122,26 +112,24 @@ Local oTab
    ::Transparent := transparent
    ::Caption := Caption
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD Caption( cCaption ) CLASS TFrame
-*------------------------------------------------------------------------------*
-Local cRet
+
+   LOCAL cRet
 
    // Under XP, when caption is changed, part of the old text remains visible.
    cRet := ::Super:Caption( cCaption )
-   If ::lVisible
+   IF ::lVisible
       ::Visible := .F.
       ::Visible := .T.
-   EndIf
-Return cRet
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN cRet
+
 METHOD Events_Color( wParam, nDefColor ) CLASS TFrame
-*------------------------------------------------------------------------------*
-Return Events_Color_InTab( Self, wParam, nDefColor )    // see h_controlmisc.prg
 
+   RETURN Events_Color_InTab( Self, wParam, nDefColor )    // see h_controlmisc.prg
 
 #pragma BEGINDUMP
 
@@ -180,6 +168,7 @@ static WNDPROC lpfnOldWndProcA = 0;
 
 static LRESULT APIENTRY SubClassFuncA( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProcA );
 }
 
@@ -195,7 +184,7 @@ HB_FUNC( INITFRAME )
    StyleEx = _OOHG_RTL_Status( hb_parl( 9 ) );
 
    if ( ! hb_parl( 8 ) )   /* opaque */
-	{
+   {
       StyleEx = StyleEx | WS_EX_TRANSPARENT;
    }
 
@@ -208,3 +197,4 @@ HB_FUNC( INITFRAME )
 }
 
 #pragma ENDDUMP
+

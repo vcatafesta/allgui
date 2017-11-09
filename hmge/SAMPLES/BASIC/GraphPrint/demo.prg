@@ -1,15 +1,13 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * DATA PROVIDED BY NETMARKETSHARE.COM FOR SEPTEMBER 2017
- */
+* MINIGUI - Harbour Win32 GUI library Demo
+* DATA PROVIDED BY NETMARKETSHARE.COM FOR SEPTEMBER 2017
+*/
 
 #include "hmg.ch"
 
 // define the static arrays for graph show and print routines
 STATIC aSeries, aSerieNames, aColors
 
-/////////////////////////////////////////////////////////////
 FUNCTION Main
 
    aSeries := { ;
@@ -49,34 +47,33 @@ FUNCTION Main
    SET FONT TO GetDefaultFontName(), 10
 
    DEFINE WINDOW m ;
-      AT 0, 0 ;
-      WIDTH 720 HEIGHT 600 ;
-      MAIN ;
-      TITLE "Print Pie Graph" ;
-      BACKCOLOR { 216, 208, 200 }
+         AT 0, 0 ;
+         WIDTH 720 HEIGHT 600 ;
+         MAIN ;
+         TITLE "Print Pie Graph" ;
+         BACKCOLOR { 216, 208, 200 }
 
-   DEFINE BUTTON d
-      ROW 10
-      COL 10
-      CAPTION "Draw"
-      ACTION showpie()
-   END BUTTON
+      DEFINE BUTTON d
+         ROW 10
+         COL 10
+         CAPTION "Draw"
+         ACTION showpie()
+      END BUTTON
 
-   DEFINE BUTTON p
-      ROW 40
-      COL 10
-      CAPTION "Print"
-      ACTION ( showpie(), printpie() )
-   END BUTTON
+      DEFINE BUTTON p
+         ROW 40
+         COL 10
+         CAPTION "Print"
+         ACTION ( showpie(), printpie() )
+      END BUTTON
 
    END WINDOW
 
    m.Center()
    m.Activate()
 
-RETURN NIL
+   RETURN NIL
 
-/////////////////////////////////////////////////////////////
 FUNCTION showpie
 
    ERASE WINDOW m
@@ -94,24 +91,23 @@ FUNCTION showpie
    ENDIF
 
    DEFINE PIE IN WINDOW m
-      ROW 10
-      COL 160
-      BOTTOM 550
-      RIGHT 560
-      TITLE "Desktop Operating System Market Share"
-      SERIES aSeries
-      DEPTH 25
-      SERIENAMES aSerieNames
-      COLORS aColors
-      3DVIEW .T.
-      SHOWXVALUES .T.
-      SHOWLEGENDS .T.
-      DATAMASK "99.99"
-   END PIE
+   ROW 10
+   COL 160
+   BOTTOM 550
+   RIGHT 560
+   TITLE "Desktop Operating System Market Share"
+   SERIES aSeries
+   DEPTH 25
+   SERIENAMES aSerieNames
+   COLORS aColors
+   3DVIEW .T.
+   SHOWXVALUES .T.
+   SHOWLEGENDS .T.
+   DATAMASK "99.99"
+END PIE
 
 RETURN NIL
 
-/////////////////////////////////////////////////////////////
 FUNCTION printpie
 
    PRINT GRAPH IN WINDOW m ;
@@ -127,9 +123,8 @@ FUNCTION printpie
       SHOWXVALUES ;
       SHOWLEGENDS DATAMASK "99.99"
 
-RETURN NIL
+   RETURN NIL
 
-/////////////////////////////////////////////////////////////
 PROCEDURE Create_CONTEXT_Menu ( cForm )
 
    IF IsContextMenuDefined () == .T.
@@ -148,13 +143,13 @@ PROCEDURE Create_CONTEXT_Menu ( cForm )
 
    END MENU
 
-RETURN
+   RETURN
 
-/////////////////////////////////////////////////////////////
 PROCEDURE Release_CONTEXT_Menu ( cForm )
 
    IF IsContextMenuDefined () == .F.
       MsgInfo ( "Context Menu not defined" )
+
       RETURN
    ENDIF
 
@@ -162,9 +157,8 @@ PROCEDURE Release_CONTEXT_Menu ( cForm )
 
    RELEASE CONTEXT MENU OF &cForm
 
-RETURN
+   RETURN
 
-/////////////////////////////////////////////////////////////
 FUNCTION IsContextMenuDefined ( lNewValue )
 
    STATIC IsContextMenuDefined := .F.
@@ -174,4 +168,5 @@ FUNCTION IsContextMenuDefined ( lNewValue )
       IsContextMenuDefined := lNewValue
    ENDIF
 
-RETURN lOldValue
+   RETURN lOldValue
+

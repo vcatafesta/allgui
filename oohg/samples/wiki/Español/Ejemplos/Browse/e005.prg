@@ -1,25 +1,23 @@
 /*
- * Ejemplo Browse n° 5
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG mantenida
- * por Ciro Vargas Clemow <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo vincular algunos controles
- * con un control Browse, de tal forma que cuando cambia
- * el value del Browse los values de los controles son
- * cambiados de manera acorde.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 5
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG mantenida
+* por Ciro Vargas Clemow <cvc@oohg.org>
+* Este ejemplo muestra cómo vincular algunos controles
+* con un control Browse, de tal forma que cuando cambia
+* el value del Browse los values de los controles son
+* cambiados de manera acorde.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX, DBFFPT
@@ -33,31 +31,31 @@ FUNCTION Main
    AbrirTablas()
 
    DEFINE WINDOW Form_1 OBJ oForm1 ;
-      AT 0,0 ;
-      CLIENTAREA ;
-      WIDTH 618 HEIGHT 380 ;
-      TITLE 'Controles vinculados a un Browse' ;
-      MAIN ;
-      ON INIT oBrw1:value := Test->(recno()) ;
-      ON INTERACTIVECLOSE VerificarSalida() ;
-      ON RELEASE Limpieza()
+         AT 0,0 ;
+         CLIENTAREA ;
+         WIDTH 618 HEIGHT 380 ;
+         TITLE 'Controles vinculados a un Browse' ;
+         MAIN ;
+         ON INIT oBrw1:value := Test->(recno()) ;
+         ON INTERACTIVECLOSE VerificarSalida() ;
+         ON RELEASE Limpieza()
 
       @ 10,10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 410 ;
          HEIGHT 340 ;
          HEADERS { 'Código', 'Nombre', 'Apellido', ;
-                   'Nacido', 'Casado' , 'Biografía' } ;
+         'Nacido', 'Casado' , 'Biografía' } ;
          WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
          WORKAREA Test ;
          FIELDS { 'Test->Code', 'Test->First', 'Test->Last', ;
-                  'Test->Birth', 'Test->Married', 'Test->Bio' } ;
+         'Test->Birth', 'Test->Married', 'Test->Bio' } ;
          FONT "Courier New" SIZE 10 ;
          JUSTIFY { BROWSE_JTFY_RIGHT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+         BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
          COLUMNCONTROLS {NIL, NIL, NIL, NIL, {'LCOMBOBOX','Si','No'}, NIL} ;
          ON CHANGE (oTxtName:value := Test->First, ;
-                    oCmbType:value := Test->Code, ;
-                    oDtpDate:value := Test->Birth)
+         oCmbType:value := Test->Code, ;
+         oDtpDate:value := Test->Birth)
 
       @ 10,430 COMBOBOX cmb_Type OBJ oCmbType ;
          WIDTH 180 ;
@@ -65,18 +63,18 @@ FUNCTION Main
          VALUESOURCE Codes->Code
 
       @ 50,430 TEXTBOX txt_Name OBJ oTxtName ;
-        WIDTH 180 ;
-        HEIGHT 24 ;
-        MAXLENGTH 25
+         WIDTH 180 ;
+         HEIGHT 24 ;
+         MAXLENGTH 25
 
       @ 90,430 DATEPICKER dtp_Date OBJ oDtpDate ;
-        WIDTH 180
+         WIDTH 180
 
       @ 210,430 LABEL lbl_Note ;
-        WIDTH 180 ;
-        HEIGHT 50 ;
-        VALUE "Vea lo que sucede cuando se cambia el item seleccionado en el Browse." ;
-        FONTCOLOR RED
+         WIDTH 180 ;
+         HEIGHT 50 ;
+         VALUE "Vea lo que sucede cuando se cambia el item seleccionado en el Browse." ;
+         FONTCOLOR RED
 
       ON KEY ESCAPE ACTION IF(VerificarSalida(), oForm1:Release(), NIL)
    END WINDOW
@@ -84,9 +82,8 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTablas()
 
    LOCAL i, aDbf1[2][4], aDbf2[6][4]
@@ -166,24 +163,23 @@ FUNCTION AbrirTablas()
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION VerificarSalida()
 
-RETURN MsgYesNo("¿ Está seguro de querer salir ?") ;
+   RETURN MsgYesNo("¿ Está seguro de querer salir ?") ;
 
-//--------------------------------------------------------------------------//
 FUNCTION Limpieza()
 
-  dbCloseAll()
+   dbCloseAll()
 
-  ERASE Test.dbf
-  ERASE Codes.dbf
-  ERASE Codes.cdx
+   ERASE Test.dbf
+   ERASE Codes.dbf
+   ERASE Codes.cdx
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,102 +1,98 @@
 /*
- * MiniGUI WMI Service Demo
- *
- * (c) 2008-2009 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI WMI Service Demo
+* (c) 2008-2009 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Procedure Main
-  
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 + iif(IsVistaOrLater(), GetBorderHeight(), 0) ;
-		TITLE 'WMI Services Demo' ;
-		MAIN
+PROCEDURE Main
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	120
-			CAPTION 'Processor Info'
-			ACTION	ProcessorInfo()
-		END BUTTON
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 + iif(IsVistaOrLater(), GetBorderHeight(), 0) ;
+         TITLE 'WMI Services Demo' ;
+         MAIN
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	120
-			CAPTION 'Disk Drive Info'
-			ACTION	DiskDriveInfo()
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   120
+         CAPTION 'Processor Info'
+         ACTION   ProcessorInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_3
-			ROW	70
-			COL	10
-			WIDTH	120
-			CAPTION 'Logical Disk Info'
-			ACTION	LogicalDiskInfo()
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   120
+         CAPTION 'Disk Drive Info'
+         ACTION   DiskDriveInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_4
-			ROW	100
-			COL	10
-			WIDTH	120
-			CAPTION 'Physical Media Info'
-			ACTION	PhysicalMediaInfo()
-		END BUTTON
-		
-		DEFINE BUTTON Button_5
-			ROW	130
-			COL	10
-			WIDTH	120
-			CAPTION 'Account Info'
-			ACTION	SIDInfo( GetUserName() )
-		END BUTTON		
+      DEFINE BUTTON Button_3
+         ROW   70
+         COL   10
+         WIDTH   120
+         CAPTION 'Logical Disk Info'
+         ACTION   LogicalDiskInfo()
+      END BUTTON
 
-	END WINDOW
+      DEFINE BUTTON Button_4
+         ROW   100
+         COL   10
+         WIDTH   120
+         CAPTION 'Physical Media Info'
+         ACTION   PhysicalMediaInfo()
+      END BUTTON
 
-	Form_1.Button_4.Enabled := IsWinNT()
-	Form_1.Button_5.Enabled := IsWinNT()
+      DEFINE BUTTON Button_5
+         ROW   130
+         COL   10
+         WIDTH   120
+         CAPTION 'Account Info'
+         ACTION   SIDInfo( GetUserName() )
+      END BUTTON
 
-	CENTER WINDOW Form_1
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   Form_1.Button_4.Enabled := IsWinNT()
+   Form_1.Button_5.Enabled := IsWinNT()
 
-*--------------------------------------------------------*
-#translate IFNOTCHAR( <exp1>,<exp2> ) ;
-=> ;
-IF( VALTYPE( <exp1> ) != "C",<exp2>,<exp1> )
+   CENTER WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-#define IS_DATE(x)                   (VALTYPE(x) == "D")
-#define IS_LOGICAL(x)                (VALTYPE(x) == "L")
-#define IS_NUMERIC(x)                (VALTYPE(x) == "N")
-#define CASE_AT(x,y,z)               z[AT(x,y)+1]
-#define TRIM_NUMBER(x)               LTRIM(STR(x))
-#define NULL                         ""
+   RETURN
 
-#define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
-                             { NULL, ;
-                               x, ;
-                               IF(IS_NUMERIC(x),;
-                                  TRIM_NUMBER(x), ;
-                                  NULL), ;
-                               IF(IS_DATE(x),DTOC(x),NULL),;
-                               IF(IS_LOGICAL(x),;
-                                  IF(x,".T.",".F."), ;
-                                  NULL), ;
-                               x })
-*--------------------------------------------------------*
+   #translate IFNOTCHAR( <exp1>,<exp2> ) ;
+      => ;
+      IF( VALTYPE( <exp1> ) != "C",<exp2>,<exp1> )
 
+   #define IS_DATE(x)                   (VALTYPE(x) == "D")
+   #define IS_LOGICAL(x)                (VALTYPE(x) == "L")
+   #define IS_NUMERIC(x)                (VALTYPE(x) == "N")
+   #define CASE_AT(x,y,z)               z[AT(x,y)+1]
+   #define TRIM_NUMBER(x)               LTRIM(STR(x))
+   #define NULL                         ""
+
+   #define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
+      { NULL, ;
+      x, ;
+      IF(IS_NUMERIC(x),;
+      TRIM_NUMBER(x), ;
+      NULL), ;
+      IF(IS_DATE(x),DTOC(x),NULL),;
+      IF(IS_LOGICAL(x),;
+      IF(x,".T.",".F."), ;
+      NULL), ;
+      x })
 
 FUNCTION ProcessorInfo()
 
-   Local oWmi, oProc
-   Local cInfo := ""
+   LOCAL oWmi, oProc
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oProc IN oWmi:ExecQuery( "SELECT * FROM Win32_Processor" )
 
@@ -106,16 +102,16 @@ FUNCTION ProcessorInfo()
       cInfo += "Description: "  + oProc:Description + CRLF
       cInfo += "ID: "  + oProc:ProcessorID + CRLF + CRLF
 
-      if IsWinNT() .AND. !IsWinXPHome()
+      IF IsWinNT() .AND. !IsWinXPHome()
 
          cInfo += "Cores: "  + TRIM_NUMBER( oProc:NumberOfCores ) + CRLF
          cInfo += "Logical Processors: "  + TRIM_NUMBER( oProc:NumberOfLogicalProcessors ) + CRLF
-         if "Intel" $ oProc:Manufacturer
+         IF "Intel" $ oProc:Manufacturer
             cInfo += "Hyper-Threading: "  + iif( oProc:NumberOfCores < oProc:NumberOfLogicalProcessors, "Enabled", "Disabled" ) + CRLF
-         endif
+         ENDIF
          cInfo += CRLF
 
-      endif
+      ENDIF
 
       cInfo += "Address Width: "  + TRIM_NUMBER( oProc:AddressWidth ) + " bits" + CRLF
       cInfo += "Data Width: "  + TRIM_NUMBER( oProc:DataWidth ) + " bits" + CRLF + CRLF
@@ -128,15 +124,14 @@ FUNCTION ProcessorInfo()
 
    NEXT
 
-Return nil 
-
+   RETURN NIL
 
 FUNCTION DiskDriveInfo()
 
-   Local oWmi, oDrive
-   Local cInfo := ""
+   LOCAL oWmi, oDrive
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oDrive IN oWmi:ExecQuery( "SELECT * FROM Win32_DiskDrive" )
 
@@ -144,11 +139,11 @@ FUNCTION DiskDriveInfo()
       cInfo += "Name: " + STRTRAN(oDrive:Name, "\\.\", "" ) + CRLF
       cInfo += "Type: " + IFEMPTY( oDrive:InterfaceType, "N/A", oDrive:InterfaceType ) + CRLF
 
-      if IsWinNT()
+      IF IsWinNT()
 
          cInfo += "Signature: " + IF( IS_NUMERIC(oDrive:Signature), LTRIM( STR( Abs( oDrive:Signature ), 20, 0 ) ), "N/A" ) + CRLF
 
-      endif
+      ENDIF
 
       cInfo += CRLF
 
@@ -156,15 +151,14 @@ FUNCTION DiskDriveInfo()
 
    MsgInfo( cInfo, "Result" )
 
-Return nil 
-
+   RETURN NIL
 
 FUNCTION LogicalDiskInfo()
 
-   Local oWmi, oDrive, cSerialNumber
-   Local cInfo := ""
+   LOCAL oWmi, oDrive, cSerialNumber
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oDrive IN oWmi:ExecQuery( "SELECT * FROM Win32_LogicalDisk" )
 
@@ -175,15 +169,14 @@ FUNCTION LogicalDiskInfo()
 
    MsgInfo( cInfo, "Result" )
 
-Return nil 
-
+   RETURN NIL
 
 FUNCTION PhysicalMediaInfo()
 
-   Local oWmi, oDrive
-   Local cInfo := ""
+   LOCAL oWmi, oDrive
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oDrive IN oWmi:ExecQuery( "SELECT * FROM Win32_PhysicalMedia" )
 
@@ -193,15 +186,14 @@ FUNCTION PhysicalMediaInfo()
 
    NEXT
 
-Return nil 
-
+   RETURN NIL
 
 FUNCTION SIDInfo( cUserAccount )
 
-   Local oWmi, oProc
-   Local cInfo
+   LOCAL oWmi, oProc
+   LOCAL cInfo
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oProc IN oWmi:ExecQuery( "SELECT * FROM Win32_Account WHERE Name = '"+cUserAccount+"'" )
       cInfo := ""
@@ -217,26 +209,26 @@ FUNCTION SIDInfo( cUserAccount )
 
    NEXT
 
-Return nil 
-
+   RETURN NIL
 
 STATIC FUNCTION WMIService()
 
-   Static oWMI
+   STATIC oWMI
 
-   Local oLocator
+   LOCAL oLocator
 
-   if oWMI == NIL
+   IF oWMI == NIL
 
       oLocator   := CreateObject( "wbemScripting.SwbemLocator" )
       oWMI       := oLocator:ConnectServer()
 
-   endif
+   ENDIF
 
-Return oWMI
+   RETURN oWMI
 
+STATIC FUNCTION IsWinXPHome()
 
-Static Function IsWinXPHome()
-  Local aVer := WinVersion()
+   LOCAL aVer := WinVersion()
 
-Return "Home" $ aVer[4]
+   RETURN "Home" $ aVer[4]
+

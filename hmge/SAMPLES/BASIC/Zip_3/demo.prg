@@ -1,100 +1,93 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Based on HBMZIP Harbour contribution library samples
- *
- * Adapted for MiniGUI Extended Edition by Grigory Filatov - 2008-2012
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Based on HBMZIP Harbour contribution library samples
+* Adapted for MiniGUI Extended Edition by Grigory Filatov - 2008-2012
 */
 
 #include <minigui.ch>
 
 #command COMPRESS [ FILES ] <afiles> ;
-      TO < zipfile > ;
-      BLOCK < block >  ;
-      [ <ovr: OVERWRITE> ] ;
-      [ <srp: STOREPATH> ] ;
-      [ PASSWORD <password> ] ;
+   TO < zipfile > ;
+   BLOCK < block >  ;
+   [ <ovr: OVERWRITE> ] ;
+   [ <srp: STOREPATH> ] ;
+   [ PASSWORD <password> ] ;
    => ;
-      COMPRESSFILES ( <zipfile>, <afiles>, <block>, <.ovr.>, <.srp.>, <password> )
-
+   COMPRESSFILES ( <zipfile>, <afiles>, <block>, <.ovr.>, <.srp.>, <password> )
 
 #command UNCOMPRESS [ FILE ] <zipfile> ;
-      [ BLOCK <block> ] ;
-      [ PASSWORD <password> ] ;
+   [ BLOCK <block> ] ;
+   [ PASSWORD <password> ] ;
    => ;
-      UNCOMPRESSFILES ( <zipfile>, <block>, <password> )
+   UNCOMPRESSFILES ( <zipfile>, <block>, <password> )
 
-*------------------------------------------------------------------------------*
 PROCEDURE Main
-*------------------------------------------------------------------------------*
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 400 HEIGHT 215 ;
-      TITLE "Backup" ;
-      ICON "demo.ico" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      FONT "Arial" SIZE 9
+         AT 0, 0 ;
+         WIDTH 400 HEIGHT 215 ;
+         TITLE "Backup" ;
+         ICON "demo.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         FONT "Arial" SIZE 9
 
-   DEFINE BUTTON Button_1
-      ROW 140
-      COL 45
-      WIDTH 150
-      HEIGHT 30
-      CAPTION "&Create Backup"
-      ACTION CreateZip()
-   END BUTTON
+      DEFINE BUTTON Button_1
+         ROW 140
+         COL 45
+         WIDTH 150
+         HEIGHT 30
+         CAPTION "&Create Backup"
+         ACTION CreateZip()
+      END BUTTON
 
-   DEFINE BUTTON Button_2
-      ROW 140
-      COL 205
-      WIDTH 150
-      HEIGHT 28
-      CAPTION "&Recover Backup"
-      ACTION UnZip()
-   END BUTTON
+      DEFINE BUTTON Button_2
+         ROW 140
+         COL 205
+         WIDTH 150
+         HEIGHT 28
+         CAPTION "&Recover Backup"
+         ACTION UnZip()
+      END BUTTON
 
-   DEFINE PROGRESSBAR ProgressBar_1
-      ROW 60
-      COL 45
-      WIDTH 310
-      HEIGHT 30
-      RANGEMIN 0
-      RANGEMAX 10
-      VALUE 0
-      FORECOLOR { 0, 130, 0 }
-   END PROGRESSBAR
+      DEFINE PROGRESSBAR ProgressBar_1
+         ROW 60
+         COL 45
+         WIDTH 310
+         HEIGHT 30
+         RANGEMIN 0
+         RANGEMAX 10
+         VALUE 0
+         FORECOLOR { 0, 130, 0 }
+      END PROGRESSBAR
 
-   DEFINE LABEL Label_1
-      ROW 100
-      COL 25
-      WIDTH 350
-      HEIGHT 20
-      VALUE ""
-      FONTNAME "Arial"
-      FONTSIZE 10
-      TOOLTIP ""
-      FONTBOLD .T.
-      TRANSPARENT .T.
-      CENTERALIGN .T.
-   END LABEL
+      DEFINE LABEL Label_1
+         ROW 100
+         COL 25
+         WIDTH 350
+         HEIGHT 20
+         VALUE ""
+         FONTNAME "Arial"
+         FONTSIZE 10
+         TOOLTIP ""
+         FONTBOLD .T.
+         TRANSPARENT .T.
+         CENTERALIGN .T.
+      END LABEL
 
-   ON KEY ESCAPE ACTION Form_1.Release
+      ON KEY ESCAPE ACTION Form_1.Release
 
    END WINDOW
 
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION CreateZip()
-*------------------------------------------------------------------------------*
+
    LOCAL aDir := Directory( "f*.txt", "D" ), aFiles := {}, nLen
    LOCAL cPath := CurDrive() + ":\" + CurDir() + "\"
 
@@ -116,11 +109,9 @@ FUNCTION CreateZip()
       Form_1.Label_1.Value := 'Backup is finished'
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION ProgressUpdate( nPos, cFile, lShowFileName )
-*------------------------------------------------------------------------------*
 
    DEFAULT lShowFileName := .F.
 
@@ -131,11 +122,10 @@ FUNCTION ProgressUpdate( nPos, cFile, lShowFileName )
       InkeyGUI( 200 )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION UnZip()
-*------------------------------------------------------------------------------*
+
    LOCAL cCurDir := GetCurrentFolder(), cArchive
 
    cArchive := Getfile ( { { 'Zip Files', '*.ZIP' } }, 'Open File', cCurDir, .F., .T. )
@@ -153,11 +143,10 @@ FUNCTION UnZip()
       Form_1.Label_1.Value := 'Restoration of Backup is finished'
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION FillFiles( aFiles, cDir, cPath )
-*------------------------------------------------------------------------------*
+
    LOCAL aSubDir, cItem
 
    FOR cItem := 1 TO Len( cDir )
@@ -175,11 +164,10 @@ FUNCTION FillFiles( aFiles, cDir, cPath )
 
    NEXT
 
-RETURN aFiles
+   RETURN aFiles
 
-*------------------------------------------------------------------------------*
 FUNCTION GetFilesCountInZip ( cFileName )
-*------------------------------------------------------------------------------*
+
    LOCAL i := 0, hUnzip, nErr
 
    hUnzip := hb_UnZipOpen( cFileName )
@@ -195,11 +183,10 @@ FUNCTION GetFilesCountInZip ( cFileName )
 
    hb_UnZipClose( hUnzip )
 
-RETURN i
+   RETURN i
 
-*------------------------------------------------------------------------------*
 PROCEDURE COMPRESSFILES ( cFileName, aDir, bBlock, lOvr, lStorePath, cPassword )
-*------------------------------------------------------------------------------*
+
    LOCAL hZip, cZipFile, i
 
    IF ValType ( lOvr ) == 'L'
@@ -234,11 +221,10 @@ PROCEDURE COMPRESSFILES ( cFileName, aDir, bBlock, lOvr, lStorePath, cPassword )
 
    hb_ZipClose( hZip )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE UNCOMPRESSFILES ( cFileName, bBlock, cPassword )
-*------------------------------------------------------------------------------*
+
    LOCAL i := 0, hUnzip, nErr
    LOCAL cFile, dDate, cTime, nSize, nCompSize, lCrypted, cComment, cStorePath
 
@@ -266,4 +252,5 @@ PROCEDURE UNCOMPRESSFILES ( cFileName, bBlock, cPassword )
 
    hb_UnZipClose( hUnzip )
 
-RETURN
+   RETURN
+

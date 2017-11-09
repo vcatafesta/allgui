@@ -23,7 +23,7 @@
 
 MEMVAR _TSB_aControlhWnd, _TSB_aControlObjects, _TSB_aClientMDIhWnd
 
-Static nId := 100
+STATIC nId := 100
 
 CLASS TControl
 
@@ -84,186 +84,182 @@ CLASS TControl
    DATA   aControls  INIT {}                         // New
    DATA   oWndlAppendMode INIT .f.                   // New
 
-   CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText",;
-                                "nClrPane", "nAlign", "nTop", "nLeft",;
-                                "nWidth", "nHeight", "Cargo" }
+CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText",;
+      "nClrPane", "nAlign", "nTop", "nLeft",;
+      "nWidth", "nHeight", "Cargo" }
 
-   METHOD AddControl( hControl ) INLINE ;
-                        If( ::aControls == nil, ::aControls := {},),;
-                        AAdd( ::aControls, hControl ), ::lValidating := .f.
+METHOD AddControl( hControl ) INLINE ;
+      If( ::aControls == nil, ::aControls := {},),;
+      AAdd( ::aControls, hControl ), ::lValidating := .f.
 
-   METHOD AddVars(hControl)
+METHOD AddVars(hControl)
 
-   METHOD Change() VIRTUAL
+METHOD Change() VIRTUAL
 
-   METHOD Click() INLINE ::oWnd:AEvalWhen()
+METHOD Click() INLINE ::oWnd:AEvalWhen()
 
-   METHOD Init( hDlg )
+METHOD Init( hDlg )
 
-   METHOD Colors( hDC )
+METHOD Colors( hDC )
 
-   METHOD CoorsUpdate()                //TWindow
+METHOD CoorsUpdate()                //TWindow
 
-   METHOD Create( cClsName )           //TWindow
+METHOD Create( cClsName )           //TWindow
 
-   METHOD Default()
+METHOD Default()
 
-   METHOD DelVars(hControl)
+METHOD DelVars(hControl)
 
-   METHOD Display()              VIRTUAL
+METHOD Display()              VIRTUAL
 
-   METHOD DrawItem( nPStruct )   VIRTUAL
+METHOD DrawItem( nPStruct )   VIRTUAL
 
-   METHOD End()
+METHOD End()
 
-   METHOD EraseBkGnd( hDC )
+METHOD EraseBkGnd( hDC )
 
-   METHOD FillMeasure()          VIRTUAL
+METHOD FillMeasure()          VIRTUAL
 
-   METHOD ForWhen()
+METHOD ForWhen()
 
-   METHOD GetDlgCode( nLastKey )
+METHOD GetDlgCode( nLastKey )
 
-   METHOD GetCliRect()                 //TWindow
+METHOD GetCliRect()                 //TWindow
 
-   METHOD GetRect()
+METHOD GetRect()
 
-   METHOD GetNewId() INLINE ++nId
+METHOD GetNewId() INLINE ++nId
 
-   METHOD GotFocus( hCtlLost )
+METHOD GotFocus( hCtlLost )
 
-   METHOD GoNextCtrl( hCtrl )
+METHOD GoNextCtrl( hCtrl )
 
-   METHOD GoPrevCtrl( hCtrl )
+METHOD GoPrevCtrl( hCtrl )
 
-   METHOD LostFocus(hWndGetFocus)
+METHOD LostFocus(hWndGetFocus)
 
-   METHOD nWidth() INLINE GetWindowWidth( ::hWnd )
+METHOD nWidth() INLINE GetWindowWidth( ::hWnd )
 
-   METHOD nHeight() INLINE GetWindowHeight( ::hWnd )
+METHOD nHeight() INLINE GetWindowHeight( ::hWnd )
 
-   METHOD HandleEvent( nMsg, nWParam, nLParam )
+METHOD HandleEvent( nMsg, nWParam, nLParam )
 
-   METHOD KeyChar( nKey, nFlags )
+METHOD KeyChar( nKey, nFlags )
 
-   METHOD KeyDown( nKey, nFlags )
+METHOD KeyDown( nKey, nFlags )
 
-   METHOD KeyUp( nKey, nFlags ) VIRTUAL
+METHOD KeyUp( nKey, nFlags ) VIRTUAL
 
-   METHOD KillFocus( hCtlFocus )
+METHOD KillFocus( hCtlFocus )
 
-   METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B",;
-                                 Eval( ::bSetGet, uVal ), )
+METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B",;
+      Eval( ::bSetGet, uVal ), )
 
-   METHOD VarGet() INLINE If( ValType( ::bSetGet ) == "B", Eval( ::bSetGet ), )
+METHOD VarGet() INLINE If( ValType( ::bSetGet ) == "B", Eval( ::bSetGet ), )
 
-   METHOD LButtonDown( nRow, nCol, nKeyFlags )
+METHOD LButtonDown( nRow, nCol, nKeyFlags )
 
-   METHOD LButtonUp( nRow, nCol, nKeyFlags )
+METHOD LButtonUp( nRow, nCol, nKeyFlags )
 
-   METHOD MouseMove( nRow, nCol, nKeyFlags )
+METHOD MouseMove( nRow, nCol, nKeyFlags )
 
-   METHOD Paint() VIRTUAL
+METHOD Paint() VIRTUAL
 
-   METHOD SuperKeyDown( nKey, nFlags )
+METHOD SuperKeyDown( nKey, nFlags )
 
-//   METHOD nWidth( nNewWidth ) INLINE GetWindowWidth( ::hWnd, nNewWidth )
+   //   METHOD nWidth( nNewWidth ) INLINE GetWindowWidth( ::hWnd, nNewWidth )
 
    MESSAGE BeginPaint METHOD _BeginPaint()
 
-   METHOD EndPaint() INLINE ::nPaintCount--,;
-                     EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
+METHOD EndPaint() INLINE ::nPaintCount--,;
+   EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
 
-   METHOD Register( nClsStyle )            //TWindow
+METHOD Register( nClsStyle )            //TWindow
 
    MESSAGE SetFocus METHOD __SetFocus()   //TWindow
 
-   METHOD RButtonUp( nRow, nCol, nKeyFlags )    //TWindow
+METHOD RButtonUp( nRow, nCol, nKeyFlags )    //TWindow
 
-   METHOD Capture() INLINE  SetCapture( ::hWnd ) //TWindow
+METHOD Capture() INLINE  SetCapture( ::hWnd ) //TWindow
 
-   METHOD GetDC() INLINE ;
-       If( ::hDC == nil, ::hDC := GetDC( ::hWnd ),),;
-       If( ::nPaintCount == nil, ::nPaintCount := 1, ::nPaintCount++ ), ::hDC
+METHOD GetDC() INLINE ;
+      If( ::hDC == nil, ::hDC := GetDC( ::hWnd ),),;
+      If( ::nPaintCount == nil, ::nPaintCount := 1, ::nPaintCount++ ), ::hDC
 
-   METHOD ReleaseDC() INLINE  ::nPaintCount--, If( ::nPaintCount == 0,;
-                              If( ReleaseDC( ::hWnd, ::hDC ), ::hDC := nil,), )
+METHOD ReleaseDC() INLINE  ::nPaintCount--, If( ::nPaintCount == 0,;
+      If( ReleaseDC( ::hWnd, ::hDC ), ::hDC := nil,), )
 
-   METHOD PostMsg( nMsg, nWParam, nLParam ) INLINE ;
-               PostMessage( ::hWnd, nMsg, nWParam, nLParam )
+METHOD PostMsg( nMsg, nWParam, nLParam ) INLINE ;
+      PostMessage( ::hWnd, nMsg, nWParam, nLParam )
 
-   METHOD lValid() INLINE If( ::bValid != nil, Eval( ::bValid ), .t. )
+METHOD lValid() INLINE If( ::bValid != nil, Eval( ::bValid ), .t. )
 
-   METHOD SetMsg( cText, lDefault )
+METHOD SetMsg( cText, lDefault )
 
-   METHOD lWhen() INLINE  If( ::bWhen != nil, Eval( ::bWhen ), .t. )
+METHOD lWhen() INLINE  If( ::bWhen != nil, Eval( ::bWhen ), .t. )
 
-   METHOD SetColor( nClrFore, nClrBack, hBrush )
+METHOD SetColor( nClrFore, nClrBack, hBrush )
 
-   METHOD EndCtrl() BLOCK ;   // It has to be Block
-      { | Self, lEnd | If( lEnd := ::lValid(), ::PostMsg( WM_CLOSE ),), lEnd }
+METHOD EndCtrl() BLOCK ;   // It has to be Block
+   { | Self, lEnd | If( lEnd := ::lValid(), ::PostMsg( WM_CLOSE ),), lEnd }
 
-   METHOD Hide() INLINE ShowWindow( ::hWnd, SW_HIDE )
+METHOD Hide() INLINE ShowWindow( ::hWnd, SW_HIDE )
 
-   METHOD Show() INLINE  ShowWindow( ::hWnd, SW_SHOWNA )
+METHOD Show() INLINE  ShowWindow( ::hWnd, SW_SHOWNA )
 
-   METHOD SendMsg( nMsg, nWParam, nLParam ) INLINE SendMessage( ::hWnd, nMsg, nWParam, nLParam )
+METHOD SendMsg( nMsg, nWParam, nLParam ) INLINE SendMessage( ::hWnd, nMsg, nWParam, nLParam )
 
-   METHOD Move( nTop, nLeft, nWidth, nHeight, lRepaint )
+METHOD Move( nTop, nLeft, nWidth, nHeight, lRepaint )
 
-   METHOD ReSize( nSizeType, nWidth, nHeight )
+METHOD ReSize( nSizeType, nWidth, nHeight )
 
-   METHOD Command( nWParam, nLParam )
+METHOD Command( nWParam, nLParam )
 
-   METHOD Notify( nWParam, nLParam )
+METHOD Notify( nWParam, nLParam )
 
-   METHOD Refresh( lErase ) INLINE InvalidateRect( ::hWnd,;
-                                   If( lErase == NIL .OR. !lErase, 0, 1 ) )
+METHOD Refresh( lErase ) INLINE InvalidateRect( ::hWnd,;
+      If( lErase == NIL .OR. !lErase, 0, 1 ) )
 
-   METHOD nGetChrHeight() INLINE ::hDC := GetDC( ::hWnd ), ;
-                          ::nChrHeight := _GetTextHeight( ::hWnd, ::hDC ) //Temp
+METHOD nGetChrHeight() INLINE ::hDC := GetDC( ::hWnd ), ;
+      ::nChrHeight := _GetTextHeight( ::hWnd, ::hDC ) //Temp
 
-   METHOD GetText() INLINE GetWindowText( ::hWnd )   //TWindow
+METHOD GetText() INLINE GetWindowText( ::hWnd )   //TWindow
 
-   METHOD VScroll( nWParam, nLParam )                //TWindow
+METHOD VScroll( nWParam, nLParam )                //TWindow
 
 ENDCLASS
 
-//----------------------------------------------------------------------------//
-
 METHOD Init( hDlg ) CLASS TControl
 
-   local oRect
+   LOCAL oRect
 
    DEFAULT ::lActive := .t., ::lCaptured := .f.
 
    if( ( ::hWnd := GetDialogItemHandle( hDlg, ::nId ) ) != 0 )    //JP
-      oRect     := ::GetRect()
+   oRect     := ::GetRect()
 
-      ::nTop    := iif (::nTop    == nil, oRect:nTop,   ::nTop    )
-      ::nLeft   := iif (::nLeft   == nil, oRect:nLeft,  ::nLeft   )
-      ::nBottom := iif (::nBottom == nil, oRect:nBottom,::nBottom )
-      ::nRight  := iif (::nRight  == nil, oRect:nRight, ::nRight  )
+   ::nTop    := iif (::nTop    == nil, oRect:nTop,   ::nTop    )
+   ::nLeft   := iif (::nLeft   == nil, oRect:nLeft,  ::nLeft   )
+   ::nBottom := iif (::nBottom == nil, oRect:nBottom,::nBottom )
+   ::nRight  := iif (::nRight  == nil, oRect:nRight, ::nRight  )
 
-      ::Move (::nTop,::nLeft,::nRight - ::nLeft, ::nBottom - ::nTop)
+   ::Move (::nTop,::nLeft,::nRight - ::nLeft, ::nBottom - ::nTop)
 
-      If( ::lActive, ::Enable(), ::Disable() )
+   If( ::lActive, ::Enable(), ::Disable() )
 
-      ::Link()
+   ::Link()
 
-      if ::oFont != nil
-         ::SetFont( ::oFont )
-      else
-         ::GetFont()
-      endif
+   IF ::oFont != nil
+      ::SetFont( ::oFont )
+   ELSE
+      ::GetFont()
+   ENDIF
 
-   else
-        MsgInfo("No Valid Control ID","Error")
-   endif
+ELSE
+   MsgInfo("No Valid Control ID","Error")
+ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+RETURN NIL
 
 METHOD AddVars( hControl ) CLASS TControl
 
@@ -271,186 +267,174 @@ METHOD AddVars( hControl ) CLASS TControl
    AADD( _TSB_aControlObjects, Self )
    AADD( _TSB_aClientMDIhWnd, IF( _HMG_BeginWindowMDIActive ,GetActiveMdiHandle(),0) )
 
-Return Nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD DelVars( hControl ) CLASS TControl
 
-   local nAt := If( ! Empty( _TSB_aControlhWnd ),;
-              AScan( _TSB_aControlhWnd, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
+   LOCAL nAt := If( ! Empty( _TSB_aControlhWnd ),;
+      AScan( _TSB_aControlhWnd, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
 
    HB_SYMBOL_UNUSED( hControl )
 
-   if nAt != 0
+   IF nAt != 0
       ADel(   _TSB_aControlhWnd, nAt )
       ASize(  _TSB_aControlhWnd, Len(  _TSB_aControlhWnd ) - 1 )
       ADel(   _TSB_aControlObjects, nAt )
       ASize(  _TSB_aControlObjects, Len(   _TSB_aControlObjects ) - 1 )
       ADel(   _TSB_aClientMDIhWnd, nAt )
       ASize(  _TSB_aClientMDIhWnd, Len(   _TSB_aClientMDIhWnd ) - 1 )
-   endif
+   ENDIF
 
-Return Nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD _BeginPaint() CLASS TControl
 
-   local cPS
+   LOCAL cPS
 
-   if ::nPaintCount == nil
+   IF ::nPaintCount == nil
       ::nPaintCount := 1
-   else
+   ELSE
       ::nPaintCount++
-   endif
+   ENDIF
 
    ::hDC = BeginPaint( ::hWnd, @cPS )
    ::cPS = cPS
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD Colors( hDC ) CLASS TControl
 
    DEFAULT ::nClrText := GetTextColor( hDC ),;
-           ::nClrPane := GetBkColor( hDC ),;
-           ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
+      ::nClrPane := GetBkColor( hDC ),;
+      ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
 
    SetTextColor( hDC, ::nClrText )
    SetBkColor( hDC, ::nClrPane )
 
-return ::hBrush
-
-//----------------------------------------------------------------------------//
+   RETURN ::hBrush
 
 METHOD CoorsUpdate() CLASS TControl
 
-   local aRect := {0,0,0,0}
+   LOCAL aRect := {0,0,0,0}
 
    GetWindowRect( ::hWnd, aRect )
-/*
+   /*
    ::nTop    = aRect[ 2 ]
    ::nLeft   = aRect[ 1 ]
    ::nBottom = aRect[ 4 ]
    ::nRight  = aRect[ 3 ]
-*/
-return nil
+   */
 
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD Create( cClsName )  CLASS TControl
 
-   local xStyle := 0
+   LOCAL xStyle := 0
 
    DEFAULT cClsName := ::ClassName(), ::cCaption := "",;
-           ::nStyle := WS_OVERLAPPEDWINDOW,;
-           ::nTop   := 0, ::nLeft := 0, ::nBottom := 10, ::nRight := 10,;
-           ::nId    := 0
+      ::nStyle := WS_OVERLAPPEDWINDOW,;
+      ::nTop   := 0, ::nLeft := 0, ::nBottom := 10, ::nRight := 10,;
+      ::nId    := 0
 
-   if ::hWnd != nil
+   IF ::hWnd != nil
       ::nStyle := nOr( ::nStyle, WS_CHILD )
-   endif
+   ENDIF
 
-   if ::hBrush == nil
+   IF ::hBrush == nil
       ::hBrush := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
-   endif
+   ENDIF
 
-   if GetClassInfo( GetInstance(), cClsName ) == nil
-       if _HMG_MainClientMDIHandle != 0
-           ::lRegistered := Register_Class( cClsName, ::hBrush , _HMG_MainClientMDIHandle )
-        else
-           ::lRegistered := Register_Class( cClsName, ::hBrush )
-        endif
-   else
+   IF GetClassInfo( GetInstance(), cClsName ) == nil
+      IF _HMG_MainClientMDIHandle != 0
+         ::lRegistered := Register_Class( cClsName, ::hBrush , _HMG_MainClientMDIHandle )
+      ELSE
+         ::lRegistered := Register_Class( cClsName, ::hBrush )
+      ENDIF
+   ELSE
       ::lRegistered := .t.
-   endif
+   ENDIF
 
-   if ::nBottom != CW_USEDEFAULT
+   IF ::nBottom != CW_USEDEFAULT
 
-     ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
-                               ::nRight - ::nLeft + 1,::nBottom - ::nTop + 1, ;
-                               ::hWndParent, 0, GetInstance() , ::nId )
+      ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
+         ::nRight - ::nLeft + 1,::nBottom - ::nTop + 1, ;
+         ::hWndParent, 0, GetInstance() , ::nId )
 
-   else
+   ELSE
 
-     ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
-                               ::nRight , ::nBottom , ;
-                               ::hWndParent, 0, GetInstance() , ::nId )
-   endif
+      ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
+         ::nRight , ::nBottom , ;
+         ::hWndParent, 0, GetInstance() , ::nId )
+   ENDIF
 
-   if ::hWnd == 0
-        MsgAlert( 'Window Create Error!', 'Alert' )
-   else
+   IF ::hWnd == 0
+      MsgAlert( 'Window Create Error!', 'Alert' )
+   ELSE
       ::AddVars( ::hWnd )
-   endif
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD Default() CLASS TControl
 
    ::lCaptured := .f.
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD End() CLASS TControl
 
-   local ix
-   local nAt := If( ! Empty( ::oWnd:aControls ),;
-              AScan( ::oWnd:aControls, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
+   LOCAL ix
+   LOCAL nAt := If( ! Empty( ::oWnd:aControls ),;
+      AScan( ::oWnd:aControls, { | hCtrl | hCtrl == Self:hWnd } ), 0 )
 
-   if nAt != 0
+   IF nAt != 0
       ADel( ::oWnd:aControls, nAt )
       ASize( ::oWnd:aControls, Len( ::oWnd:aControls ) - 1 )
-   endif
+   ENDIF
 
    ::DelVars( Self:hWnd )
 
-   if "TGETBOX" $ Upper( Self:ClassName() )
+   IF "TGETBOX" $ Upper( Self:ClassName() )
       ix := GetControlIndex ( ::cControlName, ::oWnd:cParentWnd )
-      if ix > 0
+      IF ix > 0
          ReleaseControl ( _HMG_aControlHandles [ix] )
          _HMG_aControlDeleted [ix] := .T.
-      endif
-   endif
-   if "TBTNBOX" $ Upper( Self:ClassName() )
-      if ::hWndChild != nil
-        PostMessage( ::hWndChild, WM_CLOSE )
-      endif
+      ENDIF
+   ENDIF
+   IF "TBTNBOX" $ Upper( Self:ClassName() )
+      IF ::hWndChild != nil
+         PostMessage( ::hWndChild, WM_CLOSE )
+      ENDIF
       ::PostMsg( WM_CLOSE )
-      return .T.
-   endif
 
-return ::EndCtrl()
+      RETURN .T.
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN ::EndCtrl()
+
 METHOD EraseBkGnd( hDC ) CLASS TControl
 
-   Local aRect
+   LOCAL aRect
 
-   if IsIconic( ::hWnd )
-      if ::hWnd != nil
+   IF IsIconic( ::hWnd )
+      IF ::hWnd != nil
          aRect := ::GetCliRect( ::hWnd )
          FillRect(hDC, aRect[1], aRect[2], aRect[3], aRect[4], ::hBrush )
-         return 1
-      endif
-      return 0
-   endif
 
-   if ::hBrush != nil .and. ! Empty( ::hBrush )   //JP
-        aRect := ::GetCliRect( ::hWnd )
-        FillRect( hDC, aRect[1], aRect[2], aRect[3], aRect[4], ::hBrush )
-      return 1
-   endif
+         RETURN 1
+      ENDIF
 
-return 0   //nil JP
+      RETURN 0
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   IF ::hBrush != nil .and. ! Empty( ::hBrush )   //JP
+      aRect := ::GetCliRect( ::hWnd )
+      FillRect( hDC, aRect[1], aRect[2], aRect[3], aRect[4], ::hBrush )
+
+      RETURN 1
+   ENDIF
+
+   RETURN 0   //nil JP
 
 METHOD ForWhen() CLASS TControl
 
@@ -459,58 +443,50 @@ METHOD ForWhen() CLASS TControl
    ::lCaptured := .f.
 
    // keyboard navigation
-   if ::oWnd:nLastKey == VK_UP .or. ::oWnd:nLastKey == VK_DOWN ;
-      .or. ::oWnd:nLastKey == VK_RETURN .or. ::oWnd:nLastKey == VK_TAB
-      if _GetKeyState( VK_SHIFT )
+   IF ::oWnd:nLastKey == VK_UP .or. ::oWnd:nLastKey == VK_DOWN ;
+         .or. ::oWnd:nLastKey == VK_RETURN .or. ::oWnd:nLastKey == VK_TAB
+      IF _GetKeyState( VK_SHIFT )
          ::GoPrevCtrl( ::hWnd )
-      else
+      ELSE
          ::GoNextCtrl( ::hWnd )
-      endif
-   else
-      if Empty( GetFocus() )
+      ENDIF
+   ELSE
+      IF Empty( GetFocus() )
          SetFocus( ::hWnd )
-      endif
-   endif
+      ENDIF
+   ENDIF
 
    ::oWnd:nLastKey := 0
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD GetCliRect() CLASS TControl
 
-   local aRect := _GetClientRect( ::hWnd )
+   LOCAL aRect := _GetClientRect( ::hWnd )
 
-return aRect
-
-//----------------------------------------------------------------------------//
+   RETURN aRect
 
 METHOD GetDlgCode( nLastKey ) CLASS TControl
 
-   if .not. ::oWnd:lValidating
-      if nLastKey == VK_RETURN .or. nLastKey == VK_TAB
+   IF .not. ::oWnd:lValidating
+      IF nLastKey == VK_RETURN .or. nLastKey == VK_TAB
          ::oWnd:nLastKey := nLastKey
 
-      // don't do a else here with :nLastKey = 0
-      // or WHEN does not work properly, as we pass here twice before
-      // evaluating the WHEN
-      endif
-   endif
+         // don't do a else here with :nLastKey = 0
+         // or WHEN does not work properly, as we pass here twice before
+         // evaluating the WHEN
+      ENDIF
+   ENDIF
 
-return DLGC_WANTALLKEYS // It is the only way to have 100% control using Folders
-
-//----------------------------------------------------------------------------//
+   RETURN DLGC_WANTALLKEYS // It is the only way to have 100% control using Folders
 
 METHOD GetRect() CLASS TControl
 
-   local aRect := {0,0,0,0}
+   LOCAL aRect := {0,0,0,0}
 
-    GetWindowRect( ::hWnd ,aRect )
+   GetWindowRect( ::hWnd ,aRect )
 
-return aRect
-
-//----------------------------------------------------------------------------//
+   RETURN aRect
 
 METHOD GotFocus( hCtlLost )
 
@@ -518,156 +494,153 @@ METHOD GotFocus( hCtlLost )
    ::lFocused := .t.
    ::SetMsg( ::cMsg )
 
-   if ::bGotFocus != nil
-      return Eval( ::bGotFocus )
-   endif
+   IF ::bGotFocus != nil
 
-return nil
+      RETURN Eval( ::bGotFocus )
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD GoNextCtrl( hCtrl ) CLASS TControl
 
-   local hCtlNext
+   LOCAL hCtlNext
+
    hCtlNext := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , .f. )
 
    ::hCtlFocus = hCtlNext
-   if hCtlNext != hCtrl
+   IF hCtlNext != hCtrl
       SetFocus( hCtlNext )
-   endif
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD GoPrevCtrl( hCtrl ) CLASS TControl
 
-   local hCtlPrev
+   LOCAL hCtlPrev
+
    hCtlPrev := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , .t. )
 
    ::hCtlFocus = hCtlPrev
-   if hCtlPrev != hCtrl
+   IF hCtlPrev != hCtrl
       SetFocus( hCtlPrev )
-   endif
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD KeyChar( nKey, nFlags ) CLASS TControl
 
-   local bKeyAction := SetKey( nKey )
+   LOCAL bKeyAction := SetKey( nKey )
 
-   do case
-      case nKey == VK_TAB .and. _GetKeyState( VK_SHIFT )
-           ::GoPrevCtrl( ::hWnd )
-           return 0    // We don't want API default behavior
+   DO CASE
+   CASE nKey == VK_TAB .and. _GetKeyState( VK_SHIFT )
+      ::GoPrevCtrl( ::hWnd )
 
-      case nKey == VK_TAB
-           ::GoNextCtrl( ::hWnd )
-           return 0    // We don't want API default behavior
-   endcase
+      RETURN 0    // We don't want API default behavior
 
-   if bKeyAction != nil     // Clipper SET KEYs !!!
-      return Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
-   endif
+   CASE nKey == VK_TAB
+      ::GoNextCtrl( ::hWnd )
 
-   if ::bKeyChar != nil
-      return Eval( ::bKeyChar, nKey, nFlags )
-   endif
+      RETURN 0    // We don't want API default behavior
+   ENDCASE
 
-return 0
+   IF bKeyAction != nil     // Clipper SET KEYs !!!
 
-//----------------------------------------------------------------------------//
+      RETURN Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
+   ENDIF
+
+   IF ::bKeyChar != nil
+
+      RETURN Eval( ::bKeyChar, nKey, nFlags )
+   ENDIF
+
+   RETURN 0
 
 METHOD KeyDown( nKey, nFlags ) CLASS TControl
 
-   local bKeyAction := SetKey( nKey )
+   LOCAL bKeyAction := SetKey( nKey )
 
-   if nKey == VK_TAB .and. ::hWnd != nil
+   IF nKey == VK_TAB .and. ::hWnd != nil
       ::GoNextCtrl( ::hWnd )
-      return 0
-   endif
 
-  if bKeyAction != nil     // Clipper SET KEYs !!!
-     Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
-     return 0
-   endif
+      RETURN 0
+   ENDIF
 
-   if nKey == VK_F1
-//JP      ::HelpTopic()
-      return 0
-   endif
+   IF bKeyAction != nil     // Clipper SET KEYs !!!
+      Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
 
-   if ::bKeyDown != nil
-      return Eval( ::bKeyDown, nKey, nFlags )
-   endif
+      RETURN 0
+   ENDIF
 
-return 0
+   IF nKey == VK_F1
+      //JP      ::HelpTopic()
 
-//----------------------------------------------------------------------------//
+      RETURN 0
+   ENDIF
+
+   IF ::bKeyDown != nil
+
+      RETURN Eval( ::bKeyDown, nKey, nFlags )
+   ENDIF
+
+   RETURN 0
 
 METHOD KillFocus( hCtlFocus ) CLASS TControl
 
    HB_SYMBOL_UNUSED( hCtlFocus )
-return ::LostFocus()
 
-//----------------------------------------------------------------------------//
+   RETURN ::LostFocus()
+
 METHOD LButtonDown( nRow, nCol, nKeyFlags ) CLASS TControl
 
    ::lMouseDown := .t.
    ::nLastRow   := nRow
    ::nLastCol   := nCol
 
-   if ::bLClicked != nil
-      return Eval( ::bLClicked, nRow, nCol, nKeyFlags )
-   endif
+   IF ::bLClicked != nil
 
-return nil
+      RETURN Eval( ::bLClicked, nRow, nCol, nKeyFlags )
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD LButtonUp( nRow, nCol, nKeyFlags ) CLASS TControl
 
-   if ::bLButtonUp != nil
-      return Eval( ::bLButtonUp, nRow, nCol, nKeyFlags )
-   endif
+   IF ::bLButtonUp != nil
 
-return nil
+      RETURN Eval( ::bLButtonUp, nRow, nCol, nKeyFlags )
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD LostFocus( hWndGetFocus ) CLASS TControl
 
    ::lFocused := .f.
    ::SetMsg()
-   if ! Empty( ::bLostFocus )
-      return Eval( ::bLostFocus, hWndGetFocus )
-   endif
+   IF ! Empty( ::bLostFocus )
 
-RETURN nil
+      RETURN Eval( ::bLostFocus, hWndGetFocus )
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD MouseMove( nRow, nCol, nKeyFlags ) CLASS TControl
 
-   if ::oCursor != nil
+   IF ::oCursor != nil
       SetResCursor( ::oCursor:hCursor )
-   else
+   ELSE
       CursorArrow()
-   endif
+   ENDIF
 
-   if ::lFocused
+   IF ::lFocused
       ::SetMsg( ::cMsg, ::lKeepDefaultStatus )
-   endif
+   ENDIF
 
-   if ::bMMoved != nil
-      return Eval( ::bMMoved, nRow, nCol, nKeyFlags )
-   endif
+   IF ::bMMoved != nil
 
-return 0
+      RETURN Eval( ::bMMoved, nRow, nCol, nKeyFlags )
+   ENDIF
 
-//----------------------------------------------------------------------------//
+   RETURN 0
 
 METHOD Move( nTop, nLeft, nWidth, nHeight, lRepaint ) CLASS TControl
 
@@ -675,314 +648,332 @@ METHOD Move( nTop, nLeft, nWidth, nHeight, lRepaint ) CLASS TControl
 
    ::CoorsUpdate()
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD RButtonUp( nRow, nCol, nKeyFlags ) CLASS TControl
 
-   if ::bRButtonUp != nil
+   IF ::bRButtonUp != nil
       Eval( ::bRButtonUp, nRow, nCol, nKeyFlags )
-   endif
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD Register( nClsStyle )  CLASS TControl
 
-   local hUser, ClassName
+   LOCAL hUser, ClassName
 
    DEFAULT ::lRegistered := .f.
 
-   if ::lRegistered
-      return nil
-   endif
+   IF ::lRegistered
+
+      RETURN NIL
+   ENDIF
 
    hUser := GetInstance()
 
-   ClassName := ::cControlName
+ClassName := ::cControlName
 
    DEFAULT nClsStyle  := nOr( CS_VREDRAW, CS_HREDRAW ),;
-           ::nClrPane := GetSysColor( COLOR_WINDOW ),;
-           ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
+      ::nClrPane := GetSysColor( COLOR_WINDOW ),;
+      ::hBrush   := CreateSolidBrush( GetRed( ::nClrPane ), GetGreen( ::nClrPane ), GetBlue( ::nClrPane ) )
 
    nClsStyle := nOr( nClsStyle, CS_GLOBALCLASS, CS_DBLCLKS )
 
-   if GetClassInfo( hUser, ClassName ) == nil
+   IF GetClassInfo( hUser, ClassName ) == nil
       ::lRegistered := Register_Class( ClassName, nClsStyle, "", , hUser, 0, ::hBrush )
-   else
+   ELSE
       ::lRegistered := .t.
-   endif
+   ENDIF
 
-return ::hBrush
-
-//----------------------------------------------------------------------------//
+   RETURN ::hBrush
 
 METHOD ReSize( nSizeType, nWidth, nHeight ) CLASS TControl
 
    ::CoorsUpdate()
-   if ::bResized != nil
+   IF ::bResized != nil
       Eval( ::bResized, nSizeType, nWidth, nHeight )
-   endif
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD SetMsg( cText, lDefault ) CLASS TControl
 
-    Local cOldText, cParentWnd
+   LOCAL cOldText, cParentWnd
 
-    If ::nStatusItem < 1 
-       return Nil 
-    EndIf 
+   IF ::nStatusItem < 1
 
-    DEFAULT lDefault := .F. , cText := ""
+      RETURN NIL
+   ENDIF
 
-    cParentWnd := iif( _HMG_MainClientMDIHandle == 0, ::cParentWnd, _HMG_MainClientMDIName )
+   DEFAULT lDefault := .F. , cText := ""
 
-    if _IsWindowActive ( cParentWnd )
-      if _IsControlDefined ( "StatusBar" , cParentWnd )
-         if !lDefault
+   cParentWnd := iif( _HMG_MainClientMDIHandle == 0, ::cParentWnd, _HMG_MainClientMDIName )
+
+   IF _IsWindowActive ( cParentWnd )
+      IF _IsControlDefined ( "StatusBar" , cParentWnd )
+         IF !lDefault
             cOldText := GetItemBar( _HMG_ActiveStatusHandle , ::nStatusItem )
-            if !(AllTrim(cOldText) == AllTrim(cText))
+            IF !(AllTrim(cOldText) == AllTrim(cText))
                SetProperty( cParentWnd, "StatusBar", "Item", ::nStatusItem, cText )
-            endif
-         elseif valtype ( _HMG_DefaultStatusBarMessage ) == "C"
+            ENDIF
+         ELSEIF valtype ( _HMG_DefaultStatusBarMessage ) == "C"
             SetProperty( cParentWnd, "StatusBar", "Item", ::nStatusItem, _HMG_DefaultStatusBarMessage )
-         endif
-      endif
-    endif
+         ENDIF
+      ENDIF
+   ENDIF
 
-return nil
-
-//----------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD SetColor( nClrFore, nClrBack, hBrush ) CLASS TControl
 
    ::nClrText = nClrFore
    ::nClrPane = nClrBack
 
-   If ::hBrush != nil
-      DeleteObject( ::hBrush )  // Alen Uzelac 13.09.2012
-   EndIf
+   IF ::hBrush != nil
+      DELETEObject( ::hBrush )  // Alen Uzelac 13.09.2012
+   ENDIF
 
-   if hBrush != nil
+   IF hBrush != nil
       ::hBrush := hBrush
-   else
+   ELSE
       ::hBrush := CreateSolidBrush( GetRed( nClrBack ), GetGreen( nClrBack ), GetBlue( nClrBack ) )
-   endif
+   ENDIF
 
-return nil
+   RETURN NIL
 
-//==========From TWindow ===============================
+   //==========From TWindow ===============================
 
 METHOD SuperKeyDown( nKey, nFlags ) CLASS TControl
 
-  local bKeyAction := SetKey( nKey )
+   LOCAL bKeyAction := SetKey( nKey )
 
-  if bKeyAction != nil     // Clipper SET KEYs !!!
-     Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
-     return 0
-   endif
+   IF bKeyAction != nil     // Clipper SET KEYs !!!
+      Eval( bKeyAction, ProcName( 4 ), ProcLine( 4 ) )
 
-   if nKey == VK_F1
-//      ::HelpTopic()
-      return 0
-   endif
+      RETURN 0
+   ENDIF
 
-   if ::bKeyDown != nil
-      return Eval( ::bKeyDown, nKey, nFlags )
-   endif
+   IF nKey == VK_F1
+      //      ::HelpTopic()
 
-return nil
+      RETURN 0
+   ENDIF
+
+   IF ::bKeyDown != nil
+
+      RETURN Eval( ::bKeyDown, nKey, nFlags )
+   ENDIF
+
+   RETURN NIL
 
 METHOD __SetFocus() CLASS TControl
 
-   if ::lWhen()
+   IF ::lWhen()
       SetFocus( ::hWnd )
       ::oWnd:hCtlFocus := ::hWnd
-   endif
+   ENDIF
 
-return nil
+   RETURN NIL
 
 METHOD VScroll( nWParam, nLParam ) CLASS TControl
 
-   local nScrHandle := HiWord( nLParam )
+   LOCAL nScrHandle := HiWord( nLParam )
 
-   if nScrHandle == 0                   // Window ScrollBar
-      if ::oVScroll != nil
-         do case
-            case nWParam == SB_LINEUP
-                 ::oVScroll:GoUp()
+   IF nScrHandle == 0                   // Window ScrollBar
+      IF ::oVScroll != nil
+         DO CASE
+         CASE nWParam == SB_LINEUP
+            ::oVScroll:GoUp()
 
-            case nWParam == SB_LINEDOWN
-                 ::oVScroll:GoDown()
+         CASE nWParam == SB_LINEDOWN
+            ::oVScroll:GoDown()
 
-            case nWParam == SB_PAGEUP
-                 ::oVScroll:PageUp()
+         CASE nWParam == SB_PAGEUP
+            ::oVScroll:PageUp()
 
-            case nWParam == SB_PAGEDOWN
-                 ::oVScroll:PageDown()
+         CASE nWParam == SB_PAGEDOWN
+            ::oVScroll:PageDown()
 
-            case nWParam == SB_THUMBPOSITION
-                 ::oVScroll:ThumbPos( LoWord( nLParam ) )
+         CASE nWParam == SB_THUMBPOSITION
+            ::oVScroll:ThumbPos( LoWord( nLParam ) )
 
-            case nWParam == SB_THUMBTRACK
-                 ::oVScroll:ThumbTrack( LoWord( nLParam ) )
+         CASE nWParam == SB_THUMBTRACK
+            ::oVScroll:ThumbTrack( LoWord( nLParam ) )
 
-            case nWParam == SB_ENDSCROLL
-                 return 0
-         endcase
-      endif
-   else                                 // Control ScrollBar
-      do case
-         case nWParam == SB_LINEUP
-              SendMessage( nScrHandle, FM_SCROLLUP )
+         CASE nWParam == SB_ENDSCROLL
 
-         case nWParam == SB_LINEDOWN
-              SendMessage( nScrHandle, FM_SCROLLDOWN )
+            RETURN 0
+         ENDCASE
+      ENDIF
+   ELSE                                 // Control ScrollBar
+      DO CASE
+      CASE nWParam == SB_LINEUP
+         SendMessage( nScrHandle, FM_SCROLLUP )
 
-         case nWParam == SB_PAGEUP
-              SendMessage( nScrHandle, FM_SCROLLPGUP )
+      CASE nWParam == SB_LINEDOWN
+         SendMessage( nScrHandle, FM_SCROLLDOWN )
 
-         case nWParam == SB_PAGEDOWN
-              SendMessage( nScrHandle, FM_SCROLLPGDN )
+      CASE nWParam == SB_PAGEUP
+         SendMessage( nScrHandle, FM_SCROLLPGUP )
 
-         case nWParam == SB_THUMBPOSITION
-              SendMessage( nScrHandle, FM_THUMBPOS, LoWord( nLParam ) )
+      CASE nWParam == SB_PAGEDOWN
+         SendMessage( nScrHandle, FM_SCROLLPGDN )
 
-         case nWParam == SB_THUMBTRACK
-              SendMessage( nScrHandle, FM_THUMBTRACK, LoWord( nLParam ) )
-      endcase
-   endif
+      CASE nWParam == SB_THUMBPOSITION
+         SendMessage( nScrHandle, FM_THUMBPOS, LoWord( nLParam ) )
 
-return 0
+      CASE nWParam == SB_THUMBTRACK
+         SendMessage( nScrHandle, FM_THUMBTRACK, LoWord( nLParam ) )
+      ENDCASE
+   ENDIF
+
+   RETURN 0
 
 METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TControl
 
-   do case
+   DO CASE
 
-   case nMsg == WM_CLOSE
-            return 0
+   CASE nMsg == WM_CLOSE
 
-   case nMsg == WM_COMMAND
-           return ::Command( nWParam, nLParam )
+      RETURN 0
 
-   case nMsg == WM_NOTIFY
-           return ::Notify( nWParam, nLParam )
+   CASE nMsg == WM_COMMAND
 
-   case nMsg == WM_PAINT
-           ::BeginPaint()
-           ::Paint()
-           ::EndPaint()
-           SysRefresh()
-      case nMsg == WM_DESTROY
-           return ::Destroy()
+      RETURN ::Command( nWParam, nLParam )
 
-      case nMsg == WM_DRAWITEM
-           return ::DrawItem( nWParam, nLParam )
+   CASE nMsg == WM_NOTIFY
 
-      case nMsg == WM_ERASEBKGND
-           return ::EraseBkGnd( nWParam )
+      RETURN ::Notify( nWParam, nLParam )
 
-      case nMsg == WM_HSCROLL
-           return ::HScroll( nWParam, nLParam )
+   CASE nMsg == WM_PAINT
+      ::BeginPaint()
+      ::Paint()
+      ::EndPaint()
+      SysRefresh()
+   CASE nMsg == WM_DESTROY
 
-      case nMsg == WM_KEYDOWN
-           return ::KeyDown( nWParam, nLParam )
+      RETURN ::Destroy()
 
-      case nMsg == WM_CHAR
-           return ::KeyChar( nWParam, nLParam )
+   CASE nMsg == WM_DRAWITEM
 
-      CASE nMsg == WM_GETDLGCODE
-            return ::GetDlgCode( nWParam )
+      RETURN ::DrawItem( nWParam, nLParam )
 
-      case nMsg == WM_KILLFOCUS
-           return ::LostFocus( nWParam ) // LostFocus(), not KillFocus()!!!
+   CASE nMsg == WM_ERASEBKGND
 
-      case nMsg == WM_LBUTTONDOWN
-           return ::LButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
-                                 nWParam )
-      case nMsg == WM_LBUTTONUP
-           return ::LButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
-                               nWParam )
-      case nMsg == WM_MOUSEMOVE
-           return ::MouseMove( HiWord( nLParam ), LoWord( nLParam ),;
-                               nWParam )
+      RETURN ::EraseBkGnd( nWParam )
 
-      case nMsg == WM_RBUTTONDOWN
-           return ::RButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
-                                 nWParam )
-      case nMsg == WM_RBUTTONUP
-           return ::RButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
-                               nWParam )
-      case nMsg == WM_SETFOCUS
-           return ::GotFocus( nWParam )
+   CASE nMsg == WM_HSCROLL
 
-      case nMsg == WM_VSCROLL
-           return ::VScroll( nWParam, nLParam )
+      RETURN ::HScroll( nWParam, nLParam )
 
-      case nMsg == WM_SIZE
-           return ::ReSize( nWParam, LoWord( nLParam ), HiWord( nLParam ) )
+   CASE nMsg == WM_KEYDOWN
 
-      case nMsg == WM_TIMER
-           return ::Timer( nWParam, nLParam )
+      RETURN ::KeyDown( nWParam, nLParam )
 
-      case nMsg == WM_ASYNCSELECT
-           return ::AsyncSelect( nWParam, nLParam )
+   CASE nMsg == WM_CHAR
 
-      endcase
+      RETURN ::KeyChar( nWParam, nLParam )
 
-RETURN 0
+   CASE nMsg == WM_GETDLGCODE
+
+      RETURN ::GetDlgCode( nWParam )
+
+   CASE nMsg == WM_KILLFOCUS
+
+      RETURN ::LostFocus( nWParam ) // LostFocus(), not KillFocus()!!!
+
+   CASE nMsg == WM_LBUTTONDOWN
+
+      RETURN ::LButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
+         nWParam )
+   CASE nMsg == WM_LBUTTONUP
+
+      RETURN ::LButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
+         nWParam )
+   CASE nMsg == WM_MOUSEMOVE
+
+      RETURN ::MouseMove( HiWord( nLParam ), LoWord( nLParam ),;
+         nWParam )
+
+   CASE nMsg == WM_RBUTTONDOWN
+
+      RETURN ::RButtonDown( HiWord( nLParam ), LoWord( nLParam ),;
+         nWParam )
+   CASE nMsg == WM_RBUTTONUP
+
+      RETURN ::RButtonUp( HiWord( nLParam ), LoWord( nLParam ),;
+         nWParam )
+   CASE nMsg == WM_SETFOCUS
+
+      RETURN ::GotFocus( nWParam )
+
+   CASE nMsg == WM_VSCROLL
+
+      RETURN ::VScroll( nWParam, nLParam )
+
+   CASE nMsg == WM_SIZE
+
+      RETURN ::ReSize( nWParam, LoWord( nLParam ), HiWord( nLParam ) )
+
+   CASE nMsg == WM_TIMER
+
+      RETURN ::Timer( nWParam, nLParam )
+
+   CASE nMsg == WM_ASYNCSELECT
+
+      RETURN ::AsyncSelect( nWParam, nLParam )
+
+   ENDCASE
+
+   RETURN 0
 
 METHOD Command( nWParam, nLParam ) CLASS TControl
 
-   local nNotifyCode, hWndCtl
+   LOCAL nNotifyCode, hWndCtl
 
    nNotifyCode := HiWord( nWParam )
-//   nID         = LoWord( nWParam )
+   //   nID         = LoWord( nWParam )
    hWndCtl     := nLParam
 
-   do case
-   case hWndCtl == 0
+   DO CASE
+   CASE hWndCtl == 0
 
       * TGet Enter ......................................
-      if HiWord(nWParam) == 0 .and. LoWord(nWParam) == 1
+      IF HiWord(nWParam) == 0 .and. LoWord(nWParam) == 1
          ::KeyDown( VK_RETURN, 0 )
-      EndIf
+      ENDIF
       * TGet Escape .....................................
-      if HiWord(nwParam) == 0 .and. LoWord(nwParam) == 2
+      IF HiWord(nwParam) == 0 .and. LoWord(nwParam) == 2
          ::KeyDown( VK_ESCAPE, 0 )
-      endif
+      ENDIF
 
-   case hWndCtl != 0
+   CASE hWndCtl != 0
 
-      do case
-         case nNotifyCode == CBN_KILLFOCUS
-           ::LostFocus()
-         case nNotifyCode == NM_KILLFOCUS
-           ::LostFocus()
-         case nNotifyCode == EN_KILLFOCUS
-           ::LostFocus()
-//       case nNotifyCode == EN_UPDATE
-//         ::KeyDown( VK_RETURN, 0 )
-      endcase
+      DO CASE
+      CASE nNotifyCode == CBN_KILLFOCUS
+         ::LostFocus()
+      CASE nNotifyCode == NM_KILLFOCUS
+         ::LostFocus()
+      CASE nNotifyCode == EN_KILLFOCUS
+         ::LostFocus()
+         //       case nNotifyCode == EN_UPDATE
+         //         ::KeyDown( VK_RETURN, 0 )
+      ENDCASE
 
-   endcase
+   ENDCASE
 
-return nil
+   RETURN NIL
 
 METHOD Notify( nWParam, nLParam ) CLASS TControl
 
    HB_SYMBOL_UNUSED( nWParam )
 
-//   nNotifyCode := GetNotifyCode (nLParam )
-//   hWndCtl     := GetHwndFrom ( nLParam)
+   //   nNotifyCode := GetNotifyCode (nLParam )
+   //   hWndCtl     := GetHwndFrom ( nLParam)
 
-   If GetNotifyCode( nLParam ) == NM_KILLFOCUS
+   IF GetNotifyCode( nLParam ) == NM_KILLFOCUS
       ::LostFocus()
-   endif
+   ENDIF
 
-return nil
+   RETURN NIL
+

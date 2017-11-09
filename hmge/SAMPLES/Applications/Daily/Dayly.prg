@@ -81,11 +81,13 @@ FUNCTION MAIN
    PUBLIC aPrRF := {}
 
    PUBLIC aMS := {}
+
    FOR i = 1 TO 12
       AAdd( aMS, CMonth( CToD( '01.01.2013' ) + ( i - 1 ) * 32 ) )
    NEXT
 
    PUBLIC aDay := {}
+
    dStart := CToD( '20.10.2013' )
    FOR i = 1 TO 7
       AAdd( aDay, CDoW( dStart + i - 1 ) )
@@ -101,6 +103,7 @@ FUNCTION MAIN
       { { 196, 228, 255 }, { 44,  198, 255 }, {  44, 84, 255 } } }
 
    IF !File( 'dayly.set' )
+
       RETURN NIL
    ENDIF
 
@@ -125,103 +128,102 @@ FUNCTION MAIN
    OpenTable()
 
    DEFINE WINDOW WinDayly AT 10, nScrWidth / 2 -nWidthWin / 2 ;
-      WIDTH nWidthWin HEIGHT 240 ;
-      TITLE cNameApp ICON 'MAIN' ;
-      MAIN ;
-      NOCAPTION NOSIZE NOMAXIMIZE ;
-      NOSHOW ;
-      NOTIFYICON 'TRAY' BACKCOLOR aClr[ 2 ] ;
-      NOTIFYTOOLTIP 'Dayly is activated!' ;
-      ON NOTIFYCLICK DoMethod( 'WinDayly', 'Show' )
+         WIDTH nWidthWin HEIGHT 240 ;
+         TITLE cNameApp ICON 'MAIN' ;
+         MAIN ;
+         NOCAPTION NOSIZE NOMAXIMIZE ;
+         NOSHOW ;
+         NOTIFYICON 'TRAY' BACKCOLOR aClr[ 2 ] ;
+         NOTIFYTOOLTIP 'Dayly is activated!' ;
+         ON NOTIFYCLICK DoMethod( 'WinDayly', 'Show' )
 
-   IF SETI->i_2 = .T.
-      WinDayly.Topmost := .T.
-   ENDIF
+      IF SETI->i_2 = .T.
+         WinDayly.Topmost := .T.
+      ENDIF
 
-   ON KEY ALT + F4 ACTION ExitDayly()
+      ON KEY ALT + F4 ACTION ExitDayly()
 
-   DEFINE NOTIFY MENU
-      ITEM 'Show/Hide'           IMAGE 'M_WND' ACTION iif( IsWindowVisible( GetFormHandle( 'WinDayly' ) ), WinDayly.Hide(), WinDayly.Restore() )
-      SEPARATOR
-      ITEM 'Events control'      IMAGE 'M_DLG' ACTION DaylyEvents()
-      ITEM 'Additional settings' IMAGE 'M_SET' ACTION SetDayly()
-      SEPARATOR
-      ITEM 'Help'                IMAGE 'M_HELP' ACTION _Execute ( GetActiveWindow(), "open", "dayly.chm",  ,  , 1 )
-      ITEM 'About'               IMAGE 'M_INFO' ACTION DaylyAbout()
-      SEPARATOR
-      ITEM 'Exit'                IMAGE 'M_EXIT' ACTION ExitDayly()
-   END MENU
+      DEFINE NOTIFY MENU
+         ITEM 'Show/Hide'           IMAGE 'M_WND' ACTION iif( IsWindowVisible( GetFormHandle( 'WinDayly' ) ), WinDayly.Hide(), WinDayly.Restore() )
+         SEPARATOR
+         ITEM 'Events control'      IMAGE 'M_DLG' ACTION DaylyEvents()
+         ITEM 'Additional settings' IMAGE 'M_SET' ACTION SetDayly()
+         SEPARATOR
+         ITEM 'Help'                IMAGE 'M_HELP' ACTION _Execute ( GetActiveWindow(), "open", "dayly.chm",  ,  , 1 )
+         ITEM 'About'               IMAGE 'M_INFO' ACTION DaylyAbout()
+         SEPARATOR
+         ITEM 'Exit'                IMAGE 'M_EXIT' ACTION ExitDayly()
+      END MENU
 
-   @ 01, 01  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
-   @ 14, 14  LABEL LblName1 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
-      ACTION MoveActiveWindow()
-   @ 15, 15  LABEL LblName2 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
-      ACTION MoveActiveWindow()
+      @ 01, 01  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
+      @ 14, 14  LABEL LblName1 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
+         ACTION MoveActiveWindow()
+      @ 15, 15  LABEL LblName2 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
+         ACTION MoveActiveWindow()
 
+      @ 25, 100  LABEL Lblbb WIDTH 87 HEIGHT 28 BACKCOLOR aClr[ 3 ] ;
+         ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ) } ;
+         ON CLICK ShellExecute( 0, "open", 'control.exe', 'timedate.cpl', , 1 )
+      @ 25, 105  LABEL LblTime WIDTH 60 HEIGHT 27  VALUE Left( Time(), 5 ) ;
+         FONT 'Arial' SIZE 18 BOLD  FONTCOLOR aClr[ 1 ] TRANSPARENT
+      @ 25, 167  LABEL LblSec WIDTH 20 HEIGHT 26 VALUE Right( Time(), 2 ) ;
+         FONT 'Arial' SIZE 11 BOLD  FONTCOLOR aClr[ 1 ] TRANSPARENT
 
-   @ 25, 100  LABEL Lblbb WIDTH 87 HEIGHT 28 BACKCOLOR aClr[ 3 ] ;
-      ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ) } ;
-      ON CLICK ShellExecute( 0, "open", 'control.exe', 'timedate.cpl', , 1 )
-   @ 25, 105  LABEL LblTime WIDTH 60 HEIGHT 27  VALUE Left( Time(), 5 ) ;
-      FONT 'Arial' SIZE 18 BOLD  FONTCOLOR aClr[ 1 ] TRANSPARENT
-   @ 25, 167  LABEL LblSec WIDTH 20 HEIGHT 26 VALUE Right( Time(), 2 ) ;
-      FONT 'Arial' SIZE 11 BOLD  FONTCOLOR aClr[ 1 ] TRANSPARENT
+      @ 64, 15   LABEL LblMs  WIDTH 90 HEIGHT 16  VALUE CMonth( Date() ) ;
+         FONT 'Times' SIZE 11   FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ] CENTERALIGN ;
+         ON CLICK DateCale := ClickMonth( 'WinDayly', This.Value ) ;
+         ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
+         ON MOUSELEAVE {|| ( This.FontColor := aClr[ 1 ] ) }
+      @ 64, 105  LABEL LblZ  WIDTH 30 HEIGHT 16  VALUE '' BACKCOLOR aClr[ 3 ]
 
-   @ 64, 15   LABEL LblMs  WIDTH 90 HEIGHT 16  VALUE CMonth( Date() ) ;
-      FONT 'Times' SIZE 11   FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ] CENTERALIGN ;
-      ON CLICK DateCale := ClickMonth( 'WinDayly', This.Value ) ;
-      ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
-      ON MOUSELEAVE {|| ( This.FontColor := aClr[ 1 ] ) }
-   @ 64, 105  LABEL LblZ  WIDTH 30 HEIGHT 16  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 64, 135  LABEL lblL2 VALUE Chr( 51 ) WIDTH 15 HEIGHT 16 FONT "WebDings" Size 10 FONTCOLOR aClr[ 1 ]  BACKCOLOR aClr[ 3 ] RIGHTALIGN ;
+         ON CLICK DateCale := ClickYear( 'WinDayly', WinDayly.lblYe.Value, '-' ) ;
+         ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
+         ON MOUSELEAVE ( This.FontColor := aClr[ 1 ] )
+      @ 64, 150  LABEL LblYe  WIDTH 30 HEIGHT 16  VALUE '2011' ;
+         FONT 'Times' SIZE 11  FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ]  CENTERALIGN
+      @ 64, 180  LABEL lblM2 VALUE Chr( 52 ) WIDTH 15 HEIGHT 16 FONT "WebDings" Size 10  FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ] ;
+         ON CLICK DateCale := ClickYear( 'WinDayly', WinDayly.lblYe.Value, '+' ) ;
+         ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
+         ON MOUSELEAVE ( This.FontColor := aClr[ 1 ] )
 
-   @ 64, 135  LABEL lblL2 VALUE Chr( 51 ) WIDTH 15 HEIGHT 16 FONT "WebDings" Size 10 FONTCOLOR aClr[ 1 ]  BACKCOLOR aClr[ 3 ] RIGHTALIGN ;
-      ON CLICK DateCale := ClickYear( 'WinDayly', WinDayly.lblYe.Value, '-' ) ;
-      ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
-      ON MOUSELEAVE ( This.FontColor := aClr[ 1 ] )
-   @ 64, 150  LABEL LblYe  WIDTH 30 HEIGHT 16  VALUE '2011' ;
-      FONT 'Times' SIZE 11  FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ]  CENTERALIGN
-   @ 64, 180  LABEL lblM2 VALUE Chr( 52 ) WIDTH 15 HEIGHT 16 FONT "WebDings" Size 10  FONTCOLOR aClr[ 1 ] BACKCOLOR aClr[ 3 ] ;
-      ON CLICK DateCale := ClickYear( 'WinDayly', WinDayly.lblYe.Value, '+' ) ;
-      ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), ( This.FontColor := WHITE ) } ;
-      ON MOUSELEAVE ( This.FontColor := aClr[ 1 ] )
+      @ 80, 15   LABEL LblLine1  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
 
-   @ 80, 15   LABEL LblLine1  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
-
-   nRow1 := 85
-   nCol1 := 15
-   FOR i = 1 TO 7
-      cLbl := 'LBLC_' + hb_ntos( i - 1 )
-      @ nRow1, nCol1 LABEL &cLbl  VALUE ' ' + acale[ i, 1 ] WIDTH 30 HEIGHT 16 ;
-         FONT 'Times' SIZE 11 FontColor iif( i > 5, RED, BLACK ) BACKCOLOR aCLRCale
-      nRow1 += 16
-   NEXT
-
-   nRow1 := 85
-   nCol1 := 45
-   FOR i = 2 TO 7
-      FOR j = 1 TO 7
-         cLbl := 'LBL_' + hb_ntos( i ) + hb_ntos( j )
-         @ nRow1, nCol1 LABEL &cLbl  VALUE acale[ j, i ] ACTION ClickDay( 'WinDayly' ) ;
-            WIDTH 25 HEIGHT 16  FONT 'Times' SIZE 11  BACKCOLOR aCLRCale CENTERALIGN
+      nRow1 := 85
+      nCol1 := 15
+      FOR i = 1 TO 7
+         cLbl := 'LBLC_' + hb_ntos( i - 1 )
+         @ nRow1, nCol1 LABEL &cLbl  VALUE ' ' + acale[ i, 1 ] WIDTH 30 HEIGHT 16 ;
+            FONT 'Times' SIZE 11 FontColor iif( i > 5, RED, BLACK ) BACKCOLOR aCLRCale
          nRow1 += 16
       NEXT
+
       nRow1 := 85
-      nCol1 += 25
-   NEXT
-   @ 200, 15   LABEL LblLine3  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
+      nCol1 := 45
+      FOR i = 2 TO 7
+         FOR j = 1 TO 7
+            cLbl := 'LBL_' + hb_ntos( i ) + hb_ntos( j )
+            @ nRow1, nCol1 LABEL &cLbl  VALUE acale[ j, i ] ACTION ClickDay( 'WinDayly' ) ;
+               WIDTH 25 HEIGHT 16  FONT 'Times' SIZE 11  BACKCOLOR aCLRCale CENTERALIGN
+            nRow1 += 16
+         NEXT
+         nRow1 := 85
+         nCol1 += 25
+      NEXT
+      @ 200, 15   LABEL LblLine3  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
 
-   @ 201, 15   LABEL LblLine4  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 201, 15   LABEL LblLine4  WIDTH 180 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
 
-   @ 215, 35  BUTTONEX btnLY WIDTH 140 HEIGHT 18 CAPTION 'Calendar' ;
-      FONT "Arial" SIZE 9  ;
-      BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
-      ACTION ShowListY( DateCale )
+      @ 215, 35  BUTTONEX btnLY WIDTH 140 HEIGHT 18 CAPTION 'Calendar' ;
+         FONT "Arial" SIZE 9  ;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
+         ACTION ShowListY( DateCale )
 
-   DEFINE TIMER Timer_1 INTERVAL 1000 ACTION TimerDayly()
+      DEFINE TIMER Timer_1 INTERVAL 1000 ACTION TimerDayly()
 
-   LblBox( 'lblW', 0, 0, WinDayly.Height - 1, WinDayly.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
+      LblBox( 'lblW', 0, 0, WinDayly.Height - 1, WinDayly.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
 
    END WINDOW
 
@@ -236,9 +238,9 @@ FUNCTION MAIN
 
    ACTIVATE WINDOW WinDayly
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION OpenTable()
 
@@ -273,9 +275,9 @@ FUNCTION OpenTable()
 
    aDayMess := DayToArray( Date() )
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 STATIC FUNCTION PrazdToArray( cYear )
 
@@ -289,15 +291,15 @@ STATIC FUNCTION PrazdToArray( cYear )
       aPrRF := { { '01.01', [ New Year's Day]},;
          { '20.01', 'Inauguration Day' }, ;
          { '3-1-01', 'Birthday of Martin Luther King' }, ; //the third Monday in January
-         { '14.02', [ Valentine's Day]},;
+      { '14.02', [ Valentine's Day]},;
          { '3-1-02', [ Washington's Birthday]},; //the third Monday in February
-         { '0-1-05', 'Memorial Day' }, ;         //the last Monday in May
-         { '04.07', 'Independence Day' }, ;
+      { '0-1-05', 'Memorial Day' }, ;         //the last Monday in May
+      { '04.07', 'Independence Day' }, ;
          { '1-1-09', 'Labor Day' }, ;            //the first Monday in September
-         { '2-1-10', 'Columbus Day' }, ;         //the second Monday in October
-         { '11.11', 'Veterans Day' }, ;
+      { '2-1-10', 'Columbus Day' }, ;         //the second Monday in October
+      { '11.11', 'Veterans Day' }, ;
          { '4-4-11', 'Thanksgiving Day' }, ;     //the fourth Thursday in November
-         { '25.12', 'Christmas Day' } }
+      { '25.12', 'Christmas Day' } }
 
       FOR i = 1 TO Len( aPrRF )
          cDM := aPrRF[ i, 1 ]
@@ -354,9 +356,9 @@ STATIC FUNCTION PrazdToArray( cYear )
       NEXT
    ENDIF
 
-RETURN aPrRF
+   RETURN aPrRF
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION DayWeekInMonth( cP, cYear )  /// 3-5-03
 
@@ -377,9 +379,9 @@ FUNCTION DayWeekInMonth( cP, cYear )  /// 3-5-03
       ENDIF
    NEXT
 
-RETURN iif( OrdW = 0, ATail( aWeekDate ), aWeekDate[ OrdW ] )
+   RETURN iif( OrdW = 0, ATail( aWeekDate ), aWeekDate[ OrdW ] )
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION DayToArray( dDay )
 
@@ -417,9 +419,9 @@ FUNCTION DayToArray( dDay )
       DAYLY->( dbSkip() )
    ENDDO
 
-RETURN  ASort( aToDay,,, {|x, y| x[ 3 ] < y[ 3 ] } )
+   RETURN  ASort( aToDay,,, {|x, y| x[ 3 ] < y[ 3 ] } )
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION TimerDayly()
 
@@ -438,9 +440,9 @@ FUNCTION TimerDayly()
 
    DO EVENTS
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ShowList( cTime )
 
@@ -458,10 +460,12 @@ FUNCTION ShowList( cTime )
 
    lTmrM := .F.
    IF LenD = 0
+
       RETURN NIL
    ENDIF
 
    IF _IsWindowDefined ( 'WinEdit' ) .OR. _IsWindowDefined ( 'WinSD' ) .OR. _IsWindowDefined ( 'WinExit' )
+
       RETURN NIL
    ENDIF
 
@@ -502,11 +506,13 @@ FUNCTION ShowList( cTime )
    NEXT
 
    IF lMess = .F. .AND. lPrzd = .F.
+
       RETURN NIL
    ENDIF
 
    IF _IsWindowDefined ( 'WinList' )
       IF lNewMess = .F.
+
          RETURN NIL
       ELSE
          DoMethod( 'WinList', 'Release' )
@@ -514,81 +520,79 @@ FUNCTION ShowList( cTime )
       ENDIF
    ENDIF
 
-
    DEFINE WINDOW WinList AT 10, 20 WIDTH 300 HEIGHT 240 TITLE '' CHILD  NOCAPTION NOSIZE  BACKCOLOR aClr[ 2 ]
 
-   @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
-   @ 14, 14  LABEL LblName1 WIDTH  280 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
-      ACTION MoveActiveWindow()
-   @ 15, 15  LABEL LblName2 WIDTH  280 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
-      ACTION MoveActiveWindow()
+      @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
+      @ 14, 14  LABEL LblName1 WIDTH  280 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
+         ACTION MoveActiveWindow()
+      @ 15, 15  LABEL LblName2 WIDTH  280 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
+         ACTION MoveActiveWindow()
 
-   @ 20, 100  LABEL LblDay2 WIDTH 185 HEIGHT 18  VALUE AllTrim( aDay[ nDay ] ) ;
-      FONT 'Times' SIZE 12 BOLD FONTCOLOR aClr[ 3 ]  TRANSPARENT RIGHTALIGN ;
-      ACTION MoveActiveWindow()
-   @ 38, 100  LABEL LblDay1 WIDTH 185 HEIGHT 18  VALUE AllTrim( CMonth( Date() ) ) + ' ' + hb_ntos( Day( Date() ) ) + ', ' + hb_ntos( Year( Date() ) ) ;
-      FONT 'Times' SIZE 12 BOLD  FONTCOLOR aClr[ 3 ]  TRANSPARENT RIGHTALIGN ;
-      ACTION MoveActiveWindow()
+      @ 20, 100  LABEL LblDay2 WIDTH 185 HEIGHT 18  VALUE AllTrim( aDay[ nDay ] ) ;
+         FONT 'Times' SIZE 12 BOLD FONTCOLOR aClr[ 3 ]  TRANSPARENT RIGHTALIGN ;
+         ACTION MoveActiveWindow()
+      @ 38, 100  LABEL LblDay1 WIDTH 185 HEIGHT 18  VALUE AllTrim( CMonth( Date() ) ) + ' ' + hb_ntos( Day( Date() ) ) + ', ' + hb_ntos( Year( Date() ) ) ;
+         FONT 'Times' SIZE 12 BOLD  FONTCOLOR aClr[ 3 ]  TRANSPARENT RIGHTALIGN ;
+         ACTION MoveActiveWindow()
 
-   @ 60, 15   LABEL LblLine1  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
-   @ 61, 15   LABEL LblLine2  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
+      @ 60, 15   LABEL LblLine1  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 61, 15   LABEL LblLine2  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
 
-   DEFINE WINDOW WinMess ;
-      ROW 65 ;
-      COL 25 ;
-      WIDTH 270;
-      HEIGHT 140;
-      NOCAPTION ;
-      WINDOWTYPE PANEL ;
-      BACKCOLOR aClr[ 2 ]
+      DEFINE WINDOW WinMess ;
+            ROW 65 ;
+            COL 25 ;
+            WIDTH 270;
+            HEIGHT 140;
+            NOCAPTION ;
+            WINDOWTYPE PANEL ;
+            BACKCOLOR aClr[ 2 ]
 
-   FOR i = 1 TO Len( aMess )
-      clbl := 'm' + hb_ntos( i )
-      LenMess := Len( aMess[ i, 1 ] )
-      nCrlf := NUMAT( CRLF, aMess[ i, 1 ] )
-      IF nCrlf > 0
-         nHLbl += 15 * nCrlf
-      ELSE
-         IF LenMess > 50 .AND. LenMess < 100
-            nHLbl := 30
-         ELSEIF LenMess > 100
-            nHLbl := 45
-         ELSE
-            nHLbl := 15
-         ENDIF
-      ENDIF
+         FOR i = 1 TO Len( aMess )
+            clbl := 'm' + hb_ntos( i )
+            LenMess := Len( aMess[ i, 1 ] )
+            nCrlf := NUMAT( CRLF, aMess[ i, 1 ] )
+            IF nCrlf > 0
+               nHLbl += 15 * nCrlf
+            ELSE
+               IF LenMess > 50 .AND. LenMess < 100
+                  nHLbl := 30
+               ELSEIF LenMess > 100
+                  nHLbl := 45
+               ELSE
+                  nHLbl := 15
+               ENDIF
+            ENDIF
 
-      IF Mod( i, 2 ) > 0
-         @ nRowM, 0  LABEL &clbl WIDTH 270 HEIGHT nHLbl VALUE aMess[ i, 1 ] FONT 'Arial' SIZE 9 FONTCOLOR BLACK TRANSPARENT
-         aMess[ i, 2 ] := nRowM
-         nRowM += nHLbl
-      ELSE
-         @ nRowM, 0  LABEL &clbl WIDTH 270 HEIGHT nHLbl VALUE aMess[ i, 1 ] FONT 'Arial' SIZE 9 FONTCOLOR BLACK ITALIC TRANSPARENT
-         aMess[ i, 2 ] := nRowM
-         nRowM += nHLbl + 10
-      ENDIF
-   NEXT
+            IF Mod( i, 2 ) > 0
+               @ nRowM, 0  LABEL &clbl WIDTH 270 HEIGHT nHLbl VALUE aMess[ i, 1 ] FONT 'Arial' SIZE 9 FONTCOLOR BLACK TRANSPARENT
+               aMess[ i, 2 ] := nRowM
+               nRowM += nHLbl
+            ELSE
+               @ nRowM, 0  LABEL &clbl WIDTH 270 HEIGHT nHLbl VALUE aMess[ i, 1 ] FONT 'Arial' SIZE 9 FONTCOLOR BLACK ITALIC TRANSPARENT
+               aMess[ i, 2 ] := nRowM
+               nRowM += nHLbl + 10
+            ENDIF
+         NEXT
 
-   END WINDOW
+      END WINDOW
 
-   LblBox( 'lblBC', 65, 25, 204, 294, 1, { aClr[ 2 ], aClr[ 2 ] } )
+      LblBox( 'lblBC', 65, 25, 204, 294, 1, { aClr[ 2 ], aClr[ 2 ] } )
 
-   @ 209, 15   LABEL LblLine3  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
-   @ 210, 15   LABEL LblLine4  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 209, 15   LABEL LblLine3  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
+      @ 210, 15   LABEL LblLine4  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
 
+      @ 215, 80  BUTTONEX btnOk WIDTH 140 HEIGHT 18 CAPTION 'Thank you';
+         FONT "Arial" SIZE 9  ;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT;
+         ACTION {|| iif( lTmrM, NIL, ( WinList .tmrM. Enabled := .F., ThisWindow.Release() ) )    }
 
-   @ 215, 80  BUTTONEX btnOk WIDTH 140 HEIGHT 18 CAPTION 'Thank you';
-      FONT "Arial" SIZE 9  ;
-      BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT;
-      ACTION {|| iif( lTmrM, NIL, ( WinList .tmrM. Enabled := .F., ThisWindow.Release() ) )    }
+      @ 0, 0 PLAYER PlaySound WIDTH 1 HEIGHT 1 FILE cFileSound
 
-   @ 0, 0 PLAYER PlaySound WIDTH 1 HEIGHT 1 FILE cFileSound
+      LblBox( 'lblW', 0, 0, GetProperty( 'WinList', 'HEIGHT' ) -1, GetProperty( 'WinList', 'WIDTH' ) -1,1, { aClr[ 3 ], aClr[ 3 ] } )
 
-   LblBox( 'lblW', 0, 0, GetProperty( 'WinList', 'HEIGHT' ) -1, GetProperty( 'WinList', 'WIDTH' ) -1,1, { aClr[ 3 ], aClr[ 3 ] } )
-
-   DEFINE TIMER tmrM INTERVAL 150 ACTION TimerM( aMess )
+      DEFINE TIMER tmrM INTERVAL 150 ACTION TimerM( aMess )
 
    END WINDOW
 
@@ -598,9 +602,9 @@ FUNCTION ShowList( cTime )
 
    AEval( aDayMess, {| a | iif( a[ 7 ] = 1, a[ 7 ] := 2, NIL ) } )
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION TimerM( aMess )
 
@@ -621,9 +625,9 @@ FUNCTION TimerM( aMess )
    NEXT
    ltmrM := .F.
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION FileSound()
 
@@ -635,15 +639,16 @@ FUNCTION FileSound()
       FOR i = 1 TO Len( aTypeSound )
          cFileSound := 'Dayly' + aTypeSound[ i ]
          IF File( cFileSound )
+
             RETURN cFileSound
          ENDIF
       NEXT
       PlayOk()
    ENDIF
 
-RETURN ''
+   RETURN ''
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ShowListY( DateCale )
 
@@ -678,88 +683,86 @@ FUNCTION ShowListY( DateCale )
    NEXT
 
    DEFINE WINDOW &cWinY AT i * 10, i * 10  WIDTH 762 HEIGHT 480  TITLE cNameApp ;
-      CHILD NOCAPTION NOSIZE NOMAXIMIZE ICON 'dayly' BACKCOLOR aClr[ 2 ]
+         CHILD NOCAPTION NOSIZE NOMAXIMIZE ICON 'dayly' BACKCOLOR aClr[ 2 ]
 
+      @ 1, 1  IMAGE ImgFonT PICTURE PictRG WIDTH 100 HEIGHT 100
 
-   @ 1, 1  IMAGE ImgFonT PICTURE PictRG WIDTH 100 HEIGHT 100
+      @ 14, 14  LABEL LblName1 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
+         ACTION MoveActiveWindow()
 
-   @ 14, 14  LABEL LblName1 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
-      ACTION MoveActiveWindow()
+      @ 15, 15  LABEL LblName2 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
+         ACTION MoveActiveWindow()
 
-   @ 15, 15  LABEL LblName2 WIDTH  80 HEIGHT 20  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
-      ACTION MoveActiveWindow()
+      @ 15, 95   LABEL LblY2 WIDTH GetProperty( cWinY, 'Width' ) -130 HEIGHT 25  VALUE 'Calendar for ' + cYear + ' Year' ;
+         FONT 'Verdana' SIZE 14  FONTCOLOR aClr[ 3 ] BOLD TRANSPARENT CENTERALIGN ;
+         ACTION MoveActiveWindow()
 
-   @ 15, 95   LABEL LblY2 WIDTH GetProperty( cWinY, 'Width' ) -130 HEIGHT 25  VALUE 'Calendar for ' + cYear + ' Year' ;
-      FONT 'Verdana' SIZE 14  FONTCOLOR aClr[ 3 ] BOLD TRANSPARENT CENTERALIGN ;
-      ACTION MoveActiveWindow()
+      @ 5, GetProperty( cWinY, 'Width' ) -25  LABEL btnCancel WIDTH 24 HEIGHT 25  VALUE Chr( 251 )  ;
+         FONT 'Wingdings' SIZE 24 FONTCOLOR { 196, 0, 0 } BACKCOLOR aClr[ 2 ] ;
+         ON MOUSEHOVER ( Rc_Cursor( "MINIGUI_FINGER" ), This.FontColor := { 255, 96, 96 } ) ;
+         ON MOUSELEAVE ( This.FontColor := { 196, 0, 0 } ) ;
+         ACTION ThisWindow.Release()
 
-   @ 5, GetProperty( cWinY, 'Width' ) -25  LABEL btnCancel WIDTH 24 HEIGHT 25  VALUE Chr( 251 )  ;
-      FONT 'Wingdings' SIZE 24 FONTCOLOR { 196, 0, 0 } BACKCOLOR aClr[ 2 ] ;
-      ON MOUSEHOVER ( Rc_Cursor( "MINIGUI_FINGER" ), This.FontColor := { 255, 96, 96 } ) ;
-      ON MOUSELEAVE ( This.FontColor := { 196, 0, 0 } ) ;
-      ACTION ThisWindow.Release()
+      @ 40, 110  LABEL LblLine1 WIDTH  630 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 41, 110  LABEL LblLine2 WIDTH  630 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
 
-   @ 40, 110  LABEL LblLine1 WIDTH  630 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
-   @ 41, 110  LABEL LblLine2 WIDTH  630 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
-
-
-   FOR nM = 1 TO 12
-      IF nM = 5
-         nRow := 210
-         nCol := 20
-      ELSEIF nM = 9
-         nRow := 350
-         nCol := 20
-      ENDIF
-      nRow1 := nRow
-      nCol1 := nCol
-      aCaleY := CaleToArray( CToD( '01.' + hb_ntos( nM ) + '.' + cYear ) )
-      cLB := 'M' + hb_ntos( nM )
-      @ nRow1 - 20, nCol1 + 120 LABEL &cLb   VALUE aMS[ nM ] WIDTH 90 HEIGHT 20 ;
-         FONT 'Times' SIZE 12   BACKCOLOR aClr[ 2 ] CENTERALIGN
-      IF nM = 1 .OR. nM = 5 .OR. nM = 9
-         FOR i = 2 TO 7
-            cLbl := cLB + 'LBLC_' + hb_ntos( i )
-            @ nRow1, nCol1 LABEL &cLbl   VALUE aDay[ i ] WIDTH 90 HEIGHT 15 ;
-               FONT 'Times' SIZE 11 FontColor iif( i = 7, { 200, 0, 0 }, BLACK ) BACKCOLOR aClr[ 2 ]
-            nRow1 += 16
-         NEXT
-         cLbl := cLB + 'LBLC_1'
-         @ nRow1, nCol1 LABEL &cLbl   VALUE aDay[ 1 ] WIDTH 90 HEIGHT 15 ;
-            FONT 'Times' SIZE 11  FontColor { 200, 0, 0 } BACKCOLOR aClr[ 2 ]
-      ENDIF
-
-      nRow1 := nRow
-      nCol1 := nCol + 90
-      FOR i = 2 TO 7
-         FOR j = 1 TO 7
-            cLbl := cLB + 'LBL_' + hb_ntos( i ) + hb_ntos( j )
-            @ nRow1, nCol1 LABEL &cLbl  VALUE acaleY[ j, i ] WIDTH 24 HEIGHT 15 ;
-               FONT 'Times' SIZE 10 FONTCOLOR iif( j > 5, RED, BLACK ) BACKCOLOR aClr[ 1 ] CENTERALIGN ;
-               ON MOUSEHOVER ( This.BackColor := WHITE ) ;
-               ON MOUSELEAVE ( This.BackColor := aClr[ 1 ] )
-            IF ItsHDay( nM, acaleY[ j, i ] ) = .T.
-               SetProperty( cWinY, cLbl, 'FONTCOLOR', RED )
-            ENDIF
-
-            cDM := PadL( AllTrim( acaleY[ j, i ] ), 2, '0' ) + '.' + PadL( NToC( nM ), 2, '0' )
-            iPrazd := AScan( aPrTT, {| ax| ax[ 1 ] = cDM } )
-            IF iPrazd > 0
-               _SetToolTip( clbl, cWinY, cDM + '.' + cYear + CRLF + aPrRF[ iPrazd, 2 ] )
-               SetProperty( cWinY, cLbl, 'FONTBOLD', .T. )
-            ENDIF
-
-            nRow1 += 16
-         NEXT
+      FOR nM = 1 TO 12
+         IF nM = 5
+            nRow := 210
+            nCol := 20
+         ELSEIF nM = 9
+            nRow := 350
+            nCol := 20
+         ENDIF
          nRow1 := nRow
-         nCol1 += 25
-      NEXT
-      nCol += 160
-   NEXT
+         nCol1 := nCol
+         aCaleY := CaleToArray( CToD( '01.' + hb_ntos( nM ) + '.' + cYear ) )
+         cLB := 'M' + hb_ntos( nM )
+         @ nRow1 - 20, nCol1 + 120 LABEL &cLb   VALUE aMS[ nM ] WIDTH 90 HEIGHT 20 ;
+            FONT 'Times' SIZE 12   BACKCOLOR aClr[ 2 ] CENTERALIGN
+         IF nM = 1 .OR. nM = 5 .OR. nM = 9
+            FOR i = 2 TO 7
+               cLbl := cLB + 'LBLC_' + hb_ntos( i )
+               @ nRow1, nCol1 LABEL &cLbl   VALUE aDay[ i ] WIDTH 90 HEIGHT 15 ;
+                  FONT 'Times' SIZE 11 FontColor iif( i = 7, { 200, 0, 0 }, BLACK ) BACKCOLOR aClr[ 2 ]
+               nRow1 += 16
+            NEXT
+            cLbl := cLB + 'LBLC_1'
+            @ nRow1, nCol1 LABEL &cLbl   VALUE aDay[ 1 ] WIDTH 90 HEIGHT 15 ;
+               FONT 'Times' SIZE 11  FontColor { 200, 0, 0 } BACKCOLOR aClr[ 2 ]
+         ENDIF
 
-   LblBox( 'lblW', 0, 0, GetProperty( cWinY, 'HEIGHT' ) -1, GetProperty( cWinY, 'WIDTH' ) -1,1, { aClr[ 3 ], aClr[ 3 ] } )
+         nRow1 := nRow
+         nCol1 := nCol + 90
+         FOR i = 2 TO 7
+            FOR j = 1 TO 7
+               cLbl := cLB + 'LBL_' + hb_ntos( i ) + hb_ntos( j )
+               @ nRow1, nCol1 LABEL &cLbl  VALUE acaleY[ j, i ] WIDTH 24 HEIGHT 15 ;
+                  FONT 'Times' SIZE 10 FONTCOLOR iif( j > 5, RED, BLACK ) BACKCOLOR aClr[ 1 ] CENTERALIGN ;
+                  ON MOUSEHOVER ( This.BackColor := WHITE ) ;
+                  ON MOUSELEAVE ( This.BackColor := aClr[ 1 ] )
+               IF ItsHDay( nM, acaleY[ j, i ] ) = .T.
+                  SetProperty( cWinY, cLbl, 'FONTCOLOR', RED )
+               ENDIF
+
+               cDM := PadL( AllTrim( acaleY[ j, i ] ), 2, '0' ) + '.' + PadL( NToC( nM ), 2, '0' )
+               iPrazd := AScan( aPrTT, {| ax| ax[ 1 ] = cDM } )
+               IF iPrazd > 0
+                  _SetToolTip( clbl, cWinY, cDM + '.' + cYear + CRLF + aPrRF[ iPrazd, 2 ] )
+                  SetProperty( cWinY, cLbl, 'FONTBOLD', .T. )
+               ENDIF
+
+               nRow1 += 16
+            NEXT
+            nRow1 := nRow
+            nCol1 += 25
+         NEXT
+         nCol += 160
+      NEXT
+
+      LblBox( 'lblW', 0, 0, GetProperty( cWinY, 'HEIGHT' ) -1, GetProperty( cWinY, 'WIDTH' ) -1,1, { aClr[ 3 ], aClr[ 3 ] } )
 
    END WINDOW
 
@@ -768,9 +771,9 @@ FUNCTION ShowListY( DateCale )
 
    ACTIVATE WINDOW &cWinY
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ItsHDay( nM, nD )
 
@@ -779,13 +782,14 @@ FUNCTION ItsHDay( nM, nD )
 
    FOR iT = 1 TO nTok
       IF Val( Token( aHDay[ nM ], ',', iT ) ) = Val( nD )
+
          RETURN .T.
       ENDIF
    NEXT
 
-RETURN .F.
+   RETURN .F.
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION CaleToArray( DateCale )
 
@@ -821,9 +825,9 @@ FUNCTION CaleToArray( DateCale )
       ENDIF
    NEXT
 
-RETURN aCal
+   RETURN aCal
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION RefreshCale( cWin, aCale )
 
@@ -856,9 +860,9 @@ FUNCTION RefreshCale( cWin, aCale )
    SetProperty( cWin, 'LblMs', 'VALUE', aMs[ Month( DateCale ) ] )
    SetProperty( cWin, 'LblYe', 'VALUE', Str( Year( DateCale ), 4 ) )
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ClickDay( cWin )
 
@@ -870,9 +874,9 @@ FUNCTION ClickDay( cWin )
       RefreshCale( cWin, aCale )
    ENDIF
 
-RETURN DateCale
+   RETURN DateCale
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ClickMonth( cWin, cMs )
 
@@ -889,9 +893,9 @@ FUNCTION ClickMonth( cWin, cMs )
 
    RefreshCale( cWin, aCale )
 
-RETURN DateCale
+   RETURN DateCale
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ClickYear( cWin, cYe, cMod )
 
@@ -909,9 +913,9 @@ FUNCTION ClickYear( cWin, cYe, cMod )
    aCale := CaleToArray( DateCale )
    RefreshCale( cWin, aCale )
 
-RETURN DateCale
+   RETURN DateCale
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ExitDayly()
 
@@ -921,34 +925,33 @@ FUNCTION ExitDayly()
 
    DEFINE WINDOW WinExit AT 0, 0 WIDTH 300 HEIGHT 110  MODAL  NOSIZE NOCAPTION  BACKCOLOR aClr[ 2 ]
 
-   @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
+      @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100
 
-   @ 14, 14  LABEL LblName1 WIDTH WinExit.Width - 15 HEIGHT 22  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
-      ACTION MoveActiveWindow()
-   @ 15, 15  LABEL LblName2 WIDTH WinExit.Width - 15 HEIGHT 22 VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
-      ACTION MoveActiveWindow()
+      @ 14, 14  LABEL LblName1 WIDTH WinExit.Width - 15 HEIGHT 22  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
+         ACTION MoveActiveWindow()
+      @ 15, 15  LABEL LblName2 WIDTH WinExit.Width - 15 HEIGHT 22 VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
+         ACTION MoveActiveWindow()
 
+      @ 40, 10  LABEL LblTit WIDTH 280 HEIGHT 25  VALUE 'Terminate the program execution' ;
+         FONT 'Times' SIZE 12 BOLD FONTCOLOR BLACK  TRANSPARENT  CENTERALIGN
 
-   @ 40, 10  LABEL LblTit WIDTH 280 HEIGHT 25  VALUE 'Terminate the program execution' ;
-      FONT 'Times' SIZE 12 BOLD FONTCOLOR BLACK  TRANSPARENT  CENTERALIGN
+      @ 70, 15   LABEL LblLine3  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
 
-   @ 70, 15   LABEL LblLine3  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 1 ]
+      @ 71, 15   LABEL LblLine4  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
 
-   @ 71, 15   LABEL LblLine4  WIDTH 270 HEIGHT 1  VALUE '' BACKCOLOR aClr[ 3 ]
+      @ 85, 45  BUTTONEX btnOk WIDTH 100 HEIGHT 18 CAPTION 'Terminate' ;
+         FONT "Arial" SIZE 9 ;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
+         ACTION ( lOk := .T., WinExit.Release() )
 
-   @ 85, 45  BUTTONEX btnOk WIDTH 100 HEIGHT 18 CAPTION 'Terminate' ;
-      FONT "Arial" SIZE 9 ;
-      BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
-      ACTION ( lOk := .T., WinExit.Release() )
+      @ 85, 155  BUTTONEX btnCans WIDTH 100 HEIGHT 18 CAPTION 'Cancel' ;
+         FONT "Arial" SIZE 9 ;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
+         ACTION WinExit.Release()
 
-   @ 85, 155  BUTTONEX btnCans WIDTH 100 HEIGHT 18 CAPTION 'Cancel' ;
-      FONT "Arial" SIZE 9 ;
-      BACKCOLOR { 255, 164, 44 } NOXPSTYLE FLAT ;
-      ACTION WinExit.Release()
-
-   LblBox( 'lblW', 0, 0, WinExit.Height - 1, WinExit.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
+      LblBox( 'lblW', 0, 0, WinExit.Height - 1, WinExit.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
 
    END WINDOW
 
@@ -958,14 +961,15 @@ FUNCTION ExitDayly()
    IF lOk = .T.
       CLOSE ALL
       WinDayly.Release()
+
       RETURN NIL
    ENDIF
 
    SetProperty( 'WinDayly', 'Timer_1', 'ENABLED', .T. )
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ApplRun( cTime )
 
@@ -976,6 +980,7 @@ FUNCTION ApplRun( cTime )
       nTime2 := Val( Left( SETI->tar_1, 2 ) + SubStr( SETI->tar_1, 4, 2 ) )
       IF nTime2 = nTime1
          ShellExecute( 0, "open", AllTrim( SETI->nar_1 ), , , 1 )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -984,6 +989,7 @@ FUNCTION ApplRun( cTime )
       nTime2  := Val( Left( SETI->tar_2, 2 ) + SubStr( SETI->tar_2, 4, 2 ) )
       IF nTime2 = nTime1
          ShellExecute( 0, "open", AllTrim( SETI->nar_2 ), , , 1 )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -992,21 +998,22 @@ FUNCTION ApplRun( cTime )
       nTime2  := Val( Left( SETI->tar_3, 2 ) + SubStr( SETI->tar_3, 4, 2 ) )
       IF nTime2 = nTime1
          ShellExecute( 0, "open", AllTrim( SETI->nar_2 ), , , 1 )
+
          RETURN NIL
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
-#define EWX_LOGOFF 0   // отключение от сети
-#define EWX_SHUTDOWN 1
-#define EWX_REBOOT 2
-#define EWX_FORCE 4
-#define EWX_POWEROFF 8
+   #define EWX_LOGOFF 0   // отключение от сети
+   #define EWX_SHUTDOWN 1
+   #define EWX_REBOOT 2
+   #define EWX_FORCE 4
+   #define EWX_POWEROFF 8
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ShutDn( cTime )
 
@@ -1018,6 +1025,7 @@ FUNCTION ShutDn( cTime )
       nTime2 := Val( Left( SETI->tsd_3, 2 ) + SubStr( SETI->tsd_3, 4, 2 ) )
       IF nTime2 = nTime1
          ShutDnShow( 0, aL[ 3 ] )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -1026,6 +1034,7 @@ FUNCTION ShutDn( cTime )
       nTime2 := Val( Left( SETI->tsd_2, 2 ) + SubStr( SETI->tsd_2, 4, 2 ) )
       IF nTime2 = nTime1
          ShutDnShow( 2, aL[ 2 ] )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -1037,9 +1046,9 @@ FUNCTION ShutDn( cTime )
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION ShutDnShow( nFlag, Tit )
 
@@ -1052,33 +1061,33 @@ FUNCTION ShutDnShow( nFlag, Tit )
 
    DEFINE WINDOW WinSD AT 0, 0 WIDTH 320 HEIGHT 150  MODAL  NOSIZE NOCAPTION  BACKCOLOR aClr[ 2 ]
 
-   @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100 ;
-      ACTION MoveActiveWindow()
-   @ 14, 14  LABEL LblName1 WIDTH WinSD.Width - 15 HEIGHT 22  VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
-      ACTION MoveActiveWindow()
-   @ 15, 15  LABEL LblName2 WIDTH WinSD.Width - 15 HEIGHT 22 VALUE cNameApp TRANSPARENT ;
-      FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
-      ACTION MoveActiveWindow()
+      @ 1, 1  IMAGE ImgRG PICTURE PictRG WIDTH 100 HEIGHT 100 ;
+         ACTION MoveActiveWindow()
+      @ 14, 14  LABEL LblName1 WIDTH WinSD.Width - 15 HEIGHT 22  VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR WHITE ;
+         ACTION MoveActiveWindow()
+      @ 15, 15  LABEL LblName2 WIDTH WinSD.Width - 15 HEIGHT 22 VALUE cNameApp TRANSPARENT ;
+         FONT 'Times' SIZE 14 FONTCOLOR ClrText ;
+         ACTION MoveActiveWindow()
 
-   @ 50, 10  LABEL LblTit WIDTH 300 HEIGHT 25  VALUE Tit ;
-      FONT 'Times' SIZE 11  FONTCOLOR BLACK TRANSPARENT  CENTERALIGN
+      @ 50, 10  LABEL LblTit WIDTH 300 HEIGHT 25  VALUE Tit ;
+         FONT 'Times' SIZE 11  FONTCOLOR BLACK TRANSPARENT  CENTERALIGN
 
-   @ 80, 40  LABEL LblL WIDTH 240 HEIGHT 22  VALUE '' BACKCOLOR aClr[ 1 ]
-   @ 82, 42  LABEL LblL1 WIDTH 0 HEIGHT 18  VALUE '' BACKCOLOR { 255, 0, 0 }
-   @ 82, 40  LABEL LblL2 WIDTH 240 HEIGHT 18  VALUE '30' ;
-      FONT 'Arial' SIZE 12 BOLD  TRANSPARENT CENTERALIGN
+      @ 80, 40  LABEL LblL WIDTH 240 HEIGHT 22  VALUE '' BACKCOLOR aClr[ 1 ]
+      @ 82, 42  LABEL LblL1 WIDTH 0 HEIGHT 18  VALUE '' BACKCOLOR { 255, 0, 0 }
+      @ 82, 40  LABEL LblL2 WIDTH 240 HEIGHT 18  VALUE '30' ;
+         FONT 'Arial' SIZE 12 BOLD  TRANSPARENT CENTERALIGN
 
-   LblBox( 'lblW1', 80, 40, 101, 280, 1, { aClr[ 3 ], aClr[ 3 ] } )
+      LblBox( 'lblW1', 80, 40, 101, 280, 1, { aClr[ 3 ], aClr[ 3 ] } )
 
-   @ 120, 90  BUTTONEX btnLY WIDTH 140 HEIGHT 18 CAPTION 'Cancel' ;
-      FONT "Arial" SIZE 9 ;
-      BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT ;
-      ACTION ( lTimeShdOk := .F., WinSD.Release() )
+      @ 120, 90  BUTTONEX btnLY WIDTH 140 HEIGHT 18 CAPTION 'Cancel' ;
+         FONT "Arial" SIZE 9 ;
+         BACKCOLOR { 255, 164, 44 } NOXPSTYLE  FLAT ;
+         ACTION ( lTimeShdOk := .F., WinSD.Release() )
 
       DEFINE TIMER Timer_1 INTERVAL 1000 ACTION OnTimerShD()
 
-   LblBox( 'lblW', 0, 0, WinSD.Height - 1, WinSD.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
+      LblBox( 'lblW', 0, 0, WinSD.Height - 1, WinSD.Width - 1,1, { aClr[ 3 ], aClr[ 3 ] } )
 
    END WINDOW
 
@@ -1091,22 +1100,24 @@ FUNCTION ShutDnShow( nFlag, Tit )
       WinExit( nFlag )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
-#define HTCAPTION          2
-#define WM_NCLBUTTONDOWN   161
+   #define HTCAPTION          2
+   #define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow( hWnd )
+
    DEFAULT hWnd := GetActiveWindow()
    PostMessage( hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0 )
 
-RETURN
+   RETURN
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION LblBox( cLbl, nR1, nC1, nR2, nC2, nT, aClrB )
+
    * LblBox( 'lblb', 10, 10, 484, 755, 2, { { 128, 128, 126 }, { 128, 128, 128 } } )
 
    @ nR1, nC1  LABEL  &( cLbl + '1' )  WIDTH  nC2 - nC1 HEIGHT nT             VALUE ''  BACKCOLOR aClrB[ 1 ]
@@ -1114,11 +1125,12 @@ FUNCTION LblBox( cLbl, nR1, nC1, nR2, nC2, nT, aClrB )
    @ nR2, nC1  LABEL  &( cLbl + '3' )  WIDTH  nC2 - nC1 HEIGHT nT             VALUE ''  BACKCOLOR aClrB[ 2 ]
    @ nR1, nC2  LABEL  &( cLbl + '4' )  WIDTH  nT        HEIGHT nR2 - nR1 + nT VALUE ''  BACKCOLOR aClrB[ 2 ]
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
 
 FUNCTION OnTimerShD()
+
    nSec++
    WinSd.lblL1.Width := WinSd.lblL1.Width + 8
    WinSd.lblL2.Value := AllTrim( Str( Val( WinSd.lblL2.Value ) -1 ) )
@@ -1126,11 +1138,13 @@ FUNCTION OnTimerShD()
       WinSD.Release
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
+
 PROCEDURE WinExit( nFlag )
-//-------------------------------------------------------------\\
+
+   //-------------------------------------------------------------\\
 
    IF IsWinNT()
       EnablePermissions()
@@ -1157,8 +1171,7 @@ PROCEDURE WinExit( nFlag )
       ReleaseAllWindows()
    ENDIF
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -1193,3 +1206,4 @@ HB_FUNC( EXITWINDOWSEX )
 }
 
 #pragma ENDDUMP
+

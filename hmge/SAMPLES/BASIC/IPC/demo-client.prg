@@ -1,12 +1,9 @@
 /*
- * Harbour Win32 Demo
- *
- * The client program - sending data / Клиентская программа - посылка данных
- *
- * Copyright 2015-2016 Verchenko Andrey <verchenkoag@gmail.com>
- *
- * Transmission of messages between applications / processes using the WM_COPYDATA
- * Передача сообщений между приложениями/процессами при помощи сообщения WM_COPYDATA 
+* Harbour Win32 Demo
+* The client program - sending data / Клиентская программа - посылка данных
+* Copyright 2015-2016 Verchenko Andrey <verchenkoag@gmail.com>
+* Transmission of messages between applications / processes using the WM_COPYDATA
+* Передача сообщений между приложениями/процессами при помощи сообщения WM_COPYDATA
 */
 
 #include "hbgtinfo.ch"
@@ -22,7 +19,7 @@ FUNCTION Main( cHandleServer, cAppTitleServer, cID )
    hb_default( @cHandleServer, "" )
    hb_default( @cAppTitleServer, APPSERVER_TITLE )
    hb_default( @cID, hb_NtoS( APP_ID ) )
- 
+
    hb_gtInfo( HB_GTI_CLOSABLE, .F. )
    hb_GTInfo( HB_GTI_WINTITLE, "Data Client" ) // Define the title of the window from the main menu
    hb_gtInfo( HB_GTI_ALTENTER, .F. )           // allow alt-enter for full screen
@@ -45,8 +42,8 @@ FUNCTION Main( cHandleServer, cAppTitleServer, cID )
 
    ? PadC( Version(), MaxCol() ) ; ?
    ? "  This example demonstrates the transfer of data"
-   ? "  in a window of another program " + cAppTitleServer + " - " + cHandleServer 
-   ?? " == ", hb_NtoS( hWnd ), " ", If( hWnd == nHandleServer, "YES", "NO" ) 
+   ? "  in a window of another program " + cAppTitleServer + " - " + cHandleServer
+   ?? " == ", hb_NtoS( hWnd ), " ", If( hWnd == nHandleServer, "YES", "NO" )
 
    @  0, 0 TO MaxRow(), MaxCol() DOUBLE
    @ MaxRow() - 1, 0 SAY "  ESC-exit  "
@@ -56,7 +53,7 @@ FUNCTION Main( cHandleServer, cAppTitleServer, cID )
    @ 19, 4 SAY "message to a window or windows." Color( "14/3" )
 
    Inkey( 5 )
-   
+
    DO WHILE .T.
       IF nHandleServer > 0
          IF nI <= 9
@@ -65,7 +62,7 @@ FUNCTION Main( cHandleServer, cAppTitleServer, cID )
 
             TransferDATA( nHandleServer, cString, nID )
          ELSEIF nI == 10
-            cString := 'Transmit data: exe file transfer -> demo-client.exe' 
+            cString := 'Transmit data: exe file transfer -> demo-client.exe'
             @ 5 + nI, 5 SAY cString Color( "0/3" )
 
             TransferDATA( nHandleServer, "FILE", nID )
@@ -83,9 +80,8 @@ FUNCTION Main( cHandleServer, cAppTitleServer, cID )
       ENDIF
    ENDDO
 
-RETURN 0
+   RETURN 0
 
-////////////////////////////////////////////////////////////////////////////////
 FUNCTION TransferDATA( hWnd, cVal, nID )
 
    LOCAL cBuff, cEncBuff
@@ -94,16 +90,15 @@ FUNCTION TransferDATA( hWnd, cVal, nID )
       cBuff    := FileStr( APPCLIENT )
       cEncBuff := hb_Base64Encode( cBuff, Len( cBuff ) )
       cBuff    := NIL
-      // Encoding binary data for text transmission protocol 
+      // Encoding binary data for text transmission protocol
       cVal := cVal + ";" + hb_md5( cEncBuff ) + cEncBuff
    ENDIF
 
    // Transfer data to window "Server"
    SendMessageData( hwnd, cVal, nID )
 
-RETURN NIL
+   RETURN NIL
 
-////////////////////////////////////////////////////////////////////////////////
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -112,7 +107,7 @@ HB_FUNC( SENDMESSAGEDATA )
 {
    HWND hwnd = ( HWND ) HB_PARNL( 1 );
 
-   if( IsWindow( hwnd ) )  
+   if( IsWindow( hwnd ) )
    {
       COPYDATASTRUCT cds;
 
@@ -130,3 +125,4 @@ HB_FUNC ( FINDWINDOW )
 }
 
 #pragma ENDDUMP
+

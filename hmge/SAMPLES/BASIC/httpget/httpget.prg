@@ -1,6 +1,6 @@
 /*
-  Get file from Internet via HTTP - MiniGUI DEMO
-  (C)2005 Jacek Kubica <kubica@wssk.wroc.pl>
+Get file from Internet via HTTP - MiniGUI DEMO
+(C)2005 Jacek Kubica <kubica@wssk.wroc.pl>
 */
 
 #include "minigui.ch"
@@ -9,42 +9,41 @@
 FUNCTION Main()
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 400 HEIGHT 210 ;
-      MAIN ;
-      TITLE "Get file via HTTP" ;
-      BACKCOLOR { 212, 208, 200 } ;
-      NOSIZE NOMAXIMIZE
+         AT 0, 0 ;
+         WIDTH 400 HEIGHT 210 ;
+         MAIN ;
+         TITLE "Get file via HTTP" ;
+         BACKCOLOR { 212, 208, 200 } ;
+         NOSIZE NOMAXIMIZE
 
-   @ 19 + 25, 110 TEXTBOX ServerURL VALUE "harbour.github.io" ;
-      WIDTH 175 HEIGHT 20
-   @ 44 + 25, 110 TEXTBOX FileURL VALUE "/art/harbour-logo.jpg" ;
-      WIDTH 175 HEIGHT 20
-   @ 69 + 25, 110 TEXTBOX LocalName VALUE "MyPicture.jpg" ;
-      WIDTH 120 HEIGHT 20
-   @ 22 + 25, 17 LABEL Label_3 VALUE "ServerURL" HEIGHT 17 ;
-      AUTOSIZE BOLD TRANSPARENT
-   @ 47 + 25, 17 LABEL Label_2 VALUE "FileURL" HEIGHT 17 ;
-      AUTOSIZE BOLD TRANSPARENT
-   @ 72 + 25, 17 LABEL Label_4 VALUE "LocalFile" HEIGHT 16 ;
-      AUTOSIZE BOLD TRANSPARENT
+      @ 19 + 25, 110 TEXTBOX ServerURL VALUE "harbour.github.io" ;
+         WIDTH 175 HEIGHT 20
+      @ 44 + 25, 110 TEXTBOX FileURL VALUE "/art/harbour-logo.jpg" ;
+         WIDTH 175 HEIGHT 20
+      @ 69 + 25, 110 TEXTBOX LocalName VALUE "MyPicture.jpg" ;
+         WIDTH 120 HEIGHT 20
+      @ 22 + 25, 17 LABEL Label_3 VALUE "ServerURL" HEIGHT 17 ;
+         AUTOSIZE BOLD TRANSPARENT
+      @ 47 + 25, 17 LABEL Label_2 VALUE "FileURL" HEIGHT 17 ;
+         AUTOSIZE BOLD TRANSPARENT
+      @ 72 + 25, 17 LABEL Label_4 VALUE "LocalFile" HEIGHT 16 ;
+         AUTOSIZE BOLD TRANSPARENT
 
-   @ 80 -10 + 25, 245 BUTTON Button_1 CAPTION "Get It" WIDTH 40 HEIGHT 40 FLAT ;
-      ACTION GetFileFromInet( Form_1.ServerURL.Value, Form_1.FileURL.Value, Form_1.LocalName.Value )
+      @ 80 -10 + 25, 245 BUTTON Button_1 CAPTION "Get It" WIDTH 40 HEIGHT 40 FLAT ;
+         ACTION GetFileFromInet( Form_1.ServerURL.Value, Form_1.FileURL.Value, Form_1.LocalName.Value )
 
-   DEFINE STATUSBAR
-      STATUSITEM "Author: J.Kubica <kubica@wssk.wroc.pl>"
-      DATE
-      CLOCK
-   END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM "Author: J.Kubica <kubica@wssk.wroc.pl>"
+         DATE
+         CLOCK
+      END STATUSBAR
 
    END WINDOW
 
    Form_1.Center
    Form_1.Activate
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION GetFileFromInet( cServer, cFile, cOutName )
 
@@ -75,6 +74,7 @@ FUNCTION GetFileFromInet( cServer, cFile, cOutName )
       nHandle := FCreate( cOutName, FC_NORMAL )
       IF nHandle  < 0
          MsgStop( "Local file cannot be created:" + Str( FError() ) )
+
          RETURN ""
       ELSE
          FWrite( nHandle, cPic )
@@ -98,4 +98,5 @@ FUNCTION GetFileFromInet( cServer, cFile, cOutName )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

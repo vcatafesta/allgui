@@ -1,250 +1,219 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2007-2014 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2007-2014 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
 #define NTRIM( n ) hb_ntos( n )
 
-*--------------------------------------------------------*
-Procedure Main
-*--------------------------------------------------------*
-Local cValue := GetInfoString()
+PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 260 HEIGHT 446 - iif(IsWin9X() .or. IsServer(), 10, 0) ;
-		TITLE 'WinVersion Test' ;
-		ICON 'DEMO.ICO' ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		FONT 'MS Sans Serif' SIZE 8
+   LOCAL cValue := GetInfoString()
 
-		@ 0,0 EDITBOX Edit_1 ;
-			WIDTH Form_1.Width - 2 * GetBorderWidth() + 2 ;
-			HEIGHT Form_1.Height - GetTitleHeight() - 2 * GetBorderHeight() + 2 ;
-			VALUE cValue ;
-			MAXLENGTH 1024 ;
-			NOHSCROLL
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 260 HEIGHT 446 - iif(IsWin9X() .or. IsServer(), 10, 0) ;
+         TITLE 'WinVersion Test' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         FONT 'MS Sans Serif' SIZE 8
 
-	END WINDOW
+      @ 0,0 EDITBOX Edit_1 ;
+         WIDTH Form_1.Width - 2 * GetBorderWidth() + 2 ;
+         HEIGHT Form_1.Height - GetTitleHeight() - 2 * GetBorderHeight() + 2 ;
+         VALUE cValue ;
+         MAXLENGTH 1024 ;
+         NOHSCROLL
 
-	Form_1.Center()
+   END WINDOW
 
-	Form_1.Activate()
+   Form_1.Center()
 
-Return
+   Form_1.Activate()
 
-*--------------------------------------------------------*
-Function GetInfoString()
-*--------------------------------------------------------*
-Local nMajorVersion	:= GetMajorVersion()
-Local nMinorVersion	:= GetMinorVersion()
-Local nBuildNumber	:= GetBuildNumber()
-Local nPlatformId	:= GetPlatformId()
-Local nServicePack	:= GetServicePackNT()
-Local cServicePack	:= GetServicePackString()
-Local cWinVersion  	:= GetWinVersionString()
-Local bWin95            := IsWin95()
-Local bWin98            := IsWin98()
-Local bWinME            := IsWinME()
-Local bWin9X            := IsWin9X()
-Local bWinNT            := IsWinNT()
-Local bWinNT4           := IsWinNT4()
-Local bWin2000          := IsWin2K()
-Local bWin2KorLater     := IsWin2KorLater()
-Local bWin2003          := IsWin2003()
-Local bXP               := IsWinXP()
-Local bXPorLater        := IsWinXPorLater()
-Local bXPHome           := IsWinXPHome()
-Local bXPPro            := IsWinXPPro()
-Local bXPSP2            := IsWinXPSP2()
-Local bXPSP3            := IsWinXPSP3()
-Local bMediaCenter      := IsMediaCenter()
-Local bVista            := IsWinVista()
-Local bVistaorLater     := IsVistaOrLater()
-Local bServer           := IsServer()
-Local bWin7             := IsWin7()
-Local bWin8orLater      := IsWin8OrLater()
-Local bWin8             := IsWin8()
-Local bWin81            := IsWin81()
-Local bWin10            := IsWin10()
-Local cRetString	:= ""
+   RETURN
 
-	cRetString	+= "major version = " + NTRIM(nMajorVersion) + CRLF
-	cRetString	+= "minor version = " + NTRIM(nMinorVersion) + CRLF
-	cRetString	+= "build number = " + NTRIM(nBuildNumber) + CRLF
-	cRetString	+= "platform id = " + NTRIM(nPlatformId) + CRLF
-	cRetString	+= "service pack = " + NTRIM(nServicePack) + CRLF
-	cRetString	+= "service pack string = " + LTRIM(cServicePack) + CRLF
-	cRetString	+= "version string = " + LTRIM(cWinVersion) + CRLF
-	cRetString	+= "Win95 = " + IF(bWin95, "true", "false") + CRLF
-	cRetString	+= "Win98 = " + IF(bWin98, "true", "false") + CRLF
-	cRetString	+= "WinME = " + IF(bWinME, "true", "false") + CRLF
-	cRetString	+= "Win9X = " + IF(bWin9X, "true", "false") + CRLF
-	cRetString	+= "WinNT = " + IF(bWinNT, "true", "false") + CRLF
-	cRetString	+= "WinNT4 = " + IF(bWinNT4, "true", "false") + CRLF
-	cRetString	+= "Win2000 = " + IF(bWin2000, "true", "false") + CRLF
-	cRetString	+= "Win2K or later = " + IF(bWin2KorLater, "true", "false") + CRLF
-	cRetString	+= "Win2003 = " + IF(bWin2003, "true", "false") + CRLF
-	cRetString	+= "WinXP = " + IF(bXP, "true", "false") + CRLF
-	cRetString	+= "WinXP or later = " + IF(bXPorLater, "true", "false") + CRLF
-	cRetString	+= "WinXP Home = " + IF(bXPHome, "true", "false") + CRLF
-	cRetString	+= "WinXP Pro = " + IF(bXPPro, "true", "false") + CRLF
-	cRetString	+= "WinXP SP2 = " + IF(bXPSP2, "true", "false") + CRLF
-	cRetString	+= "WinXP SP3 = " + IF(bXPSP3, "true", "false") + CRLF
-	cRetString	+= "Media Center = " + IF(bMediaCenter, "true", "false") + CRLF
-	cRetString	+= "Vista = " + IF(bVista, "true", "false") + CRLF
-	cRetString	+= "Vista or later = " + IF(bVistaorLater, "true", "false") + CRLF
-	cRetString	+= "Server = " + IF(bServer, "true", "false") + CRLF
-	cRetString	+= "Win7 = " + IF(bWin7, "true", "false") + CRLF
-	cRetString	+= "Win8 or later = " + IF(bWin8orLater, "true", "false") + CRLF
-	cRetString	+= "Win8 = " + IF(bWin8, "true", "false") + CRLF
-	cRetString	+= "Win8.1 = " + IF(bWin81, "true", "false") + CRLF
-	cRetString	+= "Win10 = " + IF(bWin10, "true", "false")
+FUNCTION GetInfoString()
 
-Return cRetString
+   LOCAL nMajorVersion   := GetMajorVersion()
+   LOCAL nMinorVersion   := GetMinorVersion()
+   LOCAL nBuildNumber   := GetBuildNumber()
+   LOCAL nPlatformId   := GetPlatformId()
+   LOCAL nServicePack   := GetServicePackNT()
+   LOCAL cServicePack   := GetServicePackString()
+   LOCAL cWinVersion     := GetWinVersionString()
+   LOCAL bWin95            := IsWin95()
+   LOCAL bWin98            := IsWin98()
+   LOCAL bWinME            := IsWinME()
+   LOCAL bWin9X            := IsWin9X()
+   LOCAL bWinNT            := IsWinNT()
+   LOCAL bWinNT4           := IsWinNT4()
+   LOCAL bWin2000          := IsWin2K()
+   LOCAL bWin2KorLater     := IsWin2KorLater()
+   LOCAL bWin2003          := IsWin2003()
+   LOCAL bXP               := IsWinXP()
+   LOCAL bXPorLater        := IsWinXPorLater()
+   LOCAL bXPHome           := IsWinXPHome()
+   LOCAL bXPPro            := IsWinXPPro()
+   LOCAL bXPSP2            := IsWinXPSP2()
+   LOCAL bXPSP3            := IsWinXPSP3()
+   LOCAL bMediaCenter      := IsMediaCenter()
+   LOCAL bVista            := IsWinVista()
+   LOCAL bVistaorLater     := IsVistaOrLater()
+   LOCAL bServer           := IsServer()
+   LOCAL bWin7             := IsWin7()
+   LOCAL bWin8orLater      := IsWin8OrLater()
+   LOCAL bWin8             := IsWin8()
+   LOCAL bWin81            := IsWin81()
+   LOCAL bWin10            := IsWin10()
+   LOCAL cRetString   := ""
 
+   cRetString   += "major version = " + NTRIM(nMajorVersion) + CRLF
+   cRetString   += "minor version = " + NTRIM(nMinorVersion) + CRLF
+   cRetString   += "build number = " + NTRIM(nBuildNumber) + CRLF
+   cRetString   += "platform id = " + NTRIM(nPlatformId) + CRLF
+   cRetString   += "service pack = " + NTRIM(nServicePack) + CRLF
+   cRetString   += "service pack string = " + LTRIM(cServicePack) + CRLF
+   cRetString   += "version string = " + LTRIM(cWinVersion) + CRLF
+   cRetString   += "Win95 = " + IF(bWin95, "true", "false") + CRLF
+   cRetString   += "Win98 = " + IF(bWin98, "true", "false") + CRLF
+   cRetString   += "WinME = " + IF(bWinME, "true", "false") + CRLF
+   cRetString   += "Win9X = " + IF(bWin9X, "true", "false") + CRLF
+   cRetString   += "WinNT = " + IF(bWinNT, "true", "false") + CRLF
+   cRetString   += "WinNT4 = " + IF(bWinNT4, "true", "false") + CRLF
+   cRetString   += "Win2000 = " + IF(bWin2000, "true", "false") + CRLF
+   cRetString   += "Win2K or later = " + IF(bWin2KorLater, "true", "false") + CRLF
+   cRetString   += "Win2003 = " + IF(bWin2003, "true", "false") + CRLF
+   cRetString   += "WinXP = " + IF(bXP, "true", "false") + CRLF
+   cRetString   += "WinXP or later = " + IF(bXPorLater, "true", "false") + CRLF
+   cRetString   += "WinXP Home = " + IF(bXPHome, "true", "false") + CRLF
+   cRetString   += "WinXP Pro = " + IF(bXPPro, "true", "false") + CRLF
+   cRetString   += "WinXP SP2 = " + IF(bXPSP2, "true", "false") + CRLF
+   cRetString   += "WinXP SP3 = " + IF(bXPSP3, "true", "false") + CRLF
+   cRetString   += "Media Center = " + IF(bMediaCenter, "true", "false") + CRLF
+   cRetString   += "Vista = " + IF(bVista, "true", "false") + CRLF
+   cRetString   += "Vista or later = " + IF(bVistaorLater, "true", "false") + CRLF
+   cRetString   += "Server = " + IF(bServer, "true", "false") + CRLF
+   cRetString   += "Win7 = " + IF(bWin7, "true", "false") + CRLF
+   cRetString   += "Win8 or later = " + IF(bWin8orLater, "true", "false") + CRLF
+   cRetString   += "Win8 = " + IF(bWin8, "true", "false") + CRLF
+   cRetString   += "Win8.1 = " + IF(bWin81, "true", "false") + CRLF
+   cRetString   += "Win10 = " + IF(bWin10, "true", "false")
 
-/////////////////////////////////////////////////////////////////////////////
-//             NAME                             DESCRIPTION
-//     ---------------------   ----------------------------------------------
-//     GetMajorVersion()       Get major version number
-//     GetMinorVersion()       Get minor version number
-//     GetBuildNumber()        Get build number (ANDed with 0xFFFF for Win9x)
-//     GetServicePackNT()      Get service pack number
-//     GetPlatformId()         Get platform id
-//     GetServicePackString()  Get service pack string
-//     GetWinVersionString()   Get windows version as string
-//     IsMediaCenter()         TRUE = Media Center Edition
-//     IsWin95()               TRUE = Win95
-//     IsWin98()               TRUE = Win98
-//     IsWinME()               TRUE = WinME
-//     IsWin2K()               TRUE = Win2000
-//     IsWin2KorLater()        TRUE = Win2000 or later
-//     IsWin2003()             TRUE = Win2003
-//     IsWinXP()               TRUE = WinXP
-//     IsWinXPorLater()        TRUE = WinXP or later
-//     IsWinXPHome()           TRUE = WinXP Home
-//     IsWinXPPro()            TRUE = WinXP Pro
-//     IsWinXPSP2()            TRUE = WinXP SP2
-//     IsWinXPSP3()            TRUE = WinXP SP3
-//     IsWinVista()            TRUE = Vista
-//     IsVistaorLater()        TRUE = Vista or later
-//     IsWin7()                TRUE = Win7
-//     IsWin8orLater()         TRUE = Win8 or later
-//     IsWin8()                TRUE = Win8
-//     IsWin81()               TRUE = Win8.1
-//     IsWin10()               TRUE = Win10
+   RETURN cRetString
 
-*--------------------------------------------------------*
-Function GetMajorVersion()
-*--------------------------------------------------------*
-  Local aVer := GetWinVersionInfo()
+   //             NAME                             DESCRIPTION
+   //     ---------------------   ----------------------------------------------
+   //     GetMajorVersion()       Get major version number
+   //     GetMinorVersion()       Get minor version number
+   //     GetBuildNumber()        Get build number (ANDed with 0xFFFF for Win9x)
+   //     GetServicePackNT()      Get service pack number
+   //     GetPlatformId()         Get platform id
+   //     GetServicePackString()  Get service pack string
+   //     GetWinVersionString()   Get windows version as string
+   //     IsMediaCenter()         TRUE = Media Center Edition
+   //     IsWin95()               TRUE = Win95
+   //     IsWin98()               TRUE = Win98
+   //     IsWinME()               TRUE = WinME
+   //     IsWin2K()               TRUE = Win2000
+   //     IsWin2KorLater()        TRUE = Win2000 or later
+   //     IsWin2003()             TRUE = Win2003
+   //     IsWinXP()               TRUE = WinXP
+   //     IsWinXPorLater()        TRUE = WinXP or later
+   //     IsWinXPHome()           TRUE = WinXP Home
+   //     IsWinXPPro()            TRUE = WinXP Pro
+   //     IsWinXPSP2()            TRUE = WinXP SP2
+   //     IsWinXPSP3()            TRUE = WinXP SP3
+   //     IsWinVista()            TRUE = Vista
+   //     IsVistaorLater()        TRUE = Vista or later
+   //     IsWin7()                TRUE = Win7
+   //     IsWin8orLater()         TRUE = Win8 or later
+   //     IsWin8()                TRUE = Win8
+   //     IsWin81()               TRUE = Win8.1
+   //     IsWin10()               TRUE = Win10
 
-Return aVer[1]
+FUNCTION GetMajorVersion()
 
-*--------------------------------------------------------*
-Function GetMinorVersion()
-*--------------------------------------------------------*
-  Local aVer := GetWinVersionInfo()
+   LOCAL aVer := GetWinVersionInfo()
 
-Return aVer[2]
+   RETURN aVer[1]
 
-*--------------------------------------------------------*
-Function GetBuildNumber()
-*--------------------------------------------------------*
-  Local aVer := GetWinVersionInfo()
+FUNCTION GetMinorVersion()
 
-Return aVer[3]
+   LOCAL aVer := GetWinVersionInfo()
 
-*--------------------------------------------------------*
-Function GetPlatformId()
-*--------------------------------------------------------*
-  Local aVer := GetWinVersionInfo()
+   RETURN aVer[2]
 
-Return aVer[4]
+FUNCTION GetBuildNumber()
 
-*--------------------------------------------------------*
-Function GetWinVersionString()
-*--------------------------------------------------------*
-  Local aVer := WinVersion()
+   LOCAL aVer := GetWinVersionInfo()
 
-Return aVer[1]
+   RETURN aVer[3]
 
-*--------------------------------------------------------*
-Function GetServicePackString()
-*--------------------------------------------------------*
-  Local aVer := WinVersion()
+FUNCTION GetPlatformId()
 
-Return aVer[2]
+   LOCAL aVer := GetWinVersionInfo()
 
-*--------------------------------------------------------*
-Function GetServicePackNT()
-*--------------------------------------------------------*
+   RETURN aVer[4]
 
-Return iif(IsWin2KorLater(), Val( Right( Trim( GetServicePackString() ), 1 ) ), 0)
+FUNCTION GetWinVersionString()
 
-*--------------------------------------------------------*
-Function IsWinXPHome()
-*--------------------------------------------------------*
-  Local aVer := WinVersion()
+   LOCAL aVer := WinVersion()
 
-Return iif(IsWinXP(), "Home" $ aVer[4], .F.)
+   RETURN aVer[1]
 
-*--------------------------------------------------------*
-Function IsWinXPPro()
-*--------------------------------------------------------*
-  Local aVer := WinVersion()
+FUNCTION GetServicePackString()
 
-Return iif(IsWinXP(), "Pro" $ aVer[4], .F.)
+   LOCAL aVer := WinVersion()
 
-*--------------------------------------------------------*
-Function IsWinXPSP2()
-*--------------------------------------------------------*
+   RETURN aVer[2]
 
-Return iif(IsWinXP(), GetServicePackNT() == 2, .F.)
+FUNCTION GetServicePackNT()
 
-*--------------------------------------------------------*
-Function IsWinXPSP3()
-*--------------------------------------------------------*
+   RETURN iif(IsWin2KorLater(), Val( Right( Trim( GetServicePackString() ), 1 ) ), 0)
 
-Return iif(IsWinXP(), GetServicePackNT() == 3, .F.)
+FUNCTION IsWinXPHome()
 
-*--------------------------------------------------------*
-Function IsServer()
-*--------------------------------------------------------*
+   LOCAL aVer := WinVersion()
 
-Return iif(IsVistaOrLater(), 'Server' $ GetWinVersionString(), .F.)
+   RETURN iif(IsWinXP(), "Home" $ aVer[4], .F.)
 
-*--------------------------------------------------------*
-Function IsWin7()
-*--------------------------------------------------------*
+FUNCTION IsWinXPPro()
 
-Return iif(IsVistaOrLater(), '7' $ GetWinVersionString(), .F.)
+   LOCAL aVer := WinVersion()
 
-*--------------------------------------------------------*
-Function IsWin8()
-*--------------------------------------------------------*
+   RETURN iif(IsWinXP(), "Pro" $ aVer[4], .F.)
 
-Return iif(IsWin8OrLater(), GetMajorVersion() == 6 .And. GetMinorVersion() == 2, .F.)
+FUNCTION IsWinXPSP2()
 
-*--------------------------------------------------------*
-Function IsWin81()
-*--------------------------------------------------------*
+   RETURN iif(IsWinXP(), GetServicePackNT() == 2, .F.)
 
-Return iif(IsWin8OrLater(), GetMajorVersion() == 6 .And. GetMinorVersion() == 3, .F.)
+FUNCTION IsWinXPSP3()
 
-*--------------------------------------------------------*
-Function IsWin10()
-*--------------------------------------------------------*
+   RETURN iif(IsWinXP(), GetServicePackNT() == 3, .F.)
 
-Return (GetMajorVersion() == 10)
+FUNCTION IsServer()
 
+   RETURN iif(IsVistaOrLater(), 'Server' $ GetWinVersionString(), .F.)
+
+FUNCTION IsWin7()
+
+   RETURN iif(IsVistaOrLater(), '7' $ GetWinVersionString(), .F.)
+
+FUNCTION IsWin8()
+
+   RETURN iif(IsWin8OrLater(), GetMajorVersion() == 6 .And. GetMinorVersion() == 2, .F.)
+
+FUNCTION IsWin81()
+
+   RETURN iif(IsWin8OrLater(), GetMajorVersion() == 6 .And. GetMinorVersion() == 3, .F.)
+
+FUNCTION IsWin10()
+
+   RETURN (GetMajorVersion() == 10)
 
 #pragma BEGINDUMP
 
@@ -353,8 +322,8 @@ HB_FUNC_STATIC( ISWINXPORLATER )
   OSVERSIONINFO osvi;
   getwinver( &osvi );
   hb_retl( osvi.dwPlatformId == VER_PLATFORM_WIN32_NT
-        && ((osvi.dwMajorVersion == 5 && osvi.dwMinorVersion > 0) || 
-		osvi.dwMajorVersion > 5) );
+        && ((osvi.dwMajorVersion == 5 && osvi.dwMinorVersion > 0) ||
+      osvi.dwMajorVersion > 5) );
 }
 
 HB_FUNC_STATIC( ISVISTAORLATER )
@@ -369,7 +338,7 @@ HB_FUNC( ISWIN8ORLATER )
   OSVERSIONINFO osvi;
   getwinver( &osvi );
   hb_retl( (osvi.dwMajorVersion >= 6 && osvi.dwMinorVersion > 1) ||
-		osvi.dwMajorVersion == 10 );
+      osvi.dwMajorVersion == 10 );
 }
 
 HB_FUNC( GETWINVERSIONINFO )
@@ -398,3 +367,4 @@ HB_FUNC( ISMEDIACENTER )
 }
 
 #pragma ENDDUMP
+

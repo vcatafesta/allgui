@@ -13,53 +13,51 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include 'minigui.ch'
 
-*-----------------------------------------------------------------------------*
 FUNCTION httpconnect( Connection , Server , Port )
-*-----------------------------------------------------------------------------*
 
-   Public &Connection
+   PUBLIC &Connection
+
    &Connection := THttp():New()
    &Connection:Connect( Server, Port )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetData()
-*-----------------------------------------------------------------------------*
+
    LOCAL PacketNames [ aDir ( _HMG_CommPath + _HMG_StationName + '.*' ) ]
    LOCAL i, Rows, Cols, RetVal := Nil, aItem, aTemp := {}, r, c
    LOCAL DataValue, DataType, DataLength, Packet
@@ -71,14 +69,14 @@ FUNCTION GetData()
 
    IF Len ( PacketNames ) > 0
 
-      Packet := MemoRead ( _HMG_CommPath + PacketNames [1] )
+      PACKet := MemoRead ( _HMG_CommPath + PacketNames [1] )
 
       Rows := Val ( SubStr ( MemoLine ( Packet , , 1 ) , 11 , 99 ) )
       Cols := Val ( SubStr ( MemoLine ( Packet , , 2 ) , 11 , 99 ) )
 
       DO CASE
 
-      // Single Data
+         // Single Data
       CASE Rows == 0 .AND. Cols == 0
 
          DataType := SubStr ( MemoLine ( Packet ,  , 3 ) , 12 , 1 )
@@ -97,7 +95,7 @@ FUNCTION GetData()
             RetVal := ( AllTrim ( DataValue ) == 'T' )
          END CASE
 
-      // One Dimension Array Data
+         // One Dimension Array Data
       CASE Rows != 0 .AND. Cols == 0
 
          i := 3
@@ -130,7 +128,7 @@ FUNCTION GetData()
 
          RetVal := aTemp
 
-      // Two Dimension Array Data
+         // Two Dimension Array Data
       CASE Rows != 0 .AND. Cols != 0
 
          i := 3
@@ -182,10 +180,10 @@ FUNCTION GetData()
 
    SET ( _SET_DATEFORMAT , bd )
 
-RETURN ( RetVal )
-*-----------------------------------------------------------------------------*
+   RETURN ( RetVal )
+
 FUNCTION SendData ( cDest , Data )
-*-----------------------------------------------------------------------------*
+
    LOCAL cData, i, j
    LOCAL pData, cLen, cType, FileName, Rows, Cols
 
@@ -295,4 +293,5 @@ FUNCTION SendData ( cDest , Data )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
+

@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Folder Demo
- * (c) 2009 Janusz Pora <januszpora@onet.eu>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Folder Demo
+* (c) 2009 Janusz Pora <januszpora@onet.eu>
 */
 
 #include "minigui.ch"
@@ -12,33 +11,30 @@
 #define IDCANCEL            2
 #define IDIGNORE            5
 
+#define FLD_AFH         1           // _HMG_ActiveFolderHandle
+#define FLD_MOD         2           // _HMG_ActiveFolderModal
+#define FLD_INM         3           // _HMG_FolderInMemory
+#define FLD_PGT         4           // _HMG_aFolderPagesTemp
+#define FLD_FLT         5           // _HMG_aFolderTemplate
+#define FLD_FPG         6           // _HMG_aFolderPages
+#define FLD_FIT         7           // _HMG_aFolderItems
+#define FLD_HFP         8           //  aHwndFolderPages
 
-#DEFINE FLD_AFH         1           // _HMG_ActiveFolderHandle
-#DEFINE FLD_MOD         2           // _HMG_ActiveFolderModal
-#DEFINE FLD_INM         3           // _HMG_FolderInMemory
-#DEFINE FLD_PGT         4           // _HMG_aFolderPagesTemp
-#DEFINE FLD_FLT         5           // _HMG_aFolderTemplate
-#DEFINE FLD_FPG         6           // _HMG_aFolderPages
-#DEFINE FLD_FIT         7           // _HMG_aFolderItems
-#DEFINE FLD_HFP         8           //  aHwndFolderPages
+FUNCTION main()
 
-*-------------------------------------------------------------
-Function main()
-*-------------------------------------------------------------
+   //SET LANGUAGE TO POLISH
 
-//SET LANGUAGE TO POLISH
+   DEFINE WINDOW MainForm ;
+         AT 0,0 ;
+         WIDTH 450 ;
+         HEIGHT 200 ;
+         TITLE 'Demo of Folders   -   By Janusz Pora' ;
+         ICON 'Star.ico' ;
+         MAIN
 
-DEFINE WINDOW MainForm ;
-       AT 0,0 ;
-       WIDTH 450 ;
-       HEIGHT 200 ;
-       TITLE 'Demo of Folders   -   By Janusz Pora' ;
-       ICON 'Star.ico' ;
-       MAIN
+      ON KEY ALT+X ACTION ThisWindow.Release
 
-       ON KEY ALT+X ACTION ThisWindow.Release
-
-       DEFINE MAIN MENU
+      DEFINE MAIN MENU
          DEFINE POPUP 'File'
             MENUITEM '&Exit'         ACTION MainForm.Release
          END POPUP
@@ -76,18 +72,21 @@ DEFINE WINDOW MainForm ;
       END MENU
 
       @ 30,70 LABEL Lbl_1 ;
-          VALUE 'Demo of Folders' AUTOSIZE ;
-          FONT 'Arial' SIZE 24 ;
-          BOLD ITALIC FONTCOLOR RED
+         VALUE 'Demo of Folders' AUTOSIZE ;
+         FONT 'Arial' SIZE 24 ;
+         BOLD ITALIC FONTCOLOR RED
 
-    END WINDOW
+   END WINDOW
 
-    CENTER WINDOW MainForm
-    ACTIVATE WINDOW MainForm
-Return  Nil
+   CENTER WINDOW MainForm
+   ACTIVATE WINDOW MainForm
 
-Function FolderInMemory(nMet,lMod)
-LOCAL cFld, cPg1, cPg2, cPg3
+   RETURN  Nil
+
+FUNCTION FolderInMemory(nMet,lMod)
+
+   LOCAL cFld, cPg1, cPg2, cPg3
+
    cPg1:= "Page1"+Str(nMet,1)
    cPg2:= "Page2"+Str(nMet,1)
    cPg3:= "Page3"+Str(nMet,1)
@@ -98,7 +97,7 @@ LOCAL cFld, cPg1, cPg2, cPg3
       cFld:= "Fld_1"+Str(nMet,1)
    ELSE
       cFld:= "Fld_2"+Str(nMet,1)
-   endif
+   ENDIF
    IF !IsWIndowDefined ( &cFld)
       IF lMod
          DO CASE
@@ -139,7 +138,7 @@ LOCAL cFld, cPg1, cPg2, cPg3
                ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN;
                ON CANCEL  {|| MsgInfo("Cancel Button") };
                ON INIT SetInitfolder()
-         endcase
+         ENDCASE
       ELSE
          DO CASE
          CASE nMet == 0
@@ -179,272 +178,276 @@ LOCAL cFld, cPg1, cPg2, cPg3
                ON FOLDERPROC   {||  ApplyFolderClick() } APPLYBTN;
                ON CANCEL  {|| MsgInfo("Cancel Button") };
                ON INIT SetInitfolder()  BUTTONS VERTICAL BOTTOM
-         endcase
+         ENDCASE
       ENDIF
 
+      DEFINE FOLDERPAGE &cPg1 RESOURCE DLG_FIRST   TITLE "Control 1" IMAGE "Check.bmp"
 
-            DEFINE FOLDERPAGE &cPg1 RESOURCE DLG_FIRST   TITLE "Control 1" IMAGE "Check.bmp"
+      @ 10,20 LABEL Lbl_1 ID 402 ;
+         VALUE 'New Label - Bold' BOLD ;
+         WIDTH 170   ;
+         HEIGHT 24  ;
+         TOOLTIP 'Tooltip for Label'
 
-              @ 10,20 LABEL Lbl_1 ID 402 ;
-                  VALUE 'New Label - Bold' BOLD ;
-                  WIDTH 170   ;
-                   HEIGHT 24  ;
-                   TOOLTIP 'Tooltip for Label'
+      @ 40,20  EDITBOX EdBox_1a ID 302 ;
+         WIDTH 200   ;
+         HEIGHT 70 ;
+         VALUE ' Sample Edit Text'   ;
+         TOOLTIP 'Defined EditBox in Memory'
 
-               @ 40,20  EDITBOX EdBox_1a ID 302 ;
-                  WIDTH 200   ;
-                   HEIGHT 70 ;
-                   VALUE ' Sample Edit Text'   ;
-                   TOOLTIP 'Defined EditBox in Memory'
+      @ 120,20 COMBOBOX cBox_1a ID 308 ;
+         ITEMS {'Item 1','Item 2','Item 3'} ;
+         VALUE 1 ;
+         WIDTH 200   ;
+         HEIGHT 70 ;
+         TOOLTIP 'Defined ComboBox in Memory'
 
-               @ 120,20 COMBOBOX cBox_1a ID 308 ;
-                 ITEMS {'Item 1','Item 2','Item 3'} ;
-                 VALUE 1 ;
-                  WIDTH 200   ;
-                   HEIGHT 70 ;
-                  TOOLTIP 'Defined ComboBox in Memory'
+      @ 20,240 FRAME frame_1a ID 306;
+         CAPTION 'Frame ';
+         WIDTH 200   ;
+         HEIGHT 100
 
+      @ 35,250  CHECKBOX chkbox_1A ID 303;
+         CAPTION 'Active CheckBox';
+         WIDTH 160   ;
+         HEIGHT 24  ;
+         TOOLTIP 'Defined CheckBox in Memory'
 
-              @ 20,240 FRAME frame_1a ID 306;
-                  CAPTION 'Frame ';
-                  WIDTH 200   ;
-                   HEIGHT 100
+      @ 65,250 RADIOGROUP RadioGrp_1a ID  {304,305} ;
+         OPTIONS {'Radio 1','Radio 2' } ;
+         VALUE 1   ;
+         WIDTH 140   ;
+         SPACING 25 ;
+         FONT 'System' ;
+         SIZE 12   ;
+         TOOLTIP 'Defined RadioGroup'
 
-               @ 35,250  CHECKBOX chkbox_1A ID 303;
-                 CAPTION 'Active CheckBox';
-                  WIDTH 160   ;
-                   HEIGHT 24  ;
-                   TOOLTIP 'Defined CheckBox in Memory'
+      @ 140,240   LISTBOX lBox_1a ID 307;
+         WIDTH 200   ;
+         HEIGHT 100 ;
+         ITEMS {'Line 1','Line 2','Line 3'} ;
+         VALUE 2 ;
+         TOOLTIP 'Defined ListBox in Memory'
 
-               @ 65,250 RADIOGROUP RadioGrp_1a ID  {304,305} ;
-                    OPTIONS {'Radio 1','Radio 2' } ;
-                VALUE 1   ;
-                  WIDTH 140   ;
-                   SPACING 25 ;
-                 FONT 'System' ;
-                SIZE 12   ;
-                   TOOLTIP 'Defined RadioGroup'
+      @ 200,20 TEXTBOX TextBox_1 ID 323 ;
+         HEIGHT 24  ;
+         VALUE 'TextBox Value'  ;
+         WIDTH 200  ;
+         TOOLTIP 'TextBox Created In Memory'
 
-               @ 140,240   LISTBOX lBox_1a ID 307;
-                  WIDTH 200   ;
-                   HEIGHT 100 ;
-                  ITEMS {'Line 1','Line 2','Line 3'} ;
-                  VALUE 2 ;
-                  TOOLTIP 'Defined ListBox in Memory'
+      @ 250,20 IMAGE image_1a ID 310 ;
+         PICTURE 'DEMO.bmp' ;
+         WIDTH 50   ;
+         HEIGHT 50
 
-               @ 200,20 TEXTBOX TextBox_1 ID 323 ;
-                   HEIGHT 24  ;
-                   VALUE 'TextBox Value'  ;
-                   WIDTH 200  ;
-                   TOOLTIP 'TextBox Created In Memory'
+      @ 250,120 BUTTON Btn_1x ID 391 ;
+         CAPTION 'Set Text'  ;
+         ACTION setEdText(cPg1, lMod, 323);
+         WIDTH 70   ;
+         HEIGHT 24  ;
+         TOOLTIP 'Set new value'
 
-               @ 250,20 IMAGE image_1a ID 310 ;
-                   PICTURE 'DEMO.bmp' ;
-                  WIDTH 50   ;
-                   HEIGHT 50
+   END FOLDERPAGE
 
-               @ 250,120 BUTTON Btn_1x ID 391 ;
-                   CAPTION 'Set Text'  ;
-                   ACTION setEdText(cPg1, lMod, 323);
-                   WIDTH 70   ;
-                   HEIGHT 24  ;
-                   TOOLTIP 'Set new value'
+   DEFINE FOLDERPAGE &cPg2 RESOURCE DLG_SECOND   TITLE "Control 2"  // IMAGE "Check.bmp"
 
-            END FOLDERPAGE
+   @ 30 ,20  DATEPICKER DatePicker_1  ID 324 ;
+      VALUE date();
+      WIDTH 150;
+      TOOLTIP 'Defined DatePicker'
 
-            DEFINE FOLDERPAGE &cPg2 RESOURCE DLG_SECOND   TITLE "Control 2"  // IMAGE "Check.bmp"
+   @ 130,40 BUTTON Btn_2a ID 318;
+      PICTURE "PLAY.BMP" ;
+      ACTION {|| _PlayAnimateBox ( 'Ani_1a' , cPg2 )};
+      WIDTH 30   ;
+      HEIGHT 30 ;
+      TOOLTIP 'Defined Imagebutton'
 
-               @ 30 ,20  DATEPICKER DatePicker_1  ID 324 ;
-                   VALUE date();
-                   WIDTH 150;
-                   TOOLTIP 'Defined DatePicker'
+   @ 130, 70 CHECKBUTTON CheckBtn_1a ID 319;
+      PICTURE 'info.bmp'  ;
+      WIDTH 30   ;
+      HEIGHT 30 ;
+      VALUE .F. ;
+      TOOLTIP 'Graphical CheckButton'
 
+   @ 170,20 ANIMATEBOX Ani_1a ID 317 ;
+      WIDTH 240   ;
+      HEIGHT 50 ;
+      FILE 'Sample.Avi'
 
-               @ 130,40 BUTTON Btn_2a ID 318;
-                 PICTURE "PLAY.BMP" ;
-                 ACTION {|| _PlayAnimateBox ( 'Ani_1a' , cPg2 )};
-                  WIDTH 30   ;
-                   HEIGHT 30 ;
-                 TOOLTIP 'Defined Imagebutton'
+   @ 250,20 SLIDER sld_1a ID 311 ;
+      RANGE 1,10 ;
+      VALUE 20 ;
+      WIDTH 300   ;
+      HEIGHT 30 ;
+      TOOLTIP 'Defined Slider in Memory'
 
-             @ 130, 70 CHECKBUTTON CheckBtn_1a ID 319;
-                 PICTURE 'info.bmp'  ;
-                  WIDTH 30   ;
-                   HEIGHT 30 ;
-                 VALUE .F. ;
-                 TOOLTIP 'Graphical CheckButton'
+   @ 290,20 PROGRESSBAR progrBar_1a ID 312 ;
+      RANGE 1 , 200      ;
+      VALUE 50      ;
+      WIDTH 300   ;
+      HEIGHT 30 ;
+      TOOLTIP 'Defined ProgressBar in Memory'
 
-           @ 170,20 ANIMATEBOX Ani_1a ID 317 ;
-                  WIDTH 240   ;
-                   HEIGHT 50 ;
-                FILE 'Sample.Avi'
+   @ 30 ,230 MONTHCALENDAR MonthCal_1 ID 125;
+      VALUE date();
+      TOOLTIP 'Defined MonthCalendar in Memory'
 
+   DEFINE TREE tree_1a ID 315 ;
+         AT 30,430 ;
+         WIDTH 150   ;
+         HEIGHT 230 ;
+         VALUE 1 ;
+         TOOLTIP 'Defined Tree in Memory'
 
-               @ 250,20 SLIDER sld_1a ID 311 ;
-                  RANGE 1,10 ;
-                  VALUE 20 ;
-                  WIDTH 300   ;
-                   HEIGHT 30 ;
-                  TOOLTIP 'Defined Slider in Memory'
+      NODE 'Item 1'
+         TREEITEM 'Item 1.1'
+         TREEITEM 'Item 1.2' ID 999
+         TREEITEM 'Item 1.3'
+      END NODE
 
+      NODE 'Item 2'
 
-               @ 290,20 PROGRESSBAR progrBar_1a ID 312 ;
-                  RANGE 1 , 200      ;
-                  VALUE 50      ;
-                  WIDTH 300   ;
-                   HEIGHT 30 ;
-                  TOOLTIP 'Defined ProgressBar in Memory'
+         TREEITEM 'Item 2.1'
 
+         NODE 'Item 2.2'
+            TREEITEM 'Item 2.2.1'
+            TREEITEM 'Item 2.2.2'
+            TREEITEM 'Item 2.2.3'
+         END NODE
 
-               @ 30 ,230 MONTHCALENDAR MonthCal_1 ID 125;
-                   VALUE date();
-                   TOOLTIP 'Defined MonthCalendar in Memory'
+         TREEITEM 'Item 2.3'
 
-               DEFINE TREE tree_1a ID 315 ;
-                   AT 30,430 ;
-                  WIDTH 150   ;
-                   HEIGHT 230 ;
-                  VALUE 1 ;
-                  TOOLTIP 'Defined Tree in Memory'
+      END NODE
 
-                NODE 'Item 1'
-                   TREEITEM 'Item 1.1'
-                   TREEITEM 'Item 1.2' ID 999
-                   TREEITEM 'Item 1.3'
-                END NODE
+      NODE 'Item 3'
+         TREEITEM 'Item 3.1'
+         TREEITEM 'Item 3.2'
 
-                NODE 'Item 2'
+         NODE 'Item 3.3'
+            TREEITEM 'Item 3.3.1'
+            TREEITEM 'Item 3.3.2'
+         END NODE
 
-                   TREEITEM 'Item 2.1'
+      END NODE
 
-                   NODE 'Item 2.2'
-                      TREEITEM 'Item 2.2.1'
-                      TREEITEM 'Item 2.2.2'
-                      TREEITEM 'Item 2.2.3'
-                   END NODE
+   END TREE
 
-                   TREEITEM 'Item 2.3'
+END FOLDERPAGE
 
-                END NODE
+DEFINE FOLDERPAGE &cPg3 RESOURCE DLG_THIRD   TITLE "Control 3"  IMAGE "Exit.bmp"
 
-                NODE 'Item 3'
-                   TREEITEM 'Item 3.1'
-                   TREEITEM 'Item 3.2'
+DEFINE TAB Tab_1a ID 316 ;
+      AT 30,30 ;
+      WIDTH 300   ;
+      HEIGHT 120 ;
+      VALUE 1 ;
+      TOOLTIP 'Redefined Tab Control'
 
-                   NODE 'Item 3.3'
-                      TREEITEM 'Item 3.3.1'
-                      TREEITEM 'Item 3.3.2'
-                   END NODE
+   DEFINE PAGE 'Page 1' IMAGE 'Exit.Bmp'
 
-                END NODE
+      @ 50,20 LABEL Lbl_2a ID 321 ;
+         VALUE 'Label on Page 1' ;
+         WIDTH 170   ;
+         HEIGHT 24  ;
+         TOOLTIP 'Redefined Label on Page 1' TRANSPARENT
 
-             END TREE
+   END PAGE
 
-            END FOLDERPAGE
+   DEFINE PAGE 'Page &2' IMAGE 'Info.Bmp'
 
-            DEFINE FOLDERPAGE &cPg3 RESOURCE DLG_THIRD   TITLE "Control 3"  IMAGE "Exit.bmp"
+      @ 50,120 LABEL Lbl_3a ID 322 ;
+         VALUE 'Label on Page 2' ;
+         WIDTH 170   ;
+         HEIGHT 24  ;
+         TOOLTIP 'Redefined Label on Page 2' TRANSPARENT
 
-             DEFINE TAB Tab_1a ID 316 ;
-                   AT 30,30 ;
-                  WIDTH 300   ;
-                   HEIGHT 120 ;
-                VALUE 1 ;
-                TOOLTIP 'Redefined Tab Control'
+   END PAGE
 
-                DEFINE PAGE 'Page 1' IMAGE 'Exit.Bmp'
+   DEFINE PAGE 'Page 3' IMAGE 'Check.Bmp'
 
-                       @ 50,20 LABEL Lbl_2a ID 321 ;
-                          VALUE 'Label on Page 1' ;
-                          WIDTH 170   ;
-                          HEIGHT 24  ;
-                          TOOLTIP 'Redefined Label on Page 1' TRANSPARENT
+   END PAGE
 
-                END PAGE
+END TAB
 
-                DEFINE PAGE 'Page &2' IMAGE 'Info.Bmp'
+@ 200,30 GRID Grid_1a ID 314 ;
+   WIDTH 400   ;
+   HEIGHT 130 ;
+   HEADERS {'Key','Name','Data'}   ;
+   WIDTHS {60,200,100}      ;
+   ITEMS {{'10','Adrian','256'}} ;
+   TOOLTIP 'Defined Grid in Memory'
 
-                       @ 50,120 LABEL Lbl_3a ID 322 ;
-                          VALUE 'Label on Page 2' ;
-                          WIDTH 170   ;
-                          HEIGHT 24  ;
-                          TOOLTIP 'Redefined Label on Page 2' TRANSPARENT
+END FOLDERPAGE
 
-                END PAGE
+END FOLDER
 
-                DEFINE PAGE 'Page 3' IMAGE 'Check.Bmp'
+ENDIF
+RELEASE FONT Font_1
 
-                END PAGE
+RETURN NIL
 
-             END TAB
+FUNCTION setEdText(cPage, lMod, nId)
 
-               @ 200,30 GRID Grid_1a ID 314 ;
-                  WIDTH 400   ;
-                  HEIGHT 130 ;
-                  HEADERS {'Key','Name','Data'}   ;
-                  WIDTHS {60,200,100}      ;
-                  ITEMS {{'10','Adrian','256'}} ;
-                  TOOLTIP 'Defined Grid in Memory'
-
-            END FOLDERPAGE
-
-         END FOLDER
-
-    endif
-    RELEASE FONT Font_1
-
-Return Nil
-
-Function setEdText(cPage, lMod, nId)
    IF lMod
       SetDialogItemText( GetFormHandle (cPage), nId,"New Text from Modal" )
-   else
+   ELSE
       SetProperty (cPage,"TextBox_1","value","New Text" )
-   endif
-Return Nil
+   ENDIF
+
+   RETURN NIL
 
 FUNCTION ApplyFolderClick()
+
    LOCAL hwndFolder := GetFolderHandle(DLG_HWND)
    LOCAL PageName:= GetFolderWindowName(DLG_HWND )
    LOCAL FolderName:= GetFolderWindowName(hwndFolder )
-  //
-  MsgInfo("Apply or OK button Click for:"+CRLF+FolderName + CRLF + PageName+ CRLF +"Nr ID: "+Str(DLG_ID))
-RETURN Nil
 
-Function FolderFun()
-Local   ret := 0, cValue
-    if DLG_ID != Nil
-        do case
-        case DLG_ID == IDOK .and. DLG_NOT ==0
-            _ReleaseWindow ( 'Dlg_1')
-        case DLG_ID == IDCANCEL .and. DLG_NOT ==0
-            _ReleaseWindow ( 'Dlg_1')
-        case DLG_ID == 104 .and. DLG_NOT ==1024
-            cValue := GetEditText (DLG_HWND, 104 )
-            if !empty(cValue)
-                EnableDialogItem (DLG_HWND, 105)
-            else
-                DisableDialogItem (DLG_HWND, 105)
-            endif
-        case DLG_ID == 105 .and. DLG_NOT ==0
-            ret := GetEditText (DLG_HWND, 104 )
-            _ReleaseDialog ( )
-        case DLG_ID == 106 .and. DLG_NOT ==0
-             SetDialogItemText(DLG_HWND, 104,"  " )
-             DisableDialogItem (DLG_HWND, 105)
-        case DLG_ID == 107 .and. DLG_NOT ==0
-            _ReleaseDialog ( )
-        endcase
-    endif
-Return ret
+   MsgInfo("Apply or OK button Click for:"+CRLF+FolderName + CRLF + PageName+ CRLF +"Nr ID: "+Str(DLG_ID))
 
-Function SetInitfolder()
- //  LOCAL hwndFolder := GetFolderHandle(DLG_HWND)
- //  LOCAL FolderName:= GetFolderWindowName(DLG_HWND )
- //   InitDialogFolder - Initialized the Folder
-Return Nil
+   RETURN NIL
 
-Function FolderRC(nMet,lMod)
-LOCAL cFld, cPg1, cPg2, cPg3
+FUNCTION FolderFun()
+
+   LOCAL   ret := 0, cValue
+
+   IF DLG_ID != Nil
+      DO CASE
+      CASE DLG_ID == IDOK .and. DLG_NOT ==0
+         _ReleaseWindow ( 'Dlg_1')
+      CASE DLG_ID == IDCANCEL .and. DLG_NOT ==0
+         _ReleaseWindow ( 'Dlg_1')
+      CASE DLG_ID == 104 .and. DLG_NOT ==1024
+         cValue := GetEditText (DLG_HWND, 104 )
+         IF !empty(cValue)
+            EnableDialogItem (DLG_HWND, 105)
+         ELSE
+            DisableDialogItem (DLG_HWND, 105)
+         ENDIF
+      CASE DLG_ID == 105 .and. DLG_NOT ==0
+         ret := GetEditText (DLG_HWND, 104 )
+         _ReleaseDialog ( )
+      CASE DLG_ID == 106 .and. DLG_NOT ==0
+         SetDialogItemText(DLG_HWND, 104,"  " )
+         DisableDialogItem (DLG_HWND, 105)
+      CASE DLG_ID == 107 .and. DLG_NOT ==0
+         _ReleaseDialog ( )
+      ENDCASE
+   ENDIF
+
+   RETURN ret
+
+FUNCTION SetInitfolder()
+
+   //  LOCAL hwndFolder := GetFolderHandle(DLG_HWND)
+   //  LOCAL FolderName:= GetFolderWindowName(DLG_HWND )
+   //   InitDialogFolder - Initialized the Folder
+
+   RETURN NIL
+
+FUNCTION FolderRC(nMet,lMod)
+
+   LOCAL cFld, cPg1, cPg2, cPg3
 
    cPg1:= "Page1"+Str(nMet,1)
    cPg2:= "Page2"+Str(nMet,1)
@@ -454,7 +457,7 @@ LOCAL cFld, cPg1, cPg2, cPg3
       cFld:= "Fld_3"+Str(nMet,1)
    ELSE
       cFld:= "Fld_4"+Str(nMet,1)
-   endif
+   ENDIF
    IF !IsWIndowDefined ( &cFld)
       IF lMod
          DO CASE
@@ -483,7 +486,7 @@ LOCAL cFld, cPg1, cPg2, cPg3
                ON FOLDERPROC   {|| FolderFun() } APPLYBTN;
                ON CANCEL  {|| MsgInfo("Cancel Button") };
                ON INIT SetInitfolder()
-         endcase
+         ENDCASE
       ELSE
          DO CASE
          CASE nMet == 0
@@ -512,94 +515,96 @@ LOCAL cFld, cPg1, cPg2, cPg3
                ON CANCEL  {|| MsgInfo("Cancel Button") };
                ON HELP  {|| MsgInfo("Help Button") };
                ON INIT SetInitfolder()
-         endcase
+         ENDCASE
       ENDIF
 
-         FOLDERPAGE &cPg1 RESOURCE DLG_FIRST  TITLE "PEOPLE"    IMAGE "Check.bmp"
+      FOLDERPAGE &cPg1 RESOURCE DLG_FIRST  TITLE "PEOPLE"    IMAGE "Check.bmp"
 
-         FOLDERPAGE &cPg2 RESOURCE DLG_SECOND TITLE "ANIMALS"   IMAGE "Check.bmp"
+      FOLDERPAGE &cPg2 RESOURCE DLG_SECOND TITLE "ANIMALS"   IMAGE "Check.bmp"
 
-         FOLDERPAGE &cPg3 RESOURCE DLG_THIRD  TITLE "BUILDINGS" IMAGE "Exit.bmp"
+      FOLDERPAGE &cPg3 RESOURCE DLG_THIRD  TITLE "BUILDINGS" IMAGE "Exit.bmp"
 
-      END FOLDER
-   endif
-   RELEASE FONT Font_1
+   END FOLDER
+ENDIF
+RELEASE FONT Font_1
 
-Return Nil
+RETURN NIL
 
-Function FolderFun1(lOk, nNewAge)
-Local   ret := 0, cValue
-    if DLG_ID != Nil
-        do case
-        case DLG_ID == IDC_EDT1 .and. DLG_NOT ==1024
-            cValue := GetEditText (DLG_HWND, IDC_EDT1 )
-            if !empty(cValue)
-                EnableDialogItem (DLG_HWND, IDC_BTN1)
-            else
-                DisableDialogItem (DLG_HWND, IDC_BTN1)
-            endif
-        case DLG_ID == IDC_BTN1 .and. DLG_NOT ==0
-            ret := GetEditText (DLG_HWND, IDC_EDT1 )
-            nNewAge := ret
-            lOk := .t.
-            _ReleaseDialog ( )
-        case DLG_ID == IDC_BTN2 .and. DLG_NOT ==0
-             SetDialogItemText(DLG_HWND, IDC_EDT1,"  " )
-             DisableDialogItem (DLG_HWND, IDC_BTN1)
-        case DLG_ID == IDC_BTN3 .and. DLG_NOT ==0
-            _ReleaseDialog ( )
-        endcase
-    endif
-Return ret
+FUNCTION FolderFun1(lOk, nNewAge)
 
+   LOCAL   ret := 0, cValue
 
-*-----------------------------------------------------------------------------*
-Function  About()
-*-----------------------------------------------------------------------------*
+   IF DLG_ID != Nil
+      DO CASE
+      CASE DLG_ID == IDC_EDT1 .and. DLG_NOT ==1024
+         cValue := GetEditText (DLG_HWND, IDC_EDT1 )
+         IF !empty(cValue)
+            EnableDialogItem (DLG_HWND, IDC_BTN1)
+         ELSE
+            DisableDialogItem (DLG_HWND, IDC_BTN1)
+         ENDIF
+      CASE DLG_ID == IDC_BTN1 .and. DLG_NOT ==0
+         ret := GetEditText (DLG_HWND, IDC_EDT1 )
+         nNewAge := ret
+         lOk := .t.
+         _ReleaseDialog ( )
+      CASE DLG_ID == IDC_BTN2 .and. DLG_NOT ==0
+         SetDialogItemText(DLG_HWND, IDC_EDT1,"  " )
+         DisableDialogItem (DLG_HWND, IDC_BTN1)
+      CASE DLG_ID == IDC_BTN3 .and. DLG_NOT ==0
+         _ReleaseDialog ( )
+      ENDCASE
+   ENDIF
+
+   RETURN ret
+
+FUNCTION  About()
+
    IF !IsWIndowDefined ( Form_About )
       DEFINE WINDOW Form_About ;
-         AT 0,0 ;
-         WIDTH 250 HEIGHT 110 ;
-         TITLE '';
-         CHILD NOCAPTION
+            AT 0,0 ;
+            WIDTH 250 HEIGHT 110 ;
+            TITLE '';
+            CHILD NOCAPTION
 
-      @ 5 ,5 FRAME Frame_1;
-          WIDTH 235  HEIGHT 90
+         @ 5 ,5 FRAME Frame_1;
+            WIDTH 235  HEIGHT 90
 
-      @ 15 ,15 IMAGE Icon_1;
-          PICTURE "Star.ico" ;
-          WIDTH 32 HEIGHT 32
+         @ 15 ,15 IMAGE Icon_1;
+            PICTURE "Star.ico" ;
+            WIDTH 32 HEIGHT 32
 
-      @ 10,70 LABEL Label_1 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE 'Demo of Folders'  ;
-         FONT 'Arial' SIZE 11 BOLD //CENTERALIGN
+         @ 10,70 LABEL Label_1 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE 'Demo of Folders'  ;
+            FONT 'Arial' SIZE 11 BOLD //CENTERALIGN
 
-      @ 35,70 LABEL Label_2 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE '(c) 2009 Janusz Pora' ;
-         FONT 'Arial' SIZE 9 FONTCOLOR BLUE //CENTERALIGN
+         @ 35,70 LABEL Label_2 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE '(c) 2009 Janusz Pora' ;
+            FONT 'Arial' SIZE 9 FONTCOLOR BLUE //CENTERALIGN
 
-      @ 60,70 LABEL Label_3 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE 'HMG Harbour MiniGui' ;
-         FONT 'Arial' SIZE 9 //CENTERALIGN
+         @ 60,70 LABEL Label_3 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE 'HMG Harbour MiniGui' ;
+            FONT 'Arial' SIZE 9 //CENTERALIGN
 
-      @ 65,15  BUTTON Btn_splash ;
-         CAPTION 'OK' ;
-         ACTION   Form_About.Release ;
-         WIDTH 40 HEIGHT 20 ;
-         FONT 'Arial' SIZE 9 Bold DEFAULT
+         @ 65,15  BUTTON Btn_splash ;
+            CAPTION 'OK' ;
+            ACTION   Form_About.Release ;
+            WIDTH 40 HEIGHT 20 ;
+            FONT 'Arial' SIZE 9 Bold DEFAULT
 
       END WINDOW
       Form_About.Center
       ACTIVATE WINDOW Form_About
-   endif
-Return Nil
+   ENDIF
 
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Function GetFolderWindowName( hWnd )
-*-----------------------------------------------------------------------------*
-   Local i := Ascan ( _HMG_aFormHandles, hWnd )
-Return IF( i > 0, _HMG_aFormNames[i], "" )
+FUNCTION GetFolderWindowName( hWnd )
+
+   LOCAL i := Ascan ( _HMG_aFormHandles, hWnd )
+
+   RETURN IF( i > 0, _HMG_aFormNames[i], "" )
+

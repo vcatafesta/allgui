@@ -1,8 +1,8 @@
 
 /*
- * Harbour MiniGUI ZeeGrid Demo
- * (c) 2017, Petr Chornyj
- */
+* Harbour MiniGUI ZeeGrid Demo
+* (c) 2017, Petr Chornyj
+*/
 
 MEMVAR hG
 
@@ -17,18 +17,18 @@ PROCEDURE Main()
 
    LOCAL hMod := zg_LoadDll()
 
-   if Empty( hMod ) 
+   IF Empty( hMod )
       QUIT
-   endif
+   ENDIF
 
    PUBLIC hG
 
    SET EVENTS FUNCTION TO App_OnEvents
 
    DEFINE WINDOW Win_1 CLIENTAREA 600, 600 TITLE 'ZeeGrid demo' ;
-      ICON "MAIN.ICO" ;
-      WINDOWTYPE MAIN ;
-      ON RELEASE FreeLibrary( hMod )
+         ICON "MAIN.ICO" ;
+         WINDOWTYPE MAIN ;
+         ON RELEASE FreeLibrary( hMod )
 
       DEFINE MAIN MENU
          POPUP 'Info'
@@ -39,7 +39,7 @@ PROCEDURE Main()
             ITEM 'Exit'       ACTION Win_1.Release
          END POPUP
       END MENU
-  
+
    END WINDOW
 
    CENTER   WINDOW Win_1
@@ -47,83 +47,75 @@ PROCEDURE Main()
 
    RETURN
 
-
 FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    LOCAL result := 0
    LOCAL aRect := { 0, 0, 0, 0 }
    LOCAL nCol, i
 
-   switch nMsg
-   case WM_CREATE
-      //
+   SWITCH nMsg
+   CASE WM_CREATE
       GetClientRect( hWnd, @aRect )
       aRect[4] *= 0.75
       zg_InitGrid( hWnd, @hG, ID_GRID, "ZeeGrid Combo", 0, 0, aRect[3], aRect[4], {|h| Grid_OnInit( h ) }  )
-      exit
+      EXIT
 
-   case WM_COMMAND
-      //
-      switch HIWORD( wParam ) 
-      //
-      case ZGN_LOADCOMBO
-         if LOWORD( wParam ) == ID_GRID
-            //
+   CASE WM_COMMAND
+      SWITCH HIWORD( wParam )
+      CASE ZGN_LOADCOMBO
+         IF LOWORD( wParam ) == ID_GRID
             zgm_ComboClear( hG, .f. )
             nCol := zgm_GetColOfIndex( hG, zgm_GetEditedCell( hG ) )
-            if nCol == 2
-               for i := 0 TO 99
+            IF nCol == 2
+               FOR i := 0 TO 99
                   zgm_ComboAddString( hG, "Clipper #" + hb_NtoS( i ) )
-               next i
-            else
-               for i := 0 TO 99
+               NEXT i
+            ELSE
+               FOR i := 0 TO 99
                   zgm_ComboAddString( hG, "Harbour #" + hb_NtoS( i ) )
-               next i
+               NEXT i
             end
-         endif
-         exit
+         ENDIF
+         EXIT
 
-      case ZGN_GOTFOCUS
-         if LOWORD( wParam ) == ID_GRID
-            //
+      CASE ZGN_GOTFOCUS
+         IF LOWORD( wParam ) == ID_GRID
             i := zgm_GetCursorIndex( hG )
-            if i > 0
+            IF i > 0
                zgm_gotoCell( hG, i )
-            else
+            ELSE
                zgm_gotoCell( hG, zgm_GetCellIndex( hG, 1, 1 ) )
-            endif
-         endif
-         exit
+            ENDIF
+         ENDIF
+         EXIT
 
-      otherwise
+      OTHERWISE
          result := Events( hWnd, nMsg, wParam, lParam )
       end
-      exit
+      EXIT
 
-   case WM_SIZE
-      //
+   CASE WM_SIZE
       GetClientRect( hWnd, @aRect )
       aRect[4] *= 0.75
       zg_Resize( hWnd, hG, aRect )
-      exit
+      EXIT
 
-   otherwise
-      //
+   OTHERWISE
       result := Events( hWnd, nMsg, wParam, lParam )
    end
 
    RETURN result
 
-
-#translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
+   #translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
 
 PROCEDURE Grid_OnInit( h )
 
    LOCAL i
+
    // Append rows
-   for i := 1 to 10
+   FOR i := 1 to 10
       zgm_AppendRow( h )
-   next i
+   NEXT i
 
    // Create font hTitleFont
    DEFINE FONT hTitleFont FONTNAME "MS Sans Serif" SIZE 28 BOLD
@@ -134,8 +126,8 @@ PROCEDURE Grid_OnInit( h )
    zgm_SetCellFont( h, 0, 20 )
 
    // Set color to row
-   zgm_SetRowBColor( h, 2, 6 ) // row #2 color yellow 
-   zgm_SetRowFColor( h, 2, 5 ) // row #2 color magenta 
+   zgm_SetRowBColor( h, 2, 6 ) // row #2 color yellow
+   zgm_SetRowFColor( h, 2, 5 ) // row #2 color magenta
 
    // Add combo
    zgm_SetCellText( h, ICEL( 2, 2 ), "Clipper #1" )
@@ -147,12 +139,13 @@ PROCEDURE Grid_OnInit( h )
    zgm_SetCellEdit( h, ICEL( 2, 4 ), 2 )     // type 2 - COMBO
 
    // Resize columns
-   for i := 1 to zgm_GetCols( h )
+   FOR i := 1 to zgm_GetCols( h )
       zgm_SetColWidth( h, i, 100 )
-   next i
+   NEXT i
 
    // Disable columns resizing & moving
    zgm_EnableColResizing( h, .F. )
    zgm_EnableColMove( h, .F. )
 
    RETURN
+

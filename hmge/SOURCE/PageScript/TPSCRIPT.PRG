@@ -9,15 +9,15 @@
 /*-----------------------------------------------------------------------------
 Coordinate system used by PageScript 32 (defaults to APS_TOPLEFT)
 
-            nLeft
-            |
- --- nTop --+--------------+
-            |              |
-            |              |
-            |              |
-            +--------------+-- nBottom
-                           |
-                           nRight
+nLeft
+|
+--- nTop --+--------------+
+|              |
+|              |
+|              |
++--------------+-- nBottom
+|
+nRight
 
 For example, to draw this rectangle, you would call PSFrameEx() with the following
 coordinates : PSFrameEx(nTop, nLeft, nBottom, nRight, ...)
@@ -29,20 +29,20 @@ coordinates : PSFrameEx(nLeft, nTop, nRight, nBottom, ...)
 #include "FileIO.ch"
 
 #ifdef __XHARBOUR__
-   // 02.06.2005 - IBTC - changed for xHarbour Builder:
-   #xtranslate Method <Classname>:<x> => Method <x>
-   #define DLL_STDCALL NIL
+// 02.06.2005 - IBTC - changed for xHarbour Builder:
+#xtranslate Method <Classname>:<x> => Method <x>
+#define DLL_STDCALL NIL
 
-   #include "hbclass.ch"
+#include "hbclass.ch"
 #else
-   #ifdef __HARBOUR__
-      #xtranslate Method <Classname>:<x> => Method <x>
-      #include "hbclass.ch"
-      #include "Dll.ch"
-   #else
-      #include "Xbp.ch"
-      #include "Dll.ch"
-   #endif
+#ifdef __HARBOUR__
+#xtranslate Method <Classname>:<x> => Method <x>
+#include "hbclass.ch"
+#include "Dll.ch"
+#else
+#include "Xbp.ch"
+#include "Dll.ch"
+#endif
 #endif
 
 // Windows constants for GetDeviceCaps WinApi call (Not complete)
@@ -69,18 +69,21 @@ coordinates : PSFrameEx(nLeft, nTop, nRight, nBottom, ...)
 #define dtRAW                1         // Document Type RAW
 #define dtEMULATION          2         // Document Type EMULATION
 
-Static oPScript                        // Holds a generic TPageScript object
-Static slInitialized := .f.            // True when PageScript is initialized
+STATIC oPScript                        // Holds a generic TPageScript object
+STATIC slInitialized := .f.            // True when PageScript is initialized
 
 /*-----------------------------------------------------------------------------
+
 Class .....: #TPageScript(...)
+
 Description: PageScript for (x)Harbour and xBase++ wrapper class
 By ........: Stephan St-Denis
 Date ......: March 2005
 -----------------------------------------------------------------------------*/
+
 CLASS TPageScript
 
-PROTECTED:
+   PROTECTED:
 
    VAR    hDll                         // Handle to PScript.dll
    VAR    aPrinters                    // Array of available printers
@@ -90,4313 +93,5211 @@ PROTECTED:
    VAR    lClipper                     // Indicates if calls to TextOut and TextBox should be compatible with PageScript for Clipper
    VAR    aDocInfo                     // Print job info array
 
-   METHOD Buffer2String                // Internal function. Returns a string from a buffer
+METHOD Buffer2String                // Internal function. Returns a string from a buffer
 
-EXPORTED:
+   EXPORTED:
 
    // Numerics
    VAR    nError                       // Error condition. 0 = OK
    VAR    nUnit                        // Current UNIT of measurment
 
-   METHOD Init                         // Class initialization
+METHOD Init                         // Class initialization
 
-   METHOD Abort                        // Abort the current document
-   METHOD BarCode                      // Print a barcode in either 3 of 9 or 128B
-   METHOD QRCode		       // Print QRCode		
-   METHOD begindoc                     // Starts a new WINDOWS print job
-   METHOD BeginDocEx                   // Starts a new WINDOWS print job, no parameters
-   METHOD BeginEmuDoc                  // Starts a new EMULATION print job
-   METHOD BeginRawDoc                  // Starts a new RAW print job
-   METHOD Bitmap                       // Draw a bitmap on the document. .BMP, .JPG and .GIF files are supported.
-   METHOD Ellipse                      // Draw an ellipse
-   METHOD EllipseEx                    // Draw an ellipse
-   METHOD EndDoc                       // Ends a WINDOWS print job
-   METHOD EndEmuDoc                    // Ends an EMULATION print job
-   METHOD EndRawDoc                    // Ends a RAW print job
-   METHOD FindPrinter                  // Search for a printer name and returns its position within the array
-   METHOD Frame                        // Draw a frame
-   METHOD FrameEx                      // Draw a frame
+METHOD Abort                        // Abort the current document
+
+METHOD BarCode                      // Print a barcode in either 3 of 9 or 128B
+
+METHOD QRCode             // Print QRCode
+
+METHOD begindoc                     // Starts a new WINDOWS print job
+
+METHOD BeginDocEx                   // Starts a new WINDOWS print job, no parameters
+
+METHOD BeginEmuDoc                  // Starts a new EMULATION print job
+
+METHOD BeginRawDoc                  // Starts a new RAW print job
+
+METHOD Bitmap                       // Draw a bitmap on the document. .BMP, .JPG and .GIF files are supported.
+
+METHOD Ellipse                      // Draw an ellipse
+
+METHOD EllipseEx                    // Draw an ellipse
+
+METHOD EndDoc                       // Ends a WINDOWS print job
+
+METHOD EndEmuDoc                    // Ends an EMULATION print job
+
+METHOD EndRawDoc                    // Ends a RAW print job
+
+METHOD FindPrinter                  // Search for a printer name and returns its position within the array
+
+METHOD Frame                        // Draw a frame
+
+METHOD FrameEx                      // Draw a frame
 
    // Gets
-   METHOD GetAsciiToAnsi               // Retreive the current conversion value
-   METHOD GetBorderColor               // Gets the current border color
-   METHOD GetBorderThickness           // Gets the border thickness
-   METHOD GetCoorSystem                // Gets the actual coordinate system
-   METHOD GetCopies                    // Gets the number of copies
-   METHOD GetCPI                       // Gets the current CPI
-   METHOD GetDecimalSep                // Gets the current Ascii to Ansi flag
-   METHOD GetDefaultPrinter            // Gets the current printer number
-   METHOD GetDuplex                    // Gets the current Duplex mode
-   METHOD GetFillColor                 // Gets the current fill color
-   METHOD GetFillPattern               // Gets the current fill pattern
-   METHOD GetFonts                     // Returns an array with all available font names
-   METHOD GetFontAngle                 // Gets the current font angle
-   METHOD GetFontCount                 // Gets the count of available fonts
-   METHOD GetFontName                  // Gets the current font name
-   METHOD GetFontNames                 // Returns the name of a font from its index position
-   METHOD GetFontJustify               // Gets the current text justification
-   METHOD GetFontStyle                 // Gets the current font style
-   METHOD GetFontSize                  // Gets the current font size
-   METHOD GetFontFColor                // Gets the current font foreground color (text color)
-   METHOD GetFontBColor                // Gets the current font background color (bounding box color)
-   METHOD GetJustify                   // Gets the current text justification
-   METHOD GetLPI                       // Gets the current LPI
-   METHOD GetMaxHeight                 // Gets the maximum height of the page in the selected unit
-   METHOD GetMaxWidth                  // Gets the maximum width of the page in the selected unit
-   METHOD GetOrientation               // Gets the current document's orientation
-   METHOD GetPageSize                  // Gets the printer paper size
-   METHOD GetPaperBin                  // Gets the current printer paper bin
 
-   METHOD GetPaperBinCount             // Gets the paper bin's count
-   METHOD GetPaperBinNames             // Gets the name of any of the available paper bin
-   METHOD GetPaperBinNumbers           // Gets the number of any of the available paper bin
+METHOD GetAsciiToAnsi               // Retreive the current conversion value
 
-   METHOD GetPaperCount                // Gets the count of paper formats available for the selected printer
-   METHOD GetPaperNames                // Gets the name of any of the paper formats, based on its index position
-   METHOD GetPaperNumbers              // Gets the number of any of the paper formats, based on its index position
+METHOD GetBorderColor               // Gets the current border color
 
-   METHOD GetPrinter                   // Returns the number of the currently selected printer
-   METHOD GetPrinters                  // Returns the list of available printers for this computer
-   METHOD GetPrinterCaps               // Retreive capabilities of the selected printer
-   METHOD GetPrinterCapsEx             // Retreive one of the capabilities of the selected printer
-   METHOD GetPrinterCount              // Retreive the number of available printers
-   METHOD GetPrinterHandle             // Returns handle of the selected printer for direct Win API calls
-   METHOD GetPrinterNames              // Returns the name of the selected printer
-   METHOD GetTextHeight                // Returns the text height in the selected unit
-   METHOD GetTextWidth                 // Returns the text width in the selected unit
-   METHOD GetTitle                     // Gets the document's title
-   METHOD GetUnit                      // Gets the current unit
-   METHOD GetUseDIB                    // Returns the DIB flag
-   METHOD GetVersion                   // Returns the .DLL version number
-   METHOD GetXerox                     // Returns the Xerox flag
+METHOD GetBorderThickness           // Gets the border thickness
 
-   METHOD IsPreviewVisible             // Returns .t. is print preview window is visible, otherwise, returns .f.
+METHOD GetCoorSystem                // Gets the actual coordinate system
 
-   METHOD Line                         // Draw a line
-   METHOD LineEx                       // Draw a line
-   METHOD NewPage                      // Signals the end of page, page eject
-   METHOD PrintDialog                  // Shows the printer dialog and returns if user clicked OK or Cancel
-   METHOD PrintEmuFile                 // Prints an EMULATION file
-   METHOD PrintRawFile                 // Prints a RAW file
+METHOD GetCopies                    // Gets the number of copies
+
+METHOD GetCPI                       // Gets the current CPI
+
+METHOD GetDecimalSep                // Gets the current Ascii to Ansi flag
+
+METHOD GetDefaultPrinter            // Gets the current printer number
+
+METHOD GetDuplex                    // Gets the current Duplex mode
+
+METHOD GetFillColor                 // Gets the current fill color
+
+METHOD GetFillPattern               // Gets the current fill pattern
+
+METHOD GetFonts                     // Returns an array with all available font names
+
+METHOD GetFontAngle                 // Gets the current font angle
+
+METHOD GetFontCount                 // Gets the count of available fonts
+
+METHOD GetFontName                  // Gets the current font name
+
+METHOD GetFontNames                 // Returns the name of a font from its index position
+
+METHOD GetFontJustify               // Gets the current text justification
+
+METHOD GetFontStyle                 // Gets the current font style
+
+METHOD GetFontSize                  // Gets the current font size
+
+METHOD GetFontFColor                // Gets the current font foreground color (text color)
+
+METHOD GetFontBColor                // Gets the current font background color (bounding box color)
+
+METHOD GetJustify                   // Gets the current text justification
+
+METHOD GetLPI                       // Gets the current LPI
+
+METHOD GetMaxHeight                 // Gets the maximum height of the page in the selected unit
+
+METHOD GetMaxWidth                  // Gets the maximum width of the page in the selected unit
+
+METHOD GetOrientation               // Gets the current document's orientation
+
+METHOD GetPageSize                  // Gets the printer paper size
+
+METHOD GetPaperBin                  // Gets the current printer paper bin
+
+METHOD GetPaperBinCount             // Gets the paper bin's count
+
+METHOD GetPaperBinNames             // Gets the name of any of the available paper bin
+
+METHOD GetPaperBinNumbers           // Gets the number of any of the available paper bin
+
+METHOD GetPaperCount                // Gets the count of paper formats available for the selected printer
+
+METHOD GetPaperNames                // Gets the name of any of the paper formats, based on its index position
+
+METHOD GetPaperNumbers              // Gets the number of any of the paper formats, based on its index position
+
+METHOD GetPrinter                   // Returns the number of the currently selected printer
+
+METHOD GetPrinters                  // Returns the list of available printers for this computer
+
+METHOD GetPrinterCaps               // Retreive capabilities of the selected printer
+
+METHOD GetPrinterCapsEx             // Retreive one of the capabilities of the selected printer
+
+METHOD GetPrinterCount              // Retreive the number of available printers
+
+METHOD GetPrinterHandle             // Returns handle of the selected printer for direct Win API calls
+
+METHOD GetPrinterNames              // Returns the name of the selected printer
+
+METHOD GetTextHeight                // Returns the text height in the selected unit
+
+METHOD GetTextWidth                 // Returns the text width in the selected unit
+
+METHOD GetTitle                     // Gets the document's title
+
+METHOD GetUnit                      // Gets the current unit
+
+METHOD GetUseDIB                    // Returns the DIB flag
+
+METHOD GetVersion                   // Returns the .DLL version number
+
+METHOD GetXerox                     // Returns the Xerox flag
+
+METHOD IsPreviewVisible             // Returns .t. is print preview window is visible, otherwise, returns .f.
+
+METHOD Line                         // Draw a line
+
+METHOD LineEx                       // Draw a line
+
+METHOD NewPage                      // Signals the end of page, page eject
+
+METHOD PrintDialog                  // Shows the printer dialog and returns if user clicked OK or Cancel
+
+METHOD PrintEmuFile                 // Prints an EMULATION file
+
+METHOD PrintRawFile                 // Prints a RAW file
 
    // Sets
-   METHOD SetAsciiToAnsi               // Set the conversion from Ascii to Ansi for text strings.
-   METHOD SetBorder                    // Set the attributes used to draw lines and borders
-   METHOD SetBorderColor               // Set the border color
-   METHOD SetBorderThickness           // Set the border thickness
-   METHOD SetClipperComp               // Set Clipper compatible calls for TextOut() and TextBox()
-   METHOD SetCoorSystem                // Set the coordinate system (xbase like: Top/Left or Windows like: Left/Top)
-   METHOD SetCPI                       // Set the number of CPI (APS_TEXT only)
-   METHOD SetCopies                    // Set the number of copies
-   METHOD SetDecimalSep                // Set the decimal separator character
-   METHOD SetDevice                    // Set the device to use (see PSCRIPT.CH for device contstant definitions)
-   METHOD SetDirectPrint               // Set the direct print flag (used for very special cases)
-   METHOD SetDuplex                    // Set the Duplex mode
-   METHOD SetFileName                  // Set the file name for a PDF file document
-   METHOD SetFill                      // Set the color and/or pattern used to fill text and shapes, like boxes and ellipes
-   METHOD SetFillColor                 // Set the color used to fill text and shapes, like boxes and ellipes
-   METHOD SetFillPattern               // Set the Pattern used to fill text and shapes, like boxes and ellipes
-   METHOD SetFontAttributes            // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontAngle                 // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontBColor                // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontFColor                // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontName                  // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontSize                  // Set the font attributes used by each call to PSTextOut()
-   METHOD SetFontStyle                 // Set the font attributes used by each call to PSTextOut()
-   METHOD SetJustify                   // Set justification for TextOut
-   METHOD SetLPI                       // Set the number of LPI
-   METHOD SetOrientation               // Set the paper orientation
-   METHOD SetPageSize                  // Set the page size to a user defined ou predifined size
-   METHOD SetPaperBin                  // Set the paper bin
-   
-   METHOD SetPDFCharSet                // Set the PDF text charset // not implemented yet
-   METHOD SetPDFOwnerPassword          // Set the encryption password for PDF documents
-   METHOD SetPDFEncoding               // Set the PDF encoding to be used
-   METHOD SetPDFVersion                // Set the PDF versionnumber to be used
-   METHOD SetPDFEmbeddedFonts          // Set the PDF embedding type
-   METHOD ShowPDF                      // Show PDF after creation in default PDF reader 
 
-   METHOD SetPWState                   // Set the print preview window state
-   METHOD SetPWPosition                // Set the print preview window position
-   METHOD SetPWSize                    // Set the print preview window size
-   METHOD SetPWBounds                  // Set the print preview window bounds (position and size at the same time)
-   METHOD SetPWZoomLevel               // Set the print preview window zoom level
-   METHOD SetPWColors                  // Set the print preview window colors
+METHOD SetAsciiToAnsi               // Set the conversion from Ascii to Ansi for text strings.
 
-   METHOD SetPrinter                   // Set the er number
-   METHOD SetRowCol                    // Set the number of rows and columns when printing using the APS_CLIP unit system
-   METHOD SetTitle                     // Set the title of the document
-   METHOD SetUnit                      // Set the unit used to calculate dimensions and placement
-   METHOD SetUseDIB                    // Set the use of compatible bitmaps printing using DIB
-   METHOD SetXerox                     // Set Xerox compatible mode for Xerox WorkCenter and other faulty printers
+METHOD SetBorder                    // Set the attributes used to draw lines and borders
 
-   METHOD TextBox                      // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-   METHOD TextBoxEx                    // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-   METHOD TextOut                      // Prints a string at position X,Y using parameters
-   METHOD TextOutEx                    // Prints a string at position X,Y using parameters
-   METHOD WaterMark                    // Sets/Returns the current WaterMark
+METHOD SetBorderColor               // Set the border color
+
+METHOD SetBorderThickness           // Set the border thickness
+
+METHOD SetClipperComp               // Set Clipper compatible calls for TextOut() and TextBox()
+
+METHOD SetCoorSystem                // Set the coordinate system (xbase like: Top/Left or Windows like: Left/Top)
+
+METHOD SetCPI                       // Set the number of CPI (APS_TEXT only)
+
+METHOD SetCopies                    // Set the number of copies
+
+METHOD SetDecimalSep                // Set the decimal separator character
+
+METHOD SetDevice                    // Set the device to use (see PSCRIPT.CH for device contstant definitions)
+
+METHOD SetDirectPrint               // Set the direct print flag (used for very special cases)
+
+METHOD SetDuplex                    // Set the Duplex mode
+
+METHOD SetFileName                  // Set the file name for a PDF file document
+
+METHOD SetFill                      // Set the color and/or pattern used to fill text and shapes, like boxes and ellipes
+
+METHOD SetFillColor                 // Set the color used to fill text and shapes, like boxes and ellipes
+
+METHOD SetFillPattern               // Set the Pattern used to fill text and shapes, like boxes and ellipes
+
+METHOD SetFontAttributes            // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontAngle                 // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontBColor                // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontFColor                // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontName                  // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontSize                  // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetFontStyle                 // Set the font attributes used by each call to PSTextOut()
+
+METHOD SetJustify                   // Set justification for TextOut
+
+METHOD SetLPI                       // Set the number of LPI
+
+METHOD SetOrientation               // Set the paper orientation
+
+METHOD SetPageSize                  // Set the page size to a user defined ou predifined size
+
+METHOD SetPaperBin                  // Set the paper bin
+
+METHOD SetPDFCharSet                // Set the PDF text charset // not implemented yet
+
+METHOD SetPDFOwnerPassword          // Set the encryption password for PDF documents
+
+METHOD SetPDFEncoding               // Set the PDF encoding to be used
+
+METHOD SetPDFVersion                // Set the PDF versionnumber to be used
+
+METHOD SetPDFEmbeddedFonts          // Set the PDF embedding type
+
+METHOD ShowPDF                      // Show PDF after creation in default PDF reader
+
+METHOD SetPWState                   // Set the print preview window state
+
+METHOD SetPWPosition                // Set the print preview window position
+
+METHOD SetPWSize                    // Set the print preview window size
+
+METHOD SetPWBounds                  // Set the print preview window bounds (position and size at the same time)
+
+METHOD SetPWZoomLevel               // Set the print preview window zoom level
+
+METHOD SetPWColors                  // Set the print preview window colors
+
+METHOD SetPrinter                   // Set the er number
+
+METHOD SetRowCol                    // Set the number of rows and columns when printing using the APS_CLIP unit system
+
+METHOD SetTitle                     // Set the title of the document
+
+METHOD SetUnit                      // Set the unit used to calculate dimensions and placement
+
+METHOD SetUseDIB                    // Set the use of compatible bitmaps printing using DIB
+
+METHOD SetXerox                     // Set Xerox compatible mode for Xerox WorkCenter and other faulty printers
+
+METHOD TextBox                      // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+
+METHOD TextBoxEx                    // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+
+METHOD TextOut                      // Prints a string at position X,Y using parameters
+
+METHOD TextOutEx                    // Prints a string at position X,Y using parameters
+
+METHOD WaterMark                    // Sets/Returns the current WaterMark
 
 ENDCLASS
 
 /*-----------------------------------------------------------------------------
+
 Method .....: #Init()
+
 Description : Class constructor
 -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Init()
 
-::bWaterMark  := NIL                   // Codeblock for Watermark function
-::nWaterMark  := AWM_NONE              // Indicates if the WaterMark is to be printed foreground or background
-::lFromDialog := .f.                   // Indicates if printer selected from printer dialog
-::lClipper    := .f.                   // Indicates if calls to TextOut and TextBox should be compatible with PageScript for Clipper
-::nUnit       := APS_MILL              // Default unit is MILLIMETERS
-::aPrinters   := {}                    // List of available printers
-::nError      := PSE_NOERROR           // Indicates an error condition, such as no printer available
-::aDocInfo    := {0, "", "", APS_PORTRAIT, 1, APS_COURIER} // Print job info array
+   ::bWaterMark  := NIL                   // Codeblock for Watermark function
+   ::nWaterMark  := AWM_NONE              // Indicates if the WaterMark is to be printed foreground or background
+   ::lFromDialog := .f.                   // Indicates if printer selected from printer dialog
+   ::lClipper    := .f.                   // Indicates if calls to TextOut and TextBox should be compatible with PageScript for Clipper
+   ::nUnit       := APS_MILL              // Default unit is MILLIMETERS
+   ::aPrinters   := {}                    // List of available printers
+   ::nError      := PSE_NOERROR           // Indicates an error condition, such as no printer available
+   ::aDocInfo    := {0, "", "", APS_PORTRAIT, 1, APS_COURIER} // Print job info array
 
-::hDll        := DllLoad("PScript.dll") // Handle of the .DLL
+   ::hDll        := DllLoad("PScript.dll") // Handle of the .DLL
 
-if Empty(::hDll)
-   ::nError := PSE_DLLNOTLOADED        // DLL not loaded error
-else
-   ::nError := DllCall(::hDll, DLL_STDCALL, "PSInit")
+   IF Empty(::hDll)
+      ::nError := PSE_DLLNOTLOADED        // DLL not loaded error
+   ELSE
+      ::nError := DllCall(::hDll, DLL_STDCALL, "PSInit")
 
-   // No error, set the coordinate system to TOP/LEFT (Default)
-   if ::nError == PSE_NOERROR
-      DllCall(::hDll, DLL_STDCALL, "PSSetCoorSystem", APS_TOPLEFT)
-   endif
-endif
+      // No error, set the coordinate system to TOP/LEFT (Default)
+      IF ::nError == PSE_NOERROR
+         DllCall(::hDll, DLL_STDCALL, "PSSetCoorSystem", APS_TOPLEFT)
+      ENDIF
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #Abort() -> Self
-Description : Abort the current document
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Abort() -> Self
+
+   Description : Abort the current document
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Abort()
 
-DllCall(::hDll, DLL_STDCALL, "PSAbort")
-::lFromDialog := .f.
+   DllCall(::hDll, DLL_STDCALL, "PSAbort")
+   ::lFromDialog := .f.
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #QRCode(<n>, <n>, <c>, [<n>]) -> NIL
-Description : Print a QRcode
-Parameter nVersion : can be any value between 1 and 40 ( Symbolsize 21*21 modules to 177 * 177 ) 
-                     increasing in steps of 4 modules per side.
-Parameter nSize    : Size in pixels 100 * 100 by default  
-Parameter nModuleWidth : size in pixels of the dots in the QRCode
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #QRCode(<n>, <n>, <c>, [<n>]) -> NIL
+
+   Description : Print a QRcode
+   Parameter nVersion : can be any value between 1 and 40 ( Symbolsize 21*21 modules to 177 * 177 )
+   increasing in steps of 4 modules per side.
+   Parameter nSize    : Size in pixels 100 * 100 by default
+   Parameter nModuleWidth : size in pixels of the dots in the QRCode
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:QRCode(nTop,nLeft,cCode,nVersion,nSize,nModuleWidth)
 
-nVersion     := iif(nVersion     == NIL, 1, Int(nVersion)) 
-nSize        := iif(nSize        == NIL, 100, Int(nSize))
-nModuleWidth := iif(nModuleWidth == NIL, 4, Int(nModuleWidth))
+   nVersion     := iif(nVersion     == NIL, 1, Int(nVersion))
+   nSize        := iif(nSize        == NIL, 100, Int(nSize))
+   nModuleWidth := iif(nModuleWidth == NIL, 4, Int(nModuleWidth))
 
-DllCall(::hDll, DLL_STDCALL, "PSQRCode", PSFtoI(nTop), PSFtoI(nLeft), cCode, nVersion,nSize,nModuleWidth)	
+   DllCall(::hDll, DLL_STDCALL, "PSQRCode", PSFtoI(nTop), PSFtoI(nLeft), cCode, nVersion,nSize,nModuleWidth)
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #BarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>]) -> NIL
-Description : Print a barcode with choice of Code 39 and Code 128
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #BarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>]) -> NIL
+
+   Description : Print a barcode with choice of Code 39 and Code 128
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:BarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVertical)
 
-// Default values
-nHeight    := iif(nHeight    == NIL, 36       , Int(nHeight))
-nThick     := iif(nThick     == NIL, 1        , nThick      )
-lPrintText := iif(lPrintText == NIL, .t.      , lPrintText  )
-nType      := iif(nType      == NIL, APS_BC128, Int(nType  ))
-lVertical  := iif(lVertical  == NIL, .f.      , lVertical   )
+   // Default values
+   nHeight    := iif(nHeight    == NIL, 36       , Int(nHeight))
+   nThick     := iif(nThick     == NIL, 1        , nThick      )
+   lPrintText := iif(lPrintText == NIL, .t.      , lPrintText  )
+   nType      := iif(nType      == NIL, APS_BC128, Int(nType  ))
+   lVertical  := iif(lVertical  == NIL, .f.      , lVertical   )
 
-if nType == APS_BC39
-   cCode := Upper(cCode)
-endif
+   IF nType == APS_BC39
+      cCode := Upper(cCode)
+   ENDIF
 
-DllCall(::hDll, DLL_STDCALL, "PSBarCode", PSFtoI(nTop), PSFtoI(nLeft), cCode, nHeight, PSFtoI(nThick), lPrintText, nType, lVertical)
+   DllCall(::hDll, DLL_STDCALL, "PSBarCode", PSFtoI(nTop), PSFtoI(nLeft), cCode, nHeight, PSFtoI(nThick), lPrintText, nType, lVertical)
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #BeginDoc(<n>, <c>, <n>, <n>, <n>, <n>, <n>) -> lError
-Description : Start a new print job using the passed parameters
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #BeginDoc(<n>, <c>, <n>, <n>, <n>, <n>, <n>) -> lError
+
+   Description : Start a new print job using the passed parameters
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:BeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex, nPaperBin)
 
-::SetTitle(cTitle)
+   ::SetTitle(cTitle)
 
-if ! ::lFromDialog
-   ::SetPrinter(nPrinter)
-   ::SetPageSize(nPageSize)
-   ::SetPaperBin(nPaperBin)
-   ::SetDuplex(nDuplex)
-   ::SetOrientation(nOrientation)
-   ::SetCopies(nCopies)
-endif
+   IF ! ::lFromDialog
+      ::SetPrinter(nPrinter)
+      ::SetPageSize(nPageSize)
+      ::SetPaperBin(nPaperBin)
+      ::SetDuplex(nDuplex)
+      ::SetOrientation(nOrientation)
+      ::SetCopies(nCopies)
+   ENDIF
 
-DllCall(::hDll, DLL_STDCALL, "PSBeginDoc")
+   DllCall(::hDll, DLL_STDCALL, "PSBeginDoc")
 
-// Put a WaterMark in the BackGround
-if ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
-   Eval(::bWaterMark, Self)
-endif
+   // Put a WaterMark in the BackGround
+   IF ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
+      Eval(::bWaterMark, Self)
+   ENDIF
 
-Return ::nError
+   RETURN ::nError
 
-/*-----------------------------------------------------------------------------
-Method .....: #BeginDocEx() -> lError
-Description : Start a new print job using the defaults values
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #BeginDocEx() -> lError
+
+   Description : Start a new print job using the defaults values
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:BeginDocEx()
 
-DllCall(::hDll, DLL_STDCALL, "PSBeginDoc")
+   DllCall(::hDll, DLL_STDCALL, "PSBeginDoc")
 
-// Put a WaterMark in the BackGround
-if ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
-   Eval(::bWaterMark, Self)
-endif
+   // Put a WaterMark in the BackGround
+   IF ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
+      Eval(::bWaterMark, Self)
+   ENDIF
 
-Return ::nError
+   RETURN ::nError
 
-/*-----------------------------------------------------------------------------
-Method .....: #BeginEmuDoc(<n>, <c>) -> lError
-Description : Start a new EMULATION print job using the passed parameters
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #BeginEmuDoc(<n>, <c>) -> lError
+
+   Description : Start a new EMULATION print job using the passed parameters
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:BeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
 
-nOrientation := iif(nOrientation == NIL, APS_PORTRAIT, nOrientation)
-nPrinter     := iif(nPrinter     == NIL, 0           , nPrinter    )
-cFont        := iif(cFont        == NIL, APS_COURIER , cFont       )
+   nOrientation := iif(nOrientation == NIL, APS_PORTRAIT, nOrientation)
+   nPrinter     := iif(nPrinter     == NIL, 0           , nPrinter    )
+   cFont        := iif(cFont        == NIL, APS_COURIER , cFont       )
 
-::aDocInfo[1] := nPrinter
-::aDocInfo[2] := cTitle
-::aDocInfo[3] := StrTran(Time(), ":", "-") + ".PRN"
-::aDocInfo[4] := nOrientation
-::aDocInfo[5] := nCopies
-::aDocInfo[6] := cFont
+   ::aDocInfo[1] := nPrinter
+   ::aDocInfo[2] := cTitle
+   ::aDocInfo[3] := StrTran(Time(), ":", "-") + ".PRN"
+   ::aDocInfo[4] := nOrientation
+   ::aDocInfo[5] := nCopies
+   ::aDocInfo[6] := cFont
 
-SET PRINTER ON
-SET CONSOLE OFF
-Set(_SET_DEVICE   , "PRINTER")
-Set(_SET_PRINTFILE, ::aDocInfo[3], .f.)
+   SET PRINTER ON
+   SET CONSOLE OFF
+   Set(_SET_DEVICE   , "PRINTER")
+   Set(_SET_PRINTFILE, ::aDocInfo[3], .f.)
 
-Return ::nError
+   RETURN ::nError
 
-/*-----------------------------------------------------------------------------
-Method .....: #BeginRawDoc(<n>, <c>) -> lError
-Description : Start a new RAW print job using the passed parameters
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #BeginRawDoc(<n>, <c>) -> lError
+
+   Description : Start a new RAW print job using the passed parameters
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:BeginRawDoc(nPrinter, cTitle)
 
-::aDocInfo[1] := nPrinter
-::aDocInfo[2] := cTitle
-::aDocInfo[3] := StrTran(Time(), ":", "-") + ".PRN"
+   ::aDocInfo[1] := nPrinter
+   ::aDocInfo[2] := cTitle
+   ::aDocInfo[3] := StrTran(Time(), ":", "-") + ".PRN"
 
-SET PRINTER ON
-SET CONSOLE OFF
-Set(_SET_DEVICE   , "PRINTER")
-Set(_SET_PRINTFILE, ::aDocInfo[3], .f.)
+   SET PRINTER ON
+   SET CONSOLE OFF
+   Set(_SET_DEVICE   , "PRINTER")
+   Set(_SET_PRINTFILE, ::aDocInfo[3], .f.)
 
-Return ::nError
+   RETURN ::nError
 
-/*-----------------------------------------------------------------------------
-Method .....: #PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> Self
-Description : Draw a bitmap on the document.
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> Self
+
+   Description : Draw a bitmap on the document.
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Bitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio)
 
-if File(cBitmap)
-   nBottom     := iif(nBottom     == NIL,        0,     nBottom     )
-   nRight      := iif(nRight      == NIL,        0,     nRight      )
-   nTransColor := iif(nTransColor == NIL, APS_NONE, Int(nTransColor))
-   lKeepRatio  := iif(lKeepRatio  == NIL,      .f.,     lKeepRatio  )
+   IF File(cBitmap)
+      nBottom     := iif(nBottom     == NIL,        0,     nBottom     )
+      nRight      := iif(nRight      == NIL,        0,     nRight      )
+      nTransColor := iif(nTransColor == NIL, APS_NONE, Int(nTransColor))
+      lKeepRatio  := iif(lKeepRatio  == NIL,      .f.,     lKeepRatio  )
 
-   DllCall(::hDll, DLL_STDCALL, "PSBitmap", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cBitmap, nTransColor, iif(lKeepRatio, 1, 0))
-endif
+      DllCall(::hDll, DLL_STDCALL, "PSBitmap", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cBitmap, nTransColor, iif(lKeepRatio, 1, 0))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #Ellipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> Self
-Description : Draw an ellipse
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Ellipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> Self
+
+   Description : Draw an ellipse
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Ellipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern)
 
-// Sets default values
-nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
-nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
-nFillColor   := iif(nFillColor   == NIL, APS_DEFAULT, Int(nFillColor  ))
-nPattern     := iif(nPattern     == NIL, APS_DEFAULT, Int(nPattern    ))
+   // Sets default values
+   nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
+   nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
+   nFillColor   := iif(nFillColor   == NIL, APS_DEFAULT, Int(nFillColor  ))
+   nPattern     := iif(nPattern     == NIL, APS_DEFAULT, Int(nPattern    ))
 
-DllCall(::hDll, DLL_STDCALL, "PSEllipseEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern)
+   DllCall(::hDll, DLL_STDCALL, "PSEllipseEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern)
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #EllipseEx(<n>, <n>, <n>, <n>) -> Self
-Description : Draw an ellipse
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #EllipseEx(<n>, <n>, <n>, <n>) -> Self
+
+   Description : Draw an ellipse
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:EllipseEx(nTop, nLeft, nBottom, nRight)
 
-DllCall(::hDll, DLL_STDCALL, "PSEllipse", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight))
+   DllCall(::hDll, DLL_STDCALL, "PSEllipse", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight))
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #EndDoc() -> Self
-Description : Signal the end of the document (stop spooling)
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #EndDoc() -> Self
+
+   Description : Signal the end of the document (stop spooling)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:EndDoc()
 
-// Put a WaterMark in the ForeGround
-if ::nWaterMark = AWM_FOREGROUND .and. ValType(::bWaterMark) == "B"
-   Eval(::bWaterMark, Self)
-endif
+   // Put a WaterMark in the ForeGround
+   IF ::nWaterMark = AWM_FOREGROUND .and. ValType(::bWaterMark) == "B"
+      Eval(::bWaterMark, Self)
+   ENDIF
 
-DllCall(::hDll, DLL_STDCALL, "PSEndDoc")
-::lFromDialog := .f.
+   DllCall(::hDll, DLL_STDCALL, "PSEndDoc")
+   ::lFromDialog := .f.
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #EndRawDoc() -> Self
-Description : Ends a RAW print job
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #EndRawDoc() -> Self
+
+   Description : Ends a RAW print job
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:EndEmuDoc()
 
-SET CONSOLE ON
-SET PRINTER OFF
-SET PRINTER TO
-Set(_SET_DEVICE   , "SCREEN")
-SetPRC(0, 0)
+   SET CONSOLE ON
+   SET PRINTER OFF
+   SET PRINTER TO
+   Set(_SET_DEVICE   , "SCREEN")
+   SetPRC(0, 0)
 
-::PrintEmuFile(::aDocInfo[3], .t., ::aDocInfo[1], ::aDocInfo[2], ::aDocInfo[4], ::aDocInfo[5], ::aDocInfo[6])
+   ::PrintEmuFile(::aDocInfo[3], .t., ::aDocInfo[1], ::aDocInfo[2], ::aDocInfo[4], ::aDocInfo[5], ::aDocInfo[6])
 
-::aDocInfo := {0, "", "", APS_PORTRAIT, 1, APS_COURIER}
+   ::aDocInfo := {0, "", "", APS_PORTRAIT, 1, APS_COURIER}
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #EndRawDoc() -> Self
-Description : Ends a RAW print job
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #EndRawDoc() -> Self
+
+   Description : Ends a RAW print job
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:EndRawDoc()
 
-SET CONSOLE ON
-SET PRINTER OFF
-SET PRINTER TO
-Set(_SET_DEVICE   , "SCREEN")
-SetPRC(0, 0)
+   SET CONSOLE ON
+   SET PRINTER OFF
+   SET PRINTER TO
+   Set(_SET_DEVICE   , "SCREEN")
+   SetPRC(0, 0)
 
-::PrintRawFile(::aDocInfo[3], .t., ::aDocInfo[1], ::aDocInfo[2])
+   ::PrintRawFile(::aDocInfo[3], .t., ::aDocInfo[1], ::aDocInfo[2])
 
-::aDocInfo := {0, "", "", APS_PORTRAIT, 1, APS_COURIER}
+   ::aDocInfo := {0, "", "", APS_PORTRAIT, 1, APS_COURIER}
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #FindPrinter(<c>) -> nPrinter
-Description : Finds a printer by name and returns its position in the array
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #FindPrinter(<c>) -> nPrinter
+
+   Description : Finds a printer by name and returns its position in the array
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:FindPrinter(cPrinter)
 
-Local nPos      := -1
-Local aPrinters := ::GetPrinters()
+   LOCAL nPos      := -1
+   LOCAL aPrinters := ::GetPrinters()
 
-// Finds a printer position in the array
-if ValType(cPrinter) == "C" .and. Len(cPrinter) > 0
-   nPos := aScan(aPrinters, {|x| AllTrim(Upper(x)) == AllTrim(Upper(cPrinter))}, 1, Len(aPrinters))
-endif
+   // Finds a printer position in the array
+   IF ValType(cPrinter) == "C" .and. Len(cPrinter) > 0
+      nPos := aScan(aPrinters, {|x| AllTrim(Upper(x)) == AllTrim(Upper(cPrinter))}, 1, Len(aPrinters))
+   ENDIF
 
-Return nPos
+   RETURN nPos
 
-/*-----------------------------------------------------------------------------
-Method .....: #Frame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> Self
-Description : Draw a frame
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Frame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> Self
+
+   Description : Draw a frame
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Frame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern, nRadius)
 
-// Sets default values
-nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
-nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
-nFillColor   := iif(nFillColor   == NIL, APS_DEFAULT, Int(nFillColor  ))
-nPattern     := iif(nPattern     == NIL, APS_DEFAULT, Int(nPattern    ))
-nRadius      := iif(nRadius      == NIL, 0          , Int(nRadius     ))
+   // Sets default values
+   nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
+   nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
+   nFillColor   := iif(nFillColor   == NIL, APS_DEFAULT, Int(nFillColor  ))
+   nPattern     := iif(nPattern     == NIL, APS_DEFAULT, Int(nPattern    ))
+   nRadius      := iif(nRadius      == NIL, 0          , Int(nRadius     ))
 
-DllCall(::hDll, DLL_STDCALL, "PSFrameEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern, nRadius)
+   DllCall(::hDll, DLL_STDCALL, "PSFrameEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern, nRadius)
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #FrameEx(<n>, <n>, <n>, <n>) -> Self
-Description : Draw a frame
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #FrameEx(<n>, <n>, <n>, <n>) -> Self
+
+   Description : Draw a frame
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:FrameEx(nTop, nLeft, nBottom, nRight, nRadius)
 
-nRadius := iif(nRadius == NIL, 0, Int(nRadius))
+   nRadius := iif(nRadius == NIL, 0, Int(nRadius))
 
-DllCall(::hDll, DLL_STDCALL, "PSFrame", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), nRadius)
+   DllCall(::hDll, DLL_STDCALL, "PSFrame", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), nRadius)
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetAsciiToAnsi() -> lValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetAsciiToAnsi() -> lValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetAsciiToAnsi()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetAsciiToAnsi")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetAsciiToAnsi")
 
-Return (nValue == 1)
+   RETURN (nValue == 1)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetBorderColor() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetBorderColor() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetBorderColor()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetBorderColor")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetBorderColor")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetBorderThickness() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetBorderThickness() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetBorderThickness()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetBorderThickness")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetBorderThickness")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetCoorSystem() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetCoorSystem() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetCoorSystem()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCoorSystem")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCoorSystem")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetCopies() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetCopies() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetCopies()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCopies")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCopies")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetCPI() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetCPI() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetCPI()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCPI")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetCPI")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetDecimalSep() -> cValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetDecimalSep() -> cValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetDecimalSep()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetDecimalSep")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetDecimalSep")
 
-Return Chr(nValue)
+   RETURN Chr(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetDefaultPrinter() -> nDefaultPrinter
-Description : Returns the default Windows printer
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetDefaultPrinter() -> nDefaultPrinter
+
+   Description : Returns the default Windows printer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetDefaultPrinter()
 
-Local nDefaultPrinter := DllCall(::hDll, DLL_STDCALL, "PSGetDefaultPrinter")
+   LOCAL nDefaultPrinter := DllCall(::hDll, DLL_STDCALL, "PSGetDefaultPrinter")
 
-Return nDefaultPrinter + 1
+   RETURN nDefaultPrinter + 1
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetDuplex() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetDuplex() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetDuplex()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetDuplex")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetDuplex")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFillColor() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFillColor() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFillColor()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFillColor")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFillColor")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFillPattern() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFillPattern() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFillPattern()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFillPattern")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFillPattern")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFonts() -> aFontList
-Description : Retreive the printer fonts for the currently selected printer
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFonts() -> aFontList
+
+   Description : Retreive the printer fonts for the currently selected printer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFonts()
 
-Local aFonts := {}
-Local cFont  := ""
-Local nCount := 0
-Local nLoop  := 0
+   LOCAL aFonts := {}
+   LOCAL cFont  := ""
+   LOCAL nCount := 0
+   LOCAL nLoop  := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
 
-if nCount > 0
-   for nLoop := 0 to nCount - 1
-      cFont := Space(128)
-      DllCall(::hDll, DLL_STDCALL, "PSGetFontNames", nLoop, @cFont)
-      aAdd(aFonts, ::Buffer2String(cFont))
-   next
-endif
+   IF nCount > 0
+      FOR nLoop := 0 to nCount - 1
+         cFont := Space(128)
+         DllCall(::hDll, DLL_STDCALL, "PSGetFontNames", nLoop, @cFont)
+         aAdd(aFonts, ::Buffer2String(cFont))
+      NEXT
+   ENDIF
 
-Return aFonts
+   RETURN aFonts
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontAngle() -> nValue
-Description : Returns the current font/text angle
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontAngle() -> nValue
+
+   Description : Returns the current font/text angle
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontAngle()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontAngle")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontAngle")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontCount() -> nValue
-Description : Returns the current font count
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontCount() -> nValue
+
+   Description : Returns the current font count
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontCount()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontJustify() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontJustify() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontJustify()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetJustify")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetJustify")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontName() -> cValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontName() -> cValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontName()
 
-Local cFont := Space(128)
+   LOCAL cFont := Space(128)
 
-DllCall(::hDll, DLL_STDCALL, "PSGetFontName", @cFont)
+   DllCall(::hDll, DLL_STDCALL, "PSGetFontName", @cFont)
 
-Return ::Buffer2String(cFont)
+   RETURN ::Buffer2String(cFont)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontNames() -> aFontList
-Description : Retreive the name of the font from its index position
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontNames() -> aFontList
+
+   Description : Retreive the name of the font from its index position
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontNames(nFontIndex)
 
-Local cFontName := ""
-Local nCount
+   LOCAL cFontName := ""
+   LOCAL nCount
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetFontCount")
 
-if nFontIndex >= 1 .and. nFontIndex <= nCount
-   cFontName := Space(128)
-   DllCall(::hDll, DLL_STDCALL, "PSGetFontNames", nFontIndex - 1, @cFontName)
-endif
+   IF nFontIndex >= 1 .and. nFontIndex <= nCount
+      cFontName := Space(128)
+      DllCall(::hDll, DLL_STDCALL, "PSGetFontNames", nFontIndex - 1, @cFontName)
+   ENDIF
 
-Return ::Buffer2String(cFontName)
+   RETURN ::Buffer2String(cFontName)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontStyle() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontStyle() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontStyle()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontStyle")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontStyle")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontSize() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontSize() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontSize()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontSize")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontSize")
 
-Return PSItoF(nValue)
+   RETURN PSItoF(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontBColor() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontBColor() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontBColor()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontBColor")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontBColor")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetFontFColor() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetFontFColor() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetFontFColor()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontFColor")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetFontFColor")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetJustify() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetJustify() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetJustify()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetJustify")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetJustify")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetLPI() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetLPI() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetLPI()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetLPI")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetLPI")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetMaxHeight() -> nValue
-Description : Returns the max height in current unit
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetMaxHeight() -> nValue
+
+   Description : Returns the max height in current unit
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetMaxHeight()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetMaxHeight")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetMaxHeight")
 
-Return PSItoF(nValue)
+   RETURN PSItoF(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetMaxWidth() -> nValue
-Description : Returns the max width in current unit
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetMaxWidth() -> nValue
+
+   Description : Returns the max width in current unit
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetMaxWidth()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetMaxWidth")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetMaxWidth")
 
-Return PSItoF(nValue)
+   RETURN PSItoF(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetOrientation() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetOrientation() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetOrientation()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetOrientation")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetOrientation")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPageSize() -> nValue
-Description : Retreive the printer paper size
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPageSize() -> nValue
+
+   Description : Retreive the printer paper size
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPageSize()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPageSize")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPageSize")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperBin() -> nValue
-Description : Retreive the currently selected printer paper bin
-Note .....: Returns -1 if called while printing
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperBin() -> nValue
+
+   Description : Retreive the currently selected printer paper bin
+   Note .....: Returns -1 if called while printing
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperBin()
 
-Local nBin := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBin")
+   LOCAL nBin := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBin")
 
-Return nBin
+   RETURN nBin
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperBinCount() -> nValue
-Description : Retreive the number of paper bins installed
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperBinCount() -> nValue
+
+   Description : Retreive the number of paper bins installed
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperBinCount()
 
-Local nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
+   LOCAL nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
 
-Return nCount
+   RETURN nCount
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperBinNames() -> cValue
-Description : Retrieve the name of any of the available paper bin
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperBinNames() -> cValue
+
+   Description : Retrieve the name of any of the available paper bin
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperBinNames(nIndex)
 
-Local cName := ""
-Local nCount   := 0
+   LOCAL cName := ""
+   LOCAL nCount   := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
 
-if nIndex >=1 .and. nIndex <= nCount
-   cName := Space(24)
-   DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinNames", nIndex - 1, @cName)
-endif
+   IF nIndex >=1 .and. nIndex <= nCount
+      cName := Space(24)
+      DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinNames", nIndex - 1, @cName)
+   ENDIF
 
-Return ::Buffer2String(cName)
+   RETURN ::Buffer2String(cName)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperBinNumbers() -> nValue
-Description : Retrieve the number of any of the available paper bin
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperBinNumbers() -> nValue
+
+   Description : Retrieve the number of any of the available paper bin
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperBinNumbers(nIndex)
 
-Local nNumber := -1
-Local nCount  := 0
+   LOCAL nNumber := -1
+   LOCAL nCount  := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinCount")
 
-if nIndex >=1 .and. nIndex <= nCount
-   nNumber := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinNumbers", nIndex - 1)
-endif
+   IF nIndex >=1 .and. nIndex <= nCount
+      nNumber := DllCall(::hDll, DLL_STDCALL, "PSGetPaperBinNumbers", nIndex - 1)
+   ENDIF
 
-Return nNumber
+   RETURN nNumber
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperCount() -> nValue
-Description : Retreive the number of paper installed
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperCount() -> nValue
+
+   Description : Retreive the number of paper installed
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperCount()
 
-Local nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
+   LOCAL nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
 
-Return nCount
+   RETURN nCount
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperNames() -> nValue
-Description : Retreive the name of a paper type based on its index position
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperNames() -> nValue
+
+   Description : Retreive the name of a paper type based on its index position
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperNames(nIndex)
 
-Local cName  := ""
-Local nCount := 0
+   LOCAL cName  := ""
+   LOCAL nCount := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
 
-if nIndex >=1 .and. nIndex <= nCount
-   cName := Space(64)
-   DllCall(::hDll, DLL_STDCALL, "PSGetPaperNames", nIndex - 1, @cName)
-endif
+   IF nIndex >=1 .and. nIndex <= nCount
+      cName := Space(64)
+      DllCall(::hDll, DLL_STDCALL, "PSGetPaperNames", nIndex - 1, @cName)
+   ENDIF
 
-Return ::Buffer2String(cName)
+   RETURN ::Buffer2String(cName)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPaperNumbers() -> nValue
-Description : Retreive the number of the paper type pointed by nIndex
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPaperNumbers() -> nValue
+
+   Description : Retreive the number of the paper type pointed by nIndex
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPaperNumbers(nIndex)
 
-Local nNumber := -1
-Local nCount  := 0
+   LOCAL nNumber := -1
+   LOCAL nCount  := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPaperCount")
 
-if nIndex >=1 .and. nIndex <= nCount
-   nNumber := DllCall(::hDll, DLL_STDCALL, "PSGetPaperNumbers", nIndex - 1)
-endif
+   IF nIndex >=1 .and. nIndex <= nCount
+      nNumber := DllCall(::hDll, DLL_STDCALL, "PSGetPaperNumbers", nIndex - 1)
+   ENDIF
 
-Return nNumber
+   RETURN nNumber
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinter() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinter() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinter()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinter")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinter")
 
-Return nValue + 1
+   RETURN nValue + 1
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinterCount() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinterCount() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinterCount()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCount")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCount")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinters() -> aClone(saPrinters)
-Description : Returns the list of available printers for this computer
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinters() -> aClone(saPrinters)
+
+   Description : Returns the list of available printers for this computer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinters()
 
-Local aPrinters := {}
-Local cPrinter  := ""
-Local nCount    := 0
-Local nLoop     := 0
+   LOCAL aPrinters := {}
+   LOCAL cPrinter  := ""
+   LOCAL nCount    := 0
+   LOCAL nLoop     := 0
 
-nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCount")
+   nCount := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCount")
 
-for nLoop := 0 to nCount - 1
-   cPrinter := Space(256)
-   DllCall(::hDll, DLL_STDCALL, "PSGetPrinterNames", nLoop, @cPrinter)
-   aAdd(aPrinters, ::Buffer2String(cPrinter))
-next
+   FOR nLoop := 0 to nCount - 1
+      cPrinter := Space(256)
+      DllCall(::hDll, DLL_STDCALL, "PSGetPrinterNames", nLoop, @cPrinter)
+      aAdd(aPrinters, ::Buffer2String(cPrinter))
+   NEXT
 
-Return aClone(aPrinters)
+   RETURN aClone(aPrinters)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinterCaps() -> aCaps
-Description : Retreive the printer capabilities of the selected printer
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinterCaps() -> aCaps
+
+   Description : Retreive the printer capabilities of the selected printer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinterCaps()
 
-Local cDllTemplate
-Local nAreaWidth
-Local nAreaHeight
-Local nTopMargin
-Local nLeftMargin
-Local nPaperWidth
-Local nPaperHeight
-// Local nMAreaWidth
-// Local nMAreaHeight
-Local nHPixelsInch
-Local nVPixelsInch
-Local nBitDepth
+   LOCAL cDllTemplate
+   LOCAL nAreaWidth
+   LOCAL nAreaHeight
+   LOCAL nTopMargin
+   LOCAL nLeftMargin
+   LOCAL nPaperWidth
+   LOCAL nPaperHeight
 
-cDllTemplate := DllPrepareCall(::hDll, DLL_STDCALL, "PSGetPrinterCaps")
+   // Local nMAreaWidth
+   // Local nMAreaHeight
+   LOCAL nHPixelsInch
+   LOCAL nVPixelsInch
+   LOCAL nBitDepth
 
-nAreaWidth   := DllExecuteCall(cDllTemplate, HORZRES)           // Printable Horz area (Width)    Pixels
-nAreaHeight  := DllExecuteCall(cDllTemplate, VERTRES)           // Printable Vert area (Height)   Pixels
-nTopMargin   := DllExecuteCall(cDllTemplate, PHYSICALOFFSETY)   // Top margin                     Pixels
-nLeftMargin  := DllExecuteCall(cDllTemplate, PHYSICALOFFSETX)   // Left margin                    Pixels
-nPaperWidth  := DllExecuteCall(cDllTemplate, PHYSICALWIDTH)     // Total paper width              Pixels
-nPaperHeight := DllExecuteCall(cDllTemplate, PHYSICALHEIGHT)    // Total paper height             Pixels
-// nMAreaWidth  := DllExecuteCall(cDllTemplate, HORZSIZE)          // Printable Horz area            mm
-// nMAreaHeight := DllExecuteCall(cDllTemplate, VERTSIZE)          // Printable Vert area            mm
-nHPixelsInch := DllExecuteCall(cDllTemplate, LOGPIXELSX)        // Number of Horz pixels/Inch     Pixels
-nVPixelsInch := DllExecuteCall(cDllTemplate, LOGPIXELSY)        // Number of Vert pixels/Inch     Pixels
-nBitDepth    := DllExecuteCall(cDllTemplate, NUMCOLORS)         // Bit depth (number of bits per pixel)
+   cDllTemplate := DllPrepareCall(::hDll, DLL_STDCALL, "PSGetPrinterCaps")
 
-Return {nPaperWidth , ;
-        nPaperHeight, ;
-        nAreaWidth  , ;
-        nAreaHeight , ;
-        nTopMargin  , ;
-        nLeftMargin , ;
-        nHPixelsInch, ;
-        nVPixelsInch, ;
-        nBitDepth}
+   nAreaWidth   := DllExecuteCall(cDllTemplate, HORZRES)           // Printable Horz area (Width)    Pixels
+   nAreaHeight  := DllExecuteCall(cDllTemplate, VERTRES)           // Printable Vert area (Height)   Pixels
+   nTopMargin   := DllExecuteCall(cDllTemplate, PHYSICALOFFSETY)   // Top margin                     Pixels
+   nLeftMargin  := DllExecuteCall(cDllTemplate, PHYSICALOFFSETX)   // Left margin                    Pixels
+   nPaperWidth  := DllExecuteCall(cDllTemplate, PHYSICALWIDTH)     // Total paper width              Pixels
+   nPaperHeight := DllExecuteCall(cDllTemplate, PHYSICALHEIGHT)    // Total paper height             Pixels
+   // nMAreaWidth  := DllExecuteCall(cDllTemplate, HORZSIZE)          // Printable Horz area            mm
+   // nMAreaHeight := DllExecuteCall(cDllTemplate, VERTSIZE)          // Printable Vert area            mm
+   nHPixelsInch := DllExecuteCall(cDllTemplate, LOGPIXELSX)        // Number of Horz pixels/Inch     Pixels
+   nVPixelsInch := DllExecuteCall(cDllTemplate, LOGPIXELSY)        // Number of Vert pixels/Inch     Pixels
+   nBitDepth    := DllExecuteCall(cDllTemplate, NUMCOLORS)         // Bit depth (number of bits per pixel)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinterCapsEx(<n>) -> nCap
-Description : Retreive one of the printer capabilities of the selected printer
------------------------------------------------------------------------------*/
+   RETURN {nPaperWidth , ;
+      nPaperHeight, ;
+      nAreaWidth  , ;
+      nAreaHeight , ;
+      nTopMargin  , ;
+      nLeftMargin , ;
+      nHPixelsInch, ;
+      nVPixelsInch, ;
+      nBitDepth}
+
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinterCapsEx(<n>) -> nCap
+
+   Description : Retreive one of the printer capabilities of the selected printer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinterCapsEx(nCap)
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCaps", nCap)
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterCaps", nCap)
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinterHandle() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinterHandle() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinterHandle()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterHandle")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetPrinterHandle")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetPrinterNames(<n>) -> cValue
-Description : Returns the name of the selected printer
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetPrinterNames(<n>) -> cValue
+
+   Description : Returns the name of the selected printer
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetPrinterNames(nPrinter)
 
-Local cPrinter := Space(256)
+   LOCAL cPrinter := Space(256)
 
-DllCall(::hDll, DLL_STDCALL, "PSGetPrinterNames", nPrinter - 1, @cPrinter)
+   DllCall(::hDll, DLL_STDCALL, "PSGetPrinterNames", nPrinter - 1, @cPrinter)
 
-Return ::Buffer2String(cPrinter)
+   RETURN ::Buffer2String(cPrinter)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetTitle() -> cValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetTitle() -> cValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetTitle()
 
-Local cTitle := Space(256)
+   LOCAL cTitle := Space(256)
 
-DllCall(::hDll, DLL_STDCALL, "PSGetTitle", @cTitle)
+   DllCall(::hDll, DLL_STDCALL, "PSGetTitle", @cTitle)
 
-Return ::Buffer2String(cTitle)
+   RETURN ::Buffer2String(cTitle)
 
-/*-----------------------------------------------------------------------------
-Method .....: #Get
-Description :
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Get
+
+   Description :
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetTextHeight(cText)
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetTextHeight", cText)
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetTextHeight", cText)
 
-Return PSItoF(nValue)
+   RETURN PSItoF(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #Get
-Description :
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Get
+
+   Description :
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetTextWidth(cText)
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetTextWidth", cText)
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetTextWidth", cText)
 
-Return PSItoF(nValue)
+   RETURN PSItoF(nValue)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetUnit() -> nValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetUnit() -> nValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetUnit()
 
-Local nValue := DllCall(::hDll, DLL_STDCALL, "PSGetUnit")
+   LOCAL nValue := DllCall(::hDll, DLL_STDCALL, "PSGetUnit")
 
-Return nValue
+   RETURN nValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetUseDIB() -> lValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetUseDIB() -> lValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetUseDIB()
 
-Local lValue := (DllCall(::hDll, DLL_STDCALL, "PSGetUseDIB") == 1)
+   LOCAL lValue := (DllCall(::hDll, DLL_STDCALL, "PSGetUseDIB") == 1)
 
-Return lValue
+   RETURN lValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #Version() -> cVersionNumber
-Description : Returns the DLL version number
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Version() -> cVersionNumber
+
+   Description : Returns the DLL version number
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetVersion()
 
-Local cVersion := Space(24)
+   LOCAL cVersion := Space(24)
 
-DllCall(::hDll, DLL_STDCALL, "PSGetVersion", @cVersion)
+   DllCall(::hDll, DLL_STDCALL, "PSGetVersion", @cVersion)
 
-Return ::Buffer2String(cVersion)
+   RETURN ::Buffer2String(cVersion)
 
-/*-----------------------------------------------------------------------------
-Method .....: #GetXerox() -> lValue
-Description : Returns the current setting
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #GetXerox() -> lValue
+
+   Description : Returns the current setting
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:GetXerox()
 
-Local lValue := (DllCall(::hDll, DLL_STDCALL, "PSGetXerox") == 1)
+   LOCAL lValue := (DllCall(::hDll, DLL_STDCALL, "PSGetXerox") == 1)
 
-Return lValue
+   RETURN lValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #IsPreviewVisible() -> lValue
-Description : Returns .t. is print preview window is visible, otherwise, returns .f.
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #IsPreviewVisible() -> lValue
+
+   Description : Returns .t. is print preview window is visible, otherwise, returns .f.
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:IsPreviewVisible()
 
-Local lValue := (DllCall(::hDll, DLL_STDCALL, "PSIsPreviewVisible") == 1)
+   LOCAL lValue := (DllCall(::hDll, DLL_STDCALL, "PSIsPreviewVisible") == 1)
 
-Return lValue
+   RETURN lValue
 
-/*-----------------------------------------------------------------------------
-Method .....: #Line(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
-Description : Draw a line
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #Line(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
+
+   Description : Draw a line
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:Line(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
 
-nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
-nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
+   nThick       := iif(nThick       == NIL, APS_DEFAULT,     nThick       )
+   nBorderColor := iif(nBorderColor == NIL, APS_DEFAULT, Int(nBorderColor))
 
-DllCall(::hDll, DLL_STDCALL, "PSLineEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor)
+   DllCall(::hDll, DLL_STDCALL, "PSLineEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor)
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #LineEx(<n>, <n>, <n>, <n>) -> NIL
-Description : Draw a line
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #LineEx(<n>, <n>, <n>, <n>) -> NIL
+
+   Description : Draw a line
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:LineEx(nTop, nLeft, nBottom, nRight)
 
-DllCall(::hDll, DLL_STDCALL, "PSLine", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight))
+   DllCall(::hDll, DLL_STDCALL, "PSLine", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight))
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #NewPage() -> NIL
-Description : Signal the end of page, page eject
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #NewPage() -> NIL
+
+   Description : Signal the end of page, page eject
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:NewPage()
 
-// Put a WaterMark in the ForeGround
-if ::nWaterMark = AWM_FOREGROUND .and. ValType(::bWaterMark) == "B"
-   Eval(::bWaterMark, Self)
-endif
+   // Put a WaterMark in the ForeGround
+   IF ::nWaterMark = AWM_FOREGROUND .and. ValType(::bWaterMark) == "B"
+      Eval(::bWaterMark, Self)
+   ENDIF
 
-DllCall(::hDll, DLL_STDCALL, "PSNewPage")
+   DllCall(::hDll, DLL_STDCALL, "PSNewPage")
 
-// Put a WaterMark in the BackGround
-if ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
-   Eval(::bWaterMark, Self)
-endif
+   // Put a WaterMark in the BackGround
+   IF ::nWaterMark = AWM_BACKGROUND .and. ValType(::bWaterMark) == "B"
+      Eval(::bWaterMark, Self)
+   ENDIF
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #PrintDialog() -> lPrint
-Description : Shows the printer dialog and returns if the user clicked OK
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #PrintDialog() -> lPrint
+
+   Description : Shows the printer dialog and returns if the user clicked OK
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:PrintDialog()
 
-Local nValue
+   LOCAL nValue
 
-::lFromDialog := .f.
+   ::lFromDialog := .f.
 
-nValue := DllCall(::hDll, DLL_STDCALL, "PSPrintDialog")
+   nValue := DllCall(::hDll, DLL_STDCALL, "PSPrintDialog")
 
-if nValue == 1
-   ::lFromDialog := .t.
-endif
+   IF nValue == 1
+      ::lFromDialog := .t.
+   ENDIF
 
-Return (nValue == 1)  // 1 == Print, 0 == Error or don't print
+   RETURN (nValue == 1)  // 1 == Print, 0 == Error or don't print
 
-/*-----------------------------------------------------------------------------
-Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-Description : Print the file pointed by cFile and optionnaly deletes it.
-Author .....: Stephan St-Denis
-Date .......: September 2002
-Notes ......: You're free to enhance this function. If you do so, please let
-              us know : tech@abeelabs.com
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
+
+   Description : Print the file pointed by cFile and optionnaly deletes it.
+   Author .....: Stephan St-Denis
+   Date .......: September 2002
+   Notes ......: You're free to enhance this function. If you do so, please let
+   us know : tech@abeelabs.com
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
 
-Local lSuccess := .t.                  // Return value
-Local nStyle   := APS_PLAIN            // Start with plain font style
-Local nRow     := 0                    // Print head line
-Local nCol     := 0                    // Print head column
-Local lBold    := .f.                  // Bold flag
-Local lItalic  := .f.                  // Italic flag
-Local lUnder   := .f.                  // Underline flag
-Local lStrike  := .f.                  // Strikeout flag
-Local cPrintLine                       // Line to print
-Local cBuffer                          // File buffer
-Local nLoop                            // For / Next loop
-Local nCtrl                            // Control character in ASCII
-Local nChar                            // Character read
-Local nPos                             // Pos of CRLF, EJECT or ESCAPE in buffer (in any)
-Local nHandle                          // File handle
-Local nBytes                           // Number of bytes read from file
-Local nSaveUnit								// Unit in use before in order to restore it at the end
+   LOCAL lSuccess := .t.                  // Return value
+   LOCAL nStyle   := APS_PLAIN            // Start with plain font style
+   LOCAL nRow     := 0                    // Print head line
+   LOCAL nCol     := 0                    // Print head column
+   LOCAL lBold    := .f.                  // Bold flag
+   LOCAL lItalic  := .f.                  // Italic flag
+   LOCAL lUnder   := .f.                  // Underline flag
+   LOCAL lStrike  := .f.                  // Strikeout flag
+   LOCAL cPrintLine                       // Line to print
+   LOCAL cBuffer                          // File buffer
+   LOCAL nLoop                            // For / Next loop
+   LOCAL nCtrl                            // Control character in ASCII
+   LOCAL nChar                            // Character read
+   LOCAL nPos                             // Pos of CRLF, EJECT or ESCAPE in buffer (in any)
+   LOCAL nHandle                          // File handle
+   LOCAL nBytes                           // Number of bytes read from file
+   LOCAL nSaveUnit                        // Unit in use before in order to restore it at the end
 
-lDelete      := iif(lDelete      == NIL, .t.         , lDelete     )
-nOrientation := iif(nOrientation == NIL, APS_PORTRAIT, nOrientation)
-nPrinter     := iif(nPrinter     == NIL, 0           , nPrinter    )
-cFont        := iif(cFont        == NIL, APS_COURIER , cFont       )
-lSuccess     := (nHandle := FOpen(cFileName)) <> -1
+   lDelete      := iif(lDelete      == NIL, .t.         , lDelete     )
+   nOrientation := iif(nOrientation == NIL, APS_PORTRAIT, nOrientation)
+   nPrinter     := iif(nPrinter     == NIL, 0           , nPrinter    )
+   cFont        := iif(cFont        == NIL, APS_COURIER , cFont       )
+   lSuccess     := (nHandle := FOpen(cFileName)) <> -1
 
-if lSuccess
-   ::BeginDoc(nPrinter, cTitle, nOrientation, nCopies)          // Start document
-	nSaveUnit := ::GetUnit()
-   ::SetUnit(APS_TEXT)                                          // Set to millimeters. We'll handle the position by ourself
-   ::SetFontAttributes(cFont, APS_PLAIN, 12)                    // Set default font
+   IF lSuccess
+      ::BeginDoc(nPrinter, cTitle, nOrientation, nCopies)          // Start document
+      nSaveUnit := ::GetUnit()
+      ::SetUnit(APS_TEXT)                                          // Set to millimeters. We'll handle the position by ourself
+      ::SetFontAttributes(cFont, APS_PLAIN, 12)                    // Set default font
 
-   while .t.
-      cBuffer := Space(pfBUFFERLEN)                             // File buffer
-      nBytes  := FRead(nHandle, @cBuffer, pfBUFFERLEN)          // Read a chunk
+      WHILE .t.
+         cBuffer := Space(pfBUFFERLEN)                             // File buffer
+         nBytes  := FRead(nHandle, @cBuffer, pfBUFFERLEN)          // Read a chunk
 
-      if nBytes == 0                                            // If Eof
-         exit                                                   // Exit
-      endif
+         IF nBytes == 0                                            // If Eof
+            EXIT                                                   // Exit
+         ENDIF
 
-      nPos       := At(Chr(13) + Chr(10), cBuffer)              // Finds CR (if any)
-      nLoop      := 1
-      cPrintLine := ""                                          // Text to print
+         nPos       := At(Chr(13) + Chr(10), cBuffer)              // Finds CR (if any)
+         nLoop      := 1
+         cPrintLine := ""                                          // Text to print
 
-      if nPos = 0
-         nPos := nBytes
-      else
-         nPos++
-      endif
+         IF nPos = 0
+            nPos := nBytes
+         ELSE
+            nPos++
+         ENDIF
 
-      while .t.
-         nChar := Asc(SubStr(cBuffer, nLoop, 1))
+         WHILE .t.
+            nChar := Asc(SubStr(cBuffer, nLoop, 1))
 
-         do case
-            case nChar == 27                                    // ESCAPE code
+            DO CASE
+            CASE nChar == 27                                    // ESCAPE code
 
-               if nLoop < nPos                                  // Advances to next char
+               IF nLoop < nPos                                  // Advances to next char
                   nLoop++
                   nCtrl := Asc(SubStr(cBuffer, nLoop, 1))       // Read the control character
 
-                  if Len(cPrintLine) != 0                       // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
+                  IF Len(cPrintLine) != 0                       // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
                      ::TextOut(nRow, nCol, cPrintLine, , , , , nStyle)    // Print the left part of the string, before the ESCAPE code
                      nCol += Len(cPrintLine)
                      cPrintLine := ""
-                  endif
+                  ENDIF
 
-                  do case
-                     case nCtrl == 66 .and. ! lBold             // B - Set   Bold
-                        lBold  := .t.
-                        nStyle += APS_BOLD
-      
-                     case nCtrl == 98 .and. lBold               // b - Reset Bold
-                        lBold  := .f.
-                        nStyle -= APS_BOLD
-      
-                     case nCtrl == 73 .and. ! lItalic           // I - Set   Italic
-                        lItalic := .t.
-                        nStyle  += APS_ITALIC
-      
-                     case nCtrl == 105 .and. lItalic            // i - Reset Italic
-                        lItalic := .f.
-                        nStyle  -= APS_ITALIC
-      
-                     case nCtrl == 85 .and. ! lUnder            // U - Set   Underline
-                        lUnder := .t.
-                        nStyle += APS_UNDERLINE
-      
-                     case nCtrl == 117 .and. lUnder             // u - Reset Underline
-                        lUnder := .f.
-                        nStyle -= APS_UNDERLINE
-      
-                     case nCtrl == 83 .and. ! lStrike           // S - Set   Strikeout
-                        lStrike := .t.
-                        nStyle  += APS_STRIKEOUT
-      
-                     case nCtrl == 115 .and. lStrike            // s - Reset Strikeout
-                        lStrike := .f.
-                        nStyle  -= APS_STRIKEOUT
+                  DO CASE
+                  CASE nCtrl == 66 .and. ! lBold             // B - Set   Bold
+                     lBold  := .t.
+                     nStyle += APS_BOLD
 
-                     case nCtrl == 7 // 8 is already taken         8 CPI
-                        ::SetCPI(8)
-      
-                     case nCtrl == 10                           // 10 CPI
-                        ::SetCPI(10)
-      
-                     case nCtrl == 12                           // 12 CPI
-                        ::SetCPI(12)
-      
-                     case nCtrl == 15                           // 15 CPI
-                        ::SetCPI(15)
-      
-                     case nCtrl == 17                           // 17 CPI (16.66)
-                        ::SetCPI(17)
-      
-                     case nCtrl == 18                           // 18 CPI
-                        ::SetCPI(18)
-      
-                     case nCtrl == 20                           // 20 CPI
-                        ::SetCPI(20)
-      
-                     case nCtrl == 6                            // 6 LPI
-                        ::SetLPI(6)
-      
-                     case nCtrl == 8                            // 8 LPI
-                        ::SetLPI(8)
-         
-                  endcase
+                  CASE nCtrl == 98 .and. lBold               // b - Reset Bold
+                     lBold  := .f.
+                     nStyle -= APS_BOLD
+
+                  CASE nCtrl == 73 .and. ! lItalic           // I - Set   Italic
+                     lItalic := .t.
+                     nStyle  += APS_ITALIC
+
+                  CASE nCtrl == 105 .and. lItalic            // i - Reset Italic
+                     lItalic := .f.
+                     nStyle  -= APS_ITALIC
+
+                  CASE nCtrl == 85 .and. ! lUnder            // U - Set   Underline
+                     lUnder := .t.
+                     nStyle += APS_UNDERLINE
+
+                  CASE nCtrl == 117 .and. lUnder             // u - Reset Underline
+                     lUnder := .f.
+                     nStyle -= APS_UNDERLINE
+
+                  CASE nCtrl == 83 .and. ! lStrike           // S - Set   Strikeout
+                     lStrike := .t.
+                     nStyle  += APS_STRIKEOUT
+
+                  CASE nCtrl == 115 .and. lStrike            // s - Reset Strikeout
+                     lStrike := .f.
+                     nStyle  -= APS_STRIKEOUT
+
+                  CASE nCtrl == 7 // 8 is already taken         8 CPI
+                     ::SetCPI(8)
+
+                  CASE nCtrl == 10                           // 10 CPI
+                     ::SetCPI(10)
+
+                  CASE nCtrl == 12                           // 12 CPI
+                     ::SetCPI(12)
+
+                  CASE nCtrl == 15                           // 15 CPI
+                     ::SetCPI(15)
+
+                  CASE nCtrl == 17                           // 17 CPI (16.66)
+                     ::SetCPI(17)
+
+                  CASE nCtrl == 18                           // 18 CPI
+                     ::SetCPI(18)
+
+                  CASE nCtrl == 20                           // 20 CPI
+                     ::SetCPI(20)
+
+                  CASE nCtrl == 6                            // 6 LPI
+                     ::SetLPI(6)
+
+                  CASE nCtrl == 8                            // 8 LPI
+                     ::SetLPI(8)
+
+                  ENDCASE
 
                   nLoop++
-               endif
-                  
-            case nChar == 12                                    // EJECT code
+               ENDIF
+
+            CASE nChar == 12                                    // EJECT code
                nLoop++
 
-               if Len(cPrintLine) != 0                          // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
+               IF Len(cPrintLine) != 0                          // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
                   ::TextOut(nRow, nCol, cPrintLine, , , , , nStyle)   // Print the rest
                   nCol += Len(cPrintLine)
                   cPrintLine := ""
-               endif
+               ENDIF
 
                nRow := 0                                        // Reset row to 0
                nCol := 0                                        // Reset column to 0
                ::NewPage()                                      // Page eject
 
-            case nChar == 13                                    // CR/LF code
+            CASE nChar == 13                                    // CR/LF code
                nLoop++
 
-               if nLoop <= nPos
-                  if Asc(SubStr(cBuffer, nLoop, 1)) == 10
+               IF nLoop <= nPos
+                  IF Asc(SubStr(cBuffer, nLoop, 1)) == 10
                      nLoop++
 
-                     if Len(cPrintLine) != 0                    // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
+                     IF Len(cPrintLine) != 0                    // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
                         ::TextOut(nRow, nCol, cPrintLine, , , , , nStyle)
                         cPrintLine := ""
-                     endif
-      
+                     ENDIF
+
                      nRow++                                     // For each CRLF, skip line
                      nCol := 0                                  // Reset to column 0
-      
-                     FSeek(nHandle, -(nBytes - nLoop + 1), FS_RELATIVE)   // Position file pointer after EJECT or CRLF
-                  else
-                     nCol := 0                                  // Reset to column 0
-                  endif
-               endif
 
-            otherwise
+                     FSeek(nHandle, -(nBytes - nLoop + 1), FS_RELATIVE)   // Position file pointer after EJECT or CRLF
+                  ELSE
+                     nCol := 0                                  // Reset to column 0
+                  ENDIF
+               ENDIF
+
+            OTHERWISE
                cPrintLine := cPrintLine + SubStr(cBuffer, nLoop, 1)
                nLoop++
 
-         endcase
+            ENDCASE
 
-         if nLoop > nPos
-            exit
-         endif
-      enddo
-   enddo
+            IF nLoop > nPos
+               EXIT
+            ENDIF
+         ENDDO
+      ENDDO
 
-   if Len(cPrintLine) != 0                                      // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
-      ::TextOut(nRow, nCol, cPrintLine, , , , , nStyle)
-      cPrintLine := ""
-   endif
+      IF Len(cPrintLine) != 0                                      // If there's still something to print...  // Changed by STD - 2008-02-25 - 1.3.5.0
+         ::TextOut(nRow, nCol, cPrintLine, , , , , nStyle)
+         cPrintLine := ""
+      ENDIF
 
-   ::SetUnit(nSaveUnit)                                         // Set to whatever unit was in use before
-   ::EndDoc()                                                   // End the document
+      ::SetUnit(nSaveUnit)                                         // Set to whatever unit was in use before
+      ::EndDoc()                                                   // End the document
 
-   FClose(nHandle)
+      FClose(nHandle)
 
-endif
+   ENDIF
 
-if lDelete
-   FErase(cFileName)
-endif
+   IF lDelete
+      FErase(cFileName)
+   ENDIF
 
-SetPRC(0, 0)
+   SetPRC(0, 0)
 
-Return lSuccess
+   RETURN lSuccess
 
-/*-----------------------------------------------------------------------------
-Function ...: PrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
-Description : Print the file pointed by cFile and optionnaly deletes it.
-              No processing on file. The file is sent "as is" to the printer.
-Author .....: Stephan St-Denis
-Date .......: September 2002
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
+
+   Description : Print the file pointed by cFile and optionnaly deletes it.
+   No processing on file. The file is sent "as is" to the printer.
+   Author .....: Stephan St-Denis
+   Date .......: September 2002
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:PrintRawFile(cFileName, lDelete, nPrinter, cTitle)
 
-Local lSuccess  // Return value
-Local nHandle   // File handle
-Local cBuffer   // File buffer
-Local nBytes    // Number of bytes read from file
+   LOCAL lSuccess  // Return value
+   LOCAL nHandle   // File handle
+   LOCAL cBuffer   // File buffer
+   LOCAL nBytes    // Number of bytes read from file
 
-lDelete  := iif(lDelete  == NIL, .t.       , lDelete )
-nPrinter := iif(nPrinter == NIL, 0         , nPrinter)
-cTitle   := iif(cTitle   == NIL, "Untitled", cTitle  )
-lSuccess := File(cFileName)
+   lDelete  := iif(lDelete  == NIL, .t.       , lDelete )
+   nPrinter := iif(nPrinter == NIL, 0         , nPrinter)
+   cTitle   := iif(cTitle   == NIL, "Untitled", cTitle  )
+   lSuccess := File(cFileName)
 
-lSuccess := (nHandle := FOpen(cFileName)) <> -1
+   lSuccess := (nHandle := FOpen(cFileName)) <> -1
 
-if lSuccess
-   ::SetPrinter(nPrinter)
-   ::SetTitle(cTitle)
+   IF lSuccess
+      ::SetPrinter(nPrinter)
+      ::SetTitle(cTitle)
 
-   DllCall(::hDll, DLL_STDCALL, "PSBeginRawDoc")
+      DllCall(::hDll, DLL_STDCALL, "PSBeginRawDoc")
 
-   while .t.
-      cBuffer := Space(pfBUFFERLEN)                             // File buffer
-      nBytes  := FRead(nHandle, @cBuffer, pfBUFFERLEN)          // Read a chunk
+      WHILE .t.
+         cBuffer := Space(pfBUFFERLEN)                             // File buffer
+         nBytes  := FRead(nHandle, @cBuffer, pfBUFFERLEN)          // Read a chunk
 
-      if nBytes == 0                                            // If Eof
-         exit                                                   // Exit
-      endif
+         IF nBytes == 0                                            // If Eof
+            EXIT                                                   // Exit
+         ENDIF
 
-      DllCall(::hDll, DLL_STDCALL, "PSPrintRawData", cBuffer, nBytes)
-   enddo
+         DllCall(::hDll, DLL_STDCALL, "PSPrintRawData", cBuffer, nBytes)
+      ENDDO
 
-   FClose(nHandle)
+      FClose(nHandle)
 
-   if lDelete
-      FErase(cFileName)
-   endif
+      IF lDelete
+         FErase(cFileName)
+      ENDIF
 
-   DllCall(::hDLL, DLL_STDCALL, "PSEndRawDoc")
-endif
+      DllCall(::hDLL, DLL_STDCALL, "PSEndRawDoc")
+   ENDIF
 
-Return lSuccess
+   RETURN lSuccess
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetAsciiToAnsi(<l>) -> Self
-Description : Set the conversion from Ascii to Ansi for text strings.
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetAsciiToAnsi(<l>) -> Self
+
+   Description : Set the conversion from Ascii to Ansi for text strings.
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetAsciiToAnsi(lValue)
 
-if ValType(lValue) == "L"
-   DllCall(::hDll, DLL_STDCALL, "PSSetAsciiToAnsi", iif(lValue, 1, 0))
-endif
+   IF ValType(lValue) == "L"
+      DllCall(::hDll, DLL_STDCALL, "PSSetAsciiToAnsi", iif(lValue, 1, 0))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetBorder([<n>, <n>]) -> Self
-Description : Sets the attributes used to draw lines and borders
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetBorder([<n>, <n>]) -> Self
+
+   Description : Sets the attributes used to draw lines and borders
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetBorder(nThickness, nBorderColor)
 
-if ValType(nThickness) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetBorderThickness", PSFtoI(nThickness))
-endif
+   IF ValType(nThickness) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetBorderThickness", PSFtoI(nThickness))
+   ENDIF
 
-if ValType(nBorderColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
-endif
+   IF ValType(nBorderColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetBorderColor(<n>) -> Self
-Description : Sets the border color
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetBorderColor(<n>) -> Self
+
+   Description : Sets the border color
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetBorderColor(nBorderColor)
 
-if ValType(nBorderColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
-endif
+   IF ValType(nBorderColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetBorderThickness(<n>) -> Self
-Description : Sets the border thickness used to draw lines and borders
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetBorderThickness(<n>) -> Self
+
+   Description : Sets the border thickness used to draw lines and borders
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetBorderThickness(nThickness)
 
-if ValType(nThickness) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetBorderThickness", PSFtoI(nThickness))
-endif
+   IF ValType(nThickness) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetBorderThickness", PSFtoI(nThickness))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetClipperComp(<l>) -> Self
-Description : Set Clipper compatible calls for TextOut() and TextBox()
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetClipperComp(<l>) -> Self
+
+   Description : Set Clipper compatible calls for TextOut() and TextBox()
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetClipperComp(lClipper)
 
-if ValType(lClipper) == "L"
-   ::lClipper := lClipper
-endif
+   IF ValType(lClipper) == "L"
+      ::lClipper := lClipper
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetCoorSystem(<n>) -> Self
-Description : Sets the coordinate system
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetCoorSystem(<n>) -> Self
+
+   Description : Sets the coordinate system
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetCoorSystem(nCoor)
 
-if ValType(nCoor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetCoorSystem", nCoor)
-endif
+   IF ValType(nCoor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetCoorSystem", nCoor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetCopies([<n>]) -> Self
-Description : Sets the number of copies
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetCopies([<n>]) -> Self
+
+   Description : Sets the number of copies
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetCopies(nCopies)
 
-if ValType(nCopies) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetCopies", nCopies)
-endif
+   IF ValType(nCopies) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetCopies", nCopies)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetCPI(<n>) -> Self
-Description : Sets the number of characters per inch (Text mode only)
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetCPI(<n>) -> Self
+
+   Description : Sets the number of characters per inch (Text mode only)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetCPI(nCPI)
 
-if ValType(nCPI) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetCPI", nCPI)
-endif
+   IF ValType(nCPI) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetCPI", nCPI)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetDevice(<n>) -> Self
-Description : Sets the device to use for the next print job
-Choices ....: DEV_PRINTER - The output will be sent to a printer
-              DEV_PREVIEW - The output will be sent to the print preview dialog
-              DEV_PDFFILE - The output will create a PDF file (must set filename)
-              DEV_EMFFILE - Print to a serie of EMF files
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetDevice(<n>) -> Self
+
+   Description : Sets the device to use for the next print job
+   Choices ....: DEV_PRINTER - The output will be sent to a printer
+   DEV_PREVIEW - The output will be sent to the print preview dialog
+   DEV_PDFFILE - The output will create a PDF file (must set filename)
+   DEV_EMFFILE - Print to a serie of EMF files
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetDevice(nDevice)
 
-if ValType(nDevice) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetDevice", nDevice)
-endif
+   IF ValType(nDevice) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetDevice", nDevice)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetDirectPrint(<c>) -> Self
-Description : Set the direct print flag (used for very special cases)
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetDirectPrint(<c>) -> Self
+
+   Description : Set the direct print flag (used for very special cases)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetDirectPrint(lDirect)
 
-if ValType(lDirect) == "L"
-   DllCall(::hDll, DLL_STDCALL, "PSSetDirectPrint", iif(lDirect, 1, 0))
-endif
+   IF ValType(lDirect) == "L"
+      DllCall(::hDll, DLL_STDCALL, "PSSetDirectPrint", iif(lDirect, 1, 0))
+   ENDIF
 
-Return self
+   RETURN self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetDecimalSep(<c>) -> Self
-Description : Sets the decimal separator character
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetDecimalSep(<c>) -> Self
+
+   Description : Sets the decimal separator character
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetDecimalSep(cSep)
 
-if ValType(cSep) == "C" .and. Len(cSep) > 0
-   DllCall(::hDll, DLL_STDCALL, "PSSetDecimalSep", Asc(cSep))
-endif
+   IF ValType(cSep) == "C" .and. Len(cSep) > 0
+      DllCall(::hDll, DLL_STDCALL, "PSSetDecimalSep", Asc(cSep))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetDuplex([<n>]) -> Self
-Description : Sets the duplex mode
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetDuplex([<n>]) -> Self
+
+   Description : Sets the duplex mode
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetDuplex(nDuplex)
 
-if ValType(nDuplex) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetDuplex", nDuplex)
-endif
+   IF ValType(nDuplex) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetDuplex", nDuplex)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFileName(<c>) -> Self
-Description : Sets the file name of a PDF file
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFileName(<c>) -> Self
+
+   Description : Sets the file name of a PDF file
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFileName(cFileName)
 
-if ValType(cFileName) == "C" .and. ! Empty(cFileName)
-   DllCall(::hDll, DLL_STDCALL, "PSSetFileName", cFileName)
-endif
+   IF ValType(cFileName) == "C" .and. ! Empty(cFileName)
+      DllCall(::hDll, DLL_STDCALL, "PSSetFileName", cFileName)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFill(<n>, [<n>]) -> Self
-Description : Sets the color used to fill shapes, like boxes and ellipes
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFill(<n>, [<n>]) -> Self
+
+   Description : Sets the color used to fill shapes, like boxes and ellipes
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFill(nFillColor, nFillPattern)
 
-if ValType(nFillColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFillColor", nFillColor)
-endif
+   IF ValType(nFillColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFillColor", nFillColor)
+   ENDIF
 
-if ValType(nFillPattern) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
-endif
+   IF ValType(nFillPattern) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFillColor(<n>) -> Self
-Description : Sets the color used to fill shapes, like boxes and ellipes
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFillColor(<n>) -> Self
+
+   Description : Sets the color used to fill shapes, like boxes and ellipes
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFillColor(nFillColor)
 
-if ValType(nFillColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFillColor", nFillColor)
-endif
+   IF ValType(nFillColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFillColor", nFillColor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFillPattern(<n>) -> Self
-Description : Sets the pattern used to fill shapes, like boxes and ellipes
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFillPattern(<n>) -> Self
+
+   Description : Sets the pattern used to fill shapes, like boxes and ellipes
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFillPattern(nFillPattern)
 
-if ValType(nFillPattern) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
-endif
+   IF ValType(nFillPattern) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont([<n>, <n>, <n>, <n>, <n>]) -> Self
-Description : Sets the font attributes used by each call to PSTextOut() and others
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont([<n>, <n>, <n>, <n>, <n>]) -> Self
+
+   Description : Sets the font attributes used by each call to PSTextOut() and others
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
 
-if ValType(cFont) == "C"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontName"  , cFont)
-endif
+   IF ValType(cFont) == "C"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontName"  , cFont)
+   ENDIF
 
-if ValType(nStyle) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontStyle" , nStyle)
-endif
+   IF ValType(nStyle) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontStyle" , nStyle)
+   ENDIF
 
-if ValType(nSize) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontSize"  , PSFtoI(nSize))
-endif
+   IF ValType(nSize) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontSize"  , PSFtoI(nSize))
+   ENDIF
 
-if ValType(nTFColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontFColor", nTFColor)
-endif
+   IF ValType(nTFColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontFColor", nTFColor)
+   ENDIF
 
-if ValType(nTBColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontBColor", nTBColor)
-endif
+   IF ValType(nTBColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontBColor", nTBColor)
+   ENDIF
 
-if ValType(nAngle) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
-endif
+   IF ValType(nAngle) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontAngle(nAngle)
 
-if ValType(nAngle) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
-endif
+   IF ValType(nAngle) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontBColor(nTBColor)
 
-if ValType(nTBColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontBColor", nTBColor)
-endif
+   IF ValType(nTBColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontBColor", nTBColor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontFColor(nTFColor)
 
-if ValType(nTFColor) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontFColor", nTFColor)
-endif
+   IF ValType(nTFColor) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontFColor", nTFColor)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontName(cFont)
 
-if ValType(cFont) == "C"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontName"  , cFont)
-endif
+   IF ValType(cFont) == "C"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontName"  , cFont)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontSize(nSize)
 
-if ValType(nSize) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontSize"  , PSFtoI(nSize))
-endif
+   IF ValType(nSize) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontSize"  , PSFtoI(nSize))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetFont() -> Self
-Description : Sets the font
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetFont() -> Self
+
+   Description : Sets the font
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetFontStyle(nStyle)
 
-if ValType(nStyle) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetFontStyle" , nStyle)
-endif
+   IF ValType(nStyle) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetFontStyle" , nStyle)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetJustify(<n>) -> Self
-Description : Sets justification for TextOut
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetJustify(<n>) -> Self
+
+   Description : Sets justification for TextOut
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetJustify(nJustify)
 
-if ValType(nJustify) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetJustify" , nJustify)
-endif
+   IF ValType(nJustify) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetJustify" , nJustify)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetLPI(<n>) -> Self
-Description : Sets the number of lines per inch (Text mode only)
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetLPI(<n>) -> Self
+
+   Description : Sets the number of lines per inch (Text mode only)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetLPI(nLPI)
 
-if ValType(nLPI) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetLPI", nLPI)
-endif
+   IF ValType(nLPI) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetLPI", nLPI)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetOrientation(<n>) -> Self
-Description : Sets the paper orientation
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetOrientation(<n>) -> Self
+
+   Description : Sets the paper orientation
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetOrientation(nOrientation)
 
-if ValType(nOrientation) == "N" .and. (nOrientation == APS_PORTRAIT .or. nOrientation == APS_LANDSCAPE)
-   DllCall(::hDll, DLL_STDCALL, "PSSetOrientation", nOrientation)
-endif
+   IF ValType(nOrientation) == "N" .and. (nOrientation == APS_PORTRAIT .or. nOrientation == APS_LANDSCAPE)
+      DllCall(::hDll, DLL_STDCALL, "PSSetOrientation", nOrientation)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPaperBin(<n>) -> Self
-Description : Sets the paper bin
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPaperBin(<n>) -> Self
+
+   Description : Sets the paper bin
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPaperBin(nPaperBin)
 
-if ValType(nPaperBin) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetPaperBin", nPaperBin)
-endif
+   IF ValType(nPaperBin) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetPaperBin", nPaperBin)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPDFCharSet(<n>) -> Self
-Description : Set the PDF charset to be use
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPDFCharSet(<n>) -> Self
+
+   Description : Set the PDF charset to be use
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPDFCharSet(nCharSet)
 
-if ValType(nCharSet) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetPDFCharSet", nCharSet)
-endif
+   IF ValType(nCharSet) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetPDFCharSet", nCharSet)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPDFOwnerPassword(<c>) -> Self
-Description : Set the encryption password for PDF documents
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPDFOwnerPassword(<c>) -> Self
+
+   Description : Set the encryption password for PDF documents
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPDFOwnerPassword(cPassword)
 
-if ValType(cPassword) == "C" .and. ! Empty(cPassword)
-   DllCall(::hDll, DLL_STDCALL, "PSSetPDFOwnerPassword", cPassword)
-endif
+   IF ValType(cPassword) == "C" .and. ! Empty(cPassword)
+      DllCall(::hDll, DLL_STDCALL, "PSSetPDFOwnerPassword", cPassword)
+   ENDIF
 
-Return Self
+   RETURN Self
 
+   /*-----------------------------------------------------------------------------
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPDFEncoding(<n>) -> Self
-Description : Set the internal encoding for PDF documents, default = 0;
-            : 0 -> WinAnsiEncoding  ( Regular encoding for Latin-text Type 1 
-		   and TrueType fonts on Windows OS.)
-	    : 1 -> StandardEncoding (Adobe Latin-text encoding for standard and 
-		   other Type 1 fonts in case of non-symbolic fonts) and the 
-                   built-in encoding in case of symbolic fonts.)
-            : 2 -> PDFDocEncoding (Rarely used non-Unicode encoding with a 
-		   single byte for each character.)   	  
------------------------------------------------------------------------------*/
+   Method .....: #SetPDFEncoding(<n>) -> Self
+
+   Description : Set the internal encoding for PDF documents, default = 0;
+   : 0 -> WinAnsiEncoding  ( Regular encoding for Latin-text Type 1
+   and TrueType fonts on Windows OS.)
+   : 1 -> StandardEncoding (Adobe Latin-text encoding for standard and
+   other Type 1 fonts in case of non-symbolic fonts) and the
+   built-in encoding in case of symbolic fonts.)
+   : 2 -> PDFDocEncoding (Rarely used non-Unicode encoding with a
+   single byte for each character.)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPDFEncoding(nEncoding)
 
-if ValType(nEncoding) == "N"
-   DllCall(::hDll, DLL_STDCALL,"PSSetPDFEncoding",nEncoding)
-endif
+   IF ValType(nEncoding) == "N"
+      DllCall(::hDll, DLL_STDCALL,"PSSetPDFEncoding",nEncoding)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPDFVersion(<n>) -> Self
-Description : Sets the PDF version to be used for creation of PDF
-            : 0 - PDFVersion 1.4
-            : 1 - PDFVersion 1.5
-            : 2 - PDFVersion 1.6
-            : 3 - PDfVersion 1.7 
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPDFVersion(<n>) -> Self
+
+   Description : Sets the PDF version to be used for creation of PDF
+   : 0 - PDFVersion 1.4
+   : 1 - PDFVersion 1.5
+   : 2 - PDFVersion 1.6
+   : 3 - PDfVersion 1.7
+   -----------------------------------------------------------------------------*/
+
 METHOD TPagescript:SetPDFVersion(nVersion)
 
-if ValType(nVersion) == "N"
-   DllCall(::hDll,DLL_STDCALL,"PSSetPDFVersion",nVersion)
-endif
+   IF ValType(nVersion) == "N"
+      DllCall(::hDll,DLL_STDCALL,"PSSetPDFVersion",nVersion)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #ShowPDF(<l>) -> Self
-Description : Show PDF in default reader after creation
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #ShowPDF(<l>) -> Self
+
+   Description : Show PDF in default reader after creation
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:ShowPDF(lShow)
 
-if ValType(lShow) == "L"
-   DllCall(::hDll,DLL_STDCALL,"PSShowPDF",iif(lShow, 1, 0))
-endif
+   IF ValType(lShow) == "L"
+      DllCall(::hDll,DLL_STDCALL,"PSShowPDF",iif(lShow, 1, 0))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPDFEmbeddedPDFFonts(<n>) -> Self
-Description : Set usage of embedded fonts
-            : 0 -> None
-            : 1 -> Full
-            : 2 -> Subset 
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPDFEmbeddedPDFFonts(<n>) -> Self
+
+   Description : Set usage of embedded fonts
+   : 0 -> None
+   : 1 -> Full
+   : 2 -> Subset
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPDFEmbeddedFonts(nEmbedded)
 
-if ValType(nEmbedded) == "N"
-   DllCall(::hDll,DLL_STDCALL,"PSSetPDFEmbeddedFonts",nEmbedded)
-endif
+   IF ValType(nEmbedded) == "N"
+      DllCall(::hDll,DLL_STDCALL,"PSSetPDFEmbeddedFonts",nEmbedded)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPageSize(<n>) -> Self
-Description : Sets the page size to a predifined paper size
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPageSize(<n>) -> Self
+
+   Description : Sets the page size to a predifined paper size
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPageSize(nPageSize)
 
-if ValType(nPageSize) == "N" // .and. (nPageSize >= DMPAPER_FIRST .and. nPageSize <= DMPAPER_LAST)
-   DllCall(::hDll, DLL_STDCALL, "PSSetPageSize", nPageSize)
-endif
+   IF ValType(nPageSize) == "N" // .and. (nPageSize >= DMPAPER_FIRST .and. nPageSize <= DMPAPER_LAST)
+      DllCall(::hDll, DLL_STDCALL, "PSSetPageSize", nPageSize)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPrinter(<n>) -> Self
-Description : Sets the printer number to which we want to print
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPrinter(<n>) -> Self
+
+   Description : Sets the printer number to which we want to print
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPrinter(nPrinter)
 
-if ValType(nPrinter) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetPrinter", nPrinter - 1)
-endif
+   IF ValType(nPrinter) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetPrinter", nPrinter - 1)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWState(<n>) -> Self
-Description : Set the print preview window state
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWState(<n>) -> Self
+
+   Description : Set the print preview window state
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWState(nState)
 
-if (ValType(nState) == "N") .and. (nState >= PWS_MINIMIZED) .and. (nState <= PWS_AUTO)
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWState", nState)
-endif
+   IF (ValType(nState) == "N") .and. (nState >= PWS_MINIMIZED) .and. (nState <= PWS_AUTO)
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWState", nState)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWPosition(<n>, <n>) -> Self
-Description : Set the print preview window position
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWPosition(<n>, <n>) -> Self
+
+   Description : Set the print preview window position
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWPosition(nLeft, nTop)
 
-if (ValType(nLeft) == "N") .and. (ValType(nTop) == "N")
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWPosition", nLeft, nTop)
-endif
+   IF (ValType(nLeft) == "N") .and. (ValType(nTop) == "N")
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWPosition", nLeft, nTop)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWSize(<n>, <n>) -> Self
-Description : Set the print preview window size (-1, -1 = Auto size)
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWSize(<n>, <n>) -> Self
+
+   Description : Set the print preview window size (-1, -1 = Auto size)
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWSize(nWidth, nHeight)
 
-if (ValType(nWidth) == "N") .and. (ValType(nHeight) == "N")
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWSize", nWidth, nHeight)
-endif
+   IF (ValType(nWidth) == "N") .and. (ValType(nHeight) == "N")
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWSize", nWidth, nHeight)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWBounds(<n>, <n>, <n>, <n>) -> Self
-Description : Set the print preview window bounds (position and size at the same time)
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWBounds(<n>, <n>, <n>, <n>) -> Self
+
+   Description : Set the print preview window bounds (position and size at the same time)
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWBounds(nLeft, nTop, nWidth, nHeight)
 
-if (ValType(nLeft) == "N") .and. (ValType(nTop) == "N") .and. (ValType(nWidth) == "N") .and. (ValType(nHeight) == "N")
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWBounds", nLeft, nTop, nWidth, nHeight)
-endif
+   IF (ValType(nLeft) == "N") .and. (ValType(nTop) == "N") .and. (ValType(nWidth) == "N") .and. (ValType(nHeight) == "N")
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWBounds", nLeft, nTop, nWidth, nHeight)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
-Description : Set the print preview window colors
-Version ....: 3.0.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
+
+   Description : Set the print preview window colors
+   Version ....: 3.0.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWColors(nBackground, nPaper, nShadow, nToolbar)
 
-if (ValType(nBackground) == "N") .and. (ValType(nPaper) == "N") .and. (ValType(nShadow) == "N") .and. (ValType(nToolbar) == "N")
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWColors", nBackground, nPaper, nShadow, nToolbar)
-endif
+   IF (ValType(nBackground) == "N") .and. (ValType(nPaper) == "N") .and. (ValType(nShadow) == "N") .and. (ValType(nToolbar) == "N")
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWColors", nBackground, nPaper, nShadow, nToolbar)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWZoomLevel(<n>) -> Self
-Description : Set the print preview window zoom level
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWZoomLevel(<n>) -> Self
+
+   Description : Set the print preview window zoom level
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetPWZoomLevel(nZoomLevel)
 
-if (ValType(nZoomLevel) == "N")
-   DllCall(::hDll, DLL_STDCALL, "PSSetPWZoomLevel", nZoomLevel)
-endif
+   IF (ValType(nZoomLevel) == "N")
+      DllCall(::hDll, DLL_STDCALL, "PSSetPWZoomLevel", nZoomLevel)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetRowCol(<n>, <n>) -> Self
-Description : Sets the number of rows and columns in the way PageScript for Clipper does
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetRowCol(<n>, <n>) -> Self
+
+   Description : Sets the number of rows and columns in the way PageScript for Clipper does
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetRowCol(nRow, nCol)
 
-if ValType(nRow) == "N" .and. ValType(nCol) == "N"
-   DllCall(::hDll, DLL_STDCALL, "PSSetRowCol", nRow, nCol)
-endif
+   IF ValType(nRow) == "N" .and. ValType(nCol) == "N"
+      DllCall(::hDll, DLL_STDCALL, "PSSetRowCol", nRow, nCol)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetTitle(<c>) -> Self
-Description : Sets the title of the document
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetTitle(<c>) -> Self
+
+   Description : Sets the title of the document
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetTitle(cTitle)
 
-if ValType(cTitle) == "C" .and. ! Empty(cTitle)
-   DllCall(::hDll, DLL_STDCALL, "PSSetTitle", cTitle)
-endif
+   IF ValType(cTitle) == "C" .and. ! Empty(cTitle)
+      DllCall(::hDll, DLL_STDCALL, "PSSetTitle", cTitle)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetUnit(<n>) -> Self
-Description : Sets the unit used to calculate dimensions and placement
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetUnit(<n>) -> Self
+
+   Description : Sets the unit used to calculate dimensions and placement
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetUnit(nUnit)
 
-if ValType(nUnit) == "N"
-   ::nUnit := nUnit
-   DllCall(::hDll, DLL_STDCALL, "PSSetUnit", nUnit)
-endif
+   IF ValType(nUnit) == "N"
+      ::nUnit := nUnit
+      DllCall(::hDll, DLL_STDCALL, "PSSetUnit", nUnit)
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetUseDIB(<l>) -> Self
-Description : Sets the use of DIB (Device Independant Bitmap) when printing bitmaps
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetUseDIB(<l>) -> Self
+
+   Description : Sets the use of DIB (Device Independant Bitmap) when printing bitmaps
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetUseDIB(lUseDIB)
 
-if ValType(lUseDIB) == "L"
-   DllCall(::hDll, DLL_STDCALL, "PSSetUseDIB", iif(lUseDIB, 1, 0))
-endif
+   IF ValType(lUseDIB) == "L"
+      DllCall(::hDll, DLL_STDCALL, "PSSetUseDIB", iif(lUseDIB, 1, 0))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #SetXerox(<l>) -> Self
-Description : Sets the use of Xerox compatible printing mode (Slower, but
-            compatible with all Xerox printers)
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetXerox(<l>) -> Self
+
+   Description : Sets the use of Xerox compatible printing mode (Slower, but
+   compatible with all Xerox printers)
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:SetXerox(lXerox)
 
-if ValType(lXerox) == "L"
-   DllCall(::hDll, DLL_STDCALL, "PSSetXerox", iif(lXerox, 1, 0))
-endif
+   IF ValType(lXerox) == "L"
+      DllCall(::hDll, DLL_STDCALL, "PSSetXerox", iif(lXerox, 1, 0))
+   ENDIF
 
-Return Self
+   RETURN Self
 
-/*-----------------------------------------------------------------------------
-Method .....: #PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
-                       <n>, <n>]) -> NIL
-Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
+
+   <n>, <n>]) -> NIL
+   Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:TextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, ;
-                           nStyle, nFColor, nBColor, nThick)
+      nStyle, nFColor, nBColor, nThick)
 
-Local Temp
+   LOCAL Temp
 
-if (ValType(cText) == "C" .and. Len(cText) < 65001)  // Must be a string and Length of less than 65001 bytes
-   cFont      := iif(cFont      == NIL, ""        ,     cFont     )
-   nJustify   := iif(nJustify   == NIL, APS_DEFAULT, Int(nJustify ))
-   nStyle     := iif(nStyle     == NIL, APS_DEFAULT, Int(nStyle   ))
-   nSize      := iif(nSize      == NIL, APS_DEFAULT,     nSize     )
-   nFColor    := iif(nFColor    == NIL, APS_DEFAULT, Int(nFColor  ))
-   nBColor    := iif(nBColor    == NIL, APS_DEFAULT, Int(nBColor  ))
-   nThick     := iif(nThick     == NIL, APS_DEFAULT,     nThick    )
+   IF (ValType(cText) == "C" .and. Len(cText) < 65001)  // Must be a string and Length of less than 65001 bytes
+      cFont      := iif(cFont      == NIL, ""        ,     cFont     )
+      nJustify   := iif(nJustify   == NIL, APS_DEFAULT, Int(nJustify ))
+      nStyle     := iif(nStyle     == NIL, APS_DEFAULT, Int(nStyle   ))
+      nSize      := iif(nSize      == NIL, APS_DEFAULT,     nSize     )
+      nFColor    := iif(nFColor    == NIL, APS_DEFAULT, Int(nFColor  ))
+      nBColor    := iif(nBColor    == NIL, APS_DEFAULT, Int(nBColor  ))
+      nThick     := iif(nThick     == NIL, APS_DEFAULT,     nThick    )
+
+      // Clipper compatible call
+      IF ::lClipper
+         Temp   := nSize
+         nSize  := nStyle
+         nStyle := Temp
+      ENDIF
+
+      DllCall(::hDll, DLL_STDCALL, "PSTextBoxEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cText, nJustify, cFont, PSFtoI(nSize), nStyle, nFColor, nBColor, PSFtoI(nThick))
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
+
+   Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   -----------------------------------------------------------------------------*/
+
+METHOD TPageScript:TextBoxEx(nTop, nLeft, nBottom, nRight, cText)
+
+   IF (ValType(cText) == "C" .and. Len(cText) < 65001 .and. ! (cText == ""))  // Must be a non empty string and Length of less than 65001 bytes
+      DllCall(::hDll, DLL_STDCALL, "PSTextBox", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cText)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #TextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
+
+   Description : Prints a string at position X,Y using parameters
+
+   PSTEXTOUT(YY1, XX2 + XXO, ' {continued)', pic, just, font, PTS3, APS_PLAIN)
+   -----------------------------------------------------------------------------*/
+
+METHOD TPageScript:TextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, ;
+      nStyle, nTFColor, nTBColor, nAngle)
+
+   LOCAL cValType
+   LOCAL Temp
+
+   cValType := ValType(xValue)
+   nTop     := iif(nTop     == NIL, APS_DEFAULT,     nTop     )
+   nLeft    := iif(nLeft    == NIL, APS_DEFAULT,     nLeft    )
+   cPicture := iif(cPicture == NIL, ""         ,     cPicture )
+   nJustify := iif(nJustify == NIL, APS_DEFAULT, Int(nJustify))
+   cFont    := iif(cFont    == NIL, ""         ,     cFont    )
+   nStyle   := iif(nStyle   == NIL, APS_DEFAULT, Int(nStyle  ))
+   nSize    := iif(nSize    == NIL, APS_DEFAULT,     nSize )
+   nTFColor := iif(nTFColor == NIL, APS_DEFAULT, Int(nTFColor))
+   nTBColor := iif(nTBColor == NIL, APS_DEFAULT, Int(nTBColor))
+   nAngle   := iif(nAngle   == NIL, APS_DEFAULT, Int(nAngle  ))
+
+   IF Empty(cPicture)
+      DO CASE
+      CASE cValType == "N"
+         cPicture := "@N"
+
+      CASE cValType == "D"
+         cPicture := "@D"
+
+      CASE cValType == "L"
+         cPicture := "@Y"
+
+      OTHERWISE
+         cPicture := "@X"
+
+      ENDCASE
+   ENDIF
+
+   xValue := Transform(xValue, cPicture)
+
+   IF nAngle <> APS_DEFAULT .and. (nAngle < 0 .or. nAngle > 360)
+      nAngle := 0
+   ENDIF
 
    // Clipper compatible call
-   if ::lClipper
+   IF ::lClipper
       Temp   := nSize
       nSize  := nStyle
       nStyle := Temp
-   endif
+   ENDIF
 
-   DllCall(::hDll, DLL_STDCALL, "PSTextBoxEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cText, nJustify, cFont, PSFtoI(nSize), nStyle, nFColor, nBColor, PSFtoI(nThick))
-endif
+   IF ! xValue == ""
+      DllCall(::hDll, DLL_STDCALL, "PSTextOutEx", PSFtoI(nTop), PSFtoI(nLeft), xValue, nJustify, cFont, PSFtoI(nSize), nStyle, nTFColor, nTBColor, nAngle)
+   ENDIF
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
-Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
------------------------------------------------------------------------------*/
-METHOD TPageScript:TextBoxEx(nTop, nLeft, nBottom, nRight, cText)
+   /*-----------------------------------------------------------------------------
 
-if (ValType(cText) == "C" .and. Len(cText) < 65001 .and. ! (cText == ""))  // Must be a non empty string and Length of less than 65001 bytes
-   DllCall(::hDll, DLL_STDCALL, "PSTextBox", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cText)
-endif
+   Method .....: #TextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
 
-Return NIL
+   Description : Prints a string at position X,Y using parameters
+   -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-Method .....: #TextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
-Description : Prints a string at position X,Y using parameters
-
-PSTEXTOUT(YY1, XX2 + XXO, ' {continued)', pic, just, font, PTS3, APS_PLAIN)
------------------------------------------------------------------------------*/
-METHOD TPageScript:TextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, ;
-                           nStyle, nTFColor, nTBColor, nAngle)
-
-Local cValType
-Local Temp
-
-cValType := ValType(xValue)
-nTop     := iif(nTop     == NIL, APS_DEFAULT,     nTop     )
-nLeft    := iif(nLeft    == NIL, APS_DEFAULT,     nLeft    )
-cPicture := iif(cPicture == NIL, ""         ,     cPicture )
-nJustify := iif(nJustify == NIL, APS_DEFAULT, Int(nJustify))
-cFont    := iif(cFont    == NIL, ""         ,     cFont    )
-nStyle   := iif(nStyle   == NIL, APS_DEFAULT, Int(nStyle  ))
-nSize    := iif(nSize    == NIL, APS_DEFAULT,     nSize )
-nTFColor := iif(nTFColor == NIL, APS_DEFAULT, Int(nTFColor))
-nTBColor := iif(nTBColor == NIL, APS_DEFAULT, Int(nTBColor))
-nAngle   := iif(nAngle   == NIL, APS_DEFAULT, Int(nAngle  ))
-
-if Empty(cPicture)
-   do case
-      case cValType == "N"
-         cPicture := "@N"
-
-      case cValType == "D"
-         cPicture := "@D"
-
-      case cValType == "L"
-         cPicture := "@Y"
-
-      otherwise
-         cPicture := "@X"
-
-   endcase
-endif
-
-xValue := Transform(xValue, cPicture)
-
-if nAngle <> APS_DEFAULT .and. (nAngle < 0 .or. nAngle > 360)
-   nAngle := 0
-endif
-
-// Clipper compatible call
-if ::lClipper
-   Temp   := nSize
-   nSize  := nStyle
-   nStyle := Temp
-endif
-
-if ! xValue == ""
-   DllCall(::hDll, DLL_STDCALL, "PSTextOutEx", PSFtoI(nTop), PSFtoI(nLeft), xValue, nJustify, cFont, PSFtoI(nSize), nStyle, nTFColor, nTBColor, nAngle)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Method .....: #TextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
-Description : Prints a string at position X,Y using parameters
------------------------------------------------------------------------------*/
 METHOD TPageScript:TextOutEx(nTop, nLeft, xValue, cPicture)
 
-Local cValType := ValType(xValue)
+   LOCAL cValType := ValType(xValue)
 
-nTop     := iif(nTop     == NIL, APS_DEFAULT,  nTop   )
-nLeft    := iif(nLeft    == NIL, APS_DEFAULT,  nLeft  )
-cPicture := iif(cPicture == NIL, ""         , cPicture)
+   nTop     := iif(nTop     == NIL, APS_DEFAULT,  nTop   )
+   nLeft    := iif(nLeft    == NIL, APS_DEFAULT,  nLeft  )
+   cPicture := iif(cPicture == NIL, ""         , cPicture)
 
-if Empty(cPicture)
-   do case
-      case cValType == "N"
+   IF Empty(cPicture)
+      DO CASE
+      CASE cValType == "N"
          cPicture := "@N"
 
-      case cValType == "D"
+      CASE cValType == "D"
          cPicture := "@D"
 
-      case cValType == "L"
+      CASE cValType == "L"
          cPicture := "@Y"
 
-      otherwise
+      OTHERWISE
          cPicture := "@X"
 
-   endcase
-endif
+      ENDCASE
+   ENDIF
 
-xValue := Transform(xValue, cPicture)
+   xValue := Transform(xValue, cPicture)
 
-if ! xValue == ""
-   DllCall(::hDll, DLL_STDCALL, "PSTextOut", PSFtoI(nTop), PSFtoI(nLeft), xValue)
-endif
+   IF ! xValue == ""
+      DllCall(::hDll, DLL_STDCALL, "PSTextOut", PSFtoI(nTop), PSFtoI(nLeft), xValue)
+   ENDIF
 
-Return NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Method .....: #WaterMark([<b>]) -> Previous WaterMark
-Description : Sets/Returns the current WaterMark
-Note .......: This method is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #WaterMark([<b>]) -> Previous WaterMark
+
+   Description : Sets/Returns the current WaterMark
+   Note .......: This method is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
 METHOD TPageScript:WaterMark(bWaterMark, nWaterMark)
 
-Local bOldWaterMark := ::bWaterMark
-Local nOldWaterMark := ::nWaterMark
+   LOCAL bOldWaterMark := ::bWaterMark
+   LOCAL nOldWaterMark := ::nWaterMark
 
-nWaterMark := iif(nWaterMark == NIL, ::nWaterMark, nWaterMark)
+   nWaterMark := iif(nWaterMark == NIL, ::nWaterMark, nWaterMark)
 
-if ValType(bWaterMark) $ "BU"
-   ::bWaterMark := bWaterMark
-   ::nWaterMark := nWaterMark
-endif
+   IF ValType(bWaterMark) $ "BU"
+      ::bWaterMark := bWaterMark
+      ::nWaterMark := nWaterMark
+   ENDIF
 
-Return {bOldWaterMark, nOldWaterMark}
+   RETURN {bOldWaterMark, nOldWaterMark}
 
+   /*-----------------------------------------------------------------------------
 
-/*-----------------------------------------------------------------------------
+   HELPER FUNCTIONS START HERE
 
+   -----------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
 
-                            HELPER FUNCTIONS START HERE
+   Method .....: #Buffer2String()
 
+   Description : Internal function. Returns a string from a buffer
+   -----------------------------------------------------------------------------*/
 
------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------
-Method .....: #Buffer2String()
-Description : Internal function. Returns a string from a buffer
------------------------------------------------------------------------------*/
 METHOD TPageScript:Buffer2String(cBuffer)
 
-Local cString
+   LOCAL cString
 
-cString := AllTrim(cBuffer)
+   cString := AllTrim(cBuffer)
 
-Return Left(cString, Len(cString) - 1)
+   RETURN Left(cString, Len(cString) - 1)
 
-/*-----------------------------------------------------------------------------
-Function ...: #PSFtoI(AValue) -> Value
-Description : Converts a Double to an Integer for PSInt compatibility
------------------------------------------------------------------------------*/
-Function PSFtoI(AValue)
+   /*-----------------------------------------------------------------------------
 
-Return Int(AValue * 10000)
+   Function ...: #PSFtoI(AValue) -> Value
 
-/*-----------------------------------------------------------------------------
-Function ...: #PSItoF(AValue) -> Value
-Description : Converts a PSInt to a Double for PSInt compatibility
------------------------------------------------------------------------------*/
-Function PSItoF(AValue)
+   Description : Converts a Double to an Integer for PSInt compatibility
+   -----------------------------------------------------------------------------*/
 
-Return Round(AValue / 10000, 4)
+FUNCTION PSFtoI(AValue)
 
+   RETURN Int(AValue * 10000)
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
+   Function ...: #PSItoF(AValue) -> Value
 
-                            FUNCTIONS START HERE
+   Description : Converts a PSInt to a Double for PSInt compatibility
+   -----------------------------------------------------------------------------*/
 
+FUNCTION PSItoF(AValue)
 
------------------------------------------------------------------------------*/
+   RETURN Round(AValue / 10000, 4)
 
-/*-----------------------------------------------------------------------------
-Function ...: PSInit() -> nErrorCode
-Description : Initialization of the printer driver
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSInit()
+   /*-----------------------------------------------------------------------------
 
-// If not Initialized, then do it !!!
-if ! slInitialized
-   oPScript      := TPageScript():New()
-   slInitialized := (oPScript:nError == PSE_NOERROR)
-endif
+   FUNCTIONS START HERE
 
-Return oPScript:nError
+   -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-Function ...: PSAbort() -> NIL
-Description : Abort the current document
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSAbort()
+   /*-----------------------------------------------------------------------------
 
-if slInitialized
-   oPScript:Abort()
-endif
+   Function ...: PSInit() -> nErrorCode
 
-Return NIL
+   Description : Initialization of the printer driver
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-Function ...: PSAsciiToAnsi([<l>]) -> lOldValue
-Description : Set/Get the conversion from Ascii to Ansi for text strings.
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSAsciiToAnsi(lValue)
+FUNCTION PSInit()
 
-Local lOldValue := .f.
+   // If not Initialized, then do it !!!
+   IF ! slInitialized
+      oPScript      := TPageScript():New()
+      slInitialized := (oPScript:nError == PSE_NOERROR)
+   ENDIF
 
-if slInitialized
-   lOldValue := oPScript:GetAsciiToAnsi()
-   oPScript:SetAsciiToAnsi(lValue)
-endif
+   RETURN oPScript:nError
 
-Return lOldValue
+   /*-----------------------------------------------------------------------------
 
-Function PSBarCodeEx(nTop, nLeft, cCode, nHeight, nThick, nType, lValidate)
+   Function ...: PSAbort() -> NIL
 
-   if slInitialized
-    oPScript:BarCodeEx(nTop, nLeft, cCode, nHeight, nThick, nType, lValidate)
-   endif
+   Description : Abort the current document
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-Return NIL
+FUNCTION PSAbort()
 
-/*-----------------------------------------------------------------------------
-Function ...: PSQRCode(<n>, <n>, <c>, [<n>,<n>]) -> NIL
-Description : Print a QRCode
-Author .....: R.Visscher
-Date .......: June 2017
------------------------------------------------------------------------------*/
-Function PSQRCode(nTop,nLeft,cCode,nVersion,nSize,nModuleWidth)
+   IF slInitialized
+      oPScript:Abort()
+   ENDIF
 
-if slInitialized
-   oPScript:QRCode(nTop, nLeft, cCode, nVersion,nSize,nModuleWidth)
-endif
+   RETURN NIL
 
-Return NIL
- 
+   /*-----------------------------------------------------------------------------
 
-/*-----------------------------------------------------------------------------
-Function ...: PSBarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>, <l>]) -> NIL
-Description : Print a barcode with choice of Code 39 and Code 128
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSBarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVertical)
-
-if slInitialized
-   oPScript:BarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVertical)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSBeginDoc(<n>, <c>, <n>, <n>) -> nError
-Description : Starts a new print job with parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSBeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex, nPaperBin)
-
-Local nError := PSE_NOTINITIALIZED
-
-if slInitialized
-   nError := oPScript:BeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex, nPaperBin)
-endif
-
-Return nError
-
-/*-----------------------------------------------------------------------------
-Function ...: PSBeginDocEx() -> nError
-Description : Starts a new print job with defaults parameters
-Author .....: Stephan St-Denis
-Date .......: July 2006
------------------------------------------------------------------------------*/
-Function PSBeginDocEx()
-
-Local nError := PSE_NOTINITIALIZED
-
-if slInitialized
-   nError := oPScript:BeginDocEx()
-endif
-
-Return nError
-
-/*-----------------------------------------------------------------------------
-Function ...: PSBeginEmuDoc(<n>, <c>, <n>, <n>, <n>, <c>) -> lError
-Description :
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSBeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
-
-Local nError := PSE_NOTINITIALIZED
-
-if slInitialized
-   nError := oPScript:BeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
-endif
-
-Return nError
-
-/*-----------------------------------------------------------------------------
-Function ...: PSBeginRawDoc(<n>, <c>, <n>, <n>) -> nError
-Description : Starts the printer driver with some parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSBeginRawDoc(nPrinter, cTitle)
-
-Local nError := PSE_NOTINITIALIZED
-
-if slInitialized
-   nError := oPScript:BeginRawDoc(nPrinter, cTitle)
-endif
-
-Return nError
-
-/*-----------------------------------------------------------------------------
-Function ...: PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> NIL
-Description : Draw a bitmap on the document.
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSBitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio)
-
-if slInitialized
-   oPScript:Bitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSEllipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> NIL
-Description : Draw an ellipse
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSEllipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern)
-
-if slInitialized
-   oPScript:Ellipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSEllipseEx(<n>, <n>, <n>, <n>) -> NIL
-Description : Draw an ellipse
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSEllipseEx(nTop, nLeft, nBottom, nRight)
-
-if slInitialized
-   oPScript:EllipseEx(nTop, nLeft, nBottom, nRight)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSEndDoc() -> NIL
-Description : Signal the end of the document
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSEndDoc()
-
-if slInitialized
-   oPScript:EndDoc()
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSEndEmuDoc() -> NIL
-Description : Signal the end of the document
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSEndEmuDoc()
-
-if slInitialized
-   oPScript:EndEmuDoc()
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSEndRawDoc() -> NIL
-Description : Signal the end of the document
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSEndRawDoc()
-
-if slInitialized
-   oPScript:EndRawDoc()
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSFindPrinter(<c>) -> nPos
-Description : Search for a printer name and returns its position within the array
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSFindPrinter(cPrinter)
-
-Local nPos := -1
-
-if slInitialized
-   nPos := oPScript:FindPrinter(cPrinter)
-endif
-
-Return nPos
-
-/*-----------------------------------------------------------------------------
-Function ...: PSFrame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> NIL
-Description : Draw a frame
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSFrame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern, nRadius)
-
-if slInitialized
-   oPScript:Frame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern, nRadius)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSFrameEx(<n>, <n>, <n>, <n>) -> NIL
-Description : Draw a frame
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSFrameEx(nTop, nLeft, nBottom, nRight, nRadius)
-
-if slInitialized
-   oPScript:FrameEx(nTop, nLeft, nBottom, nRight, nRadius)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetAsciiToAnsi() -> lValue
-Description : Retreive the translation setting
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetAsciiToAnsi()
-
-Local lValue := .f.
-
-if slInitialized
-   lValue := oPScript:GetAsciiToAnsi()
-endif
-
-Return lValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetBorderColor() -> nValue
-Description : Returns the current border color
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetBorderColor()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetBorderColor()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetBorderThickness() -> nValue
-Description : Returns the current border thickness
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetBorderThickness()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetBorderThickness()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetCaps() -> aCaps
-Description : Retreive the printer capabilities of the selected printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
-Note .......: Compatibility
------------------------------------------------------------------------------*/
-Function PSGetCaps()
-
-Return PSGetPrinterCaps()
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetCoorSystem() -> nValue
-Description : Returns the current coordinate system
-Author .....: Stephan St-Denis
-Date .......: April 2006
------------------------------------------------------------------------------*/
-Function PSGetCoorSystem()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetCoorSystem()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetCopies() -> nValue
-Description : Returns the number of copies set for the current print job
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetCopies()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetCopies()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetCPI() -> nValue
-Description : Returns the number of character per inch in use (text mode only)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetCPI()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetCPI()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetDecimalSep() -> cValue
-Description : Returns the decimal separator in use
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetDecimalSep()
-
-Local cValue := "?"
-
-if slInitialized
-   cValue := oPScript:GetDecimalSep()
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetDefPrinter() -> nValue
-Description : Returns the default Windows printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
-Note .......: Compatibility
------------------------------------------------------------------------------*/
-Function PSGetDefPrinter()
-
-Return PSGetDefaultPrinter()
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetDefaultPrinter() -> nValue
-Description : Returns the default Windows printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetDefaultPrinter()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetDefaultPrinter()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetDuplex() -> nValue
-Description : Returns the current Duplex mode
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetDuplex()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetDuplex()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFillColor() -> nValue
-Description : Returns the current fill color
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFillColor()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFillColor()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFillPattern() -> nValue
-Description : Returns the current fill pattern
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFillPattern()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFillPattern()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontAngle() -> nValue
-Description : Returns the current font angle
-Author .....: Stephan St-Denis
-Date .......: April 2006
------------------------------------------------------------------------------*/
-Function PSGetFontAngle()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontAngle()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontCount() -> nValue
-Description : Returns the current font count
-Author .....: Stephan St-Denis
-Date .......: April 2006
------------------------------------------------------------------------------*/
-Function PSGetFontCount()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontCount()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFonts() -> aFonts
-Description : Retreive the printer fonts for the selected printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetFonts()
-
-Local aFonts := {"Arial", "Courier New", "System", "Times New Roman", "Verdana", "WingDings"}
-
-if slInitialized
-   aFonts := oPScript:GetFonts()
-endif
-
-Return aClone(aFonts)
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontName() -> cValue
-Description : Returns the current font name
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontName()
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetFontName()
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontNames(<n>) -> cValue
-Description : Returns the font name from its index position
-Author .....: Stephan St-Denis
-Date .......: April 2006
------------------------------------------------------------------------------*/
-Function PSGetFontNames(nFontIndex)
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetFontNames(nFontIndex)
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontStyle() -> nValue
-Description : Returns the current font style
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontStyle()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontStyle()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontSize() -> nValue
-Description : Returns the current font size
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontSize()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontSize()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontBColor() -> nValue
-Description : Returns the current Font background color
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontBColor()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontBColor()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontFColor() -> nValue
-Description : Returns the current font Foreground color
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontFColor()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontFColor()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetJustify() -> nValue
-Description : Returns the current text justification
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetJustify()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetJustify()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetFontJustify() -> nValue
-Description : Returns the current text justification
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetFontJustify()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetFontJustify()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetLPI() -> nValue
-Description : Returns the current number of lines per inch (text mode only)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetLPI()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetLPI()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetMaxHeight() -> nValue
-Description :
-Author .....: Stephan St-Denis
-Date .......: May 2005
------------------------------------------------------------------------------*/
-Function PSGetMaxHeight()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetMaxHeight()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetMaxWidth() -> nValue
-Description :
-Author .....: Stephan St-Denis
-Date .......: May 2005
------------------------------------------------------------------------------*/
-Function PSGetMaxWidth()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetMaxWidth()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetOrientation() -> nValue
-Description : Returns the current page orientation (Portrait or Landscape)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetOrientation()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetOrientation()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPageSize() -> nValue
-Description : Retreive the printer paper size
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetPageSize()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPageSize()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperBin() -> nValue
-Description : Returns the current paper bin
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetPaperBin()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPaperBin()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperBins() -> aBinArray
-Description : Returns a two dimensions array with bins/trays numbers/names
-Author .....: Stephan St-Denis
-Date .......: May 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperBins()
-
-Local aBins     := {}
-Local nBinCount := 0
-Local nLoop
-
-if slInitialized
-   nBinCount := PSGetPaperBinCount()
-
-   for nLoop := 1 to nBinCount
-      aAdd(aBins, {PSGetPaperBinNumbers(nLoop), PSGetPaperBinNames(nLoop)} )
-   next nLoop
-endif
-
-Return aClone(aBins)
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperBinCount() -> nValue
-Description : Retreive the number of paper bins installed
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperBinCount()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPaperBinCount()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperBinNames() -> cValue
-Description : Retrieve the name of any of the available paper bin
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperBinNames(nIndex)
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetPaperBinNames(nIndex)
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperBinNumbers() -> nValue
-Description : Retrieve the number of any of the available paper bin
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperBinNumbers(nIndex)
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPaperBinNumbers(nIndex)
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperCount() -> nValue
-Description : Retreive the number of paper installed
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperCount()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPaperCount()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperNames(<nIndex>) -> cValue
-Description : Retreive the name of a paper type based on its index position
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperNames(nIndex)
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetPaperNames(nIndex)
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPaperNumbers() -> nValue
-Description : Retreive the number of the paper type pointed by nIndex
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSGetPaperNumbers(nIndex)
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPaperNumbers(nIndex)
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinter() -> nValue
-Description : Returns the currently selected printer
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinter()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPrinter()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterCount() -> nValue
-Description : Returns the number of installed printer drivers
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterCount()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPrinterCount()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterNames(nIndex) -> cValue
-Description : Returns the name of the printer pointed by nIndex
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterNames(nIndex)
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetPrinterNames(nIndex)
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinters() -> aClone(saPrinters)
-Description : Returns the list of available printers for this computer
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinters()
-
-Local aPrinters := {}
-
-if slInitialized
-   aPrinters := oPScript:GetPrinters()
-endif
-
-Return aPrinters
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterCaps() -> aCaps
-Description : Retreive the printer capabilities of the selected printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterCaps()
-
-Local aCaps := {-1, -1, -1, -1, -1, -1, -1, -1, -1}
-
-if slInitialized
-   aCaps := oPScript:GetPrinterCaps()
-endif
-
-Return aCaps
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterCapsEx(nCap)
-Description : Retreive the printer capabilities of the selected printer
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterCapsEx(nCap)
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPrinterCapsEx(nCap)
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterHandle() -> nValue
-Description : Returns the printer handle (for direct API calls)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterHandle()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetPrinterHandle()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetPrinterName() -> cValue
-Description : Returns the name of the printer number passed in parameter
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetPrinterName(nPrinter)
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetPrinterName(nPrinter)
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetTextHeight() -> nValue
-Description : Returns the height of the text in the current unit
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetTextHeight(cText)
-
-Local nValue := 0
-
-if slInitialized
-   nValue := oPScript:GetTextHeight(cText)
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetTextWidth() -> nValue
-Description : Returns the width of the text in the current unit
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetTextWidth(cText)
-
-Local nValue := 0
-
-if slInitialized
-   nValue := oPScript:GetTextWidth(cText)
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetTitle() -> cValue
-Description : Returns the title of the print job
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetTitle()
-
-Local cValue := ""
-
-if slInitialized
-   cValue := oPScript:GetTitle()
-endif
-
-Return cValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetUnit() -> nValue
-Description : Returns the unit in use
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetUnit()
-
-Local nValue := -1
-
-if slInitialized
-   nValue := oPScript:GetUnit()
-endif
-
-Return nValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetUseDIB() -> lValue
-Description : Returns the current setting for DIB (Device Independant Bitmap)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetUseDIB()
-
-Local lValue := .t.
-
-if slInitialized
-   lValue := oPScript:GetUseDIB()
-endif
-
-Return lValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetVersion() -> cValue
-Description : Returns the current PageScript version number as a character string
-Author .....: Stephan St-Denis
-Date .......: April 2006
------------------------------------------------------------------------------*/
-Function PSGetVersion()
-
-Return oPScript:GetVersion()
-
-/*-----------------------------------------------------------------------------
-Function ...: PSGetXerox() -> lValue
-Description : Returns the current setting for Xerox compatibility
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSGetXerox()
-
-Local lValue := .f.
-
-if slInitialized
-   lValue := oPScript:GetXerox()
-endif
-
-Return lValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSIsPreviewVisible() -> lValue
-Description : Returns .t. if Print Preview Window is shown
-Author .....: Stephan St-Denis
-Date .......: May 2012
------------------------------------------------------------------------------*/
-Function PSIsPreviewVisible()
-
-Local lValue := .f.
-
-if slInitialized
-   lValue := oPScript:IsPreviewVisible()
-endif
-
-Return lValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSLine(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
-Description : Draw a line
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSLine(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
-
-if slInitialized
-   oPScript:Line(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSLineEx(<n>, <n>, <n>, <n>) -> NIL
-Description : Draw a line
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSLineEx(nTop, nLeft, nBottom, nRight)
-
-if slInitialized
-   oPScript:LineEx(nTop, nLeft, nBottom, nRight)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSNewPage() -> NIL
-Description : Signal the end of page, page eject
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSNewPage()
-
-if slInitialized
-   oPScript:NewPage()
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSPrintDialog() -> lPrint
-Description : Shows the printer dialog and returns if may print or not
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSPrintDialog()
-
-Local lPrint := .f.
-
-if slInitialized
-   lPrint := oPScript:PrintDialog()
-endif
-
-Return lPrint
-
-/*-----------------------------------------------------------------------------
-Function ...: PSPrintFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-Description : Prints the file pointed by cFile and optionnaly deletes it.
-              EMULATION mode service.
-Author .....: Stephan St-Denis
-Date .......: September 2002
-Note .......: Compatibility
------------------------------------------------------------------------------*/
-Function PSPrintFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
-
-Local lSuccess := .f.
-
-if slInitialized
-   lSuccess := oPScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
-endif
-
-Return lSuccess
-
-/*-----------------------------------------------------------------------------
-Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-Description : Prints the file pointed by cFile and optionnaly deletes it.
-              EMULATION mode service.
-Author .....: Stephan St-Denis
-Date .......: September 2002
------------------------------------------------------------------------------*/
-Function PSPrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
-
-Local lSuccess := .f.
-
-if slInitialized
-   lSuccess := oPScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
-endif
-
-Return lSuccess
-
-/*-----------------------------------------------------------------------------
-Function ...: PSPrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
-Description : Prints the file pointed by cFile and optionnaly deletes it.
-              No processing on file. The file is sent "as is" to the printer.
-Author .....: Stephan St-Denis
-Date .......: September 2002
------------------------------------------------------------------------------*/
-Function PSPrintRawFile(cFileName, lDelete, nPrinter, cTitle)
-
-Local lSuccess := .f.
-
-if slInitialized
-   lSuccess := oPScript:PrintRawFile(cFileName, lDelete, nPrinter, cTitle)
-endif
-
-Return lSuccess
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetAsciiToAnsi([<l>]) -> NIL
-Description : Set the conversion from Ascii to Ansi for text strings.
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetAsciiToAnsi(lValue)
-
-Local OldValue := oPScript:GetAsciiToAnsi()
-
-if slInitialized
-   oPScript:SetAsciiToAnsi(lValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetBin(<n>) -> NIL
-Description : Sets the paper bin
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetBin(nPaperBin)
-
-Local OldValue := oPScript:GetPaperBin()
-
-PSSetPaperBin(nPaperBin)
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetBorder([<n>, <n>]) -> NIL
-Description : Sets the attributes used to draw lines and borders
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetBorder(nThickness, nBorderColor)
-
-Local OldValue := {oPScript:GetBorderThickness(), oPScript:GetBorderColor()}
-
-if slInitialized
-   oPScript:SetBorder(nThickness, nBorderColor)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetBorderColor(<n>) -> NIL
-Description : Sets the border color used to draw lines and borders
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetBorderColor(nBorderColor)
-
-Local OldValue := oPScript:GetBorderColor()
-
-if slInitialized
-   oPScript:SetBorderColor(nBorderColor)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetBorderThickness(<n>) -> NIL
-Description : Sets the border thickness used to draw lines and borders
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetBorderThickness(nThickness)
-
-Local OldValue := oPScript:GetBorderThickness()
-
-if slInitialized
-   oPScript:SetBorderThickness(nThickness)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Method .....: #PSSetClipperComp(<l>) -> NIL
-Description : Set Clipper compatible calls for TextOut() and TextBox()
------------------------------------------------------------------------------*/
-Function PSSetClipperComp(lClipper)
-
-oPScript:SetClipperComp(lClipper)
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetCoorSystem(<n>) -> NIL
-Description : Sets the Coordinate system
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetCoorSystem(nCoor)
-
-Local OldValue := oPScript:GetCoorSystem()
-
-if slInitialized
-   oPScript:SetCoorSystem(nCoor)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetCopies([<n>]) -> NIL
-Description : Sets the number of copies
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetCopies(nCopies)
-
-Local OldValue := oPScript:GetCopies()
-
-if slInitialized
-   oPScript:SetCopies(nCopies)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetCPI([<n>]) -> NIL
-Description : Sets the number of characters per inch (Text mode only)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSSetCPI(nCPI)
-
-Local OldValue := oPScript:GetCPI()
-
-if slInitialized
-   oPScript:SetCPI(nCPI)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetDecimalSep([<c>]) -> cOldSeparator
-Description : Sets the decimal separator character
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetDecimalSep(cSep)
-
-Local OldValue := oPScript:GetDecimalSep()
-
-if slInitialized
-   oPScript:SetDecimalSep(cSep)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetDevice([<n>]) -> NIL
-Description : Sets the device for the next print job
-Author .....: Stephan St-Denis
-Date .......: January 2007
------------------------------------------------------------------------------*/
-Function PSSetDevice(nDevice)
-
-if slInitialized
-   oPScript:SetDevice(nDevice)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetDirectPrint(<l>) -> NIL
-Description : Sets the direct print mode (use for very special cases)
-Author .....: Stephan St-Denis
-Date .......: March 2010
------------------------------------------------------------------------------*/
-Function PSSetDirectPrint(lDirect)
-
-if slInitialized
-   oPScript:SetDirectPrint(lDirect)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetDuplex([<n>]) -> NIL
-Description : Sets the Duplex mode
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetDuplex(nDuplex)
-
-Local OldValue := oPScript:GetDuplex()
-
-if slInitialized
-   oPScript:SetDuplex(nDuplex)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFileName([<c>]) -> NIL
-Description : Sets the file name of a PDF file document
-Author .....: Stephan St-Denis
-Date .......: January 2007
------------------------------------------------------------------------------*/
-Function PSSetFileName(cFileName)
-
-if slInitialized
-   oPScript:SetFileName(cFileName)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFill(<n>, [<n>]) -> NIL
-Description : Sets the color used to fill shapes, like boxes and ellipes
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetFill(nFillColor, nFillPattern)
-
-Local OldValue := {oPScript:GetFillColor(), oPScript:GetFillPattern()}
-
-if slInitialized
-   oPScript:SetFill(nFillColor, nFillPattern)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFillColor(<n>) -> NIL
-Description : Sets the color used to fill shapes, like boxes and ellipes
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetFillColor(nFillColor)
-
-Local OldValue := oPScript:GetFillColor()
-
-if slInitialized
-   oPScript:SetFillColor(nFillColor)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFillPattern(<n>) -> NIL
-Description : Sets the pattern used to fill shapes, like boxes and ellipes
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetFillPattern(nFillPattern)
-
-Local OldValue := oPScript:GetFillPattern()
-
-if slInitialized
-   oPScript:SetFillPattern(nFillPattern)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFont([<n>, <n>, <n>, <n>, <n>]) -> NIL
-Description : Sets the font attributes used by each call to PSTextOut()
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetFont(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
-
-Local OldValue := PSSetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontAttributes([<n>, <n>, <n>, <n>, <n>]) -> NIL
-Description : Sets the font attributes used by each call to PSTextOut()
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
-
-Local OldValue := {oPScript:GetFontName()  , oPScript:GetFontStyle() , oPScript:GetFontSize(), ;
-                   oPScript:GetFontFColor(), oPScript:GetFontBColor(), oPScript:GetFontAngle()}
-
-if slInitialized
-   oPScript:SetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontAngle(<n>) -> NIL
-Description : Sets the font angle
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontAngle(nValue)
-
-Local OldValue := oPScript:GetFontAngle()
-
-if slInitialized
-   oPScript:SetFontAngle(nValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontBColor(<n>) -> NIL
-Description : Sets the text background color
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontBColor(nValue)
-
-Local OldValue := oPScript:GetFontBColor()
-
-if slInitialized
-   oPScript:SetFontBColor(nValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontFColor(<n>) -> NIL
-Description : Sets the text foreground color
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontFColor(nValue)
-
-Local OldValue := oPScript:GetFontFColor()
-
-if slInitialized
-   oPScript:SetFontFColor(nValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontName(<c>) -> NIL
-Description : Sets the text foreground color
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontName(cValue)
-
-Local OldValue := oPScript:GetFontName()
-
-if slInitialized
-   oPScript:SetFontName(cValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontSize(<n>) -> NIL
-Description : Sets the text size in points
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontSize(nValue)
-
-Local OldValue := oPScript:GetFontSize()
-
-if slInitialized
-   oPScript:SetFontSize(nValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetFontStyle(<n>) -> NIL
-Description : Sets the font style
-Author .....: Stephan St-Denis
-Date .......: March 2006
------------------------------------------------------------------------------*/
-Function PSSetFontStyle(nValue)
-
-Local OldValue := oPScript:GetFontStyle()
-
-if slInitialized
-   oPScript:SetFontStyle(nValue)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetJustify(<n>) -> NIL
-Description : Sets justification for TextOut
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetJustify(nJustify)
-
-Local OldValue := oPScript:GetJustify()
-
-if slInitialized
-   oPScript:SetJustify(nJustify)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetLPI([<n>]) -> NIL
-Description : Sets The number of Lines per inch (Text mode only)
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSSetLPI(nLPI)
-
-Local OldValue := oPScript:GetLPI()
-
-if slInitialized
-   oPScript:SetLPI(nLPI)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetOrientation([<n>]) -> NIL
-Description : Sets the paper orientation
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetOrientation(nOrientation)
-
-Local OldValue := oPScript:GetOrientation()
-
-if slInitialized
-   oPScript:SetOrientation(nOrientation)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPaperBin(<n>) -> NIL
-Description : Sets the paper bin
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetPaperBin(nPaperBin)
-
-Local OldValue := oPScript:GetPaperBin()
-
-if slInitialized
-   oPScript:SetPaperBin(nPaperBin)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPageSize(<n>) -> NIL
-Description : Sets the page size to a predifined size
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetPageSize(nPageSize)
-
-Local OldValue := oPScript:GetPageSize()
-
-if slInitialized
-   oPScript:SetPageSize(nPageSize)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPDFCharSet(<N>) -> NIL
-Description : Set the character set to be use when printing text in PDF docs
-Author .....: Stephan St-Denis
-Date .......: October 2011
------------------------------------------------------------------------------*/
-Function PSSetPDFCharSet(nCharSet)
-
-if slInitialized
-   oPScript:SetPDFCharSet(nCharSet)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPDFOwnerPassword(<C>) -> NIL
-Description : Set the encryption password for PDF documents
-Author .....: Stephan St-Denis
-Date .......: April 2011
------------------------------------------------------------------------------*/
-Function PSSetPDFOwnerPassword(cPassword)
-
-if slInitialized
-   oPScript:SetPDFOwnerPassword(cPassword)
-endif
-
-Return NIL
-
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPDFEncoding(<N>) -> NIL
-Description : Set the internal encoding for PDF documents
-Author .....: R.Visscher
-Date .......: July 2017
------------------------------------------------------------------------------*/
-Function PSSetPDFEncoding(nEncoding)
-
-if slInitialized
-   oPScript:SetPDFEncoding(nEncoding)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPDFVersion(<N>) -> NIL
-Description : Set the version number for PDF documents
-Author .....: R.Visscher
-Date .......: July 2017
------------------------------------------------------------------------------*/
-Function PSSetPDFVersion(nVersion)
-
-if slInitialized
-   oPScript:SetPDFEncoding(nVersion)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSShowPDF(<L>) -> NIL
-Description : Show PDF after creation in default PDF reader
-Author .....: R.Visscher
-Date .......: July 2017
------------------------------------------------------------------------------*/
-Function PSShowPDF(lShow)
-
-if slInitialized
-   oPScript:ShowPDF(lShow)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPDFEmbeddedFonts(<N>) -> NIL
-Description : Set the embedding for PDF documents ( none/sub/full )
-Author .....: R.Visscher
-Date .......: July 2017
------------------------------------------------------------------------------*/
-Function PSSetPDFEmbeddedFonts(nEmbedded)
-
-if slInitialized
-   oPScript:SetPDFEmbeddedFonts(nEmbedded)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPrinter([<n>]) -> NIL
-Description : Sets the printer
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSSetPrinter(nPrinter)
-
-Local OldValue := oPScript:GetPrinter()
-
-if slInitialized
-   oPScript:SetPrinter(nPrinter)
-endif
-
-Return OldValue
-
-/*-----------------------------------------------------------------------------
-Function ...: #PSSetPWState(<n>) -> NIL
-Description : Set the print preview window state
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWState(nState)
-
-if slInitialized
-   oPScript:SetPWState(nState)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetPWPosition(<n>, <n>) -> NIL
-Description : Set the print preview window position
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWPosition(nLeft, nTop)
-
-if slInitialized
-   oPScript:SetPWPosition(nLeft, nTop)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: #PSSetPWSize(<n>, <n>) -> NIL
-Description : Set the print preview window size (-1, -1 = Auto size)
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWSize(nWidth, nHeight)
-
-if slInitialized
-   oPScript:SetPWSize(nWidth, nHeight)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: #PSSetPWBounds(<n>, <n>, <n>, <n>) -> NIL
-Description : Set the print preview window bounds (position and size at the same time)
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWBounds(nLeft, nTop, nWidth, nHeight)
-
-if slInitialized
-   oPScript:SetPWBounds(nLeft, nTop, nWidth, nHeight)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: #PSSetPWZoomLevel(<n>) -> NIL
-Description : Set the print preview window zoom level
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWZoomLevel(nZoomLevel)
-
-if slInitialized
-   oPScript:SetPWZoomLevel(nZoomLevel)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: #PSSetPWColors(<n>, <n>, <n>, <n>)) -> NIL
-Description : Set the print preview window zoom level
-Version ....: 2.1.0.0
------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------
-Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
-Description : Set the print preview window colors
-Version ....: 3.0.0.0
------------------------------------------------------------------------------*/
-Function PSSetPWColors(nBackground, nPaper, nShadow, nToolbar)
-
-if slInitialized
-   oPScript:SetPWColors(nBackground, nPaper, nShadow, nToolbar)
-endif
-
-Return NIL
-
-/*-----------------------------------------------------------------------------
-Function ...: PSSetRowCol([<n>, <n>]) -> {60, 80}
-Description : Sets the number of virtual Rows and Columns in APS_TEXT unit.
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSSetRowCol(nRow, nCol)
-
-Local nCPI := 10
-Local nLPI := 6
-
-if slInitialized
-   if oPScript:nUnit == APS_CLIP
-      oPScript:SetRowCol(nRow, nCol)
-   else
-      do case
-         case nCol >=   1 .and. nCol <=  64
+   Function ...: PSAsciiToAnsi([<l>]) -> lOldValue
+
+   Description : Set/Get the conversion from Ascii to Ansi for text strings.
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSAsciiToAnsi(lValue)
+
+   LOCAL lOldValue := .f.
+
+   IF slInitialized
+      lOldValue := oPScript:GetAsciiToAnsi()
+      oPScript:SetAsciiToAnsi(lValue)
+   ENDIF
+
+   RETURN lOldValue
+
+FUNCTION PSBarCodeEx(nTop, nLeft, cCode, nHeight, nThick, nType, lValidate)
+
+   IF slInitialized
+      oPScript:BarCodeEx(nTop, nLeft, cCode, nHeight, nThick, nType, lValidate)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSQRCode(<n>, <n>, <c>, [<n>,<n>]) -> NIL
+
+   Description : Print a QRCode
+   Author .....: R.Visscher
+   Date .......: June 2017
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSQRCode(nTop,nLeft,cCode,nVersion,nSize,nModuleWidth)
+
+   IF slInitialized
+      oPScript:QRCode(nTop, nLeft, cCode, nVersion,nSize,nModuleWidth)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>, <l>]) -> NIL
+
+   Description : Print a barcode with choice of Code 39 and Code 128
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVertical)
+
+   IF slInitialized
+      oPScript:BarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVertical)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBeginDoc(<n>, <c>, <n>, <n>) -> nError
+
+   Description : Starts a new print job with parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex, nPaperBin)
+
+   LOCAL nError := PSE_NOTINITIALIZED
+
+   IF slInitialized
+      nError := oPScript:BeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex, nPaperBin)
+   ENDIF
+
+   RETURN nError
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBeginDocEx() -> nError
+
+   Description : Starts a new print job with defaults parameters
+   Author .....: Stephan St-Denis
+   Date .......: July 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBeginDocEx()
+
+   LOCAL nError := PSE_NOTINITIALIZED
+
+   IF slInitialized
+      nError := oPScript:BeginDocEx()
+   ENDIF
+
+   RETURN nError
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBeginEmuDoc(<n>, <c>, <n>, <n>, <n>, <c>) -> lError
+
+   Description :
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
+
+   LOCAL nError := PSE_NOTINITIALIZED
+
+   IF slInitialized
+      nError := oPScript:BeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
+   ENDIF
+
+   RETURN nError
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBeginRawDoc(<n>, <c>, <n>, <n>) -> nError
+
+   Description : Starts the printer driver with some parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBeginRawDoc(nPrinter, cTitle)
+
+   LOCAL nError := PSE_NOTINITIALIZED
+
+   IF slInitialized
+      nError := oPScript:BeginRawDoc(nPrinter, cTitle)
+   ENDIF
+
+   RETURN nError
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> NIL
+
+   Description : Draw a bitmap on the document.
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSBitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio)
+
+   IF slInitialized
+      oPScript:Bitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSEllipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> NIL
+
+   Description : Draw an ellipse
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSEllipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern)
+
+   IF slInitialized
+      oPScript:Ellipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSEllipseEx(<n>, <n>, <n>, <n>) -> NIL
+
+   Description : Draw an ellipse
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSEllipseEx(nTop, nLeft, nBottom, nRight)
+
+   IF slInitialized
+      oPScript:EllipseEx(nTop, nLeft, nBottom, nRight)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSEndDoc() -> NIL
+
+   Description : Signal the end of the document
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSEndDoc()
+
+   IF slInitialized
+      oPScript:EndDoc()
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSEndEmuDoc() -> NIL
+
+   Description : Signal the end of the document
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSEndEmuDoc()
+
+   IF slInitialized
+      oPScript:EndEmuDoc()
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSEndRawDoc() -> NIL
+
+   Description : Signal the end of the document
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSEndRawDoc()
+
+   IF slInitialized
+      oPScript:EndRawDoc()
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSFindPrinter(<c>) -> nPos
+
+   Description : Search for a printer name and returns its position within the array
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSFindPrinter(cPrinter)
+
+   LOCAL nPos := -1
+
+   IF slInitialized
+      nPos := oPScript:FindPrinter(cPrinter)
+   ENDIF
+
+   RETURN nPos
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSFrame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> NIL
+
+   Description : Draw a frame
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSFrame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern, nRadius)
+
+   IF slInitialized
+      oPScript:Frame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor, nPattern, nRadius)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSFrameEx(<n>, <n>, <n>, <n>) -> NIL
+
+   Description : Draw a frame
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSFrameEx(nTop, nLeft, nBottom, nRight, nRadius)
+
+   IF slInitialized
+      oPScript:FrameEx(nTop, nLeft, nBottom, nRight, nRadius)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetAsciiToAnsi() -> lValue
+
+   Description : Retreive the translation setting
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetAsciiToAnsi()
+
+   LOCAL lValue := .f.
+
+   IF slInitialized
+      lValue := oPScript:GetAsciiToAnsi()
+   ENDIF
+
+   RETURN lValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetBorderColor() -> nValue
+
+   Description : Returns the current border color
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetBorderColor()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetBorderColor()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetBorderThickness() -> nValue
+
+   Description : Returns the current border thickness
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetBorderThickness()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetBorderThickness()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetCaps() -> aCaps
+
+   Description : Retreive the printer capabilities of the selected printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   Note .......: Compatibility
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetCaps()
+
+   RETURN PSGetPrinterCaps()
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetCoorSystem() -> nValue
+
+   Description : Returns the current coordinate system
+   Author .....: Stephan St-Denis
+   Date .......: April 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetCoorSystem()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetCoorSystem()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetCopies() -> nValue
+
+   Description : Returns the number of copies set for the current print job
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetCopies()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetCopies()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetCPI() -> nValue
+
+   Description : Returns the number of character per inch in use (text mode only)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetCPI()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetCPI()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetDecimalSep() -> cValue
+
+   Description : Returns the decimal separator in use
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetDecimalSep()
+
+   LOCAL cValue := "?"
+
+   IF slInitialized
+      cValue := oPScript:GetDecimalSep()
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetDefPrinter() -> nValue
+
+   Description : Returns the default Windows printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   Note .......: Compatibility
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetDefPrinter()
+
+   RETURN PSGetDefaultPrinter()
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetDefaultPrinter() -> nValue
+
+   Description : Returns the default Windows printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetDefaultPrinter()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetDefaultPrinter()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetDuplex() -> nValue
+
+   Description : Returns the current Duplex mode
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetDuplex()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetDuplex()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFillColor() -> nValue
+
+   Description : Returns the current fill color
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFillColor()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFillColor()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFillPattern() -> nValue
+
+   Description : Returns the current fill pattern
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFillPattern()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFillPattern()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontAngle() -> nValue
+
+   Description : Returns the current font angle
+   Author .....: Stephan St-Denis
+   Date .......: April 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontAngle()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontAngle()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontCount() -> nValue
+
+   Description : Returns the current font count
+   Author .....: Stephan St-Denis
+   Date .......: April 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontCount()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontCount()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFonts() -> aFonts
+
+   Description : Retreive the printer fonts for the selected printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFonts()
+
+   LOCAL aFonts := {"Arial", "Courier New", "System", "Times New Roman", "Verdana", "WingDings"}
+
+   IF slInitialized
+      aFonts := oPScript:GetFonts()
+   ENDIF
+
+   RETURN aClone(aFonts)
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontName() -> cValue
+
+   Description : Returns the current font name
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontName()
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetFontName()
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontNames(<n>) -> cValue
+
+   Description : Returns the font name from its index position
+   Author .....: Stephan St-Denis
+   Date .......: April 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontNames(nFontIndex)
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetFontNames(nFontIndex)
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontStyle() -> nValue
+
+   Description : Returns the current font style
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontStyle()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontStyle()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontSize() -> nValue
+
+   Description : Returns the current font size
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontSize()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontSize()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontBColor() -> nValue
+
+   Description : Returns the current Font background color
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontBColor()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontBColor()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontFColor() -> nValue
+
+   Description : Returns the current font Foreground color
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontFColor()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontFColor()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetJustify() -> nValue
+
+   Description : Returns the current text justification
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetJustify()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetJustify()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetFontJustify() -> nValue
+
+   Description : Returns the current text justification
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetFontJustify()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetFontJustify()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetLPI() -> nValue
+
+   Description : Returns the current number of lines per inch (text mode only)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetLPI()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetLPI()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetMaxHeight() -> nValue
+
+   Description :
+   Author .....: Stephan St-Denis
+   Date .......: May 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetMaxHeight()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetMaxHeight()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetMaxWidth() -> nValue
+
+   Description :
+   Author .....: Stephan St-Denis
+   Date .......: May 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetMaxWidth()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetMaxWidth()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetOrientation() -> nValue
+
+   Description : Returns the current page orientation (Portrait or Landscape)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetOrientation()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetOrientation()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPageSize() -> nValue
+
+   Description : Retreive the printer paper size
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPageSize()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPageSize()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperBin() -> nValue
+
+   Description : Returns the current paper bin
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperBin()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPaperBin()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperBins() -> aBinArray
+
+   Description : Returns a two dimensions array with bins/trays numbers/names
+   Author .....: Stephan St-Denis
+   Date .......: May 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperBins()
+
+   LOCAL aBins     := {}
+   LOCAL nBinCount := 0
+   LOCAL nLoop
+
+   IF slInitialized
+      nBinCount := PSGetPaperBinCount()
+
+      FOR nLoop := 1 to nBinCount
+         aAdd(aBins, {PSGetPaperBinNumbers(nLoop), PSGetPaperBinNames(nLoop)} )
+      NEXT nLoop
+   ENDIF
+
+   RETURN aClone(aBins)
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperBinCount() -> nValue
+
+   Description : Retreive the number of paper bins installed
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperBinCount()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPaperBinCount()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperBinNames() -> cValue
+
+   Description : Retrieve the name of any of the available paper bin
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperBinNames(nIndex)
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetPaperBinNames(nIndex)
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperBinNumbers() -> nValue
+
+   Description : Retrieve the number of any of the available paper bin
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperBinNumbers(nIndex)
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPaperBinNumbers(nIndex)
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperCount() -> nValue
+
+   Description : Retreive the number of paper installed
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperCount()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPaperCount()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperNames(<nIndex>) -> cValue
+
+   Description : Retreive the name of a paper type based on its index position
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperNames(nIndex)
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetPaperNames(nIndex)
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPaperNumbers() -> nValue
+
+   Description : Retreive the number of the paper type pointed by nIndex
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPaperNumbers(nIndex)
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPaperNumbers(nIndex)
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinter() -> nValue
+
+   Description : Returns the currently selected printer
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinter()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPrinter()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterCount() -> nValue
+
+   Description : Returns the number of installed printer drivers
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterCount()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPrinterCount()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterNames(nIndex) -> cValue
+
+   Description : Returns the name of the printer pointed by nIndex
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterNames(nIndex)
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetPrinterNames(nIndex)
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinters() -> aClone(saPrinters)
+
+   Description : Returns the list of available printers for this computer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinters()
+
+   LOCAL aPrinters := {}
+
+   IF slInitialized
+      aPrinters := oPScript:GetPrinters()
+   ENDIF
+
+   RETURN aPrinters
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterCaps() -> aCaps
+
+   Description : Retreive the printer capabilities of the selected printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterCaps()
+
+   LOCAL aCaps := {-1, -1, -1, -1, -1, -1, -1, -1, -1}
+
+   IF slInitialized
+      aCaps := oPScript:GetPrinterCaps()
+   ENDIF
+
+   RETURN aCaps
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterCapsEx(nCap)
+
+   Description : Retreive the printer capabilities of the selected printer
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterCapsEx(nCap)
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPrinterCapsEx(nCap)
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterHandle() -> nValue
+
+   Description : Returns the printer handle (for direct API calls)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterHandle()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetPrinterHandle()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetPrinterName() -> cValue
+
+   Description : Returns the name of the printer number passed in parameter
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetPrinterName(nPrinter)
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetPrinterName(nPrinter)
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetTextHeight() -> nValue
+
+   Description : Returns the height of the text in the current unit
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetTextHeight(cText)
+
+   LOCAL nValue := 0
+
+   IF slInitialized
+      nValue := oPScript:GetTextHeight(cText)
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetTextWidth() -> nValue
+
+   Description : Returns the width of the text in the current unit
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetTextWidth(cText)
+
+   LOCAL nValue := 0
+
+   IF slInitialized
+      nValue := oPScript:GetTextWidth(cText)
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetTitle() -> cValue
+
+   Description : Returns the title of the print job
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetTitle()
+
+   LOCAL cValue := ""
+
+   IF slInitialized
+      cValue := oPScript:GetTitle()
+   ENDIF
+
+   RETURN cValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetUnit() -> nValue
+
+   Description : Returns the unit in use
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetUnit()
+
+   LOCAL nValue := -1
+
+   IF slInitialized
+      nValue := oPScript:GetUnit()
+   ENDIF
+
+   RETURN nValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetUseDIB() -> lValue
+
+   Description : Returns the current setting for DIB (Device Independant Bitmap)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetUseDIB()
+
+   LOCAL lValue := .t.
+
+   IF slInitialized
+      lValue := oPScript:GetUseDIB()
+   ENDIF
+
+   RETURN lValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetVersion() -> cValue
+
+   Description : Returns the current PageScript version number as a character string
+   Author .....: Stephan St-Denis
+   Date .......: April 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetVersion()
+
+   RETURN oPScript:GetVersion()
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSGetXerox() -> lValue
+
+   Description : Returns the current setting for Xerox compatibility
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSGetXerox()
+
+   LOCAL lValue := .f.
+
+   IF slInitialized
+      lValue := oPScript:GetXerox()
+   ENDIF
+
+   RETURN lValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSIsPreviewVisible() -> lValue
+
+   Description : Returns .t. if Print Preview Window is shown
+   Author .....: Stephan St-Denis
+   Date .......: May 2012
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSIsPreviewVisible()
+
+   LOCAL lValue := .f.
+
+   IF slInitialized
+      lValue := oPScript:IsPreviewVisible()
+   ENDIF
+
+   RETURN lValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSLine(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
+
+   Description : Draw a line
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSLine(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
+
+   IF slInitialized
+      oPScript:Line(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSLineEx(<n>, <n>, <n>, <n>) -> NIL
+
+   Description : Draw a line
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSLineEx(nTop, nLeft, nBottom, nRight)
+
+   IF slInitialized
+      oPScript:LineEx(nTop, nLeft, nBottom, nRight)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSNewPage() -> NIL
+
+   Description : Signal the end of page, page eject
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSNewPage()
+
+   IF slInitialized
+      oPScript:NewPage()
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrintDialog() -> lPrint
+
+   Description : Shows the printer dialog and returns if may print or not
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSPrintDialog()
+
+   LOCAL lPrint := .f.
+
+   IF slInitialized
+      lPrint := oPScript:PrintDialog()
+   ENDIF
+
+   RETURN lPrint
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrintFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
+
+   Description : Prints the file pointed by cFile and optionnaly deletes it.
+   EMULATION mode service.
+   Author .....: Stephan St-Denis
+   Date .......: September 2002
+   Note .......: Compatibility
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSPrintFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
+
+   LOCAL lSuccess := .f.
+
+   IF slInitialized
+      lSuccess := oPScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
+   ENDIF
+
+   RETURN lSuccess
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
+
+   Description : Prints the file pointed by cFile and optionnaly deletes it.
+   EMULATION mode service.
+   Author .....: Stephan St-Denis
+   Date .......: September 2002
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSPrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
+
+   LOCAL lSuccess := .f.
+
+   IF slInitialized
+      lSuccess := oPScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies, cFont)
+   ENDIF
+
+   RETURN lSuccess
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
+
+   Description : Prints the file pointed by cFile and optionnaly deletes it.
+   No processing on file. The file is sent "as is" to the printer.
+   Author .....: Stephan St-Denis
+   Date .......: September 2002
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSPrintRawFile(cFileName, lDelete, nPrinter, cTitle)
+
+   LOCAL lSuccess := .f.
+
+   IF slInitialized
+      lSuccess := oPScript:PrintRawFile(cFileName, lDelete, nPrinter, cTitle)
+   ENDIF
+
+   RETURN lSuccess
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetAsciiToAnsi([<l>]) -> NIL
+
+   Description : Set the conversion from Ascii to Ansi for text strings.
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetAsciiToAnsi(lValue)
+
+   LOCAL OldValue := oPScript:GetAsciiToAnsi()
+
+   IF slInitialized
+      oPScript:SetAsciiToAnsi(lValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetBin(<n>) -> NIL
+
+   Description : Sets the paper bin
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetBin(nPaperBin)
+
+   LOCAL OldValue := oPScript:GetPaperBin()
+
+   PSSetPaperBin(nPaperBin)
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetBorder([<n>, <n>]) -> NIL
+
+   Description : Sets the attributes used to draw lines and borders
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetBorder(nThickness, nBorderColor)
+
+   LOCAL OldValue := {oPScript:GetBorderThickness(), oPScript:GetBorderColor()}
+
+   IF slInitialized
+      oPScript:SetBorder(nThickness, nBorderColor)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetBorderColor(<n>) -> NIL
+
+   Description : Sets the border color used to draw lines and borders
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetBorderColor(nBorderColor)
+
+   LOCAL OldValue := oPScript:GetBorderColor()
+
+   IF slInitialized
+      oPScript:SetBorderColor(nBorderColor)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetBorderThickness(<n>) -> NIL
+
+   Description : Sets the border thickness used to draw lines and borders
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetBorderThickness(nThickness)
+
+   LOCAL OldValue := oPScript:GetBorderThickness()
+
+   IF slInitialized
+      oPScript:SetBorderThickness(nThickness)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #PSSetClipperComp(<l>) -> NIL
+
+   Description : Set Clipper compatible calls for TextOut() and TextBox()
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetClipperComp(lClipper)
+
+   oPScript:SetClipperComp(lClipper)
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetCoorSystem(<n>) -> NIL
+
+   Description : Sets the Coordinate system
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetCoorSystem(nCoor)
+
+   LOCAL OldValue := oPScript:GetCoorSystem()
+
+   IF slInitialized
+      oPScript:SetCoorSystem(nCoor)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetCopies([<n>]) -> NIL
+
+   Description : Sets the number of copies
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetCopies(nCopies)
+
+   LOCAL OldValue := oPScript:GetCopies()
+
+   IF slInitialized
+      oPScript:SetCopies(nCopies)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetCPI([<n>]) -> NIL
+
+   Description : Sets the number of characters per inch (Text mode only)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetCPI(nCPI)
+
+   LOCAL OldValue := oPScript:GetCPI()
+
+   IF slInitialized
+      oPScript:SetCPI(nCPI)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetDecimalSep([<c>]) -> cOldSeparator
+
+   Description : Sets the decimal separator character
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetDecimalSep(cSep)
+
+   LOCAL OldValue := oPScript:GetDecimalSep()
+
+   IF slInitialized
+      oPScript:SetDecimalSep(cSep)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetDevice([<n>]) -> NIL
+
+   Description : Sets the device for the next print job
+   Author .....: Stephan St-Denis
+   Date .......: January 2007
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetDevice(nDevice)
+
+   IF slInitialized
+      oPScript:SetDevice(nDevice)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetDirectPrint(<l>) -> NIL
+
+   Description : Sets the direct print mode (use for very special cases)
+   Author .....: Stephan St-Denis
+   Date .......: March 2010
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetDirectPrint(lDirect)
+
+   IF slInitialized
+      oPScript:SetDirectPrint(lDirect)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetDuplex([<n>]) -> NIL
+
+   Description : Sets the Duplex mode
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetDuplex(nDuplex)
+
+   LOCAL OldValue := oPScript:GetDuplex()
+
+   IF slInitialized
+      oPScript:SetDuplex(nDuplex)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFileName([<c>]) -> NIL
+
+   Description : Sets the file name of a PDF file document
+   Author .....: Stephan St-Denis
+   Date .......: January 2007
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFileName(cFileName)
+
+   IF slInitialized
+      oPScript:SetFileName(cFileName)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFill(<n>, [<n>]) -> NIL
+
+   Description : Sets the color used to fill shapes, like boxes and ellipes
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFill(nFillColor, nFillPattern)
+
+   LOCAL OldValue := {oPScript:GetFillColor(), oPScript:GetFillPattern()}
+
+   IF slInitialized
+      oPScript:SetFill(nFillColor, nFillPattern)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFillColor(<n>) -> NIL
+
+   Description : Sets the color used to fill shapes, like boxes and ellipes
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFillColor(nFillColor)
+
+   LOCAL OldValue := oPScript:GetFillColor()
+
+   IF slInitialized
+      oPScript:SetFillColor(nFillColor)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFillPattern(<n>) -> NIL
+
+   Description : Sets the pattern used to fill shapes, like boxes and ellipes
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFillPattern(nFillPattern)
+
+   LOCAL OldValue := oPScript:GetFillPattern()
+
+   IF slInitialized
+      oPScript:SetFillPattern(nFillPattern)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFont([<n>, <n>, <n>, <n>, <n>]) -> NIL
+
+   Description : Sets the font attributes used by each call to PSTextOut()
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFont(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
+
+   LOCAL OldValue := PSSetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontAttributes([<n>, <n>, <n>, <n>, <n>]) -> NIL
+
+   Description : Sets the font attributes used by each call to PSTextOut()
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
+
+   LOCAL OldValue := {oPScript:GetFontName()  , oPScript:GetFontStyle() , oPScript:GetFontSize(), ;
+      oPScript:GetFontFColor(), oPScript:GetFontBColor(), oPScript:GetFontAngle()}
+
+   IF slInitialized
+      oPScript:SetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontAngle(<n>) -> NIL
+
+   Description : Sets the font angle
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontAngle(nValue)
+
+   LOCAL OldValue := oPScript:GetFontAngle()
+
+   IF slInitialized
+      oPScript:SetFontAngle(nValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontBColor(<n>) -> NIL
+
+   Description : Sets the text background color
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontBColor(nValue)
+
+   LOCAL OldValue := oPScript:GetFontBColor()
+
+   IF slInitialized
+      oPScript:SetFontBColor(nValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontFColor(<n>) -> NIL
+
+   Description : Sets the text foreground color
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontFColor(nValue)
+
+   LOCAL OldValue := oPScript:GetFontFColor()
+
+   IF slInitialized
+      oPScript:SetFontFColor(nValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontName(<c>) -> NIL
+
+   Description : Sets the text foreground color
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontName(cValue)
+
+   LOCAL OldValue := oPScript:GetFontName()
+
+   IF slInitialized
+      oPScript:SetFontName(cValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontSize(<n>) -> NIL
+
+   Description : Sets the text size in points
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontSize(nValue)
+
+   LOCAL OldValue := oPScript:GetFontSize()
+
+   IF slInitialized
+      oPScript:SetFontSize(nValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetFontStyle(<n>) -> NIL
+
+   Description : Sets the font style
+   Author .....: Stephan St-Denis
+   Date .......: March 2006
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetFontStyle(nValue)
+
+   LOCAL OldValue := oPScript:GetFontStyle()
+
+   IF slInitialized
+      oPScript:SetFontStyle(nValue)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetJustify(<n>) -> NIL
+
+   Description : Sets justification for TextOut
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetJustify(nJustify)
+
+   LOCAL OldValue := oPScript:GetJustify()
+
+   IF slInitialized
+      oPScript:SetJustify(nJustify)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetLPI([<n>]) -> NIL
+
+   Description : Sets The number of Lines per inch (Text mode only)
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetLPI(nLPI)
+
+   LOCAL OldValue := oPScript:GetLPI()
+
+   IF slInitialized
+      oPScript:SetLPI(nLPI)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetOrientation([<n>]) -> NIL
+
+   Description : Sets the paper orientation
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetOrientation(nOrientation)
+
+   LOCAL OldValue := oPScript:GetOrientation()
+
+   IF slInitialized
+      oPScript:SetOrientation(nOrientation)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPaperBin(<n>) -> NIL
+
+   Description : Sets the paper bin
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPaperBin(nPaperBin)
+
+   LOCAL OldValue := oPScript:GetPaperBin()
+
+   IF slInitialized
+      oPScript:SetPaperBin(nPaperBin)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPageSize(<n>) -> NIL
+
+   Description : Sets the page size to a predifined size
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPageSize(nPageSize)
+
+   LOCAL OldValue := oPScript:GetPageSize()
+
+   IF slInitialized
+      oPScript:SetPageSize(nPageSize)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPDFCharSet(<N>) -> NIL
+
+   Description : Set the character set to be use when printing text in PDF docs
+   Author .....: Stephan St-Denis
+   Date .......: October 2011
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPDFCharSet(nCharSet)
+
+   IF slInitialized
+      oPScript:SetPDFCharSet(nCharSet)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPDFOwnerPassword(<C>) -> NIL
+
+   Description : Set the encryption password for PDF documents
+   Author .....: Stephan St-Denis
+   Date .......: April 2011
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPDFOwnerPassword(cPassword)
+
+   IF slInitialized
+      oPScript:SetPDFOwnerPassword(cPassword)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPDFEncoding(<N>) -> NIL
+
+   Description : Set the internal encoding for PDF documents
+   Author .....: R.Visscher
+   Date .......: July 2017
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPDFEncoding(nEncoding)
+
+   IF slInitialized
+      oPScript:SetPDFEncoding(nEncoding)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPDFVersion(<N>) -> NIL
+
+   Description : Set the version number for PDF documents
+   Author .....: R.Visscher
+   Date .......: July 2017
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPDFVersion(nVersion)
+
+   IF slInitialized
+      oPScript:SetPDFEncoding(nVersion)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSShowPDF(<L>) -> NIL
+
+   Description : Show PDF after creation in default PDF reader
+   Author .....: R.Visscher
+   Date .......: July 2017
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSShowPDF(lShow)
+
+   IF slInitialized
+      oPScript:ShowPDF(lShow)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPDFEmbeddedFonts(<N>) -> NIL
+
+   Description : Set the embedding for PDF documents ( none/sub/full )
+   Author .....: R.Visscher
+   Date .......: July 2017
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPDFEmbeddedFonts(nEmbedded)
+
+   IF slInitialized
+      oPScript:SetPDFEmbeddedFonts(nEmbedded)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPrinter([<n>]) -> NIL
+
+   Description : Sets the printer
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPrinter(nPrinter)
+
+   LOCAL OldValue := oPScript:GetPrinter()
+
+   IF slInitialized
+      oPScript:SetPrinter(nPrinter)
+   ENDIF
+
+   RETURN OldValue
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: #PSSetPWState(<n>) -> NIL
+
+   Description : Set the print preview window state
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWState(nState)
+
+   IF slInitialized
+      oPScript:SetPWState(nState)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetPWPosition(<n>, <n>) -> NIL
+
+   Description : Set the print preview window position
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWPosition(nLeft, nTop)
+
+   IF slInitialized
+      oPScript:SetPWPosition(nLeft, nTop)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: #PSSetPWSize(<n>, <n>) -> NIL
+
+   Description : Set the print preview window size (-1, -1 = Auto size)
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWSize(nWidth, nHeight)
+
+   IF slInitialized
+      oPScript:SetPWSize(nWidth, nHeight)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: #PSSetPWBounds(<n>, <n>, <n>, <n>) -> NIL
+
+   Description : Set the print preview window bounds (position and size at the same time)
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWBounds(nLeft, nTop, nWidth, nHeight)
+
+   IF slInitialized
+      oPScript:SetPWBounds(nLeft, nTop, nWidth, nHeight)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: #PSSetPWZoomLevel(<n>) -> NIL
+
+   Description : Set the print preview window zoom level
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWZoomLevel(nZoomLevel)
+
+   IF slInitialized
+      oPScript:SetPWZoomLevel(nZoomLevel)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: #PSSetPWColors(<n>, <n>, <n>, <n>)) -> NIL
+
+   Description : Set the print preview window zoom level
+   Version ....: 2.1.0.0
+   -----------------------------------------------------------------------------*/
+   /*-----------------------------------------------------------------------------
+
+   Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
+
+   Description : Set the print preview window colors
+   Version ....: 3.0.0.0
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetPWColors(nBackground, nPaper, nShadow, nToolbar)
+
+   IF slInitialized
+      oPScript:SetPWColors(nBackground, nPaper, nShadow, nToolbar)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetRowCol([<n>, <n>]) -> {60, 80}
+
+   Description : Sets the number of virtual Rows and Columns in APS_TEXT unit.
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetRowCol(nRow, nCol)
+
+   LOCAL nCPI := 10
+   LOCAL nLPI := 6
+
+   IF slInitialized
+      IF oPScript:nUnit == APS_CLIP
+         oPScript:SetRowCol(nRow, nCol)
+      ELSE
+         DO CASE
+         CASE nCol >=   1 .and. nCol <=  64
             nCPI := 8
-   
-         case nCol >=  65 .and. nCol <=  80
+
+         CASE nCol >=  65 .and. nCol <=  80
             nCPI := 10
-   
-         case nCol >=  81 .and. nCol <=  96
+
+         CASE nCol >=  81 .and. nCol <=  96
             nCPI := 12
-   
-         case nCol >=  97 .and. nCol <= 120
+
+         CASE nCol >=  97 .and. nCol <= 120
             nCPI := 15
-   
-         case nCol >= 121 .and. nCol <= 136
+
+         CASE nCol >= 121 .and. nCol <= 136
             nCPI := 17
-   
-         case nCol >= 137 .and. nCol <= 144
+
+         CASE nCol >= 137 .and. nCol <= 144
             nCPI := 18
-   
-         case nCol >= 145
+
+         CASE nCol >= 145
             nCPI := 20
-   
-      endcase
-   
-      do case
-         case nRow >= 1 .and. nRow <= 66
+
+         ENDCASE
+
+         DO CASE
+         CASE nRow >= 1 .and. nRow <= 66
             nLPI := 6
-   
-         case nRow > 66
+
+         CASE nRow > 66
             nLPI := 8
-   
-      endcase
-   
-      PSSetCPI(nCPI)
-      PSSetLPI(nLPI)
-   endif
-endif
 
-Return {60, 80}
+         ENDCASE
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSetTitle([<c>]) -> cOldValue
-Description : Sets the document title
-Author .....: Stephan St-Denis
-Date .......: April 2005
------------------------------------------------------------------------------*/
-Function PSSetTitle(cTitle)
+         PSSetCPI(nCPI)
+         PSSetLPI(nLPI)
+      ENDIF
+   ENDIF
 
-Local OldValue := oPScript:GetTitle()
+   RETURN {60, 80}
 
-if slInitialized
-   oPScript:SetTitle(cTitle)
-endif
+   /*-----------------------------------------------------------------------------
 
-Return OldValue
+   Function ...: PSSetTitle([<c>]) -> cOldValue
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSetUnit(<n>) -> nOldValue
-Description : Sets the unit used to calculate dimensions and placement
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetUnit(nUnit)
+   Description : Sets the document title
+   Author .....: Stephan St-Denis
+   Date .......: April 2005
+   -----------------------------------------------------------------------------*/
 
-Local OldValue := oPScript:GetUnit()
+FUNCTION PSSetTitle(cTitle)
 
-if slInitialized
-   oPScript:SetUnit(nUnit)
-endif
+   LOCAL OldValue := oPScript:GetTitle()
 
-Return OldValue
+   IF slInitialized
+      oPScript:SetTitle(cTitle)
+   ENDIF
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSetUseDIB(<l>) -> lOldValue
-Description : Sets the use of DIB for printing Bitmaps
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetUseDIB(lUseDIB)
+   RETURN OldValue
 
-Local OldValue := oPScript:GetUseDIB()
+   /*-----------------------------------------------------------------------------
 
-if slInitialized
-   oPScript:SetUseDIB(lUseDIB)
-endif
+   Function ...: PSSetUnit(<n>) -> nOldValue
 
-Return OldValue
+   Description : Sets the unit used to calculate dimensions and placement
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSetXerox(<l>) -> lOldValue
-Description : Sets Xerox compatible mode for Xerox WorkCenter and other
-              faulty printers
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSSetXerox(lXerox)
+FUNCTION PSSetUnit(nUnit)
 
-Local OldValue := oPScript:GetXerox()
+   LOCAL OldValue := oPScript:GetUnit()
 
-if slInitialized
-   oPScript:SetXerox(lXerox)
-endif
+   IF slInitialized
+      oPScript:SetUnit(nUnit)
+   ENDIF
 
-Return OldValue
+   RETURN OldValue
 
-/*-----------------------------------------------------------------------------
-Function ...: PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
-                        <n>, <n>]) -> NIL
-Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSTextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, ;
-                   nStyle, nFColor, nBColor, nThick)
+   /*-----------------------------------------------------------------------------
 
-if slInitialized
-   oPScript:TextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, ;
-                    nStyle, nFColor, nBColor, nThick)
-endif
+   Function ...: PSSetUseDIB(<l>) -> lOldValue
 
-Return NIL
+   Description : Sets the use of DIB for printing Bitmaps
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-Function ...: PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
-Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSTextBoxEx(nTop, nLeft, nBottom, nRight, cText)
+FUNCTION PSSetUseDIB(lUseDIB)
 
-if slInitialized
-   oPScript:TextBoxEx(nTop, nLeft, nBottom, nRight, cText)
-endif
+   LOCAL OldValue := oPScript:GetUseDIB()
 
-Return NIL
+   IF slInitialized
+      oPScript:SetUseDIB(lUseDIB)
+   ENDIF
 
-/*-----------------------------------------------------------------------------
-Function ...: PSTextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
-Description : Prints a string at position X,Y using parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSTextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, nStyle, ;
-                   nTFColor, nTBColor, nAngle)
+   RETURN OldValue
 
-if slInitialized
-   oPScript:TextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, ;
-                    nStyle, nTFColor, nTBColor, nAngle)
-endif
+   /*-----------------------------------------------------------------------------
 
-Return NIL
+   Function ...: PSSetXerox(<l>) -> lOldValue
 
-/*-----------------------------------------------------------------------------
-Function ...: PSTextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
-Description : Prints a string at position X,Y using parameters
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSTextOutEx(nTop, nLeft, xValue, cPicture)
+   Description : Sets Xerox compatible mode for Xerox WorkCenter and other
+   faulty printers
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-if slInitialized
-   oPScript:TextOutEx(nTop, nLeft, xValue, cPicture)
-endif
+FUNCTION PSSetXerox(lXerox)
 
-Return NIL
+   LOCAL OldValue := oPScript:GetXerox()
 
-/*-----------------------------------------------------------------------------
-Function ...: PSVersion() -> cVersionNumber
-Description : Returns the version number
-Author .....: Stephan St-Denis
-Date .......: March 2005
------------------------------------------------------------------------------*/
-Function PSVersion()
+   IF slInitialized
+      oPScript:SetXerox(lXerox)
+   ENDIF
 
-Return oPScript:GetVersion()
+   RETURN OldValue
 
-/*-----------------------------------------------------------------------------
-Function ...: PSWaterMark([<b>]) -> Previous WaterMark
-Description : Sets/Returns the current WaterMark
-Author .....: Stephan St-Denis
-Date .......: March 2005
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSWaterMark(bWaterMark, lWaterMark)
+   /*-----------------------------------------------------------------------------
 
-Local aOldValues := {{|| NIL}, .f.}
-Local nWM        := AWM_NONE
+   Function ...: PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
 
-if slInitialized
-   if ValType(lWaterMark) = "L"
-      if lWaterMark
-         nWM := AWM_FOREGROUND
-      else
-         nWM := AWM_BACKGROUND
-      endif
-   endif
+   <n>, <n>]) -> NIL
+   Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-   aOldValues := oPScript:WaterMark(bWaterMark, nWM)
-endif
+FUNCTION PSTextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, ;
+      nStyle, nFColor, nBColor, nThick)
 
-Return aOldValues
+   IF slInitialized
+      oPScript:TextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, ;
+         nStyle, nFColor, nBColor, nThick)
+   ENDIF
 
-/*-----------------------------------------------------------------------------
-Unsupported / Obsolete functions
------------------------------------------------------------------------------*/
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Function ...: PSPrnChanged()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSPrnChanged()
+   /*-----------------------------------------------------------------------------
 
-Return .f.
+   Function ...: PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
 
-/*-----------------------------------------------------------------------------
-Function ...: PSRefreshPrinters()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSRefreshPrinters()
+   Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-Return NIL
+FUNCTION PSTextBoxEx(nTop, nLeft, nBottom, nRight, cText)
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSendMail()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSSendMail()
+   IF slInitialized
+      oPScript:TextBoxEx(nTop, nLeft, nBottom, nRight, cText)
+   ENDIF
 
-Return {.f., ""}
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSetTimeSlice()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSSetTimeSlice()
+   /*-----------------------------------------------------------------------------
 
-Return {|| NIL}
+   Function ...: PSTextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
 
-/*-----------------------------------------------------------------------------
-Function ...: PSSShowIcon()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSShowIcon()
+   Description : Prints a string at position X,Y using parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
 
-Return NIL
+FUNCTION PSTextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, nStyle, ;
+      nTFColor, nTBColor, nAngle)
 
-/*-----------------------------------------------------------------------------
-Function ...: PSShutDown()
-Note .......: This funtion is not implemented in PSCRIPT.DLL
------------------------------------------------------------------------------*/
-Function PSShutDown()
+   IF slInitialized
+      oPScript:TextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, ;
+         nStyle, nTFColor, nTBColor, nAngle)
+   ENDIF
 
-Return NIL
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSTextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
+
+   Description : Prints a string at position X,Y using parameters
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSTextOutEx(nTop, nLeft, xValue, cPicture)
+
+   IF slInitialized
+      oPScript:TextOutEx(nTop, nLeft, xValue, cPicture)
+   ENDIF
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSVersion() -> cVersionNumber
+
+   Description : Returns the version number
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSVersion()
+
+   RETURN oPScript:GetVersion()
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSWaterMark([<b>]) -> Previous WaterMark
+
+   Description : Sets/Returns the current WaterMark
+   Author .....: Stephan St-Denis
+   Date .......: March 2005
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSWaterMark(bWaterMark, lWaterMark)
+
+   LOCAL aOldValues := {{|| NIL}, .f.}
+   LOCAL nWM        := AWM_NONE
+
+   IF slInitialized
+      IF ValType(lWaterMark) = "L"
+         IF lWaterMark
+            nWM := AWM_FOREGROUND
+         ELSE
+            nWM := AWM_BACKGROUND
+         ENDIF
+      ENDIF
+
+      aOldValues := oPScript:WaterMark(bWaterMark, nWM)
+   ENDIF
+
+   RETURN aOldValues
+
+   /*-----------------------------------------------------------------------------
+   Unsupported / Obsolete functions
+   -----------------------------------------------------------------------------*/
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSPrnChanged()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSPrnChanged()
+
+   RETURN .f.
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSRefreshPrinters()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSRefreshPrinters()
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSendMail()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSendMail()
+
+   RETURN {.f., ""}
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSetTimeSlice()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSSetTimeSlice()
+
+   RETURN {|| NIL}
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSSShowIcon()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSShowIcon()
+
+   RETURN NIL
+
+   /*-----------------------------------------------------------------------------
+
+   Function ...: PSShutDown()
+
+   Note .......: This funtion is not implemented in PSCRIPT.DLL
+   -----------------------------------------------------------------------------*/
+
+FUNCTION PSShutDown()
+
+   RETURN NIL
 

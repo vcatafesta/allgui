@@ -13,46 +13,44 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
       fontname, fontsize, tooltip, maxlength, gotfocus, change, lostfocus, readonly, break, HelpId, ;
       invisible, notabstop, bold, italic, underline, strikeout, field, backcolor, fontcolor, novscroll, nohscroll, nId )
-*-----------------------------------------------------------------------------*
    LOCAL i , ParentFormHandle , mVar , ContainerHandle := 0 , k , Style
    LOCAL ControlHandle , FontHandle , WorkArea , blInit
    LOCAL lDialogInMemory
@@ -139,7 +137,6 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
       ELSE
 
          ControlHandle := GetDialogItemHandle( ParentFormHandle, nId )
-
 
          x := GetWindowCol ( Controlhandle )
          y := GetWindowRow ( Controlhandle )
@@ -230,7 +227,7 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
       ENDIF
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "EDIT"
    _HMG_aControlNames  [k] :=  ControlName
@@ -285,11 +282,10 @@ FUNCTION _DefineEditbox ( ControlName, ParentFormName, x, y, w, h, value, ;
       AAdd ( _HMG_aFormBrowseList [ GetFormIndex ( ParentFormName ) ] , k )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataEditBoxRefresh ( i )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field := _HMG_aControlPageMap [i], icp
 
    IF ValType ( Field ) != 'U'
@@ -304,16 +300,16 @@ PROCEDURE _DataEditBoxRefresh ( i )
       SendMessage( _HMG_aControlhandles [i] , EM_SETSEL , icp , icp )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogEdit( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL maxlength , readonly
+
    ParentName := Nil
 
    maxlength := _HMG_aControlMiscData1 [k,2]
-   readonly  := _HMG_aControlMiscData1 [k,3]
+   READonly  := _HMG_aControlMiscData1 [k,3]
 
    IF ValType ( readonly ) == 'L'
       SendMessage( ControlHandle , EM_SETREADONLY , iif( readonly, 1, 0 ) , 0 )
@@ -321,9 +317,10 @@ FUNCTION InitDialogEdit( ParentName, ControlHandle, k )
    IF ValType ( maxlength ) != 'U'
       SendMessage( ControlHandle , EM_LIMITTEXT , maxlength , 0 )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate [3]  // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
+

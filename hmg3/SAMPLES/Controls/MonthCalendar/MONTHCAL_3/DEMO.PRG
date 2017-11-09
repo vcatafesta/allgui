@@ -1,21 +1,20 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
- * http://www.hmgforum.com//
+* HMG - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
+* http://www.hmgforum.com//
 */
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE "Month Calendar Control Demo" ;
-      ICON "DEMO.ICO" ;
-      MAIN ;
-      FONT "Arial" SIZE 9
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE "Month Calendar Control Demo" ;
+         ICON "DEMO.ICO" ;
+         MAIN ;
+         FONT "Arial" SIZE 9
 
       // month calendar 1
 
@@ -46,7 +45,7 @@ Function Main
          CAPTION "GET DATE" ;
          ACTION MsgInfo ( GetDate ( Form_1.Month_1.Value ) , "Info" )
 
-		// month calendar 2
+      // month calendar 2
 
       @ 210,10 MONTHCALENDAR Month_2 ;
          VALUE CTOD("01/01/2001") ;
@@ -77,20 +76,20 @@ Function Main
          CAPTION "GET DATE" ;
          ACTION MsgInfo ( GetDate ( Form_1.Month_2.Value ) , "Info" )
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-Static Function GetDate ( dDate )
+STATIC FUNCTION GetDate ( dDate )
 
-   Local nDay := Day(dDate)
-   Local nMonth := Month(dDate)
-   Local nYear := Year(dDate)
-   Local cRet := ""
+   LOCAL nDay := Day(dDate)
+   LOCAL nMonth := Month(dDate)
+   LOCAL nYear := Year(dDate)
+   LOCAL cRet := ""
 
    cRet += "Day: "+StrZero(nDay,2)
    cRet += space(2)
@@ -98,6 +97,5 @@ Static Function GetDate ( dDate )
    cRet += space(2)
    cRet += "Year: "+StrZero(nYear,4)
 
-   Return cRet
-
+   RETURN cRet
 

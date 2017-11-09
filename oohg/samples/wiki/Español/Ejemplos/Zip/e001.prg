@@ -1,31 +1,29 @@
 /*
- * Ejemplo Zip n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo crear un archivo ZIP de una
- * carpeta y sus subcarpetas. Note que la función HB_ZipFile()
- * no procesa automáticamente las subcarpetas en Harbour 3.0
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Zip n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo crear un archivo ZIP de una
+* carpeta y sus subcarpetas. Note que la función HB_ZipFile()
+* no procesa automáticamente las subcarpetas en Harbour 3.0
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 #include 'directry.ch'
 
 FUNCTION Main()
 
-  SET LANGUAGE TO SPANISH
+   SET LANGUAGE TO SPANISH
 
    DEFINE WINDOW FormPrincipal ;
-      AT 114,218 ;
-      WIDTH 580 ;
-      HEIGHT 276 ;
-      CLIENTAREA ;
-      TITLE 'Como Zipear una Carpeta y sus Subcarpetas Usando la Librería MiniZip' ;
-      MAIN
+         AT 114,218 ;
+         WIDTH 580 ;
+         HEIGHT 276 ;
+         CLIENTAREA ;
+         TITLE 'Como Zipear una Carpeta y sus Subcarpetas Usando la Librería MiniZip' ;
+         MAIN
 
       @ 20,20 BUTTON btn_1 ;
          CAPTION 'Elegir carpeta' ;
@@ -45,13 +43,14 @@ FUNCTION Main()
    FormPrincipal.Center
    FormPrincipal.Activate
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ZipearCarpeta
 
    LOCAL cCarpeta, hZip, aArchivos, i
 
    IF EMPTY( cCarpeta := GetFolder( 'Carpeta a Ziperar', 'C:\' ) )
+
       RETURN NIL
    ENDIF
 
@@ -62,6 +61,7 @@ FUNCTION ZipearCarpeta
    hZip := HB_ZipOpen( 'ziptest.zip' )
    IF EMPTY( hZip )
       MsgExclamation( "No se pudo crear ziptest.zip !!!" )
+
       RETURN NIL
    ENDIF
 
@@ -76,8 +76,8 @@ FUNCTION ZipearCarpeta
          EVAL( {|cArchivo, nPos| ActualizarProgreso( nPos, cArchivo ) }, aArchivos[ i ], i )
 
          HB_ZipStoreFile( hZip, ;
-                          aArchivos[ i ], ;
-                          substr( aArchivos[ i ], LEN( cCarpeta ) + 2 ) )
+            aArchivos[ i ], ;
+            substr( aArchivos[ i ], LEN( cCarpeta ) + 2 ) )
       NEXT
 
       HB_ZipClose( hZip )
@@ -87,7 +87,7 @@ FUNCTION ZipearCarpeta
       MsgExclamation( "No se encontraron archivos !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ProcesarArchivos( cCarpeta, aArchivos )
 
@@ -107,15 +107,16 @@ FUNCTION ProcesarArchivos( cCarpeta, aArchivos )
       ENDIF
    NEXT
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ActualizarProgreso( nPos, cArchivo )
 
    FormPrincipal.prg_1.Value := nPos
    FormPrincipal.lbl_1.Value := cArchivo
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -5,36 +5,36 @@
 #include "minigui.ch"
 #include "hbdyn.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN ;
-		ON RELEASE UnloadAllDll()
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN ;
+         ON RELEASE UnloadAllDll()
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'Test'
-				MENUITEM 'Play Sound' ACTION PlaySound ()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP 'Test'
+            MENUITEM 'Play Sound' ACTION PlaySound ()
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
+PROCEDURE PlaySound
 
-Procedure PlaySound
+   // the number of waveform-audio output devices present in the system
+   IF HMG_CallDLL ( "WINMM.DLL" , HB_DYN_CTYPE_INT , "waveOutGetNumDevs" ) > 0
 
-	// the number of waveform-audio output devices present in the system
-	If HMG_CallDLL ( "WINMM.DLL" , HB_DYN_CTYPE_INT , "waveOutGetNumDevs" ) > 0
+      HMG_CallDLL ( "WINMM.DLL" , , "sndPlaySoundA" , "sample.wav" , 0 )
 
-		HMG_CallDLL ( "WINMM.DLL" , , "sndPlaySoundA" , "sample.wav" , 0 )
+   ENDIF
 
-	EndIf
+   RETURN
 
-Return

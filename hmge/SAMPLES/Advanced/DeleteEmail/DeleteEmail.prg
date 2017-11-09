@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- * Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2004-2007 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2004-2007 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -11,226 +10,222 @@ ANNOUNCE RDDSYS
 
 #define IDI_MAIN 1001
 
-Static cIni := "Accounts.ini", aData := {}
+STATIC cIni := "Accounts.ini", aData := {}
 
-*--------------------------------------------------------*
-Procedure Main
-*--------------------------------------------------------*
+PROCEDURE Main
 
-	LOAD WINDOW Main
-	CENTER WINDOW Main
-	ACTIVATE WINDOW Main
+   LOAD WINDOW Main
+   CENTER WINDOW Main
+   ACTIVATE WINDOW Main
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Procedure LoadAcc
-*--------------------------------------------------------*
-	Local nI
-	Local cAcc := "", cServ := "", cName := "", cPass := ""
+PROCEDURE LoadAcc
 
-	BEGIN INI FILE cIni
+   LOCAL nI
+   LOCAL cAcc := "", cServ := "", cName := "", cPass := ""
 
-	For nI := 1 To 99
+   BEGIN INI FILE cIni
 
-		GET cAcc SECTION Ltrim(Str(nI, 2)) ENTRY "Account" default ""
+      FOR nI := 1 To 99
 
-		GET cServ SECTION Ltrim(Str(nI, 2)) ENTRY "Server" default ""
+         GET cAcc SECTION Ltrim(Str(nI, 2)) ENTRY "Account" default ""
 
-		GET cName SECTION Ltrim(Str(nI, 2)) ENTRY "Login" default ""
+         GET cServ SECTION Ltrim(Str(nI, 2)) ENTRY "Server" default ""
 
-		GET cPass SECTION Ltrim(Str(nI, 2)) ENTRY "Password" default ""
+         GET cName SECTION Ltrim(Str(nI, 2)) ENTRY "Login" default ""
 
-		IF !Empty(cAcc)
-			Aadd(aData, {cAcc, cServ, cName, crypt(cPass)})
-		ELSE
-			Exit
-		ENDIF
-	Next
+         GET cPass SECTION Ltrim(Str(nI, 2)) ENTRY "Password" default ""
 
-	END INI
+         IF !Empty(cAcc)
+            Aadd(aData, {cAcc, cServ, cName, crypt(cPass)})
+         ELSE
+            EXIT
+         ENDIF
+      NEXT
 
-	Main.Combo_1.DeleteAllItems
-	IF LEN(aData) > 0
-		For nI := 1 To Len(aData)
-			Main.Combo_1.AddItem(aData[nI][1])
-		Next
-		Main.Combo_1.Value := 1
-		ComboChange()
-	ELSE
-		Main.Edit_1.Value := "pop.mail.com"
-		Main.Edit_2.Value := "user@mail.com"
-		Main.Edit_3.Value := "mypassword"
-	ENDIF
-Return
+   END INI
 
-*--------------------------------------------------------*
-Procedure ComboChange
-*--------------------------------------------------------*
-	Local nAcc := Main.Combo_1.Value
+   Main.Combo_1.DeleteAllItems
+   IF LEN(aData) > 0
+      FOR nI := 1 To Len(aData)
+         Main.Combo_1.AddItem(aData[nI][1])
+      NEXT
+      Main.Combo_1.Value := 1
+      ComboChange()
+   ELSE
+      Main.Edit_1.Value := "pop.mail.com"
+      Main.Edit_2.Value := "user@mail.com"
+      Main.Edit_3.Value := "mypassword"
+   ENDIF
 
-	IF !EMPTY(nAcc)
-		Main.Edit_1.Value := aData[nAcc][2]
-		Main.Edit_2.Value := aData[nAcc][3]
-		Main.Edit_3.Value := aData[nAcc][4]
-	ENDIF
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Function crypt(cPass)
-*--------------------------------------------------------*
-Return CHARXOR( cPass, repl("@#$%&", 4) )
+PROCEDURE ComboChange
 
-*--------------------------------------------------------*
-Procedure AddAcc
-*--------------------------------------------------------*
-	Local nAcc := Len(aData)
-	Local cName := Alltrim( InputBox( 'Enter name of account:', 'Add Account', "Spamed Mailbox", 30000, "" ) )
+   LOCAL nAcc := Main.Combo_1.Value
 
-	IF !EMPTY(cName)
-		nAcc++
-		Main.Combo_1.AddItem(cName)
-		Main.Combo_1.Value := nAcc
-		IF !Main.Button_5.Enabled
-			Main.Button_5.Enabled := .t.
-		ENDIF
+   IF !EMPTY(nAcc)
+      Main.Edit_1.Value := aData[nAcc][2]
+      Main.Edit_2.Value := aData[nAcc][3]
+      Main.Edit_3.Value := aData[nAcc][4]
+   ENDIF
 
-		BEGIN INI FILE cIni
+   RETURN
 
-			SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Account" TO cName
+FUNCTION crypt(cPass)
 
-			SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Server" TO Main.Edit_1.Value
+   RETURN CHARXOR( cPass, repl("@#$%&", 4) )
 
-			SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Login" TO Main.Edit_2.Value
+PROCEDURE AddAcc
 
-			SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Password" TO crypt(Main.Edit_3.Value)
+   LOCAL nAcc := Len(aData)
+   LOCAL cName := Alltrim( InputBox( 'Enter name of account:', 'Add Account', "Spamed Mailbox", 30000, "" ) )
 
-		END INI
+   IF !EMPTY(cName)
+      nAcc++
+      Main.Combo_1.AddItem(cName)
+      Main.Combo_1.Value := nAcc
+      IF !Main.Button_5.Enabled
+         Main.Button_5.Enabled := .t.
+      ENDIF
 
-		Aadd(aData, {cName, Main.Edit_1.Value, Main.Edit_2.Value, Main.Edit_3.Value})
-	ENDIF
-	Main.Combo_1.Setfocus
-Return
+      BEGIN INI FILE cIni
 
-*--------------------------------------------------------*
-Procedure DelAcc
-*--------------------------------------------------------*
-	Local nAcc := Main.Combo_1.Value
+         SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Account" TO cName
 
-	Main.Combo_1.DeleteItem(nAcc)
-	Main.Combo_1.Value := IF(nAcc > 2, nAcc - 1, 1)
-	Adel(aData, nAcc)
-	Asize(aData, Len(aData) - 1)
-	IF LEN(aData) > 0
-		ComboChange()
-	ELSE
-		Main.Edit_1.Value := ""
-		Main.Edit_2.Value := ""
-		Main.Edit_3.Value := ""
-		Main.Button_5.Enabled := .f.
-	ENDIF
-	SaveAcc(.t.)
-Return
+         SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Server" TO Main.Edit_1.Value
 
-*--------------------------------------------------------*
-Procedure SaveAcc(lAll)
-*--------------------------------------------------------*
-	Local nI, nAcc := Main.Combo_1.Value
+         SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Login" TO Main.Edit_2.Value
 
-	DEFAULT lAll := .f.
-	IF lAll
-		Ferase(cIni)
-		For nI := 1 To Len(aData)
-			BEGIN INI FILE cIni
+         SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Password" TO crypt(Main.Edit_3.Value)
 
-				SET SECTION Ltrim(Str(nI, 2)) ENTRY "Account" TO aData[nI][1]
+      END INI
 
-				SET SECTION Ltrim(Str(nI, 2)) ENTRY "Server" TO aData[nI][2]
+      Aadd(aData, {cName, Main.Edit_1.Value, Main.Edit_2.Value, Main.Edit_3.Value})
+   ENDIF
+   Main.Combo_1.Setfocus
 
-				SET SECTION Ltrim(Str(nI, 2)) ENTRY "Login" TO aData[nI][3]
+   RETURN
 
-				SET SECTION Ltrim(Str(nI, 2)) ENTRY "Password" TO crypt(aData[nI][4])
+PROCEDURE DelAcc
 
-			END INI
-		Next
-	ELSE
-		IF !EMPTY(nAcc)
-			aData[nAcc][2] := Main.Edit_1.Value
-			aData[nAcc][3] := Main.Edit_2.Value
-			aData[nAcc][4] := Main.Edit_3.Value
+   LOCAL nAcc := Main.Combo_1.Value
 
-			BEGIN INI FILE cIni
+   Main.Combo_1.DeleteItem(nAcc)
+   Main.Combo_1.Value := IF(nAcc > 2, nAcc - 1, 1)
+   Adel(aData, nAcc)
+   Asize(aData, Len(aData) - 1)
+   IF LEN(aData) > 0
+      ComboChange()
+   ELSE
+      Main.Edit_1.Value := ""
+      Main.Edit_2.Value := ""
+      Main.Edit_3.Value := ""
+      Main.Button_5.Enabled := .f.
+   ENDIF
+   SaveAcc(.t.)
 
-				SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Server" TO aData[nAcc][2]
+   RETURN
 
-				SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Login" TO aData[nAcc][3]
+PROCEDURE SaveAcc(lAll)
 
-				SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Password" TO crypt(aData[nAcc][4])
+   LOCAL nI, nAcc := Main.Combo_1.Value
 
-			END INI
-		ENDIF
-	ENDIF
-	Main.Combo_1.Setfocus
-Return
+   DEFAULT lAll := .f.
+   IF lAll
+      Ferase(cIni)
+      FOR nI := 1 To Len(aData)
+         BEGIN INI FILE cIni
 
-*--------------------------------------------------------*
-Function MsgAbout
-*--------------------------------------------------------*
-	Main.Combo_1.Setfocus
-Return MsgInfo(padc("Delete Email version 1.02 - Freeware", 40) + CRLF + ;
-	"Copyright (c) 2004-2007 Grigory Filatov" + CRLF + CRLF + ;
-	padc("Email: gfilatov@inbox.ru", 40) + CRLF + CRLF + ;
-	hb_compiler() + CRLF + ;
-	version() + CRLF + ;
-	substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
+            SET SECTION Ltrim(Str(nI, 2)) ENTRY "Account" TO aData[nI][1]
 
-*--------------------------------------------------------*
-Procedure DeleteMails
-*--------------------------------------------------------*
-	Local cServer, cUser, cPass, oSocket, aMessages, nMsgs
-	Local nAcc := Main.Combo_1.Value
+            SET SECTION Ltrim(Str(nI, 2)) ENTRY "Server" TO aData[nI][2]
 
-	IF MsgYesNo( "Are you sure you want to delete the All messages?", "Confirm", , , .f. )
-		oSocket := TPop3():New()
+            SET SECTION Ltrim(Str(nI, 2)) ENTRY "Login" TO aData[nI][3]
 
-		cServer  := Main.Edit_1.Value
-		cUser    := Main.Edit_2.Value
-		cPass    := Main.Edit_3.Value
+            SET SECTION Ltrim(Str(nI, 2)) ENTRY "Password" TO crypt(aData[nI][4])
 
-		Main.StatusBar.Item(1) := "Connecting"
-		IF oSocket:Connect( alltrim(cServer) )
+         END INI
+      NEXT
+   ELSE
+      IF !EMPTY(nAcc)
+         aData[nAcc][2] := Main.Edit_1.Value
+         aData[nAcc][3] := Main.Edit_2.Value
+         aData[nAcc][4] := Main.Edit_3.Value
 
-			Main.StatusBar.Item(1) := "Connected"
-			inkey(.4)
+         BEGIN INI FILE cIni
 
-			IF EMPTY(cPass)
-				cPass := InputBox( "Enter password for " + cUser )
-			ENDIF
+            SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Server" TO aData[nAcc][2]
 
-			Main.StatusBar.Item(1) := "Login"
-			IF oSocket:Login( alltrim(cUser), alltrim(cPass) )
-				aMessages := oSocket:List(.F.)
-				nMsgs := Len(aMessages)
-				For nAcc := 1 to nMsgs
-					oSocket:DeleteMessage( aMessages[nAcc][1] )
-					Main.ProgressBar_1.Value := nAcc / nMsgs * 100
-					Main.StatusBar.Item(1) := "Deleting " + ltrim(str(nAcc)) + " from " + ltrim(str(nMsgs))
-				Next
-			ENDIF
+            SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Login" TO aData[nAcc][3]
 
-		ELSE
-			Main.StatusBar.Item(1) := "Bad connect to " + alltrim(cServer)
-			inkey(1.6)
-		ENDIF
+            SET SECTION Ltrim(Str(nAcc, 2)) ENTRY "Password" TO crypt(aData[nAcc][4])
 
-		oSocket:Close()
+         END INI
+      ENDIF
+   ENDIF
+   Main.Combo_1.Setfocus
 
-		inkey(.4)
-		Main.ProgressBar_1.Value := 0
-		Main.StatusBar.Item(1) := "Waiting..."
-	ENDIF
-Return
+   RETURN
 
+FUNCTION MsgAbout
+
+   Main.Combo_1.Setfocus
+
+   RETURN MsgInfo(padc("Delete Email version 1.02 - Freeware", 40) + CRLF + ;
+      "Copyright (c) 2004-2007 Grigory Filatov" + CRLF + CRLF + ;
+      padc("Email: gfilatov@inbox.ru", 40) + CRLF + CRLF + ;
+      hb_compiler() + CRLF + ;
+      version() + CRLF + ;
+      substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
+
+PROCEDURE DeleteMails
+
+   LOCAL cServer, cUser, cPass, oSocket, aMessages, nMsgs
+   LOCAL nAcc := Main.Combo_1.Value
+
+   IF MsgYesNo( "Are you sure you want to delete the All messages?", "Confirm", , , .f. )
+      oSocket := TPop3():New()
+
+      cServer  := Main.Edit_1.Value
+      cUser    := Main.Edit_2.Value
+      cPass    := Main.Edit_3.Value
+
+      Main.StatusBar.Item(1) := "Connecting"
+      IF oSocket:Connect( alltrim(cServer) )
+
+         Main.StatusBar.Item(1) := "Connected"
+         inkey(.4)
+
+         IF EMPTY(cPass)
+            cPass := InputBox( "Enter password for " + cUser )
+         ENDIF
+
+         Main.StatusBar.Item(1) := "Login"
+         IF oSocket:Login( alltrim(cUser), alltrim(cPass) )
+            aMessages := oSocket:List(.F.)
+            nMsgs := Len(aMessages)
+            FOR nAcc := 1 to nMsgs
+               oSocket:DeleteMessage( aMessages[nAcc][1] )
+               Main.ProgressBar_1.Value := nAcc / nMsgs * 100
+               Main.StatusBar.Item(1) := "Deleting " + ltrim(str(nAcc)) + " from " + ltrim(str(nMsgs))
+            NEXT
+         ENDIF
+
+      ELSE
+         Main.StatusBar.Item(1) := "Bad connect to " + alltrim(cServer)
+         inkey(1.6)
+      ENDIF
+
+      oSocket:Close()
+
+      inkey(.4)
+      Main.ProgressBar_1.Value := 0
+      Main.StatusBar.Item(1) := "Waiting..."
+   ENDIF
+
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -240,39 +235,40 @@ Return
 
 HB_FUNC ( INITIMAGE )
 {
-	HWND  h;
-	HBITMAP hBitmap;
-	HWND hwnd;
+   HWND  h;
+   HBITMAP hBitmap;
+   HWND hwnd;
 
-	hwnd = (HWND) hb_parnl(1);
+   hwnd = (HWND) hb_parnl(1);
 
-	h = CreateWindowEx(0,"static",NULL, WS_CHILD | WS_VISIBLE | SS_BITMAP | SS_NOTIFY,
-		hb_parni(3), hb_parni(4), 0, 0, hwnd, (HMENU)hb_parni(2), GetModuleHandle(NULL), NULL );
+   h = CreateWindowEx(0,"static",NULL, WS_CHILD | WS_VISIBLE | SS_BITMAP | SS_NOTIFY,
+      hb_parni(3), hb_parni(4), 0, 0, hwnd, (HMENU)hb_parni(2), GetModuleHandle(NULL), NULL );
 
-	hBitmap = (HBITMAP) LoadImage(0,hb_parc(5),IMAGE_BITMAP,hb_parni(6),hb_parni(7),LR_LOADFROMFILE|LR_CREATEDIBSECTION);
-	if (hBitmap==NULL)
-	{
-		hBitmap = (HBITMAP) LoadImage(GetModuleHandle(NULL), hb_parc(5), IMAGE_BITMAP, hb_parni(6), hb_parni(7), LR_CREATEDIBSECTION);
-	}
+   hBitmap = (HBITMAP) LoadImage(0,hb_parc(5),IMAGE_BITMAP,hb_parni(6),hb_parni(7),LR_LOADFROMFILE|LR_CREATEDIBSECTION);
+   if (hBitmap==NULL)
+   {
+      hBitmap = (HBITMAP) LoadImage(GetModuleHandle(NULL), hb_parc(5), IMAGE_BITMAP, hb_parni(6), hb_parni(7), LR_CREATEDIBSECTION);
+   }
 
-	SendMessage( h, (UINT)STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)hBitmap );
+   SendMessage( h, (UINT)STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)hBitmap );
 
-	hb_retnl( (LONG) h );
+   hb_retnl( (LONG) h );
 }
 
 HB_FUNC (C_SETPICTURE)
 {
-	HBITMAP hBitmap;
+   HBITMAP hBitmap;
 
-	hBitmap = (HBITMAP) LoadImage(0,hb_parc(2),IMAGE_BITMAP,hb_parni(3),hb_parni(4),LR_LOADFROMFILE|LR_CREATEDIBSECTION);
-	if (hBitmap==NULL)
-	{
-		hBitmap = (HBITMAP) LoadImage(GetModuleHandle(NULL),hb_parc(2),IMAGE_BITMAP,hb_parni(3),hb_parni(4),LR_CREATEDIBSECTION);
-	}
+   hBitmap = (HBITMAP) LoadImage(0,hb_parc(2),IMAGE_BITMAP,hb_parni(3),hb_parni(4),LR_LOADFROMFILE|LR_CREATEDIBSECTION);
+   if (hBitmap==NULL)
+   {
+      hBitmap = (HBITMAP) LoadImage(GetModuleHandle(NULL),hb_parc(2),IMAGE_BITMAP,hb_parni(3),hb_parni(4),LR_CREATEDIBSECTION);
+   }
 
-	SendMessage((HWND) hb_parnl (1),(UINT)STM_SETIMAGE,(WPARAM)IMAGE_BITMAP,(LPARAM)hBitmap);
+   SendMessage((HWND) hb_parnl (1),(UINT)STM_SETIMAGE,(WPARAM)IMAGE_BITMAP,(LPARAM)hBitmap);
 
-	hb_retnl ( (LONG) hBitmap );
+   hb_retnl ( (LONG) hBitmap );
 }
 
 #pragma ENDDUMP
+

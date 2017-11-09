@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2015 Verchenko Andrey <verchenkoag@gmail.com>
- *
- * Last Revised By P.Chornyj <myorg63@mail.ru> 10.22.2016
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2015 Verchenko Andrey <verchenkoag@gmail.com>
+* Last Revised By P.Chornyj <myorg63@mail.ru> 10.22.2016
 */
 
 #include "MiniGUI.ch"
@@ -15,13 +13,13 @@ PROCEDURE Main()
    IF GetImageInfo( "logo.jpg", @nWidth, @nHeight )
 
       DEFINE WINDOW Form_1 ;
-	      MAIN ;
-      	CLIENTAREA nWidth, nHeight + 30 ;
-      	TITLE "Test a mouse click on the one picture which is divided into 3 parts (" + __FILE__ + ")"
+            MAIN ;
+            CLIENTAREA nWidth, nHeight + 30 ;
+            TITLE "Test a mouse click on the one picture which is divided into 3 parts (" + __FILE__ + ")"
 
-      	@ 0,0 IMAGE Img_Logo PICTURE "logo.jpg" WIDTH nWidth HEIGHT nHeight ;
+         @ 0,0 IMAGE Img_Logo PICTURE "logo.jpg" WIDTH nWidth HEIGHT nHeight ;
             ON MOUSEHOVER RC_CURSOR( "MINIGUI_FINGER" ) ;
-            ACTION Determine_the_portion_of_the_picture()   
+            ACTION Determine_the_portion_of_the_picture()
 
       END WINDOW
 
@@ -32,14 +30,13 @@ PROCEDURE Main()
 
    RETURN
 
-/////////////////////////////////////////////////////////////////////////////
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    #define ENUMINDEX hb_EnumIndex()
-#else
+   #else
    #define ENUMINDEX aPart:__EnumIndex
-#endif
+   #endif
 
-PROCEDURE Determine_the_portion_of_the_picture() 
+PROCEDURE Determine_the_portion_of_the_picture()
 
    STATIC aImage := {}
 
@@ -63,10 +60,10 @@ PROCEDURE Determine_the_portion_of_the_picture()
 
       IF nX > nLeft .AND. nX < nLeft + nWidth
          cMsg += CRLF + CRLF + "Area #" + HB_NtoS( ENUMINDEX )
-         cMsg += CRLF + CRLF + aPart[5] 
+         cMsg += CRLF + CRLF + aPart[5]
 
          MsgInfo( cMsg )
-     ENDIF
+      ENDIF
    NEXT
 
    RETURN
@@ -79,3 +76,4 @@ STATIC FUNCTION GetImageInfo( cPicFile, nPicWidth, nPicHeight )
    nPicHeight := aSize[2]
 
    RETURN ( nPicWidth > 0 )
+

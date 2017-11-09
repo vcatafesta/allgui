@@ -1,17 +1,15 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2003-2012 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2003-2012 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 /*
-  edited by Alexey L. Gustow <gustow33 at mail.ru> (see "gugu") :
+edited by Alexey L. Gustow <gustow33 at mail.ru> (see "gugu") :
 
-   1. wrong JPEG width/height (if EXIF exists) - see JpgSize()
-   2. add button "Zoom Fill" and function ZoomFill(),
-      add hotkey GRAY MULTIPLY for this operation
+1. wrong JPEG width/height (if EXIF exists) - see JpgSize()
+2. add button "Zoom Fill" and function ZoomFill(),
+add hotkey GRAY MULTIPLY for this operation
 */
 
 ANNOUNCE RDDSYS
@@ -20,22 +18,21 @@ ANNOUNCE RDDSYS
 #include "winprint.ch"
 
 #xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
+   => ;
+   _DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
 
 #xcommand ON KEY GRAYPLUS [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_ADD , <{action}> )
+   => ;
+   _DefineHotKey ( <"parent"> , 0 , VK_ADD , <{action}> )
 
 #xcommand ON KEY GRAYMINUS [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_SUBTRACT , <{action}> )
+   => ;
+   _DefineHotKey ( <"parent"> , 0 , VK_SUBTRACT , <{action}> )
 
 // gugu
 #xcommand ON KEY GRAYMULTIPLY [ OF <parent> ] ACTION <action> ;
-=> ;
-_DefineHotKey ( <"parent"> , 0 , VK_MULTIPLY , <{action}> )
-//
+   => ;
+   _DefineHotKey ( <"parent"> , 0 , VK_MULTIPLY , <{action}> )
 
 #define PROGRAM 'JpgViewer'
 #define VERSION ' version 1.2.2'
@@ -43,17 +40,16 @@ _DefineHotKey ( <"parent"> , 0 , VK_MULTIPLY , <{action}> )
 
 #define MsgAlert( c ) MsgEXCLAMATION( c, "Error" )
 
-Static nWidth, nHeight, cFile := "", nKoef := 1, aFiles := {}, nItem := 1, nLoadTime
+STATIC nWidth, nHeight, cFile := "", nKoef := 1, aFiles := {}, nItem := 1, nLoadTime
 
-Memvar nScrWidth, nScrHeight
+MEMVAR nScrWidth, nScrHeight
 
-*--------------------------------------------------------*
-Function Main( fname )
-*--------------------------------------------------------*
-LOCAL nLen, aDesk := GetDesktopArea()
-PRIVATE nScrWidth := aDesk[3], nScrHeight := aDesk[4]
+FUNCTION Main( fname )
 
-   default fname := "JpgViewer.jpg"
+   LOCAL nLen, aDesk := GetDesktopArea()
+   PRIVATE nScrWidth := aDesk[3], nScrHeight := aDesk[4]
+
+   DEFAULT fname := "JpgViewer.jpg"
 
    aFiles := DIRECTORY( "*.JPG" )
    Aeval( DIRECTORY( "*.JPEG" ), {|e| Aadd(aFiles, e)} )
@@ -64,144 +60,141 @@ PRIVATE nScrWidth := aDesk[3], nScrHeight := aDesk[4]
    SET DATE GERMAN
 
    DEFINE WINDOW Form_Main ;
-      AT 0,0 ;
-      WIDTH 648 HEIGHT 578 ;
-      TITLE PROGRAM ;
-      ICON 'IMAGE' ;
-      MAIN ;
-      ON INIT FileOpen(fname, .t.) ;
-      FONT 'MS Sans Serif' ;
-      SIZE 9
+         AT 0,0 ;
+         WIDTH 648 HEIGHT 578 ;
+         TITLE PROGRAM ;
+         ICON 'IMAGE' ;
+         MAIN ;
+         ON INIT FileOpen(fname, .t.) ;
+         FONT 'MS Sans Serif' ;
+         SIZE 9
 
-	DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-		DEFINE POPUP "&File"
-			MENUITEM "&Open"+Chr(9)+"   Ctrl+O" ACTION FileOpen()
-			SEPARATOR
-			MENUITEM "&Print"+Chr(9)+"   Ctrl+P" ACTION FilePrint()
-			SEPARATOR
-			MENUITEM "E&xit"+Chr(9)+"   Esc" ACTION ReleaseAllWindows()
-		END POPUP
+         DEFINE POPUP "&File"
+            MENUITEM "&Open"+Chr(9)+"   Ctrl+O" ACTION FileOpen()
+            SEPARATOR
+            MENUITEM "&Print"+Chr(9)+"   Ctrl+P" ACTION FilePrint()
+            SEPARATOR
+            MENUITEM "E&xit"+Chr(9)+"   Esc" ACTION ReleaseAllWindows()
+         END POPUP
 
-		DEFINE POPUP "&View"
-			MENUITEM "&Information"+Chr(9)+"   Ctrl+I" ACTION PictInfo()
-			SEPARATOR
-			MENUITEM "&Zoom In"+Chr(9)+"   Gray +" ACTION Zoom( 1 )
-			MENUITEM "Zoom &Out"+Chr(9)+"   Gray -" ACTION Zoom( -1 )
+         DEFINE POPUP "&View"
+            MENUITEM "&Information"+Chr(9)+"   Ctrl+I" ACTION PictInfo()
+            SEPARATOR
+            MENUITEM "&Zoom In"+Chr(9)+"   Gray +" ACTION Zoom( 1 )
+            MENUITEM "Zoom &Out"+Chr(9)+"   Gray -" ACTION Zoom( -1 )
 
-			// gugu
-			MENUITEM "Zoom &Fill"+Chr(9)+"   Gray *" ACTION ZoomFill( )
-			//
+            // gugu
+            MENUITEM "Zoom &Fill"+Chr(9)+"   Gray *" ACTION ZoomFill( )
 
-			MENUITEM "O&riginal size"+Chr(9)+"   Ctrl+H" ACTION Zoom( 0 )
-		END POPUP
+            MENUITEM "O&riginal size"+Chr(9)+"   Ctrl+H" ACTION Zoom( 0 )
+         END POPUP
 
-		DEFINE POPUP "&Help"
-			MENUITEM "&About" ACTION MsgAbout()
-		END POPUP
-	END MENU
+         DEFINE POPUP "&Help"
+            MENUITEM "&About" ACTION MsgAbout()
+         END POPUP
+      END MENU
 
-	// gugu
+      // gugu
 
-	@ 6,235 TEXTBOX Text_1 HEIGHT 20 WIDTH 80 VALUE iif( Empty(nLen), "", hb_ntos(nItem) + "/" + hb_ntos(nLen) )
-	//
+      @ 6,235 TEXTBOX Text_1 HEIGHT 20 WIDTH 80 VALUE iif( Empty(nLen), "", hb_ntos(nItem) + "/" + hb_ntos(nLen) )
 
-	DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-	       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 20, 20 FLAT
+         DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 20, 20 FLAT
 
-			BUTTON Button_1  ;
-				PICTURE 'Open' ;
-				TOOLTIP 'Open' ;
-				ACTION FileOpen()
+            BUTTON Button_1  ;
+               PICTURE 'Open' ;
+               TOOLTIP 'Open' ;
+               ACTION FileOpen()
 
-			BUTTON Button_2 ;
-				PICTURE 'Print' ;
-				TOOLTIP 'Print' ;
-				ACTION FilePrint() SEPARATOR
+            BUTTON Button_2 ;
+               PICTURE 'Print' ;
+               TOOLTIP 'Print' ;
+               ACTION FilePrint() SEPARATOR
 
-			BUTTON Button_3 ;
-				PICTURE 'Info' ;
-				TOOLTIP 'Info' ;
-				ACTION PictInfo()
+            BUTTON Button_3 ;
+               PICTURE 'Info' ;
+               TOOLTIP 'Info' ;
+               ACTION PictInfo()
 
-			BUTTON Button_4 ;
-				PICTURE 'Zout' ;
-				TOOLTIP 'Zoom out' ;
-				ACTION Zoom( 1 )
+            BUTTON Button_4 ;
+               PICTURE 'Zout' ;
+               TOOLTIP 'Zoom out' ;
+               ACTION Zoom( 1 )
 
-			BUTTON Button_5 ;
-				PICTURE 'Zin' ;
-				TOOLTIP 'Zoom in' ;
-				ACTION Zoom( -1 )
+            BUTTON Button_5 ;
+               PICTURE 'Zin' ;
+               TOOLTIP 'Zoom in' ;
+               ACTION Zoom( -1 )
 
-			BUTTON Button_6 ;
-				PICTURE 'ZFill' ;
-				TOOLTIP 'Zoom Fill' ;
-				ACTION ZoomFill()
+            BUTTON Button_6 ;
+               PICTURE 'ZFill' ;
+               TOOLTIP 'Zoom Fill' ;
+               ACTION ZoomFill()
 
-			BUTTON Button_7 ;
-				PICTURE 'Left' ;
-				TOOLTIP 'Previous' ;
-				ACTION Next( -1 )
+            BUTTON Button_7 ;
+               PICTURE 'Left' ;
+               TOOLTIP 'Previous' ;
+               ACTION Next( -1 )
 
-			BUTTON Button_8 ;
-				PICTURE 'Right' ;
-				TOOLTIP 'Next' ;
-				ACTION Next( 1 )
+            BUTTON Button_8 ;
+               PICTURE 'Right' ;
+               TOOLTIP 'Next' ;
+               ACTION Next( 1 )
 
-		END TOOLBAR
+         END TOOLBAR
 
-	END SPLITBOX
+      END SPLITBOX
 
-	Form_Main.Button_2.Enabled := !EMPTY( nLen )
-	Form_Main.Button_3.Enabled := !EMPTY( nLen )
-	Form_Main.Button_4.Enabled := !EMPTY( nLen )
-	Form_Main.Button_5.Enabled := !EMPTY( nLen )
-	Form_Main.Button_6.Enabled := !EMPTY( nLen )
-	Form_Main.Button_7.Enabled := ( nLen > 1 )
-	Form_Main.Button_8.Enabled := ( nLen > 1 )
+      Form_Main.Button_2.Enabled := !EMPTY( nLen )
+      Form_Main.Button_3.Enabled := !EMPTY( nLen )
+      Form_Main.Button_4.Enabled := !EMPTY( nLen )
+      Form_Main.Button_5.Enabled := !EMPTY( nLen )
+      Form_Main.Button_6.Enabled := !EMPTY( nLen )
+      Form_Main.Button_7.Enabled := ( nLen > 1 )
+      Form_Main.Button_8.Enabled := ( nLen > 1 )
 
-	DEFINE STATUSBAR
-		STATUSITEM "No file loaded" WIDTH 80
-		STATUSITEM "" WIDTH 52
-		STATUSITEM "" WIDTH 52 ACTION Zoom( 0 )
-		STATUSITEM "" WIDTH 80
-		STATUSITEM "" WIDTH 124
-		STATUSITEM "" WIDTH 200
-	END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM "No file loaded" WIDTH 80
+         STATUSITEM "" WIDTH 52
+         STATUSITEM "" WIDTH 52 ACTION Zoom( 0 )
+         STATUSITEM "" WIDTH 80
+         STATUSITEM "" WIDTH 124
+         STATUSITEM "" WIDTH 200
+      END STATUSBAR
 
-	ON KEY ESCAPE ACTION ReleaseAllWindows()
+      ON KEY ESCAPE ACTION ReleaseAllWindows()
 
-	ON KEY F12 ACTION Form_Main.Minimize
+      ON KEY F12 ACTION Form_Main.Minimize
 
-	ON KEY CONTROL+O ACTION FileOpen()
+      ON KEY CONTROL+O ACTION FileOpen()
 
-	ON KEY CONTROL+P ACTION FilePrint()
+      ON KEY CONTROL+P ACTION FilePrint()
 
-	ON KEY GRAYPLUS ACTION Zoom( 1 )
+      ON KEY GRAYPLUS ACTION Zoom( 1 )
 
-	ON KEY GRAYMINUS ACTION Zoom( -1 )
+      ON KEY GRAYMINUS ACTION Zoom( -1 )
 
-	// gugu
-	ON KEY GRAYMULTIPLY ACTION ZoomFill()
-        //
+      // gugu
+      ON KEY GRAYMULTIPLY ACTION ZoomFill()
 
-	ON KEY CONTROL+I ACTION PictInfo()
+      ON KEY CONTROL+I ACTION PictInfo()
 
-	ON KEY CONTROL+H ACTION Zoom( 0 )
+      ON KEY CONTROL+H ACTION Zoom( 0 )
 
-	ON KEY LEFT ACTION Next( -1 )
+      ON KEY LEFT ACTION Next( -1 )
 
-	ON KEY RIGHT ACTION Next( 1 )
+      ON KEY RIGHT ACTION Next( 1 )
 
-	ON KEY UP ACTION ( nItem := 1, Next( 0 ) )
+      ON KEY UP ACTION ( nItem := 1, Next( 0 ) )
 
-	ON KEY DOWN ACTION ( nItem := Len(aFiles), Next( 0 ) )
+      ON KEY DOWN ACTION ( nItem := Len(aFiles), Next( 0 ) )
 
-	ON KEY BACK ACTION Next( -1 )
+      ON KEY BACK ACTION Next( -1 )
 
-	ON KEY SPACE ACTION Next( 1 )
+      ON KEY SPACE ACTION Next( 1 )
 
    END WINDOW
 
@@ -209,15 +202,14 @@ PRIVATE nScrWidth := aDesk[3], nScrHeight := aDesk[4]
 
    ACTIVATE WINDOW Form_Main
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Static Function FileOpen( fname, lInit )
-*--------------------------------------------------------*
-Local cPath := "\" + CurDir() + IF( Empty( CurDir() ), "", "\" ), ;
-	aSize, nLen := LEN( aFiles ), nFormWidth, nFormHeight, nStart
+STATIC FUNCTION FileOpen( fname, lInit )
 
-   default fname := "", lInit := .f.
+   LOCAL cPath := "\" + CurDir() + IF( Empty( CurDir() ), "", "\" ), ;
+      aSize, nLen := LEN( aFiles ), nFormWidth, nFormHeight, nStart
+
+   DEFAULT fname := "", lInit := .f.
 
    IF Empty( fname )
       fname := GetFile( { {"Image files (*.jpg, *.jpeg)", "*.jpg;*.jpeg"} }, "Open", cPath )
@@ -243,7 +235,7 @@ Local cPath := "\" + CurDir() + IF( Empty( CurDir() ), "", "\" ), ;
          nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
          nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + GetBorderHeight() + GetMenuBarHeight() + 60
          IF ( nFormWidth <= nScrWidth .AND. nFormHeight <= nScrHeight ) .OR. nKoef < 0.16
-               EXIT
+            EXIT
          ENDIF
          nKoef -= 0.05
       ENDDO
@@ -289,19 +281,20 @@ Local cPath := "\" + CurDir() + IF( Empty( CurDir() ), "", "\" ), ;
 
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Static Function Zoom( nOp )
-*--------------------------------------------------------*
-Local nPictWidth, nPictHeight
+STATIC FUNCTION Zoom( nOp )
+
+   LOCAL nPictWidth, nPictHeight
 
    IF Form_Main.StatusBar.Item(1) == "No file loaded"
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    IF Empty( nOp ) .AND. nKoef == 1
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    IF Int( nKoef * 10 ) # Round(nKoef, 1) * 10
@@ -346,17 +339,17 @@ Local nPictWidth, nPictHeight
    Form_Main.Image_1.SetFocus
    Form_Main.Center
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Static Function ZoomFill()             // gugu (Gustow)
-*--------------------------------------------------------*
-Local nPictWidth, nPictHeight
+STATIC FUNCTION ZoomFill()             // gugu (Gustow)
 
-local nFormWidth, nFormHeight
+   LOCAL nPictWidth, nPictHeight
+
+   LOCAL nFormWidth, nFormHeight
 
    IF Form_Main.StatusBar.Item(1) == "No file loaded"
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    // from FileOpen()
@@ -365,11 +358,10 @@ local nFormWidth, nFormHeight
       nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
       nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + GetBorderHeight() + GetMenuBarHeight() + 60
       IF ( nFormWidth <= nScrWidth .AND. nFormHeight <= nScrHeight ) .OR. nKoef < 0.16
-            EXIT
+         EXIT
       ENDIF
       nKoef -= 0.05
    ENDDO
-   //
 
    // from Zoom()
    nPictWidth := Round( nWidth * nKoef, 0 )
@@ -402,83 +394,81 @@ local nFormWidth, nFormHeight
    Form_Main.Image_1.SetFocus
    Form_Main.Center
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Static Function PictInfo()
-*--------------------------------------------------------*
-LOCAL aLabel := {}, cLabel, aText := {}, cText, n
+STATIC FUNCTION PictInfo()
 
-IF !Empty(cFile)
+   LOCAL aLabel := {}, cLabel, aText := {}, cText, n
 
-   Aadd(aLabel, "File name:")
-   Aadd(aLabel, "Folder:")
-   Aadd(aLabel, "Compression:")
-   Aadd(aLabel, "Original size:")
-   Aadd(aLabel, "Disk size:")
-   Aadd(aLabel, "Current folder index:")
-   Aadd(aLabel, "File date/time:")
-   Aadd(aLabel, "Loaded in:")
+   IF !Empty(cFile)
 
-   Aadd(aText, cFileNoPath(cFile))
-   Aadd(aText, CurDrive() + ":\" + CurDir() + IF( Empty( CurDir() ), "", "\" ))
-   Aadd(aText, "JPEG")
-   Aadd(aText, ltrim(str(nWidth)) + " x " + ltrim(str(nHeight)) + " Pixels")
-   Aadd(aText, ltrim(str(aFiles[nItem][2]/1024)) + " KB (" + ltrim(str(aFiles[nItem][2])) + " Bytes)")
-   Aadd(aText, ltrim(str(nItem)) + " / " + ltrim(str(Len(aFiles))))
-   Aadd(aText, dtoc(aFiles[nItem][3]) + " / " + aFiles[nItem][4])
-   Aadd(aText, ltrim(str(int(nLoadTime*1000))) + " milliseconds")
+      Aadd(aLabel, "File name:")
+      Aadd(aLabel, "Folder:")
+      Aadd(aLabel, "Compression:")
+      Aadd(aLabel, "Original size:")
+      Aadd(aLabel, "Disk size:")
+      Aadd(aLabel, "Current folder index:")
+      Aadd(aLabel, "File date/time:")
+      Aadd(aLabel, "Loaded in:")
 
-   DEFINE WINDOW Form_Info AT 0,0 ;
-      WIDTH 360 HEIGHT 300 ;
-      TITLE PROGRAM + " - Image properties" ;
-      MODAL ;
-      NOSIZE ;
-      NOSYSMENU ;
-      ON INIT Form_Info.Button_OK.SetFocus ;
-      FONT 'MS Sans Serif' ; 
-      SIZE 9
+      Aadd(aText, cFileNoPath(cFile))
+      Aadd(aText, CurDrive() + ":\" + CurDir() + IF( Empty( CurDir() ), "", "\" ))
+      Aadd(aText, "JPEG")
+      Aadd(aText, ltrim(str(nWidth)) + " x " + ltrim(str(nHeight)) + " Pixels")
+      Aadd(aText, ltrim(str(aFiles[nItem][2]/1024)) + " KB (" + ltrim(str(aFiles[nItem][2])) + " Bytes)")
+      Aadd(aText, ltrim(str(nItem)) + " / " + ltrim(str(Len(aFiles))))
+      Aadd(aText, dtoc(aFiles[nItem][3]) + " / " + aFiles[nItem][4])
+      Aadd(aText, ltrim(str(int(nLoadTime*1000))) + " milliseconds")
 
-      @ 8,8 FRAME Frame_1 ; 
-          WIDTH 338 ; 
-          HEIGHT 212
+      DEFINE WINDOW Form_Info AT 0,0 ;
+            WIDTH 360 HEIGHT 300 ;
+            TITLE PROGRAM + " - Image properties" ;
+            MODAL ;
+            NOSIZE ;
+            NOSYSMENU ;
+            ON INIT Form_Info.Button_OK.SetFocus ;
+            FONT 'MS Sans Serif' ;
+            SIZE 9
 
-      FOR n := 1 TO Len(aLabel)
-         cLabel := "Label_" + ltrim(str(n))
-         @ (n-1)*24 + 23, 20 LABEL &cLabel ;
-            VALUE aLabel[n] ;
-            WIDTH 100 HEIGHT 20
-      NEXT
+         @ 8,8 FRAME Frame_1 ;
+            WIDTH 338 ;
+            HEIGHT 212
 
-      FOR n := 1 TO Len(aText)
-         cText := "Text_" + ltrim(str(n))
-         @ (n-1)*24 + 21, 134 TEXTBOX &cText ;
-            VALUE aText[n] ;
-            HEIGHT 20 ;
-            WIDTH 200 ;
-            READONLY
-      NEXT
+         FOR n := 1 TO Len(aLabel)
+            cLabel := "Label_" + ltrim(str(n))
+            @ (n-1)*24 + 23, 20 LABEL &cLabel ;
+               VALUE aLabel[n] ;
+               WIDTH 100 HEIGHT 20
+         NEXT
 
-      @ Form_Info.Height - 68, Form_Info.Width/2 - 50 BUTTON Button_OK ;
-         CAPTION "OK" ;
-         ACTION Form_Info.Release ;
-         WIDTH 96 HEIGHT 32 - IF(IsThemed(), 6, 0) ;
-         DEFAULT
+         FOR n := 1 TO Len(aText)
+            cText := "Text_" + ltrim(str(n))
+            @ (n-1)*24 + 21, 134 TEXTBOX &cText ;
+               VALUE aText[n] ;
+               HEIGHT 20 ;
+               WIDTH 200 ;
+               READONLY
+         NEXT
 
-   END WINDOW
+         @ Form_Info.Height - 68, Form_Info.Width/2 - 50 BUTTON Button_OK ;
+            CAPTION "OK" ;
+            ACTION Form_Info.Release ;
+            WIDTH 96 HEIGHT 32 - IF(IsThemed(), 6, 0) ;
+            DEFAULT
 
-   CENTER WINDOW Form_Info
+      END WINDOW
 
-   ACTIVATE WINDOW Form_Info
+      CENTER WINDOW Form_Info
 
-ENDIF
+      ACTIVATE WINDOW Form_Info
 
-Return Nil
+   ENDIF
 
-*--------------------------------------------------------*
-Static Function Next( nOp )
-*--------------------------------------------------------*
-LOCAL nLen := LEN( aFiles )
+   RETURN NIL
+
+STATIC FUNCTION Next( nOp )
+
+   LOCAL nLen := LEN( aFiles )
 
    IF nLen > 1
       IF nOp < 0
@@ -494,99 +484,97 @@ LOCAL nLen := LEN( aFiles )
       Form_Main.Text_1.Value := ltrim(str(nItem)) + "/" + ltrim(str(nLen))
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Static Function FilePrint()
-*--------------------------------------------------------*
-Local nScale := 1 / 3.937, nX, nY, nH, nW
+STATIC FUNCTION FilePrint()
+
+   LOCAL nScale := 1 / 3.937, nX, nY, nH, nW
 
    IF !Empty( cFile ) .AND. File( cFile )
 
-	INIT PRINTSYS
+      INIT PRINTSYS
 
-	SELECT BY DIALOG 
+      SELECT BY DIALOG
 
-	IF HBPRNERROR != 0 
-		RETURN Nil
-	ENDIF
+      IF HBPRNERROR != 0
 
-	SET UNITS MM                      // Sets @... units to milimeters
-	SET PAPERSIZE DMPAPER_A4          // Sets paper size to A4
+         RETURN NIL
+      ENDIF
 
-	IF nHeight >= nWidth
-		SET ORIENTATION PORTRAIT    // Sets paper orientation to portrait
-		nH := 250
-		nW := 170
-	ELSE
-		SET ORIENTATION LANDSCAPE   // Sets paper orientation to landscape
-		nH := 170
-		nW := 250
-	ENDIF
+      SET UNITS MM                      // Sets @... units to milimeters
+      SET PAPERSIZE DMPAPER_A4          // Sets paper size to A4
 
-	SET BIN DMBIN_FIRST               // Use first bin
-	SET QUALITY DMRES_HIGH            // Sets print quality to high
-	SET COLORMODE DMCOLOR_COLOR       // Set print color mode to color
-	SET PREVIEW ON                    // Enables print preview
-	SET PREVIEW RECT 0, 0, nScrHeight, nScrWidth
-	START DOC NAME Left(PROGRAM, 9)
+      IF nHeight >= nWidth
+         SET ORIENTATION PORTRAIT    // Sets paper orientation to portrait
+         nH := 250
+         nW := 170
+      ELSE
+         SET ORIENTATION LANDSCAPE   // Sets paper orientation to landscape
+         nH := 170
+         nW := 250
+      ENDIF
 
-		START PAGE
+      SET BIN DMBIN_FIRST               // Use first bin
+      SET QUALITY DMRES_HIGH            // Sets print quality to high
+      SET COLORMODE DMCOLOR_COLOR       // Set print color mode to color
+      SET PREVIEW ON                    // Enables print preview
+      SET PREVIEW RECT 0, 0, nScrHeight, nScrWidth
+      START DOC NAME Left(PROGRAM, 9)
 
-			DO WHILE .T.
+      START PAGE
 
-				nX := Round( nHeight * nScale, 0 )
-				nY := Round( nWidth * nScale, 0 )
+      DO WHILE .T.
 
-				IF ( nX <= nH .AND. nY <= nW ) .OR. nScale < 0.15
-					EXIT
-				ENDIF
+         nX := Round( nHeight * nScale, 0 )
+         nY := Round( nWidth * nScale, 0 )
 
-				nScale -= 0.05
+         IF ( nX <= nH .AND. nY <= nW ) .OR. nScale < 0.15
+            EXIT
+         ENDIF
 
-			ENDDO
+         nScale -= 0.05
 
-			@ 15,20 PICTURE cFile SIZE nX, nY
+      ENDDO
 
-		END PAGE
+      @ 15,20 PICTURE cFile SIZE nX, nY
 
-	END DOC
+   END PAGE
 
-	RELEASE PRINTSYS
+END DOC
 
-   ENDIF
+RELEASE PRINTSYS
 
-Return Nil
+ENDIF
 
-*--------------------------------------------------------*
-Static Function MsgAbout()
-*--------------------------------------------------------*
-return MsgInfo( padc(PROGRAM + VERSION, 38) + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	hb_compiler() + CRLF + version() + CRLF + ;
-	Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
-	padc("This program is Freeware!", 38), "About", , .f. )
+RETURN NIL
 
-*--------------------------------------------------------*
-Function JpgSize( cJPGfile )
-*--------------------------------------------------------*
-return hb_GetImageSize( cJPGfile )
+STATIC FUNCTION MsgAbout()
 
+   RETURN MsgInfo( padc(PROGRAM + VERSION, 38) + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      hb_compiler() + CRLF + version() + CRLF + ;
+      Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
+      padc("This program is Freeware!", 38), "About", , .f. )
+
+FUNCTION JpgSize( cJPGfile )
+
+   RETURN hb_GetImageSize( cJPGfile )
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 
-HB_FUNC ( GETDESKTOPAREA ) 
+HB_FUNC ( GETDESKTOPAREA )
 {
-	RECT rect;
-	SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
+   RECT rect;
+   SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
 
-	hb_reta(4);
-	HB_STORNI((INT) rect.top, -1, 1);
-	HB_STORNI((INT) rect.left, -1, 2);
-	HB_STORNI((INT) rect.right - rect.left, -1, 3);
-	HB_STORNI((INT) rect.bottom - rect.top, -1, 4);
+   hb_reta(4);
+   HB_STORNI((INT) rect.top, -1, 1);
+   HB_STORNI((INT) rect.left, -1, 2);
+   HB_STORNI((INT) rect.right - rect.left, -1, 3);
+   HB_STORNI((INT) rect.bottom - rect.top, -1, 4);
 }
 
 #pragma ENDDUMP
+

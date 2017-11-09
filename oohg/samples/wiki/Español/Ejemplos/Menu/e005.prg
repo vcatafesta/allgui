@@ -1,16 +1,14 @@
 /*
- * Ejemplo Menu n° 5
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo abrir un item del menu
- * (dinámicamente definido) usando su tecla de acceso
- * rápido.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Menu n° 5
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo abrir un item del menu
+* (dinámicamente definido) usando su tecla de acceso
+* rápido.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -20,12 +18,12 @@ FUNCTION Main()
    cShortcut := SUBSTR( cMenuItem, AT( "&", cMenuItem ) + 1, 1 )
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE "Abrir Menú" ;
-      MAIN ;
-      ON INIT INSERTAR_ALT_F( ASC( cShortcut ) )
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Abrir Menú" ;
+         MAIN ;
+         ON INIT INSERTAR_ALT_F( ASC( cShortcut ) )
 
       DEFINE MAIN MENU OF Win_1
          POPUP cMenuItem
@@ -53,7 +51,7 @@ FUNCTION Main()
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -69,6 +67,7 @@ HB_FUNC( INSERTAR_ALT_F )
 
 #pragma ENDDUMP
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

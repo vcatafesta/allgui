@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * MOUSEHOVER Demo was contributed to HMG forum by AGL
- * Adapted for MiniGUI Extended Edition by Grigory Filatov
+* MINIGUI - Harbour Win32 GUI library
+* MOUSEHOVER Demo was contributed to HMG forum by AGL
+* Adapted for MiniGUI Extended Edition by Grigory Filatov
 */
 
 #include "minigui.ch"
@@ -13,16 +12,17 @@
 STATIC lOver := .F.
 
 FUNCTION Main
+
    LOCAL i, cLblName
 
    SET FONT TO 'Verdana', 9
 
    DEFINE WINDOW Win_1 ;
-      AT 0 , 0 ;
-      WIDTH 230 HEIGHT 380 ;
-      BACKCOLOR CLR_BLUE1 ;
-      TITLE "MOUSEHOVER Demo" ;
-      MAIN NOMAXIMIZE NOSIZE
+         AT 0 , 0 ;
+         WIDTH 230 HEIGHT 380 ;
+         BACKCOLOR CLR_BLUE1 ;
+         TITLE "MOUSEHOVER Demo" ;
+         MAIN NOMAXIMIZE NOSIZE
 
       ON KEY ESCAPE ACTION ThisWindow.Release()
 
@@ -31,25 +31,24 @@ FUNCTION Main
          cLblName := 'Lbl_' + hb_ntos(i)
 
          @ 30 + 28 * (i - 1),10 LABEL &cLblName ;
-           VALUE "Opcion " + hb_ntos(i) ;
-           WIDTH 200 HEIGHT 23 ;
-           FONTCOLOR WHITE BACKCOLOR CLR_BLUE2 ;
-           CENTERALIGN VCENTERALIGN ;
-           ACTION MsgInfo( GetProperty(ThisWindow.Name, This.Name, 'Value') ) ;
-           ON MOUSEHOVER SelectLabel( ThisWindow.Name, This.Name ) ;
-           ON MOUSELEAVE LeaveLabel( ThisWindow.Name, This.Name )
+            VALUE "Opcion " + hb_ntos(i) ;
+            WIDTH 200 HEIGHT 23 ;
+            FONTCOLOR WHITE BACKCOLOR CLR_BLUE2 ;
+            CENTERALIGN VCENTERALIGN ;
+            ACTION MsgInfo( GetProperty(ThisWindow.Name, This.Name, 'Value') ) ;
+            ON MOUSEHOVER SelectLabel( ThisWindow.Name, This.Name ) ;
+            ON MOUSELEAVE LeaveLabel( ThisWindow.Name, This.Name )
 
       NEXT
 
-      @ 250,10 LABEL Lbl_7 VALUE "" WIDTH 200 HEIGHT 20 CENTERALIGN TRANSPARENT 
+      @ 250,10 LABEL Lbl_7 VALUE "" WIDTH 200 HEIGHT 20 CENTERALIGN TRANSPARENT
 
    END WINDOW
 
    CENTER   WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION SelectLabel( cForm, cCtrl )
 
@@ -67,8 +66,7 @@ FUNCTION SelectLabel( cForm, cCtrl )
 
    ENDIF
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION LeaveLabel( cForm, cCtrl )
 
@@ -80,4 +78,5 @@ FUNCTION LeaveLabel( cForm, cCtrl )
 
    lOver := .F.
 
-RETURN Nil
+   RETURN NIL
+

@@ -1,14 +1,12 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- * Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Example to view DBF files using standard Browse control
- * Copyright 2009 MigSoft <mig2soft/at/yahoo.com>
- *
- * Enhanced by Grigory Filatov <gfilatov@inbox.ru>
- * Last Revised 11/10/2017
- */
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Example to view DBF files using standard Browse control
+* Copyright 2009 MigSoft <mig2soft/at/yahoo.com>
+* Enhanced by Grigory Filatov <gfilatov@inbox.ru>
+* Last Revised 11/10/2017
+*/
 
 #include "minigui.ch"
 
@@ -56,9 +54,9 @@ FUNCTION Main()
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-// ----------------------------------------------------------------------------//
+   // ----------------------------------------------------------------------------//
 
 FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
 
@@ -76,44 +74,44 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
    SET DEFAULT ICON TO "MAIN"
 
    DEFINE WINDOW oWndBase AT nRow, nCol ;
-      WIDTH nWidth HEIGHT nHeight ;
-      TITLE "(c)2009 MigSoft - View DBF files" ;
-      MAIN ;
-      ON SIZE Adjust() ON MAXIMIZE Adjust()
+         WIDTH nWidth HEIGHT nHeight ;
+         TITLE "(c)2009 MigSoft - View DBF files" ;
+         MAIN ;
+         ON SIZE Adjust() ON MAXIMIZE Adjust()
 
-   DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 90, 32 FONT "Arial" SIZE 9 FLAT RIGHTTEXT
-      BUTTON Cerrar    CAPTION _HMG_aABMLangButton[ 1 ]  PICTURE "MINIGUI_EDIT_CLOSE"  ACTION oWndBase.RELEASE               AUTOSIZE
-      BUTTON Nuevo     CAPTION _HMG_aABMLangButton[ 2 ]  PICTURE "MINIGUI_EDIT_NEW"    ACTION Append()                       AUTOSIZE
-      BUTTON Modificar CAPTION _HMG_aABMLangButton[ 3 ]  PICTURE "MINIGUI_EDIT_EDIT"   ACTION Edit()                         AUTOSIZE
-      BUTTON Eliminar  CAPTION _HMG_aABMLangButton[ 4 ]  PICTURE "MINIGUI_EDIT_DELETE" ACTION DeleteOrRecall()               AUTOSIZE
-      BUTTON Buscar    CAPTION _HMG_aABMLangButton[ 5 ]  PICTURE "MINIGUI_EDIT_FIND"   ACTION MyFind()                       AUTOSIZE
-      BUTTON Imprimir  CAPTION _HMG_aABMLangButton[ 16 ] PICTURE "MINIGUI_EDIT_PRINT"  ACTION printlist( cBase, aNomb, aLong ) AUTOSIZE
-   END TOOLBAR
+      DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 90, 32 FONT "Arial" SIZE 9 FLAT RIGHTTEXT
+         BUTTON Cerrar    CAPTION _HMG_aABMLangButton[ 1 ]  PICTURE "MINIGUI_EDIT_CLOSE"  ACTION oWndBase.RELEASE               AUTOSIZE
+         BUTTON Nuevo     CAPTION _HMG_aABMLangButton[ 2 ]  PICTURE "MINIGUI_EDIT_NEW"    ACTION Append()                       AUTOSIZE
+         BUTTON Modificar CAPTION _HMG_aABMLangButton[ 3 ]  PICTURE "MINIGUI_EDIT_EDIT"   ACTION Edit()                         AUTOSIZE
+         BUTTON Eliminar  CAPTION _HMG_aABMLangButton[ 4 ]  PICTURE "MINIGUI_EDIT_DELETE" ACTION DeleteOrRecall()               AUTOSIZE
+         BUTTON Buscar    CAPTION _HMG_aABMLangButton[ 5 ]  PICTURE "MINIGUI_EDIT_FIND"   ACTION MyFind()                       AUTOSIZE
+         BUTTON Imprimir  CAPTION _HMG_aABMLangButton[ 16 ] PICTURE "MINIGUI_EDIT_PRINT"  ACTION printlist( cBase, aNomb, aLong ) AUTOSIZE
+      END TOOLBAR
 
-   DEFINE BROWSE Browse_1
-      ROW    45
-      COL    20
-      WIDTH  oWndBase.width  - 40
-      HEIGHT oWndBase.height - 95
-      VALUE 0
-      WIDTHS aLong
-      HEADERS aHdr
-      HEADERIMAGE aCabImg
-      WORKAREA &cBase
-      FIELDS aNomb
-      JUSTIFY aJust
-      IMAGE { "br_no", "br_ok" }
-      FONTNAME "Arial"
-      FONTSIZE 9
-      TOOLTIP ""
-      ONCHANGE NIL
-      LOCK .T.
-      ALLOWEDIT .T.
-      INPLACEEDIT .T.
-      ALLOWDELETE .T.
-      ALLOWAPPEND .T.
-      ONHEADCLICK NIL
-   END BROWSE
+      DEFINE BROWSE Browse_1
+         ROW    45
+         COL    20
+         WIDTH  oWndBase.width  - 40
+         HEIGHT oWndBase.height - 95
+         VALUE 0
+         WIDTHS aLong
+         HEADERS aHdr
+         HEADERIMAGE aCabImg
+         WORKAREA &cBase
+         FIELDS aNomb
+         JUSTIFY aJust
+         IMAGE { "br_no", "br_ok" }
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP ""
+         ONCHANGE NIL
+         LOCK .T.
+         ALLOWEDIT .T.
+         INPLACEEDIT .T.
+         ALLOWDELETE .T.
+         ALLOWAPPEND .T.
+         ONHEADCLICK NIL
+      END BROWSE
 
    END WINDOW
 
@@ -124,19 +122,20 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
    oWndBase.Center
    oWndBase.Activate
 
-RETURN NIL
+   RETURN NIL
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 FUNCTION VerHeadIcon( aType )
 
    LOCAL aFtype, cType, n
    LOCAL aHeadIcon := { "hdel" }
+
    aFtype := AClone( aType )
 
    FOR n := 1 TO FCount()
       cType := aFtype[ n ]
-      Switch cType
+      SWITCH cType
       CASE 'L'
          AAdd( aHeadIcon, "hlogic" )
          EXIT
@@ -154,17 +153,18 @@ FUNCTION VerHeadIcon( aType )
       END
    NEXT
 
-Return( aHeadIcon )
+   RETURN( aHeadIcon )
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE Adjust()
+
    oWndBase.Browse_1.Width  := oWndBase.Width  - 40
    oWndBase.Browse_1.Height := oWndBase.Height - 95
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE Append()
 
@@ -182,9 +182,9 @@ PROCEDURE Append()
 
    oWndBase.Browse_1.SetFocus
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE Edit()
 
@@ -196,9 +196,9 @@ PROCEDURE Edit()
 
    oWndBase.Browse_1.SetFocus
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE DeleteOrRecall()
 
@@ -212,9 +212,9 @@ PROCEDURE DeleteOrRecall()
    oWndBase.Browse_1.Refresh
    oWndBase.Browse_1.SetFocus
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE printlist( cBase, aNomb, aLong )
 
@@ -237,8 +237,8 @@ PROCEDURE printlist( cBase, aNomb, aLong )
    AFill( aHdr1, '' )
    AFill( aTot, .F. )
    AFill( aFmt, '' )
-// aFmt[9]  := '999'
-// aFmt[10] := '@E 999,999'
+   // aFmt[9]  := '999'
+   // aFmt[10] := '@E 999,999'
 
    SET DELETED ON
 
@@ -259,9 +259,9 @@ PROCEDURE printlist( cBase, aNomb, aLong )
 
    SET DELETED OFF
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 PROCEDURE MyFind()
 
@@ -297,25 +297,26 @@ PROCEDURE MyFind()
 
    oWndBase.Browse_1.SetFocus
 
-RETURN
+   RETURN
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
-/*
+   /*
    f.Exp1Check( <cSingleExpression> ) => <cResult>
 
    Copyright 2008-2010 © Bicahi Esgici <esgici@gmail.com>
-*/
+   */
+
 FUNCTION Exp1Check( ;                // Syntax Checking on a single expression
-      c1Exprsn )
+   c1Exprsn )
 
    LOCAL cRVal := '', ;
       c1Char, ;
       c1Atom  := '', ;
       nPnter  := 0, ;
       cBPrnts := "([{'" + '"', ;  // Parenthesis Begin
-      cEPrnts := ")]}'" + '"', ;  // Parenthesis End
-      cOprtrs := "+-/*,@$&!<>=#", ;
+   cEPrnts := ")]}'" + '"', ;  // Parenthesis End
+   cOprtrs := "+-/*,@$&!<>=#", ;
       cVoidEs := '"(' + "'", ;
       c1stChr := '', ;
       aLogics := { "AND", "OR", "NOT"  }, ;
@@ -395,12 +396,12 @@ FUNCTION Exp1Check( ;                // Syntax Checking on a single expression
       ENDIF
    ENDIF
 
-RETURN cRVal // Exp1Check()
+   RETURN cRVal // Exp1Check()
 
-// ---------------------------------------------------------------------------- //
+   // ---------------------------------------------------------------------------- //
 
 FUNCTION SubStrng2( ;             // Sub String defined two position
-      cString, ;
+   cString, ;
       nBegPos, ;
       nEndPos )
 
@@ -408,4 +409,5 @@ FUNCTION SubStrng2( ;             // Sub String defined two position
 
    cRVal := SubStr( cString,  nBegPos, nEndPos - nBegPos + 1 )
 
-RETURN cRVal // SubStrng2()
+   RETURN cRVal // SubStrng2()
+

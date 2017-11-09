@@ -1,26 +1,28 @@
 /*
- * Repbuild - Visual Report Builder
- * Printing functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
+* Repbuild - Visual Report Builder
+* Printing functions
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://www.geocities.com/alkresin/
 */
 
 #include "windows.ch"
 #include "guilib.ch"
 #include "repbuild.h"
 #include "repmain.h"
-memvar aPaintRep, lAddMode, oFontStandard
-Function PrintRpt
-Local hDCwindow
-Local oPrinter := HPrinter():New()
-Local aPrnCoors, prnXCoef, prnYCoef
-Local i, aItem, aMetr, aTmetr, aPmetr, dKoef, pKoef
-Local fontKoef, oFont
-Private lAddMode := .F.
+MEMVAR aPaintRep, lAddMode, oFontStandard
+
+FUNCTION PrintRpt
+
+   LOCAL hDCwindow
+   LOCAL oPrinter := HPrinter():New()
+   LOCAL aPrnCoors, prnXCoef, prnYCoef
+   LOCAL i, aItem, aMetr, aTmetr, aPmetr, dKoef, pKoef
+   LOCAL fontKoef, oFont
+   PRIVATE lAddMode := .F.
 
    IF oPrinter:hDCPrn == Nil .OR. oPrinter:hDCPrn == 0
-      Return .F.
+
+      RETURN .F.
    ENDIF
 
    aPrnCoors := GetDeviceArea( oPrinter:hDCPrn )
@@ -43,8 +45,8 @@ Private lAddMode := .F.
       IF aPaintRep[FORM_ITEMS,i,ITEM_TYPE] == TYPE_TEXT
          oFont := aPaintRep[FORM_ITEMS,i,ITEM_FONT]
          aPaintRep[FORM_ITEMS,i,ITEM_STATE] := HFont():Add( oFont:name,;
-              oFont:width,Round(oFont:height*fontKoef,0),oFont:weight, ;
-              oFont:charset,oFont:italic )
+            oFont:width,Round(oFont:height*fontKoef,0),oFont:weight, ;
+            oFont:charset,oFont:italic )
       ENDIF
    NEXT
 
@@ -75,4 +77,5 @@ Private lAddMode := .F.
    oPrinter:Preview()
    oPrinter:End()
 
-Return Nil
+   RETURN NIL
+

@@ -28,8 +28,6 @@
 #define _ARRAY_GRID_ADD_DATA_  1
 #define _ARRAY_GRID_GET_DATA_  2
 
-
-***************************************************************************
 FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
 
    LOCAL k, DataMove, nLength, nPos, DataAdd
@@ -55,7 +53,6 @@ FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
       AIns ( aData, nPos )
       aData[nPos ] := DataMove
 
-
    CASE nAction = _ARRAY_MOVE_COL_
       FOR k = 1 TO Len ( aData )
          DataMove := aData[k ][nIndex ]
@@ -63,7 +60,6 @@ FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
          AIns ( aData[k ], nPos )
          aData[k ][nPos ] := DataMove
       NEXT
-
 
    CASE nAction = _ARRAY_ADD_ROW_
       nLength := Len ( aData )
@@ -82,7 +78,6 @@ FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
          aData[nIndex ] := DataAdd
       ENDIF
 
-
    CASE nAction = _ARRAY_ADD_COL_
       nLength := Len ( aData[1 ] )
       FOR k = 1 TO Len ( aData )
@@ -97,12 +92,10 @@ FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
          ENDIF
       NEXT
 
-
    CASE nAction = _ARRAY_REMOVE_ROW_
       nLength := Len ( aData )
       ADel  ( aData, nIndex )
       ASize ( aData, nLength -1 )
-
 
    CASE nAction = _ARRAY_REMOVE_COL_
       nLength := Len ( aData[1 ] )
@@ -113,10 +106,8 @@ FUNCTION ARRAY_CHANGE ( nAction, aData, nIndex, xData )
 
    ENDCASE
 
-RETURN aData
+   RETURN aData
 
-
-***************************************************************************
 FUNCTION ARRAY_GRID ( cControlName, cParentForm, nAction, aGridData )
 
    LOCAL k
@@ -137,4 +128,5 @@ FUNCTION ARRAY_GRID ( cControlName, cParentForm, nAction, aGridData )
       NEXT
    ENDCASE
 
-RETURN aGridData
+   RETURN aGridData
+

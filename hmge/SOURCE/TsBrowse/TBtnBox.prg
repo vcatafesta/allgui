@@ -13,24 +13,34 @@
 
 CLASS TBtnBox FROM TControl
 
-   CLASSDATA lRegistered AS LOGICAL
+CLASSDATA lRegistered AS LOGICAL
 
    DATA Atx, lAppend, bAction, nCell, lChanged
    DATA hWndChild
 
-   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
-               nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
-               cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell )
-   METHOD Default()
-   METHOD HandleEvent( nMsg, nWParam, nLParam )
-   METHOD GetDlgCode( nLastKey, nFlags )
-   Method KeyChar( nKey, nFlags )
-   Method KeyDown( nKey, nFlags )
-   Method LostFocus( hCtlFocus )
-   Method lValid()
-   METHOD LButtonDown( nRow, nCol )
-   METHOD GetVal()
-   METHOD Command( nWParam, nLParam )
+METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
+      cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell )
+
+METHOD Default()
+
+METHOD HandleEvent( nMsg, nWParam, nLParam )
+
+METHOD GetDlgCode( nLastKey, nFlags )
+
+METHOD KeyChar( nKey, nFlags )
+
+METHOD KeyDown( nKey, nFlags )
+
+METHOD LostFocus( hCtlFocus )
+
+METHOD lValid()
+
+METHOD LButtonDown( nRow, nCol )
+
+METHOD GetVal()
+
+METHOD Command( nWParam, nLParam )
 
 ENDCLASS
 
@@ -38,10 +48,9 @@ ENDCLASS
 * METHOD TBtnBox:New() Version 7.0
 * ============================================================================
 
-
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
-            nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
-            cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell ) CLASS TBtnBox
+      nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
+      cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell ) CLASS TBtnBox
 
    LOCAL invisible := .F.
    LOCAL notabstop := .F.
@@ -54,10 +63,10 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
    HB_SYMBOL_UNUSED( bDown )
 
    DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-           nClrBack  := GetSysColor( COLOR_WINDOW ),;
-           nHeight   := 12,;
-           bMin      := {|| 0 },;
-           bMax      := {|| 32000 }
+      nClrBack  := GetSysColor( COLOR_WINDOW ),;
+      nHeight   := 12,;
+      bMin      := {|| 0 },;
+      bMax      := {|| 32000 }
 
    ::nTop         := nRow
    ::nLeft        := nCol
@@ -69,7 +78,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
    IF _HMG_BeginWindowMDIActive
       ParentHandle := GetActiveMdiHandle()
       cWnd := _GetWindowProperty ( ParentHandle, "PROP_FORMNAME" )
-   endif
+   ENDIF
 
    ::nId          := ::GetNewId()
    ::nStyle       := nOR( ES_NUMBER , WS_CHILD )
@@ -93,169 +102,170 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
 
    ::SetColor( nClrFore, nClrBack )
 
-   if ! Empty( ParentHandle )
-      if lSpinner
+   IF ! Empty( ParentHandle )
+      IF lSpinner
          ::Create( "EDIT" )
          nMin := If( ValType( bMin ) == "B", Eval( bMin ), bMin )
          nMax := If( ValType( bMax ) == "B", Eval( bMax ), bMax )
          ::hWndChild := InitedSpinner( ::hWndParent, ::hWnd , nCol, nRow, 0, nHeight, nMin, nMax, Eval( ::bSetGet ) )
          SetIncrementSpinner( ::hWndChild, bUp )
-      else
+      ELSE
          ::hWnd := InitBtnTextBox( ParentHandle, 0, nCol, nRow, nWidth, nHeight, '', 0, nMaxLenght, ;
-           .f., .f., .f., .f.,.f., invisible, notabstop, cResName, nBmpWidth, "", .f. )[1]
-      endif
+            .f., .f., .f., .f.,.f., invisible, notabstop, cResName, nBmpWidth, "", .f. )[1]
+      ENDIF
 
       ::AddVars( ::hWnd )
       ::Default()
 
-      if GetObjectType( hFont ) == OBJ_FONT
+      IF GetObjectType( hFont ) == OBJ_FONT
          _SetFontHandle( ::hWnd, hFont )
          ::hFont := hFont
-      endif
+      ENDIF
       oWnd:AddControl( ::hWnd )
-   endif
+   ENDIF
 
-Return Self
+   RETURN Self
 
-* ============================================================================
-* METHOD TBtnBox:Default() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:Default() Version 7.0
+   * ============================================================================
 
 METHOD Default() CLASS TBtnBox
 
    LOCAL cValue
- 
+
    cValue := Eval( ::bSetGet )
-   If Valtype( cValue ) != 'C'
+   IF Valtype( cValue ) != 'C'
       cValue := AllTrim( Str( cValue ) )
-   EndIf
+   ENDIF
 
-   if Len( cValue ) > 0
+   IF Len( cValue ) > 0
       SetWindowText( ::hWnd , cValue )
-   endif
+   ENDIF
 
-Return NIL
+   RETURN NIL
 
-* ============================================================================
-* METHOD TBtnBox:HandleEvent() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:HandleEvent() Version 7.0
+   * ============================================================================
 
 METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TBtnBox
 
    // just used for some testings
-   If nMsg == WM_NOTIFY
-         IF HiWord( nWParam ) == NM_KILLFOCUS
-           ::LostFocus()
-         Endif
-   EndIf
+   IF nMsg == WM_NOTIFY
+      IF HiWord( nWParam ) == NM_KILLFOCUS
+         ::LostFocus()
+      ENDIF
+   ENDIF
 
-Return ::Super:HandleEvent( nMsg, nWParam, nLParam )
+   RETURN ::Super:HandleEvent( nMsg, nWParam, nLParam )
 
-* ============================================================================
-* METHOD TBtnBox:GetDlgCode() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:GetDlgCode() Version 7.0
+   * ============================================================================
 
 METHOD GetDlgCode( nLastKey, nFlags ) CLASS TBtnBox
 
    HB_SYMBOL_UNUSED( nFlags )
    ::nLastKey := nLastKey
 
-Return DLGC_WANTALLKEYS + DLGC_WANTCHARS
+   RETURN DLGC_WANTALLKEYS + DLGC_WANTCHARS
 
-
-* ============================================================================
-* METHOD TBtnBox:KeyChar() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:KeyChar() Version 7.0
+   * ============================================================================
 
 METHOD KeyChar( nKey, nFlags ) CLASS TBtnBox
 
-   If _GetKeyState( VK_CONTROL )
+   IF _GetKeyState( VK_CONTROL )
       nKey := If( Upper( Chr( nKey ) ) == "W" .or. nKey == VK_RETURN, VK_TAB, nKey )
-   EndIf
+   ENDIF
 
-   If nKey == VK_TAB .or. nKey == VK_ESCAPE
-      Return 0
-   EndIf
+   IF nKey == VK_TAB .or. nKey == VK_ESCAPE
 
-RETURN ::Super:KeyChar( nKey, nFlags )
+      RETURN 0
+   ENDIF
 
-* ============================================================================
-* METHOD TBtnBox:KeyDown() Version 7.0
-* ============================================================================
+   RETURN ::Super:KeyChar( nKey, nFlags )
+
+   * ============================================================================
+   * METHOD TBtnBox:KeyDown() Version 7.0
+   * ============================================================================
 
 METHOD KeyDown( nKey, nFlags ) CLASS TBtnBox
 
    ::nLastKey := nKey
-   If nKey == VK_TAB .or. nKey == VK_RETURN .or. nKey == VK_ESCAPE
+   IF nKey == VK_TAB .or. nKey == VK_RETURN .or. nKey == VK_ESCAPE
 
       IF nKey != VK_ESCAPE
-         If ::bSetGet != Nil
+         IF ::bSetGet != Nil
             Eval( ::bSetGet, ::GetVal() )
-         EndIf
+         ENDIF
       ENDIF
       ::bLostFocus := Nil
       Eval( ::bKeyDown, nKey, nFlags, .T. )
-   EndIf
+   ENDIF
 
-RETURN 0
+   RETURN 0
 
-* ============================================================================
-* METHOD TBtnBox:lValid() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:lValid() Version 7.0
+   * ============================================================================
 
 METHOD lValid() CLASS TBtnBox
 
-   Local lRet := .t.
+   LOCAL lRet := .t.
 
-   If ValType( ::bValid ) == "B"
+   IF ValType( ::bValid ) == "B"
       lRet := Eval( ::bValid, ::GetVal() )
-   EndIf
+   ENDIF
 
-Return lRet
+   RETURN lRet
 
-* ============================================================================
-* METHOD TBtnBox:LostFocus() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:LostFocus() Version 7.0
+   * ============================================================================
 
 METHOD LostFocus( hCtlFocus ) CLASS TBtnBox
 
-   Default ::lAppend := .F.
+   DEFAULT ::lAppend := .F.
 
-   If ::nLastKey == Nil .and. ::lAppend
+   IF ::nLastKey == Nil .and. ::lAppend
       ::SetFocus()
       ::nLastKey := 0
-      Return 0
-   EndIf
+
+      RETURN 0
+   ENDIF
    ::lFocused := .F.
-   If ::bLostFocus != Nil
+   IF ::bLostFocus != Nil
       Eval( ::bLostFocus, ::nLastKey, hCtlFocus )
-   EndIf
+   ENDIF
    IF ::hWndChild != Nil
       ::SetFocus()
-   endif
+   ENDIF
 
-Return 0
+   RETURN 0
 
-* ============================================================================
-* METHOD TBtnBox:LButtonDown() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:LButtonDown() Version 7.0
+   * ============================================================================
 
 METHOD LButtonDown( nRow, nCol ) CLASS TBtnBox
 
    HB_SYMBOL_UNUSED( nRow )
    HB_SYMBOL_UNUSED( nCol )
 
-   If ::nLastKey != Nil .and. ::nLastKey == 9999
+   IF ::nLastKey != Nil .and. ::nLastKey == 9999
       ::nLastKey := 0
-   Else
+   ELSE
       ::nLastKey := 9999
-   EndIf
+   ENDIF
 
-Return 0
+   RETURN 0
 
-* ============================================================================
-* METHOD TBtnBox:VarGet() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:VarGet() Version 7.0
+   * ============================================================================
 
 METHOD GetVal() CLASS TBtnBox
 
@@ -264,65 +274,66 @@ METHOD GetVal() CLASS TBtnBox
    cType := ValType( ::VarGet() )
 
    DO CASE
-      CASE cType == 'C'
-         retVal := GetWindowText( ::hWnd )
-      CASE cType == 'N'
-         retval := Int ( Val( GetWindowText(  ::hWnd ) ) )
+   CASE cType == 'C'
+      retVal := GetWindowText( ::hWnd )
+   CASE cType == 'N'
+      retval := Int ( Val( GetWindowText(  ::hWnd ) ) )
    ENDCASE
 
-RETURN retVal
+   RETURN retVal
 
-* ============================================================================
-* METHOD TBtnBox:Command() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:Command() Version 7.0
+   * ============================================================================
 
 METHOD Command( nWParam, nLParam ) CLASS TBtnBox
 
-   local nNotifyCode, nID, hWndCtl
+   LOCAL nNotifyCode, nID, hWndCtl
 
    nNotifyCode := HiWord( nWParam )
    nID         := LoWord( nWParam )
    hWndCtl     := nLParam
 
-   do case
-   case hWndCtl == 0
+   DO CASE
+   CASE hWndCtl == 0
 
       * Enter ........................................
-      If HiWord(nWParam) == 0 .And. LoWord(nWParam) == 1
+      IF HiWord(nWParam) == 0 .And. LoWord(nWParam) == 1
          ::KeyDown( VK_RETURN, 0 )
-      EndIf
+      ENDIF
 
       * Escape .......................................
-      If HiWord(nwParam) == 0 .And. LoWord(nwParam) == 2
+      IF HiWord(nwParam) == 0 .And. LoWord(nwParam) == 2
          ::KeyDown( VK_ESCAPE, 0 )
-      EndIf
+      ENDIF
 
-   case hWndCtl != 0
+   CASE hWndCtl != 0
 
-      do case
-         case nNotifyCode == 512 .And. nID == 0 .And. ::bAction != Nil
-            ::oWnd:lPostEdit := .T.
-            Eval( ::bAction, Self, Eval( ::bSetGet ) )
-            ::bLostFocus := { | nKey | ::oWnd:EditExit( ::nCell, nKey, ::VarGet(), ;
-                     ::bValid, .F. ) }
-            ::nLastKey := VK_RETURN
-            ::LostFocus()
-            ::oWnd:lPostEdit := .F.
-         case nNotifyCode == EN_CHANGE
-            ::lChanged :=.T.
-         case nNotifyCode == EN_KILLFOCUS
-            ::LostFocus()
-         case nNotifyCode == EN_UPDATE
-            If _GetKeyState( VK_ESCAPE )
-               ::KeyDown( VK_ESCAPE, 0 )
-            Endif
-            If _GetKeyState( VK_CONTROL )
-               If GetKeyState( VK_RETURN ) == -127 .Or. _GetKeyState( VK_RETURN )
-                  ::KeyDown( VK_RETURN, 0 )
-               Endif
-            Endif
-      endcase
+      DO CASE
+      CASE nNotifyCode == 512 .And. nID == 0 .And. ::bAction != Nil
+         ::oWnd:lPostEdit := .T.
+         Eval( ::bAction, Self, Eval( ::bSetGet ) )
+         ::bLostFocus := { | nKey | ::oWnd:EditExit( ::nCell, nKey, ::VarGet(), ;
+            ::bValid, .F. ) }
+         ::nLastKey := VK_RETURN
+         ::LostFocus()
+         ::oWnd:lPostEdit := .F.
+      CASE nNotifyCode == EN_CHANGE
+         ::lChanged :=.T.
+      CASE nNotifyCode == EN_KILLFOCUS
+         ::LostFocus()
+      CASE nNotifyCode == EN_UPDATE
+         IF _GetKeyState( VK_ESCAPE )
+            ::KeyDown( VK_ESCAPE, 0 )
+         ENDIF
+         IF _GetKeyState( VK_CONTROL )
+            IF GetKeyState( VK_RETURN ) == -127 .Or. _GetKeyState( VK_RETURN )
+               ::KeyDown( VK_RETURN, 0 )
+            ENDIF
+         ENDIF
+      ENDCASE
 
-   endcase
+   ENDCASE
 
-Return nil
+   RETURN NIL
+

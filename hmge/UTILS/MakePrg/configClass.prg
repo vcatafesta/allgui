@@ -3,47 +3,55 @@
 * System : Tools/MakePrg
 * Author : Phil Ide
 * Created: 14-May-2004
-*
 * Purpose: Configuration class for MakePrg.exe
 * ----------------------------
-* History:                    
+* History:
 * ----------------------------
 * 14-May-2004 12:34:53 idep - Created
-*
 * ----------------------------
 * Last Revision:
 *    $Rev: 17 $
 *    $Date: 2004-05-14 16:05:19 +0100 (Fri, 14 May 2004) $
 *    $Author: idep $
-*    
 *****************************/
 
 #include "minigui.ch"
 #include "hbclass.ch"
 
 #ifndef __XHARBOUR__
-   # xtranslate At( < a >, < b >, [ < x, ... > ] ) => hb_At( < a >, < b >, < x > )
+# xtranslate At( < a >, < b >, [ < x, ... > ] ) => hb_At( < a >, < b >, < x > )
 #endif
 
 CLASS Config
-   EXPORTED:
-      VAR aimp
-      VAR data
 
-      METHOD init
-      METHOD write
-      METHOD findHeader
-      METHOD findDefault
-      METHOD loadSection
-      METHOD convertToInclude
-      METHOD loadVars
-      METHOD insertVars
-      METHOD envVars
+   EXPORTED:
+   VAR aimp
+   VAR data
+
+METHOD init
+
+METHOD write
+
+METHOD findHeader
+
+METHOD findDefault
+
+METHOD loadSection
+
+METHOD convertToInclude
+
+METHOD loadVars
+
+METHOD insertVars
+
+METHOD envVars
+
 ENDCLASS
 
 METHOD Config:init()
-   local cFile := GetExeFileName()
-   local cPath
+
+   LOCAL cFile := GetExeFileName()
+   LOCAL cPath
 
    ::aimp := Array(3)
    ::data = ''
@@ -53,26 +61,28 @@ METHOD Config:init()
    ::aImp[1] := ConfigCls():new('makeprg.cfg')
    ::aImp[2] := ConfigCls():new(GetEnv('USERPROFILE')+'\Application Data\MakePrg\MakePrg.cfg')
    ::aImp[3] := ConfigCls():new(cPath)
-   return self
+
+   RETURN self
 
 METHOD Config:write(cFile, cMode, cMsg)
-   local cHead
-   local cSection
-   local nH
-   local aVars
-   local cFData
+
+   LOCAL cHead
+   LOCAL cSection
+   LOCAL nH
+   LOCAL aVars
+   LOCAL cFData
 
    cHead := ::findHeader()
 
-   if !Empty(cMode)
-      if lower(cMode) == '/c'
+   IF !Empty(cMode)
+      IF lower(cMode) == '/c'
          cSection := 'console'
-      elseif lower(cmode) == '/g'
+      ELSEIF lower(cmode) == '/g'
          cSection := 'graphics'
-      endif
-   endif
+      ENDIF
+   ENDIF
 
-   default cSection to ::findDefault()
+   DEFAULT cSection to ::findDefault()
    cSection := ::loadSection(cSection)
 
    cSection := ::convertToInclude(cSection)
@@ -81,110 +91,120 @@ METHOD Config:write(cFile, cMode, cMsg)
    cHead := ::insertVars( cHead, aVars, cFile, cMsg )
 
    cHead := StrTran( cHead, '$$INCLUDE$$', cSection )
-   if hb_FileExists(cFile)
+   IF hb_FileExists(cFile)
       cFData := MemoRead( cFile )
-   endif
-   if (nH := FCreate(cFile)) <> 0
+   ENDIF
+   IF (nH := FCreate(cFile)) <> 0
       FWrite(nH, cHead)
-      if !Empty(cFData)
+      IF !Empty(cFData)
          FWrite(nH, cFData)
-      endif
+      ENDIF
       FClose(nH)
-   endif
-   return self
+   ENDIF
+
+   RETURN self
 
 METHOD Config:findHeader()
-   local cData := ''
-   local i := 1
 
-   While i < Len(::aImp) .and. Empty(cData)
+   LOCAL cData := ''
+   LOCAL i := 1
+
+   WHILE i < Len(::aImp) .and. Empty(cData)
       cData := ::aImp[i++]:findHeader()
-   enddo
-   return cData
+   ENDDO
+
+   RETURN cData
 
 METHOD Config:findDefault()
-   local i
-   local cDef := ::loadSection('default')
 
-   if !Empty(cDef)
-      if (i := At('mode=',cDef)) > 0
+   LOCAL i
+   LOCAL cDef := ::loadSection('default')
+
+   IF !Empty(cDef)
+      IF (i := At('mode=',cDef)) > 0
          cDef := SubStr(cDef,i+5)
-         if (i := At(CRLF,cDef)) > 0
+         IF (i := At(CRLF,cDef)) > 0
             cDef := Left(cDef,i-1)
-         endif
-      endif
-   endif
-   return cDef
+         ENDIF
+      ENDIF
+   ENDIF
+
+   RETURN cDef
 
 METHOD Config:loadVars()
-   local cData := ::loadSection('vars')
-   local aRet := {}
-   local i, v, n := 1
-   local cTmp
-   local cKey, cVal
+
+   LOCAL cData := ::loadSection('vars')
+   LOCAL aRet := {}
+   LOCAL i, v, n := 1
+   LOCAL cTmp
+   LOCAL cKey, cVal
 
    cData := ::aImp[1]:loadSection('vars')
    cData += ::aImp[2]:loadSection('vars')
    cData += ::aImp[2]:loadSection('vars')
 
-
-   if !Empty(cData)
-      if !(Right(cData,2) == CRLF)
+   IF !Empty(cData)
+      IF !(Right(cData,2) == CRLF)
          cData += CRLF
-      endif
+      ENDIF
 
-      While n <= Len(cData) .and. SubStr(cData,n,1) $ CRLF
+      WHILE n <= Len(cData) .and. SubStr(cData,n,1) $ CRLF
          n++
-      Enddo
+      ENDDO
 
-      While (i := At(CRLF,cData,n)) > 0
+      WHILE (i := At(CRLF,cData,n)) > 0
          cTmp := SubStr(cData,n,i-n)
-         if (v := At('=',cTmp)) > 0
+         IF (v := At('=',cTmp)) > 0
             cKey := Left(cTmp,v-1)
             cVal := SubStr(cTmp,v+1)
-            if AScan( aRet, {|e| lower(e[1]) == lower(cKey) } ) == 0
+            IF AScan( aRet, {|e| lower(e[1]) == lower(cKey) } ) == 0
                aadd( aRet, { cKey, cVal })
-            endif
-         endif
+            ENDIF
+         ENDIF
          n := i+2
-      Enddo
-   endif
-   return aRet
+      ENDDO
+   ENDIF
 
+   RETURN aRet
 
 METHOD Config:loadSection(cSection)
-   local cData := ''
-   local i := 1
 
-   While i < Len(::aImp) .and. Empty(cData)
+   LOCAL cData := ''
+   LOCAL i := 1
+
+   WHILE i < Len(::aImp) .and. Empty(cData)
       cData := ::aImp[i++]:loadSection(cSection)
-   enddo
-   return cData
+   ENDDO
+
+   RETURN cData
 
 METHOD Config:convertToInclude(cData)
-   local i, n := 1
-   local cRet := ''
-   local cTmp
 
-   if !(Right(cData,2)  == CRLF)
+   LOCAL i, n := 1
+   LOCAL cRet := ''
+   LOCAL cTmp
+
+   IF !(Right(cData,2)  == CRLF)
       cData += CRLF
-   endif
+   ENDIF
 
-   While n <= Len(cData) .and. SubStr(cData,n,1) $ CRLF
+   WHILE n <= Len(cData) .and. SubStr(cData,n,1) $ CRLF
       n++
-   Enddo
+   ENDDO
 
-   While (i := At(CRLF,cData,n)) > 0
+   WHILE (i := At(CRLF,cData,n)) > 0
       cTmp := SubStr(cData,n,i-n)
       cRet += '#include "'+cTmp+'"'+CRLF
       n := i+2
-   Enddo
-   return cRet
+   ENDDO
+
+   RETURN cRet
 
 METHOD Config:insertVars( cData, aVars, cFile, cMsg )
-   local i
 
-   default cMsg to ''
+   LOCAL i
+
+   DEFAULT cMsg to ''
 
    cData := StrTran(cData, '$$FILE$$', cFile)
    cData := StrTran(cData, '$$DATE$$', CGIDate1())
@@ -192,89 +212,98 @@ METHOD Config:insertVars( cData, aVars, cFile, cMsg )
    cData := StrTran(cData, '$$DATETIME$$', SubStr(CGIDate2(),6))
    cData := StrTran(cData, '$$MESSAGE$$', cMsg)
 
-   for i := 1 to Len(aVars)
+   FOR i := 1 to Len(aVars)
       hb_SetEnv( aVars[i][1], aVars[i][2] )
       cData := StrTran(cData, '$$'+aVars[i][1]+'$$', '$$%'+aVars[i][1]+'%$$')
-   next
+   NEXT
 
    cData := ::envVars( cData )
 
-   return cData
+   RETURN cData
 
 METHOD Config:envVars( cData )
-   local i, n
-   local cTmp
-   local cVar
-   local cValue
+
+   LOCAL i, n
+   LOCAL cTmp
+   LOCAL cVar
+   LOCAL cValue
 
    altd()
-   While (i := At('$$%', cData)) > 0 .and. (n := At('%$$', cData)) > 0
+   WHILE (i := At('$$%', cData)) > 0 .and. (n := At('%$$', cData)) > 0
       cTmp := SubStr(cData, i, (n-i)+3)
       cVar := StrTran( cTmp, '$$%' )
       cVar := StrTran( cVar, '%$$' )
       cValue := GetEnv( cVar )
       cData := StrTran( cData, cTmp, cValue )
-   Enddo
-   return cData
+   ENDDO
 
-STATIC Function CGIDate1()
-   local cDate := CGIDate2()
+   RETURN cData
 
-   return SubStr(cDate,6,11)
+STATIC FUNCTION CGIDate1()
 
-STATIC Function CGIDate2( nSecs )
-   local nDays
-   local nTime := Seconds()
-   local dDate := Date()
-   local nDayLeft := 86400 - nTime
-   local cRet
+   LOCAL cDate := CGIDate2()
 
-   default nSecs to 0
+   RETURN SubStr(cDate,6,11)
 
-   if nSecs > 0
+STATIC FUNCTION CGIDate2( nSecs )
+
+   LOCAL nDays
+   LOCAL nTime := Seconds()
+   LOCAL dDate := Date()
+   LOCAL nDayLeft := 86400 - nTime
+   LOCAL cRet
+
+   DEFAULT nSecs to 0
+
+   IF nSecs > 0
       nDays := Int(nSecs/86400)
       nSecs -= nDays*86400
 
-      if nSecs > nDayLeft
+      IF nSecs > nDayLeft
          nDays++
          nSecs -= nDayLeft
-      endif
+      ENDIF
 
       nTime += nSecs
 
       dDate += nDays
-   endif
+   ENDIF
 
    cRet := Left(cDow(dDate),3)+', '
    cRet += StrZero(Day(dDate),2)+'-'+Left(CMonth(dDate),3)+'-'+LTrim(Str(Year(dDate)))+' '
    cRet += Secs2Time(nTime)
-   return (cRet)
 
-STATIC Function Secs2Time( n )
-   local nHrs  := int(n/3600)
-   local nMins
-   local nSecs
+   RETURN (cRet)
+
+STATIC FUNCTION Secs2Time( n )
+
+   LOCAL nHrs  := int(n/3600)
+   LOCAL nMins
+   LOCAL nSecs
 
    n := n%3600
    nMins := int(n/60)
    nSecs := n%60
 
-   return StrZero(nHrs,2)+':'+StrZero(nMins,2)+':'+StrZero(nSecs,2)
+   RETURN StrZero(nHrs,2)+':'+StrZero(nMins,2)+':'+StrZero(nSecs,2)
 
-Function Time2Secs( c )
-   local nH := Val(left(c,2))
-   local nM := Val(substr(c,4,2))
-   local nS := if(len(c) == 8, Val(right(c,2)), 0 )
-   local nRet
+FUNCTION Time2Secs( c )
+
+   LOCAL nH := Val(left(c,2))
+   LOCAL nM := Val(substr(c,4,2))
+   LOCAL nS := if(len(c) == 8, Val(right(c,2)), 0 )
+   LOCAL nRet
 
    nM *= 60
    nH *= 60
    nH *= 60
 
    nRet := nS+nM+nH
-   return (nRet)
+
+   RETURN (nRet)
 
 FUNCTION cFilePath( cPathMask )
+
    LOCAL cPath
 
    hb_FNameSplit( cPathMask, @cPath )
@@ -282,8 +311,10 @@ FUNCTION cFilePath( cPathMask )
    RETURN Left( cPath, Len( cPath ) - 1 )
 
 FUNCTION cFileNoExt( cPathMask )
+
    LOCAL cName
 
    hb_FNameSplit( cPathMask, , @cName )
 
    RETURN cName
+

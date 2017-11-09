@@ -1,37 +1,35 @@
 /*
- * Bos Taurus Sample n° 7
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to use draw functions when
- * a statusbar is present.
- *
- * Based on a sample from Bos Taurus library for HMG
- * created by Dr. CLAUDIO SOTO (from Uruguay) <srvet@adinet.com.uy>
- * <http://srvet.blogspot.com>
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Bos Taurus Sample n° 7
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to use draw functions when
+* a statusbar is present.
+* Based on a sample from Bos Taurus library for HMG
+* created by Dr. CLAUDIO SOTO (from Uruguay) <srvet@adinet.com.uy>
+* <http://srvet.blogspot.com>
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "bostaurus.ch"
 
 PROCEDURE MAIN
+
    LOCAL oWin
 
    SET LANGUAGE TO SPANISH
 
    DEFINE WINDOW Win1 OBJ oWin ;
-      AT 0, 0 ;
-      WIDTH 800 ;
-      HEIGHT 600 ;
-      CLIENTAREA ;
-      TITLE "Bos Taurus: Draw Functions" ;
-      MAIN ;
-      ON PAINT Proc_ON_PAINT() ;
-      ON SIZE  Proc_ON_SIZE()
+         AT 0, 0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         CLIENTAREA ;
+         TITLE "Bos Taurus: Draw Functions" ;
+         MAIN ;
+         ON PAINT Proc_ON_PAINT() ;
+         ON SIZE  Proc_ON_SIZE()
 
       DEFINE MAIN MENU
          DEFINE POPUP "File"
@@ -68,10 +66,11 @@ PROCEDURE MAIN
 
    CENTER WINDOW Win1
    ACTIVATE WINDOW Win1
-RETURN
 
+   RETURN
 
 PROCEDURE Proc_ON_SIZE
+
    LOCAL Width  := BT_ClientAreaWidth( "Win1" )
    LOCAL Height := BT_ClientAreaHeight( "Win1" ) - BT_StatusBarHeight( "Win1" )
 
@@ -79,20 +78,22 @@ PROCEDURE Proc_ON_SIZE
    Win1.Label_2.Value := "Label_2: Client Area HEIGHT" + STR( Height )
 
    BT_ClientAreaInvalidateAll( "Win1", .F. )
-RETURN
 
+   RETURN
 
-PROCEDURE Proc_ON_PAINT    
+PROCEDURE Proc_ON_PAINT
+
    LOCAL Width  := BT_ClientAreaWidth( "Win1" )
    LOCAL Height := BT_ClientAreaHeight( "Win1" ) - BT_StatusBarHeight( "Win1" )
    LOCAL hDC, BTstruct, cText, nTypeText, nAlignText
+
    /*
-    * Since OOHG executes the default window procedure at the start of
-    * the function that process WM_PAINT message, thus validating the
-    * update region before calling the ON PAINT codeblock, we need to
-    * invalidate the whole client area to force the correct painting
-    * of all the controls.
-    */
+   * Since OOHG executes the default window procedure at the start of
+   * the function that process WM_PAINT message, thus validating the
+   * update region before calling the ON PAINT codeblock, we need to
+   * invalidate the whole client area to force the correct painting
+   * of all the controls.
+   */
 
    BT_ClientAreaInvalidateAll( "Win1", .F. )
 
@@ -120,8 +121,10 @@ PROCEDURE Proc_ON_PAINT
    BT_DrawRectangle( hDC, 220, 90, 610, 80, YELLOW, 1 )
 
    BT_DeleteDC( BTstruct )
-RETURN
 
-/*
- * EOF
- */
+   RETURN
+
+   /*
+   * EOF
+   */
+

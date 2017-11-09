@@ -1,87 +1,88 @@
 /*
- HMG Checkbox Demo
- (c) 2010 Roberto Lopez
+HMG Checkbox Demo
+(c) 2010 Roberto Lopez
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	Set Font To "Tahoma", 9
+   SET Font To "Tahoma", 9
 
-	Define Window Win1			;
-		Row	10			;
-		Col	10			;
-		Width	400			;
-		Height	300			;
-		Title	'HMG Checkbox Demo'	;
-		WindowType MAIN
+   DEFINE WINDOW Win1         ;
+         Row   10         ;
+         Col   10         ;
+         Width   400         ;
+         Height   300         ;
+         Title   'HMG Checkbox Demo'   ;
+         WindowType MAIN
 
-		Define Label Label1
-			Row 10
-			Col 10
-			Width 300
-			Value 'This is for status!'
-			BackColor {200,200,200}
-			Alignment Center
-			Alignment VCenter
-		End Label
+      DEFINE LABEL Label1
+         Row 10
+         Col 10
+         Width 300
+         Value 'This is for status!'
+         BackColor {200,200,200}
+         Alignment Center
+         Alignment VCenter
+      END LABEL
 
-		Define CheckBox Check1
-			Row		40
-			Col		10
-			Value		.F.
-			Caption		'Simple CheckBox'
-			Width		120
-			OnChange MsgInfo( "CheckBox 1 Value is Changed!" )
-		End CheckBox
+      DEFINE CHECKBOX Check1
+         Row      40
+         Col      10
+         Value      .F.
+         Caption      'Simple CheckBox'
+         Width      120
+         OnChange MsgInfo( "CheckBox 1 Value is Changed!" )
+      END CHECKBOX
 
-		Define CheckBox Check2
-			Row		70
-			Col		10
-			Width		280
-			Value		.F.
-			FontName	"Arial"
-			FontSize	12
-			FontBold	.t.
-			FontItalic	.t.
-			FontUnderline	.t.
-			FontStrikeOut	.t.
-			Caption		'CheckBox with Font Properties'
-			OnChange MsgInfo( "CheckBox 2 Value is Changed!" )
-		End CheckBox
+      DEFINE CHECKBOX Check2
+         Row      70
+         Col      10
+         Width      280
+         Value      .F.
+         FontName   "Arial"
+         FontSize   12
+         FontBold   .t.
+         FontItalic   .t.
+         FontUnderline   .t.
+         FontStrikeOut   .t.
+         Caption      'CheckBox with Font Properties'
+         OnChange MsgInfo( "CheckBox 2 Value is Changed!" )
+      END CHECKBOX
 
-		Define CheckBox Check3
-			Row		120
-			Col		10
-			Width		250
-			Value		.F.
-			Caption		'CheckBox with OnGot/LostFocus Events'
-			OnGotFocus { || Win1.Label1.Value := "CheckBox GotFocus!" }  
-			OnLostFocus { || Win1.Label1.Value := "CheckBox LostFocus!" }  
-		End CheckBox
+      DEFINE CHECKBOX Check3
+         Row      120
+         Col      10
+         Width      250
+         Value      .F.
+         Caption      'CheckBox with OnGot/LostFocus Events'
+         OnGotFocus { || Win1.Label1.Value := "CheckBox GotFocus!" }
+         OnLostFocus { || Win1.Label1.Value := "CheckBox LostFocus!" }
+      END CHECKBOX
 
-		Define Button Button1
-			Row	150
-			Col	40
-			Width	140
-			Height	28
-			Caption 'Change Event Block!'		
-			OnClick Win1.Check1.OnChange := { || MsgInfo( "Event Block of 'On Change' event of Checkbox 1 is Changed dynamically!" ) }
-		End Button
+      DEFINE BUTTON Button1
+         Row   150
+         Col   40
+         Width   140
+         Height   28
+         Caption 'Change Event Block!'
+         OnClick Win1.Check1.OnChange := { || MsgInfo( "Event Block of 'On Change' event of Checkbox 1 is Changed dynamically!" ) }
+      END BUTTON
 
-		Define Button Button2
-			Row	180
-			Col	40
-			Width	140
-			Height	28
-			Caption 'Win1.Check1.Value'			
-			OnClick MsgInfo( Win1.Check1.value ) 
-		End Button
+      DEFINE BUTTON Button2
+         Row   180
+         Col   40
+         Width   140
+         Height   28
+         Caption 'Win1.Check1.Value'
+         OnClick MsgInfo( Win1.Check1.value )
+      END BUTTON
 
-	End Window
+   END WINDOW
 
-	Center Window Win1
-	Activate Window Win1
+   CENTER WINDOW Win1
+   ACTIVATE WINDOW Win1
 
-Return Nil
+   RETURN NIL
+

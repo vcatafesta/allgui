@@ -1,183 +1,177 @@
 /*
 
-  NUMBERS.PRG   Numeric and math functions
+NUMBERS.PRG   Numeric and math functions
 
 */
 #include "default.ch"
 
+FUNCTION Crop(nMin, nValue, nMax)
 
-Function Crop(nMin, nValue, nMax)
-/*
-  "Crops" a value to make sure it falls between the minimum and maximum
-  values.  Used primarily because I'm always reversing the functions min()
-  and max() and messing things up.  Works on dates too.
+   /*
+   "Crops" a value to make sure it falls between the minimum and maximum
+   values.  Used primarily because I'm always reversing the functions min()
+   and max() and messing things up.  Works on dates too.
 
-  Either nMin or nMax may be omitted.
-*/
-  local nRet := nValue
+   Either nMin or nMax may be omitted.
+   */
+   LOCAL nRet := nValue
 
-  if nMin <> NIL
-    nRet := max(nMin, nRet)
-  endif
+   IF nMin <> NIL
+      nRet := max(nMin, nRet)
+   ENDIF
 
-  if nMax <> NIL
-    nRet := min(nMax, nRet)
-  endif
+   IF nMax <> NIL
+      nRet := min(nMax, nRet)
+   ENDIF
 
-Return(nRet)
+   RETURN(nRet)
 
+FUNCTION CtoN(c, lBigEndian)
 
+   /*
+   Converts a character binary representation of a number into a positive
+   integer numeric.  Works on any length string, but two- or four- byte
+   strings would be most common.
 
-Function CtoN(c, lBigEndian)
-/*
-  Converts a character binary representation of a number into a positive
-  integer numeric.  Works on any length string, but two- or four- byte
-  strings would be most common.
+   By default, the string is processed in little-endian format (with the least
+   significant digit first).  Setting lBigEndian to true will reverse this.
 
-  By default, the string is processed in little-endian format (with the least
-  significant digit first).  Setting lBigEndian to true will reverse this.
+   See also: NtoC()
 
-  See also: NtoC()
+   Similar Clipper functions: BIN2I(), BIN2L(), BIN2W()
+   */
+   LOCAL n := 0, nMod := 1
+   LOCAL x, nFrom := 1, nTo := len(c), nStep := 1
 
-  Similar Clipper functions: BIN2I(), BIN2L(), BIN2W()
-*/
-  local n := 0, nMod := 1
-  local x, nFrom := 1, nTo := len(c), nStep := 1
+   DEFAULT lBigEndian := .F.
 
-  default lBigEndian := .F.
+   IF lBigEndian
+      nFrom := nTo
+      nTo   := 1
+      nStep := -1
+   ENDIF
 
-  if lBigEndian
-    nFrom := nTo
-    nTo   := 1
-    nStep := -1
-  endif
+   FOR x := nFrom to nTo step nStep
+      n += asc(substr(c, x, 1)) * nMod
+      nMod *= 256
+   NEXT
 
-  for x := nFrom to nTo step nStep
-    n += asc(substr(c, x, 1)) * nMod
-    nMod *= 256
-  next
+   RETURN(n)
 
-Return(n)
+FUNCTION Factorial(n)
 
+   /*
 
+   Returns the factorial (n!) of an integer.
+   */
+   LOCAL f := n
+   LOCAL x, y := n - 1
 
-Function Factorial(n)
-/*
-  Returns the factorial (n!) of an integer.
-*/
-  local f := n
-  local x, y := n - 1
+   FOR x := y to 2 step -1
+      f *= x
+   NEXT
 
-  for x := y to 2 step -1
-    f *= x
-  next
+   RETURN(f)
 
-Return(f)
+FUNCTION HtoN(cHex)
 
+   /*
+   Converts a two-character hex string to a number from 0-255.
 
+   Example: HtoN("FF") -> 255
+   */
+   LOCAL cDigits := "0123456789ABCDEF"
+   LOCAL n
 
-Function HtoN(cHex)
-/*
-  Converts a two-character hex string to a number from 0-255.
+   n := max(at(substr(cHex, 1, 1), cDigits) - 1, 0) * 16
 
-  Example: HtoN("FF") -> 255
-*/
-  local cDigits := "0123456789ABCDEF"
-  local n
+   n += max(at(substr(cHex, 2, 1), cDigits) - 1, 0)
 
-  n := max(at(substr(cHex, 1, 1), cDigits) - 1, 0) * 16
+   RETURN(n)
 
-  n += max(at(substr(cHex, 2, 1), cDigits) - 1, 0)
+FUNCTION NtoC(nValue, nLen, lBigEndian)
 
-Return(n)
+   /*
+   Converts a positive integer into a binary character string.
 
+   nLen determines the length of the resulting string and defaults to 2.
 
+   By default, the string is created in little-endian format (with the least
+   significant digit first).  Setting lBigEndian to true will reverse this.
 
-Function NtoC(nValue, nLen, lBigEndian)
-/*
-  Converts a positive integer into a binary character string.
+   See also: CtoN()
 
-  nLen determines the length of the resulting string and defaults to 2.
+   Similar Clipper functions: I2BIN(), L2BIN()
+   */
+   LOCAL nMod, x, c
+   LOCAL cRet := ""
 
-  By default, the string is created in little-endian format (with the least
-  significant digit first).  Setting lBigEndian to true will reverse this.
+   DEFAULT nLen := 2, ;
+      lBigEndian := .F.
 
-  See also: CtoN()
+   nMod := 256 ^ (nLen - 1) // x ^ 0 = 1
 
-  Similar Clipper functions: I2BIN(), L2BIN()
-*/
-  local nMod, x, c
-  local cRet := ""
+   FOR x := 1 to nLen
+      c := chr(int(nValue / nMod))
+      IF lBigEndian
+         cRet += c
+      ELSE
+         cRet := c + cRet
+      ENDIF
+      nValue %= nMod
+      nMod /= 256
+   NEXT
 
-  default nLen := 2, ;
-          lBigEndian := .F.
+   RETURN(cRet)
 
-  nMod := 256 ^ (nLen - 1) // x ^ 0 = 1
+FUNCTION NtoH(n)
 
-  for x := 1 to nLen
-    c := chr(int(nValue / nMod))
-    if lBigEndian
-      cRet += c
-    else
-      cRet := c + cRet
-    endif
-    nValue %= nMod
-    nMod /= 256
-  next
+   /*
+   Converts a numeric byte value (0-255) into a 2-character hex string.
 
-Return(cRet)
+   Example: NtoH(255) -> "FF"
+   */
+   LOCAL cDigits := "0123456789ABCDEF"
+   LOCAL cHex := substr(cDigits, int((n % 256) / 16) + 1, 1) + ;
+      substr(cDigits, (n % 16) + 1, 1)
 
+   RETURN(cHex)
 
+FUNCTION XFix(x, nDec)
 
-Function NtoH(n)
-/*
-  Converts a numeric byte value (0-255) into a 2-character hex string.
+   /*
+   "Fixes" a number with the correct number of decimal places.
+   First, it is turned into a string with (nDec + 1) decimal places.  The
+   extra decimal is truncated and the val() of that string is returned.
 
-  Example: NtoH(255) -> "FF"
-*/
-  local cDigits := "0123456789ABCDEF"
-  local cHex := substr(cDigits, int((n % 256) / 16) + 1, 1) + ;
-                substr(cDigits, (n % 16) + 1, 1)
+   nDec defaults to 2.
+   */
+   LOCAL cNum
 
-Return(cHex)
+   DEFAULT nDec := 2
 
+   cNum := ltrim(str(x, 15, nDec + 1))
 
+   cNum := left(cNum, len(cNum) - iif(nDec > 0, 1, 2))
 
-Function XFix(x, nDec)
-/*
-  "Fixes" a number with the correct number of decimal places.
-  First, it is turned into a string with (nDec + 1) decimal places.  The
-  extra decimal is truncated and the val() of that string is returned.
+   RETURN(val(cNum))
 
-  nDec defaults to 2.
-*/
-  local cNum
+FUNCTION XRound(x, nDec)
 
-  default nDec := 2
+   /*
+   A replacement for round() that apparently really works.
+   Originally by Richard Fagen and retrieved from the CIS Clipper forum.
 
-  cNum := ltrim(str(x, 15, nDec + 1))
+   nDec defaults to 2 decimal places.
+   */
+   LOCAL nExp, nMod := iif(x < 0, -.50001, .50001)
 
-  cNum := left(cNum, len(cNum) - iif(nDec > 0, 1, 2))
+   DEFAULT nDec := 2  // Default to 2 decimal places
 
-Return(val(cNum))
+   nExp := 10 ^ nDec
+   x := int(x * nExp + nMod) / nExp
 
+   // Give x the proper number of decimal places upon returning:
 
-
-Function XRound(x, nDec)
-/*
-  A replacement for round() that apparently really works.
-  Originally by Richard Fagen and retrieved from the CIS Clipper forum.
-
-  nDec defaults to 2 decimal places.
-*/
-  local nExp, nMod := iif(x < 0, -.50001, .50001)
-
-  default nDec := 2  // Default to 2 decimal places
-
-  nExp := 10 ^ nDec
-  x := int(x * nExp + nMod) / nExp
-
-  // Give x the proper number of decimal places upon returning:
-
-Return(XFix(x, nDec))
+   RETURN(XFix(x, nDec))
 

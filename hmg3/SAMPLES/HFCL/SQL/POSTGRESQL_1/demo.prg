@@ -1,118 +1,119 @@
 /*
- HMG Grid PostgreSql Demo
- (c) 2010 Roberto Lopez
+HMG Grid PostgreSql Demo
+(c) 2010 Roberto Lopez
 */
 
 #include "hmg.ch"
 
 #command USE <(db)> [VIA <rdd>] [ALIAS <a>] [<nw: NEW>] ;
-            [<ex: EXCLUSIVE>] [<sh: SHARED>] [<ro: READONLY>] ;
-            [CODEPAGE <cp>] [CONNECTION <nConn>] [INDEX <(index1)> [, <(indexN)>]] => ;
-         dbUseArea( <.nw.>, <rdd>, <(db)>, <(a)>, ;
-                    if(<.sh.> .or. <.ex.>, !<.ex.>, NIL), <.ro.>,  [<cp>], [<nConn>] ) ;
-         [; dbSetIndex( <(index1)> )] ;
-         [; dbSetIndex( <(indexN)> )]
+   [<ex: EXCLUSIVE>] [<sh: SHARED>] [<ro: READONLY>] ;
+   [CODEPAGE <cp>] [CONNECTION <nConn>] [INDEX <(index1)> [, <(indexN)>]] => ;
+   dbUseArea( <.nw.>, <rdd>, <(db)>, <(a)>, ;
+   if(<.sh.> .or. <.ex.>, !<.ex.>, NIL), <.ro.>,  [<cp>], [<nConn>] ) ;
+   [; dbSetIndex( <(index1)> )] ;
+   [; dbSetIndex( <(indexN)> )]
 
 REQUEST PGRDD
-         
-Function Main
 
-Local	cServer			:= '127.0.0.1' 
-Local	cDataBase		:= 'data1'
-Local	cUser			:= 'postgres'	
-Local	cPassWord		:= '1234'
-Local	nConnectionHandle	:= 0
+FUNCTION Main
 
-	nConnectionHandle	:= dbPGConnection( cServer + ";" + cDataBase + ";" + cUser + ";" + cPassWord ) 
+   LOCAL   cServer         := '127.0.0.1'
+   LOCAL   cDataBase      := 'data1'
+   LOCAL   cUser         := 'postgres'
+   LOCAL   cPassWord      := '1234'
+   LOCAL   nConnectionHandle   := 0
 
-	CreateTable( cServer , cDataBase , cUser , cPassWord )
+   nConnectionHandle   := dbPGConnection( cServer + ";" + cDataBase + ";" + cUser + ";" + cPassWord )
 
-	USE "SELECT * FROM test ;" ALIAS Test NEW VIA "pgrdd" CONNECTION nConnectionHandle
+   CreateTable( cServer , cDataBase , cUser , cPassWord )
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 800 ;
-		HEIGHT 510 ;
-		TITLE 'Hello World!' ;
-		MAIN
+   USE "SELECT * FROM test ;" ALIAS Test NEW VIA "pgrdd" CONNECTION nConnectionHandle
 
-		DEFINE MAIN MENU
-			POPUP 'File'
-				ITEM 'Append (Alt+A)'            ACTION Form_1.Grid_1.Append
-				ITEM 'Save Last Appended Record (Alt+S)'   ACTION Form_1.Grid_1.Save
-				ITEM 'Set RecNo'            ACTION Form_1.Grid_1.RecNo := val(InputBox('',''))
-				ITEM 'Get RecNo'            ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
-				ITEM 'Delete'               ACTION Form_1.Grid_1.Delete
-				ITEM 'Recall'               ACTION Form_1.Grid_1.Recall
-			END POPUP
-		END MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 510 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-		@ 10,10 GRID Grid_1 ;
-			WIDTH 770 ;
-			HEIGHT 440 ;
-			HEADERS { 'Code' , 'Name' , 'Salary' , 'Creation' , 'Description' } ;
-			WIDTHS { 100 , 120 , 120 , 120 , 120 } ;
-			VALUE { 1 , 1 } ;
-			COLUMNCONTROLS { aCtrl_1 , aCtrl_2 } ;
-			ROWSOURCE "Test" 
-      
-	END WINDOW
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Append (Alt+A)'            ACTION Form_1.Grid_1.Append
+            ITEM 'Save Last Appended Record (Alt+S)'   ACTION Form_1.Grid_1.Save
+            ITEM 'Set RecNo'            ACTION Form_1.Grid_1.RecNo := val(InputBox('',''))
+            ITEM 'Get RecNo'            ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
+            ITEM 'Delete'               ACTION Form_1.Grid_1.Delete
+            ITEM 'Recall'               ACTION Form_1.Grid_1.Recall
+         END POPUP
+      END MENU
 
-	CENTER WINDOW Form_1
+      @ 10,10 GRID Grid_1 ;
+         WIDTH 770 ;
+         HEIGHT 440 ;
+         HEADERS { 'Code' , 'Name' , 'Salary' , 'Creation' , 'Description' } ;
+         WIDTHS { 100 , 120 , 120 , 120 , 120 } ;
+         VALUE { 1 , 1 } ;
+         COLUMNCONTROLS { aCtrl_1 , aCtrl_2 } ;
+         ROWSOURCE "Test"
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_1
 
-Function CreateTable ( cServer , cDataBase , cUser , cPassWord )
+   ACTIVATE WINDOW Form_1
 
-Local oServer, oQuery, oRow, i 
-Local cQuery
+   RETURN
 
-	oServer := TPQServer():New( cServer , cDataBase , cUser , cPassWord )
+FUNCTION CreateTable ( cServer , cDataBase , cUser , cPassWord )
 
-	if oServer:NetErr()
-		MsgStop ( oServer:Error() )
-		Exit Program
-	endif
+   LOCAL oServer, oQuery, oRow, i
+   LOCAL cQuery
 
-	if oServer:TableExists('TEST')
-		oQuery := oServer:Execute('DROP TABLE Test')
-		oQuery:Destroy()
-	endif
+   oServer := TPQServer():New( cServer , cDataBase , cUser , cPassWord )
 
-	cQuery := 'CREATE TABLE test('
-	cQuery += '     Code integer not null primary key, '
-	cQuery += '     Name Varchar(40), '
-	cQuery += '     Salary Double Precision, '
-	cQuery += '     Creation Date, '
-	cQuery += '     Description text ) '
+   IF oServer:NetErr()
+      MsgStop ( oServer:Error() )
+      EXIT Program
+   ENDIF
 
-	oQuery := oServer:Query(cQuery)
+   IF oServer:TableExists('TEST')
+      oQuery := oServer:Execute('DROP TABLE Test')
+      oQuery:Destroy()
+   ENDIF
 
-	if oQuery:neterr()
-		MsgStop ( oQuery:Error() )
-	endif
+   cQuery := 'CREATE TABLE test('
+   cQuery += '     Code integer not null primary key, '
+   cQuery += '     Name Varchar(40), '
+   cQuery += '     Salary Double Precision, '
+   cQuery += '     Creation Date, '
+   cQuery += '     Description text ) '
 
-	oQuery:Destroy()
+   oQuery := oServer:Query(cQuery)
 
-	For i := 1 To 10
+   IF oQuery:neterr()
+      MsgStop ( oQuery:Error() )
+   ENDIF
 
-		cQuery := "INSERT INTO test ( code , name , salary , creation , description ) VALUES ( " + str(i) + " , 'Name " + str(i) + " ' , " + str(i*1000) + " , '2010-01-01' , 'Some Text...' );"
+   oQuery:Destroy()
 
-		oQuery := oServer:Query(cQuery)
+   FOR i := 1 To 10
 
-		if oQuery:neterr()
-			MsgStop ( 'error' )
-			Exit
-		endif
+      cQuery := "INSERT INTO test ( code , name , salary , creation , description ) VALUES ( " + str(i) + " , 'Name " + str(i) + " ' , " + str(i*1000) + " , '2010-01-01' , 'Some Text...' );"
 
-	next i
+      oQuery := oServer:Query(cQuery)
 
-	oQuery:destroy()
+      IF oQuery:neterr()
+         MsgStop ( 'error' )
+         EXIT
+      ENDIF
 
-	oServer:Commit()
+   NEXT i
 
-	oServer:Destroy()
+   oQuery:destroy()
 
-Return nil
+   oServer:Commit()
+
+   oServer:Destroy()
+
+   RETURN NIL
+

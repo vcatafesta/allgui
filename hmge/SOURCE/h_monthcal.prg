@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -52,13 +52,11 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define MCS_NOTODAYCIRCLE   0x0008
 #define MCS_NOTODAY         0x0010
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineMonthCal ( ControlName, ParentFormName, x, y, w, h, value, ;
       fontname, fontsize, tooltip, notoday, notodaycircle, weeknumbers, change, ;
       HelpId, invisible, notabstop, bold, italic, underline, strikeout, ;
       backcolor, fontcolor, titlebkclr, titlefrclr, background, trlfontclr, ;
       select, gotfocus, lostfocus, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle, mVar, k, Style, blInit
    LOCAL aControlHandle := { 0, 0 }
    LOCAL lDialogInMemory
@@ -179,7 +177,7 @@ FUNCTION _DefineMonthCal ( ControlName, ParentFormName, x, y, w, h, value, ;
       h := GetWindowHeight ( aControlHandle[1] )
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  "MONTHCAL"
    _HMG_aControlNames  [k] :=  ControlName
@@ -250,24 +248,22 @@ FUNCTION _DefineMonthCal ( ControlName, ParentFormName, x, y, w, h, value, ;
       SetMonthCalTrlFontColor( aControlHandle[1], TrlFontClr[1], TrlFontClr[2], TrlFontClr[3] )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogMonthCalendar( ParentFormName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    ParentFormName := Nil
 
    SetPosMonthCal ( ControlHandle , _HMG_aControlCol [k] , _HMG_aControlRow [k] )
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION OMONTHCALEVENTS( hWnd, nMsg, wParam, lParam )    // GF 2016.04.02
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aControlHandles , hWnd )
 
    HB_SYMBOL_UNUSED( wParam )
@@ -294,4 +290,5 @@ FUNCTION OMONTHCALEVENTS( hWnd, nMsg, wParam, lParam )    // GF 2016.04.02
 
    ENDSWITCH
 
-RETURN 0
+   RETURN 0
+

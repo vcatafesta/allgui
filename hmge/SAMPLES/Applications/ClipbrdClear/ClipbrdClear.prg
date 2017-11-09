@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2005-2017 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2005-2017 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -23,9 +21,8 @@ ANNOUNCE RDDSYS
 
 STATIC lClipbrdFull := .F.
 
-*--------------------------------------------------------*
 PROCEDURE Main( ... )
-*--------------------------------------------------------*
+
    LOCAL aPar, i, lClear := .F. , lExit := .F.
 
    SET MULTIPLE OFF WARNING
@@ -66,33 +63,33 @@ PROCEDURE Main( ... )
    IF ! lExit
 
       DEFINE WINDOW Form_1 ;
-         AT 0, 0 ;
-         WIDTH 0 HEIGHT 0 ;
-         TITLE PROGRAM ;
-         ICON "ICON_2" ;
-         MAIN NOSHOW ;
-         NOTIFYICON IF( lClipbrdFull, "ICON_1", "ICON_2" ) ;
-         NOTIFYTOOLTIP PROGRAM ;
-         ON NOTIFYCLICK ClipClear()
-		
-      DEFINE NOTIFY MENU
+            AT 0, 0 ;
+            WIDTH 0 HEIGHT 0 ;
+            TITLE PROGRAM ;
+            ICON "ICON_2" ;
+            MAIN NOSHOW ;
+            NOTIFYICON IF( lClipbrdFull, "ICON_1", "ICON_2" ) ;
+            NOTIFYTOOLTIP PROGRAM ;
+            ON NOTIFYCLICK ClipClear()
 
-         ITEM '&Clipboard Viewer' ACTION ClipbrdView()
+         DEFINE NOTIFY MENU
 
-         SEPARATOR
+            ITEM '&Clipboard Viewer' ACTION ClipbrdView()
 
-         ITEM '&About...' ACTION ShellAbout( "", ;
-            PROGRAM + VERSION + CRLF + ;
-            "Copyright " + Chr( 169 ) + COPYRIGHT, LoadIconByName( "ICON_2", 32, 32 ) )
-         SEPARATOR
+            SEPARATOR
 
-         ITEM 'E&xit' ACTION Form_1.Release
+            ITEM '&About...' ACTION ShellAbout( "", ;
+               PROGRAM + VERSION + CRLF + ;
+               "Copyright " + Chr( 169 ) + COPYRIGHT, LoadIconByName( "ICON_2", 32, 32 ) )
+            SEPARATOR
 
-      END MENU
+            ITEM 'E&xit' ACTION Form_1.Release
 
-      DEFINE TIMER Timer_1  ;
-         INTERVAL 750 ;
-         ACTION ( lClipbrdFull := IsClipbrdFull(), Form_1.NotifyIcon := iif( lClipbrdFull, "ICON_1", "ICON_2" ) )
+         END MENU
+
+         DEFINE TIMER Timer_1  ;
+            INTERVAL 750 ;
+            ACTION ( lClipbrdFull := IsClipbrdFull(), Form_1.NotifyIcon := iif( lClipbrdFull, "ICON_1", "ICON_2" ) )
 
       END WINDOW
 
@@ -100,11 +97,9 @@ PROCEDURE Main( ... )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE ClipClear()
-*--------------------------------------------------------*
 
    IF lClipbrdFull .AND. OpenClipboard( Application.Handle )
 
@@ -112,15 +107,14 @@ PROCEDURE ClipClear()
          MsgAlert( "The clipboard is not available now!" )
       ENDIF
 
-      CloseClipboard()
+      CLOSEClipboard()
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION IsClipbrdFull()
-*--------------------------------------------------------*
+
    LOCAL i, lRet := .F.
 
    FOR i := 1 TO CF_MAXCOUNT
@@ -130,75 +124,75 @@ STATIC FUNCTION IsClipbrdFull()
       ENDIF
    NEXT
 
-RETURN lRet
+   RETURN lRet
 
-*--------------------------------------------------------*
 PROCEDURE ClipbrdView()
-*--------------------------------------------------------*
+
    LOCAL cText := "", hBitmap, aSize
 
    IF lClipbrdFull .AND. ( IsClipboardFormatAvailable( CF_TEXT ) .OR. IsClipboardFormatAvailable( CF_BITMAP ) )
 
       IF IsWindowDefined( Form_2 )
          BringWindowToTop( GetFormHandle( "Form_2" ) )
+
          RETURN
       ENDIF
 
       DEFINE WINDOW Form_2 ;
-         TITLE 'Clipboard Viewer' ;
-         ICON "ICON_2" ;
-         CHILD NOMAXIMIZE NOSIZE ;
-         BACKCOLOR WHITE
-
-      ON KEY ESCAPE ACTION Form_2.Release
-
-      IF IsClipboardFormatAvailable( CF_TEXT )
-
-         IF OpenClipboard( Application.Handle )
-
-            cText := GetClipboardData( CF_TEXT )
-
-            CloseClipboard()
-
-         ENDIF
-
-         DEFINE EDITBOX Text_1
-            ROW    0
-            COL    0
-            WIDTH  Form_2.Width - GetBorderWidth()
-            HEIGHT Form_2.Height - GetBorderHeight() - GetTitleHeight()
-            VALUE  cText
-            FONTBOLD .T.
+            TITLE 'Clipboard Viewer' ;
+            ICON "ICON_2" ;
+            CHILD NOMAXIMIZE NOSIZE ;
             BACKCOLOR WHITE
-         END EDITBOX
 
-      ELSE
+         ON KEY ESCAPE ACTION Form_2.Release
 
-         DEFINE IMAGE Image_1
-            ROW    2
-            COL    2
-            WIDTH  Form_2.Width - GetBorderWidth()
-            HEIGHT Form_2.Height - GetBorderHeight() - GetTitleHeight()
-         END IMAGE
+         IF IsClipboardFormatAvailable( CF_TEXT )
 
-         IF OpenClipboard( Application.Handle )
+            IF OpenClipboard( Application.Handle )
 
-            hBitmap := GetClipboardData( CF_BITMAP )
+               cText := GetClipboardData( CF_TEXT )
 
-            CloseClipboard()
+               CLOSEClipboard()
 
-            Form_2.Image_1.HBitmap := hBitmap
+            ENDIF
 
-            aSize := GetBitmapSize( hBitmap )
+            DEFINE EDITBOX Text_1
+               ROW    0
+               COL    0
+               WIDTH  Form_2.Width - GetBorderWidth()
+               HEIGHT Form_2.Height - GetBorderHeight() - GetTitleHeight()
+               VALUE  cText
+               FONTBOLD .T.
+               BACKCOLOR WHITE
+            END EDITBOX
 
-            IF aSize[1] > 32 .AND. aSize[1] < ( Form_2.Width ) .AND. aSize[2] > 32 .AND. aSize[2] < ( Form_2.Height )
-               Form_2.Width := aSize[1] + GetBorderWidth() + 2
-               Form_2.Height := aSize[2] + GetBorderHeight() + GetTitleHeight() + 2
+         ELSE
+
+            DEFINE IMAGE Image_1
+               ROW    2
+               COL    2
+               WIDTH  Form_2.Width - GetBorderWidth()
+               HEIGHT Form_2.Height - GetBorderHeight() - GetTitleHeight()
+            END IMAGE
+
+            IF OpenClipboard( Application.Handle )
+
+               hBitmap := GetClipboardData( CF_BITMAP )
+
+               CLOSEClipboard()
+
+               Form_2.Image_1.HBitmap := hBitmap
+
+               aSize := GetBitmapSize( hBitmap )
+
+               IF aSize[1] > 32 .AND. aSize[1] < ( Form_2.Width ) .AND. aSize[2] > 32 .AND. aSize[2] < ( Form_2.Height )
+                  Form_2.Width := aSize[1] + GetBorderWidth() + 2
+                  Form_2.Height := aSize[2] + GetBorderHeight() + GetTitleHeight() + 2
+               ENDIF
+
             ENDIF
 
          ENDIF
-
-      ENDIF
 
       END WINDOW
 
@@ -211,8 +205,7 @@ PROCEDURE ClipbrdView()
 
    ENDIF
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -265,3 +258,4 @@ HB_FUNC( GETCLIPBOARDDATA )
 }
 
 #pragma ENDDUMP
+

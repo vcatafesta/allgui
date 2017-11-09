@@ -1,82 +1,83 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2008 Roberto Lopez <mail.box.hmg@gmail.com>
- * http://www.hmgforum.com//
+* HMG - Harbour Win32 GUI library Demo
+* Copyright 2002-2008 Roberto Lopez <mail.box.hmg@gmail.com>
+* http://www.hmgforum.com//
 */
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'HMG Demo' ;
-		ICON 'DEMO.ICO' ;
-		MAIN ;
-		FONT 'Arial' SIZE 10 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'HMG Demo' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
-			POPUP 'M&isc'
-				ITEM 'Set RadioGroup 1 ReadOnly Property To {.T.,.T.,.T.,.T.}'	ACTION Form_1.Radio_1.ReadOnly := { .T. , .T. , .T. , .T. }
-				ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.F.,.F.,.F.}'	ACTION Form_1.Radio_1.ReadOnly := { .F. , .F. , .F. , .F. }
-				ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.T.,.F.,.T.}'	ACTION Form_1.Radio_1.ReadOnly := { .F. , .T. , .F. , .T. }
-				SEPARATOR
-				ITEM 'Set RadioGroup 2 ReadOnly Property To {.T.,.T.,.T.,.T.}'	ACTION Form_1.Radio_2.ReadOnly := { .T. , .T. , .T. , .T. }
-				ITEM 'Set RadioGroup 2 ReadOnly Property To {.F.,.F.,.F.,.F.}'	ACTION Form_1.Radio_2.ReadOnly := { .F. , .F. , .F. , .F. }
-				ITEM 'Set RadioGroup 2 ReadOnly Property To {.F.,.T.,.F.,.T.}'	ACTION Form_1.Radio_2.ReadOnly := { .F. , .T. , .F. , .T. }
-				SEPARATOR
-				ITEM 'Get RadioGroup 1 ReadOnly Property'	ACTION MsgInfo ( LogicalArrayToString ( Form_1.Radio_1.ReadOnly ) )
-				ITEM 'Get RadioGroup 2 ReadOnly Property'	ACTION MsgInfo ( LogicalArrayToString ( Form_1.Radio_2.ReadOnly ) )
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'M&isc'
+            ITEM 'Set RadioGroup 1 ReadOnly Property To {.T.,.T.,.T.,.T.}'   ACTION Form_1.Radio_1.ReadOnly := { .T. , .T. , .T. , .T. }
+            ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.F.,.F.,.F.}'   ACTION Form_1.Radio_1.ReadOnly := { .F. , .F. , .F. , .F. }
+            ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.T.,.F.,.T.}'   ACTION Form_1.Radio_1.ReadOnly := { .F. , .T. , .F. , .T. }
+            SEPARATOR
+            ITEM 'Set RadioGroup 2 ReadOnly Property To {.T.,.T.,.T.,.T.}'   ACTION Form_1.Radio_2.ReadOnly := { .T. , .T. , .T. , .T. }
+            ITEM 'Set RadioGroup 2 ReadOnly Property To {.F.,.F.,.F.,.F.}'   ACTION Form_1.Radio_2.ReadOnly := { .F. , .F. , .F. , .F. }
+            ITEM 'Set RadioGroup 2 ReadOnly Property To {.F.,.T.,.F.,.T.}'   ACTION Form_1.Radio_2.ReadOnly := { .F. , .T. , .F. , .T. }
+            SEPARATOR
+            ITEM 'Get RadioGroup 1 ReadOnly Property'   ACTION MsgInfo ( LogicalArrayToString ( Form_1.Radio_1.ReadOnly ) )
+            ITEM 'Get RadioGroup 2 ReadOnly Property'   ACTION MsgInfo ( LogicalArrayToString ( Form_1.Radio_2.ReadOnly ) )
+         END POPUP
+      END MENU
 
-		DEFINE RADIOGROUP Radio_1 
-			OPTIONS	{ 'One' , 'Two' , 'Three', 'Four' } 
-			VALUE	1 
-			WIDTH	100 
-			TOOLTIP	'RadioGroup' 
-			READONLY { .F. , .T. , .F. , .T. }
-			ROW	10
-			COL	10
-		END RADIOGROUP
-			
-		DEFINE RADIOGROUP Radio_2 
-			ROW 10
-			COL 150
-			OPTIONS { 'One' , 'Two' , 'Three', 'Four' } 
-			VALUE 1 
-			WIDTH 100 
-			TOOLTIP 'RadioGroup' 
-			READONLY { .F. , .T. , .F. , .T. }
-		END RADIOGROUP
+      DEFINE RADIOGROUP Radio_1
+         OPTIONS   { 'One' , 'Two' , 'Three', 'Four' }
+         VALUE   1
+         WIDTH   100
+         TOOLTIP   'RadioGroup'
+         READONLY { .F. , .T. , .F. , .T. }
+         ROW   10
+         COL   10
+      END RADIOGROUP
 
-		@ 150,10 DATEPICKER Date_1 ;
-		VALUE CTOD('  / /  ') ;
-		TOOLTIP 'DatePicker Control' 
+      DEFINE RADIOGROUP Radio_2
+         ROW 10
+         COL 150
+         OPTIONS { 'One' , 'Two' , 'Three', 'Four' }
+         VALUE 1
+         WIDTH 100
+         TOOLTIP 'RadioGroup'
+         READONLY { .F. , .T. , .F. , .T. }
+      END RADIOGROUP
 
-	END WINDOW
+      @ 150,10 DATEPICKER Date_1 ;
+         VALUE CTOD('  / /  ') ;
+         TOOLTIP 'DatePicker Control'
 
-	Form_1.date_1.SetFocus
+   END WINDOW
 
-	Form_1.Center
+   Form_1.date_1.SetFocus
 
-	Form_1.Activate
+   Form_1.Center
 
-Return Nil
+   Form_1.Activate
 
-Function LogicalArrayToString ( lArray )
-Local RetVal := '{ ' , I
+   RETURN NIL
 
-	For I := 1 To Len ( lArray )
+FUNCTION LogicalArrayToString ( lArray )
 
-		If lArray [I]
-			RetVal := RetVal + ' ".T." '
-		Else
-			RetVal := RetVal + ' ".F." '
-		EndIf
+   LOCAL RetVal := '{ ' , I
 
-	Next I
+   FOR I := 1 To Len ( lArray )
 
-Return RetVal + ' }'
+      IF lArray [I]
+         RetVal := RetVal + ' ".T." '
+      ELSE
+         RetVal := RetVal + ' ".F." '
+      ENDIF
+
+   NEXT I
+
+   RETURN RetVal + ' }'
+

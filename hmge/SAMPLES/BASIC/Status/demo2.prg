@@ -1,48 +1,46 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2007 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2007 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Procedure Main
-Local aItemsWidth := { 0, 100, 100, 100 }
+PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 800 ;
-		HEIGHT 600 ;
-		TITLE 'Change Statusbar Item Width Demo' ;
-		MAIN 
+   LOCAL aItemsWidth := { 0, 100, 100, 100 }
 
-		DEFINE STATUSBAR FONT 'MS Sans Serif' SIZE 8
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         TITLE 'Change Statusbar Item Width Demo' ;
+         MAIN
 
-			STATUSITEM 'Fixed Item <&W>idth:' ACTION MsgInfo('Click! 1')
-			STATUSITEM 'Item &2' WIDTH aItemsWidth[2] ACTION ResizeItem( 2 )
-			STATUSITEM 'Item &3' WIDTH aItemsWidth[3] ACTION ResizeItem( 3 )
-			STATUSITEM 'Item &4' WIDTH aItemsWidth[4] ACTION ResizeItem( 4 )
+      DEFINE STATUSBAR FONT 'MS Sans Serif' SIZE 8
 
-		END STATUSBAR
+         STATUSITEM 'Fixed Item <&W>idth:' ACTION MsgInfo('Click! 1')
+         STATUSITEM 'Item &2' WIDTH aItemsWidth[2] ACTION ResizeItem( 2 )
+         STATUSITEM 'Item &3' WIDTH aItemsWidth[3] ACTION ResizeItem( 3 )
+         STATUSITEM 'Item &4' WIDTH aItemsWidth[4] ACTION ResizeItem( 4 )
 
-	END WINDOW
+      END STATUSBAR
 
-	Form_1.StatusBar.Width(1) := Form_1.StatusBar.Width(1) + 32
-	Form_1.StatusBar.Item(1) := Form_1.StatusBar.Item(1) + Str(Form_1.StatusBar.Width(1), 4)
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   Form_1.StatusBar.Width(1) := Form_1.StatusBar.Width(1) + 32
+   Form_1.StatusBar.Item(1) := Form_1.StatusBar.Item(1) + Str(Form_1.StatusBar.Width(1), 4)
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*-------------------------------------------------------------
-Procedure ResizeItem( nItem )
-*-------------------------------------------------------------
+   RETURN
 
-	Form_1.StatusBar.Width( nItem ) := IF(Form_1.StatusBar.Width( nItem ) > 100, 100, 200)
+PROCEDURE ResizeItem( nItem )
 
-Return
+   Form_1.StatusBar.Width( nItem ) := IF(Form_1.StatusBar.Width( nItem ) > 100, 100, 200)
+
+   RETURN
+

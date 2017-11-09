@@ -1,13 +1,13 @@
 /*
-  MINIGUI - Harbour Win32 GUI library Demo/Sample
+MINIGUI - Harbour Win32 GUI library Demo/Sample
 
-  Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
-  http://harbourminigui.googlepages.com/
+Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
-  Desarrollado con Harbour Compiler y
-  MINIGUI - Harbour Win32 GUI library (HMG).
+Desarrollado con Harbour Compiler y
+MINIGUI - Harbour Win32 GUI library (HMG).
 
-  Copyright 2007 Jose Miguel <josemisu@yahoo.com.ar>
+Copyright 2007 Jose Miguel <josemisu@yahoo.com.ar>
 */
 
 #include "minigui.ch"
@@ -24,77 +24,76 @@ PROCEDURE Main()
    SET FONT TO _GetSysFont(), 9
 
    DEFINE WINDOW W_Imp1 ;
-      AT 10, 10 ;
-      WIDTH 800 HEIGHT 600 ;
-      TITLE 'Pruebas' ;
-      MAIN ;
-      NOMAXIMIZE ;
-      NOSIZE
+         AT 10, 10 ;
+         WIDTH 800 HEIGHT 600 ;
+         TITLE 'Pruebas' ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE
 
-   @15, 10 LABEL L_ImpDef1 VALUE "GET DEFAULT PRINTER TO" AUTOSIZE TRANSPARENT
-   @10, 200 TEXTBOX T_ImpDef1 WIDTH 300 FONT _GetSysFont() SIZE 10
+      @15, 10 LABEL L_ImpDef1 VALUE "GET DEFAULT PRINTER TO" AUTOSIZE TRANSPARENT
+      @10, 200 TEXTBOX T_ImpDef1 WIDTH 300 FONT _GetSysFont() SIZE 10
 
-   @45, 10 LABEL L_Impresora VALUE "GET PRINTERS TO" AUTOSIZE TRANSPARENT
-   @40, 200 COMBOBOX C_Impresora WIDTH 300 ;
-      ITEMS aIMP90 VALUE 1 ON CHANGE Actualizar1() FONT _GetSysFont() SIZE 10
+      @45, 10 LABEL L_Impresora VALUE "GET PRINTERS TO" AUTOSIZE TRANSPARENT
+      @40, 200 COMBOBOX C_Impresora WIDTH 300 ;
+         ITEMS aIMP90 VALUE 1 ON CHANGE Actualizar1() FONT _GetSysFont() SIZE 10
 
-   @75, 10 LABEL L_PRINTER VALUE "GET SELECTED PRINTER TO" AUTOSIZE TRANSPARENT
-   @70, 200 TEXTBOX T_PRINTER WIDTH 300 FONT _GetSysFont() SIZE 10
+      @75, 10 LABEL L_PRINTER VALUE "GET SELECTED PRINTER TO" AUTOSIZE TRANSPARENT
+      @70, 200 TEXTBOX T_PRINTER WIDTH 300 FONT _GetSysFont() SIZE 10
 
-   @105, 10 LABEL L_BACKCOLOR VALUE "GET BACKCOLOR TO" AUTOSIZE TRANSPARENT
-   @100, 200 TEXTBOX T_BACKCOLOR WIDTH 300 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
+      @105, 10 LABEL L_BACKCOLOR VALUE "GET BACKCOLOR TO" AUTOSIZE TRANSPARENT
+      @100, 200 TEXTBOX T_BACKCOLOR WIDTH 300 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
 
-   @135, 10 LABEL L_TEXTCOLOR VALUE "GET TEXTCOLOR TO" AUTOSIZE TRANSPARENT
-   @130, 200 TEXTBOX T_TEXTCOLOR WIDTH 300 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
+      @135, 10 LABEL L_TEXTCOLOR VALUE "GET TEXTCOLOR TO" AUTOSIZE TRANSPARENT
+      @130, 200 TEXTBOX T_TEXTCOLOR WIDTH 300 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
 
-   @15, 550 LABEL L_UNITS VALUE "SET UNITS" AUTOSIZE TRANSPARENT
-   @10, 650 RADIOGROUP R_UNITS ;
-      OPTIONS { 'ROWCOL', 'MM', 'INCHES', 'PIXELS' } ;
-      VALUE 2 ;
-      WIDTH 75 TRANSPARENT ;
-      ON CHANGE Actualizar2()
+      @15, 550 LABEL L_UNITS VALUE "SET UNITS" AUTOSIZE TRANSPARENT
+      @10, 650 RADIOGROUP R_UNITS ;
+         OPTIONS { 'ROWCOL', 'MM', 'INCHES', 'PIXELS' } ;
+         VALUE 2 ;
+         WIDTH 75 TRANSPARENT ;
+         ON CHANGE Actualizar2()
 
-   @135, 550 LABEL L_HBPRNMAXROW VALUE "HBPRNMAXROW" AUTOSIZE TRANSPARENT
-   @130, 650 TEXTBOX T_HBPRNMAXROW WIDTH 100 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
+      @135, 550 LABEL L_HBPRNMAXROW VALUE "HBPRNMAXROW" AUTOSIZE TRANSPARENT
+      @130, 650 TEXTBOX T_HBPRNMAXROW WIDTH 100 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
 
-   @165, 550 LABEL L_HBPRNMAXCOL VALUE "HBPRNMAXCOL" AUTOSIZE TRANSPARENT
-   @160, 650 TEXTBOX T_HBPRNMAXCOL WIDTH 100 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
+      @165, 550 LABEL L_HBPRNMAXCOL VALUE "HBPRNMAXCOL" AUTOSIZE TRANSPARENT
+      @160, 650 TEXTBOX T_HBPRNMAXCOL WIDTH 100 NUMERIC RIGHTALIGN FONT _GetSysFont() SIZE 10
 
-   @160, 10 GRID GR_Bins ;
-      HEIGHT 100 ;
-      WIDTH 250 ;
-      HEADERS { 'GET BINS TO', 'numero' } ;
-      WIDTHS { 150, 80 } ;
-      ITEMS {} ;
-      VALUE 1 FONT _GetSysFont() SIZE 10
+      @160, 10 GRID GR_Bins ;
+         HEIGHT 100 ;
+         WIDTH 250 ;
+         HEADERS { 'GET BINS TO', 'numero' } ;
+         WIDTHS { 150, 80 } ;
+         ITEMS {} ;
+         VALUE 1 FONT _GetSysFont() SIZE 10
 
-   @160, 270 GRID GR_PORTS ;
-      HEIGHT 100 ;
-      WIDTH 230 ;
-      HEADERS { 'GET PORTS TO' } ;
-      WIDTHS { 200 } ;
-      ITEMS {} ;
-      VALUE 1 FONT _GetSysFont() SIZE 10
+      @160, 270 GRID GR_PORTS ;
+         HEIGHT 100 ;
+         WIDTH 230 ;
+         HEADERS { 'GET PORTS TO' } ;
+         WIDTHS { 200 } ;
+         ITEMS {} ;
+         VALUE 1 FONT _GetSysFont() SIZE 10
 
-   @270, 10 GRID GR_Papers ;
-      HEIGHT 280 ;
-      WIDTH 490 ;
-      HEADERS { 'GET PAPERS TO', 'numero', 'ancho', 'alto' } ;
-      WIDTHS { 200, 80, 80, 80 } ;
-      ITEMS {} ;
-      VALUE 1 ON CHANGE Actualizar2() FONT _GetSysFont() SIZE 10
+      @270, 10 GRID GR_Papers ;
+         HEIGHT 280 ;
+         WIDTH 490 ;
+         HEADERS { 'GET PAPERS TO', 'numero', 'ancho', 'alto' } ;
+         WIDTHS { 200, 80, 80, 80 } ;
+         ITEMS {} ;
+         VALUE 1 ON CHANGE Actualizar2() FONT _GetSysFont() SIZE 10
 
-   Actualizar1()
+      Actualizar1()
 
-   ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
    END WINDOW
 
    CENTER WINDOW W_Imp1
    ACTIVATE WINDOW W_Imp1
 
-RETURN
-
+   RETURN
 
 STATIC FUNCTION Actualizar1()
 
@@ -117,7 +116,6 @@ STATIC FUNCTION Actualizar1()
    W_Imp1.T_BACKCOLOR.Value := nBACKCOLOR
    W_Imp1.T_TEXTCOLOR.Value := nTEXTCOLOR
 
-
    aIMP91B := {}
    FOR N = 1 TO Len( aIMP91 )
       DO CASE
@@ -135,7 +133,6 @@ STATIC FUNCTION Actualizar1()
    ENDIF
    W_Imp1.GR_Bins.Refresh
 
-
    W_Imp1.GR_PORTS.DeleteAllItems
    IF Len( aPORTS ) > 0
       FOR N = 1 TO Len( aPORTS )
@@ -146,7 +143,6 @@ STATIC FUNCTION Actualizar1()
       NEXT
    ENDIF
    W_Imp1.GR_PORTS.Refresh
-
 
    aIMP92B := {}
    FOR N = 1 TO Len( aIMP92 )
@@ -165,8 +161,7 @@ STATIC FUNCTION Actualizar1()
       W_Imp1.GR_Papers.Value := 1
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION Actualizar2()
 
@@ -187,4 +182,5 @@ STATIC FUNCTION Actualizar2()
    W_Imp1.T_HBPRNMAXCOL.Value := HBPRNMAXCOL
    RELEASE PRINTSYS
 
-RETURN NIL
+   RETURN NIL
+

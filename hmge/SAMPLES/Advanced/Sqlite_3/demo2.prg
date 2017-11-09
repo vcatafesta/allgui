@@ -1,195 +1,193 @@
 /*
- * demo2.prg
- *
- * This file is part of "SQLite3Facade for Harbour".
- *
- * This work is licensed under the Creative Commons Attribution 3.0 
- * Unported License. To view a copy of this license, visit 
- * http://creativecommons.org/licenses/by/3.0/ or send a letter to 
- * Creative Commons, 444 Castro Street, Suite 900, Mountain View, 
- * California, 94041, USA.
- *
- * Copyright (c) 2013, Richard Visscher
- */
+* demo2.prg
+* This file is part of "SQLite3Facade for Harbour".
+* This work is licensed under the Creative Commons Attribution 3.0
+* Unported License. To view a copy of this license, visit
+* http://creativecommons.org/licenses/by/3.0/ or send a letter to
+* Creative Commons, 444 Castro Street, Suite 900, Mountain View,
+* California, 94041, USA.
+* Copyright (c) 2013, Richard Visscher
+*/
 
 PROCEDURE Main()
-    LOCAL oSQL
-    LOCAL aStruct := {}
-    LOCAL nStart
-    LOCAL n,nRecords
-    LOCAL aFirstNames,aMidNames,aSurNames,aData
-    LOCAL nFName,nMName,nSName
-    LOCAL nAge
-    LOCAL cName	
-    LOCAL stmt,rs
 
-    IF File("sqlite.db")
-       FErase("sqlite.db")
-    ENDIF
+   LOCAL oSQL
+   LOCAL aStruct := {}
+   LOCAL nStart
+   LOCAL n,nRecords
+   LOCAL aFirstNames,aMidNames,aSurNames,aData
+   LOCAL nFName,nMName,nSName
+   LOCAL nAge
+   LOCAL cName
+   LOCAL stmt,rs
 
-    IF File("mixed.dbf")
-       FErase("mixed.dbf")
-    ENDIF
+   IF File("sqlite.db")
+      FErase("sqlite.db")
+   ENDIF
 
-    AAdd( aStruct,{ "mytext"  , "C", 100,0 } )
-    AAdd( aStruct,{ "myint"   , "N",  2,0 } )
-    AAdd( aStruct,{ "myfloat" , "N", 10,2 } )  
-    AAdd( aStruct,{ "mydate"  , "D",  8,0 } )
-    AAdd( aStruct,{ "mybool"  , "L",  1,0 } )
+   IF File("mixed.dbf")
+      FErase("mixed.dbf")
+   ENDIF
 
-    // populate table with random compounded names
-    aFirstNames := { "John", "Mike", "Willian", "Richard" }
-    aMidNames := { "Hammer", "Pliers", "Screw", "Bolt" }
-    aSurNames := { "Strawberry", "Water", "Coffee", "Pineapple", "Crookie" }
+   AAdd( aStruct,{ "mytext"  , "C", 100,0 } )
+   AAdd( aStruct,{ "myint"   , "N",  2,0 } )
+   AAdd( aStruct,{ "myfloat" , "N", 10,2 } )
+   AAdd( aStruct,{ "mydate"  , "D",  8,0 } )
+   AAdd( aStruct,{ "mybool"  , "L",  1,0 } )
 
-    ? "=================================================="
-    ? "Creating DBF file"     
-    ? "=================================================="
+   // populate table with random compounded names
+   aFirstNames := { "John", "Mike", "Willian", "Richard" }
+   aMidNames := { "Hammer", "Pliers", "Screw", "Bolt" }
+   aSurNames := { "Strawberry", "Water", "Coffee", "Pineapple", "Crookie" }
 
-    nStart := Seconds()
-    DbCreate( "mixed.dbf", aStruct )
+   ? "=================================================="
+   ? "Creating DBF file"
+   ? "=================================================="
 
-    ? "=================================================="
-    ? "Insert [exclusive] 5000 records into DBF"
-    ? "=================================================="
+   nStart := Seconds()
+   DbCreate( "mixed.dbf", aStruct )
 
-	USE mixed EXCLUSIVE 
+   ? "=================================================="
+   ? "Insert [exclusive] 5000 records into DBF"
+   ? "=================================================="
 
-	nRecords := 0
+   USE mixed EXCLUSIVE
 
-	FOR n := 1 TO 5000
+   nRecords := 0
 
-		nFName := HB_RandomInt( 1, LEN( aFirstNames ) )
-		nMName := HB_RandomInt( 1, LEN( aMidNames ) )
-		nSName := HB_RandomInt( 1, LEN( aSurNames ) )
+   FOR n := 1 TO 5000
 
-		cName := aFirstNames[ nFName ] + " " + ;
-					aMidNames[ nMName ]   + " " + ;
-					aSurNames[ nSName ]
+      nFName := HB_RandomInt( 1, LEN( aFirstNames ) )
+      nMName := HB_RandomInt( 1, LEN( aMidNames ) )
+      nSName := HB_RandomInt( 1, LEN( aSurNames ) )
 
-		nAge := HB_RandomInt( 1, 95 )
+      cName := aFirstNames[ nFName ] + " " + ;
+         aMidNames[ nMName ]   + " " + ;
+         aSurNames[ nSName ]
 
-		mixed->( DbAppend() )
-		mixed->mytext  := cName
-		mixed->myint   := nAge
-		mixed->myfloat := 1234.67
-		mixed->mydate  := Date() - nAge
-		mixed->mybool  := .F.
+      nAge := HB_RandomInt( 1, 95 )
 
-		nRecords++	
+      mixed->( DbAppend() )
+      mixed->mytext  := cName
+      mixed->myint   := nAge
+      mixed->myfloat := 1234.67
+      mixed->mydate  := Date() - nAge
+      mixed->mybool  := .F.
 
-	NEXT	
+      nRecords++
 
-	mixed->(DbCommit() )
+   NEXT
 
-	? "============================================================"
-	? " Added " + AllTrim( Str( nRecords ) ) + " records into DBF" 
-	? " Done in ", Alltrim( Str( Seconds() - nStart) )   
-	?? " seconds"
-	? "============================================================"
-	? ""
+   mixed->(DbCommit() )
 
-	? "Press any key for next test"
-	inkey(0)
+   ? "============================================================"
+   ? " Added " + AllTrim( Str( nRecords ) ) + " records into DBF"
+   ? " Done in ", Alltrim( Str( Seconds() - nStart) )
+   ?? " seconds"
+   ? "============================================================"
+   ? ""
 
-	? "=================================================="
-	? "Creating SQLite file"
-	? "=================================================="
+   ? "Press any key for next test"
+   inkey(0)
 
-	nStart := Seconds()
-	nRecords := 0
+   ? "=================================================="
+   ? "Creating SQLite file"
+   ? "=================================================="
 
-	oSQL := SQLiteFacade():New("sqlite.db") 
-	oSQL:Open()
-	oSQL:CreateTable("mixed",aStruct)
+   nStart := Seconds()
+   nRecords := 0
 
-	? "=================================================="
-	? "Insert 5000 records with transaction into SQLite"
-	? "=================================================="
+   oSQL := SQLiteFacade():New("sqlite.db")
+   oSQL:Open()
+   oSQL:CreateTable("mixed",aStruct)
 
-	stmt := oSQL:Prepare("INSERT INTO mixed ( mytext,myint,myfloat,mydate,mybool) VALUES(:mytext,:myint,:myfloat,:mydate,:mybool);")
-	oSQL:BeginTransaction()
+   ? "=================================================="
+   ? "Insert 5000 records with transaction into SQLite"
+   ? "=================================================="
 
-	FOR n := 1 TO 5000
+   stmt := oSQL:Prepare("INSERT INTO mixed ( mytext,myint,myfloat,mydate,mybool) VALUES(:mytext,:myint,:myfloat,:mydate,:mybool);")
+   oSQL:BeginTransaction()
 
-		nFName := HB_RandomInt( 1, LEN( aFirstNames ) )
-		nMName := HB_RandomInt( 1, LEN( aMidNames ) )
-		nSName := HB_RandomInt( 1, LEN( aSurNames ) )
+   FOR n := 1 TO 5000
 
-		cName := aFirstNames[ nFName ] + " " + ;
-					aMidNames[ nMName ]   + " " + ;
-					aSurNames[ nSName ]
+      nFName := HB_RandomInt( 1, LEN( aFirstNames ) )
+      nMName := HB_RandomInt( 1, LEN( aMidNames ) )
+      nSName := HB_RandomInt( 1, LEN( aSurNames ) )
 
-		nAge := hb_RandomInt( 1, 95 )
+      cName := aFirstNames[ nFName ] + " " + ;
+         aMidNames[ nMName ]   + " " + ;
+         aSurNames[ nSName ]
 
-		stmt:SetString(":mytext",cName)
-		stmt:SetInteger(":myint",nAge)
-		stmt:SetFloat(":myfloat",1234.67)
-		stmt:SetDate(":mydate", Date() - nAge )
-		stmt:SetBoolean(":mybool",.F.)
-		stmt:ExecuteUpdate()
+      nAge := hb_RandomInt( 1, 95 )
 
-		nRecords++	
+      stmt:SetString(":mytext",cName)
+      stmt:SetInteger(":myint",nAge)
+      stmt:SetFloat(":myfloat",1234.67)
+      stmt:SetDate(":mydate", Date() - nAge )
+      stmt:SetBoolean(":mybool",.F.)
+      stmt:ExecuteUpdate()
 
-		stmt:reuse():clear()
+      nRecords++
 
-	NEXT
+      stmt:reuse():clear()
 
-	oSQL:CommitTransaction()
+   NEXT
 
-	? "=============================================================="
-	? " Added " + AllTrim( Str( nRecords ) ) + " records into SQLite" 
-	? " Done in ", Alltrim( Str( Seconds() - nStart ) )
-	?? " seconds"
-	? "=============================================================="
-	? ""
+   oSQL:CommitTransaction()
 
-	? "Press any key for next test"
-	inkey(0)
+   ? "=============================================================="
+   ? " Added " + AllTrim( Str( nRecords ) ) + " records into SQLite"
+   ? " Done in ", Alltrim( Str( Seconds() - nStart ) )
+   ?? " seconds"
+   ? "=============================================================="
+   ? ""
 
-	nStart := Seconds()
-	aData := {}
+   ? "Press any key for next test"
+   inkey(0)
 
-	? "Loop through DBF records"
+   nStart := Seconds()
+   aData := {}
 
-	mixed->(DbGoTop())
-	DO WHILE !mixed->(EoF())
-		AAdd( adata, Alltrim(mixed->mytext) )
-		mixed->(DbSkip())
-	ENDDO 		
+   ? "Loop through DBF records"
 
-	? "=============================================================="	 
-	? "Added " + Str(Len( aData)) + " DBF records into array in ", Seconds() - nStart   
-	?? " seconds"
-	? "=============================================================="	
-	? ""
+   mixed->(DbGoTop())
+   DO WHILE !mixed->(EoF())
+      AAdd( adata, Alltrim(mixed->mytext) )
+      mixed->(DbSkip())
+   ENDDO
 
-	inkey(0)
-	? "Press any key for next test"
+   ? "=============================================================="
+   ? "Added " + Str(Len( aData)) + " DBF records into array in ", Seconds() - nStart
+   ?? " seconds"
+   ? "=============================================================="
+   ? ""
 
-	nStart := Seconds()
-	aData := {}
+   inkey(0)
+   ? "Press any key for next test"
 
-	? "Loop through SQLite records"
+   nStart := Seconds()
+   aData := {}
 
-	stmt := oSQL:prepare("SELECT mytext FROM mixed;")
-	rs := stmt:ExecuteQuery()
-   
+   ? "Loop through SQLite records"
 
-	WHILE rs:Next()
-		AAdd( aData, Alltrim(rs:getString("mytext")) )
-	END
+   stmt := oSQL:prepare("SELECT mytext FROM mixed;")
+   rs := stmt:ExecuteQuery()
 
-	? "=============================================================="	 
-	? "Added " + Str(Len(aData)) + " SQLite records into array in ", Seconds() - nStart   
-	?? " seconds"
-	? "=============================================================="	
-	inkey(0)
+   WHILE rs:Next()
+      AAdd( aData, Alltrim(rs:getString("mytext")) )
+   END
 
-	mixed->(DbCloseArea())
+   ? "=============================================================="
+   ? "Added " + Str(Len(aData)) + " SQLite records into array in ", Seconds() - nStart
+   ?? " seconds"
+   ? "=============================================================="
+   inkey(0)
 
-	stmt:Close()
-	rs:close()
-	oSQL:Close()
+   mixed->(DbCloseArea())
 
-RETURN
+   stmt:Close()
+   rs:close()
+   oSQL:Close()
+
+   RETURN
+

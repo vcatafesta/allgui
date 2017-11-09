@@ -1,18 +1,15 @@
 /*
- * Ejemplo ActiveX n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar la API de Google
- * para mostrar un mapa.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * Los archivos gmap1.html y gmap2.html pueden descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/ActiveX
- */
+* Ejemplo ActiveX n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar la API de Google
+* para mostrar un mapa.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* Los archivos gmap1.html y gmap2.html pueden descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/ActiveX
+*/
 
 #include "oohg.ch"
 
@@ -21,15 +18,15 @@ FUNCTION Main()
    LOCAL oForm, oActiveX, oLat, oLng, oAddr, oCity, oCntr
 
    DEFINE WINDOW Form OBJ oForm ;
-      AT 0, 0 ;
-      WIDTH 650 ;
-      HEIGHT 608 ;
-      TITLE "Mostrar un Mapa de Google" ;
-      MAIN ;
-      NOMAXIMIZE ;
-      NOSIZE ;
-      ON INIT ShowLocationByCoords( oActiveX, oLat:Value, oLng:Value ) ;
-      ON RELEASE FErase( CurDrive() + ':\' + CurDir() + '\temp.html' )
+         AT 0, 0 ;
+         WIDTH 650 ;
+         HEIGHT 608 ;
+         TITLE "Mostrar un Mapa de Google" ;
+         MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE ;
+         ON INIT ShowLocationByCoords( oActiveX, oLat:Value, oLng:Value ) ;
+         ON RELEASE FErase( CurDrive() + ':\' + CurDir() + '\temp.html' )
 
       @ 0, 0 ACTIVEX ActiveX OBJ oActiveX ;
          WIDTH 640 ;
@@ -98,10 +95,10 @@ FUNCTION Main()
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION ShowLocationByCoords( oActiveX, nLat, nLng )
+
    LOCAL cHtml := MemoRead( "gmap2.html" )
 
    cHtml := StrTran( cHtml, "<<LAT>>", LTrim(Str( nLat ) ) )
@@ -111,10 +108,10 @@ FUNCTION ShowLocationByCoords( oActiveX, nLat, nLng )
 
    oActiveX:Navigate( CurDrive() + ':\' + CurDir() + '\temp.html' )
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION ShowLocationByAddress( oActiveX, cAddress, cCity, cCountry )
+
    LOCAL cHtml := MemoRead( "gmap1.html" )
 
    cHtml = StrTran( cHtml, "<<STREET>>", AllTrim( cAddress ) )
@@ -125,9 +122,9 @@ FUNCTION ShowLocationByAddress( oActiveX, cAddress, cCity, cCountry )
 
    oActiveX:Navigate( CurDrive() + ':\' + CurDir() + '\temp.html' )
 
-RETURN NIL
+   RETURN NIL
 
+   /*
+   * EOF
+   */
 
-/*
- * EOF
- */

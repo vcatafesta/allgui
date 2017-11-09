@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2002-2014 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2002-2014 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -19,202 +17,195 @@ ANNOUNCE RDDSYS
 
 STATIC hIcon, lAsk2Save := .t., lTrayTasks := .f., lShutDown := .f.
 
-*--------------------------------------------------------*
-Function Main
-*--------------------------------------------------------*
+FUNCTION Main
 
-	SET MULTIPLE OFF WARNING
+   SET MULTIPLE OFF WARNING
 
-	hIcon := LoadTrayIcon( GetInstance(), "SHUT", 32, 32 )
+   hIcon := LoadTrayIcon( GetInstance(), "SHUT", 32, 32 )
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		NOTIFYICON 'MAIN' ;
-		NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu" ;
-		ON NOTIFYCLICK CloseApps( This.Handle ) ;
-		ON RELEASE ( DestroyIcon( hIcon ), ErrorLevel( -1 ) )
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         NOTIFYICON 'MAIN' ;
+         NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu" ;
+         ON NOTIFYCLICK CloseApps( This.Handle ) ;
+         ON RELEASE ( DestroyIcon( hIcon ), ErrorLevel( -1 ) )
 
-		DEFINE NOTIFY MENU 
-			ITEM '&Shutdown Windows'  ACTION {|| lShutDown := !lShutDown, ;
-					Form_1.Shutdown.Checked := lShutDown } NAME Shutdown
-			ITEM 'Add &Tray tasks'	  ACTION {|| lTrayTasks := !lTrayTasks, ;
-					Form_1.TrayTasks.Checked := lTrayTasks } NAME TrayTasks
-			ITEM '&Ask to save'	  ACTION {|| lAsk2Save := !lAsk2Save, ;
-					Form_1.AskSave.Checked := lAsk2Save } NAME AskSave CHECKED
-			SEPARATOR	
-			ITEM '&Mail to author...' ACTION ShellExecute(0, "open", "rundll32.exe", ;
-							"url.dll,FileProtocolHandler " + ;
-							"mailto:gfilatov@freemail.ru?cc=&bcc=" + ;
-							"&subject=Close%20All%20Feedback" + ;
-							"&body=How%20are%20you%2C%20Grigory%3F", , 1)
-			ITEM 'A&bout...'		ACTION ShellAbout( "About " + PROGRAM + "#", ;
-					PROGRAM + VERSION + CRLF + Chr(169) + COPYRIGHT, hIcon )
-			SEPARATOR	
-			ITEM 'E&xit'		  ACTION Form_1.Release
-		END MENU
+      DEFINE NOTIFY MENU
+         ITEM '&Shutdown Windows'  ACTION {|| lShutDown := !lShutDown, ;
+            Form_1.Shutdown.Checked := lShutDown } NAME Shutdown
+         ITEM 'Add &Tray tasks'     ACTION {|| lTrayTasks := !lTrayTasks, ;
+            Form_1.TrayTasks.Checked := lTrayTasks } NAME TrayTasks
+         ITEM '&Ask to save'     ACTION {|| lAsk2Save := !lAsk2Save, ;
+            Form_1.AskSave.Checked := lAsk2Save } NAME AskSave CHECKED
+         SEPARATOR
+         ITEM '&Mail to author...' ACTION ShellExecute(0, "open", "rundll32.exe", ;
+            "url.dll,FileProtocolHandler " + ;
+            "mailto:gfilatov@freemail.ru?cc=&bcc=" + ;
+            "&subject=Close%20All%20Feedback" + ;
+            "&body=How%20are%20you%2C%20Grigory%3F", , 1)
+         ITEM 'A&bout...'      ACTION ShellAbout( "About " + PROGRAM + "#", ;
+            PROGRAM + VERSION + CRLF + Chr(169) + COPYRIGHT, hIcon )
+         SEPARATOR
+         ITEM 'E&xit'        ACTION Form_1.Release
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-#define GW_HWNDFIRST	0
-#define GW_HWNDLAST	1
-#define GW_HWNDNEXT	2
-#define GW_HWNDPREV	3
-#define GW_OWNER	4
-#define GW_CHILD	5
-*--------------------------------------------------------*
-Function CloseApps( hOwnWnd )
-*--------------------------------------------------------*
-LOCAL aWindows := {}, cTitle, iWindow
-LOCAL hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )  // Get the first window
+   #define GW_HWNDFIRST   0
+   #define GW_HWNDLAST   1
+   #define GW_HWNDNEXT   2
+   #define GW_HWNDPREV   3
+   #define GW_OWNER   4
+   #define GW_CHILD   5
 
-	Form_1.NotifyIcon := "PRESSED"
-	SysWait()
+FUNCTION CloseApps( hOwnWnd )
 
-	WHILE hWnd != 0  // Loop through all the windows
-		cTitle := GetWindowText( hWnd )
-		IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
-			IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-			hWnd != hOwnWnd .AND.;              // If it is not this app
-			!EMPTY( cTitle ) .AND.;             // If the window has a title
-			!( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-			!( cTitle == "Program Manager" )    // If it is not the Program Manager
+   LOCAL aWindows := {}, cTitle, iWindow
+   LOCAL hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )  // Get the first window
 
-			AADD( aWindows, hWnd )
-		ENDIF
+   Form_1.NotifyIcon := "PRESSED"
+   SysWait()
 
-		hWnd := GetWindow( hWnd, GW_HWNDNEXT )  // Get the next window
-	ENDDO
+   WHILE hWnd != 0  // Loop through all the windows
+      cTitle := GetWindowText( hWnd )
+      IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
+         IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+         hWnd != hOwnWnd .AND.;              // If it is not this app
+         !EMPTY( cTitle ) .AND.;             // If the window has a title
+         !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+         !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
-	if lTrayTasks
-		hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )
-		WHILE hWnd != 0  // Loop through all the windows
-			cTitle := GetWindowText( hWnd )
-			IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
-				!IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
-				hWnd != hOwnWnd .AND.;              // If it is not this app
-				!EMPTY( cTitle ) .AND.;             // If the window has a title
-				!( "MS_" $ cTitle ) .AND.;          // If it is not System apps
-				!( "DDE" $ cTitle ) .AND.;          // If it is not System apps
-				!( "SYSTEM" $ cTitle ) .AND.;       // If it is not System apps
-				!( "SENS" $ cTitle ) .AND.;         // If it is not System apps
-				!( "WIN95" $ cTitle ) .AND.;        // If it is not System apps
-				!( "Spooler" $ cTitle ) .AND.;      // If it is not System apps
-				!( "Thread" $ cTitle ) .AND.;       // If it is not System apps
-				!( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-				!( cTitle == "Program Manager" )    // If it is not the Program Manager
+         AADD( aWindows, hWnd )
+      ENDIF
 
-				AADD( aWindows, hWnd )
-			ENDIF
+      hWnd := GetWindow( hWnd, GW_HWNDNEXT )  // Get the next window
+   ENDDO
 
-			hWnd := GetWindow( hWnd, GW_HWNDNEXT )  // Get the next window
-		ENDDO
+   IF lTrayTasks
+      hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )
+      WHILE hWnd != 0  // Loop through all the windows
+         cTitle := GetWindowText( hWnd )
+         IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
+            !IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
+            hWnd != hOwnWnd .AND.;              // If it is not this app
+            !EMPTY( cTitle ) .AND.;             // If the window has a title
+            !( "MS_" $ cTitle ) .AND.;          // If it is not System apps
+            !( "DDE" $ cTitle ) .AND.;          // If it is not System apps
+            !( "SYSTEM" $ cTitle ) .AND.;       // If it is not System apps
+            !( "SENS" $ cTitle ) .AND.;         // If it is not System apps
+            !( "WIN95" $ cTitle ) .AND.;        // If it is not System apps
+            !( "Spooler" $ cTitle ) .AND.;      // If it is not System apps
+            !( "Thread" $ cTitle ) .AND.;       // If it is not System apps
+            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+            !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
-	endif
+            AADD( aWindows, hWnd )
+         ENDIF
 
-        FOR EACH iWindow IN aWindows
-		PostMessage( iWindow, IF(lAsk2Save, WM_CLOSE, WM_DESTROY), 0, 0 ) // Close the window
-		DO EVENTS
-	NEXT
+         hWnd := GetWindow( hWnd, GW_HWNDNEXT )  // Get the next window
+      ENDDO
 
-	SysWait()
-	Form_1.NotifyIcon := "MAIN"
+   ENDIF
 
-	if lShutDown
-		WinExit()
-	endif
+   FOR EACH iWindow IN aWindows
+      PostMessage( iWindow, IF(lAsk2Save, WM_CLOSE, WM_DESTROY), 0, 0 ) // Close the window
+      DO EVENTS
+   NEXT
 
-Return Nil
+   SysWait()
+   Form_1.NotifyIcon := "MAIN"
 
-*--------------------------------------------------------*
-Procedure SysWait( nWait )
-*--------------------------------------------------------*
-Local iTime := Seconds()
+   IF lShutDown
+      WinExit()
+   ENDIF
 
-	DEFAULT nWait TO .15
+   RETURN NIL
 
-	REPEAT
-		DO EVENTS
-	UNTIL Seconds() - iTime < nWait
+PROCEDURE SysWait( nWait )
 
-Return
+   LOCAL iTime := Seconds()
 
-#define EWX_LOGOFF	0
-#define EWX_SHUTDOWN	1
-#define EWX_REBOOT	2
-#define EWX_FORCE	4
-#define EWX_POWEROFF	8
-*--------------------------------------------------------*
-Procedure WinExit
-*--------------------------------------------------------*
+   DEFAULT nWait TO .15
 
-   if IsWinNT()
+   REPEAT
+   DO EVENTS
+   UNTIL Seconds() - iTime < nWait
+
+   RETURN
+
+   #define EWX_LOGOFF   0
+   #define EWX_SHUTDOWN   1
+   #define EWX_REBOOT   2
+   #define EWX_FORCE   4
+   #define EWX_POWEROFF   8
+
+PROCEDURE WinExit
+
+   IF IsWinNT()
       EnablePermissions()
-   endif
+   ENDIF
 
-   if ! ExitWindows(EWX_SHUTDOWN, 0)
+   IF ! ExitWindows(EWX_SHUTDOWN, 0)
       ShowError()
-   endif
+   ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-EXIT PROCEDURE _AccelerateExit
-*--------------------------------------------------------*
-LOCAL b, r
+   EXIT PROCEDURE _AccelerateExit
+   LOCAL b, r
 
-   if ! lShutDown
-	lAsk2Save := .t.
-	lTrayTasks := .t.
+   IF ! lShutDown
+      lAsk2Save := .t.
+      lTrayTasks := .t.
 
-	Set InteractiveClose Off
+      SET InteractiveClose Off
 
-	DEFINE WINDOW Splash ;
-		AT 0,0 ;
-		WIDTH 350 HEIGHT 100 ;
-		CHILD NOCAPTION	;
-		TOPMOST	;
-		MINWIDTH 350 ;
-		MINHEIGHT 100 ;
-		MAXWIDTH 350 ;
-		MAXHEIGHT 100 ;
-		ON INIT ( DrawIcon( This.Handle, 18, 18, hIcon ), CloseApps( Application.Handle ) ) ;
-		FONT 'MS Sans Serif' ;
-		SIZE 9
+      DEFINE WINDOW Splash ;
+            AT 0,0 ;
+            WIDTH 350 HEIGHT 100 ;
+            CHILD NOCAPTION   ;
+            TOPMOST   ;
+            MINWIDTH 350 ;
+            MINHEIGHT 100 ;
+            MAXWIDTH 350 ;
+            MAXHEIGHT 100 ;
+            ON INIT ( DrawIcon( This.Handle, 18, 18, hIcon ), CloseApps( Application.Handle ) ) ;
+            FONT 'MS Sans Serif' ;
+            SIZE 9
 
-		b := Splash.Height-2*GetBorderHeight()
-		r := Splash.Width-2*GetBorderWidth()
+         b := Splash.Height-2*GetBorderHeight()
+         r := Splash.Width-2*GetBorderWidth()
 
-		DRAW PANEL IN WINDOW Splash ;
-			AT 0, 0 ;
-			TO b, r
+         DRAW PANEL IN WINDOW Splash ;
+            AT 0, 0 ;
+            TO b, r
 
-		DRAW PANEL IN WINDOW Splash ;
-			AT 1, 1 ;
-			TO b-1, r-1
+         DRAW PANEL IN WINDOW Splash ;
+            AT 1, 1 ;
+            TO b-1, r-1
 
-		@ 32,85 LABEL Label_1 VALUE "Accelerating, please wait..." AUTOSIZE ;
-			FONT 'Tahoma' ;
-			SIZE 12
+         @ 32,85 LABEL Label_1 VALUE "Accelerating, please wait..." AUTOSIZE ;
+            FONT 'Tahoma' ;
+            SIZE 12
 
-		@ 70,85 LABEL Label_2 VALUE PROGRAM + VERSION + '  ' + Chr(169) + COPYRIGHT AUTOSIZE
+         @ 70,85 LABEL Label_2 VALUE PROGRAM + VERSION + '  ' + Chr(169) + COPYRIGHT AUTOSIZE
 
-	END WINDOW
+      END WINDOW
 
-	CENTER WINDOW Splash
+      CENTER WINDOW Splash
 
-	ACTIVATE WINDOW Splash NOWAIT
-	InkeyGUI(2000)
-   endif
+      ACTIVATE WINDOW Splash NOWAIT
+      InkeyGUI(2000)
+   ENDIF
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -229,16 +220,16 @@ HB_FUNC ( SHOWERROR )
    LPVOID lpMsgBuf;
    DWORD dwError  = GetLastError();
 
-   FormatMessage( 
+   FormatMessage(
       FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
       NULL,
       dwError,
       MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
       (LPTSTR) &lpMsgBuf,
       0,
-      NULL 
+      NULL
    );
-   
+
    MessageBox(NULL, (LPCSTR)lpMsgBuf, "Shutdown", MB_OK | MB_ICONEXCLAMATION);
    // Free the buffer
    LocalFree( lpMsgBuf );
@@ -276,7 +267,7 @@ HB_FUNC( DRAWICON )
    HDC hDC;
 
    hDC = GetDC( hWnd );
- 
+
    hb_retl( DrawIcon( (HDC) hDC, hb_parni( 2 ), hb_parni( 3 ), (HICON) hb_parnl( 4 ) ) );
 
    ReleaseDC( hWnd, hDC );
@@ -288,3 +279,4 @@ HB_FUNC( DESTROYICON )
 }
 
 #pragma ENDDUMP
+

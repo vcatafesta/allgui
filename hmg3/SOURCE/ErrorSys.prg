@@ -1,79 +1,80 @@
 /*----------------------------------------------------------------------------
- HMG - Harbour Windows GUI library source code
+HMG - Harbour Windows GUI library source code
 
- Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
- http://sites.google.com/site/hmgweb/
+Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
- Head of HMG project:
+Head of HMG project:
 
-      2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
-      http://sites.google.com/site/hmgweb/
+2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
-      2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
-      http://srvet.blogspot.com
+2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
+http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
- contained in this release of HMG.
+As a special exception, you have permission for additional uses of the text
+contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- HMG library code into it.
+The exception is that, if you link the HMG library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+HMG library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+"Harbour Project"
+Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 MEMVAR _HMG_SYSDATA
+
 #include "hmg.ch"
 #include "error.ch"
-#INCLUDE "COMMON.CH"
-*------------------------------------------------------------------------------*
+#include "COMMON.CH"
+
 PROCEDURE ErrorSys
-*------------------------------------------------------------------------------*
 
-	ErrorBlock( { | oError | DefError( oError ) } )
+   ErrorBlock( { | oError | DefError( oError ) } )
 
-	*OutPutSelect()
+   *OutPutSelect()
 
-	Init()
+   Init()
 
-RETURN
+   RETURN
 
 STATIC FUNCTION DefError( oError )
+
    LOCAL cMessage
    LOCAL cDOSError
 
    LOCAL n
-   Local Ai
+   LOCAL Ai
 
    //Html Arch to ErrorLog
    LOCAL HtmArch, xText
@@ -82,21 +83,24 @@ STATIC FUNCTION DefError( oError )
 
    // By default, division by zero results in zero
    IF oError:genCode == EG_ZERODIV
+
       RETURN 0
    ENDIF
 
    // Set NetErr() of there was a database open error
    IF oError:genCode == EG_OPEN .AND. ;
-      oError:osCode == 32 .AND. ;
-      oError:canDefault
+         oError:osCode == 32 .AND. ;
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
    // Set NetErr() if there was a lock error on dbAppend()
    IF oError:genCode == EG_APPENDLOCK .AND. ;
-      oError:canDefault
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
@@ -128,9 +132,10 @@ STATIC FUNCTION DefError( oError )
 
    RETURN .F.
 
-// [vszakats]
+   // [vszakats]
 
 STATIC FUNCTION ErrorMessage( oError )
+
    LOCAL cMessage
 
    // start error message
@@ -165,107 +170,106 @@ STATIC FUNCTION ErrorMessage( oError )
 
    RETURN cMessage
 
-*******************************************
-Function ShowError ( ErrorMesssage )
-********************************************
+FUNCTION ShowError ( ErrorMesssage )
 
-	UnloadAllDll()
+   UnloadAllDll()
 
-	dbcloseall()
+   dbcloseall()
 
-	C_MSGSTOP ( ErrorMesssage , 'Program Error' )
+   C_MSGSTOP ( ErrorMesssage , 'Program Error' )
 
-	ExitProcess(0)
+   EXITProcess(0)
 
-Return Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------
-*-01-01-2003
-*-AUTHOR: Antonio Novo
-*-Create/Open the ErrorLog.Htm file
-*-Note: Is used in: errorsys.prg and h_error.prg
-*------------------------------------------------------------------------------
+   *-01-01-2003
+   *-AUTHOR: Antonio Novo
+   *-Create/Open the ErrorLog.Htm file
+   *-Note: Is used in: errorsys.prg and h_error.prg
+
 FUNCTION HTML_ERRORLOG
-*---------------------
-    Local HtmArch := 0
-    If .Not. File("\"+CurDir()+"\ErrorLog.Htm")
-        HtmArch := HtmL_Ini("\"+CurDir()+"\ErrorLog.Htm","HMG Errorlog File")
-        Html_Line(HtmArch)
-    Else
-        HtmArch := FOPEN("\"+CurDir()+"\ErrorLog.Htm",2)
-        FSeek(HtmArch,0,2)    //End Of File
-    EndIf
-RETURN (HtmArch)
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTML Page Head
-*------------------------------------------------------------------------------
+   LOCAL HtmArch := 0
+
+   IF .Not. File("\"+CurDir()+"\ErrorLog.Htm")
+      HtmArch := HtmL_Ini("\"+CurDir()+"\ErrorLog.Htm","HMG Errorlog File")
+      Html_Line(HtmArch)
+   ELSE
+      HtmArch := FOPEN("\"+CurDir()+"\ErrorLog.Htm",2)
+      FSeek(HtmArch,0,2)    //End Of File
+   ENDIF
+
+   RETURN (HtmArch)
+
+   *-30-12-2002
+   *-AUTHOR: Antonio Novo
+   *-HTML Page Head
+
 FUNCTION HTML_INI(ARCH,TIT)
-*-------------------------
-    LOCAL HTMARCH
-    LOCAL cStilo:= "<style> "                       +;
-                     "body{ "                       +;
-                       "font-family: sans-serif;"   +;
-                       "background-color: #ffffff;" +;
-                       "font-size: 75%;"            +;
-                       "color: #000000;"            +;
-                       "}"                          +;
-                     "h1{"                          +;
-                       "font-family: sans-serif;"   +;
-                       "font-size: 150%;"           +;
-                       "color: #0000cc;"            +;
-                       "font-weight: bold;"         +;
-                       "background-color: #f0f0f0;" +;
-                       "}"                          +;
-                     ".updated{"                    +;
-                       "font-family: sans-serif;"   +;
-                       "color: #cc0000;"            +;
-                       "font-size: 110%;"           +;
-                       "}"                          +;
-                     ".normaltext{"                 +;
-                      "font-family: sans-serif;"    +;
-                      "font-size: 100%;"            +;
-                      "color: #000000;"             +;
-                      "font-weight: normal;"        +;
-                      "text-transform: none;"       +;
-                      "text-decoration: none;"      +;
-                    "}"                             +;
-                    "</style>"
 
-    HTMARCH := FCREATE(ARCH)
-    FWRITE(HTMARCH,"<HTML><HEAD><TITLE>"+TIT+"</TITLE></HEAD>" + cStilo +"<BODY>"+CHR(13)+CHR(10))
-    FWRITE(HTMARCH,'<H1 Align=Center>'+TIT+'</H1><BR>'+CHR(13)+CHR(10))
-RETURN (HTMARCH)
+   LOCAL HTMARCH
+   LOCAL cStilo:= "<style> "                       +;
+      "body{ "                       +;
+      "font-family: sans-serif;"   +;
+      "background-color: #ffffff;" +;
+      "font-size: 75%;"            +;
+      "color: #000000;"            +;
+      "}"                          +;
+      "h1{"                          +;
+      "font-family: sans-serif;"   +;
+      "font-size: 150%;"           +;
+      "color: #0000cc;"            +;
+      "font-weight: bold;"         +;
+      "background-color: #f0f0f0;" +;
+      "}"                          +;
+      ".updated{"                    +;
+      "font-family: sans-serif;"   +;
+      "color: #cc0000;"            +;
+      "font-size: 110%;"           +;
+      "}"                          +;
+      ".normaltext{"                 +;
+      "font-family: sans-serif;"    +;
+      "font-size: 100%;"            +;
+      "color: #000000;"             +;
+      "font-weight: normal;"        +;
+      "text-transform: none;"       +;
+      "text-decoration: none;"      +;
+      "}"                             +;
+      "</style>"
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTM Page Line
-*------------------------------------------------------------------------------
+   HTMARCH := FCREATE(ARCH)
+   FWRITE(HTMARCH,"<HTML><HEAD><TITLE>"+TIT+"</TITLE></HEAD>" + cStilo +"<BODY>"+CHR(13)+CHR(10))
+   FWRITE(HTMARCH,'<H1 Align=Center>'+TIT+'</H1><BR>'+CHR(13)+CHR(10))
+
+   RETURN (HTMARCH)
+
+   *-30-12-2002
+   *-AUTHOR: Antonio Novo
+   *-HTM Page Line
+
 FUNCTION HTML_LINETEXT(HTMARCH,LINEA)
-*-----------------------------------
- //   LOCAL XLINEA
- //   XLINEA := RTRIM(LINEA)
-    FWRITE(HTMARCH, RTRIM( LINEA ) + "<BR>"+CHR(13)+CHR(10))
-RETURN (.T.)
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTM Line
-*------------------------------------------------------------------------------
+   //   LOCAL XLINEA
+   //   XLINEA := RTRIM(LINEA)
+   FWRITE(HTMARCH, RTRIM( LINEA ) + "<BR>"+CHR(13)+CHR(10))
+
+   RETURN (.T.)
+
+   *-30-12-2002
+   *-AUTHOR: Antonio Novo
+   *-HTM Line
+
 FUNCTION HTML_LINE(HTMARCH)
-*-------------------------
-    FWRITE(HTMARCH,"<HR>"+CHR(13)+CHR(10))
-RETURN (.T.)
 
+   FWRITE(HTMARCH,"<HR>"+CHR(13)+CHR(10))
 
-*-----------------------------------------------------------------------------*
-* Pablo César (May 2014)
-*-----------------------------------------------------------------------------*
+   RETURN (.T.)
+
+   * Pablo César (May 2014)
+
 FUNCTION HTML_END( HTMARCH )
+
    FWrite( HTMARCH, "</BODY></HTML>" )
    FClose( HTMARCH )
-Return Nil
+
+   RETURN NIL

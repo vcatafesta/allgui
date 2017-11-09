@@ -1,24 +1,26 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
 MEMVAR cMainTitle
 
-Function main_disconnect_action
-LOCAL cNetServer	:= '127.0.0.1'
-LOCAL nNetPort		:= 50000	
+FUNCTION main_disconnect_action
 
-	netio_disconnect( cNetServer , nNetPort )   
+   LOCAL cNetServer   := '127.0.0.1'
+   LOCAL nNetPort      := 50000
 
-	* Delete All Items
-	Main.Grid_1.ItemCount := 0
+   netio_disconnect( cNetServer , nNetPort )
 
-	Main.Query_String.Value   := ''
-	Main.Query_Server.Enabled := .F.
-	Main.Query_String.Enabled := .F.
-	Main.Disconnect.Enabled   := .F.
-	Main.Connect.Enabled	  := .T.
+   * Delete All Items
+   Main.Grid_1.ItemCount := 0
 
-	SETPROPERTY('Main', 'Title', cMainTitle + ' - Disconnected!')
+   Main.Query_String.Value   := ''
+   Main.Query_Server.Enabled := .F.
+   Main.Query_String.Enabled := .F.
+   Main.Disconnect.Enabled   := .F.
+   Main.Connect.Enabled     := .T.
 
-Return Nil
+   SETPROPERTY('Main', 'Title', cMainTitle + ' - Disconnected!')
+
+   RETURN NIL
+

@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window DropDown
-	Activate Window DropDown
+   LOAD WINDOW DropDown
+   ACTIVATE WINDOW DropDown
 
-Return
-
+   RETURN
 

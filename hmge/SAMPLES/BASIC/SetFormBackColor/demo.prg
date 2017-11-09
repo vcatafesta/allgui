@@ -1,45 +1,46 @@
 /*
- * MiniGUI Window BackColor Demo
- * (c) 2005 Grigory Filatov
+* MiniGUI Window BackColor Demo
+* (c) 2005 Grigory Filatov
 */
 
 #include "minigui.ch"
 
-Static nColor := 1, ;
-	aColors := { { 255 , 255 , 0 }, { 255 , 128 , 192 }, { 255 , 0 , 0 }, ;
-		{ 255 , 0 , 255 }, { 255 , 128 , 64 }, { 0 , 255 , 0 }, { 128 , 0 , 128 }, ;
-		{ 255 , 255 , 255 }, { 128 , 128 , 128}, { 0 , 0 , 255 }, { 192 , 192 , 192 } }
+STATIC nColor := 1, ;
+   aColors := { { 255 , 255 , 0 }, { 255 , 128 , 192 }, { 255 , 0 , 0 }, ;
+   { 255 , 0 , 255 }, { 255 , 128 , 64 }, { 0 , 255 , 0 }, { 128 , 0 , 128 }, ;
+   { 255 , 255 , 255 }, { 128 , 128 , 128}, { 0 , 0 , 255 }, { 192 , 192 , 192 } }
 
-Procedure Main
+PROCEDURE Main
 
-	SET MULTIPLE OFF
+   SET MULTIPLE OFF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 ;
-		HEIGHT 480 ;
-		TITLE 'Set Window BackColor Demo (Contributed by Grigory Filatov)' ;
-		MAIN ;
-		BACKCOLOR WHITE
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'Set Window BackColor Demo (Contributed by Grigory Filatov)' ;
+         MAIN ;
+         BACKCOLOR WHITE
 
-		DEFINE TIMER Timer_1 INTERVAL 2000 ACTION SetBackColor()
+      DEFINE TIMER Timer_1 INTERVAL 2000 ACTION SetBackColor()
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-Procedure SetBackColor()
+PROCEDURE SetBackColor()
 
-	nColor++
+   nColor++
 
-	if nColor > Len(aColors)
-		nColor := 1
-	endif
+   IF nColor > Len(aColors)
+      nColor := 1
+   ENDIF
 
-	ThisWindow.BackColor := aColors[nColor]
+   ThisWindow.BackColor := aColors[nColor]
 
-Return
+   RETURN
+

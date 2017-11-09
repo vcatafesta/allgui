@@ -1,129 +1,131 @@
 /*
- * $Id: h_splitbox.prg,v 1.26 2017/08/25 19:42:22 fyurisich Exp $
- */
+* $Id: h_splitbox.prg,v 1.26 2017/08/25 19:42:22 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * SplitBox control
- *
- * Copyright 2006-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* SplitBox control
+* Copyright 2006-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "hbclass.ch"
 #include "i_windefs.ch"
 
 CLASS TSplitBox FROM TControl
+
    DATA Type                   INIT "SPLITBOX" READONLY
    DATA lForceBreak            INIT .T.
    DATA cGripperText           INIT ""
    DATA lInverted              INIT .F.
    DATA nMinWidth              INIT nil
    DATA nMinHeight             INIT nil
-   
-   METHOD Define
-   METHOD SizePos              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
-   METHOD Refresh              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
-   METHOD Events_Size          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
-   METHOD RefreshData          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) , ::Super:RefreshData() }
-   METHOD AddControl
-   METHOD SetSplitBox
-   METHOD ClientHeightUsed     BLOCK { |Self| GetWindowHeight( ::hWnd )  }
-   METHOD BandGripperOFF
-   METHOD BandGripperON
-   METHOD BandHasGripper
-   METHOD HideBand
-   METHOD ShowBand
-   METHOD IsBandVisible
+
+METHOD Define
+
+METHOD SizePos              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+
+METHOD Refresh              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+
+METHOD Events_Size          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+
+METHOD RefreshData          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) , ::Super:RefreshData() }
+
+METHOD AddControl
+
+METHOD SetSplitBox
+
+METHOD ClientHeightUsed     BLOCK { |Self| GetWindowHeight( ::hWnd )  }
+
+METHOD BandGripperOFF
+
+METHOD BandGripperON
+
+METHOD BandHasGripper
+
+METHOD HideBand
+
+METHOD ShowBand
+
+METHOD IsBandVisible
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ParentForm, bottom, inverted, lRtl, noattached ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle
+
+   LOCAL ControlHandle, nStyle
 
    ::SetForm( , ParentForm,,,,,, lRtl )
 
-   If ::Container != nil .AND. ! ValidHandler( ::ContainerhWndValue )
+   IF ::Container != nil .AND. ! ValidHandler( ::ContainerhWndValue )
       MsgOOHGError( "SPLITBOX can't be defined inside Tab control. Program Terminated." )
-   EndIf
+   ENDIF
 
    ASSIGN ::lInverted VALUE inverted   TYPE "L"
    ASSIGN bottom      VALUE bottom     TYPE "L"
 
    nStyle := ::InitStyle( ,,, .T. )
-   If ::lInverted
-      If bottom
+   IF ::lInverted
+      IF bottom
          nStyle += CCS_RIGHT
-      Else
+      ELSE
          nStyle += CCS_LEFT
-      EndIf
-   Else
-      If bottom
+      ENDIF
+   ELSE
+      IF bottom
          nStyle += CCS_BOTTOM
-      Else
+      ELSE
          nStyle += CCS_TOP
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
    ControlHandle := InitSplitBox( ::ContainerhWnd, nStyle, ::lRtl )
 
-   If VALTYPE( noattached ) == "L" .AND. noattached
+   IF VALTYPE( noattached ) == "L" .AND. noattached
       ::Style := ::Style + CCS_NOPARENTALIGN
-   EndIf
+   ENDIF
 
    ::Register( ControlHandle )
    ::SizePos()
@@ -132,93 +134,81 @@ Local ControlHandle, nStyle
 
    _OOHG_AddFrame( Self )
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD AddControl( oControl ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
+
    AddSplitBoxItem( oControl:hWnd, ::hWnd, GetWindowWidth( oControl:hWnd ), ::lForceBreak, ::cGripperText, ::nMinWidth, ::nMinHeight, ::lInverted )
    ::lForceBreak  := .F.
    ::cGripperText := nil
    ::nMinWidth    := nil
-Return ::Super:AddControl( oControl )
 
-*------------------------------------------------------------------------------*
+   RETURN ::Super:AddControl( oControl )
+
 METHOD SetSplitBox( Break, GripperText, nMinWidth, nMinHeight ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
-   ::lForceBreak := ::lForceBreak .OR. ( ValType( Break ) == "L" .AND. Break )
-   If ValType( GripperText ) $ "CM"
-      ::cGripperText := GripperText
-   EndIf
-   If ValType( nMinWidth ) == "N"
-      ::nMinWidth := nMinWidth
-   EndIf
-   If ValType( nMinHeight ) == "N"
-      ::nMinHeight := nMinHeight
-   EndIf
-Return .T.
 
-*------------------------------------------------------------------------------*
+   ::lForceBreak := ::lForceBreak .OR. ( ValType( Break ) == "L" .AND. Break )
+   IF ValType( GripperText ) $ "CM"
+      ::cGripperText := GripperText
+   ENDIF
+   IF ValType( nMinWidth ) == "N"
+      ::nMinWidth := nMinWidth
+   ENDIF
+   IF ValType( nMinHeight ) == "N"
+      ::nMinHeight := nMinHeight
+   ENDIF
+
+   RETURN .T.
+
 METHOD BandGripperOFF( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
    SetBandStyle( ::hWnd, nBandId, RBBS_GRIPPERALWAYS, .F. )
    SetBandStyle( ::hWnd, nBandId, RBBS_NOGRIPPER, .T. )
 
-Return Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 METHOD BandGripperON( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
    SetBandStyle( ::hWnd, nBandId, RBBS_NOGRIPPER, .F. )
    SetBandStyle( ::hWnd, nBandId, RBBS_GRIPPERALWAYS, .T. )
 
-Return Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 METHOD BandHasGripper( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
-Return ! BandHasStyleSet( ::hWnd, nBandId, RBBS_NOGRIPPER )
+   RETURN ! BandHasStyleSet( ::hWnd, nBandId, RBBS_NOGRIPPER )
 
-*------------------------------------------------------------------------------*
 METHOD HideBand( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
    SetBandStyle( ::hWnd, nBandId, RBBS_HIDDEN, .T. )
-   
-Return ( BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN ) == .T. )
 
-*------------------------------------------------------------------------------*
+   RETURN ( BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN ) == .T. )
+
 METHOD ShowBand( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
    SetBandStyle( ::hWnd, nBandId, RBBS_HIDDEN, .F. )
-   
-Return ( BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN ) == .F. )
 
-*------------------------------------------------------------------------------*
+   RETURN ( BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN ) == .F. )
+
 METHOD IsBandVisible( nBandId ) CLASS TSplitBox
-*------------------------------------------------------------------------------*
 
-Return ! BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN )
+   RETURN ! BandHasStyleSet( ::hWnd, nBandId, RBBS_HIDDEN )
 
-*------------------------------------------------------------------------------*
-Function _EndSplitBox()
-*------------------------------------------------------------------------------*
-Return _OOHG_DeleteFrame( "SPLITBOX" )
+FUNCTION _EndSplitBox()
 
-*------------------------------------------------------------------------------*
-Function _ForceBreak( ParentForm )
-*------------------------------------------------------------------------------*
-Local oControl
+   RETURN _OOHG_DeleteFrame( "SPLITBOX" )
+
+FUNCTION _ForceBreak( ParentForm )
+
+   LOCAL oControl
+
    oControl := TControl()
    oControl:SetForm( , ParentForm )
    oControl:SetSplitBoxInfo( .T. )
-Return nil
 
-EXTERN SetSplitBoxItem
+   RETURN NIL
+
+   EXTERN SetSplitBoxItem
 
 #pragma BEGINDUMP
 
@@ -251,6 +241,7 @@ static WNDPROC lpfnOldWndProc = 0;
 
 static LRESULT APIENTRY SubClassFunc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProc );
 }
 
@@ -378,7 +369,7 @@ HB_FUNC( SETSPLITBOXITEM )
    if( HB_ISLOG( 4 ) )
    {
       rbBand.fMask |= RBBIM_STYLE;
-      
+
       if( hb_parl( 4 ) )
       {
          rbBand.fStyle |=  RBBS_BREAK;
@@ -450,6 +441,7 @@ void SetBandStyle( HWND hWnd, int nBandId, int nStyle, BOOL nSet )
 
    if( nBandIndex == -1 )
    {
+
       return;
    }
 
@@ -482,7 +474,6 @@ HB_FUNC( SETBANDSTYLE )
    /*
     * Second received parameter is the position of the
     * band at splibox's creation time.
-    *
     */
    SetBandStyle( HWNDparam( 1 ), hb_parni( 2 ), hb_parni( 3 ), hb_parl( 4 ) );
 }
@@ -492,7 +483,6 @@ HB_FUNC( BANDHASSTYLESET )
    /*
     * Second received parameter is the position of the
     * band at splibox's creation time.
-    *
     */
    int nBandIndex = SendMessage( HWNDparam( 1 ), RB_IDTOINDEX, hb_parni( 2 ), 0 );
 
@@ -520,3 +510,4 @@ HB_FUNC( SIZEREBAR )
 }
 
 #pragma ENDDUMP
+

@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-03 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-03 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 ANNOUNCE RDDSYS
@@ -10,16 +9,15 @@ ANNOUNCE RDDSYS
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-//////////////////////////////////////////////////////////////////////////////
-procedure Main()
+PROCEDURE Main()
 
    SET EVENTS FUNC TO App_OnEvents
 
    DEFINE WINDOW Form_1 ;
-      TITLE 'Demo for Gradient Background' ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      ICON 'MAIN'
+         TITLE 'Demo for Gradient Background' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ICON 'MAIN'
 
    END WINDOW
 
@@ -27,32 +25,30 @@ procedure Main()
 
    ACTIVATE WINDOW Form_1
 
-return
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
-function App_OnEvents( hWnd, nMsg, wParam, lParam )
+FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
-   local nResult
+   LOCAL nResult
 
-   switch nMsg
-   case WM_ERASEBKGND
+   SWITCH nMsg
+   CASE WM_ERASEBKGND
       nResult := FillBlue( hWnd )
-      exit
-   case WM_PAINT
+      EXIT
+   CASE WM_PAINT
       nResult := App_OnPaint( hWnd )
-      exit
-   otherwise
+      EXIT
+   OTHERWISE
       nResult := Events( hWnd, nMsg, wParam, lParam )
    end
 
-return nResult
+   RETURN nResult
 
-//////////////////////////////////////////////////////////////////////////////
-function App_OnPaint( hWnd )
+FUNCTION App_OnPaint( hWnd )
 
-   local aRect := { 0, 0, 0, 0 }
-   local hDC, pPS
-   local cRect := ""
+   LOCAL aRect := { 0, 0, 0, 0 }
+   LOCAL hDC, pPS
+   LOCAL cRect := ""
 
    hDC := BeginPaint( hWnd, @pPS )
 
@@ -68,17 +64,16 @@ function App_OnPaint( hWnd )
       FONTCOLOR WHITE TRANSPARENT ;
       ONCE
 
-   EndPaint( hWnd, pPS )
+EndPaint( hWnd, pPS )
 
-return 0
+RETURN 0
 
-//////////////////////////////////////////////////////////////////////////////
-function FillBlue( hWnd )
+FUNCTION FillBlue( hWnd )
 
-   local hDC := GetDC( hWnd )
-   local aRect := { 0, 0, 0, 0 }
-   local cx, cy, nSteps, nI, blue := 200
-   local brush
+   LOCAL hDC := GetDC( hWnd )
+   LOCAL aRect := { 0, 0, 0, 0 }
+   LOCAL cx, cy, nSteps, nI, blue := 200
+   LOCAL brush
 
    GetClientRect( hWnd, @aRect )
 
@@ -87,15 +82,16 @@ function FillBlue( hWnd )
    nSteps = (cy - cx) / 5
    aRect[4] := 0
 
-   for nI := 0 to nSteps
+   FOR nI := 0 to nSteps
       aRect[4] += 5
 
       brush := CreateSolidBrush( 0, 0, blue-- ) ; FillRect( hdc, aRect, brush )
-      DeleteObject( brush )
+      DELETEObject( brush )
 
       aRect[2] += 5
-   next
+   NEXT
 
    ReleaseDC( hWnd, hDC );
 
-return 1
+   RETURN 1
+

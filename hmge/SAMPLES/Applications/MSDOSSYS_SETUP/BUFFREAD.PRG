@@ -6,104 +6,111 @@
 *ณ Return:   .t. if file was opened                             ณ
 *ณ Assumes:  All file access will be done with the B* functions ณ
 *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
-function Bopen( cFileName, nAccMode )
 
-default nAccMode to FO_READ // default access mode is Read Only
+FUNCTION Bopen( cFileName, nAccMode )
 
-nHandle := fopen( cFileName, nAccMode )
-cLineBuffer := ''
-lFullBuff := .t.
-nTotBytes := 0
-lIsOpen := .t.
+   DEFAULT nAccMode to FO_READ // default access mode is Read Only
 
-return ( nHandle != -1 )
+   nHandle := fopen( cFileName, nAccMode )
+   cLineBuffer := ''
+   lFullBuff := .t.
+   nTotBytes := 0
+   lIsOpen := .t.
 
-*ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
-*ณ Function BReadLine()                                         ณ
-*ณ Return:   The next line of the file read buffer              ณ
-*ณ Assumes:  The file pointer will be left as last positioned   ณ
-*ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
-Function BReadLine( cDelimiter )
+   RETURN ( nHandle != -1 )
 
-local ThisLine
-local nCrLfAt
+   *ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
+   *ณ Function BReadLine()                                         ณ
+   *ณ Return:   The next line of the file read buffer              ณ
+   *ณ Assumes:  The file pointer will be left as last positioned   ณ
+   *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
 
-default cDelimiter to chr( 13 ) + chr( 10 )
+FUNCTION BReadLine( cDelimiter )
 
-do While .t.
-   
-   nCrLfAt := at( cDelimiter, cLineBuffer )
-   
-   if empty( nCrLfAt ) .and. lFullBuff
-      BDisk2Buff()
-      loop
-   endif
-   
-   if empty( nCrLfAt )
-      ThisLine := strtran( cLineBuffer, chr( 26 ) )
-      cLineBuffer := ''
-   else
-      ThisLine := left( cLineBuffer, nCrLfAt - 1 )
-      cLineBuffer := substr( cLineBuffer, nCrLfAt + len( cdelimiter ) )
-   endif
-   
-   exit
-   
-EndDo
+   LOCAL ThisLine
+   LOCAL nCrLfAt
 
-Return ThisLine
+   DEFAULT cDelimiter to chr( 13 ) + chr( 10 )
 
-*ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
-*ณ Function BDisk2Buff()                                        ณ
-*ณ Return:   .t. if there was no read error                     ณ
-*ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
+   DO WHILE .t.
+
+      nCrLfAt := at( cDelimiter, cLineBuffer )
+
+      IF empty( nCrLfAt ) .and. lFullBuff
+         BDisk2Buff()
+         LOOP
+      ENDIF
+
+      IF empty( nCrLfAt )
+         ThisLine := strtran( cLineBuffer, chr( 26 ) )
+         cLineBuffer := ''
+      ELSE
+         ThisLine := left( cLineBuffer, nCrLfAt - 1 )
+         cLineBuffer := substr( cLineBuffer, nCrLfAt + len( cdelimiter ) )
+      ENDIF
+
+      EXIT
+
+   ENDDO
+
+   RETURN ThisLine
+
+   *ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
+   *ณ Function BDisk2Buff()                                        ณ
+   *ณ Return:   .t. if there was no read error                     ณ
+   *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
+
 STATIC FUNCTION BDisk2Buff()
 
-STATIC cDiskBuffer := ''
+   STATIC cDiskBuffer := ''
 
-if len( cDiskBuffer ) != BUFFLEN
-   cDiskBuffer := space( BUFFLEN )
-endif
+   IF len( cDiskBuffer ) != BUFFLEN
+      cDiskBuffer := space( BUFFLEN )
+   ENDIF
 
-nBytesRead := fread( nHandle, @cDiskBuffer, BUFFLEN )
+   nBytesRead := fread( nHandle, @cDiskBuffer, BUFFLEN )
 
-nTotBytes += nBytesRead
+   nTotBytes += nBytesRead
 
-lFullBuff := ( nBytesRead == BUFFLEN )
+   lFullBuff := ( nBytesRead == BUFFLEN )
 
-if lFullBuff
-   cLineBuffer += cDiskBuffer
-else
-   cLineBuffer += left( cDiskBuffer, nBytesRead )
-endif
+   IF lFullBuff
+      cLineBuffer += cDiskBuffer
+   ELSE
+      cLineBuffer += left( cDiskBuffer, nBytesRead )
+   ENDIF
 
-return ferror()
+   RETURN ferror()
 
-*ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
-*ณ Function BEof()                                              ณ
-*ณ Return:   TRUE  if End of buffered file                      ณ
-*ณ           FALSE if not                                       ณ
-*ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
-Function BEof()
+   *ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
+   *ณ Function BEof()                                              ณ
+   *ณ Return:   TRUE  if End of buffered file                      ณ
+   *ณ           FALSE if not                                       ณ
+   *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
 
-Return !lFullBuff .and. len( cLineBuffer ) == 0
+FUNCTION BEof()
 
-*ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
-*ณ Function BClose()                                            ณ
-*ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
-Function BClose()
+   RETURN !lFullBuff .and. len( cLineBuffer ) == 0
 
-if lIsOpen
-   fclose( nHandle )
-   lIsOpen := .f.
-endif
+   *ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
+   *ณ Function BClose()                                            ณ
+   *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
 
-Return FError()
+FUNCTION BClose()
 
-*ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
-*ณ Function BPosition()                                         ณ
-*ณ Returns the position of virtual file pointer                 ณ
-*ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
-Function BPosition()
+   IF lIsOpen
+      fclose( nHandle )
+      lIsOpen := .f.
+   ENDIF
 
-Return nTotBytes
+   RETURN FError()
+
+   *ีออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออธ
+   *ณ Function BPosition()                                         ณ
+   *ณ Returns the position of virtual file pointer                 ณ
+   *ิออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออพ
+
+FUNCTION BPosition()
+
+   RETURN nTotBytes
+

@@ -1,62 +1,76 @@
 # include <hmg.ch>
 
-function EncryptFileAES( cFileIn, cFileOut, cPassword )
-   local nMode := 0
-   if file( cFileOut )
-      if ! msgyesno( 'Destination File ' + cFileIn + ' already exists. Do you want to overwrite?' )
-         return .f.
-      endif   
-   endif
+FUNCTION EncryptFileAES( cFileIn, cFileOut, cPassword )
 
-   if ! file( cFileIn )
+   LOCAL nMode := 0
+
+   IF file( cFileOut )
+      IF ! msgyesno( 'Destination File ' + cFileIn + ' already exists. Do you want to overwrite?' )
+
+         RETURN .f.
+      ENDIF
+   ENDIF
+
+   IF ! file( cFileIn )
       msgstop( 'Source File ' + cFileIn + ' not found!' )
-      return .f.
-   endif
-   
-   if lower( alltrim( cFileIn ) ) == lower( alltrim( cFileOut ) )
+
+      RETURN .f.
+   ENDIF
+
+   IF lower( alltrim( cFileIn ) ) == lower( alltrim( cFileOut ) )
       msgstop( 'Source File and Destination File can not be the same!' )
-      return .f.
-   endif
-   
-   if len( cPassword ) == 0
+
+      RETURN .f.
+   ENDIF
+
+   IF len( cPassword ) == 0
       msgstop( 'Password can not be empty!' )
-      return .f.
-   endif
-   
-   if CryptFileAES( cFileIn, cFileOut, cPassword, nMode ) == 1
+
+      RETURN .f.
+   ENDIF
+
+   IF CryptFileAES( cFileIn, cFileOut, cPassword, nMode ) == 1
       msgstop( 'Destination file can not be created successfully!' )
-      return .f.
-   endif
 
-   return .t.
+      RETURN .f.
+   ENDIF
 
-function DecryptFileAES( cFileIn, cFileOut, cPassword )
-   local nMode := 1
-   if file( cFileOut )
-      if ! msgyesno( 'Destination File ' + cFileIn + ' already exists. Do you want to overwrite?' )
-         return .f.
-      endif   
-   endif
+   RETURN .t.
 
-   if ! file( cFileIn )
+FUNCTION DecryptFileAES( cFileIn, cFileOut, cPassword )
+
+   LOCAL nMode := 1
+
+   IF file( cFileOut )
+      IF ! msgyesno( 'Destination File ' + cFileIn + ' already exists. Do you want to overwrite?' )
+
+         RETURN .f.
+      ENDIF
+   ENDIF
+
+   IF ! file( cFileIn )
       msgstop( 'Source File ' + cFileIn + ' not found!' )
-      return .f.
-   endif
-   
-   if lower( alltrim( cFileIn ) ) == lower( alltrim( cFileOut ) )
-      msgstop( 'Source File and Destination File can not be the same!' )
-      return .f.
-   endif
-   
-   if len( cPassword ) == 0
-      msgstop( 'Password can not be empty!' )
-      return .f.
-   endif
-   
-   if CryptFileAES( cFileIn, cFileOut, cPassword, nMode ) == 1
-      msgstop( 'Destination file can not be created successfully!' )
-      return .f.
-   endif
 
-   return .t.
+      RETURN .f.
+   ENDIF
+
+   IF lower( alltrim( cFileIn ) ) == lower( alltrim( cFileOut ) )
+      msgstop( 'Source File and Destination File can not be the same!' )
+
+      RETURN .f.
+   ENDIF
+
+   IF len( cPassword ) == 0
+      msgstop( 'Password can not be empty!' )
+
+      RETURN .f.
+   ENDIF
+
+   IF CryptFileAES( cFileIn, cFileOut, cPassword, nMode ) == 1
+      msgstop( 'Destination file can not be created successfully!' )
+
+      RETURN .f.
+   ENDIF
+
+   RETURN .t.
 

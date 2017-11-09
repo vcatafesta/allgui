@@ -1,16 +1,13 @@
 /*
- * MINIGUI - Harbour Win32 GUI library source code
- *
- * Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
- */
+* MINIGUI - Harbour Win32 GUI library source code
+* Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
+*/
 
 #include "minigui.ch"
 
 #ifdef _USERINIT_
 
-*------------------------------------------------------------------------------*
 INIT PROCEDURE _InitCLButton
-*------------------------------------------------------------------------------*
 
    InstallEventHandler ( 'CLButtonEventHandler' )
    InstallMethodHandler ( 'Release', 'ReleaseCLButtonImageList' )
@@ -23,11 +20,10 @@ INIT PROCEDURE _InitCLButton
    InstallPropertyHandler ( 'NoteText', 'SetCLButtonNoteText', 'GetCLButtonNoteText' )
    InstallPropertyHandler ( 'Picture', 'SetCLButtonPicture', 'GetCLButtonPicture' )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE _DefineCLButton ( cName, nRow, nCol, cCaption, cNotes, bAction, cParent, lDefault, w, h, cBitmap )
-*------------------------------------------------------------------------------*
+
    LOCAL hControlHandle, nId, hParentFormHandle, k, mVar
 
    IF _HMG_BeginWindowActive
@@ -64,7 +60,7 @@ PROCEDURE _DefineCLButton ( cName, nRow, nCol, cCaption, cNotes, bAction, cParen
 
    CLButton_SetNote( hControlHandle, cNotes )
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType[k] := 'CLBUTTON'
    _HMG_aControlNames[k] :=  cName
@@ -116,11 +112,10 @@ PROCEDURE _DefineCLButton ( cName, nRow, nCol, cCaption, cNotes, bAction, cParen
       _HMG_aControlBrushHandle[k] := CLButton_SetImage( hControlHandle, cBitmap )
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE ReleaseCLButtonImageList ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL i
 
    IF _IsControlDefined ( cControl, cWindow ) .AND. GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -139,13 +134,13 @@ PROCEDURE ReleaseCLButtonImageList ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-#define WM_COMMAND  0x0111
-#define BN_CLICKED  0
-*------------------------------------------------------------------------------*
+   #define WM_COMMAND  0x0111
+   #define BN_CLICKED  0
+
 FUNCTION CLButtonEventhandler ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL i
    LOCAL RetVal := Nil
 
@@ -166,12 +161,12 @@ FUNCTION CLButtonEventhandler ( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-#define BCM_SETSHIELD      0x0000160C
-*------------------------------------------------------------------------------*
+   #define BCM_SETSHIELD      0x0000160C
+
 PROCEDURE CLButton_SetShield ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL i
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -190,14 +185,14 @@ PROCEDURE CLButton_SetShield ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-#define BS_COMMANDLINK     0x0000000E
-#define BS_DEFCOMMANDLINK  0x0000000F
-#define BM_SETSTYLE        244
-*------------------------------------------------------------------------------*
+   #define BS_COMMANDLINK     0x0000000E
+   #define BS_DEFCOMMANDLINK  0x0000000F
+   #define BM_SETSTYLE        244
+
 PROCEDURE CLButtonSetFocus ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL hWnd, x, ControlCount, ParentFormHandle
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -223,11 +218,9 @@ PROCEDURE CLButtonSetFocus ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE CLButtonEnable ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
 
@@ -241,11 +234,9 @@ PROCEDURE CLButtonEnable ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE CLButtonDisable ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
 
@@ -259,11 +250,9 @@ PROCEDURE CLButtonDisable ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION SetCLButtonHandle ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
 
@@ -273,11 +262,10 @@ FUNCTION SetCLButtonHandle ( cWindow, cControl )
 
    _HMG_UserComponentProcess := .F.
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION GetCLButtonHandle ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal := Nil
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -291,11 +279,10 @@ FUNCTION GetCLButtonHandle ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
 FUNCTION SetCLButtonCaption ( cWindow, cControl, cProperty, cValue )
-*------------------------------------------------------------------------------*
+
    cProperty := NIL // Unused variable
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -310,11 +297,10 @@ FUNCTION SetCLButtonCaption ( cWindow, cControl, cProperty, cValue )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION GetCLButtonCaption ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal := Nil
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -329,11 +315,10 @@ FUNCTION GetCLButtonCaption ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
 PROCEDURE SetCLButtonNoteText ( cWindow, cControl, cProperty, cValue )
-*------------------------------------------------------------------------------*
+
    cProperty := NIL // Unused variable
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -348,11 +333,9 @@ PROCEDURE SetCLButtonNoteText ( cWindow, cControl, cProperty, cValue )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION GetCLButtonNoteText ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
 
@@ -362,12 +345,12 @@ FUNCTION GetCLButtonNoteText ( cWindow, cControl )
 
    _HMG_UserComponentProcess := .F.
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 PROCEDURE SetCLButtonPicture ( cWindow, cControl, cProperty, cBitmap )
-*------------------------------------------------------------------------------*
+
    LOCAL i
+
    cProperty := NIL // Unused variable
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -390,11 +373,10 @@ PROCEDURE SetCLButtonPicture ( cWindow, cControl, cProperty, cBitmap )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION GetCLButtonPicture ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal
 
    IF GetControlType ( cControl, cWindow ) == 'CLBUTTON'
@@ -409,11 +391,9 @@ FUNCTION GetCLButtonPicture ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
@@ -522,4 +502,5 @@ HB_FUNC( CLBUTTON_SETIMAGE )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

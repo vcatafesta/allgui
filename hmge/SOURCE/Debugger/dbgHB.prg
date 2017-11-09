@@ -1,35 +1,34 @@
 
 /*----------------------------------------------------------------------------
- HMG DEBUGGER - GUI Debugger for HMG
+HMG DEBUGGER - GUI Debugger for HMG
 
- Copyright 2015-2016 by Dr. Claudio Soto (from Uruguay).
- mail: <srvet@adinet.com.uy>
- blog: http://srvet.blogspot.com
+Copyright 2015-2016 by Dr. Claudio Soto (from Uruguay).
+mail: <srvet@adinet.com.uy>
+blog: http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301, USA
- (or visit their web site at http://www.gnu.org/).
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301, USA
+(or visit their web site at http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of HMG DEBUGGER.
+As a special exception, you have permission for additional uses of the text
+contained in this release of HMG DEBUGGER.
 
- The exception is that, if you link the HMG DEBUGGER library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- HMG DEBUGGER library code into it.
+The exception is that, if you link the HMG DEBUGGER library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+HMG DEBUGGER library code into it.
 ----------------------------------------------------------------------------*/
-
 
 #pragma DEBUGINFO=OFF
 
@@ -39,7 +38,6 @@
 #include "hbdebug.ch"
 #include "hbmemvar.ch"
 
-
 /* Information structure stored in DATA aCallStack */
 #define CSTACK_MODULE           1  // module name (.prg file)
 #define CSTACK_FUNCTION         2  // function name
@@ -48,14 +46,12 @@
 #define CSTACK_LOCALS           5  // an array with local variables
 #define CSTACK_STATICS          6  // an array with static variables
 
-
 /* Information structure stored in aCallStack[ n ][ CSTACK_LOCALS ]
-   { cLocalName, nLocalIndex, "Local", ProcName( 1 ), nLevel } */
+{ cLocalName, nLocalIndex, "Local", ProcName( 1 ), nLevel } */
 #define VAR_NAME                1
 #define VAR_POS                 2
 #define VAR_TYPE                3
 #define VAR_LEVEL               4  // eval stack level of the function
-
 
 /* Information structure stored in ::aBreakPoints */
 #define BP_LINE                 1  // line number
@@ -71,27 +67,22 @@
 #define _TRACEPOINT_TEXT_       "tp"
 #define _WATCHPOINT_TEXT_       "wp"
 
-
 /* Information structure stored in ::aModules */
 #define MODULE_NAME             1
 #define MODULE_STATICS          2
 #define MODULE_GLOBALS          3
 #define MODULE_EXTERNGLOBALS    4
 
-
 #define VAR_MAX_LEN             72
-
 
 #define MAX_SCAN_LINES          1500
 
-
 #command IFFAIL(<r>) => IF t_oDebugger:pInfo == NIL; RETURN <r>; ENDIF
-
 
 THREAD STATIC t_oDebugger
 
-
 /* Debugger entry point */
+
 PROCEDURE __dbgEntry( nMode, uParam1, uParam2, uParam3, uParam4, uParam5 )
 
    DO CASE
@@ -115,42 +106,40 @@ PROCEDURE __dbgEntry( nMode, uParam1, uParam2, uParam3, uParam4, uParam5 )
 
    ENDCASE
 
-RETURN
+   RETURN
 
-
-/*********************************************************************
+   /*********************************************************************
    Harbour Debugger .PRG Functions ( harbour\src\debug\dbgentry.c )
-*********************************************************************/
-/*
-__dbgSetEntry()
-__dbgSetGo( pInfo )
-__dbgSetTrace( pInfo )
-__dbgSetCBTrace( pInfo, lCBTrace )
-__dbgSetNextRoutine( pInfo )
-__dbgSetQuit( pInfo )
-__dbgSetToCursor( pInfo, cModule, nLine )
-__dbgGetExprValue( pInfo, cExpr|nWatch, @lValid )
-__dbgGetSourceFiles( pInfo )
-__dbgIsValidStopLine( pInfo, cModule, nLine )
-__dbgAddBreak( pInfo, cModule, nLine, cFunction )
-__dbgDelBreak( pInfo, nWatch )
-__dbgIsBreak( pInfo, cModule, nLine )
-__dbgGetBreakPoints( pInfo )
-__dbgAddWatch( pInfo, cExpr, lTrace)
-__dbgDelWatch( pInfo, nWatch )
-__dbgSetWatch( pInfo, nWatch, cExpr, lTrace )
-__dbgCntWatch( pInfo )
-__dbgGetWatchPoints( pInfo )
-__dbgGetSets()
-__dbgGetModuleName( pInfo, cFullName )
-__dbgModuleMatch( pInfo, cModule1, cModule2 )
-__dbgSendMsg( nProcLevel, pObject, Message, nParamOffset )
-*/
+   *********************************************************************/
+   /*
+   __dbgSetEntry()
+   __dbgSetGo( pInfo )
+   __dbgSetTrace( pInfo )
+   __dbgSetCBTrace( pInfo, lCBTrace )
+   __dbgSetNextRoutine( pInfo )
+   __dbgSetQuit( pInfo )
+   __dbgSetToCursor( pInfo, cModule, nLine )
+   __dbgGetExprValue( pInfo, cExpr|nWatch, @lValid )
+   __dbgGetSourceFiles( pInfo )
+   __dbgIsValidStopLine( pInfo, cModule, nLine )
+   __dbgAddBreak( pInfo, cModule, nLine, cFunction )
+   __dbgDelBreak( pInfo, nWatch )
+   __dbgIsBreak( pInfo, cModule, nLine )
+   __dbgGetBreakPoints( pInfo )
+   __dbgAddWatch( pInfo, cExpr, lTrace)
+   __dbgDelWatch( pInfo, nWatch )
+   __dbgSetWatch( pInfo, nWatch, cExpr, lTrace )
+   __dbgCntWatch( pInfo )
+   __dbgGetWatchPoints( pInfo )
+   __dbgGetSets()
+   __dbgGetModuleName( pInfo, cFullName )
+   __dbgModuleMatch( pInfo, cModule1, cModule2 )
+   __dbgSendMsg( nProcLevel, pObject, Message, nParamOffset )
+   */
 
-
-/*************************************************************************************************************
+   /*************************************************************************************************************
    HMGDebugger Class is an adaptation of the HBDebugger Class of Harbour ( harbour\src\debug\debugger.prg )
-*************************************************************************************************************/
+   *************************************************************************************************************/
 
 CLASS HMGDebugger
 
@@ -180,66 +169,109 @@ CLASS HMGDebugger
    VAR lActive           INIT .F.
    VAR lDeactivate       INIT .F.
 
-   METHOD New()
-   METHOD Activate()
-   METHOD LoadCallStack()
-   METHOD HandleEvent()
+METHOD New()
 
-   METHOD Go()
-   METHOD Step()
-   METHOD Animate()
-   METHOD Pause()
-   METHOD Trace()
-   METHOD SetCBTrace( lCBTrace )
-   METHOD SetNextRoutine()
-   METHOD GetSourceFiles()
-   METHOD GetNextValidStopLine( nProcLevel )
-   METHOD GetNextValidStopLineEx( cFileName, nLine )
-   METHOD IsValidStopLine( cFileName, nLine )
-   METHOD SetToCursor( cFileName, nLine )
-   METHOD Quit()
-   METHOD Exit()
+METHOD Activate()
 
-   METHOD BreakPointCount()
-   METHOD IsBreakPoint( cFileName, nLine )
-   METHOD BreakPointToggle( cFileName, nLine )
-   METHOD BreakPointDelete( nPos )
-   METHOD BreakPointDeleteAll()
-   METHOD BreakPointAddFunc( cFuncName )
+METHOD LoadCallStack()
 
-   METHOD GetExprValue( xExpr, lValid )
-   METHOD WatchCount()
-   METHOD WatchDeleteAll()
-   METHOD WatchDelete( nWatch )
-   METHOD WatchGetInfo( nWatch )
-   METHOD WatchSetExpr( nWatch, cExpr )
-   METHOD WatchPointAdd( cExpr )
-   METHOD TracepointAdd( cExpr )
+METHOD HandleEvent()
 
-   METHOD SetPathForFiles( cPath )
-   METHOD LoadSourceFile( cFileName )
-   METHOD GetCodeLineInfo( nProc )
+METHOD Go()
 
-   METHOD DoCommand( cCommand )
-   METHOD RestoreSettings( cFileName )
-   METHOD SaveSettings( cFileName )
+METHOD Step()
 
-   METHOD VarGetInfo( aVar )
-   METHOD VarGetName( aVar )
-   METHOD VarGetValType( aVar )
-   METHOD VarGetValue( aVar )
-   METHOD VarSetValue( aVar, uValue )
+METHOD Animate()
 
-   METHOD GetAreas()
-   METHOD GetRec( cAlias )
-   METHOD GetArrayInfo( cArrName, aArrValue )
-   METHOD GetHashInfo( cHashName, aHashValue )
-   METHOD GetObjectInfo( cObjName, oObject, aObjRawValue )
+METHOD Pause()
 
-   METHOD GetBreakPoints()
-   METHOD GetWatch()
-   METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals )   // updates monitored variables
-   METHOD GetProcStack()
+METHOD Trace()
+
+METHOD SetCBTrace( lCBTrace )
+
+METHOD SetNextRoutine()
+
+METHOD GetSourceFiles()
+
+METHOD GetNextValidStopLine( nProcLevel )
+
+METHOD GetNextValidStopLineEx( cFileName, nLine )
+
+METHOD IsValidStopLine( cFileName, nLine )
+
+METHOD SetToCursor( cFileName, nLine )
+
+METHOD Quit()
+
+METHOD Exit()
+
+METHOD BreakPointCount()
+
+METHOD IsBreakPoint( cFileName, nLine )
+
+METHOD BreakPointToggle( cFileName, nLine )
+
+METHOD BreakPointDelete( nPos )
+
+METHOD BreakPointDeleteAll()
+
+METHOD BreakPointAddFunc( cFuncName )
+
+METHOD GetExprValue( xExpr, lValid )
+
+METHOD WatchCount()
+
+METHOD WatchDeleteAll()
+
+METHOD WatchDelete( nWatch )
+
+METHOD WatchGetInfo( nWatch )
+
+METHOD WatchSetExpr( nWatch, cExpr )
+
+METHOD WatchPointAdd( cExpr )
+
+METHOD TracepointAdd( cExpr )
+
+METHOD SetPathForFiles( cPath )
+
+METHOD LoadSourceFile( cFileName )
+
+METHOD GetCodeLineInfo( nProc )
+
+METHOD DoCommand( cCommand )
+
+METHOD RestoreSettings( cFileName )
+
+METHOD SaveSettings( cFileName )
+
+METHOD VarGetInfo( aVar )
+
+METHOD VarGetName( aVar )
+
+METHOD VarGetValType( aVar )
+
+METHOD VarGetValue( aVar )
+
+METHOD VarSetValue( aVar, uValue )
+
+METHOD GetAreas()
+
+METHOD GetRec( cAlias )
+
+METHOD GetArrayInfo( cArrName, aArrValue )
+
+METHOD GetHashInfo( cHashName, aHashValue )
+
+METHOD GetObjectInfo( cObjName, oObject, aObjRawValue )
+
+METHOD GetBreakPoints()
+
+METHOD GetWatch()
+
+METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals )   // updates monitored variables
+
+METHOD GetProcStack()
 
    // Code Blocks that call the GUI functions
    VAR bGUICreateFormDebugger  INIT {|| ProcInitGUIDebugger( .T. ) }
@@ -250,24 +282,28 @@ CLASS HMGDebugger
    VAR bGUIMessageBox          INIT {|| NIL }   // this code block is initialized in ProcInitGUIDebugger()
    VAR lGUIShowMessageBox      INIT .T.
 
-   METHOD GUICreateFormDebugger()    INLINE   Eval( ::bGUICreateFormDebugger )
-   METHOD GUIReleaseFormDebugger()   INLINE   Eval( ::bGUIReleaseFormDebugger )
-   METHOD GUIUpdateInfo()            INLINE   Eval( ::bGUIUpdateInfo )
-   METHOD GUIDoEvents()              INLINE   Eval( ::bGUIDoEvents )
-   METHOD GUIReleaseAllWindows()     INLINE   Eval( ::bGUIReleaseAllWindows )
-   METHOD GUIMessageBox( ... )       INLINE   iif( ::lGUIShowMessageBox, Eval( ::bGUIMessageBox, ... ), NIL )
+METHOD GUICreateFormDebugger()    INLINE   Eval( ::bGUICreateFormDebugger )
+
+METHOD GUIReleaseFormDebugger()   INLINE   Eval( ::bGUIReleaseFormDebugger )
+
+METHOD GUIUpdateInfo()            INLINE   Eval( ::bGUIUpdateInfo )
+
+METHOD GUIDoEvents()              INLINE   Eval( ::bGUIDoEvents )
+
+METHOD GUIReleaseAllWindows()     INLINE   Eval( ::bGUIReleaseAllWindows )
+
+METHOD GUIMessageBox( ... )       INLINE   iif( ::lGUIShowMessageBox, Eval( ::bGUIMessageBox, ... ), NIL )
 
 ENDCLASS
-
 
 METHOD New() CLASS HMGDebugger
 
    t_oDebugger := Self
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Activate() CLASS HMGDebugger
+
    IFFAIL( NIL )
    ::LoadCallStack()
    IF ! ::lActive
@@ -277,8 +313,7 @@ METHOD Activate() CLASS HMGDebugger
    ENDIF
    ::HandleEvent()
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD LoadCallStack() CLASS HMGDebugger
 
@@ -304,8 +339,7 @@ METHOD LoadCallStack() CLASS HMGDebugger
       ENDIF
    NEXT
 
-RETURN NIL    // ::aProcStack -- > { cFileName, cFuncName, nLine, nLevel, aLocals, aStatics }
-
+   RETURN NIL    // ::aProcStack -- > { cFileName, cFuncName, nLine, nLevel, aLocals, aStatics }
 
 METHOD HandleEvent() CLASS HMGDebugger
 
@@ -355,6 +389,7 @@ METHOD HandleEvent() CLASS HMGDebugger
    ::aCurrentLineInfo  := { nProcLevel, cFileName, cFuncName, nLine, cInfo, ::cSettingsFileName }
 
    IF ::lDeactivate == .T.
+
       RETURN NIL
    ENDIF
 
@@ -366,18 +401,18 @@ METHOD HandleEvent() CLASS HMGDebugger
 
    ::lExitLoop := .F.
 
-  /*-----------------------------------
-    Methods that set ::lExitLoop := .T.
-    -----------------------------------
-      ::Go()
-      ::Step()
-      ::Animate()
-      ::Trace()
-      ::SetNextRoutine()
-      ::SetToCursor()
-      ::Quit()
-      ::Exit()
-    -----------------------------------*/
+   /*-----------------------------------
+   Methods that set ::lExitLoop := .T.
+   -----------------------------------
+   ::Go()
+   ::Step()
+   ::Animate()
+   ::Trace()
+   ::SetNextRoutine()
+   ::SetToCursor()
+   ::Quit()
+   ::Exit()
+   -----------------------------------*/
 
    DO WHILE ! ::lExitLoop
       ::GUIDoEvents()   // GUI: execute Do Events function
@@ -389,226 +424,234 @@ METHOD HandleEvent() CLASS HMGDebugger
                hb_ReleaseCPU()
             ENDDO
          ENDIF
+
          RETURN NIL
       ENDIF
    ENDDO
 
-RETURN NIL
+   RETURN NIL
 
-
-/*************************************************************/
-
+   /*************************************************************/
 
 METHOD Animate() CLASS HMGDebugger
+
    IFFAIL( NIL )
    __dbgResetRunFlags( ::pInfo )
    ::lAnimate := .T.
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Step() CLASS HMGDebugger   // CMD_STEP
+
    IFFAIL( NIL )
    __dbgResetRunFlags( ::pInfo )
    ::lAnimate := .F.
    ::lExitLoop := .T.
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Trace() CLASS HMGDebugger   // CMD_TRACE
+
    IFFAIL( NIL )
    ::Step() // force a Step(), be careful with the order of call ::Step() method, because __dbgResetRunFlags() in ::Step() method sets __dbgSetTrace() to Off
    __dbgSetTrace( ::pInfo )
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Go() CLASS HMGDebugger   // CMD_GO
+
    IFFAIL( NIL )
    __dbgSetGo( ::pInfo )
    ::lAnimate := .F.
    ::lExitLoop := .T.
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD SetNextRoutine() CLASS HMGDebugger   // CMD_NEXTR
+
    IFFAIL( NIL )
    __dbgSetNextRoutine( ::pInfo )
    ::lAnimate := .F.
    ::lExitLoop := .T.
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Pause() CLASS HMGDebugger
+
    IFFAIL( NIL )
    __dbgResetRunFlags( ::pInfo )
    ::lAnimate := .F.
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD SetCBTrace( lCBTrace ) CLASS HMGDebugger
+
    IFFAIL( NIL )
    hb_default( @lCBTrace, .T. )
    __dbgSetCBTrace( ::pInfo, lCBTrace )
    ::lCBTrace := lCBTrace
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD GetSourceFiles() CLASS HMGDebugger
+
    IFFAIL( NIL )
 
-RETURN __dbgGetSourceFiles( ::pInfo )
-
+   RETURN __dbgGetSourceFiles( ::pInfo )
 
 METHOD GetNextValidStopLine( nProcLevel ) CLASS HMGDebugger
 
    LOCAL i
    LOCAL cFileName
    LOCAL nLine
+
    IFFAIL( 0 )
    hb_default( @nProcLevel, 1 )
    cFileName := ProcFile( nProcLevel )
    nLine     := ProcLine( nProcLevel )
    FOR i := nLine + 1 TO nLine + MAX_SCAN_LINES + 1
       IF __dbgIsValidStopLine( ::pInfo, cFileName, i )
+
          RETURN i
       ENDIF
    NEXT
 
-RETURN 0
-
+   RETURN 0
 
 METHOD GetNextValidStopLineEx( cFileName, nLine ) CLASS HMGDebugger
 
    LOCAL i
+
    IFFAIL( 0 )
    hb_default( @cFileName, ProcFile( 1 ) )
    hb_default( @nLine,     ProcLine( 1 ) )
    FOR i := nLine + 1 TO nLine + MAX_SCAN_LINES + 1
       IF __dbgIsValidStopLine( ::pInfo, cFileName, i )
+
          RETURN i
       ENDIF
    NEXT
 
-RETURN 0
-
+   RETURN 0
 
 METHOD IsValidStopLine( cFileName, nLine ) CLASS HMGDebugger
+
    IFFAIL( .F. )
    hb_default( @cFileName, ProcFile( 1 ) )
    hb_default( @nLine, ::GetNextValidStopLine( 2 ) )
 
-RETURN __dbgIsValidStopLine( ::pInfo, cFileName, nLine )
-
+   RETURN __dbgIsValidStopLine( ::pInfo, cFileName, nLine )
 
 METHOD SetToCursor( cFileName, nLine ) CLASS HMGDebugger   // CMD_TOCURS
+
    IFFAIL( .F. )
    hb_default( @cFileName, ProcFile( 1 ) )
    hb_default( @nLine, ::GetNextValidStopLine( 2 ) )
    IF ! __dbgIsValidStopLine( ::pInfo, cFileName, nLine )
       ::GUIMessageBox( "SetToCursor: Invalid File Name (", cFileName, ") and/or Line Number (", nLine, ")" )   // GUI: message box info
+
       RETURN .F.
    ENDIF
    __dbgSetToCursor( ::pInfo, cFileName, nLine )
    ::lExitLoop := .T.
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD Quit() CLASS HMGDebugger   // CMD_QUIT
+
    IFFAIL( NIL )
    __dbgSetQuit( ::pInfo )
    t_oDebugger := NIL
    ::lExitLoop := .T.
    ::GUIReleaseAllWindows()   // GUI: close all windows and exit the program
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Exit() CLASS HMGDebugger   // CMD_EXIT
+
    ::lExitLoop := .T.
    // ::GUIReleaseFormDebugger()   // GUI: close window of debugger
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD BreakPointCount() CLASS HMGDebugger
-RETURN Len( ::GetBreakPoints() )
 
+   RETURN Len( ::GetBreakPoints() )
 
 METHOD IsBreakPoint( cFileName, nLine ) CLASS HMGDebugger
+
    IFFAIL( 0 )
 
-RETURN __dbgIsBreak( ::pInfo, cFileName, nLine ) + 1
-
+   RETURN __dbgIsBreak( ::pInfo, cFileName, nLine ) + 1
 
 METHOD BreakPointToggle( cFileName, nLine ) CLASS HMGDebugger   // CMD_BADD  &  CMD_BDEL
 
    LOCAL nAt
+
    IFFAIL( 0 )
    hb_default( @cFileName, ProcFile( 1 ) )
    hb_default( @nLine, ::GetNextValidStopLine( 2 ) )
    nAt := ::IsBreakPoint( cFileName, nLine )
    IF nAt > 0
       __dbgDelBreak( ::pInfo, nAt -1 )
+
       RETURN( - nAt )
    ELSEIF ::IsValidStopLine( cFileName, nLine )
       __dbgAddBreak( ::pInfo, cFileName, nLine )
       nAt := ::IsBreakPoint( cFileName, nLine )
+
       RETURN nAt
    ELSE
       ::GUIMessageBox( "ToggleBreakPoint: Invalid File Name (", cFileName, ") and/or Line Number (", nLine, ")" )   // GUI: message box info
+
       RETURN 0
    ENDIF
 
-RETURN 0
-
+   RETURN 0
 
 METHOD BreakPointDelete( nPos ) CLASS HMGDebugger
+
    IFFAIL( .F. )
    IF nPos >= 1 .AND. nPos <= ::BreakPointCount()
       __dbgDelBreak( ::pInfo, nPos -1 )
    ELSE
       ::GUIMessageBox( "BreakPointDelete: Invalid BreakPoint Number (", nPos, ")" )   // GUI: message box info
+
       RETURN .F.   // Invalid BreakPoint Number
    ENDIF
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD BreakPointDeleteAll() CLASS HMGDebugger
 
    LOCAL i
+
    IFFAIL( NIL )
    FOR i := ::BreakPointCount() TO 1 STEP -1
       __dbgDelBreak( ::pInfo, i -1 )
    NEXT
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD BreakPointAddFunc( cFuncName ) CLASS HMGDebugger
+
    IFFAIL( .F. )
    IF ValType( cFuncName ) == "C" .AND. ! Empty( cFuncName )
       cFuncName := Upper( AllTrim( cFuncName ) )
       __dbgAddBreak( ::pInfo, NIL, NIL, cFuncName )
    ELSE
       ::GUIMessageBox( "BreakPointAddFunc: Invalid Function Name" )   // GUI: message box info
+
       RETURN .F.   // Invalid Function Name
    ENDIF
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD GetExprValue( xExpr, lValid ) CLASS HMGDebugger   // CMD_CALC
 
    LOCAL xResult
    LOCAL bOldError, oErr
+
    IFFAIL( NIL )
    lValid := .F.
    bOldError := ErrorBlock( {| oErr| Break( oErr ) } )
@@ -627,36 +670,36 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HMGDebugger   // CMD_CALC
    END SEQUENCE
    ErrorBlock( bOldError )
 
-RETURN xResult
-
+   RETURN xResult
 
 METHOD WatchCount() CLASS HMGDebugger
-RETURN Len( ::aWatch )
 
+   RETURN Len( ::aWatch )
 
 METHOD WatchDelete( nWatch ) CLASS HMGDebugger   // CMD_WDEL
+
    IFFAIL( .F. )
    IF nWatch < 1 .OR. nWatch > Len( ::aWatch )
       ::GUIMessageBox( "WatchDelete: Invalid Watch number (", nWatch, ")" )   // GUI: message box info
+
       RETURN .F.   // Invalid Watch number
    ENDIF
    __dbgDelWatch( ::pInfo, nWatch -1 )
    hb_ADel( ::aWatch, nWatch, .T. )
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD WatchDeleteAll() CLASS HMGDebugger
 
    LOCAL i
+
    IFFAIL( NIL )
    FOR i := ::WatchCount() TO 1 STEP -1
       __dbgDelWatch( ::pInfo, i -1 )
       hb_ADel( ::aWatch, i, .T. )
    NEXT
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD WatchGetInfo( nWatch ) CLASS HMGDebugger
 
@@ -664,9 +707,11 @@ METHOD WatchGetInfo( nWatch ) CLASS HMGDebugger
    LOCAL cValType
    LOCAL lValid
    LOCAL aWatch
+
    IFFAIL( {} )
    IF nWatch < 1 .OR. nWatch > Len( ::aWatch )
       ::GUIMessageBox( "WatchGetInfo: Invalid Watch number (", nWatch, ")" )   // GUI: message box info
+
       RETURN {}   // Invalid Watch number
    ENDIF
    aWatch := ::aWatch[ nWatch ]   // aWatch[ WP_TYPE ], aWatch[ WP_EXPR ]
@@ -678,19 +723,21 @@ METHOD WatchGetInfo( nWatch ) CLASS HMGDebugger
       cValType := "U"   // xValue := "Undefined", xValue contains error description
    ENDIF
 
-RETURN { aWatch[ WP_TYPE ], aWatch[ WP_EXPR ], cValType, xValue, __dbgValToStr( lValid ) }
-
+   RETURN { aWatch[ WP_TYPE ], aWatch[ WP_EXPR ], cValType, xValue, __dbgValToStr( lValid ) }
 
 METHOD WatchSetExpr( nWatch, cExpr ) CLASS HMGDebugger
 
    LOCAL lTracePoint
+
    IFFAIL( .F. )
    IF ValType( cExpr ) != "C" .OR. Empty( cExpr )
       ::GUIMessageBox( "WatchSetExpr: Invalid expression type (", cExpr, ")" )   // GUI: message box info
+
       RETURN .F.   // Invalid expression type
    ENDIF
    IF nWatch < 1 .OR. nWatch > Len( ::aWatch )
       ::GUIMessageBox( "WatchSetExpr: Invalid Watch number (", nWatch, ")" )   // GUI: message box info
+
       RETURN .F.   // Invalid Watch number
    ENDIF
    cExpr := AllTrim( cExpr )
@@ -702,15 +749,16 @@ METHOD WatchSetExpr( nWatch, cExpr ) CLASS HMGDebugger
       ::aWatch[ nWatch ][ WP_FOUND ] := .F.
    ENDIF
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD WatchPointAdd( cExpr ) CLASS HMGDebugger   // CMD_WADD
 
    LOCAL aWatch
+
    IFFAIL( 0 )
    IF ValType( cExpr ) != "C" .OR. Empty( cExpr )
       ::GUIMessageBox( "WatchPointAdd: Invalid expression type (", cExpr, ")" )   // GUI: message box info
+
       RETURN 0   // Invalid expression type
    ENDIF
    cExpr := AllTrim( cExpr )
@@ -718,15 +766,16 @@ METHOD WatchPointAdd( cExpr ) CLASS HMGDebugger   // CMD_WADD
    __dbgAddWatch( ::pInfo, cExpr, .F. )
    AAdd( ::aWatch, aWatch )
 
-RETURN Len( ::aWatch )   // return --> nWatch
-
+   RETURN Len( ::aWatch )   // return --> nWatch
 
 METHOD TracePointAdd( cExpr ) CLASS HMGDebugger
 
    LOCAL aWatch, nLen
+
    IFFAIL( .F. )
    IF ValType( cExpr ) != "C" .OR. Empty( cExpr )
       ::GUIMessageBox( "TracePointAdd: Invalid expression type (", cExpr, ")" )   // GUI: message box info
+
       RETURN .F.   // Invalid expression type
    ENDIF
    cExpr := AllTrim( cExpr )
@@ -736,17 +785,17 @@ METHOD TracePointAdd( cExpr ) CLASS HMGDebugger
    nLen := Len( ::aWatch )
    ::aWatch[ nLen ][ WP_VALUE ] := ::GetExprValue( cExpr )
 
-RETURN .T.
-
+   RETURN .T.
 
 METHOD SetPathForFiles( cPath ) CLASS HMGDebugger
-RETURN ::aPathForFiles := __dbgPathToArray( cPath )
 
+   RETURN ::aPathForFiles := __dbgPathToArray( cPath )
 
 METHOD LoadSourceFile( cFileName ) CLASS HMGDebugger
 
    LOCAL cPrgCode, aLineCode := {}
    LOCAL i, cFileFullName := ""
+
    IF ! hb_FileExists( cFileName )
       FOR i := 1 TO Len( ::aPathForFiles )
          cFileFullName := ::aPathForFiles[ i ] + hb_ps() + cFileName
@@ -764,8 +813,7 @@ METHOD LoadSourceFile( cFileName ) CLASS HMGDebugger
       aLineCode := __dbgTextToArray( cPrgCode )
    ENDIF
 
-RETURN aLineCode
-
+   RETURN aLineCode
 
 METHOD GetCodeLineInfo( nProcLevel ) CLASS HMGDebugger
 
@@ -773,6 +821,7 @@ METHOD GetCodeLineInfo( nProcLevel ) CLASS HMGDebugger
    LOCAL cFileName
    LOCAL cFuncName
    LOCAL aStackLevel := {}
+
    IFFAIL( {} )
    hb_default( @nProcLevel, 1 )
    IF nProcLevel <= ::nProcLevel
@@ -785,8 +834,7 @@ METHOD GetCodeLineInfo( nProcLevel ) CLASS HMGDebugger
       ::GUIMessageBox( "GetCodeLineInfo: Invalid ProcLevel ( #", nProcLevel, " )" )   // GUI: message box info
    ENDIF
 
-RETURN aStackLevel
-
+   RETURN aStackLevel
 
 METHOD DoCommand( cCommand ) CLASS HMGDebugger
 
@@ -798,6 +846,7 @@ METHOD DoCommand( cCommand ) CLASS HMGDebugger
 
    IFFAIL( NIL )
    IF ValType( cCommand ) != "C" .OR. Empty( cCommand )
+
       RETURN NIL
    ENDIF
 
@@ -816,6 +865,7 @@ METHOD DoCommand( cCommand ) CLASS HMGDebugger
 
    DO CASE
    CASE Left( cCommand, 2 ) == "//" .OR. Left( cCommand, 1 )  == "!" .OR. Left( cCommand, 1 )  == "#"
+
       RETURN NIL   // comment, skip line
 
    CASE cCommand == "BREAKPOINT" .OR. cCommand == "BP"
@@ -883,13 +933,13 @@ METHOD DoCommand( cCommand ) CLASS HMGDebugger
       ::GUIMessageBox( "DoCommand: Command Error (", AllTrim( cCommand2 ), ")" )   // GUI: message box info
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD RestoreSettings( cFileName ) CLASS HMGDebugger
 
    LOCAL aCommand
    LOCAL i
+
    IFFAIL( NIL )
    IF hb_FileExists( cFileName )
       aCommand := __dbgTextToArray( hb_MemoRead( cFileName ) )
@@ -900,8 +950,7 @@ METHOD RestoreSettings( cFileName ) CLASS HMGDebugger
       ::GUIMessageBox( "RestoreSettings: Invalid File Name (", cFileName, ")" )   // GUI: message box info
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD SaveSettings( cFileName ) CLASS HMGDebugger
 
@@ -954,13 +1003,13 @@ METHOD SaveSettings( cFileName ) CLASS HMGDebugger
 
    hb_MemoWrit( cFileName, cInfo )
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD VarGetInfo( aVar ) CLASS HMGDebugger
 
    LOCAL xValue := ::VarGetValue( aVar )
    LOCAL cType := Left( aVar[ VAR_TYPE ], 1 )
+
    DO CASE
    CASE cType == "G" ; cType := "Global"
    CASE cType == "L" ; cType := "Local"
@@ -968,23 +1017,22 @@ METHOD VarGetInfo( aVar ) CLASS HMGDebugger
    OTHERWISE         ; cType := aVar[ VAR_TYPE ]
    ENDCASE
 
-RETURN { cType, aVar[ VAR_NAME ], ValType( xValue ), __dbgValToStr( xValue ) }
-
+   RETURN { cType, aVar[ VAR_NAME ], ValType( xValue ), __dbgValToStr( xValue ) }
 
 METHOD VarGetName( aVar ) CLASS HMGDebugger
-RETURN aVar[ VAR_NAME ]
 
+   RETURN aVar[ VAR_NAME ]
 
 METHOD VarGetValType( aVar ) CLASS HMGDebugger
 
    LOCAL xValue := ::VarGetValue( aVar )
 
-RETURN ValType( xValue )
-
+   RETURN ValType( xValue )
 
 METHOD VarGetValue( aVar ) CLASS HMGDebugger
 
    LOCAL cType := Left( aVar[ VAR_TYPE ], 1 )
+
    DO CASE
    CASE cType == "G" ; RETURN __dbgVMVarGGet( aVar[ VAR_LEVEL ], aVar[ VAR_POS ] )
    CASE cType == "L" ; RETURN __dbgVMVarLGet( __dbgProcLevel() - aVar[ VAR_LEVEL ], aVar[ VAR_POS ] )
@@ -992,13 +1040,13 @@ METHOD VarGetValue( aVar ) CLASS HMGDebugger
    OTHERWISE         ; RETURN aVar[ VAR_POS ] // Public or Private
    ENDCASE
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD VarSetValue( aVar, xValue ) CLASS HMGDebugger
 
    LOCAL nProcLevel
    LOCAL cType := Left( aVar[ VAR_TYPE ], 1 )
+
    IF cType == "G"
       __dbgVMVarGSet( aVar[ VAR_LEVEL ], aVar[ VAR_POS ], xValue )
    ELSEIF cType == "L"
@@ -1012,13 +1060,13 @@ METHOD VarSetValue( aVar, xValue ) CLASS HMGDebugger
       &( aVar[ VAR_NAME ] ) := xValue
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD GetProcStack() CLASS HMGDebugger
 
    LOCAL cProcLevel, cFileName, cFuncName, cLine
    LOCAL i, arr := {}
+
    FOR i := 1 TO Len( ::aProcStack )
       cProcLevel := iif( Empty( ::aProcStack[ i, CSTACK_LEVEL ] ),    "", __dbgValToStr( ::aProcStack[ i, CSTACK_LEVEL ] ) )
       cFileName  := iif( Empty( ::aProcStack[ i, CSTACK_MODULE ] ),   "", ::aProcStack[ i, CSTACK_MODULE ] )
@@ -1027,14 +1075,14 @@ METHOD GetProcStack() CLASS HMGDebugger
       AAdd( arr, { cProcLevel, cFileName, cFuncName, cLine } )
    NEXT
 
-RETURN arr
-
+   RETURN arr
 
 METHOD GetAreas() CLASS HMGDebugger
 
    LOCAL arr1[ 512 ], n, i, nAreas := 0, nAlias
    LOCAL aAreas := {}
-#define WA_ITEMS  12
+
+   #define WA_ITEMS  12
 
    FOR n := 1 TO 512
       IF ( ( n )->( Used() ) )
@@ -1061,17 +1109,18 @@ METHOD GetAreas() CLASS HMGDebugger
    NEXT
    Select( nAlias )
 
-RETURN aAreas
-
+   RETURN aAreas
 
 METHOD GetRec( cAlias ) CLASS HMGDebugger
 
    LOCAL af, nCount, i, cValue
    LOCAL arr := {}
+
    IF Empty( cAlias )
       cAlias := Alias()
    ENDIF
    IF Empty( cAlias ) .OR. ( i := Select( cAlias ) ) == 0
+
       RETURN arr
    ENDIF
    af := ( cAlias )->( dbStruct() )
@@ -1084,15 +1133,14 @@ METHOD GetRec( cAlias ) CLASS HMGDebugger
       AAdd( arr, { af[ i, 1 ], af[ i, 2 ], LTrim( Str( af[ i, 3 ] ) ), cValue } )   // { cName, cType, cLength, cValue }
    NEXT
 
-RETURN arr
-
-
+   RETURN arr
 
 METHOD GetArrayInfo( cArrName, aArrValue ) CLASS HMGDebugger
 
    LOCAL arr := {}
    LOCAL cValType
    LOCAL cValue, i
+
    IF ValType( aArrValue ) != "A"
       ::GUIMessageBox( "GetArrayInfo: Invalid data type ( ValType: " + ValType( aArrValue ) + " )" )   // GUI: message box info
    ELSE
@@ -1106,14 +1154,14 @@ METHOD GetArrayInfo( cArrName, aArrValue ) CLASS HMGDebugger
       NEXT
    ENDIF
 
-RETURN arr
-
+   RETURN arr
 
 METHOD GetHashInfo( cHashName, aHashValue ) CLASS HMGDebugger
 
    LOCAL arr := {}
    LOCAL cValType
    LOCAL cValue, i
+
    IF ValType( aHashValue ) != "H"
       ::GUIMessageBox( "GetHashInfo: Invalid data type ( ValType: " + ValType( aHashValue ) + " )" )   // GUI: message box info
    ELSE
@@ -1127,15 +1175,15 @@ METHOD GetHashInfo( cHashName, aHashValue ) CLASS HMGDebugger
       NEXT
    ENDIF
 
-RETURN arr
-
+   RETURN arr
 
 METHOD GetObjectInfo( cObjName, oObject, aObjRawValue ) CLASS HMGDebugger
 
    LOCAL aVars, aMethods, i
    LOCAL xValue, cValType, cValue
    LOCAL arr := {}
-#define _OBJ_SEP_   ":"
+
+   #define _OBJ_SEP_   ":"
    aObjRawValue := {}
    IF ValType( oObject ) != "O"
       ::GUIMessageBox( "GetObjectInfo: Invalid data type ( ValType: " + ValType( oObject ) + " )" )   // GUI: message box info
@@ -1158,9 +1206,7 @@ METHOD GetObjectInfo( cObjName, oObject, aObjRawValue ) CLASS HMGDebugger
       NEXT
    ENDIF
 
-RETURN arr
-
-
+   RETURN arr
 
 FUNCTION __dbgValToStr( uVal )
 
@@ -1178,6 +1224,7 @@ FUNCTION __dbgValToStr( uVal )
       IF nLen < Len( uVal )
          s += ", ..."
       ENDIF
+
       RETURN "Array(" + hb_ntos( Len( uVal ) ) + "): { " + s + " }"
    CASE cType $ "CM" ; RETURN '"' + uVal + '"'
    CASE cType == "L" ; RETURN iif( uVal, ".T.", ".F." )
@@ -1189,8 +1236,7 @@ FUNCTION __dbgValToStr( uVal )
    CASE cType == "P" ; RETURN "Pointer"
    ENDCASE
 
-RETURN "U"
-
+   RETURN "U"
 
 STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
 
@@ -1212,10 +1258,10 @@ STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
       END SEQUENCE
    END SEQUENCE
 
-RETURN xResult
+   RETURN xResult
 
+   #if 0
 
-#if 0
 STATIC FUNCTION __dbgObjSetValue( oObject, cVar, xValue )
 
    LOCAL oErr
@@ -1232,9 +1278,8 @@ STATIC FUNCTION __dbgObjSetValue( oObject, cVar, xValue )
       END SEQUENCE
    END SEQUENCE
 
-RETURN xValue
-#endif
-
+   RETURN xValue
+   #endif
 
 STATIC FUNCTION __dbgPathToArray( cList )
 
@@ -1242,6 +1287,7 @@ STATIC FUNCTION __dbgPathToArray( cList )
    LOCAL cSep := hb_osPathListSeparator()
    LOCAL cDirSep := hb_osPathDelimiters()
    LOCAL nPos
+
    IF cList != NIL
       DO WHILE ( nPos := At( cSep, cList ) ) > 0
          AAdd( aList, Left( cList, nPos -1 ) )        // Add a new element
@@ -1252,36 +1298,33 @@ STATIC FUNCTION __dbgPathToArray( cList )
       AEval( aList, {| x, i | iif( Right( x, 1 ) $ cDirSep, aList[ i ] := hb_StrShrink( x ), ) } )
    ENDIF
 
-RETURN aList
-
+   RETURN aList
 
 STATIC FUNCTION __dbgTextToArray( cString )
-RETURN hb_ATokens( StrTran( cString, Chr( 13 ) ), Chr( 10 ) )
 
+   RETURN hb_ATokens( StrTran( cString, Chr( 13 ) ), Chr( 10 ) )
 
 FUNCTION HMG_Debugger()
+
    IF t_oDebugger == NIL
       t_oDebugger := HMGDebugger():New()
    ENDIF
 
-RETURN t_oDebugger
+   RETURN t_oDebugger
 
-
-
-/*********************************************************************************
+   /*********************************************************************************
    Get --> BreakPoints(), Watch(), Vars()
-*********************************************************************************/
-
+   *********************************************************************************/
 
 METHOD GetBreakPoints() CLASS HMGDebugger
+
    IFFAIL( {} )
 
-RETURN __dbgGetBreakPoints( ::pInfo )
-
+   RETURN __dbgGetBreakPoints( ::pInfo )
 
 METHOD GetWatch() CLASS HMGDebugger
-RETURN ::aWatch
 
+   RETURN ::aWatch
 
 METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals ) CLASS HMGDebugger // updates monitored variables
 
@@ -1317,10 +1360,10 @@ METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics
 
    IF lShowPrivates
       /* CA-Cl*pper shows only local private variables in monitor
-       * We are marking non local private variables with "GLOBAL" text
-       *    HB_MV_PRIVATE_GLOBAL --> PRIVATE created outside of current function/procedure
-       *    HB_MV_PRIVATE_LOCAL  --> PRIVATE created in current function/procedure
-       */
+      * We are marking non local private variables with "GLOBAL" text
+      *    HB_MV_PRIVATE_GLOBAL --> PRIVATE created outside of current function/procedure
+      *    HB_MV_PRIVATE_LOCAL  --> PRIVATE created in current function/procedure
+      */
       nCount := __mvDbgInfo( HB_MV_PRIVATE )
       IF nCount > 0
          m := __mvDbgInfo( HB_MV_PRIVATE_LOCAL, ::nProcLevel )
@@ -1397,10 +1440,9 @@ METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics
       ENDIF
    ENDIF
 
-  /*
+   /*
    * Creates an array with info of the variables:
    *    { { cProcLevel, cType, cVarName, cValType, cValue }, ... }
-   *
    * aBVars is useful for set/get the value of a variable:
    *    aVarInfo := ::VarGetInfo( aBVars[ i ] )
    *    xValue := ::VarGetValue( aBVars[ i ] )
@@ -1425,9 +1467,7 @@ METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics
 
    aRawVars := aBVars
 
-RETURN aVars
-
-
+   RETURN aVars
 
 #pragma BEGINDUMP
 
@@ -1507,7 +1547,6 @@ typedef struct
    HB_BOOL bInitLines;
 } HB_DEBUGINFO;
 
-
 //        __dbgResetRunFlags( pInfo )
 HB_FUNC ( __DBGRESETRUNFLAGS )
 {
@@ -1526,3 +1565,4 @@ HB_FUNC ( __DBGRESETRUNFLAGS )
 }
 
 #pragma ENDDUMP
+

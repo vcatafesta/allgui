@@ -1,25 +1,23 @@
 /*
- * Ejemplo Comandos Gráficos n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo dibujar figuras en un formulario.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Comandos Gráficos n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo dibujar figuras en un formulario.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 ;
-      WIDTH 800 ;
-      HEIGHT 600 ;
-      TITLE "Dibujar figuras en un formulario" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         TITLE "Dibujar figuras en un formulario" ;
+         MAIN
 
       // Línea
       FOR i := 1 TO 5
@@ -78,21 +76,21 @@ FUNCTION Main()
       // Polígono
       DRAW POLYGON IN WINDOW Win_1 ;
          POINTS { {400, 100}, ;
-                  {350, 050}, ;
-                  {300, 200}, ;
-                  {350, 275}, ;
-                  {400, 340}, ;
-                  {500, 250}, ;
-                  {400, 050} } ;
+         {350, 050}, ;
+         {300, 200}, ;
+         {350, 275}, ;
+         {400, 340}, ;
+         {500, 250}, ;
+         {400, 050} } ;
          PENCOLOR PINK ;
          PENWIDTH 2 ;
          FILLCOLOR PINK
 
       // Curva de Bézier
       DRAW POLYBEZIER IN WINDOW Win_1 ;
-      POINTS  ;
-      PENCOLOR ORANGE ;
-      PENWIDTH 2
+         POINTS  ;
+         PENCOLOR ORANGE ;
+         PENWIDTH 2
 
       ON KEY ESCAPE ACTION Win_1.Release()
    END WINDOW
@@ -100,8 +98,9 @@ FUNCTION Main()
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

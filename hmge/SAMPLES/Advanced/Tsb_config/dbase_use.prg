@@ -1,30 +1,30 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2013 Verchenko Andrey <verchenkoag@gmail.com>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2013 Verchenko Andrey <verchenkoag@gmail.com>
 */
 
 #include "minigui.ch"
 #include "Dbinfo.ch"
 
-#define FILE_DBF  ChangeFileExt( Application.ExeName, ".dbf" )  
+#define FILE_DBF  ChangeFileExt( Application.ExeName, ".dbf" )
 #define FILE_CDX  ChangeFileExt( Application.ExeName, "0.cdx" )
-#define FILE_OPER_DBF  GetStartupFolder() + "\Operator.dbf"   
-#define FILE_OPER_CDX  GetStartupFolder() + "\Operator0.cdx" 
+#define FILE_OPER_DBF  GetStartupFolder() + "\Operator.dbf"
+#define FILE_OPER_CDX  GetStartupFolder() + "\Operator0.cdx"
 
 REQUEST Descend           // do not remove !!! Indexes are not created !!!
 REQUEST Stuff, StrTran, RAt, Left, Right, Pad, PadC, PadR, PadL
 REQUEST DBFCDX
 
-////////////////////////////////////////////////////////////
 // Function: open a database program
+
 FUNCTION DbfLogOpen()
+
    LOCAL nI, bErrHandler, aDbf := {}, cIndex, cFilter
    LOCAL cFileDbf    := FILE_DBF
    LOCAL cFileIndex  := FILE_CDX
    LOCAL cFileDbf2   := FILE_OPER_DBF
    LOCAL cFileIndex2 := FILE_OPER_CDX
-   
+
    IF !FILE( cFileDbf ) // creation of database fields
       AADD( aDbf , {"DATE"     ,"D",  8,0 } )
       AADD( aDbf , {"TIME"     ,"C",  8,0 } )
@@ -44,7 +44,7 @@ FUNCTION DbfLogOpen()
       AADD( aDbf , {"ID"       ,"+",  8,0 } )
       DBCreate( cFileDbf, aDbf , "DBFCDX")
       USE ( cFileDbf ) ALIAS LOG_DBF VIA "DBFCDX" NEW EXCLUSIVE
-      DbfCreateRecno()  
+      DbfCreateRecno()
       CLOSE LOG_DBF
    ENDIF
 
@@ -61,10 +61,11 @@ FUNCTION DbfLogOpen()
    // --------- opening the database with error checking ----------------
    bErrHandler := ErrorBlock( { || Break() } )
    BEGIN SEQUENCE
-      USE ( cFileDbf ) ALIAS LOG_DBF VIA "DBFCDX" NEW SHARED  
+      USE ( cFileDbf ) ALIAS LOG_DBF VIA "DBFCDX" NEW SHARED
       ORDLISTADD( cFileIndex )
    RECOVER
       MsgStop( "MAIN database " + cFileDbf  + CRLF + CRLF + " someone is busy, can not open!", "Error !" )
+
       RETURN .F.
    END SEQUENCE
    ErrorBlock( bErrHandler )
@@ -80,9 +81,9 @@ FUNCTION DbfLogOpen()
       OPER->KOPER := 0
       OPER->OPER  := "*******"
       FOR nI := 1 TO 9
-          APPEND BLANK
-          OPER->KOPER := nI
-          OPER->OPER  := "Operator - " + HB_NTOS(nI)
+         APPEND BLANK
+         OPER->KOPER := nI
+         OPER->OPER  := "Operator - " + HB_NTOS(nI)
       NEXT
       CLOSE OPER
    ENDIF
@@ -91,7 +92,7 @@ FUNCTION DbfLogOpen()
    IF !FILE( cFileIndex2 )
       USE ( cFileDbf2 ) ALIAS OPER VIA "DBFCDX" NEW EXCLUSIVE
       cIndex  := "FIELD->KOPER"
-      INDEX ON &cIndex TAG OPER TO ( cFileIndex2 )  
+      INDEX ON &cIndex TAG OPER TO ( cFileIndex2 )
       ORDLISTADD( cFileIndex2 )
       CLOSE OPER
    ENDIF
@@ -99,23 +100,25 @@ FUNCTION DbfLogOpen()
    // --------- opening the database operators with error checking ----------------
    bErrHandler := ErrorBlock( { || Break() } )
    BEGIN SEQUENCE
-      USE ( cFileDbf2 ) ALIAS OPER VIA "DBFCDX" NEW SHARED  
+      USE ( cFileDbf2 ) ALIAS OPER VIA "DBFCDX" NEW SHARED
       ORDLISTADD( cFileIndex2 )
    RECOVER
       MsgStop( "OPERATOR database " + cFileDbf2  + CRLF + CRLF + " someone is busy, can not open!", "Error !" )
+
       RETURN .F.
    END SEQUENCE
    ErrorBlock( bErrHandler )
 
-   SELECT LOG_DBF 
-   SET RELATION TO FIELD->KOPER INTO OPER 
+   SELECT LOG_DBF
+   SET RELATION TO FIELD->KOPER INTO OPER
    //dbSetRelation( OPER , {|| KOPER}, OPER )
-   
-RETURN .T.
 
-////////////////////////////////////////////////////////////
-// Function: create records in the database
+   RETURN .T.
+
+   // Function: create records in the database
+
 FUNCTION DbfCreateRecno()
+
    LOCAL n1,n2,nI,nJ,cFile,cModule,kEvent,cEvent,cRez,cMemo
    LOCAL cList
 
@@ -137,44 +140,44 @@ FUNCTION DbfCreateRecno()
       cList  := "listing ("+ HB_NTOS( nI ) +"): " + cFile + " ,"
       cMemo  := "remark_" + HB_NTOS( nI ) + CRLF
       FOR nJ := 0 TO kEvent
-        cMemo += ProcName(nJ) + "(" +HB_NTOS(procline(nJ))+")" + CRLF
-        cList += "File_00" + Chr( 48 + nJ ) + ".zip ,"
-        IF nJ % 3 == 0
-           cList += CRLF
-        ENDIF
+         cMemo += ProcName(nJ) + "(" +HB_NTOS(procline(nJ))+")" + CRLF
+         cList += "File_00" + Chr( 48 + nJ ) + ".zip ,"
+         IF nJ % 3 == 0
+            cList += CRLF
+         ENDIF
       NEXT
 
       APPEND BLANK
       LOG_DBF->DATE     := DATE() - 365 * n2 + n1
       LOG_DBF->TIME     := SECTOTIME( SECONDS() - n1*100 + n2*50 )
-      LOG_DBF->NEVENT   := kEvent 
-      LOG_DBF->EVENT    := cEvent 
+      LOG_DBF->NEVENT   := kEvent
+      LOG_DBF->EVENT    := cEvent
       LOG_DBF->COMPUTER := NetName()
       LOG_DBF->USER     := hb_UserName()
-      LOG_DBF->KOPER    := hb_RandomInt( 8 ) 
+      LOG_DBF->KOPER    := hb_RandomInt( 8 )
       LOG_DBF->VER      := "0.01"
       LOG_DBF->MODULE   := cModule
-      LOG_DBF->REZULT   := cRez   
-      LOG_DBF->MEMO     := cMemo  
-      
-      IF kEvent == 5 .OR. kEvent == 6 
-          LOG_DBF->FILES := cFile  
-          LOG_DBF->NFILE := kEvent
-          LOG_DBF->NSIZE := (SECONDS() - n1*100 + n2*50 )/1000 * kEvent
-          LOG_DBF->MEMO2 := cList  
-      ELSE  
-          LOG_DBF->MEMO2 := "Recno ¹: "+ HB_NTOS( nI )   
+      LOG_DBF->REZULT   := cRez
+      LOG_DBF->MEMO     := cMemo
+
+      IF kEvent == 5 .OR. kEvent == 6
+         LOG_DBF->FILES := cFile
+         LOG_DBF->NFILE := kEvent
+         LOG_DBF->NSIZE := (SECONDS() - n1*100 + n2*50 )/1000 * kEvent
+         LOG_DBF->MEMO2 := cList
+      ELSE
+         LOG_DBF->MEMO2 := "Recno ¹: "+ HB_NTOS( nI )
       ENDIF
       // emulation recno deleted
-      IF nI % 15 == 0  
-        DELETE        
-      ENDIF  
-    NEXT
+      IF nI % 15 == 0
+         DELETE
+      ENDIF
+   NEXT
 
-RETURN NIL
+   RETURN NIL
 
-////////////////////////////////////////////////////////////
-// Function: "delete index files"
+   // Function: "delete index files"
+
 FUNCTION MyDbfIndexDelete()
 
    CLOSE OPER
@@ -185,69 +188,75 @@ FUNCTION MyDbfIndexDelete()
 
    RETURN NIL
 
-/////////////////////////////////////////////////////////////////////
-// Function: "logging"
-FUNCTION DbfLogWrite(nOper,cFile,cModule,kEvent,cEvent,cRez,cMemo) 
-      LOCAL nSel, nIsxSel := SELECT()
-      Default nOper := 0, cFile := "", cModule := "", kEvent := 0
-      Default cEvent := "", cRez := "", cMemo := ""
+   // Function: "logging"
 
-      nSel := SELECT("LOG_DBF")
-      IF nSel == 0 
-         MsgStop( "MAIN database " + FILE_DBF + " is closed! I can not write! ","Error!" )
-      ELSE
-         // add a record to the database
-         SELECT LOG_DBF
-         APPEND BLANK
-         IF RLock()
-            LOG_DBF->DATE     := DATE()
-            LOG_DBF->TIME     := TIME()
-            LOG_DBF->COMPUTER := NetName()
-            LOG_DBF->USER     := hb_UserName()
-            LOG_DBF->KOPER    := nOper
-            LOG_DBF->VER      := "0.3"
-            LOG_DBF->FILES    := cFile  
-            LOG_DBF->MODULE   := cModule
-            LOG_DBF->NEVENT   := kEvent 
-            LOG_DBF->EVENT    := cEvent 
-            LOG_DBF->REZULT   := cRez   
-            LOG_DBF->MEMO     := cMemo  
-            UNLOCK
-         ENDIF
-      ENDIF
+FUNCTION DbfLogWrite(nOper,cFile,cModule,kEvent,cEvent,cRez,cMemo)
 
-SELECT(nIsxSel)
-Return NIL
+   LOCAL nSel, nIsxSel := SELECT()
 
-/////////////////////////////////////////////////////////////////
-// Function: window display of open databases and indexes
-FUNCTION BASE_TEK()
-LOCAL nI, cText, nSel, nOrder, cAlias
+   DEFAULT nOper := 0, cFile := "", cModule := "", kEvent := 0
+   DEFAULT cEvent := "", cRez := "", cMemo := ""
 
-cAlias := ALIAS()
-nSel := SELECT()
-IF nSel == 0
-   cText := "No open databases !" + CRLF + CRLF   
-   MsgInfo( cText, "Open the database" )
-   RETURN NIL
-ENDIF
-
-nOrder := INDEXORD() // remember the main index 
-
-cText := "Open DB - alias: "+Alias()+"()" + CRLF + CRLF
-cText += "Open index files: " + CRLF + CRLF 
-FOR nI := 1 TO 100
-   cAlias := ALLTRIM( DBORDERINFO(DBOI_FULLPATH,,ORDNAME(nI)) )
-   IF cAlias == ""
-      EXIT
+   nSel := SELECT("LOG_DBF")
+   IF nSel == 0
+      MsgStop( "MAIN database " + FILE_DBF + " is closed! I can not write! ","Error!" )
    ELSE
-      DBSetOrder( nI )
-      cText += cAlias + " " + CRLF + "Focus index: " + ORDSETFOCUS() + CRLF 
-      cText += " Key index: [" + DBORDERINFO( DBOI_EXPRESSION ) + "]" + CRLF + CRLF
-   ENDIF 
-NEXT
-DBSetOrder( nOrder ) // switch on the main index
-cText += CRLF + "The current index = "+STR(nOrder,3)+" , Focus index: " + ORDSETFOCUS() + CRLF
-MsgInfo( cText, "Open the database" )
+      // add a record to the database
+      SELECT LOG_DBF
+      APPEND BLANK
+      IF RLock()
+         LOG_DBF->DATE     := DATE()
+         LOG_DBF->TIME     := TIME()
+         LOG_DBF->COMPUTER := NetName()
+         LOG_DBF->USER     := hb_UserName()
+         LOG_DBF->KOPER    := nOper
+         LOG_DBF->VER      := "0.3"
+         LOG_DBF->FILES    := cFile
+         LOG_DBF->MODULE   := cModule
+         LOG_DBF->NEVENT   := kEvent
+         LOG_DBF->EVENT    := cEvent
+         LOG_DBF->REZULT   := cRez
+         LOG_DBF->MEMO     := cMemo
+         UNLOCK
+      ENDIF
+   ENDIF
 
-RETURN NIL
+   SELECT(nIsxSel)
+
+   RETURN NIL
+
+   // Function: window display of open databases and indexes
+
+FUNCTION BASE_TEK()
+
+   LOCAL nI, cText, nSel, nOrder, cAlias
+
+   cAlias := ALIAS()
+   nSel := SELECT()
+   IF nSel == 0
+      cText := "No open databases !" + CRLF + CRLF
+      MsgInfo( cText, "Open the database" )
+
+      RETURN NIL
+   ENDIF
+
+   nOrder := INDEXORD() // remember the main index
+
+   cText := "Open DB - alias: "+Alias()+"()" + CRLF + CRLF
+   cText += "Open index files: " + CRLF + CRLF
+   FOR nI := 1 TO 100
+      cAlias := ALLTRIM( DBORDERINFO(DBOI_FULLPATH,,ORDNAME(nI)) )
+      IF cAlias == ""
+         EXIT
+      ELSE
+         DBSetOrder( nI )
+         cText += cAlias + " " + CRLF + "Focus index: " + ORDSETFOCUS() + CRLF
+         cText += " Key index: [" + DBORDERINFO( DBOI_EXPRESSION ) + "]" + CRLF + CRLF
+      ENDIF
+   NEXT
+   DBSetOrder( nOrder ) // switch on the main index
+   cText += CRLF + "The current index = "+STR(nOrder,3)+" , Focus index: " + ORDSETFOCUS() + CRLF
+   MsgInfo( cText, "Open the database" )
+
+   RETURN NIL
+

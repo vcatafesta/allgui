@@ -1,11 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
 */
 ANNOUNCE RDDSYS
 
@@ -15,77 +12,77 @@ ANNOUNCE RDDSYS
 #define VERSION ' version 1.1'
 #define COPYRIGHT ' 2005 Grigory Filatov. All Rights Reserved'
 
-Static cFontName := "Times New Roman", nFontSize := 40
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
-LOCAL cSpeed := Ltrim( Str( GetCPUSpeed(), 10, 0 ) ) + " MHz"
+STATIC cFontName := "Times New Roman", nFontSize := 40
 
-	SET MULTIPLE OFF
+PROCEDURE Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 392 HEIGHT 148 - IF(IsThemed(), 0, 8) ;
-		TITLE cSpeed ;
-		ICON 'MAIN' ;
-		MAIN NOMAXIMIZE NOSIZE ;
-		FONT _GetSysFont() SIZE 8
+   LOCAL cSpeed := Ltrim( Str( GetCPUSpeed(), 10, 0 ) ) + " MHz"
 
-		@ 5,5 LABEL Label_1a VALUE PROGRAM AUTOSIZE TRANSPARENT FONTCOLOR WHITE
-		@ 4,4 LABEL Label_1b VALUE PROGRAM AUTOSIZE TRANSPARENT
+   SET MULTIPLE OFF
 
-		@ 25,11 LABEL Label_2a VALUE cSpeed WIDTH 360 HEIGHT 68 ;
-			FONT cFontName SIZE nFontSize BOLD ITALIC ;
-			CENTERALIGN TRANSPARENT FONTCOLOR WHITE
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 392 HEIGHT 148 - IF(IsThemed(), 0, 8) ;
+         TITLE cSpeed ;
+         ICON 'MAIN' ;
+         MAIN NOMAXIMIZE NOSIZE ;
+         FONT _GetSysFont() SIZE 8
 
-		@ 24,10 LABEL Label_2b VALUE cSpeed WIDTH 360 HEIGHT 68 ;
-			FONT cFontName SIZE nFontSize BOLD ITALIC ;
-			CENTERALIGN TRANSPARENT FONTCOLOR BLACK
+      @ 5,5 LABEL Label_1a VALUE PROGRAM AUTOSIZE TRANSPARENT FONTCOLOR WHITE
+      @ 4,4 LABEL Label_1b VALUE PROGRAM AUTOSIZE TRANSPARENT
 
-		@ Form_1.Height-IF(IsWinNT(), 48, 44),11 LABEL Label_3a VALUE "Copyright " + Chr(169) + COPYRIGHT ;
-			WIDTH 360 HEIGHT 16 CENTERALIGN TRANSPARENT FONTCOLOR WHITE
+      @ 25,11 LABEL Label_2a VALUE cSpeed WIDTH 360 HEIGHT 68 ;
+         FONT cFontName SIZE nFontSize BOLD ITALIC ;
+         CENTERALIGN TRANSPARENT FONTCOLOR WHITE
 
-		@ Form_1.Height-IF(IsWinNT(), 49, 45),10 LABEL Label_3b VALUE "Copyright " + Chr(169) + COPYRIGHT ;
-			WIDTH 360 HEIGHT 16 CENTERALIGN TRANSPARENT
+      @ 24,10 LABEL Label_2b VALUE cSpeed WIDTH 360 HEIGHT 68 ;
+         FONT cFontName SIZE nFontSize BOLD ITALIC ;
+         CENTERALIGN TRANSPARENT FONTCOLOR BLACK
 
-		@ 0,0 LABEL Label_4 VALUE "" WIDTH 1 HEIGHT 1 // dummy label for proper drawing of label's shadow
+      @ Form_1.Height-IF(IsWinNT(), 48, 44),11 LABEL Label_3a VALUE "Copyright " + Chr(169) + COPYRIGHT ;
+         WIDTH 360 HEIGHT 16 CENTERALIGN TRANSPARENT FONTCOLOR WHITE
 
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 2000 ;
-			ACTION OnTimer()
+      @ Form_1.Height-IF(IsWinNT(), 49, 45),10 LABEL Label_3b VALUE "Copyright " + Chr(169) + COPYRIGHT ;
+         WIDTH 360 HEIGHT 16 CENTERALIGN TRANSPARENT
 
-		ON KEY ALT+X ACTION ThisWindow.Release
+      @ 0,0 LABEL Label_4 VALUE "" WIDTH 1 HEIGHT 1 // dummy label for proper drawing of label's shadow
 
-	END WINDOW
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 2000 ;
+         ACTION OnTimer()
 
-	CENTER WINDOW Form_1
+      ON KEY ALT+X ACTION ThisWindow.Release
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-RETURN
+   CENTER WINDOW Form_1
 
-*--------------------------------------------------------*
-Static Procedure OnTimer()
-*--------------------------------------------------------*
-LOCAL cSpeed := Ltrim( Str( GetCPUSpeed(), 10, 0 ) ) + " MHz"
+   ACTIVATE WINDOW Form_1
 
-	Form_1.Title := cSpeed
+   RETURN
 
-	if IsControlDefined(Label_2a, Form_1)
-		Form_1.Label_2a.Release
-		if !IsWinNT()
-			@ 25,11 LABEL Label_2a OF Form_1 VALUE cSpeed ;
-				WIDTH 360 HEIGHT 68 ;
-				FONT cFontName SIZE nFontSize BOLD ITALIC ;
-				CENTERALIGN TRANSPARENT FONTCOLOR WHITE
-		endif
-	endif
+STATIC PROCEDURE OnTimer()
 
-	Form_1.Label_2b.Release
+   LOCAL cSpeed := Ltrim( Str( GetCPUSpeed(), 10, 0 ) ) + " MHz"
 
-	@ 24,10 LABEL Label_2b OF Form_1 VALUE cSpeed ;
-		WIDTH 360 HEIGHT 68 ;
-		FONT cFontName SIZE nFontSize BOLD ITALIC ;
-		CENTERALIGN TRANSPARENT FONTCOLOR BLACK
+   Form_1.Title := cSpeed
 
-Return
+   IF IsControlDefined(Label_2a, Form_1)
+      Form_1.Label_2a.Release
+      IF !IsWinNT()
+         @ 25,11 LABEL Label_2a OF Form_1 VALUE cSpeed ;
+            WIDTH 360 HEIGHT 68 ;
+            FONT cFontName SIZE nFontSize BOLD ITALIC ;
+            CENTERALIGN TRANSPARENT FONTCOLOR WHITE
+      ENDIF
+   ENDIF
+
+   Form_1.Label_2b.Release
+
+   @ 24,10 LABEL Label_2b OF Form_1 VALUE cSpeed ;
+      WIDTH 360 HEIGHT 68 ;
+      FONT cFontName SIZE nFontSize BOLD ITALIC ;
+      CENTERALIGN TRANSPARENT FONTCOLOR BLACK
+
+   RETURN
+

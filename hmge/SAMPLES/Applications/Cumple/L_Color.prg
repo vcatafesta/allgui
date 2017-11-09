@@ -1,5 +1,8 @@
+
 FUNCTION MiColor(NomColor)
-LOCAL Numcolor
+
+   LOCAL Numcolor
+
    ***COLORES***
    DO CASE
    CASE UPPER(NomColor)=="AMARILLO"
@@ -68,56 +71,60 @@ LOCAL Numcolor
       Numcolor:={255,200,255}
    OTHERWISE
       Numcolor:={255,255,255} //blanco
-*      Numcolor:={236,233,216} //color windows
+      *      Numcolor:={236,233,216} //color windows
    ENDCASE
-RETURN(Numcolor)
 
-***COLORES PARA OPENOFFICE
-*oCell:CellBackColor:=RGB(255,0,0) //AZUL
-*oCell:CellBackColor:=RGB(0,255,0) //VERDE
-*oCell:CellBackColor:=RGB(0,0,255) //ROJO
-***FIN COLORES PARA OPENOFFICE
+   RETURN(Numcolor)
 
+   ***COLORES PARA OPENOFFICE
+   *oCell:CellBackColor:=RGB(255,0,0) //AZUL
+   *oCell:CellBackColor:=RGB(0,255,0) //VERDE
+   *oCell:CellBackColor:=RGB(0,0,255) //ROJO
+   ***FIN COLORES PARA OPENOFFICE
 
 PROCEDURE PONER_COLOR()
-LOCAL Ncolor
-MEMVAR MiColor
-public MiColor:={}
-FOR Ncolor=0 TO 28
-   AADD(MiColor,{ GetRed  ( GetSysColor(Ncolor) ) , ;
-                  GetGreen( GetSysColor(Ncolor) ) , ;
-                  GetBlue ( GetSysColor(Ncolor) ) } )
-NEXT
-/*
-aColors := { "COLOR_SCROLLBAR" ,;
-      "COLOR_BACKGROUND" ,;
-      "COLOR_ACTIVECAPTION" ,;
-      "COLOR_INACTIVECAPTION" ,;
-      "COLOR_MENU" ,;
-      "COLOR_WINDOW" ,;
-      "COLOR_WINDOWFRAME" ,;
-      "COLOR_MENUTEXT" ,;
-      "COLOR_WINDOWTEXT" ,;
-      "COLOR_CAPTIONTEXT" ,;
-      "COLOR_ACTIVEBORDER" ,;
-      "COLOR_INACTIVEBORDER" ,;
-      "COLOR_APPWORKSPACE" ,;
-      "COLOR_HIGHLIGHT" ,;
-      "COLOR_HIGHLIGHTTEXT" ,;
-      "COLOR_BTNFACE" ,;
-      "COLOR_BTNSHADOW" ,;
-      "COLOR_GRAYTEXT" ,;
-      "COLOR_BTNTEXT" ,;
-      "COLOR_INACTIVECAPTIONTEXT",;
-      "COLOR_BTNHIGHLIGHT",;
-      "COLOR_3DDKSHADOW",;
-      "COLOR_3DLIGHT",;
-      "COLOR_INFOTEXT",;  // tooltip text
-      "COLOR_INFOBK",;  // tooltip background
-      "COLOR_BTNALTERNATEFACE" ,;
-      "COLOR_HOTLIGHT",;
-      "COLOR_GRADIENTACTIVECAPTION",;
-      "COLOR_GRADIENTINACTIVECAPTION";
-       }
-*/
-RETURN
+
+   LOCAL Ncolor
+   MEMVAR MiColor
+   PUBLIC MiColor:={}
+
+   FOR Ncolor=0 TO 28
+      AADD(MiColor,{ GetRed  ( GetSysColor(Ncolor) ) , ;
+         GetGreen( GetSysColor(Ncolor) ) , ;
+         GetBlue ( GetSysColor(Ncolor) ) } )
+   NEXT
+   /*
+   aColors := { "COLOR_SCROLLBAR" ,;
+   "COLOR_BACKGROUND" ,;
+   "COLOR_ACTIVECAPTION" ,;
+   "COLOR_INACTIVECAPTION" ,;
+   "COLOR_MENU" ,;
+   "COLOR_WINDOW" ,;
+   "COLOR_WINDOWFRAME" ,;
+   "COLOR_MENUTEXT" ,;
+   "COLOR_WINDOWTEXT" ,;
+   "COLOR_CAPTIONTEXT" ,;
+   "COLOR_ACTIVEBORDER" ,;
+   "COLOR_INACTIVEBORDER" ,;
+   "COLOR_APPWORKSPACE" ,;
+   "COLOR_HIGHLIGHT" ,;
+   "COLOR_HIGHLIGHTTEXT" ,;
+   "COLOR_BTNFACE" ,;
+   "COLOR_BTNSHADOW" ,;
+   "COLOR_GRAYTEXT" ,;
+   "COLOR_BTNTEXT" ,;
+   "COLOR_INACTIVECAPTIONTEXT",;
+   "COLOR_BTNHIGHLIGHT",;
+   "COLOR_3DDKSHADOW",;
+   "COLOR_3DLIGHT",;
+   "COLOR_INFOTEXT",;  // tooltip text
+   "COLOR_INFOBK",;  // tooltip background
+   "COLOR_BTNALTERNATEFACE" ,;
+   "COLOR_HOTLIGHT",;
+   "COLOR_GRADIENTACTIVECAPTION",;
+   "COLOR_GRADIENTINACTIVECAPTION";
+   }
+   */
+
+   RETURN
+

@@ -1,46 +1,46 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2008, http://harbour-project.org/
 ---------------------------------------------------------------------------
-     THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-     ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-     THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-     PARTICULAR PURPOSE.
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
 *-----------------------------------------------------------------------------*/
 
 #include <minigui.ch>
@@ -51,155 +51,149 @@
 #define IDYES 6
 #define IDNO 7
 
-*-----------------------------------------------------------------------------*
-Procedure Main()
-*-----------------------------------------------------------------------------*
+PROCEDURE Main()
 
- DEFINE WINDOW FrmTMsgTest;
-    AT 0, 0;
-    WIDTH 300;
-    HEIGHT 200;
-    TITLE "Timed Message Test";
-    MAIN;
-    ON INIT (Msgt(3,"Timed Message Test" + CRLF + "Duration is 3 seconds","Info"),test2())
+   DEFINE WINDOW FrmTMsgTest;
+         AT 0, 0;
+         WIDTH 300;
+         HEIGHT 200;
+         TITLE "Timed Message Test";
+         MAIN;
+         ON INIT (Msgt(3,"Timed Message Test" + CRLF + "Duration is 3 seconds","Info"),test2())
 
- END WINDOW
+   END WINDOW
 
- FrmTMsgTest.Center
- FrmTMsgTest.Activate
+   FrmTMsgTest.Center
+   FrmTMsgTest.Activate
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure Test2()
-*-----------------------------------------------------------------------------*
-      SET NAVIGATION EXTENDED
+PROCEDURE Test2()
 
-      DEFINE WINDOW FrmTest2;
-             AT 0, 0;
-             WIDTH 400;
-             HEIGHT 200;        
-             TITLE "Timed Message";
-             ON INIT Msgt(5,"2° Timed Message Test" + CRLF + "Duration is 5 seconds","2 Info");
-             ON INTERACTIVECLOSE ReleaseAllWindows()
+   SET NAVIGATION EXTENDED
 
-             @ 10,10 LABEL label_1 ;
-                           VALUE 'Simple Code:' ;
-                           WIDTH 100
+   DEFINE WINDOW FrmTest2;
+         AT 0, 0;
+         WIDTH 400;
+         HEIGHT 200;
+         TITLE "Timed Message";
+         ON INIT Msgt(5,"2° Timed Message Test" + CRLF + "Duration is 5 seconds","2 Info");
+         ON INTERACTIVECLOSE ReleaseAllWindows()
 
-             @ 10,120 TEXTBOX text_2 ;                      
-                      VALUE 'Test2'  ;                       
-                      On Enter Msgt("On enter - No Timer!",[test2]) 
+      @ 10,10 LABEL label_1 ;
+         VALUE 'Simple Code:' ;
+         WIDTH 100
 
-             @ 40,120 TEXTBOX text_3 ;                      
-                      VALUE 'Test3';                         
-                      On Enter Msgt(2,"on enter",[test3],"YESNO")
+      @ 10,120 TEXTBOX text_2 ;
+         VALUE 'Test2'  ;
+         On Enter Msgt("On enter - No Timer!",[test2])
 
-             @ 70,120 TEXTBOX text_4 ;
-                      VALUE 'test 4' ;
-                      On Lostfocus Quiz_Test()
+      @ 40,120 TEXTBOX text_3 ;
+         VALUE 'Test3';
+         On Enter Msgt(2,"on enter",[test3],"YESNO")
 
-      END WINDOW
+      @ 70,120 TEXTBOX text_4 ;
+         VALUE 'test 4' ;
+         On Lostfocus Quiz_Test()
 
-      FrmTest2.Center
-      FrmTest2.Activate
+   END WINDOW
 
-Return
+   FrmTest2.Center
+   FrmTest2.Activate
 
-*-----------------------------------------------------------------------------*
-Function Quiz_Test()
-*-----------------------------------------------------------------------------*
-local result:= msgt(4,"Does a triangle have three sides?","Quiz",'YESNO')
+   RETURN
 
-      do case
-         case Result==IDYES .Or. Result==IDOK .Or. Result==IDRETRY
-              Msgt("That's right!", "Result")
+FUNCTION Quiz_Test()
 
-         case Result==IDNO .Or. Result==IDCANCEL
-              Msgt("Believe it or not, triangles "+CRLF+"really do have three sides.", "Result")
+   LOCAL result:= msgt(4,"Does a triangle have three sides?","Quiz",'YESNO')
 
-         otherwise
-              Msgt("I sensed some hesitation there. "+CRLF+"The correct answer is Yes.", "Result")
-      endcase
+   DO CASE
+   CASE Result==IDYES .Or. Result==IDOK .Or. Result==IDRETRY
+      Msgt("That's right!", "Result")
 
-return result
+   CASE Result==IDNO .Or. Result==IDCANCEL
+      Msgt("Believe it or not, triangles "+CRLF+"really do have three sides.", "Result")
 
-*-----------------------------------------------------------------------------*
-Function Msgt (nTimeout, Message, Title, Flags) 
-*-----------------------------------------------------------------------------*
-* Created at 04/20/2005 By Pierpaolo Martinello Italy                         *
-*-----------------------------------------------------------------------------*
-        local switch:=.f., rtv:=0
+   OTHERWISE
+      Msgt("I sensed some hesitation there. "+CRLF+"The correct answer is Yes.", "Result")
+   ENDCASE
 
-        DEFAULT Message TO "" , Title TO "" , Flags TO "MSGBOX"
+   RETURN result
 
-        If ValType (nTimeout) != 'U' .and. ValType (nTimeout) = 'C'  
-              Flags    :=  Title
-              Title    :=  Message
-              Message  :=  nTimeout
-              switch   :=  .t.
-        endif 
+FUNCTION Msgt (nTimeout, Message, Title, Flags)
 
-        Flags:=UPPER(Flags)
-        Message+= if(empty(Message),"Empty string!","")
+   * Created at 04/20/2005 By Pierpaolo Martinello Italy                         *
+   LOCAL switch:=.f., rtv:=0
 
-        if switch 
-           do case
+   DEFAULT Message TO "" , Title TO "" , Flags TO "MSGBOX"
 
-              case "RETRYCANCEL" == FLAGS
-                   rtv := MsgRetryCancel(Message,title)
+   IF ValType (nTimeout) != 'U' .and. ValType (nTimeout) = 'C'
+      Flags    :=  Title
+      Title    :=  Message
+      Message  :=  nTimeout
+      SWITCH   :=  .t.
+      ENDIF
 
-              case "OKCANCEL" == FLAGS
-                   rtv := MsgOkCancel(Message,Title)
+      Flags:=UPPER(Flags)
+      Message+= if(empty(Message),"Empty string!","")
 
-              case "YESNO" == FLAGS
-                   rtv := MsgYesNo(Message,Title)
+      IF switch
+         DO CASE
 
-              case "YESNO_ID" == FLAGS
-                   rtv := MsgYesNo(Message,Title,.t.)
+         CASE "RETRYCANCEL" == FLAGS
+            rtv := MsgRetryCancel(Message,title)
 
-              case "INFO" == FLAGS
-                   rtv := MsgInfo(Message,Title)
+         CASE "OKCANCEL" == FLAGS
+            rtv := MsgOkCancel(Message,Title)
 
-              case "STOP" == FLAGS
-                   rtv := MsgStop(Message,Title)
+         CASE "YESNO" == FLAGS
+            rtv := MsgYesNo(Message,Title)
 
-              case "EXCLAMATION" == FLAGS
-                   rtv := MsgExclamation(Message,Title)
+         CASE "YESNO_ID" == FLAGS
+            rtv := MsgYesNo(Message,Title,.t.)
 
-              otherwise 
-                   MsgBox(Message,Title)
-           endcase
-        else
-           do case
+         CASE "INFO" == FLAGS
+            rtv := MsgInfo(Message,Title)
 
-              case "RETRYCANCEL" == FLAGS
-                   rtv := C_T_MSGRETRYCANCEL(Message,Title,nTimeout*1000)
+         CASE "STOP" == FLAGS
+            rtv := MsgStop(Message,Title)
 
-              case "OKCANCEL" == FLAGS
-                   rtv := C_T_MSGOKCANCEL(Message,Title,nTimeout*1000)
+         CASE "EXCLAMATION" == FLAGS
+            rtv := MsgExclamation(Message,Title)
 
-              case "YESNO" == FLAGS
-                   rtv := C_T_MSGYESNO(Message,Title,nTimeout*1000)
+         OTHERWISE
+            MsgBox(Message,Title)
+         ENDCASE
+      ELSE
+         DO CASE
 
-              case "YESNO_ID" == FLAGS
-                   rtv := C_T_MSGYESNO_ID(Message,Title,nTimeout*1000)
+         CASE "RETRYCANCEL" == FLAGS
+            rtv := C_T_MSGRETRYCANCEL(Message,Title,nTimeout*1000)
 
-              case "INFO" == FLAGS
-                   rtv := C_T_MSGINFO(Message,Title,nTimeout*1000)
+         CASE "OKCANCEL" == FLAGS
+            rtv := C_T_MSGOKCANCEL(Message,Title,nTimeout*1000)
 
-              case "STOP" == FLAGS
-                   rtv := C_T_MSGSTOP(Message,Title,nTimeout*1000)
+         CASE "YESNO" == FLAGS
+            rtv := C_T_MSGYESNO(Message,Title,nTimeout*1000)
 
-              case "EXCLAMATION" == FLAGS
-                   rtv := C_T_MSGEXCLAMATION(Message,Title,nTimeout*1000)
+         CASE "YESNO_ID" == FLAGS
+            rtv := C_T_MSGYESNO_ID(Message,Title,nTimeout*1000)
 
-              otherwise 
-                   rtv := C_T_MSGBOX(Message,Title,nTimeout*1000)
-           endcase
-       endif 
-return rtv
+         CASE "INFO" == FLAGS
+            rtv := C_T_MSGINFO(Message,Title,nTimeout*1000)
 
+         CASE "STOP" == FLAGS
+            rtv := C_T_MSGSTOP(Message,Title,nTimeout*1000)
+
+         CASE "EXCLAMATION" == FLAGS
+            rtv := C_T_MSGEXCLAMATION(Message,Title,nTimeout*1000)
+
+         OTHERWISE
+            rtv := C_T_MSGBOX(Message,Title,nTimeout*1000)
+         ENDCASE
+      ENDIF
+
+      RETURN rtv
 
 #pragma BEGINDUMP
 
@@ -260,50 +254,51 @@ TimedMessageBox(
 
 HB_FUNC( C_T_MSGRETRYCANCEL )
 {
-	int r ;
-	r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_RETRYCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
-	hb_retni ( r ) ;
+   int r ;
+   r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_RETRYCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
+   hb_retni ( r ) ;
 }
 
 HB_FUNC( C_T_MSGOKCANCEL )
 {
-	int r ;
-	r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_OKCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
-	hb_retni ( r ) ;
+   int r ;
+   r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_OKCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
+   hb_retni ( r ) ;
 }
 
 HB_FUNC( C_T_MSGYESNO )
 {
-	int r ;
-	r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
-	hb_retni ( r ) ;
+   int r ;
+   r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL ,hb_parni(3)) ;
+   hb_retni ( r ) ;
 }
 
 HB_FUNC( C_T_MSGYESNO_ID )
 {
-	int r ;
-	r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL| MB_DEFBUTTON2 ,hb_parni(3)) ;
-	hb_retni ( r ) ;
+   int r ;
+   r = TimedMessageBox( NULL, hb_parc(1),hb_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL| MB_DEFBUTTON2 ,hb_parni(3)) ;
+   hb_retni ( r ) ;
 }
 
 HB_FUNC( C_T_MSGBOX )
 {
-	TimedMessageBox( NULL, hb_parc(1),hb_parc(2) ,MB_SYSTEMMODAL,hb_parni(3)) ;
+   TimedMessageBox( NULL, hb_parc(1),hb_parc(2) ,MB_SYSTEMMODAL,hb_parni(3)) ;
 }
 
 HB_FUNC( C_T_MSGINFO )
 {
-	TimedMessageBox( NULL, hb_parc(1) , hb_parc(2) , MB_OK | MB_ICONINFORMATION | MB_SYSTEMMODAL ,hb_parni(3));
+   TimedMessageBox( NULL, hb_parc(1) , hb_parc(2) , MB_OK | MB_ICONINFORMATION | MB_SYSTEMMODAL ,hb_parni(3));
 }
 
 HB_FUNC( C_T_MSGSTOP )
 {
-	TimedMessageBox( NULL , hb_parc(1) , hb_parc(2) , MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL ,hb_parni(3));
+   TimedMessageBox( NULL , hb_parc(1) , hb_parc(2) , MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL ,hb_parni(3));
 }
 
 HB_FUNC( C_T_MSGEXCLAMATION )
 {
-	TimedMessageBox(NULL, hb_parc(1), hb_parc(2), MB_ICONEXCLAMATION | MB_OK | MB_SYSTEMMODAL, hb_parni(3));
+   TimedMessageBox(NULL, hb_parc(1), hb_parc(2), MB_ICONEXCLAMATION | MB_OK | MB_SYSTEMMODAL, hb_parni(3));
 }
 
 #pragma ENDDUMP
+

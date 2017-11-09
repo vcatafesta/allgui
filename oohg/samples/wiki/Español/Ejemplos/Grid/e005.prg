@@ -1,57 +1,55 @@
 /*
- * Ejemplo Grid n° 05
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG creada por
- * Ciro Vargas C. <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo utilizar imágenes en los
- * cabezales de columna. Es posible utilizar código similar
- * en los controles Browse y XBrowse.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 05
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG creada por
+* Ciro Vargas C. <cvc@oohg.org>
+* Este ejemplo muestra cómo utilizar imágenes en los
+* cabezales de columna. Es posible utilizar código similar
+* en los controles Browse y XBrowse.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
+
    LOCAL oForm, oGrid, aRows[ 20 ]
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0, 0 ;
-      WIDTH 640 ;
-      HEIGHT 400 ;
-      TITLE 'Grid - Imágenes en los Cabezales de Columna' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 640 ;
+         HEIGHT 400 ;
+         TITLE 'Grid - Imágenes en los Cabezales de Columna' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Ver aquí'
             MENUITEM 'Remover col. 1' ACTION oGrid:DeleteColumn( 1, .T. )
             MENUITEM 'Agregar col. 5' ;
                ACTION oGrid:AddColumn( 5, ;
-                                       "Nueva col.", ;
-                                       70, ;
-                                       HEADER_IMG_AT_LEFT, ;
-                                       WHITE, ;
-                                       RED, ;
-                                       .T., ;
-                                       Nil, ;
-                                       { 'TEXTBOX', 'CHARACTER', '!!!' }, ;
-                                       { || automsgbox("Cliqueada !!!") }, ;
-                                       { |x| ! empty(x) }, ;
-                                       "No puede estar vacía !!!", ;
-                                       { |col, item| empty(item[col]) }, ;
-                                       2, ;
-                                       HEADER_IMG_AT_LEFT )
+               "Nueva col.", ;
+               70, ;
+               HEADER_IMG_AT_LEFT, ;
+               WHITE, ;
+               RED, ;
+               .T., ;
+               Nil, ;
+               { 'TEXTBOX', 'CHARACTER', '!!!' }, ;
+               { || automsgbox("Cliqueada !!!") }, ;
+               { |x| ! empty(x) }, ;
+               "No puede estar vacía !!!", ;
+               { |col, item| empty(item[col]) }, ;
+               2, ;
+               HEADER_IMG_AT_LEFT )
             MENUITEM 'Cambiar imágenes' ;
                ACTION oGrid:LoadHeaderImages( {'MINIGUI_EDIT_ADD', ;
-                                               'MINIGUI_EDIT_CANCEL', ;
-                                               'MINIGUI_EDIT_ADD', ;
-                                               'MINIGUI_EDIT_CANCEL', ;
-                                               'MINIGUI_EDIT_ADD'} )
+               'MINIGUI_EDIT_CANCEL', ;
+               'MINIGUI_EDIT_ADD', ;
+               'MINIGUI_EDIT_CANCEL', ;
+               'MINIGUI_EDIT_ADD'} )
             SEPARATOR
             MENUITEM 'Remover imagen de la col. 3' ;
                ACTION oGrid:HeaderImage( 3, 0 )
@@ -67,8 +65,8 @@ FUNCTION Main
                ACTION AutoMsgBox( oGrid:HeaderImage( 3 ) )
             MENUITEM "Alineación de la imagen en la col. 3" ;
                ACTION MsgBox( ;
-                  IF( oGrid:HeaderImageAlign( 3 ) == HEADER_IMG_AT_LEFT, ;
-                      'IZQUIERDA', 'DERECHA') )
+               IF( oGrid:HeaderImageAlign( 3 ) == HEADER_IMG_AT_LEFT, ;
+               'IZQUIERDA', 'DERECHA') )
             SEPARATOR
             MENUITEM 'Cambiar valores del ítem 2' ACTION SetItem()
             MENUITEM 'Obtener valores del ítem 2' ACTION GetItem()
@@ -110,28 +108,28 @@ FUNCTION Main
          HEIGHT 330
          HEADERS { 'Col. 1', 'Col. 2', 'Col. 3', 'Col. 4', 'Col. 5' }
          HEADERIMAGES { 'MINIGUI_EDIT_EDIT', ;
-                        'MINIGUI_EDIT_DELETE', ;
-                        'MINIGUI_EDIT_EDIT', ;
-                        'MINIGUI_EDIT_CLOSE', ;
-                        'MINIGUI_EDIT_EDIT' }
+            'MINIGUI_EDIT_DELETE', ;
+            'MINIGUI_EDIT_EDIT', ;
+            'MINIGUI_EDIT_CLOSE', ;
+            'MINIGUI_EDIT_EDIT' }
          IMAGESALIGN { HEADER_IMG_AT_RIGHT, ;
-                       HEADER_IMG_AT_LEFT, ;
-                       HEADER_IMG_AT_RIGHT, ;
-                       HEADER_IMG_AT_LEFT, ;
-                       HEADER_IMG_AT_RIGHT }
+            HEADER_IMG_AT_LEFT, ;
+            HEADER_IMG_AT_RIGHT, ;
+            HEADER_IMG_AT_LEFT, ;
+            HEADER_IMG_AT_RIGHT }
          JUSTIFY { GRID_JTFY_RIGHT, ;
-                   GRID_JTFY_RIGHT, ;
-                   GRID_JTFY_RIGHT, ;
-                   GRID_JTFY_RIGHT, ;
-                   GRID_JTFY_RIGHT }
+            GRID_JTFY_RIGHT, ;
+            GRID_JTFY_RIGHT, ;
+            GRID_JTFY_RIGHT, ;
+            GRID_JTFY_RIGHT }
          WIDTHS { 140, 140, 140, 140, 140 }
          ITEMS aRows
          ALLOWEDIT .T.
          COLUMNCONTROLS { { 'TEXTBOX', 'NUMERIC', '$ 999,999.99' }, ;
-                          { 'DATEPICKER', 'DROPDOWN' }, ;
-                          { 'COMBOBOX', { 'Uno', 'Dos', 'Tres' } }, ;
-                          { 'SPINNER', 1, 20 }, ;
-                          { 'CHECKBOX', 'Si', 'No' } }
+            { 'DATEPICKER', 'DROPDOWN' }, ;
+            { 'COMBOBOX', { 'Uno', 'Dos', 'Tres' } }, ;
+            { 'SPINNER', 1, 20 }, ;
+            { 'CHECKBOX', 'Si', 'No' } }
       END GRID
 
       oGrid := GetControlObject( "Grid_1", "Form_1" )
@@ -143,39 +141,36 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- *  HEADERIMAGES { 'MINIGUI_EDIT_EDIT', ;
- *                 'MINIGUI_EDIT_DELETE', ;
- *                 'MINIGUI_EDIT_EDIT', ;
- *                 'MINIGUI_EDIT_CLOSE', ;
- *                 'MINIGUI_EDIT_EDIT' }
- *
- *  Define las imágenes para cada cabezal de columna.
- *
- *  Las imágenes son cargadas (sin repeticiones) en una "imagelist" en
- *  - la posición 1: MINIGUI_EDIT_EDIT
- *  - la posición 2: MINIGUI_EDIT_DELETE
- *  - la posición 3: MINIGUI_EDIT_CLOSE
- *
- *  Las imágenes son asociadas a cada columna por el índice de la imagen
- *  en la "imagelist", por lo que
- *  ::HeaderImage(1) retorna 1
- *  ::HeaderImage(2) retorna 2
- *  ::HeaderImage(3) retorna 1
- *  ::HeaderImage(4) retorna 3
- *  ::HeaderImage(5) retorna 1
- *
- */
+   /*
+   *  HEADERIMAGES { 'MINIGUI_EDIT_EDIT', ;
+   *                 'MINIGUI_EDIT_DELETE', ;
+   *                 'MINIGUI_EDIT_EDIT', ;
+   *                 'MINIGUI_EDIT_CLOSE', ;
+   *                 'MINIGUI_EDIT_EDIT' }
+   *  Define las imágenes para cada cabezal de columna.
+   *  Las imágenes son cargadas (sin repeticiones) en una "imagelist" en
+   *  - la posición 1: MINIGUI_EDIT_EDIT
+   *  - la posición 2: MINIGUI_EDIT_DELETE
+   *  - la posición 3: MINIGUI_EDIT_CLOSE
+   *  Las imágenes son asociadas a cada columna por el índice de la imagen
+   *  en la "imagelist", por lo que
+   *  ::HeaderImage(1) retorna 1
+   *  ::HeaderImage(2) retorna 2
+   *  ::HeaderImage(3) retorna 1
+   *  ::HeaderImage(4) retorna 3
+   *  ::HeaderImage(5) retorna 1
+   */
 
 PROCEDURE SetItem
 
    Form_1.Grid_1.Item( 2 ) := { 123.45, date(), 2, 10, .T. }
 
-RETURN
+   RETURN
 
 PROCEDURE GetItem
+
    LOCAL a
 
    a := Form_1.Grid_1.Item( 2 )
@@ -186,18 +181,19 @@ PROCEDURE GetItem
    MsgInfo( str( a[ 4 ] ), 'Item 2  Col. 4' )
    MsgInfo( if( a[ 5 ], '.T.', '.F.' ), 'Item 2  Col. 5' )
 
-RETURN
+   RETURN
 
 PROCEDURE ChangeHeader
 
    IF GetProperty( 'Form_1', 'Grid_1', 'HEADER', 1 ) == 'Nuevo'
       Form_1.Grid_1.Header( 1 ) := "Col. 1"
-   Else
+   ELSE
       SetProperty( 'Form_1', 'Grid_1', 'HEADER', 1, 'Nuevo' )
    ENDIF
 
-RETURN
+   RETURN
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

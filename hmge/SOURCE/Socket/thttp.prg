@@ -1,50 +1,40 @@
 /*
- * Harbour Project source code:
- * THttp class
- *
- * Copyright 2001-2003 Matteo Baccan <baccan@infomedia.it>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* THttp class
+* Copyright 2001-2003 Matteo Baccan <baccan@infomedia.it>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "common.ch"
 #include "hbclass.ch"
@@ -66,354 +56,345 @@
 *    THttp:GetUserAgent
 *    Thttp:SetReceiveTimeout
 *  EXAMPLE
-*
 *  SEE ALSO
 *    TFtp
-**********
 */
+
 CLASS THttp
 
-   METHOD New()
+METHOD New()
 
-   METHOD Connect( cAddress, nPort )
-   METHOD Close()
+METHOD Connect( cAddress, nPort )
 
-   METHOD SetProxy( cProxy, nPort, cUser, cPwd )
+METHOD Close()
 
-   METHOD SetUser( cUser, cPwd )
+METHOD SetProxy( cProxy, nPort, cUser, cPwd )
 
-   METHOD Get( cPage, aPair )
-   METHOD Post( cPage, aPair )
+METHOD SetUser( cUser, cPwd )
 
-   METHOD SetUserAgent( cAgent )
-   METHOD GetUserAgent()
+METHOD Get( cPage, aPair )
 
-   METHOD SetReceiveTimeout( nMilliSec )
+METHOD Post( cPage, aPair )
 
-   METHOD Value2String( aPair )
+METHOD SetUserAgent( cAgent )
 
-   CLASSDATA oSocket       HIDDEN
-   CLASSDATA cProxyAddress HIDDEN
-   CLASSDATA nProxyPort    HIDDEN
-   CLASSDATA cLogin        HIDDEN
-   CLASSDATA cLoginRemote  HIDDEN
-   CLASSDATA cHostAddress  HIDDEN
-   CLASSDATA nHostPort     HIDDEN
-   CLASSDATA cUserAgent    HIDDEN
+METHOD GetUserAgent()
+
+METHOD SetReceiveTimeout( nMilliSec )
+
+METHOD Value2String( aPair )
+
+CLASSDATA oSocket       HIDDEN
+CLASSDATA cProxyAddress HIDDEN
+CLASSDATA nProxyPort    HIDDEN
+CLASSDATA cLogin        HIDDEN
+CLASSDATA cLoginRemote  HIDDEN
+CLASSDATA cHostAddress  HIDDEN
+CLASSDATA nHostPort     HIDDEN
+CLASSDATA cUserAgent    HIDDEN
 
 ENDCLASS
 
-
 METHOD New() CLASS THttp
-::oSocket    := TSocket():New()
-::cUserAgent := "THttp/Harbour (http://www.baccan.it; MSIE 6.0)"
-return Self
 
-/****m* THttp/THttp:Connect
-*  NAME
-*    Connect - connect to a remote server
-*  SYNOPSIS
-*    Connect( cAddress, nPort )
-*  PURPOSE
-*    Connect to a remote server on cAddress and nPort
-*  EXAMPLE
-*
-*    #include "common.ch"
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    FUNCTION Main( cProxy, nProxyPort )
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    local oSock, cRet
-*    local cServer  := "www.google.com" // "localhost"  //
-*    local nPort    := 80               // 8080         //
-*
-*    DEFAULT nProxyPort TO "8080"
-*
-*    oSock := THttp():New()
-*    if cProxy!=NIL
-*       oSock:SetProxy( cProxy, VAL(nProxyPort) )
-*    endif
-*
-*    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
-*    if oSock:Connect( cServer, nPort )
-*       ? "Connected"
-*
-*       ? "Get homepage"
-*       ? oSock:Get( "pippo:pluto@/" )
-*
-*       ? "Close connection"
-*       if oSock:Close()
-*          ? "Close successfull"
-*       else
-*          ? "Error on close connection"
-*       endif
-*    else
-*       ? "Refused"
-*    endif
-*
-*    RETURN NIL
-*
-*  SEE ALSO
-*    THttp:Get
-**********
-*/
+   ::oSocket    := TSocket():New()
+   ::cUserAgent := "THttp/Harbour (http://www.baccan.it; MSIE 6.0)"
+
+   RETURN Self
+
+   /****m* THttp/THttp:Connect
+   *  NAME
+   *    Connect - connect to a remote server
+   *  SYNOPSIS
+   *    Connect( cAddress, nPort )
+   *  PURPOSE
+   *    Connect to a remote server on cAddress and nPort
+   *  EXAMPLE
+   *    #include "common.ch"
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    FUNCTION Main( cProxy, nProxyPort )
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    local oSock, cRet
+   *    local cServer  := "www.google.com" // "localhost"  //
+   *    local nPort    := 80               // 8080         //
+   *    DEFAULT nProxyPort TO "8080"
+   *    oSock := THttp():New()
+   *    if cProxy!=NIL
+   *       oSock:SetProxy( cProxy, VAL(nProxyPort) )
+   *    endif
+   *    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
+   *    if oSock:Connect( cServer, nPort )
+   *       ? "Connected"
+   *       ? "Get homepage"
+   *       ? oSock:Get( "pippo:pluto@/" )
+   *       ? "Close connection"
+   *       if oSock:Close()
+   *          ? "Close successfull"
+   *       else
+   *          ? "Error on close connection"
+   *       endif
+   *    else
+   *       ? "Refused"
+   *    endif
+   *    RETURN NIL
+   *  SEE ALSO
+   *    THttp:Get
+   */
+
 METHOD Connect( cAddress, nPort ) CLASS THttp
-LOCAL lRet
 
-DEFAULT nPort TO 80
-::cHostAddress := cAddress
-::nHostPort    := nPort
+   LOCAL lRet
 
-IF ::cProxyAddress!=NIL
-   lRet := ::oSocket:Connect(::cProxyAddress,::nProxyPort)
-ELSE
-   lRet := ::oSocket:Connect(::cHostAddress,::nHostPort)
-ENDIF
+   DEFAULT nPort TO 80
+   ::cHostAddress := cAddress
+   ::nHostPort    := nPort
 
-return lRet
+   IF ::cProxyAddress!=NIL
+      lRet := ::oSocket:Connect(::cProxyAddress,::nProxyPort)
+   ELSE
+      lRet := ::oSocket:Connect(::cHostAddress,::nHostPort)
+   ENDIF
 
-//
-// Close socket
-//
+   RETURN lRet
+
+   // Close socket
+
 METHOD Close() CLASS THttp
-return ::oSocket:Close()
 
-/****m* THttp/THttp:Get
-*  NAME
-*    Get - get a remote page
-*  SYNOPSIS
-*    Get( cPage, aPair )
-*  PURPOSE
-*    Get a remote page
-*  EXAMPLE
-*
-*    #include "common.ch"
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    FUNCTION Main( cProxy, nProxyPort )
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    local oSock, cRet
-*    local cServer  := "www.google.com" // "localhost"  //
-*    local nPort    := 80               // 8080         //
-*
-*    DEFAULT nProxyPort TO "8080"
-*
-*    oSock := THttp():New()
-*    if cProxy!=NIL
-*       oSock:SetProxy( cProxy, VAL(nProxyPort) )
-*    endif
-*
-*    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
-*    if oSock:Connect( cServer, nPort )
-*       ? "Connected"
-*
-*       ? "Get homepage"
-*       ? oSock:Get( "pippo:pluto@/" )
-*
-*       ? "Close connection"
-*       if oSock:Close()
-*          ? "Close successfull"
-*       else
-*          ? "Error on close connection"
-*       endif
-*    else
-*       ? "Refused"
-*    endif
-*
-*    RETURN NIL
-*
-*  SEE ALSO
-*    THttp:Post
-**********
-*/
+   RETURN ::oSocket:Close()
+
+   /****m* THttp/THttp:Get
+   *  NAME
+   *    Get - get a remote page
+   *  SYNOPSIS
+   *    Get( cPage, aPair )
+   *  PURPOSE
+   *    Get a remote page
+   *  EXAMPLE
+   *    #include "common.ch"
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    FUNCTION Main( cProxy, nProxyPort )
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    local oSock, cRet
+   *    local cServer  := "www.google.com" // "localhost"  //
+   *    local nPort    := 80               // 8080         //
+   *    DEFAULT nProxyPort TO "8080"
+   *    oSock := THttp():New()
+   *    if cProxy!=NIL
+   *       oSock:SetProxy( cProxy, VAL(nProxyPort) )
+   *    endif
+   *    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
+   *    if oSock:Connect( cServer, nPort )
+   *       ? "Connected"
+   *       ? "Get homepage"
+   *       ? oSock:Get( "pippo:pluto@/" )
+   *       ? "Close connection"
+   *       if oSock:Close()
+   *          ? "Close successfull"
+   *       else
+   *          ? "Error on close connection"
+   *       endif
+   *    else
+   *       ? "Refused"
+   *    endif
+   *    RETURN NIL
+   *  SEE ALSO
+   *    THttp:Post
+   */
+
 METHOD Get( cPage, aPair ) CLASS THttp
-LOCAL cRet := ""
-LOCAL cURL := ""
-LOCAL cPost := ::Value2String( aPair )
-LOCAL nPos
 
-nPos := AT( "@", cPage )
-IF nPos>0
-   ::cLoginRemote := ::SetUser( LEFT( cPage, nPos-1 ) )
-   cPage := SUBSTR( cPage, nPos+1 )
-ENDIF
+   LOCAL cRet := ""
+   LOCAL cURL := ""
+   LOCAL cPost := ::Value2String( aPair )
+   LOCAL nPos
 
-cURL := "GET "
-IF ::cProxyAddress!=NIL
-   cURL += "http://" +::cHostAddress +":" +ALLTRIM(STR(::nHostPort))
-ENDIF
-cURL += cPage
-if len(cPost)>0
-   cURL += "?" +cPost
-endif
-cURL += " HTTP/1.0" +CHR(13)+CHR(10)
-if ::cLogin!=NIL
-   cURL += "Proxy-authorization: Basic " +::cLogin +CHR(13)+CHR(10)
-endif
-if ::cLoginRemote!=NIL
-   cURL += "Authorization: Basic " +::cLoginRemote +CHR(13)+CHR(10)
-endif
-cURL += "Host: " +::cHostAddress +CHR(13)+CHR(10)
-cURL += "User-Agent: " +::cUserAgent +CHR(13)+CHR(10)
-cURL += CHR(13)+CHR(10)
+   nPos := AT( "@", cPage )
+   IF nPos>0
+      ::cLoginRemote := ::SetUser( LEFT( cPage, nPos-1 ) )
+      cPage := SUBSTR( cPage, nPos+1 )
+   ENDIF
 
-IF ::oSocket:SendString( cURL )
-   cRet := ::oSocket:ReceiveString()
-ENDIF
-return cRet
+   cURL := "GET "
+   IF ::cProxyAddress!=NIL
+      cURL += "http://" +::cHostAddress +":" +ALLTRIM(STR(::nHostPort))
+   ENDIF
+   cURL += cPage
+   IF len(cPost)>0
+      cURL += "?" +cPost
+   ENDIF
+   cURL += " HTTP/1.0" +CHR(13)+CHR(10)
+   IF ::cLogin!=NIL
+      cURL += "Proxy-authorization: Basic " +::cLogin +CHR(13)+CHR(10)
+   ENDIF
+   IF ::cLoginRemote!=NIL
+      cURL += "Authorization: Basic " +::cLoginRemote +CHR(13)+CHR(10)
+   ENDIF
+   cURL += "Host: " +::cHostAddress +CHR(13)+CHR(10)
+   cURL += "User-Agent: " +::cUserAgent +CHR(13)+CHR(10)
+   cURL += CHR(13)+CHR(10)
 
-/****m* THttp/THttp:Post
-*  NAME
-*    Post - post some value to a page
-*  SYNOPSIS
-*    Post( cPage, aPair )
-*  PURPOSE
-*    post some value to a page
-*  EXAMPLE
-*
-*    #include "common.ch"
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    FUNCTION Main( cProxy, nProxyPort )
-*    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-*    local oSock, cRet
-*    local cServer  := "www.google.com" // "localhost"  //
-*    local nPort    := 80               // 8080         //
-*
-*    DEFAULT nProxyPort TO "8080"
-*
-*    oSock := THttp():New()
-*    if cProxy!=NIL
-*       oSock:SetProxy( cProxy, VAL(nProxyPort) )
-*    endif
-*
-*    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
-*    if oSock:Connect( cServer, nPort )
-*       ? "Connected"
-*
-*       ? "Get homepage"
-*       ? oSock:Get( "pippo:pluto@/" )
-*
-*       ? "Close connection"
-*       if oSock:Close()
-*          ? "Close successfull"
-*       else
-*          ? "Error on close connection"
-*       endif
-*    else
-*       ? "Refused"
-*    endif
-*
-*    RETURN NIL
-*
-*  SEE ALSO
-*    THttp:Get
-**********
-*/
+   IF ::oSocket:SendString( cURL )
+      cRet := ::oSocket:ReceiveString()
+   ENDIF
+
+   RETURN cRet
+
+   /****m* THttp/THttp:Post
+   *  NAME
+   *    Post - post some value to a page
+   *  SYNOPSIS
+   *    Post( cPage, aPair )
+   *  PURPOSE
+   *    post some value to a page
+   *  EXAMPLE
+   *    #include "common.ch"
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    FUNCTION Main( cProxy, nProxyPort )
+   *    * ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+   *    local oSock, cRet
+   *    local cServer  := "www.google.com" // "localhost"  //
+   *    local nPort    := 80               // 8080         //
+   *    DEFAULT nProxyPort TO "8080"
+   *    oSock := THttp():New()
+   *    if cProxy!=NIL
+   *       oSock:SetProxy( cProxy, VAL(nProxyPort) )
+   *    endif
+   *    ? "Connect to " +cServer +":" +alltrim(str( nPort ))
+   *    if oSock:Connect( cServer, nPort )
+   *       ? "Connected"
+   *       ? "Get homepage"
+   *       ? oSock:Get( "pippo:pluto@/" )
+   *       ? "Close connection"
+   *       if oSock:Close()
+   *          ? "Close successfull"
+   *       else
+   *          ? "Error on close connection"
+   *       endif
+   *    else
+   *       ? "Refused"
+   *    endif
+   *    RETURN NIL
+   *  SEE ALSO
+   *    THttp:Get
+   */
+
 METHOD Post( cPage, aPair ) CLASS THttp
-LOCAL cRet := ""
-LOCAL cURL := ""
-LOCAL cPost := ::Value2String( aPair )
-LOCAL nPos
 
-nPos := AT( "@", cPage )
-IF nPos>0
-   ::cLoginRemote := ::SetUser( LEFT( cPage, nPos-1 ) )
-   cPage := SUBSTR( cPage, nPos+1 )
-ENDIF
+   LOCAL cRet := ""
+   LOCAL cURL := ""
+   LOCAL cPost := ::Value2String( aPair )
+   LOCAL nPos
 
-cURL := "POST "
-IF ::cProxyAddress!=NIL
-   cURL += "http://" +::cHostAddress +":" +ALLTRIM(STR(::nHostPort))
-ENDIF
-cURL += cPage +" HTTP/1.0" +CHR(13)+CHR(10)
-cURL += "Content-Length: " +ALLTRIM(STR(LEN(cPost))) +CHR(13)+CHR(10)
-cURL += "Content-Type: application/x-www-form-urlencoded" +CHR(13)+CHR(10)
-if ::cLogin!=NIL
-   cURL += "Proxy-authorization: Basic " +::cLogin +CHR(13)+CHR(10)
-endif
-if ::cLoginRemote!=NIL
-   cURL += "Authorization: Basic " +::cLoginRemote +CHR(13)+CHR(10)
-endif
-cURL += "Host: " +::cHostAddress +CHR(13)+CHR(10)
-cURL += "User-Agent: " +::cUserAgent +CHR(13)+CHR(10)
-cURL += CHR(13)+CHR(10)
-cURL += cPost
+   nPos := AT( "@", cPage )
+   IF nPos>0
+      ::cLoginRemote := ::SetUser( LEFT( cPage, nPos-1 ) )
+      cPage := SUBSTR( cPage, nPos+1 )
+   ENDIF
 
-IF ::oSocket:SendString( cURL )
-   cRet := ::oSocket:ReceiveString()
-ENDIF
-return cRet
+   cURL := "POST "
+   IF ::cProxyAddress!=NIL
+      cURL += "http://" +::cHostAddress +":" +ALLTRIM(STR(::nHostPort))
+   ENDIF
+   cURL += cPage +" HTTP/1.0" +CHR(13)+CHR(10)
+   cURL += "Content-Length: " +ALLTRIM(STR(LEN(cPost))) +CHR(13)+CHR(10)
+   cURL += "Content-Type: application/x-www-form-urlencoded" +CHR(13)+CHR(10)
+   IF ::cLogin!=NIL
+      cURL += "Proxy-authorization: Basic " +::cLogin +CHR(13)+CHR(10)
+   ENDIF
+   IF ::cLoginRemote!=NIL
+      cURL += "Authorization: Basic " +::cLoginRemote +CHR(13)+CHR(10)
+   ENDIF
+   cURL += "Host: " +::cHostAddress +CHR(13)+CHR(10)
+   cURL += "User-Agent: " +::cUserAgent +CHR(13)+CHR(10)
+   cURL += CHR(13)+CHR(10)
+   cURL += cPost
+
+   IF ::oSocket:SendString( cURL )
+      cRet := ::oSocket:ReceiveString()
+   ENDIF
+
+   RETURN cRet
 
 METHOD Value2String( aPair ) CLASS THttp
-local cPost := ""
-local nPair
-local oDecode
 
-DEFAULT aPair TO {}
+   LOCAL cPost := ""
+   LOCAL nPair
+   LOCAL oDecode
 
-oDecode := TDecode():New()
+   DEFAULT aPair TO {}
 
-for nPair := 1 to len( aPair )
-   if nPair!=1
-      cPost += "&"
-   endif
-   cPost += aPair[nPair]:cKey +"=" +oDecode:encode(aPair[nPair]:cValue)
-next
+   oDecode := TDecode():New()
 
-return cPost
+   FOR nPair := 1 to len( aPair )
+      IF nPair!=1
+         cPost += "&"
+      ENDIF
+      cPost += aPair[nPair]:cKey +"=" +oDecode:encode(aPair[nPair]:cValue)
+   NEXT
 
-//
-// Set proxy port
-//
+   RETURN cPost
+
+   // Set proxy port
+
 METHOD SetProxy( cProxy, nPort, cUser, cPwd ) CLASS THttp
-local oSock
 
-DEFAULT nPort TO 8080
-::cProxyAddress := cProxy
-::nProxyPort    := nPort
-if cUser!=NIL
-   oSock := TDecode():new()
-   if cPwd!=nil
-      ::cLogin := oSock:encode64( cUser+":"+cPwd )
-   else
-      ::cLogin := oSock:encode64( cUser )
-   endif
-else
-   ::cLogin := NIL
-endif
-return nil
+   LOCAL oSock
 
-//
-// Set user and password method
-//
+   DEFAULT nPort TO 8080
+   ::cProxyAddress := cProxy
+   ::nProxyPort    := nPort
+   IF cUser!=NIL
+      oSock := TDecode():new()
+      IF cPwd!=nil
+         ::cLogin := oSock:encode64( cUser+":"+cPwd )
+      ELSE
+         ::cLogin := oSock:encode64( cUser )
+      ENDIF
+   ELSE
+      ::cLogin := NIL
+   ENDIF
+
+   RETURN NIL
+
+   // Set user and password method
+
 METHOD SetUser( cUser, cPwd ) CLASS THttp
-local oSock
-if cUser!=NIL
-   oSock := TDecode():new()
-   if cPwd!=nil
-      ::cLoginRemote := oSock:encode64( cUser+":"+cPwd )
-   else
-      ::cLoginRemote := oSock:encode64( cUser )
-   endif
-else
-   ::cLoginRemote := NIL
-endif
-return nil
 
-//
-// Set user agent
-//
+   LOCAL oSock
+
+   IF cUser!=NIL
+      oSock := TDecode():new()
+      IF cPwd!=nil
+         ::cLoginRemote := oSock:encode64( cUser+":"+cPwd )
+      ELSE
+         ::cLoginRemote := oSock:encode64( cUser )
+      ENDIF
+   ELSE
+      ::cLoginRemote := NIL
+   ENDIF
+
+   RETURN NIL
+
+   // Set user agent
+
 METHOD SetUserAgent( cAgent ) CLASS THttp
-::cUserAgent := cAgent
-return nil
 
-//
-// Get user agent
-//
+   ::cUserAgent := cAgent
+
+   RETURN NIL
+
+   // Get user agent
+
 METHOD GetUserAgent() CLASS THttp
-return ::cUserAgent
 
-//
-// Set receive timeout
-//
+   RETURN ::cUserAgent
+
+   // Set receive timeout
+
 METHOD SetReceiveTimeout( nMilliSec ) CLASS THttp
-::oSocket:SetReceiveTimeout( nMilliSec )
-return nil
+
+   ::oSocket:SetReceiveTimeout( nMilliSec )
+
+   RETURN NIL
+

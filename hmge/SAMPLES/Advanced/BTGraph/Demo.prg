@@ -2,50 +2,49 @@
 
 FUNCTION Main
 
-   set font to _GetSysFont(), 10
-   define window graph at 0, 0 width 1000 height 700 title 'Bos Taurus Graph' main
-      define label selecttype
+   SET font to _GetSysFont(), 10
+   DEFINE WINDOW graph at 0, 0 width 1000 height 700 title 'Bos Taurus Graph' main
+      DEFINE LABEL selecttype
          row 10
          col 45
          width 115
          value 'Select Graph Type'
          vcenteralign .T.
-      end label
-      define combobox graphtype
+      END LABEL
+      DEFINE COMBOBOX graphtype
          row 10
          col 160
          width 100
          items { 'Bar', 'Lines', 'Points', 'Pie' }
          onchange drawgraph()
-      end combobox
-      define checkbox enable3d
+      END COMBOBOX
+      DEFINE CHECKBOX enable3d
          row 10
          col 280
          width 100
          caption 'Enable 3D'
          onchange drawgraph()
          value .T.
-      end checkbox
-      define button Button_1
+      END CHECKBOX
+      DEFINE BUTTON Button_1
          row 10
          col 400
          caption 'Save as PNG'
          action BT_BitmapSaveFile( BT_HMGGetImage( "graph", "grapharea" ), "Graph.PNG", BT_FILEFORMAT_PNG )
-      end button
-      define image grapharea
+      END BUTTON
+      DEFINE IMAGE grapharea
          row 50
          col 50
          width 600
          height 600
          stretch .T.
       end image
-   end window
+   END WINDOW
    graph.graphtype.value := 1
    graph.center
    graph.activate
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION drawgraph
 
@@ -74,7 +73,9 @@ FUNCTION drawgraph
    LOCAL lNoBorder := .F.
    LOCAL nLegendWidth := 50
    LOCAL hBitmap
+
    IF graph.graphtype.value == 0
+
       RETURN NIL
    ENDIF
    IF graph.graphtype.value == 4 // pie
@@ -87,7 +88,7 @@ FUNCTION drawgraph
 
    BT_HMGSetImage( "graph", "grapharea", hBitmap, .T. )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep, aTitleColor, nXRanges, ;
       l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendWindth, lNoborder )
@@ -136,13 +137,11 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
    nWide   := ( nRight - nLeft ) * nResH / ( nMax( aData ) + 1 ) * nResH
 
    // Graph area
-   //
    IF ! lNoborder
       DrawWindowBoxInBitMap( hDC, Max( 1, nTop - 44 ), Max( 1, nLeft - 80 - nBarD ), nHeight - 1, nWidth - 1 )
    ENDIF
 
    // Back area
-   //
    IF l3D
       DrawRectInBitmap( hDC, nTop + 1, nLeft, nBottom - nDeep, nRight, { 255, 255, 255 } )
    ELSE
@@ -186,13 +185,11 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
    ENDIF
 
    // Graph info
-   //
    IF !Empty( cTitle )
       DrawTextInBitmap( hDC, nTop - 30 * nResV, nLeft + nWidth / 3, cTitle, 'Arial', 12, aTitleColor, 2 )
    ENDIF
 
    // Legends
-   //
    IF lLegends
       nPos := nTop
       FOR nI := 1 TO Len( aSeries )
@@ -273,7 +270,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
       nRNeg += ( nMaxBar / nXRanges )
    NEXT nI
 
-   IF lYGrid .and. nType <> BARS 
+   IF lYGrid .and. nType <> BARS
       nPos := IF( l3D, nTop, nTop - 5 )
       nI  := nLeft + nWide
       FOR nJ := 1 TO nMax( aData )
@@ -308,7 +305,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
       NEXT
    ENDIF
 
-   IF lYGrid .and. nType == BARS 
+   IF lYGrid .and. nType == BARS
       nPos := IF( l3D, nTop, nTop-5 )
       nI  := nLeft + ( ( nWide + nSep ) / 2 ) + nWide
       FOR nJ := 1 TO nMax( aData )
@@ -319,7 +316,6 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
    ENDIF
 
    // Bars
-   //
    IF nType == BARS
       IF nMin <> 0
          nPos := nLeft + ( ( nWide + nSep ) / 2 )
@@ -334,7 +330,6 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
    ENDIF
 
    // Lines
-   //
    IF nType == LINES
       IF nMin <> 0
          nWideB  := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
@@ -366,7 +361,6 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
    ENDIF
 
    // Points
-   //
    IF nType == POINTS
       IF nMin <> 0
          nWideB := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
@@ -413,25 +407,28 @@ FUNCTION HMG_Graph( nWidth, nHeight, aData, cTitle, aYVals, nBarD, nWideB, nSep,
 
    BT_DeleteDC( BTstruct )
 
-RETURN hBitmap
-
+   RETURN hBitmap
 
 PROCEDURE DrawWindowBoxInBitmap( hDC, row, col, rowr, colr, nPenWidth )
+
    BT_DrawRectangle ( hDC, Row, Col, Colr - col, rowr - row, { 0, 0, 0 }, nPenWidth )
 
-RETURN
+   RETURN
 
 PROCEDURE DrawRectInBitmap( hDC, row, col, row1, col1, aColor, nPenWidth )
+
    BT_DrawFillRectangle ( hDC, Row, Col, col1 - col, row1 - row, aColor, aColor, nPenWidth )
 
-RETURN
+   RETURN
 
 PROCEDURE DrawLineInBitmap( hDC, Row1, Col1, Row2, Col2, aColor, nPenWidth )
+
    BT_DrawLine ( hDC, Row1, Col1, Row2, Col2, aColor, nPenWidth )
 
-RETURN
+   RETURN
 
 PROCEDURE DrawTextInBitmap( hDC, Row, Col, cText, cFontName, nFontSize, aColor, nAlign )
+
    DEFAULT nAlign := 0
    DO CASE
    CASE nAlign == 0
@@ -442,12 +439,12 @@ PROCEDURE DrawTextInBitmap( hDC, Row, Col, cText, cFontName, nFontSize, aColor, 
       BT_DrawText ( hDC, Row, Col, cText, cFontName, nFontSize, aColor, , , BT_TEXT_CENTER + BT_TEXT_TOP )
    ENDCASE
 
-RETURN
+   RETURN
 
 PROCEDURE DrawBarInBitmap( hDC, nY, nX, nHigh, nWidth, l3DView, nDeep, aColor )
 
    LOCAL nColTop, nShadow, nShadow2, nH := nHigh
-   
+
    nColTop := ClrShadow( RGB( aColor[ 1 ], aColor[ 2 ], aColor[ 3 ] ), 20 )
    nShadow := ClrShadow( nColTop, 20 )
    nShadow2 := ClrShadow( nColTop, 40 )
@@ -469,7 +466,7 @@ PROCEDURE DrawBarInBitmap( hDC, nY, nX, nHigh, nWidth, l3DView, nDeep, aColor )
       DrawBoxInBitmap( hDC, nY, nX, nH, nWidth, l3DView, nDeep )
    ENDIF
 
-RETURN
+   RETURN
 
 STATIC FUNCTION ClrShadow( nColor, nFactor )
 
@@ -479,7 +476,7 @@ STATIC FUNCTION ClrShadow( nColor, nFactor )
    aHSL[ 3 ] -= nFactor
    aRGB := HSL2RGB( aHSL[ 1 ], aHSL[ 2 ], aHSL[ 3 ] )
 
-RETURN RGB( aRGB[ 1 ], aRGB[ 2 ], aRGB[ 3 ] )
+   RETURN RGB( aRGB[ 1 ], aRGB[ 2 ], aRGB[ 3 ] )
 
 STATIC FUNCTION nMax( aData )
 
@@ -489,7 +486,7 @@ STATIC FUNCTION nMax( aData )
       nMax := Max( Len( aData[ nI ] ), nMax )
    NEXT nI
 
-RETURN( nMax )
+   RETURN( nMax )
 
 STATIC FUNCTION DetMaxVal( nNum )
 
@@ -520,7 +517,7 @@ STATIC FUNCTION DetMaxVal( nNum )
 
    ENDDO
 
-RETURN ( nVal )
+   RETURN ( nVal )
 
 PROCEDURE DrawPointInBitmap( hDC, nType, nY, nX, nHigh, aColor )
 
@@ -530,13 +527,13 @@ PROCEDURE DrawPointInBitmap( hDC, nType, nY, nX, nHigh, aColor )
       DrawCircleinBitmap( hDC, nX - nHigh - 2, nY - 2, 6, aColor )
    ENDIF
 
-RETURN
+   RETURN
 
 PROCEDURE DrawCircleInBitmap( hDC, nCol, nRow, nWidth, aColor, nPenWidth )
+
    BT_DrawFillEllipse( hDC, nCol, nRow, nWidth, nWidth, aColor, aColor, nPenWidth )
 
-RETURN
-
+   RETURN
 
 FUNCTION HMG_PieGraph( nWidth, nHeight, series, aname, colors, ctitle, aTitleColor, depth, l3d, lxval, lsleg, lnoborder )
 
@@ -624,22 +621,22 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, series, aname, colors, ctitle, aTitleCol
    tocol := tocol + 1
 
    FOR i := 1 TO Len( series )
-      sum := sum + series[ i ]
+      SUM := sum + series[ i ]
    NEXT i
    FOR i := 1 TO Len( series )
       AAdd( degrees, Round( series[ i ] / sum * 360, 0 ) )
    NEXT i
-   sum := 0
+   SUM := 0
    FOR i := 1 TO Len( degrees )
-      sum := sum + degrees[ i ]
+      SUM := sum + degrees[ i ]
    NEXT i
    IF sum <> 360
       degrees[ Len( degrees ) ] := degrees[ Len( degrees ) ] + ( 360 - sum )
    ENDIF
 
-   sum := 0
+   SUM := 0
    FOR i := 1 TO Len( degrees )
-      sum := sum + degrees[ i ]
+      SUM := sum + degrees[ i ]
       AAdd( cumulative, sum )
    NEXT i
 
@@ -744,9 +741,10 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, series, aname, colors, ctitle, aTitleCol
 
    BT_DeleteDC( BTstruct )
 
-RETURN hBitmap
+   RETURN hBitmap
 
 PROCEDURE DrawArcInBitmap( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth )
+
    IF ValType( penrgb ) == "U"
       penrgb := BLACK
    ENDIF
@@ -756,9 +754,10 @@ PROCEDURE DrawArcInBitmap( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, 
 
    BT_DrawArc ( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth )
 
-RETURN
+   RETURN
 
 PROCEDURE DrawPieInBitmap( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth, fillrgb )
+
    IF ValType( penrgb ) == "U"
       penrgb := BLACK
    ENDIF
@@ -771,13 +770,14 @@ PROCEDURE DrawPieInBitmap( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, 
 
    BT_DrawPie ( hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth, fillrgb )
 
-RETURN
+   RETURN
 
 PROCEDURE DrawPolygonInBitmap( hDC, apoints, penrgb, penwidth, fillrgb )
 
    LOCAL xarr := {}
    LOCAL yarr := {}
    LOCAL x := 0
+
    IF ValType( penrgb ) == "U"
       penrgb := BLACK
    ENDIF
@@ -794,7 +794,7 @@ PROCEDURE DrawPolygonInBitmap( hDC, apoints, penrgb, penwidth, fillrgb )
 
    BT_DrawPolygon ( hDC, yarr, xarr, penrgb, penwidth, fillrgb )
 
-RETURN
+   RETURN
 
 STATIC FUNCTION RGB2HSL( nR, nG, nB )
 
@@ -836,11 +836,10 @@ STATIC FUNCTION RGB2HSL( nR, nG, nB )
 
    nH := Int( ( nH * 239 ) / 6 )
    IF nH < 0 ; nH += 240 ; ENDIF
-   nS := Int( nS * 239 )
-   nL := Int( nL * 239 )
+      nS := Int( nS * 239 )
+      nL := Int( nL * 239 )
 
-RETURN { nH, nS, nL }
-
+      RETURN { nH, nS, nL }
 
 STATIC FUNCTION HSL2RGB( nH, nS, nL )
 
@@ -891,28 +890,28 @@ STATIC FUNCTION HSL2RGB( nH, nS, nL )
       nB := aTmp3[ 3 ]
    ENDIF
 
-RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
+   RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
 
+   STATIC PROC DrawBoxinBitmap( hDC, nY, nX, nHigh, nWidth, l3D, nDeep )
 
-STATIC PROC DrawBoxinBitmap( hDC, nY, nX, nHigh, nWidth, l3D, nDeep )
-
-   // Set Border
-   DrawLineinbitmap( hDC, nX, nY, nX - nHigh + nDeep, nY, BLACK )  // LEFT
-   DrawLineinbitmap( hDC, nX, nY + nWidth, nX - nHigh + nDeep, nY + nWidth, BLACK )  // RIGHT
-   DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY, nX - nHigh + nDeep, nY + nWidth, BLACK )  // Top
-   DrawLineinbitmap( hDC, nX, nY, nX, nY + nWidth, BLACK )                          // Bottom
-   IF l3D
-      // Set shadow
-      DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY + nWidth, nX - nHigh, nY + nDeep + nWidth, BLACK )
-      DrawLineinbitmap( hDC, nX, nY + nWidth, nX - nDeep, nY + nWidth + nDeep, BLACK )
-      IF nHigh > 0
-         DrawLineinbitmap( hDC, nX - nDeep, nY + nWidth + nDeep, nX - nHigh, nY + nWidth + nDeep, BLACK )
-         DrawLineinbitmap( hDC, nX - nHigh, nY + nDeep, nX - nHigh, nY + nWidth + nDeep, BLACK )
-         DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY, nX - nHigh, nY + nDeep, BLACK )
-      ELSE
-         DrawLineinbitmap( hDC, nX - nDeep, nY + nWidth + nDeep, nX - nHigh + 1, nY + nWidth + nDeep, BLACK )
-         DrawLineinbitmap( hDC, nX, nY, nX - nDeep, nY + nDeep, BLACK )
+      // Set Border
+      DrawLineinbitmap( hDC, nX, nY, nX - nHigh + nDeep, nY, BLACK )  // LEFT
+      DrawLineinbitmap( hDC, nX, nY + nWidth, nX - nHigh + nDeep, nY + nWidth, BLACK )  // RIGHT
+      DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY, nX - nHigh + nDeep, nY + nWidth, BLACK )  // Top
+      DrawLineinbitmap( hDC, nX, nY, nX, nY + nWidth, BLACK )                          // Bottom
+      IF l3D
+         // Set shadow
+         DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY + nWidth, nX - nHigh, nY + nDeep + nWidth, BLACK )
+         DrawLineinbitmap( hDC, nX, nY + nWidth, nX - nDeep, nY + nWidth + nDeep, BLACK )
+         IF nHigh > 0
+            DrawLineinbitmap( hDC, nX - nDeep, nY + nWidth + nDeep, nX - nHigh, nY + nWidth + nDeep, BLACK )
+            DrawLineinbitmap( hDC, nX - nHigh, nY + nDeep, nX - nHigh, nY + nWidth + nDeep, BLACK )
+            DrawLineinbitmap( hDC, nX - nHigh + nDeep, nY, nX - nHigh, nY + nDeep, BLACK )
+         ELSE
+            DrawLineinbitmap( hDC, nX - nDeep, nY + nWidth + nDeep, nX - nHigh + 1, nY + nWidth + nDeep, BLACK )
+            DrawLineinbitmap( hDC, nX, nY, nX - nDeep, nY + nDeep, BLACK )
+         ENDIF
       ENDIF
-   ENDIF
 
-RETURN
+      RETURN
+

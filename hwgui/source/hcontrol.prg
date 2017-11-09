@@ -1,17 +1,13 @@
 /*
- * $Id: hcontrol.prg,v 1.90 2008/10/10 20:59:49 mlacecilia Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HControl, HStatus, HStatic, HButton, HGroup, HLine classes
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hcontrol.prg,v 1.90 2008/10/10 20:59:49 mlacecilia Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HControl, HStatus, HStatic, HButton, HGroup, HLine classes
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 
- *
- * ButtonEx class
- *
- * Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
- * www - http://sites.uol.com.br/culikr/
+* ButtonEx class
+* Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
+* www - http://sites.uol.com.br/culikr/
 
 */
 
@@ -50,40 +46,53 @@ CLASS HControl INHERIT HCustomWindow
    DATA   lInit           INIT .F.
    DATA   lnoValid        INIT .F.
    DATA   nGetSkip        INIT 0
-   DATA   anchor          INIT 0   
+   DATA   anchor          INIT 0
    DATA   xName           HIDDEN
    ACCESS Name            INLINE ::xName
    ASSIGN Name( cName )   INLINE ::xName := cName, ;
-                                              __objAddData( ::oParent, cName ), ;
-                                              ::oParent: & ( cName ) := Self
+      __objAddData( ::oParent, cName ), ;
+      ::oParent: & ( cName ) := Self
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
-   METHOD Init()
-   METHOD SetColor( tcolor, bColor, lRepaint )
-   METHOD NewId()
-   METHOD Disable()     INLINE EnableWindow( ::handle, .F. )
-   METHOD Enable()      INLINE EnableWindow( ::handle, .T. )
-   METHOD IsEnabled()   INLINE IsWindowEnabled( ::Handle )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
+
+METHOD Init()
+
+METHOD SetColor( tcolor, bColor, lRepaint )
+
+METHOD NewId()
+
+METHOD Disable()     INLINE EnableWindow( ::handle, .F. )
+
+METHOD Enable()      INLINE EnableWindow( ::handle, .T. )
+
+METHOD IsEnabled()   INLINE IsWindowEnabled( ::Handle )
+
    //METHOD SetFocus()    INLINE ( SendMessage( ::oParent:handle, WM_NEXTDLGCTL, ;
    //                                           ::handle, 1 ), ;
    //                              SetFocus( ::handle ) )
-   METHOD SetFocus()    INLINE SendMessage( GetActiveWindow(), WM_NEXTDLGCTL,::handle, 1 )                                  
-   METHOD GetText()     INLINE GetWindowText( ::handle )
-   METHOD SetText( c )  INLINE SetWindowText( ::Handle, c ), ::Refresh()
-   METHOD Refresh()     VIRTUAL
-   METHOD onAnchor(x,y,w,h)  
-   METHOD END()
+
+METHOD SetFocus()    INLINE SendMessage( GetActiveWindow(), WM_NEXTDLGCTL,::handle, 1 )
+
+METHOD GetText()     INLINE GetWindowText( ::handle )
+
+METHOD SetText( c )  INLINE SetWindowText( ::Handle, c ), ::Refresh()
+
+METHOD Refresh()     VIRTUAL
+
+METHOD onAnchor(x,y,w,h)
+
+METHOD END()
 
 ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-            bInit, bSize, bPaint, cTooltip, tcolor, bColor ) CLASS HControl
+      bInit, bSize, bPaint, cTooltip, tcolor, bColor ) CLASS HControl
 
    ::oParent := IIf( oWndParent == NIL, ::oDefaultParent, oWndParent )
    ::id      := IIf( nId == NIL, ::NewId(), nId )
    ::style   := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
-                           WS_VISIBLE + WS_CHILD )
+      WS_VISIBLE + WS_CHILD )
    ::oFont   := oFont
    ::nLeft   := nLeft
    ::nTop    := nTop
@@ -111,10 +120,11 @@ METHOD NewId() CLASS HControl
    IF AScan( ::oParent:aControls, { | o | o:id == nId } ) != 0
       nId --
       DO WHILE nId >= CONTROL_FIRST_ID .AND. ;
-               AScan( ::oParent:aControls, { | o | o:id == nId } ) != 0
+            AScan( ::oParent:aControls, { | o | o:id == nId } ) != 0
          nId --
       ENDDO
    ENDIF
+
    RETURN nId
 
 METHOD INIT CLASS HControl
@@ -136,6 +146,7 @@ METHOD INIT CLASS HControl
       ENDIF
       ::lInit := .T.
    ENDIF
+
    RETURN NIL
 
 METHOD SetColor( tcolor, bColor, lRepaint ) CLASS HControl
@@ -170,109 +181,110 @@ METHOD END() CLASS HControl
       ::tooltip := NIL
 
    ENDIF
+
    RETURN NIL
 
 METHOD onAnchor(x,y,w,h) CLASS HControl
-LOCAL nAnchor,nXincRelative, nYincRelative, nXincAbsolute,nYincAbsolute 
-LOCAL x1,y1,w1,h1,x9,y9,w9,h9
 
-  nAnchor := ::anchor 
-  x9 := ::nLeft 
-  y9 := ::nTop  
-  w9 := ::nWidth
-  h9 := ::nHeight
+   LOCAL nAnchor,nXincRelative, nYincRelative, nXincAbsolute,nYincAbsolute
+   LOCAL x1,y1,w1,h1,x9,y9,w9,h9
 
-  x1 := ::nLeft 
-  y1 := ::nTop 
-  w1 := ::nWidth 
-  h1 := ::nHeight
-  *- calculo relativo
-  nXincRelative :=  w / x
-  nYincRelative :=  h / y
- 	*- calculo ABSOLUTE
-  nXincAbsolute := (w - x) 
-  nYincAbsolute := (h - y)
+   nAnchor := ::anchor
+   x9 := ::nLeft
+   y9 := ::nTop
+   w9 := ::nWidth
+   h9 := ::nHeight
 
-  IF nanchor >= ANCHOR_VERTFIX
-    *- vertical fixed center
-    nAnchor := nAnchor - ANCHOR_VERTFIX
-    y1 := y9 + INT((h - y) * ((y9 + h9 / 2) / y))
-  ENDIF
-  IF nAnchor >= ANCHOR_HORFIX
-    *- horizontal fixed center
-    nAnchor := nAnchor - ANCHOR_HORFIX
-    x1 := x9 + INT((w - x) * ((x9 + w9 / 2) / x)) 
-  ENDIF
-  IF nAnchor >= ANCHOR_RIGHTREL
-    && relative - RIGHT RELATIVE
-    nAnchor := nAnchor - ANCHOR_RIGHTREL
-    x1 := w - INT((x - x9 - w9) * nxIncRelative) - w9
-  ENDIF
-  IF nAnchor >= ANCHOR_BOTTOMREL
-    && relative - BOTTOM RELATIVE
-    nAnchor := nAnchor - ANCHOR_BOTTOMREL
-    Y1 := h - INT((y - y9 - h9) * nyIncRelative) - h9
-  ENDIF
-  IF nAnchor >= ANCHOR_LEFTREL
-    && relative - LEFT RELATIVE
-    nAnchor := nAnchor - ANCHOR_LEFTREL
-    IF x1 != x9
-      w1 := x1 - (INT(x9 * nxIncRelative)) + w9
-    ENDIF  
-    x1 := INT(x9 * nxIncRelative)
-  ENDIF
-  IF nAnchor >= ANCHOR_TOPREL
-    && relative  - TOP RELATIVE
-    nAnchor := nAnchor - ANCHOR_TOPREL
-    IF y1 != y9
-      h1 := y1 - (INT(y9 * nyIncRelative)) + h9
-    ENDIF  
-    y1 := INT(y9 * nyIncRelative)
-  ENDIF
-  IF nAnchor >= ANCHOR_RIGHTABS
-    && Absolute - RIGHT ABSOLUTE
-    nAnchor := nAnchor - ANCHOR_RIGHTABS
-    IF x1 != x9
-      w1 := x1 - (x9 +  INT(nxIncAbsolute)) + w9
-    ENDIF  
-    x1 := x9 +  INT(nxIncAbsolute)
-  ENDIF
-  IF nAnchor >= ANCHOR_BOTTOMABS
-     && Absolute - BOTTOM ABSOLUTE
-     nAnchor := nAnchor - ANCHOR_BOTTOMABS
-     IF y1 != y9
-       h1 := y1 - (y9 +  INT(nyIncAbsolute)) + h9
-     ENDIF 
- 	  y1 := y9 +  INT(nyIncAbsolute) 
-  ENDIF
-  IF nAnchor >= ANCHOR_LEFTABS
-    && Absolute - LEFT ABSOLUTE
-     nAnchor := nAnchor - ANCHOR_LEFTABS
-     IF x1 != x9
-       w1 := x1 - x9 + w9
-     ENDIF  
-     x1 := x9 
-  ENDIF
-  IF nAnchor >= ANCHOR_TOPABS
-    && Absolute - TOP ABSOLUTE
-    //nAnchor := nAnchor - 1
-    IF y1 != y9
-      h1 := y1 - y9 + h9
-    ENDIF  
-    y1 := y9 
-  ENDIF
-  RedrawWindow(::handle,RDW_ERASE + RDW_INVALIDATE )
-  MoveWindow( ::handle,x1,y1,w1,h1)
+   x1 := ::nLeft
+   y1 := ::nTop
+   w1 := ::nWidth
+   h1 := ::nHeight
+   *- calculo relativo
+   nXincRelative :=  w / x
+   nYincRelative :=  h / y
+   *- calculo ABSOLUTE
+   nXincAbsolute := (w - x)
+   nYincAbsolute := (h - y)
 
-  ::nLeft := x1
-  ::nTop := y1
-  ::nWidth := w1
-  ::nHeight := h1
- 
-RETURN Nil
+   IF nanchor >= ANCHOR_VERTFIX
+      *- vertical fixed center
+      nAnchor := nAnchor - ANCHOR_VERTFIX
+      y1 := y9 + INT((h - y) * ((y9 + h9 / 2) / y))
+   ENDIF
+   IF nAnchor >= ANCHOR_HORFIX
+      *- horizontal fixed center
+      nAnchor := nAnchor - ANCHOR_HORFIX
+      x1 := x9 + INT((w - x) * ((x9 + w9 / 2) / x))
+   ENDIF
+   IF nAnchor >= ANCHOR_RIGHTREL
+      && relative - RIGHT RELATIVE
+      nAnchor := nAnchor - ANCHOR_RIGHTREL
+      x1 := w - INT((x - x9 - w9) * nxIncRelative) - w9
+   ENDIF
+   IF nAnchor >= ANCHOR_BOTTOMREL
+      && relative - BOTTOM RELATIVE
+      nAnchor := nAnchor - ANCHOR_BOTTOMREL
+      Y1 := h - INT((y - y9 - h9) * nyIncRelative) - h9
+   ENDIF
+   IF nAnchor >= ANCHOR_LEFTREL
+      && relative - LEFT RELATIVE
+      nAnchor := nAnchor - ANCHOR_LEFTREL
+      IF x1 != x9
+         w1 := x1 - (INT(x9 * nxIncRelative)) + w9
+      ENDIF
+      x1 := INT(x9 * nxIncRelative)
+   ENDIF
+   IF nAnchor >= ANCHOR_TOPREL
+      && relative  - TOP RELATIVE
+      nAnchor := nAnchor - ANCHOR_TOPREL
+      IF y1 != y9
+         h1 := y1 - (INT(y9 * nyIncRelative)) + h9
+      ENDIF
+      y1 := INT(y9 * nyIncRelative)
+   ENDIF
+   IF nAnchor >= ANCHOR_RIGHTABS
+      && Absolute - RIGHT ABSOLUTE
+      nAnchor := nAnchor - ANCHOR_RIGHTABS
+      IF x1 != x9
+         w1 := x1 - (x9 +  INT(nxIncAbsolute)) + w9
+      ENDIF
+      x1 := x9 +  INT(nxIncAbsolute)
+   ENDIF
+   IF nAnchor >= ANCHOR_BOTTOMABS
+      && Absolute - BOTTOM ABSOLUTE
+      nAnchor := nAnchor - ANCHOR_BOTTOMABS
+      IF y1 != y9
+         h1 := y1 - (y9 +  INT(nyIncAbsolute)) + h9
+      ENDIF
+      y1 := y9 +  INT(nyIncAbsolute)
+   ENDIF
+   IF nAnchor >= ANCHOR_LEFTABS
+      && Absolute - LEFT ABSOLUTE
+      nAnchor := nAnchor - ANCHOR_LEFTABS
+      IF x1 != x9
+         w1 := x1 - x9 + w9
+      ENDIF
+      x1 := x9
+   ENDIF
+   IF nAnchor >= ANCHOR_TOPABS
+      && Absolute - TOP ABSOLUTE
+      //nAnchor := nAnchor - 1
+      IF y1 != y9
+         h1 := y1 - y9 + h9
+      ENDIF
+      y1 := y9
+   ENDIF
+   RedrawWindow(::handle,RDW_ERASE + RDW_INVALIDATE )
+   MoveWindow( ::handle,x1,y1,w1,h1)
 
+   ::nLeft := x1
+   ::nTop := y1
+   ::nWidth := w1
+   ::nHeight := h1
 
-//- HStatus
+   RETURN NIL
+
+   //- HStatus
 
 CLASS HStatus INHERIT HControl
 
@@ -280,11 +292,14 @@ CLASS VAR winclass   INIT "msctls_statusbar32"
 
    DATA aParts
 
-   METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint )
-   METHOD Activate()
-   METHOD Init()
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-                    bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )
+METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint )
+
+METHOD Activate()
+
+METHOD Init()
+
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )
 
 ENDCLASS
 
@@ -292,10 +307,10 @@ METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint ) CLASS
 
    bSize  := IIf( bSize != NIL, bSize, { | o, x, y | o:Move( 0, y - 20, x, 20 ) } )
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
-                        WS_CHILD + WS_VISIBLE + WS_OVERLAPPED + ;
-                        WS_CLIPSIBLINGS )
+      WS_CHILD + WS_VISIBLE + WS_OVERLAPPED + ;
+      WS_CLIPSIBLINGS )
    Super:New( oWndParent, nId, nStyle, 0, 0, 0, 0, oFont, bInit, ;
-              bSize, bPaint )
+      bSize, bPaint )
 
    ::aParts  := aParts
 
@@ -304,6 +319,7 @@ METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint ) CLASS
    RETURN Self
 
 METHOD Activate CLASS HStatus
+
    LOCAL aCoors
 
    IF ! Empty( ::oParent:handle )
@@ -314,31 +330,35 @@ METHOD Activate CLASS HStatus
          ::oParent:aOffset[ 4 ] := aCoors[ 4 ] - aCoors[ 2 ]
       ENDIF
    ENDIF
+
    RETURN NIL
 
 METHOD Init CLASS HStatus
+
    IF ! ::lInit
       Super:Init()
       IF ! Empty( ::aParts )
          hwg_InitStatus( ::oParent:handle, ::handle, Len( ::aParts ), ::aParts )
       ENDIF
    ENDIF
+
    RETURN  NIL
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )  CLASS hStatus
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )  CLASS hStatus
 
    HB_SYMBOL_UNUSED( cCaption )
    HB_SYMBOL_UNUSED( lTransp )
 
    Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, ;
-              bSize, bPaint, ctooltip, tcolor, bcolor )
+      bSize, bPaint, ctooltip, tcolor, bcolor )
    HWG_InitCommonControlsEx()
    ::style   := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
    ::aParts := aParts
+
    RETURN Self
 
-//- HStatic
+   //- HStatic
 
 CLASS HStatic INHERIT HControl
 
@@ -348,25 +368,32 @@ CLASS VAR winclass   INIT "STATIC"
    DATA lownerDraw  INIT .F.
    DATA nStyleOwner INIT 0
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-               bColor, lTransp )
-   METHOD Redefine( oWndParent, nId, oFont, bInit, ;
-                    bSize, bPaint, cTooltip, tcolor, bColor, lTransp )
-   METHOD Activate()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+      bColor, lTransp )
+
+METHOD Redefine( oWndParent, nId, oFont, bInit, ;
+      bSize, bPaint, cTooltip, tcolor, bColor, lTransp )
+
+METHOD Activate()
+
    // METHOD SetValue( value ) INLINE SetDlgItemText( ::oParent:handle, ::id, ;
    //                                                 value )
-   METHOD SetValue( value ) INLINE ::Auto_Size( value ), ;
-                           SetDlgItemText( ::oParent:handle, ::id, value )
-   METHOD Auto_Size( cValue, nAlign )  HIDDEN
 
-   METHOD Init()
-   METHOD PAINT( o )
+METHOD SetValue( value ) INLINE ::Auto_Size( value ), ;
+      SetDlgItemText( ::oParent:handle, ::id, value )
+
+METHOD Auto_Size( cValue, nAlign )  HIDDEN
+
+METHOD Init()
+
+METHOD PAINT( o )
+
 ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-            bColor, lTransp ) CLASS HStatic
+      cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+      bColor, lTransp ) CLASS HStatic
 
    ::lOwnerDraw := Hwg_BitAnd( nStyle, SS_OWNERDRAW ) + 1 >= SS_OWNERDRAW
    // Enabling style for tooltips
@@ -377,7 +404,6 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
          nStyle := Hwg_BitOr( nStyle, SS_NOTIFY )
       ENDIF
    ENDIF
-   //
    IF ( lTransp != NIL .AND. lTransp ) .OR. ::lOwnerDraw
       ::extStyle += WS_EX_TRANSPARENT
       bPaint := { | o, p | o:paint( p ) }
@@ -388,7 +414,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ENDIF
 
    Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
-              bInit, bSize, bPaint, cTooltip, tcolor, bColor )
+      bInit, bSize, bPaint, cTooltip, tcolor, bColor )
 
    IF (lTransp != NIL .AND. lTransp) .AND. ::oParent:brush != Nil
       ::bcolor := ::oparent:bcolor
@@ -405,7 +431,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    RETURN Self
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, cTooltip, tcolor, bColor, lTransp ) CLASS HStatic
+      bSize, bPaint, cTooltip, tcolor, bColor, lTransp ) CLASS HStatic
 
    IF ( lTransp != NIL .AND. lTransp )  //.OR. ::lOwnerDraw
       ::extStyle += WS_EX_TRANSPARENT
@@ -413,7 +439,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    ENDIF
 
    Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, ;
-              bSize, bPaint, cTooltip, tcolor, bColor )
+      bSize, bPaint, cTooltip, tcolor, bColor )
 
    ::title := cCaption
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
@@ -421,18 +447,22 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    IF ValType( cTooltip ) == "C"
       ::Style := SS_NOTIFY
    ENDIF
+
    RETURN Self
 
 METHOD Activate CLASS HStatic
+
    IF ! Empty( ::oParent:handle )
       ::handle := CreateStatic( ::oParent:handle, ::id, ::style, ;
-                                ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-                                ::extStyle )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+         ::extStyle )
       ::Init()
    ENDIF
+
    RETURN NIL
 
 METHOD Init CLASS HStatic
+
    IF ! ::lInit
       Super:init()
       IF ::Title != NIL
@@ -440,9 +470,11 @@ METHOD Init CLASS HStatic
          SetWindowText( ::handle, ::title )
       ENDIF
    ENDIF
+
    RETURN  NIL
 
 METHOD Paint( lpDis ) CLASS HStatic
+
    LOCAL drawInfo := GetDrawItemInfo( lpDis )
    LOCAL client_rect, szText
    LOCAL dwtext, nstyle
@@ -461,18 +493,20 @@ METHOD Paint( lpDis ) CLASS HStatic
    IF ::oparent:brush != Nil
       SETBKCOLOR(dc,::oparent:bcolor)
       SetBkMode(dc,0)
-   ENDIF   
+   ENDIF
 
    IF ::lOwnerDraw
       ::Auto_Size( szText, ::nStyleOwner )
    ENDIF
    // Draw the text
    DrawText( dc, szText, ;
-             client_rect[ 1 ], client_rect[ 2 ], client_rect[ 3 ], client_rect[ 4 ], ;
-             dwtext )
-   RETURN nil
+      client_rect[ 1 ], client_rect[ 2 ], client_rect[ 3 ], client_rect[ 4 ], ;
+      dwtext )
+
+   RETURN NIL
 
 METHOD Auto_Size( cValue, nAlign ) CLASS HStatic
+
    LOCAL  ASize, nLeft
 
    IF ::autosize .OR. ::lOwnerDraw
@@ -489,10 +523,10 @@ METHOD Auto_Size( cValue, nAlign ) CLASS HStatic
       ::move( ::nLeft, ::nTop )
       ::nLeft := nLeft
    ENDIF
-   RETURN Nil
 
+   RETURN NIL
 
-//- HButton
+   //- HButton
 
 CLASS HButton INHERIT HControl
 
@@ -500,30 +534,33 @@ CLASS VAR winclass   INIT "BUTTON"
 
    DATA bClick
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-               tcolor, bColor )
-   METHOD Activate()
-   METHOD Redefine( oWnd, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-                    tcolor, bColor )
-   METHOD Init()
-   METHOD Notify( lParam )
-   METHOD onClick()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor )
+
+METHOD Activate()
+
+METHOD Redefine( oWnd, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor )
+
+METHOD Init()
+
+METHOD Notify( lParam )
+
+METHOD onClick()
 
 ENDCLASS
 
-
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-            tcolor, bColor ) CLASS HButton
-
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor ) CLASS HButton
 
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), BS_PUSHBUTTON + BS_NOTIFY )
 
    Super:New( oWndParent, nId, nStyle, nLeft, nTop, ;
-              IIf( nWidth  == NIL, 90, nWidth  ), ;
-              IIf( nHeight == NIL, 30, nHeight ), ;
-              oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
+      IIf( nWidth  == NIL, 90, nWidth  ), ;
+      IIf( nHeight == NIL, 30, nHeight ), ;
+      oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
    ::bClick  := bClick
    ::title   := cCaption
    ::Activate()
@@ -536,22 +573,25 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    IF bClick != NIL
       ::oParent:AddEvent( 0, Self, { || ::onClick() } )
    ENDIF
+
    RETURN Self
 
 METHOD Activate CLASS HButton
+
    IF ! Empty( ::oParent:handle )
       ::handle := CreateButton( ::oParent:handle, ::id, ::style, ;
-                                ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-                                ::title )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+         ::title )
       ::Init()
    ENDIF
+
    RETURN NIL
 
 METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-                 cTooltip, tcolor, bColor, cCaption ) CLASS HButton
+      cTooltip, tcolor, bColor, cCaption ) CLASS HButton
 
    Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, ;
-              bSize, bPaint, cTooltip, tcolor, bColor )
+      bSize, bPaint, cTooltip, tcolor, bColor )
 
    ::title   := cCaption
 
@@ -559,30 +599,35 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       //::oParent:AddEvent( 0, Self, bClick )
       ::oParent:AddEvent( 0, Self, { || ::onClick() } )
    ENDIF
+
    RETURN Self
 
 METHOD Init CLASS HButton
+
    IF ! ::lInit
       ::Super:init()
       IF ::Title != NIL
          SETWINDOWTEXT( ::handle, ::title )
       ENDIF
    ENDIF
+
    RETURN  NIL
 
 METHOD onClick()  CLASS HButton
+
    IF ::bClick != Nil
       ::oParent:lSuspendMsgsHandling := .T.
       Eval( ::bClick, ::oParent, ::id )
       ::oParent:lSuspendMsgsHandling := .F.
    ENDIF
-   RETURN Nil
 
+   RETURN NIL
 
 METHOD Notify( lParam ) CLASS HButton
+
    LOCAL ndown := getkeystate( VK_RIGHT ) + getkeystate( VK_DOWN ) + GetKeyState( VK_TAB )
    LOCAL nSkip := 0
-   //
+
    IF lParam = WM_KEYDOWN
       IF ::oParent:Classname = "HTAB"
          IF getfocus() != ::handle
@@ -590,7 +635,7 @@ METHOD Notify( lParam ) CLASS HButton
             SENDMESSAGE( ::handle, BM_SETSTYLE , BS_PUSHBUTTON , 1 )
          ENDIF
          IF getkeystate( VK_LEFT ) + getkeystate( VK_UP ) < 0 .OR. ;
-            ( GetKeyState( VK_TAB ) < 0 .and. GetKeyState( VK_SHIFT ) < 0 )
+               ( GetKeyState( VK_TAB ) < 0 .and. GetKeyState( VK_SHIFT ) < 0 )
             nSkip := - 1
          ELSEIF ndown < 0
             nSkip := 1
@@ -599,13 +644,15 @@ METHOD Notify( lParam ) CLASS HButton
             //SETFOCUS( ::oParent:Handle )
             ::oParent:Setfocus()
             GetSkip( ::oparent, ::handle, , nSkip )
+
             RETURN 0
          ENDIF
       ENDIF
    ENDIF
+
    RETURN - 1
 
-//- HGroup
+   //- HGroup
 
 CLASS HButtonEX INHERIT HButton
 
@@ -628,42 +675,49 @@ CLASS HButtonEX INHERIT HButton
    DATA m_csbitmaps init {,,,, }
    DATA m_bToggled INIT .f.
 
-
-
    DATA m_bDrawTransparent INIT .f.
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, ;
-               bColor, lTransp, hBitmap, hIcon )
+
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, tcolor, ;
+      bColor, lTransp, hBitmap, hIcon )
    DATA iStyle
    DATA m_bmpBk, m_pbmpOldBk
    DATA  bMouseOverButton INIT .f.
 
-   METHOD Paint( lpDis )
-   METHOD SetBitmap( )
-   METHOD SetIcon()
-   METHOD Init()
-   METHOD onevent( msg, wParam, lParam )
-   METHOD CancelHover()
-   METHOD End()
-   METHOD Redefine( oWnd, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-                    tcolor, bColor, hBitmap, iStyle, hIcon )
-   METHOD PaintBk( p )
-   METHOD SetDefaultColor( lRepaint )
-   METHOD SetColorEx( nIndex, nColor, bPaint )
+METHOD Paint( lpDis )
 
-   METHOD SetText( c ) INLINE ::title := c, ::caption := c, ;
-                           SendMessage( ::handle, WM_PAINT, 0, 0 ), ;
-                           SetWindowText( ::handle, ::title )
+METHOD SetBitmap( )
 
+METHOD SetIcon()
 
-//   METHOD SaveParentBackground()
+METHOD Init()
 
+METHOD onevent( msg, wParam, lParam )
+
+METHOD CancelHover()
+
+METHOD End()
+
+METHOD Redefine( oWnd, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor, hBitmap, iStyle, hIcon )
+
+METHOD PaintBk( p )
+
+METHOD SetDefaultColor( lRepaint )
+
+METHOD SetColorEx( nIndex, nColor, bPaint )
+
+METHOD SetText( c ) INLINE ::title := c, ::caption := c, ;
+      SendMessage( ::handle, WM_PAINT, 0, 0 ), ;
+      SetWindowText( ::handle, ::title )
+
+   //   METHOD SaveParentBackground()
 
 END CLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-            tcolor, bColor, hBitmap, iStyle, hicon, Transp ) CLASS HButtonEx
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor, hBitmap, iStyle, hicon, Transp ) CLASS HButtonEx
 
    DEFAULT iStyle TO ST_ALIGN_HORIZ
    DEFAULT Transp TO .T.
@@ -672,25 +726,22 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::m_bLButtonDown := .f.
    ::m_bIsToggle := .f.
 
-
    ::Caption := cCaption
    ::iStyle                             := iStyle
    ::hBitmap                            := hBitmap
    ::hicon                              := hicon
    ::m_bDrawTransparent                 := Transp
 
-
    bPaint   := { | o, p | o:paint( p ) }
 
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-                tcolor, bColor )
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor )
 
    RETURN Self
 
-
 METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-                 cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon  ) CLASS HButtonEx
+      cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon  ) CLASS HButtonEx
    DEFAULT iStyle TO ST_ALIGN_HORIZ
    bPaint   := { | o, p | o:paint( p ) }
    ::m_bLButtonDown := .f.
@@ -712,17 +763,16 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
    ::m_crColors[ BTNST_COLOR_BK_FOCUS ] := GetSysColor( COLOR_BTNFACE )
    ::m_crColors[ BTNST_COLOR_FG_FOCUS ] := GetSysColor( COLOR_BTNTEXT )
 
-
    ::Super:Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-                     cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon  )
+      cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon  )
    ::title   := cCaption
 
    ::Caption := cCaption
 
-
    RETURN Self
 
 METHOD SetBitmap() CLASS HButtonEX
+
    IF ValType( ::hBitmap ) == "N"
       SendMessage( ::handle, BM_SETIMAGE, IMAGE_BITMAP, ::hBitmap )
    ENDIF
@@ -730,17 +780,23 @@ METHOD SetBitmap() CLASS HButtonEX
    RETURN Self
 
 METHOD SetIcon() CLASS HButtonEX
+
    IF ValType( ::hIcon ) == "N"
       SendMessage( ::handle, BM_SETIMAGE, IMAGE_ICON, ::hIcon )
    ENDIF
+
    RETURN Self
 
 METHOD END() CLASS HButtonEX
+
    Super:END()
+
    RETURN Self
 
 METHOD INIT CLASS HButtonEx
+
    LOCAL nbs
+
    IF ! ::lInit
       ::nHolder := 1
       SetWindowObject( ::handle, Self )
@@ -769,6 +825,7 @@ METHOD INIT CLASS HButtonEx
       ::Super:init()
       ::SetBitmap()
    ENDIF
+
    RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
@@ -784,10 +841,13 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
             ::m_bFirstTime := .T.
          ENDIF
       ENDIF
+
       RETURN 0
    ELSEIF msg == WM_ERASEBKGND
+
       RETURN 0
    ELSEIF msg == BM_SETSTYLE
+
       RETURN BUTTONEXONSETSTYLE( wParam, lParam, ::handle, @::m_bIsDefault )
 
    ELSEIF msg == WM_MOUSEMOVE
@@ -795,117 +855,129 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
       ::bMouseOverButton := .T.
       Invalidaterect( ::handle, .f. )
       TRACKMOUSEVENT( ::handle )
-      ENDIF
-      RETURN 0
-   ELSEIF msg == WM_MOUSELEAVE
-      ::CancelHover()
-      RETURN 0
+   ENDIF
 
-   ELSEIF msg == WM_KEYDOWN
+   RETURN 0
+ELSEIF msg == WM_MOUSELEAVE
+   ::CancelHover()
+
+   RETURN 0
+
+ELSEIF msg == WM_KEYDOWN
 
    #ifdef __XHARBOUR__
-      IF hb_inline( lParam ) {  LPARAM  l = ( LPARAM ) hb_parnl( 1 ) ; hb_retl( l & 0x40000000 ) ; }
-   #else
+   IF hb_inline( lParam ) {  LPARAM  l = ( LPARAM ) hb_parnl( 1 ) ; hb_retl( l & 0x40000000 ) ; }
+      #else
       IF hb_BitTest( lParam , 30 )  // the key was down before ?
-   #endif
-          RETURN 0
-       ENDIF
-    IF ( ( wParam == VK_SPACE ) .or. ( wParam == VK_RETURN ) )
-       SendMessage( ::handle, WM_LBUTTONDOWN, 0, MAKELPARAM( 1, 1 ) )
-       RETURN 0
-    ENDIF
-    IF wParam == VK_LEFT .OR. wParam == VK_UP
-       GetSkip( ::oParent, ::handle, , - 1 )
-       RETURN 0
-    ENDIF
-    IF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-       GetSkip( ::oParent, ::handle, , 1 )
-       RETURN 0
-    ENDIF
- ELSEIF msg == WM_SYSKEYUP
-    IF ( pos := At( "&", ::title ) ) > 0 .and. wParam == Asc( Upper( SubStr( ::title, ++ pos, 1 ) ) )
-       IF ValType( ::bClick ) == "B" .or. ::id < 3
-          SendMessage( ::oParent:handle, WM_COMMAND, makewparam( ::id, BN_CLICKED ), ::handle )
-       ENDIF
-    ENDIF
-    RETURN 0
- ELSEIF msg == WM_KEYUP
+         #endif
 
-    IF ( ( wParam == VK_SPACE ) .or. ( wParam == VK_RETURN ) )
-       SendMessage( ::handle, WM_LBUTTONUP, 0, MAKELPARAM( 1, 1 ) )
-       RETURN 0
-    ENDIF
+         RETURN 0
+      ENDIF
+      IF ( ( wParam == VK_SPACE ) .or. ( wParam == VK_RETURN ) )
+         SendMessage( ::handle, WM_LBUTTONDOWN, 0, MAKELPARAM( 1, 1 ) )
 
- ELSEIF msg == WM_LBUTTONUP
-    ::m_bLButtonDown := .f.
-    IF ( ::m_bSent )
-       SendMessage( ::handle, BM_SETSTATE, 0, 0 )
-       ::m_bSent := .f.
-    ENDIF
-    IF ::m_bIsToggle
-       pt[ 1 ] := LOWORD( lParam )
-       pt[ 2 ] := HIWORD( lParam )
-       acoor := ClientToScreen( ::handle, pt[ 1 ], pt[ 2 ] )
+         RETURN 0
+      ENDIF
+      IF wParam == VK_LEFT .OR. wParam == VK_UP
+         GetSkip( ::oParent, ::handle, , - 1 )
 
-       rectButton := GetWindowRect( ::handle )
+         RETURN 0
+      ENDIF
+      IF wParam == VK_RIGHT .OR. wParam == VK_DOWN
+         GetSkip( ::oParent, ::handle, , 1 )
 
-       IF ( ! PtInRect( rectButton, acoor ) )
-          ::m_bToggled = ! ::m_bToggled
-          InvalidateRect( ::handle, 0 )
-          SendMessage( ::handle, BM_SETSTATE, 0, 0 )
-          ::m_bLButtonDown := .T.
-       ENDIF
-    ENDIF
-    RETURN - 1
+         RETURN 0
+      ENDIF
+   ELSEIF msg == WM_SYSKEYUP
+      IF ( pos := At( "&", ::title ) ) > 0 .and. wParam == Asc( Upper( SubStr( ::title, ++ pos, 1 ) ) )
+         IF ValType( ::bClick ) == "B" .or. ::id < 3
+            SendMessage( ::oParent:handle, WM_COMMAND, makewparam( ::id, BN_CLICKED ), ::handle )
+         ENDIF
+      ENDIF
 
- ELSEIF msg == WM_LBUTTONDOWN
-    ::m_bLButtonDown := .t.
-    IF ( ::m_bIsToggle )
-       ::m_bToggled := ! ::m_bToggled
-       InvalidateRect( ::handle, 0 )
-    ENDIF
-    RETURN - 1
+      RETURN 0
+   ELSEIF msg == WM_KEYUP
 
- ELSEIF msg == WM_LBUTTONDBLCLK
+      IF ( ( wParam == VK_SPACE ) .or. ( wParam == VK_RETURN ) )
+         SendMessage( ::handle, WM_LBUTTONUP, 0, MAKELPARAM( 1, 1 ) )
 
-    IF ( ::m_bIsToggle )
+         RETURN 0
+      ENDIF
 
-       // for toggle buttons, treat doubleclick as singleclick
-       SendMessage( ::handle, BM_SETSTATE, ::m_bToggled, 0 )
+   ELSEIF msg == WM_LBUTTONUP
+      ::m_bLButtonDown := .f.
+      IF ( ::m_bSent )
+         SendMessage( ::handle, BM_SETSTATE, 0, 0 )
+         ::m_bSent := .f.
+      ENDIF
+      IF ::m_bIsToggle
+         pt[ 1 ] := LOWORD( lParam )
+         pt[ 2 ] := HIWORD( lParam )
+         acoor := ClientToScreen( ::handle, pt[ 1 ], pt[ 2 ] )
 
-    ELSE
+         rectButton := GetWindowRect( ::handle )
 
-       SendMessage( ::handle, BM_SETSTATE, 1, 0 )
-       ::m_bSent := TRUE
+         IF ( ! PtInRect( rectButton, acoor ) )
+            ::m_bToggled = ! ::m_bToggled
+            InvalidateRect( ::handle, 0 )
+            SendMessage( ::handle, BM_SETSTATE, 0, 0 )
+            ::m_bLButtonDown := .T.
+         ENDIF
+      ENDIF
 
-    ENDIF
-    RETURN 0
+      RETURN - 1
 
- ELSEIF msg == WM_GETDLGCODE
-    RETURN ButtonGetDlgCode( lParam )
+   ELSEIF msg == WM_LBUTTONDOWN
+      ::m_bLButtonDown := .t.
+      IF ( ::m_bIsToggle )
+         ::m_bToggled := ! ::m_bToggled
+         InvalidateRect( ::handle, 0 )
+      ENDIF
 
- ELSEIF msg == WM_SYSCOLORCHANGE
-    ::SetDefaultColors()
- ELSEIF msg == WM_CHAR
-    IF wParam == VK_RETURN .or. wParam == VK_SPACE
-       IF ( ::m_bIsToggle )
+      RETURN - 1
 
-          ::m_bToggled := ! ::m_bToggled
-          InvalidateRect( ::handle, 0 )
-       ELSE
+   ELSEIF msg == WM_LBUTTONDBLCLK
 
-          SendMessage( ::handle, BM_SETSTATE, 1, 0 )
-          ::m_bSent := .t.
-       ENDIF
-       SendMessage( ::oParent:handle, WM_COMMAND, makewparam( ::id, BN_CLICKED ), ::handle )
-    ELSEIF wParam == VK_ESCAPE
-          SendMessage( ::oParent:handle, WM_COMMAND, makewparam( IDCANCEL, BN_CLICKED ), ::handle )
-    ENDIF
-    RETURN 0
- ENDIF
- RETURN - 1
+      IF ( ::m_bIsToggle )
 
+         // for toggle buttons, treat doubleclick as singleclick
+         SendMessage( ::handle, BM_SETSTATE, ::m_bToggled, 0 )
 
+      ELSE
+
+         SendMessage( ::handle, BM_SETSTATE, 1, 0 )
+         ::m_bSent := TRUE
+
+      ENDIF
+
+      RETURN 0
+
+   ELSEIF msg == WM_GETDLGCODE
+
+      RETURN ButtonGetDlgCode( lParam )
+
+   ELSEIF msg == WM_SYSCOLORCHANGE
+      ::SetDefaultColors()
+   ELSEIF msg == WM_CHAR
+      IF wParam == VK_RETURN .or. wParam == VK_SPACE
+         IF ( ::m_bIsToggle )
+
+            ::m_bToggled := ! ::m_bToggled
+            InvalidateRect( ::handle, 0 )
+         ELSE
+
+            SendMessage( ::handle, BM_SETSTATE, 1, 0 )
+            ::m_bSent := .t.
+         ENDIF
+         SendMessage( ::oParent:handle, WM_COMMAND, makewparam( ::id, BN_CLICKED ), ::handle )
+      ELSEIF wParam == VK_ESCAPE
+         SendMessage( ::oParent:handle, WM_COMMAND, makewparam( IDCANCEL, BN_CLICKED ), ::handle )
+      ENDIF
+
+      RETURN 0
+   ENDIF
+
+   RETURN - 1
 
 METHOD CancelHover() CLASS HBUTTONEx
 
@@ -914,9 +986,10 @@ METHOD CancelHover() CLASS HBUTTONEx
       Invalidaterect( ::handle, .f. )
    ENDIF
 
-   RETURN nil
+   RETURN NIL
 
 METHOD SetDefaultColor( lPaint ) CLASS HBUTTONEx
+
    DEFAULT lPaint TO .f.
 
    ::m_crColors[ BTNST_COLOR_BK_IN ]    := GetSysColor( COLOR_BTNFACE )
@@ -928,20 +1001,22 @@ METHOD SetDefaultColor( lPaint ) CLASS HBUTTONEx
    IF lPaint
       Invalidaterect( ::handle, .f. )
    ENDIF
+
    RETURN Self
 
-
 METHOD SetColorEx( nIndex, nColor, lPaint ) CLASS HBUTTONEx
+
    DEFAULT lPaint TO .f.
    IF nIndex > BTNST_MAX_COLORS
+
       RETURN - 1
    ENDIF
    ::m_crColors[ nIndex ]    := nColor
    IF lPaint
       Invalidaterect( ::handle, .f. )
    ENDIF
-   RETURN 0
 
+   RETURN 0
 
 METHOD Paint( lpDis ) CLASS HBUTTONEx
 
@@ -973,7 +1048,6 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
    LOCAL centerRectHeight
    LOCAL uAlign, uStyleTmp
 
-
    IF ( ::m_bFirstTime )
 
       ::m_bFirstTime := .F.
@@ -995,9 +1069,8 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
 
    SetBkMode( dc, TRANSPARENT )
    IF ( ::m_bDrawTransparent )
-//        ::PaintBk(DC)
+      //        ::PaintBk(DC)
    ENDIF
-
 
    // Prepare draw... paint button background
 
@@ -1038,24 +1111,23 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
       ELSE
 
          uState := HWG_BITOR( ;
-                              HWG_BITOR( DFCS_BUTTONPUSH, ;
-                                         IF( ::bMouseOverButton, DFCS_HOT, 0 ) ), ;
-                              IF( bIsPressed, DFCS_PUSHED, 0 ) )
+            HWG_BITOR( DFCS_BUTTONPUSH, ;
+            IF( ::bMouseOverButton, DFCS_HOT, 0 ) ), ;
+            IF( bIsPressed, DFCS_PUSHED, 0 ) )
 
          DrawFrameControl( dc, itemRect, DFC_BUTTON, uState )
       ENDIF
 
    ENDIF
 
-//      if ::iStyle ==  ST_ALIGN_HORIZ
-//         uAlign := DT_RIGHT
-//      else
-//         uAlign := DT_LEFT
-//      endif
-//
-//      IF VALTYPE( ::hbitmap ) != "N"
-//         uAlign := DT_CENTER
-//      ENDIF
+   //      if ::iStyle ==  ST_ALIGN_HORIZ
+   //         uAlign := DT_RIGHT
+   //      else
+   //         uAlign := DT_LEFT
+   //      endif
+   //      IF VALTYPE( ::hbitmap ) != "N"
+   //         uAlign := DT_CENTER
+   //      ENDIF
    uAlign := DT_LEFT
    IF ValType( ::hbitmap ) == "N"
       uAlign := DT_CENTER
@@ -1064,62 +1136,56 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
       uAlign := DT_CENTER
    ENDIF
 
-//             DT_CENTER | DT_VCENTER | DT_SINGLELINE
-//   uAlign += DT_WORDBREAK + DT_CENTER + DT_CALCRECT +  DT_VCENTER + DT_SINGLELINE  // DT_SINGLELINE + DT_VCENTER + DT_WORDBREAK
+   //             DT_CENTER | DT_VCENTER | DT_SINGLELINE
+   //   uAlign += DT_WORDBREAK + DT_CENTER + DT_CALCRECT +  DT_VCENTER + DT_SINGLELINE  // DT_SINGLELINE + DT_VCENTER + DT_WORDBREAK
    uAlign += DT_VCENTER
    uStyleTmp := HWG_GETWINDOWSTYLE( ::handle )
 
    #ifdef __XHARBOUR
-      IF hb_inline( uStyleTmp ) { ULONG ulStyle = ( ULONG ) hb_parnl( 1 ) ; hb_retl( ulStyle & BS_MULTILINE ) ; }
-    #else
-       IF hb_BitAnd( uStyleTmp, BS_MULTILINE ) != 0
-       #endif
-       uAlign += DT_WORDBREAK
-    ELSE
-       uAlign += DT_SINGLELINE
-    ENDIF
+   IF hb_inline( uStyleTmp ) { ULONG ulStyle = ( ULONG ) hb_parnl( 1 ) ; hb_retl( ulStyle & BS_MULTILINE ) ; }
+      #else
+      IF hb_BitAnd( uStyleTmp, BS_MULTILINE ) != 0
+         #endif
+         uAlign += DT_WORDBREAK
+      ELSE
+         uAlign += DT_SINGLELINE
+      ENDIF
 
+      captionRect := { drawInfo[ 4 ], drawInfo[ 5 ], drawInfo[ 6 ], drawInfo[ 7 ] }
 
+      bHasTitle := ValType( ::caption ) == "C" .and. ! Empty( ::Caption )
 
-    captionRect := { drawInfo[ 4 ], drawInfo[ 5 ], drawInfo[ 6 ], drawInfo[ 7 ] }
+      DrawTheIcon( ::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle )
 
-    bHasTitle := ValType( ::caption ) == "C" .and. ! Empty( ::Caption )
+      IF ( bHasTitle )
 
-    DrawTheIcon( ::handle, dc, bHasTitle, @itemRect, @captionRect, bIsPressed, bIsDisabled, ::hIcon, ::hbitmap, ::iStyle )
+         // If button is pressed then "press" title also
+         IF bIsPressed .and. ! ::Themed
+            OffsetRect( @captionRect, 1, 1 )
+         ENDIF
 
-    IF ( bHasTitle )
+         // Center text
+         centerRect := captionRect
 
-       // If button is pressed then "press" title also
-       IF bIsPressed .and. ! ::Themed
-          OffsetRect( @captionRect, 1, 1 )
-       ENDIF
+         centerRect := copyrect( captionRect )
 
-       // Center text
-       centerRect := captionRect
+         IF ValType( ::hicon ) == "N" .or. ValType( ::hbitmap ) == "N"
+            DrawText( dc, ::caption, captionRect[ 1 ], captionRect[ 2 ], captionRect[ 3 ], captionRect[ 4 ], uAlign + DT_CALCRECT, @captionRect )
+         ELSE
+            uAlign += DT_CENTER // NANDO
+         ENDIF
 
-       centerRect := copyrect( captionRect )
+         captionRectWidth  := captionRect[ 3 ] - captionRect[ 1 ]
+         captionRectHeight := captionRect[ 4 ] - captionRect[ 2 ]
+         centerRectWidth   := centerRect[ 3 ] - centerRect[ 1 ]
+         centerRectHeight  := centerRect[ 4 ] - centerRect[ 2 ]
+         //ok      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
+         //      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
+         //      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
+         OffsetRect( @captionRect, 0, ( centerRectHeight - captionRectHeight ) / 2 )
 
-
-
-       IF ValType( ::hicon ) == "N" .or. ValType( ::hbitmap ) == "N"
-          DrawText( dc, ::caption, captionRect[ 1 ], captionRect[ 2 ], captionRect[ 3 ], captionRect[ 4 ], uAlign + DT_CALCRECT, @captionRect )
-       ELSE
-          uAlign += DT_CENTER // NANDO
-       ENDIF
-
-
-       captionRectWidth  := captionRect[ 3 ] - captionRect[ 1 ]
-       captionRectHeight := captionRect[ 4 ] - captionRect[ 2 ]
-       centerRectWidth   := centerRect[ 3 ] - centerRect[ 1 ]
-       centerRectHeight  := centerRect[ 4 ] - centerRect[ 2 ]
-//ok      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
-//      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
-//      OffsetRect( @captionRect, ( centerRectWidth - captionRectWidth ) / 2, ( centerRectHeight - captionRectHeight ) / 2 )
-       OffsetRect( @captionRect, 0, ( centerRectHeight - captionRectHeight ) / 2 )
-
-
-/*      SetBkMode( dc, TRANSPARENT )
-      IF ( bIsDisabled )
+         /*      SetBkMode( dc, TRANSPARENT )
+         IF ( bIsDisabled )
 
          OffsetRect( @captionRect, 1, 1 )
          SetTextColor( DC, GetSysColor( COLOR_3DHILIGHT ) )
@@ -1128,129 +1194,128 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
          SetTextColor( DC, GetSysColor( COLOR_3DSHADOW ) )
          DrawText( DC, ::caption, captionRect[ 1 ], captionRect[ 2 ], captionRect[ 3 ], captionRect[ 4 ], DT_WORDBREAK + DT_VCENTER + DT_CENTER, @captionRect )
 
-      ELSE
+         ELSE
 
          IF ( ::bMouseOverButton .or. bIsPressed )
 
-            SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_IN ] )
-            SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_IN ] )
+         SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_IN ] )
+         SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_IN ] )
 
          ELSE
 
-            IF ( bIsFocused )
+         IF ( bIsFocused )
 
-               SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_FOCUS ] )
-               SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_FOCUS ] )
+         SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_FOCUS ] )
+         SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_FOCUS ] )
 
+         ELSE
+
+         SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_OUT ] )
+         SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_OUT ] )
+         ENDIF
+         ENDIF
+         ENDIF
+         */
+
+         IF ::Themed
+
+            hb_DrawThemeText( ::hTheme, dc, BP_PUSHBUTTON, IF( bIsDisabled, PBS_DISABLED, PBS_NORMAL ), ;
+               ::caption, ;
+               uAlign, ;
+               0, captionRect )
+
+         ELSE
+
+            SetBkMode( dc, TRANSPARENT )
+
+            IF ( bIsDisabled )
+
+               OffsetRect( @captionRect, 1, 1 )
+               SetTextColor( dc, GetSysColor( COLOR_3DHILIGHT ) )
+               DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
+               OffsetRect( @captionRect, - 1, - 1 )
+               SetTextColor( dc, GetSysColor( COLOR_3DSHADOW ) )
+               DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
+               // if
             ELSE
 
-               SetTextColor( DC, ::m_crColors[ BTNST_COLOR_FG_OUT ] )
-               SetBkColor( DC, ::m_crColors[ BTNST_COLOR_BK_OUT ] )
+               //          SetTextColor( dc, GetSysColor( COLOR_BTNTEXT ) )
+               //            SetBkColor( dc, GetSysColor( COLOR_BTNFACE ) )
+               //            DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
+               IF ( ::bMouseOverButton .or. bIsPressed )
+
+                  SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_IN ] )
+                  SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_IN ] )
+
+               ELSE
+
+                  IF ( bIsFocused )
+
+                     SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_FOCUS ] )
+                     SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_FOCUS ] )
+
+                  ELSE
+
+                     SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_OUT ] )
+                     SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_OUT ] )
+                  ENDIF
+               ENDIF
+               DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
+
             ENDIF
          ENDIF
       ENDIF
-  */
 
-       IF ::Themed
+      // Draw the focus rect
+      IF bIsFocused .and. bDrawFocusRect
 
-          hb_DrawThemeText( ::hTheme, dc, BP_PUSHBUTTON, IF( bIsDisabled, PBS_DISABLED, PBS_NORMAL ), ;
-                            ::caption, ;
-                            uAlign, ;
-                            0, captionRect )
+         focusRect := COPYRECT( itemRect )
+         InflateRect( @focusRect, - 3, - 3 )
+         DrawFocusRect( dc, focusRect )
+      ENDIF
 
-       ELSE
+      RETURN NIL
 
-          SetBkMode( dc, TRANSPARENT )
+METHOD PAINTBK( hdc ) CLASS HBUTTONEx
 
-          IF ( bIsDisabled )
+   LOCAL clDC := HclientDc():New( ::oparent:handle )
+   LOCAL rect, rect1
 
-             OffsetRect( @captionRect, 1, 1 )
-             SetTextColor( dc, GetSysColor( COLOR_3DHILIGHT ) )
-             DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
-             OffsetRect( @captionRect, - 1, - 1 )
-             SetTextColor( dc, GetSysColor( COLOR_3DSHADOW ) )
-             DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
-             // if
-          ELSE
+   rect := GetClientRect( ::handle )
 
-             //          SetTextColor( dc, GetSysColor( COLOR_BTNTEXT ) )
-//            SetBkColor( dc, GetSysColor( COLOR_BTNFACE ) )
-//            DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
-             IF ( ::bMouseOverButton .or. bIsPressed )
+   rect1 := GetWindowRect( ::handle )
+   ScreenToClient( ::oparent:handle, rect1 )
 
-                SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_IN ] )
-                SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_IN ] )
+   IF ValType( ::m_dcBk ) == "U"
 
-             ELSE
+      ::m_dcBk := hdc():New()
+      ::m_dcBk:CreateCompatibleDC( clDC:m_hDC )
+      ::m_bmpBk := CreateCompatibleBitmap( clDC:m_hDC, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 2 ] )
+      ::m_pbmpOldBk = ::m_dcBk:SelectObject( ::m_bmpBk )
+      ::m_dcBk:BitBlt( 0, 0, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 4 ], clDC:m_hDc, rect1[ 1 ], rect1[ 2 ], SRCCOPY )
+   ENDIF
 
-                IF ( bIsFocused )
+   BitBlt( hdc, 0, 0, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 4 ], ::m_dcBk:m_hDC, 0, 0, SRCCOPY )
 
-                   SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_FOCUS ] )
-                   SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_FOCUS ] )
+   RETURN Self
 
-                ELSE
+CLASS HGroup INHERIT HControl
 
-                   SetTextColor( dc, ::m_crColors[ BTNST_COLOR_FG_OUT ] )
-                   SetBkColor( dc, ::m_crColors[ BTNST_COLOR_BK_OUT ] )
-                ENDIF
-             ENDIF
-             DrawText( dc, ::caption, @captionRect[ 1 ], @captionRect[ 2 ], @captionRect[ 3 ], @captionRect[ 4 ], uAlign )
+CLASS VAR winclass   INIT "BUTTON"
 
-          ENDIF
-       ENDIF
-    ENDIF
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor )
 
-    // Draw the focus rect
-    IF bIsFocused .and. bDrawFocusRect
+METHOD Activate()
 
-       focusRect := COPYRECT( itemRect )
-       InflateRect( @focusRect, - 3, - 3 )
-       DrawFocusRect( dc, focusRect )
-    ENDIF
-
-    RETURN nil
-
- METHOD PAINTBK( hdc ) CLASS HBUTTONEx
-
-    LOCAL clDC := HclientDc():New( ::oparent:handle )
-    LOCAL rect, rect1
-
-    rect := GetClientRect( ::handle )
-
-    rect1 := GetWindowRect( ::handle )
-    ScreenToClient( ::oparent:handle, rect1 )
-
-    IF ValType( ::m_dcBk ) == "U"
-
-       ::m_dcBk := hdc():New()
-       ::m_dcBk:CreateCompatibleDC( clDC:m_hDC )
-       ::m_bmpBk := CreateCompatibleBitmap( clDC:m_hDC, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 2 ] )
-       ::m_pbmpOldBk = ::m_dcBk:SelectObject( ::m_bmpBk )
-       ::m_dcBk:BitBlt( 0, 0, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 4 ], clDC:m_hDc, rect1[ 1 ], rect1[ 2 ], SRCCOPY )
-    ENDIF
-
-    BitBlt( hdc, 0, 0, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 4 ], ::m_dcBk:m_hDC, 0, 0, SRCCOPY )
-    RETURN Self
-
-
-
-
- CLASS HGroup INHERIT HControl
-
- CLASS VAR winclass   INIT "BUTTON"
-
-    METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-                cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor )
-    METHOD Activate()
-
- ENDCLASS
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
-            oFont, bInit, bSize, bPaint, tcolor, bColor ) CLASS HGroup
+      oFont, bInit, bSize, bPaint, tcolor, bColor ) CLASS HGroup
 
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), BS_GROUPBOX )
    Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-              oFont, bInit, bSize, bPaint,, tcolor, bColor )
+      oFont, bInit, bSize, bPaint,, tcolor, bColor )
 
    ::title   := cCaption
    ::Activate()
@@ -1258,15 +1323,17 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
    RETURN Self
 
 METHOD Activate CLASS HGroup
+
    IF ! Empty( ::oParent:handle )
       ::handle := CreateButton( ::oParent:handle, ::id, ::style, ;
-                                ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-                                ::title )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+         ::title )
       ::Init()
    ENDIF
+
    RETURN NIL
 
-// HLine
+   // HLine
 
 CLASS HLine INHERIT HControl
 
@@ -1275,17 +1342,18 @@ CLASS VAR winclass   INIT "STATIC"
    DATA lVert
    DATA oPenLight, oPenGray
 
-   METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize )
-   METHOD Activate()
-   METHOD Paint()
+METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize )
+
+METHOD Activate()
+
+METHOD Paint()
 
 ENDCLASS
-
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize ) CLASS HLine
 
    Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop,,,,, ;
-              bSize, { | o, lp | o:Paint( lp ) } )
+      bSize, { | o, lp | o:Paint( lp ) } )
 
    ::title := ""
    ::lVert := IIf( lVert == NIL, .F., lVert )
@@ -1305,14 +1373,17 @@ METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize ) CLASS HLine
    RETURN Self
 
 METHOD Activate CLASS HLine
+
    IF ! Empty( ::oParent:handle )
       ::handle := CreateStatic( ::oParent:handle, ::id, ::style, ;
-                                ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
+
    RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HLine
+
    LOCAL drawInfo := GetDrawItemInfo( lpdis )
    LOCAL hDC := drawInfo[ 3 ]
    LOCAL x1  := drawInfo[ 4 ], y1 := drawInfo[ 5 ]
@@ -1336,10 +1407,9 @@ METHOD Paint( lpdis ) CLASS HLine
 
    RETURN NIL
 
-
-
-   init PROCEDURE starttheme()
+INIT PROCEDURE starttheme()
    INITTHEMELIB()
 
    EXIT PROCEDURE endtheme()
-   ENDTHEMELIB()
+ENDTHEMELIB()
+

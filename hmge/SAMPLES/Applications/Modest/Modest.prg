@@ -10,7 +10,7 @@
 #define MSG_ERROR_LOAD               'Error load structure for '
 #define MSG_NEW_STRUCTURE            'New structure (empty) started'
 #define MSG_ERROR_FIELDNAME          'Field names begin with a letter and may contain A-Z, 0-9, and "_"'
-#define MSG_CHAR_INCORRECT           'Incorrect symbol ' 
+#define MSG_CHAR_INCORRECT           'Incorrect symbol '
 #define MSG_LEN_EMPTY                'Zero length of the field'
 #define MSG_DECIMALS_LONG            'Invalid field width or number of decimals'
 #define MSG_FIELD_ALREADY            'The field name is duplicated with'
@@ -64,562 +64,559 @@
 
 #define NAVY_COLOR                    { 0, 0, 106 }
 
-
 // Complementary RDD
- 
-Request DBFCDX, DBFFPT
+
+REQUEST DBFCDX, DBFFPT
 #include "Requests.ch"                // Function list for transformation rules
 
+STATIC nShift     := 0         // Row's insert mode. Utilize in
+// procedure FiniEditField() (for inserting a new
+// field) and procedure of inserting from collector
 
-Static nShift     := 0         // Row's insert mode. Utilize in
-                               // procedure FiniEditField() (for inserting a new
-                               // field) and procedure of inserting from collector
-
-Memvar aCollector
-Memvar aStat
-Memvar oEditStru
+MEMVAR aCollector
+MEMVAR aStat
+MEMVAR oEditStru
 
 /******
-*
 *       Editing and documenting of database structures
-*
 */
 
-Procedure Main( cFile )
-Local nModestHeight, ;
+PROCEDURE Main( cFile )
+
+   LOCAL nModestHeight, ;
       aStru
 
-// Array of working parameters
+   // Array of working parameters
 
-Private aStat := { 'CurrMode'   => MODE_DEFAULT , ;    // Review mode
-                   'FileName'   => ''           , ;    // Working file name
-                   'RDD'        => DbSetDriver(), ;    // Current database RDD
-                   'DefName'    => 'NEW'        , ;    // Field name prefix at adding
-                   'DefType'    => TYPE_IS_CHAR , ;    // Field type (numbet in array) CORRECT_TYPES
-                   'DefLen'     => 10           , ;    // Field length
-                   'DefDec'     => 0            , ;    // Field decimal
-                   'Expression' => THIS_VALUE   , ;    // Transformation rule
-                   'ChStruct'   => .F.          , ;    // Structure is changed
-                   'ChDescript' => .F.          , ;    // Description is changed
-                   'Counter'    => 1            , ;    // Internal counter (for new field adding)
-                   'Cargo'      => ''             ;    // Temporary saving of mixed datas
-                 }
-Private oEditStru                                      // TBrowse-object
-Private aCollector := {}                               // Collector of fields
+   PRIVATE aStat := { 'CurrMode'   => MODE_DEFAULT , ;    // Review mode
+   'FileName'   => ''           , ;    // Working file name
+   'RDD'        => DbSetDriver(), ;    // Current database RDD
+   'DefName'    => 'NEW'        , ;    // Field name prefix at adding
+   'DefType'    => TYPE_IS_CHAR , ;    // Field type (numbet in array) CORRECT_TYPES
+   'DefLen'     => 10           , ;    // Field length
+   'DefDec'     => 0            , ;    // Field decimal
+   'Expression' => THIS_VALUE   , ;    // Transformation rule
+   'ChStruct'   => .F.          , ;    // Structure is changed
+   'ChDescript' => .F.          , ;    // Description is changed
+   'Counter'    => 1            , ;    // Internal counter (for new field adding)
+   'Cargo'      => ''             ;    // Temporary saving of mixed datas
+   }
+   PRIVATE oEditStru                                      // TBrowse-object
+   PRIVATE aCollector := {}                               // Collector of fields
 
-aStru := InitDefault()       // Set empty structure because of TsBrowse reguires the existing
-                             // of one value evethough
+   aStru := InitDefault()       // Set empty structure because of TsBrowse reguires the existing
+   // of one value evethough
 
-Set Font to 'Tahoma', 9
-Set MenuStyle Extended
-Set Navigation Extended
+   SET Font to 'Tahoma', 9
+   SET MenuStyle Extended
+   SET Navigation Extended
 
-SetMenuTheme()
+   SetMenuTheme()
 
-GetOptions()                // Loading of params from INI
+   GetOptions()                // Loading of params from INI
 
-Define window wModest       ;
-       At 0, 0              ;
-       Width 720            ;
-       Height 580           ;
-       Title APPNAME        ;
-       Icon '1MODEST'       ;
-       Main                 ;
-       On Init ReSize()     ;
-       On Size ReSize()     ;
-       On Maximize ReSize() ;
-       On Minimize ReSize() ;
-       On InteractiveClose Done()
+   DEFINE WINDOW wModest       ;
+         At 0, 0              ;
+         Width 720            ;
+         Height 580           ;
+         Title APPNAME        ;
+         Icon '1MODEST'       ;
+         Main                 ;
+         On Init ReSize()     ;
+         On Size ReSize()     ;
+         On Maximize ReSize() ;
+         On Minimize ReSize() ;
+         On InteractiveClose Done()
 
-    // Creation of the program main menu
+      // Creation of the program main menu
 
-    Define main menu
-    
-      Define Popup '&File'
-        MenuItem '&New' Action NewFile()               ;
-                        Image 'NEW_FILE'               ;
-                        Name pdNew                     ;
-                        Message 'Create new structure'
-        MenuItem '&Open' Action LoadFile() ;
-                         Image 'OPEN_FILE' ;
-                         Name pdOpen       ;
-                         Message 'Open file and load structure'
-        MenuItem '&Save' Action SaveData() ;
-                         Image 'SAVE'      ;
-                         Name pdSave       ;
-                         Message 'Save structure and description'
-        Separator
-        MenuItem '&Print' Action PrintStructure() ;
-                          Image 'PRINT'           ;
-                          Name pdPrint            ;
-                          Message 'Print structure and comments'
-        Separator
-        MenuItem 'E&xit Alt+X' Action { || Done(), ThisWindow.Release } ;
-                               Image 'HBPRINT_CLOSE'                    ;
-                               Message 'Exit from application'
-      End Popup
+      DEFINE MAIN MENU
 
-      Define Popup '&Edit'
-         MenuItem '&Copy'  Action AddInCollector( MODE_COPY ) ;
-                           Image 'COPY'                       ;
-                           Name pdCopy                        ;
-                           Message 'Copy to Collector'
-         MenuItem 'C&ut'   Action AddInCollector( MODE_CUT ) ;
-                           Image 'CUT'                       ;
-                           Name pdCut                        ;
-                           Message 'Cut to Collector'
-         MenuItem 'Paste (&After)' Action { || nShift := 1, PasteFromCollector() } ;
-                                   Image 'PASTE'                                   ;
-                                   Name pdPasteAfter                               ;
-                                   Message 'Paste from Collector (after current)'
-         MenuItem 'Paste (&Before)' Action { || nShift := 0, PasteFromCollector() } ;
-                                    Name pdPasteBefore                              ;
-                                    Message 'Paste from Collector (before current)'
-         Separator
-         MenuItem '&Description' Action EditGeneralDesc() ;
-                                 Image 'EDIT_TEXT'        ;
-                                 Name pdDescription       ;
-                                 Message 'Modify database description'
-      End Popup
-      
-      Define Popup 'F&ield'
-         MenuItem '&Add' Action EditField( MODE_NEWFIELD ) ;
-                         Image 'ADD_FIELD'                 ;
-                         Name pdAdd                        ;
-                         Message 'Add new field'
-         MenuItem '&Edit' Action EditField( MODE_EDITFIELD ) ;
-                          Image 'EDIT_FIELD'                 ;
-                          Name pdEdit                        ;
-                          Message 'Edit current field'
-         Separator
-         MenuItem '&Insert after' Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
-                                  Image 'INS_FIELD'                                      ;
-                                  Name pdInsertAfter                                    ;
-                                  Message 'Insert field after current'
-         MenuItem 'Insert &before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
-                                   Name pdInsertBefore                                   ;
-                                   Message 'Insert field before current'
-         Separator
-         MenuItem '&Delete' Action DelField() ;
-                            Image 'DEL_FIELD' ;
-                            Name pdDelete     ;
-                            Message 'Delete/Undelete field'
-      End Popup
-      
-      Define Popup '&Service'
-        MenuItem '&Export to text' Action ExportToTXT() ;
-                                   Name pdExport        ;
-                                   Message 'Export description to text file'
-        Separator
-        MenuItem 'Clear &messages' Action ClearMsg() ;
-                                   Message 'Clear messages area'
-        MenuItem 'Clear &Collector' Action ClearCollector() ;
-                                    Message 'Clear Collector'
-        Separator
-        MenuItem '&Options' Action Options() ;
-                            Image 'OPTIONS'  ;
-                            Message 'Set parameters application'
-      End Popup
-      
-      Define Popup '?' Name ppHelp
-         MenuItem '&About me' Action AboutMe() Image 'ABOUT'
-      End Popup
-            
-    End Menu
+         DEFINE POPUP '&File'
+            MenuItem '&New' Action NewFile()               ;
+               Image 'NEW_FILE'               ;
+               Name pdNew                     ;
+               Message 'Create new structure'
+            MenuItem '&Open' Action LoadFile() ;
+               Image 'OPEN_FILE' ;
+               Name pdOpen       ;
+               Message 'Open file and load structure'
+            MenuItem '&Save' Action SaveData() ;
+               Image 'SAVE'      ;
+               Name pdSave       ;
+               Message 'Save structure and description'
+            Separator
+            MenuItem '&Print' Action PrintStructure() ;
+               Image 'PRINT'           ;
+               Name pdPrint            ;
+               Message 'Print structure and comments'
+            Separator
+            MenuItem 'E&xit Alt+X' Action { || Done(), ThisWindow.Release } ;
+               Image 'HBPRINT_CLOSE'                    ;
+               Message 'Exit from application'
+         End Popup
 
-   // Toolbar
+         DEFINE POPUP '&Edit'
+            MenuItem '&Copy'  Action AddInCollector( MODE_COPY ) ;
+               Image 'COPY'                       ;
+               Name pdCopy                        ;
+               Message 'Copy to Collector'
+            MenuItem 'C&ut'   Action AddInCollector( MODE_CUT ) ;
+               Image 'CUT'                       ;
+               Name pdCut                        ;
+               Message 'Cut to Collector'
+            MenuItem 'Paste (&After)' Action { || nShift := 1, PasteFromCollector() } ;
+               Image 'PASTE'                                   ;
+               Name pdPasteAfter                               ;
+               Message 'Paste from Collector (after current)'
+            MenuItem 'Paste (&Before)' Action { || nShift := 0, PasteFromCollector() } ;
+               Name pdPasteBefore                              ;
+               Message 'Paste from Collector (before current)'
+            Separator
+            MenuItem '&Description' Action EditGeneralDesc() ;
+               Image 'EDIT_TEXT'        ;
+               Name pdDescription       ;
+               Message 'Modify database description'
+         End Popup
 
-   Define Toolbar tbrAction ButtonSize 24, 24 Flat
-     Button btnNewFile         ;
+         DEFINE POPUP 'F&ield'
+            MenuItem '&Add' Action EditField( MODE_NEWFIELD ) ;
+               Image 'ADD_FIELD'                 ;
+               Name pdAdd                        ;
+               Message 'Add new field'
+            MenuItem '&Edit' Action EditField( MODE_EDITFIELD ) ;
+               Image 'EDIT_FIELD'                 ;
+               Name pdEdit                        ;
+               Message 'Edit current field'
+            Separator
+            MenuItem '&Insert after' Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
+               Image 'INS_FIELD'                                      ;
+               Name pdInsertAfter                                    ;
+               Message 'Insert field after current'
+            MenuItem 'Insert &before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
+               Name pdInsertBefore                                   ;
+               Message 'Insert field before current'
+            Separator
+            MenuItem '&Delete' Action DelField() ;
+               Image 'DEL_FIELD' ;
+               Name pdDelete     ;
+               Message 'Delete/Undelete field'
+         End Popup
+
+         DEFINE POPUP '&Service'
+            MenuItem '&Export to text' Action ExportToTXT() ;
+               Name pdExport        ;
+               Message 'Export description to text file'
+            Separator
+            MenuItem 'Clear &messages' Action ClearMsg() ;
+               Message 'Clear messages area'
+            MenuItem 'Clear &Collector' Action ClearCollector() ;
+               Message 'Clear Collector'
+            Separator
+            MenuItem '&Options' Action Options() ;
+               Image 'OPTIONS'  ;
+               Message 'Set parameters application'
+         End Popup
+
+         DEFINE POPUP '?' Name ppHelp
+            MenuItem '&About me' Action AboutMe() Image 'ABOUT'
+         End Popup
+
+      End Menu
+
+      // Toolbar
+
+      DEFINE TOOLBAR tbrAction ButtonSize 24, 24 Flat
+         Button btnNewFile         ;
             Picture 'NEW_FILE' ;
             Action NewFile()   ;
             Tooltip 'New file'
-     Button btnOpenFile         ;
+         Button btnOpenFile         ;
             Picture 'OPEN_FILE' ;
             Action LoadFile()   ;
             Tooltip 'Load structure from file'
-     Button btnSave           ;
+         Button btnSave           ;
             Picture 'SAVE'    ;
             Action SaveData() ;
             Tooltip 'Save files'
-     Button btnPrint Picture 'PRINT'               ;
+         Button btnPrint Picture 'PRINT'               ;
             Action PrintStructure()                ;
             Tooltip 'Print structure and comments' ;
             Separator
-     Button btnEditGeneral                        ;
+         Button btnEditGeneral                        ;
             Picture 'EDIT_TEXT'                   ;
             Action EditGeneralDesc()              ;
             Tooltip 'Modify database description' ;
             Separator
-     Button btnAddField                       ;
+         Button btnAddField                       ;
             Picture 'ADD_FIELD'               ;
             Action EditField( MODE_NEWFIELD ) ;
             Tooltip 'Add field'
-     Button btnInsField                                           ;
+         Button btnInsField                                           ;
             Picture 'INS_FIELD'                                   ;
             Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
             DropDown                                              ;
             Tooltip 'Insert field after current (default)'
-     Button btnEditField                       ;
+         Button btnEditField                       ;
             Picture 'EDIT_FIELD'               ;
             Action EditField( MODE_EDITFIELD ) ;
             Tooltip 'Modify field'
-     Button btnDeleteField         ;
+         Button btnDeleteField         ;
             Picture 'DEL_FIELD'    ;
             Action DelField()      ;
             Tooltip 'Delete field' ;
             Separator
-     Button btnCopy                            ;
+         Button btnCopy                            ;
             Picture 'COPY'                     ;
             Action AddInCollector( MODE_COPY ) ;
             Tooltip 'Copy to Collector'
-     Button btnCut                            ;
+         Button btnCut                            ;
             Picture 'CUT'                     ;
             Action AddInCollector( MODE_CUT ) ;
             Tooltip 'Cut to Collector'
-     Button btnPaste                                               ;
+         Button btnPaste                                               ;
             Picture 'PASTE'                                        ;
             Action { || nShift := 1, PasteFromCollector() }        ;
             DropDown                                               ;
             Tooltip 'Paste from Collector after current (default)' ;
             Separator
-     Button btnOptions                           ;
+         Button btnOptions                           ;
             Picture 'OPTIONS'                    ;
             Action Options()                     ;
             Tooltip 'Set parameters application' ;
             Separator
-     Button btnAbout         ;
+         Button btnAbout         ;
             Picture 'ABOUT'  ;
             Action AboutMe() ;
             Tooltip 'About me'
-   End Toolbar
+      End Toolbar
 
-   // Dropdown menu for inserting a new field
+      // Dropdown menu for inserting a new field
 
-   Define dropdown menu button btnInsField
-      MenuItem 'Insert after'  Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
-                               Message 'Insert field after current'
-      MenuItem 'Insert before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
-                               Message 'Insert field before current'
-   End Menu
-   
-   // Dropdown menu for inserting a field from collector
+      Define dropdown menu button btnInsField
+         MenuItem 'Insert after'  Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
+            Message 'Insert field after current'
+         MenuItem 'Insert before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
+            Message 'Insert field before current'
+      End Menu
 
-   Define dropdown menu button btnPaste
-      MenuItem 'Insert after'  Action { || nShift := 1, PasteFromCollector() } ;
-                               Message 'Paste from Collector (after current)'
-      MenuItem 'Insert before' Action { || nShift := 0, PasteFromCollector() } ;
-                               Message 'Paste from Collector (before current)'
-   End Menu
+      // Dropdown menu for inserting a field from collector
 
-   // Status bar
-   // Declaration is placed before others definitions of controls,
-   // because it is necessary for TsBrowse for show of position. 
+      Define dropdown menu button btnPaste
+         MenuItem 'Insert after'  Action { || nShift := 1, PasteFromCollector() } ;
+            Message 'Paste from Collector (after current)'
+         MenuItem 'Insert before' Action { || nShift := 0, PasteFromCollector() } ;
+            Message 'Paste from Collector (before current)'
+      End Menu
 
-   Define statusbar Font 'Tahoma' Size 9
-     StatusItem '' Default
-     StatusItem '' Width 100                           // Show of position
-     StatusItem '' Width 30                            // Changing indicator
-     StatusItem aStat[ 'RDD' ] Width 100               // Current database RDD
-   End Statusbar
+      // Status bar
+      // Declaration is placed before others definitions of controls,
+      // because it is necessary for TsBrowse for show of position.
 
-   // Warning!
-   // The all following coords of controls are conditional and changed by
-   // procedure ReSize()
+      DEFINE STATUSBAR Font 'Tahoma' Size 9
+         StatusItem '' Default
+         StatusItem '' Width 100                           // Show of position
+         StatusItem '' Width 30                            // Changing indicator
+         StatusItem aStat[ 'RDD' ] Width 100               // Current database RDD
+      END STATUSBAR
 
-   // Table of existing fields
+      // Warning!
+      // The all following coords of controls are conditional and changed by
+      // procedure ReSize()
 
-   Define TBrowse oEditStru                  ;
-     At 40 + If(IsXPThemeActive(), 5, 0), 5  ;
-     Width 200                               ;
-     Height 200                              ;
-     On Change ShowValues()                  ;
-     On DblClick EditField( MODE_EDITFIELD ) ;
-     Celled
+      // Table of existing fields
 
-     oEditStru : SetArray( aStru )
+      Define TBrowse oEditStru                  ;
+         At 40 + If(IsXPThemeActive(), 5, 0), 5  ;
+         Width 200                               ;
+         Height 200                              ;
+         On Change ShowValues()                  ;
+         On DblClick EditField( MODE_EDITFIELD ) ;
+         Celled
 
-     // avoids changing of order by double clicking on column's headers
+      oEditStru : SetArray( aStru )
 
-     oEditStru : lNoChangeOrd := .T.
+      // avoids changing of order by double clicking on column's headers
 
-     // 1st column (numbering) is freezed and locked
+      oEditStru : lNoChangeOrd := .T.
 
-     oEditStru : nFreeze := 1
-     oEditStru : lLockFreeze := .T.
-     
-     // Column of field's numbering
-     
-     Add column to TBrowse oEditStru                                      ;
+      // 1st column (numbering) is freezed and locked
+
+      oEditStru : nFreeze := 1
+      oEditStru : lLockFreeze := .T.
+
+      // Column of field's numbering
+
+      Add column to TBrowse oEditStru                                      ;
          ShowBlock { | nNum | Iif( nNum == Nil, oEditStru : nAt, nNum ) } ;
          Title '#'                                                        ;
          Size 40                                                          ;
          Colors CLR_BLACK, CLR_HGRAY
 
-     // Columns for datas
-     
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_NAME                          ;
+      // Columns for datas
+
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_NAME                          ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Name'                                         ;
          Size 100
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_TYPE                          ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_TYPE                          ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Type'                                         ;
          Size 50
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_LEN                           ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_LEN                           ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Len'                                          ;
          Size 80
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_DEC                           ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_DEC                           ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Dec'                                          ;
          Size 50
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_OLDNAME                       ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_OLDNAME                       ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Old name'                                     ;
          Size 100
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_OLDTYPE                       ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_OLDTYPE                       ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Old type'                                     ;
          Size 50
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_OLDLEN                        ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_OLDLEN                        ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Old len'                                      ;
          Size 80
-     Add column to TBrowse oEditStru                          ;
-         Data array element DBS_OLDDEC                        ;
+      Add column to TBrowse oEditStru                          ;
+         DATA array element DBS_OLDDEC                        ;
          Colors CLR_BLACK, { | Pos, Col | BackColors( Pos, Col ) } ;
          Title 'Old dec'                                      ;
          Size 50
 
-   End TBrowse   
-   
-   Define tab tbDescript ;
-      At 40 + If(IsXPThemeActive(), 5, 0), 205 ;
-      Width 340          ;
-      Height 200
-      
-      Define page 'Field'
+   End TBrowse
 
-        // Field name
+   DEFINE TAB tbDescript ;
+         At 40 + If(IsXPThemeActive(), 5, 0), 205 ;
+         Width 340          ;
+         Height 200
 
-        @ 40, 15 Label lblName  ;
-                 Value 'Name'   ;
-                 Width 50       ;
-                 Height 18      ;
-                 Bold           ;
-                 FontColor NAVY_COLOR
-        @ 40, 40 TextBox txbName ;
-                 Value ''        ;
-                 Width 90        ;
-                 MaxLength 10    ;
-                 UpperCase
+      DEFINE PAGE 'Field'
 
-        // Field type
+         // Field name
 
-        @ 40, 80 Label lblType  ;
-                 Value 'Type'   ;
-                 Height 18      ;
-                 Width 60       ;
-                 Bold           ;
-                 FontColor NAVY_COLOR
-        @ 40, 100 ComboBox cmbType    ;
-                  Width 40            ;
-                  Height 110          ;
-                  Items CORRECT_TYPES ;
-                  Value 1             ;
-                  ListWidth 40        ;
-                  On change ChangeMaxLimit()
+         @ 40, 15 Label lblName  ;
+            Value 'Name'   ;
+            Width 50       ;
+            Height 18      ;
+            Bold           ;
+            FontColor NAVY_COLOR
+         @ 40, 40 TextBox txbName ;
+            Value ''        ;
+            Width 90        ;
+            MaxLength 10    ;
+            UpperCase
 
-        // Field length
+         // Field type
 
-        @ 60, 15 Label lblLen   ;
-                 Value 'Length' ;
-                 Width 35       ;
-                 Height 18      ;
-                 Bold           ;
-                 FontColor NAVY_COLOR
-        @ 60, 40 Spinner spnLen       ;
-                 Range 1, LEN_IS_CHAR ;
-                 Value 1              ;
-                 Width 50             ;
-                 On Lostfocus ChangeMaxLimit()
+         @ 40, 80 Label lblType  ;
+            Value 'Type'   ;
+            Height 18      ;
+            Width 60       ;
+            Bold           ;
+            FontColor NAVY_COLOR
+         @ 40, 100 ComboBox cmbType    ;
+            Width 40            ;
+            Height 110          ;
+            Items CORRECT_TYPES ;
+            Value 1             ;
+            ListWidth 40        ;
+            On change ChangeMaxLimit()
 
-        // Field decimal
+         // Field length
 
-        @ 60, 80 Label lblDec     ;
-                 Value 'Decimals' ;
-                 Height 18        ;
-                 Bold             ;
-                 FontColor NAVY_COLOR
-        @ 60, 100 Spinner spnDec      ;
-                  Range 0, LEN_IS_NUM ;
-                  Value 0             ;
-                  Width 50            ;
-                  On LostFocus ChangeMaxLimit()
+         @ 60, 15 Label lblLen   ;
+            Value 'Length' ;
+            Width 35       ;
+            Height 18      ;
+            Bold           ;
+            FontColor NAVY_COLOR
+         @ 60, 40 Spinner spnLen       ;
+            Range 1, LEN_IS_CHAR ;
+            Value 1              ;
+            Width 50             ;
+            On Lostfocus ChangeMaxLimit()
 
-        // Comment of field
+         // Field decimal
 
-        @ 80, 5 Label lblComment ;
-                Value 'Comment'   ;
-                Height 18         ;
-                Width 60          ;
-                Bold              ;
-                FontColor NAVY_COLOR
-        @ 120, 15 EditBox edtComment ;
-                  Value ''           ;
-                  NoHScroll          ;
-                  ReadOnly
+         @ 60, 80 Label lblDec     ;
+            Value 'Decimals' ;
+            Height 18        ;
+            Bold             ;
+            FontColor NAVY_COLOR
+         @ 60, 100 Spinner spnDec      ;
+            Range 0, LEN_IS_NUM ;
+            Value 0             ;
+            Width 50            ;
+            On LostFocus ChangeMaxLimit()
 
-        // Transformation rule of field contexts at the changing of value type
+         // Comment of field
 
-        @ 210, 5 Label lblRule               ;
-                 Value 'Transformation rule' ;
-                 Height 18                   ;
-                 Width 130                   ;
-                 Bold                        ;
-                 FontColor NAVY_COLOR
-        @ 230, 40 TextBox txbRule ;
-                  Value ''
+         @ 80, 5 Label lblComment ;
+            Value 'Comment'   ;
+            Height 18         ;
+            Width 60          ;
+            Bold              ;
+            FontColor NAVY_COLOR
+         @ 120, 15 EditBox edtComment ;
+            Value ''           ;
+            NoHScroll          ;
+            READOnly
 
-        // Buttons Apply/Discard changes in field description
+         // Transformation rule of field contexts at the changing of value type
 
-        @ 240, 110 ButtonEx btnFldOk              ;
-                   Width 30 Height 30             ;
-                   Icon 'OK'                      ;
-                   Action FiniEditField( SET_OK ) ;
-                   Tooltip 'Apply changes [F2]'   ;
-                   Flat                           ;
-                   Backcolor WHITE
-        @ 240, 145 ButtonEx btnFldCancel              ;
-                   Width 30 Height 30                 ;
-                   Icon 'CANCEL'                      ;
-                   Action FiniEditField( SET_CANCEL ) ;
-                   Tooltip 'Discard changes [Esc]'    ;
-                   Flat                               ;
-                   Backcolor WHITE
+         @ 210, 5 Label lblRule               ;
+            Value 'Transformation rule' ;
+            Height 18                   ;
+            Width 130                   ;
+            Bold                        ;
+            FontColor NAVY_COLOR
+         @ 230, 40 TextBox txbRule ;
+            Value ''
 
-      End page
-      
-      Define page 'Database'
+         // Buttons Apply/Discard changes in field description
 
-        // General description of database
+         @ 240, 110 ButtonEx btnFldOk              ;
+            Width 30 Height 30             ;
+            Icon 'OK'                      ;
+            Action FiniEditField( SET_OK ) ;
+            Tooltip 'Apply changes [F2]'   ;
+            Flat                           ;
+            Backcolor WHITE
+         @ 240, 145 ButtonEx btnFldCancel              ;
+            Width 30 Height 30                 ;
+            Icon 'CANCEL'                      ;
+            Action FiniEditField( SET_CANCEL ) ;
+            Tooltip 'Discard changes [Esc]'    ;
+            Flat                               ;
+            Backcolor WHITE
 
-        @ 30, 5 EditBox edtGeneral ;
-                Value ''           ;
-                NoHScroll          ;
-                ReadOnly
+      END PAGE
 
-        // Buttons Apply/Discard changes
+      DEFINE PAGE 'Database'
 
-        @ 240, 110 ButtonEx btnGeneralOk           ;
-                   Width 30 Height 30              ;
-                   Icon 'OK'                       ;
-                   Action FiniEdtGeneral( SET_OK ) ;
-                   Tooltip 'Apply changes [F2]'    ;
-                   Flat                            ;
-                   Backcolor WHITE
-        @ 240, 145 ButtonEx btnGeneralCancel           ;
-                   Width 30 Height 30                  ;
-                   Icon 'CANCEL'                       ;
-                   Action FiniEdtGeneral( SET_CANCEL ) ;
-                   Tooltip 'Discard changes [Esc]'     ;
-                   Flat                                ;
-                   Backcolor WHITE
-      End page
-      
-      Define page 'Collector'
+         // General description of database
 
-        // Collector of fields
+         @ 30, 5 EditBox edtGeneral ;
+            Value ''           ;
+            NoHScroll          ;
+            READOnly
 
-        @ 30, 5 Grid grdCollector                                              ;
-                Headers { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
-                Widths  { 80    , 45    , 40   , 40   , 102    }               ;
-                DynamicBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
-                                   { | xVal, nItem | DynamicColors( nItem ) }, ;
-                                   { | xVal, nItem | DynamicColors( nItem ) }, ;
-                                   { | xVal, nItem | DynamicColors( nItem ) }, ;
-                                   { | xVal, nItem | DynamicColors( nItem ) }  ;
-                                 }
-      End page
-      
-   End tab
+         // Buttons Apply/Discard changes
+
+         @ 240, 110 ButtonEx btnGeneralOk           ;
+            Width 30 Height 30              ;
+            Icon 'OK'                       ;
+            Action FiniEdtGeneral( SET_OK ) ;
+            Tooltip 'Apply changes [F2]'    ;
+            Flat                            ;
+            Backcolor WHITE
+         @ 240, 145 ButtonEx btnGeneralCancel           ;
+            Width 30 Height 30                  ;
+            Icon 'CANCEL'                       ;
+            Action FiniEdtGeneral( SET_CANCEL ) ;
+            Tooltip 'Discard changes [Esc]'     ;
+            Flat                                ;
+            Backcolor WHITE
+      END PAGE
+
+      DEFINE PAGE 'Collector'
+
+         // Collector of fields
+
+         @ 30, 5 Grid grdCollector                                              ;
+            Headers { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
+            Widths  { 80    , 45    , 40   , 40   , 102    }               ;
+            DYNAMICBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
+            { | xVal, nItem | DynamicColors( nItem ) }, ;
+            { | xVal, nItem | DynamicColors( nItem ) }, ;
+            { | xVal, nItem | DynamicColors( nItem ) }, ;
+            { | xVal, nItem | DynamicColors( nItem ) }  ;
+            }
+      END PAGE
+
+   END TAB
 
    // Decoding of used colors in table
 
    @ 220, 5 Label lblLegend ;
-            Value 'Legend:' ;
-            Height 20       ;
-            Bold            ;
-            FontColor NAVY_COLOR  ;
-            Autosize
+      Value 'Legend:' ;
+      Height 20       ;
+      Bold            ;
+      FontColor NAVY_COLOR  ;
+      Autosize
    @ 220, 55 Label lblNew    ;
-             Value 'New'     ;
-             Height 18       ;
-             Width 60        ;
-             CenterAlign     ;
-             Border          ;
-             Backcolor { 227, 227, 234 }
+      Value 'New'     ;
+      Height 18       ;
+      Width 60        ;
+      CenterAlign     ;
+      Border          ;
+      Backcolor { 227, 227, 234 }
    @ 220, 105 Label lblModified         ;
-              Value 'Modified'          ;
-              Height 18                 ;
-              Width 60                  ;
-              CenterAlign               ;
-              Border                    ;
-              Backcolor { 128, 255, 0 } ;
-              FontColor BLACK
+      Value 'Modified'          ;
+      Height 18                 ;
+      Width 60                  ;
+      CenterAlign               ;
+      Border                    ;
+      Backcolor { 128, 255, 0 } ;
+      FontColor BLACK
    @ 220, 155 Label lblDeleted            ;
-              Value 'Deleted'             ;
-              Height 18                   ;
-              Width 60                    ;
-              CenterAlign                 ;
-              Border                      ;
-              Backcolor { 255, 128, 128 } ;
-              FontColor BLACK
+      Value 'Deleted'             ;
+      Height 18                   ;
+      Width 60                    ;
+      CenterAlign                 ;
+      Border                      ;
+      Backcolor { 255, 128, 128 } ;
+      FontColor BLACK
 
-  // System messages area
+   // System messages area
 
-  @ 240, 5 EditBox edtMessages ;
-           Value ''            ;
-           Height 90           ;
-           ReadOnly            ;
-           Backcolor WHITE
+   @ 240, 5 EditBox edtMessages ;
+      Value ''            ;
+      Height 90           ;
+      READOnly            ;
+      Backcolor WHITE
 
    On key Alt+X of wModest Action { || Done(), ReleaseAllWindows() }
 
-End Window
+END WINDOW
 
 // If program starts with parameter when to load a structure. Certainly,
 // if specified file exists, else it is considered, that a such file must be created.
 
-If ( Valtype( cFile ) == 'C' )
+IF ( Valtype( cFile ) == 'C' )
 
-   If File( cFile )
+   IF File( cFile )
       GetStructure( cFile )
-   Else
+   ELSE
       WriteMsg( MSG_NEW_STRUCTURE )
-   Endif
+   ENDIF
 
-Else
+ELSE
    WriteMsg( MSG_NEW_STRUCTURE )
-      
-Endif
+
+ENDIF
 
 // Window title
 
 SetWinTitle()
 
-If IsXPThemeActive()
+IF IsXPThemeActive()
    nModestHeight := wModest.Height + 10
    wModest.Height := nModestHeight
-Endif
+ENDIF
 
 wModest.MinWidth := 720
 wModest.MinHeight := GetProperty( 'wModest', 'Height' )
@@ -630,7 +627,7 @@ wModest.txbName.Enabled := .F.
 wModest.cmbType.Enabled := .F.
 wModest.spnLen.Enabled  := .F.
 wModest.spnDec.Enabled  := .F.
-wModest.txbRule.Enabled := .F. 
+wModest.txbRule.Enabled := .F.
 
 // Buttons Ok/Cancel
 
@@ -649,1450 +646,1365 @@ oEditStru : SetAlign( 1, 1, DT_RIGHT )
 
 wModest.oEditStru.SetFocus
 
-Center window wModest
-Activate window wModest
+CENTER WINDOW wModest
+ACTIVATE WINDOW wModest
 
-Return
+RETURN
 
 ****** End of Main ******
 
-
 /******
-*
 *       Done() --> lSuccess
-*
 *       Program closing procedure
-*
 */
 
-Function Done
-Memvar aStat
+FUNCTION Done
 
-If ( aStat[ 'ChStruct'   ] .or. ;
-     aStat[ 'ChDescript' ]      ;
-   )
-   
-   If MsgYesNo( 'Data was changed. Would you like to save?', 'Attention', .F., , .F., .F. )
-      SaveData()
-   Endif
-   
-Endif
+   MEMVAR aStat
 
-Return .T.
+   IF ( aStat[ 'ChStruct'   ] .or. ;
+         aStat[ 'ChDescript' ]      ;
+         )
 
-****** End of Done ******
+      IF MsgYesNo( 'Data was changed. Would you like to save?', 'Attention', .F., , .F., .F. )
+         SaveData()
+      ENDIF
 
+   ENDIF
 
-/******
-*
-*       GetOptions()
-*
-*       Parameters initialization
-*
-*/
+   RETURN .T.
 
-Static Procedure GetOptions
-Memvar aStat
-Local cName  := '', ;
+   ****** End of Done ******
+
+   /******
+   *       GetOptions()
+   *       Parameters initialization
+   */
+
+STATIC PROCEDURE GetOptions
+
+   MEMVAR aStat
+   LOCAL cName  := '', ;
       nType  := 1, ;
       nLen   := 0 , ;
       nDec   := 0 , ;
       cRDD   := '', ;
       cValue := ''
 
-If File( MODEST_INI )
+   IF File( MODEST_INI )
 
-   Begin ini file MODEST_INI
+      BEGIN INI FILE MODEST_INI
 
-     // Common parameters
+         // Common parameters
 
-     Get cRDD   Section 'Common' Entry 'RDD'        Default ''
-     Get cValue Section 'Common' Entry 'Expression' Default ''
+         GET cRDD   Section 'Common' Entry 'RDD'        Default ''
+         GET cValue Section 'Common' Entry 'Expression' Default ''
 
-     // Field attributes, which are used at the creating
-     // the new fields.
+         // Field attributes, which are used at the creating
+         // the new fields.
 
-     Get cName Section 'Field' Entry 'Field_Name' Default ''
-     Get nType Section 'Field' Entry 'Field_Type' Default 0
-     Get nLen  Section 'Field' Entry 'Field_Len'  Default 0
-     Get nDec  Section 'Field' Entry 'Field_Dec'  Default 0
+         GET cName Section 'Field' Entry 'Field_Name' Default ''
+         GET nType Section 'Field' Entry 'Field_Type' Default 0
+         GET nLen  Section 'Field' Entry 'Field_Len'  Default 0
+         GET nDec  Section 'Field' Entry 'Field_Dec'  Default 0
 
-   End Ini
+      END INI
 
-   // Analyse of input datas.
+      // Analyse of input datas.
 
-   If !Empty( cRDD )
-   
-      // Support for 2 RDD only
-      
-      If ( ( cRDD == 'DBFCDX' ) .or. ( cRDD == 'DBFNTX' ) )
-         aStat[ 'RDD' ] := cRDD
-      Endif
-      
-   Endif
-   
-   If !Empty( cValue )
-      aStat[ 'Expression' ] := cValue
-   Endif
-   
-   If !Empty( cName )
-      aStat[ 'DefName' ] := Left( AllTrim( cName ), 7 )
-   Endif
-   
-   If ( ( nType > 0 ) .and. ( nType <= Len( CORRECT_TYPES ) ) )
-      aStat[ 'DefType' ] := nType
-   Endif
+      IF !Empty( cRDD )
 
-   If ( nLen >= 0 )   
-      aStat[ 'DefLen' ] := Min( nLen, LEN_IS_CHAR )
-   Endif
-   
-   If ( nDec >= 0 )
-      aStat[ 'DefDec' ] := Min( nDec, LEN_IS_NUM )
-   Endif
+         // Support for 2 RDD only
 
-Endif
+         IF ( ( cRDD == 'DBFCDX' ) .or. ( cRDD == 'DBFNTX' ) )
+            aStat[ 'RDD' ] := cRDD
+         ENDIF
 
-Return
+      ENDIF
 
-****** End of GetOptions ******
+      IF !Empty( cValue )
+         aStat[ 'Expression' ] := cValue
+      ENDIF
 
+      IF !Empty( cName )
+         aStat[ 'DefName' ] := Left( AllTrim( cName ), 7 )
+      ENDIF
 
-/******
-*
-*       BackColors( nRow, nCol ) --> nColor
-*
-*       Colors of fields table
-*       (color show of the changing)
-*
-*/
+      IF ( ( nType > 0 ) .and. ( nType <= Len( CORRECT_TYPES ) ) )
+         aStat[ 'DefType' ] := nType
+      ENDIF
 
-Static Function BackColors( nRow, nCol )
-Memvar oEditStru
-Local nColor := CLR_WHITE
+      IF ( nLen >= 0 )
+         aStat[ 'DefLen' ] := Min( nLen, LEN_IS_CHAR )
+      ENDIF
 
-If !Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
+      IF ( nDec >= 0 )
+         aStat[ 'DefDec' ] := Min( nDec, LEN_IS_NUM )
+      ENDIF
 
-   Do case
-      Case  ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
-        // Added row
-        nColor := RGB( 227, 227, 234 )
-      
-      Case  ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
-        // Deleted row
-        nColor := RGB( 255, 128, 128 )
-      
-      Otherwise
-      
-        // Row with changed values
+   ENDIF
 
-        If ( ( nCol == 2 ) .or. ;          // Field name (current and previous)
-             ( nCol == 6 )      ;
-           )
-          If !( Eval( oEditStru : aColumns[ 2 ] : bData ) ==  Eval( oEditStru : aColumns[ 6 ] : bData ) )
-             nColor := RGB( 128, 255, 0 )
-          Endif
+   RETURN
 
-        ElseIf ( ( nCol == 3 ) .or. ;      // Type (current and previous)
-                 ( nCol == 7 )      ;
-               )
-          If !( Eval( oEditStru : aColumns[ 3 ] : bData ) ==  Eval( oEditStru : aColumns[ 7 ] : bData ) )
-             nColor := RGB( 128, 255, 0 )
-          Endif
+   ****** End of GetOptions ******
 
-        ElseIf ( ( nCol == 4 ) .or. ;      // Length (current and previous)
-                 ( nCol == 8 )      ;
-               )
-          If !( Eval( oEditStru : aColumns[ 4 ] : bData ) ==  Eval( oEditStru : aColumns[ 8 ] : bData ) )
-             nColor := RGB( 128, 255, 0 )
-          Endif
+   /******
+   *       BackColors( nRow, nCol ) --> nColor
+   *       Colors of fields table
+   *       (color show of the changing)
+   */
 
-        ElseIf ( ( nCol == 5 ) .or. ;      // Decimal
-                 ( nCol == 9 )      ;
-               )
-          If !( Eval( oEditStru : aColumns[ 5 ] : bData ) ==  Eval( oEditStru : aColumns[ 9 ] : bData ) )
-             nColor := RGB( 128, 255, 0 )
-          Endif
+STATIC FUNCTION BackColors( nRow, nCol )
 
-        Endif
-      
-   Endcase
-    
-Endif
+   MEMVAR oEditStru
+   LOCAL nColor := CLR_WHITE
 
-Return nColor
+   IF !Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
 
-****** End of BackColors ******
-
-
-/******
-*
-*       DynamicColors( nItem )
-*
-*       Colors in the collector table
-*
-*/
-
-Static Function DynamicColors( nItem )
-Memvar aCollector
-Local nColor := RGB( 255, 255, 255 )
-
-// We will show in color only records with attributes
-// "New element" аnd "Deleted element"
-
-If !Empty( aCollector )
-
-   If ( nItem > 0 )
-   
-      If ( aCollector[ nItem, DBS_FLAG ] == FLAG_INSERTED )
+      DO CASE
+      CASE  ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
          // Added row
          nColor := RGB( 227, 227, 234 )
 
-      ElseIf ( aCollector[ nItem, DBS_FLAG ] == FLAG_DELETED )
+      CASE  ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
          // Deleted row
          nColor := RGB( 255, 128, 128 )
 
-      Endif
+      OTHERWISE
 
-   Endif
+         // Row with changed values
 
-Endif
+         IF ( ( nCol == 2 ) .or. ;          // Field name (current and previous)
+            ( nCol == 6 )      ;
+               )
+            IF !( Eval( oEditStru : aColumns[ 2 ] : bData ) ==  Eval( oEditStru : aColumns[ 6 ] : bData ) )
+               nColor := RGB( 128, 255, 0 )
+            ENDIF
 
-Return nColor
+         ELSEIF ( ( nCol == 3 ) .or. ;      // Type (current and previous)
+            ( nCol == 7 )      ;
+               )
+            IF !( Eval( oEditStru : aColumns[ 3 ] : bData ) ==  Eval( oEditStru : aColumns[ 7 ] : bData ) )
+               nColor := RGB( 128, 255, 0 )
+            ENDIF
 
-****** End of DynamicColors ******
+         ELSEIF ( ( nCol == 4 ) .or. ;      // Length (current and previous)
+            ( nCol == 8 )      ;
+               )
+            IF !( Eval( oEditStru : aColumns[ 4 ] : bData ) ==  Eval( oEditStru : aColumns[ 8 ] : bData ) )
+               nColor := RGB( 128, 255, 0 )
+            ENDIF
 
+         ELSEIF ( ( nCol == 5 ) .or. ;      // Decimal
+            ( nCol == 9 )      ;
+               )
+            IF !( Eval( oEditStru : aColumns[ 5 ] : bData ) ==  Eval( oEditStru : aColumns[ 9 ] : bData ) )
+               nColor := RGB( 128, 255, 0 )
+            ENDIF
 
-/******
-*
-*       InitDefault() --> aStru
-*
-*       "Empty" structure
-*
-*/
+         ENDIF
 
-Static Function InitDefault
-Memvar aStat
-Local aStru := Array( DBS_NEW_ALEN )
+      ENDCASE
 
-aStat[ 'FileName'   ] := ''           // Working file
-aStat[ 'ChStruct'   ] := .F.          // Changing is absent
-aStat[ 'ChDescript' ] := .F.
-aStat[ 'Counter'    ] := 1            // Counter is reestablished
+   ENDIF
 
-Return { aStru }
+   RETURN nColor
 
-****** End of InitDefault ******
+   ****** End of BackColors ******
 
+   /******
+   *       DynamicColors( nItem )
+   *       Colors in the collector table
+   */
 
-/******
-*
-*       AboutMe()
-*
-*       About program
-*
-*/
+STATIC FUNCTION DynamicColors( nItem )
 
-Static Procedure AboutMe
+   MEMVAR aCollector
+   LOCAL nColor := RGB( 255, 255, 255 )
 
-Load window AboutMe as wAboutMe
+   // We will show in color only records with attributes
+   // "New element" аnd "Deleted element"
 
-wAboutMe.lblAppName.Value    := APPNAME
-wAboutMe.lblAppVersion.Value := APPVERSION
-wAboutMe.lblCopyright.Value  := ( 'Author:' + COPYRIGHT )
-wAboutMe.lblComponents.Value := ( HB_Compiler()    + CRLF + ;
-                                  Version()        + CRLF + ;
-                                  MiniGuiVersion()          ;
-                                )
+   IF !Empty( aCollector )
 
-On key Escape of wAboutMe Action wAboutMe.Release()
-On key Alt+X of wAboutMe Action { || Done(), ReleaseAllWindows() }  // Hotkey for urgent program closing
+      IF ( nItem > 0 )
 
-Center window wAboutMe
-Activate window wAboutMe
+         IF ( aCollector[ nItem, DBS_FLAG ] == FLAG_INSERTED )
+            // Added row
+            nColor := RGB( 227, 227, 234 )
 
-Return
+         ELSEIF ( aCollector[ nItem, DBS_FLAG ] == FLAG_DELETED )
+            // Deleted row
+            nColor := RGB( 255, 128, 128 )
 
-****** End of AboutMe ******
+         ENDIF
 
+      ENDIF
 
-/******
-*
-*       ReSize()
-*
-*       Arranging of controls size to main window size
-*       It will change the initial arrangement, which is doing in the main procedure
-*
-*/
- 
-Static Procedure ReSize
-Memvar oEditStru
-Local nHeight := ( wModest.Height - 215 - IF(IsXPThemeActive(), 15, 0) )
+   ENDIF
 
-// Tab control
+   RETURN nColor
 
-wModest.tbDescript.Col    := ( wModest.Width - wModest.tbDescript.Width - 15 )
-wModest.tbDescript.Height := nHeight
+   ****** End of DynamicColors ******
 
-// Field name
+   /******
+   *       InitDefault() --> aStru
+   *       "Empty" structure
+   */
 
-wModest.txbName.Row := ( wModest.lblName.Row - 2 )
-wModest.txbName.Col := ( wModest.lblName.Col + wModest.lblName.Width + 5 )
+STATIC FUNCTION InitDefault
 
-// Field type
+   MEMVAR aStat
+   LOCAL aStru := Array( DBS_NEW_ALEN )
 
-wModest.lblType.Row   := wModest.lblName.Row
-wModest.lblType.Col   := ( wModest.txbName.Col + wModest.txbName.Width + 50 )
-
-wModest.cmbType.Row := ( wModest.lblType.Row - 2 )
-wModest.cmbType.Col := ( wModest.lblType.Col + wModest.lblType.Width + 15 )
-
-// Field length
-
-wModest.lblLen.Row   := ( wModest.lblName.Row + 44 )
-wModest.lblLen.Col   := wModest.lblName.Col
-wModest.lblLen.Width := wModest.lblName.Width
-
-wModest.spnLen.Row := ( wModest.lblLen.Row - 4 )
-wModest.spnLen.Col := ( wModest.txbName.Col + ( wModest.txbName.Width - wModest.spnLen.Width + 5 ) )
-
-// Decimal
-
-wModest.lblDec.Row   := wModest.lblLen.Row
-wModest.lblDec.Col   := wModest.lblType.Col
-wModest.lblDec.Width := wModest.lblType.Width
-
-wModest.spnDec.Row := wModest.spnLen.Row
-wModest.spnDec.Col := ( wModest.cmbType.Col - 10 )
-
-// Description of field
-
-wModest.lblComment.Row :=  ( wModest.lblLen.Row + 40 )
-wModest.lblComment.Col := wModest.lblName.Col
-
-wModest.edtComment.Row := ( wModest.lblComment.Row + 20 )
-wModest.edtComment.Col := wModest.lblComment.Col
-wModest.edtComment.Height := ( nHeight - wModest.lblComment.Row - 145 )
-wModest.edtComment.Width  := ( wModest.tbDescript.Width - 30 )
-
-// Transformation rule at the type changing
-
-wModest.lblRule.Row :=  ( wModest.edtComment.Row + wModest.edtComment.Height + 20 )
-wModest.lblRule.Col := wModest.lblName.Col
-
-wModest.txbRule.Row   := ( wModest.lblRule.Row + 20 )
-wModest.txbRule.Col   := wModest.lblRule.Col
-wModest.txbRule.Width := wModest.edtComment.Width
-
-// Ok/Cancel
-
-wModest.btnFldOk.Row := ( wModest.txbRule.Row + wModest.txbRule.Height + 15 )
-wModest.btnFldOk.Col := ( wModest.tbDescript.Width - 80 )
-
-wModest.btnFldCancel.Row := wModest.btnFldOk.Row
-wModest.btnFldCancel.Col := ( wModest.btnFldOk.Col + wModest.btnFldOk.Width + 5 )
-
-// System messages
-
-wModest.edtMessages.Row   := ( wModest.oEditStru.Row + nHeight + 10 )
-wModest.edtMessages.Col   := wModest.oEditStru.Col
-wModest.edtMessages.Width := ( wModest.Width - 20 )
-
-// Field table
-
-wModest.oEditStru.Height := ( nHeight - 33 )
-wModest.oEditStru.Width  := ( wModest.Width - wModest.tbDescript.Width - 25 )
-
-oEditStru : Refresh()
-
-// Decoding of table colors
-
-wModest.lblLegend.Row := ( wModest.oEditStru.Row + wModest.oEditStru.Height + 15 )
-wModest.lblLegend.Col := wModest.oEditStru.Col
-
-wModest.lblNew.Row := ( wModest.lblLegend.Row - 2 )
-wModest.lblNew.Col := ( wModest.lblLegend.Col + wModest.lblLegend.Width + 5 )
-
-wModest.lblModified.Row := wModest.lblNew.Row
-wModest.lblModified.Col := (wModest.lblNew.Col + wModest.lblNew.Width + 5 )
-
-wModest.lblDeleted.Row := wModest.lblNew.Row
-wModest.lblDeleted.Col := ( wModest.lblModified.Col + wModest.lblModified.Width + 5 )
-
-// Description of database
-
-wModest.edtGeneral.Width  := ( wModest.tbDescript.Width - 12 )
-wModest.edtGeneral.Height := ( wModest.tbDescript.Height - 85 )
-
-// Description editing (Ok/Cancel)
-
-wModest.btnGeneralOk.Row := wModest.btnFldOk.Row 
-wModest.btnGeneralOk.Col := wModest.btnFldOk.Col
-
-wModest.btnGeneralCancel.Row := wModest.btnGeneralOk.Row
-wModest.btnGeneralCancel.Col := wModest.btnFldCancel.Col
-
-// Collector
-
-wModest.grdCollector.Width  := ( wModest.tbDescript.Width - 12 )
-wModest.grdCollector.Height := ( wModest.tbDescript.Height - 40 )
-
-// Refresh the all aboved movings
-
-InvalidateRect( Application.Handle, 0 )
-
-Return
-
-****** End of ReSize ******
-
-
-/******
-*
-*       SetWinTitle()
-*
-*       Show info about working file at the window title
-*
-*/
-
-Procedure SetWinTitle
-Memvar aStat
-
-If !Empty( aStat[ 'FileName' ] )
-   wModest.Title := APPNAME + ' - ' + aStat[ 'FileName' ]
-Else
-   wModest.Title := APPNAME + ' - New file'
-Endif
-
-Return
-
-****** End of SetWinTitle ******
-
-
-/******
-*
-*       SetIconSave( nIcon )
-*
-*       Show the icon of saving necessity in status
-*
-*/
-
-Procedure SetIconSave( nIcon )
-wModest.StatusBar.Icon( 3 ) := IIf( ( nIcon == 1 ), 'MUST_SAVE', '' )
-Return
-
-****** End of SetIconSave ******
-
-
-/******
-*
-*       SetRDDName()
-*
-*       Show the current database RDD in status
-*
-*/
-
-Procedure SetRDDName
-Memvar aStat
-wModest.StatusBar.Item( 4 ) := aStat[ 'RDD' ]
-Return
-
-****** End of SetRDDName ******
-
-
-/******
-*
-*       ShowValues()
-*
-*       Filling and show the current values in the editing fields
-*
-*/
-
-Static Procedure ShowValues
-Memvar oEditStru
-Local nRow := oEditStru : nAt, ;
-      nPos
-
-If !Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
-   wModest.txbName.Value := oEditStru : aArray[ nRow, DBS_NAME ]
-   
-   If !Empty( nPos := AScan( CORRECT_TYPES, oEditStru : aArray[ nRow, DBS_TYPE ] ) )
-      wModest.cmbType.Value := nPos
-   Else
-      wModest.cmbType.Value := TYPE_IS_CHAR
-   Endif
-   
-   wModest.spnLen.Value     := oEditStru : aArray[ nRow, DBS_LEN     ]
-   wModest.spnDec.Value     := oEditStru : aArray[ nRow, DBS_DEC     ]
-   wModest.edtComment.Value := oEditStru : aArray[ nRow, DBS_COMMENT ]
-   wModest.txbRule.Value    := oEditStru : aArray[ nRow, DBS_RULE    ]
-
-   wModest.StatusBar.Item( 2 ) := ( LTrim( Str( nRow ) ) + '/' + LTrim( Str( Len( oEditStru : aArray ) ) ) )
-
-Else
-
-   wModest.StatusBar.Item( 2 ) := 'Empty'
-   
-Endif
-
-Return
-
-****** End of ShowValues *****
-
-
-/******
-*
-*       WriteMsg( cMessage )
-*
-*       Filling the messages area
-*
-*/
-
-Procedure WriteMsg( cMessage )
-Local cText := GetProperty( 'wModest', 'edtMessages', 'Value' )
-
-cText += ( cMessage + CRLF )
-SetProperty( 'wModest', 'edtMessages', 'Value', cText )
-
-// Showing of last row
-
-SendMessage( GetControlHandle( 'edtMessages', 'wModest' ), WM_VSCROLL, SB_BOTTOM, 0 )
-
-Return
-
-****** End of WriteMsg ******
-
-
-/******
-*
-*       ClearCollector()
-*
-*       Clear of the collector
-*/
-
-Static Procedure ClearCollector
-Memvar aCollector
-
-If MsgYesNo( 'Clear Collector?', 'Confirm', .T., , .F., .F. )
-   aCollector := {}
-   FillCollector() 
-Endif
-
-Return
-
-****** End of ClearCollector ******
-
-
-/******
-*
-*       ClearMsg()
-*
-*       Clear of the messages area
-*/
-
-Static Procedure ClearMsg
-
-If MsgYesNo( 'Clear messages area?', 'Confirm', .T., , .F., .F. )
-   SetProperty( 'wModest', 'edtMessages', 'Value', '' )
-   SendMessage( GetControlHandle( 'edtMessages', 'wModest' ), WM_VSCROLL, SB_TOP, 0 )
-Endif
-
-Return
-
-****** End of ClearMsg ******
-
-
-/******
-*
-*       StructASize( aStructure ) --> aStructure
-*
-*       Expanded array of structure description
-*
-*/
-
-Static Function StructASize( aStructure )
-
-AEval( aStructure, { | elem | ASize( elem, DBS_NEW_ALEN )            , ;
-                              elem[ DBS_COMMENT ] := ''              , ;
-                              elem[ DBS_FLAG    ] := FLAG_DEFAULT    , ;
-                              elem[ DBS_OLDNAME ] := elem[ DBS_NAME ], ;
-                              elem[ DBS_OLDTYPE ] := elem[ DBS_TYPE ], ;
-                              elem[ DBS_OLDLEN  ] := elem[ DBS_LEN  ], ;
-                              elem[ DBS_OLDDEC  ] := elem[ DBS_DEC  ], ;
-                              elem[ DBS_RULE    ] := ''                ;
-                    } )
-
-Return aStructure
-
-****** End of StructASize ******
-
-
-/******
-*
-*       InvertEnable( cName )
-*
-*       Inverting of the attribute Enabled for one element
-*
-*/
-
-Static Procedure InvertEnable( cName )
-Local lEnable := GetProperty( 'wModest', cName, 'Enabled' )
-SetProperty( 'wModest', cName, 'Enabled', !lEnable )
-Return
-
-****** End of InvertEnable ******
-
-
-/******
-*
-*       InvertReadOnly( cName )
-*
-*       Inverting of the attribute ReadOnly for one element
-*
-*/
-
-Static Procedure InvertReadOnly( cName )
-Local lReadOnly := GetProperty( 'wModest', cName, 'ReadOnly' )
-SetProperty( 'wModest', cName, 'ReadOnly', !lReadOnly )
-Return
-
-****** End of InvertReadOnly ******
-
-
-/******
-*
-*       InvertForEdit( lEnabled )
-*
-*       Inverting of the attributes (menu, toolbar)
-*       at the editing
-*
-*/
-
-Static Procedure InvertForEdit( lEnabled )
-
-// Menu
-
-// Access to menu items are changed here, but is not in procedure InvertEnable(),
-// because the function GetProperty() no determine the current value of property Enabled
-// for menu item
- 
-// File
-
-SetProperty( 'wModest', 'pdNew'  , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdOpen' , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdSave' , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdPrint', 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdNew'  , 'Enabled', lEnabled )
-
-// Edit
-
-SetProperty( 'wModest', 'pdCopy'       , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdCut'        , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdPasteAfter' , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdPasteBefore', 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdDescription', 'Enabled', lEnabled )
-
-// Field
-
-SetProperty( 'wModest', 'pdAdd'         , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdInsertAfter' , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdInsertBefore', 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdEdit'        , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdDelete'      , 'Enabled', lEnabled )
-SetProperty( 'wModest', 'pdExport'      , 'Enabled', lEnabled )
-
-// Toolbar
-
-InvertEnable( 'btnNewFile' )
-InvertEnable( 'btnOpenFile' )
-InvertEnable( 'btnSave' )
-InvertEnable( 'btnPrint' )
-InvertEnable( 'btnAddField' )
-InvertEnable( 'btnInsField' )
-InvertEnable( 'btnEditField' )
-InvertEnable( 'btnDeleteField' )
-InvertEnable( 'btnCopy' )
-InvertEnable( 'btnCut' )
-InvertEnable( 'btnPaste' )
-InvertEnable( 'btnEditGeneral' )
-
-Return
-
-****** End of InvertForEdit ******
-
-
-/*****
-*
-*       InvertForGeneral()
-*
-*       Inverting of elements availability at the editing
-*       of general database description
-*
-*/
-
-Static Procedure InvertForGeneral
-Memvar oEditStru
-
-// Fields list
-
-InvertEnable( 'oEditStru' )
-
-// Editing field and buttons Ok/Cancel
-
-InvertReadOnly( 'edtGeneral' )
-InvertEnable( 'btnGeneralOk' )
-InvertEnable( 'btnGeneralCancel' )
-
-Return
-
-****** End of InvertForGeneral ******
-
-
-/******
-*
-*       InvertForFields()
-*
-*       Changing of elements availability at the editing
-*       of field characteristics
-*
-*/
-
-Static Procedure InvertForFields
-
-// Field list
-
-InvertEnable( 'oEditStru' )
-
-// Editing is available
-
-InvertEnable( 'txbName' )
-InvertEnable( 'cmbType' )
-InvertEnable( 'spnLen' )
-InvertEnable( 'spnDec' )
-InvertReadOnly( 'edtComment' )
-
-InvertEnable( 'btnFldOk' )
-InvertEnable( 'btnFldCancel' )
-
-Return
-
-****** End of InvertForFields ******
- 
-
-/******
-*
-*       GetStructure( cFile )
-*
-*       Loading of existing structure
-*
-*/
-
-Static Procedure GetStructure( cFile )
-Memvar aStat, oEditStru
-Local aStru := {}, ;
-      nPos       , ;
-      cName      , ;
-      cRDD
-
-Try
-
-   // Select RDD
-
-   If ( ( nPos := RAt( '.', cFile ) ) > 0 )
-      
-      If !Empty( cName := Left( cFile, nPos ) )
-         
-         If File( cName + 'FPT' )
-            cRDD := 'DBFCDX'
-         Else
-            cRDD := aStat[ 'RDD' ]
-         Endif
-         
-      Endif
-      
-   Endif 
-   
-   // Reading the database structure, array is transformed to working format.
-   // The database is closed after reading.
-
-   DbUseArea( , cRDD, cFile,, .T. )
-   aStru := DbStruct()
-   aStru := StructASize( aStru )
-   DbCloseAll()
-   
-   // Filling of comments.
-   
-   If ( nPos > 0 )
-      cName := ( Left( cFile, nPos ) + 'XML' )
-      If File( cName )
-         aStru := LoadXML( cName, aStru )
-      Endif
-   Endif
-   
-   WriteMsg( cFile + MSG_STRUCTURE_LOADED )
-
-   aStat[ 'FileName'   ] := cFile
-   aStat[ 'RDD'        ] := cRDD
+   aStat[ 'FileName'   ] := ''           // Working file
    aStat[ 'ChStruct'   ] := .F.          // Changing is absent
    aStat[ 'ChDescript' ] := .F.
    aStat[ 'Counter'    ] := 1            // Counter is reestablished
 
-   SetWinTitle()
-   SetIconSave( 0 )
-   SetRDDName()
-      
-Catch
-   WriteMsg( MSG_ERROR_LOAD + cFile )
+   RETURN { aStru }
 
-End
+   ****** End of InitDefault ******
 
-// If array is empty when to do the initialization
+   /******
+   *       AboutMe()
+   *       About program
+   */
 
-If Empty( aStru )
-   aStru := InitDefault()
-   SetWinTitle()
-Endif
+STATIC PROCEDURE AboutMe
 
-oEditStru : SetArray( aStru )
-oEditStru : Display()
+   LOAD WINDOW AboutMe as wAboutMe
 
-oEditStru : goTop()
-oEditStru : Refresh()
+   wAboutMe.lblAppName.Value    := APPNAME
+   wAboutMe.lblAppVersion.Value := APPVERSION
+   wAboutMe.lblCopyright.Value  := ( 'Author:' + COPYRIGHT )
+   wAboutMe.lblComponents.Value := ( HB_Compiler()    + CRLF + ;
+      Version()        + CRLF + ;
+      MiniGuiVersion()          ;
+      )
 
-Return
+   On key Escape of wAboutMe Action wAboutMe.Release()
+   On key Alt+X of wAboutMe Action { || Done(), ReleaseAllWindows() }  // Hotkey for urgent program closing
 
-****** End of GetStructure ******
+   CENTER WINDOW wAboutMe
+   ACTIVATE WINDOW wAboutMe
 
+   RETURN
 
-/******
-*
-*       LoadXML( cFile, aStru ) --> aStru
-*
-*       Filling of comments of fields
-*
-*/
+   ****** End of AboutMe ******
 
-Static Function LoadXML( cFile, aStru )
-Local oXMLDoc  := TXMLDocument() : New(), ;
+   /******
+   *       ReSize()
+   *       Arranging of controls size to main window size
+   *       It will change the initial arrangement, which is doing in the main procedure
+   */
+
+STATIC PROCEDURE ReSize
+
+   MEMVAR oEditStru
+   LOCAL nHeight := ( wModest.Height - 215 - IF(IsXPThemeActive(), 15, 0) )
+
+   // Tab control
+
+   wModest.tbDescript.Col    := ( wModest.Width - wModest.tbDescript.Width - 15 )
+   wModest.tbDescript.Height := nHeight
+
+   // Field name
+
+   wModest.txbName.Row := ( wModest.lblName.Row - 2 )
+   wModest.txbName.Col := ( wModest.lblName.Col + wModest.lblName.Width + 5 )
+
+   // Field type
+
+   wModest.lblType.Row   := wModest.lblName.Row
+   wModest.lblType.Col   := ( wModest.txbName.Col + wModest.txbName.Width + 50 )
+
+   wModest.cmbType.Row := ( wModest.lblType.Row - 2 )
+   wModest.cmbType.Col := ( wModest.lblType.Col + wModest.lblType.Width + 15 )
+
+   // Field length
+
+   wModest.lblLen.Row   := ( wModest.lblName.Row + 44 )
+   wModest.lblLen.Col   := wModest.lblName.Col
+   wModest.lblLen.Width := wModest.lblName.Width
+
+   wModest.spnLen.Row := ( wModest.lblLen.Row - 4 )
+   wModest.spnLen.Col := ( wModest.txbName.Col + ( wModest.txbName.Width - wModest.spnLen.Width + 5 ) )
+
+   // Decimal
+
+   wModest.lblDec.Row   := wModest.lblLen.Row
+   wModest.lblDec.Col   := wModest.lblType.Col
+   wModest.lblDec.Width := wModest.lblType.Width
+
+   wModest.spnDec.Row := wModest.spnLen.Row
+   wModest.spnDec.Col := ( wModest.cmbType.Col - 10 )
+
+   // Description of field
+
+   wModest.lblComment.Row :=  ( wModest.lblLen.Row + 40 )
+   wModest.lblComment.Col := wModest.lblName.Col
+
+   wModest.edtComment.Row := ( wModest.lblComment.Row + 20 )
+   wModest.edtComment.Col := wModest.lblComment.Col
+   wModest.edtComment.Height := ( nHeight - wModest.lblComment.Row - 145 )
+   wModest.edtComment.Width  := ( wModest.tbDescript.Width - 30 )
+
+   // Transformation rule at the type changing
+
+   wModest.lblRule.Row :=  ( wModest.edtComment.Row + wModest.edtComment.Height + 20 )
+   wModest.lblRule.Col := wModest.lblName.Col
+
+   wModest.txbRule.Row   := ( wModest.lblRule.Row + 20 )
+   wModest.txbRule.Col   := wModest.lblRule.Col
+   wModest.txbRule.Width := wModest.edtComment.Width
+
+   // Ok/Cancel
+
+   wModest.btnFldOk.Row := ( wModest.txbRule.Row + wModest.txbRule.Height + 15 )
+   wModest.btnFldOk.Col := ( wModest.tbDescript.Width - 80 )
+
+   wModest.btnFldCancel.Row := wModest.btnFldOk.Row
+   wModest.btnFldCancel.Col := ( wModest.btnFldOk.Col + wModest.btnFldOk.Width + 5 )
+
+   // System messages
+
+   wModest.edtMessages.Row   := ( wModest.oEditStru.Row + nHeight + 10 )
+   wModest.edtMessages.Col   := wModest.oEditStru.Col
+   wModest.edtMessages.Width := ( wModest.Width - 20 )
+
+   // Field table
+
+   wModest.oEditStru.Height := ( nHeight - 33 )
+   wModest.oEditStru.Width  := ( wModest.Width - wModest.tbDescript.Width - 25 )
+
+   oEditStru : Refresh()
+
+   // Decoding of table colors
+
+   wModest.lblLegend.Row := ( wModest.oEditStru.Row + wModest.oEditStru.Height + 15 )
+   wModest.lblLegend.Col := wModest.oEditStru.Col
+
+   wModest.lblNew.Row := ( wModest.lblLegend.Row - 2 )
+   wModest.lblNew.Col := ( wModest.lblLegend.Col + wModest.lblLegend.Width + 5 )
+
+   wModest.lblModified.Row := wModest.lblNew.Row
+   wModest.lblModified.Col := (wModest.lblNew.Col + wModest.lblNew.Width + 5 )
+
+   wModest.lblDeleted.Row := wModest.lblNew.Row
+   wModest.lblDeleted.Col := ( wModest.lblModified.Col + wModest.lblModified.Width + 5 )
+
+   // Description of database
+
+   wModest.edtGeneral.Width  := ( wModest.tbDescript.Width - 12 )
+   wModest.edtGeneral.Height := ( wModest.tbDescript.Height - 85 )
+
+   // Description editing (Ok/Cancel)
+
+   wModest.btnGeneralOk.Row := wModest.btnFldOk.Row
+   wModest.btnGeneralOk.Col := wModest.btnFldOk.Col
+
+   wModest.btnGeneralCancel.Row := wModest.btnGeneralOk.Row
+   wModest.btnGeneralCancel.Col := wModest.btnFldCancel.Col
+
+   // Collector
+
+   wModest.grdCollector.Width  := ( wModest.tbDescript.Width - 12 )
+   wModest.grdCollector.Height := ( wModest.tbDescript.Height - 40 )
+
+   // Refresh the all aboved movings
+
+   InvalidateRect( Application.Handle, 0 )
+
+   RETURN
+
+   ****** End of ReSize ******
+
+   /******
+   *       SetWinTitle()
+   *       Show info about working file at the window title
+   */
+
+PROCEDURE SetWinTitle
+
+   MEMVAR aStat
+
+   IF !Empty( aStat[ 'FileName' ] )
+      wModest.Title := APPNAME + ' - ' + aStat[ 'FileName' ]
+   ELSE
+      wModest.Title := APPNAME + ' - New file'
+   ENDIF
+
+   RETURN
+
+   ****** End of SetWinTitle ******
+
+   /******
+   *       SetIconSave( nIcon )
+   *       Show the icon of saving necessity in status
+   */
+
+PROCEDURE SetIconSave( nIcon )
+
+   wModest.StatusBar.Icon( 3 ) := IIf( ( nIcon == 1 ), 'MUST_SAVE', '' )
+
+   RETURN
+
+   ****** End of SetIconSave ******
+
+   /******
+   *       SetRDDName()
+   *       Show the current database RDD in status
+   */
+
+PROCEDURE SetRDDName
+
+   MEMVAR aStat
+
+   wModest.StatusBar.Item( 4 ) := aStat[ 'RDD' ]
+
+   RETURN
+
+   ****** End of SetRDDName ******
+
+   /******
+   *       ShowValues()
+   *       Filling and show the current values in the editing fields
+   */
+
+STATIC PROCEDURE ShowValues
+
+   MEMVAR oEditStru
+   LOCAL nRow := oEditStru : nAt, ;
+      nPos
+
+   IF !Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
+      wModest.txbName.Value := oEditStru : aArray[ nRow, DBS_NAME ]
+
+      IF !Empty( nPos := AScan( CORRECT_TYPES, oEditStru : aArray[ nRow, DBS_TYPE ] ) )
+         wModest.cmbType.Value := nPos
+      ELSE
+         wModest.cmbType.Value := TYPE_IS_CHAR
+      ENDIF
+
+      wModest.spnLen.Value     := oEditStru : aArray[ nRow, DBS_LEN     ]
+      wModest.spnDec.Value     := oEditStru : aArray[ nRow, DBS_DEC     ]
+      wModest.edtComment.Value := oEditStru : aArray[ nRow, DBS_COMMENT ]
+      wModest.txbRule.Value    := oEditStru : aArray[ nRow, DBS_RULE    ]
+
+      wModest.StatusBar.Item( 2 ) := ( LTrim( Str( nRow ) ) + '/' + LTrim( Str( Len( oEditStru : aArray ) ) ) )
+
+   ELSE
+
+      wModest.StatusBar.Item( 2 ) := 'Empty'
+
+   ENDIF
+
+   RETURN
+
+   ****** End of ShowValues *****
+
+   /******
+   *       WriteMsg( cMessage )
+   *       Filling the messages area
+   */
+
+PROCEDURE WriteMsg( cMessage )
+
+   LOCAL cText := GetProperty( 'wModest', 'edtMessages', 'Value' )
+
+   cText += ( cMessage + CRLF )
+   SetProperty( 'wModest', 'edtMessages', 'Value', cText )
+
+   // Showing of last row
+
+   SendMessage( GetControlHandle( 'edtMessages', 'wModest' ), WM_VSCROLL, SB_BOTTOM, 0 )
+
+   RETURN
+
+   ****** End of WriteMsg ******
+
+   /******
+   *       ClearCollector()
+   *       Clear of the collector
+   */
+
+STATIC PROCEDURE ClearCollector
+
+   MEMVAR aCollector
+
+   IF MsgYesNo( 'Clear Collector?', 'Confirm', .T., , .F., .F. )
+      aCollector := {}
+      FillCollector()
+   ENDIF
+
+   RETURN
+
+   ****** End of ClearCollector ******
+
+   /******
+   *       ClearMsg()
+   *       Clear of the messages area
+   */
+
+STATIC PROCEDURE ClearMsg
+
+   IF MsgYesNo( 'Clear messages area?', 'Confirm', .T., , .F., .F. )
+      SetProperty( 'wModest', 'edtMessages', 'Value', '' )
+      SendMessage( GetControlHandle( 'edtMessages', 'wModest' ), WM_VSCROLL, SB_TOP, 0 )
+   ENDIF
+
+   RETURN
+
+   ****** End of ClearMsg ******
+
+   /******
+   *       StructASize( aStructure ) --> aStructure
+   *       Expanded array of structure description
+   */
+
+STATIC FUNCTION StructASize( aStructure )
+
+   AEval( aStructure, { | elem | ASize( elem, DBS_NEW_ALEN )            , ;
+      elem[ DBS_COMMENT ] := ''              , ;
+      elem[ DBS_FLAG    ] := FLAG_DEFAULT    , ;
+      elem[ DBS_OLDNAME ] := elem[ DBS_NAME ], ;
+      elem[ DBS_OLDTYPE ] := elem[ DBS_TYPE ], ;
+      elem[ DBS_OLDLEN  ] := elem[ DBS_LEN  ], ;
+      elem[ DBS_OLDDEC  ] := elem[ DBS_DEC  ], ;
+      elem[ DBS_RULE    ] := ''                ;
+      } )
+
+   RETURN aStructure
+
+   ****** End of StructASize ******
+
+   /******
+   *       InvertEnable( cName )
+   *       Inverting of the attribute Enabled for one element
+   */
+
+STATIC PROCEDURE InvertEnable( cName )
+
+   LOCAL lEnable := GetProperty( 'wModest', cName, 'Enabled' )
+
+   SetProperty( 'wModest', cName, 'Enabled', !lEnable )
+
+   RETURN
+
+   ****** End of InvertEnable ******
+
+   /******
+   *       InvertReadOnly( cName )
+   *       Inverting of the attribute ReadOnly for one element
+   */
+
+STATIC PROCEDURE InvertReadOnly( cName )
+
+   LOCAL lReadOnly := GetProperty( 'wModest', cName, 'ReadOnly' )
+
+   SetProperty( 'wModest', cName, 'ReadOnly', !lReadOnly )
+
+   RETURN
+
+   ****** End of InvertReadOnly ******
+
+   /******
+   *       InvertForEdit( lEnabled )
+   *       Inverting of the attributes (menu, toolbar)
+   *       at the editing
+   */
+
+STATIC PROCEDURE InvertForEdit( lEnabled )
+
+   // Menu
+
+   // Access to menu items are changed here, but is not in procedure InvertEnable(),
+   // because the function GetProperty() no determine the current value of property Enabled
+   // for menu item
+
+   // File
+
+   SetProperty( 'wModest', 'pdNew'  , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdOpen' , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdSave' , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdPrint', 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdNew'  , 'Enabled', lEnabled )
+
+   // Edit
+
+   SetProperty( 'wModest', 'pdCopy'       , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdCut'        , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdPasteAfter' , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdPasteBefore', 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdDescription', 'Enabled', lEnabled )
+
+   // Field
+
+   SetProperty( 'wModest', 'pdAdd'         , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdInsertAfter' , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdInsertBefore', 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdEdit'        , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdDelete'      , 'Enabled', lEnabled )
+   SetProperty( 'wModest', 'pdExport'      , 'Enabled', lEnabled )
+
+   // Toolbar
+
+   InvertEnable( 'btnNewFile' )
+   InvertEnable( 'btnOpenFile' )
+   InvertEnable( 'btnSave' )
+   InvertEnable( 'btnPrint' )
+   InvertEnable( 'btnAddField' )
+   InvertEnable( 'btnInsField' )
+   InvertEnable( 'btnEditField' )
+   InvertEnable( 'btnDeleteField' )
+   InvertEnable( 'btnCopy' )
+   InvertEnable( 'btnCut' )
+   InvertEnable( 'btnPaste' )
+   InvertEnable( 'btnEditGeneral' )
+
+   RETURN
+
+   ****** End of InvertForEdit ******
+
+   /*****
+   *       InvertForGeneral()
+   *       Inverting of elements availability at the editing
+   *       of general database description
+   */
+
+STATIC PROCEDURE InvertForGeneral
+
+   MEMVAR oEditStru
+
+   // Fields list
+
+   InvertEnable( 'oEditStru' )
+
+   // Editing field and buttons Ok/Cancel
+
+   InvertReadOnly( 'edtGeneral' )
+   InvertEnable( 'btnGeneralOk' )
+   InvertEnable( 'btnGeneralCancel' )
+
+   RETURN
+
+   ****** End of InvertForGeneral ******
+
+   /******
+   *       InvertForFields()
+   *       Changing of elements availability at the editing
+   *       of field characteristics
+   */
+
+STATIC PROCEDURE InvertForFields
+
+   // Field list
+
+   InvertEnable( 'oEditStru' )
+
+   // Editing is available
+
+   InvertEnable( 'txbName' )
+   InvertEnable( 'cmbType' )
+   InvertEnable( 'spnLen' )
+   InvertEnable( 'spnDec' )
+   InvertReadOnly( 'edtComment' )
+
+   InvertEnable( 'btnFldOk' )
+   InvertEnable( 'btnFldCancel' )
+
+   RETURN
+
+   ****** End of InvertForFields ******
+
+   /******
+   *       GetStructure( cFile )
+   *       Loading of existing structure
+   */
+
+STATIC PROCEDURE GetStructure( cFile )
+
+   MEMVAR aStat, oEditStru
+   LOCAL aStru := {}, ;
+      nPos       , ;
+      cName      , ;
+      cRDD
+
+   Try
+
+      // Select RDD
+
+      IF ( ( nPos := RAt( '.', cFile ) ) > 0 )
+
+         IF !Empty( cName := Left( cFile, nPos ) )
+
+            IF File( cName + 'FPT' )
+               cRDD := 'DBFCDX'
+            ELSE
+               cRDD := aStat[ 'RDD' ]
+            ENDIF
+
+         ENDIF
+
+      ENDIF
+
+      // Reading the database structure, array is transformed to working format.
+      // The database is closed after reading.
+
+      DbUseArea( , cRDD, cFile,, .T. )
+      aStru := DbStruct()
+      aStru := StructASize( aStru )
+      DbCloseAll()
+
+      // Filling of comments.
+
+      IF ( nPos > 0 )
+         cName := ( Left( cFile, nPos ) + 'XML' )
+         IF File( cName )
+            aStru := LoadXML( cName, aStru )
+         ENDIF
+      ENDIF
+
+      WriteMsg( cFile + MSG_STRUCTURE_LOADED )
+
+      aStat[ 'FileName'   ] := cFile
+      aStat[ 'RDD'        ] := cRDD
+      aStat[ 'ChStruct'   ] := .F.          // Changing is absent
+      aStat[ 'ChDescript' ] := .F.
+      aStat[ 'Counter'    ] := 1            // Counter is reestablished
+
+      SetWinTitle()
+      SetIconSave( 0 )
+      SetRDDName()
+
+   CATCH
+      WriteMsg( MSG_ERROR_LOAD + cFile )
+
+   End
+
+   // If array is empty when to do the initialization
+
+   IF Empty( aStru )
+      aStru := InitDefault()
+      SetWinTitle()
+   ENDIF
+
+   oEditStru : SetArray( aStru )
+   oEditStru : Display()
+
+   oEditStru : goTop()
+   oEditStru : Refresh()
+
+   RETURN
+
+   ****** End of GetStructure ******
+
+   /******
+   *       LoadXML( cFile, aStru ) --> aStru
+   *       Filling of comments of fields
+   */
+
+STATIC FUNCTION LoadXML( cFile, aStru )
+
+   LOCAL oXMLDoc  := TXMLDocument() : New(), ;
       oXMLNode                          , ;
       cName                             , ;
       cField                            , ;
       nPos
 
-oXMLDoc : Read( Memoread( cFile ) )
-
-oXMLNode := oXMLDoc : FindFirst()
-
-// Usually for positioning to the needed XML node it is used the
-// function FindFirst() with node name as parameter. But
-// for me this function finds only root node.
-// Therefore desctiption analyse we will do by exhaustive search of the all nodes.
- 
-Do while ( Valtype( oXMLNode ) == 'O' )
-
-   cName := oXMLNode : cName                    // Node name
-
-   Do case
-      Case ( cName == XML_TAG_DESCRIPTION )     // Description of database
-        wModest.edtGeneral.Value := oXMLNode : cData
-
-      Case ( cName == XML_TAG_FIELD )           // Description of field row
-      
-        // Filling array with only existing description
-
-        If !Empty( oXMLNode : cData )
-        
-           cField := Upper( oXMLNode : GetAttribute( XML_ATTR_NAME ) )
-           
-           If !Empty( nPos := AScan( aStru, { | elem | Upper( elem[ DBS_NAME ] ) == cField } ) )
-              aStru[ nPos, DBS_COMMENT ] := AllTrim( oXMLNode : cData ) 
-           Endif 
-        Endif
-         
-   Endcase
+   oXMLDoc : Read( Memoread( cFile ) )
 
-   // Go to the next node
-   
-   oXmlNode := oXMLDoc : FindNext()
-
-Enddo
-
-Return aStru
-
-****** End of LoadXML ******
-
-
-/******
-*
-*       NewFile()
-*
-*       Create a new structure
-*
-*/
+   oXMLNode := oXMLDoc : FindFirst()
 
-Static procedure NewFile
-Memvar aStat, oEditStru
-Local aStru
+   // Usually for positioning to the needed XML node it is used the
+   // function FindFirst() with node name as parameter. But
+   // for me this function finds only root node.
+   // Therefore desctiption analyse we will do by exhaustive search of the all nodes.
 
-If ( aStat[ 'ChStruct'   ] .or. ;
-     aStat[ 'ChDescript' ]      ;
-   )
-   
-   If MsgYesNo( 'Data changed. Save?', 'Attention', .T., , .F., .F. )
-      If !SaveData()
-         Return
-      Endif
-   Endif
-   
-Endif
+   DO WHILE ( Valtype( oXMLNode ) == 'O' )
 
-aStru := InitDefault()
-oEditStru : SetArray( aStru )
+      cName := oXMLNode : cName                    // Node name
 
-oEditStru : Display()
+      DO CASE
+      CASE ( cName == XML_TAG_DESCRIPTION )     // Description of database
+         wModest.edtGeneral.Value := oXMLNode : cData
 
-oEditStru : goTop()
-oEditStru : Refresh()
+      CASE ( cName == XML_TAG_FIELD )           // Description of field row
 
-// Change the datas which ate show in editing fields.
-        
-wModest.txbName.Value    := ''
-wModest.cmbType.Value    := TYPE_IS_CHAR
-wModest.spnLen.Value     := 1
-wModest.spnDec.Value     := 0
-wModest.edtComment.Value := ''
-wModest.txbRule.Value    := ''
+         // Filling array with only existing description
 
-wModest.edtGeneral.Value := ''
+         IF !Empty( oXMLNode : cData )
 
-SetWinTitle()
-SetIconSave( 0 )
+            cField := Upper( oXMLNode : GetAttribute( XML_ATTR_NAME ) )
 
-WriteMsg( MSG_NEW_STRUCTURE )
+            IF !Empty( nPos := AScan( aStru, { | elem | Upper( elem[ DBS_NAME ] ) == cField } ) )
+               aStru[ nPos, DBS_COMMENT ] := AllTrim( oXMLNode : cData )
+            ENDIF
+         ENDIF
 
-Return
+      ENDCASE
 
-****** End of NewFile ******
+      // Go to the next node
 
+      oXmlNode := oXMLDoc : FindNext()
 
-/******
-*
-*       LoadFile()
-*
-*       Loading of database structure
-*
-*/
+   ENDDO
 
-Static Procedure LoadFile
-Memvar aStat
-Local cFile
+   RETURN aStru
 
-If ( aStat[ 'ChStruct'   ] .or. ;
-     aStat[ 'ChDescript' ]      ;
-   )
-   
-   If MsgYesNo( 'Data changed. Save?', 'Attention', .T., , .F., .F. )
-      If !SaveData()
-         Return
-      Endif
-   Endif
-   
-Endif
+   ****** End of LoadXML ******
 
-cFile := GetFile( FILEDLG_FILTER, 'Select dBASE file', , .F., .T. )
+   /******
+   *       NewFile()
+   *       Create a new structure
+   */
 
-If !Empty( cFile )
-   GetStructure( cFile )
-Endif
+STATIC PROCEDURE NewFile
 
-Return
+   MEMVAR aStat, oEditStru
+   LOCAL aStru
 
-****** End of LoadFile ******
+   IF ( aStat[ 'ChStruct'   ] .or. ;
+         aStat[ 'ChDescript' ]      ;
+         )
 
+      IF MsgYesNo( 'Data changed. Save?', 'Attention', .T., , .F., .F. )
+         IF !SaveData()
 
-/******
-*
-*       EditGeneralDesc()
-*
-*       Editing of general database description
-*
-*/
+            RETURN
+         ENDIF
+      ENDIF
 
-Static Procedure EditGeneralDesc
-Memvar aStat
+   ENDIF
 
-// Available only controls which are needed for editing
+   aStru := InitDefault()
+   oEditStru : SetArray( aStru )
 
-InvertForEdit( .F. )         // Locking of menu, toolbar
-InvertForGeneral()           // Tab controls
+   oEditStru : Display()
 
-// Save the current value (for possible refusal from changing)
+   oEditStru : goTop()
+   oEditStru : Refresh()
 
-aStat[ 'Cargo' ] := wModest.edtGeneral.Value
+   // Change the datas which ate show in editing fields.
 
-// Show needed tab and buttons
-
-wModest.tbDescript.Value := 2
-
-wModest.StatusBar.Item( 1 ) := ( 'Edit general base description. ' + SHORTKEY_TOOLTIP )
-
-// Assignment of hotkeys
-
-On key F2 of wModest Action FiniEdtGeneral( SET_OK )
-On key Escape of wModest Action FiniEdtGeneral( SET_CANCEL )
-
-wModest.edtGeneral.SetFocus 
-
-Return
-
-****** End of EditGeneralDesc ******
-
-
-/******
-*
-*       FiniEdtGeneral( nMode )
-*
-*       Finish of editing of general database description
-*
-*/
-
-Static Procedure FiniEdtGeneral( nMode )
-Memvar aStat, oEditStru
-
-If ( nMode == SET_CANCEL )
-
-   // Restore the previous value
-   wModest.edtGeneral.Value := aStat[ 'Cargo' ]
-
-Else
-   
-   // Check for changing
-   aStat[ 'ChDescript' ] := !( wModest.edtGeneral.Value == aStat[ 'Cargo' ] )
-   
-Endif
-
-aStat[ 'Cargo' ] := ''
-
-// Open the locked controls
-
-InvertForEdit( .T. )        // Menu, toolbar
-InvertForGeneral()          // Tab controls
-
-If aStat[ 'ChDescript' ]
-   SetIconSave( 1 )
-Endif
-
-wModest.StatusBar.Item( 1 ) := ''
-
-Release key F2 of wModest
-Release key Escape of wModest
-
-wModest.oEditStru.SetFocus
-   
-Return
-
-****** End of FiniEdtGeneral ******
-
-
-/******
-*
-*       EditField( nMode )
-*
-*       Field's editing
-*
-*/
-
-Static Procedure EditField( nMode )
-Memvar aStat, oEditStru
-Local nRow, ;
-      nPos
-
-// Перечитуємо характеристики. Пов’язане з тим, що при перегортанні
-// рядків по PageDown вказівник може стояти на останній позиціїї, а
-// факт зміни внутрішніх змінних в TsBrowse не реєструється в опції
-// On change
- 
-ShowValues()
-nRow := oEditStru : nAt
-
-// Спочатку перевіряємо можливість виконання операцій. Якщо назва поля порожня,
-// вважаємо, що структура не заповнена. В цьому випадку дозволяється лише
-// додавання нового поля.
-
-If ( ( nMode == MODE_INSFIELD  ) .or. ;
-     ( nMode == MODE_EDITFIELD )      ;
-   )
-   
-   If Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
-   
-      // Якщо пробують виконати вставку або редагування запису в порожній структурі,
-      // перемикаємо на режим додавання.
-      
-      nMode := MODE_NEWFIELD
-      
-   Endif
-   
-Endif
-
-If ( nMode == MODE_EDITFIELD )      // Редагування. Значення існують.
-
-   wModest.txbName.Value := oEditStru : aArray[ nRow, DBS_NAME ]
-
-   If !Empty( nPos := AScan( CORRECT_TYPES, oEditStru : aArray[ nRow, DBS_TYPE ] ) )
-      wModest.cmbType.Value := nPos
-   Else
-      wModest.cmbType.Value := aStat[ 'DefType' ]
-   Endif
-   
-   wModest.spnLen.Value     := oEditStru : aArray[ nRow, DBS_LEN     ]
-   wModest.spnDec.Value     := oEditStru : aArray[ nRow, DBS_DEC     ]
-   wModest.edtComment.Value := oEditStru : aArray[ nRow, DBS_COMMENT ]
-   wModest.txbRule.Value    := oEditStru : aArray[ nRow, DBS_RULE    ]
-
-   // Правило перетворення
-   
-   aStat[ 'Cargo' ] := Upper( AllTrim( wModest.txbRule.Value ) )
-      
-Else
-   wModest.txbName.Value    := ( aStat[ 'DefName' ] + StrZero( aStat[ 'Counter' ], 3 ) )
-   wModest.cmbType.Value    := aStat[ 'DefType' ]
-   wModest.spnLen.Value     := aStat[ 'DefLen'  ]
-   wModest.spnDec.Value     := aStat[ 'DefDec'  ]
+   wModest.txbName.Value    := ''
+   wModest.cmbType.Value    := TYPE_IS_CHAR
+   wModest.spnLen.Value     := 1
+   wModest.spnDec.Value     := 0
    wModest.edtComment.Value := ''
    wModest.txbRule.Value    := ''
 
-Endif
+   wModest.edtGeneral.Value := ''
 
-// Залишаємо доступними тільки елементи, необхідні для редагування
+   SetWinTitle()
+   SetIconSave( 0 )
 
-InvertForEdit( .F. )      // Меню, панель інструментів
-InvertForFields()         // Елементи вкладок
+   WriteMsg( MSG_NEW_STRUCTURE )
 
-// Заповнюювати поле правила перетворення даних має сенс тільки в режимі
-// редагування (дані мають існувати)
-// TODO: додаткого перевіряти ознаку рядка в списку і ігнорувати
-// створені записи
+   RETURN
 
-If ( nMode == MODE_EDITFIELD )
-   InvertEnable( 'txbRule' )
-Endif
- 
-wModest.tbDescript.Value := 1           // Відображаємо потрібну закладку
+   ****** End of NewFile ******
 
-Do case
-   Case ( nMode == MODE_NEWFIELD )
-     aStat[ 'CurrMode' ] := MODE_NEWFIELD
-     wModest.StatusBar.Item( 1 ) := ( 'Create new field. ' + SHORTKEY_TOOLTIP )
-     
-   Case ( nMode == MODE_INSFIELD )
-     aStat[ 'CurrMode' ] := MODE_INSFIELD
-     wModest.StatusBar.Item( 1 ) := ( 'Insert ' + Iif( ( nShift < 0 ), '(before)', '(after)' ) + ;
-                                      ' new field. ' + SHORTKEY_TOOLTIP )
-     
-   Case ( nMode == MODE_EDITFIELD )
-     aStat[ 'CurrMode' ] := MODE_EDITFIELD
-     wModest.StatusBar.Item( 1 ) := ( 'Edit current field. ' + SHORTKEY_TOOLTIP )
-     
-Endcase
+   /******
+   *       LoadFile()
+   *       Loading of database structure
+   */
 
-// Призначення клавіш для швидкого завершення редагування
+STATIC PROCEDURE LoadFile
 
-On key F2 of wModest Action FiniEditField( SET_OK )
-On key Escape of wModest Action FiniEditField( SET_CANCEL )
+   MEMVAR aStat
+   LOCAL cFile
 
-wModest.txbName.SetFocus 
+   IF ( aStat[ 'ChStruct'   ] .or. ;
+         aStat[ 'ChDescript' ]      ;
+         )
 
-Return
+      IF MsgYesNo( 'Data changed. Save?', 'Attention', .T., , .F., .F. )
+         IF !SaveData()
 
-****** End of EditField ******
+            RETURN
+         ENDIF
+      ENDIF
 
+   ENDIF
 
-/******
-*
-*       ChangeMaxLimit()
-*
-*       Changing of max field size limit in dependence from type
-*
-*/
+   cFile := GetFile( FILEDLG_FILTER, 'Select dBASE file', , .F., .T. )
 
-Static Procedure ChangeMaxLimit
+   IF !Empty( cFile )
+      GetStructure( cFile )
+   ENDIF
 
-// Коригуємо співвідношення розмірності поля та дробноъ частини.
-// Для логічних полів не має сенсу встановлювати довжину поля понад 1,
-// полів приміток - 10. І, звичайно, такі поля не повинні мати дробної частини.
-// А дата має розмірність 8.
+   RETURN
 
-Do case
-   Case ( wModest.cmbType.Value == TYPE_IS_CHAR )
+   ****** End of LoadFile ******
+
+   /******
+   *       EditGeneralDesc()
+   *       Editing of general database description
+   */
+
+STATIC PROCEDURE EditGeneralDesc
+
+   MEMVAR aStat
+
+   // Available only controls which are needed for editing
+
+   InvertForEdit( .F. )         // Locking of menu, toolbar
+   InvertForGeneral()           // Tab controls
+
+   // Save the current value (for possible refusal from changing)
+
+   aStat[ 'Cargo' ] := wModest.edtGeneral.Value
+
+   // Show needed tab and buttons
+
+   wModest.tbDescript.Value := 2
+
+   wModest.StatusBar.Item( 1 ) := ( 'Edit general base description. ' + SHORTKEY_TOOLTIP )
+
+   // Assignment of hotkeys
+
+   On key F2 of wModest Action FiniEdtGeneral( SET_OK )
+   On key Escape of wModest Action FiniEdtGeneral( SET_CANCEL )
+
+   wModest.edtGeneral.SetFocus
+
+   RETURN
+
+   ****** End of EditGeneralDesc ******
+
+   /******
+   *       FiniEdtGeneral( nMode )
+   *       Finish of editing of general database description
+   */
+
+STATIC PROCEDURE FiniEdtGeneral( nMode )
+
+   MEMVAR aStat, oEditStru
+
+   IF ( nMode == SET_CANCEL )
+
+      // Restore the previous value
+      wModest.edtGeneral.Value := aStat[ 'Cargo' ]
+
+   ELSE
+
+      // Check for changing
+      aStat[ 'ChDescript' ] := !( wModest.edtGeneral.Value == aStat[ 'Cargo' ] )
+
+   ENDIF
+
+   aStat[ 'Cargo' ] := ''
+
+   // Open the locked controls
+
+   InvertForEdit( .T. )        // Menu, toolbar
+   InvertForGeneral()          // Tab controls
+
+   IF aStat[ 'ChDescript' ]
+      SetIconSave( 1 )
+   ENDIF
+
+   wModest.StatusBar.Item( 1 ) := ''
+
+   RELEASE key F2 of wModest
+   RELEASE key Escape of wModest
+
+   wModest.oEditStru.SetFocus
+
+   RETURN
+
+   ****** End of FiniEdtGeneral ******
+
+   /******
+   *       EditField( nMode )
+   *       Field's editing
+   */
+
+STATIC PROCEDURE EditField( nMode )
+
+   MEMVAR aStat, oEditStru
+   LOCAL nRow, ;
+      nPos
+
+   // Перечитуємо характеристики. Пов’язане з тим, що при перегортанні
+   // рядків по PageDown вказівник може стояти на останній позиціїї, а
+   // факт зміни внутрішніх змінних в TsBrowse не реєструється в опції
+   // On change
+
+   ShowValues()
+   nRow := oEditStru : nAt
+
+   // Спочатку перевіряємо можливість виконання операцій. Якщо назва поля порожня,
+   // вважаємо, що структура не заповнена. В цьому випадку дозволяється лише
+   // додавання нового поля.
+
+   IF ( ( nMode == MODE_INSFIELD  ) .or. ;
+         ( nMode == MODE_EDITFIELD )      ;
+         )
+
+      IF Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
+
+         // Якщо пробують виконати вставку або редагування запису в порожній структурі,
+         // перемикаємо на режим додавання.
+
+         nMode := MODE_NEWFIELD
+
+      ENDIF
+
+   ENDIF
+
+   IF ( nMode == MODE_EDITFIELD )      // Редагування. Значення існують.
+
+      wModest.txbName.Value := oEditStru : aArray[ nRow, DBS_NAME ]
+
+      IF !Empty( nPos := AScan( CORRECT_TYPES, oEditStru : aArray[ nRow, DBS_TYPE ] ) )
+         wModest.cmbType.Value := nPos
+      ELSE
+         wModest.cmbType.Value := aStat[ 'DefType' ]
+      ENDIF
+
+      wModest.spnLen.Value     := oEditStru : aArray[ nRow, DBS_LEN     ]
+      wModest.spnDec.Value     := oEditStru : aArray[ nRow, DBS_DEC     ]
+      wModest.edtComment.Value := oEditStru : aArray[ nRow, DBS_COMMENT ]
+      wModest.txbRule.Value    := oEditStru : aArray[ nRow, DBS_RULE    ]
+
+      // Правило перетворення
+
+      aStat[ 'Cargo' ] := Upper( AllTrim( wModest.txbRule.Value ) )
+
+   ELSE
+      wModest.txbName.Value    := ( aStat[ 'DefName' ] + StrZero( aStat[ 'Counter' ], 3 ) )
+      wModest.cmbType.Value    := aStat[ 'DefType' ]
+      wModest.spnLen.Value     := aStat[ 'DefLen'  ]
+      wModest.spnDec.Value     := aStat[ 'DefDec'  ]
+      wModest.edtComment.Value := ''
+      wModest.txbRule.Value    := ''
+
+   ENDIF
+
+   // Залишаємо доступними тільки елементи, необхідні для редагування
+
+   InvertForEdit( .F. )      // Меню, панель інструментів
+   InvertForFields()         // Елементи вкладок
+
+   // Заповнюювати поле правила перетворення даних має сенс тільки в режимі
+   // редагування (дані мають існувати)
+   // TODO: додаткого перевіряти ознаку рядка в списку і ігнорувати
+   // створені записи
+
+   IF ( nMode == MODE_EDITFIELD )
+      InvertEnable( 'txbRule' )
+   ENDIF
+
+   wModest.tbDescript.Value := 1           // Відображаємо потрібну закладку
+
+   DO CASE
+   CASE ( nMode == MODE_NEWFIELD )
+      aStat[ 'CurrMode' ] := MODE_NEWFIELD
+      wModest.StatusBar.Item( 1 ) := ( 'Create new field. ' + SHORTKEY_TOOLTIP )
+
+   CASE ( nMode == MODE_INSFIELD )
+      aStat[ 'CurrMode' ] := MODE_INSFIELD
+      wModest.StatusBar.Item( 1 ) := ( 'Insert ' + Iif( ( nShift < 0 ), '(before)', '(after)' ) + ;
+         ' new field. ' + SHORTKEY_TOOLTIP )
+
+   CASE ( nMode == MODE_EDITFIELD )
+      aStat[ 'CurrMode' ] := MODE_EDITFIELD
+      wModest.StatusBar.Item( 1 ) := ( 'Edit current field. ' + SHORTKEY_TOOLTIP )
+
+   ENDCASE
+
+   // Призначення клавіш для швидкого завершення редагування
+
+   On key F2 of wModest Action FiniEditField( SET_OK )
+   On key Escape of wModest Action FiniEditField( SET_CANCEL )
+
+   wModest.txbName.SetFocus
+
+   RETURN
+
+   ****** End of EditField ******
+
+   /******
+   *       ChangeMaxLimit()
+   *       Changing of max field size limit in dependence from type
+   */
+
+STATIC PROCEDURE ChangeMaxLimit
+
+   // Коригуємо співвідношення розмірності поля та дробноъ частини.
+   // Для логічних полів не має сенсу встановлювати довжину поля понад 1,
+   // полів приміток - 10. І, звичайно, такі поля не повинні мати дробної частини.
+   // А дата має розмірність 8.
+
+   DO CASE
+   CASE ( wModest.cmbType.Value == TYPE_IS_CHAR )
       wModest.spnLen.RangeMax := LEN_IS_CHAR
       wModest.spnLen.Value    := Min( LEN_IS_CHAR, wModest.spnLen.Value )
-     
+
       // Для символьних полів дозволяється вказувати дробну частину.
       // В Clipper за допомогою цього можна було обходити обмеження
       // довжини поля.
-     
+
       wModest.spnDec.RangeMax := LEN_IS_NUM
       wModest.spnDec.Value    := Min( LEN_IS_CHAR, wModest.spnDec.Value )
-     
-   Case ( wModest.cmbType.Value == TYPE_IS_NUM )
+
+   CASE ( wModest.cmbType.Value == TYPE_IS_NUM )
       wModest.spnLen.RangeMax := LEN_IS_NUM
       wModest.spnLen.Value    := Min( LEN_IS_NUM, wModest.spnLen.Value )
 
       wModest.spnDec.RangeMax := LEN_IS_NUM
       wModest.spnDec.Value    := Min( LEN_IS_CHAR, wModest.spnDec.Value )
 
-   Case ( wModest.cmbType.Value == TYPE_IS_DATE )
+   CASE ( wModest.cmbType.Value == TYPE_IS_DATE )
       wModest.spnLen.RangeMax := LEN_IS_DATE
       wModest.spnLen.Value    := LEN_IS_DATE
 
       wModest.spnDec.RangeMax := 0
       wModest.spnDec.Value    := 0
 
-   Case ( wModest.cmbType.Value == TYPE_IS_LOGIC )
+   CASE ( wModest.cmbType.Value == TYPE_IS_LOGIC )
       wModest.spnLen.RangeMax := LEN_IS_LOGIC
       wModest.spnLen.Value    := LEN_IS_LOGIC
 
       wModest.spnDec.RangeMax := 0
       wModest.spnDec.Value    := 0
-   
-   Case ( wModest.cmbType.Value == TYPE_IS_MEMO )
+
+   CASE ( wModest.cmbType.Value == TYPE_IS_MEMO )
       wModest.spnLen.RangeMax := LEN_IS_MEMO
       wModest.spnLen.Value    := LEN_IS_MEMO
       wModest.spnDec.RangeMax := 0
       wModest.spnDec.Value    := 0
 
-Endcase
+   ENDCASE
 
-Return
+   RETURN
 
-****** End of ChangeMaxLimit ******
+   ****** End of ChangeMaxLimit ******
 
+   /******
+   *       FiniEditField( nMode )
+   *       Finish the field editing
+   */
 
-/******
-*
-*       FiniEditField( nMode )
-*
-*       Finish the field editing
-*
-*/
+STATIC PROCEDURE FiniEditField( nMode )
 
-Static Procedure FiniEditField( nMode )
-Memvar aStat, oEditStru
-Local nRow := oEditStru : nAt, ;
+   MEMVAR aStat, oEditStru
+   LOCAL nRow := oEditStru : nAt, ;
       aItem                  , ;
       nType := wModest.cmbType.Value
 
-If ( nMode == SET_OK )
+   IF ( nMode == SET_OK )
 
-   // Перевіримо коректність внесених даних
-   
-   If !CheckData()
-      Return
-   Endif
-   
-   // Зберігаємо зміни
+      // Перевіримо коректність внесених даних
 
-   If ( ( aStat[ 'CurrMode' ] == MODE_NEWFIELD ) .or. ;
-        ( aStat[ 'CurrMode' ] == MODE_INSFIELD )      ;
-      )
-      
-      aItem := Array( DBS_NEW_ALEN )
-      
-      aItem[ DBS_FLAG    ] := FLAG_INSERTED
-      aItem[ DBS_NAME    ] := wModest.txbName.Value
-      aItem[ DBS_TYPE    ] := CORRECT_TYPES[ nType ]
-      aItem[ DBS_LEN     ] := wModest.spnLen.Value
-      aItem[ DBS_DEC     ] := wModest.spnDec.Value
-      aItem[ DBS_OLDNAME ] := ''
-      aItem[ DBS_OLDTYPE ] := ''
-      aItem[ DBS_OLDLEN  ] := 0
-      aItem[ DBS_OLDDEC  ] := 0
-      aItem[ DBS_COMMENT ] := wModest.edtComment.Value
-      aItem[ DBS_RULE    ] := wModest.txbRule.Value
+      IF !CheckData()
 
-      aStat[ 'Counter'    ] ++
-      aStat[ 'ChStruct'   ] := .T.
-      aStat[ 'ChDescript' ] := .T.
-                  
-  Endif
-   
-  Do case
-     Case ( aStat[ 'CurrMode' ] == MODE_NEWFIELD )
-      
-       If Empty( oEditStru : aArray[ 1, DBS_NAME ] )
-          oEditStru : aArray[ 1, DBS_FLAG    ] := FLAG_INSERTED
-          oEditStru : aArray[ 1, DBS_NAME    ] := wModest.txbName.Value
-          oEditStru : aArray[ 1, DBS_TYPE    ] := CORRECT_TYPES[ nType ]
-          oEditStru : aArray[ 1, DBS_LEN     ] := wModest.spnLen.Value
-          oEditStru : aArray[ 1, DBS_DEC     ] := wModest.spnDec.Value
-          oEditStru : aArray[ 1, DBS_OLDNAME ] := ''
-          oEditStru : aArray[ 1, DBS_OLDTYPE ] := ''
-          oEditStru : aArray[ 1, DBS_OLDLEN  ] := 0
-          oEditStru : aArray[ 1, DBS_OLDDEC  ] := 0
-          oEditStru : aArray[ 1, DBS_COMMENT ] := wModest.edtComment.Value
-          oEditStru : aArray[ 1, DBS_RULE    ] := wModest.txbRule.Value
-           
-       Else
-         nRow := ( oEditStru : nLen + 1 )
-         oEditStru : Insert( aItem, nRow )
-         oEditStru : GoPos( nRow, 2 )
+         RETURN
+      ENDIF
+
+      // Зберігаємо зміни
+
+      IF ( ( aStat[ 'CurrMode' ] == MODE_NEWFIELD ) .or. ;
+            ( aStat[ 'CurrMode' ] == MODE_INSFIELD )      ;
+            )
+
+         aItem := Array( DBS_NEW_ALEN )
+
+         aItem[ DBS_FLAG    ] := FLAG_INSERTED
+         aItem[ DBS_NAME    ] := wModest.txbName.Value
+         aItem[ DBS_TYPE    ] := CORRECT_TYPES[ nType ]
+         aItem[ DBS_LEN     ] := wModest.spnLen.Value
+         aItem[ DBS_DEC     ] := wModest.spnDec.Value
+         aItem[ DBS_OLDNAME ] := ''
+         aItem[ DBS_OLDTYPE ] := ''
+         aItem[ DBS_OLDLEN  ] := 0
+         aItem[ DBS_OLDDEC  ] := 0
+         aItem[ DBS_COMMENT ] := wModest.edtComment.Value
+         aItem[ DBS_RULE    ] := wModest.txbRule.Value
+
+         aStat[ 'Counter'    ] ++
+         aStat[ 'ChStruct'   ] := .T.
+         aStat[ 'ChDescript' ] := .T.
+
+      ENDIF
+
+      DO CASE
+      CASE ( aStat[ 'CurrMode' ] == MODE_NEWFIELD )
+
+         IF Empty( oEditStru : aArray[ 1, DBS_NAME ] )
+            oEditStru : aArray[ 1, DBS_FLAG    ] := FLAG_INSERTED
+            oEditStru : aArray[ 1, DBS_NAME    ] := wModest.txbName.Value
+            oEditStru : aArray[ 1, DBS_TYPE    ] := CORRECT_TYPES[ nType ]
+            oEditStru : aArray[ 1, DBS_LEN     ] := wModest.spnLen.Value
+            oEditStru : aArray[ 1, DBS_DEC     ] := wModest.spnDec.Value
+            oEditStru : aArray[ 1, DBS_OLDNAME ] := ''
+            oEditStru : aArray[ 1, DBS_OLDTYPE ] := ''
+            oEditStru : aArray[ 1, DBS_OLDLEN  ] := 0
+            oEditStru : aArray[ 1, DBS_OLDDEC  ] := 0
+            oEditStru : aArray[ 1, DBS_COMMENT ] := wModest.edtComment.Value
+            oEditStru : aArray[ 1, DBS_RULE    ] := wModest.txbRule.Value
+
+         ELSE
+            nRow := ( oEditStru : nLen + 1 )
+            oEditStru : Insert( aItem, nRow )
+            oEditStru : GoPos( nRow, 2 )
+            oEditStru : Display()
+         ENDIF
+
+      CASE ( aStat[ 'CurrMode' ] == MODE_INSFIELD )
+
+         // Рядок вставляється після поточного (nShift == 1) або попереду (nShift == 0)
+
+         oEditStru : Insert( aItem, nRow + nShift )
          oEditStru : Display()
-       Endif
 
-     Case ( aStat[ 'CurrMode' ] == MODE_INSFIELD )
-       
-       // Рядок вставляється після поточного (nShift == 1) або попереду (nShift == 0)
+      CASE ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
 
-       oEditStru : Insert( aItem, nRow + nShift )
-       oEditStru : Display()
-     
-     Case ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
+         // Що змінилося
 
-       // Що змінилося
-       
-       If ( !( oEditStru : aArray[ nRow, DBS_NAME ] == wModest.txbName.Value  ) .or. ;
-            !( oEditStru : aArray[ nRow, DBS_TYPE ] == CORRECT_TYPES[ nType ] ) .or. ;
-            !( oEditStru : aArray[ nRow, DBS_LEN  ] == wModest.spnLen.Value   ) .or. ;
-            !( oEditStru : aArray[ nRow, DBS_DEC  ] == wModest.spnDec.Value   )      ;
-          )
-          aStat[ 'ChStruct' ] := .T.
-       Endif
+         IF ( !( oEditStru : aArray[ nRow, DBS_NAME ] == wModest.txbName.Value  ) .or. ;
+               !( oEditStru : aArray[ nRow, DBS_TYPE ] == CORRECT_TYPES[ nType ] ) .or. ;
+               !( oEditStru : aArray[ nRow, DBS_LEN  ] == wModest.spnLen.Value   ) .or. ;
+               !( oEditStru : aArray[ nRow, DBS_DEC  ] == wModest.spnDec.Value   )      ;
+               )
+            aStat[ 'ChStruct' ] := .T.
+         ENDIF
 
-       If !( oEditStru : aArray[ nRow, DBS_COMMENT ] == wModest.edtComment.Value )
-          aStat[ 'ChDescript' ] := .T.
-       Endif            
+         IF !( oEditStru : aArray[ nRow, DBS_COMMENT ] == wModest.edtComment.Value )
+            aStat[ 'ChDescript' ] := .T.
+         ENDIF
 
-       If !( Upper( AllTrim( wModest.txbRule.Value ) ) == aStat[ 'Cargo' ] )
-          aStat[ 'ChStruct' ] := .T.
-       Endif
+         IF !( Upper( AllTrim( wModest.txbRule.Value ) ) == aStat[ 'Cargo' ] )
+            aStat[ 'ChStruct' ] := .T.
+         ENDIF
 
-       oEditStru : aArray[ nRow, DBS_NAME    ] := wModest.txbName.Value
-       oEditStru : aArray[ nRow, DBS_TYPE    ] := CORRECT_TYPES[ nType ]
-       oEditStru : aArray[ nRow, DBS_LEN     ] := wModest.spnLen.Value
-       oEditStru : aArray[ nRow, DBS_DEC     ] := wModest.spnDec.Value
-       oEditStru : aArray[ nRow, DBS_COMMENT ] := wModest.edtComment.Value
-       oEditStru : aArray[ nRow, DBS_RULE    ] := wModest.txbRule.Value
-     
-  Endcase
+         oEditStru : aArray[ nRow, DBS_NAME    ] := wModest.txbName.Value
+         oEditStru : aArray[ nRow, DBS_TYPE    ] := CORRECT_TYPES[ nType ]
+         oEditStru : aArray[ nRow, DBS_LEN     ] := wModest.spnLen.Value
+         oEditStru : aArray[ nRow, DBS_DEC     ] := wModest.spnDec.Value
+         oEditStru : aArray[ nRow, DBS_COMMENT ] := wModest.edtComment.Value
+         oEditStru : aArray[ nRow, DBS_RULE    ] := wModest.txbRule.Value
 
-  oEditStru : GoPos( ( nRow + nShift ), 2 )
-   
-Endif
+      ENDCASE
 
-// Відкриваємо доступ до елементів
+      oEditStru : GoPos( ( nRow + nShift ), 2 )
 
-InvertForEdit( .T. )        // Меню, панель інструментів
-InvertForFields()           // Елементи вкладок
+   ENDIF
 
-// Правило перетворення заповнюється тільки в режимі
-// редагування існуючого поля
+   // Відкриваємо доступ до елементів
 
-If ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
-   InvertEnable( 'txbRule' )
-Endif
+   InvertForEdit( .T. )        // Меню, панель інструментів
+   InvertForFields()           // Елементи вкладок
 
-If ( aStat[ 'ChStruct'   ] .or. ;
-     aStat[ 'ChDescript' ]      ;
-   )
+   // Правило перетворення заповнюється тільки в режимі
+   // редагування існуючого поля
+
+   IF ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
+      InvertEnable( 'txbRule' )
+   ENDIF
+
+   IF ( aStat[ 'ChStruct'   ] .or. ;
+         aStat[ 'ChDescript' ]      ;
+         )
+      SetIconSave( 1 )
+   ENDIF
+
+   wModest.StatusBar.Item( 1 ) := ''
+
+   aStat[ 'CurrMode' ] := MODE_DEFAULT
+   aStat[ 'Cargo'    ] := ''
+
+   RELEASE key F2 of wModest
+   RELEASE key Escape of wModest
+
+   oEditStru : Refresh()
+
+   ShowValues()
+
+   RETURN
+
+   ****** End of FiniEditField ******
+
+   /******
+   *       DelField()
+   *       To remove the row
+   */
+
+STATIC PROCEDURE DelField
+
+   MEMVAR aStat, oEditStru
+   LOCAL nRow := oEditStru : nAt
+
+   IF Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
+
+      RETURN
+   ENDIF
+
+   // Створені рядки видаляємо з таблиці, а ті, що вже існували,
+   // лише помічаємо як видалені. Це дає можливість зняти відмітку
+
+   IF ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
+
+      IF ( oEditStru : nLen == 1 )
+
+         // Якщо таблиця містить тільки один рядок, просто
+         // видаляємо існуючі значення
+
+         oEditStru : aArray[ 1, DBS_FLAG    ] := FLAG_DEFAULT
+         oEditStru : aArray[ 1, DBS_NAME    ] := Nil
+         oEditStru : aArray[ 1, DBS_TYPE    ] := Nil
+         oEditStru : aArray[ 1, DBS_LEN     ] := Nil
+         oEditStru : aArray[ 1, DBS_DEC     ] := Nil
+         oEditStru : aArray[ 1, DBS_OLDNAME ] := Nil
+         oEditStru : aArray[ 1, DBS_OLDTYPE ] := Nil
+         oEditStru : aArray[ 1, DBS_OLDLEN  ] := Nil
+         oEditStru : aArray[ 1, DBS_OLDDEC  ] := Nil
+         oEditStru : aArray[ 1, DBS_COMMENT ] := Nil
+         oEditStru : aArray[ 1, DBS_RULE    ] := Nil
+
+      ELSE
+
+         // Для видалення тимчасово вмикаємо штатну можливість
+
+         oEditStru : SetDeleteMode( .T. )
+         oEditStru : DeleteRow()
+         oEditStru : SetDeleteMode( .F. )
+
+      ENDIF
+
+   ELSE
+
+      IF ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
+         oEditStru : aArray[ nRow, DBS_FLAG ] := FLAG_DEFAULT
+      ELSE
+         oEditStru : aArray[ nRow, DBS_FLAG ] := FLAG_DELETED
+      ENDIF
+
+   ENDIF
+
+   oEditStru : Refresh()
+
+   // Відображаємо зміну
+
+   aStat[ 'ChStruct' ] := .T.
    SetIconSave( 1 )
-Endif
 
-wModest.StatusBar.Item( 1 ) := ''
+   RETURN
 
-aStat[ 'CurrMode' ] := MODE_DEFAULT
-aStat[ 'Cargo'    ] := ''
+   ****** End of DelField ******
 
-Release key F2 of wModest
-Release key Escape of wModest
+   /******
+   *       CheckData() --> lSuccess
+   *       Checkup for valid field attributes
+   */
 
-oEditStru : Refresh()
+STATIC FUNCTION CheckData
 
-ShowValues()
-
-Return
-
-****** End of FiniEditField ******
-
-
-/******
-*
-*       DelField()
-*
-*       To remove the row
-*
-*/
-
-Static Procedure DelField
-Memvar aStat, oEditStru
-Local nRow := oEditStru : nAt
-
-If Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
-   Return
-Endif
-
-// Створені рядки видаляємо з таблиці, а ті, що вже існували,
-// лише помічаємо як видалені. Це дає можливість зняти відмітку
-
-If ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
-
-     If ( oEditStru : nLen == 1 )
-        
-        // Якщо таблиця містить тільки один рядок, просто
-        // видаляємо існуючі значення
-
-        oEditStru : aArray[ 1, DBS_FLAG    ] := FLAG_DEFAULT
-        oEditStru : aArray[ 1, DBS_NAME    ] := Nil
-        oEditStru : aArray[ 1, DBS_TYPE    ] := Nil
-        oEditStru : aArray[ 1, DBS_LEN     ] := Nil
-        oEditStru : aArray[ 1, DBS_DEC     ] := Nil
-        oEditStru : aArray[ 1, DBS_OLDNAME ] := Nil
-        oEditStru : aArray[ 1, DBS_OLDTYPE ] := Nil
-        oEditStru : aArray[ 1, DBS_OLDLEN  ] := Nil
-        oEditStru : aArray[ 1, DBS_OLDDEC  ] := Nil
-        oEditStru : aArray[ 1, DBS_COMMENT ] := Nil
-        oEditStru : aArray[ 1, DBS_RULE    ] := Nil
-        
-     Else
-     
-       // Для видалення тимчасово вмикаємо штатну можливість
-        
-       oEditStru : SetDeleteMode( .T. )
-       oEditStru : DeleteRow()
-       oEditStru : SetDeleteMode( .F. )
-     
-     Endif
-
-Else
-
-   If ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
-      oEditStru : aArray[ nRow, DBS_FLAG ] := FLAG_DEFAULT
-   Else
-      oEditStru : aArray[ nRow, DBS_FLAG ] := FLAG_DELETED
-   Endif
-   
-Endif
-
-oEditStru : Refresh()
-
-// Відображаємо зміну
-
-aStat[ 'ChStruct' ] := .T.
-SetIconSave( 1 )
-
-Return
-
-****** End of DelField ******
-
-
-/******
-*
-*       CheckData() --> lSuccess
-*
-*       Checkup for valid field attributes
-*/
-
-Static Function CheckData
-Memvar aStat, oEditStru
-Local lSuccess   := .F.             , ;
+   MEMVAR aStat, oEditStru
+   LOCAL lSuccess   := .F.             , ;
       Cycle                         , ;
       nLen       := oEditStru : nLen, ;
       nRow       := oEditStru : nAt , ;
@@ -2101,280 +2013,273 @@ Local lSuccess   := .F.             , ;
       nType                         , ;
       xRule
 
-Begin Sequence
+   BEGIN Sequence
 
-   // Перевірка імені поля. Ім’я має починатися з символу, складатися
-   // виключно з латинських літер "A"-"Z", чисел 0-9 і, можливо, символа
-   // підкреслювання "_" 
-   
-   If !CheckNameField( AllTrim( wModest.txbName.Value ) )
-      Break
-   Endif
-   
-   // Перевіримо дублювання полів
-   
-   For Cycle := 1 to nLen
+      // Перевірка імені поля. Ім’я має починатися з символу, складатися
+      // виключно з латинських літер "A"-"Z", чисел 0-9 і, можливо, символа
+      // підкреслювання "_"
 
-       cFieldName := Iif( Empty( oEditStru : aArray[ Cycle, DBS_NAME ] )           , ;
-                          ''                                                       , ;
-                          AllTrim( Upper( oEditStru : aArray[ Cycle, DBS_NAME ] ) )  ;
-                        )
-   
-       If ( AllTrim( Upper( wModest.txbName.Value ) ) == cFieldName )
-          
-          If ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
-             If !( Cycle == nRow )
-                WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
-                Break
-             Endif
-          Else
-             WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
-             Break
-          Endif
-           
-       Endif
-    
-   Next
-   
-   // Розмірність поля обмежена. Для символьних полів - 255,
-   // числових - 20. Тому додатково перевіряємо співідношення
-   // довжини поля і дробної частини для чисел.
-   
-   If ( wModest.cmbType.Value == TYPE_IS_NUM )
-   
-      If ( wModest.spnLen.Value > LEN_IS_NUM )
-         WriteMsg( MSG_DECIMALS_LONG )
+      IF !CheckNameField( AllTrim( wModest.txbName.Value ) )
          Break
-      Endif
-       
-      // Якщо є дробна частина, то загальна довжина поля має
-      // враховувати її розмірність + 1 позиція для розділового знаку
-   
-      If !Empty( wModest.spnDec.Value )
-   
-         If ( ( wModest.spnDec.Value + 1 ) >= wModest.spnLen.Value )
+      ENDIF
+
+      // Перевіримо дублювання полів
+
+      FOR Cycle := 1 to nLen
+
+         cFieldName := Iif( Empty( oEditStru : aArray[ Cycle, DBS_NAME ] )           , ;
+            ''                                                       , ;
+            AllTrim( Upper( oEditStru : aArray[ Cycle, DBS_NAME ] ) )  ;
+            )
+
+         IF ( AllTrim( Upper( wModest.txbName.Value ) ) == cFieldName )
+
+            IF ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
+               IF !( Cycle == nRow )
+                  WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
+                  Break
+               ENDIF
+            ELSE
+               WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
+               Break
+            ENDIF
+
+         ENDIF
+
+      NEXT
+
+      // Розмірність поля обмежена. Для символьних полів - 255,
+      // числових - 20. Тому додатково перевіряємо співідношення
+      // довжини поля і дробної частини для чисел.
+
+      IF ( wModest.cmbType.Value == TYPE_IS_NUM )
+
+         IF ( wModest.spnLen.Value > LEN_IS_NUM )
             WriteMsg( MSG_DECIMALS_LONG )
             Break
-         Endif
-      
-      Endif
+         ENDIF
 
-   Endif
-     
-   // Перевірки пройшли успішно. Але якщо вказано формулу перетворення
-   // даних, ця ознака буде переглянута.
-   
-   lSuccess := .T.
-   
-   // Правило трансформації. Тільки для полів, що вже існували
-   // в структурі. Заодно підправляється ознака корекності заповнення
-   // даних
-   
-   If ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
-   
-      xRule := AllTrim( wModest.txbRule.Value )
-      
-      If !Empty( xRule )
-   
-        // Спочатку виконуємо підстановку у вираз тестових значень
-        
-        Do case
-           Case ( ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'C' ) .or. ;
+         // Якщо є дробна частина, то загальна довжина поля має
+         // враховувати її розмірність + 1 позиція для розділового знаку
+
+         IF !Empty( wModest.spnDec.Value )
+
+            IF ( ( wModest.spnDec.Value + 1 ) >= wModest.spnLen.Value )
+               WriteMsg( MSG_DECIMALS_LONG )
+               Break
+            ENDIF
+
+         ENDIF
+
+      ENDIF
+
+      // Перевірки пройшли успішно. Але якщо вказано формулу перетворення
+      // даних, ця ознака буде переглянута.
+
+      lSuccess := .T.
+
+      // Правило трансформації. Тільки для полів, що вже існували
+      // в структурі. Заодно підправляється ознака корекності заповнення
+      // даних
+
+      IF ( aStat[ 'CurrMode' ] == MODE_EDITFIELD )
+
+         xRule := AllTrim( wModest.txbRule.Value )
+
+         IF !Empty( xRule )
+
+            // Спочатку виконуємо підстановку у вираз тестових значень
+
+            DO CASE
+            CASE ( ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'C' ) .or. ;
                   ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'M' )      ;
-                )
-             
-             cValue := '"'
-             For Cycle := 1 to oEditStru : aArray[ nRow, DBS_OLDLEN ]
-               cValue += LTrim( Str( Cycle ) )
-             Next
-             cValue += '"'
-             
-           Case ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'N' )
-              
-              If !Empty( oEditStru : aArray[ nRow, DBS_OLDDEC ] )
-                 cValue := Replicate( '8', oEditStru : aArray[ nRow, DBS_OLDDEC ] )
-                 cValue := ( Replicate( '8', ( oEditStru : aArray[ nRow, DBS_OLDLEN ]       - ;
-                                               oEditStru : aArray[ nRow, DBS_OLDDEC ] - 1 )   ;
-                                      ) + '.' + cValue )
-              Else
-                 cValue := Replicate( '8', oEditStru : aArray[ nRow, DBS_OLDLEN ] )               
-              Endif
-              
-           Case ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'D' )
-             cValue := 'Date()'
-             
-           Case ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'L' )
-             cValue := '.T.'
-             
-        Endcase
-        
-        xRule := StrTran( xRule, aStat[ 'Expression' ], cValue )
+                  )
 
-        Try
-        
-          xRule := &( '{ || ' + xRule + ' }' )
-          nType := wModest.cmbType.Value
-        
-          cValue := Valtype( Eval( xRule ) )
-          If !( cValue == CORRECT_TYPES[ nType ] )
-             WriteMsg( MSG_RULE_TYPES + 'Rule - ' + cValue + ', field - ' + CORRECT_TYPES[ nType ] )
-             lSuccess := .F.
-          Endif
-          
-        Catch
-          WriteMsg( MSG_RULE_INCORRECT )
-          lSuccess := .F.
-        End        
-        
-      Endif
-      
-   Endif
-   
-   ChangeMaxLimit()
-   
-End
+               cValue := '"'
+               FOR Cycle := 1 to oEditStru : aArray[ nRow, DBS_OLDLEN ]
+                  cValue += LTrim( Str( Cycle ) )
+               NEXT
+               cValue += '"'
 
-Return lSuccess
+            CASE ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'N' )
 
-****** End of CheckData ******
+               IF !Empty( oEditStru : aArray[ nRow, DBS_OLDDEC ] )
+                  cValue := Replicate( '8', oEditStru : aArray[ nRow, DBS_OLDDEC ] )
+                  cValue := ( Replicate( '8', ( oEditStru : aArray[ nRow, DBS_OLDLEN ]       - ;
+                     oEditStru : aArray[ nRow, DBS_OLDDEC ] - 1 )   ;
+                     ) + '.' + cValue )
+               ELSE
+                  cValue := Replicate( '8', oEditStru : aArray[ nRow, DBS_OLDLEN ] )
+               ENDIF
 
+            CASE ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'D' )
+               cValue := 'Date()'
 
-/******
-*
-*       CheckNameField( cName ) --> lSuccess
-*
-*       Checkup for valid field name
-*
-*/
+            CASE ( oEditStru : aArray[ nRow, DBS_OLDTYPE ] == 'L' )
+               cValue := '.T.'
 
-Static Function CheckNameField( cName )
-Local lSuccess := .T.         , ;
+            ENDCASE
+
+            xRule := StrTran( xRule, aStat[ 'Expression' ], cValue )
+
+            Try
+
+               xRule := &( '{ || ' + xRule + ' }' )
+               nType := wModest.cmbType.Value
+
+               cValue := Valtype( Eval( xRule ) )
+               IF !( cValue == CORRECT_TYPES[ nType ] )
+                  WriteMsg( MSG_RULE_TYPES + 'Rule - ' + cValue + ', field - ' + CORRECT_TYPES[ nType ] )
+                  lSuccess := .F.
+               ENDIF
+
+            CATCH
+               WriteMsg( MSG_RULE_INCORRECT )
+               lSuccess := .F.
+            End
+
+         ENDIF
+
+      ENDIF
+
+      ChangeMaxLimit()
+
+   End
+
+   RETURN lSuccess
+
+   ****** End of CheckData ******
+
+   /******
+   *       CheckNameField( cName ) --> lSuccess
+   *       Checkup for valid field name
+   */
+
+STATIC FUNCTION CheckNameField( cName )
+
+   LOCAL lSuccess := .T.         , ;
       nLen     := Len( cName ), ;
       Cycle                   , ;
       cChar
 
-If !Empty( nLen )
+   IF !Empty( nLen )
 
-   // First symbol of name must be the letter
-   
-   If IsAlpha( Left( cName, 1 ) )
-   
-      For Cycle := 1 to nLen
-   
-        cChar := Substr( cName, Cycle, 1 )
-     
-        If !( cChar $ 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' )
-           WriteMsg( MSG_CHAR_INCORRECT + cChar )
-           lSuccess := .F.
-        Endif
-     
-      Next
-      
-   Else
+      // First symbol of name must be the letter
+
+      IF IsAlpha( Left( cName, 1 ) )
+
+         FOR Cycle := 1 to nLen
+
+            cChar := Substr( cName, Cycle, 1 )
+
+            IF !( cChar $ 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' )
+               WriteMsg( MSG_CHAR_INCORRECT + cChar )
+               lSuccess := .F.
+            ENDIF
+
+         NEXT
+
+      ELSE
+         WriteMsg( MSG_ERROR_FIELDNAME )
+         lSuccess := .F.
+      ENDIF
+
+   ELSE
       WriteMsg( MSG_ERROR_FIELDNAME )
       lSuccess := .F.
-   Endif
-   
-Else
-   WriteMsg( MSG_ERROR_FIELDNAME )
-   lSuccess := .F.
-Endif
+   ENDIF
 
-Return lSuccess
+   RETURN lSuccess
 
-****** End of CheckNameField ******
+   ****** End of CheckNameField ******
 
+   /******
+   *       AddInCollector( nMode )
+   *       To copy (nMode = MODE_COPY) or cut (nMode = MODE_CUT)
+   *       row in collector
+   */
 
-/******
-*
-*       AddInCollector( nMode )
-*
-*       To copy (nMode = MODE_COPY) or cut (nMode = MODE_CUT)
-*       row in collector
-*
-*/
+STATIC PROCEDURE AddInCollector( nMode )
 
-Static Procedure AddInCollector( nMode )
-Memvar aStat, oEditStru, aCollector
-Local cObj  := ThisWindow.FocusedControl, ;
+   MEMVAR aStat, oEditStru, aCollector
+   LOCAL cObj  := ThisWindow.FocusedControl, ;
       nRow  := oEditStru : nAt          , ;
       aItem
 
-// The focus must be in the field list for bring the field to collector
+   // The focus must be in the field list for bring the field to collector
 
-If !( cObj == 'oEditStru' )
-   WriteMsg( MSG_NOACTIVE_STRUCTURE )
-   Return
-Endif
+   IF !( cObj == 'oEditStru' )
+      WriteMsg( MSG_NOACTIVE_STRUCTURE )
 
-If Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
-   WriteMsg( MSG_STRUCTURE_EMPTY )
-   Return
-Endif
+      RETURN
+   ENDIF
 
-aItem := Array( DBS_NEW_ALEN )
-      
-aItem[ DBS_FLAG    ] := oEditStru : aArray[ nRow, DBS_FLAG    ]
-aItem[ DBS_NAME    ] := oEditStru : aArray[ nRow, DBS_NAME    ]
-aItem[ DBS_TYPE    ] := oEditStru : aArray[ nRow, DBS_TYPE    ]
-aItem[ DBS_LEN     ] := oEditStru : aArray[ nRow, DBS_LEN     ]
-aItem[ DBS_DEC     ] := oEditStru : aArray[ nRow, DBS_DEC     ]
-aItem[ DBS_OLDNAME ] := oEditStru : aArray[ nRow, DBS_OLDNAME ]
-aItem[ DBS_OLDTYPE ] := oEditStru : aArray[ nRow, DBS_OLDTYPE ]
-aItem[ DBS_OLDLEN  ] := oEditStru : aArray[ nRow, DBS_OLDLEN  ]
-aItem[ DBS_OLDDEC  ] := oEditStru : aArray[ nRow, DBS_OLDDEC  ]
-aItem[ DBS_COMMENT ] := oEditStru : aArray[ nRow, DBS_COMMENT ]
-aItem[ DBS_RULE    ] := oEditStru : aArray[ nRow, DBS_RULE    ]
+   IF Empty( oEditStru : aArray[ nRow, DBS_NAME ] )
+      WriteMsg( MSG_STRUCTURE_EMPTY )
 
-AAdd( aCollector, aItem )
+      RETURN
+   ENDIF
 
-wModest.grdCollector.AddItem( { aItem[ DBS_NAME ]         , ;
-                                aItem[ DBS_TYPE ]         , ;
-                                Str( aItem[ DBS_LEN ], 3 ), ;
-                                Str( aItem[ DBS_DEC ], 3 ), ;
-                                aItem[ DBS_COMMENT ]        ;
-                              } )
+   aItem := Array( DBS_NEW_ALEN )
 
-// If row is cut to collector, when to delete from field list
- 
-If ( nMode == MODE_CUT )
-   oEditStru : SetDeleteMode( .T., .F. )
-   oEditStru : DeleteRow()
-   oEditStru : SetDeleteMode( .F. )
+   aItem[ DBS_FLAG    ] := oEditStru : aArray[ nRow, DBS_FLAG    ]
+   aItem[ DBS_NAME    ] := oEditStru : aArray[ nRow, DBS_NAME    ]
+   aItem[ DBS_TYPE    ] := oEditStru : aArray[ nRow, DBS_TYPE    ]
+   aItem[ DBS_LEN     ] := oEditStru : aArray[ nRow, DBS_LEN     ]
+   aItem[ DBS_DEC     ] := oEditStru : aArray[ nRow, DBS_DEC     ]
+   aItem[ DBS_OLDNAME ] := oEditStru : aArray[ nRow, DBS_OLDNAME ]
+   aItem[ DBS_OLDTYPE ] := oEditStru : aArray[ nRow, DBS_OLDTYPE ]
+   aItem[ DBS_OLDLEN  ] := oEditStru : aArray[ nRow, DBS_OLDLEN  ]
+   aItem[ DBS_OLDDEC  ] := oEditStru : aArray[ nRow, DBS_OLDDEC  ]
+   aItem[ DBS_COMMENT ] := oEditStru : aArray[ nRow, DBS_COMMENT ]
+   aItem[ DBS_RULE    ] := oEditStru : aArray[ nRow, DBS_RULE    ]
 
-   // Cut a row to collector changes the srtucture (and, probably, description)
-   // Establish the appropriate flag.
-   
-   aStat[ 'ChStruct' ] := .T.
-   
-   If !Empty( aItem[ DBS_COMMENT ] )
-      aStat[ 'ChDescript' ] := .T.
-   Endif
-   
-   SetIconSave( 1 )
-   
-Endif
+   AAdd( aCollector, aItem )
 
-// Show needed tab (for see the contents of collector)
+   wModest.grdCollector.AddItem( { aItem[ DBS_NAME ]         , ;
+      aItem[ DBS_TYPE ]         , ;
+      Str( aItem[ DBS_LEN ], 3 ), ;
+      Str( aItem[ DBS_DEC ], 3 ), ;
+      aItem[ DBS_COMMENT ]        ;
+      } )
 
-wModest.tbDescript.Value := 3
+   // If row is cut to collector, when to delete from field list
 
-Return
+   IF ( nMode == MODE_CUT )
+      oEditStru : SetDeleteMode( .T., .F. )
+      oEditStru : DeleteRow()
+      oEditStru : SetDeleteMode( .F. )
 
-****** End of AddInCollector ******
- 
+      // Cut a row to collector changes the srtucture (and, probably, description)
+      // Establish the appropriate flag.
 
-/******
-*
-*       PasteFromCollector()
-*
-*       Paste field from collector
-*
-*/
+      aStat[ 'ChStruct' ] := .T.
 
-Static Procedure PasteFromCollector
-Memvar oEditStru, aStat, aCollector
-Local cObj       := ThisWindow.FocusedControl, ;
+      IF !Empty( aItem[ DBS_COMMENT ] )
+         aStat[ 'ChDescript' ] := .T.
+      ENDIF
+
+      SetIconSave( 1 )
+
+   ENDIF
+
+   // Show needed tab (for see the contents of collector)
+
+   wModest.tbDescript.Value := 3
+
+   RETURN
+
+   ****** End of AddInCollector ******
+
+   /******
+   *       PasteFromCollector()
+   *       Paste field from collector
+   */
+
+STATIC PROCEDURE PasteFromCollector
+
+   MEMVAR oEditStru, aStat, aCollector
+   LOCAL cObj       := ThisWindow.FocusedControl, ;
       nItem                                  , ;
       aItem      := Array( DBS_NEW_ALEN )    , ;
       nLen       := oEditStru : nLen         , ;
@@ -2382,194 +2287,192 @@ Local cObj       := ThisWindow.FocusedControl, ;
       nRow                                   , ;
       cFieldName
 
-// If control focus is not the collector, when it is ignored.
-// Also don't execute, if collector is empty or
-// active element is absent.
+   // If control focus is not the collector, when it is ignored.
+   // Also don't execute, if collector is empty or
+   // active element is absent.
 
-If !( cObj == 'grdCollector' )
-   WriteMsg( MSG_NOACTIVE_COLLECTOR )
-   Return
-Endif
+   IF !( cObj == 'grdCollector' )
+      WriteMsg( MSG_NOACTIVE_COLLECTOR )
 
-nItem := wModest.grdCollector.Value
+      RETURN
+   ENDIF
 
-If ( Empty( wModest.grdCollector.ItemCount ) .or. Empty( nItem ) )
-   WriteMsg( MSG_COLLECTOR_EMPTY )
-   Return
-Endif
+   nItem := wModest.grdCollector.Value
 
-ACopy( aCollector[ nItem ], aItem )        // Get inserted data from collector
+   IF ( Empty( wModest.grdCollector.ItemCount ) .or. Empty( nItem ) )
+      WriteMsg( MSG_COLLECTOR_EMPTY )
 
-// Checking for field dublication
-   
-For Cycle := 1 to nLen
+      RETURN
+   ENDIF
 
-    cFieldName := Iif( Empty( oEditStru : aArray[ Cycle, DBS_NAME ] )           , ;
-                       ''                                                       , ;
-                       AllTrim( Upper( oEditStru : aArray[ Cycle, DBS_NAME ] ) )  ;
-                     )
-   
-    If ( AllTrim( Upper( aItem[ DBS_NAME ] ) ) == cFieldName )
-       WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
-       Return
-    Endif
-    
-Next
+   ACopy( aCollector[ nItem ], aItem )        // Get inserted data from collector
 
-nRow := oEditStru : nAt
+   // Checking for field dublication
 
-If Empty( oEditStru : aArray[ 1, DBS_NAME ] )
-   oEditStru : aArray[ 1, DBS_FLAG    ] := aItem[ DBS_FLAG    ]
-   oEditStru : aArray[ 1, DBS_NAME    ] := aItem[ DBS_NAME    ]
-   oEditStru : aArray[ 1, DBS_TYPE    ] := aItem[ DBS_TYPE    ]
-   oEditStru : aArray[ 1, DBS_LEN     ] := aItem[ DBS_LEN     ]
-   oEditStru : aArray[ 1, DBS_DEC     ] := aItem[ DBS_DEC     ]
-   oEditStru : aArray[ 1, DBS_OLDNAME ] := aItem[ DBS_OLDNAME ]
-   oEditStru : aArray[ 1, DBS_OLDTYPE ] := aItem[ DBS_OLDTYPE ]
-   oEditStru : aArray[ 1, DBS_OLDLEN  ] := aItem[ DBS_OLDLEN  ]
-   oEditStru : aArray[ 1, DBS_OLDDEC  ] := aItem[ DBS_OLDDEC  ]
-   oEditStru : aArray[ 1, DBS_COMMENT ] := aItem[ DBS_COMMENT ]
-   oEditStru : aArray[ 1, DBS_RULE    ] := aItem[ DBS_RULE    ]
+   FOR Cycle := 1 to nLen
 
-Else
-   oEditStru : Insert( aItem, nRow + nShift )
-   oEditStru : Display()
-   oEditStru : GoPos( ( nRow + nShift ), 2 )
-Endif
+      cFieldName := Iif( Empty( oEditStru : aArray[ Cycle, DBS_NAME ] )           , ;
+         ''                                                       , ;
+         AllTrim( Upper( oEditStru : aArray[ Cycle, DBS_NAME ] ) )  ;
+         )
 
-aStat[ 'ChStruct' ] := .T.
+      IF ( AllTrim( Upper( aItem[ DBS_NAME ] ) ) == cFieldName )
+         WriteMsg( MSG_FIELD_ALREADY + ' #' + LTrim( Str( Cycle ) ) + ' - ' + cFieldName )
 
-If !Empty( aItem[ DBS_COMMENT ] )
-   aStat[ 'ChDescript' ] := .T.
-Endif
+         RETURN
+      ENDIF
 
-SetIconSave( 1 )
+   NEXT
 
-oEditStru : Refresh()
+   nRow := oEditStru : nAt
 
-ShowValues()
+   IF Empty( oEditStru : aArray[ 1, DBS_NAME ] )
+      oEditStru : aArray[ 1, DBS_FLAG    ] := aItem[ DBS_FLAG    ]
+      oEditStru : aArray[ 1, DBS_NAME    ] := aItem[ DBS_NAME    ]
+      oEditStru : aArray[ 1, DBS_TYPE    ] := aItem[ DBS_TYPE    ]
+      oEditStru : aArray[ 1, DBS_LEN     ] := aItem[ DBS_LEN     ]
+      oEditStru : aArray[ 1, DBS_DEC     ] := aItem[ DBS_DEC     ]
+      oEditStru : aArray[ 1, DBS_OLDNAME ] := aItem[ DBS_OLDNAME ]
+      oEditStru : aArray[ 1, DBS_OLDTYPE ] := aItem[ DBS_OLDTYPE ]
+      oEditStru : aArray[ 1, DBS_OLDLEN  ] := aItem[ DBS_OLDLEN  ]
+      oEditStru : aArray[ 1, DBS_OLDDEC  ] := aItem[ DBS_OLDDEC  ]
+      oEditStru : aArray[ 1, DBS_COMMENT ] := aItem[ DBS_COMMENT ]
+      oEditStru : aArray[ 1, DBS_RULE    ] := aItem[ DBS_RULE    ]
 
-Return
+   ELSE
+      oEditStru : Insert( aItem, nRow + nShift )
+      oEditStru : Display()
+      oEditStru : GoPos( ( nRow + nShift ), 2 )
+   ENDIF
 
-****** End of PasteFromCollector ******
+   aStat[ 'ChStruct' ] := .T.
 
+   IF !Empty( aItem[ DBS_COMMENT ] )
+      aStat[ 'ChDescript' ] := .T.
+   ENDIF
 
-/******
-*
-*       FillCollector()
-*
-*       Filling of collector list
-*
-*/
+   SetIconSave( 1 )
 
-Procedure FillCollector
-Memvar aCollector
+   oEditStru : Refresh()
 
-wModest.grdCollector.DeleteAllItems      
+   ShowValues()
 
-AEval( aCollector, { | aItem | wModest.grdCollector.AddItem( { aItem[ DBS_NAME ]         , ;
-                                                               aItem[ DBS_TYPE ]         , ;
-                                                               Str( aItem[ DBS_LEN ], 3 ), ;
-                                                               Str( aItem[ DBS_DEC ], 3 ), ;
-                                                               aItem[ DBS_COMMENT ]        ;
-                                                              } )                          ;
-                   } ) 
+   RETURN
 
-Return
+   ****** End of PasteFromCollector ******
 
-****** End of FillCollector ******
+   /******
+   *       FillCollector()
+   *       Filling of collector list
+   */
 
+PROCEDURE FillCollector
 
-/******
-*
-*       SetMenuTheme()
-*
-*       Set Themed Menu is based on OS type
-*
-*/
+   MEMVAR aCollector
 
-Static Procedure SetMenuTheme()
-LOCAL aColors := GetMenuColors()
+   wModest.grdCollector.DeleteAllItems
 
-	aColors[ MNUCLR_MENUBARBACKGROUND1 ]  := GetSysColor( 15 )
-	aColors[ MNUCLR_MENUBARBACKGROUND2 ]  := GetSysColor( 15 )
+   AEval( aCollector, { | aItem | wModest.grdCollector.AddItem( { aItem[ DBS_NAME ]         , ;
+      aItem[ DBS_TYPE ]         , ;
+      Str( aItem[ DBS_LEN ], 3 ), ;
+      Str( aItem[ DBS_DEC ], 3 ), ;
+      aItem[ DBS_COMMENT ]        ;
+      } )                          ;
+      } )
 
-If IsThemed()
+   RETURN
 
-	aColors[ MNUCLR_MENUBARTEXT ]         := GetSysColor(  7 )
-	aColors[ MNUCLR_MENUBARSELECTEDTEXT ] := GetSysColor( 14 )
-	aColors[ MNUCLR_MENUBARGRAYEDTEXT ]   := GetSysColor( 17 )
-	aColors[ MNUCLR_MENUBARSELECTEDITEM1 ]:= GetSysColor( 13 )
-	aColors[ MNUCLR_MENUBARSELECTEDITEM2 ]:= GetSysColor( 13 )
-	aColors[ MNUCLR_MENUITEMTEXT ]        := GetSysColor(  7 )  
-	aColors[ MNUCLR_MENUITEMSELECTEDTEXT ]:= GetSysColor( 14 )  
-	aColors[ MNUCLR_MENUITEMGRAYEDTEXT ]  := GetSysColor( 17 )   
+   ****** End of FillCollector ******
 
-	aColors[ MNUCLR_MENUITEMBACKGROUND1 ] := GetSysColor( 4 )
-	aColors[ MNUCLR_MENUITEMBACKGROUND2 ] := GetSysColor( 4 )
+   /******
+   *       SetMenuTheme()
+   *       Set Themed Menu is based on OS type
+   */
 
-	aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND1 ] := GetSysColor( 13 )
-	aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND2 ] := GetSysColor( 13 )
-	aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND1 ]   := GetSysColor( 4 )
-	aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND2 ]   := GetSysColor( 4 )
+STATIC PROCEDURE SetMenuTheme()
 
-	aColors[ MNUCLR_IMAGEBACKGROUND1 ] := GetSysColor( 15 )
-	aColors[ MNUCLR_IMAGEBACKGROUND2 ] := GetSysColor( 15 )
+   LOCAL aColors := GetMenuColors()
 
-	aColors[ MNUCLR_SEPARATOR1 ] := GetSysColor( 17 )
-	aColors[ MNUCLR_SEPARATOR2 ] := GetSysColor( 14 )
+   aColors[ MNUCLR_MENUBARBACKGROUND1 ]  := GetSysColor( 15 )
+   aColors[ MNUCLR_MENUBARBACKGROUND2 ]  := GetSysColor( 15 )
 
-	aColors[ MNUCLR_SELECTEDITEMBORDER1 ] := GetSysColor( 13 ) 
-	aColors[ MNUCLR_SELECTEDITEMBORDER2 ] := GetSysColor( 13 )
-	aColors[ MNUCLR_SELECTEDITEMBORDER3 ] := GetSysColor( 17 )
-	aColors[ MNUCLR_SELECTEDITEMBORDER4 ] := GetSysColor( 14 )
+   IF IsThemed()
 
-	SET MENUCURSOR FULL
-	SET MENUSEPARATOR DOUBLE RIGHTALIGN
-	SET MENUITEM BORDER FLAT
+      aColors[ MNUCLR_MENUBARTEXT ]         := GetSysColor(  7 )
+      aColors[ MNUCLR_MENUBARSELECTEDTEXT ] := GetSysColor( 14 )
+      aColors[ MNUCLR_MENUBARGRAYEDTEXT ]   := GetSysColor( 17 )
+      aColors[ MNUCLR_MENUBARSELECTEDITEM1 ]:= GetSysColor( 13 )
+      aColors[ MNUCLR_MENUBARSELECTEDITEM2 ]:= GetSysColor( 13 )
+      aColors[ MNUCLR_MENUITEMTEXT ]        := GetSysColor(  7 )
+      aColors[ MNUCLR_MENUITEMSELECTEDTEXT ]:= GetSysColor( 14 )
+      aColors[ MNUCLR_MENUITEMGRAYEDTEXT ]  := GetSysColor( 17 )
 
-Else
-	If ! IsWinNT()
-		SetMenuBitmapHeight( BmpSize( "CUT" )[ 1 ] ) 
-	EndIf
+      aColors[ MNUCLR_MENUITEMBACKGROUND1 ] := GetSysColor( 4 )
+      aColors[ MNUCLR_MENUITEMBACKGROUND2 ] := GetSysColor( 4 )
 
-	aColors[ MNUCLR_MENUBARTEXT ]         := RGB(   0,   0,   0 )
-	aColors[ MNUCLR_MENUBARSELECTEDTEXT ] := RGB(   0,   0,   0 )
-	aColors[ MNUCLR_MENUBARGRAYEDTEXT ]   := RGB( 128, 128, 128 )
-	aColors[ MNUCLR_MENUBARSELECTEDITEM1 ]:= GetSysColor(15)
-	aColors[ MNUCLR_MENUBARSELECTEDITEM2 ]:= GetSysColor(15)
+      aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND1 ] := GetSysColor( 13 )
+      aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND2 ] := GetSysColor( 13 )
+      aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND1 ]   := GetSysColor( 4 )
+      aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND2 ]   := GetSysColor( 4 )
 
-	aColors[ MNUCLR_MENUITEMTEXT ]        := RGB(   0,   0,   0 )
-	aColors[ MNUCLR_MENUITEMSELECTEDTEXT ]:= RGB( 255, 255, 255 )
-	aColors[ MNUCLR_MENUITEMGRAYEDTEXT ]  := RGB( 128, 128, 128 )
+      aColors[ MNUCLR_IMAGEBACKGROUND1 ] := GetSysColor( 15 )
+      aColors[ MNUCLR_IMAGEBACKGROUND2 ] := GetSysColor( 15 )
 
-	aColors[ MNUCLR_MENUITEMBACKGROUND1 ] := GetSysColor( 4 )
-	aColors[ MNUCLR_MENUITEMBACKGROUND2 ] := GetSysColor( 4 )
+      aColors[ MNUCLR_SEPARATOR1 ] := GetSysColor( 17 )
+      aColors[ MNUCLR_SEPARATOR2 ] := GetSysColor( 14 )
 
-	aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND1 ] := RGB(  10,  36, 106 )
-	aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND2 ] := RGB(  10,  36, 106 )
-	aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND1 ]   := RGB( 212, 208, 200 )
-	aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND2 ]   := RGB( 212, 208, 200 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER1 ] := GetSysColor( 13 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER2 ] := GetSysColor( 13 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER3 ] := GetSysColor( 17 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER4 ] := GetSysColor( 14 )
 
-	aColors[ MNUCLR_IMAGEBACKGROUND1 ] := GetSysColor( 4 )
-	aColors[ MNUCLR_IMAGEBACKGROUND2 ] := GetSysColor( 4 )
+      SET MENUCURSOR FULL
+      SET MENUSEPARATOR DOUBLE RIGHTALIGN
+      SET MENUITEM BORDER FLAT
 
-	aColors[ MNUCLR_SEPARATOR1 ] := RGB( 128, 128, 128 )
-	aColors[ MNUCLR_SEPARATOR2 ] := RGB( 255, 255, 255 )
+   ELSE
+      IF ! IsWinNT()
+         SetMenuBitmapHeight( BmpSize( "CUT" )[ 1 ] )
+      ENDIF
 
-	aColors[ MNUCLR_SELECTEDITEMBORDER1 ] := RGB(  10,  36, 106 )
-	aColors[ MNUCLR_SELECTEDITEMBORDER2 ] := RGB( 128, 128, 128 )
-	aColors[ MNUCLR_SELECTEDITEMBORDER3 ] := RGB(  10,  36, 106 )
-	aColors[ MNUCLR_SELECTEDITEMBORDER4 ] := RGB( 255, 255, 255 )
+      aColors[ MNUCLR_MENUBARTEXT ]         := RGB(   0,   0,   0 )
+      aColors[ MNUCLR_MENUBARSELECTEDTEXT ] := RGB(   0,   0,   0 )
+      aColors[ MNUCLR_MENUBARGRAYEDTEXT ]   := RGB( 128, 128, 128 )
+      aColors[ MNUCLR_MENUBARSELECTEDITEM1 ]:= GetSysColor(15)
+      aColors[ MNUCLR_MENUBARSELECTEDITEM2 ]:= GetSysColor(15)
 
-	SET MENUCURSOR SHORT
-	SET MENUSEPARATOR DOUBLE LEFTALIGN
-	SET MENUITEM BORDER 3D
+      aColors[ MNUCLR_MENUITEMTEXT ]        := RGB(   0,   0,   0 )
+      aColors[ MNUCLR_MENUITEMSELECTEDTEXT ]:= RGB( 255, 255, 255 )
+      aColors[ MNUCLR_MENUITEMGRAYEDTEXT ]  := RGB( 128, 128, 128 )
 
-EndIf
+      aColors[ MNUCLR_MENUITEMBACKGROUND1 ] := GetSysColor( 4 )
+      aColors[ MNUCLR_MENUITEMBACKGROUND2 ] := GetSysColor( 4 )
 
-SetMenuColors( aColors )
+      aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND1 ] := RGB(  10,  36, 106 )
+      aColors[ MNUCLR_MENUITEMSELECTEDBACKGROUND2 ] := RGB(  10,  36, 106 )
+      aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND1 ]   := RGB( 212, 208, 200 )
+      aColors[ MNUCLR_MENUITEMGRAYEDBACKGROUND2 ]   := RGB( 212, 208, 200 )
 
-Return
+      aColors[ MNUCLR_IMAGEBACKGROUND1 ] := GetSysColor( 4 )
+      aColors[ MNUCLR_IMAGEBACKGROUND2 ] := GetSysColor( 4 )
 
-****** End of SetMenuTheme ******
+      aColors[ MNUCLR_SEPARATOR1 ] := RGB( 128, 128, 128 )
+      aColors[ MNUCLR_SEPARATOR2 ] := RGB( 255, 255, 255 )
+
+      aColors[ MNUCLR_SELECTEDITEMBORDER1 ] := RGB(  10,  36, 106 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER2 ] := RGB( 128, 128, 128 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER3 ] := RGB(  10,  36, 106 )
+      aColors[ MNUCLR_SELECTEDITEMBORDER4 ] := RGB( 255, 255, 255 )
+
+      SET MENUCURSOR SHORT
+      SET MENUSEPARATOR DOUBLE LEFTALIGN
+      SET MENUITEM BORDER 3D
+
+   ENDIF
+
+   SetMenuColors( aColors )
+
+   RETURN
+
+   ****** End of SetMenuTheme ******
+

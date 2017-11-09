@@ -1,9 +1,8 @@
 /*
- * DBCHW - DBC ( Harbour + HWGUI )
- * Database structure handling
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* DBCHW - DBC ( Harbour + HWGUI )
+* Database structure handling
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -13,12 +12,13 @@
 #include "ads.ch"
 #endif
 
-memvar mypath, obrwfont, improc,msfile
+MEMVAR mypath, obrwfont, improc,msfile
 
-Function StruMan( lNew )
-Local oModDlg
-Local at := { "Character", "Numeric", "Date", "Logical", "Memo" }
-LOCAL af, oBrw
+FUNCTION StruMan( lNew )
+
+   LOCAL oModDlg
+   LOCAL at := { "Character", "Numeric", "Date", "Logical", "Memo" }
+   LOCAL af, oBrw
 
    IF lNew
       af := { {"","",0,0} }
@@ -29,15 +29,15 @@ LOCAL af, oBrw
    INIT DIALOG oModDlg FROM RESOURCE "DLG_STRU"
 
    REDEFINE BROWSE oBrw ARRAY OF oModDlg ID ID_BROWSE  ;
-       ON CLICK {|o|SetField(o)}
+      ON CLICK {|o|SetField(o)}
    REDEFINE COMBOBOX at OF oModDlg ID IDC_COMBOBOX2
 
    DIALOG ACTIONS OF oModDlg ;
-          ON 0,IDOK        ACTION {|o| EndStru(o,lNew)}   ;
-          ON BN_CLICKED,IDC_PUSHBUTTON2 ACTION {|| ModiStru(1) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON3 ACTION {|| ModiStru(2) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON4 ACTION {|| ModiStru(3) }  ;
-          ON BN_CLICKED,IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
+      ON 0,IDOK        ACTION {|o| EndStru(o,lNew)}   ;
+      ON BN_CLICKED,IDC_PUSHBUTTON2 ACTION {|| ModiStru(1) }  ;
+      ON BN_CLICKED,IDC_PUSHBUTTON3 ACTION {|| ModiStru(2) }  ;
+      ON BN_CLICKED,IDC_PUSHBUTTON4 ACTION {|| ModiStru(3) }  ;
+      ON BN_CLICKED,IDC_PUSHBUTTON5 ACTION {|| ModiStru(4) }
 
    oBrw:aArray := af
    oBrw:AddColumn( HColumn():New( "Name",{|value,o|o:aArray[o:nCurrent,1] },"C",10,0  ) )
@@ -48,47 +48,55 @@ LOCAL af, oBrw
    oBrw:ofont      := oBrwFont
 
    oModDlg:Activate()
-Return Nil
 
-Static Function SetField( oBrw )
-Local hDlg := getmodalhandle(), i
+   RETURN NIL
+
+STATIC FUNCTION SetField( oBrw )
+
+   LOCAL hDlg := getmodalhandle(), i
+
    SetDlgItemText( hDlg, IDC_EDIT2, oBrw:aArray[oBrw:nCurrent,1] )
    IF ( i := At( oBrw:aArray[oBrw:nCurrent,2], "CNDLM" ) ) != 0
       ComboSetString( GetDlgItem( hDlg, IDC_COMBOBOX2 ), i )
    ENDIF
    SetDlgItemText( hDlg, IDC_EDIT3, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,3] ) ) )
    SetDlgItemText( hDlg, IDC_EDIT4, Ltrim( Str( oBrw:aArray[oBrw:nCurrent,4] ) ) )
-Return Nil
 
-Static Function ModiStru( nOper )
-Local oDlg := getmodalDlg(), hDlg := oDlg:handle
-Local oBrowse := oDlg:FindControl( ID_BROWSE )
-Local cName, cType, nLen, nDec := 0
+   RETURN NIL
+
+STATIC FUNCTION ModiStru( nOper )
+
+   LOCAL oDlg := getmodalDlg(), hDlg := oDlg:handle
+   LOCAL oBrowse := oDlg:FindControl( ID_BROWSE )
+   LOCAL cName, cType, nLen, nDec := 0
 
    IF nOper < 4
       cName := GetDlgItemText( hDlg, IDC_EDIT2, 10 )
       IF Empty( cName )
          SetFocus( GetDlgItem( hDlg, IDC_EDIT2 ) )
-         Return Nil
+
+         RETURN NIL
       ENDIF
       cType := Left( GetDlgItemText( hDlg, IDC_COMBOBOX2, 10 ), 1 )
       IF Empty( cType )
          SetFocus( GetDlgItem( hDlg, IDC_COMBOBOX2 ) )
-         Return Nil
+
+         RETURN NIL
       ENDIF
-      IF cType == "D" 
+      IF cType == "D"
          nLen := 8
-      ELSEIF cType == "L" 
+      ELSEIF cType == "L"
          nLen := 1
-      ELSEIF cType == "M" 
+      ELSEIF cType == "M"
          nLen := 10
       ELSE
          nLen  := Val( GetDlgItemText( hDlg, IDC_EDIT3, 10 ) )
          IF nLen == 0
             SetFocus( GetDlgItem( hDlg, IDC_EDIT3 ) )
-            Return Nil
+
+            RETURN NIL
          ENDIF
-         IF cType == "N" 
+         IF cType == "N"
             nDec  := Val( GetDlgItemText( hDlg, IDC_EDIT4, 10 ) )
          ENDIF
       ENDIF
@@ -109,19 +117,22 @@ Local cName, cType, nLen, nDec := 0
       oBrowse:nRecords --
    ENDIF
    RedrawWindow( oBrowse:handle, RDW_ERASE + RDW_INVALIDATE )
-Return Nil
 
-Static Function EndStru( oDlg,lNew )
-Local fname, alsname
-Local A1,A2,A3,A4,B1,B2,B3,B4,C1,C2
-Local fi1, kolf, i, j
-Local oBrowse := oDlg:FindControl( ID_BROWSE )
-Local oWindow, aControls
-Local oPBar, nSch := 0
+   RETURN NIL
+
+STATIC FUNCTION EndStru( oDlg,lNew )
+
+   LOCAL fname, alsname
+   LOCAL A1,A2,A3,A4,B1,B2,B3,B4,C1,C2
+   LOCAL fi1, kolf, i, j
+   LOCAL oBrowse := oDlg:FindControl( ID_BROWSE )
+   LOCAL oWindow, aControls
+   LOCAL oPBar, nSch := 0
 
    IF lNew
       IF Empty( fname := SaveFile( "*.dbf","xBase files( *.dbf )", "*.dbf", mypath ) )
-         Return Nil
+
+         RETURN NIL
       ENDIF
       mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
       dbCreate( fname, oBrowse:aArray )
@@ -211,6 +222,7 @@ Local oPBar, nSch := 0
          ENDIF
       ENDIF
    ENDIF
-   EndDialog( getmodalhandle() )
-Return Nil
+EndDialog( getmodalhandle() )
+
+RETURN NIL
 

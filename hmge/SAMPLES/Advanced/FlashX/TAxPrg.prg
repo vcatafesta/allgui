@@ -1,14 +1,15 @@
 #include "hbclass.ch"
 
 #ifndef __XHARBOUR__
-   #xcommand TRY                => bError := errorBlock( {|oError| break( oError ) } ) ;;
-                                   BEGIN SEQUENCE
+#xcommand TRY                => bError := errorBlock( {|oError| break( oError ) } ) ;;
+   BEGIN SEQUENCE
    #xcommand CATCH [<!oError!>] => errorBlock( bError ) ;;
-                                   RECOVER [USING <oError>] <-oError-> ;;
-                                   errorBlock( bError )
-#endif
+   RECOVER [USING <oError>] <-oError-> ;;
+      errorBlock( bError )
+   #endif
 
 CLASS TActiveX
+
    DATA oOle
    DATA hWnd
    DATA cWindowName
@@ -20,21 +21,35 @@ CLASS TActiveX
    DATA nOldWinWidth
    DATA nOldWinHeight
    DATA bHide INIT .F.
-   METHOD New( cWindowName, cProgId , nRow , nCol , nWidth , nHeight )
-   METHOD Load()
-   METHOD ReSize( nRow , nCol , nWidth , nHeight )
-   METHOD Hide()
-   METHOD Show()
-   METHOD Release()
-   METHOD Refresh()
-   METHOD Adjust()
-   METHOD GetRow()
-   METHOD GetCol()
-   METHOD GetWidth()
-   METHOD GetHeight()
+
+METHOD New( cWindowName, cProgId , nRow , nCol , nWidth , nHeight )
+
+METHOD Load()
+
+METHOD ReSize( nRow , nCol , nWidth , nHeight )
+
+METHOD Hide()
+
+METHOD Show()
+
+METHOD Release()
+
+METHOD Refresh()
+
+METHOD Adjust()
+
+METHOD GetRow()
+
+METHOD GetCol()
+
+METHOD GetWidth()
+
+METHOD GetHeight()
+
 ENDCLASS
 
 METHOD New( cWindowName , cProgId , nRow , nCol , nWidth , nHeight ) CLASS TActiveX
+
    if( empty( nRow )    , nRow    := 0 , )
    if( empty( nCol )    , nCol    := 0 , )
    if( empty( nWidth )  , nWidth  := GetProperty( cWindowName , "width" ) , )
@@ -47,13 +62,16 @@ METHOD New( cWindowName , cProgId , nRow , nCol , nWidth , nHeight ) CLASS TActi
    ::cProgId := cProgId
    ::nOldWinWidth := GetProperty( cWindowName , "width" )
    ::nOldWinHeight := GetProperty( cWindowName , "Height" )
-Return Self
+
+   RETURN Self
 
 METHOD Load() CLASS TActiveX
-   local oError, bError
-   local nHandle := GetFormHandle(::cWindowName)
-   local xObjeto
-   local OCX_Error := 0
+
+   LOCAL oError, bError
+   LOCAL nHandle := GetFormHandle(::cWindowName)
+   LOCAL xObjeto
+   LOCAL OCX_Error := 0
+
    AtlAxWinInit()
    ::hWnd := CreateWindowEx( nHandle, ::cProgId )
    MoveWindow( ::hWnd , ::nCol , ::nRow , ::nWidth , ::nHeight , .t. )
@@ -63,22 +81,27 @@ METHOD Load() CLASS TActiveX
    CATCH
       MsgInfo( oError:description )
    END
-RETURN ::oOle
+
+   RETURN ::oOle
 
 METHOD ReSize( nRow , nCol , nWidth , nHeight ) CLASS TActiveX
-   if !::bHide
+
+   IF !::bHide
       MoveWindow( ::hWnd , nCol , nRow , nWidth , nHeight , .t. )
-   endif
+   ENDIF
    ::nRow := nRow
    ::nCol := nCol
    ::nWidth := nWidth
    ::nHeight := nHeight
    ::nOldWinWidth := GetProperty( ::cWindowName , "width" )
    ::nOldWinHeight := GetProperty( ::cWindowName , "Height" )
-RETURN .T.
+
+   RETURN .T.
 
 METHOD Adjust() CLASS TActiveX
-   Local nAuxRight , nAuxBottom
+
+   LOCAL nAuxRight , nAuxBottom
+
    nAuxRight := ( ::nOldWinWidth - ( ::nWidth + ::nCol ) )
    nAuxBottom := ( ::nOldWinHeight - ( ::nHeight + ::nRow ) )
    MoveWindow( ::hWnd , ::nCol , ::nRow , GetProperty( ::cWindowName , "width" ) - ::nCol - nAuxRight , GetProperty( ::cWindowName , "height" ) - ::nRow - nAuxBottom , .t. )
@@ -86,40 +109,52 @@ METHOD Adjust() CLASS TActiveX
    ::nHeight := GetProperty( ::cWindowName , "height" ) - ::nRow - nAuxBottom
    ::nOldWinWidth := GetProperty( ::cWindowName , "width" )
    ::nOldWinHeight := GetProperty( ::cWindowName , "Height" )
-RETURN .T.
+
+   RETURN .T.
 
 METHOD GetRow() CLASS TActiveX
-RETURN ::nRow
+
+   RETURN ::nRow
 
 METHOD GetCol() CLASS TActiveX
-RETURN ::nCol
+
+   RETURN ::nCol
 
 METHOD GetWidth() CLASS TActiveX
-RETURN ::nWidth
+
+   RETURN ::nWidth
 
 METHOD GetHeight() CLASS TActiveX
-RETURN ::nHeight
+
+   RETURN ::nHeight
 
 METHOD Hide() CLASS TActiveX
+
    MoveWindow( ::hWnd , 0 , 0 , 0 , 0 , .t. )
    ::bHide := .T.
-RETURN .T.
+
+   RETURN .T.
 
 METHOD Show() CLASS TActiveX
+
    MoveWindow( ::hWnd , ::nCol , ::nRow , ::nWidth , ::nHeight , .t. )
    ::bHide := .F.
-RETURN .T.
+
+   RETURN .T.
 
 METHOD Release() CLASS TActiveX
+
    //DestroyWindow( ::hWnd )
    AtlAxWinEnd()
-RETURN .T.
+
+   RETURN .T.
 
 METHOD Refresh() CLASS TActiveX
+
    ::Hide()
    ::Show()
-RETURN .T.
 
+   RETURN .T.
 
 #pragma BEGINDUMP
 
@@ -175,3 +210,4 @@ HB_FUNC_STATIC( CREATEWINDOWEX ) // hWnd, cProgId -> hActiveXWnd
 }
 
 #pragma ENDDUMP
+

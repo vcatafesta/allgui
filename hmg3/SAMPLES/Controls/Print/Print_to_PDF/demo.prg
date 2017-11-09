@@ -1,212 +1,207 @@
 #include "hmg.ch"
 
-*------------------------------------------------------------------------------*
-Function Main()
-*------------------------------------------------------------------------------*
+FUNCTION Main()
 
-//	AVAILABLE LIBRARY INTERFACE LANGUAGES
+   //   AVAILABLE LIBRARY INTERFACE LANGUAGES
 
-//	SET LANGUAGE TO ENGLISH (DEFAULT)
-//	SET LANGUAGE TO SPANISH
-//	SET LANGUAGE TO PORTUGUESE
-//	SET LANGUAGE TO ITALIAN
-//	SET LANGUAGE TO GERMAN
-//	SET LANGUAGE TO FRENCH
+   //   SET LANGUAGE TO ENGLISH (DEFAULT)
+   //   SET LANGUAGE TO SPANISH
+   //   SET LANGUAGE TO PORTUGUESE
+   //   SET LANGUAGE TO ITALIAN
+   //   SET LANGUAGE TO GERMAN
+   //   SET LANGUAGE TO FRENCH
 
-	Private aColor [10]
+   PRIVATE aColor [10]
 
-	aColor [1] := YELLOW	
-	aColor [2] := PINK	
-	aColor [3] := RED	
-	aColor [4] := FUCHSIA	
-	aColor [5] := BROWN	
-	aColor [6] := ORANGE	
-	aColor [7] := GREEN	
-	aColor [8] := PURPLE	
-	aColor [9] := BLACK	
-	aColor [10] := BLUE
+   aColor [1] := YELLOW
+   aColor [2] := PINK
+   aColor [3] := RED
+   aColor [4] := FUCHSIA
+   aColor [5] := BROWN
+   aColor [6] := ORANGE
+   aColor [7] := GREEN
+   aColor [8] := PURPLE
+   aColor [9] := BLACK
+   aColor [10] := BLUE
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'MiniPrint Library Test' ;
-		MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniPrint Library Test' ;
+         MAIN
 
-		DEFINE MAIN MENU 
-			DEFINE POPUP 'File'
-				MENUITEM 'Default Printer' ACTION PrintTest1()
-				MENUITEM 'User Selected Printer' ACTION PrintTest2()
-				MENUITEM 'User Selected Printer And Settings' ACTION PrintTest3()
-				MENUITEM 'User Selected Printer And Settings (Preview)' ACTION PrintTest4()
-				MENUITEM 'PDF Print' ACTION PrintTest5()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP 'File'
+            MENUITEM 'Default Printer' ACTION PrintTest1()
+            MENUITEM 'User Selected Printer' ACTION PrintTest2()
+            MENUITEM 'User Selected Printer And Settings' ACTION PrintTest3()
+            MENUITEM 'User Selected Printer And Settings (Preview)' ACTION PrintTest4()
+            MENUITEM 'PDF Print' ACTION PrintTest5()
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	MAXIMIZE WINDOW Win_1
+   MAXIMIZE WINDOW Win_1
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest1()
-*------------------------------------------------------------------------------*
-Local i 
+   RETURN
 
-	SELECT PRINTER DEFAULT ;
-		ORIENTATION	PRINTER_ORIENT_PORTRAIT ;
-		PAPERSIZE	PRINTER_PAPER_LETTER ;
-		QUALITY		PRINTER_RES_MEDIUM 
+PROCEDURE PrintTest1()
 
-	PrintDoc()
+   LOCAL i
 
-	MsgInfo('Print Finished')
+   SELECT PRINTER DEFAULT ;
+      ORIENTATION   PRINTER_ORIENT_PORTRAIT ;
+      PAPERSIZE   PRINTER_PAPER_LETTER ;
+      QUALITY      PRINTER_RES_MEDIUM
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest2()
-*------------------------------------------------------------------------------*
-Local i 
-Local cPrinter
+   PrintDoc()
 
-	cPrinter := GetPrinter()
+   MsgInfo('Print Finished')
 
-	If Empty (cPrinter)
-		Return
-	EndIf
+   RETURN
 
-	SELECT PRINTER cPrinter ;
-		ORIENTATION	PRINTER_ORIENT_PORTRAIT ;
-		PAPERSIZE	PRINTER_PAPER_LETTER ;
-		QUALITY		PRINTER_RES_MEDIUM
+PROCEDURE PrintTest2()
 
-	PrintDoc()
+   LOCAL i
+   LOCAL cPrinter
 
-	MsgInfo('Print Finished')
+   cPrinter := GetPrinter()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest3()
-*------------------------------------------------------------------------------*
-Local i 
-Local lSuccess
+   IF Empty (cPrinter)
 
-	// Measure Units Are Millimeters
+      RETURN
+   ENDIF
 
-	SELECT PRINTER DIALOG TO lSuccess 
+   SELECT PRINTER cPrinter ;
+      ORIENTATION   PRINTER_ORIENT_PORTRAIT ;
+      PAPERSIZE   PRINTER_PAPER_LETTER ;
+      QUALITY      PRINTER_RES_MEDIUM
 
-	If lSuccess == .T.
-		PrintDoc()
-		MsgInfo('Print Finished')
-	EndIf
+   PrintDoc()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest4()
-*------------------------------------------------------------------------------*
-Local i 
-Local lSuccess
+   MsgInfo('Print Finished')
 
-	SELECT PRINTER DIALOG TO lSuccess PREVIEW
+   RETURN
 
-	If lSuccess == .T.
-		PrintDoc()
-		MsgInfo('Print Finished')
-	EndIf
+PROCEDURE PrintTest3()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest5()
-*------------------------------------------------------------------------------*
-Local i 
-Local lSuccess
+   LOCAL i
+   LOCAL lSuccess
 
-	SELECT PRINTER PDF 'pdfprintdemo.pdf' TO lSuccess
+   // Measure Units Are Millimeters
 
-	If lSuccess == .T.
-		PrintDoc()
-		MsgInfo('Print Finished')
-      if file( 'pdfprintdemo.pdf')
-         execute file 'pdfprintdemo.pdf'
-      endif   
-	EndIf
+   SELECT PRINTER DIALOG TO lSuccess
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintDoc
-*------------------------------------------------------------------------------*
-Local i
+   IF lSuccess == .T.
+      PrintDoc()
+      MsgInfo('Print Finished')
+   ENDIF
 
-	// Measure Units Are Millimeters
+   RETURN
 
-	START PRINTDOC
+PROCEDURE PrintTest4()
 
+   LOCAL i
+   LOCAL lSuccess
 
-			START PRINTPAGE
+   SELECT PRINTER DIALOG TO lSuccess PREVIEW
 
-				@ 20,20 PRINT "Filled Rectangle Sample:" ;
-					FONT "Arial" ;
-					SIZE 20 
+   IF lSuccess == .T.
+      PrintDoc()
+      MsgInfo('Print Finished')
+   ENDIF
 
-			
-				@ 30,20 PRINT RECTANGLE ;
-					TO 40,190 ;
-					PENWIDTH 0.1;
-					COLOR {255,255,0}
-					
-					
-				@ 60,20 PRINT RECTANGLE ;
-					TO 100,190 ;
-					PENWIDTH 0.1;
-					COLOR {255,255,0};
-					FILLED
-					
-				@ 110,20 PRINT RECTANGLE ;
-					TO 150,190 ;
-					PENWIDTH 0.1;
-					COLOR {255,255,0};
-					ROUNDED
-					
-				@ 160,20 PRINT RECTANGLE ;
-					TO 200,190 ;
-					PENWIDTH 0.1;
-					COLOR {255,255,0};
-					FILLED;
-					ROUNDED
-										
-			END PRINTPAGE
-			START PRINTPAGE
+   RETURN
 
-				@ 20,20 PRINT "Filled Rectangle Sample:" ;
-					FONT "Arial" ;
-					SIZE 20 
+PROCEDURE PrintTest5()
 
-			
-				@ 30,20 PRINT RECTANGLE ;
-					TO 40,190 ;
-					PENWIDTH 0.1
-					
-				@ 60,20 PRINT RECTANGLE ;
-					TO 100,190 ;
-					PENWIDTH 0.1;
-					FILLED
-					
-				@ 110,20 PRINT RECTANGLE ;
-					TO 150,190 ;
-					PENWIDTH 0.1;
-					ROUNDED
-					
-				@ 160,20 PRINT RECTANGLE ;
-					TO 200,190 ;
-					PENWIDTH 0.1;
-					FILLED;
-					ROUNDED
-										
-			END PRINTPAGE
+   LOCAL i
+   LOCAL lSuccess
 
-			
-	END PRINTDOC
+   SELECT PRINTER PDF 'pdfprintdemo.pdf' TO lSuccess
 
-Return
+   IF lSuccess == .T.
+      PrintDoc()
+      MsgInfo('Print Finished')
+      IF file( 'pdfprintdemo.pdf')
+         EXECUTE FILE 'pdfprintdemo.pdf'
+      ENDIF
+   ENDIF
+
+   RETURN
+
+PROCEDURE PrintDoc
+
+   LOCAL i
+
+   // Measure Units Are Millimeters
+
+   START PRINTDOC
+
+      START PRINTPAGE
+
+         @ 20,20 PRINT "Filled Rectangle Sample:" ;
+            FONT "Arial" ;
+            SIZE 20
+
+         @ 30,20 PRINT RECTANGLE ;
+            TO 40,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0}
+
+         @ 60,20 PRINT RECTANGLE ;
+            TO 100,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            FILLED
+
+         @ 110,20 PRINT RECTANGLE ;
+            TO 150,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            ROUNDED
+
+         @ 160,20 PRINT RECTANGLE ;
+            TO 200,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            FILLED;
+            ROUNDED
+
+      END PRINTPAGE
+      START PRINTPAGE
+
+         @ 20,20 PRINT "Filled Rectangle Sample:" ;
+            FONT "Arial" ;
+            SIZE 20
+
+         @ 30,20 PRINT RECTANGLE ;
+            TO 40,190 ;
+            PENWIDTH 0.1
+
+         @ 60,20 PRINT RECTANGLE ;
+            TO 100,190 ;
+            PENWIDTH 0.1;
+            FILLED
+
+         @ 110,20 PRINT RECTANGLE ;
+            TO 150,190 ;
+            PENWIDTH 0.1;
+            ROUNDED
+
+         @ 160,20 PRINT RECTANGLE ;
+            TO 200,190 ;
+            PENWIDTH 0.1;
+            FILLED;
+            ROUNDED
+
+      END PRINTPAGE
+
+   END PRINTDOC
+
+   RETURN
+

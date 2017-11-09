@@ -1,8 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2016 P.Chornyj <myorg63@mail.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2016 P.Chornyj <myorg63@mail.ru>
 */
 
 #define _HMG_OUTLOG
@@ -26,7 +24,6 @@
 #define FILE_NOTIFY_CHANGE_LAST_WRITE 0x00000010
 #define FILE_NOTIFY_CHANGE_SECURITY   0x00000100
 
-
 #define PROGRAM 'Directory Watcher'
 #define COPYRIGHT ' Petr Chornyj, 2016'
 
@@ -34,6 +31,7 @@ STATIC lStartWatch := .F.
 
 /*
 */
+
 FUNCTION Main( cDir )
 
    SET MULTIPLE OFF
@@ -41,35 +39,36 @@ FUNCTION Main( cDir )
    SET LOGFILE TO "dirwatcher.log"
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 0 HEIGHT 0 ;
-      TITLE PROGRAM ;
-      MAIN NOSHOW ;
-      NOTIFYICON "MAIN" ;
-      NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu"
+         AT 0, 0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         NOTIFYICON "MAIN" ;
+         NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu"
 
-   DEFINE NOTIFY MENU
-      ITEM '&Start Watch' ACTION StartWatch( cDir )
-      SEPARATOR
-      ITEM '&Mail to author...' ;
-         ACTION ShellExecute( 0, "open", "rundll32.exe", ;
-         "url.dll,FileProtocolHandler " + ;
-         "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
-         "&subject=Directory%20Watcher%20Feedback:" + ;
-         "&body=How%20are%20you%2C%20Grigory%3F", , 1 )
-      ITEM '&About...' ACTION ShellAbout( "About " + PROGRAM + "#", PROGRAM + ' version 1.0' + ;
-         CRLF + "Copyright " + Chr( 169 ) + COPYRIGHT, LoadTrayIcon( GetInstance(), "MAIN", 32, 32 ) )
-      SEPARATOR
-      ITEM 'E&xit'  ACTION Form_1.Release
-   END MENU
+      DEFINE NOTIFY MENU
+         ITEM '&Start Watch' ACTION StartWatch( cDir )
+         SEPARATOR
+         ITEM '&Mail to author...' ;
+            ACTION ShellExecute( 0, "open", "rundll32.exe", ;
+            "url.dll,FileProtocolHandler " + ;
+            "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
+            "&subject=Directory%20Watcher%20Feedback:" + ;
+            "&body=How%20are%20you%2C%20Grigory%3F", , 1 )
+         ITEM '&About...' ACTION ShellAbout( "About " + PROGRAM + "#", PROGRAM + ' version 1.0' + ;
+            CRLF + "Copyright " + Chr( 169 ) + COPYRIGHT, LoadTrayIcon( GetInstance(), "MAIN", 32, 32 ) )
+         SEPARATOR
+         ITEM 'E&xit'  ACTION Form_1.Release
+      END MENU
 
    END WINDOW
 
    ACTIVATE WINDOW Form_1
 
    RETURN NIL
-/*
-*/
+   /*
+   */
+
 PROCEDURE StartWatch( cDir )
 
    LOCAL cDirectory
@@ -95,8 +94,9 @@ PROCEDURE StartWatch( cDir )
    ENDIF
 
    RETURN
-/*
-*/
+   /*
+   */
+
 FUNCTION WatchDirectory( cDir )
 
    LOCAL pChangeHandle
@@ -108,6 +108,7 @@ FUNCTION WatchDirectory( cDir )
 
    IF INVALID_HANDLE_VALUE( pChangeHandle )
       ? "ERROR: FindFirstChangeNotification function failed."
+
       RETURN wapi_GetLastError()
    ENDIF
 
@@ -128,6 +129,7 @@ FUNCTION WatchDirectory( cDir )
          IF lRunAnyway
             IF ! wapi_FindNextChangeNotification( pChangeHandle )
                ? "ERROR: FindNextChangeNotification function failed."
+
                RETURN wapi_GetLastError()
             ENDIF
          ELSE
@@ -146,6 +148,7 @@ FUNCTION WatchDirectory( cDir )
 
       OTHERWISE
          ? "ERROR: Unhandled nWaitStatus."
+
          RETURN wapi_GetLastError()
 
       ENDSWITCH
@@ -154,8 +157,9 @@ FUNCTION WatchDirectory( cDir )
    ? "EXIT: Quit signal was received."
 
    RETURN 0
-/*
-*/
+   /*
+   */
+
 PROCEDURE RefreshDirectory( cDir, lRunAnyway )
 
    // This is where you might place code to refresh your
@@ -168,8 +172,8 @@ PROCEDURE RefreshDirectory( cDir, lRunAnyway )
    ENDIF
 
    RETURN
-/*
-*/
+   /*
+   */
 #pragma BEGINDUMP
 
 #include <windows.h>
@@ -250,3 +254,4 @@ HB_FUNC( INVALID_HANDLE_VALUE )
 }
 
 #pragma ENDDUMP
+

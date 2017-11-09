@@ -1,29 +1,30 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Program : Test03.prg
- * Purpose : TData class test showing how to create an index of a database with a progress meter.
+* MINIGUI - Harbour Win32 GUI library Demo
+* Program : Test03.prg
+* Purpose : TData class test showing how to create an index of a database with a progress meter.
 */
 
 #include "hmg.ch"
 
-function main
-   local oDB
+FUNCTION main
+
+   LOCAL oDB
 
    SET WINDOW MAIN OFF
 
    // setup test.dbf
    dbcreate('test',{{'FLD1',"+",8,0}})
-   use test
-   while lastrec() < 100000
-      append blank
+   USE test
+   WHILE lastrec() < 100000
+      APPEND BLANK
    end
-   use
+   USE
 
    oDB:=tdata():new(,"test")
-   if oDB:use()
+   IF oDB:use()
       oDB:createIndex("test",,"fld1",,,.t.,5)
-   endif
+   ENDIF
    oDB:close()
 
-return nil
+   RETURN NIL
+

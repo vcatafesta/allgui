@@ -1,6 +1,6 @@
 #xcommand DEFINE LBLTEXTBOX <name> ROW <nRow> COL <nCol> [ WIDTH <nW> ] CAPTION <cCaption> ;
-      => ;
-      CreateTextboxWithLabel( <(name)>, <nRow>, <nCol>, <cCaption>, <nW> )
+   => ;
+   CreateTextboxWithLabel( <(name)>, <nRow>, <nCol>, <cCaption>, <nW> )
 
 #xcommand END LBLTEXTBOX =>;
 
@@ -19,60 +19,59 @@ FUNCTION Main
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW MainForm ;
-      AT 0, 0 WIDTH nWidth HEIGHT nHeight ;
-      TITLE "Labeled TextBox Demo" ;
-      MODAL ;
-      NOSIZE ;
-      FONT "Segoe UI" SIZE 10
+         AT 0, 0 WIDTH nWidth HEIGHT nHeight ;
+         TITLE "Labeled TextBox Demo" ;
+         MODAL ;
+         NOSIZE ;
+         FONT "Segoe UI" SIZE 10
 
       DEFINE LBLTEXTBOX Text_1 ;
          ROW 10 ;
          COL 135 ;
          WIDTH 250 ;
          CAPTION "Enter your name:"
-      END LBLTEXTBOX
-        
-      DEFINE LBLTEXTBOX Text_2 ;
-         ROW 40 ;
-         COL 135 ;
-         WIDTH 250 ;
-         CAPTION "Enter your address:"
-      END LBLTEXTBOX
-        
-      DEFINE LBLTEXTBOX Text_3 ;
-         ROW 70 ;
-         COL 135 ;
-         WIDTH 250 ;
-         CAPTION "Enter your city:"
-      END LBLTEXTBOX
-        
-      DEFINE TEXTBOX Text_4
-         ROW 100 
-         COL 135 
-         WIDTH 250 
-         VALUE "textbox without 'caption'"
-      END TEXTBOX
-        
-      DEFINE BUTTON Button_1
-         ROW nHeight - GetTitleHeight() - GetBorderHeight() - iif(IsSeven(), 2, 0) - 35
-         COL nWidth  - GetBorderWidth() - iif(IsSeven(), 2, 0) - 80
-         WIDTH 70
-         CAPTION "Close"
-         ACTION ThisWindow.Release
-      END BUTTON
+   END LBLTEXTBOX
 
-   END WINDOW
+   DEFINE LBLTEXTBOX Text_2 ;
+      ROW 40 ;
+      COL 135 ;
+      WIDTH 250 ;
+      CAPTION "Enter your address:"
+END LBLTEXTBOX
 
-   MainForm.Text_1.Value := "User Name"
-   MainForm.Text_2.Value := "User Address"
-   MainForm.Text_3.Value := "User City"
-   MainForm.Text_1.SetFocus()
+DEFINE LBLTEXTBOX Text_3 ;
+   ROW 70 ;
+   COL 135 ;
+   WIDTH 250 ;
+   CAPTION "Enter your city:"
+END LBLTEXTBOX
 
-   MainForm.Center()
-   MainForm.Activate()
+DEFINE TEXTBOX Text_4
+   ROW 100
+   COL 135
+   WIDTH 250
+   VALUE "textbox without 'caption'"
+END TEXTBOX
+
+DEFINE BUTTON Button_1
+   ROW nHeight - GetTitleHeight() - GetBorderHeight() - iif(IsSeven(), 2, 0) - 35
+   COL nWidth  - GetBorderWidth() - iif(IsSeven(), 2, 0) - 80
+   WIDTH 70
+   CAPTION "Close"
+   ACTION ThisWindow.Release
+END BUTTON
+
+END WINDOW
+
+MainForm.Text_1.Value := "User Name"
+MainForm.Text_2.Value := "User Address"
+MainForm.Text_3.Value := "User City"
+MainForm.Text_1.SetFocus()
+
+MainForm.Center()
+MainForm.Activate()
 
 RETURN NIL
-
 
 STATIC FUNCTION CreateTextboxWithLabel( textboxname, nR, nC, cCaption, nW )
 
@@ -103,4 +102,5 @@ STATIC FUNCTION CreateTextboxWithLabel( textboxname, nR, nC, cCaption, nW )
       //ONLOSTFOCUS SetProperty( ThisWindow.Name, textboxname, "FontColor", GRAY )
    END TEXTBOX
 
-RETURN NIL
+   RETURN NIL
+

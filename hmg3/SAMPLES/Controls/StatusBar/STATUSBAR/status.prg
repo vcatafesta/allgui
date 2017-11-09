@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window Status
-	Activate Window Status
+   LOAD WINDOW Status
+   ACTIVATE WINDOW Status
 
-Return
-
+   RETURN
 

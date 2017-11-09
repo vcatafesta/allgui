@@ -1,11 +1,9 @@
 /*
- *$Id: htimer.prg,v 1.1 2005/01/12 11:56:34 alkresin Exp $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HTimer class 
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+*$Id: htimer.prg,v 1.1 2005/01/12 11:56:34 alkresin Exp $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HTimer class
+* Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -16,14 +14,16 @@
 
 CLASS HTimer INHERIT HObject
 
-   CLASS VAR aTimers   INIT {}
+CLASS VAR aTimers   INIT {}
+
    DATA id, tag
    DATA value
    DATA oParent
    DATA bAction
 
-   METHOD New( oParent,id,value,bAction )
-   METHOD End()
+METHOD New( oParent,id,value,bAction )
+
+METHOD End()
 
 ENDCLASS
 
@@ -31,17 +31,18 @@ METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 
    ::oParent := Iif( oParent==Nil, HWindow():GetMain(), oParent )
    ::id      := Iif( nId==Nil, TIMER_FIRST_ID + Len( ::oParent:aControls ), ;
-                         nId )
+      nId )
    ::value   := value
    ::bAction := bAction
 
    ::tag := hwg_SetTimer( ::id,::value )
    Aadd( ::aTimers,Self )
 
-Return Self
+   RETURN Self
 
 METHOD End() CLASS HTimer
-Local i
+
+   LOCAL i
 
    hwg_KillTimer( ::tag )
    i := Ascan( ::aTimers,{|o|o:id==::id} )
@@ -50,23 +51,25 @@ Local i
       Asize( ::aTimers,Len( ::aTimers )-1 )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function TimerProc( idTimer )
-Local i := Ascan( HTimer():aTimers,{|o|o:id==idTimer} )
+FUNCTION TimerProc( idTimer )
+
+   LOCAL i := Ascan( HTimer():aTimers,{|o|o:id==idTimer} )
 
    IF i != 0
       Eval( HTimer():aTimers[i]:bAction )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-EXIT PROCEDURE CleanTimers
-Local oTimer, i
+   EXIT PROCEDURE CleanTimers
+   LOCAL oTimer, i
 
-   For i := 1 TO Len( HTimer():aTimers )
+   FOR i := 1 TO Len( HTimer():aTimers )
       oTimer := HTimer():aTimers[i]
       hwg_KillTimer( oTimer:tag )
    NEXT
 
-Return
+   RETURN
+

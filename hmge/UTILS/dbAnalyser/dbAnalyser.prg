@@ -3,7 +3,6 @@
 * System : <unkown>
 * Author : Phil Ide
 * Created: 18/02/2004
-*
 * Purpose:
 * ----------------------------
 * History:
@@ -19,6 +18,7 @@ SET PROCEDURE TO dbanUtils
 ANNOUNCE RDDSYS
 
 STATIC FUNCTION Help( nMsg )
+
    ?
    IF nMsg == HELP_MSG_FILE_NOT_FOUND
       ? 'File not found'
@@ -31,6 +31,7 @@ STATIC FUNCTION Help( nMsg )
    RETURN ( Nil )
 
 STATIC FUNCTION Copyright()
+
    cls
    ?? Lower( cFileNoExt( ExeName() ) ) + ' v' + dbaVer()
    ? '(c) Phil Ide 2004, All Rights Reserved'
@@ -83,10 +84,11 @@ FUNCTION FHandle( n )
    RETURN nH
 
 FUNCTION dbaVer()
+
    RETURN LTrim( Str( VERSION_MAJOR ) ) + '.' + LTrim( Str( VERSION_MINOR ) ) + '.' + LTrim( Str( VERSION_BUILD ) )
 
-
 PROCEDURE Main( cDBF )
+
    SET EPOCH TO 1980
    SET DATE ANSI
    Copyright()
@@ -104,3 +106,4 @@ PROCEDURE Main( cDBF )
    ENDIF
 
    RETURN
+

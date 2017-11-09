@@ -1,21 +1,20 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 600 HEIGHT 400 ;
-      TITLE "MiniGUI Slider Demo" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      BKBRUSH "basn3p01" ;
-      FONT "Arial" SIZE 10
+         AT 0,0 ;
+         WIDTH 600 HEIGHT 400 ;
+         TITLE "MiniGUI Slider Demo" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         BKBRUSH "basn3p01" ;
+         FONT "Arial" SIZE 10
 
       // Horizontal
       @ 20,20 SLIDER Slider_1 ;
@@ -26,7 +25,7 @@ Function Main
          ON SCROLL {||Slider1_Change()} ;
          ON CHANGE {||Slider1_Change()}
 
-         SetSliderSelRange( Form_1.Slider_1.Handle, 3, 7 )
+      SetSliderSelRange( Form_1.Slider_1.Handle, 3, 7 )
 
       @ 70,20 TEXTBOX TextBox_1 VALUE " 5" WIDTH 60 MAXLENGTH 5
 
@@ -115,72 +114,73 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-Function Slider1_Change
+FUNCTION Slider1_Change
 
-   Local nValue := Form_1.Slider_1.Value
+   LOCAL nValue := Form_1.Slider_1.Value
 
    Form_1.TextBox_1.Value := Str(nValue, 2)
    Form_1.Slider_5.Value := nValue
 
-Return Nil
+   RETURN NIL
 
-Function Slider2_Change
+FUNCTION Slider2_Change
 
-   Local nValue := Form_1.Slider_2.Value
+   LOCAL nValue := Form_1.Slider_2.Value
 
    Form_1.TextBox_2.Value := Str(nValue, 2)
    Form_1.Slider_6.Value := nValue
 
-Return Nil
+   RETURN NIL
 
-Function Slider3_Change
+FUNCTION Slider3_Change
 
-   Local nValue := Form_1.Slider_3.Value
+   LOCAL nValue := Form_1.Slider_3.Value
 
    Form_1.TextBox_3.Value := Str(nValue, 2)
    Form_1.Slider_7.Value := nValue
 
-Return Nil
+   RETURN NIL
 
-Function Slider4_Change
+FUNCTION Slider4_Change
 
-   Local nValue := Form_1.Slider_4.Value
+   LOCAL nValue := Form_1.Slider_4.Value
 
    Form_1.TextBox_4.Value := Str(nValue, 2)
    Form_1.Slider_8.Value := nValue
 
-Return Nil
+   RETURN NIL
 
-Function Slider5_Change
+FUNCTION Slider5_Change
 
-   Local nValue := Form_1.Slider_5.Value
+   LOCAL nValue := Form_1.Slider_5.Value
 
    Form_1.TextBox_5.Value := Str(nValue, 2)
 
-Return Nil
+   RETURN NIL
 
-Function Slider6_Change
+FUNCTION Slider6_Change
 
-   Local nValue := Form_1.Slider_6.Value
+   LOCAL nValue := Form_1.Slider_6.Value
 
    Form_1.TextBox_6.Value := Str(nValue, 2)
 
-Return Nil
+   RETURN NIL
 
-Function Slider7_Change
+FUNCTION Slider7_Change
 
-   Local nValue := Form_1.Slider_7.Value
+   LOCAL nValue := Form_1.Slider_7.Value
 
    Form_1.TextBox_7.Value := Str(nValue, 2)
 
-Return Nil
+   RETURN NIL
 
-Function Slider8_Change
+FUNCTION Slider8_Change
 
-   Local nValue := Form_1.Slider_8.Value
+   LOCAL nValue := Form_1.Slider_8.Value
 
    Form_1.TextBox_8.Value := Str(nValue, 2)
 
-Return Nil
+   RETURN NIL
+

@@ -1,18 +1,20 @@
 *:**************************
-*: Program OPEN_NTX.PRG 
+*: Program OPEN_NTX.PRG
 *:**************************
-PROCEDURE open_ntx 
 
-if ! file ("EMPLOYE.ntx")
-   use EMPLOYE
-   index on FIELD->CLI_ID to EMPLOYE
-   use 
-endif
+PROCEDURE open_ntx
 
-if ! file ("EMPLOYEC.ntx")
-   use EMPLOYE
-   index on FIELD->CLI_CITY to EMPLOYEC
-   use 
-endif
+   IF ! file ("EMPLOYE.ntx")
+      USE EMPLOYE
+      INDEX ON FIELD->CLI_ID to EMPLOYE
+      USE
+   ENDIF
 
-RETURN
+   IF ! file ("EMPLOYEC.ntx")
+      USE EMPLOYE
+      INDEX ON FIELD->CLI_CITY to EMPLOYEC
+      USE
+   ENDIF
+
+   RETURN
+

@@ -6,33 +6,34 @@
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-		DEFINE MAIN MENU
-			POPUP 'Common &Dialog Functions'
-				
-			ITEM 'PutFile() without default file name' ;
-				ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' ) )
-                        ITEM 'PutFile() without default extension' ;
-				ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' , ;
-					.f., "My_picture" ) )
-			ITEM 'PutFile() with default filename - My_picture.jpg' ;
-				ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' , ;
-					.f., "My_picture.jpg" ) )
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'Common &Dialog Functions'
 
-	END WINDOW
+            ITEM 'PutFile() without default file name' ;
+               ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' ) )
+            ITEM 'PutFile() without default extension' ;
+               ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' , ;
+               .f., "My_picture" ) )
+            ITEM 'PutFile() with default filename - My_picture.jpg' ;
+               ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image As' , 'C:\' , ;
+               .f., "My_picture.jpg" ) )
+         END POPUP
+      END MENU
 
-	CENTER WINDOW Win_1
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
 
-Return
+   ACTIVATE WINDOW Win_1
+
+   RETURN
+

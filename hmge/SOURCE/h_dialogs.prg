@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -50,9 +50,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #endif
 #include 'minigui.ch'
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetColor( aInitColor )
-*-----------------------------------------------------------------------------*
+
    LOCAL aRetVal [3] , nColor , nInitColor
 
    IF IsArrayRGB ( aInitColor )
@@ -63,23 +62,20 @@ FUNCTION GetColor( aInitColor )
       aRetVal := nRGB2Arr ( nColor )
    ENDIF
 
-RETURN aRetVal
+   RETURN aRetVal
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetFolder( cTitle, cInitPath, nFlags, lNewFolderButton ) // JK HMG 1.0 Experimental Build 8
-*-----------------------------------------------------------------------------*
-RETURN C_BrowseForFolder( NIL, cTitle, hb_defaultValue( nFlags, BIF_USENEWUI + BIF_VALIDATE + ;
-   iif( hb_defaultValue( lNewFolderButton, .T. ), 0, BIF_NONEWFOLDERBUTTON ) ), NIL, cInitPath )
 
-*-----------------------------------------------------------------------------*
+   RETURN C_BrowseForFolder( NIL, cTitle, hb_defaultValue( nFlags, BIF_USENEWUI + BIF_VALIDATE + ;
+      iif( hb_defaultValue( lNewFolderButton, .T. ), 0, BIF_NONEWFOLDERBUTTON ) ), NIL, cInitPath )
+
 FUNCTION BrowseForFolder( nFolder, nFlags, cTitle, cInitPath ) // Contributed By Ryszard Rylko
-*-----------------------------------------------------------------------------*
-RETURN C_BrowseForFolder( NIL, cTitle, hb_defaultValue( nFlags, ;
-   hb_BitOr( BIF_NEWDIALOGSTYLE, BIF_EDITBOX, BIF_VALIDATE ) ), nFolder, cInitPath )
 
-*-----------------------------------------------------------------------------*
+   RETURN C_BrowseForFolder( NIL, cTitle, hb_defaultValue( nFlags, ;
+      hb_BitOr( BIF_NEWDIALOGSTYLE, BIF_EDITBOX, BIF_VALIDATE ) ), nFolder, cInitPath )
+
 FUNCTION GetFile( aFilter, title, cIniFolder, multiselect, lNoChangeCurDir, nFilterIndex )
-*-----------------------------------------------------------------------------*
+
    LOCAL fileslist As Array
    LOCAL cFilter As String
    LOCAL n, files
@@ -111,12 +107,10 @@ FUNCTION GetFile( aFilter, title, cIniFolder, multiselect, lNoChangeCurDir, nFil
       fileslist := files
    ENDIF
 
-RETURN ( fileslist )
+   RETURN ( fileslist )
 
-*-----------------------------------------------------------------------------*
 FUNCTION Putfile( aFilter, title, cIniFolder, lNoChangeCurDir, cDefFileName, ;
-   /*@*/nFilterIndex, lPromptOverwrite ) //  p.d. 12/05/2016 added lPromptOverwrite
-*-----------------------------------------------------------------------------*
+      /*@*/nFilterIndex, lPromptOverwrite ) //  p.d. 12/05/2016 added lPromptOverwrite
    LOCAL cFilter As String
 
    hb_default( @cDefFileName, "" )
@@ -127,11 +121,10 @@ FUNCTION Putfile( aFilter, title, cIniFolder, lNoChangeCurDir, cDefFileName, ;
       cFilter += Chr( 0 )
    ENDIF
 
-RETURN C_PutFile ( cFilter, title, cIniFolder, lNoChangeCurDir, cDefFileName, @nFilterIndex, hb_defaultValue( lPromptOverwrite, .F. ) )
+   RETURN C_PutFile ( cFilter, title, cIniFolder, lNoChangeCurDir, cDefFileName, @nFilterIndex, hb_defaultValue( lPromptOverwrite, .F. ) )
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetFont( cInitFontName , nInitFontSize , lBold , lItalic , anInitColor , lUnderLine , lStrikeOut , nCharset )
-*-----------------------------------------------------------------------------*
+
    LOCAL RetArray , rgbcolor := 0
 
    hb_default( @cInitFontName, "" )
@@ -155,4 +148,5 @@ FUNCTION GetFont( cInitFontName , nInitFontSize , lBold , lItalic , anInitColor 
       RetArray [5] := nRGB2Arr( rgbcolor )
    ENDIF
 
-RETURN RetArray
+   RETURN RetArray
+

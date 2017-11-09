@@ -1,55 +1,45 @@
 /*
- * $Id: tsqlbrw.prg 18756 2013-01-10 22:27:11Z druzus $
- */
+* $Id: tsqlbrw.prg 18756 2013-01-10 22:27:11Z druzus $
+*/
 
 /*
- * Harbour Project source code:
- * MySQL TBrowse
- * A TBrowse on a MySQL Table / query
- *
- * Copyright 2000 Maurilio Longo <maurilio.longo@libero.it>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.txt.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* MySQL TBrowse
+* A TBrowse on a MySQL Table / query
+* Copyright 2000 Maurilio Longo <maurilio.longo@libero.it>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.txt.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "hbclass.ch"
 
@@ -60,36 +50,34 @@
 
 /* NOTE:
 
-   In fact no, the 'regular syntax is the same as the VO one,
+In fact no, the 'regular syntax is the same as the VO one,
 
-   ACCESS Block METHOD Block()
-   or
-   ACCESS Block INLINE ::MyVal
+ACCESS Block METHOD Block()
+or
+ACCESS Block INLINE ::MyVal
 
-   and
+and
 
-   ASSIGN Block( x ) METHOD Block( x )
-   or
-   ASSIGN Block( x ) INLINE ::MyVal := x
+ASSIGN Block( x ) METHOD Block( x )
+or
+ASSIGN Block( x ) INLINE ::MyVal := x
 
 */
-
 
 CREATE CLASS TBColumnSQL FROM TBColumn
 
    VAR   oBrw                 // pointer to Browser containing this column, needed to be able to
-                              // retreive field values from Browse instance variable oCurRow
-// VAR   Picture              // From clipper 5.3
+   // retreive field values from Browse instance variable oCurRow
+   // VAR   Picture              // From clipper 5.3
    VAR   nFieldNum            // This column maps field num from query
 
    MESSAGE  Block METHOD Block()          // When evaluating code block to get data from source this method
-                                          // gets called. I need this since inside TBColumn Block I cannot
-                                          // reference Column or Browser instance variables
+   // gets called. I need this since inside TBColumn Block I cannot
+   // reference Column or Browser instance variables
 
-   METHOD   New( cHeading, bBlock, oBrw )   // Saves inside column a copy of container browser
+METHOD   New( cHeading, bBlock, oBrw )   // Saves inside column a copy of container browser
 
 ENDCLASS
-
 
 METHOD New( cHeading, bBlock, oBrw ) CLASS TBColumnSQL
 
@@ -97,7 +85,6 @@ METHOD New( cHeading, bBlock, oBrw ) CLASS TBColumnSQL
    ::oBrw := oBrw
 
    RETURN Self
-
 
 METHOD Block() CLASS TBColumnSQL
 
@@ -130,31 +117,33 @@ METHOD Block() CLASS TBColumnSQL
 
    RETURN hb_macroBlock( xValue )
 
-/* -------------------------------------------------------- */
+   /* -------------------------------------------------------- */
 
-/*
+   /*
    This class is more or less like a TBrowseDB() object in that it receives an oQuery/oTable
    object and gives back a browseable view of it
-*/
+   */
+
 CREATE CLASS TBrowseSQL FROM TBrowse
 
    VAR      oCurRow                       // Active row inside table / sql query
    VAR      oQuery                        // Query / table object which we are browsing
 
-   METHOD   New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable )
+METHOD   New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable )
 
-   METHOD   EditField()                   // Editing of hilighted field, after editing does an update of
-                                          // corresponding row inside table
+METHOD   EditField()                   // Editing of hilighted field, after editing does an update of
 
-   METHOD   BrowseTable( lCanEdit, aExitKeys ) // Handles standard moving inside table and if lCanEdit == .T.
-                                               // allows editing of field. It is the stock ApplyKey() moved inside a table
-                                               // if lCanEdit K_DEL deletes current row
-                                               // When a key is pressed which is present inside aExitKeys it leaves editing loop
+   // corresponding row inside table
 
-   METHOD   KeyboardHook( nKey )               // Where do all unknown keys go?
+METHOD   BrowseTable( lCanEdit, aExitKeys ) // Handles standard moving inside table and if lCanEdit == .T.
+
+   // allows editing of field. It is the stock ApplyKey() moved inside a table
+   // if lCanEdit K_DEL deletes current row
+   // When a key is pressed which is present inside aExitKeys it leaves editing loop
+
+METHOD   KeyboardHook( nKey )               // Where do all unknown keys go?
 
 ENDCLASS
-
 
 METHOD New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable ) CLASS TBrowseSQL
 
@@ -240,7 +229,6 @@ STATIC FUNCTION Skipper( nSkip, oQuery )
 
    RETURN oQuery:GetRow( oQuery:RecNo() )
 
-
 METHOD EditField() CLASS TBrowseSQL
 
    LOCAL oCol
@@ -282,14 +270,14 @@ METHOD EditField() CLASS TBrowseSQL
       // NOTE: I need to use ::oCurRow:FieldPut(...) when changing values since message redirection doesn't work at present
       //       time for write access to instance variables but only for reading them
       aGetList := { GetNew( Row(), Col(),;
-                            {| xValue | iif( xValue == NIL, Eval( oCol:Block ), ::oCurRow:FieldPut( oCol:nFieldNum, xValue ) ) },;
-                            oCol:heading,;
-                            oCol:picture,;
-                            ::colorSpec ) }
+         {| xValue | iif( xValue == NIL, Eval( oCol:Block ), ::oCurRow:FieldPut( oCol:nFieldNum, xValue ) ) },;
+         oCol:heading,;
+         oCol:picture,;
+         ::colorSpec ) }
 
       // Set initial cursor shape
       // SetCursor( iif( ReadInsert(), SC_INSERT, SC_NORMAL ) )
-      ReadModal( aGetList )
+      READModal( aGetList )
       // SetCursor( SC_NONE )
 
       /* NOTE: To do in a better way */
@@ -297,7 +285,7 @@ METHOD EditField() CLASS TBrowseSQL
          Alert( Left( ::oQuery:Error(), 60 ) )
       ENDIF
 
-   endif
+   ENDIF
 
    IF ! ::oQuery:Refresh()
       Alert( ::oQuery:Error() )
@@ -308,7 +296,7 @@ METHOD EditField() CLASS TBrowseSQL
    // Check exit key from get
    nKey := LastKey()
    IF nKey == K_UP   .OR. nKey == K_DOWN .OR. ;
-      nKey == K_PGUP .OR. nKey == K_PGDN
+         nKey == K_PGUP .OR. nKey == K_PGDN
 
       // Ugh
       hb_keyIns( nKey )
@@ -316,7 +304,6 @@ METHOD EditField() CLASS TBrowseSQL
    ENDIF
 
    RETURN Self
-
 
 METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
 
@@ -393,7 +380,7 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
       CASE nKey == K_ENTER .AND. lCanEdit
          ::EditField()
 
-#if 0
+         #if 0
       CASE nKey == K_DEL
          IF lCanEdit
             IF ! ::oQuery:Delete( ::oCurRow )
@@ -406,7 +393,7 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
             ::inValidate()
             ::refreshAll():forceStable()
          ENDIF
-#endif
+         #endif
 
       OTHERWISE
          ::KeyboardHook( nKey )
@@ -415,9 +402,11 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
 
    RETURN Self
 
-// Empty method to be subclassed
+   // Empty method to be subclassed
+
 METHOD KeyboardHook( nKey ) CLASS TBrowseSQL
 
    HB_SYMBOL_UNUSED( nKey )
 
    RETURN Self
+

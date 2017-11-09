@@ -1,21 +1,18 @@
 /*
- * Ejemplo MonthCalendar # 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Vea <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo es un caso de prueba para el control MonthCalendar.
- *
- * Note que al cambiar la vista actual en un control MULTISELECT,
- * de MCMV_MONTH a otro tipo, genera un cambio en el valor del
- * control. El valor previo se pierde y se fija un nuevo rango:
- * para MCMV_YEAR se seleccionan los últimos días del mes,
- * para MCMV_DECADE se seleccionan los últimos días del año, y
- * para MCMV_CENTURY se seleccionan los últimos días de la década.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo MonthCalendar # 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Vea <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo es un caso de prueba para el control MonthCalendar.
+* Note que al cambiar la vista actual en un control MULTISELECT,
+* de MCMV_MONTH a otro tipo, genera un cambio en el valor del
+* control. El valor previo se pierde y se fija un nuevo rango:
+* para MCMV_YEAR se seleccionan los últimos días del mes,
+* para MCMV_DECADE se seleccionan los últimos días del año, y
+* para MCMV_CENTURY se seleccionan los últimos días de la década.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "i_windefs.ch"
@@ -27,12 +24,12 @@ PROCEDURE Main
    SET DATE BRITISH
 
    DEFINE WINDOW Win_1 OBJ oWin ;
-      AT 0, 0 ;
-      WIDTH 1000 ;
-      HEIGHT 500 ;
-      TITLE "Control MonthCalendar" ;
-      MAIN ;
-      ON INIT Ajustar()
+         AT 0, 0 ;
+         WIDTH 1000 ;
+         HEIGHT 500 ;
+         TITLE "Control MonthCalendar" ;
+         MAIN ;
+         ON INIT Ajustar()
 
       DEFINE MAIN MENU
          POPUP "Acciones"
@@ -94,21 +91,28 @@ PROCEDURE Main
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN
+   RETURN
 
 PROCEDURE SetearMSC
+
    AutoMsgBox( "MaxSelCount = " + LTrim( Str( oMC2:MaxSelCount( Val( InputBox( 'Nuevo MaxSelCount' ) ) ) ) ) )
-RETURN
+
+   RETURN
 
 PROCEDURE ObtenerMSC
+
    AutoMsgBox( "MaxSelCount = " + LTrim( Str( oMC2:MaxSelCount() ) ) )
-RETURN
+
+   RETURN
 
 PROCEDURE Ajustar
+
    oWin:ClientWidth := Max( oMC1:Col + oMC1:Width, oMC2:Col + oMC2:Width ) + 20 + oLst:Width + 20
    oLst:Col := oWin:ClientWidth - 20 - oLst:Width
-RETURN
 
-/*
- * EOF
- */
+   RETURN
+
+   /*
+   * EOF
+   */
+

@@ -1,101 +1,99 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2013 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2013 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'Harbour MiniGUI Demo' ;
-		MAIN ;
-		ON SIZE SizeTest()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Harbour MiniGUI Demo' ;
+         MAIN ;
+         ON SIZE SizeTest()
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'Test'
-				MENUITEM 'Disable Page 1' ACTION DisableTab( 1 )
-				MENUITEM 'Enable Page 1' ACTION EnableTab( 1 )
-				SEPARATOR
-				MENUITEM 'Disable Page 2' ACTION DisableTab( 2 )
-				MENUITEM 'Enable Page 2' ACTION EnableTab( 2 )
-				SEPARATOR
-				MENUITEM 'Disable Page 3' ACTION DisableTab( 3 )
-				MENUITEM 'Enable Page 3' ACTION EnableTab( 3 )
-				SEPARATOR
-				MENUITEM "E&xit" ACTION Form_1.Release()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP 'Test'
+            MENUITEM 'Disable Page 1' ACTION DisableTab( 1 )
+            MENUITEM 'Enable Page 1' ACTION EnableTab( 1 )
+            SEPARATOR
+            MENUITEM 'Disable Page 2' ACTION DisableTab( 2 )
+            MENUITEM 'Enable Page 2' ACTION EnableTab( 2 )
+            SEPARATOR
+            MENUITEM 'Disable Page 3' ACTION DisableTab( 3 )
+            MENUITEM 'Enable Page 3' ACTION EnableTab( 3 )
+            SEPARATOR
+            MENUITEM "E&xit" ACTION Form_1.Release()
+         END POPUP
+      END MENU
 
-		DEFINE TAB Tab_1 ;
-			AT 10,10 ;
-			WIDTH 600 ;
-			HEIGHT 400 ;
-			VALUE 1 ;
-			TOOLTIP 'Tab Control' 
+      DEFINE TAB Tab_1 ;
+            AT 10,10 ;
+            WIDTH 600 ;
+            HEIGHT 400 ;
+            VALUE 1 ;
+            TOOLTIP 'Tab Control'
 
-			PAGE 'Page &1'
+         PAGE 'Page &1'
 
-			@  60,20 textbox txt_1 value '1-Uno'
-			@  90,20 textbox txt_2 value '2-Dos'
-			@ 120,20 textbox txt_3 value '3-Tres' 
+            @  60,20 textbox txt_1 value '1-Uno'
+            @  90,20 textbox txt_2 value '2-Dos'
+            @ 120,20 textbox txt_3 value '3-Tres'
 
-			END PAGE
+         END PAGE
 
-			PAGE 'Page &2'
+         PAGE 'Page &2'
 
-			@ 60,60 textbox txt_a value 'A-Uno'
-			@ 90,60 textbox txt_b value 'B-Dos'  
+            @ 60,60 textbox txt_a value 'A-Uno'
+            @ 90,60 textbox txt_b value 'B-Dos'
 
-			@ 120,60 COMBOBOX combo_1 ITEMS {'1-Uno','2-Dos','3-Tres'} VALUE 1
+            @ 120,60 COMBOBOX combo_1 ITEMS {'1-Uno','2-Dos','3-Tres'} VALUE 1
 
-			END PAGE
+         END PAGE
 
-			PAGE 'Page &3'
+         PAGE 'Page &3'
 
-			@ 60,100 textbox txt_c value 'C-Uno'
-			@ 90,100 textbox txt_d value 'D-Dos'  
+            @ 60,100 textbox txt_c value 'C-Uno'
+            @ 90,100 textbox txt_d value 'D-Dos'
 
-			@ 120,100 SPINNER spinner_1 RANGE 0,10 VALUE 5
+            @ 120,100 SPINNER spinner_1 RANGE 0,10 VALUE 5
 
-			@ 150,100 FRAME Frame_2 WIDTH 120 HEIGHT 110 CAPTION "Page 3"
+            @ 150,100 FRAME Frame_2 WIDTH 120 HEIGHT 110 CAPTION "Page 3"
 
-			DEFINE RADIOGROUP R1
-				ROW	170
-				COL	120
-				OPTIONS	{ 'Uno','Dos','Tres' }
-				VALUE	1
-				WIDTH   80
-			END RADIOGROUP
+            DEFINE RADIOGROUP R1
+               ROW   170
+               COL   120
+               OPTIONS   { 'Uno','Dos','Tres' }
+               VALUE   1
+               WIDTH   80
+            END RADIOGROUP
 
-			END PAGE
+         END PAGE
 
-		END TAB
+      END TAB
 
-	END WINDOW
+   END WINDOW
 
-	DisableTab( 3 )
+   DisableTab( 3 )
 
-	Form_1.Center
+   Form_1.Center
 
-	Form_1.Activate
+   Form_1.Activate
 
-Return Nil
+   RETURN NIL
 
+PROCEDURE SizeTest()
 
-Procedure SizeTest()
+   Form_1.Tab_1.Width := Form_1.Width - 40
+   Form_1.Tab_1.Height := Form_1.Height - 80
 
-	Form_1.Tab_1.Width := Form_1.Width - 40
-	Form_1.Tab_1.Height := Form_1.Height - 80
+   RETURN
 
-Return
+STATIC FUNCTION DisableTab( nPage )
 
-
-Static Function DisableTab( nPage )
-Local y, w, z, cPageCaption
+   LOCAL y, w, z, cPageCaption
 
    y := GetControlIndex ( 'Tab_1', 'Form_1' )
    FOR w := 1 TO Len ( _HMG_aControlPageMap [y] [nPage] )
@@ -113,11 +111,11 @@ Local y, w, z, cPageCaption
       Form_1.Tab_1.Caption( nPage ) := '*' + cPageCaption
    ENDIF
 
-Return Nil
+   RETURN NIL
 
+STATIC FUNCTION EnableTab( nPage )
 
-Static Function EnableTab( nPage )
-Local y, w, z, cPageCaption
+   LOCAL y, w, z, cPageCaption
 
    y := GetControlIndex ( 'Tab_1', 'Form_1' )
    FOR w := 1 TO Len ( _HMG_aControlPageMap [y] [nPage] )
@@ -135,4 +133,5 @@ Local y, w, z, cPageCaption
       Form_1.Tab_1.Caption( nPage ) := SubStr( cPageCaption, 2 )
    ENDIF
 
-Return Nil
+   RETURN NIL
+

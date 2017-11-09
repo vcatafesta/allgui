@@ -1,44 +1,43 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
- *
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
 */
 
 #include "minigui.ch"
 #include "TSBrowse.ch"
 
 // store config file to current folder
-#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".config" ) 
+#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".config" )
 // OR store config file to temporary folder
 //#define INI_FILE_WIN_CFG  GetTempFolder() + "\" + cFileNoPath( ChangeFileExt( Application.ExeName, ".config" ) )
 
-/////////////////////////////////////////////////////////////////////
 // Function: Recover all values TBROWSE from ini file
-Function IniGetTbrowse(oBrw)
-   Local cSection, cPathFileConfig
-   Local FormName := _HMG_ThisFormName
-   Local cProgName := GetProperty(FormName, "Title")
-   Local nI, cVal, nVal, aDim, aColor, aColSize, aFonts, hFont 
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+FUNCTION IniGetTbrowse(oBrw)
+
+   LOCAL cSection, cPathFileConfig
+   LOCAL FormName := _HMG_ThisFormName
+   LOCAL cProgName := GetProperty(FormName, "Title")
+   LOCAL nI, cVal, nVal, aDim, aColor, aColSize, aFonts, hFont
+
+   cPathFileConfig := INI_FILE_WIN_CFG
    cSection := FormName
-   
+
    IF FILE( cPathFileConfig )
-   
-      IF IsINISection(cPathFileConfig, cSection) // there is a section [] 
+
+      IF IsINISection(cPathFileConfig, cSection) // there is a section []
 
          ////////////////// download color of the ini-file  ///////////////////
          aColor := {}
          FOR nI := 1 TO 20
-             cVal := "TbrColor_" + HB_NToS(nI)
-             IF IsVarINISection(cPathFileConfig, cSection, cVal)
+            cVal := "TbrColor_" + HB_NToS(nI)
+            IF IsVarINISection(cPathFileConfig, cSection, cVal)
                // load into an array
-                aDim := CTOA( GetIni( cSection , cVal , '{}', cPathFileConfig ) ) 
-                IF LEN(aDim) > 0
-                   AADD( aColor, aDim[2] )
-                ENDIF
-             ENDIF
+               aDim := CTOA( GetIni( cSection , cVal , '{}', cPathFileConfig ) )
+               IF LEN(aDim) > 0
+                  AADD( aColor, aDim[2] )
+               ENDIF
+            ENDIF
          NEXT
 
          ////////////////// Download Size column widths of the ini-file ///////////////////
@@ -51,22 +50,22 @@ Function IniGetTbrowse(oBrw)
             ELSE
                AADD( aColSize, nVal )
             ENDIF
-          NEXT
-       
+         NEXT
+
          ////////////////// Download fonts Tbrowsa from ini-file ///////////////////
          aFonts := {}
          FOR nI := 1 TO 5
             cVal := "Font_" + HB_NToS(nI)
             IF IsVarINISection(cPathFileConfig, cSection, cVal)
-               // load into an array 
+               // load into an array
                aDim := &( GetIni( cSection , cVal , '{}', cPathFileConfig ) )
                AADD( aFonts, aDim )
             ENDIF
          NEXT
-     
+
          ////////////////// Restore fonts tbrowse  ///////////////////
          IF LEN(aFonts) == 5
-            TbrUpFonts(oBrw,aFonts)           
+            TbrUpFonts(oBrw,aFonts)
          ENDIF
          ////////////////// Restore color in tbrowse  ///////////////////
          IF LEN(aColor) == 20
@@ -78,7 +77,7 @@ Function IniGetTbrowse(oBrw)
             FOR nI := 1 TO Len( oBrw:aColumns )
                nVal := aColSize[nI]
                oBrw:SetColSize( nI, nVal )
-             NEXT
+            NEXT
          ENDIF
 
       ENDIF  // IsINISection(cPathFileConfig, cSection)
@@ -88,19 +87,20 @@ Function IniGetTbrowse(oBrw)
    // ---- Remember font editing window for memo fields -> Form_memo.prg ----
    hFont := oBrw:aColumns[ 1 ]:hFontEdit   // 5-edition font
    M->aFontEdit := GetFontParam(hFont)
-   
-Return Nil
 
-/////////////////////////////////////////////////////////////////////
-// Function: Save all values TBROWSE in the ini-file
-Function IniSetTbrowse(oBrw)
-   Local FormName := _HMG_ThisFormName
-   Local cProgName := GetProperty(FormName, "Title")
-   Local cSection, cText, cPathFileConfig, aDim, nWidth 
-   Local nI, nCol, oCol, aColor, cVal, aVar := {}
-   Local aFont
+   RETURN NIL
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+   // Function: Save all values TBROWSE in the ini-file
+
+FUNCTION IniSetTbrowse(oBrw)
+
+   LOCAL FormName := _HMG_ThisFormName
+   LOCAL cProgName := GetProperty(FormName, "Title")
+   LOCAL cSection, cText, cPathFileConfig, aDim, nWidth
+   LOCAL nI, nCol, oCol, aColor, cVal, aVar := {}
+   LOCAL aFont
+
+   cPathFileConfig := INI_FILE_WIN_CFG
    cSection := FormName
 
    IF ! File( cPathFileConfig )
@@ -141,7 +141,6 @@ Function IniSetTbrowse(oBrw)
    AADD( aVar, "Color of text for special header"                                   )
    AADD( aVar, "Color of active special header"                                     )
 
-
    ///////////////////// save the current color in the array TBROWSE ////////////////
    nCol := 1  // Any column with color
    oCol := oBrw:aColumns[ nCol ]
@@ -152,7 +151,7 @@ Function IniSetTbrowse(oBrw)
    aColor[16] := oBrw:aSuperHead[nCol,5]  // Background color for super header
    aColor[17] := oBrw:aSuperHead[nCol,4]  // Color of text for super header
    // ------ considered previously stored TWO colors ------------------
-   aColor[1] := M->nTbrwColorText ; aColor[2] := M->nTbrwColorPane 
+   aColor[1] := M->nTbrwColorText ; aColor[2] := M->nTbrwColorPane
 
    ///////////////////////// write color TBROWSE in ini-file  //////////////////////
    FOR nI := 1 TO LEN(aVar)
@@ -160,7 +159,7 @@ Function IniSetTbrowse(oBrw)
       aDim := { aVar[nI] , aColor[nI] }
       // write array to a string in the ini file
       WriteIni( cSection, cVal , ATOC(aDim), cPathFileConfig )
-    NEXT
+   NEXT
 
    //////// write dimensions of the width of the columns in TBROWSE ini-file //////
    FOR nI := 1 TO Len( oBrw:aColumns )
@@ -168,8 +167,8 @@ Function IniSetTbrowse(oBrw)
       nWidth  := oBrw:GetColSizes()[nI]
       // write line in the ini file
       WriteIni( cSection, cVal , HB_NToS(nWidth), cPathFileConfig )
-    NEXT
- 
+   NEXT
+
    ////////////////// Read and write fonts TBROWSE in ini file  //////////////////
    aFont := LoadTbrwFonts(oBrw)
    FOR nI := 1 TO Len( aFont )
@@ -177,23 +176,23 @@ Function IniSetTbrowse(oBrw)
       aDim  := aFont[nI]
       // write line in the ini file
       WriteIni( cSection, cVal , hb_Valtoexp(aDim), cPathFileConfig )
-    NEXT
+   NEXT
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-STATIC Function GetIni( cSection, cEntry, cDefault, cFile )
-RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
+STATIC FUNCTION GetIni( cSection, cEntry, cDefault, cFile )
 
-*--------------------------------------------------------*
-STATIC Function WriteIni( cSection, cEntry, cValue, cFile )
-RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
 
-*--------------------------------------------------------*
-STATIC Function IsINISection(cIniFile, cName)
-Return ( aScan( _GetSectionNames(cIniFile), {|x| UPPER(x) == UPPER(cName)} ) > 0 )
+STATIC FUNCTION WriteIni( cSection, cEntry, cValue, cFile )
 
-*--------------------------------------------------------*
-STATIC  Function IsVarINISection(cIniFile, cSecName, cName) 
-Return ( aScan( _GetSection(cSecName, cIniFile), {|x| UPPER(x[1]) == UPPER(cName)} ) > 0 ) 
- 
+   RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+
+STATIC FUNCTION IsINISection(cIniFile, cName)
+
+   RETURN ( aScan( _GetSectionNames(cIniFile), {|x| UPPER(x) == UPPER(cName)} ) > 0 )
+
+   STATIC  Function IsVarINISection(cIniFile, cSecName, cName)
+
+   RETURN ( aScan( _GetSection(cSecName, cIniFile), {|x| UPPER(x[1]) == UPPER(cName)} ) > 0 )
+

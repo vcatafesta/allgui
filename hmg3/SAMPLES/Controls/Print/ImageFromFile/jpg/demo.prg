@@ -1,161 +1,161 @@
 #include "hmg.ch"
 
-*------------------------------------------------------------------------------*
-Function Main()
-*------------------------------------------------------------------------------*
+FUNCTION Main()
 
-//	AVAILABLE LIBRARY INTERFACE LANGUAGES
+   //   AVAILABLE LIBRARY INTERFACE LANGUAGES
 
-//	SET LANGUAGE TO ENGLISH (DEFAULT)
-//	SET LANGUAGE TO SPANISH
-//	SET LANGUAGE TO PORTUGUESE
-//	SET LANGUAGE TO ITALIAN
-//	SET LANGUAGE TO GERMAN
-//	SET LANGUAGE TO FRENCH
+   //   SET LANGUAGE TO ENGLISH (DEFAULT)
+   //   SET LANGUAGE TO SPANISH
+   //   SET LANGUAGE TO PORTUGUESE
+   //   SET LANGUAGE TO ITALIAN
+   //   SET LANGUAGE TO GERMAN
+   //   SET LANGUAGE TO FRENCH
 
-	Private aColor [10]
+   PRIVATE aColor [10]
 
-	aColor [1] := YELLOW	
-	aColor [2] := PINK	
-	aColor [3] := RED	
-	aColor [4] := FUCHSIA	
-	aColor [5] := BROWN	
-	aColor [6] := ORANGE	
-	aColor [7] := GREEN	
-	aColor [8] := PURPLE	
-	aColor [9] := BLACK	
-	aColor [10] := BLUE
+   aColor [1] := YELLOW
+   aColor [2] := PINK
+   aColor [3] := RED
+   aColor [4] := FUCHSIA
+   aColor [5] := BROWN
+   aColor [6] := ORANGE
+   aColor [7] := GREEN
+   aColor [8] := PURPLE
+   aColor [9] := BLACK
+   aColor [10] := BLUE
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'MiniPrint Library Test' ;
-		MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniPrint Library Test' ;
+         MAIN
 
-		DEFINE MAIN MENU 
-			DEFINE POPUP 'File'
-				MENUITEM 'Default Printer' ACTION PrintTest1()
-				MENUITEM 'User Selected Printer' ACTION PrintTest2()
-				MENUITEM 'User Selected Printer And Settings' ACTION PrintTest3()
-				MENUITEM 'User Selected Printer And Settings (Preview)' ACTION PrintTest4()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP 'File'
+            MENUITEM 'Default Printer' ACTION PrintTest1()
+            MENUITEM 'User Selected Printer' ACTION PrintTest2()
+            MENUITEM 'User Selected Printer And Settings' ACTION PrintTest3()
+            MENUITEM 'User Selected Printer And Settings (Preview)' ACTION PrintTest4()
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	MAXIMIZE WINDOW Win_1
+   MAXIMIZE WINDOW Win_1
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest1()
-*------------------------------------------------------------------------------*
-Local i 
+   RETURN
 
-	SELECT PRINTER DEFAULT ;
-		ORIENTATION	PRINTER_ORIENT_PORTRAIT ;
-		PAPERSIZE	PRINTER_PAPER_LETTER ;
-		QUALITY		PRINTER_RES_MEDIUM 
+PROCEDURE PrintTest1()
 
-	PrintDoc()
+   LOCAL i
 
-	MsgInfo('Print Finished')
+   SELECT PRINTER DEFAULT ;
+      ORIENTATION   PRINTER_ORIENT_PORTRAIT ;
+      PAPERSIZE   PRINTER_PAPER_LETTER ;
+      QUALITY      PRINTER_RES_MEDIUM
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest2()
-*------------------------------------------------------------------------------*
-Local i 
-Local cPrinter
+   PrintDoc()
 
-	cPrinter := GetPrinter()
+   MsgInfo('Print Finished')
 
-	If Empty (cPrinter)
-		Return
-	EndIf
+   RETURN
 
-	SELECT PRINTER cPrinter ;
-		ORIENTATION	PRINTER_ORIENT_PORTRAIT ;
-		PAPERSIZE	PRINTER_PAPER_LETTER ;
-		QUALITY		PRINTER_RES_MEDIUM
+PROCEDURE PrintTest2()
 
-	PrintDoc()
+   LOCAL i
+   LOCAL cPrinter
 
-	MsgInfo('Print Finished')
+   cPrinter := GetPrinter()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest3()
-*------------------------------------------------------------------------------*
-Local i 
-Local lSuccess
+   IF Empty (cPrinter)
 
-	// Measure Units Are Millimeters
+      RETURN
+   ENDIF
 
-	SELECT PRINTER DIALOG TO lSuccess 
+   SELECT PRINTER cPrinter ;
+      ORIENTATION   PRINTER_ORIENT_PORTRAIT ;
+      PAPERSIZE   PRINTER_PAPER_LETTER ;
+      QUALITY      PRINTER_RES_MEDIUM
 
-	If lSuccess == .T.
-		PrintDoc()
-		MsgInfo('Print Finished')
-	EndIf
+   PrintDoc()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintTest4()
-*------------------------------------------------------------------------------*
-Local i 
-Local lSuccess
+   MsgInfo('Print Finished')
 
-	SELECT PRINTER DIALOG TO lSuccess PREVIEW
+   RETURN
 
-	If lSuccess == .T.
-		PrintDoc()
-		MsgInfo('Print Finished')
-	EndIf
+PROCEDURE PrintTest3()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure PrintDoc
-*------------------------------------------------------------------------------*
-Local i
+   LOCAL i
+   LOCAL lSuccess
 
-	// Measure Units Are Millimeters
+   // Measure Units Are Millimeters
 
-	START PRINTDOC
+   SELECT PRINTER DIALOG TO lSuccess
 
-		FOR I := 1 TO 10
+   IF lSuccess == .T.
+      PrintDoc()
+      MsgInfo('Print Finished')
+   ENDIF
 
-			START PRINTPAGE
+   RETURN
 
-				@ 20,20 PRINT RECTANGLE ;
-					TO 50,190 ;
-					PENWIDTH 0.1
+PROCEDURE PrintTest4()
 
-				@ 25,25 PRINT IMAGE "hmg.jpg" ;
-					WIDTH 20 ;
-					HEIGHT 20 
+   LOCAL i
+   LOCAL lSuccess
 
-				@ 30,85 PRINT "PRINT DEMO" ;
-					FONT "Courier New" ;
-					SIZE 24 ;
-					BOLD ;
-					COLOR aColor [i]
+   SELECT PRINTER DIALOG TO lSuccess PREVIEW
 
-				@ 140,60 PRINT "Page Number :" + Str(i,2) ;
-					FONT "Arial" ;
-					SIZE 20 ;
-					COLOR aColor [i]
+   IF lSuccess == .T.
+      PrintDoc()
+      MsgInfo('Print Finished')
+   ENDIF
 
-				@ 260,20 PRINT LINE ;
-					TO 260,190 ;
-					PENWIDTH 0.1
+   RETURN
 
-			END PRINTPAGE
+PROCEDURE PrintDoc
 
-		NEXT I
+   LOCAL i
 
-	END PRINTDOC
+   // Measure Units Are Millimeters
 
-Return
+   START PRINTDOC
+
+      FOR I := 1 TO 10
+
+         START PRINTPAGE
+
+            @ 20,20 PRINT RECTANGLE ;
+               TO 50,190 ;
+               PENWIDTH 0.1
+
+            @ 25,25 PRINT IMAGE "hmg.jpg" ;
+               WIDTH 20 ;
+               HEIGHT 20
+
+            @ 30,85 PRINT "PRINT DEMO" ;
+               FONT "Courier New" ;
+               SIZE 24 ;
+               BOLD ;
+               COLOR aColor [i]
+
+            @ 140,60 PRINT "Page Number :" + Str(i,2) ;
+               FONT "Arial" ;
+               SIZE 20 ;
+               COLOR aColor [i]
+
+            @ 260,20 PRINT LINE ;
+               TO 260,190 ;
+               PENWIDTH 0.1
+
+         END PRINTPAGE
+
+      NEXT I
+
+   END PRINTDOC
+
+   RETURN
+

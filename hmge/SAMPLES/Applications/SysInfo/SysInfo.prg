@@ -1,11 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-2012 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-2012 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -20,928 +17,909 @@ ANNOUNCE RDDSYS
 
 #define NTRIM( n ) hb_ntos( n )
 
-Static aCaption := { "Computer:", ;
-			"Processor:", ;
-			"Bios:", ;
-			"Motherboard:", ;
-			"RAM:", ;
-			"Hard disks:", ;
-			"Removed disks:", ;
-			"CD-ROM:", ;
-			"Video card:", ;
-			"Sound card:", ;
-			"Network card:", ;
-			"KeyBoard:", ;
-			"Mouse:", ;
-			"Monitor:", ;
-			"Modem:", ;
-			"Printers:", ;
-			"IP address:", ;
-			"OS:", ;
-			"Notes:" ;
-			}
-
-Static aValue, lWinNT
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
-	Local n, cDrv, nDrv, hbprn, aPrinters, aPorts, cPrnString := "", ;
-	Brush_1, nCnt, cLbl, cText, aHardDisk := {}, nTotal := 0, nFree := 0, ;
-	nTotalMemory := MemoryStatus(1) + 1, aWinVer := WindowsVersion()
-
-	SET DATE GERMAN
-	SET CENTURY ON
-
-	aValue := Array( Len(aCaption) )
-	lWinNT := IsWinNT()
-
-	Afill(aValue, "")
-
-	aValue[1] := ComputerName() + " (" + RegisteredName() + ")"
-	IF lWinNT
-		aValue[1] += " - " + IF(IsAdmin(), "Administrator", "Guest")
-	ENDIF
-
-	aValue[2] := CPUName() + " " + IF(lWinNT, "[~", "") + NTRIM( GetCPUSpeed() ) + " MHz" + IF(lWinNT, "]", "")
-	aValue[3] := BiosName()
-
-	IF !lWinNT
-		aValue[4] := SubStr( cBiosSignOn(), 12 )
-	ENDIF
-
-	aValue[5] := NTRIM( nTotalMemory ) + " MB (" + NTRIM( nTotalMemory * 1024 ) + " KB" + ")"
-
-	For n := 1 To 26
-
-		cDrv := Chr( 64 + n ) + ":"
-
-		nDrv := GetDriveType( cDrv + "\" + Chr(0) )
-
-		if nDrv = 3
-			Aadd( aHardDisk, cDrv )
-		elseif nDrv = 2
-			aValue[7] += cDrv + " "
-		elseif nDrv = 5
-			aValue[8] += cDrv + " " + CDROMName( cDrv )
-		endif
-
-	Next
-
-	aValue[6] := {}
-
-	DO EVENTS
-
-	Aeval( aHardDisk, {|e| Aadd( aValue[6], e + " " + ;
-		NTRIM(HB_DISKSPACE(e, HB_DISK_TOTAL) / (1024 * 1024)) + " MB (free " + ;
-		NTRIM(HB_DISKSPACE(e, HB_DISK_FREE) / (1024 * 1024)) + " MB - " + ;
-		NTRIM(INT( HB_DISKSPACE(e, HB_DISK_FREE) / HB_DISKSPACE(e, HB_DISK_TOTAL) * 100 )) + "%)" )})
-
-	Aeval( aHardDisk, {|e| nTotal += (HB_DISKSPACE(e, HB_DISK_TOTAL) / (1024 * 1024)), ;
-		nFree += (HB_DISKSPACE(e, HB_DISK_FREE) / (1024 * 1024))} )
-
-	Aadd( aValue[6], Repl("-", 100) )
-	Aadd( aValue[6], LTRIM(HDDName() + " ") + NTRIM(nTotal) + " MB (free " + NTRIM(nFree) + " MB - " + ;
-		NTRIM(INT( nFree / nTotal * 100 )) + "%)" )
-
-	aValue[9]  := VideoName()
-	aValue[10] := SoundName()
-	aValue[11] := NetworkName()
-	aValue[12] := KeybdName()
-	aValue[13] := MouseName()
-	aValue[14] := MonitorName() + ", " + DisplayCurrentMode()
-	aValue[15] := ModemName()
-
-	INIT PRINTSYS
-	GET PRINTERS TO aPrinters
-	GET PORTS TO aPorts
-	RELEASE PRINTSYS
-
-	aValue[16] := {}
-
-	IF LEN(aPrinters) > 0
-		For n := 1 To Len(aPrinters)
-			Aadd( aValue[16], aPrinters[n] + " (" + ;
-				IF( lWinNT, "", IF( LEFT(aPorts[n], 2) == "\\", "remote ", "local " ) ) + aPorts[n] + ")" )
-		Next
-
-		Aeval( aPrinters, {|e| cPrnString += e + "   "} )
-
-		Aadd( aValue[16], Repl("-", 100) )
-		Aadd( aValue[16], cPrnString )
-	ENDIF
-
-	aValue[17] := IPInfo()
-	aValue[18] := "Microsoft " + ALLTRIM( aWinVer[1] ) + " " + ALLTRIM( aWinVer[2] ) + " (" + aWinVer[3] + ")"
-
-	SET NAVIGATION EXTENDED
-
-	DEFINE WINDOW Form_1					;
-		AT 0,0						;
-		WIDTH 453					;
-		HEIGHT IF(IsXPThemeActive(), 518, 512 )		; 
-		TITLE PROGRAM					;
-		MAIN						;
-		ICON 'MAIN'					;
-		NOMAXIMIZE NOSIZE				;
-		ON INIT ( InitDraw(), PaintMessage() )		;
-		ON GOTFOCUS ( IF(lWinNT, InitDraw(), ),		;
-			PaintMessage() )			;
-		BACKCOLOR {216, 216, 216}			;
-		FONT 'MS Sans Serif'				;
-		SIZE 9
-
-		@ 0,0 ANIMATEBOX Avi_1				;
-			WIDTH 106				;
-			HEIGHT 40				;
-			FILE 'COOL' AUTOPLAY
-
-	       @ 6,86 LABEL Label_1				;
-			VALUE PROGRAM + VERSION			;
-			BACKCOLOR WHITE				;
-			AUTOSIZE
-
-		@ 5, 316 HYPERLINK Label_2				;
-			VALUE "gfilatov@inbox.ru"			;
-			ADDRESS "gfilatov@inbox.ru?cc=&bcc=" +		;
-				"&subject=System%20Info%20Feedback:";
-			BACKCOLOR WHITE					;
-			WIDTH 100 HEIGHT 14 HANDCURSOR			;
-			TOOLTIP "E-mail me if you have any comments or suggestions"
-
-	       @ 22,86 LABEL Label_3					;
-			VALUE "Copyright "+ Chr(169) + COPYRIGHT +;
-				". All rights reserved"			;
-			BACKCOLOR WHITE					;
-			WIDTH 300 HEIGHT 14
-
-		For nCnt := 1 To Len(aCaption)
-
-			cLbl := 'Lbl_' + NTRIM(nCnt)
-			@ 50 + (nCnt - 1) * 20, 6 LABEL &cLbl		;
-				VALUE aCaption[nCnt]			;
-				AUTOSIZE TRANSPARENT
-
-			cText := 'Text_' + NTRIM(nCnt)
-			IF nCnt == Len(aCaption)
-				@ 48 + (nCnt - 1) * 20, 85 EDITBOX &cText		;
-					HEIGHT 72					;
-					WIDTH 356					;
-					VALUE aValue[nCnt]				;
-					ON CHANGE OnTextChange()
-
-			ELSEIF nCnt == 6 .OR. nCnt == 16
-				@ 48 + (nCnt - 1) * 20, 85 COMBOBOX &cText		;
-					HEIGHT 120					;
-					WIDTH 356					;
-					ITEMS aValue[nCnt]				;
-					VALUE Len( aValue[nCnt] )
-			ELSE
-				@ 48 + (nCnt - 1) * 20, 85 TEXTBOX &cText		;
-					HEIGHT 19					;
-					WIDTH 356					;
-					VALUE aValue[nCnt]				;
-					ON CHANGE OnTextChange()
-			ENDIF
-		Next
-
-		@ 454, 12 BUTTON Button_1			;
-			PICTURE 'PRINT'				;
-			ACTION RepToPrinter()			;
-			WIDTH 24				;
-			HEIGHT 24				;
-			TOOLTIP "Print... (Ctrl+P)"		;
-			FLAT NOTABSTOP
-
-		@ 454, 48 BUTTON Button_2			;
-			PICTURE 'SAVE'				;
-			ACTION RepToDisk()			;
-			WIDTH 24				;
-			HEIGHT 24				;
-			TOOLTIP "Save... (Ctrl+S)"		;
-			FLAT NOTABSTOP
-
-		ON KEY ALT+X ACTION ReleaseAllWindows()
-		ON KEY CONTROL+P ACTION RepToPrinter()
-		ON KEY CONTROL+S ACTION RepToDisk()
-
-	END WINDOW
-
-	DEFINE BKGBRUSH Brush_1 PATTERN IN Form_1 BITMAP Skin\background.bmp
-
-	CENTER WINDOW Form_1
-
-	ACTIVATE WINDOW Form_1
-
-RETURN
-
-*--------------------------------------------------------*
-Static proc OnTextChange()
-*--------------------------------------------------------*
-Local cItem := This.Name
-Local nItem := Val( SubStr( cItem, At("_", cItem) + 1 ) )
-Local cText := 'Text_' + NTRIM( nItem )
-
-aValue[nItem] := GetProperty( "Form_1", cText, "Value" )
-
-RETURN
-
-*--------------------------------------------------------*
-Static proc RepToPrinter()
-*--------------------------------------------------------*
-Local cTitle := PROGRAM + VERSION, n, i, nRow := 24
-
-	INIT PRINTSYS
-
-	SELECT BY DIALOG 
-
-	IF HBPRNERROR != 0 
-		RETURN
-	ENDIF
-
-	SET UNITS MM    		// Sets @... units to milimeters
-	SET PAPERSIZE DMPAPER_A4	// Sets paper size to A4
-	SET ORIENTATION PORTRAIT	// Sets paper orientation to portrait
-	SET BIN DMBIN_FIRST		// Use first bin
-
-	DEFINE FONT "Courier" NAME "Courier New" SIZE 10
-
-	START DOC NAME Left(PROGRAM, 7)
-
-		START PAGE
-
-			@ 14, 18 SAY cTitle ;
-				FONT "Courier" ;
-				TO PRINT
-
-			@ 14, 160 SAY DtoC(Date()) + " " + Left(Time(), 5) ;
-				FONT "Courier" ;
-				TO PRINT
-
-			@ 20, 16, 200, 196 RECTANGLE
-
-			For n := 1 To Len(aValue)
-
-				IF Valtype(aValue[n]) == "C"
-
-					@ nRow, 18 SAY aCaption[n] ;
-						FONT "Courier" ;
-						TO PRINT
-					@ nRow, 50 SAY aValue[n] ;
-						FONT "Courier" ;
-						TO PRINT
-					nRow += 6
-
-				ELSEIF Valtype(aValue[n]) == "A"
-
-					@ nRow, 18 SAY aCaption[n] ;
-						FONT "Courier" ;
-						TO PRINT
-
-					IF n == 6
-						@ nRow, 50 SAY ATAIL(aValue[n]) ;
-							FONT "Courier" ;
-							TO PRINT
-						nRow += 6
-					ENDIF
-
-					For i := 1 To Len(aValue[n]) - 2
-						@ nRow, IF( n == 6, 60, 50) SAY aValue[n][i] ;
-							FONT "Courier" ;
-							TO PRINT
-						nRow += 6
-					Next
-				ENDIF
-			Next
-
-		END PAGE
-
-	END DOC
-
-	RELEASE PRINTSYS
-
-RETURN
-
-*--------------------------------------------------------*
-Static proc RepToDisk()
-*--------------------------------------------------------*
-Local cTxt := PROGRAM + VERSION + CRLF, n
-Local cFileName := Putfile( { {"Text Files", "*.txt"}, {"All Files", "*.*"} }, "Save to File", ".\", .t. )
-
-	IF !Empty( cFileName )
-		cTxt += Repl("-", 70) + CRLF
-
-		For n := 1 To Len(aValue)
-			IF Valtype(aValue[n]) == "C"
-				cTxt += padr(aCaption[n], 17) + aValue[n] + CRLF
-			ELSEIF Valtype(aValue[n]) == "A"
-				IF LEN(aValue[n]) > 0
-					cTxt += padr(aCaption[n], 17) + ATAIL( aValue[n] ) + CRLF
-					Aeval(aValue[n], {|e,i| IF(i < Len(aValue[n]) - 1, cTxt += space(22) + e + CRLF, )})
-				ELSE
-					cTxt += padr(aCaption[n], 17) + CRLF
-				ENDIF
-			ENDIF
-		Next
-
-		cTxt += Repl("-", 70) + CRLF
-		cTxt += CDOW(Date()) + ", " + DtoC(Date()) + " " + Left(Time(), 5) + CRLF
-
-		Memowrit( IF(AT(".", cFileName) > 0, cFileName, cFileName + ".txt") , cTxt )
-	ENDIF
-
-RETURN
-
-*--------------------------------------------------------*
-Static proc InitDraw()
-*--------------------------------------------------------*
-	DRAW RECTANGLE IN WINDOW Form_1 AT 0,63 ;
-		TO 41,447 ;
-		PENCOLOR BLACK ;
-		FILLCOLOR WHITE
-RETURN
-
-*--------------------------------------------------------*
-Static proc PaintMessage()
-*--------------------------------------------------------*
-	Form_1.Label_1.Value := PROGRAM + VERSION
-	Form_1.Label_2.Value := "gfilatov@inbox.ru"
-	Form_1.Label_3.Value := "Copyright "+ Chr(169) + COPYRIGHT + ". All rights reserved"
-RETURN
-
-*--------------------------------------------------------*
-Function ComputerName()
-*--------------------------------------------------------*
-return GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName", "Computername" )
-
-*--------------------------------------------------------*
-Function RegisteredName()
-*--------------------------------------------------------*
-Local cName := ""
-
-IF lWinNT
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows NT\CurrentVersion", "RegisteredOrganization" )
-ELSE
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion", "RegisteredOrganization" )
-ENDIF
-
-return cName
-
-*--------------------------------------------------------*
-Function CPUName()
-*--------------------------------------------------------*
-Local cName := ""
-
-IF lWinNT
-	cName := Ltrim( GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System\CentralProcessor\0", "ProcessorNameString" ) )
-ELSE
-	cName := GetCPU()
-ENDIF
-
-return cName
-
-*--------------------------------------------------------*
-Function BiosName()
-*--------------------------------------------------------*
-Local cName
-
-IF lWinNT
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System", "SystemBiosVersion" ) + " (" + ;
-		GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System", "SystemBiosDate" ) + ")"
-ELSE
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\Root\*PNP0C01\0000", "BIOSVersion" ) + " (" + ;
-		GetRegVar( HKEY_LOCAL_MACHINE, "Enum\Root\*PNP0C01\0000", "BIOSDate" ) + ")"
-ENDIF
-
-return cName
-
-*--------------------------------------------------------*
-Function VideoName()
-*--------------------------------------------------------*
-Local cName := "", oReg, cReg := "", oKey, nId := 0
-
-IF lWinNT
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000", "DriverDesc" )
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display" )
-
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display\" + cReg )
-
-		cName := oKey:Get( "DriverDesc" )
-
-		oKey:Close()
+STATIC aCaption := { "Computer:", ;
+   "Processor:", ;
+   "Bios:", ;
+   "Motherboard:", ;
+   "RAM:", ;
+   "Hard disks:", ;
+   "Removed disks:", ;
+   "CD-ROM:", ;
+   "Video card:", ;
+   "Sound card:", ;
+   "Network card:", ;
+   "KeyBoard:", ;
+   "Mouse:", ;
+   "Monitor:", ;
+   "Modem:", ;
+   "Printers:", ;
+   "IP address:", ;
+   "OS:", ;
+   "Notes:" ;
+   }
+
+STATIC aValue, lWinNT
+
+PROCEDURE Main()
+
+   LOCAL n, cDrv, nDrv, hbprn, aPrinters, aPorts, cPrnString := "", ;
+      Brush_1, nCnt, cLbl, cText, aHardDisk := {}, nTotal := 0, nFree := 0, ;
+      nTotalMemory := MemoryStatus(1) + 1, aWinVer := WindowsVersion()
+
+   SET DATE GERMAN
+   SET CENTURY ON
+
+   aValue := Array( Len(aCaption) )
+   lWinNT := IsWinNT()
+
+   Afill(aValue, "")
+
+   aValue[1] := ComputerName() + " (" + RegisteredName() + ")"
+   IF lWinNT
+      aValue[1] += " - " + IF(IsAdmin(), "Administrator", "Guest")
+   ENDIF
+
+   aValue[2] := CPUName() + " " + IF(lWinNT, "[~", "") + NTRIM( GetCPUSpeed() ) + " MHz" + IF(lWinNT, "]", "")
+   aValue[3] := BiosName()
+
+   IF !lWinNT
+      aValue[4] := SubStr( cBiosSignOn(), 12 )
+   ENDIF
+
+   aValue[5] := NTRIM( nTotalMemory ) + " MB (" + NTRIM( nTotalMemory * 1024 ) + " KB" + ")"
+
+   FOR n := 1 To 26
+
+      cDrv := Chr( 64 + n ) + ":"
+
+      nDrv := GetDriveType( cDrv + "\" + Chr(0) )
+
+      IF nDrv = 3
+         Aadd( aHardDisk, cDrv )
+      ELSEIF nDrv = 2
+         aValue[7] += cDrv + " "
+      ELSEIF nDrv = 5
+         aValue[8] += cDrv + " " + CDROMName( cDrv )
+      ENDIF
+
+   NEXT
+
+   aValue[6] := {}
+
+   DO EVENTS
+
+   Aeval( aHardDisk, {|e| Aadd( aValue[6], e + " " + ;
+      NTRIM(HB_DISKSPACE(e, HB_DISK_TOTAL) / (1024 * 1024)) + " MB (free " + ;
+      NTRIM(HB_DISKSPACE(e, HB_DISK_FREE) / (1024 * 1024)) + " MB - " + ;
+      NTRIM(INT( HB_DISKSPACE(e, HB_DISK_FREE) / HB_DISKSPACE(e, HB_DISK_TOTAL) * 100 )) + "%)" )})
+
+   Aeval( aHardDisk, {|e| nTotal += (HB_DISKSPACE(e, HB_DISK_TOTAL) / (1024 * 1024)), ;
+      nFree += (HB_DISKSPACE(e, HB_DISK_FREE) / (1024 * 1024))} )
+
+   Aadd( aValue[6], Repl("-", 100) )
+   Aadd( aValue[6], LTRIM(HDDName() + " ") + NTRIM(nTotal) + " MB (free " + NTRIM(nFree) + " MB - " + ;
+      NTRIM(INT( nFree / nTotal * 100 )) + "%)" )
+
+   aValue[9]  := VideoName()
+   aValue[10] := SoundName()
+   aValue[11] := NetworkName()
+   aValue[12] := KeybdName()
+   aValue[13] := MouseName()
+   aValue[14] := MonitorName() + ", " + DisplayCurrentMode()
+   aValue[15] := ModemName()
+
+   INIT PRINTSYS
+   GET PRINTERS TO aPrinters
+   GET PORTS TO aPorts
+   RELEASE PRINTSYS
+
+   aValue[16] := {}
+
+   IF LEN(aPrinters) > 0
+      FOR n := 1 To Len(aPrinters)
+         Aadd( aValue[16], aPrinters[n] + " (" + ;
+            IF( lWinNT, "", IF( LEFT(aPorts[n], 2) == "\\", "remote ", "local " ) ) + aPorts[n] + ")" )
+      NEXT
+
+      Aeval( aPrinters, {|e| cPrnString += e + "   "} )
+
+      Aadd( aValue[16], Repl("-", 100) )
+      Aadd( aValue[16], cPrnString )
+   ENDIF
+
+   aValue[17] := IPInfo()
+   aValue[18] := "Microsoft " + ALLTRIM( aWinVer[1] ) + " " + ALLTRIM( aWinVer[2] ) + " (" + aWinVer[3] + ")"
+
+   SET NAVIGATION EXTENDED
+
+   DEFINE WINDOW Form_1               ;
+         AT 0,0                  ;
+         WIDTH 453               ;
+         HEIGHT IF(IsXPThemeActive(), 518, 512 )      ;
+         TITLE PROGRAM               ;
+         MAIN                  ;
+         ICON 'MAIN'               ;
+         NOMAXIMIZE NOSIZE            ;
+         ON INIT ( InitDraw(), PaintMessage() )      ;
+         ON GOTFOCUS ( IF(lWinNT, InitDraw(), ),      ;
+         PaintMessage() )         ;
+         BACKCOLOR {216, 216, 216}         ;
+         FONT 'MS Sans Serif'            ;
+         SIZE 9
+
+      @ 0,0 ANIMATEBOX Avi_1            ;
+         WIDTH 106            ;
+         HEIGHT 40            ;
+         FILE 'COOL' AUTOPLAY
+
+      @ 6,86 LABEL Label_1            ;
+         VALUE PROGRAM + VERSION         ;
+         BACKCOLOR WHITE            ;
+         AUTOSIZE
+
+      @ 5, 316 HYPERLINK Label_2            ;
+         VALUE "gfilatov@inbox.ru"         ;
+         ADDRESS "gfilatov@inbox.ru?cc=&bcc=" +      ;
+         "&subject=System%20Info%20Feedback:";
+         BACKCOLOR WHITE               ;
+         WIDTH 100 HEIGHT 14 HANDCURSOR         ;
+         TOOLTIP "E-mail me if you have any comments or suggestions"
+
+      @ 22,86 LABEL Label_3               ;
+         VALUE "Copyright "+ Chr(169) + COPYRIGHT +;
+         ". All rights reserved"         ;
+         BACKCOLOR WHITE               ;
+         WIDTH 300 HEIGHT 14
+
+      FOR nCnt := 1 To Len(aCaption)
+
+         cLbl := 'Lbl_' + NTRIM(nCnt)
+         @ 50 + (nCnt - 1) * 20, 6 LABEL &cLbl      ;
+            VALUE aCaption[nCnt]         ;
+            AUTOSIZE TRANSPARENT
 
-	ENDDO
-
-	oReg:Close()
-
-	nId := 0
-
-	WHILE EMPTY(cName) .OR. AT( "VGA", cName ) > 0
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display\" + StrZero(nId++, 4), "DriverDesc" )
-		IF nId > 99
-			EXIT
-		ENDIF
-	ENDDO
-ENDIF
+         cText := 'Text_' + NTRIM(nCnt)
+         IF nCnt == Len(aCaption)
+            @ 48 + (nCnt - 1) * 20, 85 EDITBOX &cText      ;
+               HEIGHT 72               ;
+               WIDTH 356               ;
+               VALUE aValue[nCnt]            ;
+               ON CHANGE OnTextChange()
+
+         ELSEIF nCnt == 6 .OR. nCnt == 16
+            @ 48 + (nCnt - 1) * 20, 85 COMBOBOX &cText      ;
+               HEIGHT 120               ;
+               WIDTH 356               ;
+               ITEMS aValue[nCnt]            ;
+               VALUE Len( aValue[nCnt] )
+         ELSE
+            @ 48 + (nCnt - 1) * 20, 85 TEXTBOX &cText      ;
+               HEIGHT 19               ;
+               WIDTH 356               ;
+               VALUE aValue[nCnt]            ;
+               ON CHANGE OnTextChange()
+         ENDIF
+      NEXT
+
+      @ 454, 12 BUTTON Button_1         ;
+         PICTURE 'PRINT'            ;
+         ACTION RepToPrinter()         ;
+         WIDTH 24            ;
+         HEIGHT 24            ;
+         TOOLTIP "Print... (Ctrl+P)"      ;
+         FLAT NOTABSTOP
+
+      @ 454, 48 BUTTON Button_2         ;
+         PICTURE 'SAVE'            ;
+         ACTION RepToDisk()         ;
+         WIDTH 24            ;
+         HEIGHT 24            ;
+         TOOLTIP "Save... (Ctrl+S)"      ;
+         FLAT NOTABSTOP
+
+      ON KEY ALT+X ACTION ReleaseAllWindows()
+      ON KEY CONTROL+P ACTION RepToPrinter()
+      ON KEY CONTROL+S ACTION RepToDisk()
 
-return cName
+   END WINDOW
 
-*--------------------------------------------------------*
-Function SoundName()
-*--------------------------------------------------------*
-Local cName := "", oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cClass
+   DEFINE BKGBRUSH Brush_1 PATTERN IN Form_1 BITMAP Skin\background.bmp
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}", .f. )
+   CENTER WINDOW Form_1
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-		IF Len(cReg) == 4
+   ACTIVATE WINDOW Form_1
 
-			oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
+   RETURN
+
+   STATIC proc OnTextChange()
+
+      LOCAL cItem := This.Name
+      LOCAL nItem := Val( SubStr( cItem, At("_", cItem) + 1 ) )
+      LOCAL cText := 'Text_' + NTRIM( nItem )
+
+      aValue[nItem] := GetProperty( "Form_1", cText, "Value" )
+
+      RETURN
+
+      STATIC proc RepToPrinter()
+
+         LOCAL cTitle := PROGRAM + VERSION, n, i, nRow := 24
+
+         INIT PRINTSYS
+
+         SELECT BY DIALOG
 
-			cName := oKey:Get( "DriverDesc" )
+         IF HBPRNERROR != 0
+
+            RETURN
+         ENDIF
 
-			oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1 - 1, 4) + "\Drivers", .f. )
+         SET UNITS MM          // Sets @... units to milimeters
+         SET PAPERSIZE DMPAPER_A4   // Sets paper size to A4
+         SET ORIENTATION PORTRAIT   // Sets paper orientation to portrait
+         SET BIN DMBIN_FIRST      // Use first bin
 
-			IF !Empty( oKey1:Get( "SubClasses" ) )
-				oKey1:Close()
-				oKey:Close()
-				EXIT
-			ENDIF
+         DEFINE FONT "Courier" NAME "Courier New" SIZE 10
 
-			oKey:Close()
-		ENDIF
-	ENDDO
+         START DOC NAME Left(PROGRAM, 7)
 
-	oReg:Close()
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI" )
+         START PAGE
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         @ 14, 18 SAY cTitle ;
+            FONT "Courier" ;
+            TO PRINT
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI\" + cReg )
+         @ 14, 160 SAY DtoC(Date()) + " " + Left(Time(), 5) ;
+            FONT "Courier" ;
+            TO PRINT
 
-		While RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+         @ 20, 16, 200, 196 RECTANGLE
 
-			oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI\" + cReg + "\" + cReg1 )
+         FOR n := 1 To Len(aValue)
 
-			cClass := oKey1:Get("Class")
+            IF Valtype(aValue[n]) == "C"
 
-			IF cClass == "MEDIA"
-				cName := oKey1:Get("DeviceDesc")
-				oKey1:Close()
-				EXIT
-			ENDIF
+               @ nRow, 18 SAY aCaption[n] ;
+                  FONT "Courier" ;
+                  TO PRINT
+               @ nRow, 50 SAY aValue[n] ;
+                  FONT "Courier" ;
+                  TO PRINT
+               nRow += 6
 
-			oKey1:Close()
+            ELSEIF Valtype(aValue[n]) == "A"
 
-			IF nId > 99
-				EXIT
-			ENDIF
-		EndDo
+               @ nRow, 18 SAY aCaption[n] ;
+                  FONT "Courier" ;
+                  TO PRINT
 
-		oKey:Close()
+               IF n == 6
+                  @ nRow, 50 SAY ATAIL(aValue[n]) ;
+                     FONT "Courier" ;
+                     TO PRINT
+                  nRow += 6
+               ENDIF
 
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
+               FOR i := 1 To Len(aValue[n]) - 2
+                  @ nRow, IF( n == 6, 60, 50) SAY aValue[n][i] ;
+                     FONT "Courier" ;
+                     TO PRINT
+                  nRow += 6
+               NEXT
+            ENDIF
+         NEXT
 
-		nId1 := 0
-	EndDo
+      END PAGE
 
-	oReg:Close()
-ENDIF
+   END DOC
 
-return cName
+   RELEASE PRINTSYS
 
-*--------------------------------------------------------*
-Function NetworkName()
-*--------------------------------------------------------*
-Local cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
+   RETURN
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}", .f. )
+   STATIC proc RepToDisk()
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-		IF Len(cReg) == 4
+      LOCAL cTxt := PROGRAM + VERSION + CRLF, n
+      LOCAL cFileName := Putfile( { {"Text Files", "*.txt"}, {"All Files", "*.*"} }, "Save to File", ".\", .t. )
 
-			oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
+      IF !Empty( cFileName )
+         cTxt += Repl("-", 70) + CRLF
 
-			cName := oKey:Get( "DriverDesc" )
+         FOR n := 1 To Len(aValue)
+            IF Valtype(aValue[n]) == "C"
+               cTxt += padr(aCaption[n], 17) + aValue[n] + CRLF
+            ELSEIF Valtype(aValue[n]) == "A"
+               IF LEN(aValue[n]) > 0
+                  cTxt += padr(aCaption[n], 17) + ATAIL( aValue[n] ) + CRLF
+                  Aeval(aValue[n], {|e,i| IF(i < Len(aValue[n]) - 1, cTxt += space(22) + e + CRLF, )})
+               ELSE
+                  cTxt += padr(aCaption[n], 17) + CRLF
+               ENDIF
+            ENDIF
+         NEXT
 
-			IF !Empty( oKey:Get( "AdapterModel" ) )
-				oKey:Close()
-				EXIT
-			ENDIF
+         cTxt += Repl("-", 70) + CRLF
+         cTxt += CDOW(Date()) + ", " + DtoC(Date()) + " " + Left(Time(), 5) + CRLF
 
-			oKey:Close()
+         Memowrit( IF(AT(".", cFileName) > 0, cFileName, cFileName + ".txt") , cTxt )
+      ENDIF
 
-		ENDIF
-	ENDDO
+      RETURN
 
-	oReg:Close()
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Net" )
+      STATIC proc InitDraw()
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         DRAW RECTANGLE IN WINDOW Form_1 AT 0,63 ;
+            TO 41,447 ;
+            PENCOLOR BLACK ;
+            FILLCOLOR WHITE
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Net\" + cReg )
+         RETURN
 
-		cName := oKey:Get( "DriverDesc" )
+         STATIC proc PaintMessage()
 
-		oKey:Close()
+            Form_1.Label_1.Value := PROGRAM + VERSION
+            Form_1.Label_2.Value := "gfilatov@inbox.ru"
+            Form_1.Label_3.Value := "Copyright "+ Chr(169) + COPYRIGHT + ". All rights reserved"
 
-	ENDDO
+            RETURN
 
-	oReg:Close()
+FUNCTION ComputerName()
 
-ENDIF
+   RETURN GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName", "Computername" )
 
-return cName
+FUNCTION RegisteredName()
 
-*--------------------------------------------------------*
-Function KeybdName()
-*--------------------------------------------------------*
-Local cName := "", nId := 0
+   LOCAL cName := ""
 
-IF lWinNT
-	cName := GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96B-E325-11CE-BFC1-08002BE10318}\0000", "DriverDesc" )
-ELSE
-	IF GetRegVar( HKEY_LOCAL_MACHINE, "Enum\ACPI\*PNP0303\0", "Class" ) == "Keyboard"
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\ACPI\*PNP0303\0", "DeviceDesc" )
-	ENDIF
+   IF lWinNT
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows NT\CurrentVersion", "RegisteredOrganization" )
+   ELSE
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "Software\Microsoft\Windows\CurrentVersion", "RegisteredOrganization" )
+   ENDIF
 
-	WHILE EMPTY(cName) .AND. GetRegVar( HKEY_LOCAL_MACHINE, "Enum\BIOS\*PNP0303\" + StrZero(nId++, 2), "Class" ) # "Keyboard"
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\BIOS\*PNP0303\" + StrZero(nId, 2), "DeviceDesc" )
-		IF nId > 99
-			EXIT
-		ENDIF
-	ENDDO
-ENDIF
+   RETURN cName
 
-return cName
+FUNCTION CPUName()
 
-*--------------------------------------------------------*
-Function MouseName()
-*--------------------------------------------------------*
-Local cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
+   LOCAL cName := ""
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}", .f. )
+   IF lWinNT
+      cName := Ltrim( GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System\CentralProcessor\0", "ProcessorNameString" ) )
+   ELSE
+      cName := GetCPU()
+   ENDIF
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-		IF Len(cReg) == 4
+   RETURN cName
 
-			oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
+FUNCTION BiosName()
 
-			cName := oKey:Get( "DriverDesc" )
+   LOCAL cName
 
-			oKey:Close()
-		ENDIF
-	ENDDO
+   IF lWinNT
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System", "SystemBiosVersion" ) + " (" + ;
+         GetRegVar( HKEY_LOCAL_MACHINE, "HARDWARE\DESCRIPTION\System", "SystemBiosDate" ) + ")"
+   ELSE
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\Root\*PNP0C01\0000", "BIOSVersion" ) + " (" + ;
+         GetRegVar( HKEY_LOCAL_MACHINE, "Enum\Root\*PNP0C01\0000", "BIOSDate" ) + ")"
+   ENDIF
 
-	oReg:Close()
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse" )
+   RETURN cName
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+FUNCTION VideoName()
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse\" + cReg )
+   LOCAL cName := "", oReg, cReg := "", oKey, nId := 0
 
-		cName := oKey:Get( "DriverDesc" )
+   IF lWinNT
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000", "DriverDesc" )
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display" )
 
-		oKey:Close()
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
 
-	ENDDO
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display\" + cReg )
 
-	oReg:Close()
+         cName := oKey:Get( "DriverDesc" )
 
-	nId := 0
+         oKey:Close()
 
-	WHILE EMPTY(cName)
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse\" + StrZero(nId++, 4), "DriverDesc" )
-		IF nId > 99
-			EXIT
-		ENDIF
-	ENDDO
-ENDIF
+      ENDDO
 
-return cName
+      oReg:Close()
 
-*--------------------------------------------------------*
-Function MonitorName()
-*--------------------------------------------------------*
-Local cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
+      nId := 0
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96E-E325-11CE-BFC1-08002BE10318}", .f. )
+      WHILE EMPTY(cName) .OR. AT( "VGA", cName ) > 0
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Display\" + StrZero(nId++, 4), "DriverDesc" )
+         IF nId > 99
+            EXIT
+         ENDIF
+      ENDDO
+   ENDIF
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-		IF Len(cReg) == 4
+   RETURN cName
 
-			oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96E-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
+FUNCTION SoundName()
 
-			cName := oKey:Get( "DriverDesc" )
+   LOCAL cName := "", oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cClass
 
-			oKey:Close()
-		ENDIF
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
-	ENDDO
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}", .f. )
 
-	oReg:Close()
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor" )
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         IF Len(cReg) == 4
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+            oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor\" + cReg )
+            cName := oKey:Get( "DriverDesc" )
 
-		cName := oKey:Get( "DriverDesc" )
+            oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96C-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1 - 1, 4) + "\Drivers", .f. )
 
-		oKey:Close()
-/*
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
-*/
-	ENDDO
+            IF !Empty( oKey1:Get( "SubClasses" ) )
+               oKey1:Close()
+               oKey:Close()
+               EXIT
+            ENDIF
 
-	oReg:Close()
+            oKey:Close()
+         ENDIF
+      ENDDO
 
-	nId := 0
+      oReg:Close()
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI" )
 
-	WHILE EMPTY(cName) .OR. AT( "Plug", cName ) > 0
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor\" + StrZero(nId++, 4), "DriverDesc" )
-		IF nId > 99
-			EXIT
-		ENDIF
-	ENDDO
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
 
-ENDIF
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI\" + cReg )
 
-return cName
+         WHILE RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
 
-*--------------------------------------------------------*
-Function ModemName()
-*--------------------------------------------------------*
-Local oReg, cReg := "", oKey, nId := 0, nId1 := 0, cName := "", cClass
+            oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\PCI\" + cReg + "\" + cReg1 )
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96D-E325-11CE-BFC1-08002BE10318}", .f. )
+            cClass := oKey1:Get("Class")
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-		IF Len(cReg) == 4
+            IF cClass == "MEDIA"
+               cName := oKey1:Get("DeviceDesc")
+               oKey1:Close()
+               EXIT
+            ENDIF
 
-			oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96D-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
+            oKey1:Close()
 
-			cName := oKey:Get( "DriverDesc" )
+            IF nId > 99
+               EXIT
+            ENDIF
+         ENDDO
 
-			oKey:Close()
-		ENDIF
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
-	ENDDO
+         oKey:Close()
 
-	oReg:Close()
-ELSE
-	WHILE EMPTY(cName)
-		cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Modem\" + StrZero(nId++, 4), "DriverDesc" )
-		IF nId > 99
-			EXIT
-		ENDIF
-	ENDDO
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
 
-	IF EMPTY(cName)
+         nId1 := 0
+      ENDDO
 
-		nId := 0
+      oReg:Close()
+   ENDIF
 
-		oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\Root\MDMGEN" )
+   RETURN cName
 
-		While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+FUNCTION NetworkName()
 
-			oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\Root\MDMGEN\" + cReg )
+   LOCAL cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
 
-			cClass := oKey:Get("Class")
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}", .f. )
 
-			IF cClass == "Modem"
-				cName := oKey:Get("DeviceDesc")
-			ENDIF
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         IF Len(cReg) == 4
 
-			oKey:Close()
+            oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
 
-			IF !EMPTY(cName)
-				EXIT
-			ENDIF
+            cName := oKey:Get( "DriverDesc" )
 
-		EndDo
+            IF !Empty( oKey:Get( "AdapterModel" ) )
+               oKey:Close()
+               EXIT
+            ENDIF
 
-		oReg:Close()
+            oKey:Close()
 
-	ENDIF
-ENDIF
+         ENDIF
+      ENDDO
 
-return cName
+      oReg:Close()
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Net" )
 
-*--------------------------------------------------------*
-Function IPInfo()
-*--------------------------------------------------------*
-Local cIP := "0.0.0.0"
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
 
-If WSAStartUp() == 0
-	cIP := GetHostByName( GetHostName() )
-	WSACleanUp()
-Endif
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Net\" + cReg )
 
-return cIP
+         cName := oKey:Get( "DriverDesc" )
 
-*--------------------------------------------------------*
-Function CDROMName(cDrive)
-*--------------------------------------------------------*
-Local oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cName := "", cClass, cNameDrive
+         oKey:Close()
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE", .f. )
+      ENDDO
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+      oReg:Close()
 
-		oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg, .f. )
+   ENDIF
 
-		While RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+   RETURN cName
 
-			oKey1 := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg + "\" + cReg1, .f. )
+FUNCTION KeybdName()
 
-			cClass := oKey1:Get("Class")
+   LOCAL cName := "", nId := 0
 
-			IF cClass == "CDROM"
-				cName := oKey1:Get("FriendlyName")
-				oKey1:Close()
-				EXIT
-			ENDIF
+   IF lWinNT
+      cName := GetRegVar( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96B-E325-11CE-BFC1-08002BE10318}\0000", "DriverDesc" )
+   ELSE
+      IF GetRegVar( HKEY_LOCAL_MACHINE, "Enum\ACPI\*PNP0303\0", "Class" ) == "Keyboard"
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\ACPI\*PNP0303\0", "DeviceDesc" )
+      ENDIF
 
-			oKey1:Close()
-		EndDo
+      WHILE EMPTY(cName) .AND. GetRegVar( HKEY_LOCAL_MACHINE, "Enum\BIOS\*PNP0303\" + StrZero(nId++, 2), "Class" ) # "Keyboard"
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "Enum\BIOS\*PNP0303\" + StrZero(nId, 2), "DeviceDesc" )
+         IF nId > 99
+            EXIT
+         ENDIF
+      ENDDO
+   ENDIF
 
-		oKey:Close()
+   RETURN cName
 
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
+FUNCTION MouseName()
 
-		nId1 := 0
-	EndDo
+   LOCAL cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
 
-	oReg:Close()
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI" )
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}", .f. )
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         IF Len(cReg) == 4
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg )
+            oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
 
-		While RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+            cName := oKey:Get( "DriverDesc" )
 
-			oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg + "\" + cReg1 )
+            oKey:Close()
+         ENDIF
+      ENDDO
 
-			cClass := oKey1:Get("Class")
-			cNameDrive := oKey1:Get("CurrentDriveLetterAssignment")
+      oReg:Close()
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse" )
 
-			IF cClass == "CDROM" .AND. cNameDrive $ cDrive
-				cName := oKey1:Get("DeviceDesc")
-				oKey1:Close()
-				EXIT
-			ENDIF
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
 
-			oKey1:Close()
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse\" + cReg )
 
-		EndDo
+         cName := oKey:Get( "DriverDesc" )
 
-		oKey:Close()
+         oKey:Close()
 
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
+      ENDDO
 
-		nId1 := 0
-	EndDo
+      oReg:Close()
 
-	oReg:Close()
-ENDIF
+      nId := 0
 
-return cName
+      WHILE EMPTY(cName)
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Mouse\" + StrZero(nId++, 4), "DriverDesc" )
+         IF nId > 99
+            EXIT
+         ENDIF
+      ENDDO
+   ENDIF
 
-*--------------------------------------------------------*
-Function HDDName()
-*--------------------------------------------------------*
-Local oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cName := "", cClass, cNameDrive := ""
+   RETURN cName
 
-IF lWinNT
-	oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE", .f. )
+FUNCTION MonitorName()
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+   LOCAL cName := "", oReg, cReg := "", oKey, nId := 0, nId1 := 0
 
-		oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg, .f. )
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96E-E325-11CE-BFC1-08002BE10318}", .f. )
 
-		While RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         IF Len(cReg) == 4
 
-			oKey1 := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg + "\" + cReg1, .f. )
+            oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96E-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
 
-			cClass := oKey1:Get("Class")
+            cName := oKey:Get( "DriverDesc" )
 
-			IF cClass == "DiskDrive"
-				cName := oKey1:Get("FriendlyName")
-				oKey1:Close()
-				EXIT
-			ENDIF
+            oKey:Close()
+         ENDIF
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
+      ENDDO
 
-			oKey1:Close()
+      oReg:Close()
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor" )
 
-		EndDo
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
 
-		oKey:Close()
-/*
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
-*/
-		nId1 := 0
-	EndDo
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor\" + cReg )
 
-	oReg:Close()
+         cName := oKey:Get( "DriverDesc" )
 
-ELSE
-	oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI" )
+         oKey:Close()
+         /*
+         IF !EMPTY(cName)
+         EXIT
+         ENDIF
+         */
+      ENDDO
 
-	While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+      oReg:Close()
 
-		oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg )
+      nId := 0
 
-		While RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+      WHILE EMPTY(cName) .OR. AT( "Plug", cName ) > 0
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Monitor\" + StrZero(nId++, 4), "DriverDesc" )
+         IF nId > 99
+            EXIT
+         ENDIF
+      ENDDO
 
-			oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg + "\" + cReg1 )
+   ENDIF
 
-			cClass := oKey1:Get("Class")
-			cNameDrive := oKey1:Get("CurrentDriveLetterAssignment")
+   RETURN cName
 
-			IF cClass == "DiskDrive" .AND. "C" $ cNameDrive
-				cName := oKey1:Get("DeviceDesc")
-				oKey1:Close()
-				EXIT
-			ENDIF
+FUNCTION ModemName()
 
-			oKey1:Close()
+   LOCAL oReg, cReg := "", oKey, nId := 0, nId1 := 0, cName := "", cClass
 
-		EndDo
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96D-E325-11CE-BFC1-08002BE10318}", .f. )
 
-		oKey:Close()
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+         IF Len(cReg) == 4
 
-		IF !EMPTY(cName)
-			EXIT
-		ENDIF
+            oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Control\Class\{4D36E96D-E325-11CE-BFC1-08002BE10318}\" + StrZero(nId1++, 4), .f. )
 
-		nId1 := 0
-	EndDo
+            cName := oKey:Get( "DriverDesc" )
 
-	oReg:Close()
-ENDIF
+            oKey:Close()
+         ENDIF
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
+      ENDDO
 
-return ALLTRIM(cName)
+      oReg:Close()
+   ELSE
+      WHILE EMPTY(cName)
+         cName := GetRegVar( HKEY_LOCAL_MACHINE, "System\CurrentControlSet\Services\Class\Modem\" + StrZero(nId++, 4), "DriverDesc" )
+         IF nId > 99
+            EXIT
+         ENDIF
+      ENDDO
 
-*--------------------------------------------------------*
-static FUNCTION cBios_( nFunction, nBytes )
-*--------------------------------------------------------*
-   local n, nPeek, cBiosInfo := ""
+      IF EMPTY(cName)
 
-   For n := 0 To nBytes - 1
+         nId := 0
 
-      If ( nPeek := PeekByte( nFunction, n ) ) < 32
-           Exit
+         oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\Root\MDMGEN" )
+
+         WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+
+            oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\Root\MDMGEN\" + cReg )
+
+            cClass := oKey:Get("Class")
+
+            IF cClass == "Modem"
+               cName := oKey:Get("DeviceDesc")
+            ENDIF
+
+            oKey:Close()
+
+            IF !EMPTY(cName)
+               EXIT
+            ENDIF
+
+         ENDDO
+
+         oReg:Close()
+
+      ENDIF
+   ENDIF
+
+   RETURN cName
+
+FUNCTION IPInfo()
+
+   LOCAL cIP := "0.0.0.0"
+
+   IF WSAStartUp() == 0
+      cIP := GetHostByName( GetHostName() )
+      WSACleanUp()
+   ENDIF
+
+   RETURN cIP
+
+FUNCTION CDROMName(cDrive)
+
+   LOCAL oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cName := "", cClass, cNameDrive
+
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE", .f. )
+
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+
+         oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg, .f. )
+
+         WHILE RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+
+            oKey1 := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg + "\" + cReg1, .f. )
+
+            cClass := oKey1:Get("Class")
+
+            IF cClass == "CDROM"
+               cName := oKey1:Get("FriendlyName")
+               oKey1:Close()
+               EXIT
+            ENDIF
+
+            oKey1:Close()
+         ENDDO
+
+         oKey:Close()
+
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
+
+         nId1 := 0
+      ENDDO
+
+      oReg:Close()
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI" )
+
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg )
+
+         WHILE RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+
+            oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg + "\" + cReg1 )
+
+            cClass := oKey1:Get("Class")
+            cNameDrive := oKey1:Get("CurrentDriveLetterAssignment")
+
+            IF cClass == "CDROM" .AND. cNameDrive $ cDrive
+               cName := oKey1:Get("DeviceDesc")
+               oKey1:Close()
+               EXIT
+            ENDIF
+
+            oKey1:Close()
+
+         ENDDO
+
+         oKey:Close()
+
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
+
+         nId1 := 0
+      ENDDO
+
+      oReg:Close()
+   ENDIF
+
+   RETURN cName
+
+FUNCTION HDDName()
+
+   LOCAL oReg, cReg := "", cReg1 := "", oKey, oKey1, nId := 0, nId1 := 0, cName := "", cClass, cNameDrive := ""
+
+   IF lWinNT
+      oReg := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE", .f. )
+
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+
+         oKey := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg, .f. )
+
+         WHILE RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+
+            oKey1 := TReg32():Create( HKEY_LOCAL_MACHINE, "SYSTEM\CurrentControlSet\Enum\IDE\" + cReg + "\" + cReg1, .f. )
+
+            cClass := oKey1:Get("Class")
+
+            IF cClass == "DiskDrive"
+               cName := oKey1:Get("FriendlyName")
+               oKey1:Close()
+               EXIT
+            ENDIF
+
+            oKey1:Close()
+
+         ENDDO
+
+         oKey:Close()
+         /*
+         IF !EMPTY(cName)
+         EXIT
+         ENDIF
+         */
+         nId1 := 0
+      ENDDO
+
+      oReg:Close()
+
+   ELSE
+      oReg := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI" )
+
+      WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+
+         oKey := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg )
+
+         WHILE RegEnumKey( oKey:nHandle, nId1++, @cReg1 ) == 0
+
+            oKey1 := TReg32():New( HKEY_LOCAL_MACHINE, "Enum\SCSI\" + cReg + "\" + cReg1 )
+
+            cClass := oKey1:Get("Class")
+            cNameDrive := oKey1:Get("CurrentDriveLetterAssignment")
+
+            IF cClass == "DiskDrive" .AND. "C" $ cNameDrive
+               cName := oKey1:Get("DeviceDesc")
+               oKey1:Close()
+               EXIT
+            ENDIF
+
+            oKey1:Close()
+
+         ENDDO
+
+         oKey:Close()
+
+         IF !EMPTY(cName)
+            EXIT
+         ENDIF
+
+         nId1 := 0
+      ENDDO
+
+      oReg:Close()
+   ENDIF
+
+   RETURN ALLTRIM(cName)
+
+STATIC FUNCTION cBios_( nFunction, nBytes )
+
+   LOCAL n, nPeek, cBiosInfo := ""
+
+   FOR n := 0 To nBytes - 1
+
+      IF ( nPeek := PeekByte( nFunction, n ) ) < 32
+         EXIT
       End
 
       cBiosInfo += Chr( nPeek )
 
-   Next
+   NEXT
 
-RETURN cBiosInfo
+   RETURN cBiosInfo
 
-#define BIOS_TYPE       1040481
-#define BIOS_OEM_SIGNON 1040577
-#define BIOS_SIGNON     1043569
-#define BIOS_ID         1043592
-#define BIOS_DATE       1048565
+   #define BIOS_TYPE       1040481
+   #define BIOS_OEM_SIGNON 1040577
+   #define BIOS_SIGNON     1043569
+   #define BIOS_ID         1043592
+   #define BIOS_DATE       1048565
 
-*--------------------------------------------------------*
 FUNCTION cBiosSignOn()
-*--------------------------------------------------------*
-RETURN cBios_( BIOS_SIGNON, 37 )
 
-*--------------------------------------------------------*
+   RETURN cBios_( BIOS_SIGNON, 37 )
+
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue := ""
 
    DEFAULT nKey := HKEY_CURRENT_USER
@@ -951,39 +929,37 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*-----------------------------------------------------------------------------*
-function drawrect(window,row,col,row1,col1,penrgb,penwidth,fillrgb)
-*-----------------------------------------------------------------------------*
-Local i := GetFormIndex ( Window )
-Local FormHandle := _HMG_aFormHandles [i] , fill
+FUNCTION drawrect(window,row,col,row1,col1,penrgb,penwidth,fillrgb)
 
-if formhandle > 0
+   LOCAL i := GetFormIndex ( Window )
+   LOCAL FormHandle := _HMG_aFormHandles [i] , fill
 
-   if valtype(penrgb) == "U"
-      penrgb = {0,0,0}
-   endif
+   IF formhandle > 0
 
-   if valtype(penwidth) == "U"
-      penwidth = 1
-   endif
+      IF valtype(penrgb) == "U"
+         penrgb = {0,0,0}
+      ENDIF
 
-   if valtype(fillrgb) == "U"
-      fillrgb := {255,255,255}
-      fill := .f.
-   else
-      fill := .t.   
-   endif
+      IF valtype(penwidth) == "U"
+         penwidth = 1
+      ENDIF
 
-   rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill)
+      IF valtype(fillrgb) == "U"
+         fillrgb := {255,255,255}
+         fill := .f.
+      ELSE
+         fill := .t.
+      ENDIF
 
-   aadd ( _HMG_aFormGraphTasks [i] , { || rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill) } )
+      rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill)
 
-endif
+      aadd ( _HMG_aFormGraphTasks [i] , { || rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill) } )
 
-return nil
+   ENDIF
 
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -1018,19 +994,19 @@ HB_FUNC( GETDRIVETYPE )
 
 HB_FUNC( DISPLAYCURRENTMODE )
 {
-	BYTE buffer[ 20 ];
-	DEVMODE  lpDevMode;
+   BYTE buffer[ 20 ];
+   DEVMODE  lpDevMode;
 
-	strcpy( ( char * ) buffer, "0x0x0" );
+   strcpy( ( char * ) buffer, "0x0x0" );
 
-	if ( EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &lpDevMode ) )
-	{
-		wsprintf( ( char * ) buffer, "%dx%dx%d bits",
-			lpDevMode.dmPelsWidth, lpDevMode.dmPelsHeight,
-			lpDevMode.dmBitsPerPel );
-	}
+   if ( EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &lpDevMode ) )
+   {
+      wsprintf( ( char * ) buffer, "%dx%dx%d bits",
+         lpDevMode.dmPelsWidth, lpDevMode.dmPelsHeight,
+         lpDevMode.dmBitsPerPel );
+   }
 
-	hb_retc( ( char * ) buffer );
+   hb_retc( ( char * ) buffer );
 }
 
 HB_FUNC ( REGENUMKEY )
@@ -1102,14 +1078,14 @@ HB_FUNC ( RECTDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(9))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) HB_PARNI(8,1),(int) HB_PARNI(8,2),(int) HB_PARNI(8,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) HB_PARNI(8,1),(int) HB_PARNI(8,2),(int) HB_PARNI(8,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    Rectangle((HDC) hdc1,(int) hb_parni(3),(int) hb_parni(2),(int) hb_parni(5),(int) hb_parni(4));
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj2);
@@ -1138,6 +1114,7 @@ HB_FUNC( ISADMIN )
      if (nError == ERROR_CALL_NOT_IMPLEMENTED)
        {
         hb_retl( TRUE );
+
         return;
        }
     }
@@ -1175,8 +1152,8 @@ HB_FUNC( ISADMIN )
        {
           if ( EqualSid(psidAdmin, pGroupInfo->Groups[i].Sid) )
            {
-        	    lAdMin = TRUE;
-        	    break;
+               lAdMin = TRUE;
+               break;
            }
        }
     }
@@ -1199,3 +1176,4 @@ HB_FUNC( ISADMIN )
 }
 
 #pragma ENDDUMP
+

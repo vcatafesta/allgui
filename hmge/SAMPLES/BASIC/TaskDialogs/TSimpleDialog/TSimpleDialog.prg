@@ -1,13 +1,12 @@
-/* 
-   TSimpleDlg.prg
- */ 
- 
-#include "minigui.ch" 
-#include "hbclass.ch" 
-#include "TaskDlgs.ch" 
+/*
+TSimpleDlg.prg
+*/
 
+#include "minigui.ch"
+#include "hbclass.ch"
+#include "TaskDlgs.ch"
 
-PROCEDURE main() 
+PROCEDURE main()
 
    LOCAL oSimpleDialog := SimpleTaskDialog()
 
@@ -28,9 +27,10 @@ PROCEDURE main()
 
    RETURN
 
-/*
-*/ 
-STATIC PROCEDURE ShowDialogResult( obj ) 
+   /*
+   */
+
+STATIC PROCEDURE ShowDialogResult( obj )
 
    LOCAL msg, msg1, msg2
 
@@ -42,7 +42,7 @@ STATIC PROCEDURE ShowDialogResult( obj )
 
          MsgInfo( msg + CRLF + CRLF + msg1 + CRLF + msg2, "MsgInfo", , .F. )
 
-         // And now we can try emulate the MsgInfo(..) with TaskDialog() 
+         // And now we can try emulate the MsgInfo(..) with TaskDialog()
 
          WITH OBJECT TaskDialog()   // Yep, it's not so simple as SimpleTaskDialog() ;)
             :New( "TaskDialog", msg, msg1 + CRLF + msg2, Nil, Nil, TD_INFORMATION_ICON )
@@ -60,3 +60,4 @@ STATIC PROCEDURE ShowDialogResult( obj )
    ENDIF
 
    RETURN
+

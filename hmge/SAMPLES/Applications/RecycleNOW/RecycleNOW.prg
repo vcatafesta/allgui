@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -17,40 +15,37 @@ ANNOUNCE RDDSYS
 
 #define MsgAlert( c ) MsgEXCLAMATION( c, "Error" )
 
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
+PROCEDURE Main()
 
-	SET MULTIPLE OFF
+   SET MULTIPLE OFF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		ICON 'MAIN' ;
-		MAIN NOSHOW ;
-		ON INIT RecycleNOW()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         ICON 'MAIN' ;
+         MAIN NOSHOW ;
+         ON INIT RecycleNOW()
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure RecycleNOW()
-*--------------------------------------------------------*
-// Immediate removal of files in the Recycle Bin
+STATIC PROCEDURE RecycleNOW()
 
-	IF EMPTY( EmptyRecycleBin() )
-		DO EVENTS
-	ELSE
-		MsgAlert( "Wrong Recycle Bin Operation!" )
-	ENDIF
+   // Immediate removal of files in the Recycle Bin
 
-	Form_1.Release
+   IF EMPTY( EmptyRecycleBin() )
+      DO EVENTS
+   ELSE
+      MsgAlert( "Wrong Recycle Bin Operation!" )
+   ENDIF
 
-Return
+   Form_1.Release
+
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -61,7 +56,7 @@ Return
 
 HB_FUNC ( EMPTYRECYCLEBIN )
 {
-	hb_retnl( SHEmptyRecycleBin(NULL,NULL,SHERB_NOCONFIRMATION + SHERB_NOPROGRESSUI) );
+   hb_retnl( SHEmptyRecycleBin(NULL,NULL,SHERB_NOCONFIRMATION + SHERB_NOPROGRESSUI) );
 }
 
 #pragma ENDDUMP

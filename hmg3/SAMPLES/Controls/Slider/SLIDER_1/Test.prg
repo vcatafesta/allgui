@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window Test
-	Activate Window Test
+   LOAD WINDOW Test
+   ACTIVATE WINDOW Test
 
-Return
-
+   RETURN
 

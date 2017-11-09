@@ -1,27 +1,33 @@
 /*
- * $Id: oosql.prg,v 1.1 2010/10/03 01:28:09 guerra000 Exp $
- */
+* $Id: oosql.prg,v 1.1 2010/10/03 01:28:09 guerra000 Exp $
+*/
 /*
- *  TMySqlServer's layer for use with XBROWSE control.
- */
+*  TMySqlServer's layer for use with XBROWSE control.
+*/
 
 #include "hbclass.ch"
 
-*-----------------------------------------------------------------------------*
 CLASS ooMySql
-*-----------------------------------------------------------------------------*
+
    // Methods always used by XBrowse
-   METHOD Skipper
+
+METHOD Skipper
+
    DELEGATE GoTop            TO oQuery
    DELEGATE GoBottom         TO oQuery
 
    // Methods used by XBrowse if you'll have a scrollbar
    DELEGATE RecNo            TO oQuery
-   METHOD RecCount           INLINE ::oQuery:LastRec()
+
+METHOD RecCount           INLINE ::oQuery:LastRec()
+
    DELEGATE GoTo             TO oQuery
-   METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
-   METHOD OrdKeyCount        INLINE ::oQuery:LastRec()
-   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
+
+METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
+
+METHOD OrdKeyCount        INLINE ::oQuery:LastRec()
+
+METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
 
    // Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
@@ -33,26 +39,34 @@ CLASS ooMySql
 
    // Used by "own" class (not used by XBrowse itself)
    DATA oQuery
-   METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+
+METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+
    DELEGATE DbStruct         TO oQuery
    DELEGATE FieldGet         TO oQuery
    DELEGATE FieldPut         TO oQuery
-   METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+
+METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+
    DELEGATE Skip             TO oQuery
    DELEGATE Bof              TO oQuery
-   METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
+
+METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
+
    DELEGATE FieldName        TO oQuery
    DELEGATE FieldPos         TO oQuery
    DELEGATE LastRec          TO oQuery
-   METHOD FieldBlock
+
+METHOD FieldBlock
 
    ERROR HANDLER FieldAssign
+
 ENDCLASS
 
-*-----------------------------------------------------------------------------*
 METHOD Skipper( nSkip ) CLASS ooMySql
-*-----------------------------------------------------------------------------*
-LOCAL nCount := 0
+
+   LOCAL nCount := 0
+
    nSkip := INT( nSkip )
    IF nSkip > 0
       DO WHILE nSkip > 0
@@ -74,17 +88,17 @@ LOCAL nCount := 0
          nSkip++
       ENDDO
    ENDIF
-RETURN nCount
 
-*-----------------------------------------------------------------------------*
+   RETURN nCount
+
 METHOD FieldBlock( nPos ) CLASS ooMySql
-*-----------------------------------------------------------------------------*
-RETURN { | _x_ | IF( PCOUNT() > 0 , ::oQuery:FieldPut( nPos, _x_ ) , ::oQuery:FieldGet( nPos ) ) }
 
-*-----------------------------------------------------------------------------*
+   RETURN { | _x_ | IF( PCOUNT() > 0 , ::oQuery:FieldPut( nPos, _x_ ) , ::oQuery:FieldGet( nPos ) ) }
+
 METHOD FieldAssign( xValue ) CLASS ooMySql
-*-----------------------------------------------------------------------------*
-LOCAL nPos, cMessage, uRet, lError
+
+   LOCAL nPos, cMessage, uRet, lError
+
    cMessage := ALLTRIM( UPPER( __GetMessage() ) )
    lError := .T.
    IF PCOUNT() == 0
@@ -104,20 +118,22 @@ LOCAL nPos, cMessage, uRet, lError
       uRet := NIL
       ::MsgNotFound( cMessage )
    ENDIF
-RETURN uRet
 
-// Database methods not implemented (not used by XBrowse)
-*   METHOD OrdScope
-*   METHOD Filter
+   RETURN uRet
 
-*   METHOD Locate     BLOCK { | Self, bFor, bWhile, nNext, nRec, lRest | ( ::cAlias__ )->( __dbLocate( bFor, bWhile, nNext, nRec, lRest ) ) }
-*   METHOD Seek       BLOCK { | Self, uKey, lSoftSeek, lLast | ( ::cAlias__ )->( DbSeek( uKey, lSoftSeek, lLast ) ) }
-*   METHOD Commit     BLOCK { | Self |                         ( ::cAlias__ )->( DbCommit() ) }
-*   METHOD Unlock     BLOCK { | Self |                         ( ::cAlias__ )->( DbUnlock() ) }
-*   METHOD Delete     BLOCK { | Self |                         ( ::cAlias__ )->( DbDelete() ) }
-*   METHOD Close      BLOCK { | Self |                         ( ::cAlias__ )->( DbCloseArea() ) }
-*   METHOD Found      BLOCK { | Self |                         ( ::cAlias__ )->( Found() ) }
-*   METHOD SetOrder   BLOCK { | Self, uOrder |                 ( ::cAlias__ )->( ORDSETFOCUS( uOrder ) ) }
-*   METHOD SetIndex   BLOCK { | Self, cFile, lAdditive |       IF( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
-*   METHOD Append     BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
-*   METHOD Lock       BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
+   // Database methods not implemented (not used by XBrowse)
+   *   METHOD OrdScope
+   *   METHOD Filter
+
+   *   METHOD Locate     BLOCK { | Self, bFor, bWhile, nNext, nRec, lRest | ( ::cAlias__ )->( __dbLocate( bFor, bWhile, nNext, nRec, lRest ) ) }
+   *   METHOD Seek       BLOCK { | Self, uKey, lSoftSeek, lLast | ( ::cAlias__ )->( DbSeek( uKey, lSoftSeek, lLast ) ) }
+   *   METHOD Commit     BLOCK { | Self |                         ( ::cAlias__ )->( DbCommit() ) }
+   *   METHOD Unlock     BLOCK { | Self |                         ( ::cAlias__ )->( DbUnlock() ) }
+   *   METHOD Delete     BLOCK { | Self |                         ( ::cAlias__ )->( DbDelete() ) }
+   *   METHOD Close      BLOCK { | Self |                         ( ::cAlias__ )->( DbCloseArea() ) }
+   *   METHOD Found      BLOCK { | Self |                         ( ::cAlias__ )->( Found() ) }
+   *   METHOD SetOrder   BLOCK { | Self, uOrder |                 ( ::cAlias__ )->( ORDSETFOCUS( uOrder ) ) }
+   *   METHOD SetIndex   BLOCK { | Self, cFile, lAdditive |       IF( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
+   *   METHOD Append     BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
+   *   METHOD Lock       BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
+

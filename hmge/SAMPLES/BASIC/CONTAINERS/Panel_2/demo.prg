@@ -4,12 +4,13 @@
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-    Load Window Demo
-    
-    Center Window Demo
+   LOAD WINDOW Demo
 
-    Activate Window Demo
+   CENTER WINDOW Demo
 
-Return Nil
+   ACTIVATE WINDOW Demo
+
+   RETURN NIL
+

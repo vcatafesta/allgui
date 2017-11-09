@@ -75,8 +75,8 @@
 #define DSS_PREFIXONLY    1024
 #define DSS_RIGHT        32768
 /*
- * Owner draw actions
- */
+* Owner draw actions
+*/
 #define ODA_DRAWENTIRE    1
 #define ODA_SELECT        2
 #define ODA_FOCUS         4
@@ -106,12 +106,13 @@
 #define WS_VISIBLE          0x10000000
 #define WS_CHILD            0x40000000
 
-
 * HMG 1.0 Experimental Build 9a ( JK )
 * ( C ) 2005 Jacek Kubica < kubica@wssk .wroc. pl >
 //-------------------------------------------------------------\\
+
 FUNCTION OwnButtonPaint( pdis )
-//-------------------------------------------------------------\\
+
+   //-------------------------------------------------------------\\
    LOCAL hDC, itemState, itemAction, i, rgbTrans, hWnd, lFlat, lNotrans
    LOCAL oldBkMode, hOldFont, nFreeSpace
    LOCAL x1, y1, x2, y2, xp1, yp1, xp2, yp2
@@ -128,10 +129,12 @@ FUNCTION OwnButtonPaint( pdis )
    hDC := GETOWNBTNDC( pdis )
 
    IF Empty( hDC )
+
       RETURN ( 1 )
    ENDIF
 
    IF GETOWNBTNCTLTYPE( pdis ) <> ODT_BUTTON
+
       RETURN ( 1 )
    ENDIF
 
@@ -141,6 +144,7 @@ FUNCTION OwnButtonPaint( pdis )
    loSelect := ( AND( itemAction, ODA_SELECT ) == ODA_SELECT )
 
    IF ! lDrawEntire  .AND. ! loFocus .AND. ! loSelect
+
       RETURN ( 1 )
    ENDIF
 
@@ -151,9 +155,9 @@ FUNCTION OwnButtonPaint( pdis )
    i := AScan ( _HMG_aControlHandles, hWnd )
 
    IF ( i <= 0 .OR. _HMG_aControlType[ i ] <> "OBUTTON" )
+
       RETURN ( 1 )
    ENDIF
-
 
    nCRLF := CountIt( _HMG_aControlCaption[ i ] ) + 1
    lDisabled := AND( itemState, ODS_DISABLED ) == ODS_DISABLED
@@ -162,7 +166,6 @@ FUNCTION OwnButtonPaint( pdis )
    lFlat := AND( _HMG_aControlSpacing[ i ], OBT_FLAT ) == OBT_FLAT
    lNotrans := AND( _HMG_aControlSpacing[ i ], OBT_NOTRANSPARENT ) == OBT_NOTRANSPARENT
    //   lnoxpstyle := AND( _HMG_aControlSpacing [ i ], OBT_NOXPSTYLE ) == OBT_NOXPSTYLE
-
 
    IF ! lNotrans
       rgbTrans := NIL
@@ -176,7 +179,6 @@ FUNCTION OwnButtonPaint( pdis )
 
    ENDIF
 
-
    hOldFont := SelectObject( hDC, _HMG_aControlFontHandle[ i ] )
    aMetr := GetTextMetric( hDC )
    oldBkMode := SetBkMode( hDC, TRANSPARENT )
@@ -189,7 +191,6 @@ FUNCTION OwnButtonPaint( pdis )
    ENDIF
 
    IF lSelected                               // click
-
 
    ELSEIF ! ( _HMG_aControlRangeMax[ i ] == 1 )      //normal
       aFill1 := aOBClr[ iObClr, 3 ]
@@ -211,7 +212,7 @@ FUNCTION OwnButtonPaint( pdis )
 
       IF !Empty( aButMisc[ 2 ] )     //Picture box
 
-         DeleteObject ( _hmg_aControlBrushhandle[ i ] )
+         DELETEObject ( _hmg_aControlBrushhandle[ i ] )
          nnnn := _SetBtnPicture (  hDC, _HMG_aControlPicture[ i ] )
          _hmg_aControlBrushHandle[ i ] := nnnn
 
@@ -242,7 +243,7 @@ FUNCTION OwnButtonPaint( pdis )
       _HMG_aControlFontColor[ i ] := aOBClr[ iObClr, 8 ]
 
       IF !Empty( aButMisc[ 2 ] )
-         DeleteObject ( _hmg_aControlBrushhandle[ i ] )
+         DELETEObject ( _hmg_aControlBrushhandle[ i ] )
          nnnn := _SetBtnPicture (  hDC, aButMisc[ 2 ] )
          _hmg_aControlBrushHandle[ i ] := nnnn
       ENDIF
@@ -255,12 +256,6 @@ FUNCTION OwnButtonPaint( pdis )
    ENDIF
 
    SetTextColor( hDC, _HMG_aControlFontColor[ i, 1 ], _HMG_aControlFontColor[ i, 2 ], _HMG_aControlFontColor[ i, 3 ] )
-
-
-
-   ////////////////////////////////////////////////////////////////////////////////////////
-
-
 
    IF ! Empty( _HMG_aControlBrushHandle[ i ] )
       IF _HMG_aControlMiscData1[ i ] == 0
@@ -452,11 +447,13 @@ FUNCTION OwnButtonPaint( pdis )
       ENDIF
    ENDIF
 
-RETURN ( 1 )
+   RETURN ( 1 )
 
-//-------------------------------------------------------------\\
+   //-------------------------------------------------------------\\
+
 STATIC FUNCTION CountIt( cText )
-//-------------------------------------------------------------\\
+
+   //-------------------------------------------------------------\\
    LOCAL nPoz, nCount := 0
 
    IF At( CRLF, cText ) > 0
@@ -466,4 +463,5 @@ STATIC FUNCTION CountIt( cText )
       ENDDO
    ENDIF
 
-RETURN nCount
+   RETURN nCount
+

@@ -1,47 +1,47 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
- "Harbour GUI framework for Win32"
-  Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-  Copyright 2001 Antonio Linares <alinares@fivetech.com>
- www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
- "Harbour Project"
- Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
- "WHAT32"
- Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
- "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -68,6 +68,7 @@ FUNCTION easyreport
    MEMVAR cfilerepo
 
    PUBLIC _npage, angrpby, wfield, nlmargin, nfsize, ISEVERYPAGE, wfield1, crompe
+
    ldatetimestamp := !ldatetimestamp
 
    nlen := Len( afields )
@@ -124,7 +125,7 @@ FUNCTION easyreport
             nran := random( 9999999 )
             cfilerepo := 'T' + hb_ntos( nran ) + '.prn'
          ENDDO
-         SET PRINTER to &cfilerepo
+         SET PRINTER TO &cfilerepo
          SET DEVICE TO PRINT
       ELSE
          SET DEVICE TO PRINT
@@ -151,7 +152,8 @@ FUNCTION easyreport
          ENDIF
       ENDIF
       IF HBPRNERROR != 0
-         RETURN nil
+
+         RETURN NIL
       ENDIF
 
       SET PAGE PAPERSIZE npapersize
@@ -198,7 +200,7 @@ FUNCTION easyreport
             "Max. number of rows =" + Str( HBPRNMAXROW, 3 ) + ', selected ' + Str( nlpp, 3 ) + CRLF + ;
             "Max. number of cols =" + Str( HBPRNMAXCOL, 3 ) + ', selected ' + Str( ncpl, 3 ), "Error" )
       ENDIF
-    
+
       START DOC
       START PAGE
    ENDIF
@@ -247,7 +249,7 @@ FUNCTION easyreport
             wfield := &wfield       // value
          ENDIF
          cType := ValType( wfield )
- 
+
          IF lmode
             DO CASE
             CASE cType == 'C'
@@ -310,8 +312,8 @@ FUNCTION easyreport
 
       &cfile->( dbSkip() )
    ENDDO
-// FIN DE LA IMPRESIÓN DEL ÚLTIMO REGISTRO DE LA TABLA
-// IMPRESIÓN DEL SUBTOTAL DEL ULTIMO GRUPO DE LA TABLA EN CASO DE HABER SUBTOTALES
+   // FIN DE LA IMPRESIÓN DEL ÚLTIMO REGISTRO DE LA TABLA
+   // IMPRESIÓN DEL SUBTOTAL DEL ULTIMO GRUPO DE LA TABLA EN CASO DE HABER SUBTOTALES
    IF swt == 1 // EXISTE COLUMNA DE TOTALES
       ncol := nlmargin + 1
       imp_SUBTOTALES( @nlin, @ncol, @lmode, @swt, @grpby )
@@ -357,13 +359,13 @@ FUNCTION easyreport
          SET DEVICE TO SCREEN
       ENDIF
    ELSE
-      END PAGE
-      END DOC
-      RELEASE PRINTSYS
-   ENDIF
-   RELEASE _npage, angrpby, wfield, nlmargin, nfsize, ISEVERYPAGE, wfield1, crompe
+   END PAGE
+END DOC
+RELEASE PRINTSYS
+ENDIF
+RELEASE _npage, angrpby, wfield, nlmargin, nfsize, ISEVERYPAGE, wfield1, crompe
 
-RETURN Nil
+RETURN NIL
 
 STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grpby, chdrgrp )
 
@@ -502,7 +504,7 @@ STATIC FUNCTION headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grp
 
    ENDIF
 
-RETURN nlin
+   RETURN nlin
 
 STATIC FUNCTION mypreview( cfilerepo )
 
@@ -516,18 +518,18 @@ STATIC FUNCTION mypreview( cfilerepo )
    ENDIF
 
    DEFINE WINDOW PRINT_PREVIEW ;
-      AT 10, 10 ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'Preview ----- ' + WFILEREPO ;
-      MODAL
+         AT 10, 10 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Preview ----- ' + WFILEREPO ;
+         MODAL
 
-   @ 0, 0 EDITBOX EDIT_P ;
-      WIDTH 630 ;
-      HEIGHT 440 ;
-      VALUE wr ;
-      READONLY ;
-      FONT 'Courier new' ;
-      SIZE 10
+      @ 0, 0 EDITBOX EDIT_P ;
+         WIDTH 630 ;
+         HEIGHT 440 ;
+         VALUE wr ;
+         READONLY ;
+         FONT 'Courier new' ;
+         SIZE 10
 
    END WINDOW
    CENTER WINDOW PRINT_PREVIEW
@@ -540,7 +542,7 @@ STATIC FUNCTION mypreview( cfilerepo )
       ERASE &WFILEREPO
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
 STATIC FUNCTION JUSTIFICALINEA( WPR_LINE, WTOPE )
 
@@ -557,7 +559,7 @@ STATIC FUNCTION JUSTIFICALINEA( WPR_LINE, WTOPE )
       ENDIF
    NEXT I
 
-RETURN WPR_LINE
+   RETURN WPR_LINE
 
 FUNCTION extreport( cfilerep )
 
@@ -568,10 +570,12 @@ FUNCTION extreport( cfilerep )
 
    IF .NOT. File( cfilerep + '.rpt' )
       msginfo( '(' + cfilerep + '.rpt) can not found' )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    PUBLIC aline := {}
+
    creport := MemoRead( cfilerep + '.rpt' )
    nContlin := MLCount( cReport )
    FOR i := 1 TO nContlin
@@ -589,14 +593,16 @@ FUNCTION extreport( cfilerep )
    IF Len( afields ) == 0
       msginfo( 'Fields not defined' )
       RELEASE aline
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    afields := &afields
    awidths := leadato( 'REPORT', 'WIDTHS', '{}' )
    IF Len( awidths ) == 0
       msginfo( 'Widths not defined' )
       RELEASE aline
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    awidths := &awidths
    atotals := leadato( 'REPORT', 'TOTALS', NIL )
@@ -657,7 +663,7 @@ FUNCTION extreport( cfilerep )
    easyreport( ctitle, aheaders1, aheaders2, afields, awidths, atotals, nlpp, ldos, lpreview, cgraphic, nfi, nci, nff, ncf, lmul, cgrpby, chdrgrp, llandscape, ncpl, lselect, calias, nllmargin, aformats, npapersize, ntoprow, lnodatetimestamp )
    RELEASE aline
 
-RETURN Nil
+   RETURN NIL
 
 STATIC FUNCTION leadato( cName, cPropmet, cDefault )
 
@@ -678,13 +684,14 @@ STATIC FUNCTION leadato( cName, cPropmet, cDefault )
                IF Right( cfvalue, 1 ) = ';'
                   cfvalue := SubStr( cfvalue, 1, Len( cfvalue ) - 1 )
                ENDIF
+
                RETURN AllTrim( cfvalue )
             ENDIF
          ENDIF
       ENDIF
    NEXT i
 
-RETURN cDefault
+   RETURN cDefault
 
 STATIC FUNCTION leaimage( cName, cPropmet, cDefault )
 
@@ -705,10 +712,11 @@ STATIC FUNCTION leaimage( cName, cPropmet, cDefault )
       ENDIF
    NEXT i
    IF sw1 == 1
+
       RETURN SubStr( aline[lin], npos1, npos2 - npos1 + 1 )
    ENDIF
 
-RETURN cDefault
+   RETURN cDefault
 
 STATIC FUNCTION leadatoh( cName, cPropmet, cDefault, npar )
 
@@ -734,10 +742,11 @@ STATIC FUNCTION leadatoh( cName, cPropmet, cDefault, npar )
       ENDIF
    NEXT i
    IF sw1 == 1
+
       RETURN SubStr( aline[lin], npos1, npos2 - npos1 + 1 )
    ENDIF
 
-RETURN cDefault
+   RETURN cDefault
 
 STATIC FUNCTION leadatologic( cName, cPropmet, cDefault )
 
@@ -749,27 +758,31 @@ STATIC FUNCTION leadatologic( cName, cPropmet, cDefault )
       ELSE
          IF sw == 1
             IF At( Upper( cPropmet ) + ' ', Upper( aline[i] ) ) > 0
+
                RETURN .T.
             ENDIF
             IF Len( Trim( aline[i] ) ) == 0
+
                RETURN cDefault
             ENDIF
          ENDIF
       ENDIF
    NEXT i
 
-RETURN cDefault
+   RETURN cDefault
 
 STATIC FUNCTION clean( cfvalue )
+
    cfvalue := StrTran( cfvalue, '"', '' )
    cfvalue := StrTran( cfvalue, "'", "" )
 
-RETURN cfvalue
+   RETURN cfvalue
 
 STATIC FUNCTION learowi( cname, npar )
 
    LOCAL i, npos1, nrow := '0'
-// Unused Parameter
+
+   // Unused Parameter
    HB_SYMBOL_UNUSED( cname )
 
    FOR i := 1 TO Len( aline )
@@ -780,12 +793,13 @@ STATIC FUNCTION learowi( cname, npar )
       ENDIF
    NEXT i
 
-RETURN nrow
+   RETURN nrow
 
 STATIC FUNCTION leacoli( cname, npar )
 
    LOCAL i, npos, ncol := '0'
-// Unused Parameter
+
+   // Unused Parameter
    HB_SYMBOL_UNUSED( cname )
 
    FOR i := 1 TO Len( aline )
@@ -796,7 +810,7 @@ STATIC FUNCTION leacoli( cname, npar )
       ENDIF
    NEXT i
 
-RETURN ncol
+   RETURN ncol
 
 STATIC PROCEDURE imp_SUBTOTALES ( nlin, ncol, lmode, swt, grpby )
 
@@ -858,11 +872,11 @@ STATIC PROCEDURE imp_SUBTOTALES ( nlin, ncol, lmode, swt, grpby )
    IF nlin > nlpp
       nlin := ntoprow
       IF .NOT. ldos
-         END PAGE
-         START PAGE
-      ENDIF
-      nlin := headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grpby, chdrgrp )
+      END PAGE
+      START PAGE
    ENDIF
+   nlin := headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grpby, chdrgrp )
+ENDIF
 
 RETURN
 
@@ -871,17 +885,18 @@ STATIC PROCEDURE imp_pagina( nlin, lmode, grpby, chdrgrp )
    IF nlin > nlpp
       nlin := ntoprow
       IF .NOT. ldos
-         END PAGE
-         START PAGE
-         IF cgraphic <> NIL .AND. lmul .AND. !ldos
-            IF .NOT. File( cgraphic )
-               msgstop( 'Graphic file is not found', 'Error' )
-            ELSE
-               @nfi, nci + nlmargin PICTURE cgraphic SIZE nff - nfi - 4, ncf - nci - 3
-            ENDIF
+      END PAGE
+      START PAGE
+      IF cgraphic <> NIL .AND. lmul .AND. !ldos
+         IF .NOT. File( cgraphic )
+            msgstop( 'Graphic file is not found', 'Error' )
+         ELSE
+            @nfi, nci + nlmargin PICTURE cgraphic SIZE nff - nfi - 4, ncf - nci - 3
          ENDIF
       ENDIF
-      nlin := headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grpby, chdrgrp )
    ENDIF
+   nlin := headers( aheaders1, aheaders2, awidths, nlin, ctitle, lmode, grpby, chdrgrp )
+ENDIF
 
 RETURN
+

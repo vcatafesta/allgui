@@ -1,246 +1,219 @@
 /******
-*
 * MINIGUI - Harbour Win32 GUI library Demo
-*
 * Demo functions for show system paths
-* 
 * (c) 2008 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
-*
 * Revised by Grigory Filatov <gfilatov@inbox.ru>
-* 
 */
 
 #include "MiniGUI.ch"
 
-
-Static cCurDir
-
+STATIC cCurDir
 
 /******
-*
 *       Варианты представления системных путей
-*
 */
 
-Procedure Main
+PROCEDURE Main
 
-Set font to 'Tahoma', 9
+   SET font to 'Tahoma', 9
 
-cCurDir := GetCurrentFolder()
+   cCurDir := GetCurrentFolder()
 
-Load window Demo as wMain
-IF IsVistaOrLater()
-   wMain.Width := (wMain.Width) + GetBorderWidth()
-   wMain.Height := (wMain.Height) + GetBorderHeight()
-ENDIF
+   LOAD WINDOW Demo as wMain
+   IF IsVistaOrLater()
+      wMain.Width := (wMain.Width) + GetBorderWidth()
+      wMain.Height := (wMain.Height) + GetBorderHeight()
+   ENDIF
 
-wMain.BtnTextBox_1.Value := GetSpecialFolder( CSIDL_APPDATA )
+   wMain.BtnTextBox_1.Value := GetSpecialFolder( CSIDL_APPDATA )
 
-wMain.Label_3.Value := ''          // Компактная форма
-wMain.Label_6.Value := ''          // Сокращённое представление (в формате 8.3)
+   wMain.Label_3.Value := ''          // Компактная форма
+   wMain.Label_6.Value := ''          // Сокращённое представление (в формате 8.3)
 
-wMain.Label_7.Value := ( wMain.Label_7.Value + ' ' + cCurDir )
- 
-wMain.Label_8.Value := ''          // Относительный маршрут
+   wMain.Label_7.Value := ( wMain.Label_7.Value + ' ' + cCurDir )
 
-wMain.Spinner_1.Value := 30
+   wMain.Label_8.Value := ''          // Относительный маршрут
 
-MakePaths()
- 
-Center window wMain
-Activate window wMain
+   wMain.Spinner_1.Value := 30
 
-Return
+   MakePaths()
 
-****** End of Main ******
+   CENTER WINDOW wMain
+   ACTIVATE WINDOW wMain
 
+   RETURN
 
-/******
-*
-*       SelectDir()
-*
-*       Выбор каталога для сканирования
-*
-*/
+   ****** End of Main ******
 
-Static Procedure SelectDir
-Local cPath := AllTrim( wMain.BtnTextBox_1.Value )
+   /******
+   *       SelectDir()
+   *       Выбор каталога для сканирования
+   */
 
-If !Empty( cPath := GetFolder( 'Choose a directory', cPath ) )
-   wMain.BtnTextBox_1.Value := cPath
-Endif
+STATIC PROCEDURE SelectDir
 
-Return
+   LOCAL cPath := AllTrim( wMain.BtnTextBox_1.Value )
 
-****** End of SelectDir ******
+   IF !Empty( cPath := GetFolder( 'Choose a directory', cPath ) )
+      wMain.BtnTextBox_1.Value := cPath
+   ENDIF
 
+   RETURN
 
-/******
-*
-*       MakePaths()
-*
-*       Формирование представлений путей
-*
-*/
+   ****** End of SelectDir ******
 
-Static Procedure MakePaths
+   /******
+   *       MakePaths()
+   *       Формирование представлений путей
+   */
 
-ShowCompactPath()
-ShowShortPath()
-ShowRelPath()
+STATIC PROCEDURE MakePaths
 
-Return
+   ShowCompactPath()
+   ShowShortPath()
+   ShowRelPath()
 
-****** End of MakePaths ******
- 
+   RETURN
 
-/******
-*
-*       ShowCompactPath()
-*
-*       Сжатая форма представления маршрута
-*
-*/
+   ****** End of MakePaths ******
 
-Static Procedure ShowCompactPath
-Local cPath := wMain.BtnTextBox_1.Value, ;
-      nLen  := wMain.Spinner_1.Value 
+   /******
+   *       ShowCompactPath()
+   *       Сжатая форма представления маршрута
+   */
 
-If ( ( nLen < GetProperty( 'wMain', 'Spinner_1', 'RangeMin' ) ) .or. ;
-     ( nLen > Getproperty( 'wMain', 'Spinner_1', 'RangeMax' ) )      ;
-   )  
-   wMain.Spinner_1.Refresh
-Endif
+STATIC PROCEDURE ShowCompactPath
 
-If !Empty( cPath )
-   wMain.Label_3.Value := _GetCompactPath( cPath, nLen )
-Endif
+   LOCAL cPath := wMain.BtnTextBox_1.Value, ;
+      nLen  := wMain.Spinner_1.Value
 
-Return
+   IF ( ( nLen < GetProperty( 'wMain', 'Spinner_1', 'RangeMin' ) ) .or. ;
+         ( nLen > Getproperty( 'wMain', 'Spinner_1', 'RangeMax' ) )      ;
+         )
+      wMain.Spinner_1.Refresh
+   ENDIF
 
-****** End of ShowCompactPath ******
+   IF !Empty( cPath )
+      wMain.Label_3.Value := _GetCompactPath( cPath, nLen )
+   ENDIF
 
+   RETURN
 
-/******
-*
-*       ShowShortPath()
-*
-*       Сокращённое (формат 8.3) представление представлений путей
-*
-*/
+   ****** End of ShowCompactPath ******
 
-Static Procedure ShowShortPath
-Local cPath := wMain.BtnTextBox_1.Value
+   /******
+   *       ShowShortPath()
+   *       Сокращённое (формат 8.3) представление представлений путей
+   */
 
-If !Empty( cPath )
-   wMain.Label_6.Value := _GetShortPathName( cPath )
-Endif
+STATIC PROCEDURE ShowShortPath
 
-Return
+   LOCAL cPath := wMain.BtnTextBox_1.Value
 
-****** End of ShowShortPath ******
+   IF !Empty( cPath )
+      wMain.Label_6.Value := _GetShortPathName( cPath )
+   ENDIF
 
+   RETURN
 
-/******
-*
-*       ShowRelPath()
-*
-*       Отображение маршрута относительно текущего каталога
-*
-*/
+   ****** End of ShowShortPath ******
 
-Static Procedure ShowRelPath
-Local cPath := wMain.BtnTextBox_1.Value
+   /******
+   *       ShowRelPath()
+   *       Отображение маршрута относительно текущего каталога
+   */
 
-If !Empty( cPath )
-   wMain.Label_8.Value := RelativePath( cCurDir, cPath )
-Endif
+STATIC PROCEDURE ShowRelPath
 
-Return
+   LOCAL cPath := wMain.BtnTextBox_1.Value
 
-****** End of ShowRelPath ******
+   IF !Empty( cPath )
+      wMain.Label_8.Value := RelativePath( cCurDir, cPath )
+   ENDIF
 
+   RETURN
 
-/******
-*
-*       RelativePath( cCurPath, cTargetPath ) --> cRelPath
-*
-*       Относительное выражение пути поиска
-*
-*/
+   ****** End of ShowRelPath ******
 
-Static Function RelativePath( cCurPath, cTargetPath )
-Local aCurrPath    := HB_ATokens( cCurPath, '\' )   , ;
+   /******
+   *       RelativePath( cCurPath, cTargetPath ) --> cRelPath
+   *       Относительное выражение пути поиска
+   */
+
+STATIC FUNCTION RelativePath( cCurPath, cTargetPath )
+
+   LOCAL aCurrPath    := HB_ATokens( cCurPath, '\' )   , ;
       aTargetPath  := HB_ATokens( cTargetPath, '\' ), ;
       cRelPath     := ''                            , ;
       nLen                                          , ;
-      Cycle 
+      Cycle
 
-If ( Upper( cCurPath ) == Upper( cTargetPath ) ) 
+   IF ( Upper( cCurPath ) == Upper( cTargetPath ) )
 
-   // Каталоги одинаковы
-   Return ''
-   
-   // ... или можно возвращать текущий маршрут 
-   // Return cCurPath
+      // Каталоги одинаковы
 
-Endif
+      RETURN ''
 
-// При построении относительного пути доступа учитываются следующие варианты:
-// 1) Каталоги находятся на разных дисках - можно использовать только абсолютный путь
-// 2) Целевой каталог подчинён текущему (ниже уровнем)
-// 3) Целевой каталог находится в той же ветви, что и текущий, но на более высоком
-//    уровне
-// 4) Текущий и целевой каталоги находятся на одном диске, но в разных ветвях. 
+      // ... или можно возвращать текущий маршрут
+      // Return cCurPath
 
-If ( Upper( aCurrPath[ 1 ] ) == Upper( aTargetPath[ 1 ] ) )       // Диск общий?
+   ENDIF
 
-   // Пытаемся избавиться от общей части имён каталогов
-   
-   Do while .T.
-   
-      If ( Empty( aCurrPath ) .or. Empty( aTargetPath ) )
-         Exit
-      Endif
-      
-      If ( Upper( aCurrPath[ 1 ] ) == Upper( aTargetPath[ 1 ] ) )
-         
-         ADel( aCurrPath, 1 )
-         ASize( aCurrPath, ( Len( aCurrPath ) - 1 ) )
+   // При построении относительного пути доступа учитываются следующие варианты:
+   // 1) Каталоги находятся на разных дисках - можно использовать только абсолютный путь
+   // 2) Целевой каталог подчинён текущему (ниже уровнем)
+   // 3) Целевой каталог находится в той же ветви, что и текущий, но на более высоком
+   //    уровне
+   // 4) Текущий и целевой каталоги находятся на одном диске, но в разных ветвях.
 
-         ADel( aTargetPath, 1 )
-         ASize( aTargetPath, ( Len( aTargetPath ) - 1 ) )
-               
-      Else
-         Exit
-      Endif
-      
-   Enddo
-   
-   // Если в массиве описания текущего каталога остались элементы, то к
-   // определению относительного пути добавляем соответсвующее число переходов
-   // на верхний уровень и остаток описания целевого каталога
-   
-   If !Empty( aCurrPath )
-      cRelPath += Replicate( '..\', Len( aCurrPath ) )
-   Endif
-   
-   If ( ( nLen := Len( aTargetPath ) ) > 0 )
-      For Cycle := 1 to nLen
-         cRelPath += ( aTargetPath[ Cycle ] + '\' )
-      Next
-   Endif
-      
-Else
-  cRelPath := cTargetPath        // Каталоги на разных дисках
-  
-Endif
+   IF ( Upper( aCurrPath[ 1 ] ) == Upper( aTargetPath[ 1 ] ) )       // Диск общий?
 
-If ( Right( cRelPath, 1 ) == '\' )
-   cRelPath := Left( cRelPath, ( Len( cRelPath ) - 1 ) )
-Endif
+      // Пытаемся избавиться от общей части имён каталогов
 
-Return cRelPath
+      DO WHILE .T.
 
+         IF ( Empty( aCurrPath ) .or. Empty( aTargetPath ) )
+            EXIT
+         ENDIF
 
-****** End of RelativePath ******
+         IF ( Upper( aCurrPath[ 1 ] ) == Upper( aTargetPath[ 1 ] ) )
+
+            ADel( aCurrPath, 1 )
+            ASize( aCurrPath, ( Len( aCurrPath ) - 1 ) )
+
+            ADel( aTargetPath, 1 )
+            ASize( aTargetPath, ( Len( aTargetPath ) - 1 ) )
+
+         ELSE
+            EXIT
+         ENDIF
+
+      ENDDO
+
+      // Если в массиве описания текущего каталога остались элементы, то к
+      // определению относительного пути добавляем соответсвующее число переходов
+      // на верхний уровень и остаток описания целевого каталога
+
+      IF !Empty( aCurrPath )
+         cRelPath += Replicate( '..\', Len( aCurrPath ) )
+      ENDIF
+
+      IF ( ( nLen := Len( aTargetPath ) ) > 0 )
+         FOR Cycle := 1 to nLen
+            cRelPath += ( aTargetPath[ Cycle ] + '\' )
+         NEXT
+      ENDIF
+
+   ELSE
+      cRelPath := cTargetPath        // Каталоги на разных дисках
+
+   ENDIF
+
+   IF ( Right( cRelPath, 1 ) == '\' )
+      cRelPath := Left( cRelPath, ( Len( cRelPath ) - 1 ) )
+   ENDIF
+
+   RETURN cRelPath
+
+   ****** End of RelativePath ******
+

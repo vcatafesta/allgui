@@ -1,14 +1,16 @@
 /*
- * $Id: clocks.prg,v 1.1 2017/07/09 20:08:04 guerra000 Exp $
- */
+* $Id: clocks.prg,v 1.1 2017/07/09 20:08:04 guerra000 Exp $
+*/
 /*
- *  Simple multi-notifyicon sample.
- */
+*  Simple multi-notifyicon sample.
+*/
 
 #include "oohg.ch"
 
 PROCEDURE MAIN
-LOCAL oWnd
+
+   LOCAL oWnd
+
    DEFINE WINDOW Main OBJ oWnd TITLE "Alarm Manager"
       DEFINE MAIN MENU
          ITEM "New Alarm"   ACTION NewAlarm( oWnd )
@@ -16,10 +18,13 @@ LOCAL oWnd
       END MENU
    END WINDOW
    ACTIVATE WINDOW Main
-RETURN
+
+   RETURN
 
 PROCEDURE NewAlarm( oWnd )
-LOCAL oWndAlarm
+
+   LOCAL oWndAlarm
+
    DEFINE WINDOW NewAlarm OBJ oWndAlarm MODAL WIDTH 165 HEIGHT 83 CLIENTAREA
       @  12, 10 LABEL Message     VALUE "Seconds to wait" AUTOSIZE
       @  10,105 TEXTBOX Seconds   WIDTH 50 NUMERIC VALUE 60
@@ -29,17 +34,20 @@ LOCAL oWndAlarm
    END WINDOW
    CENTER WINDOW NewAlarm
    ACTIVATE WINDOW NewAlarm
-RETURN
+
+   RETURN
 
 PROCEDURE ActivateAlarm( oWnd, oWndAlarm )
-LOCAL nSeconds, aAlarmInfo
+
+   LOCAL nSeconds, aAlarmInfo
+
    nSeconds := oWndAlarm:Seconds:Value
    IF nSeconds < 1
       MsgInfo( "Must specify any amount of seconds" )
+
       RETURN
    ENDIF
    oWndAlarm:Release()
-   //
    // { Notify icon object , Timer object , Seconds left , oWnd }
    aAlarmInfo := { nil, nil, nSeconds + 1, oWnd }
    aAlarmInfo[ 1 ] := oWnd:AddNotifyIcon( "", "Alarm" )
@@ -48,14 +56,18 @@ LOCAL nSeconds, aAlarmInfo
    END MENU
    UpdateCounter( aAlarmInfo )
    DEFINE TIMER 0 OF ( oWnd ) OBJ aAlarmInfo[ 2 ] INTERVAL 1000 ACTION UpdateCounter( aAlarmInfo )
-RETURN
+
+   RETURN
 
 PROCEDURE ReleaseCounter( aAlarmInfo )
+
    aAlarmInfo[ 2 ]:Release()
    aAlarmInfo[ 1 ]:Release()
-RETURN
+
+   RETURN
 
 PROCEDURE UpdateCounter( aAlarmInfo )
+
    aAlarmInfo[ 3 ]--
    IF aAlarmInfo[ 3 ] < 1
       ReleaseCounter( aAlarmInfo )
@@ -64,7 +76,8 @@ PROCEDURE UpdateCounter( aAlarmInfo )
       aAlarmInfo[ 1 ]:HIcon := CreateIcon( aAlarmInfo[ 4 ]:hWnd, aAlarmInfo[ 3 ] )
       aAlarmInfo[ 1 ]:ToolTip := LTRIM( STR( aAlarmInfo[ 3 ] ) ) + " second(s) remaining"
    ENDIF
-RETURN
+
+   RETURN
 
 #pragma BEGINDUMP
 #include <windows.h>
@@ -294,7 +307,7 @@ void GeneraNumeros( HDC hdc2, HDC hdc3 )
    // PintaBits( hdc2, hdc3, 56, 15,  1,  2,  4,  4,  4,  4 );
    // PintaBits( hdc2, hdc3, 64,  6,  9,  9,  6,  9,  9,  6 );
    // PintaBits( hdc2, hdc3, 72,  6,  9,  9,  7,  1,  1, 14 );
-   
+
 }
 
 HBITMAP InicializaNumeros( HWND hWnd, int iColor1, int iColor2 )
@@ -394,3 +407,4 @@ HB_FUNC( CREATEICON )   // ( hWnd, nTiempo )
 }
 
 #pragma ENDDUMP
+

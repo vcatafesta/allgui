@@ -1,17 +1,13 @@
 /*
- * $Id: hcombo.prg,v 1.45 2008/09/20 23:48:06 fperillo Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCombo class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCheckComboEx class
- *
- * Copyright 2007 Luiz Rafale Culik Guimaraes (Luiz at xharbour.com.br)
- * www - http://kresin.belgorod.su
+* $Id: hcombo.prg,v 1.45 2008/09/20 23:48:06 fperillo Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HCombo class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
+* HWGUI - Harbour Win32 GUI library source code:
+* HCheckComboEx class
+* Copyright 2007 Luiz Rafale Culik Guimaraes (Luiz at xharbour.com.br)
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -34,7 +30,8 @@ HB_FUNC(COPYDATA)
 
 CLASS HComboBox INHERIT HControl
 
-   CLASS VAR winclass   INIT "COMBOBOX"
+CLASS VAR winclass   INIT "COMBOBOX"
+
    DATA  aItems
    DATA  bSetGet
    DATA  value    INIT 1
@@ -47,94 +44,103 @@ CLASS HComboBox INHERIT HControl
    DATA  lText    INIT .F.
    DATA  lEdit    INIT .F.
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-                  aItems,oFont,bInit,bSize,bPaint,bChange,ctooltip,lEdit,lText,bGFocus,tcolor,bcolor,bLFocus, bIChange )
-   METHOD Activate()
-   METHOD Redefine( oWnd,nId,vari,bSetGet,aItems,oFont,bInit,bSize,bDraw,bChange,ctooltip,bGFocus,bLFocus, bIChange )
-   METHOD Init( aCombo, nCurrent )
-   METHOD Refresh()
-   METHOD Setitem( nPos )
-   METHOD GetValue()
-   METHOD AddItem(cItem)
-   METHOD DeleteItem(nPos)
+METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+      aItems,oFont,bInit,bSize,bPaint,bChange,ctooltip,lEdit,lText,bGFocus,tcolor,bcolor,bLFocus, bIChange )
+
+METHOD Activate()
+
+METHOD Redefine( oWnd,nId,vari,bSetGet,aItems,oFont,bInit,bSize,bDraw,bChange,ctooltip,bGFocus,bLFocus, bIChange )
+
+METHOD Init( aCombo, nCurrent )
+
+METHOD Refresh()
+
+METHOD Setitem( nPos )
+
+METHOD GetValue()
+
+METHOD AddItem(cItem)
+
+METHOD DeleteItem(nPos)
+
 ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,oFont, ;
-                  bInit,bSize,bPaint,bChange,ctooltip,lEdit,lText,bGFocus,tcolor,bcolor,bLFocus ,bIChange ) CLASS HComboBox
+      bInit,bSize,bPaint,bChange,ctooltip,lEdit,lText,bGFocus,tcolor,bcolor,bLFocus ,bIChange ) CLASS HComboBox
 
-   if lEdit == Nil; lEdit := .f.; endif
-   if lText == Nil; lText := .f.; endif
-   //if bValid != NIL; ::bValid := bValid; endif
+   IF lEdit == Nil; lEdit := .f.; endif
+      IF lText == Nil; lText := .f.; endif
+         //if bValid != NIL; ::bValid := bValid; endif
 
-   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),Iif( lEdit,CBS_DROPDOWN,CBS_DROPDOWNLIST )+WS_TABSTOP )
-   Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctooltip,tcolor,bcolor )
+         nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),Iif( lEdit,CBS_DROPDOWN,CBS_DROPDOWNLIST )+WS_TABSTOP )
+         Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctooltip,tcolor,bcolor )
 
-   ::lEdit := lEdit
-   ::lText := lText
+         ::lEdit := lEdit
+         ::lText := lText
 
-   if lEdit
-      ::lText := .t.
-   endif
-
-   if ::lText
-      ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
-   else
-      ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
-   endif
-
-   ::bSetGet := bSetGet
-   ::aItems  := aItems
-   ::Activate()
-
-   ::bChangeSel := bChange
-   ::bGetFocus := bGFocus
-   ::bLostFocus := bLfocus
-
-   IF bSetGet != Nil
-      IF bGFocus != Nil
-         ::lnoValid := .T.
-         ::oParent:AddEvent( CBN_SETFOCUS,self,{|o,id|__When(o:FindControl(id))},,"onGotFocus" )
+         IF lEdit
+            ::lText := .t.
          ENDIF
-      // By Luiz Henrique dos Santos (luizhsantos@gmail.com) 03/06/2006
-      ::oParent:AddEvent( CBN_KILLFOCUS, self, { | o, id | __Valid( o:FindControl( id ) ) },.F.,"onLostFocus" )
-      //---------------------------------------------------------------------------
-   ELSE
-     IF bGFocus != Nil
-       ::lnoValid := .T.
-       ::oParent:AddEvent( CBN_SETFOCUS,self,{|o,id|__When(o:FindControl(id))},,"onGotGocus" )
-     ENDIF
-     ::oParent:AddEvent( CBN_KILLFOCUS, self, {|o,id|__Valid(o:FindControl(id))},,"onLostFocus" )
-   ENDIF
-   IF bChange != Nil .OR. bSetGet != Nil
-      ::oParent:AddEvent( CBN_SELCHANGE,self,{|o,id|__onChange(o:FindControl(id))},,"onChange" )
-   ENDIF
 
-   IF bIChange != Nil .AND. ::lEdit
-      ::bchangeInt := bIChange
-      ::oParent:AddEvent( CBN_EDITUPDATE ,self,{|o,id|__InteractiveChange(o:FindControl(id))},,"interactiveChange" )
-   ENDIF
+         IF ::lText
+            ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
+         ELSE
+            ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
+         ENDIF
 
+         ::bSetGet := bSetGet
+         ::aItems  := aItems
+         ::Activate()
 
-Return Self
+         ::bChangeSel := bChange
+         ::bGetFocus := bGFocus
+         ::bLostFocus := bLfocus
+
+         IF bSetGet != Nil
+            IF bGFocus != Nil
+               ::lnoValid := .T.
+               ::oParent:AddEvent( CBN_SETFOCUS,self,{|o,id|__When(o:FindControl(id))},,"onGotFocus" )
+            ENDIF
+            // By Luiz Henrique dos Santos (luizhsantos@gmail.com) 03/06/2006
+            ::oParent:AddEvent( CBN_KILLFOCUS, self, { | o, id | __Valid( o:FindControl( id ) ) },.F.,"onLostFocus" )
+         ELSE
+            IF bGFocus != Nil
+               ::lnoValid := .T.
+               ::oParent:AddEvent( CBN_SETFOCUS,self,{|o,id|__When(o:FindControl(id))},,"onGotGocus" )
+            ENDIF
+            ::oParent:AddEvent( CBN_KILLFOCUS, self, {|o,id|__Valid(o:FindControl(id))},,"onLostFocus" )
+         ENDIF
+         IF bChange != Nil .OR. bSetGet != Nil
+            ::oParent:AddEvent( CBN_SELCHANGE,self,{|o,id|__onChange(o:FindControl(id))},,"onChange" )
+         ENDIF
+
+         IF bIChange != Nil .AND. ::lEdit
+            ::bchangeInt := bIChange
+            ::oParent:AddEvent( CBN_EDITUPDATE ,self,{|o,id|__InteractiveChange(o:FindControl(id))},,"interactiveChange" )
+         ENDIF
+
+         RETURN Self
 
 METHOD Activate CLASS HComboBox
+
    IF !empty( ::oParent:handle )
       ::handle := CreateCombo( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Redefine( oWndParent,nId,vari,bSetGet,aItems,oFont,bInit,bSize,bPaint, ;
-                  bChange,ctooltip,bGFocus  ) CLASS HComboBox
+      bChange,ctooltip,bGFocus  ) CLASS HComboBox
 
    Super:New( oWndParent,nId,0,0,0,0,0,oFont,bInit,bSize,bPaint,ctooltip )
 
-   if ::lText
+   IF ::lText
       ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
-   else
+   ELSE
       ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
-   endif
+   ENDIF
    ::bSetGet := bSetGet
    ::aItems  := aItems
 
@@ -143,10 +149,10 @@ METHOD Redefine( oWndParent,nId,vari,bSetGet,aItems,oFont,bInit,bSize,bPaint, ;
       ::bGetFocus := bGFocus
       ::oParent:AddEvent( CBN_SETFOCUS,self,{|o,id|__When(o:FindControl(id))},,"onGotFocus" )
       // By Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
-      if ::bSetGet <> nil
+      IF ::bSetGet <> nil
          ::oParent:AddEvent( CBN_SELCHANGE,self,{|o,id|__Valid(o:FindControl(id))},,"onChange" )
-      elseif ::bChangeSel != NIL
-        ::oParent:AddEvent( CBN_SELCHANGE,self,{|o,id|__Valid(o:FindControl(id))},,"onChange" )
+      ELSEIF ::bChangeSel != NIL
+         ::oParent:AddEvent( CBN_SELCHANGE,self,{|o,id|__Valid(o:FindControl(id))},,"onChange" )
       ENDIF
    ELSEIF bChange != Nil
       ::oParent:AddEvent( CBN_SELCHANGE,self,bChange,,"onChange" )
@@ -157,36 +163,38 @@ METHOD Redefine( oWndParent,nId,vari,bSetGet,aItems,oFont,bInit,bSize,bPaint, ;
    ENDIF
 
    ::Refresh() // By Luiz Henrique dos Santos
-Return Self
+
+   RETURN Self
 
 METHOD Init() CLASS HComboBox
-   Local i,numofchars
-   Local LongComboWidth := 0
-   lOCAL NewLongComboWidth ,avgwidth
+
+   LOCAL i,numofchars
+   LOCAL LongComboWidth := 0
+   LOCAL NewLongComboWidth ,avgwidth
 
    IF !::lInit
       Super:Init()
       IF ::aItems != Nil
          IF ::value == Nil
             IF ::lText
-                ::value := ::aItems[1]
+               ::value := ::aItems[1]
             ELSE
-                ::value := 1
+               ::value := 1
             ENDIF
          ENDIF
          SendMessage( ::handle, CB_RESETCONTENT, 0, 0)
          FOR i := 1 TO Len( ::aItems )
             ComboAddString( ::handle, ::aItems[i] )
             numofchars =SendMessage(::handle,CB_GETLBTEXTLEN,i-1,0)
-            if  numofchars > LongComboWidth
-                LongComboWidth=numofchars
-            endif
+            IF  numofchars > LongComboWidth
+               LongComboWidth=numofchars
+            ENDIF
          NEXT
          IF ::lText
             IF ::lEdit
-                SetDlgItemText(getmodalhandle(), ::id, ::value)
+               SetDlgItemText(getmodalhandle(), ::id, ::value)
             ELSE
-                ComboSetString( ::handle, AScan( ::aItems, ::value ) )
+               ComboSetString( ::handle, AScan( ::aItems, ::value ) )
             ENDIF
             SendMessage( ::handle, CB_SELECTSTRING, 0, ::value)
             SetWindowText(::handle, ::value)
@@ -198,18 +206,21 @@ METHOD Init() CLASS HComboBox
          SendMessage( ::handle, CB_SETDROPPEDWIDTH, NewLongComboWidth + 50, 0 )
       ENDIF
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Refresh() CLASS HComboBox
-   Local vari, i
+
+   LOCAL vari, i
+
    IF ::bSetGet != Nil
       vari := Eval( ::bSetGet,,Self )
-      if ::lText
+      IF ::lText
          ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
-        SendMessage( ::handle, CB_SETEDITSEL, 0, LEN(::value) )
-      else
+         SendMessage( ::handle, CB_SETEDITSEL, 0, LEN(::value) )
+      ELSE
          ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
-      endif
+      ENDIF
    ENDIF
 
    SendMessage( ::handle, CB_RESETCONTENT, 0, 0)
@@ -220,18 +231,19 @@ METHOD Refresh() CLASS HComboBox
 
    IF ::lText
       IF ::lEdit
-        SetDlgItemText(getmodalhandle(), ::id, ::value)
+         SetDlgItemText(getmodalhandle(), ::id, ::value)
       ELSE
-        ComboSetString( ::handle, AScan( ::aItems, ::value ) )
+         ComboSetString( ::handle, AScan( ::aItems, ::value ) )
       ENDIF
    ELSE
       ComboSetString( ::handle, ::value )
       ::SetItem(::value )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD SetItem(nPos) CLASS HComboBox
+
    IF ::lText
       ::value := ::aItems[nPos]
    ELSE
@@ -249,73 +261,81 @@ METHOD SetItem(nPos) CLASS HComboBox
       Eval( ::bChangeSel, nPos, Self )
       ::oparent:lSuspendMsgsHandling := .f.
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD GetValue() CLASS HComboBox
-Local nPos := SendMessage( ::handle,CB_GETCURSEL,0,0 ) + 1
+
+   LOCAL nPos := SendMessage( ::handle,CB_GETCURSEL,0,0 ) + 1
 
    ::value := Iif( ::lText, ::aItems[nPos], nPos )
    IF ::bSetGet != Nil
       Eval( ::bSetGet, ::value, Self )
    ENDIF
 
-Return ::value
+   RETURN ::value
 
 METHOD DeleteItem(nIndex) CLASS HComboBox
 
    IF SendMessage(::handle, CB_DELETESTRING ,nIndex-1, 0) > 0 //<= LEN(ocombo:aitems)
       ADEL(::Aitems,nIndex)
       ASIZE(::Aitems,len(::aitems)-1)
+
       RETURN .T.
    ENDIF
- RETURN .F.
+
+   RETURN .F.
 
 METHOD AddItem(cItem) CLASS HComboBox
-   Local nCount
 
-    AADD(::Aitems,cItem)
-    nCount := SendMessage( ::handle, CB_GETCOUNT,0,0) + 1
-     ComboAddString( ::handle,cItem)  //::aItems[i] )
-RETURN nCount
+   LOCAL nCount
 
+   AADD(::Aitems,cItem)
+   nCount := SendMessage( ::handle, CB_GETCOUNT,0,0) + 1
+   ComboAddString( ::handle,cItem)  //::aItems[i] )
 
-Static Function __InteractiveChange( oCtrl )
-LOCAL npos:=SendMessage( oCtrl:handle, CB_GETEDITSEL, 0, 0)
+   RETURN nCount
+
+STATIC FUNCTION __InteractiveChange( oCtrl )
+
+   LOCAL npos:=SendMessage( oCtrl:handle, CB_GETEDITSEL, 0, 0)
 
    octrl:oparent:lSuspendMsgsHandling := .t.
    Eval( oCtrl:bChangeInt, oCtrl:value, oCtrl )
    octrl:oparent:lSuspendMsgsHandling := .f.
 
- SendMessage( oCtrl:handle, CB_SETEDITSEL, 0, NPOS )
-RETURN Nil
+   SendMessage( oCtrl:handle, CB_SETEDITSEL, 0, NPOS )
 
+   RETURN NIL
 
-Static Function __onChange( oCtrl )
-Local npos
+STATIC FUNCTION __onChange( oCtrl )
+
+   LOCAL npos
 
    nPos := SendMessage( oCtrl:handle,CB_GETCURSEL,0,0 ) + 1
    octrl:setitem(npos)
 
-RETURN Nil
+   RETURN NIL
 
+STATIC FUNCTION __When( oCtrl )
 
-Static Function __When( oCtrl )
-Local res := .t., oParent, nSkip
+   LOCAL res := .t., oParent, nSkip
 
-     IF !CheckFocus(oCtrl, .f.)
-       RETURN .t.
-    ENDIF
+   IF !CheckFocus(oCtrl, .f.)
+
+      RETURN .t.
+   ENDIF
 
    IF !oCtrl:lText
       oCtrl:Refresh()
    ELSE
-     * SetWindowText(oCtrl:handle, oCtrl:value)
-     * SendMessage( oCtrl:handle, CB_SELECTSTRING, 0, oCtrl:value)
+      * SetWindowText(oCtrl:handle, oCtrl:value)
+      * SendMessage( oCtrl:handle, CB_SELECTSTRING, 0, oCtrl:value)
    ENDIF
    nSkip := iif( GetKeyState( VK_UP ) < 0 .or. (GetKeyState( VK_TAB ) < 0 .and. GetKeyState(VK_SHIFT) < 0 ), -1, 1 )
    IF oCtrl:bGetFocus != Nil
       octrl:oparent:lSuspendMsgsHandling := .t.
-         octrl:lnoValid := .T.
+      octrl:lnoValid := .T.
       res := Eval( oCtrl:bGetFocus, Eval( oCtrl:bSetGet, , oCtrl ), oCtrl )
       octrl:oparent:lSuspendMsgsHandling := .f.
       octrl:lnoValid := ! res
@@ -329,22 +349,25 @@ Local res := .t., oParent, nSkip
          GetSkip( oCtrl:oParent, oCtrl:handle, , nSkip )
       ENDIF
    ENDIF
-RETURN res
 
-Static Function __Valid( oCtrl )
-Local oDlg,nPos,nSkip, res, hCtrl:=getfocus()
-Local ltab :=  GETKEYSTATE(VK_TAB) < 0
+   RETURN res
 
-  //writelog('f'+str(ParentGetDialog(oCtrl):handle)+str(GetActiveWindow())+str(getfocus())+str(octrl:handle)+octrl:classname+chr(13))
+STATIC FUNCTION __Valid( oCtrl )
+
+   LOCAL oDlg,nPos,nSkip, res, hCtrl:=getfocus()
+   LOCAL ltab :=  GETKEYSTATE(VK_TAB) < 0
+
+   //writelog('f'+str(ParentGetDialog(oCtrl):handle)+str(GetActiveWindow())+str(getfocus())+str(octrl:handle)+octrl:classname+chr(13))
 
    IF !CheckFocus(oCtrl, .t.) .or. oCtrl:lNoValid
+
       RETURN .t.
    ENDIF
-  nSkip := iif(GetKeyState(VK_SHIFT) < 0 , -1, 1 )
+   nSkip := iif(GetKeyState(VK_SHIFT) < 0 , -1, 1 )
 
-  IF ( oDlg := ParentGetDialog( oCtrl ) ) == Nil .OR. oDlg:nLastKey != 27
-   // end by sauli
-   *IF lESC // "if" by Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
+   IF ( oDlg := ParentGetDialog( oCtrl ) ) == Nil .OR. oDlg:nLastKey != 27
+      // end by sauli
+      *IF lESC // "if" by Luiz Henrique dos Santos (luizhsantos@gmail.com) 04/06/2006
       nPos := SendMessage( oCtrl:handle,CB_GETCURSEL,0,0 ) + 1
       IF oCtrl:lText
          oCtrl:value := Iif( nPos>0, oCtrl:aItems[nPos],GetWindowText(octrl:handle) )
@@ -352,70 +375,79 @@ Local ltab :=  GETKEYSTATE(VK_TAB) < 0
          oCtrl:value := nPos
       ENDIF
       IF oCtrl:bSetGet != Nil
-        Eval( oCtrl:bSetGet, oCtrl:value, oCtrl )
+         Eval( oCtrl:bSetGet, oCtrl:value, oCtrl )
       ENDIF
-     // By Luiz Henrique dos Santos (luizhsantos@gmail.com.br) 03/06/2006
+      // By Luiz Henrique dos Santos (luizhsantos@gmail.com.br) 03/06/2006
       IF oCtrl:bLostFocus != Nil
-          octrl:oparent:lSuspendMsgsHandling := .t.
-             res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl )
-             octrl:oparent:lSuspendMsgsHandling := .f.
-          IF ! res
-             SetFocus( oCtrl:handle )
-             IF oDlg != Nil
-                oDlg:nLastKey := 0
-             ENDIF
-             RETURN .F.
-          ENDIF
-       ENDIF
-       IF oDlg != Nil
-          oDlg:nLastKey := 0
-       ENDIF
-       IF ltab .AND. GETFOCUS() = hCtrl
-          IF oCtrl:oParent:CLASSNAME = "HTAB"
+         octrl:oparent:lSuspendMsgsHandling := .t.
+         res := Eval( oCtrl:bLostFocus, oCtrl:value, oCtrl )
+         octrl:oparent:lSuspendMsgsHandling := .f.
+         IF ! res
+            SetFocus( oCtrl:handle )
+            IF oDlg != Nil
+               oDlg:nLastKey := 0
+            ENDIF
+
+            RETURN .F.
+         ENDIF
+      ENDIF
+      IF oDlg != Nil
+         oDlg:nLastKey := 0
+      ENDIF
+      IF ltab .AND. GETFOCUS() = hCtrl
+         IF oCtrl:oParent:CLASSNAME = "HTAB"
             oCtrl:oParent:SETFOCUS()
             getskip(octrl:oparent,octrl:handle,,nSkip)
-          ENDIF
-       ENDIF
+         ENDIF
+      ENDIF
    ENDIF
-Return .T.
 
-
-//***************************************************
-
-
+   RETURN .T.
 
 CLASS HCheckComboBox INHERIT HComboBox
 
-   CLASS VAR winclass INIT "COMBOBOX"
+CLASS VAR winclass INIT "COMBOBOX"
+
    DATA m_bTextUpdated INIT .f.
 
    DATA m_bItemHeightSet INIT .f.
    DATA m_hListBox INIT 0
    DATA aCheck
    DATA m_strText INIT ""
-   METHOD onGetText( w, l )
-   METHOD OnGetTextLength( w, l )
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-   aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid, acheck )
-   METHOD Redefine( oWnd, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bDraw, bChange, ctooltip, bGFocus )
-   METHOD INIT( aCombo, nCurrent )
-   METHOD Refresh()
-   METHOD Paint( lpDis )
-   METHOD SetCheck( nIndex, bFlag )
-   METHOD RecalcText()
+METHOD onGetText( w, l )
 
-   METHOD GetCheck( nIndex )
+METHOD OnGetTextLength( w, l )
 
-   METHOD SelectAll( bCheck )
-   METHOD MeasureItem( l )
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid, acheck )
 
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD GetAllCheck()
+METHOD Redefine( oWnd, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bDraw, bChange, ctooltip, bGFocus )
+
+METHOD INIT( aCombo, nCurrent )
+
+METHOD Refresh()
+
+METHOD Paint( lpDis )
+
+METHOD SetCheck( nIndex, bFlag )
+
+METHOD RecalcText()
+
+METHOD GetCheck( nIndex )
+
+METHOD SelectAll( bCheck )
+
+METHOD MeasureItem( l )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD GetAllCheck()
+
 ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
-               bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid, acheck ) CLASS hCheckComboBox
+      bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid, acheck ) CLASS hCheckComboBox
 
    ::aCheck := acheck
    IF VALTYPE( nStyle ) == "N"
@@ -427,42 +459,47 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
    bPaint := { | o, p | o:paint( p ) }
 
    ::super:New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
-                bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid )
+      bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bValid )
 
-RETURN Self
+   RETURN Self
 
 METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-                    bChange, ctooltip, bGFocus, acheck ) CLASS hCheckComboBox
+      bChange, ctooltip, bGFocus, acheck ) CLASS hCheckComboBox
 
    ::super:Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-                     bChange, ctooltip, bGFocus )
+      bChange, ctooltip, bGFocus )
 
    ::acheck := acheck
 
-RETURN Self
+   RETURN Self
 
 METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
 
-LOCAL nIndex
-LOCAL rcItem
-LOCAL rcClient
-LOCAL pt
-LOCAL nItemHeight
-LOCAL nTopIndex
+   LOCAL nIndex
+   LOCAL rcItem
+   LOCAL rcClient
+   LOCAL pt
+   LOCAL nItemHeight
+   LOCAL nTopIndex
 
    IF msg == WM_RBUTTONDOWN
    ELSEIF msg == LB_GETCURSEL
+
       RETURN - 1
    ELSEIF msg == LB_GETCURSEL
+
       RETURN - 1
 
    ELSEIF msg == WM_MEASUREITEM
       ::MeasureItem( lParam )
+
       RETURN 0
    ELSEIF msg == WM_GETTEXT
+
       RETURN ::OnGetText( wParam, lParam )
 
    ELSEIF msg == WM_GETTEXTLENGTH
+
       RETURN ::OnGetTextLength()
 
    ELSEIF msg == WM_CHAR
@@ -478,6 +515,7 @@ LOCAL nTopIndex
 
          SendMessage( ::oParent:handle, WM_COMMAND, MAKELONG( ::id, CBN_SELCHANGE ), ::handle )
       ENDIF
+
       RETURN 0
 
    ELSEIF msg == WM_LBUTTONDOWN
@@ -514,11 +552,13 @@ LOCAL nTopIndex
 
       RETURN 0
    ENDIF
-RETURN - 1
+
+   RETURN - 1
 
 METHOD INIT() CLASS hCheckComboBox
 
-LOCAL i
+   LOCAL i
+
    ::nHolder := 1
    SetWindowObject( ::handle, Self )
    HWG_INITCOMBOPROC( ::handle )
@@ -531,10 +571,13 @@ LOCAL i
          NEXT
       ENDIF
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 METHOD Refresh() CLASS hCheckComboBox
-local i
+
+   LOCAL i
+
    ::super:refresh()
    IF LEN( ::acheck ) > 0
       FOR i := 1 TO LEN( ::acheck )
@@ -542,13 +585,14 @@ local i
       NEXT
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
 METHOD SetCheck( nIndex, bFlag ) CLASS hCheckComboBox
 
-LOCAL nResult := COMBOBOXSETITEMDATA( ::handle, nIndex - 1, bFlag )
+   LOCAL nResult := COMBOBOXSETITEMDATA( ::handle, nIndex - 1, bFlag )
 
    IF ( nResult < 0 )
+
       RETURN nResult
    ENDIF
 
@@ -557,18 +601,19 @@ LOCAL nResult := COMBOBOXSETITEMDATA( ::handle, nIndex - 1, bFlag )
    // Redraw the window
    InvalidateRect( ::handle, 0 )
 
-RETURN nResult
+   RETURN nResult
 
 METHOD GetCheck( nIndex ) CLASS hCheckComboBox
 
-LOCAL l := COMBOBOXGETITEMDATA( ::handle, nIndex - 1 )
+   LOCAL l := COMBOBOXGETITEMDATA( ::handle, nIndex - 1 )
 
-RETURN IF( l == 1, .t., .f. )
+   RETURN IF( l == 1, .t., .f. )
 
 METHOD SelectAll( bCheck ) CLASS hCheckComboBox
 
-LOCAL nCount
-LOCAL i
+   LOCAL nCount
+   LOCAL i
+
    DEFAULT bCheck TO .t.
 
    nCount := SendMessage( ::handle, CB_GETCOUNT, 0, 0 )
@@ -576,15 +621,17 @@ LOCAL i
    FOR i := 1 TO nCount
       ::SetCheck( i, bCheck )
    NEXT
-RETURN nil
+
+   RETURN NIL
 
 METHOD RecalcText() CLASS hCheckComboBox
 
-LOCAL strtext
-LOCAL ncount
-LOCAL strSeparator
-LOCAL i
-LOCAL stritem
+   LOCAL strtext
+   LOCAL ncount
+   LOCAL strSeparator
+   LOCAL i
+   LOCAL stritem
+
    IF ( !::m_bTextUpdated )
 
       // Get the list count
@@ -622,20 +669,21 @@ LOCAL stritem
 
       ::m_bTextUpdated := TRUE
    ENDIF
-RETURN self
+
+   RETURN self
 
 METHOD Paint( lpDis ) CLASS hCheckComboBox
 
-LOCAL drawInfo := GetDrawItemInfo( lpdis )
+   LOCAL drawInfo := GetDrawItemInfo( lpdis )
 
-LOCAL dc := drawInfo[ 3 ]
+   LOCAL dc := drawInfo[ 3 ]
 
-LOCAL rcBitmap := { DrawInfo[ 4 ], DrawInfo[ 5 ], DrawInfo[ 6 ], DrawInfo[ 7 ] }
-LOCAL rcText   := { DrawInfo[ 4 ], DrawInfo[ 5 ], DrawInfo[ 6 ], DrawInfo[ 7 ] }
-LOCAL strtext  := ""
-LOCAL ncheck
-LOCAL metrics
-LOCAL nstate
+   LOCAL rcBitmap := { DrawInfo[ 4 ], DrawInfo[ 5 ], DrawInfo[ 6 ], DrawInfo[ 7 ] }
+   LOCAL rcText   := { DrawInfo[ 4 ], DrawInfo[ 5 ], DrawInfo[ 6 ], DrawInfo[ 7 ] }
+   LOCAL strtext  := ""
+   LOCAL ncheck
+   LOCAL metrics
+   LOCAL nstate
 
    IF ( DrawInfo[ 1 ] < 0 )
 
@@ -696,19 +744,19 @@ LOCAL nstate
       DrawFocusRect( dc, rcText )
    ENDIF
 
-RETURN self
+   RETURN self
 
 METHOD MeasureItem( l ) CLASS hCheckComboBox
 
-LOCAL dc                  := HCLIENTDC():new( ::handle )
-LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO( l )
-LOCAL metrics
-LOCAL pFont
+   LOCAL dc                  := HCLIENTDC():new( ::handle )
+   LOCAL lpMeasureItemStruct := GETMEASUREITEMINFO( l )
+   LOCAL metrics
+   LOCAL pFont
 
    pFont := dc:SelectObject( IF( VALTYPE( ::oFont ) == "O", ::oFont:handle, ::oParent:oFont:handle ) )
    IF !empty( pFont  )
 
-          metrics := dc:GetTextMetric()
+      metrics := dc:GetTextMetric()
 
       lpMeasureItemStruct[ 5 ] := metrics[ 1 ] + metrics[ 4 ]
 
@@ -722,45 +770,53 @@ LOCAL pFont
       dc:SelectObject( pFont )
       dc:end()
    ENDIF
-RETURN self
+
+   RETURN self
 
 METHOD OnGetText( wParam, lParam ) CLASS hCheckComboBox
+
    ::RecalcText()
 
    IF ( lParam == 0 )
+
       RETURN 0
    ENDIF
 
    // Copy the 'fake' window text
    copydata( lParam, ::m_strText, wParam )
 
-RETURN LEN( ::m_strText )
+   RETURN LEN( ::m_strText )
 
 METHOD OnGetTextLength( WPARAM, LPARAM ) CLASS hCheckComboBox
 
-HB_SYMBOL_UNUSED(wParam)
-HB_SYMBOL_UNUSED(lParam)
+   HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(lParam)
 
    ::RecalcText()
-RETURN LEN( ::m_strText )
+
+   RETURN LEN( ::m_strText )
 
 METHOD GetAllCheck() CLASS hCheckComboBox
-Local aCheck :={}
-Local n
-   For n := 1  to len(::aItems)
-      aadd( aCheck ,::GetCheck(n))
-   next
-return aCheck
 
-function hwg_multibitor( ... )
-Local aArgumentList := HB_AParams()
-Local nItem
-Local result := 0
+   LOCAL aCheck :={}
+   LOCAL n
+
+   FOR n := 1  to len(::aItems)
+      aadd( aCheck ,::GetCheck(n))
+   NEXT
+
+   RETURN aCheck
+
+FUNCTION hwg_multibitor( ... )
+
+   LOCAL aArgumentList := HB_AParams()
+   LOCAL nItem
+   LOCAL result := 0
 
    FOR EACH nItem IN aArgumentList
-       IF ValType( nItem ) != "N"
-          msginfo( "hwg_multibitor parameter not numeric set to zero", "Possible error" )
-          nItem := 0
+      IF ValType( nItem ) != "N"
+         msginfo( "hwg_multibitor parameter not numeric set to zero", "Possible error" )
+         nItem := 0
       ENDIF
       result := hwg_bitor( result, nItem )
    NEXT

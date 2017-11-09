@@ -1,19 +1,18 @@
 /*
- * $Id: guimain.prg,v 1.27 2008/10/07 12:37:49 lculik Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Main prg level functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: guimain.prg,v 1.27 2008/10/07 12:37:49 lculik Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* Main prg level functions
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
 #include "guilib.ch"
 #include "common.ch"
 
-Function InitControls( oWnd,lNoActivate )
-Local i, pArray := oWnd:aControls, lInit
+FUNCTION InitControls( oWnd,lNoActivate )
+
+   LOCAL i, pArray := oWnd:aControls, lInit
 
    lNoActivate := Iif( lNoActivate==Nil,.F.,lNoActivate )
 
@@ -21,17 +20,17 @@ Local i, pArray := oWnd:aControls, lInit
       FOR i := 1 TO Len( pArray )
          // writelog( "InitControl1"+str(pArray[i]:handle)+"/"+pArray[i]:classname+" "+str(pArray[i]:nWidth)+"/"+str(pArray[i]:nHeight) )
          IF empty(pArray[i]:handle)  .AND. !lNoActivate
-//         IF empty(pArray[i]:handle ) .AND. !lNoActivate
+            //         IF empty(pArray[i]:handle ) .AND. !lNoActivate
             lInit := pArray[i]:lInit
             pArray[i]:lInit := .T.
             pArray[i]:Activate()
             pArray[i]:lInit := lInit
 
          ENDIF
-//           IF empty(pArray[i]:handle)// <= 0        
-         IF if(valtype(pArray[i]:handle)=="P",ptrtoulong(pArray[i]:handle),pArray[i]:handle ) <= 0        
+         //           IF empty(pArray[i]:handle)// <= 0
+         IF if(valtype(pArray[i]:handle)=="P",ptrtoulong(pArray[i]:handle),pArray[i]:handle ) <= 0
             pArray[i]:handle := GetDlgItem( oWnd:handle, pArray[i]:id )
-            
+
             // writelog( "InitControl2"+str(pArray[i]:handle)+"/"+pArray[i]:classname )
          ENDIF
          IF !Empty( pArray[i]:aControls )
@@ -41,40 +40,53 @@ Local i, pArray := oWnd:aControls, lInit
       NEXT
    ENDIF
 
-Return .T.
+   RETURN .T.
 
-Function FindParent( hCtrl,nLevel )
-Local i, oParent, hParent := GetParent( hCtrl )
+FUNCTION FindParent( hCtrl,nLevel )
+
+   LOCAL i, oParent, hParent := GetParent( hCtrl )
+
    IF hParent > 0
       IF ( i := Ascan( HDialog():aModalDialogs,{|o|o:handle==hParent} ) ) != 0
-         Return HDialog():aModalDialogs[i]
+
+         RETURN HDialog():aModalDialogs[i]
       ELSEIF ( oParent := HDialog():FindDialog(hParent) ) != Nil
-         Return oParent
+
+         RETURN oParent
       ELSEIF ( oParent := HWindow():FindWindow(hParent) ) != Nil
-         Return oParent
+
+         RETURN oParent
       ENDIF
    ENDIF
    IF nLevel == Nil; nLevel := 0; ENDIF
-   IF nLevel < 2
-      IF ( oParent := FindParent( hParent,nLevel+1 ) ) != Nil
-         Return oParent:FindControl( ,hParent )
+      IF nLevel < 2
+         IF ( oParent := FindParent( hParent,nLevel+1 ) ) != Nil
+
+            RETURN oParent:FindControl( ,hParent )
+         ENDIF
       ENDIF
-   ENDIF
-Return Nil
 
-Function FindSelf( hCtrl )
-Local oParent
+      RETURN NIL
+
+FUNCTION FindSelf( hCtrl )
+
+   LOCAL oParent
+
    oParent := FindParent( hCtrl )
-   if oParent == Nil
-		oParent := GetAncestor(hCtrl, GA_PARENT)
-	endif
-	IF oParent != Nil
-      Return oParent:FindControl( ,hCtrl )
+   IF oParent == Nil
+      oParent := GetAncestor(hCtrl, GA_PARENT)
    ENDIF
-Return Nil
+   IF oParent != Nil
 
-Function WriteStatus( oWnd, nPart, cText, lRedraw )
-Local aControls, i
+      RETURN oParent:FindControl( ,hCtrl )
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION WriteStatus( oWnd, nPart, cText, lRedraw )
+
+   LOCAL aControls, i
+
    aControls := oWnd:aControls
    IF ( i := Ascan( aControls, {|o|o:ClassName()=="HSTATUS"} ) ) > 0
       WriteStatusWindow( aControls[i]:handle,nPart-1,cText )
@@ -82,40 +94,49 @@ Local aControls, i
          RedrawWindow( aControls[i]:handle, RDW_ERASE + RDW_INVALIDATE )
       ENDIF
    ENDIF
-Return Nil
 
-Function ReadStatus( oWnd, nPart)
-Local aControls, i, ntxtLen, cText := ""
+   RETURN NIL
+
+FUNCTION ReadStatus( oWnd, nPart)
+
+   LOCAL aControls, i, ntxtLen, cText := ""
+
    aControls := oWnd:aControls
    IF ( i := Ascan( aControls, {|o|o:ClassName()=="HSTATUS"} ) ) > 0
       ntxtLen := SendMessage(aControls[i]:handle,SB_GETTEXTLENGTH, nPart-1, 0)
       cText := replicate(chr(0),ntxtLen)
       SendMessage( aControls[i]:handle, SB_GETTEXT, nPart-1, @cText )
    ENDIF
-Return cText
 
-Function VColor( cColor )
-Local i,res := 0, n := 1, iValue
+   RETURN cText
+
+FUNCTION VColor( cColor )
+
+   LOCAL i,res := 0, n := 1, iValue
+
    cColor := Trim(cColor)
-   for i := 1 to Len( cColor )
+   FOR i := 1 to Len( cColor )
       iValue := Asc( Substr( cColor,Len(cColor)-i+1,1 ) )
-      if iValue < 58 .and. iValue > 47
+      IF iValue < 58 .and. iValue > 47
          iValue -= 48
-      elseif iValue >= 65 .and. iValue <= 70
+      ELSEIF iValue >= 65 .and. iValue <= 70
          iValue -= 55
-      elseif iValue >= 97 .and. iValue <= 102
+      ELSEIF iValue >= 97 .and. iValue <= 102
          iValue -= 87
-      else
-        Return 0
-      endif
+      ELSE
+
+         RETURN 0
+      ENDIF
       res += iValue * n
       n *= 16
-   next
-Return res
+   NEXT
 
-Function MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
-Local oModDlg, oFont := HFont():Add( "MS Sans Serif",0,-13 )
-Local cRes := IIF(cResIni != Nil, Trim(cResIni), "")
+   RETURN res
+
+FUNCTION MsgGet( cTitle, cText, nStyle, x, y, nDlgStyle, cResIni )
+
+   LOCAL oModDlg, oFont := HFont():Add( "MS Sans Serif",0,-13 )
+   LOCAL cRes := IIF(cResIni != Nil, Trim(cResIni), "")
 
    IF !Empty(cRes)
       Keyb_Event(VK_END)
@@ -126,7 +147,7 @@ Local cRes := IIF(cResIni != Nil, Trim(cResIni), "")
    nDlgStyle := Iif( nDlgStyle == Nil, 0, nDlgStyle )
 
    INIT DIALOG oModDlg TITLE cTitle AT x,y SIZE 300,140 ;
-        FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+nDlgStyle
+      FONT oFont CLIPPER STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+nDlgStyle
 
    @ 20,10 SAY cText SIZE 260,22
    @ 20,35 GET cres  SIZE 260,26 STYLE WS_TABSTOP + nStyle
@@ -138,123 +159,128 @@ Local cRes := IIF(cResIni != Nil, Trim(cResIni), "")
 
    oFont:Release()
    IF oModDlg:lResult
-      Return Trim( cRes )
+
+      RETURN Trim( cRes )
    ELSE
       cRes := ""
    ENDIF
 
-Return cRes
+   RETURN cRes
 
-Function WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, cOk, cCancel )
-Local oDlg, oBrw, nChoice := 0, lArray := .T., nField, lNewFont := .F.
-Local i, aLen, nLen := 0, addX := 20, addY := 20, minWidth := 0, x1
-Local hDC, aMetr, width, height, aArea, aRect
-Local nStyle := WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX
+FUNCTION WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrBSel, cOk, cCancel )
+
+   LOCAL oDlg, oBrw, nChoice := 0, lArray := .T., nField, lNewFont := .F.
+   LOCAL i, aLen, nLen := 0, addX := 20, addY := 20, minWidth := 0, x1
+   LOCAL hDC, aMetr, width, height, aArea, aRect
+   LOCAL nStyle := WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX
 
    IF cTitle == Nil; cTitle := ""; ENDIF
-   IF nLeft == Nil .AND. nTop == Nil; nStyle += DS_CENTER; ENDIF
-   IF nLeft == Nil; nLeft := 0; ENDIF
-   IF nTop == Nil; nTop := 0; ENDIF
-   IF oFont == Nil
-      oFont := HFont():Add( "MS Sans Serif",0,-13 )
-      lNewFont := .T.
-   ENDIF
-   IF cOk != Nil
-      minWidth += 120
-      IF cCancel != Nil
-         minWidth += 100
-      ENDIF
-      addY += 30
-   ENDIF
+      IF nLeft == Nil .AND. nTop == Nil; nStyle += DS_CENTER; ENDIF
+         IF nLeft == Nil; nLeft := 0; ENDIF
+            IF nTop == Nil; nTop := 0; ENDIF
+               IF oFont == Nil
+                  oFont := HFont():Add( "MS Sans Serif",0,-13 )
+                  lNewFont := .T.
+               ENDIF
+               IF cOk != Nil
+                  minWidth += 120
+                  IF cCancel != Nil
+                     minWidth += 100
+                  ENDIF
+                  addY += 30
+               ENDIF
 
-   IF Valtype( arr ) == "C"
-      lArray := .F.
-      aLen := RecCount()
-      IF ( nField := FieldPos( arr ) ) == 0
-         Return 0
-      ENDIF
-      nLen := dbFieldInfo( 3,nField )
-   ELSE
-      aLen := Len( arr )
-      IF Valtype( arr[1] ) == "A"
-         FOR i := 1 TO aLen
-            nLen := Max( nLen,Len(arr[i,1]) )
-         NEXT
-      ELSE
-         FOR i := 1 TO aLen
-            nLen := Max( nLen,Len(arr[i]) )
-         NEXT
-      ENDIF
-   ENDIF
+               IF Valtype( arr ) == "C"
+                  lArray := .F.
+                  aLen := RecCount()
+                  IF ( nField := FieldPos( arr ) ) == 0
 
-   hDC := GetDC( GetActiveWindow() )
-   SelectObject( hDC, ofont:handle )
-   aMetr := GetTextMetric( hDC )
-   aArea := GetDeviceArea( hDC )
-   aRect := GetWindowRect( GetActiveWindow() )
-   ReleaseDC( GetActiveWindow(),hDC )
-   height := (aMetr[1]+1)*aLen+4+addY+8
-   IF height > aArea[2]-aRect[2]-nTop-60
-      height := aArea[2]-aRect[2]-nTop-60
-   ENDIF
-   width := Max( aMetr[2] * 2 * nLen + addX, minWidth )
+                     RETURN 0
+                  ENDIF
+                  nLen := dbFieldInfo( 3,nField )
+               ELSE
+                  aLen := Len( arr )
+                  IF Valtype( arr[1] ) == "A"
+                     FOR i := 1 TO aLen
+                        nLen := Max( nLen,Len(arr[i,1]) )
+                     NEXT
+                  ELSE
+                     FOR i := 1 TO aLen
+                        nLen := Max( nLen,Len(arr[i]) )
+                     NEXT
+                  ENDIF
+               ENDIF
 
-   INIT DIALOG oDlg TITLE cTitle ;
-         AT nLeft,nTop           ;
-         SIZE width,height       ;
-         STYLE nStyle            ;
-         FONT oFont              ;
-         ON INIT {|o|ResetWindowPos(o:handle),oBrw:setfocus()}
+               hDC := GetDC( GetActiveWindow() )
+               SelectObject( hDC, ofont:handle )
+               aMetr := GetTextMetric( hDC )
+               aArea := GetDeviceArea( hDC )
+               aRect := GetWindowRect( GetActiveWindow() )
+               ReleaseDC( GetActiveWindow(),hDC )
+               height := (aMetr[1]+1)*aLen+4+addY+8
+               IF height > aArea[2]-aRect[2]-nTop-60
+                  height := aArea[2]-aRect[2]-nTop-60
+               ENDIF
+               width := Max( aMetr[2] * 2 * nLen + addX, minWidth )
 
-   IF lArray
-      @ 0,0 BROWSE oBrw ARRAY
-      oBrw:aArray := arr
-      IF Valtype( arr[1] ) == "A"
-         oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent,1]},"C",nLen ) )
-      ELSE
-         oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent]},"C",nLen ) )
-      ENDIF
-   ELSE
-      @ 0,0 BROWSE oBrw DATABASE
-      oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),(o:alias)->(FieldGet(nField))},"C",nLen ) )
-   ENDIF
+               INIT DIALOG oDlg TITLE cTitle ;
+                  AT nLeft,nTop           ;
+                  SIZE width,height       ;
+                  STYLE nStyle            ;
+                  FONT oFont              ;
+                  ON INIT {|o|ResetWindowPos(o:handle),oBrw:setfocus()}
 
-   oBrw:oFont  := oFont
-   oBrw:bSize  := {|o,x,y|MoveWindow(o:handle,addX/2,10,x-addX,y-addY)}
-   oBrw:bEnter := {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
+               IF lArray
+                  @ 0,0 BROWSE oBrw ARRAY
+                  oBrw:aArray := arr
+                  IF Valtype( arr[1] ) == "A"
+                     oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent,1]},"C",nLen ) )
+                  ELSE
+                     oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),o:aArray[o:nCurrent]},"C",nLen ) )
+                  ENDIF
+               ELSE
+                  @ 0,0 BROWSE oBrw DATABASE
+                  oBrw:AddColumn( HColumn():New( ,{|value,o|HB_SYMBOL_UNUSED(value),(o:alias)->(FieldGet(nField))},"C",nLen ) )
+               ENDIF
 
-   oBrw:lDispHead := .F.
-   IF clrT != Nil
-      oBrw:tcolor := clrT
-   ENDIF
-   IF clrB != Nil
-      oBrw:bcolor := clrB
-   ENDIF
-   IF clrTSel != Nil
-      oBrw:tcolorSel := clrTSel
-   ENDIF
-   IF clrBSel != Nil
-      oBrw:bcolorSel := clrBSel
-   ENDIF
+               oBrw:oFont  := oFont
+               oBrw:bSize  := {|o,x,y|MoveWindow(o:handle,addX/2,10,x-addX,y-addY)}
+               oBrw:bEnter := {|o|nChoice:=o:nCurrent,EndDialog(o:oParent:handle)}
 
-   IF cOk != Nil
-      x1 := Int(width/2) - Iif( cCancel != Nil, 90, 40 )
-      @ x1,height-36 BUTTON cOk SIZE 80,30 ON CLICK {||nChoice:=oBrw:nCurrent,EndDialog(oDlg:handle)}
-      IF cCancel != Nil
-         @ x1+100,height-36 BUTTON cCancel SIZE 80,30 ON CLICK {||nChoice:=0,EndDialog(oDlg:handle)}
-      ENDIF
-   ENDIF
+               oBrw:lDispHead := .F.
+               IF clrT != Nil
+                  oBrw:tcolor := clrT
+               ENDIF
+               IF clrB != Nil
+                  oBrw:bcolor := clrB
+               ENDIF
+               IF clrTSel != Nil
+                  oBrw:tcolorSel := clrTSel
+               ENDIF
+               IF clrBSel != Nil
+                  oBrw:bcolorSel := clrBSel
+               ENDIF
 
-   oDlg:Activate()
-   IF lNewFont
-      oFont:Release()
-   ENDIF
+               IF cOk != Nil
+                  x1 := Int(width/2) - Iif( cCancel != Nil, 90, 40 )
+                  @ x1,height-36 BUTTON cOk SIZE 80,30 ON CLICK {||nChoice:=oBrw:nCurrent,EndDialog(oDlg:handle)}
+                  IF cCancel != Nil
+                     @ x1+100,height-36 BUTTON cCancel SIZE 80,30 ON CLICK {||nChoice:=0,EndDialog(oDlg:handle)}
+                  ENDIF
+               ENDIF
 
-Return nChoice
+               oDlg:Activate()
+               IF lNewFont
+                  oFont:Release()
+               ENDIF
 
-Function ShowProgress( nStep,maxPos,nRange,cTitle,oWnd,x1,y1,width,height )
-Local nStyle := WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX
-Static oDlg, hPBar, iCou, nLimit
+               RETURN nChoice
+
+FUNCTION ShowProgress( nStep,maxPos,nRange,cTitle,oWnd,x1,y1,width,height )
+
+   LOCAL nStyle := WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX
+
+   STATIC oDlg, hPBar, iCou, nLimit
 
    IF nStep == 0
       nLimit := Iif( nRange != Nil,Int( nRange/maxPos ),1 )
@@ -271,9 +297,9 @@ Static oDlg, hPBar, iCou, nLimit
          hPBar := CreateProgressBar( oWnd:handle, maxPos,20,25,width-40,20 )
       ELSE
          INIT DIALOG oDlg TITLE cTitle   ;
-              AT x1,y1 SIZE width,height ;
-              STYLE nStyle               ;
-              ON INIT {|o|hPBar:=CreateProgressBar(o:handle, maxPos,20,25,width-40,20)}
+            AT x1,y1 SIZE width,height ;
+            STYLE nStyle               ;
+            ON INIT {|o|hPBar:=CreateProgressBar(o:handle, maxPos,20,25,width-40,20)}
          ACTIVATE DIALOG oDlg NOMODAL
       ENDIF
    ELSEIF nStep == 1
@@ -292,67 +318,75 @@ Static oDlg, hPBar, iCou, nLimit
    ELSE
       DestroyWindow( hPBar )
       IF oDlg != Nil
-         EndDialog( oDlg:handle )
-      ENDIF
+      EndDialog( oDlg:handle )
    ENDIF
-           
-Return Nil
+ENDIF
 
-Function EndWindow()
+RETURN NIL
+
+FUNCTION EndWindow()
+
    IF HWindow():GetMain() != Nil
       SendMessage( HWindow():aWindows[1]:handle, WM_SYSCOMMAND, SC_CLOSE, 0 )
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 FUNCTION HdSerial( cDrive )
 
-   Local n       :=  HDGETSERIAL( cDrive )
-   Local cHex    :=  NUMTOHEX(n)
-   Local cResult := ""
+   LOCAL n       :=  HDGETSERIAL( cDrive )
+   LOCAL cHex    :=  NUMTOHEX(n)
+   LOCAL cResult := ""
+
    cResult := Substr( cHex,1, 4 ) + '-' + Substr( cHex,5, 4 )
 
-return cResult
+   RETURN cResult
 
-Function Hwg_GetIni( cSection, cEntry, cDefault, cFile )
-RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
- 
-Function Hwg_WriteIni( cSection, cEntry, cValue, cFile )
-RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+FUNCTION Hwg_GetIni( cSection, cEntry, cDefault, cFile )
 
-Function SetHelpFileName ( cNewName )
-   Static cName := ""
-   Local cOldName := cName
-   if cNewName <> Nil
+   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
+
+FUNCTION Hwg_WriteIni( cSection, cEntry, cValue, cFile )
+
+   RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+
+FUNCTION SetHelpFileName ( cNewName )
+
+   STATIC cName := ""
+   LOCAL cOldName := cName
+
+   IF cNewName <> Nil
       cName := cNewName
-   endif
-return cOldName
+   ENDIF
 
-Function RefreshAllGets( oDlg )
+   RETURN cOldName
+
+FUNCTION RefreshAllGets( oDlg )
 
    AEval( oDlg:GetList, {|o|o:Refresh()} )
-Return Nil
 
-/*
+   RETURN NIL
 
-cTitle:   Window Title
-cDescr:  'Data Bases','*.dbf'
-cTip  :   *.dbf
-cInitDir: Initial directory
+   /*
 
-*/
+   cTitle:   Window Title
+   cDescr:  'Data Bases','*.dbf'
+   cTip  :   *.dbf
+   cInitDir: Initial directory
+
+   */
 
 FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle )
 
    LOCAL aFiles, cRet, cFile, x, cFilter := "", cItem, nAt, cChar,i
-   Local hWnd := 0
-   Local nFlags:=""
-   Local cPath := ""
-   Local nIndex:=1
+   LOCAL hWnd := 0
+   LOCAL nFlags:=""
+   LOCAL cPath := ""
+   LOCAL nIndex:=1
 
    cFilter += cDescr + Chr(0) + cTip + Chr(0)
 
    cFile := Space( 32000 )
-
 
    cRet := _GetOpenFileName( hWnd, @cFile, cTitle, cFilter, nFlags, cIniDir, Nil, @nIndex )
 
@@ -363,7 +397,8 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle )
    aFiles := {}
 
    IF nAt == 0 // no double chr(0) user must have pressed cancel
-       RETURN( aFiles )
+
+      RETURN( aFiles )
    ENDIF
 
    x := At( Chr(0), cFile ) // fist null
@@ -375,28 +410,31 @@ FUNCTION SelectMultipleFiles(cDescr, cTip, cIniDir, cTitle )
       cItem := ""
 
       FOR i:=1 to Len(cFile) //EACH cChar IN cFile
-          cChar:=cFile[i]
-          IF cChar == 0
-             aAdd( aFiles, StrTran( cPath, Chr(0), "" ) + '\' + cItem )
-             cItem := ""
-             LOOP
-          ENDIF
-          cItem += cChar
+         cChar:=cFile[i]
+         IF cChar == 0
+            aAdd( aFiles, StrTran( cPath, Chr(0), "" ) + '\' + cItem )
+            cItem := ""
+            LOOP
+         ENDIF
+         cItem += cChar
       NEXT
    ELSE
-       aFiles := { StrTran( cPath, CHR(0), "" ) }
+      aFiles := { StrTran( cPath, CHR(0), "" ) }
    ENDIF
 
-   Return( aFiles )
- 
-Function HWG_Version(oTip)
-Local oVersion
-if oTip==1
-  oVersion:="HwGUI "+HWG_VERSION+" "+Version()
-Else
-  oVersion:="HwGUI "+HWG_VERSION
-Endif
-Return oVersion
+   RETURN( aFiles )
+
+FUNCTION HWG_Version(oTip)
+
+   LOCAL oVersion
+
+   IF oTip==1
+      oVersion:="HwGUI "+HWG_VERSION+" "+Version()
+   ELSE
+      oVersion:="HwGUI "+HWG_VERSION
+   ENDIF
+
+   RETURN oVersion
 
 FUNCTION TxtRect( cTxt, oWin )
 
@@ -406,17 +444,17 @@ FUNCTION TxtRect( cTxt, oWin )
    LOCAL oFont := oWin:oFont
 
    hDC       := GetDC( oWin:handle )
-	IF oFont == Nil
-		oFont := oWin:oParent:oFont
-	ENDIF
-	IF oFont != Nil
+   IF oFont == Nil
+      oFont := oWin:oParent:oFont
+   ENDIF
+   IF oFont != Nil
       hFont := SelectObject( hDC, oFont:handle )
    ENDIF
    ASize     := GetTextSize( hDC, cTxt )
    IF oFont != Nil
       SelectObject( hDC, hFont )
-	endif
-	ReleaseDC( oWin:handle, hDC )
-   RETURN ASize
+   ENDIF
+   ReleaseDC( oWin:handle, hDC )
 
+   RETURN ASize
 

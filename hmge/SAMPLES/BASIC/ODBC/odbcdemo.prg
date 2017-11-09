@@ -1,11 +1,10 @@
 /*
 * MiniGUI ODBC Demo
 * Based upon code from:
-*	ODBCDEMO - ODBC Access Class Demonstration
-*	Felipe G. Coury <fcoury@flexsys-ci.com>
+*   ODBCDEMO - ODBC Access Class Demonstration
+*   Felipe G. Coury <fcoury@flexsys-ci.com>
 * MiniGUI Version:
-*	Roberto Lopez
-*
+*   Roberto Lopez
 * Updated for HMG Extended Edition by MiniGUI Team
 */
 
@@ -14,33 +13,32 @@
 #xcommand WITH <oObject> DO => Self := <oObject>
 #xcommand ENDWITH           => Self := NIL
 
-Memvar Self
+MEMVAR Self
 
 PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'MiniGUI ODBC Demo' ;
-		MAIN  
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniGUI ODBC Demo' ;
+         MAIN
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'File'
-				MENUITEM 'Test' ACTION Test()
-				SEPARATOR
-				MENUITEM 'Exit'	ACTION Form_1.Release
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         DEFINE POPUP 'File'
+            MENUITEM 'Test' ACTION Test()
+            SEPARATOR
+            MENUITEM 'Exit'   ACTION Form_1.Release
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-
-Function TEST
+FUNCTION TEST
 
    LOCAL cConStr := ;
       "DBQ=" + GetStartupFolder() + "\bd1.mdb;" + ;
@@ -50,40 +48,41 @@ Function TEST
 
    WITH dsFunctions DO
 
-      ::SetSQL( "SELECT * FROM table1" )
-      if ::Open()
+   ::SetSQL( "SELECT * FROM table1" )
+   IF ::Open()
 
-         // Put data in fields array
-         ::LoadData( ::nRecNo )
+      // Put data in fields array
+      ::LoadData( ::nRecNo )
 
-         MsgInfo( ::FieldByName( "field1" ):Value )
+      MsgInfo( ::FieldByName( "field1" ):Value )
 
-         ::Skip()
+      ::Skip()
 
-         MsgInfo ( ::FieldByName( "field1" ):Value )
+      MsgInfo ( ::FieldByName( "field1" ):Value )
 
-         ::GoTo( 1 )
+      ::GoTo( 1 )
 
-         MsgInfo ( ::FieldByName( "field1" ):Value )
+      MsgInfo ( ::FieldByName( "field1" ):Value )
 
-         ::Prior()
+      ::Prior()
 
-         MsgInfo ( ::FieldByName( "field1" ):Value )
+      MsgInfo ( ::FieldByName( "field1" ):Value )
 
-         ::First()
+      ::First()
 
-         MsgInfo ( ::FieldByName( "field1" ):Value )
+      MsgInfo ( ::FieldByName( "field1" ):Value )
 
-         ::Last()
+      ::Last()
 
-         MsgInfo ( ::FieldByName( "field1" ):Value )
+      MsgInfo ( ::FieldByName( "field1" ):Value )
 
-         ::Close()
+      ::Close()
 
-      endif
+   ENDIF
 
-   ENDWITH
+ENDWITH
 
-   dsFunctions:Destroy()
+dsFunctions:Destroy()
 
-Return NIL
+RETURN NIL
+

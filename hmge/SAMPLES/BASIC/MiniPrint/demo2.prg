@@ -1,133 +1,135 @@
 /*
- MINIPRINT DEMO
- (c) 2010 Roberto Lopez
+MINIPRINT DEMO
+(c) 2010 Roberto Lopez
 */
 
 #include "minigui.ch"
 #include "miniprint.ch"
 
-Function Main
+FUNCTION Main
 
-	Define Window Win1			;
-		Row	10			;
-		Col	10			;
-		Width	400			;
-		Height	400			;
-		Title	'Miniprint Demo'	;
-		MAIN				;
-		On Init	Win1.Center()  
+   DEFINE WINDOW Win1         ;
+         Row   10         ;
+         Col   10         ;
+         Width   400         ;
+         Height   400         ;
+         Title   'Miniprint Demo'   ;
+         MAIN            ;
+         On Init   Win1.Center()
 
-		@ 40 , 40 Button Button1	;
-			Caption 'Start Print'	;
-			On Click Button1Click()	;
-			Default
+      @ 40 , 40 Button Button1   ;
+         Caption 'Start Print'   ;
+         On Click Button1Click()   ;
+         DEFAULT
 
-	End Window
+   END WINDOW
 
-	Activate Window Win1
+   ACTIVATE WINDOW Win1
 
-Return Nil
+   RETURN NIL
 
+PROCEDURE Button1Click()
 
-Procedure Button1Click()
-Local cPrinter
-Local nLastCol
+   LOCAL cPrinter
+   LOCAL nLastCol
 
-	cPrinter := GetPrinter()
+   cPrinter := GetPrinter()
 
-	if Empty( cPrinter )
-		Return
-	endif
+   IF Empty( cPrinter )
 
-	SELECT PRINTER cPrinter PREVIEW
+      RETURN
+   ENDIF
 
-	nLastCol := GetPrintableAreaWidth() - iif(IsWinNT(), 2, 10)
+   SELECT PRINTER cPrinter PREVIEW
 
-	START PRINTDOC
+   nLastCol := GetPrintableAreaWidth() - iif(IsWinNT(), 2, 10)
 
-		START PRINTPAGE
-			@ 20 , 10 PRINT 'Hello HMG MiniPrint!' ;
-				TO 40 , nLastCol ;
-				FONT 'Courier New' ;
-				SIZE 36 ;
-				CENTER
+   START PRINTDOC
 
-			@ 50 , 10 PRINT LINE ;
-				TO 50 , nLastCol ;
-				COLOR { 0 , 255 , 0 } 
+      START PRINTPAGE
+         @ 20 , 10 PRINT 'Hello HMG MiniPrint!' ;
+            TO 40 , nLastCol ;
+            FONT 'Courier New' ;
+            SIZE 36 ;
+            CENTER
 
-			@ 70 , 10 PRINT RECTANGLE ;
-				TO 100 , nLastCol ;
-				COLOR { 0 , 0 , 255 }
+         @ 50 , 10 PRINT LINE ;
+            TO 50 , nLastCol ;
+            COLOR { 0 , 255 , 0 }
 
-			@ 120 , 10 PRINT IMAGE 'hmg.png' ;
-				WIDTH 80 ;
-				HEIGHT 40 ;
-				STRETCH
+         @ 70 , 10 PRINT RECTANGLE ;
+            TO 100 , nLastCol ;
+            COLOR { 0 , 0 , 255 }
 
-			@ 120 , 110 PRINT IMAGE 'hmg.png' ;
-				WIDTH 80 ;
-				HEIGHT 40
+         @ 120 , 10 PRINT IMAGE 'hmg.png' ;
+            WIDTH 80 ;
+            HEIGHT 40 ;
+            STRETCH
 
-			@ 210 , 50 PRINT RECTANGLE ;
-				TO 220 , 190 ;
-				COLOR { 255 , 0 , 0 } ;
-				PENWIDTH 2
+         @ 120 , 110 PRINT IMAGE 'hmg.png' ;
+            WIDTH 80 ;
+            HEIGHT 40
 
-			@ 205 , 10 PRINT 'This is a long long text to test multiline print..' ;
-				TO 235 , 30 ;
-				FONT 'Arial' ;
-				SIZE 11 ;
-				COLOR { 0 , 0 , 255 }
+         @ 210 , 50 PRINT RECTANGLE ;
+            TO 220 , 190 ;
+            COLOR { 255 , 0 , 0 } ;
+            PENWIDTH 2
 
-			@ 240 , 10 PRINT 'Alignment 1' ;
-				TO 250 , nLastCol ;
-				FONT 'Arial' ;
-				SIZE 12 ;
-				COLOR { 255 , 0 , 0 } 
+         @ 205 , 10 PRINT 'This is a long long text to test multiline print..' ;
+            TO 235 , 30 ;
+            FONT 'Arial' ;
+            SIZE 11 ;
+            COLOR { 0 , 0 , 255 }
 
-			@ 250 , 10 PRINT 'Alignment 2' ;
-				TO 260 , nLastCol ;
-				FONT 'Arial' ;
-				SIZE 12 ;
-				COLOR { 0 , 255 , 0 } ;
-				CENTER
+         @ 240 , 10 PRINT 'Alignment 1' ;
+            TO 250 , nLastCol ;
+            FONT 'Arial' ;
+            SIZE 12 ;
+            COLOR { 255 , 0 , 0 }
 
-			@ 260 , 10 PRINT 'Alignment 3' ;
-				TO 270 , nLastCol ;
-				FONT 'Arial' ;
-				SIZE 12 ;
-				COLOR { 0 , 0 , 255 } ;
-				RIGHT
+         @ 250 , 10 PRINT 'Alignment 2' ;
+            TO 260 , nLastCol ;
+            FONT 'Arial' ;
+            SIZE 12 ;
+            COLOR { 0 , 255 , 0 } ;
+            CENTER
 
-		END PRINTPAGE
+         @ 260 , 10 PRINT 'Alignment 3' ;
+            TO 270 , nLastCol ;
+            FONT 'Arial' ;
+            SIZE 12 ;
+            COLOR { 0 , 0 , 255 } ;
+            RIGHT
 
-		START PRINTPAGE
+      END PRINTPAGE
 
-			@ 30 , 15 PRINT 'Another Page!' ;
-				FONT 'Arial' ;
-				SIZE 72 ;
-				COLOR { 0 , 0 , 255 } 
+      START PRINTPAGE
 
-			@ 130 , 15 PRINT 'Another Page!' ;
-				FONT 'Arial' ;
-				SIZE 72 ;
+         @ 30 , 15 PRINT 'Another Page!' ;
+            FONT 'Arial' ;
+            SIZE 72 ;
+            COLOR { 0 , 0 , 255 }
 
-			@ 160 , 10 PRINT LINE ;
-				TO 160 , nLastCol ;
+         @ 130 , 15 PRINT 'Another Page!' ;
+            FONT 'Arial' ;
+            SIZE 72 ;
 
-			@ 200 , nLastCol PRINT 'Another Page!' ;
-				FONT 'Arial' ;
-				SIZE 20 ;
-				RIGHT			
+         @ 160 , 10 PRINT LINE ;
+            TO 160 , nLastCol ;
 
-			@ 210 , 100 PRINT 'Another Page!' ;
-				FONT 'Arial' ;
-				SIZE 20 ;
-				CENTER
+         @ 200 , nLastCol PRINT 'Another Page!' ;
+            FONT 'Arial' ;
+            SIZE 20 ;
+            RIGHT
 
-		END PRINTPAGE
+         @ 210 , 100 PRINT 'Another Page!' ;
+            FONT 'Arial' ;
+            SIZE 20 ;
+            CENTER
 
-	END PRINTDOC
+      END PRINTPAGE
 
-Return
+   END PRINTDOC
+
+   RETURN
+

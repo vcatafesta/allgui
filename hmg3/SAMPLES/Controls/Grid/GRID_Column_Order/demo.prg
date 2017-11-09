@@ -1,17 +1,17 @@
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-Local aRows [20] [3]
+   LOCAL aRows [20] [3]
 
-   Private fColor := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , { 0,0,255 } , { 0,255,0 } ) }   
+   PRIVATE fColor := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , { 0,0,255 } , { 0,255,0 } ) }
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 400 ;
-      TITLE 'Mixed Data Type Grid Test' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 400 ;
+         TITLE 'Mixed Data Type Grid Test' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'
@@ -52,19 +52,19 @@ Local aRows [20] [3]
          ITEMS aRows ;
          EDIT ;
          COLUMNCONTROLS { ;
-            {'TEXTBOX' , 'NUMERIC' , '$ 999,999.99'} , ;
-            {'DATEPICKER' , 'DROPDOWN'} , ;
-            {'COMBOBOX' , {'One' , 'Two' , 'Three'}} , ;
-            { 'SPINNER' , 1 , 20 } , ;
-            { 'CHECKBOX' , 'Yes' , 'No' } ;
-            } ;
+         {'TEXTBOX' , 'NUMERIC' , '$ 999,999.99'} , ;
+         {'DATEPICKER' , 'DROPDOWN'} , ;
+         {'COMBOBOX' , {'One' , 'Two' , 'Three'}} , ;
+         { 'SPINNER' , 1 , 20 } , ;
+         { 'CHECKBOX' , 'Yes' , 'No' } ;
+         } ;
          COLUMNWHEN { ;
-            { || This.CellValue > 120 } , ;
-            { || This.CellValue = Date() } , ;
-            Nil , ;
-            Nil , ;
-            Nil ;
-            } ;
+         { || This.CellValue > 120 } , ;
+         { || This.CellValue = Date() } , ;
+         Nil , ;
+         Nil , ;
+         Nil ;
+         } ;
          DYNAMICFORECOLOR { fColor , fColor, fColor, fColor, fColor }
 
    END WINDOW
@@ -73,22 +73,28 @@ Local aRows [20] [3]
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
-
+   RETURN NIL
 
 PROCEDURE SetOrder()
-local i, aColumns := { 5, 4, 3, 2, 1 }
+
+   LOCAL i, aColumns := { 5, 4, 3, 2, 1 }
+
    Form_1.Grid_1.DisableUpdate()
    FOR i = 1 TO Form_1.Grid_1.ColumnCOUNT
-       Form_1.Grid_1.ColumnDISPLAYPOSITION (i) := aColumns [i]
+      Form_1.Grid_1.ColumnDISPLAYPOSITION (i) := aColumns [i]
    NEXT
    Form_1.Grid_1.EnableUpdate()
    Form_1.Grid_1.Refresh
-RETURN
+
+   RETURN
 
 PROCEDURE GetOrder()
-local i
+
+   LOCAL i
+
    FOR i = 1 TO Form_1.Grid_1.ColumnCOUNT
-       MsgInfo ( "Column " + ltrim( str ( Form_1.Grid_1.ColumnDISPLAYPOSITION (i) ) ), ltrim( str ( i ) ) )
+      MsgInfo ( "Column " + ltrim( str ( Form_1.Grid_1.ColumnDISPLAYPOSITION (i) ) ), ltrim( str ( i ) ) )
    NEXT
-RETURN
+
+   RETURN
+

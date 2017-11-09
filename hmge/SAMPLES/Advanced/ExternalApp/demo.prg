@@ -1,161 +1,159 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006-2011 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006-2011 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
 #define WM_CLOSE           0x0010
 
-#define GW_HWNDFIRST		0
-#define GW_HWNDLAST		1
-#define GW_HWNDNEXT		2
-#define GW_HWNDPREV		3
-#define GW_OWNER		4
-#define GW_CHILD		5
+#define GW_HWNDFIRST      0
+#define GW_HWNDLAST      1
+#define GW_HWNDNEXT      2
+#define GW_HWNDPREV      3
+#define GW_OWNER      4
+#define GW_CHILD      5
 
-Static cAppTitle
+STATIC cAppTitle
 
 FUNCTION Main()
-Local nLang := nHex( SubStr( I2Hex( GetUserLangID() ), 3 ) )
 
-	IF nLang == 25
-		cAppTitle := "Калькулятор"
-	ELSEIF nLang == 10 .OR. nLang == 22
-		cAppTitle := "Calculadora"
-	ELSEIF nlang == 16
-		cAppTitle := "Calcolatrice"
-	ELSE //IF nLang == 9
-		cAppTitle := "Calculator"
-	ENDIF
+   LOCAL nLang := nHex( SubStr( I2Hex( GetUserLangID() ), 3 ) )
 
-  	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 400 HEIGHT 200 ;
-		TITLE "Minimize/Restore Calc Demo" ;
-		MAIN ;
-		ON INIT StartIt() ;
-		ON RELEASE CloseIt()
+   IF nLang == 25
+      cAppTitle := "Калькулятор"
+   ELSEIF nLang == 10 .OR. nLang == 22
+      cAppTitle := "Calculadora"
+   ELSEIF nlang == 16
+      cAppTitle := "Calcolatrice"
+   ELSE //IF nLang == 9
+      cAppTitle := "Calculator"
+   ENDIF
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	150
-			CAPTION 'Minimize/Restore Calc' 
-			ACTION MinimizeIt()
-			DEFAULT .T.
-		END BUTTON
+   DEFINE WINDOW Form_Main ;
+         AT 0,0 ;
+         WIDTH 400 HEIGHT 200 ;
+         TITLE "Minimize/Restore Calc Demo" ;
+         MAIN ;
+         ON INIT StartIt() ;
+         ON RELEASE CloseIt()
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	150
-			CAPTION 'Cancel'
-			ACTION ThisWindow.Release
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   150
+         CAPTION 'Minimize/Restore Calc'
+         ACTION MinimizeIt()
+         DEFAULT .T.
+      END BUTTON
 
-	END WINDOW
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   150
+         CAPTION 'Cancel'
+         ACTION ThisWindow.Release
+      END BUTTON
 
-	CENTER WINDOW Form_Main
+   END WINDOW
 
-	ACTIVATE WINDOW Form_Main
+   CENTER WINDOW Form_Main
 
-RETURN Nil
+   ACTIVATE WINDOW Form_Main
 
+   RETURN NIL
 
 FUNCTION StartIt()
-Local aTitles := GetTitles( Application.Handle )
 
-	IF EMPTY( aScan( aTitles, {|e| cAppTitle $ e[1] } ) )
+   LOCAL aTitles := GetTitles( Application.Handle )
 
-		_Execute ( 0, , "Calc", , , 5 )
+   IF EMPTY( aScan( aTitles, {|e| cAppTitle $ e[1] } ) )
 
-	ENDIF
+      _Execute ( 0, , "Calc", , , 5 )
 
-RETURN Nil
+   ENDIF
 
+   RETURN NIL
 
 FUNCTION CloseIt()
-Local aTitles := GetTitles( Application.Handle )
-Local hWnd, n
 
-	IF ( n := aScan( aTitles, {|e| cAppTitle $ e[1] } ) ) > 0
+   LOCAL aTitles := GetTitles( Application.Handle )
+   LOCAL hWnd, n
 
-		hWnd := aTitles[ n ][ 2 ]
+   IF ( n := aScan( aTitles, {|e| cAppTitle $ e[1] } ) ) > 0
 
-		PostMessage ( hWnd, WM_CLOSE, 0, 0 )
+      hWnd := aTitles[ n ][ 2 ]
 
-	ENDIF
+      PostMessage ( hWnd, WM_CLOSE, 0, 0 )
 
-RETURN Nil
+   ENDIF
 
+   RETURN NIL
 
 FUNCTION MinimizeIt()
-Local aTitles := GetTitles( Application.Handle )
-Local hWnd, n
 
-	IF ( n := aScan( aTitles, {|e| cAppTitle $ e[1] } ) ) > 0
+   LOCAL aTitles := GetTitles( Application.Handle )
+   LOCAL hWnd, n
 
-		hWnd := aTitles[ n ][ 2 ]
+   IF ( n := aScan( aTitles, {|e| cAppTitle $ e[1] } ) ) > 0
 
-		IF IsIconic( hWnd )
+      hWnd := aTitles[ n ][ 2 ]
 
-			_Restore( hWnd )
+      IF IsIconic( hWnd )
 
-		ELSE
+         _Restore( hWnd )
 
-			_Minimize( hWnd )
+      ELSE
 
-		ENDIF
+         _Minimize( hWnd )
 
-	ELSE
+      ENDIF
 
-		MsgStop( "Cannot find application window!", "Error" )
+   ELSE
 
-	ENDIF
+      MsgStop( "Cannot find application window!", "Error" )
 
-RETURN Nil
+   ENDIF
 
+   RETURN NIL
 
 FUNCTION GetTitles( hOwnWnd )
-Local aTasks := {}, cTitle := "", ;
-	hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )        // Get the first window
 
-	WHILE hWnd != 0                                   // Loop through all the windows
+   LOCAL aTasks := {}, cTitle := "", ;
+      hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )        // Get the first window
 
-		cTitle := GetWindowText( hWnd )
+   WHILE hWnd != 0                                   // Loop through all the windows
 
-		IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
-			IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
-			hWnd != hOwnWnd .AND.;             // If it is not this app
-			!EMPTY( cTitle ) .AND.;            // If the window has a title
-			!( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
-			!( cTitle == "Program Manager" )   // If it is not the Program Manager
+      cTitle := GetWindowText( hWnd )
 
-			aAdd( aTasks, { cTitle, hWnd } )
-		ENDIF
+      IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
+         IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
+         hWnd != hOwnWnd .AND.;             // If it is not this app
+         !EMPTY( cTitle ) .AND.;            // If the window has a title
+         !( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
+         !( cTitle == "Program Manager" )   // If it is not the Program Manager
 
-		hWnd := GetWindow( hWnd, GW_HWNDNEXT )     // Get the next window
-	ENDDO
+         aAdd( aTasks, { cTitle, hWnd } )
+      ENDIF
 
-RETURN aTasks
+      hWnd := GetWindow( hWnd, GW_HWNDNEXT )     // Get the next window
+   ENDDO
 
+   RETURN aTasks
 
 STATIC FUNCTION nHex( cHex )
-Local n, nChar, nResult := 0
-Local nLen := Len( cHex )
 
-	FOR n = 1 TO nLen
-		nChar := Asc( Upper( SubStr( cHex, n, 1 ) ) )
-		nResult += ( ( nChar - If( nChar <= 57, 48, 55 ) ) * ( 16 ^ ( nLen - n ) ) )
-	NEXT
+   LOCAL n, nChar, nResult := 0
+   LOCAL nLen := Len( cHex )
 
-RETURN nResult
+   FOR n = 1 TO nLen
+      nChar := Asc( Upper( SubStr( cHex, n, 1 ) ) )
+      nResult += ( ( nChar - If( nChar <= 57, 48, 55 ) ) * ( 16 ^ ( nLen - n ) ) )
+   NEXT
 
+   RETURN nResult
 
 #pragma BEGINDUMP
 
@@ -196,3 +194,4 @@ HB_FUNC ( I2HEX )
 }
 
 #pragma ENDDUMP
+

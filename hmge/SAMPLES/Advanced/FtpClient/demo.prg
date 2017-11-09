@@ -1,44 +1,38 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-07 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Based upon program MINIGUI\SAMPLES\ADVANCED\FILEMAN
- * Copyright 2003-2007 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Used functions desencri() and encri() by Gustavo C. Asborno <gcasborno@yahoo.com.ar>
- *
- * Used functions of sample ftplite on group harbourminigui_es by Juan Castillo A. <juan_casarte@yahoo.es>
- *
- * Copyright 2007 Walter Formigoni <walter.formigoni@uol.com.br>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-07 Roberto Lopez <harbourminigui@gmail.com>
+* Based upon program MINIGUI\SAMPLES\ADVANCED\FILEMAN
+* Copyright 2003-2007 Grigory Filatov <gfilatov@inbox.ru>
+* Used functions desencri() and encri() by Gustavo C. Asborno <gcasborno@yahoo.com.ar>
+* Used functions of sample ftplite on group harbourminigui_es by Juan Castillo A. <juan_casarte@yahoo.es>
+* Copyright 2007 Walter Formigoni <walter.formigoni@uol.com.br>
 */
-
 
 #include <minigui.ch>
 #include "Dbstruct.ch"
 #include "tip.ch"
 
-Static aDirectory, aSubDirectory, aOldPos
-Static aNivel := { 1, 1 }, aBack := { .t., .t. }, aGridWidth, nGridFocus := 1, bBlock, lBlock := .f.
-Static cRunCommand := "", aWinVer, aSortCol := { 2, 2 }
+STATIC aDirectory, aSubDirectory, aOldPos
+STATIC aNivel := { 1, 1 }, aBack := { .t., .t. }, aGridWidth, nGridFocus := 1, bBlock, lBlock := .f.
+STATIC cRunCommand := "", aWinVer, aSortCol := { 2, 2 }
 
-Memvar lfirst, oClient, oUrl
-Memvar newRecord
+MEMVAR lfirst, oClient, oUrl
+MEMVAR newRecord
 
-function main()
+FUNCTION main()
 
    LOCAL nScrWidth := GetDesktopWidth(), nScrHeight := GetDesktopHeight(), nWidth, nHeight, nGridHeight, nGridWidth
    LOCAL cButton,cDrive
 
-   Local nWnd := 1
-   Public lfirst := .t.
-   Public oClient, oUrl
+   LOCAL nWnd := 1
+   PUBLIC lfirst := .t.
+   PUBLIC oClient, oUrl
 
-   if !file("sites.dbf")
+   IF !file("sites.dbf")
       CreateTable()
-   endif
+   ENDIF
 
-   use sites alias sites
+   USE sites alias sites
 
    WHILE IsExeRunning( cFileNoPath( HB_ArgV( 0 ) ) + "_" + Ltrim(Str(nWnd)) )
       nWnd++
@@ -48,7 +42,6 @@ function main()
 
    SET CENTURY ON
    SET DATE GERMAN
-
 
    aDirectory := ARRAY( 2 )
    aSubDirectory := ARRAY( 2, 64 )
@@ -63,125 +56,148 @@ function main()
    nGridWidth := IF(nWidth = 800, 380, IF(nWidth = 700, 330, 280))
    aGridWidth := IF(nHeight = 600, {0, 145, 80, 74, 60 }, IF(nHeight = 540, {0, 115, 80, 60, 54 }, {0, 85, 70, 60, 45 }))
 
-   load window ftp
+   LOAD WINDOW ftp
    fillcombo()
    ftp.combo_1.value := 1
    ftp.button_4.enabled := .f.
    ftp.button_5.enabled := .f.
    ftp.button_6.enabled := .f.
    ftp.button_7.enabled := .f.
-   center window ftp
-   activate window ftp
-return nil
+   CENTER WINDOW ftp
+   ACTIVATE WINDOW ftp
 
-function sitemanager()
-    IF IsWindowDefined("sitemanager")
-       Domethod( 'sitemanager', 'SETFOCUS')
+   RETURN NIL
+
+FUNCTION sitemanager()
+
+   IF IsWindowDefined("sitemanager")
+      Domethod( 'sitemanager', 'SETFOCUS')
+
       RETURN NIL
-    Endif
+   ENDIF
 
-   load window sitemanager
-   center window sitemanager
-   activate window sitemanager
-return nil
+   LOAD WINDOW sitemanager
+   CENTER WINDOW sitemanager
+   ACTIVATE WINDOW sitemanager
 
-function sitemanagerexit()
-   release window sitemanager
-return nil
+   RETURN NIL
 
-function editsite(param)
-   public newRecord
-   load window editsitemanager
-   if param = NIL
+FUNCTION sitemanagerexit()
+
+   RELEASE WINDOW sitemanager
+
+   RETURN NIL
+
+FUNCTION editsite(param)
+
+   PUBLIC newRecord
+
+   LOAD WINDOW editsitemanager
+   IF param = NIL
       newRecord := .f.
       sites->(dbgoto(sitemanager.browse_1.value))
       editsitemanager.text_1.value := sites->name
       editsitemanager.text_2.value  :=sites->address
       editsitemanager.text_3.value := sites->user
       editsitemanager.text_4.value :=  desencri(sites->password)  && decript
-   else
+   ELSE
       newRecord := .t.
-   endif
+   ENDIF
 
-   center window editsitemanager
-   activate window editsitemanager
-return nil
+   CENTER WINDOW editsitemanager
+   ACTIVATE WINDOW editsitemanager
 
-function ftppropcancel()
-   release window editsitemanager
-return nil
+   RETURN NIL
 
-function ftpdelete()
-   if msgyesno('Are You Sure?','Delete Record') == .f.
-      return nil
-   Endif
+FUNCTION ftppropcancel()
+
+   RELEASE WINDOW editsitemanager
+
+   RETURN NIL
+
+FUNCTION ftpdelete()
+
+   IF msgyesno('Are You Sure?','Delete Record') == .f.
+
+      RETURN NIL
+   ENDIF
    sites->(dbdelete(sitemanager.browse_1.value))
    sites->(__dbpack())
    sitemanager.browse_1.refresh
    fillcombo()
-return nil
 
-function ftppropsave()
-   if newRecord = .t.
+   RETURN NIL
+
+FUNCTION ftppropsave()
+
+   IF newRecord = .t.
       sites->(dbappend())
-   endif
+   ENDIF
    sites->name := editsitemanager.text_1.value
    sites->address := editsitemanager.text_2.value
    sites->user := editsitemanager.text_3.value
    sites->password := encrip(editsitemanager.text_4.value) && encript
    sitemanager.browse_1.refresh
    fillcombo()
-   release window editsitemanager
-return nil
+   RELEASE WINDOW editsitemanager
 
-function fillcombo()
-   local x
+   RETURN NIL
+
+FUNCTION fillcombo()
+
+   LOCAL x
+
    ftp.combo_1.deleteallitems
-   for x = 1 to sites->(reccount())
+   FOR x = 1 to sites->(reccount())
       ftp.combo_1.additem(sites->name)
       sites->(dbskip())
-   next x
-return nil
+   NEXT x
 
-function ftpconn1()
-   if sites->(reccount()) > 0
+   RETURN NIL
+
+FUNCTION ftpconn1()
+
+   IF sites->(reccount()) > 0
       sites->(dbgoto(ftp.combo_1.value))
       ftpconnect()
-   else
+   ELSE
       msgalert("No available sites", "Alert")
-   endif
-return nil
+   ENDIF
 
-function ftpconn2()
+   RETURN NIL
+
+FUNCTION ftpconn2()
+
    sites->(dbgoto(sitemanager.browse_1.value))
    ftp.combo_1.value := sitemanager.browse_1.value
    ftpconnect()
-   release window sitemanager
-return nil
+   RELEASE WINDOW sitemanager
 
+   RETURN NIL
 
-function ftpConnect()
+FUNCTION ftpConnect()
 
-   Local cUser     := sites->user
-   Local cPassWord := desencri(sites->password)
-   Local cServer   := sites->address
+   LOCAL cUser     := sites->user
+   LOCAL cPassWord := desencri(sites->password)
+   LOCAL cServer   := sites->address
 
-   Local cProtocol := "ftp://"
-   Local cUrl
+   LOCAL cProtocol := "ftp://"
+   LOCAL cUrl
 
    cUrl := cProtocol + Alltrim( cUser )+":"+ Alltrim( cPassWord ) +"@"+  alltrim( cServer)
 
    oUrl := tURL():New( cUrl )
    IF Empty( oUrl )
-      return nil
-   endif
+
+      RETURN NIL
+   ENDIF
    oClient := TIpClientFtp():new( oUrl, .T. ) && PARAM .T. TO LOG
    IF Empty( oClient )
-      return nil
-   endif
+
+      RETURN NIL
+   ENDIF
    oClient:nConnTimeout := 20000
    oClient:bUsePasv     := .T.
-
 
    // Comprobamos si el usuario contiene una @ para forzar el userid
    IF At( "@", cUser ) > 0
@@ -189,7 +205,6 @@ function ftpConnect()
       oClient:oUrl:cUserID   := cUser
       oClient:oUrl:cPassword := cPassword
    ENDIF
-
 
    IF oClient:Open()
       IF Empty( oClient:cReply )
@@ -207,27 +222,27 @@ function ftpConnect()
       msgalert("Connection is not opened", "Alert")
    ENDIF
 
-return nil
-
+   RETURN NIL
 
 FUNCTION FTPFILLGRID()
-   local ctext, cSepChar, nPos, acDir, cLine, x, avalues, xpesq, xpos, cvalue, cvalue1
-   local nX, cFileName, nDirImg
+
+   LOCAL ctext, cSepChar, nPos, acDir, cLine, x, avalues, xpesq, xpos, cvalue, cvalue1
+   LOCAL nX, cFileName, nDirImg
 
    ctext := oClient:List()
    oClient:reset()
    cSepChar := CRLF
    nPos := At( cSepChar, ctext )
-   If nPos == 0
-      If ! Empty( ctext )  // single line, just one file, THEREFORE there won't be any CRLF's!
+   IF nPos == 0
+      IF ! Empty( ctext )  // single line, just one file, THEREFORE there won't be any CRLF's!
          ctext += CRLF
-      Else
+      ELSE
          cSepChar := Chr(10)
-      Endif
+      ENDIF
       nPos := At( cSepChar, ctext )
-   Endif
+   ENDIF
    acDir := {}
-   Do While nPos > 0 &&.and. ! Eval( ::bAbort )
+   DO WHILE nPos > 0 &&.and. ! Eval( ::bAbort )
       cLine := AllTrim( Left( ctext, nPos - 1 ) )
       ctext := SubStr( ctext, nPos + Len( cSepChar ) )
       cLine := AllTrim( StrTran( cLine, Chr(0), "" ) )
@@ -236,99 +251,112 @@ FUNCTION FTPFILLGRID()
 
       nPos := At( cSepChar, ctext )
       DO EVENTS
-   Enddo
+   ENDDO
 
    ftp.Grid_2.DisableUpdate
    ftp.Grid_2.DeleteAllItems
 
    nPos := If( len(acDir)>0 .and. acDir[1]=="[..]", 2, 1 )
-   for x = nPos to len(acDir)
+   FOR x = nPos to len(acDir)
       avalues := {}
       xpesq := alltrim(acDir[x])
-      do while .t.
+      DO WHILE .t.
          xpos := at(' ',xpesq)
-         if xpos = 0
+         IF xpos = 0
             aadd(avalues,xpesq)
             cFileName := ""
-            for nX := 10 to len(avalues)
-                cFileName += avalues[nX]+' '
-            next
+            FOR nX := 10 to len(avalues)
+               cFileName += avalues[nX]+' '
+            NEXT
             cFileName := If( substr(avalues[1],1,1) = 'l', substr(cFileName, 1, at('->', cFileName) - 1), rtrim(cFileName) )
             nDirImg := If( substr(avalues[1],1,1) = 'd', 0, 1 )
             ftp.Grid_2.AddItem( {nDirImg,cFileName,avalues[5],avalues[7]+'.'+ALLTRIM(STR(nMONTH(avalues[6])))+'.'+avalues[8],avalues[9],avalues[1]} )
-            exit
-         endif
+            EXIT
+         ENDIF
          cvalue := substr(xpesq,1,xpos-1)
          xpesq := Ltrim(substr(xpesq,xpos+1,len(xpesq)))
-         if len(avalues) < 7 .or. len(avalues) > 8
+         IF len(avalues) < 7 .or. len(avalues) > 8
             aadd(avalues,cvalue)
-         else
-            if at(':',cvalue) > 0
+         ELSE
+            IF at(':',cvalue) > 0
                cvalue1 := alltrim(str(year(date())))
                aadd(avalues,cvalue1) && year
                aadd(avalues,cvalue)  && time
-            else
+            ELSE
                aadd(avalues,cvalue) && year
                aadd(avalues,"")  && time
-            endif
-         endif
-      enddo
+            ENDIF
+         ENDIF
+      ENDDO
 
-   next x
+   NEXT x
 
    ftp.Grid_2.EnableUpdate
-RETURN nil
+
+   RETURN NIL
 
 FUNCTION LOCALMKDIR()
-   local cfile := INPUTBOX('NEW DIR NAME ?')
+
+   LOCAL cfile := INPUTBOX('NEW DIR NAME ?')
+
    createfolder(getcurrentfolder() + '\'+cfile)
    GetDirectory(getcurrentfolder() + '\*.*', 1)
-return nil
+
+   RETURN NIL
 
 FUNCTION LOCALREN()
-   local cFileOld := getcurrentfolder()+'\'+getcolvalue("GRID_1","FTP",2)
-   local cFileNew := INPUTBOX('NEW FILE NAME ?')
+
+   LOCAL cFileOld := getcurrentfolder()+'\'+getcolvalue("GRID_1","FTP",2)
+   LOCAL cFileNew := INPUTBOX('NEW FILE NAME ?')
+
    cFileNew := getcurrentfolder()+'\'+cFileNew
    RENAME (cFileOld) TO (cFileNew)
    GetDirectory(getcurrentfolder() + '\*.*', 1)
-return nil
 
+   RETURN NIL
 
 FUNCTION LOCALDEL()
-   local ctype
-   local cFile := getcurrentfolder() + '\'+getcolvalue("GRID_1","FTP",2)
+
+   LOCAL ctype
+   LOCAL cFile := getcurrentfolder() + '\'+getcolvalue("GRID_1","FTP",2)
+
    IF .NOT. EMPTY(cFile)
       ctype := getcolvalue("GRID_1","FTP",3)
-      if alltrim(ctype) = '<DIR>'
+      IF alltrim(ctype) = '<DIR>'
          cfile := strtran(cfile,'[','')
          cfile := strtran(cfile,']','')
          removefolder(cfile)
       ELSE
          ERASE (cFile)
-      endif
+      ENDIF
 
       GetDirectory(getcurrentfolder() + '\*.*', 1)
    ENDIF
-return nil
+
+   RETURN NIL
 
 FUNCTION FTPCWD()
-   local lresp, cpath, cfolder
-   local ctype := substr(getcolvalue("GRID_2","FTP",6),1,1)
-   if ctype = 'd'
+
+   LOCAL lresp, cpath, cfolder
+   LOCAL ctype := substr(getcolvalue("GRID_2","FTP",6),1,1)
+
+   IF ctype = 'd'
       lresp :=  oClient:PWD
       cpath := oClient:cReply
-      if cpath == '/'
+      IF cpath == '/'
          cfolder := '/'+getcolvalue("GRID_2","FTP",2)
-      else
+      ELSE
          cfolder := cpath+'/'+getcolvalue("GRID_2","FTP",2)
-      endif
+      ENDIF
       lresp := oClient:CWD(cfolder)
       FTPFILLGRID()
-   endif
-RETURN nil
+   ENDIF
+
+   RETURN NIL
 
 FUNCTION FTPCLOSE()
-   local lresp := oClient:CLOSE()
+
+   LOCAL lresp := oClient:CLOSE()
 
    ftp.Grid_2.DeleteAllItems
    ftp.button_4.enabled := .f.
@@ -336,128 +364,142 @@ FUNCTION FTPCLOSE()
    ftp.button_6.enabled := .f.
    ftp.button_7.enabled := .f.
    ftp.button_3.enabled := .t.
-RETURN nil
+
+   RETURN NIL
 
 FUNCTION FTPREN()
-   local cFileOld := getcolvalue("GRID_2","FTP",2)
-   local cFileNew := INPUTBOX('NEW FILE NAME ?')
-   local lresp := oClient:RENAME( cFileOld,cFileNew )
+
+   LOCAL cFileOld := getcolvalue("GRID_2","FTP",2)
+   LOCAL cFileNew := INPUTBOX('NEW FILE NAME ?')
+   LOCAL lresp := oClient:RENAME( cFileOld,cFileNew )
+
    FTPFILLGRID()
-RETURN nil
+
+   RETURN NIL
 
 FUNCTION FTPMKDIR()
-   local cFile := INPUTBOX('NEW DIR NAME ?')
-   local lresp := oClient:MKD( cFile )
+
+   LOCAL cFile := INPUTBOX('NEW DIR NAME ?')
+   LOCAL lresp := oClient:MKD( cFile )
+
    FTPFILLGRID()
-RETURN nil
+
+   RETURN NIL
 
 FUNCTION FTPDEL()
-   local ctype, lresp
-   local cFile := getcolvalue("GRID_2","FTP",2)
+
+   LOCAL ctype, lresp
+   LOCAL cFile := getcolvalue("GRID_2","FTP",2)
+
    IF .NOT. EMPTY(cFile)
       ctype := substr(getcolvalue("GRID_2","FTP",6),1,1)
-      if ctype = 'd'
+      IF ctype = 'd'
          lresp := oClient:RMD( cFile )
       ELSE
          lresp := oClient:Dele( cFile )
-      endif
+      ENDIF
       ftpfillgrid()
    ENDIF
-return nil
+
+   RETURN NIL
 
 FUNCTION FTPDOWN()
-   local lresp
-   local cFile := getcolvalue("GRID_2","FTP",2)
-   if ftp.grid_1.cell(1,2) # '[..]'
+
+   LOCAL lresp
+   LOCAL cFile := getcolvalue("GRID_2","FTP",2)
+
+   IF ftp.grid_1.cell(1,2) # '[..]'
       setcurrentfolder('c:\')
-   endif
-   if ISOBJECT(oClient)
+   ENDIF
+   IF ISOBJECT(oClient)
       lresp := oClient:DownloadFile( cFile )
       GetDirectory(getcurrentfolder() + '\*.*', 1)
-      if valtype(lresp) = "L"
-         if lresp != .t.
+      IF valtype(lresp) = "L"
+         IF lresp != .t.
             msgstop('Error was arised at downloading!')
-         endif
-      endif
-   endif
-return nil
+         ENDIF
+      ENDIF
+   ENDIF
+
+   RETURN NIL
 
 FUNCTION FTPUP()
-   local lresp
-   local cFile := getcolvalue("GRID_1","FTP",2)
-   local cFile1 := getcurrentfolder()+'\'+cFile
 
-   if ftp.grid_1.cell(1,2) # '[..]'
+   LOCAL lresp
+   LOCAL cFile := getcolvalue("GRID_1","FTP",2)
+   LOCAL cFile1 := getcurrentfolder()+'\'+cFile
+
+   IF ftp.grid_1.cell(1,2) # '[..]'
       cFile1 := 'C:\'+cFile
-   endif
-   if file(cFile1)
-      if ISOBJECT(oClient)
-//         oClient:TypeA()
+   ENDIF
+   IF file(cFile1)
+      IF ISOBJECT(oClient)
+         //         oClient:TypeA()
          oClient:bUsePasv := .T.
 
          lresp := oClient:UploadFile( cFile1 )
-//         ftpfillgrid()
+         //         ftpfillgrid()
 
-         if valtype(lresp) = "L"
-            if lresp = .t.
+         IF valtype(lresp) = "L"
+            IF lresp = .t.
                ftpfillgrid()
-            else
+            ELSE
                msgstop('Error was arised at uploading!')
-            endif
-         endif
-      endif
-   endif
-return nil
+            ENDIF
+         ENDIF
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------*
-Function GetColValue( xObj, xForm, nCol )
-*------------------------------------------------------------*
-   Local nPos:= GetProperty(xForm, xObj, 'Value')
-   Local aRet:= GetProperty(xForm, xObj, 'Item', nPos)
-return aRet[nCol]
+   RETURN NIL
 
-*------------------------------------------------------------*
-function initgrid()
-*------------------------------------------------------------*
+FUNCTION GetColValue( xObj, xForm, nCol )
+
+   LOCAL nPos:= GetProperty(xForm, xObj, 'Value')
+   LOCAL aRet:= GetProperty(xForm, xObj, 'Item', nPos)
+
+   RETURN aRet[nCol]
+
+FUNCTION initgrid()
+
    GetDirectory(aSubDirectory[1][1] + '\*.*', 1)
    lfirst := .f.
-return nil
 
-*------------------------------------------------------------*
-function nMonth(param)
-*------------------------------------------------------------*
-   local RETVAL := 0
+   RETURN NIL
 
-   if upper(param) = 'JAN'
+FUNCTION nMonth(param)
+
+   LOCAL RETVAL := 0
+
+   IF upper(param) = 'JAN'
       RETVAL := 1
-   elseif upper(param) = 'FEB'
+   ELSEIF upper(param) = 'FEB'
       RETVAL := 2
-   elseif upper(param) = 'MAR'
+   ELSEIF upper(param) = 'MAR'
       RETVAL := 3
-   elseif upper(param) = 'APR'
+   ELSEIF upper(param) = 'APR'
       RETVAL := 4
-   elseif upper(param) = 'MAY'
+   ELSEIF upper(param) = 'MAY'
       RETVAL := 5
-   elseif upper(param) = 'JUN'
+   ELSEIF upper(param) = 'JUN'
       RETVAL := 6
-   elseif upper(param) = 'JUL'
+   ELSEIF upper(param) = 'JUL'
       RETVAL := 7
-   elseif upper(param) = 'AUG'
+   ELSEIF upper(param) = 'AUG'
       RETVAL := 8
-   elseif upper(param) = 'SEP'
+   ELSEIF upper(param) = 'SEP'
       RETVAL := 9
-   elseif upper(param) = 'OCT'
+   ELSEIF upper(param) = 'OCT'
       RETVAL := 10
-   elseif upper(param) = 'NOV'
+   ELSEIF upper(param) = 'NOV'
       RETVAL := 11
-   elseif upper(param) = 'DEC'
+   ELSEIF upper(param) = 'DEC'
       RETVAL := 12
-   endif
-return(RETVAL)
+   ENDIF
 
-*------------------------------------------------------------*
-procedure Head_click( nCol )
-*------------------------------------------------------------*
+   RETURN(RETVAL)
+
+PROCEDURE Head_click( nCol )
+
    LOCAL nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value ),;
       nOldCol := aSortCol[nGridFocus]
 
@@ -491,17 +533,16 @@ procedure Head_click( nCol )
       ftp.Grid_1.DisableUpdate
       ftp.Grid_1.DeleteAllItems
       Aeval(aDirectory[nGridFocus], {|e| ftp.Grid_1.AddItem( {if(valtype(e[2])="N", 0,1), e[1], ;
-        if(valtype(e[2])="N", STR(e[2]), e[2]), DTOC(e[3]), e[4] } )})
+         if(valtype(e[2])="N", STR(e[2]), e[2]), DTOC(e[3]), e[4] } )})
       _SetGridCaption( "Grid_1", "FTP", nCol, "[" + ftp.Grid_1.Header(nCol) + "]", if(nCol=2, BROWSE_JTFY_LEFT, if(nCol=3, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER )))
       ftp.Grid_1.Value := if(Empty(nPos), 1, nPos)
       ftp.Grid_1.EnableUpdate
    ENDIF
 
-Return
+   RETURN
 
-*------------------------------------------------------------*
 FUNCTION GetDirectory( cVar, nFocus )
-*------------------------------------------------------------*
+
    LOCAL aDir:= {}, aAux := {}, nSortCol
    LOCAL cDir, i := 1, j := 1
 
@@ -526,10 +567,10 @@ FUNCTION GetDirectory( cVar, nFocus )
 
             IF SubStr( aDirectory[nFocus][i][1], 2, 1) <> '.' .AND. SubStr( aDirectory[nFocus][j][1], 2, 1) <> '.'
 
-               aAux				:= aDirectory[nFocus][i]
-               aDirectory[nFocus][i]	:= aDirectory[nFocus][j]
-               aDirectory[nFocus][j]	:= aAux
-               aAux				:= {}
+               aAux            := aDirectory[nFocus][i]
+               aDirectory[nFocus][i]   := aDirectory[nFocus][j]
+               aDirectory[nFocus][j]   := aAux
+               aAux            := {}
             ENDIF
          ENDIF
 
@@ -541,16 +582,16 @@ FUNCTION GetDirectory( cVar, nFocus )
    nSortCol := aSortCol[nFocus]
    IF nSortCol = 1
       Asort(aDirectory[nFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
-      SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[1] < b[1])))})
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[1] < b[1])))})
    ELSEIF nSortCol = 2
       Asort(aDirectory[nFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
-      SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[2] < b[2])))})
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[2] < b[2])))})
    ELSEIF nSortCol = 3
       Asort(aDirectory[nFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N",  ;
-      SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[3] < b[3])))})
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[3] < b[3])))})
    ELSE
       Asort(aDirectory[nFocus], , , {|a,b| if(valtype(a[2]) # "N" .AND. valtype(b[2]) # "N", ;
-      SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[4] < b[4])))})
+         SUBSTR(a[1],2) < SUBSTR(b[1],2), if(valtype(a[2]) # "N", SUBSTR(a[1],2) < CHR(254)+b[1], if(valtype(b[2]) # "N", CHR(254)+a[1] < SUBSTR(b[1],2), a[4] < b[4])))})
    ENDIF
 
    IF nFocus = 1
@@ -562,13 +603,13 @@ FUNCTION GetDirectory( cVar, nFocus )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------*
 FUNCTION Verify()
-*------------------------------------------------------------*
+
    LOCAL nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value )
    LOCAL cDirectory := aSubDirectory[nGridFocus][1], i, cPath, cFile, cExt, cExe
+
    IF !Empty( nPos )
       IF Len( aDirectory[nGridFocus] ) > 0
          IF Alltrim(aDirectory[nGridFocus][ nPos, 1 ] ) <> '[..]' .AND. Valtype(aDirectory[nGridFocus][ nPos, 2 ]) # "N"
@@ -613,25 +654,24 @@ FUNCTION Verify()
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------*
 FUNCTION CurrentDirectory(param)
-*------------------------------------------------------------*
+
    LOCAL cPath := GetFull(), cName := GetName()
    LOCAL cText := cPath + '\' + cName
-   if param # NIL
+
+   IF param # NIL
       nGridFocus := param
-   endif
+   ENDIF
    IF nGridFocus = 1
       ftp.Label_3.Value := cText
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------*
 FUNCTION GetExt()
-*------------------------------------------------------------*
+
    LOCAL cExtension := "", cFile := GetName()
    LOCAL nPosition  := Rat( '.', Alltrim(cFile) )
 
@@ -639,11 +679,10 @@ FUNCTION GetExt()
       cExtension := SubStr( cFile, nPosition + 1, Len( Alltrim(cFile) ) )
    ENDIF
 
-RETURN Upper(cExtension)
+   RETURN Upper(cExtension)
 
-*------------------------------------------------------------*
 FUNCTION GetName()
-*------------------------------------------------------------*
+
    LOCAL cText := "", nPos
 
    IF ( nPos := IF( nGridFocus = 1, ftp.Grid_1.Value, ftp.Grid_2.Value ) ) > 0
@@ -652,58 +691,56 @@ FUNCTION GetName()
          aDirectory[nGridFocus][ nPos, 1] )
    ENDIF
 
-RETURN ALLTRIM( cText )
+   RETURN ALLTRIM( cText )
 
-*------------------------------------------------------------*
 FUNCTION GetFull()
-*------------------------------------------------------------*
+
    LOCAL cText := aSubDirectory[nGridFocus][1], i
 
    FOR i = 2 TO aNivel[nGridFocus]
       cText += SubStr(aSubDirectory[nGridFocus][ i ], 1, Len(aSubDirectory[nGridFocus][ i ]) - 1)
    NEXT
 
-RETURN cText
+   RETURN cText
 
-*------------------------------------------------------------*
-Static Function GetOpenCommand( cExt )
-*------------------------------------------------------------*
-   Local oReg, cVar1 := "", cVar2 := "", nPos
+STATIC FUNCTION GetOpenCommand( cExt )
 
-   If ! ValType( cExt ) == "C"
-      Return ""
-   Endif
+   LOCAL oReg, cVar1 := "", cVar2 := "", nPos
 
-   If ! Left( cExt, 1 ) == "."
+   IF ! ValType( cExt ) == "C"
+
+      RETURN ""
+   ENDIF
+
+   IF ! Left( cExt, 1 ) == "."
       cExt := "." + cExt
-   Endif
+   ENDIF
 
    oReg := TReg32():New( HKEY_CLASSES_ROOT, cExt, .f. )
    cVar1 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) ) // i.e look for (Default) key
    oReg:close()
 
-   If ! Empty( cVar1 )
+   IF ! Empty( cVar1 )
       oReg := TReg32():New( HKEY_CLASSES_ROOT, cVar1 + "\shell\open\command", .f. )
       cVar2 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) )  // i.e look for (Default) key
       oReg:close()
 
-      If ( nPos := RAt( " %1", cVar2 ) ) > 0        // look for param placeholder without the quotes (ie notepad)
+      IF ( nPos := RAt( " %1", cVar2 ) ) > 0        // look for param placeholder without the quotes (ie notepad)
          cVar2 := SubStr( cVar2, 1, nPos )
-      Elseif ( nPos := RAt( '"%', cVar2 ) ) > 0     // look for stuff like "%1", "%L", and so forth (ie, with quotes)
+      ELSEIF ( nPos := RAt( '"%', cVar2 ) ) > 0     // look for stuff like "%1", "%L", and so forth (ie, with quotes)
          cVar2 := SubStr( cVar2, 1, nPos - 1 )
-      Elseif ( nPos := RAt( '%', cVar2 ) ) > 0      // look for stuff like "%1", "%L", and so forth (ie, without quotes)
+      ELSEIF ( nPos := RAt( '%', cVar2 ) ) > 0      // look for stuff like "%1", "%L", and so forth (ie, without quotes)
          cVar2 := SubStr( cVar2, 1, nPos - 1 )
-      Elseif ( nPos := RAt( ' /', cVar2 ) ) > 0     // look for stuff like "/"
+      ELSEIF ( nPos := RAt( ' /', cVar2 ) ) > 0     // look for stuff like "/"
          cVar2 := SubStr( cVar2, 1, nPos - 1 )
-      Endif
-   Endif
+      ENDIF
+   ENDIF
 
-Return RTrim( cVar2 )
+   RETURN RTrim( cVar2 )
 
-*------------------------------------------------------------*
-Function _SetGridCaption ( ControlName, ParentForm , Column , Value , nJustify )
-*------------------------------------------------------------*
-   Local i , h , t
+FUNCTION _SetGridCaption ( ControlName, ParentForm , Column , Value , nJustify )
+
+   LOCAL i , h , t
 
    i := GetControlIndex ( ControlName, ParentForm )
 
@@ -713,15 +750,14 @@ Function _SetGridCaption ( ControlName, ParentForm , Column , Value , nJustify )
 
    _HMG_aControlCaption [i] [Column] := Value
 
-   If t == 'GRID'
+   IF t == 'GRID'
       SETGRIDCOLUMNHEADER ( h , Column , Value , nJustify )
-   EndIf
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-*------------------------------------------------------------*
-Procedure CreateTable
-*------------------------------------------------------------*
+PROCEDURE CreateTable
+
    LOCAL aDbf[4][4]
    FIELD NAME, ADDRESS, USER, PASSWORD
 
@@ -729,47 +765,46 @@ Procedure CreateTable
    aDbf[1][ DBS_TYPE ] := "Character"
    aDbf[1][ DBS_LEN ]  := 60
    aDbf[1][ DBS_DEC ]  := 0
-   //
    aDbf[2][ DBS_NAME ] := "Address"
    aDbf[2][ DBS_TYPE ] := "Character"
    aDbf[2][ DBS_LEN ]  := 100
    aDbf[2][ DBS_DEC ]  := 0
-   //
    aDbf[3][ DBS_NAME ] := "User"
    aDbf[3][ DBS_TYPE ] := "Character"
    aDbf[3][ DBS_LEN ]  := 60
    aDbf[3][ DBS_DEC ]  := 0
-   //
    aDbf[4][ DBS_NAME ] := "Password"
    aDbf[4][ DBS_TYPE ] := "Character"
    aDbf[4][ DBS_LEN ]  := 20
    aDbf[4][ DBS_DEC ]  := 0
 
-
    DBCREATE("Sites", aDbf)
 
-return
+   RETURN
 
-*------------------------------------------------------------*
-Function Encrip(pepe)
-*------------------------------------------------------------*
-   local pala:='', let, a, conv
-   local enc:=len(pepe)
-   for a=1 to enc
+FUNCTION Encrip(pepe)
+
+   LOCAL pala:='', let, a, conv
+   LOCAL enc:=len(pepe)
+
+   FOR a=1 to enc
       let:=substr(pepe,a,1)
       conv:=asc(let)+100+a
       pala+=chr(conv)
-   next
-return(pala)
+   NEXT
 
-*------------------------------------------------------------*
-Function Desencri(pepe)
-*------------------------------------------------------------*
-   local pala:='', let, a, conv
-   local enc:=len(alltrim(pepe))
-   for a=1 to enc
+   RETURN(pala)
+
+FUNCTION Desencri(pepe)
+
+   LOCAL pala:='', let, a, conv
+   LOCAL enc:=len(alltrim(pepe))
+
+   FOR a=1 to enc
       let:=substr(pepe,a,1)
       conv:=asc(let)-100-a
       pala+=chr(conv)
-   next
-return(pala)
+   NEXT
+
+   RETURN(pala)
+

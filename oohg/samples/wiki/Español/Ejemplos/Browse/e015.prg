@@ -1,17 +1,15 @@
 /*
- * Ejemplo Browse n° 15
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo definir valores por defecto
- * para registros recién agregados, también muestra como
- * mostrar columnas computadas de solo lectura mientras
- * la ocurre la edición de una fila.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 15
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo definir valores por defecto
+* para registros recién agregados, también muestra como
+* mostrar columnas computadas de solo lectura mientras
+* la ocurre la edición de una fila.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -26,14 +24,14 @@ FUNCTION Main
    SET BROWSESYNC ON
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      CLIENTAREA ;
-      WIDTH 500 HEIGHT 380 ;
-      MINWIDTH 500 MINHEIGHT 380 ;
-      TITLE "Browse: valores por defecto en registros recién agregados" ;
-      MAIN;
-      ON INIT AbrirTablas( oBrowse ) ;
-      ON RELEASE TareasFinales()
+         AT 0,0 ;
+         CLIENTAREA ;
+         WIDTH 500 HEIGHT 380 ;
+         MINWIDTH 500 MINHEIGHT 380 ;
+         TITLE "Browse: valores por defecto en registros recién agregados" ;
+         MAIN;
+         ON INIT AbrirTablas( oBrowse ) ;
+         ON RELEASE TareasFinales()
 
       @ 05,10 LABEL Label_1 OBJ oLbl ;
          VALUE "Use Alt-A para agregar un record y vea que sucede" ;
@@ -43,53 +41,53 @@ FUNCTION Main
          WIDTH oForm:ClientWidth - 20 ;
          HEIGHT oForm:ClientHeight - 40 ;
          ONHEADCLICK { { || ordSetFocus( "recno" ), oBrowse:Refresh() }, ;
-                       { || ordSetFocus( "code" ), oBrowse:Refresh() }, ;
-                       NIL, ;
-                       NIL, ;
-                       NIL, ;
-                       NIL, ;
-                       NIL } ;
+         { || ordSetFocus( "code" ), oBrowse:Refresh() }, ;
+         NIL, ;
+         NIL, ;
+         NIL, ;
+         NIL, ;
+         NIL } ;
          EDIT INPLACE ;
          APPEND ;
          DELETE ;
          HEADERS { 'Reg.', ;
-                   'Código', ;
-                   'Nombre', ;
-                   'Apellido', ;
-                   'Nacimiento', ;
-                   'Casado', ;
-                   'Biografía' } ;
+         'Código', ;
+         'Nombre', ;
+         'Apellido', ;
+         'Nacimiento', ;
+         'Casado', ;
+         'Biografía' } ;
          WIDTHS { 60, 150, 150, 150, 150, 150, 150 } ;
          WORKAREA Test ;
          FIELDS { { || Test->(RECNO()) }, ;
-                  'Test->Code', ;
-                  'Test->First', ;
-                  'Test->Last', ;
-                  'Test->Birth', ;
-                  'Test->Married', ;
-                  'Test->Bio' } ;
+         'Test->Code', ;
+         'Test->First', ;
+         'Test->Last', ;
+         'Test->Birth', ;
+         'Test->Married', ;
+         'Test->Bio' } ;
          COLUMNCONTROLS { NIL, ;
-                          {'COMBOBOX',{'1','2','3'},{1,2,3},"NUMERIC"}, ;
-                          NIL, ;
-                          NIL, ;
-                          NIL, ;
-                          NIL, ;
-                          {'MEMO', "Biografía", , 600, 600, .T., .T. } } ;
+         {'COMBOBOX',{'1','2','3'},{1,2,3},"NUMERIC"}, ;
+         NIL, ;
+         NIL, ;
+         NIL, ;
+         NIL, ;
+         {'MEMO', "Biografía", , 600, 600, .T., .T. } } ;
          READONLY { { || LlenarNroRegistro( oBrowse ) }, ;
-                    .F., ;
-                    .F., ;
-                    .F., ;
-                    .F., ;
-                    .F., ;
-                    .F. } ;
+         .F., ;
+         .F., ;
+         .F., ;
+         .F., ;
+         .F., ;
+         .F. } ;
          FONT "Courier New" SIZE 10 ;
          JUSTIFY { BROWSE_JTFY_RIGHT, ;
-                   BROWSE_JTFY_RIGHT, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER }
+         BROWSE_JTFY_RIGHT, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER }
 
       ON KEY ESCAPE ACTION oForm:Release()
    END WINDOW
@@ -97,9 +95,8 @@ FUNCTION Main
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION LlenarNroRegistro( oBrw )
 
    // Cargar la celda del Grid con el numero del registro aún no agregado
@@ -110,21 +107,21 @@ FUNCTION LlenarNroRegistro( oBrw )
    oBrw:RefreshRow( oBrw:ItemCount )
 
    // Evitar la edición de la celda
-RETURN .T.
 
-//--------------------------------------------------------------------------//
+   RETURN .T.
+
 FUNCTION AbrirTablas( oBrw )
 
    LOCAL i
 
    DBCREATE( "Test", ;
-             { { "Code",    "Numeric",   10, 0 }, ;
-               { "First",   "Character", 25, 0 }, ;
-               { "Last",    "Character", 25, 0 }, ;
-               { "Married", "Logical",    1, 0 }, ;
-               { "Birth",   "Date",       8, 0 }, ;
-               { "Bio",     "Memo",      10, 0 } }, ;
-             "DBFCDX" )
+      { { "Code",    "Numeric",   10, 0 }, ;
+      { "First",   "Character", 25, 0 }, ;
+      { "Last",    "Character", 25, 0 }, ;
+      { "Married", "Logical",    1, 0 }, ;
+      { "Birth",   "Date",       8, 0 }, ;
+      { "Bio",     "Memo",      10, 0 } }, ;
+      "DBFCDX" )
 
    USE test VIA "DBFCDX"
    ZAP
@@ -142,21 +139,21 @@ FUNCTION AbrirTablas( oBrw )
    INDEX ON RECNO() TAG recno TO code
 
    GO BOTTOM
-	oBrw:SetValue( RECNO(), oBrw:CountPerPage )
+   oBrw:SetValue( RECNO(), oBrw:CountPerPage )
 
-RETURN Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION TareasFinales()
 
-  dbCloseAll()
+   dbCloseAll()
 
-  ERASE Test.dbf
-  ERASE Test.fpt
-  ERASE Code.cdx
+   ERASE Test.dbf
+   ERASE Test.fpt
+   ERASE Code.cdx
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

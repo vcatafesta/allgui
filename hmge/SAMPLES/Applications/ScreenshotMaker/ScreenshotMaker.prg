@@ -1,15 +1,13 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2005-2007 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2005-2007 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
 
 #ifdef __XHARBOUR__
-  #define __CALLDLL__
+#define __CALLDLL__
 #endif
 
 #include "minigui.ch"
@@ -18,151 +16,141 @@ ANNOUNCE RDDSYS
 #define VERSION ' version 1.2'
 #define COPYRIGHT ' 2005-2007 Grigory Filatov'
 
-Static nJpg := 0, nShotInterval := 2, cSaveFolder := "", cFilename := "#", lMouseClick := .T.
+STATIC nJpg := 0, nShotInterval := 2, cSaveFolder := "", cFilename := "#", lMouseClick := .T.
 
 DECLARE WINDOW Form_2
 
-Procedure Main( lStartUp )
-	Local lWinRun := .F.
+PROCEDURE Main( lStartUp )
 
-	cSaveFolder := cFilePath( HB_ArgV(0) ) + "\"
+   LOCAL lWinRun := .F.
 
-	If !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
-		!Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", PROGRAM ))
-		lWinRun := .T.
-	EndIf
+   cSaveFolder := cFilePath( HB_ArgV(0) ) + "\"
 
-	SET MULTIPLE OFF
+   IF !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
+         !Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", PROGRAM ))
+      lWinRun := .T.
+   ENDIF
 
-	DEFINE WINDOW Form_1 			;
-		AT 0,0 				;
-		WIDTH 0 HEIGHT 0		;
-		TITLE PROGRAM 			;
-		MAIN NOSHOW 			;
-		NOTIFYICON 'MAIN' 		;
-		NOTIFYTOOLTIP PROGRAM 		;
-		ON NOTIFYCLICK IF( lMouseClick, SnapShot(), StopTimer() )
+   SET MULTIPLE OFF
 
-		DEFINE NOTIFY MENU 
-			ITEM '&AutoRun'		ACTION ( lWinRun := !lWinRun, ;
-				Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
-				NAME Auto_Run
-			SEPARATOR
-			ITEM '&Options...'		ACTION Form_2()
-			ITEM 'A&bout...'		ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
-				"Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
-			SEPARATOR
-			ITEM 'E&xit'			ACTION Form_1.Release
-		END MENU
+   DEFINE WINDOW Form_1          ;
+         AT 0,0             ;
+         WIDTH 0 HEIGHT 0      ;
+         TITLE PROGRAM          ;
+         MAIN NOSHOW          ;
+         NOTIFYICON 'MAIN'       ;
+         NOTIFYTOOLTIP PROGRAM       ;
+         ON NOTIFYCLICK IF( lMouseClick, SnapShot(), StopTimer() )
 
-		Form_1.Auto_Run.Checked := lWinRun
+      DEFINE NOTIFY MENU
+         ITEM '&AutoRun'      ACTION ( lWinRun := !lWinRun, ;
+            Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
+            NAME Auto_Run
+         SEPARATOR
+         ITEM '&Options...'      ACTION Form_2()
+         ITEM 'A&bout...'      ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
+            "Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
+         SEPARATOR
+         ITEM 'E&xit'         ACTION Form_1.Release
+      END MENU
 
-	END WINDOW
+      Form_1.Auto_Run.Checked := lWinRun
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
-Static Procedure SnapShot()
-*--------------------------------------------------------*
-Local cSaveFile, nW := GetDesktopWidth(), nH := GetDesktopHeight()
+   RETURN
 
-	nJpg++
+STATIC PROCEDURE SnapShot()
 
-	DO WHILE FILE( ( cSaveFile := cSaveFolder + cFilename + StrZero(nJpg, 9)+".jpg" ) ) .AND. nJpg < 999999999
+   LOCAL cSaveFile, nW := GetDesktopWidth(), nH := GetDesktopHeight()
 
-		nJpg++
+   nJpg++
 
-	ENDDO
+   DO WHILE FILE( ( cSaveFile := cSaveFolder + cFilename + StrZero(nJpg, 9)+".jpg" ) ) .AND. nJpg < 999999999
 
-	PlayHand()
+      nJpg++
 
-	Save2Jpg(0, cSaveFile, nW, nH)
+   ENDDO
 
-Return
+   PlayHand()
 
-#ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
+   Save2Jpg(0, cSaveFile, nW, nH)
 
-   *-----------------------------------------------------------------------------*
+   RETURN
+
+   #ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
+
    DECLARE SaveToJpgEx(hWnd, cFileName, nWidth, nHeight) IN JPG.DLL ALIAS SAVE2JPG
-   *-----------------------------------------------------------------------------*
 
-#else
+   #else
 
-   *-----------------------------------------------------------------------------*
    DECLARE DLL_TYPE_VOID SaveToJpgEx(DLL_TYPE_LONG hWnd, DLL_TYPE_LPCSTR cFileName, ;
-	DLL_TYPE_INT nWidth, DLL_TYPE_INT nHeight) IN JPG.DLL ALIAS SAVE2JPG
-   *-----------------------------------------------------------------------------*
+      DLL_TYPE_INT nWidth, DLL_TYPE_INT nHeight) IN JPG.DLL ALIAS SAVE2JPG
 
-#endif
+   #endif
 
-*--------------------------------------------------------*
-Static Procedure Form_2()
-*--------------------------------------------------------*
-Local cTmpFld
+STATIC PROCEDURE Form_2()
 
-	if .not. IsWindowDefined(Form_2)
+   LOCAL cTmpFld
 
-		Load Window Form_2
+   IF .not. IsWindowDefined(Form_2)
 
-		Form_2.Button_2.Enabled := !IsControlDefined(Timer_1, Form_1)
-		Form_2.Button_3.Enabled := IsControlDefined(Timer_1, Form_1)
+      LOAD WINDOW Form_2
 
-		Center Window Form_2
+      Form_2.Button_2.Enabled := !IsControlDefined(Timer_1, Form_1)
+      Form_2.Button_3.Enabled := IsControlDefined(Timer_1, Form_1)
 
-		Activate Window Form_2
+      CENTER WINDOW Form_2
 
-	endif
+      ACTIVATE WINDOW Form_2
 
-Return
+   ENDIF
 
-*--------------------------------------------------------*
-Static Procedure StartTimer()
-*--------------------------------------------------------*
+   RETURN
 
-	DEFINE TIMER Timer_1 OF Form_1 ;
-		INTERVAL 60 / nShotInterval * 1000 ;
-		ACTION SnapShot()
+STATIC PROCEDURE StartTimer()
 
-	PlayOk()
+   DEFINE TIMER Timer_1 OF Form_1 ;
+      INTERVAL 60 / nShotInterval * 1000 ;
+      ACTION SnapShot()
 
-	Form_2.Release
+   PlayOk()
 
-Return
+   Form_2.Release
 
-*--------------------------------------------------------*
-Static Procedure StopTimer()
-*--------------------------------------------------------*
+   RETURN
 
-	if IsControlDefined(Timer_1, Form_1)
+STATIC PROCEDURE StopTimer()
 
-		Form_1.Timer_1.Release
-		PlayOk()
+   IF IsControlDefined(Timer_1, Form_1)
 
-	endif
+      Form_1.Timer_1.Release
+      PlayOk()
 
-	if IsWindowDefined(Form_2)
+   ENDIF
 
-		Form_2.Button_2.Enabled := .T.
-		Form_2.Button_3.Enabled := .F.
+   IF IsWindowDefined(Form_2)
 
-	endif
+      Form_2.Button_2.Enabled := .T.
+      Form_2.Button_3.Enabled := .F.
 
-Return
+   ENDIF
 
-*--------------------------------------------------------*
-Static Procedure WinRun( lMode )
-*--------------------------------------------------------*
-   Local cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
-         cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
-         cRegKey  := GETREGVAR( NIL, cRunKey, PROGRAM )
+   RETURN
 
-   if IsWinNT()
+STATIC PROCEDURE WinRun( lMode )
+
+   LOCAL cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
+      cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
+      cRegKey  := GETREGVAR( NIL, cRunKey, PROGRAM )
+
+   IF IsWinNT()
       EnablePermissions()
-   endif
+   ENDIF
 
    IF lMode
       IF Empty(cRegKey) .OR. cRegKey # cRunName
@@ -172,11 +160,10 @@ Static Procedure WinRun( lMode )
       DELREGVAR( NIL, cRunKey, PROGRAM )
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -185,11 +172,10 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -198,11 +184,10 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg, nValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -210,8 +195,7 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    nValue := oReg:Delete(cSubKey)
    oReg:Close()
 
-RETURN nValue
-
+   RETURN nValue
 
 #pragma BEGINDUMP
 
@@ -239,3 +223,4 @@ HB_FUNC( ENABLEPERMISSIONS )
 }
 
 #pragma ENDDUMP
+

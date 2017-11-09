@@ -1,15 +1,16 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
-Local oMainWindow, oFont, oSplitV, oSplitH, oEdit1, oEdit2
+FUNCTION Main
+
+   LOCAL oMainWindow, oFont, oSplitV, oSplitH, oEdit1, oEdit2
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
-     AT 200,0 SIZE 420,300                       ;
-     FONT oFont
+      COLOR COLOR_3DLIGHT+1                       ;
+      AT 200,0 SIZE 420,300                       ;
+      FONT oFont
 
    @ 20,10 TREE oTree SIZE 140,100
 
@@ -31,4 +32,5 @@ Local oMainWindow, oFont, oSplitV, oSplitH, oEdit1, oEdit2
 
    ACTIVATE WINDOW oMainWindow
 
-Return nil
+   RETURN NIL
+

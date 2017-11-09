@@ -9,12 +9,12 @@ DECLARE DLL_TYPE_LONG TWAIN_EasyVersion()                                       
 FUNCTION Main
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 ;
-      WIDTH 600 ;
-      HEIGHT 600 ;
-      CLIENTAREA ;
-      TITLE 'Scanner or WebCam Capture using EZTwain free library' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 600 ;
+         CLIENTAREA ;
+         TITLE 'Scanner or WebCam Capture using EZTwain free library' ;
+         MAIN
 
       DEFINE MAIN MENU
          MENUITEM 'Test' ACTION Acquire()
@@ -31,16 +31,18 @@ FUNCTION Main
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION Acquire
+
    LOCAL cFileName := "Image_" + DToS( Date () ) + "_" + StrTran( Time(), ":", "" ) + ".bmp"
 
    TWAIN_AcquireToFilename( Win_1.hWnd, cFileName )
    Win_1.Image_1.Picture := cFileName
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

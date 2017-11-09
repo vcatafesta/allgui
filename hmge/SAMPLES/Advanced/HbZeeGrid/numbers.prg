@@ -1,8 +1,8 @@
 
 /*
- * Harbour MiniGUI ZeeGrid Demo
- * (c) 2017, Petr Chornyj
- */
+* Harbour MiniGUI ZeeGrid Demo
+* (c) 2017, Petr Chornyj
+*/
 
 MEMVAR hG
 
@@ -17,9 +17,9 @@ PROCEDURE Main()
 
    LOCAL hMod := zg_LoadDll()
 
-   if Empty( hMod ) 
+   IF Empty( hMod )
       QUIT
-   endif
+   ENDIF
 
    PUBLIC hG
 
@@ -27,9 +27,9 @@ PROCEDURE Main()
    SET EVENTS FUNCTION TO App_OnEvents
 
    DEFINE WINDOW Win_1 CLIENTAREA 600, 600 TITLE 'ZeeGrid demo' ;
-      ICON "MAIN.ICO" ;
-      WINDOWTYPE MAIN ;
-      ON RELEASE FreeLibrary( hMod )
+         ICON "MAIN.ICO" ;
+         WINDOWTYPE MAIN ;
+         ON RELEASE FreeLibrary( hMod )
 
       DEFINE MAIN MENU
          POPUP 'Info'
@@ -40,7 +40,7 @@ PROCEDURE Main()
             ITEM 'Exit'       ACTION Win_1.Release
          END POPUP
       END MENU
-  
+
    END WINDOW
 
    CENTER   WINDOW Win_1
@@ -48,53 +48,46 @@ PROCEDURE Main()
 
    RETURN
 
-
 FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    LOCAL result := 0, i
 
-   switch nMsg
-   case WM_CREATE
-      //
+   SWITCH nMsg
+   CASE WM_CREATE
       zg_InitGrid( hWnd, @hG, ID_GRID, "ZeeGrid Numbers",,,,, {|h| Grid_OnInit( h ) }  )
-      exit
+      EXIT
 
-   case WM_COMMAND
-      //
-      switch HIWORD( wParam ) 
-      //
-      case ZGN_GOTFOCUS
-         if LOWORD( wParam ) == ID_GRID
+   CASE WM_COMMAND
+      SWITCH HIWORD( wParam )
+      CASE ZGN_GOTFOCUS
+         IF LOWORD( wParam ) == ID_GRID
 
             i := zgm_GetCursorIndex( hG )
-            if i > 0
+            IF i > 0
                zgm_gotoCell( hG, i )
-            else
+            ELSE
                zgm_gotoCell( hG, zgm_GetCellIndex( hG, 1, 1 ) )
-            endif
+            ENDIF
 
-         endif
-         exit
+         ENDIF
+         EXIT
 
-      otherwise
+      OTHERWISE
          result := Events( hWnd, nMsg, wParam, lParam )
       end
-      exit
+      EXIT
 
-   case WM_SIZE
-      //
+   CASE WM_SIZE
       zg_Resize( hWnd, hG )
-      exit
+      EXIT
 
-   otherwise
-      //
+   OTHERWISE
       result := Events( hWnd, nMsg, wParam, lParam )
    end
 
    RETURN result
 
-
-#translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
+   #translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
 
 PROCEDURE Grid_OnInit( h )
 
@@ -108,11 +101,11 @@ PROCEDURE Grid_OnInit( h )
    zgm_SetCellFont( h, 0, 20 )
 
    // Append rows
-   for i := 1 to 10
+   FOR i := 1 to 10
       zgm_AppendRow( h )
-   next i
+   NEXT i
 
-   // --- 
+   // ---
    zgm_SetColType( h, 1, 3 )   // numeric
    zgm_SetColType( h, 2, 3 )   // numeric
    zgm_SetColType( h, 3, 3 )   // numeric
@@ -132,12 +125,13 @@ PROCEDURE Grid_OnInit( h )
    zgm_setCellNumPrecision( h, ICEL( 3, 3 ), 4 )
 
    // Resize columns
-   for i := 1 to zgm_GetCols( h )
+   FOR i := 1 to zgm_GetCols( h )
       zgm_SetColWidth( h, i, 80 )
-   next i
+   NEXT i
 
    // Disable columns resizing & moving
    zgm_EnableColResizing( h, .F. )
    zgm_EnableColMove( h, .F. )
 
    RETURN
+

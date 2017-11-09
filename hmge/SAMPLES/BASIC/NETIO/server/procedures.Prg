@@ -1,103 +1,100 @@
 #include <hmg.ch>
 
-*----------------------------------------------------------------------------*
 FUNCTION Query_001( cQueryString )
-*----------------------------------------------------------------------------*
-LOCAL aRecordSet := {} , cIndex
 
-	cQueryString := UPPER( ALLTRIM ( cQueryString ) )
+   LOCAL aRecordSet := {} , cIndex
 
-	cIndex := TempFile ( , 'ntx' )
+   cQueryString := UPPER( ALLTRIM ( cQueryString ) )
 
-	USE TEST SHARED
+   cIndex := TempFile ( , 'ntx' )
 
-		INDEX ON TEST->LAST TO (cIndex) FOR UPPER( ALLTRIM ( TEST->LAST ) ) = cQueryString .AND. ( .NOT. DELETED() )
+   USE TEST SHARED
 
-		GO TOP
+   INDEX ON TEST->LAST TO (cIndex) FOR UPPER( ALLTRIM ( TEST->LAST ) ) = cQueryString .AND. ( .NOT. DELETED() )
 
-		DO WHILE .NOT. EOF()
+   GO TOP
 
-			AADD( aRecordSet , ;
-				{ STR(RECNO()) , TEST->LAST , TEST->FIRST , TEST->STREET , TEST->CITY , TEST->STATE , TEST->ZIP , ;
-				DTOC(TEST->HIREDATE) , IF(TEST->MARRIED,'.T.','.F.') , STR(TEST->AGE) , STR(TEST->SALARY) } )
+   DO WHILE .NOT. EOF()
 
-			SKIP
+      AADD( aRecordSet , ;
+         { STR(RECNO()) , TEST->LAST , TEST->FIRST , TEST->STREET , TEST->CITY , TEST->STATE , TEST->ZIP , ;
+         DTOC(TEST->HIREDATE) , IF(TEST->MARRIED,'.T.','.F.') , STR(TEST->AGE) , STR(TEST->SALARY) } )
 
-		ENDDO
+      SKIP
 
-	USE
+   ENDDO
 
-	DELETE FILE (cIndex)
+   USE
 
-RETURN aRecordSet
+   DELETE FILE (cIndex)
 
-*----------------------------------------------------------------------------*
+   RETURN aRecordSet
+
 FUNCTION Query_002(nRecNo)
-*----------------------------------------------------------------------------*
-LOCAL lResult
 
-	USE TEST SHARED
+   LOCAL lResult
 
-		DBGOTO(nRecNo)
+   USE TEST SHARED
 
-		IF .NOT. DELETED()
+   DBGOTO(nRecNo)
 
-			DO WHILE .NOT. RLOCK() ; ENDDO
+   IF .NOT. DELETED()
 
-			DBDELETE()
+      DO WHILE .NOT. RLOCK() ; ENDDO
 
-			UNLOCK
+         DBDELETE()
 
-			lResult := .T.
+         UNLOCK
 
-		ELSE
+         lResult := .T.
 
-			lResult := .F.
+      ELSE
 
-		ENDIF
+         lResult := .F.
 
-	USE
+      ENDIF
 
-RETURN lResult
+      USE
 
-*----------------------------------------------------------------------------*
+      RETURN lResult
+
 FUNCTION Query_003(aValues)
-*----------------------------------------------------------------------------*
-LOCAL I
 
-	USE TEST SHARED
+   LOCAL I
 
-		APPEND BLANK
+   USE TEST SHARED
 
-		FOR I := 1 TO LEN(aValues)
+   APPEND BLANK
 
-			FIELDPUT( I , aValues[I] )
+   FOR I := 1 TO LEN(aValues)
 
-		NEXT I
+      FIELDPUT( I , aValues[I] )
 
-	USE
+   NEXT I
 
-RETURN NIL
+   USE
 
-*----------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION Query_004(nRecNo,aValues)
-*----------------------------------------------------------------------------*
-LOCAL I
 
-	USE TEST SHARED
+   LOCAL I
 
-		DBGOTO(nRecNo)		
+   USE TEST SHARED
 
-		DO WHILE .NOT. RLOCK() ; ENDDO
+   DBGOTO(nRecNo)
 
-		FOR I := 1 TO LEN(aValues)
+   DO WHILE .NOT. RLOCK() ; ENDDO
 
-			FIELDPUT( I , aValues[I] )
+      FOR I := 1 TO LEN(aValues)
 
-		NEXT I
+         FIELDPUT( I , aValues[I] )
 
-		UNLOCK
+      NEXT I
 
-	USE
+      UNLOCK
 
-RETURN NIL
+      USE
+
+      RETURN NIL
+

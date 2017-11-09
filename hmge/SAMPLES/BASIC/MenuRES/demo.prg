@@ -1,6 +1,6 @@
 /*
- * Harbour MiniGUI Accelerators Demo
- * (c) 2017 P.Ch.
+* Harbour MiniGUI Accelerators Demo
+* (c) 2017 P.Ch.
 */
 
 #include "minigui.ch"
@@ -10,150 +10,147 @@
 
 MEMVAR hMenu, hAccel
 
-//////////////////////////////////////////////////////////////////////////////
-function Main()
+FUNCTION Main()
 
    SET EVENTS FUNCTION TO App_OnEvents
 
    DEFINE WINDOW Win_1 ;
-      CLIENTAREA 400, 400 ;
-      TITLE 'Accelerators Demo' ;
-      MAIN ;
-      ON INIT Win1_OnInit( ThisWindow.Handle ) ;
-      ON RELEASE DestroyMenu( hMenu )
+         CLIENTAREA 400, 400 ;
+         TITLE 'Accelerators Demo' ;
+         MAIN ;
+         ON INIT Win1_OnInit( ThisWindow.Handle ) ;
+         ON RELEASE DestroyMenu( hMenu )
 
    END WINDOW
 
    Win_1.Center
    Win_1.Activate
 
-return 0
+   RETURN 0
 
-//////////////////////////////////////////////////////////////////////////////
-static procedure Win1_OnInit( hWnd )
+STATIC PROCEDURE Win1_OnInit( hWnd )
 
-   public hMenu  := LoadMenu( Nil, 'MainMenu' )
-   public hAccel := LoadAccelerators( Nil, 'FontAccel' )
+   PUBLIC hMenu  := LoadMenu( Nil, 'MainMenu' )
+   PUBLIC hAccel := LoadAccelerators( Nil, 'FontAccel' )
 
-   if ! Empty( hMenu )
+   IF ! Empty( hMenu )
       SetMenu( hWnd, hMenu )
-   endif
+   ENDIF
 
-#if 0  // normal behavior
-   if ! Empty( hAccel )
+   #if 0  // normal behavior
+   IF ! Empty( hAccel )
       SetAcceleratorTable( hWnd, hAccel )
-   endif
-#else  // test behavior
+   ENDIF
+   #else  // test behavior
    TestSomeFuncs( hAccel, hWnd )
-#endif
+   #endif
 
-return
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
-function App_OnEvents( hWnd, nMsg, wParam, lParam )
+FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
-   local nResult
+   LOCAL nResult
 
-   switch nMsg
-   case WM_COMMAND
-      switch LoWord( wParam )
-      case IDM_REGULAR
-      case IDM_BOLD
-      case IDM_ITALIC
-      case IDM_ULINE
+   SWITCH nMsg
+   CASE WM_COMMAND
+      SWITCH LoWord( wParam )
+      CASE IDM_REGULAR
+      CASE IDM_BOLD
+      CASE IDM_ITALIC
+      CASE IDM_ULINE
          MsgInfo( "IDM_:" + hb_NtoS( LoWord( wParam ) ), ;
-                  "From a " + iif( 0 == HiWord( wParam ), 'Menu', 'Accelerator' ) )
+            "From a " + iif( 0 == HiWord( wParam ), 'Menu', 'Accelerator' ) )
          nResult := 0
-         exit   
-      otherwise
+         EXIT
+      OTHERWISE
          nResult := Events( hWnd, nMsg, wParam, lParam )
       end
-      exit
-   otherwise
+      EXIT
+   OTHERWISE
       nResult := Events( hWnd, nMsg, wParam, lParam )
-   end switch
+   END SWITCH
 
-return nResult
+   RETURN nResult
 
-//////////////////////////////////////////////////////////////////////////////
-static procedure TestSomeFuncs( hAccel, hWnd )
+STATIC PROCEDURE TestSomeFuncs( hAccel, hWnd )
 
-   local  aAccel
-   local  hAccel2, pAccel := 0
-   local  nLen, cmd
+   LOCAL  aAccel
+   LOCAL  hAccel2, pAccel := 0
+   LOCAL  nLen, cmd
 
    nLen := CopyAcceleratorTable( hAccel, @pAccel )
 
    // stage 1
-   if nLen > 0 .and. ! Empty( pAccel )
+   IF nLen > 0 .and. ! Empty( pAccel )
       hAccel2 := CreateAcceleratorTable( pAccel, nLen )
 
-      if ! Empty( hAccel2 ) .and. Empty( pAccel )
-         if DestroyAcceleratorTable( hAccel )
+      IF ! Empty( hAccel2 ) .and. Empty( pAccel )
+         IF DestroyAcceleratorTable( hAccel )
             hAccel := hAccel2
-         endif
-      endif
-   endif
+         ENDIF
+      ENDIF
+   ENDIF
 
    // stage 2
-   if ! Empty( hAccel )
+   IF ! Empty( hAccel )
       aAccel := AcceleratorTable2Array( hAccel )
 
-      if ! Empty( aAccel )
+      IF ! Empty( aAccel )
          hAccel2 := Array2AcceleratorTable( aAccel )
 
-         if ! Empty( hAccel2 )
-            if DestroyAcceleratorTable( hAccel )
+         IF ! Empty( hAccel2 )
+            IF DestroyAcceleratorTable( hAccel )
                hAccel := hAccel2
-            endif
-         endif
-      endif
-   endif
+            ENDIF
+         ENDIF
+      ENDIF
+   ENDIF
 
    SetAcceleratorTable( hWnd, hAccel )
 
-   if ( nLen := Len( aAccel ) ) > 0
+   IF ( nLen := Len( aAccel ) ) > 0
       ShowVirtKey( aAccel[nLen] )
 
       cmd  := aAccel[nLen][3]
       PostMessage( hWnd, WM_COMMAND, MAKELONG( cmd, 1 ), 0 )
-   endif
+   ENDIF
 
-return
+   RETURN
 
-#define FALT        0x10
-#define FCONTROL    0x08
-#define FNOINVERT   0x02
-#define FSHIFT      0x04
-#define FVIRTKEY    1
+   #define FALT        0x10
+   #define FCONTROL    0x08
+   #define FNOINVERT   0x02
+   #define FSHIFT      0x04
+   #define FVIRTKEY    1
 
-static procedure ShowVirtKey( aAccel )
+STATIC PROCEDURE ShowVirtKey( aAccel )
 
-   local cAlt
-   local cControl
-   local cShift
-   local cMsg     := ''
-   local nVirtKey := aAccel[1]
+   LOCAL cAlt
+   LOCAL cControl
+   LOCAL cShift
+   LOCAL cMsg     := ''
+   LOCAL nVirtKey := aAccel[1]
 
-   if hb_bitAnd( nVirtKey, FALT ) != 0
+   IF hb_bitAnd( nVirtKey, FALT ) != 0
       cAlt := "ALT"
       cMsg := cAlt
-   endif
+   ENDIF
 
-   if hb_bitAnd( nVirtKey, FCONTROL ) != 0
+   IF hb_bitAnd( nVirtKey, FCONTROL ) != 0
       cControl := "CTRL"
       cMsg     += Iif( Empty( cMsg ), cControl, '+' + cControl )
-   endif
+   ENDIF
 
-   if hb_bitAnd( nVirtKey, FSHIFT ) != 0
+   IF hb_bitAnd( nVirtKey, FSHIFT ) != 0
       cShift := "SHIFT"
       cMsg   += Iif( Empty( cMsg ), cShift, '+' + cShift )
-   endif
+   ENDIF
 
-   if hb_bitAnd( nVirtKey, FVIRTKEY ) != 0
-      cMsg += Iif( Empty( cMsg ), hb_UChar( aAccel[2] ), '+' + hb_UChar( aAccel[2] ) ) 
-   endif
+   IF hb_bitAnd( nVirtKey, FVIRTKEY ) != 0
+      cMsg += Iif( Empty( cMsg ), hb_UChar( aAccel[2] ), '+' + hb_UChar( aAccel[2] ) )
+   ENDIF
 
    MsgInfo( "KEYSTROKE:" + cMsg + CRLF + "IDM_:" + hb_NtoS( aAccel[3]), "Simulating a keystroke" )
 
-return
+   RETURN
+

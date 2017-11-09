@@ -1,15 +1,15 @@
 /*
-  MINIGUI - Harbour Win32 GUI library Demo/Sample
- 
-  Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
-  http://harbourminigui.googlepages.com/
+MINIGUI - Harbour Win32 GUI library Demo/Sample
 
-  SUIZO miniprint_list es Freevare. 
+Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
-  Desarrollado con Harbour Compiler y
-  MINIGUI - Harbour Win32 GUI library (HMG).
+SUIZO miniprint_list es Freevare.
 
-  Copyright 2006 Jose Miguel <josemisu@yahoo.com.ar>
+Desarrollado con Harbour Compiler y
+MINIGUI - Harbour Win32 GUI library (HMG).
+
+Copyright 2006 Jose Miguel <josemisu@yahoo.com.ar>
 */
 
 #include "minigui.ch"
@@ -20,7 +20,8 @@ FIELD CODTAR, NOMTAR, IMPORTE
 MEMVAR TituloImp
 
 PROCEDURE main()
-   Local N, aArq:={}
+
+   LOCAL N, aArq:={}
 
    ***CODIGO DE PAGINA español***
    REQUEST HB_CODEPAGE_ESWIN
@@ -31,7 +32,7 @@ PROCEDURE main()
    RDDSETDEFAULT( "DBFCDX" )
 
    ***DATOS DE INICIALIZACION***
-   Set Navigation Extended //TAB y ENTER
+   SET Navigation Extended //TAB y ENTER
    SET DATE FORMAT "dd-mm-yyyy"
    SET EPOCH TO YEAR(DATE())-50
 
@@ -41,7 +42,7 @@ PROCEDURE main()
       Aadd( aArq , { 'NOMTAR'    , 'C' , 50  , 0 } )
       Aadd( aArq , { 'IMPORTE'   , 'N' , 13  , 2 } )
       DBCreate( "TARIFAS" , aArq  )
-      Use TARIFAS Alias TARIFAS new
+      USE TARIFAS Alias TARIFAS new
       FOR N=1 TO 50
          APPEND BLANK
          REPLACE CODTAR WITH "E"+STRZERO(N,3)
@@ -53,111 +54,113 @@ PROCEDURE main()
    ***fin crear fichero de datos para este ejemplo***
 
    ***crear fichero indice para este ejemplo***
-   Use TARIFAS Alias TARIFAS New Shared
-   Index On CODTAR TAG ORDEN1 To TARIFAS.CDX
+   USE TARIFAS Alias TARIFAS New Shared
+   INDEX ON CODTAR TAG ORDEN1 To TARIFAS.CDX
    ***fin crear fichero indice para este ejemplo***
 
    Lis_TarCodigo()
 
-Return
+   RETURN
 
 PROCEDURE Lis_TarCodigo()
-   Local aIMP
-   Private TituloImp:="Listado de tarifas"
+
+   LOCAL aIMP
+   PRIVATE TituloImp:="Listado de tarifas"
 
    DEFINE WINDOW W_Imp1 ;
-      AT 10,10 ;
-      WIDTH 400 HEIGHT 275 ;
-      TITLE 'SUIZO miniprint_list v1.0 - Imprimir: '+TituloImp ;
-      MAIN      ;
-      ON RELEASE CloseTables()
+         AT 10,10 ;
+         WIDTH 400 HEIGHT 275 ;
+         TITLE 'SUIZO miniprint_list v1.0 - Imprimir: '+TituloImp ;
+         MAIN      ;
+         ON RELEASE CloseTables()
 
       @ 15,10 LABEL L_CodTar1 ;
-              VALUE 'Desde codigo' ;
-              WIDTH 90 HEIGHT 25
+         VALUE 'Desde codigo' ;
+         WIDTH 90 HEIGHT 25
       @ 10,100 TEXTBOX T_CodTar1 ;
-              WIDTH 100 ;
-              VALUE 'E001' ;
-              TOOLTIP 'Codigo tarifa' ;
-              MAXLENGTH 10
+         WIDTH 100 ;
+         VALUE 'E001' ;
+         TOOLTIP 'Codigo tarifa' ;
+         MAXLENGTH 10
 
       @ 10,250 BUTTON B_Acerca CAPTION 'Aceca de' WIDTH 90 HEIGHT 25 ;
-               ACTION Acercade()
+         ACTION Acercade()
 
       @ 45,10 LABEL L_CodTar2 ;
-              VALUE 'Hasta codigo' ;
-              WIDTH 90 HEIGHT 25
+         VALUE 'Hasta codigo' ;
+         WIDTH 90 HEIGHT 25
       @ 40,100 TEXTBOX T_CodTar2 ;
-              WIDTH 100 ;
-              VALUE 'E050' ;
-              TOOLTIP 'Codigo tarifa' ;
-              MAXLENGTH 10
+         WIDTH 100 ;
+         VALUE 'E050' ;
+         TOOLTIP 'Codigo tarifa' ;
+         MAXLENGTH 10
 
       @ 70,10 CHECKBOX C_Cuadro ;
-            CAPTION 'Imprimir cuadros en lineas' ;
-            WIDTH 200 VALUE .F.
+         CAPTION 'Imprimir cuadros en lineas' ;
+         WIDTH 200 VALUE .F.
 
       draw rectangle in window W_Imp1 at 110,010 to 112,390 fillcolor{255,0,0} //Rojo
 
       aIMP:=Impresoras()
 
       @125,10 LABEL L_Impresora ;
-              VALUE 'Impresora' ;
-              WIDTH 90 HEIGHT 25
+         VALUE 'Impresora' ;
+         WIDTH 90 HEIGHT 25
       @120,100 COMBOBOX C_Impresora ;
-            WIDTH 280 ;
-            ITEMS aIMP[1] ;
-            VALUE aIMP[3] ;
-            TOOLTIP 'Impresora' NOTABSTOP
+         WIDTH 280 ;
+         ITEMS aIMP[1] ;
+         VALUE aIMP[3] ;
+         TOOLTIP 'Impresora' NOTABSTOP
 
       @150, 10 CHECKBOX nImp CAPTION 'Seleccionar impresora' ;
-               width 160 value .f. ;
-               ON CHANGE W_Imp1.C_Impresora.Enabled:=IF(W_Imp1.nImp.Value=.T.,.F.,.T.)
+         width 160 value .f. ;
+         ON CHANGE W_Imp1.C_Impresora.Enabled:=IF(W_Imp1.nImp.Value=.T.,.F.,.T.)
 
       @180, 10 CHECKBOX nVer CAPTION 'Previsualizar documento' ;
-               width 160 value .f.
+         width 160 value .f.
 
       @210, 10 BUTTON B_Imp CAPTION 'Imprimir' WIDTH 90 HEIGHT 25 ;
-               ACTION Lis_TarCodigoi("IMPRESORA")
+         ACTION Lis_TarCodigoi("IMPRESORA")
 
       @210,110 BUTTON B_Excel CAPTION 'Hoja excel' WIDTH 90 HEIGHT 25 ;
-               ACTION Lis_TarCodigoi("EXCEL")
+         ACTION Lis_TarCodigoi("EXCEL")
 
       @210,210 BUTTON B_Can CAPTION 'Cancelar'  WIDTH 90 HEIGHT 25 ;
-               ACTION W_Imp1.release
+         ACTION W_Imp1.release
 
-      END WINDOW
-      CENTER WINDOW W_Imp1
-      ACTIVATE WINDOW W_Imp1
+   END WINDOW
+   CENTER WINDOW W_Imp1
+   ACTIVATE WINDOW W_Imp1
 
-Return
+   RETURN
 
+PROCEDURE CloseTables()
 
-Procedure CloseTables()
    CLOSE DATABASES
    FERASE('TARIFAS.CDX')
    IF FILE("FIN.DBF")
       ERASE FIN.DBF
       ERASE FIN.CDX
    ENDIF
-Return
 
+   RETURN
 
-procedure Lis_TarCodigoi(LLAMADA)
+PROCEDURE Lis_TarCodigoi(LLAMADA)
 
    SELEC("Tarifas")
 
    SET FILTER TO
    COPY TO FIN FOR ;
-	CODTAR>=W_Imp1.T_CodTar1.value .AND. CODTAR<=W_Imp1.T_CodTar2.value
+      CODTAR>=W_Imp1.T_CodTar1.value .AND. CODTAR<=W_Imp1.T_CodTar2.value
 
-   Use FIN Alias FIN New Shared
+   USE FIN Alias FIN New Shared
    INDEX ON CODTAR TO FIN
 
    GO TOP
    IF LASTREC()=0
       MsgExclamation("No hay datos en las fecha introducidas","Informacion")
       FIN->( DBCLOSEAREA() )
+
       RETURN
    ENDIF
 
@@ -167,11 +170,11 @@ procedure Lis_TarCodigoi(LLAMADA)
       Lis_TarCodigoiF()
    ENDIF
 
-Return
+   RETURN
 
+PROCEDURE Lis_TarCodigoiF()
 
-procedure Lis_TarCodigoiF()
-   Local dirimp:=GetCurrentFolder(), nomimp2, PAG, LIN
+   LOCAL dirimp:=GetCurrentFolder(), nomimp2, PAG, LIN
 
    IF W_Imp1.nImp.value=.t.
       nomimp2:=GetPrinter()
@@ -182,11 +185,12 @@ procedure Lis_TarCodigoiF()
       ENDIF
    ELSE
       IF W_Imp1.C_Impresora.ItemCount=0 .OR. ;
-         W_Imp1.C_Impresora.Value<=0 .OR. ;
-         W_Imp1.C_Impresora.Value>W_Imp1.C_Impresora.ItemCount
+            W_Imp1.C_Impresora.Value<=0 .OR. ;
+            W_Imp1.C_Impresora.Value>W_Imp1.C_Impresora.ItemCount
          MsgStop("No hay impresoras instaladas","Error")
-         release printsys
+         RELEASE printsys
          SetCurrentFolder(dirimp)
+
          RETURN
       ENDIF
       IF W_Imp1.nVer.value=.t.
@@ -197,78 +201,78 @@ procedure Lis_TarCodigoiF()
    ENDIF
 
    START PRINTDOC NAME TituloImp
-   START PRINTPAGE
+      START PRINTPAGE
 
-GO TOP
-PAG:=0
-LIN:=0
-DO WHILE .NOT. EOF()
-   IF LIN>=260 .OR. PAG=0
-      IF PAG<>0
-         @ LIN+5,105 PRINT "SIGUE EN LA HOJA: "+LTRIM(STR(PAG+1)) CENTER
-         END PRINTPAGE
-         START PRINTPAGE
-      ENDIF
-      PAG++
+         GO TOP
+         PAG:=0
+         LIN:=0
+         DO WHILE .NOT. EOF()
+            IF LIN>=260 .OR. PAG=0
+               IF PAG<>0
+                  @ LIN+5,105 PRINT "SIGUE EN LA HOJA: "+LTRIM(STR(PAG+1)) CENTER
+               END PRINTPAGE
+               START PRINTPAGE
+               ENDIF
+               PAG++
 
-      @ 20,20 PRINT "SUIZO miniprint_list v1.0"
-      @ 20,190 PRINT "Hoja: "+LTRIM(STR(PAG)) RIGHT
-      @ 25,20 PRINT DATE()
+               @ 20,20 PRINT "SUIZO miniprint_list v1.0"
+               @ 20,190 PRINT "Hoja: "+LTRIM(STR(PAG)) RIGHT
+               @ 25,20 PRINT DATE()
 
-      @ 25,105 PRINT "Nombre de la empresa" CENTER
-      @ 35,105 PRINT TituloImp FONT "ft18" CENTER
+               @ 25,105 PRINT "Nombre de la empresa" CENTER
+               @ 35,105 PRINT TituloImp FONT "ft18" CENTER
 
-      @ 40,20 PRINT 'desde: '+W_Imp1.T_CodTar1.value
-      @ 45,20 PRINT 'hasta: '+W_Imp1.T_CodTar2.value
+               @ 40,20 PRINT 'desde: '+W_Imp1.T_CodTar1.value
+               @ 45,20 PRINT 'hasta: '+W_Imp1.T_CodTar2.value
 
-      LIN:=55
-      IF W_Imp1.C_Cuadro.Value=.T.
-         @ LIN, 19 PRINT RECTANGLE TO LIN+5, 39
-         @ LIN, 39 PRINT RECTANGLE TO LIN+5,109
-         @ LIN,109 PRINT RECTANGLE TO LIN+5,141
-      ELSE
-         @ LIN+4,20 PRINT LINE TO LIN+4,140
-      ENDIF
-      @ LIN,20 PRINT "Codigo"
-      @ LIN,40 PRINT "Descripcion"
-      @ LIN,140 PRINT "Importe" RIGHT
+               LIN:=55
+               IF W_Imp1.C_Cuadro.Value=.T.
+                  @ LIN, 19 PRINT RECTANGLE TO LIN+5, 39
+                  @ LIN, 39 PRINT RECTANGLE TO LIN+5,109
+                  @ LIN,109 PRINT RECTANGLE TO LIN+5,141
+               ELSE
+                  @ LIN+4,20 PRINT LINE TO LIN+4,140
+               ENDIF
+               @ LIN,20 PRINT "Codigo"
+               @ LIN,40 PRINT "Descripcion"
+               @ LIN,140 PRINT "Importe" RIGHT
 
-      LIN:=LIN+5
-   ENDIF
+               LIN:=LIN+5
+            ENDIF
 
-   IF W_Imp1.C_Cuadro.Value=.T.
-      @ LIN, 19 PRINT RECTANGLE TO LIN+5, 39
-      @ LIN, 39 PRINT RECTANGLE TO LIN+5,109
-      @ LIN,109 PRINT RECTANGLE TO LIN+5,141
-   ENDIF
-   @ LIN,20 PRINT CODTAR
-   @ LIN,40 PRINT NOMTAR
-   @ LIN,140 PRINT TRANSFORM( IMPORTE , "@E 9,999,999.99" ) RIGHT
+            IF W_Imp1.C_Cuadro.Value=.T.
+               @ LIN, 19 PRINT RECTANGLE TO LIN+5, 39
+               @ LIN, 39 PRINT RECTANGLE TO LIN+5,109
+               @ LIN,109 PRINT RECTANGLE TO LIN+5,141
+            ENDIF
+            @ LIN,20 PRINT CODTAR
+            @ LIN,40 PRINT NOMTAR
+            @ LIN,140 PRINT TRANSFORM( IMPORTE , "@E 9,999,999.99" ) RIGHT
 
-   LIN:=LIN+5
-   SKIP
+            LIN:=LIN+5
+            SKIP
 
-ENDDO
+         ENDDO
 
-   END PRINTPAGE
+      END PRINTPAGE
    END PRINTDOC
 
-  SetCurrentFolder(dirimp)
+   SetCurrentFolder(dirimp)
 
-  W_Imp1.release
+   W_Imp1.release
 
-Return
+   RETURN
 
+PROCEDURE Lis_TarCodigoiE()
 
-procedure Lis_TarCodigoiE()
-   Local LIN:=8, nCol
+   LOCAL LIN:=8, nCol
    LOCAL oExcel, oHoja
 
    oExcel := TOleAuto():New( "Excel.Application" )
    oExcel:WorkBooks:Add()
-***Solo en MS office XP
-*   oExcel:Sheets("Hoja1"):Name := "Listado"
-*   oExcel:Sheets("Hoja2"):Name := "Resumen"
+   ***Solo en MS office XP
+   *   oExcel:Sheets("Hoja1"):Name := "Listado"
+   *   oExcel:Sheets("Hoja2"):Name := "Resumen"
    oHoja := oExcel:Get( "ActiveSheet" )
    oHoja:Cells:Font:Name := "Arial"
    oHoja:Cells:Font:Size := 10
@@ -277,7 +281,7 @@ procedure Lis_TarCodigoiE()
    oHoja:Cells( LIN, 1 ):HorizontalAlignment:= -4152  //Derecha
    oHoja:Cells( LIN, 2 ):Value := "Descripcion"
    oHoja:Cells( LIN, 3 ):Value := "Importe"
-***Solo en MS office XP
+   ***Solo en MS office XP
    oHoja:Cells( LIN, 3 ):Set( "NumberFormat", "#.##0,00 €" )
 
    oHoja:Range(CHR(64+1)+LTRIM(STR(LIN))+":"+CHR(64+3)+LTRIM(STR(LIN))):Font:Bold := .T.
@@ -287,18 +291,18 @@ procedure Lis_TarCodigoiE()
 
    LIN++
 
-DO WHILE .NOT. EOF()
+   DO WHILE .NOT. EOF()
 
-   oHoja:Cells( LIN, 1 ):Value := CODTAR
-   oHoja:Cells( LIN, 2 ):Value := NOMTAR
-   oHoja:Cells( LIN, 3 ):Value := IMPORTE
-***Solo en MS office XP
-   oHoja:Cells( LIN, 3 ):Set( "NumberFormat", "#.##0,00" )
+      oHoja:Cells( LIN, 1 ):Value := CODTAR
+      oHoja:Cells( LIN, 2 ):Value := NOMTAR
+      oHoja:Cells( LIN, 3 ):Value := IMPORTE
+      ***Solo en MS office XP
+      oHoja:Cells( LIN, 3 ):Set( "NumberFormat", "#.##0,00" )
 
-   LIN++
-   SKIP
+      LIN++
+      SKIP
 
-ENDDO
+   ENDDO
 
    oHoja:Cells( 1, 1 ):Value := "SUIZO miniprint_list v1.0"
    oHoja:Cells( 2, 1 ):Value := DATE()
@@ -312,9 +316,8 @@ ENDDO
       oHoja:Columns( nCol ):AutoFit()
    NEXT
 
-
-*Guardar como
-*oHoja:SaveAs( TituloImp )
+   *Guardar como
+   *oHoja:SaveAs( TituloImp )
 
    oHoja:Cells( 1, 1 ):Select()
    oExcel:Visible := .T.
@@ -324,20 +327,21 @@ ENDDO
 
    W_Imp1.release
 
-Return
+   RETURN
 
+FUNCTION Impresoras()
 
-Function Impresoras()
-   Local aIMP1,aIMP2,aIMP3
+   LOCAL aIMP1,aIMP2,aIMP3
 
    aIMP1:=aPrinters()
    ASORT(aIMP1,,, { |x, y| UPPER(x) < UPPER(y) })
    aIMP2:=GetDefaultPrinter()
    aIMP3:=ASCAN(aIMP1, {|aVal| aVal == aIMP2})
 
-RETURN {aIMP1,aIMP2,aIMP3}
+   RETURN {aIMP1,aIMP2,aIMP3}
 
+FUNCTION Acercade()
 
-Function Acercade()
-RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+CRLF+"<josemisu@yahoo.com.ar>"+CRLF+CRLF+ ;
-   hb_compiler()+CRLF+Version()+CRLF+MiniGuiVersion(),"SUIZO miniprint_list v1.0")
+   RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+CRLF+"<josemisu@yahoo.com.ar>"+CRLF+CRLF+ ;
+      hb_compiler()+CRLF+Version()+CRLF+MiniGuiVersion(),"SUIZO miniprint_list v1.0")
+

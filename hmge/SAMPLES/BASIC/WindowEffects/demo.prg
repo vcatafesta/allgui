@@ -1,27 +1,25 @@
 /*
- * MiniGUI Demo
- *
- * Author: Luis Vasquez <luisvasquezcl@yahoo.com>
- *
- * Added support to multiple windows by Mahmoud Fayed <msfclipper@yahoo.com>
+* MiniGUI Demo
+* Author: Luis Vasquez <luisvasquezcl@yahoo.com>
+* Added support to multiple windows by Mahmoud Fayed <msfclipper@yahoo.com>
 */
 
 #include "minigui.ch"
 
-#define VERTICAL	1
-#define HORIZONTAL	2
-#define ANGULO		3
-#define OPEN		1
-#define CLOSE		2
+#define VERTICAL   1
+#define HORIZONTAL   2
+#define ANGULO      3
+#define OPEN      1
+#define CLOSE      2
 
 FUNCTION Main
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 300 ;
-      TITLE 'Test Window with effect' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 300 ;
+         TITLE 'Test Window with effect' ;
+         MAIN
 
       @ 14, 10 LABEL LABEL_1 VALUE 'Select Window effect:' WIDTH 125 FONT GetDefaultFontName() SIZE 9
       @ 10, 140 COMBOBOX COMBO_1 ITEMS { 'Vertical', 'Horizontal', 'Angle' } VALUE 1
@@ -35,8 +33,7 @@ FUNCTION Main
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
-
+   RETURN NIL
 
 PROCEDURE P1
 
@@ -45,37 +42,36 @@ PROCEDURE P1
    cWindowName := "Win_" + hb_ntos( _GetId() )
 
    DEFINE WINDOW &cWindowName ;
-      AT 300, 350 ;
-      WIDTH 300 ;
-      HEIGHT 300 ;
-      TITLE 'Hello World!' ;
-      CHILD ;
-      ON INIT WindowEfect( cWindowName, OPEN, win_1 .combo_1. value ) ;
-      ON RELEASE WindowEfect( cWindowName, CLOSE, win_1 .combo_1. value )
+         AT 300, 350 ;
+         WIDTH 300 ;
+         HEIGHT 300 ;
+         TITLE 'Hello World!' ;
+         CHILD ;
+         ON INIT WindowEfect( cWindowName, OPEN, win_1 .combo_1. value ) ;
+         ON RELEASE WindowEfect( cWindowName, CLOSE, win_1 .combo_1. value )
 
-   DEFINE LABEL LABEL_1
-      ROW 10
-      COL 10
-      WIDTH 300
-      VALUE 'Window with effect'
-      FONTNAME 'Arial'
-      FONTSIZE 12
-      FONTBOLD .T.
-   END LABEL
+      DEFINE LABEL LABEL_1
+         ROW 10
+         COL 10
+         WIDTH 300
+         VALUE 'Window with effect'
+         FONTNAME 'Arial'
+         FONTSIZE 12
+         FONTBOLD .T.
+      END LABEL
 
-   DEFINE BUTTON BTN1
-      ROW 40
-      COL 10
-      CAPTION '&Close'
-      ACTION DoMethod( cWindowName, "release" )
-   END BUTTON
+      DEFINE BUTTON BTN1
+         ROW 40
+         COL 10
+         CAPTION '&Close'
+         ACTION DoMethod( cWindowName, "release" )
+      END BUTTON
 
    END WINDOW
 
    ACTIVATE WINDOW &cWindowName
 
-RETURN
-
+   RETURN
 
 PROCEDURE WindowEfect( cWin, nEvento, nEfecto )
 
@@ -146,4 +142,5 @@ PROCEDURE WindowEfect( cWin, nEvento, nEfecto )
       MoveWindow( hWin, c, r, nw, nh, .T. )
    NEXT
 
-RETURN
+   RETURN
+

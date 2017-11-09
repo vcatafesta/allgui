@@ -4,7 +4,6 @@
 #include "HBXml.ch"         // HBXml.ch from folder HARBOUR\CONTRIB\XHB
 #include "Modest.ch"
 
-
 // Program messages
 
 #define MSG_SAVE_STARTED             'Save started '
@@ -19,732 +18,697 @@
 #define MSG_ERROR_BACKUP_MEMO        'Error create backup memo '
 #define MSG_ERROR_BACKUP_XML         'Error create backup XML-description '
 
-
-Declare window wModest
-
+DECLARE window wModest
 
 /******
-*
 *       SaveData() --> lSuccess
-*
 *       Reorganization of database, preservation of description
-*
 */
 
-Function SaveData
-Memvar aStat, oEditStru, aCollector, aParams
-Local lSuccess := .F., ;
+FUNCTION SaveData
+
+   MEMVAR aStat, oEditStru, aCollector, aParams
+   LOCAL lSuccess := .F., ;
       aStru    := {} , ;
       aTmp           , ;
       Cycle          , ;
       nLen
 
-// Array of working params
+   // Array of working params
 
-Private aParams := { 'SaveStru'   => .F., ;    // Keep of database structure
-                     'SaveDesc'   => .F., ;    // Keep of description
-                     'DeletedOff' => .T., ;    // Transfer the deleted records
-                     'CreateBAK'  => .F., ;    // Create backup
-                     'NewFile'    => .T., ;    // Flag: new file creation
-                     'Path'       => '' , ;    // Path to preservation
-                     'File'       => '' , ;    // File name (without path)
-                     'Ext'        => '' , ;    // File extension
-                     'RDD'        => '' , ;    // Database RDD
-                     'TmpFile'    => ''   ;    // Temporary file
-                   }
+   PRIVATE aParams := { 'SaveStru'   => .F., ;    // Keep of database structure
+   'SaveDesc'   => .F., ;    // Keep of description
+   'DeletedOff' => .T., ;    // Transfer the deleted records
+   'CreateBAK'  => .F., ;    // Create backup
+   'NewFile'    => .T., ;    // Flag: new file creation
+   'Path'       => '' , ;    // Path to preservation
+   'File'       => '' , ;    // File name (without path)
+   'Ext'        => '' , ;    // File extension
+   'RDD'        => '' , ;    // Database RDD
+   'TmpFile'    => ''   ;    // Temporary file
+   }
 
-Load window DbSave as wSave
+   LOAD WINDOW DbSave as wSave
 
-If !Empty( aStat[ 'FileName' ] )
-   wSave.btnDatabase.Value := aStat[ 'FileName' ]
-Else
-   wSave.btnDatabase.Value := ( hb_DirSepDel( GetCurrentFolder() ) + '\NewBase.dbf' )
-Endif
+   IF !Empty( aStat[ 'FileName' ] )
+      wSave.btnDatabase.Value := aStat[ 'FileName' ]
+   ELSE
+      wSave.btnDatabase.Value := ( hb_DirSepDel( GetCurrentFolder() ) + '\NewBase.dbf' )
+   ENDIF
 
-wSave.cmbRDD.Value := Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 2, 1 )
+   wSave.cmbRDD.Value := Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 2, 1 )
 
-wSave.Title := APPNAME + ' - Save file'
+   wSave.Title := APPNAME + ' - Save file'
 
-// Only changed parts for keep
+   // Only changed parts for keep
 
-wSave.cmbRDD.Enabled := aStat[ 'ChStruct' ]
+   wSave.cmbRDD.Enabled := aStat[ 'ChStruct' ]
 
-wSave.cbxSaveStru.Value   := aStat[ 'ChStruct' ]
-wSave.cbxSaveStru.Enabled := aStat[ 'ChStruct' ]
+   wSave.cbxSaveStru.Value   := aStat[ 'ChStruct' ]
+   wSave.cbxSaveStru.Enabled := aStat[ 'ChStruct' ]
 
-wSave.cbxSaveDescript.Value   := aStat[ 'ChDescript' ]
-wSave.cbxSaveDescript.Enabled := aStat[ 'ChDescript' ]
+   wSave.cbxSaveDescript.Value   := aStat[ 'ChDescript' ]
+   wSave.cbxSaveDescript.Enabled := aStat[ 'ChDescript' ]
 
-wSave.cbxDeleted.Enabled   := aStat[ 'ChStruct' ]
-wSave.cbxCreateBAK.Value   := .T.
-wSave.cbxCreateBAK.Enabled := ( aStat[ 'ChStruct' ] .or. aStat[ 'ChDescript' ] ) 
+   wSave.cbxDeleted.Enabled   := aStat[ 'ChStruct' ]
+   wSave.cbxCreateBAK.Value   := .T.
+   wSave.cbxCreateBAK.Enabled := ( aStat[ 'ChStruct' ] .or. aStat[ 'ChDescript' ] )
 
-On key Escape of wSave Action { || lSuccess := .F., wSave.Release }
+   On key Escape of wSave Action { || lSuccess := .F., wSave.Release }
 
-// Because of this procedure may be evoked at Main form closing
-// (exit without saving changed data), when repeatedly pressing Alt+X
-// will be close program immediately.
- 
-On key Alt+X of wSave Action ReleaseAllWindows()
+   // Because of this procedure may be evoked at Main form closing
+   // (exit without saving changed data), when repeatedly pressing Alt+X
+   // will be close program immediately.
 
-SetEnabled()        // Availability of controls
+   On key Alt+X of wSave Action ReleaseAllWindows()
 
-Center window wSave
-Activate window wSave
+   SetEnabled()        // Availability of controls
 
-// If saving was confirmed
+   CENTER WINDOW wSave
+   ACTIVATE WINDOW wSave
 
-If lSuccess
+   // If saving was confirmed
 
-   // In this place lSuccess is not saving result, but
-   // result of setting of saving params in form.
-   
-   If ( lSuccess := DoSave() )
-      
-      // Change the data in edit form. For example, user
-      // was change something and decide to select other file. The data was saved,
-      // but he was refuse from selected file - and datas at editing
-      // are remain as is.
-      
-      nLen := oEditStru : nLen
-     
-      For Cycle := 1 to nLen
-     
-        If !( oEditStru : aArray[ Cycle, DBS_FLAG ] == FLAG_DELETED )
-           aTmp := Array( DBS_NEW_ALEN )
-     
-           aTmp[ DBS_FLAG    ] := FLAG_DEFAULT
-           aTmp[ DBS_NAME    ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
-           aTmp[ DBS_TYPE    ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
-           aTmp[ DBS_LEN     ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
-           aTmp[ DBS_DEC     ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
-           aTmp[ DBS_OLDNAME ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
-           aTmp[ DBS_OLDTYPE ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
-           aTmp[ DBS_OLDLEN  ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
-           aTmp[ DBS_OLDDEC  ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
-           aTmp[ DBS_COMMENT ] := oEditStru : aArray[ Cycle, DBS_COMMENT ]
-           aTmp[ DBS_RULE    ] := ''
-           
-           AAdd( aStru, aTmp )
-     
-        Endif
-     
-      Next
-     
-      oEditStru : SetArray( aStru )
-     
-      oEditStru : Display()
-     
-      oEditStru : goTop()
-      oEditStru : Refresh()
-     
-      SetWinTitle()
-      SetIconSave( 0 )
-      SetRDDName()
-      
-      // Process the collector after successful saving.
-      // Because the database already exists, all fields, which are placed in the collector
-      // get flag "New field". Transformation rules are destroyed.
+   IF lSuccess
 
-      AEval( aCollector, { | aItem | aItem[ DBS_FLAG    ] :=  FLAG_INSERTED, ;
-                                     aItem[ DBS_OLDNAME ] := ''            , ;
-                                     aItem[ DBS_OLDTYPE ] := ''            , ;
-                                     aItem[ DBS_OLDLEN  ] := ''            , ;
-                                     aItem[ DBS_OLDDEC  ] := ''            , ;
-                                     aItem[ DBS_RULE    ] := ''              ;
-                         } )
-      FillCollector()   // Collector refreshing
-      
-   Endif
-   
-Endif
+      // In this place lSuccess is not saving result, but
+      // result of setting of saving params in form.
 
-Return lSuccess
+      IF ( lSuccess := DoSave() )
 
-****** End of SaveData ******
+         // Change the data in edit form. For example, user
+         // was change something and decide to select other file. The data was saved,
+         // but he was refuse from selected file - and datas at editing
+         // are remain as is.
 
+         nLen := oEditStru : nLen
 
-/******
-*
-*       SetEnabled()
-*
-*       Control for availability of controls in dialog
-*
-*/
+         FOR Cycle := 1 to nLen
 
-Static Procedure SetEnabled
-Memvar aStat
+            IF !( oEditStru : aArray[ Cycle, DBS_FLAG ] == FLAG_DELETED )
+               aTmp := Array( DBS_NEW_ALEN )
 
-wSave.btnDatabase.Enabled := wSave.cbxSaveStru.Value 
+               aTmp[ DBS_FLAG    ] := FLAG_DEFAULT
+               aTmp[ DBS_NAME    ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
+               aTmp[ DBS_TYPE    ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
+               aTmp[ DBS_LEN     ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
+               aTmp[ DBS_DEC     ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
+               aTmp[ DBS_OLDNAME ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
+               aTmp[ DBS_OLDTYPE ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
+               aTmp[ DBS_OLDLEN  ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
+               aTmp[ DBS_OLDDEC  ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
+               aTmp[ DBS_COMMENT ] := oEditStru : aArray[ Cycle, DBS_COMMENT ]
+               aTmp[ DBS_RULE    ] := ''
 
-If Empty( wSave.btnDatabase.Value )
-   wSave.btnOK.Enabled := .F. 
-Else
-   wSave.btnOK.Enabled := ( ( wSave.cbxSaveStru.Value          .or. ;
-                              wSave.cbxSaveDescript.Value           ;
-                            )                                 .and. ;
-                            !Empty( wSave.btnDatabase.Value )       ;
-                          )
-Endif
+               AAdd( aStru, aTmp )
 
-Return
+            ENDIF
 
-****** End of SetEnabled ******
+         NEXT
 
+         oEditStru : SetArray( aStru )
 
-/******
-*
-*      WhatSave()
-*
-*      Select file for preservation
-*
-*/
+         oEditStru : Display()
 
-Static Procedure WhatSave
-Local cFile := PutFile( FILEDLG_FILTER, 'Select dBASE file', , .T. )
+         oEditStru : goTop()
+         oEditStru : Refresh()
 
-If !Empty( cFile )
-   wSave.btnDatabase.Value := cFile
-Endif
-                
-Return
+         SetWinTitle()
+         SetIconSave( 0 )
+         SetRDDName()
 
-****** End of WhatSave ******
+         // Process the collector after successful saving.
+         // Because the database already exists, all fields, which are placed in the collector
+         // get flag "New field". Transformation rules are destroyed.
 
+         AEval( aCollector, { | aItem | aItem[ DBS_FLAG    ] :=  FLAG_INSERTED, ;
+            aItem[ DBS_OLDNAME ] := ''            , ;
+            aItem[ DBS_OLDTYPE ] := ''            , ;
+            aItem[ DBS_OLDLEN  ] := ''            , ;
+            aItem[ DBS_OLDDEC  ] := ''            , ;
+            aItem[ DBS_RULE    ] := ''              ;
+            } )
+         FillCollector()   // Collector refreshing
 
-/******
-*
-*       KeepParams()
-*
-*       Bring the setting to working array
-*
-*/
+      ENDIF
 
-Static Procedure KeepParams
-Memvar aParams
-Local cFile, ;
+   ENDIF
+
+   RETURN lSuccess
+
+   ****** End of SaveData ******
+
+   /******
+   *       SetEnabled()
+   *       Control for availability of controls in dialog
+   */
+
+STATIC PROCEDURE SetEnabled
+
+   MEMVAR aStat
+
+   wSave.btnDatabase.Enabled := wSave.cbxSaveStru.Value
+
+   IF Empty( wSave.btnDatabase.Value )
+      wSave.btnOK.Enabled := .F.
+   ELSE
+      wSave.btnOK.Enabled := ( ( wSave.cbxSaveStru.Value          .or. ;
+         wSave.cbxSaveDescript.Value           ;
+         )                                 .and. ;
+         !Empty( wSave.btnDatabase.Value )       ;
+         )
+   ENDIF
+
+   RETURN
+
+   ****** End of SetEnabled ******
+
+   /******
+   *      WhatSave()
+   *      Select file for preservation
+   */
+
+STATIC PROCEDURE WhatSave
+
+   LOCAL cFile := PutFile( FILEDLG_FILTER, 'Select dBASE file', , .T. )
+
+   IF !Empty( cFile )
+      wSave.btnDatabase.Value := cFile
+   ENDIF
+
+   RETURN
+
+   ****** End of WhatSave ******
+
+   /******
+   *       KeepParams()
+   *       Bring the setting to working array
+   */
+
+STATIC PROCEDURE KeepParams
+
+   MEMVAR aParams
+   LOCAL cFile, ;
       nPos
 
-aParams[ 'SaveStru'   ] := wSave.cbxSaveStru.Value
-aParams[ 'SaveDesc'   ] := wSave.cbxSaveDescript.Value
-aParams[ 'DeletedOff' ] := wSave.cbxDeleted.Value
-aParams[ 'CreateBAK'  ] := wSave.cbxCreateBAK.Value
-aParams[ 'RDD'        ] := Iif( ( GetProperty( 'wSave', 'cmbRDD', 'Value' ) == 1 ), 'DBFNTX', 'DBFCDX' )
+   aParams[ 'SaveStru'   ] := wSave.cbxSaveStru.Value
+   aParams[ 'SaveDesc'   ] := wSave.cbxSaveDescript.Value
+   aParams[ 'DeletedOff' ] := wSave.cbxDeleted.Value
+   aParams[ 'CreateBAK'  ] := wSave.cbxCreateBAK.Value
+   aParams[ 'RDD'        ] := Iif( ( GetProperty( 'wSave', 'cmbRDD', 'Value' ) == 1 ), 'DBFNTX', 'DBFCDX' )
 
-// Allocate from full name the path, file name and extension
+   // Allocate from full name the path, file name and extension
 
-cFile := AllTrim( wSave.btnDatabase.Value )
+   cFile := AllTrim( wSave.btnDatabase.Value )
 
-If ( ( nPos := RAt( '.', cFile ) ) > 0 )
-   aParams[ 'Ext' ] := Substr( cFile, ( nPos + 1 ) )
-   cFile := Substr( cFile, 1, ( nPos - 1 ) )
-Endif 
+   IF ( ( nPos := RAt( '.', cFile ) ) > 0 )
+      aParams[ 'Ext' ] := Substr( cFile, ( nPos + 1 ) )
+      cFile := Substr( cFile, 1, ( nPos - 1 ) )
+   ENDIF
 
-If ( ( nPos := RAt( '\', cFile ) ) > 0 )
-   aParams[ 'File' ] := Substr( cFile, ( nPos + 1 ) )
-   aParams[ 'Path' ] := Substr( cFile, 1, ( nPos - 1 ) )
-Else
-   aParams[ 'File' ] := cFile
-   aParams[ 'Path' ] := GetCurrentFolder()
-Endif 
+   IF ( ( nPos := RAt( '\', cFile ) ) > 0 )
+      aParams[ 'File' ] := Substr( cFile, ( nPos + 1 ) )
+      aParams[ 'Path' ] := Substr( cFile, 1, ( nPos - 1 ) )
+   ELSE
+      aParams[ 'File' ] := cFile
+      aParams[ 'Path' ] := GetCurrentFolder()
+   ENDIF
 
-If Empty( aParams[ 'Ext' ] )
-   aParams[ 'Ext' ] := 'dbf'       // Typical extension
-Endif
- 
-cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-WriteMsg( MSG_SAVE_STARTED + cFile )
+   IF Empty( aParams[ 'Ext' ] )
+      aParams[ 'Ext' ] := 'dbf'       // Typical extension
+   ENDIF
 
-// If file is not exest, when keeping will be easier. Therefore
-// check for parameter.
+   cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+   WriteMsg( MSG_SAVE_STARTED + cFile )
 
-aParams[ 'NewFile' ] := !File( cFile )
+   // If file is not exest, when keeping will be easier. Therefore
+   // check for parameter.
 
-Return
+   aParams[ 'NewFile' ] := !File( cFile )
 
-****** End of KeepParams ******
- 
+   RETURN
 
-/******
-*
-*       DoSave() --> lSuccess
-*
-*       Description keeping
-*
-*/
+   ****** End of KeepParams ******
 
-Static Function DoSave
-Memvar oEditStru, aStat, aParams, aStru
-Local lSuccess := .F., ;
+   /******
+   *       DoSave() --> lSuccess
+   *       Description keeping
+   */
+
+STATIC FUNCTION DoSave
+
+   MEMVAR oEditStru, aStat, aParams, aStru
+   LOCAL lSuccess := .F., ;
       cFile          , ;
       Cycle          , ;
       nLen           , ;
       aTmp
 
-// Expanded array of fields description for function DbCreate(). It's possible, because
-// this function have used DBS_NAME, DBS_TYPE, DBS_LEN, DBS_DEC and ignore
-// the others elements.
+   // Expanded array of fields description for function DbCreate(). It's possible, because
+   // this function have used DBS_NAME, DBS_TYPE, DBS_LEN, DBS_DEC and ignore
+   // the others elements.
 
-Private aStru := {}  
- 
-// Fill of the structure description. Deleted fileds are ignored.
+   PRIVATE aStru := {}
 
-nLen := oEditStru : nLen
+   // Fill of the structure description. Deleted fileds are ignored.
 
-For Cycle := 1 to nLen
+   nLen := oEditStru : nLen
 
-  If !( oEditStru : aArray[ Cycle, DBS_FLAG ] == FLAG_DELETED )
-     
-     aTmp := Array( DBS_NEW_ALEN )
-     
-     aTmp[ DBS_NAME    ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
-     aTmp[ DBS_TYPE    ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
-     aTmp[ DBS_LEN     ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
-     aTmp[ DBS_DEC     ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
-     aTmp[ DBS_OLDNAME ] := oEditStru : aArray[ Cycle, DBS_OLDNAME ]
-     aTmp[ DBS_OLDTYPE ] := oEditStru : aArray[ Cycle, DBS_OLDTYPE ]
-     aTmp[ DBS_RULE    ] := oEditStru : aArray[ Cycle, DBS_RULE    ]
-     aTmp[ DBS_COMMENT ] := oEditStru : aArray[ Cycle, DBS_COMMENT ]
-     
-     AAdd( aStru, aTmp )
-     
-  Endif
+   FOR Cycle := 1 to nLen
 
-Next
+      IF !( oEditStru : aArray[ Cycle, DBS_FLAG ] == FLAG_DELETED )
 
-Begin Sequence
+         aTmp := Array( DBS_NEW_ALEN )
 
-   If aParams[ 'SaveStru' ]      // Keep structure
-   
-      If !aParams[ 'NewFile' ]
-        // Create tempfile at database folder.
-        aParams[ 'TmpFile' ] := TempFileName()
-      Endif
-      
-      If !CreateEmpty()
-         Break
-      Endif
-      
-      If !aParams[ 'NewFile' ]
-      
-         // If it modify of existing base, transfer the records in a new structure
-            
-         If !Transfer()
+         aTmp[ DBS_NAME    ] := oEditStru : aArray[ Cycle, DBS_NAME    ]
+         aTmp[ DBS_TYPE    ] := oEditStru : aArray[ Cycle, DBS_TYPE    ]
+         aTmp[ DBS_LEN     ] := oEditStru : aArray[ Cycle, DBS_LEN     ]
+         aTmp[ DBS_DEC     ] := oEditStru : aArray[ Cycle, DBS_DEC     ]
+         aTmp[ DBS_OLDNAME ] := oEditStru : aArray[ Cycle, DBS_OLDNAME ]
+         aTmp[ DBS_OLDTYPE ] := oEditStru : aArray[ Cycle, DBS_OLDTYPE ]
+         aTmp[ DBS_RULE    ] := oEditStru : aArray[ Cycle, DBS_RULE    ]
+         aTmp[ DBS_COMMENT ] := oEditStru : aArray[ Cycle, DBS_COMMENT ]
+
+         AAdd( aStru, aTmp )
+
+      ENDIF
+
+   NEXT
+
+   BEGIN Sequence
+
+      IF aParams[ 'SaveStru' ]      // Keep structure
+
+         IF !aParams[ 'NewFile' ]
+            // Create tempfile at database folder.
+            aParams[ 'TmpFile' ] := TempFileName()
+         ENDIF
+
+         IF !CreateEmpty()
             Break
-         Endif
-          
-         // Create backup if its needed
-      
-         If aParams[ 'CreateBAK' ]
-          
-            // Backup name is construct by add the complementary
-            // extension .bak
-            // Existed backups should be erased before renaming,
-            //  otherwise FRename() will finished with error.
-             
-            cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-      
-            If File( cFile + '.bak' )
-               Erase ( cFile + '.bak' )
-            Endif
-             
-            If Empty( FRename( cFile, ( cFile + '.bak' ) ) )
-                
-               // If database have the comment file
-                
-               cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
-               cFile += Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
-      
-               If File( cFile + '.bak' )
-                  Erase ( cFile + '.bak' )
-               Endif
-                
-               If File( cFile )
-                  If !Empty( FRename( cFile, ( cFile + '.bak' ) ) )
-                     WriteMsg( MSG_ERROR_BACKUP_MEMO + cFile )
-                     Break
-                  Endif
-               Endif
-                
-            Else
-               WriteMsg( MSG_ERROR_BACKUP_BASE + cFile )
-               Break
-            Endif
-            
-         Endif
-          
-         // If backup was not created, it is needed before renaming
-         // to erase the initial (output) files
-      
-         cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-         Erase ( cFile )
-      
-         cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
-         cFile += Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
-         Erase ( cFile )
+         ENDIF
 
-          
-         // Rename the tempfile to working file.
-      
-         cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-          
-         If Empty( FRename( aParams[ 'TmpFile' ], cFile ) )
-                
-            // File of comments
-      
-            aParams[ 'TmpFile' ] := Left( aParams[ 'TmpFile' ], ( Len( aParams[ 'TmpFile' ] ) - 3 ) )
-            aParams[ 'TmpFile' ] += Iif( ( aParams[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
-      
-            If File( aParams[ 'TmpFile' ] )
-      
-               cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
-               cFile += Iif( ( aParams[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
-             
-               If !Empty( FRename( aParams[ 'TmpFile' ], cFile ) )
-                  WriteMsg( MSG_ERROR_CREATE_MEMO + cFile )
+         IF !aParams[ 'NewFile' ]
+
+            // If it modify of existing base, transfer the records in a new structure
+
+            IF !Transfer()
+               Break
+            ENDIF
+
+            // Create backup if its needed
+
+            IF aParams[ 'CreateBAK' ]
+
+               // Backup name is construct by add the complementary
+               // extension .bak
+               // Existed backups should be erased before renaming,
+               //  otherwise FRename() will finished with error.
+
+               cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+
+               IF File( cFile + '.bak' )
+                  ERASE ( cFile + '.bak' )
+               ENDIF
+
+               IF Empty( FRename( cFile, ( cFile + '.bak' ) ) )
+
+                  // If database have the comment file
+
+                  cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
+                  cFile += Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
+
+                  IF File( cFile + '.bak' )
+                     ERASE ( cFile + '.bak' )
+                  ENDIF
+
+                  IF File( cFile )
+                     IF !Empty( FRename( cFile, ( cFile + '.bak' ) ) )
+                        WriteMsg( MSG_ERROR_BACKUP_MEMO + cFile )
+                        Break
+                     ENDIF
+                  ENDIF
+
+               ELSE
+                  WriteMsg( MSG_ERROR_BACKUP_BASE + cFile )
                   Break
-               Endif
-            Endif
-                
-         Else
-            WriteMsg( MSG_ERROR_CREATE + cFile )
-            Break
-         Endif
-      
-      Endif
+               ENDIF
 
-   Endif
-   
-   If aParams[ 'SaveDesc' ]        // Keep the database description
+            ENDIF
 
-      cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.xml' )
+            // If backup was not created, it is needed before renaming
+            // to erase the initial (output) files
 
-      If aParams[ 'CreateBAK' ]
+            cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+            ERASE ( cFile )
 
-         If File( cFile + '.bak' )
-            Erase ( cFile + '.bak' )
-         Endif
-         
-         If File( cFile ) 
-            If !Empty( FRename( cFile, ( cFile + '.bak' ) ) )
-               WriteMsg( MSG_ERROR_BACKUP_XML + cFile )
+            cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
+            cFile += Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
+            ERASE ( cFile )
+
+            // Rename the tempfile to working file.
+
+            cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+
+            IF Empty( FRename( aParams[ 'TmpFile' ], cFile ) )
+
+               // File of comments
+
+               aParams[ 'TmpFile' ] := Left( aParams[ 'TmpFile' ], ( Len( aParams[ 'TmpFile' ] ) - 3 ) )
+               aParams[ 'TmpFile' ] += Iif( ( aParams[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
+
+               IF File( aParams[ 'TmpFile' ] )
+
+                  cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' )
+                  cFile += Iif( ( aParams[ 'RDD' ] == 'DBFCDX' ), 'FPT', 'DBT' )
+
+                  IF !Empty( FRename( aParams[ 'TmpFile' ], cFile ) )
+                     WriteMsg( MSG_ERROR_CREATE_MEMO + cFile )
+                     Break
+                  ENDIF
+               ENDIF
+
+            ELSE
+               WriteMsg( MSG_ERROR_CREATE + cFile )
                Break
-            Endif
-         Endif
+            ENDIF
 
-     Endif
+         ENDIF
 
-     If File( cFile )
-        Erase ( cFile )
-     Endif
+      ENDIF
 
-     If !SaveXML()
-        WriteMsg( MSG_ERROR_CREATE_XML + cFile )
-        Break
-     Endif
-        
-   Endif
-      
-   lSuccess := .T.
-   
-End
+      IF aParams[ 'SaveDesc' ]        // Keep the database description
 
-If lSuccess
+         cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.xml' )
 
-   // Change the array of working params
-   
-   aStat[ 'FileName'   ] := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-   aStat[ 'RDD'        ] := aStat[ 'RDD' ]
-   aStat[ 'ChStruct'   ] := .F.          // Changing is absent
-   aStat[ 'ChDescript' ] := .F.
+         IF aParams[ 'CreateBAK' ]
 
-   WriteMsg( MSG_SAVE_SUCCESS )
-   Do Events
-   
-Else
-   WriteMsg( MSG_SAVE_ERROR )
-   
-Endif
+            IF File( cFile + '.bak' )
+               ERASE ( cFile + '.bak' )
+            ENDIF
 
-wModest.StatusBar.Item( 2 ) := ''
+            IF File( cFile )
+               IF !Empty( FRename( cFile, ( cFile + '.bak' ) ) )
+                  WriteMsg( MSG_ERROR_BACKUP_XML + cFile )
+                  Break
+               ENDIF
+            ENDIF
 
-Return lSuccess
+         ENDIF
 
-****** End of DoSave ******
+         IF File( cFile )
+            ERASE ( cFile )
+         ENDIF
 
+         IF !SaveXML()
+            WriteMsg( MSG_ERROR_CREATE_XML + cFile )
+            Break
+         ENDIF
 
-/******
-*
-*       TempFileName() --> cFile
-*
-*       Create the temporary file
-*
-*/
+      ENDIF
 
-Static Function TempFileName
-Memvar aParams
-Local nHandle, cFile
+      lSuccess := .T.
 
-Do while .T.
+   End
 
-   If ( ( nHandle := HB_FTempCreate( aParams[ 'Path' ],,, @cFile ) ) > 0 )
-      FClose( nHandle )
-      Erase ( cFile )
-   Endif
-   
-   // Change the extension of .tmp file, which is created by HB_FTempCreate()
-   // to standard. Reason - database must be contain the fields of comments.
-   
-   If !File( cFile := Left( cFile, ( Len( cFile ) - 3 ) ) + 'dbf' )
-      Exit
-   Endif
+   IF lSuccess
 
-Enddo
+      // Change the array of working params
 
-Return cFile
+      aStat[ 'FileName'   ] := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+      aStat[ 'RDD'        ] := aStat[ 'RDD' ]
+      aStat[ 'ChStruct'   ] := .F.          // Changing is absent
+      aStat[ 'ChDescript' ] := .F.
 
-****** End of TempFileName
- 
+      WriteMsg( MSG_SAVE_SUCCESS )
+      Do Events
 
-/******
-*
-*       CreateEmpty() --> lSuccess
-*
-*       Create the empty base with the declared structure
-*
-*/
+   ELSE
+      WriteMsg( MSG_SAVE_ERROR )
 
-Static Function CreateEmpty
-Memvar aParams, aStru
-Local cFile          , ;
+   ENDIF
+
+   wModest.StatusBar.Item( 2 ) := ''
+
+   RETURN lSuccess
+
+   ****** End of DoSave ******
+
+   /******
+   *       TempFileName() --> cFile
+   *       Create the temporary file
+   */
+
+STATIC FUNCTION TempFileName
+
+   MEMVAR aParams
+   LOCAL nHandle, cFile
+
+   DO WHILE .T.
+
+      IF ( ( nHandle := HB_FTempCreate( aParams[ 'Path' ],,, @cFile ) ) > 0 )
+         FClose( nHandle )
+         ERASE ( cFile )
+      ENDIF
+
+      // Change the extension of .tmp file, which is created by HB_FTempCreate()
+      // to standard. Reason - database must be contain the fields of comments.
+
+      IF !File( cFile := Left( cFile, ( Len( cFile ) - 3 ) ) + 'dbf' )
+         EXIT
+      ENDIF
+
+   ENDDO
+
+   RETURN cFile
+
+   ****** End of TempFileName
+
+   /******
+   *       CreateEmpty() --> lSuccess
+   *       Create the empty base with the declared structure
+   */
+
+STATIC FUNCTION CreateEmpty
+
+   MEMVAR aParams, aStru
+   LOCAL cFile          , ;
       lSuccess := .F.
 
-If !aParams[ 'NewFile' ]
-  cFile := aParams[ 'TmpFile' ]
-Else
-  cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
-Endif
+   IF !aParams[ 'NewFile' ]
+      cFile := aParams[ 'TmpFile' ]
+   ELSE
+      cFile := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] )
+   ENDIF
 
-Try
-  DbCreate( cFile, aStru, aParams[ 'RDD' ] )
-  lSuccess := .T.
-Catch
-  WriteMsg( MSG_ERROR_CREATE + cFile )
-End
+   Try
+      DbCreate( cFile, aStru, aParams[ 'RDD' ] )
+      lSuccess := .T.
+   CATCH
+      WriteMsg( MSG_ERROR_CREATE + cFile )
+   End
 
-Return lSuccess
+   RETURN lSuccess
 
-****** End of CreateEmpty ******
+   ****** End of CreateEmpty ******
 
+   /******
+   *       Transfer() --> lSuccess
+   *       Transfer the records to database with a new structure
+   */
 
-/******
-*
-*       Transfer() --> lSuccess
-*
-*       Transfer the records to database with a new structure
-*
-*/
+STATIC FUNCTION Transfer
 
-Static Function Transfer
-Memvar aStat, aParams
-Local lSuccess := .T.
+   MEMVAR aStat, aParams
+   LOCAL lSuccess := .T.
 
-Try
+   Try
 
-  DbUseArea( .T., aStat[ 'RDD'   ], ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] ), 'OldBase' )
-  DbUseArea( .T., aParams[ 'RDD' ], aParams[ 'TmpFile' ], 'NewBase' )
+      DbUseArea( .T., aStat[ 'RDD'   ], ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' + aParams[ 'Ext' ] ), 'OldBase' )
+      DbUseArea( .T., aParams[ 'RDD' ], aParams[ 'TmpFile' ], 'NewBase' )
 
-  WriteMsg( MSG_TRANSFER_PROGRESS )
-  OldBase->( DbEval( { || ChangeRecord() }, { || Iif( aParams[ 'DeletedOff' ], .T., !Deleted() ) } ) )
-  WriteMsg( MSG_TRANSFER_FINISH )  
+      WriteMsg( MSG_TRANSFER_PROGRESS )
+      OldBase->( DbEval( { || ChangeRecord() }, { || Iif( aParams[ 'DeletedOff' ], .T., !Deleted() ) } ) )
+      WriteMsg( MSG_TRANSFER_FINISH )
 
-Catch
-  lSuccess := .F.
-Finally
-  DbCloseAll()
-End
+   CATCH
+      lSuccess := .F.
+      Finally
+      DbCloseAll()
+   End
 
-Return lSuccess
+   RETURN lSuccess
 
-****** End of Transfer ******
+   ****** End of Transfer ******
 
+   /******
+   *       ChangeRecord()
+   *       Transfer the fields contents
+   */
 
-/******
-*
-*       ChangeRecord()
-*
-*       Transfer the fields contents
-*
-*/
+STATIC PROCEDURE ChangeRecord
 
-Static Procedure ChangeRecord
-Memvar aParams, aStru
-Local nRecno := OldBase->( Recno() )   , ;
+   MEMVAR aParams, aStru
+   LOCAL nRecno := OldBase->( Recno() )   , ;
       nCount := OldBase->( Reccount() ), ;
       nElems := Len( aStru )           , ;
       Cycle                            , ;
       cField                           , ;
       nField                           , ;
       xValue
-      
-wModest.StatusBar.Item( 2 ) := ( LTrim( Str( nRecno ) ) + '/' + LTrim( Str( nCount ) ) )
-Do Events
 
-NewBase->( DbAppend() )
+   wModest.StatusBar.Item( 2 ) := ( LTrim( Str( nRecno ) ) + '/' + LTrim( Str( nCount ) ) )
+   Do Events
 
-For Cycle := 1 to nElems
+   NewBase->( DbAppend() )
 
-   // If previous field name is absent, means that it a new field,
-   // no need to tarnster data from old base
+   FOR Cycle := 1 to nElems
 
-   If !Empty( cField := aStru[ Cycle, DBS_OLDNAME ] )
-   
-      nField := OldBase->( FieldPos( cField ) )
-      
-      If !( ( xValue := EqnType( nField, Cycle ) ) == nil )
-         NewBase->( FieldPut( Cycle, xValue ) )
-      Endif
+      // If previous field name is absent, means that it a new field,
+      // no need to tarnster data from old base
 
-   Endif
+      IF !Empty( cField := aStru[ Cycle, DBS_OLDNAME ] )
 
-Next
+         nField := OldBase->( FieldPos( cField ) )
 
-// Restore the deletion flag at transfering of deleted records
+         IF !( ( xValue := EqnType( nField, Cycle ) ) == nil )
+            NewBase->( FieldPut( Cycle, xValue ) )
+         ENDIF
 
-If aParams[ 'DeletedOff' ]
-   If OldBase->( Deleted() )
-      NewBase->( DbDelete() )
-   Endif
-Endif
+      ENDIF
 
-Return
+   NEXT
 
-****** End of ChangeRecord ******
+   // Restore the deletion flag at transfering of deleted records
 
+   IF aParams[ 'DeletedOff' ]
+      IF OldBase->( Deleted() )
+         NewBase->( DbDelete() )
+      ENDIF
+   ENDIF
 
-/******
-*
-*       EqnType( nField, nElem ) --> xVar
-*
-*       The coordination of field's types
-*
-*/
+   RETURN
 
-Static Function EqnType( nField, nElem )
-Memvar aStru, aStat, xVar
-Local cOldType := aStru[ nElem, DBS_OLDTYPE ], ;
+   ****** End of ChangeRecord ******
+
+   /******
+   *       EqnType( nField, nElem ) --> xVar
+   *       The coordination of field's types
+   */
+
+STATIC FUNCTION EqnType( nField, nElem )
+
+   MEMVAR aStru, aStat, xVar
+   LOCAL cOldType := aStru[ nElem, DBS_OLDTYPE ], ;
       cNewType := aStru[ nElem, DBS_TYPE    ], ;
       cName                                  , ;
       cRule
 
-If Empty( aStru[ nElem, DBS_RULE ] )
+   IF Empty( aStru[ nElem, DBS_RULE ] )
 
-   // If rule is not set, transformation is typical
-    
-   Private xVar := OldBase->( FieldGet( nField ) )
+      // If rule is not set, transformation is typical
 
-   Do case
-      Case ( ( cOldType == 'C' ) .or. ( cOldType == 'M' ) )
+      PRIVATE xVar := OldBase->( FieldGet( nField ) )
 
-        Do case
-           Case ( cNewType == 'C' )
-             xVar := Left( xVar, aStru[ nElem, DBS_LEN ] )
+      DO CASE
+      CASE ( ( cOldType == 'C' ) .or. ( cOldType == 'M' ) )
 
-           Case ( cNewType == 'N' )
-             xVar := Iif( ( Type( 'Val( xVar )' ) == 'N' ), Val( xVar ), 0 )
+         DO CASE
+         CASE ( cNewType == 'C' )
+            xVar := Left( xVar, aStru[ nElem, DBS_LEN ] )
 
-           Case ( cNewType == 'D' )
-             xVar := Iif( ( Type( 'CtoD( xVar )' ) == 'D' ), ;
-                          CtoD( xVar ), CtoD( '' ) )
+         CASE ( cNewType == 'N' )
+            xVar := Iif( ( Type( 'Val( xVar )' ) == 'N' ), Val( xVar ), 0 )
 
-           Case ( cNewType == 'L' )
-             xVar := AllTrim( xVar )
-             If ( Len( xVar ) == 1 )
-                xVar := Iif( ( xVar == 'T' ), .T., .F. )
-             Else
-                xVar := .F.
-             Endif
+         CASE ( cNewType == 'D' )
+            xVar := Iif( ( Type( 'CtoD( xVar )' ) == 'D' ), ;
+               CtoD( xVar ), CtoD( '' ) )
 
-        Endcase
+         CASE ( cNewType == 'L' )
+            xVar := AllTrim( xVar )
+            IF ( Len( xVar ) == 1 )
+               xVar := Iif( ( xVar == 'T' ), .T., .F. )
+            ELSE
+               xVar := .F.
+            ENDIF
 
-      Case ( cOldType == 'N' )
+         ENDCASE
 
-        Do case
-           Case ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
-             xVar := Str( xVar, aStru[ nElem, DBS_LEN ], ;
-                                aStru[ nElem, DBS_DEC ] )
+      CASE ( cOldType == 'N' )
 
-           Case ( cNewType == 'D' )
-             xVar := CtoD( AllTrim( Str( xVar ) ) )
+         DO CASE
+         CASE ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
+            xVar := Str( xVar, aStru[ nElem, DBS_LEN ], ;
+               aStru[ nElem, DBS_DEC ] )
 
-           Case ( cNewType == 'L' )
-             xVar := Iif( ( xVar == 1 ), .T., .F. )
+         CASE ( cNewType == 'D' )
+            xVar := CtoD( AllTrim( Str( xVar ) ) )
 
-        Endcase
+         CASE ( cNewType == 'L' )
+            xVar := Iif( ( xVar == 1 ), .T., .F. )
 
-      Case ( cOldType == 'D' )
+         ENDCASE
 
-        Do case
-           Case ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
-             xVar := DtoC( xVar )
+      CASE ( cOldType == 'D' )
 
-           Case ( cNewType == 'N' )
-             xVar := Val( DtoC( xVar ) )
+         DO CASE
+         CASE ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
+            xVar := DtoC( xVar )
 
-          Case ( cNewType == 'L' )
+         CASE ( cNewType == 'N' )
+            xVar := Val( DtoC( xVar ) )
+
+         CASE ( cNewType == 'L' )
             xVar := .F.
 
-        Endcase
+         ENDCASE
 
-      Case ( cOldType == 'L' )
+      CASE ( cOldType == 'L' )
 
-        Do case
-           Case ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
-             xVar := Iif( xVar, 'T', 'F' )
+         DO CASE
+         CASE ( ( cNewType == 'C' ) .or. ( cNewType == 'M' ) )
+            xVar := Iif( xVar, 'T', 'F' )
 
-           Case ( cNewType == 'N' )
-             xVar := Iif( xVar, 1, 0 )
+         CASE ( cNewType == 'N' )
+            xVar := Iif( xVar, 1, 0 )
 
-           Case ( cNewType == 'D' )
-             xVar := CtoD( '' )
+         CASE ( cNewType == 'D' )
+            xVar := CtoD( '' )
 
-        Endcase
+         ENDCASE
 
-   Endcase
+      ENDCASE
 
-Else
+   ELSE
 
-  cName := aStru[ nElem, DBS_OLDNAME ]
-  cName := ( 'OldBase->' + cName )
-  
-  cRule := aStru[ nElem, DBS_RULE ]
-  cRule := StrTran( cRule, aStat[ 'Expression' ], cName )
-        
-  Try
-    cRule := &( '{ || ' + cRule + ' }' )
-    xVar  := Eval( cRule )
-  Catch
-    xVar := nil
-  End
-          
-Endif
+      cName := aStru[ nElem, DBS_OLDNAME ]
+      cName := ( 'OldBase->' + cName )
 
-Return xVar
+      cRule := aStru[ nElem, DBS_RULE ]
+      cRule := StrTran( cRule, aStat[ 'Expression' ], cName )
 
-****** End of EqnType ******
+      Try
+         cRule := &( '{ || ' + cRule + ' }' )
+         xVar  := Eval( cRule )
+      CATCH
+         xVar := nil
+      End
 
+   ENDIF
 
-/******
-*
-*       SaveXML() --> lSuccess
-*
-*       Keep the database description
-*
-*/
+   RETURN xVar
 
-Static Function SaveXML
-Memvar aParams, aStru
-Local lSuccess     := .T.                                                  , ;
+   ****** End of EqnType ******
+
+   /******
+   *       SaveXML() --> lSuccess
+   *       Keep the database description
+   */
+
+STATIC FUNCTION SaveXML
+
+   MEMVAR aParams, aStru
+   LOCAL lSuccess     := .T.                                                  , ;
       cFile        := ( aParams[ 'Path' ] + '\' + aParams[ 'File' ] + '.' ), ;
       oXMLDoc                                                              , ;
       oXMLDatabase                                                         , ;
@@ -755,73 +719,74 @@ Local lSuccess     := .T.                                                  , ;
       aAttr                                                                , ;
       nFileHandle
 
-Try
+   Try
 
-   /*
-     The result is a file with the following contents:
+      /*
+      The result is a file with the following contents:
 
-     <?xml version="1.0"?>
-     <Database file="D:\Programs\Modest\FOXHELP.DBF">
-       <Description>FoxPro Help</Description>
-       <Structure>
-         <Field dec="0" len="30" name="TOPIC" type="C">Topic</field>
-         <Field dec="0" len="10" name="DETAILS" type="M">Text</field>
-         <Field dec="0" len="20" name="CLASS" type="C"/>
-       </Structure>
-     </Database>
-       
-   */
-   
-   // Create empty XML-document with header
+      <?xml version="1.0"?>
+      <Database file="D:\Programs\Modest\FOXHELP.DBF">
+      <Description>FoxPro Help</Description>
+      <Structure>
+      <Field dec="0" len="30" name="TOPIC" type="C">Topic</field>
+      <Field dec="0" len="10" name="DETAILS" type="M">Text</field>
+      <Field dec="0" len="20" name="CLASS" type="C"/>
+      </Structure>
+      </Database>
 
-   oXMLDoc := TXMLDocument() : New( '<?xml version="1.0"?>' )
+      */
 
-   // Create main XML node
+      // Create empty XML-document with header
 
-   oXMLDatabase := TXMLNode() : New( , XML_TAG_DATABASE, { XML_TAG_FILE => ( cFile + aParams[ 'Ext' ] ) } )
-   oXMLDoc : oRoot : AddBelow( oXMLDatabase )
+      oXMLDoc := TXMLDocument() : New( '<?xml version="1.0"?>' )
 
-   // Add node with the database description
+      // Create main XML node
 
-   oXMLHeader := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_DESCRIPTION, nil, AllTrim( wModest.edtGeneral.Value ) )
-   oXMLDatabase : AddBelow( oXMLHeader )
+      oXMLDatabase := TXMLNode() : New( , XML_TAG_DATABASE, { XML_TAG_FILE => ( cFile + aParams[ 'Ext' ] ) } )
+      oXMLDoc : oRoot : AddBelow( oXMLDatabase )
 
-   // Section of field's description
-   oXMLStruct := TXMLNode() : New( , XML_TAG_STRUCTURE )
-   oXMLDatabase : AddBelow( oXMLStruct )
+      // Add node with the database description
 
-   For each aField in aStru
-      aAttr := { XML_ATTR_NAME => aField[ DBS_NAME ]              , ;
-                 XML_ATTR_TYPE => aField[ DBS_TYPE ]              , ;
-                 XML_ATTR_LEN => LTrim( Str( aField[ DBS_LEN ] ) ), ;
-                 XML_ATTR_DEC => LTrim( Str( aField[ DBS_DEC ] ) )  ;
-               }
+      oXMLHeader := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_DESCRIPTION, nil, AllTrim( wModest.edtGeneral.Value ) )
+      oXMLDatabase : AddBelow( oXMLHeader )
 
-      If !Empty( aField[ DBS_COMMENT ] )
-         oXMLField := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_FIELD, aAttr, aField[ DBS_COMMENT ] )
-      Else
-         oXMLField := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_FIELD, aAttr )
-      Endif
+      // Section of field's description
+      oXMLStruct := TXMLNode() : New( , XML_TAG_STRUCTURE )
+      oXMLDatabase : AddBelow( oXMLStruct )
 
-      oXMLStruct : AddBelow( oXMLField )
+      FOR EACH aField in aStru
+         aAttr := { XML_ATTR_NAME => aField[ DBS_NAME ]              , ;
+            XML_ATTR_TYPE => aField[ DBS_TYPE ]              , ;
+            XML_ATTR_LEN => LTrim( Str( aField[ DBS_LEN ] ) ), ;
+            XML_ATTR_DEC => LTrim( Str( aField[ DBS_DEC ] ) )  ;
+            }
 
-   Next
+         IF !Empty( aField[ DBS_COMMENT ] )
+            oXMLField := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_FIELD, aAttr, aField[ DBS_COMMENT ] )
+         ELSE
+            oXMLField := TXMLNode() : New( HBXML_TYPE_TAG, XML_TAG_FIELD, aAttr )
+         ENDIF
 
-   // Create XML file
-   nFileHandle := FCreate( cFile + 'XML')
-   
-   If Empty( FError() )
-   
-      // Keep XML tree
-      oXmlDoc : Write( nFileHandle, HBXML_STYLE_INDENT )
-      FClose( nFileHandle )
-      
-   Endif
+         oXMLStruct : AddBelow( oXMLField )
 
-Catch
-   lSuccess := .F.
-End
+      NEXT
 
-Return lSuccess
+      // Create XML file
+      nFileHandle := FCreate( cFile + 'XML')
 
-****** End of SaveXML ******
+      IF Empty( FError() )
+
+         // Keep XML tree
+         oXmlDoc : Write( nFileHandle, HBXML_STYLE_INDENT )
+         FClose( nFileHandle )
+
+      ENDIF
+
+   CATCH
+      lSuccess := .F.
+   End
+
+   RETURN lSuccess
+
+   ****** End of SaveXML ******
+

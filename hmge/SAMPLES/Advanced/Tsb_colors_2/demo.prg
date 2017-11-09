@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>
- * Copyright 2014 Igor Nazarov <047545@mail.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>
+* Copyright 2014 Igor Nazarov <047545@mail.ru>
 */
 
 #include "MiniGUI.ch"
@@ -41,19 +39,19 @@ FUNCTION Main()
    SET FONT TO "Arial", 9
 
    DEFINE WINDOW Form_Colors AT 0, 0 WIDTH 727 HEIGHT 590 ;
-      TITLE "TSBrowse Colors (discoloration and save a color entry in the file)" ;
-      MAIN ;
-      BACKCOLOR CLR_GRAY ;
-      NOMAXIMIZE NOSIZE
+         TITLE "TSBrowse Colors (discoloration and save a color entry in the file)" ;
+         MAIN ;
+         BACKCOLOR CLR_GRAY ;
+         NOMAXIMIZE NOSIZE
 
-   MyButtonsBottom( aVar )  // buttons at the bottom of the window
+      MyButtonsBottom( aVar )  // buttons at the bottom of the window
 
-   DEFINE TBROWSE oBrw ;
-      AT     20, 20 ;
-      WIDTH  680 ;
-      HEIGHT 480 ;
-      ON CHANGE {|| CorrectionFirstLast( oBrw ) };
-      CELL
+      DEFINE TBROWSE oBrw ;
+         AT     20, 20 ;
+         WIDTH  680 ;
+         HEIGHT 480 ;
+         ON CHANGE {|| CorrectionFirstLast( oBrw ) };
+         CELL
    END TBROWSE
 
    oBrw:SetArray( aVar )
@@ -105,47 +103,46 @@ FUNCTION Main()
 
    ON KEY ESCAPE ACTION ThisWindow.Release
 
-   END WINDOW
+END WINDOW
 
-   //oBrw:lCellBrw := .F.   // маркер на всю таблицу / Marker on the entire table
+//oBrw:lCellBrw := .F.   // маркер на всю таблицу / Marker on the entire table
 
-   // take a look for description in the source h_tbrowse.prg
-   oBrw:lNoGrayBar  := .T.  // не показывать неактивный курсор
-   oBrw:nAdjColumn  := 2    // растянуть колонку 2 до заполнения пустоты в бровсе справа
-   oBrw:nHeightCell += 6    // к высоте строк по умолчпанию  добавить 6 пиксела
+// take a look for description in the source h_tbrowse.prg
+oBrw:lNoGrayBar  := .T.  // не показывать неактивный курсор
+oBrw:nAdjColumn  := 2    // растянуть колонку 2 до заполнения пустоты в бровсе справа
+oBrw:nHeightCell += 6    // к высоте строк по умолчпанию  добавить 6 пиксела
 
-   oBrw:nHeightSuper := 24  // высота заголовка ( сложного,  составного )
+oBrw:nHeightSuper := 24  // высота заголовка ( сложного,  составного )
 
-   oBrw:nHeightHead += 4    // к высоте строки заголовка по умолчпанию добавить 4 пиксела
-   oBrw:lNoHScroll  := .F.  // показ горизонтального скролинга
+oBrw:nHeightHead += 4    // к высоте строки заголовка по умолчпанию добавить 4 пиксела
+oBrw:lNoHScroll  := .F.  // показ горизонтального скролинга
 
-   oBrw:lFooting := .T.     // использовать подвал
-   oBrw:lDrawFooters := .T. // рисовать  подвалы
-   oBrw:nHeightFoot := 20   // высота строки подвала
-   oBrw:DrawFooters()       // выполнить прорисовку подвала
+oBrw:lFooting := .T.     // использовать подвал
+oBrw:lDrawFooters := .T. // рисовать  подвалы
+oBrw:nHeightFoot := 20   // высота строки подвала
+oBrw:DrawFooters()       // выполнить прорисовку подвала
 
-   oBrw:aColumns[ 3 ]:cFooting := "Footing of the column 3" // установить значение подвала колонки 3
+oBrw:aColumns[ 3 ]:cFooting := "Footing of the column 3" // установить значение подвала колонки 3
 
-   oBrw:ResetVScroll()      // показ вертикального скролинга
+oBrw:ResetVScroll()      // показ вертикального скролинга
 
-   //рамочный курсор в 4 и 5 колонке
-   oBrw:SetColor( { 6 }, { -CLR_HRED }, 4 )
-   oBrw:SetColor( { 6 }, { -CLR_HRED }, 5 )
+//рамочный курсор в 4 и 5 колонке
+oBrw:SetColor( { 6 }, { -CLR_HRED }, 4 )
+oBrw:SetColor( { 6 }, { -CLR_HRED }, 5 )
 
-   oBrw:Refresh( .T. )
+oBrw:Refresh( .T. )
 
-   oBrw:nAt := 5     // передвинуть МАРКЕР на 5 строку
-   oBrw:nCell := 3   // передвинуть МАРКЕР на 3 колонку
-   // OR in one line
-   //oBrw:GoPos( 5,3 )   // передвинуть МАРКЕР на 5 строку и 3 колонку
-   Form_Colors.oBrw.SetFocus
+oBrw:nAt := 5     // передвинуть МАРКЕР на 5 строку
+oBrw:nCell := 3   // передвинуть МАРКЕР на 3 колонку
+// OR in one line
+//oBrw:GoPos( 5,3 )   // передвинуть МАРКЕР на 5 строку и 3 колонку
+Form_Colors.oBrw.SetFocus
 
-   CENTER WINDOW Form_Colors
-   ACTIVATE WINDOW Form_Colors
+CENTER WINDOW Form_Colors
+ACTIVATE WINDOW Form_Colors
 
 RETURN NIL
 
-//////////////////////////////////////////////////////////////////
 PROCEDURE CorrectionFirstLast( oBrw )
 
    IF oBrw:nRowCount() == oBrw:nRowPos()
@@ -156,9 +153,8 @@ PROCEDURE CorrectionFirstLast( oBrw )
       oBrw:Refresh( .F. )
    ENDIF
 
-RETURN
+   RETURN
 
-//////////////////////////////////////////////////////////////////
 FUNCTION ColorPicker( oBrw )
 
    LOCAL aColor
@@ -170,14 +166,12 @@ FUNCTION ColorPicker( oBrw )
       oBrw:aArray[ oBrw:nAt ][ oBrw:nCell ] := RGB( aColor[ 1 ], aColor[ 2 ], aColor[ 3 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////////
 FUNCTION SetNewColor( oBrw, nCol )
 
-RETURN oBrw:aArray[ oBrw:nAt ][ nCol ]
+   RETURN oBrw:aArray[ oBrw:nAt ][ nCol ]
 
-///////////////////////////////////////////////////////////////////
 FUNCTION n2RGB( nColor )
 
    LOCAL nR, nG, nB
@@ -187,30 +181,28 @@ FUNCTION n2RGB( nColor )
    nG := CTON( SubStr( cColor, 3, 2 ), 16 )
    nB := CTON( SubStr( cColor, 1, 2 ), 16 )
 
-RETURN { nR, nG, nB }
+   RETURN { nR, nG, nB }
 
-///////////////////////////////////////////////////////////////////
 FUNCTION ViewColorTbrws( oBrw, nCol, aVar )
 
    LOCAL nI, nJ, nNew
 
-   FOR nI := 1 TO Len(oBrw:aArray)   
-     nNew := aVar[nI,1]
+   FOR nI := 1 TO Len(oBrw:aArray)
+      nNew := aVar[nI,1]
 
-     FOR nJ := 1 to 3  // меняем цвет ТОЛЬКО по 3 колонкам
-       IF !((nNew = 16 .OR. nNew = 17) .AND. nJ > Len( oBrw:aSuperHead))
-	  oBrw:SetColor( { nNew }, { oBrw:aArray[nI][nCol] }, nJ )
-       ENDIF
-     NEXT
+      FOR nJ := 1 to 3  // меняем цвет ТОЛЬКО по 3 колонкам
+         IF !((nNew = 16 .OR. nNew = 17) .AND. nJ > Len( oBrw:aSuperHead))
+            oBrw:SetColor( { nNew }, { oBrw:aArray[nI][nCol] }, nJ )
+         ENDIF
+      NEXT
    NEXT
 
    oBrw:Refresh( .T. )
 
    DoMethod( "Form_Colors", "oBrw", "SetFocus" )  // back focus on the table
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////////
 FUNCTION SaveFileColor( oBrw, nCol, cFile, aVar )
 
    LOCAL oCol, aColor, cFilePath := GetStartUpFolder() + "\" + cFile
@@ -240,9 +232,8 @@ FUNCTION SaveFileColor( oBrw, nCol, cFile, aVar )
 
    DoMethod( "Form_Colors", "oBrw", "SetFocus" )  // back focus on the table
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////////
 FUNCTION MyButtonsBottom( aVar )  // buttons at the bottom of the window
 
    @ 510, 20 BUTTONEX BUTTON_1 ;
@@ -264,10 +255,11 @@ FUNCTION MyButtonsBottom( aVar )  // buttons at the bottom of the window
       CAPTION "Record colors in" + CRLF + "ColorDefault.txt" ;
       ACTION SaveFileColor( oBrw, 4, "ColorDefault.txt", aVar ) ;
       WIDTH 100 HEIGHT 38
-   			
+
    @ 510, 620 BUTTONEX BUTTON_5 ;
       CAPTION "Exit" ;
       ACTION ReleaseAllWindows();
       WIDTH 80 HEIGHT 38
 
-RETURN NIL
+   RETURN NIL
+

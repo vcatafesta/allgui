@@ -1,14 +1,15 @@
 #include "hmg.ch"
 
-Function Main
-Local aRows
+FUNCTION Main
+
+   LOCAL aRows
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 800 ;
-      HEIGHT 600 ;
-      TITLE "Demo: GRID CheckBox" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         TITLE "Demo: GRID CheckBox" ;
+         MAIN
 
       aRows := ARRAY (25)
       aRows [1]   := {'Simpson',    'Homer'     }
@@ -37,7 +38,6 @@ Local aRows
       aRows [24]  := {'Belford',    'Victor'    }
       aRows [25]  := {'Werdum',     'Fabricio'  }
 
-
       @ 50,10 GRID Grid_1 ;
          WIDTH 750 ;
          HEIGHT 350 ;
@@ -59,12 +59,12 @@ Local aRows
 
    ACTIVATE WINDOW Form_1
 
-Return
-
-
+   RETURN
 
 PROCEDURE GetListCheckBox
-Local i, cList := ""
+
+   LOCAL i, cList := ""
+
    IF Form_1.Grid_1.CheckBoxEnabled == .T.
       FOR i = 1 TO Form_1.Grid_1.ItemCount
          IF Form_1.Grid_1.CheckBoxItem ( i ) == .T.
@@ -78,6 +78,6 @@ Local i, cList := ""
    ELSE
       MsgInfo ("CheckBoxEnabled is FALSE")
    ENDIF
-RETURN
 
+   RETURN
 

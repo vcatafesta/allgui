@@ -1,348 +1,355 @@
 /*
 
-  FILEPART.PRG    Functions dealing with filenames or parts thereof...
+FILEPART.PRG    Functions dealing with filenames or parts thereof...
 
 */
 #include "default.ch"
 #include "filepart.ch"
 
+FUNCTION AddSlash(cPath)
 
-Function AddSlash(cPath)
-/*
-  Adds a trailing backslash to a path name if not already present.  An empty
-  string will not be affected.  You may pass cPath by reference if desired.
-*/
+   /*
+   Adds a trailing backslash to a path name if not already present.  An empty
+   string will not be affected.  You may pass cPath by reference if desired.
+   */
 
-  if !empty(cPath)
-    if right(cPath, 1) <> "\"
-      cPath += "\"
-    endif
-  endif
+   IF !empty(cPath)
+      IF right(cPath, 1) <> "\"
+         cPath += "\"
+      ENDIF
+   ENDIF
 
-Return(cPath)
+   RETURN(cPath)
 
+   #ifndef DOS_ONLY
 
-#ifndef DOS_ONLY
+FUNCTION CurPath(lSlash)
 
-Function CurPath(lSlash)
-/*
-  Returns the current drive and path in the format "D:\PATH".  If lSlash is
-  true, a trailing backslash will be appended.  lSlash defaults to false.
-*/
-  local cPath := CurDrive() + ":\" + curdir()
+   /*
 
-  // CurDrive() is a FiveWin function.
+   Returns the current drive and path in the format "D:\PATH".  If lSlash is
+   true, a trailing backslash will be appended.  lSlash defaults to false.
+   */
+   LOCAL cPath := CurDrive() + ":\" + curdir()
 
-  default lSlash := .F.
+   // CurDrive() is a FiveWin function.
 
-Return(iif(lSlash, AddSlash(cPath), StripSlash(cPath)))
+   DEFAULT lSlash := .F.
 
+   RETURN(iif(lSlash, AddSlash(cPath), StripSlash(cPath)))
 
+FUNCTION ExeName()
 
-Function ExeName()
-/*
-  Returns the current executable's name.
-  Translates directly to GetModuleFileName(GetInstance()).
-*/
-Return(GetModuleFileName(GetInstance()))
+   /*
 
+   Returns the current executable's name.
+   Translates directly to GetModuleFileName(GetInstance()).
+   */
 
+   RETURN(GetModuleFileName(GetInstance()))
 
-Function ExePath(lSlash)
-/*
-  Returns the location of the currently running Windows EXE in the format
-  "D:\PATH".  If the optional parameter lSlash is true, a trailing backslash
-  will be appended.  lSlash defaults to false.
-*/
-  local cExe := ExeName()
+FUNCTION ExePath(lSlash)
 
-  default lSlash := .F.
+   /*
 
-Return( left(cExe, rat("\", cExe) - iif(lSlash, 0, 1)) )
+   Returns the location of the currently running Windows EXE in the format
+   "D:\PATH".  If the optional parameter lSlash is true, a trailing backslash
+   will be appended.  lSlash defaults to false.
+   */
+   LOCAL cExe := ExeName()
 
-#endif
+   DEFAULT lSlash := .F.
 
+   RETURN( left(cExe, rat("\", cExe) - iif(lSlash, 0, 1)) )
 
+   #endif
 
-Function FileParts(cFileSpec, nPart)
-/*
-    This function returns requested part(s) from an extended filename.
+FUNCTION FileParts(cFileSpec, nPart)
 
-    The part of cFileSpec you get is determined by the value of nPart:
+   /*
+   This function returns requested part(s) from an extended filename.
 
-      FP_FILENAME  = Filename, including extension
-      FP_NAMEONLY  = Filename, without the extension
-      FP_EXTENSION = Extension (no period)
-      FP_PATH      = Pathname including a trailing backslash
-      FP_DIR       = Pathname without a trailing backslash
-      FP_DRIVE     = Drive letter including a trailing colon
-      FP_STRIPEXT  = Returns everything to the left of the extension.
+   The part of cFileSpec you get is determined by the value of nPart:
 
-      These constants are defined in FILEPART.CH.
+   FP_FILENAME  = Filename, including extension
+   FP_NAMEONLY  = Filename, without the extension
+   FP_EXTENSION = Extension (no period)
+   FP_PATH      = Pathname including a trailing backslash
+   FP_DIR       = Pathname without a trailing backslash
+   FP_DRIVE     = Drive letter including a trailing colon
+   FP_STRIPEXT  = Returns everything to the left of the extension.
 
-    Examples:
+   These constants are defined in FILEPART.CH.
 
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_FILENAME)  --> "JUNK.TMP"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_NAMEONLY)  --> "JUNK"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_EXTENSION) --> "TMP"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_PATH)      --> "C:\TEMP\"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_DIR)       --> "C:\TEMP"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_DRIVE)     --> "C:"
-      ? FileParts("C:\TEMP\JUNK.TMP", FP_STRIPEXT)  --> "C:\TEMP\JUNK"
+   Examples:
 
-    If nPart is empty or omitted, it will default to FP_FILENAME.
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_FILENAME)  --> "JUNK.TMP"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_NAMEONLY)  --> "JUNK"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_EXTENSION) --> "TMP"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_PATH)      --> "C:\TEMP\"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_DIR)       --> "C:\TEMP"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_DRIVE)     --> "C:"
+   ? FileParts("C:\TEMP\JUNK.TMP", FP_STRIPEXT)  --> "C:\TEMP\JUNK"
 
-    If the requested part is not found within cFileSpec, a null string ("")
-     is returned, except for FP_STRIPEXT, where the whole string will be
-     returned if no extension is found.
+   If nPart is empty or omitted, it will default to FP_FILENAME.
 
-      ? FileParts("JUNK.TMP", FP_PATH)    --> ""
-      ? FileParts("JUNK.TMP", FP_DRIVE)   --> ""
-      ? FileParts("C:\JUNK"), FP_STRIPEXT --> "C:\JUNK"
+   If the requested part is not found within cFileSpec, a null string ("")
+   is returned, except for FP_STRIPEXT, where the whole string will be
 
-    If a path is requested, but only a drive letter exists, a trailing
-     backslash will be added to the returned text:
+   returned if no extension is found.
 
-      ? FileParts("B:REPORT.TXT", FP_PATH) --> "B:\"
+   ? FileParts("JUNK.TMP", FP_PATH)    --> ""
+   ? FileParts("JUNK.TMP", FP_DRIVE)   --> ""
+   ? FileParts("C:\JUNK"), FP_STRIPEXT --> "C:\JUNK"
 
-    FP_DIR is the same as FP_PATH except that it strips a trailing backslash
-     if present.
+   If a path is requested, but only a drive letter exists, a trailing
+   backslash will be added to the returned text:
 
-    Note: FileParts() assumes that the last thing in cFileSpec is a filename
-     unless it ends with a trailing backslash.  In the following example,
-     FileParts() thinks "DOCS" is a filename without an extension:
+   ? FileParts("B:REPORT.TXT", FP_PATH) --> "B:\"
 
-      ? FileParts("C:\WP51\DOCS", FP_PATH)     --> "C:\WP51\"
-      ? FileParts("C:\WP51\DOCS", FP_FILENAME) --> "DOCS"
+   FP_DIR is the same as FP_PATH except that it strips a trailing backslash
+   if present.
 
-    By adding a trailing backslash to the above example, the confusion would
-     be avoided.
+   Note: FileParts() assumes that the last thing in cFileSpec is a filename
+   unless it ends with a trailing backslash.  In the following example,
+   FileParts() thinks "DOCS" is a filename without an extension:
 
-    Also, directories with extensions (periods) really confuse the function.
-    Don't allow them!
-*/
-  local cText := "", nL, nR
-  local nColon := at(":", cFileSpec)
-  local nDot   := rat(".", cFileSpec)
-  local nSlash := rat("\", cFileSpec)
+   ? FileParts("C:\WP51\DOCS", FP_PATH)     --> "C:\WP51\"
+   ? FileParts("C:\WP51\DOCS", FP_FILENAME) --> "DOCS"
 
-  default nPart := FP_FILENAME
+   By adding a trailing backslash to the above example, the confusion would
+   be avoided.
 
-  do case
-    case nPart == FP_FILENAME
-      if nSlash > 0                               // Is there a path?
-        cText := substr(cFileSpec, nSlash + 1)
-      elseif nColon > 0                           // How about a colon?
-        cText := substr(cFileSpec, nColon + 1)
-      else                                        // Must be filename only
-        cText := cFileSpec
-      endif
+   Also, directories with extensions (periods) really confuse the function.
+   Don't allow them!
+   */
+   LOCAL cText := "", nL, nR
+   LOCAL nColon := at(":", cFileSpec)
+   LOCAL nDot   := rat(".", cFileSpec)
+   LOCAL nSlash := rat("\", cFileSpec)
 
-    case nPart == FP_NAMEONLY
-      if nSlash > 0                               // Find the left boundary
-        nL := nSlash + 1                          //  (Just like filename)
-      elseif nColon > 0
-        nL := nColon + 1
-      else
-        nL := 1
-      endif
-      if nDot > 0                                 // Find the right boundary
-        nR := nDot - 1                            // at the dot
-      else
-        nR := len(cFileSpec)                      // No dot?
-      endif
+   DEFAULT nPart := FP_FILENAME
+
+   DO CASE
+   CASE nPart == FP_FILENAME
+      IF nSlash > 0                               // Is there a path?
+         cText := substr(cFileSpec, nSlash + 1)
+      ELSEIF nColon > 0                           // How about a colon?
+         cText := substr(cFileSpec, nColon + 1)
+      ELSE                                        // Must be filename only
+         cText := cFileSpec
+      ENDIF
+
+   CASE nPart == FP_NAMEONLY
+      IF nSlash > 0                               // Find the left boundary
+         nL := nSlash + 1                          //  (Just like filename)
+      ELSEIF nColon > 0
+         nL := nColon + 1
+      ELSE
+         nL := 1
+      ENDIF
+      IF nDot > 0                                 // Find the right boundary
+         nR := nDot - 1                            // at the dot
+      ELSE
+         nR := len(cFileSpec)                      // No dot?
+      ENDIF
       cText := substr(cFileSpec, nL, (nR - nL) + 1) // Get the stuff between
 
-    case nPart == FP_EXTENSION
-      if nDot > 0                                 // Take everything past the
-        cText := substr(cFileSpec, nDot + 1)      // dot.
-      endif
+   CASE nPart == FP_EXTENSION
+      IF nDot > 0                                 // Take everything past the
+         cText := substr(cFileSpec, nDot + 1)      // dot.
+      ENDIF
 
-    case nPart == FP_PATH .or. nPart == FP_DIR
-      if nSlash > 0
-        cText := left(cFileSpec, nSlash - iif(nPart == FP_DIR, 1, 0))
-      elseif nColon > 0
-        cText := left(cFileSpec, nColon) + iif(nPart == FP_PATH, "\", "")
-      endif
+   CASE nPart == FP_PATH .or. nPart == FP_DIR
+      IF nSlash > 0
+         cText := left(cFileSpec, nSlash - iif(nPart == FP_DIR, 1, 0))
+      ELSEIF nColon > 0
+         cText := left(cFileSpec, nColon) + iif(nPart == FP_PATH, "\", "")
+      ENDIF
 
-    case nPart == FP_DRIVE
-      if nColon > 0
-        cText := left(cFileSpec, nColon)
-      endif
+   CASE nPart == FP_DRIVE
+      IF nColon > 0
+         cText := left(cFileSpec, nColon)
+      ENDIF
 
-    case nPart == FP_STRIPEXT
-      if nDot > 0
-        cText := left(cFileSpec, nDot - 1)
-      else
-        cText := cFileSpec
-      endif
+   CASE nPart == FP_STRIPEXT
+      IF nDot > 0
+         cText := left(cFileSpec, nDot - 1)
+      ELSE
+         cText := cFileSpec
+      ENDIF
 
-  endcase
+   ENDCASE
 
-Return(cText)
+   RETURN(cText)
 
+FUNCTION GetTempDir(lSlash)
 
+   /*
 
-Function GetTempDir(lSlash)
-/*
-  Returns the name of the temp directory.  lSlash determines if the string
-  will end with a trailing backslash or not (default is false).
+   Returns the name of the temp directory.  lSlash determines if the string
+   will end with a trailing backslash or not (default is false).
 
-  The function first looks for the environment variable "TEMP", then "TMP".
-  If neither of these is found or the specified directories do not exist,
-  C:\TEMP then C:\WINDOWS\TEMP will be used if found.  If all these fail,
-  the function will return a null string.
-*/
-  local x, cDir := ""
-  #ifdef DOS_ONLY
-  local aTemp_ := { getenv("TEMP"), ;
-                    getenv("TMP") , ;
-                    "C:\TEMP"      }
-  #else
-  local aTemp_ := { getenv("TEMP"), ;
-                    getenv("TMP") , ;
-                    "C:\TEMP"     , ;
-                    AddSlash(GetWinDir()) + "TEMP" }
-  #endif
+   The function first looks for the environment variable "TEMP", then "TMP".
+   If neither of these is found or the specified directories do not exist,
+   C:\TEMP then C:\WINDOWS\TEMP will be used if found.  If all these fail,
+   the function will return a null string.
+   */
+   LOCAL x, cDir := ""
 
-  default lSlash := .F.
+   #ifdef DOS_ONLY
+   LOCAL aTemp_ := { getenv("TEMP"), ;
+      getenv("TMP") , ;
+      "C:\TEMP"      }
+   #else
+   LOCAL aTemp_ := { getenv("TEMP"), ;
+      getenv("TMP") , ;
+      "C:\TEMP"     , ;
+      AddSlash(GetWinDir()) + "TEMP" }
+   #endif
 
-  for x := 1 to len(aTemp_)
-    if !empty(aTemp_[x])
-      if GoodFile(Temp_Name(".TMP", aTemp_[x]))
-        cDir := iif(lSlash, AddSlash(aTemp_[x]), StripSlash(aTemp_[x]))
-        exit
-      endif
-    endif
-  next
+   DEFAULT lSlash := .F.
 
-Return(cDir)
+   FOR x := 1 to len(aTemp_)
+      IF !empty(aTemp_[x])
+         IF GoodFile(Temp_Name(".TMP", aTemp_[x]))
+            cDir := iif(lSlash, AddSlash(aTemp_[x]), StripSlash(aTemp_[x]))
+            EXIT
+         ENDIF
+      ENDIF
+   NEXT
 
+   RETURN(cDir)
 
+FUNCTION IndexOf(cFile)
 
-Function IndexOf(cFile)
-/*
-  Returns the name of a file's structural index by stripping the extension
-  off the given filename & adding the index extension.  Merely a convenience
-  item and to make code more readable.
+   /*
 
-  Translates directly to: NewExt(cFile, ordBagExt())
-*/
-Return(NewExt(cFile, ordBagExt()))
+   Returns the name of a file's structural index by stripping the extension
+   off the given filename & adding the index extension.  Merely a convenience
+   item and to make code more readable.
 
+   Translates directly to: NewExt(cFile, ordBagExt())
+   */
 
+   RETURN(NewExt(cFile, ordBagExt()))
 
-Function MemoOf(cFile)
-/*
-  Returns the name of a database's memo file.  The function does not check
-  if the database has a memo or not, just what it would be called.  It uses
-  the Comix function cmxMemoExt() to get the extension.  Obviously, this
-  function only works with the Comix RDD.
-*/
-Return(NewExt(cFile, sx_MemoExt()))
+FUNCTION MemoOf(cFile)
 
+   /*
 
+   Returns the name of a database's memo file.  The function does not check
+   if the database has a memo or not, just what it would be called.  It uses
+   the Comix function cmxMemoExt() to get the extension.  Obviously, this
 
-Function NewExt(cFile, cExt)
-/*
-  Strips the current extension off a file and replaces it with cExt.  The
+   function only works with the Comix RDD.
+
+   */
+
+   RETURN(NewExt(cFile, sx_MemoExt()))
+
+FUNCTION NewExt(cFile, cExt)
+
+   /*
+   Strips the current extension off a file and replaces it with cExt.  The
+
    function will add the period if not provided.
 
-  Translates directly to FileParts(cFile, FP_STRIPEXT) + cExt
-*/
+   Translates directly to FileParts(cFile, FP_STRIPEXT) + cExt
+   */
 
-  if left(cExt, 1) <> "." // Add period if needed
-    cExt := "." + cExt
-  endif
+   IF left(cExt, 1) <> "." // Add period if needed
+      cExt := "." + cExt
+   ENDIF
 
-Return(FileParts(cFile, FP_STRIPEXT) + cExt)
+   RETURN(FileParts(cFile, FP_STRIPEXT) + cExt)
 
+FUNCTION RevExt(cFile)
 
+   /*
 
-Function RevExt(cFile)
-/*
-  Returns <cFile> with its extension reversed.  Useful for making backup
-  copies of files, etc.
+   Returns <cFile> with its extension reversed.  Useful for making backup
+   copies of files, etc.
 
-  RevExt("FILE.DBF") -> "FILE.FBD"
-*/
-  local cRev := FileParts(cFile, FP_STRIPEXT) + "."
-  local cExt := FileParts(cFile, FP_EXTENSION)
-  local x
+   RevExt("FILE.DBF") -> "FILE.FBD"
+   */
+   LOCAL cRev := FileParts(cFile, FP_STRIPEXT) + "."
+   LOCAL cExt := FileParts(cFile, FP_EXTENSION)
+   LOCAL x
 
-  for x := len(cExt) to 1 step -1
-    cRev += substr(cExt, x, 1)
-  next
+   FOR x := len(cExt) to 1 step -1
+      cRev += substr(cExt, x, 1)
+   NEXT
 
-Return(cRev)
+   RETURN(cRev)
 
+FUNCTION StripExt(cFile)
 
+   /*
+   Just a quick way to write FileParts(cFile, FP_STRIPEXT)
+   */
 
-Function StripExt(cFile)
-/*
-  Just a quick way to write FileParts(cFile, FP_STRIPEXT)
-*/
-Return(FileParts(cFile, FP_STRIPEXT))
+   RETURN(FileParts(cFile, FP_STRIPEXT))
 
+FUNCTION StripSlash(cPath)
 
+   /*
+   Removes a trailing backslash (if any) from cPath.  You may pass cPath by
+   reference if desired.
+   */
 
-Function StripSlash(cPath)
-/*
-  Removes a trailing backslash (if any) from cPath.  You may pass cPath by
-  reference if desired.
-*/
+   IF right(cPath, 1) == "\"
+      cPath := left(cPath, len(cPath) - 1)
+   ENDIF
 
-  if right(cPath, 1) == "\"
-    cPath := left(cPath, len(cPath) - 1)
-  endif
+   RETURN(cPath)
 
-Return(cPath)
+FUNCTION Temp_Name(cExt, cPath)
 
+   /*
 
+   Returns a temporary, unique filename based on the current value of the
+   system timer.
 
-Function Temp_Name(cExt, cPath)
-/*
-  Returns a temporary, unique filename based on the current value of the
-    system timer.
+   cExt is an optional extension to use for the file, defaulting to ".TMP".
 
-  cExt is an optional extension to use for the file, defaulting to ".TMP".
+   cPath is an optional path to locate the temporary file in.  It defaults to
+   the current path (blank).
 
-  cPath is an optional path to locate the temporary file in.  It defaults to
-    the current path (blank).
+   The extension and path (if any) will be part of the returned filename.
 
-  The extension and path (if any) will be part of the returned filename.
+   Examples:
 
-  Examples:
+   Temp_Name()                   -->  "_0123456.TMP"
+   Temp_Name(".CDX")             -->  "_0123456.CDX"
+   Temp_Name(".DBF", "C:\TEMP")  -->  "C:\TEMP\_0123456.DBF"
+   */
+   LOCAL cTemp
 
-    Temp_Name()                   -->  "_0123456.TMP"
-    Temp_Name(".CDX")             -->  "_0123456.CDX"
-    Temp_Name(".DBF", "C:\TEMP")  -->  "C:\TEMP\_0123456.DBF"
-*/
-  local cTemp
-  static cLast := ""
+   STATIC cLast := ""
 
-  default cExt  := ".TMP", ;
-          cPath := ""
+   DEFAULT cExt  := ".TMP", ;
+      cPath := ""
 
-  if left(cExt, 1) <> "."   // Add dot if needed
-    cExt := "." + cExt
-  endif
+   IF left(cExt, 1) <> "."   // Add dot if needed
+      cExt := "." + cExt
+   ENDIF
 
-  cPath := AddSlash(cPath)  // Add trailing backslash if needed
+   cPath := AddSlash(cPath)  // Add trailing backslash if needed
 
-  do while .T.
+   DO WHILE .T.
 
-    cTemp := cPath + "_" + ;
-             padl(ltrim(str(seconds() * 100, 7, 0)), 7, "0") + cExt
+      cTemp := cPath + "_" + ;
+         padl(ltrim(str(seconds() * 100, 7, 0)), 7, "0") + cExt
 
-    if cTemp == cLast .or. file(cTemp)                 // Already exist or
-      loop                                             // same as last time?
-    endif
+      IF cTemp == cLast .or. file(cTemp)                 // Already exist or
+         LOOP                                             // same as last time?
+      ENDIF
 
-    cLast := cTemp                                     // Record it & exit
-    exit
+      cLast := cTemp                                     // Record it & exit
+      EXIT
 
-  enddo
+   ENDDO
 
-Return(cTemp)
+   RETURN(cTemp)
 

@@ -1,26 +1,24 @@
 /*
- * Ejemplo Impresión n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo enumerar los tamaños de papel
- * disponibles en un driver de impresora.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Impresión n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo enumerar los tamaños de papel
+* disponibles en un driver de impresora.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 500 ;
-      HEIGHT 300 ;
-      TITLE 'Tamaños de Papel de una Impresora' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 500 ;
+         HEIGHT 300 ;
+         TITLE 'Tamaños de Papel de una Impresora' ;
+         MAIN
 
       DEFINE STATUSBAR
          STATUSITEM "Haga clic en el botón y seleccione una impresora."
@@ -36,9 +34,10 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION MostrarDatos()
+
    LOCAL oPrint
 
    oPrint := TPrint( "HBPRINTER" )
@@ -50,8 +49,9 @@ FUNCTION MostrarDatos()
 
    oPrint:Release()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,21 +1,22 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
-Local oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
+FUNCTION Main
+
+   LOCAL oMainWindow, oTrayMenu, oIcon := HIcon():AddResource("ICON_1")
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"
 
    CONTEXT MENU oTrayMenu
-      MENUITEM "Message"  ACTION MsgInfo( "Tray Message !" )
-      SEPARATOR
-      MENUITEM "Exit"  ACTION EndWindow()
-   ENDMENU
+   MENUITEM "Message"  ACTION MsgInfo( "Tray Message !" )
+   SEPARATOR
+   MENUITEM "Exit"  ACTION EndWindow()
+ENDMENU
 
-   oMainWindow:InitTray( oIcon,,oTrayMenu,"TestTray" )
+oMainWindow:InitTray( oIcon,,oTrayMenu,"TestTray" )
 
-   ACTIVATE WINDOW oMainWindow NOSHOW
-   oTrayMenu:End()
+ACTIVATE WINDOW oMainWindow NOSHOW
+oTrayMenu:End()
 
-Return Nil
+RETURN NIL
 

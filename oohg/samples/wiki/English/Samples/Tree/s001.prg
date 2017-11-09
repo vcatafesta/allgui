@@ -1,26 +1,23 @@
 /*
- * Tree Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to drag and drop between two Tree
- * controls, how to get the visible items and the items
- * currently shown in the control's window, and how to get
- * the reference numbers of the visible items and the reference
- * numbers of the items currently shown in the control's window.
- * It also shows how to use methods EditLabel, Expand,
- * FirstVisible, IsItemExpanded, IsItemValid, IsItemVisible,
- * ItemCount, ItemDraggable, ItemEnabled, ItemHeight,
- * ItemVisible, LastVisible, NextVisible, Value, SelectionID
- * and VisibleCount.
- * 
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * You can download the resource file and the images from:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Tree
- */
+* Tree Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to drag and drop between two Tree
+* controls, how to get the visible items and the items
+* currently shown in the control's window, and how to get
+* the reference numbers of the visible items and the reference
+* numbers of the items currently shown in the control's window.
+* It also shows how to use methods EditLabel, Expand,
+* FirstVisible, IsItemExpanded, IsItemValid, IsItemVisible,
+* ItemCount, ItemDraggable, ItemEnabled, ItemHeight,
+* ItemVisible, LastVisible, NextVisible, Value, SelectionID
+* and VisibleCount.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* You can download the resource file and the images from:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Tree
+*/
 
 #include "oohg.ch"
 
@@ -29,24 +26,24 @@ FUNCTION Main()
    LOCAL oForm, oTree1, oTree2, oTree
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 530 ;
-      TITLE 'Tree Control - Drag/Drop and other things' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 530 ;
+         TITLE 'Tree Control - Drag/Drop and other things' ;
+         MAIN
 
       DEFINE TREE Tree_1 OBJ oTree1 ;
-         AT 10,10 ;
-         WIDTH 300 ;
-         HEIGHT 202 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WINDOW", "WATCH"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         SELBOLD ;
-         INDENT 25 ;
-         VALUE 1
+            AT 10,10 ;
+            WIDTH 300 ;
+            HEIGHT 202 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WINDOW", "WATCH"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            SELBOLD ;
+            INDENT 25 ;
+            VALUE 1
 
          ON KEY F2 OF (oTree1) ACTION {|| Form_1.Tree_1.EditLabel }
 
@@ -56,9 +53,9 @@ FUNCTION Main()
                   NODE 'T1 Item ' + LTRIM(STR(i)) + '.' + LTRIM(STR(j))
                      FOR k := 1 TO 5
                         TREEITEM 'T1 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k))
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k))
                      NEXT
                   END NODE
                NEXT
@@ -77,19 +74,18 @@ FUNCTION Main()
       Form_1.Tree_1.ItemEnabled(5, .F.)
       Form_1.Tree_1.ItemEnabled(6, .F.)
 
-
       DEFINE TREE Tree_2 OBJ oTree2 ;
-         AT 10,320 ;
-         WIDTH 300 ;
-         HEIGHT 200 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WATCH", "WINDOW"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         VALUE 1 ;
-         SELBOLD ;
-         INDENT 25
+            AT 10,320 ;
+            WIDTH 300 ;
+            HEIGHT 200 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WATCH", "WINDOW"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            VALUE 1 ;
+            SELBOLD ;
+            INDENT 25
 
          ON KEY F2 OF (oTree2) ACTION {|| Form_1.Tree_2.EditLabel }
 
@@ -99,9 +95,9 @@ FUNCTION Main()
                   NODE 'T2 Item ' + LTRIM(STR(i)) + '.' + LTRIM(STR(j))
                      FOR k := 1 TO 5
                         TREEITEM 'T2 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k))
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k))
                      NEXT
                   END NODE
                NEXT
@@ -156,8 +152,8 @@ FUNCTION Main()
       @ 280,460 BUTTON Button_8 ;
          CAPTION 'Item Height' ;
          ACTION AutoMsgBox( ;
-                oTree:ItemHeight( ;
-                   VAL(InputBox('New Item Height')))) ;
+         oTree:ItemHeight( ;
+         VAL(InputBox('New Item Height')))) ;
          WIDTH 140
 
       @ 310,10 BUTTON Button_9 ;
@@ -188,61 +184,66 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * Items that are visible now or that will be visible
- * when the control is scrolled up or down.
- */
+   /*
+   * Items that are visible now or that will be visible
+   * when the control is scrolled up or down.
+   */
+
 FUNCTION VisibleItems(oTree)
-  LOCAL i, Item, lFound
 
-  i := 1
-  Item := oTree:FirstVisible()
-  lFound := .F.
+   LOCAL i, Item, lFound
 
-  DO WHILE Item # 0
-     AutoMsgBox(Item)
+   i := 1
+   Item := oTree:FirstVisible()
+   lFound := .F.
 
-     i ++
-     lFound := .T.
+   DO WHILE Item # 0
+      AutoMsgBox(Item)
 
-     Item := oTree:NextVisible(Item)
-  ENDDO
+      i ++
+      lFound := .T.
 
-  IF ! lFound
-     MsgBox("Tree has no visible items !!!")
-  ENDIF
+      Item := oTree:NextVisible(Item)
+   ENDDO
 
-RETURN NIL
+   IF ! lFound
+      MsgBox("Tree has no visible items !!!")
+   ENDIF
 
-/* Items that are visible now.
- * The second parameter in IsItemVisible indicates if the method
- * is going to consider visible an item partially shown.
- */
+   RETURN NIL
+
+   /* Items that are visible now.
+   * The second parameter in IsItemVisible indicates if the method
+   * is going to consider visible an item partially shown.
+   */
+
 FUNCTION ItemsInWindow(oTree)
-  LOCAL i, Item, Partial, lFound
 
-  i := 1
-  Item := oTree:FirstVisible()
-  lFound := .F.
+   LOCAL i, Item, Partial, lFound
 
-  DO WHILE Item # 0 .AND. oTree:IsItemVisible(Item, .F.)
-     AutoMsgBox({Item, IF(oTree:IsItemVisible(Item, .T.), ;
-                          "whole", "partial")})
-     i ++
-     lFound := .T.
+   i := 1
+   Item := oTree:FirstVisible()
+   lFound := .F.
 
-     Item := oTree:NextVisible(Item)
-  ENDDO
+   DO WHILE Item # 0 .AND. oTree:IsItemVisible(Item, .F.)
+      AutoMsgBox({Item, IF(oTree:IsItemVisible(Item, .T.), ;
+         "whole", "partial")})
+      i ++
+      lFound := .T.
 
-  IF ! lFound
-     MsgBox("Tree's window shows no item !!!")
-  ENDIF
+      Item := oTree:NextVisible(Item)
+   ENDDO
 
-RETURN NIL
+   IF ! lFound
+      MsgBox("Tree's window shows no item !!!")
+   ENDIF
+
+   RETURN NIL
 
 FUNCTION ShowItem( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Item To Show'))
@@ -253,22 +254,22 @@ FUNCTION ShowItem( oTree )
       MsgStop( "Invalid item !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/* In trees without ITEMID clause you can use
- * oTree:SelectionID := Nil to clear the item ID.
- *
- * Doing this in trees with ITEMID clause will rise a runtime error.
- *
- * Note that oTree:SelectionID() retrives the ID of the selected item,
- * while oTree:SelectionID(Nil) will try to clear it's ID.
- */
+   /* In trees without ITEMID clause you can use
+   * oTree:SelectionID := Nil to clear the item ID.
+   * Doing this in trees with ITEMID clause will rise a runtime error.
+   * Note that oTree:SelectionID() retrives the ID of the selected item,
+   * while oTree:SelectionID(Nil) will try to clear it's ID.
+   */
+
 FUNCTION ChangeID( oTree )
+
    LOCAL newID
 
    // we are assuming character IDs
    newID := InputBox('Change ID from ' + ;
-                     AutoType( oTree:SelectionID() ) + ' to:')
+      AutoType( oTree:SelectionID() ) + ' to:')
    // to use numeric IDs uncomment next line an adapt validation
    // newID := VAL(newID)
    // to use mixed IDs you must develop and use you own capture function
@@ -279,9 +280,10 @@ FUNCTION ChangeID( oTree )
       AutoMsgBox(oTree:SelectionID(newID))
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION IsVisible( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Item To Check'))
@@ -292,9 +294,10 @@ FUNCTION IsVisible( oTree )
       MsgStop( "Invalid item !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION IsExpanded( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Item To Check'))
@@ -305,8 +308,9 @@ FUNCTION IsExpanded( oTree )
       MsgStop( "Invalid item !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

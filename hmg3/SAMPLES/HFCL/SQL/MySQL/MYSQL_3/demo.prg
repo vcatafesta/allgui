@@ -1,581 +1,579 @@
 /*
-*
-*	HMG Basic MySql Access Sample.
-*	Roberto Lopez <mail.box.hmg@gmail.com>
-*
-*	Based Upon Code Contributed by;
-*
-*		Humberto Fornazier	<hfornazier@brfree.com.br>
-*		Mitja Podgornik		<yamamoto@rocketmail.com>
-* 
+*   HMG Basic MySql Access Sample.
+*   Roberto Lopez <mail.box.hmg@gmail.com>
+*   Based Upon Code Contributed by;
+*      Humberto Fornazier   <hfornazier@brfree.com.br>
+*      Mitja Podgornik      <yamamoto@rocketmail.com>
 */
 
 #include "hmg.ch"
 
-*------------------------------------------------------------------------------*
-Function Main
-*------------------------------------------------------------------------------*
+FUNCTION Main
 
-	Private oServer	:= Nil 
-	
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'MySql Basic Sample' ;
-		MAIN ;
-		ON INIT Connect() ;
-		ON RELEASE Disconnect()
+   PRIVATE oServer   := Nil
 
-		DEFINE MAIN MENU
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MySql Basic Sample' ;
+         MAIN ;
+         ON INIT Connect() ;
+         ON RELEASE Disconnect()
 
-			DEFINE POPUP 'File'
-				MENUITEM 'Prepare Data'	ACTION Prepare_Data()
-			END POPUP
+      DEFINE MAIN MENU
 
-			DEFINE POPUP 'Query'
-				MENUITEM 'Open Query WIndow'	ACTION ShowQuery()
-			END POPUP
+         DEFINE POPUP 'File'
+            MENUITEM 'Prepare Data'   ACTION Prepare_Data()
+         END POPUP
 
-		END MENU
+         DEFINE POPUP 'Query'
+            MENUITEM 'Open Query WIndow'   ACTION ShowQuery()
+         END POPUP
 
-	END WINDOW
+      END MENU
 
-	Win_1.Center
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   Win_1.Center
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Connect
-*------------------------------------------------------------------------------*
-/*
+   ACTIVATE WINDOW Win_1
 
-	Class TMySQLServer:
+   RETURN
 
-		- Manages access to a MySQL server and returns an oServer object 
-		to which you'll send all your queries.
+PROCEDURE Connect
 
-		- Administra el acceso a un servidor MySql y retorna un objeto
-		oServer al cual se le enviaran los comandos SQL.
+   /*
 
-	Method New(cServer, cUser, cPassword): 
+   Class TMySQLServer:
 
-		- Opens connection to a server, returns a server object.
+   - Manages access to a MySQL server and returns an oServer object
+   to which you'll send all your queries.
 
-		- Abre una conexion a un servidor, retorna un objeto servidor.
+   - Administra el acceso a un servidor MySql y retorna un objeto
+   oServer al cual se le enviaran los comandos SQL.
 
-	Method NetErr():
+   Method New(cServer, cUser, cPassword):
 
-		- Returns .T. if something went wrong
+   - Opens connection to a server, returns a server object.
 
-		- Retorna .T. en caso de error.
+   - Abre una conexion a un servidor, retorna un objeto servidor.
 
-	Method Error():
+   Method NetErr():
 
-		- Returns textual description of last error.
+   - Returns .T. if something went wrong
 
-		- Retorna la descripcion del ultimo error.
+   - Retorna .T. en caso de error.
 
-	Method SelectDB(cDBName):
+   Method Error():
 
-		- Which data base I will use for subsequent queries.
+   - Returns textual description of last error.
 
-		- Selecciona la base de datos que se usara en los siguientes
-		consultas.
+   - Retorna la descripcion del ultimo error.
 
-*/
+   Method SelectDB(cDBName):
 
-	// Connect
+   - Which data base I will use for subsequent queries.
 
-	oServer := TMySQLServer():New("localhost", "root", "")
+   - Selecciona la base de datos que se usara en los siguientes
+   consultas.
 
-	// Check For Error
+   */
 
-	If oServer:NetErr()
-		MsgStop(oServer:Error())
-		Win_1.Title := 'MySql Basic Sample - Not Connected' 
-	Else
+   // Connect
 
-		MsgInfo("Connected")
-		Win_1.Title := 'MySql Basic Sample - Connected' 
+   oServer := TMySQLServer():New("localhost", "root", "")
 
-	EndIf
+   // Check For Error
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Disconnect()
-*------------------------------------------------------------------------------*
-/*..............................................................................
+   IF oServer:NetErr()
+      MsgStop(oServer:Error())
+      Win_1.Title := 'MySql Basic Sample - Not Connected'
+   ELSE
 
-	Class TMySQLServer - Method Destroy():
+      MsgInfo("Connected")
+      Win_1.Title := 'MySql Basic Sample - Connected'
 
-		- Closes connection to server.
-		
-		- Cierra la conexion con un servidor.
+   ENDIF
 
-..............................................................................*/
+   RETURN
 
-	oServer:Destroy()
-	Win_1.Title := 'MySql Basic Sample - Not Connected' 
+PROCEDURE Disconnect()
 
-Return
+   /*..............................................................................
 
-*------------------------------------------------------------------------------*
-Procedure ShowQuery ()
-*------------------------------------------------------------------------------*
-Private cSearch := ''
+   Class TMySQLServer - Method Destroy():
 
-	// Select DataBase - Seleccionar Base de Datos
+   - Closes connection to server.
 
-	oServer:SelectDB( "NAMEBOOK" )
+   - Cierra la conexion con un servidor.
 
-	// Check For Error - Verificar Errores
+   ..............................................................................*/
 
-	If oServer:NetErr() 
-		MsgStop( oServer:Error() )
-	Endif 
+   oServer:Destroy()
+   Win_1.Title := 'MySql Basic Sample - Not Connected'
 
-	Define Window ShowQuery ;
-		At 0,0 ;
-		Width 640 ;
-		Height 480 ;
-		Title 'Show Query' ;
-		Modal ;
-		NoSize
+   RETURN
 
-		Define Main Menu
-			Define Popup 'Operations'
-				MenuItem 'New Query' Action ( cSearch := AllTrim ( InputBox ( "Enter Search String" , "Query By Name") ) , DoQuery ( cSearch ) )
-				MenuItem 'Append Row' Action AppendRow()
-				MenuItem 'Edit Row' Action EditRow()
-				MenuItem 'Delete Row' Action DeleteRow()
-				Separator
-				MenuItem 'Refresh' Action DoQuery ( cSearch )
-			End Popup
-		End Menu
+PROCEDURE ShowQuery ()
 
-		Define Grid Grid_1
-			Row 0
-			Col 0
-			Width 631
-			Height 430
-			Headers {'Code','Name'}
-			Widths {250,250}
-		End Grid
+   PRIVATE cSearch := ''
 
-	End Window		
+   // Select DataBase - Seleccionar Base de Datos
 
-	ShowQuery.Center
+   oServer:SelectDB( "NAMEBOOK" )
 
-	ShowQuery.Activate
+   // Check For Error - Verificar Errores
 
-Return
+   IF oServer:NetErr()
+      MsgStop( oServer:Error() )
+   ENDIF
 
-*------------------------------------------------------------------------------*
-Function DoQuery( cSearch )
-*------------------------------------------------------------------------------*
-/*..............................................................................
+   DEFINE WINDOW ShowQuery ;
+         At 0,0 ;
+         Width 640 ;
+         Height 480 ;
+         Title 'Show Query' ;
+         Modal ;
+         NoSize
 
-	Class TMySQLServer - Method Query(cQuery):
+      DEFINE MAIN MENU
+         DEFINE POPUP 'Operations'
+            MenuItem 'New Query' Action ( cSearch := AllTrim ( InputBox ( "Enter Search String" , "Query By Name") ) , DoQuery ( cSearch ) )
+            MenuItem 'Append Row' Action AppendRow()
+            MenuItem 'Edit Row' Action EditRow()
+            MenuItem 'Delete Row' Action DeleteRow()
+            Separator
+            MenuItem 'Refresh' Action DoQuery ( cSearch )
+         End Popup
+      End Menu
 
-		- Gets a textual query and returns a TMySQLQuery or TMySQLTable 
-		object.
+      DEFINE GRID Grid_1
+         Row 0
+         Col 0
+         Width 631
+         Height 430
+         Headers {'Code','Name'}
+         Widths {250,250}
+      END GRID
 
-		- Obtiene una consulta y retorna un objeto TMySQLQuery o 
-		TMySQLTable 
+   END WINDOW
 
-	Class TMySQLQuery:
+   ShowQuery.Center
 
-		- A standard query to an oServer with joins. Every query has a 
-		GetRow() method which on every call returns a TMySQLRow object 
-		which, in turn, contains requested fields.
-		Query objects convert MySQL answers (which is an array of 
-		strings) to clipper level types.
-		At present time N (with decimals), L, D, and C clipper types 
-		are supported.
+   ShowQuery.Activate
 
-		- Una consulta estandar a un objeto oServer con joins. Cada
-		consulta tiene un metodo GetRow(), el cual en cada llamada, 
-		retorna un objeto TMySQLRow, el que contiene los campos 
-		requeridos.
-		Los objetos Query convierten las respuestas MySql (la cual es
-		un array de cadenas) a tipos Clipper.
-		Actualmente los tipos N (con decimales), L, D, and C son 
-		soportados.
+   RETURN
 
-	Class TMySQLQuery - Method LastRec() :
+FUNCTION DoQuery( cSearch )
 
-		- Number of rows available on answer.
+   /*..............................................................................
 
-		- Numero de filas disponibles en la respuesta.		
+   Class TMySQLServer - Method Query(cQuery):
 
-	Class TMySQLQuery - Method Skip() :
+   - Gets a textual query and returns a TMySQLQuery or TMySQLTable
+   object.
 
-		- Same as clipper ones.
+   - Obtiene una consulta y retorna un objeto TMySQLQuery o
+   TMySQLTable
 
-		- Identico al de Clipper.
+   Class TMySQLQuery:
 
-	Class TMySQLQuery - Method Destroy():
+   - A standard query to an oServer with joins. Every query has a
+   GetRow() method which on every call returns a TMySQLRow object
+   which, in turn, contains requested fields.
+   Query objects convert MySQL answers (which is an array of
+   strings) to clipper level types.
+   At present time N (with decimals), L, D, and C clipper types
+   are supported.
 
-		- Destroys specified query object.
+   - Una consulta estandar a un objeto oServer con joins. Cada
+   consulta tiene un metodo GetRow(), el cual en cada llamada,
+   retorna un objeto TMySQLRow, el que contiene los campos
+   requeridos.
+   Los objetos Query convierten las respuestas MySql (la cual es
+   un array de cadenas) a tipos Clipper.
+   Actualmente los tipos N (con decimales), L, D, and C son
+   soportados.
 
-		- Destruye el objeto Query especificado.		
+   Class TMySQLQuery - Method LastRec() :
 
-	Class TMySQLQuery - Method GetRow(nRow):
+   - Number of rows available on answer.
 
-		- Return Row n of answer.
+   - Numero de filas disponibles en la respuesta.
 
-		- Retorna ¤a fila n de una respuesta.
+   Class TMySQLQuery - Method Skip() :
 
-	Class TMySQLRow:
+   - Same as clipper ones.
 
-		- Every row returned by a SELECT is converted to a TMySQLRow 
-		object. This object handles fields and has methods to access 
-		fields given a field name or position.
+   - Identico al de Clipper.
 
-		- Cada fila retornada por un SELECT es convertida a un 
-		objeto TMySQLRow- Este objeto maneja campos y tiene metodos
-		para accederlos dado un nombre de campo o una posicion.
+   Class TMySQLQuery - Method Destroy():
 
-	Class TMySQLRow - Method FieldGet(cnField):
+   - Destroys specified query object.
 
-		- Same as clipper ones, but FieldGet() and FieldPut() accept a 
-		string as field identifier, not only a number.
+   - Destruye el objeto Query especificado.
 
-		- Identico al de Clipper, excepto que acepta una cadena de
-		caracteres como identificador de campo (no solo un numero).
+   Class TMySQLQuery - Method GetRow(nRow):
 
-..............................................................................*/
+   - Return Row n of answer.
 
-Local oQuery
-Local oRow
-Local i
-Local aQuery := {}
+   - Retorna ¤a fila n de una respuesta.
 
-	cSearch := '"' + cSearch + "%" + '"'
+   Class TMySQLRow:
 
-	oQuery := oServer:Query( "Select Code, Name From Names Where Name Like " + cSearch + " Order By Name" )
+   - Every row returned by a SELECT is converted to a TMySQLRow
+   object. This object handles fields and has methods to access
+   fields given a field name or position.
 
-	If oQuery:NetErr()												
-		MsgStop ( oQuery:Error() )
-		Return
-	Endif
+   - Cada fila retornada por un SELECT es convertida a un
+   objeto TMySQLRow- Este objeto maneja campos y tiene metodos
+   para accederlos dado un nombre de campo o una posicion.
 
-	ShowQuery.Grid_1.DeleteAllItems()
+   Class TMySQLRow - Method FieldGet(cnField):
 
-	For i := 1 To oQuery:LastRec()
+   - Same as clipper ones, but FieldGet() and FieldPut() accept a
+   string as field identifier, not only a number.
 
-		oRow := oQuery:GetRow(i)
-		
-		ShowQuery.Grid_1.AddItem ( { Str(oRow:fieldGet(1), 8) , oRow:fieldGet(2) } )
+   - Identico al de Clipper, excepto que acepta una cadena de
+   caracteres como identificador de campo (no solo un numero).
 
-		oQuery:Skip(1)
+   ..............................................................................*/
 
-	Next
+   LOCAL oQuery
+   LOCAL oRow
+   LOCAL i
+   LOCAL aQuery := {}
 
-	oQuery:Destroy()
+   cSearch := '"' + cSearch + "%" + '"'
 
-Return ( aQuery )
+   oQuery := oServer:Query( "Select Code, Name From Names Where Name Like " + cSearch + " Order By Name" )
 
-*------------------------------------------------------------------------------*
-Procedure DeleteRow()
-*------------------------------------------------------------------------------*
-Local oQuery
-Local aGridRow
-Local i
-Local cCode
+   IF oQuery:NetErr()
+      MsgStop ( oQuery:Error() )
 
-	i := ShowQuery.Grid_1.Value
+      RETURN
+   ENDIF
 
-	if i == 0 
-		Return
-	EndIf
+   ShowQuery.Grid_1.DeleteAllItems()
 
-	if MsgYesNo("Are You Sure")
+   FOR i := 1 To oQuery:LastRec()
 
-		aGridRow	:= ShowQuery.Grid_1.Item (i)
-		cCode		:= aGridRow [1]
+      oRow := oQuery:GetRow(i)
 
-		oQuery := oServer:Query( "DELETE FROM NAMES WHERE CODE = " + cCode )
+      ShowQuery.Grid_1.AddItem ( { Str(oRow:fieldGet(1), 8) , oRow:fieldGet(2) } )
 
-		If oQuery:NetErr()												
-			MsgStop ( oQuery:Error() )
-			Return
-		Endif
+      oQuery:Skip(1)
 
-		oQuery:Destroy()
+   NEXT
 
-		DoQuery ( cSearch )
+   oQuery:Destroy()
 
-	EndIf
+   RETURN ( aQuery )
 
-Return
+PROCEDURE DeleteRow()
 
-*------------------------------------------------------------------------------*
-Procedure EditRow()
-*------------------------------------------------------------------------------*
-Local oQuery
-Local aGridRow
-Local i
+   LOCAL oQuery
+   LOCAL aGridRow
+   LOCAL i
+   LOCAL cCode
 
-Local aResults 	
-Local cCode
-Local cName
-Local cEMail
+   i := ShowQuery.Grid_1.Value
 
-	i := ShowQuery.Grid_1.Value
+   IF i == 0
 
-	if i == 0 
-		Return
-	EndIf
+      RETURN
+   ENDIF
 
-	aGridRow	:= ShowQuery.Grid_1.Item (i)
-	cCode		:= aGridRow [1]
+   IF MsgYesNo("Are You Sure")
 
-	oQuery:= oServer:Query( "Select * From NAMES WHERE CODE = " + AllTrim(cCode))
+      aGridRow   := ShowQuery.Grid_1.Item (i)
+      cCode      := aGridRow [1]
 
-	If oQuery:NetErr()												
-		MsgStop(oQuery:Error())
-		Return Nil
-	Else
+      oQuery := oServer:Query( "DELETE FROM NAMES WHERE CODE = " + cCode )
 
-		oRow	:= oQuery:GetRow(1)
-		cCode	:= Alltrim(Str(oRow:fieldGet(1)))
-		cName	:= AllTrim(oRow:fieldGet(2))
-		cEMail	:= AllTrim(oRow:fieldGet(3))                  
-		oQuery:Destroy()
+      IF oQuery:NetErr()
+         MsgStop ( oQuery:Error() )
 
-		aResults := InputWindow	(;
-					'Edit Row'			, ;
-					{ 'Name:' , 'Email:' }, ;
-					{ cName , cEmail }	, ;
-					{ 40 , 40 }			;
-					)
+         RETURN
+      ENDIF
 
-		If aResults [1] != Nil
-	
-			cName		:= AllTrim(aResults [1])
-			cEMail		:= AllTrim(aResults [2])
+      oQuery:Destroy()
 
-			oQuery		:= oServer:Query( "UPDATE NAMES SET  Name = '"+cName+"' , eMail = '"+cEMail+"'  WHERE CODE = " + AllTrim(cCode) )
+      DoQuery ( cSearch )
 
-			If oQuery:NetErr()												
-				MsgStop(oQuery:Error())
-			Else
-				DoQuery ( cSearch )
-			EndIf
+   ENDIF
 
-		EndIf
+   RETURN
 
-	EndIf
+PROCEDURE EditRow()
 
-Return
-*------------------------------------------------------------------------------*
-Procedure AppendRow()
-*------------------------------------------------------------------------------*
-Local oQuery
-Local aGridRow
-Local i
-Local cQuery
-Local aResults 	
-Local cCode
-Local cName
-Local cEMail
+   LOCAL oQuery
+   LOCAL aGridRow
+   LOCAL i
 
+   LOCAL aResults
+   LOCAL cCode
+   LOCAL cName
+   LOCAL cEMail
 
-	aResults := InputWindow ( ;
-				'Append Row' , ;
-				{ 'Name:' , 'Email:' } , ;
-				{ '' , '' } , ;
-				{ 40 , 40 } ;
-				)
+   i := ShowQuery.Grid_1.Value
 
-	If aResults [1] != Nil
-	
-		cCode	:= ""
-		cName	:= AllTrim(aResults [1])
-		cEMail	:= AllTrim(aResults [2])
+   IF i == 0
 
-		cQuery := "INSERT INTO NAMES VALUES ( '' , '"+ AllTrim(cName)+"'  , '"+cEmail+ "' ) "
+      RETURN
+   ENDIF
 
-		oQuery	:= oServer:Query( cQuery )
+   aGridRow   := ShowQuery.Grid_1.Item (i)
+   cCode      := aGridRow [1]
 
-		If oQuery:NetErr()												
-			MsgStop(oQuery:Error())
-		Else
-			DoQuery ( cName )
-		EndIf
+   oQuery:= oServer:Query( "Select * From NAMES WHERE CODE = " + AllTrim(cCode))
 
-	EndIf
+   IF oQuery:NetErr()
+      MsgStop(oQuery:Error())
 
-Return
+      RETURN NIL
+   ELSE
 
-*------------------------------------------------------------------------------*
-Function Prepare_data()
-*------------------------------------------------------------------------------*
+      oRow   := oQuery:GetRow(1)
+      cCode   := Alltrim(Str(oRow:fieldGet(1)))
+      cName   := AllTrim(oRow:fieldGet(2))
+      cEMail   := AllTrim(oRow:fieldGet(3))
+      oQuery:Destroy()
 
-	My_SQL_Database_Create( "NAMEBOOK" )
-	My_SQL_Database_Connect( "NAMEBOOK" )
-	My_SQL_Table_Create( "NAMES" )
-	My_SQL_Table_Insert( "NAMES" )
+      aResults := InputWindow   (;
+         'Edit Row'         , ;
+         { 'Name:' , 'Email:' }, ;
+         { cName , cEmail }   , ;
+         { 40 , 40 }         ;
+         )
 
-Return Nil
+      IF aResults [1] != Nil
 
-*------------------------------------------------------------------------------*
-Function  My_SQL_Database_Create( cDatabase )
-*------------------------------------------------------------------------------*
-Local i:= 0
-Local aDatabaseList:= {} 
+         cName      := AllTrim(aResults [1])
+         cEMail      := AllTrim(aResults [2])
 
-	cDatabase:=Lower(cDatabase)
+         oQuery      := oServer:Query( "UPDATE NAMES SET  Name = '"+cName+"' , eMail = '"+cEMail+"'  WHERE CODE = " + AllTrim(cCode) )
 
-	If oServer == Nil 
-		MsgInfo("Not connected to SQL server!")
-		Return Nil
-	EndIf
+         IF oQuery:NetErr()
+            MsgStop(oQuery:Error())
+         ELSE
+            DoQuery ( cSearch )
+         ENDIF
 
-	aDatabaseList:= oServer:ListDBs()
+      ENDIF
 
-	If oServer:NetErr() 
-		MsGInfo("Error verifying database list: " + oServer:Error())
-		Release Window ALL
-	Endif 
+   ENDIF
 
-	If AScan( aDatabaseList, Lower(cDatabase) ) != 0
-		MsgINFO( "Database allready exists!")
-		Return Nil
-	EndIf 
+   RETURN
 
-	oServer:CreateDatabase( cDatabase )
+PROCEDURE AppendRow()
 
-	If oServer:NetErr() 
-		MsGInfo("Error creating database: " + oServer:Error() )
-	Endif 
+   LOCAL oQuery
+   LOCAL aGridRow
+   LOCAL i
+   LOCAL cQuery
+   LOCAL aResults
+   LOCAL cCode
+   LOCAL cName
+   LOCAL cEMail
 
-Return Nil
+   aResults := InputWindow ( ;
+      'Append Row' , ;
+      { 'Name:' , 'Email:' } , ;
+      { '' , '' } , ;
+      { 40 , 40 } ;
+      )
 
-*------------------------------------------------------------------------------*
-Function My_SQL_Database_Connect( cDatabase )
-*------------------------------------------------------------------------------*
-/*..............................................................................
+   IF aResults [1] != Nil
 
-	Class TMySQLServer - Method ListDBs()
+      cCode   := ""
+      cName   := AllTrim(aResults [1])
+      cEMail   := AllTrim(aResults [2])
 
-		- Returns an array with list of data bases available.
+      cQuery := "INSERT INTO NAMES VALUES ( '' , '"+ AllTrim(cName)+"'  , '"+cEmail+ "' ) "
 
-		- Retorna un array con la lista de bases de datos disponibles.
+      oQuery   := oServer:Query( cQuery )
 
-	Class TMySQLServer - ListTables()
+      IF oQuery:NetErr()
+         MsgStop(oQuery:Error())
+      ELSE
+         DoQuery ( cName )
+      ENDIF
 
-		- Returns an array with list of available tables in current
-		database.
+   ENDIF
 
-		- Retorna un array con la lista de tablas disponibles en la
-		base de datos actual.
+   RETURN
 
-..............................................................................*/
+FUNCTION Prepare_data()
 
-Local i:= 0
-Local aDatabaseList:= {}                                           
+   My_SQL_Database_Create( "NAMEBOOK" )
+   My_SQL_Database_Connect( "NAMEBOOK" )
+   My_SQL_Table_Create( "NAMES" )
+   My_SQL_Table_Insert( "NAMES" )
 
-	cDatabase:= Lower(cDatabase)
-	If oServer == Nil 
-		MsgInfo("Not connected to SQL server!")
-		Return Nil
-	EndIf
+   RETURN NIL
 
-	aDatabaseList:= oServer:ListDBs()
-	If oServer:NetErr() 
-		MsGInfo("Error verifying database list: " + oServer:Error())
-		Release Window ALL
-	Endif 
+FUNCTION  My_SQL_Database_Create( cDatabase )
 
-	If AScan( aDatabaseList, Lower(cDatabase) ) == 0
-		MsgINFO( "Database "+cDatabase+" doesn't exist!")
-		Return Nil
-	EndIf 
+   LOCAL i:= 0
+   LOCAL aDatabaseList:= {}
 
-	oServer:SelectDB( cDatabase )
-	If oServer:NetErr() 
-		MsgStop("Error connecting to database "+cDatabase+": "+oServer:Error() )
-	Endif 
+   cDatabase:=Lower(cDatabase)
 
-Return Nil
+   IF oServer == Nil
+      MsgInfo("Not connected to SQL server!")
 
-*------------------------------------------------------------------------------*
-Function My_SQL_Table_Create( cTable )				
-*------------------------------------------------------------------------------*
-Local i:= 0
-Local aTableList:= {}                                           
-Local aStruc:= {}            
-Local cQuery 
+      RETURN NIL
+   ENDIF
 
-	If oServer == Nil
-		MsgStop("Not connected to SQL Server...")
-		Return Nil
-	EndIf
-              
-	aTableList:= oServer:ListTables()
-	If oServer:NetErr() 
-		MsgStop("Error getting table list: " + oServer:Error() )
-		Return
-	Endif 
+   aDatabaseList:= oServer:ListDBs()
 
-	If AScan( aTableList, Lower(cTable) ) != 0
-		MsgStop( "Table "+cTable+" allready exists!")
-		Return
-	EndIf 
+   IF oServer:NetErr()
+      MsGInfo("Error verifying database list: " + oServer:Error())
+      RELEASE WINDOW ALL
+   ENDIF
 
-	cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "  
-	oQuery := oServer:Query( cQuery )											
-	If oServer:NetErr() 
-		MsgStop("Error creating table "+cTable+": "+oServer:Error() )
-		Return
-	Endif 
+   IF AScan( aDatabaseList, Lower(cDatabase) ) != 0
+      MsgINFO( "Database allready exists!")
 
-	oQuery:Destroy()     
-							
-Return Nil
-            
-*------------------------------------------------------------------------------*
-Function My_SQL_Table_Insert( cTable )				
-*------------------------------------------------------------------------------*
-Local cQuery:= ""    
-Local NrReg:= 0            
+      RETURN NIL
+   ENDIF
 
-	If ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" ) 
-		Return Nil
-	EndIf                    
+   oServer:CreateDatabase( cDatabase )
 
-	If !File( "NAMES.DBF" ) 
-		MsgBox( "File Names.dbf doesn't exist!" )
-		Return Nil
-	EndIf
+   IF oServer:NetErr()
+      MsGInfo("Error creating database: " + oServer:Error() )
+   ENDIF
 
-	Use Names Alias Names New
-	go top
+   RETURN NIL
 
-	Do While !Eof()
+FUNCTION My_SQL_Database_Connect( cDatabase )
 
-		cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "   
-		oQuery := oServer:Query(  cQuery )
-		If oServer:NetErr() 
-			MsGInfo("Error executing Query "+cQuery+": "+oServer:Error() )
-			EXIT 
-		Endif 
+   /*..............................................................................
 
-		oQuery:Destroy()
-                      
-		NrReg++
+   Class TMySQLServer - Method ListDBs()
 
-		skip
+   - Returns an array with list of data bases available.
 
-	EndDo
+   - Retorna un array con la lista de bases de datos disponibles.
 
-	use
+   Class TMySQLServer - ListTables()
 
-	MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)       
+   - Returns an array with list of available tables in current
+   database.
 
-Return Nil
+   - Retorna un array con la lista de tablas disponibles en la
+   base de datos actual.
+
+   ..............................................................................*/
+
+   LOCAL i:= 0
+   LOCAL aDatabaseList:= {}
+
+   cDatabase:= Lower(cDatabase)
+   IF oServer == Nil
+      MsgInfo("Not connected to SQL server!")
+
+      RETURN NIL
+   ENDIF
+
+   aDatabaseList:= oServer:ListDBs()
+   IF oServer:NetErr()
+      MsGInfo("Error verifying database list: " + oServer:Error())
+      RELEASE WINDOW ALL
+   ENDIF
+
+   IF AScan( aDatabaseList, Lower(cDatabase) ) == 0
+      MsgINFO( "Database "+cDatabase+" doesn't exist!")
+
+      RETURN NIL
+   ENDIF
+
+   oServer:SelectDB( cDatabase )
+   IF oServer:NetErr()
+      MsgStop("Error connecting to database "+cDatabase+": "+oServer:Error() )
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION My_SQL_Table_Create( cTable )
+
+   LOCAL i:= 0
+   LOCAL aTableList:= {}
+   LOCAL aStruc:= {}
+   LOCAL cQuery
+
+   IF oServer == Nil
+      MsgStop("Not connected to SQL Server...")
+
+      RETURN NIL
+   ENDIF
+
+   aTableList:= oServer:ListTables()
+   IF oServer:NetErr()
+      MsgStop("Error getting table list: " + oServer:Error() )
+
+      RETURN
+   ENDIF
+
+   IF AScan( aTableList, Lower(cTable) ) != 0
+      MsgStop( "Table "+cTable+" allready exists!")
+
+      RETURN
+   ENDIF
+
+   cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "
+   oQuery := oServer:Query( cQuery )
+   IF oServer:NetErr()
+      MsgStop("Error creating table "+cTable+": "+oServer:Error() )
+
+      RETURN
+   ENDIF
+
+   oQuery:Destroy()
+
+   RETURN NIL
+
+FUNCTION My_SQL_Table_Insert( cTable )
+
+   LOCAL cQuery:= ""
+   LOCAL NrReg:= 0
+
+   IF ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" )
+
+      RETURN NIL
+   ENDIF
+
+   IF !File( "NAMES.DBF" )
+      MsgBox( "File Names.dbf doesn't exist!" )
+
+      RETURN NIL
+   ENDIF
+
+   USE Names Alias Names New
+   GO TOP
+
+   DO WHILE !Eof()
+
+      cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "
+      oQuery := oServer:Query(  cQuery )
+      IF oServer:NetErr()
+         MsGInfo("Error executing Query "+cQuery+": "+oServer:Error() )
+         EXIT
+      ENDIF
+
+      oQuery:Destroy()
+
+      NrReg++
+
+      SKIP
+
+   ENDDO
+
+   USE
+
+   MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)
+
+   RETURN NIL
 

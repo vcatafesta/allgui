@@ -1,6 +1,6 @@
 /*
-  with GAL edition (Alexey L. Gustow <gustow33 [dog] mail.ru>)
-  2011.Oct.01-08
+with GAL edition (Alexey L. Gustow <gustow33 [dog] mail.ru>)
+2011.Oct.01-08
 */
 
 #include "Directry.ch"
@@ -8,7 +8,6 @@
 #include "Inkey.ch"
 #include "MiniGUI.ch"
 #include "Stock.ch"
-
 
 // Max amount of space character, adde to function name
 // at saving to file
@@ -31,870 +30,819 @@
 #define EDITOR_GOTO               2              // To open and go to string
 #define EDITOR_FIND               3              // To open and transfer the search expression
 
-Memvar aOptions
+MEMVAR aOptions
 
-Memvar gugupath // GAL
-
+MEMVAR gugupath // GAL
 
 /******
-*
 *       Stock()
-*
 *       Inventory of the distribution's structure
-*
 */
 
-Procedure Main
+PROCEDURE Main
 
-// Проверка на наличие необходимых каталогов. Сообщения об
-// ошибках выводяться без языкового изменения, поскольку
-// требуемые файлы должны находиться в проверяемых каталогах.
+   // Проверка на наличие необходимых каталогов. Сообщения об
+   // ошибках выводяться без языкового изменения, поскольку
+   // требуемые файлы должны находиться в проверяемых каталогах.
 
-If !DirCheck()
-   MsgStop( "Don't create work directories!", 'Fatal error' )
-   Quit
-Endif
+   IF !DirCheck()
+      MsgStop( "Don't create work directories!", 'Fatal error' )
+      QUIT
+   ENDIF
 
-Set Navigation Extended
-Set Font To 'Tahoma', 9
+   SET Navigation Extended
+   SET Font To 'Tahoma', 9
 
-Private aOptions := ReadOptions()
+   PRIVATE aOptions := ReadOptions()
 
-//// GAL added (for path to sources)
-Private gugupath := CurDrive() + ":\" + CurDir()
-////
+   //// GAL added (for path to sources)
+   PRIVATE gugupath := CurDrive() + ":\" + CurDir()
 
-SetBaseLang()     // Установка языка сообщений
+   SetBaseLang()     // Установка языка сообщений
 
-Define window wStock                                      ;
-       At 132, 235                                        ;
-       Width 556                                          ;
-       Height 403                                         ;
-       Title APPTITLE                                     ;
-       Icon 'STOCK'                                       ;
-       Main                                               ;
-       On Init ReSize()                                   ;
-       On Size ReSize()                                   ;
-       On Maximize ReSize()                               ;
-       On Minimize ReSize()
+   DEFINE WINDOW wStock                                      ;
+         At 132, 235                                        ;
+         Width 556                                          ;
+         Height 403                                         ;
+         Title APPTITLE                                     ;
+         Icon 'STOCK'                                       ;
+         Main                                               ;
+         On Init ReSize()                                   ;
+         On Size ReSize()                                   ;
+         On Maximize ReSize()                               ;
+         On Minimize ReSize()
+
+      // Панель инструментов
+
+      DEFINE TOOLBAR tbrTools ButtonSize 20, 20
+         Button btnNew     Picture 'NEW'     Action NewList()  Tooltip 'Create new list'
+         Button btnOpen    Picture 'OPEN'    Action LoadList() Tooltip 'Load list from file'
+         Button btnSave    Picture 'SAVE'    Action SaveList() Tooltip 'Save to file'
+         Button btnEdit    Picture 'EDIT'    Action OpenFile() Tooltip 'Open in external editor'
+         Button btnOptions Picture 'OPTIONS' Action Options()  Tooltip 'Settings'
+      End Toolbar
+
+      // Размеры элементов диалога условны, т.к. их изменение выполняется программно.
+
+      // Рабочий список. Его бы раскрасить, но назначение DynamicBackcolor
+      // ОЧЕНЬ замедляет формирование нового списка.
+
+      @ 31, 3 Grid grdContent                                   ;
+         Width 535                                         ;
+         Height 305                                        ;
+         Headers { 'Name', 'Type', 'Comment' }             ;
+         Widths { 200, 100, 200 }                          ;
+         Font 'Tahoma' Size 10                             ;
+         On change GridStatus()                            ;
+         NoLines                                           ;
+         Edit Inplace {}                                   ;
+         ColumnWhen { { || .F. }, { || .F. }, { || .T. } }
+
+      // Условие поиска
+
+      @ 340, 5 Label lblSearch    ;
+         Value 'Find'       ;
+         Width 40 Height 18 ;
+         FontColor BLUE     ;
+         Bold
+
+      @ ( wStock.lblSearch.Row - 4 ), ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 ) ;
+         TEXTBox txbSearch                    ;
+         Width 400                            ;
+         Height 20                            ;
+         UpperCase                            ;
+         On change QSeek()                    ;
+         On enter wStock.grdContent.SetFocus  ;
+         Tooltip 'String for search'
+
+      @ wStock.txbSearch.Row, ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 ) ;
+         Button btnSearch   ;
+         Picture 'FIND'     ;
+         Width 20           ;
+         Height 20          ;
+         Action QSeek()     ;
+         Tooltip 'Find more'
+
+      @ wStock.btnSearch.Row, ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 ) ;
+         Button btnFindAll  ;
+         Picture 'FINDALL'  ;
+         Width 20           ;
+         Height 20          ;
+         Action FindAll()   ;
+         Tooltip 'Find all'
+
+      // Строка состояния
+
+      DEFINE STATUSBAR
+         StatusItem '' Default
+         StatusItem '' Width 80 Default
+      END STATUSBAR
+
+      On key ALT+X of wStock Action wStock.Release
+
+   END WINDOW
+
+   // Если указан языковой файл и он в наличии, выполняется инициализация
+
+   IF ( !Empty( aOptions[ OPTIONS_LANGFILE ] )              .and. ;
+         File( LANGFILE_PATH + aOptions[ OPTIONS_LANGFILE ] )      ;
+         )
+      BuildMenu( GetLangStrings( GET_MENU_LANG, aOptions[ OPTIONS_LANGFILE ] ) )
+      ModifyMainForm( GetLangStrings( GET_MAINFORM_LANG, aOptions[ OPTIONS_LANGFILE ] ) )
+   ELSE
+      BuildMenu()
+      ModifyMainForm()
+   ENDIF
+
+   // Если указано восстановление просмотра последнего файла
+
+   IF ( aOptions[ OPTIONS_ONSTART ] == ONSTART_OPENLAST )
+      IF !Empty( aOptions[ OPTIONS_LASTFILE ] )
+         LoadList( aOptions[ OPTIONS_LASTFILE ] )
+      ENDIF
+   ENDIF
+
+   SetState()
+
+   CENTER WINDOW wStock
+   ACTIVATE WINDOW wStock
+
+   RETURN
+
+   ****** End of Main ******
+
+   /*******
+   *       DirCheck() --> lSuccess
+   *       Checkup and creation of the folders
+   */
+
+STATIC FUNCTION DirCheck
+
+   LOCAL lSuccess := .F.
+
+   BEGIN Sequence
+
+      // Каталог даных
+
+      IF !CheckPath( DATA_PATH, .T. )
+         Break
+      ENDIF
+
+      // Каталог языковых файлов
+
+      IF !CheckPath( LANGFILE_PATH, .T. )
+         Break
+      ENDIF
+
+      lSuccess := .T.
+
+   End
+
+   RETURN lSuccess
+
+   ****** End of DirCheck ******
+
+   /******
+   *       BuildMenu( aStrings )
+   *       Building the main menu of the program.
+   *       Separate procedure is exuded for possibility of
+   *       the change language interface.
+   */
+
+PROCEDURE BuildMenu( aStrings )
+
+   IF !( Valtype( aStrings ) == 'A' )
+      aStrings := GetLangStrings( GET_MENU_LANG )
+   ENDIF
+
+   DEFINE MAIN MENU of wStock
+
+      DEFINE POPUP aStrings[ 1, 2 ]             // File
+         MenuItem aStrings[ 2, 2 ] ;
+            Action NewList()      ;
+            Message aStrings[ 3, 2 ]
+         MenuItem aStrings[ 4, 2 ] ;
+            Action LoadList()     ;
+            Message aStrings[ 5, 2 ]
+         MenuItem aStrings[ 6, 2 ] ;
+            Action SaveList()     ;
+            Name SaveList         ;
+            Message aStrings[ 7, 2 ]
+         Separator
+         MenuItem ( aStrings[ 8, 2 ]  + '   Alt+X' ) ;
+            Action ThisWindow.Release                     ;
+            Message aStrings[ 9, 2 ]
+      End Popup
+
+      DEFINE POPUP aStrings[ 10, 2 ]           // Edit
+         MenuItem aStrings[ 11, 2 ] ;
+            Action SetTitle()      ;
+            Name SetTitle          ;
+            Message aStrings[ 12, 2 ]
+         Separator
+         MenuItem aStrings[ 13, 2 ] ;
+            Action OpenFile()      ;
+            Name OpenFile          ;
+            Message aStrings[ 14, 2 ]
+         Separator
+         MenuItem aStrings[ 15, 2 ]                      ;
+            Action CopyToClipboard( GetNameFunction() ) ;
+            Name CopyIt                                 ;
+            Message aStrings[ 16, 2 ]
+      End Popup
+
+      DEFINE POPUP aStrings[ 17, 2 ]           // Tools
+         MenuItem aStrings[ 18, 2 ] ;
+            Action Formater()      ;
+            Name Reformatter       ;
+            Message aStrings[ 19, 2 ]
+         MenuItem aStrings[ 20, 2 ]   ;
+            Action CallsTable()      ;
+            Name CallsTable          ;
+            Message aStrings[ 21, 2 ]
+      End Popup
+
+      DEFINE POPUP aStrings[ 22, 2 ]           // Service
+         DEFINE POPUP aStrings[ 23, 2 ]
+            MenuItem aStrings[ 24, 2 ]  ;
+               Action SelectLanguage() ;
+               Message aStrings[ 25, 2 ]
+            Separator
+            MenuItem aStrings[ 26, 2 ]    ;
+               Action MakeLangTemplate() ;
+               Message aStrings[ 27, 2 ]
+         End Popup
+
+         Separator
+         MenuItem aStrings[ 28, 2 ] ;
+            Action Options()       ;
+            Message aStrings[ 29, 2 ]
+      End Popup
+
+      DEFINE POPUP '?'                         // ?
+         MenuItem aStrings[ 30, 2 ]        ;
+            Action About( aStrings[ 30, 2 ] ) ;
+            Message aStrings[ 31, 2 ]
+      End Popup
+
+   End Menu
+
+   RETURN
+
+   ****** End of BuildMenu *****
+
+   /******
+   *       ModifyMainForm( aStrings )
+   *       Changing of the main window language interface.
+   *       Separate procedure is exuded for possibility of
+   *       the change language interface.
+   */
+
+PROCEDURE ModifyMainForm( aStrings )
+
+   IF !( Valtype( aStrings ) == 'A' )
+      aStrings := GetLangStrings( GET_MAINFORM_LANG )
+   ENDIF
+
+   // Заголовок главного окна
+
+   wStock.Title := aStrings[ 1, 2 ]
 
    // Панель инструментов
 
-   Define Toolbar tbrTools ButtonSize 20, 20
-       Button btnNew     Picture 'NEW'     Action NewList()  Tooltip 'Create new list'
-       Button btnOpen    Picture 'OPEN'    Action LoadList() Tooltip 'Load list from file'
-       Button btnSave    Picture 'SAVE'    Action SaveList() Tooltip 'Save to file'
-       Button btnEdit    Picture 'EDIT'    Action OpenFile() Tooltip 'Open in external editor'
-       Button btnOptions Picture 'OPTIONS' Action Options()  Tooltip 'Settings'
-   End Toolbar
+   wStock.tbrTools.btnNew.Tooltip     := aStrings[ 2, 2 ]
+   wStock.tbrTools.btnOpen.Tooltip    := aStrings[ 3, 2 ]
+   wStock.tbrTools.btnSave.Tooltip    := aStrings[ 4, 2 ]
+   wStock.tbrTools.btnEdit.Tooltip    := aStrings[ 5, 2 ]
+   wStock.tbrTools.btnOptions.Tooltip := aStrings[ 6, 2 ]
 
-   // Размеры элементов диалога условны, т.к. их изменение выполняется программно.
+   // Заголовки колонок таблицы
 
-   // Рабочий список. Его бы раскрасить, но назначение DynamicBackcolor
-   // ОЧЕНЬ замедляет формирование нового списка.
-
-   @ 31, 3 Grid grdContent                                   ;
-           Width 535                                         ;
-           Height 305                                        ;
-           Headers { 'Name', 'Type', 'Comment' }             ;
-           Widths { 200, 100, 200 }                          ;
-           Font 'Tahoma' Size 10                             ;
-           On change GridStatus()                            ;
-           NoLines                                           ;
-           Edit Inplace {}                                   ;
-           ColumnWhen { { || .F. }, { || .F. }, { || .T. } }
+   wStock.grdContent.Header( 1 ) := aStrings[ 7, 2 ]
+   wStock.grdContent.Header( 2 ) := aStrings[ 8, 2 ]
+   wStock.grdContent.Header( 3 ) := aStrings[ 9, 2 ]
 
    // Условие поиска
 
-   @ 340, 5 Label lblSearch    ;
-            Value 'Find'       ;
-            Width 40 Height 18 ;
-            FontColor BLUE     ;
-            Bold
+   wStock.lblSearch.Value    := aStrings[ 10, 2 ]
+   wStock.txbSearch.Tooltip  := aStrings[ 11, 2 ]
+   wStock.btnSearch.Tooltip  := aStrings[ 12, 2 ]
+   wStock.btnFindAll.Tooltip := aStrings[ 13, 2 ]
 
-   @ ( wStock.lblSearch.Row - 4 ), ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 ) ;
-     TextBox txbSearch                    ;
-     Width 400                            ;
-     Height 20                            ;
-     UpperCase                            ;
-     On change QSeek()                    ;
-     On enter wStock.grdContent.SetFocus  ;
-     Tooltip 'String for search'
+   RETURN
 
-   @ wStock.txbSearch.Row, ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 ) ;
-     Button btnSearch   ;
-     Picture 'FIND'     ;
-     Width 20           ;
-     Height 20          ;
-     Action QSeek()     ;
-     Tooltip 'Find more'
+   ****** End of ModifyMainForm *****
 
-   @ wStock.btnSearch.Row, ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 ) ;
-     Button btnFindAll  ;
-     Picture 'FINDALL'  ;
-     Width 20           ;
-     Height 20          ;
-     Action FindAll()   ;
-     Tooltip 'Find all'
+   /*****
+   *       ReSize()
+   *       Matching of the sizes list and window
+   */
 
-   // Строка состояния
+STATIC PROCEDURE ReSize
 
-   Define Statusbar
-       StatusItem '' Default
-       StatusItem '' Width 80 Default
-   End Statusbar
-
-   On key ALT+X of wStock Action wStock.Release
-
-End Window
-
-// Если указан языковой файл и он в наличии, выполняется инициализация
-
-If ( !Empty( aOptions[ OPTIONS_LANGFILE ] )              .and. ;
-     File( LANGFILE_PATH + aOptions[ OPTIONS_LANGFILE ] )      ;
-   )
-   BuildMenu( GetLangStrings( GET_MENU_LANG, aOptions[ OPTIONS_LANGFILE ] ) )
-   ModifyMainForm( GetLangStrings( GET_MAINFORM_LANG, aOptions[ OPTIONS_LANGFILE ] ) )
-Else   
-   BuildMenu()
-   ModifyMainForm()
-Endif
-
-// Если указано восстановление просмотра последнего файла
-
-If ( aOptions[ OPTIONS_ONSTART ] == ONSTART_OPENLAST )
-   If !Empty( aOptions[ OPTIONS_LASTFILE ] )
-      LoadList( aOptions[ OPTIONS_LASTFILE ] )
-   Endif
-Endif
-
-SetState()
-
-Center window wStock
-Activate window wStock
-
-Return
-
-****** End of Main ******
-
-
-/*******
-*
-*       DirCheck() --> lSuccess
-*
-*       Checkup and creation of the folders
-*
-*/
-
-Static Function DirCheck
-Local lSuccess := .F.
-
-Begin Sequence
-
-  // Каталог даных
-  
-  If !CheckPath( DATA_PATH, .T. )
-     Break
-  Endif
-
-  // Каталог языковых файлов
-  
-  If !CheckPath( LANGFILE_PATH, .T. )
-     Break
-  Endif
-
-  lSuccess := .T.
-
-End
-
-Return lSuccess
-
-****** End of DirCheck ******
-
-
-/******
-*
-*       BuildMenu( aStrings )
-*
-*       Building the main menu of the program.
-*       Separate procedure is exuded for possibility of
-*       the change language interface.
-*
-*/
-
-Procedure BuildMenu( aStrings )
-
-If !( Valtype( aStrings ) == 'A' )
-   aStrings := GetLangStrings( GET_MENU_LANG )
-Endif
-
-Define main menu of wStock
-
-  Define popup aStrings[ 1, 2 ]             // File
-    MenuItem aStrings[ 2, 2 ] ;
-        Action NewList()      ;
-        Message aStrings[ 3, 2 ]
-    MenuItem aStrings[ 4, 2 ] ;
-        Action LoadList()     ;
-        Message aStrings[ 5, 2 ]
-    MenuItem aStrings[ 6, 2 ] ;
-        Action SaveList()     ;
-        Name SaveList         ;
-        Message aStrings[ 7, 2 ]
-    Separator
-    MenuItem ( aStrings[ 8, 2 ]  + '	Alt+X' ) ;
-        Action ThisWindow.Release                     ;
-        Message aStrings[ 9, 2 ]
-  End Popup
-
-  Define popup aStrings[ 10, 2 ]           // Edit
-    MenuItem aStrings[ 11, 2 ] ;
-        Action SetTitle()      ;
-        Name SetTitle          ;
-        Message aStrings[ 12, 2 ]
-    Separator
-    MenuItem aStrings[ 13, 2 ] ;
-        Action OpenFile()      ;
-        Name OpenFile          ;
-        Message aStrings[ 14, 2 ]
-    Separator
-    MenuItem aStrings[ 15, 2 ]                      ;
-        Action CopyToClipboard( GetNameFunction() ) ;
-        Name CopyIt                                 ;
-        Message aStrings[ 16, 2 ]
-  End Popup
-  
-  Define popup aStrings[ 17, 2 ]           // Tools
-    MenuItem aStrings[ 18, 2 ] ;
-        Action Formater()      ;
-        Name Reformatter       ;
-        Message aStrings[ 19, 2 ]
-    MenuItem aStrings[ 20, 2 ]   ;
-        Action CallsTable()      ;
-        Name CallsTable          ;
-        Message aStrings[ 21, 2 ]
-  End Popup
-
-  Define popup aStrings[ 22, 2 ]           // Service
-    Define popup aStrings[ 23, 2 ]
-       MenuItem aStrings[ 24, 2 ]  ;
-           Action SelectLanguage() ;
-           Message aStrings[ 25, 2 ]
-       Separator
-       MenuItem aStrings[ 26, 2 ]    ;
-           Action MakeLangTemplate() ;
-           Message aStrings[ 27, 2 ]
-    End Popup
-    
-    Separator
-    MenuItem aStrings[ 28, 2 ] ;
-        Action Options()       ;
-        Message aStrings[ 29, 2 ]
-  End Popup
-  
-  Define popup '?'                         // ?
-    MenuItem aStrings[ 30, 2 ]        ;
-    Action About( aStrings[ 30, 2 ] ) ;
-    Message aStrings[ 31, 2 ]
-  End Popup
-
-End Menu
-
-Return
-
-****** End of BuildMenu *****
- 
-
-/******
-*
-*       ModifyMainForm( aStrings )
-*
-*       Changing of the main window language interface.
-*       Separate procedure is exuded for possibility of
-*       the change language interface.
-*
-*/
-
-Procedure ModifyMainForm( aStrings )
-
-If !( Valtype( aStrings ) == 'A' )
-   aStrings := GetLangStrings( GET_MAINFORM_LANG )
-Endif
-
-// Заголовок главного окна
-
-wStock.Title := aStrings[ 1, 2 ]
-
-// Панель инструментов
-
-wStock.tbrTools.btnNew.Tooltip     := aStrings[ 2, 2 ]
-wStock.tbrTools.btnOpen.Tooltip    := aStrings[ 3, 2 ]
-wStock.tbrTools.btnSave.Tooltip    := aStrings[ 4, 2 ]
-wStock.tbrTools.btnEdit.Tooltip    := aStrings[ 5, 2 ]
-wStock.tbrTools.btnOptions.Tooltip := aStrings[ 6, 2 ]
-
-// Заголовки колонок таблицы
-
-wStock.grdContent.Header( 1 ) := aStrings[ 7, 2 ]
-wStock.grdContent.Header( 2 ) := aStrings[ 8, 2 ]
-wStock.grdContent.Header( 3 ) := aStrings[ 9, 2 ]
-
-// Условие поиска
-
-wStock.lblSearch.Value    := aStrings[ 10, 2 ]
-wStock.txbSearch.Tooltip  := aStrings[ 11, 2 ]
-wStock.btnSearch.Tooltip  := aStrings[ 12, 2 ]
-wStock.btnFindAll.Tooltip := aStrings[ 13, 2 ]
-
-Return
-
-****** End of ModifyMainForm *****
-
-
-/*****
-*
-*       ReSize()
-*
-*       Matching of the sizes list and window
-*
-*/
-
-Static Procedure ReSize
-Local nWidth  := wStock.Width , ;
+   LOCAL nWidth  := wStock.Width , ;
       nHeight := wStock.Height
 
-// Изменяем размер отображаемого списка
+   // Изменяем размер отображаемого списка
 
-wStock.grdContent.Row := 31
-wStock.grdContent.Col := 3
-wStock.grdContent.Width  := ( nWidth - 2 * wStock.grdContent.Col - 2 * GetBorderWidth() )
-wStock.grdContent.Height := ( nHeight - wStock.grdContent.Row - GetTitleHeight() - ;
-                              GetMenubarHeight() - 2 * GetBorderHeight() - 52 )
+   wStock.grdContent.Row := 31
+   wStock.grdContent.Col := 3
+   wStock.grdContent.Width  := ( nWidth - 2 * wStock.grdContent.Col - 2 * GetBorderWidth() )
+   wStock.grdContent.Height := ( nHeight - wStock.grdContent.Row - GetTitleHeight() - ;
+      GetMenubarHeight() - 2 * GetBorderHeight() - 52 )
 
-If !Empty( wStock.grdContent.ItemCount )
-   wStock.grdContent.ColumnsAutoFit()
-Endif
+   IF !Empty( wStock.grdContent.ItemCount )
+      wStock.grdContent.ColumnsAutoFit()
+   ENDIF
 
-// Метка поисковой строки
+   // Метка поисковой строки
 
-wStock.lblSearch.Row := ( wStock.grdContent.Row + wStock.grdContent.Height + 10 )
-wStock.lblSearch.Col := wStock.grdContent.Col
+   wStock.lblSearch.Row := ( wStock.grdContent.Row + wStock.grdContent.Height + 10 )
+   wStock.lblSearch.Col := wStock.grdContent.Col
 
-// Поле ввода поискового значения и кнопка поиска
+   // Поле ввода поискового значения и кнопка поиска
 
-wStock.txbSearch.Row := ( wStock.lblSearch.Row - 4 )
-wStock.txbSearch.Col := ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 )
-wStock.txbSearch.Width := ( wStock.grdContent.Width - wStock.lblSearch.Width - ;
-                            wStock.txbSearch.Col - wStock.btnSearch.Width + 10 )
+   wStock.txbSearch.Row := ( wStock.lblSearch.Row - 4 )
+   wStock.txbSearch.Col := ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 )
+   wStock.txbSearch.Width := ( wStock.grdContent.Width - wStock.lblSearch.Width - ;
+      wStock.txbSearch.Col - wStock.btnSearch.Width + 10 )
 
-wStock.btnSearch.Row := wStock.txbSearch.Row
-wStock.btnSearch.Col := ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 )
+   wStock.btnSearch.Row := wStock.txbSearch.Row
+   wStock.btnSearch.Col := ( wStock.txbSearch.Col + wStock.txbSearch.Width + 5 )
 
-wStock.btnFindAll.Row := wStock.btnSearch.Row
-wStock.btnFindAll.Col := ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 )
- 
-Return
+   wStock.btnFindAll.Row := wStock.btnSearch.Row
+   wStock.btnFindAll.Col := ( wStock.btnSearch.Col + wStock.btnSearch.Width + 5 )
 
-****** End of ReSize ******
+   RETURN
 
+   ****** End of ReSize ******
 
-/******
-*
-*       SetState()
-*
-*       Control for the condition of dialog elements
-*
-*/
+   /******
+   *       SetState()
+   *       Control for the condition of dialog elements
+   */
 
-Static Procedure SetState
-Memvar aOptions
+STATIC PROCEDURE SetState
 
-If !Empty( wStock.grdContent.ItemCount )
+   MEMVAR aOptions
 
-   wStock.SaveList.Enabled    := .T.
-   wStock.SetTitle.Enabled    := .T.
-   wStock.CopyIt.Enabled      := .T.
-   wStock.Reformatter.Enabled := .T.
-   wStock.CallsTable.Enabled  := .T.
-   wStock.OpenFile.Enabled    := !Empty( aOptions[ OPTIONS_EDITOR ] )
+   IF !Empty( wStock.grdContent.ItemCount )
 
-   wStock.btnSave.Enabled := .T.
-   wStock.btnEdit.Enabled := !Empty( aOptions[ OPTIONS_EDITOR ] )
+      wStock.SaveList.Enabled    := .T.
+      wStock.SetTitle.Enabled    := .T.
+      wStock.CopyIt.Enabled      := .T.
+      wStock.Reformatter.Enabled := .T.
+      wStock.CallsTable.Enabled  := .T.
+      wStock.OpenFile.Enabled    := !Empty( aOptions[ OPTIONS_EDITOR ] )
 
-   wStock.txbSearch.Enabled := .T.
+      wStock.btnSave.Enabled := .T.
+      wStock.btnEdit.Enabled := !Empty( aOptions[ OPTIONS_EDITOR ] )
 
-Else
+      wStock.txbSearch.Enabled := .T.
 
-   wStock.SaveList.Enabled    := .F.
-   wStock.SetTitle.Enabled    := .F.
-   wStock.CopyIt.Enabled      := .F.
-   wStock.Reformatter.Enabled := .F.
-   wStock.CallsTable.Enabled  := .F.
-   wStock.OpenFile.Enabled    := .F.
+   ELSE
 
-   wStock.btnSave.Enabled := .F.
-   wStock.btnEdit.Enabled := .F.
+      wStock.SaveList.Enabled    := .F.
+      wStock.SetTitle.Enabled    := .F.
+      wStock.CopyIt.Enabled      := .F.
+      wStock.Reformatter.Enabled := .F.
+      wStock.CallsTable.Enabled  := .F.
+      wStock.OpenFile.Enabled    := .F.
 
-   wStock.txbSearch.Enabled := .F.
+      wStock.btnSave.Enabled := .F.
+      wStock.btnEdit.Enabled := .F.
 
-Endif
+      wStock.txbSearch.Enabled := .F.
 
-wStock.btnSearch.Enabled  := !Empty( wStock.txbSearch.Value )
-wStock.btnFindAll.Enabled := !Empty( wStock.txbSearch.Value )
+   ENDIF
 
-Return
+   wStock.btnSearch.Enabled  := !Empty( wStock.txbSearch.Value )
+   wStock.btnFindAll.Enabled := !Empty( wStock.txbSearch.Value )
 
-****** End of SetState ******
+   RETURN
 
+   ****** End of SetState ******
 
-/*****
-*
-*       GridStatus()
-*
-*       Show of the position inside list
-*
-*/
+   /*****
+   *       GridStatus()
+   *       Show of the position inside list
+   */
 
-Static Procedure GridStatus
-wStock.Statusbar.Item( 2 ) := ( LTrim( Str( wStock.grdContent.Value ) )     + ;
-                                '/'                                         + ;
-                                LTrim( Str( wStock.grdContent.ItemCount ) )   ;
-                               )
+STATIC PROCEDURE GridStatus
 
-Return
+   wStock.Statusbar.Item( 2 ) := ( LTrim( Str( wStock.grdContent.Value ) )     + ;
+      '/'                                         + ;
+      LTrim( Str( wStock.grdContent.ItemCount ) )   ;
+      )
 
-****** End of GridStatus ******
+   RETURN
 
+   ****** End of GridStatus ******
 
-/*****
-*
-*       NewList()
-*
-*       Formation of the new list
-*
-*/
+   /*****
+   *       NewList()
+   *       Formation of the new list
+   */
 
-Static Procedure NewList
-Memvar aOptions
-Local cPath                                                                           , ;
+STATIC PROCEDURE NewList
+
+   MEMVAR aOptions
+   LOCAL cPath                                                                           , ;
       aStrings  := GetLangStrings( GET_SYSDIALOGS_LANG, aOptions[ OPTIONS_LANGFILE ] ), ;
       aFileList := {}                                                                 , ;
       Cycle                                                                           , ;
       nLen                                                                            , ;
       cNum
 
-/// GAL added
-if Empty( aOptions[ OPTIONS_GETPATH ] )
-  aOptions[ OPTIONS_GETPATH ] := GetStartUpFolder()
-endif
-///
+   /// GAL added
+   IF Empty( aOptions[ OPTIONS_GETPATH ] )
+      aOptions[ OPTIONS_GETPATH ] := GetStartUpFolder()
+   ENDIF
 
-If !Empty( cPath := GetFolder( aStrings[ 6, 2 ], aOptions[ OPTIONS_GETPATH ] ) )
+   IF !Empty( cPath := GetFolder( aStrings[ 6, 2 ], aOptions[ OPTIONS_GETPATH ] ) )
 
-   //// GAL added
-   gugupath := cPath
-   if Empty( gugupath )
-     gugupath := CurDrive() + ":\" + Curdir()
-   endif
-   ////
+      //// GAL added
+      gugupath := cPath
+      IF Empty( gugupath )
+         gugupath := CurDrive() + ":\" + Curdir()
+      ENDIF
 
-   // Внесение в список файлов .prg
-   aFileList := GetFileList( aFileList, ( cPath + '\*.prg' ) )
+      // Внесение в список файлов .prg
+      aFileList := GetFileList( aFileList, ( cPath + '\*.prg' ) )
 
-   // Внесение в список файлов .c
-   aFileList := GetFileList( aFileList, ( cPath + '\*.c' ) )
+      // Внесение в список файлов .c
+      aFileList := GetFileList( aFileList, ( cPath + '\*.c' ) )
 
-   If !Empty( aFileList )
+      IF !Empty( aFileList )
 
-      // Упорядочение списка: файлы с расширением *.prg и *.c
-      // должны оказаться рядом
+         // Упорядочение списка: файлы с расширением *.prg и *.c
+         // должны оказаться рядом
 
-      ASort( aFileList, , , { | x, y | BaseCompare( x ) < BaseCompare( y ) } )
+         ASort( aFileList, , , { | x, y | BaseCompare( x ) < BaseCompare( y ) } )
 
-      // Внесение в отображаемый список
+         // Внесение в отображаемый список
 
-      nLen := Len( aFileList )
-      cNum := LTrim( Str( nLen ) )
+         nLen := Len( aFileList )
+         cNum := LTrim( Str( nLen ) )
 
-      // Запретить обновление и доступ к GRID
+         // Запретить обновление и доступ к GRID
 
-      wStock.grdContent.DisableUpdate
-      wStock.grdContent.Enabled := .F.
-      wStock.grdContent.DeleteAllItems
+         wStock.grdContent.DisableUpdate
+         wStock.grdContent.Enabled := .F.
+         wStock.grdContent.DeleteAllItems
 
-      For Cycle := 1 to nLen
+         FOR Cycle := 1 to nLen
 
-        wStock.Statusbar.Item( 1 ) := aFileList[ Cycle ]
-        wStock.Statusbar.Item( 2 ) := ( LTrim( Str( Cycle ) ) + '/' + cNum )
+            wStock.Statusbar.Item( 1 ) := aFileList[ Cycle ]
+            wStock.Statusbar.Item( 2 ) := ( LTrim( Str( Cycle ) ) + '/' + cNum )
 
-        // Анализ содержимого файла
+            // Анализ содержимого файла
 
-        ParseFile( cPath, aFileList[ Cycle ] )
+            ParseFile( cPath, aFileList[ Cycle ] )
 
-      Next
+         NEXT
 
-      wStock.Statusbar.Item( 1 ) := cPath
-      wStock.Statusbar.Item( 2 ) := ''
+         wStock.Statusbar.Item( 1 ) := cPath
+         wStock.Statusbar.Item( 2 ) := ''
 
-      // Запросить наименование созданного каталога и файл для сохранения
+         // Запросить наименование созданного каталога и файл для сохранения
 
-      aOptions[ OPTIONS_TITLE ] := cPath
+         aOptions[ OPTIONS_TITLE ] := cPath
 
-      SetTitle()
-      SaveList()
-      
-      // Возврат главного окна к рабочему состоянию
+         SetTitle()
+         SaveList()
 
-      wStock.grdContent.ColumnsAutoFit
-      wStock.grdContent.EnableUpdate
-      wStock.grdContent.Enabled := .T.
+         // Возврат главного окна к рабочему состоянию
 
-      wStock.grdContent.Value := 1
-      wStock.grdContent.SetFocus
+         wStock.grdContent.ColumnsAutoFit
+         wStock.grdContent.EnableUpdate
+         wStock.grdContent.Enabled := .T.
 
-      // Запомнить последний использованный каталог
+         wStock.grdContent.Value := 1
+         wStock.grdContent.SetFocus
 
-      aOptions[ OPTIONS_GETPATH ] := cPath
+         // Запомнить последний использованный каталог
 
-   Endif
+         aOptions[ OPTIONS_GETPATH ] := cPath
 
-Endif
+      ENDIF
 
-SetState()
-GridStatus()
+   ENDIF
 
-Return
+   SetState()
+   GridStatus()
 
-****** End of NewList *****
+   RETURN
 
+   ****** End of NewList *****
 
-/*****
-*
-*       GetFileList( aFileList, cPattern ) --> aFileList
-*
-*       Entering to the filelist with required extension
-*
-*/
+   /*****
+   *       GetFileList( aFileList, cPattern ) --> aFileList
+   *       Entering to the filelist with required extension
+   */
 
-Static Function GetFileList( aFileList, cPattern )
-Local aFiles, ;
+STATIC FUNCTION GetFileList( aFileList, cPattern )
+
+   LOCAL aFiles, ;
       Cycle , ;
       nLen
 
-If !Empty( aFiles := Directory( cPattern ) )
+   IF !Empty( aFiles := Directory( cPattern ) )
 
-   nLen := Len( aFiles )
-   For Cycle := 1 to nLen
-     AAdd( aFileList, aFiles[ Cycle, F_NAME ] )
-   Next
+      nLen := Len( aFiles )
+      FOR Cycle := 1 to nLen
+         AAdd( aFileList, aFiles[ Cycle, F_NAME ] )
+      NEXT
 
-Endif
+   ENDIF
 
-Return aFileList
+   RETURN aFileList
 
-***** End of GetFileList *****
+   ***** End of GetFileList *****
 
+   /*****
+   *       BaseCompare( cValue ) --> cValue
+   *       Allocation of the base for compare from the symbol expression
+   */
 
-/*****
-*
-*       BaseCompare( cValue ) --> cValue
-*
-*       Allocation of the base for compare from the symbol expression
-*
-*/
+STATIC FUNCTION BaseCompare( cValue )
 
-Static Function BaseCompare( cValue )
+   // От сортировки ожидаем следующего:
+   // - связанные файлы (prg и c) будут располагаться рядом
+   // - файлы с расширением *.prg располагаются выше связанных с ними файлов *.c
 
-// От сортировки ожидаем следующего:
-// - связанные файлы (prg и c) будут располагаться рядом
-// - файлы с расширением *.prg располагаются выше связанных с ними файлов *.c
+   // Применительно к дистрибутиву MiniGUI этого можно достичь:
+   // - избавлением от префикса H_ (для *.prg) и C_ (для *.c) - после этого имена
+   //   файлов станут одинаковы
+   // - для *.prg удалить расширение - имя укорачивается и получает при сортировке
+   //   более высокий приоритет
 
-// Применительно к дистрибутиву MiniGUI этого можно достичь:
-// - избавлением от префикса H_ (для *.prg) и C_ (для *.c) - после этого имена
-//   файлов станут одинаковы
-// - для *.prg удалить расширение - имя укорачивается и получает при сортировке
-//   более высокий приоритет
+   cValue := Upper( cValue )
 
-cValue := Upper( cValue )
+   IF ( Left( cValue, 2 ) == 'H_' )
+      cValue := Left( cValue, ( Len( cValue ) - 4 ) )
+   ENDIF
 
-If ( Left( cValue, 2 ) == 'H_' )
-   cValue := Left( cValue, ( Len( cValue ) - 4 ) )
-Endif
+   IF ( ( Left( cValue, 2 ) == 'H_' ) .or. ;
+         ( Left( cValue, 2 ) == 'C_' )      ;
+         )
+      cValue := Substr( cValue, 3 )
+   ENDIF
 
-If ( ( Left( cValue, 2 ) == 'H_' ) .or. ;
-     ( Left( cValue, 2 ) == 'C_' )      ;
-   )
-   cValue := Substr( cValue, 3 )
-Endif
+   RETURN cValue
 
-Return cValue
+   ****** End of BaseCompare *****
 
-****** End of BaseCompare *****
+   /*****
+   *       ParseFile( cPath, cFile )
+   *       Поиск операторов
+   */
 
+STATIC PROCEDURE ParseFile( cPath, cFile )
 
-/*****
-*
-*       ParseFile( cPath, cFile )
-*
-*       Поиск операторов
-*
-*/
-
-Static Procedure ParseFile( cPath, cFile )
-Local oFile   := TFileRead() : New( cPath + '\' + cFile ), ;
+   LOCAL oFile   := TFileRead() : New( cPath + '\' + cFile ), ;
       cString                                            , ;
       nPos                                               , ;
       cType                                              , ;
       cWord
 
-AddToContent( cFile, '', '' )   // Добавляем в список программный файл
+   AddToContent( cFile, '', '' )   // Добавляем в список программный файл
 
-oFile : Open()
-If !oFile : Error()
+   oFile : Open()
+   IF !oFile : Error()
 
-   Do while oFile : MoreToRead()
+      DO WHILE oFile : MoreToRead()
 
-      cString := oFile : ReadLine()
+         cString := oFile : ReadLine()
 
-      If !Empty( cString )    // Пустые строки игнорируем
+         IF !Empty( cString )    // Пустые строки игнорируем
 
-         cString := LTrim( cString )
+            cString := LTrim( cString )
 
-         // Комментарии пропускаем
+            // Комментарии пропускаем
 
-         Do case
-            Case ( Left( cString, 1 ) == '*' )
-              Loop
+            DO CASE
+            CASE ( Left( cString, 1 ) == '*' )
+               LOOP
 
-            Case ( Left( cString, 2 ) == '//' )
-              Loop
+            CASE ( Left( cString, 2 ) == '//' )
+               LOOP
 
-            Case ( ( '/*' $ cString ) .and. ( '*/' $ cString ) )
-              Loop
+            CASE ( ( '/*' $ cString ) .and. ( '*/' $ cString ) )
+               LOOP
 
-            Case ( Left( cString, 2 ) == '/*' )
+            CASE ( Left( cString, 2 ) == '/*' )
 
-              // Многострочный комментарий
+               // Многострочный комментарий
 
-              Do while oFile : MoreToRead()
+               DO WHILE oFile : MoreToRead()
 
-                 cString := oFile : ReadLine()
+                  cString := oFile : ReadLine()
 
-                 If ( '*/' $ cString )
-                    Exit
-                 Endif
+                  IF ( '*/' $ cString )
+                     EXIT
+                  ENDIF
 
-              Enddo
+               ENDDO
 
-              Loop
+               LOOP
 
-         Endcase
+            ENDCASE
 
-         // Получение имени процедуры/функции и указания на её область видимости
+            // Получение имени процедуры/функции и указания на её область видимости
 
-         If ( Left( cString, 7 ) == 'HB_FUNC' )
+            IF ( Left( cString, 7 ) == 'HB_FUNC' )
 
-            // Функции C (WinAPI)
+               // Функции C (WinAPI)
 
-            If !Empty( nPos := At( '(', cString ) )
+               IF !Empty( nPos := At( '(', cString ) )
 
-               cString := Substr( cString, ( nPos + 1 ) )
+                  cString := Substr( cString, ( nPos + 1 ) )
 
-               If !Empty( nPos := At( ')', cString ) )
-                  cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
-                  AddToContent( ( Space( 3 ) + cString ), 'HB_FUNC', '' )
-               Endif
+                  IF !Empty( nPos := At( ')', cString ) )
+                     cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
+                     AddToContent( ( Space( 3 ) + cString ), 'HB_FUNC', '' )
+                  ENDIF
 
-            Endif
+               ENDIF
 
-         Else
+            ELSE
 
-            // Выделяем 1-е слово
+               // Выделяем 1-е слово
 
-           If !Empty( nPos := At( ' ', cString ) )
+               IF !Empty( nPos := At( ' ', cString ) )
 
-              cWord := AllTrim( Left( cString, ( nPos - 1 ) ) )
+                  cWord := AllTrim( Left( cString, ( nPos - 1 ) ) )
 
-              // Проверяем вхождение в список ключевых слов. В первую
-              // очередь проверяется область видимости, далее выясняется
-              // оператор
+                  // Проверяем вхождение в список ключевых слов. В первую
+                  // очередь проверяется область видимости, далее выясняется
+                  // оператор
 
-              cWord += ' '
-              If !Empty( AScan( { 'STATIC ', 'STATI ', 'STAT ' }     , ;
-                                { | elem | elem == Upper( cWord ) } )  ;
-                       )
-                 cType := 'Static '
+                  cWord += ' '
+                  IF !Empty( AScan( { 'STATIC ', 'STATI ', 'STAT ' }     , ;
+                        { | elem | elem == Upper( cWord ) } )  ;
+                        )
+                     cType := 'Static '
 
-                 // В этом случае необходимо изменить определяемое выражение
+                     // В этом случае необходимо изменить определяемое выражение
 
-                 cString := AllTrim( Substr( cString, ( nPos + 1 ) ) )
+                     cString := AllTrim( Substr( cString, ( nPos + 1 ) ) )
 
-                 If !Empty( nPos := At( ' ', cString ) )
-                    cWord := ( AllTrim( Left( cString, ( nPos - 1 ) ) ) + ' ' )
-                 Endif
+                     IF !Empty( nPos := At( ' ', cString ) )
+                        cWord := ( AllTrim( Left( cString, ( nPos - 1 ) ) ) + ' ' )
+                     ENDIF
 
-              Else
-                 cType := ''
+                  ELSE
+                     cType := ''
 
-              Endif
+                  ENDIF
 
-              If !Empty( cWord )
+                  IF !Empty( cWord )
 
-                 Do case
-                    Case !Empty( AScan( { 'PROCEDURE ', 'PROCEDUR ', 'PROCEDU ', ;
-                                          'PROCED '   , 'PROCE '   , 'PROC '     ;
-                                        }                                      , ;
-                                        { | elem | elem == Upper( cWord ) } )    ;
-                               )
-                      cType += ' Procedure'
+                     DO CASE
+                     CASE !Empty( AScan( { 'PROCEDURE ', 'PROCEDUR ', 'PROCEDU ', ;
+                           'PROCED '   , 'PROCE '   , 'PROC '     ;
+                           }                                      , ;
+                           { | elem | elem == Upper( cWord ) } )    ;
+                           )
+                        cType += ' Procedure'
 
-                    Case !Empty( AScan( { 'FUNCTION ', 'FUNCTIO ', 'FUNCTI ' , ;
-                                          'FUNCT '   , 'FUNC '                 ;
-                                        }                                    , ;
-                                        { | elem | elem == Upper( cWord ) } )  ;
-                               )
-                      cType += ' Function'
+                     CASE !Empty( AScan( { 'FUNCTION ', 'FUNCTIO ', 'FUNCTI ' , ;
+                           'FUNCT '   , 'FUNC '                 ;
+                           }                                    , ;
+                           { | elem | elem == Upper( cWord ) } )  ;
+                           )
+                        cType += ' Function'
 
-                 Endcase
+                     ENDCASE
 
-                 // Определение имени процедуры/функции
+                     // Определение имени процедуры/функции
 
-                 cType := AllTrim( cType )
-                 If ( !Empty( cType ) .and. !( cType == 'Static' ) )
-                    cString := AllTrim( Substr( cString, ( nPos + 1 ) ) )
+                     cType := AllTrim( cType )
+                     IF ( !Empty( cType ) .and. !( cType == 'Static' ) )
+                        cString := AllTrim( Substr( cString, ( nPos + 1 ) ) )
 
-                    // Удаление всего, что слудует за именем
+                        // Удаление всего, что слудует за именем
 
-                    If !Empty( nPos := At( '(', cString ) )
-                       cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
-                    Endif
+                        IF !Empty( nPos := At( '(', cString ) )
+                           cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
+                        ENDIF
 
-                    If !Empty( nPos := At( ' ', cString ) )
-                       cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
-                    Endif
+                        IF !Empty( nPos := At( ' ', cString ) )
+                           cString := AllTrim( Left( cString, ( nPos - 1 ) ) )
+                        ENDIF
 
-                    AddToContent( ( Space( 3 ) + cString ), cType, '' )
+                        AddToContent( ( Space( 3 ) + cString ), cType, '' )
 
-                 Endif
+                     ENDIF
 
-              Endif
+                  ENDIF
 
-           Endif
+               ENDIF
 
-         Endif
+            ENDIF
 
-      Endif
+         ENDIF
 
-   Enddo
+      ENDDO
 
-   oFile : Close()
+      oFile : Close()
 
-Endif
+   ENDIF
 
-Return
+   RETURN
 
-****** End of ParseFile ******
+   ****** End of ParseFile ******
 
+   /******
+   *       AddToContent( cName, cType, cComment )
+   *       Addition of the string to list
+   */
 
-/******
-*
-*       AddToContent( cName, cType, cComment )
-*
-*       Addition of the string to list
-*
-*/
+STATIC PROCEDURE AddToContent( cName, cType, cComment )
 
-Static Procedure AddToContent( cName, cType, cComment )
-wStock.grdContent.AddItem( { cName, cType, cComment } )
-Return
+   wStock.grdContent.AddItem( { cName, cType, cComment } )
 
-****** End of AddToContent ******
+   RETURN
 
+   ****** End of AddToContent ******
 
-/******
-*
-*       IsFound( cValue, cItem ) --> lFound
-*
-*       Checkup of the presence required fragment in the string
-*
-*/
+   /******
+   *       IsFound( cValue, cItem ) --> lFound
+   *       Checkup of the presence required fragment in the string
+   */
 
-Static Function IsFound( cValue, cItem )
-Memvar aOptions
-Local nLen   := Len( cValue ), ;
+STATIC FUNCTION IsFound( cValue, cItem )
+
+   MEMVAR aOptions
+   LOCAL nLen   := Len( cValue ), ;
       lFound := .F.
 
-// Варианты выполнения поиска
+   // Варианты выполнения поиска
 
-If ( aOptions[ OPTIONS_SEARCH ] == SEARCH_EQUAL )      // Точное соответствие
-   lFound := ( Upper( Left( AllTrim( cItem ), nLen ) ) == cValue )
+   IF ( aOptions[ OPTIONS_SEARCH ] == SEARCH_EQUAL )      // Точное соответствие
+      lFound := ( Upper( Left( AllTrim( cItem ), nLen ) ) == cValue )
 
-ElseIf ( aOptions[ OPTIONS_SEARCH ] == SEARCH_ENTRY )  // Вхождение поисковой подстроки
-   lFound := ( cValue $ Upper( AllTrim( cItem ) ) )
+   ELSEIF ( aOptions[ OPTIONS_SEARCH ] == SEARCH_ENTRY )  // Вхождение поисковой подстроки
+      lFound := ( cValue $ Upper( AllTrim( cItem ) ) )
 
-Endif
+   ENDIF
 
-Return lFound
+   RETURN lFound
 
-****** End of IsFound ******
+   ****** End of IsFound ******
 
+   /******
+   *       QSeek()
+   *       Seek into list
+   */
 
-/******
-*
-*       QSeek()
-*
-*       Seek into list
-*
-*/
+STATIC PROCEDURE QSeek
 
-Static Procedure QSeek
-Local cValue := AllTrim( wStock.txbSearch.Value ), ;
+   LOCAL cValue := AllTrim( wStock.txbSearch.Value ), ;
       nPos   := ( wStock.grdContent.Value + 1 )  , ;
       nCount := wStock.grdContent.ItemCount      , ;
       Cycle                                      , ;
       lFound
 
-wStock.btnSearch.Enabled   := !Empty( cValue )
-wStock.btnFindAll.Enabled  := !Empty( cValue )
-wStock.txbSearch.Backcolor := WHITE
+   wStock.btnSearch.Enabled   := !Empty( cValue )
+   wStock.btnFindAll.Enabled  := !Empty( cValue )
+   wStock.txbSearch.Backcolor := WHITE
 
-If !Empty( cValue )
+   IF !Empty( cValue )
 
-   // Поиск начинается со следующей строки таблицы
+      // Поиск начинается со следующей строки таблицы
 
-   For Cycle := nPos to nCount
+      FOR Cycle := nPos to nCount
 
-     If ( lFound := IsFound( cValue, wStock.grdContent.Item( Cycle )[ 1 ] ) )
-        wStock.grdContent.Value := Cycle
-        Exit
-     Endif
+         IF ( lFound := IsFound( cValue, wStock.grdContent.Item( Cycle )[ 1 ] ) )
+            wStock.grdContent.Value := Cycle
+            EXIT
+         ENDIF
 
-   Next
+      NEXT
 
-   // Выделяем цветом поле поискового значения, если выражение не обнаружено
+      // Выделяем цветом поле поискового значения, если выражение не обнаружено
 
-   If !lFound
-      wStock.txbSearch.Backcolor := { 255, 127, 127 }
-   Endif
+      IF !lFound
+         wStock.txbSearch.Backcolor := { 255, 127, 127 }
+      ENDIF
 
-Endif
+   ENDIF
 
-Return
+   RETURN
 
-****** End of QSeek ******
+   ****** End of QSeek ******
 
+   /******
+   *       FindAll()
+   *       Find all matched enties
+   */
 
-/******
-*
-*       FindAll()
-*
-*       Find all matched enties
-*
-*/
+STATIC PROCEDURE FindAll
 
-Static Procedure FindAll
-Memvar aOptions
-Local cValue   := AllTrim( wStock.txbSearch.Value )                               , ;
+   MEMVAR aOptions
+   LOCAL cValue   := AllTrim( wStock.txbSearch.Value )                               , ;
       nCount   := wStock.grdContent.ItemCount                                     , ;
       aStrings := GetLangStrings( GET_FINDALL_LANG, aOptions[ OPTIONS_LANGFILE ] ), ;
       aMatches := {}                                                              , ;
@@ -902,215 +850,204 @@ Local cValue   := AllTrim( wStock.txbSearch.Value )                             
       cItem                                                                       , ;
       cFile
 
-wStock.btnSearch.Enabled  := !Empty( cValue )
-wStock.btnFindAll.Enabled := !Empty( cValue )
+   wStock.btnSearch.Enabled  := !Empty( cValue )
+   wStock.btnFindAll.Enabled := !Empty( cValue )
 
-If !Empty( cValue )
+   IF !Empty( cValue )
 
-   Define window wFindAll     ;
-       At 0, 0                ;
-       Width 350              ;
-       Height 300             ;
-       Title aStrings[ 1, 2 ] ;
-       Icon 'STOCK'           ;
-       Modal
+      DEFINE WINDOW wFindAll     ;
+            At 0, 0                ;
+            Width 350              ;
+            Height 300             ;
+            Title aStrings[ 1, 2 ] ;
+            Icon 'STOCK'           ;
+            Modal
 
-      @ 10, 5 Label lblName                                    ;
-              Value ( aStrings[ 1, 2 ] + ' [' + cValue + ']' ) ;
-              Width 330                                        ;
-              Height 18                                        ;
-              Bold                                             ;
-              FontColor BLUE
+         @ 10, 5 Label lblName                                    ;
+            Value ( aStrings[ 1, 2 ] + ' [' + cValue + ']' ) ;
+            Width 330                                        ;
+            Height 18                                        ;
+            Bold                                             ;
+            FontColor BLUE
 
-      @ ( wFindAll.lblName.Row + wFindAll.lblName.Height + 3 ), wFindAll.lblName.Col ; 
-        Grid grdMatches                                                  ;
-        Width 330                                                        ;
-        Height 200                                                       ;
-        Headers { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
-        Widths { 150, 100, 200 }                                         ;
-        Font 'Tahoma' Size 10                                            ;
-        NoLines                                                          ;
-        On DblClick Do_GoTo( aMatches )
+         @ ( wFindAll.lblName.Row + wFindAll.lblName.Height + 3 ), wFindAll.lblName.Col ;
+            Grid grdMatches                                                  ;
+            Width 330                                                        ;
+            Height 200                                                       ;
+            Headers { aStrings[ 3, 2 ], aStrings[ 4, 2 ], aStrings[ 5, 2 ] } ;
+            Widths { 150, 100, 200 }                                         ;
+            Font 'Tahoma' Size 10                                            ;
+            NoLines                                                          ;
+            On DblClick Do_GoTo( aMatches )
 
-      @ ( wFindAll.grdMatches.Row + wFindAll.grdMatches.Height + 10 ), ;
-        ( wFindAll.grdMatches.Col + 55 )                               ;
-        Button btnGoto                                                 ;
-        Caption aStrings[ 6, 2 ]                                       ;
-        Action Do_GoTo( aMatches ) 
+         @ ( wFindAll.grdMatches.Row + wFindAll.grdMatches.Height + 10 ), ;
+            ( wFindAll.grdMatches.Col + 55 )                               ;
+            Button btnGoto                                                 ;
+            Caption aStrings[ 6, 2 ]                                       ;
+            Action Do_GoTo( aMatches )
 
-      @ wFindAll.btnGoto.Row, ( wFindAll.btnGoto.Col + wFindAll.btnGoto.Width + 30 ) ;
-        Button btnCancel                                                             ;
-        Caption _HMG_MESSAGE[ 7 ]                                                    ;
-        Action wFindAll.Release 
+         @ wFindAll.btnGoto.Row, ( wFindAll.btnGoto.Col + wFindAll.btnGoto.Width + 30 ) ;
+            Button btnCancel                                                             ;
+            Caption _HMG_MESSAGE[ 7 ]                                                    ;
+            Action wFindAll.Release
 
-      On key Escape of wFindAll Action wFindAll.Release
-      On key Alt+X  of wFindAll Action ReleaseAllWindows()
+         On key Escape of wFindAll Action wFindAll.Release
+         On key Alt+X  of wFindAll Action ReleaseAllWindows()
 
-   End window
+      END WINDOW
 
-   // Отобрать все вхождения
+      // Отобрать все вхождения
 
-   wFindAll.grdMatches.DeleteAllItems
-   
-   For Cycle := 1 to nCount
+      wFindAll.grdMatches.DeleteAllItems
 
-     cItem := wStock.grdContent.Item( Cycle )[ 1 ]
-     
-     If !( Left( cItem, 1 ) == Space( 1 ) )
-        cFile := AllTrim( cItem )
-     Endif 
+      FOR Cycle := 1 to nCount
 
-     cItem := AllTrim( cItem )
-     
-     If IsFound( cValue, cItem )
-        AAdd( aMatches, Cycle )
-        wFindAll.grdMatches.AddItem( { cItem, cFile, wStock.grdContent.Item( Cycle )[ 2 ] } )
-     Endif
+         cItem := wStock.grdContent.Item( Cycle )[ 1 ]
 
-   Next
-   
-   If Empty( wFindAll.grdMatches.ItemCount )
-      wFindAll.btnGoto.Enabled := .F.
-   Else
-      wFindAll.grdMatches.Value := 1
-   Endif
+         IF !( Left( cItem, 1 ) == Space( 1 ) )
+            cFile := AllTrim( cItem )
+         ENDIF
 
-   CenterInside( 'wStock', 'wFindAll' )
-   Activate window wFindAll
+         cItem := AllTrim( cItem )
 
-Endif
+         IF IsFound( cValue, cItem )
+            AAdd( aMatches, Cycle )
+            wFindAll.grdMatches.AddItem( { cItem, cFile, wStock.grdContent.Item( Cycle )[ 2 ] } )
+         ENDIF
 
-Return
+      NEXT
 
-****** End of FindAll ******
+      IF Empty( wFindAll.grdMatches.ItemCount )
+         wFindAll.btnGoto.Enabled := .F.
+      ELSE
+         wFindAll.grdMatches.Value := 1
+      ENDIF
 
+      CenterInside( 'wStock', 'wFindAll' )
+      ACTIVATE WINDOW wFindAll
 
-/******
-*
-*       Do_GoTo( aMatches )
-*
-*       Go to selected position
-*
-*/
+   ENDIF
 
-Static Procedure Do_GoTo( aMatches )
-Local nPos := wFindAll.grdMatches.Value
+   RETURN
 
-If !Empty( nPos )
-   nPos := aMatches[ nPos ]
-   wFindAll.Release
-   wStock.grdContent.Value := nPos
-Endif
+   ****** End of FindAll ******
 
-Return
+   /******
+   *       Do_GoTo( aMatches )
+   *       Go to selected position
+   */
 
-****** End of Do_GoTo ******
+STATIC PROCEDURE Do_GoTo( aMatches )
 
+   LOCAL nPos := wFindAll.grdMatches.Value
 
-/******
-*
-*       GetNameFunction() --> cName
-*
-*       Reading the cell value (function name)
-*
-*/
+   IF !Empty( nPos )
+      nPos := aMatches[ nPos ]
+      wFindAll.Release
+      wStock.grdContent.Value := nPos
+   ENDIF
 
-Static Function GetNameFunction
-Local nValue := wStock.grdContent.Value
-Return AllTrim( wStock.grdContent.Cell( nValue, 1 ) )
+   RETURN
 
-****** End of GetNameFunction ******
+   ****** End of Do_GoTo ******
 
+   /******
+   *       GetNameFunction() --> cName
+   *       Reading the cell value (function name)
+   */
 
-/******
-*
-*       SaveList()
-*
-*       Saving of list to file
-*
-*/
+STATIC FUNCTION GetNameFunction
 
-Static Procedure SaveList
-Memvar aOptions
-Local cFile                                  , ;
+   LOCAL nValue := wStock.grdContent.Value
+
+   RETURN AllTrim( wStock.grdContent.Cell( nValue, 1 ) )
+
+   ****** End of GetNameFunction ******
+
+   /******
+   *       SaveList()
+   *       Saving of list to file
+   */
+
+STATIC PROCEDURE SaveList
+
+   MEMVAR aOptions
+   LOCAL cFile                                  , ;
       nLen     := wStock.grdContent.ItemCount, ;
       Cycle                                  , ;
-      cNum                                   , ; 
+      cNum                                   , ;
       aStrings := GetLangStrings( GET_SYSDIALOGS_LANG, aOptions[ OPTIONS_LANGFILE ] )
 
-cFile := PutFile( { { aStrings[ 3, 2 ], '*.txt' }, ;
-                    { aStrings[ 5, 2 ], '*.*'   }  ;
-                  }                              , ;
-                  aStrings[ 7, 2 ]               , ;
-                  DATA_PATH                      , ;
-                  .T.                              ;
-                )
+   cFile := PutFile( { { aStrings[ 3, 2 ], '*.txt' }, ;
+      { aStrings[ 5, 2 ], '*.*'   }  ;
+      }                              , ;
+      aStrings[ 7, 2 ]               , ;
+      DATA_PATH                      , ;
+      .T.                              ;
+      )
 
-If !Empty( cFile )
+   IF !Empty( cFile )
 
-   wStock.grdContent.Enabled  := .F.
-   cNum                       := LTrim( Str( nLen ) )
+      wStock.grdContent.Enabled  := .F.
+      cNum                       := LTrim( Str( nLen ) )
 
-   Set alternate to ( cFile )
-   Set console off
-   Set alternate on
+      SET ALTERNATE TO ( cFile )
+      SET CONSOLE OFF
+      SET ALTERNATE ON
 
-   // Маршрут к ресурсам текущего каталога, описание
+      // Маршрут к ресурсам текущего каталога, описание
 
-   ?? SOURCE_PATH + aOptions[ OPTIONS_GETPATH ]
-   ?
-   ?? SOURCE_TITLE + aOptions[ OPTIONS_TITLE ]
-   ?
+      ?? SOURCE_PATH + aOptions[ OPTIONS_GETPATH ]
+      ?
+      ?? SOURCE_TITLE + aOptions[ OPTIONS_TITLE ]
+      ?
 
-   For Cycle := 1 to nLen
+      FOR Cycle := 1 to nLen
 
-     wStock.Statusbar.Item( 1 ) := AllTrim( wStock.grdContent.Item( Cycle )[ 1 ] )
-     wStock.Statusbar.Item( 2 ) := ( LTrim( Str( Cycle ) ) + '/' + cNum )
+         wStock.Statusbar.Item( 1 ) := AllTrim( wStock.grdContent.Item( Cycle )[ 1 ] )
+         wStock.Statusbar.Item( 2 ) := ( LTrim( Str( Cycle ) ) + '/' + cNum )
 
-     ?? PadR( wStock.grdContent.Item( Cycle )[ 1 ], SPACES_TO_NAME ) + Chr( K_TAB )
-     ?? PadR( wStock.grdContent.Item( Cycle )[ 2 ], SPACES_TO_TYPE ) + Chr( K_TAB )
-     ?? wStock.grdContent.Item( Cycle )[ 3 ]
-     ?
-   Next
+         ?? PadR( wStock.grdContent.Item( Cycle )[ 1 ], SPACES_TO_NAME ) + Chr( K_TAB )
+         ?? PadR( wStock.grdContent.Item( Cycle )[ 2 ], SPACES_TO_TYPE ) + Chr( K_TAB )
+         ?? wStock.grdContent.Item( Cycle )[ 3 ]
+         ?
+      NEXT
 
-   Set alternate off
-   Set console on
-   Set alternate to
+      SET ALTERNATE OFF
+      SET CONSOLE ON
+      SET ALTERNATE TO
 
-   // Запомнить файл последнего каталога
+      // Запомнить файл последнего каталога
 
-   aOptions[ OPTIONS_LASTFILE ] := cFile
+      aOptions[ OPTIONS_LASTFILE ] := cFile
 
-   Begin ini file STOCK_INI
+      BEGIN INI FILE STOCK_INI
 
-     Set section 'MAIN' entry 'LastFile' to aOptions[ OPTIONS_LASTFILE ]
+         SET SECTION 'MAIN' entry 'LastFile' to aOptions[ OPTIONS_LASTFILE ]
 
-   End Ini
+      END INI
 
-   wStock.Statusbar.Item( 1 ) := aOptions[ OPTIONS_GETPATH ]
-   wStock.grdContent.Enabled  := .T.
-   wStock.grdContent.SetFocus
+      wStock.Statusbar.Item( 1 ) := aOptions[ OPTIONS_GETPATH ]
+      wStock.grdContent.Enabled  := .T.
+      wStock.grdContent.SetFocus
 
-   GridStatus()
+      GridStatus()
 
-Endif
+   ENDIF
 
-Return
+   RETURN
 
-****** End of SaveList ******
+   ****** End of SaveList ******
 
+   /******
+   *      LoadList( cFile )
+   *      Loading of list from file
+   */
 
-/******
-*
-*      LoadList( cFile )
-*
-*      Loading of list from file
-*
-*/
+STATIC PROCEDURE LoadList( cFile )
 
-Static Procedure LoadList( cFile )
-Memvar aOptions
-Local cString , ;
+   MEMVAR aOptions
+   LOCAL cString , ;
       oFile   , ;
       nPos    , ;
       cName   , ;
@@ -1118,627 +1055,600 @@ Local cString , ;
       cComment, ;
       aStrings
 
-If ( cFile == nil )
+   IF ( cFile == nil )
 
-   aStrings := GetLangStrings( GET_SYSDIALOGS_LANG, aOptions[ OPTIONS_LANGFILE ] )
+      aStrings := GetLangStrings( GET_SYSDIALOGS_LANG, aOptions[ OPTIONS_LANGFILE ] )
 
-   cFile := GetFile( { { aStrings[ 3, 2 ], '*.txt' } , ;
-                       { aStrings[ 5, 2 ], '*.*'   }   ;
-                     }                               , ;
-                     aStrings[ 1, 2 ]                , ;
-                     DATA_PATH                       , ;
-                     .F.                             , ;
-                     .T.                               ;
-                   )
-Endif
+      cFile := GetFile( { { aStrings[ 3, 2 ], '*.txt' } , ;
+         { aStrings[ 5, 2 ], '*.*'   }   ;
+         }                               , ;
+         aStrings[ 1, 2 ]                , ;
+         DATA_PATH                       , ;
+         .F.                             , ;
+         .T.                               ;
+         )
+   ENDIF
 
-If !Empty( cFile )
+   IF !Empty( cFile )
 
-   oFile := TFileRead() : New( cFile )
+      oFile := TFileRead() : New( cFile )
 
-   oFile : Open()
+      oFile : Open()
 
-   If !oFile : Error()
+      IF !oFile : Error()
 
-      // Запретить обновление и доступ к GRID
+         // Запретить обновление и доступ к GRID
 
-      wStock.grdContent.DisableUpdate
-      wStock.grdContent.Enabled := .F.
-      wStock.grdContent.DeleteAllItems
+         wStock.grdContent.DisableUpdate
+         wStock.grdContent.Enabled := .F.
+         wStock.grdContent.DeleteAllItems
 
-      wStock.Statusbar.Item( 1 ) := ''
-      wStock.Statusbar.Item( 2 ) := ''
+         wStock.Statusbar.Item( 1 ) := ''
+         wStock.Statusbar.Item( 2 ) := ''
 
-      // Сбрасываем действующее значение маршрута каталогизированных ресурсов.
+         // Сбрасываем действующее значение маршрута каталогизированных ресурсов.
 
-      aOptions[ OPTIONS_GETPATH ] := ''
+         aOptions[ OPTIONS_GETPATH ] := ''
 
-      Do while oFile : MoreToRead()
+         DO WHILE oFile : MoreToRead()
 
-         If !Empty( cString := oFile : ReadLine() )
+            IF !Empty( cString := oFile : ReadLine() )
 
-            // В первой строке - маршрут к каталогизированным ресурсам.
+               // В первой строке - маршрут к каталогизированным ресурсам.
 
-            If ( ( Left( cString, Len( SOURCE_PATH ) ) == SOURCE_PATH ) .and. ;
-                 Empty( aOptions[ OPTIONS_GETPATH ] )                         ;
-               )
-               aOptions[ OPTIONS_GETPATH ] := AllTrim( Substr( cString, ( Len( SOURCE_PATH ) + 1 ) ) )
-               Loop
+               IF ( ( Left( cString, Len( SOURCE_PATH ) ) == SOURCE_PATH ) .and. ;
+                     Empty( aOptions[ OPTIONS_GETPATH ] )                         ;
+                     )
+                  aOptions[ OPTIONS_GETPATH ] := AllTrim( Substr( cString, ( Len( SOURCE_PATH ) + 1 ) ) )
+                  LOOP
 
-            ElseIf ( ( Left( cString, Len( SOURCE_TITLE ) ) == SOURCE_TITLE ) .and. ;
+               ELSEIF ( ( Left( cString, Len( SOURCE_TITLE ) ) == SOURCE_TITLE ) .and. ;
                      Empty( aOptions[ OPTIONS_TITLE ] )                             ;
-                   )
-               aOptions[ OPTIONS_TITLE ] := AllTrim( Substr( cString, ( Len( SOURCE_TITLE ) +1 ) ) )
-               Loop
+                     )
+                  aOptions[ OPTIONS_TITLE ] := AllTrim( Substr( cString, ( Len( SOURCE_TITLE ) +1 ) ) )
+                  LOOP
 
-            Endif
+               ENDIF
 
-            // Заполнение таблицы
+               // Заполнение таблицы
 
-            If !Empty( nPos := At( Chr( K_TAB ), cString ) )
+               IF !Empty( nPos := At( Chr( K_TAB ), cString ) )
 
-               cType := cComment := ''
-               cName := Left( cString, ( nPos - 1 ) )
+                  cType := cComment := ''
+                  cName := Left( cString, ( nPos - 1 ) )
 
-               cString := Substr( cString, ( nPos + 1 ) )
+                  cString := Substr( cString, ( nPos + 1 ) )
 
-               If !Empty( nPos := At( Chr( K_TAB ), cString ) )
-                  cType    := AllTrim( Left( cString, ( nPos - 1 ) ) )
-                  cComment := AllTrim( Substr( cString, ( nPos + 1 ) ) )
-               Endif
+                  IF !Empty( nPos := At( Chr( K_TAB ), cString ) )
+                     cType    := AllTrim( Left( cString, ( nPos - 1 ) ) )
+                     cComment := AllTrim( Substr( cString, ( nPos + 1 ) ) )
+                  ENDIF
 
-               wStock.Statusbar.Item( 1 ) := AllTrim( cName )
-               AddToContent( cName, cType, cComment )
+                  wStock.Statusbar.Item( 1 ) := AllTrim( cName )
+                  AddToContent( cName, cType, cComment )
 
-            Endif
+               ENDIF
 
-         Endif
+            ENDIF
 
-      Enddo
+         ENDDO
 
-      oFile : Close()
+         oFile : Close()
 
-      wStock.Statusbar.Item( 1 ) := aOptions[ OPTIONS_GETPATH ]
-      wStock.Statusbar.Item( 2 ) := ''
+         wStock.Statusbar.Item( 1 ) := aOptions[ OPTIONS_GETPATH ]
+         wStock.Statusbar.Item( 2 ) := ''
 
-      StoreTitle()
+         StoreTitle()
 
-      wStock.grdContent.ColumnsAutoFit
-      wStock.grdContent.EnableUpdate
-      wStock.grdContent.Enabled := .T.
+         wStock.grdContent.ColumnsAutoFit
+         wStock.grdContent.EnableUpdate
+         wStock.grdContent.Enabled := .T.
 
-      wStock.grdContent.Value := 1
-      wStock.grdContent.SetFocus
+         wStock.grdContent.Value := 1
+         wStock.grdContent.SetFocus
 
-      // Запомнить файл последнего каталога
+         // Запомнить файл последнего каталога
 
-      aOptions[ OPTIONS_LASTFILE ] := cFile
+         aOptions[ OPTIONS_LASTFILE ] := cFile
 
-      Begin ini file STOCK_INI
+         BEGIN INI FILE STOCK_INI
 
-        Set section 'MAIN' entry 'LastFile' to aOptions[ OPTIONS_LASTFILE ]
+            SET SECTION 'MAIN' entry 'LastFile' to aOptions[ OPTIONS_LASTFILE ]
 
-      End Ini
+         END INI
 
-   Endif
+      ENDIF
 
-Endif
+   ENDIF
 
-SetState()
-GridStatus()
+   SetState()
+   GridStatus()
 
-Return
+   RETURN
 
-****** End of LoadList ******
+   ****** End of LoadList ******
 
+   /******
+   *       SetTitle()
+   *       Input/editing of the catalog name
+   */
 
-/******
-*
-*       SetTitle()
-*
-*       Input/editing of the catalog name
-*
-*/
+STATIC PROCEDURE SetTitle
 
-Static Procedure SetTitle
-Memvar aOptions
-Local aStrings := GetLangStrings( GET_SETTITLE_LANG, aOptions[ OPTIONS_LANGFILE ] )
+   MEMVAR aOptions
+   LOCAL aStrings := GetLangStrings( GET_SETTITLE_LANG, aOptions[ OPTIONS_LANGFILE ] )
 
-Define window wSetTitle       ;
-       At 132, 235            ;
-       Width 406              ;
-       Height 142             ;
-       Title aStrings[ 1, 2 ] ;
-       Icon 'STOCK'           ;
-       Modal
+   DEFINE WINDOW wSetTitle       ;
+         At 132, 235            ;
+         Width 406              ;
+         Height 142             ;
+         Title aStrings[ 1, 2 ] ;
+         Icon 'STOCK'           ;
+         Modal
 
-   @ 10, 5 Label lblName          ;
-           Value aStrings[ 2, 2 ] ;
-           Width 100              ;
-           Height 18              ;
-           Bold                   ;
-           FontColor BLUE
+      @ 10, 5 Label lblName          ;
+         Value aStrings[ 2, 2 ] ;
+         Width 100              ;
+         Height 18              ;
+         Bold                   ;
+         FontColor BLUE
 
-   @ ( wSetTitle.lblName.Row + wSetTitle.lblName.Height + 10 ), wSetTitle.lblName.Col ;
-     TextBox txbName                 ;
-     Height 20                       ;
-     Value aOptions[ OPTIONS_TITLE ]
+      @ ( wSetTitle.lblName.Row + wSetTitle.lblName.Height + 10 ), wSetTitle.lblName.Col ;
+         TEXTBox txbName                 ;
+         Height 20                       ;
+         Value aOptions[ OPTIONS_TITLE ]
 
-   @ ( wSetTitle.txbName.Row + wSetTitle.txbName.Height + 15 ), 150               ;
-     Button btnOK                                                                 ;
-     Caption _HMG_MESSAGE[ 6 ]                                                    ;
-     Action { || aOptions[ OPTIONS_TITLE ] := AllTrim( wSetTitle.txbName.Value ), ;
-                 StoreTitle()                                                   , ;
-                 ThisWindow.Release                                               ;
-            }
+      @ ( wSetTitle.txbName.Row + wSetTitle.txbName.Height + 15 ), 150               ;
+         Button btnOK                                                                 ;
+         Caption _HMG_MESSAGE[ 6 ]                                                    ;
+         Action { || aOptions[ OPTIONS_TITLE ] := AllTrim( wSetTitle.txbName.Value ), ;
+         StoreTitle()                                                   , ;
+         ThisWindow.Release                                               ;
+         }
 
-   @ wSetTitle.btnOk.Row, ( wSetTitle.btnOk.Col + wSetTitle.btnOk.Width + 25 ) ;
-     Button btnCancel          ;
-     Caption _HMG_MESSAGE[ 7 ] ;
-     Action ThisWindow.Release
+      @ wSetTitle.btnOk.Row, ( wSetTitle.btnOk.Col + wSetTitle.btnOk.Width + 25 ) ;
+         Button btnCancel          ;
+         Caption _HMG_MESSAGE[ 7 ] ;
+         Action ThisWindow.Release
 
-   On key Escape of wSetTitle Action wSetTitle.Release
-   On key Alt+X  of wSetTitle Action ReleaseAllWindows()
+      On key Escape of wSetTitle Action wSetTitle.Release
+      On key Alt+X  of wSetTitle Action ReleaseAllWindows()
 
-End window
+   END WINDOW
 
-wSetTitle.txbName.Width := ( wSetTitle.Width - 2 * wSetTitle.txbName.Col  - ;
-                             2 * GetBorderWidth() )
-wSetTitle.txbName.SetFocus
+   wSetTitle.txbName.Width := ( wSetTitle.Width - 2 * wSetTitle.txbName.Col  - ;
+      2 * GetBorderWidth() )
+   wSetTitle.txbName.SetFocus
 
-CenterInside( 'wStock', 'wSetTitle')
-Activate window wSetTitle
+   CenterInside( 'wStock', 'wSetTitle')
+   ACTIVATE WINDOW wSetTitle
 
-Return
+   RETURN
 
-****** End of SetTitle ******
+   ****** End of SetTitle ******
 
+   /******
+   *       StoreTitle()
+   *       Output of the catalog name in the title of main form
+   */
 
-/******
-*
-*       StoreTitle()
-*
-*       Output of the catalog name in the title of main form
-*
-*/
+STATIC PROCEDURE StoreTitle
 
-Static Procedure StoreTitle
-Memvar aOptions
+   MEMVAR aOptions
 
-wStock.Title := ( APPTITLE + Iif( !Empty( aOptions[ OPTIONS_TITLE ] )  , ;
-                                  ( ' - ' + aOptions[ OPTIONS_TITLE ] ), ;
-                                  '' )                                   ;
-                )
+   wStock.Title := ( APPTITLE + Iif( !Empty( aOptions[ OPTIONS_TITLE ] )  , ;
+      ( ' - ' + aOptions[ OPTIONS_TITLE ] ), ;
+      '' )                                   ;
+      )
 
-Return
+   RETURN
 
-****** End of StoreTitle ******
+   ****** End of StoreTitle ******
 
+   /******
+   *       Options()
+   *       Program tuning
+   */
 
-/******
-*
-*       Options()
-*
-*       Program tuning
-*
-*/
+STATIC PROCEDURE Options
 
-Static Procedure Options
-Memvar aOptions
-Local aStrings := GetLangStrings( GET_OPTIONSFORM_LANG, aOptions[ OPTIONS_LANGFILE ] ), ;
+   MEMVAR aOptions
+   LOCAL aStrings := GetLangStrings( GET_OPTIONSFORM_LANG, aOptions[ OPTIONS_LANGFILE ] ), ;
       aLang    := GetLangStrings( GET_SYSDIALOGS_LANG, aOptions[ OPTIONS_LANGFILE ] )
 
-Define window wOptions        ;
-       At 132, 235            ;
-       Width 433              ;
-       Height 309             ;
-       Title aStrings[ 1, 2 ] ;
-       Icon 'STOCK'           ;
-       Modal
+   DEFINE WINDOW wOptions        ;
+         At 132, 235            ;
+         Width 433              ;
+         Height 309             ;
+         Title aStrings[ 1, 2 ] ;
+         Icon 'STOCK'           ;
+         Modal
 
-   @ 5, 5 Frame frmOnStart         ;
-          Caption aStrings[ 2, 2 ] ;
-          Width 205                ;
-          Height 75                ;
-          Bold                     ;
-          Fontcolor BLUE
+      @ 5, 5 Frame frmOnStart         ;
+         Caption aStrings[ 2, 2 ] ;
+         Width 205                ;
+         Height 75                ;
+         Bold                     ;
+         Fontcolor BLUE
 
-   @ ( wOptions.frmOnStart.Row + 15 ), ( wOptions.frmOnStart.Col + 10 ) ;
-     RadioGroup rdgOnStart                                              ;
-     Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                     ;
-     Width 185                                                          ;
-     Value aOptions[ OPTIONS_ONSTART ]
+      @ ( wOptions.frmOnStart.Row + 15 ), ( wOptions.frmOnStart.Col + 10 ) ;
+         RadioGroup rdgOnStart                                              ;
+         Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                     ;
+         Width 185                                                          ;
+         Value aOptions[ OPTIONS_ONSTART ]
 
-   @ wOptions.frmOnStart.Row                                           , ;
-     ( wOptions.frmOnStart.Col + wOptions.frmOnStart.Width + 5 )         ;
-     Frame frmSearch                                                     ;
-     Caption aStrings[ 5, 2 ]                                            ;
-     Width wOptions.frmOnStart.Width Height wOptions.frmOnStart.Height   ;
-     Bold                                                                ;
-     Fontcolor BLUE
+      @ wOptions.frmOnStart.Row                                           , ;
+         ( wOptions.frmOnStart.Col + wOptions.frmOnStart.Width + 5 )         ;
+         Frame frmSearch                                                     ;
+         Caption aStrings[ 5, 2 ]                                            ;
+         Width wOptions.frmOnStart.Width Height wOptions.frmOnStart.Height   ;
+         Bold                                                                ;
+         Fontcolor BLUE
 
-   @ wOptions.rdgOnStart.Row, ( wOptions.frmSearch.Col + 15 ) ;
-     RadioGroup rdgSearch                                     ;
-     Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ] }           ;
-     Width 165                                                ;
-     Value aOptions[ OPTIONS_SEARCH ]
+      @ wOptions.rdgOnStart.Row, ( wOptions.frmSearch.Col + 15 ) ;
+         RadioGroup rdgSearch                                     ;
+         Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ] }           ;
+         Width 165                                                ;
+         Value aOptions[ OPTIONS_SEARCH ]
 
-   @ ( wOptions.frmOnStart.Row + wOptions.frmOnStart.Height + 5 )      , ;
-     wOptions.frmOnStart.Col                                             ;
-     Frame frmEditor                                                     ;
-     Caption aStrings[ 8, 2 ]                                            ;
-     Width ( wOptions.frmOnStart.Width + wOptions.frmSearch.Width + 5 )  ;
-     Height 140                                                          ;
-     Bold                                                                ;
-     Fontcolor BLUE
+      @ ( wOptions.frmOnStart.Row + wOptions.frmOnStart.Height + 5 )      , ;
+         wOptions.frmOnStart.Col                                             ;
+         Frame frmEditor                                                     ;
+         Caption aStrings[ 8, 2 ]                                            ;
+         Width ( wOptions.frmOnStart.Width + wOptions.frmSearch.Width + 5 )  ;
+         Height 140                                                          ;
+         Bold                                                                ;
+         Fontcolor BLUE
 
-   @ ( wOptions.frmEditor.Row + 25 ), ( wOptions.frmEditor.Col + 10 ) ;
-     Textbox txbEditor                                                ;
-     Value aOptions[ OPTIONS_EDITOR ]                                 ;
-     Height 20                                                        ;
-     Width ( wOptions.frmEditor.Width - 45 )
+      @ ( wOptions.frmEditor.Row + 25 ), ( wOptions.frmEditor.Col + 10 ) ;
+         TEXTbox txbEditor                                                ;
+         Value aOptions[ OPTIONS_EDITOR ]                                 ;
+         Height 20                                                        ;
+         Width ( wOptions.frmEditor.Width - 45 )
 
-   @ wOptions.txbEditor.Row                                          , ;
-     ( wOptions.txbEditor.Col + wOptions.txbEditor.Width + 5 )         ;
-     Button btnSearch                                                  ;
-     Picture 'FIND'                                                    ;
-     Action { |cFile| cFile  := GetFile( { { aLang[ 4, 2 ], '*.exe' }, ;
-                                           { aLang[ 5, 2 ], '*.*'   }  ;
-                                         }                           , ;
-                                         aLang[ 2, 2 ]             , , ;
-                                         .F.                         , ;
-                                         .T.                           ;
-                                       )                             , ;
-                      Iif( !Empty( cFile )                           , ;
-                           SetProperty( 'wOptions', 'txbEditor', 'Value', cFile ), ) ;
-             }                                                                       ;
-     Width 20 Height 20
+      @ wOptions.txbEditor.Row                                          , ;
+         ( wOptions.txbEditor.Col + wOptions.txbEditor.Width + 5 )         ;
+         Button btnSearch                                                  ;
+         Picture 'FIND'                                                    ;
+         Action { |cFile| cFile  := GetFile( { { aLang[ 4, 2 ], '*.exe' }, ;
+         { aLang[ 5, 2 ], '*.*'   }  ;
+         }                           , ;
+         aLang[ 2, 2 ]             , , ;
+         .F.                         , ;
+         .T.                           ;
+         )                             , ;
+         Iif( !Empty( cFile )                           , ;
+         SetProperty( 'wOptions', 'txbEditor', 'Value', cFile ), ) ;
+         }                                                                       ;
+         Width 20 Height 20
 
-   @ ( wOptions.txbEditor.Row + 25 ), wOptions.txbEditor.Col            ;
-     RadioGroup rdgParameters                                           ;
-     Options { aStrings[ 9, 2 ], aStrings[ 10, 2 ], aStrings[ 11, 2 ] } ; 
-     Width 270                                                          ;
-     Spacing 28                                                         ;
-     Value aOptions[ OPTIONS_RUNMODE ]                                  ;
-     On change EnableParameters()
+      @ ( wOptions.txbEditor.Row + 25 ), wOptions.txbEditor.Col            ;
+         RadioGroup rdgParameters                                           ;
+         Options { aStrings[ 9, 2 ], aStrings[ 10, 2 ], aStrings[ 11, 2 ] } ;
+         Width 270                                                          ;
+         Spacing 28                                                         ;
+         Value aOptions[ OPTIONS_RUNMODE ]                                  ;
+         On change EnableParameters()
 
-   @ ( wOptions.rdgParameters.Row + 30 )                              , ;
-     ( wOptions.rdgParameters.Col + wOptions.rdgParameters.Width + 5 )  ;
-     Textbox txbWithNumber                                              ;
-     Height 20                                                          ;
-     Width 120
+      @ ( wOptions.rdgParameters.Row + 30 )                              , ;
+         ( wOptions.rdgParameters.Col + wOptions.rdgParameters.Width + 5 )  ;
+         TEXTbox txbWithNumber                                              ;
+         Height 20                                                          ;
+         Width 120
 
-   @ ( wOptions.txbWithNumber.Row + 30 ), wOptions.txbWithNumber.Col ;
-     Textbox txbWithName                                             ;
-     Height 20                                                       ;
-     Width 120
+      @ ( wOptions.txbWithNumber.Row + 30 ), wOptions.txbWithNumber.Col ;
+         TEXTbox txbWithName                                             ;
+         Height 20                                                       ;
+         Width 120
 
-   @ ( wOptions.Height - 70 ), 80 Button btnOk Caption _HMG_MESSAGE[ 6 ] ;
-     Action { || SaveOptions(), wOptions.Release }
+      @ ( wOptions.Height - 70 ), 80 Button btnOk Caption _HMG_MESSAGE[ 6 ] ;
+         Action { || SaveOptions(), wOptions.Release }
 
-   @ wOptions.btnOk.Row, ( wOptions.btnOk.Col + wOptions.btnOk.Width + 70 ) ;
-     Button btnCancel Caption _HMG_MESSAGE[ 7 ]                             ;
-     Action wOptions.Release
+      @ wOptions.btnOk.Row, ( wOptions.btnOk.Col + wOptions.btnOk.Width + 70 ) ;
+         Button btnCancel Caption _HMG_MESSAGE[ 7 ]                             ;
+         Action wOptions.Release
 
-   On key Escape of wOptions Action wOptions.Release
-   On key Alt+X  of wOptions Action ReleaseAllWindows()
+      On key Escape of wOptions Action wOptions.Release
+      On key Alt+X  of wOptions Action ReleaseAllWindows()
 
-End window
+   END WINDOW
 
-// Отображаемые значения и установка доступа к элементам диалога
+   // Отображаемые значения и установка доступа к элементам диалога
 
-Do case
-   Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_SIMPLEOPEN )
-     wOptions.txbWithNumber.Value := ''
-     wOptions.txbWithName.Value   := ''
+   DO CASE
+   CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_SIMPLEOPEN )
+      wOptions.txbWithNumber.Value := ''
+      wOptions.txbWithName.Value   := ''
 
-   Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_GOTO )
-     wOptions.txbWithNumber.Value := aOptions[ OPTIONS_EDITOR_PARMS ]
-     wOptions.txbWithName.Value   := ''
+   CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_GOTO )
+      wOptions.txbWithNumber.Value := aOptions[ OPTIONS_EDITOR_PARMS ]
+      wOptions.txbWithName.Value   := ''
 
-   Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_FIND )
-     wOptions.txbWithNumber.Value := ''
-     wOptions.txbWithName.Value   := aOptions[ OPTIONS_EDITOR_PARMS ]
+   CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_FIND )
+      wOptions.txbWithNumber.Value := ''
+      wOptions.txbWithName.Value   := aOptions[ OPTIONS_EDITOR_PARMS ]
 
-Endcase
+   ENDCASE
 
-EnableParameters()
+   EnableParameters()
 
-CenterInside( 'wStock', 'wOptions' )
-Activate window wOptions
+   CenterInside( 'wStock', 'wOptions' )
+   ACTIVATE WINDOW wOptions
 
-Return
+   RETURN
 
-****** End of Options ******
+   ****** End of Options ******
 
+   /******
+   *       EnableParameters()
+   *       Administration for the edition of complementary parameters
+   *       for editor launching
+   */
 
-/******
-*
-*       EnableParameters()
-*
-*       Administration for the edition of complementary parameters
-*       for editor launching
-*
-*/
+STATIC PROCEDURE EnableParameters
 
-Static Procedure EnableParameters
+   DO CASE
+   CASE ( wOptions.rdgParameters.Value == EDITOR_SIMPLEOPEN )
+      wOptions.txbWithNumber.Enabled := .F.
+      wOptions.txbWithName.Enabled   := .F.
 
-Do case
-   Case ( wOptions.rdgParameters.Value == EDITOR_SIMPLEOPEN )
-     wOptions.txbWithNumber.Enabled := .F.
-     wOptions.txbWithName.Enabled   := .F.
+   CASE ( wOptions.rdgParameters.Value == EDITOR_GOTO )
+      wOptions.txbWithNumber.Enabled := .T.
+      wOptions.txbWithName.Enabled   := .F.
 
-   Case ( wOptions.rdgParameters.Value == EDITOR_GOTO )
-     wOptions.txbWithNumber.Enabled := .T.
-     wOptions.txbWithName.Enabled   := .F.
+   CASE ( wOptions.rdgParameters.Value == EDITOR_FIND )
+      wOptions.txbWithNumber.Enabled := .F.
+      wOptions.txbWithName.Enabled   := .T.
 
-   Case ( wOptions.rdgParameters.Value == EDITOR_FIND )
-     wOptions.txbWithNumber.Enabled := .F.
-     wOptions.txbWithName.Enabled   := .T.
+   ENDCASE
 
-Endcase
+   RETURN
 
-Return
+   ****** End of EnableParameters ******
 
-****** End of EnableParameters ******
+   /******
+   *       SaveOptions()
+   *       Preservation the options
+   */
 
+STATIC PROCEDURE SaveOptions
 
-/******
-*
-*       SaveOptions()
-*
-*       Preservation the options
-*
-*/
+   MEMVAR aOptions
 
-Static Procedure SaveOptions
-Memvar aOptions
+   BEGIN INI FILE STOCK_INI
 
-Begin ini file STOCK_INI
+      SET SECTION 'MAIN' entry 'OnStart' to wOptions.rdgOnStart.Value
+      aOptions[ OPTIONS_ONSTART ] := wOptions.rdgOnStart.Value
 
-  Set section 'MAIN' entry 'OnStart' to wOptions.rdgOnStart.Value
-  aOptions[ OPTIONS_ONSTART ] := wOptions.rdgOnStart.Value
+      SET SECTION 'MAIN' entry 'Search'  to wOptions.rdgSearch.Value
+      aOptions[ OPTIONS_SEARCH ] := wOptions.rdgSearch.Value
 
-  Set section 'MAIN' entry 'Search'  to wOptions.rdgSearch.Value
-  aOptions[ OPTIONS_SEARCH ] := wOptions.rdgSearch.Value
+      SET SECTION 'EDITOR' entry 'Editor'  to AllTrim( wOptions.txbEditor.Value )
+      aOptions[ OPTIONS_EDITOR ] := AllTrim( wOptions.txbEditor.Value )
 
-  Set section 'EDITOR' entry 'Editor'  to AllTrim( wOptions.txbEditor.Value )
-  aOptions[ OPTIONS_EDITOR ] := AllTrim( wOptions.txbEditor.Value )
+      SET SECTION 'EDITOR' entry 'RunWith' to wOptions.rdgParameters.Value
+      aOptions[ OPTIONS_RUNMODE ] := wOptions.rdgParameters.Value
 
-  Set section 'EDITOR' entry 'RunWith' to wOptions.rdgParameters.Value
-  aOptions[ OPTIONS_RUNMODE ] := wOptions.rdgParameters.Value
+      DO CASE
+      CASE ( wOptions.rdgParameters.Value == EDITOR_SIMPLEOPEN ) // Открыть файл в редакторе (без условий)
+         SET SECTION 'EDITOR' entry 'EditParms' to ''
+         aOptions[ OPTIONS_EDITOR_PARMS ] := ''
 
-  Do case
-     Case ( wOptions.rdgParameters.Value == EDITOR_SIMPLEOPEN ) // Открыть файл в редакторе (без условий)
-       Set section 'EDITOR' entry 'EditParms' to ''
-       aOptions[ OPTIONS_EDITOR_PARMS ] := ''
+      CASE ( wOptions.rdgParameters.Value == EDITOR_GOTO )       // Открыть и перейти на строку
+         SET SECTION 'EDITOR' entry 'EditParms' to AllTrim( wOptions.txbWithNumber.Value )
+         aOptions[ OPTIONS_EDITOR_PARMS ] := AllTrim( wOptions.txbWithNumber.Value )
 
-     Case ( wOptions.rdgParameters.Value == EDITOR_GOTO )       // Открыть и перейти на строку
-       Set section 'EDITOR' entry 'EditParms' to AllTrim( wOptions.txbWithNumber.Value )
-       aOptions[ OPTIONS_EDITOR_PARMS ] := AllTrim( wOptions.txbWithNumber.Value )
+      CASE ( wOptions.rdgParameters.Value == EDITOR_FIND )       // Открыть и передать выражение для поиска
+         SET SECTION 'EDITOR' entry 'EditParms' to AllTrim( wOptions.txbWithName.Value )
+         aOptions[ OPTIONS_EDITOR_PARMS ] := AllTrim( wOptions.txbWithName.Value )
 
-     Case ( wOptions.rdgParameters.Value == EDITOR_FIND )       // Открыть и передать выражение для поиска
-       Set section 'EDITOR' entry 'EditParms' to AllTrim( wOptions.txbWithName.Value )
-       aOptions[ OPTIONS_EDITOR_PARMS ] := AllTrim( wOptions.txbWithName.Value )
+      ENDCASE
 
-  Endcase
+   END INI
 
-End Ini
+   SetState()
 
-SetState()
+   RETURN
 
-Return
+   ****** End of SaveOptions ******
 
-****** End of SaveOptions ******
+   /******
+   *       ReadOptions() --> aOptions
+   *       Restoration the options
+   */
 
+STATIC FUNCTION ReadOptions
 
-/******
-*
-*       ReadOptions() --> aOptions
-*
-*       Restoration the options
-*
-*/
+   LOCAL aOptions := Array( OPTIONS_ALEN )
 
-Static Function ReadOptions
-Local aOptions := Array( OPTIONS_ALEN )
+   aOptions[ OPTIONS_ONSTART      ] := ONSTART_NONEACTION
+   aOptions[ OPTIONS_SEARCH       ] := SEARCH_EQUAL
+   aOptions[ OPTIONS_GETPATH      ] := ''
+   aOptions[ OPTIONS_TITLE        ] := ''
+   aOptions[ OPTIONS_LASTFILE     ] := ''
+   aOptions[ OPTIONS_EDITOR       ] := ''
+   aOptions[ OPTIONS_RUNMODE      ] := EDITOR_SIMPLEOPEN
+   aOptions[ OPTIONS_EDITOR_PARMS ] := ''
+   aOptions[ OPTIONS_LANGFILE     ] := ''
 
-aOptions[ OPTIONS_ONSTART      ] := ONSTART_NONEACTION
-aOptions[ OPTIONS_SEARCH       ] := SEARCH_EQUAL
-aOptions[ OPTIONS_GETPATH      ] := ''
-aOptions[ OPTIONS_TITLE        ] := ''
-aOptions[ OPTIONS_LASTFILE     ] := ''
-aOptions[ OPTIONS_EDITOR       ] := ''
-aOptions[ OPTIONS_RUNMODE      ] := EDITOR_SIMPLEOPEN
-aOptions[ OPTIONS_EDITOR_PARMS ] := ''
-aOptions[ OPTIONS_LANGFILE     ] := ''
+   IF File( STOCK_INI )
 
-If File( STOCK_INI )
+      BEGIN INI FILE STOCK_INI
+         GET aOptions[ OPTIONS_ONSTART      ] section 'MAIN'   entry 'OnStart'   Default ONSTART_NONEACTION
+         GET aOptions[ OPTIONS_SEARCH       ] section 'MAIN'   entry 'Search'    Default SEARCH_EQUAL
+         GET aOptions[ OPTIONS_LASTFILE     ] section 'MAIN'   entry 'LastFile'  Default ''
+         GET aOptions[ OPTIONS_LANGFILE     ] section 'MAIN'   entry 'LangFile'  Default ''
+         GET aOptions[ OPTIONS_EDITOR       ] section 'EDITOR' entry 'Editor'    Default ''
+         GET aOptions[ OPTIONS_RUNMODE      ] section 'EDITOR' entry 'RunWith'   Default EDITOR_SIMPLEOPEN
+         GET aOptions[ OPTIONS_EDITOR_PARMS ] section 'EDITOR' entry 'EditParms' Default ''
 
-   Begin ini file STOCK_INI
-     Get aOptions[ OPTIONS_ONSTART      ] section 'MAIN'   entry 'OnStart'   Default ONSTART_NONEACTION
-     Get aOptions[ OPTIONS_SEARCH       ] section 'MAIN'   entry 'Search'    Default SEARCH_EQUAL
-     Get aOptions[ OPTIONS_LASTFILE     ] section 'MAIN'   entry 'LastFile'  Default ''
-     Get aOptions[ OPTIONS_LANGFILE     ] section 'MAIN'   entry 'LangFile'  Default ''
-     Get aOptions[ OPTIONS_EDITOR       ] section 'EDITOR' entry 'Editor'    Default ''
-     Get aOptions[ OPTIONS_RUNMODE      ] section 'EDITOR' entry 'RunWith'   Default EDITOR_SIMPLEOPEN
-     Get aOptions[ OPTIONS_EDITOR_PARMS ] section 'EDITOR' entry 'EditParms' Default ''
+      END INI
 
-   End Ini
+   ENDIF
 
-Endif
+   RETURN aOptions
 
-Return aOptions
+   ****** End of ReadOptions ******
 
-****** End of ReadOptions ******
+   /******
+   *       CurrtFileName() --> cFile
+   *       To determine the program file Определить программный файл, allusive the current
+   *       (into list) procedure
+   */
 
+FUNCTION CurrFileName
 
-/******
-*
-*       CurrtFileName() --> cFile
-*
-*       To determine the program file Определить программный файл, allusive the current
-*       (into list) procedure
-*
-*/
-
-Function CurrFileName
-Local nPos   := wStock.grdContent.Value, ;
+   LOCAL nPos   := wStock.grdContent.Value, ;
       cFile  := ''
 
-// Ищем программный файл, содержащий текущий элемент.
+   // Ищем программный файл, содержащий текущий элемент.
 
-Do while .T.
+   DO WHILE .T.
 
-   If Empty( wStock.grdContent.Item( nPos )[ 2 ] )
-      cFile := AllTrim( wStock.grdContent.Item( nPos )[ 1 ] )
-      Exit
-   Endif
+      IF Empty( wStock.grdContent.Item( nPos )[ 2 ] )
+         cFile := AllTrim( wStock.grdContent.Item( nPos )[ 1 ] )
+         EXIT
+      ENDIF
 
-   nPos --
+      nPos --
 
-   If ( nPos <= 0 )
-      Exit
-   Endif
+      IF ( nPos <= 0 )
+         EXIT
+      ENDIF
 
-Enddo
+   ENDDO
 
-Return cFile
+   RETURN cFile
 
-****** End of CurrFileName ******
+   ****** End of CurrFileName ******
 
+   /******
+   *       OpenFile()
+   *       To open with external editor
+   */
 
-/******
-*
-*       OpenFile()
-*
-*       To open with external editor
-*
-*/
+STATIC PROCEDURE OpenFile
 
-Static Procedure OpenFile
-Memvar aOptions, cSearch, cString
-Local cFile  := CurrFileName(), ;
+   MEMVAR aOptions, cSearch, cString
+   LOCAL cFile  := CurrFileName(), ;
       nPos                    , ;
       cParms                  , ;
       oFile                   , ;
       Cycle  := 1
 
-Private cSearch, ;
-        cString
+   PRIVATE cSearch, ;
+      cString
 
-If !Empty( cFile )
+   IF !Empty( cFile )
 
-   cFile := ( aOptions[ OPTIONS_GETPATH ] + '\' + cFile )
+      cFile := ( aOptions[ OPTIONS_GETPATH ] + '\' + cFile )
 
-   Do case
-      Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_SIMPLEOPEN )  // Открыть файл в редакторе
-        Execute file ( aOptions[ OPTIONS_EDITOR ] ) Parameters cFile
+      DO CASE
+      CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_SIMPLEOPEN )  // Открыть файл в редакторе
+         EXECUTE FILE ( aOptions[ OPTIONS_EDITOR ] ) Parameters cFile
 
-      Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_GOTO )        // Открыть c переходом на строку
+      CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_GOTO )        // Открыть c переходом на строку
 
-        nPos    := wStock.grdContent.Value
-        cSearch := ''
+         nPos    := wStock.grdContent.Value
+         cSearch := ''
 
-        If ( !Empty( aOptions[ OPTIONS_EDITOR_PARMS ] ) .and. ;
-             !Empty( wStock.grdContent.Item( nPos )[ 2 ] )              ;
-           )
+         IF ( !Empty( aOptions[ OPTIONS_EDITOR_PARMS ] ) .and. ;
+               !Empty( wStock.grdContent.Item( nPos )[ 2 ] )              ;
+               )
 
-          // Формируем поисковое выражение
+            // Формируем поисковое выражение
 
-          If ( AllTrim( wStock.grdContent.Item( nPos )[ 2 ] ) == 'HB_FUNC' )
-             cSearch += '.and. ( "HB_FUNC" $ cString )'
-          Endif
+            IF ( AllTrim( wStock.grdContent.Item( nPos )[ 2 ] ) == 'HB_FUNC' )
+               cSearch += '.and. ( "HB_FUNC" $ cString )'
+            ENDIF
 
-          If ( 'Static' $ wStock.grdContent.Item( nPos )[ 2 ] )
-             cSearch += '.and. ( "STAT" $ cString )'
-          Endif
+            IF ( 'Static' $ wStock.grdContent.Item( nPos )[ 2 ] )
+               cSearch += '.and. ( "STAT" $ cString )'
+            ENDIF
 
-          If ( 'Procedure' $ wStock.grdContent.Item( nPos )[ 2 ] )
-             cSearch += '.and. ( "PROC" $ cString )'
-          Endif
+            IF ( 'Procedure' $ wStock.grdContent.Item( nPos )[ 2 ] )
+               cSearch += '.and. ( "PROC" $ cString )'
+            ENDIF
 
-          If ( 'Function' $ wStock.grdContent.Item( nPos )[ 2 ] )
-             cSearch += '.and. ( "FUNC" $ cString )'
-          Endif
+            IF ( 'Function' $ wStock.grdContent.Item( nPos )[ 2 ] )
+               cSearch += '.and. ( "FUNC" $ cString )'
+            ENDIF
 
-          cSearch += ( '.and. ( "' + Upper( AllTrim( wStock.grdContent.Item( nPos )[ 1 ] ) ) + '" $ cString )' )
+            cSearch += ( '.and. ( "' + Upper( AllTrim( wStock.grdContent.Item( nPos )[ 1 ] ) ) + '" $ cString )' )
 
-          If ( Left( cSearch, 1 ) == '.' )
-             cSearch := Substr( cSearch, 6 )
-          Endif
+            IF ( Left( cSearch, 1 ) == '.' )
+               cSearch := Substr( cSearch, 6 )
+            ENDIF
 
-          oFile := TFileRead() : New( cFile )
-          oFile : Open()
+            oFile := TFileRead() : New( cFile )
+            oFile : Open()
 
-          If !oFile : Error()
+            IF !oFile : Error()
 
-             Do while oFile : MoreToRead()
+               DO WHILE oFile : MoreToRead()
 
-                cString := Upper( oFile : ReadLine() )
+                  cString := Upper( oFile : ReadLine() )
 
-                If &cSearch
-                   Exit
-                Endif
+                  IF &cSearch
+                     EXIT
+                  ENDIF
 
-                Cycle ++
+                  Cycle ++
 
-             Enddo
+               ENDDO
 
-             oFile : Close()
+               oFile : Close()
 
-          Endif
+            ENDIF
 
-          If ( Cycle > 1 )        // Найдено?
-             cParms := StrTran( aOptions[ OPTIONS_EDITOR_PARMS ], '%N', AllTrim( Str( Cycle ) ) )
-          Else
-             cParms := ''
-          Endif
+            IF ( Cycle > 1 )        // Найдено?
+               cParms := StrTran( aOptions[ OPTIONS_EDITOR_PARMS ], '%N', AllTrim( Str( Cycle ) ) )
+            ELSE
+               cParms := ''
+            ENDIF
 
-          cParms := ( cFile + ' ' + cParms )
+            cParms := ( cFile + ' ' + cParms )
 
-        Else
-          cParms := cFile
+         ELSE
+            cParms := cFile
 
-        Endif
+         ENDIF
 
-        Execute file ( aOptions[ OPTIONS_EDITOR ] ) Parameters cParms
+         EXECUTE FILE ( aOptions[ OPTIONS_EDITOR ] ) Parameters cParms
 
-      Case ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_FIND )        // Открыть с поиском
-        If !Empty( cParms := aOptions[ OPTIONS_EDITOR_PARMS ] )
-           nPos   := wStock.grdContent.Value
-           cParms := StrTran( cParms, '%P', AllTrim( wStock.grdContent.Item( nPos )[ 1 ] ) )
-           cParms := ( cFile + ' ' + cParms )
-        Else
-           cParms := cFile
-        Endif
+      CASE ( aOptions[ OPTIONS_RUNMODE ] == EDITOR_FIND )        // Открыть с поиском
+         IF !Empty( cParms := aOptions[ OPTIONS_EDITOR_PARMS ] )
+            nPos   := wStock.grdContent.Value
+            cParms := StrTran( cParms, '%P', AllTrim( wStock.grdContent.Item( nPos )[ 1 ] ) )
+            cParms := ( cFile + ' ' + cParms )
+         ELSE
+            cParms := cFile
+         ENDIF
 
-        Execute file ( aOptions[ OPTIONS_EDITOR ] ) Parameters cParms
+         EXECUTE FILE ( aOptions[ OPTIONS_EDITOR ] ) Parameters cParms
 
-   Endcase
+      ENDCASE
 
-Endif
+   ENDIF
 
-Return
+   RETURN
 
-****** End of OpenFile ******
+   ****** End of OpenFile ******
 
+   /******
+   *       About( cTitle )
+   *       About program
+   */
 
-/******
-*
-*       About( cTitle )
-*
-*       About program
-*
-*/
+STATIC PROCEDURE About( cTitle )
 
-Static Procedure About( cTitle )
-Local cMsg := ( APPTITLE + ' ' + APPVERSION + CRLF + COPYRIGHT + CRLF + ;
-  'with GAL edition (Alexey L. Gustow <gustow33 [dog] mail.ru>)' + CRLF + ;
-  '2011.Oct.01-08' )
+   LOCAL cMsg := ( APPTITLE + ' ' + APPVERSION + CRLF + COPYRIGHT + CRLF + ;
+      'with GAL edition (Alexey L. Gustow <gustow33 [dog] mail.ru>)' + CRLF + ;
+      '2011.Oct.01-08' )
 
-MsgInfo( cMsg, cTitle )
+   MsgInfo( cMsg, cTitle )
 
-Return
+   RETURN
 
-****** End of About ******
+   ****** End of About ******
+

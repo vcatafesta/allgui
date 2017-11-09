@@ -1,15 +1,13 @@
 /*
- * Ejemplo Combobox n° 6
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo cargar un combobox a partir de una
- * dbf, utilizando las cláusulas ITEMSOURCE y VALUESOURCE.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Combobox n° 6
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo cargar un combobox a partir de una
+* dbf, utilizando las cláusulas ITEMSOURCE y VALUESOURCE.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -23,9 +21,9 @@ FUNCTION Main
    OpenTables()
 
    DEFINE WINDOW MAIN OBJ oWnd ;
-      TITLE "Combobox desde una DBF" ;
-      WIDTH 350 ;
-      HEIGHT 200
+         TITLE "Combobox desde una DBF" ;
+         WIDTH 350 ;
+         HEIGHT 200
 
       @ 10,10 COMBOBOX Combo ;
          WIDTH 200 ;
@@ -33,7 +31,7 @@ FUNCTION Main
          VALUESOURCE 'test->code' ;
          VALUE 3 ;
          ON CHANGE oWnd:Label:Value := ;
-                      "El valor del combo es: " + autotype(oWnd:Combo:Value)
+         "El valor del combo es: " + autotype(oWnd:Combo:Value)
 
       @ 60,10 LABEL Label ;
          VALUE "Seleccione un item en el combo para ver su valor !!!" ;
@@ -47,9 +45,8 @@ FUNCTION Main
 
    CerrarTablas()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OpenTables()
 
    LOCAL aDbf[ 2, 4 ]
@@ -77,18 +74,19 @@ FUNCTION OpenTables()
 
    INDEX ON Code TO code
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CerrarTablas()
+
    LOCAL cIndexExt := INDEXEXT()
 
    CLOSE DATABASES
    ERASE ("Test" + cIndexExt)
    ERASE Test.dbf
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

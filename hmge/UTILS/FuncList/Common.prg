@@ -1,23 +1,17 @@
 /******
-*
 *       Common procedures
-*
 */
-
 
 #include "Common.ch"
 
-
 /******
-*
 *       CenterInsife( cMainWindow, cClientWindow )
-*
 *       Centring the child windows inside parent window
-*
 */
 
-Procedure CenterInside( cMainWindow, cClientWindow )
-Local nColMain      := GetProperty( cMainWindow  , 'Col'    ), ;
+PROCEDURE CenterInside( cMainWindow, cClientWindow )
+
+   LOCAL nColMain      := GetProperty( cMainWindow  , 'Col'    ), ;
       nRowMain      := GetProperty( cMainWindow  , 'Row'    ), ;
       nWidthMain    := GetProperty( cMainWindow  , 'Width'  ), ;
       nHeightMain   := GetProperty( cMainWindow  , 'Height' ), ;
@@ -26,32 +20,27 @@ Local nColMain      := GetProperty( cMainWindow  , 'Col'    ), ;
       nCol                                                   , ;
       nRow
 
-nCol := ( nColMain + Int( ( nWidthMain  - nWidthClient  ) / 2 ) )
-nRow := ( nRowMain + Int( ( nHeightMain - nHeightClient ) / 2 ) )
+   nCol := ( nColMain + Int( ( nWidthMain  - nWidthClient  ) / 2 ) )
+   nRow := ( nRowMain + Int( ( nHeightMain - nHeightClient ) / 2 ) )
 
-SetProperty( cClientWindow, 'Col', nCol )
-SetProperty( cClientWindow, 'Row', nRow )
+   SetProperty( cClientWindow, 'Col', nCol )
+   SetProperty( cClientWindow, 'Row', nRow )
 
-Return
+   RETURN
 
-****** End of CenterInside ******
+   ****** End of CenterInside ******
 
+   /******
+   *       CheckPath( cPath [, lCreate ] ) --> lSuccess
+   *       Path's verify, absent folders is created,
+   *       if specify lCreate = .T.
+   *       Remark: The verify is maked for folder with lower level
+   *          than current folder.
+   */
 
+FUNCTION CheckPath( cPath, lCreate )
 
-/******
-*
-*       CheckPath( cPath [, lCreate ] ) --> lSuccess
-*
-*       Path's verify, absent folders is created, 
-*       if specify lCreate = .T.
-*
-*       Remark: The verify is maked for folder with lower level
-*          than current folder.
-*
-*/
-
-Function CheckPath( cPath, lCreate )
-Local cCurrDisk   := DiskName(), ;
+   LOCAL cCurrDisk   := DiskName(), ;
       cCurrDir    := CurDir()  , ;
       lDiskChange := .F.       , ;
       lSuccess    := .F.       , ;
@@ -60,135 +49,131 @@ Local cCurrDisk   := DiskName(), ;
       Cycle                    , ;
       nLen
 
-If ( !( Valtype( 'cPath' ) == 'C' ) .or. ;
-      Empty( cPath )                     ;
-   )
-   Return .F.
-Endif
+   IF ( !( Valtype( 'cPath' ) == 'C' ) .or. ;
+         Empty( cPath )                     ;
+         )
 
-If Empty( cPath )
-   Return .T.
-Endif
+      RETURN .F.
+   ENDIF
 
-Default lCreate to .F.
+   IF Empty( cPath )
 
-cPath    := AllTrim( cPath )
-cCurrDir := AllTrim( cCurrDisk + ':\' + cCurrDir )
+      RETURN .T.
+   ENDIF
 
-If ( Right( cPath, 1 ) == '\' )
-   cPath := Substr( cPath, 1, ( Len( cPath ) - 1 ) )
-Endif
+   DEFAULT lCreate to .F.
 
-If ( Left( cPath, 1 ) == '\' )
-   cPath := Substr( cPath, 2 )
-Endif
+   cPath    := AllTrim( cPath )
+   cCurrDir := AllTrim( cCurrDisk + ':\' + cCurrDir )
 
-nLen := Len( aDirs := StrToArray( cPath, '\' ) )
+   IF ( Right( cPath, 1 ) == '\' )
+      cPath := Substr( cPath, 1, ( Len( cPath ) - 1 ) )
+   ENDIF
 
-Begin Sequence
+   IF ( Left( cPath, 1 ) == '\' )
+      cPath := Substr( cPath, 2 )
+   ENDIF
 
-   For Cycle := 1 to nLen
+   nLen := Len( aDirs := StrToArray( cPath, '\' ) )
 
-     // The each folders are verify successively.
-     // Firstly check for designated disk.
-     // If it is true and disk is available, pass to
-     // the root directory of this disk.
+   BEGIN Sequence
 
-     If ( Right( aDirs[ Cycle ], 1 ) == ':' )
+      FOR Cycle := 1 to nLen
 
-        If IsDisk( aDirs[ Cycle ] )
+         // The each folders are verify successively.
+         // Firstly check for designated disk.
+         // If it is true and disk is available, pass to
+         // the root directory of this disk.
 
-           If DiskChange( aDirs[ Cycle ] )
+         IF ( Right( aDirs[ Cycle ], 1 ) == ':' )
 
-             DirChange( '\' )
-             lDiskChange := .T.
-             Loop
+            IF IsDisk( aDirs[ Cycle ] )
 
-           Else
-             Break
+               IF DiskChange( aDirs[ Cycle ] )
 
-           Endif
+                  DirChange( '\' )
+                  lDiskChange := .T.
+                  LOOP
 
-        Else
-          Break
+               ELSE
+                  Break
 
-        Endif
+               ENDIF
 
-     Endif
+            ELSE
+               Break
 
-     // If the folder is not exist and parameter lCreate = .T., try
-     // to create this folder and pass to it. If it is unsuccessful attempt
-     // the further operations are breaked.
+            ENDIF
 
-     nError := DirChange( aDirs[ Cycle ] )
-     If !Empty( nError )
+         ENDIF
 
-        If lCreate
-           If Empty( MakeDir( aDirs[ Cycle ] ) )
+         // If the folder is not exist and parameter lCreate = .T., try
+         // to create this folder and pass to it. If it is unsuccessful attempt
+         // the further operations are breaked.
 
-              If !Empty( DirChange( aDirs[ Cycle ] ) )
-                 Break
-              Endif
+         nError := DirChange( aDirs[ Cycle ] )
+         IF !Empty( nError )
 
-           Else
-              Break
+            IF lCreate
+               IF Empty( MakeDir( aDirs[ Cycle ] ) )
 
-           Endif
+                  IF !Empty( DirChange( aDirs[ Cycle ] ) )
+                     Break
+                  ENDIF
 
-        Else
-          Break
+               ELSE
+                  Break
 
-        Endif
+               ENDIF
 
-     Endif
+            ELSE
+               Break
 
-   Next
+            ENDIF
 
-   lSuccess := .T.
+         ENDIF
 
-End
+      NEXT
 
-// Return to current folder
+      lSuccess := .T.
 
-If lDiskChange
-   DiskChange( cCurrDisk )
-   DirChange( '\' )
-Endif
+   End
 
-DirChange( cCurrDir )
+   // Return to current folder
 
-Return lSuccess
+   IF lDiskChange
+      DiskChange( cCurrDisk )
+      DirChange( '\' )
+   ENDIF
 
-****** End of CheckPath ******
+   DirChange( cCurrDir )
 
+   RETURN lSuccess
 
-/******
-*
-*       StrToArray( cString, cDelimiter ) --> aResult
-*
-*       Converting the string to array.
-*
-*       Parameters:
-*
-*          cString     - processed string
-*          cDelimiter  - one or a few delimiters. Default value is
-*                        defined for functions Token() and NumToken().
-*
-*/
+   ****** End of CheckPath ******
 
-Function StrToArray( cString, cDelimiter )
-Local aResult := {}                             , ;
+   /******
+   *       StrToArray( cString, cDelimiter ) --> aResult
+   *       Converting the string to array.
+   *       Parameters:
+   *          cString     - processed string
+   *          cDelimiter  - one or a few delimiters. Default value is
+   *                        defined for functions Token() and NumToken().
+   */
+
+FUNCTION StrToArray( cString, cDelimiter )
+
+   LOCAL aResult := {}                             , ;
       nCount  := NumToken( cString, cDelimiter ), ;
       Cycle
 
-For Cycle := 1 to nCount
-  AAdd( aResult, Token( cString, cDelimiter, Cycle ) )
-Next
+   FOR Cycle := 1 to nCount
+      AAdd( aResult, Token( cString, cDelimiter, Cycle ) )
+   NEXT
 
-Return aResult
+   RETURN aResult
 
-****** End of StrToArray ******
-
+   ****** End of StrToArray ******
 
 #pragma BEGINDUMP
 
@@ -196,24 +181,23 @@ Return aResult
 #include "hbapi.h"
 
 /******
-*
 *       Blocking window close button
-*
 */
 
 HB_FUNC( DISABLECLOSEBUTTON )
 {
   HWND hWnd;
-  HMENU hMenu; 
-  
+  HMENU hMenu;
+
   hWnd = (HWND) hb_parnl( 1 );
   hMenu = GetSystemMenu( hWnd, FALSE );
-   
+
   if (hMenu != 0)
-  { 
-	DeleteMenu( hMenu, SC_CLOSE, MF_BYCOMMAND);
-  } 
+  {
+   DeleteMenu( hMenu, SC_CLOSE, MF_BYCOMMAND);
+  }
 
 }
 
 #pragma ENDDUMP
+

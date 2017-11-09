@@ -1,70 +1,69 @@
 /*
-  Harbour extended Field Types 
+Harbour extended Field Types
 
-  Type Short
-  Code Name     Width (Bytes)     Description
-  ---- -------  ----------------- -------------------------------------------------------------------
-   D   Date     3, 4 or 8          Date
-   M   Memo     4 or 8             Memo
-   +   AutoInc  4                  Auto increment
-   =   ModTime  8                  Last modified date & time of this record
-   ^   RowVers  8                  Row version number; modification count of this record
-   @   DayTime  8                  Date & Time
-   I   Integer  1, 2, 3, 4 or 8    Signed Integer ( Width :  )" },;
-   T   Time     4 or 8             Only time (if width is 4 ) or Date & Time (if width is 8 ) (?)
-   V   Variant  3, 4, 6 or more    Variable type Field
-   Y   Currency 8                  64 bit integer with implied 4 decimal
-   B   Double   8                  Floating point / 64 bit binary
+Type Short
+Code Name     Width (Bytes)     Description
+---- -------  ----------------- -------------------------------------------------------------------
+D   Date     3, 4 or 8          Date
+M   Memo     4 or 8             Memo
++   AutoInc  4                  Auto increment
+=   ModTime  8                  Last modified date & time of this record
+^   RowVers  8                  Row version number; modification count of this record
+@   DayTime  8                  Date & Time
+I   Integer  1, 2, 3, 4 or 8    Signed Integer ( Width :  )" },;
+T   Time     4 or 8             Only time (if width is 4 ) or Date & Time (if width is 8 ) (?)
+V   Variant  3, 4, 6 or more    Variable type Field
+Y   Currency 8                  64 bit integer with implied 4 decimal
+B   Double   8                  Floating point / 64 bit binary
 
-  Program : ExFldTps.prg
-  Author : Bicahi Esgici ( esgici <at> gmail.com )
+Program : ExFldTps.prg
+Author : Bicahi Esgici ( esgici <at> gmail.com )
 
-  All rights reserved.
+All rights reserved.
 
-  2011.10.12
+2011.10.12
 
-  A warn :  While running, this program produce some .dbf and .txt file(s) and don't erase its upon close. 
-            This is because you may want inspect its. 
-            You may erase these files arbitrarily.
+A warn :  While running, this program produce some .dbf and .txt file(s) and don't erase its upon close.
+This is because you may want inspect its.
+You may erase these files arbitrarily.
 */
 
 PROCEDURE Main()
 
    LOCAL aOperations := { { "Width",            "Testing Field Widths" }, ;
-                          { "Numeric Limits",   "Determining Numeric Limits" }, ;
-                          { "Integer Limits",   "Determining Integer Limits" }, ;
-                          { "Set/Get",          "Set & read back field values" }, ;
-                          { "Conversion",       "Convert and test signed to integer" } }, ;
+      { "Numeric Limits",   "Determining Numeric Limits" }, ;
+      { "Integer Limits",   "Determining Integer Limits" }, ;
+      { "Set/Get",          "Set & read back field values" }, ;
+      { "Conversion",       "Convert and test signed to integer" } }, ;
       a1Oper := {}, ;
       n1Oper := 1
 
    LOCAL aFldTypes := { { "D", "Date",     "Date ( Width : 3, 4 or 8 )" },;
-                        { "M", "Memo",     "Memo ( Width : 4 or 8 )" }, ;
-                        { "+", "AutoInc",  "Auto increment ( Width : 4 )" }, ;
-                        { "=", "ModTime",  "Last modified date & time of this record ( Width : 8 )" }, ;
-                        { "^", "RowVers",  "Row version number; modification count of this record ( Width : 8 )" }, ;
-                        { "@", "DayTime",  "Date & Time ( Width : 8 )" }, ;
-                        { "I", "Integer",  "Signed Integer ( Width : 1, 2, 3, 4 or 8 )" }, ;
-                        { "T", "Time",     "Only time (if width is 4 ) or Date & Time (if width is 8 )" }, ;
-                        { "V", "Variant",  "Variable type (!) Field ( Width : 3, 4, 6 or more)" }, ;
-                        { "Y", "Currency", "Integer 64 bit with implied 4 decimal" }, ;
-                        { "B", "Double",   "Floating point / 64 bit binary ( Width : 8 )" } }, ;
+      { "M", "Memo",     "Memo ( Width : 4 or 8 )" }, ;
+      { "+", "AutoInc",  "Auto increment ( Width : 4 )" }, ;
+      { "=", "ModTime",  "Last modified date & time of this record ( Width : 8 )" }, ;
+      { "^", "RowVers",  "Row version number; modification count of this record ( Width : 8 )" }, ;
+      { "@", "DayTime",  "Date & Time ( Width : 8 )" }, ;
+      { "I", "Integer",  "Signed Integer ( Width : 1, 2, 3, 4 or 8 )" }, ;
+      { "T", "Time",     "Only time (if width is 4 ) or Date & Time (if width is 8 )" }, ;
+      { "V", "Variant",  "Variable type (!) Field ( Width : 3, 4, 6 or more)" }, ;
+      { "Y", "Currency", "Integer 64 bit with implied 4 decimal" }, ;
+      { "B", "Double",   "Floating point / 64 bit binary ( Width : 8 )" } }, ;
       a1Type := {}, ;
       n1Type := 1, ;
       n2Type := 1
 
    LOCAL nMColumn :=  0, ;    // Menu Column No
-      nMRow    :=  0          // Menu Row No
+   nMRow    :=  0          // Menu Row No
 
    SET WRAP ON
    SET MESSAGE TO 58 CENTER
    SET CENTURY ON
 
-   * In screen resolution 1440 * 900  SetMode( 60, 150 ) seem good. 
-   * In this case value of SET MESSAGE TO will be 58 ( less 2 than nRow specified in SetMod() ).  
+   * In screen resolution 1440 * 900  SetMode( 60, 150 ) seem good.
+   * In this case value of SET MESSAGE TO will be 58 ( less 2 than nRow specified in SetMod() ).
 
-   SetMode( 60, 150 )            
-
+   SetMode( 60, 150 )
 
    WHILE n1Oper > 0
 
@@ -140,9 +139,9 @@ PROCEDURE Main()
 
    ENDDO n1Oper
 
-RETURN // Main()
+   RETURN // Main()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE FT_Widths( a1Type )               // Testing Field Widths
 
@@ -151,11 +150,11 @@ PROCEDURE FT_Widths( a1Type )               // Testing Field Widths
       aStru1 := {}, ;
       aStru2 := {}, ;
       aStru3 := { { 'FldType',     "C", 1, 0 }, ; // Type of field
-                  { 'WidtSpec',    "N", 2, 0 }, ; // Specified width
-                  { 'Dec_Spec',    "N", 2, 0 }, ; // Specified decimal
-                  { 'WidtAppl',    "N", 2, 0 }, ; // Applied (by Harbour) width
-                  { 'Dec_Max',     "N", 2, 0 }, ; // Computed maximum dec
-                  { 'Result',      "C", 1, 0 } }
+   { 'WidtSpec',    "N", 2, 0 }, ; // Specified width
+   { 'Dec_Spec',    "N", 2, 0 }, ; // Specified decimal
+   { 'WidtAppl',    "N", 2, 0 }, ; // Applied (by Harbour) width
+   { 'Dec_Max',     "N", 2, 0 }, ; // Computed maximum dec
+   { 'Result',      "C", 1, 0 } }
 
    FOR nFldNo := 1 TO 32
       AAdd( aStru1, { "X" + StrZero( nFldNo, 2 ), cType, nFldNo, 0 } )
@@ -178,7 +177,6 @@ PROCEDURE FT_Widths( a1Type )               // Testing Field Widths
 
    USE
 
-
    dbCreate( "Widths", aStru3 )
 
    USE Widths
@@ -200,9 +198,9 @@ PROCEDURE FT_Widths( a1Type )               // Testing Field Widths
 
    USE
 
-RETURN // FT_Widths()
+   RETURN // FT_Widths()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE NumLimits()                              // Determining Numeric Limits
 
@@ -240,19 +238,19 @@ PROCEDURE NumLimits()                              // Determining Numeric Limits
 
    MemoEdit( MemoRead( "N_Limits.TXT" ) )
 
-RETURN // NumLimits()
+   RETURN // NumLimits()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE IntLimits()                             // Determining Integer Limits
 
    LOCAL nFldNo := 0, ;
       aStru4 := { { 'MNMX', "C", 7, 0 }, ;
-                  { 'INT1', "I", 1, 0 }, ;
-                  { 'INT2', "I", 2, 0 }, ;
-                  { 'INT3', "I", 3, 0 }, ;
-                  { 'INT4', "I", 4, 0 }, ;
-                  { 'INT8', "I", 8, 0 } }
+      { 'INT1', "I", 1, 0 }, ;
+      { 'INT2', "I", 2, 0 }, ;
+      { 'INT3', "I", 3, 0 }, ;
+      { 'INT4', "I", 4, 0 }, ;
+      { 'INT8', "I", 8, 0 } }
 
    dbCreate( "IntLimits", aStru4 )
 
@@ -299,16 +297,16 @@ PROCEDURE IntLimits()                             // Determining Integer Limits
 
    USE
 
-RETURN // IntLimits()
+   RETURN // IntLimits()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_NoType()                             // Testing NoType ( Variant ) field type
 
    LOCAL aStru5 := { { "Initial",    "C", 19, 0 }, ;
-                     { "Internal",   "V", 19, 0 }, ;
-                     { "ReadBack",   "C", 19, 0 }, ;
-                     { "ReadBackTp", "C",  1, 0 } }
+      { "Internal",   "V", 19, 0 }, ;
+      { "ReadBack",   "C", 19, 0 }, ;
+      { "ReadBackTp", "C",  1, 0 } }
 
    dbCreate( "SG_NoType", aStru5 )
 
@@ -330,9 +328,9 @@ PROCEDURE SG_NoType()                             // Testing NoType ( Variant ) 
    Browse()
    USE
 
-RETURN // SG_NoType()
+   RETURN // SG_NoType()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE V_SetGet( aType )               // Set & read back field values
 
@@ -388,19 +386,19 @@ PROCEDURE V_SetGet( aType )               // Set & read back field values
 
    END SWITCH
 
-RETURN // V_SetGet()
+   RETURN // V_SetGet()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_Date()                           // Date : Compare set / get
 
    LOCAL aStru6 := { { "Initial",  "D",  8, 0 },;
-                   { "Internal3",  "D",  3, 0 },;
-                   { "Internal4",  "D",  4, 0 },;
-                   { "Internal8",  "D",  8, 0 },;
-                   { "ReadBack3",  "C", 12, 0 },;
-                   { "ReadBack4",  "C", 12, 0 },;
-                   { "ReadBack8",  "C", 12, 0 } }
+      { "Internal3",  "D",  3, 0 },;
+      { "Internal4",  "D",  4, 0 },;
+      { "Internal8",  "D",  8, 0 },;
+      { "ReadBack3",  "C", 12, 0 },;
+      { "ReadBack4",  "C", 12, 0 },;
+      { "ReadBack8",  "C", 12, 0 } }
 
    dbCreate( "SG_Date", aStru6 )
 
@@ -408,25 +406,25 @@ PROCEDURE SG_Date()                           // Date : Compare set / get
 
    dbAppend()
    REPLACE Initial  WITH Date() - ( 66 * 365 + 66 / 4 ), ;
-         Internal3  WITH Initial,;
-         Internal4  WITH Initial,;
-         Internal8  WITH Initial,;
-         ReadBack3  WITH hb_ValToStr( Internal3 ),;
-         ReadBack4  WITH hb_ValToStr( Internal4 ),;
-         ReadBack8  WITH hb_ValToStr( Internal8 )
+      Internal3  WITH Initial,;
+      Internal4  WITH Initial,;
+      Internal8  WITH Initial,;
+      READBack3  WITH hb_ValToStr( Internal3 ),;
+      READBack4  WITH hb_ValToStr( Internal4 ),;
+      READBack8  WITH hb_ValToStr( Internal8 )
    dbGoTop()
 
    Browse()
    USE
 
-RETURN // SG_Date()
+   RETURN // SG_Date()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_Memo()                       // Set / Get test for MEMO fields
 
    LOCAL aStru7 := { { "MEMO_4",   "M",  4, 0 },;
-                     { "MEMO_10",  "M", 10, 0 } }
+      { "MEMO_10",  "M", 10, 0 } }
 
    dbCreate( "SG_Memo", aStru7 )
 
@@ -434,24 +432,24 @@ PROCEDURE SG_Memo()                       // Set / Get test for MEMO fields
 
    dbAppend()
    REPLACE MEMO_4   WITH "MEMO field with width 4", ;
-           MEMO_10  WITH "MEMO field with width 4"
+      MEMO_10  WITH "MEMO field with width 4"
 
    dbGoTop()
 
    Browse()
    USE
 
-RETURN // SG_Date()
+   RETURN // SG_Date()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_DayTime()                       // Set / Get test for DayTime fields
 
    LOCAL aStru8 := { { "ModTim",   "=",  8, 0 },;
-                     { "DaTime",   "@",  8, 0 },;
-                     { "Time_8",   "T",  8, 0 },;
-                     { "Time_4",   "T",  4, 0 },;
-                     { "Time_C",   "C", 12, 0 } }
+      { "DaTime",   "@",  8, 0 },;
+      { "Time_8",   "T",  8, 0 },;
+      { "Time_4",   "T",  4, 0 },;
+      { "Time_C",   "C", 12, 0 } }
 
    dbCreate( "SG_Datime", aStru8 )
 
@@ -471,51 +469,51 @@ PROCEDURE SG_DayTime()                       // Set / Get test for DayTime field
    //  REPLACE Time_8  WITH ModTim          //  ==> 0000-00-00 00:00:00.000
 
    REPLACE DaTime  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
-           Time_8  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
-           Time_C  WITH Time()
+   Time_8  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
+   Time_C  WITH Time()
 
    dbGoTop()
 
    Browse()
    USE
 
-RETURN // SG_DayTime()
+   RETURN // SG_DayTime()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_Integers()                       // Set / Get test for INTEGER fields
 
    LOCAL nRecno := 0, ;
       aStru9 := { { 'INT1',  "I", 1, 0 }, ;
-                  { 'NUM1',  "N", 4, 0 }, ;
-                  { 'EQL1',  "L", 1, 0 }, ;
-                  { 'INT11', "I", 1, 1 }, ;
-                  { 'NUM11', "N", 5, 1 }, ;
-                  { 'EQL11', "L", 1, 0 }, ;
-                  { 'INT2',  "I", 2, 0 }, ;
-                  { 'NUM2',  "N", 8, 0 }, ;
-                  { 'EQL2',  "L", 1, 0 }, ;
-                  { 'INT22', "I", 8, 2 }, ;
-                  { 'NUM22', "N", 12, 2 }, ;
-                  { 'EQL22', "L", 1, 0 }, ;
-                  { 'INT3',  "I", 3, 0 }, ;
-                  { 'NUM3',  "N", 8, 0 }, ;
-                  { 'EQL3',  "L", 1, 0 }, ;
-                  { 'INT32', "I", 3, 2 }, ;
-                  { 'NUM32', "N", 12, 2 }, ;
-                  { 'EQL32', "L", 1, 0 }, ;
-                  { 'INT4',  "I", 4, 0 }, ;
-                  { 'NUM4',  "N", 12, 0 }, ;
-                  { 'EQL4',  "L", 1, 0 }, ;
-                  { 'INT42', "I", 4, 2 }, ;
-                  { 'NUM42', "N", 14, 2 }, ;
-                  { 'EQL42', "L", 1, 0 }, ;
-                  { 'INT8',  "I", 8, 0 }, ;
-                  { 'NUM8',  "N", 21, 0 }, ;
-                  { 'EQL8',  "L", 1, 0 }, ;
-                  { 'INT84', "I", 8, 4 }, ;
-                  { 'NUM84', "N", 21, 4 }, ;
-                  { 'EQL84', "L", 1, 0 } }
+      { 'NUM1',  "N", 4, 0 }, ;
+      { 'EQL1',  "L", 1, 0 }, ;
+      { 'INT11', "I", 1, 1 }, ;
+      { 'NUM11', "N", 5, 1 }, ;
+      { 'EQL11', "L", 1, 0 }, ;
+      { 'INT2',  "I", 2, 0 }, ;
+      { 'NUM2',  "N", 8, 0 }, ;
+      { 'EQL2',  "L", 1, 0 }, ;
+      { 'INT22', "I", 8, 2 }, ;
+      { 'NUM22', "N", 12, 2 }, ;
+      { 'EQL22', "L", 1, 0 }, ;
+      { 'INT3',  "I", 3, 0 }, ;
+      { 'NUM3',  "N", 8, 0 }, ;
+      { 'EQL3',  "L", 1, 0 }, ;
+      { 'INT32', "I", 3, 2 }, ;
+      { 'NUM32', "N", 12, 2 }, ;
+      { 'EQL32', "L", 1, 0 }, ;
+      { 'INT4',  "I", 4, 0 }, ;
+      { 'NUM4',  "N", 12, 0 }, ;
+      { 'EQL4',  "L", 1, 0 }, ;
+      { 'INT42', "I", 4, 2 }, ;
+      { 'NUM42', "N", 14, 2 }, ;
+      { 'EQL42', "L", 1, 0 }, ;
+      { 'INT8',  "I", 8, 0 }, ;
+      { 'NUM8',  "N", 21, 0 }, ;
+      { 'EQL8',  "L", 1, 0 }, ;
+      { 'INT84', "I", 8, 4 }, ;
+      { 'NUM84', "N", 21, 4 }, ;
+      { 'EQL84', "L", 1, 0 } }
 
    dbCreate( "SG_Integers", aStru9 )
    USE SG_Integers
@@ -551,17 +549,17 @@ PROCEDURE SG_Integers()                       // Set / Get test for INTEGER fiel
    Browse()
    USE
 
-RETURN // SG_Integers()
+   RETURN // SG_Integers()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_Currency()                       // Set / Get test for CURRENCY fields
 
    LOCAL aStru10 := { { "Currenc",  "Y",  8, 4 },;
-                      { "NUM2D",    "N", 21, 2 },;
-                      { "NUM4D",    "N", 21, 4 },;
-                      { "NUM6D",    "N", 23, 6 },;
-                      { "NUM8D",    "N", 25, 8 } }
+      { "NUM2D",    "N", 21, 2 },;
+      { "NUM4D",    "N", 21, 4 },;
+      { "NUM6D",    "N", 23, 6 },;
+      { "NUM8D",    "N", 25, 8 } }
 
    dbCreate( "SG_Curncy", aStru10 )
 
@@ -581,9 +579,9 @@ PROCEDURE SG_Currency()                       // Set / Get test for CURRENCY fie
    Browse()
    USE
 
-RETURN // SG_Currency()
+   RETURN // SG_Currency()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SG_Double()                       // Set / Get test for DOUBLE ( BINARY ) fields
 
@@ -613,9 +611,9 @@ PROCEDURE SG_Double()                       // Set / Get test for DOUBLE ( BINAR
    Browse()
    USE
 
-RETURN // SG_Double()
+   RETURN // SG_Double()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SignChng()                           // Convert and test signed to integer
 
@@ -655,13 +653,13 @@ PROCEDURE SignChng()                           // Convert and test signed to int
          NUM4 WITH hb_Random( 0, 2 ^ 32 - 1 ), INT4 WITH NUM4 - 2 ^ 31, RET4 WITH INT4 + 2 ^ 31, EQL4 WITH NUM4 = RET4,;
          NUM8 WITH hb_Random( 0, 2 ^ 64 - 1 ), INT8 WITH NUM8 - 2 ^ 63, RET8 WITH INT8 + 2 ^ 63, EQL8 WITH NUM8 = RET8
 
-
    NEXT nRecno
 
    dbGoTop()
    Browse()
    USE
 
-RETURN // SignChng()
+   RETURN // SignChng()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+

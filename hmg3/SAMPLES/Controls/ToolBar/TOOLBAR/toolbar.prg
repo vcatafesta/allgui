@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window ToolBar
-	Activate Window ToolBar
+   LOAD WINDOW ToolBar
+   ACTIVATE WINDOW ToolBar
 
-Return
-
+   RETURN
 

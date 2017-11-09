@@ -1,33 +1,37 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
-Function main_delete_action
-LOCAL I , nRecNo
+FUNCTION main_delete_action
 
-IF Main.Query_Server.Enabled == .T.
+   LOCAL I , nRecNo
 
-	IF .NOT. MSGYESNO('Are You Sure?')
-		Return Nil
-	ENDIF
+   IF Main.Query_Server.Enabled == .T.
 
-	I := Main.Grid_1.Value
+      IF .NOT. MSGYESNO('Are You Sure?')
 
-	IF I == 0
-		MsgStop('You must select a row!')
-		Return Nil
-	ENDIF
+         RETURN NIL
+      ENDIF
 
-	nRecNo := Val( Main.Grid_1.Cell(I,1) )
+      I := Main.Grid_1.Value
 
-	IF netio_funcexec( "query_002" , nRecNo )
-		MsgInfo('Record Deleted Successfully!')
-		Main.Query_String.Value := ''
-		main_query_server_action()
-	ELSE
-		MsgStop('Error Deleting Record!')
-	ENDIF
+      IF I == 0
+         MsgStop('You must select a row!')
 
-ENDIF
+         RETURN NIL
+      ENDIF
 
-Return Nil
+      nRecNo := Val( Main.Grid_1.Cell(I,1) )
+
+      IF netio_funcexec( "query_002" , nRecNo )
+         MsgInfo('Record Deleted Successfully!')
+         Main.Query_String.Value := ''
+         main_query_server_action()
+      ELSE
+         MsgStop('Error Deleting Record!')
+      ENDIF
+
+   ENDIF
+
+   RETURN NIL
+

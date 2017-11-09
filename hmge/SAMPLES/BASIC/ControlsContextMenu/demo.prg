@@ -6,9 +6,10 @@
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-      Load Window demo
-      Activate Window demo
+   LOAD WINDOW demo
+   ACTIVATE WINDOW demo
 
-Return
+   RETURN
+

@@ -1,32 +1,30 @@
 /*******************************************************************************
-   Filename			: Indici.prg
+Filename         : Indici.prg
 
-   Created			: 05 April 2012 (10:50:55)
-   Created by		: Pierpaolo Martinello
+Created         : 05 April 2012 (10:50:55)
+Created by      : Pierpaolo Martinello
 
-   Last Updated		: 01/06/2013 15:39:30
-   Updated by		: Pierpaolo
+Last Updated      : 01/06/2013 15:39:30
+Updated by      : Pierpaolo
 
-   Comments			: Freeware
+Comments         : Freeware
 *******************************************************************************/
 
+PROCEDURE Opentable()
 
-*-----------------------------------------------------------------------------*
-Procedure Opentable()
-*-----------------------------------------------------------------------------*
-   local aarq, dbd :="."+right(oFatt:Dbf_driver,3), error :=.f. , lf:={}
-   local archivio := oFatt:DataPath+"Presa.DbF"
-   Local aMsg := {"Archive Bookings unavailable try again?"," Archivio Prenotazioni non disponibile Riprovo?"} [alng]
+   LOCAL aarq, dbd :="."+right(oFatt:Dbf_driver,3), error :=.f. , lf:={}
+   LOCAL archivio := oFatt:DataPath+"Presa.DbF"
+   LOCAL aMsg := {"Archive Bookings unavailable try again?"," Archivio Prenotazioni non disponibile Riprovo?"} [alng]
 
    CLEAN MEMORY
 
-   If ! ISDIRECTORY(ofatt:DataPath)
+   IF ! ISDIRECTORY(ofatt:DataPath)
       Createfolder(oFatt:DataPath)
       MSGT(1.5,[Cartella Dati creata!],,.t.)
-   Endif
+   ENDIF
    Archivio:= oFatt:DataPath+'Presa.DbF'
 
-   If ! File(Archivio)
+   IF ! File(Archivio)
       aarq := {}
       Aadd( aarq ,  {'RESOURCE  ','C',1, 0} )
       Aadd( aarq ,  {'DATA_IN   ','D',8, 0} )
@@ -44,66 +42,67 @@ Procedure Opentable()
       MSGT(1.5,[Archivio Prenotazioni creato!],,.t.)
 
       aarq:={}
-   Endif
+   ENDIF
    dbSelectArea( "1" )
-   if net_use( Archivio,"PRESA",.t.,2,.F.,aMsg )
+   IF net_use( Archivio,"PRESA",.t.,2,.F.,aMsg )
       //  msgbox("indicizzo",alias())
       Lf := directory(oFatt:DataPath+"Maint*.txt","H")
-      if len(lf) > 0
+      IF len(lf) > 0
          aeval(lf,{|x| deletefile(oFatt:DataPath+x[1])} )
-      Endif
+      ENDIF
 
-      if ofatt:pack
-         pack
-      Endif
-      index on dtos(PRESA->DATA_IN)+PRESA->RESOURCE+PRESA->TIME_IN to Presa
+      IF ofatt:pack
+         PACK
+      ENDIF
+      INDEX ON dtos(PRESA->DATA_IN)+PRESA->RESOURCE+PRESA->TIME_IN to Presa
       dbcloseall()
-   Endif
+   ENDIF
 
    dbSelectArea( "1" )
    Apridb({"PRESA","1"},Archivio,.F.,2,.F.,aMsg ;
-        ,{"Presa",{"Presa"}},1,.F.,.t.) // error)
-return
-/*
-*/
-*------------------------------------------------------------------------------*
-Function Apridb(warea,dbfile,modo,tries,interattivo,msg,indice,ordine,error,cl_Msg)
-*------------------------------------------------------------------------------*
+      ,{"Presa",{"Presa"}},1,.F.,.t.) // error)
+
+   RETURN
+   /*
+   */
+
+FUNCTION Apridb(warea,dbfile,modo,tries,interattivo,msg,indice,ordine,error,cl_Msg)
+
    //Net_use( file, ali, ex_use, tries, interactive, YNmessage )
-   Local dbd := "."+right(oFatt:Dbf_driver,3), abag := indice[2], rtv := .T.
-   default msg to " Archivio "+warea[1]+" non disponibile Riprovo?"
-   default tries to 5, modo to .F., interattivo to .T., error to .F.,cl_Msg to ''
+   LOCAL dbd := "."+right(oFatt:Dbf_driver,3), abag := indice[2], rtv := .T.
+
+   DEFAULT msg to " Archivio "+warea[1]+" non disponibile Riprovo?"
+   DEFAULT tries to 5, modo to .F., interattivo to .T., error to .F.,cl_Msg to ''
    dbSelectArea( warea[2] )
 
-   If net_use( Dbfile, warea[1], .f., tries, interattivo, msg ) .and. !error
-      If !.F. ; ordListClear() ; end
-         if dbd == ".NTX"
+   IF net_use( Dbfile, warea[1], .f., tries, interattivo, msg ) .and. !error
+      IF !.F. ; ordListClear() ; end
+         IF dbd == ".NTX"
             aeval(abag,{|x| ordListAdd( oFatt:DataPath+x )})
-         Else   // CDX
-            if indice[1] # NIL .or. !Empty(indice[1])
+         ELSE   // CDX
+            IF indice[1] # NIL .or. !Empty(indice[1])
                ordListAdd( oFatt:DataPath+indice[1])
-            endif
-         Endif
+            ENDIF
+         ENDIF
          ordSetFocus( ordine )
-         go top
-   Else
-      if (empty(Cl_Msg),ChiudiPrg(.T.),ErrTipo(Cl_Msg,alias()) )
-      rtv := .F.
-   Endif
+         GO TOP
+      ELSE
+         IF (empty(Cl_Msg),ChiudiPrg(.T.),ErrTipo(Cl_Msg,alias()) )
+            rtv := .F.
+         ENDIF
 
-return rtv
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function ErrTipo( dove ,label)
-*-----------------------------------------------------------------------------*
-   Local aMsg:={ dove+CRLF+[Repeat the rebuilding indexes]+CRLF+[as the only active user!];
-     ,dove+CRLF+[Ripetere la ricostruzione indici]+CRLF+[come unico utente attivo!]} [alng]
-   default label to  ''
+         RETURN rtv
+         /*
+         */
+
+FUNCTION ErrTipo( dove ,label)
+
+   LOCAL aMsg:={ dove+CRLF+[Repeat the rebuilding indexes]+CRLF+[as the only active user!];
+      ,dove+CRLF+[Ripetere la ricostruzione indici]+CRLF+[come unico utente attivo!]} [alng]
+   DEFAULT label to  ''
    msgExclamation( aMsg,label)
-return .T.
-/*
-*/
-*-----------------------------------------------------------------------------*
 
-*-----------------------------------------------------------------------------*
+   RETURN .T.
+   /*
+   */
+

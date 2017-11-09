@@ -16,35 +16,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -56,14 +56,12 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define TBB1   2
 #define TBB2   3
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       cValue, ProcedureName, ProcedureName2, abitmap, BtnWidth, FontName, FontSize, ;
       aToolTip, nMaxLength, lUpper, lLower, lNumeric, lPassword, ;
       uLostFocus, uGotFocus, uChange, uEnter, right, HelpId, ;
       bold, italic, underline, strikeout, field, backcolor, fontcolor , ;
       invisible, notabstop, nId, disableedit, lDefault, cuetext, keepfocus )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle, aControlHandle := 0
    LOCAL mVar, k, Style
    LOCAL FontHandle, cBmp, cTTip, lBtn2 := ISBLOCK( ProcedureName2 )
@@ -128,12 +126,12 @@ FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
    ENDIF
    lDialogInMemory := _HMG_DialogInMemory
 
-// Check if the window/form is defined.
+   // Check if the window/form is defined.
    IF .NOT. _IsWindowDefined( ParentFormName ) .AND. .NOT. lDialogInMemory
       MsgMiniGuiError( "Window " + IFNIL( ParentFormName, "Parent", ParentFormName ) + " is not defined." )
    ENDIF
 
-// Check if the control is already defined.
+   // Check if the control is already defined.
    IF _IsControlDefined( ControlName, ParentFormName ) .AND. .NOT. lDialogInMemory
       MsgMiniGuiError( "Control " + ControlName + " of " + ParentFormName + " already defined." )
    ENDIF
@@ -235,7 +233,7 @@ FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := iif( lNumeric, "BTNNUMTEXT", "BTNTEXT" )
    _HMG_aControlNames  [k] :=  ControlName
@@ -295,7 +293,7 @@ FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
          SetWindowText( aControlHandle[1], cValue )
       ENDIF
 
-      IF !Empty( cuetext ) .AND. IsVistaOrLater() 
+      IF !Empty( cuetext ) .AND. IsVistaOrLater()
          SendMessageWideString( aControlHandle[1], EM_SETCUEBANNER, .T. /*show on focus*/, cuetext )
       ENDIF
 
@@ -304,14 +302,14 @@ FUNCTION _DefineBtnTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       ENDIF
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogBtnTextBox( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL nMaxLength, Field, cValue, lNumeric, abitmap, BtnWidth, lBtn2, aControlHandle
 
    Field          := _HMG_aControlPageMap  [k]
+
    nMaxLength     := _HMG_aControlRangeMax  [k]
    cValue         := _HMG_aControlValue  [k]
    lNumeric       := ( _HMG_aControlType [k] == "BTNNUMTEXT" )
@@ -324,14 +322,14 @@ FUNCTION InitDialogBtnTextBox( ParentName, ControlHandle, k )
       SendMessage( aControlHandle [1] , EM_LIMITTEXT , nMaxLength , 0 )
    ENDIF
 
-// With NUMERIC clause, transform numeric value into a string.
+   // With NUMERIC clause, transform numeric value into a string.
    IF lNumeric
       IF ValType( cValue ) != 'C'
          cValue := hb_ntos( cValue )
       ENDIF
    ENDIF
 
-// Fill the TEXTBOX with the text given.
+   // Fill the TEXTBOX with the text given.
    IF Len( cValue ) > 0
       SetWindowText ( aControlHandle [1] , cValue )
    ENDIF
@@ -341,16 +339,15 @@ FUNCTION InitDialogBtnTextBox( ParentName, ControlHandle, k )
    ENDIF
 
    ReDefBtnTextBox( ControlHandle, abitmap [1], BtnWidth, abitmap [2], lBtn2 )
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION TBBtnEvents( hwndEdit, HwndBtn )
-*------------------------------------------------------------------------------*
+
    LOCAL i, aHandle
 
    i := AScan ( _HMG_aControlSpacing, { |x| ValType( x ) == 'A' .AND. Len( x ) > 0 .AND. ValType( x [1] ) == 'N' .AND. x [1] == hwndEdit } )
@@ -381,4 +378,5 @@ FUNCTION TBBtnEvents( hwndEdit, HwndBtn )
 
    ENDIF
 
-RETURN 0
+   RETURN 0
+

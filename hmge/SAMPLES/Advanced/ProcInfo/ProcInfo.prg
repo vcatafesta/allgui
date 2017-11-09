@@ -1,7 +1,6 @@
 /*
- * MiniGUI Process Information Demo
- *
- * Copyright 2014-2015 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI Process Information Demo
+* Copyright 2014-2015 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -9,15 +8,16 @@ ANNOUNCE RDDSYS
 #include <hmg.ch>
 
 PROCEDURE Main()
+
    LOCAL fColor  := { |val| iif( val[1] == '<!>', RED, BLACK ) }
 
    SET FONT TO _GetSysFont(), 10
 
    DEFINE WINDOW frmProcInfo ;
-      WIDTH 650 + iif( IsWinNT(), GetBorderWidth() / 2, 0 ) ;
-      HEIGHT 450 + iif( IsWinNT(), GetBorderHeight(), 0 ) ;
-      TITLE 'Process Information' ;
-      MAIN
+         WIDTH 650 + iif( IsWinNT(), GetBorderWidth() / 2, 0 ) ;
+         HEIGHT 450 + iif( IsWinNT(), GetBorderHeight(), 0 ) ;
+         TITLE 'Process Information' ;
+         MAIN
 
       ON KEY ESCAPE ACTION ThisWindow.Release()
       ON KEY DELETE ACTION PROC_Terminate_Process()
@@ -39,15 +39,16 @@ PROCEDURE Main()
 
    FillGrid( 32 )
 
-   CENTER Window frmProcInfo
+   CENTER WINDOW frmProcInfo
 
-   ACTIVATE Window frmProcInfo
+   ACTIVATE WINDOW frmProcInfo
 
-RETURN // ProcInfo.Main()
+   RETURN // ProcInfo.Main()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 PROCEDURE FillGrid( nMin )
+
    LOCAL aProcess := iif( IsWinNT(), GetProcessesNT(), GetProcessesW9x() ), ;
       nProcID, nCurItem := 1
    LOCAL i, cFullFileName, hWnd
@@ -83,11 +84,12 @@ PROCEDURE FillGrid( nMin )
 
    AdjustGrid( nMin, iif( nCurItem < frmProcInfo.grdProcInfo.ItemCount, nCurItem, frmProcInfo.grdProcInfo.ItemCount ) )
 
-RETURN // FillGrid()
+   RETURN // FillGrid()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 PROCEDURE AdjustGrid( nMin, nItem )
+
    LOCAL nRows, nHeight, hBrw, nBrwOldH, nBrwNewH
 
    nRows    := Min( nMin, frmProcInfo.grdProcInfo.ItemCount )
@@ -100,11 +102,12 @@ PROCEDURE AdjustGrid( nMin, nItem )
    SetProperty( 'frmProcInfo', 'grdProcInfo', 'Height', nBrwNewH )
    SetProperty( 'frmProcInfo', 'grdProcInfo', 'Value', nItem )
 
-RETURN // AdjustGrid()
+   RETURN // AdjustGrid()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 FUNCTION IsExistInList( cFullFileName )
+
    LOCAL i, aItem, lExist := .F.
 
    FOR i := 1 TO frmProcInfo.grdProcInfo.ItemCount
@@ -117,11 +120,12 @@ FUNCTION IsExistInList( cFullFileName )
 
    NEXT
 
-RETURN lExist // IsExistInList()
+   RETURN lExist // IsExistInList()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 PROCEDURE PROC_Terminate_Process
+
    LOCAL nID := Val( frmProcInfo.grdProcInfo.Item( frmProcInfo.grdProcInfo.Value )[ 2 ] )
 
    IF ! Empty( frmProcInfo.grdProcInfo.Item( frmProcInfo.grdProcInfo.Value )[ 1 ] ) // app is hunging
@@ -133,13 +137,14 @@ PROCEDURE PROC_Terminate_Process
 
    ENDIF
 
-RETURN // PROC_Terminate_Process()
+   RETURN // PROC_Terminate_Process()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
-#define GW_OWNER	4
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   #define GW_OWNER   4
 
 FUNCTION GetAppHandleByFileName( cFileName )
-LOCAL hWnd := 0, hWin, cFullFileName := ""
+
+   LOCAL hWnd := 0, hWin, cFullFileName := ""
 
    FOR EACH hWin IN EnumWindows()
 
@@ -154,20 +159,21 @@ LOCAL hWnd := 0, hWin, cFullFileName := ""
 
    NEXT
 
-RETURN hWnd // GetAppHandleByFileName()
+   RETURN hWnd // GetAppHandleByFileName()
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 FUNCTION GetWH_ListView( hBrw, nRows )
+
    LOCAL a
 
    a    := ListViewApproximateViewRect( hBrw, nRows )
    a[1] += GetBorderWidth () / 2  // Width
    a[2] += GetBorderHeight() / 2  // Height
 
-RETURN a  // { Width, Height }
+   RETURN a  // { Width, Height }
 
-*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+   *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
 
 #pragma BEGINDUMP
 
@@ -218,7 +224,7 @@ void GetExeName( HWND hWnd, char *szFileName )
    lpfnEnumProcessModules( hProc, ahMods, sizeof( ahMods ), &dwSize );
 
    lpfnGetModuleFileNameEx( hProc, ahMods[0], szFileName, _MAX_PATH );
-		
+
    CloseHandle( hProc );
 
    FreeLibrary( hInstLib );
@@ -243,7 +249,7 @@ static PHB_ITEM pArray;
 
 BOOL CALLBACK EnumWindowsProc( HWND hWnd, LPARAM lParam )
 {
-  PHB_ITEM pHWnd = hb_itemPutNL( NULL, ( LONG ) hWnd ); 
+  PHB_ITEM pHWnd = hb_itemPutNL( NULL, ( LONG ) hWnd );
 #if defined( __MINGW32__ )
    UNREFERENCED_PARAMETER( lParam );
 #endif
@@ -282,9 +288,9 @@ HB_FUNC( LISTVIEWAPPROXIMATEVIEWRECT )
 }
 
 typedef BOOL (WINAPI * PFNISAPPHUNG)(
-	IN HWND hWnd,
-	OUT PBOOL pbHung
-	);
+   IN HWND hWnd,
+   OUT PBOOL pbHung
+   );
 
 BOOL IsAppHung(
      IN HWND hWnd,
@@ -295,6 +301,7 @@ BOOL IsAppHung(
    HINSTANCE hUser;
 
    if (!IsWindow(hWnd))
+
        return SetLastError(ERROR_INVALID_PARAMETER), FALSE;
 
    osvi.dwOSVersionInfoSize = sizeof(osvi);
@@ -313,6 +320,7 @@ BOOL IsAppHung(
       *(FARPROC *)&_IsHungAppWindow =
          GetProcAddress(hUser, "IsHungAppWindow");
       if (_IsHungAppWindow == NULL)
+
          return SetLastError(ERROR_PROC_NOT_FOUND), FALSE;
 
       // call the function IsHungAppWindow
@@ -328,6 +336,7 @@ BOOL IsAppHung(
       *(FARPROC *)&_IsHungThread =
          GetProcAddress(hUser, "IsHungThread");
       if (_IsHungThread == NULL)
+
          return SetLastError(ERROR_PROC_NOT_FOUND), FALSE;
 
       // call the function IsHungThread
@@ -351,3 +360,4 @@ HB_FUNC( ISAPPHUNG )
 }
 
 #pragma ENDDUMP
+

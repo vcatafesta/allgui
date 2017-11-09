@@ -1,241 +1,224 @@
-*------------------------------------------------------------------------------*
-Init Procedure _InitMyButton
-*------------------------------------------------------------------------------*
-
-	InstallEventHandler ( 'MyButtonEventHandler' )
-	InstallMethodHandler ( 'SetFocus' , 'MyButtonSetFocus' )
-	InstallMethodHandler ( 'Enable' , 'MyButtonEnable' )
-	InstallMethodHandler ( 'Disable' , 'MyButtonDisable' )
-	InstallPropertyHandler ( 'Handle' , 'SetMyButtonHandle' , 'GetMyButtonHandle' )
-	InstallPropertyHandler ( 'Caption' , 'SetMyButtonCaption' , 'GetMyButtonCaption' )
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure _DefineMyButton ( cName , nRow , nCol , cCaption , bAction , cParent )
-*------------------------------------------------------------------------------*
-Local hControlHandle, nId, hParentFormHandle, k, cMacroVar
-
-	If .Not. _IsWindowDefined (cParent)
-		MsgMiniGuiError("Window: "+ cParent + " is not defined.")
-	Endif
-
-	If _IsControlDefined (cName,cParent)
-		MsgMiniGuiError ("Control: " + cName + " Of " + cParent + " Already defined.")
-	Endif
-
-	cMacroVar := '_' + cParent + '_' + cName
-	k			:= _GetControlFree()
-	nId			:= _GetId() 
-	hParentFormHandle	:= GetFormHandle (cParent)
-	hControlHandle		:= InitMyButton ( ;
-							hParentFormHandle , ;
-							nRow , ;
-							nCol , ;
-							cCaption , ;
-							nId ;
-						)
-
-	Public &cMacroVar. := k
-
-	_HMG_aControlType [k] := 'MYBUTTON'
-	_HMG_aControlNames  [k] :=  cName
-	_HMG_aControlHandles  [k] := hControlHandle
-	_HMG_aControlParenthandles [k] := hParentFormHandle
-	_HMG_aControlIds  [k] :=  0 
-	_HMG_aControlProcedures  [k] := bAction
-	_HMG_aControlPageMap  [k] :=  {} 
-	_HMG_aControlValue  [k] :=  Nil 
-	_HMG_aControlInputMask  [k] :=  "" 
-	_HMG_aControllostFocusProcedure  [k] :=  "" 
-	_HMG_aControlGotFocusProcedure  [k] :=  "" 
-	_HMG_aControlChangeProcedure  [k] :=  "" 
-	_HMG_aControlDeleted  [k] :=  .F. 
-	_HMG_aControlBkColor [k] :=   Nil 
-	_HMG_aControlFontColor  [k] :=  Nil 
-	_HMG_aControlDblClick  [k] :=  "" 
-	_HMG_aControlHeadClick  [k] :=  {} 
-	_HMG_aControlRow   [k] := 0
-	_HMG_aControlCol   [k] := 0 
-	_HMG_aControlWidth   [k] := 0 
-	_HMG_aControlHeight   [k] := 0 
-	_HMG_aControlSpacing   [k] := 0 
-	_HMG_aControlContainerRow  [k] :=  -1 
-	_HMG_aControlContainerCol  [k] :=  -1 
-	_HMG_aControlPicture  [k] :=  "" 
-	_HMG_aControlContainerHandle [k] :=   0 
-	_HMG_aControlFontName  [k] :=  Nil
-	_HMG_aControlFontSize  [k] :=  Nil
-	_HMG_aControlFontAttributes  [k] :=  {} 
-	_HMG_aControlToolTip   [k] :=  '' 
-	_HMG_aControlRangeMin  [k] :=   0  
-	_HMG_aControlRangeMax  [k] :=   0  
-	_HMG_aControlCaption  [k] :=   ''
-	_HMG_aControlVisible  [k] :=   .t. 
-	_HMG_aControlHelpId  [k] :=   0 
-	_HMG_aControlFontHandle  [k] :=   Nil
-	_HMG_aControlBrushHandle  [k] :=   0 
-	_HMG_aControlEnabled  [k] :=   .T. 
-	_HMG_aControlMiscData1 [k] := 0
-	_HMG_aControlMiscData2 [k] := ''
+INIT PROCEDURE _InitMyButton
+
+   InstallEventHandler ( 'MyButtonEventHandler' )
+   InstallMethodHandler ( 'SetFocus' , 'MyButtonSetFocus' )
+   InstallMethodHandler ( 'Enable' , 'MyButtonEnable' )
+   InstallMethodHandler ( 'Disable' , 'MyButtonDisable' )
+   InstallPropertyHandler ( 'Handle' , 'SetMyButtonHandle' , 'GetMyButtonHandle' )
+   InstallPropertyHandler ( 'Caption' , 'SetMyButtonCaption' , 'GetMyButtonCaption' )
+
+   RETURN
+
+PROCEDURE _DefineMyButton ( cName , nRow , nCol , cCaption , bAction , cParent )
+
+   LOCAL hControlHandle, nId, hParentFormHandle, k, cMacroVar
+
+   IF .Not. _IsWindowDefined (cParent)
+      MsgMiniGuiError("Window: "+ cParent + " is not defined.")
+   ENDIF
+
+   IF _IsControlDefined (cName,cParent)
+      MsgMiniGuiError ("Control: " + cName + " Of " + cParent + " Already defined.")
+   ENDIF
+
+   cMacroVar := '_' + cParent + '_' + cName
+   k         := _GetControlFree()
+   nId         := _GetId()
+   hParentFormHandle   := GetFormHandle (cParent)
+   hControlHandle      := InitMyButton ( ;
+      hParentFormHandle , ;
+      nRow , ;
+      nCol , ;
+      cCaption , ;
+      nId ;
+      )
 
-Return
+   PUBLIC &cMacroVar. := k
 
-#define WM_COMMAND		0x0111
-#define BN_CLICKED		0
+   _HMG_aControlType [k] := 'MYBUTTON'
+   _HMG_aControlNames  [k] :=  cName
+   _HMG_aControlHandles  [k] := hControlHandle
+   _HMG_aControlParenthandles [k] := hParentFormHandle
+   _HMG_aControlIds  [k] :=  0
+   _HMG_aControlProcedures  [k] := bAction
+   _HMG_aControlPageMap  [k] :=  {}
+   _HMG_aControlValue  [k] :=  Nil
+   _HMG_aControlInputMask  [k] :=  ""
+   _HMG_aControllostFocusProcedure  [k] :=  ""
+   _HMG_aControlGotFocusProcedure  [k] :=  ""
+   _HMG_aControlChangeProcedure  [k] :=  ""
+   _HMG_aControlDeleted  [k] :=  .F.
+   _HMG_aControlBkColor [k] :=   Nil
+   _HMG_aControlFontColor  [k] :=  Nil
+   _HMG_aControlDblClick  [k] :=  ""
+   _HMG_aControlHeadClick  [k] :=  {}
+   _HMG_aControlRow   [k] := 0
+   _HMG_aControlCol   [k] := 0
+   _HMG_aControlWidth   [k] := 0
+   _HMG_aControlHeight   [k] := 0
+   _HMG_aControlSpacing   [k] := 0
+   _HMG_aControlContainerRow  [k] :=  -1
+   _HMG_aControlContainerCol  [k] :=  -1
+   _HMG_aControlPicture  [k] :=  ""
+   _HMG_aControlContainerHandle [k] :=   0
+   _HMG_aControlFontName  [k] :=  Nil
+   _HMG_aControlFontSize  [k] :=  Nil
+   _HMG_aControlFontAttributes  [k] :=  {}
+   _HMG_aControlToolTip   [k] :=  ''
+   _HMG_aControlRangeMin  [k] :=   0
+   _HMG_aControlRangeMax  [k] :=   0
+   _HMG_aControlCaption  [k] :=   ''
+   _HMG_aControlVisible  [k] :=   .t.
+   _HMG_aControlHelpId  [k] :=   0
+   _HMG_aControlFontHandle  [k] :=   Nil
+   _HMG_aControlBrushHandle  [k] :=   0
+   _HMG_aControlEnabled  [k] :=   .T.
+   _HMG_aControlMiscData1 [k] := 0
+   _HMG_aControlMiscData2 [k] := ''
 
-*------------------------------------------------------------------------------*
-Function MyButtonEventhandler ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
-Local i
-Local RetVal := Nil
+   RETURN
 
-hWnd := Nil // Unused variable
+   #define WM_COMMAND      0x0111
+   #define BN_CLICKED      0
 
-	if nMsg == WM_COMMAND
+FUNCTION MyButtonEventhandler ( hWnd, nMsg, wParam, lParam )
 
-		i := Ascan ( _HMG_aControlHandles , lParam )
+   LOCAL i
+   LOCAL RetVal := Nil
 
-		If i > 0 .And. _HMG_aControlType [i] == 'MYBUTTON'
+   hWnd := Nil // Unused variable
 
-			IF HiWord (wParam) == BN_CLICKED
-				RetVal := 0
-				_DoControlEventProcedure ( _HMG_aControlProcedures [i] , i )
-			Endif
+   IF nMsg == WM_COMMAND
 
-		Endif
+      i := Ascan ( _HMG_aControlHandles , lParam )
 
-	endif
+      IF i > 0 .And. _HMG_aControlType [i] == 'MYBUTTON'
 
-Return RetVal
+         IF HiWord (wParam) == BN_CLICKED
+            RetVal := 0
+            _DoControlEventProcedure ( _HMG_aControlProcedures [i] , i )
+         ENDIF
 
-*------------------------------------------------------------------------------*
-Procedure MyButtonSetFocus ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+      ENDIF
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   ENDIF
 
-		SetFocus ( GetControlHandle ( cControl , cWindow ) )
+   RETURN RetVal
 
-		_HMG_UserComponentProcess := .T.
+PROCEDURE MyButtonSetFocus ( cWindow , cControl )
 
-	else
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-		_HMG_UserComponentProcess := .F.
+      SetFocus ( GetControlHandle ( cControl , cWindow ) )
 
-	endif
+      _HMG_UserComponentProcess := .T.
 
-Return
+   ELSE
 
-*------------------------------------------------------------------------------*
-Procedure MyButtonEnable ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+      _HMG_UserComponentProcess := .F.
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   ENDIF
 
-		EnableWindow ( GetControlHandle ( cControl , cWindow ) )
+   RETURN
 
-		_HMG_UserComponentProcess := .T.
+PROCEDURE MyButtonEnable ( cWindow , cControl )
 
-	else
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-		_HMG_UserComponentProcess := .F.
+      EnableWindow ( GetControlHandle ( cControl , cWindow ) )
 
-	endif
+      _HMG_UserComponentProcess := .T.
 
-Return
+   ELSE
 
-*------------------------------------------------------------------------------*
-Procedure MyButtonDisable ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+      _HMG_UserComponentProcess := .F.
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   ENDIF
 
-		DisableWindow ( GetControlHandle ( cControl , cWindow ) )
+   RETURN
 
-		_HMG_UserComponentProcess := .T.
+PROCEDURE MyButtonDisable ( cWindow , cControl )
 
-	else
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-		_HMG_UserComponentProcess := .F.
+      DisableWindow ( GetControlHandle ( cControl , cWindow ) )
 
-	endif
+      _HMG_UserComponentProcess := .T.
 
-Return
+   ELSE
 
-*------------------------------------------------------------------------------*
-Function SetMyButtonHandle ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+      _HMG_UserComponentProcess := .F.
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   ENDIF
 
-		MsgExclamation ( 'This Property is Read Only!' , 'Warning' )
+   RETURN
 
-	endif
+FUNCTION SetMyButtonHandle ( cWindow , cControl )
 
-	_HMG_UserComponentProcess := .F.
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-Return Nil
+      MsgExclamation ( 'This Property is Read Only!' , 'Warning' )
 
-*------------------------------------------------------------------------------*
-Function GetMyButtonHandle ( cWindow , cControl )
-*------------------------------------------------------------------------------*
-Local RetVal := Nil
+   ENDIF
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   _HMG_UserComponentProcess := .F.
 
-		_HMG_UserComponentProcess := .T.
-		RetVal := GetControlHandle ( cControl , cWindow )
+   RETURN NIL
 
-	else
+FUNCTION GetMyButtonHandle ( cWindow , cControl )
 
-		_HMG_UserComponentProcess := .F.
+   LOCAL RetVal := Nil
 
-	endif
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-Return RetVal
+      _HMG_UserComponentProcess := .T.
+      RetVal := GetControlHandle ( cControl , cWindow )
 
-*------------------------------------------------------------------------------*
-Function SetMyButtonCaption ( cWindow , cControl , cProperty , cValue )
-*------------------------------------------------------------------------------*
-cProperty := Nil // Unused variable
+   ELSE
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+      _HMG_UserComponentProcess := .F.
 
-		_HMG_UserComponentProcess := .T.
+   ENDIF
 
-		SetWindowText ( GetControlHandle ( cControl , cWindow ) , cValue )
+   RETURN RetVal
 
-	else
+FUNCTION SetMyButtonCaption ( cWindow , cControl , cProperty , cValue )
 
-		_HMG_UserComponentProcess := .F.
+   cProperty := Nil // Unused variable
 
-	endif
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-Return Nil
+      _HMG_UserComponentProcess := .T.
 
-*------------------------------------------------------------------------------*
-Function GetMyButtonCaption ( cWindow , cControl )
-*------------------------------------------------------------------------------*
-Local RetVal := Nil
+      SetWindowText ( GetControlHandle ( cControl , cWindow ) , cValue )
 
-	If GetControlType ( cControl , cWindow ) == 'MYBUTTON'
+   ELSE
 
-		_HMG_UserComponentProcess := .T.
+      _HMG_UserComponentProcess := .F.
 
-		RetVal := GetWindowText ( GetControlHandle ( cControl , cWindow ) )
+   ENDIF
 
-	else
+   RETURN NIL
 
-		_HMG_UserComponentProcess := .F.
+FUNCTION GetMyButtonCaption ( cWindow , cControl )
 
-	endif
+   LOCAL RetVal := Nil
 
-Return RetVal
+   IF GetControlType ( cControl , cWindow ) == 'MYBUTTON'
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+      _HMG_UserComponentProcess := .T.
+
+      RetVal := GetWindowText ( GetControlHandle ( cControl , cWindow ) )
+
+   ELSE
+
+      _HMG_UserComponentProcess := .F.
+
+   ENDIF
+
+   RETURN RetVal
+
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
@@ -246,10 +229,10 @@ Return RetVal
 HB_FUNC( INITMYBUTTON )
 {
 
-	HWND hwnd = (HWND) hb_parnl (1) ;
-	HWND hbutton;
+   HWND hwnd = (HWND) hb_parnl (1) ;
+   HWND hbutton;
 
-	hbutton = CreateWindow( "button" ,
+   hbutton = CreateWindow( "button" ,
                            hb_parc(4) ,
                            BS_NOTIFY | WS_CHILD | BS_PUSHBUTTON | WS_VISIBLE,
                            hb_parni(3) ,
@@ -261,8 +244,9 @@ HB_FUNC( INITMYBUTTON )
                            GetModuleHandle(NULL) ,
                            NULL ) ;
 
-	hb_retnl ( (LONG) hbutton );
+   hb_retnl ( (LONG) hbutton );
 
 }
 
 #pragma ENDDUMP
+

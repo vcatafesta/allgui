@@ -1,50 +1,50 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-    "Harbour GUI framework for Win32"
-    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-    Copyright 2001 Antonio Linares <alinares@fivetech.com>
-    www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-    "Harbour Project"
-    Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-    "WHAT32"
-    Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-    "HWGUI"
-    Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
- Parts of this code is contributed and used here under permission of his author:
- (C)2005 Janusz Pora <januszpora@onet.eu>
+Parts of this code is contributed and used here under permission of his author:
+(C)2005 Janusz Pora <januszpora@onet.eu>
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
@@ -62,9 +62,8 @@
 STATIC asMRU := { Nil, Nil, Nil, Nil, Nil, Nil }
 STATIC aMRU_File
 
-*-----------------------------------------------------------------------------*
 FUNCTION AddMRUItem( NewItem, action )
-*-----------------------------------------------------------------------------*
+
    LOCAL result
 
    result := CheckForDuplicateMRU( NewItem )
@@ -75,13 +74,12 @@ FUNCTION AddMRUItem( NewItem, action )
       AddMenuElement( NewItem, action )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION CheckForDuplicateMRU( NewItem )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , DuplicateMRU := NOFOUND
-    
+
    IF !Empty( NewItem )
       // Uppercase newitem for string comparisons
       NewItem := Upper( NewItem )
@@ -91,11 +89,10 @@ STATIC FUNCTION CheckForDuplicateMRU( NewItem )
       ENDIF
    ENDIF
 
-RETURN DuplicateMRU
+   RETURN DuplicateMRU
 
-*-----------------------------------------------------------------------------*
 FUNCTION AddMenuElement( NewItem , cAction )
-*-----------------------------------------------------------------------------*
+
    LOCAL x , n , cx
    LOCAL action , Caption , xCaption , cyMRU_Id , cxMRU_Id
 
@@ -137,12 +134,11 @@ FUNCTION AddMenuElement( NewItem , cAction )
    ENDIF
    // Increment the menu count
    MRUCount++
-      
-RETURN Nil
 
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
 STATIC FUNCTION ReorderMRUList( DuplicateLocation )
-*-----------------------------------------------------------------------------*
+
    LOCAL cxMRU_Id
 
    // Move entries previously "more recent" than the
@@ -152,29 +148,27 @@ STATIC FUNCTION ReorderMRUList( DuplicateLocation )
       _RemoveMenuItem( cxMRU_Id , MRUParentForm )
       hb_ADel( aMRU_File, DuplicateLocation, .T. )
    ENDIF
-   
-RETURN Nil
 
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION SaveMRUFileList()
-*-----------------------------------------------------------------------------*
+
    LOCAL i , cFile
-   
+
    BEGIN INI FILE cFileIni
-   // Loop through all MRU
-   FOR i := 1 TO maxMRU_Files
-      // Write MRU to INI with key as it's position in list
-      cFile := iif( i <= Len( aMRU_File ), aMru_File[i, 2], "" )
-      SET SECTION cSectionIni ENTRY hb_ntos( i ) TO cFile
-   NEXT
+      // Loop through all MRU
+      FOR i := 1 TO maxMRU_Files
+         // Write MRU to INI with key as it's position in list
+         cFile := iif( i <= Len( aMRU_File ), aMru_File[i, 2], "" )
+         SET SECTION cSectionIni ENTRY hb_ntos( i ) TO cFile
+      NEXT
 
    END INI
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineMruItem ( caption , cIniFile , cSection , nMaxItems , action , name )
-*-----------------------------------------------------------------------------*
+
    LOCAL n, cValue := "", lExist := .F., aTmp := {}
 
    DEFAULT caption := " (Empty) ", nMaxItems := 10, name := "MRU", cIniFile := "mru.ini", cSection := "MRU"
@@ -189,21 +183,21 @@ FUNCTION _DefineMruItem ( caption , cIniFile , cSection , nMaxItems , action , n
 
    BEGIN INI FILENAME cIniFile
 
-   FOR n := 1 TO nMaxItems  // Retrieve entry from INI
+      FOR n := 1 TO nMaxItems  // Retrieve entry from INI
 
-      GET cValue SECTION cSection ENTRY hb_ntos( n ) DEFAULT ""
+         GET cValue SECTION cSection ENTRY hb_ntos( n ) DEFAULT ""
 
-      IF ! Empty( cValue )  // Check if a value was returned
-         lExist := .T.
-         AAdd( aTmp, cValue )
-         IF n == 1
-            MENUITEM caption NAME &name
+         IF ! Empty( cValue )  // Check if a value was returned
+            lExist := .T.
+            AAdd( aTmp, cValue )
+            IF n == 1
+               MENUITEM caption NAME &name
+            ENDIF
+         ELSE
+            EXIT
          ENDIF
-      ELSE
-         EXIT
-      ENDIF
 
-   NEXT
+      NEXT
 
    END INI
 
@@ -218,14 +212,13 @@ FUNCTION _DefineMruItem ( caption , cIniFile , cSection , nMaxItems , action , n
       MENUITEM caption NAME &name DISABLED
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION ClearMRUList()
-*-----------------------------------------------------------------------------*
+
    LOCAL n , cxMRU_Id
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    FOR EACH n IN aMRU_File DESCEND
       cxMRU_Id := n[ 3 ]
       IF n:__enumIsLast()
@@ -234,22 +227,23 @@ FUNCTION ClearMRUList()
          cMRU_Id := cxMRU_Id
          aMRU_File := {}
          MRUCount := 0
-      ELSE 
+      ELSE
          _RemoveMenuItem( cxMRU_Id , MRUParentForm )
       ENDIF
-#else
-   FOR n := Len( aMRU_File ) TO 1 STEP -1
-      cxMRU_Id := aMRU_File[n,3]
-      IF n > 1
-         _RemoveMenuItem( cxMRU_Id , MRUParentForm )
-      ELSE 
-         _ModifyMenuItem( cxMRU_Id , MRUParentForm , ' (Empty) ' , {|| Nil } )
-         SetProperty( MRUParentForm , cxMRU_Id , 'Enabled' , .F. )
-         cMRU_Id := cxMRU_Id
-         aMRU_File := {}
-         MRUCount := 0
-      ENDIF
-#endif
-   NEXT
+      #else
+      FOR n := Len( aMRU_File ) TO 1 STEP -1
+         cxMRU_Id := aMRU_File[n,3]
+         IF n > 1
+            _RemoveMenuItem( cxMRU_Id , MRUParentForm )
+         ELSE
+            _ModifyMenuItem( cxMRU_Id , MRUParentForm , ' (Empty) ' , {|| Nil } )
+            SetProperty( MRUParentForm , cxMRU_Id , 'Enabled' , .F. )
+            cMRU_Id := cxMRU_Id
+            aMRU_File := {}
+            MRUCount := 0
+         ENDIF
+         #endif
+      NEXT
 
-RETURN Nil
+      RETURN NIL
+

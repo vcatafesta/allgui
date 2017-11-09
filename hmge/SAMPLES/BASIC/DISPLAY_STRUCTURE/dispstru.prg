@@ -1,33 +1,33 @@
 /*
-   Display Structure v1.1
-   Copyright 2004 Marcos Antonio Gambeta
+Display Structure v1.1
+Copyright 2004 Marcos Antonio Gambeta
 
-   Contato: marcosgambeta@yahoo.com.br
-            marcosgambeta@uol.com.br
-            marcos_gambeta@hotmail.com
+Contato: marcosgambeta@yahoo.com.br
+marcosgambeta@uol.com.br
+marcos_gambeta@hotmail.com
 
-   Website: http://geocities.yahoo.com.br/marcosgambeta/
+Website: http://geocities.yahoo.com.br/marcosgambeta/
 
-   Este arquivo é parte do programa "Display Structure".
+Este arquivo é parte do programa "Display Structure".
 
-   "Display Structure" é um software livre; você pode redistribuí-lo e/ou
-   modificá-lo dentro dos termos da Licença Pública Geral GNU como
-   publicada pela Fundação do Software Livre (FSF); na versão 2 da
-   Licença, ou (na sua opinião) qualquer versão.
+"Display Structure" é um software livre; você pode redistribuí-lo e/ou
+modificá-lo dentro dos termos da Licença Pública Geral GNU como
+publicada pela Fundação do Software Livre (FSF); na versão 2 da
+Licença, ou (na sua opinião) qualquer versão.
 
-   Este programa é distribuído na esperança que possa ser útil,
-   mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÂO a qualquer
-   MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU
-   para maiores detalhes.
+Este programa é distribuído na esperança que possa ser útil,
+mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÂO a qualquer
+MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU
+para maiores detalhes.
 
-   Você deve ter recebido uma cópia da Licença Pública Geral GNU
-   junto com este programa, se não, escreva para a Fundação do Software
-   Livre(FSF) Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+Você deve ter recebido uma cópia da Licença Pública Geral GNU
+junto com este programa, se não, escreva para a Fundação do Software
+Livre(FSF) Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-   Uma versão da Licença Pública Geral GNU pode ser encontrada no endereço
-   abaixo:
+Uma versão da Licença Pública Geral GNU pode ser encontrada no endereço
+abaixo:
 
-   http://www.gnu.org/copyleft/gpl.txt
+http://www.gnu.org/copyleft/gpl.txt
 
 */
 
@@ -41,58 +41,61 @@
 // Variáveis estáticas
 //==========================================================================//
 
-Static aCamposN  // armazena todos os campos na ordem natural
-Static aCamposC  // armazena os campos correntes
-Static nOrder    // ordem de exibição corrente (1=natural/2=alfabética)
-Static cTipo     // filtro para tipos de campos
-                 // "X" : mostra todos os campos
-                 // "C" : mostra campos do tipo C (character)
-                 // "N" : mostra campos do tipo N (numeric)
-                 // "D" : mostra campos do tipo D (date)
-                 // "L" : mostra campos do tipo L (logic)
-                 // "M" : mostra campos do tipo M (memo)
+STATIC aCamposN  // armazena todos os campos na ordem natural
+STATIC aCamposC  // armazena os campos correntes
+STATIC nOrder    // ordem de exibição corrente (1=natural/2=alfabética)
+STATIC cTipo     // filtro para tipos de campos
+// "X" : mostra todos os campos
+// "C" : mostra campos do tipo C (character)
+// "N" : mostra campos do tipo N (numeric)
+// "D" : mostra campos do tipo D (date)
+// "L" : mostra campos do tipo L (logic)
+// "M" : mostra campos do tipo M (memo)
 
 //==========================================================================//
 // Função: Main
 // Janela principal do sistema
 //==========================================================================//
 
-Function Main ( cArquivo )
+FUNCTION Main ( cArquivo )
 
-   Local i
+   LOCAL i
 
-   If PCount() == 0
+   IF PCount() == 0
       cArquivo := GetFile( {{'Database files (*.dbf)', '*.dbf'}, {'All files (*.*)', '*.*'}}, ;
-                       'Open database' )
-   EndIf
+         'Open database' )
+   ENDIF
 
    // verifica se foi passado um nome de arquivo
-   If cArquivo == Nil
+   IF cArquivo == Nil
       MsgInfo("Nenhum arquivo fornecido!","Aviso")
-      Return Nil
-   EndIf
+
+      RETURN NIL
+   ENDIF
 
    // verifica se o arquivo existe
-   If !File( cArquivo )
+   IF !File( cArquivo )
       MsgInfo("Arquivo não encontrado!","Aviso")
-      Return Nil
-   EndIf
+
+      RETURN NIL
+   ENDIF
 
    // preenche o vetor aCamposN com
    // os campos do arquivo
-   Use (cArquivo) ReadOnly Shared
-   If NetErr()
+   USE (cArquivo) ReadOnly Shared
+   IF NetErr()
       MsgInfo("O arquivo não pode ser aberto!","Aviso")
-      Return Nil
-   Endif
+
+      RETURN NIL
+   ENDIF
    aCamposN := DBStruct()
-   Use
+   USE
 
    // formata as colunas 'tamanho' e 'decimais'
-   For i := 1 To Len(aCamposN)
+   FOR i := 1 To Len(aCamposN)
       aCamposN[i,3] := Str(aCamposN[i,3],5)
       aCamposN[i,4] := If( aCamposN[i,2]=="N", Str(aCamposN[i,4],5), "" )
-   Next i
+   NEXT i
 
    aCamposC := AClone(aCamposN)
    nOrder   := 1   // ordem natural
@@ -100,13 +103,13 @@ Function Main ( cArquivo )
 
    // define a janela principal
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 420 HEIGHT 480 + iif(IsThemed(), GetBorderHeight(), 0) ;
-      TITLE "Display Structure" ;
-      ICON "MAIN_ICON" ;
-      NOSIZE ;
-      NOMAXIMIZE ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 420 HEIGHT 480 + iif(IsThemed(), GetBorderHeight(), 0) ;
+         TITLE "Display Structure" ;
+         ICON "MAIN_ICON" ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         MAIN
 
       // define a barra de status
       DEFINE STATUSBAR
@@ -172,32 +175,33 @@ Function Main ( cArquivo )
    Form1.Center
    Form1.Activate
 
-   Return Nil
+   RETURN NIL
 
-//==========================================================================//
-// Função: AtualizaOrdem
-// Atualiza, no menu, a ordem atual dos campos
-//==========================================================================//
+   //==========================================================================//
+   // Função: AtualizaOrdem
+   // Atualiza, no menu, a ordem atual dos campos
+   //==========================================================================//
 
-Static Function AtualizaOrdem ()
+STATIC FUNCTION AtualizaOrdem ()
 
-   If nOrder == 1
+   IF nOrder == 1
       // ordem natural
       Form1.OrdNat.Checked := TRUE
       Form1.OrdAlf.Checked := FALSE
-   Else
+   ELSE
       // ordem alfabética
       Form1.OrdNat.Checked := FALSE
       Form1.OrdAlf.Checked := TRUE
-   EndIf
-   Return Nil
+   ENDIF
 
-//==========================================================================//
-// Função: AtualizaTipo
-// Atualiza, no menu, o tipo dos campos exibidos
-//==========================================================================//
+   RETURN NIL
 
-Static Function AtualizaTipo ()
+   //==========================================================================//
+   // Função: AtualizaTipo
+   // Atualiza, no menu, o tipo dos campos exibidos
+   //==========================================================================//
+
+STATIC FUNCTION AtualizaTipo ()
 
    // desmarca todos
    Form1.TipoX.Checked := FALSE
@@ -207,97 +211,101 @@ Static Function AtualizaTipo ()
    Form1.TipoL.Checked := FALSE
    Form1.TipoM.Checked := FALSE
    // marca o atual
-   Do Case
-   Case cTipo == "X" ; Form1.TipoX.Checked := TRUE
-   Case cTipo == "C" ; Form1.TipoC.Checked := TRUE
-   Case cTipo == "N" ; Form1.TipoN.Checked := TRUE
-   Case cTipo == "D" ; Form1.TipoD.Checked := TRUE
-   Case cTipo == "L" ; Form1.TipoL.Checked := TRUE
-   Case cTipo == "M" ; Form1.TipoM.Checked := TRUE
-   EndCase
-   Return Nil
+   DO CASE
+   CASE cTipo == "X" ; Form1.TipoX.Checked := TRUE
+   CASE cTipo == "C" ; Form1.TipoC.Checked := TRUE
+   CASE cTipo == "N" ; Form1.TipoN.Checked := TRUE
+   CASE cTipo == "D" ; Form1.TipoD.Checked := TRUE
+   CASE cTipo == "L" ; Form1.TipoL.Checked := TRUE
+   CASE cTipo == "M" ; Form1.TipoM.Checked := TRUE
+   ENDCASE
 
-//==========================================================================//
-// Função: OrdNat
-// Preenche o grid com os campos na ordem natural
-//==========================================================================//
+   RETURN NIL
 
-Static Function OrdNat ()
+   //==========================================================================//
+   // Função: OrdNat
+   // Preenche o grid com os campos na ordem natural
+   //==========================================================================//
 
-   Local i
+STATIC FUNCTION OrdNat ()
+
+   LOCAL i
 
    // limpa o grid
    Form1.Grid1.DeleteAllItems
    // preenche com os campos correntes
-   For i := 1 To Len(aCamposC)
+   FOR i := 1 To Len(aCamposC)
       Form1.Grid1.AddItem( aCamposC[i] )
-   Next i
+   NEXT i
    nOrder := 1 // ordem natural
    AtualizaOrdem()
-   Return Nil
 
-//==========================================================================//
-// Função: OrdAlf
-// Preenche o grid com os campos na ordem alfabética
-//==========================================================================//
+   RETURN NIL
 
-Static Function OrdAlf ()
+   //==========================================================================//
+   // Função: OrdAlf
+   // Preenche o grid com os campos na ordem alfabética
+   //==========================================================================//
 
-   Local i
-   Local a := AClone(aCamposC)
+STATIC FUNCTION OrdAlf ()
+
+   LOCAL i
+   LOCAL a := AClone(aCamposC)
 
    // ordena o vetor temporário
    ASort(a,,,{|x,y|x[1]<y[1]})
    // limpa o grid
    Form1.Grid1.DeleteAllItems
    // preenche o grid com os campos correntes
-   For i := 1 To Len(a)
+   FOR i := 1 To Len(a)
       Form1.Grid1.AddItem( a[i] )
-   Next i
+   NEXT i
    nOrder := 2 // ordem alfabética
    AtualizaOrdem()
-   Return Nil
 
-//==========================================================================//
-// Função: FiltrarTipo
-// Seleciona os campos de acordo com o tipo escolhido
-//==========================================================================//
+   RETURN NIL
 
-Static Function FiltrarTipo ( cTipoSel )
+   //==========================================================================//
+   // Função: FiltrarTipo
+   // Seleciona os campos de acordo com o tipo escolhido
+   //==========================================================================//
 
-   Local i
+STATIC FUNCTION FiltrarTipo ( cTipoSel )
+
+   LOCAL i
 
    // limpa o vetor dos campos correntes
    aCamposC := {}
    // preenche com os campos do tipo selecionado
-   For i := 1 To Len(aCamposN)
-      If cTipoSel == "X" .Or. aCamposN[i,2] == cTipoSel
+   FOR i := 1 To Len(aCamposN)
+      IF cTipoSel == "X" .Or. aCamposN[i,2] == cTipoSel
          AAdd(aCamposC,aCamposN[i])
-      EndIf
-   Next i
+      ENDIF
+   NEXT i
    // atualiza o grid
-   If nOrder == 1
+   IF nOrder == 1
       OrdNat() // ordem natural
-   Else
+   ELSE
       OrdAlf() // ordem alfabética
-   EndIf
+   ENDIF
    cTipo := cTipoSel
    AtualizaTipo()
-   Return Nil
 
-//==========================================================================//
-// Função: Sobre
-// Mostra a janela "Sobre..." do programa
-//==========================================================================//
+   RETURN NIL
 
-Static Function Sobre ()
+   //==========================================================================//
+   // Função: Sobre
+   // Mostra a janela "Sobre..." do programa
+   //==========================================================================//
+
+STATIC FUNCTION Sobre ()
 
    DEFINE WINDOW Form2 ;
-      AT 0,0 ;
-      WIDTH 340 HEIGHT 300 ;
-      TITLE "Sobre Display Structure" ;
-      MODAL ;
-      FONT "Arial" SIZE 10
+         AT 0,0 ;
+         WIDTH 340 HEIGHT 300 ;
+         TITLE "Sobre Display Structure" ;
+         MODAL ;
+         FONT "Arial" SIZE 10
 
       @ 15,35 IMAGE Image1 PICTURE "IMAGE_MAIN" WIDTH 48 HEIGHT 48
 
@@ -333,6 +341,7 @@ Static Function Sobre ()
    Form2.Center
    Form2.Activate
 
-   Return Nil
+   RETURN NIL
 
-//==========================================================================//
+   //==========================================================================//
+

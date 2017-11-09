@@ -1,55 +1,45 @@
 /*
- * $Id: adordd.prg 8953 2008-07-08 06:06:06Z vszakats $
- */
+* $Id: adordd.prg 8953 2008-07-08 06:06:06Z vszakats $
+*/
 
 /*
- * Harbour Project source code:
- * ADORDD - RDD to automatically manage Microsoft ADO
- *
- * Copyright 2007 Fernando Mancera <fmancera@viaopen.com> and
- * Antonio Linares <alinares@fivetechsoft.com>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  if not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* ADORDD - RDD to automatically manage Microsoft ADO
+* Copyright 2007 Fernando Mancera <fmancera@viaopen.com> and
+* Antonio Linares <alinares@fivetechsoft.com>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  if not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "rddsys.ch"
 #include "fileio.ch"
@@ -60,45 +50,45 @@
 
 #ifndef __XHARBOUR__
 #include "hbusrrdd.ch"
-   #xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
-                                 BEGIN SEQUENCE
+#xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+   BEGIN SEQUENCE
    #xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
-                                 RECOVER[USING < oErr > ] <- oErr->;;
-                                 ErrorBlock( bError )
-#else
+   RECOVER[USING < oErr > ] <- oErr->;;
+      ErrorBlock( bError )
+   #else
    #include "usrrdd.ch"
-#endif
+   #endif
 
-#define WA_RECORDSET  1
-#define WA_BOF        2
-#define WA_EOF        3
-#define WA_CONNECTION 4
-#define WA_CATALOG    5
-#define WA_TABLENAME  6
-#define WA_ENGINE     7
-#define WA_SERVER     8
-#define WA_USERNAME   9
-#define WA_PASSWORD  10
-#define WA_QUERY     11
-#define WA_LOCATEFOR 12
-#define WA_SCOPEINFO 13
-#define WA_SQLSTRUCT 14
+   #define WA_RECORDSET  1
+   #define WA_BOF        2
+   #define WA_EOF        3
+   #define WA_CONNECTION 4
+   #define WA_CATALOG    5
+   #define WA_TABLENAME  6
+   #define WA_ENGINE     7
+   #define WA_SERVER     8
+   #define WA_USERNAME   9
+   #define WA_PASSWORD  10
+   #define WA_QUERY     11
+   #define WA_LOCATEFOR 12
+   #define WA_SCOPEINFO 13
+   #define WA_SQLSTRUCT 14
 
-#define WA_SIZE      14
+   #define WA_SIZE      14
 
-ANNOUNCE ADORDD
+   ANNOUNCE ADORDD
 
-STATIC bError, s_cTableName, s_cEngine, s_cServer, s_cUserName, s_cPassword, s_cQuery := ""
+   STATIC bError, s_cTableName, s_cEngine, s_cServer, s_cUserName, s_cPassword, s_cQuery := ""
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
 
 STATIC FUNCTION hb_tokenGet( cText, nPos, cSep )
 
    LOCAL aTokens := hb_ATokens( cText, cSep )
 
-RETURN iif( nPos <= Len( aTokens ), aTokens[ nPos ], "" )
+   RETURN iif( nPos <= Len( aTokens ), aTokens[ nPos ], "" )
 
-#endif
+   #endif
 
 STATIC FUNCTION ADO_INIT( nRDD )
 
@@ -106,7 +96,7 @@ STATIC FUNCTION ADO_INIT( nRDD )
 
    USRRDD_RDDDATA( nRDD, aRData )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_NEW( nWA )
 
@@ -117,7 +107,7 @@ STATIC FUNCTION ADO_NEW( nWA )
 
    USRRDD_AREADATA( nWA, aWAData )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_CREATE( nWA, aOpenInfo )
 
@@ -168,7 +158,7 @@ STATIC FUNCTION ADO_CREATE( nWA, aOpenInfo )
 
    oConnection:Close()
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_CREATEFIELDS( nWA, aStruct )
 
@@ -218,7 +208,7 @@ STATIC FUNCTION ADO_CREATEFIELDS( nWA, aStruct )
       ENDCASE
    NEXT
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_OPEN( nWA, aOpenInfo )
 
@@ -300,6 +290,7 @@ STATIC FUNCTION ADO_OPEN( nWA, aOpenInfo )
       oError:CanDefault  := .T.
 
       UR_SUPER_ERROR( nWA, oError )
+
       RETURN FAILURE
    ENDIF
 
@@ -324,18 +315,18 @@ STATIC FUNCTION ADO_OPEN( nWA, aOpenInfo )
       ADO_GOTOP( nWA )
    ENDIF
 
-RETURN nResult
+   RETURN nResult
 
 STATIC FUNCTION ADO_CLOSE( nWA )
 
    LOCAL oRecordSet := USRRDD_AREADATA( nWA )[ WA_RECORDSET ]
 
    TRY
-   // oRecordSet:Close()
+      // oRecordSet:Close()
    CATCH
    END
 
-RETURN UR_SUPER_CLOSE( nWA )
+   RETURN UR_SUPER_CLOSE( nWA )
 
 STATIC FUNCTION ADO_GETVALUE( nWA, nField, xValue )
 
@@ -348,7 +339,7 @@ STATIC FUNCTION ADO_GETVALUE( nWA, nField, xValue )
       xValue := oRecordSet:Fields( nField - 1 ):Value
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_GOTOID( nWA, nRecord )
 
@@ -360,7 +351,7 @@ STATIC FUNCTION ADO_GOTOID( nWA, nRecord )
    ENDIF
    ADO_RECID( nWA, @nRecNo )
 
-RETURN iif( nRecord == nRecNo, SUCCESS, FAILURE )
+   RETURN iif( nRecord == nRecNo, SUCCESS, FAILURE )
 
 STATIC FUNCTION ADO_GOTOP( nWA )
 
@@ -374,7 +365,7 @@ STATIC FUNCTION ADO_GOTOP( nWA )
    aWAData[ WA_BOF ] := .F.
    aWAData[ WA_EOF ] := .F.
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_GOBOTTOM( nWA )
 
@@ -386,7 +377,7 @@ STATIC FUNCTION ADO_GOBOTTOM( nWA )
    aWAData[ WA_BOF ] := .F.
    aWAData[ WA_EOF ] := .F.
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_SKIPRAW( nWA, nRecords )
 
@@ -396,6 +387,7 @@ STATIC FUNCTION ADO_SKIPRAW( nWA, nRecords )
    IF nRecords != 0
       IF aWAData[ WA_EOF ]
          IF nRecords > 0
+
             RETURN SUCCESS
          ENDIF
          ADO_GOBOTTOM( nWA )
@@ -412,7 +404,7 @@ STATIC FUNCTION ADO_SKIPRAW( nWA, nRecords )
       ENDIF
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_BOF( nWA, lBof )
 
@@ -420,7 +412,7 @@ STATIC FUNCTION ADO_BOF( nWA, lBof )
 
    lBof := aWAData[ WA_BOF ]
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_EOF( nWA, lEof )
 
@@ -428,23 +420,23 @@ STATIC FUNCTION ADO_EOF( nWA, lEof )
 
    lEof := ( oRecordSet:AbsolutePosition == -3 )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_DELETED( nWA, lDeleted )
 
    LOCAL oRecordSet := USRRDD_AREADATA( nWA )[ WA_RECORDSET ]
 
    TRY
-   IF oRecordSet:Status == adRecDeleted
-      lDeleted := .T.
-   ELSE
-      lDeleted := .F.
-   ENDIF
+      IF oRecordSet:Status == adRecDeleted
+         lDeleted := .T.
+      ELSE
+         lDeleted := .F.
+      ENDIF
    CATCH
       lDeleted := .F.
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_DELETE( nWA )
 
@@ -454,7 +446,7 @@ STATIC FUNCTION ADO_DELETE( nWA )
 
    ADO_SKIPRAW( nWA, 1 )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_RECID( nWA, nRecNo )
 
@@ -462,7 +454,7 @@ STATIC FUNCTION ADO_RECID( nWA, nRecNo )
 
    nRecno := iif( oRecordSet:AbsolutePosition == -3, oRecordSet:RecordCount() + 1, oRecordSet:AbsolutePosition )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_RECCOUNT( nWA, nRecords )
 
@@ -470,7 +462,7 @@ STATIC FUNCTION ADO_RECCOUNT( nWA, nRecords )
 
    nRecords := oRecordSet:RecordCount()
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_PUTVALUE( nWA, nField, xValue )
 
@@ -488,7 +480,7 @@ STATIC FUNCTION ADO_PUTVALUE( nWA, nField, xValue )
       END
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_APPEND( nWA, lUnLockAll )
 
@@ -503,7 +495,7 @@ STATIC FUNCTION ADO_APPEND( nWA, lUnLockAll )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_FLUSH( nWA )
 
@@ -514,7 +506,7 @@ STATIC FUNCTION ADO_FLUSH( nWA )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDINFO( nWA, nIndex, aOrderInfo )
 
@@ -530,13 +522,13 @@ STATIC FUNCTION ADO_ORDINFO( nWA, nIndex, aOrderInfo )
       ENDIF
    ENDCASE
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_PACK( nWA )
 
    LOCAL oRecordSet := USRRDD_AREADATA( nWA )[ WA_RECORDSET ]
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_RAWLOCK( nWA, nAction, nRecNo )
 
@@ -545,7 +537,7 @@ STATIC FUNCTION ADO_RAWLOCK( nWA, nAction, nRecNo )
    HB_SYMBOL_UNUSED( nAction )
    HB_SYMBOL_UNUSED( nRecNo )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_LOCK( nWA, aLockInfo  )
 
@@ -555,7 +547,7 @@ STATIC FUNCTION ADO_LOCK( nWA, aLockInfo  )
    aLockInfo[ UR_LI_RECORD ] := RecNo()
    aLockInfo[ UR_LI_RESULT ] := .T.
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_UNLOCK( nWA, xRecID )
 
@@ -563,7 +555,7 @@ STATIC FUNCTION ADO_UNLOCK( nWA, xRecID )
 
    HB_SYMBOL_UNUSED( xRecID )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_SETFILTER( nWA, aFilterInfo )
 
@@ -571,7 +563,7 @@ STATIC FUNCTION ADO_SETFILTER( nWA, aFilterInfo )
 
    oRecordSet:Filter := SQLTranslate( aFilterInfo[ UR_FRI_CEXPR ] )
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_CLEARFILTER( nWA )
 
@@ -582,7 +574,7 @@ STATIC FUNCTION ADO_CLEARFILTER( nWA )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ZAP( nWA )
 
@@ -598,7 +590,7 @@ STATIC FUNCTION ADO_ZAP( nWA )
       oRecordSet:Requery()
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_SETLOCATE( nWA, aScopeInfo )
 
@@ -608,7 +600,7 @@ STATIC FUNCTION ADO_SETLOCATE( nWA, aScopeInfo )
 
    aWAData[ WA_SCOPEINFO ] := aScopeInfo
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_LOCATE( nWA, lContinue )
 
@@ -619,7 +611,7 @@ STATIC FUNCTION ADO_LOCATE( nWA, lContinue )
    USRRDD_SETFOUND( nWA, ! oRecordSet:EOF )
    aWAData[ WA_EOF ] := oRecordSet:EOF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_CLEARREL( nWA )
 
@@ -640,7 +632,7 @@ STATIC FUNCTION ADO_CLEARREL( nWA )
       ENDIF
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_RELAREA( nWA, nRelNo, nRelArea )
 
@@ -650,7 +642,7 @@ STATIC FUNCTION ADO_RELAREA( nWA, nRelNo, nRelArea )
       nRelArea := Select( aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Keys( nRelNo - 1 ):RelatedTable )
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_RELTEXT( nWA, nRelNo, cExpr )
 
@@ -660,7 +652,7 @@ STATIC FUNCTION ADO_RELTEXT( nWA, nRelNo, cExpr )
       cExpr := aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Keys( nRelNo - 1 ):Columns( 0 ):RelatedColumn
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_SETREL( nWA, aRelInfo )
 
@@ -670,13 +662,13 @@ STATIC FUNCTION ADO_SETREL( nWA, aRelInfo )
    LOCAL cKeyName := cParent + "_" + cChild
 
    TRY
-   aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Keys:Append( cKeyName, adKeyForeign, ;
-      aRelInfo[ UR_RI_CEXPR ], cChild, aRelInfo[ UR_RI_CEXPR ] )
+      aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Keys:Append( cKeyName, adKeyForeign, ;
+         aRelInfo[ UR_RI_CEXPR ], cChild, aRelInfo[ UR_RI_CEXPR ] )
    CATCH
-   // raise error for can't create relation
+      // raise error for can't create relation
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDLSTADD( nWA, aOrderInfo )
 
@@ -687,7 +679,7 @@ STATIC FUNCTION ADO_ORDLSTADD( nWA, aOrderInfo )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDLSTCLEAR( nWA )
 
@@ -698,7 +690,7 @@ STATIC FUNCTION ADO_ORDLSTCLEAR( nWA )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDLSTFOCUS( nWA, aOrderInfo )
 
@@ -709,7 +701,7 @@ STATIC FUNCTION ADO_ORDLSTFOCUS( nWA, aOrderInfo )
    CATCH
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDCREATE( nWA, aOrderCreateInfo )
 
@@ -727,14 +719,14 @@ STATIC FUNCTION ADO_ORDCREATE( nWA, aOrderCreateInfo )
    ENDIF
 
    TRY
-   IF aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Indexes == NIL .OR. ! lFound
-      oIndex := TOleAuto():New( "ADOX.Index" )
-      oIndex:Name := iif( ! Empty( aOrderCreateInfo[ UR_ORCR_TAGNAME ] ), aOrderCreateInfo[ UR_ORCR_TAGNAME ], aOrderCreateInfo[ UR_ORCR_CKEY ] )
-      oIndex:PrimaryKey := .F.
-      oIndex:Unique := aOrderCreateInfo[ UR_ORCR_UNIQUE ]
-      oIndex:Columns:Append( aOrderCreateInfo[ UR_ORCR_CKEY ] )
-      aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Indexes:Append( oIndex )
-   ENDIF
+      IF aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Indexes == NIL .OR. ! lFound
+         oIndex := TOleAuto():New( "ADOX.Index" )
+         oIndex:Name := iif( ! Empty( aOrderCreateInfo[ UR_ORCR_TAGNAME ] ), aOrderCreateInfo[ UR_ORCR_TAGNAME ], aOrderCreateInfo[ UR_ORCR_CKEY ] )
+         oIndex:PrimaryKey := .F.
+         oIndex:Unique := aOrderCreateInfo[ UR_ORCR_UNIQUE ]
+         oIndex:Columns:Append( aOrderCreateInfo[ UR_ORCR_CKEY ] )
+         aWAData[ WA_CATALOG ]:Tables( aWAData[ WA_TABLENAME ] ):Indexes:Append( oIndex )
+      ENDIF
    CATCH
       oError := ErrorNew()
       oError:GenCode     := EG_CREATE
@@ -746,7 +738,7 @@ STATIC FUNCTION ADO_ORDCREATE( nWA, aOrderCreateInfo )
       UR_SUPER_ERROR( nWA, oError )
    END
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 STATIC FUNCTION ADO_ORDDESTROY( nWA, aOrderInfo )
 
@@ -761,7 +753,7 @@ STATIC FUNCTION ADO_ORDDESTROY( nWA, aOrderInfo )
       NEXT
    ENDIF
 
-RETURN SUCCESS
+   RETURN SUCCESS
 
 FUNCTION ADORDD_GETFUNCTABLE( pFuncCount, pFuncTable, pSuperTable, nRddID )
 
@@ -809,13 +801,13 @@ FUNCTION ADORDD_GETFUNCTABLE( pFuncCount, pFuncTable, pSuperTable, nRddID )
    aADOFunc[ UR_ORDLSTCLEAR ]  := ( @ADO_ORDLSTCLEAR() )
    aADOFunc[ UR_ORDLSTFOCUS ]  := ( @ADO_ORDLSTFOCUS() )
 
-RETURN USRRDD_GETFUNCTABLE( pFuncCount, pFuncTable, pSuperTable, nRddID, cSuperRDD, ;
+   RETURN USRRDD_GETFUNCTABLE( pFuncCount, pFuncTable, pSuperTable, nRddID, cSuperRDD, ;
       aADOFunc )
 
 INIT PROCEDURE ADORDD_INIT()
    rddRegister( "ADORDD", RDT_FULL )
 
-RETURN
+   RETURN
 
 STATIC FUNCTION ADO_GETFIELDSIZE( nDBFFieldType, nADOFieldSize )
 
@@ -843,7 +835,7 @@ STATIC FUNCTION ADO_GETFIELDSIZE( nDBFFieldType, nADOFieldSize )
 
    ENDCASE
 
-RETURN nDBFFieldSize
+   RETURN nDBFFieldSize
 
 STATIC FUNCTION ADO_GETFIELDTYPE( nADOFieldType )
 
@@ -881,7 +873,6 @@ STATIC FUNCTION ADO_GETFIELDTYPE( nADOFieldType )
 
    CASE nADOFieldType == adNumeric
       nDBFFieldType := HB_FT_LONG
-
 
    CASE nADOFieldType == adError
    CASE nADOFieldType == adUserDefined
@@ -934,9 +925,9 @@ STATIC FUNCTION ADO_GETFIELDTYPE( nADOFieldType )
    CASE nADOFieldType == adChapter
 
    CASE nADOFieldType == adVarNumeric
-#if 0
+      #if 0
    CASE nADOFieldType == adArray
-#endif
+      #endif
 
    CASE nADOFieldType == adBoolean
       nDBFFieldType := HB_FT_LOGICAL
@@ -949,37 +940,37 @@ STATIC FUNCTION ADO_GETFIELDTYPE( nADOFieldType )
 
    ENDCASE
 
-RETURN nDBFFieldType
+   RETURN nDBFFieldType
 
 FUNCTION HB_AdoSetTable( cTableName )
 
    s_cTableName := cTableName
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetEngine( cEngine )
 
    s_cEngine := cEngine
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetServer( cServer )
 
    s_cServer := cServer
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetUser( cUser )
 
    s_cUserName := cUser
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetPassword( cPassword )
 
    s_cPassword := cPassword
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetQuery( cQuery )
 
@@ -987,13 +978,13 @@ FUNCTION HB_AdoSetQuery( cQuery )
 
    s_cQuery := cQuery
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HB_AdoSetLocateFor( cLocateFor )
 
    USRRDD_AREADATA( Select() )[ WA_LOCATEFOR ] := cLocateFor
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION SQLTranslate( cExpr )
 
@@ -1010,19 +1001,19 @@ STATIC FUNCTION SQLTranslate( cExpr )
    cExpr := StrTran( cExpr, ".AND.", "AND" )
    cExpr := StrTran( cExpr, ".OR.", "OR" )
 
-RETURN cExpr
+   RETURN cExpr
 
 FUNCTION HB_AdoRddGetConnection( nWA )
 
    DEFAULT nWA TO Select()
 
-RETURN USRRDD_AREADATA( nWA )[ WA_CONNECTION ]
+   RETURN USRRDD_AREADATA( nWA )[ WA_CONNECTION ]
 
 FUNCTION HB_AdoRddGetCatalog( nWA )
 
    DEFAULT nWA TO Select()
 
-RETURN USRRDD_AREADATA( nWA )[ WA_CATALOG ]
+   RETURN USRRDD_AREADATA( nWA )[ WA_CATALOG ]
 
 FUNCTION HB_AdoRddGetRecordSet( nWA )
 
@@ -1032,4 +1023,5 @@ FUNCTION HB_AdoRddGetRecordSet( nWA )
 
    aWAData := USRRDD_AREADATA( nWA )
 
-RETURN iif( aWAData != nil, aWAData[ WA_RECORDSET ], nil )
+   RETURN iif( aWAData != nil, aWAData[ WA_RECORDSET ], nil )
+

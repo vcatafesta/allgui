@@ -2,18 +2,15 @@
 #include "minigui.ch"
 
 #ifdef _USERINIT_
-*------------------------------------------------------------------------------*
 INIT PROCEDURE _InitActiveX
-*------------------------------------------------------------------------------*
 
    InstallMethodHandler ( 'Release', 'ReleaseActiveX' )
    InstallPropertyHandler ( 'XObject', 'SetActiveXObject', 'GetActiveXObject' )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE _DefineActivex ( cControlName, cParentForm, nRow, nCol, nWidth, nHeight, cProgId )
-*------------------------------------------------------------------------------*
+
    LOCAL mVar, nControlHandle, aControlHandles, k, nParentFormHandle, oOle
    LOCAL nAtlDllHandle, nInterfacePointer
 
@@ -71,7 +68,7 @@ PROCEDURE _DefineActivex ( cControlName, cParentForm, nRow, nCol, nWidth, nHeigh
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType[ k ] := "ACTIVEX"
    _HMG_aControlNames[ k ] :=  cControlName
@@ -114,15 +111,13 @@ PROCEDURE _DefineActivex ( cControlName, cParentForm, nRow, nCol, nWidth, nHeigh
    _HMG_aControlMiscData1[ k ] := oOle
    _HMG_aControlMiscData2[ k ] := ''
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE ReleaseActiveX ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF _IsControlDefined ( cControl, cWindow ) .AND. GetControlType ( cControl, cWindow ) == 'ACTIVEX'
 
-      ExitActivex( GetControlHandle ( cControl, cWindow ), _HMG_aControlHelpId[ GetControlIndex ( cControl, cWindow ) ] )
+      EXITActivex( GetControlHandle ( cControl, cWindow ), _HMG_aControlHelpId[ GetControlIndex ( cControl, cWindow ) ] )
 
       _HMG_UserComponentProcess := .T.
 
@@ -132,11 +127,9 @@ PROCEDURE ReleaseActiveX ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION SetActiveXObject ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'ACTIVEX'
 
@@ -146,11 +139,10 @@ FUNCTION SetActiveXObject ( cWindow, cControl )
 
    _HMG_UserComponentProcess := .F.
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION GetActiveXObject ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal := Nil
 
    IF GetControlType ( cControl, cWindow ) == 'ACTIVEX'
@@ -164,37 +156,35 @@ FUNCTION GetActiveXObject ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
 FUNCTION _GetControlObject ( ControlName, ParentForm )
-*------------------------------------------------------------------------------*
+
    LOCAL mVar, i
 
    mVar := '_' + ParentForm + '_' + ControlName
    i := &mVar
    IF i == 0
+
       RETURN ''
    ENDIF
 
-RETURN ( _HMG_aControlMiscData1[ i ] )
+   RETURN ( _HMG_aControlMiscData1[ i ] )
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 #include <commctrl.h>
 
-#if defined( _MSC_VER ) 
-# pragma warning(push) 
-# pragma warning(disable:4201)  /* warning C4201: nonstandard extension used: nameless struct/union */ 
-#endif 
+#if defined( _MSC_VER )
+# pragma warning(push)
+# pragma warning(disable:4201)  /* warning C4201: nonstandard extension used: nameless struct/union */
+#endif
 #include <olectl.h>
-#if defined( _MSC_VER ) 
-# pragma warning(pop) 
+#if defined( _MSC_VER )
+# pragma warning(pop)
 #endif
 
 typedef HRESULT ( WINAPI * LPAtlAxGetControl )( HWND hwnd, IUnknown ** unk );
@@ -247,4 +237,5 @@ HB_FUNC( EXITACTIVEX )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

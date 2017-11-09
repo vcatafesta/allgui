@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -50,17 +50,15 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #endif
 #include 'minigui.ch'
 
-*-----------------------------------------------------------------------------*
 FUNCTION WindowsVersion()
-*-----------------------------------------------------------------------------*
+
    LOCAL aRetVal := WinVersion()
 
-RETURN { aRetVal [1] + aRetVal [4] , aRetVal [2] , 'Build ' + aRetVal [3] }
+   RETURN { aRetVal [1] + aRetVal [4] , aRetVal [2] , 'Build ' + aRetVal [3] }
 
-*-----------------------------------------------------------------------------*
 FUNCTION _Execute( hWnd , cOperation , cFile , cParameters , cDirectory , nState )
-*-----------------------------------------------------------------------------*
 
-RETURN ShellExecute( hb_defaultValue( hWnd, GetActiveWindow() ) , ;
-   cOperation /* possible values are 'edit', 'explore', 'find', 'open', 'print' */ , ;
-   hb_defaultValue( cFile, "" ) , cParameters , cDirectory , hb_defaultValue( nState, SW_SHOWNORMAL ) )
+   RETURN ShellExecute( hb_defaultValue( hWnd, GetActiveWindow() ) , ;
+      cOperation /* possible values are 'edit', 'explore', 'find', 'open', 'print' */ , ;
+      hb_defaultValue( cFile, "" ) , cParameters , cDirectory , hb_defaultValue( nState, SW_SHOWNORMAL ) )
+

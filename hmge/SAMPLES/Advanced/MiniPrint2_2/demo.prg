@@ -1,20 +1,17 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * Copyright 2016 Dr. Claudio Soto <srvet@adinet.com.uy>
- */
+* HMG - Harbour Win32 GUI library Demo
+* Copyright 2016 Dr. Claudio Soto <srvet@adinet.com.uy>
+*/
 
 #include "hmg.ch"
 #include "Directry.ch"
 
-*------------------------------------------------------------------------------*
-Function Main()
-*------------------------------------------------------------------------------*
+FUNCTION Main()
 
    DEFINE WINDOW Win_1 ;
-      CLIENTAREA 400, 300 ;
-      TITLE 'MiniPrint Library Test: Insert Page Number' ;
-      MAIN 
+         CLIENTAREA 400, 300 ;
+         TITLE 'MiniPrint Library Test: Insert Page Number' ;
+         MAIN
 
       @ 50, 50 BUTTON Button_1 CAPTION "Test" ACTION PrintTest() DEFAULT
 
@@ -22,98 +19,95 @@ Function Main()
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-Return Nil
+   RETURN NIL
 
+PROCEDURE PrintTest
 
-*------------------------------------------------------------------------------*
-Procedure PrintTest
-*------------------------------------------------------------------------------*
    LOCAL lSuccess
 
    SELECT PRINTER DIALOG TO lSuccess PREVIEW
 
-   If lSuccess == .F.
+   IF lSuccess == .F.
       MsgStop('Print Error')
-      Return
-   EndIf
+
+      RETURN
+   ENDIF
 
    // Measure Units Are Millimeters
 
    START PRINTDOC
 
-         // first page
-         START PRINTPAGE
+      // first page
+      START PRINTPAGE
 
-            @ 20,20 PRINT "Filled Rectangle Sample:" ;
-               FONT "Arial" ;
-               SIZE 20 
+         @ 20,20 PRINT "Filled Rectangle Sample:" ;
+            FONT "Arial" ;
+            SIZE 20
 
-            @ 30,20 PRINT RECTANGLE ;
-               TO 40,190 ;
-               PENWIDTH 0.1;
-               COLOR {255,255,0}
+         @ 30,20 PRINT RECTANGLE ;
+            TO 40,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0}
 
-            @ 60,20 PRINT RECTANGLE ;
-               TO 100,190 ;
-               PENWIDTH 0.1;
-               COLOR {255,255,0};
-               FILLED
+         @ 60,20 PRINT RECTANGLE ;
+            TO 100,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            FILLED
 
-            @ 110,20 PRINT RECTANGLE ;
-               TO 150,190 ;
-               PENWIDTH 0.1;
-               COLOR {255,255,0};
-               ROUNDED
+         @ 110,20 PRINT RECTANGLE ;
+            TO 150,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            ROUNDED
 
-            @ 160,20 PRINT RECTANGLE ;
-               TO 200,190 ;
-               PENWIDTH 0.1;
-               COLOR {255,255,0};
-               FILLED;
-               ROUNDED
+         @ 160,20 PRINT RECTANGLE ;
+            TO 200,190 ;
+            PENWIDTH 0.1;
+            COLOR {255,255,0};
+            FILLED;
+            ROUNDED
 
-         END PRINTPAGE
+      END PRINTPAGE
 
-         // second page
-         START PRINTPAGE
+      // second page
+      START PRINTPAGE
 
-            @ 20,20 PRINT "Filled Rectangle Sample:" ;
-               FONT "Arial" ;
-               SIZE 20 
+         @ 20,20 PRINT "Filled Rectangle Sample:" ;
+            FONT "Arial" ;
+            SIZE 20
 
-            @ 30,20 PRINT RECTANGLE ;
-               TO 40,190 ;
-               PENWIDTH 0.1
+         @ 30,20 PRINT RECTANGLE ;
+            TO 40,190 ;
+            PENWIDTH 0.1
 
-            @ 60,20 PRINT RECTANGLE ;
-               TO 100,190 ;
-               PENWIDTH 0.1;
-               FILLED
+         @ 60,20 PRINT RECTANGLE ;
+            TO 100,190 ;
+            PENWIDTH 0.1;
+            FILLED
 
-            @ 110,20 PRINT RECTANGLE ;
-               TO 150,190 ;
-               PENWIDTH 0.1;
-               ROUNDED
+         @ 110,20 PRINT RECTANGLE ;
+            TO 150,190 ;
+            PENWIDTH 0.1;
+            ROUNDED
 
-            @ 160,20 PRINT RECTANGLE ;
-               TO 200,190 ;
-               PENWIDTH 0.1;
-               FILLED;
-               ROUNDED
+         @ 160,20 PRINT RECTANGLE ;
+            TO 200,190 ;
+            PENWIDTH 0.1;
+            FILLED;
+            ROUNDED
 
-         END PRINTPAGE
+      END PRINTPAGE
 
-         // call this function after a last END PRINTPAGE and before END PRINTDOC command
-         ProcInsertPageNumber( OpenPrinterGetDC() )
+      // call this function after a last END PRINTPAGE and before END PRINTDOC command
+      ProcInsertPageNumber( OpenPrinterGetDC() )
 
    END PRINTDOC
 
-Return
-
-
-************************************************************************************************************
+   RETURN
 
 PROCEDURE ProcInsertPageNumber( hDC )
+
    LOCAL cFuncNameCallBack := "ProcDrawEMFCallBack"
    LOCAL cFoldPrefix := GetTempFolder() + "\"
    LOCAL cNamePrefix := cFoldPrefix + _hmg_printer_timestamp + "_hmg_print_preview_"
@@ -122,24 +116,22 @@ PROCEDURE ProcInsertPageNumber( hDC )
    MEMVAR nPageNumber
    PRIVATE nPageNumber := 1
 
-   FOR i := 1 TO LEN( aFiles ) 
+   FOR i := 1 TO LEN( aFiles )
       cFileNameOld := cFoldPrefix + aFiles [ i ] [ F_NAME ]
       cFileNameNew := cFoldPrefix + "New_" + aFiles [ i ] [ F_NAME ]
       nError := BT_DrawEMF( hDC, cFileNameOld, cFileNameNew, cFuncNameCallBack )
       IF nError == 0
-         FERASE( cFileNameOld ) 
+         FERASE( cFileNameOld )
          FRENAME( cFileNameNew, cFileNameOld )
       ELSE
          MsgStop("Error ("+ hb_NtoS( nError ) +") in write into EMF: " + cFileNameOld )
       ENDIF
    NEXT
 
-RETURN
-
-
-*************************************************************************************************************
+   RETURN
 
 FUNCTION ProcDrawEMFCallBack( hDC, leftMM, topMM, rightMM, bottomMM, leftPx, topPx, rightPx, bottomPx, IsParamHDC )  // rectangle that bounded the area to draw, in milimeters and pixels
+
    LOCAL Old_PageDC := OpenPrinterGetPageDC()
 
    HB_SYMBOL_UNUSED( leftMM )
@@ -154,19 +146,14 @@ FUNCTION ProcDrawEMFCallBack( hDC, leftMM, topMM, rightMM, bottomMM, leftPx, top
    @ topMM + 15, rightMM - 65 PRINT "Page Number: " + hb_NtoS( M->nPageNumber++ ) + " of " + hb_NtoS( _hmg_printer_PageCount ) FONT "Arial" SIZE 12
    OpenPrinterGetPageDC() := Old_PageDC
 
-RETURN NIL
-
-
+   RETURN NIL
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 #include "hbvm.h"
 
-
-//**********************************************************************************************************************
 //* BT_DrawEMF ( [ hDC ] , cFileNameOld , cFileNameNew , cFuncNameCallBack )  --->  Return nError, e.g. Zero is OK
-//**********************************************************************************************************************
 
 HB_FUNC( BT_DRAWEMF )
 {
@@ -197,6 +184,7 @@ HB_FUNC( BT_DRAWEMF )
    if( pDynSym == NULL )
    {
       hb_retni( 1 );
+
       return;
    }
 
@@ -221,6 +209,7 @@ HB_FUNC( BT_DRAWEMF )
    if( hEMF_Old == NULL )
    {
       hb_retni( 2 );
+
       return;
    }
 
@@ -231,6 +220,7 @@ HB_FUNC( BT_DRAWEMF )
    {
       DeleteEnhMetaFile( hEMF_Old );
       hb_retni( 3 );
+
       return;
    }
 
@@ -258,6 +248,7 @@ HB_FUNC( BT_DRAWEMF )
    {
       DeleteEnhMetaFile( hEMF_Old );
       hb_retni( 4 );
+
       return;
    }
 
@@ -292,3 +283,4 @@ HB_FUNC( BT_DRAWEMF )
 }
 
 #pragma ENDDUMP
+

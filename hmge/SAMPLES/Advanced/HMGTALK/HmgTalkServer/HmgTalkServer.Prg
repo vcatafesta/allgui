@@ -1,197 +1,208 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- *********************************************************************************
- * Simple Server for test with NETIO
- *
- * Created by : Paulo Sérgio Durço - 23/10/2009 8:30 Hrs
- *
- * Thanks Master Roberto Lopez for your great work.
- *********************************************************************************
- * It is HMG SERVERIO with some modifications.
- * update in 27/01/2010
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Simple Server for test with NETIO
+* Created by : Paulo Sérgio Durço - 23/10/2009 8:30 Hrs
+* Thanks Master Roberto Lopez for your great work.
+* It is HMG SERVERIO with some modifications.
+* update in 27/01/2010
 */
 
 #include "minigui.ch"
 
-Memvar c_TITLE
-Memvar pListenSocket
-**********************************************************************************
+MEMVAR c_TITLE
+MEMVAR pListenSocket
+
 * Function Main
-Function Main
-	Public c_TITLE := "HMG Talk Server"
-	Public pListenSocket
 
-	Set Multiple Off
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 587 HEIGHT 173 ;
-		TITLE 'Configurations -- HMG Talk Server' ;
-		MAIN ;
-		NOSHOW ;
-		NOSIZE NOCAPTION ;
-		ICON "MAIN" ;
-		NOTIFYICON "MAIN" ;
-		NOTIFYTOOLTIP 'HMG Talk Server' ;
-		ON NOTIFYCLICK Show_Status();
-		ON INIT Start_Server();
-		ON RELEASE Delete_Table()
+   PUBLIC c_TITLE := "HMG Talk Server"
+   PUBLIC pListenSocket
 
-		DEFINE NOTIFY MENU
-			ITEM 'About...'		ACTION MsgInfo( 'HMG Talk Server', c_TITLE )
-			ITEM 'Configurations'	ACTION Show_Config()
-			ITEM 'Restart Server'	ACTION Restart_Server()
-			SEPARATOR
-			ITEM 'Exit Server'  	ACTION Form_1.Release
-		END MENU
+   SET MULTIPLE OFF
 
-          @ 10,10 FRAME Frame_1;
-		        WIDTH  560;
-        		   HEIGHT 120;
-			   OPAQUE
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 587 HEIGHT 173 ;
+         TITLE 'Configurations -- HMG Talk Server' ;
+         MAIN ;
+         NOSHOW ;
+         NOSIZE NOCAPTION ;
+         ICON "MAIN" ;
+         NOTIFYICON "MAIN" ;
+         NOTIFYTOOLTIP 'HMG Talk Server' ;
+         ON NOTIFYCLICK Show_Status();
+         ON INIT Start_Server();
+         ON RELEASE Delete_Table()
 
-          @ 20,20 LABEL Label_1;
-		        WIDTH  40;
-        		   HEIGHT 20;
-        		   VALUE "Port"
+      DEFINE NOTIFY MENU
+         ITEM 'About...'      ACTION MsgInfo( 'HMG Talk Server', c_TITLE )
+         ITEM 'Configurations'   ACTION Show_Config()
+         ITEM 'Restart Server'   ACTION Restart_Server()
+         SEPARATOR
+         ITEM 'Exit Server'     ACTION Form_1.Release
+      END MENU
 
-          @ 20,110 TEXTBOX Text_1;
-		        WIDTH  40;
-		        HEIGHT 20;
-		        INPUTMASK "9999"
+      @ 10,10 FRAME Frame_1;
+         WIDTH  560;
+         HEIGHT 120;
+         OPAQUE
 
-          @ 50,20 LABEL Label_2;
-		        WIDTH  90;
-			   HEIGHT 20;
-			   VALUE "Database Path"
+      @ 20,20 LABEL Label_1;
+         WIDTH  40;
+         HEIGHT 20;
+         VALUE "Port"
 
-          @ 50,110 TEXTBOX Text_2;
-		        WIDTH  410;
-			   HEIGHT 20;
-			   READONLY;
-        		   MAXLENGTH 100;
+      @ 20,110 TEXTBOX Text_1;
+         WIDTH  40;
+         HEIGHT 20;
+         INPUTMASK "9999"
 
-          @ 50,530 BUTTON Button_1;
-     		   CAPTION "...";
-			   ON CLICK SetProperty( "Form_1","Text_2","Value",GetFolder ( "Database Path" ) );
-		        WIDTH  30;
-			   HEIGHT 20
+      @ 50,20 LABEL Label_2;
+         WIDTH  90;
+         HEIGHT 20;
+         VALUE "Database Path"
 
-		@ 90,20 BUTTON Button_2;
-        		   CAPTION "Restart Server";
-        		   ON CLICK Write_Ini();
-		        WIDTH  100;
-        		   HEIGHT 28
+      @ 50,110 TEXTBOX Text_2;
+         WIDTH  410;
+         HEIGHT 20;
+         READONLY;
+         MAXLENGTH 100;
 
-		@ 90,460 BUTTON Button_3;
-        		   CAPTION "Close";
-        		   ON CLICK Form_1.Hide;
-		        WIDTH  100;
-        		   HEIGHT 28
+      @ 50,530 BUTTON Button_1;
+         CAPTION "...";
+         ON CLICK SetProperty( "Form_1","Text_2","Value",GetFolder ( "Database Path" ) );
+         WIDTH  30;
+         HEIGHT 20
 
-	END WINDOW
+      @ 90,20 BUTTON Button_2;
+         CAPTION "Restart Server";
+         ON CLICK Write_Ini();
+         WIDTH  100;
+         HEIGHT 28
 
-	CENTER WINDOW Form_1
+      @ 90,460 BUTTON Button_3;
+         CAPTION "Close";
+         ON CLICK Form_1.Hide;
+         WIDTH  100;
+         HEIGHT 28
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return Nil
+   CENTER WINDOW Form_1
 
-**********************************************************************************
-* Show config window
-Function Show_Config()
-	Form_1.Restore
-Return Nil
+   ACTIVATE WINDOW Form_1
 
-**********************************************************************************
-* Start the Server
-Function Start_Server()
-     Local c_Path := GetStartupFolder()
-     Local c_Port := "2941"
-     Local c_Addr := "127.0.0.1"
-	pListenSocket := NIL
+   RETURN NIL
 
-	if !File("Config.ini")
-	   Begin ini file ("Config.ini")
-	      Set Section "CONFIGURATIONS" ENTRY "Port"    To c_Port
-	      Set Section "CONFIGURATIONS" ENTRY "Path"    To c_Path
-	      Set Section "CONFIGURATIONS" ENTRY "Address" To c_Addr
-	   End ini
-	else
-	   Begin ini file ("Config.ini")
-	      Get c_Port Section "CONFIGURATIONS" ENTRY "Port"
-	      Get c_Path Section "CONFIGURATIONS" ENTRY "Path"
-	      Get c_Addr Section "CONFIGURATIONS" ENTRY "Address" DEFAULT c_Addr
-	   End ini
-	endif
+   * Show config window
 
-	Form_1.Text_1.Value := c_Port
-	Form_1.Text_2.Value := c_Path
+FUNCTION Show_Config()
 
-	pListenSocket := netio_mtserver( Val( AllTrim(c_Port) ), c_Addr )
+   Form_1.Restore
 
-	if empty( pListenSocket )
-		SetProperty( "Form_1","NOTIFYICON","STOP" )
-		MsgStop( "Cannot start server!", c_TITLE )
-	else
-	    SetProperty( "Form_1","NOTIFYICON","MAIN" )
-		DBCreate( "Messenger.DBF", {{"COD","N",5,0}, {"NICK","C",10,0}, {"MSG","C",200,0}, ;
-		                            {"ONLINE","L",1,0}, {"TONICK","C",10,0}} )		
-	    Show_Status()									
-	endif
-Return Nil
+   RETURN NIL
 
-**********************************************************************************
-Function Delete_Table()
-	FErase("Messenger.DBF")
-Return Nil
+   * Start the Server
 
-**********************************************************************************
-* Stop the Server
-Function Stop_Server()
-     if !empty( pListenSocket )
-		SetProperty( "Form_1","NOTIFYICON","STOP" )
-		netio_serverstop( pListenSocket )
-		pListenSocket := NIL
-     endif
-Return Nil
+FUNCTION Start_Server()
 
-**********************************************************************************
-* Show Server status
-Function Show_Status()
-     if !empty( pListenSocket )
-		MsgInfo( "Hmg Talk Server is running at Port: " ;
-                 + AllTrim(Form_1.Text_1.Value) + CHR(13);
-                 + "Database Path : " + AllTrim(Form_1.Text_2.Value), c_TITLE )
-     else
-		MsgInfo( "Hmg Talk Server is stopped!", c_TITLE )
-     endif
-Return Nil
+   LOCAL c_Path := GetStartupFolder()
+   LOCAL c_Port := "2941"
+   LOCAL c_Addr := "127.0.0.1"
 
-**********************************************************************************
-* Restart the Server
-Function Restart_Server()
-	    Stop_Server()
-		Delete_Table()
-	    Start_Server()
-Return Nil
+   pListenSocket := NIL
 
-**********************************************************************************
-* Write the INI file with content in text´s box on Form_1 (Config Window)
-Function Write_Ini()
-     if File("Config.ini")
-	   fErase("Config.ini")
-     endif
+   IF !File("Config.ini")
+      BEGIN INI FILE ("Config.ini")
+         SET SECTION "CONFIGURATIONS" ENTRY "Port"    To c_Port
+         SET SECTION "CONFIGURATIONS" ENTRY "Path"    To c_Path
+         SET SECTION "CONFIGURATIONS" ENTRY "Address" To c_Addr
+      END INI
+   ELSE
+      BEGIN INI FILE ("Config.ini")
+         GET c_Port Section "CONFIGURATIONS" ENTRY "Port"
+         GET c_Path Section "CONFIGURATIONS" ENTRY "Path"
+         GET c_Addr Section "CONFIGURATIONS" ENTRY "Address" DEFAULT c_Addr
+      END INI
+   ENDIF
 
-     Begin ini file ("Config.ini")
-	   Set Section "CONFIGURATIONS" ENTRY "Port"    To Form_1.Text_1.Value
-	   Set Section "CONFIGURATIONS" ENTRY "Path"    To Form_1.Text_2.Value
-	   Set Section "CONFIGURATIONS" ENTRY "Address" To "127.0.0.1"
-     End ini
+   Form_1.Text_1.Value := c_Port
+   Form_1.Text_2.Value := c_Path
 
-     Restart_Server()
-Return Nil
+   pListenSocket := netio_mtserver( Val( AllTrim(c_Port) ), c_Addr )
+
+   IF empty( pListenSocket )
+      SetProperty( "Form_1","NOTIFYICON","STOP" )
+      MsgStop( "Cannot start server!", c_TITLE )
+   ELSE
+      SetProperty( "Form_1","NOTIFYICON","MAIN" )
+      DBCreate( "Messenger.DBF", {{"COD","N",5,0}, {"NICK","C",10,0}, {"MSG","C",200,0}, ;
+         {"ONLINE","L",1,0}, {"TONICK","C",10,0}} )
+      Show_Status()
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION Delete_Table()
+
+   FErase("Messenger.DBF")
+
+   RETURN NIL
+
+   * Stop the Server
+
+FUNCTION Stop_Server()
+
+   IF !empty( pListenSocket )
+      SetProperty( "Form_1","NOTIFYICON","STOP" )
+      netio_serverstop( pListenSocket )
+      pListenSocket := NIL
+   ENDIF
+
+   RETURN NIL
+
+   * Show Server status
+
+FUNCTION Show_Status()
+
+   IF !empty( pListenSocket )
+      MsgInfo( "Hmg Talk Server is running at Port: " ;
+         + AllTrim(Form_1.Text_1.Value) + CHR(13);
+         + "Database Path : " + AllTrim(Form_1.Text_2.Value), c_TITLE )
+   ELSE
+      MsgInfo( "Hmg Talk Server is stopped!", c_TITLE )
+   ENDIF
+
+   RETURN NIL
+
+   * Restart the Server
+
+FUNCTION Restart_Server()
+
+   Stop_Server()
+   DELETE_Table()
+   Start_Server()
+
+   RETURN NIL
+
+   * Write the INI file with content in text´s box on Form_1 (Config Window)
+
+FUNCTION Write_Ini()
+
+   IF File("Config.ini")
+      fErase("Config.ini")
+   ENDIF
+
+   BEGIN INI FILE ("Config.ini")
+      SET SECTION "CONFIGURATIONS" ENTRY "Port"    To Form_1.Text_1.Value
+      SET SECTION "CONFIGURATIONS" ENTRY "Path"    To Form_1.Text_2.Value
+      SET SECTION "CONFIGURATIONS" ENTRY "Address" To "127.0.0.1"
+   END INI
+
+   Restart_Server()
+
+   RETURN NIL
+

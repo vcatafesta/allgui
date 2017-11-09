@@ -1,12 +1,10 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- * dbview.prg - dbf browsing sample
- *
- * HWGUI - Harbour Win32 and Linux (GTK) GUI library
- * Copyright 2005-2014 Alexander S.Kresin <alex@kresin.ru>
- *
- * Adapted for MiniGUI Extended Edition by Grigory Filatov - 2014
- */
+* MINIGUI - Harbour Win32 GUI library Demo
+* dbview.prg - dbf browsing sample
+* HWGUI - Harbour Win32 and Linux (GTK) GUI library
+* Copyright 2005-2014 Alexander S.Kresin <alex@kresin.ru>
+* Adapted for MiniGUI Extended Edition by Grigory Filatov - 2014
+*/
 
 #include <minigui.ch>
 #include "error.ch"
@@ -15,139 +13,133 @@
 REQUEST HB_CODEPAGE_RU866
 REQUEST HB_CODEPAGE_RUKOI8
 #ifdef __XHARBOUR__
-   REQUEST HB_CODEPAGE_RUWIN
+REQUEST HB_CODEPAGE_RUWIN
 #else
-   REQUEST HB_CODEPAGE_RU1251
+REQUEST HB_CODEPAGE_RU1251
 #endif
 
 REQUEST DBFCDX
 
-Set Procedure To h_rptgen
+SET Procedure To h_rptgen
 
-Static aFieldTypes := { "C","N","D","L","M" }
-Static dbv_cLocate, dbv_nRec, dbv_cSeek
+STATIC aFieldTypes := { "C","N","D","L","M" }
+STATIC dbv_cLocate, dbv_nRec, dbv_cSeek
 
-Memvar DataCP, currentCP, currFname
+MEMVAR DataCP, currentCP, currFname
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FUNCTION Main
 
-Function Main
-Private DataCP, currentCP, currFname
+   PRIVATE DataCP, currentCP, currFname
 
    RDDSETDEFAULT( "DBFCDX" )
 
    SET CENTURY ON
    SET DATE GERMAN
-   
+
    SET FONT TO "Courier New", 10
    SET DEFAULT ICON TO "demo.ico"
 
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW WndMain ;
-	AT 0, 0 ;
-	WIDTH 640 HEIGHT 480 ;
-	TITLE "DBF Browse" ;
-	MAIN ;
-	ON INIT ( BuildMenu(), ResizeEdit() ) ;
-	ON SIZE ResizeEdit() ;
-	ON MAXIMIZE ResizeEdit()
+         AT 0, 0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE "DBF Browse" ;
+         MAIN ;
+         ON INIT ( BuildMenu(), ResizeEdit() ) ;
+         ON SIZE ResizeEdit() ;
+         ON MAXIMIZE ResizeEdit()
 
-	@ 0,0 EDITBOX Edit_1 ;
-		WIDTH 0 ;
-		HEIGHT 0 ;
-   		VALUE '' ;
-		BACKCOLOR WHITE
+      @ 0,0 EDITBOX Edit_1 ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         VALUE '' ;
+         BACKCOLOR WHITE
 
-	DEFINE STATUSBAR FONT 'Verdana' SIZE 9
-              STATUSITEM "" WIDTH 200
-              STATUSITEM "" WIDTH 90
-              DATE          WIDTH 90
-              CLOCK         WIDTH 80
-	END STATUSBAR
+      DEFINE STATUSBAR FONT 'Verdana' SIZE 9
+         STATUSITEM "" WIDTH 200
+         STATUSITEM "" WIDTH 90
+         DATE          WIDTH 90
+         CLOCK         WIDTH 80
+      END STATUSBAR
 
-	ON KEY ALT+O ACTION FileOpen()
-	ON KEY ALT+A ACTION dbv_AppRec()
-	ON KEY F7 ACTION dbv_Continue()
-	ON KEY F8 ACTION dbv_DelRec()
-	ON KEY ALT+X ACTION WndMain.Release()
+      ON KEY ALT+O ACTION FileOpen()
+      ON KEY ALT+A ACTION dbv_AppRec()
+      ON KEY F7 ACTION dbv_Continue()
+      ON KEY F8 ACTION dbv_DelRec()
+      ON KEY ALT+X ACTION WndMain.Release()
 
    END WINDOW
 
    CENTER WINDOW WndMain
    ACTIVATE WINDOW WndMain
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Procedure BuildMenu()
+STATIC PROCEDURE BuildMenu()
 
    DEFINE MAIN MENU OF WndMain
-     POPUP "&File"
-       MENUITEM "&New" ACTION ModiStru( .T. )
-       MENUITEM "&Open"+Chr(9)+"Alt+O" ACTION FileOpen()
-       SEPARATOR       
-       MENUITEM "E&xit" ACTION WndMain.Release()
-     END POPUP
-     POPUP "&Index"
-       MENUITEM "&Select order" ACTION SelectIndex() DISABLED
-       MENUITEM "&New order" ACTION NewIndex() DISABLED
-       MENUITEM "&Open index file" ACTION OpenIndex() DISABLED
-       SEPARATOR
-       MENUITEM "&Reindex all" ACTION ReIndex() DISABLED
-       SEPARATOR
-       MENUITEM "&Close all indexes" ACTION CloseIndex() DISABLED
-     END POPUP
-     POPUP "&Structure"
-       MENUITEM "&Modify structure" ACTION ModiStru( .F. ) DISABLED
-     END POPUP
-     POPUP "&Move"
-       MENUITEM "&Go To" ACTION dbv_Goto() DISABLED
-       MENUITEM "&Seek" ACTION dbv_Seek() DISABLED
-       MENUITEM "&Locate" ACTION dbv_Locate() DISABLED
-       MENUITEM "&Continue"+Chr(9)+"F7" ACTION dbv_Continue() DISABLED
-     END POPUP
-     POPUP "&Command"
-       MENUITEM "&Append record"+Chr(9)+"Alt+A" ACTION dbv_AppRec() DISABLED
-       MENUITEM "&Delete record"+Chr(9)+"F8" ACTION dbv_DelRec() DISABLED
-       MENUITEM "&Pack" ACTION dbv_Pack() DISABLED
-       MENUITEM "&Zap" ACTION dbv_Zap() DISABLED
-     END POPUP
-     POPUP "&View"
-       MENUITEM "&Font" ACTION ChangeFont()
-       POPUP "&Local codepage"
-          MENUITEM "EN" ACTION ( hb_cdpSelect( "EN" ), LocalCheck( 1 ) ) NAME SetLocal_1 CHECKED
-          MENUITEM "RUKOI8" ACTION ( hb_cdpSelect( "RUKOI8" ), LocalCheck( 2 ) ) NAME SetLocal_2
-          MENUITEM "RU1251" ACTION ( hb_cdpSelect( "RU1251" ), LocalCheck( 3 ) ) NAME SetLocal_3
-       END POPUP
-       POPUP "&Data's codepage"
-          MENUITEM "EN" ACTION SetDataCP( "EN" ) NAME SetData_1 CHECKED
-          MENUITEM "RUKOI8" ACTION SetDataCP( "RUKOI8" ) NAME SetData_2
-          MENUITEM "RU1251" ACTION SetDataCP( "RU1251" ) NAME SetData_3
-          MENUITEM "RU866"  ACTION SetDataCP( "RU866" ) NAME SetData_4
-       END POPUP
-     END POPUP
-     POPUP "&Help"
-       MENUITEM "&About" ACTION Msginfo("Dbf Files Browser" + Chr(10) + "2005-2014" )
-     END POPUP
+      POPUP "&File"
+         MENUITEM "&New" ACTION ModiStru( .T. )
+         MENUITEM "&Open"+Chr(9)+"Alt+O" ACTION FileOpen()
+         SEPARATOR
+         MENUITEM "E&xit" ACTION WndMain.Release()
+      END POPUP
+      POPUP "&Index"
+         MENUITEM "&Select order" ACTION SelectIndex() DISABLED
+         MENUITEM "&New order" ACTION NewIndex() DISABLED
+         MENUITEM "&Open index file" ACTION OpenIndex() DISABLED
+         SEPARATOR
+         MENUITEM "&Reindex all" ACTION ReIndex() DISABLED
+         SEPARATOR
+         MENUITEM "&Close all indexes" ACTION CloseIndex() DISABLED
+      END POPUP
+      POPUP "&Structure"
+         MENUITEM "&Modify structure" ACTION ModiStru( .F. ) DISABLED
+      END POPUP
+      POPUP "&Move"
+         MENUITEM "&Go To" ACTION dbv_Goto() DISABLED
+         MENUITEM "&Seek" ACTION dbv_Seek() DISABLED
+         MENUITEM "&Locate" ACTION dbv_Locate() DISABLED
+         MENUITEM "&Continue"+Chr(9)+"F7" ACTION dbv_Continue() DISABLED
+      END POPUP
+      POPUP "&Command"
+         MENUITEM "&Append record"+Chr(9)+"Alt+A" ACTION dbv_AppRec() DISABLED
+         MENUITEM "&Delete record"+Chr(9)+"F8" ACTION dbv_DelRec() DISABLED
+         MENUITEM "&Pack" ACTION dbv_Pack() DISABLED
+         MENUITEM "&Zap" ACTION dbv_Zap() DISABLED
+      END POPUP
+      POPUP "&View"
+         MENUITEM "&Font" ACTION ChangeFont()
+         POPUP "&Local codepage"
+            MENUITEM "EN" ACTION ( hb_cdpSelect( "EN" ), LocalCheck( 1 ) ) NAME SetLocal_1 CHECKED
+            MENUITEM "RUKOI8" ACTION ( hb_cdpSelect( "RUKOI8" ), LocalCheck( 2 ) ) NAME SetLocal_2
+            MENUITEM "RU1251" ACTION ( hb_cdpSelect( "RU1251" ), LocalCheck( 3 ) ) NAME SetLocal_3
+         END POPUP
+         POPUP "&Data's codepage"
+            MENUITEM "EN" ACTION SetDataCP( "EN" ) NAME SetData_1 CHECKED
+            MENUITEM "RUKOI8" ACTION SetDataCP( "RUKOI8" ) NAME SetData_2
+            MENUITEM "RU1251" ACTION SetDataCP( "RU1251" ) NAME SetData_3
+            MENUITEM "RU866"  ACTION SetDataCP( "RU866" ) NAME SetData_4
+         END POPUP
+      END POPUP
+      POPUP "&Help"
+         MENUITEM "&About" ACTION Msginfo("Dbf Files Browser" + Chr(10) + "2005-2014" )
+      END POPUP
    END MENU
-   
-Return
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN
 
-Static Procedure ResizeEdit
+STATIC PROCEDURE ResizeEdit
 
    WndMain.Edit_1.Width := WndMain.Width - 2 * GetBorderWidth()
    WndMain.Edit_1.Height := WndMain.Height - ( GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + iif(IsXPThemeActive(), 22, 20) )
 
-Return
+   RETURN
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION FileOpen( fname )
 
-Static Function FileOpen( fname )
-Local mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
+   LOCAL mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
 
    IF Empty( fname )
       fname := Getfile( {{"xBase files (*.dbf)", "*.dbf"}},"Open a Dbf", mypath )
@@ -155,12 +147,12 @@ Local mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
 
    IF !Empty( fname )
       CLOSE ALL
-      
+
       IF DataCP != Nil
-         Use (fname) New CodePage (DataCP)
+         USE (fname) New CodePage (DataCP)
          currentCP := DataCP
       ELSE
-         Use (fname) New
+         USE (fname) New
       ENDIF
       currFname := Left( fname, rAt( ".", fname ) - 1 )
 
@@ -175,108 +167,102 @@ Local mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
       EnableMainMenu( "WndMain" )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FUNCTION EnableMainMenu( cFormName )
 
-Function EnableMainMenu( cFormName )
-Local nFormHandle, i, nControlCount
+   LOCAL nFormHandle, i, nControlCount
 
    nFormHandle   := GetFormHandle( cFormName )
    nControlCount := Len( _HMG_aControlHandles )
 
-   For i := 1 To nControlCount
+   FOR i := 1 To nControlCount
 
-      If _HMG_aControlParentHandles [i] == nFormHandle
-         If ValType( _HMG_aControlHandles [i] ) == 'N'
+      IF _HMG_aControlParentHandles [i] == nFormHandle
+         IF ValType( _HMG_aControlHandles [i] ) == 'N'
             IF _HMG_aControlType [i] == 'MENU' .AND. _HMG_aControlEnabled [i] == .F.
                _EnableMenuItem( _HMG_aControlNames [i], cFormName )
             ENDIF
-         EndIf
-      EndIf
+         ENDIF
+      ENDIF
 
-   Next i
+   NEXT i
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Procedure LocalCheck( nCheck )
+STATIC PROCEDURE LocalCheck( nCheck )
 
    WndMain.SetLocal_1.Checked := (nCheck == 1)
    WndMain.SetLocal_2.Checked := (nCheck == 2)
    WndMain.SetLocal_3.Checked := (nCheck == 3)
 
-Return
+   RETURN
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC PROCEDURE SetBrowse( cAlias )
 
-Static Procedure SetBrowse( cAlias )
-Local i, size, size1
-Local astruct
-Local anames := {"iif(deleted(), '*', ' ')"}
-Local aheaders := {"*"}
-Local asizes := {18 + iif(IsXPThemeActive(), 4, 0)}
-Local ajustify := {0}, areadonly := {.t.}
+   LOCAL i, size, size1
+   LOCAL astruct
+   LOCAL anames := {"iif(deleted(), '*', ' ')"}
+   LOCAL aheaders := {"*"}
+   LOCAL asizes := {18 + iif(IsXPThemeActive(), 4, 0)}
+   LOCAL ajustify := {0}, areadonly := {.t.}
 
-	astruct := (cAlias)->( dbStruct(cAlias) )
+   astruct := (cAlias)->( dbStruct(cAlias) )
 
-	FOR i := 1 to Len(astruct)
-		aAdd(anames, astruct[i, 1])
-		aAdd(aheaders, astruct[i, 1])
-		size := Len(trim(astruct[i, 1])) * 15
-		size1 := astruct[i, 3] * iif(astruct[i, 2] == 'L', 50, iif(astruct[i, 2] == 'D', 15, 10))
-		aAdd(asizes, Max(size1, size))
-		aAdd(ajustify, LtoN(astruct[i, 2] == 'N'))
-		aAdd(areadonly, .f.)
-	NEXT
+   FOR i := 1 to Len(astruct)
+      aAdd(anames, astruct[i, 1])
+      aAdd(aheaders, astruct[i, 1])
+      size := Len(trim(astruct[i, 1])) * 15
+      size1 := astruct[i, 3] * iif(astruct[i, 2] == 'L', 50, iif(astruct[i, 2] == 'D', 15, 10))
+      aAdd(asizes, Max(size1, size))
+      aAdd(ajustify, LtoN(astruct[i, 2] == 'N'))
+      aAdd(areadonly, .f.)
+   NEXT
 
-	IF IsControlDefined( Edit_1, WndMain ) == .T.
-		WndMain.Edit_1.Release()
-	ENDIF
+   IF IsControlDefined( Edit_1, WndMain ) == .T.
+      WndMain.Edit_1.Release()
+   ENDIF
 
-	DEFINE BROWSE Edit_1
-		ROW 0
-		COL 0
-		WIDTH WndMain.Width - 2 * GetBorderWidth()
-		HEIGHT WndMain.Height - ( GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + iif(IsXPThemeActive(), 22, 20) )
-		PARENT WndMain
-		HEADERS aheaders
-		WIDTHS asizes
-		FIELDS anames
-		JUSTIFY ajustify
-		WORKAREA &cAlias
-		VALUE (cAlias)->( Recno() )
-		VSCROLLBAR (cAlias)->( Lastrec() ) > 0
-		ALLOWEDIT .T.
-		INPLACEEDIT .T.
-		READONLYFIELDS areadonly
-		FONTNAME _HMG_DefaultFontName
-		FONTSIZE _HMG_DefaultFontSize
-	END BROWSE
+   DEFINE BROWSE Edit_1
+      ROW 0
+      COL 0
+      WIDTH WndMain.Width - 2 * GetBorderWidth()
+      HEIGHT WndMain.Height - ( GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + iif(IsXPThemeActive(), 22, 20) )
+      PARENT WndMain
+      HEADERS aheaders
+      WIDTHS asizes
+      FIELDS anames
+      JUSTIFY ajustify
+      WORKAREA &cAlias
+      VALUE (cAlias)->( Recno() )
+      VSCROLLBAR (cAlias)->( Lastrec() ) > 0
+      ALLOWEDIT .T.
+      INPLACEEDIT .T.
+      READONLYFIELDS areadonly
+      FONTNAME _HMG_DefaultFontName
+      FONTSIZE _HMG_DefaultFontSize
+   END BROWSE
 
-	WndMain.Edit_1.SetFocus()
-Return
+   WndMain.Edit_1.SetFocus()
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN
 
-Static Function ChangeFont()
-Local aNewFont := GetFont( _HMG_DefaultFontName, _HMG_DefaultFontSize )
+STATIC FUNCTION ChangeFont()
 
-	IF !Empty( aNewFont[1] )
-		_HMG_DefaultFontName := aNewFont[1]
-		_HMG_DefaultFontSize := aNewFont[2]
-		IF !Empty( Alias() )
-			dbGoto( WndMain.Edit_1.Value )
-			SetBrowse( Alias() )
-		ENDIF
-	ENDIF
+   LOCAL aNewFont := GetFont( _HMG_DefaultFontName, _HMG_DefaultFontSize )
 
-Return Nil
+   IF !Empty( aNewFont[1] )
+      _HMG_DefaultFontName := aNewFont[1]
+      _HMG_DefaultFontSize := aNewFont[2]
+      IF !Empty( Alias() )
+         dbGoto( WndMain.Edit_1.Value )
+         SetBrowse( Alias() )
+      ENDIF
+   ENDIF
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN NIL
 
-Static Function SetDataCP( cp )
+STATIC FUNCTION SetDataCP( cp )
 
    DataCP := cp
 
@@ -289,19 +275,19 @@ Static Function SetDataCP( cp )
       FileOpen( currFname+".dbf" )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION SelectIndex()
 
-Static Function SelectIndex()
-Local aIndex := { { "None","   ","   " } }, i, indname, iLen := 0
-Local width, height, nChoice := 0, nOrder := OrdNumber() + 1
+   LOCAL aIndex := { { "None","   ","   " } }, i, indname, iLen := 0
+   LOCAL width, height, nChoice := 0, nOrder := OrdNumber() + 1
 
    IF Empty( Alias() )
-      Return Nil
+
+      RETURN NIL
    ENDIF
-   
-   i := 1   
+
+   i := 1
    DO WHILE !EMPTY( indname := ORDNAME( i ) )
       AADD( aIndex, { indname, ORDKEY( i ), ORDBAGNAME( i ) } )
       iLen := Max( iLen, Len( OrdKey( i ) ) )
@@ -310,145 +296,145 @@ Local width, height, nChoice := 0, nOrder := OrdNumber() + 1
 
    width := 14 * ( iLen + 20 )
    height := 20 * ( Len( aIndex ) + 2 ) + GetBorderHeight()
-   
-	DEFINE WINDOW SelectIndex ;
-		AT 0 , 0 ;
-                WIDTH width+GetBorderWidth() HEIGHT height+GetBorderHeight() ;
-                TITLE "Select Order" ;
-		MODAL ;
-                NOSIZE
 
-	@ 0,0 GRID Grid_1 ;
-		WIDTH  width ;
-		HEIGHT height ;
-		HEADERS { "OrdName", "Order key", "Filename" } ;
-		WIDTHS { 100, Max(iLen*10,width-210), 100 } ;
-		ITEMS aIndex ;
-		VALUE nOrder ;
-		ON DBLCLICK ( nChoice := SelectIndex.Grid_1.Value, SelectIndex.Release() )
+   DEFINE WINDOW SelectIndex ;
+         AT 0 , 0 ;
+         WIDTH width+GetBorderWidth() HEIGHT height+GetBorderHeight() ;
+         TITLE "Select Order" ;
+         MODAL ;
+         NOSIZE
 
-	ON KEY ESCAPE ACTION SelectIndex.Release()
+      @ 0,0 GRID Grid_1 ;
+         WIDTH  width ;
+         HEIGHT height ;
+         HEADERS { "OrdName", "Order key", "Filename" } ;
+         WIDTHS { 100, Max(iLen*10,width-210), 100 } ;
+         ITEMS aIndex ;
+         VALUE nOrder ;
+         ON DBLCLICK ( nChoice := SelectIndex.Grid_1.Value, SelectIndex.Release() )
 
-	END WINDOW
-	CENTER WINDOW SelectIndex
-	ACTIVATE WINDOW SelectIndex
+      ON KEY ESCAPE ACTION SelectIndex.Release()
+
+   END WINDOW
+   CENTER WINDOW SelectIndex
+   ACTIVATE WINDOW SelectIndex
 
    IF nChoice > 0
       nChoice --
-      Set Order To nChoice
+      SET Order To nChoice
       UpdBrowse()
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION NewIndex()
 
-Static Function NewIndex()
-Local cName := "", lMulti := .T., lUniq := .F., cTag := "", cExpr := "", cCond := ""
-Local lResult := .F.
+   LOCAL cName := "", lMulti := .T., lUniq := .F., cTag := "", cExpr := "", cCond := ""
+   LOCAL lResult := .F.
 
    IF Empty( Alias() )
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
-	DEFINE WINDOW NewIndex ;
-		AT 0 , 0 ;
-                WIDTH 310 HEIGHT 270 ;
-                TITLE "Create Order" ; 
-		MODAL ;
-                NOSIZE
+   DEFINE WINDOW NewIndex ;
+         AT 0 , 0 ;
+         WIDTH 310 HEIGHT 270 ;
+         TITLE "Create Order" ;
+         MODAL ;
+         NOSIZE
 
-	   DEFINE LABEL Label_1
-		ROW 10
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		VALUE "Order name:"
-		VCENTERALIGN .T.
-	   END LABEL
+      DEFINE LABEL Label_1
+         ROW 10
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         VALUE "Order name:"
+         VCENTERALIGN .T.
+      END LABEL
 
-	   DEFINE TEXTBOX Text_1
-		ROW 10
-		COL 110
-		WIDTH  100
-		HEIGHT 22
-		VALUE cName
-		ON LOSTFOCUS cName := NewIndex.Text_1.Value
-	   END TEXTBOX
+      DEFINE TEXTBOX Text_1
+         ROW 10
+         COL 110
+         WIDTH  100
+         HEIGHT 22
+         VALUE cName
+         ON LOSTFOCUS cName := NewIndex.Text_1.Value
+      END TEXTBOX
 
-	   DEFINE CHECKBOX Check_1
-		ROW 40
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		CAPTION "Multibag"
-		VALUE lMulti
-		ON LOSTFOCUS lMulti := NewIndex.Check_1.Value
-	   END CHECKBOX
+      DEFINE CHECKBOX Check_1
+         ROW 40
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         CAPTION "Multibag"
+         VALUE lMulti
+         ON LOSTFOCUS lMulti := NewIndex.Check_1.Value
+      END CHECKBOX
 
-	   DEFINE TEXTBOX Text_2
-		ROW 40
-		COL 110
-		WIDTH  100
-		HEIGHT 22
-		VALUE cTag
-		ON LOSTFOCUS cTag := NewIndex.Text_2.Value
-	   END TEXTBOX
+      DEFINE TEXTBOX Text_2
+         ROW 40
+         COL 110
+         WIDTH  100
+         HEIGHT 22
+         VALUE cTag
+         ON LOSTFOCUS cTag := NewIndex.Text_2.Value
+      END TEXTBOX
 
-	   DEFINE CHECKBOX Check_2
-		ROW 65
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		CAPTION "Unique"
-		VALUE lUniq
-		ON LOSTFOCUS lUniq := NewIndex.Check_2.Value
-	   END CHECKBOX
+      DEFINE CHECKBOX Check_2
+         ROW 65
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         CAPTION "Unique"
+         VALUE lUniq
+         ON LOSTFOCUS lUniq := NewIndex.Check_2.Value
+      END CHECKBOX
 
-	   DEFINE LABEL Label_2
-		ROW 85
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		VALUE "Expression:"
-		VCENTERALIGN .T.
-	   END LABEL
+      DEFINE LABEL Label_2
+         ROW 85
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         VALUE "Expression:"
+         VCENTERALIGN .T.
+      END LABEL
 
-	   DEFINE TEXTBOX Text_3
-		ROW 107
-		COL 10
-		WIDTH  280
-		HEIGHT 22
-		VALUE cExpr
-		ON LOSTFOCUS cExpr := NewIndex.Text_3.Value
-	   END TEXTBOX
+      DEFINE TEXTBOX Text_3
+         ROW 107
+         COL 10
+         WIDTH  280
+         HEIGHT 22
+         VALUE cExpr
+         ON LOSTFOCUS cExpr := NewIndex.Text_3.Value
+      END TEXTBOX
 
-	   DEFINE LABEL Label_3
-		ROW 135
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		VALUE "Condition:"
-		VCENTERALIGN .T.
-	   END LABEL
+      DEFINE LABEL Label_3
+         ROW 135
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         VALUE "Condition:"
+         VCENTERALIGN .T.
+      END LABEL
 
-	   DEFINE TEXTBOX Text_4
-		ROW 157
-		COL 10
-		WIDTH  280
-		HEIGHT 22
-		VALUE cCond
-		ON LOSTFOCUS cCond := NewIndex.Text_4.Value
-	   END TEXTBOX
+      DEFINE TEXTBOX Text_4
+         ROW 157
+         COL 10
+         WIDTH  280
+         HEIGHT 22
+         VALUE cCond
+         ON LOSTFOCUS cCond := NewIndex.Text_4.Value
+      END TEXTBOX
 
-	@ 195,40  BUTTON _Ok CAPTION "Ok" WIDTH 100 HEIGHT 28 ON CLICK {||lResult:=.T.,NewIndex.Release()}
-	@ 195,160 BUTTON _Cancel CAPTION "Cancel" WIDTH 100 HEIGHT 28 ON CLICK {||NewIndex.Release()}
+      @ 195,40  BUTTON _Ok CAPTION "Ok" WIDTH 100 HEIGHT 28 ON CLICK {||lResult:=.T.,NewIndex.Release()}
+      @ 195,160 BUTTON _Cancel CAPTION "Cancel" WIDTH 100 HEIGHT 28 ON CLICK {||NewIndex.Release()}
 
-	ON KEY ESCAPE ACTION NewIndex._Cancel.OnClick()
+      ON KEY ESCAPE ACTION NewIndex._Cancel.OnClick()
 
-	END WINDOW
-	CENTER WINDOW NewIndex
-	ACTIVATE WINDOW NewIndex
+   END WINDOW
+   CENTER WINDOW NewIndex
+   ACTIVATE WINDOW NewIndex
 
    IF lResult
       IF !Empty( cName ) .AND. ( !Empty( cTag ) .OR. !lMulti ) .AND. !Empty( cExpr )
@@ -456,14 +442,14 @@ Local lResult := .F.
          IF lMulti
             IF EMPTY( cCond )
                ORDCREATE( cName,cTag,cExpr, &("{||"+cExpr+"}"),iif(lUniq,.T.,Nil) )
-            ELSE                     
+            ELSE
                ordCondSet( cCond, &("{||"+cCond + "}" ),,,,, RECNO(),,,, )
                ORDCREATE( cName, cTag, cExpr, &("{||"+cExpr+"}"),iif(lUniq,.T.,Nil) )
             ENDIF
          ELSE
             IF EMPTY( cCond )
                dbCreateIndex( cName,cExpr,&("{||"+cExpr+"}"),iif(lUniq,.T.,Nil) )
-            ELSE                     
+            ELSE
                ordCondSet( cCond, &("{||"+cCond + "}" ),,,,, RECNO(),,,, )
                ORDCREATE( cName, cTag, cExpr, &("{||"+cExpr+"}"),iif(lUniq,.T.,Nil) )
             ENDIF
@@ -475,29 +461,30 @@ Local lResult := .F.
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION OpenIndex()
 
-Static Function OpenIndex()
-Local mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
-Local fname := Getfile( {{"index files (*.cdx)", "*.cdx"}},"Open an index", mypath )
+   LOCAL mypath := "\" + CurDir() + iif( Empty( CurDir() ), "", "\" )
+   LOCAL fname := Getfile( {{"index files (*.cdx)", "*.cdx"}},"Open an index", mypath )
 
    IF Empty( Alias() )
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    IF !Empty( fname )
-      Set Index To (fname)
+      SET Index To (fname)
       UpdBrowse()
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Static Function ReIndex()
+STATIC FUNCTION ReIndex()
 
    IF Empty( Alias() )
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    DlgWait("Reindexing")
@@ -505,83 +492,77 @@ Static Function ReIndex()
    DlgWait()
    WndMain.Edit_1.Refresh()
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function CloseIndex()
+STATIC FUNCTION CloseIndex()
 
    IF Empty( Alias() )
-      Return Nil
+
+      RETURN NIL
    ENDIF
-   
+
    OrdListClear()
-   Set Order To 0
+   SET Order To 0
    UpdBrowse()
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function UpdBrowse()
+STATIC FUNCTION UpdBrowse()
 
    WndMain.Edit_1.Refresh()
    WndMain.StatusBar.Item( 1 ) :=  "Records: "+Ltrim(Str(LastRec()))
    WndMain.StatusBar.Item( 2 ) := ""
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION DlgWait( cTitle )
 
-Static Function DlgWait( cTitle )
+   IF ! IsWindowDefined( WaitWin )
+      DEFINE WINDOW WaitWin ;
+            AT 0 , 0 ;
+            WIDTH 220 HEIGHT 80 ;
+            TITLE cTitle ;
+            TOPMOST ;
+            NOMAXIMIZE NOMINIMIZE NOSIZE NOSYSMENU ;
+            BACKCOLOR {0,74,168}
 
-  IF ! IsWindowDefined( WaitWin )
-	DEFINE WINDOW WaitWin ;
-		AT 0 , 0 ;
-                WIDTH 220 HEIGHT 80 ;
-                TITLE cTitle ;
-		TOPMOST ;
-                NOMAXIMIZE NOMINIMIZE NOSIZE NOSYSMENU ;
-                BACKCOLOR {0,74,168}
+         DEFINE LABEL WaitLabel
+            ROW 10
+            COL 10
+            WIDTH  200
+            HEIGHT 30
+            VALUE "Wait, please ..."
+            FONTNAME "Lucida Console"
+            FONTSIZE 14
+            CENTERALIGN .T.
+            VCENTERALIGN .T.
+            TRANSPARENT .T.
+            FONTCOLOR {255,255,0}
+         END LABEL
 
-	   DEFINE LABEL WaitLabel
-		ROW 10
-		COL 10
-		WIDTH  200
-		HEIGHT 30
-		VALUE "Wait, please ..."
-		FONTNAME "Lucida Console"
-		FONTSIZE 14
-		CENTERALIGN .T.
-		VCENTERALIGN .T.
-		TRANSPARENT .T.
-		FONTCOLOR {255,255,0}
-	   END LABEL
+      END WINDOW
+      CENTER WINDOW WaitWin
+      ACTIVATE WINDOW WaitWin NOWAIT
+   ENDIF
 
-	END WINDOW
-	CENTER WINDOW WaitWin
-	ACTIVATE WINDOW WaitWin NOWAIT
-  ENDIF
+   IF ! Empty( cTitle )
+      WAITWin.Title := cTitle
+      SHOW WINDOW WaitWin
+      DO EVENTS
+   ELSE
+      WAITWin.Hide
+   ENDIF
 
-  IF ! Empty( cTitle )
-	WaitWin.Title := cTitle
-	SHOW WINDOW WaitWin
-	DO EVENTS
-  ELSE
-	WaitWin.Hide
-  ENDIF
+   RETURN NIL
 
-Return Nil
+STATIC FUNCTION ModiStru( lNew )
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function ModiStru( lNew )
-Local af0 := {}, cName := "", nType := 1, cLen := "10", cDec := "0"
-Local aTypes := { "Character","Numeric","Date","Logical","Memo" }
-Local fname, cAlias, nRec, nOrd, lOverFlow := .F., xValue
-Local lResult := .F., i, stru
-Memvar af
-Private af
+   LOCAL af0 := {}, cName := "", nType := 1, cLen := "10", cDec := "0"
+   LOCAL aTypes := { "Character","Numeric","Date","Logical","Memo" }
+   LOCAL fname, cAlias, nRec, nOrd, lOverFlow := .F., xValue
+   LOCAL lResult := .F., i, stru
+   MEMVAR af
+   PRIVATE af
 
    IF lNew
       af0 := { {"","",10,0} }
@@ -596,81 +577,81 @@ Private af
       cDec  := hb_ntos( af0[1,4] )
       af  := dbStruct()
       FOR i := 1 TO Len(af)
-#ifdef __XHARBOUR__
+         #ifdef __XHARBOUR__
          af[i,5] := i
-#else
+         #else
          Aadd( af[i],i )
-#endif
+         #endif
       NEXT
    ENDIF
 
-	DEFINE WINDOW ModiStru ;
-		AT 0 , 0 ;
-                WIDTH 400+GetBorderWidth() ;
-		HEIGHT 340+GetBorderHeight() ;
-                TITLE "Modify structure" ; 
-		MODAL ;
-                NOSIZE
+   DEFINE WINDOW ModiStru ;
+         AT 0 , 0 ;
+         WIDTH 400+GetBorderWidth() ;
+         HEIGHT 340+GetBorderHeight() ;
+         TITLE "Modify structure" ;
+         MODAL ;
+         NOSIZE
 
-	@ 10,10 GRID Grid_1 ;
-		WIDTH  250 ;
-		HEIGHT 200 ;
-		HEADERS { "Name", "Type", "Length", "Dec" } ;
-		WIDTHS { 88, 46, 60, 36 } ;
-		ITEMS af0 ;
-		VALUE 1 ;
-		COLUMNCONTROLS { , , {'TEXTBOX','NUMERIC','9999'}, {'TEXTBOX','NUMERIC','999'} } ;
-		ON CHANGE grd_onPosChg( ModiStru.Grid_1.Value )
-   
-	   DEFINE TEXTBOX Text_1
-		ROW 230
-		COL 10
-		WIDTH  100
-		HEIGHT 22
-		VALUE cName
-	   END TEXTBOX
+      @ 10,10 GRID Grid_1 ;
+         WIDTH  250 ;
+         HEIGHT 200 ;
+         HEADERS { "Name", "Type", "Length", "Dec" } ;
+         WIDTHS { 88, 46, 60, 36 } ;
+         ITEMS af0 ;
+         VALUE 1 ;
+         COLUMNCONTROLS { , , {'TEXTBOX','NUMERIC','9999'}, {'TEXTBOX','NUMERIC','999'} } ;
+         ON CHANGE grd_onPosChg( ModiStru.Grid_1.Value )
 
-	   DEFINE COMBOBOX Combo_2
-		ROW 230
-		COL 120
-		WIDTH  100
-		HEIGHT 120
-		ITEMS aTypes
-		VALUE nType
-	   END COMBOBOX
+      DEFINE TEXTBOX Text_1
+         ROW 230
+         COL 10
+         WIDTH  100
+         HEIGHT 22
+         VALUE cName
+      END TEXTBOX
 
-	   DEFINE TEXTBOX Text_3
-		ROW 230
-		COL 230
-		WIDTH  50
-		HEIGHT 22
-		VALUE cLen
-	   END TEXTBOX
+      DEFINE COMBOBOX Combo_2
+         ROW 230
+         COL 120
+         WIDTH  100
+         HEIGHT 120
+         ITEMS aTypes
+         VALUE nType
+      END COMBOBOX
 
-	   DEFINE TEXTBOX Text_4
-		ROW 230
-		COL 290
-		WIDTH  40
-		HEIGHT 22
-		VALUE cDec
-	   END TEXTBOX
+      DEFINE TEXTBOX Text_3
+         ROW 230
+         COL 230
+         WIDTH  50
+         HEIGHT 22
+         VALUE cLen
+      END TEXTBOX
 
-	@ 270,20  BUTTON _Add CAPTION "Add" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(1)}
-	@ 270,110 BUTTON _Insert CAPTION "Insert" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(2)}
-	@ 270,200 BUTTON _Change CAPTION "Change" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(3)}
-	@ 270,290 BUTTON _Remove CAPTION "Remove" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(4)}
+      DEFINE TEXTBOX Text_4
+         ROW 230
+         COL 290
+         WIDTH  40
+         HEIGHT 22
+         VALUE cDec
+      END TEXTBOX
 
-	@ 10,280  BUTTON _Ok CAPTION "Ok" WIDTH 100 HEIGHT 28 ON CLICK {||lResult:=.T.,ModiStru.Release()}
-	@ 50,280  BUTTON _Cancel CAPTION "Cancel" WIDTH 100 HEIGHT 28 ON CLICK {||ModiStru.Release()}
-	@ 90,280  BUTTON _Print CAPTION "Print" WIDTH 100 HEIGHT 28 ON CLICK {||PrintStru()}
-	@ 130,280 BUTTON _SaveAs CAPTION "Save As PDF" WIDTH 100 HEIGHT 28 ON CLICK {||SaveStru()}
+      @ 270,20  BUTTON _Add CAPTION "Add" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(1)}
+      @ 270,110 BUTTON _Insert CAPTION "Insert" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(2)}
+      @ 270,200 BUTTON _Change CAPTION "Change" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(3)}
+      @ 270,290 BUTTON _Remove CAPTION "Remove" WIDTH 80 HEIGHT 28 ON CLICK {||UpdStru(4)}
 
-	ON KEY ESCAPE ACTION ModiStru._Cancel.OnClick()
+      @ 10,280  BUTTON _Ok CAPTION "Ok" WIDTH 100 HEIGHT 28 ON CLICK {||lResult:=.T.,ModiStru.Release()}
+      @ 50,280  BUTTON _Cancel CAPTION "Cancel" WIDTH 100 HEIGHT 28 ON CLICK {||ModiStru.Release()}
+      @ 90,280  BUTTON _Print CAPTION "Print" WIDTH 100 HEIGHT 28 ON CLICK {||PrintStru()}
+      @ 130,280 BUTTON _SaveAs CAPTION "Save As PDF" WIDTH 100 HEIGHT 28 ON CLICK {||SaveStru()}
 
-	END WINDOW
-	CENTER WINDOW ModiStru
-	ACTIVATE WINDOW ModiStru
-   
+      ON KEY ESCAPE ACTION ModiStru._Cancel.OnClick()
+
+   END WINDOW
+   CENTER WINDOW ModiStru
+   ACTIVATE WINDOW ModiStru
+
    IF lResult
 
       DlgWait("Restructuring")
@@ -679,7 +660,8 @@ Private af
          DlgWait()
          fname := InputBox("Input new file name","File creation")
          IF Empty( fname )
-            Return Nil
+
+            RETURN NIL
          ENDIF
          DlgWait("Restructuring")
          dbCreate( fname,af )
@@ -690,16 +672,16 @@ Private af
          nRec := RecNo()
          SET ORDER TO 0
          GO TOP
-         
+
          fname := "a0_new"
          dbCreate( fname,af )
          IF currentCP != Nil
-            use (fname) new codepage (currentCP)
+            USE (fname) new codepage (currentCP)
          ELSE
-            use (fname) new
+            USE (fname) new
          ENDIF
          dbSelectArea( cAlias )
-         
+
          DO WHILE !Eof()
             dbSelectArea( fname )
             APPEND BLANK
@@ -752,9 +734,9 @@ Private af
          ENDIF
 
          IF currentCP != Nil
-            use (currFname) new codepage (currentCP)
+            USE (currFname) new codepage (currentCP)
          ELSE
-            use (currFname) new
+            USE (currFname) new
          ENDIF
          IF nOrd > 0
             SET ORDER TO nOrd
@@ -768,26 +750,24 @@ Private af
 
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION grd_onPosChg( nItem )
 
-Static Function grd_onPosChg( nItem )
-Local aArray := ModiStru.Grid_1.Item( nItem )
+   LOCAL aArray := ModiStru.Grid_1.Item( nItem )
 
    ModiStru.Text_1.Value := aArray[1]
    ModiStru.Combo_2.Value := Ascan( aFieldTypes,aArray[2] )
    ModiStru.Text_3.Value := hb_ntos( aArray[3] )
    ModiStru.Text_4.Value := hb_ntos( aArray[4] )
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION UpdStru( nOperation )
 
-Static Function UpdStru( nOperation )
-Local cName, cType, nLen, nDec, i
-Local nCurrent := ModiStru.Grid_1.Value
-Memvar af
+   LOCAL cName, cType, nLen, nDec, i
+   LOCAL nCurrent := ModiStru.Grid_1.Value
+   MEMVAR af
 
    IF nOperation == 4
       Adel( af,nCurrent )
@@ -834,26 +814,24 @@ Memvar af
    ModiStru.Grid_1.Refresh()
    ModiStru.Grid_1.SetFocus()
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION PrintStru()
 
-Static Function PrintStru()
-Memvar _HMG_RPTDATA, aStruct, i, af
-Public _HMG_RPTDATA := Array( 165 ), aStruct := af, i := 1
+   MEMVAR _HMG_RPTDATA, aStruct, i, af
+   PUBLIC _HMG_RPTDATA := Array( 165 ), aStruct := af, i := 1
 
    LOAD REPORT Demo
    EXECUTE REPORT Demo PREVIEW SELECTPRINTER
 
    RELEASE _HMG_RPTDATA, aStruct, i
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION SaveStru()
 
-Static Function SaveStru()
-Memvar _HMG_RPTDATA, aStruct, i, af
-Public _HMG_RPTDATA := Array( 165 ), aStruct := af, i := 1
+   MEMVAR _HMG_RPTDATA, aStruct, i, af
+   PUBLIC _HMG_RPTDATA := Array( 165 ), aStruct := af, i := 1
 
    LOAD REPORT Demo
    EXECUTE REPORT Demo ;
@@ -861,12 +839,11 @@ Public _HMG_RPTDATA := Array( 165 ), aStruct := af, i := 1
 
    RELEASE _HMG_RPTDATA, aStruct, i
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Goto()
 
-Static Function dbv_Goto()
-Local nRec := Val( GetData( Ltrim(Str(dbv_nRec)),"Go to ...","Input record number:" ) )
+   LOCAL nRec := Val( GetData( Ltrim(Str(dbv_nRec)),"Go to ...","Input record number:" ) )
 
    IF nRec != 0
       dbv_nRec := nRec
@@ -878,12 +855,11 @@ Local nRec := Val( GetData( Ltrim(Str(dbv_nRec)),"Go to ...","Input record numbe
       WndMain.Edit_1.Refresh()
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Seek()
 
-Static Function dbv_Seek()
-Local cKey, nRec, xType
+   LOCAL cKey, nRec, xType
 
    IF OrdNumber() == 0
       Msgstop( "No active order!","Seek record" )
@@ -910,19 +886,19 @@ Local cKey, nRec, xType
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Locate()
 
-Static Function dbv_Locate()
-Local cLocate := dbv_cLocate
-Local bOldError, cType, nRec
+   LOCAL cLocate := dbv_cLocate
+   LOCAL bOldError, cType, nRec
 
    DO WHILE .T.
 
       cLocate := GetData( cLocate,"Locate","Input condition:" )
       IF Empty( cLocate )
-         Return Nil
+
+         RETURN NIL
       ENDIF
 
       bOldError := ErrorBlock( { | e | MacroError(e) } )
@@ -954,12 +930,11 @@ Local bOldError, cType, nRec
       dbGoto( nRec )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Continue()
 
-Static Function dbv_Continue()
-Local nRec
+   LOCAL nRec
 
    IF !Empty( dbv_cLocate )
       dbGoto( WndMain.Edit_1.Value )
@@ -975,17 +950,13 @@ Local nRec
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function GetData( cRes, cTitle, cText )
+STATIC FUNCTION GetData( cRes, cTitle, cText )
 
    cRes := InputBox( cText, cTitle, cRes )
 
-Return iif(_HMG_DialogCancelled, "", cRes)
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN iif(_HMG_DialogCancelled, "", cRes)
 
 STATIC FUNCTION MacroError( e )
 
@@ -994,11 +965,10 @@ STATIC FUNCTION MacroError( e )
       BREAK
    ENDIF
 
-RETURN .T.
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN .T.
 
 STATIC FUNCTION ErrMessage( oError )
+
    // start error message
    LOCAL cMessage := iif( oError:severity > ES_WARNING, "Error", "Warning" ) + " "
 
@@ -1034,28 +1004,26 @@ STATIC FUNCTION ErrMessage( oError )
       cMessage += " (DOS Error " + hb_ntos( oError:osCode ) + ")"
    ENDIF
 
-RETURN cMessage
+   RETURN cMessage
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function dbv_AppRec()
+STATIC FUNCTION dbv_AppRec()
 
    IF Empty( Alias() )
-      Return .F.
+
+      RETURN .F.
    ENDIF
-   
+
    APPEND BLANK
 
    WndMain.Edit_1.Value := LastRec()
    WndMain.StatusBar.Item( 1 ) :=  "Records: "+Ltrim(Str(LastRec()))
    WndMain.StatusBar.Item( 2 ) := ""
 
-RETURN .T.
+   RETURN .T.
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Pack()
 
-Static Function dbv_Pack()
-Local cTitle := "Packing database"
+   LOCAL cTitle := "Packing database"
 
    IF Msgyesno( "Are you sure ?",cTitle )
       DlgWait( cTitle )
@@ -1066,12 +1034,11 @@ Local cTitle := "Packing database"
       WndMain.StatusBar.Item( 2 ) := ""
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STATIC FUNCTION dbv_Zap()
 
-Static Function dbv_Zap()
-Local cTitle := "Zap database"
+   LOCAL cTitle := "Zap database"
 
    IF Msgyesno( "ALL DATA WILL BE LOST !!! Are you sure ?",cTitle )
       DlgWait( cTitle )
@@ -1082,11 +1049,9 @@ Local cTitle := "Zap database"
       WndMain.StatusBar.Item( 2 ) := ""
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Static Function dbv_DelRec()
+STATIC FUNCTION dbv_DelRec()
 
    IF ! Empty( Alias() )
       dbGoto( WndMain.Edit_1.Value )
@@ -1098,4 +1063,5 @@ Static Function dbv_DelRec()
       WndMain.Edit_1.Refresh()
    ENDIF
 
-Return Nil
+   RETURN NIL
+

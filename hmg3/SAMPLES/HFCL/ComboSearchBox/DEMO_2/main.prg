@@ -1,78 +1,67 @@
-  /*
-     
+/*
 
-      CSBox ( Combined Search Box ) try
+CSBox ( Combined Search Box ) try
 
+*/
 
-    */
+#include "hmg.ch"
 
-    #include "hmg.ch"
+*!!!!!!!!!!!!!!!!!!!!!!
+#include "hfcl.ch"
+*!!!!!!!!!!!!!!!!!!!!!!
 
-    *!!!!!!!!!!!!!!!!!!!!!!	
-    #include "hfcl.ch"
-    *!!!!!!!!!!!!!!!!!!!!!!
+PROC Main()
 
-    PROC Main()
+   aCountries := HB_ATOKENS( MEMOREAD( "Countries.lst" ),   CRLF )
 
-       aCountries := HB_ATOKENS( MEMOREAD( "Countries.lst" ),   CRLF )
-       
-       ASORT( aCountries )                    // This Array MUST be sorted
-           
-       DEFINE WINDOW frmCSBTest ;
-          AT 0,0 ;
-          WIDTH 550 ;
-          HEIGHT 300;
-          TITLE 'CSBox ( Combined Search Box ) Test' ;
-          MAIN
-         
-          ON KEY ESCAPE ACTION frmCSBTest.Release
-          
+   ASORT( aCountries )                    // This Array MUST be sorted
 
-          define label countries
-             row 25
-             col 100
-             width 100
-             value "Countries"
-          end label
+   DEFINE WINDOW frmCSBTest ;
+         AT 0,0 ;
+         WIDTH 550 ;
+         HEIGHT 300;
+         TITLE 'CSBox ( Combined Search Box ) Test' ;
+         MAIN
 
-          define combosearchbox s1
-             row 25
-             col 190
-             width 200
-             fontname "Courier"
-             fontitalic .t.
-             fontbold .t.
-             fontcolor {255,255,255}
-             backcolor {0,0,255}
-             items acountries
-             on enter msginfo(frmcsbtest.s1.value)
-             anywheresearch .f.
-             // dropheight 50
-             additive .t.
-             rowoffset 50
-             coloffset 0
-          end combosearchbox
-            
+      ON KEY ESCAPE ACTION frmCSBTest.Release
 
-            
-       END WINDOW // frmCSBTest
-       
-       frmCSBTest.Center
+      DEFINE LABEL countries
+         row 25
+         col 100
+         width 100
+         value "Countries"
+      END LABEL
 
+      DEFINE COMBOSEARCHbox s1
+         row 25
+         col 190
+         width 200
+         fontname "Courier"
+         fontitalic .t.
+         fontbold .t.
+         fontcolor {255,255,255}
+         backcolor {0,0,255}
+         items acountries
+         on enter msginfo(frmcsbtest.s1.value)
+         anywheresearch .f.
+         // dropheight 50
+         additive .t.
+         rowoffset 50
+         coloffset 0
+      END COMBOSEARCHbox
 
-	* !!!!!!
-	* CombosearchBox already inherits all properties events 
-	* and methods from TextBox!!!
-	* Test it uncommenting the following:
-	*
-	* frmCSBTest.s1.Value := '*'
-	*
-	* !!!!!!
+   END WINDOW // frmCSBTest
 
-       
-       frmCSBTest.Activate
+   frmCSBTest.Center
 
-         
-    RETU // Main()
+   * !!!!!!
+   * CombosearchBox already inherits all properties events
+   * and methods from TextBox!!!
+   * Test it uncommenting the following:
+   * frmCSBTest.s1.Value := '*'
+   * !!!!!!
 
+   frmCSBTest.Activate
+
+   RETU // Main()
 

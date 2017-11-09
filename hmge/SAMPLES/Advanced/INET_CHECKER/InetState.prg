@@ -1,8 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2015 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2015 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -13,99 +11,91 @@ ANNOUNCE RDDSYS
 #define COPYRIGHT ' Grigory Filatov, 2002-2015'
 #define TIMER_INFO ': Timer is '
 
-Static lTimer := .T.
+STATIC lTimer := .T.
 
-*--------------------------------------------------------*
 PROCEDURE Main
-*--------------------------------------------------------*
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		ON INIT UpdateNotify() ;
-		NOTIFYICON 'ICON_1' ;
-		NOTIFYTOOLTIP PROGRAM + TIMER_INFO + iif( lTimer, "On", "Off" ) ;
-		ON NOTIFYCLICK ShellAbout( "About " + PROGRAM + "#", PROGRAM + ' version 2.0' + CRLF + Chr(169) + COPYRIGHT, ;
-					LoadTrayIcon(GetInstance(), "ICON_1", 32, 32) )
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         ON INIT UpdateNotify() ;
+         NOTIFYICON 'ICON_1' ;
+         NOTIFYTOOLTIP PROGRAM + TIMER_INFO + iif( lTimer, "On", "Off" ) ;
+         ON NOTIFYCLICK ShellAbout( "About " + PROGRAM + "#", PROGRAM + ' version 2.0' + CRLF + Chr(169) + COPYRIGHT, ;
+         LoadTrayIcon(GetInstance(), "ICON_1", 32, 32) )
 
-		DEFINE NOTIFY MENU
-			ITEM 'Stop/Start Timer'	ACTION UpdateTimer() NAME Timer CHECKED
-			ITEM 'OnLine Check'	ACTION UpdateNotify()
-			SEPARATOR	
-			ITEM 'About...'		ACTION MsgInfo(PROGRAM + ' version 2.0' + CRLF + Chr(169) + COPYRIGHT, ;
-								'Built with Harbour and MiniGUI')
-			ITEM 'Exit'		ACTION Form_1.Release
-		END MENU
+      DEFINE NOTIFY MENU
+         ITEM 'Stop/Start Timer'   ACTION UpdateTimer() NAME Timer CHECKED
+         ITEM 'OnLine Check'   ACTION UpdateNotify()
+         SEPARATOR
+         ITEM 'About...'      ACTION MsgInfo(PROGRAM + ' version 2.0' + CRLF + Chr(169) + COPYRIGHT, ;
+            'Built with Harbour and MiniGUI')
+         ITEM 'Exit'      ACTION Form_1.Release
+      END MENU
 
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 10000 ;
-			ACTION UpdateNotify()
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 10000 ;
+         ACTION UpdateNotify()
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-// Flags for InternetGetConnectedState and Ex
+   // Flags for InternetGetConnectedState and Ex
 
-#define INTERNET_CONNECTION_MODEM       1
-#define INTERNET_CONNECTION_LAN         2
-#define INTERNET_CONNECTION_PROXY       4
-#define INTERNET_CONNECTION_MODEM_BUSY  8 /* no longer used */
-#define INTERNET_RAS_INSTALLED         16
-#define INTERNET_CONNECTION_OFFLINE    32
-#define INTERNET_CONNECTION_CONFIGURED 64
+   #define INTERNET_CONNECTION_MODEM       1
+   #define INTERNET_CONNECTION_LAN         2
+   #define INTERNET_CONNECTION_PROXY       4
+   #define INTERNET_CONNECTION_MODEM_BUSY  8 /* no longer used */
+   #define INTERNET_RAS_INSTALLED         16
+   #define INTERNET_CONNECTION_OFFLINE    32
+   #define INTERNET_CONNECTION_CONFIGURED 64
 
-// Flag for InternetCheckConnection
+   // Flag for InternetCheckConnection
 
-#define FLAG_ICC_FORCE_CONNECTION       1
+   #define FLAG_ICC_FORCE_CONNECTION       1
 
-*--------------------------------------------------------*
 FUNCTION IsConnected()
-*--------------------------------------------------------*
-	LOCAL nFlags := 0, lRet := .F.
 
-	IF InternetGetConnectedState( @nFlags, 0 )
-/*
-		if nFlags == INTERNET_CONNECTION_CONFIGURED + INTERNET_RAS_INSTALLED + INTERNET_CONNECTION_PROXY + INTERNET_CONNECTION_LAN
-			MsgInfo( "Internet Connection via LAN" )
-		endif
-*/
-		IF InternetCheckConnection( "https://harbour.github.io", FLAG_ICC_FORCE_CONNECTION, 0 )
+   LOCAL nFlags := 0, lRet := .F.
 
-			lRet := .T.
-		ENDIF
+   IF InternetGetConnectedState( @nFlags, 0 )
+      /*
+      if nFlags == INTERNET_CONNECTION_CONFIGURED + INTERNET_RAS_INSTALLED + INTERNET_CONNECTION_PROXY + INTERNET_CONNECTION_LAN
+      MsgInfo( "Internet Connection via LAN" )
+      endif
+      */
+      IF InternetCheckConnection( "https://harbour.github.io", FLAG_ICC_FORCE_CONNECTION, 0 )
 
-	ENDIF
-  
-RETURN lRet
+         lRet := .T.
+      ENDIF
 
-*--------------------------------------------------------*
+   ENDIF
+
+   RETURN lRet
+
 PROCEDURE UpdateNotify()
-*--------------------------------------------------------*
 
-	Form_1.NotifyIcon := 'ICON_1'
-	INKEYGUI( 100 )
-	Form_1.NotifyIcon := iif( IsConnected(), "ICON_GREEN", "ICON_RED" )
+   Form_1.NotifyIcon := 'ICON_1'
+   INKEYGUI( 100 )
+   Form_1.NotifyIcon := iif( IsConnected(), "ICON_GREEN", "ICON_RED" )
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE UpdateTimer()
-*--------------------------------------------------------*
 
-	lTimer := !lTimer
+   lTimer := !lTimer
 
-	Form_1.Timer.Checked := lTimer
-	Form_1.Timer_1.Enabled := lTimer
+   Form_1.Timer.Checked := lTimer
+   Form_1.Timer_1.Enabled := lTimer
 
-	Form_1.NotifyTooltip := PROGRAM + TIMER_INFO + iif( lTimer, "On", "Off" )
+   Form_1.NotifyTooltip := PROGRAM + TIMER_INFO + iif( lTimer, "On", "Off" )
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -137,8 +127,10 @@ _DLL_FUNC_RET _DLL_FUNC_TYPE _FUNC_NAME _DLL_FUNC_PARAM \
       pfunc = (PFUNC) GetProcAddress( hLib, _DLL_FUNC_NAMESTRINGAW );\
    }\
    if( pfunc == NULL )\
+
       return( (_DLL_FUNC_RET) _DLL_FUNC_RETFAILCALL );\
    else\
+
       return pfunc _DLL_FUNC_CALLPARAM;\
 }
 
@@ -182,3 +174,4 @@ HB_FUNC ( INTERNETCHECKCONNECTION )
 }
 
 #pragma ENDDUMP
+

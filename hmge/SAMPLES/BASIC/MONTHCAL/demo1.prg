@@ -16,27 +16,23 @@
 
 #include "minigui.ch"
 
-Function Main ()
+FUNCTION Main ()
 
    // criando a janela principal
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE "Margens no controle MonthCalendar" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Margens no controle MonthCalendar" ;
+         MAIN
 
-      //-----------------//
       // controle Month1 //
-      //-----------------//
 
       // criando o primeiro controle MonthCalendar padrão
       @ 10,10 MONTHCALENDAR Month1 ;
          TOOLTIP "Controle MonthCalendar padrão"
 
-      //-----------------//
       // controle Month2 //
-      //-----------------//
 
       // criando o segundo controle MonthCalendar padrão
       @ 10,330 MONTHCALENDAR Month2 ;
@@ -50,9 +46,7 @@ Function Main ()
       // controle Month2, em 15 pontos
       Form1.Month2.Height := Form1.Month1.Height + 30
 
-      //-----------------//
       // controle Month3 //
-      //-----------------//
 
       // criando o terceiro controle MonthCalendar padrão
       @ 220,10 MONTHCALENDAR Month3 ;
@@ -67,9 +61,7 @@ Function Main ()
       // controle Month3, em 20 pontos
       Form1.Month3.Height := Form1.Month1.Height + 40
 
-      //-----------------//
       // controle Month4 //
-      //-----------------//
 
       // criando o quarto controle MonthCalendar padrão
       @ 220,330 MONTHCALENDAR Month4 ;
@@ -92,4 +84,5 @@ Function Main ()
    // ativando a janela
    ACTIVATE WINDOW Form1
 
-   Return Nil
+   RETURN NIL
+

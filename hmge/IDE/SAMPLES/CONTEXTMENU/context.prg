@@ -4,10 +4,10 @@
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	Load Window Context
-	Activate Window Context
+   LOAD WINDOW Context
+   ACTIVATE WINDOW Context
 
-Return
+   RETURN
 

@@ -1,25 +1,23 @@
 /*
- * Ejemplo Registro de Windows n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo guardar la posición y el tamaño
- * de un formulario y cómo restaurarlos cuando el formulario
- * se inicializa.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Registro de Windows n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo guardar la posición y el tamaño
+* de un formulario y cómo restaurarlos cuando el formulario
+* se inicializa.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW FormMain ;
-      OBJ oForm ;
-      TITLE 'Operaciones sobre el Registro de Windows' ;
-      ON INIT CargarReg()
+         OBJ oForm ;
+         TITLE 'Operaciones sobre el Registro de Windows' ;
+         ON INIT CargarReg()
 
       @ 20, 20 BUTTON btn_Guardar ;
          CAPTION 'Guardar' ;
@@ -35,14 +33,13 @@ FUNCTION Main
    CENTER WINDOW FormMain
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
-
-#define hKey HKEY_CURRENT_USER
-#define cKey 'Software\OOHG\EjemploRegistro\FormMain'
-
+   #define hKey HKEY_CURRENT_USER
+   #define cKey 'Software\OOHG\EjemploRegistro\FormMain'
 
 FUNCTION CargarReg
+
    LOCAL col, row, width, height
 
    IF IsRegistryKey( hKey, cKey )
@@ -64,13 +61,13 @@ FUNCTION CargarReg
       ENDIF
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION GuardarReg
 
    IF ! IsRegistryKey( hKey, cKey )
       IF ! CreateRegistryKey( hKey, cKey )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -82,21 +79,21 @@ FUNCTION GuardarReg
       SetRegistryValue( hKey, cKey, 'height', oForm:Height )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION BorrarReg
 
-   DeleteRegistryVar( hKey, cKey, 'col' )
-   DeleteRegistryVar( hKey, cKey, 'row' )
-   DeleteRegistryVar( hKey, cKey, 'width' )
-   DeleteRegistryVar( hKey, cKey, 'height' )
-   DeleteRegistryKey( hKey, 'Software\OOHG\EjemploRegistro', 'FormMain' )
-   DeleteRegistryKey( hKey, 'Software\OOHG', 'EjemploRegistro' )
-   DeleteRegistryKey( hKey, 'Software', 'OOHG' )
+   DELETERegistryVar( hKey, cKey, 'col' )
+   DELETERegistryVar( hKey, cKey, 'row' )
+   DELETERegistryVar( hKey, cKey, 'width' )
+   DELETERegistryVar( hKey, cKey, 'height' )
+   DELETERegistryKey( hKey, 'Software\OOHG\EjemploRegistro', 'FormMain' )
+   DELETERegistryKey( hKey, 'Software\OOHG', 'EjemploRegistro' )
+   DELETERegistryKey( hKey, 'Software', 'OOHG' )
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

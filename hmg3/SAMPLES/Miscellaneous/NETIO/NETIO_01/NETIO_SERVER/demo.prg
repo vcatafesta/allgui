@@ -1,16 +1,18 @@
 REQUEST HB_GT_WIN_DEFAULT
-function main()
 
-local pListenSocket
+FUNCTION main()
 
-	pListenSocket := netio_mtserver()
+   LOCAL pListenSocket
 
-	if empty( pListenSocket )
-		? "Cannot start server."
-	else
-		wait "Press any key to stop NETIO server."
-		netio_serverstop( pListenSocket )
-		pListenSocket := NIL
-	endif
+   pListenSocket := netio_mtserver()
 
-return
+   IF empty( pListenSocket )
+      ? "Cannot start server."
+   ELSE
+      WAIT "Press any key to stop NETIO server."
+      netio_serverstop( pListenSocket )
+      pListenSocket := NIL
+   ENDIF
+
+   RETURN
+

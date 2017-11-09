@@ -1,36 +1,33 @@
 /*
-   Here is my implementation of ACHOICE in HMG using grid control.
-   The only problem is that it nearly look likes the ACHOICE of the old days.
+Here is my implementation of ACHOICE in HMG using grid control.
+The only problem is that it nearly look likes the ACHOICE of the old days.
 
-   Caveats:
-   1. Grid control height and width must be larger than the height of the window, frmAchoice in this regard so that the scroll bars is not visible.
-   2. If you want the horizontal and/or vertical scroll bar, then adjust the dimension calculation.
+Caveats:
+1. Grid control height and width must be larger than the height of the window, frmAchoice in this regard so that the scroll bars is not visible.
+2. If you want the horizontal and/or vertical scroll bar, then adjust the dimension calculation.
 
-   Dhanny del Pilar <dhaine_adp@hotmail.com>
+Dhanny del Pilar <dhaine_adp@hotmail.com>
 */
-
 
 #include "minigui.ch"
 
-
-**************
 PROCEDURE Main
 
    SET DEFAULT ICON TO "ZZZ_A_WINDOW"
    SET CENTERWINDOW RELATIVE PARENT
 
    DEFINE WINDOW Win1;
-      AT 0,0 WIDTH 300 HEIGHT 400;
-      TITLE "HMG AChoice Test";
-      MAIN;
-      NOMAXIMIZE NOSIZE
+         AT 0,0 WIDTH 300 HEIGHT 400;
+         TITLE "HMG AChoice Test";
+         MAIN;
+         NOMAXIMIZE NOSIZE
 
       DEFINE MAINMENU
-        DEFINE POPUP "&File"
-          ITEM "Test ACHOICE" ACTION Test()
-          SEPARATOR
-          ITEM "Exit" ACTION ThisWindow.Release
-        END POPUP
+         DEFINE POPUP "&File"
+            ITEM "Test ACHOICE" ACTION Test()
+            SEPARATOR
+            ITEM "Exit" ACTION ThisWindow.Release
+         END POPUP
       END MENU
 
    END WINDOW
@@ -40,19 +37,17 @@ PROCEDURE Main
 
    RETURN
 
-
-************************************
 FUNCTION Test()  // test stub module
 
    LOCAL aChoices_ := { { "Date"          },;
-                        { "Date Before"   },;
-                        { "Date After"    },;
-                        { "Month to Date" },;
-                        { "Year to Date"  },;
-                        { "Date Range"    } }
+      { "Date Before"   },;
+      { "Date After"    },;
+      { "Month to Date" },;
+      { "Year to Date"  },;
+      { "Date Range"    } }
 
    LOCAL nChoice
-   
+
    nChoice := hmg_Achoice( NIL, aChoices_, "Select Report Type" )
    IF nChoice > 0
       MSGINFO( aChoices_[ nChoice, 1 ], "HMG AChoice: " + hb_ntos( nChoice ) )
@@ -60,8 +55,6 @@ FUNCTION Test()  // test stub module
 
    RETURN NIL
 
-
-*****************************************************************************
 FUNCTION hmg_Achoice( cTitle, aSelection_, cHeading, cFont, nFontSize, lSort )
 
    LOCAL nRetVal := 0
@@ -83,6 +76,7 @@ FUNCTION hmg_Achoice( cTitle, aSelection_, cHeading, cFont, nFontSize, lSort )
 
    //--> terminate and return 0 if there are no selections specified
    IF LEN( aSelection_ ) < 1
+
       RETURN nRetVal
    ENDIF
 
@@ -106,15 +100,15 @@ FUNCTION hmg_Achoice( cTitle, aSelection_, cHeading, cFont, nFontSize, lSort )
    nWidth     := GETTXTWIDTH( cLonger, nFontSize, cFont )
    nCellWidth := nWidth
    nWidth     += GetBorderWidth()
-   nHeight    := LEN( aSelection_ ) * nFontSize 
+   nHeight    := LEN( aSelection_ ) * nFontSize
    nHeight    := INT( nHeight / 72 * 25.4 ) + 1
    nHeight    := nHeight * LEN( aSelection_ ) + GetTitleHeight() + GetBorderHeight() / 2
 
    DEFINE WINDOW frmAchoice;
-      CLIENTAREA nWidth, nHeight;
-      TITLE cTitle;
-      MODAL NOSIZE;
-      ON MOUSECLICK ThisWindow.Release
+         CLIENTAREA nWidth, nHeight;
+         TITLE cTitle;
+         MODAL NOSIZE;
+         ON MOUSECLICK ThisWindow.Release
 
       ON KEY ESCAPE ACTION ThisWindow.Release
       ON KEY RETURN ACTION ( nRetVal := frmAchoice.grdChoice.Value, ThisWindow.Release )
@@ -136,8 +130,6 @@ FUNCTION hmg_Achoice( cTitle, aSelection_, cHeading, cFont, nFontSize, lSort )
 
    RETURN nRetVal
 
-
-***************************************************************************************
 STATIC FUNCTION GetTxtWidth( cText, nFontSize, cFontName ) // get the width of the text
 
    LOCAL hFont
@@ -156,6 +148,7 @@ STATIC FUNCTION GetTxtWidth( cText, nFontSize, cFontName ) // get the width of t
    hFont := InitFont( cFontName, nFontSize + 2 )
    nWidth := GetTextWidth( 0, cText, hFont )
 
-   DeleteObject( hFont )
+   DELETEObject( hFont )
 
    RETURN nWidth
+

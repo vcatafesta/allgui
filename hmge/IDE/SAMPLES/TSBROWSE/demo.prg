@@ -5,11 +5,12 @@
 #include "minigui.ch"
 #include "tsbrowse.ch"
 
-Function Main
+FUNCTION Main
 
-	use test alias demo shared
+   USE test alias demo shared
 
-	Load Window Demo
-	Activate Window Demo
+   LOAD WINDOW Demo
+   ACTIVATE WINDOW Demo
 
-Return Nil
+   RETURN NIL
+

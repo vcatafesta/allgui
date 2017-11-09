@@ -1,316 +1,343 @@
-/* 
- * MINIGUI - Harbour Win32 GUI library Demo 
- * 
- * Copyright 2008 Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
- * 
-*/ 
+/*
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2008 Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
+*/
 
-ANNOUNCE RDDSYS 
+ANNOUNCE RDDSYS
 
 #include <minigui.ch>
 
-Static _prtHandle:=0
-Static _lOpenPrt:=.f.
+STATIC _prtHandle:=0
+STATIC _lOpenPrt:=.f.
 
+FUNCTION Main
 
-Function Main
-Local aPrinters:={}, aPorts:={}, aReturn:={}, aForms:={}
-Local aprnport
+   LOCAL aPrinters:={}, aPorts:={}, aReturn:={}, aForms:={}
+   LOCAL aprnport
 
-  SET DATE BRITISH
+   SET DATE BRITISH
 
-  aprnport:=rr_getprinters()
-  IF aprnport<>",,"
-     aprnport:=str2arr(aprnport,",,")
-     aeval(aprnport,{|x,xi| aprnport[xi]:=str2arr(x,',')})
-     aeval(aprnport,{|x| aadd(aPrinters,x[1]), aadd(aports,x[2]) })
-  ENDIF
+   aprnport:=rr_getprinters()
+   IF aprnport<>",,"
+      aprnport:=str2arr(aprnport,",,")
+      aeval(aprnport,{|x,xi| aprnport[xi]:=str2arr(x,',')})
+      aeval(aprnport,{|x| aadd(aPrinters,x[1]), aadd(aports,x[2]) })
+   ENDIF
 
-  LOAD WINDOW maschera1
-  maschera1.Button_1.enabled:=.F. 
-  maschera1.Button_2.enabled:=.F. 
-  maschera1.Button_3.enabled:=.F. 
-  CENTER WINDOW maschera1
-  ACTIVATE WINDOW maschera1
-return nil
+   LOAD WINDOW maschera1
+   maschera1.Button_1.enabled:=.F.
+   maschera1.Button_2.enabled:=.F.
+   maschera1.Button_3.enabled:=.F.
+   CENTER WINDOW maschera1
+   ACTIVATE WINDOW maschera1
+
+   RETURN NIL
 
 PROCEDURE OnInit
-	IF !IsWinNT()
-		MsgStop( 'This Program Runs In Win2000/XP Only!', 'Stop' )
-		QUIT
-	ENDIF
-RETURN
 
-static function str2arr( cList, cDelimiter )
-Local nPos
-Local aList := {}
-Local nlencd:=0
-Local asub
-DO CASE
- CASE valtype(cdelimiter)=='C'
-   cDelimiter:=if(cDelimiter==NIL,",",cDelimiter)
-   nlencd:=len(cdelimiter)
-   DO WHILE ( nPos := AT( cDelimiter, cList )) != 0
-      AADD( aList, SUBSTR( cList, 1, nPos - 1 ))
-      cList := SUBSTR( cList, nPos + nlencd )
-   ENDDO
-   AADD( aList, cList )
- CASE valtype(cdelimiter)=='N'
-   DO WHILE len((nPos:=left(clist,cdelimiter)))==cdelimiter
-      aadd(alist,npos)
-      clist:=substr(clist,cdelimiter+1)
-   ENDDO
- CASE valtype(cdelimiter)=='A'
-   aeval(cDelimiter,{|x| nlencd+=x})
-   DO WHILE len((nPos:=left(clist,nlencd)))==nlencd
-      asub:={}
-      aeval(cdelimiter,{|x| aadd(asub,left(npos,x)),npos:=substr(npos,x+1)})
-      aadd(aList,asub)
-      cList:=substr(cList,nlencd+1)
-   ENDDO
- ENDCASE
-RETURN ( aList )
+   IF !IsWinNT()
+      MsgStop( 'This Program Runs In Win2000/XP Only!', 'Stop' )
+      QUIT
+   ENDIF
 
+   RETURN
 
-function Setprtname(aPorts)
-Local nIndex:=This.value
-  if empty(This.Item(nIndex))
-    maschera1.Text_1.Value:=""  
-    maschera1.Text_2.Value:=""
-    MSGSTOP("No Printer Selected !","Error")
-    return nil
-  else
-    maschera1.Text_1.Value:=This.Item(nIndex)
-    maschera1.Text_2.Value:=aPorts[nIndex]
-    maschera1.Button_1.enabled:=.T. 
-endif
-LST2_fill()
-return nil
+STATIC FUNCTION str2arr( cList, cDelimiter )
 
+   LOCAL nPos
+   LOCAL aList := {}
+   LOCAL nlencd:=0
+   LOCAL asub
 
-function Lst2_fill
-Local aReturn:={}
-  open_prt()
-     aReturn:=ENUM_FORMS(_prtHandle)
-  closeprinter()
-  if empty(aReturn)
-     MSGSTOP("No Forms found !","Error")
-  else
-     Lst2_refr(aReturn)
-  endif
-return nil
+   DO CASE
+   CASE valtype(cdelimiter)=='C'
+      cDelimiter:=if(cDelimiter==NIL,",",cDelimiter)
+      nlencd:=len(cdelimiter)
+      DO WHILE ( nPos := AT( cDelimiter, cList )) != 0
+         AADD( aList, SUBSTR( cList, 1, nPos - 1 ))
+         cList := SUBSTR( cList, nPos + nlencd )
+      ENDDO
+      AADD( aList, cList )
+   CASE valtype(cdelimiter)=='N'
+      DO WHILE len((nPos:=left(clist,cdelimiter)))==cdelimiter
+         aadd(alist,npos)
+         clist:=substr(clist,cdelimiter+1)
+      ENDDO
+   CASE valtype(cdelimiter)=='A'
+      aeval(cDelimiter,{|x| nlencd+=x})
+      DO WHILE len((nPos:=left(clist,nlencd)))==nlencd
+         asub:={}
+         aeval(cdelimiter,{|x| aadd(asub,left(npos,x)),npos:=substr(npos,x+1)})
+         aadd(aList,asub)
+         cList:=substr(cList,nlencd+1)
+      ENDDO
+   ENDCASE
 
+   RETURN ( aList )
 
-function Lst2_refr(aReturn)
-Local aForms:={},nLen:=0,i
-  aForms:=aReturn[1]
-  if !empty(aForms)
+FUNCTION Setprtname(aPorts)
+
+   LOCAL nIndex:=This.value
+
+   IF empty(This.Item(nIndex))
+      maschera1.Text_1.Value:=""
+      maschera1.Text_2.Value:=""
+      MSGSTOP("No Printer Selected !","Error")
+
+      RETURN NIL
+   ELSE
+      maschera1.Text_1.Value:=This.Item(nIndex)
+      maschera1.Text_2.Value:=aPorts[nIndex]
+      maschera1.Button_1.enabled:=.T.
+   ENDIF
+   LST2_fill()
+
+   RETURN NIL
+
+FUNCTION Lst2_fill
+
+   LOCAL aReturn:={}
+
+   open_prt()
+   aReturn:=ENUM_FORMS(_prtHandle)
+   CLOSEprinter()
+   IF empty(aReturn)
+      MSGSTOP("No Forms found !","Error")
+   ELSE
+      Lst2_refr(aReturn)
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION Lst2_refr(aReturn)
+
+   LOCAL aForms:={},nLen:=0,i
+
+   aForms:=aReturn[1]
+   IF !empty(aForms)
       nLen:=LEN(aForms)
-      if nLen>0
+      IF nLen>0
          maschera1.List_2.DeleteAllItems
-         for i= 1 to nLen
-          if !empty(aForms[i])
-             maschera1.List_2.Additem(aForms[i])
-          endif
-         next i
-      else
+         FOR i= 1 to nLen
+            IF !empty(aForms[i])
+               maschera1.List_2.Additem(aForms[i])
+            ENDIF
+         NEXT i
+      ELSE
          MSGSTOP("No Forms found !","Error")
-      endif
-  endif
-return nil
+      ENDIF
+   ENDIF
 
+   RETURN NIL
 
-static function closeprinter
-if _lOpenPrt:=.t.
-  close_printer(_prtHandle)
-  _prtHandle:=0
-  _lOpenPrt:=.f.
-endif
-return nil
+STATIC FUNCTION closeprinter
 
+   IF _lOpenPrt:=.t.
+      CLOSE_printer(_prtHandle)
+      _prtHandle:=0
+      _lOpenPrt:=.f.
+   ENDIF
 
-#define FORM_USER       0
-#define FORM_BUILTIN    1
-#define FORM_PRINTER    2
-function GetDataForm
-Local nWidth:=0,nLength:=0,aReturn:={},nFlag:=0
-Local cFormName:="",aWidth:={},aLength:={},aName:={},aFlags:={}
-Local nIndex:=This.value
-if empty(nIndex)
-  maschera1.GetBox_1.Value:=""
-  MSGALERT("No Form Selected","Warning")
-  return nil
-endif
-open_prt()
- aReturn:=ENUM_FORMS(_prtHandle)
-closeprinter()
-cFormName:=alltrim(This.Item(nIndex))
-aName:=aReturn[1]
-aWidth:=aReturn[2]
-aLength:=aReturn[3]
-aFlags:=aReturn[4]
-maschera1.GetBox_1.Value:=alltrim(cFormName)
-maschera1.GetBox_2.Value:=aWidth [nIndex]
-maschera1.GetBox_3.Value:=aLength[nIndex]
-if aFlags[nIndex]=FORM_BUILTIN
-   maschera1.Text_3.Value:="FORM BUILT IN"
-   _distxt(.f.)
-elseif aFlags[nIndex]=FORM_PRINTER
-   maschera1.Text_3.Value:="FORM PRINTER"
-   _distxt(.f.)
-elseif aFlags[nIndex]=FORM_USER
-   maschera1.Text_3.Value:="FORM USER"
-   _distxt(.t.)
-   maschera1.GetBox_1.enabled:=.f.
-   maschera1.Text_3.enabled:=.f.
-endif
-return nil
+   RETURN NIL
 
+   #define FORM_USER       0
+   #define FORM_BUILTIN    1
+   #define FORM_PRINTER    2
 
-static function _distxt(lValue)
+FUNCTION GetDataForm
+
+   LOCAL nWidth:=0,nLength:=0,aReturn:={},nFlag:=0
+   LOCAL cFormName:="",aWidth:={},aLength:={},aName:={},aFlags:={}
+   LOCAL nIndex:=This.value
+
+   IF empty(nIndex)
+      maschera1.GetBox_1.Value:=""
+      MSGALERT("No Form Selected","Warning")
+
+      RETURN NIL
+   ENDIF
+   open_prt()
+   aReturn:=ENUM_FORMS(_prtHandle)
+   CLOSEprinter()
+   cFormName:=alltrim(This.Item(nIndex))
+   aName:=aReturn[1]
+   aWidth:=aReturn[2]
+   aLength:=aReturn[3]
+   aFlags:=aReturn[4]
+   maschera1.GetBox_1.Value:=alltrim(cFormName)
+   maschera1.GetBox_2.Value:=aWidth [nIndex]
+   maschera1.GetBox_3.Value:=aLength[nIndex]
+   IF aFlags[nIndex]=FORM_BUILTIN
+      maschera1.Text_3.Value:="FORM BUILT IN"
+      _distxt(.f.)
+   ELSEIF aFlags[nIndex]=FORM_PRINTER
+      maschera1.Text_3.Value:="FORM PRINTER"
+      _distxt(.f.)
+   ELSEIF aFlags[nIndex]=FORM_USER
+      maschera1.Text_3.Value:="FORM USER"
+      _distxt(.t.)
+      maschera1.GetBox_1.enabled:=.f.
+      maschera1.Text_3.enabled:=.f.
+   ENDIF
+
+   RETURN NIL
+
+STATIC FUNCTION _distxt(lValue)
+
    maschera1.GetBox_1.enabled:=lValue
    maschera1.GetBox_2.enabled:=lValue
    maschera1.GetBox_3.enabled:=lValue
    maschera1.Text_3.enabled:=lValue
-   maschera1.Button_1.enabled:=!lvalue 
-   maschera1.Button_2.enabled:=lvalue 
+   maschera1.Button_1.enabled:=!lvalue
+   maschera1.Button_2.enabled:=lvalue
    maschera1.Button_3.enabled:=lValue
-return nil
 
+   RETURN NIL
 
-function NewUsrFrm()
-Local cFormName:="",nWidth:=0,nHeigth:=0,cReturn:=""
-maschera1.Button_1.enabled:=.f.
-maschera1.Button_2.enabled:=.f.
-maschera1.Button_3.enabled:=.f.
-maschera1.Text_3.enabled:=.f.
-maschera1.GetBox_1.Enabled:=.t.
-maschera1.GetBox_2.Enabled:=.t.
-maschera1.GetBox_3.Enabled:=.t.
-if (maschera1.Button_1.caption=="New User Form")
-    maschera1.GetBox_1.Value:="Form_User"
-    maschera1.GetBox_2.Value:=70
-    maschera1.GetBox_3.Value:=116
-    maschera1.GetBox_1.Setfocus
-    maschera1.Button_1.caption:="Save User Form"
-    maschera1.Button_1.Enabled:=.t.
-    cFormName:=alltrim(maschera1.GetBox_1.Value)
-    nWidth:=maschera1.GetBox_2.Value
-    nHeigth:=maschera1.GetBox_3.Value
-elseif(maschera1.Button_1.caption=="Save User Form")
- if MSGYESNO("Add New Form ?","Confirm")
-    cFormName:=alltrim(maschera1.GetBox_1.Value)
-    nWidth:=maschera1.GetBox_2.Value
-    nHeigth:=maschera1.GetBox_3.Value
-    open_prt()
-      cReturn:=New_Form(_prtHandle,cFormName,nWidth,nHeigth)
-    closeprinter()
-    maschera1.Button_1.caption:="New User Form"
-    if valtype(cReturn)="A"
-      IF !empty(cReturn[1])     
-        IF cReturn[1]=1902
-           MSGSTOP("Invalid Form Name !","Error")    
-        elseif cReturn[1]=87
-           MSGSTOP("Invalid Parameter !","Error")    
-        else
-          MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")
-        endif
+FUNCTION NewUsrFrm()
+
+   LOCAL cFormName:="",nWidth:=0,nHeigth:=0,cReturn:=""
+
+   maschera1.Button_1.enabled:=.f.
+   maschera1.Button_2.enabled:=.f.
+   maschera1.Button_3.enabled:=.f.
+   maschera1.Text_3.enabled:=.f.
+   maschera1.GetBox_1.Enabled:=.t.
+   maschera1.GetBox_2.Enabled:=.t.
+   maschera1.GetBox_3.Enabled:=.t.
+   IF (maschera1.Button_1.caption=="New User Form")
+      maschera1.GetBox_1.Value:="Form_User"
+      maschera1.GetBox_2.Value:=70
+      maschera1.GetBox_3.Value:=116
+      maschera1.GetBox_1.Setfocus
+      maschera1.Button_1.caption:="Save User Form"
+      maschera1.Button_1.Enabled:=.t.
+      cFormName:=alltrim(maschera1.GetBox_1.Value)
+      nWidth:=maschera1.GetBox_2.Value
+      nHeigth:=maschera1.GetBox_3.Value
+   ELSEIF(maschera1.Button_1.caption=="Save User Form")
+      IF MSGYESNO("Add New Form ?","Confirm")
+         cFormName:=alltrim(maschera1.GetBox_1.Value)
+         nWidth:=maschera1.GetBox_2.Value
+         nHeigth:=maschera1.GetBox_3.Value
+         open_prt()
+         cReturn:=New_Form(_prtHandle,cFormName,nWidth,nHeigth)
+         CLOSEprinter()
+         maschera1.Button_1.caption:="New User Form"
+         IF valtype(cReturn)="A"
+            IF !empty(cReturn[1])
+               IF cReturn[1]=1902
+                  MSGSTOP("Invalid Form Name !","Error")
+               ELSEIF cReturn[1]=87
+                  MSGSTOP("Invalid Parameter !","Error")
+               ELSE
+                  MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")
+               ENDIF
+            ENDIF
+         ENDIF
       ENDIF
-    endif
- endif
- clean_scrn()  
- LST2_fill()
- _ibtnval(.t.)
-endif
-return nil
-
-
-function ModifyForm
-Local cFormName:="",nWidth:=0,nHeigth:=0,cReturn:=""
-maschera1.Button_1.enabled:=.f.
-maschera1.Button_2.enabled:=.f.
-maschera1.Button_3.enabled:=.f.
-maschera1.Text_3.enabled:=.f.
-maschera1.GetBox_1.enabled:=.t.
-cFormName:=ALLTRIM(maschera1.GetBox_1.Value)
-maschera1.GetBox_1.enabled:=.f.
-nWidth:=maschera1.GetBox_2.Value
-nHeigth:=maschera1.GetBox_3.Value
-if MSGYESNO("Save Change ?","Confirm")
-  open_prt()
-    cReturn:=Set_Form(_prtHandle,cFormName,nWidth,nHeigth)
-  closeprinter()
- if valtype(cReturn)="A"
-   IF !empty(cReturn[1])     
-      IF cReturn[1]=1902
-         MSGSTOP("Invalid Form Name !","Error")    
-      elseif cReturn[1]=87
-         MSGSTOP("Invalid Parameter !","Error")    
-      else
-        MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")
-      endif
+      clean_scrn()
+      LST2_fill()
+      _ibtnval(.t.)
    ENDIF
- endif
-endif
-clean_scrn()
-LST2_fill()
-_ibtnval(.t.)
-return nil
 
+   RETURN NIL
 
-static function open_prt
-Local cPrinterName:=""
-  cPrinterName:=maschera1.Text_1.Value
-  if _lOpenPrt=.t.
-    closeprinter()  
-  endif
-  if _lOpenPrt=.f. 
-    _prtHandle:=Open_Printer(cPrinterName)
-    _lOpenPrt:=.t.
-  endif
-return nil
+FUNCTION ModifyForm
 
+   LOCAL cFormName:="",nWidth:=0,nHeigth:=0,cReturn:=""
 
-function DelUserForm
-Local cFormName:="",cReturn:=""
-if MSGYESNO("Delete Selected Form ?","Warning")
-  cFormName:=alltrim(maschera1.GetBox_1.Value)
-  open_prt()
-  cReturn:=delete_form(_prtHandle,cFormName)
-  closeprinter()
-  if valtype(cReturn)="A"
-    IF !empty(cReturn[1])
-      IF cReturn[1]=1902
-        MSGSTOP("Invalid Form Name !","Error")    
-      else
-        MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")    
-      endif
-      return nil
-    ENDIF
-  endif
-endif
-clean_scrn()
-LST2_fill()
-_ibtnval(.t.)
-return nil
+   maschera1.Button_1.enabled:=.f.
+   maschera1.Button_2.enabled:=.f.
+   maschera1.Button_3.enabled:=.f.
+   maschera1.Text_3.enabled:=.f.
+   maschera1.GetBox_1.enabled:=.t.
+   cFormName:=ALLTRIM(maschera1.GetBox_1.Value)
+   maschera1.GetBox_1.enabled:=.f.
+   nWidth:=maschera1.GetBox_2.Value
+   nHeigth:=maschera1.GetBox_3.Value
+   IF MSGYESNO("Save Change ?","Confirm")
+      open_prt()
+      cReturn:=Set_Form(_prtHandle,cFormName,nWidth,nHeigth)
+      CLOSEprinter()
+      IF valtype(cReturn)="A"
+         IF !empty(cReturn[1])
+            IF cReturn[1]=1902
+               MSGSTOP("Invalid Form Name !","Error")
+            ELSEIF cReturn[1]=87
+               MSGSTOP("Invalid Parameter !","Error")
+            ELSE
+               MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")
+            ENDIF
+         ENDIF
+      ENDIF
+   ENDIF
+   clean_scrn()
+   LST2_fill()
+   _ibtnval(.t.)
 
+   RETURN NIL
 
-static function clean_scrn
-  maschera1.Text_3.Value:=""
-  maschera1.GetBox_1.Value:=""
-  maschera1.GetBox_2.Value:=0	
-  maschera1.GetBox_3.Value:=0
-return nil
+STATIC FUNCTION open_prt
 
+   LOCAL cPrinterName:=""
 
-static function _ibtnval(lMode)
-  maschera1.Button_1.Enabled:= lMode
-  maschera1.Text_3.Enabled  := lMode
-  maschera1.Button_2.Enabled:= !lMode
-  maschera1.Button_3.Enabled:= !lMode
-return nil
+   cPrinterName:=maschera1.Text_1.Value
+   IF _lOpenPrt=.t.
+      CLOSEprinter()
+   ENDIF
+   IF _lOpenPrt=.f.
+      _prtHandle:=Open_Printer(cPrinterName)
+      _lOpenPrt:=.t.
+   ENDIF
 
+   RETURN NIL
+
+FUNCTION DelUserForm
+
+   LOCAL cFormName:="",cReturn:=""
+
+   IF MSGYESNO("Delete Selected Form ?","Warning")
+      cFormName:=alltrim(maschera1.GetBox_1.Value)
+      open_prt()
+      cReturn:=delete_form(_prtHandle,cFormName)
+      CLOSEprinter()
+      IF valtype(cReturn)="A"
+         IF !empty(cReturn[1])
+            IF cReturn[1]=1902
+               MSGSTOP("Invalid Form Name !","Error")
+            ELSE
+               MSGSTOP("Error # "+alltrim(str(cReturn[1])),"Error")
+            ENDIF
+
+            RETURN NIL
+         ENDIF
+      ENDIF
+   ENDIF
+   clean_scrn()
+   LST2_fill()
+   _ibtnval(.t.)
+
+   RETURN NIL
+
+STATIC FUNCTION clean_scrn
+
+   maschera1.Text_3.Value:=""
+   maschera1.GetBox_1.Value:=""
+   maschera1.GetBox_2.Value:=0
+   maschera1.GetBox_3.Value:=0
+
+   RETURN NIL
+
+STATIC FUNCTION _ibtnval(lMode)
+
+   maschera1.Button_1.Enabled:= lMode
+   maschera1.Text_3.Enabled  := lMode
+   maschera1.Button_2.Enabled:= !lMode
+   maschera1.Button_3.Enabled:= !lMode
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -324,9 +351,8 @@ return nil
 
 #include <winspool.h>
 
-
 HB_FUNC (ENUM_FORMS)
-{ 
+{
    PHB_ITEM pfName;
    PHB_ITEM pfSx;
    PHB_ITEM pfSy;
@@ -343,6 +369,7 @@ HB_FUNC (ENUM_FORMS)
    if (pBuffer == NULL)
      {
          hb_retc("");
+
          return;
      }
    EnumForms( (HWND) hb_parnl(1),1, pBuffer,dwSize,&dwSize,&dwForms);
@@ -351,6 +378,7 @@ HB_FUNC (ENUM_FORMS)
      {
 //         MessageBox(NULL,"Enum Form Failed","Debug", MB_OK | MB_ICONSTOP );
          hb_retc("");
+
          return;
      }
 
@@ -390,7 +418,7 @@ HB_FUNC (ENUM_FORMS)
 }
 
 HB_FUNC (OPEN_PRINTER)
-{     
+{
    OSVERSIONINFO osvi;
    char PrinterName[128] ;
    PRINTER_DEFAULTS pd;
@@ -410,7 +438,7 @@ HB_FUNC (OPEN_PRINTER)
    {
       MessageBox(NULL,"Open Printer Failed","Debug", MB_OK | MB_ICONSTOP );
    }
-   hb_retnl((LONG) hPrinter); 
+   hb_retnl((LONG) hPrinter);
 }
 
 HB_FUNC (CLOSE_PRINTER)
@@ -424,7 +452,7 @@ HB_FUNC (DELETE_FORM)
    DWORD dwFlag;
 
    dwFlag=DeleteForm( (HWND) hb_parnl(1), (char *) hb_parc(2) );
-   if ( dwFlag==0 ) 
+   if ( dwFlag==0 )
    {
       MessageBox(NULL,"Delete Form Failed","Debug", MB_OK | MB_ICONSTOP );
       pError=hb_itemNew(NULL);
@@ -438,7 +466,7 @@ HB_FUNC (NEW_FORM)
 {
   PHB_ITEM pError;
   FORM_INFO_1* pForm ;
-  LPBYTE pBuffer ;  
+  LPBYTE pBuffer ;
   DWORD dwFlag ;
 
   pBuffer = GlobalAlloc(GPTR, sizeof(pForm));
@@ -446,6 +474,7 @@ HB_FUNC (NEW_FORM)
      {
         MessageBox(NULL,"No Allocating Memory","Debug", MB_OK | MB_ICONSTOP );
         hb_retc("");
+
         return;
      }
    pForm = (FORM_INFO_1*)pBuffer;
@@ -464,10 +493,11 @@ HB_FUNC (NEW_FORM)
     {
       MessageBox(NULL,"Adding New Form Failed","Debug", MB_OK | MB_ICONSTOP );
       pError = hb_itemNew(NULL);
-      hb_arrayNew(pError,1);  
+      hb_arrayNew(pError,1);
       hb_arraySetNL(pError,1,GetLastError());
       hb_itemRelease(hb_itemReturn(pError));
       GlobalFree(pBuffer);
+
       return ;
     }
   GlobalFree(pBuffer);
@@ -477,7 +507,7 @@ HB_FUNC ( SET_FORM )
 {
   PHB_ITEM pError;
   FORM_INFO_1* pForm ;
-  LPBYTE pBuffer ;  
+  LPBYTE pBuffer ;
   DWORD dwFlag ;
 
    pBuffer = GlobalAlloc(GPTR, sizeof(pForm));
@@ -485,6 +515,7 @@ HB_FUNC ( SET_FORM )
      {
         MessageBox(NULL,"No allocated Memory","Debug", MB_OK | MB_ICONSTOP );
         hb_retc("");
+
         return;
      }
    pForm = (FORM_INFO_1*)pBuffer;
@@ -504,12 +535,14 @@ HB_FUNC ( SET_FORM )
       MessageBox(NULL,"Modify Form Failed","Debug", MB_OK | MB_ICONSTOP );
       GlobalFree(pBuffer);
       pError = hb_itemNew(NULL);
-      hb_arrayNew(pError,1);  
+      hb_arrayNew(pError,1);
       hb_arraySetNL(pError,1,GetLastError());
       hb_itemRelease(hb_itemReturn(pError));
+
       return;
-    }  
+    }
   GlobalFree(pBuffer);
 }
 
 #pragma ENDDUMP
+

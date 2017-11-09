@@ -75,8 +75,8 @@
 #define DSS_PREFIXONLY    1024
 #define DSS_RIGHT        32768
 /*
- * Owner draw actions
- */
+* Owner draw actions
+*/
 #define ODA_DRAWENTIRE    1
 #define ODA_SELECT        2
 #define ODA_FOCUS         4
@@ -106,15 +106,13 @@
 #define WS_VISIBLE          0x10000000
 #define WS_CHILD            0x40000000
 
-
 STATIC lXPThemeActive   := .F.
-
 
 * HMG 1.0 Experimental Build 9a (JK)
 * (C) 2005 Jacek Kubica <kubica@wssk.wroc.pl>
-*-----------------------------------------------------------------------------*
+
 FUNCTION OwnButtonPaint( pdis )
-*-----------------------------------------------------------------------------*
+
    LOCAL hDC, itemState, itemAction, i, rgbTrans, hWnd, lFlat, lNotrans
    LOCAL oldBkMode, hOldFont, hBrush, nFreeSpace
    LOCAL x1, y1, x2, y2, xp1, yp1, xp2, yp2
@@ -131,10 +129,12 @@ FUNCTION OwnButtonPaint( pdis )
    hDC := GETOWNBTNDC( pdis )
 
    IF Empty( hDC )
+
       RETURN ( 1 )
    ENDIF
 
    IF GETOWNBTNCTLTYPE( pdis ) <> ODT_BUTTON
+
       RETURN ( 1 )
    ENDIF
 
@@ -144,6 +144,7 @@ FUNCTION OwnButtonPaint( pdis )
    loSelect := ( AND( itemAction, ODA_SELECT ) == ODA_SELECT )
 
    IF ! lDrawEntire  .AND. ! loFocus .AND. ! loSelect
+
       RETURN ( 1 )
    ENDIF
 
@@ -154,9 +155,9 @@ FUNCTION OwnButtonPaint( pdis )
    i := AScan ( _HMG_aControlHandles, hWnd )
 
    IF ( i <= 0 .OR. _HMG_aControlType[ i ] <> "OBUTTON" )
+
       RETURN ( 1 )
    ENDIF
-
 
    nCRLF := CountIt( _HMG_aControlCaption[ i ] ) + 1
    lDisabled := AND( itemState, ODS_DISABLED ) == ODS_DISABLED
@@ -176,7 +177,6 @@ FUNCTION OwnButtonPaint( pdis )
       ENDIF
 
    ENDIF
-
 
    hOldFont := SelectObject( hDC, _HMG_aControlFontHandle[ i ] )
    aMetr := GetTextMetric( hDC )
@@ -210,14 +210,14 @@ FUNCTION OwnButtonPaint( pdis )
          IF ! Empty( _HMG_aControlBkColor[ i ] )
             hBrush := CreateSolidBrush( _HMG_aControlBkColor[ i, 1 ], _HMG_aControlBkColor[ i, 2 ], _HMG_aControlBkColor[ i, 3 ] )
             FILLRECT( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-            DeleteObject( hBrush )
+            DELETEObject( hBrush )
          ENDIF
       ENDIF
 
       _HMG_aControlFontColor[i ] := aButStyles[ iButStyle, 7 ]
 
       IF !Empty( aButMisc[ 2 ] )     // Picture
-         DeleteObject ( _hmg_aControlBrushhandle[i ] )
+         DELETEObject ( _hmg_aControlBrushhandle[i ] )
          nnnn := _SetBtnPicture (  hDC, _HMG_aControlPicture[ i ] )
          _hmg_aControlBrushHandle[i ] := nnnn
       ENDIF
@@ -247,15 +247,14 @@ FUNCTION OwnButtonPaint( pdis )
          IF ! Empty( _HMG_aControlBkColor[ i ] )
             hBrush := CreateSolidBrush( _HMG_aControlBkColor[ i, 1 ], _HMG_aControlBkColor[ i, 2 ], _HMG_aControlBkColor[ i, 3 ]   )
             FILLRECT( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-            DeleteObject( hBrush )
+            DELETEObject( hBrush )
          ENDIF
       ENDIF
-
 
       _HMG_aControlFontColor[i ] := aButStyles[ iButStyle, 8 ]
 
       IF !Empty( aButMisc[ 2 ] )
-         DeleteObject ( _hmg_aControlBrushhandle[i ] )
+         DELETEObject ( _hmg_aControlBrushhandle[i ] )
          nnnn := _SetBtnPicture (  hDC, aButMisc[ 2 ] )
          _hmg_aControlBrushHandle[i ] := nnnn
       ENDIF
@@ -295,7 +294,6 @@ FUNCTION OwnButtonPaint( pdis )
       ENDIF
 
       IF !Empty( _HMG_aControlCaption[ i ] )  // button has caption
-
 
          IF !Empty( _HMG_aControlBrushHandle[ i ] )
             IF !( AND( _HMG_aControlSpacing[ i ], OBT_UPTEXT ) == OBT_UPTEXT )  // upper text aspect not set
@@ -340,9 +338,7 @@ FUNCTION OwnButtonPaint( pdis )
                DrawText( hDC, _HMG_aControlCaption[ i ], xPoz, pozYtext - 2, x2,  aBtnRc[ 4 ], DT_CENTER )
             ELSE
                DrawGlyph( hDC, aBtnRc[ 1 ] + 4, aBtnRc[ 2 ] + 4, aBtnRc[ 3 ] - 6, aBtnRc[ 4 ] - 6, _HMG_aControlBrushHandle[ i ], rgbTrans, .F., .T. )
-               //
                DrawText( hDC, _HMG_aControlCaption[ i ], xPoz, pozYtext - 2, x2,  aBtnRc[ 4 ], DT_CENTER )
-               //
 
             ENDIF
 
@@ -353,9 +349,7 @@ FUNCTION OwnButtonPaint( pdis )
                DrawText( hDC, _HMG_aControlCaption[ i ],  0, pozYtext - 1, x2,  aBtnRc[ 4 ], DT_CENTER )
             ELSE
                DrawGlyph( hDC, aBtnRc[ 1 ] + 3, aBtnRc[ 2 ] + 3, aBtnRc[ 3 ] - 6, aBtnRc[ 4 ] - 6, _HMG_aControlBrushHandle[ i ], rgbTrans, .F., .T. )
-               //
                DrawText( hDC, _HMG_aControlCaption[ i ],  0, pozYtext - 1, x2,  aBtnRc[ 4 ], DT_CENTER )
-               //
 
             ENDIF
 
@@ -484,11 +478,10 @@ FUNCTION OwnButtonPaint( pdis )
       ENDIF
    ENDIF
 
-RETURN ( 1 )
+   RETURN ( 1 )
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION CountIt( cText )
-*-----------------------------------------------------------------------------*
+
    LOCAL nPoz, nCount := 0
 
    IF At( CRLF, cText ) > 0
@@ -498,4 +491,5 @@ STATIC FUNCTION CountIt( cText )
       ENDDO
    ENDIF
 
-RETURN nCount
+   RETURN nCount
+

@@ -1,16 +1,14 @@
 /*
- * Ejemplo ComboBox n° 8
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo obtener el Value y el Caption
- * del ítem seleccionado en un ComboBox con las cláusulas
- * ITEMSOURCE y VALUESOURCE.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo ComboBox n° 8
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo obtener el Value y el Caption
+* del ítem seleccionado en un ComboBox con las cláusulas
+* ITEMSOURCE y VALUESOURCE.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -21,10 +19,10 @@ FUNCTION Main
    AbrirTablas()
 
    DEFINE WINDOW MAIN OBJ oWnd ;
-      TITLE "Item y Value Seleccionados en un ComboBox" ;
-      WIDTH 370 ;
-      HEIGHT 400 ;
-      ON RELEASE CerrarTablas()
+         TITLE "Item y Value Seleccionados en un ComboBox" ;
+         WIDTH 370 ;
+         HEIGHT 400 ;
+         ON RELEASE CerrarTablas()
 
       @ 10,10 COMBOBOX Combo1 OBJ oCombo1 ;
          WIDTH 200 ;
@@ -32,13 +30,13 @@ FUNCTION Main
          ITEMSOURCE 'Prueba->Nombre' ;
          VALUESOURCE 'Prueba->Codigo' ;
          ON CHANGE ( oValue1:value := "El Value (Codigo) es: " + ;
-                                      AutoType(oCombo1:Value), ;
-                     oItem1:value := "El Item (nombre) es: " + ;
-                                     oCombo1:ItemBySource(oCombo1:Value) )
-/*
- * Se puede remplazar ItemBySource(oCombo1:Value) con
- * Item(ASCAN(oCombo1:aValues, oCombo1:Value)).
- */
+         AutoType(oCombo1:Value), ;
+         oItem1:value := "El Item (nombre) es: " + ;
+         oCombo1:ItemBySource(oCombo1:Value) )
+      /*
+      * Se puede remplazar ItemBySource(oCombo1:Value) con
+      * Item(ASCAN(oCombo1:aValues, oCombo1:Value)).
+      */
 
       @ 13,220 LABEL Dummy1 VALUE "CON VALUESOURCE" AUTOSIZE
 
@@ -55,12 +53,12 @@ FUNCTION Main
          DISPLAYEDIT ;
          ITEMSOURCE 'Prueba->Nombre' ;
          ON CHANGE ( oValue2:value := "El Value (recno) es: " + ;
-                                      AutoType(oCombo2:Value), ;
-                     oItem2:value := "El Item (nombre) es: " + ;
-                                     oCombo2:ItemBySource(oCombo2:Value) )
-/*
- * Se puede remplazar ItemBySource(oCombo2:Value) con Item(oCombo2:Value).
- */
+         AutoType(oCombo2:Value), ;
+         oItem2:value := "El Item (nombre) es: " + ;
+         oCombo2:ItemBySource(oCombo2:Value) )
+      /*
+      * Se puede remplazar ItemBySource(oCombo2:Value) con Item(oCombo2:Value).
+      */
 
       @ 213,220 LABEL Dummy2 VALUE "SIN" AUTOSIZE
 
@@ -78,7 +76,7 @@ FUNCTION Main
    CENTER WINDOW MAIN
    ACTIVATE WINDOW MAIN
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION AbrirTablas()
 
@@ -99,7 +97,7 @@ FUNCTION AbrirTablas()
 
    INDEX ON Codigo TO codigo
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CerrarTablas()
 
@@ -107,8 +105,9 @@ FUNCTION CerrarTablas()
    ERASE ("codigo" + INDEXEXT())
    ERASE Prueba.dbf
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

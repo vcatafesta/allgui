@@ -1,7 +1,7 @@
 /*
- * RDD SQL DEMO
- * Based on Harbour Compiler Contrib Sample
- * Adapted for MiniGUI Extended Edition by Grigory Filatov - 2009
+* RDD SQL DEMO
+* Based on Harbour Compiler Contrib Sample
+* Adapted for MiniGUI Extended Edition by Grigory Filatov - 2009
 */
 
 #include "minigui.ch"
@@ -25,33 +25,34 @@ PROCEDURE main()
    INDEX ON FIELD->AMOUNT TO amount
    DBGOTOP()
 
-	DEFINE WINDOW Win_1 ;
-		ROW 0 ;
-		COL 0 ;
-		WIDTH 500 ;
-		HEIGHT 400 ;
-		TITLE 'RDD SQL Array Test' ;
-		WINDOWTYPE MAIN  
+   DEFINE WINDOW Win_1 ;
+         ROW 0 ;
+         COL 0 ;
+         WIDTH 500 ;
+         HEIGHT 400 ;
+         TITLE 'RDD SQL Array Test' ;
+         WINDOWTYPE MAIN
 
-		DEFINE BROWSE browse1
-			ROW 		10
-			COL 		10
-			WIDTH		470			
-			HEIGHT		330
-			HEADERS 	{'Name','Family Name','Birth','Amount'}
-			WIDTHS		{125,125,105,94}
-			WORKAREA	Persons
-			FIELDS		{'Persons->Name','Persons->FamilyName','Persons->Birth','Persons->Amount'}
-			JUSTIFY		{ ,,BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT }
-			ALLOWEDIT 	.T.
-			INPLACEEDIT 	.T.
-		END BROWSE
-		                           	
-		ON KEY ESCAPE ACTION ThisWindow.Release
+      DEFINE BROWSE browse1
+         ROW       10
+         COL       10
+         WIDTH      470
+         HEIGHT      330
+         HEADERS    {'Name','Family Name','Birth','Amount'}
+         WIDTHS      {125,125,105,94}
+         WORKAREA   Persons
+         FIELDS      {'Persons->Name','Persons->FamilyName','Persons->Birth','Persons->Amount'}
+         JUSTIFY      { ,,BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT }
+         ALLOWEDIT    .T.
+         INPLACEEDIT    .T.
+      END BROWSE
 
-	END WINDOW
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-	Win_1.Center
-	Win_1.Activate
+   END WINDOW
 
-RETURN
+   Win_1.Center
+   Win_1.Activate
+
+   RETURN
+

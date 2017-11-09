@@ -4,22 +4,21 @@
 #define CLR_PINK   RGB( 255, 128, 128)
 #define CLR_NBLUE  RGB( 128, 128, 192)
 
-Memvar oBrw1, oBrw2
-Memvar aDatos_origen, aDatos_destin
+MEMVAR oBrw1, oBrw2
+MEMVAR aDatos_origen, aDatos_destin
 
+PROCEDURE Main()
 
-Procedure Main()
-
-   Public oBrw1, oBrw2
-   Public aDatos_origen, aDatos_destin
+   PUBLIC oBrw1, oBrw2
+   PUBLIC aDatos_origen, aDatos_destin
 
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 840 ;
-      HEIGHT 480 ;
-      TITLE "TsBrowse Array Test" ;
-      MAIN ;
-      FONT 'Tahoma' SIZE 10
+         AT 0,0 ;
+         WIDTH 840 ;
+         HEIGHT 480 ;
+         TITLE "TsBrowse Array Test" ;
+         MAIN ;
+         FONT 'Tahoma' SIZE 10
 
       Sample1()
 
@@ -27,11 +26,9 @@ Procedure Main()
 
    ACTIVATE WINDOW Form1
 
-Return
+   RETURN
 
-*--------------------------------------------------------------
-
-Function Sample1()
+FUNCTION Sample1()
 
    aDatos_origen := {}
    aDatos_destin := {{,,,}}
@@ -68,86 +65,84 @@ Function Sample1()
          ON DBLCLICK CopyRec();
          GRID
 
-         oBrw1:SetArray( aDatos_origen )
+      oBrw1:SetArray( aDatos_origen )
 
-         ADD COLUMN TO TBROWSE oBrw1 ;
-            DATA ARRAY ELEMENT 1;
-            TITLE "Rubro" SIZE 120
+      ADD COLUMN TO TBROWSE oBrw1 ;
+         DATA ARRAY ELEMENT 1;
+         TITLE "Rubro" SIZE 120
 
-         ADD COLUMN TO TBROWSE oBrw1 ;
-            DATA ARRAY ELEMENT 2;
-            TITLE "Articulo" SIZE 80
+      ADD COLUMN TO TBROWSE oBrw1 ;
+         DATA ARRAY ELEMENT 2;
+         TITLE "Articulo" SIZE 80
 
-         ADD COLUMN TO TBROWSE oBrw1 ;
-            DATA ARRAY ELEMENT 3;
-            TITLE "Marca" SIZE 80
+      ADD COLUMN TO TBROWSE oBrw1 ;
+         DATA ARRAY ELEMENT 3;
+         TITLE "Marca" SIZE 80
 
-         ADD COLUMN TO TBROWSE oBrw1 ;
-            DATA ARRAY ELEMENT 4;
-            TITLE "M" SIZE 30
+      ADD COLUMN TO TBROWSE oBrw1 ;
+         DATA ARRAY ELEMENT 4;
+         TITLE "M" SIZE 30
 
-         oBrw1:SetColor({5,6},{CLR_WHITE,CLR_MAGENTA})
-         oBrw1:SetColor( { 3, 4 }, { CLR_WHITE, CLR_NBLUE } )
+      oBrw1:SetColor({5,6},{CLR_WHITE,CLR_MAGENTA})
+      oBrw1:SetColor( { 3, 4 }, { CLR_WHITE, CLR_NBLUE } )
 
-      END TBROWSE
+   END TBROWSE
 
-      DEFINE TBROWSE oBrw2 ;
-         AT 60,450 ;
-         OF Form1 ;
-         WIDTH 330 ;
-         HEIGHT 340 ;
-         ON GOTFOCUS fModelo_Hab(2) ;
-         GRID
+   DEFINE TBROWSE oBrw2 ;
+      AT 60,450 ;
+      OF Form1 ;
+      WIDTH 330 ;
+      HEIGHT 340 ;
+      ON GOTFOCUS fModelo_Hab(2) ;
+      GRID
 
-         oBrw2:SetArray( aDatos_destin )
-         AIns( ASize( oBrw2:aDefValue, Len( oBrw2:aDefValue ) + 1 ), 1 )
+   oBrw2:SetArray( aDatos_destin )
+   AIns( ASize( oBrw2:aDefValue, Len( oBrw2:aDefValue ) + 1 ), 1 )
 
-         ADD COLUMN TO TBROWSE oBrw2 ;
-            DATA ARRAY ELEMENT 1;
-            TITLE "Rubro" SIZE 120
+   ADD COLUMN TO TBROWSE oBrw2 ;
+      DATA ARRAY ELEMENT 1;
+      TITLE "Rubro" SIZE 120
 
-         ADD COLUMN TO TBROWSE oBrw2 ;
-            DATA ARRAY ELEMENT 2;
-            TITLE "Articulo" SIZE 80
+   ADD COLUMN TO TBROWSE oBrw2 ;
+      DATA ARRAY ELEMENT 2;
+      TITLE "Articulo" SIZE 80
 
-         ADD COLUMN TO TBROWSE oBrw2 ;
-            DATA ARRAY ELEMENT 3;
-            TITLE "Marca" SIZE 80
+   ADD COLUMN TO TBROWSE oBrw2 ;
+      DATA ARRAY ELEMENT 3;
+      TITLE "Marca" SIZE 80
 
-         ADD COLUMN TO TBROWSE oBrw2 ;
-            DATA ARRAY ELEMENT 4;
-            TITLE "C" SIZE 30
+   ADD COLUMN TO TBROWSE oBrw2 ;
+      DATA ARRAY ELEMENT 4;
+      TITLE "C" SIZE 30
 
-         oBrw2:SetColor( { 5, 6 }, {CLR_WHITE, CLR_MAGENTA } )
-         oBrw2:SetColor( { 3, 4 }, { CLR_WHITE, CLR_NBLUE } )
+   oBrw2:SetColor( { 5, 6 }, {CLR_WHITE, CLR_MAGENTA } )
+   oBrw2:SetColor( { 3, 4 }, { CLR_WHITE, CLR_NBLUE } )
 
-         oBrw2:SetDeleteMode( .T., .T.)   // Activate Key DEL and confirmation
+   oBrw2:SetDeleteMode( .T., .T.)   // Activate Key DEL and confirmation
 
-      END TBROWSE
+END TBROWSE
 
-      @ 110,355 BUTTON Button_1 OF Form1;
-         CAPTION "Add";
-         ACTION CopyRec() ;
-         WIDTH  80;
-         HEIGHT 28 ;
-         FONT "Arial" SIZE 9
+@ 110,355 BUTTON Button_1 OF Form1;
+   CAPTION "Add";
+   ACTION CopyRec() ;
+   WIDTH  80;
+   HEIGHT 28 ;
+   FONT "Arial" SIZE 9
 
-      @ 150,355 BUTTON Button_2 OF Form1;
-         CAPTION "Del";
-         ACTION DelRec() ;
-         WIDTH  80;
-         HEIGHT 28 ;
-         FONT "Arial" SIZE 9
+@ 150,355 BUTTON Button_2 OF Form1;
+   CAPTION "Del";
+   ACTION DelRec() ;
+   WIDTH  80;
+   HEIGHT 28 ;
+   FONT "Arial" SIZE 9
 
-      oBrw2:SetFocus()
+oBrw2:SetFocus()
 
-   ENDIF
+ENDIF
 
-Return Nil
+RETURN NIL
 
-*--------------------------------------------------------------
-
-Function fModelo_Hab(mod)
+FUNCTION fModelo_Hab(mod)
 
    IF mod == 1
       Form1.Button_1.Enabled := .t.
@@ -157,11 +152,10 @@ Function fModelo_Hab(mod)
       Form1.Button_2.Enabled := .t.
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------------
+FUNCTION CopyRec()
 
-Function CopyRec()
    LOCAL cItem, nRow, nVal, oRow
 
    IF Len(oBrw2:aArray) == 1 .AND. ( Empty(oBrw2:aArray[ 1, 1 ]) .OR. SubStr(oBrw2:aArray[ 1, 1 ], 1, 3) == '???' )
@@ -195,42 +189,39 @@ Function CopyRec()
    oBrw2:GoPos( nRow, 1)
    oBrw2:Refresh()
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------------
-
-Function delRec()
+FUNCTION delRec()
 
    oBrw2:DeleteRow()
    oBrw2:Refresh()
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------------
+STATIC FUNCTION ASeek( uSeek, oBrw )
 
-Static Function ASeek( uSeek, oBrw )
+   LOCAL nEle, uData, ;
+      lFound := .F., ;
+      aArray := oBrw:aArray, ;
+      nCol   := oBrw:nColOrder, ;
+      nRecNo := oBrw:nAt
 
-   Local nEle, uData, ;
-         lFound := .F., ;
-         aArray := oBrw:aArray, ;
-         nCol   := oBrw:nColOrder, ;
-         nRecNo := oBrw:nAt
-
-   For nEle := 1 To Len( aArray )
+   FOR nEle := 1 To Len( aArray )
 
       uData := aArray[ nEle, nCol ]
 
-      If uData = uSeek
+      IF uData = uSeek
          lFound := .T.
-         Exit
-      EndIf
+         EXIT
+      ENDIF
 
-   Next
+   NEXT
 
-   If lFound .and. nEle <= oBrw:nLen
+   IF lFound .and. nEle <= oBrw:nLen
       oBrw:nAt := nEle
-   Else
+   ELSE
       oBrw:nAt := nRecNo
-   EndIf
+   ENDIF
 
-Return lFound
+   RETURN lFound
+

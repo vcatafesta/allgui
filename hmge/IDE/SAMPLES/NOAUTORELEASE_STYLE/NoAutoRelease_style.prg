@@ -1,21 +1,20 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2004 Roberto Lopez <roblez@ciudad.com.ar>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2004 Roberto Lopez <roblez@ciudad.com.ar>
+* http://harbourminigui.googlepages.com/
 */
 
 * NoAuoRelease Style Demo / ACTIVATE WINDOW ALL command
 
-* Using this style speed up application execution, since the forms are 
-* loaded / created / activated only once (at program startup). Later you 
+* Using this style speed up application execution, since the forms are
+* loaded / created / activated only once (at program startup). Later you
 * only must show or hide them as needed.
 
-* Using ACTIVATE WINDOW ALL command, all defined windows will be activated 
-* simultaneously. NOAUTORELEASE and NOSHOW styles in non-main windows 
+* Using ACTIVATE WINDOW ALL command, all defined windows will be activated
+* simultaneously. NOAUTORELEASE and NOSHOW styles in non-main windows
 * are forced. (NOAUTORELEASE style, makes that, when the user closes the windows
-* interactively they are hide instead released from memory, then, there is 
-* no need to reload / redefine prior to show it again. NOSHOW style makes that 
+* interactively they are hide instead released from memory, then, there is
+* no need to reload / redefine prior to show it again. NOSHOW style makes that
 * the windows be not displayed at activation).
 
 #include "minigui.ch"
@@ -27,23 +26,21 @@
 * are referred using semi-oop syntax from 'Main_Form', prior to be loaded
 * (remember that main window must be the first to be loaded or defined).
 
-Declare Window Std_Form
-Declare Window Child_Form
-Declare Window Topmost_Form
-Declare Window Modal_Form
+DECLARE Window Std_Form
+DECLARE Window Child_Form
+DECLARE Window Topmost_Form
+DECLARE Window Modal_Form
 
-Function Main
+FUNCTION Main
 
-	Load Window Main_Form // Main window must be loaded first.
+   LOAD WINDOW Main_Form // Main window must be loaded first.
 
-	Load Window Std_Form
-	Load Window Child_Form
-	Load Window Topmost_Form
-	Load Window Modal_Form
+   LOAD WINDOW Std_Form
+   LOAD WINDOW Child_Form
+   LOAD WINDOW Topmost_Form
+   LOAD WINDOW Modal_Form
 
-	Activate Window All
+   ACTIVATE WINDOW All
 
-Return Nil
-
-
+   RETURN NIL
 

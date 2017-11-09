@@ -1,63 +1,66 @@
 /*
-   New C:\hmg.3.4.0\SAMPLES\Basics\MIXEDCONSOLE demo2
-   By Pablo César Arrascaeta
-   February 23rd, 2015
+New C:\hmg.3.4.0\SAMPLES\Basics\MIXEDCONSOLE demo2
+By Pablo César Arrascaeta
+February 23rd, 2015
 */
 
 #include "hmg.ch"
 
 REQUEST HB_GT_WIN_DEFAULT
 
-Function Main()
+FUNCTION Main()
 
-Public hWnd1, hWnd2
+   PUBLIC hWnd1, hWnd2
 
-DEFINE WINDOW form_1 AT 100 , 700 WIDTH 200 HEIGHT 200 TITLE "Mixed Mode Demo" MAIN
+   DEFINE WINDOW form_1 AT 100 , 700 WIDTH 200 HEIGHT 200 TITLE "Mixed Mode Demo" MAIN
 
-    DEFINE BUTTON Button_1
-       ROW    10
-       COL    10
-       CAPTION "Test Console"
-       ACTION   TestConsole()
-    END BUTTON
- 
-    DEFINE TEXTBOX Text_1
-       ROW    110
-       COL    30
-       WIDTH  120
-       HEIGHT 24
-       FONTNAME "Arial"
-       FONTSIZE 9
-       TOOLTIP "Type your name"
-       ONENTER TestConsole()
-       VALUE ""
-    END TEXTBOX
+      DEFINE BUTTON Button_1
+         ROW    10
+         COL    10
+         CAPTION "Test Console"
+         ACTION   TestConsole()
+      END BUTTON
 
-END WINDOW
-hWnd1:=GetFormHandle("Form_1")
-Form_1.Text_1.SetFocus
-ACTIVATE WINDOW form_1
-Return Nil
+      DEFINE TEXTBOX Text_1
+         ROW    110
+         COL    30
+         WIDTH  120
+         HEIGHT 24
+         FONTNAME "Arial"
+         FONTSIZE 9
+         TOOLTIP "Type your name"
+         ONENTER TestConsole()
+         VALUE ""
+      END TEXTBOX
 
-Function TestConsole()
-Local cName:=PadR(GetProperty("Form_1","Text_1","Value"),30)
+   END WINDOW
+   hWnd1:=GetFormHandle("Form_1")
+   Form_1.Text_1.SetFocus
+   ACTIVATE WINDOW form_1
 
-If !ValType(hWnd2)="N"
-   hWnd2:=GetConsoleWindowHandle()
-Endif
-SetForeGroundWindow( hWnd2 )
-SetMode(25,80)
-CLS
-@ 12,00 SAY "Name:" GET cName
-READ
-If LastKey()=27
-   TerminateProcess()
-Endif
-SetForeGroundWindow( hWnd1 )
+   RETURN NIL
 
-Form_1.Text_1.SetFocus
-Form_1.Text_1.Value:=cName
-Return nil
+FUNCTION TestConsole()
+
+   LOCAL cName:=PadR(GetProperty("Form_1","Text_1","Value"),30)
+
+   IF !ValType(hWnd2)="N"
+      hWnd2:=GetConsoleWindowHandle()
+   ENDIF
+   SetForeGroundWindow( hWnd2 )
+   SetMode(25,80)
+   CLS
+   @ 12,00 SAY "Name:" GET cName
+   READ
+   IF LastKey()=27
+      TerminateProcess()
+   ENDIF
+   SetForeGroundWindow( hWnd1 )
+
+   Form_1.Text_1.SetFocus
+   Form_1.Text_1.Value:=cName
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 #define WINVER 0x0600 // for Vista

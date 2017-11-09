@@ -1,9 +1,8 @@
-/* 
- * MINIGUI - Harbour Win32 GUI library Demo
- * An example of using of win_TaskDialogIndirect0 with custom buttons and progress bar
- * with progress effects
- *
- * Copyright 2016, Petr Chornyj
+/*
+* MINIGUI - Harbour Win32 GUI library Demo
+* An example of using of win_TaskDialogIndirect0 with custom buttons and progress bar
+* with progress effects
+* Copyright 2016, Petr Chornyj
 */
 
 #include "minigui.ch"
@@ -15,7 +14,7 @@
 
 STATIC s_state   := PBST_NORMAL
 STATIC s_marquee := .F.
-      
+
 PROCEDURE main()
 
    LOCAL aConfig := Array( TDC_CONFIG )
@@ -27,15 +26,15 @@ PROCEDURE main()
    aConfig[ TDC_TASKDIALOG_FLAGS ]  := hb_bitOr( TDF_SHOW_PROGRESS_BAR, TDF_ALLOW_DIALOG_CANCELLATION )
    aConfig[ TDC_BUTTON ]            := Len( aCustButton )
    aConfig[ TDC_TASKDIALOG_BUTTON ] := aCustButton
-   aConfig[TDC_CALLBACK]            := {|h,n,w,l| __cb_progress( h,n,w,l )} 
+   aConfig[TDC_CALLBACK]            := {|h,n,w,l| __cb_progress( h,n,w,l )}
 
    nResult := win_TaskDialogIndirect0( aConfig, @nButton, NIL, NIL )
 
-   IF nResult == NOERROR 
-      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. ) 
+   IF nResult == NOERROR
+      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. )
    ELSE
       IF nResult != E_OUTOFMEMORY
-         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. ) 
+         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. )
       ELSE
          // Do Something
          QUIT
@@ -44,11 +43,11 @@ PROCEDURE main()
 
    RETURN
 
-
 STATIC FUNCTION __cb_progress( hWnd, nNotification, nWParam, nLParam )
+
    /*
-      To prevent the task dialog from closing, the application must return FALSE,
-      otherwise the task dialog is closed 
+   To prevent the task dialog from closing, the application must return FALSE,
+   otherwise the task dialog is closed
    */
    LOCAL  lResult := .F.
 
@@ -70,10 +69,9 @@ STATIC FUNCTION __cb_progress( hWnd, nNotification, nWParam, nLParam )
          lResult := .T.
       ENDIF
       EXIT
-   END SWITCH   
+   END SWITCH
 
    RETURN lResult
-
 
 STATIC PROCEDURE CycleState( hWnd )
 
@@ -94,7 +92,6 @@ STATIC PROCEDURE CycleState( hWnd )
 
    RETURN
 
-
 STATIC PROCEDURE ToggleMode( hWnd )
 
    s_marquee := ! s_marquee
@@ -111,14 +108,13 @@ STATIC PROCEDURE ToggleMode( hWnd )
 
    RETURN
 
-
 STATIC PROCEDURE UpdateInstruction( hWnd )
 
    LOCAL cMsg := ""
 
    SWITCH s_state
    CASE PBST_NORMAL
-      cMsg += "State: Normal" + CRLF 
+      cMsg += "State: Normal" + CRLF
       EXIT
    CASE PBST_PAUSED
       cMsg += "State: Paused" + CRLF
@@ -132,3 +128,4 @@ STATIC PROCEDURE UpdateInstruction( hWnd )
    _SetMainInstruction( hWnd, cMsg )
 
    RETURN
+

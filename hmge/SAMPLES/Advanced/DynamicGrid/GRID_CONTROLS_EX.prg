@@ -8,27 +8,19 @@
 // BLOG:     http://srvet.blogspot.com
 // ******************************************************************************
 
-
 // FUNCTIONS
 // *********************************************************************************
 // GRID_ColumnCount         ---> Return the Number of Column on GRID
-//
 // GRID_AddColumnEx         ---> Complement of Method:  AddColumn (nColIndex)
 // GRID_DeleteColumnEx      ---> Complement of Method:  DeleteColumn (nColIndex)
-//
 // GRID_GetColumnControlsEx ---> Return Array with Controls of Column(nColIndex) ==> {cCAPTION, nWIDTH, nJUSTIFY, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK}
-//
 // GRID_GetColumnControl    ---> Return specific Control of Column(nColIndex) ==> [cCAPTION, nWIDTH, nJUSTIFY, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK]
 // GRID_SetColumnControl    ---> Set specific Control of Column(nColIndex)    ==> [cCAPTION, nWIDTH, nJUSTIFY, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK]
-//
 // GRID_GetColumnDisplayPos ---> Get the position of Column(nColIndex) in that display in the GRID
 // GRID_SetColumnDisplayPos ---> Set the position of Column(nColIndex) in that display in the GRID
-//
 // GRID_GetColumnWidthDisplay -> Get the Width of Column(nColIndex) in that display in the GRID
-//
 // GRID_SetBkImage          ---> Set background image in Grid
 // *********************************************************************************
-
 
 // SYNTAX
 // *********************************************************************************
@@ -57,21 +49,22 @@
 #define _GRID_COLUMNVALID_      14   // _HMG_aControlMiscData1 [i,14]
 #define _GRID_COLUMNWHEN_       15   // _HMG_aControlMiscData1 [i,15]
 
-
 // *****************
 // ** Properties ***
 // *****************
 
 // *****************************************************************************
+
 FUNCTION GRID_ColumnCount ( cControlName, cParentForm )
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
 
-RETURN LISTVIEW_GETCOLUMNCOUNT ( GetControlHandle ( cControlName, cParentForm ) )
+   RETURN LISTVIEW_GETCOLUMNCOUNT ( GetControlHandle ( cControlName, cParentForm ) )
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_GetColumnControlsEx ( cControlName, cParentForm, nColIndex )
 
    LOCAL aGridControls := Array ( 9 )
@@ -91,38 +84,39 @@ FUNCTION GRID_GetColumnControlsEx ( cControlName, cParentForm, nColIndex )
    aGridControls[9 ] := GRID_GETCOLUMNCONTROL ( cControlName, cParentForm, _GRID_ONHEADCLICK_,      nColIndex )
    // Return Array --> {cCAPTION, nWIDTH, nJUSTIFY, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK}
 
-RETURN aGridControls
+   RETURN aGridControls
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_GetColumnControl ( cControlName, cParentForm, nControl, nColIndex )
 
    LOCAL Length, i, Data := NIL
+
    i := GetControlIndex( cControlName, cParentForm )
 
    IF nControl = _GRID_ONHEADCLICK_
       Length := Len( _HMG_aControlHeadClick[i ] )
       IF nColIndex > 0 .AND. nColIndex <= Length
-         Data := _HMG_aControlHeadClick[i ][nColIndex ]
+         DATA := _HMG_aControlHeadClick[i ][nColIndex ]
       ENDIF
 
    ELSEIF nControl = _GRID_COLUMNCAPTION_
       Length := Len( _HMG_aControlPageMap[i ] )
       IF nColIndex > 0 .AND. nColIndex <= Length
-         Data := _HMG_aControlPageMap[i ][nColIndex ]
+         DATA := _HMG_aControlPageMap[i ][nColIndex ]
       ENDIF
 
    ELSEIF ValType ( _HMG_aControlMiscData1[ i ][ nControl ] ) == "A"
       Length := Len( _HMG_aControlMiscData1[ i ][ nControl ] )
       IF nColIndex > 0 .AND. nColIndex <= Length
-         Data := _HMG_aControlMiscData1[ i ][ nControl ][nColIndex ]
+         DATA := _HMG_aControlMiscData1[ i ][ nControl ][nColIndex ]
       ENDIF
    ENDIF
 
-RETURN DATA
+   RETURN DATA
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_SetColumnControl ( cControlName, cParentForm, nControl, nColIndex, Data )
 
    LOCAL Length, num_Col, i, Old_Data
@@ -178,13 +172,14 @@ FUNCTION GRID_SetColumnControl ( cControlName, cParentForm, nControl, nColIndex,
       ENDIF
    ENDIF
 
-RETURN Old_Data
+   RETURN Old_Data
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_GetColumnDisplayPos ( cControlName, cParentForm, nColIndex )
 
    LOCAL nPos, ArrayOrder
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
@@ -193,13 +188,14 @@ FUNCTION GRID_GetColumnDisplayPos ( cControlName, cParentForm, nColIndex )
    ArrayOrder := LISTVIEW_GETCOLUMNORDERARRAY ( GetControlHandle ( cControlName, cParentForm ), GRID_ColumnCount ( cControlName, cParentForm ) )
    nPos := AScan ( ArrayOrder, nColIndex )
 
-RETURN nPos
+   RETURN nPos
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_SetColumnDisplayPos ( cControlName, cParentForm, nColIndex, nPos_Display )
 
    LOCAL nOld_Pos, ArrayOrder
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
@@ -217,45 +213,46 @@ FUNCTION GRID_SetColumnDisplayPos ( cControlName, cParentForm, nColIndex, nPos_D
       LISTVIEW_SETCOLUMNORDERARRAY ( GetControlHandle ( cControlName, cParentForm ), GRID_ColumnCount ( cControlName, cParentForm ), ArrayOrder )
    ENDIF
 
-RETURN nOld_Pos
+   RETURN nOld_Pos
 
+   // *****************************************************************************
 
-// *****************************************************************************
 FUNCTION GRID_GetColumnWidthDisplay ( cControlName, cParentForm, nColIndex )
 
    LOCAL nWidth
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
    // LISTVIEW_GETCOLUMNWIDTH: Low-level function in C native of HMG (source c_grid.c)
    nWidth := LISTVIEW_GETCOLUMNWIDTH ( GetControlHandle ( cControlName, cParentForm ), nColIndex - 1 )
 
-RETURN nWidth
+   RETURN nWidth
 
-
-// *****************************************************************************
-// CONSTANTS -->  GRID_SetBkImage (nAction)
-#define _GRID_SETBKIMAGE_NONE_   0
-#define _GRID_SETBKIMAGE_NORMAL_ 1
-#define _GRID_SETBKIMAGE_FILL_   2
+   // *****************************************************************************
+   // CONSTANTS -->  GRID_SetBkImage (nAction)
+   #define _GRID_SETBKIMAGE_NONE_   0
+   #define _GRID_SETBKIMAGE_NORMAL_ 1
+   #define _GRID_SETBKIMAGE_FILL_   2
 
 PROCEDURE GRID_SetBkImage ( cControlName, cParentForm, nAction, cBMPFileName, yOffset, xOffset )
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
    // LISTVIEW_SETBKIMAGE and BMP_LOAD_FILE are Low-level functions in C (see the end of this file)
    LISTVIEW_SETBKIMAGE ( GetControlHandle ( cControlName, cParentForm ), BMP_LOAD_FILE ( cBMPFileName ), xOffset, yOffset, nAction )
 
-RETURN
+   RETURN
 
+   // **************
+   // ** Methods ***
+   // **************
 
+   // *****************************************************************************
 
-// **************
-// ** Methods ***
-// **************
-
-// *****************************************************************************
 PROCEDURE GRID_AddColumnEx ( cControlName, cParentForm, nColIndex, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK )
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
@@ -271,11 +268,12 @@ PROCEDURE GRID_AddColumnEx ( cControlName, cParentForm, nColIndex, aCOLUMNCONTRO
    GRID_ADDCONTROLS ( cControlName, cParentForm, _GRID_COLUMNVALID_,      nColIndex, bCOLUMNVALID )
    GRID_ADDCONTROLS ( cControlName, cParentForm, _GRID_ONHEADCLICK_,      nColIndex, bONHEADCLICK )
 
-RETURN
+   RETURN
 
+   // *****************************************************************************
 
-// *****************************************************************************
 PROCEDURE GRID_DeleteColumnEx ( cControlName, cParentForm, nColIndex )
+
    IF ValType ( cParentForm ) == "U"
       cParentForm := ThisWindow.Name
    ENDIF
@@ -291,13 +289,11 @@ PROCEDURE GRID_DeleteColumnEx ( cControlName, cParentForm, nColIndex )
    GRID_DELETECONTROLS ( cControlName, cParentForm, _GRID_COLUMNVALID_,      nColIndex )
    GRID_DELETECONTROLS ( cControlName, cParentForm, _GRID_ONHEADCLICK_,      nColIndex )
 
-RETURN
+   RETURN
 
-
-
-// *********************************************************************************************************
-// ** Internal Functions ***
-// *********************************************************************************************************
+   // *********************************************************************************************************
+   // ** Internal Functions ***
+   // *********************************************************************************************************
 
 PROCEDURE GRID_ADDCONTROLS ( cControlName, cParentForm, nControl, nColIndex, Data )
 
@@ -336,9 +332,7 @@ PROCEDURE GRID_ADDCONTROLS ( cControlName, cParentForm, nControl, nColIndex, Dat
       ENDIF
    ENDIF
 
-RETURN
-
-
+   RETURN
 
 PROCEDURE GRID_DELETECONTROLS ( cControlName, cParentForm, nControl, nColIndex )
 
@@ -364,18 +358,15 @@ PROCEDURE GRID_DELETECONTROLS ( cControlName, cParentForm, nControl, nColIndex )
       ENDIF
    ENDIF
 
-RETURN
+   RETURN
 
-
-
-// ***********************************************************************************************************
-// Low-level Functions in C
-// ***********************************************************************************************************
+   // ***********************************************************************************************************
+   // Low-level Functions in C
+   // ***********************************************************************************************************
 #pragma begindump
 
 #define _WIN32_IE      0x0500
 #define _WIN32_WINNT   0x501
-
 
 #include <windows.h>
 #include <commctrl.h>
@@ -387,7 +378,6 @@ RETURN
 #define HB_STORNI( n, x, y ) hb_storvni( n, x, y )
 #endif
 
-//******************************************************************************
 // LISTVIEW_SETCOLUMNJUSTIFY (ControlHandle, nCol, nJustify)
 HB_FUNC ( LISTVIEW_SETCOLUMNJUSTIFY )
 {
@@ -397,8 +387,6 @@ HB_FUNC ( LISTVIEW_SETCOLUMNJUSTIFY )
    ListView_SetColumn ((HWND) hb_parnl(1), hb_parni(2), &COL);
 }
 
-
-//******************************************************************************
 // LISTVIEW_GETCOLUMNORDERARRAY (ControlHandle, nColumnCount) --> Return Array: {Column Order}
 HB_FUNC ( LISTVIEW_GETCOLUMNORDERARRAY )
 {
@@ -411,8 +399,6 @@ HB_FUNC ( LISTVIEW_GETCOLUMNORDERARRAY )
    GlobalFree (p);
 }
 
-
-//******************************************************************************
 // LISTVIEW_SETCOLUMNORDERARRAY (ControlHandle, nColumnCount, aArrayOrder)
 HB_FUNC ( LISTVIEW_SETCOLUMNORDERARRAY )
 {
@@ -426,8 +412,6 @@ HB_FUNC ( LISTVIEW_SETCOLUMNORDERARRAY )
    GlobalFree (p);
 }
 
-
-//******************************************************************************
 // LISTVIEW_SETBKIMAGE (ControlHandle, hBitmap, yOffset, xOffset, nFlag)
 HB_FUNC ( LISTVIEW_SETBKIMAGE )
 {
@@ -452,8 +436,6 @@ HB_FUNC ( LISTVIEW_SETBKIMAGE )
 //   DeleteObject ((HBITMAP) hb_parnl (2));
 }
 
-
-//******************************************************************************
 // BMP_LOAD_FILE (cFileBMP) ---> Return hBITMAP
 HB_FUNC (BMP_LOAD_FILE)
 {
@@ -473,3 +455,4 @@ HB_FUNC (BMP_LOAD_FILE)
 }
 
 #pragma enddump
+

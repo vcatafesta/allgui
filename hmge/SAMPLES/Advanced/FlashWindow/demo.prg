@@ -1,5 +1,5 @@
 /*
- * MiniGUI Flashing Window Demo
+* MiniGUI Flashing Window Demo
 */
 
 #include "hmg.ch"
@@ -26,40 +26,40 @@ PROCEDURE Main
 
    ELSE
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE APP_TITLE ;
-		MAIN ;
-		ON MINIMIZE Flashing( This.Name, 5, {|| IsIconic( This.Handle ) } )
+      DEFINE WINDOW Win_1 ;
+            AT 0,0 ;
+            WIDTH 400 ;
+            HEIGHT 400 ;
+            TITLE APP_TITLE ;
+            MAIN ;
+            ON MINIMIZE Flashing( This.Name, 5, {|| IsIconic( This.Handle ) } )
 
-		ON KEY CONTROL + SPACE ACTION _Minimize( FindWindow( APP_TITLE ) ) TO lResult
+         ON KEY CONTROL + SPACE ACTION _Minimize( FindWindow( APP_TITLE ) ) TO lResult
 
-	END WINDOW
+      END WINDOW
 
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+      CENTER WINDOW Win_1
+      ACTIVATE WINDOW Win_1
 
    ENDIF
 
-RETURN
+   RETURN
 
-/*
- *	Flashing( [<cFormName>], [<nBlinks>], [<bWhen>] )
-*/
+   /*
+   *   Flashing( [<cFormName>], [<nBlinks>], [<bWhen>] )
+   */
+
 FUNCTION Flashing( cForm, nBlinks, bWhen )
 
-	LOCAL lResult
+   LOCAL lResult
 
-	DEFAULT cForm := ThisWindow.Name, nBlinks := 300, bWhen := { || .T. }
+   DEFAULT cForm := ThisWindow.Name, nBlinks := 300, bWhen := { || .T. }
 
-	IF ( lResult := Eval( bWhen ) )
-		FLASH WINDOW &cForm COUNT nBlinks INTERVAL iif( IsWinNT(), 200, 0 )
-	ENDIF
+   IF ( lResult := Eval( bWhen ) )
+      FLASH WINDOW &cForm COUNT nBlinks INTERVAL iif( IsWinNT(), 200, 0 )
+   ENDIF
 
-RETURN lResult
-
+   RETURN lResult
 
 #pragma BEGINDUMP
 
@@ -77,3 +77,4 @@ HB_FUNC ( FINDWINDOW )
 }
 
 #pragma ENDDUMP
+

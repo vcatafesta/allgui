@@ -1,38 +1,36 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "minigui.ch"
 #include "Dbstruct.ch"
 
-Memvar aRows, a_hdr_image
-Memvar nSortColBrowse, nSortColGrid, cSearchText, cPressedKeys
-//------------------------------------------------------------------------------
-Function Main
-//------------------------------------------------------------------------------
-   Private aRows [20] [3]
-   Private nSortColBrowse := 1, nSortColGrid := 1, cSearchText := "", cPressedKeys := ""
+MEMVAR aRows, a_hdr_image
+MEMVAR nSortColBrowse, nSortColGrid, cSearchText, cPressedKeys
 
-   Declare a_hdr_image[2]
+FUNCTION Main
+
+   PRIVATE aRows [20] [3]
+   PRIVATE nSortColBrowse := 1, nSortColGrid := 1, cSearchText := "", cPressedKeys := ""
+
+   DECLARE a_hdr_image[2]
    a_hdr_image[1] = 'UP.BMP'
    a_hdr_image[2] = 'DN.BMP'
 
    REQUEST DBFCDX
    SET CENTURY ON
    SET DELETED ON
-   //
    SET CODEPAGE TO RUSSIAN // Important for localize UPPER
    SET EVENTS FUNCTION TO MYEVENTS
-   //
 
    DEFINE WINDOW Form_1;
-      AT 0,0;
-      WIDTH 640 HEIGHT 480;
-      TITLE "MiniGUI Browse/Grid Incremental Search Demo";
-      MAIN;
-      NOMAXIMIZE NOSIZE;
-      ON INIT OpenTables();
-      ON RELEASE CloseTables()
+         AT 0,0;
+         WIDTH 640 HEIGHT 480;
+         TITLE "MiniGUI Browse/Grid Incremental Search Demo";
+         MAIN;
+         NOMAXIMIZE NOSIZE;
+         ON INIT OpenTables();
+         ON RELEASE CloseTables()
 
       DEFINE MAIN MENU
          POPUP 'File'
@@ -44,9 +42,8 @@ Function Main
       END MENU
 
       DEFINE STATUSBAR
-      STATUSITEM 'HMG Power Ready'
+         STATUSITEM 'HMG Power Ready'
       END STATUSBAR
-
 
       @ 10,10 BROWSE Browse_1;
          WIDTH 610;
@@ -63,13 +60,13 @@ Function Main
          ON GOTFOCUS {|| BrowseHeadClick( nSortColBrowse ) }
 
       aRows [1]  := {'Simpson','Homer','555-5555'}
-      aRows [2]	 := {'Mulder','Fox','324-6432'}
+      aRows [2]    := {'Mulder','Fox','324-6432'}
       aRows [3]  := {'Smart','Max','432-5892'}
-      aRows [4]	 := {'Grillo','Pepe','894-2332'}
-      aRows [5]	 := {'Kirk','James','346-9873'}
-      aRows [6]	 := {'Barriga','Carlos','394-9654'}
+      aRows [4]    := {'Grillo','Pepe','894-2332'}
+      aRows [5]    := {'Kirk','James','346-9873'}
+      aRows [6]    := {'Barriga','Carlos','394-9654'}
       aRows [7]  := {'Flanders','Ned','435-3211'}
-      aRows [8]	 := {'Smith','John','123-1234'}
+      aRows [8]    := {'Smith','John','123-1234'}
       aRows [9]  := {'Pedemonti','Flavio','000-0000'}
       aRows [10] := {'Gomez','Juan','583-4832'}
       aRows [11] := {'Fernandez','Raul','321-4332'}
@@ -98,92 +95,86 @@ Function Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-//------------------------------------------------------------------------------
-Function BrowseHeadClick( nCol )
-//------------------------------------------------------------------------------
+FUNCTION BrowseHeadClick( nCol )
 
    cSearchText := "Sort&Search by < " +;
       GetProperty( "Form_1", "Browse_1", "Header", nCol ) + " >: "
    nSortColBrowse := nCol
    cPressedKeys := ""
 
-   if nCol = 1
-      set order to tag "Code"
+   IF nCol = 1
+      SET order to tag "Code"
       Form_1.Browse_1.HeaderImage( 1 ) := 1
       Form_1.Browse_1.HeaderImage( 2 ) := 0
 
-   elseif nCol = 2
-      set order to tag "First"
+   ELSEIF nCol = 2
+      SET order to tag "First"
       Form_1.Browse_1.HeaderImage( 1 ) := 0
       Form_1.Browse_1.HeaderImage( 2 ) := 1
-   endif
+   ENDIF
 
    DoMethod( "Form_1", "Browse_1", "Refresh" )
    SetProperty( "Form_1", "StatusBar", "Caption", cSearchText )
 
-Return Nil
+   RETURN NIL
 
-//------------------------------------------------------------------------------
-Function GridHeadClick( nCol )
-//------------------------------------------------------------------------------
-   Local i
+FUNCTION GridHeadClick( nCol )
+
+   LOCAL i
 
    cSearchText := "Sort&Search by < " +;
       GetProperty( "Form_1", "Grid_1", "Header", nCol ) + " >: "
    nSortColGrid := nCol
    cPressedKeys := ""
 
-   if nCol = 1
+   IF nCol = 1
       aRows := asort( aRows,,, { |x, y| x[1] < y[1] } )
-      for i = 1 to len( aRows )
+      FOR i = 1 to len( aRows )
          Form_1.Grid_1.Item( i ) := aRows[ i ]
-      next
+      NEXT
       Form_1.Grid_1.HeaderImage( 1 ) := 1
       Form_1.Grid_1.HeaderImage( 2 ) := 0
 
-   elseif nCol = 2
+   ELSEIF nCol = 2
       aRows := asort( aRows,,, { |x, y| x[2] < y[2] } )
-      for i = 1 to len( aRows )
+      FOR i = 1 to len( aRows )
          Form_1.Grid_1.Item( i ) := aRows[ i ]
-      next
+      NEXT
       Form_1.Grid_1.HeaderImage( 1 ) := 0
       Form_1.Grid_1.HeaderImage( 2 ) := 1
-   endif
+   ENDIF
 
    i := Form_1.Grid_1.Value
    Form_1.Grid_1.Value := if( i = 0, 1, i )
    Form_1.StatusBar.Item(1) := cSearchText
 
-Return Nil
+   RETURN NIL
 
-//------------------------------------------------------------------------------
-Procedure OpenTables()
-//------------------------------------------------------------------------------
+PROCEDURE OpenTables()
 
-   if !file("test.dbf")
+   IF !file("test.dbf")
       CreateTable()
-   endif
+   ENDIF
 
-   Use Test index Test Via "DBFCDX"
-   set order to tag "Code"
-   Go Top
+   USE Test index Test Via "DBFCDX"
+   SET order to tag "Code"
+   GO TOP
 
    Form_1.Browse_1.Value := RecNo()
    BrowseHeadClick( 1 )
 
-Return
+   RETURN
 
-//------------------------------------------------------------------------------
-Procedure CloseTables()
-//------------------------------------------------------------------------------
-   Use
-Return
+PROCEDURE CloseTables()
 
-//------------------------------------------------------------------------------
-Procedure CreateTable
-//------------------------------------------------------------------------------
+   USE
+
+   RETURN
+
+PROCEDURE CreateTable
+
    LOCAL aDbf[5][4], i
    FIELD Code, First
 
@@ -191,186 +182,192 @@ Procedure CreateTable
    aDbf[1][ DBS_TYPE ] := "Numeric"
    aDbf[1][ DBS_LEN ] := 10
    aDbf[1][ DBS_DEC ] := 0
-   //
    aDbf[2][ DBS_NAME ] := "First"
    aDbf[2][ DBS_TYPE ] := "Character"
    aDbf[2][ DBS_LEN ] := 25
    aDbf[2][ DBS_DEC ] := 0
-   //
    aDbf[3][ DBS_NAME ] := "Last"
    aDbf[3][ DBS_TYPE ] := "Character"
    aDbf[3][ DBS_LEN ] := 25
    aDbf[3][ DBS_DEC ] := 0
-   //
    aDbf[4][ DBS_NAME ] := "Married"
    aDbf[4][ DBS_TYPE ] := "Logical"
    aDbf[4][ DBS_LEN ] := 1
    aDbf[4][ DBS_DEC ] := 0
-   //
    aDbf[5][ DBS_NAME ] := "Birth"
    aDbf[5][ DBS_TYPE ] := "Date"
    aDbf[5][ DBS_LEN ] := 8
    aDbf[5][ DBS_DEC ] := 0
-   //
 
    DBCREATE("Test", aDbf, "DBFCDX")
 
-   Use test Via "DBFCDX"
-   zap
+   USE test Via "DBFCDX"
+   ZAP
 
-   For i:= 1 To 100
-      append blank
-      Replace code with i
-      Replace First With aRows[Random(20)][1]
-      Replace Last With 'Last Name '+ Str(i)
-      Replace Married With .t.
-      replace birth with date()+i-10000
-   Next i
+   FOR i:= 1 To 100
+      APPEND BLANK
+      REPLACE code with i
+      REPLACE First With aRows[Random(20)][1]
+      REPLACE Last With 'Last Name '+ Str(i)
+      REPLACE Married With .t.
+      REPLACE birth with date()+i-10000
+   NEXT i
 
-   Index on str(Code,10) Tag "Code" To "Test"
-   Index on upper(First) Tag "First" To "Test"
+   INDEX ON str(Code,10) Tag "Code" To "Test"
+   INDEX ON upper(First) Tag "First" To "Test"
 
-   Use
+   USE
 
-Return
+   RETURN
 
-//------------------------------------------------------------------------------
-Function Form1Event1( i, nVirtKey, cKey )
-//------------------------------------------------------------------------------
+FUNCTION Form1Event1( i, nVirtKey, cKey )
+
    LOCAL nLastRec := 1
 
-   Do Case
-   Case nVirtKey == 46 // DEL
-      If MsgYesNo( _HMG_BRWLangMessage [1] , _HMG_BRWLangMessage [2] ) == .t.
+   DO CASE
+   CASE nVirtKey == 46 // DEL
+      IF MsgYesNo( _HMG_BRWLangMessage [1] , _HMG_BRWLangMessage [2] ) == .t.
          _BrowseDelete('','',i)
-      EndIf
+      ENDIF
 
-   Case nVirtKey == 36 // HOME
+   CASE nVirtKey == 36 // HOME
       _BrowseHome('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 35 // END
+      RETURN 1
+
+   CASE nVirtKey == 35 // END
       _BrowseEnd('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 33 // PGUP
+      RETURN 1
+
+   CASE nVirtKey == 33 // PGUP
       _BrowsePrior('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 34 // PGDN
+      RETURN 1
+
+   CASE nVirtKey == 34 // PGDN
       _BrowseNext('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 38 // UP
+      RETURN 1
+
+   CASE nVirtKey == 38 // UP
       _BrowseUp('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 40 // DOWN
+      RETURN 1
+
+   CASE nVirtKey == 40 // DOWN
       _BrowseDown('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case len( cKey ) > 0 .or. nVirtKey = 8
+      RETURN 1
 
-      if nVirtKey = 8 // BackSpace
+   CASE len( cKey ) > 0 .or. nVirtKey = 8
+
+      IF nVirtKey = 8 // BackSpace
          cPressedKeys := left( cPressedKeys, len(cPressedKeys)-1 )
-      elseif len( cKey ) > 0
+      ELSEIF len( cKey ) > 0
          cPressedKeys := cPressedKeys + cKey
-      endif
+      ENDIF
       Form_1.StatusBar.Item(1) := cSearchText + cPressedKeys
 
       nLastRec := recno()
-      if nSortColBrowse = 1
-         if ! dbseek( str(val(cPressedKeys), 10) )
+      IF nSortColBrowse = 1
+         IF ! dbseek( str(val(cPressedKeys), 10) )
             go nLastRec
-         endif
-      elseif nSortColBrowse = 2
-         if ! dbseek( cPressedKeys )
+         ENDIF
+      ELSEIF nSortColBrowse = 2
+         IF ! dbseek( cPressedKeys )
             go nLastRec
-         endif
-      endif
+         ENDIF
+      ENDIF
       Form_1.Browse_1.Value := recno()
-      Return 1
 
-   EndCase
+      RETURN 1
 
-RETURN 0
+   ENDCASE
 
-//------------------------------------------------------------------------------
-Function Form1Event2( i, nVirtKey, cKey )
-//------------------------------------------------------------------------------
+   RETURN 0
+
+FUNCTION Form1Event2( i, nVirtKey, cKey )
+
    LOCAL nLastRec := 1, nFindElem := 0
 
-   Do Case
-   Case nVirtKey == 36 // HOME
+   DO CASE
+   CASE nVirtKey == 36 // HOME
       _GridHome('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 35 // END
+      RETURN 1
+
+   CASE nVirtKey == 35 // END
       _GridEnd('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 33 // PGUP
+      RETURN 1
+
+   CASE nVirtKey == 33 // PGUP
       _GridPgUp('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 34 // PGDN
+      RETURN 1
+
+   CASE nVirtKey == 34 // PGDN
       _GridPgDn('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 38 // UP
+      RETURN 1
+
+   CASE nVirtKey == 38 // UP
       _GridPrior('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case nVirtKey == 40 // DOWN
+      RETURN 1
+
+   CASE nVirtKey == 40 // DOWN
       _GridNext('','',i)
       cPressedKeys := ""
       Form_1.StatusBar.Item(1) := cSearchText
-      Return 1
 
-   Case len( cKey ) > 0 .or. nVirtKey = 8
+      RETURN 1
 
-      if nVirtKey = 8 // BackSpace
+   CASE len( cKey ) > 0 .or. nVirtKey = 8
+
+      IF nVirtKey = 8 // BackSpace
          cPressedKeys := left( cPressedKeys, len(cPressedKeys)-1 )
-      elseif len( cKey ) > 0
+      ELSEIF len( cKey ) > 0
          cPressedKeys := cPressedKeys + cKey
-      endif
+      ENDIF
       Form_1.StatusBar.Item(1) := cSearchText + cPressedKeys
 
       nLastRec := Form_1.Grid_1.Value
       nFindElem := ascan( aRows, { | x | left( upper( x[nSortColGrid] ), len(cPressedKeys) ) == cPressedKeys } )
-      if nFindElem > 0
+      IF nFindElem > 0
          Form_1.Grid_1.Value := nFindElem
-      else
+      ELSE
          Form_1.Grid_1.Value := nLastRec
-      endif
-      Return 1 // Must be 1 to disable standard search procedure
+      ENDIF
 
-   EndCase
+      RETURN 1 // Must be 1 to disable standard search procedure
 
-RETURN 0
+   ENDCASE
 
-//------------------------------------------------------------------------------
-#include "MyEvents.prg"
-//------------------------------------------------------------------------------
+   RETURN 0
+
+   #include "MyEvents.prg"
+

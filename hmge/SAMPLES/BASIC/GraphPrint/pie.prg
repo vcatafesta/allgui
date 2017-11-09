@@ -1,33 +1,33 @@
 #include "minigui.ch"
 
-function main
+FUNCTION main
 
-   define window m main ;
-	clientarea 640, 480 ;
-	Title "Print Pie Graph" ;
-	backcolor {216,208,200}
+   DEFINE WINDOW m main ;
+         clientarea 640, 480 ;
+         Title "Print Pie Graph" ;
+         backcolor {216,208,200}
 
-   define button x
-      row 10
-      col 10
-      caption "Draw"
-      action showpie()
-   end button
+      DEFINE BUTTON x
+         row 10
+         col 10
+         caption "Draw"
+         action showpie()
+      END BUTTON
 
-   define button x1
-      row 40
-      col 10
-      caption "Print"
-      action ( showpie(), printpie() )
-   end button
+      DEFINE BUTTON x1
+         row 40
+         col 10
+         caption "Print"
+         action ( showpie(), printpie() )
+      END BUTTON
 
-   end window
+   END WINDOW
    m.center
    m.activate
-return nil
 
+   RETURN NIL
 
-function showpie
+FUNCTION showpie
 
    ERASE WINDOW m
 
@@ -43,17 +43,19 @@ function showpie
       3DVIEW;
       SHOWXVALUES;
       SHOWLEGENDS RIGHT DATAMASK "99,999"
-return nil
 
+   RETURN NIL
 
-function printpie
-   Local cPrinter
+FUNCTION printpie
+
+   LOCAL cPrinter
 
    cPrinter := GetPrinter()
 
-   If Empty (cPrinter)
-      return nil
-   EndIf
+   IF Empty (cPrinter)
+
+      RETURN NIL
+   ENDIF
 
    SetDefaultPrinter (cPrinter)
 
@@ -69,10 +71,10 @@ function printpie
       3DVIEW;
       SHOWXVALUES;
       SHOWLEGENDS RIGHT DATAMASK "99,999"
-return nil
 
+   RETURN NIL
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
 
 #pragma BEGINDUMP
 
@@ -82,4 +84,5 @@ HB_FUNC_TRANSLATE( SETDEFAULTPRINTER, WIN_PRINTERSETDEFAULT )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

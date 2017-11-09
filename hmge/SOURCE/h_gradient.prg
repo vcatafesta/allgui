@@ -1,81 +1,82 @@
 /* MINIGUI - Harbour Win32 GUI library source code
 
-   Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
-   http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
-   This    program  is  free  software;  you can redistribute it and/or modify
-   it under  the  terms  of the GNU General Public License as published by the
-   Free  Software   Foundation;  either  version 2 of the License, or (at your
-   option) any later version.
+This    program  is  free  software;  you can redistribute it and/or modify
+it under  the  terms  of the GNU General Public License as published by the
+Free  Software   Foundation;  either  version 2 of the License, or (at your
+option) any later version.
 
-   This   program   is   distributed  in  the hope that it will be useful, but
-   WITHOUT    ANY    WARRANTY;    without   even   the   implied  warranty  of
-   MERCHANTABILITY  or  FITNESS  FOR A PARTICULAR PURPOSE. See the GNU General
-   Public License for more details.
+This   program   is   distributed  in  the hope that it will be useful, but
+WITHOUT    ANY    WARRANTY;    without   even   the   implied  warranty  of
+MERCHANTABILITY  or  FITNESS  FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
 
-   You   should  have  received a copy of the GNU General Public License along
-   with   this   software;   see  the  file COPYING. If not, write to the Free
-   Software   Foundation,   Inc.,   59  Temple  Place,  Suite  330, Boston, MA
-   02111-1307 USA (or visit the web site http://www.gnu.org/).
+You   should  have  received a copy of the GNU General Public License along
+with   this   software;   see  the  file COPYING. If not, write to the Free
+Software   Foundation,   Inc.,   59  Temple  Place,  Suite  330, Boston, MA
+02111-1307 USA (or visit the web site http://www.gnu.org/).
 
-   As   a   special  exception, you have permission for additional uses of the
-   text  contained  in  this  release  of  Harbour Minigui.
+As   a   special  exception, you have permission for additional uses of the
+text  contained  in  this  release  of  Harbour Minigui.
 
-   The   exception   is that,   if   you  link  the  Harbour  Minigui  library
-   with  other    files   to  produce   an   executable,   this  does  not  by
-   itself   cause  the   resulting   executable    to   be  covered by the GNU
-   General  Public  License.  Your    use  of that   executable   is   in   no
-   way  restricted on account of linking the Harbour-Minigui library code into
-   it.
+The   exception   is that,   if   you  link  the  Harbour  Minigui  library
+with  other    files   to  produce   an   executable,   this  does  not  by
+itself   cause  the   resulting   executable    to   be  covered by the GNU
+General  Public  License.  Your    use  of that   executable   is   in   no
+way  restricted on account of linking the Harbour-Minigui library code into
+it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-    "Harbour GUI framework for Win32"
-    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-    Copyright 2001 Antonio Linares <alinares@fivetech.com>
-    www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-    "Harbour Project"
-    Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-    "WHAT32"
-    Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-    "HWGUI"
-    Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
-   Parts  of  this  code  is contributed and used here under permission of his
-   author: Copyright 2007-2017 (C) P.Chornyj <myorg63@mail.ru>
- */
+Parts  of  this  code  is contributed and used here under permission of his
+author: Copyright 2007-2017 (C) P.Chornyj <myorg63@mail.ru>
+*/
 
 #include "minigui.ch"
 
 #ifndef __XHARBOUR__
-  /* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */
-  #xcommand DEFAULT => OTHERWISE
+/* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */
+#xcommand DEFAULT => OTHERWISE
 #endif
 
 /*
- * HMG 1.3 Extended Build 33
- * Author: P.Chornyj <myorg63@mail.ru>
- */
+* HMG 1.3 Extended Build 33
+* Author: P.Chornyj <myorg63@mail.ru>
+*/
 
 INIT PROCEDURE InitGradientFunc()
 
    _InitGradientFunc()
 
-RETURN
+   RETURN
 
-EXIT PROCEDURE ExitGradientFunc()
+   EXIT PROCEDURE ExitGradientFunc()
 
    _ExitGradientFunc()
 
-RETURN
+   RETURN
 
-/*
- * HMG 1.2 Extended Builds 30-33
- * Author: P.Chornyj <myorg63@mail.ru>
- */
+   /*
+   * HMG 1.2 Extended Builds 30-33
+   * Author: P.Chornyj <myorg63@mail.ru>
+   */
+
 FUNCTION DrawGradient( window, row, col, rowr, colr, aColor1, aColor2, vertical, border )
 
    LOCAL i := GetFormIndex ( window )
@@ -109,16 +110,16 @@ FUNCTION DrawGradient( window, row, col, rowr, colr, aColor1, aColor2, vertical,
          FillGradient( hDC, row + 1, col + 1, rowr - 1, colr - 1, vertical, color1, color2 )
          EXIT
 
-      DEFAULT
+         DEFAULT
          FillGradient( hDC, row, col, rowr, colr, vertical, color1, color2 )
       END SWITCH
 
       ReleaseDC( FormHandle, hDC )
-    
+
       SWITCH border
       CASE 1
          EXIT
- 
+
       CASE 2  // box
          AAdd( _HMG_aFormGraphTasks [i], ;
             { || hDC := GetDC( FormHandle ), ;
@@ -135,7 +136,7 @@ FUNCTION DrawGradient( window, row, col, rowr, colr, aColor1, aColor2, vertical,
             ReleaseDC( FormHandle, hDC ) } )
          EXIT
 
-      DEFAULT  // border none
+         DEFAULT  // border none
          AAdd( _HMG_aFormGraphTasks [i], ;
             {|| FillGradient( hDC := GetDC( FormHandle ), row, col, rowr, colr, vertical, color1, color2 ), ;
             ReleaseDC( FormHandle, hDC ) } )
@@ -143,11 +144,11 @@ FUNCTION DrawGradient( window, row, col, rowr, colr, aColor1, aColor2, vertical,
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * C-level
- */
+   /*
+   * C-level
+   */
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -175,6 +176,7 @@ static TransparentBltPtr f_TransparentBlt = NULL;
 
 BOOL EnabledGradient( void )
 {
+
    return s_hDLL != NULL ? TRUE : FALSE;
 }
 
@@ -414,3 +416,4 @@ HBRUSH LinearGradientBrush( HDC pDC, long cx, long cy, COLORREF crFrom, COLORREF
 }
 
 #pragma ENDDUMP
+

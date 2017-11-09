@@ -1,135 +1,134 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-2009 Janusz Pora <JanuszPora@onet.eu>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-2009 Janusz Pora <JanuszPora@onet.eu>
 */
 
 #include "minigui.ch"
 
-*-----------------------------------------------------------------------------*
-Function Undo_Click()
-*-----------------------------------------------------------------------------*
-    lUndo :=.t.
-    UndoRTF(hEd)
-    lUndo :=.f.
-Return NIL
+FUNCTION Undo_Click()
 
-*-----------------------------------------------------------------------------*
-Function Redo_Click()
-*-----------------------------------------------------------------------------*
-    RedoRTF(hEd)
-Return NIL
+   lUndo :=.t.
+   UndoRTF(hEd)
+   lUndo :=.f.
 
-*--------------------------------------------------
-Function AddMenuUndo( nUndo ,typ )
-*--------------------------------------------------
-    Local x, n, cx, nu
-    Local action , cAction , Caption, cyUndo_Id, cxUndo_Id
+   RETURN NIL
 
-    X:=len(aUndo)
-    Caption := emumUndo[nUndo+1]
-    cAction := '{|| mUndo_Click( 1 ) }'
-    action :=&cAction
+FUNCTION Redo_Click()
 
-    if typ == 1
-        // Check if this is the first item
-        If len(aUndo) == 0
-            // Modify a first element the menu
-            cxUndo_Id := cUndo_Id
+   RedoRTF(hEd)
+
+   RETURN NIL
+
+FUNCTION AddMenuUndo( nUndo ,typ )
+
+   LOCAL x, n, cx, nu
+   LOCAL action , cAction , Caption, cyUndo_Id, cxUndo_Id
+
+   X:=len(aUndo)
+   Caption := emumUndo[nUndo+1]
+   cAction := '{|| mUndo_Click( 1 ) }'
+   action :=&cAction
+
+   IF typ == 1
+      // Check if this is the first item
+      IF len(aUndo) == 0
+         // Modify a first element the menu
+         cxUndo_Id := cUndo_Id
+         _ModifyMenuItem ( cxUndo_Id , MainForm ,caption , action  )
+         aadd( aUndo , { nUndo, cUndo_Id, action, 1 })
+      ELSE
+         IF aUndo[1,1] != nUndo
+            cx:=  alltrim(str( x ))   //strzero(x,2)
+            cyUndo_Id := cUndo_Id +'_'+ cx
+            cxUndo_Id := aUndo[1,2]
+            _InsertMenuItem ( cxUndo_Id , MainForm ,caption , action, cyUndo_Id  )
+            ASIZE(aUndo, Len(aUndo)+1)
+            AINS( aUndo, 1 )
+            cAction := '{|| mUndo_Click( 1 )}'
+            action :=&cAction
+            aUndo[ 1 ] := {nUndo,cyUndo_Id,action,1}
+         ELSE
+            nU := aUndo[ 1 , 4 ] + 1
+            aUndo[ 1 , 4 ] := nU
+            cxUndo_Id := aUndo[1,2]
+            _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , aUndo[1,3] )
+
+         ENDIF
+
+      ENDIF
+   ELSE
+      IF aUndo[1,1] != nUndo
+         cxUndo_Id := aUndo[ 1 , 2 ]
+         ADEL( aUndo, 1 )
+         ASIZE(aUndo, Len(aUndo)-1)
+         IF len(aUndo)>0
+            _RemoveMenuItem( cxUndo_Id , MainForm)
+         ELSE
             _ModifyMenuItem ( cxUndo_Id , MainForm ,caption , action  )
-            aadd( aUndo , { nUndo, cUndo_Id, action, 1 })
-        Else
-            if aUndo[1,1] != nUndo
-                cx:=  alltrim(str( x ))   //strzero(x,2)
-                cyUndo_Id := cUndo_Id +'_'+ cx
-                cxUndo_Id := aUndo[1,2]
-                _InsertMenuItem ( cxUndo_Id , MainForm ,caption , action, cyUndo_Id  )
-                ASIZE(aUndo, Len(aUndo)+1)
-                AINS( aUndo, 1 )
-                cAction := '{|| mUndo_Click( 1 )}'
-                action :=&cAction
-                aUndo[ 1 ] := {nUndo,cyUndo_Id,action,1}
-            else
-                nU := aUndo[ 1 , 4 ] + 1
-                aUndo[ 1 , 4 ] := nU
-                cxUndo_Id := aUndo[1,2]
-                _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , aUndo[1,3] )
+         ENDIF
+      ELSE
+         nU := aUndo[ 1 , 4 ] - 1
+         aUndo[ 1 , 4 ] := nU
+         cxUndo_Id := aUndo[1,2]
+         _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , aUndo[1,3] )
+      ENDIF
+   ENDIF
+   IF CanUndo(hEd)
+      IF len(aUndo) != X
+         FOR n := 1 to len(aUndo)
+            cAction := '{|| mUndo_Click( '+str(n) + ') }'
+            action :=&cAction
+            nU := aUndo[ n , 4 ]
+            Caption := emumUndo[aUndo[n,1]+1]
+            cxUndo_Id := aUndo[n,2]
+            _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , action )
+         NEXT
+      ENDIF
+   ELSE
+      aUndo := {}
+   ENDIF
 
-            endif
+   RETURN NIL
 
-        Endif
-    else
-            if aUndo[1,1] != nUndo
-                cxUndo_Id := aUndo[ 1 , 2 ]
-                ADEL( aUndo, 1 )
-                ASIZE(aUndo, Len(aUndo)-1)
-                if len(aUndo)>0
-                  _RemoveMenuItem( cxUndo_Id , MainForm)
-                else
-                  _ModifyMenuItem ( cxUndo_Id , MainForm ,caption , action  )
-                endif
-            else
-                nU := aUndo[ 1 , 4 ] - 1
-                aUndo[ 1 , 4 ] := nU
-                cxUndo_Id := aUndo[1,2]
-                _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , aUndo[1,3] )
-            endif
-    endif
-    if CanUndo(hEd)
-        if len(aUndo) != X
-            for n := 1 to len(aUndo)
-                cAction := '{|| mUndo_Click( '+str(n) + ') }'
-                action :=&cAction
-                nU := aUndo[ n , 4 ]
-                Caption := emumUndo[aUndo[n,1]+1]
-                cxUndo_Id := aUndo[n,2]
-                _ModifyMenuItem ( cxUndo_Id , MainForm , Caption+' ('+alltrim(str(nU))+')' , action )
-            next
-        endif
-    else
-        aUndo := {}
-    endif
-Return Nil
+FUNCTION mUndo_Click( nUndoIt )
 
-*--------------------------------------------------
-Function mUndo_Click( nUndoIt )
-*--------------------------------------------------
-    Local nPos , n , nUndo
-    Local aTyp := {}
-    nPos :=  nUndoIt
-    for n := 1 to nPos
-        Aadd(aTyp,aUndo[n,1])
-    next
-    syg(0)
-    for n := 1 to len(aTyp)
-        nUndo := aTyp[n]
-        do while nUndo == GetUndoName(hEd) .and. CanUndo(hEd)
-            Undo_Click()
-        enddo
-    next
-    if ! CanUndo(hEd)
-       aUndo := {}
-    endif
-Return Nil
+   LOCAL nPos , n , nUndo
+   LOCAL aTyp := {}
 
-*--------------------------------------------------
-Function ClearUndo_Click()
-*--------------------------------------------------
-    Local n , cxUndo_Id
-    for n :=1 to len(aUndo)
-       cxUndo_Id := aUndo[ n , 2 ]
+   nPos :=  nUndoIt
+   FOR n := 1 to nPos
+      Aadd(aTyp,aUndo[n,1])
+   NEXT
+   syg(0)
+   FOR n := 1 to len(aTyp)
+      nUndo := aTyp[n]
+      DO WHILE nUndo == GetUndoName(hEd) .and. CanUndo(hEd)
+         Undo_Click()
+      ENDDO
+   NEXT
+   IF ! CanUndo(hEd)
+      aUndo := {}
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION ClearUndo_Click()
+
+   LOCAL n , cxUndo_Id
+
+   FOR n :=1 to len(aUndo)
+      cxUndo_Id := aUndo[ n , 2 ]
       _RemoveMenuItem( cxUndo_Id , MainForm)
-    next
-    aUndo:={}
-    ClearUndoBuffer(hEd)
-    Btn_Stat(1)
-Return Nil
+   NEXT
+   aUndo:={}
+   CLEARUndoBuffer(hEd)
+   Btn_Stat(1)
+
+   RETURN NIL
 
 #pragma BEGINDUMP
-
 
 #define _WIN32_IE      0x0500
 #define HB_OS_WIN_USED
@@ -149,7 +148,6 @@ Return Nil
 #include <wingdi.h>
 #include <setupapi.h>
 
-
 #pragma argsused
 int CALLBACK enumFontFamilyProc(ENUMLOGFONTEX *lpelfe, NEWTEXTMETRICEX *lpntme, DWORD FontType, LPARAM lParam)
 {
@@ -158,6 +156,7 @@ int CALLBACK enumFontFamilyProc(ENUMLOGFONTEX *lpelfe, NEWTEXTMETRICEX *lpntme, 
       if (FontType == TRUETYPE_FONTTYPE ) //DEVICE_FONTTYPE | RASTER_FONTTYPE
          SendMessage( (HWND) lParam, CB_ADDSTRING, 0, (LPARAM) (LPSTR) lpelfe->elfFullName);
    }
+
     return 1;
 }
 
@@ -180,7 +179,6 @@ HB_FUNC( RE_GETFONTS)
    enumFonts((HWND) hb_parnl (1) );
 }
 
-
 HB_FUNC ( GETDEVCAPS ) // GetDevCaps ( hwnd )
 {
 
@@ -199,7 +197,6 @@ HB_FUNC ( GETDEVCAPS ) // GetDevCaps ( hwnd )
     hb_retni( (UINT) ix );
 
 }
-
 
 #pragma ENDDUMP
 

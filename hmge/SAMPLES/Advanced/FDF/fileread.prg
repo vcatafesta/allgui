@@ -1,11 +1,11 @@
 /*
- * $Id: fileread.prg,v 1.1 2005/10/13 12:01:10 lf_sfnet Exp $
- */
+* $Id: fileread.prg,v 1.1 2005/10/13 12:01:10 lf_sfnet Exp $
+*/
 
 /* Harbour Project source code
- * A class that reads a file one line at a time
-   http://harbour-Project.org/
-   Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
+* A class that reads a file one line at a time
+http://harbour-Project.org/
+Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
 */
 
 #include "fileio.ch"
@@ -19,6 +19,7 @@
 #define oF_DEFAULT_READ_SIZE  4096
 
 FUNCTION TFileRead()
+
    STATIC s_oClass
 
    IF s_oClass == NIL
@@ -30,7 +31,7 @@ FUNCTION TFileRead()
       s_oClass:AddClassData( "nLastOp" )   // The last operation done (for error messages)
       s_oClass:AddClassData( "cBuffer" )   // The readahead buffer
       s_oClass:AddClassData( "nReadSize" ) // How much to add to the readahead buffer on
-                                           // each read from the file
+      // each read from the file
 
       s_oClass:AddMethod( "New",        @f_new() )       // Create a new class instance
       s_oClass:AddMethod( "Open",       @f_open() )      // Open the file for reading
@@ -48,6 +49,7 @@ FUNCTION TFileRead()
    RETURN s_oClass:Instance()
 
 STATIC FUNCTION f_new( cFile, nSize )
+
    LOCAL oSelf := Qself()
 
    IF nSize == NIL .OR. nSize < 1
@@ -67,6 +69,7 @@ STATIC FUNCTION f_new( cFile, nSize )
    RETURN oSelf
 
 STATIC FUNCTION f_open( nMode )
+
    LOCAL oSelf := Qself()
 
    IF oSelf:nHan == -1
@@ -96,6 +99,7 @@ STATIC FUNCTION f_open( nMode )
    RETURN oSelf
 
 STATIC FUNCTION f_read()
+
    LOCAL oSelf := Qself()
    LOCAL cLine := ""
    LOCAL nPos
@@ -145,17 +149,17 @@ STATIC FUNCTION f_read()
          ENDIF
          // Deal with multiple possible end of line conditions.
          DO CASE
-            CASE SUBSTR( oSelf:cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
-               // It's a messed up DOS newline (such as that created by a program
-               // that uses "\r\n" as newline when writing to a text mode file,
-               // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
-               nPos += 3
-            CASE SUBSTR( oSelf:cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
-               // It's a standard DOS newline
-               nPos += 2
-            OTHERWISE
-               // It's probably a Mac or Unix newline
-               nPos++
+         CASE SUBSTR( oSelf:cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
+            // It's a messed up DOS newline (such as that created by a program
+            // that uses "\r\n" as newline when writing to a text mode file,
+            // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
+            nPos += 3
+         CASE SUBSTR( oSelf:cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
+            // It's a standard DOS newline
+            nPos += 2
+         OTHERWISE
+            // It's probably a Mac or Unix newline
+            nPos++
          ENDCASE
          oSelf:cBuffer := SUBSTR( oSelf:cBuffer, nPos )
       ENDIF
@@ -164,26 +168,28 @@ STATIC FUNCTION f_read()
    RETURN cLine
 
 STATIC FUNCTION f_EOL_pos( oFile )
+
    LOCAL nCRpos, nLFpos, nPos
 
    // Look for both CR and LF in the file read buffer.
    nCRpos := AT( CHR( 13 ), oFile:cBuffer )
    nLFpos := AT( CHR( 10 ), oFile:cBuffer )
    DO CASE
-      CASE nCRpos == 0
-         // If there's no CR, use the LF position.
-         nPos := nLFpos
-      CASE nLFpos == 0
-         // If there's no LF, use the CR position.
-         nPos := nCRpos
-      OTHERWISE
-         // If there's both a CR and an LF, use the position of the first one.
-         nPos := MIN( nCRpos, nLFpos )
+   CASE nCRpos == 0
+      // If there's no CR, use the LF position.
+      nPos := nLFpos
+   CASE nLFpos == 0
+      // If there's no LF, use the CR position.
+      nPos := nCRpos
+   OTHERWISE
+      // If there's both a CR and an LF, use the position of the first one.
+      nPos := MIN( nCRpos, nLFpos )
    ENDCASE
 
    RETURN nPos
 
 STATIC FUNCTION f_close()
+
    LOCAL oSelf := Qself()
 
    oSelf:nLastOp := oF_CLOSE_FILE
@@ -203,32 +209,48 @@ STATIC FUNCTION f_close()
    RETURN oSelf
 
 STATIC FUNCTION f_name()
+
    LOCAL oSelf := Qself()
+
    // Returns the filename associated with this class instance.
+
    RETURN oSelf:cFile
 
 STATIC FUNCTION f_is_open()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if the file is open.
+
    RETURN oSelf:nHan != -1
 
 STATIC FUNCTION f_more()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if there is more to be read from either the file or the
    // readahead buffer. Only when both are exhausted is there no more to read.
+
    RETURN !oSelf:lEOF .OR. !EMPTY( oSelf:cBuffer )
 
 STATIC FUNCTION f_error()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if an error was recorded.
+
    RETURN oSelf:nError != 0
 
 STATIC FUNCTION f_error_no()
+
    LOCAL oSelf := Qself()
+
    // Returns the last error code that was recorded.
+
    RETURN oSelf:nError
 
 STATIC FUNCTION f_error_msg( cText )
+
    STATIC s_cAction := {"on", "creating object for", "opening", "reading from", "closing"}
    LOCAL oSelf := Qself()
    LOCAL cMessage, nTemp

@@ -1,28 +1,26 @@
 /*
- * Data Input Sample n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo definir un formulario de ingreso
- * de datos utilizando la cláusula VALID, y cómo implementar
- * el reseteo de los campos del formulario ignorando las
- * validaciones definidas.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Data Input Sample n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo definir un formulario de ingreso
+* de datos utilizando la cláusula VALID, y cómo implementar
+* el reseteo de los campos del formulario ignorando las
+* validaciones definidas.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 80,80 ;
-      WIDTH 508 ;
-      HEIGHT 138 ;
-      MAIN ;
-      TITLE "ooHG - Resetear campos de ingreso con cláusula VALID"
+         AT 80,80 ;
+         WIDTH 508 ;
+         HEIGHT 138 ;
+         MAIN ;
+         TITLE "ooHG - Resetear campos de ingreso con cláusula VALID"
 
       @ 30, 190 BUTTON btn_1 ;
          CAPTION 'Iniciar Ingreso' ;
@@ -35,18 +33,18 @@ FUNCTION Main
 
    Form_1.Activate
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION DataInput()
 
    LOCAL oForm2, oTxt2, oTxt3
 
    DEFINE WINDOW Form_2 ;
-      OBJ oForm2 ;
-      AT 0,0 ;
-      WIDTH 300 ;
-      HEIGHT 200 ;
-      TITLE "Ingreso de Datos"
+         OBJ oForm2 ;
+         AT 0,0 ;
+         WIDTH 300 ;
+         HEIGHT 200 ;
+         TITLE "Ingreso de Datos"
 
       @ 13, 10 LABEL lbl_1 ;
          VALUE "Nombre" ;
@@ -90,9 +88,9 @@ FUNCTION DataInput()
          CAPTION 'Cancel' ;
          WIDTH  100 ;
          ACTION {|| oTxt1:value := "<nombre>", ;
-                    oTxt2:value := 3, ;
-                    oTxt3:value := "<notas>", ;
-                    oTxt1:setfocus()} ;
+         oTxt2:value := 3, ;
+         oTxt3:value := "<notas>", ;
+         oTxt1:setfocus()} ;
          CANCEL
 
       ON KEY ESCAPE ACTION oForm2:Release()
@@ -101,8 +99,9 @@ FUNCTION DataInput()
    oForm2:Center()
    oForm2:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,44 +1,41 @@
 /*
- * Tree Sample n° 7
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to drag an item of a Tree control
- * to an internal window.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * You can download the resource file and the images from:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Tree
- */
+* Tree Sample n° 7
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to drag an item of a Tree control
+* to an internal window.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* You can download the resource file and the images from:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/Tree
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    PUBLIC nRow := 0, ;
-          nImage := 1, ;
-          aImages := { "WINDOW", "WATCH", "LED_OFF", "LED_ON" }
+      nImage := 1, ;
+      aImages := { "WINDOW", "WATCH", "LED_OFF", "LED_ON" }
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE 'Tree Control - Drag to a window' ;
-      MAIN
+         OBJ oForm ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'Tree Control - Drag to a window' ;
+         MAIN
 
       DEFINE TREE Tree_1 ;
-         OBJ oTree ;
-         AT 10,10 ;
-         WIDTH 200 ;
-         HEIGHT 400 ;
-         ENABLEDRAG ;
-         TARGET { {|| oAuxWin } } ;
-         NODEIMAGES {"WINDOW", "WATCH"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"}
+            OBJ oTree ;
+            AT 10,10 ;
+            WIDTH 200 ;
+            HEIGHT 400 ;
+            ENABLEDRAG ;
+            TARGET { {|| oAuxWin } } ;
+            NODEIMAGES {"WINDOW", "WATCH"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"}
 
          NODE 'Item 1'
             TREEITEM 'Item 1.1'
@@ -75,12 +72,12 @@ FUNCTION Main()
       END TREE
 
       DEFINE INTERNAL AuxWin ;
-         OBJ oAuxWin ;
-         AT oTree:Row, oTree:Col + oTree:Width + 20 ;
-         WIDTH oForm:ClientWidth - oTree:Col * 2 - oTree:Width - 30 ;
-         HEIGHT oTree:Height ;
-         BACKCOLOR WHITE ;
-         BORDER
+            OBJ oAuxWin ;
+            AT oTree:Row, oTree:Col + oTree:Width + 20 ;
+            WIDTH oForm:ClientWidth - oTree:Col * 2 - oTree:Width - 30 ;
+            HEIGHT oTree:Height ;
+            BACKCOLOR WHITE ;
+            BORDER
       END INTERNAL
 
       WITH OBJECT oAuxWin
@@ -97,7 +94,7 @@ FUNCTION Main()
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION AuxWin_OnDrop( oOrigin, oTarget )
 
@@ -106,11 +103,11 @@ FUNCTION AuxWin_OnDrop( oOrigin, oTarget )
    WITH OBJECT oOrigin
       nItem := :HandleToItem( :ItemOnDrag )
       aItemImages := :ItemImages( :HandleToItem( :ItemOnDrag ) )
-      If nItem == :Value
+      IF nItem == :Value
          nImage := aItemImages[ 2 ] + 1     // selected image
-      Else
+      ELSE
          nImage := aItemImages[ 1 ] + 1     // unselected image
-      EndIf
+      ENDIF
 
       DEFINE IMAGE ( "Image_" + LTRIM( STR( nImage ) ) )
          PARENT  (oTarget)
@@ -126,8 +123,9 @@ FUNCTION AuxWin_OnDrop( oOrigin, oTarget )
       nImage ++
    END WITH
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

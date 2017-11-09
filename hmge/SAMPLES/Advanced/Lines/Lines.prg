@@ -1,8 +1,5 @@
-*
 * MINIGUI - HARBOUR - Win32
-* 
 * Copyright 2003-2008 Grigory Filatov <gfilatov@inbox.ru>
-*
 ANNOUNCE RDDSYS
 
 #define __SCRSAVERDATA__
@@ -16,271 +13,262 @@ ANNOUNCE RDDSYS
 #define PIXELMOVE  2
 #define CLR_DEFAULT  RGB( 255, 255, 0 )
 
-Static hPen 
-Static aX, aY 
-Static aPX, aPY
-Static aMX, aMY
-Static aIX, aIY
+STATIC hPen
+STATIC aX, aY
+STATIC aPX, aPY
+STATIC aMX, aMY
+STATIC aIX, aIY
 
-Static lInit := .T.
+STATIC lInit := .T.
 
-Memvar cIniFile
-Memvar nWidth, nHeight
-Memvar nType, nPolig, nColor
-*--------------------------------------------------------*
-Procedure Main( cParameters )
-*--------------------------------------------------------*
+MEMVAR cIniFile
+MEMVAR nWidth, nHeight
+MEMVAR nType, nPolig, nColor
 
-	PUBLIC cIniFile := GetWindowsFolder()+"\control.ini"
+PROCEDURE Main( cParameters )
 
-	PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
-	PRIVATE nType := 1, nPolig := 5, nColor := CLR_DEFAULT
+   PUBLIC cIniFile := GetWindowsFolder()+"\control.ini"
 
-	BEGIN INI FILE cIniFile
+   PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
+   PRIVATE nType := 1, nPolig := 5, nColor := CLR_DEFAULT
 
-		GET nType SECTION "Screen Saver.Lines" ENTRY "Type" DEFAULT nType
-		GET nPolig SECTION "Screen Saver.Lines" ENTRY "Number" DEFAULT nPolig
-		GET nColor SECTION "Screen Saver.Lines" ENTRY "Color" DEFAULT nColor
+   BEGIN INI FILE cIniFile
 
-	END INI
+      GET nType SECTION "Screen Saver.Lines" ENTRY "Type" DEFAULT nType
+      GET nPolig SECTION "Screen Saver.Lines" ENTRY "Number" DEFAULT nPolig
+      GET nColor SECTION "Screen Saver.Lines" ENTRY "Color" DEFAULT nColor
 
-	IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
-		LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
-		LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
+   END INI
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			NOSHOW
-	ELSE
+   IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
+         LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
+         LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			ON RELEASE (DeleteObject( hPen ), .T.) ;
-			ON PAINT DoLines(nType) ;
-			INTERVAL .02 ;
-			BACKCOLOR BLACK
-	ENDIF
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         NOSHOW
+   ELSE
 
-	INSTALL SCREENSAVER FILENAME Lines.scr
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         ON RELEASE (DeleteObject( hPen ), .T.) ;
+         ON PAINT DoLines(nType) ;
+         INTERVAL .02 ;
+         BACKCOLOR BLACK
+   ENDIF
 
-	CONFIGURE SCREENSAVER ConfigureSaver()
+   INSTALL SCREENSAVER FILENAME Lines.scr
 
-	ACTIVATE SCREENSAVER ;
-		WINDOW Form_SSaver ;
-		PARAMETERS cParameters
+   CONFIGURE SCREENSAVER ConfigureSaver()
 
-Return
+   ACTIVATE SCREENSAVER ;
+      WINDOW Form_SSaver ;
+      PARAMETERS cParameters
 
-*--------------------------------------------------------*
-Procedure DoLines( nType )
-*--------------------------------------------------------*
-  local hDC, hOldPen
-  local n, nI
+   RETURN
 
-  if lInit
-     hPen := CreatePen( PS_SOLID, 1, nColor )
-     aX := Array( nPolig ); aY := Array( nPolig ) 
-     AFill( aX, 0 ) ; AFill( aY, 0 )
-     aPX := AClone( aX ); aPY := AClone( aY )
-     aMX := AClone( aX ); aMY := AClone( aY )
-     aIX := Array( nPolig ); aIY := Array( nPolig )
-     lInit := .F.
-  endif
+PROCEDURE DoLines( nType )
 
-  for n := 1 to nPolig
-      if Abs( aX[ n ] - aPX[ n ] ) < PIXELMOVE .or. Abs( aY[ n ] - aPY[ n ] ) < PIXELMOVE
+   LOCAL hDC, hOldPen
+   LOCAL n, nI
+
+   IF lInit
+      hPen := CreatePen( PS_SOLID, 1, nColor )
+      aX := Array( nPolig ); aY := Array( nPolig )
+      AFill( aX, 0 ) ; AFill( aY, 0 )
+      aPX := AClone( aX ); aPY := AClone( aY )
+      aMX := AClone( aX ); aMY := AClone( aY )
+      aIX := Array( nPolig ); aIY := Array( nPolig )
+      lInit := .F.
+   ENDIF
+
+   FOR n := 1 to nPolig
+      IF Abs( aX[ n ] - aPX[ n ] ) < PIXELMOVE .or. Abs( aY[ n ] - aPY[ n ] ) < PIXELMOVE
          aPX[ n ] := Random( nWidth )
          aPY[ n ] := Random( nHeight )
          nI := Min( Abs( aX[ n ] - aPX[ n ] ), Abs( aY[ n ] - aPY[ n ] ) ) / PIXELMOVE
          aIX[ n ] := ( aPX[ n ] - aX[ n ] ) / nI
          aIY[ n ] := ( aPY[ n ] - aY[ n ] ) / nI
-      endif
+      ENDIF
       aX[ n ] += aIX[ n ]
       aX[ n ] := MinMax( aX[ n ], nWidth )
       aY[ n ] += aIY[ n ]
       aY[ n ] := MinMax( aY[ n ], nHeight )
-  next
+   NEXT
 
-  hDC := GetDC( _HMG_MainHandle )
-  hOldPen := SelectObject( hDC, hPen )
+   hDC := GetDC( _HMG_MainHandle )
+   hOldPen := SelectObject( hDC, hPen )
 
-  IF nType = 1
+   IF nType = 1
 
-      MoveTo( hDC, aMX[ nPolig ], aMY[ nPolig ] )  
-      for n := 1 to nPolig
-          LineTo( hDC, aMX[ n ], aMY[ n ] )
-          aMX[ n ] := aX[ n ]
-          aMY[ n ] := aY[ n ]
-      next
+      MoveTo( hDC, aMX[ nPolig ], aMY[ nPolig ] )
+      FOR n := 1 to nPolig
+         LineTo( hDC, aMX[ n ], aMY[ n ] )
+         aMX[ n ] := aX[ n ]
+         aMY[ n ] := aY[ n ]
+      NEXT
 
       RedrawWindow( _HMG_MainHandle )
 
-      MoveTo( hDC, aX[ nPolig ], aY[ nPolig ] )  
-      for n := 1 to nPolig
-          LineTo( hDC, aX[ n ], aY[ n ] )
-      next
+      MoveTo( hDC, aX[ nPolig ], aY[ nPolig ] )
+      FOR n := 1 to nPolig
+         LineTo( hDC, aX[ n ], aY[ n ] )
+      NEXT
 
-  ELSE
+   ELSE
 
       MoveTo( hDC, aMX[ nPolig - 1 ], aMY[ nPolig - 1] )
-      for n := 1 to nPolig - 1
-          LineTo( hDC, aMX[ n ], aMY[ n ] )
-      next
-      for n := 1 to nPolig 
-          MoveTo( hDC, aMX[ nPolig ], aMY[ nPolig ] )
-          LineTo( hDC, aMX[ n ], aMY[ n ] )
-          aMX[ n ] := aX[ n ]
-          aMY[ n ] := aY[ n ]
-      next
+      FOR n := 1 to nPolig - 1
+         LineTo( hDC, aMX[ n ], aMY[ n ] )
+      NEXT
+      FOR n := 1 to nPolig
+         MoveTo( hDC, aMX[ nPolig ], aMY[ nPolig ] )
+         LineTo( hDC, aMX[ n ], aMY[ n ] )
+         aMX[ n ] := aX[ n ]
+         aMY[ n ] := aY[ n ]
+      NEXT
 
       RedrawWindow( _HMG_MainHandle )
 
-      MoveTo( hDC, aX[ nPolig - 1 ], aY[ nPolig - 1 ] )  
-      for n := 1 to nPolig - 1
-          LineTo( hDC, aX[ n ], aY[ n ] )
-      next
-      for n := 1 to nPolig 
-          MoveTo( hDC, aX[ nPolig ], aY[ nPolig ] )  
-          LineTo( hDC, aX[ n ], aY[ n ] )
-      next
+      MoveTo( hDC, aX[ nPolig - 1 ], aY[ nPolig - 1 ] )
+      FOR n := 1 to nPolig - 1
+         LineTo( hDC, aX[ n ], aY[ n ] )
+      NEXT
+      FOR n := 1 to nPolig
+         MoveTo( hDC, aX[ nPolig ], aY[ nPolig ] )
+         LineTo( hDC, aX[ n ], aY[ n ] )
+      NEXT
 
-  ENDIF
+   ENDIF
 
-  SelectObject( hDC, hOldPen )
-  ReleaseDC( _HMG_MainHandle, hDC )
+   SelectObject( hDC, hOldPen )
+   ReleaseDC( _HMG_MainHandle, hDC )
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Procedure ConfigureSaver()
-*--------------------------------------------------------*
-	LOCAL aColor, aCustColor := { RGB(255,255,0), RGB(0,255,0), RGB(0,255,255), ;
-		RGB(0,128,255), RGB(255,128,255), RGB(240,240,240), RGB(192,192,192), RGB(255,128,0), ;
-		RGB(225,225,0), RGB(0,225,0), RGB(0,225,225), ;
-		RGB(0,128,225), RGB(225,128,225), RGB(140,140,140), RGB(216,216,216), RGB(225,128,0) }
+PROCEDURE ConfigureSaver()
 
-	DEFINE WINDOW Form_Config ; 
-        AT 0,0 ; 
-        WIDTH 222 ; 
-        HEIGHT 152 ; 
-        TITLE 'Lines Settings' ; 
-        ICON 'ICON_1' ;
-        CHILD ;
-        NOMINIMIZE NOMAXIMIZE NOSIZE ;
-        ON INIT ShowCursor(.T.) ;
-        ON PAINT DoMethod( "Form_Config", "Radio_1", "SetFocus" ) ;
-        FONT 'MS Sans Serif' ; 
-        SIZE 9
+   LOCAL aColor, aCustColor := { RGB(255,255,0), RGB(0,255,0), RGB(0,255,255), ;
+      RGB(0,128,255), RGB(255,128,255), RGB(240,240,240), RGB(192,192,192), RGB(255,128,0), ;
+      RGB(225,225,0), RGB(0,225,0), RGB(0,225,225), ;
+      RGB(0,128,225), RGB(225,128,225), RGB(140,140,140), RGB(216,216,216), RGB(225,128,0) }
 
-        @ 8, 8 FRAME Frame_1 ; 
-            CAPTION 'Type' ; 
-            WIDTH 66 ; 
-            HEIGHT 72
+   DEFINE WINDOW Form_Config ;
+         AT 0,0 ;
+         WIDTH 222 ;
+         HEIGHT 152 ;
+         TITLE 'Lines Settings' ;
+         ICON 'ICON_1' ;
+         CHILD ;
+         NOMINIMIZE NOMAXIMIZE NOSIZE ;
+         ON INIT ShowCursor(.T.) ;
+         ON PAINT DoMethod( "Form_Config", "Radio_1", "SetFocus" ) ;
+         FONT 'MS Sans Serif' ;
+         SIZE 9
 
-        @ 24,20 RADIOGROUP Radio_1 ; 
-            OPTIONS { "&One", "&Two" } ; 
-            WIDTH 40 ; 
-            VALUE nType ;
-            ON CHANGE nType := Form_Config.Radio_1.Value
+      @ 8, 8 FRAME Frame_1 ;
+         CAPTION 'Type' ;
+         WIDTH 66 ;
+         HEIGHT 72
 
-        @ 18, 86 LABEL Label_1 ; 
-            VALUE 'Number of lines:' ; 
-            WIDTH 80 ; 
-            HEIGHT 23 ; 
+      @ 24,20 RADIOGROUP Radio_1 ;
+         OPTIONS { "&One", "&Two" } ;
+         WIDTH 40 ;
+         VALUE nType ;
+         ON CHANGE nType := Form_Config.Radio_1.Value
 
-        @ 14, 168 SPINNER Spinner_1 ; 
-            RANGE 3, 30 ; 
-            HEIGHT 23 ; 
-            WIDTH 40 ; 
-            VALUE nPolig ;
-            ON CHANGE nPolig := Form_Config.Spinner_1.Value ;
-            FONT 'MS Sans Serif' ; 
-            SIZE 10
+      @ 18, 86 LABEL Label_1 ;
+         VALUE 'Number of lines:' ;
+         WIDTH 80 ;
+         HEIGHT 23 ;
 
-        @ 50,85 BUTTON Button_Clr ; 
-            CAPTION 'Select the &Color of lines' ; 
-            ACTION (aColor := GetColor(nColor, aCustColor), ; 
-		if(aColor[1]==NIL, , nColor := RGB(aColor[1], aColor[2], aColor[3]))) ;
-            WIDTH 122 ; 
-            HEIGHT 28 ; 
-            FLAT
+      @ 14, 168 SPINNER Spinner_1 ;
+         RANGE 3, 30 ;
+         HEIGHT 23 ;
+         WIDTH 40 ;
+         VALUE nPolig ;
+         ON CHANGE nPolig := Form_Config.Spinner_1.Value ;
+         FONT 'MS Sans Serif' ;
+         SIZE 10
 
-        DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 66, 24 FLAT BOTTOM RIGHTTEXT
+      @ 50,85 BUTTON Button_Clr ;
+         CAPTION 'Select the &Color of lines' ;
+         ACTION (aColor := GetColor(nColor, aCustColor), ;
+         if(aColor[1]==NIL, , nColor := RGB(aColor[1], aColor[2], aColor[3]))) ;
+         WIDTH 122 ;
+         HEIGHT 28 ;
+         FLAT
 
-		BUTTON Button_1  ;
-			CAPTION 'A&bout' ;
-			PICTURE 'About' ;
-			ACTION MsgAbout() SEPARATOR
+      DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 66, 24 FLAT BOTTOM RIGHTTEXT
 
-		BUTTON Button_2 ;
-			CAPTION '&Save' ;
-			PICTURE 'Save' ;
-			ACTION ( SaveConfig(), Form_Config.Release, Form_SSaver.Release )
+         BUTTON Button_1  ;
+            CAPTION 'A&bout' ;
+            PICTURE 'About' ;
+            ACTION MsgAbout() SEPARATOR
 
-		BUTTON Button_3 ;
-			CAPTION 'C&ancel' ;
-			PICTURE 'Cancel' ;
-			ACTION ( Form_Config.Release, Form_SSaver.Release )
+         BUTTON Button_2 ;
+            CAPTION '&Save' ;
+            PICTURE 'Save' ;
+            ACTION ( SaveConfig(), Form_Config.Release, Form_SSaver.Release )
 
-        END TOOLBAR
+         BUTTON Button_3 ;
+            CAPTION 'C&ancel' ;
+            PICTURE 'Cancel' ;
+            ACTION ( Form_Config.Release, Form_SSaver.Release )
 
-	END WINDOW
+      END TOOLBAR
 
-	CENTER WINDOW Form_Config
+   END WINDOW
 
-	ACTIVATE WINDOW Form_Config, Form_SSaver
+   CENTER WINDOW Form_Config
 
-Return
+   ACTIVATE WINDOW Form_Config, Form_SSaver
 
-*--------------------------------------------------------*
-Static Procedure SaveConfig()
-*--------------------------------------------------------*
+   RETURN
 
-  BEGIN INI FILE cIniFile
+STATIC PROCEDURE SaveConfig()
 
-	SET SECTION "Screen Saver.Lines" ENTRY "Type" TO nType
-	SET SECTION "Screen Saver.Lines" ENTRY "Number" TO nPolig
-	SET SECTION "Screen Saver.Lines" ENTRY "Color" TO nColor
+   BEGIN INI FILE cIniFile
 
-  END INI
+      SET SECTION "Screen Saver.Lines" ENTRY "Type" TO nType
+      SET SECTION "Screen Saver.Lines" ENTRY "Number" TO nPolig
+      SET SECTION "Screen Saver.Lines" ENTRY "Color" TO nColor
 
-Return
+   END INI
 
-*--------------------------------------------------------*
-Static Function MinMax( nvalue, nRegion )
-*--------------------------------------------------------*
-Return Min( nRegion, Max( nvalue, 0 ) )
+   RETURN
 
-*--------------------------------------------------------*
-Static Function MsgAbout()
-*--------------------------------------------------------*
-return MsgInfo( PROGRAM + VERSION + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	"eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
-	"This Screen Saver is Freeware!" + CRLF + ;
-	padc("Copying is allowed!", 36), "About", , .F. )
- 
-*-----------------------------------------------------------------------------*
-Static Function GetColor(nInitColor, aCustomColors)
-*-----------------------------------------------------------------------------*
-Local aRetVal [3] , nColor 
+STATIC FUNCTION MinMax( nvalue, nRegion )
 
-	nColor := ChooseColor( NIL, nInitColor, aCustomColors )
+   RETURN Min( nRegion, Max( nvalue, 0 ) )
 
-	If nColor == -1
-		aRetVal [1] := Nil
-		aRetVal [2] := Nil
-		aRetVal [3] := Nil
-	Else
-		aRetVal [1] := GetRed (nColor)
-		aRetVal [2] := GetGreen (nColor)
-		aRetVal [3] := GetBlue (nColor)
-	EndIf
+STATIC FUNCTION MsgAbout()
 
-Return aRetVal
+   RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      "eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
+      "This Screen Saver is Freeware!" + CRLF + ;
+      padc("Copying is allowed!", 36), "About", , .F. )
 
+STATIC FUNCTION GetColor(nInitColor, aCustomColors)
+
+   LOCAL aRetVal [3] , nColor
+
+   nColor := ChooseColor( NIL, nInitColor, aCustomColors )
+
+   IF nColor == -1
+      aRetVal [1] := Nil
+      aRetVal [2] := Nil
+      aRetVal [3] := Nil
+   ELSE
+      aRetVal [1] := GetRed (nColor)
+      aRetVal [2] := GetGreen (nColor)
+      aRetVal [3] := GetBlue (nColor)
+   ENDIF
+
+   RETURN aRetVal
 
 #pragma BEGINDUMP
 
@@ -310,10 +298,11 @@ HB_FUNC ( CREATEPEN )
 {
 
    hb_retnl( (LONG) CreatePen(
-               hb_parni( 1 ),	// pen style 
-               hb_parni( 2 ),	// pen width  
-               (COLORREF) hb_parnl( 3 ) 	// pen color 
+               hb_parni( 1 ),   // pen style
+               hb_parni( 2 ),   // pen width
+               (COLORREF) hb_parnl( 3 )    // pen color
              ) );
 }
 
 #pragma ENDDUMP
+

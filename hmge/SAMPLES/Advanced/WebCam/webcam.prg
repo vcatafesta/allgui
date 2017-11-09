@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2011 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2011 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include <minigui.ch>
@@ -9,205 +8,182 @@
 #define WS_CHILD     0x40000000
 #define WS_VISIBLE   0x10000000
 
-Static CamSource     // used to identify the video source
-Static hWnd          // used as a window handle
+STATIC CamSource     // used to identify the video source
+STATIC hWnd          // used as a window handle
 
-*------------------------------------------------------------------------------*
-Procedure Main()
-*------------------------------------------------------------------------------*
+PROCEDURE Main()
 
-  LOAD WINDOW webcam
+   LOAD WINDOW webcam
 
-  ON KEY ESCAPE OF webcam ACTION ThisWindow.Release
+   ON KEY ESCAPE OF webcam ACTION ThisWindow.Release
 
-  CENTER WINDOW webcam
+   CENTER WINDOW webcam
 
-  ACTIVATE WINDOW webcam
+   ACTIVATE WINDOW webcam
 
-Return
+   RETURN
 
-*------------------------------------------------------------------------------*
-Procedure OnFormLoad()
-*------------------------------------------------------------------------------*
+PROCEDURE OnFormLoad()
 
-cameraSource()
+   cameraSource()
 
-webcam.Button_5.Enabled := .F.
-webcam.Button_4.Enabled := .F.
-webcam.Button_1.Enabled := .F.
-webcam.Button_2.Enabled := .F.
-webcam.Button_3.Enabled := .F.
+   webcam.Button_5.Enabled := .F.
+   webcam.Button_4.Enabled := .F.
+   webcam.Button_1.Enabled := .F.
+   webcam.Button_2.Enabled := .F.
+   webcam.Button_3.Enabled := .F.
 
-Return
+   RETURN
 
-*------------------------------------------------------------------------------*
-Procedure OnFormUnLoad()
-*------------------------------------------------------------------------------*
+PROCEDURE OnFormUnLoad()
 
-If !Empty(hWnd)
+   IF !Empty(hWnd)
+      capDriverDisconnect(hWnd)
+      DestroyWindow(hWnd)
+   ENDIF
+   IF File("C:\CAPTURE.AVI")
+      Ferase("C:\CAPTURE.AVI")
+   ENDIF
+
+   RETURN
+
+PROCEDURE StartClick()
+
+   IF !ISNIL(CamSource)
+      webcam.Label_0.Visible := .F.
+
+      previewCamera()
+
+      webcam.Button_1.Enabled := .T.
+      webcam.Button_4.Enabled := .F.
+      webcam.Button_2.Enabled := .T.
+      webcam.Button_5.Enabled := .T.
+   ENDIF
+
+   RETURN
+
+PROCEDURE cameraSource()
+
+   LOCAL i
+   LOCAL cDriverName := Space(128)
+   LOCAL cDriverVersion := Space(128)
+
+   FOR i := 0 To 9
+      IF capGetDriverDescription(i, @cDriverName, 128, @cDriverVersion, 128)
+         webcam.Combo_1.AddItem(cDriverName)
+      ENDIF
+   NEXT
+
+   IF webcam.Combo_1.ItemCount <> 0
+      webcam.Combo_1.Value := 1
+      CamSource := webcam.Combo_1.Value - 1
+   ELSE
+      webcam.Label_0.Visible := .F.
+      webcam.Combo_1.AddItem("No capture devices found")
+      webcam.Combo_1.Value := 1
+   ENDIF
+
+   RETURN
+
+PROCEDURE previewCamera()
+
+   LOCAL i := 0
+   LOCAL nMaxAttempt := 10
+   LOCAL lConnect
+
+   webcam.Image_1.Visible := .F.
+
+   hWnd := capCreateCaptureWindow("WebCam", hb_bitOr(WS_CHILD, WS_VISIBLE), ;
+      webcam.Image_1.Col, webcam.Image_1.Row, webcam.Image_1.Width, webcam.Image_1.Height, ;
+      GetFormHandle("webcam"), 1)
+
+   REPEAT
+   lConnect := capDriverConnect(hWnd, CamSource)
+   UNTIL !lConnect .Or. ++i > nMaxAttempt
+
+   IF lConnect
+      // set the preview scale
+      capPreviewScale(hWnd, .T.)
+      // set the preview rate (ms)
+      capPreviewRate(hWnd, 30)
+      // start previewing the image
+      capPreview(hWnd, .T.)
+   ELSE
+      // error connecting to video source
+      DestroyWindow(hWnd)
+      hWnd := 0
+   ENDIF
+
+   RETURN
+
+PROCEDURE stopPreviewCamera()
+
    capDriverDisconnect(hWnd)
    DestroyWindow(hWnd)
-EndIf
-If File("C:\CAPTURE.AVI")
-   Ferase("C:\CAPTURE.AVI")
-EndIf
 
-Return
+   webcam.Image_1.Visible := .T.
 
-*------------------------------------------------------------------------------*
-Procedure StartClick()
-*------------------------------------------------------------------------------*
+   RETURN
 
-If !ISNIL(CamSource)
-   webcam.Label_0.Visible := .F.
+PROCEDURE Button1_Click()  // stop preview
+
+   stopPreviewCamera()
+
+   webcam.Button_5.Enabled := .F.
+   webcam.Button_4.Enabled := .T.
+   webcam.Button_1.Enabled := .F.
+
+   RETURN
+
+PROCEDURE Button2_Click()  // recording
+
+   webcam.Button_3.Enabled := .T.
+   webcam.Button_2.Enabled := .F.
+
+   capCaptureSequence(hWnd)
+
+   RETURN
+
+PROCEDURE Button3_Click()  // stop recording and ask to save video
+
+   LOCAL cSaveName
+
+   IF MsgYesNo("Do you want to save your recording video?", "Recording Video")
+      cSaveName := Putfile( {{"Avi files (*.avi)","*.avi"}}, "Save Video As", "C:\", .f., "RecordedVideo" )
+      IF !Empty(cSaveName)
+         capFileSaveAs(hWnd, cSaveName)
+      ENDIF
+   ENDIF
+
+   webcam.Button_2.Enabled := .T.
+   webcam.Button_3.Enabled := .F.
+
+   RETURN
+
+PROCEDURE Button4_Click()  // preview
+
+   CamSource := webcam.Combo_1.Value - 1
 
    previewCamera()
 
-   webcam.Button_1.Enabled := .T.
-   webcam.Button_4.Enabled := .F.
-   webcam.Button_2.Enabled := .T.
    webcam.Button_5.Enabled := .T.
-EndIf
+   webcam.Button_4.Enabled := .F.
+   webcam.Button_1.Enabled := .T.
 
-Return
+   RETURN
 
-*------------------------------------------------------------------------------*
-Procedure cameraSource()
-*------------------------------------------------------------------------------*
-Local i
-Local cDriverName := Space(128)
-Local cDriverVersion := Space(128)
+PROCEDURE Button5_Click()  // save image
 
-For i := 0 To 9
-   If capGetDriverDescription(i, @cDriverName, 128, @cDriverVersion, 128)
-      webcam.Combo_1.AddItem(cDriverName)
-   EndIf
-Next
+   LOCAL cSaveName
 
-If webcam.Combo_1.ItemCount <> 0
-   webcam.Combo_1.Value := 1
-   CamSource := webcam.Combo_1.Value - 1
-Else
-   webcam.Label_0.Visible := .F.
-   webcam.Combo_1.AddItem("No capture devices found")
-   webcam.Combo_1.Value := 1
-EndIf
+   IF MsgYesNo("Do you want to save current picture?", "Save Image")
+      cSaveName := Putfile( {{"Bmp files (*.bmp)","*.bmp"}}, "Save Image As", "C:\", .f., "Image" )
+      IF !Empty(cSaveName)
+         capFileSaveDIB(hWnd, cSaveName)
+      ENDIF
+   ENDIF
 
-Return
-
-*------------------------------------------------------------------------------*
-Procedure previewCamera()
-*------------------------------------------------------------------------------*
-Local i := 0
-Local nMaxAttempt := 10
-Local lConnect
-
-webcam.Image_1.Visible := .F.
-
-hWnd := capCreateCaptureWindow("WebCam", hb_bitOr(WS_CHILD, WS_VISIBLE), ;
-   webcam.Image_1.Col, webcam.Image_1.Row, webcam.Image_1.Width, webcam.Image_1.Height, ;
-   GetFormHandle("webcam"), 1)
-
-REPEAT
-   lConnect := capDriverConnect(hWnd, CamSource)
-UNTIL !lConnect .Or. ++i > nMaxAttempt
-
-If lConnect
-   // set the preview scale
-   capPreviewScale(hWnd, .T.)
-   // set the preview rate (ms)
-   capPreviewRate(hWnd, 30)
-   // start previewing the image
-   capPreview(hWnd, .T.)
-Else
-   // error connecting to video source
-   DestroyWindow(hWnd)
-   hWnd := 0
-EndIf
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure stopPreviewCamera()
-*------------------------------------------------------------------------------*
-
-capDriverDisconnect(hWnd)
-DestroyWindow(hWnd)
-
-webcam.Image_1.Visible := .T.
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure Button1_Click()  // stop preview
-*------------------------------------------------------------------------------*
-
-stopPreviewCamera()
-
-webcam.Button_5.Enabled := .F.
-webcam.Button_4.Enabled := .T.
-webcam.Button_1.Enabled := .F.
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure Button2_Click()  // recording
-*------------------------------------------------------------------------------*
- 
-webcam.Button_3.Enabled := .T.
-webcam.Button_2.Enabled := .F.
-
-capCaptureSequence(hWnd)
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure Button3_Click()  // stop recording and ask to save video
-*------------------------------------------------------------------------------*
-Local cSaveName
-
-If MsgYesNo("Do you want to save your recording video?", "Recording Video")
-   cSaveName := Putfile( {{"Avi files (*.avi)","*.avi"}}, "Save Video As", "C:\", .f., "RecordedVideo" )
-   If !Empty(cSaveName)
-      capFileSaveAs(hWnd, cSaveName)
-   EndIf
-EndIf
-
-webcam.Button_2.Enabled := .T.
-webcam.Button_3.Enabled := .F.
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure Button4_Click()  // preview
-*------------------------------------------------------------------------------*
- 
-CamSource := webcam.Combo_1.Value - 1
-
-previewCamera()
-
-webcam.Button_5.Enabled := .T.
-webcam.Button_4.Enabled := .F.
-webcam.Button_1.Enabled := .T.
-
-Return
-
-
-*------------------------------------------------------------------------------*
-Procedure Button5_Click()  // save image
-*------------------------------------------------------------------------------*
- 
-Local cSaveName
-
-If MsgYesNo("Do you want to save current picture?", "Save Image")
-   cSaveName := Putfile( {{"Bmp files (*.bmp)","*.bmp"}}, "Save Image As", "C:\", .f., "Image" )
-   If !Empty(cSaveName)
-      capFileSaveDIB(hWnd, cSaveName)
-   EndIf
-EndIf
-
-Return
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -286,3 +262,4 @@ HB_FUNC( CAPFILESAVEDIB )
 }
 
 #pragma ENDDUMP
+

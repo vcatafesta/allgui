@@ -1,59 +1,58 @@
-*------------------------------------------------------------------------------*
-Function ShowWait_Window( cMessage )
-*------------------------------------------------------------------------------*
-Local nWidthPix
 
-  if ! IsWindowDefined ( Wait_window ) 
+FUNCTION ShowWait_Window( cMessage )
 
-	nWidthPix := GetTextWidth( , cMessage ) + 25
+   LOCAL nWidthPix
 
-	DEFINE WINDOW Wait_window ;
-		AT		Application.Row + GetTitleHeight() + GetBorderHeight() + 2 , Application.Col + Application.Width - nWidthPix - 10  ;
-		WIDTH		nWidthPix	;
-		HEIGHT		37		;
-		MAXWIDTH	nWidthPix	;
-		MAXHEIGHT	37		;
-		MINWIDTH	nWidthPix	;
-		MINHEIGHT	37		;
-		TITLE		''		;	
-		CHILD		;
-		NOSYSMENU	;
-		NOCAPTION
+   IF ! IsWindowDefined ( Wait_window )
 
-		DEFINE WINDOW Wait_window_panel ;
-			ROW iif(IsSeven(), 0, 3) ;
-			COL iif(IsSeven(), 0, 2) ;
-			WIDTH  Wait_window.Width - 11 ;
-			HEIGHT Wait_window.Height - 13 ;
-			WINDOWTYPE PANEL
+      nWidthPix := GetTextWidth( , cMessage ) + 25
 
-			DEFINE LABEL Message
-				ROW		iif(IsSeven(), 2, 4)
-				COL		5
-				PARENT		Wait_window_panel
-				AUTOSIZE	.T.
-				WIDTH		nWidthPix - 30
-				HEIGHT		Wait_window_panel.Height - 5
- 				FONTSIZE	10
-				FONTBOLD	.T.
-				VALUE		cMessage
-			END LABEL			
-	   	END WINDOW
+      DEFINE WINDOW Wait_window ;
+            AT      Application.Row + GetTitleHeight() + GetBorderHeight() + 2 , Application.Col + Application.Width - nWidthPix - 10  ;
+            WIDTH      nWidthPix   ;
+            HEIGHT      37      ;
+            MAXWIDTH   nWidthPix   ;
+            MAXHEIGHT   37      ;
+            MINWIDTH   nWidthPix   ;
+            MINHEIGHT   37      ;
+            TITLE      ''      ;
+            CHILD      ;
+            NOSYSMENU   ;
+            NOCAPTION
 
-	END WINDOW
+         DEFINE WINDOW Wait_window_panel ;
+               ROW iif(IsSeven(), 0, 3) ;
+               COL iif(IsSeven(), 0, 2) ;
+               WIDTH  Wait_window.Width - 11 ;
+               HEIGHT Wait_window.Height - 13 ;
+               WINDOWTYPE PANEL
 
-	ACTIVATE WINDOW Wait_window NOWAIT
+            DEFINE LABEL Message
+               ROW      iif(IsSeven(), 2, 4)
+               COL      5
+               PARENT      Wait_window_panel
+               AUTOSIZE   .T.
+               WIDTH      nWidthPix - 30
+               HEIGHT      Wait_window_panel.Height - 5
+               FONTSIZE   10
+               FONTBOLD   .T.
+               VALUE      cMessage
+            END LABEL
+         END WINDOW
 
-  Endif
+      END WINDOW
 
-Return Nil
+      ACTIVATE WINDOW Wait_window NOWAIT
 
-*------------------------------------------------------------------------------*
-Function HideWait_Window()
-*------------------------------------------------------------------------------*
+   ENDIF
 
-  if IsWindowDefined ( Wait_window ) 
-	Wait_window.Release
-  endif
+   RETURN NIL
 
-Return Nil
+FUNCTION HideWait_Window()
+
+   IF IsWindowDefined ( Wait_window )
+      WAIT_window.Release
+   ENDIF
+
+   RETURN NIL
+

@@ -13,47 +13,45 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineRadioGroup ( ControlName, ParentFormName, x, y, aOptions, Value, ;
       fontname, fontsize, tooltip, change, width, ;
       spacing, HelpId, invisible, notabstop, bold, italic, underline, strikeout, ;
       backcolor , fontcolor , transparent , horizontal , leftjustify , aReadOnly , aId )
-*-----------------------------------------------------------------------------*
    LOCAL i , ParentFormHandle , blInit , mVar , BackCol , BackRow , k , Style
    LOCAL aHandles[ 0 ], ControlHandle, FontHandle, n, lDialogInMemory
 
@@ -227,7 +225,7 @@ FUNCTION _DefineRadioGroup ( ControlName, ParentFormName, x, y, aOptions, Value,
       ENDIF
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "RADIOGROUP"
    _HMG_aControlNames  [k] :=  ControlName
@@ -281,35 +279,33 @@ FUNCTION _DefineRadioGroup ( ControlName, ParentFormName, x, y, aOptions, Value,
       _SetRadioGroupReadOnly ( ControlName , ParentFormName , aReadOnly )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogRadioGroup( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL aHandles , Value
 
    HB_SYMBOL_UNUSED( ControlHandle )
 
    aHandles := _HMG_aControlHandles [k]
    Value    := _HMG_aControlValue [k]
-// EF 93
+   // EF 93
    IF ValType ( Value ) == 'N' .AND. Value > 0
       _SetValue ( , , Value , k )
    ENDIF
-//JP V40
+   //JP V40
    IF Len( _HMG_aControlIds [k] ) == Len( aHandles ) .AND. ValType( ParentName ) <> 'U'
       _SetRadioGroupReadOnly ( _HMG_aControlNames [k] , ParentName , _HMG_aControlPageMap [k] )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetRadioGroupReadOnly ( ControlName , ParentForm , aReadOnly )
-*-----------------------------------------------------------------------------*
+
    LOCAL z , aHandles , aOptions , lError := .F.
    LOCAL i := GetControlIndex ( ControlName , ParentForm )
 
@@ -341,4 +337,5 @@ PROCEDURE _SetRadioGroupReadOnly ( ControlName , ParentForm , aReadOnly )
       _HMG_aControlPageMap [i] := aReadOnly
    ENDIF
 
-RETURN
+   RETURN
+

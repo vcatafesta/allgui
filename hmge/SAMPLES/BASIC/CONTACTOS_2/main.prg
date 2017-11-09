@@ -1,505 +1,495 @@
 /*
 * Contactos
 * (C) 2003 Roberto Lopez <harbourminigui@gmail.com>
-*
 * (C) 2005 Designed by MigSoft with MiniGUI IDE :: Roberto Lopez ::
 */
 
 #include "minigui.ch"
 
-Static Nuevo := .F.
+STATIC Nuevo := .F.
 
-Function Main
+FUNCTION Main
 
-        set delete on
-        set browsesync on
-        set century on
-        set date french
+   SET delete on
+   SET browsesync on
+   SET CENTURY ON
+   SET DATE french
 
-        Request DBFCDX , DBFFPT
-        Rddsetdefault( "DBFCDX" )
+   REQUEST DBFCDX , DBFFPT
+   Rddsetdefault( "DBFCDX" )
 
-	Set Default Icon To "Tutor"
-        Load Window Principal
-	Activate Window Principal
+   SET Default Icon To "Tutor"
+   LOAD WINDOW Principal
+   ACTIVATE WINDOW Principal
 
-Return Nil
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 PROCEDURE AdministradorDeContactos
-*------------------------------------------------------------------------------*
 
-        Load Window Win_1
-      	Win_1.Browse_1.SetFocus
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+   LOAD WINDOW Win_1
+   Win_1.Browse_1.SetFocus
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE AbrirTablas
-*------------------------------------------------------------------------------*
 
-	USE TIPOS INDEX TIPOS SHARED NEW
-	SET ORDER TO TAG Cod_Tipo
-	GO TOP
+   USE TIPOS INDEX TIPOS SHARED NEW
+   SET ORDER TO TAG Cod_Tipo
+   GO TOP
 
-	USE CONTACTOS INDEX CONTACTOS SHARED NEW
-	SET ORDER TO TAG Apellido
-	GO TOP
+   USE CONTACTOS INDEX CONTACTOS SHARED NEW
+   SET ORDER TO TAG Apellido
+   GO TOP
 
-	Win_1.Browse_1.Value := Contactos->(RecNo())
+   Win_1.Browse_1.Value := Contactos->(RecNo())
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE CerrarTablas
-*------------------------------------------------------------------------------*
 
-	Close Contactos
-	Close Tipos
+   CLOSE Contactos
+   CLOSE Tipos
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE DesactivarEdicion
-*------------------------------------------------------------------------------*
 
-	Win_1.Browse_1.Enabled		:= .T.
-	Win_1.Control_1.Enabled		:= .F.
-	Win_1.Control_2.Enabled		:= .F.
-	Win_1.Control_3.Enabled		:= .F.
-	Win_1.Control_4.Enabled		:= .F.
-	Win_1.Control_5.Enabled		:= .F.
-	Win_1.Control_6.Enabled		:= .F.
-	Win_1.Control_7.Enabled		:= .F.
-	Win_1.Control_8.Enabled		:= .F.
-	Win_1.Control_9.Enabled		:= .F.
-	Win_1.Control_10.Enabled	:= .F.
-	Win_1.Control_11.Enabled	:= .F.
-	Win_1.Control_12.Enabled	:= .F.
+   Win_1.Browse_1.Enabled      := .T.
+   Win_1.Control_1.Enabled      := .F.
+   Win_1.Control_2.Enabled      := .F.
+   Win_1.Control_3.Enabled      := .F.
+   Win_1.Control_4.Enabled      := .F.
+   Win_1.Control_5.Enabled      := .F.
+   Win_1.Control_6.Enabled      := .F.
+   Win_1.Control_7.Enabled      := .F.
+   Win_1.Control_8.Enabled      := .F.
+   Win_1.Control_9.Enabled      := .F.
+   Win_1.Control_10.Enabled   := .F.
+   Win_1.Control_11.Enabled   := .F.
+   Win_1.Control_12.Enabled   := .F.
 
-	Win_1.Aceptar.Enabled		:= .F.
-	Win_1.Cancelar.Enabled		:= .F.
+   Win_1.Aceptar.Enabled      := .F.
+   Win_1.Cancelar.Enabled      := .F.
 
-	Win_1.ToolBar_1.Enabled		:= .T.
+   Win_1.ToolBar_1.Enabled      := .T.
 
-	Win_1.Browse_1.SetFocus
+   Win_1.Browse_1.SetFocus
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE ActivarEdicion
-*------------------------------------------------------------------------------*
 
-	Win_1.Browse_1.Enabled		:= .F.
-	Win_1.Control_1.Enabled		:= .T.
-	Win_1.Control_2.Enabled		:= .T.
-	Win_1.Control_3.Enabled		:= .T.
-	Win_1.Control_4.Enabled		:= .T.
-	Win_1.Control_5.Enabled		:= .T.
-	Win_1.Control_6.Enabled		:= .T.
-	Win_1.Control_7.Enabled		:= .T.
-	Win_1.Control_8.Enabled		:= .T.
-	Win_1.Control_9.Enabled		:= .T.
-	Win_1.Control_10.Enabled	:= .T.
-	Win_1.Control_11.Enabled	:= .T.
-	Win_1.Control_12.Enabled	:= .T.
+   Win_1.Browse_1.Enabled      := .F.
+   Win_1.Control_1.Enabled      := .T.
+   Win_1.Control_2.Enabled      := .T.
+   Win_1.Control_3.Enabled      := .T.
+   Win_1.Control_4.Enabled      := .T.
+   Win_1.Control_5.Enabled      := .T.
+   Win_1.Control_6.Enabled      := .T.
+   Win_1.Control_7.Enabled      := .T.
+   Win_1.Control_8.Enabled      := .T.
+   Win_1.Control_9.Enabled      := .T.
+   Win_1.Control_10.Enabled   := .T.
+   Win_1.Control_11.Enabled   := .T.
+   Win_1.Control_12.Enabled   := .T.
 
-	Win_1.Aceptar.Enabled		:= .T.
-	Win_1.Cancelar.Enabled		:= .T.
-	Win_1.ToolBar_1.Enabled		:= .F.
+   Win_1.Aceptar.Enabled      := .T.
+   Win_1.Cancelar.Enabled      := .T.
+   Win_1.ToolBar_1.Enabled      := .F.
 
-	Win_1.Control_1.SetFocus
+   Win_1.Control_1.SetFocus
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE CancelarEdicion()
-*------------------------------------------------------------------------------*
 
-	DesactivarEdicion()
-	Actualizar()
-	UNLOCK
-	Nuevo := .F.
+   DesactivarEdicion()
+   Actualizar()
+   UNLOCK
+   Nuevo := .F.
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE AceptarEdicion()
-*------------------------------------------------------------------------------*
 
-	DesactivarEdicion()
+   DesactivarEdicion()
 
-	Tipos->(DbGoTo (Win_1.Control_2.Value))
+   Tipos->(DbGoTo (Win_1.Control_2.Value))
 
-	If Nuevo == .T.
-		Contactos->(DbAppend())
-		Nuevo := .F.
-	EndIf
+   IF Nuevo == .T.
+      Contactos->(DbAppend())
+      Nuevo := .F.
+   ENDIF
 
-	Contactos->Apellido	:= Win_1.Control_1.Value
-	Contactos->Cod_Tipo	:= Tipos->Cod_Tipo
-	Contactos->Nombres	:= Win_1.Control_3.Value
-	Contactos->Calle	:= Win_1.Control_4.Value
-	Contactos->Numero	:= Win_1.Control_5.Value
-	Contactos->Piso		:= Win_1.Control_6.Value
-	Contactos->Dpto		:= Win_1.Control_7.Value
-	Contactos->Tel_Part	:= Win_1.Control_8.Value
-	Contactos->Tel_Cel	:= Win_1.Control_9.Value
-	Contactos->E_Mail	:= Win_1.Control_10.Value
-	Contactos->Fecha_Nac	:= Win_1.Control_11.Value
-	Contactos->Observ	:= Win_1.Control_12.Value
+   Contactos->Apellido   := Win_1.Control_1.Value
+   Contactos->Cod_Tipo   := Tipos->Cod_Tipo
+   Contactos->Nombres   := Win_1.Control_3.Value
+   Contactos->Calle   := Win_1.Control_4.Value
+   Contactos->Numero   := Win_1.Control_5.Value
+   Contactos->Piso      := Win_1.Control_6.Value
+   Contactos->Dpto      := Win_1.Control_7.Value
+   Contactos->Tel_Part   := Win_1.Control_8.Value
+   Contactos->Tel_Cel   := Win_1.Control_9.Value
+   Contactos->E_Mail   := Win_1.Control_10.Value
+   Contactos->Fecha_Nac   := Win_1.Control_11.Value
+   Contactos->Observ   := Win_1.Control_12.Value
 
-	Win_1.Browse_1.Refresh
+   Win_1.Browse_1.Refresh
 
+   IF Nuevo == .T.
+      Win_1.Browse_1.Value := Contactos->(RecNo())
+   ENDIF
 
-	If Nuevo == .T.
-		Win_1.Browse_1.Value := Contactos->(RecNo())
-	EndIf
+   UNLOCK
 
-	UNLOCK
+   RETURN
 
-RETURN
-*------------------------------------------------------------------------------*
 PROCEDURE Nuevo()
-*------------------------------------------------------------------------------*
 
-	// Se asignan valores iniciales a los controles.
+   // Se asignan valores iniciales a los controles.
 
-	Win_1.Control_1.Value := ''
-	Win_1.Control_2.Value := 0
-	Win_1.Control_3.Value := ''
-	Win_1.Control_4.Value := ''
-	Win_1.Control_5.Value := 0
-	Win_1.Control_6.Value := 0
-	Win_1.Control_7.Value := ''
-	Win_1.Control_8.Value := ''
-	Win_1.Control_9.Value := ''
-	Win_1.Control_10.Value := ''
-	Win_1.Control_11.Value := CtoD ('01/01/1960')
-	Win_1.Control_12.Value := ''
+   Win_1.Control_1.Value := ''
+   Win_1.Control_2.Value := 0
+   Win_1.Control_3.Value := ''
+   Win_1.Control_4.Value := ''
+   Win_1.Control_5.Value := 0
+   Win_1.Control_6.Value := 0
+   Win_1.Control_7.Value := ''
+   Win_1.Control_8.Value := ''
+   Win_1.Control_9.Value := ''
+   Win_1.Control_10.Value := ''
+   Win_1.Control_11.Value := CtoD ('01/01/1960')
+   Win_1.Control_12.Value := ''
 
-	ActivarEdicion()
+   ActivarEdicion()
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE Actualizar()
-*------------------------------------------------------------------------------*
 
-	Tipos->( DbSeek ( Contactos->Cod_Tipo ) )
+   Tipos->( DbSeek ( Contactos->Cod_Tipo ) )
 
-	Win_1.Control_1.Value	:= Contactos->Apellido
-	Win_1.Control_2.Value	:= Tipos->(RecNo())
-	Win_1.Control_3.Value	:= Contactos->Nombres
-	Win_1.Control_4.Value	:= Contactos->Calle
-	Win_1.Control_5.Value 	:= Contactos->Numero
-	Win_1.Control_6.Value	:= Contactos->Piso
-	Win_1.Control_7.Value 	:= Contactos->Dpto
-	Win_1.Control_8.Value	:= Contactos->Tel_Part
-	Win_1.Control_9.Value	:= Contactos->Tel_Cel
-	Win_1.Control_10.Value	:= Contactos->E_Mail
-	Win_1.Control_11.Value	:= Contactos->Fecha_Nac
-	Win_1.Control_12.Value	:= Contactos->Observ
+   Win_1.Control_1.Value   := Contactos->Apellido
+   Win_1.Control_2.Value   := Tipos->(RecNo())
+   Win_1.Control_3.Value   := Contactos->Nombres
+   Win_1.Control_4.Value   := Contactos->Calle
+   Win_1.Control_5.Value    := Contactos->Numero
+   Win_1.Control_6.Value   := Contactos->Piso
+   Win_1.Control_7.Value    := Contactos->Dpto
+   Win_1.Control_8.Value   := Contactos->Tel_Part
+   Win_1.Control_9.Value   := Contactos->Tel_Cel
+   Win_1.Control_10.Value   := Contactos->E_Mail
+   Win_1.Control_11.Value   := Contactos->Fecha_Nac
+   Win_1.Control_12.Value   := Contactos->Observ
 
-Return
-*------------------------------------------------------------------------------*
-Function BloquearRegistro()
-*------------------------------------------------------------------------------*
-Local RetVal
+   RETURN
 
-	If Contactos->(RLock())
-		RetVal := .t.
-	Else
-		MsgExclamation ('El Registro Esta Siendo Editado Por Otro Usuario. Reintente Mas Tarde')
-		RetVal := .f.
-	EndIf
+FUNCTION BloquearRegistro()
 
-Return RetVal
-*------------------------------------------------------------------------------*
-Procedure Eliminar
-*------------------------------------------------------------------------------*
+   LOCAL RetVal
 
-	If MsgYesNo ( 'Esta Seguro')
+   IF Contactos->(RLock())
+      RetVal := .t.
+   ELSE
+      MsgExclamation ('El Registro Esta Siendo Editado Por Otro Usuario. Reintente Mas Tarde')
+      RetVal := .f.
+   ENDIF
 
-		If BloquearRegistro()
-			Contactos->(dbdelete())
-			Contactos->(dbgotop())
-			Win_1.Browse_1.Refresh
-			Win_1.Browse_1.Value := Contactos->(RecNo())
-			Actualizar()
-		EndIf
-	EndIf
+   RETURN RetVal
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Buscar
-*------------------------------------------------------------------------------*
-Local Buscar
+PROCEDURE Eliminar
 
-	Buscar := Upper ( AllTrim ( InputBox( 'Ingrese Apellido a Buscar:' , 'Busqueda' ) ) )
+   IF MsgYesNo ( 'Esta Seguro')
 
-	If .Not. Empty(Buscar)
+      IF BloquearRegistro()
+         Contactos->(dbdelete())
+         Contactos->(dbgotop())
+         Win_1.Browse_1.Refresh
+         Win_1.Browse_1.Value := Contactos->(RecNo())
+         Actualizar()
+      ENDIF
+   ENDIF
 
-		If Contactos->(DbSeek(Buscar))
-			Win_1.Browse_1.Value := Contactos->(RecNo())
-		Else
-			MsgExclamation('No se encontraron registros')
-		EndIf
+   RETURN
 
-	EndIf
+PROCEDURE Buscar
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Imprimir()
-*------------------------------------------------------------------------------*
-Local RecContactos , RecTipos
+   LOCAL Buscar
 
-	RecContactos := Contactos->(RecNo())
-	RecTipos := Tipos->(RecNo())
+   Buscar := Upper ( AllTrim ( InputBox( 'Ingrese Apellido a Buscar:' , 'Busqueda' ) ) )
 
-	Select Contactos
-	Set Relation To Field->Cod_Tipo Into Tipos
-	Go Top
+   IF .Not. Empty(Buscar)
 
-	DO REPORT								;
-		TITLE 'Contactos'						;
-		HEADERS  {'','','','',''} , {'Apellido','Nombres','Calle','Numero','Tipo'};
-		FIELDS   {'Contactos->Apellido','Contactos->Nombres','Contactos->Calle','Contactos->Numero','Tipos->Desc'};
-		WIDTHS   {10,15,20,7,15} 						;
-		TOTALS   {.F.,.F.,.F.,.F.,.F.}					;
-		WORKAREA Contactos						;
-		LPP 50								;
-		CPL 80								;
-		LMARGIN 5							;
-		PREVIEW
+      IF Contactos->(DbSeek(Buscar))
+         Win_1.Browse_1.Value := Contactos->(RecNo())
+      ELSE
+         MsgExclamation('No se encontraron registros')
+      ENDIF
 
-	Select Contactos
-	Set Relation To
+   ENDIF
 
-	Contactos->(DbGoTo(RecContactos))
-	Tipos->(DbGoTo(RecTipos))
+   RETURN
 
-Return
+PROCEDURE Imprimir()
+
+   LOCAL RecContactos , RecTipos
+
+   RecContactos := Contactos->(RecNo())
+   RecTipos := Tipos->(RecNo())
+
+   SELECT Contactos
+   SET RELATION TO Field->Cod_Tipo Into Tipos
+   GO TOP
+
+   DO REPORT                        ;
+      TITLE 'Contactos'                  ;
+      HEADERS  {'','','','',''} , {'Apellido','Nombres','Calle','Numero','Tipo'};
+      FIELDS   {'Contactos->Apellido','Contactos->Nombres','Contactos->Calle','Contactos->Numero','Tipos->Desc'};
+      WIDTHS   {10,15,20,7,15}                   ;
+      TOTALS   {.F.,.F.,.F.,.F.,.F.}               ;
+      WORKAREA Contactos                  ;
+      LPP 50                        ;
+      CPL 80                        ;
+      LMARGIN 5                     ;
+      PREVIEW
+
+   SELECT Contactos
+   SET RELATION TO
+
+   Contactos->(DbGoTo(RecContactos))
+   Tipos->(DbGoTo(RecTipos))
+
+   RETURN
 
 PROCEDURE AdministradorDeTipos
 
-        Load Window Win_2
-	Win_2.Text_1.SetFocus
-	CENTER WINDOW Win_2
-	ACTIVATE WINDOW Win_2
+   LOAD WINDOW Win_2
+   Win_2.Text_1.SetFocus
+   CENTER WINDOW Win_2
+   ACTIVATE WINDOW Win_2
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION Busqueda
-*------------------------------------------------------------------------------*
-Local RetVal := .F. , nRecCount := 0
 
-	If Empty ( Win_2.Text_1.Value )
-		Return .F.
-	EndIf
+   LOCAL RetVal := .F. , nRecCount := 0
 
-	Win_2.Grid_1.DeleteAllItems
+   IF Empty ( Win_2.Text_1.Value )
 
-	Use Tipos Index Tipos Shared
-	Set Order To Tag Desc
+      RETURN .F.
+   ENDIF
 
-	If AllTrim (AllTrim(Win_2.Text_1.Value)) == '*'
+   Win_2.Grid_1.DeleteAllItems
 
-		Go Top
+   USE Tipos Index Tipos Shared
+   SET Order To Tag Desc
 
-		Do While .Not. Eof()
-			nRecCount++
-			Win_2.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
-			Skip
-		EndDo
+   IF AllTrim (AllTrim(Win_2.Text_1.Value)) == '*'
 
-		If nRecCount > 0
-			RetVal := .T.
-			Win_2.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
-		ELse
-			RetVal := .F.
-			Win_2.StatusBar.Item(1) := 'No se encontraron registros'
-		EndIf
+      GO TOP
 
-	Else
+      DO WHILE .Not. Eof()
+         nRecCount++
+         Win_2.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
+         SKIP
+      ENDDO
 
-		If DbSeek(AllTrim(Win_2.Text_1.Value))
+      IF nRecCount > 0
+         RetVal := .T.
+         Win_2.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
+      ELSE
+         RetVal := .F.
+         Win_2.StatusBar.Item(1) := 'No se encontraron registros'
+      ENDIF
 
-			RetVal := .T.
+   ELSE
 
-			Do While Upper(Tipos->Desc) = AllTrim(Win_2.Text_1.Value)
-				nRecCount++
-				Win_2.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
-				Skip
-			EndDo
+      IF DbSeek(AllTrim(Win_2.Text_1.Value))
 
-			RetVal := .T.
-			Win_2.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
+         RetVal := .T.
 
-		Else
-			Win_2.StatusBar.Item(1) := 'No se encontraron registros'
-		EndIf
+         DO WHILE Upper(Tipos->Desc) = AllTrim(Win_2.Text_1.Value)
+            nRecCount++
+            Win_2.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
+            SKIP
+         ENDDO
 
-	EndIf
+         RetVal := .T.
+         Win_2.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
 
-	Close Tipos
+      ELSE
+         Win_2.StatusBar.Item(1) := 'No se encontraron registros'
+      ENDIF
 
-Return ( RetVal )
-*------------------------------------------------------------------------------*
+   ENDIF
+
+   CLOSE Tipos
+
+   RETURN ( RetVal )
+
 PROCEDURE Agregar
-*------------------------------------------------------------------------------*
-Local cDesc , nCod_Tipo
 
-	cDesc := InputBox ( 'Descripcion:' , 'Agregar Registro' )
+   LOCAL cDesc , nCod_Tipo
 
-	If .Not. Empty ( cDesc )
+   cDesc := InputBox ( 'Descripcion:' , 'Agregar Registro' )
 
-		Use Tipos Index Tipos Shared
-		Set Order To Tag Cod_Tipo
+   IF .Not. Empty ( cDesc )
 
-		If flock()
+      USE Tipos Index Tipos Shared
+      SET Order To Tag Cod_Tipo
 
-			Go Bottom
+      IF flock()
 
-			nCod_Tipo := Tipos->Cod_Tipo + 1
+         Go Bottom
 
-			Append Blank
+         nCod_Tipo := Tipos->Cod_Tipo + 1
 
-			Tipos->Cod_Tipo := nCod_Tipo
-			Tipos->Desc	:= cDesc
+         APPEND BLANK
 
-			Close Tipos
+         Tipos->Cod_Tipo := nCod_Tipo
+         Tipos->Desc   := cDesc
 
-			If ( Busqueda() == .T. , ( Win_2.Grid_1.Value := 1 , Win_2.Grid_1.SetFocus ) , Nil )
+         CLOSE Tipos
 
-		Else
+         IF ( Busqueda() == .T. , ( Win_2.Grid_1.Value := 1 , Win_2.Grid_1.SetFocus ) , Nil )
 
-			MsgStop ('Operacion Cancelada: El Archivo esta siendo actualizado por otro usuario. Reintente mas tarde')
+         ELSE
 
-		EndIf
+            MsgStop ('Operacion Cancelada: El Archivo esta siendo actualizado por otro usuario. Reintente mas tarde')
 
-	EndIf
+         ENDIF
 
-Return
-*------------------------------------------------------------------------------*
+      ENDIF
+
+      RETURN
+
 PROCEDURE Borrar
-*------------------------------------------------------------------------------*
-Local ItemPos , aItem
 
-	ItemPos := Win_2.Grid_1.Value
+   LOCAL ItemPos , aItem
 
-	If ItemPos == 0
-		MsgStop ('No hay regostros seleccionados','Borrar Registro')
-		Return
-	EndIf
+   ItemPos := Win_2.Grid_1.Value
 
-	If MsgYesNo ( 'Esta Seguro' , 'Borrar Registro' )
+   IF ItemPos == 0
+      MsgStop ('No hay regostros seleccionados','Borrar Registro')
 
-		Use Contactos Index Contactos Shared New
-		Set Order To Tag Cod_Tipo
+      RETURN
+   ENDIF
 
-		Use Tipos Index Tipos Shared New
-		Set Order To Tag Cod_Tipo
+   IF MsgYesNo ( 'Esta Seguro' , 'Borrar Registro' )
 
-		aItem := Win_2.Grid_1.Item ( ItemPos )
+      USE Contactos Index Contactos Shared New
+      SET Order To Tag Cod_Tipo
 
-		Seek Val ( aItem[1] )
+      USE Tipos Index Tipos Shared New
+      SET Order To Tag Cod_Tipo
 
-		If found()
-			If rlock()
-				If Contactos->(DbSeek(Tipos->Cod_Tipo))
-					Close Tipos
-					Close Contactos
-					MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')
-				Else
-					Delete
-					Close Tipos
-					Close Contactos
-					If ( Busqueda() == .T. , ( Win_2.Grid_1.Value := 1 , Win_2.Grid_1.SetFocus ) , Nil )
-				EndIf
-			Else
-				Close Tipos
-				MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Borrar registro')
-			EndIf
-		Else
-			Close Tipos
-			MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Borrar registro')
-		EndIf
+      aItem := Win_2.Grid_1.Item ( ItemPos )
 
-	EndIf
+      SEEK Val ( aItem[1] )
 
-Return
-*------------------------------------------------------------------------------*
+      IF found()
+         IF rlock()
+            IF Contactos->(DbSeek(Tipos->Cod_Tipo))
+               CLOSE Tipos
+               CLOSE Contactos
+               MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')
+            ELSE
+               DELETE
+               CLOSE Tipos
+               CLOSE Contactos
+               IF ( Busqueda() == .T. , ( Win_2.Grid_1.Value := 1 , Win_2.Grid_1.SetFocus ) , Nil )
+               ENDIF
+            ELSE
+               CLOSE Tipos
+               MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Borrar registro')
+            ENDIF
+         ELSE
+            CLOSE Tipos
+            MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Borrar registro')
+         ENDIF
+
+      ENDIF
+
+      RETURN
+
 PROCEDURE Modificar
-*------------------------------------------------------------------------------*
-Local ItemPos , aItem , cDesc , nCodTipo , i
 
-	ItemPos := Win_2.Grid_1.Value
+   LOCAL ItemPos , aItem , cDesc , nCodTipo , i
 
-	If ItemPos == 0
-		MsgStop ('No hay regostros seleccionados','Editar Registro')
-		Return
-	EndIf
+   ItemPos := Win_2.Grid_1.Value
 
-	Use Tipos Index Tipos Shared
-	Set Order To Tag Cod_Tipo
+   IF ItemPos == 0
+      MsgStop ('No hay regostros seleccionados','Editar Registro')
 
-	aItem := Win_2.Grid_1.Item ( ItemPos )
+      RETURN
+   ENDIF
 
-	If dBSeek ( Val ( aItem[1] ) )
-		If rlock()
-			cDesc := InputBox ( 'Descripcion:','Editar Registro', AllTrim(Tipos->Desc))
+   USE Tipos Index Tipos Shared
+   SET Order To Tag Cod_Tipo
 
-			If ! Empty ( cDesc )
-				Tipos->Desc := cDesc
-			EndIf
+   aItem := Win_2.Grid_1.Item ( ItemPos )
 
-			nCodTipo := Tipos->Cod_Tipo
+   IF dBSeek ( Val ( aItem[1] ) )
+      IF rlock()
+         cDesc := InputBox ( 'Descripcion:','Editar Registro', AllTrim(Tipos->Desc))
 
-			Close Tipos
+         IF ! Empty ( cDesc )
+            Tipos->Desc := cDesc
+         ENDIF
 
-			If Busqueda()
+         nCodTipo := Tipos->Cod_Tipo
 
-				Win_2.Grid_1.Value := 1
+         CLOSE Tipos
 
-				For i := 1 To Win_2.Grid_1.ItemCount
+         IF Busqueda()
 
-					aItem := Win_2.Grid_1.Item ( i )
+            Win_2.Grid_1.Value := 1
 
-					If Val ( aItem [1] ) == nCodTipo
-						Win_2.Grid_1.Value := i
-						Win_2.Grid_1.SetFocus
-						Exit
-					EndIf
+            FOR i := 1 To Win_2.Grid_1.ItemCount
 
-				Next i
+               aItem := Win_2.Grid_1.Item ( i )
 
-			EndIf
-		Else
-			Close Tipos
-			MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Editar Registro')
-		EndIf
-	Else
-		Close Tipos
-		MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Editar Registro')
-	EndIf
+               IF Val ( aItem [1] ) == nCodTipo
+                  Win_2.Grid_1.Value := i
+                  Win_2.Grid_1.SetFocus
+                  EXIT
+               ENDIF
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Impresion()
-*------------------------------------------------------------------------------*
+            NEXT i
 
-	Use Tipos Index Tipos Shared New
-	Set Order To Tag Cod_Tipo
-	Go Top
+         ENDIF
+      ELSE
+         CLOSE Tipos
+         MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Editar Registro')
+      ENDIF
+   ELSE
+      CLOSE Tipos
+      MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Editar Registro')
+   ENDIF
 
-	DO REPORT							;
-		TITLE 'Tipos'						;
-		HEADERS  {'',''} , {'Codigo','Descripcion'}		;
-		FIELDS   {'Cod_Tipo','Desc'}				;
-		WIDTHS   {20,20} 					;
-		TOTALS   {.F.,.F.}					;
-		WORKAREA Tipos						;
-		LPP 50							;
-		CPL 80							;
-		LMARGIN 5						;
-		PREVIEW
+   RETURN
 
-	Close Tipos
+PROCEDURE Impresion()
 
-Return
+   USE Tipos Index Tipos Shared New
+   SET Order To Tag Cod_Tipo
+   GO TOP
+
+   DO REPORT                     ;
+      TITLE 'Tipos'                  ;
+      HEADERS  {'',''} , {'Codigo','Descripcion'}      ;
+      FIELDS   {'Cod_Tipo','Desc'}            ;
+      WIDTHS   {20,20}                ;
+      TOTALS   {.F.,.F.}               ;
+      WORKAREA Tipos                  ;
+      LPP 50                     ;
+      CPL 80                     ;
+      LMARGIN 5                  ;
+      PREVIEW
+
+   CLOSE Tipos
+
+   RETURN
+

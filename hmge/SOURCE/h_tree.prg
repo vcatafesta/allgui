@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -50,11 +50,9 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 STATIC lDialogInMemory := .F.
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineTree ( ControlName, ParentFormName, row, col, width, height, change, tooltip, fontname, fontsize, ;
       gotfocus, lostfocus, dblclick, break, value, HelpId, aImgNode, aImgItem, noBot, bold, italic, underline, strikeout, ;
       itemids, backcolor, fontcolor, linecolor , indent, itemheight, nId )
-*-----------------------------------------------------------------------------*
    LOCAL i , ParentFormHandle , Controlhandle , mVar, ImgDefNode, ImgDefItem, aBitmaps := Array( 4 )
    LOCAL FontHandle , k , Style , Mask , blInit
 
@@ -252,7 +250,7 @@ FUNCTION _DefineTree ( ControlName, ParentFormName, row, col, width, height, cha
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_ActiveTreeIndex := k
 
@@ -301,11 +299,10 @@ FUNCTION _DefineTree ( ControlName, ParentFormName, row, col, width, height, cha
       Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogTree( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL ImgDefNode, ImgDefItem, aBitmaps := Array( 4 ), aImgNode, aImgItem
    LOCAL text, ImgDef, Id, aImage, iUnsel, iSel, NodeHandle, n, NodeIndex, Handle
 
@@ -334,7 +331,7 @@ FUNCTION InitDialogTree( ParentName, ControlHandle, k )
 
    FOR n := 1 TO Len( _HMG_aDialogTreeItem )
       aImage     := _HMG_aDialogTreeItem[n,2]
-      text       := _HMG_aDialogTreeItem[n,1]
+      TEXT       := _HMG_aDialogTreeItem[n,1]
       id         := _HMG_aDialogTreeItem[n,3]
       NodeIndex  := _HMG_aDialogTreeItem[n,4]
       ImgDef     := iif( ValType( aImage ) == "A" , Len( aImage ), 0 )  //Tree+
@@ -375,16 +372,15 @@ FUNCTION InitDialogTree( ParentName, ControlHandle, k )
          TreeView_SelectItem ( _HMG_ActiveTreeHandle , _HMG_aTreeMap [ AScan ( _HMG_aTreeIdMap , _HMG_ActiveTreeValue ) ] )
       ENDIF
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineTreeNode ( text, aImage, Id )
-*-----------------------------------------------------------------------------*
+
    LOCAL ImgDef, iUnSel, iSel
 
    hb_default( @Id, 0 )
@@ -414,19 +410,16 @@ FUNCTION _DefineTreeNode ( text, aImage, Id )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndTreeNode()
-*-----------------------------------------------------------------------------*
 
    _HMG_NodeIndex--
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineTreeItem ( text, aImage, Id )
-*-----------------------------------------------------------------------------*
+
    LOCAL handle, ImgDef, iUnSel, iSel
 
    hb_default( @Id, 0 )
@@ -454,11 +447,9 @@ FUNCTION _DefineTreeItem ( text, aImage, Id )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndTree()
-*-----------------------------------------------------------------------------*
 
    IF .NOT. lDialogInMemory
 
@@ -477,11 +468,10 @@ FUNCTION _EndTree()
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _Collapse ( ControlName , ParentForm , Item )
-*-----------------------------------------------------------------------------*
+
    LOCAL ItemHandle
 
    ItemHandle := TreeItemGetHandle ( ControlName , ParentForm , Item )
@@ -490,11 +480,10 @@ PROCEDURE _Collapse ( ControlName , ParentForm , Item )
       SendMessage ( GetControlHandle( ControlName , ParentForm ), TVM_EXPAND, TVE_COLLAPSE, ItemHandle )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _Expand ( ControlName , ParentForm , Item )
-*-----------------------------------------------------------------------------*
+
    LOCAL ItemHandle
 
    ItemHandle := TreeItemGetHandle ( ControlName , ParentForm , Item )
@@ -503,11 +492,10 @@ PROCEDURE _Expand ( ControlName , ParentForm , Item )
       SendMessage ( GetControlHandle( ControlName , ParentForm ), TVM_EXPAND, TVE_EXPAND, ItemHandle )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION TreeItemGetHandle ( ControlName , ParentForm , Item )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , ItemHandle := 0 , Pos
 
    i := GetControlIndex( ControlName , ParentForm )
@@ -527,11 +515,10 @@ STATIC FUNCTION TreeItemGetHandle ( ControlName , ParentForm , Item )
 
    ENDIF
 
-RETURN ItemHandle
+   RETURN ItemHandle
 
-*-----------------------------------------------------------------------------*
 PROCEDURE TreeItemChangeImage ( ControlName , ParentForm , nItem , aImage )
-*-----------------------------------------------------------------------------*
+
    LOCAL TreeHandle := GetControlHandle  ( ControlName , ParentForm )
    LOCAL ItemHandle := TreeItemGetHandle ( ControlName , ParentForm , nItem )
    LOCAL ImgDef, iUnSel, iSel
@@ -543,4 +530,5 @@ PROCEDURE TreeItemChangeImage ( ControlName , ParentForm , nItem , aImage )
       TREEITEM_SETIMAGEINDEX ( TreeHandle , ItemHandle , iUnSel , iSel )
    ENDIF
 
-RETURN
+   RETURN
+

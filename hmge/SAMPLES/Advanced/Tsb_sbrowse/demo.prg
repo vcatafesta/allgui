@@ -1,11 +1,10 @@
 #include "minigui.ch"
 #include "tsbrowse.ch"
 
-*-----------------------------------
-Function Main()
-*-----------------------------------
-   Local cTitle := "Test Browse: Right Click For Record View", ;
-         bSetup := { |oBrw| SetMyBrowser( oBrw ) }
+FUNCTION Main()
+
+   LOCAL cTitle := "Test Browse: Right Click For Record View", ;
+      bSetup := { |oBrw| SetMyBrowser( oBrw ) }
 
    CreateTable()
 
@@ -18,11 +17,11 @@ Function Main()
    SET DEFAULT ICON TO GetStartupFolder() + "\demo.ico"
 
    DEFINE WINDOW sample AT 0,0 WIDTH 640 HEIGHT 480 ;
-      TITLE "Open Table via SBrowse" ;
-      MAIN ;
-      NOSHOW ;
-      ON INIT SBrowse( "Test", cTitle, bSetup ) ;
-      ON RELEASE ( dbCloseArea( "Test" ), hb_dbDrop( "Test" ) )
+         TITLE "Open Table via SBrowse" ;
+         MAIN ;
+         NOSHOW ;
+         ON INIT SBrowse( "Test", cTitle, bSetup ) ;
+         ON RELEASE ( dbCloseArea( "Test" ), hb_dbDrop( "Test" ) )
 
       DEFINE TIMER t_1 INTERVAL 1000 ACTION iif( Empty(CountChildWindows()), ThisWindow.Release(), )
 
@@ -31,11 +30,9 @@ Function Main()
    sample.Center()
    sample.Activate()
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------
-Function CreateTable
-*-----------------------------------
+FUNCTION CreateTable
 
    DBCREATE("Test", {{"CODE", "C", 3, 0},{"NAME", "C", 50, 0},{"RESIDENTS", "N", 11, 0},{"NOTES", "M", 10, 0}},,.T.)
 
@@ -55,12 +52,11 @@ Function CreateTable
    REPLACE CODE WITH 'RUS', NAME WITH 'Russia', RESIDENTS WITH 141900000
    USE
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------
-Function SetMyBrowser( oBrw )
-*-----------------------------------
-Local cFormName := oBrw:cParentWnd
+FUNCTION SetMyBrowser( oBrw )
+
+   LOCAL cFormName := oBrw:cParentWnd
 
    SetProperty( cFormName, "MinWidth", 920 )
    SetProperty( cFormName, "MinHeight", 480 )
@@ -70,19 +66,19 @@ Local cFormName := oBrw:cParentWnd
    oBrw:nClrFocuFore := CLR_BLACK
    oBrw:nClrFocuBack := COLOR_GRID
 
-Return .T. // editable browse (return .F. is readonly)
+   RETURN .T. // editable browse (return .F. is readonly)
 
-*-----------------------------------
-Function CountChildWindows
-*-----------------------------------
-Local i, nFormCount := Len (_HMG_aFormHandles), nCnt := 0
+FUNCTION CountChildWindows
+
+   LOCAL i, nFormCount := Len (_HMG_aFormHandles), nCnt := 0
 
    FOR i := 1 TO nFormCount
       IF _HMG_aFormType [i] <> "A"
-	IF _IsWindowDefined ( _HMG_aFormNames [i] )
-		nCnt++
-	ENDIF
+         IF _IsWindowDefined ( _HMG_aFormNames [i] )
+            nCnt++
+         ENDIF
       ENDIF
    NEXT
 
-Return nCnt
+   RETURN nCnt
+

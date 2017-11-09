@@ -1,17 +1,15 @@
 /***************************************************
- 
-  Exploring Bos Taurus of Dr. CLAUDIO SOTO from Uruguay
 
-  Phase 1 : Select ( GetFile() ) and load image file 
+Exploring Bos Taurus of Dr. CLAUDIO SOTO from Uruguay
 
- ***************************************************
+Phase 1 : Select ( GetFile() ) and load image file
 
 Bos Taurus :
 
-  AUTOR:    Dr. CLAUDIO SOTO
-  PAIS:     URUGUAY
-  E-MAIL:   srvet@adinet.com.uy
-  BLOG:     http://srvet.blogspot.com
+AUTOR:    Dr. CLAUDIO SOTO
+PAIS:     URUGUAY
+E-MAIL:   srvet@adinet.com.uy
+BLOG:     http://srvet.blogspot.com
 
 ***************************************************/
 
@@ -25,44 +23,44 @@ PROCEDURE Main()
    aHandles := {}
 
    DEFINE WINDOW frmBTExpMain;
-      AT 0,0;
-      WIDTH  700;
-      HEIGHT 600;
-      TITLE "Exploring Bos Taurus for HMG";
-      ICON "BT_Icon" ;
-      ON RELEASE ReleaseAll() ;
-      MAIN
+         AT 0,0;
+         WIDTH  700;
+         HEIGHT 600;
+         TITLE "Exploring Bos Taurus for HMG";
+         ICON "BT_Icon" ;
+         ON RELEASE ReleaseAll() ;
+         MAIN
 
       ON KEY ESCAPE ACTION ThisWindow.Release
 
-      DEFINE MAIN MENU 
+      DEFINE MAIN MENU
 
-	DEFINE POPUP '&File' NAME mitFile
-         
+         DEFINE POPUP '&File' NAME mitFile
+
             ITEM '&Open'     NAME mit_Open       ACTION BTEx_OpenImgFile()
-            
+
             SEPARATOR
-            
+
             ITEM "E&xit"     ACTION ThisWindow.Release
-       
-	END POPUP // File
-         
-	POPUP '?'                    
+
+         END POPUP // File
+
+         POPUP '?'
 
             ITEM '&About'  ACTION MsgInfo( BT_InfoName() + Space(3) + ;
-                                           BT_InfoVersion() + CRLF + ;
-                                           BT_InfoAuthor () + CRLF + ;
-                                           "E-MAIL:   srvet@adinet.com.uy" + CRLF + ;
-                                           "BLOG:     http://srvet.blogspot.com", "Info" )
+               BT_InfoVersion() + CRLF + ;
+               BT_InfoAuthor () + CRLF + ;
+               "E-MAIL:   srvet@adinet.com.uy" + CRLF + ;
+               "BLOG:     http://srvet.blogspot.com", "Info" )
          END POPUP // Info
 
       END MENU // MAIN
 
       DEFINE STATUSBAR FONT 'Verdana' SIZE 8
-          STATUSITEM ""
-          STATUSITEM ""
-          DATE WIDTH 80
-          CLOCK WIDTH 90
+         STATUSITEM ""
+         STATUSITEM ""
+         DATE WIDTH 80
+         CLOCK WIDTH 90
       END STATUSBAR
 
    END WINDOW // frmBTExpMain
@@ -70,17 +68,17 @@ PROCEDURE Main()
    CENTER WINDOW   frmBTExpMain
    ACTIVATE WINDOW frmBTExpMain
 
-RETURN // BTExplore.Main()
+   RETURN // BTExplore.Main()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE ReleaseAll()
 
    AEVAL( aHandles, { | hImage, i1 | BT_BitmapRelease( hImage ), aHandles[ i1 ] := NIL } )
 
-RETURN // ReleaseAll()
+   RETURN // ReleaseAll()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE BTEx_Release( hBitmap )
 
@@ -90,47 +88,47 @@ PROCEDURE BTEx_Release( hBitmap )
 
    ASIZE( aHandles, LEN( aHandles ) - 1 )
 
-RETURN // BTEx_Release()
+   RETURN // BTEx_Release()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE BTEx_Paint(;
-                      cFrmName,;
-                      hBitmap )
+      cFrmName,;
+      hBitmap )
 
    LOCAL nFrmWidth  := BT_ClientAreaWidth(  cFrmName ),;
-         nFrmHeight := BT_ClientAreaHeight( cFrmName )
-                                           
+      nFrmHeight := BT_ClientAreaHeight( cFrmName )
+
    LOCAL hDC, BTstruct
-   
+
    hDC := BT_CreateDC( cFrmName, BT_HDC_INVALIDCLIENTAREA, @BTstruct )
 
    BT_DrawBitmap( hDC, 0, 0, nFrmWidth, nFrmHeight, BT_SCALE, hBitmap )
 
    BT_DeleteDC( BTstruct )
 
-RETURN // BTEx_Paint()
+   RETURN // BTEx_Paint()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
 
    LOCAL cImgFileName := GetFile(,, GetCurrentFolder() )  // Image File Name
 
    LOCAL nParentHeight := frmBTExpMain.Height,;
-         nParentCol := frmBTExpMain.Col,;
-         nParentRow := frmBTExpMain.Row,;
-         nFrmWidth,;
-         nFrmHeight 
+      nParentCol := frmBTExpMain.Col,;
+      nParentRow := frmBTExpMain.Row,;
+      nFrmWidth,;
+      nFrmHeight
 
    LOCAL cFrmName := "frmImg_",;
-         hBitmap
+      hBitmap
 
    LOCAL nImgWidth,;          // Width of bitmap
-         nImgHeight,;         // Height of bitmap
-         nAspRatio
+   nImgHeight,;         // Height of bitmap
+   nAspRatio
 
-   IF ! EMPTY( cImgFileName )     
+   IF ! EMPTY( cImgFileName )
 
       cFrmName += STRZERO( ++nFrmNo )
       hBitmap  := BT_BitmapLoadFile( cImgFileName )
@@ -138,25 +136,25 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
       AADD( aHandles, hBitmap )
 
       nImgWidth  := BT_BitmapWidth( hBitmap )
-      nImgHeight := BT_BitmapHeight( hBitmap ) 
+      nImgHeight := BT_BitmapHeight( hBitmap )
 
-      nAspRatio  := nImgWidth / nImgHeight 
+      nAspRatio  := nImgWidth / nImgHeight
 
       nFrmHeight := MIN( nImgHeight, nParentHeight )
       nFrmWidth  := nFrmHeight * nAspRatio - 40
 
       DEFINE WINDOW &cFrmName ;
-         AT nParentRow + nFrmNo * 40, nParentCol + nFrmNo * 40;
-         WIDTH  nFrmWidth ;
-         HEIGHT nFrmHeight ;
-         ICON "BT_Icon" ;
-         TITLE "Bos Taurus Image Library for HMG"  ; 
-         ON PAINT    BTEx_Paint( cFrmName, hBitmap ) ;
-         ON SIZE     BT_ClientAreaInvalidateAll( cFrmName ) ;
-         ON MAXIMIZE BT_ClientAreaInvalidateAll( cFrmName ) ;
-         ON RELEASE { || BTEx_Release( hBitmap ), frmBTExpMain.StatusBar.Item(1) := '' } ;
-         ON GOTFOCUS {|| frmBTExpMain.StatusBar.Item(1) := cImgFileName } ;
-         CHILD
+            AT nParentRow + nFrmNo * 40, nParentCol + nFrmNo * 40;
+            WIDTH  nFrmWidth ;
+            HEIGHT nFrmHeight ;
+            ICON "BT_Icon" ;
+            TITLE "Bos Taurus Image Library for HMG"  ;
+            ON PAINT    BTEx_Paint( cFrmName, hBitmap ) ;
+            ON SIZE     BT_ClientAreaInvalidateAll( cFrmName ) ;
+            ON MAXIMIZE BT_ClientAreaInvalidateAll( cFrmName ) ;
+            ON RELEASE { || BTEx_Release( hBitmap ), frmBTExpMain.StatusBar.Item(1) := '' } ;
+            ON GOTFOCUS {|| frmBTExpMain.StatusBar.Item(1) := cImgFileName } ;
+            CHILD
 
          ON KEY ESCAPE ACTION ThisWindow.Release
 
@@ -166,4 +164,5 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
 
    ENDIF ! EMPTY( cBMFileName )
 
-RETURN // BTEx_OpenImgFile()
+   RETURN // BTEx_OpenImgFile()
+

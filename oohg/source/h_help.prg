@@ -1,64 +1,52 @@
 /*
- * $Id: h_help.prg,v 1.9 2017/08/25 19:42:21 fyurisich Exp $
- */
+* $Id: h_help.prg,v 1.9 2017/08/25 19:42:21 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * Help files functions
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* Help files functions
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "fileio.ch"
@@ -67,62 +55,62 @@ STATIC _OOHG_ActiveHelpFile := ""
 *STATIC _OOHG_nTopic         := 0
 *STATIC _OOHG_nMet           := 0
 
-*-------------------------------------------------------------
-Function SetHelpFile( cFile )
-*-------------------------------------------------------------
-LOCAL hFile
+FUNCTION SetHelpFile( cFile )
+
+   LOCAL hFile
 
    _OOHG_ActiveHelpFile := ""
 
-   if ! File( cFile )
+   IF ! File( cFile )
       MsgInfo( "Help File " + cFile + " Not Found " )
-      Return .F.
-   endif
+
+      RETURN .F.
+   ENDIF
 
    hFile := FOpen( cFile, FO_READ + FO_SHARED )
 
-   If FError() != 0
+   IF FError() != 0
       MsgInfo( "Error opening Help file. DOS ERROR: " + Str( FError(), 2, 0 ) )
-      Return .F.
-   EndIf
+
+      RETURN .F.
+   ENDIF
 
    _OOHG_ActiveHelpFile := cFile
 
-	FClose( hFile )
+   FClose( hFile )
 
-Return .T.
+   RETURN .T.
 
-*-------------------------------------
-Function HelpTopic( nTopic , nMet )
-*-------------------------------------
-Local ret:=0
+FUNCTION HelpTopic( nTopic , nMet )
 
-   If ! empty( _OOHG_ActiveHelpFile )
+   LOCAL ret:=0
 
-      if !HB_IsNumeric( nTopic )
+   IF ! empty( _OOHG_ActiveHelpFile )
+
+      IF !HB_IsNumeric( nTopic )
          nTopic := 0
-      endif
-      if !HB_IsNumeric( nMet )
+      ENDIF
+      IF !HB_IsNumeric( nMet )
          nMet := 0
-      endif
+      ENDIF
 
-*      _OOHG_nTopic := nTopic
-*      _OOHG_nMet   := nMet
+      *      _OOHG_nTopic := nTopic
+      *      _OOHG_nMet   := nMet
 
-      if UPPER( Right( ALLTRIM( _OOHG_ActiveHelpFile ), 4 ) ) == '.CHM'
+      IF UPPER( Right( ALLTRIM( _OOHG_ActiveHelpFile ), 4 ) ) == '.CHM'
          ret := WinHelp( _OOHG_Main:hWnd, _OOHG_ActiveHelpFile, 0, nMet, nTopic )
-      else
+      ELSE
          ret := WinHelp( _OOHG_Main:hWnd, _OOHG_ActiveHelpFile, 1, nMet, nTopic )
-      endif
-   endif
-Return ret
+      ENDIF
+   ENDIF
 
-*-------------------------------------------------------------
-Function GetActiveHelpFile()
-*-------------------------------------------------------------
-Return _OOHG_ActiveHelpFile
+   RETURN ret
 
-EXTERN WINHELP, WINHLP
+FUNCTION GetActiveHelpFile()
+
+   RETURN _OOHG_ActiveHelpFile
+
+   EXTERN WINHELP, WINHLP
 
 #pragma BEGINDUMP
 #include <windows.h>
@@ -166,3 +154,4 @@ HB_FUNC( WINHLP )
    HB_FUNCNAME( WINHELP )();
 }
 #pragma ENDDUMP
+

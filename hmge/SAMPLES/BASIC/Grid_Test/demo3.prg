@@ -1,55 +1,57 @@
 #include "minigui.ch"
 
-Procedure Main
-local nId
+PROCEDURE Main
 
-define window m at 0,0 width 600 height 400 title 'Grid Demo' main
+   LOCAL nId
 
-   define grid g
-      row 10
-      col 10
-      width 472
-      height 200
-      headers {"Name","City","Amount"}
-      widths {200,150,100}
-      allowedit .t.
-      COLUMNCONTROLS { { 'TEXTBOX','CHARACTER' } , { 'COMBOBOX',{ 'CHENNAI','DELHI','KOLKATTA' } } , { 'TEXTBOX','NUMERIC',"999999.99" } }
-      items { {"Person 1", 1, 1000} , {"Person 2", 3, 2000} }
-      justify {0,0,1}
-   end grid
+   DEFINE WINDOW m at 0,0 width 600 height 400 title 'Grid Demo' main
 
-   define button b1
-      row 230
-      col 10
-      width 240
-      caption "Add a new item in inplaced combobox"
-      action AddGridEditComboItem( "g", "m", 2, Upper( InputBox("Enter a new city", "Add city", "MUMBAI") ) )
-   end button
+      DEFINE GRID g
+         row 10
+         col 10
+         width 472
+         height 200
+         headers {"Name","City","Amount"}
+         widths {200,150,100}
+         allowedit .t.
+         COLUMNCONTROLS { { 'TEXTBOX','CHARACTER' } , { 'COMBOBOX',{ 'CHENNAI','DELHI','KOLKATTA' } } , { 'TEXTBOX','NUMERIC',"999999.99" } }
+         items { {"Person 1", 1, 1000} , {"Person 2", 3, 2000} }
+         justify {0,0,1}
+      END GRID
 
-   define button b2
-      row 260
-      col 10
-      width 240
-      caption "Add a new item in grid"
-      action ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
-   end button
+      DEFINE BUTTON b1
+         row 230
+         col 10
+         width 240
+         caption "Add a new item in inplaced combobox"
+         action AddGridEditComboItem( "g", "m", 2, Upper( InputBox("Enter a new city", "Add city", "MUMBAI") ) )
+      END BUTTON
 
-   on key escape action thiswindow.release()
+      DEFINE BUTTON b2
+         row 260
+         col 10
+         width 240
+         caption "Add a new item in grid"
+         action ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
+      END BUTTON
 
-end window
-m.center
-m.activate
+      on key escape action thiswindow.release()
 
-Return
+   END WINDOW
+   m.center
+   m.activate
 
+   RETURN
 
-function AddGridEditComboItem ( cGridName, cWindowName, nColIndex, cNewItem )
-local i := GetControlIndex ( cGridName, cWindowName )
-local aEditcontrols := _HMG_aControlMiscData1 [i] [13]
+FUNCTION AddGridEditComboItem ( cGridName, cWindowName, nColIndex, cNewItem )
 
-   if ascan(aEditControls [nColIndex] [2], cNewItem) == 0
+   LOCAL i := GetControlIndex ( cGridName, cWindowName )
+   LOCAL aEditcontrols := _HMG_aControlMiscData1 [i] [13]
+
+   IF ascan(aEditControls [nColIndex] [2], cNewItem) == 0
       aAdd ( aEditControls [nColIndex] [2], cNewItem )
-   endif
+   ENDIF
    _HMG_aControlMiscData1 [i] [13] := aEditControls
 
-return nil
+   RETURN NIL
+

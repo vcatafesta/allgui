@@ -1,55 +1,45 @@
 /*
- * $Id: tmysql.prg 18755 2013-01-10 15:23:52Z vszakats $
- */
+* $Id: tmysql.prg 18755 2013-01-10 15:23:52Z vszakats $
+*/
 
 /*
- * Harbour Project source code:
- * MySQL DBMS classes.
- * These classes try to emulate clipper dbXXXX functions on a SQL query
- *
- * Copyright 2000 Maurilio Longo <maurilio.longo@libero.it>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.txt.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* MySQL DBMS classes.
+* These classes try to emulate clipper dbXXXX functions on a SQL query
+* Copyright 2000 Maurilio Longo <maurilio.longo@libero.it>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.txt.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "hbclass.ch"
 
@@ -57,8 +47,8 @@
 
 #include "mysql.ch"
 
-
 // Every single row of an answer
+
 CREATE CLASS TMySQLRow
 
    VAR aRow                                     // a single row of answer
@@ -72,21 +62,25 @@ CREATE CLASS TMySQLRow
 
    VAR cMyCollation                             // collation of the SQL Server strings & memos  to be translated
 
-   METHOD New( aRow, aFStruct, cTableName, cCollation )     // Create a new Row object
+METHOD New( aRow, aFStruct, cTableName, cCollation )     // Create a new Row object
 
-   METHOD FieldGet( cnField )                   // Same as clipper ones, but FieldGet() and FieldPut() accept a string as
-   METHOD FieldPut( cnField, Value )            // field identifier, not only a number
-   METHOD FieldName( nNum )
-   METHOD FieldPos( cFieldName )
+METHOD FieldGet( cnField )                   // Same as clipper ones, but FieldGet() and FieldPut() accept a string as
 
-   METHOD FieldLen( nNum )                      // Length of field N
-   METHOD FieldDec( nNum, lFormat )             // How many decimals in field N
-   METHOD FieldType( nNum )                     // Clipper type of field N
+METHOD FieldPut( cnField, Value )            // field identifier, not only a number
 
-   METHOD MakePrimaryKeyWhere()                 // returns a WHERE x=y statement which uses primary key (if available)
+METHOD FieldName( nNum )
+
+METHOD FieldPos( cFieldName )
+
+METHOD FieldLen( nNum )                      // Length of field N
+
+METHOD FieldDec( nNum, lFormat )             // How many decimals in field N
+
+METHOD FieldType( nNum )                     // Clipper type of field N
+
+METHOD MakePrimaryKeyWhere()                 // returns a WHERE x=y statement which uses primary key (if available)
 
 ENDCLASS
-
 
 METHOD New( aRow, aFStruct, cTableName, cCollation) CLASS TMySQLRow
 
@@ -105,13 +99,12 @@ METHOD New( aRow, aFStruct, cTableName, cCollation) CLASS TMySQLRow
    AFill( ::aDirty, .F. )
 
    IF VALTYPE(cCollation) == "C" .AND. ! EMPTY(cCollation)  // better check for real possible needed
-     ::cMyCollation := cCollation
+      ::cMyCollation := cCollation
    ELSE
-     ::cMyCollation := SET(_SET_CODEPAGE)
+      ::cMyCollation := SET(_SET_CODEPAGE)
    ENDIF
 
    RETURN Self
-
 
 METHOD FieldGet( cnField ) CLASS TMySQLRow
 
@@ -122,25 +115,30 @@ METHOD FieldGet( cnField ) CLASS TMySQLRow
       // Char fields are padded with spaces since a real .dbf field would be
       IF ::FieldType( nNum ) == "C"
          IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-           RETURN HB_TRANSLATE( PadR( ::aRow[ nNum ], ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] ), ::cMyCollation, SET(_SET_CODEPAGE) )
+
+            RETURN HB_TRANSLATE( PadR( ::aRow[ nNum ], ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] ), ::cMyCollation, SET(_SET_CODEPAGE) )
          ELSE
-           RETURN PadR( ::aRow[ nNum ], ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] )
+
+            RETURN PadR( ::aRow[ nNum ], ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] )
          ENDIF
       ELSEIF ::FieldType( nNum ) == "M"
          IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-           RETURN HB_TRANSLATE( ::aRow[ nNum ], ::cMyCollation, SET(_SET_CODEPAGE) )
+
+            RETURN HB_TRANSLATE( ::aRow[ nNum ], ::cMyCollation, SET(_SET_CODEPAGE) )
          ELSE
-           RETURN ::aRow[ nNum ]
+
+            RETURN ::aRow[ nNum ]
          ENDIF
       ELSEIF ::FieldType( nNum ) == "L"      // elch
+
          RETURN IF( ASC(LEFT( ::aRow[ nNum ],1)) == 0, .F., .T.)
       ELSE
+
          RETURN ::aRow[ nNum ]
       ENDIF
    ENDIF
 
    RETURN NIL
-
 
 METHOD FieldPut( cnField, Value ) CLASS TMySQLRow
 
@@ -149,8 +147,8 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLRow
    IF nNum > 0 .AND. nNum <= Len( ::aRow )
 
       IF ValType( Value ) == ValType( ::aRow[ nNum ] );
-         .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
-         .OR. ::aRow[ nNum ] == NIL
+            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
+            .OR. ::aRow[ nNum ] == NIL
 
          // if it is a char field remove trailing spaces
          IF VALTYPE(Value) == "C"
@@ -179,29 +177,29 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLRow
 
    RETURN NIL
 
+   // Given a field name returns it's position
 
-// Given a field name returns it's position
 METHOD FieldPos( cFieldName ) CLASS TMySQLRow
 
    LOCAL cUpperName := Upper( cFieldName )
 
    RETURN AScan( ::aFieldStruct, {| aItem | Upper( aItem[ MYSQL_FS_NAME ] ) == cUpperName } )
 
+   // Returns name of field N
 
-// Returns name of field N
 METHOD FieldName( nNum ) CLASS TMySQLRow
 
    RETURN iif( nNum >= 1 .AND. nNum <= Len( ::aFieldStruct ), ::aFieldStruct[ nNum ][ MYSQL_FS_NAME ], "" )
-
 
 METHOD FieldLen( nNum ) CLASS TMySQLRow
 
    RETURN iif( nNum >= 1 .AND. nNum <= Len( ::aFieldStruct ), ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ], 0 )
 
-/*
+   /*
    lFormat: when .T. method returns number of formatted decimal places from mysql table otherwise _SET_DECIMALS.
    lFormat is usefull for copying table structure from mysql to dbf
-*/
+   */
+
 METHOD FieldDec( nNum, lFormat ) CLASS TMySQLRow
 
    hb_default( @lFormat, .F. )
@@ -209,15 +207,16 @@ METHOD FieldDec( nNum, lFormat ) CLASS TMySQLRow
    IF nNum >= 1 .AND. nNum <= Len( ::aFieldStruct )
 
       IF ! lFormat .AND. ( ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_FLOAT .OR. ;
-                           ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_DOUBLE )
+            ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_DOUBLE )
+
          RETURN Set( _SET_DECIMALS )
       ELSE
+
          RETURN ::aFieldStruct[ nNum ][ MYSQL_FS_DECIMALS ]
       ENDIF
    ENDIF
 
    RETURN 0
-
 
 METHOD FieldType( nNum ) CLASS TMySQLRow
 
@@ -232,21 +231,26 @@ METHOD FieldType( nNum ) CLASS TMySQLRow
       CASE MYSQL_TYPE_DOUBLE
       CASE MYSQL_TYPE_NEWDECIMAL
       CASE MYSQL_TYPE_INT24
+
          RETURN "N"
 
       CASE MYSQL_TYPE_VAR_STRING
       CASE MYSQL_TYPE_STRING
       CASE MYSQL_TYPE_DATETIME
+
          RETURN "C"
 
       CASE MYSQL_TYPE_DATE
+
          RETURN "D"
 
       CASE MYSQL_TYPE_BLOB
       CASE MYSQL_TYPE_MEDIUM_BLOB  // 2^24 not to big for 64k ?
+
          RETURN "M"
 
       CASE MYSQL_TYPE_BIT  //elch
+
          RETURN "L"
 
       ENDSWITCH
@@ -254,8 +258,8 @@ METHOD FieldType( nNum ) CLASS TMySQLRow
 
    RETURN "U"
 
+   // returns a WHERE x=y statement which uses primary key (if available)
 
-// returns a WHERE x=y statement which uses primary key (if available)
 METHOD MakePrimaryKeyWhere() CLASS TMySQLRow
 
    LOCAL ni, cWhere := ""
@@ -264,7 +268,7 @@ METHOD MakePrimaryKeyWhere() CLASS TMySQLRow
 
       // search for fields part of a primary key
       IF hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], PRI_KEY_FLAG ) == PRI_KEY_FLAG .OR. ;
-         hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], MULTIPLE_KEY_FLAG ) == MULTIPLE_KEY_FLAG
+            hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], MULTIPLE_KEY_FLAG ) == MULTIPLE_KEY_FLAG
 
          IF ! Empty( cWhere )
             cWhere += " AND "
@@ -288,9 +292,10 @@ METHOD MakePrimaryKeyWhere() CLASS TMySQLRow
 
    RETURN cWhere
 
-/* -------------------------------------------------------- */
+   /* -------------------------------------------------------- */
 
-// Every single query submitted to MySQL server
+   // Every single query submitted to MySQL server
+
 CREATE CLASS TMySQLQuery
 
    VAR nSocket                          // connection handle to MySQL server
@@ -305,8 +310,8 @@ CREATE CLASS TMySQLQuery
    VAR lEof
 
    VAR lFieldAsData                     // Use fields as object DATA. For compatibility
-                                        // Names of fields can match name of TMySQLQuery/Table DATAs,
-                                        // and it is dangerous. ::lFieldAsData:=.F. can fix it
+   // Names of fields can match name of TMySQLQuery/Table DATAs,
+   // and it is dangerous. ::lFieldAsData:=.F. can fix it
    VAR aRow                             // Values of fields of current row
 
    VAR nNumFields                       // how many fields per row
@@ -316,38 +321,51 @@ CREATE CLASS TMySQLQuery
 
    VAR cMyCollation                     // collation of the SQL Query strings & memos to be translated
 
-   METHOD New( nSocket, cQuery, cCollation )        // New query object
-   METHOD Destroy()
-   METHOD End() INLINE ::Destroy()
-   METHOD Refresh()                     // ReExecutes the query (cQuery) so that changes to table are visible
+METHOD New( nSocket, cQuery, cCollation )        // New query object
 
-   METHOD GetRow( nRow )                // return Row n of answer
+METHOD Destroy()
 
-   METHOD Skip( nRows )                 // Same as clipper ones
+METHOD End() INLINE ::Destroy()
 
-   METHOD Bof() INLINE ::lBof
-   METHOD Eof() INLINE ::lEof
-   METHOD RecNo() INLINE ::nCurRow
-   METHOD LastRec() INLINE ::nNumRows
-   METHOD GoTop() INLINE ::GetRow( 1 )
-   METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
-   METHOD GoTO( nRow ) INLINE ::GetRow( nRow )
+METHOD Refresh()                     // ReExecutes the query (cQuery) so that changes to table are visible
 
-   METHOD FCount()
+METHOD GetRow( nRow )                // return Row n of answer
 
-   METHOD NetErr() INLINE ::lError      // Returns .T. if something went wrong
-   METHOD Error()                       // Returns textual description of last error and clears ::lError
+METHOD Skip( nRows )                 // Same as clipper ones
 
-   METHOD FieldName( nNum )
-   METHOD FieldPos( cFieldName )
-   METHOD FieldGet( cnField )
+METHOD Bof() INLINE ::lBof
 
-   METHOD FieldLen( nNum )              // Length of field N
-   METHOD FieldDec( nNum, lFormat )     // How many decimals in field N
-   METHOD FieldType( nNum )             // Clipper type of field N
+METHOD Eof() INLINE ::lEof
+
+METHOD RecNo() INLINE ::nCurRow
+
+METHOD LastRec() INLINE ::nNumRows
+
+METHOD GoTop() INLINE ::GetRow( 1 )
+
+METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
+
+METHOD GoTO( nRow ) INLINE ::GetRow( nRow )
+
+METHOD FCount()
+
+METHOD NetErr() INLINE ::lError      // Returns .T. if something went wrong
+
+METHOD Error()                       // Returns textual description of last error and clears ::lError
+
+METHOD FieldName( nNum )
+
+METHOD FieldPos( cFieldName )
+
+METHOD FieldGet( cnField )
+
+METHOD FieldLen( nNum )              // Length of field N
+
+METHOD FieldDec( nNum, lFormat )     // How many decimals in field N
+
+METHOD FieldType( nNum )             // Clipper type of field N
 
 ENDCLASS
-
 
 METHOD New( nSocket, cQuery, cCollation ) CLASS TMySQLQuery
 
@@ -403,7 +421,6 @@ METHOD New( nSocket, cQuery, cCollation ) CLASS TMySQLQuery
 
    RETURN Self
 
-
 METHOD Refresh() CLASS TMySQLQuery
 
    // free present result handle
@@ -428,18 +445,17 @@ METHOD Refresh() CLASS TMySQLQuery
       ::getRow( ::nCurRow )
 
    ELSE
-#if 0
+      #if 0
       ::aFieldStruct := {}
       ::nResultHandle := NIL
       ::nNumFields := 0
       ::nNumRows := 0
-#endif
+      #endif
       ::lError := .T.
 
    ENDIF
 
    RETURN ! ::lError
-
 
 METHOD Skip( nRows ) CLASS TMySQLQuery
 
@@ -482,7 +498,8 @@ METHOD Skip( nRows ) CLASS TMySQLQuery
 
    RETURN NIL
 
-// Get row n of a query and return it as a TMySQLRow object
+   // Get row n of a query and return it as a TMySQLRow object
+
 METHOD GetRow( nRow ) CLASS TMySQLQuery
 
    LOCAL oRow := NIL
@@ -593,19 +610,17 @@ METHOD GetRow( nRow ) CLASS TMySQLQuery
 
    RETURN iif( ::aRow == NIL, NIL, oRow )
 
+   // Free result handle and associated resources
 
-// Free result handle and associated resources
 METHOD Destroy() CLASS TMySQLQuery
 
    ::nResultHandle := NIL
 
    RETURN Self
 
-
 METHOD FCount() CLASS TMySQLQuery
 
    RETURN ::nNumFields
-
 
 METHOD Error() CLASS TMySQLQuery
 
@@ -613,7 +628,8 @@ METHOD Error() CLASS TMySQLQuery
 
    RETURN mysql_error( ::nSocket )
 
-// Given a field name returns it's position
+   // Given a field name returns it's position
+
 METHOD FieldPos( cFieldName ) CLASS TMySQLQuery
 
    LOCAL cUpperName, nPos
@@ -622,7 +638,7 @@ METHOD FieldPos( cFieldName ) CLASS TMySQLQuery
 
    nPos := AScan( ::aFieldStruct, {| aItem | Upper( aItem[ MYSQL_FS_NAME ] ) == cUpperName } )
 
-#if 0
+   #if 0
    nPos := 0
    DO WHILE ++nPos <= Len( ::aFieldStruct )
       IF Upper( ::aFieldStruct[ nPos ][ MYSQL_FS_NAME ] ) == cUpperName
@@ -634,15 +650,16 @@ METHOD FieldPos( cFieldName ) CLASS TMySQLQuery
    IF nPos > Len( ::aFieldStruct )
       nPos := 0
    ENDIF
-#endif
+   #endif
 
    RETURN nPos
 
+   // Returns name of field N
 
-// Returns name of field N
 METHOD FieldName( nNum ) CLASS TMySQLQuery
 
    IF nNum >= 1 .AND. nNum <= Len( ::aFieldStruct )
+
       RETURN ::aFieldStruct[ nNum ][ MYSQL_FS_NAME ]
    ENDIF
 
@@ -664,52 +681,58 @@ METHOD FieldGet( cnField ) CLASS TMySQLQuery
       // Char fields are padded with spaces since a real .dbf field would be
       IF ::FieldType( nNum ) == "C"
          IF ! ::cMyCollation == SET(_SET_CODEPAGE)
+
             RETURN HB_TRANSLATE( PadR( Value,::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] ), ::cMyCollation, SET(_SET_CODEPAGE) )
          ELSE
+
             RETURN PadR( Value,::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ] )
          ENDIF
       ELSEIF ::FieldType( nNum ) == "M"
          IF ! ::cMyCollation == SET(_SET_CODEPAGE)
+
             RETURN HB_TRANSLATE( Value, ::cMyCollation, SET(_SET_CODEPAGE) )
          ELSE
+
             RETURN Value
          ENDIF
       ELSE
+
          RETURN Value
       ENDIF
    ENDIF
 
    RETURN NIL
 
-
 METHOD FieldLen( nNum ) CLASS TMySQLQuery
 
    IF nNum >= 1 .AND. nNum <= Len( ::aFieldStruct )
+
       RETURN ::aFieldStruct[ nNum ][ MYSQL_FS_LENGTH ]
    ENDIF
 
    RETURN 0
 
-
-/*
+   /*
    lFormat: when .T. method returns number of formatted decimal places from mysql table otherwise _SET_DECIMALS.
    lFormat is usefull for copying table structure from mysql to dbf
-*/
+   */
+
 METHOD FieldDec( nNum, lFormat ) CLASS TMySQLQuery
 
    hb_default( @lFormat, .F. )
 
    IF nNum >= 1 .AND. nNum <= Len( ::aFieldStruct )
       IF ! lFormat .AND. ( ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_FLOAT .OR. ;
-                           ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_DOUBLE )
+            ::aFieldStruct[ nNum ][ MYSQL_FS_TYPE ] == MYSQL_TYPE_DOUBLE )
+
          RETURN Set( _SET_DECIMALS )
       ELSE
+
          RETURN ::aFieldStruct[ nNum ][ MYSQL_FS_DECIMALS ]
       ENDIF
    ENDIF
 
    RETURN 0
-
 
 METHOD FieldType( nNum ) CLASS TMySQLQuery
 
@@ -724,21 +747,26 @@ METHOD FieldType( nNum ) CLASS TMySQLQuery
       CASE MYSQL_TYPE_DOUBLE
       CASE MYSQL_TYPE_NEWDECIMAL
       CASE MYSQL_TYPE_INT24
+
          RETURN "N"
 
       CASE MYSQL_TYPE_VAR_STRING
       CASE MYSQL_TYPE_STRING
       CASE MYSQL_TYPE_DATETIME
+
          RETURN "C"
 
       CASE MYSQL_TYPE_DATE
+
          RETURN "D"
 
       CASE MYSQL_TYPE_BLOB
       CASE MYSQL_TYPE_MEDIUM_BLOB  //2^24 not to big for 64k ?
+
          RETURN "M"
 
       CASE MYSQL_TYPE_BIT  //elch
+
          RETURN "L"
 
       ENDSWITCH
@@ -746,39 +774,50 @@ METHOD FieldType( nNum ) CLASS TMySQLQuery
 
    RETURN "U"
 
-/* -------------------------------------------------------- */
+   /* -------------------------------------------------------- */
 
-// A Table is a query without joins; this way I can Insert() e Delete() rows.
-// NOTE: it's always a SELECT result, so it will contain a full table only if
-//       SELECT * FROM ... was issued
+   // A Table is a query without joins; this way I can Insert() e Delete() rows.
+   // NOTE: it's always a SELECT result, so it will contain a full table only if
+   //       SELECT * FROM ... was issued
+
 CREATE CLASS TMySQLTable FROM TMySQLQuery
 
    VAR cTable                                       // name of table
    VAR aOldValue                                    //  keeps a copy of old value
 
-   METHOD New( nSocket, cQuery, cTableName, cCollation )
-   METHOD GetRow( nRow )
-   METHOD Skip( nRow )
-   METHOD GoTop() INLINE ::GetRow( 1 )
-   METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
-   METHOD GoTo( nRow ) INLINE ::GetRow( nRow )
+METHOD New( nSocket, cQuery, cTableName, cCollation )
 
-   METHOD Update( oRow, lOldRecord, lRefresh )      // Gets an oRow and updates changed fields
+METHOD GetRow( nRow )
 
-   METHOD Save() INLINE ::Update()
+METHOD Skip( nRow )
 
-   METHOD Delete( oRow, lOldRecord, lRefresh )      // Deletes passed row from table
-   METHOD Append( oRow, lRefresh )                  // Inserts passed row into table
-   METHOD GetBlankRow( lSetValues )                 // Returns an empty row with all available fields empty
-   METHOD SetBlankRow() INLINE ::GetBlankRow( .T. ) // Compatibility
+METHOD GoTop() INLINE ::GetRow( 1 )
 
-   METHOD Blank() INLINE ::GetBlankRow()
-   METHOD FieldPut( cnField, Value )                // field identifier, not only a number
-   METHOD Refresh()
-   METHOD MakePrimaryKeyWhere()                     // returns a WHERE x=y statement which uses primary key (if available)
+METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
+
+METHOD GoTo( nRow ) INLINE ::GetRow( nRow )
+
+METHOD Update( oRow, lOldRecord, lRefresh )      // Gets an oRow and updates changed fields
+
+METHOD Save() INLINE ::Update()
+
+METHOD Delete( oRow, lOldRecord, lRefresh )      // Deletes passed row from table
+
+METHOD Append( oRow, lRefresh )                  // Inserts passed row into table
+
+METHOD GetBlankRow( lSetValues )                 // Returns an empty row with all available fields empty
+
+METHOD SetBlankRow() INLINE ::GetBlankRow( .T. ) // Compatibility
+
+METHOD Blank() INLINE ::GetBlankRow()
+
+METHOD FieldPut( cnField, Value )                // field identifier, not only a number
+
+METHOD Refresh()
+
+METHOD MakePrimaryKeyWhere()                     // returns a WHERE x=y statement which uses primary key (if available)
 
 ENDCLASS
-
 
 METHOD New( nSocket, cQuery, cTableName, cCollation ) CLASS TMySQLTable
 
@@ -794,7 +833,6 @@ METHOD New( nSocket, cQuery, cTableName, cCollation ) CLASS TMySQLTable
    NEXT
 
    RETURN Self
-
 
 METHOD GetRow( nRow ) CLASS TMySQLTable
 
@@ -812,7 +850,6 @@ METHOD GetRow( nRow ) CLASS TMySQLTable
 
    RETURN oRow
 
-
 METHOD Skip( nRow ) CLASS TMySQLTable
 
    LOCAL i
@@ -825,8 +862,8 @@ METHOD Skip( nRow ) CLASS TMySQLTable
 
    RETURN NIL
 
+   /* Creates an update query for changed fields and submits it to server */
 
-/* Creates an update query for changed fields and submits it to server */
 METHOD Update( oRow, lOldRecord, lRefresh ) CLASS TMySQLTable
 
    LOCAL cUpdateQuery := "UPDATE " + ::cTable + " SET "
@@ -850,6 +887,7 @@ METHOD Update( oRow, lOldRecord, lRefresh ) CLASS TMySQLTable
 
       // no Change
       IF Right( cUpdateQuery, 4 ) == "SET "
+
          RETURN ! ::lError
       ENDIF
 
@@ -940,7 +978,6 @@ METHOD Update( oRow, lOldRecord, lRefresh ) CLASS TMySQLTable
 
    RETURN ! ::lError
 
-
 METHOD Delete( oRow, lOldRecord, lRefresh ) CLASS TMySQLTable
 
    LOCAL cDeleteQuery := "DELETE FROM " + ::cTable, i
@@ -1028,8 +1065,8 @@ METHOD Delete( oRow, lOldRecord, lRefresh ) CLASS TMySQLTable
 
    RETURN ! ::lError
 
+   // Adds a row with values passed into oRow
 
-// Adds a row with values passed into oRow
 METHOD Append( oRow, lRefresh ) CLASS TMySQLTable
 
    LOCAL cInsertQuery := "INSERT INTO " + ::cTable + " ("
@@ -1068,12 +1105,12 @@ METHOD Append( oRow, lRefresh ) CLASS TMySQLTable
          IF lRefresh
             ::refresh()
          ELSE
-#if 0
+            #if 0
             /* was same values from FieldGet( i ) ! */
             FOR i := 1 TO ::nNumFields
-                ::aOldValue[ i ] := ::FieldGet( i )
+               ::aOldValue[ i ] := ::FieldGet( i )
             NEXT
-#endif
+            #endif
          ENDIF
 
          RETURN .T.
@@ -1131,7 +1168,6 @@ METHOD Append( oRow, lRefresh ) CLASS TMySQLTable
 
    RETURN .F.
 
-
 METHOD GetBlankRow( lSetValues ) CLASS TMySQLTable
 
    LOCAL i
@@ -1188,7 +1224,6 @@ METHOD GetBlankRow( lSetValues ) CLASS TMySQLTable
 
    RETURN TMySQLRow():New( aRow, ::aFieldStruct, ::cTable, ::cMyCollation )
 
-
 METHOD FieldPut( cnField, Value ) CLASS TMySQLTable
 
    LOCAL nNum
@@ -1202,20 +1237,20 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLTable
    IF nNum > 0 .AND. nNum <= ::nNumFields
 
       IF ValType( Value ) == ValType( ::aRow[ nNum ] );
-         .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
-         .OR. ::aRow[ nNum ] == NIL
+            .OR. (ValType( Value ) + ValType( ::aRow[ nNum ] ))$"CMC";
+            .OR. ::aRow[ nNum ] == NIL
 
          // if it is a char field remove trailing spaces
          IF ValType(Value) == "C"
             IF ! ::cMyCollation == SET(_SET_CODEPAGE)
                Value := HB_TRANSLATE( RTrim( Value ), SET(_SET_CODEPAGE), ::cMyCollation )
             ELSE
-              Value := RTrim( Value )
+               Value := RTrim( Value )
             ENDIF
          ELSEIF ValType(Value) == "M"
-           IF ! ::cMyCollation == SET(_SET_CODEPAGE)
-              Value := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
-           ENDIF
+            IF ! ::cMyCollation == SET(_SET_CODEPAGE)
+               Value := HB_TRANSLATE( Value, SET(_SET_CODEPAGE), ::cMyCollation )
+            ENDIF
          ENDIF
 
          ::aRow[ nNum ] := Value
@@ -1228,7 +1263,6 @@ METHOD FieldPut( cnField, Value ) CLASS TMySQLTable
    ENDIF
 
    RETURN NIL
-
 
 METHOD Refresh() CLASS TMySQLTABLE
 
@@ -1254,21 +1288,21 @@ METHOD Refresh() CLASS TMySQLTABLE
       ::getRow( ::nCurRow )
 
    ELSE
-#if 0
+      #if 0
       ::aFieldStruct := {}
       ::nResultHandle := NIL
       ::nNumFields := 0
       ::nNumRows := 0
 
       ::aOldValue := {}
-#endif
+      #endif
       ::lError := .T.
    ENDIF
 
    RETURN ! ::lError
 
+   // returns a WHERE x=y statement which uses primary key (if available)
 
-// returns a WHERE x=y statement which uses primary key (if available)
 METHOD MakePrimaryKeyWhere() CLASS TMySQLTable
 
    LOCAL ni, cWhere := ""
@@ -1277,7 +1311,7 @@ METHOD MakePrimaryKeyWhere() CLASS TMySQLTable
 
       // search for fields part of a primary key
       IF hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], PRI_KEY_FLAG ) == PRI_KEY_FLAG .OR. ;
-         hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], MULTIPLE_KEY_FLAG ) == MULTIPLE_KEY_FLAG
+            hb_bitAnd( ::aFieldStruct[ nI ][ MYSQL_FS_FLAGS ], MULTIPLE_KEY_FLAG ) == MULTIPLE_KEY_FLAG
 
          IF ! Empty( cWhere )
             cWhere += " AND "
@@ -1293,9 +1327,10 @@ METHOD MakePrimaryKeyWhere() CLASS TMySQLTable
 
    RETURN cWhere
 
-/* -------------------------------------------------------- */
+   /* -------------------------------------------------------- */
 
-// Every available MySQL server
+   // Every available MySQL server
+
 CREATE CLASS TMySQLServer
 
    VAR nSocket                                             // connection handle to server (currently pointer to a MYSQL structure)
@@ -1308,33 +1343,43 @@ CREATE CLASS TMySQLServer
    VAR cCreateQuery
    VAR cMyCollation                                        // collation of the SQL Server strings & memos  to be translated
 
-   METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation )  // Opens connection to a server, returns a server object
-   METHOD Destroy()                                        // Closes connection to server
+METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation )  // Opens connection to a server, returns a server object
 
-   METHOD SelectDB( cDBName )                              // Which data base I will use for subsequent queries
+METHOD Destroy()                                        // Closes connection to server
 
-   METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) // Create new table using the same syntax of dbCreate()
-   METHOD DeleteTable( cTable )                            // delete table
-   METHOD TableStruct( cTable )                            // returns a structure array compatible with clipper's dbStruct() ones
-   METHOD CreateIndex( cName, cTable, aFNames, lUnique )   // Create an index (unique) on field name(s) passed as an array of strings aFNames
-   METHOD DeleteIndex( cName, cTable )                     // Delete index cName from cTable
+METHOD SelectDB( cDBName )                              // Which data base I will use for subsequent queries
 
-   METHOD ListDBs()                                        // returns an array with list of data bases available
-   METHOD ListTables()                                     // returns an array with list of available tables in current database
+METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) // Create new table using the same syntax of dbCreate()
 
-   METHOD Query( cQuery )                                  // Gets a textual query and returns a TMySQLQuery or TMySQLTable object
+METHOD DeleteTable( cTable )                            // delete table
 
-   METHOD NetErr() INLINE ::lError                         // Returns .T. if something went wrong
-   METHOD Error()                                          // Returns textual description of last error
-   METHOD CreateDatabase( cDataBase )                      // Create an New Mysql Database
-   METHOD DeleteDatabase( cDataBase )                      // Delete database
+METHOD TableStruct( cTable )                            // returns a structure array compatible with clipper's dbStruct() ones
 
-   METHOD sql_Commit()                                     // Commits transaction [mitja]
-   METHOD sql_Rollback()                                   // Rollbacks transaction [mitja]
-   METHOD sql_Version()                                    // server version as numeric [mitja]
+METHOD CreateIndex( cName, cTable, aFNames, lUnique )   // Create an index (unique) on field name(s) passed as an array of strings aFNames
+
+METHOD DeleteIndex( cName, cTable )                     // Delete index cName from cTable
+
+METHOD ListDBs()                                        // returns an array with list of data bases available
+
+METHOD ListTables()                                     // returns an array with list of available tables in current database
+
+METHOD Query( cQuery )                                  // Gets a textual query and returns a TMySQLQuery or TMySQLTable object
+
+METHOD NetErr() INLINE ::lError                         // Returns .T. if something went wrong
+
+METHOD Error()                                          // Returns textual description of last error
+
+METHOD CreateDatabase( cDataBase )                      // Create an New Mysql Database
+
+METHOD DeleteDatabase( cDataBase )                      // Delete database
+
+METHOD sql_Commit()                                     // Commits transaction [mitja]
+
+METHOD sql_Rollback()                                   // Rollbacks transaction [mitja]
+
+METHOD sql_Version()                                    // server version as numeric [mitja]
 
 ENDCLASS
-
 
 METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation ) CLASS TMySQLServer
 
@@ -1346,9 +1391,9 @@ METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation ) CLASS TMySQLS
    ::lError := .F.
 
    IF VALTYPE(cCollation) == "C" .AND. ! EMPTY(cCollation)  // better check for real possible needed
-     ::cMyCollation := cCollation
+      ::cMyCollation := cCollation
    ELSE
-     ::cMyCollation := SET(_SET_CODEPAGE)
+      ::cMyCollation := SET(_SET_CODEPAGE)
    ENDIF
 
    IF Empty( ::nSocket )
@@ -1364,14 +1409,16 @@ METHOD Destroy() CLASS TMySQLServer
    RETURN Self
 
 METHOD sql_commit() CLASS TMySQLServer
+
    RETURN mysql_commit( ::nSocket ) == 0
 
 METHOD sql_rollback() CLASS TMySQLServer
+
    RETURN mysql_rollback( ::nSocket ) == 0
 
 METHOD sql_version() CLASS TMySQLServer
-   RETURN mysql_get_server_version( ::nSocket )
 
+   RETURN mysql_get_server_version( ::nSocket )
 
 METHOD SelectDB( cDBName ) CLASS TMySQLServer
 
@@ -1383,26 +1430,27 @@ METHOD SelectDB( cDBName ) CLASS TMySQLServer
    ELSE                                       /* table exists */
       ::cDBName := cDBName
       ::lError := .F.
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD CreateDatabase( cDataBase ) CLASS TMySQLServer
 
    LOCAL cCreateQuery := "CREATE DATABASE " + Lower( cDatabase )
 
    IF mysql_query( ::nSocket, cCreateQuery ) == 0
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
 
+   // NOTE: OS/2 port of MySQL is picky about table names, that is if you create a table with
+   // an upper case name you cannot alter it (for example) using a lower case name, this violates
+   // OS/2 case insensibility about names
 
-// NOTE: OS/2 port of MySQL is picky about table names, that is if you create a table with
-// an upper case name you cannot alter it (for example) using a lower case name, this violates
-// OS/2 case insensibility about names
 METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) CLASS TMySQLServer
 
    /* NOTE: all table names are created with lower case */
@@ -1426,13 +1474,13 @@ METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) CLASS TMyS
          EXIT
 
       CASE "N"
-#if 0
+         #if 0
          IF aStruct[ i ][ DBS_DEC ] == 0
             ::cCreateQuery += qText( aStruct[ i ][ DBS_NAME ] ) + " int(" + hb_ntos( aStruct[ i ][ DBS_LEN ] ) + ")" + Eval( cNN, aStruct[ i ] ) + iif( aStruct[ i ][ DBS_NAME ] == cPrimaryKey, " NOT NULL ", "" ) + iif( aStruct[ i ][ DBS_NAME ] == cAuto, " auto_increment ", "" ) + ","
          ELSE
             ::cCreateQuery += qText( aStruct[ i ][ DBS_NAME ] ) + " real(" + hb_ntos( aStruct[ i ][ DBS_LEN ] ) + "," + hb_ntos( aStruct[ i ][ DBS_DEC ] ) + ")" + Eval( cNN, aStruct[ i ] ) + ","
          ENDIF
-#endif
+         #endif
          IF aStruct[ i ][ DBS_DEC ] == 0 .AND. aStruct[ i ][ DBS_LEN ] <= 18
             DO CASE
             CASE aStruct[ i ][ DBS_LEN ] <= 2
@@ -1484,13 +1532,13 @@ METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) CLASS TMyS
    // remove last comma from list
    ::cCreateQuery := Left( ::cCreateQuery, Len( ::cCreateQuery ) - 1 ) + ");"
    IF mysql_query( ::nSocket, ::cCreateQuery ) == 0
+
       RETURN .T.
    ELSE
       ::lError := .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD CreateIndex( cName, cTable, aFNames, lUnique ) CLASS TMySQLServer
 
@@ -1515,44 +1563,44 @@ METHOD CreateIndex( cName, cTable, aFNames, lUnique ) CLASS TMySQLServer
    cCreateQuery := Left( cCreateQuery, Len( cCreateQuery ) - 1 ) + ")"
 
    IF mysql_query( ::nSocket, cCreateQuery ) == 0
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD DeleteIndex( cName, cTable ) CLASS TMySQLServer
 
    LOCAL cDropQuery := "DROP INDEX " + cName + " FROM " + Lower( cTable )
 
    IF mysql_query( ::nSocket, cDropQuery ) == 0
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD DeleteTable( cTable ) CLASS TMySQLServer
 
    LOCAL cDropQuery := "DROP TABLE " + Lower( cTable )
 
    IF mysql_query( ::nSocket, cDropQuery ) == 0
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD DeleteDatabase( cDataBase ) CLASS TMySQLServer
 
    LOCAL cDropQuery := "DROP DATABASE " + Lower( cDataBase )
 
    IF mysql_query( ::nSocket, cDropQuery ) == 0
+
       RETURN .T.
    ENDIF
 
    RETURN .F.
-
 
 METHOD Query( cQuery ) CLASS TMySQLServer
 
@@ -1590,25 +1638,22 @@ METHOD Query( cQuery ) CLASS TMySQLServer
 
    RETURN oQuery
 
-
 METHOD Error() CLASS TMySQLServer
 
    ::lError := .F.
 
    RETURN iif( Empty( ::nSocket ), "No connection to server", mysql_error( ::nSocket ) )
 
-
 METHOD ListDBs() CLASS TMySQLServer
 
    RETURN mysql_list_dbs( ::nSocket )
-
 
 METHOD ListTables() CLASS TMySQLServer
 
    RETURN mysql_list_tables( ::nSocket )
 
+   // TOFIX: Conversion creates a .dbf with "C" fields of wrong dimension, maybe only when utf8 collation
 
-// TOFIX: Conversion creates a .dbf with "C" fields of wrong dimension, maybe only when utf8 collation
 METHOD TableStruct( cTable ) CLASS TMySQLServer
 
    LOCAL aStruct := {}
@@ -1641,7 +1686,7 @@ METHOD TableStruct( cTable ) CLASS TMySQLServer
             * TEST
             aSField[ DBS_TYPE ] := "C"
             IF ::cMyCollation == "UTF8"
-              aSField[ DBS_LEN ] := MAX(1,INT( aField[ MYSQL_FS_LENGTH ] / 3))  // to be proofed if valid
+               aSField[ DBS_LEN ] := MAX(1,INT( aField[ MYSQL_FS_LENGTH ] / 3))  // to be proofed if valid
             ENDIF
             EXIT
 
@@ -1649,10 +1694,10 @@ METHOD TableStruct( cTable ) CLASS TMySQLServer
          CASE MYSQL_TYPE_VARCHAR    // max 2^16 CHAR
          CASE MYSQL_TYPE_VAR_STRING
             IF aField[ MYSQL_FS_LENGTH ] <= 255
-              aSField[ DBS_TYPE ] := "C"
+               aSField[ DBS_TYPE ] := "C"
             ELSE
-              aSField[ DBS_TYPE ] := "M"  // no decimals as high byte
-              aSField[ DBS_LEN ] := 10
+               aSField[ DBS_TYPE ] := "M"  // no decimals as high byte
+               aSField[ DBS_LEN ] := 10
             ENDIF
             EXIT
 
@@ -1708,7 +1753,7 @@ METHOD TableStruct( cTable ) CLASS TMySQLServer
          ENDSWITCH
 
          IF aSField[ DBS_TYPE ] <> "U"
-           AAdd( aStruct, aSField )
+            AAdd( aStruct, aSField )
          ENDIF
       NEXT
 
@@ -1716,40 +1761,48 @@ METHOD TableStruct( cTable ) CLASS TMySQLServer
 
    RETURN aStruct
 
+   // Returns an SQL string with clipper value converted ie. Date() -> "'YYYY-MM-DD'"
 
-// Returns an SQL string with clipper value converted ie. Date() -> "'YYYY-MM-DD'"
 STATIC FUNCTION ClipValue2SQL( Value )
 
    SWITCH ValType( Value )
    CASE "N"
+
       RETURN hb_ntos( Value )
 
    CASE "D"
       IF Empty( Value )
+
          RETURN "''"
       ELSE
          /* MySQL dates are like YYYY-MM-DD */
+
          RETURN "'" + StrZero( Year( Value ), 4 ) + "-" + StrZero( Month( Value ), 2 ) + "-" + StrZero( Day( Value ), 2 ) + "'"
       ENDIF
 
    CASE "C"
    CASE "M"
       IF Empty( Value )
+
          RETURN "''"
       ELSE
+
          RETURN "'" + mysql_escape_string( value ) + "'"
       ENDIF
 
    CASE "L"
+
       RETURN iif( Value, "1", "0" )
 
    CASE "U"
+
       RETURN "NULL"
 
    ENDSWITCH
 
    RETURN "''"       // NOTE: Here we lose values we cannot convert
 
-
 STATIC FUNCTION qText( cText )
+
    RETURN  chr(96) + cText + chr(96)
+

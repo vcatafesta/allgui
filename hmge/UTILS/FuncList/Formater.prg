@@ -1,141 +1,133 @@
 #include "MiniGUI.ch"
 #include "Stock.ch"
 
-
 // Processing range
 
 #define FILE_CURRENT                 1             // Current file
 #define FILE_ALL                     2             // All files
 
-
-Declare window wStock
-
+DECLARE window wStock
 
 /******
-*
 *       Formater()
-*
 *       Start code formatting
-*
 */
 
-Procedure Formater
-Memvar aOptions
-Local lContinue := .F.                                                               , ;
+PROCEDURE Formater
+
+   MEMVAR aOptions
+   LOCAL lContinue := .F.                                                               , ;
       aStrings  := GetLangStrings( GET_FORMATTER_LANG, aOptions[ OPTIONS_LANGFILE ] ), ;
       nRange    := FILE_CURRENT                                                      , ;
       nCharCase := KEYWORD_CAPITALIZE
 
-Define window wReformat       ;
-       At 132, 235            ;
-       Width 280              ;
-       Height 275             ;
-       Title aStrings[ 1, 2 ] ;
-       Icon 'STOCK'           ;
-       Modal
+   DEFINE WINDOW wReformat       ;
+         At 132, 235            ;
+         Width 280              ;
+         Height 275             ;
+         Title aStrings[ 1, 2 ] ;
+         Icon 'STOCK'           ;
+         Modal
 
-   @ 5, 5 Frame frmFiles           ;
-          Caption aStrings[ 2, 2 ] ;
-          Width ( wReformat.Width - 20 ) ;
-          Height 75                ;
-          Bold                     ;
-          Fontcolor BLUE
+      @ 5, 5 Frame frmFiles           ;
+         Caption aStrings[ 2, 2 ] ;
+         Width ( wReformat.Width - 20 ) ;
+         Height 75                ;
+         Bold                     ;
+         Fontcolor BLUE
 
-   @ ( wReformat.frmFiles.Row + 15 ), ( wReformat.frmFiles.Col + 10 ) ;
-     RadioGroup rdgFiles                                              ;
-     Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                   ;
-     Value nRange                                                     ;
-     Width ( wReformat.frmFiles.Width - 20 )
+      @ ( wReformat.frmFiles.Row + 15 ), ( wReformat.frmFiles.Col + 10 ) ;
+         RadioGroup rdgFiles                                              ;
+         Options { aStrings[ 3, 2 ], aStrings[ 4, 2 ] }                   ;
+         Value nRange                                                     ;
+         Width ( wReformat.frmFiles.Width - 20 )
 
-   @ ( wReformat.frmFiles.Row + wReformat.frmFiles.Height + 5 ), wReformat.frmFiles.Col ;
-     Frame frmCase                  ;
-     Caption aStrings[ 5, 2 ]       ;
-     Width wReformat.frmFiles.Width ;
-     Height 100                     ;
-     Bold                           ;
-     Fontcolor BLUE
+      @ ( wReformat.frmFiles.Row + wReformat.frmFiles.Height + 5 ), wReformat.frmFiles.Col ;
+         Frame frmCase                  ;
+         Caption aStrings[ 5, 2 ]       ;
+         Width wReformat.frmFiles.Width ;
+         Height 100                     ;
+         Bold                           ;
+         Fontcolor BLUE
 
-   @ ( wReformat.frmCase.Row + 15 ), ( wReformat.frmCase.Col + 10 )   ;
-     RadioGroup rdgCase                                               ;
-     Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ], aStrings[ 8, 2 ] } ;
-     Width wReformat.rdgFiles.Width                                   ;
-     Value nCharCase
+      @ ( wReformat.frmCase.Row + 15 ), ( wReformat.frmCase.Col + 10 )   ;
+         RadioGroup rdgCase                                               ;
+         Options { aStrings[ 6, 2 ], aStrings[ 7, 2 ], aStrings[ 8, 2 ] } ;
+         Width wReformat.rdgFiles.Width                                   ;
+         Value nCharCase
 
-   @ ( wReformat.frmCase.Row + wReformat.frmCase.Height + 20 ), ;
-     ( wReformat.frmCase.Col + 15 )                             ;
-     Button btnGoto                                             ;
-     Caption aStrings[ 9, 2 ]                                   ;
-     Action { || lContinue := .T.                    , ;
-                 nRange := wReformat.rdgFiles.Value  , ;
-                 nCharCase := wReformat.rdgCase.Value, ;
-                 wReformat.Release                     ;
-            } 
+      @ ( wReformat.frmCase.Row + wReformat.frmCase.Height + 20 ), ;
+         ( wReformat.frmCase.Col + 15 )                             ;
+         Button btnGoto                                             ;
+         Caption aStrings[ 9, 2 ]                                   ;
+         Action { || lContinue := .T.                    , ;
+         nRange := wReformat.rdgFiles.Value  , ;
+         nCharCase := wReformat.rdgCase.Value, ;
+         wReformat.Release                     ;
+         }
 
-   @ wReformat.btnGoto.Row, ( wReformat.btnGoto.Col + wReformat.btnGoto.Width + 30 ) ;
-     Button btnCancel                                                                ;
-     Caption _HMG_MESSAGE[ 7 ]                                                       ;
-     Action wReformat.Release 
+      @ wReformat.btnGoto.Row, ( wReformat.btnGoto.Col + wReformat.btnGoto.Width + 30 ) ;
+         Button btnCancel                                                                ;
+         Caption _HMG_MESSAGE[ 7 ]                                                       ;
+         Action wReformat.Release
 
-   On key Escape of wReformat Action wReformat.Release
-   On key Alt+X  of wReformat Action ReleaseAllWindows()
-       
-End Window
+      On key Escape of wReformat Action wReformat.Release
+      On key Alt+X  of wReformat Action ReleaseAllWindows()
 
-CenterInside( 'wStock', 'wReformat' )
-Activate window wReformat
+   END WINDOW
 
-If lContinue
-   
-   // Formatting
+   CenterInside( 'wStock', 'wReformat' )
+   ACTIVATE WINDOW wReformat
 
-   Define window wConsole       ;
-        At 132, 235             ;
-        Width 380               ;
-        Height 350              ;
-        Title aStrings[ 10, 2 ] ;
-        Icon 'STOCK'            ;
-        Modal                   ;
-        On init Do_Format( nRange, nCharCase, aStrings )
+   IF lContinue
 
-     @ 5, 5 EditBox edtConsole              ;
+      // Formatting
+
+      DEFINE WINDOW wConsole       ;
+            At 132, 235             ;
+            Width 380               ;
+            Height 350              ;
+            Title aStrings[ 10, 2 ] ;
+            Icon 'STOCK'            ;
+            Modal                   ;
+            On init Do_Format( nRange, nCharCase, aStrings )
+
+         @ 5, 5 EditBox edtConsole              ;
             Height ( wConsole.Height - 90 ) ;
             Width ( wConsole.Width - 20 )   ;
-            ReadOnly
+            READOnly
 
-    @ ( wConsole.edtConsole.Row + wConsole.edtConsole.Height + 15 ), ;
-      ( wConsole.edtConsole.Col + 125 )                              ;
-      Button btnOK                                                   ;
-      Caption _HMG_MESSAGE[ 6 ]                                      ;
-      Action wConsole.Release 
-    
-     On key Alt+X  of wConsole Action ReleaseAllWindows()
+         @ ( wConsole.edtConsole.Row + wConsole.edtConsole.Height + 15 ), ;
+            ( wConsole.edtConsole.Col + 125 )                              ;
+            Button btnOK                                                   ;
+            Caption _HMG_MESSAGE[ 6 ]                                      ;
+            Action wConsole.Release
 
-   End Window
+         On key Alt+X  of wConsole Action ReleaseAllWindows()
 
-   wConsole.btnOK.Enabled := .F.
-  
-   CenterInside( 'wStock', 'wConsole' )
-   DisableCloseButton( GetFormHandle( 'wConsole' ) )
-   Activate window wConsole
-   
-Endif
+      END WINDOW
 
-Return
+      wConsole.btnOK.Enabled := .F.
 
-****** End of Formater ******
+      CenterInside( 'wStock', 'wConsole' )
+      DisableCloseButton( GetFormHandle( 'wConsole' ) )
+      ACTIVATE WINDOW wConsole
 
+   ENDIF
 
-/******
-*
-*       Do_Format( nRange, nCharCase, aLangStrings )
-*
-*       Start of processing
-*
-*/
+   RETURN
 
-Static Procedure Do_Format( nRange, nCharCase, aLangStrings )
-Memvar aOptions, aCommands, aPhrases
-Local cStartTime  := Time()                                                   , ;
+   ****** End of Formater ******
+
+   /******
+   *       Do_Format( nRange, nCharCase, aLangStrings )
+   *       Start of processing
+   */
+
+STATIC PROCEDURE Do_Format( nRange, nCharCase, aLangStrings )
+
+   MEMVAR aOptions, aCommands, aPhrases
+   LOCAL cStartTime  := Time()                                                   , ;
       cFinishTime                                                             , ;
       cDir        := ( aOptions[ OPTIONS_GETPATH ] + '\' + APPTITLE + '.SRC' ), ;
       cFileInput                                                              , ;
@@ -143,190 +135,186 @@ Local cStartTime  := Time()                                                   , 
       nCount      := wStock.grdContent.ItemCount                              , ;
       Cycle
 
-wConsole.edtConsole.SetFocus   
-wConsole.edtConsole.Value := ( aLangStrings[ 11, 2 ] + ' ' + cStartTime + CRLF )
-Do Events
+   wConsole.edtConsole.SetFocus
+   wConsole.edtConsole.Value := ( aLangStrings[ 11, 2 ] + ' ' + cStartTime + CRLF )
+   Do Events
 
-// Folder for placing processed files
+   // Folder for placing processed files
 
-If !CheckPath( cDir, .T. )
-   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + 'Error create ' + cDir )
-   wConsole.btnOK.Enabled    := .T.
-   Return   
-Endif
+   IF !CheckPath( cDir, .T. )
+      wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + 'Error create ' + cDir )
+      wConsole.btnOK.Enabled    := .T.
 
-// Load key words lists
+      RETURN
+   ENDIF
 
-Private aCommands := LoadKeywords( FILE_COMMANDS ), ;
-        aPhrases  := LoadKeywords( FILE_PHRASES  )
+   // Load key words lists
 
-wConsole.edtConsole.Value := ( wConsole.edtConsole.Value   + ;
-                               Iif( !Empty( aCommands )    , ;
-                                     aLangStrings[ 15, 2 ] , ;
-                                     aLangStrings[ 16, 2 ]   ;
-                                  )                        + ;
-                                  CRLF                       ;
-                             ) 
-Do Events
+   PRIVATE aCommands := LoadKeywords( FILE_COMMANDS ), ;
+      aPhrases  := LoadKeywords( FILE_PHRASES  )
 
-wConsole.edtConsole.Value := ( wConsole.edtConsole.Value  + ;
-                               Iif( !Empty( aPhrases )    , ;
-                                    aLangStrings[ 17, 2 ] , ;
-                                    aLangStrings[ 18, 2 ]   ;
-                                  )                       + ;
-                                  CRLF                      ;
-                             ) 
-Do Events
+   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value   + ;
+      Iif( !Empty( aCommands )    , ;
+      aLangStrings[ 15, 2 ] , ;
+      aLangStrings[ 16, 2 ]   ;
+      )                        + ;
+      CRLF                       ;
+      )
+   Do Events
 
-// Start of processing
+   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value  + ;
+      Iif( !Empty( aPhrases )    , ;
+      aLangStrings[ 17, 2 ] , ;
+      aLangStrings[ 18, 2 ]   ;
+      )                       + ;
+      CRLF                      ;
+      )
+   Do Events
 
-If ( nRange == FILE_CURRENT )   // Current file
+   // Start of processing
 
-   cFileInput := CurrFileName()
-   
-   If IsPRG( cFileInput, aLangStrings )
-   
-      cFileOutput := ( cDir + '\' + cFileInput )
-      cFileInput  := ( aOptions[ OPTIONS_GETPATH ] + '\' + cFileInput )
-      PRG_Fine( cFileInput, cFileOutput, nCharCase, aLangStrings )
-      
-   Endif
+   IF ( nRange == FILE_CURRENT )   // Current file
 
-Else
-  
-  // All files
-  
-  For Cycle := 1 to nCount
-    
-    cFileInput := RTrim( wStock.grdContent.Item( Cycle )[ 1 ] )
-    
-    If !Empty( Left( cFileInput, 1 ) )
-       
-       // Is it file?
-       
-       If IsPRG( cFileInput, aLangStrings )
+      cFileInput := CurrFileName()
+
+      IF IsPRG( cFileInput, aLangStrings )
+
          cFileOutput := ( cDir + '\' + cFileInput )
          cFileInput  := ( aOptions[ OPTIONS_GETPATH ] + '\' + cFileInput )
          PRG_Fine( cFileInput, cFileOutput, nCharCase, aLangStrings )
-       Endif
-       
-    Endif
-    
-  Next
-  
-Endif
 
-cFinishTime := Time()
-wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + ;
-                               aLangStrings[ 13, 2 ]     + ;
-                               ' '                       + ;
-                               cFinishTime + CRLF )
-wConsole.edtConsole.Value := ( wConsole.edtConsole.Value           + ;
-                               aLangStrings[ 14, 2 ]               + ;
-                               ' '                                 + ;
-                               ElapTime( cStartTime, cFinishTime ) + ;
-                               CRLF                                  ;
-                             )
-wConsole.btnOK.Enabled := .T.
-Do Events
- 
-Return
+      ENDIF
 
-****** End of Do_Format ******
+   ELSE
 
+      // All files
 
-/******
-*
-*       LoadKeywords( cFile ) --> aWords
-*
-*       Load key words list
-*
-*/
+      FOR Cycle := 1 to nCount
 
-Static Function LoadKeywords( cFile )
-Local oFile   := TFileRead() : New( cFile ), ; 
+         cFileInput := RTrim( wStock.grdContent.Item( Cycle )[ 1 ] )
+
+         IF !Empty( Left( cFileInput, 1 ) )
+
+            // Is it file?
+
+            IF IsPRG( cFileInput, aLangStrings )
+               cFileOutput := ( cDir + '\' + cFileInput )
+               cFileInput  := ( aOptions[ OPTIONS_GETPATH ] + '\' + cFileInput )
+               PRG_Fine( cFileInput, cFileOutput, nCharCase, aLangStrings )
+            ENDIF
+
+         ENDIF
+
+      NEXT
+
+   ENDIF
+
+   cFinishTime := Time()
+   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + ;
+      aLangStrings[ 13, 2 ]     + ;
+      ' '                       + ;
+      cFinishTime + CRLF )
+   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value           + ;
+      aLangStrings[ 14, 2 ]               + ;
+      ' '                                 + ;
+      ElapTime( cStartTime, cFinishTime ) + ;
+      CRLF                                  ;
+      )
+   wConsole.btnOK.Enabled := .T.
+   Do Events
+
+   RETURN
+
+   ****** End of Do_Format ******
+
+   /******
+   *       LoadKeywords( cFile ) --> aWords
+   *       Load key words list
+   */
+
+STATIC FUNCTION LoadKeywords( cFile )
+
+   LOCAL oFile   := TFileRead() : New( cFile ), ;
       aWords  := {}                        , ;
       cString                              , ;
       aTmp
 
-oFile : Open()
+   oFile : Open()
 
-If !oFile : Error()
+   IF !oFile : Error()
 
-   Do while oFile : MoreToRead()
-   
-      // Ignore empty strings and strings, starting with ';' (COMMENT_CHAR)
-      
-      If !Empty( cString := oFile : ReadLine() )
-         
-         cString := AllTrim( cString )
-         
-         aTmp := Array( KEYWORD_ALEN )
+      DO WHILE oFile : MoreToRead()
 
-         If !( Left( cString, 1 ) == COMMENT_CHAR )
-            
-            // Strings, starting with symbol '*' indicate, that necessary
-            // to use the word/phrase at substitution without the register changing
-            
-            If ( Left( cString, 1 ) == '*' )
-            
-               cString := Substr( cString, 2 )
-               
-               aTmp[ KEYWORD_LONG   ] := cString
-               aTmp[ KEYWORD_FREEZE ] := .T.
-         
-            Else
-         
-               aTmp[ KEYWORD_LONG   ] := cString
-               aTmp[ KEYWORD_FREEZE ] := .F.
+         // Ignore empty strings and strings, starting with ';' (COMMENT_CHAR)
 
-            Endif
-            
-            // If the short word (DO, for example), increase the length
-            
-            If ( Len( aTmp[ KEYWORD_LONG ] ) < MINKEYWORD_LEN )
-               aTmp[ KEYWORD_LONG ] := PadR( aTmp[ KEYWORD_LONG ], MINKEYWORD_LEN )
-            Endif
-   
-            AAdd( aWords, aTmp )
-         
-         Endif
-         
-      Endif
-      
-   Enddo
-   
-   oFile : Close()
+         IF !Empty( cString := oFile : ReadLine() )
 
-   ASort( aWords,,, { | x, y | Upper(x[ 1 ] ) < Upper( y[ 1 ] ) } )
-      
-Endif
+            cString := AllTrim( cString )
 
-Return aWords
+            aTmp := Array( KEYWORD_ALEN )
 
-****** End of LoadKeywords ******
+            IF !( Left( cString, 1 ) == COMMENT_CHAR )
 
+               // Strings, starting with symbol '*' indicate, that necessary
+               // to use the word/phrase at substitution without the register changing
 
-/******
-*
-*       IsPRG( cFile, aLangStrings ) --> lIsPRG
-*
-*       Check the file extension - processing for
-*       the .PRG files only
-*
-*/
+               IF ( Left( cString, 1 ) == '*' )
 
-Static Function IsPRG( cFile, aLangStrings )
-Local lIsPRG := ( Upper( Right( cFile, 4 ) ) == '.PRG' )
+                  cString := Substr( cString, 2 )
 
-If !lIsPRG
-   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + cFile + ' - ' + aLangStrings[ 13, 2 ] + CRLF )
-Else
-   wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + cFile )
-Endif
+                  aTmp[ KEYWORD_LONG   ] := cString
+                  aTmp[ KEYWORD_FREEZE ] := .T.
 
-Do Events
+               ELSE
 
-Return lIsPRG
+                  aTmp[ KEYWORD_LONG   ] := cString
+                  aTmp[ KEYWORD_FREEZE ] := .F.
 
-****** End of lIsPRG ******
+               ENDIF
+
+               // If the short word (DO, for example), increase the length
+
+               IF ( Len( aTmp[ KEYWORD_LONG ] ) < MINKEYWORD_LEN )
+                  aTmp[ KEYWORD_LONG ] := PadR( aTmp[ KEYWORD_LONG ], MINKEYWORD_LEN )
+               ENDIF
+
+               AAdd( aWords, aTmp )
+
+            ENDIF
+
+         ENDIF
+
+      ENDDO
+
+      oFile : Close()
+
+      ASort( aWords,,, { | x, y | Upper(x[ 1 ] ) < Upper( y[ 1 ] ) } )
+
+   ENDIF
+
+   RETURN aWords
+
+   ****** End of LoadKeywords ******
+
+   /******
+   *       IsPRG( cFile, aLangStrings ) --> lIsPRG
+   *       Check the file extension - processing for
+   *       the .PRG files only
+   */
+
+STATIC FUNCTION IsPRG( cFile, aLangStrings )
+
+   LOCAL lIsPRG := ( Upper( Right( cFile, 4 ) ) == '.PRG' )
+
+   IF !lIsPRG
+      wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + cFile + ' - ' + aLangStrings[ 13, 2 ] + CRLF )
+   ELSE
+      wConsole.edtConsole.Value := ( wConsole.edtConsole.Value + cFile )
+   ENDIF
+
+   Do Events
+
+   RETURN lIsPRG
+
+   ****** End of lIsPRG ******
+

@@ -1,14 +1,14 @@
 /*
- HMG Window Property Demo
- (c) 2016 P.Chornyj <myorg63@mail.ru>
+HMG Window Property Demo
+(c) 2016 P.Chornyj <myorg63@mail.ru>
 */
 
 #include "minigui.ch"
 
 #ifdef __XHARBOUR__
 // #error "Not xHarbour ready"
-   #xtranslate BEGIN SEQUENCE WITH { |e| Break(e) } => TRY
-   #xtranslate RECOVER USING => CATCH
+#xtranslate BEGIN SEQUENCE WITH { |e| Break(e) } => TRY
+#xtranslate RECOVER USING => CATCH
 #endif
 
 FUNCTION Main()
@@ -16,80 +16,79 @@ FUNCTION Main()
    SET DATE FORMAT TO "dd.mm.yyyy"
 
    DEFINE WINDOW Win1 ;
-      ROW 10 ;
-      COL 10 ;
-      WIDTH 340 ;
-      HEIGHT 400 ;
-      TITLE "Window Property Demo" ;
-      WINDOWTYPE MAIN ;
-      ON INIT Win1_AddProperty() ;
-      ON RELEASE Win1_RemoveProperty()
+         ROW 10 ;
+         COL 10 ;
+         WIDTH 340 ;
+         HEIGHT 400 ;
+         TITLE "Window Property Demo" ;
+         WINDOWTYPE MAIN ;
+         ON INIT Win1_AddProperty() ;
+         ON RELEASE Win1_RemoveProperty()
 
-   DEFINE LABEL Label2
-      ROW 10
-      COL 10
-      WIDTH 300
-      VALUE "See below:"
-      ALIGNMENT LEFT
-      ALIGNMENT VCENTER
-   END LABEL
+      DEFINE LABEL Label2
+         ROW 10
+         COL 10
+         WIDTH 300
+         VALUE "See below:"
+         ALIGNMENT LEFT
+         ALIGNMENT VCENTER
+      END LABEL
 
-   DEFINE LABEL Label1
-      ROW 30
-      COL 10
-      WIDTH 300
-      VALUE "Initial state of Label1"
-      BACKCOLOR { 200, 200, 200 }
-      ALIGNMENT CENTER
-      ALIGNMENT VCENTER
-   END LABEL
+      DEFINE LABEL Label1
+         ROW 30
+         COL 10
+         WIDTH 300
+         VALUE "Initial state of Label1"
+         BACKCOLOR { 200, 200, 200 }
+         ALIGNMENT CENTER
+         ALIGNMENT VCENTER
+      END LABEL
 
-   DEFINE BUTTON Button1
-      ROW 150
-      COL 40
-      WIDTH 240
-      HEIGHT 28
-      CAPTION 'Set Property "PROP_1" TO "TEST"'
-      ONCLICK Win1_AddProperty()
-   END BUTTON
+      DEFINE BUTTON Button1
+         ROW 150
+         COL 40
+         WIDTH 240
+         HEIGHT 28
+         CAPTION 'Set Property "PROP_1" TO "TEST"'
+         ONCLICK Win1_AddProperty()
+      END BUTTON
 
-   Win1.Button1.Enabled := .F.
+      Win1.Button1.Enabled := .F.
 
-   DEFINE BUTTON Button2
-      ROW 180
-      COL 40
-      WIDTH 240
-      HEIGHT 28
-      CAPTION 'Get Property "PROP_1"'
-      ONCLICK Win1_GetProperty()
-   END BUTTON
+      DEFINE BUTTON Button2
+         ROW 180
+         COL 40
+         WIDTH 240
+         HEIGHT 28
+         CAPTION 'Get Property "PROP_1"'
+         ONCLICK Win1_GetProperty()
+      END BUTTON
 
-   DEFINE BUTTON Button3
-      ROW 210
-      COL 40
-      WIDTH 240
-      HEIGHT 28
-      CAPTION 'Remove Property "PROP_1"'
-      ONCLICK ( Win1_RemoveProperty(), Win1.Button1.Enabled := .T., This.Enabled := .F. )
-   END BUTTON
+      DEFINE BUTTON Button3
+         ROW 210
+         COL 40
+         WIDTH 240
+         HEIGHT 28
+         CAPTION 'Remove Property "PROP_1"'
+         ONCLICK ( Win1_RemoveProperty(), Win1.Button1.Enabled := .T., This.Enabled := .F. )
+      END BUTTON
 
-   DEFINE BUTTON Button4
-      ROW 240
-      COL 40
-      WIDTH 240
-      HEIGHT 28
-      CAPTION 'Count WinProps'
-      ONCLICK Win1_GetPropertyInfo()
-   END BUTTON
+      DEFINE BUTTON Button4
+         ROW 240
+         COL 40
+         WIDTH 240
+         HEIGHT 28
+         CAPTION 'Count WinProps'
+         ONCLICK Win1_GetPropertyInfo()
+      END BUTTON
 
    END WINDOW
 
    CENTER WINDOW  Win1
    ACTIVATE WINDOW Win1
 
-RETURN 0
+   RETURN 0
 
-///////////////////////////////////////////////////////////////////////////////
 PROCEDURE Win1_AddProperty()
 
    LOCAL cMsg, hHash
@@ -119,18 +118,18 @@ PROCEDURE Win1_AddProperty()
 
    MsgInfo( "Today is " + cMsg )
 
-RETURN
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////////
 PROCEDURE Win1_RemoveProperty()
-/*
- Before  a  window  is destroyed (that is, before it returns from processing
+
+   /*
+   Before  a  window  is destroyed (that is, before it returns from processing
    the  WM_NCDESTROY  message),  an application must remove all entries it has
    added to the property list.
 
    An  application  can remove only those properties it has added. It must not
    remove properties added by other applications or by the system itself.
- */
+   */
    RemoveProp( Win1.Handle, "PROP_1" )
 
    RELEASE WINDOWPROPERTY "PROP_2" OF Win1
@@ -142,28 +141,21 @@ PROCEDURE Win1_RemoveProperty()
    Win1.Button1.Enabled := .T.
    Win1.Button3.Enabled := .F.
 
-RETURN
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////////
 PROCEDURE Win1_GetProperty()
 
    LOCAL xValue, oError
 
-   *************************************
    BEGIN SEQUENCE WITH {|e| Break( e ) }
-   *************************************
       GET WINDOWPROPERTY "PROP_1" OF Win1 VALUE xValue
-   *************************************
    RECOVER USING oError
-   *************************************
       IF "PROP_1" $ oError:Description .AND. "not defined" $ oError:Description
          MsgInfo( "Be careful if using _Get/_SetWindowProp() (GET/SET WINDOWPROPERTY..)"  )
 
          xValue := GetProp( Win1.Handle, "PROP_1" )
       ENDIF
-   *************************************
    END SEQUENCE
-   *************************************
 
    IF ! HB_ISNIL( xValue )
       Win1.Label1.Value := hb_ValToStr( xValue )
@@ -171,9 +163,8 @@ PROCEDURE Win1_GetProperty()
       Win1.Label1.Value := "Undefined."
    ENDIF
 
-RETURN
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////////
 PROCEDURE Win1_GetPropertyInfo()
 
    LOCAL aProps := EnumProps( Win1.Handle ), e
@@ -188,4 +179,5 @@ PROCEDURE Win1_GetPropertyInfo()
 
    MsgInfo( cMsg  )
 
-RETURN
+   RETURN
+

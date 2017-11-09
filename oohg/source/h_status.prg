@@ -1,64 +1,52 @@
 /*
- * $Id: h_status.prg,v 1.54 2017/08/25 19:42:22 fyurisich Exp $
- */
+* $Id: h_status.prg,v 1.54 2017/08/25 19:42:22 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * Statusbar control
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* Statusbar control
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "hbclass.ch"
@@ -67,6 +55,7 @@
 STATIC _OOHG_ActiveMessageBar := Nil
 
 CLASS TMessageBar FROM TControl
+
    DATA Type        INIT "MESSAGEBAR" READONLY
    DATA aClicks     INIT Nil
    DATA aRClicks    INIT Nil
@@ -80,42 +69,61 @@ CLASS TMessageBar FROM TControl
    DATA cLedOff     INIT "zzz_led_off"
    DATA aAligns     INIT {}
 
-   METHOD Define
-   METHOD EndStatus                      BLOCK { || _EndMessageBar() }
+METHOD Define
 
-   METHOD AddItem
-   METHOD Item
-   METHOD Caption(nItem, cCaption, cAlign) BLOCK { |Self, nItem, cCaption, cAlign| ::Item( nItem, cCaption, cAlign ) }
-   METHOD ItemWidth
-   METHOD ItemCount                      BLOCK { |Self| GetItemCount( ::hWnd ) }
-   METHOD ItemToolTip
-   METHOD ItemIcon
-   METHOD ItemClick
-   METHOD ItemRClick
-   METHOD ItemDblClick
-   METHOD ItemRDblClick
-   METHOD ClientHeightUsed               BLOCK { |Self| GetWindowHeight( ::hWnd ) * IF( ::lTop, 1, -1 ) }
-   METHOD MinHeight                      SETGET
-   METHOD BackColor                      SETGET
-   METHOD ItemAlign
-   METHOD SetClock
-   METHOD SetKeybrd
-   METHOD SetDate
+METHOD EndStatus                      BLOCK { || _EndMessageBar() }
 
-   METHOD Events_Notify
-   METHOD Events_Size
-   METHOD RefreshData
+METHOD AddItem
+
+METHOD Item
+
+METHOD Caption(nItem, cCaption, cAlign) BLOCK { |Self, nItem, cCaption, cAlign| ::Item( nItem, cCaption, cAlign ) }
+
+METHOD ItemWidth
+
+METHOD ItemCount                      BLOCK { |Self| GetItemCount( ::hWnd ) }
+
+METHOD ItemToolTip
+
+METHOD ItemIcon
+
+METHOD ItemClick
+
+METHOD ItemRClick
+
+METHOD ItemDblClick
+
+METHOD ItemRDblClick
+
+METHOD ClientHeightUsed               BLOCK { |Self| GetWindowHeight( ::hWnd ) * IF( ::lTop, 1, -1 ) }
+
+METHOD MinHeight                      SETGET
+
+METHOD BackColor                      SETGET
+
+METHOD ItemAlign
+
+METHOD SetClock
+
+METHOD SetKeybrd
+
+METHOD SetDate
+
+METHOD Events_Notify
+
+METHOD Events_Size
+
+METHOD RefreshData
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, y, x, w, h, caption, ProcedureName, ;
-               fontname, nFontsize, tooltip, clock, date, kbd, nClrF, nClrB, ;
-               bold, italic, underline, strikeout, lTop, lNoAutoAdjust, ;
-               Width, icon, cstyl, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-Local ControlHandle
+      fontname, nFontsize, tooltip, clock, date, kbd, nClrF, nClrB, ;
+      bold, italic, underline, strikeout, lTop, lNoAutoAdjust, ;
+      Width, icon, cstyl, cAlign ) CLASS TMessageBar
+   LOCAL ControlHandle
 
    EMPTY( nClrF )
    EMPTY( nClrB )
@@ -147,9 +155,9 @@ Local ControlHandle
    ENDIF
 
    // Re-defines first status item
-   If ValType( Caption ) $ "CM"
+   IF ValType( Caption ) $ "CM"
       ::AddItem( Caption, Width, ProcedureName, ToolTip, icon, cstyl, cAlign )
-   Endif
+   ENDIF
 
    IF ValType( clock ) == "L" .AND. clock
       ::SetClock()
@@ -170,42 +178,41 @@ Local ControlHandle
 
    ::nWidth := GetWindowWidth( ::hWnd )
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD AddItem( Caption, Width, action, ToolTip, icon, cstyl, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-Local styl, nItem, i, nRep
+
+   LOCAL styl, nItem, i, nRep
 
    ASSIGN Width VALUE Width TYPE "N" DEFAULT 50
 
    styl := 0
-   If ValType( cStyl ) $ "CM" .AND. ! Empty( cStyl )
+   IF ValType( cStyl ) $ "CM" .AND. ! Empty( cStyl )
       cStyl := UPPER( ALLTRIM( cStyl ) )
-      If     "RAISED" = cStyl
+      IF     "RAISED" = cStyl
          styl := 1
-      ElseIf "FLAT"   = cStyl
+      ELSEIF "FLAT"   = cStyl
          styl := 2
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
    nRep := 0
-   If ValType( cAlign ) $ "CM" .AND. ! Empty( cAlign )
+   IF ValType( cAlign ) $ "CM" .AND. ! Empty( cAlign )
       cAlign := UPPER( ALLTRIM( cAlign ) )
-      If cAlign == "CENTER"
+      IF cAlign == "CENTER"
          nRep := 1
-      ElseIf cAlign == "RIGHT"
+      ELSEIF cAlign == "RIGHT"
          nRep := 2
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
-   If ! ::lAutoAdjust
+   IF ! ::lAutoAdjust
       nItem := InitItemBar( ::hWnd, Replicate( Chr( 9 ), nRep ) + Caption, 0, Width, 2, Icon, ToolTip, styl )
-   ElseIf LEN( ::aWidths ) == 0
+   ELSEIF LEN( ::aWidths ) == 0
       nItem := InitItemBar( ::hWnd, Replicate( Chr( 9 ), nRep ) + Caption, 0, Width, 0, Icon, ToolTip, styl )
-   Else
+   ELSE
       nItem := InitItemBar( ::hWnd, Replicate( Chr( 9 ), nRep ) + Caption, 0, Width, 1, Icon, ToolTip, styl )
-   EndIf
+   ENDIF
 
    ASIZE( ::aClicks, nItem )
    ::aClicks[ nItem ] := action
@@ -223,78 +230,78 @@ Local styl, nItem, i, nRep
    ::aAligns[ nItem ] := cAlign
 
    i := At( "&", Caption )
-   If i > 0 .AND. i < LEN( Caption )
+   IF i > 0 .AND. i < LEN( Caption )
       DEFINE HOTKEY 0 PARENT ( Self ) KEY "ALT+" + SubStr( Caption, i + 1, 1 ) ACTION ::DoEvent( ::aClicks[ nItem ], "CLICK" )
-   EndIf
+   ENDIF
 
-Return nItem
+   RETURN nItem
 
-*------------------------------------------------------------------------------*
 METHOD Item( nItem, uValue, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-/* If third parameter is NIL the previous alignment is used */
-Local nRep
-   If ValType( uValue ) $ "CM"
-      nRep := 0
-      If cAlign == Nil .AND. nItem >= 1 .AND. nItem <= Len( ::aAligns )
-         cAlign := ::aAligns[ nItem ]
-      EndIf
-      If ValType( cAlign ) $ "CM" .AND. ! Empty( cAlign )
-         cAlign := UPPER( ALLTRIM( cAlign ) )
-         If cAlign == "CENTER"
-            nRep := 1
-         ElseIf cAlign == "RIGHT"
-            nRep := 2
-         EndIf
-      EndIf
-      If nItem >= 1 .AND. nItem <= Len( ::aAligns )
-         ::aAligns[ nItem ] := cAlign
-      EndIf
-      SetItemBar( ::hWnd, Replicate( Chr( 9 ), nRep ) + uValue, nItem - 1 )
-   EndIf
-Return GetItemBar( ::hWnd, nItem - 1 )
 
-*------------------------------------------------------------------------------*
+   /* If third parameter is NIL the previous alignment is used */
+   LOCAL nRep
+
+   IF ValType( uValue ) $ "CM"
+      nRep := 0
+      IF cAlign == Nil .AND. nItem >= 1 .AND. nItem <= Len( ::aAligns )
+         cAlign := ::aAligns[ nItem ]
+      ENDIF
+      IF ValType( cAlign ) $ "CM" .AND. ! Empty( cAlign )
+         cAlign := UPPER( ALLTRIM( cAlign ) )
+         IF cAlign == "CENTER"
+            nRep := 1
+         ELSEIF cAlign == "RIGHT"
+            nRep := 2
+         ENDIF
+      ENDIF
+      IF nItem >= 1 .AND. nItem <= Len( ::aAligns )
+         ::aAligns[ nItem ] := cAlign
+      ENDIF
+      SetItemBar( ::hWnd, Replicate( Chr( 9 ), nRep ) + uValue, nItem - 1 )
+   ENDIF
+
+   RETURN GetItemBar( ::hWnd, nItem - 1 )
+
 METHOD ItemAlign( nItem, cAlign )
-*------------------------------------------------------------------------------*
-Local uRet
-   If ValType( cAlign ) $ "CM" .AND. nItem >= 1 .AND. nItem <= Len( ::aAligns )
+
+   LOCAL uRet
+
+   IF ValType( cAlign ) $ "CM" .AND. nItem >= 1 .AND. nItem <= Len( ::aAligns )
       ::Item( nItem, ::Item( nItem ), cAlign )
       uRet := ::aAligns[ nItem ]
-   Else
+   ELSE
       uRet := Nil
-   EndIf
-Return uRet
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN uRet
+
 METHOD ItemWidth( nItem, nWidth ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-   If ValType( nWidth ) == "N" .AND. nItem >= 2 .AND. nItem <= ::ItemCount
-      If Len( ::aWidths ) < ::ItemCount
+
+   IF ValType( nWidth ) == "N" .AND. nItem >= 2 .AND. nItem <= ::ItemCount
+      IF Len( ::aWidths ) < ::ItemCount
          ASIZE( ::aWidths, ::ItemCount )
-      EndIf
+      ENDIF
       ::aWidths[ nItem ] := nWidth
       RefreshItemBar( ::hWnd, ::aWidths, ::lAutoAdjust )
       ::aWidths[ 1 ] := GetItemWidth( ::hWnd, 1 )
-   EndIf
-Return GetItemWidth( ::hWnd, nItem )
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN GetItemWidth( ::hWnd, nItem )
+
 METHOD ItemToolTip( nItem, cValue ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    IF ValType( cValue ) $ "CM"
       SetItemToolTip( ::hWnd, cValue, nItem - 1 )
    ENDIF
-Return GetItemToolTip( ::hWnd, nItem - 1 )
 
-*------------------------------------------------------------------------------*
+   RETURN GetItemToolTip( ::hWnd, nItem - 1 )
+
 METHOD ItemIcon( nItem, cIcon ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-Return SetStatusItemIcon( ::hWnd, nItem, cIcon )
 
-*------------------------------------------------------------------------------*
+   RETURN SetStatusItemIcon( ::hWnd, nItem, cIcon )
+
 METHOD ItemClick( nItem, bAction ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    IF nItem >= 1 .AND. nItem <= LEN( ::aClicks )
       IF PCOUNT() >= 2
          IF ! HB_IsBlock( bAction )
@@ -305,11 +312,11 @@ METHOD ItemClick( nItem, bAction ) CLASS TMessageBar
          bAction := ::aClicks[ nItem ]
       ENDIF
    ENDIF
-Return bAction
 
-*------------------------------------------------------------------------------*
+   RETURN bAction
+
 METHOD ItemRClick( nItem, bAction ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    IF nItem >= 1 .AND. nItem <= LEN( ::aRClicks )
       IF PCOUNT() >= 2
          IF ! HB_IsBlock( bAction )
@@ -320,11 +327,11 @@ METHOD ItemRClick( nItem, bAction ) CLASS TMessageBar
          bAction := ::aRClicks[ nItem ]
       ENDIF
    ENDIF
-Return bAction
 
-*------------------------------------------------------------------------------*
+   RETURN bAction
+
 METHOD ItemDblClick( nItem, bAction ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    IF nItem >= 1 .AND. nItem <= LEN( ::aDblClicks )
       IF PCOUNT() >= 2
          IF ! HB_IsBlock( bAction )
@@ -335,11 +342,11 @@ METHOD ItemDblClick( nItem, bAction ) CLASS TMessageBar
          bAction := ::aDblClicks[ nItem ]
       ENDIF
    ENDIF
-Return bAction
 
-*------------------------------------------------------------------------------*
+   RETURN bAction
+
 METHOD ItemRDblClick( nItem, bAction ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    IF nItem >= 1 .AND. nItem <= LEN( ::aRDblClicks )
       IF PCOUNT() >= 2
          IF ! HB_IsBlock( bAction )
@@ -350,35 +357,37 @@ METHOD ItemRDblClick( nItem, bAction ) CLASS TMessageBar
          bAction := ::aRDblClicks[ nItem ]
       ENDIF
    ENDIF
-Return bAction
 
-*------------------------------------------------------------------------------*
+   RETURN bAction
+
 METHOD SetClock( Width, ToolTip, action, lAmPm, icon, cstyl, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-Local nrItem
 
-   If ValType( lAmPm ) != "L"
+   LOCAL nrItem
+
+   IF ValType( lAmPm ) != "L"
       lAmPm := .F.
-   EndIf
-   If ValType( Width ) != 'N'
+   ENDIF
+   IF ValType( Width ) != 'N'
       Width := If( lAmPm, 95, 70 )
-   EndIf
-   If ! ValType( ToolTip ) $ "CM"
+   ENDIF
+   IF ! ValType( ToolTip ) $ "CM"
       ToolTip := 'Clock'
-   EndIf
+   ENDIF
 
-   If ! lAmPm
+   IF ! lAmPm
       nrItem := ::AddItem( Time(), Width, action, ToolTip, icon, cstyl, cAlign )
       TTimer():Define(, Self, 1000, { || ::Item( nrItem, Time(), Nil ) } )
-   Else
+   ELSE
       nrItem := ::AddItem( TMessageBar_AmPmClock(), Width, action, ToolTip, icon, cstyl, cAlign )
       TTimer():Define(, Self, 1000, { || ::Item( nrItem, TMessageBar_AmPmClock(), Nil ) } )
-   Endif
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
 STATIC FUNCTION TMessageBar_AmPmClock()
-LOCAL cTime, nHour
+
+   LOCAL cTime, nHour
+
    cTime := TIME()
    nHour := VAL( LEFT( cTime, 2 ) )
    IF nHour > 12
@@ -390,114 +399,117 @@ LOCAL cTime, nHour
    ELSE
       cTime := cTime + " am"
    ENDIF
-Return cTime
 
-*------------------------------------------------------------------------------*
+   RETURN cTime
+
 METHOD SetKeybrd( Width, ToolTip, action, icon, cstyl, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-local nrItem1, nrItem2, nrItem3
 
-   If ValType( Width ) == 'U'
+   LOCAL nrItem1, nrItem2, nrItem3
+
+   IF ValType( Width ) == 'U'
       Width := 45
-   EndIf
-   If ValType( ToolTip ) == 'U'
+   ENDIF
+   IF ValType( ToolTip ) == 'U'
       ToolTip := ''
-   EndIf
-   If ValType( Action ) == 'U'
+   ENDIF
+   IF ValType( Action ) == 'U'
       Action := ''
-   EndIf
-   If ValType( icon ) $ "CM"
+   ENDIF
+   IF ValType( icon ) $ "CM"
       ::cLedOn := icon
-   ElseIf ValType( icon ) == "A" .AND. Len( icon ) > 0
-      If ValType( icon[ 1 ] ) $ "CM"
+   ELSEIF ValType( icon ) == "A" .AND. Len( icon ) > 0
+      IF ValType( icon[ 1 ] ) $ "CM"
          ::cLedOn := icon[ 1 ]
-      EndIf
-      If Len( icon ) > 1 .AND. ValType( icon[ 2 ] ) $ "CM"
+      ENDIF
+      IF Len( icon ) > 1 .AND. ValType( icon[ 2 ] ) $ "CM"
          ::cLedOff := icon[ 2 ]
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
    nrItem1 := ::AddItem( "Num", Max( GetTextWidth( Nil, "Num", ::FontHandle ) + 36, Width ), action, ToolTip, if( IsNumLockActive(), ::cLedOn, ::cLedOff ), cstyl, cAlign )
    nrItem2 := ::AddItem( "Caps", Max( GetTextWidth( Nil, "Caps", ::FontHandle ) + 36, Width ), action, ToolTip, if( IsCapsLockActive(), ::cLedOn, ::cLedOff ), cstyl, cAlign )
    nrItem3 := ::AddItem( "Ins", Max( GetTextWidth( Nil, "Ins", ::FontHandle ) + 36, Width ), action, ToolTip, if( IsCapsLockActive(), ::cLedOn, ::cLedOff ), cstyl, cAlign )
 
-   If Empty( Action )
+   IF Empty( Action )
       ::aClicks[ nrItem1 ] := { || KeyToggle( VK_NUMLOCK ) }
       ::aClicks[ nrItem2 ] := { || KeyToggle( VK_CAPITAL ) }
       ::aClicks[ nrItem3 ] := { || KeyToggle( VK_INSERT ) }
-   Else
+   ELSE
       ::aClicks[ nrItem1 ] := Action
       ::aClicks[ nrItem2 ] := Action
       ::aClicks[ nrItem3 ] := Action
-   EndIf
+   ENDIF
 
    TTimer():Define(, Self, 400, ;
       {|| SetStatusItemIcon( ::hWnd, nrItem1, if ( IsNumLockActive(), ::cLedOn, ::cLedOff ) ), ;
-          SetStatusItemIcon( ::hWnd, nrItem2, if ( IsCapsLockActive(), ::cLedOn, ::cLedOff ) ), ;
-          SetStatusItemIcon( ::hWnd, nrItem3, if ( IsInsertActive(), ::cLedOn, ::cLedOff ) ) } )
+      SetStatusItemIcon( ::hWnd, nrItem2, if ( IsCapsLockActive(), ::cLedOn, ::cLedOff ) ), ;
+      SetStatusItemIcon( ::hWnd, nrItem3, if ( IsInsertActive(), ::cLedOn, ::cLedOff ) ) } )
 
-Return Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 METHOD SetDate( Width, ToolTip, action, icon, cstyl, cAlign ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    ASSIGN Width VALUE Width TYPE "N" DEFAULT If( "yyyy" $ Lower( Set( _SET_DATEFORMAT ) ), 95, 75 )
-Return ::AddItem( Dtoc( Date() ), Width, action, ToolTip, icon, cstyl, cAlign )
 
-*------------------------------------------------------------------------------*
+   RETURN ::AddItem( Dtoc( Date() ), Width, action, ToolTip, icon, cstyl, cAlign )
+
 METHOD Events_Notify( wParam, lParam ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
-Local nNotify := GetNotifyCode( lParam )
-Local x, lRet
 
-   If nNotify == NM_CLICK
+   LOCAL nNotify := GetNotifyCode( lParam )
+   LOCAL x, lRet
+
+   IF nNotify == NM_CLICK
       DefWindowProc( ::hWnd, NM_CLICK, wParam, lParam )
       x := GetItemPos( lParam ) + 1
-      If x > 0 .AND. x <= Len( ::aClicks )
+      IF x > 0 .AND. x <= Len( ::aClicks )
          lRet := ::DoEventMouseCoords( ::aClicks[ x ], "CLICK" )
-         If HB_IsLogical( lRet ) .AND. lRet
+         IF HB_IsLogical( lRet ) .AND. lRet
             // supress default processing
-            Return lRet
-         EndIf
-      EndIf
-   ElseIf nNotify == NM_RCLICK
+
+            RETURN lRet
+         ENDIF
+      ENDIF
+   ELSEIF nNotify == NM_RCLICK
       DefWindowProc( ::hWnd, NM_RCLICK, wParam, lParam )
       x := GetItemPos( lParam ) + 1
-      If x > 0 .AND. x <= Len( ::aRClicks )
+      IF x > 0 .AND. x <= Len( ::aRClicks )
          lRet := ::DoEventMouseCoords( ::aRClicks[ x ], "RCLICK" )
-         If HB_IsLogical( lRet ) .AND. lRet
+         IF HB_IsLogical( lRet ) .AND. lRet
             // supress default processing
-            Return lRet
-         EndIf
-      EndIf
-   ElseIf nNotify == NM_DBLCLK
+
+            RETURN lRet
+         ENDIF
+      ENDIF
+   ELSEIF nNotify == NM_DBLCLK
       DefWindowProc( ::hWnd, NM_DBLCLK, wParam, lParam )
       x := GetItemPos( lParam ) + 1
-      If x > 0 .AND. x <= Len( ::aDblClicks )
+      IF x > 0 .AND. x <= Len( ::aDblClicks )
          lRet := ::DoEventMouseCoords( ::aDblClicks[ x ], "DBLCLICK" )
-         If HB_IsLogical( lRet ) .AND. lRet
+         IF HB_IsLogical( lRet ) .AND. lRet
             // supress default processing
-            Return lRet
-         EndIf
-      EndIf
-   ElseIf nNotify == NM_RDBLCLK
+
+            RETURN lRet
+         ENDIF
+      ENDIF
+   ELSEIF nNotify == NM_RDBLCLK
       DefWindowProc( ::hWnd, NM_RDBLCLK, wParam, lParam )
       x := GetItemPos( lParam ) + 1
-      If x > 0 .AND. x <= Len( ::aRDblClicks )
+      IF x > 0 .AND. x <= Len( ::aRDblClicks )
          lRet := ::DoEventMouseCoords( ::aRDblClicks[ x ], "RDBLCLICK" )
-         If HB_IsLogical( lRet ) .AND. lRet
+         IF HB_IsLogical( lRet ) .AND. lRet
             // supress default processing
-            Return lRet
-         EndIf
-      EndIf
-   EndIf
 
-Return ::Super:Events_Notify( wParam, lParam )
+            RETURN lRet
+         ENDIF
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN ::Super:Events_Notify( wParam, lParam )
+
 METHOD Events_Size() CLASS TMessageBar
-*------------------------------------------------------------------------------*
-LOCAL nWidth, nOldWidth
+
+   LOCAL nWidth, nOldWidth
+
    nWidth := GetWindowWidth( ::hWnd )
    IF ! ::nWidth == nWidth
       nOldWidth := ::nWidth
@@ -506,49 +518,43 @@ LOCAL nWidth, nOldWidth
    ENDIF
    ::RefreshData()
    AEVAL( ::aControls, { |o| o:Events_Size() } )
-Return ::Super:Events_Size()
 
-*------------------------------------------------------------------------------*
+   RETURN ::Super:Events_Size()
+
 METHOD RefreshData() CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    RefreshItemBar( ::hWnd, ::aWidths, ::lAutoAdjust )
    IF LEN( ::aWidths ) >= 1
       ::aWidths[ 1 ] := GetItemWidth( ::hWnd, 1 )
    ENDIF
-Return ::Super:RefreshData()
 
-*------------------------------------------------------------------------------*
+   RETURN ::Super:RefreshData()
+
 METHOD MinHeight( nWidth ) CLASS TMessageBar
-*------------------------------------------------------------------------------*
+
    SendMessage( ::hWnd, SB_SETMINHEIGHT, nWidth, 0 )
    SendMessage( ::hWnd, WM_SIZE, 0, 0 )
-Return ::ClientHeightUsed()
 
-*------------------------------------------------------------------------------*
-Function _EndMessageBar()
-*------------------------------------------------------------------------------*
+   RETURN ::ClientHeightUsed()
+
+FUNCTION _EndMessageBar()
+
    _OOHG_ActiveMessageBar := Nil
    _OOHG_DeleteFrame( "MESSAGEBAR" )
-Return Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION _SetStatusClock( nSize, cToolTip, uAction, lAmPm, icon, cstyl, cAlign )
-*------------------------------------------------------------------------------*
-Return _OOHG_ActiveMessageBar:SetClock( nSize, cToolTip, uAction, lAmPm, icon, cstyl, cAlign )
 
-*------------------------------------------------------------------------------*
+   RETURN _OOHG_ActiveMessageBar:SetClock( nSize, cToolTip, uAction, lAmPm, icon, cstyl, cAlign )
+
 FUNCTION _SetStatusKeybrd( nSize, cToolTip, uAction, icon, cstyl, cAlign )
-*------------------------------------------------------------------------------*
-Return _OOHG_ActiveMessageBar:SetKeybrd( nSize, cToolTip, uAction, icon, cstyl, cAlign )
 
-*------------------------------------------------------------------------------*
+   RETURN _OOHG_ActiveMessageBar:SetKeybrd( nSize, cToolTip, uAction, icon, cstyl, cAlign )
+
 FUNCTION _SetStatusItem( Caption, Width, action, ToolTip, icon, cstyl, cAlign )
-*------------------------------------------------------------------------------*
-Return _OOHG_ActiveMessageBar:AddItem( Caption, Width, action, ToolTip, icon, cstyl, cAlign )
 
-
-
-
+   RETURN _OOHG_ActiveMessageBar:AddItem( Caption, Width, action, ToolTip, icon, cstyl, cAlign )
 
 #pragma BEGINDUMP
 
@@ -574,6 +580,7 @@ static WNDPROC lpfnOldWndProc = 0;
 
 static LRESULT APIENTRY SubClassFunc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProc );
 }
 
@@ -625,7 +632,7 @@ HB_FUNC( INITITEMBAR )
 {
    HWND  hWndSB;
    int   cSpaceInBetween = 8;
-   int   ptArray[ NUM_OF_PARTS ];   
+   int   ptArray[ NUM_OF_PARTS ];
    int   nrOfParts = 0;
    int   n ;
    RECT  rect;
@@ -806,7 +813,6 @@ HB_FUNC_EXTERN( SETSTATUSITEMICON )
    // Unloads from memory current icon
    DestroyIcon( ( HICON ) SendMessage( hwnd, SB_GETICON, ( WPARAM ) hb_parni( 2 ) - 1, ( LPARAM ) 0 ) );
 
-   //
    GetClientRect( hwnd, &rect );
    cy = rect.bottom - rect.top-4;
    cx = cy;
@@ -855,3 +861,4 @@ HB_FUNC_STATIC( TMESSAGEBAR_BACKCOLOR )
    // Return value was set in _OOHG_DetermineColorReturn()
 }
 #pragma ENDDUMP
+

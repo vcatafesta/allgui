@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -17,38 +15,33 @@ ANNOUNCE RDDSYS
 
 #define MsgAlert( c ) MsgEXCLAMATION( c, PROGRAM, , .f. )
 
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
+PROCEDURE Main()
 
-	SET MULTIPLE OFF
+   SET MULTIPLE OFF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		ICON 'MAIN' ;
-		MAIN NOSHOW ;
-		ON INIT OpenSendTo()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         ICON 'MAIN' ;
+         MAIN NOSHOW ;
+         ON INIT OpenSendTo()
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure OpenSendTo()
-*--------------------------------------------------------*
+STATIC PROCEDURE OpenSendTo()
 
-	IF .NOT. OpenSendToFolder()
-		MsgAlert( 'Error opening "Send To" folder!' )
-	ENDIF
+   IF .NOT. OpenSendToFolder()
+      MsgAlert( 'Error opening "Send To" folder!' )
+   ENDIF
 
-	RELEASE WINDOW MAIN
+   RELEASE WINDOW MAIN
 
-Return
-
+   RETURN
 
 #pragma BEGINDUMP
 

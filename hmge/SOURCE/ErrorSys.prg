@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -52,22 +52,22 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #include "hbver.ch"
 
 #ifdef _TSBROWSE_
-  MEMVAR _TSB_aControlhWnd
+MEMVAR _TSB_aControlhWnd
+
 #endif
-*-----------------------------------------------------------------------------*
+
 PROCEDURE ErrorSys
-*-----------------------------------------------------------------------------*
+
    ErrorBlock( { | oError | DefError( oError ) } )
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    Set( _SET_HBOUTLOG, GetStartUpFolder() + "\error.log" )
    Set( _SET_HBOUTLOGINFO, MiniGUIVersion() )
-#endif
+   #endif
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION DefError( oError )
-*-----------------------------------------------------------------------------*
+
    LOCAL cText
    LOCAL HtmArch
    LOCAL HtmText
@@ -76,12 +76,14 @@ STATIC FUNCTION DefError( oError )
    // By default, division by zero results in zero
    IF oError:genCode == EG_ZERODIV .AND. ;
          oError:canSubstitute
+
       RETURN 0
    ENDIF
 
    // By default, retry on RDD lock error failure
    IF oError:genCode == EG_LOCK .AND. ;
          oError:canRetry
+
       RETURN .T.
    ENDIF
 
@@ -90,6 +92,7 @@ STATIC FUNCTION DefError( oError )
          oError:osCode == 32 .AND. ;
          oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
@@ -97,6 +100,7 @@ STATIC FUNCTION DefError( oError )
    IF oError:genCode == EG_APPENDLOCK .AND. ;
          oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
@@ -126,13 +130,12 @@ STATIC FUNCTION DefError( oError )
 
    ShowError( cText, oError )
 
-   ExitProcess()
+   EXITProcess()
 
-RETURN .F.
+   RETURN .F.
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION ErrorMessage( oError )
-*-----------------------------------------------------------------------------*
+
    // start error message
    LOCAL cMessage := iif( oError:severity > ES_WARNING, "Error", "Warning" ) + " "
 
@@ -168,19 +171,18 @@ STATIC FUNCTION ErrorMessage( oError )
       cMessage += " (DOS Error " + hb_ntos( oError:osCode ) + ")"
    ENDIF
 
-RETURN cMessage
+   RETURN cMessage
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE ShowError( cErrorMessage, oError )
-*-----------------------------------------------------------------------------*
+
    STATIC _lShowError := .T.
 
    IF _lShowError
 
       _lShowError := .F.
-#ifdef _TSBROWSE_
+      #ifdef _TSBROWSE_
       _TSB_aControlhWnd := {}
-#endif
+      #endif
       MsgStop( iif( _lShowDetailError(), cErrorMessage, ErrorMessage( oError ) ), 'Program Error', NIL, .F. )
 
       ErrorLevel( 1 )
@@ -189,17 +191,18 @@ STATIC PROCEDURE ShowError( cErrorMessage, oError )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE ErrorLog( nHandle, oErr )
-*-----------------------------------------------------------------------------*
+
    STATIC _lAddError := .T.
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    LOCAL nCount
-#else
+
+   #else
    LOCAL nScope, nCount, tmp, cName, xValue
-#endif
+
+   #endif
 
    IF _lAddError
 
@@ -219,127 +222,127 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
       Html_LineText( nHandle, "Operating system...: " + OS() )
       Html_LineText( nHandle, "MiniGUI version....: " + MiniGUIVersion() )
       Html_LineText( nHandle, "Harbour version....: " + Version() )
-#if ( __HARBOUR__ - 0 > 0x030200 )
+      #if ( __HARBOUR__ - 0 > 0x030200 )
       Html_LineText( nHandle, "Harbour built on...: " + hb_Version( HB_VERSION_BUILD_DATE_STR ) )
-#else
+      #else
       Html_LineText( nHandle, "Harbour built on...: " + hb_BuildDate() )
-#endif
+      #endif
       Html_LineText( nHandle, "C/C++ compiler.....: " + hb_Compiler() )
 
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       Html_LineText( nHandle, "Multi Threading....: " + iif( Hb_MultiThread(), "YES", "NO" ) )
       Html_LineText( nHandle, "VM Optimization....: " + strvalue( hb_VMMode() ) )
 
       IF Type( "Select()" ) == "UI" .OR. Type( "Select()" ) == "N"
          Html_LineText( nHandle, "" )
          Html_LineText( nHandle, "Current Work Area..: " + strvalue( &("Select()") ) )
-#else
-      Html_LineText( nHandle, "Multi Threading....: " + iif( hb_mtvm(), "YES", "NO" ) )
+         #else
+         Html_LineText( nHandle, "Multi Threading....: " + iif( hb_mtvm(), "YES", "NO" ) )
 
-      IF hb_IsFunction( "Select" )
+         IF hb_IsFunction( "Select" )
+            Html_LineText( nHandle, "" )
+            Html_LineText( nHandle, "Current Work Area..: " + strvalue( Eval( hb_macroBlock( "Select()" ) ) ) )
+            #endif
+         ENDIF
+
          Html_LineText( nHandle, "" )
-         Html_LineText( nHandle, "Current Work Area..: " + strvalue( Eval( hb_macroBlock( "Select()" ) ) ) )
-#endif
-      ENDIF
+         Html_LineText( nHandle, PadC( " Environmental Information ", 79, "-" ) )
+         Html_LineText( nHandle, "" )
 
-      Html_LineText( nHandle, "" )
-      Html_LineText( nHandle, PadC( " Environmental Information ", 79, "-" ) )
-      Html_LineText( nHandle, "" )
+         Html_LineText( nHandle, "SET ALTERNATE......: " + strvalue( Set( _SET_ALTERNATE ), .T. ) )
+         Html_LineText( nHandle, "SET ALTFILE........: " + strvalue( Set( _SET_ALTFILE ) ) )
+         Html_LineText( nHandle, "SET AUTOPEN........: " + strvalue( Set( _SET_AUTOPEN ), .T. ) )
+         Html_LineText( nHandle, "SET AUTORDER.......: " + strvalue( Set( _SET_AUTORDER ) ) )
+         Html_LineText( nHandle, "SET AUTOSHARE......: " + strvalue( Set( _SET_AUTOSHARE ) ) )
 
-      Html_LineText( nHandle, "SET ALTERNATE......: " + strvalue( Set( _SET_ALTERNATE ), .T. ) )
-      Html_LineText( nHandle, "SET ALTFILE........: " + strvalue( Set( _SET_ALTFILE ) ) )
-      Html_LineText( nHandle, "SET AUTOPEN........: " + strvalue( Set( _SET_AUTOPEN ), .T. ) )
-      Html_LineText( nHandle, "SET AUTORDER.......: " + strvalue( Set( _SET_AUTORDER ) ) )
-      Html_LineText( nHandle, "SET AUTOSHARE......: " + strvalue( Set( _SET_AUTOSHARE ) ) )
+         #ifdef __XHARBOUR__
+         Html_LineText( nHandle, "SET BACKGROUNDTASKS: " + strvalue( Set( _SET_BACKGROUNDTASKS ), .T. ) )
+         Html_LineText( nHandle, "SET BACKGROUNDTICK.: " + strvalue( Set( _SET_BACKGROUNDTICK ), .T. ) )
+         #endif
+         Html_LineText( nHandle, "SET CENTURY........: " + strvalue( __SetCentury(), .T. ) )
+         Html_LineText( nHandle, "SET COUNT..........: " + strvalue( Set( _SET_COUNT ) ) )
 
-#ifdef __XHARBOUR__
-      Html_LineText( nHandle, "SET BACKGROUNDTASKS: " + strvalue( Set( _SET_BACKGROUNDTASKS ), .T. ) )
-      Html_LineText( nHandle, "SET BACKGROUNDTICK.: " + strvalue( Set( _SET_BACKGROUNDTICK ), .T. ) )
-#endif
-      Html_LineText( nHandle, "SET CENTURY........: " + strvalue( __SetCentury(), .T. ) )
-      Html_LineText( nHandle, "SET COUNT..........: " + strvalue( Set( _SET_COUNT ) ) )
+         Html_LineText( nHandle, "SET DATE FORMAT....: " + strvalue( Set( _SET_DATEFORMAT ) ) )
+         Html_LineText( nHandle, "SET DBFLOCKSCHEME..: " + strvalue( Set( _SET_DBFLOCKSCHEME ) ) )
+         Html_LineText( nHandle, "SET DEBUG..........: " + strvalue( Set( _SET_DEBUG ), .T. ) )
+         Html_LineText( nHandle, "SET DECIMALS.......: " + strvalue( Set( _SET_DECIMALS ) ) )
+         Html_LineText( nHandle, "SET DEFAULT........: " + strvalue( Set( _SET_DEFAULT ) ) )
+         Html_LineText( nHandle, "SET DEFEXTENSIONS..: " + strvalue( Set( _SET_DEFEXTENSIONS ), .T. ) )
+         Html_LineText( nHandle, "SET DELETED........: " + strvalue( Set( _SET_DELETED ), .T. ) )
+         Html_LineText( nHandle, "SET DELIMCHARS.....: " + strvalue( Set( _SET_DELIMCHARS ) ) )
+         Html_LineText( nHandle, "SET DELIMETERS.....: " + strvalue( Set( _SET_DELIMITERS ), .T. ) )
+         Html_LineText( nHandle, "SET DIRCASE........: " + strvalue( Set( _SET_DIRCASE ) ) )
+         Html_LineText( nHandle, "SET DIRSEPARATOR...: " + strvalue( Set( _SET_DIRSEPARATOR ) ) )
 
-      Html_LineText( nHandle, "SET DATE FORMAT....: " + strvalue( Set( _SET_DATEFORMAT ) ) )
-      Html_LineText( nHandle, "SET DBFLOCKSCHEME..: " + strvalue( Set( _SET_DBFLOCKSCHEME ) ) )
-      Html_LineText( nHandle, "SET DEBUG..........: " + strvalue( Set( _SET_DEBUG ), .T. ) )
-      Html_LineText( nHandle, "SET DECIMALS.......: " + strvalue( Set( _SET_DECIMALS ) ) )
-      Html_LineText( nHandle, "SET DEFAULT........: " + strvalue( Set( _SET_DEFAULT ) ) )
-      Html_LineText( nHandle, "SET DEFEXTENSIONS..: " + strvalue( Set( _SET_DEFEXTENSIONS ), .T. ) )
-      Html_LineText( nHandle, "SET DELETED........: " + strvalue( Set( _SET_DELETED ), .T. ) )
-      Html_LineText( nHandle, "SET DELIMCHARS.....: " + strvalue( Set( _SET_DELIMCHARS ) ) )
-      Html_LineText( nHandle, "SET DELIMETERS.....: " + strvalue( Set( _SET_DELIMITERS ), .T. ) )
-      Html_LineText( nHandle, "SET DIRCASE........: " + strvalue( Set( _SET_DIRCASE ) ) )
-      Html_LineText( nHandle, "SET DIRSEPARATOR...: " + strvalue( Set( _SET_DIRSEPARATOR ) ) )
+         Html_LineText( nHandle, "SET EOL............: " + strvalue( Asc( Set( _SET_EOL ) ) ) )
+         Html_LineText( nHandle, "SET EPOCH..........: " + strvalue( Set( _SET_EPOCH ) ) )
+         Html_LineText( nHandle, "SET ERRORLOG.......: " + strvalue( _GetErrorlogFile() ) )
+         #ifdef __XHARBOUR__
+         Html_LineText( nHandle, "SET ERRORLOOP......: " + strvalue( Set( _SET_ERRORLOOP ) ) )
+         #endif
+         Html_LineText( nHandle, "SET EXACT..........: " + strvalue( Set( _SET_EXACT ), .T. ) )
+         Html_LineText( nHandle, "SET EXCLUSIVE......: " + strvalue( Set( _SET_EXCLUSIVE ), .T. ) )
+         Html_LineText( nHandle, "SET EXTRA..........: " + strvalue( Set( _SET_EXTRA ), .T. ) )
+         Html_LineText( nHandle, "SET EXTRAFILE......: " + strvalue( Set( _SET_EXTRAFILE ) ) )
 
-      Html_LineText( nHandle, "SET EOL............: " + strvalue( Asc( Set( _SET_EOL ) ) ) )
-      Html_LineText( nHandle, "SET EPOCH..........: " + strvalue( Set( _SET_EPOCH ) ) )
-      Html_LineText( nHandle, "SET ERRORLOG.......: " + strvalue( _GetErrorlogFile() ) )
-#ifdef __XHARBOUR__
-      Html_LineText( nHandle, "SET ERRORLOOP......: " + strvalue( Set( _SET_ERRORLOOP ) ) )
-#endif
-      Html_LineText( nHandle, "SET EXACT..........: " + strvalue( Set( _SET_EXACT ), .T. ) )
-      Html_LineText( nHandle, "SET EXCLUSIVE......: " + strvalue( Set( _SET_EXCLUSIVE ), .T. ) )
-      Html_LineText( nHandle, "SET EXTRA..........: " + strvalue( Set( _SET_EXTRA ), .T. ) )
-      Html_LineText( nHandle, "SET EXTRAFILE......: " + strvalue( Set( _SET_EXTRAFILE ) ) )
+         Html_LineText( nHandle, "SET FILECASE.......: " + strvalue( Set( _SET_FILECASE ) ) )
+         Html_LineText( nHandle, "SET FIXED..........: " + strvalue( Set( _SET_FIXED ), .T. ) )
+         Html_LineText( nHandle, "SET FORCEOPT.......: " + strvalue( Set( _SET_FORCEOPT ), .T. ) )
 
-      Html_LineText( nHandle, "SET FILECASE.......: " + strvalue( Set( _SET_FILECASE ) ) )
-      Html_LineText( nHandle, "SET FIXED..........: " + strvalue( Set( _SET_FIXED ), .T. ) )
-      Html_LineText( nHandle, "SET FORCEOPT.......: " + strvalue( Set( _SET_FORCEOPT ), .T. ) )
+         Html_LineText( nHandle, "SET HARDCOMMIT.....: " + strvalue( Set( _SET_HARDCOMMIT ), .T. ) )
 
-      Html_LineText( nHandle, "SET HARDCOMMIT.....: " + strvalue( Set( _SET_HARDCOMMIT ), .T. ) )
+         Html_LineText( nHandle, "SET IDLEREPEAT.....: " + strvalue( Set( _SET_IDLEREPEAT ), .T. ) )
 
-      Html_LineText( nHandle, "SET IDLEREPEAT.....: " + strvalue( Set( _SET_IDLEREPEAT ), .T. ) )
+         Html_LineText( nHandle, "SET LANGUAGE.......: " + strvalue( Set( _SET_LANGUAGE ) ) )
 
-      Html_LineText( nHandle, "SET LANGUAGE.......: " + strvalue( Set( _SET_LANGUAGE ) ) )
+         Html_LineText( nHandle, "SET MARGIN.........: " + strvalue( Set( _SET_MARGIN ) ) )
+         Html_LineText( nHandle, "SET MBLOCKSIZE.....: " + strvalue( Set( _SET_MBLOCKSIZE ) ) )
+         Html_LineText( nHandle, "SET MFILEEXT.......: " + strvalue( Set( _SET_MFILEEXT ) ) )
 
-      Html_LineText( nHandle, "SET MARGIN.........: " + strvalue( Set( _SET_MARGIN ) ) )
-      Html_LineText( nHandle, "SET MBLOCKSIZE.....: " + strvalue( Set( _SET_MBLOCKSIZE ) ) )
-      Html_LineText( nHandle, "SET MFILEEXT.......: " + strvalue( Set( _SET_MFILEEXT ) ) )
+         Html_LineText( nHandle, "SET OPTIMIZE.......: " + strvalue( Set( _SET_OPTIMIZE ), .T. ) )
+         #ifdef __XHARBOUR__
+         Html_LineText( nHandle, "SET OUTPUTSAFETY...: " + strvalue( Set( _SET_OUTPUTSAFETY ), .T. ) )
+         #endif
 
-      Html_LineText( nHandle, "SET OPTIMIZE.......: " + strvalue( Set( _SET_OPTIMIZE ), .T. ) )
-#ifdef __XHARBOUR__
-      Html_LineText( nHandle, "SET OUTPUTSAFETY...: " + strvalue( Set( _SET_OUTPUTSAFETY ), .T. ) )
-#endif
+         Html_LineText( nHandle, "SET PATH...........: " + strvalue( Set( _SET_PATH ) ) )
+         Html_LineText( nHandle, "SET PRINTER........: " + strvalue( Set( _SET_PRINTER ), .T. ) )
+         #ifdef __XHARBOUR__
+         Html_LineText( nHandle, "SET PRINTERJOB.....: " + strvalue( Set( _SET_PRINTERJOB ) ) )
+         #endif
+         Html_LineText( nHandle, "SET PRINTFILE......: " + strvalue( Set( _SET_PRINTFILE ) ) )
 
-      Html_LineText( nHandle, "SET PATH...........: " + strvalue( Set( _SET_PATH ) ) )
-      Html_LineText( nHandle, "SET PRINTER........: " + strvalue( Set( _SET_PRINTER ), .T. ) )
-#ifdef __XHARBOUR__
-      Html_LineText( nHandle, "SET PRINTERJOB.....: " + strvalue( Set( _SET_PRINTERJOB ) ) )
-#endif
-      Html_LineText( nHandle, "SET PRINTFILE......: " + strvalue( Set( _SET_PRINTFILE ) ) )
+         Html_LineText( nHandle, "SET SOFTSEEK.......: " + strvalue( Set( _SET_SOFTSEEK ), .T. ) )
 
-      Html_LineText( nHandle, "SET SOFTSEEK.......: " + strvalue( Set( _SET_SOFTSEEK ), .T. ) )
+         #ifdef __XHARBOUR__
+         Html_LineText( nHandle, "SET TRACE..........: " + strvalue( Set( _SET_TRACE ), .T. ) )
+         Html_LineText( nHandle, "SET TRACEFILE......: " + strvalue( Set( _SET_TRACEFILE ) ) )
+         Html_LineText( nHandle, "SET TRACESTACK.....: " + strvalue( Set( _SET_TRACESTACK ) ) )
+         #endif
+         Html_LineText( nHandle, "SET TRIMFILENAME...: " + strvalue( Set( _SET_TRIMFILENAME ) ) )
 
-#ifdef __XHARBOUR__
-      Html_LineText( nHandle, "SET TRACE..........: " + strvalue( Set( _SET_TRACE ), .T. ) )
-      Html_LineText( nHandle, "SET TRACEFILE......: " + strvalue( Set( _SET_TRACEFILE ) ) )
-      Html_LineText( nHandle, "SET TRACESTACK.....: " + strvalue( Set( _SET_TRACESTACK ) ) )
-#endif
-      Html_LineText( nHandle, "SET TRIMFILENAME...: " + strvalue( Set( _SET_TRIMFILENAME ) ) )
+         Html_LineText( nHandle, "SET UNIQUE.........: " + strvalue( Set( _SET_UNIQUE ), .T. ) )
 
-      Html_LineText( nHandle, "SET UNIQUE.........: " + strvalue( Set( _SET_UNIQUE ), .T. ) )
+         Html_LineText( nHandle, "" )
+         Html_LineText( nHandle, PadC( " Detailed Work Area Items ", 79, "-" ) )
+         Html_LineText( nHandle, "" )
 
-      Html_LineText( nHandle, "" )
-      Html_LineText( nHandle, PadC( " Detailed Work Area Items ", 79, "-" ) )
-      Html_LineText( nHandle, "" )
-
-#ifdef __XHARBOUR__
-      IF Type( "Select()" ) == "UI" .OR. Type( "Select()" ) == "N"
-         FOR nCount := 1 TO 250
-            IF !Empty( ( nCount )->( &("Alias()" ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Work Area No ......: " + strvalue( &("Select()" ) ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Alias .............: " + &("Alias()" ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Current Recno .....: " + strvalue( &("RecNo()" ) ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Current Filter ....: " + &("DbFilter()" ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Relation Exp. .....: " + &("DbRelation()" ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Index Order .......: " + strvalue( &("IndexOrd(0)" ) ) ) )
-               ( nCount )->( Html_LineText( nHandle, "Active Key ........: " + strvalue( &("IndexKey(0)" ) ) ) )
-               ( nCount )->( Html_LineText( nHandle, "" ) )
-            ENDIF
-         NEXT
-      ENDIF
-#else
-      hb_WAEval( {||
+         #ifdef __XHARBOUR__
+         IF Type( "Select()" ) == "UI" .OR. Type( "Select()" ) == "N"
+            FOR nCount := 1 TO 250
+               IF !Empty( ( nCount )->( &("Alias()" ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Work Area No ......: " + strvalue( &("Select()" ) ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Alias .............: " + &("Alias()" ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Current Recno .....: " + strvalue( &("RecNo()" ) ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Current Filter ....: " + &("DbFilter()" ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Relation Exp. .....: " + &("DbRelation()" ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Index Order .......: " + strvalue( &("IndexOrd(0)" ) ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "Active Key ........: " + strvalue( &("IndexKey(0)" ) ) ) )
+                  ( nCount )->( Html_LineText( nHandle, "" ) )
+               ENDIF
+            NEXT
+         ENDIF
+         #else
+         hb_WAEval( {||
          IF hb_IsFunction( "Select" )
             Html_LineText( nHandle, "Work Area No ......: " + strvalue( Do( "Select" ) ) )
          ENDIF
@@ -362,52 +365,51 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
             Html_LineText( nHandle, "Active Key ........: " + strvalue( Eval( hb_macroBlock( "IndexKey( 0 )" ) ) ) )
          ENDIF
          Html_LineText( nHandle, "" )
+
          RETURN .T.
          } )
-#endif
-      Html_LineText( nHandle, PadC( " Internal Error Handling Information ", 79, "-" ) )
-      Html_LineText( nHandle, "" )
-      Html_LineText( nHandle, "Subsystem Call ....: " + oErr:subsystem() )
-      Html_LineText( nHandle, "System Code .......: " + strvalue( oErr:subcode() ) )
-      Html_LineText( nHandle, "Default Status ....: " + strvalue( oErr:candefault() ) )
-      Html_LineText( nHandle, "Description .......: " + oErr:description() )
-      Html_LineText( nHandle, "Operation .........: " + oErr:operation() )
-      Html_LineText( nHandle, "Involved File .....: " + oErr:filename() )
-      Html_LineText( nHandle, "Dos Error Code ....: " + strvalue( oErr:oscode() ) )
-
-#ifdef __XHARBOUR__
-#ifdef HB_THREAD_SUPPORT
-      Html_LineText( nHandle, "Running threads ...: " + strvalue( oErr:RunningThreads() ) )
-      Html_LineText( nHandle, "VM thread ID ......: " + strvalue( oErr:VmThreadId() ) )
-      Html_LineText( nHandle, "OS thread ID ......: " + strvalue( oErr:OsThreadId() ) )
-#endif
-#else
-      /* NOTE: Adapted from hb_mvSave() source in Harbour RTL. */
-      Html_LineText( nHandle, "" )
-      Html_LineText( nHandle, PadC( " Available Memory Variables ", 79, "+" ) )
-      Html_LineText( nHandle, "" )
-
-      FOR EACH nScope IN { HB_MV_PUBLIC, HB_MV_PRIVATE }
-         nCount := __mvDbgInfo( nScope )
-         FOR tmp := 1 TO nCount
-            xValue := __mvDbgInfo( nScope, tmp, @cName )
-            IF ValType( xValue ) $ "CNDTL" .AND. Left( cName, 1 ) <> "_"
-               Html_LineText( nHandle, "      " + cName + " TYPE " + ValType( xValue ) + " [" + hb_CStr( xValue ) + "]" )
-            ENDIF
-         NEXT
-      NEXT
-
-      IF nCount > 0
+         #endif
+         Html_LineText( nHandle, PadC( " Internal Error Handling Information ", 79, "-" ) )
          Html_LineText( nHandle, "" )
+         Html_LineText( nHandle, "Subsystem Call ....: " + oErr:subsystem() )
+         Html_LineText( nHandle, "System Code .......: " + strvalue( oErr:subcode() ) )
+         Html_LineText( nHandle, "Default Status ....: " + strvalue( oErr:candefault() ) )
+         Html_LineText( nHandle, "Description .......: " + oErr:description() )
+         Html_LineText( nHandle, "Operation .........: " + oErr:operation() )
+         Html_LineText( nHandle, "Involved File .....: " + oErr:filename() )
+         Html_LineText( nHandle, "Dos Error Code ....: " + strvalue( oErr:oscode() ) )
+
+         #ifdef __XHARBOUR__
+         #ifdef HB_THREAD_SUPPORT
+         Html_LineText( nHandle, "Running threads ...: " + strvalue( oErr:RunningThreads() ) )
+         Html_LineText( nHandle, "VM thread ID ......: " + strvalue( oErr:VmThreadId() ) )
+         Html_LineText( nHandle, "OS thread ID ......: " + strvalue( oErr:OsThreadId() ) )
+         #endif
+         #else
+         /* NOTE: Adapted from hb_mvSave() source in Harbour RTL. */
+         Html_LineText( nHandle, "" )
+         Html_LineText( nHandle, PadC( " Available Memory Variables ", 79, "+" ) )
+         Html_LineText( nHandle, "" )
+
+         FOR EACH nScope IN { HB_MV_PUBLIC, HB_MV_PRIVATE }
+            nCount := __mvDbgInfo( nScope )
+            FOR tmp := 1 TO nCount
+               xValue := __mvDbgInfo( nScope, tmp, @cName )
+               IF ValType( xValue ) $ "CNDTL" .AND. Left( cName, 1 ) <> "_"
+                  Html_LineText( nHandle, "      " + cName + " TYPE " + ValType( xValue ) + " [" + hb_CStr( xValue ) + "]" )
+               ENDIF
+            NEXT
+         NEXT
+
+         IF nCount > 0
+            Html_LineText( nHandle, "" )
+         ENDIF
+         #endif
       ENDIF
-#endif
-   ENDIF
 
-RETURN
+      RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION strvalue( c, l )
-*-----------------------------------------------------------------------------*
 
    SWITCH ValType( c )
    CASE "C"
@@ -417,14 +419,14 @@ STATIC FUNCTION strvalue( c, l )
    CASE "L" ; RETURN iif( hb_defaultValue( l, .F. ), iif( c, "ON", "OFF" ), iif( c, ".T.", ".F." ) )
    ENDSWITCH
 
-RETURN ""
+   RETURN ""
 
-/* Date Created: 14/11/2005
+   /* Date Created: 14/11/2005
    Author: Antonio Novo <antonionovo@gmail.com>
    Enable/Disable Error Detail */
-*-----------------------------------------------------------------------------*
+
 FUNCTION _lShowDetailError( lNewValue )
-*-----------------------------------------------------------------------------*
+
    STATIC _lShowDetailError := .T.
    LOCAL lOldValue := _lShowDetailError
 
@@ -432,15 +434,15 @@ FUNCTION _lShowDetailError( lNewValue )
       _lShowDetailError := lNewValue
    ENDIF
 
-RETURN lOldValue
+   RETURN lOldValue
 
-#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
-*-01-01-2003
-*-Author: Antonio Novo
-*-Create/Open the ErrorLog.Htm file
-*-----------------------------------------------------------------------------*
+   #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+   *-01-01-2003
+   *-Author: Antonio Novo
+   *-Create/Open the ErrorLog.Htm file
+
 FUNCTION HTML_ERRORLOG
-*-----------------------------------------------------------------------------*
+
    LOCAL HtmArch := -1
    LOCAL cErrorLogFile := _GetErrorlogFile()
 
@@ -458,14 +460,14 @@ FUNCTION HTML_ERRORLOG
       ENDIF
    ENDIF
 
-RETURN ( HtmArch )
+   RETURN ( HtmArch )
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTML Page Head
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTML Page Head
+
 FUNCTION HTML_INI( ARCH, TITLE )
-*-----------------------------------------------------------------------------*
+
    LOCAL HtmArch := -1
    LOCAL cStyle  := "<style> "     + ;
       "body{ "                     + ;
@@ -506,49 +508,48 @@ FUNCTION HTML_INI( ARCH, TITLE )
       ENDIF
    ENDIF
 
-RETURN ( HtmArch )
+   RETURN ( HtmArch )
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTM Page Line
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTM Page Line
+
 PROCEDURE HTML_LINETEXT( HTMARCH, LINEA )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH > 0 .AND. IsErrorLogActive()
       FWrite( HTMARCH, RTrim( LINEA ) + "<BR>" + Chr( 13 ) + Chr( 10 ) )
    ENDIF
 
-RETURN
+   RETURN
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTM Line
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTM Line
+
 PROCEDURE HTML_LINE( HTMARCH )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH > 0 .AND. IsErrorLogActive()
       FWrite( HTMARCH, "<HR>" + Chr( 13 ) + Chr( 10 ) )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE HTML_END( HTMARCH )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH > 0 .AND. IsErrorLogActive()
       FWrite( HTMARCH, "</BODY></HTML>" )
       FClose( HTMARCH )
    ENDIF
 
-RETURN
+   RETURN
 
-#else
-*-01-01-2003
-*-Author: Antonio Novo
-*-Create/Open the ErrorLog.Htm file
-*-----------------------------------------------------------------------------*
+   #else
+   *-01-01-2003
+   *-Author: Antonio Novo
+   *-Create/Open the ErrorLog.Htm file
+
 FUNCTION HTML_ERRORLOG
-*-----------------------------------------------------------------------------*
+
    LOCAL HtmArch
    LOCAL cErrorLogFile := _GetErrorlogFile()
 
@@ -566,14 +567,14 @@ FUNCTION HTML_ERRORLOG
       ENDIF
    ENDIF
 
-RETURN ( HtmArch )
+   RETURN ( HtmArch )
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTML Page Head
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTML Page Head
+
 FUNCTION HTML_INI( ARCH, TITLE )
-*-----------------------------------------------------------------------------*
+
    LOCAL HtmArch := -1
    LOCAL cStyle  := "<style> "     + ;
       "body{ "                     + ;
@@ -614,47 +615,47 @@ FUNCTION HTML_INI( ARCH, TITLE )
       ENDIF
    ENDIF
 
-RETURN ( HtmArch )
+   RETURN ( HtmArch )
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTM Page Line
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTM Page Line
+
 PROCEDURE HTML_LINETEXT( HTMARCH, LINEA )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH != NIL .AND. IsErrorLogActive()
       hb_vfWrite( HTMARCH, RTrim( LINEA ) + "<BR>" + CRLF )
    ENDIF
 
-RETURN
+   RETURN
 
-*-30-12-2002
-*-Author: Antonio Novo
-*-HTM Line
-*-----------------------------------------------------------------------------*
+   *-30-12-2002
+   *-Author: Antonio Novo
+   *-HTM Line
+
 PROCEDURE HTML_LINE( HTMARCH )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH != NIL .AND. IsErrorLogActive()
       hb_vfWrite( HTMARCH, "<HR>" + CRLF )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE HTML_END( HTMARCH )
-*-----------------------------------------------------------------------------*
+
    IF HTMARCH != NIL .AND. IsErrorLogActive()
       hb_vfWrite( HTMARCH, "</BODY></HTML>" )
       hb_vfClose( HTMARCH )
    ENDIF
 
-RETURN
-#endif
+   RETURN
+   #endif
 
-// (JK) HMG 1.0 Build 6
-*-----------------------------------------------------------------------------*
+   // (JK) HMG 1.0 Build 6
+
 PROCEDURE _SetErrorLogFile( cFile )
-*-----------------------------------------------------------------------------*
+
    _HMG_ErrorLogFile := IFEMPTY( cFile, GetStartUpFolder() + "\ErrorLog.htm", cFile )
 
-RETURN
+   RETURN
+

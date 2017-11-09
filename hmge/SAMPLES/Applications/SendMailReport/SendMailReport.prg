@@ -1,15 +1,12 @@
-/* 
- * MINIGUI - Harbour Win32 GUI library Demo 
- * 
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com> 
- * http://harbourminigui.googlepages.com/ 
- * 
- * From original source by '2005 Grigory Filatov <gfilatov@front.ru>
- * Improved at 2016 By Pierpaolo Martinello <pier.martinello[at]alice.it>
- * 
-*/ 
+/*
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* From original source by '2005 Grigory Filatov <gfilatov@front.ru>
+* Improved at 2016 By Pierpaolo Martinello <pier.martinello[at]alice.it>
+*/
 
-ANNOUNCE RDDSYS 
+ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 #include "fileio.ch"
@@ -31,55 +28,47 @@ DECLARE WINDOW FORM_2
 #define MB_YESNO 4
 #define MB_YESNOCANCEL 3
 
-*--------*
 * SYNTAX: SENDMAIL [silent clog compress ]
 * With silent, it doesn't open any window
-*
 * With compress the compressed filename declares him that will contain the attached ones
-*
-* Ie. SendMail Y N Test 
+* Ie. SendMail Y N Test
 * It will send an e-mail without windows and the attached file it is "Test.zip"
-*
 * Ie Sendmail Y
 * It will send an e-mail without windows.
 * The possible File attached is drawn by the file Ini
-*
 * In both the cases will be written the "Sendmail.log" file
-*
 * for silent and clog are valid Y N or 1 0 or .T. .F. or any char (=.F.)
 * Compress arg require silent arg
-*
-*-----------------------------------------------------------------------------*
 
-Memvar cCfgFile, cLogFile,LogPath
-Memvar aEntry, cCryptKey
+MEMVAR cCfgFile, cLogFile,LogPath
+MEMVAR aEntry, cCryptKey
 
 DECLARE WINDOW Form_2
 
-Static aGet, lchg, namelog
-*-----------------------------------------------------------------------------*
+STATIC aGet, lchg, namelog
+
 PROCEDURE Main( Silent, cLog, Compress)
-*-----------------------------------------------------------------------------*
-LOCAL cPath := GetStartUpFolder() + "\", cFileName := cFileNoExt( GetExeFileName() )
-LOCAL extraTitle , i
+
+   LOCAL cPath := GetStartUpFolder() + "\", cFileName := cFileNoExt( GetExeFileName() )
+   LOCAL extraTitle , i
 
    PRIVATE cCfgFile := cPath + Lower(cFileName) + ".ini"
    PRIVATE cLogFile := cPath + Lower(cFileName) + ".log"
    PRIVATE aEntry   := {}, cCryptKey := REPL( "#$@%&", 2 )
-   Private LogPath  := GetcurrentFolder()
+   PRIVATE LogPath  := GetcurrentFolder()
 
    DEFAULT Silent to .F., Compress to '', Clog to .F.
 
-   If valtype(clog) == "C" .and. !empty(clog)
+   IF valtype(clog) == "C" .and. !empty(clog)
       clog := Lower(clog)
       clog := IF(clog=".t." .or. clog="clog" .or. clog="y" .or. val(clog)>0, .T., .F.)
-   Endif
+   ENDIF
 
-   If File( cLogFile )
-      if clog .or. FileSize( cLogFile ) > 1000000
+   IF File( cLogFile )
+      IF clog .or. FileSize( cLogFile ) > 1000000
          Ferase( cLogFile )
-      endif
-   Endif
+      ENDIF
+   ENDIF
 
    aAdd( aEntry, "SMTP" )              //  1
    aAdd( aEntry, "From" )              //  2
@@ -101,7 +90,7 @@ LOCAL extraTitle , i
    aAdd( aEntry, "Shutdown")           // 18
 
    aGet := ARRAY(18)
-   lchg := .f.                         
+   lchg := .f.
 
    DEFAULT aget[1] TO "smtp.domain.com"
    DEFAULT aget[2] TO "Sender <sender@domain.com>"
@@ -118,10 +107,10 @@ LOCAL extraTitle , i
    aGet[13] := 1
    DEFAULT aget[14] TO Silent
 
-   If Pcount() = 3
+   IF Pcount() = 3
       Compress := Lower(Compress)
       Compress := STRTRAN(Compress, ".zip", "")
-   EndIf
+   ENDIF
 
    DEFAULT aget[15] TO Compress
    DEFAULT aget[16] TO Left( ExeName(), RAt( "\", ExeName() ) )
@@ -132,9 +121,9 @@ LOCAL extraTitle , i
 
       BEGIN INI FILE cCfgFile
 
-         For i := 1 To Len(aEntry)
-             GET aGet[i] SECTION "Data" ENTRY aEntry[i]
-         Next i
+         FOR i := 1 To Len(aEntry)
+            GET aGet[i] SECTION "Data" ENTRY aEntry[i]
+         NEXT i
          aGet[8] := STRTRAN( aGet[8], Chr(250), CRLF )
          aGet[12] := CHARXOR( aGet[12], cCryptKey )
 
@@ -143,551 +132,562 @@ LOCAL extraTitle , i
       LogPath := aget[16]+"\"
 
    ENDIF
-   if aget[17] = 0
+   IF aget[17] = 0
       aget[17] ++
-   Endif
+   ENDIF
 
    aget[18] := min( aget[18],10 )
 
-   If Empty(Compress)
+   IF Empty(Compress)
       compress := aget[15]
-   Else
+   ELSE
       aget[15] := Compress
-   Endif
+   ENDIF
 
-   If valtype(Silent) == "C" .and. !empty(Silent)
+   IF valtype(Silent) == "C" .and. !empty(Silent)
       silent := Lower(Silent)
-      if "?" $ silent
-          MsgInfo( [Syntax: ] + "Sendmail [Silent] [clear log] [Zipname] "+CRLF+CRLF+;
-                  [ ] + "where Silent are Y [.T. or 1 or silent] or N [.F. or 0]" +CRLF+;
-                  [ ] + "where clearlog are Y [.T. or 1 or clog] or N [.F. or 0] "+CRLF+;
-                  [ ] + "Zipname no need name extension '.zip'"+CRLF+CRLF+;
-                  "Ie: SendMail 0 .T. (or SendMail N 1)"+CRLF+;
-                  " Will take action clear log and open main window."+CRLF+CRLF+;
-                  "Ie: SendMail Y .T. (or SendMail clog silent)"+CRLF+;
-                  " Will take action clear log and send mail without GUI.", "Syntax Help" )
-          Return
-      endif
+      IF "?" $ silent
+         MsgInfo( [Syntax: ] + "Sendmail [Silent] [clear log] [Zipname] "+CRLF+CRLF+;
+            [ ] + "where Silent are Y [.T. or 1 or silent] or N [.F. or 0]" +CRLF+;
+            [ ] + "where clearlog are Y [.T. or 1 or clog] or N [.F. or 0] "+CRLF+;
+            [ ] + "Zipname no need name extension '.zip'"+CRLF+CRLF+;
+            "Ie: SendMail 0 .T. (or SendMail N 1)"+CRLF+;
+            " Will take action clear log and open main window."+CRLF+CRLF+;
+            "Ie: SendMail Y .T. (or SendMail clog silent)"+CRLF+;
+            " Will take action clear log and send mail without GUI.", "Syntax Help" )
+
+         RETURN
+      ENDIF
       silent := IF(Silent=".t." .or. Silent="silent" .or. silent="y" .or. val(silent)>0, .T., .F.)
 
-   Endif
+   ENDIF
 
    aget[14] := Silent
 
-   SET CENTURY ON 
-   SET DATE GERMAN 
+   SET CENTURY ON
+   SET DATE GERMAN
 
-   If Silent
+   IF Silent
       M_Send(.F.)
-      Return
-   Endif
 
-   extratitle := " [ I send the file(s) attached as "+Compress+".Zip ]" 
+      RETURN
+   ENDIF
+
+   extratitle := " [ I send the file(s) attached as "+Compress+".Zip ]"
 
    DEFINE WINDOW Form_1 ;
-          AT 131,220 ;
-          WIDTH 663 ;
-          HEIGHT 545 + IF(IsXPThemeActive(), 6, 0) ;
-          TITLE PROGRAM ;
-          ICON IDI_MAIN ;
-          MAIN ;
-          NOMINIMIZE NOMAXIMIZE NOSIZE ;
-          On INIT ReadLog() ;
-          ON RELEASE if(lchg,SaveData(.t.),nil) ;
-          FONT "MS Sans Serif" SIZE 10
+         AT 131,220 ;
+         WIDTH 663 ;
+         HEIGHT 545 + IF(IsXPThemeActive(), 6, 0) ;
+         TITLE PROGRAM ;
+         ICON IDI_MAIN ;
+         MAIN ;
+         NOMINIMIZE NOMAXIMIZE NOSIZE ;
+         On INIT ReadLog() ;
+         ON RELEASE if(lchg,SaveData(.t.),nil) ;
+         FONT "MS Sans Serif" SIZE 10
 
-          DEFINE STATUSBAR
-                STATUSITEM ""
-                DATE
-                CLOCK
-          END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM ""
+         DATE
+         CLOCK
+      END STATUSBAR
 
-          @ 9,7 FRAME Frame_1 WIDTH 640 HEIGHT 45
+      @ 9,7 FRAME Frame_1 WIDTH 640 HEIGHT 45
 
-          //@ 17,20 BUTTON PicButton_1 PICTURE "SEND" ACTION Readlog() WIDTH 24 HEIGHT 24 TOOLTIP "Send Mail (Alt+S)"
-          @ 17,20 BUTTON PicButton_1 PICTURE "SEND" ACTION m_send(.T.) WIDTH 30 HEIGHT 30 TOOLTIP "Send Mail (Alt+S)"
-          @ 17,52 BUTTON PicButton_2 PICTURE "CONFIG" ACTION m_config() WIDTH 30 HEIGHT 30 TOOLTIP "Config (Alt+C)"
-          @ 17,84 BUTTON PicButton_3 PICTURE "TRASH" ACTION File_Attached(.T.) WIDTH 30 HEIGHT 30 TOOLTIP "Clear the Attachment List (Alt+T)"
-          @ 17,116 BUTTON PicButton_4 PICTURE "INFO" ACTION m_about() WIDTH 30 HEIGHT 30 TOOLTIP "About (Alt+A)"
-          @ 17,148 BUTTON PicButton_5 PICTURE "SAVE" ACTION Savedata() WIDTH 30 HEIGHT 30 TOOLTIP "Save options"
-          @ 17,180 BUTTON PicButton_6 PICTURE "EXIT" ACTION Form_1.Release WIDTH 30 HEIGHT 30 TOOLTIP "Exit (Alt+X)"
+      //@ 17,20 BUTTON PicButton_1 PICTURE "SEND" ACTION Readlog() WIDTH 24 HEIGHT 24 TOOLTIP "Send Mail (Alt+S)"
+      @ 17,20 BUTTON PicButton_1 PICTURE "SEND" ACTION m_send(.T.) WIDTH 30 HEIGHT 30 TOOLTIP "Send Mail (Alt+S)"
+      @ 17,52 BUTTON PicButton_2 PICTURE "CONFIG" ACTION m_config() WIDTH 30 HEIGHT 30 TOOLTIP "Config (Alt+C)"
+      @ 17,84 BUTTON PicButton_3 PICTURE "TRASH" ACTION File_Attached(.T.) WIDTH 30 HEIGHT 30 TOOLTIP "Clear the Attachment List (Alt+T)"
+      @ 17,116 BUTTON PicButton_4 PICTURE "INFO" ACTION m_about() WIDTH 30 HEIGHT 30 TOOLTIP "About (Alt+A)"
+      @ 17,148 BUTTON PicButton_5 PICTURE "SAVE" ACTION Savedata() WIDTH 30 HEIGHT 30 TOOLTIP "Save options"
+      @ 17,180 BUTTON PicButton_6 PICTURE "EXIT" ACTION Form_1.Release WIDTH 30 HEIGHT 30 TOOLTIP "Exit (Alt+X)"
 
-          @ 21,240 LABEL Label_0 VALUE "Message Priority:" WIDTH 120 HEIGHT 20
-          @ 17,370 RADIOGROUP Radio_0 OPTIONS { "Normal", "Highest", "Low" } VALUE 1 ;
-                   WIDTH 66 SPACING 14 TOOLTIP "Select a Message Priority" ON CHANGE Changeinfo() HORIZONTAL
+      @ 21,240 LABEL Label_0 VALUE "Message Priority:" WIDTH 120 HEIGHT 20
+      @ 17,370 RADIOGROUP Radio_0 OPTIONS { "Normal", "Highest", "Low" } VALUE 1 ;
+         WIDTH 66 SPACING 14 TOOLTIP "Select a Message Priority" ON CHANGE Changeinfo() HORIZONTAL
 
-          @ 62,7 FRAME Frame_2 WIDTH 640 HEIGHT 404 //370
-          @ 205,15 FRAME Frame_3 WIDTH 135 HEIGHT 55
+      @ 62,7 FRAME Frame_2 WIDTH 640 HEIGHT 404 //370
+      @ 205,15 FRAME Frame_3 WIDTH 135 HEIGHT 55
 
-          @ 84,24 LABEL Label_1 VALUE "SMTP Server" WIDTH 100 HEIGHT 20
-          @ 108,24 LABEL Label_2 VALUE "From" WIDTH 100 HEIGHT 20
-          @ 131,24 LABEL Label_3 VALUE "To" WIDTH 100 HEIGHT 20
-          @ 158,24 LABEL Label_4 VALUE "Cc" WIDTH 100 HEIGHT 20
-          @ 158,377 LABEL Label_5 VALUE "Bcc" WIDTH 58 HEIGHT 20
-          @ 185,24 LABEL Label_6 VALUE "Subject" WIDTH 100 HEIGHT 20
-          @ 210,24 LABEL Label_7 VALUE "Attachment" WIDTH 100 HEIGHT 20
-          @ 262,24 LABEL Label_8 VALUE "Message Type" WIDTH 100 HEIGHT 20
-          @ 315,24 LABEL Label_9 VALUE "Log Folder" WIDTH 100 HEIGHT 20
-          @ 370,24 LABEL Label_10 VALUE "Send Log" WIDTH 100 HEIGHT 20
-          @ 472,24 LABEL Label_11 VALUE "LOG FOLDER PATH NOT SET !!! " AUTOSIZE
-          @ 434,84 Label 12 Value "Time Shutdown (minutes): After sending the log mail, shutdown the pc ( 0 = disabled )." AUTOSIZE ;
-                   TOOLTIP "Shutdown require Admin Rights"
+      @ 84,24 LABEL Label_1 VALUE "SMTP Server" WIDTH 100 HEIGHT 20
+      @ 108,24 LABEL Label_2 VALUE "From" WIDTH 100 HEIGHT 20
+      @ 131,24 LABEL Label_3 VALUE "To" WIDTH 100 HEIGHT 20
+      @ 158,24 LABEL Label_4 VALUE "Cc" WIDTH 100 HEIGHT 20
+      @ 158,377 LABEL Label_5 VALUE "Bcc" WIDTH 58 HEIGHT 20
+      @ 185,24 LABEL Label_6 VALUE "Subject" WIDTH 100 HEIGHT 20
+      @ 210,24 LABEL Label_7 VALUE "Attachment" WIDTH 100 HEIGHT 20
+      @ 262,24 LABEL Label_8 VALUE "Message Type" WIDTH 100 HEIGHT 20
+      @ 315,24 LABEL Label_9 VALUE "Log Folder" WIDTH 100 HEIGHT 20
+      @ 370,24 LABEL Label_10 VALUE "Send Log" WIDTH 100 HEIGHT 20
+      @ 472,24 LABEL Label_11 VALUE "LOG FOLDER PATH NOT SET !!! " AUTOSIZE
+      @ 434,84 Label 12 Value "Time Shutdown (minutes): After sending the log mail, shutdown the pc ( 0 = disabled )." AUTOSIZE ;
+         TOOLTIP "Shutdown require Admin Rights"
 
-          @ 78,155 TEXTBOX Text_1 HEIGHT 23 WIDTH 480 ON CHANGE  ( aget[1] := Form_1.Text_1.Value, ChangeInfo() )
-          Form_1.Text_1.Value := aget[1] 
+      @ 78,155 TEXTBOX Text_1 HEIGHT 23 WIDTH 480 ON CHANGE  ( aget[1] := Form_1.Text_1.Value, ChangeInfo() )
+      Form_1.Text_1.Value := aget[1]
 
-          @ 104,155 TEXTBOX Text_2 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[2] := Form_1.Text_2.Value , ChangeInfo() )
-          Form_1.Text_2.Value := aget[2]
+      @ 104,155 TEXTBOX Text_2 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[2] := Form_1.Text_2.Value , ChangeInfo() )
+      Form_1.Text_2.Value := aget[2]
 
-          @ 129,155 TEXTBOX Text_3 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[3] := Form_1.Text_3.Value , ChangeInfo() )
-          Form_1.Text_3.Value := aget[3]
+      @ 129,155 TEXTBOX Text_3 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[3] := Form_1.Text_3.Value , ChangeInfo() )
+      Form_1.Text_3.Value := aget[3]
 
-          @ 155,155 TEXTBOX Text_4 HEIGHT 22 WIDTH 200 ON CHANGE ( aget[4] := Form_1.Text_4.Value, ChangeInfo() )
-          Form_1.Text_4.Value := aget[4]
+      @ 155,155 TEXTBOX Text_4 HEIGHT 22 WIDTH 200 ON CHANGE ( aget[4] := Form_1.Text_4.Value, ChangeInfo() )
+      Form_1.Text_4.Value := aget[4]
 
-          @ 155,435 TEXTBOX Text_5 HEIGHT 22 WIDTH 200 ON CHANGE ( aget[5] := Form_1.Text_5.Value, ChangeInfo() )
-          Form_1.Text_5.Value := aget[5]
+      @ 155,435 TEXTBOX Text_5 HEIGHT 22 WIDTH 200 ON CHANGE ( aget[5] := Form_1.Text_5.Value, ChangeInfo() )
+      Form_1.Text_5.Value := aget[5]
 
-          @ 180,155 TEXTBOX Text_6 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[6] := Form_1.Text_6.Value , ChangeInfo() )
-          Form_1.Text_6.Value := aget[6]
+      @ 180,155 TEXTBOX Text_6 HEIGHT 22 WIDTH 480 ON CHANGE ( aget[6] := Form_1.Text_6.Value , ChangeInfo() )
+      Form_1.Text_6.Value := aget[6]
 
-          @ 205,155 COMBOBOXEX Combo_7 ITEMS aget[7] HEIGHT 200 WIDTH 450 Tooltip "Attached File List";
-                    ON GOTFOCUS MCONTEXT() ON CHANGE SetFcompress()
+      @ 205,155 COMBOBOXEX Combo_7 ITEMS aget[7] HEIGHT 200 WIDTH 450 Tooltip "Attached File List";
+         ON GOTFOCUS MCONTEXT() ON CHANGE SetFcompress()
 
-          Form_1.Combo_7.Value := IF(Len(aget[7]) == 0, 0, 1)
+      Form_1.Combo_7.Value := IF(Len(aget[7]) == 0, 0, 1)
 
-          @ 205,610 BUTTON PicButton_7 PICTURE "OPEN" ACTION File_Attached() ;
-                    WIDTH 24 HEIGHT 24 TOOLTIP "Select a File(s) To Attach"
+      @ 205,610 BUTTON PicButton_7 PICTURE "OPEN" ACTION File_Attached() ;
+         WIDTH 24 HEIGHT 24 TOOLTIP "Select a File(s) To Attach"
 
-          @ 234,24 CHECKBOX Check_1 CAPTION " Compress" WIDTH 100 HEIGHT 20 ;
-                   ;// VALUE ( !Empty(Form_1.Combo_7.DisplayValue) .and. !Empty(Compress) .or. aget[17] > 1) ;
-                   VALUE ( !Empty(compress) .or. aget[17] > 1) ;
-                   ON CHANGE SetFcompress()
+      @ 234,24 CHECKBOX Check_1 CAPTION " Compress" WIDTH 100 HEIGHT 20 ;
+         ;// VALUE ( !Empty(Form_1.Combo_7.DisplayValue) .and. !Empty(Compress) .or. aget[17] > 1) ;
+         VALUE ( !Empty(compress) .or. aget[17] > 1) ;
+         ON CHANGE SetFcompress()
 
-          @ 232,155 EDITBOX Edit_1 WIDTH 480 HEIGHT 190 ON CHANGE aget[8] := Form_1.Edit_1.Value NOHSCROLL
+      @ 232,155 EDITBOX Edit_1 WIDTH 480 HEIGHT 190 ON CHANGE aget[8] := Form_1.Edit_1.Value NOHSCROLL
 
-          @ 280,24 RADIOGROUP Radio_1 OPTIONS {"Text","HTML" } VALUE aget[13] ;
-                   WIDTH 64 SPACING 0 TOOLTIP "Select a Message Format" ;
-                   ON CHANGE ( aget[13] := Form_1.Radio_1.Value,Changeinfo() ) TRANSPARENT HORIZONTAL
+      @ 280,24 RADIOGROUP Radio_1 OPTIONS {"Text","HTML" } VALUE aget[13] ;
+         WIDTH 64 SPACING 0 TOOLTIP "Select a Message Format" ;
+         ON CHANGE ( aget[13] := Form_1.Radio_1.Value,Changeinfo() ) TRANSPARENT HORIZONTAL
 
-          @310,100 BUTTON PicButton_8 PICTURE "OPEN" ACTION LogFolder() ;
-                   WIDTH 24 HEIGHT 24 TOOLTIP "Select a log folder."
+      @310,100 BUTTON PicButton_8 PICTURE "OPEN" ACTION LogFolder() ;
+         WIDTH 24 HEIGHT 24 TOOLTIP "Select a log folder."
 
-          @ 345,24 RADIOGROUP Radio_2 OPTIONS { "No send log", "Send only if fail", "Send always log" } VALUE aget[17] ;
-                   WIDTH 120 TOOLTIP "Select a Log options" ;
-                   ON CHANGE Changelog() 
+      @ 345,24 RADIOGROUP Radio_2 OPTIONS { "No send log", "Send only if fail", "Send always log" } VALUE aget[17] ;
+         WIDTH 120 TOOLTIP "Select a Log options" ;
+         ON CHANGE Changelog()
 
-          @ 430,24 SPINNER Spinner_1 RANGE 0,10 VALUE aget[18] WIDTH 50 TOOLTIP "Range 0,10 minutes (Shutdown require Admin Rights)" ON CHANGE ( aget[18]:= this.value, Changelog() )
+      @ 430,24 SPINNER Spinner_1 RANGE 0,10 VALUE aget[18] WIDTH 50 TOOLTIP "Range 0,10 minutes (Shutdown require Admin Rights)" ON CHANGE ( aget[18]:= this.value, Changelog() )
 
-          Form_1.Edit_1.Value := aget[8]
+      Form_1.Edit_1.Value := aget[8]
 
-          DEFINE CONTEXT MENU CONTROL Combo_7
-                MENUITEM "Add a File(s) To Attach" ACTION File_Attached(.F.,.F.,.T.) NAME ADDFILE
-                MENUITEM "Remove from list" ACTION File_Attached(.T.,.T.,.T.) NAME DELFILE DISABLED
-          END MENU
+      DEFINE CONTEXT MENU CONTROL Combo_7
+         MENUITEM "Add a File(s) To Attach" ACTION File_Attached(.F.,.F.,.T.) NAME ADDFILE
+         MENUITEM "Remove from list" ACTION File_Attached(.T.,.T.,.T.) NAME DELFILE DISABLED
+      END MENU
 
-          ON KEY ALT+S ACTION m_send(.T.)
-          ON KEY ALT+C ACTION m_config()
-          ON KEY ALT+T ACTION File_Attached(.T.)
-          ON KEY ALT+A ACTION m_about()
-          ON KEY ALT+X ACTION ReleaseAllWindows()
+      ON KEY ALT+S ACTION m_send(.T.)
+      ON KEY ALT+C ACTION m_config()
+      ON KEY ALT+T ACTION File_Attached(.T.)
+      ON KEY ALT+A ACTION m_about()
+      ON KEY ALT+X ACTION ReleaseAllWindows()
 
-   END WINDOW 
+   END WINDOW
 
    Form_1.Title := PROGRAM + IF(Form_1.Check_1.Value == .T., extratitle, "")
 
-   Displaystatus()
+   DISPLAYstatus()
 
    CENTER WINDOW Form_1
 
    ACTIVATE WINDOW Form_1
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function Readlog( nogui )
-*-----------------------------------------------------------------------------*
-Local cExePath := LogPath+"*.txt"
-local dirLog   := directory(cExePath), cString:='', le := len(dirlog)
-local filename := LogPath  , hnd, start, stop, n
-Local cBuff    , arow := {} ,nerr := 0 ,cntbr, artv := {}
-Local outFile  := Left( ExeName(), RAt( "\", ExeName() ) )+"Log.txt"
-Local lr       := {462,1156}, Mr , cdt, nLength
-Local destHandle, TmpBuff, LastPos, BuffPos, ByteCount
+   RETURN
+   /*
+   */
 
-DEFAULT Nogui TO .F.
+FUNCTION Readlog( nogui )
 
-if !lchg
-   if !nogui
-      Form_1.PicButton_5.enabled := .F.
-   Endif
-Endif
+   LOCAL cExePath := LogPath+"*.txt"
+   LOCAL dirLog   := directory(cExePath), cString:='', le := len(dirlog)
+   LOCAL filename := LogPath  , hnd, start, stop, n
+   LOCAL cBuff    , arow := {} ,nerr := 0 ,cntbr, artv := {}
+   LOCAL outFile  := Left( ExeName(), RAt( "\", ExeName() ) )+"Log.txt"
+   LOCAL lr       := {462,1156}, Mr , cdt, nLength
+   LOCAL destHandle, TmpBuff, LastPos, BuffPos, ByteCount
 
-* se non trovo file di testo esco dalla procedura
-* If I find I get out of text files from the procedure
-if le < 1
-   if !nogui
-      msgexclamation(LogPath+CRLF+CRLF+"No log available on this folder!")
-   endif
-   * tolgo la richiesta di salvataggio in uscita
-   * remove the prompt to save on exit
-   lchg := .f.
-   Return .F.
-endif
+   DEFAULT Nogui TO .F.
 
-*Cancello il file di log precedente
-* Gate the previous log file
-Ferase(outfile)
-* una pausa per permettere a Cobian di generare il log completo solo se attivo il modo silent
-* A break to allow Cobian to generate the complete log only if activated the silent mode
-if nogui
-   inkey(5,128)
-Endif
-* Metto in ordine di data
-* I put in order of date
-ASort(dirlog,,, { |x, y| x[3] > y[3] })
+   IF !lchg
+      IF !nogui
+         Form_1.PicButton_5.enabled := .F.
+      ENDIF
+   ENDIF
 
-*Se ci sono più log devo estrarre l'ultimo generato
-* If there are more I have to pull out the last log generated
-cdt := dirlog[1,3]
-aeval(dirlog,{ |x| if(x[3]=cdt,aadd(artv,x),) } )
-ASort( artv ,,, { |x, y| x[4] > y[4] })
+   * se non trovo file di testo esco dalla procedura
+   * If I find I get out of text files from the procedure
+   IF le < 1
+      IF !nogui
+         msgexclamation(LogPath+CRLF+CRLF+"No log available on this folder!")
+      ENDIF
+      * tolgo la richiesta di salvataggio in uscita
+      * remove the prompt to save on exit
+      lchg := .f.
 
-cntbr := rat("]",aget[6])
-*controllo se è il log desiderato
-* Check if the desired log
-if date() > artv[1,3]
-   if !nogui
-      msgstop("Report non ancora elaborato !";
-      ,if (" PROPERLY "$ Form_1.Label_11.VALUE,"LOG FOLDER PATH NOT SET !!! ","Data esecuzione superiore a quella di log!" ) )
-   Endif
-   aget[ 8] := "Report non ancora elaborato !"+Hb_eol()+"Trovato il file: "+artv[1,1]
-   Success( .F. , cntbr, nogui )
-   if !Nogui
+      RETURN .F.
+   ENDIF
+
+   *Cancello il file di log precedente
+   * Gate the previous log file
+   Ferase(outfile)
+   * una pausa per permettere a Cobian di generare il log completo solo se attivo il modo silent
+   * A break to allow Cobian to generate the complete log only if activated the silent mode
+   IF nogui
+      inkey(5,128)
+   ENDIF
+   * Metto in ordine di data
+   * I put in order of date
+   ASort(dirlog,,, { |x, y| x[3] > y[3] })
+
+   *Se ci sono più log devo estrarre l'ultimo generato
+   * If there are more I have to pull out the last log generated
+   cdt := dirlog[1,3]
+   aeval(dirlog,{ |x| if(x[3]=cdt,aadd(artv,x),) } )
+   ASort( artv ,,, { |x, y| x[4] > y[4] })
+
+   cntbr := rat("]",aget[6])
+   *controllo se è il log desiderato
+   * Check if the desired log
+   IF date() > artv[1,3]
+      IF !nogui
+         msgstop("Report non ancora elaborato !";
+            ,if (" PROPERLY "$ Form_1.Label_11.VALUE,"LOG FOLDER PATH NOT SET !!! ","Data esecuzione superiore a quella di log!" ) )
+      ENDIF
+      aget[ 8] := "Report non ancora elaborato !"+Hb_eol()+"Trovato il file: "+artv[1,1]
+      Success( .F. , cntbr, nogui )
+      IF !Nogui
+         Form_1.Edit_1.Value := aget[8]
+      ENDIF
+      * tolgo la richiesta di savataggo in uscita
+      * remove the prompt to save on exit
+      lchg := .f.
+      SaveEnable(nogui)
+
+      RETURN aget[17] = 3
+   ENDIF
+
+   * apro il file in lettura
+   * I open the file for reading
+   filename += artv[1,1]
+
+   Aget[15] := Lower( cFileNoExt( FileName ) )
+   namelog  := GetcurrentFolder()+"\"+aget[15]+".Txt"
+
+   * Creo una copia pronta per la spedizione previa cancellazione
+   * I create a copy ready for shipping after deletion
+   IF file (namelog)
+      Ferase ( namelog )
+   ENDIF
+
+   hnd := FOPEN(filename,64)
+   IF Ferror() <> 0
+      IF !Nogui
+         msgStop("Error opening file : "+filename,"Readlog 364")
+      ENDIF
+      * Procedura abortita
+      * Abortive Procedure
+
+      RETURN .F.
+   ENDIF
+   * quì la procedura di copia poichè con Filecopy fallisce
+   * Here the copy procedure as with filecopy fails
+   IF len (aget[7]) > 1
+      IF ( (destHandle:= fcreate(namelog, 0)) != -1 )
+         LastPos:= fseek(hnd, 0, 2)
+         BuffPos:= 0
+         fseek(hnd, 0, 0)
+         DO WHILE (BuffPos < LastPos)
+            TmpBuff := Space(8192)
+            BuffPos += (ByteCount:= fread(hnd, @TmpBuff,8192))
+            fwrite(destHandle, TmpBuff, ByteCount)
+         ENDDO
+         fclose(destHandle)
+      ENDIF
+   ENDIF
+
+   * Mi adatto alla dimensione del Log
+   * I adapt to the size of the Log
+   Mr := if( artv[1,2] <= lr[1],lr[1],lr[2] )
+   * vado alla file del file
+   * I go to the file
+   nLength := FSEEK(Hnd, 0, 2 )
+   * Torno indietro di 462 o 1156 Bytes
+   * Back to 462 or 1156 Bytes
+   FSEEK(Hnd, nLength-Mr,0 )
+   * ora pulisco i caratteri indesiderati
+   * now I'm cleaning the unwanted characters
+   FOR N = 1 TO Mr   //462
+      cBuff := FREADSTR(Hnd, 1)
+      IF cBuff = CHR(13)
+         IF !empty(cstring)
+            aadd (arow,alltrim(cstring))
+         ENDIF
+         cstring := ''
+      ELSE
+         cString += cBuff
+      ENDIF
+      FSEEK(hnd,1,1)
+   NEXT
+
+   * se trovate le righe giuste  altrimenti genera l'errore
+   * If you find the right lines otherwise generates error
+   IF len(arow) > 2
+      FOR n =  1 to len(arow)
+         start := at("Error",arow[n])
+         stop  := at("File ",arow[n])
+         nerr  += trueval(substr(arow[n],start,stop-start))
+      NEXT
+      * formatto in modo che la procedura ripetuta generi lo stesso subject
+      * I format so that the procedure repeated kinds the same subject
+      Success( nerr < 1, cntbr ,nogui )
+      IF !Nogui
+         Form_1.Text_6.Value := aget[6]
+      ENDIF
+      aget[ 8] := "File: "+artv[1,1]+CrLf
+      aeval(arow,{|x| aget[ 8] += x+CrLf })
+   ELSE
+      aget[ 8] := "File: "+artv[1,1]+CrLf
+      aeval(arow,{|x| aget[ 8] += x+CrLf })
+      Success( .F. , cntbr, nogui )
+   ENDIF
+
+   writefile( outfile, arow )
+   IF !Nogui
       Form_1.Edit_1.Value := aget[8]
-   Endif
-   * tolgo la richiesta di savataggo in uscita
+   ENDIF
+   fclose(hnd)
+
+   * tolgo la richiesta di savataggoi in uscita
    * remove the prompt to save on exit
    lchg := .f.
-   SaveEnable(nogui)
-   Return aget[17] = 3
-Endif
 
-* apro il file in lettura
-* I open the file for reading
-filename += artv[1,1]
+   RETURN .T.
+   /*
+   */
 
-Aget[15] := Lower( cFileNoExt( FileName ) )
-namelog  := GetcurrentFolder()+"\"+aget[15]+".Txt"
+PROCEDURE Success( Yes,cntbr, nogui )
 
-* Creo una copia pronta per la spedizione previa cancellazione
-* I create a copy ready for shipping after deletion
-if file (namelog)
-   Ferase ( namelog )
-Endif
+   LOCAL vCombo
 
-hnd := FOPEN(filename,64)
-If Ferror() <> 0
-   if !Nogui
-      msgStop("Error opening file : "+filename,"Readlog 364")
-   Endif
-   * Procedura abortita
-   * Abortive Procedure
-   Return .F.
-Endif
-* quì la procedura di copia poichè con Filecopy fallisce
-* Here the copy procedure as with filecopy fails
-If len (aget[7]) > 1
-   If ( (destHandle:= fcreate(namelog, 0)) != -1 )
-      LastPos:= fseek(hnd, 0, 2)
-      BuffPos:= 0
-      fseek(hnd, 0, 0)
-      Do While (BuffPos < LastPos)
-         TmpBuff := Space(8192)
-         BuffPos += (ByteCount:= fread(hnd, @TmpBuff,8192))
-         fwrite(destHandle, TmpBuff, ByteCount)
-      EndDo
-      fclose(destHandle)
-   EndIf
-EndIf
+   DEFAULT yes to .F., nogui to .f.
 
-* Mi adatto alla dimensione del Log
-* I adapt to the size of the Log
-Mr := if( artv[1,2] <= lr[1],lr[1],lr[2] )
-* vado alla file del file
-* I go to the file
-nLength := FSEEK(Hnd, 0, 2 )
-* Torno indietro di 462 o 1156 Bytes
-* Back to 462 or 1156 Bytes
-FSEEK(Hnd, nLength-Mr,0 )
-* ora pulisco i caratteri indesiderati
-* now I'm cleaning the unwanted characters
-FOR N = 1 TO Mr   //462
-    cBuff := FREADSTR(Hnd, 1)
-    IF cBuff = CHR(13)
-       if !empty(cstring)
-          aadd (arow,alltrim(cstring))
-       Endif
-       cstring := ''
-    Else
-       cString += cBuff
-    Endif
-    FSEEK(hnd,1,1)
-NEXT
+   IF !Yes
+      IF cntbr < 1
+         aget[ 6] := "[ Fail ] " +aget[6]
+      ELSE
+         aget[ 6] := substr(aget[6],cntbr+2 )
+         aget[ 6] := "[ Fail ] " +aget[6]
+      ENDIF
+   ELSE
+      IF cntbr < 1
+         aget[ 6] := "[ Success ] " +aget[6]
+      ELSE
+         aget[ 6] := substr(aget[6],cntbr+2 )
+         aget[ 6] := "[ Success ] " +aget[6]
+      ENDIF
+   ENDIF
 
-* se trovate le righe giuste  altrimenti genera l'errore
-* If you find the right lines otherwise generates error
-if len(arow) > 2
-   for n =  1 to len(arow)
-       start := at("Error",arow[n])
-       stop  := at("File ",arow[n])
-       nerr  += trueval(substr(arow[n],start,stop-start))
-   next
-   * formatto in modo che la procedura ripetuta generi lo stesso subject
-   * I format so that the procedure repeated kinds the same subject
-   Success( nerr < 1, cntbr ,nogui )
-   if !Nogui
-      Form_1.Text_6.Value := aget[6]
-   Endif
-   aget[ 8] := "File: "+artv[1,1]+CrLf
-   aeval(arow,{|x| aget[ 8] += x+CrLf })
-Else
-   aget[ 8] := "File: "+artv[1,1]+CrLf
-   aeval(arow,{|x| aget[ 8] += x+CrLf })
-   Success( .F. , cntbr, nogui )
-Endif
-
-writefile( outfile, arow )
-if !Nogui
-   Form_1.Edit_1.Value := aget[8]
-Endif
-fclose(hnd)
-
-* tolgo la richiesta di savataggoi in uscita
-* remove the prompt to save on exit
-lchg := .f.
-
-Return .T.
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure Success( Yes,cntbr, nogui )
-*-----------------------------------------------------------------------------*
-Local vCombo
-default yes to .F., nogui to .f.
-
-if !Yes
-    if cntbr < 1
-       aget[ 6] := "[ Fail ] " +aget[6]
-    Else
-       aget[ 6] := substr(aget[6],cntbr+2 )
-       aget[ 6] := "[ Fail ] " +aget[6]
-    Endif
-Else
-    if cntbr < 1
-       aget[ 6] := "[ Success ] " +aget[6]
-    Else
-       aget[ 6] := substr(aget[6],cntbr+2 )
-       aget[ 6] := "[ Success ] " +aget[6]
-    Endif
-Endif
-
-if aget[17] = 3 .or. ("Fail" $ aget[ 6] .and. aget[17] = 2 )   // send the log if always request or if fail)
+   IF aget[17] = 3 .or. ("Fail" $ aget[ 6] .and. aget[17] = 2 )   // send the log if always request or if fail)
       * is there same item ?
       vcombo := ascan(aget[7],namelog)
-      if vCombo < 1
+      IF vCombo < 1
          aAdd(aGet[7], nameLog)
-         if !nogui
+         IF !nogui
             Form_1.Combo_7.AddItem(nameLog)
             Form_1.Combo_7.Value := len(aget[7])
-         Endif
-      else
-         if !nogui
+         ENDIF
+      ELSE
+         IF !nogui
             Form_1.Combo_7.AddItem(nameLog)
             Form_1.Combo_7.Value := vCombo
-         Endif
-      Endif
-Endif
-
-if !Nogui
-   Form_1.Text_6.Value := aget[6]
-Endif
-
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-FUNCTION Trueval(string)
-*-----------------------------------------------------------------------------*
-   local Lenx,I,outval:='',letter
-   default string to ''
-   Lenx := LEN(string)
-   For i = 1 TO Lenx
-       letter = SUBST(string,i,1)
-       IF letter $ "-0123456789."
-          outval += letter
-       ENDIF
-   NEXT
-Return VAL(outval)
-/*
-*/
-*-----------------------------------------------------------------------------*
-FUNCTION Writefile(filename,arrayname)
-*-----------------------------------------------------------------------------*
-Local f_handle,kounter
-* open file and position pointer at the end of file
-IF VALTYPE("filename")=="C"
-  f_handle = FOPEN(filename,2)
-  *- if not joy opening file, create one
-  IF Ferror() <> 0
-    f_handle := Fcreate(filename,0)
-  ENDIF
-  FSEEK(f_handle,0,2)
-ELSE
-  f_handle := filename
-  FSEEK(f_handle,0,2)
-ENDIF
-
-IF VALTYPE(arrayname) == "A"
-   * if its an array, do a loop to write it out
-   FOR kounter = 1 TO len(arrayname)
-       *- append a CR/LF
-       FWRITE(f_handle,arrayname[kounter]+CRLF )
-   NEXT
-ELSE
-  * must be a character string - just write it
-  FWRITE(f_handle,arrayname+CRLF )
-ENDIF (VALTYPE(arrayname) == "A")
-
-* close the file
-IF VALTYPE("filename") == "C"
-   Fclose(f_handle)
-ENDIF
-
-Return .T.
-/*
-*/
-*-----------------------------------------------------------------------------*
-Function LogFolder()
-*-----------------------------------------------------------------------------*
-  Local nFolder, cPath ,fTitle := Form_1.Title
-
-  if empty(aget[16])
-     nFolder := Left( ExeName(), RAt( "\", ExeName() ) )
-  Else
-     nFolder := aget[16]
-  Endif
-  Form_1.Title := PROGRAM 
-  If !Empty( (cPath := getfolder("Browse for log folder ....",nFolder)) )
-     LogPath := cPath +"\"
-     aget[16] := cPath
-     Form_1.Label_11.VALUE := "Log folder path = "+LogPath
-  End If
-  Form_1.Title := fTitle
-  if nfolder <> aget [16]
-     Changeinfo()
-  Endif
-Return Nil
-
-/*
-*/
-*-----------------------------------------------------------------------------* 
-STATIC PROCEDURE Mcontext(ACT) 
-*-----------------------------------------------------------------------------* 
-DEFAULT ACT TO .T.
-
-IF ACT
-   // DO EVENTS
-   IF EMPTY(FORM_1.COMBO_7.DISPLAYVALUE)
-       DISABLE MENUITEM DELFILE OF FORM_1
-   ELSE
-       ENABLE MENUITEM DELFILE OF FORM_1
+         ENDIF
+      ENDIF
    ENDIF
-ENDIF
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC PROCEDURE DisplayStatus() 
-*-----------------------------------------------------------------------------* 
-local lpf := "Log folder path = "+LogPath
+   IF !Nogui
+      Form_1.Text_6.Value := aget[6]
+   ENDIF
 
-If alltrim(LogPath) <> "\"
-    if LogPath == GetcurrentFolder()+"\"
-      lpf := "LOG FOLDER PATH ( "+logpath +" ) NOT SET PROPERLY !!! "
-    Endif
-    Form_1.Label_11.VALUE := lpf
-Endif
+   RETURN
+   /*
+   */
 
-if Empty(Form_1.Combo_7.DisplayValue)
-   _setTooltip("combo_7","Form_1","Attached File(s) List")
-else
-   _setitem("statusbar","Form_1",1,SPACE(8)+"File: "+cfilenopath(Form_1.combo_7.displayvalue))
-   _setTooltip("combo_7","Form_1","Attached File: "+cfilenopath(Form_1.combo_7.displayvalue))
-endif
+FUNCTION Trueval(string)
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC PROCEDURE SetFcompress() 
-*-----------------------------------------------------------------------------* 
-Local Compress := Lower( aGet[15] ), new := Lower( cFileNoExt( Form_1.Combo_7.DisplayValue ) )
+   LOCAL Lenx,I,outval:='',letter
 
-If Form_1.Check_1.Value == .T. .and. !Empty(new)
-   If !Empty(compress) .and. compress <> new
-      PlayExclamation()
-      If msgYesNo("Do you want to replace the file "+compress+".Zip" + CRLF + ;
-                  "with the new "+new+".Zip ?", "Confirm", , IDI_MAIN, .f.)
-         aGet[15] := new
-      EndIf
-   Else
-      aGet[15] := new
-   EndIf
-Else
-   aGet[15] := ''
-EndIf
+   DEFAULT string to ''
+   Lenx := LEN(string)
+   FOR i = 1 TO Lenx
+      letter = SUBST(string,i,1)
+      IF letter $ "-0123456789."
+         outval += letter
+      ENDIF
+   NEXT
 
-If Empty(new)
-   if aget[17] < 2
-      Form_1.Check_1.Value := .F.
-   Endif
+   RETURN VAL(outval)
+   /*
+   */
+
+FUNCTION Writefile(filename,arrayname)
+
+   LOCAL f_handle,kounter
+
+   * open file and position pointer at the end of file
+   IF VALTYPE("filename")=="C"
+      f_handle = FOPEN(filename,2)
+      *- if not joy opening file, create one
+      IF Ferror() <> 0
+         f_handle := Fcreate(filename,0)
+      ENDIF
+      FSEEK(f_handle,0,2)
+   ELSE
+      f_handle := filename
+      FSEEK(f_handle,0,2)
+   ENDIF
+
+   IF VALTYPE(arrayname) == "A"
+      * if its an array, do a loop to write it out
+      FOR kounter = 1 TO len(arrayname)
+         *- append a CR/LF
+         FWRITE(f_handle,arrayname[kounter]+CRLF )
+      NEXT
+   ELSE
+      * must be a character string - just write it
+      FWRITE(f_handle,arrayname+CRLF )
+   ENDIF (VALTYPE(arrayname) == "A")
+
+   * close the file
+   IF VALTYPE("filename") == "C"
+      Fclose(f_handle)
+   ENDIF
+
+   RETURN .T.
+   /*
+   */
+
+FUNCTION LogFolder()
+
+   LOCAL nFolder, cPath ,fTitle := Form_1.Title
+
+   IF empty(aget[16])
+      nFolder := Left( ExeName(), RAt( "\", ExeName() ) )
+   ELSE
+      nFolder := aget[16]
+   ENDIF
    Form_1.Title := PROGRAM
-Else
-   Form_1.Title := PROGRAM + IF(Empty(aGet[15]), "", " [ I send the file(s) attached as "+aGet[15]+".Zip ]")
-EndIf
+   IF !Empty( (cPath := getfolder("Browse for log folder ....",nFolder)) )
+      LogPath := cPath +"\"
+      aget[16] := cPath
+      Form_1.Label_11.VALUE := "Log folder path = "+LogPath
+   END IF
+   Form_1.Title := fTitle
+   IF nfolder <> aget [16]
+      Changeinfo()
+   ENDIF
 
-if aget[17] > 1
-   if len(aget[7]) < 1
-      aget[15] := ""
-      Form_1.Check_1.Value := .F.
-   Endif
-Endif
+   RETURN NIL
 
-ChangeInfo()
-DisplayStatus()
-MCONTEXT()
+   /*
+   */
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+STATIC PROCEDURE Mcontext(ACT)
+
+   DEFAULT ACT TO .T.
+
+   IF ACT
+      // DO EVENTS
+      IF EMPTY(FORM_1.COMBO_7.DISPLAYVALUE)
+         DISABLE MENUITEM DELFILE OF FORM_1
+      ELSE
+         ENABLE MENUITEM DELFILE OF FORM_1
+      ENDIF
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+STATIC PROCEDURE DisplayStatus()
+
+   LOCAL lpf := "Log folder path = "+LogPath
+
+   IF alltrim(LogPath) <> "\"
+      IF LogPath == GetcurrentFolder()+"\"
+         lpf := "LOG FOLDER PATH ( "+logpath +" ) NOT SET PROPERLY !!! "
+      ENDIF
+      Form_1.Label_11.VALUE := lpf
+   ENDIF
+
+   IF Empty(Form_1.Combo_7.DisplayValue)
+      _setTooltip("combo_7","Form_1","Attached File(s) List")
+   ELSE
+      _setitem("statusbar","Form_1",1,SPACE(8)+"File: "+cfilenopath(Form_1.combo_7.displayvalue))
+      _setTooltip("combo_7","Form_1","Attached File: "+cfilenopath(Form_1.combo_7.displayvalue))
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+STATIC PROCEDURE SetFcompress()
+
+   LOCAL Compress := Lower( aGet[15] ), new := Lower( cFileNoExt( Form_1.Combo_7.DisplayValue ) )
+
+   IF Form_1.Check_1.Value == .T. .and. !Empty(new)
+      IF !Empty(compress) .and. compress <> new
+         PlayExclamation()
+         IF msgYesNo("Do you want to replace the file "+compress+".Zip" + CRLF + ;
+               "with the new "+new+".Zip ?", "Confirm", , IDI_MAIN, .f.)
+            aGet[15] := new
+         ENDIF
+      ELSE
+         aGet[15] := new
+      ENDIF
+   ELSE
+      aGet[15] := ''
+   ENDIF
+
+   IF Empty(new)
+      IF aget[17] < 2
+         Form_1.Check_1.Value := .F.
+      ENDIF
+      Form_1.Title := PROGRAM
+   ELSE
+      Form_1.Title := PROGRAM + IF(Empty(aGet[15]), "", " [ I send the file(s) attached as "+aGet[15]+".Zip ]")
+   ENDIF
+
+   IF aget[17] > 1
+      IF len(aget[7]) < 1
+         aget[15] := ""
+         Form_1.Check_1.Value := .F.
+      ENDIF
+   ENDIF
+
+   ChangeInfo()
+   DISPLAYStatus()
+   MCONTEXT()
+
+   RETURN
+   /*
+   */
+
 STATIC PROCEDURE m_Send(gui)
-*-----------------------------------------------------------------------------* 
-   LOCAL i, oSocket, cSMTP, cFrom, cTo, cCC, cBCC, cSubject, cMsgBody, aAttachment 
-   LOCAL lLogin, lLoginMD5, cUserID, cPassWord, lHTML, cUser := "" 
+
+   LOCAL i, oSocket, cSMTP, cFrom, cTo, cCC, cBCC, cSubject, cMsgBody, aAttachment
+   LOCAL lLogin, lLoginMD5, cUserID, cPassWord, lHTML, cUser := ""
    LOCAL Silent, Fcompress, nCompress := 9, nPriority := 3, nPort := 25
-   LOCAL cPrgPath := GetStartUpFolder()+"\" 
-   Local nFlag := MB_OK + MB_SETFOREGROUND + MB_SYSTEMMODAL + MB_ICONEXCLAMATION
+   LOCAL cPrgPath := GetStartUpFolder()+"\"
+   LOCAL nFlag := MB_OK + MB_SETFOREGROUND + MB_SYSTEMMODAL + MB_ICONEXCLAMATION
 
-   default gui to .T. 
+   DEFAULT gui to .T.
 
-   if !Readlog(!gui)
+   IF !Readlog(!gui)
       MessageBoxTimeout("Non verrà inviata alcuna mail !","",nflag ,3000)
-      Return
-   Endif
+
+      RETURN
+   ENDIF
 
    cSMTP       := aget[ 1]
    cFrom       := aget[ 2]
@@ -707,24 +707,23 @@ STATIC PROCEDURE m_Send(gui)
    // aGet[16] "LogPath"
    // aGet[17] "SendLog"
 
+   IF Gui
+      nPriority   := if(Form_1.Radio_0.Value == 2, 1, if(Form_1.Radio_0.Value == 3, 5, nPriority))
+      Silent   := .F.
+   ENDIF
 
-   if Gui 
-      nPriority	:= if(Form_1.Radio_0.Value == 2, 1, if(Form_1.Radio_0.Value == 3, 5, nPriority))
-      Silent	:= .F.
-   endif
-
-   if "Fail" $ aget[ 6] .and. aget[17] = 1
+   IF "Fail" $ aget[ 6] .and. aget[17] = 1
       Fcompress := ""
-   Endif
+   ENDIF
 
-   if len (aget[7]) > 1
+   IF len (aget[7]) > 1
       Fcompress   := aGet[15]
-   Endif
+   ENDIF
 
-   If !Empty(Fcompress).and. len(aget[7]) > 0
+   IF !Empty(Fcompress).and. len(aget[7]) > 0
       HB_ZIPFILE( cPrgPath+Fcompress+".Zip", aAttachment, nCompress , , .T. , , .T. )
       aAttachment := { cPrgPath+Fcompress+".Zip" }
-   EndIf
+   ENDIF
 
    oSocket := TSMTP():New()
 
@@ -775,86 +774,89 @@ STATIC PROCEDURE m_Send(gui)
       IF lLogin
          IF lLoginMD5
             IF ! oSocket:LoginMD5( cUserID, cPassWord )
-               If Silent
+               IF Silent
                   LogFile( cLogFile, {oSocket:GetLastError()+" While trying to login got an error messages from server"} )
-               Else
+               ELSE
                   MsgStop( oSocket:GetLastError(), "While trying to login got an error messages from server" )
-               EndIf
+               ENDIF
                oSocket:Close()
-               Return
+
+               RETURN
             ENDIF
          ELSEIF ! oSocket:Login( cUserID, cPassWord )
-            If Silent
+            IF Silent
                LogFile( cLogFile, {oSocket:GetLastError()+" While trying to login got an error messages from server"} )
-            Else
+            ELSE
                MsgStop( oSocket:GetLastError(), "While trying to login got an error messages from server" )
-            EndIf
+            ENDIF
             oSocket:Close()
-            Return
+
+            RETURN
          ENDIF
       ENDIF
 
       IF ! oSocket:Send(.T.)
-         If Silent
+         IF Silent
             LogFile( cLogFile, {oSocket:GetLastError()+" While trying to send data got an error messages from server"} )
-         Else
+         ELSE
             MsgStop( oSocket:GetLastError(), "While trying to send data got an error messages from server" )
-         EndIf
+         ENDIF
          oSocket:Close()
-         Return
+
+         RETURN
       ENDIF
 
       oSocket:Close()
 
-      If Silent
+      IF Silent
          LogFile( cLogFile, {"Mail sent to " + cTo + " successfully"} )
-      Else
+      ELSE
          MsgInfo( "Mail sent to " + cTo + " successfully!", PROGRAM )
-      EndIf
+      ENDIF
 
    ELSE
 
-      If Silent
+      IF Silent
          LogFile( cLogFile, {"Can't connect to SMTP server: " + cSMTP} )
-      Else
+      ELSE
          MsgStop( "Can't connect to SMTP server: " + cSMTP, "Error while trying to connect to SMTP server" )
-      EndIf
+      ENDIF
 
    ENDIF
-*/
-* Clean Files tmp now after a little pause
-inkey(10)
-Ferase(GetStartUpFolder()+"\"+aget[15]+".txt")
-Ferase(GetStartUpFolder()+"\"+aget[15]+".Zip")
-* Can I shutdown The Pc ?
+   */
+   * Clean Files tmp now after a little pause
+   inkey(10)
+   Ferase(GetStartUpFolder()+"\"+aget[15]+".txt")
+   Ferase(GetStartUpFolder()+"\"+aget[15]+".Zip")
+   * Can I shutdown The Pc ?
 
-if aget[18] > 0
-   SetTimer()
-Endif
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC PROCEDURE m_config() 
-*-----------------------------------------------------------------------------* 
+   IF aget[18] > 0
+      SetTimer()
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+STATIC PROCEDURE m_config()
 
    DEFINE WINDOW Form_2 ;
-      AT 199,144 WIDTH 374 HEIGHT 221 ;
-      TITLE Left(PROGRAM, Len(PROGRAM)-3)+"Config" ;
-      ICON IDI_MAIN ;
-      MODAL NOSIZE ;
-      ON INIT Form_2.Button_1.Setfocus ;
-      FONT "MS Sans Serif" SIZE 10
+         AT 199,144 WIDTH 374 HEIGHT 221 ;
+         TITLE Left(PROGRAM, Len(PROGRAM)-3)+"Config" ;
+         ICON IDI_MAIN ;
+         MODAL NOSIZE ;
+         ON INIT Form_2.Button_1.Setfocus ;
+         FONT "MS Sans Serif" SIZE 10
 
       @ 8,8 FRAME Frame_1 WIDTH 350 HEIGHT 138
 
       @ 22,25 CHECKBOX CheckBox_1 CAPTION "My server requires authentication" ;
-              WIDTH 240 HEIGHT 22 ON CHANGE ( aget[9] := Form_2.CheckBox_1.Value, ChangeInfo() )
+         WIDTH 240 HEIGHT 22 ON CHANGE ( aget[9] := Form_2.CheckBox_1.Value, ChangeInfo() )
       Form_2.CheckBox_1.Value := aget[9]
 
       @ 46,45 CHECKBOX CheckBox_2 CAPTION "MD5 Password Authentication" ;
-              WIDTH 200 HEIGHT 22 ON CHANGE ( aget[10] := Form_2.CheckBox_2.Value, ChangeInfo() )
-      
+         WIDTH 200 HEIGHT 22 ON CHANGE ( aget[10] := Form_2.CheckBox_2.Value, ChangeInfo() )
+
       Form_2.CheckBox_2.Value := aget[10]
 
       @ 81,25 LABEL Label_1 VALUE "User Name" WIDTH 90 HEIGHT 22
@@ -875,394 +877,399 @@ STATIC PROCEDURE m_config()
    CENTER WINDOW Form_2
 
    ACTIVATE WINDOW Form_2
-   
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC FUNCTION m_about() 
-*-----------------------------------------------------------------------------*
-Return MsgInfo(padc(PROGRAM + " - Freeware", 40) + CRLF + ;
-   "Copyright (c) 2005-2006 Grigory Filatov" + CRLF + CRLF + ;
-   padc("Email: gfilatov@front.ru", 36) + CRLF + CRLF + ;
-   "Improved by Pierpaolo Martinello 2016"+ CRLF + CRLF + ;
-   hb_compiler() + CRLF + ;
-   version() + CRLF + ;
-   substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
-/*
-*/
-*-----------------------------------------------------------------------------*
+
+   RETURN
+   /*
+   */
+
+STATIC FUNCTION m_about()
+
+   RETURN MsgInfo(padc(PROGRAM + " - Freeware", 40) + CRLF + ;
+      "Copyright (c) 2005-2006 Grigory Filatov" + CRLF + CRLF + ;
+      padc("Email: gfilatov@front.ru", 36) + CRLF + CRLF + ;
+      "Improved by Pierpaolo Martinello 2016"+ CRLF + CRLF + ;
+      hb_compiler() + CRLF + ;
+      version() + CRLF + ;
+      substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
+   /*
+   */
+
 STATIC PROCEDURE File_Attached( lClear, lcOne, oAdd , sLog )
-*-----------------------------------------------------------------------------*
+
    LOCAL i,ync, cNewAtt, c := .F., v := aget[7], cv := Form_1.Combo_7.Value
+
    //Local Ichk := GetComboArray( "Combo_7", "Form_1" )
 
-   Default lClear to .F., lcOne to .F., oAdd to .F. , slog to .f.
+   DEFAULT lClear to .F., lcOne to .F., oAdd to .F. , slog to .f.
 
-   if slog
+   IF slog
       cNewAtt := v
-   Else
-      if len(v) > 0 .and. !lClear .and. Form_1.Combo_7.ItemCount > 0
-         if !oadd
+   ELSE
+      IF len(v) > 0 .and. !lClear .and. Form_1.Combo_7.ItemCount > 0
+         IF !oadd
             PlayExclamation()
             ync := msgYesNoCancel("Add a new file or make a new selection?", "Choice", IDI_MAIN, .f.)
-            if ync = -1
-               Return
-            else
-               c := ( ync == 0 )
-            endif
-         endif
-      Endif
+            IF ync = -1
 
-      if !lClear
+               RETURN
+            ELSE
+               c := ( ync == 0 )
+            ENDIF
+         ENDIF
+      ENDIF
+
+      IF !lClear
          cNewAtt := GetFile( { {"All Files", "*.*"}, ;
             {"ZIP Archives", "*.zip"}, {"RAR Archives", "*.rar"} }, ;
             "Select a File(s) To Attach", , .T. )
-      endif
+      ENDIF
 
-   Endif
+   ENDIF
 
-   if !empty( cNewAtt )
+   IF !empty( cNewAtt )
 
-      If C
+      IF C
          aGet[7] := {}
          Form_1.Combo_7.DeleteAllItems
          v := {}
-      Endif
+      ENDIF
 
-      if valtype(cNewAtt) == 'C'
+      IF valtype(cNewAtt) == 'C'
 
-         If ascan(v,cNewAtt) < 1
+         IF ascan(v,cNewAtt) < 1
             Form_1.Combo_7.AddItem(cNewAtt)
             aAdd(aGet[7], cNewAtt)
-         Endif
+         ENDIF
 
-      elseif valtype(cNewAtt) == 'A'
+      ELSEIF valtype(cNewAtt) == 'A'
 
-         for i := 1 to len(cNewAtt)
+         FOR i := 1 to len(cNewAtt)
 
-             if ascan(aget[7],cNewAtt[i]) < 1
-                Form_1.Combo_7.AddItem(cNewAtt[i])
-                aAdd(aGet[7], cNewAtt[i])
-             Endif
+            IF ascan(aget[7],cNewAtt[i]) < 1
+               Form_1.Combo_7.AddItem(cNewAtt[i])
+               aAdd(aGet[7], cNewAtt[i])
+            ENDIF
 
-         next i
+         NEXT i
 
-      endif
+      ENDIF
 
       Form_1.Combo_7.Value := 1
 
-   elseif lClear
+   ELSEIF lClear
 
-      if LcOne
+      IF LcOne
          Form_1.Combo_7.DeleteItem( cv )
          aGet[7] := GetComboArray( "Combo_7", "Form_1" )
          Form_1.Combo_7.Value := if( cv >= 1, cv - 1, 1 )
-      else
+      ELSE
          aGet[7] := {}
          Form_1.Combo_7.DeleteAllItems
          Form_1.Check_1.Value := .F.
          aGet[15] := ''
-      Endif
+      ENDIF
 
-   endif
+   ENDIF
 
    // DO EVENTS
 
-   If EMPTY(FORM_1.COMBO_7.DISPLAYVALUE)
-       DISABLE MENUITEM DELFILE OF FORM_1
-   Else
-       ENABLE MENUITEM DELFILE OF FORM_1
-   Endif
+   IF EMPTY(FORM_1.COMBO_7.DISPLAYVALUE)
+      DISABLE MENUITEM DELFILE OF FORM_1
+   ELSE
+      ENABLE MENUITEM DELFILE OF FORM_1
+   ENDIF
 
    SetFCompress()
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC PROCEDURE SaveData(out) 
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
+STATIC PROCEDURE SaveData(out)
+
    LOCAL i, s := aget[14], q := .T.
-   Default out to .F.
-   
-   if !s
-      if out
+
+   DEFAULT out to .F.
+
+   IF !s
+      IF out
          PlayExclamation()
          q := msgYesno("Do you want to save these parameters ?", "Exit from application.", q, IDI_MAIN, .f.)
-      Endif
-   endif
+      ENDIF
+   ENDIF
 
-   if q
+   IF q
       BEGIN INI FILE cCfgFile
 
-            SET SECTION Left(PROGRAM, Len(PROGRAM)-4) ENTRY "Release" to Right(PROGRAM, 3)
+         SET SECTION Left(PROGRAM, Len(PROGRAM)-4) ENTRY "Release" to Right(PROGRAM, 3)
 
-            For i := 1 To Len(aEntry)
-                IF i == 8
-                   aGet[i] := STRTRAN( aGet[i], CRLF, Chr(250) )
-                ELSEIF i == 12
-                   aGet[i] := CHARXOR( aGet[i], cCryptKey )
-                ENDIF
-                SET SECTION "Data" ENTRY aEntry[i] TO aGet[i]
-            Next i
+         FOR i := 1 To Len(aEntry)
+            IF i == 8
+               aGet[i] := STRTRAN( aGet[i], CRLF, Chr(250) )
+            ELSEIF i == 12
+               aGet[i] := CHARXOR( aGet[i], cCryptKey )
+            ENDIF
+            SET SECTION "Data" ENTRY aEntry[i] TO aGet[i]
+         NEXT i
 
       END INI
    endi
    aGet[12] := CHARXOR( aGet[12], cCryptKey )
    lchg := .F.
    SaveEnable()
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure SaveEnable(nogui)
-*-----------------------------------------------------------------------------*
-   default nogui to .F.
-   If !nogui
+
+   RETURN
+   /*
+   */
+
+PROCEDURE SaveEnable(nogui)
+
+   DEFAULT nogui to .F.
+   IF !nogui
       Form_1.PicButton_5.enabled := lchg
-   Endif
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-STATIC PROCEDURE LogFile( cFileName, acInfo ) 
-*-----------------------------------------------------------------------------*
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+STATIC PROCEDURE LogFile( cFileName, acInfo )
+
    LOCAL hFile, cLine := DToC( Date() ) + " " + Time() + " : ", n
 
-   For n = 1 to Len( acInfo )
+   FOR n = 1 to Len( acInfo )
       cLine += acInfo[ n ] + Chr( 9 )
-   Next
+   NEXT
    cLine += CRLF
 
-   if ! File( cFileName )
+   IF ! File( cFileName )
       FClose( FCreate( cFileName ) )
-   endif
+   ENDIF
 
    if( ( hFile := FOpen( cFileName, FO_WRITE + FO_SHARED ) ) != -1 )
-      FSeek( hFile, 0, FS_END )
-      FWrite( hFile, cLine, Len( cLine ) )
-      FClose( hFile )
-   endif
+   FSeek( hFile, 0, FS_END )
+   FWrite( hFile, cLine, Len( cLine ) )
+   FClose( hFile )
+ENDIF
 
-Return
+RETURN
 /*
 */
-*-----------------------------------------------------------------------------*
-STATIC Function GetComboArray( ControlName, ParentWindow ) 
-*-----------------------------------------------------------------------------*
-Local n, cnt := GetProperty( ParentWindow, ControlName, "ITEMCOUNT" ), aret := {}
 
-for n = 1 to cnt
-    aadd( aret, GetProperty( ParentWindow, ControlName, "ITEM", n ) )
-next
+STATIC FUNCTION GetComboArray( ControlName, ParentWindow )
 
-Return aret
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure ChangeLog()
-*-----------------------------------------------------------------------------*
-Local ret, q:= .t.,  cmp := Empty(Form_1.Combo_7.DisplayValue)
-    ret := Form_1.Radio_2.Value
+   LOCAL n, cnt := GetProperty( ParentWindow, ControlName, "ITEMCOUNT" ), aret := {}
 
-    if ret = 1
-         if cmp
-            Form_1.Check_1.Value := .F.
-         Endif
-         aget[17]:= ret
+   FOR n = 1 to cnt
+      aadd( aret, GetProperty( ParentWindow, ControlName, "ITEM", n ) )
+   NEXT
 
-    Else
-         if Form_1.Check_1.Value .and. !cmp
-            q := msgYesno("Do you want to compress these files ?", "Confirmation.", q, IDI_MAIN, .f.)
-            Form_1.Check_1.Value := q
-         Endif
-         aget[17]:= ret
-    endif
+   RETURN aret
+   /*
+   */
 
-    ChangeInfo()
+PROCEDURE ChangeLog()
 
-Return 
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure ChangeInfo()
-*-----------------------------------------------------------------------------*
-    lchg := .T.
-    SaveEnable()
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
-Procedure SetTimer()
-*-----------------------------------------------------------------------------*
-    Local cTime := Time(), lExit := .t., cWindow := "", cLabel, nMode := 1
+   LOCAL ret, q:= .t.,  cmp := Empty(Form_1.Combo_7.DisplayValue)
 
-    Local nTime1 := left(cTime,3)
-    Local nTime2 := val(substr(ctime,4,2))+ aget[18]
-    Local nTime3 := right(ctime,3)
+   ret := Form_1.Radio_2.Value
 
-    PUBLIC cTimeExit
+   IF ret = 1
+      IF cmp
+         Form_1.Check_1.Value := .F.
+      ENDIF
+      aget[17]:= ret
 
-    m->cTimeExit := nTime1 + StrZero(nTime2,2) + nTime3
+   ELSE
+      IF Form_1.Check_1.Value .and. !cmp
+         q := msgYesno("Do you want to compress these files ?", "Confirmation.", q, IDI_MAIN, .f.)
+         Form_1.Check_1.Value := q
+      ENDIF
+      aget[17]:= ret
+   ENDIF
 
-    m->cTimeExit := TimeDiff( ctime, m->cTimeExit )
+   ChangeInfo()
 
-    cLabel := "Tempo rimanente prima della chiusura:"
+   RETURN
+   /*
+   */
 
-    if !aget[14]
+PROCEDURE ChangeInfo()
 
-       Set InteractiveClose Off
+   lchg := .T.
+   SaveEnable()
 
-       DEFINE WINDOW Form_2 AT 0,0 WIDTH 250 HEIGHT IF(Empty(cWindow), 162, 206) ;
-              TITLE "Shutdown attivato!" ;
-              ICON "MAIN" ;
-              NOMINIMIZE NOMAXIMIZE NOSIZE ;
-              ON RELEASE Form_2.Timer_1.Enabled := .f. ;
-              ON PAINT Form_2.Button_1.SetFocus
+   RETURN
+   /*
+   */
 
-       @  10,  5 LABEL Label_1 ;
-                 VALUE cLabel  ;
-                 WIDTH  240    ;
-                 HEIGHT 22     ;
-                 FONT "Arial"  ;
-                 SIZE 9 BOLD
+PROCEDURE SetTimer()
 
-       @  35, 25 LABEL TimeExit  ;
-                 VALUE m->cTimeExit ;
-                 WIDTH  200      ;
-                 HEIGHT 52       ;
-                 FONT "Arial"    ;
-                 SIZE 36 BOLD
+   LOCAL cTime := Time(), lExit := .t., cWindow := "", cLabel, nMode := 1
 
-       @ 100, 75 BUTTON Button_1 CAPTION "Annulla" ;
-                 ACTION ( lExit := .f., Form_2.release ) ;
-                 WIDTH 100 HEIGHT 24 FONT "MS Sans Serif" SIZE 9
+   LOCAL nTime1 := left(cTime,3)
+   LOCAL nTime2 := val(substr(ctime,4,2))+ aget[18]
+   LOCAL nTime3 := right(ctime,3)
 
-       DEFINE TIMER Timer_1 ;
-              INTERVAL 1000 ;
-              ACTION SetTimeExit( cWindow )
+   PUBLIC cTimeExit
 
-       END WINDOW
+   m->cTimeExit := nTime1 + StrZero(nTime2,2) + nTime3
 
-       CENTER WINDOW Form_2
+   m->cTimeExit := TimeDiff( ctime, m->cTimeExit )
 
-       ACTIVATE WINDOW Form_2
+   cLabel := "Tempo rimanente prima della chiusura:"
 
-    Endif
+   IF !aget[14]
 
-    IF lExit
-       WinExit(nMode)
-    ELSE
-       RELEASE m->cTimeExit
-       Set InteractiveClose On
-       Form_1.Show
-    ENDIF
+      SET InteractiveClose Off
 
-    Set InteractiveClose ON
+      DEFINE WINDOW Form_2 AT 0,0 WIDTH 250 HEIGHT IF(Empty(cWindow), 162, 206) ;
+            TITLE "Shutdown attivato!" ;
+            ICON "MAIN" ;
+            NOMINIMIZE NOMAXIMIZE NOSIZE ;
+            ON RELEASE Form_2.Timer_1.Enabled := .f. ;
+            ON PAINT Form_2.Button_1.SetFocus
 
-Return
-/*
-*/
-#define GW_HWNDFIRST    0
-#define GW_HWNDNEXT    2
-#define GW_OWNER        4
-*-----------------------------------------------------------------------------*
-Function SetTimeExit( cTitle )
-*-----------------------------------------------------------------------------*
-    LOCAL aWnd := {}, hWnd, cAppTitle
+         @  10,  5 LABEL Label_1 ;
+            VALUE cLabel  ;
+            WIDTH  240    ;
+            HEIGHT 22     ;
+            FONT "Arial"  ;
+            SIZE 9 BOLD
 
-    m->cTimeExit := TimeAsString( TimeAsSeconds( m->cTimeExit ) - 1 )
+         @  35, 25 LABEL TimeExit  ;
+            VALUE m->cTimeExit ;
+            WIDTH  200      ;
+            HEIGHT 52       ;
+            FONT "Arial"    ;
+            SIZE 36 BOLD
 
-    Form_2.TimeExit.Value := m->cTimeExit
+         @ 100, 75 BUTTON Button_1 CAPTION "Annulla" ;
+            ACTION ( lExit := .f., Form_2.release ) ;
+            WIDTH 100 HEIGHT 24 FONT "MS Sans Serif" SIZE 9
 
-    IF m->cTimeExit == "00:00:00"
-       Form_2.Release
-    ENDIF
+         DEFINE TIMER Timer_1 ;
+            INTERVAL 1000 ;
+            ACTION SetTimeExit( cWindow )
 
-    IF !Empty(cTitle)
-        hWnd := GetWindow( _HMG_MainHandle, GW_HWNDFIRST )    // Get the first window
-        WHILE hWnd != 0                        // Loop through all the windows
-            cAppTitle := GetWindowText( hWnd )
-            IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;    // If it is an owner window
-                IsWindowVisible( hWnd ) .AND.;        // If it is a visible window
-                hWnd != _HMG_MainHandle .AND.;        // If it is not this app
-                !EMPTY( cAppTitle ) .AND.;        // If the window has a title
-                !( "DOS Session" $ cAppTitle ) .AND.;    // If it is not DOS session
-                !( cAppTitle == "Program Manager" )    // If it is not the Program Manager
+      END WINDOW
 
-                Aadd( aWnd, ALLTRIM(cAppTitle) )
-            ENDIF
+      CENTER WINDOW Form_2
 
-            hWnd := GetWindow( hWnd, GW_HWNDNEXT )        // Get the next window
-        ENDDO
-        IF EMPTY( Ascan( aWnd, ALLTRIM(cTitle) ) )
-            Form_2.Release
-        ENDIF
-    ENDIF
+      ACTIVATE WINDOW Form_2
 
-Return .t.
-/*
-*/
-#define EWX_LOGOFF   0
-#define EWX_SHUTDOWN 1
-#define EWX_REBOOT   2
-#define EWX_FORCE    4
-#define EWX_POWEROFF 8
-*-----------------------------------------------------------------------------*
-Procedure WinExit( nFlag )
-*-----------------------------------------------------------------------------*
+   ENDIF
 
-   if IsWinNT()
+   IF lExit
+      WinExit(nMode)
+   ELSE
+      RELEASE m->cTimeExit
+      SET InteractiveClose On
+      Form_1.Show
+   ENDIF
+
+   SET InteractiveClose ON
+
+   RETURN
+   /*
+   */
+   #define GW_HWNDFIRST    0
+   #define GW_HWNDNEXT    2
+   #define GW_OWNER        4
+
+FUNCTION SetTimeExit( cTitle )
+
+   LOCAL aWnd := {}, hWnd, cAppTitle
+
+   m->cTimeExit := TimeAsString( TimeAsSeconds( m->cTimeExit ) - 1 )
+
+   Form_2.TimeExit.Value := m->cTimeExit
+
+   IF m->cTimeExit == "00:00:00"
+      Form_2.Release
+   ENDIF
+
+   IF !Empty(cTitle)
+      hWnd := GetWindow( _HMG_MainHandle, GW_HWNDFIRST )    // Get the first window
+      WHILE hWnd != 0                        // Loop through all the windows
+         cAppTitle := GetWindowText( hWnd )
+         IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;    // If it is an owner window
+            IsWindowVisible( hWnd ) .AND.;        // If it is a visible window
+            hWnd != _HMG_MainHandle .AND.;        // If it is not this app
+            !EMPTY( cAppTitle ) .AND.;        // If the window has a title
+            !( "DOS Session" $ cAppTitle ) .AND.;    // If it is not DOS session
+            !( cAppTitle == "Program Manager" )    // If it is not the Program Manager
+
+            Aadd( aWnd, ALLTRIM(cAppTitle) )
+         ENDIF
+
+         hWnd := GetWindow( hWnd, GW_HWNDNEXT )        // Get the next window
+      ENDDO
+      IF EMPTY( Ascan( aWnd, ALLTRIM(cTitle) ) )
+         Form_2.Release
+      ENDIF
+   ENDIF
+
+   RETURN .t.
+   /*
+   */
+   #define EWX_LOGOFF   0
+   #define EWX_SHUTDOWN 1
+   #define EWX_REBOOT   2
+   #define EWX_FORCE    4
+   #define EWX_POWEROFF 8
+
+PROCEDURE WinExit( nFlag )
+
+   IF IsWinNT()
       EnablePermissions()
-   endif
+   ENDIF
 
    nFlag := EWX_SHUTDOWN
    nFlag += EWX_POWEROFF
    nFlag += EWX_FORCE
 
-   if !ExitWindowsEx(nFlag, 0)
+   IF !ExitWindowsEx(nFlag, 0)
       ShowError()
-   else
+   ELSE
       ReleaseAllWindows()
-   endif
+   ENDIF
 
-Return
-/*
-*/
-*-----------------------------------------------------------------------------*
+   RETURN
+   /*
+   */
+
 FUNCTION TimeDiff( cStartTime, cEndTime )
-*-----------------------------------------------------------------------------*
-RETURN TimeAsString(IF(cEndTime < cStartTime, 86400, 0) + ;
-       TimeAsSeconds(cEndTime) - TimeAsSeconds(cStartTime))
-/*
-*/
-*-----------------------------------------------------------------------------*
-FUNCTION TimeAsSeconds( cTime )
-*-----------------------------------------------------------------------------*
-RETURN VAL(cTime) * 3600 + VAL(SUBSTR(cTime, 4)) * 60 + ;
-       VAL(SUBSTR(cTime, 7))
-/*
-*/
-*-----------------------------------------------------------------------------*
-FUNCTION TimeAsString( nSeconds )
-*-----------------------------------------------------------------------------*
-RETURN StrZero(INT(Mod(nSeconds / 3600, 24)), 2, 0) + ":" + ;
-       StrZero(INT(Mod(nSeconds / 60, 60)), 2, 0) + ":" + ;
-       StrZero(INT(Mod(nSeconds, 60)), 2, 0)
-/*
-*/
-*-----------------------------------------------------------------------------*
-FUNCTION TimeIsValid( cTime )
-*-----------------------------------------------------------------------------*
-RETURN VAL(cTime) < 24 .AND. VAL(SUBSTR(cTime, 4)) < 60 .AND. ;
-       VAL(SUBSTR(cTime, 7)) < 60
 
-/*
-*/
-*-----------------------------------------------------------------------------*
-DECLARE DLL_TYPE_BOOL SwitchToThisWindow( DLL_TYPE_LONG hWnd, DLL_TYPE_BOOL lRestore ) ;
-    IN USER32.DLL
+   RETURN TimeAsString(IF(cEndTime < cStartTime, 86400, 0) + ;
+      TimeAsSeconds(cEndTime) - TimeAsSeconds(cStartTime))
+   /*
+   */
+
+FUNCTION TimeAsSeconds( cTime )
+
+   RETURN VAL(cTime) * 3600 + VAL(SUBSTR(cTime, 4)) * 60 + ;
+      VAL(SUBSTR(cTime, 7))
+   /*
+   */
+
+FUNCTION TimeAsString( nSeconds )
+
+   RETURN StrZero(INT(Mod(nSeconds / 3600, 24)), 2, 0) + ":" + ;
+      StrZero(INT(Mod(nSeconds / 60, 60)), 2, 0) + ":" + ;
+      StrZero(INT(Mod(nSeconds, 60)), 2, 0)
+   /*
+   */
+
+FUNCTION TimeIsValid( cTime )
+
+   RETURN VAL(cTime) < 24 .AND. VAL(SUBSTR(cTime, 4)) < 60 .AND. ;
+      VAL(SUBSTR(cTime, 7)) < 60
+
+   /*
+   */
+   DECLARE DLL_TYPE_BOOL SwitchToThisWindow( DLL_TYPE_LONG hWnd, DLL_TYPE_BOOL lRestore ) ;
+      IN USER32.DLL
 
 #pragma BEGINDUMP
 
@@ -1320,3 +1327,4 @@ HB_FUNC( EXITWINDOWSEX )
 }
 
 #pragma ENDDUMP
+

@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -50,13 +50,12 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define SB_SETTEXT      (WM_USER+1)
 #define SBT_OWNERDRAW   0x1000
 
-#define ITEMTYPENAME	"ITEMMESSAGE"
-#define ITEMNAME	"StatusItem"
-#define PROGRESSNAME	"ProgressMessage"
+#define ITEMTYPENAME   "ITEMMESSAGE"
+#define ITEMNAME   "StatusItem"
+#define PROGRESSNAME   "ProgressMessage"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginMessageBar( ControlName, ParentForm, kbd, fontname, fontsize, bold, italic, underline, strikeout )
-*-----------------------------------------------------------------------------*
+
    LOCAL mVar , k , ParentFormHandle , aRect := { 0, 0, 0, 0 }
    LOCAL ControlHandle , FontHandle
 
@@ -103,7 +102,7 @@ FUNCTION _BeginMessageBar( ControlName, ParentForm, kbd, fontname, fontsize, bol
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "MESSAGEBAR"
    _HMG_aControlNames  [k] :=  ControlName
@@ -156,10 +155,10 @@ FUNCTION _BeginMessageBar( ControlName, ParentForm, kbd, fontname, fontsize, bol
       _SetStatusBarKbd ( ControlName, ParentForm )
    ENDIF
 
-RETURN Nil
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION _EndMessageBar()
-*-----------------------------------------------------------------------------*
+
    LOCAL i
 
    // Must have at least one StatusItem to prevent crash when function Events(...) receives WM_SIZE message
@@ -172,10 +171,10 @@ FUNCTION _EndMessageBar()
    _HMG_ActiveMessageBarName := ""
    _HMG_StatusItemCount      := 0
 
-RETURN Nil
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION _DefineItemMessage ( ControlName, ParentControl, x, y, Caption, ProcedureName, w, h, icon, cstyl, tooltip, default, backcolor, fontcolor, align )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , cParentForm, mVar, ParentForm, ParentFormHandle, k
    LOCAL ControlHandle, cCaption
 
@@ -230,7 +229,7 @@ FUNCTION _DefineItemMessage ( ControlName, ParentControl, x, y, Caption, Procedu
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  ITEMTYPENAME
    _HMG_aControlNames  [k] :=  ControlName
@@ -281,11 +280,10 @@ FUNCTION _DefineItemMessage ( ControlName, ParentControl, x, y, Caption, Procedu
       SendMessage( ParentForm, SB_SETTEXT, hb_BitOr( _HMG_StatusItemCount - 1, SBT_OWNERDRAW ), 0 )
    ENDIF
 
-RETURN ControlHandle
+   RETURN ControlHandle
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusClock ( BarName , FormName , Width , ToolTip , Action , lAMPM , backcolor , fontcolor )
-*-----------------------------------------------------------------------------*
+
    LOCAL nrItem
 
    hb_default( @lAMPM, .F. )
@@ -297,11 +295,10 @@ FUNCTION _SetStatusClock ( BarName , FormName , Width , ToolTip , Action , lAMPM
 
    _DefineTimer ( 'StatusTimer' , FormName , 1000 , {|| _SetItem ( BarName , FormName , nrItem , iif( lAMPM, AMPM( Time() ), Time() ) ) } )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusKeybrd ( BarName , FormName , Width , ToolTip , action )
-*-----------------------------------------------------------------------------*
+
    LOCAL nrItem1 , nrItem2 , nrItem3
 
    __defaultNIL( @Width, 75 )
@@ -325,15 +322,15 @@ FUNCTION _SetStatusKeybrd ( BarName , FormName , Width , ToolTip , action )
       _SetStatusIcon ( BarName , FormName , nrItem2 , iif ( IsCapsLockActive() , "zzz_led_on" , "zzz_led_off" ) ), ;
       _SetStatusIcon ( BarName , FormName , nrItem3 , iif ( IsInsertActive() , "zzz_led_on" , "zzz_led_off" ) ) } )
 
-RETURN Nil
+   RETURN NIL
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    /* FOR EACH hb_enumIndex() */
    #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-#endif
-*-----------------------------------------------------------------------------*
+   #endif
+
 FUNCTION _IsOwnerDrawStatusBarItem( ParentHandle , ItemID , Value , lSet )
-*-----------------------------------------------------------------------------*
+
    LOCAL h, i, nLocID := 0, lOwnerDraw := .F.
 
    hb_default( @lSet, .F. )
@@ -358,12 +355,12 @@ FUNCTION _IsOwnerDrawStatusBarItem( ParentHandle , ItemID , Value , lSet )
       ENDIF
    NEXT
 
-RETURN lOwnerDraw
+   RETURN lOwnerDraw
 
-// (GF) HMG 1.2 Extended Build 25
-*-----------------------------------------------------------------------------*
+   // (GF) HMG 1.2 Extended Build 25
+
 STATIC FUNCTION AMPM( cTime )
-*-----------------------------------------------------------------------------*
+
    LOCAL nHour := Val( cTime )
 
    DO CASE
@@ -377,12 +374,11 @@ STATIC FUNCTION AMPM( cTime )
       cTime := StrZero( nHour - 12, 2 ) + SubStr( cTime, 3 ) + " pm"
    ENDCASE
 
-RETURN cTime
+   RETURN cTime
 
-// (GF) HMG 1.2 Extended Build 30
-*-----------------------------------------------------------------------------*
+   // (GF) HMG 1.2 Extended Build 30
+
 FUNCTION _SetStatusBarKbd ( BarName, FormName )
-*-----------------------------------------------------------------------------*
 
    _DefineItemMessage ( ITEMNAME, BarName, 0, 0, GetProperty ( FormName, "Title" ), , , 0, , "RAISED" )
 
@@ -397,11 +393,10 @@ FUNCTION _SetStatusBarKbd ( BarName, FormName )
       _SetItem ( BarName, FormName, 3, iif( IsNumLockActive()   , "NUM",  "" ) ), ;
       _SetItem ( BarName, FormName, 4, iif( IsScrollLockActive(), "SCRL", "" ) ) } )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _GetStatusItemWidth( hWnd, nItem )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, h, aItemWidth := {}
 
    FOR EACH h IN _HMG_aControlParentHandles
@@ -411,11 +406,10 @@ FUNCTION _GetStatusItemWidth( hWnd, nItem )
       ENDIF
    NEXT
 
-RETURN iif( PCount() > 1, aItemWidth [nItem], aItemWidth )
+   RETURN iif( PCount() > 1, aItemWidth [nItem], aItemWidth )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusItemProperty( nItem, Value, hWnd, nType )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, h, nIndex := 0
 
    FOR EACH h IN _HMG_aControlParentHandles
@@ -446,11 +440,10 @@ FUNCTION _SetStatusItemProperty( nItem, Value, hWnd, nType )
       ENDIF
    NEXT
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusProgressMessage ( BarName , FormName , Width , ToolTip , Action , nValue , nMin , nMax )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, NrItem, HwndStatus, hwndProgress
 
    hb_default( @nValue, 0 )
@@ -471,11 +464,10 @@ FUNCTION _SetStatusProgressMessage ( BarName , FormName , Width , ToolTip , Acti
    _HMG_aControlRangeMax  [i] := nMax
    _HMG_aControlValue     [i] := nValue
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusProgressPos ( FormName, nValue )
-*-----------------------------------------------------------------------------*
+
    LOCAL i
 
    hb_default( @nValue, 0 )
@@ -484,11 +476,10 @@ FUNCTION _SetStatusProgressPos ( FormName, nValue )
       SetPosProgressBarItem ( _HMG_aControlMiscData1 [i,2], nValue )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetStatusProgressRange ( FormName, nMin, nMax )
-*-----------------------------------------------------------------------------*
+
    LOCAL i
 
    hb_default( @nMin, 0 )
@@ -498,4 +489,5 @@ FUNCTION _SetStatusProgressRange ( FormName, nMin, nMax )
       SetProgressBarRange ( _HMG_aControlMiscData1 [i,2], nMin, nMax )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
+

@@ -1,72 +1,73 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	Set StationName	To 'John_Station'
-	Set CommPath	To 'C:\'
+   SET StationName   To 'John_Station'
+   SET CommPath   To 'C:\'
 
-	DEFINE WINDOW Form_0 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'MiniGUI Communications Demo' ;
-		ICON 'DEMO.ICO' ;
-		MAIN ;
-		FONT 'Arial' SIZE 10 
+   DEFINE WINDOW Form_0 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI Communications Demo' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
-			POPUP 'File'
-				ITEM 'GetData'		ACTION GetTest()
-				ITEM 'Exit'		ACTION Form_0.Release
-			END POPUP
-			POPUP 'Help'
-				ITEM 'About'		ACTION MsgInfo ("MiniGUI Communications Demo") 
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'GetData'      ACTION GetTest()
+            ITEM 'Exit'      ACTION Form_0.Release
+         END POPUP
+         POPUP 'Help'
+            ITEM 'About'      ACTION MsgInfo ("MiniGUI Communications Demo")
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_0
+   CENTER WINDOW Form_0
 
-	ACTIVATE WINDOW Form_0
+   ACTIVATE WINDOW Form_0
 
-Return Nil
+   RETURN NIL
 
-Procedure GetTest()
-Local r , i
+PROCEDURE GetTest()
 
-	Repeat
+   LOCAL r , i
 
-		r := GetData()
+   Repeat
 
-		If Valtype (r) == 'A'
+   r := GetData()
 
-			If Valtype ( r [1] ) != 'A'
+   IF Valtype (r) == 'A'
 
-				Aeval ( r, { |i| MsgInfo( i ) } )
+      IF Valtype ( r [1] ) != 'A'
 
-			Else
+         Aeval ( r, { |i| MsgInfo( i ) } )
 
-				For Each i In r
+      ELSE
 
-					Aeval ( i, { |j| MsgInfo( j ) } )
+         FOR EACH i In r
 
-				Next
+            Aeval ( i, { |j| MsgInfo( j ) } )
 
-			EndIf
+         NEXT
 
-		ElseIf r # Nil
+      ENDIF
 
-			MsgInfo( r )
+   ELSEIF r # Nil
 
-		EndIf
+      MsgInfo( r )
 
-	Until r # Nil
+   ENDIF
 
-Return
+   Until r # Nil
+
+   RETURN
+

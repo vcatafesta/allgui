@@ -1,11 +1,9 @@
 /*
- * $Id: viewer.prg,v 1.3 2007/05/26 19:48:51 richardroesnadi Exp $
- *
- * JPEG, BMP, PNG, MNG, TIFF images viewer.
- * FreeImage.dll should present to use this sample
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: viewer.prg,v 1.3 2007/05/26 19:48:51 richardroesnadi Exp $
+* JPEG, BMP, PNG, MNG, TIFF images viewer.
+* FreeImage.dll should present to use this sample
+* Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -17,81 +15,83 @@
 #define SCROLLVRANGE       20
 #define SCROLLHRANGE       20
 
-Function Main
-Local oMainWindow, oFont
-// Local hDCwindow
-Private oToolBar, oImage, oSayMain, oSayScale
-Private aScreen, nKoef, lScrollV := .F., lScrollH := .F., nStepV := 0, nStepH := 0
-Private nVert, nHorz
+FUNCTION Main
 
-#ifdef __FREEIMAGE__
+   LOCAL oMainWindow, oFont
+
+   // Local hDCwindow
+   PRIVATE oToolBar, oImage, oSayMain, oSayScale
+   PRIVATE aScreen, nKoef, lScrollV := .F., lScrollH := .F., nStepV := 0, nStepH := 0
+   PRIVATE nVert, nHorz
+
+   #ifdef __FREEIMAGE__
    IF !FI_Init()
-      Return Nil
+
+      RETURN NIL
    ENDIF
-#endif
+   #endif
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17
 
    INIT WINDOW oMainWindow MAIN TITLE "Viewer"  ;
-     COLOR COLOR_3DLIGHT+1                      ;
-     AT 200,0 SIZE 400,150                      ;
-     FONT oFont                                 ;
-     ON OTHER MESSAGES {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
-     //      ON PAINT {|o|PaintWindow(o)}               ;
+      COLOR COLOR_3DLIGHT+1                      ;
+      AT 200,0 SIZE 400,150                      ;
+      FONT oFont                                 ;
+      ON OTHER MESSAGES {|o,m,wp,lp|MessagesProc(o,m,wp,lp)}
+   //      ON PAINT {|o|PaintWindow(o)}               ;
 
    MENU OF oMainWindow
-      MENU TITLE "&File"
-         MENUITEM "&Open" ACTION FileOpen( oMainWindow )
-         SEPARATOR
-         MENUITEM "&Exit"+Chr(9)+"Alt+x" ACTION EndWindow() ;
-           ACCELERATOR FALT,Asc("X")
-      ENDMENU
-      MENU TITLE "&View"
-         MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
-         MENUITEM "Zoom &out" ACTION Zoom( oMainWindow,1 )
-         MENUITEM "Ori&ginal size" ACTION Zoom( oMainWindow,0 )
-      ENDMENU
-      MENU TITLE "&Help"
-         MENUITEM "&About" ACTION MsgInfo("About")
-      ENDMENU
-   ENDMENU
+   MENU TITLE "&File"
+   MENUITEM "&Open" ACTION FileOpen( oMainWindow )
+   SEPARATOR
+   MENUITEM "&Exit"+Chr(9)+"Alt+x" ACTION EndWindow() ;
+      ACCELERATOR FALT,Asc("X")
+ENDMENU
+MENU TITLE "&View"
+MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
+MENUITEM "Zoom &out" ACTION Zoom( oMainWindow,1 )
+MENUITEM "Ori&ginal size" ACTION Zoom( oMainWindow,0 )
+ENDMENU
+MENU TITLE "&Help"
+MENUITEM "&About" ACTION MsgInfo("About")
+ENDMENU
+ENDMENU
 
-   @ 0,0 PANEL oToolBar SIZE oMainWindow:nWidth,28 ;
-      ON SIZE {|o,x,y|MoveWindow(o:handle,0,0,x,o:nHeight)}
+@ 0,0 PANEL oToolBar SIZE oMainWindow:nWidth,28 ;
+   ON SIZE {|o,x,y|MoveWindow(o:handle,0,0,x,o:nHeight)}
 
+@ 2,2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
+   SIZE 24,24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
+   TOOLTIP "Open file"
+@ 26,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,1 )} ;
+   SIZE 24,24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
+   TOOLTIP "Zoom out"
+@ 50,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,-1)} ;
+   SIZE 24,24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
+   TOOLTIP "Zoom in"
+@ 74,2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
+   SIZE 24,24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
+   TOOLTIP "Info"
 
-
-   @ 2,2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
-        SIZE 24,24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
-        TOOLTIP "Open file"
-   @ 26,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,1 )} ;
-        SIZE 24,24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
-        TOOLTIP "Zoom out"
-   @ 50,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,-1)} ;
-        SIZE 24,24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
-        TOOLTIP "Zoom in"
-   @ 74,2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
-        SIZE 24,24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
-        TOOLTIP "Info"
-
-   @ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
-        FONT oFont BACKCOLOR 12507070
+@ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
+   FONT oFont BACKCOLOR 12507070
 
 #ifdef __FREEIMAGE__
-   @ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+@ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #else
-   @ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+@ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
 #endif
 
-   aScreen := GetWorkareaRect()
-   // writelog( str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]) )
+aScreen := GetWorkareaRect()
+// writelog( str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]) )
 
-   ACTIVATE WINDOW oMainWindow
+ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
-Static Function MessagesProc( oWnd, msg, wParam, lParam )
-Local i, aItem
+STATIC FUNCTION MessagesProc( oWnd, msg, wParam, lParam )
+
+   LOCAL i, aItem
 
    IF msg == WM_VSCROLL
       Vscroll( oWnd,LoWord( wParam ),HiWord( wParam ) )
@@ -99,20 +99,21 @@ Local i, aItem
       Hscroll( oWnd,LoWord( wParam ),HiWord( wParam ) )
    ELSEIF msg == WM_KEYUP
       IF wParam == 40        // Down
-        VScroll( oWnd, SB_LINEDOWN )
+         VScroll( oWnd, SB_LINEDOWN )
       ELSEIF wParam == 38    // Up
-        VScroll( oWnd, SB_LINEUP )
+         VScroll( oWnd, SB_LINEUP )
       ELSEIF wParam == 39    // Right
-        HScroll( oWnd, SB_LINEDOWN )
+         HScroll( oWnd, SB_LINEDOWN )
       ELSEIF wParam == 37    // Left
-        HScroll( oWnd, SB_LINEUP )
+         HScroll( oWnd, SB_LINEUP )
       ENDIF
    ENDIF
 
-Return -1
+   RETURN -1
 
-Static Function Vscroll( oWnd, nScrollCode, nNewPos )
-Local stepV
+STATIC FUNCTION Vscroll( oWnd, nScrollCode, nNewPos )
+
+   LOCAL stepV
 
    IF nScrollCode == SB_LINEDOWN
       IF nStepV < SCROLLVRANGE
@@ -140,10 +141,11 @@ Local stepV
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Static Function Hscroll( oWnd, nScrollCode, nNewPos )
-Local stepH
+STATIC FUNCTION Hscroll( oWnd, nScrollCode, nNewPos )
+
+   LOCAL stepH
 
    IF nScrollCode == SB_LINEDOWN
       IF nStepH < SCROLLHRANGE
@@ -172,18 +174,19 @@ Local stepH
 
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Static Function FileOpen( oWnd )
-Local mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
-Local fname
-Local aCoors
+STATIC FUNCTION FileOpen( oWnd )
 
-#ifdef __FREEIMAGE__
+   LOCAL mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+   LOCAL fname
+   LOCAL aCoors
+
+   #ifdef __FREEIMAGE__
    fname := SelectFile( "Graphic files( *.jpg;*.png;*.psd;*.tif )", "*.jpg;*.png;*.psd;*.tif", mypath )
-#else
+   #else
    fname := SelectFile( "Graphic files( *.jpg;*.gif;*.bmp )", "*.jpg;*.gif;*.bmp", mypath )
-#endif
+   #endif
    IF !Empty( fname )
       nKoef := 1
       nStepV := nStepH := 0
@@ -195,16 +198,16 @@ Local aCoors
       ENDIF
       /*
       IF oImage != Nil
-         oImage:Release()
+      oImage:Release()
       ENDIF
       */
-#ifdef __FREEIMAGE__
+      #ifdef __FREEIMAGE__
       // oImage := HFreeImage():AddFile( fname )
       oSayMain:ReplaceImage( fname )
-#else
+      #else
       // oImage := HBitmap():AddFile( fname )
       oSayMain:ReplaceBitmap( fname )
-#endif
+      #endif
       oImage := oSayMain:oImage
       oSayMain:nOffsetH := oSayMain:nOffsetV := 0
 
@@ -245,14 +248,16 @@ Local aCoors
       oSayScale:SetValue( Str(nKoef*100,4)+" %" )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Static Function Zoom( oWnd,nOp )
-Local aCoors
-Local stepV, stepH
+STATIC FUNCTION Zoom( oWnd,nOp )
+
+   LOCAL aCoors
+   LOCAL stepV, stepH
 
    IF oImage == Nil
-      Return Nil
+
+      RETURN NIL
    ENDIF
    aCoors := GetClientRect( oWnd:handle )
    nVert := ( oWnd:nHeight - aCoors[4] )
@@ -306,15 +311,18 @@ Local stepV, stepH
    ShowScrollBar( oWnd:handle,SB_HORZ,lScrollH )
    ShowScrollBar( oWnd:handle,SB_VERT,lScrollV )
 
-Return Nil
+   RETURN NIL
 
-/*
-Static Function PaintWindow( oWnd )
-Local stepV, stepH
-Local nOffsV, nOffsH
+   /*
+
+   Static Function PaintWindow( oWnd )
+
+   Local stepV, stepH
+   Local nOffsV, nOffsH
 
    IF oImage == Nil
-      Return -1
+
+   Return -1
    ENDIF
 
    stepV := Round( ( Round( oImage:nHeight * nKoef,0 ) - ( oWnd:nHeight-oToolbar:nHeight-nVert ) ) / SCROLLVRANGE, 0 )
@@ -326,27 +334,28 @@ Local nOffsV, nOffsH
    hDC := BeginPaint( oWnd:handle, pps )
 
    // writelog( "Paint: "+str(Round( oImage:nWidth * nKoef,0 )) + str(Round( oImage:nHeight * nKoef,0 )) )
-#ifdef __FREEIMAGE__
+   #ifdef __FREEIMAGE__
    oImage:Draw( hDC, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef,0 ), Round( oImage:nHeight * nKoef,0 ) )
-#else
+   #else
    DrawBitmap( hDC, oImage:handle,, -nOffsH, oToolbar:nHeight-nOffsV, Round( oImage:nWidth * nKoef,0 ), Round( oImage:nHeight * nKoef,0 ) )
-#endif
+   #endif
 
    IF lScrollV
-      SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
+   SetScrollInfo( oWnd:handle, SB_VERT, 1, nStepV+1, 1, SCROLLVRANGE )
    ENDIF
    EndPaint( oWnd:handle, pps )
 
-Return 0
-*/
+   Return 0
+   */
 
-Static Function ImageInfo()
+STATIC FUNCTION ImageInfo()
 
    IF oImage == Nil
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -392,3 +401,4 @@ HB_FUNC( GETWORKAREARECT )
 }
 
 #pragma ENDDUMP
+

@@ -35,29 +35,30 @@
 // Statics variables
 //===========================================================================//
 
-Static nOp1,nOp2         // Store the values entered
-Static lDecimalFlag      // Indicates whether there is already a decimal point in value
-Static nNumOps           // Number of values entered
-Static cLastInput        // Store the last key pressed
-Static cOpFlag           // Indicates the pending operation
-Static nMemo := 0        // Memory Calculator
+STATIC nOp1,nOp2         // Store the values entered
+STATIC lDecimalFlag      // Indicates whether there is already a decimal point in value
+STATIC nNumOps           // Number of values entered
+STATIC cLastInput        // Store the last key pressed
+STATIC cOpFlag           // Indicates the pending operation
+STATIC nMemo := 0        // Memory Calculator
 
 //===========================================================================//
 // Form main
 //===========================================================================//
-Function ShowCalc( nInput, lRetu_ClipBoard )
 
-   Default lRetu_ClipBoard := .t.
+FUNCTION ShowCalc( nInput, lRetu_ClipBoard )
+
+   DEFAULT lRetu_ClipBoard := .t.
 
    DEFINE WINDOW Calc ;
-      AT 0,0 WIDTH 260 HEIGHT 228 ;
-      TITLE "Calculator" ;
-      ICON "Calc.ico" ;
-      CHILD ;
-      NOSIZE NOMAXIMIZE ;
-      FONT "Arial" SIZE 10 ;
-      ON INIT Form_Load(nInput) ;
-      ON RELEASE nOp1 := Val(Alltrim(Calc.ReadOut.Value))
+         AT 0,0 WIDTH 260 HEIGHT 228 ;
+         TITLE "Calculator" ;
+         ICON "Calc.ico" ;
+         CHILD ;
+         NOSIZE NOMAXIMIZE ;
+         FONT "Arial" SIZE 10 ;
+         ON INIT Form_Load(nInput) ;
+         ON RELEASE nOp1 := Val(Alltrim(Calc.ReadOut.Value))
 
       // visor
       @ 007,027 TEXTBOX ReadOut  VALUE "0." WIDTH 220 HEIGHT 25 BACKCOLOR WHITE RIGHTALIGN NOTABSTOP
@@ -100,106 +101,100 @@ Function ShowCalc( nInput, lRetu_ClipBoard )
    Calc.Center
    Calc.Activate
 
-   if lRetu_ClipBoard
+   IF lRetu_ClipBoard
       System.Clipboard := Ltrim(Str(nOp1))
-   endif
+   ENDIF
 
-Return nOp1
+   RETURN nOp1
 
-//---------------------------------------------------------------------------//
-// The initialization routine of the form.
-// Set the initial values of variables.
-//---------------------------------------------------------------------------//
-Static Function Form_Load(nInput)
+   // The initialization routine of the form.
+   // Set the initial values of variables.
 
-    lDecimalFlag := .f.
-    nNumOps := 0
-    cLastInput := "NONE"
-    cOpFlag := " "
-    Calc.Readout.Value := "0."
-    nOp1 := 0
-    nOp2 := 0
+STATIC FUNCTION Form_Load(nInput)
 
-   if Valtype(nInput) == "N"
+   lDecimalFlag := .f.
+   nNumOps := 0
+   cLastInput := "NONE"
+   cOpFlag := " "
+   Calc.Readout.Value := "0."
+   nOp1 := 0
+   nOp2 := 0
+
+   IF Valtype(nInput) == "N"
       System.ClipBoard := nInput
       nMemo := nInput
-      ReadMemo_Click()
+      READMemo_Click()
       nMemo := 0
-   else
+   ELSE
       Calc.ReadHide.SetFocus()
-   endif
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-//---------------------------------------------------------------------------//
-// Event 'click' of button "C" (CANCEL)
-// Reset text control ReadOut and clean the variables
-//---------------------------------------------------------------------------//
-Static Function Cancel_Click()
+   // Event 'click' of button "C" (CANCEL)
+   // Reset text control ReadOut and clean the variables
+
+STATIC FUNCTION Cancel_Click()
 
    Form_Load()
 
-Return Nil
+   RETURN NIL
 
-//---------------------------------------------------------------------------//
-// Event 'click' of button "CE" (CANCEL ENTRY)
-// Cancel value on ReadOut (TextBox)
-//---------------------------------------------------------------------------//
-Static Function CancelEntry_Click()
+   // Event 'click' of button "CE" (CANCEL ENTRY)
+   // Cancel value on ReadOut (TextBox)
 
-    Calc.Readout.Value := "0."
-    lDecimalFlag := .f.
-    cLastInput := "CE"
-    Calc.ReadHide.SetFocus()
+STATIC FUNCTION CancelEntry_Click()
 
-Return Nil
+   Calc.Readout.Value := "0."
+   lDecimalFlag := .f.
+   cLastInput := "CE"
+   Calc.ReadHide.SetFocus()
 
-//---------------------------------------------------------------------------//
-// Event 'click' of button "." (DECIMAL POINT)
-// If the last button pressed, was an operator, show on ReadOut (TextBox)
-// the value "0.". Case not, add a decimal point into ReadOut
-//---------------------------------------------------------------------------//
-Static Function Decimal_Click()
+   RETURN NIL
 
-    If cLastInput = "NEG"
-        Calc.Readout.Value := "-0."
-    ElseIf cLastInput <> "NUMS"
-        Calc.Readout.Value := "0."
-    EndIf
-    lDecimalFlag := .t.
-    cLastInput := "NUMS"
-    Calc.ReadHide.SetFocus()
+   // Event 'click' of button "." (DECIMAL POINT)
+   // If the last button pressed, was an operator, show on ReadOut (TextBox)
+   // the value "0.". Case not, add a decimal point into ReadOut
 
-Return Nil
+STATIC FUNCTION Decimal_Click()
 
-//---------------------------------------------------------------------------//
-// Event 'click' for the buttons of 0 to 9 (NUMBERS KEYS)
-// Add the new number into ReadOut (TextBox)
-//---------------------------------------------------------------------------//
-Static Function Number_Click( nIndex )
+   IF cLastInput = "NEG"
+      Calc.Readout.Value := "-0."
+   ELSEIF cLastInput <> "NUMS"
+      Calc.Readout.Value := "0."
+   ENDIF
+   lDecimalFlag := .t.
+   cLastInput := "NUMS"
+   Calc.ReadHide.SetFocus()
 
-    If cLastInput <> "NUMS"
-       Calc.Readout.Value := "."
-       lDecimalFlag := .f.
-    EndIf
-    If lDecimalFlag
-       Calc.Readout.Value := Calc.Readout.Value + Str(nIndex,1)
-    Else
-       Calc.Readout.Value := Left(Calc.Readout.Value,At(".",Calc.Readout.Value)-1)+Str(nIndex,1)+"."
-    EndIf
-    If cLastInput = "NEG"
-       Calc.Readout.Value := "-" + Calc.Readout.Value
-    endif
-    cLastInput := "NUMS"
-    Calc.ReadHide.SetFocus()
+   RETURN NIL
 
-Return Nil
+   // Event 'click' for the buttons of 0 to 9 (NUMBERS KEYS)
+   // Add the new number into ReadOut (TextBox)
 
-//---------------------------------------------------------------------------//
-// Event 'click' for the button "%" (PERCENT KEY)
-// Calculate and show, the percentual of first value
-//---------------------------------------------------------------------------//
-Static Function Percent_Click()
+STATIC FUNCTION Number_Click( nIndex )
+
+   IF cLastInput <> "NUMS"
+      Calc.Readout.Value := "."
+      lDecimalFlag := .f.
+   ENDIF
+   IF lDecimalFlag
+      Calc.Readout.Value := Calc.Readout.Value + Str(nIndex,1)
+   ELSE
+      Calc.Readout.Value := Left(Calc.Readout.Value,At(".",Calc.Readout.Value)-1)+Str(nIndex,1)+"."
+   ENDIF
+   IF cLastInput = "NEG"
+      Calc.Readout.Value := "-" + Calc.Readout.Value
+   ENDIF
+   cLastInput := "NUMS"
+   Calc.ReadHide.SetFocus()
+
+   RETURN NIL
+
+   // Event 'click' for the button "%" (PERCENT KEY)
+   // Calculate and show, the percentual of first value
+
+STATIC FUNCTION Percent_Click()
 
    nOp2 := nOp1 * Val(Calc.Readout.Value)/100
    Calc.Readout.Value := AllTrim(Str(nOp2))
@@ -209,167 +204,164 @@ Static Function Percent_Click()
    lDecimalFlag := .t.
    Calc.ReadHide.SetFocus()
 
-Return Nil
+   RETURN NIL
 
-//---------------------------------------------------------------------------//
-// Event 'click' for the keys "+-x/=" (OPERATOR KEYS)
-// If the last button pressed was a number, or part this.
-// Increment the nNumOps. If a operand be present, define nOp1.
-// If two operand are presenteso, define nOp1 like the result of the
-// operation from nOp1 and current value and show the results
-//---------------------------------------------------------------------------//
-Static Function Operator_Click( cIndex )
+   // Event 'click' for the keys "+-x/=" (OPERATOR KEYS)
+   // If the last button pressed was a number, or part this.
+   // Increment the nNumOps. If a operand be present, define nOp1.
+   // If two operand are presenteso, define nOp1 like the result of the
+   // operation from nOp1 and current value and show the results
 
-    Local cTempReadout
+STATIC FUNCTION Operator_Click( cIndex )
 
-    cTempReadout := Calc.Readout.Value
+   LOCAL cTempReadout
 
-    Calc.ReadFunc.Value := cIndex
+   cTempReadout := Calc.Readout.Value
 
-    If cLastInput = "NUMS"
-        nNumOps ++
-    EndIf
-    Do Case
-    Case nNumOps = 0
-        If cIndex = "-" .And. cLastInput <> "NEG"
-            Calc.Readout.Value := "-" + Calc.Readout.Value
-            cLastInput := "NEG"
-        EndIf
-    Case nNumOps = 1
-        nOp1 := Val( Calc.Readout.Value )
-        If cIndex = "-" .And. cLastInput <> "NUMS" .And. cOpFlag <> "="
-            Calc.Readout.Value := "-"
-            cLastInput := "NEG"
-        EndIf
-    Case nNumOps = 2
-        nOp2 := Val(cTempReadout)
-        Do Case
-        Case cOpFlag = "+"
-           nOp1 := nOp1 + nOp2
-        Case cOpFlag = "-"
-           nOp1 := nOp1 - nOp2
-        Case cOpFlag = "*"
-           nOp1 := nOp1 * nOp2
-        Case cOpFlag = "/"
-           If nOp2 = 0
-              MsgInfo("Division by 0 (zero) not allowed.","Calc")
-           Else
-              nOp1 := nOp1 / nOp2
-           EndIf
-        Case cOpFlag = "="
-           nOp1 := nOp2
-        Endcase
-        Calc.Readout.Value := LTrim(Str(nOp1))
-        nNumOps := 1
-    Endcase
-    If cLastInput <> "NEG"
-        cLastInput := "OPS"
-        cOpFlag := cIndex
-    EndIf
-    Calc.ReadHide.SetFocus()
+   Calc.ReadFunc.Value := cIndex
 
-Return Nil
+   IF cLastInput = "NUMS"
+      nNumOps ++
+   ENDIF
+   DO CASE
+   CASE nNumOps = 0
+      IF cIndex = "-" .And. cLastInput <> "NEG"
+         Calc.Readout.Value := "-" + Calc.Readout.Value
+         cLastInput := "NEG"
+      ENDIF
+   CASE nNumOps = 1
+      nOp1 := Val( Calc.Readout.Value )
+      IF cIndex = "-" .And. cLastInput <> "NUMS" .And. cOpFlag <> "="
+         Calc.Readout.Value := "-"
+         cLastInput := "NEG"
+      ENDIF
+   CASE nNumOps = 2
+      nOp2 := Val(cTempReadout)
+      DO CASE
+      CASE cOpFlag = "+"
+         nOp1 := nOp1 + nOp2
+      CASE cOpFlag = "-"
+         nOp1 := nOp1 - nOp2
+      CASE cOpFlag = "*"
+         nOp1 := nOp1 * nOp2
+      CASE cOpFlag = "/"
+         IF nOp2 = 0
+            MsgInfo("Division by 0 (zero) not allowed.","Calc")
+         ELSE
+            nOp1 := nOp1 / nOp2
+         ENDIF
+      CASE cOpFlag = "="
+         nOp1 := nOp2
+      ENDCASE
+      Calc.Readout.Value := LTrim(Str(nOp1))
+      nNumOps := 1
+   ENDCASE
+   IF cLastInput <> "NEG"
+      cLastInput := "OPS"
+      cOpFlag := cIndex
+   ENDIF
+   Calc.ReadHide.SetFocus()
 
-//---------------------------------------------------------------------------//
-// This function clean the variable used for add value into memory
-//---------------------------------------------------------------------------//
-Static Function CancelMemo_Click
-	nMemo := 0
-	SetProperty("Calc","btnMS","FontBold",.F.)
-	Calc.ReadHide.SetFocus()
-Return Nil
+   RETURN NIL
 
-//---------------------------------------------------------------------------//
-// This function show in ReadOut (TextBox) the value in memory (nMemo)
-//---------------------------------------------------------------------------//
-Static Function ReadMemo_Click
+   // This function clean the variable used for add value into memory
 
-	Local i, nLen
+STATIC FUNCTION CancelMemo_Click
 
-	If !Empty(nMemo)
-		Calc.Readout.Value := ""
-		nLen := Len(Ltrim(Str(nMemo)))
-		for i := 1 to nLen
-			if SubStr(Ltrim(Str(nMemo)),i,1) # "."
-				Number_Click(Val(SubStr(Ltrim(Str(nMemo)),i,1)))
-			else
-				if nLen # i
-					Decimal_Click()
-					if Right(Calc.Readout.Value,1) # "."
-						Calc.Readout.Value := Calc.Readout.Value + "."
-					endif
-				endif
-			endif
-		next i
-	endif
-	Calc.ReadHide.SetFocus()
+   nMemo := 0
+   SetProperty("Calc","btnMS","FontBold",.F.)
+   Calc.ReadHide.SetFocus()
 
-Return Nil
+   RETURN NIL
 
-//---------------------------------------------------------------------------//
-// This function, move to memory (nMemo) the value of ReadOut (TxtBox)
-//---------------------------------------------------------------------------//
-Static Function SMemo_Click
+   // This function show in ReadOut (TextBox) the value in memory (nMemo)
 
-	if !Empty(Calc.Readout.Value) .and. Val(Calc.Readout.Value) > 0
-		nMemo := Val(Calc.Readout.value)
-		SetProperty("Calc","btnMS","FontBold",.T.)
-		Calc.ReadHide.SetFocus()
-	endif
+STATIC FUNCTION ReadMemo_Click
 
-Return Nil
+   LOCAL i, nLen
 
-//---------------------------------------------------------------------------//
-// This function add the value from ReadOut (TextBox) into memory
-//---------------------------------------------------------------------------//
-Static Function AddMemo_Click
+   IF !Empty(nMemo)
+      Calc.Readout.Value := ""
+      nLen := Len(Ltrim(Str(nMemo)))
+      FOR i := 1 to nLen
+         IF SubStr(Ltrim(Str(nMemo)),i,1) # "."
+            Number_Click(Val(SubStr(Ltrim(Str(nMemo)),i,1)))
+         ELSE
+            IF nLen # i
+               Decimal_Click()
+               IF Right(Calc.Readout.Value,1) # "."
+                  Calc.Readout.Value := Calc.Readout.Value + "."
+               ENDIF
+            ENDIF
+         ENDIF
+      NEXT i
+   ENDIF
+   Calc.ReadHide.SetFocus()
 
-	if !Empty(Calc.Readout.Value) .and. Val(Calc.Readout.Value) > 0
-		nMemo := nMemo + Val(Calc.Readout.Value)
-		SetProperty("Calc","btnMS","FontBold",.T.)
-	endif
-	Calc.ReadHide.SetFocus()
+   RETURN NIL
 
-Return Nil
+   // This function, move to memory (nMemo) the value of ReadOut (TxtBox)
 
-//---------------------------------------------------------------------------//
-// This function evaluates the keys you type, to perform the functions of
-// Calculator keyboard
-//---------------------------------------------------------------------------//
-Static Function EvalKeys()
+STATIC FUNCTION SMemo_Click
 
-	Local c_Keys
+   IF !Empty(Calc.Readout.Value) .and. Val(Calc.Readout.Value) > 0
+      nMemo := Val(Calc.Readout.value)
+      SetProperty("Calc","btnMS","FontBold",.T.)
+      Calc.ReadHide.SetFocus()
+   ENDIF
 
-	if !Empty(Calc.ReadHide.Value)
-		c_Keys := Alltrim(Calc.ReadHide.Value)
-		do case
-			case c_Keys == "0" .or. IsDigit(c_Keys)
-					Number_Click(Val(c_Keys))
-			case c_Keys == "/"
-					Operator_Click("/")
-			case c_Keys == "*"
-					Operator_Click("*")
-			case c_Keys == "-"
-					Operator_Click("-")
-			case c_Keys == "+"
-					Operator_Click("+")
-			case c_Keys == "."
-					Decimal_Click()
-			case c_Keys == "C" .or. c_Keys == "c"
-					CancelEntry_Click()
-			case c_Keys == "R" .or. c_Keys == "r"
-					Cancel_Click()
-			case c_Keys == "W" .or. c_Keys == "w"
-					CancelMemo_Click()
-			case c_Keys == "S" .or. c_Keys == "s"
-					ReadMemo_Click()
-			case c_Keys == "M" .or. c_Keys == "m"
-					SMemo_Click()
-			case c_Keys == "A" .or. c_Keys == "a"
-					AddMemo_Click()
-		end case
-		Calc.ReadHide.Value := ""
-	endif
+   RETURN NIL
 
-Return Nil
-//===========================================================================//
+   // This function add the value from ReadOut (TextBox) into memory
+
+STATIC FUNCTION AddMemo_Click
+
+   IF !Empty(Calc.Readout.Value) .and. Val(Calc.Readout.Value) > 0
+      nMemo := nMemo + Val(Calc.Readout.Value)
+      SetProperty("Calc","btnMS","FontBold",.T.)
+   ENDIF
+   Calc.ReadHide.SetFocus()
+
+   RETURN NIL
+
+   // This function evaluates the keys you type, to perform the functions of
+   // Calculator keyboard
+
+STATIC FUNCTION EvalKeys()
+
+   LOCAL c_Keys
+
+   IF !Empty(Calc.ReadHide.Value)
+      c_Keys := Alltrim(Calc.ReadHide.Value)
+      DO CASE
+      CASE c_Keys == "0" .or. IsDigit(c_Keys)
+         Number_Click(Val(c_Keys))
+      CASE c_Keys == "/"
+         Operator_Click("/")
+      CASE c_Keys == "*"
+         Operator_Click("*")
+      CASE c_Keys == "-"
+         Operator_Click("-")
+      CASE c_Keys == "+"
+         Operator_Click("+")
+      CASE c_Keys == "."
+         Decimal_Click()
+      CASE c_Keys == "C" .or. c_Keys == "c"
+         CancelEntry_Click()
+      CASE c_Keys == "R" .or. c_Keys == "r"
+         Cancel_Click()
+      CASE c_Keys == "W" .or. c_Keys == "w"
+         CancelMemo_Click()
+      CASE c_Keys == "S" .or. c_Keys == "s"
+         READMemo_Click()
+      CASE c_Keys == "M" .or. c_Keys == "m"
+         SMemo_Click()
+      CASE c_Keys == "A" .or. c_Keys == "a"
+         AddMemo_Click()
+      END CASE
+      Calc.ReadHide.Value := ""
+   ENDIF
+
+   RETURN NIL
+   //===========================================================================//
+

@@ -1,6 +1,5 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "minigui.ch"
@@ -8,10 +7,10 @@
 PROCEDURE Main()
 
    DEFINE WINDOW Form_Main ;
-      AT 0,0 ;
-      WIDTH 540 HEIGHT 380 ;
-      TITLE "MiniGUI Spinner Demo" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 540 HEIGHT 380 ;
+         TITLE "MiniGUI Spinner Demo" ;
+         MAIN
 
       @ 10,250 SPINNER Spinner_1 ;
          RANGE 0,10 ;
@@ -19,14 +18,14 @@ PROCEDURE Main()
          WIDTH 50 ;
          TOOLTIP "Range 0,10" ;
          ON CHANGE PlayBeep()
-/*
+      /*
       @ 50,250 SPINNER Spinner_2 ;
-         RANGE 0,100 ;
-         VALUE 5 ;
-         WIDTH 50 ;
-         TOOLTIP "Range 0,100 HORIZONTAL WRAP READONLY INCREMENT 5" ;
-         HORIZONTAL WRAP READONLY INCREMENT 5
-*/
+      RANGE 0,100 ;
+      VALUE 5 ;
+      WIDTH 50 ;
+      TOOLTIP "Range 0,100 HORIZONTAL WRAP READONLY INCREMENT 5" ;
+      HORIZONTAL WRAP READONLY INCREMENT 5
+      */
       DEFINE SPINNER Spinner_2
          ROW 50
          COL 250
@@ -48,7 +47,7 @@ PROCEDURE Main()
       @ 50,10 BUTTON Button_2 ;
          CAPTION "Get value" ;
          ACTION MsgInfo( "Spinner_1 Value: " + hb_NToS( Form_Main.Spinner_1.Value ) + CRLF + ;
-                         "Spinner_2 Value: " + hb_NToS( Form_Main.Spinner_2.Value ) )
+         "Spinner_2 Value: " + hb_NToS( Form_Main.Spinner_2.Value ) )
 
       @ 90,10 BUTTON Button_3 ;
          CAPTION "Disable state" ;
@@ -73,3 +72,4 @@ PROCEDURE Main()
    ACTIVATE WINDOW Form_Main
 
    RETURN
+

@@ -1,11 +1,9 @@
 /*
- * $Id: procini.prg,v 1.3 2007/11/26 10:50:18 andijahja Exp $
- *
- * Common procedures
- * Ini files reading
- *
- * Author: Alexander S.Kresin <alex@belacy.belgorod.su>
- *         www - http://www.geocities.com/alkresin/
+* $Id: procini.prg,v 1.3 2007/11/26 10:50:18 andijahja Exp $
+* Common procedures
+* Ini files reading
+* Author: Alexander S.Kresin <alex@belacy.belgorod.su>
+*         www - http://www.geocities.com/alkresin/
 */
 *+膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊
 *+
@@ -20,45 +18,49 @@
 *+膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊膊
 
 /*
- Function Rdini scans file line by line, creates variables ( if they doesn't
- declared yet ) as Public and asiignes them values.
- File format:
-      ...
-      [SECTION1_NAME]
-      ...
-      [SECTION2_NAME]
-      ...
- Function reads variables from beginning of file until first section
- and from sections, named in function call.
- Comments must have symbol ';' in the first position of a line.
- Symbol '&' indicate continue on the next line.
- Variables may be logical:
 
-    var_name=On
-    var_name=Off
-    var_name=
+Function Rdini scans file line by line, creates variables ( if they doesn't
 
-  character:
+declared yet ) as Public and asiignes them values.
+File format:
+...
+[SECTION1_NAME]
+...
+[SECTION2_NAME]
+...
 
-    var_name="stroka"
+Function reads variables from beginning of file until first section
 
-  numeric:
+and from sections, named in function call.
+Comments must have symbol ';' in the first position of a line.
+Symbol '&' indicate continue on the next line.
+Variables may be logical:
 
-    var_name=999
+var_name=On
+var_name=Off
+var_name=
 
-  codeblock:
+character:
 
-    var_name={|| ... }
+var_name="stroka"
 
-  array of any structure, including all types of variables:
+numeric:
 
-    var_name={ ... { ... } ... }
+var_name=999
 
- Syntax: Rdini ( ini_file_name, [section1_name], [section2_name],;
-                 [section3_name], [section4_name] ),
-   where ini_file_name - name of .ini - file you want to read,
-   section1_name, ..., section4_name - names of sections in .ini - file
-    which you want to read.
+codeblock:
+
+var_name={|| ... }
+
+array of any structure, including all types of variables:
+
+var_name={ ... { ... } ... }
+
+Syntax: Rdini ( ini_file_name, [section1_name], [section2_name],;
+[section3_name], [section4_name] ),
+where ini_file_name - name of .ini - file you want to read,
+section1_name, ..., section4_name - names of sections in .ini - file
+which you want to read.
 */
 
 #include "fileio.ch"
@@ -70,12 +72,13 @@
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
+
 FUNCTION RDINI( fname, prm1, prm2, prm3, prm4 )
 
-LOCAL han, stroka, strfull, kolstr, rez, poz1, vname, i, prblo, lTruncAr
-LOCAL lWinIni  := ( VALTYPE( prm1 ) == "A" )
-LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
-LOCAL iniDbf := ( Upper( FilExten( fname ) ) == "DBF" )
+   LOCAL han, stroka, strfull, kolstr, rez, poz1, vname, i, prblo, lTruncAr
+   LOCAL lWinIni  := ( VALTYPE( prm1 ) == "A" )
+   LOCAL strbuf := Space(STR_BUFLEN), poz := STR_BUFLEN+1
+   LOCAL iniDbf := ( Upper( FilExten( fname ) ) == "DBF" )
 
    kolstr := 0
    prblo  := .T.
@@ -102,7 +105,6 @@ LOCAL iniDbf := ( Upper( FilExten( fname ) ) == "DBF" )
             ENDIF
             strfull := ""
          ENDIF
-         //
          IF Left( stroka,1 ) = "["
             stroka := UPPER( SUBSTR( stroka, 2, AT( "]", stroka ) - 2 ) )
             IF lWinIni
@@ -129,15 +131,19 @@ LOCAL iniDbf := ( Upper( FilExten( fname ) ) == "DBF" )
                         IF ASC( vname ) = 35                // #
                            vname := SUBSTR( vname, 2 )
                            PRIVATE &vname := {}
+
                         ELSE
                            PUBLIC &vname := {}
+
                         ENDIF
                      ELSE
                         IF ASC( vname ) = 35                // #
                            vname := SUBSTR( vname, 2 )
                            PRIVATE &vname
+
                         ELSE
                            PUBLIC &vname
+
                         ENDIF
                      ENDIF
                   ELSE
@@ -157,30 +163,33 @@ LOCAL iniDbf := ( Upper( FilExten( fname ) ) == "DBF" )
                   ENDCASE
                ENDIF
             ENDIF
-            //
          ENDIF
       ENDDO
       FCLOSE( han )
    ELSE
+
       RETURN 0
    ENDIF
    IF iniDbf
       USE
    ENDIF
-RETURN kolstr
 
-*+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
-*+
-*+    Function RDZNACH()
-*+
-*+    Called from ( procini.prg  )   1 - function rdini()
-*+                                   1 - function rdarr()
-*+
-*+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
-*+
+   RETURN kolstr
+
+   *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
+   *+
+   *+    Function RDZNACH()
+   *+
+   *+    Called from ( procini.prg  )   1 - function rdini()
+   *+                                   1 - function rdarr()
+   *+
+   *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
+   *+
+
 STATIC FUNCTION RDZNACH( ps )
 
-LOCAL poz, znc
+   LOCAL poz, znc
+
    ps := ALLTRIM( ps )
    IF ASC( ps ) = 34
       poz := AT( CHR( 34 ), SUBSTR( ps, 2 ) )
@@ -190,20 +199,23 @@ LOCAL poz, znc
    ELSE
       znc := &ps
    ENDIF
-RETURN znc
 
-*+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
-*+
-*+    Function RDARR()
-*+
-*+    Called from ( procini.prg  )   1 - function rdini()
-*+                                   1 - function rdarr()
-*+
-*+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
-*+
+   RETURN znc
+
+   *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
+   *+
+   *+    Function RDARR()
+   *+
+   *+    Called from ( procini.prg  )   1 - function rdini()
+   *+                                   1 - function rdarr()
+   *+
+   *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
+   *+
+
 STATIC FUNCTION RDARR( vname, stroka )
 
-LOCAL poz1, i := 0, lenm, len1, strv, newname
+   LOCAL poz1, i := 0, lenm, len1, strv, newname
+
    poz1 := FIND_Z( SUBSTR( stroka, 2 ), "}" )
    IF poz1 <> 0
       stroka := SUBSTR( stroka, 2, poz1 - 1 )
@@ -227,14 +239,20 @@ LOCAL poz1, i := 0, lenm, len1, strv, newname
          ENDIF
       ENDDO
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 STATIC FUNCTION RDSTRDBF
-LOCAL stroka
-FIELD INICOND, INITEXT
+
+   LOCAL stroka
+   FIELD INICOND, INITEXT
+
    IF Eof()
-      Return ""
+
+      RETURN ""
    ENDIF
    stroka := IIF( Empty( INICOND ) .OR. &( INICOND ), Trim(INITEXT), "" )
    SKIP
-RETURN stroka
+
+   RETURN stroka
+

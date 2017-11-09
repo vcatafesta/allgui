@@ -1,11 +1,12 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
 MEMVAR aRecordSet
 
-Function main_grid_1_onquerydata
+FUNCTION main_grid_1_onquerydata
 
-	This.QueryData := aRecordSet [This.QueryRowIndex] [This.QueryColIndex]
+   This.QueryData := aRecordSet [This.QueryRowIndex] [This.QueryColIndex]
 
-Return Nil
+   RETURN NIL
+

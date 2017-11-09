@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2006 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2006 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 ANNOUNCE RDDSYS
 
@@ -22,8 +20,10 @@ ANNOUNCE RDDSYS
 
 STATIC lexit := .F., nUnits := 0
 MEMVAR cFileIni
+
 /*
 */
+
 PROCEDURE Main
 
    LOCAL nDestSize := 1.44, nSizeType := 3, lCreateBatFile := .T., ;
@@ -33,88 +33,88 @@ PROCEDURE Main
 
    IF File( cFileIni + '.ini' )
       BEGIN INI FILE cFileIni
-        GET nDestSize SECTION "Settings" ENTRY "DestSize"
-        GET nSizeType SECTION "Settings" ENTRY "SizeType"
-        GET lCreateBatFile SECTION "Settings" ENTRY "CreateBatFile"
+         GET nDestSize SECTION "Settings" ENTRY "DestSize"
+         GET nSizeType SECTION "Settings" ENTRY "SizeType"
+         GET lCreateBatFile SECTION "Settings" ENTRY "CreateBatFile"
       END INI
    ELSE
       BEGIN INI FILE cFileIni
-        SET SECTION "Settings" ENTRY "DestSize" TO nDestSize
-        SET SECTION "Settings" ENTRY "SizeType" TO nSizeType
-        SET SECTION "Settings" ENTRY "CreateBatFile" TO lCreateBatFile
+         SET SECTION "Settings" ENTRY "DestSize" TO nDestSize
+         SET SECTION "Settings" ENTRY "SizeType" TO nSizeType
+         SET SECTION "Settings" ENTRY "CreateBatFile" TO lCreateBatFile
       END INI
    ENDIF
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 422 HEIGHT IF( IsXPThemeActive(), 148, 142 ) ;
-      TITLE PROGRAM ;
-      ICON IDI_MAIN ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      FONT "MS Sans Serif" SIZE 8 ;
-      ON RELEASE iif( Empty( cFile ), , SaveSettings() )
+         AT 0, 0 ;
+         WIDTH 422 HEIGHT IF( IsXPThemeActive(), 148, 142 ) ;
+         TITLE PROGRAM ;
+         ICON IDI_MAIN ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         FONT "MS Sans Serif" SIZE 8 ;
+         ON RELEASE iif( Empty( cFile ), , SaveSettings() )
 
-   @ 10, 2 LABEL Label_1 VALUE "Source file:" WIDTH 56 RIGHTALIGN
-   @ 7, 62 BTNTEXTBOX Text_1 WIDTH 345 HEIGHT 22 ;
-      VALUE '' ;
-      ACTION {|| cFile := GetFile( NIL, NIL, ;
-      iif( Empty( cFile ), GetMyDocumentsFolder(), cFilePath( cFile ) ), .F., .F. ), ;
-      iif( Empty( cFile ), , ( Form_1 .Text_1. Value := cFile, ;
-      Form_1.Text_2.Value := cFilePath( cFile ) + "\", lExistFile( cFile ), Form_1.Text_1. SetFocus ) ) } ;
-      PICTURE "OPEN" ;
-      BUTTONWIDTH 19
+      @ 10, 2 LABEL Label_1 VALUE "Source file:" WIDTH 56 RIGHTALIGN
+      @ 7, 62 BTNTEXTBOX Text_1 WIDTH 345 HEIGHT 22 ;
+         VALUE '' ;
+         ACTION {|| cFile := GetFile( NIL, NIL, ;
+         iif( Empty( cFile ), GetMyDocumentsFolder(), cFilePath( cFile ) ), .F., .F. ), ;
+         iif( Empty( cFile ), , ( Form_1 .Text_1. Value := cFile, ;
+         Form_1.Text_2.Value := cFilePath( cFile ) + "\", lExistFile( cFile ), Form_1.Text_1. SetFocus ) ) } ;
+         PICTURE "OPEN" ;
+         BUTTONWIDTH 19
 
-   @ 38, 2 LABEL Label_2 VALUE "Split to:" WIDTH 56 RIGHTALIGN
-   @ 35, 62 BTNTEXTBOX Text_2 WIDTH 345 HEIGHT 22 ;
-      VALUE '' ;
-      ACTION {|| cFolder := GetFolder(), ;
-      iif( Empty( cFolder ), , ( Form_1.Text_2.Value := cFolder, Form_1.Text_2. SetFocus ) ) } ;
-      PICTURE "OPEN" ;
-      BUTTONWIDTH 19
+      @ 38, 2 LABEL Label_2 VALUE "Split to:" WIDTH 56 RIGHTALIGN
+      @ 35, 62 BTNTEXTBOX Text_2 WIDTH 345 HEIGHT 22 ;
+         VALUE '' ;
+         ACTION {|| cFolder := GetFolder(), ;
+         iif( Empty( cFolder ), , ( Form_1.Text_2.Value := cFolder, Form_1.Text_2. SetFocus ) ) } ;
+         PICTURE "OPEN" ;
+         BUTTONWIDTH 19
 
-   @ 66, 2 LABEL Label_3 VALUE "Split size:" WIDTH 56 RIGHTALIGN
-   @ 63, 62 GETBOX Text_3 WIDTH 44 HEIGHT 22 ;
-      VALUE nDestSize ;
-      PICTURE "9999.99" ;
-      ON CHANGE iif( lExistFile( cFile ), nDestSize := Form_1.Text_3.Value, )
+      @ 66, 2 LABEL Label_3 VALUE "Split size:" WIDTH 56 RIGHTALIGN
+      @ 63, 62 GETBOX Text_3 WIDTH 44 HEIGHT 22 ;
+         VALUE nDestSize ;
+         PICTURE "9999.99" ;
+         ON CHANGE iif( lExistFile( cFile ), nDestSize := Form_1.Text_3.Value, )
 
-   @ 63, 108 COMBOBOX ComboBox_1 ;
-      ITEMS { "Bytes", "KBytes", "MBytes" } ;
-      VALUE nSizeType WIDTH 60 ;
-      ON CHANGE iif( lExistFile( cFile ), nSizeType := Form_1.ComboBox_1.Value, ) ;
-      ON LISTDISPLAY ( aEscBlock := EscapeOff() ) ;
-      ON LISTCLOSE ( EscapeOn( aEscBlock ) )
+      @ 63, 108 COMBOBOX ComboBox_1 ;
+         ITEMS { "Bytes", "KBytes", "MBytes" } ;
+         VALUE nSizeType WIDTH 60 ;
+         ON CHANGE iif( lExistFile( cFile ), nSizeType := Form_1.ComboBox_1.Value, ) ;
+         ON LISTDISPLAY ( aEscBlock := EscapeOff() ) ;
+         ON LISTCLOSE ( EscapeOn( aEscBlock ) )
 
-   @ 64, 175 CHECKBOX CheckBox_1 CAPTION 'Create BAT file' VALUE lCreateBatFile ;
-      WIDTH 90 HEIGHT 22
+      @ 64, 175 CHECKBOX CheckBox_1 CAPTION 'Create BAT file' VALUE lCreateBatFile ;
+         WIDTH 90 HEIGHT 22
 
-   @ 62, 305 BUTTON Button_1 ;
-      CAPTION '? ' ;
-      ACTION MsgAbout() ;
-      WIDTH 26 HEIGHT 24
+      @ 62, 305 BUTTON Button_1 ;
+         CAPTION '? ' ;
+         ACTION MsgAbout() ;
+         WIDTH 26 HEIGHT 24
 
-   @ 62, 348 BUTTON Button_2 ;
-      CAPTION '&Split' ;
-      ACTION {|| Form_1.Button_2.Visible := .F., Form_1.Button_3.Visible := .T., Form_1.Button_3.SetFocus, ;
-      SplitFile( Form_1.Text_1.Value, Form_1.Text_2.Value, Form_1.Text_3.Value, ;
-      Form_1.ComboBox_1.Value, Form_1.CheckBox_1.Value ), lexit := .F., Form_1.ProgressBar_1.Value := 0, ;
-      Form_1.Button_3.Visible := .F., Form_1.Button_2.Visible := .T., Form_1.Button_2.SetFocus } ;
-      WIDTH 59 HEIGHT 24
+      @ 62, 348 BUTTON Button_2 ;
+         CAPTION '&Split' ;
+         ACTION {|| Form_1.Button_2.Visible := .F., Form_1.Button_3.Visible := .T., Form_1.Button_3.SetFocus, ;
+         SplitFile( Form_1.Text_1.Value, Form_1.Text_2.Value, Form_1.Text_3.Value, ;
+         Form_1.ComboBox_1.Value, Form_1.CheckBox_1.Value ), lexit := .F., Form_1.ProgressBar_1.Value := 0, ;
+         Form_1.Button_3.Visible := .F., Form_1.Button_2.Visible := .T., Form_1.Button_2.SetFocus } ;
+         WIDTH 59 HEIGHT 24
 
-   @ 62, 348 BUTTON Button_3 ;
-      CAPTION '&Cancel' ;
-      ACTION lexit := .T. ;
-      WIDTH 59 HEIGHT 24
+      @ 62, 348 BUTTON Button_3 ;
+         CAPTION '&Cancel' ;
+         ACTION lexit := .T. ;
+         WIDTH 59 HEIGHT 24
 
-   DRAW BOX IN WINDOW Form_1 AT 91, 6 TO 109, 299
+      DRAW BOX IN WINDOW Form_1 AT 91, 6 TO 109, 299
 
-   @ 93, 7 LABEL Label_4 VALUE "None" WIDTH 290 HEIGHT 15
+      @ 93, 7 LABEL Label_4 VALUE "None" WIDTH 290 HEIGHT 15
 
-   @ 91, 305 PROGRESSBAR ProgressBar_1 RANGE 0, 100 ;
-      WIDTH 102 HEIGHT 19 SMOOTH
+      @ 91, 305 PROGRESSBAR ProgressBar_1 RANGE 0, 100 ;
+         WIDTH 102 HEIGHT 19 SMOOTH
 
-   ON KEY ESCAPE ACTION ( cFile := "", ThisWindow.Release )
+      ON KEY ESCAPE ACTION ( cFile := "", ThisWindow.Release )
 
    END WINDOW
 
@@ -123,9 +123,10 @@ PROCEDURE Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
-/*
-*/
+   RETURN
+   /*
+   */
+
 STATIC FUNCTION lExistFile( cSource )
 
    LOCAL hsource                 // file handle for source file
@@ -136,6 +137,7 @@ STATIC FUNCTION lExistFile( cSource )
 
    IF Empty( cSource ) .OR. !File( cSource )
       Form_1.Label_4.Value := "File doesn't exist!"
+
       RETURN .F.
    ENDIF
 
@@ -156,12 +158,14 @@ STATIC FUNCTION lExistFile( cSource )
       ENDIF
       FClose( hsource )
    ELSE
+
       RETURN .F.
    ENDIF
 
-RETURN .T.
-/*
-*/
+   RETURN .T.
+   /*
+   */
+
 FUNCTION SplitFile( cSource, cTarget, nDestSize, nSizeType, lCreateBatFile )
 
    LOCAL i                           // general counter
@@ -275,31 +279,35 @@ FUNCTION SplitFile( cSource, cTarget, nDestSize, nSizeType, lCreateBatFile )
       ENDIF
    ENDIF
 
-RETURN lsplit
-/*
-*/
+   RETURN lsplit
+   /*
+   */
+
 STATIC FUNCTION MsgAbout()
-RETURN MsgInfo( PadC( PROGRAM + VERSION, 42 ) + CRLF + ;
+
+   RETURN MsgInfo( PadC( PROGRAM + VERSION, 42 ) + CRLF + ;
       "Copyright " + Chr( 169 ) + COPYRIGHT + CRLF + CRLF + ;
       hb_Compiler() + CRLF + Version() + CRLF + ;
       Left( MiniGuiVersion(), 38 ) + CRLF + CRLF + ;
       PadC( "This program is Freeware!", 40 ), "About" )
-/*
-*/
+   /*
+   */
+
 STATIC FUNCTION SaveSettings()
 
    LOCAL nDestSize := Form_1.Text_3.Value, nSizeType := Form_1.ComboBox_1.Value, ;
       lCreateBatFile := Form_1.CheckBox_1.Value
 
    BEGIN INI FILE cFileIni
-     SET SECTION "Settings" ENTRY "DestSize" TO nDestSize
-     SET SECTION "Settings" ENTRY "SizeType" TO nSizeType
-     SET SECTION "Settings" ENTRY "CreateBatFile" TO lCreateBatFile
+      SET SECTION "Settings" ENTRY "DestSize" TO nDestSize
+      SET SECTION "Settings" ENTRY "SizeType" TO nSizeType
+      SET SECTION "Settings" ENTRY "CreateBatFile" TO lCreateBatFile
    END INI
 
-RETURN NIL
-/*
-*/
+   RETURN NIL
+   /*
+   */
+
 STATIC FUNCTION EscapeOff
 
    LOCAL bKeyBlock, abRetVal := {}
@@ -308,23 +316,27 @@ STATIC FUNCTION EscapeOff
    AAdd( abRetVal, bKeyBlock )
    RELEASE KEY ESCAPE OF Form_1
 
-RETURN( abRetVal )
-/*
-*/
+   RETURN( abRetVal )
+   /*
+   */
+
 STATIC PROCEDURE EscapeOn( aKeyBlock )
 
    _DefineHotKey( "Form_1", 0, 27, aKeyBlock[ 1 ] )
 
-RETURN
-/*
-*/
+   RETURN
+   /*
+   */
+
 FUNCTION cFileName( cPathMask )
 
-RETURN cFileNoPath( cPathMask )
-/*
-*/
+   RETURN cFileNoPath( cPathMask )
+   /*
+   */
+
 FUNCTION cFilePath( cPathMask )
 
    LOCAL n := RAt( "\", cPathMask )
 
-RETURN iif( n > 0, Left( cPathMask, n -1 ), Left( cPathMask, 2 ) )
+   RETURN iif( n > 0, Left( cPathMask, n -1 ), Left( cPathMask, 2 ) )
+

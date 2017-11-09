@@ -1,5 +1,5 @@
 /*
- * Author: P.Chornyj <myorg63@mail.ru>
+* Author: P.Chornyj <myorg63@mail.ru>
 */
 
 #include "minigui.ch"
@@ -7,124 +7,128 @@
 #define c1Tab CHR(9)
 #define NTrim( n ) LTRIM( STR( n, IF( n == INT( n ), 0, 2 ) ) )
 
-Memvar aPictures, aImageInfo
-Memvar TotalFrames, CurrentFrame
+MEMVAR aPictures, aImageInfo
+MEMVAR TotalFrames, CurrentFrame
 
-Function main()
-Local picture
-Local aPictInfo := {}
-Public aPictures := {}, aImageInfo := {}
-Public TotalFrames, CurrentFrame
+FUNCTION main()
 
-        picture := Getfile ( { {'Gif Files', '*.gif'} }, 'Open a File' , GetCurrentFolder(), .f. , .t. )
+   LOCAL picture
+   LOCAL aPictInfo := {}
+   PUBLIC aPictures := {}, aImageInfo := {}
+   PUBLIC TotalFrames, CurrentFrame
 
-	IF Empty( picture )
-		picture := 'ani-free.gif'
-		LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )
-	ELSE
-		IF !LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )
-			QUIT
-		ENDIF
-	ENDIF
+   picture := Getfile ( { {'Gif Files', '*.gif'} }, 'Open a File' , GetCurrentFolder(), .f. , .t. )
 
-	TotalFrames := Len( aPictures )
-	CurrentFrame := 1
+   IF Empty( picture )
+      picture := 'ani-free.gif'
+      LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )
+   ELSE
+      IF !LoadGif( picture, @aPictInfo, @aPictures, @aImageInfo )
+         QUIT
+      ENDIF
+   ENDIF
 
-	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 320 HEIGHT 240 ;
-		TITLE 'Gif89 Demo' ;
-		MAIN NOMAXIMIZE NOSIZE ;
-		BACKCOLOR SILVER ;
-		ON INTERACTIVECLOSE OnClose()
+   TotalFrames := Len( aPictures )
+   CurrentFrame := 1
 
-		DEFINE MAIN MENU
+   DEFINE WINDOW Form_Main ;
+         AT 0,0 ;
+         WIDTH 320 HEIGHT 240 ;
+         TITLE 'Gif89 Demo' ;
+         MAIN NOMAXIMIZE NOSIZE ;
+         BACKCOLOR SILVER ;
+         ON INTERACTIVECLOSE OnClose()
 
-			DEFINE POPUP "&File" 
+      DEFINE MAIN MENU
 
-				MENUITEM '&Play' ACTION IIF( TotalFrames > 1, Form_Main.Timer_1.Enabled := .T., )
-				MENUITEM '&Stop' ACTION IIF( TotalFrames > 1, Form_Main.Timer_1.Enabled := .F., )
-				SEPARATOR
-				MENUITEM "E&xit" ACTION OnClose()
+         DEFINE POPUP "&File"
 
-			END POPUP
+            MENUITEM '&Play' ACTION IIF( TotalFrames > 1, Form_Main.Timer_1.Enabled := .T., )
+            MENUITEM '&Stop' ACTION IIF( TotalFrames > 1, Form_Main.Timer_1.Enabled := .F., )
+            SEPARATOR
+            MENUITEM "E&xit" ACTION OnClose()
 
-			DEFINE POPUP "&?" 
+         END POPUP
 
-				MENUITEM "GIF &Info" ACTION IIF( TotalFrames > 1, ;
-					( Form_Main.Timer_1.Enabled := .F., MsgMulty( { ;
-					"Picture name" + c1Tab + ": " + cFileNoPath( picture ), ;
-					"Gif Version"  + c1Tab + ": " + aPictInfo [1], ; 
-					"Image Width"  + c1Tab + ": " + NTrim( aPictInfo [2] ), ;
-					"Image Height" + c1Tab + ": " + NTrim( aPictInfo [3] ), ;
-					"Total Frames" + c1Tab + ": " + NTrim( TotalFrames ), ;
-					"CurrentFrame" + c1Tab + ": " + NTrim( CurrentFrame ) }, ;
-					"GIF Info" ), Form_Main.Timer_1.Enabled := .T. ), )
+         DEFINE POPUP "&?"
 
-			END POPUP
+            MENUITEM "GIF &Info" ACTION IIF( TotalFrames > 1, ;
+               ( Form_Main.Timer_1.Enabled := .F., MsgMulty( { ;
+               "Picture name" + c1Tab + ": " + cFileNoPath( picture ), ;
+               "Gif Version"  + c1Tab + ": " + aPictInfo [1], ;
+               "Image Width"  + c1Tab + ": " + NTrim( aPictInfo [2] ), ;
+               "Image Height" + c1Tab + ": " + NTrim( aPictInfo [3] ), ;
+               "Total Frames" + c1Tab + ": " + NTrim( TotalFrames ), ;
+               "CurrentFrame" + c1Tab + ": " + NTrim( CurrentFrame ) }, ;
+               "GIF Info" ), Form_Main.Timer_1.Enabled := .T. ), )
 
-		END MENU
+         END POPUP
 
-                @ 20, 20 IMAGE Image_1 PICTURE picture ;
-                        WIDTH aPictInfo [2] ;
-                        HEIGHT aPictInfo [3] ;
-                        WHITEBACKGROUND TRANSPARENT
+      END MENU
 
-	END WINDOW
+      @ 20, 20 IMAGE Image_1 PICTURE picture ;
+         WIDTH aPictInfo [2] ;
+         HEIGHT aPictInfo [3] ;
+         WHITEBACKGROUND TRANSPARENT
 
-	IF TotalFrames > 1
+   END WINDOW
 
-		DEFINE TIMER Timer_1 OF Form_Main INTERVAL GetFrameDelay( aImageInfo [CurrentFrame] ) ;
-	                ACTION PlayGif()
+   IF TotalFrames > 1
 
-		Form_Main.Image_1.Picture := aPictures [CurrentFrame]
-		Form_Main.Timer_1.Enabled := .T.
-		Form_Main.Width := Max( 180, aPictInfo [2] + 2 * GetBorderWidth() + 40 )
-		Form_Main.Height := GetTitleHeight() + aPictInfo [3] + 2 * GetBorderHeight() + 60
-		Form_Main.Image_1.Col := ( Form_Main.Width - aPictInfo [2] - 2 * GetBorderWidth() ) / 2 + 1
+      DEFINE TIMER Timer_1 OF Form_Main INTERVAL GetFrameDelay( aImageInfo [CurrentFrame] ) ;
+         ACTION PlayGif()
 
-		DRAW PANEL IN WINDOW Form_Main ;
-			AT Form_Main.Image_1.Row - 2, Form_Main.Image_1.Col - 2 ;
-			TO Form_Main.Image_1.Row + aPictInfo [3] + 2, Form_Main.Image_1.Col + aPictInfo [2] + 2
-	ENDIF
+      Form_Main.Image_1.Picture := aPictures [CurrentFrame]
+      Form_Main.Timer_1.Enabled := .T.
+      Form_Main.Width := Max( 180, aPictInfo [2] + 2 * GetBorderWidth() + 40 )
+      Form_Main.Height := GetTitleHeight() + aPictInfo [3] + 2 * GetBorderHeight() + 60
+      Form_Main.Image_1.Col := ( Form_Main.Width - aPictInfo [2] - 2 * GetBorderWidth() ) / 2 + 1
 
-	CENTER WINDOW Form_Main
+      DRAW PANEL IN WINDOW Form_Main ;
+         AT Form_Main.Image_1.Row - 2, Form_Main.Image_1.Col - 2 ;
+         TO Form_Main.Image_1.Row + aPictInfo [3] + 2, Form_Main.Image_1.Col + aPictInfo [2] + 2
+   ENDIF
 
-	ACTIVATE WINDOW Form_Main
+   CENTER WINDOW Form_Main
 
-Return Nil
+   ACTIVATE WINDOW Form_Main
 
-/*
-*/
-Function PlayGif()
+   RETURN NIL
 
-	IF CurrentFrame < TotalFrames
-		CurrentFrame ++
-	ELSE
-		CurrentFrame := 1
-	ENDIF
+   /*
+   */
 
-	Form_Main.Image_1.Picture := aPictures [CurrentFrame]
-	Form_Main.Timer_1.Value := GetFrameDelay( aImageInfo [CurrentFrame] )
+FUNCTION PlayGif()
 
-	Form_Main.Image_1.Refresh
+   IF CurrentFrame < TotalFrames
+      CurrentFrame ++
+   ELSE
+      CurrentFrame := 1
+   ENDIF
 
-Return Nil
+   Form_Main.Image_1.Picture := aPictures [CurrentFrame]
+   Form_Main.Timer_1.Value := GetFrameDelay( aImageInfo [CurrentFrame] )
 
-/*
-*/
-Function OnClose()
+   Form_Main.Image_1.Refresh
 
-	AEVal( aPictures, {|f| FErase( f ) } )
+   RETURN NIL
 
-	IF TotalFrames > 1
-		Form_Main.Timer_1.Release
-	ENDIF
+   /*
+   */
 
-	Form_Main.Release
+FUNCTION OnClose()
 
-Return Nil
+   AEVal( aPictures, {|f| FErase( f ) } )
 
-/*
-*/
-#include "MsM.prg"
+   IF TotalFrames > 1
+      Form_Main.Timer_1.Release
+   ENDIF
+
+   Form_Main.Release
+
+   RETURN NIL
+
+   /*
+   */
+   #include "MsM.prg"
+

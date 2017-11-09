@@ -1,127 +1,126 @@
 /*
- * MiniGUI HBPRINTER Simple Demo
+* MiniGUI HBPRINTER Simple Demo
 */
 
 #include "minigui.ch"
 #include "winprint.ch"
 
-*----------------------*
-Function Main
-*----------------------*
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'HBPRINTER Simple Demo' ;
-                ICON 'zzz_PrintIcon' ;
-		MAIN
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'HBPRINTER Simple Demo' ;
+         ICON 'zzz_PrintIcon' ;
+         MAIN
 
-		DEFINE MAIN MENU
-			POPUP 'File'
-				MENUITEM 'Test' ACTION HBPRINTERDEMO()
-				SEPARATOR
-				MENUITEM 'Exit' ACTION ThisWindow.Release
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'File'
+            MENUITEM 'Test' ACTION HBPRINTERDEMO()
+            SEPARATOR
+            MENUITEM 'Exit' ACTION ThisWindow.Release
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return Nil
+   RETURN NIL
 
-*----------------------*
 PROCEDURE HBPRINTERDEMO
-*----------------------*
-Local aColor [10], i
 
-	aColor [1] := YELLOW	
-	aColor [2] := PINK	
-	aColor [3] := RED	
-	aColor [4] := FUCHSIA	
-	aColor [5] := BROWN	
-	aColor [6] := ORANGE	
-	aColor [7] := GREEN	
-	aColor [8] := PURPLE	
-	aColor [9] := BLACK	
-	aColor [10] := BLUE
+   LOCAL aColor [10], i
 
-	// Initialize print system
+   aColor [1] := YELLOW
+   aColor [2] := PINK
+   aColor [3] := RED
+   aColor [4] := FUCHSIA
+   aColor [5] := BROWN
+   aColor [6] := ORANGE
+   aColor [7] := GREEN
+   aColor [8] := PURPLE
+   aColor [9] := BLACK
+   aColor [10] := BLUE
 
-	INIT PRINTSYS
+   // Initialize print system
 
-	// Select a default printer
+   INIT PRINTSYS
 
-	SELECT DEFAULT
+   // Select a default printer
 
-	// Let the user to select a printer via dialog
+   SELECT DEFAULT
 
-	// SELECT BY DIALOG 
+   // Let the user to select a printer via dialog
 
-	// If the error code is not zero cancel print
+   // SELECT BY DIALOG
 
-	IF HBPRNERROR != 0 
-		MSGSTOP ('Print Cancelled!')
-		RETURN
-	ENDIF
+   // If the error code is not zero cancel print
 
-	// The best way to get the most similiar printout on various printers 
-	// is to use SET UNITS MM, remembering to use margins large enough for 
-	// all printers.
+   IF HBPRNERROR != 0
+      MSGSTOP ('Print Cancelled!')
 
-	SET UNITS MM    		// Sets @... units to milimeters
+      RETURN
+   ENDIF
 
-	SET PAPERSIZE DMPAPER_A4	// Sets paper size to A4
+   // The best way to get the most similiar printout on various printers
+   // is to use SET UNITS MM, remembering to use margins large enough for
+   // all printers.
 
-	SET ORIENTATION PORTRAIT	// Sets paper orientation to portrait
+   SET UNITS MM          // Sets @... units to milimeters
 
-	SET BIN DMBIN_FIRST    		// Use first bin
+   SET PAPERSIZE DMPAPER_A4   // Sets paper size to A4
 
-	SET QUALITY DMRES_HIGH		// Sets print quality to high
+   SET ORIENTATION PORTRAIT   // Sets paper orientation to portrait
 
-	SET COLORMODE DMCOLOR_COLOR	// Set print color mode to color
+   SET BIN DMBIN_FIRST          // Use first bin
 
-	SET COPIES TO 2    		// Set print quantity of copies
+   SET QUALITY DMRES_HIGH      // Sets print quality to high
 
-	SET PREVIEW ON			// Enables print preview
+   SET COLORMODE DMCOLOR_COLOR   // Set print color mode to color
 
-	SET PREVIEW RECT MAXIMIZED	// Maximized preview window
+   SET COPIES TO 2          // Set print quantity of copies
 
-	// Create a font for use with @...SAY command
-	DEFINE FONT "TitleFont" NAME "Courier New" SIZE 24 BOLD
+   SET PREVIEW ON         // Enables print preview
 
-	START DOC
+   SET PREVIEW RECT MAXIMIZED   // Maximized preview window
 
-		FOR i:=1 TO LEN(aColor)
+   // Create a font for use with @...SAY command
+   DEFINE FONT "TitleFont" NAME "Courier New" SIZE 24 BOLD
 
-			START PAGE
+   START DOC
 
-				@ 20,20,50,190 RECTANGLE
+   FOR i:=1 TO LEN(aColor)
 
-				@ 25,25 PICTURE "hmglogo.gif" SIZE 20,15
+      START PAGE
 
-				@ 35,60 SAY "HBPRINTER SIMPLE DEMO" ;
-					FONT "TitleFont" ;
-					COLOR RED ;
-					TO PRINT
+      @ 20,20,50,190 RECTANGLE
 
-				@ 140,60 SAY "Page Number :" + Str(i, 2) ;
-					FONT "TitleFont" ;
-					COLOR aColor [i] ;
-					TO PRINT
+      @ 25,25 PICTURE "hmglogo.gif" SIZE 20,15
 
-				@ 270,20,270,190 LINE
+      @ 35,60 SAY "HBPRINTER SIMPLE DEMO" ;
+         FONT "TitleFont" ;
+         COLOR RED ;
+         TO PRINT
 
-			END PAGE
+      @ 140,60 SAY "Page Number :" + Str(i, 2) ;
+         FONT "TitleFont" ;
+         COLOR aColor [i] ;
+         TO PRINT
 
-		NEXT
+      @ 270,20,270,190 LINE
 
-	END DOC
+   END PAGE
 
-	// Releases print system
+NEXT
 
-	RELEASE PRINTSYS
+END DOC
+
+// Releases print system
+
+RELEASE PRINTSYS
 
 RETURN
+

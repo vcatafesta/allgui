@@ -1,52 +1,53 @@
 /*
- * MiniGUI Menu MRU Demo
- *
- * (C) 2009 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI Menu MRU Demo
+* (C) 2009 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Function Main
-   Local cPrompt
+FUNCTION Main
 
-   If !File('demo2.ini')
-	BEGIN INI FILENAME 'demo2.ini'
-		SET SECTION "MRU" ENTRY "1" TO "Item1"
-		SET SECTION "MRU" ENTRY "2" TO "Item2"
-		SET SECTION "MRU" ENTRY "3" TO "Item3"
-	END INI
-   EndIf
+   LOCAL cPrompt
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'MiniGUI MRU Demo' ;
-		MAIN ;
-		ON RELEASE SaveMRUFileList()
+   IF !File('demo2.ini')
+      BEGIN INI FILENAME 'demo2.ini'
+         SET SECTION "MRU" ENTRY "1" TO "Item1"
+         SET SECTION "MRU" ENTRY "2" TO "Item2"
+         SET SECTION "MRU" ENTRY "3" TO "Item3"
+      END INI
+   ENDIF
 
-		DEFINE MAIN MENU
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniGUI MRU Demo' ;
+         MAIN ;
+         ON RELEASE SaveMRUFileList()
 
-		    POPUP "Test"
-			MENUITEM "&Manage this under MRU list" ;
-                          ACTION ( cPrompt := InputBox( "Write something", "Whatever..." ),;
-                                   AddMenuElement(cPrompt, "MsgInfo(cPrompt)") )
+      DEFINE MAIN MENU
 
-			POPUP "&MRU"
-                           MRUITEM INI 'demo2.ini' SECTION "MRU" SIZE 5 ACTION MsgInfo ( cPrompt )
-			END POPUP
+         POPUP "Test"
+            MENUITEM "&Manage this under MRU list" ;
+               ACTION ( cPrompt := InputBox( "Write something", "Whatever..." ),;
+               AddMenuElement(cPrompt, "MsgInfo(cPrompt)") )
 
-                        MENUITEM "&Clear the MRU List" ACTION ClearMRUList()
+            POPUP "&MRU"
+               MRUITEM INI 'demo2.ini' SECTION "MRU" SIZE 5 ACTION MsgInfo ( cPrompt )
+            END POPUP
 
-                        SEPARATOR
-                        MENUITEM  'Exit' ACTION ThisWindow.Release()
-		    END POPUP
+            MENUITEM "&Clear the MRU List" ACTION ClearMRUList()
 
-		END MENU
+            SEPARATOR
+            MENUITEM  'Exit' ACTION ThisWindow.Release()
+         END POPUP
 
-	END WINDOW
+      END MENU
 
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+   END WINDOW
 
-Return Nil
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
+
+   RETURN NIL
+

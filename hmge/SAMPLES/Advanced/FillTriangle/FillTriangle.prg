@@ -1,76 +1,77 @@
 /*
- * FillTriangle.prg
- *
- * Author: P.Chornyj <myorg63@mail.ru>
- *
- * Last Revised by Grigory Filatov 10/03/2017
- */
+* FillTriangle.prg
+* Author: P.Chornyj <myorg63@mail.ru>
+* Last Revised by Grigory Filatov 10/03/2017
+*/
 
 ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 
-Function Main()
+FUNCTION Main()
 
-	DEFINE WINDOW Form_1 ;
-		WINDOWTYPE MAIN ;
-		CLIENTAREA iif(IsXPThemeActive(), 245, 253), iif(IsXPThemeActive(), 245, 253) ;
-		TITLE 'Gradient Triangle Demo' ;
-		ON PAINT OnPaint() ;
-                ON MOUSEMOVE ShowRGB()  
+   DEFINE WINDOW Form_1 ;
+         WINDOWTYPE MAIN ;
+         CLIENTAREA iif(IsXPThemeActive(), 245, 253), iif(IsXPThemeActive(), 245, 253) ;
+         TITLE 'Gradient Triangle Demo' ;
+         ON PAINT OnPaint() ;
+         ON MOUSEMOVE ShowRGB()
 
-		This.MaxButton := .F.
-		This.Sizable := .F.
-		This.SysMenu := .F.
+      This.MaxButton := .F.
+      This.Sizable := .F.
+      This.SysMenu := .F.
 
-		ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-/*
- PRG-level
-*/
-Function OnPaint()
-LOCAL hDC, pps
+   /*
+   PRG-level
+   */
 
-	hDC := BeginPaint( This.Handle, @pps )
+FUNCTION OnPaint()
 
-	FillGradientEx( hDC )
+   LOCAL hDC, pps
 
-	EndPaint( This.Handle, pps )
+   hDC := BeginPaint( This.Handle, @pps )
 
-Return Nil
+   FillGradientEx( hDC )
 
-Function ShowRGB()
-LOCAL hdc, x, y, aColor := {0, 0, 0}
+EndPaint( This.Handle, pps )
 
-	hdc := GetDC( This.Handle )
-	x := _HMG_MouseCol
-	y := _HMG_MouseRow
+RETURN NIL
 
-	IF GetPixelColor( hdc, x, y, @aColor )
-		ThisWindow.Title := "RGB (" ;
-				+ " r:" + str(aColor[1], 3 ) ;
-				+ " g:" + str(aColor[2], 3 ) ;
-				+ " b:" + str(aColor[3], 3 ) ;
-				+ " )"
-	ELSE
-		ThisWindow.Title := "RGB ( CLR_INVALID )"
-	ENDIF
+FUNCTION ShowRGB()
 
-	ReleaseDC( This.Handle, hdc )
+   LOCAL hdc, x, y, aColor := {0, 0, 0}
 
-Return Nil
+   hdc := GetDC( This.Handle )
+   x := _HMG_MouseCol
+   y := _HMG_MouseRow
 
-/*
- C-level
-*/
+   IF GetPixelColor( hdc, x, y, @aColor )
+      ThisWindow.Title := "RGB (" ;
+         + " r:" + str(aColor[1], 3 ) ;
+         + " g:" + str(aColor[2], 3 ) ;
+         + " b:" + str(aColor[3], 3 ) ;
+         + " )"
+   ELSE
+      ThisWindow.Title := "RGB ( CLR_INVALID )"
+   ENDIF
+
+   ReleaseDC( This.Handle, hdc )
+
+   RETURN NIL
+
+   /*
+   C-level
+   */
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -83,7 +84,7 @@ HB_FUNC( FILLGRADIENTEX )
    MSIMG32GradientFill m_dllGradientFillFunc;
    TRIVERTEX rcVertex[4];
    GRADIENT_TRIANGLE gTri[2];
-   
+
    BOOL bPaintedGradient = FALSE;
 
    m_hMsimg32 = LoadLibrary( "msimg32.dll" );
@@ -128,8 +129,8 @@ HB_FUNC( FILLGRADIENTEX )
        gTri[1].Vertex2 = 2;
        gTri[1].Vertex3 = 3;
 
-       bPaintedGradient = m_dllGradientFillFunc 
-         ( (HDC) hb_parnl( 1 ), rcVertex, 4, &gTri, 2, 
+       bPaintedGradient = m_dllGradientFillFunc
+         ( (HDC) hb_parnl( 1 ), rcVertex, 4, &gTri, 2,
          GRADIENT_FILL_TRIANGLE );
      }
      FreeLibrary( m_hMsimg32 );
@@ -147,16 +148,17 @@ HB_FUNC( GETPIXELCOLOR )
 
   result = ( pixel != CLR_INVALID ? HB_TRUE : HB_FALSE );
   if ( result )
-  {  
-    C1 = ( USHORT ) ( GetRValue( pixel ) ); 
+  {
+    C1 = ( USHORT ) ( GetRValue( pixel ) );
     C2 = ( USHORT ) ( GetGValue( pixel ) );
     C3 = ( USHORT ) ( GetBValue( pixel ) );
     HB_STORNI( C1, 4, 1);
     HB_STORNI( C2, 4, 2);
     HB_STORNI( C3, 4, 3);
-  }  
+  }
 
-  hb_retl( result );  
+  hb_retl( result );
 }
 
 #pragma ENDDUMP
+

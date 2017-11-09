@@ -1,33 +1,31 @@
 /*
- * Ejemplo Browse n° 8
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo manejar campos no conocidos
- * al crear el control.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 8
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo manejar campos no conocidos
+* al crear el control.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    LOCAL oForm, ;
-         oBrw, ;
-         myDbf := "Test1", ;
-         myFields := { "Code1", "Name1"}
+      oBrw, ;
+      myDbf := "Test1", ;
+      myFields := { "Code1", "Name1"}
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE 'Browse: manejar campos no conocidos' ;
-      MAIN ;
-      ON INIT AbrirTablas() ;
-      ON RELEASE CerrarTablas()
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'Browse: manejar campos no conocidos' ;
+         MAIN ;
+         ON INIT AbrirTablas() ;
+         ON RELEASE CerrarTablas()
 
       @ 10,10 BROWSE Browse_1 OBJ oBrw ;
          WIDTH oForm:ClientWidth - 20 ;
@@ -40,7 +38,7 @@ FUNCTION Main
          FIELDS myFields ;
          VALID { {|| &( "memvar" + myDbf + myFields[1] ) > 0 }, {|| ! empty( &("memvar" + myDbf + myFields[2]) ) } }
 
-     /* Al ejecutarse el valid, la clase crea una variable llamada
+      /* Al ejecutarse el valid, la clase crea una variable llamada
       * MemVarBaseCampo, donde Base es el alias del área de trabajo
       * y Campo es el nombre del ídem. Ejemplo: MemVarTest1Code1
       */
@@ -51,16 +49,15 @@ FUNCTION Main
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION AbrirTablas()
 
    LOCAL i
 
    DBCREATE( "Test1", ;
-             { {"Code1", "N", 10, 0}, ;
-               {"Name1", "C", 25, 0} } )
+      { {"Code1", "N", 10, 0}, ;
+      {"Name1", "C", 25, 0} } )
 
    USE Test1 NEW
    ZAP
@@ -73,19 +70,19 @@ FUNCTION AbrirTablas()
 
    GO TOP
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION CerrarTablas()
 
-  CLOSE DATABASES
+   CLOSE DATABASES
 
-  IF MsgYesNo( "¿ Borrar la tabla ?", "" )
-     ERASE Test1.dbf
-  ENDIF
+   IF MsgYesNo( "¿ Borrar la tabla ?", "" )
+      ERASE Test1.dbf
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

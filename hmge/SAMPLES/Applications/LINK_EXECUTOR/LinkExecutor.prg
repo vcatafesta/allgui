@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -15,113 +13,108 @@ ANNOUNCE RDDSYS
 #define VERSION ' version 1.1'
 #define COPYRIGHT ' 2003-2006 Grigory Filatov'
 
-#define IDI_1		1001
+#define IDI_1      1001
 
-*--------------------------------------------------------*
-Procedure Main
-*--------------------------------------------------------*
+PROCEDURE Main
 
-	SET MULTIPLE OFF
+   SET MULTIPLE OFF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 354 ;
-		HEIGHT IF(IsXPThemeActive(), 120, 115) ;
-		TITLE PROGRAM ;
-		ICON 'IDI_MAIN' ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		ON INIT Form_1.CONTROL_4.SetFocus ;
-		ON MOUSECLICK MsgAbout() ;
-		FONT 'Tahoma' ; 
-		SIZE 9
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 354 ;
+         HEIGHT IF(IsXPThemeActive(), 120, 115) ;
+         TITLE PROGRAM ;
+         ICON 'IDI_MAIN' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INIT Form_1.CONTROL_4.SetFocus ;
+         ON MOUSECLICK MsgAbout() ;
+         FONT 'Tahoma' ;
+         SIZE 9
 
-		@ 2,6 FRAME CONTROL_1 ; 
-			CAPTION 'Create Link' ; 
-			WIDTH 242 ; 
-			HEIGHT 80
+      @ 2,6 FRAME CONTROL_1 ;
+         CAPTION 'Create Link' ;
+         WIDTH 242 ;
+         HEIGHT 80
 
-		@ 20,24 CHECKBOX CONTROL_2 ; 
-			CAPTION 'On Desktop' ; 
-			WIDTH 220 ; 
-			HEIGHT 30 ; 
-			VALUE FALSE
+      @ 20,24 CHECKBOX CONTROL_2 ;
+         CAPTION 'On Desktop' ;
+         WIDTH 220 ;
+         HEIGHT 30 ;
+         VALUE FALSE
 
-		@ 46,24 CHECKBOX CONTROL_3 ; 
-			CAPTION 'In "Start/Programs" Menu' ; 
-			WIDTH 220 ; 
-			HEIGHT 30 ; 
-			VALUE FALSE
+      @ 46,24 CHECKBOX CONTROL_3 ;
+         CAPTION 'In "Start/Programs" Menu' ;
+         WIDTH 220 ;
+         HEIGHT 30 ;
+         VALUE FALSE
 
-		@ 10,262 BUTTON CONTROL_4 ; 
-			CAPTION 'OK' ; 
-			ACTION ( CreateLink(Form_1.CONTROL_2.Value, Form_1.CONTROL_3.Value), ;
-				Form_1.Release ) ;
-			WIDTH 74 ; 
-			HEIGHT 22
+      @ 10,262 BUTTON CONTROL_4 ;
+         CAPTION 'OK' ;
+         ACTION ( CreateLink(Form_1.CONTROL_2.Value, Form_1.CONTROL_3.Value), ;
+         Form_1.Release ) ;
+         WIDTH 74 ;
+         HEIGHT 22
 
-		@ 40,262 BUTTON CONTROL_5 ; 
-			CAPTION 'Cancel' ; 
-			ACTION Form_1.Release ; 
-			WIDTH 74 ; 
-			HEIGHT 22
+      @ 40,262 BUTTON CONTROL_5 ;
+         CAPTION 'Cancel' ;
+         ACTION Form_1.Release ;
+         WIDTH 74 ;
+         HEIGHT 22
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure CreateLink( lDesk, lMenu )
-*--------------------------------------------------------*
-Local cFileName := Lower( ChangeFileExt( Application.ExeName, ".ini" ) )
-Local cDesktop := GetDesktopFolder()
-Local cMenuPrgs := GetSpecialFolder( CSIDL_PROGRAMS )
-Local cLinkName := "Calculator"
-Local cExeName := GetWindowsFolder() + "\Calc.exe"
-Local cIco := ""
+STATIC PROCEDURE CreateLink( lDesk, lMenu )
 
-	IF !FILE(cFileName)
-		BEGIN INI FILE cFileName
-			SET SECTION "Options" ENTRY "LinkName" TO cLinkName
-			SET SECTION "Options" ENTRY "FileName" TO cExeName
-		END INI
-	ENDIF
+   LOCAL cFileName := Lower( ChangeFileExt( Application.ExeName, ".ini" ) )
+   LOCAL cDesktop := GetDesktopFolder()
+   LOCAL cMenuPrgs := GetSpecialFolder( CSIDL_PROGRAMS )
+   LOCAL cLinkName := "Calculator"
+   LOCAL cExeName := GetWindowsFolder() + "\Calc.exe"
+   LOCAL cIco := ""
 
-	BEGIN INI FILE cFileName
-		GET cLinkName SECTION "Options" ENTRY "LinkName" DEFAULT cLinkName
-		GET cExeName SECTION "Options" ENTRY "FileName" DEFAULT cExeName
-	END INI
+   IF !FILE(cFileName)
+      BEGIN INI FILE cFileName
+         SET SECTION "Options" ENTRY "LinkName" TO cLinkName
+         SET SECTION "Options" ENTRY "FileName" TO cExeName
+      END INI
+   ENDIF
 
-	cIco := cExeName
+   BEGIN INI FILE cFileName
+      GET cLinkName SECTION "Options" ENTRY "LinkName" DEFAULT cLinkName
+      GET cExeName SECTION "Options" ENTRY "FileName" DEFAULT cExeName
+   END INI
 
-	if lDesk
-		if CreateFileLink( cDesktop + "\" + cLinkName, cExeName, cFilePath(cExeName), cIco ) # 0
-			MsgStop( "Create Link Error!", PROGRAM, , .f. )
-		endif
-	endif
+   cIco := cExeName
 
-	if lMenu
-		if CreateFileLink( cMenuPrgs + "\" + cLinkName, cExeName, cFilePath(cExeName), cIco ) # 0
-			MsgStop( "Create Link Error!", PROGRAM, , .f. )
-		endif
-	endif
+   IF lDesk
+      IF CreateFileLink( cDesktop + "\" + cLinkName, cExeName, cFilePath(cExeName), cIco ) # 0
+         MsgStop( "Create Link Error!", PROGRAM, , .f. )
+      ENDIF
+   ENDIF
 
-Return
+   IF lMenu
+      IF CreateFileLink( cMenuPrgs + "\" + cLinkName, cExeName, cFilePath(cExeName), cIco ) # 0
+         MsgStop( "Create Link Error!", PROGRAM, , .f. )
+      ENDIF
+   ENDIF
 
-*--------------------------------------------------------*
-Static Function MsgAbout()
-*--------------------------------------------------------*
-Return MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
-	padc("Copyright " + Chr(169) + COPYRIGHT, 40) + CRLF + CRLF + ;
-	hb_compiler() + CRLF + version() + CRLF + ;
-	Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
-	padc("This program is Freeware!", 38) + CRLF + ;
-	padc("Copying is allowed!", 42), "About", IDI_1, .f. )
+   RETURN
 
+STATIC FUNCTION MsgAbout()
+
+   RETURN MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
+      padc("Copyright " + Chr(169) + COPYRIGHT, 40) + CRLF + CRLF + ;
+      hb_compiler() + CRLF + version() + CRLF + ;
+      Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
+      padc("This program is Freeware!", 38) + CRLF + ;
+      padc("Copying is allowed!", 42), "About", IDI_1, .f. )
 
 #pragma BEGINDUMP
 
@@ -208,6 +201,7 @@ HRESULT WINAPI CreateLink(LPSTR lpszLink, LPSTR lpszPathObj, LPSTR lpszWorkPath,
        }
        CoUninitialize();
     }
+
     return hres;
 }
 
@@ -220,3 +214,4 @@ HB_FUNC( CREATEFILELINK )
 }
 
 #pragma ENDDUMP
+

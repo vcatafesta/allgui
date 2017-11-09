@@ -2,22 +2,21 @@
 #include "TSBrowse.ch"
 
 #ifndef __XHARBOUR__           //V90
-   #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
-   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-   #xcommand FINALLY          => ALWAYS
+#xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
+#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+#xcommand FINALLY          => ALWAYS
 #endif
 
 #ifndef __XHARBOUR__
-   Static oConx, oRSet
+STATIC oConx, oRSet
 #endif
 
-//--------------------------------------------------------------------------------------------------------------------//
+FUNCTION TestAdo(met)
 
-Function TestAdo(met)
-   Local oBrw, Font_1
+   LOCAL oBrw, Font_1
 
-   Local cStr := "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + cFilePath( hb_argv( 0 ) ) + ;
-                 "\Sbtest.mdb;User Id=admin;Password=;"
+   LOCAL cStr := "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + cFilePath( hb_argv( 0 ) ) + ;
+      "\Sbtest.mdb;User Id=admin;Password=;"
    LOCAL nWinWidth  := getdesktopwidth() * 0.8
    LOCAL nWinHeight := getdesktopheight() * 0.8
    LOCAL nBrwWidth := nWinWidth-30
@@ -28,7 +27,7 @@ Function TestAdo(met)
    oConx:Open()
    oRSet := TOleAuto():New( "ADODB.RecordSet" )
 
-   With Object oRSet
+   WITH OBJECT oRSet
       :CursorLocation   := adUseClient
       :CursorType       := adOpenDynamic
       :LockType         := adLockOptimistic
@@ -40,88 +39,87 @@ Function TestAdo(met)
 
    IF ! _IsControlDefined ("Font_1","Main")
       DEFINE FONT Font_1  FONTNAME "Arial" SIZE 10
-   endif
+   ENDIF
 
    IF Met == 0 .or. Met == 3 .or. Met == 4
 
+      DEFINE WINDOW Child1 At 0,0 ;
+            WIDTH nWinWidth HEIGHT nWinHeight ;
+            TITLE   "ADO With TSBrowse - All Fields";
+            ICON "Demo.ico";
+            CHILD;
+            ON INIT  oBrw:SetFocus()
+
+         DO CASE
+         CASE  Met == 0
+            @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
+               WIDTH nBrwWidth HEIGHT nBrwHeight  ;
+               FONT Font_1 ;
+               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
+
+         CASE  Met == 3
+            @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
+               WIDTH nBrwWidth HEIGHT nBrwHeight  ;
+               FONT Font_1 ;
+               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
+               AUTOSEARCH
+         CASE  Met == 4
+            @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
+               WIDTH nBrwWidth HEIGHT nBrwHeight  ;
+               FONT Font_1 ;
+               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
+               AUTOFILTER
+         ENDCASE
+
+         oBrw:aColumns[ 1 ]:lEdit := .F.
+         oBrw:nClrLine := COLOR_GRID
+
+      ELSE
          DEFINE WINDOW Child1 At 0,0 ;
-         WIDTH nWinWidth HEIGHT nWinHeight ;
-         TITLE   "ADO With TSBrowse - All Fields";
-         ICON "Demo.ico";
-         CHILD;
-         ON INIT  oBrw:SetFocus()
+               WIDTH nWinWidth+8 HEIGHT nWinHeight ;
+               TITLE   "ADO With TSBrowse - Selected Fields";
+               ICON "Demo.ico";
+               CHILD;
+               ON INIT  oBrw:SetFocus()
 
-      DO CASE
-      CASE  Met == 0
-         @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
-            WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-            FONT Font_1 ;
-            COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
+            @  10,  10 TBROWSE oBrw RECORDSET oRSet EDITABLE AUTOCOLS FONT Font_1 SELECTOR .T. ;
+               WIDTH nBrwWidth HEIGHT nBrwHeight  ;
+               COLUMNS "First", "City", "State", "Married", "HireDate", "Age", "Salary" ;
+               HEADERS "Apellido", "Ciudad", "Estado", "Casado", "Ingreso", "Edad", "Salario" ;
+               SIZES 100, 120, 20, 25, 74, 25, 80 ;
+               COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HBLUE;
 
-      CASE  Met == 3
-         @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
-            WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-            FONT Font_1 ;
-            COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
-            AUTOSEARCH
-      CASE  Met == 4
-         @  10,  10 TBROWSE oBrw RECORDSET oRSet  EDITABLE AUTOCOLS SELECTOR .T. ;
-            WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-            FONT Font_1 ;
-            COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HRED  ;
-            AUTOFILTER
-      ENDCASE
+            oBrw:nClrLine := COLOR_GRID
 
-      oBrw:aColumns[ 1 ]:lEdit := .F.
-      oBrw:nClrLine := COLOR_GRID
+         ENDIF
+      END WINDOW
+      ACTIVATE WINDOW Child1
 
-   ELSE
-         DEFINE WINDOW Child1 At 0,0 ;
-         WIDTH nWinWidth+8 HEIGHT nWinHeight ;
-         TITLE   "ADO With TSBrowse - Selected Fields";
-         ICON "Demo.ico";
-         CHILD;
-         ON INIT  oBrw:SetFocus()
+      RELEASE FONT Font_1
 
-         @  10,  10 TBROWSE oBrw RECORDSET oRSet EDITABLE AUTOCOLS FONT Font_1 SELECTOR .T. ;
-            WIDTH nBrwWidth HEIGHT nBrwHeight  ;
-            COLUMNS "First", "City", "State", "Married", "HireDate", "Age", "Salary" ;
-            HEADERS "Apellido", "Ciudad", "Estado", "Casado", "Ingreso", "Edad", "Salario" ;
-            SIZES 100, 120, 20, 25, 74, 25, 80 ;
-            COLORS CLR_BLACK, CLR_WHITE, CLR_BLACK, { CLR_WHITE, COLOR_GRID }, CLR_BLACK, -CLR_HBLUE;
+      RETURN NIL
 
+      /*
 
-   oBrw:nClrLine := COLOR_GRID
+      static function ConnectToAccess()
 
+      local lConnect := .f.
+      local cStr := "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ;
+      cFilePath( hb_argv( 0 ) ) + "xbrtest.mdb;User Id=admin;Password=;"
 
-endif
-   END WINDOW
-   ACTIVATE WINDOW Child1
+      oConx := TOleAuto():New("ADODB.Connection")
+      oConx:ConnectionString := cStr
 
-   RELEASE FONT Font_1
-
-Return Nil
-
-//----------------------------------------------------------------------------//
-/*
-static function ConnectToAccess()
-
-   local lConnect := .f.
-   local cStr := "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ;
-            cFilePath( hb_argv( 0 ) ) + "xbrtest.mdb;User Id=admin;Password=;"
-
-   oConx := TOleAuto():New("ADODB.Connection")
-   oConx:ConnectionString := cStr
-
-   TRY
+      TRY
       oConx:Open()
       lConnect := .T.
-   CATCH
+      CATCH
       oConx := Nil
       MsgInfo('Connect Fail')
-      Return nil
-   END
 
-Return lConnect
-*/
+      Return nil
+      END
+
+      Return lConnect
+      */
 

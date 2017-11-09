@@ -4,129 +4,139 @@
 #include "hmg.ch"
 #require "hmgsqlite"
 
-function main
-local aTable := {}
-local aCurRow := {}
-public oDB := nil
-public cDBName := "sample.db3"
+FUNCTION main
 
-set century on
-set date ital
+   LOCAL aTable := {}
+   LOCAL aCurRow := {}
+   PUBLIC oDB := nil
+   PUBLIC cDBName := "sample.db3"
 
-if .not. file( cDBName )
-   create_populate()
-else
-   oDB := connect2db( cDBName, .f. )   
-endif   
+   SET CENTURY ON
+   SET DATE ital
 
-define window sample at 0,0 width 800 height 500 main
+   IF .not. file( cDBName )
+      create_populate()
+   ELSE
+      oDB := connect2db( cDBName, .f. )
+   ENDIF
 
-define grid table
-   row 10
-   col 10
-   width 780
-   height 400
-   widths {200,100,100,100,50,200}
-   headers {"Text","Number","Floating","Date1","Logic","Text2"}
-end grid
+   DEFINE WINDOW sample at 0,0 width 800 height 500 main
 
-define button P_ViewRecord
-   row 420
-   col 100
-   width 140
-   height 24
-   caption "View record = Giri11"
-   action ViewRecord()
-end button
+      DEFINE GRID table
+         row 10
+         col 10
+         width 780
+         height 400
+         widths {200,100,100,100,50,200}
+         headers {"Text","Number","Floating","Date1","Logic","Text2"}
+      END GRID
 
-define button P_ChangeRecord
-   row 420
-   col 300
-   width 140
-   height 24
-   caption "Popraw"
-   action ChangeRecord()
-end button
+      DEFINE BUTTON P_ViewRecord
+         row 420
+         col 100
+         width 140
+         height 24
+         caption "View record = Giri11"
+         action ViewRecord()
+      END BUTTON
 
-end window
-RefreshTable()
-sample.center
-sample.activate
-return NIL
+      DEFINE BUTTON P_ChangeRecord
+         row 420
+         col 300
+         width 140
+         height 24
+         caption "Popraw"
+         action ChangeRecord()
+      END BUTTON
 
-function RefreshTable
+   END WINDOW
+   RefreshTable()
+   sample.center
+   sample.activate
+
+   RETURN NIL
+
+FUNCTION RefreshTable
 
    sample.table.DeleteAllItems()
-   
+
    aTable := sql(oDB,"select * from new where date1 <= "+c2sql(ctod("15-04-2010")))
-   for i := 1 to len(aTable)
+   FOR i := 1 to len(aTable)
       aCurRow := aTable[i]
       sample.table.additem({aCurRow[1],str(aCurRow[2]),str(aCurRow[3]),dtoc(aCurRow[4]),iif(aCurRow[5]==1,"True","False"),aCurRow[6]})
-   next i
-   if sample.table.itemcount > 0
+   NEXT i
+   IF sample.table.itemcount > 0
       sample.table.value := 1
-   endif
+   ENDIF
    sample.table.Refresh
-return nil   
 
+   RETURN NIL
 
-function create_populate()
-local cCreateSQL := "CREATE TABLE new (text VARCHAR(50), number INTEGER PRIMARY KEY AUTOINCREMENT, floating FLOAT, date1 DATE, logic INTEGER, text2  VARCHAR(40))"
-local cCreateIndex := "CREATE UNIQUE INDEX unique1 ON new (text,text2)"
+FUNCTION create_populate()
 
-oDB := connect2db(cDBName,.t.)
-if oDB == nil
-   return nil
-endif
+   LOCAL cCreateSQL := "CREATE TABLE new (text VARCHAR(50), number INTEGER PRIMARY KEY AUTOINCREMENT, floating FLOAT, date1 DATE, logic INTEGER, text2  VARCHAR(40))"
+   LOCAL cCreateIndex := "CREATE UNIQUE INDEX unique1 ON new (text,text2)"
 
-if .not. miscsql(oDB,cCreateSQL)
-   return nil
-endif
+   oDB := connect2db(cDBName,.t.)
+   IF oDB == nil
 
-if .not. miscsql(oDB,cCreateIndex)
-   return nil
-endif
+      RETURN NIL
+   ENDIF
 
-for i := 1 to 100
-   
-cQStr := "insert into new (text,floating,date1,logic,text2) values ("+;
-          c2sql("Giri"+alltrim(str(i)))+","+;
-          c2sql(123.45)+","+;
-          iif(i <= 50,c2sql(date()),c2sql(ctod("18-09-2010")))+","+;
-          c2sql(.t.)+","+;
-          c2sql("India")+;
-          ")"
-if .not. miscsql(oDB,cQstr)
-   return nil
-endif
-         
-next i
+   IF .not. miscsql(oDB,cCreateSQL)
 
-msginfo("Insert Queries Completed!")
-         
-return nil
+      RETURN NIL
+   ENDIF
 
+   IF .not. miscsql(oDB,cCreateIndex)
 
-function ViewRecord
-   local aResult
-   
+      RETURN NIL
+   ENDIF
+
+   FOR i := 1 to 100
+
+      cQStr := "insert into new (text,floating,date1,logic,text2) values ("+;
+         c2sql("Giri"+alltrim(str(i)))+","+;
+         c2sql(123.45)+","+;
+         iif(i <= 50,c2sql(date()),c2sql(ctod("18-09-2010")))+","+;
+         c2sql(.t.)+","+;
+         c2sql("India")+;
+         ")"
+      IF .not. miscsql(oDB,cQstr)
+
+         RETURN NIL
+      ENDIF
+
+   NEXT i
+
+   msginfo("Insert Queries Completed!")
+
+   RETURN NIL
+
+FUNCTION ViewRecord
+
+   LOCAL aResult
+
    aResult := sql(oDB, 'Select text2 from new where text = "Giri11"') // for update')
-   if !empty(aResult)
+   IF !empty(aResult)
       msgbox("Result is: " + aResult[1,1])
-   endif
-return
+   ENDIF
 
-function ChangeRecord
-   local aTemp := {space(40)}
-   
+   RETURN
+
+FUNCTION ChangeRecord
+
+   LOCAL aTemp := {space(40)}
+
    aTemp := InputWindow("Put your value for TEXT2", {"New value:"}, {space(40)}, {40})
-   if aTemp[1] != Nil // changed here
-      cQstr := "update new set text2= " + c2sql( aTemp[1] ) + " where text= " + c2sql( 'Giri11' )  
-       if !miscsql(oDB,cQstr)
+   IF aTemp[1] != Nil // changed here
+      cQstr := "update new set text2= " + c2sql( aTemp[1] ) + " where text= " + c2sql( 'Giri11' )
+      IF !miscsql(oDB,cQstr)
          msginfo("Error during writing!")
-      else
+      ELSE
          msgbox("TEXT2 saved OK")
          RefreshTable()
-      endif
-   endif
-return
+      ENDIF
+   ENDIF
+
+   RETURN

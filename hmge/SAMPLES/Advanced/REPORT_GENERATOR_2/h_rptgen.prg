@@ -1,47 +1,47 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2009, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2009, http://harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2009 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2009 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
@@ -51,10 +51,11 @@
 
 #include "Fileio.ch"
 
-Memvar Drv
+MEMVAR Drv
+
 * Main ************************************************************************
 
-Procedure _DefineReport ( cName )
+PROCEDURE _DefineReport ( cName )
 
    _HMG_RPTDATA [ 118 ] := 0
    _HMG_RPTDATA [ 119 ] := 0
@@ -84,24 +85,24 @@ Procedure _DefineReport ( cName )
    _HMG_RPTDATA [ 166 ] := Nil
    _HMG_RPTDATA [ 167 ] := {}
 
-
-   If cName <> '_TEMPLATE_'
+   IF cName <> '_TEMPLATE_'
 
       _HMG_RPTDATA [162] := cName
 
-   Else
+   ELSE
 
       cName := _HMG_RPTDATA [162]
 
-   EndIf
+   ENDIF
 
-   Public &cName := {}
+   PUBLIC &cName := {}
 
-Return
+   RETURN
 
-Procedure _EndReport 
-Local cReportName
-Local aMiscdata
+PROCEDURE _EndReport
+
+   LOCAL cReportName
+   LOCAL aMiscdata
 
    aMiscData := {}
 
@@ -120,88 +121,82 @@ Local aMiscdata
 
    &cReportName := { _HMG_RPTDATA [159] , _HMG_RPTDATA [160] , _HMG_RPTDATA [158] , _HMG_RPTDATA [157] , _HMG_RPTDATA [ 126 ] , _HMG_RPTDATA [ 121 ] , _HMG_RPTDATA [ 122 ] , aMiscData }
 
-Return
+   RETURN
 
-* Layout **********************************************************************
+   * Layout **********************************************************************
 
-Procedure _BeginLayout
+PROCEDURE _BeginLayout
 
    _HMG_RPTDATA [161] := 'LAYOUT'
 
-Return
+   RETURN
 
-Procedure _EndLayout
+PROCEDURE _EndLayout
 
    aadd ( _HMG_RPTDATA [159] , _HMG_RPTDATA [ 155 ] )
    aadd ( _HMG_RPTDATA [159] , _HMG_RPTDATA [ 156 ] )
    aadd ( _HMG_RPTDATA [159] , _HMG_RPTDATA [ 118 ] )
    aadd ( _HMG_RPTDATA [159] , _HMG_RPTDATA [ 119 ] )
 
-Return
+   RETURN
 
-* Header **********************************************************************
+   * Header **********************************************************************
 
-Procedure _BeginHeader
+PROCEDURE _BeginHeader
 
    _HMG_RPTDATA [161] := 'HEADER'
 
    _HMG_RPTDATA [160] := {}
 
-Return
+   RETURN
 
-Procedure _EndHeader
+PROCEDURE _EndHeader
 
+   RETURN
 
-Return
+   * Detail **********************************************************************
 
-
-* Detail **********************************************************************
-
-Procedure _BeginDetail
+PROCEDURE _BeginDetail
 
    _HMG_RPTDATA [161] := 'DETAIL'
 
    _HMG_RPTDATA [158] := {}
 
-Return
+   RETURN
 
-Procedure _EndDetail
+PROCEDURE _EndDetail
 
+   RETURN
 
-Return
+   * Footer **********************************************************************
 
-* Footer **********************************************************************
-
-Procedure _BeginFooter
+PROCEDURE _BeginFooter
 
    _HMG_RPTDATA [161] := 'FOOTER'
 
    _HMG_RPTDATA [157] := {}
 
-Return
+   RETURN
 
-Procedure _EndFooter
+PROCEDURE _EndFooter
 
+   RETURN
 
-Return
+   * Summary **********************************************************************
 
-* Summary **********************************************************************
-
-Procedure _BeginSummary
+PROCEDURE _BeginSummary
 
    _HMG_RPTDATA [161] := 'SUMMARY'
 
-Return
+   RETURN
 
-Procedure _EndSummary
+PROCEDURE _EndSummary
 
+   RETURN
 
-Return
+   * Text **********************************************************************
 
-
-* Text **********************************************************************
-
-Procedure _BeginText
+PROCEDURE _BeginText
 
    _HMG_RPTDATA[116] := ''         // Text
    _HMG_ActiveControlRow := 0         // Row
@@ -218,11 +213,11 @@ Procedure _BeginText
    _HMG_ActiveControlRightAlign := .F.      // Alignment
    _HMG_ActiveControlCenterAlign := .F.      // Alignment
 
-Return
+   RETURN
 
-Procedure _EndText
+PROCEDURE _EndText
 
-Local aText
+   LOCAL aText
 
    aText := {              ;
       'TEXT'            , ;
@@ -242,37 +237,37 @@ Local aText
       _HMG_ActiveControlCenterAlign     ;
       }
 
-   If   _HMG_RPTDATA [161] == 'HEADER'
+   IF   _HMG_RPTDATA [161] == 'HEADER'
 
-           aadd (    _HMG_RPTDATA [160] , aText )
+      aadd (    _HMG_RPTDATA [160] , aText )
 
-   ElseIf   _HMG_RPTDATA [161] == 'DETAIL'
+   ELSEIF   _HMG_RPTDATA [161] == 'DETAIL'
 
-           aadd ( _HMG_RPTDATA [158] , aText )
+      aadd ( _HMG_RPTDATA [158] , aText )
 
-   ElseIf   _HMG_RPTDATA [161] == 'FOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'FOOTER'
 
-           aadd ( _HMG_RPTDATA [157] , aText )
+      aadd ( _HMG_RPTDATA [157] , aText )
 
-   ElseIf   _HMG_RPTDATA [161] == 'SUMMARY'
+   ELSEIF   _HMG_RPTDATA [161] == 'SUMMARY'
 
-           aadd ( _HMG_RPTDATA [126] , aText )
+      aadd ( _HMG_RPTDATA [126] , aText )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPHEADER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPHEADER'
 
-           aadd ( _HMG_RPTDATA [ 121 ] , aText )
+      aadd ( _HMG_RPTDATA [ 121 ] , aText )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPFOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPFOOTER'
 
-           aadd ( _HMG_RPTDATA [ 122 ] , aText )
+      aadd ( _HMG_RPTDATA [ 122 ] , aText )
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-* Band Height *****************************************************************
+   * Band Height *****************************************************************
 
-Procedure _BandHeight ( nValue )
+PROCEDURE _BandHeight ( nValue )
 
    IF   _HMG_RPTDATA [ 161 ] == 'HEADER'
 
@@ -300,49 +295,50 @@ Procedure _BandHeight ( nValue )
 
    ENDIF
 
-Return
+   RETURN
 
-* Execute *********************************************************************
+   * Execute *********************************************************************
 
-Procedure ExecuteReport ( cReportName , lPreview , lSelect , cOutputFileName )
+PROCEDURE ExecuteReport ( cReportName , lPreview , lSelect , cOutputFileName )
 
-Local aLayout 
-Local aHeader 
-Local aDetail 
-Local aFooter 
-Local aSummary
-Local aTemp
-Local cPrinter
-//Local nDetailBandsPerPage 
-Local nPaperWidth 
-Local nPaperHeight 
-Local nOrientation 
-Local nPaperSize 
-Local nHeadeHeight 
-Local nDetailHeight
-Local nFooterHeight
-Local nBandSpace
-Local nCurrentOffset
-Local nPreviousRecNo
-Local nSummaryHeight
-Local aGroupHeader
-Local aGroupFooter
-Local nGroupHeaderHeight
-Local nGroupFooterHeight
-Local xGroupExpression
-Local nGroupCount
-Local xPreviousGroupExpression
-Local lGroupStarted
-Local lSuccess
-Local aMiscData
-Local xTemp
-Local aPaper [18] [2]
-Local cPdfPaperSize := ''
-Local cPdfOrientation := ''
-Local nOutfile
-Local xSkipProcedure
-Local xEOF
-Local lTempEof
+   LOCAL aLayout
+   LOCAL aHeader
+   LOCAL aDetail
+   LOCAL aFooter
+   LOCAL aSummary
+   LOCAL aTemp
+   LOCAL cPrinter
+
+   //Local nDetailBandsPerPage
+   LOCAL nPaperWidth
+   LOCAL nPaperHeight
+   LOCAL nOrientation
+   LOCAL nPaperSize
+   LOCAL nHeadeHeight
+   LOCAL nDetailHeight
+   LOCAL nFooterHeight
+   LOCAL nBandSpace
+   LOCAL nCurrentOffset
+   LOCAL nPreviousRecNo
+   LOCAL nSummaryHeight
+   LOCAL aGroupHeader
+   LOCAL aGroupFooter
+   LOCAL nGroupHeaderHeight
+   LOCAL nGroupFooterHeight
+   LOCAL xGroupExpression
+   LOCAL nGroupCount
+   LOCAL xPreviousGroupExpression
+   LOCAL lGroupStarted
+   LOCAL lSuccess
+   LOCAL aMiscData
+   LOCAL xTemp
+   LOCAL aPaper [18] [2]
+   LOCAL cPdfPaperSize := ''
+   LOCAL cPdfOrientation := ''
+   LOCAL nOutfile
+   LOCAL xSkipProcedure
+   LOCAL xEOF
+   LOCAL lTempEof
 
    IF _HMG_RPTDATA [ 120 ] > 1
       MsgMiniGUIError('Only One Group Level Allowed')
@@ -353,23 +349,23 @@ Local lTempEof
    _HMG_RPTDATA [ 163 ] := .F.
    _HMG_RPTDATA [ 166 ] := .F.
 
-   If ValType ( cOutputFileName ) == 'C'
+   IF ValType ( cOutputFileName ) == 'C'
 
-      If AllTrim ( Upper ( Right ( cOutputFileName , 4 ) ) ) == '.PDF'
+      IF AllTrim ( Upper ( Right ( cOutputFileName , 4 ) ) ) == '.PDF'
 
          _HMG_RPTDATA [ 150 ] := .T.
 
-      ElseIf AllTrim ( Upper ( Right ( cOutputFileName , 5 ) ) ) == '.HTML'
+      ELSEIF AllTrim ( Upper ( Right ( cOutputFileName , 5 ) ) ) == '.HTML'
 
          _HMG_RPTDATA [ 163 ] := .T.
 
-      ElseIf AllTrim ( Upper ( Right ( cOutputFileName , 4 ) ) ) == '.RTF'
+      ELSEIF AllTrim ( Upper ( Right ( cOutputFileName , 4 ) ) ) == '.RTF'
 
          _HMG_RPTDATA [ 166 ] := .T.
 
-      EndIf
+      ENDIF
 
-   EndIf
+   ENDIF
 
    IF _HMG_RPTDATA [ 163 ] == .T.
 
@@ -389,21 +385,20 @@ Local lTempEof
       pdfOpen( cOutputFileName , 200 , .t. )
    ENDIF
 
-   If ValType ( xSkipProcedure ) = 'U'
+   IF ValType ( xSkipProcedure ) = 'U'
 
       * If not workarea open, cancel report execution
 
-      If Select() == 0
-         Return
-      EndIf
+      IF Select() == 0
+
+         RETURN
+      ENDIF
 
       nPreviousRecNo := RecNo()
 
-   EndIf
+   ENDIF
 
-   ***********************************************************************
    * Determine Print Parameters
-   ***********************************************************************
 
    aTemp := __MVGET ( cReportName )
 
@@ -432,109 +427,105 @@ Local lTempEof
    nPaperWidth      := aLayout [3]
    nPaperHeight      := aLayout [4]
 
-   If ValType ( lPreview ) <> 'L'
+   IF ValType ( lPreview ) <> 'L'
       lPreview := .F.
-   EndIf
+   ENDIF
 
-   If ValType ( lSelect ) <> 'L'
+   IF ValType ( lSelect ) <> 'L'
       lSelect := .F.
-   EndIf
+   ENDIF
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F.
 
-      If lSelect == .T.
+      IF lSelect == .T.
          cPrinter := GetPrinter()
-      Else
+      ELSE
          cPrinter := GetDefaultPrinter()
-      EndIf
+      ENDIF
 
-      If Empty (cPrinter)
-         Return
-      EndIf
+      IF Empty (cPrinter)
+
+         RETURN
+      ENDIF
 
    ENDIF
 
-   ***********************************************************************
    * Select Printer
-   ***********************************************************************
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F. .AND. _HMG_RPTDATA [ 166 ] == .F.
-   init printsys
-   SET UNITS MM
+      INIT printsys
+      SET UNITS MM
 
       IF lPreview == .T.
 
-         If nPaperSize == PRINTER_PAPER_USER
+         IF nPaperSize == PRINTER_PAPER_USER
 
-            if drv = "H"
+            IF drv = "H"
                SELECT PRINTER
                SET PAGE ORIENTATION nOrientation
 
-            Else
-             SELECT PRINTER cPrinter         ;
-               TO lSuccess         ;
-               ORIENTATION   nOrientation   ;
-               PAPERSIZE   nPaperSize   ;
-               PAPERWIDTH   nPaperWidth   ;
-               PAPERLENGTH   nPaperHeight   ;
-               PREVIEW
-             Endif
-         Else
+            ELSE
+               SELECT PRINTER cPrinter         ;
+                  TO lSuccess         ;
+                  ORIENTATION   nOrientation   ;
+                  PAPERSIZE   nPaperSize   ;
+                  PAPERWIDTH   nPaperWidth   ;
+                  PAPERLENGTH   nPaperHeight   ;
+                  PREVIEW
+            ENDIF
+         ELSE
 
-            if drv = "H"
+            IF drv = "H"
                SELECT PRINTER cPrinter PREVIEW
-            Else
+            ELSE
 
-            SELECT PRINTER cPrinter         ;
-               TO lSuccess         ;
-               ORIENTATION   nOrientation   ;
-               PAPERSIZE   nPaperSize   ;
-               PREVIEW
-               Endif
-         EndIf
+               SELECT PRINTER cPrinter         ;
+                  TO lSuccess         ;
+                  ORIENTATION   nOrientation   ;
+                  PAPERSIZE   nPaperSize   ;
+                  PREVIEW
+            ENDIF
+         ENDIF
 
       ELSE
 
-         If nPaperSize == PRINTER_PAPER_USER
-            if drv = "H"
+         IF nPaperSize == PRINTER_PAPER_USER
+            IF drv = "H"
 
-            Else
+            ELSE
 
                SELECT PRINTER cPrinter         ;
-                      TO lSuccess         ;
-                      ORIENTATION   nOrientation   ;
-                      PAPERSIZE   nPaperSize   ;
-                      PAPERWIDTH   nPaperWidth   ;
-                      PAPERLENGTH   nPaperHeight
-            Endif
-         Else
-            if drv = "H"
+                  TO lSuccess         ;
+                  ORIENTATION   nOrientation   ;
+                  PAPERSIZE   nPaperSize   ;
+                  PAPERWIDTH   nPaperWidth   ;
+                  PAPERLENGTH   nPaperHeight
+            ENDIF
+         ELSE
+            IF drv = "H"
 
-            Else
+            ELSE
 
-            SELECT PRINTER cPrinter         ;
-               TO lSuccess         ;
-               ORIENTATION   nOrientation   ;
-               PAPERSIZE   nPaperSize   ;
+               SELECT PRINTER cPrinter         ;
+                  TO lSuccess         ;
+                  ORIENTATION   nOrientation   ;
+                  PAPERSIZE   nPaperSize   ;
 
-            Endif
-            
-         EndIf
+            ENDIF
+
+         ENDIF
       ENDIF
-      if drv = "H"
+      IF drv = "H"
          define font "f0" name "courier new" size 12
          define pen "P0" style PS_SOLID width 10
          SET PAGE ORIENTATION nOrientation PAPERSIZE nPapersize FONT "f0"
-      Endif
-
+      ENDIF
 
    ENDIF
 
-   ***********************************************************************
    * Determine Paper Dimensions in mm.
-   ***********************************************************************
 
-   If npaperSize >=1 .and. nPaperSize <= 18
+   IF npaperSize >=1 .and. nPaperSize <= 18
 
       aPaper [ PRINTER_PAPER_LETTER             ] := { 215.9   , 279.4 }
       aPaper [ PRINTER_PAPER_LETTERSMALL          ] := { 215.9   , 279.4 }
@@ -555,279 +546,274 @@ Local lTempEof
       aPaper [ PRINTER_PAPER_11X17            ] := { 279.4   , 431.8   }
       aPaper [ PRINTER_PAPER_NOTE            ] := { 215.9   , 279.4 }
 
-      If    nOrientation == PRINTER_ORIENT_PORTRAIT
+      IF    nOrientation == PRINTER_ORIENT_PORTRAIT
 
-//         nPaperWidth   := aPaper [ nPaperSize ] [ 1 ]
+         //         nPaperWidth   := aPaper [ nPaperSize ] [ 1 ]
          npaperHeight   := aPaper [ nPaperSize ] [ 2 ]
 
-      ElseIf   nOrientation == PRINTER_ORIENT_LANDSCAPE
+      ELSEIF   nOrientation == PRINTER_ORIENT_LANDSCAPE
 
-//         nPaperWidth   := aPaper [ nPaperSize ] [ 2 ]
+         //         nPaperWidth   := aPaper [ nPaperSize ] [ 2 ]
          npaperHeight   := aPaper [ nPaperSize ] [ 1 ]
 
-      Else
+      ELSE
 
          MsgMiniGUIError('Report: Orientation Not Supported')
 
-      EndIf
+      ENDIF
 
-   Else
+   ELSE
 
       MsgMiniGUIError('Report: Paper Size Not Supported')
 
-   EndIf
-
+   ENDIF
 
    IF _HMG_RPTDATA [ 150 ] == .T.
 
       * PDF Paper Size
 
-      If   nPaperSize == PRINTER_PAPER_LETTER
+      IF   nPaperSize == PRINTER_PAPER_LETTER
 
-              cPdfPaperSize := "LETTER"
+         cPdfPaperSize := "LETTER"
 
-      ElseIf   nPaperSize == PRINTER_PAPER_LEGAL
+      ELSEIF   nPaperSize == PRINTER_PAPER_LEGAL
 
-              cPdfPaperSize := "LEGAL"
+         cPdfPaperSize := "LEGAL"
 
-      ElseIf nPaperSize == PRINTER_PAPER_A4
+      ELSEIF nPaperSize == PRINTER_PAPER_A4
 
          cPdfPaperSize := "A4"
 
-      ElseIf nPaperSize == PRINTER_PAPER_TABLOID
+      ELSEIF nPaperSize == PRINTER_PAPER_TABLOID
 
          cPdfPaperSize := "LEDGER"
 
-      ElseIf nPaperSize == PRINTER_PAPER_EXECUTIVE
+      ELSEIF nPaperSize == PRINTER_PAPER_EXECUTIVE
 
          cPdfPaperSize := "EXECUTIVE"
 
-      ElseIf nPaperSize == PRINTER_PAPER_A3
+      ELSEIF nPaperSize == PRINTER_PAPER_A3
 
          cPdfPaperSize := "A3"
 
-      ElseIf nPaperSize == PRINTER_PAPER_ENV_10
+      ELSEIF nPaperSize == PRINTER_PAPER_ENV_10
 
          cPdfPaperSize := "COM10"
 
-      ElseIf nPaperSize == PRINTER_PAPER_B4
+      ELSEIF nPaperSize == PRINTER_PAPER_B4
 
          cPdfPaperSize := "JIS B4"
 
-      ElseIf nPaperSize == PRINTER_PAPER_B5
+      ELSEIF nPaperSize == PRINTER_PAPER_B5
 
          cPdfPaperSize := "B5"
 
-      ElseIf nPaperSize == PRINTER_PAPER_P32K
+      ELSEIF nPaperSize == PRINTER_PAPER_P32K
 
          cPdfPaperSize := "JPOST"
 
-      ElseIf nPaperSize == PRINTER_PAPER_ENV_C5
+      ELSEIF nPaperSize == PRINTER_PAPER_ENV_C5
 
          cPdfPaperSize := "C5"
 
-      ElseIf nPaperSize == PRINTER_PAPER_ENV_DL
+      ELSEIF nPaperSize == PRINTER_PAPER_ENV_DL
 
          cPdfPaperSize := "DL"
 
-      ElseIf nPaperSize == PRINTER_PAPER_ENV_B5
+      ELSEIF nPaperSize == PRINTER_PAPER_ENV_B5
 
          cPdfPaperSize := "B5"
 
-      ElseIf nPaperSize == PRINTER_PAPER_ENV_MONARCH
+      ELSEIF nPaperSize == PRINTER_PAPER_ENV_MONARCH
 
          cPdfPaperSize := "MONARCH"
 
-      Else
+      ELSE
 
          MsgMiniGUIError("Report: PDF Paper Size Not Supported")
 
-      EndIf
+      ENDIF
 
       * PDF Orientation
 
-      If    nOrientation == PRINTER_ORIENT_PORTRAIT
+      IF    nOrientation == PRINTER_ORIENT_PORTRAIT
 
          cPdfOrientation := 'P'
 
-      ElseIf   nOrientation == PRINTER_ORIENT_LANDSCAPE
+      ELSEIF   nOrientation == PRINTER_ORIENT_LANDSCAPE
 
          cPdfOrientation := 'L'
 
-      Else
+      ELSE
 
          MsgMiniGUIError('Report: Orientation Not Supported')
 
-      EndIf
+      ENDIF
 
    ENDIF
 
-   ***********************************************************************
    * Calculate Bands
-   ***********************************************************************
 
    nBandSpace      := nPaperHeight - nHeadeHeight - nFooterHeight
 
-//   nDetailBandsPerPage   := Int ( nBandSpace / nDetailHeight )
+   //   nDetailBandsPerPage   := Int ( nBandSpace / nDetailHeight )
 
-   ***********************************************************************
    * Print Document
-   ***********************************************************************
 
-   If nGroupCount > 0
+   IF nGroupCount > 0
 
       xGroupExpression := &(xTemp)
 
-   EndIf
+   ENDIF
 
    _HMG_RPTDATA [ 117 ] := 1
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F. .AND. _HMG_RPTDATA [ 166 ] == .F.
 
-      if drv = "H"
+      IF drv = "H"
          START DOC
-      Else
+      ELSE
          START PRINTDOC
-      Endif
-
-   ENDIF
-
-   If ValType ( xSkipProcedure ) == 'U'
-      Go Top
-   EndIf
-
-   xPreviousGroupExpression := ''
-   lGroupStarted := .f.
-
-   If ValType ( xSkipProcedure ) == 'U'
-      lTempEof := Eof()
-   Else
-      lTempEof := Eval(xEof)
-   EndIf
-
-   Do While .Not. lTempEof
-
-      IF _HMG_RPTDATA [ 163 ] == .F.
-
-         IF _HMG_RPTDATA [ 150 ] == .T.
-
-            pdfNewPage( cPdfPaperSize , cPdfOrientation, 6 )
-
-         ELSEif _HMG_RPTDATA [ 166 ] == .F.
-
-            if drv = "H"
-               START PAGE
-            Else
-               START PRINTPAGE
-            Endif
-
          ENDIF
 
-         nCurrentOffset := 0
+      ENDIF
 
-         _ProcessBand ( aHeader , 0 )
+      IF ValType ( xSkipProcedure ) == 'U'
+         GO TOP
+      ENDIF
 
-         nCurrentOffset := nHeadeHeight
+      xPreviousGroupExpression := ''
+      lGroupStarted := .f.
 
-         do while .t.
+      IF ValType ( xSkipProcedure ) == 'U'
+         lTempEof := Eof()
+      ELSE
+         lTempEof := Eval(xEof)
+      ENDIF
 
-            If nGroupCount > 0
+      DO WHILE .Not. lTempEof
 
-               If ( valtype (xPreviousGroupExpression) != valtype (xGroupExpression) ) .or. ( xPreviousGroupExpression <> xGroupExpression )
+         IF _HMG_RPTDATA [ 163 ] == .F.
 
-                  If lGroupStarted
+            IF _HMG_RPTDATA [ 150 ] == .T.
+
+               pdfNewPage( cPdfPaperSize , cPdfOrientation, 6 )
+
+            ELSEIF _HMG_RPTDATA [ 166 ] == .F.
+
+               IF drv = "H"
+                  START PAGE
+               ELSE
+                  START PRINTPAGE
+                  ENDIF
+
+               ENDIF
+
+               nCurrentOffset := 0
+
+               _ProcessBand ( aHeader , 0 )
+
+               nCurrentOffset := nHeadeHeight
+
+               DO WHILE .t.
+
+                  IF nGroupCount > 0
+
+                     IF ( valtype (xPreviousGroupExpression) != valtype (xGroupExpression) ) .or. ( xPreviousGroupExpression <> xGroupExpression )
+
+                        IF lGroupStarted
+
+                           _ProcessBand ( aGroupFooter , nCurrentOffset )
+                           nCurrentOffset += nGroupFooterHeight
+
+                        ENDIF
+
+                        _ProcessBand ( aGroupHeader , nCurrentOffset )
+                        nCurrentOffset += nGroupHeaderHeight
+
+                        xPreviousGroupExpression := xGroupExpression
+
+                        lGroupStarted := .T.
+
+                     ENDIF
+
+                  ENDIF
+
+                  _ProcessBand ( aDetail , nCurrentOffset )
+
+                  nCurrentOffset += nDetailHeight
+
+                  IF ValType ( xSkipProcedure ) == 'U'
+                     SKIP
+                     lTempEof := Eof()
+                  ELSE
+                     Eval(xSkipProcedure)
+                     lTempEof := Eval(xEof)
+                  ENDIF
+
+                  IF lTempEof
+
+                     * If group footer defined, print it.
+
+                     IF nGroupFooterHeight > 0
+
+                        * If group footer don't fit in the current page, print page footer,
+                        * start a new page and print header first
+
+                        IF nCurrentOffset + nGroupFooterHeight > nPaperHeight - nFooterHeight
+
+                           nCurrentOffset := nPaperHeight - nFooterHeight
+                           _ProcessBand ( aFooter , nCurrentOffset )
+
+                           IF _HMG_RPTDATA [ 150 ] == .F.
+
+                              IF drv = "H"
+                              END PAGE
+                              START PAGE
+                           ELSE
+                           END PRINTPAGE
+                           START PRINTPAGE
+                           ENDIF
+                        ELSE
+
+                           pdfNewPage( cPdfPaperSize , cPdfOrientation, 6 )
+
+                        ENDIF
+
+                        _HMG_RPTDATA [ 117 ]++
+
+                        nCurrentOffset := 0
+                        _ProcessBand ( aHeader , 0 )
+                        nCurrentOffset := nHeadeHeight
+
+                     ENDIF
 
                      _ProcessBand ( aGroupFooter , nCurrentOffset )
                      nCurrentOffset += nGroupFooterHeight
 
-                  EndIf
+                  ENDIF
 
-                  _ProcessBand ( aGroupHeader , nCurrentOffset )
-                  nCurrentOffset += nGroupHeaderHeight
+                  * If Summary defined, print it.
 
-                  xPreviousGroupExpression := xGroupExpression
+                  IF Len ( aSummary ) > 0
 
-                  lGroupStarted := .T.
+                     * If summary don't fit in the current page, print footer,
+                     * start a new page and print header first
 
-               EndIf
+                     IF nCurrentOffset + nSummaryHeight > nPaperHeight - nFooterHeight
 
-            EndIf
+                        nCurrentOffset := nPaperHeight - nFooterHeight
+                        _ProcessBand ( aFooter , nCurrentOffset )
 
-            _ProcessBand ( aDetail , nCurrentOffset )
+                        IF _HMG_RPTDATA [ 150 ] == .F.
 
-            nCurrentOffset += nDetailHeight
-
-            If ValType ( xSkipProcedure ) == 'U'
-               Skip
-               lTempEof := Eof()
-            Else
-               Eval(xSkipProcedure)
-               lTempEof := Eval(xEof)
-            EndIf
-
-            If lTempEof
-
-               * If group footer defined, print it.
-
-               If nGroupFooterHeight > 0
-
-                  * If group footer don't fit in the current page, print page footer,
-                  * start a new page and print header first
-
-                  If nCurrentOffset + nGroupFooterHeight > nPaperHeight - nFooterHeight
-
-                     nCurrentOffset := nPaperHeight - nFooterHeight
-                     _ProcessBand ( aFooter , nCurrentOffset )
-
-                     IF _HMG_RPTDATA [ 150 ] == .F.
-
-                        if drv = "H"
+                           IF drv = "H"
                            END PAGE
                            START PAGE
-                        Else
+                        ELSE
                         END PRINTPAGE
                         START PRINTPAGE
-                        Endif
-                     ELSE
-
-                        pdfNewPage( cPdfPaperSize , cPdfOrientation, 6 )
-
-                     ENDIF
-
-                     _HMG_RPTDATA [ 117 ]++
-
-                     nCurrentOffset := 0
-                     _ProcessBand ( aHeader , 0 )
-                     nCurrentOffset := nHeadeHeight
-
-                  EndIf
-
-                  _ProcessBand ( aGroupFooter , nCurrentOffset )
-                  nCurrentOffset += nGroupFooterHeight
-
-               EndIf
-
-               * If Summary defined, print it.
-
-               If Len ( aSummary ) > 0
-
-                  * If summary don't fit in the current page, print footer,
-                  * start a new page and print header first
-
-                  If nCurrentOffset + nSummaryHeight > nPaperHeight - nFooterHeight
-
-                     nCurrentOffset := nPaperHeight - nFooterHeight
-                     _ProcessBand ( aFooter , nCurrentOffset )
-
-                     IF _HMG_RPTDATA [ 150 ] == .F.
-
-                        if drv = "H"
-                           END PAGE
-                           START PAGE
-                        Else
-                        END PRINTPAGE
-                        START PRINTPAGE
-                        Endif
+                        ENDIF
 
                      ELSE
 
@@ -841,31 +827,31 @@ Local lTempEof
                      _ProcessBand ( aHeader , 0 )
                      nCurrentOffset := nHeadeHeight
 
-                  EndIf
+                  ENDIF
 
                   _ProcessBand ( aSummary , nCurrentOffset )
 
-                  Exit
+                  EXIT
 
-               EndIf
+               ENDIF
 
-               Exit
+               EXIT
 
-            EndIf
+            ENDIF
 
-            If nGroupCount > 0
+            IF nGroupCount > 0
 
                xGroupExpression := &(xTemp)
 
-            EndIf
+            ENDIF
 
-            If nCurrentOffset + nDetailHeight > nPaperHeight - nFooterHeight
+            IF nCurrentOffset + nDetailHeight > nPaperHeight - nFooterHeight
 
-               Exit
+               EXIT
 
-            EndIf
+            ENDIF
 
-         EndDo
+         ENDDO
 
          nCurrentOffset := nPaperHeight - nFooterHeight
 
@@ -873,362 +859,362 @@ Local lTempEof
 
          IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 166 ] == .F.
 
-            if drv = "H"
-               END PAGE
-            Else
-               END PRINTPAGE
-            Endif
-
-         ENDIF
-
-         _HMG_RPTDATA [ 117 ]++
-
-      ELSE
-
-         nCurrentOffset := 0
-
-         _ProcessBand ( aHeader , 0 )
-
-         nCurrentOffset := nHeadeHeight
-
-         do while .t.
-
-            If nGroupCount > 0
-
-               If xPreviousGroupExpression <> xGroupExpression
-
-                  If lGroupStarted
-
-                     _ProcessBand ( aGroupFooter , nCurrentOffset )
-                     nCurrentOffset += nGroupFooterHeight
-
-                  EndIf
-
-                  _ProcessBand ( aGroupHeader , nCurrentOffset )
-
-                  nCurrentOffset += nGroupHeaderHeight
-
-                  xPreviousGroupExpression := xGroupExpression
-
-                  lGroupStarted := .T.
-
-               EndIf
-
-            EndIf
-
-            _ProcessBand ( aDetail , nCurrentOffset )
-
-            nCurrentOffset += nDetailHeight
-
-            If ValType ( xSkipProcedure ) == 'U'
-               Skip
-               lTempEof := Eof()
-            Else
-               Eval(xSkipProcedure)
-               lTempEof := Eval(xEof)
-            EndIf
-
-            If lTempEof
-
-               * If group footer defined, print it.
-
-               If nGroupFooterHeight > 0
-
-                  _ProcessBand ( aGroupFooter , nCurrentOffset )
-                  nCurrentOffset += nGroupFooterHeight
-
-               EndIf
-
-               * If Summary defined, print it.
-
-               If Len ( aSummary ) > 0
-                  _ProcessBand ( aSummary , nCurrentOffset )
-                  nCurrentOffset += nSummaryHeight
-               EndIf
-
-               Exit
-
-            EndIf
-
-            If nGroupCount > 0
-               xGroupExpression := &(xTemp)
-            EndIf
-
-         EndDo
-
-         _ProcessBand ( aFooter , nCurrentOffset )
-
+            IF drv = "H"
+            END PAGE
+         ELSE
+         END PRINTPAGE
       ENDIF
-
-   EndDo
-
-   IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F. .AND. _HMG_RPTDATA [ 166 ] == .F.
-
-            if drv = "H"
-               END DOC
-               RELEASE PRINTSYS
-            Else
-               END PRINTDOC
-            Endif
-
-   ELSEIF _HMG_RPTDATA [ 150 ] == .T.
-
-      pdfClose()
-
-   ELSEIF _HMG_RPTDATA [ 163 ] == .T.
-
-      _HMG_RPTDATA [ 149 ] += '</body>' + chr(13) + chr(10)
-      _HMG_RPTDATA [ 149 ] += '</html>' + chr(13) + chr(10)
-
-      nOutfile := FCREATE( cOutputFileName , FC_NORMAL)
-
-      FWRITE( nOutfile , _HMG_RPTDATA [ 149 ] , Len(_HMG_RPTDATA [ 149 ]) )
-
-      FCLOSE(nOutfile)
 
    ENDIF
 
-   If ValType ( xSkipProcedure ) == 'U'
-      Go nPreviousRecNo
-   EndIf
+   _HMG_RPTDATA [ 117 ]++
 
-Return
+ELSE
+
+   nCurrentOffset := 0
+
+   _ProcessBand ( aHeader , 0 )
+
+   nCurrentOffset := nHeadeHeight
+
+   DO WHILE .t.
+
+      IF nGroupCount > 0
+
+         IF xPreviousGroupExpression <> xGroupExpression
+
+            IF lGroupStarted
+
+               _ProcessBand ( aGroupFooter , nCurrentOffset )
+               nCurrentOffset += nGroupFooterHeight
+
+            ENDIF
+
+            _ProcessBand ( aGroupHeader , nCurrentOffset )
+
+            nCurrentOffset += nGroupHeaderHeight
+
+            xPreviousGroupExpression := xGroupExpression
+
+            lGroupStarted := .T.
+
+         ENDIF
+
+      ENDIF
+
+      _ProcessBand ( aDetail , nCurrentOffset )
+
+      nCurrentOffset += nDetailHeight
+
+      IF ValType ( xSkipProcedure ) == 'U'
+         SKIP
+         lTempEof := Eof()
+      ELSE
+         Eval(xSkipProcedure)
+         lTempEof := Eval(xEof)
+      ENDIF
+
+      IF lTempEof
+
+         * If group footer defined, print it.
+
+         IF nGroupFooterHeight > 0
+
+            _ProcessBand ( aGroupFooter , nCurrentOffset )
+            nCurrentOffset += nGroupFooterHeight
+
+         ENDIF
+
+         * If Summary defined, print it.
+
+         IF Len ( aSummary ) > 0
+            _ProcessBand ( aSummary , nCurrentOffset )
+            nCurrentOffset += nSummaryHeight
+         ENDIF
+
+         EXIT
+
+      ENDIF
+
+      IF nGroupCount > 0
+         xGroupExpression := &(xTemp)
+      ENDIF
+
+   ENDDO
+
+   _ProcessBand ( aFooter , nCurrentOffset )
+
+ENDIF
+
+ENDDO
+
+IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F. .AND. _HMG_RPTDATA [ 166 ] == .F.
+
+   IF drv = "H"
+   END DOC
+   RELEASE PRINTSYS
+ELSE
+END PRINTDOC
+ENDIF
+
+ELSEIF _HMG_RPTDATA [ 150 ] == .T.
+
+pdfClose()
+
+ELSEIF _HMG_RPTDATA [ 163 ] == .T.
+
+_HMG_RPTDATA [ 149 ] += '</body>' + chr(13) + chr(10)
+_HMG_RPTDATA [ 149 ] += '</html>' + chr(13) + chr(10)
+
+nOutfile := FCREATE( cOutputFileName , FC_NORMAL)
+
+FWRITE( nOutfile , _HMG_RPTDATA [ 149 ] , Len(_HMG_RPTDATA [ 149 ]) )
+
+FCLOSE(nOutfile)
+
+ENDIF
+
+IF ValType ( xSkipProcedure ) == 'U'
+   Go nPreviousRecNo
+ENDIF
+
+RETURN
 
 *.............................................................................*
-Procedure _ProcessBand ( aBand  , nOffset )
-*.............................................................................*
-Local i
 
-   For i := 1 To Len ( aBand )
+PROCEDURE _ProcessBand ( aBand  , nOffset )
+
+   *.............................................................................*
+   LOCAL i
+
+   FOR i := 1 To Len ( aBand )
 
       _PrintObject ( aBand [i] , nOffset )
 
-   Next i
+   NEXT i
 
-Return
+   RETURN
 
-*.............................................................................*
-Procedure _PrintObject ( aObject , nOffset )
-*.............................................................................*
+   *.............................................................................*
 
+PROCEDURE _PrintObject ( aObject , nOffset )
 
-   If   aObject [1] == 'TEXT'
+   *.............................................................................*
+
+   IF   aObject [1] == 'TEXT'
 
       _PrintText( aObject , nOffset )
 
-   ElseIf aObject [1] == 'IMAGE'
+   ELSEIF aObject [1] == 'IMAGE'
 
       _PrintImage( aObject , nOffset )
 
-   ElseIf aObject [1] == 'LINE'
+   ELSEIF aObject [1] == 'LINE'
 
       _PrintLine( aObject , nOffset )
 
-   ElseIf aObject [1] == 'RECTANGLE'
+   ELSEIF aObject [1] == 'RECTANGLE'
 
       _PrintRectangle( aObject , nOffset )
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure _PrintText( aObject , nOffset )
-*-----------------------------------------------------------------------------*
+PROCEDURE _PrintText( aObject , nOffset )
 
-Local cValue      := aObject [ 2]
-Local nRow      := aObject [ 3]
-Local nCol      := aObject [ 4]
-Local nWidth      := aObject [ 5]
-Local nHeight      := aObject [ 6]
-Local cFontname      := aObject [ 7]
-Local nFontSize      := aObject [ 8]
-Local lFontBold      := aObject [ 9]
-Local lFontItalic   := aObject [10]
-Local lFontUnderLine   := aObject [11]
-Local lFOntStrikeout   := aObject [12]
-Local aFontColor   := aObject [13]
-Local lAlignment_1    := aObject [14]
-Local lAlignment_2    := aObject [15]
-Local cAlignment   := ''
-Local nFontStyle   := 0
-Local nTextRowFix   := 5
-Local cHtmlAlignment
-Local HBPcOffset     := 0
+   LOCAL cValue      := aObject [ 2]
+   LOCAL nRow      := aObject [ 3]
+   LOCAL nCol      := aObject [ 4]
+   LOCAL nWidth      := aObject [ 5]
+   LOCAL nHeight      := aObject [ 6]
+   LOCAL cFontname      := aObject [ 7]
+   LOCAL nFontSize      := aObject [ 8]
+   LOCAL lFontBold      := aObject [ 9]
+   LOCAL lFontItalic   := aObject [10]
+   LOCAL lFontUnderLine   := aObject [11]
+   LOCAL lFOntStrikeout   := aObject [12]
+   LOCAL aFontColor   := aObject [13]
+   LOCAL lAlignment_1    := aObject [14]
+   LOCAL lAlignment_2    := aObject [15]
+   LOCAL cAlignment   := ''
+   LOCAL nFontStyle   := 0
+   LOCAL nTextRowFix   := 5
+   LOCAL cHtmlAlignment
+   LOCAL HBPcOffset     := 0
 
    cValue := &cValue
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F.
 
-      If   lAlignment_1 == .F. .and.  lAlignment_2 == .T.
+      IF   lAlignment_1 == .F. .and.  lAlignment_2 == .T.
 
          cAlignment   := 'CENTER'
          hbprn:settextalign(TA_CENTER)
-         
-      ElseIf   lAlignment_1 == .T. .and.  lAlignment_2 == .F.
+
+      ELSEIF   lAlignment_1 == .T. .and.  lAlignment_2 == .F.
 
          cAlignment   := 'RIGHT'
          hbprn:settextalign(TA_RIGHT)
 
-      ElseIf   lAlignment_1 == .F. .and.  lAlignment_2 == .F.
+      ELSEIF   lAlignment_1 == .F. .and.  lAlignment_2 == .F.
 
          cAlignment   := ''
          hbprn:settextalign(TA_LEFT)
-         
-      EndIf
 
-      if drv = "H"
+      ENDIF
+
+      IF drv = "H"
 
          hbprn:modifyfont("F0", cFontName ,nFontSize, ,0,lFontBold,!lFontBold , ;
-               lFontitalic,!lFontitalic ,lFontUnderline ,!lFontUnderline,;
-               lFontStrikeout,!lFontStrikeout)
+            lFontitalic,!lFontitalic ,lFontUnderline ,!lFontUnderline,;
+            lFontStrikeout,!lFontStrikeout)
 
          hbPrn:SetTextColor( { aFontColor[1] , aFontColor[2] , aFontColor[3] } )
 
          IF ! ISCHARACTER( cValue )
             cValue := alltrim( HB_ValToStr( cValue ) )
          ENDIF
-         if cAlignment  = 'RIGHT'
+         IF cAlignment  = 'RIGHT'
             HBPcOffset := nWidth
-         Elseif cAlignment  = 'CENTER'
+         ELSEIF cAlignment  = 'CENTER'
             HBPcOffset := nWidth / 2
-         Endif
+         ENDIF
 
          @nRow + nOffset + 3 , nCol + HBPcOffset SAY cValue FONT "F0" TO PRINT
 
-      Else
+      ELSE
 
-      _HMG_PRINTER_H_MULTILINE_PRINT ( _HMG_PRINTER_HDC , nRow  + nOffset , nCol , nRow + nHeight  + nOffset , nCol + nWidth , cFontName , nFontSize , aFontColor[1] , aFontColor[2] , aFontColor[3] , cValue , lFontBold , lFontItalic , lFontUnderline , lFontStrikeout , .T. , .T. , .T. , cAlignment )
+         _HMG_PRINTER_H_MULTILINE_PRINT ( _HMG_PRINTER_HDC , nRow  + nOffset , nCol , nRow + nHeight  + nOffset , nCol + nWidth , cFontName , nFontSize , aFontColor[1] , aFontColor[2] , aFontColor[3] , cValue , lFontBold , lFontItalic , lFontUnderline , lFontStrikeout , .T. , .T. , .T. , cAlignment )
 
-      Endif
+      ENDIF
 
    ELSEIF _HMG_RPTDATA [ 163 ] == .T.
 
-      if   ValType (cValue) == "N"
+      IF   ValType (cValue) == "N"
 
          cValue := AllTrim(Str(cValue))
 
-      Elseif   ValType (cValue) == "D"
+      ELSEIF   ValType (cValue) == "D"
 
          cValue := dtoc (cValue)
 
-      Elseif   ValType (cValue) == "L"
+      ELSEIF   ValType (cValue) == "L"
 
          cValue := if ( cValue == .T. , _HMG_RPTDATA [ 371 ] [24] , _HMG_RPTDATA [ 371 ] [25] )
 
-      EndIf
+      ENDIF
 
-      If   lAlignment_1 == .F. .and.  lAlignment_2 == .T.
+      IF   lAlignment_1 == .F. .and.  lAlignment_2 == .T.
 
          cHtmlAlignment   := 'center'
 
-      ElseIf   lAlignment_1 == .T. .and.  lAlignment_2 == .F.
+      ELSEIF   lAlignment_1 == .T. .and.  lAlignment_2 == .F.
 
          cHtmlAlignment   := 'right'
 
-      ElseIf   lAlignment_1 == .F. .and.  lAlignment_2 == .F.
+      ELSEIF   lAlignment_1 == .F. .and.  lAlignment_2 == .F.
 
          cHtmlAlignment   := 'left'
 
-      EndIf
+      ENDIF
 
       _HMG_RPTDATA [ 149 ] += '<div style=position:absolute;left:' + alltrim(str(nCol)) +  'mm;top:' +  alltrim(str(nRow+nOffset)) + 'mm;width:' +  alltrim(str(nWidth)) + 'mm;font-size:' + alltrim(str(nFontSize)) + 'pt;font-family:"' +  cFontname + '";text-align:' + cHtmlAlignment + ';font-weight:' + if(lFontBold,'bold','normal') + ';font-style:' + if(lFontItalic,'italic','normal') + ';text-decoration:' + if(lFontUnderLine,'underline','none') + ';color:rgb(' + alltrim(str(aFontColor[1])) + ',' + alltrim(str(aFontColor[2])) + ',' +  alltrim(str(aFontColor[3])) + ');>' + cValue + '</div>' + chr(13) + chr(10)
 
    ELSEIF _HMG_RPTDATA [ 150 ] == .T.
 
-      if   ValType (cValue) == "N"
+      IF   ValType (cValue) == "N"
 
          cValue := AllTrim(Str(cValue))
 
-      Elseif   ValType (cValue) == "D"
+      ELSEIF   ValType (cValue) == "D"
 
          cValue := dtoc (cValue)
 
-      Elseif   ValType (cValue) == "L"
+      ELSEIF   ValType (cValue) == "L"
 
          cValue := if ( cValue == .T. , _HMG_RPTDATA [ 371 ] [24] , _HMG_RPTDATA [ 371 ] [25] )
 
-      EndIf
+      ENDIF
 
-      If   lFontBold == .f. .and. lFontItalic == .f.
+      IF   lFontBold == .f. .and. lFontItalic == .f.
 
          nFontStyle := 0
 
-      ElseIf   lFontBold == .t. .and. lFontItalic == .f.
+      ELSEIF   lFontBold == .t. .and. lFontItalic == .f.
 
          nFontStyle := 1
 
-      ElseIf   lFontBold == .f. .and. lFontItalic == .t.
+      ELSEIF   lFontBold == .f. .and. lFontItalic == .t.
 
          nFontStyle := 2
 
-      ElseIf   lFontBold == .t. .and. lFontItalic == .t.
+      ELSEIF   lFontBold == .t. .and. lFontItalic == .t.
 
          nFontStyle := 3
 
-      EndIf
+      ENDIF
 
       pdfSetFont( cFontname , nFontStyle , nFontSize )
 
-      If   lAlignment_1 == .F. .and.  lAlignment_2 == .T. // Center
+      IF   lAlignment_1 == .F. .and.  lAlignment_2 == .T. // Center
 
-         If lFontUnderLine
+         IF lFontUnderLine
 
             pdfAtSay ( cValue + chr(254) , nRow + nOffset + nTextRowFix , nCol + ( nWidth - ( pdfTextWidth( cValue ) * 25.4 ) ) / 2  , 'M' )
 
-         Else
+         ELSE
 
             pdfAtSay ( chr(253) + chr(aFontColor[1]) + chr(aFontColor[2]) + chr(aFontColor[3]) + cValue , nRow + nOffset + nTextRowFix , nCol + ( nWidth - ( pdfTextWidth( cValue ) * 25.4 ) ) / 2  , 'M' )
 
-         EndIf
+         ENDIF
 
-      ElseIf   lAlignment_1 == .T. .and.  lAlignment_2 == .F. // Right
+      ELSEIF   lAlignment_1 == .T. .and.  lAlignment_2 == .F. // Right
 
-         If lFontUnderLine
+         IF lFontUnderLine
 
             pdfAtSay ( cValue + chr(254) , nRow + nOffset + nTextRowFix , nCol + nWidth - pdfTextWidth( cValue ) * 25.4 , 'M' )
 
-         Else
+         ELSE
 
             pdfAtSay ( chr(253) + chr(aFontColor[1]) + chr(aFontColor[2]) + chr(aFontColor[3]) + cValue , nRow + nOffset + nTextRowFix , nCol + nWidth - pdfTextWidth( cValue ) * 25.4 , 'M' )
 
-         EndIf
+         ENDIF
 
-      ElseIf   lAlignment_1 == .F. .and.  lAlignment_2 == .F. // Left
+      ELSEIF   lAlignment_1 == .F. .and.  lAlignment_2 == .F. // Left
 
-         If lFontUnderLine
+         IF lFontUnderLine
 
             pdfAtSay ( cValue + chr(254) , nRow + nOffset + nTextRowFix , nCol , 'M' )
 
-         Else
+         ELSE
 
             pdfAtSay ( chr(253) + chr(aFontColor[1]) + chr(aFontColor[2]) + chr(aFontColor[3]) + cValue , nRow + nOffset + nTextRowFix , nCol , 'M' )
 
-         EndIf
+         ENDIF
 
-      EndIf
+      ENDIF
 
    ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure _PrintImage( aObject , nOffset )
-*-----------------------------------------------------------------------------*
-Local cValue      := aObject [ 2]
-Local nRow      := aObject [ 3]
-Local nCol      := aObject [ 4]
-Local nWidth      := aObject [ 5]
-Local nHeight      := aObject [ 6]
-Local lStretch      := aObject [ 7]
+PROCEDURE _PrintImage( aObject , nOffset )
+
+   LOCAL cValue      := aObject [ 2]
+   LOCAL nRow      := aObject [ 3]
+   LOCAL nCol      := aObject [ 4]
+   LOCAL nWidth      := aObject [ 5]
+   LOCAL nHeight      := aObject [ 6]
+   LOCAL lStretch      := aObject [ 7]
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F.
 
-      if drv = "H"
+      IF drv = "H"
          hbprn:picture(nRow + nOffset,nCol, nHeight , nWidth ,cValue, , )
-      Else
+      ELSE
          _HMG_PRINTER_H_IMAGE ( _HMG_PRINTER_HDC , cValue , nRow + nOffset , nCol , nHeight , nWidth , .T. )
-      Endif
+      ENDIF
 
    ELSEIF _HMG_RPTDATA [ 150 ] == .T.
 
@@ -1248,31 +1234,30 @@ Local lStretch      := aObject [ 7]
 
    ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure _PrintLine( aObject , nOffset )
-*-----------------------------------------------------------------------------*
-Local nFromRow      := aObject [ 2]
-Local nFromCol      := aObject [ 3]
-Local nToRow      := aObject [ 4]
-Local nToCol      := aObject [ 5]
-Local nPenWidth      := aObject [ 6]
-Local aPenColor      := aObject [ 7]
+PROCEDURE _PrintLine( aObject , nOffset )
+
+   LOCAL nFromRow      := aObject [ 2]
+   LOCAL nFromCol      := aObject [ 3]
+   LOCAL nToRow      := aObject [ 4]
+   LOCAL nToCol      := aObject [ 5]
+   LOCAL nPenWidth      := aObject [ 6]
+   LOCAL aPenColor      := aObject [ 7]
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F.
-      if drv = "H"
+      IF drv = "H"
          Hbprn:modifypen("P0", , nPenWidth*25.4 , { aPenColor[1] , aPenColor[2] , aPenColor[3] } )
          hbprn:line(nFromRow + nOffset, nFromCol , nToRow  + nOffset , nToCol ,"P0" )
-      Else
-      _HMG_PRINTER_H_LINE ( _HMG_PRINTER_HDC , nFromRow + nOffset , nFromCol , nToRow  + nOffset , nToCol , nPenWidth , aPenColor[1] , aPenColor[2] , aPenColor[3]  , .T. , .T. )
-      Endif
+      ELSE
+         _HMG_PRINTER_H_LINE ( _HMG_PRINTER_HDC , nFromRow + nOffset , nFromCol , nToRow  + nOffset , nToCol , nPenWidth , aPenColor[1] , aPenColor[2] , aPenColor[3]  , .T. , .T. )
+      ENDIF
 
    ELSEIF _HMG_RPTDATA [ 150 ] == .T.
 
-      If nFromRow <> nToRow .and. nFromCol <> nToCol
+      IF nFromRow <> nToRow .and. nFromCol <> nToCol
          MsgMiniGUIError('Report: Only horizontal and vertical lines are supported with PDF output')
-      EndIf
+      ENDIF
 
       pdfBox( nFromRow + nOffset , nFromCol, nToRow + nOffset + nPenWidth , nToCol , 0 , 1 , "M" , CHR(253) + CHR(aPenColor[1]) + CHR(aPenColor[2]) + CHR(aPenColor[3]) )
 
@@ -1282,28 +1267,26 @@ Local aPenColor      := aObject [ 7]
 
    ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure _PrintRectangle( aObject , nOffset )
-*-----------------------------------------------------------------------------*
-Local nFromRow      := aObject [ 2]
-Local nFromCol      := aObject [ 3]
-Local nToRow      := aObject [ 4]
-Local nToCol      := aObject [ 5]
-Local nPenWidth      := aObject [ 6]
-Local aPenColor      := aObject [ 7]
+PROCEDURE _PrintRectangle( aObject , nOffset )
 
+   LOCAL nFromRow      := aObject [ 2]
+   LOCAL nFromCol      := aObject [ 3]
+   LOCAL nToRow      := aObject [ 4]
+   LOCAL nToCol      := aObject [ 5]
+   LOCAL nPenWidth      := aObject [ 6]
+   LOCAL aPenColor      := aObject [ 7]
 
    IF _HMG_RPTDATA [ 150 ] == .F. .AND. _HMG_RPTDATA [ 163 ] == .F.
 
-      if drv = "H"
+      IF drv = "H"
          Hbprn:modifypen("P0", , nPenWidth*25.4 , { aPenColor[1] , aPenColor[2] , aPenColor[3] } )
          hbprn:rectangle( nFromRow + nOffset , nFromCol , nToRow  + nOffset ,nToCol ,"p0" , )
-      Else
-      _HMG_PRINTER_H_RECTANGLE ( _HMG_PRINTER_HDC , nFromRow + nOffset , nFromCol , nToRow  + nOffset , nToCol , nPenWidth , aPenColor[1] , aPenColor[2] , aPenColor[3] , .T. , .T. )
-      Endif
-      
+      ELSE
+         _HMG_PRINTER_H_RECTANGLE ( _HMG_PRINTER_HDC , nFromRow + nOffset , nFromCol , nToRow  + nOffset , nToCol , nPenWidth , aPenColor[1] , aPenColor[2] , aPenColor[3] , .T. , .T. )
+      ENDIF
+
    ELSEIF _HMG_RPTDATA [ 150 ] == .T.
 
       pdfBox( nFromRow + nOffset , nFromCol, nFromRow + nOffset + nPenWidth , nToCol , 0 , 1 , "M" , CHR(253) + CHR(aPenColor[1]) + CHR(aPenColor[2]) + CHR(aPenColor[3]) )
@@ -1317,11 +1300,11 @@ Local aPenColor      := aObject [ 7]
 
    ENDIF
 
-Return
+   RETURN
 
-* Line **********************************************************************
+   * Line **********************************************************************
 
-Procedure _BeginLine
+PROCEDURE _BeginLine
 
    _HMG_RPTDATA [ 110 ] := 0      // FromRow
    _HMG_RPTDATA [ 111 ] := 0      // FromCol
@@ -1330,11 +1313,11 @@ Procedure _BeginLine
    _HMG_RPTDATA [ 114 ] := 1      // PenWidth
    _HMG_RPTDATA [ 115 ] := { 0 , 0 , 0 }   // PenColor
 
-Return
+   RETURN
 
-Procedure _EndLine
+PROCEDURE _EndLine
 
-Local aLine
+   LOCAL aLine
 
    aLine := {           ;
       'LINE'         , ;
@@ -1346,37 +1329,37 @@ Local aLine
       _HMG_RPTDATA [ 115 ]     ;
       }
 
-   If   _HMG_RPTDATA [161] == 'HEADER'
+   IF   _HMG_RPTDATA [161] == 'HEADER'
 
-           aadd (    _HMG_RPTDATA [160] , aLine )
+      aadd (    _HMG_RPTDATA [160] , aLine )
 
-   ElseIf   _HMG_RPTDATA [161] == 'DETAIL'
+   ELSEIF   _HMG_RPTDATA [161] == 'DETAIL'
 
-           aadd ( _HMG_RPTDATA [158] , aLine )
+      aadd ( _HMG_RPTDATA [158] , aLine )
 
-   ElseIf   _HMG_RPTDATA [161] == 'FOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'FOOTER'
 
-           aadd ( _HMG_RPTDATA [157] , aLine )
+      aadd ( _HMG_RPTDATA [157] , aLine )
 
-   ElseIf   _HMG_RPTDATA [161] == 'SUMMARY'
+   ELSEIF   _HMG_RPTDATA [161] == 'SUMMARY'
 
-           aadd ( _HMG_RPTDATA [126] , aLine )
+      aadd ( _HMG_RPTDATA [126] , aLine )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPHEADER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPHEADER'
 
-           aadd ( _HMG_RPTDATA [ 121 ] , aLine )
+      aadd ( _HMG_RPTDATA [ 121 ] , aLine )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPFOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPFOOTER'
 
-           aadd ( _HMG_RPTDATA [ 122 ] , aLine )
+      aadd ( _HMG_RPTDATA [ 122 ] , aLine )
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-* Image **********************************************************************
+   * Image **********************************************************************
 
-Procedure _BeginImage
+PROCEDURE _BeginImage
 
    _HMG_ActiveControlValue := ''         // Value
    _HMG_ActiveControlRow := 0         // Row
@@ -1385,11 +1368,11 @@ Procedure _BeginImage
    _HMG_ActiveControlHeight := 0         // Height
    _HMG_ActiveControlStretch := .F.      // Stretch
 
-Return
+   RETURN
 
-Procedure _EndImage
+PROCEDURE _EndImage
 
-Local aImage
+   LOCAL aImage
 
    aImage := {              ;
       'IMAGE'            , ;
@@ -1401,37 +1384,37 @@ Local aImage
       _HMG_ActiveControlStretch     ;
       }
 
-   If   _HMG_RPTDATA [161] == 'HEADER'
+   IF   _HMG_RPTDATA [161] == 'HEADER'
 
-           aadd (    _HMG_RPTDATA [160] , aImage )
+      aadd (    _HMG_RPTDATA [160] , aImage )
 
-   ElseIf   _HMG_RPTDATA [161] == 'DETAIL'
+   ELSEIF   _HMG_RPTDATA [161] == 'DETAIL'
 
-           aadd ( _HMG_RPTDATA [158] , aImage )
+      aadd ( _HMG_RPTDATA [158] , aImage )
 
-   ElseIf   _HMG_RPTDATA [161] == 'FOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'FOOTER'
 
-           aadd ( _HMG_RPTDATA [157] , aImage )
+      aadd ( _HMG_RPTDATA [157] , aImage )
 
-   ElseIf   _HMG_RPTDATA [161] == 'SUMMARY'
+   ELSEIF   _HMG_RPTDATA [161] == 'SUMMARY'
 
-           aadd ( _HMG_RPTDATA [126] , aImage )
+      aadd ( _HMG_RPTDATA [126] , aImage )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPHEADER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPHEADER'
 
-           aadd ( _HMG_RPTDATA [ 121 ] , aImage )
+      aadd ( _HMG_RPTDATA [ 121 ] , aImage )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPFOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPFOOTER'
 
-           aadd ( _HMG_RPTDATA [ 122 ] , aImage )
+      aadd ( _HMG_RPTDATA [ 122 ] , aImage )
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-* Rectangle **********************************************************************
+   * Rectangle **********************************************************************
 
-Procedure _BeginRectangle
+PROCEDURE _BeginRectangle
 
    _HMG_RPTDATA [ 110 ] := 0      // FromRow
    _HMG_RPTDATA [ 111 ] := 0      // FromCol
@@ -1440,11 +1423,11 @@ Procedure _BeginRectangle
    _HMG_RPTDATA [ 114 ] := 1      // PenWidth
    _HMG_RPTDATA [ 115 ] := { 0 , 0 , 0 }   // PenColor
 
-Return
+   RETURN
 
-Procedure _EndRectangle
+PROCEDURE _EndRectangle
 
-Local aRectangle
+   LOCAL aRectangle
 
    aRectangle := {           ;
       'RECTANGLE'      , ;
@@ -1456,97 +1439,118 @@ Local aRectangle
       _HMG_RPTDATA [ 115 ]     ;
       }
 
-   If   _HMG_RPTDATA [161] == 'HEADER'
+   IF   _HMG_RPTDATA [161] == 'HEADER'
 
-           aadd (    _HMG_RPTDATA [160] , aRectangle )
+      aadd (    _HMG_RPTDATA [160] , aRectangle )
 
-   ElseIf   _HMG_RPTDATA [161] == 'DETAIL'
+   ELSEIF   _HMG_RPTDATA [161] == 'DETAIL'
 
-           aadd ( _HMG_RPTDATA [158] , aRectangle )
+      aadd ( _HMG_RPTDATA [158] , aRectangle )
 
-   ElseIf   _HMG_RPTDATA [161] == 'FOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'FOOTER'
 
-           aadd ( _HMG_RPTDATA [157] , aRectangle )
+      aadd ( _HMG_RPTDATA [157] , aRectangle )
 
-   ElseIf   _HMG_RPTDATA [161] == 'SUMMARY'
+   ELSEIF   _HMG_RPTDATA [161] == 'SUMMARY'
 
-           aadd ( _HMG_RPTDATA [126] , aRectangle )
+      aadd ( _HMG_RPTDATA [126] , aRectangle )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPHEADER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPHEADER'
 
-           aadd ( _HMG_RPTDATA [ 121 ] , aRectangle )
+      aadd ( _HMG_RPTDATA [ 121 ] , aRectangle )
 
-   ElseIf   _HMG_RPTDATA [161] == 'GROUPFOOTER'
+   ELSEIF   _HMG_RPTDATA [161] == 'GROUPFOOTER'
 
-           aadd ( _HMG_RPTDATA [ 122 ] , aRectangle )
+      aadd ( _HMG_RPTDATA [ 122 ] , aRectangle )
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-*..............................................................................
-Procedure _BeginGroup()
-*..............................................................................
+   *..............................................................................
+
+PROCEDURE _BeginGroup()
+
+   *..............................................................................
 
    _HMG_RPTDATA [161] := 'GROUP'
 
    _HMG_RPTDATA [ 120 ]++
 
-Return
+   RETURN
 
-*..............................................................................
-Procedure _EndGroup() 
-*..............................................................................
+   *..............................................................................
 
-Return
+PROCEDURE _EndGroup()
 
-*..............................................................................
-Procedure _BeginGroupHeader()
-*..............................................................................
+   *..............................................................................
+
+   RETURN
+
+   *..............................................................................
+
+PROCEDURE _BeginGroupHeader()
+
+   *..............................................................................
 
    _HMG_RPTDATA [161] := 'GROUPHEADER'
 
-Return
+   RETURN
 
-*..............................................................................
-Procedure _EndGroupHeader() 
-*..............................................................................
+   *..............................................................................
 
-Return
+PROCEDURE _EndGroupHeader()
 
-*..............................................................................
-Procedure _BeginGroupFooter()
-*..............................................................................
+   *..............................................................................
+
+   RETURN
+
+   *..............................................................................
+
+PROCEDURE _BeginGroupFooter()
+
+   *..............................................................................
 
    _HMG_RPTDATA [161] := 'GROUPFOOTER'
 
-Return
+   RETURN
 
-*..............................................................................
-Procedure _EndGroupFooter() 
-*..............................................................................
+   *..............................................................................
 
-Return
+PROCEDURE _EndGroupFooter()
 
-*..............................................................................
-Function _dbSum( cField ) 
-*..............................................................................
-Local nVar := 0
+   *..............................................................................
 
-   if type ( cField ) == 'N'
+   RETURN
+
+   *..............................................................................
+
+FUNCTION _dbSum( cField )
+
+   *..............................................................................
+   LOCAL nVar := 0
+
+   IF type ( cField ) == 'N'
 
       SUM &(cField) TO nVar
 
-   EndIf
+   ENDIF
 
-Return nVar
+   RETURN nVar
 
-*..............................................................................
-Procedure _BeginData()
-*..............................................................................
-Return
+   *..............................................................................
 
-*..............................................................................
-Procedure _EndData() 
-*..............................................................................
-Return
+PROCEDURE _BeginData()
+
+   *..............................................................................
+
+   RETURN
+
+   *..............................................................................
+
+PROCEDURE _EndData()
+
+   *..............................................................................
+
+   RETURN
+

@@ -1,23 +1,22 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>
- * Copyright 2014 Igor Nazarov <047545@mail.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2014 Andrey Verchenko <verchenkoag@gmail.com>
+* Copyright 2014 Igor Nazarov <047545@mail.ru>
 */
 #include "MiniGUI.ch"
 #include "TSBrowse.ch"
 
-MEMVAR oBrwClr 
+MEMVAR oBrwClr
 
-/////////////////////////////////////////////////////////////////////////////////
 // Function: Change color TBROWSE
+
 FUNCTION Form_color()
+
    LOCAL aVar := {},  nI:=1, aRetColor
    LOCAL aBackColor := {122,161,230}
    LOCAL nFBSize := 10, aFontColor := WHITE    // font size / color buttons
-   LOCAL nLenButt := 160 , nHButt  := 55       // width/height button 
-   PUBLIC oBrwClr 
+   LOCAL nLenButt := 160 , nHButt  := 55       // width/height button
+   PUBLIC oBrwClr
 
    /////////////////////// Building Array for Browse  ////////////////////////////
    AADD( aVar, { nI++, "nClrText"           , "Color of text in the table cells"                                  , CLR_BLUE        , 0                  } )
@@ -44,142 +43,140 @@ FUNCTION Form_color()
    SET FONT TO "Arial", 9   // Set the default font
 
    DEFINE WINDOW Form_Colors AT 0,0 WIDTH 727 HEIGHT 610 ;
-     TITLE "Color change menu for TBROWSE" ;
-     BACKCOLOR aBackColor       ;
-     CHILD                      ;
-     NOMAXIMIZE NOSIZE
+         TITLE "Color change menu for TBROWSE" ;
+         BACKCOLOR aBackColor       ;
+         CHILD                      ;
+         NOMAXIMIZE NOSIZE
 
-     @ 510,20 BUTTONEX BUTTON_1  WIDTH nLenButt HEIGHT nHButt    ;
+      @ 510,20 BUTTONEX BUTTON_1  WIDTH nLenButt HEIGHT nHButt    ;
          CAPTION "Show Colors column:"+ CRLF +"Color User !" ;
          FONTCOLOR aFontColor             ;
          BACKCOLOR GRAY                   ;
-         SIZE nFBSize BOLD                ;    
+         SIZE nFBSize BOLD                ;
          NOHOTLIGHT NOXPSTYLE HANDCURSOR  ;
-         ACTION ViewColorTbrws(oBrwClr,4,aVar) 
+         ACTION ViewColorTbrws(oBrwClr,4,aVar)
 
-     @ 510,190 BUTTONEX BUTTON_2  WIDTH nLenButt HEIGHT nHButt  ;
+      @ 510,190 BUTTONEX BUTTON_2  WIDTH nLenButt HEIGHT nHButt  ;
          CAPTION "Show Colors column:"+ CRLF +"Color by default !" ;
          FONTCOLOR aFontColor             ;
          BACKCOLOR {0, 176, 240}          ;
-         SIZE nFBSize BOLD                ;    
+         SIZE nFBSize BOLD                ;
          NOHOTLIGHT NOXPSTYLE HANDCURSOR  ;
-         ACTION ViewColorTbrws(oBrwClr,5,aVar) 
+         ACTION ViewColorTbrws(oBrwClr,5,aVar)
 
-     @ 510,430 BUTTONEX BUTTON_3  WIDTH nLenButt HEIGHT nHButt  ;
+      @ 510,430 BUTTONEX BUTTON_3  WIDTH nLenButt HEIGHT nHButt  ;
          CAPTION "Transfer to TBROWSE"+ CRLF +"a current color" ;
          FONTCOLOR aFontColor             ;
          BACKCOLOR LGREEN                 ;
-         SIZE nFBSize BOLD                ;    
+         SIZE nFBSize BOLD                ;
          NOHOTLIGHT NOXPSTYLE HANDCURSOR  ;
-         ACTION ( aRetColor := RetSaveColor(oBrwClr), ThisWindow.Release ) 
-  			
-     @ 510,600 BUTTONEX BUTTON_4  WIDTH nLenButt-58 HEIGHT nHButt ;
+         ACTION ( aRetColor := RetSaveColor(oBrwClr), ThisWindow.Release )
+
+      @ 510,600 BUTTONEX BUTTON_4  WIDTH nLenButt-58 HEIGHT nHButt ;
          CAPTION "Exit"                   ;
          FONTCOLOR aFontColor             ;
          BACKCOLOR MAROON                 ;
-         SIZE nFBSize BOLD                ;    
+         SIZE nFBSize BOLD                ;
          NOHOTLIGHT NOXPSTYLE HANDCURSOR  ;
-         ACTION ( aRetColor := {} , ThisWindow.Release ) 
-   
-     DEFINE TBROWSE oBrwClr ; 
-            AT     20,20 ; 
-            WIDTH  680 ; 
-            HEIGHT 480 ;
-            ON CHANGE { || CorrectionFirstLast( oBrwClr ) };
-            CELL         
-     END TBROWSE  
+         ACTION ( aRetColor := {} , ThisWindow.Release )
 
-     oBrwClr:SetArray( aVar )
+      DEFINE TBROWSE oBrwClr ;
+         AT     20,20 ;
+         WIDTH  680 ;
+         HEIGHT 480 ;
+         ON CHANGE { || CorrectionFirstLast( oBrwClr ) };
+         CELL
+   END TBROWSE
 
-     ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 1;  
-       HEADER CRLF + "No";
-       SIZE 40;
-       COLORS {CLR_BLACK, WHITE} ;
-       ALIGN DT_CENTER
+   oBrwClr:SetArray( aVar )
 
-     ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 2;
-       HEADER CRLF + "Variable name";
-       SIZE 170;
-       COLORS {CLR_BLACK, WHITE} ;
-       ALIGN DT_LEFT
+   ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 1;
+      HEADER CRLF + "No";
+      SIZE 40;
+      COLORS {CLR_BLACK, WHITE} ;
+      ALIGN DT_CENTER
 
-     ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 3;
-       HEADER CRLF + "Name in the table";
-       SIZE 340;
-       COLORS {CLR_BLACK, WHITE} ;
-       ALIGN DT_LEFT
+   ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 2;
+      HEADER CRLF + "Variable name";
+      SIZE 170;
+      COLORS {CLR_BLACK, WHITE} ;
+      ALIGN DT_LEFT
 
-     ADD COLUMN TO TBROWSE oBrwClr DATA {|| '***' };  
-       HEADER "Color "+ CRLF +" User"+ CRLF +"(change!!!)";
-       SIZE 80;
-       ALIGN DT_CENTER;
-       MOVE DT_MOVE_DOWN;
-       EDITABLE 
+   ADD COLUMN TO TBROWSE oBrwClr DATA ARRAY ELEMENT 3;
+      HEADER CRLF + "Name in the table";
+      SIZE 340;
+      COLORS {CLR_BLACK, WHITE} ;
+      ALIGN DT_LEFT
 
-     ADD COLUMN TO TBROWSE oBrwClr DATA {|| '.' } ; 
-       HEADER CRLF + "Color by "+ CRLF +" default";
-       SIZE 80;
-       ALIGN DT_CENTER
+   ADD COLUMN TO TBROWSE oBrwClr DATA {|| '***' };
+      HEADER "Color "+ CRLF +" User"+ CRLF +"(change!!!)";
+      SIZE 80;
+      ALIGN DT_CENTER;
+      MOVE DT_MOVE_DOWN;
+      EDITABLE
 
-     ADD  SUPER  HEADER TO oBrwClr ;
-        FROM  COLUMN  1         ;
-        TO  COLUMN 3            ;
-        HEADER "Basic description"
+   ADD COLUMN TO TBROWSE oBrwClr DATA {|| '.' } ;
+      HEADER CRLF + "Color by "+ CRLF +" default";
+      SIZE 80;
+      ALIGN DT_CENTER
 
-     ADD   HEADER TO oBrwClr ;
-        FROM   4         ;
-        TO   5            ;
-        HEADER "Used Color"
+   ADD  SUPER  HEADER TO oBrwClr ;
+      FROM  COLUMN  1         ;
+      TO  COLUMN 3            ;
+      HEADER "Basic description"
 
+   ADD   HEADER TO oBrwClr ;
+      FROM   4         ;
+      TO   5            ;
+      HEADER "Used Color"
 
-       oBrwClr:Setcolor( { 2 }, { { || NewColor(oBrwClr,4) } } , 4 )       // display color of aVar [4] 
-       oBrwClr:aColumns[4]:bPrevEdit := { || ColorPicker(oBrwClr), FALSE } // 4-column editing
+   oBrwClr:Setcolor( { 2 }, { { || NewColor(oBrwClr,4) } } , 4 )       // display color of aVar [4]
+   oBrwClr:aColumns[4]:bPrevEdit := { || ColorPicker(oBrwClr), FALSE } // 4-column editing
 
-       oBrwClr:Setcolor( { 2 }, { { || NewColor(oBrwClr, 5) } } , 5 )      // display color of aVar[5] 
+   oBrwClr:Setcolor( { 2 }, { { || NewColor(oBrwClr, 5) } } , 5 )      // display color of aVar[5]
 
-     ON KEY ESCAPE ACTION ThisWindow.Release
+   ON KEY ESCAPE ACTION ThisWindow.Release
 
-   END WINDOW
+END WINDOW
 
-   //oBrwClr:lCellBrw := .F.   // Marker on the entire table
+//oBrwClr:lCellBrw := .F.   // Marker on the entire table
 
-   // See description in the source: h_tbrowse.prg
-    oBrwClr:lNoGrayBar  := .t.   // Skip the inactive cursor
-    oBrwClr:nAdjColumn  := 2     // stretch column 2 to fill the voids in the right brovse
-    oBrwClr:nHeightCell += 6     // to the row height on umolchpaniyu add 6 pixels
+// See description in the source: h_tbrowse.prg
+oBrwClr:lNoGrayBar  := .t.   // Skip the inactive cursor
+oBrwClr:nAdjColumn  := 2     // stretch column 2 to fill the voids in the right brovse
+oBrwClr:nHeightCell += 6     // to the row height on umolchpaniyu add 6 pixels
 
-    oBrwClr:nHeightSuper := 24   // height of the header (the complex, composite)
+oBrwClr:nHeightSuper := 24   // height of the header (the complex, composite)
 
-    oBrwClr:nHeightHead  += 4    // to the height of the title bar on umolchpaniyu add 4 pixels
-    oBrwClr:lNoHScroll   := .f.  // Display a horizontal scrolling
+oBrwClr:nHeightHead  += 4    // to the height of the title bar on umolchpaniyu add 4 pixels
+oBrwClr:lNoHScroll   := .f.  // Display a horizontal scrolling
 
-    oBrwClr:lFooting     := .T.  // Use the basement
-    oBrwClr:lDrawFooters := .T.  // Draw cellars
-    oBrwClr:nHeightFoot  := 20   // row height basement
-    oBrwClr:DrawFooters()        // perform the drawing of the basement
+oBrwClr:lFooting     := .T.  // Use the basement
+oBrwClr:lDrawFooters := .T.  // Draw cellars
+oBrwClr:nHeightFoot  := 20   // row height basement
+oBrwClr:DrawFooters()        // perform the drawing of the basement
 
-    oBrwClr:aColumns[3]:cFooting := "Footing column 3" // set the value of the basement columns 3
+oBrwClr:aColumns[3]:cFooting := "Footing column 3" // set the value of the basement columns 3
 
-    oBrwClr:ResetVScroll ()      // display vertical scrolling
+oBrwClr:ResetVScroll ()      // display vertical scrolling
 
-    // frame pointer in column 4 and 5
-   oBrwClr:Setcolor( { 6 }, { -CLR_HRED } , 4 ) 
-   oBrwClr:Setcolor( { 6 }, { -CLR_HRED } , 5 ) 
+// frame pointer in column 4 and 5
+oBrwClr:Setcolor( { 6 }, { -CLR_HRED } , 4 )
+oBrwClr:Setcolor( { 6 }, { -CLR_HRED } , 5 )
 
-   oBrwClr:Refresh(.T.)
-   
-   oBrwClr:nAt := 5         // move the marker on the 5 string
-   oBrwClr:nCell := 3       // move the marker on the 3 column
-   //oBrwClr:GoPos( 5,3 )   // move the marker on the 5 rows and 3 columns
+oBrwClr:Refresh(.T.)
 
-   Form_Colors.oBrwClr.SetFocus
+oBrwClr:nAt := 5         // move the marker on the 5 string
+oBrwClr:nCell := 3       // move the marker on the 3 column
+//oBrwClr:GoPos( 5,3 )   // move the marker on the 5 rows and 3 columns
 
-   CENTER WINDOW Form_Colors
-   ACTIVATE WINDOW Form_Colors
+Form_Colors.oBrwClr.SetFocus
+
+CENTER WINDOW Form_Colors
+ACTIVATE WINDOW Form_Colors
 
 RETURN aRetColor  // return an array of colors for TBROWSE
 
-//////////////////////////////////////////////////////////////////
 STATIC PROCEDURE CorrectionFirstLast( oBrwClr )
 
    IF oBrwClr:nRowCount() == oBrwClr:nRowPos()
@@ -190,73 +187,76 @@ STATIC PROCEDURE CorrectionFirstLast( oBrwClr )
       oBrwClr:Refresh( .F. )
    ENDIF
 
-RETURN
+   RETURN
 
-//////////////////////////////////////////////////////////////////
 FUNCTION ColorPicker(oBrwClr)
-    LOCAL aColor := {}
 
-    aColor := n2RGB(oBrwClr:aArray[oBrwClr:nAt][oBrwClr:nCell] ) // receive color from the current cell
-    aColor := GetColor(aColor)   // standard menu Windows-color
-    IF aColor[1] # NIL
-       // put a new color in the current cell
-       oBrwClr:aArray[oBrwClr:nAt][oBrwClr:nCell] := RGB(aColor[1], aColor[2], aColor[3] ) 
-    ENDIF
-RETURN NIL
+   LOCAL aColor := {}
 
-///////////////////////////////////////////////////////////////////
+   aColor := n2RGB(oBrwClr:aArray[oBrwClr:nAt][oBrwClr:nCell] ) // receive color from the current cell
+   aColor := GetColor(aColor)   // standard menu Windows-color
+   IF aColor[1] # NIL
+      // put a new color in the current cell
+      oBrwClr:aArray[oBrwClr:nAt][oBrwClr:nCell] := RGB(aColor[1], aColor[2], aColor[3] )
+   ENDIF
+
+   RETURN NIL
+
 FUNCTION NEWColor(oBrwClr, nCol)
-RETURN oBrwClr:aArray[oBrwClr:nAt][nCol] 
 
-///////////////////////////////////////////////////////////////////
+   RETURN oBrwClr:aArray[oBrwClr:nAt][nCol]
+
 FUNCTION n2RGB(nColor)
+
    LOCAL nR := 0, nG := 0, nB := 0, cColor := NTOC(nColor, 16)
 
    nR := CTON(SUBSTR( cColor, 5, 2 ), 16)
    nG := CTON(SUBSTR( cColor, 3, 2 ), 16)
    nB := CTON(SUBSTR( cColor, 1, 2 ), 16)
-RETURN {nR, nG, nB }
 
-///////////////////////////////////////////////////////////////////
+   RETURN {nR, nG, nB }
+
 FUNCTION ViewColorTbrws(oBrwClr, nCol, aVar)
+
    LOCAL nI, nJ, nNew
 
-   FOR nI := 1 TO LEN(oBrwClr:aArray)   
-     nNew := aVar[nI,1]
+   FOR nI := 1 TO LEN(oBrwClr:aArray)
+      nNew := aVar[nI,1]
 
-     FOR nJ := 1 to 3  // change the color only on the 3 columns
-       IF !((nNew = 16 .OR. nNew = 17) .AND. nJ > Len( oBrwClr:aSuperHead))
-           // 16 and 17 of the color array elements are not defined in the class Tbrowse
-	  oBrwClr:Setcolor( { nNew }, {  oBrwClr:aArray[nI][nCol]  } , nJ )       
-       ENDIF
-     NEXT
+      FOR nJ := 1 to 3  // change the color only on the 3 columns
+         IF !((nNew = 16 .OR. nNew = 17) .AND. nJ > Len( oBrwClr:aSuperHead))
+            // 16 and 17 of the color array elements are not defined in the class Tbrowse
+            oBrwClr:Setcolor( { nNew }, {  oBrwClr:aArray[nI][nCol]  } , nJ )
+         ENDIF
+      NEXT
 
-     IF nI == 3   //  меняем цвет текста шапки таблицы по 4-5 колонке
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 ) 
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 ) 
-  
-     ELSEIF nI == 4  //  меняем цвет фона шапки таблицы по 4-5 колонке
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 ) 
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 ) 
+      IF nI == 3   //  меняем цвет текста шапки таблицы по 4-5 колонке
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 )
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 )
 
-     ELSEIF nI == 9  //  меняем цвет текста подвала таблицы по 4-5 колонке
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 ) 
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 ) 
+      ELSEIF nI == 4  //  меняем цвет фона шапки таблицы по 4-5 колонке
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 )
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 )
 
-     ELSEIF nI == 10 //  меняем цвет фона подвала таблицы по 4-5 колонке
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 ) 
-       oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 ) 
-     ENDIF
+      ELSEIF nI == 9  //  меняем цвет текста подвала таблицы по 4-5 колонке
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 )
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 )
+
+      ELSEIF nI == 10 //  меняем цвет фона подвала таблицы по 4-5 колонке
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 4 )
+         oBrwClr:Setcolor( { nI }, {  oBrwClr:aArray[nI][nCol]  } , 5 )
+      ENDIF
    NEXT
 
    oBrwClr:Refresh(.T.)
    DoMethod( 'Form_Colors',"oBrwClr", "SetFocus" )  // focus in the table
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////////
-// Function: save the current color in the array TBROWSE
+   // Function: save the current color in the array TBROWSE
+
 FUNCTION RetSaveColor(oBrwClr)
+
    LOCAL oCol, aColor, nCol
 
    nCol := 1  // 2 or 3 column with color
@@ -268,6 +268,5 @@ FUNCTION RetSaveColor(oBrwClr)
    aColor[16] := oBrwClr:aSuperHead[nCol,5]  // Background color of in super header
    aColor[17] := oBrwClr:aSuperHead[nCol,4]  // Color of text in super header
 
-RETURN aColor
+   RETURN aColor
 
-///////////////////////////////////////////////////////////////////

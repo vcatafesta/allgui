@@ -1,18 +1,17 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1;
-      AT 0,0;
-      WIDTH 230 HEIGHT 300;
-      TITLE "MiniGUI Label Demo";
-      MAIN;
-      FONT "Arial" SIZE 10 BACKCOLOR YELLOW
+         AT 0,0;
+         WIDTH 230 HEIGHT 300;
+         TITLE "MiniGUI Label Demo";
+         MAIN;
+         FONT "Arial" SIZE 10 BACKCOLOR YELLOW
 
       @ 010,10 LABEL Label_1 VALUE "Label_1" WIDTH 200;
          TOOLTIP "Label 1"
@@ -45,4 +44,5 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
+

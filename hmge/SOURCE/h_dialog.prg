@@ -16,35 +16,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -53,9 +53,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 #define DS_SETFONT          64   /* User specified font for Dlg controls */
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , caption , fontname , fontsize , DialogProcedure , InitProcedure , ReleaseProcedure, modal , bold, italic )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , htooltip , mVar , k
    LOCAL FormHandle, ParentHandle, style
 
@@ -102,7 +101,8 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
          IF ValType( DialogProcedure ) == "B"
             _HMG_ModalDialogProcedure := DialogProcedure
          ENDIF
-         RETURN Nil
+
+         RETURN NIL
       ELSE
          IF ValType( InitProcedure ) == "B"
             _HMG_InitDialogProcedure := InitProcedure
@@ -122,7 +122,8 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
          _HMG_ModalDialogReturn := InitModalDialog ( ParentHandle,  Id_resource )
          _HMG_InitDialogProcedure := ""
          _HMG_ModalDialogProcedure := ""
-         RETURN Nil
+
+         RETURN NIL
       ELSE
          IF ValType( InitProcedure ) == "B"
             _HMG_InitDialogProcedure := InitProcedure
@@ -164,7 +165,7 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
 
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames [k] := FormName
       _HMG_aFormHandles  [k] :=  FormHandle
@@ -221,7 +222,7 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames , FormName )
       AAdd ( _HMG_aFormHandles , FormHandle )
@@ -273,9 +274,9 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1, {} )
       AAdd ( _HMG_aFormMiscData2, '' )
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-#endif
+      #endif
 
    ENDIF
 
@@ -289,11 +290,10 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
       _HMG_aDialogTemplate[1] := &mVar.
    ENDIF
 
-RETURN ( FormHandle )
+   RETURN ( FormHandle )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginDialog( name, parent, Id_resource, x, y, w, h, caption, fontname, fontsize, dialogproc, initproc, releaseproc, modal, bold, italic, underline, strikeout )
-*-----------------------------------------------------------------------------*
+
    LOCAL FontHandle
 
    IF _HMG_BeginDialogActive
@@ -322,11 +322,10 @@ FUNCTION _BeginDialog( name, parent, Id_resource, x, y, w, h, caption, fontname,
 
    _DefineDialog ( name, parent, Id_resource, x, y, w, h, caption, fontname, fontsize, dialogproc, initproc, releaseproc, modal, bold, italic, underline, strikeout )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndDialog()
-*-----------------------------------------------------------------------------*
+
    LOCAL FormHandle, ParentForm, nId, n, k, k_old, ControlHandle, blInit, FontHandle
 
    IF  _HMG_DialogInMemory .AND. Len( _HMG_aDialogTemplate ) > 0
@@ -405,12 +404,12 @@ FUNCTION _EndDialog()
 
    _PopEventInfo()
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL ret := FALSE, i, ControlHandle
+
    _HMG_ActiveDlgProcHandle    := hwndDlg
    _HMG_ActiveDlgProcMsg       := nMsg
    _HMG_ActiveDlgProcId        := wParam
@@ -424,7 +423,7 @@ FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
          ret := TRUE
       ENDIF
    CASE nMsg == WM_DESTROY
-      EraseDialog( hwndDlg )
+      ERASEDialog( hwndDlg )
       ret := TRUE
    CASE nMsg == WM_CLOSE
       i := AScan ( _HMG_aFormhandles, hwndDlg )
@@ -433,7 +432,7 @@ FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
             Eval( _HMG_aFormReleaseProcedure [i] )
          ENDIF
       ENDIF
-      EraseDialog( hwndDlg )
+      ERASEDialog( hwndDlg )
       ret := TRUE
    CASE nMsg == WM_COMMAND
       i := AScan ( _HMG_aFormhandles, hwndDlg )  // find DialogProcedure
@@ -469,11 +468,10 @@ FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
    _HMG_ActiveDlgProcId        := 0
    _HMG_ActiveDlgProcNotify    := 0
 
-RETURN ret
+   RETURN ret
 
-*-----------------------------------------------------------------------------*
 FUNCTION ModalDialogProc( hwndDlg, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL ret
 
    HB_SYMBOL_UNUSED( lParam )
@@ -490,57 +488,56 @@ FUNCTION ModalDialogProc( hwndDlg, nMsg, wParam, lParam )
       ENDIF
       ret := TRUE
    CASE nMsg == WM_CLOSE
-      EndDialog( hwndDlg, 0 )
-      ret := TRUE
-   CASE nMsg == WM_COMMAND
-      DO CASE
-      CASE LOWORD( wParam ) == IDOK .AND. HIWORD( wParam ) == BN_CLICKED
-         EndDialog( hwndDlg, IDOK )
-         ret := TRUE
-      CASE LOWORD( wParam ) == IDCANCEL .AND. HIWORD( wParam ) == BN_CLICKED
-         EndDialog( hwndDlg, IDCANCEL )
-         ret := TRUE
-      CASE LOWORD( wParam ) == IDIGNORE .AND. HIWORD( wParam ) == BN_CLICKED
-         ret := TRUE
-      OTHERWISE
-         IF ValType( _HMG_ModalDialogProcedure ) == 'B'
-            Eval( _HMG_ModalDialogProcedure, hwndDlg, nMsg, LOWORD( wParam ), HIWORD( wParam ) )
-         ENDIF
-         ret := TRUE
-      ENDCASE
-   OTHERWISE
-      ret := FALSE
-   ENDCASE
-   _HMG_ActiveDlgProcHandle    := 0
-   _HMG_ActiveDlgProcMsg       := 0
-   _HMG_ActiveDlgProcId        := 0
-   _HMG_ActiveDlgProcNotify    := 0
+   EndDialog( hwndDlg, 0 )
+   ret := TRUE
+CASE nMsg == WM_COMMAND
+   DO CASE
+   CASE LOWORD( wParam ) == IDOK .AND. HIWORD( wParam ) == BN_CLICKED
+   EndDialog( hwndDlg, IDOK )
+   ret := TRUE
+CASE LOWORD( wParam ) == IDCANCEL .AND. HIWORD( wParam ) == BN_CLICKED
+EndDialog( hwndDlg, IDCANCEL )
+ret := TRUE
+CASE LOWORD( wParam ) == IDIGNORE .AND. HIWORD( wParam ) == BN_CLICKED
+ret := TRUE
+OTHERWISE
+IF ValType( _HMG_ModalDialogProcedure ) == 'B'
+   Eval( _HMG_ModalDialogProcedure, hwndDlg, nMsg, LOWORD( wParam ), HIWORD( wParam ) )
+ENDIF
+ret := TRUE
+ENDCASE
+OTHERWISE
+ret := FALSE
+ENDCASE
+_HMG_ActiveDlgProcHandle    := 0
+_HMG_ActiveDlgProcMsg       := 0
+_HMG_ActiveDlgProcId        := 0
+_HMG_ActiveDlgProcNotify    := 0
 
 RETURN ret
 
-*-----------------------------------------------------------------------------*
 FUNCTION DisableDialogItem ( hDlg, Id )
-*-----------------------------------------------------------------------------*
+
    LOCAL ControlHandle := GetDialogITemHandle( hDlg, Id )
+
    IF ControlHandle > 0
       DisableWindow( ControlHandle )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION EnableDialogItem ( hDlg, Id )
-*-----------------------------------------------------------------------------*
+
    LOCAL ControlHandle := GetDialogITemHandle( hDlg, Id )
+
    IF ControlHandle > 0
       EnableWindow( ControlHandle )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION EraseDialog( hwndDlg )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, x, ControlCount, mVar
 
    i := AScan ( _HMG_aFormhandles, hwndDlg )
@@ -613,18 +610,18 @@ FUNCTION EraseDialog( hwndDlg )
       DestroyWindow( hwndDlg )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _ReleaseDialog( hwndDlg )
-*-----------------------------------------------------------------------------*
+
    DEFAULT  hwndDlg TO _HMG_ActiveDlgProcHandle
    IF hwndDlg != 0
       IF _HMG_ActiveDlgProcModal
-         EndDialog( hwndDlg, 0 )
-      ELSE
-         EraseDialog( hwndDlg )
-      ENDIF
+      EndDialog( hwndDlg, 0 )
+   ELSE
+      ERASEDialog( hwndDlg )
    ENDIF
+ENDIF
 
-RETURN Nil
+RETURN NIL
+

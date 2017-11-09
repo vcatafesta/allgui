@@ -4,22 +4,20 @@
 
 #include "minigui.ch"
 
-
 #xcommand SHOW CONTEXTMENU OF <parent> ;
-      [ AT <nRow>, <nCol> ] ;
-      [ <centered: CENTERED> ] ;
-      => ;
-      _ShowContextMenu( <"parent">, <nRow>, <nCol>, <.centered.> )
+   [ AT <nRow>, <nCol> ] ;
+   [ <centered: CENTERED> ] ;
+   => ;
+   _ShowContextMenu( <"parent">, <nRow>, <nCol>, <.centered.> )
 
-
-Procedure Main
+PROCEDURE Main
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'Dynamic Context Menu Demo ' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Dynamic Context Menu Demo ' ;
+         MAIN
 
       DEFINE MAIN MENU
          POPUP "&File"
@@ -43,23 +41,22 @@ Procedure Main
 
    ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
+PROCEDURE MenuProc()
 
-Procedure MenuProc()
-
-   If This.Name == '01'
+   IF This.Name == '01'
       MsgInfo ('Action 01')
-   ElseIf This.Name == '02'
+   ELSEIF This.Name == '02'
       MsgInfo ('Action 02')
-   ElseIf This.Name == '03'
+   ELSEIF This.Name == '03'
       MsgInfo ('Action 03')
-   EndIf
+   ENDIF
 
-RETURN
-
+   RETURN
 
 FUNCTION DynamicContextMenu(typ)
+
    LOCAL N
    LOCAL m_char
 
@@ -73,31 +70,31 @@ FUNCTION DynamicContextMenu(typ)
    END MENU
 
    DO CASE
-      CASE typ == 1
-         SHOW CONTEXTMENU OF Win_1
-      CASE typ == 2
-         SHOW CONTEXTMENU OF Win_1 CENTERED
-      CASE typ == 3
-         SHOW CONTEXTMENU OF Win_1 AT GetDesktopHeight()/2, GetDesktopWidth()/2
-  ENDCASE
+   CASE typ == 1
+      SHOW CONTEXTMENU OF Win_1
+   CASE typ == 2
+      SHOW CONTEXTMENU OF Win_1 CENTERED
+   CASE typ == 3
+      SHOW CONTEXTMENU OF Win_1 AT GetDesktopHeight()/2, GetDesktopWidth()/2
+   ENDCASE
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION _ShowContextMenu(ParentFormName, nRow, nCol, lCentered)
+
    LOCAL xContextMenuParentHandle := 0
    LOCAL aRow := GetCursorPos()
 
    DEFAULT nRow := 0, nCol := 0, ParentFormName := ""
 
-   If .Not. _IsWindowDefined (ParentFormName)
+   IF .Not. _IsWindowDefined (ParentFormName)
       xContextMenuParentHandle := _HMG_xContextMenuParentHandle
-   else
+   ELSE
       xContextMenuParentHandle := GetFormHandle ( ParentFormName )
-   Endif
-   if xContextMenuParentHandle == 0
+   ENDIF
+   IF xContextMenuParentHandle == 0
       MsgMiniGuiError("Context Menu is not defined. Program terminated")
-   endif
+   ENDIF
    IF lCentered
       nCol := GetWindowCol(xContextMenuParentHandle) + GetWindowWidth(xContextMenuParentHandle)/2 - 60
       nRow := GetWindowRow(xContextMenuParentHandle) + GetWindowHeight(xContextMenuParentHandle)/2 - GetTitleHeight() - 5
@@ -108,4 +105,5 @@ FUNCTION _ShowContextMenu(ParentFormName, nRow, nCol, lCentered)
 
    TrackPopupMenu ( _HMG_xContextMenuHandle , nCol , nRow , xContextMenuParentHandle )
 
-RETURN Nil
+   RETURN NIL
+

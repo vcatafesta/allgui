@@ -1,154 +1,136 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-
 /******
-*
 *       Template for application
-*
 */
 
-Procedure Main
+PROCEDURE Main
 
-  SET FONT TO GetDefaultFontName(), GetDefaultFontSize()
+   SET FONT TO GetDefaultFontName(), GetDefaultFontSize()
 
-  SET DEFAULT ICON TO "MAIN"
+   SET DEFAULT ICON TO "MAIN"
 
-  SET CENTERWINDOW RELATIVE PARENT
+   SET CENTERWINDOW RELATIVE PARENT
 
-  DEFINE WINDOW MainWin ;
+   DEFINE WINDOW MainWin ;
          MAIN ;
          CLIENTAREA 600, 400 ;
          TITLE 'Template Demo' ;
          BKBRUSH 'PAPER' ;
          ICON "MAIN"
 
-         CreateMainMenu()
+      CreateMainMenu()
 
-         DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
+      DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
 
-         END STATUSBAR
+      END STATUSBAR
 
-         ON KEY ALT+X ACTION { || QuickExit() }
+      ON KEY ALT+X ACTION { || QuickExit() }
 
-  END WINDOW
+   END WINDOW
 
-  CENTER WINDOW MainWin
-  ACTIVATE WINDOW MainWin
+   CENTER WINDOW MainWin
+   ACTIVATE WINDOW MainWin
 
-Return
+   RETURN
 
-****** End of Main ******
+   ****** End of Main ******
 
+   /******
+   *       CreateMainMenu()
+   *       Cteate Main Menu
+   */
 
-/******
-*
-*       CreateMainMenu()
-*
-*       Cteate Main Menu
-*
-*/
+STATIC PROCEDURE CreateMainMenu
 
-Static Procedure CreateMainMenu
+   DEFINE MAIN MENU OF MainWin
 
-  DEFINE MAIN MENU OF MainWin
-          
-     POPUP '&File'
-        ITEM '&Child Window' ACTION Child_Click()
-        ITEM '&Modal Window' ACTION Modal_Click()
-        SEPARATOR
-        ITEM 'E&xit' + Chr(9) + 'Alt+X' ACTION { || QuickExit() }
-     END POPUP
-                  
-  END MENU
+      POPUP '&File'
+         ITEM '&Child Window' ACTION Child_Click()
+         ITEM '&Modal Window' ACTION Modal_Click()
+         SEPARATOR
+         ITEM 'E&xit' + Chr(9) + 'Alt+X' ACTION { || QuickExit() }
+      END POPUP
 
-Return
+   END MENU
 
-****** End of CreateMainMenu ******
+   RETURN
 
+   ****** End of CreateMainMenu ******
 
-/******
-*
-*       QuickExit()
-*
-*       Exit from application
-*
-*/
+   /******
+   *       QuickExit()
+   *       Exit from application
+   */
 
-Static Procedure QuickExit
+STATIC PROCEDURE QuickExit
 
-  QUIT
+   QUIT
 
-Return
+   RETURN
 
-***** End of QuickExit ******
+   ***** End of QuickExit ******
 
+   /******
+   *       Child_Click()
+   *       Cteate Child Window
+   */
 
-/******
-*
-*       Child_Click()
-*
-*       Cteate Child Window
-*
-*/
+PROCEDURE Child_Click
 
-Procedure Child_Click
+   IF IsWindowDefined ( ChildWin )
+      DoMethod ( "ChildWin", "SetFocus" )
 
-IF IsWindowDefined ( ChildWin )
-   DoMethod ( "ChildWin", "SetFocus" )
-   Return
-ENDIF
+      RETURN
+   ENDIF
 
-DEFINE WINDOW ChildWin ;
-   CHILD ;
-   CLIENTAREA 400, 300 ;
-   MINWIDTH 200 ;
-   MINHEIGHT 200 ;
-   TITLE 'Child Window'
+   DEFINE WINDOW ChildWin ;
+         CHILD ;
+         CLIENTAREA 400, 300 ;
+         MINWIDTH 200 ;
+         MINHEIGHT 200 ;
+         TITLE 'Child Window'
 
-   ON KEY ESCAPE ACTION ThisWindow.Release()
+      ON KEY ESCAPE ACTION ThisWindow.Release()
 
-END WINDOW
+   END WINDOW
 
-ChildWin.Center()
+   ChildWin.Center()
 
-ChildWin.Activate()
+   ChildWin.Activate()
 
-Return
+   RETURN
 
-***** End of Child_Click ******
+   ***** End of Child_Click ******
 
+   /******
+   *       Modal_Click()
+   *       Cteate Modal Window
+   */
 
-/******
-*
-*       Modal_Click()
-*
-*       Cteate Modal Window
-*
-*/
+PROCEDURE Modal_Click
 
-Procedure Modal_Click
+   DEFINE WINDOW ModalWin ;
+         MODAL ;
+         CLIENTAREA 400, 300 ;
+         MINWIDTH 200 ;
+         MINHEIGHT 200 ;
+         TITLE 'Modal Window'
 
-DEFINE WINDOW ModalWin ;
-   MODAL ;
-   CLIENTAREA 400, 300 ;
-   MINWIDTH 200 ;
-   MINHEIGHT 200 ;
-   TITLE 'Modal Window'
+      ON KEY ESCAPE ACTION ThisWindow.Release()
 
-   ON KEY ESCAPE ACTION ThisWindow.Release()
+   END WINDOW
 
-END WINDOW
+   ModalWin.Center()
 
-ModalWin.Center()
+   ModalWin.Activate()
 
-ModalWin.Activate()
+   RETURN
 
-Return
+   ***** End of Modal_Click ******
 
-***** End of Modal_Click ******

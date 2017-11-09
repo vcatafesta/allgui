@@ -1,8 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -21,102 +19,93 @@ ANNOUNCE RDDSYS
 #define ID_CHART   1001
 #define ID_CHART_2 1002
 
-Static oRMChart, lDraw := .F.
+STATIC oRMChart, lDraw := .F.
 
 SET PROCEDURE TO rmchart.prg
 
-*-----------------------------------------------------------------------------*
-Procedure Main
-*-----------------------------------------------------------------------------*
+PROCEDURE Main
 
-	SET FONT TO "Times New Roman" , 10
+   SET FONT TO "Times New Roman" , 10
 
-        oRMChart := RMChart():New()
+   oRMChart := RMChart():New()
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 680 ;
-		HEIGHT 550 ;
-		TITLE APP_TITLE ;
-		ICON "demo.ico" ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		ON INTERACTIVECLOSE iif( MsgYesNo("Really want to quit ?", "Exit"), EndWindow( .F. ), .F. )
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 680 ;
+         HEIGHT 550 ;
+         TITLE APP_TITLE ;
+         ICON "demo.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INTERACTIVECLOSE iif( MsgYesNo("Really want to quit ?", "Exit"), EndWindow( .F. ), .F. )
 
-		@ 475, 100 BUTTON Btn_Chart ;
-			CAPTION "RMCHART" ;
-			ACTION Chart( thiswindow.Handle ) ;
-			WIDTH 150 HEIGHT 30 DEFAULT
+      @ 475, 100 BUTTON Btn_Chart ;
+         CAPTION "RMCHART" ;
+         ACTION Chart( thiswindow.Handle ) ;
+         WIDTH 150 HEIGHT 30 DEFAULT
 
-		@ 475, 270 BUTTON Btn_Print ;
-			CAPTION "PRINT" ;
-			ACTION PrintChart( thiswindow.Handle ) ;
-			WIDTH 150 HEIGHT 30
+      @ 475, 270 BUTTON Btn_Print ;
+         CAPTION "PRINT" ;
+         ACTION PrintChart( thiswindow.Handle ) ;
+         WIDTH 150 HEIGHT 30
 
-		@ 475, 440 BUTTON Btn_Cancel ;
-			CAPTION "Close" ;
-			ACTION EndWindow() ;
-			WIDTH 150 HEIGHT 30
+      @ 475, 440 BUTTON Btn_Cancel ;
+         CAPTION "Close" ;
+         ACTION EndWindow() ;
+         WIDTH 150 HEIGHT 30
 
-		ON KEY ESCAPE ACTION Win_1.Btn_Cancel.OnClick
+      ON KEY ESCAPE ACTION Win_1.Btn_Cancel.OnClick
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure Chart( hWnd )
-*-----------------------------------------------------------------------------*
+PROCEDURE Chart( hWnd )
 
-    IF !lDraw
-        lDraw := .T.
-        Graphic10( hWnd, oRMChart, ID_CHART )
-        oRMChart:Draw( ID_CHART )
-    ENDIF
+   IF !lDraw
+      lDraw := .T.
+      Graphic10( hWnd, oRMChart, ID_CHART )
+      oRMChart:Draw( ID_CHART )
+   ENDIF
 
-Return
+   RETURN
 
-#define RMC_PORTRAIT  1
-#define RMC_LANDSCAPE 2
+   #define RMC_PORTRAIT  1
+   #define RMC_LANDSCAPE 2
 
-*-----------------------------------------------------------------------------*
-Procedure PrintChart( hWnd )
-*-----------------------------------------------------------------------------*
+PROCEDURE PrintChart( hWnd )
 
    Graphic10( hWnd, oRMChart, ID_CHART_2, 1 )
 
-    IF CallDll32( "RMC_DRAW2PRINTER", "RMCHART.DLL", ID_CHART_2, RMC_LANDSCAPE, 10, 10, 220, 150, RMC_EMFPLUS ) < 0
+   IF CallDll32( "RMC_DRAW2PRINTER", "RMCHART.DLL", ID_CHART_2, RMC_LANDSCAPE, 10, 10, 220, 150, RMC_EMFPLUS ) < 0
 
-       MsgStop("Print error!")
-       
-    ENDIF
+      MsgStop("Print error!")
+
+   ENDIF
 
    oRmChart:DeleteChart( ID_CHART_2 )
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure endwindow( lClose )
-*-----------------------------------------------------------------------------*
-    Default lClose To .T.
+PROCEDURE endwindow( lClose )
 
-    IF lDraw
-        oRmChart:DeleteChart( ID_CHART )
-        oRMChart:Destroy()
-    ENDIF
+   DEFAULT lClose To .T.
 
-    IF lClose
-        Win_1.Release
-    ENDIF
+   IF lDraw
+      oRmChart:DeleteChart( ID_CHART )
+      oRMChart:Destroy()
+   ENDIF
 
-Return
+   IF lClose
+      Win_1.Release
+   ENDIF
 
-*-----------------------------------------------------------------------------*
+   RETURN
+
 FUNCTION Graphic10( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
-*-----------------------------------------------------------------------------*
 
    LOCAL aPPC, aData, aData2, sTemp, aXPos, aYPos
 
@@ -139,65 +128,65 @@ FUNCTION Graphic10( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
 
    ************** Add label axis to region 1 *****************************
    sTemp := "1999*2000*2001*2002*2003*2004*2005*2006"
-   oRMChart:AddLabelAxis(nIdChart,1, sTemp,1,8,RMC_LABELAXISBOTTOM,8,COLOR_DARK_BLUE,RMC_TEXTCENTER,COLOR_DARK_SALMON,RMC_LINESTYLEDOT,"") 
+   oRMChart:AddLabelAxis(nIdChart,1, sTemp,1,8,RMC_LABELAXISBOTTOM,8,COLOR_DARK_BLUE,RMC_TEXTCENTER,COLOR_DARK_SALMON,RMC_LINESTYLEDOT,"")
 
-   ************** Add Series 1 to region 1 ******************************* 
+   ************** Add Series 1 to region 1 *******************************
    ****** Read points per column ******
    aPPC := { 12 }
    ****** Read data values ******
    aData := { ;
-    4.75 , 4.75 , 4.75 , 4.75 , 4.75 , ;
-    5 , 5 , 5.25 , 5.25 , 5.25 , ;
-    5.5 , 5.5 , 5.5 , 5.75 , 6 , ;
-    6 , 6.5 , 6.5 , 6.5 , 6.5 , ;
-    6.5 , 6.5 , 6.5 , 6.5 , 5.5 , ;
-    5.5 , 5 , 4.5 , 4 , 3.75 , ;
-    3.75 , 3.5 , 3 , 2.5 , 2 , ;
-    1.75 , 1.75 , 1.75 , 1.75 , ;
-    1.75 , 1.75 , 1.75 , 1.75 , ;
-    1.75 , 1.75 , 1.75 , 1.25 , ;
-    1.25 , 1.25 , 1.25 , 1.25 , ;
-    1.25 , 1.25 , 1 , 1 , 1 , ;
-    1 , 1 , 1 , 1 , 1 , ;
-    1 , 1 , 1 , 1 , 1 , ;
-    1 , 1.25 , 1.5 , 1.75 , 2 , ;
-    2.25 , 2.25 , 2.5 , 2.75 , ;
-    2.75 , 3 , 3.25 , 3.25 , 3.5 , ;
-    3.75 , 3.75 , 4 , 4.25 , 4.5 , ;
-    4.5 , 4.75 , 4.75 , 5 , 5.25 , ;
-    5.25 , 5.25 , 5.25 , 5.25 , 5.25 , 5.25 }
+      4.75 , 4.75 , 4.75 , 4.75 , 4.75 , ;
+      5 , 5 , 5.25 , 5.25 , 5.25 , ;
+      5.5 , 5.5 , 5.5 , 5.75 , 6 , ;
+      6 , 6.5 , 6.5 , 6.5 , 6.5 , ;
+      6.5 , 6.5 , 6.5 , 6.5 , 5.5 , ;
+      5.5 , 5 , 4.5 , 4 , 3.75 , ;
+      3.75 , 3.5 , 3 , 2.5 , 2 , ;
+      1.75 , 1.75 , 1.75 , 1.75 , ;
+      1.75 , 1.75 , 1.75 , 1.75 , ;
+      1.75 , 1.75 , 1.75 , 1.25 , ;
+      1.25 , 1.25 , 1.25 , 1.25 , ;
+      1.25 , 1.25 , 1 , 1 , 1 , ;
+      1 , 1 , 1 , 1 , 1 , ;
+      1 , 1 , 1 , 1 , 1 , ;
+      1 , 1.25 , 1.5 , 1.75 , 2 , ;
+      2.25 , 2.25 , 2.5 , 2.75 , ;
+      2.75 , 3 , 3.25 , 3.25 , 3.5 , ;
+      3.75 , 3.75 , 4 , 4.25 , 4.5 , ;
+      4.5 , 4.75 , 4.75 , 5 , 5.25 , ;
+      5.25 , 5.25 , 5.25 , 5.25 , 5.25 , 5.25 }
 
    oRMChart:AddLineSeries(nIdChart,1, aData, 96,aPPC,1,RMC_LINE,RMC_LINE_CABLE_SHADOW,RMC_LSTYLE_STAIR,FALSE, ;
-                                    COLOR_GREEN,RMC_SYMBOL_NONE,1,RMC_VLABEL_NONE,RMC_HATCHBRUSH_OFF)
+      COLOR_GREEN,RMC_SYMBOL_NONE,1,RMC_VLABEL_NONE,RMC_HATCHBRUSH_OFF)
 
    ************** Add Series 2 to region 1 *******************************
    ****** Read data values ******
    aData2 := { ;
-    3 , 3 , 3 , 2.5 , 2.5 , ;
-    2.5 , 2.5 , 2.5 , 2.5 , 2.5 , ;
-    3 , 3 , 3 , 3.25 , 3.5 , ;
-    3.75 , 3.75 , 4.25 , 4.25 , ;
-    4.5 , 4.5 , 4.75 , 4.75 , 4.75 , ;
-    4.75 , 4.75 , 4.75 , 4.75 , ;
-    4.5 , 4.5 , 4.5 , 4.25 , 3.75 , ;
-    3.75 , 3.25 , 3.25 , 3.25 , ;
-    3.25 , 3.25 , 3.25 , 3.25 , ;
-    3.25 , 3.25 , 3.25 , 3.25 , ;
-    3.25 , 3.25 , 2.75 , 2.75 , ;
-    2.75 , 2.5 , 2.5 , 2.5 , 2 , ;
-    2 , 2 , 2 , 2 , 2 , ;
-    2 , 2 , 2 , 2 , 2 , ;
-    2 , 2 , 2 , 2 , 2 , ;
-    2 , 2 , 2 , 2 , 2 , ;
-    2 , 2 , 2 , 2 , 2 , ;
-    2 , 2 , 2 , 2 , 2.25 , ;
-    2.25 , 2.25 , 2.5 , 2.5 , 2.5 , ;
-    2.75 , 2.75 , 3 , 3 , 3.25 , 3.25 , 3.5 }
+      3 , 3 , 3 , 2.5 , 2.5 , ;
+      2.5 , 2.5 , 2.5 , 2.5 , 2.5 , ;
+      3 , 3 , 3 , 3.25 , 3.5 , ;
+      3.75 , 3.75 , 4.25 , 4.25 , ;
+      4.5 , 4.5 , 4.75 , 4.75 , 4.75 , ;
+      4.75 , 4.75 , 4.75 , 4.75 , ;
+      4.5 , 4.5 , 4.5 , 4.25 , 3.75 , ;
+      3.75 , 3.25 , 3.25 , 3.25 , ;
+      3.25 , 3.25 , 3.25 , 3.25 , ;
+      3.25 , 3.25 , 3.25 , 3.25 , ;
+      3.25 , 3.25 , 2.75 , 2.75 , ;
+      2.75 , 2.5 , 2.5 , 2.5 , 2 , ;
+      2 , 2 , 2 , 2 , 2 , ;
+      2 , 2 , 2 , 2 , 2 , ;
+      2 , 2 , 2 , 2 , 2 , ;
+      2 , 2 , 2 , 2 , 2 , ;
+      2 , 2 , 2 , 2 , 2 , ;
+      2 , 2 , 2 , 2 , 2.25 , ;
+      2.25 , 2.25 , 2.5 , 2.5 , 2.5 , ;
+      2.75 , 2.75 , 3 , 3 , 3.25 , 3.25 , 3.5 }
 
    oRMChart:AddLineSeries(nIdChart,1, aData2, 96,aPPC,1,RMC_LINE,RMC_LINE_CABLE_SHADOW,RMC_LSTYLE_STAIR,FALSE, ;
-                                    COLOR_GOLDENROD,RMC_SYMBOL_NONE,1,RMC_VLABEL_NONE,RMC_HATCHBRUSH_OFF)
+      COLOR_GOLDENROD,RMC_SYMBOL_NONE,1,RMC_VLABEL_NONE,RMC_HATCHBRUSH_OFF)
 
-   ************** Add CustomObjects ******************************* 
+   ************** Add CustomObjects *******************************
    aXPos := Array(2)
    aXPos[1] := 216 ; aXPos[2] := 287
    aYPos := Array(2)
@@ -215,7 +204,8 @@ FUNCTION Graphic10( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
 
    sTemp := "Euroland (Prime Rate)"
    oRMChart:COText(nIdChart, 4, sTemp, 295, 185, 0, 0, RMC_BOX_NONE, COLOR_DEFAULT, COLOR_DEFAULT, 0, RMC_LINE_HORIZONTAL, COLOR_DEFAULT, "00BC")
- 
+
    oRMChart:SetWatermark(RMC_USERWM,RMC_USERWMCOLOR,RMC_USERWMLUCENT,RMC_USERWMALIGN,RMC_USERFONTSIZE)
 
    RETURN NIL
+

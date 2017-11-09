@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2002-2009 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2002-2009 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -14,372 +12,363 @@
 #define COPYRIGHT ' Grigory Filatov, 2002-2009'
 #define NTRIM( n ) LTrim( Str( n ) )
 
-Static aAllPrinters := {}, cDefaultPrinter := "", ;
-	lShowWindow := .T., nTop := 0, nLeft := 0, cCfgFile := "SwitchPrinter.ini"
+STATIC aAllPrinters := {}, cDefaultPrinter := "", ;
+   lShowWindow := .T., nTop := 0, nLeft := 0, cCfgFile := "SwitchPrinter.ini"
 
-*--------------------------------------------------------*
-Procedure Main( lStartUp )
-*--------------------------------------------------------*
-	Local lWinRun := .F.
-	
-	SET MULTIPLE OFF WARNING
-	
-	If !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
-		!Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Switch Printer" ))
-		lWinRun := .T.
-	EndIf
+PROCEDURE Main( lStartUp )
 
-	cCfgFile := cFilePath(GetExeFileName()) + "\" + cCfgFile
-	IF FILE(cCfgFile)
-		BEGIN INI FILE cCfgFile
-			GET lShowWindow SECTION "Position" ENTRY "ShowWindow" DEFAULT lShowWindow
-			GET nTop SECTION "Position" ENTRY "Top" DEFAULT nTop
-			GET nLeft SECTION "Position" ENTRY "Left" DEFAULT nLeft
-		END INI
-	ENDIF
+   LOCAL lWinRun := .F.
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		NOTIFYICON "MAINICON" ;
-		NOTIFYTOOLTIP PROGRAM ;
-		ON NOTIFYCLICK SwitchMenu() ;
-		ON INIT IF(lShowWindow, SetFloatWin(), ) ;
-		ON RELEASE SavePos(.f.)
-		
-	DEFINE NOTIFY MENU
-		ITEM '&About...'		ACTION ShellAbout( "", ;
-				PROGRAM + VERSION + CRLF + ;
-				"Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAINICON", 32, 32 ) )
-		SEPARATOR
+   SET MULTIPLE OFF WARNING
 
-		ITEM 'Auto&Run'		ACTION {|| lWinRun := !lWinRun, ;
-				Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) } ;
-				NAME Auto_Run
-		SEPARATOR
+   IF !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
+         !Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Switch Printer" ))
+      lWinRun := .T.
+   ENDIF
 
-		ITEM '&Show float window'	ACTION {|| lShowWindow := !lShowWindow, SetFloatWin() } ;
-				NAME Float_Win
+   cCfgFile := cFilePath(GetExeFileName()) + "\" + cCfgFile
+   IF FILE(cCfgFile)
+      BEGIN INI FILE cCfgFile
+         GET lShowWindow SECTION "Position" ENTRY "ShowWindow" DEFAULT lShowWindow
+         GET nTop SECTION "Position" ENTRY "Top" DEFAULT nTop
+         GET nLeft SECTION "Position" ENTRY "Left" DEFAULT nLeft
+      END INI
+   ENDIF
 
-		SEPARATOR	
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         NOTIFYICON "MAINICON" ;
+         NOTIFYTOOLTIP PROGRAM ;
+         ON NOTIFYCLICK SwitchMenu() ;
+         ON INIT IF(lShowWindow, SetFloatWin(), ) ;
+         ON RELEASE SavePos(.f.)
 
-		ITEM 'E&xit'			ACTION Form_1.Release
-	END MENU
+      DEFINE NOTIFY MENU
+         ITEM '&About...'      ACTION ShellAbout( "", ;
+            PROGRAM + VERSION + CRLF + ;
+            "Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAINICON", 32, 32 ) )
+         SEPARATOR
 
-	Form_1.Auto_Run.Checked := lWinRun
-	Form_1.Float_Win.Checked := lShowWindow
+         ITEM 'Auto&Run'      ACTION {|| lWinRun := !lWinRun, ;
+            Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) } ;
+            NAME Auto_Run
+         SEPARATOR
 
-	END WINDOW
+         ITEM '&Show float window'   ACTION {|| lShowWindow := !lShowWindow, SetFloatWin() } ;
+            NAME Float_Win
 
-	ACTIVATE WINDOW Form_1
+         SEPARATOR
 
-Return
+         ITEM 'E&xit'         ACTION Form_1.Release
+      END MENU
 
-*--------------------------------------------------------*
-Procedure SwitchMenu()
-*--------------------------------------------------------*
-	Local nItem, cItem, cAction, cActCheck, nActCheck := 1, ;
-		aPos, hMainWnd := GetFormHandle("Form_1")
+      Form_1.Auto_Run.Checked := lWinRun
+      Form_1.Float_Win.Checked := lShowWindow
 
-	aAllPrinters := aAllPrinters()
+   END WINDOW
 
-	DEFINE CONTEXT MENU OF Form_1
+   ACTIVATE WINDOW Form_1
 
-		For nItem := 1 To Len(aAllPrinters)
-			if aAllPrinters[nItem][3]
-				nActCheck := nItem
-			endif
-			cAction := 'SetDefault(' + NTRIM(nItem) + ')'
-			cItem := 'Item_' + NTRIM(nItem)
-			ITEM "&"+aAllPrinters[nItem][1]	ACTION &cAction ;
-				NAME &cItem
-		Next
+   RETURN
 
-		IF Len(aAllPrinters) = 0
-			ITEM '&Printers is NOT installed'	ACTION _dummy()
-		ELSE
-			SEPARATOR
-			ITEM '&Close Menu'			ACTION _dummy()
-		ENDIF
+PROCEDURE SwitchMenu()
 
-	END MENU
+   LOCAL nItem, cItem, cAction, cActCheck, nActCheck := 1, ;
+      aPos, hMainWnd := GetFormHandle("Form_1")
 
-	IF Len(aAllPrinters) > 0
-		cActCheck := 'Item_' + NTRIM(nActCheck)
-		SetProperty("Form_1", cActCheck, "Checked", .T.)
-		Form_1.NotifyTooltip := aAllPrinters[nActCheck][1]
-	ENDIF
+   aAllPrinters := aAllPrinters()
 
-	aPos := GetCursorPos()
+   DEFINE CONTEXT MENU OF Form_1
 
-	TrackPopupMenu ( _hmg_aFormContextMenuHandle[Ascan( _hmg_aFormhandles, hMainWnd )], ;
-			aPos[2], aPos[1], hMainWnd )
+      FOR nItem := 1 To Len(aAllPrinters)
+         IF aAllPrinters[nItem][3]
+            nActCheck := nItem
+         ENDIF
+         cAction := 'SetDefault(' + NTRIM(nItem) + ')'
+         cItem := 'Item_' + NTRIM(nItem)
+         ITEM "&"+aAllPrinters[nItem][1]   ACTION &cAction ;
+            NAME &cItem
+      NEXT
 
-Return
+      IF Len(aAllPrinters) = 0
+         ITEM '&Printers is NOT installed'   ACTION _dummy()
+      ELSE
+         SEPARATOR
+         ITEM '&Close Menu'         ACTION _dummy()
+      ENDIF
 
-*--------------------------------------------------------*
-Procedure SetFloatWin()
-*--------------------------------------------------------*
-   Local n, btn, cAction, nCheck := 1, nCnt := 1
+   END MENU
+
+   IF Len(aAllPrinters) > 0
+      cActCheck := 'Item_' + NTRIM(nActCheck)
+      SetProperty("Form_1", cActCheck, "Checked", .T.)
+      Form_1.NotifyTooltip := aAllPrinters[nActCheck][1]
+   ENDIF
+
+   aPos := GetCursorPos()
+
+   TrackPopupMenu ( _hmg_aFormContextMenuHandle[Ascan( _hmg_aFormhandles, hMainWnd )], ;
+      aPos[2], aPos[1], hMainWnd )
+
+   RETURN
+
+PROCEDURE SetFloatWin()
+
+   LOCAL n, btn, cAction, nCheck := 1, nCnt := 1
 
    IF !IsWindowDefined( Form_2 )
 
-	IF Len( aAllPrinters := aAllPrinters() ) == 0
-		MsgStop( 'Printers is NOT installed!' )
-		Return
-	ENDIF
-	nCnt += Len(aAllPrinters)
+      IF Len( aAllPrinters := aAllPrinters() ) == 0
+         MsgStop( 'Printers is NOT installed!' )
 
-	DEFINE WINDOW Form_2 			;
-		AT nTop,nLeft 			;
-		WIDTH 0 HEIGHT 42			;
-		CHILD NOCAPTION NOMINIMIZE		;
-		NOMAXIMIZE NOSIZE			;
-		TOPMOST				;
-		ON RELEASE ( nTop := GetWindowRow( GetFormHandle("Form_2") ), ;
-				nLeft := GetWindowCol( GetFormHandle("Form_2") ), ;
-				SavePos() )
+         RETURN
+      ENDIF
+      nCnt += Len(aAllPrinters)
 
-		DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 38, 32 FLAT RIGHTTEXT
+      DEFINE WINDOW Form_2          ;
+            AT nTop,nLeft          ;
+            WIDTH 0 HEIGHT 42         ;
+            CHILD NOCAPTION NOMINIMIZE      ;
+            NOMAXIMIZE NOSIZE         ;
+            TOPMOST            ;
+            ON RELEASE ( nTop := GetWindowRow( GetFormHandle("Form_2") ), ;
+            nLeft := GetWindowCol( GetFormHandle("Form_2") ), ;
+            SavePos() )
 
-			BUTTON Button_0 ;
-				CAPTION "Drag float window" ;
-				PICTURE 'Logo' ;
-				ACTION ( InterActiveMoveHandle( GetFormHandle("Form_2") ), ;
-					Form_2.Button_0.Value := .F. ) ;
-				CHECK SEPARATOR
+         DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 38, 32 FLAT RIGHTTEXT
 
-		For n := 1 To Len(aAllPrinters)
-			btn := 'Button_' + NTRIM( n )
-			cAction := 'SetDefault(' + NTRIM(n) + ')'
-			nCheck := IF(aAllPrinters[n][3], n, nCheck)
-			BUTTON &btn ;
-				CAPTION aAllPrinters[n][1] ;
-				PICTURE if(aAllPrinters[n][3], 'Prn_On', 'Prn_Off') ;
-				ACTION &cAction ;
-				CHECK GROUP
-		Next
+            BUTTON Button_0 ;
+               CAPTION "Drag float window" ;
+               PICTURE 'Logo' ;
+               ACTION ( InterActiveMoveHandle( GetFormHandle("Form_2") ), ;
+               Form_2.Button_0.Value := .F. ) ;
+               CHECK SEPARATOR
 
-		END TOOLBAR
+            FOR n := 1 To Len(aAllPrinters)
+               btn := 'Button_' + NTRIM( n )
+               cAction := 'SetDefault(' + NTRIM(n) + ')'
+               nCheck := IF(aAllPrinters[n][3], n, nCheck)
+               BUTTON &btn ;
+                  CAPTION aAllPrinters[n][1] ;
+                  PICTURE if(aAllPrinters[n][3], 'Prn_On', 'Prn_Off') ;
+                  ACTION &cAction ;
+                  CHECK GROUP
+            NEXT
 
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 1000 ;
-			ACTION IF( cDefaultPrinter # GetDefPrinter(), ( Form_2.Release, SetFloatWin() ), )
-	
-	END WINDOW
+         END TOOLBAR
 
-	cDefaultPrinter := aAllPrinters[nCheck][1]
+         DEFINE TIMER Timer_1 ;
+            INTERVAL 1000 ;
+            ACTION IF( cDefaultPrinter # GetDefPrinter(), ( Form_2.Release, SetFloatWin() ), )
 
-	Form_2.Width := 38 * nCnt + 2 * nCnt + 8
-	btn := 'Button_' + NTRIM( nCheck )
-	SetProperty("Form_2", btn, "Value", aAllPrinters[nCheck][3])
-	Form_1.Float_Win.Checked := .T.
+      END WINDOW
 
-	ACTIVATE WINDOW Form_2
+      cDefaultPrinter := aAllPrinters[nCheck][1]
+
+      Form_2.Width := 38 * nCnt + 2 * nCnt + 8
+      btn := 'Button_' + NTRIM( nCheck )
+      SetProperty("Form_2", btn, "Value", aAllPrinters[nCheck][3])
+      Form_1.Float_Win.Checked := .T.
+
+      ACTIVATE WINDOW Form_2
 
    ELSE
 
-	Form_2.Release
-	Form_1.Float_Win.Checked := .F.
+      Form_2.Release
+      Form_1.Float_Win.Checked := .F.
 
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Procedure SavePos( lPos )
-*--------------------------------------------------------*
+PROCEDURE SavePos( lPos )
+
    DEFAULT lPos TO .T.
 
    BEGIN INI FILE cCfgFile
-	IF lPos
-		SET SECTION "Position" ENTRY "Top" TO nTop
-		SET SECTION "Position" ENTRY "Left" TO nLeft
-	ELSE
-		SET SECTION "Position" ENTRY "ShowWindow" TO lShowWindow
-	ENDIF
+      IF lPos
+         SET SECTION "Position" ENTRY "Top" TO nTop
+         SET SECTION "Position" ENTRY "Left" TO nLeft
+      ELSE
+         SET SECTION "Position" ENTRY "ShowWindow" TO lShowWindow
+      ENDIF
    END INI
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Function SetDefault(nI)
-*--------------------------------------------------------*
-Return PrnSetDefault( aAllPrinters[nI][1], aAllPrinters[nI][2] )
+FUNCTION SetDefault(nI)
 
-#define HWND_BROADCAST (-1)
-#define WM_WININICHANGE           26    // 0x001A
-*--------------------------------------------------------*
-Procedure PrnSetDefault( cName, cPort )
-*--------------------------------------------------------*
-    LOCAL cPrnStr := cName + "," + PrnGetDriver( cName ) + "," + cPort
+   RETURN PrnSetDefault( aAllPrinters[nI][1], aAllPrinters[nI][2] )
 
-    Form_1.NotifyTooltip := cName
+   #define HWND_BROADCAST (-1)
+   #define WM_WININICHANGE           26    // 0x001A
 
-    IF !IsWinNT()
-	SETREGVAR( HKEY_CURRENT_CONFIG, ;
-		"System\CurrentControlSet\Control\Print\Printers", "Default", cName )
-    ENDIF
+PROCEDURE PrnSetDefault( cName, cPort )
 
-    IF WriteProfileString( "Windows", "Device", cPrnStr )
-	SendMessage( HWND_BROADCAST, WM_WININICHANGE, 0, "Windows" )
-    ENDIF
+   LOCAL cPrnStr := cName + "," + PrnGetDriver( cName ) + "," + cPort
 
-    IF IsWindowDefined( Form_2 )
-	Form_2.Release
-	SetFloatWin()
-    ENDIF
+   Form_1.NotifyTooltip := cName
 
-Return
+   IF !IsWinNT()
+      SETREGVAR( HKEY_CURRENT_CONFIG, ;
+         "System\CurrentControlSet\Control\Print\Printers", "Default", cName )
+   ENDIF
 
-*--------------------------------------------------------*
-Function PrnGetDriver( cPrnName )
-*--------------------------------------------------------*
-    LOCAL cDriver := GETREGVAR( HKEY_LOCAL_MACHINE, ;
+   IF WriteProfileString( "Windows", "Device", cPrnStr )
+      SendMessage( HWND_BROADCAST, WM_WININICHANGE, 0, "Windows" )
+   ENDIF
+
+   IF IsWindowDefined( Form_2 )
+      Form_2.Release
+      SetFloatWin()
+   ENDIF
+
+   RETURN
+
+FUNCTION PrnGetDriver( cPrnName )
+
+   LOCAL cDriver := GETREGVAR( HKEY_LOCAL_MACHINE, ;
       "System\CurrentControlSet\Control\Print\Environments\Windows 4.0\Drivers\" + cPrnName, ;
       "Driver" )
 
-Return SubStr( cDriver, 1, At( ".", cDriver ) - 1 )
+   RETURN SubStr( cDriver, 1, At( ".", cDriver ) - 1 )
 
-*--------------------------------------------------------*
-Function aAllPrinters()
-*--------------------------------------------------------*
-    LOCAL aPrinters := {}, aPrn := Asort( GetAllPrinters() ), ;
-	i, name, cDefPrn := GetDefPrinter()
+FUNCTION aAllPrinters()
 
-    For i := 1 To Len(aPrn)
-	name := Token(aPrn[i], ",", 1)
-    	Aadd( aPrinters, { name, Token(aPrn[i], ",", 2), name == cDefPrn } )
-    Next
+   LOCAL aPrinters := {}, aPrn := Asort( GetAllPrinters() ), ;
+      i, name, cDefPrn := GetDefPrinter()
 
-Return( aPrinters )
+   FOR i := 1 To Len(aPrn)
+      name := Token(aPrn[i], ",", 1)
+      Aadd( aPrinters, { name, Token(aPrn[i], ",", 2), name == cDefPrn } )
+   NEXT
 
-*--------------------------------------------------------*
-Function GetDefPrinter()
-*--------------------------------------------------------*
-Return IF( IsWinNT(), GetDefaultPrinter(), ;
-	GETREGVAR( HKEY_CURRENT_CONFIG, ;
-		"System\CurrentControlSet\Control\Print\Printers", "Default" ) )
+   RETURN( aPrinters )
 
-#define WM_SYSCOMMAND	274
-#define SC_CLOSE	61536
-*-----------------------------------------------------------------------------*
-Function _ReleaseWindow (FormName)
-*-----------------------------------------------------------------------------*
-Local FormCount , b , i , x
+FUNCTION GetDefPrinter()
 
-	b := _HMG_InteractiveClose
-	_HMG_InteractiveClose := 1
+   RETURN IF( IsWinNT(), GetDefaultPrinter(), ;
+      GETREGVAR( HKEY_CURRENT_CONFIG, ;
+      "System\CurrentControlSet\Control\Print\Printers", "Default" ) )
 
-	FormCount := len (_HMG_aFormHandles)
+   #define WM_SYSCOMMAND   274
+   #define SC_CLOSE   61536
 
-	If .Not. _IsWindowDefined (Formname)
-		MsgMiniGuiError("Window: "+ FormName + " is not defined. Program terminated" )
-	Endif
+FUNCTION _ReleaseWindow (FormName)
 
-	If .Not. _IsWindowActive (Formname)
-		MsgMiniGuiError("Window: "+ FormName + " is not active. Program terminated" )
-	Endif
+   LOCAL FormCount , b , i , x
 
-	If _HMG_ThisEventType == 'WINDOW_RELEASE' 
-		If GetFormIndex (FormName) == _HMG_ThisIndex
-			MsgMiniGuiError("Release a window in its own 'on release' procedure or release the main window in any 'on release' procedure is not allowed. Program terminated" )
-		EndIf
-	EndIf
+   b := _HMG_InteractiveClose
+   _HMG_InteractiveClose := 1
 
-	* If the window to release is the main application window, release all
-	* windows command will be executed
-	
-	If GetWindowType (FormName) == 'A'
+   FormCount := len (_HMG_aFormHandles)
 
-		If _HMG_ThisEventType == 'WINDOW_RELEASE' 
-			MsgMiniGuiError("Release a window in its own 'on release' procedure or release the main window in any 'on release' procedure is not allowed. Program terminated" )
-		Else
-			ReleaseAllWindows()
-		EndIf
+   IF .Not. _IsWindowDefined (Formname)
+      MsgMiniGuiError("Window: "+ FormName + " is not defined. Program terminated" )
+   ENDIF
 
-	EndIf
+   IF .Not. _IsWindowActive (Formname)
+      MsgMiniGuiError("Window: "+ FormName + " is not active. Program terminated" )
+   ENDIF
 
-	i := GetFormIndex ( Formname )
+   IF _HMG_ThisEventType == 'WINDOW_RELEASE'
+      IF GetFormIndex (FormName) == _HMG_ThisIndex
+         MsgMiniGuiError("Release a window in its own 'on release' procedure or release the main window in any 'on release' procedure is not allowed. Program terminated" )
+      ENDIF
+   ENDIF
 
-	* Release Window
+   * If the window to release is the main application window, release all
+   * windows command will be executed
 
-	if	_hmg_aformtype [i] == 'M'	;
-		.and.				;
-		_hmg_activemodalhandle <> _hmg_aformhandles [i]
+   IF GetWindowType (FormName) == 'A'
 
-			EnableWindow ( _hmg_aformhandles [i] )
-			SendMessage( _hmg_aformhandles [i] , WM_SYSCOMMAND, SC_CLOSE, 0 )
+      IF _HMG_ThisEventType == 'WINDOW_RELEASE'
+         MsgMiniGuiError("Release a window in its own 'on release' procedure or release the main window in any 'on release' procedure is not allowed. Program terminated" )
+      ELSE
+         ReleaseAllWindows()
+      ENDIF
 
-	Else
+   ENDIF
 
-		For x := 1 To FormCount
-			if _hmg_aFormParentHandle [x] == _hmg_aformhandles [i]
-				_hmg_aFormParentHandle [x] := _hmg_MainHandle
-			EndIf
-		Next x
-		     
-		EnableWindow ( _hmg_aformhandles [i] )
-		SendMessage( _hmg_aformhandles [i] , WM_SYSCOMMAND, SC_CLOSE, 0 )
+   i := GetFormIndex ( Formname )
 
-	EndIf
+   * Release Window
 
-	_HMG_InteractiveClose := b
+   IF   _hmg_aformtype [i] == 'M'   ;
+         .and.            ;
+         _hmg_activemodalhandle <> _hmg_aformhandles [i]
 
-Return Nil
+      EnableWindow ( _hmg_aformhandles [i] )
+      SendMessage( _hmg_aformhandles [i] , WM_SYSCOMMAND, SC_CLOSE, 0 )
 
-*--------------------------------------------------------*
+   ELSE
+
+      FOR x := 1 To FormCount
+         IF _hmg_aFormParentHandle [x] == _hmg_aformhandles [i]
+            _hmg_aFormParentHandle [x] := _hmg_MainHandle
+         ENDIF
+      NEXT x
+
+      EnableWindow ( _hmg_aformhandles [i] )
+      SendMessage( _hmg_aformhandles [i] , WM_SYSCOMMAND, SC_CLOSE, 0 )
+
+   ENDIF
+
+   _HMG_InteractiveClose := b
+
+   RETURN NIL
+
 FUNCTION Token( cString, cDelimiter, nPointer )
-*--------------------------------------------------------*
-RETURN AllToken( cString, cDelimiter, nPointer, 1 )
 
-*--------------------------------------------------------*
+   RETURN AllToken( cString, cDelimiter, nPointer, 1 )
+
 FUNCTION AllToken( cString, cDelimiter, nPointer, nAction )
-*--------------------------------------------------------*
-LOCAL nTokens := 0, nPos := 1, nLen := len( cString ), nStart, cRet
-DEFAULT cDelimiter to chr(0)+chr(9)+chr(10)+chr(13)+chr(26)+chr(32)+chr(138)+chr(141)
-DEFAULT nAction to 0
 
-// nAction == 0 - numtoken
-// nAction == 1 - token
-// nAction == 2 - attoken
+   LOCAL nTokens := 0, nPos := 1, nLen := len( cString ), nStart, cRet
 
-      while nPos <= nLen
-            if .not. substr( cString, nPos, 1 ) $ cDelimiter
-               nStart := nPos
-               while nPos <= nLen .and. .not. substr( cString, nPos, 1 ) $ cDelimiter
-                     ++nPos
-               enddo
-               ++nTokens
-               IF nAction > 0
-                  IF nPointer == nTokens
-                     IF nAction == 1
-                        cRet := substr( cString, nStart, nPos - nStart )
-                     ELSE
-                        cRet := nStart
-                     ENDIF
-                     exit
-                  ENDIF
+   DEFAULT cDelimiter to chr(0)+chr(9)+chr(10)+chr(13)+chr(26)+chr(32)+chr(138)+chr(141)
+   DEFAULT nAction to 0
+
+   // nAction == 0 - numtoken
+   // nAction == 1 - token
+   // nAction == 2 - attoken
+
+   WHILE nPos <= nLen
+      IF .not. substr( cString, nPos, 1 ) $ cDelimiter
+         nStart := nPos
+         WHILE nPos <= nLen .and. .not. substr( cString, nPos, 1 ) $ cDelimiter
+            ++nPos
+         ENDDO
+         ++nTokens
+         IF nAction > 0
+            IF nPointer == nTokens
+               IF nAction == 1
+                  cRet := substr( cString, nStart, nPos - nStart )
+               ELSE
+                  cRet := nStart
                ENDIF
-            endif
-            if substr( cString, nPos, 1 ) $ cDelimiter
-               while nPos <= nLen .and. substr( cString, nPos, 1 ) $ cDelimiter
-                     ++nPos
-               enddo
-            endif
-            cRet := nTokens
-      ENDDO
+               EXIT
+            ENDIF
+         ENDIF
+      ENDIF
+      IF substr( cString, nPos, 1 ) $ cDelimiter
+         WHILE nPos <= nLen .and. substr( cString, nPos, 1 ) $ cDelimiter
+            ++nPos
+         ENDDO
+      ENDIF
+      cRet := nTokens
+   ENDDO
 
-RETURN cRet
+   RETURN cRet
 
-*--------------------------------------------------------*
-Static Procedure WinRun(lMode)
-*--------------------------------------------------------*
-   Local cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
-         cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
-         cRegKey  := GETREGVAR( NIL, cRunKey, "Switch Printer" )
+STATIC PROCEDURE WinRun(lMode)
+
+   LOCAL cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
+      cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
+      cRegKey  := GETREGVAR( NIL, cRunKey, "Switch Printer" )
 
    IF IsWinNT()
       EnablePermissions()
@@ -392,11 +381,10 @@ Static Procedure WinRun(lMode)
       DELREGVAR( NIL, cRunKey, "Switch Printer" )
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -405,11 +393,10 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-Return( cValue )
+   RETURN( cValue )
 
-*--------------------------------------------------------*
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -418,11 +405,10 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-Return( cValue )
+   RETURN( cValue )
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg, nValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -430,8 +416,7 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    nValue := oReg:Delete(cSubKey)
    oReg:Close()
 
-Return( nValue )
-
+   RETURN( nValue )
 
 #pragma BEGINDUMP
 
@@ -448,144 +433,147 @@ Return( nValue )
 
 HB_FUNC( GETDEFAULTPRINTER )
 {
-	char PrinterDefault[128] ;
-	OSVERSIONINFO osvi;
-	DWORD Needed, Returned;
-	DWORD BuffSize = 256;
-	LPPRINTER_INFO_5 PrinterInfo;
-	char* p;
+   char PrinterDefault[128] ;
+   OSVERSIONINFO osvi;
+   DWORD Needed, Returned;
+   DWORD BuffSize = 256;
+   LPPRINTER_INFO_5 PrinterInfo;
+   char* p;
 
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	GetVersionEx(&osvi);
+   osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+   GetVersionEx(&osvi);
 
-	if (osvi.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
-	{
-		EnumPrinters(PRINTER_ENUM_DEFAULT,NULL,5,NULL,0,&Needed,&Returned);
-		PrinterInfo = (LPPRINTER_INFO_5) LocalAlloc(LPTR,Needed);
-		EnumPrinters(PRINTER_ENUM_DEFAULT,NULL,5,(LPBYTE) PrinterInfo,Needed,&Needed,&Returned);
-		strcpy(PrinterDefault,PrinterInfo->pPrinterName);
-		LocalFree(PrinterInfo);
-	}
-	else if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-	{
-		if (osvi.dwMajorVersion >= 5) 
-		{
-			GetDefaultPrinter(PrinterDefault,&BuffSize);
-		}
-		else 
-		{
-			GetProfileString("windows","device","",PrinterDefault,BuffSize);
-			p = PrinterDefault;
-			while (*p != '0' && *p != ',')
-				++p;
-			*p = '0';
-		}
-	}
+   if (osvi.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS)
+   {
+      EnumPrinters(PRINTER_ENUM_DEFAULT,NULL,5,NULL,0,&Needed,&Returned);
+      PrinterInfo = (LPPRINTER_INFO_5) LocalAlloc(LPTR,Needed);
+      EnumPrinters(PRINTER_ENUM_DEFAULT,NULL,5,(LPBYTE) PrinterInfo,Needed,&Needed,&Returned);
+      strcpy(PrinterDefault,PrinterInfo->pPrinterName);
+      LocalFree(PrinterInfo);
+   }
+   else if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
+   {
+      if (osvi.dwMajorVersion >= 5)
+      {
+         GetDefaultPrinter(PrinterDefault,&BuffSize);
+      }
+      else
+      {
+         GetProfileString("windows","device","",PrinterDefault,BuffSize);
+         p = PrinterDefault;
+         while (*p != '0' && *p != ',')
+            ++p;
+         *p = '0';
+      }
+   }
 
-	hb_retc(PrinterDefault);
+   hb_retc(PrinterDefault);
 }
 
 HB_FUNC( GETALLPRINTERS )
 {
-	OSVERSIONINFO osvi;
-	DWORD dwSize = 0;
-	DWORD dwPrinters = 0;
-	DWORD i;
-	LPBYTE pBuffer ;
-	HGLOBAL cBuffer ;
-	PRINTER_INFO_5* pInfo;
-	DWORD flags;
+   OSVERSIONINFO osvi;
+   DWORD dwSize = 0;
+   DWORD dwPrinters = 0;
+   DWORD i;
+   LPBYTE pBuffer ;
+   HGLOBAL cBuffer ;
+   PRINTER_INFO_5* pInfo;
+   DWORD flags;
 
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	GetVersionEx(&osvi);
+   osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+   GetVersionEx(&osvi);
 
-	if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-		flags = PRINTER_ENUM_CONNECTIONS|PRINTER_ENUM_LOCAL;
-	else
-		flags = PRINTER_ENUM_LOCAL;
+   if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
+      flags = PRINTER_ENUM_CONNECTIONS|PRINTER_ENUM_LOCAL;
+   else
+      flags = PRINTER_ENUM_LOCAL;
 
-	EnumPrinters(flags, NULL, 5, NULL, 0, &dwSize, &dwPrinters);
-	pBuffer = GlobalAlloc(GPTR, dwSize);
-	if (pBuffer == NULL)
-	{
-		hb_reta(0);
-		return;
-	}
+   EnumPrinters(flags, NULL, 5, NULL, 0, &dwSize, &dwPrinters);
+   pBuffer = GlobalAlloc(GPTR, dwSize);
+   if (pBuffer == NULL)
+   {
+      hb_reta(0);
 
-	EnumPrinters(flags, NULL, 5, pBuffer, dwSize, &dwSize, &dwPrinters);
-	if (dwPrinters == 0)
-	{
-		hb_reta(0);
-		return;
-	}
+      return;
+   }
 
-	pInfo = (PRINTER_INFO_5*)pBuffer;
+   EnumPrinters(flags, NULL, 5, pBuffer, dwSize, &dwSize, &dwPrinters);
+   if (dwPrinters == 0)
+   {
+      hb_reta(0);
 
-	hb_reta( dwPrinters );
+      return;
+   }
 
-	for ( i = 0; i < dwPrinters; i++, pInfo++)
-	{
-		cBuffer = ( char * ) GlobalAlloc(GPTR, 256);
+   pInfo = (PRINTER_INFO_5*)pBuffer;
 
-		strcat(cBuffer,pInfo->pPrinterName);
-		strcat(cBuffer,",");
-		strcat(cBuffer,pInfo->pPortName);
+   hb_reta( dwPrinters );
 
-		HB_STORC( cBuffer , -1 , i+1 ); 
+   for ( i = 0; i < dwPrinters; i++, pInfo++)
+   {
+      cBuffer = ( char * ) GlobalAlloc(GPTR, 256);
 
-		GlobalFree(cBuffer);
-	}
+      strcat(cBuffer,pInfo->pPrinterName);
+      strcat(cBuffer,",");
+      strcat(cBuffer,pInfo->pPortName);
 
-	GlobalFree(pBuffer);
+      HB_STORC( cBuffer , -1 , i+1 );
+
+      GlobalFree(cBuffer);
+   }
+
+   GlobalFree(pBuffer);
 }
 
 HB_FUNC( ENABLEPERMISSIONS )
 {
-	LUID tmpLuid;
-	TOKEN_PRIVILEGES tkp, tkpNewButIgnored;
-	DWORD lBufferNeeded;
-	HANDLE hdlTokenHandle;
-	HANDLE hdlProcessHandle = GetCurrentProcess();
+   LUID tmpLuid;
+   TOKEN_PRIVILEGES tkp, tkpNewButIgnored;
+   DWORD lBufferNeeded;
+   HANDLE hdlTokenHandle;
+   HANDLE hdlProcessHandle = GetCurrentProcess();
 
-	OpenProcessToken(hdlProcessHandle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hdlTokenHandle);
+   OpenProcessToken(hdlProcessHandle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hdlTokenHandle);
 
-	LookupPrivilegeValue(NULL, "SeSystemEnvironmentPrivilege", &tmpLuid);
+   LookupPrivilegeValue(NULL, "SeSystemEnvironmentPrivilege", &tmpLuid);
 
-	tkp.PrivilegeCount            = 1;
-	tkp.Privileges[0].Luid        = tmpLuid;
-	tkp.Privileges[0].Attributes  = SE_PRIVILEGE_ENABLED;
+   tkp.PrivilegeCount            = 1;
+   tkp.Privileges[0].Luid        = tmpLuid;
+   tkp.Privileges[0].Attributes  = SE_PRIVILEGE_ENABLED;
 
-	AdjustTokenPrivileges(hdlTokenHandle, FALSE, &tkp, sizeof(tkpNewButIgnored), &tkpNewButIgnored, &lBufferNeeded);
+   AdjustTokenPrivileges(hdlTokenHandle, FALSE, &tkp, sizeof(tkpNewButIgnored), &tkpNewButIgnored, &lBufferNeeded);
 }
 
 HB_FUNC( WRITEPROFILESTRING )
 {
-	const char * lpSection = hb_parc( 1 );
-	const char * lpEntry = ISCHAR(2) ? hb_parc( 2 ) : NULL ;
-	const char * lpData = ISCHAR(3) ? hb_parc( 3 ) : NULL ;
+   const char * lpSection = hb_parc( 1 );
+   const char * lpEntry = ISCHAR(2) ? hb_parc( 2 ) : NULL ;
+   const char * lpData = ISCHAR(3) ? hb_parc( 3 ) : NULL ;
 
-	if ( WriteProfileString( lpSection, lpEntry, lpData) )
-		hb_retl( TRUE );
-	else
-		hb_retl( FALSE );
+   if ( WriteProfileString( lpSection, lpEntry, lpData) )
+      hb_retl( TRUE );
+   else
+      hb_retl( FALSE );
 }
 
 HB_FUNC( INTERACTIVEMOVEHANDLE )
 {
-	keybd_event(
-		VK_RIGHT,	// virtual-key code
-		0,		// hardware scan code
-		0,		// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
-	keybd_event(
-		VK_LEFT,	// virtual-key code
-		0,		// hardware scan code
-		0,		// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
+   keybd_event(
+      VK_RIGHT,   // virtual-key code
+      0,      // hardware scan code
+      0,      // flags specifying various function options
+      0      // additional data associated with keystroke
+   );
+   keybd_event(
+      VK_LEFT,   // virtual-key code
+      0,      // hardware scan code
+      0,      // flags specifying various function options
+      0      // additional data associated with keystroke
+   );
 
-	SendMessage( (HWND) hb_parnl(1), WM_SYSCOMMAND, SC_MOVE, 10 );
+   SendMessage( (HWND) hb_parnl(1), WM_SYSCOMMAND, SC_MOVE, 10 );
 }
 
 #pragma ENDDUMP
+

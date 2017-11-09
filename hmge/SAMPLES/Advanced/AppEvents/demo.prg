@@ -1,18 +1,16 @@
 /*
- * Harbour MiniGUI AppEvents Demo
- * (c) 2017 P.Ch.
+* Harbour MiniGUI AppEvents Demo
+* (c) 2017 P.Ch.
 */
 
 #include "minigui.ch"
 
-//////////////////////////////////////////////////////////////////////////////
 #define WM_APP       0x8000
 #define ev_Fire1     (WM_APP + 1)
 #define ev_Fire2     (WM_APP + 2)
 #define ev_Fire3     (WM_APP + 3)
 #define ev_FireOnce  (WM_APP + 10)
 
-//////////////////////////////////////////////////////////////////////////////
 FUNCTION Main()
 
    LOCAL bEvent1 := {|h,m| HB_SYMBOL_UNUSED(h), MsgInfo('ID:'+hb_NtoS(m), 'Event fired:[1]')}
@@ -22,9 +20,9 @@ FUNCTION Main()
    LOCAL bEvent0 := {|h,m| HB_SYMBOL_UNUSED(h), MsgInfo('ID:'+hb_NtoS(m), 'Event fired:[0]')}
 
    DEFINE WINDOW WinMain ;
-      CLIENTAREA 600, 400 ;
-      TITLE 'AppEvents Demo' ;
-      MAIN 
+         CLIENTAREA 600, 400 ;
+         TITLE 'AppEvents Demo' ;
+         MAIN
 
       ON APPEVENT ev_Fire1 ACTION bEvent1 OF ThisWindow.Handle
       ON APPEVENT ev_Fire2 ACTION bEvent2 OF ThisWindow.Handle
@@ -32,7 +30,7 @@ FUNCTION Main()
 
       // change action of event ev_Fire3 to codeblock bEvent4
       UPDATE APPEVENT ev_Fire3 OF ThisWindow.Handle NOACTIVE
-      UPDATE APPEVENT ev_Fire3 ACTION bEvent4 OF ThisWindow.Handle 
+      UPDATE APPEVENT ev_Fire3 ACTION bEvent4 OF ThisWindow.Handle
 
       ON APPEVENT ev_FireOnce ACTION bEvent0 OF ThisWindow.Handle ONCE
       // REMOVE APPEVENT ALL OF ThisWindow.Handle ONCE
@@ -96,28 +94,28 @@ FUNCTION Main()
    WinMain.Center
    WinMain.Activate
 
-RETURN 0
+   RETURN 0
 
-//////////////////////////////////////////////////////////////////////////////
 STATIC PROCEDURE GetInfo( hwnd, lOnce )
 
    LOCAL aInfo := GetAppEventsInfo( hwnd,lOnce )
    LOCAL cMsgs
 
-   IF ! Empty( aInfo )   
-#ifndef __XHARBOUR__
+   IF ! Empty( aInfo )
+      #ifndef __XHARBOUR__
       cMsgs := hb_strFormat ;
-      ( ;
+         ( ;
          e"Holder:\t\t%d\nCount of events:\t%d\nUsed events:\t%d\nStatus:\t\t%s", ;
          aInfo[1], aInfo[2], aInfo[3], Iif( aInfo[4], "active", "not active" ) ;
-      )
-#else
+         )
+      #else
       cMsgs := "" // FIXME
-#endif
+      #endif
    ELSE
       cMsgs := "Not Installed."
    ENDIF
 
    MsgInfo( cMsgs, iif( lOnce, "Once", "On" ) )
 
-RETURN
+   RETURN
+

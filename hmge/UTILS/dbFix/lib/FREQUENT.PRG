@@ -1,200 +1,210 @@
 /*
 
-  FREQUENT.PRG    These functions get used everywhere!
+FREQUENT.PRG    These functions get used everywhere!
 
-  These functions are called so often (both by external programs and within
-  RayLib) that they deserve their own uncluttered OBJ!
+These functions are called so often (both by external programs and within
+RayLib) that they deserve their own uncluttered OBJ!
 
 */
 #include "default.ch"
 
 #define CRLF  chr(13)+chr(10)
 
+FUNCTION FWriteLn(h, cText)
 
-Function FWriteLn(h, cText)
-/*
-  Writes a line of text to a file handle (h) followed by CRLF.
-*/
+   /*
+   Writes a line of text to a file handle (h) followed by CRLF.
+   */
 
-  fwrite(h, cText + CRLF)
+   fwrite(h, cText + CRLF)
 
-Return(NIL)
+   RETURN(NIL)
 
+FUNCTION InsDel(cOrig, nStart, nDelete, cInsert)
 
+   /*
+   InsDel() works exactly like Clipper's stuff() function, but for some
+   reason stuff() seemed to be causing GPFs when used with FiveWin.
+   */
 
-Function InsDel(cOrig, nStart, nDelete, cInsert)
-/*
-  InsDel() works exactly like Clipper's stuff() function, but for some
-    reason stuff() seemed to be causing GPFs when used with FiveWin.
-*/
-Return(left(cOrig, nStart - 1) + cInsert + substr(cOrig, nStart + nDelete))
+   RETURN(left(cOrig, nStart - 1) + cInsert + substr(cOrig, nStart + nDelete))
 
+FUNCTION Nstr(n, nLen, nDec)
 
+   /*
+   ltrim(str(n[, nLen, nDec]))
+   */
+   LOCAL c
 
-Function Nstr(n, nLen, nDec)
-/*
-  ltrim(str(n[, nLen, nDec]))
-*/
-  local c
+   IF nLen == NIL
+      c := str(n)
+   ELSE
+      DEFAULT nDec := 0
+      c := str(n, nLen, nDec)
+   ENDIF
 
-  if nLen == NIL
-    c := str(n)
-  else
-    default nDec := 0
-    c := str(n, nLen, nDec)
-  endif
+   RETURN(ltrim(c))
 
-Return(ltrim(c))
+FUNCTION ReplaceStr(cString, cOld, cNew)
 
+   /*
+   Equivalent to strtran(), without the nStart and nCount options.
 
+   Replaces all occurrences of the cOld substring with cNew within the larger
+   string cString.  Case matters.
 
-Function ReplaceStr(cString, cOld, cNew)
-/*
-  Equivalent to strtran(), without the nStart and nCount options.
+   Example:  ReplaceStr("Peter Piper", "er", "ery")  -->  "Petery Pipery"
 
-  Replaces all occurrences of the cOld substring with cNew within the larger
-  string cString.  Case matters.
+   (The function formerly known as Replace())
+   */
+   LOCAL o, n, x, i := 1
+   LOCAL cWork := cString
 
-  Example:  ReplaceStr("Peter Piper", "er", "ery")  -->  "Petery Pipery"
+   o := len(cOld)
+   n := len(cNew)
 
-  (The function formerly known as Replace())
-*/
-  local o, n, x, i := 1
-  local cWork := cString
+   IF len(cWork) == 0 .or. o == 0 // Can't replace null strings!
 
-  o := len(cOld)
-  n := len(cNew)
+      RETURN(cWork)
+   ENDIF
 
-  if len(cWork) == 0 .or. o == 0 // Can't replace null strings!
-    Return(cWork)
-  endif
+   DO WHILE (x := at(cOld, substr(cWork, i))) > 0
+      x += (i - 1)
+      cWork := InsDel(cWork, x, o, cNew)
+      // Move the index past the replacement string.  This avoids an endless
+      // loop should cOld be a substring of cNew!
+      i := x + n
+   ENDDO
 
-  do while (x := at(cOld, substr(cWork, i))) > 0
-    x += (i - 1)
-    cWork := InsDel(cWork, x, o, cNew)
-    // Move the index past the replacement string.  This avoids an endless
-    // loop should cOld be a substring of cNew!
-    i := x + n
-  enddo
+   RETURN(cWork)
 
-Return(cWork)
+FUNCTION IReplaceStr(cString, cOld, cNew)
 
+   /*
+   Like ReplaceStr(), but case-insensitive.
+   */
+   LOCAL o, n, x, i := 1
+   LOCAL cWork := cString
+   LOCAL cUpOld, cUpWork
 
+   o := len(cOld)
+   n := len(cNew)
 
-Function IReplaceStr(cString, cOld, cNew)
-/*
-  Like ReplaceStr(), but case-insensitive.
-*/
-  local o, n, x, i := 1
-  local cWork := cString
-  local cUpOld, cUpWork
+   IF len(cWork) == 0 .or. o == 0 // Can't replace null strings!
 
-  o := len(cOld)
-  n := len(cNew)
+      RETURN(cWork)
+   ENDIF
 
-  if len(cWork) == 0 .or. o == 0 // Can't replace null strings!
-    Return(cWork)
-  endif
+   cUpOld := upper(cOld)
+   cUpWork := upper(cWork)
 
-  cUpOld := upper(cOld)
-  cUpWork := upper(cWork)
+   DO WHILE (x := at(cUpOld, substr(cUpWork, i))) > 0
+      x += (i - 1)
+      cWork := InsDel(cWork, x, o, cNew)
+      // Move the index past the replacement string.  This avoids an endless
+      // loop should cOld be a substring of cNew!
+      i := x + n
+      cUpWork := upper(cWork)
+   ENDDO
 
-  do while (x := at(cUpOld, substr(cUpWork, i))) > 0
-    x += (i - 1)
-    cWork := InsDel(cWork, x, o, cNew)
-    // Move the index past the replacement string.  This avoids an endless
-    // loop should cOld be a substring of cNew!
-    i := x + n
-    cUpWork := upper(cWork)
-  enddo
+   RETURN(cWork)
 
-Return(cWork)
+FUNCTION SetCentury(lToggle)
 
+   /*
+   Logical Set/Get function for the SET CENTURY setting.  It simply calls the
 
+   function that SET CENTURY preprocesses to: __SetCentury(lToggle).
 
-Function SetCentury(lToggle)
-/*
-  Logical Set/Get function for the SET CENTURY setting.  It simply calls the
-  function that SET CENTURY preprocesses to: __SetCentury(lToggle).
-*/
-Return(__SetCentury(lToggle))
+   */
 
+   RETURN(__SetCentury(lToggle))
 
+FUNCTION StoD(cDTOS)
 
-Function StoD(cDTOS)
-/*
-  The functional inverse of dtos().
-*/
-  local dNew
-  local cDF := set(_SET_DATEFORMAT, "YYYY/MM/DD")
+   /*
+   The functional inverse of dtos().
+   */
+   LOCAL dNew
+   LOCAL cDF := set(_SET_DATEFORMAT, "YYYY/MM/DD")
 
-  dNew := ctod(transform(cDTOS, "@R 9999/99/99"))
+   dNew := ctod(transform(cDTOS, "@R 9999/99/99"))
 
-  set(_SET_DATEFORMAT, cDF)
+   set(_SET_DATEFORMAT, cDF)
 
-Return(dNew)
+   RETURN(dNew)
 
+FUNCTION XCommit(lExclusive)
 
+   /*
+   Use in an aliased expression to issue the following oft-reapeated commands:
 
-Function XCommit(lExclusive)
-/*
-  Use in an aliased expression to issue the following oft-reapeated commands:
+   DBCommit()
+   DBUnlock()
+   DBSkip(0)
 
-  DBCommit()
-  DBUnlock()
-  DBSkip(0)
+   The DBUnlock() step will not be performed if lExclusive is true (defaults
+   to false).
+   */
+   DEFAULT lExclusive := .F.
 
-  The DBUnlock() step will not be performed if lExclusive is true (defaults
-  to false).
-*/
-  default lExclusive := .F.
+   DBCommit()
 
-  DBCommit()
+   IF !lExclusive
+      DBUnlock()
+   ENDIF
 
-  if !lExclusive
-    DBUnlock()
-  endif
+   DBSkip(0)
 
-  DBSkip(0)
+   RETURN(NIL)
 
-Return(NIL)
+   // Stubs for common FiveWin function calls:
 
+   #ifdef DOS_ONLY
 
-// Stubs for common FiveWin function calls:
+FUNCTION CursorArrow()
 
-#ifdef DOS_ONLY
+   RETURN(NIL)
 
-Function CursorArrow()
-Return(NIL)
+FUNCTION CursorWait()
 
-Function CursorWait()
-Return(NIL)
+   RETURN(NIL)
 
-Function cValToChar(u)
-Return(XtoC(u))
+FUNCTION cValToChar(u)
 
-Function MessageBeep(nBeep)
-Return(tone(100, 3))
+   RETURN(XtoC(u))
 
-Function MsgAlert(cText, cCaption)
-Return(alert(cText))
+FUNCTION MessageBeep(nBeep)
 
-Function MsgInfo(cText, cCaption)
-Return(alert(cText))
+   RETURN(tone(100, 3))
 
-Function MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
-Return(eval(bAction))
+FUNCTION MsgAlert(cText, cCaption)
 
-Function MsgRetryCancel(cText, cCaption)
-Return(alert(cText, { "Retry", "Cancel" }) == 1)
+   RETURN(alert(cText))
 
-Function MsgStop(cText, cCaption)
-Return(alert(cText))
+FUNCTION MsgInfo(cText, cCaption)
 
-Function MsgYesNo(cText, cCaption)
-Return(alert(cText, { "Yes", "No" }) == 1)
+   RETURN(alert(cText))
 
-Function SysRefresh()
-Return(NIL)
+FUNCTION MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
 
-#endif
+   RETURN(eval(bAction))
+
+FUNCTION MsgRetryCancel(cText, cCaption)
+
+   RETURN(alert(cText, { "Retry", "Cancel" }) == 1)
+
+FUNCTION MsgStop(cText, cCaption)
+
+   RETURN(alert(cText))
+
+FUNCTION MsgYesNo(cText, cCaption)
+
+   RETURN(alert(cText, { "Yes", "No" }) == 1)
+
+FUNCTION SysRefresh()
+
+   RETURN(NIL)
+
+   #endif
+

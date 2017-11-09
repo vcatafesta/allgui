@@ -1,14 +1,17 @@
 #include <hmg.ch>
 
-Function Main
+FUNCTION Main
 
-        Load Window Main
-        Main.Center
-        Main.Activate
+   LOAD WINDOW Main
+   Main.Center
+   Main.Activate
 
-Return Nil
+   RETURN NIL
 
-Function generate_error()
-	Local x, num
-	x := num * 10
-Return Nil
+FUNCTION generate_error()
+
+   LOCAL x, num
+
+   x := num * 10
+
+   RETURN NIL

@@ -9,15 +9,15 @@
 
 #include 'minigui.ch'
 
-*-------------------------
-function p2()
-*-------------------------
-load window newform
-center window newform
-activate window newform
+FUNCTION p2()
 
-load window qwerty
-center window qwerty
-activate window qwerty
-return Nil
-
+   LOAD WINDOW newform
+   CENTER WINDOW newform
+   ACTIVATE WINDOW newform
+
+   LOAD WINDOW qwerty
+   CENTER WINDOW qwerty
+   ACTIVATE WINDOW qwerty
+
+   RETURN NIL
+

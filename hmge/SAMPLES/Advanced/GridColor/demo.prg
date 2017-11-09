@@ -1,6 +1,6 @@
 /*
- * MiniGUI Grid Color Demo
- * (c) 2009 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI Grid Color Demo
+* (c) 2009 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -11,12 +11,12 @@ PROCEDURE Main
    SET AUTOADJUST ON
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE 'Grid Colors Themes (borrowed from Total Commander)' ;
-      MAIN ;
-      ON INIT OnInit( GetStartupFolder() + "\Presets.ini" )
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'Grid Colors Themes (borrowed from Total Commander)' ;
+         MAIN ;
+         ON INIT OnInit( GetStartupFolder() + "\Presets.ini" )
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'
@@ -50,8 +50,7 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE Test_it
 
@@ -63,51 +62,50 @@ PROCEDURE Test_it
    cTheme := Form_1.Grid_1.Cell( a[ 1 ], a[ 2 ] )
 
    BEGIN INI FILE cIniFile
-   IF ( nForeColor := _GetIni( cTheme, 'ForeColor', -1, 0 ) ) # -1
-      SetProperty( 'Form_1', 'Grid_1', 'ForeColor', nRGB2Arr ( nForeColor ) )
-   ELSE
-      SetProperty( 'Form_1', 'Grid_1', 'ForeColor', BLACK )
-   ENDIF
-   IF ( nBackColor := _GetIni( cTheme, 'BackColor', -1, 0 ) ) # -1
-      SetProperty( 'Form_1', 'Grid_1', 'BackColor', nRGB2Arr ( nBackColor ) )
-   ELSE
-      SetProperty( 'Form_1', 'Grid_1', 'BackColor', WHITE )
-   ENDIF
-   IF ( nCellForeColor := _GetIni( cTheme, 'CursorText', -1, 0 ) ) # -1
-      _HMG_GridSelectedCellForeColor := nRGB2Arr ( nCellForeColor )
-   ELSEIF _GetIni( cTheme, 'InverseCursor', 0, 0 ) == 1
-      IF _GetIni( cTheme, 'InverseSelection', 0, 0 ) # 1
-         _HMG_GridSelectedCellForeColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+      IF ( nForeColor := _GetIni( cTheme, 'ForeColor', -1, 0 ) ) # -1
+         SetProperty( 'Form_1', 'Grid_1', 'ForeColor', nRGB2Arr ( nForeColor ) )
       ELSE
-         _HMG_GridSelectedCellForeColor := WHITE
+         SetProperty( 'Form_1', 'Grid_1', 'ForeColor', BLACK )
       ENDIF
-      _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'ForeColor' )
-   ELSEIF ( nCellMarkColor := _GetIni( cTheme, 'MarkColor', -1, 0 ) ) # -1
-      _HMG_GridSelectedCellForeColor := nRGB2Arr ( nCellMarkColor )
-      _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
-   ELSE
-      _HMG_GridSelectedCellForeColor := RED
-   ENDIF
-   IF ValType( nCellMarkColor ) # "N"
-      IF ( nCellBackColor := _GetIni( cTheme, 'CursorColor', -1, 0 ) ) # -1
-         _HMG_GridSelectedCellBackColor := nRGB2Arr ( nCellBackColor )
-      ENDIF
-   ELSEIF _GetIni( cTheme, 'InverseSelection', 0, 0 ) == 1
-      _HMG_GridSelectedCellBackColor := nRGB2Arr ( nCellMarkColor )
-      IF nCellForeColor # -1
-         _HMG_GridSelectedCellForeColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+      IF ( nBackColor := _GetIni( cTheme, 'BackColor', -1, 0 ) ) # -1
+         SetProperty( 'Form_1', 'Grid_1', 'BackColor', nRGB2Arr ( nBackColor ) )
       ELSE
-         _HMG_GridSelectedCellForeColor := WHITE
+         SetProperty( 'Form_1', 'Grid_1', 'BackColor', WHITE )
       ENDIF
-   ELSE
-      _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
-   ENDIF
+      IF ( nCellForeColor := _GetIni( cTheme, 'CursorText', -1, 0 ) ) # -1
+         _HMG_GridSelectedCellForeColor := nRGB2Arr ( nCellForeColor )
+      ELSEIF _GetIni( cTheme, 'InverseCursor', 0, 0 ) == 1
+         IF _GetIni( cTheme, 'InverseSelection', 0, 0 ) # 1
+            _HMG_GridSelectedCellForeColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+         ELSE
+            _HMG_GridSelectedCellForeColor := WHITE
+         ENDIF
+         _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'ForeColor' )
+      ELSEIF ( nCellMarkColor := _GetIni( cTheme, 'MarkColor', -1, 0 ) ) # -1
+         _HMG_GridSelectedCellForeColor := nRGB2Arr ( nCellMarkColor )
+         _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+      ELSE
+         _HMG_GridSelectedCellForeColor := RED
+      ENDIF
+      IF ValType( nCellMarkColor ) # "N"
+         IF ( nCellBackColor := _GetIni( cTheme, 'CursorColor', -1, 0 ) ) # -1
+            _HMG_GridSelectedCellBackColor := nRGB2Arr ( nCellBackColor )
+         ENDIF
+      ELSEIF _GetIni( cTheme, 'InverseSelection', 0, 0 ) == 1
+         _HMG_GridSelectedCellBackColor := nRGB2Arr ( nCellMarkColor )
+         IF nCellForeColor # -1
+            _HMG_GridSelectedCellForeColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+         ELSE
+            _HMG_GridSelectedCellForeColor := WHITE
+         ENDIF
+      ELSE
+         _HMG_GridSelectedCellBackColor := GetProperty( 'Form_1', 'Grid_1', 'BackColor' )
+      ENDIF
    END INI
 
    refresh_it()
 
-RETURN
-
+   RETURN
 
 PROCEDURE OnInit( cIniFile )
 
@@ -129,8 +127,7 @@ PROCEDURE OnInit( cIniFile )
    Form_1.StatusBar.Item( 2 ) := " " + hb_ntos( Form_1.Grid_1.ItemCount ) + " Presets"
    Form_1.Grid_1.SetFocus
 
-RETURN
-
+   RETURN
 
 FUNCTION refresh_it()
 
@@ -139,4 +136,5 @@ FUNCTION refresh_it()
    Form_1.Grid_1.Value := iif( a[ 1 ] # 1, 1, 2 )
    Form_1.Grid_1.Value := a
 
-RETURN NIL
+   RETURN NIL
+

@@ -1,30 +1,29 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-   Local hSplitWnd
+   LOCAL hSplitWnd
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'MiniGUI SplitBox Demo' ;
-      MAIN ;
-      ON PAINT SplitBox_Resize (hSplitWnd)
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI SplitBox Demo' ;
+         MAIN ;
+         ON PAINT SplitBox_Resize (hSplitWnd)
 
       DEFINE STATUSBAR
-         STATUSITEM 'HMG Power Ready - Resize SplitBox And Enjoy !' 
+         STATUSITEM 'HMG Power Ready - Resize SplitBox And Enjoy !'
       END STATUSBAR
 
-      DEFINE MAIN MENU 
+      DEFINE MAIN MENU
          POPUP '&Help'
-            ITEM 'About'      ACTION MsgInfo ("MiniGUI SplitBox Demo","A COOL Feature ;)") 
+            ITEM 'About'      ACTION MsgInfo ("MiniGUI SplitBox Demo","A COOL Feature ;)")
          END POPUP
       END MENU
 
@@ -32,60 +31,60 @@ Function Main
 
          DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 95,30 FLAT RIGHTTEXT CAPTION 'ToolBar 1'
 
-		BUTTON Button_1 ;
-			CAPTION '&Undo' ;
-			PICTURE 'button4.bmp' ;
-			ACTION MsgInfo('UnDo Click!') 
+            BUTTON Button_1 ;
+               CAPTION '&Undo' ;
+               PICTURE 'button4.bmp' ;
+               ACTION MsgInfo('UnDo Click!')
 
-		BUTTON Button_2 ;
-			CAPTION '&Save' ;
-			PICTURE 'button5.bmp' ;
-			ACTION MsgInfo('Save Click!') 
-	
-		BUTTON Button_3 ;
-			CAPTION '&Close' ;
-			PICTURE 'button6.bmp' ;
-			ACTION MsgInfo('Close Click!') 
+            BUTTON Button_2 ;
+               CAPTION '&Save' ;
+               PICTURE 'button5.bmp' ;
+               ACTION MsgInfo('Save Click!')
 
-		BUTTON Button_10 ;
-			CAPTION '&Login' ;
-			PICTURE 'button14.bmp' ;
-			ACTION MsgInfo('Login Click!') 
+            BUTTON Button_3 ;
+               CAPTION '&Close' ;
+               PICTURE 'button6.bmp' ;
+               ACTION MsgInfo('Close Click!')
+
+            BUTTON Button_10 ;
+               CAPTION '&Login' ;
+               PICTURE 'button14.bmp' ;
+               ACTION MsgInfo('Login Click!')
 
          END TOOLBAR
 
-         DEFINE WINDOW SplitChild_1 ; 
-            WIDTH 200 ;
-            HEIGHT 200 ;
-            VIRTUAL WIDTH 800 ;
-            VIRTUAL HEIGHT 800 ;
-            SPLITCHILD NOCAPTION
+         DEFINE WINDOW SplitChild_1 ;
+               WIDTH 200 ;
+               HEIGHT 200 ;
+               VIRTUAL WIDTH 800 ;
+               VIRTUAL HEIGHT 800 ;
+               SPLITCHILD NOCAPTION
 
             DEFINE LABEL Label_1
                ROW   55
                COL   30
-               VALUE 'Label !!!' 
-               WIDTH 100 
-               HEIGHT 27 
+               VALUE 'Label !!!'
+               WIDTH 100
+               HEIGHT 27
             END LABEL
 
             DEFINE CHECKBOX Check_1
                ROW   80
                COL   30
-               CAPTION 'Check 1' 
-               VALUE .T. 
-               TOOLTIP 'CheckBox' 
+               CAPTION 'Check 1'
+               VALUE .T.
+               TOOLTIP 'CheckBox'
             END CHECKBOX
-         
+
             DEFINE SLIDER Slider_1
                ROW 115
                COL 30
                RANGEMIN 1
-               RANGEMAX 10 
-               VALUE 5 
-               TOOLTIP 'Slider' 
+               RANGEMAX 10
+               VALUE 5
+               TOOLTIP 'Slider'
             END SLIDER
-            
+
             DEFINE FRAME Frame_1
                ROW   45
                COL   170
@@ -96,13 +95,13 @@ Function Main
             DEFINE RADIOGROUP Radio_1
                ROW   50
                COL   180
-               OPTIONS { 'One' , 'Two' , 'Three', 'Four' } 
-               VALUE 1 
-               WIDTH 70 
-               TOOLTIP 'RadioGroup' 
+               OPTIONS { 'One' , 'Two' , 'Three', 'Four' }
+               VALUE 1
+               WIDTH 70
+               TOOLTIP 'RadioGroup'
             END RADIOGROUP
 
-         END WINDOW 
+         END WINDOW
 
       END SPLITBOX
 
@@ -112,29 +111,25 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-*---------------------------------------------*
 PROCEDURE SplitBox_Resize (SplitBoxHandle)
-*---------------------------------------------*
-LOCAL Height    := Form_1.ClientHeight - Form_1.Statusbar.Height
-LOCAL DifHeight := Height - REBAR_GETHEIGHT (SplitBoxHandle)
-LOCAL aRect     := REBAR_GETBANDINFO (SplitBoxHandle, 1)  // SplitChild_1
-LOCAL NewHeight := aRect [2] + DifHeight
+
+   LOCAL Height    := Form_1.ClientHeight - Form_1.Statusbar.Height
+   LOCAL DifHeight := Height - REBAR_GETHEIGHT (SplitBoxHandle)
+   LOCAL aRect     := REBAR_GETBANDINFO (SplitBoxHandle, 1)  // SplitChild_1
+   LOCAL NewHeight := aRect [2] + DifHeight
 
    REBAR_SETMINCHILDSIZE (SplitBoxHandle, 1, NewHeight)   // SplitChild_1
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 #include <commctrl.h>
 
-//*********************************************
 //    by Dr. Claudio Soto (July 2014)
-//*********************************************
 
 HB_FUNC( REBAR_GETHEIGHT )
 {
@@ -223,3 +218,4 @@ HB_FUNC( REBAR_GETBANDINFO )
 }
 
 #pragma ENDDUMP
+

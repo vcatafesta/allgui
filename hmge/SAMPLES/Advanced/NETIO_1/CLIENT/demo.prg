@@ -1,12 +1,14 @@
 
 FUNCTION MAIN
-	Local cServer := "127.0.0.1"
-	Local cPort := "2941"
 
-	NETIO_CONNECT()
+   LOCAL cServer := "127.0.0.1"
+   LOCAL cPort := "2941"
 
-	use ("net:" + cServer + ":" + cPort + ":base\test")
+   NETIO_CONNECT()
 
-	browse()
+   USE ("net:" + cServer + ":" + cPort + ":base\test")
 
-RETURN NIL
+   browse()
+
+   RETURN NIL
+

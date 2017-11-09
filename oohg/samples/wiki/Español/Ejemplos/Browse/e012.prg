@@ -1,21 +1,20 @@
 /*
- * Ejemplo Browse n° 12
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo se puede editar una columna
- * de un Browse utilizando otro Browse, por medio de la
- * cláusula EDITKEYS.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 12
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo se puede editar una columna
+* de un Browse utilizando otro Browse, por medio de la
+* cláusula EDITKEYS.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX
@@ -27,13 +26,13 @@ FUNCTION Main
    AbrirTablas()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Usar un Browse para editar otro' ;
-      MAIN ;
-      ON RELEASE CerrarTablas()
+         OBJ oForm1 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Usar un Browse para editar otro' ;
+         MAIN ;
+         ON RELEASE CerrarTablas()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 400 ;
@@ -59,15 +58,15 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION Seleccionar( oBrw )
 
    LOCAL nReg, oEdit
 
    IF _OOHG_ThisItemColIndex # 1
-     RETURN NIL
+
+      RETURN NIL
    ENDIF
 
    nReg := 0
@@ -75,13 +74,13 @@ FUNCTION Seleccionar( oBrw )
    oEdit := GetControlObjectByHandle( GetFocus() )
 
    DEFINE WINDOW Form_2 ;
-      OBJ oForm2 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Seleccionar' ;
-      MODAL ;
-      ON RELEASE ( oEdit:Value := Data->Code, Code->Number := Data->Number )
+         OBJ oForm2 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Seleccionar' ;
+         MODAL ;
+         ON RELEASE ( oEdit:Value := Data->Code, Code->Number := Data->Number )
 
       @ 10, 10 BROWSE Browse_2 OBJ oBrw2 ;
          WIDTH 400 ;
@@ -98,9 +97,8 @@ FUNCTION Seleccionar( oBrw )
 
    oForm2:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTablas()
 
    LOCAL aDbf1[ 3 ][ 4 ], aDbf2[ 3 ][ 4 ]
@@ -213,18 +211,18 @@ FUNCTION AbrirTablas()
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CerrarTablas()
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Code.dbf
-  ERASE Data.dbf
+   ERASE Code.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

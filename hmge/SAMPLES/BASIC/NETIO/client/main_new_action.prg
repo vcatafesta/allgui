@@ -1,36 +1,38 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
-Function main_new_action
-LOCAL Title , aLabels , aInitValues , aFormats , aValues
+FUNCTION main_new_action
 
-IF Main.Query_Server.Enabled == .T.
+   LOCAL Title , aLabels , aInitValues , aFormats , aValues
 
-	Title 		:= 'New Record'
+   IF Main.Query_Server.Enabled == .T.
 
-	aLabels 	:= { 'First:'	, 'Last:'	,'Street:'		,'City:'	,'State:'	,'Zip:' , 'Hire Date'	, 'Married'	, 'Age'	, 'Salary'	}
-	aInitValues 	:= { ''		, '' 		, ''			, ''	 	, '' 		,'' 	, DATE()	, .F.		, 0	, 0		}
-	aFormats 	:= { 32		, 32 		, 32			, 32 		, 32		, 32 	, NIL		, NIL		, '99'	, '999999'	}
+      Title       := 'New Record'
 
-	aValues 	:= InputWindow ( Title , aLabels , aInitValues , aFormats )
+      aLabels    := { 'First:'   , 'Last:'   ,'Street:'      ,'City:'   ,'State:'   ,'Zip:' , 'Hire Date'   , 'Married'   , 'Age'   , 'Salary'   }
+      aInitValues    := { ''      , ''       , ''         , ''       , ''       ,''    , DATE()   , .F.      , 0   , 0      }
+      aFormats    := { 32      , 32       , 32         , 32       , 32      , 32    , NIL      , NIL      , '99'   , '999999'   }
 
-	If aValues [1] == Nil
+      aValues    := InputWindow ( Title , aLabels , aInitValues , aFormats )
 
-		MsgInfo( 'Canceled', 'New Record' )
+      IF aValues [1] == Nil
 
-	Else
+         MsgInfo( 'Canceled', 'New Record' )
 
-		netio_funcexec( "query_003" , aValues )
+      ELSE
 
-		MsgInfo( 'Operation Completed!' )
+         netio_funcexec( "query_003" , aValues )
 
-		Main.Query_String.Value := aValues[2]
+         MsgInfo( 'Operation Completed!' )
 
-		main_query_server_action()
+         Main.Query_String.Value := aValues[2]
 
-	EndIf
+         main_query_server_action()
 
-ENDIF
+      ENDIF
 
-Return Nil
+   ENDIF
+
+   RETURN NIL
+

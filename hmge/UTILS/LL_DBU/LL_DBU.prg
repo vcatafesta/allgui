@@ -1,65 +1,65 @@
 /*
 
-  LL_DBU : Low Level DBU.
+LL_DBU : Low Level DBU.
 
-  Not a real DBU, only an experimental work with very limited DB operations.
+Not a real DBU, only an experimental work with very limited DB operations.
 
-  Primary goal of this project is access, detect, inspect and dig a damaged table.
+Primary goal of this project is access, detect, inspect and dig a damaged table.
 
-  Reasons of damage may be various, so recovery method too depend on a damage type.
+Reasons of damage may be various, so recovery method too depend on a damage type.
 
-  This program open a table by Low Level file access and read methods. 
+This program open a table by Low Level file access and read methods.
 
-  A second usage may be inspecting how data recorded into a table; always in the visible form or not.
+A second usage may be inspecting how data recorded into a table; always in the visible form or not.
 
-  I also tried some function to easy using of Virtual Grid. The virtual grid is a very handy control
-  (even have more possibilities than standard Grid). But don't have AddItems and Refresh methods. 
-  This program have two little functions for this purpose ( VGridAddItem() and VGridRefresh() ).
+I also tried some function to easy using of Virtual Grid. The virtual grid is a very handy control
+(even have more possibilities than standard Grid). But don't have AddItems and Refresh methods.
+This program have two little functions for this purpose ( VGridAddItem() and VGridRefresh() ).
 
-  Another interesting point may be showing how can be implement "returning beginning of procedure" from anywhere 
-  of that procedure ( procedure : LL_UseTable() ). 
-    
-  I hope that my friends find useful this humble work.
+Another interesting point may be showing how can be implement "returning beginning of procedure" from anywhere
+of that procedure ( procedure : LL_UseTable() ).
 
-  Happy HMG'ing :D
+I hope that my friends find useful this humble work.
 
-  Bicahi Esgici
+Happy HMG'ing :D
 
-  2010, 12, 21
+Bicahi Esgici
+
+2010, 12, 21
 
 */
 
 /*
- * Adapted for MiniGUI Extended Edition by Grigory Filatov - Dec 2010
+* Adapted for MiniGUI Extended Edition by Grigory Filatov - Dec 2010
 */
 
 #include "minigui.ch"
 #include "fileio.ch"
 
 STATIC aTblInfo,;
-       aTableStru,;
-       aTInfGrdItems,;
-       nFileHandle,;
-       nFileLength,;
-       nFilePointr,;
-       nTblHdrLeng,;
-       nTblRecLeng,;
-       aFInfNams,;
-       aRecoData
+   aTableStru,;
+   aTInfGrdItems,;
+   nFileHandle,;
+   nFileLength,;
+   nFilePointr,;
+   nTblHdrLeng,;
+   nTblRecLeng,;
+   aFInfNams,;
+   aRecoData
 
 PROCEDURE Main( cTableNam )
 
-   LOCAL aButtons := { { " « ", "Go to first record",    430,  96  },;  
-                       { " < ", "Go to previous record", 430, 212  },;  
-                       { " > ", "Go to next record",     430, 328  },;  
-                       { " » ", "Go to last record",     430, 444  } }  
+   LOCAL aButtons := { { " « ", "Go to first record",    430,  96  },;
+      { " < ", "Go to previous record", 430, 212  },;
+      { " > ", "Go to next record",     430, 328  },;
+      { " » ", "Go to last record",     430, 444  } }
 
    LOCAL nButton,;
-         cBtnName,;
-         cBtnCapt,;
-         cBtnTTip,;
-         nBttnRow,;
-         nBttnCol
+      cBtnName,;
+      cBtnCapt,;
+      cBtnTTip,;
+      nBttnRow,;
+      nBttnCol
 
    SET CENT ON
 
@@ -77,141 +77,141 @@ PROCEDURE Main( cTableNam )
    nTblHdrLeng := 0
    nTblRecLeng := 0
 
-   aFInfNams  := { { 'Type', 'Table Type'           },; 
-                   { 'UDat', 'Last Update Date'     },;
-                   { 'HLen', 'Header Length'        },;
-                   { 'RLen', 'Record Length'        },;
-                   { 'RCou', 'Record Count'         },;
-                   { 'FCou', 'Field Count'          },;
-                   { 'FSzC', 'File Size (Computed)' } }
+   aFInfNams  := { { 'Type', 'Table Type'           },;
+      { 'UDat', 'Last Update Date'     },;
+      { 'HLen', 'Header Length'        },;
+      { 'RLen', 'Record Length'        },;
+      { 'RCou', 'Record Count'         },;
+      { 'FCou', 'Field Count'          },;
+      { 'FSzC', 'File Size (Computed)' } }
 
    AEVAL( aFInfNams, { | a1 | AADD( aTInfGrdItems, { a1[ 2 ], '' } ) } )
 
    aRecoData := {}
 
    DEFINE WINDOW frmLLDBUMain ;
-       AT 0,0 ;
-       WIDTH 630 ;
-       HEIGHT 550;
-       TITLE 'LL DBU ( Low-level DBU )' ;
-       ON INIT LL_UseTable( cTableNam ) ;
-       MAIN ;
-       ICON 'MAIN'
+         AT 0,0 ;
+         WIDTH 630 ;
+         HEIGHT 550;
+         TITLE 'LL DBU ( Low-level DBU )' ;
+         ON INIT LL_UseTable( cTableNam ) ;
+         MAIN ;
+         ICON 'MAIN'
 
-       ON KEY ESCAPE ACTION frmLLDBUMain.Release
+      ON KEY ESCAPE ACTION frmLLDBUMain.Release
 
-       DEFINE TAB tabLLDBUMain ;
-          OF     frmLLDBUMain  ;
-          AT     10, 10        ;
-          WIDTH  600           ;
-          HEIGHT 480           ;
-          VALUE 1              
+      DEFINE TAB tabLLDBUMain ;
+            OF     frmLLDBUMain  ;
+            AT     10, 10        ;
+            WIDTH  600           ;
+            HEIGHT 480           ;
+            VALUE 1
 
-          DEFINE PAGE 'Table Info'
+         DEFINE PAGE 'Table Info'
 
-             DEFINE GRID  grdTblInfo
-                 PARENT   frmLLDBUMain
-                 ROW      30
-                 COL      100
-                 WIDTH    380
-                 HEIGHT   180 
-                 HEADERS  { 'Info Name', 'Info Data' }
-                 WIDTHS   { 130, 246 }             
-                 ON QUERYDATA VGridAddItem( aTInfGrdItems )
+            DEFINE GRID  grdTblInfo
+               PARENT   frmLLDBUMain
+               ROW      30
+               COL      100
+               WIDTH    380
+               HEIGHT   180
+               HEADERS  { 'Info Name', 'Info Data' }
+               WIDTHS   { 130, 246 }
+               ON QUERYDATA VGridAddItem( aTInfGrdItems )
 
-                 VIRTUAL  .T.  
+               VIRTUAL  .T.
 
-                 ITEMCOUNT LEN( aTInfGrdItems ) 
+               ITEMCOUNT LEN( aTInfGrdItems )
 
-             END GRID // grdTblData 
+            END GRID // grdTblData
 
-             DEFINE GRID  grdTblStru 
-                 PARENT   frmLLDBUMain
-                 ROW      220 
-                 COL      100
-                 WIDTH    380
-                 HEIGHT   250
-                 HEADERS  { 'No', 'Field Name', 'Type', 'Width', 'Dec' }
-                 WIDTHS   { 30, 100, 109, 60, 60 }             
+            DEFINE GRID  grdTblStru
+               PARENT   frmLLDBUMain
+               ROW      220
+               COL      100
+               WIDTH    380
+               HEIGHT   250
+               HEADERS  { 'No', 'Field Name', 'Type', 'Width', 'Dec' }
+               WIDTHS   { 30, 100, 109, 60, 60 }
 
-                 COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}          ,;
-                                  {'TEXTBOX','CHARACTER'}          ,;
-                                  {'TEXTBOX','CHARACTER'}          ,;
-                                  {'TEXTBOX','NUMERIC','99,9999'}  ,;
-                                  {'TEXTBOX','NUMERIC','99'}       } 
+               COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}          ,;
+                  {'TEXTBOX','CHARACTER'}          ,;
+                  {'TEXTBOX','CHARACTER'}          ,;
+                  {'TEXTBOX','NUMERIC','99,9999'}  ,;
+                  {'TEXTBOX','NUMERIC','99'}       }
 
-                 ON QUERYDATA VGridAddItem( aTableStru )
+               ON QUERYDATA VGridAddItem( aTableStru )
 
-                 VIRTUAL  .T.  
+               VIRTUAL  .T.
 
-                 ITEMCOUNT LEN( aTableStru ) 
+               ITEMCOUNT LEN( aTableStru )
 
-             END GRID // grdTblStru              
+            END GRID // grdTblStru
 
-          END PAGE // TabPage&DBInfo
-       
-          /*   
-       
-             Second page of Tab ( record data : fields names and their contents )
-       
-          */   
+         END PAGE // TabPage&DBInfo
 
-          DEFINE PAGE 'Record Data'
-             DEFINE GRID  grdTblData
-                 PARENT   frmLLDBUMain
-                 ROW      30
-                 COL      10
-                 WIDTH    580
-                 HEIGHT   380 
-                 HEADERS  { 'Field Name', 'Field Content' }
-                 WIDTHS   { 80, 496 }             
+         /*
 
-                 ON QUERYDATA VGridAddItem( aRecoData )
+         Second page of Tab ( record data : fields names and their contents )
 
-                 VIRTUAL  .T.  
+         */
 
-             END GRID // grdTblData 
+         DEFINE PAGE 'Record Data'
+            DEFINE GRID  grdTblData
+               PARENT   frmLLDBUMain
+               ROW      30
+               COL      10
+               WIDTH    580
+               HEIGHT   380
+               HEADERS  { 'Field Name', 'Field Content' }
+               WIDTHS   { 80, 496 }
 
-             FOR nButton := 1 TO LEN( aButtons )
+               ON QUERYDATA VGridAddItem( aRecoData )
 
-                 cBtnName := "btnNav_" + LTRIM( STR( nButton ) )
-                 cBtnCapt := aButtons[ nButton, 1 ]
-                 cBtnTTip := aButtons[ nButton, 2 ]
-                 nBttnRow := aButtons[ nButton, 3 ]
-                 nBttnCol := aButtons[ nButton, 4 ]
+               VIRTUAL  .T.
 
-                 DEFINE BUTTON &cBtnName
-                    PARENT   frmLLDBUMain
-                    ROW nBttnRow
-                    COL nBttnCol
-                    CAPTION cBtnCapt
-                    ONCLICK LL_SKIP( VAL( RIGHT( This.Name, 1 ) ) )
-                    WIDTH 20
-                    HEIGHT 20
-                    FONTNAME "FixedSys"
-                    FONTSIZE 15
-                    FONTBOLD .T.
-                    TOOLTIP cBtnTTip
-                 END BUTTON // &cBtnName 
+            END GRID // grdTblData
 
-             NEXT nButton   
+            FOR nButton := 1 TO LEN( aButtons )
 
-          END PAGE // TabPage&Record
+               cBtnName := "btnNav_" + LTRIM( STR( nButton ) )
+               cBtnCapt := aButtons[ nButton, 1 ]
+               cBtnTTip := aButtons[ nButton, 2 ]
+               nBttnRow := aButtons[ nButton, 3 ]
+               nBttnCol := aButtons[ nButton, 4 ]
 
-       END TAB // tabLLDBUMain
+               DEFINE BUTTON &cBtnName
+                  PARENT   frmLLDBUMain
+                  ROW nBttnRow
+                  COL nBttnCol
+                  CAPTION cBtnCapt
+                  ONCLICK LL_SKIP( VAL( RIGHT( This.Name, 1 ) ) )
+                  WIDTH 20
+                  HEIGHT 20
+                  FONTNAME "FixedSys"
+                  FONTSIZE 15
+                  FONTBOLD .T.
+                  TOOLTIP cBtnTTip
+               END BUTTON // &cBtnName
 
-       DEFINE CONTEXT MENU OF frmLLDBUMain
-          ITEM 'Open Table' ACTION LL_UseTable()
-          SEPARATOR
-          ITEM 'About' ACTION MsgAbout()
-       END MENU
+            NEXT nButton
 
-       DEFINE STATUSBAR FONT 'Verdana' SIZE 8
-          STATUSITEM "" WIDTH 400
-          STATUSITEM "" WIDTH 47
-          DATE          WIDTH 83
-          CLOCK         WIDTH 73
-       END STATUSBAR
+         END PAGE // TabPage&Record
+
+      END TAB // tabLLDBUMain
+
+      DEFINE CONTEXT MENU OF frmLLDBUMain
+         ITEM 'Open Table' ACTION LL_UseTable()
+         SEPARATOR
+         ITEM 'About' ACTION MsgAbout()
+      END MENU
+
+      DEFINE STATUSBAR FONT 'Verdana' SIZE 8
+         STATUSITEM "" WIDTH 400
+         STATUSITEM "" WIDTH 47
+         DATE          WIDTH 83
+         CLOCK         WIDTH 73
+      END STATUSBAR
 
    END WINDOW
 
@@ -220,26 +220,27 @@ PROCEDURE Main( cTableNam )
 
    RETURN // Main()
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-/*
+   /*
    An example procedure to show how can be implement "returning beginning of procedure" from anywhere of that procedure.
-*/
+   */
+
 PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
-                    cTableNam )
+   cTableNam )
 
    LOCAL aTGHas   := {},;
-         nFVSnFT              // file's validity status and file type
+      nFVSnFT              // file's validity status and file type
 
    WHILE .T.
 
       IF HB_ISNIL( cTableNam )
 
          cTableNam := GetFile ( { { 'Tables', '*.dbf' }, { 'All Files', '*.*' } },;  // acFilter
-                                'Select Table',;   // cTitle 
-                                ,;                 // cDefaultPath 
-                                .F.,;              // lMultiSelect 
-                                .F. )              // lNoChangeDir 
+         'Select Table',;   // cTitle
+         ,;                 // cDefaultPath
+         .F.,;              // lMultiSelect
+         .F. )              // lNoChangeDir
       ENDIF
 
       IF !EMPTY( cTableNam ) .AND. FILE( cTableNam )
@@ -250,19 +251,19 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
 
          aTblInfo := HL_DBInfoLL( cTableNam, .F. )
 
-         nFVSnFT  := aTblInfo[ 1 ] 
+         nFVSnFT  := aTblInfo[ 1 ]
 
          IF nFVSnFT > 0                // Valid Table
 
             nFileHandle := aTblInfo[ 2 ]
-            nTblHdrLeng := aTblInfo[ 3, 1, 2, 3, 2 ] 
-            nTblRecLeng := aTblInfo[ 3, 1, 2, 4, 2 ] 
+            nTblHdrLeng := aTblInfo[ 3, 1, 2, 3, 2 ]
+            nTblRecLeng := aTblInfo[ 3, 1, 2, 4, 2 ]
             nFileLength := FSEEK( nFileHandle, 0, 2 )
             nFilePointr := FSEEK( nFileHandle, nTblHdrLeng, 0 )
 
             aTGHas   := aTblInfo[ 3, 1, 2 ]
             frmLLDBUMain.STATUSBAR.Item( 1 ) := aTGHas[ 1, 2 ]  // Full file name
-            aTGHas[ 1, 1 ] := "Type"                            
+            aTGHas[ 1, 1 ] := "Type"
             aTGHas[ 1, 2 ] := HL_TablTypeNam( nFVSnFT )
             AEVAL( aTInfGrdItems, { | a1, i1 | a1[ 2 ] := aTGHas[ i1, 2 ] } )
             VGridRefresh( "frmLLDBUMain", "grdTblInfo" )
@@ -270,19 +271,19 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
             aTableStru := aTblInfo[ 3, 2, 2 ]
             AEVAL( aTableStru, { | a1, i1 | ASIZE( a1, 5 ), AINS( a1, 1 ), a1[ 1 ] := STR( i1, 3 ) } )
             AEVAL( aTableStru, { | a1 | a1[ 3 ] += " ( " +  HL_FldTypC2V( a1[ 3 ] ) + " )" } )
-      
-            frmLLDBUMain.grdTblStru.ItemCount := LEN( aTableStru ) 
+
+            frmLLDBUMain.grdTblStru.ItemCount := LEN( aTableStru )
             VGridRefresh( "frmLLDBUMain", "grdTblStru" )
 
             /*
-               Page - 2
+            Page - 2
             */
 
             aRecoData := { { '<Deleted>', '' } }
 
-            AEVAL( aTableStru, { | a1 | AADD( aRecoData, { a1[ 2 ], '' } ) } ) 
+            AEVAL( aTableStru, { | a1 | AADD( aRecoData, { a1[ 2 ], '' } ) } )
 
-            frmLLDBUMain.grdTblData.ItemCount := LEN( aTableStru ) + 1  // +1 for "deleted" mark 
+            frmLLDBUMain.grdTblData.ItemCount := LEN( aTableStru ) + 1  // +1 for "deleted" mark
             VGridRefresh( "frmLLDBUMain", "grdTblData" )
 
             LL_SKIP( 1 ) // Go Top
@@ -301,16 +302,16 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
 
    ENDDO .T.
 
-RETURN // LL_UseTable()
+   RETURN // LL_UseTable()
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE VGridRefresh(;
-                         cWindName,;
-                         cGridName )
+      cWindName,;
+      cGridName )
 
    LOCAL nGrdValue,;
-         nGrdItmCo := GetProperty( cWindName, cGridName, "ItemCount" )
+      nGrdItmCo := GetProperty( cWindName, cGridName, "ItemCount" )
 
    FOR nGrdValue := 1 TO nGrdItmCo
       SetProperty( cWindName, cGridName, "Value", nGrdValue )
@@ -318,22 +319,22 @@ PROCEDURE VGridRefresh(;
 
    SetProperty( cWindName, cGridName, "Value", 1 )
 
-RETURN // VGridRefresh()
+   RETURN // VGridRefresh()
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE VGridAddItem(;
-                          aGridItems )
+      aGridItems )
 
-  IF This.QueryRowIndex <= LEN( aGridItems )
+   IF This.QueryRowIndex <= LEN( aGridItems )
 
       This.QueryData := aGridItems[ This.QueryRowIndex, This.QueryColIndex ]
 
-  ENDIF      
+   ENDIF
 
-RETURN // VGridAddItem()
+   RETURN // VGridAddItem()
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE LL_SKIP( nSkip )           // Low-level skip
 
@@ -342,14 +343,14 @@ PROCEDURE LL_SKIP( nSkip )           // Low-level skip
 
    DO CASE
 
-      CASE nSkip == 1  // Go Top
-         nFilePointr := FSEEK( nFileHandle, nTblHdrLeng, 0 )
-      CASE nSkip == 2  // Go Prev
-         nFilePointr := FSEEK( nFileHandle, nFilePointr - nTblRecLeng, 0 )
-      CASE nSkip == 3  // Go Next
-         nFilePointr := FSEEK( nFileHandle, nFilePointr + nTblRecLeng, 0 )
-      CASE nSkip == 4  // Go Bottom
-         nFilePointr := FSEEK( nFileHandle, nTblRecLeng, 2 )
+   CASE nSkip == 1  // Go Top
+      nFilePointr := FSEEK( nFileHandle, nTblHdrLeng, 0 )
+   CASE nSkip == 2  // Go Prev
+      nFilePointr := FSEEK( nFileHandle, nFilePointr - nTblRecLeng, 0 )
+   CASE nSkip == 3  // Go Next
+      nFilePointr := FSEEK( nFileHandle, nFilePointr + nTblRecLeng, 0 )
+   CASE nSkip == 4  // Go Bottom
+      nFilePointr := FSEEK( nFileHandle, nTblRecLeng, 2 )
 
    END CASE // nSkip
 
@@ -371,41 +372,41 @@ PROCEDURE LL_SKIP( nSkip )           // Low-level skip
 
    ENDIF
 
-   frmLLDBUMain.STATUSBAR.Item( 2 ) := PADC( HB_NTOS( nCurrRRN ), 8 ) // nCurrRRN 
+   frmLLDBUMain.STATUSBAR.Item( 2 ) := PADC( HB_NTOS( nCurrRRN ), 8 ) // nCurrRRN
 
-RETURN // LL_SKIP( nSkip )
+   RETURN // LL_SKIP( nSkip )
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE LL_DispReco()
 
    LOCAL cRecStr := SPACE( nTblRecLeng ),;
-         nRBytes
+      nRBytes
 
    LOCAL aClTblStru := { { '', '<Deleted>', '', 1, 0 } }
 
    LOCAL nFldNum,;
-         nFldPos :=  1,;
-         nFldLen,;
-         cFldDat,;
-         aRecDat := {}
+      nFldPos :=  1,;
+      nFldLen,;
+      cFldDat,;
+      aRecDat := {}
 
-   AEVAL( aTableStru, { | a1 | AADD( aClTblStru, a1 ) } )     
+   AEVAL( aTableStru, { | a1 | AADD( aClTblStru, a1 ) } )
 
-   nRBytes := FREAD( nFileHandle, @cRecStr, nTblRecLeng ) 
+   nRBytes := FREAD( nFileHandle, @cRecStr, nTblRecLeng )
 
    IF nRBytes # nTblRecLeng
       MsgAlert( "Low level file read error", "Alert" )
-   ELSE   
+   ELSE
       FOR nFldNum := 1 TO LEN( aClTblStru )
-         nFldLen := aClTblStru[ nFldNum, 4 ]   
+         nFldLen := aClTblStru[ nFldNum, 4 ]
          cFldDat := SUBSTR( cRecStr, nFldPos, nFldLen )
          IF HL_IsIncCtrl( cFldDat )
             cFldDat := '0x' + FT_BYT2HEX( cFldDat ) + '( ' + cFldDat + ' )'
-         ENDIF   
-         AADD( aRecDat, cFldDat )   
+         ENDIF
+         AADD( aRecDat, cFldDat )
          nFldPos += nFldLen
-      NEXT nFldNum 
+      NEXT nFldNum
 
       AEVAL( aRecDat, { | c1, i1 | aRecoData[ i1, 2 ] := c1 } )
 
@@ -413,27 +414,28 @@ PROCEDURE LL_DispReco()
 
    ENDIF
 
-RETURN // LL_DispReco()
+   RETURN // LL_DispReco()
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION MsgAbout()
 
-RETURN MsgInfo(;
-  "Not a real DBU, only an experimental work with very limited DB operations." + CRLF + CRLF +;
-  "Primary goal of this project is access, detect, inspect and dig a damaged table." + CRLF + CRLF +;
-  "Reasons of damage may be various, so recovery method too depend on a damage type." + CRLF + CRLF +;
-  "This program open a table by Low Level file access and read methods." + CRLF + CRLF +;
-  "A second usage may be inspecting how data recorded into a table; always in the visible form or not." + CRLF + CRLF +;
-  "I hope that my friends find useful this humble work." + CRLF + CRLF +;
-  "Happy HMG'ing :D" + CRLF + CRLF +;
-  "Bicahi Esgici", "About Low Level DBU" )
+   RETURN MsgInfo(;
+      "Not a real DBU, only an experimental work with very limited DB operations." + CRLF + CRLF +;
+      "Primary goal of this project is access, detect, inspect and dig a damaged table." + CRLF + CRLF +;
+      "Reasons of damage may be various, so recovery method too depend on a damage type." + CRLF + CRLF +;
+      "This program open a table by Low Level file access and read methods." + CRLF + CRLF +;
+      "A second usage may be inspecting how data recorded into a table; always in the visible form or not." + CRLF + CRLF +;
+      "I hope that my friends find useful this humble work." + CRLF + CRLF +;
+      "Happy HMG'ing :D" + CRLF + CRLF +;
+      "Bicahi Esgici", "About Low Level DBU" )
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-#define HEXTABLE "0123456789ABCDEF"
+   #define HEXTABLE "0123456789ABCDEF"
 
 FUNCTION HEX2DEC( cHexNum )
+
    LOCAL n, nDec := 0, nHexPower := 1
 
    FOR n := LEN( cHexNum ) TO 1 step -1
@@ -441,42 +443,45 @@ FUNCTION HEX2DEC( cHexNum )
       nHexPower *= 16
    NEXT n
 
-RETURN nDec
+   RETURN nDec
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION FT_BYT2HEX( cByte )
+
    LOCAL xHexString := ""
 
    IF VALTYPE(cByte) == "C"
       xHexString += SUBSTR( HEXTABLE, INT(ASC(cByte) / 16) + 1, 1 ) ;
-                  + SUBSTR( HEXTABLE, INT(ASC(cByte) % 16) + 1, 1 )
+         + SUBSTR( HEXTABLE, INT(ASC(cByte) % 16) + 1, 1 )
    ENDIF
 
-RETURN xHexString
+   RETURN xHexString
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION HL_IsIncCtrl( cByte )
+
    LOCAL z, x
    LOCAL lRet := .F.
 
    FOR x := 1 TO LEN( cByte )
       z := SUBSTR( cByte , x , 1 )
-      If !( ISDIGIT( z ) .OR. z == '.' .OR. ISALPHA( z ) .OR. z == ' ' .OR. z == '!' .OR. z == '?' .OR. z == '-' .OR. z == '*' )
+      IF !( ISDIGIT( z ) .OR. z == '.' .OR. ISALPHA( z ) .OR. z == ' ' .OR. z == '!' .OR. z == '?' .OR. z == '-' .OR. z == '*' )
          lRet := .T.
-         Exit
-      EndIf
+         EXIT
+      ENDIF
    NEXT x
 
-RETURN lRet
+   RETURN lRet
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION HL_FldTypC2V( field_type )
+
    LOCAL cType := "Unknown"
    LOCAL data_type [5],;
-         n
+      n
 
    // data types as character strings
    data_type [1] := "Character"
@@ -489,11 +494,12 @@ FUNCTION HL_FldTypC2V( field_type )
       cType := data_type[ n ]
    ENDIF
 
-RETURN cType
+   RETURN cType
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION HL_TablTypeNam( ntype )
+
    LOCAL cString := ""
 
    SWITCH ntype
@@ -541,11 +547,12 @@ FUNCTION HL_TablTypeNam( ntype )
 
    ENDSWITCH
 
-RETURN cString
+   RETURN cString
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION GetTableNum( ctype )
+
    LOCAL nRet := 0
 
    SWITCH ctype
@@ -593,14 +600,15 @@ FUNCTION GetTableNum( ctype )
 
    ENDSWITCH
 
-RETURN nRet
+   RETURN nRet
 
-*.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-#define FIELD_ENTRY_SIZE 32
-#define FIELD_NAME_SIZE  11
+   #define FIELD_ENTRY_SIZE 32
+   #define FIELD_NAME_SIZE  11
 
 FUNCTION HL_DBInfoLL( cTable, lMessage )
+
    LOCAL nHandle
    LOCAL dbfhead
    LOCAL h1,h2,h3,h4
@@ -634,6 +642,7 @@ FUNCTION HL_DBInfoLL( cTable, lMessage )
       IF lMessage
          MsgStop('Can not open file '+cTable+' for reading!')
       ENDIF
+
       RETURN aInfo
    ENDIF
 
@@ -654,6 +663,7 @@ FUNCTION HL_DBInfoLL( cTable, lMessage )
          MsgStop('Can not detect type of file '+cTable)
       ENDIF
       FCLOSE( nHandle )
+
       RETURN aInfo
    ENDIF
 
@@ -707,37 +717,37 @@ FUNCTION HL_DBInfoLL( cTable, lMessage )
    // Fields Structure
    fieldlist := {}
    FOR nField=1 TO nof
-     nPos := nField * FIELD_ENTRY_SIZE
-     FSEEK( nHandle, nPos, FS_SET ) // Goto File Offset of the nField-th Field
-     cFieldName := SPACE(FIELD_NAME_SIZE)
-     FREAD( nHandle, @cFieldName, FIELD_NAME_SIZE )
-     cFieldName := STRTRAN(cFieldName,CHR(0),' ')
-     cFieldName := RTRIM(SUBSTR(cFieldName,1,AT(' ',cFieldName)))
+      nPos := nField * FIELD_ENTRY_SIZE
+      FSEEK( nHandle, nPos, FS_SET ) // Goto File Offset of the nField-th Field
+      cFieldName := SPACE(FIELD_NAME_SIZE)
+      FREAD( nHandle, @cFieldName, FIELD_NAME_SIZE )
+      cFieldName := STRTRAN(cFieldName,CHR(0),' ')
+      cFieldName := RTRIM(SUBSTR(cFieldName,1,AT(' ',cFieldName)))
 
-     cType := SPACE(1)
-     FREAD( nHandle, @cType, 1 )
+      cType := SPACE(1)
+      FREAD( nHandle, @cType, 1 )
 
-     FSEEK( nHandle, 4, FS_RELATIVE )
-     IF ctype=='C'
-       cWidth:=SPACE(2)
-       FREAD( nHandle, @cWidth, 2 )
-       h1:=FT_BYT2HEX(SUBSTR(cWidth,1,1))
-       h2:=FT_BYT2HEX(SUBSTR(cWidth,2,1))
-       nWidth:=hex2dec(h1)+256*hex2dec(h2) // record size
-       nDec:=0
-     ELSE
-       cWidth:=SPACE(1)
-       FREAD( nHandle, @cWidth, 1 )
-       nWidth:=hex2dec(FT_BYT2HEX(cWidth))
-       cDec:=SPACE(1)
-       FREAD( nHandle, @cDec, 1 )
-       nDec:=hex2dec(FT_BYT2HEX(cDec))
-     ENDIF
-     AADD(fieldlist,{cFieldName,cType,nWidth,nDec})
+      FSEEK( nHandle, 4, FS_RELATIVE )
+      IF ctype=='C'
+         cWidth:=SPACE(2)
+         FREAD( nHandle, @cWidth, 2 )
+         h1:=FT_BYT2HEX(SUBSTR(cWidth,1,1))
+         h2:=FT_BYT2HEX(SUBSTR(cWidth,2,1))
+         nWidth:=hex2dec(h1)+256*hex2dec(h2) // record size
+         nDec:=0
+      ELSE
+         cWidth:=SPACE(1)
+         FREAD( nHandle, @cWidth, 1 )
+         nWidth:=hex2dec(FT_BYT2HEX(cWidth))
+         cDec:=SPACE(1)
+         FREAD( nHandle, @cDec, 1 )
+         nDec:=hex2dec(FT_BYT2HEX(cDec))
+      ENDIF
+      AADD(fieldlist,{cFieldName,cType,nWidth,nDec})
    NEXT
 
    aInfo[3][2] := ARRAY( 2 )
    aInfo[3][2][2] := fieldlist
 
-RETURN aInfo
+   RETURN aInfo
 

@@ -1,11 +1,9 @@
 /*
- * $Id: hsplit.prg,v 1.11 2008/06/20 23:43:00 mlacecilia Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HSplitter class
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hsplit.prg,v 1.11 2008/06/20 23:43:00 mlacecilia Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HSplitter class
+* Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -15,7 +13,7 @@
 
 CLASS HSplitter INHERIT HControl
 
-   CLASS VAR winclass INIT "STATIC"
+CLASS VAR winclass INIT "STATIC"
 
    DATA aLeft
    DATA aRight
@@ -25,22 +23,28 @@ CLASS HSplitter INHERIT HControl
    DATA lMoved INIT .F.
    DATA bEndDrag
 
-   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
-                  bSize,bPaint,color,bcolor,aLeft,aRight )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Paint( lpdis )
-   METHOD Drag( lParam )
-   METHOD DragAll()
+METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
+      bSize,bPaint,color,bcolor,aLeft,aRight )
+
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Paint( lpdis )
+
+METHOD Drag( lParam )
+
+METHOD DragAll()
 
 ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
-                  bSize,bDraw,color,bcolor,aLeft,aRight ) CLASS HSplitter
+      bSize,bDraw,color,bcolor,aLeft,aRight ) CLASS HSplitter
 
    Super:New( oWndParent,nId,WS_CHILD+WS_VISIBLE+SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,,, ;
-                  bSize,bDraw,,color,bcolor )
+      bSize,bDraw,,color,bcolor )
 
    ::title   := ""
    ::aLeft   := Iif( aLeft==Nil, {}, aLeft )
@@ -49,19 +53,21 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD Activate() CLASS HSplitter
-   IF !empty( ::oParent:handle ) 
+
+   IF !empty( ::oParent:handle )
       ::handle := CreateStatic( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
-HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(wParam)
 
    IF msg == WM_MOUSEMOVE
       IF ::hCursor == Nil
@@ -88,7 +94,7 @@ HB_SYMBOL_UNUSED(wParam)
       ::End()
    ENDIF
 
-Return -1
+   RETURN -1
 
 METHOD Init CLASS HSplitter
 
@@ -99,16 +105,18 @@ METHOD Init CLASS HSplitter
       Hwg_InitWinCtrl( ::handle )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HSplitter
-/*
-Local drawInfo := GetDrawItemInfo( lpdis )
-Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
-*/
-Local pps, hDC, aCoors, x1, y1, x2, y2
 
-HB_SYMBOL_UNUSED(lpdis)
+   /*
+   Local drawInfo := GetDrawItemInfo( lpdis )
+   Local hDC := drawInfo[3], x1 := drawInfo[4], y1 := drawInfo[5], x2 := drawInfo[6], y2 := drawInfo[7]
+
+   */
+   LOCAL pps, hDC, aCoors, x1, y1, x2, y2
+
+   HB_SYMBOL_UNUSED(lpdis)
 
    pps := DefinePaintStru()
    hDC := BeginPaint( ::handle, pps )
@@ -123,12 +131,13 @@ HB_SYMBOL_UNUSED(lpdis)
    ELSE
       DrawEdge( hDC,x1,y1,x2,y2,EDGE_ETCHED,Iif( ::lVertical,BF_LEFT,BF_TOP ) )
    ENDIF
-   EndPaint( ::handle, pps )
+EndPaint( ::handle, pps )
 
-Return Nil
+RETURN NIL
 
 METHOD Drag( lParam ) CLASS HSplitter
-Local xPos := Loword( lParam ), yPos := Hiword( lParam )
+
+   LOCAL xPos := Loword( lParam ), yPos := Hiword( lParam )
 
    IF ::lVertical
       IF xPos > 32000
@@ -144,10 +153,11 @@ Local xPos := Loword( lParam ), yPos := Hiword( lParam )
    MoveWindow( ::handle,::nLeft,::nTop,::nWidth,::nHeight )
    ::lMoved := .T.
 
-Return Nil
+   RETURN NIL
 
 METHOD DragAll() CLASS HSplitter
-Local i, oCtrl, nDiff
+
+   LOCAL i, oCtrl, nDiff
 
    FOR i := 1 TO Len( ::aRight )
       oCtrl := ::aRight[i]
@@ -175,5 +185,5 @@ Local i, oCtrl, nDiff
    NEXT
    ::lMoved := .F.
 
-Return Nil
+   RETURN NIL
 

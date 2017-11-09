@@ -1,101 +1,96 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "minigui.ch"
 
 MEMVAR oMain, oWnd
 
-Function Main
-	LOCAL hSplitHandle, nY, nH
+FUNCTION Main
 
-	**********
-	SET OOP ON
-	**********
+   LOCAL hSplitHandle, nY, nH
 
-	SET CENTURY ON
+   SET OOP ON
 
-	SET DATE AMERICAN
+   SET CENTURY ON
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 800 HEIGHT 600 ;
-		TITLE 'MiniGUI SplitBox Demo' ;
-		MAIN ;
-		FONT 'Arial' SIZE 10 
+   SET DATE AMERICAN
 
-		*********************************
-		PUBLIC oMain := ThisWindow.Object
-		*********************************
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 HEIGHT 600 ;
+         TITLE 'MiniGUI SplitBox Demo' ;
+         MAIN ;
+         FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
-			POPUP '&File'
-				ITEM 'Exit'	ACTION Form_1.Release
-			END POPUP
-			POPUP '&Help'
-				ITEM 'About'	ACTION MsgInfo (MiniGUIVersion(), "MiniGUI SplitBox Demo") 
-			END POPUP
-		END MENU
-	
-		DEFINE SPLITBOX HANDLE hSplitHandle
+      PUBLIC oMain := ThisWindow.Object
 
-			DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 85,85 FLAT
+      DEFINE MAIN MENU
+         POPUP '&File'
+            ITEM 'Exit'   ACTION Form_1.Release
+         END POPUP
+         POPUP '&Help'
+            ITEM 'About'   ACTION MsgInfo (MiniGUIVersion(), "MiniGUI SplitBox Demo")
+         END POPUP
+      END MENU
 
-				BUTTON Button_1 CAPTION '&More ToolBars...' PICTURE 'res\button1.bmp' ACTION MsgInfo('Click! 1')  TOOLTIP 'ONE'
+      DEFINE SPLITBOX HANDLE hSplitHandle
 
-				BUTTON Button_2 CAPTION '&Button 2' PICTURE 'res\button2.bmp' ACTION MsgInfo('Click! 2')  TOOLTIP 'TWO'
+         DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 85,85 FLAT
 
-				BUTTON Button_3 CAPTION 'Button &3' PICTURE 'res\button3.bmp' ACTION MsgInfo('Click! 3')  TOOLTIP 'THREE'
+            BUTTON Button_1 CAPTION '&More ToolBars...' PICTURE 'res\button1.bmp' ACTION MsgInfo('Click! 1')  TOOLTIP 'ONE'
 
-			END TOOLBAR
+            BUTTON Button_2 CAPTION '&Button 2' PICTURE 'res\button2.bmp' ACTION MsgInfo('Click! 2')  TOOLTIP 'TWO'
 
-		END SPLITBOX
+            BUTTON Button_3 CAPTION 'Button &3' PICTURE 'res\button3.bmp' ACTION MsgInfo('Click! 3')  TOOLTIP 'THREE'
 
-		DEFINE STATUSBAR
-			STATUSITEM 'HMG Power Ready'
-			STATUSITEM ''
-			DATE
-			IF "/" $ Set( 4 )
-				CLOCK AMPM
-			ELSE
-				CLOCK
-			ENDIF
-		END STATUSBAR
+         END TOOLBAR
 
-		**********************************************************
-		PRIVATE oWnd := oMain
+      END SPLITBOX
 
-		IF oWnd:HasStatusBar
-			SetStatusbarProperties()
-		ENDIF
+      DEFINE STATUSBAR
+         STATUSITEM 'HMG Power Ready'
+         STATUSITEM ''
+         DATE
+         IF "/" $ Set( 4 )
+            CLOCK AMPM
+         ELSE
+            CLOCK
+         ENDIF
+      END STATUSBAR
 
-		nY := GetWindowHeight( hSplitHandle )
-		nH := oWnd:ClientHeight - iif( oWnd:HasStatusBar, oWnd:StatusBar:Height, 0 ) - nY
+      PRIVATE oWnd := oMain
 
-		@nY +  5, 10 LABEL lblClientH VALUE "Client Area Height = " + hb_ntos( nH ) + " pixels" AUTOSIZE
-		@nY + 25, 10 LABEL lblClientW VALUE "Client Area Width = " + hb_ntos( oWnd:ClientWidth ) + " pixels" AUTOSIZE
-		**********************************************************
+      IF oWnd:HasStatusBar
+         SetStatusbarProperties()
+      ENDIF
 
-	END WINDOW
+      nY := GetWindowHeight( hSplitHandle )
+      nH := oWnd:ClientHeight - iif( oWnd:HasStatusBar, oWnd:StatusBar:Height, 0 ) - nY
 
-	CENTER WINDOW Form_1
+      @nY +  5, 10 LABEL lblClientH VALUE "Client Area Height = " + hb_ntos( nH ) + " pixels" AUTOSIZE
+      @nY + 25, 10 LABEL lblClientW VALUE "Client Area Width = " + hb_ntos( oWnd:ClientWidth ) + " pixels" AUTOSIZE
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return Nil
+   CENTER WINDOW Form_1
 
+   ACTIVATE WINDOW Form_1
 
-Procedure SetStatusbarProperties
-	LOCAL nItem := 2
+   RETURN NIL
 
-	WITH OBJECT oWnd:StatusBar
-		:Icon("res\smile.ico")
+PROCEDURE SetStatusbarProperties
 
-		:Icon("res\smile.ico", nItem)
-		:Say(MiniGUIVersion(), nItem)
-		:Width(nItem, 300)
-		:Action(nItem, {|| MsgInfo('Status Item Click!')})
-	END WITH
+   LOCAL nItem := 2
 
-Return
+   WITH OBJECT oWnd:StatusBar
+      :Icon("res\smile.ico")
+
+      :Icon("res\smile.ico", nItem)
+      :Say(MiniGUIVersion(), nItem)
+      :Width(nItem, 300)
+      :Action(nItem, {|| MsgInfo('Status Item Click!')})
+   END WITH
+
+   RETURN
+

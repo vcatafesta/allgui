@@ -4,20 +4,20 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-	END WINDOW
+   END WINDOW
 
-	Win_1.Cursor := "finger"
+   Win_1.Cursor := "finger"
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 

@@ -1,5 +1,5 @@
 /*
- * MiniGUI Menu Demo
+* MiniGUI Menu Demo
 */
 
 #include "minigui.ch"
@@ -10,26 +10,26 @@ PROCEDURE Main
    LOCAL nI
 
    aMenu := { { "Cadastro", "MsgInfo('Cadastro')"  }, ;
-              {  "Consulta", "MsgInfo('Consulta')" }, ;
-              {  "Sair", "DoMethod('Win_1','Release')" } }
+      {  "Consulta", "MsgInfo('Consulta')" }, ;
+      {  "Sair", "DoMethod('Win_1','Release')" } }
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'Menu Demo 4' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Menu Demo 4' ;
+         MAIN
 
       DEFINE MAIN MENU
 
-      FOR nI := 1 TO Len( aMenu )
+         FOR nI := 1 TO Len( aMenu )
 
-         POPUP aMenu[ nI ][ 1 ]
-            cAction := aMenu[ nI ][ 2 ]
-            ITEM aMenu[ nI ][ 1 ] ACTION {|| &cAction }
-         END POPUP
+            POPUP aMenu[ nI ][ 1 ]
+               cAction := aMenu[ nI ][ 2 ]
+               ITEM aMenu[ nI ][ 1 ] ACTION {|| &cAction }
+            END POPUP
 
-      NEXT
+         NEXT
 
       END MENU
 
@@ -37,4 +37,5 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Win_1
 
-RETURN
+   RETURN
+

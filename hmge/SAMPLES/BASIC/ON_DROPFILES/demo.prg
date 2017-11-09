@@ -1,5 +1,5 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "MiniGUI.ch"
@@ -7,9 +7,9 @@
 FUNCTION Main
 
    DEFINE WINDOW Form_1 AT 50, 50 WIDTH 500 HEIGHT 370 ;
-      TITLE "DROP HERE" ;
-      MAIN ;
-      ON DROPFILES {| aFiles | ResolveDrop( "Form_1", { "GRID_1", "LISTBOX_1" }, aFiles ) }
+         TITLE "DROP HERE" ;
+         MAIN ;
+         ON DROPFILES {| aFiles | ResolveDrop( "Form_1", { "GRID_1", "LISTBOX_1" }, aFiles ) }
 
       ON KEY ESCAPE ACTION ThisWindow.Release
 
@@ -25,8 +25,7 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION ResolveDrop( cForm, aCtrl, aFiles )
 
@@ -72,8 +71,7 @@ FUNCTION ResolveDrop( cForm, aCtrl, aFiles )
       ENDCASE
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION AddNewItem( cForm, cControl, xValue, lList )
 
@@ -96,4 +94,5 @@ STATIC FUNCTION AddNewItem( cForm, cControl, xValue, lList )
       DoMethod( cForm, cControl, "AddItem", xValue )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

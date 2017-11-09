@@ -1,20 +1,19 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * (c) 2010 Janusz Pora <januszpora@onet.eu>
+* MINIGUI - Harbour Win32 GUI library Demo
+* (c) 2010 Janusz Pora <januszpora@onet.eu>
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 540 HEIGHT 300 ;
-      TITLE 'MiniGUI PagerBox Demo' ;
-      ICON 'demo.ico' ;
-      MAIN ;
-      FONT 'Arial' SIZE 10
+         AT 0,0 ;
+         WIDTH 540 HEIGHT 300 ;
+         TITLE 'MiniGUI PagerBox Demo' ;
+         ICON 'demo.ico' ;
+         MAIN ;
+         FONT 'Arial' SIZE 10
 
       DEFINE MAIN MENU
 
@@ -34,7 +33,6 @@ Function Main
             ITEM '&About'      ACTION MsgInfo ( "MiniGUI PagerBox Demo"+CRLF+"by Janusz Pora" )
          END POPUP
       END MENU
-
 
       DEFINE PAGERBOX Pager_1 CAPTION "Demo PagerBox" SCROLLSIZE 5 WIDTH 900 HEIGHT 65 BACKCOLOR GREEN AUTOSCROLL
 
@@ -89,18 +87,16 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Procedure Vert_CLick
-*-----------------------------------------------------------------------------*
+PROCEDURE Vert_CLick
 
-   if ! IsWIndowDefined ( Form_2 )
+   IF ! IsWIndowDefined ( Form_2 )
 
       DEFINE WINDOW Form_2 ;
-         WIDTH 400 HEIGHT 300 ;
-         TITLE 'Vertical PagerBox Test' ;
-         CHILD
+            WIDTH 400 HEIGHT 300 ;
+            TITLE 'Vertical PagerBox Test' ;
+            CHILD
 
          DEFINE PAGERBOX Pager_2 CAPTION "PagerBox" SCROLLSIZE 5 WIDTH 60 HEIGHT 400 BACKCOLOR BLUE VERTICAL
 
@@ -145,11 +141,11 @@ Procedure Vert_CLick
 
    ENDIF
 
-RETURN
-
+   RETURN
 
 FUNCTION SetBtnSize(lDbl)
-  LOCAL nBtnSize := _Pager_GetButtonSize( 'Pager_1', 'Form_1' )
+
+   LOCAL nBtnSize := _Pager_GetButtonSize( 'Pager_1', 'Form_1' )
 
    IF lDbl
       _Pager_SetButtonSize( 'Pager_1', 'Form_1', nBtnSize*2 )
@@ -161,18 +157,18 @@ FUNCTION SetBtnSize(lDbl)
       Form_1.Btn_Size_2.enabled := .t.
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION SetBorderSize(nSize)
-  LOCAL nBrdSize := _Pager_GetBorder( 'Pager_1', 'Form_1' )
 
-  _Pager_SetBorder( 'Pager_1', 'Form_1', nSize )
+   LOCAL nBrdSize := _Pager_GetBorder( 'Pager_1', 'Form_1' )
 
-RETURN NIL
+   _Pager_SetBorder( 'Pager_1', 'Form_1', nSize )
 
+   RETURN NIL
 
 FUNCTION SetPagerBoxPos()
+
    LOCAL nPos := _Pager_GetPos( 'Pager_1', 'Form_1' )
 
    IF nPos == 0
@@ -181,4 +177,5 @@ FUNCTION SetPagerBoxPos()
       _Pager_SetPos( 'Pager_1', 'Form_1', 0 )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

@@ -1,5 +1,5 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "minigui.ch"
@@ -10,72 +10,74 @@ STATIC nStatic
 
 PROCEDURE Main()
 
-	LOCAL lValue AS LOGICAL, aArray AS ARRAY, bBlock AS BLOCK
-	STATIC nCount AS NUMERIC
+   LOCAL lValue AS LOGICAL, aArray AS ARRAY, bBlock AS BLOCK
 
-	SET CENTURY ON
+   STATIC nCount AS NUMERIC
 
-	PUBLIC cUserName AS STRING
-	PRIVATE dDate AS DATE
+   SET CENTURY ON
 
-	ASSIGN nStatic := 0
-	ASSIGN nCount := 1
-	ASSIGN aArray := { 1, "2", .T. }
-	ASSIGN bBlock := {|| .T. }
+   PUBLIC cUserName AS STRING
+   PRIVATE dDate AS DATE
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 350 ;
-		HEIGHT 300 ;
-		TITLE 'Strongly Typed Variables Test' ;
-		MAIN
+   ASSIGN nStatic := 0
+   ASSIGN nCount := 1
+   ASSIGN aArray := { 1, "2", .T. }
+   ASSIGN bBlock := {|| .T. }
 
-		DEFINE MAIN MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 350 ;
+         HEIGHT 300 ;
+         TITLE 'Strongly Typed Variables Test' ;
+         MAIN
 
-			DEFINE POPUP "Tests"
-				MENUITEM 'Assign Valid Value' ACTION MsgInfo( iif( DoTest( aArray ), "Success", "Failure" ), "Result" )
-				MENUITEM 'Assign Wrong Value' ACTION DoTest2( aArray )
-				SEPARATOR
-                                ITEM 'Exit' ACTION Form_1.Release()
-			END POPUP
+      DEFINE MAIN MENU
 
-			DEFINE POPUP "Info"
-				MENUITEM 'Get String Value'	ACTION MsgInfo( cUserName, "Public Value" )
-				MENUITEM 'Get Date Value'	ACTION MsgInfo( dDate, "Private Value" )
-				MENUITEM 'Get Numeric Value'	ACTION MsgInfo( nStatic, "Static Value" )
-				MENUITEM 'Get Logical Value'	ACTION MsgInfo( lValue, "Local Value" )
-				MENUITEM 'Get Array Value'	ACTION MsgDebug( "Array Value:", aArray )
-				MENUITEM 'Get Block Value'	ACTION MsgInfo( Eval(bBlock), "Local Value" )
-			END POPUP
+         DEFINE POPUP "Tests"
+            MENUITEM 'Assign Valid Value' ACTION MsgInfo( iif( DoTest( aArray ), "Success", "Failure" ), "Result" )
+            MENUITEM 'Assign Wrong Value' ACTION DoTest2( aArray )
+            SEPARATOR
+            ITEM 'Exit' ACTION Form_1.Release()
+         END POPUP
 
-		END MENU
+         DEFINE POPUP "Info"
+            MENUITEM 'Get String Value'   ACTION MsgInfo( cUserName, "Public Value" )
+            MENUITEM 'Get Date Value'   ACTION MsgInfo( dDate, "Private Value" )
+            MENUITEM 'Get Numeric Value'   ACTION MsgInfo( nStatic, "Static Value" )
+            MENUITEM 'Get Logical Value'   ACTION MsgInfo( lValue, "Local Value" )
+            MENUITEM 'Get Array Value'   ACTION MsgDebug( "Array Value:", aArray )
+            MENUITEM 'Get Block Value'   ACTION MsgInfo( Eval(bBlock), "Local Value" )
+         END POPUP
 
-	END WINDOW 
+      END MENU
 
-	Form_1.Center()
-	Form_1.Activate()
+   END WINDOW
 
-RETURN
+   Form_1.Center()
+   Form_1.Activate()
 
+   RETURN
 
 FUNCTION DoTest( aArr )
-	LOCAL lOK AS LOGICAL
 
-	nStatic++
+   LOCAL lOK AS LOGICAL
 
-	ASSIGN dDate := Date()
-	ASSIGN lOK := .T.
-	ASSIGN cUserName := "UserName"
-	ASSIGN aArr [2] := "Character"
+   nStatic++
 
-RETURN lOK
+   ASSIGN dDate := Date()
+   ASSIGN lOK := .T.
+   ASSIGN cUserName := "UserName"
+   ASSIGN aArr [2] := "Character"
 
+   RETURN lOK
 
 FUNCTION DoTest2( aArr )
-	LOCAL lOK AS LOGICAL
 
-	ASSIGN dDate := Date() // Valid assignment
-	ASSIGN lOK := .F.      // Valid assignment
-	ASSIGN aArr := "Wrong" // Wrong assignment
+   LOCAL lOK AS LOGICAL
 
-RETURN lOK
+   ASSIGN dDate := Date() // Valid assignment
+   ASSIGN lOK := .F.      // Valid assignment
+   ASSIGN aArr := "Wrong" // Wrong assignment
+
+   RETURN lOK
+

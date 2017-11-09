@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Copyright 2003-2007 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2007 Roberto Lopez <harbourminigui@gmail.com>
+* Copyright 2003-2007 Grigory Filatov <gfilatov@inbox.ru>
 */
 ANNOUNCE RDDSYS
 
@@ -15,322 +13,317 @@ ANNOUNCE RDDSYS
 #define VERSION " v.1.2"
 #define COPYRIGHT " Grigory Filatov, 2003-2007"
 
-Memvar cFileName, nWidth, nHeight, aMsg, aRem, nOldMsg
-Memvar aItems
-*--------------------------------------------------------*
-Procedure Main( cParameters )
-*--------------------------------------------------------*
-	LOCAL cLine, oFile
+MEMVAR cFileName, nWidth, nHeight, aMsg, aRem, nOldMsg
+MEMVAR aItems
 
-	PRIVATE cFileName := GetStartUpFolder() + "\" + cFileNoExt( GetExeFileName() ) + ".DAT"
-	PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
-	PRIVATE aMsg := {}, aRem := {}, nOldMsg := 1
+PROCEDURE Main( cParameters )
 
-	IF FILE( cFileName )
-		oFile := TFileRead():New( cFileName )
-		oFile:Open()
-		IF oFile:Error()
-			MsgStop( oFile:ErrorMsg( "FileRead: " ), "Error" )
-			Return
-		ELSE
-			WHILE oFile:MoreToRead()
-				cLine := StrTran(oFile:ReadLine(), Chr(26), "")
-				IF SUBSTR(cLine, 1, 1) # ";" .AND. SUBSTR(cLine, 1, 1) # "*"
-					AADD(aMsg, cLine)
-				ELSE
-					AADD(aRem, cLine)
-				ENDIF
-			END WHILE
-			oFile:Close()
-		ENDIF 
-	ELSE
-		AADD(aMsg, "Nothing is as easy as it looks.")
-		AADD(aMsg, "Every solution breeds new problems.")
-		AADD(aMsg, "Everything takes longer than you think.")
-		AADD(aMsg, "Anything that can go wrong will go wrong.")
-		AADD(aMsg, "Too much of a good thing can be wonderful.")
-		AADD(aMsg, "Time is a good healer, but a bad beautician.")
-		AADD(aMsg, "Success always occurs in private, and failure in full view.")
-	ENDIF
+   LOCAL cLine, oFile
 
-	IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
-		LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
-		LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
+   PRIVATE cFileName := GetStartUpFolder() + "\" + cFileNoExt( GetExeFileName() ) + ".DAT"
+   PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
+   PRIVATE aMsg := {}, aRem := {}, nOldMsg := 1
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			NOSHOW
-	ELSE
+   IF FILE( cFileName )
+      oFile := TFileRead():New( cFileName )
+      oFile:Open()
+      IF oFile:Error()
+         MsgStop( oFile:ErrorMsg( "FileRead: " ), "Error" )
 
-		DEFINE SCREENSAVER ;
-			WINDOW Form_SSaver ;
-			MAIN ;
-			ON INIT RunMsg() ;
-			ON PAINT RunMsg() ;
-			INTERVAL 10 ;
-			BACKCOLOR BLACK
-	ENDIF
+         RETURN
+      ELSE
+         WHILE oFile:MoreToRead()
+            cLine := StrTran(oFile:ReadLine(), Chr(26), "")
+            IF SUBSTR(cLine, 1, 1) # ";" .AND. SUBSTR(cLine, 1, 1) # "*"
+               AADD(aMsg, cLine)
+            ELSE
+               AADD(aRem, cLine)
+            ENDIF
+         END WHILE
+         oFile:Close()
+      ENDIF
+   ELSE
+      AADD(aMsg, "Nothing is as easy as it looks.")
+      AADD(aMsg, "Every solution breeds new problems.")
+      AADD(aMsg, "Everything takes longer than you think.")
+      AADD(aMsg, "Anything that can go wrong will go wrong.")
+      AADD(aMsg, "Too much of a good thing can be wonderful.")
+      AADD(aMsg, "Time is a good healer, but a bad beautician.")
+      AADD(aMsg, "Success always occurs in private, and failure in full view.")
+   ENDIF
 
-	INSTALL SCREENSAVER TO FILE MLaws.scr
+   IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
+         LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
+         LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
 
-	CONFIGURE SCREENSAVER ConfigScrSaver()
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         NOSHOW
+   ELSE
 
-	ACTIVATE SCREENSAVER ;
-		WINDOW Form_SSaver ;
-		PARAMETERS cParameters
+      DEFINE SCREENSAVER ;
+         WINDOW Form_SSaver ;
+         MAIN ;
+         ON INIT RunMsg() ;
+         ON PAINT RunMsg() ;
+         INTERVAL 10 ;
+         BACKCOLOR BLACK
+   ENDIF
 
-Return
+   INSTALL SCREENSAVER TO FILE MLaws.scr
 
-*--------------------------------------------------------*
-Procedure RunMsg()
-*--------------------------------------------------------*
-  Local nRow := Random( nHeight ), nCol := Random( nWidth )
-  Local nMsg := Max(1, Random( Len(aMsg) ) ), cMsg, nMsgWidth
+   CONFIGURE SCREENSAVER ConfigScrSaver()
 
-  nRow := IF( nRow > nHeight - 24, nRow - 24, nRow )
+   ACTIVATE SCREENSAVER ;
+      WINDOW Form_SSaver ;
+      PARAMETERS cParameters
 
-  DO WHILE nOldMsg = nMsg
-	nMsg := Max(1, Random( Len(aMsg) ) )
-  ENDDO
+   RETURN
 
-  cMsg := aMsg[ nMsg ]
-  nOldMsg := nMsg
+PROCEDURE RunMsg()
 
-  if ! IsControlDefined(Label_1, Form_SSaver)
-     @ nRow, nCol LABEL Label_1 OF Form_SSaver ;
-		VALUE cMsg ;
-		WIDTH 120 HEIGHT 24 ;
-		FONT 'Tahoma' SIZE 12 ;
-		BACKCOLOR BLACK ;
-		FONTCOLOR WHITE BOLD
-  endif
+   LOCAL nRow := Random( nHeight ), nCol := Random( nWidth )
+   LOCAL nMsg := Max(1, Random( Len(aMsg) ) ), cMsg, nMsgWidth
 
-  Form_SSaver.Label_1.Visible := .f.
+   nRow := IF( nRow > nHeight - 24, nRow - 24, nRow )
 
-  nMsgWidth := GetTextWidth( NIL, cMsg, _HMG_aControlFontHandle [ GetControlIndex ( "Label_1", "Form_SSaver" ) ] )
-  Form_SSaver.Label_1.Width := nMsgWidth
-  Form_SSaver.Label_1.Row := nRow
-  Form_SSaver.Label_1.Col := IF( nCol > nWidth - nMsgWidth, Max(0, nCol - nMsgWidth), nCol )
-  Form_SSaver.Label_1.Value := cMsg
+   DO WHILE nOldMsg = nMsg
+      nMsg := Max(1, Random( Len(aMsg) ) )
+   ENDDO
 
-  Form_SSaver.Label_1.Visible := .t.
+   cMsg := aMsg[ nMsg ]
+   nOldMsg := nMsg
 
-Return
+   IF ! IsControlDefined(Label_1, Form_SSaver)
+      @ nRow, nCol LABEL Label_1 OF Form_SSaver ;
+         VALUE cMsg ;
+         WIDTH 120 HEIGHT 24 ;
+         FONT 'Tahoma' SIZE 12 ;
+         BACKCOLOR BLACK ;
+         FONTCOLOR WHITE BOLD
+   ENDIF
 
-*--------------------------------------------------------*
-Procedure ConfigScrSaver()
-*--------------------------------------------------------*
-LOCAL bColor := {|x,nItem| if( nItem/2 == int(nItem/2), RGB(240,240,240), RGB(255,255,255) )}
+   Form_SSaver.Label_1.Visible := .f.
 
-PRIVATE aItems := {}
-AEVAL(aMsg, {|e| AADD(aItems, {e})})
+   nMsgWidth := GetTextWidth( NIL, cMsg, _HMG_aControlFontHandle [ GetControlIndex ( "Label_1", "Form_SSaver" ) ] )
+   Form_SSaver.Label_1.Width := nMsgWidth
+   Form_SSaver.Label_1.Row := nRow
+   Form_SSaver.Label_1.Col := IF( nCol > nWidth - nMsgWidth, Max(0, nCol - nMsgWidth), nCol )
+   Form_SSaver.Label_1.Value := cMsg
 
-DEFINE WINDOW Form_Config ; 
-    AT 0,0 ; 
-    WIDTH 378 ; 
-    HEIGHT 312 + IF(IsThemed(), 10, 0) ; 
-    TITLE PROGRAM ; 
-    ICON 'ICON_1' ;
-    CHILD ;
-    NOMINIMIZE NOMAXIMIZE NOSIZE ;
-    ON INIT ( ShowCursor(.T.), Form_Config.CONTROL_8.SetFocus ) ;
-    FONT 'MS Sans Serif' ; 
-    SIZE 9 ;
-    BACKCOLOR BLACK
+   Form_SSaver.Label_1.Visible := .t.
 
-        @ 10,70 LABEL CONTROL_1 ; 
-            VALUE "Murphy's Laws" ; 
-            ACTION MsgAbout() ;
-            WIDTH 240 ; 
-            HEIGHT 32 ; 
-            FONT 'Courier New' ; 
-            SIZE 22 ; 
-            BACKCOLOR BLACK ;
-            FONTCOLOR YELLOW
+   RETURN
 
-        @ 46,10 LABEL CONTROL_2 ; 
-            VALUE 'Below is the list of laws which are shown in the screensaver. You can add' ; 
-            WIDTH 350 ; 
-            HEIGHT 16 ; 
-            FONT 'MS Sans Serif' ; 
-            SIZE 8 ; 
-            BACKCOLOR BLACK ;
-            FONTCOLOR WHITE
+PROCEDURE ConfigScrSaver()
 
-        @ 60,10 LABEL CONTROL_3 ; 
-            VALUE 'your own if you want, or you can modify or delete any of the existing ones.' ; 
-            WIDTH 350 ; 
-            HEIGHT 16 ; 
-            FONT 'MS Sans Serif' ; 
-            SIZE 8 ; 
-            BACKCOLOR BLACK ;
-            FONTCOLOR WHITE
+   LOCAL bColor := {|x,nItem| if( nItem/2 == int(nItem/2), RGB(240,240,240), RGB(255,255,255) )}
 
-        @ 254,230 BUTTON CONTROL_8 ; 
-            CAPTION '&Save' ; 
-            ACTION ( SaveConfig(), Form_Config.Release, Form_SSaver.Release ) ; 
-            WIDTH 62 ; 
-            HEIGHT 26 ;
-		DEFAULT
+   PRIVATE aItems := {}
 
-        @ 254,300 BUTTON CONTROL_9 ; 
-            CAPTION '&Cancel' ; 
-            ACTION ( Form_Config.Release, Form_SSaver.Release ) ; 
-            WIDTH 62 ; 
-            HEIGHT 26
+   AEVAL(aMsg, {|e| AADD(aItems, {e})})
 
-        @ 80,10 GRID CONTROL_4 ; 
-            WIDTH 352 ; 
-            HEIGHT 162 ; 
-            HEADERS { 'True' } ; 
-            WIDTHS { 330 } ; 
-            ITEMS aItems ;
-            NOLINES ;
-            ON GOTFOCUS ( Form_Config.CONTROL_6.Enabled := .T., ;
-				Form_Config.CONTROL_7.Enabled := .T. ) ;
-            ON DBLCLICK ModifyItem(Form_Config.CONTROL_4.Value) ;
-		DYNAMICBACKCOLOR { bColor }
+   DEFINE WINDOW Form_Config ;
+         AT 0,0 ;
+         WIDTH 378 ;
+         HEIGHT 312 + IF(IsThemed(), 10, 0) ;
+         TITLE PROGRAM ;
+         ICON 'ICON_1' ;
+         CHILD ;
+         NOMINIMIZE NOMAXIMIZE NOSIZE ;
+         ON INIT ( ShowCursor(.T.), Form_Config.CONTROL_8.SetFocus ) ;
+         FONT 'MS Sans Serif' ;
+         SIZE 9 ;
+         BACKCOLOR BLACK
 
-        @ 254,10 BUTTON CONTROL_5 ; 
-            CAPTION '&Add' ; 
-            ACTION AddItem() ; 
-            WIDTH 62 ; 
-            HEIGHT 26 
+      @ 10,70 LABEL CONTROL_1 ;
+         VALUE "Murphy's Laws" ;
+         ACTION MsgAbout() ;
+         WIDTH 240 ;
+         HEIGHT 32 ;
+         FONT 'Courier New' ;
+         SIZE 22 ;
+         BACKCOLOR BLACK ;
+         FONTCOLOR YELLOW
 
-        @ 254,80 BUTTON CONTROL_6 ; 
-            CAPTION '&Modify' ; 
-            ACTION ModifyItem(Form_Config.CONTROL_4.Value) ; 
-            WIDTH 62 ; 
-            HEIGHT 26 
+      @ 46,10 LABEL CONTROL_2 ;
+         VALUE 'Below is the list of laws which are shown in the screensaver. You can add' ;
+         WIDTH 350 ;
+         HEIGHT 16 ;
+         FONT 'MS Sans Serif' ;
+         SIZE 8 ;
+         BACKCOLOR BLACK ;
+         FONTCOLOR WHITE
 
-        @ 254,150 BUTTON CONTROL_7 ; 
-            CAPTION '&Remove' ; 
-            ACTION RemoveItem(Form_Config.CONTROL_4.Value) ; 
-            WIDTH 62 ; 
-            HEIGHT 26 
+      @ 60,10 LABEL CONTROL_3 ;
+         VALUE 'your own if you want, or you can modify or delete any of the existing ones.' ;
+         WIDTH 350 ;
+         HEIGHT 16 ;
+         FONT 'MS Sans Serif' ;
+         SIZE 8 ;
+         BACKCOLOR BLACK ;
+         FONTCOLOR WHITE
 
-END WINDOW
+      @ 254,230 BUTTON CONTROL_8 ;
+         CAPTION '&Save' ;
+         ACTION ( SaveConfig(), Form_Config.Release, Form_SSaver.Release ) ;
+         WIDTH 62 ;
+         HEIGHT 26 ;
+         DEFAULT
 
-Form_Config.CONTROL_6.Enabled := !Empty(Form_Config.CONTROL_4.Value)
-Form_Config.CONTROL_7.Enabled := !Empty(Form_Config.CONTROL_4.Value)
+      @ 254,300 BUTTON CONTROL_9 ;
+         CAPTION '&Cancel' ;
+         ACTION ( Form_Config.Release, Form_SSaver.Release ) ;
+         WIDTH 62 ;
+         HEIGHT 26
 
-CENTER WINDOW Form_Config
+      @ 80,10 GRID CONTROL_4 ;
+         WIDTH 352 ;
+         HEIGHT 162 ;
+         HEADERS { 'True' } ;
+         WIDTHS { 330 } ;
+         ITEMS aItems ;
+         NOLINES ;
+         ON GOTFOCUS ( Form_Config.CONTROL_6.Enabled := .T., ;
+         Form_Config.CONTROL_7.Enabled := .T. ) ;
+         ON DBLCLICK ModifyItem(Form_Config.CONTROL_4.Value) ;
+         DYNAMICBACKCOLOR { bColor }
 
-ACTIVATE WINDOW Form_Config, Form_SSaver
+      @ 254,10 BUTTON CONTROL_5 ;
+         CAPTION '&Add' ;
+         ACTION AddItem() ;
+         WIDTH 62 ;
+         HEIGHT 26
 
-Return
+      @ 254,80 BUTTON CONTROL_6 ;
+         CAPTION '&Modify' ;
+         ACTION ModifyItem(Form_Config.CONTROL_4.Value) ;
+         WIDTH 62 ;
+         HEIGHT 26
 
-*--------------------------------------------------------*
-Static Procedure AddItem()
-*--------------------------------------------------------*
-LOCAL cMsg := ""
+      @ 254,150 BUTTON CONTROL_7 ;
+         CAPTION '&Remove' ;
+         ACTION RemoveItem(Form_Config.CONTROL_4.Value) ;
+         WIDTH 62 ;
+         HEIGHT 26
+
+   END WINDOW
+
+   Form_Config.CONTROL_6.Enabled := !Empty(Form_Config.CONTROL_4.Value)
+   Form_Config.CONTROL_7.Enabled := !Empty(Form_Config.CONTROL_4.Value)
+
+   CENTER WINDOW Form_Config
+
+   ACTIVATE WINDOW Form_Config, Form_SSaver
+
+   RETURN
+
+STATIC PROCEDURE AddItem()
+
+   LOCAL cMsg := ""
 
    cMsg := InputBox( 'Enter the new law:' , 'Add' , cMsg , 15000 , cMsg )
 
    IF !EMPTY(cMsg)
 
-	AADD(aItems, {cMsg})
+      AADD(aItems, {cMsg})
 
-	ADD ITEM ATAIL(aItems) TO CONTROL_4 OF Form_Config
+      ADD ITEM ATAIL(aItems) TO CONTROL_4 OF Form_Config
 
-	Form_Config.CONTROL_4.Value := LEN(aItems)
+      Form_Config.CONTROL_4.Value := LEN(aItems)
 
    ENDIF
 
    Form_Config.CONTROL_4.SetFocus
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure ModifyItem(nItem)
-*--------------------------------------------------------*
-LOCAL cMsg := Form_Config.CONTROL_4.Item(nItem)[1], nCnt
+STATIC PROCEDURE ModifyItem(nItem)
+
+   LOCAL cMsg := Form_Config.CONTROL_4.Item(nItem)[1], nCnt
 
    IF !EMPTY(cMsg)
 
-	cMsg := InputBox( 'Enter the new text of the law:' , 'Modify' , cMsg , 15000 , cMsg )
+      cMsg := InputBox( 'Enter the new text of the law:' , 'Modify' , cMsg , 15000 , cMsg )
 
-	IF !EMPTY(cMsg)
-		aItems[nItem][1] := cMsg
+      IF !EMPTY(cMsg)
+         aItems[nItem][1] := cMsg
 
-		DELETE ITEM ALL FROM CONTROL_4 OF Form_Config
-		For nCnt := 1 To Len(aItems)
-			ADD ITEM aItems[nCnt] TO CONTROL_4 OF Form_Config
-		Next
+         DELETE ITEM ALL FROM CONTROL_4 OF Form_Config
+         FOR nCnt := 1 To Len(aItems)
+            ADD ITEM aItems[nCnt] TO CONTROL_4 OF Form_Config
+         NEXT
 
-		Form_Config.CONTROL_4.Value := nItem
-	ENDIF
+         Form_Config.CONTROL_4.Value := nItem
+      ENDIF
 
-	Form_Config.CONTROL_4.SetFocus
-
-   ENDIF
-
-Return
-
-*--------------------------------------------------------*
-Static Procedure RemoveItem(nItem)
-*--------------------------------------------------------*
-IF !Empty( nItem )
-
-   IF MsgYesNo( "Are you sure you want to remove the selected item?", "Confirm" )
-
-	aDel( aItems, nItem )
-	aSize( aItems, Len(aItems)-1 )
-
-      DELETE ITEM nItem FROM CONTROL_4 OF Form_Config
-
-	Form_Config.CONTROL_4.Value := IF( LEN(aItems) = nItem, nItem-1, nItem )
+      Form_Config.CONTROL_4.SetFocus
 
    ENDIF
 
-   Form_Config.CONTROL_4.SetFocus
+   RETURN
 
-ENDIF
+STATIC PROCEDURE RemoveItem(nItem)
 
-Return
+   IF !Empty( nItem )
 
-*--------------------------------------------------------*
-Static Procedure SaveConfig()
-*--------------------------------------------------------*
-LOCAL cLaws := "", nCnt
+      IF MsgYesNo( "Are you sure you want to remove the selected item?", "Confirm" )
 
-	For nCnt := 1 To Len(aRem)
-		cLaws += aRem[nCnt] + CRLF
-	Next
-	For nCnt := 1 To Len(aItems)
-		cLaws += aItems[nCnt][1] + IF(ncnt < Len(aItems), CRLF, "")
-	Next
+         aDel( aItems, nItem )
+         aSize( aItems, Len(aItems)-1 )
 
-	MemoWrit(cFileName, cLaws)
+         DELETE ITEM nItem FROM CONTROL_4 OF Form_Config
 
-Return
+         Form_Config.CONTROL_4.Value := IF( LEN(aItems) = nItem, nItem-1, nItem )
 
-*--------------------------------------------------------*
-Function MsgAbout()
-*--------------------------------------------------------*
-Return MsgInfo( PROGRAM + VERSION + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	"eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
-	"This Screen Saver is Freeware!" + CRLF + ;
-	padc("Copying is allowed!", 30), "About..." )
- 
+      ENDIF
 
-/* Harbour Project source code
+      Form_Config.CONTROL_4.SetFocus
+
+   ENDIF
+
+   RETURN
+
+STATIC PROCEDURE SaveConfig()
+
+   LOCAL cLaws := "", nCnt
+
+   FOR nCnt := 1 To Len(aRem)
+      cLaws += aRem[nCnt] + CRLF
+   NEXT
+   FOR nCnt := 1 To Len(aItems)
+      cLaws += aItems[nCnt][1] + IF(ncnt < Len(aItems), CRLF, "")
+   NEXT
+
+   MemoWrit(cFileName, cLaws)
+
+   RETURN
+
+FUNCTION MsgAbout()
+
+   RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      "eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
+      "This Screen Saver is Freeware!" + CRLF + ;
+      padc("Copying is allowed!", 30), "About..." )
+
+   /* Harbour Project source code
    A class that reads a file one line at a time
    http://harbour-Project.org/
    Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
-*/
+   */
 
-#define oF_ERROR_MIN          1
-#define oF_CREATE_OBJECT      1
-#define oF_OPEN_FILE          2
-#define oF_READ_FILE          3
-#define oF_CLOSE_FILE         4
-#define oF_ERROR_MAX          4
-#define oF_DEFAULT_READ_SIZE  4096
+   #define oF_ERROR_MIN          1
+   #define oF_CREATE_OBJECT      1
+   #define oF_OPEN_FILE          2
+   #define oF_READ_FILE          3
+   #define oF_CLOSE_FILE         4
+   #define oF_ERROR_MAX          4
+   #define oF_DEFAULT_READ_SIZE  4096
 
 FUNCTION TFileRead()
+
    STATIC s_oClass
 
    IF s_oClass == NIL
@@ -342,7 +335,7 @@ FUNCTION TFileRead()
       s_oClass:AddClassData( "nLastOp" )   // The last operation done (for error messages)
       s_oClass:AddClassData( "cBuffer" )   // The readahead buffer
       s_oClass:AddClassData( "nReadSize" ) // How much to add to the readahead buffer on
-                                           // each read from the file
+      // each read from the file
 
       s_oClass:AddMethod( "New",        @f_new() )       // Create a new class instance
       s_oClass:AddMethod( "Open",       @f_open() )      // Open the file for reading
@@ -360,6 +353,7 @@ FUNCTION TFileRead()
    RETURN s_oClass:Instance()
 
 STATIC FUNCTION f_new( cFile, nSize )
+
    LOCAL oSelf := Qself()
 
    IF nSize == NIL .OR. nSize < 1
@@ -379,6 +373,7 @@ STATIC FUNCTION f_new( cFile, nSize )
    RETURN oSelf
 
 STATIC FUNCTION f_open( nMode )
+
    LOCAL oSelf := Qself()
 
    IF oSelf:nHan == -1
@@ -408,6 +403,7 @@ STATIC FUNCTION f_open( nMode )
    RETURN oSelf
 
 STATIC FUNCTION f_read()
+
    LOCAL oSelf := Qself()
    LOCAL cLine := ""
    LOCAL nPos
@@ -457,17 +453,17 @@ STATIC FUNCTION f_read()
          ENDIF
          // Deal with multiple possible end of line conditions.
          DO CASE
-            CASE SUBSTR( oSelf:cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
-               // It's a messed up DOS newline (such as that created by a program
-               // that uses "\r\n" as newline when writing to a text mode file,
-               // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
-               nPos += 3
-            CASE SUBSTR( oSelf:cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
-               // It's a standard DOS newline
-               nPos += 2
-            OTHERWISE
-               // It's probably a Mac or Unix newline
-               nPos++
+         CASE SUBSTR( oSelf:cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
+            // It's a messed up DOS newline (such as that created by a program
+            // that uses "\r\n" as newline when writing to a text mode file,
+            // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
+            nPos += 3
+         CASE SUBSTR( oSelf:cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
+            // It's a standard DOS newline
+            nPos += 2
+         OTHERWISE
+            // It's probably a Mac or Unix newline
+            nPos++
          ENDCASE
          oSelf:cBuffer := SUBSTR( oSelf:cBuffer, nPos )
       ENDIF
@@ -476,26 +472,28 @@ STATIC FUNCTION f_read()
    RETURN cLine
 
 STATIC FUNCTION f_EOL_pos( oFile )
+
    LOCAL nCRpos, nLFpos, nPos
 
    // Look for both CR and LF in the file read buffer.
    nCRpos := AT( CHR( 13 ), oFile:cBuffer )
    nLFpos := AT( CHR( 10 ), oFile:cBuffer )
    DO CASE
-      CASE nCRpos == 0
-         // If there's no CR, use the LF position.
-         nPos := nLFpos
-      CASE nLFpos == 0
-         // If there's no LF, use the CR position.
-         nPos := nCRpos
-      OTHERWISE
-         // If there's both a CR and an LF, use the position of the first one.
-         nPos := MIN( nCRpos, nLFpos )
+   CASE nCRpos == 0
+      // If there's no CR, use the LF position.
+      nPos := nLFpos
+   CASE nLFpos == 0
+      // If there's no LF, use the CR position.
+      nPos := nCRpos
+   OTHERWISE
+      // If there's both a CR and an LF, use the position of the first one.
+      nPos := MIN( nCRpos, nLFpos )
    ENDCASE
 
    RETURN nPos
 
 STATIC FUNCTION f_close()
+
    LOCAL oSelf := Qself()
 
    oSelf:nLastOp := oF_CLOSE_FILE
@@ -515,32 +513,48 @@ STATIC FUNCTION f_close()
    RETURN oSelf
 
 STATIC FUNCTION f_name()
+
    LOCAL oSelf := Qself()
+
    // Returns the filename associated with this class instance.
+
    RETURN oSelf:cFile
 
 STATIC FUNCTION f_is_open()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if the file is open.
+
    RETURN oSelf:nHan != -1
 
 STATIC FUNCTION f_more()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if there is more to be read from either the file or the
    // readahead buffer. Only when both are exhausted is there no more to read.
+
    RETURN !oSelf:lEOF .OR. !EMPTY( oSelf:cBuffer )
 
 STATIC FUNCTION f_error()
+
    LOCAL oSelf := Qself()
+
    // Returns .T. if an error was recorded.
+
    RETURN oSelf:nError != 0
 
 STATIC FUNCTION f_error_no()
+
    LOCAL oSelf := Qself()
+
    // Returns the last error code that was recorded.
+
    RETURN oSelf:nError
 
 STATIC FUNCTION f_error_msg( cText )
+
    STATIC s_cAction := {"on", "creating object for", "opening", "reading from", "closing"}
    LOCAL oSelf := Qself()
    LOCAL cMessage, nTemp
@@ -561,4 +575,5 @@ STATIC FUNCTION f_error_msg( cText )
 
    RETURN cMessage
 
-// EOF TFileRead()
+   // EOF TFileRead()
+

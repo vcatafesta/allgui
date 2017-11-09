@@ -1,8 +1,7 @@
-/* 
- * MINIGUI - Harbour Win32 GUI library Demo
- * An example of using of win_TaskDialogIndirect0 with radio, custom buttons and callback function
- *
- * Copyright 2016, Petr Chornyj
+/*
+* MINIGUI - Harbour Win32 GUI library Demo
+* An example of using of win_TaskDialogIndirect0 with radio, custom buttons and callback function
+* Copyright 2016, Petr Chornyj
 */
 
 #include "minigui.ch"
@@ -14,9 +13,9 @@ PROCEDURE main()
    LOCAL nResult
    LOCAL nButton := NIL
    LOCAL aCustButton  := { ;
-                          { 1100, "Enable" }, ;
-                          { 1101, "Disable" } ;
-                         }
+      { 1100, "Enable" }, ;
+      { 1101, "Disable" } ;
+      }
    LOCAL aRadioButton := { { 1102, "Radio button" } }
 
    aConfig[ TDC_WINDOWTITLE ]         := "Enable/Disable Sample"
@@ -26,13 +25,13 @@ PROCEDURE main()
    aConfig[ TDC_RADIOBUTTON ]            := Len( aRadioButton )
    aConfig[ TDC_TASKDIALOG_RADIOBUTTON ] := aRadioButton
 
-   aConfig[TDC_CALLBACK] := {|h,n,w,l| __cb_enable( h,n,w,l )} 
+   aConfig[TDC_CALLBACK] := {|h,n,w,l| __cb_enable( h,n,w,l )}
 
-   IF ( nResult := win_TaskDialogIndirect0( aConfig, @nButton, NIL, NIL ) ) == NOERROR 
-      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. ) 
+   IF ( nResult := win_TaskDialogIndirect0( aConfig, @nButton, NIL, NIL ) ) == NOERROR
+      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. )
    ELSE
       IF nResult != E_OUTOFMEMORY
-         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. ) 
+         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. )
       ELSE
          // Do Something
          QUIT
@@ -41,12 +40,14 @@ PROCEDURE main()
 
    RETURN
 
-/*
-*/
-STATIC FUNCTION __cb_enable( hWnd, nNotification, wParam, lParam )
    /*
-      To prevent the task dialog from closing, the application must return FALSE,
-      otherwise the task dialog is closed 
+   */
+
+STATIC FUNCTION __cb_enable( hWnd, nNotification, wParam, lParam )
+
+   /*
+   To prevent the task dialog from closing, the application must return FALSE,
+   otherwise the task dialog is closed
    */
    LOCAL lResult := .F.
 
@@ -76,6 +77,7 @@ STATIC FUNCTION __cb_enable( hWnd, nNotification, wParam, lParam )
       lResult := If( wParam == IDCANCEL, .T., .F. )
       EXIT
 
-   END SWITCH   
+   END SWITCH
 
    RETURN lResult
+

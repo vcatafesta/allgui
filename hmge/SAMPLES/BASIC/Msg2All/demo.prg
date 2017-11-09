@@ -1,10 +1,9 @@
 /*
- * MiniGUI Msg2All Demo
- * (c) 2007 Grigory Filatov
- *
- * Functions Msg2All(), NewMsg2All(), Msg2AllPrn() for Xailer
- * Author: Bingen Ugaldebere
- * Final revision: 07/11/2006
+* MiniGUI Msg2All Demo
+* (c) 2007 Grigory Filatov
+* Functions Msg2All(), NewMsg2All(), Msg2AllPrn() for Xailer
+* Author: Bingen Ugaldebere
+* Final revision: 07/11/2006
 */
 
 #include "minigui.ch"
@@ -12,105 +11,103 @@
 
 #define CLR_BLUE { 0, 0, 128 }
 
-*-------------------------------------------------------------
-Procedure Main
-*-------------------------------------------------------------
+PROCEDURE Main
 
-	SET LANGUAGE TO SPANISH
+   SET LANGUAGE TO SPANISH
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 300 ;
-		HEIGHT 245 ;
-		TITLE 'Msg2All Demo' ;
-		ICON "demo.ico" ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 300 ;
+         HEIGHT 245 ;
+         TITLE 'Msg2All Demo' ;
+         ICON "demo.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
-		@ 10, 40 FRAME Frame_1 ;
-			CAPTION '' ;
-			WIDTH  220 ;
-			HEIGHT 185
+      @ 10, 40 FRAME Frame_1 ;
+         CAPTION '' ;
+         WIDTH  220 ;
+         HEIGHT 185
 
-		@ 40 ,70 BUTTON Button_1 ;
-			CAPTION "Crear mensajes" ;
-			ACTION NewMsg2All() ;
-	                WIDTH 160 ;
-			HEIGHT 30
+      @ 40 ,70 BUTTON Button_1 ;
+         CAPTION "Crear mensajes" ;
+         ACTION NewMsg2All() ;
+         WIDTH 160 ;
+         HEIGHT 30
 
-		@ 90 ,70 BUTTON Button_2 ;
-			CAPTION "Visualizar mensajes" ;
-			ACTION Msg2All() ;
-	                WIDTH 160 ;
-			HEIGHT 30
+      @ 90 ,70 BUTTON Button_2 ;
+         CAPTION "Visualizar mensajes" ;
+         ACTION Msg2All() ;
+         WIDTH 160 ;
+         HEIGHT 30
 
-		@ 140 ,70 BUTTON Button_3 ;
-			CAPTION _HMG_aABMLangButton [17] ;
-			ACTION Form_1.Release() ;
-	                WIDTH 160 ;
-			HEIGHT 30
+      @ 140 ,70 BUTTON Button_3 ;
+         CAPTION _HMG_aABMLangButton [17] ;
+         ACTION Form_1.Release() ;
+         WIDTH 160 ;
+         HEIGHT 30
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-//Mensaje a todos los usuarios de una red
-*-------------------------------------------------------------
-Function NewMsg2All()
-*-------------------------------------------------------------
-Local lSave := .F.
-Local cMessage:=Space(250), cFrom:=Space(30), nValidity:=10
+   //Mensaje a todos los usuarios de una red
+
+FUNCTION NewMsg2All()
+
+   LOCAL lSave := .F.
+   LOCAL cMessage:=Space(250), cFrom:=Space(30), nValidity:=10
 
    //Si no existe el archivo crearlo
-   If !File("Messages.Dbf")
+   IF !File("Messages.Dbf")
       DbCreate( "Messages.Dbf",;
-                { { "Date"     , "D",   8, 0 },;
-                  { "Time"     , "C",   5, 0 },;
-                  { "From"     , "C",  30, 0 },;
-                  { "Message"  , "C", 250, 0 },;
-                  { "ValidDays", "N",   2, 0 },;
-                  { "IP"       , "C", 400, 0 } } , "DBFNTX" )
-   Endif
+         { { "Date"     , "D",   8, 0 },;
+         { "Time"     , "C",   5, 0 },;
+         { "From"     , "C",  30, 0 },;
+         { "Message"  , "C", 250, 0 },;
+         { "ValidDays", "N",   2, 0 },;
+         { "IP"       , "C", 400, 0 } } , "DBFNTX" )
+   ENDIF
 
    DEFINE WINDOW _NewForm   ;
-      AT 0,0                ;
-      WIDTH 300             ;
-      HEIGHT 250            ;
-      TITLE "Nuevo mensaje" ;
-      ICON "demo.ico"       ;
-      MODAL                 ;
-      NOSIZE                ;
-      FONT 'MS Sans Serif'  ;
-      SIZE 9
+         AT 0,0                ;
+         WIDTH 300             ;
+         HEIGHT 250            ;
+         TITLE "Nuevo mensaje" ;
+         ICON "demo.ico"       ;
+         MODAL                 ;
+         NOSIZE                ;
+         FONT 'MS Sans Serif'  ;
+         SIZE 9
 
       ON KEY ESCAPE ACTION _NewForm.Release
 
       @ 5, 10 LABEL _Label_1 VALUE "Texto del Mensaje" WIDTH 270 TRANSPARENT
 
       @ 25, 10 EDITBOX _TextBox_1 VALUE cMessage WIDTH 270 HEIGHT 60 MAXLENGTH Len(cMessage) ;
-                 NOHSCROLL
+         NOHSCROLL
 
       @ 90, 10 LABEL _Label_2 VALUE "Autor" WIDTH 270 TRANSPARENT
 
       @ 110, 10 TEXTBOX _TextBox_2 VALUE cFrom WIDTH 270 HEIGHT 20 MAXLENGTH Len(cFrom) ;
-                 ON ENTER _NewForm._TextBox_3.SetFocus
+         ON ENTER _NewForm._TextBox_3.SetFocus
 
       @ 145, 10 LABEL _Label_3 VALUE "Días de Validez" WIDTH 90 TRANSPARENT
 
       @ 142,110 TEXTBOX _TextBox_3 VALUE nValidity WIDTH 40 HEIGHT 20 NUMERIC INPUTMASK "99" ;
-                 ON ENTER _NewForm._Ok.SetFocus
+         ON ENTER _NewForm._Ok.SetFocus
 
       @ 180, 50 BUTTON _Ok CAPTION "&"+_HMG_MESSAGE [6] WIDTH 80 HEIGHT 25 DEFAULT ;
-                ACTION ( lSave := .T. , ;
-                   cFrom := _NewForm._TextBox_2.Value, cMessage := _NewForm._TextBox_1.Value, ;
-                   nValidity := _NewForm._TextBox_3.Value, _NewForm.Release )
+         ACTION ( lSave := .T. , ;
+         cFrom := _NewForm._TextBox_2.Value, cMessage := _NewForm._TextBox_1.Value, ;
+         nValidity := _NewForm._TextBox_3.Value, _NewForm.Release )
 
-     @ 180,150 BUTTON _Cancel CAPTION "&"+_HMG_MESSAGE [7] WIDTH 80 HEIGHT 25 ;
-                ACTION _NewForm.Release
+      @ 180,150 BUTTON _Cancel CAPTION "&"+_HMG_MESSAGE [7] WIDTH 80 HEIGHT 25 ;
+         ACTION _NewForm.Release
 
    END WINDOW
 
@@ -118,12 +115,13 @@ Local cMessage:=Space(250), cFrom:=Space(30), nValidity:=10
 
    ACTIVATE WINDOW _NewForm
 
-   If lSave
+   IF lSave
 
       DbUseArea(.T.,"DBFNTX","Messages.Dbf","Messages")
-      If NetErr()
-         Return Nil
-      Endif
+      IF NetErr()
+
+         RETURN NIL
+      ENDIF
 
       Messages->( DbAppend() )
 
@@ -135,140 +133,141 @@ Local cMessage:=Space(250), cFrom:=Space(30), nValidity:=10
 
       Messages->( DbCloseArea() )
 
-   Endif
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-//Muestra el mensaje a una IP no mostrada aun
-*-------------------------------------------------------------
-Function Msg2All()
-*-------------------------------------------------------------
-Local cLocalIP:=GetLocalIp()[1], cFinalIP:=SubStr(cLocalIP,Rat(".",cLocalIP))+"."
-Local lOk:=.F.
+   //Muestra el mensaje a una IP no mostrada aun
 
-If File("Messages.Dbf")
+FUNCTION Msg2All()
 
-   DbUseArea(.T.,"DBFNTX","Messages.Dbf","Messages")
-   If NetErr()
-      Return Nil
-   Endif
+   LOCAL cLocalIP:=GetLocalIp()[1], cFinalIP:=SubStr(cLocalIP,Rat(".",cLocalIP))+"."
+   LOCAL lOk:=.F.
 
-   Do While !Eof()
+   IF File("Messages.Dbf")
 
-      If Messages->Date+Messages->ValidDays < Date()
-         //Borrar mensajes caducados
-         IF Rlock()
-            Messages->(DbDelete())
-         ENDIF
+      DbUseArea(.T.,"DBFNTX","Messages.Dbf","Messages")
+      IF NetErr()
 
-      Else
-         //Buscar la IP y mostrar el mensaje si no se encuentra
-         If At( cFinalIP,Messages->IP )=0
-            DEFINE WINDOW _ReadForm  ;
-               AT 0,0                ;
-               WIDTH 300             ;
-               HEIGHT 190            ;
-               TITLE "Mensaje de "+Alltrim(Messages->From)+"  "+Dtoc(Messages->Date)+"  "+Messages->Time ;
-               ICON "demo.ico"       ;
-               MODAL                 ;
-               NOSIZE                ;
-               FONT 'MS Sans Serif'  ;
-               SIZE 9
+         RETURN NIL
+      ENDIF
 
-               ON KEY ESCAPE ACTION _ReadForm.Release
+      DO WHILE !Eof()
 
-               @  5, 10 LABEL _Label_1 VALUE "Mensaje de "+Alltrim(Messages->From) WIDTH 270 TRANSPARENT
+         IF Messages->Date+Messages->ValidDays < Date()
+            //Borrar mensajes caducados
+            IF Rlock()
+               Messages->(DbDelete())
+            ENDIF
 
-               @ 25, 10 LABEL _Label_2 VALUE "De fecha "+Dtoc(Messages->Date)+"  "+Messages->Time WIDTH 270 TRANSPARENT
+         ELSE
+            //Buscar la IP y mostrar el mensaje si no se encuentra
+            IF At( cFinalIP,Messages->IP )=0
+               DEFINE WINDOW _ReadForm  ;
+                     AT 0,0                ;
+                     WIDTH 300             ;
+                     HEIGHT 190            ;
+                     TITLE "Mensaje de "+Alltrim(Messages->From)+"  "+Dtoc(Messages->Date)+"  "+Messages->Time ;
+                     ICON "demo.ico"       ;
+                     MODAL                 ;
+                     NOSIZE                ;
+                     FONT 'MS Sans Serif'  ;
+                     SIZE 9
 
-               @ 45, 10 EDITBOX _TextBox_1 VALUE Alltrim(Messages->Message) WIDTH 270 HEIGHT 60 ;
-                        NOHSCROLL
+                  ON KEY ESCAPE ACTION _ReadForm.Release
 
-               @ 120,20 BUTTON _Print CAPTION "&"+_HMG_aABMLangButton [16] WIDTH 80 HEIGHT 25 ;
-                        ACTION Msg2AllPrn( _ReadForm.Title, Alltrim(Messages->Message) )
+                  @  5, 10 LABEL _Label_1 VALUE "Mensaje de "+Alltrim(Messages->From) WIDTH 270 TRANSPARENT
 
-               @ 120,105 BUTTON _Ok CAPTION "&"+_HMG_MESSAGE [6] WIDTH 80 HEIGHT 25 ;
-                        ACTION ( lOk:=.T., _ReadForm.Release )
+                  @ 25, 10 LABEL _Label_2 VALUE "De fecha "+Dtoc(Messages->Date)+"  "+Messages->Time WIDTH 270 TRANSPARENT
 
-               @ 120,190 BUTTON _Demorar CAPTION IF("ES" $ Set( _SET_LANGUAGE ), "&Demorar", "&Delay") WIDTH 80 HEIGHT 25 ;
-                        ACTION ( lOk:=.F., _ReadForm.Release )
+                  @ 45, 10 EDITBOX _TextBox_1 VALUE Alltrim(Messages->Message) WIDTH 270 HEIGHT 60 ;
+                     NOHSCROLL
 
-            END WINDOW
+                  @ 120,20 BUTTON _Print CAPTION "&"+_HMG_aABMLangButton [16] WIDTH 80 HEIGHT 25 ;
+                     ACTION Msg2AllPrn( _ReadForm.Title, Alltrim(Messages->Message) )
 
-            CENTER WINDOW _ReadForm
+                  @ 120,105 BUTTON _Ok CAPTION "&"+_HMG_MESSAGE [6] WIDTH 80 HEIGHT 25 ;
+                     ACTION ( lOk:=.T., _ReadForm.Release )
 
-            ACTIVATE WINDOW _ReadForm
+                  @ 120,190 BUTTON _Demorar CAPTION IF("ES" $ Set( _SET_LANGUAGE ), "&Demorar", "&Delay") WIDTH 80 HEIGHT 25 ;
+                     ACTION ( lOk:=.F., _ReadForm.Release )
 
-            IF lOk   //Mensaje aceptado
-               IF Rlock()
-                  Messages->IP := Left(Alltrim(Messages->IP),Len(Alltrim(Messages->IP))-1)+cFinalIP
+               END WINDOW
+
+               CENTER WINDOW _ReadForm
+
+               ACTIVATE WINDOW _ReadForm
+
+               IF lOk   //Mensaje aceptado
+                  IF Rlock()
+                     Messages->IP := Left(Alltrim(Messages->IP),Len(Alltrim(Messages->IP))-1)+cFinalIP
+                  ENDIF
                ENDIF
             ENDIF
-         Endif
-      Endif
+         ENDIF
 
-      Messages->( DbSkip() )
+         Messages->( DbSkip() )
 
-   Enddo
+      ENDDO
 
-   Messages->( DbCloseArea() )
+      Messages->( DbCloseArea() )
 
-Endif
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-//Prints a Message
-*-------------------------------------------------------------
-Function Msg2AllPrn( cTitle, cText )
-*-------------------------------------------------------------
-Local n, aRect := Array(4)
+   //Prints a Message
 
-	INIT PRINTSYS
+FUNCTION Msg2AllPrn( cTitle, cText )
 
-	SELECT PRINTER BY DIALOG
+   LOCAL n, aRect := Array(4)
 
-	IF HBPRNERROR != 0 
-		Return Nil
-	ENDIF
+   INIT PRINTSYS
 
-	aRect[1] := ( GetDesktopHeight() - 599 ) / 2
-	aRect[2] := ( GetDesktopWidth() - 799 ) / 2
-	aRect[3] := GetDesktopHeight() - aRect[1]
-	aRect[4] := GetDesktopWidth() - aRect[2]
+   SELECT PRINTER BY DIALOG
 
-	DEFINE FONT "Font_1" NAME "Times New Roman" SIZE 14 BOLD UNDERLINE
-	DEFINE FONT "Font_2" NAME "Times New Roman" SIZE 12
+   IF HBPRNERROR != 0
 
-	SET PAPERSIZE DMPAPER_A4	// Sets paper size to A4
+      RETURN NIL
+   ENDIF
 
-	SET ORIENTATION PORTRAIT	// Sets paper orientation to portrait
+   aRect[1] := ( GetDesktopHeight() - 599 ) / 2
+   aRect[2] := ( GetDesktopWidth() - 799 ) / 2
+   aRect[3] := GetDesktopHeight() - aRect[1]
+   aRect[4] := GetDesktopWidth() - aRect[2]
 
-	SET PREVIEW ON			// Enables print preview
-	SET CLOSEPREVIEW OFF
+   DEFINE FONT "Font_1" NAME "Times New Roman" SIZE 14 BOLD UNDERLINE
+   DEFINE FONT "Font_2" NAME "Times New Roman" SIZE 12
 
-	SET PREVIEW RECT aRect
-	SET PREVIEW SCALE 3
+   SET PAPERSIZE DMPAPER_A4   // Sets paper size to A4
 
-	START DOC NAME cTitle
+   SET ORIENTATION PORTRAIT   // Sets paper orientation to portrait
 
-		START PAGE
+   SET PREVIEW ON         // Enables print preview
+   SET CLOSEPREVIEW OFF
 
-			@1, 1+(HBPRNMAXCOL-Len(cTitle))/2 SAY cTitle FONT "Font_1" COLOR CLR_BLUE TO PRINT
+   SET PREVIEW RECT aRect
+   SET PREVIEW SCALE 3
 
-			For n:=1 To MlCount( cText, 80 )
+   START DOC NAME cTitle
 
-				@n+4, 10 SAY MemoLine( cText, 80, n ) FONT "Font_2" TO PRINT
+   START PAGE
 
-			Next
+   @1, 1+(HBPRNMAXCOL-Len(cTitle))/2 SAY cTitle FONT "Font_1" COLOR CLR_BLUE TO PRINT
 
-		END PAGE
+   FOR n:=1 To MlCount( cText, 80 )
 
-	END DOC
+      @n+4, 10 SAY MemoLine( cText, 80, n ) FONT "Font_2" TO PRINT
 
-	RELEASE PRINTSYS
+   NEXT
 
-Return Nil
+END PAGE
 
+END DOC
+
+RELEASE PRINTSYS
+
+RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -315,3 +314,4 @@ HB_FUNC( GETLOCALIP )
 }
 
 #pragma ENDDUMP
+

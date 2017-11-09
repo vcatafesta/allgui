@@ -4,12 +4,13 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-    Load Window Hello
-    
-    Center Window Hello
+   LOAD WINDOW Hello
 
-    Activate Window Hello
+   CENTER WINDOW Hello
 
-Return
+   ACTIVATE WINDOW Hello
+
+   RETURN
+

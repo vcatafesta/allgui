@@ -4,18 +4,19 @@
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	USE MTIEMPO
+   USE MTIEMPO
 
-	Load Window Report
-	Activate Window Report
+   LOAD WINDOW Report
+   ACTIVATE WINDOW Report
 
-Return Nil
+   RETURN NIL
 
-Procedure TestReport
+PROCEDURE TestReport
 
-	GO TOP
-	DO REPORT FORM RepDemo
+   GO TOP
+   DO REPORT FORM RepDemo
 
-Return
+   RETURN
+

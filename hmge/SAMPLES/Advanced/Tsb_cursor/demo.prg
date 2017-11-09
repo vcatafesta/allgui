@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Author: Igor Nazarov
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Author: Igor Nazarov
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -24,10 +22,10 @@ PROCEDURE Main
    AAdd( aFont, GetFontHandle( "Font_2" ) )
 
    DEFINE WINDOW Form_0 ;
-      TITLE "TsBrowse Double Cursor Demo" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      ON RELEASE DeleteObject( aBmp[ 1 ] )
+         TITLE "TsBrowse Double Cursor Demo" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON RELEASE DeleteObject( aBmp[ 1 ] )
 
       DEFINE STATUSBAR
          STATUSITEM "Item 1" WIDTH 0    FONTCOLOR BLACK
@@ -45,8 +43,7 @@ PROCEDURE Main
 
    DoMethod( "Form_0", "Activate" )
 
-RETURN
-
+   RETURN
 
 FUNCTION CreateBrowse()
 
@@ -64,7 +61,7 @@ FUNCTION CreateBrowse()
       OF Form_0 ;
       WIDTH Form_0.WIDTH - 2 * GetBorderWidth() ;
       HEIGHT Form_0.HEIGHT - GetTitleHeight() - GetTitleHeight() - ;
-         GetProperty( "Form_0", "StatusBar", "Height" ) - 2 * GetBorderHeight() ;
+      GetProperty( "Form_0", "StatusBar", "Height" ) - 2 * GetBorderHeight() ;
       GRID ;
       SELECTOR TRUE;
       FONT "Arial" SIZE 12
@@ -115,10 +112,9 @@ FUNCTION CreateBrowse()
 
    oBrw:ChangeFont( {|| IF( oBrw:lDrawSelect, aFont[ 2 ], aFont[ 1 ] ) },,  )
 
-   END TBROWSE
+END TBROWSE
 
 RETURN NIL
-
 
 FUNCTION RandStr( nLen )
 
@@ -130,4 +126,5 @@ FUNCTION RandStr( nLen )
       cPass += SubStr( cSet, Random( 52 ), 1 )
    NEXT
 
-RETURN cPass
+   RETURN cPass
+

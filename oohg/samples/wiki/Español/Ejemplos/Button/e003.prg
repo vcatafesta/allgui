@@ -1,49 +1,41 @@
 /*
- * Ejemplo Button n° 3
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo definir botones con imágenes.
- * También sirve como un caso de prueba para la clase TButton.
- *
- * Los botones pueden mostrar imágenes ICO y BMP de cualquier
- * tamaño (se muestran en su tamaño actual).
- *
- * Transparencia:
- *
- * Imágenes ICO:
- * a. profundidad de color 24 bpp + canal alfa, o
- * b. para otras profundidades de color, el color negro
- *    será el transparente.
- *
- * Imágenes BMP:
- * a. la profuncidad de color no debe superar los 8 bpp, y
- * b. el color del pixel ubicado arriba a la izquierda
- *    será el transparente si tiene índice 0 en la paleta.
- *
- * Imágenes JPG/JPEG/GIF:
- * a. la que se haya definido.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * El archivo de recursos y las imágenes pueden descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Button
- */
+* Ejemplo Button n° 3
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo definir botones con imágenes.
+* También sirve como un caso de prueba para la clase TButton.
+* Los botones pueden mostrar imágenes ICO y BMP de cualquier
+* tamaño (se muestran en su tamaño actual).
+* Transparencia:
+* Imágenes ICO:
+* a. profundidad de color 24 bpp + canal alfa, o
+* b. para otras profundidades de color, el color negro
+*    será el transparente.
+* Imágenes BMP:
+* a. la profuncidad de color no debe superar los 8 bpp, y
+* b. el color del pixel ubicado arriba a la izquierda
+*    será el transparente si tiene índice 0 en la paleta.
+* Imágenes JPG/JPEG/GIF:
+* a. la que se haya definido.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* El archivo de recursos y las imágenes pueden descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Button
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    DEFINE WINDOW FormMain ;
-      AT 0,0 ;
-      WIDTH 258 ;
-      HEIGHT 100 ;
-      MAIN ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Imágenes en Botones" ;
+         AT 0,0 ;
+         WIDTH 258 ;
+         HEIGHT 100 ;
+         MAIN ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Imágenes en Botones" ;
 
       @ 20, 20 BUTTON But_1 ;
          CAPTION "Con Texto" ;
@@ -63,19 +55,19 @@ FUNCTION Main()
    CENTER WINDOW FormMain
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ShowForm1
 
    // Botones con imagen y texto
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 558 ;
-      HEIGHT 450 ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Imágenes en Botones" ;
+         AT 0,0 ;
+         WIDTH 558 ;
+         HEIGHT 450 ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Imágenes en Botones" ;
 
       // Primera columna: ICOs desde archivo
 
@@ -219,19 +211,19 @@ FUNCTION ShowForm1
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ShowForm2
 
    // Botones con images y tema sin texto
 
    DEFINE WINDOW Form_2 ;
-      AT 0,0 ;
-      WIDTH 558 ;
-      HEIGHT 450 ;
-      NOMINIMIZE ;
-      NOMAXIMIZE ;
-      TITLE "ooHG - Botones con Imagen y Tema sin Texto" ;
+         AT 0,0 ;
+         WIDTH 558 ;
+         HEIGHT 450 ;
+         NOMINIMIZE ;
+         NOMAXIMIZE ;
+         TITLE "ooHG - Botones con Imagen y Tema sin Texto" ;
 
       // Primera columna: ICOs desde archivo
 
@@ -375,8 +367,9 @@ FUNCTION ShowForm2
    CENTER WINDOW Form_2
    ACTIVATE WINDOW Form_2
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

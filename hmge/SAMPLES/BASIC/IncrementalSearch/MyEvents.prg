@@ -1,14 +1,13 @@
 #define WM_NOTIFY 78
 #define LVN_KEYDOWN ( - 155 )
 
-//------------------------------------------------------------------------------
 FUNCTION MyEvents( hWnd, nMsg, wParam, lParam )
-//------------------------------------------------------------------------------
+
    LOCAL i, nVirtKey, cKey, Result := 0
    LOCAL cFormName := "", cControlName := ""
 
-   if nMsg = WM_NOTIFY
-      if GetNotifyCode( lParam ) = LVN_KEYDOWN
+   IF nMsg = WM_NOTIFY
+      IF GetNotifyCode( lParam ) = LVN_KEYDOWN
 
          nVirtKey := GetGridvKey( lParam )
          cKey := KeyToChar( nVirtKey )
@@ -18,32 +17,28 @@ FUNCTION MyEvents( hWnd, nMsg, wParam, lParam )
          i := Ascan( _HMG_aControlHandles, GetHwndFrom( lParam ) )
          cControlName := if( i > 0, _HMG_aControlNames[ i ], "" )
 
-         if cFormName == "Form_1" .and. cControlName == "Browse_1"
+         IF cFormName == "Form_1" .and. cControlName == "Browse_1"
             Result := Form1Event1( i, nVirtKey, cKey )
-         elseif cFormName == "Form_1" .and. cControlName == "Grid_1"
+         ELSEIF cFormName == "Form_1" .and. cControlName == "Grid_1"
             Result := Form1Event2( i, nVirtKey, cKey )
-         elseif cFormName == "Form2" .and. cControlName == "Browse_1"
-            //
-         elseif cFormName == "winPreparChild" .and. cControlName == "Browse_1"
-            //
-         elseif cFormName == "winUsersRights" .and. cControlName == "Grid_1"
-            //
-         else
+         ELSEIF cFormName == "Form2" .and. cControlName == "Browse_1"
+         ELSEIF cFormName == "winPreparChild" .and. cControlName == "Browse_1"
+         ELSEIF cFormName == "winUsersRights" .and. cControlName == "Grid_1"
+         ELSE
             Result := Events( hWnd, nMsg, wParam, lParam )
-         endif
+         ENDIF
 
-      else
+      ELSE
          Result := Events( hWnd, nMsg, wParam, lParam )
-      endif
-   else
+      ENDIF
+   ELSE
       Result := Events( hWnd, nMsg, wParam, lParam )
-   endif
+   ENDIF
 
-RETURN Result
+   RETURN Result
 
-//------------------------------------------------------------------------------
-Static Function KeyToChar( nVirtKey )
-//------------------------------------------------------------------------------
+STATIC FUNCTION KeyToChar( nVirtKey )
+
    LOCAL i, cRetChar := ""
    LOCAL nKeyboardMode := GetKeyboardMode()
    LOCAL lShift := CheckBit( GetKeyState( 16 ), 32768 )
@@ -60,48 +55,49 @@ Static Function KeyToChar( nVirtKey )
    LOCAL cKeys2ShiftRU := '!"¹;%:?*()ÉÖÓÊÅÍÃØÙÇÔÛÂÀÏÐÎËÄß×ÑÌÈÒÜ '
 
    i := ascan( aKeysNumPad, nVirtKey )
-   if i > 0
+   IF i > 0
+
       RETURN substr( cKeysNumPad, i, 1 )
-   endif
+   ENDIF
 
    i := ascan( aKeys1, nVirtKey )
-   if i > 0
-      if nKeyboardMode == 1033 // US
-         if lShift
+   IF i > 0
+      IF nKeyboardMode == 1033 // US
+         IF lShift
             cRetChar := substr( cKeys1ShiftUS, i, 1 )
-         else
+         ELSE
             cRetChar := substr( cKeys1US, i, 1 )
-         endif
-      elseif nKeyboardMode == 1049 // RU
-         if lShift
+         ENDIF
+      ELSEIF nKeyboardMode == 1049 // RU
+         IF lShift
             cRetChar := substr( cKeys1ShiftRU, i, 1 )
-         else
+         ELSE
             cRetChar := substr( cKeys1RU, i, 1 )
-         endif
-      endif
+         ENDIF
+      ENDIF
+
       RETURN cRetChar
-   endif
+   ENDIF
 
    i := at( chr( nVirtKey ), cKeys2US )
-   if i > 0
-      if nKeyboardMode == 1033 // US
-         if lShift
+   IF i > 0
+      IF nKeyboardMode == 1033 // US
+         IF lShift
             cRetChar := substr( cKeys2ShiftUS, i, 1 )
-         else
+         ELSE
             cRetChar := substr( cKeys2US, i, 1 )
-         endif
-      elseif nKeyboardMode == 1049 // RU
-         if lShift
+         ENDIF
+      ELSEIF nKeyboardMode == 1049 // RU
+         IF lShift
             cRetChar := substr( cKeys2ShiftRU, i, 1 )
-         else
+         ELSE
             cRetChar := substr( cKeys2RU, i, 1 )
-         endif
-      endif
-   endif
+         ENDIF
+      ENDIF
+   ENDIF
 
    RETURN cRetChar
 
-//------------------------------------------------------------------------------
 #pragma BEGINDUMP
 
 #include <windows.h>
@@ -125,4 +121,3 @@ HB_FUNC( GETKEYBOARDMODE )
 }
 
 #pragma ENDDUMP
-//------------------------------------------------------------------------------

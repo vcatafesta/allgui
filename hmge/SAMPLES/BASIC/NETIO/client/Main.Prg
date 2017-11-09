@@ -1,30 +1,31 @@
 /*
- *	MiniGUI Basic NetIO Client Sample.
- *	Roberto Lopez <mail.box.hmg@gmail.com>
+*   MiniGUI Basic NetIO Client Sample.
+*   Roberto Lopez <mail.box.hmg@gmail.com>
 */
 
 #include <hmg.ch>
 
-Function Main
+FUNCTION Main
 
-MEMVAR aRecordSet
-MEMVAR cMainTitle
+   MEMVAR aRecordSet
+   MEMVAR cMainTitle
 
-PUBLIC aRecordSet
-PUBLIC cMainTitle
+   PUBLIC aRecordSet
+   PUBLIC cMainTitle
 
-        Load Window Main
+   LOAD WINDOW Main
 
-	IF ValType( cMainTitle ) != "C"
-		cMainTitle := Main.Title
-	ENDIF
+   IF ValType( cMainTitle ) != "C"
+      cMainTitle := Main.Title
+   ENDIF
 
-	Main.Query_Server.Enabled	:= .F.
-	Main.Disconnect.Enabled		:= .F.
-	Main.Query_String.Enabled	:= .F.
+   Main.Query_Server.Enabled   := .F.
+   Main.Disconnect.Enabled      := .F.
+   Main.Query_String.Enabled   := .F.
 
-        Main.Center
+   Main.Center
 
-        Main.Activate
+   Main.Activate
 
-Return Nil
+   RETURN NIL
+

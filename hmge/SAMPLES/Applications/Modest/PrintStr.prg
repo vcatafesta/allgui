@@ -6,7 +6,7 @@
 // Paper size of format À4 at RowCol in HBPrinter
 // MaxRow = 68
 // MaxCol = 131
- 
+
 // Print margins
 
 #define SH_TOP_MARGIN              1           // Top margin
@@ -24,320 +24,293 @@
 #define DESCR_CHAR_COUNT          90
 #define COMMENT_CHAR_COUNT        40
 
+MEMVAR nLine, nPage                            // Counters of printed rows and pages
 
-Memvar nLine, nPage                            // Counters of printed rows and pages
-
-
-Declare window wModest
-
+DECLARE window wModest
 
 /******
-*
 *       PrintStructure()
-*
 *       Print of structure
-*
 */
 
-Procedure PrintStructure
-Memvar aStat, oEditStru
-Local Cycle, ;
+PROCEDURE PrintStructure
+
+   MEMVAR aStat, oEditStru
+   LOCAL Cycle, ;
       nLen
 
-Private nLine := SH_FIRST_LINE, ;        // Counter of printed rows
-        nPage := 1                       // Counter of pages
+   PRIVATE nLine := SH_FIRST_LINE, ;        // Counter of printed rows
+   nPage := 1                       // Counter of pages
 
-// If field name is absent in the first row when it means that
-// the field's array is empty. The printing is not execute.
- 
-If Empty( oEditStru : aArray[ 1, DBS_NAME ] )
-   Return
-Endif
+   // If field name is absent in the first row when it means that
+   // the field's array is empty. The printing is not execute.
 
-// Print system initialization and printer selection
-// Warning! The all changes of printing parameters
-// in this dialog are ignored.
+   IF Empty( oEditStru : aArray[ 1, DBS_NAME ] )
 
-Init PrintSys
-Select by dialog
+      RETURN
+   ENDIF
 
-If !Empty( HBPRNError )
-   Return
-Endif
+   // Print system initialization and printer selection
+   // Warning! The all changes of printing parameters
+   // in this dialog are ignored.
 
-// Own settings for paper size and orientation
+   INIT PrintSys
+   SELECT by dialog
 
-Set PaperSize DMPAPER_A4                                   // Page format A4
-Set orientation PORTRAIT                                   // Page orientation is portrait
-Set print margins Top SH_TOP_MARGIN Left SH_FIRST_COL      // Page margins
+   IF !Empty( HBPRNError )
 
-// Preview parameters
+      RETURN
+   ENDIF
 
-Set Preview on          // Preview is ON
-Set Thumbnails on       // Thumbnails is ON
-Set ClosePreview off    // Preview window is not closed after printing
+   // Own settings for paper size and orientation
 
-// Preview window size is adjusted for desktop's width and height (without taskbar)
+   SET PaperSize DMPAPER_A4                                   // Page format A4
+   SET orientation PORTRAIT                                   // Page orientation is portrait
+   SET print margins Top SH_TOP_MARGIN Left SH_FIRST_COL      // Page margins
 
-Set preview rect 0, 0, GetDesktopRealHeight(), GetDesktopRealWidth()
-Set preview scale 2
+   // Preview parameters
 
-// Print fonts
+   SET Preview on          // Preview is ON
+   SET Thumbnails on       // Thumbnails is ON
+   SET ClosePreview off    // Preview window is not closed after printing
 
-Define font 'fTitle' name 'Times New Roman' Size 12 Bold        // Page number font
-Define font 'fBase'  name 'Times New Roman' Size 12             // Main font
-Define font 'fAlert' name 'Times New Roman' Size 12 Italic      // Font for warnings
+   // Preview window size is adjusted for desktop's width and height (without taskbar)
 
-nLen := oEditStru : nLen
+   SET preview rect 0, 0, GetDesktopRealHeight(), GetDesktopRealWidth()
+   SET preview scale 2
 
-Start Doc name aStat[ 'FileName' ]
-Start Page
+   // Print fonts
 
-TitlePrn()                    // Print of page header
-HeaderPrn()                   // Print of database description
-HeadTablePrn()                // Header of field table
+   Define font 'fTitle' name 'Times New Roman' Size 12 Bold        // Page number font
+   Define font 'fBase'  name 'Times New Roman' Size 12             // Main font
+   Define font 'fAlert' name 'Times New Roman' Size 12 Italic      // Font for warnings
 
-For Cycle := 1 to nLen
-  
-  If ( nLine == SH_FIRST_LINE )
-     Start Page
-     TitlePrn()                    // Print of page header
-     HeadTablePrn()                // Table header is repeated on the each page
-  Endif
+   nLen := oEditStru : nLen
 
-  DataPrn( Cycle )
-  
-Next
+   Start Doc name aStat[ 'FileName' ]
+   Start Page
 
-End Page
+   TitlePrn()                    // Print of page header
+   HeaderPrn()                   // Print of database description
+   HeadTablePrn()                // Header of field table
+
+   FOR Cycle := 1 to nLen
+
+      IF ( nLine == SH_FIRST_LINE )
+         Start Page
+         TitlePrn()                    // Print of page header
+         HeadTablePrn()                // Table header is repeated on the each page
+      ENDIF
+
+      DataPrn( Cycle )
+
+   NEXT
+
+END PAGE
 End Doc
 
-Release font 'fTitle'
-Release font 'fBase'
-Release font 'fAlert'
+RELEASE font 'fTitle'
+RELEASE font 'fBase'
+RELEASE font 'fAlert'
 
-Release PrintSys
+RELEASE PrintSys
 
-Return
+RETURN
 
 ****** End of PrintStructure ******
 
-
 /******
-*
 *       LineCounter( nStep )
-*
 *       Rows counter
-*
 */
 
-Static Procedure LineCounter( nStep )
+STATIC PROCEDURE LineCounter( nStep )
 
-If ( nStep == nil )
-   nLine ++
-Else
-   nLine += nStep
-Endif
+   IF ( nStep == nil )
+      nLine ++
+   ELSE
+      nLine += nStep
+   ENDIF
 
-// Pass to next page?
+   // Pass to next page?
 
-If PAGE_FULL
-   LinePrn()
-   End Page
-   
+   IF PAGE_FULL
+      LinePrn()
+   END PAGE
+
    nLine := SH_FIRST_LINE
    nPage ++
-   
-   Start Page
-   
-Endif
 
-Return
+   Start Page
+
+ENDIF
+
+RETURN
 
 ****** End of LineCounter ******
 
-
 /******
-*
 *       LinePrn()
-*
 *       Print of horizontal line
-*
 */
 
-Static Procedure LinePrn
-@ nLine, 0, nLine, ( HBPRNMAXCOL - 2 * SH_FIRST_COL ) Line
-Return
+STATIC PROCEDURE LinePrn
 
-****** End of LinePrn ******
+   @ nLine, 0, nLine, ( HBPRNMAXCOL - 2 * SH_FIRST_COL ) Line
 
+   RETURN
 
-/******
-*
-*       TitlePrn()
-*
-*       Print of page header
-*
-*/
+   ****** End of LinePrn ******
 
-Static Procedure TitlePrn
-Memvar aStat
-Local cTitle := ( 'Page ' + LTrim( Str( nPage ) ) )
+   /******
+   *       TitlePrn()
+   *       Print of page header
+   */
 
-// Show warning if structure or description changing was not saved before printing
+STATIC PROCEDURE TitlePrn
 
-If ( aStat[ 'ChStruct' ] .or. aStat[ 'ChDescript' ] )
+   MEMVAR aStat
+   LOCAL cTitle := ( 'Page ' + LTrim( Str( nPage ) ) )
 
-   Do case
-      Case ( aStat[ 'ChStruct' ] .and. aStat[ 'ChDescript' ] )
-        @ nLine, 0 Say 'Structure and description no saved!' Font 'fAlert' Color RED to print
-      Case aStat[ 'ChStruct' ]
-        @ nLine, 0 Say 'Structure no saved!' Font 'fAlert' Color RED to print
-      Case aStat[ 'ChDescript' ]
-        @ nLine, 0 Say 'Description no saved!' Font 'fAlert' Color RED to print
-   Endcase
-   
-Endif
+   // Show warning if structure or description changing was not saved before printing
 
-@ nLine, ( HBPRNMAXCOL - SH_PAGE_NUM ) Say cTitle Font 'fTitle' to print
-LineCounter( 2 )
+   IF ( aStat[ 'ChStruct' ] .or. aStat[ 'ChDescript' ] )
 
-Return
+      DO CASE
+      CASE ( aStat[ 'ChStruct' ] .and. aStat[ 'ChDescript' ] )
+         @ nLine, 0 Say 'Structure and description no saved!' Font 'fAlert' Color RED to print
+      CASE aStat[ 'ChStruct' ]
+         @ nLine, 0 Say 'Structure no saved!' Font 'fAlert' Color RED to print
+      CASE aStat[ 'ChDescript' ]
+         @ nLine, 0 Say 'Description no saved!' Font 'fAlert' Color RED to print
+      ENDCASE
 
-****** End of TitlePrn *****
+   ENDIF
 
+   @ nLine, ( HBPRNMAXCOL - SH_PAGE_NUM ) Say cTitle Font 'fTitle' to print
+   LineCounter( 2 )
 
-/******
-*
-*       HeaderPrn()
-*
-*       Print of general description
-*
-*/
+   RETURN
 
-Static Procedure HeaderPrn
-Memvar aStat
-Local cText := AllTrim( wModest.edtGeneral.Value ), ;
+   ****** End of TitlePrn *****
+
+   /******
+   *       HeaderPrn()
+   *       Print of general description
+   */
+
+STATIC PROCEDURE HeaderPrn
+
+   MEMVAR aStat
+   LOCAL cText := AllTrim( wModest.edtGeneral.Value ), ;
       nLen                                         , ;
       Cycle
 
-@ nLine,  0 Say 'Date:' Font 'fTitle' to print
-@ nLine, 15 Say DtoC( Date() ) Font 'fBase' to print 
-LineCounter()
+   @ nLine,  0 Say 'Date:' Font 'fTitle' to print
+   @ nLine, 15 Say DtoC( Date() ) Font 'fBase' to print
+   LineCounter()
 
-@ nLine,  0 Say 'File:' Font 'fTitle' to print
-@ nLine, 15 Say aStat[ 'FileName' ] Font 'fBase' to print 
-LineCounter()
+   @ nLine,  0 Say 'File:' Font 'fTitle' to print
+   @ nLine, 15 Say aStat[ 'FileName' ] Font 'fBase' to print
+   LineCounter()
 
-@ nLine, 0 Say 'Description:' Font 'fTitle' to print
+   @ nLine, 0 Say 'Description:' Font 'fTitle' to print
 
-nLen := MLCount( cText, DESCR_CHAR_COUNT,,, .T. )
-For Cycle := 1 to nLen
-  @ nLine, 15 Say LTrim( Memoline( cText, DESCR_CHAR_COUNT, Cycle,,, .T. ) ) Font 'fBase' to print
-  LineCounter()
-Next
+   nLen := MLCount( cText, DESCR_CHAR_COUNT,,, .T. )
+   FOR Cycle := 1 to nLen
+      @ nLine, 15 Say LTrim( Memoline( cText, DESCR_CHAR_COUNT, Cycle,,, .T. ) ) Font 'fBase' to print
+      LineCounter()
+   NEXT
 
-Return
+   RETURN
 
-****** End of HeaderPrn ******
+   ****** End of HeaderPrn ******
 
+   /******
+   *      HeadTablePrn()
+   *      Print of table header
+   */
 
-/******
-*
-*      HeadTablePrn()
-*
-*      Print of table header
-*
-*/
+STATIC PROCEDURE HeadTablePrn
 
-Static Procedure HeadTablePrn
+   LineCounter()
+   LinePrn()
 
-LineCounter()
-LinePrn()
+   @ nLine,  2 Say '#'       Font 'fTitle' to print
+   @ nLine, 20 Say 'Field'   Font 'fTitle' to print
+   @ nLine, 40 Say 'Type'    Font 'fTitle' to print
+   @ nLine, 50 Say 'Len'     Font 'fTitle' to print
+   @ nLine, 60 Say 'Dec'     Font 'fTitle' to print
+   @ nLine, 70 Say 'Comment' Font 'fTitle' to print
 
-@ nLine,  2 Say '#'       Font 'fTitle' to print
-@ nLine, 20 Say 'Field'   Font 'fTitle' to print
-@ nLine, 40 Say 'Type'    Font 'fTitle' to print
-@ nLine, 50 Say 'Len'     Font 'fTitle' to print
-@ nLine, 60 Say 'Dec'     Font 'fTitle' to print
-@ nLine, 70 Say 'Comment' Font 'fTitle' to print
+   LineCounter()
 
-LineCounter()
+   LinePrn()
+   LineCounter()
 
-LinePrn()
-LineCounter()
+   RETURN
 
-Return
+   ****** End of HeadTablePrn *****
 
-****** End of HeadTablePrn *****
+   /******
+   *       DataPrn( nRow )
+   *       Print of structure
+   */
 
+STATIC PROCEDURE DataPrn( nRow )
 
-/******
-*
-*       DataPrn( nRow )
-*
-*       Print of structure
-*
-*/
-
-Static Procedure DataPrn( nRow )
-Memvar oEditStru
-Local cText, ;
+   MEMVAR oEditStru
+   LOCAL cText, ;
       Cycle, ;
       nLen
 
-@ nLine,  0 Say Str( nRow, 3 ) Font 'fBase' to print
+   @ nLine,  0 Say Str( nRow, 3 ) Font 'fBase' to print
 
-If ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
-   @ nLine, 7 Say 'New' Font 'fAlert' Color RED to print
-ElseIf ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
-   @ nLine, 7 Say 'Deleted' Font 'fAlert' Color RED to print
-Endif
+   IF ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_INSERTED )
+      @ nLine, 7 Say 'New' Font 'fAlert' Color RED to print
+   ELSEIF ( oEditStru : aArray[ nRow, DBS_FLAG ] == FLAG_DELETED )
+      @ nLine, 7 Say 'Deleted' Font 'fAlert' Color RED to print
+   ENDIF
 
-@ nLine, 20 Say oEditStru : aArray[ nRow, DBS_NAME ] Font 'fBase' to print
-@ nLine, 42 Say oEditStru : aArray[ nRow, DBS_TYPE ] Font 'fBase' to print
-@ nLine, 54 Say Str( oEditStru : aArray[ nRow, DBS_LEN ], 3 ) Font 'fBase' Align TA_RIGHT to print
-@ nLine, 64 Say Str( oEditStru : aArray[ nRow, DBS_DEC ], 3 ) Font 'fBase' Align TA_RIGHT to print
+   @ nLine, 20 Say oEditStru : aArray[ nRow, DBS_NAME ] Font 'fBase' to print
+   @ nLine, 42 Say oEditStru : aArray[ nRow, DBS_TYPE ] Font 'fBase' to print
+   @ nLine, 54 Say Str( oEditStru : aArray[ nRow, DBS_LEN ], 3 ) Font 'fBase' Align TA_RIGHT to print
+   @ nLine, 64 Say Str( oEditStru : aArray[ nRow, DBS_DEC ], 3 ) Font 'fBase' Align TA_RIGHT to print
 
-cText := oEditStru : aArray[ nRow, DBS_COMMENT ]
+   cText := oEditStru : aArray[ nRow, DBS_COMMENT ]
 
-If !Empty( cText )
+   IF !Empty( cText )
 
-   nLen := MLCount( cText, COMMENT_CHAR_COUNT,,, .T. )
-   
-   For Cycle := 1 to nLen
-       @ nLine, 70 Say LTrim( Memoline( cText, COMMENT_CHAR_COUNT, Cycle,,, .T. ) ) Font 'fBase' to print
-       
-       If !( Cycle == nLen )
-          LineCounter()
-       Endif
-       
-   Next
+      nLen := MLCount( cText, COMMENT_CHAR_COUNT,,, .T. )
 
-Endif
+      FOR Cycle := 1 to nLen
+         @ nLine, 70 Say LTrim( Memoline( cText, COMMENT_CHAR_COUNT, Cycle,,, .T. ) ) Font 'fBase' to print
 
-LineCounter()
+         IF !( Cycle == nLen )
+            LineCounter()
+         ENDIF
 
-Return
+      NEXT
 
-****** End of DataPrn ******
- 
+   ENDIF
 
+   LineCounter()
 
-// C-level functions
+   RETURN
+
+   ****** End of DataPrn ******
+
+   // C-level functions
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 
-
 /******
-*
 *       Real width of desktop
-*
 */
 
-HB_FUNC_STATIC( GETDESKTOPREALWIDTH ) 
+HB_FUNC_STATIC( GETDESKTOPREALWIDTH )
 {
    RECT rect;
    SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
@@ -347,12 +320,10 @@ HB_FUNC_STATIC( GETDESKTOPREALWIDTH )
 }
 
 /******
-*
 *       Real height of desktop (without taskbar)
-*
 */
 
-HB_FUNC_STATIC( GETDESKTOPREALHEIGHT ) 
+HB_FUNC_STATIC( GETDESKTOPREALHEIGHT )
 {
    RECT rect;
    SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
@@ -361,3 +332,4 @@ HB_FUNC_STATIC( GETDESKTOPREALHEIGHT )
 }
 
 #pragma ENDDUMP
+

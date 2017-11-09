@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2004-2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2004-2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -15,139 +13,131 @@ ANNOUNCE RDDSYS
 #define COPYRIGHT ' Grigory Filatov, 2004-2006'
 #define NTRIM( n ) hb_ntos( n )
 
-#define GW_HWNDFIRST		0
-#define GW_HWNDLAST		1
-#define GW_HWNDNEXT		2
-#define GW_HWNDPREV		3
-#define GW_OWNER		4
-#define GW_CHILD		5
+#define GW_HWNDFIRST      0
+#define GW_HWNDLAST      1
+#define GW_HWNDNEXT      2
+#define GW_HWNDPREV      3
+#define GW_OWNER      4
+#define GW_CHILD      5
 
-Static aList := {}
+STATIC aList := {}
 
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
+PROCEDURE Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		ON RELEASE iif(LEN( aList ) > 0, RestoreAllWindows(), ) ;
-		NOTIFYICON "MAIN" ;
-		NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu" ;
-		ON NOTIFYCLICK iif(Empty(aList), ShrinkActiveWindow(), RestoreWindow())
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         ON RELEASE iif(LEN( aList ) > 0, RestoreAllWindows(), ) ;
+         NOTIFYICON "MAIN" ;
+         NOTIFYTOOLTIP PROGRAM + ": Right Click for Menu" ;
+         ON NOTIFYCLICK iif(Empty(aList), ShrinkActiveWindow(), RestoreWindow())
 
-		DEFINE NOTIFY MENU 
-			ITEM '&Restore Window'	ACTION RestoreWindow() NAME WinRestore
-			ITEM '&Shrink The Active Window' ;
-				ACTION ShrinkActiveWindow()
-			SEPARATOR
-			ITEM '&Mail to author...' ;
-				ACTION ShellExecute( 0, "open", "rundll32.exe", ;
-					"url.dll,FileProtocolHandler " + ;
-					"mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
-					"&subject=Shrink%20It%20Feedback:" + ;
-					"&body=How%20are%20you%2C%20Grigory%3F", , 1 )
-			ITEM '&About...'	ACTION ShellAbout( "", PROGRAM + ' version 1.1' + ;
-					CRLF + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), "MAIN", 32, 32) )
-			SEPARATOR
-			ITEM 'E&xit'	ACTION Form_1.Release
-		END MENU
+      DEFINE NOTIFY MENU
+         ITEM '&Restore Window'   ACTION RestoreWindow() NAME WinRestore
+         ITEM '&Shrink The Active Window' ;
+            ACTION ShrinkActiveWindow()
+         SEPARATOR
+         ITEM '&Mail to author...' ;
+            ACTION ShellExecute( 0, "open", "rundll32.exe", ;
+            "url.dll,FileProtocolHandler " + ;
+            "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
+            "&subject=Shrink%20It%20Feedback:" + ;
+            "&body=How%20are%20you%2C%20Grigory%3F", , 1 )
+         ITEM '&About...'   ACTION ShellAbout( "", PROGRAM + ' version 1.1' + ;
+            CRLF + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), "MAIN", 32, 32) )
+         SEPARATOR
+         ITEM 'E&xit'   ACTION Form_1.Release
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	Form_1.WinRestore.Enabled := .F.
+   Form_1.WinRestore.Enabled := .F.
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Procedure ShrinkActiveWindow()
-*--------------------------------------------------------*
-LOCAL nActiveWnd := GetFirstActiveWindow(), nActiveHeight, nShrinkHeight
+PROCEDURE ShrinkActiveWindow()
 
-	IF .NOT. EMPTY( nActiveWnd )
+   LOCAL nActiveWnd := GetFirstActiveWindow(), nActiveHeight, nShrinkHeight
 
-		nActiveHeight := GetWindowHeight( nActiveWnd )
-		nShrinkHeight := GetTitleHeight() + 2
+   IF .NOT. EMPTY( nActiveWnd )
 
-		IF nActiveHeight > nShrinkHeight
+      nActiveHeight := GetWindowHeight( nActiveWnd )
+      nShrinkHeight := GetTitleHeight() + 2
 
-			Aadd( aList, { nActiveWnd, nActiveHeight } )
+      IF nActiveHeight > nShrinkHeight
 
-			Form_1.NotifyTooltip := PROGRAM + ": " + NTRIM(LEN(aList)) + " window(s)"
-			Form_1.WinRestore.Enabled := .T.
+         Aadd( aList, { nActiveWnd, nActiveHeight } )
 
-			_SetWindowHeight( nActiveWnd, nShrinkHeight )
-		ENDIF
-	ENDIF
+         Form_1.NotifyTooltip := PROGRAM + ": " + NTRIM(LEN(aList)) + " window(s)"
+         Form_1.WinRestore.Enabled := .T.
 
-Return
+         _SetWindowHeight( nActiveWnd, nShrinkHeight )
+      ENDIF
+   ENDIF
 
-*--------------------------------------------------------*
-Procedure RestoreWindow()
-*--------------------------------------------------------*
+   RETURN
 
-	_SetWindowHeight( aTail( aList ) [1], aTail( aList ) [2] )
+PROCEDURE RestoreWindow()
 
-	ADEL( aList, LEN(aList) )
-	ASIZE( aList, LEN(aList) - 1 )
+   _SetWindowHeight( aTail( aList ) [1], aTail( aList ) [2] )
 
-	Form_1.NotifyTooltip := PROGRAM + ": " + NTRIM(LEN(aList)) + " window(s)"
+   ADEL( aList, LEN(aList) )
+   ASIZE( aList, LEN(aList) - 1 )
 
-	IF EMPTY( aList )
-		Form_1.WinRestore.Enabled := .F.
-	ENDIF
+   Form_1.NotifyTooltip := PROGRAM + ": " + NTRIM(LEN(aList)) + " window(s)"
 
-Return
+   IF EMPTY( aList )
+      Form_1.WinRestore.Enabled := .F.
+   ENDIF
 
-*--------------------------------------------------------*
-Procedure RestoreAllWindows()
-*--------------------------------------------------------*
+   RETURN
 
-	WHILE LEN( aList ) > 0
-		RestoreWindow()
-	END
+PROCEDURE RestoreAllWindows()
 
-Return
+   WHILE LEN( aList ) > 0
+      RestoreWindow()
+   END
 
-*-----------------------------------------------------------------------------*
-Procedure _SetWindowHeight( hWnd, Height )
-*-----------------------------------------------------------------------------*
-LOCAL actpos := { 0, 0, 0, 0 }
+   RETURN
 
-	GetWindowRect( hWnd, actpos )
+PROCEDURE _SetWindowHeight( hWnd, Height )
 
-	MoveWindow( hWnd, actpos[1], actpos[2], actpos[3] - actpos[1], Height, .T. )
+   LOCAL actpos := { 0, 0, 0, 0 }
 
-Return
+   GetWindowRect( hWnd, actpos )
 
-*--------------------------------------------------------*
-Function GetFirstActiveWindow()
-*--------------------------------------------------------*
-LOCAL ahWnd := {}, nActiveWnd := 0
-LOCAL hWnd := GetWindow( _HMG_MainHandle, GW_HWNDFIRST )                // Get the first window
+   MoveWindow( hWnd, actpos[1], actpos[2], actpos[3] - actpos[1], Height, .T. )
 
-	WHILE hWnd != 0                                                 // Loop through all the windows
+   RETURN
 
-		IF IsWindowVisible( hWnd ) .AND.;                       // If it is a visible window
-			hWnd != _HMG_MainHandle .AND.;                  // If it is not this app
-			ASCAN( aList, { |e| e[1] = hWnd } ) == 0 .AND.; // If the window is not shrinked
-			!EMPTY( GetWindowText( hWnd ) ) .AND.;          // If the window has a title
-			!IsIconic( hWnd ) .AND.;                        // If the window is not minimized
-			!( GetWindowText( hWnd ) == "Program Manager" ) // If it is not the Program Manager
+FUNCTION GetFirstActiveWindow()
 
-			AADD( ahWnd, hWnd )
-		ENDIF
+   LOCAL ahWnd := {}, nActiveWnd := 0
+   LOCAL hWnd := GetWindow( _HMG_MainHandle, GW_HWNDFIRST )                // Get the first window
 
-		hWnd := GetWindow( hWnd, GW_HWNDNEXT )                  // Get the next window
+   WHILE hWnd != 0                                                 // Loop through all the windows
 
-	END
+      IF IsWindowVisible( hWnd ) .AND.;                       // If it is a visible window
+         hWnd != _HMG_MainHandle .AND.;                  // If it is not this app
+         ASCAN( aList, { |e| e[1] = hWnd } ) == 0 .AND.; // If the window is not shrinked
+         !EMPTY( GetWindowText( hWnd ) ) .AND.;          // If the window has a title
+         !IsIconic( hWnd ) .AND.;                        // If the window is not minimized
+         !( GetWindowText( hWnd ) == "Program Manager" ) // If it is not the Program Manager
 
-	IF LEN( ahWnd ) > 0
-		nActiveWnd := ahWnd[ 1 ]                                // Return First Active Window
-	ENDIF
+         AADD( ahWnd, hWnd )
+      ENDIF
 
-Return nActiveWnd
+      hWnd := GetWindow( hWnd, GW_HWNDNEXT )                  // Get the next window
+
+   END
+
+   IF LEN( ahWnd ) > 0
+      nActiveWnd := ahWnd[ 1 ]                                // Return First Active Window
+   ENDIF
+
+   RETURN nActiveWnd
+

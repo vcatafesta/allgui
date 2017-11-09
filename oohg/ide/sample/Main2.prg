@@ -1,44 +1,45 @@
 #include 'oohg.ch'
 
-*--------------------------
-Function Main()
-*-------------------------
-    LOAD WINDOW fp
-    center window fp
-    activate window fp
-Return nil
+FUNCTION Main()
 
-*-------------------------
-Function rep()
-*-------------------------
-set language to english
-wempresa:="hollywood"
-USe test
-DO REPORT FORM repdemo
-close data
-return
+   LOAD WINDOW fp
+   CENTER WINDOW fp
+   ACTIVATE WINDOW fp
 
-*-------------------------
-function toolbar()
-*-------------------------
-/*
-load window tbarsamp
-center window tbarsamp
-activate window tbarsamp
-*/
-return nil
+   RETURN NIL
 
-*-------------------------
-function abre()
-*-------------------------
-use test
-return nil
+FUNCTION rep()
 
-*-------------------------
-function cierra()
-*-------------------------
-close data
-return nil
+   SET language to english
+   wempresa:="hollywood"
+   USE test
+   DO REPORT FORM repdemo
+   CLOSE data
 
-#include 'prgspi.prg'
-#include 'p2.prg'
+   RETURN
+
+FUNCTION toolbar()
+
+   /*
+   load window tbarsamp
+   center window tbarsamp
+   activate window tbarsamp
+   */
+
+   RETURN NIL
+
+FUNCTION abre()
+
+   USE test
+
+   RETURN NIL
+
+FUNCTION cierra()
+
+   CLOSE data
+
+   RETURN NIL
+
+   #include 'prgspi.prg'
+   #include 'p2.prg'
+

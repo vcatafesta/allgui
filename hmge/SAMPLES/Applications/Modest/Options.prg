@@ -1,86 +1,78 @@
 #include "Modest.ch"
 #include "MiniGUI.ch"
 
-
-Memvar aStat
-
+MEMVAR aStat
 
 /******
-*
 *       Options()
-*
 *       Setting of typical params
-*
 */
 
-Procedure Options
+PROCEDURE Options
 
-Load window Options as wOptions
+   LOAD WINDOW Options as wOptions
 
-wOptions.Title := APPNAME + ' - Options'
+   wOptions.Title := APPNAME + ' - Options'
 
-wOptions.txbName.Value := aStat[ 'DefName' ]
-wOptions.cmbType.Value := aStat[ 'DefType' ]
-wOptions.spnLen.Value  := aStat[ 'DefLen'  ]
-wOptions.spnDec.Value  := aStat[ 'DefDec'  ]
+   wOptions.txbName.Value := aStat[ 'DefName' ]
+   wOptions.cmbType.Value := aStat[ 'DefType' ]
+   wOptions.spnLen.Value  := aStat[ 'DefLen'  ]
+   wOptions.spnDec.Value  := aStat[ 'DefDec'  ]
 
-wOptions.cmbRDD.Value        := Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 2, 1 )
-wOptions.txbExpression.Value := aStat[ 'Expression' ]
+   wOptions.cmbRDD.Value        := Iif( ( aStat[ 'RDD' ] == 'DBFCDX' ), 2, 1 )
+   wOptions.txbExpression.Value := aStat[ 'Expression' ]
 
-On key Escape of wOptions Action wOptions.Release
-On key Alt+X of wOptions Action { || Done(), ReleaseAllWindows() }
+   On key Escape of wOptions Action wOptions.Release
+   On key Alt+X of wOptions Action { || Done(), ReleaseAllWindows() }
 
-Center window wOptions
-Activate window wOptions
+   CENTER WINDOW wOptions
+   ACTIVATE WINDOW wOptions
 
-Return
+   RETURN
 
-****** End of Options ******
+   ****** End of Options ******
 
+   /******
+   *       DoSave()
+   *       Save of params
+   */
 
-/******
-*
-*       DoSave()
-*
-*       Save of params
-*
-*/
+STATIC PROCEDURE DoSave
 
-Static Procedure DoSave
-Local cValue
+   LOCAL cValue
 
-aStat[ 'RDD' ] := Iif( ( wOptions.cmbRDD.Value == 2 ), 'DBFCDX', 'DBFNTX' )
+   aStat[ 'RDD' ] := Iif( ( wOptions.cmbRDD.Value == 2 ), 'DBFCDX', 'DBFNTX' )
 
-cValue := AllTrim( wOptions.txbName.Value )
-aStat[ 'DefName' ] := Iif( !Empty( cValue ), cValue, 'NEW' )
-aStat[ 'DefType' ] := wOptions.cmbType.Value
-aStat[ 'DefLen'  ] := wOptions.spnLen.Value
-aStat[ 'DefDec'  ] := wOptions.spnDec.Value
+   cValue := AllTrim( wOptions.txbName.Value )
+   aStat[ 'DefName' ] := Iif( !Empty( cValue ), cValue, 'NEW' )
+   aStat[ 'DefType' ] := wOptions.cmbType.Value
+   aStat[ 'DefLen'  ] := wOptions.spnLen.Value
+   aStat[ 'DefDec'  ] := wOptions.spnDec.Value
 
-cValue := AllTrim( wOptions.txbExpression.Value )
-aStat[ 'Expression' ] :=  Iif( !Empty( cValue ), cValue, THIS_VALUE )
+   cValue := AllTrim( wOptions.txbExpression.Value )
+   aStat[ 'Expression' ] :=  Iif( !Empty( cValue ), cValue, THIS_VALUE )
 
+   BEGIN INI FILE MODEST_INI
 
-Begin ini file MODEST_INI
+      // Common parameters
 
-   // Common parameters
-     
-   Set Section 'Common' Entry 'RDD'        to aStat[ 'RDD' ]
-   Set Section 'Common' Entry 'Expression' to aStat[ 'Expression' ]
-      
-   // Field characterizations which are used at the new fields creation
-     
-   Set Section 'Field' Entry 'Field_Name' to aStat[ 'DefName' ]
-   Set Section 'Field' Entry 'Field_Type' to aStat[ 'DefType' ]
-   Set Section 'Field' Entry 'Field_Len'  to aStat[ 'DefLen'  ]
-   Set Section 'Field' Entry 'Field_Dec'  to aStat[ 'DefDec'  ]
-   
-End Ini
+      SET SECTION 'Common' Entry 'RDD'        to aStat[ 'RDD' ]
+      SET SECTION 'Common' Entry 'Expression' to aStat[ 'Expression' ]
 
-// Show selected RDD name in status row
+      // Field characterizations which are used at the new fields creation
 
-SetRDDName()
+      SET SECTION 'Field' Entry 'Field_Name' to aStat[ 'DefName' ]
+      SET SECTION 'Field' Entry 'Field_Type' to aStat[ 'DefType' ]
+      SET SECTION 'Field' Entry 'Field_Len'  to aStat[ 'DefLen'  ]
+      SET SECTION 'Field' Entry 'Field_Dec'  to aStat[ 'DefDec'  ]
 
-Return
+   END INI
 
-****** End of DoSave ******
+   // Show selected RDD name in status row
+
+   SetRDDName()
+
+   RETURN
+
+   ****** End of DoSave ******
+

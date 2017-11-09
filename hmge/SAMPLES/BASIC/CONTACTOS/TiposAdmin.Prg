@@ -2,371 +2,374 @@
 
 PROCEDURE AdministradorDeTipos
 
-	DEFINE WINDOW Win_1				;
-		AT 0,0					;
-		WIDTH 310				;
-		HEIGHT 460 + IF(IsXPThemeActive(),8,0)	;
-		TITLE 'Administrador de Tipos'		;
-		MODAL   				;
-		FONT 'ARIAL' SIZE 9			;
-		NOSIZE
+   DEFINE WINDOW Win_1            ;
+         AT 0,0               ;
+         WIDTH 310            ;
+         HEIGHT 460 + IF(IsXPThemeActive(),8,0)   ;
+         TITLE 'Administrador de Tipos'      ;
+         MODAL               ;
+         FONT 'ARIAL' SIZE 9         ;
+         NOSIZE
 
-		DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 58,35 FLAT BORDER
+      DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 58,35 FLAT BORDER
 
-			BUTTON Nuevo 			;
-				CAPTION '&Nuevo' 	;
-				PICTURE 'nuevo'	;
-				ACTION Agregar()
+         BUTTON Nuevo          ;
+            CAPTION '&Nuevo'    ;
+            PICTURE 'nuevo'   ;
+            ACTION Agregar()
 
-			BUTTON EDITAR 			;
-				CAPTION '&Editar' 	;
-				PICTURE 'editar'	;
-				ACTION Modificar()
+         BUTTON EDITAR          ;
+            CAPTION '&Editar'    ;
+            PICTURE 'editar'   ;
+            ACTION Modificar()
 
-			BUTTON ELIMINAR 		;
-				CAPTION 'E&liminar'	;
-				PICTURE 'borrar'	;
-				ACTION Borrar() 
+         BUTTON ELIMINAR       ;
+            CAPTION 'E&liminar'   ;
+            PICTURE 'borrar'   ;
+            ACTION Borrar()
 
-			BUTTON IMPRIMIR 		;
-				CAPTION '&Imprimir'	;
-				PICTURE 'imprimir2' ;
-				ACTION Impresion() 
+         BUTTON IMPRIMIR       ;
+            CAPTION '&Imprimir'   ;
+            PICTURE 'imprimir2' ;
+            ACTION Impresion()
 
-			BUTTON CERRAR			;
-				CAPTION '&Cerrar'	;
-				PICTURE 'cerrar'	;
-				ACTION Win_1.release 
+         BUTTON CERRAR         ;
+            CAPTION '&Cerrar'   ;
+            PICTURE 'cerrar'   ;
+            ACTION Win_1.release
 
-		END TOOLBAR
+      END TOOLBAR
 
-		DEFINE STATUSBAR 
-			STATUSITEM "" 
-		END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM ""
+      END STATUSBAR
 
-		// Todos los controles @... tienen una sintaxis altena.
-		// La ventaja principal de esta sintaxis es que las propiedades
-		// pueden incluirse en cualquier orden. 
+      // Todos los controles @... tienen una sintaxis altena.
+      // La ventaja principal de esta sintaxis es que las propiedades
+      // pueden incluirse en cualquier orden.
 
-		DEFINE LABEL Label_1
-			ROW	60
-			COL	10
-			VALUE 	'Buscar:'
-			WIDTH 	40
-		END LABEL
+      DEFINE LABEL Label_1
+         ROW   60
+         COL   10
+         VALUE    'Buscar:'
+         WIDTH    40
+      END LABEL
 
-		// La clausula ONENTER permite definir un procedimiento que se 
-		// ejecutara cuando el usuario presione enter mientras el control
-		// tenga el foco.
+      // La clausula ONENTER permite definir un procedimiento que se
+      // ejecutara cuando el usuario presione enter mientras el control
+      // tenga el foco.
 
-		// La clausula TOOLTIP permite definir un texto de ayuda que aparecera
-		// automaticamente cuando el mouse pasa sobre el control.
+      // La clausula TOOLTIP permite definir un texto de ayuda que aparecera
+      // automaticamente cuando el mouse pasa sobre el control.
 
-		DEFINE TEXTBOX Text_1
-			ROW		60
-			COL		60
-			WIDTH		195
-			ONENTER		If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil ) 
-			TOOLTIP		'Buscar (Ingrese "*" para todos los registros)'
-			UPPERCASE	.T.
-		END TEXTBOX
+      DEFINE TEXTBOX Text_1
+         ROW      60
+         COL      60
+         WIDTH      195
+         ONENTER      If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil )
+         TOOLTIP      'Buscar (Ingrese "*" para todos los registros)'
+         UPPERCASE   .T.
+      END TEXTBOX
 
-		// La clausula PICTURE permite definir un archivo de imagen
-		// que se asociara al control. 
+      // La clausula PICTURE permite definir un archivo de imagen
+      // que se asociara al control.
 
-		DEFINE BUTTON Button_1
-			ROW	60
-			COL	265
-			WIDTH	25
-			HEIGHT	25
-			PICTURE	'buscar'
-			ACTION If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil ) 
-			TOOLTIP 'Buscar'
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   60
+         COL   265
+         WIDTH   25
+         HEIGHT   25
+         PICTURE   'buscar'
+         ACTION If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil )
+         TOOLTIP 'Buscar'
+      END BUTTON
 
-		// El control GRID permite mostrar datos en forma de tabla.
-		// La clausula HEADERS requiere un array de caracteres conteniendo
-		// los encabezados de las columnas del control.
-		// La clausula WIDTHS requiere un array numerico conteniendo
-		// los anchos de las columnas del control.
+      // El control GRID permite mostrar datos en forma de tabla.
+      // La clausula HEADERS requiere un array de caracteres conteniendo
+      // los encabezados de las columnas del control.
+      // La clausula WIDTHS requiere un array numerico conteniendo
+      // los anchos de las columnas del control.
 
-		DEFINE GRID Grid_1
-			ROW 95
-			COL 10
-			WIDTH 280  				
-			HEIGHT 310 					
-			HEADERS { 'Codigo' , 'Descripcion' }	
-			WIDTHS { 60 , 215 }			
-		END GRID
+      DEFINE GRID Grid_1
+         ROW 95
+         COL 10
+         WIDTH 280
+         HEIGHT 310
+         HEADERS { 'Codigo' , 'Descripcion' }
+         WIDTHS { 60 , 215 }
+      END GRID
 
-	END WINDOW
+   END WINDOW
 
-	Win_1.Text_1.SetFocus
-	
-	CENTER WINDOW Win_1
+   Win_1.Text_1.SetFocus
 
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
 
-RETURN
-*------------------------------------------------------------------------------*
+   ACTIVATE WINDOW Win_1
+
+   RETURN
+
 FUNCTION Busqueda
-*------------------------------------------------------------------------------*
-Local RetVal := .F. , nRecCount := 0
 
-	If Empty ( Win_1.Text_1.Value ) 
-		Return .F.
-	EndIf
+   LOCAL RetVal := .F. , nRecCount := 0
 
-	// GRID
-	// ----
+   IF Empty ( Win_1.Text_1.Value )
 
-	// El metodo 'DeleteAllItems' se usa para eliminar todos los items de un 
-	// control GRID
+      RETURN .F.
+   ENDIF
 
-	// El metodo 'AddItem' se usa para agregar items a un control GRID. 
-	// Su argumento debe ser un array de caracteres conteniendo tantos elementos 
-	// como columnas tenga el GRID.
+   // GRID
+   // ----
 
-	// STATUSBAR
-	// ---------
+   // El metodo 'DeleteAllItems' se usa para eliminar todos los items de un
+   // control GRID
 
-	// Cuando se define un STATUSBAR para una ventana, se le asigna
-	// automaticamente el nombre de 'StausBar'.
-	// Puede accederse a cada una de sus secciones por medio de la propiedad
-	// 'Item', indicando como argumento, la posicion del mismo al 
-	// definirse el control. La propiedad 'Item' es de tipo caracter par el
-	// control STATUSBAR.
+   // El metodo 'AddItem' se usa para agregar items a un control GRID.
+   // Su argumento debe ser un array de caracteres conteniendo tantos elementos
+   // como columnas tenga el GRID.
 
-	Win_1.Grid_1.DeleteAllItems
+   // STATUSBAR
+   // ---------
 
-	Use Tipos Index Tipos Shared
-	Set Order To Tag Desc
+   // Cuando se define un STATUSBAR para una ventana, se le asigna
+   // automaticamente el nombre de 'StausBar'.
+   // Puede accederse a cada una de sus secciones por medio de la propiedad
+   // 'Item', indicando como argumento, la posicion del mismo al
+   // definirse el control. La propiedad 'Item' es de tipo caracter par el
+   // control STATUSBAR.
 
-	If AllTrim (AllTrim(Win_1.Text_1.Value)) == '*'
+   Win_1.Grid_1.DeleteAllItems
 
-		Go Top
+   USE Tipos Index Tipos Shared
+   SET Order To Tag Desc
 
-		Do While .Not. Eof()
-			nRecCount++
-			Win_1.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
-			Skip
-		EndDo
+   IF AllTrim (AllTrim(Win_1.Text_1.Value)) == '*'
 
-		If nRecCount > 0
-			RetVal := .T.
-			Win_1.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
-		ELse
-			RetVal := .F.
-			Win_1.StatusBar.Item(1) := 'No se encontraron registros'
-		EndIf
+      GO TOP
 
-	Else
+      DO WHILE .Not. Eof()
+         nRecCount++
+         Win_1.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
+         SKIP
+      ENDDO
 
-		If DbSeek(AllTrim(Win_1.Text_1.Value))
+      IF nRecCount > 0
+         RetVal := .T.
+         Win_1.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
+      ELSE
+         RetVal := .F.
+         Win_1.StatusBar.Item(1) := 'No se encontraron registros'
+      ENDIF
 
-			RetVal := .T.
+   ELSE
 
-			Do While Upper(Tipos->Desc) = AllTrim(Win_1.Text_1.Value)
-				nRecCount++
-				Win_1.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
-				Skip
-			EndDo
+      IF DbSeek(AllTrim(Win_1.Text_1.Value))
 
-			RetVal := .T.
-			Win_1.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
+         RetVal := .T.
 
-		Else
-			Win_1.StatusBar.Item(1) := 'No se encontraron registros'
-		EndIf
+         DO WHILE Upper(Tipos->Desc) = AllTrim(Win_1.Text_1.Value)
+            nRecCount++
+            Win_1.Grid_1.AddItem ( { Str(Tipos->Cod_Tipo) , Tipos->Desc } )
+            SKIP
+         ENDDO
 
-	EndIf
+         RetVal := .T.
+         Win_1.StatusBar.Item(1) := AllTrim(Str(nRecCount)) + ' Registros Encontrados'
 
-	Close Tipos
+      ELSE
+         Win_1.StatusBar.Item(1) := 'No se encontraron registros'
+      ENDIF
 
-Return ( RetVal )
-*------------------------------------------------------------------------------*
+   ENDIF
+
+   CLOSE Tipos
+
+   RETURN ( RetVal )
+
 PROCEDURE Agregar
-*------------------------------------------------------------------------------*
-Local cDesc, nCod_Tipo
 
-	// La funcion 'InputBox' crea una ventana que permite 
-	// ingresar un texto.
-	// El primer parametro indica la etiqueta del texto que se desea ingresar
-	// y el segundo parametro, el titulo.
+   LOCAL cDesc, nCod_Tipo
 
-	// En el GRID, la propiedad 'Value' (numerica, lectura/escritura)
-	// indica o permite establecer el item seleccionado.
+   // La funcion 'InputBox' crea una ventana que permite
+   // ingresar un texto.
+   // El primer parametro indica la etiqueta del texto que se desea ingresar
+   // y el segundo parametro, el titulo.
 
-	// La funcion 'MsgStop' muestra una venta con un mensaje (primer 
-	// parametro) un titulo (segundo parametro) un icono de stop y
-	// el boton aceptar.
+   // En el GRID, la propiedad 'Value' (numerica, lectura/escritura)
+   // indica o permite establecer el item seleccionado.
 
-	cDesc := InputBox ( 'Descripcion:' , 'Agregar Registro' )
+   // La funcion 'MsgStop' muestra una venta con un mensaje (primer
+   // parametro) un titulo (segundo parametro) un icono de stop y
+   // el boton aceptar.
 
-	If .Not. Empty ( cDesc )
+   cDesc := InputBox ( 'Descripcion:' , 'Agregar Registro' )
 
-		Use Tipos Index Tipos Shared
-		Set Order To Tag Cod_Tipo
+   IF .Not. Empty ( cDesc )
 
-		If flock()
-		
-			Go Bottom
+      USE Tipos Index Tipos Shared
+      SET Order To Tag Cod_Tipo
 
-			nCod_Tipo := Tipos->Cod_Tipo + 1
+      IF flock()
 
-			Append Blank 
+         Go Bottom
 
-			Tipos->Cod_Tipo := nCod_Tipo
-			Tipos->Desc	:= cDesc
-		
-			Close Tipos
+         nCod_Tipo := Tipos->Cod_Tipo + 1
 
-			If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil ) 
+         APPEND BLANK
 
-		Else
+         Tipos->Cod_Tipo := nCod_Tipo
+         Tipos->Desc   := cDesc
 
-			MsgStop ('Operacion Cancelada: El Archivo esta siendo actualizado por otro usuario. Reintente mas tarde')
+         CLOSE Tipos
 
-		EndIf
-				
-	EndIf
+         IF ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil )
 
-Return
-*------------------------------------------------------------------------------*
+         ELSE
+
+            MsgStop ('Operacion Cancelada: El Archivo esta siendo actualizado por otro usuario. Reintente mas tarde')
+
+         ENDIF
+
+      ENDIF
+
+      RETURN
+
 PROCEDURE Borrar
-*------------------------------------------------------------------------------*
-Local ItemPos , aItem
 
-	// Si la propiedad 'Value' en un GRID es cero, significa que no hay 
-	// items seleccionados
+   LOCAL ItemPos , aItem
 
-	// La funcion 'MsgYestNo' muestra una ventana con un texto (primer parametro)
-	// un titulo (segundo parametro) y botones 'Si' y 'No'.
-	// Si se selecciona el boton 'Si' la funcion retorna .t.
-	// Seleccionando 'No' la funcion retorna .F.
+   // Si la propiedad 'Value' en un GRID es cero, significa que no hay
+   // items seleccionados
 
-	ItemPos := Win_1.Grid_1.Value
+   // La funcion 'MsgYestNo' muestra una ventana con un texto (primer parametro)
+   // un titulo (segundo parametro) y botones 'Si' y 'No'.
+   // Si se selecciona el boton 'Si' la funcion retorna .t.
+   // Seleccionando 'No' la funcion retorna .F.
 
-	If ItemPos == 0
-		MsgStop ('No hay regostros seleccionados','Borrar Registro')
-		Return
-	EndIf
+   ItemPos := Win_1.Grid_1.Value
 
-	If MsgYesNo ( 'Esta Seguro' , 'Borrar Registro' )
+   IF ItemPos == 0
+      MsgStop ('No hay regostros seleccionados','Borrar Registro')
 
-		Use Contactos Index Contactos Shared New
-		Set Order To Tag Cod_Tipo
+      RETURN
+   ENDIF
 
-		Use Tipos Index Tipos Shared New
-		Set Order To Tag Cod_Tipo
+   IF MsgYesNo ( 'Esta Seguro' , 'Borrar Registro' )
 
-		aItem := Win_1.Grid_1.Item ( ItemPos )
+      USE Contactos Index Contactos Shared New
+      SET Order To Tag Cod_Tipo
 
-		Seek Val ( aItem[1] )
+      USE Tipos Index Tipos Shared New
+      SET Order To Tag Cod_Tipo
 
-		If found()
-			If rlock()
-				If Contactos->(DbSeek(Tipos->Cod_Tipo))
-					Close Tipos
-					Close Contactos
-					MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')	
-				Else
-					Delete
-					Close Tipos
-					Close Contactos
-					If ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil ) 
-				EndIf
-			Else
-				Close Tipos
-				MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Borrar registro')
-			EndIf
-		Else
-			Close Tipos
-			MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Borrar registro')
-		EndIf
+      aItem := Win_1.Grid_1.Item ( ItemPos )
 
-	EndIf
+      SEEK Val ( aItem[1] )
 
-Return
-*------------------------------------------------------------------------------*
+      IF found()
+         IF rlock()
+            IF Contactos->(DbSeek(Tipos->Cod_Tipo))
+               CLOSE Tipos
+               CLOSE Contactos
+               MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')
+            ELSE
+               DELETE
+               CLOSE Tipos
+               CLOSE Contactos
+               IF ( Busqueda() == .T. , ( Win_1.Grid_1.Value := 1 , Win_1.Grid_1.SetFocus ) , Nil )
+               ENDIF
+            ELSE
+               CLOSE Tipos
+               MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Borrar registro')
+            ENDIF
+         ELSE
+            CLOSE Tipos
+            MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Borrar registro')
+         ENDIF
+
+      ENDIF
+
+      RETURN
+
 PROCEDURE Modificar
-*------------------------------------------------------------------------------*
-Local ItemPos , aItem , cDesc , nCodTipo , i
 
-	// La propiedad 'Item' del control GRID retorna un array de caracteres con 
-	// tantos elementos como columnas tenga el control.
+   LOCAL ItemPos , aItem , cDesc , nCodTipo , i
 
-	ItemPos := Win_1.Grid_1.Value
+   // La propiedad 'Item' del control GRID retorna un array de caracteres con
+   // tantos elementos como columnas tenga el control.
 
-	If ItemPos == 0
-		MsgStop ('No hay regostros seleccionados','Editar Registro')
-		Return
-	EndIf
+   ItemPos := Win_1.Grid_1.Value
 
-	Use Tipos Index Tipos Shared
-	Set Order To Tag Cod_Tipo
+   IF ItemPos == 0
+      MsgStop ('No hay regostros seleccionados','Editar Registro')
 
-	aItem := Win_1.Grid_1.Item ( ItemPos )
-	
-	If dBSeek ( Val ( aItem[1] ) )
-		If rlock()
-			cDesc := InputBox ( 'Descripcion:','Editar Registro', AllTrim(Tipos->Desc))
+      RETURN
+   ENDIF
 
-			If ! Empty ( cDesc )
-				Tipos->Desc := cDesc
-			EndIf
+   USE Tipos Index Tipos Shared
+   SET Order To Tag Cod_Tipo
 
-			nCodTipo := Tipos->Cod_Tipo
+   aItem := Win_1.Grid_1.Item ( ItemPos )
 
-			Close Tipos
+   IF dBSeek ( Val ( aItem[1] ) )
+      IF rlock()
+         cDesc := InputBox ( 'Descripcion:','Editar Registro', AllTrim(Tipos->Desc))
 
-			If Busqueda()
+         IF ! Empty ( cDesc )
+            Tipos->Desc := cDesc
+         ENDIF
 
-				Win_1.Grid_1.Value := 1
+         nCodTipo := Tipos->Cod_Tipo
 
-				For i := 1 To Win_1.Grid_1.ItemCount
+         CLOSE Tipos
 
-					aItem := Win_1.Grid_1.Item ( i )  
+         IF Busqueda()
 
-					If Val ( aItem [1] ) == nCodTipo
-						Win_1.Grid_1.Value := i
-						Win_1.Grid_1.SetFocus
-						Exit
-					EndIf
+            Win_1.Grid_1.Value := 1
 
-				Next i
+            FOR i := 1 To Win_1.Grid_1.ItemCount
 
-			EndIf
-		Else
-			Close Tipos
-			MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Editar Registro')
-		EndIf
-	Else
-		Close Tipos
-		MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Editar Registro')
-	EndIf
+               aItem := Win_1.Grid_1.Item ( i )
 
-Return
-*------------------------------------------------------------------------------*
-Procedure Impresion()
-*------------------------------------------------------------------------------*
+               IF Val ( aItem [1] ) == nCodTipo
+                  Win_1.Grid_1.Value := i
+                  Win_1.Grid_1.SetFocus
+                  EXIT
+               ENDIF
 
-	Use Tipos Index Tipos Shared New
-	Set Order To Tag Cod_Tipo
-	Go Top
+            NEXT i
 
-	DO REPORT							;
-		TITLE 'Tipos'						;
-		HEADERS  {'',''} , {'Codigo','Descripcion'}		;
-		FIELDS   {'Cod_Tipo','Desc'}				;
-		WIDTHS   {20,20} 					;
-		TOTALS   {.F.,.F.}					;
-		WORKAREA Tipos						;
-		LPP 50							;
-		CPL 80							;
-		LMARGIN 5						;
-		PREVIEW						
+         ENDIF
+      ELSE
+         CLOSE Tipos
+         MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Editar Registro')
+      ENDIF
+   ELSE
+      CLOSE Tipos
+      MsgStop('Operacion cancelada: El registro ha sido eliminado por otro usuario','Editar Registro')
+   ENDIF
 
-	Close Tipos
+   RETURN
 
-Return
+PROCEDURE Impresion()
+
+   USE Tipos Index Tipos Shared New
+   SET Order To Tag Cod_Tipo
+   GO TOP
+
+   DO REPORT                     ;
+      TITLE 'Tipos'                  ;
+      HEADERS  {'',''} , {'Codigo','Descripcion'}      ;
+      FIELDS   {'Cod_Tipo','Desc'}            ;
+      WIDTHS   {20,20}                ;
+      TOTALS   {.F.,.F.}               ;
+      WORKAREA Tipos                  ;
+      LPP 50                     ;
+      CPL 80                     ;
+      LMARGIN 5                  ;
+      PREVIEW
+
+   CLOSE Tipos
+
+   RETURN
+

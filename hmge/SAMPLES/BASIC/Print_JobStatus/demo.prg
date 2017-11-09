@@ -3,9 +3,8 @@
 MEMVAR aJobData
 MEMVAR aColor
 
-*------------------------------------------------------------------------------*
 FUNCTION Main()
-*------------------------------------------------------------------------------*
+
    PRIVATE aJobData   // aJobData must be declared as Public or Private
    PRIVATE aColor[10 ]
 
@@ -21,11 +20,11 @@ FUNCTION Main()
    aColor[10 ] := BLUE
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'MiniPrint Library Test' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniPrint Library Test' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'
@@ -47,10 +46,9 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 PROCEDURE PrintTest1()
-*------------------------------------------------------------------------------*
 
    SELECT PRINTER DEFAULT ;
       ORIENTATION PRINTER_ORIENT_PORTRAIT ;
@@ -61,15 +59,16 @@ PROCEDURE PrintTest1()
 
    MsgInfo( 'Print Finished' )
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest2()
-*------------------------------------------------------------------------------*
+
    LOCAL cPrinter
 
    cPrinter := GetPrinter()
 
    IF Empty ( cPrinter )
+
       RETURN
    ENDIF
 
@@ -82,10 +81,10 @@ PROCEDURE PrintTest2()
 
    MsgInfo( 'Print Finished' )
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest3()
-*------------------------------------------------------------------------------*
+
    LOCAL lSuccess
 
    // Measure Units Are Millimeters
@@ -97,10 +96,10 @@ PROCEDURE PrintTest3()
       MsgInfo( 'Print Finished' )
    ENDIF
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest4()
-*------------------------------------------------------------------------------*
+
    LOCAL lSuccess
 
    SELECT PRINTER DIALOG TO lSuccess PREVIEW
@@ -110,96 +109,94 @@ PROCEDURE PrintTest4()
       MsgInfo( 'Print Finished' )
    ENDIF
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintDoc
-*------------------------------------------------------------------------------*
+
    LOCAL i
 
    Win_1.EditBox_1.Value := ""   // clean EditBox
 
    START PRINTDOC STOREJOBDATA aJobData
 
-   FOR i := 1 TO 10
+      FOR i := 1 TO 10
 
-      START PRINTPAGE
+         START PRINTPAGE
 
-      @ 20, 20 PRINT RECTANGLE ;
-         TO 50, 190 ;
-         PENWIDTH 0.1
+            @ 20, 20 PRINT RECTANGLE ;
+               TO 50, 190 ;
+               PENWIDTH 0.1
 
-      @ 25, 25 PRINT IMAGE "hmg.gif" ;
-         WIDTH 20 ;
-         HEIGHT 20
+            @ 25, 25 PRINT IMAGE "hmg.gif" ;
+               WIDTH 20 ;
+               HEIGHT 20
 
-      @ 30, 85 PRINT "PRINT DEMO" ;
-         FONT "Courier New" ;
-         SIZE 24 ;
-         BOLD ;
-         COLOR aColor[i ]
+            @ 30, 85 PRINT "PRINT DEMO" ;
+               FONT "Courier New" ;
+               SIZE 24 ;
+               BOLD ;
+               COLOR aColor[i ]
 
-      @ 140, 60 PRINT "Page Number : " + hb_ntos( i ) ;
-         FONT "Arial" ;
-         SIZE 20 ;
-         COLOR aColor[i ]
+            @ 140, 60 PRINT "Page Number : " + hb_ntos( i ) ;
+               FONT "Arial" ;
+               SIZE 20 ;
+               COLOR aColor[i ]
 
-      @ 260, 20 PRINT LINE ;
-         TO 260, 190 ;
-         PENWIDTH 0.1
+            @ 260, 20 PRINT LINE ;
+               TO 260, 190 ;
+               PENWIDTH 0.1
 
-      END PRINTPAGE
+         END PRINTPAGE
 
-   NEXT i
+      NEXT i
 
    END PRINTDOC
 
-RETURN
+   RETURN
 
-#define JOB_STATUS_PAUSED              0x00000001
-#define JOB_STATUS_ERROR               0x00000002
-#define JOB_STATUS_DELETING            0x00000004
-#define JOB_STATUS_SPOOLING            0x00000008
-#define JOB_STATUS_PRINTING            0x00000010
-#define JOB_STATUS_OFFLINE             0x00000020
-#define JOB_STATUS_PAPEROUT            0x00000040
-#define JOB_STATUS_PRINTED             0x00000080
-#define JOB_STATUS_DELETED             0x00000100
-#define JOB_STATUS_BLOCKED_DEVQ        0x00000200
-#define JOB_STATUS_USER_INTERVENTION   0x00000400
-#define JOB_STATUS_RESTART             0x00000800
-#define JOB_STATUS_COMPLETE            0x00001000
+   #define JOB_STATUS_PAUSED              0x00000001
+   #define JOB_STATUS_ERROR               0x00000002
+   #define JOB_STATUS_DELETING            0x00000004
+   #define JOB_STATUS_SPOOLING            0x00000008
+   #define JOB_STATUS_PRINTING            0x00000010
+   #define JOB_STATUS_OFFLINE             0x00000020
+   #define JOB_STATUS_PAPEROUT            0x00000040
+   #define JOB_STATUS_PRINTED             0x00000080
+   #define JOB_STATUS_DELETED             0x00000100
+   #define JOB_STATUS_BLOCKED_DEVQ        0x00000200
+   #define JOB_STATUS_USER_INTERVENTION   0x00000400
+   #define JOB_STATUS_RESTART             0x00000800
+   #define JOB_STATUS_COMPLETE            0x00001000
 
+   #define PRINTER_STATUS_OK                    0
+   #define PRINTER_STATUS_PAUSED                0x00000001
+   #define PRINTER_STATUS_ERROR                 0x00000002
+   #define PRINTER_STATUS_PENDING_DELETION      0x00000004
+   #define PRINTER_STATUS_PAPER_JAM             0x00000008
+   #define PRINTER_STATUS_PAPER_OUT             0x00000010
+   #define PRINTER_STATUS_MANUAL_FEED           0x00000020
+   #define PRINTER_STATUS_PAPER_PROBLEM         0x00000040
+   #define PRINTER_STATUS_OFFLINE               0x00000080
+   #define PRINTER_STATUS_IO_ACTIVE             0x00000100
+   #define PRINTER_STATUS_BUSY                  0x00000200
+   #define PRINTER_STATUS_PRINTING              0x00000400
+   #define PRINTER_STATUS_OUTPUT_BIN_FULL       0x00000800
+   #define PRINTER_STATUS_NOT_AVAILABLE         0x00001000
+   #define PRINTER_STATUS_WAITING               0x00002000
+   #define PRINTER_STATUS_PROCESSING            0x00004000
+   #define PRINTER_STATUS_INITIALIZING          0x00008000
+   #define PRINTER_STATUS_WARMING_UP            0x00010000
+   #define PRINTER_STATUS_TONER_LOW             0x00020000
+   #define PRINTER_STATUS_NO_TONER              0x00040000
+   #define PRINTER_STATUS_PAGE_PUNT             0x00080000
+   #define PRINTER_STATUS_USER_INTERVENTION     0x00100000
+   #define PRINTER_STATUS_OUT_OF_MEMORY         0x00200000
+   #define PRINTER_STATUS_DOOR_OPEN             0x00400000
+   #define PRINTER_STATUS_SERVER_UNKNOWN        0x00800000
+   #define PRINTER_STATUS_POWER_SAVE            0x01000000
 
-#define PRINTER_STATUS_OK                    0
-#define PRINTER_STATUS_PAUSED                0x00000001
-#define PRINTER_STATUS_ERROR                 0x00000002
-#define PRINTER_STATUS_PENDING_DELETION      0x00000004
-#define PRINTER_STATUS_PAPER_JAM             0x00000008
-#define PRINTER_STATUS_PAPER_OUT             0x00000010
-#define PRINTER_STATUS_MANUAL_FEED           0x00000020
-#define PRINTER_STATUS_PAPER_PROBLEM         0x00000040
-#define PRINTER_STATUS_OFFLINE               0x00000080
-#define PRINTER_STATUS_IO_ACTIVE             0x00000100
-#define PRINTER_STATUS_BUSY                  0x00000200
-#define PRINTER_STATUS_PRINTING              0x00000400
-#define PRINTER_STATUS_OUTPUT_BIN_FULL       0x00000800
-#define PRINTER_STATUS_NOT_AVAILABLE         0x00001000
-#define PRINTER_STATUS_WAITING               0x00002000
-#define PRINTER_STATUS_PROCESSING            0x00004000
-#define PRINTER_STATUS_INITIALIZING          0x00008000
-#define PRINTER_STATUS_WARMING_UP            0x00010000
-#define PRINTER_STATUS_TONER_LOW             0x00020000
-#define PRINTER_STATUS_NO_TONER              0x00040000
-#define PRINTER_STATUS_PAGE_PUNT             0x00080000
-#define PRINTER_STATUS_USER_INTERVENTION     0x00100000
-#define PRINTER_STATUS_OUT_OF_MEMORY         0x00200000
-#define PRINTER_STATUS_DOOR_OPEN             0x00400000
-#define PRINTER_STATUS_SERVER_UNKNOWN        0x00800000
-#define PRINTER_STATUS_POWER_SAVE            0x01000000
-
-*------------------------------------------------------------------------------*
 PROCEDURE DisplayJobInfo()
-*------------------------------------------------------------------------------*
+
    STATIC flag := .F.
    LOCAL i, nPos, cStatusPrinter, nStatusPrinter, cStatusJob, aJobInfo, t
 
@@ -244,6 +241,7 @@ PROCEDURE DisplayJobInfo()
       { JOB_STATUS_COMPLETE,            "JOB_STATUS_COMPLETE"           } }
 
    IF flag == .T.
+
       RETURN
    ENDIF
    flag := .T.
@@ -312,4 +310,5 @@ PROCEDURE DisplayJobInfo()
 
    flag := .F.
 
-RETURN
+   RETURN
+

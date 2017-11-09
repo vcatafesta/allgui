@@ -6,8 +6,8 @@
 //================================================================//
 
 /*
-  Revised: P.Ch. 16.10.
- */
+Revised: P.Ch. 16.10.
+*/
 
 #include "minigui.ch"
 
@@ -15,33 +15,32 @@ FUNCTION Main()
 
    SET TOOLTIPBALLOON ON
 
-	DEFINE WINDOW Form1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 ;
-		TITLE "Tooltip Ballon com título e ícone (" + __FILE__ + ")" ;
-		MAIN ;
-		NOSIZE ;
-		NOMAXIMIZE
+   DEFINE WINDOW Form1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE "Tooltip Ballon com título e ícone (" + __FILE__ + ")" ;
+         MAIN ;
+         NOSIZE ;
+         NOMAXIMIZE
 
-		@ 117,150 BUTTON Button1 CAPTION "?" ACTION Form1.Release ;
-			TOOLTIP "Clique aqui para fechar esta janela."
+      @ 117,150 BUTTON Button1 CAPTION "?" ACTION Form1.Release ;
+         TOOLTIP "Clique aqui para fechar esta janela."
 
-		Form1.Button1.Caption := "&Exit (" + hb_NToS( 13 ) + ")"
-		Form1.Button1.Enabled := .F.
+      Form1.Button1.Caption := "&Exit (" + hb_NToS( 13 ) + ")"
+      Form1.Button1.Enabled := .F.
 
-		DEFINE TIMER Timer1 INTERVAL 1000 ACTION AddToolTipIcon()
+      DEFINE TIMER Timer1 INTERVAL 1000 ACTION AddToolTipIcon()
 
-	END WINDOW
+   END WINDOW
 
-	SET TOOLTIP TEXTCOLOR TO RED   OF Form1
-	SET TOOLTIP BACKCOLOR TO WHITE OF Form1
+   SET TOOLTIP TEXTCOLOR TO RED   OF Form1
+   SET TOOLTIP BACKCOLOR TO WHITE OF Form1
 
-	CENTER   WINDOW Form1
-	ACTIVATE WINDOW Form1
+   CENTER   WINDOW Form1
+   ACTIVATE WINDOW Form1
 
    RETURN NIL
-
 
 PROCEDURE AddToolTipIcon()
 
@@ -50,20 +49,21 @@ PROCEDURE AddToolTipIcon()
 
    IF nTime < 0
 
-   	Form1.Timer1.Release
-   	Form1.Button1.Caption := "&Exit"
+      Form1.Timer1.Release
+      Form1.Button1.Caption := "&Exit"
 
-   	// first clear
-   	CLEAR TOOLTIPICON OF Form1
-   	// and second - add
-     	ADD TOOLTIPICON nIcon WITH MESSAGE Form1.Button1.Caption TO Form1
+      // first clear
+      CLEAR TOOLTIPICON OF Form1
+      // and second - add
+      ADD TOOLTIPICON nIcon WITH MESSAGE Form1.Button1.Caption TO Form1
 
-   	Form1.Button1.Enabled := .T.
+      Form1.Button1.Enabled := .T.
 
    ELSE
 
-   	Form1.Button1.Caption := "&Exit (" + hb_NToS( nTime -- ) + ")"
+      Form1.Button1.Caption := "&Exit (" + hb_NToS( nTime -- ) + ")"
 
    ENDIF
 
    RETURN
+

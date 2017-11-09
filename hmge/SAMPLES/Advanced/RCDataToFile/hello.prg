@@ -1,11 +1,11 @@
-/* 
- * hello.prg 
- */ 
-  
-procedure main() 
+/*
+* hello.prg
+*/
 
-   OutStd( "Hello from resources!" ) 
+PROCEDURE main()
 
-   ErrorLevel( 7 ) 
+   OutStd( "Hello from resources!" )
 
-return
+   ErrorLevel( 7 )
+
+   RETURN

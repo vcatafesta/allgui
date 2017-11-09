@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-08 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2005-2008 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-08 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2005-2008 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -17,144 +15,137 @@
 #define IDOK                1
 #define IDCANCEL            2
 
-Static lBlock := .F.
-Static IsTimerLeave := .F.
-Static SoundFileName := ""
-Static Description := ""
+STATIC lBlock := .F.
+STATIC IsTimerLeave := .F.
+STATIC SoundFileName := ""
+STATIC Description := ""
 
-*--------------------------------------------------------*
-Procedure Main()
-*--------------------------------------------------------*
+PROCEDURE Main()
 
-	SET MULTIPLE OFF WARNING
+   SET MULTIPLE OFF WARNING
 
-	SoundFileName += GetWindowsFolder() + "\Media\Ding.wav"
-	Description += "Warning !"
+   SoundFileName += GetWindowsFolder() + "\Media\Ding.wav"
+   Description += "Warning !"
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		NOTIFYICON IDI_ICON ;
-		NOTIFYTOOLTIP PROGRAM ;
-		ON NOTIFYCLICK Settings()
-		
-		DEFINE NOTIFY MENU
-			ITEM '&About...'	ACTION ShellAbout( "", ;
-					PROGRAM + VERSION + CRLF + ;
-					IF(IsXPThemeActive(), "", "Copyright ") + Chr(169) + COPYRIGHT, ;
-					LoadMainIcon(GetInstance(), IDI_ICON) )
-			SEPARATOR
-			ITEM 'E&xit'		ACTION Form_1.Release
-		END MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         NOTIFYICON IDI_ICON ;
+         NOTIFYTOOLTIP PROGRAM ;
+         ON NOTIFYCLICK Settings()
 
-	END WINDOW
+      DEFINE NOTIFY MENU
+         ITEM '&About...'   ACTION ShellAbout( "", ;
+            PROGRAM + VERSION + CRLF + ;
+            IF(IsXPThemeActive(), "", "Copyright ") + Chr(169) + COPYRIGHT, ;
+            LoadMainIcon(GetInstance(), IDI_ICON) )
+         SEPARATOR
+         ITEM 'E&xit'      ACTION Form_1.Release
+      END MENU
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
-Procedure Settings()
-*--------------------------------------------------------*
-	IF lBlock == .T.
-		Return
-	ENDIF
+   RETURN
 
-	DEFINE DIALOG Form_2 OF Form_1 ;
-		RESOURCE IDD_DIALOG ;
-		ON INIT { |hDlg| lBlock := .T., SetForegroundWindow(hDlg) } ;
-		ON RELEASE lBlock := .F.
+PROCEDURE Settings()
 
-		REDEFINE BUTTON Btn_1 ID IDOK ;
-			ACTION OnOK()
+   IF lBlock == .T.
 
-		REDEFINE BUTTON Btn_2 ID IDCANCEL ;
-			ACTION _ReleaseWindow ( 'Form_2' )
+      RETURN
+   ENDIF
 
-		REDEFINE BUTTON Btn_3 ID IDC_QUIT ;
-			ACTION _ReleaseWindow ( 'Form_1' )
+   DEFINE DIALOG Form_2 OF Form_1 ;
+      RESOURCE IDD_DIALOG ;
+      ON INIT { |hDlg| lBlock := .T., SetForegroundWindow(hDlg) } ;
+      ON RELEASE lBlock := .F.
 
-		REDEFINE TEXTBOX TextBox_1 ID IDC_TIME ;
-			VALUE 5 NUMERIC
+   REDEFINE BUTTON Btn_1 ID IDOK ;
+      ACTION OnOK()
 
-		REDEFINE TEXTBOX TextBox_2 ID IDC_DESCRIPTION ;
-			VALUE Description
+   REDEFINE BUTTON Btn_2 ID IDCANCEL ;
+      ACTION _ReleaseWindow ( 'Form_2' )
 
-		REDEFINE TEXTBOX TextBox_3 ID IDC_FILE ;
-			VALUE SoundFileName
+   REDEFINE BUTTON Btn_3 ID IDC_QUIT ;
+      ACTION _ReleaseWindow ( 'Form_1' )
 
-		REDEFINE BUTTON Btn_4 ID IDC_BROWSE ;
-			ACTION OnBrowseForFile()
+   REDEFINE TEXTBOX TextBox_1 ID IDC_TIME ;
+      VALUE 5 NUMERIC
 
-		REDEFINE BUTTON Btn_5 ID IDC_TEST ;
-			ACTION OnTest()
+   REDEFINE TEXTBOX TextBox_2 ID IDC_DESCRIPTION ;
+      VALUE Description
 
-        END DIALOG 
+   REDEFINE TEXTBOX TextBox_3 ID IDC_FILE ;
+      VALUE SoundFileName
 
-Return
+   REDEFINE BUTTON Btn_4 ID IDC_BROWSE ;
+      ACTION OnBrowseForFile()
 
-*--------------------------------------------------------*
-Procedure OnOK()
-*--------------------------------------------------------*
-local time := Form_2.TextBox_1.Value
+   REDEFINE BUTTON Btn_5 ID IDC_TEST ;
+      ACTION OnTest()
 
-	if IsTimerLeave
-		Form_1.Timer_1.Value := time * 60000
-	else
-		DEFINE TIMER Timer_1 OF Form_1 INTERVAL time * 60000 ACTION TimerAction()
-		IsTimerLeave = .T.
-	endif
+END DIALOG
 
-	Description := Form_2.TextBox_2.Value
+RETURN
 
-	_ReleaseWindow ( 'Form_2' )
+PROCEDURE OnOK()
 
-Return
+   LOCAL time := Form_2.TextBox_1.Value
 
-*--------------------------------------------------------*
-Procedure OnBrowseForFile()
-*--------------------------------------------------------*
-local cFile := GetFile( { {"Audio files (*.wav)", "*.wav"}, {"All files (*.*)", "*.*"} }, ;
-		"Select a sound", cFilePath(SoundFileName), , .T. )
+   IF IsTimerLeave
+      Form_1.Timer_1.Value := time * 60000
+   ELSE
+      DEFINE TIMER Timer_1 OF Form_1 INTERVAL time * 60000 ACTION TimerAction()
+      IsTimerLeave = .T.
+   ENDIF
 
-	if File( cFile )
-		SoundFileName := cFile
-		Form_2.TextBox_3.Value := SoundFileName
-	endif
+   Description := Form_2.TextBox_2.Value
 
-Return
+   _ReleaseWindow ( 'Form_2' )
 
-*--------------------------------------------------------*
-Procedure OnTest()
-*--------------------------------------------------------*
-	if Empty( SoundFileName )
-		PlayAsterisk()
-	else
-		PLAY WAVE SoundFileName
-	endif
+   RETURN
 
-Return
+PROCEDURE OnBrowseForFile()
 
-*--------------------------------------------------------*
-Procedure TimerAction()
-*--------------------------------------------------------*
-	if IsTimerLeave
-		Form_1.Timer_1.Release
-		IsTimerLeave = .F.
-	endif
+   LOCAL cFile := GetFile( { {"Audio files (*.wav)", "*.wav"}, {"All files (*.*)", "*.*"} }, ;
+      "Select a sound", cFilePath(SoundFileName), , .T. )
 
-	if Empty( SoundFileName )
-		PlayAsterisk()
-	else
-		PLAY WAVE SoundFileName
-	endif
+   IF File( cFile )
+      SoundFileName := cFile
+      Form_2.TextBox_3.Value := SoundFileName
+   ENDIF
 
-	MsgAlert( Description, "Timer" )
+   RETURN
 
-Return
+PROCEDURE OnTest()
 
+   IF Empty( SoundFileName )
+      PlayAsterisk()
+   ELSE
+      PLAY WAVE SoundFileName
+   ENDIF
+
+   RETURN
+
+PROCEDURE TimerAction()
+
+   IF IsTimerLeave
+      Form_1.Timer_1.Release
+      IsTimerLeave = .F.
+   ENDIF
+
+   IF Empty( SoundFileName )
+      PlayAsterisk()
+   ELSE
+      PLAY WAVE SoundFileName
+   ENDIF
+
+   MsgAlert( Description, "Timer" )
+
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -162,14 +153,15 @@ Return
 
 HB_FUNC( LOADMAINICON )
 {
-	HICON himage;
-	HINSTANCE hInstance  = ( HINSTANCE ) HB_PARNL( 1 );  // handle to application instance
-	WORD      wIconName  = ( WORD )      hb_parni( 2 );  // resource identifier
+   HICON himage;
+   HINSTANCE hInstance  = ( HINSTANCE ) HB_PARNL( 1 );  // handle to application instance
+   WORD      wIconName  = ( WORD )      hb_parni( 2 );  // resource identifier
 
-	himage = ( HICON ) LoadImage( hInstance, MAKEINTRESOURCE (wIconName), IMAGE_ICON,
-				0, 0, LR_DEFAULTCOLOR );
+   himage = ( HICON ) LoadImage( hInstance, MAKEINTRESOURCE (wIconName), IMAGE_ICON,
+            0, 0, LR_DEFAULTCOLOR );
 
-	HB_RETNL( ( LONG_PTR ) himage );
+   HB_RETNL( ( LONG_PTR ) himage );
 }
 
 #pragma ENDDUMP
+

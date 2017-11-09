@@ -1,29 +1,28 @@
 /*
- * Ejemplo Zip n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo extraer todos los archivos de un
- * archivo ZIP mientras se recrea la estructura de carpetas
- * almacenada.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Zip n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo extraer todos los archivos de un
+* archivo ZIP mientras se recrea la estructura de carpetas
+* almacenada.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 #include 'directry.ch'
 
 FUNCTION Main()
+
    LOCAL oUnzip, oZipFile, oFolder
 
    DEFINE WINDOW FormPrin ;
-      AT 114,218 ;
-      WIDTH 534 ;
-      HEIGHT 276 ;
-      TITLE 'Como Extraer Archivos de un ZIP Usando la Librería MiniZip' ;
-      MAIN
+         AT 114,218 ;
+         WIDTH 534 ;
+         HEIGHT 276 ;
+         TITLE 'Como Extraer Archivos de un ZIP Usando la Librería MiniZip' ;
+         MAIN
 
       @ 20,20 BUTTON btn_1 ;
          CAPTION 'Archivo ZIP' ;
@@ -63,7 +62,7 @@ FUNCTION Main()
    FormPrin.Center
    FormPrin.Activate
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ExtraerArchivos( cArchZip, cFolder )
 
@@ -80,15 +79,16 @@ FUNCTION ExtraerArchivos( cArchZip, cFolder )
    FormPrin.prg_1.Value := 0
    FormPrin.lbl_1.Value := ""
 
-RETURN
+   RETURN
 
 FUNCTION Progreso( nPos, cArch )
 
    FormPrin.prg_1.Value := nPos
    FormPrin.lbl_1.Value := cArch
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

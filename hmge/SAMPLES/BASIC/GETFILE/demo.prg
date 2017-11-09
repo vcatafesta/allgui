@@ -4,30 +4,32 @@
 
 #include "minigui.ch"
 
-Procedure Main
-Local a
+PROCEDURE Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'GetFile Test' ;
-		MAIN 
+   LOCAL a
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'Common &Dialog Functions'
-				MENUITEM 'Select single file' ACTION MsgInfo( Getfile ( , 'Open a File' , , , .t. ), "Result" )
-				MENUITEM 'Select file(s)' ACTION ( a := Getfile ( { {'All Files','*.*'} } , 'Open File(s)' , GetCurrentFolder() , .t. , .t. ), ;
-								aEval( a, {|x,i| msginfo ( x, ltrim( str ( i ) ) )} ) )
-				SEPARATOR
-				ITEM 'Exit' ACTION ThisWindow.Release
-			END POPUP
-		END MENU
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'GetFile Test' ;
+         MAIN
 
-	END WINDOW
+      DEFINE MAIN MENU
+         DEFINE POPUP 'Common &Dialog Functions'
+            MENUITEM 'Select single file' ACTION MsgInfo( Getfile ( , 'Open a File' , , , .t. ), "Result" )
+            MENUITEM 'Select file(s)' ACTION ( a := Getfile ( { {'All Files','*.*'} } , 'Open File(s)' , GetCurrentFolder() , .t. , .t. ), ;
+               aEval( a, {|x,i| msginfo ( x, ltrim( str ( i ) ) )} ) )
+            SEPARATOR
+            ITEM 'Exit' ACTION ThisWindow.Release
+         END POPUP
+      END MENU
 
-	CENTER WINDOW Win_1
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
 
-Return
+   ACTIVATE WINDOW Win_1
+
+   RETURN
+

@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -54,17 +54,12 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #include "winprint.ch"
 
 /*
- * Copyright Alfredo Arteaga 14/10/2001 original idea
- *
- * Grigory Filatov 23/06/2003 translation for MiniGUI
- *
- * Roberto Lopez 23/06/2003 command definition
- *
- * Copyright Alfredo Arteaga TGRAPH 2, 12/03/2002
- *
- * Grigory Filatov 26/02/2004 translation #2 for MiniGUI
- *
- * Grigory Filatov 02/12/2006 updated label's backcolor
+* Copyright Alfredo Arteaga 14/10/2001 original idea
+* Grigory Filatov 23/06/2003 translation for MiniGUI
+* Roberto Lopez 23/06/2003 command definition
+* Copyright Alfredo Arteaga TGRAPH 2, 12/03/2002
+* Grigory Filatov 26/02/2004 translation #2 for MiniGUI
+* Grigory Filatov 02/12/2006 updated label's backcolor
 */
 
 #define COLOR_WINDOWTEXT     8
@@ -115,13 +110,11 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    nWide   := ( nRight - nLeft ) * nResH / ( nMax( aData ) + 1 ) * nResH
 
    // Graph area
-   //
    IF !lPrint .AND. !lNoborder
       DrawWindowBoxIn( parent, Max( 1, nTop - 44 ), Max( 1, nLeft - 80 - nBarD ), nHeight - 1, nWidth - 1 )
    ENDIF
 
    // Back area
-   //
    IF l3D
       drawrect( parent, nTop + 1, nLeft, nBottom - nDeep, nRight, WHITE, , WHITE )
    ELSE
@@ -165,7 +158,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Graph info
-   //
    IF !Empty( cTitle )
       cNameObj := 'Obj_Name_' + hb_ntos( nGraphObj++ )
       @ nTop - 36 * nResV, nLeft LABEL &cNameObj OF &parent VALUE cTitle;
@@ -181,7 +173,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Legends
-   //
    IF lLegends
       nPos := nTop
       FOR nI := 1 TO Len( aSeries )
@@ -198,7 +189,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Max, Min values
-   //
    nMax := nMin := 0
    FOR nJ := 1 TO Len( aSeries )
       FOR nI := 1 TO Len( aData[nJ] )
@@ -216,7 +206,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    nMaxBar := nMax * nRel
 
    // Zero position
-   //
    IF nXMax > nXMin
       nZero := nTop + nMaxBar + nDeep + 5
    ELSE
@@ -237,7 +226,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    nRange := nMax / nXRanges
 
    // xLabels
-   //
    nRPos := nRNeg := nZero - nDeep
    FOR nI := 0 TO nXRanges
       IF lxVal
@@ -316,7 +304,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    nPos := nLeft + ( nWide + nSep ) / 2            // first point graph
 
    // yLabels
-   //
    IF lyVal .AND. Len( aYVals ) > 0
       nWideB := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
       nI := nLeft + nWideB
@@ -332,7 +319,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Bars
-   //
    IF nType == BARS
       nPos := nLeft + ( nWide + nSep ) / 2
       lRedraw := ( nSeries == 1 .AND. Len( aColors ) >= nRange )
@@ -347,7 +333,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Lines
-   //
    IF nType == LINES
       nWideB := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
       nPos := nLeft + nWideB
@@ -377,7 +362,6 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
    ENDIF
 
    // Points
-   //
    IF nType == POINTS
       nWideB := ( nRight - nLeft ) / ( nMax( aData ) + 1 )
       nPos := nLeft + nWideB
@@ -421,8 +405,7 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
       ENDIF
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE EraseBarGraph ( Parent )
 
@@ -435,8 +418,7 @@ PROCEDURE EraseBarGraph ( Parent )
       ENDIF
    ENDDO
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE DrawBar( parent, nY, nX, nHigh, nWidth, l3D, nDeep, aColor )
 
@@ -465,8 +447,7 @@ STATIC PROCEDURE DrawBar( parent, nY, nX, nHigh, nWidth, l3D, nDeep, aColor )
    // Border
    DrawBox( parent, nY, nX, nH, nWidth, l3D, nDeep )
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE DrawBox( parent, nY, nX, nHigh, nWidth, l3D, nDeep )
 
@@ -489,8 +470,7 @@ STATIC PROCEDURE DrawBox( parent, nY, nX, nHigh, nWidth, l3D, nDeep )
       ENDIF
    ENDIF
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE DrawPoint( parent, nType, nY, nX, nHigh, aColor )
 
@@ -504,15 +484,13 @@ STATIC PROCEDURE DrawPoint( parent, nType, nY, nX, nHigh, aColor )
 
    ENDIF
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE Circle( window, nCol, nRow, nWidth, aColor )
 
    DrawEllipse( window, nCol, nRow, nCol + nWidth - 1, nRow + nWidth - 1, , , aColor )
 
-RETURN
-
+   RETURN
 
 STATIC FUNCTION nMax( aData )
 
@@ -520,8 +498,7 @@ STATIC FUNCTION nMax( aData )
 
    AEval( aData, { | ele | nMax := Max( nMax, Len( ele ) ) } )
 
-RETURN( nMax )
-
+   RETURN( nMax )
 
 STATIC FUNCTION DetMaxVal( nNum )
 
@@ -551,8 +528,7 @@ STATIC FUNCTION DetMaxVal( nNum )
 
    ENDDO
 
-RETURN ( nVal )
-
+   RETURN ( nVal )
 
 STATIC FUNCTION ClrShadow( nColor, nFactor )
 
@@ -562,8 +538,7 @@ STATIC FUNCTION ClrShadow( nColor, nFactor )
    aHSL[3] -= nFactor
    aRGB := HSL2RGB( aHSL[1], aHSL[2], aHSL[3] )
 
-RETURN RGB( aRGB[1], aRGB[2], aRGB[3] )
-
+   RETURN RGB( aRGB[1], aRGB[2], aRGB[3] )
 
 STATIC FUNCTION RGB2HSL( nR, nG, nB )
 
@@ -605,11 +580,10 @@ STATIC FUNCTION RGB2HSL( nR, nG, nB )
 
    nH := Int( ( nH * 239 ) / 6 )
    IF nH < 0 ; nH += 240 ; ENDIF
-   nS := Int( nS * 239 )
-   nL := Int( nL * 239 )
+      nS := Int( nS * 239 )
+      nL := Int( nL * 239 )
 
-RETURN { nH, nS, nL }
-
+      RETURN { nH, nS, nL }
 
 STATIC FUNCTION HSL2RGB( nH, nS, nL )
 
@@ -660,14 +634,13 @@ STATIC FUNCTION HSL2RGB( nH, nS, nL )
       nB := aTmp3[3]
    ENDIF
 
-RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
+   RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
 
+   /*
+   * Copyright (c) 2003 Rathinagiri <srgiri@dataone.in>
+   * Revised by Grigory Filatov
+   */
 
-/*
- * Copyright (c) 2003 Rathinagiri <srgiri@dataone.in>
- *
- * Revised by Grigory Filatov
-*/
 FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname, colors, ctitle, depth, l3d, lxval, lsleg, cPicture, lNoborder, placement, lPrint )
 
    LOCAL topleftrow
@@ -710,21 +683,21 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
          backcolor := NIL
       ENDIF
       cname := "title_of_pie" + hb_ntos( nPieObj++ )
-      define label &cname
-        parent &windowname
-        row fromrow + 10
-        col fromcol + iif( Len( ctitle ) * 8 > ( tocol - fromcol ), 0, 5 )
-        width iif( Len( ctitle ) * 8 > ( tocol - fromcol ), Len( ctitle ) * 10, tocol - fromcol - 10 )
-        height 16 + _HMG_DefaultFontSize
-        fontbold .T.
-        fontname _HMG_DefaultFontName
-        fontsize _HMG_DefaultFontSize + 3
-        centeralign ( Len( ctitle ) * 8 < ( tocol - fromcol ) )
-        vcenteralign .T.
-        value ctitle
-        fontcolor { 0, 0, 0 }
-        backcolor iif( lPrint, WHITE, backcolor )
-      end label
+      DEFINE LABEL &cname
+         parent &windowname
+         row fromrow + 10
+         col fromcol + iif( Len( ctitle ) * 8 > ( tocol - fromcol ), 0, 5 )
+         width iif( Len( ctitle ) * 8 > ( tocol - fromcol ), Len( ctitle ) * 10, tocol - fromcol - 10 )
+         height 16 + _HMG_DefaultFontSize
+         fontbold .T.
+         fontname _HMG_DefaultFontName
+         fontsize _HMG_DefaultFontSize + 3
+         centeralign ( Len( ctitle ) * 8 < ( tocol - fromcol ) )
+         vcenteralign .T.
+         value ctitle
+         fontcolor { 0, 0, 0 }
+         backcolor iif( lPrint, WHITE, backcolor )
+      END LABEL
       RedrawWindow( GetControlHandle( cname, windowname ) )
       fromrow += 25 + _HMG_DefaultFontSize
    ENDIF
@@ -774,12 +747,12 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
 
    AEval( series, {|i| ser_sum += i } )
    AEval( series, {|i| AAdd( degrees, Round( i / ser_sum * 360, 0 ) ) } )
-   sum := 0
+   SUM := 0
    AEval( degrees, {|i| sum += i } )
    IF sum <> 360
       degrees[len(degrees)] += 360 - sum
    ENDIF
-   sum := 0
+   SUM := 0
    AEval( degrees, {|i| sum += i, AAdd( cumulative,sum ) } )
 
    fromradialrow := middlerightrow
@@ -876,27 +849,26 @@ FUNCTION drawpiegraph( windowname, fromrow, fromcol, torow, tocol, series, aname
       FOR i := 1 TO Len( aname )
          cname := "pielegend_" + hb_ntos( nPieObj++ )
          drawrect( windowname, fromrow, fromcol, fromrow + 15, fromcol + 15, { 0, 0, 0 }, 1, colors[i] )
-         define label &cname
-           parent &windowname
-           row fromrow
-           col fromcol + 20
-           fontname _HMG_DefaultFontName
-           fontsize _HMG_DefaultFontSize - 1
-           autosize .T.
-           IF !lPrint .AND. !lNoborder
-              height 16
-           ENDIF
-           value aname[i] + iif( lxval, " - " + LTrim( Transform( series[i], cPicture ) ) + " (" + LTrim( Str( series[i] / ser_sum * 100, 6, 2 ) ) + " %)", "" )
-           fontcolor iif( RGB( colors[i][1], colors[i][2], colors[i][3] ) == RGB( 255, 255, 255 ), BLACK, colors[i] )
-           backcolor iif( lPrint, WHITE, NIL )
-           transparent .T.
-         end label
+         DEFINE LABEL &cname
+            parent &windowname
+            row fromrow
+            col fromcol + 20
+            fontname _HMG_DefaultFontName
+            fontsize _HMG_DefaultFontSize - 1
+            autosize .T.
+            IF !lPrint .AND. !lNoborder
+               height 16
+            ENDIF
+            value aname[i] + iif( lxval, " - " + LTrim( Transform( series[i], cPicture ) ) + " (" + LTrim( Str( series[i] / ser_sum * 100, 6, 2 ) ) + " %)", "" )
+            fontcolor iif( RGB( colors[i][1], colors[i][2], colors[i][3] ) == RGB( 255, 255, 255 ), BLACK, colors[i] )
+            backcolor iif( lPrint, WHITE, NIL )
+            transparent .T.
+         END LABEL
          fromrow += 20
       NEXT i
    ENDIF
 
-RETURN nil
-
+   RETURN NIL
 
 PROCEDURE ErasePieGraph( windowname )
 
@@ -913,8 +885,7 @@ PROCEDURE ErasePieGraph( windowname )
       ENDIF
    ENDDO
 
-RETURN
-
+   RETURN
 
 FUNCTION _PiePrint( cForm, fromrow, fromcol, torow, tocol, series, aname, colors, ctitle, depth, l3d, lxval, lsleg, cPicture, x, y, cLibrary, placement )
 
@@ -922,21 +893,20 @@ FUNCTION _PiePrint( cForm, fromrow, fromcol, torow, tocol, series, aname, colors
 
    _HMG_IsModalActive := .F.
    DEFAULT cLibrary := ""
-   Define Window _PieGraph;
-      At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
-      Width GetProperty( cForm, 'Width' );
-      Height GetProperty( cForm, 'Height' );
-      Child;
-      On Init ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ),;
+   DEFINE WINDOW _PieGraph;
+         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
+         Width GetProperty( cForm, 'Width' );
+         Height GetProperty( cForm, 'Height' );
+         Child;
+         On Init ( drawpiegraph( "_PieGraph",fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,cPicture, .T., placement, .T. ),;
          _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
-      BackColor WHITE
+         BackColor WHITE
 
-   End Window
-   Activate Window _PieGraph
+   END WINDOW
+   ACTIVATE WINDOW _PieGraph
    _HMG_IsModalActive := b
 
-RETURN nil
-
+   RETURN NIL
 
 FUNCTION _GraphPrint( cForm, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aData, cTitle, aYVals, nBarD, nWideB, nSep, nXRanges, ;
       l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendsWidth, x, y, cLibrary )
@@ -945,22 +915,21 @@ FUNCTION _GraphPrint( cForm, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
 
    _HMG_IsModalActive := .F.
    DEFAULT cLibrary := ""
-   Define Window _Graph;
-      At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
-      Width GetProperty( cForm, 'Width' );
-      Height GetProperty( cForm, 'Height' );
-      Child;
-      On Init ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
+   DEFINE WINDOW _Graph;
+         At GetProperty( cForm, 'Row' ), GetProperty( cForm, 'Col' );
+         Width GetProperty( cForm, 'Width' );
+         Height GetProperty( cForm, 'Height' );
+         Child;
+         On Init ( GraphShow("_Graph",nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle,aYVals,nBarD,nWideB,nSep,nXRanges,;
          l3D, lGrid, lxGrid, lyGrid, lxVal, lyVal, lLegends, aSeries, aColors, nType, lViewVal, cPicture, nLegendsWidth, .T. , .T. ),;
          _bmpprint( ThisWindow.Name, x, y, iif( "HBPRINT" $ Upper( cLibrary ), 2, 1 ) ) );
-      BackColor WHITE
+         BackColor WHITE
 
-   End Window
-   Activate Window _Graph
+   END WINDOW
+   ACTIVATE WINDOW _Graph
    _HMG_IsModalActive := b
 
-RETURN nil
-
+   RETURN NIL
 
 STATIC FUNCTION _bmpprint( cForm, x, y, nLibrary )
 
@@ -989,6 +958,7 @@ STATIC FUNCTION _bmpprint( cForm, x, y, nLibrary )
       IF HBPRNERROR != 0
          DoMethod ( cForm, 'Release' )
          _cleanprint()
+
          RETURN .F.
       ENDIF
 
@@ -1010,93 +980,94 @@ STATIC FUNCTION _bmpprint( cForm, x, y, nLibrary )
 
       REPEAT
 
-         th := ++tw / r
+      th := ++tw / r
 
       UNTIL ( tw < w - x .OR. th < h - y )
 
       DoMethod ( cForm, 'Hide' )
 
       START DOC
-         START PAGE
+      START PAGE
 
-            @ VO + y + ( h - th ) / 2, HO + x + ( w - tw ) / 2 PICTURE cTempFile SIZE tH, tW
+      @ VO + y + ( h - th ) / 2, HO + x + ( w - tw ) / 2 PICTURE cTempFile SIZE tH, tW
 
-         END PAGE
-      END DOC
+   END PAGE
+END DOC
 
-      RELEASE PRINTSYS
+RELEASE PRINTSYS
 
-   ELSE
+ELSE
 
-      SELECT PRINTER DEFAULT TO lSuccess ORIENTATION nOrientation PREVIEW
+SELECT PRINTER DEFAULT TO lSuccess ORIENTATION nOrientation PREVIEW
 
-      IF .NOT. lSuccess
-         DoMethod ( cForm, 'Release' )
-         _cleanprint()
-         RETURN .F.
-      ENDIF
-
-      HO := GetPrintableAreaHorizontalOffset()
-      VO := GetPrintableAreaVerticalOffset()
-
-      W := GetPrintableAreaWidth() - x - HO * 2
-      H := GetPrintableAreaHeight() - y - VO * 2
-
-      REPEAT
-
-         th := ++tw / r
-
-      UNTIL ( tw < w - x .OR. th < h - y )
-
-      DoMethod ( cForm, 'Hide' )
-
-      START PRINTDOC NAME 'MINIPRINT'
-         START PRINTPAGE
-
-            @ VO + y + ( h - th ) / 2, HO + x + ( w - tw ) / 2 PRINT IMAGE cTempFile WIDTH tW HEIGHT tH
-
-         END PRINTPAGE
-      END PRINTDOC
-
-   ENDIF
-
-   DO EVENTS
+IF .NOT. lSuccess
    DoMethod ( cForm, 'Release' )
    _cleanprint()
 
-RETURN .T.
+   RETURN .F.
+ENDIF
 
+HO := GetPrintableAreaHorizontalOffset()
+VO := GetPrintableAreaVerticalOffset()
+
+W := GetPrintableAreaWidth() - x - HO * 2
+H := GetPrintableAreaHeight() - y - VO * 2
+
+REPEAT
+
+th := ++tw / r
+
+UNTIL ( tw < w - x .OR. th < h - y )
+
+DoMethod ( cForm, 'Hide' )
+
+START PRINTDOC NAME 'MINIPRINT'
+   START PRINTPAGE
+
+      @ VO + y + ( h - th ) / 2, HO + x + ( w - tw ) / 2 PRINT IMAGE cTempFile WIDTH tW HEIGHT tH
+
+   END PRINTPAGE
+END PRINTDOC
+
+ENDIF
+
+DO EVENTS
+DoMethod ( cForm, 'Release' )
+_cleanprint()
+
+RETURN .T.
 
 STATIC FUNCTION _cleanprint()
 
    LOCAL cTempMask := GetTempFolder() + '\_hmg_printwindow_*.bmp'
 
-RETURN FileDelete( cTempMask )
+   RETURN FileDelete( cTempMask )
 
-#ifdef HB_DYNLIB
+   #ifdef HB_DYNLIB
+
 STATIC FUNCTION FileDelete( cMask )
 
    LOCAL aDir := Directory( cMask )
 
    AEval( aDir, { |n| FErase( cFilePath( cMask ) + '\' + n [1] ) } )
 
-RETURN .T.
+   RETURN .T.
 
-#endif
+   #endif
 
-#ifdef _HMG_COMPAT_
-*-----------------------------------------------------------------------------*
+   #ifdef _HMG_COMPAT_
+
 FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeight )
-*-----------------------------------------------------------------------------*
+
    LOCAL lSuccess, nOrientation
    LOCAL TempName, W, H, HO, VO
    LOCAL bw, bh, r, tw := 0, th
    LOCAL ntop, nleft, nbottom, nright
 
    IF ValType ( nRow ) == 'U' .OR. ;
-      ValType ( nCol ) == 'U' .OR. ;
-      ValType ( nWidth ) == 'U' .OR. ;
-      ValType ( nHeight ) == 'U'
+         ValType ( nCol ) == 'U' .OR. ;
+         ValType ( nWidth ) == 'U' .OR. ;
+         ValType ( nHeight ) == 'U'
 
       ntop := -1
       nleft := -1
@@ -1145,6 +1116,7 @@ FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeig
       ENDIF
 
       IF ! lSuccess
+
          RETURN NIL
       ENDIF
 
@@ -1178,7 +1150,7 @@ FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeig
 
    REPEAT
 
-      th := ++tw / r
+   th := ++tw / r
 
    UNTIL ( tw < w .OR. th < h )
 
@@ -1195,6 +1167,7 @@ FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeig
    DO EVENTS
    FErase( TempName )
 
-RETURN NIL
+   RETURN NIL
 
-#endif
+   #endif
+

@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2005 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -16,124 +14,128 @@ ANNOUNCE RDDSYS
 
 PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 HEIGHT 400 ;
-		TITLE PROGRAM + " - Contributed by Grigory Filatov" ;
-		MAIN ;
-		ICON "demo.ico" ;
-		NOMAXIMIZE ;
-		ON INIT OnInit() ;
-		ON PAINT drawcircle() ;
-		BACKCOLOR WHITE ;
-		FONT "MS Sans Serif" SIZE 8
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 HEIGHT 400 ;
+         TITLE PROGRAM + " - Contributed by Grigory Filatov" ;
+         MAIN ;
+         ICON "demo.ico" ;
+         NOMAXIMIZE ;
+         ON INIT OnInit() ;
+         ON PAINT drawcircle() ;
+         BACKCOLOR WHITE ;
+         FONT "MS Sans Serif" SIZE 8
 
-		@ 10,Form_1.Width - 120 BUTTON Button_1 ;
-		CAPTION 'Close' ;
-		ACTION Form_1.Release
+      @ 10,Form_1.Width - 120 BUTTON Button_1 ;
+         CAPTION 'Close' ;
+         ACTION Form_1.Release
 
-	END WINDOW
+   END WINDOW
 
-	Form_1.Center
+   Form_1.Center
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
 PROCEDURE OnInit
 
-	IF !IsWinNT()
-		MsgStop( 'This Program Runs In Win2000/XP Only!', 'Stop' )
-		ReleaseAllWindows()
-	ENDIF
+   IF !IsWinNT()
+      MsgStop( 'This Program Runs In Win2000/XP Only!', 'Stop' )
+      ReleaseAllWindows()
+   ENDIF
 
-	Form_1.Button_1.Setfocus
+   Form_1.Button_1.Setfocus
 
-	LayeredWindowStarting(_HMG_MainHandle)
+   LayeredWindowStarting(_HMG_MainHandle)
 
-	CLEAN MEMORY
+   CLEAN MEMORY
 
-RETURN
+   RETURN
 
 PROCEDURE drawcircle
-Local i, x0, y0, a := 320, r := 80, rr := 100, step_fi := PI / 8
-Local N := 2 * PI / step_fi
 
-	for i := 0 to N - 1
+   LOCAL i, x0, y0, a := 320, r := 80, rr := 100, step_fi := PI / 8
+   LOCAL N := 2 * PI / step_fi
 
-		x0 := rr * sin( i * step_fi )
-		y0 := rr * cos( i * step_fi )
+   FOR i := 0 to N - 1
 
-		circle( "Form_1", a/2 + x0, a/2 + y0, r )
+      x0 := rr * sin( i * step_fi )
+      y0 := rr * cos( i * step_fi )
 
-	next i
+      circle( "Form_1", a/2 + x0, a/2 + y0, r )
 
-RETURN
+   NEXT i
+
+   RETURN
 
 STATIC PROCEDURE Circle( window, nCol, nRow, nWidth )
-	drawellipse(window, nCol, nRow, nCol + nWidth - 1, nRow + nWidth - 1)
-RETURN
 
-static function Sin( nAng )
+   drawellipse(window, nCol, nRow, nCol + nWidth - 1, nRow + nWidth - 1)
 
-   local nSin, nOld
-   local nMod := 3
-   local lSgn := .f.
+   RETURN
+
+STATIC FUNCTION Sin( nAng )
+
+   LOCAL nSin, nOld
+   LOCAL nMod := 3
+   LOCAL lSgn := .f.
 
    nSin := nAng
 
-   do while nSin != nOld
+   DO WHILE nSin != nOld
 
       nOld = nSin
 
-      if lSgn
+      IF lSgn
          nSin += (nAng ** nMod) / Fac( nMod )
-      else
+      ELSE
          nSin -= (nAng ** nMod) / Fac( nMod )
-      endif
+      ENDIF
 
       nMod += 2
 
       lSgn = !lSgn
 
-   enddo
+   ENDDO
 
-return nSin
+   RETURN nSin
 
-static function Cos( nAng )
+STATIC FUNCTION Cos( nAng )
 
-   local nCos, nOld
-   local nMod := 2
-   local lSgn := .f.
+   LOCAL nCos, nOld
+   LOCAL nMod := 2
+   LOCAL lSgn := .f.
 
    nCos := 1
 
-   do while nCos != nOld
+   DO WHILE nCos != nOld
 
       nOld = nCos
 
-      if lSgn
+      IF lSgn
          nCos += (nAng ** nMod) / Fac( nMod )
-      else
+      ELSE
          nCos -= (nAng ** nMod) / Fac( nMod )
-      endif
+      ENDIF
 
       nMod += 2
 
       lSgn = !lSgn
 
-   enddo
+   ENDDO
 
-return nCos
+   RETURN nCos
 
-static function Fac( nNum )
-  local n, nFac := 1
+STATIC FUNCTION Fac( nNum )
 
-  for n := 2 to nNum
+   LOCAL n, nFac := 1
+
+   FOR n := 2 to nNum
       nFac *= n
-  next
+   NEXT
 
-return nFac
+   RETURN nFac
 
 #pragma BEGINDUMP
 
@@ -143,25 +145,26 @@ return nFac
 
 HB_FUNC ( LAYEREDWINDOWSTARTING )
 {
-	HWND hWnd = ( HWND ) hb_parnl( 1 );
-	MSG Msg;
-	int x;
+   HWND hWnd = ( HWND ) hb_parnl( 1 );
+   MSG Msg;
+   int x;
 
-	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+   SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
 
-	for ( x = 0; x < 255; x += 5 )
-	{
-		SetLayeredWindowAttributes(hWnd, 0, x, LWA_ALPHA);
-  
-		if( PeekMessage((LPMSG) &Msg, 0, 0, 0, PM_REMOVE) )
-		{
-			TranslateMessage(&Msg);
-			DispatchMessage(&Msg);
-		}
-		Sleep(50);
-	}
+   for ( x = 0; x < 255; x += 5 )
+   {
+      SetLayeredWindowAttributes(hWnd, 0, x, LWA_ALPHA);
 
-	SetLayeredWindowAttributes(hWnd, 0, 255, LWA_ALPHA);
+      if( PeekMessage((LPMSG) &Msg, 0, 0, 0, PM_REMOVE) )
+      {
+         TranslateMessage(&Msg);
+         DispatchMessage(&Msg);
+      }
+      Sleep(50);
+   }
+
+   SetLayeredWindowAttributes(hWnd, 0, 255, LWA_ALPHA);
 }
 
 #pragma ENDDUMP
+

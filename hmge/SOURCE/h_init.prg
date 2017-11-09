@@ -1,47 +1,47 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
- "Harbour GUI framework for Win32"
-  Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-  Copyright 2001 Antonio Linares <alinares@fivetech.com>
- www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
- "Harbour Project"
- Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
- "WHAT32"
- Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
- "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -53,25 +53,24 @@ REQUEST GETINSTANCE
 
 STATIC _HMG_SYSINIT
 
-*------------------------------------------------------------------------------*
 PROCEDURE Init
-*------------------------------------------------------------------------------*
+
    LOCAL nCellForeColor := GetSysColor ( COLOR_HIGHLIGHTTEXT )
    LOCAL nCellBackColor := GetSysColor ( COLOR_HIGHLIGHT )
 
    PUBLIC _HMG_SYSDATA [ _HMG_SYSDATA_SIZE ]
 
    _HMG_SYSINIT := { Date(), Time() }
-//JP Drag Image
+   //JP Drag Image
    _HMG_ActiveDragImageHandle := 0
-//JP MDI
+   //JP MDI
    _HMG_MainClientMDIHandle := 0
    _HMG_MainClientMDIName  := ""
    _HMG_ActiveMDIChildIndex := 0
    _HMG_BeginWindowMDIActive := .F.
    _HMG_MdiChildActive  := .F.
    _HMG_ActiveStatusHandle  := 0
-// (JK) HMG 1.0 Experimental Build 6
+   // (JK) HMG 1.0 Experimental Build 6
    _HMG_ErrorLogFile := ""
    _HMG_CreateErrorlog := .T.
 
@@ -113,14 +112,14 @@ PROCEDURE Init
 
    _HMG_aUserBlocks := Array ( 7 )
    _HMG_lOOPEnabled := .F.
-#ifdef _OBJECT_
+   #ifdef _OBJECT_
    _HMG_bOnFormInit       := {|nIndex, cVar  | Do_OnWndInit   ( nIndex, cVar ) }
    _HMG_bOnFormDestroy    := {|nIndex        | Do_OnWndRelease( nIndex ) }
    _HMG_bOnControlInit    := {|nIndex, cVar  | Do_OnCtlInit   ( nIndex, cVar ) }
    _HMG_bOnControlDestroy := {|nIndex        | Do_OnCtlRelease( nIndex ) }
    _HMG_bOnWndLaunch      := {|hWnd, nMsg, wParam, lParam| Do_OnWndLaunch( hWnd, nMsg, wParam, lParam ) }
    _HMG_bOnCtlLaunch      := {|hWnd, nMsg, wParam, lParam| Do_OnCtlLaunch( hWnd, nMsg, wParam, lParam ) }
-#endif
+   #endif
    _HMG_DateTextBoxActive := .F.
 
    _HMG_ThisFormName := Nil
@@ -249,7 +248,7 @@ PROCEDURE Init
 
    _HMG_MainWindowFirst := .T.
    _HMG_MainActive      := .F.
-   _HMG_MainCargo	:= NIL
+   _HMG_MainCargo   := NIL
    _HMG_MainHandle      := 0
 
    _HMG_MouseRow        := 0
@@ -292,12 +291,12 @@ PROCEDURE Init
    _HMG_BeginPagerActive     := .F.
    _HMG_ActivePagerForm      := 0
 
-#ifdef _TSBROWSE_
+   #ifdef _TSBROWSE_
    _HMG_ActiveTBrowseName    := ""
    _HMG_ActiveTBrowseHandle  := 0
    _HMG_BeginTBrowseActive   := .F.
-#endif
-#ifdef _PROPGRID_
+   #endif
+   #ifdef _PROPGRID_
    _HMG_ActivePropGridHandle := 0
    _HMG_ActiveCategoryHandle := 0
    _HMG_ActivePropGridIndex  := 0
@@ -305,7 +304,7 @@ PROCEDURE Init
    _HMG_PGLangButton         := {}
    _HMG_PGLangError          := {}
    _HMG_PGLangMessage        := {}
-#endif
+   #endif
    _HMG_BeginTabActive := .F.
    _HMG_ActiveTabPage  := 0
    _HMG_ActiveTabFullPageMap := {}
@@ -380,8 +379,8 @@ PROCEDURE Init
    _HMG_aFormInteractiveCloseProcedure := {}
    _HMG_aFormMinMaxInfo  := {}
    _HMG_aFormActivateId  := {}
-   _HMG_aFormMiscData1   := {}   
-   _HMG_aFormMiscData2   := {} 
+   _HMG_aFormMiscData1   := {}
+   _HMG_aFormMiscData2   := {}
 
    _HMG_aControlDeleted  := {}
    _HMG_aControlType  := {}
@@ -426,31 +425,31 @@ PROCEDURE Init
 
    _HMG_ListBoxDragNotification := _GetDDLMessage()
 
-#ifdef _USERINIT_
+   #ifdef _USERINIT_
    _HMG_aCustomEventProcedure := {}
    _HMG_aCustomPropertyProcedure := {}
    _HMG_aCustomMethodProcedure := {}
    _HMG_UserComponentProcess := .F.
-#endif
+   #endif
 
    _HMG_ParentWindowActive  := .F.
 
-#ifdef _PANEL_
+   #ifdef _PANEL_
    _HMG_LoadWindowRow  := -1
    _HMG_LoadWindowCol  := -1
    _HMG_LoadWindowWidth  := -1
    _HMG_LoadWindowHeight  := -1
-#endif
-#ifdef _HMG_COMPAT_
+   #endif
+   #ifdef _HMG_COMPAT_
    _HMG_StopWindowEventProcedure := {}
    _HMG_StopControlEventProcedure := {}
    _HMG_LastActiveFormIndex := 0
    _HMG_LastActiveControlIndex := 0
-#endif
+   #endif
 
-#if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
+   #if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
    InitCodePage()
-#endif
+   #endif
 
    InitMessages()
 
@@ -459,11 +458,10 @@ PROCEDURE Init
    _HMG_IsMultiple := IsExeRunning ( StrTran( GetExeFileName (), '\', '_' ) )
    _SetErrorLogFile( _GetErrorLogFile() )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION TimeFromStart
-*------------------------------------------------------------------------------*
+
    LOCAL cText := "", n, aData
 
    aData := _hmg_Elapsed( _HMG_SYSINIT [1], Date(), _HMG_SYSINIT [2], Time() )
@@ -472,11 +470,10 @@ FUNCTION TimeFromStart
       cText += iif( n == 1, "days ", iif( n == 2, "hours ", iif( n == 3, "mins ", "secs" ) ) )
    NEXT
 
-RETURN cText
+   RETURN cText
 
-*------------------------------------------------------------------------------*
 STATIC FUNCTION _hmg_Elapsed( dStart, dEnd, cTimeStart, cTimeEnd )
-*------------------------------------------------------------------------------*
+
    LOCAL nTotalSec, nCtr, nConstant, nTemp, aRetVal [4]
 
    nTotalSec := ( dEnd - dStart ) * 86400 + ;
@@ -497,12 +494,12 @@ STATIC FUNCTION _hmg_Elapsed( dStart, dEnd, cTimeStart, cTimeEnd )
       nTemp -= aRetVal[ nCtr ] * nConstant
    NEXT
 
-RETURN aRetVal
+   RETURN aRetVal
 
-#if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
-*------------------------------------------------------------------------------*
+   #if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
+
 STATIC PROCEDURE InitCodePage
-*------------------------------------------------------------------------------*
+
    LOCAL cLang
 
    IF Empty( cLang := hb_UserLang() )
@@ -565,25 +562,25 @@ STATIC PROCEDURE InitCodePage
 
    ENDIF
 
-RETURN
+   RETURN
 
-#endif
-*------------------------------------------------------------------------------*
+   #endif
+
 FUNCTION _GetSysFont()
-*------------------------------------------------------------------------------*
 
    IF _HMG_IsXPorLater
+
       RETURN GetDefaultFontName()
    ENDIF
 
-RETURN "MS Sans Serif"  // Win NT, 9x
+   RETURN "MS Sans Serif"  // Win NT, 9x
 
-*------------------------------------------------------------------------------*
 PROCEDURE InitMessages
-*------------------------------------------------------------------------------*
-#ifdef _MULTILINGUAL_
+
+   #ifdef _MULTILINGUAL_
    LOCAL cLang
-#endif
+
+   #endif
 
    // MISC MESSAGES (ENGLISH DEFAULT)
 
@@ -682,95 +679,95 @@ PROCEDURE InitMessages
 
    _HMG_aLangButton := {    ;
       "&Close",             ; // 1
-      "&New",               ; // 2
-      "&Modify",            ; // 3
-      "&Delete",            ; // 4
-      "&Find",              ; // 5
-      "&Print",             ; // 6
-      "&Cancel",            ; // 7
-      "&Ok",                ; // 8
-      "&Copy",              ; // 9
-      "&Activate Filter",   ; // 10
-      "&Deactivate Filter", ; // 11
-      "&Restore"            } // 12
+   "&New",               ; // 2
+   "&Modify",            ; // 3
+   "&Delete",            ; // 4
+   "&Find",              ; // 5
+   "&Print",             ; // 6
+   "&Cancel",            ; // 7
+   "&Ok",                ; // 8
+   "&Copy",              ; // 9
+   "&Activate Filter",   ; // 10
+   "&Deactivate Filter", ; // 11
+   "&Restore"            } // 12
    _HMG_aLangLabel := { ;
       "None",                       ; // 1
-      "Record",                     ; // 2
-      "Total",                      ; // 3
-      "Active order",               ; // 4
-      "Options",                    ; // 5
-      "New record",                 ; // 6
-      "Modify record",              ; // 7
-      "Select record",              ; // 8
-      "Find record",                ; // 9
-      "Print options",              ; // 10
-      "Available fields",           ; // 11
-      "Fields to print",            ; // 12
-      "Available printers",         ; // 13
-      "First record to print",      ; // 14
-      "Last record to print",       ; // 15
-      "Delete record",              ; // 16
-      "Preview",                    ; // 17
-      "View page thumbnails",       ; // 18
-      "Filter Condition: ",         ; // 19
-      "Filtered: ",                 ; // 20
-      "Filtering Options" ,         ; // 21
-      "Database Fields" ,           ; // 22
-      "Comparison Operator",        ; // 23
-      "Filter Value",               ; // 24
-      "Select Field To Filter",     ; // 25
-      "Select Comparison Operator", ; // 26
-      "Equal",                      ; // 27
-      "Not Equal",                  ; // 28
-      "Greater Than",               ; // 29
-      "Lower Than",                 ; // 30
-      "Greater or Equal Than",      ; // 31
-      "Lower or Equal Than"         } // 32
+   "Record",                     ; // 2
+   "Total",                      ; // 3
+   "Active order",               ; // 4
+   "Options",                    ; // 5
+   "New record",                 ; // 6
+   "Modify record",              ; // 7
+   "Select record",              ; // 8
+   "Find record",                ; // 9
+   "Print options",              ; // 10
+   "Available fields",           ; // 11
+   "Fields to print",            ; // 12
+   "Available printers",         ; // 13
+   "First record to print",      ; // 14
+   "Last record to print",       ; // 15
+   "Delete record",              ; // 16
+   "Preview",                    ; // 17
+   "View page thumbnails",       ; // 18
+   "Filter Condition: ",         ; // 19
+   "Filtered: ",                 ; // 20
+   "Filtering Options" ,         ; // 21
+   "Database Fields" ,           ; // 22
+   "Comparison Operator",        ; // 23
+   "Filter Value",               ; // 24
+   "Select Field To Filter",     ; // 25
+   "Select Comparison Operator", ; // 26
+   "Equal",                      ; // 27
+   "Not Equal",                  ; // 28
+   "Greater Than",               ; // 29
+   "Lower Than",                 ; // 30
+   "Greater or Equal Than",      ; // 31
+   "Lower or Equal Than"         } // 32
    _HMG_aLangUser := { ;
       CRLF + "Can't find an active area.   "  + CRLF + "Please select any area before call EDIT   " + CRLF,       ; // 1
-      "Type the field value (any text)",                                                                          ; // 2
-      "Type the field value (any number)",                                                                        ; // 3
-      "Select the date",                                                                                          ; // 4
-      "Check for true value",                                                                                     ; // 5
-      "Enter the field value",                                                                                    ; // 6
-      "Select any record and press OK",                                                                           ; // 7
-      CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
-      CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
-      CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
-      CRLF + "Record not found   " + CRLF,                                                                        ; // 11
-      "Select the field to include to list",                                                                      ; // 12
-      "Select the field to exclude from list",                                                                    ; // 13
-      "Select the printer",                                                                                       ; // 14
-      "Push button to include field",                                                                             ; // 15
-      "Push button to exclude field",                                                                             ; // 16
-      "Push button to select the first record to print",                                                          ; // 17
-      "Push button to select the last record to print",                                                           ; // 18
-      CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
-      CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
-      CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
-      CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
-      CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
-      CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
-      CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
-      "Ordered by",                                                                                               ; // 26
-      "From record",                                                                                              ; // 27
-      "To record",                                                                                                ; // 28
-      "Yes",                                                                                                      ; // 29
-      "No",                                                                                                       ; // 30
-      "Page:",                                                                                                    ; // 31
-      CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
-      "Filtered by",                                                                                              ; // 33
-      CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
-      CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
-      CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
-      CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
-      CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
-      CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
-      CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
-      CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
+   "Type the field value (any text)",                                                                          ; // 2
+   "Type the field value (any number)",                                                                        ; // 3
+   "Select the date",                                                                                          ; // 4
+   "Check for true value",                                                                                     ; // 5
+   "Enter the field value",                                                                                    ; // 6
+   "Select any record and press OK",                                                                           ; // 7
+   CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
+   CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
+   CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
+   CRLF + "Record not found   " + CRLF,                                                                        ; // 11
+   "Select the field to include to list",                                                                      ; // 12
+   "Select the field to exclude from list",                                                                    ; // 13
+   "Select the printer",                                                                                       ; // 14
+   "Push button to include field",                                                                             ; // 15
+   "Push button to exclude field",                                                                             ; // 16
+   "Push button to select the first record to print",                                                          ; // 17
+   "Push button to select the last record to print",                                                           ; // 18
+   CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
+   CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
+   CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
+   CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
+   CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
+   CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
+   CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
+   "Ordered by",                                                                                               ; // 26
+   "From record",                                                                                              ; // 27
+   "To record",                                                                                                ; // 28
+   "Yes",                                                                                                      ; // 29
+   "No",                                                                                                       ; // 30
+   "Page:",                                                                                                    ; // 31
+   CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
+   "Filtered by",                                                                                              ; // 33
+   CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
+   CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
+   CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
+   CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
+   CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
+   CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
+   CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
+   CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
+   CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
 
-#ifdef _MULTILINGUAL_
+   #ifdef _MULTILINGUAL_
 
    IF _HMG_LANG_ID == 'FI'  // FINNISH - Language Is Not Supported By hb_langSelect() Function
       cLang := 'FI'
@@ -781,9 +778,7 @@ PROCEDURE InitMessages
    DO CASE
 
    CASE cLang == "CS"  // Czech
-      /////////////////////////////////////////////////////////////
       // CZECH
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -965,9 +960,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                     } // 42
 
    CASE cLang == "HR"  // Croatian
-      /////////////////////////////////////////////////////////////
       // CROATIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -1149,9 +1142,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
 
    CASE cLang == "EU"  // Basque
-      /////////////////////////////////////////////////////////////
       // BASQUE
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -1244,17 +1235,17 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {   ;
          "&Itxi",             ; // 1
-         "&Berria",           ; // 2
-         "&Aldatu",           ; // 3
-         "&Ezabatu",          ; // 4
-         "Bi&latu",           ; // 5
-         "In&primatu",        ; // 6
-         "&Utzi",             ; // 7
-         "&Ok",               ; // 8
-         "&Kopiatu",          ; // 9
-         "I&ragazkia Ezarri", ; // 10
-         "Ira&gazkia Kendu",  ; // 11
-         "&Restore"           } // 12
+      "&Berria",           ; // 2
+      "&Aldatu",           ; // 3
+      "&Ezabatu",          ; // 4
+      "Bi&latu",           ; // 5
+      "In&primatu",        ; // 6
+      "&Utzi",             ; // 7
+      "&Ok",               ; // 8
+      "&Kopiatu",          ; // 9
+      "I&ragazkia Ezarri", ; // 10
+      "Ira&gazkia Kendu",  ; // 11
+      "&Restore"           } // 12
       _HMG_aLangLabel := {                  ;
          "Bat ere ez",                      ; // 1
       "Erregistroa",                        ; // 2
@@ -1333,9 +1324,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                      } // 42
 
    CASE cLang == "FR"  // French
-      /////////////////////////////////////////////////////////////
       // FRENCH
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -1426,17 +1415,17 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {  ;
          "&Fermer",          ; // 1
-         "&Nouveau",         ; // 2
-         "&Modifier",        ; // 3
-         "&Supprimer",       ; // 4
-         "&Trouver",         ; // 5
-         "&Imprimer",        ; // 6
-         "&Abandon",         ; // 7
-         "&Ok",              ; // 8
-         "&Copier",          ; // 9
-         "&Activer Filtre",  ; // 10
-         "&Dйactiver Filtre",; // 11
-         "&Reconstituer"     } // 12
+      "&Nouveau",         ; // 2
+      "&Modifier",        ; // 3
+      "&Supprimer",       ; // 4
+      "&Trouver",         ; // 5
+      "&Imprimer",        ; // 6
+      "&Abandon",         ; // 7
+      "&Ok",              ; // 8
+      "&Copier",          ; // 9
+      "&Activer Filtre",  ; // 10
+      "&Dйactiver Filtre",; // 11
+      "&Reconstituer"     } // 12
       _HMG_aLangLabel := {                       ;
          "Aucun",                                ; // 1
       "Enregistrement",                          ; // 2
@@ -1515,9 +1504,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                                   } // 42
 
    CASE cLang == "DE"  // German
-      /////////////////////////////////////////////////////////////
       // GERMAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -1558,7 +1545,7 @@ PROCEDURE InitMessages
          Chr( 13 ) + "Suche in Memo oder Logic " + Chr( 13 ) + "Feld nicht mцglich" + Chr( 13 ), ;
          Chr( 13 ) + "Datensatz nicht gefunden" + Chr( 13 ), ;
          Chr( 13 ) + "Zu viele Spalten" + Chr( 13 ) + " Report passt nicht auf die Seite" + Chr( 13 ) }
-   
+
       _HMG_aABMLangLabel  := { "Datensatz"              , ;
          "Datensatz Anzahl"        , ;
          "Datensatz (Neu)"        , ;
@@ -1608,7 +1595,7 @@ PROCEDURE InitMessages
       // EDIT EXTENDED
 
       _HMG_aLangButton := {  ;
-      "S&chlieЯen",          ; // 1
+         "S&chlieЯen",          ; // 1
       "&Neu",                ; // 2
       "&Bearbeiten",         ; // 3
       "&Lцschen",            ; // 4
@@ -1621,7 +1608,7 @@ PROCEDURE InitMessages
       "&Filter deaktivieren",; // 11
       "&Wiederherstellen"    } // 12
       _HMG_aLangLabel := { ;
-      "Keine",                                         ; // 1
+         "Keine",                                         ; // 1
       "Datensatz",                                     ; // 2
       "Gesamt",                                        ; // 3
       "Aktive Sortierung",                             ; // 4
@@ -1698,9 +1685,7 @@ PROCEDURE InitMessages
       CRLF + "Gelцschten Datensatz wiederherstellen   " + CRLF + "Sind sie sicher?    " + CRLF                                                    } // 42
 
    CASE cLang == "IT"  // Italian
-      /////////////////////////////////////////////////////////////
       // ITALIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -1791,17 +1776,17 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {  ;
          "&Chiudi",          ; // 1
-         "&Nuovo",           ; // 2
-         "&Modifica",        ; // 3
-         "&Elimina",         ; // 4
-         "&Trova",           ; // 5
-         "&Stampa",          ; // 6
-         "&Annulla",         ; // 7
-         "&Ok",              ; // 8
-         "C&opia",           ; // 9
-         "A&ttiva Filtro",   ; // 10
-         "&Disattiva Filtro",; // 11
-         "&Ripristina"       } // 12
+      "&Nuovo",           ; // 2
+      "&Modifica",        ; // 3
+      "&Elimina",         ; // 4
+      "&Trova",           ; // 5
+      "&Stampa",          ; // 6
+      "&Annulla",         ; // 7
+      "&Ok",              ; // 8
+      "C&opia",           ; // 9
+      "A&ttiva Filtro",   ; // 10
+      "&Disattiva Filtro",; // 11
+      "&Ripristina"       } // 12
       _HMG_aLangLabel := {                ;
          "Nessuno",                       ; // 1
       "Record",                           ; // 2
@@ -1880,9 +1865,7 @@ PROCEDURE InitMessages
       CRLF + "Ripristinare il record cancellato             " + CRLF + "Sei sicuro  ?    " + CRLF              } // 42
 
    CASE cLang == "PL"  // Polish
-      /////////////////////////////////////////////////////////////
       // POLISH
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -2063,12 +2046,10 @@ PROCEDURE InitMessages
       CRLF + "Czy przwrуciж skasowny   " + CRLF + "Czy jesteњ pewien?    " + CRLF                              } // 42
 
    CASE cLang == "PT"  // Portuguese
-      /////////////////////////////////////////////////////////////
       // PORTUGUESE
-      ////////////////////////////////////////////////////////////
- 
+
       // MISC MESSAGES
- 
+
       _HMG_MESSAGE [1] := "Vocк tem Certeza ?"
       _HMG_MESSAGE [2] := "Fechar Janela"
       _HMG_MESSAGE [3] := "Fechamento nгo permitido"
@@ -2078,9 +2059,9 @@ PROCEDURE InitMessages
       _HMG_MESSAGE [7] := "Cancela"
       _HMG_MESSAGE [8] := "Aplicar"
       _HMG_MESSAGE [9] := "Pбg."
- 
+
       // BROWSE
- 
+
       _HMG_BRWLangButton  := { "Incluir"  , ;
          "Alterar"  , ;
          "Cancelar" , ;
@@ -2097,9 +2078,9 @@ PROCEDURE InitMessages
          "Aguarde..."                                       , ;
          "Dado Invбlido"                                     }
       _HMG_BRWLangMessage := { "Vocк tem Certeza ?" , "Apaga Registro" }
- 
+
       // EDIT
- 
+
       _HMG_aABMLangUser   := { Chr( 13 ) + "Serб apagado o registro atual" + Chr( 13 ) + "Tem certeza ?"                          + Chr( 13 ) , ;
          Chr( 13 ) + "Nгo existe um нndice ativo"    + Chr( 13 ) + "Nгo й possнvel realizar a busca"        + Chr( 13 ) , ;
          Chr( 13 ) + "Nгo encontrado o campo нndice" + Chr( 13 ) + "Nгo й possнvel realizar a busca"        + Chr( 13 ) , ;
@@ -2151,9 +2132,9 @@ PROCEDURE InitMessages
          "EDIT, Atualizaзгo fora do limite (por favor, comunique o erro)"         , ;
          "EDIT, Evento principal fora do limite (por favor, comunique o erro)"    , ;
          "EDIT, Evento mostrado estб fora do limite (por favor, comunique o erro)" }
- 
+
       // EDIT EXTENDED
- 
+
       _HMG_aLangButton    := { "&Sair",             ; // 1
       "&Novo",             ; // 2
       "&Alterar",          ; // 3
@@ -2242,9 +2223,7 @@ PROCEDURE InitMessages
       CRLF + "Vocк vai restabelecer o registro apagado   " + CRLF + "Tem certeza ?    " + CRLF                               } // 42
 
    CASE cLang == "RU"  // Russian
-      /////////////////////////////////////////////////////////////
       // RUSSIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -2341,98 +2320,96 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Закрыть",           ; // 1
-         "&Создать",           ; // 2
-         "&Правка",            ; // 3
-         "&Удалить",           ; // 4
-         "&Найти",             ; // 5
-         "П&ечать",            ; // 6
-         "От&мена",            ; // 7
-         "&Ок",                ; // 8
-         "&Копия",             ; // 9
-         "&Вкл. фильтр",       ; // 10
-         "С&нять фильтр",      ; // 11
-         "&Восстановить"       } // 12
+      "&Создать",           ; // 2
+      "&Правка",            ; // 3
+      "&Удалить",           ; // 4
+      "&Найти",             ; // 5
+      "П&ечать",            ; // 6
+      "От&мена",            ; // 7
+      "&Ок",                ; // 8
+      "&Копия",             ; // 9
+      "&Вкл. фильтр",       ; // 10
+      "С&нять фильтр",      ; // 11
+      "&Восстановить"       } // 12
       _HMG_aLangLabel := { ;
          "Нет",                          ; // 1
-         "Запись",                       ; // 2
-         "Всего",                        ; // 3
-         "Упорядочение",                 ; // 4
-         "Параметры",                    ; // 5
-         "Новая запись",                 ; // 6
-         "Изменить запись",              ; // 7
-         "Выбрать запись",               ; // 8
-         "Найти запись",                 ; // 9
-         "Параметры печати",             ; // 10
-         "Доступные поля",               ; // 11
-         "Поля для печати",              ; // 12
-         "Доступные принтеры",           ; // 13
-         "Начать печать с записи",       ; // 14
-         "Завершить печать записью",     ; // 15
-         "Удалить запись",               ; // 16
-         "Просмотр",                     ; // 17
-         "Страница миниатюр",            ; // 18
-         "Условие фильтра: ",            ; // 19
-         "Фильтр: ",                     ; // 20
-         "Параметры фильтра" ,           ; // 21
-         "Поля базы данных" ,            ; // 22
-         "Операторы сравнения",          ; // 23
-         "Значение фильтра",             ; // 24
-         "Выбор поля для фильтра",       ; // 25
-         "Выбор оператора сравнения",    ; // 26
-         "Равно",                        ; // 27
-         "Не равно",                     ; // 28
-         "Больше",                       ; // 29
-         "Меньше",                       ; // 30
-         "Больше или равно",             ; // 31
-         "Меньше или равно"           }    // 32
+      "Запись",                       ; // 2
+      "Всего",                        ; // 3
+      "Упорядочение",                 ; // 4
+      "Параметры",                    ; // 5
+      "Новая запись",                 ; // 6
+      "Изменить запись",              ; // 7
+      "Выбрать запись",               ; // 8
+      "Найти запись",                 ; // 9
+      "Параметры печати",             ; // 10
+      "Доступные поля",               ; // 11
+      "Поля для печати",              ; // 12
+      "Доступные принтеры",           ; // 13
+      "Начать печать с записи",       ; // 14
+      "Завершить печать записью",     ; // 15
+      "Удалить запись",               ; // 16
+      "Просмотр",                     ; // 17
+      "Страница миниатюр",            ; // 18
+      "Условие фильтра: ",            ; // 19
+      "Фильтр: ",                     ; // 20
+      "Параметры фильтра" ,           ; // 21
+      "Поля базы данных" ,            ; // 22
+      "Операторы сравнения",          ; // 23
+      "Значение фильтра",             ; // 24
+      "Выбор поля для фильтра",       ; // 25
+      "Выбор оператора сравнения",    ; // 26
+      "Равно",                        ; // 27
+      "Не равно",                     ; // 28
+      "Больше",                       ; // 29
+      "Меньше",                       ; // 30
+      "Больше или равно",             ; // 31
+      "Меньше или равно"           }    // 32
       _HMG_aLangUser := { ;
          CRLF + "Не обнаружена активная область."  + CRLF + "Выберите любую область перед обращением к EDIT" + CRLF, ; // 1
-         "Введите текстовое значения",                                                                               ; // 2
-         "Введите число",                                                                                            ; // 3
-         "Укажите дату",                                                                                             ; // 4
-         "Логическое значение",                                                                                      ; // 5
-         "Введите значение поля",                                                                                    ; // 6
-         "Выберите любую запись и нажмите OK",                                                                       ; // 7
-         CRLF + "Текущая запись будет удалена " + CRLF + "Продолжать ?    " + CRLF,                                  ; // 8
-         CRLF + "Нет упорядочения " + CRLF + "Выберите одно из существующих " + CRLF,                                ; // 9
-         CRLF + "Поиск в полях примечаний и логических полях не выполняется " + CRLF,                                ; // 10
-         CRLF + "Запись не найдена  " + CRLF,                                                                        ; // 11
-         "Поля для включение в список печати",                                                                       ; // 12
-         "Список полей для печати",                                                                                  ; // 13
-         "Выбор принтера",                                                                                           ; // 14
-         "Нажмите для переноса поля в список печати",                                                                ; // 15
-         "Нажмите для исключения поля из списка печати",                                                             ; // 16
-         "Запись, с которой начинается печать",                                                                      ; // 17
-         "Запись, на которой завершается печать",                                                                    ; // 18
-         CRLF + "Включаемых полей нет " + CRLF,                                                                      ; // 19
-         CRLF + "Первое поле на включение " + CRLF,                                                                  ; // 20
-         CRLF + "Исключаемых полей нет " + CRLF,                                                                     ; // 21
-         CRLF + "Первое поле на исключение " + CRLF,                                                                 ; // 22
-         CRLF + "Нет выбранных полей " + CRLF + "Сформируйте список для печати " + CRLF,                             ; // 23
-         CRLF + "Слишком много полей " + CRLF + "Уменьшите их количество " + CRLF,                                   ; // 24
-         CRLF + "Принтер не готов  " + CRLF,                                                                         ; // 25
-         "Упорядочение ",                                                                                            ; // 26
-         "От записи ",                                                                                               ; // 27
-         "До записи ",                                                                                               ; // 28
-         "Да",                                                                                                       ; // 29
-         "Нет",                                                                                                      ; // 30
-         "Страница:",                                                                                                ; // 31
-         CRLF + "Выберите принтер  " + CRLF,                                                                         ; // 32
-         "Отфильтровано по",                                                                                         ; // 33
-         CRLF + "Это не активный фильтр    " + CRLF,                                                                 ; // 34
-         CRLF + "Поля примечаний не фильтруются  " + CRLF,                                                           ; // 35
-         CRLF + "Выберите поля для фильтра    " + CRLF,                                                              ; // 36
-         CRLF + "Выберите любой оператор для фильтра" + CRLF,                                                        ; // 37
-         CRLF + "Наберите любое значение для фильтра" + CRLF,                                                        ; // 38
-         CRLF + "Нет активных фильтров   " + CRLF,                                                                   ; // 39
-         CRLF + "Снять фильтр ?   " + CRLF,                                                                          ; // 40
-         CRLF + "Запись блокирована другим пользователем " + CRLF,                                                   ; // 41
-         CRLF + "Текущая запись будет восстановлена " + CRLF + "Продолжать ?    " + CRLF                             } // 42
+      "Введите текстовое значения",                                                                               ; // 2
+      "Введите число",                                                                                            ; // 3
+      "Укажите дату",                                                                                             ; // 4
+      "Логическое значение",                                                                                      ; // 5
+      "Введите значение поля",                                                                                    ; // 6
+      "Выберите любую запись и нажмите OK",                                                                       ; // 7
+      CRLF + "Текущая запись будет удалена " + CRLF + "Продолжать ?    " + CRLF,                                  ; // 8
+      CRLF + "Нет упорядочения " + CRLF + "Выберите одно из существующих " + CRLF,                                ; // 9
+      CRLF + "Поиск в полях примечаний и логических полях не выполняется " + CRLF,                                ; // 10
+      CRLF + "Запись не найдена  " + CRLF,                                                                        ; // 11
+      "Поля для включение в список печати",                                                                       ; // 12
+      "Список полей для печати",                                                                                  ; // 13
+      "Выбор принтера",                                                                                           ; // 14
+      "Нажмите для переноса поля в список печати",                                                                ; // 15
+      "Нажмите для исключения поля из списка печати",                                                             ; // 16
+      "Запись, с которой начинается печать",                                                                      ; // 17
+      "Запись, на которой завершается печать",                                                                    ; // 18
+      CRLF + "Включаемых полей нет " + CRLF,                                                                      ; // 19
+      CRLF + "Первое поле на включение " + CRLF,                                                                  ; // 20
+      CRLF + "Исключаемых полей нет " + CRLF,                                                                     ; // 21
+      CRLF + "Первое поле на исключение " + CRLF,                                                                 ; // 22
+      CRLF + "Нет выбранных полей " + CRLF + "Сформируйте список для печати " + CRLF,                             ; // 23
+      CRLF + "Слишком много полей " + CRLF + "Уменьшите их количество " + CRLF,                                   ; // 24
+      CRLF + "Принтер не готов  " + CRLF,                                                                         ; // 25
+      "Упорядочение ",                                                                                            ; // 26
+      "От записи ",                                                                                               ; // 27
+      "До записи ",                                                                                               ; // 28
+      "Да",                                                                                                       ; // 29
+      "Нет",                                                                                                      ; // 30
+      "Страница:",                                                                                                ; // 31
+      CRLF + "Выберите принтер  " + CRLF,                                                                         ; // 32
+      "Отфильтровано по",                                                                                         ; // 33
+      CRLF + "Это не активный фильтр    " + CRLF,                                                                 ; // 34
+      CRLF + "Поля примечаний не фильтруются  " + CRLF,                                                           ; // 35
+      CRLF + "Выберите поля для фильтра    " + CRLF,                                                              ; // 36
+      CRLF + "Выберите любой оператор для фильтра" + CRLF,                                                        ; // 37
+      CRLF + "Наберите любое значение для фильтра" + CRLF,                                                        ; // 38
+      CRLF + "Нет активных фильтров   " + CRLF,                                                                   ; // 39
+      CRLF + "Снять фильтр ?   " + CRLF,                                                                          ; // 40
+      CRLF + "Запись блокирована другим пользователем " + CRLF,                                                   ; // 41
+      CRLF + "Текущая запись будет восстановлена " + CRLF + "Продолжать ?    " + CRLF                             } // 42
 
    CASE cLang == "UK" .OR. cLang == "UA"  // Ukrainian
-      /////////////////////////////////////////////////////////////
       // UKRAINIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -2613,9 +2590,7 @@ PROCEDURE InitMessages
       CRLF + "Поточний запис буде відновлено " + CRLF + "Продовжити ?    " + CRLF                                  } // 42
 
    CASE cLang == "ES"  // Spanish
-      /////////////////////////////////////////////////////////////
       // SPANISH
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -2629,7 +2604,7 @@ PROCEDURE InitMessages
       _HMG_MESSAGE [8] := 'Apply'
       _HMG_MESSAGE [9] := 'Pag.'
 
-      // BROWSE  
+      // BROWSE
 
       _HMG_BRWLangButton := { "Agregar"    , ;
          "Editar"     , ;
@@ -2796,9 +2771,7 @@ PROCEDURE InitMessages
       CRLF + "Se dispone a restaurar el registro suprimido   " + CRLF + "їEsta seguro?    " + CRLF,                  } // 42
 
    CASE cLang == "FI"  // Finnish
-      ///////////////////////////////////////////////////////////////////////
       // FINNISH
-      ///////////////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -2983,9 +2956,7 @@ PROCEDURE InitMessages
       CRLF + "Palautatko poistetun tietueen   " + CRLF + "Oletko varma?    " + CRLF  } // 42
 
    CASE cLang == "NL"  // Dutch
-      /////////////////////////////////////////////////////////////
       // DUTCH
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -3167,9 +3138,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF } // 42
 
    CASE cLang == "SL"  // Slovenian
-      /////////////////////////////////////////////////////////////
       // SLOVENIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -3353,9 +3322,7 @@ PROCEDURE InitMessages
       CRLF + "Obnovili boste pobrisano vrstico   " + CRLF + "Ste prepriиani?    " + CRLF                       } // 42
 
    CASE cLang == "SK"  // Slovak
-      /////////////////////////////////////////////////////////////
       // SLOVAK
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -3537,9 +3504,7 @@ PROCEDURE InitMessages
       CRLF + "Chcete obnoviќ vymazanй zбznamy   " + CRLF + "Ste si istэ(б)?    " + CRLF                   } // 42
 
    CASE cLang == "HU"  // Hungarian
-      /////////////////////////////////////////////////////////////
       // HUNGARIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -3721,9 +3686,7 @@ PROCEDURE InitMessages
       CRLF + "Tцrцlt rekordokat kнvбn visszahнvni   " + CRLF + "Biztos benne ?    " + CRLF                  } // 42
 
    CASE cLang == "EL"  // Greek - Ellinika
-      /////////////////////////////////////////////////////////////
       // GREEK - ЕЛЛЗНЙКБ - EL
-      /////////////////////////////////////////////////////////////
 
       // MISC MESSAGES (GREEK EL)
 
@@ -3806,7 +3769,7 @@ PROCEDURE InitMessages
          "ДйбгсбцЮ"            , ;
          "Екфхрщуз"            , ;
          "КлеЯуймп"     }
-	
+
       _HMG_aABMLangError  := { "ЕРЕОЕСГБУЙБ, фп ьнпмб ресйпчзт есгбуйбт ден хрбсчей"                 , ;
          "ЕРЕОЕСГБУЙБ, з ресйпчЮ есгбуЯбт Эчей ресйууьфесб брп 16 редЯб"                 , ;
          "ЕРЕОЕСГБУЙБ, схимьт бнбнЭщузт екфьт псЯщн (рбсбкблю гнщуфпрпйЮубфе фп bug)"    , ;
@@ -3907,9 +3870,7 @@ PROCEDURE InitMessages
       CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF    } // 42
 
    CASE cLang == "BG"  // Bulgarian
-      /////////////////////////////////////////////////////////////
       // BULGARIAN
-      ////////////////////////////////////////////////////////////
 
       // MISC MESSAGES
 
@@ -4090,6 +4051,7 @@ PROCEDURE InitMessages
 
    ENDCASE
 
-#endif
+   #endif
 
-RETURN
+   RETURN
+

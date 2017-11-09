@@ -8,7 +8,6 @@ PROCEDURE MAIN
 
    PUBLIC New_rec := .F., _qry_exp := ""
 
-//---------------------------------------------*
    SET PROCEDURE TO Open_dbf.prg
    SET PROCEDURE TO Open_ntx.prg
    SET PROCEDURE TO Use_dbf.prg
@@ -21,124 +20,123 @@ PROCEDURE MAIN
    Open_dbf()
    Open_ntx()
 
-   Use_employe()
-//---------------------------------------------*
+   USE_employe()
 
    FOR nFldCnt := 1 TO EMPLOYE->( FCount() )
       AAdd( aFields, EMPLOYE->( FieldName( nFldCnt ) ) )
    NEXT
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 800 ;
-      HEIGHT 700 ;
-      TITLE "Table EMPLOYE" ;
-      ICON "EMPLOYE.ICO" ;
-      MAIN ;
-      ON INIT brw_idx := GetControlIndex( 'Browse_1', 'Win_1' )
+         AT 0, 0 ;
+         WIDTH 800 ;
+         HEIGHT 700 ;
+         TITLE "Table EMPLOYE" ;
+         ICON "EMPLOYE.ICO" ;
+         MAIN ;
+         ON INIT brw_idx := GetControlIndex( 'Browse_1', 'Win_1' )
 
-   ON KEY ESCAPE ACTION Win_1.Release
+      ON KEY ESCAPE ACTION Win_1.Release
 
-   DEFINE STATUSBAR FONT "Arial" SIZE 12
-      STATUSITEM "Table EMPLOYE"
-      KEYBOARD WIDTH 90
-      DATE WIDTH 100
-      CLOCK WIDTH 80
-   END STATUSBAR
+      DEFINE STATUSBAR FONT "Arial" SIZE 12
+         STATUSITEM "Table EMPLOYE"
+         KEYBOARD WIDTH 90
+         DATE WIDTH 100
+         CLOCK WIDTH 80
+      END STATUSBAR
 
-   DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 60, 40 IMAGESIZE 32, 32 FLAT BORDER
+      DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 60, 40 IMAGESIZE 32, 32 FLAT BORDER
 
-   BUTTON FIRST_EMPL ;
-      CAPTION "Fi&rst" ;
-      PICTURE "go_first.bmp" ;
-      ACTION ( _BrowseHome( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
+         BUTTON FIRST_EMPL ;
+            CAPTION "Fi&rst" ;
+            PICTURE "go_first.bmp" ;
+            ACTION ( _BrowseHome( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
 
-   BUTTON PREV_EMPL ;
-      CAPTION "Pre&v" ;
-      PICTURE "go_prev.bmp" ;
-      ACTION ( _BrowseUp( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
+         BUTTON PREV_EMPL ;
+            CAPTION "Pre&v" ;
+            PICTURE "go_prev.bmp" ;
+            ACTION ( _BrowseUp( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
 
-   BUTTON NEXT_EMPL ;
-      CAPTION "Nex&t" ;
-      PICTURE "go_next.bmp" ;
-      ACTION ( _BrowseDown( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
+         BUTTON NEXT_EMPL ;
+            CAPTION "Nex&t" ;
+            PICTURE "go_next.bmp" ;
+            ACTION ( _BrowseDown( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) )
 
-   BUTTON LAST_EMPL ;
-      CAPTION "&Last" ;
-      PICTURE "go_last.bmp" ;
-      ACTION ( _BrowseEnd( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) ) SEPARATOR
+         BUTTON LAST_EMPL ;
+            CAPTION "&Last" ;
+            PICTURE "go_last.bmp" ;
+            ACTION ( _BrowseEnd( '', '', brw_idx ), Win_1.Browse_1.Value := EMPLOYE->( RecNo() ) ) SEPARATOR
 
-   BUTTON FIND_EMPL ;
-      CAPTION "&Find" ;
-      PICTURE "edit_find.bmp" ;
-      ACTION Find_EMPL()
+         BUTTON FIND_EMPL ;
+            CAPTION "&Find" ;
+            PICTURE "edit_find.bmp" ;
+            ACTION Find_EMPL()
 
-   BUTTON NEW_EMPL ;
-      CAPTION "&New" ;
-      PICTURE "edit_new.bmp" ;
-      ACTION ( New_rec := .T. , NewRecord_EMPL() )
+         BUTTON NEW_EMPL ;
+            CAPTION "&New" ;
+            PICTURE "edit_new.bmp" ;
+            ACTION ( New_rec := .T. , NewRecord_EMPL() )
 
-   BUTTON EDIT_EMPL ;
-      CAPTION "&Edit" ;
-      PICTURE "edit_edit.bmp" ;
-      ACTION iif ( RecordStatus_EMPL(), EnableField_EMPL(), Nil )
+         BUTTON EDIT_EMPL ;
+            CAPTION "&Edit" ;
+            PICTURE "edit_edit.bmp" ;
+            ACTION iif ( RecordStatus_EMPL(), EnableField_EMPL(), Nil )
 
-   BUTTON DELETE_EMPL ;
-      CAPTION "&Delete" ;
-      PICTURE "edit_delete.bmp" ;
-      ACTION iif ( RecordStatus_EMPL(), DeleteRecord_EMPL(), Nil )
+         BUTTON DELETE_EMPL ;
+            CAPTION "&Delete" ;
+            PICTURE "edit_delete.bmp" ;
+            ACTION iif ( RecordStatus_EMPL(), DeleteRecord_EMPL(), Nil )
 
-   BUTTON PRINT_EMPL ;
-      CAPTION "&Print" ;
-      PICTURE "edit_print.bmp" ;
-      ACTION PrintData_EMPL()
+         BUTTON PRINT_EMPL ;
+            CAPTION "&Print" ;
+            PICTURE "edit_print.bmp" ;
+            ACTION PrintData_EMPL()
 
-   BUTTON EXIT_EMPL ;
-      CAPTION "E&xit" ;
-      PICTURE "edit_close.bmp" ;
-      ACTION Win_1.Release
+         BUTTON EXIT_EMPL ;
+            CAPTION "E&xit" ;
+            PICTURE "edit_close.bmp" ;
+            ACTION Win_1.Release
 
-   END TOOLBAR
+      END TOOLBAR
 
-   PaintDisplay_EMPL( aFields )
+      PaintDisplay_EMPL( aFields )
 
-   @ 90, 20 BROWSE Browse_1 ;
-      WIDTH 440 ;
-      HEIGHT 450 ;
-      FONT "Arial" ;
-      SIZE 11 ;
-      HEADERS aFields ;
-      WIDTHS { 70, 130, 130, 120, 90, 90, 110, 110, 110, 110 } ;
-      WORKAREA EMPLOYE ;
-      FIELDS aFields ;
-      JUSTIFY { BROWSE_JTFY_RIGHT, , , , BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, , , BROWSE_JTFY_RIGHT, } ;
-      ON CHANGE LoadData_EMPL() ;
-      ON HEADCLICK { {|| Head1_EMPL() }, , , , , , , , , {|| Head10_EMPL() } } ;
-      ON DBLCLICK ( EnableField_EMPL(), iif ( ! RecordStatus_EMPL(), DisableField_EMPL(), Nil ) )
+      @ 90, 20 BROWSE Browse_1 ;
+         WIDTH 440 ;
+         HEIGHT 450 ;
+         FONT "Arial" ;
+         SIZE 11 ;
+         HEADERS aFields ;
+         WIDTHS { 70, 130, 130, 120, 90, 90, 110, 110, 110, 110 } ;
+         WORKAREA EMPLOYE ;
+         FIELDS aFields ;
+         JUSTIFY { BROWSE_JTFY_RIGHT, , , , BROWSE_JTFY_RIGHT, BROWSE_JTFY_RIGHT, , , BROWSE_JTFY_RIGHT, } ;
+         ON CHANGE LoadData_EMPL() ;
+         ON HEADCLICK { {|| Head1_EMPL() }, , , , , , , , , {|| Head10_EMPL() } } ;
+         ON DBLCLICK ( EnableField_EMPL(), iif ( ! RecordStatus_EMPL(), DisableField_EMPL(), Nil ) )
 
-   @ 580, 50 BUTTON SAVE_EMPL ;
-      CAPTION "&Save" ;
-      PICTURE "ok.bmp" ;
-      ACTION SaveRecord_EMPL() ;
-      RIGHT ;
-      WIDTH 100 ;
-      HEIGHT 40
+      @ 580, 50 BUTTON SAVE_EMPL ;
+         CAPTION "&Save" ;
+         PICTURE "ok.bmp" ;
+         ACTION SaveRecord_EMPL() ;
+         RIGHT ;
+         WIDTH 100 ;
+         HEIGHT 40
 
-   @ 580, 150 BUTTON CANCEL_EMPL ;
-      CAPTION "&Cancel" ;
-      PICTURE "cancel.bmp" ;
-      ACTION CancelEdit_EMPL() ;
-      RIGHT ;
-      WIDTH 100 ;
-      HEIGHT 40
+      @ 580, 150 BUTTON CANCEL_EMPL ;
+         CAPTION "&Cancel" ;
+         PICTURE "cancel.bmp" ;
+         ACTION CancelEdit_EMPL() ;
+         RIGHT ;
+         WIDTH 100 ;
+         HEIGHT 40
 
-   @ 580, 300 BUTTON QUERY_EMPL ;
-      CAPTION "&Query" ;
-      PICTURE "edit_find.bmp" ;
-      ACTION QueryRecord_EMPL() ;
-      RIGHT ;
-      WIDTH 100 ;
-      HEIGHT 40
+      @ 580, 300 BUTTON QUERY_EMPL ;
+         CAPTION "&Query" ;
+         PICTURE "edit_find.bmp" ;
+         ACTION QueryRecord_EMPL() ;
+         RIGHT ;
+         WIDTH 100 ;
+         HEIGHT 40
 
    END WINDOW
 
@@ -151,8 +149,8 @@ PROCEDURE MAIN
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE DisableField_EMPL
 
    LOCAL nControl
@@ -171,8 +169,8 @@ PROCEDURE DisableField_EMPL
 
    Win_1.Browse_1.SetFocus
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE EnableField_EMPL
 
    LOCAL nControl
@@ -191,8 +189,8 @@ PROCEDURE EnableField_EMPL
 
    Win_1.Control_2.SetFocus
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE DisableToolbar_EMPL
 
    Win_1.Toolbar_1.FIRST_EMPL.Enabled  := .F.
@@ -206,8 +204,8 @@ PROCEDURE DisableToolbar_EMPL
    Win_1.Toolbar_1.PRINT_EMPL.Enabled  := .F.
    Win_1.Toolbar_1.EXIT_EMPL.Enabled   := .F.
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE EnableToolbar_EMPL
 
    Win_1.Toolbar_1.FIRST_EMPL.Enabled  := .T.
@@ -221,8 +219,8 @@ PROCEDURE EnableToolbar_EMPL
    Win_1.Toolbar_1.PRINT_EMPL.Enabled  := .T.
    Win_1.Toolbar_1.EXIT_EMPL.Enabled   := .T.
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 FUNCTION RecordStatus_EMPL()
 
    LOCAL RetVal
@@ -236,8 +234,8 @@ FUNCTION RecordStatus_EMPL()
       RetVal := .F.
    ENDIF
 
-RETURN RetVal
-//---------------------------------------------*
+   RETURN RetVal
+
 PROCEDURE LoadData_EMPL
 
    LOCAL nFldCnt
@@ -248,8 +246,8 @@ PROCEDURE LoadData_EMPL
       SetProperty( "Win_1", "Control_" + hb_ntos( nFldCnt ), "Value", EMPLOYE->( FieldGet( nFldCnt ) ) )
    NEXT
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE CancelEdit_EMPL
 
    DisableField_EMPL()
@@ -259,8 +257,8 @@ PROCEDURE CancelEdit_EMPL
 
    Win_1.StatusBar.Item( 1 ) := "Table EMPLOYE"
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE SaveRecord_EMPL
 
    LOCAL nRecNo, nFldCnt
@@ -288,8 +286,8 @@ PROCEDURE SaveRecord_EMPL
 
    Win_1.StatusBar.Item( 1 ) := "Save Record"
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE NewRecord_EMPL
 
    Win_1.StatusBar.Item( 1 ) := "Editing"
@@ -313,8 +311,8 @@ PROCEDURE NewRecord_EMPL
 
    Win_1.Control_2.SetFocus
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE DeleteRecord_EMPL
 
    IF MsgYesNo ( "Are you sure you want to delete the current record?", "Confirmation" )
@@ -328,8 +326,8 @@ PROCEDURE DeleteRecord_EMPL
    ENDIF
    EMPLOYE->( dbUnlock() )
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE Find_EMPL
 
    Win_1.StatusBar.Item( 1 ) := "Query"
@@ -350,8 +348,8 @@ PROCEDURE Find_EMPL
    Win_1.Query_EMPL.Enabled := .T.
    Win_1.Control_1.SetFocus
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE PrintData_EMPL
 
    LOCAL PrevRec
@@ -374,8 +372,8 @@ PROCEDURE PrintData_EMPL
 
    EMPLOYE->( dbGoto( PrevRec ) )
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE PaintDisplay_EMPL( aFldNames )
 
    LOCAL nCnt, cLblNames, nRow := 100
@@ -399,8 +397,8 @@ PROCEDURE PaintDisplay_EMPL( aFldNames )
    @ 340, 610 TEXTBOX  Control_9 NUMERIC INPUTMASK "99999.99"
    @ 370, 610 TEXTBOX  Control_10        INPUTMASK Replicate( "A", 10 )
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE Head1_EMPL
 
    SELECT EMPLOYE
@@ -410,8 +408,8 @@ PROCEDURE Head1_EMPL
    Win_1.Browse_1.Refresh
    LoadData_EMPL()
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE Head10_EMPL
 
    SELECT EMPLOYE
@@ -421,8 +419,8 @@ PROCEDURE Head10_EMPL
    Win_1.Browse_1.Refresh
    LoadData_EMPL()
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE QueryRecord_EMPL
 
    LOCAL found_rec
@@ -455,8 +453,8 @@ PROCEDURE QueryRecord_EMPL
    Win_1.Browse_1.Refresh
    LoadData_EMPL()
 
-RETURN
-//---------------------------------------------*
+   RETURN
+
 PROCEDURE PreQuery_EMPL
 
    LOCAL _ima_filter
@@ -543,6 +541,7 @@ PROCEDURE PreQuery_EMPL
       _qry_exp += "CLI_CITY = " + Chr( 34 ) + Win_1.Control_10.Value + Chr( 34 )
    ENDIF
 
-RETURN
+   RETURN
 
-// end of program *
+   // end of program *
+

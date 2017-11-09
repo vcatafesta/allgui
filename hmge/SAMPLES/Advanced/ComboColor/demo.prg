@@ -1,15 +1,12 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
-
-#define CLR_DEFAULT		0xff000000
+#define CLR_DEFAULT      0xff000000
 #define CLR_NONE                0xFFFFFFFF
 
 #define COLOR_SCROLLBAR         0
@@ -38,198 +35,189 @@
 #define COLOR_INFOTEXT          23
 #define COLOR_INFOBK            24
 
+FUNCTION Main()
 
-*------------------------------------------------
-Function Main()
-*------------------------------------------------
-LOCAL n, aColorName := {}, aSysColorName := {}
-LOCAL aColor := ;
-                {{YELLOW,    "YELLOW"},;
-                 {PINK,      "PINK"},;
-                 {RED,       "RED"},;
-                 {FUCHSIA,   "FUCHSIA"},;
-                 {BROWN,     "BROWN"},;
-                 {ORANGE,    "ORANGE"},;
-                 {GREEN,     "GREEN"},;
-                 {PURPLE,    "PURPLE"},;
-                 {BLACK,     "BLACK"},;
-                 {WHITE,     "WHITE"},;
-                 {GRAY,      "GRAY"},;
-                 {BLUE,      "BLUE"},;
-                 {SILVER,    "SILVER"},;
-                 {MAROON,    "MAROON"},;
-                 {OLIVE,     "OLIVE"},;
-                 {LGREEN,    "LGREEN"},;
-                 {AQUA,      "AQUA"},;
-                 {NAVY,      "NAVY"},;
-                 {TEAL,      "TEAL"}}
+   LOCAL n, aColorName := {}, aSysColorName := {}
+   LOCAL aColor := ;
+      {{YELLOW,    "YELLOW"},;
+      {PINK,      "PINK"},;
+      {RED,       "RED"},;
+      {FUCHSIA,   "FUCHSIA"},;
+      {BROWN,     "BROWN"},;
+      {ORANGE,    "ORANGE"},;
+      {GREEN,     "GREEN"},;
+      {PURPLE,    "PURPLE"},;
+      {BLACK,     "BLACK"},;
+      {WHITE,     "WHITE"},;
+      {GRAY,      "GRAY"},;
+      {BLUE,      "BLUE"},;
+      {SILVER,    "SILVER"},;
+      {MAROON,    "MAROON"},;
+      {OLIVE,     "OLIVE"},;
+      {LGREEN,    "LGREEN"},;
+      {AQUA,      "AQUA"},;
+      {NAVY,      "NAVY"},;
+      {TEAL,      "TEAL"}}
 
-LOCAL aSysColor := ;
- {{COLOR_3DDKSHADOW,         "Dark shadow for 3D display elements"},;
-  {COLOR_BTNFACE,            "Face color for 3D display elements"},;
-  {COLOR_BTNHIGHLIGHT,       "Highlight color for 3D display elements"},;
-  {COLOR_3DLIGHT,            "Light color for 3D display elements"},;
-  {COLOR_BTNSHADOW,          "Shadow color for 3D display elements"},;
-  {COLOR_ACTIVEBORDER,       "Active window border"},;
-  {COLOR_ACTIVECAPTION,      "Active window caption"},;
-  {COLOR_APPWORKSPACE,       "Background color of MDI applications"},;
-  {COLOR_BACKGROUND,         "Desktop"},;
-  {COLOR_BTNTEXT,            "Text on push buttons"},;
-  {COLOR_CAPTIONTEXT,        "Text in caption, size, and scroll arrow box"},;
-  {COLOR_GRAYTEXT,           "Grayed (disabled) text"},;
-  {COLOR_HIGHLIGHT,          "Item(s) selected in a control"},;
-  {COLOR_HIGHLIGHTTEXT,      "Text of item(s) selected in a control"},;
-  {COLOR_INACTIVEBORDER,     "Inactive window border"},;
-  {COLOR_INACTIVECAPTION,    "Inactive window caption"},;
-  {COLOR_INACTIVECAPTIONTEXT,"Color of text in an inactive caption"},;
-  {COLOR_INFOBK,             "Background color for tooltip controls"},;
-  {COLOR_INFOTEXT,           "Text color for tooltip controls"},;
-  {COLOR_MENU,               "Menu background"},;
-  {COLOR_MENUTEXT,           "Text in menus"},;
-  {COLOR_SCROLLBAR,          "Scroll bar gray area"},;
-  {COLOR_WINDOW,             "Window background"},;
-  {COLOR_WINDOWFRAME,        "Window frame"},;
-  {COLOR_WINDOWTEXT,         "Text in windows"}}
+   LOCAL aSysColor := ;
+      {{COLOR_3DDKSHADOW,         "Dark shadow for 3D display elements"},;
+      {COLOR_BTNFACE,            "Face color for 3D display elements"},;
+      {COLOR_BTNHIGHLIGHT,       "Highlight color for 3D display elements"},;
+      {COLOR_3DLIGHT,            "Light color for 3D display elements"},;
+      {COLOR_BTNSHADOW,          "Shadow color for 3D display elements"},;
+      {COLOR_ACTIVEBORDER,       "Active window border"},;
+      {COLOR_ACTIVECAPTION,      "Active window caption"},;
+      {COLOR_APPWORKSPACE,       "Background color of MDI applications"},;
+      {COLOR_BACKGROUND,         "Desktop"},;
+      {COLOR_BTNTEXT,            "Text on push buttons"},;
+      {COLOR_CAPTIONTEXT,        "Text in caption, size, and scroll arrow box"},;
+      {COLOR_GRAYTEXT,           "Grayed (disabled) text"},;
+      {COLOR_HIGHLIGHT,          "Item(s) selected in a control"},;
+      {COLOR_HIGHLIGHTTEXT,      "Text of item(s) selected in a control"},;
+      {COLOR_INACTIVEBORDER,     "Inactive window border"},;
+      {COLOR_INACTIVECAPTION,    "Inactive window caption"},;
+      {COLOR_INACTIVECAPTIONTEXT,"Color of text in an inactive caption"},;
+      {COLOR_INFOBK,             "Background color for tooltip controls"},;
+      {COLOR_INFOTEXT,           "Text color for tooltip controls"},;
+      {COLOR_MENU,               "Menu background"},;
+      {COLOR_MENUTEXT,           "Text in menus"},;
+      {COLOR_SCROLLBAR,          "Scroll bar gray area"},;
+      {COLOR_WINDOW,             "Window background"},;
+      {COLOR_WINDOWFRAME,        "Window frame"},;
+      {COLOR_WINDOWTEXT,         "Text in windows"}}
 
-LOCAL BmpW := 16
-LOCAL BmpH := 16
+   LOCAL BmpW := 16
+   LOCAL BmpH := 16
 
    AEval(aColor, {|x| AAdd(aColorName, x[2]) })
    AEval(aSysColor, {|x| AAdd(aSysColorName, x[2]) })
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 500 HEIGHT 300 ;
-      TITLE 'Harbour MiniGUI Combo Color Demo - by Janusz Pora' ;
-      MAIN NOMAXIMIZE NOSIZE
+         AT 0,0 ;
+         WIDTH 500 HEIGHT 300 ;
+         TITLE 'Harbour MiniGUI Combo Color Demo - by Janusz Pora' ;
+         MAIN NOMAXIMIZE NOSIZE
 
       DEFINE MAIN MENU
          POPUP '&File'
-            ITEM 'Get HMG Color'	ACTION GetHMGColor(aColor)
-            ITEM 'Get System Color'	ACTION GetSystemColor(aSysColor)
+            ITEM 'Get HMG Color'   ACTION GetHMGColor(aColor)
+            ITEM 'Get System Color'   ACTION GetSystemColor(aSysColor)
             SEPARATOR
-            ITEM '&Exit'		ACTION Form_1.Release
+            ITEM '&Exit'      ACTION Form_1.Release
          END POPUP
          POPUP '&Help'
-            ITEM '&About'		ACTION MsgInfo ("MiniGUI Combo Color Demo")
+            ITEM '&About'      ACTION MsgInfo ("MiniGUI Combo Color Demo")
          END POPUP
 
       END MENU
 
-
       DEFINE IMAGELIST Imagelst_1 ;
-         BUTTONSIZE BmpW, BmpH ;
-         IMAGE {}
+            BUTTONSIZE BmpW, BmpH ;
+            IMAGE {}
 
-      FOR n:=1 TO Len(aColor)
-         HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
-         HMG_SetColorBtm(aColor[n,1], 1, BmpW, BmpH)
-         HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
-      NEXT
+         FOR n:=1 TO Len(aColor)
+            HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
+            HMG_SetColorBtm(aColor[n,1], 1, BmpW, BmpH)
+            HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
+         NEXT
 
+         DEFINE IMAGELIST Imagelst_2 ;
+               BUTTONSIZE BmpW, BmpH ;
+               IMAGE {}
 
-      DEFINE IMAGELIST Imagelst_2 ;
-         BUTTONSIZE BmpW, BmpH ;
-         IMAGE {}
+            FOR n:=1 TO Len(aSysColor)
+               HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
+               HMG_SetSysColorBtm(aSysColor[n,1], 1, BmpW, BmpH)
+               HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
+            NEXT
 
-      FOR n:=1 TO Len(aSysColor)
-         HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
-         HMG_SetSysColorBtm(aSysColor[n,1], 1, BmpW, BmpH)
-         HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
-      NEXT
+            @ 10,20 Label Label_1 Value "HMG Colors ComboColor" AUTOSIZE
 
+            @ 33,20 COMBOBOXEX ComboEx_1 ;
+               WIDTH 150 HEIGHT 200;
+               ITEMS aColorName ;
+               VALUE 1 ;
+               ON ENTER GetHMGColor(aColor) ;
+               FONT 'MS Sans Serif' SIZE 9 ;
+               IMAGELIST "Imagelst_1"   ;
+               TOOLTIP "Extend Combo HMG color"
 
-      @ 10,20 Label Label_1 Value "HMG Colors ComboColor" AUTOSIZE
+            @ 10,190 Label Label_2 Value "System Colors ComboColor" AUTOSIZE
 
-      @ 33,20 COMBOBOXEX ComboEx_1 ;
-         WIDTH 150 HEIGHT 200;
-         ITEMS aColorName ;
-         VALUE 1 ;
-         ON ENTER GetHMGColor(aColor) ;
-         FONT 'MS Sans Serif' SIZE 9 ;
-         IMAGELIST "Imagelst_1"   ;
-         TOOLTIP "Extend Combo HMG color"
+            @ 33,190 COMBOBOXEX ComboEx_2 ;
+               WIDTH 250  HEIGHT 200;
+               ITEMS aSysColorName ;
+               VALUE 1 ;
+               ON ENTER GetSystemColor(aSysColor) ;
+               FONT 'MS Sans serif' SIZE 9 ;
+               IMAGELIST "Imagelst_2"   ;
+               TOOLTIP "Extend Combo System Color"
 
-      @ 10,190 Label Label_2 Value "System Colors ComboColor" AUTOSIZE
+         END WINDOW
 
-      @ 33,190 COMBOBOXEX ComboEx_2 ;
-         WIDTH 250  HEIGHT 200;
-         ITEMS aSysColorName ;
-         VALUE 1 ;
-         ON ENTER GetSystemColor(aSysColor) ;
-         FONT 'MS Sans serif' SIZE 9 ;
-         IMAGELIST "Imagelst_2"   ;
-         TOOLTIP "Extend Combo System Color"
+         Form_1.Center
+         Form_1.Activate
 
+         RETURN NIL
 
-   END WINDOW
+FUNCTION HMG_SetColorBtm(aColor, bChecked, BmpWidh, BmpHeight)
 
-   Form_1.Center
-   Form_1.Activate
+   LOCAL hImage, hImageLst, nColor
 
-Return Nil
-
-
-*--------------------------------------
-Function HMG_SetColorBtm(aColor, bChecked, BmpWidh, BmpHeight)
-*--------------------------------------
-LOCAL hImage, hImageLst, nColor
    hImageLst := This.imagelst_1.Handle
    nColor := RGB( aColor [ 1 ], aColor [ 2 ], aColor [ 3 ] )
    hImage := CreateColorBMP( ThisWindow.Handle, BmpWidh, BmpHeight, nColor, bChecked )
    IL_AddMaskedIndirect( hImageLst , hImage , , BmpWidh , BmpHeight , 1 )
-RETURN Nil
 
+   RETURN NIL
 
-*--------------------------------------
-Function HMG_SetSysColorBtm(Color, bChecked, BmpWidh, BmpHeight)
-*--------------------------------------
-LOCAL hImage, hImageLst, nColor
+FUNCTION HMG_SetSysColorBtm(Color, bChecked, BmpWidh, BmpHeight)
+
+   LOCAL hImage, hImageLst, nColor
+
    hImageLst := This.imagelst_2.Handle
    nColor := GetSysColor( Color )
    hImage := CreateColorBMP( ThisWindow.Handle, BmpWidh, BmpHeight, nColor, bChecked )
    IL_AddMaskedIndirect( hImageLst , hImage , , BmpWidh , BmpHeight , 1 )
-RETURN Nil
 
+   RETURN NIL
 
-*--------------------------------------
 FUNCTION GetHMGColor(aColor)
-*--------------------------------------
+
    LOCAL nPos, cStr, aColorHMG
+
    nPos := Form_1.ComboEx_1.Value
    aColorHMG := aColor[nPos,1]
    IF nPos > 0
       cStr := aColor[nPos,2]+ '  { '+ AllTrim( Str(aColorHMG[1]))+','+ AllTrim( Str(aColorHMG[2])) +','+ AllTrim( Str(aColorHMG[3])) +' }'
       MsgInfo(cStr, 'Selected color')
-   endif
-RETURN NIL
+   ENDIF
 
+   RETURN NIL
 
-*--------------------------------------
 FUNCTION GetSystemColor(aColor)
-*--------------------------------------
+
    LOCAL nPos, cStr,nColorSys
+
    nPos := Form_1.ComboEx_2.Value
    nColorSys := GetSysColor ( aColor[nPos,1] )
    IF nPos > 0
       cStr := aColor[nPos,2]+ '  { '+ AllTrim( Str(GetRed(nColorSys)))+','+ AllTrim( Str(GetGreen(nColorSys))) +','+ AllTrim( Str(GetBlue(nColorSys))) +' }'
       MsgInfo(cStr, 'Selected color')
-   endif
-RETURN NIL
+   ENDIF
 
+   RETURN NIL
 
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
 #include <commctrl.h>
 
-
 static void GoToPoint( HDC hDC, int ix, int iy )
 {
    POINT pt;
    MoveToEx( hDC, ix, iy, &pt );
 }
-
 
 HB_FUNC ( CREATECOLORBMP )   //CreateColorBmp(hwnd,BmpWidh,BmpHeight,nColor,bChecked)
 {
@@ -309,7 +297,6 @@ HB_FUNC ( CREATECOLORBMP )   //CreateColorBmp(hwnd,BmpWidh,BmpHeight,nColor,bChe
    DeleteObject( hColorBrush );
    DeleteObject( hBlackPen );
 
-
    DeleteDC( imgDC );
    DeleteDC( tmpDC );
 
@@ -342,3 +329,4 @@ HB_FUNC( IL_ADDMASKEDINDIRECT )   //IL_AddMaskedIndirect( hwnd , himage , color 
 }
 
 #pragma ENDDUMP
+

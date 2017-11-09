@@ -1,43 +1,41 @@
 /*
- * HMG Cursor Demo
+* HMG Cursor Demo
 */
 
 #include "minigui.ch"
 
 /*
- ArrowCursor           // The standard arrow cursor.
- UpArrowCursor         // An arrow pointing upwards toward the top of the screen.
- CrossCursor           // A crosshair cursor, typically used to help the user accurately select a point on the screen.
- WaitCursor            // An hourglass or watch cursor, usually shown during operations that prevent the user from interacting with the application.
- IBeamCursor           // A caret or ibeam cursor, indicating that a widget can accept and display text input.
- SizeVerCursor         // A cursor used for elements that are used to vertically resize top-level windows.
- SizeHorCursor         // A cursor used for elements that are used to horizontally resize top-level windows.
- SizeBDiagCursor       // A cursor used for elements that are used to diagonally resize top-level windows at their top-right and bottom-left corners.
- SizeFDiagCursor       // A cursor used for elements that are used to diagonally resize top-level windows at their top-left and bottom-right corners.
- SizeAllCursor         // A cursor used for elements that are used to resize top-level windows in any direction.
- PointingHandCursor    // A pointing hand cursor that is typically used for clickable elements such as hyperlinks.
- ForbiddenCursor       // A slashed circle cursor, typically used during drag and drop operations to indicate that dragged content cannot be dropped on particular widgets or inside certain regions.
- WhatsThisCursor       // An arrow with a question mark, typically used to indicate the presence of What's This? help for a widget.
- BusyCursor            // An hourglass or watch cursor, usually shown during operations that allow the user to interact with the application while they are performed in the background.
+ArrowCursor           // The standard arrow cursor.
+UpArrowCursor         // An arrow pointing upwards toward the top of the screen.
+CrossCursor           // A crosshair cursor, typically used to help the user accurately select a point on the screen.
+WaitCursor            // An hourglass or watch cursor, usually shown during operations that prevent the user from interacting with the application.
+IBeamCursor           // A caret or ibeam cursor, indicating that a widget can accept and display text input.
+SizeVerCursor         // A cursor used for elements that are used to vertically resize top-level windows.
+SizeHorCursor         // A cursor used for elements that are used to horizontally resize top-level windows.
+SizeBDiagCursor       // A cursor used for elements that are used to diagonally resize top-level windows at their top-right and bottom-left corners.
+SizeFDiagCursor       // A cursor used for elements that are used to diagonally resize top-level windows at their top-left and bottom-right corners.
+SizeAllCursor         // A cursor used for elements that are used to resize top-level windows in any direction.
+PointingHandCursor    // A pointing hand cursor that is typically used for clickable elements such as hyperlinks.
+ForbiddenCursor       // A slashed circle cursor, typically used during drag and drop operations to indicate that dragged content cannot be dropped on particular widgets or inside certain regions.
+WhatsThisCursor       // An arrow with a question mark, typically used to indicate the presence of What's This? help for a widget.
+BusyCursor            // An hourglass or watch cursor, usually shown during operations that allow the user to interact with the application while they are performed in the background.
 */
 
-#define CLR_BACK	{ 225, 225, 225 }
-
+#define CLR_BACK   { 225, 225, 225 }
 
 FUNCTION Main
 
-   Define Window Win_1 ;
-      Row 0 ;
-      Col 0 ;
-      Width 430 ;
-      Height 450 ;
-      Title 'HMG Cursor Demo' ;
-      WindowType MAIN
+   DEFINE WINDOW Win_1 ;
+         Row 0 ;
+         Col 0 ;
+         Width 430 ;
+         Height 450 ;
+         Title 'HMG Cursor Demo' ;
+         WindowType MAIN
 
+      DEFINE MAIN MENU
 
-      Define Main Menu
-
-         Define Popup "Tests"
+         DEFINE POPUP "Tests"
             MenuItem "Set Cursor Arrow"     Action SetArrowCursor( Application.Handle )
             MenuItem "Set Cursor Hand"      Action SetHandCursor( Application.Handle )
             MenuItem "Set Cursor Wait"      Action SetWaitCursor( Application.Handle )
@@ -51,8 +49,7 @@ FUNCTION Main
 
       End Menu
 
-
-      Define Label Lbl_0
+      DEFINE LABEL Lbl_0
          Row       40
          Col       10
          Width     180
@@ -61,9 +58,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorArrow()
-      End Label
+      END LABEL
 
-      Define Label Lbl_1
+      DEFINE LABEL Lbl_1
          Row       40
          Col       220
          Width     180
@@ -72,9 +69,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorUpArrow()
-      End Label
+      END LABEL
 
-      Define Label Lbl_2
+      DEFINE LABEL Lbl_2
          Row       80
          Col       10
          Width     180
@@ -83,9 +80,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorCross()
-      End Label
+      END LABEL
 
-      Define Label Lbl_3
+      DEFINE LABEL Lbl_3
          Row       80
          Col       220
          Width     180
@@ -94,9 +91,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorWait()
-      End Label
+      END LABEL
 
-      Define Label Lbl_4
+      DEFINE LABEL Lbl_4
          Row       120
          Col       10
          Width     180
@@ -105,9 +102,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorIBeam()
-      End Label
+      END LABEL
 
-      Define Label Lbl_5
+      DEFINE LABEL Lbl_5
          Row       120
          Col       220
          Width     180
@@ -116,9 +113,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeNS()
-      End Label
+      END LABEL
 
-      Define Label Lbl_6
+      DEFINE LABEL Lbl_6
          Row       160
          Col       10
          Width     180
@@ -127,9 +124,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeWE()
-      End Label
+      END LABEL
 
-      Define Label Lbl_7
+      DEFINE LABEL Lbl_7
          Row       160
          Col       220
          Width     180
@@ -138,9 +135,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenEsW()
-      End Label
+      END LABEL
 
-      Define Label Lbl_8
+      DEFINE LABEL Lbl_8
          Row       200
          Col       10
          Width     180
@@ -149,9 +146,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizenWsE()
-      End Label
+      END LABEL
 
-      Define Label Lbl_9
+      DEFINE LABEL Lbl_9
          Row       200
          Col       220
          Width     180
@@ -160,9 +157,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorSizeAll()
-      End Label
+      END LABEL
 
-      Define Label Lbl_10
+      DEFINE LABEL Lbl_10
          Row       240
          Col       10
          Width     180
@@ -171,9 +168,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorNo()
-      End Label
+      END LABEL
 
-      Define Label Lbl_11
+      DEFINE LABEL Lbl_11
          Row       240
          Col       220
          Width     180
@@ -182,9 +179,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHelp()
-      End Label
+      END LABEL
 
-      Define Label Lbl_12
+      DEFINE LABEL Lbl_12
          Row       280
          Col       10
          Width     180
@@ -193,9 +190,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorHand()
-      End Label
+      END LABEL
 
-      Define Label Lbl_13
+      DEFINE LABEL Lbl_13
          Row       280
          Col       220
          Width     180
@@ -204,9 +201,9 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover CursorAppStarting()
-      End Label
+      END LABEL
 
-      Define Label Lbl_14
+      DEFINE LABEL Lbl_14
          Row       320
          Col       10
          Width     180
@@ -215,22 +212,19 @@ FUNCTION Main
          BackColor CLR_BACK
          CenterAlign .t.
          OnMouseHover FileCursor( 'write.cur' )
-      End Label
+      END LABEL
 
+   END WINDOW
 
-   End Window
+   CENTER WINDOW Win_1
 
-   Center Window Win_1
+   ACTIVATE WINDOW Win_1
 
-   Activate Window Win_1
+   RETURN NIL
 
-RETURN NIL
+PROCEDURE PutMouse( obj, form, rect )
 
-
-*------------------------------------------------------------------------------*
-Procedure PutMouse( obj, form, rect )
-*------------------------------------------------------------------------------*
-   Local ocol, orow
+   LOCAL ocol, orow
 
    DEFAULT form TO ThisWindow.name, rect TO {20,40}
 
@@ -240,4 +234,5 @@ Procedure PutMouse( obj, form, rect )
    _SETFOCUS( obj, FORM )
    SETCURSORPOS( ocol, orow )
 
-Return
+   RETURN
+

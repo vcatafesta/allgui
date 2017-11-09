@@ -1,32 +1,31 @@
 /*
- * EditBox Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to detect when the last line of
- * the text is shown in the display area, using methods
- * GetLastVisibleLine and GetLineCount.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* EditBox Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to detect when the last line of
+* the text is shown in the display area, using methods
+* GetLastVisibleLine and GetLineCount.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
+
    PRIVATE oForm, oCtrl, oLbl, oTmr
 
    DEFINE WINDOW Frm_1 ;
-      AT 0, 0 ;
-      OBJ oForm ;
-      WIDTH 430 ;
-      HEIGHT 430 ;
-      CLIENTAREA ;
-      NOSIZE ;
-      TITLE 'EditBox - Detect when last line scrolls into view' ;
-      MAIN ;
-      ON INIT FillCtrl()
+         AT 0, 0 ;
+         OBJ oForm ;
+         WIDTH 430 ;
+         HEIGHT 430 ;
+         CLIENTAREA ;
+         NOSIZE ;
+         TITLE 'EditBox - Detect when last line scrolls into view' ;
+         MAIN ;
+         ON INIT FillCtrl()
 
       @ 10, 10 EDITBOX edt_1 ;
          OBJ oCtrl ;
@@ -50,9 +49,10 @@ FUNCTION Main
    CENTER WINDOW Frm_1
    ACTIVATE WINDOW Frm_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION FillCtrl
+
    LOCAL cLines, i
 
    cLines := "This is line 001"
@@ -61,18 +61,21 @@ FUNCTION FillCtrl
    NEXT
    oCtrl:Value := cLines
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CheckEnd
-   IF oCtrl:GetLastVisibleLine() + 1 == oCtrl:GetLineCount()
-       oLbl:Value := "End Reached"
-       oLbl:FontColor := RED
-   ELSE
-       oLbl:Value := "Last visible row " + LTrim( Str( oCtrl:GetLastVisibleLine() + 1 ) ) + " of " + LTrim( Str( oCtrl:GetLineCount() ) )
-       oLbl:FontColor := BLUE
-   ENDIF
-RETURN NIL
 
-/*
- * EOF
- */
+   IF oCtrl:GetLastVisibleLine() + 1 == oCtrl:GetLineCount()
+      oLbl:Value := "End Reached"
+      oLbl:FontColor := RED
+   ELSE
+      oLbl:Value := "Last visible row " + LTrim( Str( oCtrl:GetLastVisibleLine() + 1 ) ) + " of " + LTrim( Str( oCtrl:GetLineCount() ) )
+      oLbl:FontColor := BLUE
+   ENDIF
+
+   RETURN NIL
+
+   /*
+   * EOF
+   */
+

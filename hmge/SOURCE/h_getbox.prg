@@ -18,35 +18,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 //#define __CLIPPER_COMPAT__
@@ -62,8 +62,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define GBB2   3
 
 #ifndef __XHARBOUR__
-   SET PROCEDURE TO tget\tget.prg
-   SET PROCEDURE TO tget\tgetint.prg
+SET PROCEDURE TO tget\tget.prg
+SET PROCEDURE TO tget\tgetint.prg
 #endif
 
 STATIC lInsert
@@ -71,13 +71,11 @@ STATIC lClrFocus := .F.
 STATIC aClrFocus := { 235, 235, 145 }, aOldBackClr
 STATIC aFntFocus, aOldFontClr
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
-   FontName, FontSize, aToolTip, lPassword, uLostFocus, uGotFocus, uChange, ;
-   right, HelpId, readonly, bold, italic, underline, strikeout, field, backcolor, ;
-   fontcolor, invisible, notabstop, nId, valid, cPicture, cmessage, cvalidmessage, ;
-   when, ProcedureName, ProcedureName2, abitmap, BtnWidth, lNoMinus, noborder )
-*-----------------------------------------------------------------------------*
+      FontName, FontSize, aToolTip, lPassword, uLostFocus, uGotFocus, uChange, ;
+      right, HelpId, readonly, bold, italic, underline, strikeout, field, backcolor, ;
+      fontcolor, invisible, notabstop, nId, valid, cPicture, cmessage, cvalidmessage, ;
+      when, ProcedureName, ProcedureName2, abitmap, BtnWidth, lNoMinus, noborder )
    LOCAL ParentFormHandle, DialogHandle
    LOCAL aControlHandle := {}
    LOCAL mVar, lDialogInMemory
@@ -151,16 +149,16 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
    ENDIF
 
    IF _HMG_BeginWindowActive .OR. _HMG_BeginDialogActive
-#ifdef _TSBROWSE_
+      #ifdef _TSBROWSE_
       IF _HMG_BeginWindowMDIActive
          ParentFormHandle := GetActiveMdiHandle()
          ParentFormName := _GetWindowProperty ( ParentFormHandle, "PROP_FORMNAME" )
       ELSE
-#endif
+         #endif
          ParentFormName := iif( _HMG_BeginDialogActive, _HMG_ActiveDialogName, _HMG_ActiveFormName )
-#ifdef _TSBROWSE_
+         #ifdef _TSBROWSE_
       ENDIF
-#endif
+      #endif
       __defaultNIL( @FontName, _HMG_ActiveFontName )
       __defaultNIL( @FontSize, _HMG_ActiveFontSize )
    ENDIF
@@ -285,7 +283,7 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
 
    oGet:UpdateBuffer()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "GETBOX"
    _HMG_aControlNames  [k] :=  ControlName
@@ -345,27 +343,25 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
       ENDIF
    ENDIF
 
-RETURN oGet
+   RETURN oGet
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE _GetBoxSetNextFocus( lPrevious )
-*-----------------------------------------------------------------------------*
+
    LOCAL NextControlHandle, i
 
-   NextControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
-   setfocus ( NextControlHandle )
-   i := AScan ( _HMG_aControlHandles , NextControlHandle )
-   IF i > 0
-      IF _HMG_aControlType [i] == 'BUTTON'
-         SendMessage ( NextControlHandle , BM_SETSTYLE , LOWORD ( BS_DEFPUSHBUTTON ) , 1 )
-      ENDIF
+NEXTControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
+setfocus ( NextControlHandle )
+i := AScan ( _HMG_aControlHandles , NextControlHandle )
+IF i > 0
+   IF _HMG_aControlType [i] == 'BUTTON'
+      SendMessage ( NextControlHandle , BM_SETSTYLE , LOWORD ( BS_DEFPUSHBUTTON ) , 1 )
    ENDIF
+ENDIF
 
 RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataGetBoxRefresh ( i )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field := _HMG_aControlPageMap [i], hWnd := _HMG_aControlHandles [i]
 
    IF ValType ( Field ) != 'U'
@@ -374,11 +370,10 @@ PROCEDURE _DataGetBoxRefresh ( i )
       _SetGetBoxValue( i, hWnd, _HMG_aControlValue [i] )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataGetBoxSave ( ControlName, ParentForm )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field , i
    LOCAL oGet
 
@@ -387,6 +382,7 @@ PROCEDURE _DataGetBoxSave ( ControlName, ParentForm )
 
    oGet:SetFocus()
    Field := _HMG_aControlPageMap [i]
+
    &( Field ) := _GetValue ( ControlName , ParentForm )
 
    oGet:VarPut( &( Field ) )
@@ -396,11 +392,10 @@ PROCEDURE _DataGetBoxSave ( ControlName, ParentForm )
       oGet:Buffer := DToC( oGet:cargo )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL ParentHandle, lshift, lCtrl
    LOCAL nStart, nEnd, coldbuff, h, oGet, ipp, nlen
    LOCAL cText, cPicMask, cPicFunc, lCleanZero, MinDec
@@ -412,12 +407,14 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    STATIC readonly := .F.
 
    IF i <= 0
+
       RETURN( 0 )
    ENDIF
 
    ParentHandle := AScan( _HMG_aFormHandles, _HMG_aControlParentHandles [i] )
 
    IF ParentHandle <= 0
+
       RETURN( 0 )
    ENDIF
 
@@ -426,7 +423,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    lCleanZero := _HMG_aControlInputMask [i,3]
 
    oGet       := _HMG_aControlHeadClick [i]
-   readonly   := _HMG_aControlMiscData1 [i,2]
+   READonly   := _HMG_aControlMiscData1 [i,2]
 
    _HMG_ThisFormName := _HMG_aFormNames [ ParentHandle ]
    _HMG_ThisControlName := _HMG_aControlNames [i]
@@ -455,10 +452,10 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          IF !Eval( oGet:preblock, oGet, .F. )
             IF oGet:VarGet() == oGet:UnTransform( oGet:Original )
                lAllowEdit := .F.
-#ifdef __CLIPPER_COMPAT__
+               #ifdef __CLIPPER_COMPAT__
                Tone( 400 )
                PostMessage( hWnd, WM_KEYDOWN, VK_DOWN, 0 )
-#endif
+               #endif
             ENDIF
          ENDIF
       ENDIF
@@ -598,6 +595,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
 
       IF ValType( oGet:cargo ) == "D" .AND. oGet:BadDate
          PostMessage( hWnd, WM_INVALID, wParam, 0 )
+
          RETURN( 0 )
       ENDIF
 
@@ -652,21 +650,25 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
       CASE wParam == 1  // CTRL+A SelectAll
 
          SendMessage( _HMG_aControlhandles [ i ] , EM_SETSEL , 0 , -1 )
+
          RETURN( 0 )
 
       CASE wParam == 22 // CTRL+V Paste
 
          SendMessage( _HMG_aControlhandles [ i ] , WM_PASTE , 0 , 0 )
+
          RETURN( 0 )
 
       CASE wParam == 3  // CTRL+C Copy
 
          CopyToClipboard( SubStr( oGet:Buffer, nStart, nEnd - nStart ) )
+
          RETURN( 0 )
 
       CASE wParam == 24 .AND. !readonly // CTRL+X Cut
 
          IF !lAllowEdit .OR. oGet:type == "L"
+
             RETURN( 0 )
          ENDIF
 
@@ -709,6 +711,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
       CASE wParam == 25 .AND. !readonly // CTRL+Y Clear
 
          IF !lAllowEdit .OR. oGet:type == "L"
+
             RETURN( 0 )
          ENDIF
 
@@ -781,6 +784,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          _HMG_aControlMiscData1 [i,3] := 0
 
          IF readonly .OR. !lAllowEdit
+
             RETURN( 0 )
          ENDIF
 
@@ -792,10 +796,12 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          ENDIF
 
          IF wParam <> 46 .AND. wParam <> 44 .AND. Asc( _Input( Chr( wParam ), i ) ) <= 0  // dot and coma
+
             RETURN( 0 )
          ENDIF
 
          IF ( "A" $ cPicFunc ) .AND. !IsAlpha( Chr( wParam ) )
+
             RETURN ( 0 )
          ENDIF
 
@@ -851,9 +857,9 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
             ENDIF
 
             IF oGet:Rejected
-#ifdef __CLIPPER_COMPAT__
+               #ifdef __CLIPPER_COMPAT__
                Tone( 400 )
-#endif
+               #endif
             ELSE
                oGet:Assign()
                _HMG_aControlValue[i] := oGet:VarGet()
@@ -892,20 +898,22 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    CASE nMsg == WM_LBUTTONDBLCLK
 
       IF wParam == MK_LBUTTON
-#ifndef __XHARBOUR__
+         #ifndef __XHARBOUR__
          IF Len( oGet:aKeyEvent ) > 0
+
             RETURN oGet:DoKeyEvent( nMsg )
          ELSE
-#endif
+            #endif
             SendMessage( _HMG_aControlhandles [i] , EM_SETSEL , 0 , -1 )
-#ifndef __XHARBOUR__
+            #ifndef __XHARBOUR__
          ENDIF
-#endif
+         #endif
       ENDIF
 
    CASE nMsg == WM_KEYDOWN
 
       IF wParam == 110 .OR. wParam == 190
+
          RETURN( 0 )
       ENDIF
 
@@ -964,10 +972,12 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
 
       IF lCtrl .AND. wParam == VK_INSERT
          CopyToClipboard( SubStr( oGet:Buffer, nStart, nEnd - nStart ) )
+
          RETURN( 0 )
 
       ELSEIF lShift .AND. wParam == VK_INSERT
          SendMessage( hWnd , WM_PASTE , 0 , 0 )
+
          RETURN( 0 )
 
       ELSEIF wParam == VK_DOWN
@@ -975,9 +985,11 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          IF !lCtrl .AND. !lShift
             SendMessage( hWnd , EM_SETSEL , nEnd , nEnd )
             IF ValType( oGet:cargo ) == "D" .AND. oGet:BadDate
+
                RETURN( 0 )
             ELSE
                _GetBoxSetNextFocus( .F. )
+
                RETURN( 0 )
             ENDIF
          ELSE
@@ -1004,9 +1016,11 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          IF !lCtrl .AND. !lShift
             SendMessage( hWnd , EM_SETSEL , nEnd , nEnd )
             IF ValType( oGet:cargo ) == "D" .AND. oGet:BadDate
+
                RETURN( 0 )
             ELSE
                _GetBoxSetNextFocus( .T. )
+
                RETURN( 0 )
             ENDIF
          ELSE
@@ -1075,6 +1089,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
       ELSEIF wParam == VK_DELETE
 
          IF readonly .OR. ! lAllowEdit .OR. oGet:type == "L"
+
             RETURN( 0 )
          ENDIF
 
@@ -1119,16 +1134,17 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
 
          RETURN( 0 )
 
-#ifndef __XHARBOUR__
+         #ifndef __XHARBOUR__
       ELSE
 
          oGet:DoKeyEvent( wParam )
-#endif
+         #endif
       ENDIF
 
    CASE nMsg == WM_PASTE
 
       IF readonly .OR. ! lAllowEdit
+
          RETURN( 0 )
       ENDIF
 
@@ -1237,11 +1253,10 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
 
    ENDCASE
 
-RETURN( 0 )
+   RETURN( 0 )
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetGetBoxValue( nId, hWnd, Value )
-*-----------------------------------------------------------------------------*
+
    LOCAL aPicData
    LOCAL oGet       := _HMG_aControlHeadClick [nId]
    LOCAL cPicFunc   := _HMG_aControlInputMask [nId, 1]
@@ -1289,22 +1304,20 @@ PROCEDURE _SetGetBoxValue( nId, hWnd, Value )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetGetBoxValidMessage( ControlName, ParentForm , cNewMessage )
-*-----------------------------------------------------------------------------*
+
    LOCAL ix := GetControlIndex ( ControlName, ParentForm )
 
    IF ix > 0 .AND. _HMG_aControlType [ix] == "GETBOX"
       _HMG_aControlSpacing [ix] := cNewMessage
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION _GetGetBoxValidMessage( ControlName, ParentForm )
-*-----------------------------------------------------------------------------*
+
    LOCAL ix := GetControlIndex ( ControlName, ParentForm )
    LOCAL cValidMsg := ""
 
@@ -1312,39 +1325,37 @@ FUNCTION _GetGetBoxValidMessage( ControlName, ParentForm )
       cValidMsg := _HMG_aControlSpacing [ix]
    ENDIF
 
-RETURN cValidMsg
+   RETURN cValidMsg
 
-*-----------------------------------------------------------------------------*
 FUNCTION _RangeCheck( oGet, lo, hi )
-*-----------------------------------------------------------------------------*
+
    LOCAL value := oGet:VarGet()
 
    IF ! oGet:changed
+
       RETURN .T.
    ENDIF
 
-RETURN ( value >= lo .AND. value <= hi )
+   RETURN ( value >= lo .AND. value <= hi )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetGetBoxColorFocus( aBackColor, aFontColor )
-*-----------------------------------------------------------------------------*
+
    LOCAL aOldClrFocus := { aClrFocus, aFntFocus }
 
    lClrFocus := .T.
-   
+
    IF aBackColor != NIL
       aClrFocus := aBackColor
-   ENDIF   
+   ENDIF
 
    IF aFontColor != NIL
       aFntFocus := aFontColor
-   ENDIF   
+   ENDIF
 
-RETURN aOldClrFocus
+   RETURN aOldClrFocus
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DispGetBoxText( hWnd, cText )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aControlHandles , hWnd )
 
    IF And( GetWindowLong( _HMG_aControlHandles [i], GWL_STYLE ), ES_PASSWORD ) == ES_PASSWORD
@@ -1353,11 +1364,10 @@ PROCEDURE _DispGetBoxText( hWnd, cText )
       SetWindowText( _HMG_aControlHandles [i], cText )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE _SetGetBoxCaret( hWnd )
-*-----------------------------------------------------------------------------*
+
    HideCaret( hWnd )
    DestroyCaret()
 
@@ -1366,11 +1376,10 @@ STATIC PROCEDURE _SetGetBoxCaret( hWnd )
       ShowCaret( hWnd )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION _GetPictureData( oGet, cPicture )
-*-----------------------------------------------------------------------------*
+
    LOCAL nAt, nFor
    LOCAL cNum, lDecRev
    LOCAL cPicMask, cPicFunc, lCleanZero
@@ -1462,11 +1471,10 @@ FUNCTION _GetPictureData( oGet, cPicture )
 
    ENDIF
 
-RETURN { cPicFunc, cPicMask, lCleanZero }
+   RETURN { cPicFunc, cPicMask, lCleanZero }
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _FirstEditable( nId )
-*-----------------------------------------------------------------------------*
+
    LOCAL nFor
    LOCAL oGet    := _HMG_aControlHeadClick [nId]
    LOCAL nMaxLen := Len( oGet:Buffer )
@@ -1474,11 +1482,13 @@ STATIC FUNCTION _FirstEditable( nId )
    IF nMaxLen != NIL
 
       IF _IsEditable( 1 , nId )
+
          RETURN 1
       ENDIF
 
       FOR nFor := 2 TO nMaxLen
          IF _IsEditable( nFor , nId )
+
             RETURN nFor
          ENDIF
       NEXT
@@ -1487,21 +1497,22 @@ STATIC FUNCTION _FirstEditable( nId )
 
    oGet:TypeOut := .T.
 
-RETURN 0
+   RETURN 0
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _IsEditable( nPos, nId )
-*-----------------------------------------------------------------------------*
+
    LOCAL cChar
    LOCAL cPicMask := _HMG_aControlInputMask [nId,2]
    LOCAL oGet     := _HMG_aControlHeadClick [nId]
    LOCAL nMaxLen  := Len( oGet:Buffer )
 
    IF Empty( cPicMask )
+
       RETURN .T.
    ENDIF
 
    IF nPos > Len( cPicMask ) .AND. nPos <= nMaxLen
+
       RETURN .T.
    ENDIF
 
@@ -1521,17 +1532,17 @@ STATIC FUNCTION _IsEditable( nPos, nId )
 
    ENDIF
 
-RETURN .F.
+   RETURN .F.
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    /* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */
    #xcommand DEFAULT => OTHERWISE
    /* FOR EACH hb_enumIndex() */
    #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-#endif
-*-----------------------------------------------------------------------------*
+   #endif
+
 STATIC FUNCTION _Input( cChar , nID )
-*-----------------------------------------------------------------------------*
+
    LOCAL oGet     := _HMG_aControlHeadClick [nId]
    LOCAL cPicFunc := _HMG_aControlInputMask [nId,1]
    LOCAL cPicMask := _HMG_aControlInputMask [nId,2]
@@ -1547,19 +1558,23 @@ STATIC FUNCTION _Input( cChar , nID )
       CASE cChar == "."
       CASE cChar == ","
          oGet:toDecPos()
+
          RETURN ""
       CASE !( cChar $ "0123456789+" )
+
          RETURN ""
       ENDCASE
       EXIT
    CASE "D"
       IF !( cChar $ "0123456789" )
+
          RETURN ""
       ENDIF
       EXIT
    CASE "L"
       cPic := Upper( cChar )
       IF !( cPic $ "YNTF" + cLangItem_1 + cLangItem_2 )
+
          RETURN ""
       ENDIF
       IF cPic == cLangItem_1
@@ -1580,65 +1595,65 @@ STATIC FUNCTION _Input( cChar , nID )
    IF ! Empty( cPicMask )
 
       cPic := SubStr( cPicMask, oGet:pos, 1 )
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       IF ! Empty( cPic )
-#endif
+         #endif
          SWITCH cPic
          CASE "A"
-           IF ! IsAlpha( cChar )
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "N"
-           IF ! IsAlpha( cChar ) .AND. ! IsDigit( cChar )
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "9"
-           IF ! IsDigit( cChar ) .AND. cChar != "-"
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "#"
-           IF ! IsDigit( cChar ) .AND. !( cChar == " " ) .AND. !( cChar $ ".+-" )
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "L"
-           IF !( Upper( cChar ) $ "YNTF" + cLangItem_1 + cLangItem_2 )
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "Y"
-           IF !( Upper( cChar ) $ "YN" )
-             cChar := ""
-           ENDIF
-           EXIT
-         CASE "$"
-           EXIT
-         CASE "*"
-           IF oGet:type == "N"
-             IF ! IsDigit( cChar ) .AND. cChar != "-"
+            IF ! IsAlpha( cChar )
                cChar := ""
-             ENDIF
-           ELSE
-             cChar := Transform( cChar, cPic )
-           ENDIF
-           EXIT
-         DEFAULT
-           cChar := Transform( cChar, cPic )
+            ENDIF
+            EXIT
+         CASE "N"
+            IF ! IsAlpha( cChar ) .AND. ! IsDigit( cChar )
+               cChar := ""
+            ENDIF
+            EXIT
+         CASE "9"
+            IF ! IsDigit( cChar ) .AND. cChar != "-"
+               cChar := ""
+            ENDIF
+            EXIT
+         CASE "#"
+            IF ! IsDigit( cChar ) .AND. !( cChar == " " ) .AND. !( cChar $ ".+-" )
+               cChar := ""
+            ENDIF
+            EXIT
+         CASE "L"
+            IF !( Upper( cChar ) $ "YNTF" + cLangItem_1 + cLangItem_2 )
+               cChar := ""
+            ENDIF
+            EXIT
+         CASE "Y"
+            IF !( Upper( cChar ) $ "YN" )
+               cChar := ""
+            ENDIF
+            EXIT
+         CASE "$"
+            EXIT
+         CASE "*"
+            IF oGet:type == "N"
+               IF ! IsDigit( cChar ) .AND. cChar != "-"
+                  cChar := ""
+               ENDIF
+            ELSE
+               cChar := Transform( cChar, cPic )
+            ENDIF
+            EXIT
+            DEFAULT
+            cChar := Transform( cChar, cPic )
          ENDSWITCH
-#ifdef __XHARBOUR__
+         #ifdef __XHARBOUR__
       ENDIF
-#endif
+      #endif
    ENDIF
 
-RETURN cChar
+   RETURN cChar
 
-// (JK) HMG 1.1 Experimental Build 12
-*-----------------------------------------------------------------------------*
+   // (JK) HMG 1.1 Experimental Build 12
+
 STATIC FUNCTION _GetDefinedStatusBarItemValue( ParentHandle, ItemID )
-*-----------------------------------------------------------------------------*
+
    LOCAL h, i, nLocID := 0
 
    hb_default( @ItemID, 1 )
@@ -1655,4 +1670,5 @@ STATIC FUNCTION _GetDefinedStatusBarItemValue( ParentHandle, ItemID )
 
    NEXT
 
-RETURN ( _HMG_aControlCaption [i] )
+   RETURN ( _HMG_aControlCaption [i] )
+

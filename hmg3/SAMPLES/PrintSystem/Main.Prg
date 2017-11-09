@@ -1,11 +1,10 @@
 #include <hmg.ch>
 
-Function Main
+FUNCTION Main
 
-        Load Window Main
-        Main.Center
-        Main.Activate
+   LOAD WINDOW Main
+   Main.Center
+   Main.Activate
 
-Return
-
+   RETURN
 

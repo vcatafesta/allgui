@@ -1,21 +1,20 @@
 /*
- * Ejemplo Browse n° 13
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo agregar una columna con
- * imágenes a un Browse preexistente (aplica también
- * a Grid y XBrowse).
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 13
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo agregar una columna con
+* imágenes a un Browse preexistente (aplica también
+* a Grid y XBrowse).
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX
@@ -27,13 +26,13 @@ FUNCTION Main
    AbrirTablas()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'Agregar columna "IMAGLIST" a un Browse' ;
-      MAIN ;
-      ON RELEASE CerrarTablas()
+         OBJ oForm1 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Agregar columna "IMAGLIST" a un Browse' ;
+         MAIN ;
+         ON RELEASE CerrarTablas()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 620 ;
@@ -44,8 +43,8 @@ FUNCTION Main
          FIELDS { 'code', 'number', 'issued', 'image' } ;
          COLUMNCONTROLS { NIL, NIL, NIL, {'IMAGELIST'} } ;
          IMAGE { 'MINIGUI_EDIT_CANCEL', ;
-                 'MINIGUI_EDIT_COPY', ;
-                 'MINIGUI_EDIT_OK' } ;
+         'MINIGUI_EDIT_COPY', ;
+         'MINIGUI_EDIT_OK' } ;
          EDIT INPLACE
 
       @ 220, 10 BUTTON btn_Add ;
@@ -58,9 +57,8 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTablas
 
    LOCAL aDbf1[ 4 ][ 4 ]
@@ -144,39 +142,38 @@ FUNCTION AbrirTablas
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CerrarTablas
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Data.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AddColumn(oBrw1)
 
    oBrw1:ClearBitMaps()
    oBrw1:AddBitMap( { 'MINIGUI_EDIT_CANCEL', ;
-                      'MINIGUI_EDIT_COPY', ;
-                      'MINIGUI_EDIT_OK' } )
+      'MINIGUI_EDIT_COPY', ;
+      'MINIGUI_EDIT_OK' } )
 
    // Vea los parametros en h_xbrowse.prg
    oBrw1:AddColumn( NIL, ;           // agregar en la última posición
-                    "image", ;
-                    "Imagen", ;
-                    50, ;
-                    NIL, ;
-                    NIL, ;
-                    NIL, ;
-                    NIL, ;
-                    NIL, ;
-                    { 'IMAGELIST' } )
+   "image", ;
+      "Imagen", ;
+      50, ;
+      NIL, ;
+      NIL, ;
+      NIL, ;
+      NIL, ;
+      NIL, ;
+      { 'IMAGELIST' } )
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- */
+* MINIGUI - Harbour Win32 GUI library Demo
+*/
 
 #include "minigui.ch"
 #include "tsbrowse.ch"
@@ -13,8 +12,10 @@ FIELD KODS, NAME, ID
 MEMVAR oBrw, aResult
 
 // -----------------------------------
+
 PROCEDURE Main()
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL i, oCol, aStru, cAls, cBrw
    LOCAL cFile := "datab"
 
@@ -79,111 +80,111 @@ PROCEDURE Main()
    PRIVATE oBrw
 
    DEFINE WINDOW win_1 AT 0, 0 WIDTH 650 HEIGHT 500 ;
-      MAIN TITLE "TSBrowse Add Record Demo"         ;
-      NOMAXIMIZE NOSIZE        ;
-      ON INIT NIL              ;
-      ON RELEASE  dbCloseAll()
+         MAIN TITLE "TSBrowse Add Record Demo"         ;
+         NOMAXIMIZE NOSIZE        ;
+         ON INIT NIL              ;
+         ON RELEASE  dbCloseAll()
 
-   DEFINE TBROWSE oBrw AT 40, 10 ALIAS cAls  WIDTH 620 HEIGHT 418  CELL
+      DEFINE TBROWSE oBrw AT 40, 10 ALIAS cAls  WIDTH 620 HEIGHT 418  CELL
 
-   WITH OBJECT oBrw
+      WITH OBJECT oBrw
 
-      cBrw       := :cControlName
-      :hFontHead := GetFontHandle( "FontBold" )
-      :hFontFoot := :hFontHead
-      :lCellBrw  := .T.
+         cBrw       := :cControlName
+         :hFontHead := GetFontHandle( "FontBold" )
+         :hFontFoot := :hFontHead
+         :lCellBrw  := .T.
 
-      :aColSel   := { "KODS", "NAME", "KOLV", "CENA", "ID" }
+         :aColSel   := { "KODS", "NAME", "KOLV", "CENA", "ID" }
 
-      :LoadFields( .T. )
+         :LoadFields( .T. )
 
-      :SetColor( { 6 }, { {|a, b, c| If( c:nCell == b, { Rgb( 66, 255, 236 ), Rgb( 209, 227, 248 ) }, ;
-         { Rgb( 220, 220, 220 ), Rgb( 220, 220, 220 ) } ) } } )
+         :SetColor( { 6 }, { {|a, b, c| If( c:nCell == b, { Rgb( 66, 255, 236 ), Rgb( 209, 227, 248 ) }, ;
+            { Rgb( 220, 220, 220 ), Rgb( 220, 220, 220 ) } ) } } )
 
-      oCol                   := :GetColumn( 'KODS' )
-      oCol:lEdit             := .F.
-      oCol:cHeading          := "Product" + CRLF + "code"
-      oCol:cOrder            := "KOD"
-      oCol:lNoDescend        := .T.
-      oCol:nAlign            := 1
-      oCol:nFAlign           := 1
-      oCol:cFooting          := {| nc| nc := ( oBrw:cAlias )->( ordKeyNo() ),    ;
-         iif( Empty( nc ), '', '#' + hb_ntos( nc ) ) }
+         oCol                   := :GetColumn( 'KODS' )
+         oCol:lEdit             := .F.
+         oCol:cHeading          := "Product" + CRLF + "code"
+         oCol:cOrder            := "KOD"
+         oCol:lNoDescend        := .T.
+         oCol:nAlign            := 1
+         oCol:nFAlign           := 1
+         oCol:cFooting          := {| nc| nc := ( oBrw:cAlias )->( ordKeyNo() ),    ;
+            iif( Empty( nc ), '', '#' + hb_ntos( nc ) ) }
 
-      oCol                   := :GetColumn( 'NAME' )
-      oCol:cHeading          := "Denomination"
-      oCol:cOrder            := "NAM"
-      oCol:nWidth            := 190
-      oCol:lNoDescend        := .T.
-      oCol:lOnGotFocusSelect := .T.
-      oCol:lEmptyValToChar   := .T.
-      oCol:bPrevEdit         := {|val, brw| Prev( val, brw ) }
-      oCol:bPostEdit         := {|val, brw| Post( val, brw ) }
+         oCol                   := :GetColumn( 'NAME' )
+         oCol:cHeading          := "Denomination"
+         oCol:cOrder            := "NAM"
+         oCol:nWidth            := 190
+         oCol:lNoDescend        := .T.
+         oCol:lOnGotFocusSelect := .T.
+         oCol:lEmptyValToChar   := .T.
+         oCol:bPrevEdit         := {|val, brw| Prev( val, brw ) }
+         oCol:bPostEdit         := {|val, brw| Post( val, brw ) }
 
-      oCol                   := :GetColumn( 'KOLV' )
-      oCol:cHeading          := "Amount"
-      oCol:lOnGotFocusSelect := .T.
-      oCol:lEmptyValToChar   := .T.
-      oCol:bPrevEdit         := {|val, brw    | Prev( val, brw    ) }
-      oCol:bPostEdit         := {|val, brw, add| Post( val, brw, add ) }
+         oCol                   := :GetColumn( 'KOLV' )
+         oCol:cHeading          := "Amount"
+         oCol:lOnGotFocusSelect := .T.
+         oCol:lEmptyValToChar   := .T.
+         oCol:bPrevEdit         := {|val, brw    | Prev( val, brw    ) }
+         oCol:bPostEdit         := {|val, brw, add| Post( val, brw, add ) }
 
-      oCol                   := :GetColumn( 'CENA' )
-      oCol:cHeading          := "Price" + CRLF + "for unit"
-      oCol:lOnGotFocusSelect := .T.
-      oCol:lEmptyValToChar   := .T.
-      oCol:bPrevEdit         := {|val, brw    | Prev( val, brw    ) }
-      oCol:bPostEdit         := {|val, brw, add| Post( val, brw, add ) }
+         oCol                   := :GetColumn( 'CENA' )
+         oCol:cHeading          := "Price" + CRLF + "for unit"
+         oCol:lOnGotFocusSelect := .T.
+         oCol:lEmptyValToChar   := .T.
+         oCol:bPrevEdit         := {|val, brw    | Prev( val, brw    ) }
+         oCol:bPostEdit         := {|val, brw, add| Post( val, brw, add ) }
 
-      oCol                   := :GetColumn( 'ID' )
-      oCol:lEdit             := .F.
-      oCol:nWidth            := 60
-      oCol:cHeading          := "Id"
-      oCol:cPicture          := '99999'
-      oCol:nAlign            := 1
-      oCol:nFAlign           := 1
-      oCol:cFooting          := {| nc| nc := ( oBrw:cAlias )->( ordKeyCount() ), ;
-         iif( Empty( nc ), '', hb_ntos( nc ) ) }
+         oCol                   := :GetColumn( 'ID' )
+         oCol:lEdit             := .F.
+         oCol:nWidth            := 60
+         oCol:cHeading          := "Id"
+         oCol:cPicture          := '99999'
+         oCol:nAlign            := 1
+         oCol:nFAlign           := 1
+         oCol:cFooting          := {| nc| nc := ( oBrw:cAlias )->( ordKeyCount() ), ;
+            iif( Empty( nc ), '', hb_ntos( nc ) ) }
 
-      :aSortBmp := { LoadImage( "br_up.bmp" ), LoadImage( "br_dn.bmp" ) }
+         :aSortBmp := { LoadImage( "br_up.bmp" ), LoadImage( "br_dn.bmp" ) }
 
-      :SetIndexCols( :nColumn( 'KODS' ), :nColumn( 'NAME' ) )
-      :SetOrder( :nColumn( 'NAME' ) )
+         :SetIndexCols( :nColumn( 'KODS' ), :nColumn( 'NAME' ) )
+         :SetOrder( :nColumn( 'NAME' ) )
 
-      AEval( :aColumns, {| oCol| oCol:lFixLite := .T. } )
+         AEval( :aColumns, {| oCol| oCol:lFixLite := .T. } )
 
-      :lNoGrayBar   := .T.
-      :nWheelLines  := 1
-      :nClrLine     := COLOR_GRID
-      :nHeightCell  += 5
-      :nHeightHead  += 5
-      :nHeightFoot  := :nHeightCell + 5
-      :lDrawFooters := .T.
-      :lFooting     := .T.
-      :lNoVScroll   := .F.
-      :lNoHScroll   := .T.
-      :nFreeze      := 1
-      :lLockFreeze  := .T.
+         :lNoGrayBar   := .T.
+         :nWheelLines  := 1
+         :nClrLine     := COLOR_GRID
+         :nHeightCell  += 5
+         :nHeightHead  += 5
+         :nHeightFoot  := :nHeightCell + 5
+         :lDrawFooters := .T.
+         :lFooting     := .T.
+         :lNoVScroll   := .F.
+         :lNoHScroll   := .T.
+         :nFreeze      := 1
+         :lLockFreeze  := .T.
 
-      :SetDeleteMode( .T., .F. )
+         :SetDeleteMode( .T., .F. )
 
-      :bChange      := {| oBr| oBr:DrawFooters() }
-      :bLDblClick   := {| uP1, uP2, nFl, oBr| uP1 := Nil, uP2 := Nil, nFl := Nil, ;
-         oBr:PostMsg( WM_KEYDOWN, VK_F4, 0 ) }
+         :bChange      := {| oBr| oBr:DrawFooters() }
+         :bLDblClick   := {| uP1, uP2, nFl, oBr| uP1 := Nil, uP2 := Nil, nFl := Nil, ;
+            oBr:PostMsg( WM_KEYDOWN, VK_F4, 0 ) }
 
-      :nFireKey     := VK_F4                       // default Edit
+         :nFireKey     := VK_F4                       // default Edit
 
-      :UserKeys( VK_RETURN, {| oBr      | oBr:SetFocus(), .F. } )
-      :UserKeys( VK_F2, {| oBr, nKy, cKy| Add_Rec( oBr, nKy, cKy ), oBr:SetFocus() } )
-      :UserKeys( VK_F3, {| oBr, nKy, cKy| Del_Rec( oBr, nKy, cKy ), oBr:SetFocus(), .F. } )
-      :UserKeys( VK_F6, {| oBr          | oBr:SetOrder( oBr:nColumn( ;
-         iif( ( oBr:cAlias )->( ordSetFocus() ) == "KOD", 'NAME', 'KODS' ) ) ), oBr:SetFocus() } )
+         :UserKeys( VK_RETURN, {| oBr      | oBr:SetFocus(), .F. } )
+         :UserKeys( VK_F2, {| oBr, nKy, cKy| Add_Rec( oBr, nKy, cKy ), oBr:SetFocus() } )
+         :UserKeys( VK_F3, {| oBr, nKy, cKy| Del_Rec( oBr, nKy, cKy ), oBr:SetFocus(), .F. } )
+         :UserKeys( VK_F6, {| oBr          | oBr:SetOrder( oBr:nColumn( ;
+            iif( ( oBr:cAlias )->( ordSetFocus() ) == "KOD", 'NAME', 'KODS' ) ) ), oBr:SetFocus() } )
 
-      if :nLen > :nRowCount()
-         :ResetVScroll( .T. )
-         :oHScroll:SetRange( 0, 0 )
-      ENDIF
+         IF :nLen > :nRowCount()
+            :ResetVScroll( .T. )
+            :oHScroll:SetRange( 0, 0 )
+         ENDIF
 
-   END WITH
+      END WITH
 
    END TBROWSE
 
@@ -195,24 +196,29 @@ PROCEDURE Main()
    @ 0, 0 GETBOX DELETE  HEIGHT 5  WIDTH 7  VALUE "" ;
       BACKCOLOR { RED, RED, RED }  INVISIBLE
 
-   END WINDOW
+END WINDOW
 
-   oBrw:SetNoHoles()
-   oBrw:SetFocus()
+oBrw:SetNoHoles()
+oBrw:SetFocus()
 
-   CENTER   WINDOW win_1
-   ACTIVATE WINDOW win_1
+CENTER   WINDOW win_1
+ACTIVATE WINDOW win_1
 
 RETURN
 
 // -----------------------------------
-FUNCTION TR0( c )
-// -----------------------------------
-RETURN PadL( AllTrim( c ), Len( c ) )
 
-// -----------------------------------
+FUNCTION TR0( c )
+
+   // -----------------------------------
+
+   RETURN PadL( AllTrim( c ), Len( c ) )
+
+   // -----------------------------------
+
 FUNCTION RandStr( nLen )
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL cSet  := "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
    LOCAL cPass := ""
    LOCAL i
@@ -225,11 +231,13 @@ FUNCTION RandStr( nLen )
       NEXT
    ENDIF
 
-RETURN cPass
+   RETURN cPass
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION Prev( uVal, oBrw )
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL nCol, oCol
 
    WITH OBJECT oBrw
@@ -238,11 +246,13 @@ STATIC FUNCTION Prev( uVal, oBrw )
       oCol:Cargo := uVal            // old value
    END WITH
 
-RETURN .T.
+   RETURN .T.
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION Post( uVal, oBrw )
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL nCol, oCol, cNam, uOld, lMod, cAls
 
    WITH OBJECT oBrw
@@ -254,11 +264,13 @@ STATIC FUNCTION Post( uVal, oBrw )
       cAls := :cAlias
    END WITH
 
-RETURN .T.
+   RETURN .T.
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION Del_Rec( oBrw )
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL oCel, nY, nX, nH, nK, lNoG
 
    WITH OBJECT oBrw
@@ -289,11 +301,13 @@ STATIC FUNCTION Del_Rec( oBrw )
 
    END WITH
 
-RETURN NIL
+   RETURN NIL
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION Add_Rec( oBrw )
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL cBrw, cAls
    LOCAL nWdt, nPos, nLen
    LOCAL nRow, nCol, nRec, oCel
@@ -346,18 +360,18 @@ STATIC FUNCTION Add_Rec( oBrw )
    cNamP := "@K " + repl( 'X', nLen )
 
    DEFINE WINDOW wNewRec  ;
-      AT nRow, nCol  WIDTH nWdt  HEIGHT nHgt  TITLE ''      ;
-      MODAL          NOSIZE      NOSYSMENU    NOCAPTION     ;
-      ON INIT      ( This.Topmost := .T., InkeyGui( 10 ),     ;
-      This.Topmost := .F. )
+         AT nRow, nCol  WIDTH nWdt  HEIGHT nHgt  TITLE ''      ;
+         MODAL          NOSIZE      NOSYSMENU    NOCAPTION     ;
+         ON INIT      ( This.Topmost := .T., InkeyGui( 10 ),     ;
+         This.Topmost := .F. )
 
-   @ 0, nX1 GETBOX KODS  HEIGHT nHgt  WIDTH nW1  VALUE cKods  PICTURE cKodP  VALID VldNewRec()
+      @ 0, nX1 GETBOX KODS  HEIGHT nHgt  WIDTH nW1  VALUE cKods  PICTURE cKodP  VALID VldNewRec()
 
-   nX2 := This.KODS.Width + nX1 + 1
+      nX2 := This.KODS.Width + nX1 + 1
 
-   @ 0, nX2 GETBOX NAME  HEIGHT nHgt  WIDTH nW2  VALUE cName  PICTURE cNamP  VALID VldNewRec()
+      @ 0, nX2 GETBOX NAME  HEIGHT nHgt  WIDTH nW2  VALUE cName  PICTURE cNamP  VALID VldNewRec()
 
-   ON KEY ESCAPE ACTION  ThisWindow.Release
+      ON KEY ESCAPE ACTION  ThisWindow.Release
 
    END WINDOW
 
@@ -388,19 +402,23 @@ STATIC FUNCTION Add_Rec( oBrw )
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION GetNewKod()
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL cAls := oBrw:cAlias
    LOCAL nLen := Len( ( cAls )->KODS )
 
-RETURN Left( hb_ntos( ( cAls )->( ordKeyCount() ) + 1 ) + Space( nLen ), nLen )
+   RETURN Left( hb_ntos( ( cAls )->( ordKeyCount() ) + 1 ) + Space( nLen ), nLen )
 
-// -----------------------------------
+   // -----------------------------------
+
 STATIC FUNCTION VldNewRec()
-// -----------------------------------
+
+   // -----------------------------------
    LOCAL cWnd := _HMG_ThisFormName
    LOCAL cGet := _HMG_ThisControlName
    LOCAL cAls := oBrw:cAlias
@@ -428,8 +446,7 @@ STATIC FUNCTION VldNewRec()
       ENDIF
    ENDIF
 
-RETURN lRet
-
+   RETURN lRet
 
 #pragma BEGINDUMP
 
@@ -494,6 +511,7 @@ HB_FUNC( SHOWGETVALID )
    HWND hWnd = ( HWND ) hb_parnl(1);
 
    if( ! IsWindow( hWnd ) )
+
       return;
 
    bl.cbStruct = sizeof( EDITBALLOONTIP );
@@ -540,3 +558,4 @@ HB_FUNC( SHOWGETVALID )
 }
 
 #pragma ENDDUMP
+

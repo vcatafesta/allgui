@@ -1,18 +1,15 @@
 /*
- * Ejemplo Clases n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG
- * mantenida por Ciro Vargas C. <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo construir una subclase del Grid
- * para interceptar y procesar un grupo de teclas.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Clases n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG
+* mantenida por Ciro Vargas C. <cvc@oohg.org>
+* Este ejemplo muestra cómo construir una subclase del Grid
+* para interceptar y procesar un grupo de teclas.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "hbclass.ch"
@@ -25,11 +22,11 @@ FUNCTION Main
    PUBLIC aFilas[ 20, 3 ]
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0, 0 ;
-      WIDTH 500 ;
-      HEIGHT 420 ;
-      TITLE 'Procesar teclas en un Grid usando una subclase' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 500 ;
+         HEIGHT 420 ;
+         TITLE 'Procesar teclas en un Grid usando una subclase' ;
+         MAIN
 
       aFilas[ 01 ] := {'Simpson',   'Homer',     '555-5555'}
       aFilas[ 02 ] := {'Mulder',    'Fox',       '324-6432'}
@@ -52,7 +49,6 @@ FUNCTION Main
       aFilas[ 19 ] := {'Pradon',    'Alejandra', '???-????'}
       aFilas[ 20 ] := {'Reyes',     'Monica',    '432-5836'}
 
-
       @ 10, 10 GRID Grid_2 OBJ oGrid ;
          SUBCLASS MiGrid ;
          WIDTH oForm:ClientWidth - 20 ;
@@ -71,42 +67,46 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 CLASS MiGrid FROM TGrid
 
-   METHOD Events_Notify
+METHOD Events_Notify
 
 ENDCLASS
 
 METHOD Events_Notify( wParam, lParam ) CLASS MiGrid
-   Local nNotify := GetNotifyCode( lParam )
-   Local nvkey, c, i
 
-   If nNotify == LVN_KEYDOWN
+   LOCAL nNotify := GetNotifyCode( lParam )
+   LOCAL nvkey, c, i
+
+   IF nNotify == LVN_KEYDOWN
       // Obtener código de tecla virtual, vea i_keybd.ch
       nvKey := GetGridvKey( lParam )
 
-      If nvkey >= VK_A .AND. nvkey <= VK_Z
+      IF nvkey >= VK_A .AND. nvkey <= VK_Z
          // Obtener carácter
          c := Upper( Chr( GetGridvKeyAsChar( lParam ) ) )
 
          // Buscar la primera fila que contenga el carácter
          i := ASCAN( aFilas, { |aItem| c $ Upper( aItem[1] ) } )
 
-         If i > 0
+         IF i > 0
             // Seleccionar el ítem en el grid
             ::Value := i
-         EndIf
+         ENDIF
 
          // Evitar la ejecución de la acción por defecto
-         Return 1
-      EndIf
-   EndIf
+
+         RETURN 1
+      ENDIF
+   ENDIF
 
    // Ejecutar la acción por defecto de la clase TGrid
-Return ::Super:Events_Notify( wParam, lParam )
 
-/*
- * EOF
- */
+   RETURN ::Super:Events_Notify( wParam, lParam )
+
+   /*
+   * EOF
+   */
+

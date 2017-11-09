@@ -5,53 +5,54 @@
 #include "minigui.ch"
 
 #xcommand  WAIT WINDOW <message> NOWAIT ;
-      => ;
-	ShowWait_Window(<message>) 
+   => ;
+   ShowWait_Window(<message>)
 
 #xcommand  WAIT CLEAR ;
-      => ;
-	HideWait_Window()
+   => ;
+   HideWait_Window()
 
-Function Main
-Local cTitle := 'WAIT WINDOW DEMO - Foxpro style'
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE cTitle ;
-		MAIN
+   LOCAL cTitle := 'WAIT WINDOW DEMO - Foxpro style'
 
-		@ 70,70 BUTTON Button_1 CAPTION 'WAIT WINDOW "Processing..." NOWAIT' ACTION Test1() WIDTH 250
-		@ 100,70 BUTTON Button_2 CAPTION 'WAIT CLEAR' ACTION Test2(cTitle) WIDTH 250
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE cTitle ;
+         MAIN
 
-	END WINDOW
+      @ 70,70 BUTTON Button_1 CAPTION 'WAIT WINDOW "Processing..." NOWAIT' ACTION Test1() WIDTH 250
+      @ 100,70 BUTTON Button_2 CAPTION 'WAIT CLEAR' ACTION Test2(cTitle) WIDTH 250
 
-	CENTER WINDOW Win_1 
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
 
-Return Nil
+   ACTIVATE WINDOW Win_1
 
-procedure test1()
+   RETURN NIL
 
-	WAIT WINDOW "Processing... " NOWAIT
+PROCEDURE test1()
 
-	Win_1.Title := "Processing... "
+   WAIT WINDOW "Processing... " NOWAIT
 
-	Win_1.Setfocus()
+   Win_1.Title := "Processing... "
 
-return
+   Win_1.Setfocus()
 
-procedure test2( cTitle )
+   RETURN
 
-	WAIT CLEAR
+PROCEDURE test2( cTitle )
 
-	Win_1.Title := cTitle
+   WAIT CLEAR
 
-	DO MESSAGE LOOP
+   Win_1.Title := cTitle
 
-return
+   DO MESSAGE LOOP
 
+   RETURN
 
-#include "WaitWindowFox.prg"
+   #include "WaitWindowFox.prg"
+

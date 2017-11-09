@@ -1,21 +1,18 @@
 /*
- * Ejemplo Combobox n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar las cláusulas
- * ITEMSOURCE, ITEMIMAGENUMBER e IMAGESOURCE para cargar
- * ítems e imágenes en un combobox usando información
- * de una base de datos. También muestra cómo cambiar
- * las imágenes luego de la creación del control.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * Las imágenes utilizadas en este ejemplo pueden descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Combobox
- */
+* Ejemplo Combobox n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar las cláusulas
+* ITEMSOURCE, ITEMIMAGENUMBER e IMAGESOURCE para cargar
+* ítems e imágenes en un combobox usando información
+* de una base de datos. También muestra cómo cambiar
+* las imágenes luego de la creación del control.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* Las imágenes utilizadas en este ejemplo pueden descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Combobox
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -27,11 +24,11 @@ FUNCTION Main()
    CrearDBF()
 
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 428 ;
-      HEIGHT 300 ;
-      TITLE "COMBOBOX con Imágenes" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 428 ;
+         HEIGHT 300 ;
+         TITLE "COMBOBOX con Imágenes" ;
+         MAIN
 
       @ 20,20 COMBOBOX cmb_1 ;
          OBJ oCmb_1 ;
@@ -49,7 +46,7 @@ FUNCTION Main()
          WIDTH 100 ;
          HEIGHT 28 ;
          ACTION {|| oCmb_1:ImageSource := {|| test->image2}, ;
-                    oCmb_1:Refresh() }
+         oCmb_1:Refresh() }
 
       ON KEY ESCAPE ACTION ThisWindow.Release()
    END WINDOW
@@ -59,7 +56,7 @@ FUNCTION Main()
 
    DBCLOSEALL()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CrearDBF()
 
@@ -80,30 +77,31 @@ FUNCTION CrearDBF()
    aDbf[3][ DBS_LEN ]  := 12
    aDbf[3][ DBS_DEC ]  := 0
 
-	REQUEST DBFCDX
+   REQUEST DBFCDX
 
    DBCREATE("Test", aDbf, "DBFCDX")
 
-	USE test Via "DBFCDX"
-	ZAP
+   USE test Via "DBFCDX"
+   ZAP
 
-	APPEND BLANK
-	REPLACE Item   WITH "Item 1"
-	REPLACE Image  WITH "globe.bmp"
-	REPLACE Image2 WITH "albaran.bmp"
+   APPEND BLANK
+   REPLACE Item   WITH "Item 1"
+   REPLACE Image  WITH "globe.bmp"
+   REPLACE Image2 WITH "albaran.bmp"
 
-	APPEND BLANK
-	REPLACE Item   WITH "Item 2"
-	REPLACE Image  WITH "albaran.bmp"
-	REPLACE Image2 WITH "info.bmp"
+   APPEND BLANK
+   REPLACE Item   WITH "Item 2"
+   REPLACE Image  WITH "albaran.bmp"
+   REPLACE Image2 WITH "info.bmp"
 
-	APPEND BLANK
-	REPLACE Item   WITH "Item 3"
-	REPLACE Image  WITH "info.bmp"
-	REPLACE Image2 WITH "globe.bmp"
+   APPEND BLANK
+   REPLACE Item   WITH "Item 3"
+   REPLACE Image  WITH "info.bmp"
+   REPLACE Image2 WITH "globe.bmp"
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

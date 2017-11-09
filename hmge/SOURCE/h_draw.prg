@@ -13,43 +13,42 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawtextout( window, row, col, string, fontcolor, backcolor, fontname, fontsize, bold, italic, underline, strikeout, transparent, angle, once )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, FormHandle, FontHandle
    LOCAL torow, tocol
 
@@ -75,17 +74,16 @@ FUNCTION drawtextout( window, row, col, string, fontcolor, backcolor, fontname, 
 
       torow := row + iif( transparent .OR. !Empty( angle ), 0, fontsize + 4 )
       tocol := col + ( Len( string ) - 1 ) * fontsize
-      textdraw( formhandle, row, col, string, torow, tocol, fontcolor, backcolor, fontname, fontsize, bold, italic, underline, strikeout, transparent, angle )
+      TEXTdraw( formhandle, row, col, string, torow, tocol, fontcolor, backcolor, fontname, fontsize, bold, italic, underline, strikeout, transparent, angle )
       IF ! once
          AAdd ( _HMG_aFormGraphTasks [i], {|| textdraw( formhandle,row,col,string,torow,tocol,fontcolor,backcolor,fontname,fontsize,bold,italic,underline,strikeout,transparent,angle ) } )
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawline( window, row, col, row1, col1, penrgb, penwidth )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle
 
@@ -98,11 +96,10 @@ FUNCTION drawline( window, row, col, row1, col1, penrgb, penwidth )
       AAdd ( _HMG_aFormGraphTasks [i] , {|| linedraw( formhandle,row,col,row1,col1,penrgb,penwidth ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawrect( window, row, col, row1, col1, penrgb, penwidth, fillrgb )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle, fill
 
@@ -118,11 +115,10 @@ FUNCTION drawrect( window, row, col, row1, col1, penrgb, penwidth, fillrgb )
       AAdd ( _HMG_aFormGraphTasks [i] , {|| rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawroundrect( window, row, col, row1, col1, width, height, penrgb, penwidth, fillrgb )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle, fill
 
@@ -138,11 +134,10 @@ FUNCTION drawroundrect( window, row, col, row1, col1, width, height, penrgb, pen
       AAdd ( _HMG_aFormGraphTasks [i] , {|| roundrectdraw( FormHandle,row,col,row1,col1,width,height,penrgb,penwidth,fillrgb,fill ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawellipse( window, row, col, row1, col1, penrgb, penwidth, fillrgb )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle, fill
 
@@ -158,11 +153,10 @@ FUNCTION drawellipse( window, row, col, row1, col1, penrgb, penwidth, fillrgb )
       AAdd ( _HMG_aFormGraphTasks [i] , {|| ellipsedraw( FormHandle ,row,col,row1,col1,penrgb,penwidth,fillrgb,fill ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawarc( window, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle
 
@@ -175,11 +169,10 @@ FUNCTION drawarc( window, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb
       AAdd ( _HMG_aFormGraphTasks [i] , {|| arcdraw( FormHandle ,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawpie( window, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth, fillrgb )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle, fill
 
@@ -195,11 +188,10 @@ FUNCTION drawpie( window, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb
       AAdd ( _HMG_aFormGraphTasks [i] , {|| piedraw( FormHandle,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth,fillrgb,fill ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawpolygon( window, apoints, penrgb, penwidth, fillrgb )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle, fill
    LOCAL xarr := {}, yarr := {}
@@ -217,11 +209,10 @@ FUNCTION drawpolygon( window, apoints, penrgb, penwidth, fillrgb )
       AAdd( _HMG_aFormGraphTasks [i] , {|| polygondraw( FormHandle,xarr,yarr,penrgb,penwidth,fillrgb,fill ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION drawpolybezier( window, apoints, penrgb, penwidth )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle
    LOCAL xarr := {}, yarr := {}
@@ -236,12 +227,12 @@ FUNCTION drawpolybezier( window, apoints, penrgb, penwidth )
       AAdd( _HMG_aFormGraphTasks [i] , {|| polybezierdraw( FormHandle,xarr,yarr,penrgb,penwidth ) } )
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-#define COLOR_BTNFACE	15
-*-----------------------------------------------------------------------------*
+   #define COLOR_BTNFACE   15
+
 FUNCTION HMG_DrawIcon( window, icon, row, col, w, h, rgb, transparent )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window ), backcolor
    LOCAL FormHandle
 
@@ -272,11 +263,10 @@ FUNCTION HMG_DrawIcon( window, icon, row, col, w, h, rgb, transparent )
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION EraseWindow( window )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
 
    IF i > 0
@@ -288,11 +278,10 @@ FUNCTION EraseWindow( window )
       ENDIF
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION DrawWindowBoxIn( window, row, col, rowr, colr )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle := _HMG_aFormHandles [i]
    LOCAL hDC := GetDC( FormHandle )
@@ -301,11 +290,10 @@ FUNCTION DrawWindowBoxIn( window, row, col, rowr, colr )
    ReleaseDC( FormHandle, hDC )
    AAdd( _HMG_aFormGraphTasks [i] , {|| WndBoxIn( ( hDC := GetDC( FormHandle ) ), row, col, rowr, colr ), ReleaseDC( FormHandle, hDC ) } )
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION DrawWindowBoxRaised( window, row, col, rowr, colr )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := GetFormIndex ( Window )
    LOCAL FormHandle := _HMG_aFormHandles [i]
    LOCAL hDC := GetDC( FormHandle )
@@ -314,4 +302,5 @@ FUNCTION DrawWindowBoxRaised( window, row, col, rowr, colr )
    ReleaseDC( FormHandle, hDC )
    AAdd( _HMG_aFormGraphTasks [i] , {|| WndBoxRaised( ( hDC := GetDC( FormHandle ) ), row, col, rowr, colr ), ReleaseDC( FormHandle, hDC ) } )
 
-RETURN nil
+   RETURN NIL
+

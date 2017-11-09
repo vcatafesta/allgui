@@ -1,31 +1,31 @@
 /*
 
-  HMG - Harbour Win32 GUI library Demo/Sample
+HMG - Harbour Win32 GUI library Demo/Sample
 
-  Load / Save single dimensional character array
+Load / Save single dimensional character array
 
-  The ComboBox control requires a single dimensional character array.   
+The ComboBox control requires a single dimensional character array.
 
-  So, manipulate this type array frequently required for ComboBox process.
+So, manipulate this type array frequently required for ComboBox process.
 
-  This sample load an external (single dimensional character) array from a text file to the program and upon exit save it to the file.
+This sample load an external (single dimensional character) array from a text file to the program and upon exit save it to the file.
 
-  Processing array into program we are using a dynamic ComboBox control.  
+Processing array into program we are using a dynamic ComboBox control.
 
-  All critics and suggestions are welcome.
+All critics and suggestions are welcome.
 
-  Developed under Harbour Compiler and 
-  HMG - Harbour Win32 GUI library
+Developed under Harbour Compiler and
+HMG - Harbour Win32 GUI library
 
-  Thanks to "Le Roy" Roberto Lopez;
+Thanks to "Le Roy" Roberto Lopez;
 
-  and Carlos RD, who requested and inspired this sample.
+and Carlos RD, who requested and inspired this sample.
 
-  Copyright Bicahi Esgici < esgici <at> gmail.com >
+Copyright Bicahi Esgici < esgici <at> gmail.com >
 
-  History : Feb 2013 : First release
+History : Feb 2013 : First release
 
-  Revised by Grigory Filatov <gfilatov@inbox.ru>
+Revised by Grigory Filatov <gfilatov@inbox.ru>
 
 */
 
@@ -40,26 +40,26 @@ PROCEDURE Main()
    PRIVATE aTires := LoadArray( cArrFNam )
 
    DEFINE WINDOW frmLS1dArry ;
-       AT 0,0 ;
-       WIDTH 400 ;
-       HEIGHT 200 ;
-       TITLE 'Load / Save single dimension array sample' ;
-       ON RELEASE SaveArray( cArrFNam, aTires ) ;
-       MAIN
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Load / Save single dimension array sample' ;
+         ON RELEASE SaveArray( cArrFNam, aTires ) ;
+         MAIN
 
-       ON KEY CONTROL+DELETE ACTION DeleteItem()
+      ON KEY CONTROL+DELETE ACTION DeleteItem()
 
-       ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-       @ 10,10 COMBOBOX cmbTest ;
-           WIDTH  200  ;
-           HEIGHT 200 ;
-           ITEMS aTires ;
-           VALUE 1 ;
-           DISPLAYEDIT ;
-           ON LOSTFOCUS RefreshCBox() ;
-           ON ENTER     RefreshCBox() ;
-           DROPPEDWIDTH 250
+      @ 10,10 COMBOBOX cmbTest ;
+         WIDTH  200  ;
+         HEIGHT 200 ;
+         ITEMS aTires ;
+         VALUE 1 ;
+         DISPLAYEDIT ;
+         ON LOSTFOCUS RefreshCBox() ;
+         ON ENTER     RefreshCBox() ;
+         DROPPEDWIDTH 250
 
    END WINDOW
 
@@ -67,9 +67,9 @@ PROCEDURE Main()
 
    ACTIVATE WINDOW frmLS1dArry
 
-RETURN // Main()
+   RETURN // Main()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE RefreshCBox()
 
@@ -85,9 +85,9 @@ PROCEDURE RefreshCBox()
 
    ENDIF
 
-RETURN // RefreshCBox()
+   RETURN // RefreshCBox()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE DeleteItem()
 
@@ -107,24 +107,24 @@ PROCEDURE DeleteItem()
 
    ENDIF
 
-RETURN // DeleteItem()
+   RETURN // DeleteItem()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION LoadArray(;                      // Load a 1d Char array from a file
-                   cFilName )
+   cFilName )
 
    LOCAL aRVal := {}
 
    aRVal := HB_ATOKENS( HB_MEMOREAD( cFilName ), CRLF )
 
-RETURN aRVal // LoadArray()
+   RETURN aRVal // LoadArray()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SaveArray(;                     // Save a 1d Char array to a file
-                   cFilName,;
-                   aC1dArray )
+   cFilName,;
+      aC1dArray )
 
    LOCAL cText := CRLF
 
@@ -135,6 +135,7 @@ PROCEDURE SaveArray(;                     // Save a 1d Char array to a file
 
    ENDIF
 
-RETURN // SaveArray()
+   RETURN // SaveArray()
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+

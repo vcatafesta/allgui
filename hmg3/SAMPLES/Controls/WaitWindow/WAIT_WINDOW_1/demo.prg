@@ -5,34 +5,35 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'WAIT WINDOW DEMO 1' ;
-		MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'WAIT WINDOW DEMO 1' ;
+         MAIN
 
-	@ 70,70 BUTTON Button_1 CAPTION 'WAIT WINDOW "Processing..." NOWAIT' ACTION Test1() WIDTH 250
-	@ 100,70 BUTTON Button_2 CAPTION 'WAIT CLEAR' ACTION Test2() WIDTH 250
+      @ 70,70 BUTTON Button_1 CAPTION 'WAIT WINDOW "Processing..." NOWAIT' ACTION Test1() WIDTH 250
+      @ 100,70 BUTTON Button_2 CAPTION 'WAIT CLEAR' ACTION Test2() WIDTH 250
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Win_1 
+   CENTER WINDOW Win_1
 
-	ACTIVATE WINDOW Win_1 
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
-procedure test1()
+PROCEDURE test1()
 
-	WAIT WINDOW "Processing..."  NOWAIT
+   WAIT WINDOW "Processing..."  NOWAIT
 
-return
+   RETURN
 
-procedure test2()
+PROCEDURE test2()
 
-	WAIT CLEAR
+   WAIT CLEAR
 
-return
+   RETURN
+

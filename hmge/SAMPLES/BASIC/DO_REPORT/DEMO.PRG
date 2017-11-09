@@ -1,54 +1,49 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * 2010-05-26 Edited by Alexey L. Gustow <gustow33 @ mail.ru> ("GAL")
- * - translation to English (mainly in report definitions)
- * - little reformatting
- * - todo: translating memo's (Test->BIO) fields from Spanish to English
+* MINIGUI - Harbour Win32 GUI library Demo
+* 2010-05-26 Edited by Alexey L. Gustow <gustow33 @ mail.ru> ("GAL")
+* - translation to English (mainly in report definitions)
+* - little reformatting
+* - todo: translating memo's (Test->BIO) fields from Spanish to English
 */
 
 #include "minigui.ch"
 
-*--------------------------------------------------------*
-Function Main()
-*--------------------------------------------------------*
+FUNCTION Main()
 
-   set language to ENGLISH    // GAL (changed from SPANISH")
+   SET language to ENGLISH    // GAL (changed from SPANISH")
 
-   set century on
-   set date ansi
+   SET CENTURY ON
+   SET DATE ANSI
 
-   use test
-   index on field->first to lista   // ".NTX" (by default)
+   USE test
+   INDEX ON field->first to lista   // ".NTX" (by default)
 
-   define window Pr_Form ;
-      at 0,0 ;
-      width 200 ;
-      height 100 ;
-      title 'DO REPORT Tests' ;
-      main ;
-      on release ( DbCloseArea(), FErase("lista.ntx") )
+   DEFINE WINDOW Pr_Form ;
+         at 0,0 ;
+         width 200 ;
+         height 100 ;
+         title 'DO REPORT Tests' ;
+         main ;
+         on release ( DbCloseArea(), FErase("lista.ntx") )
 
-         define main menu
-            popup 'File'
-               item 'Do Report Test'  action PrintTest()
-               item 'Do Report Test2' action PrintTest2()
-               item 'Do Report Test3' action PrintTest3()
-               item 'Do Report Test4' action PrintTest4()
-               separator
-               item 'Exit'            action ThisWindow.Release
-            end popup
-         end menu
+      DEFINE MAIN MENU
+         POPUP 'File'
+            item 'Do Report Test'  action PrintTest()
+            item 'Do Report Test2' action PrintTest2()
+            item 'Do Report Test3' action PrintTest3()
+            item 'Do Report Test4' action PrintTest4()
+            separator
+            item 'Exit'            action ThisWindow.Release
+         end popup
+      end menu
 
-   end window
+   END WINDOW
 
-   activate window Pr_Form
+   ACTIVATE WINDOW Pr_Form
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function PrintTest()
-*--------------------------------------------------------*
+FUNCTION PrintTest()
 
    DbGoTop()    // in "Test.dbf"
 
@@ -65,38 +60,33 @@ Function PrintTest()
       lmargin  3                                                              ;
       tmargin  3                                                              ;
       papersize DMPAPER_A4                                                    ;
-      preview                                                                 ; 
-      select                                                                  ;
+      preview                                                                 ;
+      SELECT                                                                  ;
       multiple                                                                ;
       grouped by 'first'                                                      ;
       headrgrp 'Name'                                                         ;
       nodatetimestamp
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function PrintTest2()
-*--------------------------------------------------------*
+FUNCTION PrintTest2()
 
    DbGoTop()
    DO REPORT FORM REPORT2
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function PrintTest3()
-*--------------------------------------------------------*
+FUNCTION PrintTest3()
 
    DbGoTop()
    DO REPORT FORM REPORT3
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function PrintTest4()
-*--------------------------------------------------------*
+FUNCTION PrintTest4()
 
    DbGoTop()
    DO REPORT FORM REPORT4
 
-Return Nil
+   RETURN NIL
+

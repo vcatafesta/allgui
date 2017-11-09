@@ -1,21 +1,19 @@
 /*
- * Ejemplo Browse # 18
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo derivar el flujo del programa a
- * otro control mientras estamos en el evento ON EDITCELL de
- * un Browse.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse # 18
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo derivar el flujo del programa a
+* otro control mientras estamos en el evento ON EDITCELL de
+* un Browse.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
 
-Function Main
+FUNCTION Main
 
    LOCAL oForm, oBrowse
 
@@ -28,40 +26,40 @@ Function Main
    AbrirTablas()
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      CLIENTAREA ;
-      WIDTH 500 HEIGHT 380 ;
-      MINWIDTH 500 MINHEIGHT 380 ;
-      TITLE 'ooHG Demo - Cómo derivar el flujo del programa dentro de un Browse' ;
-      MAIN NOMAXIMIZE ;
-      ON RELEASE Limpiar() ;
-      ON SIZE ( oBrowse:Width  := oForm:ClientWidth - 40, ;
-                oBrowse:Height := oForm:ClientHeight - 40 )
+         AT 0,0 ;
+         CLIENTAREA ;
+         WIDTH 500 HEIGHT 380 ;
+         MINWIDTH 500 MINHEIGHT 380 ;
+         TITLE 'ooHG Demo - Cómo derivar el flujo del programa dentro de un Browse' ;
+         MAIN NOMAXIMIZE ;
+         ON RELEASE Limpiar() ;
+         ON SIZE ( oBrowse:Width  := oForm:ClientWidth - 40, ;
+         oBrowse:Height := oForm:ClientHeight - 40 )
 
       @ 20,20 BROWSE Browse_1 OBJ oBrowse ;
          WIDTH oForm:ClientWidth - 40 ;
          HEIGHT oForm:ClientHeight - 40 ;
          HEADERS { 'Código', ;
-                   'Nombre', ;
-                   'Apellido', ;
-                   'Nacido', ;
-                   'Casado', ;
-                   'Biografía' } ;
+         'Nombre', ;
+         'Apellido', ;
+         'Nacido', ;
+         'Casado', ;
+         'Biografía' } ;
          WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
          WORKAREA test ;
          FIELDS { 'Test->Code', ;
-                  'Test->First', ;
-                  'Test->Last', ;
-                  'Test->Birth', ;
-                  'Test->Married', ;
-                  'Test->Bio' } ;
+         'Test->First', ;
+         'Test->Last', ;
+         'Test->Birth', ;
+         'Test->Married', ;
+         'Test->Bio' } ;
          FONT "Courier New" SIZE 10 ;
          JUSTIFY { BROWSE_JTFY_RIGHT, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER} ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER} ;
          EDIT INPLACE ;
          ON EDITCELL MiFuncion()
 
@@ -72,9 +70,8 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN Nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------
 FUNCTION AbrirTablas()
 
    LOCAL aDbf[6][4]
@@ -127,19 +124,18 @@ FUNCTION AbrirTablas()
 
    GO TOP
 
-RETURN Nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------
 FUNCTION MiFuncion()
 
    IF This.CellColIndex == 2
       DEFINE WINDOW Form_2 ;
-         AT 0,0 ;
-         CLIENTAREA ;
-         WIDTH 380 HEIGHT 380 ;
-         TITLE 'Seleccione un ítem con dobleclic' ;
-         NOSIZE NOMAXIMIZE ;
-         MODAL
+            AT 0,0 ;
+            CLIENTAREA ;
+            WIDTH 380 HEIGHT 380 ;
+            TITLE 'Seleccione un ítem con dobleclic' ;
+            NOSIZE NOMAXIMIZE ;
+            MODAL
 
          @ 20,20 LISTBOX lst_1 ;
             WIDTH 340 ;
@@ -154,19 +150,19 @@ FUNCTION MiFuncion()
       ACTIVATE WINDOW Form_2
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION Limpiar()
 
-  dbCloseAll()
+   dbCloseAll()
 
-  ERASE Test.dbf
-  ERASE Test.fpt
-  ERASE Code.cdx
+   ERASE Test.dbf
+   ERASE Test.fpt
+   ERASE Code.cdx
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

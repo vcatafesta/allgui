@@ -1,5 +1,5 @@
 /*
- * MiniGUI ComboBox Demo
+* MiniGUI ComboBox Demo
 */
 
 #include "minigui.ch"
@@ -9,22 +9,22 @@ PROCEDURE Main()
    LOCAL aDigits := {}, i
    LOCAL aWords  := { "one", "two", "three", "twenty", "thirty" }
 
-   for i := 1 to 2500
+   FOR i := 1 to 2500
       aadd( aDigits, "$" + hb_NToS( hb_RandomInt( 2500 ) ) )
-   next
+   NEXT
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 400 ;
-      HEIGHT 200 ;
-      TITLE 'ComboBox Demo' ;
-      MAIN 
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'ComboBox Demo' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Test'
             MENUITEM 'Get Value for Combo_1' ACTION MsgInfo( Form_1.Combo_1.Value )
             MENUITEM 'Set Value for Combo_1' ;
-                     ACTION ( Form_1.Text_1.Value := 'tw', Form_1.Text_3.Value := 'th' )
+               ACTION ( Form_1.Text_1.Value := 'tw', Form_1.Text_3.Value := 'th' )
             SEPARATOR
             ITEM 'Exit' ACTION ThisWindow.Release
          END POPUP
@@ -33,7 +33,6 @@ PROCEDURE Main()
             MENUITEM 'Set Value for Combo_2' ACTION Form_1.Text_2.Value := hb_NToS( hb_RandomInt( 2500 ) )
          END POPUP
       END MENU
-
 
       @ 10,10 COMBOBOX Combo_1 ;
          ITEMS aWords;
@@ -66,7 +65,7 @@ PROCEDURE Main()
 
    RETURN
 
-
 FUNCTION ComboSearch( aArray, cValue )
 
    RETURN Ascan( aArray, {|e| SubStr(e, 2) = cValue} )
+

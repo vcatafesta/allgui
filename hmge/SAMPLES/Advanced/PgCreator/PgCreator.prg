@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Property Grid Creator Ver 1.1
- * (c) 2008-2010 Janusz Pora <januszpora@onet.eu>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Property Grid Creator Ver 1.1
+* (c) 2008-2010 Janusz Pora <januszpora@onet.eu>
 */
 
 ANNOUNCE RDDSYS
@@ -49,9 +48,8 @@ ANNOUNCE RDDSYS
 
 MEMVAR clCategory, nDefId, FormTest, PG_test, Form1, PGrid1
 
-*-----------------------------------------------------------------------------*
-Function main()
-*-----------------------------------------------------------------------------*
+FUNCTION main()
+
    PUBLIC clCategory := 'Init Category (ROOT)', nDefId := 100
    PUBLIC FormTest := "FormTest" , PG_test := "PG_Test"
    PUBLIC Form1 := "Form_1" , PGrid1 := "PropGrid_1"
@@ -60,13 +58,13 @@ Function main()
    DECLARE WINDOW Form1
 
    DEFINE WINDOW Form_1 ;
-      AT 100,50 ;
-      WIDTH 750 ;
-      HEIGHT 510 ;
-      TITLE 'Property Grid Creator Ver 1.1' ;
-      ICON "PgGen.ico" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         AT 100,50 ;
+         WIDTH 750 ;
+         HEIGHT 510 ;
+         TITLE 'Property Grid Creator Ver 1.1' ;
+         ICON "PgGen.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE MAIN MENU
          POPUP '&File'
@@ -76,7 +74,7 @@ Function main()
             ITEM 'Get Value selected Item' ACTION DisplPGValue("PropGrid_1","Form_1",0)
             ITEM 'Get Property Info selected Item' ACTION DisplPGInfo("PropGrid_1","Form_1",0)
          END POPUP
-          POPUP '&Info'
+         POPUP '&Info'
             ITEM 'About...' ACTION About()
          END POPUP
 
@@ -101,57 +99,56 @@ Function main()
          ITEMINFO SINGLEEXPAND
 
       DEFINE CATEGORY 'Main PG Property' ID CTG_MAIN //INFO "To create a Property Grid, fill Property Items with correct data and press button Create Property"
-         DEFINE CATEGORY "Header" ID CTG_HEADER
-            PROPERTYITEM CHECK  "Header"       VALUE "Excluded"  ITEMDATA "Excluded;Included" ID ITM_HEADER INFO "Check to include Header to Property Grid"
-            PROPERTYITEM STRING "Header Name"  VALUE "Property Name" DISABLED ID ITM_HDNAME INFO "Insert Header Name"
-            PROPERTYITEM STRING "Header Value" VALUE "Value"   DISABLED ID ITM_HDVALUE INFO "Insert Header Name for Value"
-         END CATEGORY
-         PROPERTYITEM SIZE   "Control Position" VALUE "(50,40)"  ITEMDATA "Row; Col"  ID ITM_PGPOS INFO "Insert Positon for Property Control"
-         PROPERTYITEM SIZE   "Control Size"     VALUE "(300,400)"  ITEMDATA "Width; Height"  ID ITM_PGSIZE INFO "Insert Size for Property Control"
-         DEFINE CATEGORY "Item" ID CTG_ITEMPAR
-            PROPERTYITEM INTEGER "Indent"         VALUE 20  ID ITM_PGINDENT INFO "Insert value for Indent"
-            PROPERTYITEM INTEGER "Width of Data"  VALUE 150  ID ITM_PGDATAW INFO "Insert column size for Value"
-            PROPERTYITEM INTEGER "Height of Item" VALUE 20  ID ITM_PGITEMH INFO "Insert height of item"
-            PROPERTYITEM CHECK  "Item Expand"     VALUE "Included"  ITEMDATA "Excluded;Included" ID ITM_PGEXP INFO "Check this option to expand a Category at start"
-            PROPERTYITEM CHECK  "Single Expand"   VALUE "Excluded"  ITEMDATA "Excluded;Included" ID ITM_PGSINEXP INFO "Check this option to expand only one Category"
-         END CATEGORY
-         PROPERTYITEM FONT   "Font"      VALUE "Arial, 8, Italic"  ITEMDATA "Arial; 8; false; true; false; false"  ID ITM_PGFONT INFO "Basic font for application"
-         PROPERTYITEM COLOR  "Fontcolor" VALUE  BLACK  ITEMDATA '0;0;0'  ID ITM_PGFONTCLR INFO "Color for Font, choose from palette of colours"
-         PROPERTYITEM COLOR  "Backcolor" VALUE  {240,240,240}  ITEMDATA '208;205;188' ID ITM_PGBACKCLR INFO "Colour for background, choose from palette of colours"
-         PROPERTYITEM CHECK  'Info'      VALUE 'Hide'  ITEMDATA 'Hide;Show' ID ITM_PGINFO INFO "Check this option to show window with Info"
-      END CATEGORY
-      DEFINE CATEGORY "INIT Category" ID CTG_INITCAT
-         PROPERTYITEM STRING 'Init Category (ROOT)'      VALUE "Name of Init Category" ID ITM_PGINITCTG INFO "Insert name of Init Category to create Property Grid"
-      END CATEGORY
+      DEFINE CATEGORY "Header" ID CTG_HEADER
+      PROPERTYITEM CHECK  "Header"       VALUE "Excluded"  ITEMDATA "Excluded;Included" ID ITM_HEADER INFO "Check to include Header to Property Grid"
+      PROPERTYITEM STRING "Header Name"  VALUE "Property Name" DISABLED ID ITM_HDNAME INFO "Insert Header Name"
+      PROPERTYITEM STRING "Header Value" VALUE "Value"   DISABLED ID ITM_HDVALUE INFO "Insert Header Name for Value"
+   END CATEGORY
+   PROPERTYITEM SIZE   "Control Position" VALUE "(50,40)"  ITEMDATA "Row; Col"  ID ITM_PGPOS INFO "Insert Positon for Property Control"
+   PROPERTYITEM SIZE   "Control Size"     VALUE "(300,400)"  ITEMDATA "Width; Height"  ID ITM_PGSIZE INFO "Insert Size for Property Control"
+   DEFINE CATEGORY "Item" ID CTG_ITEMPAR
+   PROPERTYITEM INTEGER "Indent"         VALUE 20  ID ITM_PGINDENT INFO "Insert value for Indent"
+   PROPERTYITEM INTEGER "Width of Data"  VALUE 150  ID ITM_PGDATAW INFO "Insert column size for Value"
+   PROPERTYITEM INTEGER "Height of Item" VALUE 20  ID ITM_PGITEMH INFO "Insert height of item"
+   PROPERTYITEM CHECK  "Item Expand"     VALUE "Included"  ITEMDATA "Excluded;Included" ID ITM_PGEXP INFO "Check this option to expand a Category at start"
+   PROPERTYITEM CHECK  "Single Expand"   VALUE "Excluded"  ITEMDATA "Excluded;Included" ID ITM_PGSINEXP INFO "Check this option to expand only one Category"
+END CATEGORY
+PROPERTYITEM FONT   "Font"      VALUE "Arial, 8, Italic"  ITEMDATA "Arial; 8; false; true; false; false"  ID ITM_PGFONT INFO "Basic font for application"
+PROPERTYITEM COLOR  "Fontcolor" VALUE  BLACK  ITEMDATA '0;0;0'  ID ITM_PGFONTCLR INFO "Color for Font, choose from palette of colours"
+PROPERTYITEM COLOR  "Backcolor" VALUE  {240,240,240}  ITEMDATA '208;205;188' ID ITM_PGBACKCLR INFO "Colour for background, choose from palette of colours"
+PROPERTYITEM CHECK  'Info'      VALUE 'Hide'  ITEMDATA 'Hide;Show' ID ITM_PGINFO INFO "Check this option to show window with Info"
+END CATEGORY
+DEFINE CATEGORY "INIT Category" ID CTG_INITCAT
+PROPERTYITEM STRING 'Init Category (ROOT)'      VALUE "Name of Init Category" ID ITM_PGINITCTG INFO "Insert name of Init Category to create Property Grid"
+END CATEGORY
 
-      DEFINE CATEGORY "Item Property"  ID CTG_ITEM
-         PROPERTYITEM LIST   "CATEGORY"  VALUE "Name of Init Category" ITEMDATA  clCategory ID ITM_CTG INFO "Insert a parent Category for Item"
-         PROPERTYITEM ENUM   "Type"      VALUE "string"  ITEMDATA  "category;string;numeric;double;syscolor;color;logic;date;font;array;enum;flag;sysinfo;image;check;size;file;folder;list;userfun" INFO "Select type of Item" ID ITM_TYPE
-         PROPERTYITEM STRING "Name"      VALUE ""        ID ITM_NAME  INFO "Insert a Name for Item"
-         PROPERTYITEM USERFUN "Value"    VALUE ""        ITEMDATA "{|x| DefFunData(PGrid1,Form1,.f.,x)}" ID ITM_VALUE INFO "Insert a Value for Item, use appropriate function mit help of button."
-         PROPERTYITEM USERFUN "Data"     VALUE ""        ITEMDATA "{|x| DefFunData(PGrid1,Form1,.t.,x)}" ID ITM_DATA  INFO "Insert adequate data to type of Item, use appropriate function mit help of button."
-         PROPERTYITEM CHECK  "Disabled"  VALUE "Enabled" ITEMDATA "Enabled;Disabled" ID ITM_DISAB INFO "Check to disable this Item"
-         PROPERTYITEM CHECK  "Disable Edit"  VALUE "Disabled" ITEMDATA "Enabled;Disabled" ID ITM_DISED INFO "Check to disable this Item"
-         PROPERTYITEM INTEGER 'Id'       VALUE nDefId    ID ITM_ID  INFO "Automatically or manually invent new ID Numbers for new Item"
-         PROPERTYITEM STRING 'Info'      VALUE  ""       ID ITM_INFO  INFO "Inser a Information for Item"
-         PROPERTYITEM STRING 'Varable Name ' VALUE "" ID ITM_VAR INFO "Inser a Variable Name for Value to saved in file *.mem"
-      END CATEGORY
+DEFINE CATEGORY "Item Property"  ID CTG_ITEM
+PROPERTYITEM LIST   "CATEGORY"  VALUE "Name of Init Category" ITEMDATA  clCategory ID ITM_CTG INFO "Insert a parent Category for Item"
+PROPERTYITEM ENUM   "Type"      VALUE "string"  ITEMDATA  "category;string;numeric;double;syscolor;color;logic;date;font;array;enum;flag;sysinfo;image;check;size;file;folder;list;userfun" INFO "Select type of Item" ID ITM_TYPE
+PROPERTYITEM STRING "Name"      VALUE ""        ID ITM_NAME  INFO "Insert a Name for Item"
+PROPERTYITEM USERFUN "Value"    VALUE ""        ITEMDATA "{|x| DefFunData(PGrid1,Form1,.f.,x)}" ID ITM_VALUE INFO "Insert a Value for Item, use appropriate function mit help of button."
+PROPERTYITEM USERFUN "Data"     VALUE ""        ITEMDATA "{|x| DefFunData(PGrid1,Form1,.t.,x)}" ID ITM_DATA  INFO "Insert adequate data to type of Item, use appropriate function mit help of button."
+PROPERTYITEM CHECK  "Disabled"  VALUE "Enabled" ITEMDATA "Enabled;Disabled" ID ITM_DISAB INFO "Check to disable this Item"
+PROPERTYITEM CHECK  "Disable Edit"  VALUE "Disabled" ITEMDATA "Enabled;Disabled" ID ITM_DISED INFO "Check to disable this Item"
+PROPERTYITEM INTEGER 'Id'       VALUE nDefId    ID ITM_ID  INFO "Automatically or manually invent new ID Numbers for new Item"
+PROPERTYITEM STRING 'Info'      VALUE  ""       ID ITM_INFO  INFO "Inser a Information for Item"
+PROPERTYITEM STRING 'Varable Name ' VALUE "" ID ITM_VAR INFO "Inser a Variable Name for Value to saved in file *.mem"
+END CATEGORY
 
-   END PROPGRID
+END PROPGRID
 
-   ExpandCategPG("Form_1","PropGrid_1",'Main Property',1)
+ExpandCategPG("Form_1","PropGrid_1",'Main Property',1)
 
-   END WINDOW
+END WINDOW
 
-   Form_1.Btn_21.Enabled :=.f.
+Form_1.Btn_21.Enabled :=.f.
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-Return Nil
+RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION ChdItem(PGname,cForm)
-*------------------------------------------------------------------------------*
+
    LOCAL aValue, nId, xValue, cValue, ItType
 
    GET INFO PROPERTYITEM &PGName OF  &cForm TO  aValue
@@ -166,15 +163,15 @@ FUNCTION ChdItem(PGname,cForm)
          ELSE
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_HDNAME
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_HDVALUE
-         endif
+         ENDIF
       CASE nId == ITM_PGINITCTG
          xValue := aValue[PGI_VALUE ]
          IF !Empty(xValue)
             SET PROPERTYITEM &PGName OF &cForm   ;
                VALUE xValue ITEMDATA xValue ID ITM_CTG
             Form_1.Btn_20.Enabled :=.t.
-         endif
-      //Value for Item
+         ENDIF
+         //Value for Item
       CASE nId == ITM_TYPE
          ItType := PgIdentType(xValue)
 
@@ -202,8 +199,8 @@ FUNCTION ChdItem(PGname,cForm)
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_DISAB
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_VAR
          CASE ItType == PG_STRING .or. ItType == PG_INTEGER ;
-            .or. ItType == PG_DOUBLE .or. ItType == PG_LOGIC .or. ItType == PG_DATE ;
-            .or. ItType == PG_SYSCOLOR
+               .or. ItType == PG_DOUBLE .or. ItType == PG_LOGIC .or. ItType == PG_DATE ;
+               .or. ItType == PG_SYSCOLOR
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_DATA
          CASE ItType == PG_SIZE
             DISABLE PROPERTYITEM &PGName OF  &cForm ID ITM_VALUE
@@ -214,12 +211,12 @@ FUNCTION ChdItem(PGname,cForm)
             Form_1.Btn_21.Enabled :=.t.
          ENDIF
       ENDCASE
-   endif
-RETURN nil
+   ENDIF
 
-*-----------------------------------------------------------------------------*
-Function CreateTestPG(FormName,ControlName,FormTest, PG_Test)
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
+FUNCTION CreateTestPG(FormName,ControlName,FormTest, PG_Test)
+
    LOCAL lHD, cHdName, cHdValue, xPos, yPos, xSize, ySize, aFontColor, aBackColor, nIndent, nDataWidth
    LOCAL cInitCateg, aFont, nItemHeight, lPgExp, lPgSinExp, lInfo
 
@@ -236,23 +233,21 @@ Function CreateTestPG(FormName,ControlName,FormTest, PG_Test)
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGSINEXP TO lPgSinExp
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGINFO TO lInfo
 
-
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGFONTCLR TO aFontColor
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGBACKCLR TO aBackColor
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGFONT TO aFont
 
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_PGINITCTG TO cInitCateg
 
-
    Form_1.Btn_20.Enabled :=.f.
 
    DEFINE WINDOW &FormTest ;
-      AT 130,130 + xSize +xPos;
-      WIDTH xSize +xPos +200;
-      HEIGHT ySize +100 ;
-      TITLE 'PropertyGrid Test' ;
-      ON RELEASE ReleaseTest() ;
-      CHILD
+         AT 130,130 + xSize +xPos;
+         WIDTH xSize +xPos +200;
+         HEIGHT ySize +100 ;
+         TITLE 'PropertyGrid Test' ;
+         ON RELEASE ReleaseTest() ;
+         CHILD
 
       _DefinePropGrid ( PG_Test, FormTest, yPos,xPos , xSize, ySize, , , .f., , ;
          aFont[1], aFont[2], , , ,.f., , , aFont[3], aFont[4], aFont[6], aFont[7],;
@@ -261,67 +256,64 @@ Function CreateTestPG(FormName,ControlName,FormTest, PG_Test)
 
       DEFINE CATEGORY cInitCateg ID nDefId
 
-      END CATEGORY
-      nDefId += 10
+   END CATEGORY
+   nDefId += 10
 
-      SET PROPERTYITEM &ControlName OF &FormName  ;
-               VALUE nDefId ID ITM_ID
+   SET PROPERTYITEM &ControlName OF &FormName  ;
+      VALUE nDefId ID ITM_ID
 
-   END PROPGRID
+END PROPGRID
 
-      @ 10,380 FRAME Frame_1 WIDTH 140 HEIGHT 120 CAPTION "Property from:"
-      @ 30,400 BUTTON btn_1;
-            CAPTION "File Txt";
-            ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.txt",FormName, ControlName) ;
-            WIDTH 100 HEIGHT 24
+@ 10,380 FRAME Frame_1 WIDTH 140 HEIGHT 120 CAPTION "Property from:"
+@ 30,400 BUTTON btn_1;
+   CAPTION "File Txt";
+   ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.txt",FormName, ControlName) ;
+   WIDTH 100 HEIGHT 24
 
-      @ 60,400 BUTTON btn_2;
-            CAPTION "File Xml";
-            ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.xml",FormName, ControlName) ;
-            WIDTH 100 HEIGHT 24
+@ 60,400 BUTTON btn_2;
+   CAPTION "File Xml";
+   ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.xml",FormName, ControlName) ;
+   WIDTH 100 HEIGHT 24
 
-      @ 90,400 BUTTON btn_3;
-            CAPTION "File Ini";
-            ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.ini",FormName, ControlName);
-            WIDTH 100 HEIGHT 24
+@ 90,400 BUTTON btn_3;
+   CAPTION "File Ini";
+   ACTION LoadPropertyFile(FormTest,PG_Test,"PgTest.ini",FormName, ControlName);
+   WIDTH 100 HEIGHT 24
 
-      @ 160,380 FRAME Frame_2 WIDTH 140 HEIGHT 130 CAPTION "Property save to:"
+@ 160,380 FRAME Frame_2 WIDTH 140 HEIGHT 130 CAPTION "Property save to:"
 
-      @ 180,400 BUTTON btn_5;
-            CAPTION "File Txt";
-            ACTION SaveToFile(FormTest,PG_Test,"PgTest.txt",2) ;
-            WIDTH 100 HEIGHT 24
+@ 180,400 BUTTON btn_5;
+   CAPTION "File Txt";
+   ACTION SaveToFile(FormTest,PG_Test,"PgTest.txt",2) ;
+   WIDTH 100 HEIGHT 24
 
-      @ 215,400 BUTTON btn_6;
-            CAPTION "File Xml";
-            ACTION SaveToFile(FormTest,PG_Test,"PgTest.xml",1) ;
-            WIDTH 100 HEIGHT 24
+@ 215,400 BUTTON btn_6;
+   CAPTION "File Xml";
+   ACTION SaveToFile(FormTest,PG_Test,"PgTest.xml",1) ;
+   WIDTH 100 HEIGHT 24
 
-      @ 250,400 BUTTON btn_7;
-            CAPTION "File Ini";
-            ACTION SaveToFile(FormTest,PG_Test,"PgTest.ini",3) ;
-            WIDTH 100 HEIGHT 24
+@ 250,400 BUTTON btn_7;
+   CAPTION "File Ini";
+   ACTION SaveToFile(FormTest,PG_Test,"PgTest.ini",3) ;
+   WIDTH 100 HEIGHT 24
 
-   END WINDOW
+END WINDOW
 
-   ACTIVATE WINDOW &FormTest
+ACTIVATE WINDOW &FormTest
 
-Return nil
+RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION ReleaseTest()
-*-----------------------------------------------------------------------------*
 
    Form_1.Btn_20.Enabled :=.t.
    Form_1.Btn_21.Enabled :=.f.
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Function AddItemPG( FormName, ControlName, FormTest, PG_Test)
-*-----------------------------------------------------------------------------*
-LOCAL cCateg, cType,cName, cValue, cData, lDisab, lDisEd,;
-         nId, cInfo, cVarName, aValue,aData
+FUNCTION AddItemPG( FormName, ControlName, FormTest, PG_Test)
+
+   LOCAL cCateg, cType,cName, cValue, cData, lDisab, lDisEd,;
+      nId, cInfo, cVarName, aValue,aData
 
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_CTG TO cCateg
    GET PROPERTYITEM &ControlName OF &FormName ID ITM_TYPE TO cType
@@ -353,28 +345,28 @@ LOCAL cCateg, cType,cName, cValue, cData, lDisab, lDisEd,;
                   VALUE cName ;
                   ITEMDATA aValue[PGI_VALUE]+';'+cName ;
                   ID ITM_CTG
-            endif
+            ENDIF
 
             SET PROPERTYITEM &ControlName OF &FormName ;
                VALUE nId +10 ;
                ID ITM_ID
-         endif
-      endif
+         ENDIF
+      ENDIF
 
-   else
+   ELSE
 
       _AddPropertyItem  (PG_Test , FormTest, cCateg, cType, cName, cValue, cData, lDisab, lDisEd, nId ,cInfo, cVarName, , 1 )
 
       SET PROPERTYITEM &ControlName OF &FormName VALUE nId +10 ID ITM_ID
 
-   endif
+   ENDIF
 
-Return nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION DefFunData( PGname, cForm, lData, cData )
-*-----------------------------------------------------------------------------*
+
    LOCAL cType, ItType, cInputPrompt, cDataNew, xData
+
    DEFAULT cData := "Default Data"
    GET PROPERTYITEM &PGName OF &cForm ID ITM_TYPE TO  cType
    ItType := PgIdentType(cType)
@@ -388,48 +380,47 @@ FUNCTION DefFunData( PGname, cForm, lData, cData )
          IF Empty(cData)
             IF ItType == PG_IMAGE
                cData := '*.bmp'
-            elseif ItType == PG_FILE
+            ELSEIF ItType == PG_FILE
                cData := '*.txt, *.*'
-            else
+            ELSE
                cData := xData
-            endif
+            ENDIF
          ENDIF
-      else
-          GET PROPERTYITEM &PGName OF  &cForm ID ITM_DATA TO  xData
+      ELSE
+         GET PROPERTYITEM &PGName OF  &cForm ID ITM_DATA TO  xData
          IF Empty(cData)
             IF ItType == PG_SIZE
                cData := "(  )"
-            else
+            ELSE
                cData := xData
-            endif
+            ENDIF
          ENDIF
-      endif
+      ENDIF
 
       IF ItType == PG_ARRAY  .or.( ItType == PG_ENUM .and. lData) .or. (ItType == PG_IMAGE .and. lData) .or. ;
-         ( ItType == PG_FLAG .and. lData) .or. ( ItType == PG_LIST .and. lData ).or. ( ItType == PG_FILE .and. lData ) .or.;
-         ( ItType == PG_SIZE .and. lData)
+            ( ItType == PG_FLAG .and. lData) .or. ( ItType == PG_LIST .and. lData ).or. ( ItType == PG_FILE .and. lData ) .or.;
+            ( ItType == PG_SIZE .and. lData)
          IF lData
             cData := CHARREPL (';', cData, ',')
-         endif
+         ENDIF
          cDataNew :=ArrayDlg( cData, cForm  )
          cData := IF(!Empty( cDataNew ),cdataNew, cData )
          IF lData
             cData := CHARREPL (',', cData, ';')
-         endif
+         ENDIF
          IF ItType == PG_SIZE .and. !Empty(cData)
             ENABLE PROPERTYITEM &PGName OF  &cForm ID ITM_VALUE
-         endif
+         ENDIF
       ELSE
 
          cData :=InputPgData ( cInputPrompt , "Item Type: "+cType , cData, xData, ItType,lData )
-      endif
-   endif
+      ENDIF
+   ENDIF
 
-RETURN cData
+   RETURN cData
 
-*-----------------------------------------------------------------------------*
-Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItType,lData   )
-*-----------------------------------------------------------------------------*
+FUNCTION InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItType,lData   )
+
    LOCAL RetVal := '', bRetVal, aData, aFltr
    LOCAL n, BmpW, BmpH, aColorName, aSysColor, nPos
 
@@ -437,8 +428,7 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
    DEFAULT cDialogCaption   TO ""
    DEFAULT cDefValue   TO ""
 
-
-      DEFINE WINDOW _InputPG        ;
+   DEFINE WINDOW _InputPG        ;
          AT 0,0                      ;
          WIDTH 250                   ;
          HEIGHT 115 +  GetTitleHeight() ;
@@ -448,96 +438,96 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
          FONT 'Arial'                ;
          SIZE 10
 
-         @ 07,10 LABEL _Label        ;
-            VALUE cInputPrompt       ;
-            WIDTH 280
+      @ 07,10 LABEL _Label        ;
+         VALUE cInputPrompt       ;
+         WIDTH 280
 
-         bRetVal := {|| _InputPG._DataBox.Value }
-         ON KEY ESCAPE ACTION ( _HMG_DialogCancelled := .T. , _InputPG.Release )
+      bRetVal := {|| _InputPG._DataBox.Value }
+      ON KEY ESCAPE ACTION ( _HMG_DialogCancelled := .T. , _InputPG.Release )
 
-         DO CASE
-         CASE ItType == PG_CATEG .or. ItType == PG_STRING .or. ItType == PG_DEFAULT .or. ;
+      DO CASE
+      CASE ItType == PG_CATEG .or. ItType == PG_STRING .or. ItType == PG_DEFAULT .or. ;
             ItType == PG_INTEGER .or. ItType == PG_DOUBLE
 
-            IF ItType == PG_INTEGER .or. ItType == PG_DOUBLE
-               bRetVal := {|| AllTrim(Str(_InputPG._DataBox.Value ))}
+         IF ItType == PG_INTEGER .or. ItType == PG_DOUBLE
+            bRetVal := {|| AllTrim(Str(_InputPG._DataBox.Value ))}
 
-               @ 30,10 TEXTBOX _DataBox VALUE cDefValue   ;
-                  HEIGHT 26  WIDTH 220  NUMERIC    ;
-                  ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal) , _InputPG.Release )
+            @ 30,10 TEXTBOX _DataBox VALUE cDefValue   ;
+               HEIGHT 26  WIDTH 220  NUMERIC    ;
+               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal) , _InputPG.Release )
 
-            else
-               @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-                  HEIGHT 26  WIDTH 220    ;
-                  ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-            endif
+         ELSE
+            @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
+               HEIGHT 26  WIDTH 220    ;
+               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+         ENDIF
 
-         CASE ItType == PG_LOGIC
+      CASE ItType == PG_LOGIC
 
-            bRetVal := {|| IF(_InputPG._DataBox.Value ==1,"true","false") }
+         bRetVal := {|| IF(_InputPG._DataBox.Value ==1,"true","false") }
 
-            @ 30 ,10 RADIOGROUP _DataBox  OPTIONS {"true","false"};
-               VALUE 1 HORIZONTAL ;
-               ON CHANGE  (  RetVal := Eval(bRetVal) )
+         @ 30 ,10 RADIOGROUP _DataBox  OPTIONS {"true","false"};
+            VALUE 1 HORIZONTAL ;
+            ON CHANGE  (  RetVal := Eval(bRetVal) )
 
-         CASE ItType == PG_FONT
+      CASE ItType == PG_FONT
 
-            IF lData
-               IF Empty(cDefValue)
-                  cDefValue := "Arial;8;false;false;false"
-               ELSE
-                  cDefValue := CHARREPL (';', cDefValue, ',')
-                  aData := PgIdentData(cDefValue,PG_FONT,,',')
-                  cDefValue:= AttrTran(aData,'A')
-               ENDIF
-            else
-               IF Empty(cDefValue)
-                  cDefValue := "Arial,8"
-               ELSE
-                  aData := PgIdentData(cDefValue,PG_FONT,,',')
-                  cDefValue := aFont2Str(aData)
-               ENDIF
+         IF lData
+            IF Empty(cDefValue)
+               cDefValue := "Arial;8;false;false;false"
+            ELSE
+               cDefValue := CHARREPL (';', cDefValue, ',')
+               aData := PgIdentData(cDefValue,PG_FONT,,',')
+               cDefValue:= AttrTran(aData,'A')
             ENDIF
-
-            @ 30 ,10  BTNTEXTBOX _DataBox ;
-               HEIGHT 26  WIDTH 220   ;
-               VALUE cDefValue ;
-               ACTION {|| _InputPG._DataBox.Value := InsertFont( cDefValue ,lData) }
-
-         CASE ItType == PG_COLOR
-
-            IF lData
-               IF Empty(cDefValue)
-                  cDefValue := "0;0;0"
-               ELSE
-                  cDefValue := CHARREPL (';', cDefValue, ',')
-                  aData := PgIdentData(cDefValue,PG_COLOR,,',')
-                  cDefValue:= AttrTran(aData,'A')
-               ENDIF
-            else
-               IF Empty(cDefValue)
-                  cDefValue := "{0,0,0)"
-               ELSE
-                  aData := PgIdentData(cDefValue,PG_COLOR,,',')
-                  cDefValue := aCol2Str(aData)
-               ENDIF
+         ELSE
+            IF Empty(cDefValue)
+               cDefValue := "Arial,8"
+            ELSE
+               aData := PgIdentData(cDefValue,PG_FONT,,',')
+               cDefValue := aFont2Str(aData)
             ENDIF
-            @ 30 ,10  BTNTEXTBOX _DataBox ;
-               HEIGHT 26 WIDTH 220            ;
-               VALUE cDefValue ;
-               ACTION {|| _InputPG._DataBox.Value := InsertColor( cDefValue, lData) }
+         ENDIF
 
-         CASE ItType == PG_SYSCOLOR
+         @ 30 ,10  BTNTEXTBOX _DataBox ;
+            HEIGHT 26  WIDTH 220   ;
+            VALUE cDefValue ;
+            ACTION {|| _InputPG._DataBox.Value := InsertFont( cDefValue ,lData) }
 
-            BmpW := 28
-            BmpH := 20
-            aColorName := {}
-            bRetVal := {|| nPos:= _InputPG._DataBox.Value, IF(nPos > 0, aColorName[nPos],cDefValue)  }
-            aSysColor := PgIdentColor(1)
-            AEval(aSysColor, {|x| AAdd(aColorName, x[2]) })
-            nPos := IF(Empty(cDefValue),1,AScan(aColorName, cDefValue))
+      CASE ItType == PG_COLOR
 
-            DEFINE IMAGELIST Imagelst_1 ;
+         IF lData
+            IF Empty(cDefValue)
+               cDefValue := "0;0;0"
+            ELSE
+               cDefValue := CHARREPL (';', cDefValue, ',')
+               aData := PgIdentData(cDefValue,PG_COLOR,,',')
+               cDefValue:= AttrTran(aData,'A')
+            ENDIF
+         ELSE
+            IF Empty(cDefValue)
+               cDefValue := "{0,0,0)"
+            ELSE
+               aData := PgIdentData(cDefValue,PG_COLOR,,',')
+               cDefValue := aCol2Str(aData)
+            ENDIF
+         ENDIF
+         @ 30 ,10  BTNTEXTBOX _DataBox ;
+            HEIGHT 26 WIDTH 220            ;
+            VALUE cDefValue ;
+            ACTION {|| _InputPG._DataBox.Value := InsertColor( cDefValue, lData) }
+
+      CASE ItType == PG_SYSCOLOR
+
+         BmpW := 28
+         BmpH := 20
+         aColorName := {}
+         bRetVal := {|| nPos:= _InputPG._DataBox.Value, IF(nPos > 0, aColorName[nPos],cDefValue)  }
+         aSysColor := PgIdentColor(1)
+         AEval(aSysColor, {|x| AAdd(aColorName, x[2]) })
+         nPos := IF(Empty(cDefValue),1,AScan(aColorName, cDefValue))
+
+         DEFINE IMAGELIST Imagelst_1 ;
                BUTTONSIZE BmpW, BmpH ;
                IMAGE {}
 
@@ -546,7 +536,6 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
                HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
                HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
             NEXT
-
 
             @ 30 ,10  COMBOBOXEX  _DataBox ;
                HEIGHT 100 WIDTH 220 ;
@@ -572,11 +561,11 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
 
          CASE ItType == PG_IMAGE
 
-               aFltr := PgIdentData( cDefData,PG_IMAGE )
-               @ 30 ,10  BTNTEXTBOX _DataBox ;
-                  HEIGHT 26 WIDTH 220            ;
-                  VALUE cDefValue ;
-                  ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "Image File", cDefValue , .f. , .t.)  }
+            aFltr := PgIdentData( cDefData,PG_IMAGE )
+            @ 30 ,10  BTNTEXTBOX _DataBox ;
+               HEIGHT 26 WIDTH 220            ;
+               VALUE cDefValue ;
+               ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "Image File", cDefValue , .f. , .t.)  }
 
          CASE ItType == PG_SYSINFO
 
@@ -621,7 +610,7 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
                ELSE
                   cDefValue := CHARREPL (',', cDefValue, ';')
                ENDIF
-            else
+            ELSE
                IF Empty(cDefValue)
                   cDefValue := "False"
                ELSE
@@ -632,7 +621,7 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
                      ELSE
                         cDefValue := cDefData
                      ENDIF
-                  endif
+                  ENDIF
                ENDIF
             ENDIF
             @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
@@ -658,15 +647,15 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
 
             IF lData
                @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-               HEIGHT 26  WIDTH 220    ;
-               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+                  HEIGHT 26  WIDTH 220    ;
+                  ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
 
-            else
+            ELSE
                @ 30 ,10  BTNTEXTBOX _DataBox ;
                   HEIGHT 26 WIDTH 220            ;
                   VALUE cDefValue ;
                   ACTION {|| _InputPG._DataBox.Value := GetFolder( cDefData, cDefValue ) }
-            endif
+            ENDIF
 
          CASE ItType == PG_USERFUN
 
@@ -691,20 +680,19 @@ Function InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
       CENTER WINDOW _InputPG
       ACTIVATE WINDOW _InputPG
 
-Return ( RetVal )
+      RETURN ( RetVal )
 
-*------------------------------------------------------------------------------*
 FUNCTION InsertFont( cValue ,lData)
-*------------------------------------------------------------------------------*
+
    LOCAL adata, aDataNew,cData:=""
 
    IF lData
       aData := PgIdentData( cValue,PG_FONT)
       aDataNew := GetFont (aData[1,3], Val(aData[2,3]) ,aData[3,3]=="true" , aData[4,3]=="true" , , aData[5,3]=="true" , aData[6,3]=="true" )
-   else
+   ELSE
       aData := PgIdentData( cValue,PG_FONT,,',')
       aDataNew := GetFont (aData[1], Val(aData[2]) ,aData[3]=="true" , aData[4]=="true" , , aData[5]=="true" , aData[6]=="true" )
-   endif
+   ENDIF
    IF !Empty(aDataNew[1])
       ADel(aDataNew,5)
       ASize(aDataNew,6)
@@ -712,11 +700,11 @@ FUNCTION InsertFont( cValue ,lData)
       aData :=PgIdentData(cData,PG_FONT)
       cValue  := aFont2Str(aData)
    ENDIF
-RETURN IF(lData,cData,cValue)
 
-*------------------------------------------------------------------------------*
+   RETURN IF(lData,cData,cValue)
+
 FUNCTION InsertColor( cValue,lData )
-*------------------------------------------------------------------------------*
+
    LOCAL adata, aDataNew,cData
 
    aData := PgIdentData( cValue,PG_COLOR,,',')
@@ -724,12 +712,12 @@ FUNCTION InsertColor( cValue,lData )
    IF aDataNew[1] != NIL
       cData:= AttrTran(aDataNew,'A')
       cValue  := aCol2Str(aDataNew)
-   endif
-RETURN IF(lData,cData,cValue)
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN IF(lData,cData,cValue)
+
 FUNCTION InsertSize( cValue,cData )
-*------------------------------------------------------------------------------*
+
    LOCAL adata, nValueNew, n, cInput
 
    aData := PgIdentData(cData,PG_SIZE,cValue)
@@ -745,22 +733,23 @@ FUNCTION InsertSize( cValue,cData )
          cValue += AllTrim(Str( aData[n,2]))
       NEXT
       cValue += ')'
-   endif
-RETURN cValue
+   ENDIF
 
-*--------------------------------------
-Function HMG_SetSysColorBtm(Color, BmpWidh, BmpHeight)
-*--------------------------------------
-LOCAL hImage, hImageLst, nColor
+   RETURN cValue
+
+FUNCTION HMG_SetSysColorBtm(Color, BmpWidh, BmpHeight)
+
+   LOCAL hImage, hImageLst, nColor
+
    hImageLst := GetControlHandle ( "imagelst_1" , _HMG_ActiveFormName )
    nColor := GetSysColor ( Color)
    hImage := CreateColorBMP( GetFormHandle (_HMG_ActiveFormName), nColor, BmpWidh, BmpHeight )
    IL_AddMaskedIndirect( hImageLst , hImage , , BmpWidh , BmpHeight , 1 )
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION GetSystemColor(aColor)
-*------------------------------------------------------------------------------*
+
    LOCAL nPos, cStr, nColorSys
 
    nPos := Form_1.ComboEx_2.Value
@@ -768,16 +757,16 @@ FUNCTION GetSystemColor(aColor)
    IF nPos > 0
       cStr := aColor[nPos,2]+ '  { '+ AllTrim( Str(GetRed(nColorSys)))+','+ AllTrim( Str(GetGreen(nColorSys))) +','+ AllTrim( Str(GetBlue(nColorSys))) +' }'
       MsgInfo(cStr, 'Selected color')
-   endif
-RETURN nil
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION LoadPropertyFile(ParentForm,ControlName,cFile,FormGen, ControlGen)
-*------------------------------------------------------------------------------*
-LOCAL aProp, k, cExt, aFlt, aCateg, cData, lXml
+
+   LOCAL aProp, k, cExt, aFlt, aCateg, cData, lXml
 
    cExt:= Lower(SubStr(cFile,RAt('.',cFile)+1))
-   DO case
+   DO CASE
    CASE cExt == 'xml'
       aFlt := {{'File *.xml','*.xml'}}
    CASE cExt == 'txt'
@@ -786,9 +775,10 @@ LOCAL aProp, k, cExt, aFlt, aCateg, cData, lXml
       aFlt := {{'Ini File ','*.ini'}}
    ENDCASE
    cFile := GetFile ( aFlt , 'Store File Property Grid' ,cFile , .f. , .f. )
-   if Empty(cFile)
-        Return .f.
-   endif
+   IF Empty(cFile)
+
+      RETURN .f.
+   ENDIF
    IF File(cFile)
       IF Lower(SubStr(cFile,RAt('.',cFile)+1)) == 'xml'
          lXml := .t.
@@ -797,7 +787,7 @@ LOCAL aProp, k, cExt, aFlt, aCateg, cData, lXml
          k := GetControlIndex ( ControlName, ParentForm )
          IF !lXml
             aProp := _LoadProperty(cFile, k)
-         endif
+         ENDIF
          _InitPgArray(aProp, cFile, lXml, k)
          _HMG_aControlCaption   [k] :=  cFile
          _HMG_aControlMiscData1 [k,5] := lXml
@@ -808,21 +798,23 @@ LOCAL aProp, k, cExt, aFlt, aCateg, cData, lXml
       cData := aVal2Str(aCateg)
       SET PROPERTYITEM &ControlGen OF &FormGen VALUE "ROOT" ITEMDATA cData ID ITM_CTG
    ENDIF
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION ReadTxt(ParentForm,ControlName,cFile)
-*------------------------------------------------------------------------------*
+
    LOCAL aProp,k
+
    k := GetControlIndex ( ControlName, ParentForm )
    aProp := _LoadProperty(cFile, k)
    DispArray(aProp)
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION DispArray(aProp)
-*------------------------------------------------------------------------------*
+
    LOCAL n,i, cStr:="",cItem
+
    FOR n:=1 TO Len(aProp)
       cItem:=aProp[n]
       IF ValType(cItem) == 'A'
@@ -830,36 +822,38 @@ FUNCTION DispArray(aProp)
             IF ValType(cItem[i]) == 'C'
                cStr += cItem[i]+','
             ELSE
-               if  ValType(cItem[i])=='L'
+               IF  ValType(cItem[i])=='L'
                   cStr += IF(cItem[i],'.T.','.F.')+','
-               else
+               ELSE
                   cStr += ValType(cItem[i])+','
-               endif
+               ENDIF
             ENDIF
          NEXT
          cStr += CRLF
       ENDIF
    NEXT
    MsgInfo(cStr)
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION ReadXml(cFile)
-*------------------------------------------------------------------------------*
-   LOCAL oXmlDoc := HXMLDoc():Read( cFile )
-   MsgInfo(oXmlDoc:Save2String())
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   LOCAL oXmlDoc := HXMLDoc():Read( cFile )
+
+   MsgInfo(oXmlDoc:Save2String())
+
+   RETURN NIL
+
 FUNCTION DisplPGValue(PGname,cForm,nId)
-*------------------------------------------------------------------------------*
+
    LOCAL xValue,cType
    LOCAL cStr
+
    IF nId==0
       cStr:= "The variable for selected item "
-   else
+   ELSE
       cStr :="The variable for item of ID "+alltrim(Str(nId))+" is type: "
-   endif
+   ENDIF
    GET PROPERTYITEM &PGName OF  &cForm ID nId TO  xValue
    IF valtype(xValue)!='U'
       cStr += " is type: "
@@ -867,37 +861,38 @@ FUNCTION DisplPGValue(PGname,cForm,nId)
    ELSE
       cStr += " is not available"
       cType := ""
-   endif
+   ENDIF
    DO CASE
-      CASE cType $  "CM";  MsgInfo(cStr+cType+CRLF+xValue)
-      CASE cType == "D" ;  MsgInfo(cStr+cType+CRLF+DToC( xValue ))
-      CASE cType == "N" ;  MsgInfo(cStr+cType+CRLF+Str( xValue ))
-      CASE cType == "L" ;  MsgInfo(cStr+cType+CRLF+if(xValue == .t.,'TRUE','FALSE') )
-      CASE cType == "A" ;  MsgInfo(cStr+cType+CRLF+ AToC( xValue ))
-      OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
+   CASE cType $  "CM";  MsgInfo(cStr+cType+CRLF+xValue)
+   CASE cType == "D" ;  MsgInfo(cStr+cType+CRLF+DToC( xValue ))
+   CASE cType == "N" ;  MsgInfo(cStr+cType+CRLF+Str( xValue ))
+   CASE cType == "L" ;  MsgInfo(cStr+cType+CRLF+if(xValue == .t.,'TRUE','FALSE') )
+   CASE cType == "A" ;  MsgInfo(cStr+cType+CRLF+ AToC( xValue ))
+   OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
    ENDCASE
-RETURN Nil
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION DisplPGInfo(PGname,cForm,nId)
-*------------------------------------------------------------------------------*
+
    LOCAL xValue,aValue,n
    LOCAL cStr
    LOCAL aType := {"Name      - ",;
-                   "Value     - ",;
-                   "Data      - ",;
-                   "Disabled  - ",;
-                   "Changed   - ",;
-                   "Item Type - ",;
-                   "Item ID   - ",;
-                   "Variable  - ",;
-                   "Info      - ",;
-                   "InitValue - "}
+      "Value     - ",;
+      "Data      - ",;
+      "Disabled  - ",;
+      "Changed   - ",;
+      "Item Type - ",;
+      "Item ID   - ",;
+      "Variable  - ",;
+      "Info      - ",;
+      "InitValue - "}
+
    IF nId==0
       cStr:= "The array info for selected item: "+CRLF+CRLF
-   else
+   ELSE
       cStr :="The array info for item of ID "+alltrim(Str(nId))+":"+CRLF
-   endif
+   ENDIF
    GET INFO PROPERTYITEM &PGName OF &cForm ID nId TO aValue
    IF valtype(aValue)!='A'
       cStr += " ERROR by read Property Info! "
@@ -914,19 +909,18 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
          OTHERWISE;                     cStr += 'NIL' +CRLF
          ENDCASE
       NEXT
-   Endif
+   ENDIF
    MsgInfo(cStr,"Info" )
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION SaveToFile(ParentForm,ControlName,cFile,met)
-*------------------------------------------------------------------------------*
-LOCAL oXmlDoc, cExt, lSave := .t.
-LOCAL aFlt, nH
+
+   LOCAL oXmlDoc, cExt, lSave := .t.
+   LOCAL aFlt, nH
 
    cExt:= Lower(SubStr(cFile,RAt('.',cFile)+1))
-   DO case
+   DO CASE
    CASE cExt == 'xml'.or. met == 1
       aFlt := {{'File *.xml','*.xml'}}
    CASE cExt == 'txt' .or. met == 2
@@ -935,23 +929,24 @@ LOCAL aFlt, nH
       aFlt := {{'Ini File ','*.ini'}}
    ENDCASE
    cFile := PutFile ( aFlt , 'Store File Property Grid' , , .f. , cFile )
-   if Empty(cFile)
-        Return .f.
-   endif
+   IF Empty(cFile)
+
+      RETURN .f.
+   ENDIF
    IF File(cFile)
       IF !MsgYesNo ( "Overwrite File :"+cFile+" ?" , "Warning" )
          lSave := .f.
       ENDIF
    ENDIF
    IF lSave
-      DO case
+      DO CASE
       CASE cExt == 'xml' .or. met == 1
          oXmlDoc := CreatePropXml(ParentForm,ControlName)
          oXmlDoc:Save( cFile )
-         ReadXml(cFile)
+         READXml(cFile)
       CASE cExt == 'txt' .or. met == 2
          lSave := CreatePropFile(ParentForm,ControlName,cFile)
-         ReadTxt(ParentForm,ControlName,cFile)
+         READTxt(ParentForm,ControlName,cFile)
       CASE cExt == 'ini' .or. met == 3
          lSave := CreateIniFile(ParentForm,ControlName,cFile)
          IF lSave
@@ -959,15 +954,16 @@ LOCAL aFlt, nH
                MsgInfo(Freadstr(nH,32000))
             ENDIF
             FCLOSE(nH)
-         endif
+         ENDIF
       ENDCASE
    ENDIF
-RETURN lSave
 
-*-----------------------------------------------------------------------------*
+   RETURN lSave
+
 FUNCTION IdentCateg( ControlName, ParentForm )
-*------------------------------------------------------------------------------*
-LOCAL hItem, hWndPG, k, cValue,aCateg := {"ROOT"}
+
+   LOCAL hItem, hWndPG, k, cValue,aCateg := {"ROOT"}
+
    k := GetControlIndex ( ControlName, ParentForm )
    IF k > 0
       hWndPG := _HMG_aControlHandles  [k]
@@ -980,67 +976,69 @@ LOCAL hItem, hWndPG, k, cValue,aCateg := {"ROOT"}
          hItem := PG_GetNextItem( hWndPG, hItem )
       ENDDO
    ENDIF
-RETURN aCateg
 
-*-----------------------------------------------------------------------------*
+   RETURN aCateg
+
 FUNCTION IdentRootCateg( ControlName, ParentForm )
-*------------------------------------------------------------------------------*
-LOCAL hItem, hWndPG, k, cValue:=""
+
+   LOCAL hItem, hWndPG, k, cValue:=""
+
    k := GetControlIndex ( ControlName, ParentForm )
    IF k > 0
       hWndPG := _HMG_aControlHandles  [k]
       hItem := PG_GetRoot( hWndPG )
-      if hItem != 0
+      IF hItem != 0
          cValue := PG_GETITEM(hWndPG,hItem,PGI_NAME)
       ENDIF
    ENDIF
-RETURN cValue
 
-*-----------------------------------------------------------------------------*
-Function About()
-*-----------------------------------------------------------------------------*
+   RETURN cValue
+
+FUNCTION About()
+
    IF !IsWindowDefined ( Form_About )
       DEFINE WINDOW Form_About ;
-         AT 0,0 ;
-         WIDTH 250 HEIGHT 110 ;
-         TITLE '';
-         TOPMOST NOCAPTION ;
+            AT 0,0 ;
+            WIDTH 250 HEIGHT 110 ;
+            TITLE '';
+            TOPMOST NOCAPTION ;
 
-      @ 10 ,10 IMAGE Icon_1;
-          PICTURE "PgGen.ico" ;
-          WIDTH 50 HEIGHT 50
+         @ 10 ,10 IMAGE Icon_1;
+            PICTURE "PgGen.ico" ;
+            WIDTH 50 HEIGHT 50
 
-      @ 5 ,5 FRAME Frame_1;
-          WIDTH 235  HEIGHT 90
+         @ 5 ,5 FRAME Frame_1;
+            WIDTH 235  HEIGHT 90
 
-      @ 10,70 LABEL Label_1 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE 'Property Grid Creator'  ;
-         FONT 'Arial' SIZE 11 BOLD //CENTERALIGN
+         @ 10,70 LABEL Label_1 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE 'Property Grid Creator'  ;
+            FONT 'Arial' SIZE 11 BOLD //CENTERALIGN
 
-      @ 35,70 LABEL Label_2 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE '(c) 2008 Janusz Pora' ;
-         FONT 'Arial' SIZE 9 FONTCOLOR BLUE //CENTERALIGN
+         @ 35,70 LABEL Label_2 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE '(c) 2008 Janusz Pora' ;
+            FONT 'Arial' SIZE 9 FONTCOLOR BLUE //CENTERALIGN
 
-      @ 60,70 LABEL Label_3 ;
-         WIDTH 180 HEIGHT 20 ;
-         VALUE 'HMG Harbour MiniGui' ;
-         FONT 'Arial' SIZE 9 //CENTERALIGN
+         @ 60,70 LABEL Label_3 ;
+            WIDTH 180 HEIGHT 20 ;
+            VALUE 'HMG Harbour MiniGui' ;
+            FONT 'Arial' SIZE 9 //CENTERALIGN
 
-      @ 65,15  BUTTON Btn_splash ;
-         CAPTION 'OK' ;
-         ACTION  {|| Form_About.Release };
-         WIDTH 40 HEIGHT 20 ;
-         FONT 'Arial' SIZE 9 Bold
+         @ 65,15  BUTTON Btn_splash ;
+            CAPTION 'OK' ;
+            ACTION  {|| Form_About.Release };
+            WIDTH 40 HEIGHT 20 ;
+            FONT 'Arial' SIZE 9 Bold
 
       END WINDOW
       Form_About.Center
       ACTIVATE WINDOW Form_About
    ENDIF
-Return Nil
 
+   RETURN NIL
 
-#ifdef __XHARBOUR__
-  #include <..\propgrid\fileread.prg>
-#endif
+   #ifdef __XHARBOUR__
+   #include <..\propgrid\fileread.prg>
+   #endif
+

@@ -1,423 +1,420 @@
 /*----------------------------------------------------------------------------
- HMG - Harbour Windows GUI library source code
+HMG - Harbour Windows GUI library source code
 
- Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
- http://sites.google.com/site/hmgweb/
+Copyright 2002-2016 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
- Head of HMG project:
+Head of HMG project:
 
-      2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
-      http://sites.google.com/site/hmgweb/
+2002-2012 Roberto Lopez <mail.box.hmg@gmail.com>
+http://sites.google.com/site/hmgweb/
 
-      2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
-      http://srvet.blogspot.com
+2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
+http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
- contained in this release of HMG.
+As a special exception, you have permission for additional uses of the text
+contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
- HMG library code into it.
+The exception is that, if you link the HMG library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+HMG library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+"Harbour Project"
+Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 MEMVAR _HMG_SYSDATA
+
 #include "common.ch"
 #include "hmg.ch"
 
-*-----------------------------------------------------------------------------*
-Function _DefineToolBar (	cControlName		, ;
-				cParentWindowName	, ;
-				nButtonWidth		, ;
-				nButtonHeight		, ;
-				lFlat			, ;
-				lBottom			, ;
-				lRightText		, ;
-				lBorder			, ;
-				cFontName		, ;
-				nFontSize		, ;
-				lBold			, ;
-				lItalic			, ;
-				lUnderLine		, ;
-				lStrikeOut		, ;
-				cToolTip		, ;
-				cGripperText		, ;
-				lBreak			, ;
-				nImageWidth		, ;
-				nImageHeight		, ;
-				lStrictWidth		  ;
-			)
-*-----------------------------------------------------------------------------*
-* Local Variables
-Local nParentWindowHandle
-Local nControlHandle
-Local mVar
-Local k
-Local nId
-Local nFontHandle
-Local aTemp := {}
-LOCAL lSplitBoxActive
+FUNCTION _DefineToolBar (   cControlName      , ;
+      cParentWindowName   , ;
+      nButtonWidth      , ;
+      nButtonHeight      , ;
+      lFlat         , ;
+      lBottom         , ;
+      lRightText      , ;
+      lBorder         , ;
+      cFontName      , ;
+      nFontSize      , ;
+      lBold         , ;
+      lItalic         , ;
+      lUnderLine      , ;
+      lStrikeOut      , ;
+      cToolTip      , ;
+      cGripperText      , ;
+      lBreak         , ;
+      nImageWidth      , ;
+      nImageHeight      , ;
+      lStrictWidth        ;
+      )
+   * Local Variables
+   LOCAL nParentWindowHandle
+   LOCAL nControlHandle
+   LOCAL mVar
+   LOCAL k
+   LOCAL nId
+   LOCAL nFontHandle
+   LOCAL aTemp := {}
+   LOCAL lSplitBoxActive
 
-Default nImageWidth	To -1
-Default nImageHeight	To -1
+   DEFAULT nImageWidth   To -1
+   DEFAULT nImageHeight   To -1
 
-	* Set Public ToolBar Support Variables
-	_HMG_SYSDATA [ 309 ]	:= 0
-	_HMG_SYSDATA [ 313 ]	:= cGripperText
-	_HMG_SYSDATA [ 261 ]	:= lBreak
+   * Set Public ToolBar Support Variables
+   _HMG_SYSDATA [ 309 ]   := 0
+   _HMG_SYSDATA [ 313 ]   := cGripperText
+   _HMG_SYSDATA [ 261 ]   := lBreak
 
    lSplitBoxActive := _HMG_SYSDATA [ 262 ]   // ADD
 
-	if lSplitBoxActive == .T.
-		_HMG_SYSDATA [ 216 ]	:= 'TOOLBAR'
-	EndIf
+   IF lSplitBoxActive == .T.
+      _HMG_SYSDATA [ 216 ]   := 'TOOLBAR'
+   ENDIF
 
-	* If inside DEFINE WINDOW structure gets window name
+   * If inside DEFINE WINDOW structure gets window name
 
-	If _HMG_SYSDATA [ 264 ] = .T.
-		cParentWindowName := _HMG_SYSDATA [ 223 ]
-	EndIf
+   IF _HMG_SYSDATA [ 264 ] = .T.
+      cParentWindowName := _HMG_SYSDATA [ 223 ]
+   ENDIF
 
-	_HMG_SYSDATA [ 311 ] := cParentWindowName
+   _HMG_SYSDATA [ 311 ] := cParentWindowName
 
-	* Error Checking
+   * Error Checking
 
-	If .Not. _IsWindowDefined ( cParentWindowName )
-		MsgHMGError("Window: "+ cParentWindowName + " is not defined. Program terminated")
-		ExitProcess(0)
-		Return Nil
-	Endif
+   IF .Not. _IsWindowDefined ( cParentWindowName )
+      MsgHMGError("Window: "+ cParentWindowName + " is not defined. Program terminated")
+      EXITProcess(0)
 
-	If _IsControlDefined ( cControlName , cParentWindowName )
-		MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + " Already defined. Program Terminated")
-		ExitProcess(0)
-		Return Nil
-	endif
+      RETURN NIL
+   ENDIF
 
-	* Create Public control variable
-	mVar := '_' + cParentWindowName + '_' + cControlName
+   IF _IsControlDefined ( cControlName , cParentWindowName )
+      MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + " Already defined. Program Terminated")
+      EXITProcess(0)
 
-	* Get Parent Window Handle
-	nParentWindowHandle := GetFormHandle ( cParentWindowName )
-	_HMG_SYSDATA [ 312 ] := nParentWindowHandle
+      RETURN NIL
+   ENDIF
 
-	* Get Id For Control
-	nId := _GetId()
+   * Create Public control variable
+   mVar := '_' + cParentWindowName + '_' + cControlName
 
-	* Create Control
-	aTemp := InitToolBar ( nParentWindowHandle , nId , nButtonWidth , nButtonHeight , lBorder , lFlat , lBottom , lRightText , lSplitBoxActive , nImageWidth , nImageHeight , lStrictWidth )
+   * Get Parent Window Handle
+   nParentWindowHandle := GetFormHandle ( cParentWindowName )
+   _HMG_SYSDATA [ 312 ] := nParentWindowHandle
 
-	nControlHandle := atemp[1]
+   * Get Id For Control
+   nId := _GetId()
 
-	_HMG_SYSDATA [ 315 ]	:= aTemp [2]
-	_HMG_SYSDATA [ 300 ]	:= aTemp [3]
+   * Create Control
+   aTemp := InitToolBar ( nParentWindowHandle , nId , nButtonWidth , nButtonHeight , lBorder , lFlat , lBottom , lRightText , lSplitBoxActive , nImageWidth , nImageHeight , lStrictWidth )
 
-	_HMG_SYSDATA [ 310 ] := nControlHandle
+   nControlHandle := atemp[1]
 
-	* Set Font
-	If ValType(cFontName) != "U" .and. ValType(nFontSize) != "U"
-		nFontHandle := _SetFont (nControlHandle,cFontName,nFontSize,lbold,litalic,lunderline,lstrikeout)
-	Else
-		nFontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],lbold,litalic,lunderline,lstrikeout)		
-	Endif
+   _HMG_SYSDATA [ 315 ]   := aTemp [2]
+   _HMG_SYSDATA [ 300 ]   := aTemp [3]
 
-	if ValType(cToolTip) != "U"
-	        SetToolTip ( nControlHandle , cToolTip , GetFormToolTipHandle (cParentWindowName) )
-	endif
+   _HMG_SYSDATA [ 310 ] := nControlHandle
 
-	* Get Position In Control Arrays
-	k := _GetControlFree()
+   * Set Font
+   IF ValType(cFontName) != "U" .and. ValType(nFontSize) != "U"
+      nFontHandle := _SetFont (nControlHandle,cFontName,nFontSize,lbold,litalic,lunderline,lstrikeout)
+   ELSE
+      nFontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],lbold,litalic,lunderline,lstrikeout)
+   ENDIF
 
-	Public &mVar. := k
+   IF ValType(cToolTip) != "U"
+      SetToolTip ( nControlHandle , cToolTip , GetFormToolTipHandle (cParentWindowName) )
+   ENDIF
 
-	_HMG_SYSDATA [1]		[k] := "TOOLBAR" 
-	_HMG_SYSDATA [2]		[k] := cControlName
-	_HMG_SYSDATA [3]		[k] := nControlHandle 
-	_HMG_SYSDATA [4]		[k] := nParentWindowHandle 
-	_HMG_SYSDATA [  5 ]		[k] := nId
-	_HMG_SYSDATA [  6 ]		[k] := Nil
-	_HMG_SYSDATA [  7 ]		[k] := {} 
-	_HMG_SYSDATA [  8 ]		[k] := Nil 
-	_HMG_SYSDATA [  9 ]		[k] := "" 
-	_HMG_SYSDATA [ 10 ]		[k] := "" 
-	_HMG_SYSDATA [ 11 ]		[k] := "" 
-	_HMG_SYSDATA [ 12 ]		[k] := "" 
-	_HMG_SYSDATA [ 13 ]		[k] := .F.	
-	_HMG_SYSDATA [ 14 ]		[k] := Nil 
-	_HMG_SYSDATA [ 15 ]		[k] := Nil 
-	_HMG_SYSDATA [ 16 ]		[k] := ""  
-	_HMG_SYSDATA [ 17 ]		[k] := {} 
-	_HMG_SYSDATA [ 18 ]		[k] := IF (VALTYPE (lBottom) == "L",         lBottom,         .F.)   // ADD
-	_HMG_SYSDATA [ 19 ]		[k] := IF (VALTYPE (lSplitBoxActive) == "L", lSplitBoxActive, .F.)   // ADD
-	_HMG_SYSDATA [ 20 ]		[k] := nButtonWidth
-	_HMG_SYSDATA [ 21 ]		[k] := nButtonHeight
-	_HMG_SYSDATA [ 22 ]		[k] := 0 
-	_HMG_SYSDATA [ 23 ]		[k] := -1  
-	_HMG_SYSDATA [ 24 ]		[k] := -1 
-	_HMG_SYSDATA [ 25 ]		[k] := "" 
-	_HMG_SYSDATA [ 26 ]		[k] := 0 
-	_HMG_SYSDATA [ 27 ]		[k] := "" 
-	_HMG_SYSDATA [ 28 ]		[k] := 0  
-	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.} 
-	_HMG_SYSDATA [ 30 ]		[k] := "" 
-	_HMG_SYSDATA [ 31 ]		[k] := 0  
-	_HMG_SYSDATA [ 32 ]		[k] := 0  
-	_HMG_SYSDATA [ 33 ]		[k] := ""  
-	_HMG_SYSDATA [ 34 ]		[k] := .t. 
-	_HMG_SYSDATA [ 35 ]		[k] := 0 
-	_HMG_SYSDATA [ 36 ]		[k] := 0 
-	_HMG_SYSDATA [ 37 ]		[k] := 0 
-	_HMG_SYSDATA [ 38 ]		[k] := .T. 
-	_HMG_SYSDATA [ 39 ]		[k] := 0
-	_HMG_SYSDATA [ 40 ] 		[k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
+   * Get Position In Control Arrays
+   k := _GetControlFree()
 
+   PUBLIC &mVar. := k
 
-Return Nil
+   _HMG_SYSDATA [1]      [k] := "TOOLBAR"
+   _HMG_SYSDATA [2]      [k] := cControlName
+   _HMG_SYSDATA [3]      [k] := nControlHandle
+   _HMG_SYSDATA [4]      [k] := nParentWindowHandle
+   _HMG_SYSDATA [  5 ]      [k] := nId
+   _HMG_SYSDATA [  6 ]      [k] := Nil
+   _HMG_SYSDATA [  7 ]      [k] := {}
+   _HMG_SYSDATA [  8 ]      [k] := Nil
+   _HMG_SYSDATA [  9 ]      [k] := ""
+   _HMG_SYSDATA [ 10 ]      [k] := ""
+   _HMG_SYSDATA [ 11 ]      [k] := ""
+   _HMG_SYSDATA [ 12 ]      [k] := ""
+   _HMG_SYSDATA [ 13 ]      [k] := .F.
+   _HMG_SYSDATA [ 14 ]      [k] := Nil
+   _HMG_SYSDATA [ 15 ]      [k] := Nil
+   _HMG_SYSDATA [ 16 ]      [k] := ""
+   _HMG_SYSDATA [ 17 ]      [k] := {}
+   _HMG_SYSDATA [ 18 ]      [k] := IF (VALTYPE (lBottom) == "L",         lBottom,         .F.)   // ADD
+   _HMG_SYSDATA [ 19 ]      [k] := IF (VALTYPE (lSplitBoxActive) == "L", lSplitBoxActive, .F.)   // ADD
+   _HMG_SYSDATA [ 20 ]      [k] := nButtonWidth
+   _HMG_SYSDATA [ 21 ]      [k] := nButtonHeight
+   _HMG_SYSDATA [ 22 ]      [k] := 0
+   _HMG_SYSDATA [ 23 ]      [k] := -1
+   _HMG_SYSDATA [ 24 ]      [k] := -1
+   _HMG_SYSDATA [ 25 ]      [k] := ""
+   _HMG_SYSDATA [ 26 ]      [k] := 0
+   _HMG_SYSDATA [ 27 ]      [k] := ""
+   _HMG_SYSDATA [ 28 ]      [k] := 0
+   _HMG_SYSDATA [ 29 ]      [k] := {.f.,.f.,.f.,.f.}
+   _HMG_SYSDATA [ 30 ]      [k] := ""
+   _HMG_SYSDATA [ 31 ]      [k] := 0
+   _HMG_SYSDATA [ 32 ]      [k] := 0
+   _HMG_SYSDATA [ 33 ]      [k] := ""
+   _HMG_SYSDATA [ 34 ]      [k] := .t.
+   _HMG_SYSDATA [ 35 ]      [k] := 0
+   _HMG_SYSDATA [ 36 ]      [k] := 0
+   _HMG_SYSDATA [ 37 ]      [k] := 0
+   _HMG_SYSDATA [ 38 ]      [k] := .T.
+   _HMG_SYSDATA [ 39 ]      [k] := 0
+   _HMG_SYSDATA [ 40 ]       [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
-*-----------------------------------------------------------------------------*
-Function _DefineToolButton ( cControlName , ;
-		cPicture , ;
-		cCaption , ;
-		bAction , ;
-		lSeparator , ;
-		lAutoSize , ;
-		lCheck , ;
-		lGroup , ;
-		lDropdown , ;
-		lWholeDropDown , ;
-		cToolTip , ;
-		notrans )
+   RETURN NIL
 
-Local nId
-Local nControlHandle
-Local cParentWindowName
-Local nParentWindowHandle
-Local mVar
-Local k
-Local i
-Local c
-Local nToolBarIndex
-Local nButtonPos
+FUNCTION _DefineToolButton ( cControlName , ;
+      cPicture , ;
+      cCaption , ;
+      bAction , ;
+      lSeparator , ;
+      lAutoSize , ;
+      lCheck , ;
+      lGroup , ;
+      lDropdown , ;
+      lWholeDropDown , ;
+      cToolTip , ;
+      notrans )
 
-	* Gets Toolbar Parent Window Name
-	cParentWindowName := _HMG_SYSDATA [ 311 ]
+   LOCAL nId
+   LOCAL nControlHandle
+   LOCAL cParentWindowName
+   LOCAL nParentWindowHandle
+   LOCAL mVar
+   LOCAL k
+   LOCAL i
+   LOCAL c
+   LOCAL nToolBarIndex
+   LOCAL nButtonPos
 
-	* Error Checking
+   * Gets Toolbar Parent Window Name
+   cParentWindowName := _HMG_SYSDATA [ 311 ]
 
-	If .Not. _IsWindowDefined ( cParentWindowName )
-		MsgHMGError("Window: "+ cParentWindowName + " is not defined. Program terminated")
-		ExitProcess(0)
-		Return Nil
-	Endif
+   * Error Checking
 
-	If _IsControlDefined ( cControlName , cParentWindowName )
-		MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + " Already defined. Program Terminated")
-		ExitProcess(0)
-		Return Nil
-	endif
+   IF .Not. _IsWindowDefined ( cParentWindowName )
+      MsgHMGError("Window: "+ cParentWindowName + " is not defined. Program terminated")
+      EXITProcess(0)
 
-	If lDropdown == .T. .And. ValType(bAction) = 'U'
-		MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + ". ToolBar DropDown buttons must have an associated action (Use WholeDropDown style for no action). Program Terminated")
-		ExitProcess(0)
-		Return Nil
-	EndIf
+      RETURN NIL
+   ENDIF
 
-	* Get Parent Window Handle
-	nParentWindowHandle := _HMG_SYSDATA [ 312 ]
+   IF _IsControlDefined ( cControlName , cParentWindowName )
+      MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + " Already defined. Program Terminated")
+      EXITProcess(0)
 
-	* Create Public control variable
-	mVar := '_' + cParentWindowName + '_' + cControlName
+      RETURN NIL
+   ENDIF
 
-	* Get Id 
-	nId := _GetId()
+   IF lDropdown == .T. .And. ValType(bAction) = 'U'
+      MsgHMGError ("Control: " + cControlName + " Of " + cParentWindowName + ". ToolBar DropDown buttons must have an associated action (Use WholeDropDown style for no action). Program Terminated")
+      EXITProcess(0)
 
-	* Increment ToolBar Button Count
-	_HMG_SYSDATA [ 309 ]++
+      RETURN NIL
+   ENDIF
 
-	* Create Control
-	nControlHandle := InitToolButton (		;
-			_HMG_SYSDATA [ 310 ]	, ;
-			cPicture			, ;
-			cCaption			, ;
-			nId				, ;
-			lSeparator			, ;
-			lAutoSize			, ;
-			lCheck				, ;
-			lGroup				, ;
-			lDropdown			, ;
-			lWholeDropDown			, ;
-			_HMG_SYSDATA [ 315 ]	, ;
-			_HMG_SYSDATA [ 300 ], ;
-         notrans )
+   * Get Parent Window Handle
+   nParentWindowHandle := _HMG_SYSDATA [ 312 ]
 
+   * Create Public control variable
+   mVar := '_' + cParentWindowName + '_' + cControlName
 
-	k := _GetControlFree()
+   * Get Id
+   nId := _GetId()
 
-	Public &mVar. := k
+   * Increment ToolBar Button Count
+   _HMG_SYSDATA [ 309 ]++
 
-	_HMG_SYSDATA [1]		[k] := "TOOLBUTTON" 
-	_HMG_SYSDATA [2]		[k] :=  cControlName 
-	_HMG_SYSDATA [3]		[k] :=  nControlHandle
-	_HMG_SYSDATA [4]		[k] :=  nParentWindowHandle
-	_HMG_SYSDATA [  5 ]		[k] :=  nId 
-	_HMG_SYSDATA [  6 ]		[k] :=  bAction
-	_HMG_SYSDATA [  7 ]		[k] :=  {} 
-	_HMG_SYSDATA [  8 ]		[k] :=  _HMG_SYSDATA [ 309 ]   // ToolBar Button Count
-	_HMG_SYSDATA [  9 ]		[k] :=  "" 
-	_HMG_SYSDATA [ 10 ]		[k] :=  ""
-	_HMG_SYSDATA [ 11 ]		[k] :=  "" 
-	_HMG_SYSDATA [ 12 ]		[k] :=  "" 
-	_HMG_SYSDATA [ 13 ]		[k] :=  .F. 
-	_HMG_SYSDATA [ 14 ]		[k] :=  Nil 
-	_HMG_SYSDATA [ 15 ]		[k] :=  Nil 
-	_HMG_SYSDATA [ 16 ]		[k] := "" 
-	_HMG_SYSDATA [ 17 ]		[k] := {} 
-	_HMG_SYSDATA [ 18 ]		[k] := Nil
-	_HMG_SYSDATA [ 19 ]		[k] := Nil 
-	_HMG_SYSDATA [ 20 ]		[k] := 0 
-	_HMG_SYSDATA [ 21 ]		[k] := 0 
-	_HMG_SYSDATA [ 22 ]		[k] := 0 
-	_HMG_SYSDATA [ 23 ]		[k] := -1 
-	_HMG_SYSDATA [ 24 ]		[k] := -1 
-	_HMG_SYSDATA [ 25 ]		[k] := cPicture
-	_HMG_SYSDATA [ 26 ]		[k] := _HMG_SYSDATA [ 310 ]   // ToolBar Handle
-	_HMG_SYSDATA [ 27 ]		[k] := '' 
-	_HMG_SYSDATA [ 28 ]		[k] := 0 
-	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.} 
-	_HMG_SYSDATA [ 30 ]		[k] := cToolTip
-	_HMG_SYSDATA [ 31 ]		[k] := 0  
-	_HMG_SYSDATA [ 32 ]		[k] := notrans  
-	_HMG_SYSDATA [ 33 ]		[k] := cCaption  
-	_HMG_SYSDATA [ 34 ]		[k] := .t. 
-	_HMG_SYSDATA [ 35 ]		[k] := 0 
-	_HMG_SYSDATA [ 36 ]		[k] := 0 
-	_HMG_SYSDATA [ 37 ]		[k] := 0 
-	_HMG_SYSDATA [ 38 ]		[k] := .T. 
-	_HMG_SYSDATA [ 39 ]		[k] := 0
-	_HMG_SYSDATA [ 40 ] 		[k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
+   * Create Control
+   nControlHandle := InitToolButton (      ;
+      _HMG_SYSDATA [ 310 ]   , ;
+      cPicture         , ;
+      cCaption         , ;
+      nId            , ;
+      lSeparator         , ;
+      lAutoSize         , ;
+      lCheck            , ;
+      lGroup            , ;
+      lDropdown         , ;
+      lWholeDropDown         , ;
+      _HMG_SYSDATA [ 315 ]   , ;
+      _HMG_SYSDATA [ 300 ], ;
+      notrans )
 
-	If ValType ( cCaption ) != 'U'
+   k := _GetControlFree()
+
+   PUBLIC &mVar. := k
+
+   _HMG_SYSDATA [1]      [k] := "TOOLBUTTON"
+   _HMG_SYSDATA [2]      [k] :=  cControlName
+   _HMG_SYSDATA [3]      [k] :=  nControlHandle
+   _HMG_SYSDATA [4]      [k] :=  nParentWindowHandle
+   _HMG_SYSDATA [  5 ]      [k] :=  nId
+   _HMG_SYSDATA [  6 ]      [k] :=  bAction
+   _HMG_SYSDATA [  7 ]      [k] :=  {}
+   _HMG_SYSDATA [  8 ]      [k] :=  _HMG_SYSDATA [ 309 ]   // ToolBar Button Count
+   _HMG_SYSDATA [  9 ]      [k] :=  ""
+   _HMG_SYSDATA [ 10 ]      [k] :=  ""
+   _HMG_SYSDATA [ 11 ]      [k] :=  ""
+   _HMG_SYSDATA [ 12 ]      [k] :=  ""
+   _HMG_SYSDATA [ 13 ]      [k] :=  .F.
+   _HMG_SYSDATA [ 14 ]      [k] :=  Nil
+   _HMG_SYSDATA [ 15 ]      [k] :=  Nil
+   _HMG_SYSDATA [ 16 ]      [k] := ""
+   _HMG_SYSDATA [ 17 ]      [k] := {}
+   _HMG_SYSDATA [ 18 ]      [k] := Nil
+   _HMG_SYSDATA [ 19 ]      [k] := Nil
+   _HMG_SYSDATA [ 20 ]      [k] := 0
+   _HMG_SYSDATA [ 21 ]      [k] := 0
+   _HMG_SYSDATA [ 22 ]      [k] := 0
+   _HMG_SYSDATA [ 23 ]      [k] := -1
+   _HMG_SYSDATA [ 24 ]      [k] := -1
+   _HMG_SYSDATA [ 25 ]      [k] := cPicture
+   _HMG_SYSDATA [ 26 ]      [k] := _HMG_SYSDATA [ 310 ]   // ToolBar Handle
+   _HMG_SYSDATA [ 27 ]      [k] := ''
+   _HMG_SYSDATA [ 28 ]      [k] := 0
+   _HMG_SYSDATA [ 29 ]      [k] := {.f.,.f.,.f.,.f.}
+   _HMG_SYSDATA [ 30 ]      [k] := cToolTip
+   _HMG_SYSDATA [ 31 ]      [k] := 0
+   _HMG_SYSDATA [ 32 ]      [k] := notrans
+   _HMG_SYSDATA [ 33 ]      [k] := cCaption
+   _HMG_SYSDATA [ 34 ]      [k] := .t.
+   _HMG_SYSDATA [ 35 ]      [k] := 0
+   _HMG_SYSDATA [ 36 ]      [k] := 0
+   _HMG_SYSDATA [ 37 ]      [k] := 0
+   _HMG_SYSDATA [ 38 ]      [k] := .T.
+   _HMG_SYSDATA [ 39 ]      [k] := 0
+   _HMG_SYSDATA [ 40 ]       [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
+
+   IF ValType ( cCaption ) != 'U'
 
       SetToolButtonCaption ( _HMG_SYSDATA [26] [k] , _HMG_SYSDATA [5] [k] , cCaption)   // ADD HMG 3.0.45
-		cCaption := HMG_UPPER ( cCaption )
+      cCaption := HMG_UPPER ( cCaption )
 
-		i := HB_UAT ( '&' , cCaption )
+      i := HB_UAT ( '&' , cCaption )
 
-		If i > 0
-			c := ASC ( HB_USUBSTR ( cCaption , i+1 , 1 ) )			
+      IF i > 0
+         c := ASC ( HB_USUBSTR ( cCaption , i+1 , 1 ) )
 
-			If c >= 48 .And. c <= 90
+         IF c >= 48 .And. c <= 90
 
-				nToolBarIndex := aScan ( _HMG_SYSDATA [ 3 ] , _HMG_SYSDATA [ 310 ] )
-				nButtonPos := _HMG_SYSDATA [ 309 ]
+            nToolBarIndex := aScan ( _HMG_SYSDATA [ 3 ] , _HMG_SYSDATA [ 310 ] )
+            nButtonPos := _HMG_SYSDATA [ 309 ]
 
-				If lWholeDropDown == .T.
-					bAction := { || _DropDownShortcut ( nId , nParentWindowHandle , nToolBarIndex , nButtonPos ) }
-				EndIf
+            IF lWholeDropDown == .T.
+               bAction := { || _DropDownShortcut ( nId , nParentWindowHandle , nToolBarIndex , nButtonPos ) }
+            ENDIF
 
-				_DefineHotKey ( cParentWindowName , MOD_ALT , c , bAction )
+            _DefineHotKey ( cParentWindowName , MOD_ALT , c , bAction )
 
-			EndIf
-		EndIf
+         ENDIF
+      ENDIF
 
-	EndIf
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Function _EndToolBar ()
-*-----------------------------------------------------------------------------*
-Local i
+FUNCTION _EndToolBar ()
 
-	ActivateToolBar ( _HMG_SYSDATA [ 310 ] )
+   LOCAL i
 
-	if _HMG_SYSDATA [ 262 ] == .T. 
-		i := GetFormIndex ( _HMG_SYSDATA [ 222 ] )
+   ActivateToolBar ( _HMG_SYSDATA [ 310 ] )
 
-		AddSplitBoxItem ( _HMG_SYSDATA [ 310 ] , ;
-				_HMG_SYSDATA [ 87 ] [i] ,  ;
-				 GetToolBarWidth(_HMG_SYSDATA [ 310 ]) , ;
-				_HMG_SYSDATA [ 261 ] , ;
-				_HMG_SYSDATA [ 313 ] , ;
-				GetToolBarWidth(_HMG_SYSDATA [ 310 ]) , ;
-				GetToolBarHeight(_HMG_SYSDATA [ 310 ]) , ;
-				_HMG_SYSDATA [ 258 ] ;
-				)
+   IF _HMG_SYSDATA [ 262 ] == .T.
+      i := GetFormIndex ( _HMG_SYSDATA [ 222 ] )
 
-	EndIf
-Return Nil
+      AddSplitBoxItem ( _HMG_SYSDATA [ 310 ] , ;
+         _HMG_SYSDATA [ 87 ] [i] ,  ;
+         GetToolBarWidth(_HMG_SYSDATA [ 310 ]) , ;
+         _HMG_SYSDATA [ 261 ] , ;
+         _HMG_SYSDATA [ 313 ] , ;
+         GetToolBarWidth(_HMG_SYSDATA [ 310 ]) , ;
+         GetToolBarHeight(_HMG_SYSDATA [ 310 ]) , ;
+         _HMG_SYSDATA [ 258 ] ;
+         )
 
-// #define WM_USER     1024        // ok (MinGW)
-#define WM_USER         0x0400        // ok
-#define TB_SETHOTITEM    (WM_USER+72)   // ok
+   ENDIF
 
-*------------------------------------------------------------------------------*
-Procedure _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , nButtonPos )
-*------------------------------------------------------------------------------*
-Local aPos := { 0 , 0 , 0 , 0 }
-Local aSize
-Local x
+   RETURN NIL
 
+   // #define WM_USER     1024        // ok (MinGW)
+   #define WM_USER         0x0400        // ok
+   #define TB_SETHOTITEM    (WM_USER+72)   // ok
 
-	x  := Ascan ( _HMG_SYSDATA [  5 ] , nToolButtonId )
+PROCEDURE _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , nButtonPos )
 
-	if x > 0 .And. _HMG_SYSDATA [1] [x] = "TOOLBUTTON"
-		aPos:= {0,0,0,0}
-		GetWindowRect(_HMG_SYSDATA [3] [i],aPos)
-		aSize := GetToolButtonSize ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [  8 ] [ x ] - 1 )
+   LOCAL aPos := { 0 , 0 , 0 , 0 }
+   LOCAL aSize
+   LOCAL x
 
-		SendMessage( _HMG_SYSDATA [3] [i] , TB_SETHOTITEM, nButtonPos - 1 ,  0 )
+   x  := Ascan ( _HMG_SYSDATA [  5 ] , nToolButtonId )
 
-		TrackPopupMenu ( _HMG_SYSDATA [ 32 ] [x] , aPos[1] + aSize [1] , aPos[2] + aSize [2] + ( aPos[4] - aPos[2] - aSize [2] ) / 2 , nParentWindowHandle )
+   IF x > 0 .And. _HMG_SYSDATA [1] [x] = "TOOLBUTTON"
+      aPos:= {0,0,0,0}
+      GetWindowRect(_HMG_SYSDATA [3] [i],aPos)
+      aSize := GetToolButtonSize ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [  8 ] [ x ] - 1 )
 
-		SendMessage( _HMG_SYSDATA [3] [i] , TB_SETHOTITEM, -1 ,  0 )
+      SendMessage( _HMG_SYSDATA [3] [i] , TB_SETHOTITEM, nButtonPos - 1 ,  0 )
 
-    	EndIf
+      TrackPopupMenu ( _HMG_SYSDATA [ 32 ] [x] , aPos[1] + aSize [1] , aPos[2] + aSize [2] + ( aPos[4] - aPos[2] - aSize [2] ) / 2 , nParentWindowHandle )
 
+      SendMessage( _HMG_SYSDATA [3] [i] , TB_SETHOTITEM, -1 ,  0 )
 
-Return
+   ENDIF
 
+   RETURN
 
-// by Dr. Claudio Soto (May 2014)
-*------------------------------------------------------------------------------*
+   // by Dr. Claudio Soto (May 2014)
+
 PROCEDURE RepositionToolBar (nIndex)
-*------------------------------------------------------------------------------*
-LOCAL nRow, nCol, cFormName
+
+   LOCAL nRow, nCol, cFormName
 
    DEFAULT nIndex TO GetLastActiveFormIndex()
    IF nIndex > 0
-      cFormName := GetFormNameByIndex (nIndex) 
+      cFormName := GetFormNameByIndex (nIndex)
       IF BT_StatusBarHeight (cFormName) > 0 .AND. BT_ToolBarBottomHeight (cFormName) > 0
          nCol := GETWINDOWCOL (BT_ToolBarBottomHandle(cFormName))
          ScreenToClient (GetFormHandle(cFormName), @nCOL, NIL)
@@ -426,5 +423,5 @@ LOCAL nRow, nCol, cFormName
       ENDIF
    ENDIF
 
-RETURN
+   RETURN
 

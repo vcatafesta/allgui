@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -15,268 +13,268 @@ ANNOUNCE RDDSYS
 #define CLR_BLUE { 0, 0, 136 }
 #define IDI_MAIN 1001
 
-Static aIni
+STATIC aIni
 
 PROCEDURE Main
 
-LOCAL cCfgFile := GetStartUpFolder() + "\" + cFileNoExt( GetExeFileName() ) + ".ini"
-LOCAL aEntry := {}, aView := {}, nBorderWidth, nBorderHeight, cPicture, i
-LOCAL nCol_Play1 := 36, nCol_Play2 := 172, nCol_Driver := 309
-LOCAL aClr_Pen, aClr_Fore, aClr_Back, aBtn_Fore, aBtn_Back
+   LOCAL cCfgFile := GetStartUpFolder() + "\" + cFileNoExt( GetExeFileName() ) + ".ini"
+   LOCAL aEntry := {}, aView := {}, nBorderWidth, nBorderHeight, cPicture, i
+   LOCAL nCol_Play1 := 36, nCol_Play2 := 172, nCol_Driver := 309
+   LOCAL aClr_Pen, aClr_Fore, aClr_Back, aBtn_Fore, aBtn_Back
 
-aAdd( aEntry, "FilmName" )
-aAdd( aEntry, "Info_File" )
-aAdd( aEntry, "Info_Type" )
-aAdd( aEntry, "Picture" )
-aAdd( aEntry, "FilmName_File" )
-aAdd( aEntry, "Command_Line" )
-aAdd( aEntry, "Images_Dir" )
-aAdd( aEntry, "PathXviD" )
-aAdd( aEntry, "Info_Aligment" )
-aAdd( aEntry, "Exit_Button_Click" )
+   aAdd( aEntry, "FilmName" )
+   aAdd( aEntry, "Info_File" )
+   aAdd( aEntry, "Info_Type" )
+   aAdd( aEntry, "Picture" )
+   aAdd( aEntry, "FilmName_File" )
+   aAdd( aEntry, "Command_Line" )
+   aAdd( aEntry, "Images_Dir" )
+   aAdd( aEntry, "PathXviD" )
+   aAdd( aEntry, "Info_Aligment" )
+   aAdd( aEntry, "Exit_Button_Click" )
 
-aAdd( aView, "Button_Exit_Text" )
-aAdd( aView, "Button_Exit_Hint" )
-aAdd( aView, "Button_Play1_Text" )
-aAdd( aView, "Button_Play1_Hint" )
-aAdd( aView, "Button_Play1_Visible" )
-aAdd( aView, "Button_Play2_Text" )
-aAdd( aView, "Button_Play2_Hint" )
-aAdd( aView, "Button_Play2_Visible" )
-aAdd( aView, "Button_Driver_Text" )
-aAdd( aView, "Button_Driver_Hint" )
-aAdd( aView, "Button_Driver_Visible" )
-aAdd( aView, "Form_Height" )
-aAdd( aView, "Form_Width" )
-aAdd( aView, "Border_Color" )
-aAdd( aView, "Background_Color" )
-aAdd( aView, "Font_Color" )
-aAdd( aView, "Buttons_Color" )
-aAdd( aView, "Buttons_Font_Color" )
+   aAdd( aView, "Button_Exit_Text" )
+   aAdd( aView, "Button_Exit_Hint" )
+   aAdd( aView, "Button_Play1_Text" )
+   aAdd( aView, "Button_Play1_Hint" )
+   aAdd( aView, "Button_Play1_Visible" )
+   aAdd( aView, "Button_Play2_Text" )
+   aAdd( aView, "Button_Play2_Hint" )
+   aAdd( aView, "Button_Play2_Visible" )
+   aAdd( aView, "Button_Driver_Text" )
+   aAdd( aView, "Button_Driver_Hint" )
+   aAdd( aView, "Button_Driver_Visible" )
+   aAdd( aView, "Form_Height" )
+   aAdd( aView, "Form_Width" )
+   aAdd( aView, "Border_Color" )
+   aAdd( aView, "Background_Color" )
+   aAdd( aView, "Font_Color" )
+   aAdd( aView, "Buttons_Color" )
+   aAdd( aView, "Buttons_Font_Color" )
 
-	aIni := Array(28)
+   aIni := Array(28)
 
-	DEFAULT aIni[1] TO "Film"
-	DEFAULT aIni[2] TO ""
-	DEFAULT aIni[3] TO ""
-	DEFAULT aIni[4] TO ""
-	DEFAULT aIni[5] TO ""
-	DEFAULT aIni[6] TO ""
-	DEFAULT aIni[7] TO ""
-	DEFAULT aIni[8] TO ""
-	aIni[9] := 0
-	aIni[10] := 0
-	DEFAULT aIni[11] TO "Exit"
-	DEFAULT aIni[12] TO ""
-	DEFAULT aIni[13] TO "Play by LA"
-	DEFAULT aIni[14] TO ""
-	aIni[15] := 1
-	DEFAULT aIni[16] TO "Play"
-	DEFAULT aIni[17] TO ""
-	aIni[18] := 1
-	DEFAULT aIni[19] TO "Setup"
-	DEFAULT aIni[20] TO ""
-	aIni[21] := 1
-	aIni[22] := 0
-	aIni[23] := 0
-	aIni[24] := 65535
-	aIni[25] := 8388672
-	aIni[26] := 65535
-	aIni[27] := 10494032
-	aIni[28] := 65535
+   DEFAULT aIni[1] TO "Film"
+   DEFAULT aIni[2] TO ""
+   DEFAULT aIni[3] TO ""
+   DEFAULT aIni[4] TO ""
+   DEFAULT aIni[5] TO ""
+   DEFAULT aIni[6] TO ""
+   DEFAULT aIni[7] TO ""
+   DEFAULT aIni[8] TO ""
+   aIni[9] := 0
+   aIni[10] := 0
+   DEFAULT aIni[11] TO "Exit"
+   DEFAULT aIni[12] TO ""
+   DEFAULT aIni[13] TO "Play by LA"
+   DEFAULT aIni[14] TO ""
+   aIni[15] := 1
+   DEFAULT aIni[16] TO "Play"
+   DEFAULT aIni[17] TO ""
+   aIni[18] := 1
+   DEFAULT aIni[19] TO "Setup"
+   DEFAULT aIni[20] TO ""
+   aIni[21] := 1
+   aIni[22] := 0
+   aIni[23] := 0
+   aIni[24] := 65535
+   aIni[25] := 8388672
+   aIni[26] := 65535
+   aIni[27] := 10494032
+   aIni[28] := 65535
 
-	IF FILE(cCfgFile)
+   IF FILE(cCfgFile)
 
-		BEGIN INI FILE cCfgFile
+      BEGIN INI FILE cCfgFile
 
-			For i := 1 To Len(aEntry)
-				GET aIni[i] SECTION "Data" ENTRY aEntry[i]
-			Next i
-			For i := 1 To Len(aView)
-				GET aIni[i+10] SECTION "View" ENTRY aView[i]
-			Next i
+         FOR i := 1 To Len(aEntry)
+            GET aIni[i] SECTION "Data" ENTRY aEntry[i]
+         NEXT i
+         FOR i := 1 To Len(aView)
+            GET aIni[i+10] SECTION "View" ENTRY aView[i]
+         NEXT i
 
-		END INI
+      END INI
 
-	ENDIF
+   ENDIF
 
-	nBorderWidth  := GetBorderWidth()
-	nBorderHeight := GetBorderHeight()
+   nBorderWidth  := GetBorderWidth()
+   nBorderHeight := GetBorderHeight()
 
-	cPicture := IF(FILE(aIni[4]), aIni[4], "LOGO")
+   cPicture := IF(FILE(aIni[4]), aIni[4], "LOGO")
 
-	IF !EMPTY(aIni[15]) .AND. EMPTY(aIni[18]) .AND. !EMPTY(aIni[21])
-		nCol_Play1 := 172
-	ELSEIF !EMPTY(aIni[15]) .AND. EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
-		nCol_Play1 := 309
-	ELSEIF EMPTY(aIni[15]) .AND. !EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
-		nCol_Play2 := 309
-	ELSEIF !EMPTY(aIni[15]) .AND. !EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
-		nCol_Play1 := 172
-		nCol_Play2 := 309
-	ENDIF
+   IF !EMPTY(aIni[15]) .AND. EMPTY(aIni[18]) .AND. !EMPTY(aIni[21])
+      nCol_Play1 := 172
+   ELSEIF !EMPTY(aIni[15]) .AND. EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
+      nCol_Play1 := 309
+   ELSEIF EMPTY(aIni[15]) .AND. !EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
+      nCol_Play2 := 309
+   ELSEIF !EMPTY(aIni[15]) .AND. !EMPTY(aIni[18]) .AND. EMPTY(aIni[21])
+      nCol_Play1 := 172
+      nCol_Play2 := 309
+   ENDIF
 
-	aClr_Pen  := { GetRed( aIni[24] ), GetGreen( aIni[24] ), GetBlue( aIni[24] ) }
-	aClr_Back := { GetRed( aIni[25] ), GetGreen( aIni[25] ), GetBlue( aIni[25] ) }
-	aClr_Fore := { GetRed( aIni[26] ), GetGreen( aIni[26] ), GetBlue( aIni[26] ) }
-	aBtn_Back := { GetRed( aIni[27] ), GetGreen( aIni[27] ), GetBlue( aIni[27] ) }
-	aBtn_Fore := { GetRed( aIni[28] ), GetGreen( aIni[28] ), GetBlue( aIni[28] ) }
+   aClr_Pen  := { GetRed( aIni[24] ), GetGreen( aIni[24] ), GetBlue( aIni[24] ) }
+   aClr_Back := { GetRed( aIni[25] ), GetGreen( aIni[25] ), GetBlue( aIni[25] ) }
+   aClr_Fore := { GetRed( aIni[26] ), GetGreen( aIni[26] ), GetBlue( aIni[26] ) }
+   aBtn_Back := { GetRed( aIni[27] ), GetGreen( aIni[27] ), GetBlue( aIni[27] ) }
+   aBtn_Fore := { GetRed( aIni[28] ), GetGreen( aIni[28] ), GetBlue( aIni[28] ) }
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH Max(586, aIni[23]) HEIGHT Max(423, aIni[22]) ;
-		TITLE aIni[1] ;
-		ICON IDI_MAIN ;
-		MAIN ;
-		NOSIZE NOMAXIMIZE NOMINIMIZE NOSYSMENU NOCAPTION ;
-		ON INIT SetHandCursor(GetControlHandle("Label_3", "Form_1")) ;
-		BACKCOLOR aClr_Back ;
-		FONT "Tahoma" SIZE 9
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH Max(586, aIni[23]) HEIGHT Max(423, aIni[22]) ;
+         TITLE aIni[1] ;
+         ICON IDI_MAIN ;
+         MAIN ;
+         NOSIZE NOMAXIMIZE NOMINIMIZE NOSYSMENU NOCAPTION ;
+         ON INIT SetHandCursor(GetControlHandle("Label_3", "Form_1")) ;
+         BACKCOLOR aClr_Back ;
+         FONT "Tahoma" SIZE 9
 
-		DRAW LINE IN WINDOW Form_1 AT 0, 0 TO 0,Form_1.Width ;
-			PENCOLOR aClr_Pen ;
-			PENWIDTH nBorderWidth
+      DRAW LINE IN WINDOW Form_1 AT 0, 0 TO 0,Form_1.Width ;
+         PENCOLOR aClr_Pen ;
+         PENWIDTH nBorderWidth
 
-		DRAW LINE IN WINDOW Form_1 AT Form_1.Height, 0 TO Form_1.Height,Form_1.Width ;
-			PENCOLOR aClr_Pen ;
-			PENWIDTH nBorderWidth
+      DRAW LINE IN WINDOW Form_1 AT Form_1.Height, 0 TO Form_1.Height,Form_1.Width ;
+         PENCOLOR aClr_Pen ;
+         PENWIDTH nBorderWidth
 
-		DRAW LINE IN WINDOW Form_1 AT 0, 0 TO Form_1.Height,0 ;
-			PENCOLOR aClr_Pen ;
-			PENWIDTH nBorderWidth
+      DRAW LINE IN WINDOW Form_1 AT 0, 0 TO Form_1.Height,0 ;
+         PENCOLOR aClr_Pen ;
+         PENWIDTH nBorderWidth
 
-		DRAW LINE IN WINDOW Form_1 AT 0, Form_1.Width TO Form_1.Height,Form_1.Width ;
-			PENCOLOR aClr_Pen ;
-			PENWIDTH nBorderWidth
+      DRAW LINE IN WINDOW Form_1 AT 0, Form_1.Width TO Form_1.Height,Form_1.Width ;
+         PENCOLOR aClr_Pen ;
+         PENWIDTH nBorderWidth
 
-		@ 8,nBorderWidth LABEL Label_1 OF Form_1 VALUE aIni[1] WIDTH Form_1.Width - nBorderWidth * 2 HEIGHT 28 CENTERALIGN ;
-			BACKCOLOR aClr_Back ;
-			FONTCOLOR aClr_Fore ;
-			ACTION MoveActiveWindow() ;
-			FONT "Tahoma" SIZE 13
+      @ 8,nBorderWidth LABEL Label_1 OF Form_1 VALUE aIni[1] WIDTH Form_1.Width - nBorderWidth * 2 HEIGHT 28 CENTERALIGN ;
+         BACKCOLOR aClr_Back ;
+         FONTCOLOR aClr_Fore ;
+         ACTION MoveActiveWindow() ;
+         FONT "Tahoma" SIZE 13
 
-                @ 36 + aIni[9]/10,nBorderWidth - 1 IMAGE Image_1 OF Form_1 ;
-                        PICTURE cPicture ;
-                        WIDTH 318 - aIni[9] ;
-                        HEIGHT 324 - aIni[9]/5 ;
-			ACTION m_about() ;
-			STRETCH
+      @ 36 + aIni[9]/10,nBorderWidth - 1 IMAGE Image_1 OF Form_1 ;
+         PICTURE cPicture ;
+         WIDTH 318 - aIni[9] ;
+         HEIGHT 324 - aIni[9]/5 ;
+         ACTION m_about() ;
+         STRETCH
 
-	IF UPPER(aIni[3]) == "HTML"
+      IF UPPER(aIni[3]) == "HTML"
 
-		@ 36,nBorderWidth + 320 - aIni[9] QHTM Html_1 OF Form_1 ;
-			VALUE MemoRead( aIni[2] ) ;
-			WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
-			HEIGHT 324
+         @ 36,nBorderWidth + 320 - aIni[9] QHTM Html_1 OF Form_1 ;
+            VALUE MemoRead( aIni[2] ) ;
+            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
+            HEIGHT 324
 
-	ELSE
+      ELSE
 
-		@ 36,nBorderWidth + 320 - aIni[9] LABEL Label_2 OF Form_1 ;
-			VALUE MemoRead( aIni[2] ) ;
-			WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
-			HEIGHT 324 ;
-			BACKCOLOR CLR_BLUE ;
-			FONTCOLOR aClr_Fore ;
-			FONT "Tahoma" SIZE 8
-	ENDIF
+         @ 36,nBorderWidth + 320 - aIni[9] LABEL Label_2 OF Form_1 ;
+            VALUE MemoRead( aIni[2] ) ;
+            WIDTH Form_1.Width - nBorderWidth * 2 - 318 + aIni[9];
+            HEIGHT 324 ;
+            BACKCOLOR CLR_BLUE ;
+            FONTCOLOR aClr_Fore ;
+            FONT "Tahoma" SIZE 8
+      ENDIF
 
-		@ 362,nBorderWidth + 320 LABEL Label_3 OF Form_1 ;
-			VALUE "Copyright " + CHR(169) + " 2006 Grigory Filatov" WIDTH 250 HEIGHT 16 RIGHTALIGN ;
-			BACKCOLOR aClr_Back ;
-			FONTCOLOR aClr_Fore ;
-			ACTION ShellExecute(0, "open", "rundll32.exe", "url.dll,FileProtocolHandler " + ;
-			"mailto:gfilatov@inbox.ru?cc=&bcc=&subject=Harbour%20AutoRun%20Feedback:", , 1) ;
-			BOLD TOOLTIP "E-mail me if you have any comments or suggestions"
+      @ 362,nBorderWidth + 320 LABEL Label_3 OF Form_1 ;
+         VALUE "Copyright " + CHR(169) + " 2006 Grigory Filatov" WIDTH 250 HEIGHT 16 RIGHTALIGN ;
+         BACKCOLOR aClr_Back ;
+         FONTCOLOR aClr_Fore ;
+         ACTION ShellExecute(0, "open", "rundll32.exe", "url.dll,FileProtocolHandler " + ;
+         "mailto:gfilatov@inbox.ru?cc=&bcc=&subject=Harbour%20AutoRun%20Feedback:", , 1) ;
+         BOLD TOOLTIP "E-mail me if you have any comments or suggestions"
 
-	IF !EMPTY(aIni[15])
+      IF !EMPTY(aIni[15])
 
-		@ 386,nBorderWidth + nCol_Play1  BUTTONEX Button_1 OF Form_1 CAPTION aIni[13] ;
-			ACTION m_playLA( aIni[6] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[14]) ;
-			BACKCOLOR aBtn_Back ;
-			FONTCOLOR aBtn_Fore NOXPSTYLE DEFAULT
-	ENDIF
+         @ 386,nBorderWidth + nCol_Play1  BUTTONEX Button_1 OF Form_1 CAPTION aIni[13] ;
+            ACTION m_playLA( aIni[6] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[14]) ;
+            BACKCOLOR aBtn_Back ;
+            FONTCOLOR aBtn_Fore NOXPSTYLE DEFAULT
+      ENDIF
 
-	IF !EMPTY(aIni[18])
+      IF !EMPTY(aIni[18])
 
-		@ 386,nBorderWidth + nCol_Play2 BUTTONEX Button_2 OF Form_1 CAPTION aIni[16] ;
-			ACTION m_play( aIni[5] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[17]) ;
-			BACKCOLOR aBtn_Back ;
-			FONTCOLOR aBtn_Fore NOXPSTYLE
-	ENDIF
+         @ 386,nBorderWidth + nCol_Play2 BUTTONEX Button_2 OF Form_1 CAPTION aIni[16] ;
+            ACTION m_play( aIni[5] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[17]) ;
+            BACKCOLOR aBtn_Back ;
+            FONTCOLOR aBtn_Fore NOXPSTYLE
+      ENDIF
 
-	IF !EMPTY(aIni[21])
+      IF !EMPTY(aIni[21])
 
-		@ 386,nBorderWidth + nCol_Driver BUTTONEX Button_3 OF Form_1 CAPTION aIni[19] ;
-			ACTION m_play( aIni[8] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[20]) ;
-			BACKCOLOR aBtn_Back ;
-			FONTCOLOR aBtn_Fore NOXPSTYLE
-	ENDIF
+         @ 386,nBorderWidth + nCol_Driver BUTTONEX Button_3 OF Form_1 CAPTION aIni[19] ;
+            ACTION m_play( aIni[8] ) WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[20]) ;
+            BACKCOLOR aBtn_Back ;
+            FONTCOLOR aBtn_Fore NOXPSTYLE
+      ENDIF
 
-		@ 386,nBorderWidth + 445 BUTTONEX Button_4 OF Form_1 CAPTION aIni[11] ;
-			ACTION Form_1.Release WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[12] + " (Esc)") ;
-			BACKCOLOR aBtn_Back ;
-			FONTCOLOR aBtn_Fore NOXPSTYLE
+      @ 386,nBorderWidth + 445 BUTTONEX Button_4 OF Form_1 CAPTION aIni[11] ;
+         ACTION Form_1.Release WIDTH 128 HEIGHT 23 TOOLTIP lTrim(aIni[12] + " (Esc)") ;
+         BACKCOLOR aBtn_Back ;
+         FONTCOLOR aBtn_Fore NOXPSTYLE
 
-		ON KEY ESCAPE ACTION ReleaseAllWindows()
+      ON KEY ESCAPE ACTION ReleaseAllWindows()
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE m_playLA( cRun )
-Local cParameter
 
-	IF !EMPTY(cRun)
+   LOCAL cParameter
 
-		cParameter := Chr(34) + Trim( Token( cRun, " ", 2 ) + " " + Token( cRun, " ", 3 ) + " " + Token( cRun, " ", 4 ) ) + Chr(34)
-		_Execute ( 0, , Token( cRun, " " ), cParameter, , 5 )
+   IF !EMPTY(cRun)
 
-	ENDIF
+      cParameter := Chr(34) + Trim( Token( cRun, " ", 2 ) + " " + Token( cRun, " ", 3 ) + " " + Token( cRun, " ", 4 ) ) + Chr(34)
+      _Execute ( 0, , Token( cRun, " " ), cParameter, , 5 )
 
-	IF !EMPTY(aIni[10])
-		Form_1.Release
-	ENDIF
+   ENDIF
 
-RETURN
+   IF !EMPTY(aIni[10])
+      Form_1.Release
+   ENDIF
 
+   RETURN
 
 STATIC PROCEDURE m_play( cRun )
 
-	_Execute ( 0, , cRun , , , 5 )
+   _Execute ( 0, , cRun , , , 5 )
 
-	IF !EMPTY(aIni[10])
-		Form_1.Release
-	ENDIF
+   IF !EMPTY(aIni[10])
+      Form_1.Release
+   ENDIF
 
-RETURN
-
+   RETURN
 
 STATIC FUNCTION m_about()
-RETURN MsgInfo("Harbour AutoRun version 1.01 - Freeware" + CRLF + ;
-	"Copyright (c) 2006 Grigory Filatov" + CRLF + CRLF + ;
-	padc("Email: gfilatov@inbox.ru", 38) + CRLF + CRLF + ;
-	hb_compiler() + CRLF + ;
-	version() + CRLF + ;
-	substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
 
+   RETURN MsgInfo("Harbour AutoRun version 1.01 - Freeware" + CRLF + ;
+      "Copyright (c) 2006 Grigory Filatov" + CRLF + CRLF + ;
+      padc("Email: gfilatov@inbox.ru", 38) + CRLF + CRLF + ;
+      hb_compiler() + CRLF + ;
+      version() + CRLF + ;
+      substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
 
-#define HTCAPTION          2
-#define WM_NCLBUTTONDOWN   161
+   #define HTCAPTION          2
+   #define WM_NCLBUTTONDOWN   161
 
-Static Procedure MoveActiveWindow(hWnd)
-	default hWnd := GetActiveWindow()
+STATIC PROCEDURE MoveActiveWindow(hWnd)
 
-	PostMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
-	CursorArrow()
+   DEFAULT hWnd := GetActiveWindow()
 
-Return
+   PostMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
+   CursorArrow()
 
-Static Function Token( cStr, cDelim, nToken )
+   RETURN
+
+STATIC FUNCTION Token( cStr, cDelim, nToken )
+
    LOCAL nPos, cToken := "", nCounter := 1
 
    DEFAULT nToken := 1
@@ -302,37 +300,35 @@ Static Function Token( cStr, cDelim, nToken )
 
    ENDDO
 
-RETURN cToken
+   RETURN cToken
 
+STATIC FUNCTION drawline(window,row,col,row1,col1,penrgb,penwidth)
 
-Static Function drawline(window,row,col,row1,col1,penrgb,penwidth)
-Local i := GetFormIndex ( Window )
-Local FormHandle := _HMG_aFormHandles [i]
+   LOCAL i := GetFormIndex ( Window )
+   LOCAL FormHandle := _HMG_aFormHandles [i]
 
-	if formhandle > 0
+   IF formhandle > 0
 
-		if valtype(penrgb) == "U"
-			penrgb = {0,0,0}
-		endif
-	
-		if valtype(penwidth) == "U"
-			penwidth = 1
-		endif
+      IF valtype(penrgb) == "U"
+         penrgb = {0,0,0}
+      ENDIF
 
-		linedraw( formhandle,row,col,row1,col1,penrgb,penwidth)
+      IF valtype(penwidth) == "U"
+         penwidth = 1
+      ENDIF
 
-		aadd ( _HMG_aFormGraphTasks [i] , { || linedraw( formhandle,row,col,row1,col1,penrgb,penwidth) } )
+      linedraw( formhandle,row,col,row1,col1,penrgb,penwidth)
 
-	endif
+      aadd ( _HMG_aFormGraphTasks [i] , { || linedraw( formhandle,row,col,row1,col1,penrgb,penwidth) } )
 
-return nil
+   ENDIF
 
+   RETURN NIL
 
 #pragma BEGINDUMP
 
 /*
  * QHTM wrappers for Harbour
- *
  * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
  * www - http://www.geocities.com/alkresin/
 */
@@ -380,14 +376,17 @@ BOOL qhtmInit( char* cLibname )
       {
          QHTM_INITIALIZE pFunc = (QHTM_INITIALIZE) GetProcAddress( hQhtmDll,"QHTM_Initialize" );
          if( pFunc )
+
             return ( pFunc( GetModuleHandle( NULL ) ) )? 1:0;
       }
       else
       {
          MessageBox( GetActiveWindow(), "Library not loaded", cLibname, MB_OK | MB_ICONSTOP );
+
          return 0;
       }
    }
+
    return 1;
 }
 
@@ -413,15 +412,15 @@ HB_FUNC( CREATEQHTM )
 {
    if( qhtmInit(NULL) )
    {
-      HWND handle = CreateWindow( 
+      HWND handle = CreateWindow(
                        "QHTM_Window_Class_001",     /* predefined class  */
                        NULL,                        /* no window title   */
                        WS_CHILD | WS_VISIBLE | hb_parnl(3),    /* style  */
                        hb_parni(4), hb_parni(5),    /* x, y       */
                        hb_parni(6), hb_parni(7),    /* nWidth, nHeight */
-                       (HWND) hb_parnl(1),           /* parent window    */ 
-                       (HMENU) hb_parni(2),          /* control ID  */ 
-                       GetModuleHandle( NULL ), 
+                       (HWND) hb_parnl(1),           /* parent window    */
+                       (HMENU) hb_parni(2),          /* control ID  */
+                       GetModuleHandle( NULL ),
                        NULL);
 
       hb_retnl( (LONG) handle );
@@ -572,5 +571,5 @@ HB_FUNC( QHTM_FORMCALLBACK )
 
 #pragma ENDDUMP
 
-#include "h_qhtm.prg"
+   #include "h_qhtm.prg"
 

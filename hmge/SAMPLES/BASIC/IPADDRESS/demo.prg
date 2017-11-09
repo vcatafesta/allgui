@@ -1,18 +1,17 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-DEFINE WINDOW FORM_MAIN ;
-	AT 0,0 ;
-	WIDTH 640 HEIGHT 480 ;
-	TITLE "IPADDRESS Control Demo" ;
-	MAIN
+   DEFINE WINDOW FORM_MAIN ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE "IPADDRESS Control Demo" ;
+         MAIN
 
       @ 10,10 EDITBOX EDITBOX_1 VALUE "" WIDTH 150 HEIGHT 400
 
@@ -54,59 +53,66 @@ DEFINE WINDOW FORM_MAIN ;
 
       @ 350,200 BUTTON BUTTON_4 CAPTION "Clear Text" ACTION FORM_MAIN.EDITBOX_1.VALUE := ""
 
-END WINDOW
+   END WINDOW
 
-CENTER WINDOW FORM_MAIN
+   CENTER WINDOW FORM_MAIN
 
-ACTIVATE WINDOW FORM_MAIN
+   ACTIVATE WINDOW FORM_MAIN
 
-Return Nil
+   RETURN NIL
 
-Function AddText( t )
-Local a := FORM_MAIN.EDITBOX_1.VALUE 
-	a += t + CRLF
-	FORM_MAIN.EDITBOX_1.Value := a
-Return Nil
+FUNCTION AddText( t )
 
-// SET
+   LOCAL a := FORM_MAIN.EDITBOX_1.VALUE
 
-Function SetIp1
+   a += t + CRLF
+   FORM_MAIN.EDITBOX_1.Value := a
 
-	FORM_MAIN.IPADDRESS_1.VALUE := {} // clear ip address
+   RETURN NIL
 
-Return Nil
+   // SET
 
-Function SetIp2
+FUNCTION SetIp1
 
-	FORM_MAIN.IPADDRESS_2.VALUE := {127,0,0,1}
+   FORM_MAIN.IPADDRESS_1.VALUE := {} // clear ip address
 
-Return Nil
+   RETURN NIL
 
-Function SetIp3
+FUNCTION SetIp2
 
-	FORM_MAIN.IPADDRESS_3.VALUE := {255,255,255,255}
+   FORM_MAIN.IPADDRESS_2.VALUE := {127,0,0,1}
 
-Return Nil
+   RETURN NIL
 
-// GET
+FUNCTION SetIp3
 
-Function GetIp1
-Local a := FORM_MAIN.IPADDRESS_1.VALUE
+   FORM_MAIN.IPADDRESS_3.VALUE := {255,255,255,255}
 
-	MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
+   RETURN NIL
 
-Return Nil
+   // GET
 
-Function GetIp2
-Local a := FORM_MAIN.IPADDRESS_2.VALUE
+FUNCTION GetIp1
 
-	MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
+   LOCAL a := FORM_MAIN.IPADDRESS_1.VALUE
 
-Return Nil
+   MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
 
-Function GetIp3
-Local a := FORM_MAIN.IPADDRESS_3.VALUE
+   RETURN NIL
 
-	MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
+FUNCTION GetIp2
 
-Return Nil
+   LOCAL a := FORM_MAIN.IPADDRESS_2.VALUE
+
+   MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
+
+   RETURN NIL
+
+FUNCTION GetIp3
+
+   LOCAL a := FORM_MAIN.IPADDRESS_3.VALUE
+
+   MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
+
+   RETURN NIL
+

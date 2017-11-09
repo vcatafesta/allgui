@@ -1,22 +1,20 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Based on tsttable sample included in xHarbour distribution
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
+* Based on tsttable sample included in xHarbour distribution
 */
 
 #include "minigui.ch"
 #include 'ttable.ch'
 
-Request Dbfcdx
+REQUEST Dbfcdx
 
 PROCEDURE main
 
    LOCAL x := 1
    LOCAL oTable, cAlias
-   LOCAL bColor := { || if ( deleted() , RGB( 255, 0, 0 ) , RGB( 255, 255, 255 ) ) }	
-   
+   LOCAL bColor := { || if ( deleted() , RGB( 255, 0, 0 ) , RGB( 255, 255, 255 ) ) }
+
    RDDSETDEFAULT( 'dbfcdx')
 
    SET CENTURY ON
@@ -25,104 +23,104 @@ PROCEDURE main
 
    /*Open a Table with Table Class */
    DEFINE TABLE oTable FILE test ALIAS Table SHARED NEW
-   
-   /*Adding an Index to This Table */
-   DEFINE ORDER ON KEY "name" TAG _1 IN oTable
 
-   IF !FILE( 'test.cdx' )
+      /*Adding an Index to This Table */
+      DEFINE ORDER ON KEY "name" TAG _1 IN oTable
 
-      /* Force the index Creating */
-      oTable:Reindex()
+      IF !FILE( 'test.cdx' )
 
-   ENDIF
+         /* Force the index Creating */
+         oTable:Reindex()
 
-   IF oTable:LastRec() == 0
+      ENDIF
 
-      WHILE x <= 100
+      IF oTable:LastRec() == 0
 
-         oTable:ReadBlank()
+         WHILE x <= 100
 
-         oTable:name   := Str( x, 20 )
-         oTable:street := Str( x + 1, 20 )
-         oTable:city   := Str( x + 2, 20 )
-         oTable:code   := x
-         oTable:today  := Date()
-         oTable:pay    := ( x % 2 ) == 0
+            oTable:ReadBlank()
 
-         oTable:Append()
+            oTable:name   := Str( x, 20 )
+            oTable:street := Str( x + 1, 20 )
+            oTable:city   := Str( x + 2, 20 )
+            oTable:code   := x
+            oTable:today  := Date()
+            oTable:pay    := ( x % 2 ) == 0
 
-         oTable:Write()
+            oTable:Append()
 
-         x ++
+            oTable:Write()
 
-      ENDDO
+            x ++
 
-      oTable:GoTop()
+         ENDDO
 
-   ENDIF
+         oTable:GoTop()
 
-   cAlias := oTable:Alias
+      ENDIF
 
-   DEFINE WINDOW Form_1 ;
-	AT 0,0 ;
-	WIDTH 640 HEIGHT 480 ;
-	TITLE 'MiniGUI Table Class Demo' ;
-	MAIN NOMAXIMIZE ;
-	ON RELEASE CloseTable()
+      cAlias := oTable:Alias
 
-	DEFINE MAIN MENU 
-		POPUP 'File'
-			ITEM 'Append record'		ACTION Append_record(oTable)
-			ITEM 'Undo the last writing'		ACTION Undo_record(oTable)
-			ITEM 'Delete record'		ACTION Delete_record(oTable)
-			ITEM 'Roolback the ALL deleting'	ACTION Undo_delete(oTable)
-			SEPARATOR
-			ITEM 'Exit'			ACTION Form_1.Release
-		END POPUP
-		POPUP 'Help'
-			ITEM 'About'			ACTION MsgInfo ("MiniGUI Table Class Demo") 
-		END POPUP
+      DEFINE WINDOW Form_1 ;
+            AT 0,0 ;
+            WIDTH 640 HEIGHT 480 ;
+            TITLE 'MiniGUI Table Class Demo' ;
+            MAIN NOMAXIMIZE ;
+            ON RELEASE CloseTable()
 
-	END MENU
+         DEFINE MAIN MENU
+            POPUP 'File'
+               ITEM 'Append record'      ACTION Append_record(oTable)
+               ITEM 'Undo the last writing'      ACTION Undo_record(oTable)
+               ITEM 'Delete record'      ACTION Delete_record(oTable)
+               ITEM 'Roolback the ALL deleting'   ACTION Undo_delete(oTable)
+               SEPARATOR
+               ITEM 'Exit'         ACTION Form_1.Release
+            END POPUP
+            POPUP 'Help'
+               ITEM 'About'         ACTION MsgInfo ("MiniGUI Table Class Demo")
+            END POPUP
 
-	DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
-	END STATUSBAR
+         END MENU
 
-	@ 10,10 BROWSE Browse_1	;
-		WIDTH 610	;
-		HEIGHT 382	;	
-		HEADERS { 'Code' , 'Name' , 'Street' , 'City' , 'Date' , 'Pay' } ;
-		WIDTHS { 80 , 100 , 100 , 100 , 100 , 50 } ;
-		WORKAREA &cAlias ;
-		FIELDS { 'Code' , 'Name' , 'Street' , 'City' , 'Today' , 'Pay' } ;
-		JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER } ;
-		DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor } ;
-		EDIT INPLACE ;
-		LOCK ;
-		WHEN { {|| Empty(Field->Code) }, , , , , }
+         DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
+         END STATUSBAR
 
-	ON KEY ESCAPE ACTION ThisWindow.Release()
+         @ 10,10 BROWSE Browse_1   ;
+            WIDTH 610   ;
+            HEIGHT 382   ;
+            HEADERS { 'Code' , 'Name' , 'Street' , 'City' , 'Date' , 'Pay' } ;
+            WIDTHS { 80 , 100 , 100 , 100 , 100 , 50 } ;
+            WORKAREA &cAlias ;
+            FIELDS { 'Code' , 'Name' , 'Street' , 'City' , 'Today' , 'Pay' } ;
+            JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER } ;
+            DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor } ;
+            EDIT INPLACE ;
+            LOCK ;
+            WHEN { {|| Empty(Field->Code) }, , , , , }
 
-   END WINDOW
+         ON KEY ESCAPE ACTION ThisWindow.Release()
 
-   CENTER WINDOW Form_1
+      END WINDOW
 
-   Form_1.Browse_1.SetFocus
+      CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1
+      Form_1.Browse_1.SetFocus
 
-RETURN
+      ACTIVATE WINDOW Form_1
 
+      RETURN
 
-Procedure Append_record(oTable)
-Local i := GetControlIndex ( "Browse_1", "Form_1" ), n
+PROCEDURE Append_record(oTable)
+
+   LOCAL i := GetControlIndex ( "Browse_1", "Form_1" ), n
 
    oTable:GoBottom()
 
    n := oTable:code
 
    IF n < 2  // trick for a wrong GO BOTTOM at the first time
-	n := oTable:RecNo()
+      n := oTable:RecNo()
    ENDIF
 
    oTable:ReadBlank()
@@ -138,7 +136,7 @@ Local i := GetControlIndex ( "Browse_1", "Form_1" ), n
 
    BEGIN TRANSACTION IN oTable
 
-	oTable:Write()
+      oTable:Write()
 
    END TRANSACTION IN oTable
 
@@ -148,24 +146,24 @@ Local i := GetControlIndex ( "Browse_1", "Form_1" ), n
 
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
+PROCEDURE Delete_record(oTable)
 
-Procedure Delete_record(oTable)
-Local nValue := Form_1.Browse_1.Value
+   LOCAL nValue := Form_1.Browse_1.Value
 
    oTable:GoTo(nValue)
 
    BEGIN TRANSACTION IN oTable
 
-	oTable:Delete()
+      oTable:Delete()
 
    END TRANSACTION IN oTable
 
    IF oTable:LastRec() == nValue
-	nValue --
+      nValue --
    ELSE
-	nValue ++
+      nValue ++
    ENDIF
 
    Form_1.Browse_1.Value := nValue
@@ -173,35 +171,31 @@ Local nValue := Form_1.Browse_1.Value
    Form_1.Browse_1.Refresh
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
-
-Procedure Undo_record(oTable)
+PROCEDURE Undo_record(oTable)
 
    ROLLBACK _WRITE_BUFFER STEP 1 IN oTable
 
    Form_1.Browse_1.Refresh
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
-
-Procedure Undo_delete(oTable)
+PROCEDURE Undo_delete(oTable)
 
    ROLLBACK _DELETE_BUFFER IN oTable
 
    Form_1.Browse_1.Refresh
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
-
-Procedure CloseTable
+PROCEDURE CloseTable
 
    USE
 
-Return
-
+   RETURN
 
 PROCEDURE dodata()
 
@@ -224,4 +218,5 @@ PROCEDURE dodata()
 
    ENDIF
 
-RETURN
+   RETURN
+

@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
@@ -60,110 +59,110 @@
 
 #define MB_TIMEDOUT 32000
 
-Procedure Main()
+PROCEDURE Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 320 ;
-		HEIGHT 260 ;
-		TITLE 'MessageBox Timeout Demo' ;
-		MAIN ;
-		TOPMOST ;
-		ON INIT OnInit()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 320 ;
+         HEIGHT 260 ;
+         TITLE 'MessageBox Timeout Demo' ;
+         MAIN ;
+         TOPMOST ;
+         ON INIT OnInit()
 
-		@ 50 , 50 BUTTON Button_1 ;
-			CAPTION "MsgInfo Timeout Test" ;
-			ACTION MsgInfoTimeout(3) ;
-	                WIDTH 200 ;
-			HEIGHT 30
+      @ 50 , 50 BUTTON Button_1 ;
+         CAPTION "MsgInfo Timeout Test" ;
+         ACTION MsgInfoTimeout(3) ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-		@ 100 , 50 BUTTON Button_2 ;
-			CAPTION "MsgYesNo Timeout Test" ;
-			ACTION MsgYesNoTimeout(5) ;
-	                WIDTH 200 ;
-			HEIGHT 30
+      @ 100 , 50 BUTTON Button_2 ;
+         CAPTION "MsgYesNo Timeout Test" ;
+         ACTION MsgYesNoTimeout(5) ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-		@ 150 , 50 BUTTON Button_3 ;
-			CAPTION "MsgOkCancel Timeout Test" ;
-			ACTION MsgOkCancelTimeout(5) ;
-	                WIDTH 200 ;
-			HEIGHT 30
+      @ 150 , 50 BUTTON Button_3 ;
+         CAPTION "MsgOkCancel Timeout Test" ;
+         ACTION MsgOkCancelTimeout(5) ;
+         WIDTH 200 ;
+         HEIGHT 30
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
+PROCEDURE MsgInfoTimeout( nTimeout )
 
-Procedure MsgInfoTimeout( nTimeout )
-Local nFlag, nMilliSeconds, nRet
+   LOCAL nFlag, nMilliSeconds, nRet
 
    nFlag := MB_OK + MB_SETFOREGROUND + MB_SYSTEMMODAL + MB_ICONINFORMATION
    nMilliSeconds := nTimeout * 1000
    nRet := MessageBoxTimeout ("Test a timeout of " + hb_ntos (nTimeout) + " seconds.", "MsgInfo Timeout", nFlag, nMilliSeconds)
 
-DO CASE
+   DO CASE
    CASE nRet == IDOK
-        MsgInfo ( "OK" , "Result" )
+      MsgInfo ( "OK" , "Result" )
    CASE nRet == MB_TIMEDOUT
-        MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
+      MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
    OTHERWISE
-        MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
-ENDCASE
+      MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
+   ENDCASE
 
-Return
+   RETURN
 
+PROCEDURE MsgYesNoTimeout( nTimeout )
 
-Procedure MsgYesNoTimeout( nTimeout )
-Local nFlag, nMilliSeconds, nRet
+   LOCAL nFlag, nMilliSeconds, nRet
 
    nFlag := MB_YESNO + MB_SETFOREGROUND + MB_SYSTEMMODAL + MB_ICONQUESTION
    nMilliSeconds := nTimeout * 1000
    nRet := MessageBoxTimeout ("Test a timeout of " + hb_ntos (nTimeout) + " seconds.", "MsgYesNo Timeout", nFlag, nMilliSeconds)
 
-DO CASE
+   DO CASE
    CASE nRet == IDYES
-        MsgInfo ( "YES" , "Result" )
+      MsgInfo ( "YES" , "Result" )
    CASE nRet == IDNO
-        MsgInfo ( "NO" , "Result" )
+      MsgInfo ( "NO" , "Result" )
    CASE nRet == MB_TIMEDOUT
-        MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
+      MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
    OTHERWISE
-        MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
-ENDCASE
+      MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
+   ENDCASE
 
-Return
+   RETURN
 
+PROCEDURE MsgOkCancelTimeout( nTimeout )
 
-Procedure MsgOkCancelTimeout( nTimeout )
-Local nFlag, nMilliSeconds, nRet
+   LOCAL nFlag, nMilliSeconds, nRet
 
    nFlag := MB_OKCANCEL + MB_SETFOREGROUND + MB_SYSTEMMODAL + MB_ICONQUESTION
    nMilliSeconds := nTimeout * 1000
    nRet := MessageBoxTimeout ("Test a timeout of " + hb_ntos (nTimeout) + " seconds.", "MsgOkCancel Timeout", nFlag, nMilliSeconds)
 
-DO CASE
+   DO CASE
    CASE nRet == IDOK
-        MsgInfo ( "OK" , "Result" )
-   CASE nRet == IDCANCEL 
-        MsgInfo ( "CANCEL" , "Result" )
+      MsgInfo ( "OK" , "Result" )
+   CASE nRet == IDCANCEL
+      MsgInfo ( "CANCEL" , "Result" )
    CASE nRet == MB_TIMEDOUT
-        MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
+      MsgInfo ( "TimeOut in " + hb_ntos (nTimeout) + " seconds." , "Result" )
    OTHERWISE
-        MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
-ENDCASE
+      MsgInfo ( "TimeOut --> nRet = " + hb_ntos (nRet) , "Result" )
+   ENDCASE
 
-Return
+   RETURN
 
+STATIC PROCEDURE OnInit
 
-Static Procedure OnInit
+   IF !IsWinXPorLater()
+      MsgStop( 'This Program Runs In WinXP or Later Only!', 'Stop' )
+      ReleaseAllWindows()
+   ENDIF
 
-	IF !IsWinXPorLater()
-		MsgStop( 'This Program Runs In WinXP or Later Only!', 'Stop' )
-		ReleaseAllWindows()
-	ENDIF
+   RETURN
 
-Return

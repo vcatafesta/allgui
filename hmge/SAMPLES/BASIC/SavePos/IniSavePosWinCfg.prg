@@ -1,57 +1,53 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2012 Janusz Pora <januszpora@onet.eu>
- *
- * 2014: Modified by Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
- *
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2012 Janusz Pora <januszpora@onet.eu>
+* 2014: Modified by Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
 */
 
 #include "minigui.ch"
 
 // store config file to current folder
-#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".cfg" ) 
+#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".cfg" )
 // OR store config file to temporary folder
 //#define INI_FILE_WIN_CFG  GetTempFolder() + "\" + cFileNoPath( ChangeFileExt( Application.ExeName, ".cfg" ) )
 
+PROCEDURE Main
 
-Procedure Main
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 300 ;
+         TITLE 'Example: saving and restoring of window position through the ini file' ;
+         BACKCOLOR {0,176,240} ;
+         MAIN ;
+         ON INIT IniGetPosWindow() ;
+         ON RELEASE IniSetPosWindow()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 600 ;
-		HEIGHT 300 ;
-		TITLE 'Example: saving and restoring of window position through the ini file' ;
-	        BACKCOLOR {0,176,240} ;
-              	MAIN ;
-		ON INIT IniGetPosWindow() ;
-		ON RELEASE IniSetPosWindow()
+      @ 20, 20 LABEL Label_1 ;
+         VALUE 'Change the position of this window, exit the program and then restart' ;
+         WIDTH 400 HEIGHT 50 TRANSPARENT
 
-		@ 20, 20 LABEL Label_1 ;
-                  VALUE 'Change the position of this window, exit the program and then restart' ;
-                  WIDTH 400 HEIGHT 50 TRANSPARENT
+      @ 100, 10 BUTTON Button_1 ;
+         CAPTION 'Exit' ACTION   ThisWindow.Release DEFAULT
 
-		@ 100, 10 BUTTON Button_1 ;
-		  CAPTION 'Exit' ACTION	ThisWindow.Release DEFAULT
+   END WINDOW
 
-	END WINDOW
+   CENTER WINDOW Form_1
 
-	CENTER WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   RETURN
 
-Return
+FUNCTION IniGetPosWindow( FormName, cProgName )
 
-/////////////////////////////////////////////////////////////////////
-Function IniGetPosWindow( FormName, cProgName )
-   Local cSection, actpos := {0,0,0,0}
-   Local col , row , width , height
-   Local cPathFileConfig
+   LOCAL cSection, actpos := {0,0,0,0}
+   LOCAL col , row , width , height
+   LOCAL cPathFileConfig
 
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := GetProperty(FormName, "Title")
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := GetProperty(FormName, "Title")
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+   cPathFileConfig := INI_FILE_WIN_CFG
 
    GetWindowRect( GetFormHandle( FormName ), actpos )
    cSection := FormName
@@ -70,20 +66,20 @@ Function IniGetPosWindow( FormName, cProgName )
       IF width > 0 .AND. height > 0
          MoveWindow( GetFormHandle( FormName ) , col , row , width , height , .t. )
       ENDIF
-   ENDIF 
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-/////////////////////////////////////////////////////////////////////
-Function IniSetPosWindow( FormName, cProgName )
-   Local cSection, actpos := {0,0,0,0}
-   Local col , row , width , height
-   Local cText, cPathFileConfig
+FUNCTION IniSetPosWindow( FormName, cProgName )
 
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := GetProperty(FormName, "Title")
+   LOCAL cSection, actpos := {0,0,0,0}
+   LOCAL col , row , width , height
+   LOCAL cText, cPathFileConfig
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := GetProperty(FormName, "Title")
+
+   cPathFileConfig := INI_FILE_WIN_CFG
 
    GetWindowRect( GetFormHandle( FormName ), actpos )
    cSection := FormName
@@ -109,12 +105,13 @@ Function IniSetPosWindow( FormName, cProgName )
    WriteIni( cSection, "width"    , HB_NToS(width)  , cPathFileConfig )
    WriteIni( cSection, "height"   , HB_NToS(height) , cPathFileConfig )
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-STATIC Function GetIni( cSection, cEntry, cDefault, cFile )
-RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
+STATIC FUNCTION GetIni( cSection, cEntry, cDefault, cFile )
 
-*--------------------------------------------------------*
-STATIC Function WriteIni( cSection, cEntry, cValue, cFile )
-RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
+
+STATIC FUNCTION WriteIni( cSection, cEntry, cValue, cFile )
+
+   RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+

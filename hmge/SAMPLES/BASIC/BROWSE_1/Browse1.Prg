@@ -1,17 +1,16 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 * Value property selects a record by its number (RecNo())
 * Value property returns selected record number (recNo())
-* Browse control does not change the active work area 
+* Browse control does not change the active work area
 * Browse control does not change the record pointer in any area
 * (nor change selection when it changes) when SET BROWSESYNC is OFF (the default)
 * You can programatically refresh it using refresh method.
-* Variables called <MemVar>.<WorkAreaName>.<FieldName> are created for 
+* Variables called <MemVar>.<WorkAreaName>.<FieldName> are created for
 * validation in browse editing window. You can use it in VALID array.
 * Using APPEND clause you can add records to table associated with WORKAREA
 * clause. The hotkey to add records is Alt+A.
@@ -24,188 +23,185 @@
 #include "minigui.ch"
 #include "Dbstruct.ch"
 
-Function Main
-Local var := 'Test'
+FUNCTION Main
 
-	REQUEST DBFCDX , DBFFPT
+   LOCAL var := 'Test'
 
-	SET CENTURY ON
-	SET DELETED ON
+   REQUEST DBFCDX , DBFFPT
 
-	SET BROWSESYNC ON	
+   SET CENTURY ON
+   SET DELETED ON
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'MiniGUI Browse Demo' ;
-		MAIN NOMAXIMIZE ;
-		ON INIT OpenTables() ;
-		ON RELEASE CloseTables()
+   SET BROWSESYNC ON
 
-		DEFINE MAIN MENU 
-			POPUP 'File'
-				ITEM 'Set Browse Value'	ACTION Form_1.Browse_1.Value := Val ( InputBox ('Set Browse Value','') )
-				ITEM 'Get Browse Value'	ACTION MsgInfo ( Str ( Form_1.Browse_1.Value ) )
-				ITEM 'Refresh Browse'	ACTION Form_1.Browse_1.Refresh
-				SEPARATOR
-				ITEM 'Exit'		ACTION Form_1.Release
-			END POPUP
-			POPUP 'Help'
-				ITEM 'About'		ACTION MsgInfo ("MiniGUI Browse Demo") 
-			END POPUP
-		END MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI Browse Demo' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT OpenTables() ;
+         ON RELEASE CloseTables()
 
-		DEFINE STATUSBAR
-			STATUSITEM ''
-		END STATUSBAR
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Set Browse Value'   ACTION Form_1.Browse_1.Value := Val ( InputBox ('Set Browse Value','') )
+            ITEM 'Get Browse Value'   ACTION MsgInfo ( Str ( Form_1.Browse_1.Value ) )
+            ITEM 'Refresh Browse'   ACTION Form_1.Browse_1.Refresh
+            SEPARATOR
+            ITEM 'Exit'      ACTION Form_1.Release
+         END POPUP
+         POPUP 'Help'
+            ITEM 'About'      ACTION MsgInfo ("MiniGUI Browse Demo")
+         END POPUP
+      END MENU
 
-		DEFINE TAB Tab_1 ;
-			AT 0,10 ;
-			WIDTH 600 ;
-			HEIGHT 400 ;
-			VALUE 1 ;
-			TOOLTIP 'Tab Control' ;
-			ON CHANGE ( DoMethod ( 'Form_1' , 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'SetFocus' ), ;
-				DoMethod ( 'Form_1' , 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'Refresh' ) , ChangeTest() )
+      DEFINE STATUSBAR
+         STATUSITEM ''
+      END STATUSBAR
 
-			PAGE 'Page 1'
+      DEFINE TAB Tab_1 ;
+            AT 0,10 ;
+            WIDTH 600 ;
+            HEIGHT 400 ;
+            VALUE 1 ;
+            TOOLTIP 'Tab Control' ;
+            ON CHANGE ( DoMethod ( 'Form_1' , 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'SetFocus' ), ;
+            DoMethod ( 'Form_1' , 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'Refresh' ) , ChangeTest() )
 
-				@ 40,20 BROWSE Browse_1									;
-					WIDTH 560  										;
-					HEIGHT 340 										;	
-					HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
-					WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
-					WORKAREA &var ;
-					FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-					TOOLTIP 'Browse Test' ;
-					ON CHANGE ChangeTest() ;
-					JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
-					DELETE ;
-					LOCK ;
-					EDIT INPLACE 
-			END PAGE
+         PAGE 'Page 1'
 
-			PAGE 'Page &2'
+            @ 40,20 BROWSE Browse_1                           ;
+               WIDTH 560                                ;
+               HEIGHT 340                               ;
+               HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
+               WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
+               WORKAREA &var ;
+               FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
+               TOOLTIP 'Browse Test' ;
+               ON CHANGE ChangeTest() ;
+               JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+               DELETE ;
+               LOCK ;
+               EDIT INPLACE
+         END PAGE
 
-				@ 40,20 BROWSE Browse_2									;
-					WIDTH 560  										;
-					HEIGHT 340 										;	
-					HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
-					WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
-					WORKAREA &var ;
-					FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-					TOOLTIP 'Browse Test' ;
-					ON CHANGE ChangeTest() ;
-					JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
-					DELETE ;
-					LOCK ;
-					EDIT INPLACE 
-			END PAGE
+         PAGE 'Page &2'
 
-			PAGE 'Page 3'
+            @ 40,20 BROWSE Browse_2                           ;
+               WIDTH 560                                ;
+               HEIGHT 340                               ;
+               HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
+               WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
+               WORKAREA &var ;
+               FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
+               TOOLTIP 'Browse Test' ;
+               ON CHANGE ChangeTest() ;
+               JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+               DELETE ;
+               LOCK ;
+               EDIT INPLACE
+         END PAGE
 
-				@ 40,20 BROWSE Browse_3									;
-					WIDTH 560  										;
-					HEIGHT 340 										;	
-					HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
-					WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
-					WORKAREA &var ;
-					FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-					TOOLTIP 'Browse Test' ;
-					ON CHANGE ChangeTest() ;
-					JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
-					DELETE ;
-					LOCK ;
-					EDIT INPLACE 
-			END PAGE
+         PAGE 'Page 3'
 
-		END TAB
+            @ 40,20 BROWSE Browse_3                           ;
+               WIDTH 560                                ;
+               HEIGHT 340                               ;
+               HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
+               WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
+               WORKAREA &var ;
+               FIELDS { 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
+               TOOLTIP 'Browse Test' ;
+               ON CHANGE ChangeTest() ;
+               JUSTIFY { BROWSE_JTFY_LEFT,BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+               DELETE ;
+               LOCK ;
+               EDIT INPLACE
+         END PAGE
 
-	END WINDOW
+      END TAB
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	Form_1.Browse_1.SetFocus
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   Form_1.Browse_1.SetFocus
 
-Return Nil
+   ACTIVATE WINDOW Form_1
 
-Procedure OpenTables()
+   RETURN NIL
 
-	if !file("test.dbf")
-		CreateTable()
-	endif
+PROCEDURE OpenTables()
 
-	Use Test Via "DBFCDX"
-	Go Top
+   IF !file("test.dbf")
+      CreateTable()
+   ENDIF
 
-	Form_1.Browse_1.Value := RecNo()	
-	
-Return
+   USE Test Via "DBFCDX"
+   GO TOP
 
-Procedure CloseTables()
+   Form_1.Browse_1.Value := RecNo()
 
-	Use
+   RETURN
 
-Return
+PROCEDURE CloseTables()
 
-Procedure ChangeTest()
+   USE
 
-	Form_1.StatusBar.Item(1) := 'RecNo() ' + Alltrim ( Str ( GetProperty ( 'Form_1', 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'Value' ) ) )
+   RETURN
 
-Return 
+PROCEDURE ChangeTest()
 
-Procedure CreateTable
-Local aDbf[6][4], i
+   Form_1.StatusBar.Item(1) := 'RecNo() ' + Alltrim ( Str ( GetProperty ( 'Form_1', 'Browse_' + Ltrim( Str( Form_1.Tab_1.Value ) ) , 'Value' ) ) )
 
-        aDbf[1][ DBS_NAME ] := "Code"
-        aDbf[1][ DBS_TYPE ] := "Numeric"
-        aDbf[1][ DBS_LEN ]  := 10
-        aDbf[1][ DBS_DEC ]  := 0
-        //
-        aDbf[2][ DBS_NAME ] := "First"
-        aDbf[2][ DBS_TYPE ] := "Character"
-        aDbf[2][ DBS_LEN ]  := 25
-        aDbf[2][ DBS_DEC ]  := 0
-        //
-        aDbf[3][ DBS_NAME ] := "Last"
-        aDbf[3][ DBS_TYPE ] := "Character"
-        aDbf[3][ DBS_LEN ]  := 25
-        aDbf[3][ DBS_DEC ]  := 0
-        //
-        aDbf[4][ DBS_NAME ] := "Married"
-        aDbf[4][ DBS_TYPE ] := "Logical"
-        aDbf[4][ DBS_LEN ]  := 1
-        aDbf[4][ DBS_DEC ]  := 0
-        //
-        aDbf[5][ DBS_NAME ] := "Birth"
-        aDbf[5][ DBS_TYPE ] := "Date"
-        aDbf[5][ DBS_LEN ]  := 8
-        aDbf[5][ DBS_DEC ]  := 0
-        //
-        aDbf[6][ DBS_NAME ] := "Bio"
-        aDbf[6][ DBS_TYPE ] := "Memo"
-        aDbf[6][ DBS_LEN ]  := 10
-        aDbf[6][ DBS_DEC ]  := 0
-        //
+   RETURN
 
-        DBCREATE("Test", aDbf, "DBFCDX")
+PROCEDURE CreateTable
 
-	Use test Via "DBFCDX"
-	zap
+   LOCAL aDbf[6][4], i
 
-	For i:= 1 To 100
-		append blank
-		Replace code with i 
-		Replace First With 'First Name '+ Str(i)
-		Replace Last With 'Last Name '+ Str(i)
-		Replace Married With .t.
-		replace birth with date()+i-10000
-	Next i
+   aDbf[1][ DBS_NAME ] := "Code"
+   aDbf[1][ DBS_TYPE ] := "Numeric"
+   aDbf[1][ DBS_LEN ]  := 10
+   aDbf[1][ DBS_DEC ]  := 0
+   aDbf[2][ DBS_NAME ] := "First"
+   aDbf[2][ DBS_TYPE ] := "Character"
+   aDbf[2][ DBS_LEN ]  := 25
+   aDbf[2][ DBS_DEC ]  := 0
+   aDbf[3][ DBS_NAME ] := "Last"
+   aDbf[3][ DBS_TYPE ] := "Character"
+   aDbf[3][ DBS_LEN ]  := 25
+   aDbf[3][ DBS_DEC ]  := 0
+   aDbf[4][ DBS_NAME ] := "Married"
+   aDbf[4][ DBS_TYPE ] := "Logical"
+   aDbf[4][ DBS_LEN ]  := 1
+   aDbf[4][ DBS_DEC ]  := 0
+   aDbf[5][ DBS_NAME ] := "Birth"
+   aDbf[5][ DBS_TYPE ] := "Date"
+   aDbf[5][ DBS_LEN ]  := 8
+   aDbf[5][ DBS_DEC ]  := 0
+   aDbf[6][ DBS_NAME ] := "Bio"
+   aDbf[6][ DBS_TYPE ] := "Memo"
+   aDbf[6][ DBS_LEN ]  := 10
+   aDbf[6][ DBS_DEC ]  := 0
 
-	Index on field->code to code
+   DBCREATE("Test", aDbf, "DBFCDX")
 
-	Use
+   USE test Via "DBFCDX"
+   ZAP
 
-Return
+   FOR i:= 1 To 100
+      APPEND BLANK
+      REPLACE code with i
+      REPLACE First With 'First Name '+ Str(i)
+      REPLACE Last With 'Last Name '+ Str(i)
+      REPLACE Married With .t.
+      REPLACE birth with date()+i-10000
+   NEXT i
+
+   INDEX ON field->code to code
+
+   USE
+
+   RETURN
+

@@ -1,10 +1,10 @@
 /*
-  MINIGUI - Harbour Win32 GUI library Demo/Sample
+MINIGUI - Harbour Win32 GUI library Demo/Sample
 
-  Copyright 2002-09 Roberto Lopez <harbourminigui@gmail.com>
-  http://harbourminigui.googlepages.com/
+Copyright 2002-09 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
-  Copyright 2009 Sudip Bhattacharyya <sudipb001@gmail.com>
+Copyright 2009 Sudip Bhattacharyya <sudipb001@gmail.com>
 */
 
 #include "minigui.ch"
@@ -21,10 +21,10 @@ FUNCTION Main()
    SET DATE GERMAN
 
    DEFINE WINDOW winMain ;
-      AT 0, 0 WIDTH 640 HEIGHT 460 ;
-      TITLE "Printing Test Sample" ;
-      MAIN ;
-      ON INIT CreateData()
+         AT 0, 0 WIDTH 640 HEIGHT 460 ;
+         TITLE "Printing Test Sample" ;
+         MAIN ;
+         ON INIT CreateData()
 
       DEFINE MAIN MENU
          POPUP "&File"
@@ -38,8 +38,7 @@ FUNCTION Main()
    winMain.Center()
    winMain.Activate()
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION PrintList()
 
@@ -48,63 +47,63 @@ FUNCTION PrintList()
    mPrinter := GetPrinter()
 
    IF Empty ( mPrinter )
+
       RETURN NIL
    ENDIF
 
    SELECT PRINTER mPrinter ORIENTATION PRINTER_ORIENT_PORTRAIT PREVIEW
 
    START PRINTDOC NAME "Address"
-   START PRINTPAGE
+      START PRINTPAGE
 
-   SELECT addr
-   GO TOP
+         SELECT addr
+         GO TOP
 
-   mPageNo := 0
-   mLineNo := 0
+         mPageNo := 0
+         mLineNo := 0
 
-   DO WHILE .NOT. Eof()
+         DO WHILE .NOT. Eof()
 
-      IF mLineNo >= 260 .OR. mPageNo == 0
-         IF ++mPageNo > 1
+            IF mLineNo >= 260 .OR. mPageNo == 0
+               IF ++mPageNo > 1
+                  mLineNo += 5
+                  @ mLineNo, 105 PRINT "Continue to Page " + LTrim( Str( mPageNo ) ) CENTER
+               END PRINTPAGE
+               START PRINTPAGE
+               ENDIF
+
+               @ 20, 20 PRINT "ADDRESS LIST"
+               @ 20, 190 PRINT "Page: " + LTrim( Str( mPageNo ) ) RIGHT
+               @ 25, 20 PRINT Date()
+
+               mLineNo := 35
+               @ mLineNo, 20 PRINT "First Name"
+               @ mLineNo, 50 PRINT "Last Name"
+               @ mLineNo, 80 PRINT "Address"
+
+               mLineNo += 5
+               @ mLineNo, 20 PRINT LINE TO mLineNo, 140
+               mLineNo += 2
+            ENDIF
+
+            @ mLineNo, 20 PRINT fname
+            @ mLineNo, 50 PRINT lname
+            @ mLineNo, 80 PRINT addr1
             mLineNo += 5
-            @ mLineNo, 105 PRINT "Continue to Page " + LTrim( Str( mPageNo ) ) CENTER
-            END PRINTPAGE
-            START PRINTPAGE
-         ENDIF
+            @ mLineNo, 80 PRINT addr2
+            mLineNo += 5
+            @ mLineNo, 80 PRINT addr3
+            mLineNo += 5
 
-         @ 20, 20 PRINT "ADDRESS LIST"
-         @ 20, 190 PRINT "Page: " + LTrim( Str( mPageNo ) ) RIGHT
-         @ 25, 20 PRINT Date()
+            DO EVENTS
+            SKIP
 
-         mLineNo := 35
-         @ mLineNo, 20 PRINT "First Name"
-         @ mLineNo, 50 PRINT "Last Name"
-         @ mLineNo, 80 PRINT "Address"
+         ENDDO
 
-         mLineNo += 5
-         @ mLineNo, 20 PRINT LINE TO mLineNo, 140
-         mLineNo += 2
-      ENDIF
-
-      @ mLineNo, 20 PRINT fname
-      @ mLineNo, 50 PRINT lname
-      @ mLineNo, 80 PRINT addr1
-      mLineNo += 5
-      @ mLineNo, 80 PRINT addr2
-      mLineNo += 5
-      @ mLineNo, 80 PRINT addr3
-      mLineNo += 5
-
-      DO EVENTS
-      SKIP
-
-   ENDDO
-
-   END PRINTPAGE
+      END PRINTPAGE
    END PRINTDOC
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION CreateData()
 
@@ -139,4 +138,5 @@ FUNCTION CreateData()
       SELECT addr
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

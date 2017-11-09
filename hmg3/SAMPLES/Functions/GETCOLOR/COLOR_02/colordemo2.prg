@@ -1,25 +1,25 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 ;
-		HEIGHT 480 ;
-		TITLE '' ;
-		MAIN ;
-		BACKCOLOR {212,208,251} 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE '' ;
+         MAIN ;
+         BACKCOLOR {212,208,251}
 
-		@ 40,10 LABEL Label_1 VALUE 'hI All !!' ;
-			BACKCOLOR {212,208,251} ;
-			FONTCOLOR BLUE
+      @ 40,10 LABEL Label_1 VALUE 'hI All !!' ;
+         BACKCOLOR {212,208,251} ;
+         FONTCOLOR BLUE
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 

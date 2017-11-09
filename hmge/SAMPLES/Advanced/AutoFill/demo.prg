@@ -1,33 +1,32 @@
 /*
-  MINIGUI - Harbour Win32 GUI library Demo/Sample
+MINIGUI - Harbour Win32 GUI library Demo/Sample
 
-  Copyright 2002-09 Roberto Lopez <harbourminigui@gmail.com>
-  http://harbourminigui.googlepages.com
+Copyright 2002-09 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com
 
-  AutoFill in Text Box
+AutoFill in Text Box
 
-  Started by Bicahi Esgici <esgici@gmail.com>
+Started by Bicahi Esgici <esgici@gmail.com>
 
-  Enhanced by Roberto Lopez and Rathinagiri
+Enhanced by Roberto Lopez and Rathinagiri
 
-  2009.05.12
+2009.05.12
 */
 
 #include "minigui.ch"
 
-
 PROCEDURE Main()
 
-   Local aCountries := HB_ATOKENS( MEMOREAD( "Countries.lst" ), CRLF )
+   LOCAL aCountries := HB_ATOKENS( MEMOREAD( "Countries.lst" ), CRLF )
 
    ASORT( aCountries )             // This Array MUST be sorted
 
    DEFINE WINDOW frmAFTest;
-      AT 0,0;
-      WIDTH  550;
-      HEIGHT 300;
-      TITLE 'AutoFill in Text Box (by Bicahi Esgici)';
-      MAIN
+         AT 0,0;
+         WIDTH  550;
+         HEIGHT 300;
+         TITLE 'AutoFill in Text Box (by Bicahi Esgici)';
+         MAIN
 
       ON KEY ESCAPE ACTION frmAFTest.Release
 
@@ -62,22 +61,22 @@ PROCEDURE Main()
 
    frmAFTest.Activate
 
-RETURN
+   RETURN
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE AutoFill( ;        // Auto filling text box
-                aList,;      // Items list
-                nCaller )    // NIL : OnChange, 1: UP, 2: Down
+   aList,;      // Items list
+   nCaller )    // NIL : OnChange, 1: UP, 2: Down
 
    STATIC cLastVal := '',;
       n1Result := 0
 
    LOCAL  cFrmName,;
-          cTxBname,;
-          cTxBValue,;        // Text Box Value
-          nCarePos,;         // Text Box CaretPos
-          cCurval := ''
+      cTxBname,;
+      cTxBValue,;        // Text Box Value
+   nCarePos,;         // Text Box CaretPos
+   cCurval := ''
 
    cFrmName := thiswindow.name
    cTxBName := this.focusedcontrol
@@ -129,39 +128,42 @@ PROCEDURE AutoFill( ;        // Auto filling text box
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE AF_Apply(;
-   cFrmName,;
-   cTxBName,;
-   cValue,;
-   nPosit )
+      cFrmName,;
+      cTxBName,;
+      cValue,;
+      nPosit )
 
    SetProperty( cFrmName, cTxBName, "Value", cValue )
    SetProperty( cFrmName, cTxBName, "CaretPos", nPosit )
 
-RETURN
+   RETURN
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
-PROC AFKeySet( aitems )
-   Local cFrmName := thiswindow.name
+   PROC AFKeySet( aitems )
 
-   ON KEY UP   OF &cFrmName  ACTION AutoFill( aitems, 1 )
-   ON KEY DOWN OF &cFrmName  ACTION AutoFill( aitems, 2 )
+      LOCAL cFrmName := thiswindow.name
 
-RETURN
+      ON KEY UP   OF &cFrmName  ACTION AutoFill( aitems, 1 )
+      ON KEY DOWN OF &cFrmName  ACTION AutoFill( aitems, 2 )
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+      RETURN
+
+      *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE AFKeyRls()
-   Local cFrmName := thiswindow.name
+
+   LOCAL cFrmName := thiswindow.name
 
    RELEASE KEY UP   OF &cFrmName
    RELEASE KEY DOWN OF &cFrmName
 
    RETURN
 
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
+

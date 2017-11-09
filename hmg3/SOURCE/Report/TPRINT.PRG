@@ -1,5 +1,4 @@
 
-
 MEMVAR  _HMG_SYSDATA
 
 #include 'hmg.ch'
@@ -8,83 +7,62 @@ MEMVAR  _HMG_SYSDATA
 
 CREATE CLASS TPRINT
 
-DATA cprintlibrary      INIT "MINIPRINT"  PROTECTED
-DATA nmhor              INIT (10)/4.75    PROTECTED
-DATA nmver              INIT (10)/2.45    PROTECTED
-DATA nhfij              INIT (12/3.70)    PROTECTED
-DATA nvfij              INIT (12/1.65)    PROTECTED
-DATA cunits             INIT "ROWCOL"     PROTECTED
-DATA cprinter           INIT ""           PROTECTED
+   DATA cprintlibrary      INIT "MINIPRINT"  PROTECTED
+   DATA nmhor              INIT (10)/4.75    PROTECTED
+   DATA nmver              INIT (10)/2.45    PROTECTED
+   DATA nhfij              INIT (12/3.70)    PROTECTED
+   DATA nvfij              INIT (12/1.65)    PROTECTED
+   DATA cunits             INIT "ROWCOL"     PROTECTED
+   DATA cprinter           INIT ""           PROTECTED
 
-DATA aprinters          INIT {}           PROTECTED
-DATA aports             INIT {}           PROTECTED
+   DATA aprinters          INIT {}           PROTECTED
+   DATA aports             INIT {}           PROTECTED
 
-DATA lprerror           INIT .F.          
-DATA exit               INIT .F.          PROTECTED
-DATA acolor             INIT {1,1,1}      PROTECTED  
-DATA cfontname          INIT "courier new" PROTECTED
-DATA nfontsize          INIT 10            PROTECTED
-DATA nwpen              INIT 0.1   PROTECTED //// ancho del pen
-DATA tempfile           INIT gettempdir()+"T"+ALLTRIM(STR(int(hb_random(999999)),8))+".prn" PROTECTED
-DATA impreview          INIT .F. PROTECTED
-DATA cversion            INIT "V1.2" PROTECTED
+   DATA lprerror           INIT .F.
+   DATA exit               INIT .F.          PROTECTED
+   DATA acolor             INIT {1,1,1}      PROTECTED
+   DATA cfontname          INIT "courier new" PROTECTED
+   DATA nfontsize          INIT 10            PROTECTED
+   DATA nwpen              INIT 0.1   PROTECTED //// ancho del pen
+   DATA tempfile           INIT gettempdir()+"T"+ALLTRIM(STR(int(hb_random(999999)),8))+".prn" PROTECTED
+   DATA impreview          INIT .F. PROTECTED
+   DATA cversion            INIT "V1.2" PROTECTED
 
-*-------------------------
 METHOD init()
-*-------------------------
-*-------------------------
+
 METHOD begindoc()
-*-------------------------
-*-------------------------
+
 METHOD enddoc()
 
-method printdos()
-*-------------------------
-*-------------------------
+METHOD printdos()
+
 METHOD beginpage()
-*-------------------------
 
 METHOD condendos()
 
 METHOD NORMALDOS()
 
-*-------------------------
 METHOD endpage()
-*-------------------------
-*-------------------------
+
 METHOD release()
-*-------------------------
-*-------------------------
+
 METHOD printdata()
-*-------------------------
-*-------------------------
+
 METHOD printimage
-*-------------------------
-*-------------------------
+
 METHOD printline
-*-------------------------
 
 METHOD printrectangle
-*-------------------------
 
 METHOD selprinter()
-*-------------------------
-*-------------------------
 
 METHOD getdefprinter()
-*-------------------------
 
-*-------------------------
 METHOD setcolor()
-*-------------------------
 
-*-------------------------
 METHOD setpreviewsize()
-*-------------------------
 
-*-------------------------
 METHOD setunits()   ////// mm o rowcol
-*-------------------------
 
 METHOD printroundrectangle()
 
@@ -92,557 +70,559 @@ METHOD version()  INLINE ::cversion
 
 ENDCLASS
 
-
 METHOD condenDOS() CLASS TPRINT
-if ::cprintlibrary="DOS"
-   @ prow(), pcol() say CHR(15)
-endif
-return nil
 
-
-method normaldos() CLASS TPRINT
-if ::cprintlibrary="DOS"
-   @ prow(), pcol() say CHR(18)
-endif
-return nil
-
-METHOD setpreviewsize(ntam)
-if ntam=NIL .or. ntam>5
-   ntam=1
-endif
-return nil
-
-*-------------------------
-METHOD release() CLASS TPRINT
-*-------------------------
-if ::exit
-   return nil
-endif
-do case
-endcase
-RETURN NIL
-
-
-*-------------------------
-METHOD init(clibx) CLASS TPRINT
-*-------------------------
-
-clibx := NIL   // ADD
-
-if _IsWindowDefined ( "_HMG_PRINTER_SHOWPREVIEW" )
-  msgstop("Print preview pending, close first")
-  ::exit:=.T.
-  return nil
-endif
-
-::aprinters:=aprinters()
-
-do case
-
-case ::cprintlibrary="DOS"
-     ::impreview:=.F.
-endcase
-
-return nil
-
-*-------------------------
-METHOD selprinter( lselect , lpreview, llandscape , npapersize ,cprinterx) CLASS TPRINT
-*-------------------------
-local Worientation, lsucess := .T.
-if ::exit
-   ::lprerror:=.T.
-   return nil
-endif
-
-SETPRC(0,0)
-
-DEFAULT llandscape to .F.
-
-do case
-
-case ::cprintlibrary="MINIPRINT"
-
-   if llandscape
-      Worientation:= PRINTER_ORIENT_LANDSCAPE
-   else
-      Worientation:= PRINTER_ORIENT_PORTRAIT
-   endif
-
-   if lselect .and. lpreview .and. cprinterx = NIL
-      ::cPrinter := GetPrinter()
-      If Empty (::cPrinter)
-         ::lprerror:=.T.
-         Return Nil
-      EndIf
-
-      if npapersize#NIL
-         SELECT PRINTER ::cprinter to lsucess ;
-         ORIENTATION worientation ;
-         PAPERSIZE npapersize       ;
-         PREVIEW
-      else
-         SELECT PRINTER ::cprinter to lsucess ;
-         ORIENTATION worientation ;
-         PREVIEW
-      endif
-   endif
-
-   if (.not. lselect) .and. lpreview .and. cprinterx = NIL
-
-      if npapersize#NIL
-         SELECT PRINTER DEFAULT TO lsucess ;
-         ORIENTATION worientation  ;
-         PAPERSIZE npapersize       ;
-         PREVIEW
-      else
-         SELECT PRINTER DEFAULT TO lsucess ;
-         ORIENTATION worientation  ;
-         PREVIEW
-      endif
-   endif
-
-   if (.not. lselect) .and. (.not. lpreview) .and. cprinterx = NIL
-
-      if npapersize#NIL
-         SELECT PRINTER DEFAULT TO lsucess  ;
-         ORIENTATION worientation  ;
-         PAPERSIZE npapersize
-      else
-         SELECT PRINTER DEFAULT TO lsucess  ;
-         ORIENTATION worientation
-      endif
-   endif
-
-   if lselect .and. .not. lpreview .and. cprinterx = NIL
-      ::cPrinter := GetPrinter()
-      If Empty (::cPrinter)
-         ::lprerror:=.T.
-         Return Nil
-      EndIf
-
-      if npapersize#NIL
-         SELECT PRINTER ::cprinter to lsucess ;
-         ORIENTATION worientation ;
-         PAPERSIZE npapersize
-      else
-         SELECT PRINTER ::cprinter to lsucess ;
-         ORIENTATION worientation
-      endif
-   endif
-
-   if cprinterx # NIL .AND. lpreview
-      If Empty (cprinterx)
-         ::lprerror:=.T.
-         Return Nil
-      EndIf
-
-      if npapersize#NIL
-         SELECT PRINTER cprinterx to lsucess ;
-         ORIENTATION worientation ;
-         PAPERSIZE npapersize ;
-         PREVIEW
-      else
-         SELECT PRINTER cprinterx to lsucess ;
-         ORIENTATION worientation ;
-         PREVIEW 
-      endif
-   endif
-
-   if cprinterx # NIL .AND. .not. lpreview
-      If Empty (cprinterx)
-         ::lprerror:=.T.
-         Return Nil
-      EndIf
-
-      if npapersize#NIL
-         SELECT PRINTER cprinterx to lsucess ;
-         ORIENTATION worientation ;
-         PAPERSIZE npapersize
-      else
-         SELECT PRINTER cprinterx to lsucess ;
-         ORIENTATION worientation 
-      endif
-   endif
-
-   IF .NOT. lsucess
-      ::lprerror:=.T.
-      return nil
+   IF ::cprintlibrary="DOS"
+      @ prow(), pcol() say CHR(15)
    ENDIF
 
-case ::cprintlibrary="DOS"
-   do while file(::tempfile)
-      ::tempfile:=gettempdir()+"T"+ALLTRIM(STR(int(hb_random(999999)),8))+".prn"
-   enddo
-   if lpreview
-      ::impreview:=.T.
-   endif
-endcase
+   RETURN NIL
 
-RETURN nil
+METHOD normaldos() CLASS TPRINT
 
+   IF ::cprintlibrary="DOS"
+      @ prow(), pcol() say CHR(18)
+   ENDIF
 
+   RETURN NIL
 
-*-------------------------
+METHOD setpreviewsize(ntam)
+
+   IF ntam=NIL .or. ntam>5
+      ntam=1
+   ENDIF
+
+   RETURN NIL
+
+METHOD release() CLASS TPRINT
+
+   IF ::exit
+
+      RETURN NIL
+   ENDIF
+   DO CASE
+   ENDCASE
+
+   RETURN NIL
+
+METHOD init(clibx) CLASS TPRINT
+
+   clibx := NIL   // ADD
+
+   IF _IsWindowDefined ( "_HMG_PRINTER_SHOWPREVIEW" )
+      msgstop("Print preview pending, close first")
+      ::exit:=.T.
+
+      RETURN NIL
+   ENDIF
+
+   ::aprinters:=aprinters()
+
+   DO CASE
+
+   CASE ::cprintlibrary="DOS"
+      ::impreview:=.F.
+   ENDCASE
+
+   RETURN NIL
+
+METHOD selprinter( lselect , lpreview, llandscape , npapersize ,cprinterx) CLASS TPRINT
+
+   LOCAL Worientation, lsucess := .T.
+
+   IF ::exit
+      ::lprerror:=.T.
+
+      RETURN NIL
+   ENDIF
+
+   SETPRC(0,0)
+
+   DEFAULT llandscape to .F.
+
+   DO CASE
+
+   CASE ::cprintlibrary="MINIPRINT"
+
+      IF llandscape
+         Worientation:= PRINTER_ORIENT_LANDSCAPE
+      ELSE
+         Worientation:= PRINTER_ORIENT_PORTRAIT
+      ENDIF
+
+      IF lselect .and. lpreview .and. cprinterx = NIL
+         ::cPrinter := GetPrinter()
+         IF Empty (::cPrinter)
+            ::lprerror:=.T.
+
+            RETURN NIL
+         ENDIF
+
+         IF npapersize#NIL
+            SELECT PRINTER ::cprinter to lsucess ;
+               ORIENTATION worientation ;
+               PAPERSIZE npapersize       ;
+               PREVIEW
+         ELSE
+            SELECT PRINTER ::cprinter to lsucess ;
+               ORIENTATION worientation ;
+               PREVIEW
+         ENDIF
+      ENDIF
+
+      IF (.not. lselect) .and. lpreview .and. cprinterx = NIL
+
+         IF npapersize#NIL
+            SELECT PRINTER DEFAULT TO lsucess ;
+               ORIENTATION worientation  ;
+               PAPERSIZE npapersize       ;
+               PREVIEW
+         ELSE
+            SELECT PRINTER DEFAULT TO lsucess ;
+               ORIENTATION worientation  ;
+               PREVIEW
+         ENDIF
+      ENDIF
+
+      IF (.not. lselect) .and. (.not. lpreview) .and. cprinterx = NIL
+
+         IF npapersize#NIL
+            SELECT PRINTER DEFAULT TO lsucess  ;
+               ORIENTATION worientation  ;
+               PAPERSIZE npapersize
+         ELSE
+            SELECT PRINTER DEFAULT TO lsucess  ;
+               ORIENTATION worientation
+         ENDIF
+      ENDIF
+
+      IF lselect .and. .not. lpreview .and. cprinterx = NIL
+         ::cPrinter := GetPrinter()
+         IF Empty (::cPrinter)
+            ::lprerror:=.T.
+
+            RETURN NIL
+         ENDIF
+
+         IF npapersize#NIL
+            SELECT PRINTER ::cprinter to lsucess ;
+               ORIENTATION worientation ;
+               PAPERSIZE npapersize
+         ELSE
+            SELECT PRINTER ::cprinter to lsucess ;
+               ORIENTATION worientation
+         ENDIF
+      ENDIF
+
+      IF cprinterx # NIL .AND. lpreview
+         IF Empty (cprinterx)
+            ::lprerror:=.T.
+
+            RETURN NIL
+         ENDIF
+
+         IF npapersize#NIL
+            SELECT PRINTER cprinterx to lsucess ;
+               ORIENTATION worientation ;
+               PAPERSIZE npapersize ;
+               PREVIEW
+         ELSE
+            SELECT PRINTER cprinterx to lsucess ;
+               ORIENTATION worientation ;
+               PREVIEW
+         ENDIF
+      ENDIF
+
+      IF cprinterx # NIL .AND. .not. lpreview
+         IF Empty (cprinterx)
+            ::lprerror:=.T.
+
+            RETURN NIL
+         ENDIF
+
+         IF npapersize#NIL
+            SELECT PRINTER cprinterx to lsucess ;
+               ORIENTATION worientation ;
+               PAPERSIZE npapersize
+         ELSE
+            SELECT PRINTER cprinterx to lsucess ;
+               ORIENTATION worientation
+         ENDIF
+      ENDIF
+
+      IF .NOT. lsucess
+         ::lprerror:=.T.
+
+         RETURN NIL
+      ENDIF
+
+   CASE ::cprintlibrary="DOS"
+      DO WHILE file(::tempfile)
+         ::tempfile:=gettempdir()+"T"+ALLTRIM(STR(int(hb_random(999999)),8))+".prn"
+      ENDDO
+      IF lpreview
+         ::impreview:=.T.
+      ENDIF
+   ENDCASE
+
+   RETURN NIL
+
 METHOD BEGINDOC(cdoc) CLASS TPRINT
-*-------------------------
 
-do case
-case ::cprintlibrary="MINIPRINT"
-   START PRINTDOC NAME cDoc   //// modificaicon en esta linea
-case ::cprintlibrary="DOS"
-   SET PRINTER TO &(::tempfile)
-   SET DEVICE TO PRINT
-endcase
-RETURN self
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      START PRINTDOC NAME cDoc   //// modificaicon en esta linea
+      CASE ::cprintlibrary="DOS"
+         SET PRINTER TO &(::tempfile)
+         SET DEVICE TO PRINT
+      ENDCASE
 
-*-------------------------
+      RETURN self
+
 METHOD ENDDOC() CLASS TPRINT
-*-------------------------
-local _nhandle,wr
-do case
-case ::cprintlibrary="MINIPRINT"
+
+   LOCAL _nhandle,wr
+
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
    END PRINTDOC
-case ::cprintlibrary="DOS"
+CASE ::cprintlibrary="DOS"
    SET DEVICE TO SCREEN
-   SET PRINTER TO   
-   _nhandle:=FOPEN(::tempfile,0+64) 
-   if ::impreview
-         wr:= HB_MemoRead ((::tempfile))   // ADD
-   DEFINE WINDOW PRINT_PREVIEW  ;
-   	AT 10,10 ;
-   	   WIDTH 640 HEIGHT 480 ;
-   	   TITLE 'Preview -----> ' + ::tempfile ;
-   	   MODAL
-  
-   	@ 0,0 EDITBOX EDIT_P ;
-   	OF PRINT_PREVIEW ;
-   	WIDTH 590 ;
-   	HEIGHT 440 ;
-   	VALUE WR ;
-   	READONLY ;
-   	FONT 'Courier new' ;
-   	SIZE 10
+   SET PRINTER TO
+   _nhandle:=FOPEN(::tempfile,0+64)
+   IF ::impreview
+      wr:= HB_MemoRead ((::tempfile))   // ADD
+      DEFINE WINDOW PRINT_PREVIEW  ;
+            AT 10,10 ;
+            WIDTH 640 HEIGHT 480 ;
+            TITLE 'Preview -----> ' + ::tempfile ;
+            MODAL
 
-        @ 10,600 button but_4 caption "X" width 30 action ( print_preview.release() )
-        @ 110,600 button but_1 caption "+ +" width 30 action zoom("+")
-        @ 210,600 button but_2 caption "- -" width 30 action zoom("-")
-        @ 310,600 button but_3 caption "P" width 30 action (::printdos())
+         @ 0,0 EDITBOX EDIT_P ;
+            OF PRINT_PREVIEW ;
+            WIDTH 590 ;
+            HEIGHT 440 ;
+            VALUE WR ;
+            READONLY ;
+            FONT 'Courier new' ;
+            SIZE 10
 
-  
-   END WINDOW
-   
-   CENTER WINDOW PRINT_PREVIEW
-   ACTIVATE WINDOW PRINT_PREVIEW
+         @ 10,600 button but_4 caption "X" width 30 action ( print_preview.release() )
+         @ 110,600 button but_1 caption "+ +" width 30 action zoom("+")
+         @ 210,600 button but_2 caption "- -" width 30 action zoom("-")
+         @ 310,600 button but_3 caption "P" width 30 action (::printdos())
 
-   else
+      END WINDOW
+
+      CENTER WINDOW PRINT_PREVIEW
+      ACTIVATE WINDOW PRINT_PREVIEW
+
+   ELSE
 
       ::PRINTDOS()
 
-   endif
+   ENDIF
 
    IF FILE(::tempfile)
       fclose(_nhandle)
       ERASE &(::tempfile)
    ENDIF
-endcase
+ENDCASE
+
 RETURN self
 
 METHOD SETCOLOR(atColor) CLASS TPRINT
-::acolor:=atColor
-RETURN NIL
 
-*-------------------------
+   ::acolor:=atColor
+
+   RETURN NIL
+
 METHOD beginPAGE() CLASS TPRINT
-*-------------------------
-do case
-case ::cprintlibrary="MINIPRINT"
-   START PRINTPAGE
-case ::cprintlibrary="DOS"
-   @ 0,0 SAY ""
-endcase
-RETURN self
 
-*-------------------------
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      START PRINTPAGE
+      CASE ::cprintlibrary="DOS"
+         @ 0,0 SAY ""
+      ENDCASE
+
+      RETURN self
+
 METHOD ENDPAGE() CLASS TPRINT
-*-------------------------
-do case
-case ::cprintlibrary="MINIPRINT"
+
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
    END PRINTPAGE
-case ::cprintlibrary="DOS"
+CASE ::cprintlibrary="DOS"
    EJECT
-endcase
+ENDCASE
+
 RETURN self
 
-*-------------------------
 METHOD getdefprinter() CLASS TPRINT
-*-------------------------
-local cdefprinter
-do case
-case ::cprintlibrary="MINIPRINT"
-   cdefprinter:=GetDefaultPrinter()
-endcase
-RETURN cdefprinter
 
+   LOCAL cdefprinter
 
-*-------------------------
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      cdefprinter:=GetDefaultPrinter()
+   ENDCASE
+
+   RETURN cdefprinter
+
 METHOD setunits(cunitsx) CLASS TPRINT
-*-------------------------
 
-if cunitsx="MM"
-   ::cunits:="MM"
-else
-   ::cunits:="ROWCOL"
-endif
-RETURN nil
+   IF cunitsx="MM"
+      ::cunits:="MM"
+   ELSE
+      ::cunits:="ROWCOL"
+   ENDIF
 
-*-------------------------
+   RETURN NIL
+
 METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen) CLASS TPRINT
-*-------------------------
-local ctext,cspace
-// Local i,caux
-do case
-    case valtype(data)=='C' 
-                ctext:=data
-    case valtype(data)=='N'
-                ctext:=ALLTRIM(STR(data))
-    case valtype(data)=='D'
-                ctext:=dtoc(data)
-    case valtype(data)=='L'
-               ctext:= iif(data,'T','F')  
-    case valtype(data)=='M'  
-               ctext:=data
-    otherwise
-               ctext:=""
-endcase
 
-DEFAULT calign to "L"
+   LOCAL ctext,cspace
 
+   // Local i,caux
+   DO CASE
+   CASE valtype(data)=='C'
+      ctext:=data
+   CASE valtype(data)=='N'
+      ctext:=ALLTRIM(STR(data))
+   CASE valtype(data)=='D'
+      ctext:=dtoc(data)
+   CASE valtype(data)=='L'
+      ctext:= iif(data,'T','F')
+   CASE valtype(data)=='M'
+      ctext:=data
+   OTHERWISE
+      ctext:=""
+   ENDCASE
 
-DEFAULT nlen to 15
+   DEFAULT calign to "L"
 
-do case
-   case calign = "C"
-        cspace=  space( (int(nlen)-HMG_LEN(ctext))/2 )
-   case calign = "R"
-        cspace = space(int(nlen)-HMG_LEN(ctext))
-   otherwise
-        cspace:=""
-endcase   
+   DEFAULT nlen to 15
 
-DEFAULT nlin to 1
+   DO CASE
+   CASE calign = "C"
+      cspace=  space( (int(nlen)-HMG_LEN(ctext))/2 )
+   CASE calign = "R"
+      cspace = space(int(nlen)-HMG_LEN(ctext))
+   OTHERWISE
+      cspace:=""
+   ENDCASE
 
-DEFAULT ncol to 1
+   DEFAULT nlin to 1
 
-DEFAULT ctext to ""
+   DEFAULT ncol to 1
 
-DEFAULT lbold to .F.
+   DEFAULT ctext to ""
 
-DEFAULT cfont to ::cfontname
+   DEFAULT lbold to .F.
 
-DEFAULT nsize to ::nfontsize
+   DEFAULT cfont to ::cfontname
 
-DEFAULT acolor to ::acolor
+   DEFAULT nsize to ::nfontsize
 
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
+   DEFAULT acolor to ::acolor
 
-ctext:= cspace + ctext
+   IF ::cunits="MM"
+      ::nmver:=1
+      ::nvfij:=0
+      ::nmhor:=1
+      ::nhfij:=0
+   ELSE
+      ::nmhor  := (::nfontsize)/4.75
+      ::nmver  := (::nfontsize)/2.45
+      ::nvfij  := (12/1.65)
+      ::nhfij  := (12/3.70)
+   ENDIF
 
-do case
-case ::cprintlibrary="MINIPRINT"
- if .not. lbold
-      if calign="R"
+   ctext:= cspace + ctext
 
-       @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2  +((nlen+1)*nsize/4.75) PRINT (ctext) font cfont size nsize COLOR ::acolor RIGHT
-      else
-         @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2 PRINT (ctext) font cfont size nsize COLOR ::acolor
-      endif
-   else
-      if calign="R"
-             @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2+((nlen+1)*nsize/4.75) PRINT (ctext) font cfont size nsize  BOLD COLOR ::acolor RIGHT
-      else
-         @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2 PRINT (ctext) font cfont size nsize  BOLD COLOR ::acolor
-      endif
-   endif
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      IF .not. lbold
+         IF calign="R"
 
-case ::cprintlibrary="DOS"
-   if .not. lbold
-       @ nlin,ncol say (ctext)
-   else   
-       @ nlin,ncol say (ctext)
-       @ nlin,ncol say (ctext)
-   endif
-endcase
-RETURN self
+            @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2  +((nlen+1)*nsize/4.75) PRINT (ctext) font cfont size nsize COLOR ::acolor RIGHT
+         ELSE
+            @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2 PRINT (ctext) font cfont size nsize COLOR ::acolor
+         ENDIF
+      ELSE
+         IF calign="R"
+            @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2+((nlen+1)*nsize/4.75) PRINT (ctext) font cfont size nsize  BOLD COLOR ::acolor RIGHT
+         ELSE
+            @ nlin*::nmver+::nvfij, ncol*::nmhor+ ::nhfij*2 PRINT (ctext) font cfont size nsize  BOLD COLOR ::acolor
+         ENDIF
+      ENDIF
 
-*-------------------------
+   CASE ::cprintlibrary="DOS"
+      IF .not. lbold
+         @ nlin,ncol say (ctext)
+      ELSE
+         @ nlin,ncol say (ctext)
+         @ nlin,ncol say (ctext)
+      ENDIF
+   ENDCASE
+
+   RETURN self
+
 METHOD printimage(nlin,ncol,nlinf,ncolf,cimage) CLASS TPRINT
-*-------------------------
 
-DEFAULT nlin to 1
+   DEFAULT nlin to 1
 
-DEFAULT ncol to 1
+   DEFAULT ncol to 1
 
-DEFAULT cimage to ""
+   DEFAULT cimage to ""
 
-DEFAULT nlinf to 4
+   DEFAULT nlinf to 4
 
-DEFAULT ncolf to 4
+   DEFAULT ncolf to 4
 
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
-do case
-case ::cprintlibrary="MINIPRINT"
-   @  nlin*::nmver+::nvfij , ncol*::nmhor+::nhfij*2 PRINT IMAGE cimage WIDTH ((ncolf - ncol-1)*::nmhor + ::nhfij) HEIGHT ((nlinf+0.5 - nlin)*::nmver+::nvfij)
-endcase
-RETURN nil
+   IF ::cunits="MM"
+      ::nmver:=1
+      ::nvfij:=0
+      ::nmhor:=1
+      ::nhfij:=0
+   ELSE
+      ::nmhor  := (::nfontsize)/4.75
+      ::nmver  := (::nfontsize)/2.45
+      ::nvfij  := (12/1.65)
+      ::nhfij  := (12/3.70)
+   ENDIF
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      @  nlin*::nmver+::nvfij , ncol*::nmhor+::nhfij*2 PRINT IMAGE cimage WIDTH ((ncolf - ncol-1)*::nmhor + ::nhfij) HEIGHT ((nlinf+0.5 - nlin)*::nmver+::nvfij)
+   ENDCASE
 
+   RETURN NIL
 
-*-------------------------
 METHOD printline(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
-*-------------------------
 
-DEFAULT nlin to 1
+   DEFAULT nlin to 1
 
-DEFAULT ncol to 1
+   DEFAULT ncol to 1
 
-DEFAULT nlinf to 4
+   DEFAULT nlinf to 4
 
-DEFAULT ncolf to 4
+   DEFAULT ncolf to 4
 
-DEFAULT atcolor to ::acolor
+   DEFAULT atcolor to ::acolor
 
-DEFAULT ntwpen to ::nwpen
+   DEFAULT ntwpen to ::nwpen
 
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
+   IF ::cunits="MM"
+      ::nmver:=1
+      ::nvfij:=0
+      ::nmhor:=1
+      ::nhfij:=0
+   ELSE
+      ::nmhor  := (::nfontsize)/4.75
+      ::nmver  := (::nfontsize)/2.45
+      ::nvfij  := (12/1.65)
+      ::nhfij  := (12/3.70)
+   ENDIF
 
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      @  (nlin+.2)*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT LINE TO  (nlinf+.2)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2  COLOR atcolor PENWIDTH ntwpen  //// CPEN
+   CASE ::cprintlibrary="DOS"
+      IF nlin=nlinf
+         @ nlin,ncol say REPLICATE("-",ncolf-ncol+1)
+      ENDIF
+   ENDCASE
 
-do case
-case ::cprintlibrary="MINIPRINT"
-   @  (nlin+.2)*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT LINE TO  (nlinf+.2)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2  COLOR atcolor PENWIDTH ntwpen  //// CPEN
-case ::cprintlibrary="DOS"
-  if nlin=nlinf
-     @ nlin,ncol say REPLICATE("-",ncolf-ncol+1)
-  endif
-endcase
-RETURN nil
+   RETURN NIL
 
-*-------------------------
 METHOD printrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
-*-------------------------
 
+   DEFAULT nlin to 1
 
-DEFAULT nlin to 1
+   DEFAULT ncol to 1
 
-DEFAULT ncol to 1
+   DEFAULT nlinf to 4
 
-DEFAULT nlinf to 4
+   DEFAULT ncolf to 4
 
-DEFAULT ncolf to 4
+   DEFAULT atcolor to ::acolor
 
-DEFAULT atcolor to ::acolor
+   DEFAULT ntwpen to ::nwpen
 
-DEFAULT ntwpen to ::nwpen
+   IF ::cunits="MM"
+      ::nmver:=1
+      ::nvfij:=0
+      ::nmhor:=1
+      ::nhfij:=0
+   ELSE
+      ::nmhor  := (::nfontsize)/4.75
+      ::nmver  := (::nfontsize)/2.45
+      ::nvfij  := (12/1.65)
+      ::nhfij  := (12/3.70)
+   ENDIF
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  //// CPEN
+   ENDCASE
 
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
-do case
-case ::cprintlibrary="MINIPRINT"
-   @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  //// CPEN
-endcase
-RETURN nil
-
+   RETURN NIL
 
 METHOD printroundrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
-*-------------------------
 
-DEFAULT nlin to 1
+   DEFAULT nlin to 1
 
-DEFAULT ncol to 1
+   DEFAULT ncol to 1
 
-DEFAULT nlinf to 4
+   DEFAULT nlinf to 4
 
-DEFAULT ncolf to 4
+   DEFAULT ncolf to 4
 
-DEFAULT atcolor to ::acolor
+   DEFAULT atcolor to ::acolor
 
-DEFAULT ntwpen to ::nwpen
+   DEFAULT ntwpen to ::nwpen
 
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
-do case
-case ::cprintlibrary="MINIPRINT"
-   @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  ROUNDED //// CPEN
-endcase
-RETURN nil
+   IF ::cunits="MM"
+      ::nmver:=1
+      ::nvfij:=0
+      ::nmhor:=1
+      ::nhfij:=0
+   ELSE
+      ::nmhor  := (::nfontsize)/4.75
+      ::nmver  := (::nfontsize)/2.45
+      ::nvfij  := (12/1.65)
+      ::nhfij  := (12/3.70)
+   ENDIF
+   DO CASE
+   CASE ::cprintlibrary="MINIPRINT"
+      @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  ROUNDED //// CPEN
+   ENDCASE
 
-method printdos() CLASS TPRINT
-local cbat, nHdl
-    cbat:='b'+ALLTRIM(STR(random(999999),6))+'.bat'
-    nHdl := FCREATE( cBat )
-    FWRITE( nHdl, "copy " + ::tempfile + " prn" + CHR( 13 ) + CHR( 10 ) )
-    FWRITE( nHdl, "rem comando auxiliar de impresion" + CHR( 13 ) + CHR( 10 ) )
-    FCLOSE( nHdl )
-    waitrun( cBat, 0 )
-    erase &cbat
-return nil
+   RETURN NIL
 
+METHOD printdos() CLASS TPRINT
 
-static function zoom(cOp)
- 
-if cop="+" .and. print_preview.edit_p.fontsize <= 24
-  print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize + 2
-endif
+   LOCAL cbat, nHdl
 
-if cop="-" .and. print_preview.edit_p.fontsize > 7
-  print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize - 2
-endif
-return nil
+   cbat:='b'+ALLTRIM(STR(random(999999),6))+'.bat'
+   nHdl := FCREATE( cBat )
+   FWRITE( nHdl, "copy " + ::tempfile + " prn" + CHR( 13 ) + CHR( 10 ) )
+   FWRITE( nHdl, "rem comando auxiliar de impresion" + CHR( 13 ) + CHR( 10 ) )
+   FCLOSE( nHdl )
+   WAITrun( cBat, 0 )
+   ERASE &cbat
 
+   RETURN NIL
+
+STATIC FUNCTION zoom(cOp)
+
+   IF cop="+" .and. print_preview.edit_p.fontsize <= 24
+      print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize + 2
+   ENDIF
+
+   IF cop="-" .and. print_preview.edit_p.fontsize > 7
+      print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize - 2
+   ENDIF
+
+   RETURN NIL
 

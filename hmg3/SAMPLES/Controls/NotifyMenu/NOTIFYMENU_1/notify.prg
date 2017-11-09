@@ -4,11 +4,10 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window Notify
-	Activate Window Notify
+   LOAD WINDOW Notify
+   ACTIVATE WINDOW Notify
 
-Return
-
+   RETURN
 

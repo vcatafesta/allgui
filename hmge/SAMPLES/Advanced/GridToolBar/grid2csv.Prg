@@ -1,131 +1,138 @@
 #include <hmg.ch>
 
-function _grid2csv(gridname,windowname,lheader)
+FUNCTION _grid2csv(gridname,windowname,lheader)
 
-local filename := ""
-local adata := {}
-local lines := 0
-local i := 0
-local aeditcontrols := {}
-local count1 := 0
-local count2 := 0
-local linedata := {}
-local xres,aec,aitems
-local cdata := ""
-local aclinedata := {}
-local fhandle := 0
-local linebreak := chr(13)
-local aline := {}
-local cline := ''
-local ncolumns := 0
-default lheader := .t.
+   LOCAL filename := ""
+   LOCAL adata := {}
+   LOCAL lines := 0
+   LOCAL i := 0
+   LOCAL aeditcontrols := {}
+   LOCAL count1 := 0
+   LOCAL count2 := 0
+   LOCAL linedata := {}
+   LOCAL xres,aec,aitems
+   LOCAL cdata := ""
+   LOCAL aclinedata := {}
+   LOCAL fhandle := 0
+   LOCAL linebreak := chr(13)
+   LOCAL aline := {}
+   LOCAL cline := ''
+   LOCAL ncolumns := 0
 
-filename :=  PutFile ( { {"Comma Separated Value Files (*.csv)", "*.csv" } } , "Export to text file (CSV)" ,  , .f. ) 
-if len(alltrim(filename)) == 0
-   return nil
-endif
+   DEFAULT lheader := .t.
 
-if at(".csv",lower(filename)) > 0
-   if .not. right(lower(filename),4) == ".csv"
+   filename :=  PutFile ( { {"Comma Separated Value Files (*.csv)", "*.csv" } } , "Export to text file (CSV)" ,  , .f. )
+   IF len(alltrim(filename)) == 0
+
+      RETURN NIL
+   ENDIF
+
+   IF at(".csv",lower(filename)) > 0
+      IF .not. right(lower(filename),4) == ".csv"
+         filename := filename + ".csv"
+      ENDIF
+   ELSE
       filename := filename + ".csv"
-   endif
-else
-   filename := filename + ".csv"
-endif
+   ENDIF
 
-if file(filename)
-   if .not. msgyesno("Are you sure to overwrite?","Export to text file (CSV)")
-      return nil
-   endif
-endif
+   IF file(filename)
+      IF .not. msgyesno("Are you sure to overwrite?","Export to text file (CSV)")
 
-fhandle := fcreate(filename)
-if fhandle < 0
-   msgstop("File "+filename+" could not be created!")
-   return nil
-endif
+         RETURN NIL
+      ENDIF
+   ENDIF
 
+   fhandle := fcreate(filename)
+   IF fhandle < 0
+      msgstop("File "+filename+" could not be created!")
 
-lines := getproperty(windowname,gridname,"itemcount")
-IF lines == 0
-   msginfo("No rows to save!")
-   RETURN nil
-ENDIF
+      RETURN NIL
+   ENDIF
 
-i := GetControlIndex ( gridname , windowname )
+   lines := getproperty(windowname,gridname,"itemcount")
+   IF lines == 0
+      msginfo("No rows to save!")
 
-aEditcontrols := _HMG_aControlMiscData1 [i] [13]
+      RETURN NIL
+   ENDIF
 
-if lheader
-   asize(aclinedata,0)
-   ncolumns := len(getproperty(windowname,gridname,"item",1))
-   for count1 := 1 to ncolumns
-      cdata := getproperty(windowname,gridname,"header",count1)
-      aadd(aclinedata,cdata)
-   next count1
-   aadd(adata,aclone(aclinedata))
-endif
+   i := GetControlIndex ( gridname , windowname )
 
-for count1 := 1 to lines
-   linedata := getproperty(windowname,gridname,"item",count1)
-   asize(aclinedata,0)
-   for count2 := 1 to len(linedata)
-      do case
-         case ValType(linedata[count2]) == "N"
+   aEditcontrols := _HMG_aControlMiscData1 [i] [13]
+
+   IF lheader
+      asize(aclinedata,0)
+      ncolumns := len(getproperty(windowname,gridname,"item",1))
+      FOR count1 := 1 to ncolumns
+         cdata := getproperty(windowname,gridname,"header",count1)
+         aadd(aclinedata,cdata)
+      NEXT count1
+      aadd(adata,aclone(aclinedata))
+   ENDIF
+
+   FOR count1 := 1 to lines
+      linedata := getproperty(windowname,gridname,"item",count1)
+      asize(aclinedata,0)
+      FOR count2 := 1 to len(linedata)
+         DO CASE
+         CASE ValType(linedata[count2]) == "N"
             xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
             AEC := XRES [1]
             AITEMS := XRES [5]
             IF AEC == 'COMBOBOX'
                cdata := aitems[linedata[count2]]
-            else
+            ELSE
                cdata := LTrim( Str( linedata[count2] ) )
             ENDIF
-         case ValType(linedata[count2]) == "D"
+         CASE ValType(linedata[count2]) == "D"
             cdata := dtoc( linedata[count2])
-         case ValType(linedata[count2]) == "L"
+         CASE ValType(linedata[count2]) == "L"
             xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
             AEC := XRES [1]
             AITEMS := XRES [8]
             IF AEC == 'CHECKBOX'
                cdata := iif(linedata[count2],aitems[1],aitems[2])
-            else
+            ELSE
                cdata := iif(linedata[count2],"TRUE","FALSE")
-            endif
-         otherwise
+            ENDIF
+         OTHERWISE
             cdata := linedata[count2]
-      endcase
-      aadd(aclinedata,cdata)
-   next count2
-   aadd(adata,aclone(aclinedata))
-next count1
-for count1 := 1 to len(adata)
-   cline := ''
-   aline := adata[count1]
-   for count2 := 1 to len(aline)
-      cline := cline + '"' + _parsequote(aline[count2]) + '"'
-      if .not. count2 == len(aline)
-         cline := cline + ','
-      endif
-   next count2
-   cline := cline + linebreak
-   fwrite(fhandle,cline)
-next count1
-if fclose(fhandle)
-   msginfo("Exported Successfully!")
-else
-   msgstop("Error in saving!")
-endif
-return nil
-         
+         ENDCASE
+         aadd(aclinedata,cdata)
+      NEXT count2
+      aadd(adata,aclone(aclinedata))
+   NEXT count1
+   FOR count1 := 1 to len(adata)
+      cline := ''
+      aline := adata[count1]
+      FOR count2 := 1 to len(aline)
+         cline := cline + '"' + _parsequote(aline[count2]) + '"'
+         IF .not. count2 == len(aline)
+            cline := cline + ','
+         ENDIF
+      NEXT count2
+      cline := cline + linebreak
+      fwrite(fhandle,cline)
+   NEXT count1
+   IF fclose(fhandle)
+      msginfo("Exported Successfully!")
+   ELSE
+      msgstop("Error in saving!")
+   ENDIF
 
-function _parsequote(cdata)
-local i := 0
-local cout := ""
-for i := 1 to len(cdata)
-   if substr(cdata,i,1) == '"'
-      cout := cout + substr(cdata,i,1) + '"'
-   else
-      cout := cout + substr(cdata,i,1)
-   endif
-next i
-return cout   
+   RETURN NIL
+
+FUNCTION _parsequote(cdata)
+
+   LOCAL i := 0
+   LOCAL cout := ""
+
+   FOR i := 1 to len(cdata)
+      IF substr(cdata,i,1) == '"'
+         cout := cout + substr(cdata,i,1) + '"'
+      ELSE
+         cout := cout + substr(cdata,i,1)
+      ENDIF
+   NEXT i
+
+   RETURN cout

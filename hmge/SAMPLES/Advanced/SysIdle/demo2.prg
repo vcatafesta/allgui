@@ -4,20 +4,18 @@
 
 #include "hmg.ch"
 
-Static nInterval := 60  // 60 seconds
+STATIC nInterval := 60  // 60 seconds
 
-*---------------------------------------
-Function Main
-*---------------------------------------
+FUNCTION Main
 
    SET NAVIGATION EXTENDED
    SET FONT TO "Tahoma", 10
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 WIDTH 640 HEIGHT 480 ;
-      TITLE "SysIdle Detection Test" ;
-      MAIN ;
-      ON INIT Win_1.Text_1.SetFocus()
+         AT 0,0 WIDTH 640 HEIGHT 480 ;
+         TITLE "SysIdle Detection Test" ;
+         MAIN ;
+         ON INIT Win_1.Text_1.SetFocus()
 
       @12, 10 LABEL Label_1 VALUE "Caption_1" WIDTH 80 RIGHTALIGN
 
@@ -38,7 +36,7 @@ Function Main
          NUMERIC
 
       DEFINE STATUSBAR FONT "Tahoma" SIZE 9 KEYBOARD
-        STATUSITEM ""
+         STATUSITEM ""
       END STATUSBAR
 
    END WINDOW
@@ -48,11 +46,10 @@ Function Main
    Win_1.Center()
    Win_1.Activate()
 
-Return Nil
+   RETURN NIL
 
-*---------------------------------------
-Static Function Notification( lLogOff )
-*---------------------------------------
+STATIC FUNCTION Notification( lLogOff )
+
    IF SysIdleSecs() > nInterval
 
       Win_1.Timer_1.Enabled := .F.
@@ -70,10 +67,7 @@ Static Function Notification( lLogOff )
 
    Win_1.StatusBar.Item(1) := "Idle time elapsed: " + hb_ntos( SysIdleSecs() )
 
-Return Nil
-
-*---------------------------------------
-*---------------------------------------
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -83,7 +77,7 @@ Return Nil
 WINUSERAPI BOOL WINAPI GetLastInputInfo(PLASTINPUTINFO);
 typedef BOOL (WINAPI *GETLASTINPUTINFO_)(PLASTINPUTINFO);
 
-HB_FUNC( SYSIDLESECS ) 
+HB_FUNC( SYSIDLESECS )
 {
    HINSTANCE handle = LoadLibrary("user32.dll");
 
@@ -96,7 +90,7 @@ HB_FUNC( SYSIDLESECS )
       if( pFunc )
       {
          LASTINPUTINFO lpi;
-  
+
          lpi.cbSize = sizeof(LASTINPUTINFO);
 
          if (!pFunc(&lpi))
@@ -105,7 +99,7 @@ HB_FUNC( SYSIDLESECS )
          }
          else
          {
-            hb_retni( ( GetTickCount() - lpi.dwTime ) / 1000 ); 
+            hb_retni( ( GetTickCount() - lpi.dwTime ) / 1000 );
          }
       }
    else
@@ -117,3 +111,4 @@ HB_FUNC( SYSIDLESECS )
 }
 
 #pragma ENDDUMP
+

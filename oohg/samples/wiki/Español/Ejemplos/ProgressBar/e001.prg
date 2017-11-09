@@ -1,17 +1,15 @@
 /*
- * Ejemplo ProgressBar n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo definir un control ProgressBar
- * con estila Marquee (el control muestra una barra animada
- * que nunca se detiene), y cómo cambiar el estilo desde el
- * programa.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo ProgressBar n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo definir un control ProgressBar
+* con estila Marquee (el control muestra una barra animada
+* que nunca se detiene), y cómo cambiar el estilo desde el
+* programa.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -20,11 +18,11 @@ FUNCTION Main
    LOCAL nPrevio := 10
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 466 + GetBorderWidth() ;
-      HEIGHT 200 + GetTitleHeight() + 2 * GetBorderHeight() ;
-      TITLE "OOHG - Estilos Marquee y Normal en Controles ProgressBar" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 466 + GetBorderWidth() ;
+         HEIGHT 200 + GetTitleHeight() + 2 * GetBorderHeight() ;
+         TITLE "OOHG - Estilos Marquee y Normal en Controles ProgressBar" ;
+         MAIN
 
       @ 20,20 PROGRESSBAR Progress_1 ;
          OBJ oProg1 ;
@@ -34,10 +32,10 @@ FUNCTION Main
          TOOLTIP 'Control ProgressBar Marquee. Cliquee el boton "Detener" para detener la animación.' ;
          MARQUEE 90
       /*
-       * 90 es el tiempo, en milisegundos, con que se actualiza la animación.
-       * Cuanto más alto sea el número, más despacio se mueve.
-       * Si este parámetro es cero o negativo, la animación se detiene.
-       */
+      * 90 es el tiempo, en milisegundos, con que se actualiza la animación.
+      * Cuanto más alto sea el número, más despacio se mueve.
+      * Si este parámetro es cero o negativo, la animación se detiene.
+      */
 
       @ 80,20 PROGRESSBAR Progress_2 ;
          OBJ oProg2 ;
@@ -71,7 +69,7 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CambiarEstilo( oProg, nValue, oBut )
 
@@ -88,24 +86,22 @@ FUNCTION CambiarEstilo( oProg, nValue, oBut )
    ENDIF
 
    /*
-    * SetStyleNormal() configura el control en estilo Normal.
-    * Si el parámetro se omite o no es numérico o es negativo,
-    * se asume cero. Este parámetro setea el VALUE del control.
-    *
-    * SetStyleMarquee() configura el control en estilo Marquee.
-    * Si el parámetro se omite o no es numérico o es negativo,
-    * el estilo se cambia pero lo animación no se inicia.
-    * Este parámetro indica el tiempo, en milisegundos, con que
-    * se actualiza la animación. Cuanto más alto sea el número,
-    * más despacio se mueve.
-    *
-    * Al configurar el estilo normal no se restaura el VALUE
-    * del control al valor anterior al cambio de estilo.
-    * Ud. debe guardar el VALUE antes de cambiar el estilo si
-    * desea restaurarlo más tarde.
-    */
+   * SetStyleNormal() configura el control en estilo Normal.
+   * Si el parámetro se omite o no es numérico o es negativo,
+   * se asume cero. Este parámetro setea el VALUE del control.
+   * SetStyleMarquee() configura el control en estilo Marquee.
+   * Si el parámetro se omite o no es numérico o es negativo,
+   * el estilo se cambia pero lo animación no se inicia.
+   * Este parámetro indica el tiempo, en milisegundos, con que
+   * se actualiza la animación. Cuanto más alto sea el número,
+   * más despacio se mueve.
+   * Al configurar el estilo normal no se restaura el VALUE
+   * del control al valor anterior al cambio de estilo.
+   * Ud. debe guardar el VALUE antes de cambiar el estilo si
+   * desea restaurarlo más tarde.
+   */
 
-RETURN nValue
+   RETURN nValue
 
 FUNCTION AlternarMarquee( oProg, oBut )
 
@@ -124,16 +120,16 @@ FUNCTION AlternarMarquee( oProg, oBut )
    ENDIF
 
    /*
-    * StartMarquee() utiliza el tiempo definido en el control.
-    * Si este valor es negativo o cero, se asume 30.
-    *
-    * En estilo Marquee, el VALUE del control es siempre 1, por lo
-    * tanto no es posible reiniciar la animación desde el punto en
-    * que se detuvo. Siempre se inicia desde el principio.
-    */
+   * StartMarquee() utiliza el tiempo definido en el control.
+   * Si este valor es negativo o cero, se asume 30.
+   * En estilo Marquee, el VALUE del control es siempre 1, por lo
+   * tanto no es posible reiniciar la animación desde el punto en
+   * que se detuvo. Siempre se inicia desde el principio.
+   */
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

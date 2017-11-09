@@ -2,20 +2,16 @@
 #include "minigui.ch"
 
 #ifdef _USERINIT_
-*------------------------------------------------------------------------------*
 INIT PROCEDURE _InitAnimateRes
-*------------------------------------------------------------------------------*
 
    InstallMethodHandler ( 'Release', 'ReleaseAnimateRes' )
    InstallPropertyHandler ( 'File', 'SetAnimateResFile', 'GetAnimateResFile' )
    InstallPropertyHandler ( 'ResId', 'SetAnimateResId', 'GetAnimateResId' )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineAnimateRes ( ControlName, ParentForm, x, y, w, h, cFile, nRes, ;
       tooltip, HelpId, invisible )
-*------------------------------------------------------------------------------*
    LOCAL cParentForm, mVar, ControlHandle, hAvi
 
    hb_default( @w, 200 )
@@ -41,7 +37,7 @@ FUNCTION _DefineAnimateRes ( ControlName, ParentForm, x, y, w, h, cFile, nRes, ;
    ENDIF
 
    mVar := '_' + ParentForm + '_' + ControlName
-   Public &mVar. := Len( _HMG_aControlNames ) + 1
+   PUBLIC &mVar. := Len( _HMG_aControlNames ) + 1
 
    cParentForm := ParentForm
 
@@ -102,11 +98,9 @@ FUNCTION _DefineAnimateRes ( ControlName, ParentForm, x, y, w, h, cFile, nRes, ;
       Eval ( _HMG_bOnControlInit, Len( _HMG_aControlNames ), mVar )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION SetAnimateResFile ( cWindow, cControl, cProperty, cValue )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'ANIMATE' .AND. Upper ( cProperty ) == 'FILE'
 
@@ -120,11 +114,10 @@ FUNCTION SetAnimateResFile ( cWindow, cControl, cProperty, cValue )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION GetAnimateResFile ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal := Nil
 
    IF GetControlType ( cControl, cWindow ) == 'ANIMATE'
@@ -139,11 +132,9 @@ FUNCTION GetAnimateResFile ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
 FUNCTION SetAnimateResId ( cWindow, cControl, cProperty, cValue )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'ANIMATE' .AND. Upper ( cProperty ) == 'RESID'
 
@@ -157,11 +148,10 @@ FUNCTION SetAnimateResId ( cWindow, cControl, cProperty, cValue )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION GetAnimateResId ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL RetVal := Nil
 
    IF GetControlType ( cControl, cWindow ) == 'ANIMATE'
@@ -176,11 +166,9 @@ FUNCTION GetAnimateResId ( cWindow, cControl )
 
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
 
-*------------------------------------------------------------------------------*
 PROCEDURE ReleaseAnimateRes ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF _IsControlDefined ( cControl, cWindow ) .AND. GetControlType ( cControl, cWindow ) == 'ANIMATE'
 
@@ -194,11 +182,9 @@ PROCEDURE ReleaseAnimateRes ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
@@ -260,4 +246,5 @@ HB_FUNC( UNLOADANIMATELIB )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

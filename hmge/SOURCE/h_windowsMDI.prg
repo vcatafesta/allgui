@@ -16,35 +16,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -71,24 +71,25 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #include "error.ch"
 
 MEMVAR mVar
+
 #ifdef _TSBROWSE_
 MEMVAR _TSB_aControlhWnd, _TSB_aControlObjects, _TSB_aClientMDIhWnd
+
 #endif
 
-*-----------------------------------------------------------------------------*
 FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, x, ControlCount
-#ifdef _TSBROWSE_
+
+   #ifdef _TSBROWSE_
    LOCAL oGet
-#endif
+
+   #endif
 
    DO CASE
 
-#ifdef _TSBROWSE_
-   //**********************************************************************
+      #ifdef _TSBROWSE_
    CASE nMsg == WM_KEYDOWN .OR. nMsg == WM_KEYUP
-   //**********************************************************************
 
       IF Type( '_TSB_aControlhWnd' ) == 'A' .AND. Len( _TSB_aControlhWnd ) > 0
          oGet := GetObjectByClientMDI( hWnd )
@@ -96,25 +97,22 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
             oGet:HandleEvent ( nMsg, wParam, lParam )
          ENDIF
       ENDIF
-  
-   //**********************************************************************
-   CASE nMsg == WM_MOUSEWHEEL 
-   //**********************************************************************
+
+   CASE nMsg == WM_MOUSEWHEEL
       IF Type( '_TSB_aControlhWnd' ) == 'A' .AND. Len( _TSB_aControlhWnd ) > 0
          oGet := GetObjectByClientMDI( hWnd )
          IF ValType( oGet ) == 'O'
             x := oGet:HandleEvent ( nMsg, wParam, lParam )
             IF ValType( x ) == 'N'
                IF x != 0
+
                   RETURN x
                ENDIF
             ENDIF
          ENDIF
       ENDIF
-#endif
-   //**********************************************************************
+      #endif
    CASE nMsg == WM_MDIACTIVATE
-   //**********************************************************************
 
       IF _HMG_MdiChildActive == .F.
 
@@ -125,21 +123,15 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
 
       ENDIF
 
-   //**********************************************************************
    CASE nMsg == WM_GETDLGCODE
-   //**********************************************************************
 
       RETURN DLGC_WANTALLKEYS
 
-   //**********************************************************************
    CASE nMsg == WM_WINDOWPOSCHANGED .OR. nMsg ==  WM_WINDOWPOSCHANGING
-   //**********************************************************************
 
       RETURN 0
 
-   //**********************************************************************
    CASE nMsg == WM_MOVE
-   //**********************************************************************
 
       IF _HMG_MdiChildActive == .F.
 
@@ -151,9 +143,7 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
 
       ENDIF
 
-   //**********************************************************************
    CASE nMsg == WM_SIZE
-   //**********************************************************************
 
       IF _HMG_MdiChildActive == .F.
 
@@ -182,19 +172,16 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
 
       ENDIF
 
-   //**********************************************************************
    CASE nMsg == WM_CLOSE
-   //**********************************************************************
 
       IF GetEscapeState() < 0
+
          RETURN ( 1 )
       ENDIF
 
       RETURN _MdiChildClose( hWnd )
 
-   //**********************************************************************
    CASE nMsg == WM_DESTROY
-   //**********************************************************************
 
       ControlCount := Len ( _HMG_aControlHandles )
 
@@ -293,14 +280,12 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
 
    ENDCASE
 
-RETURN ( 0 )
+   RETURN ( 0 )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       nocaption, novscroll, nohscroll, title, FontName, FontSize, ;
       initprocedure, ReleaseProcedure, ClickProcedure, GotFocus, LostFocus, SizeProcedure, ;
       maximizeprocedure, minimizeprocedure, focused, cursor, InteractiveCloseProcedure, MouseMoveProcedure )
-*-----------------------------------------------------------------------------*
    LOCAL i , htooltip , mVar , ParentForm , k , aRGB := { -1 , -1 , -1 }
    LOCAL FormHandle , ChildIndex
 
@@ -369,18 +354,18 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
    ENDIF
 
    htooltip := InitToolTip( FormHandle , SetToolTipBalloon() )  //JP MDI ToolTip
-//JP MDI Background
+   //JP MDI Background
    IF aRGB[1] != -1
       SetWindowBackground( Formhandle, PaintBkGnd( Formhandle, aRGB ) )
    ENDIF
-//JP End
+   //JP End
    _HMG_ActiveMDIChildIndex := ChildIndex
 
    k := AScan ( _HMG_aFormDeleted , .T. )
 
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames  [k] :=  FormName
       _HMG_aFormHandles  [k] :=  FormHandle
@@ -432,15 +417,15 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-#endif
+      #endif
 
    ELSE
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames , FormName )
       AAdd ( _HMG_aFormHandles , FormHandle )
@@ -492,9 +477,9 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1  , {} )
       AAdd ( _HMG_aFormMiscData2  , '' )
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-#endif
+      #endif
 
    ENDIF
 
@@ -504,20 +489,18 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       Eval ( _HMG_bOnFormInit, k, mVar )
    ENDIF
 
-RETURN ( FormHandle )
+   RETURN ( FormHandle )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndMdiChildWindow ()
-*-----------------------------------------------------------------------------*
+
    _ActivateMdiWindow ( _HMG_ActiveFormName )
    _HMG_ActiveFormName := _HMG_ActiveFormNameBak
    _HMG_MdiChildActive := .F.
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _ActivateMdiWindow ( FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL i
 
    IF .NOT. _IsWindowDefined ( Formname )
@@ -565,11 +548,10 @@ FUNCTION _ActivateMdiWindow ( FormName )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiChildClose ( hWnd )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, xRetVal
 
    i := AScan ( _HMG_aFormHandles , hWnd )
@@ -582,6 +564,7 @@ FUNCTION _MdiChildClose ( hWnd )
          xRetVal := _DoWindowEventProcedure ( _HMG_aFormInteractiveCloseProcedure [i] , i , 'WINDOW_ONINTERACTIVECLOSE' )
          IF ValType ( xRetVal ) == 'L'
             IF !xRetVal
+
                RETURN 1
             ENDIF
          ENDIF
@@ -591,15 +574,18 @@ FUNCTION _MdiChildClose ( hWnd )
 
       CASE 0
          MsgStop ( _HMG_MESSAGE [3] )
+
          RETURN 1
       CASE 2
          IF ! MsgYesNo ( _HMG_MESSAGE [1] , _HMG_MESSAGE [2] )
+
             RETURN 1
          ENDIF
          EXIT
       CASE 3
          IF _HMG_aFormType [i] == 'A'
             IF ! MsgYesNo ( _HMG_MESSAGE [1] , _HMG_MESSAGE [2] )
+
                RETURN 1
             ENDIF
          ENDIF
@@ -613,11 +599,10 @@ FUNCTION _MdiChildClose ( hWnd )
 
    ENDIF
 
-RETURN 0
+   RETURN 0
 
-*-----------------------------------------------------------------------------*
 FUNCTION ActivateMdiChildWindow ( ChildName )
-*-----------------------------------------------------------------------------*
+
    LOCAL n
 
    FOR n := 1 TO Len( _HMG_aFormHandles )
@@ -628,22 +613,20 @@ FUNCTION ActivateMdiChildWindow ( ChildName )
       ENDIF
    NEXT
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _CloseActiveMdi()
-*-----------------------------------------------------------------------------*
+
    LOCAL ChildHandle := GetActiveMdiHandle()
 
    IF _MdiChildClose( ChildHandle ) == 0
       DestroyActiveMdi( ChildHandle )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiChildCloseAll()
-*-----------------------------------------------------------------------------*
+
    LOCAL ChildHandle, n
 
    FOR n := 1 TO Len( _HMG_aFormHandles )
@@ -655,11 +638,10 @@ FUNCTION _MdiChildCloseAll()
       ENDIF
    NEXT
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiChildRestoreAll()
-*-----------------------------------------------------------------------------*
+
    LOCAL n
 
    FOR n := 1 TO Len( _HMG_aFormHandles )
@@ -668,69 +650,63 @@ FUNCTION _MdiChildRestoreAll()
       ENDIF
    NEXT
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetActiveMdiHandle()
-*-----------------------------------------------------------------------------*
 
-RETURN iif( _HMG_MainClientMDIHandle > 0, SendMessage( _HMG_MainClientMDIHandle, WM_MDIGETACTIVE, 0, 0 ), 0 )
+   RETURN iif( _HMG_MainClientMDIHandle > 0, SendMessage( _HMG_MainClientMDIHandle, WM_MDIGETACTIVE, 0, 0 ), 0 )
 
-*-----------------------------------------------------------------------------*
 FUNCTION DestroyActiveMdi( hwndCln )
-*-----------------------------------------------------------------------------*
+
    SendMessage( _HMG_MainClientMDIHandle, WM_MDIDESTROY, hwndCln, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiWindowsTile( lVert )
-*-----------------------------------------------------------------------------*
+
    LOCAL Style := iif( lVert, MDITILE_VERTICAL, MDITILE_HORIZONTAL )
+
    SendMessage( _HMG_MainClientMDIHandle, WM_MDITILE, Style, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiWindowsCascade()
-*-----------------------------------------------------------------------------*
+
    SendMessage( _HMG_MainClientMDIHandle, WM_MDICASCADE, 0, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiWindowsIcons()
-*-----------------------------------------------------------------------------*
+
    SendMessage( _HMG_MainClientMDIHandle, WM_MDIICONARRANGE, 0, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiWindowsRestore( childhwnd )
-*-----------------------------------------------------------------------------*
+
    SendMessage( _HMG_MainClientMDIHandle, WM_MDIRESTORE, childhwnd, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _MdiWindowsActivate( childhwnd )
-*-----------------------------------------------------------------------------*
+
    IF _HMG_MainClientMDIHandle > 0
       SendMessage( _HMG_MainClientMDIHandle, WM_MDIACTIVATE, childhwnd, 0 )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-#ifdef _TSBROWSE_
-*-----------------------------------------------------------------------------*
+   #ifdef _TSBROWSE_
+
 FUNCTION GetObjectByClientMDI( hWnd )
-*-----------------------------------------------------------------------------*
+
    LOCAL oWnd := NIL, nPos
 
    IF ( nPos := AScan( _TSB_aClientMDIhWnd, hWnd ) ) > 0
       oWnd := _TSB_aControlObjects[ nPos ]
    ENDIF
 
-RETURN oWnd
+   RETURN oWnd
 
-#endif
+   #endif
+

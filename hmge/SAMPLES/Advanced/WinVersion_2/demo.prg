@@ -1,63 +1,60 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2011 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2011 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-*--------------------------------------------------------*
-Procedure Main
-*--------------------------------------------------------*
-  Local aVer := GetWinVersionInfo()
+PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 550 HEIGHT 350 ;
-		TITLE 'WinVersion Test' ;
-		ICON 'DEMO.ICO' ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		FONT 'Tahoma' SIZE 9
+   LOCAL aVer := GetWinVersionInfo()
 
-		DEFINE TREE Tree_1 ;
-			AT 0,0 ;
-			WIDTH Form_1.Width - GetBorderWidth() + 2 ;
-			HEIGHT Form_1.Height - GetTitleHeight() - GetBorderHeight() + 2 ;
-			VALUE 1 ;
-			NODEIMAGES { 'cl_fl.bmp', 'op_fl.bmp' } ;
-			ITEMIMAGES { 'op_fl.bmp' } ;
-			NOROOTBUTTON
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 550 HEIGHT 350 ;
+         TITLE 'WinVersion Test' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         FONT 'Tahoma' SIZE 9
 
-			NODE 'Operate System'
-				TREEITEM "Name: " + GetWinVerString() IMAGES { 'mswin.bmp' }
-				TREEITEM "Version: " + hb_ntos(aVer[1]) + "." + hb_ntos(aVer[2]) + "." + hb_ntos(aVer[3]) IMAGES { 'mswin.bmp' }
-				TREEITEM "Service Pack Version: " + WinVersion()[2] IMAGES { 'mswin.bmp' }
-				TREEITEM "Manufacturer: Microsoft Corporation" IMAGES { 'home.bmp' }
+      DEFINE TREE Tree_1 ;
+            AT 0,0 ;
+            WIDTH Form_1.Width - GetBorderWidth() + 2 ;
+            HEIGHT Form_1.Height - GetTitleHeight() - GetBorderHeight() + 2 ;
+            VALUE 1 ;
+            NODEIMAGES { 'cl_fl.bmp', 'op_fl.bmp' } ;
+            ITEMIMAGES { 'op_fl.bmp' } ;
+            NOROOTBUTTON
 
-				TREEITEM "Visible Memory Size: " + hb_ntos(MemoryStatus(1)) + " MB (remaining " + hb_ntos(MemoryStatus(2)) + " MB)" IMAGES { 'memory.bmp' }
-				TREEITEM "Virtual Memory Size: " + hb_ntos(MemoryStatus(5)) + " MB (remaining " + hb_ntos(MemoryStatus(6)) + " MB)" IMAGES { 'memory.bmp' }
-				TREEITEM "Free Space In Paging File: " + hb_ntos(MemoryStatus(4)) + " MB" IMAGES { 'memory.bmp' }
+         NODE 'Operate System'
+            TREEITEM "Name: " + GetWinVerString() IMAGES { 'mswin.bmp' }
+            TREEITEM "Version: " + hb_ntos(aVer[1]) + "." + hb_ntos(aVer[2]) + "." + hb_ntos(aVer[3]) IMAGES { 'mswin.bmp' }
+            TREEITEM "Service Pack Version: " + WinVersion()[2] IMAGES { 'mswin.bmp' }
+            TREEITEM "Manufacturer: Microsoft Corporation" IMAGES { 'home.bmp' }
 
-				TREEITEM "System Drive: " + Left(System.WindowsFolder, 2)
-				TREEITEM "Windows Directory: " + System.WindowsFolder
-				TREEITEM "System Directory: " + System.SystemFolder
-			END NODE
+            TREEITEM "Visible Memory Size: " + hb_ntos(MemoryStatus(1)) + " MB (remaining " + hb_ntos(MemoryStatus(2)) + " MB)" IMAGES { 'memory.bmp' }
+            TREEITEM "Virtual Memory Size: " + hb_ntos(MemoryStatus(5)) + " MB (remaining " + hb_ntos(MemoryStatus(6)) + " MB)" IMAGES { 'memory.bmp' }
+            TREEITEM "Free Space In Paging File: " + hb_ntos(MemoryStatus(4)) + " MB" IMAGES { 'memory.bmp' }
 
-		END TREE
+            TREEITEM "System Drive: " + Left(System.WindowsFolder, 2)
+            TREEITEM "Windows Directory: " + System.WindowsFolder
+            TREEITEM "System Directory: " + System.SystemFolder
+         END NODE
 
-		ON KEY ESCAPE ACTION ThisWindow.Release()
+      END TREE
 
-	END WINDOW
+      ON KEY ESCAPE ACTION ThisWindow.Release()
 
-	Form_1.Tree_1.Expand( 1 )
+   END WINDOW
 
-	Form_1.Center()
+   Form_1.Tree_1.Expand( 1 )
 
-	Form_1.Activate()
+   Form_1.Center()
 
-Return
+   Form_1.Activate()
 
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -66,19 +63,15 @@ Return
 #include "hbapi.h"
 #include "hbapiitm.h"
 
-//
 // Product types
 // This list grows with each OS release.
-//
 // There is no ordering of values to ensure callers
 // do an equality test i.e. greater-than and less-than
 // comparisons are not useful.
-//
 // NOTE: Values in this list should never be deleted.
 //       When a product-type 'X' gets dropped from a
 //       OS release onwards, the value of 'X' continues
 //       to be used in the mapping table of GetProductInfo.
-//
 
 #define PRODUCT_UNDEFINED                           0x00000000
 
@@ -127,7 +120,6 @@ Return
 
 #define PRODUCT_UNLICENSED                          0xABCDABCD
 
-
 #if _WIN32_WINNT >= 0x0501
   WINBASEAPI void WINAPI
   GetNativeSystemInfo(
@@ -136,9 +128,9 @@ Return
 #endif
 
 #if defined( __BORLANDC__ )
-  #define VER_SUITE_PERSONAL		0x00000200
-  #define VER_SUITE_BLADE		0x00000400
-  #define VER_SUITE_STORAGE_SERVER	0x00002000
+  #define VER_SUITE_PERSONAL      0x00000200
+  #define VER_SUITE_BLADE      0x00000400
+  #define VER_SUITE_STORAGE_SERVER   0x00002000
 
   #define PROCESSOR_ARCHITECTURE_AMD64  9
 #endif
@@ -176,6 +168,7 @@ HB_FUNC( GETWINVERSTRING )
        osvi.dwOSVersionInfoSize = sizeof (OSVERSIONINFO);
        if (! GetVersionEx ( (OSVERSIONINFO *) &osvi) )
           hb_retc( "version unknown" );
+
           return;
     }
 
@@ -277,7 +270,6 @@ HB_FUNC( GETWINVERSTRING )
                 strcat( szResult, "Web Server Edition" );
                 break;
           }
-
 
           pIsWow64Process = ( P_ISWOW64PROCESS ) GetProcAddress( GetModuleHandle( TEXT( "kernel32" ) ), "IsWow64Process" );
 
@@ -409,6 +401,7 @@ HB_FUNC( GETWINVERSTRING )
           if( lRet != ERROR_SUCCESS )
           {
              hb_retc( "version unknown" );
+
              return;
           }
 
@@ -419,6 +412,7 @@ HB_FUNC( GETWINVERSTRING )
           if( (lRet != ERROR_SUCCESS) || (dwBufLen > BUFSIZE) )
           {
              hb_retc( "version unknown" );
+
              return;
           }
 
@@ -520,3 +514,4 @@ HB_FUNC( GETWINVERSIONINFO )
 }
 
 #pragma ENDDUMP
+

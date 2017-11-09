@@ -1,68 +1,69 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
 PROCEDURE MAIN
 
-    DEFINE WINDOW MainWindow AT 0,0 ;
-           WIDTH 400 HEIGHT 200 ;
-           MAIN ;
-           TITLE "NoWait window test"
+   DEFINE WINDOW MainWindow AT 0,0 ;
+         WIDTH 400 HEIGHT 200 ;
+         MAIN ;
+         TITLE "NoWait window test"
 
-        @ 20,20 BUTTON Btn_Start CAPTION "Start!" ACTION NonStop() DEFAULT
+      @ 20,20 BUTTON Btn_Start CAPTION "Start!" ACTION NonStop() DEFAULT
 
-        @ 60,20 BUTTON Btn_Close CAPTION "Close" ACTION ThisWindow.Release()
+      @ 60,20 BUTTON Btn_Close CAPTION "Close" ACTION ThisWindow.Release()
 
-    END WINDOW
+   END WINDOW
 
-    CENTER WINDOW MainWindow
-    ACTIVATE WINDOW MainWindow
+   CENTER WINDOW MainWindow
+   ACTIVATE WINDOW MainWindow
 
-RETURN
+   RETURN
 
-#define MsgInfo( c )	MsgInfo( c, , , .f. )
+   #define MsgInfo( c )   MsgInfo( c, , , .f. )
 
 PROCEDURE NonStop()
-LOCAL nSeconds := 0, nCount := 11, lLoop := .T.
 
-    DEFINE WINDOW NonStop ;
-	AT 0,0 ;
-	WIDTH 190 HEIGHT 90 ;
-	TITLE "Working..." ;
-	MODAL NOSYSMENU NOSIZE ;
-	ON RELEASE IF( lLoop, ( lLoop := .F., MsgInfo( "Aborted by user request!" ) ), )
+   LOCAL nSeconds := 0, nCount := 11, lLoop := .T.
 
-	@ 10,10 LABEL Lbl_Title VALUE "This window will be closed in" AUTOSIZE
+   DEFINE WINDOW NonStop ;
+         AT 0,0 ;
+         WIDTH 190 HEIGHT 90 ;
+         TITLE "Working..." ;
+         MODAL NOSYSMENU NOSIZE ;
+         ON RELEASE IF( lLoop, ( lLoop := .F., MsgInfo( "Aborted by user request!" ) ), )
 
-	@ 30,60 LABEL Lbl_Progress VALUE "" AUTOSIZE
+      @ 10,10 LABEL Lbl_Title VALUE "This window will be closed in" AUTOSIZE
 
-	ON KEY ESCAPE ACTION NonStop.Release()
+      @ 30,60 LABEL Lbl_Progress VALUE "" AUTOSIZE
 
-    END WINDOW
+      ON KEY ESCAPE ACTION NonStop.Release()
 
-    CENTER WINDOW NonStop
-    ACTIVATE WINDOW NonStop NOWAIT
+   END WINDOW
 
-    DO WHILE nCount > 0 .AND. lLoop
-        IF ABS( SECONDS() - nSeconds ) >= 1
-            nCount--
-            NonStop.Lbl_Progress.Value := LTRIM( STR( nCount ) ) + " second" + IF(nCount > 1, "s", "")
-            nSeconds := SECONDS()
-        ENDIF
-        DO EVENTS
-    ENDDO
+   CENTER WINDOW NonStop
+   ACTIVATE WINDOW NonStop NOWAIT
 
-    IF lLoop
-        NonStop.Hide()
-        MsgInfo( "All is Done!" )
-        lLoop := .F.
-        NonStop.Release()
-	DO MESSAGE LOOP
-    ENDIF
+   DO WHILE nCount > 0 .AND. lLoop
+      IF ABS( SECONDS() - nSeconds ) >= 1
+         nCount--
+         NonStop.Lbl_Progress.Value := LTRIM( STR( nCount ) ) + " second" + IF(nCount > 1, "s", "")
+         nSeconds := SECONDS()
+      ENDIF
+      DO EVENTS
+   ENDDO
 
-RETURN
+   IF lLoop
+      NonStop.Hide()
+      MsgInfo( "All is Done!" )
+      lLoop := .F.
+      NonStop.Release()
+      DO MESSAGE LOOP
+   ENDIF
+
+   RETURN
+

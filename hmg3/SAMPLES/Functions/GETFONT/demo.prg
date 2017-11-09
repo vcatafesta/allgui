@@ -1,77 +1,76 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
- * http://www.hmgforum.com//
+* HMG - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
+* http://www.hmgforum.com//
 */
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'HMG Demo' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'HMG Demo' ;
+         MAIN
 
-		DEFINE MAIN MENU 
-			POPUP 'Common &Dialog Functions'
-				ITEM 'GetFont()'	ACTION GetFont_Click()
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'Common &Dialog Functions'
+            ITEM 'GetFont()'   ACTION GetFont_Click()
+         END POPUP
+      END MENU
 
-	END WINDOW
+   END WINDOW
 
-	Form_1.Center()
+   Form_1.Center()
 
-	Form_1.Activate()
+   Form_1.Activate()
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Procedure GetFont_Click
-*-----------------------------------------------------------------------------*
-Local a
+PROCEDURE GetFont_Click
 
-	a := GetFont ( 'Arial' , 12 , .f. , .t. , {0,0,255} , .f. , .f. , 0 )
+   LOCAL a
 
-	if empty ( a [1] )
+   a := GetFont ( 'Arial' , 12 , .f. , .t. , {0,0,255} , .f. , .f. , 0 )
 
-		MsgInfo ('Cancelled')
+   IF empty ( a [1] )
 
-	Else
+      MsgInfo ('Cancelled')
 
-		MsgInfo( a [1] + Str( a [2] ) )
+   ELSE
 
-		if  a [3] == .t.
-			MsgInfo ("Bold")
-		else
-			MsgInfo ("Non Bold")
-		endif
+      MsgInfo( a [1] + Str( a [2] ) )
 
-		if  a [4] == .t.
-			MsgInfo ("Italic")
-		else
-			MsgInfo ("Non Italic")
-		endif
+      IF  a [3] == .t.
+         MsgInfo ("Bold")
+      ELSE
+         MsgInfo ("Non Bold")
+      ENDIF
 
-		MsgInfo ( str( a [5][1]) +str( a [5][2]) +str( a [5][3]), 'Color' )
+      IF  a [4] == .t.
+         MsgInfo ("Italic")
+      ELSE
+         MsgInfo ("Non Italic")
+      ENDIF
 
-		if  a [6] == .t.
-			MsgInfo ("Underline")
-		else
-			MsgInfo ("Non Underline")
-		endif
+      MsgInfo ( str( a [5][1]) +str( a [5][2]) +str( a [5][3]), 'Color' )
 
-		if  a [7] == .t.
-			MsgInfo ("StrikeOut")
-		else
-			MsgInfo ("Non StrikeOut")
-		endif
+      IF  a [6] == .t.
+         MsgInfo ("Underline")
+      ELSE
+         MsgInfo ("Non Underline")
+      ENDIF
 
-		MsgInfo ( str ( a [8] ) , 'Charset' )
+      IF  a [7] == .t.
+         MsgInfo ("StrikeOut")
+      ELSE
+         MsgInfo ("Non StrikeOut")
+      ENDIF
 
-	EndIf
+      MsgInfo ( str ( a [8] ) , 'Charset' )
 
-Return Nil
+   ENDIF
+
+   RETURN NIL
+

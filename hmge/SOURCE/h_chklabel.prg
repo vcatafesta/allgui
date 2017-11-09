@@ -13,48 +13,46 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       fontname, fontsize, bold, BORDER, CLIENTEDGE, HSCROLL, VSCROLL, ;
       TRANSPARENT, aRGB_bk, aRGB_font, ProcedureName, tooltip, HelpId, invisible, ;
       italic, underline, strikeout, autosize, rightalign, centeralign, ;
       blink, mouseover, mouseleave, abitmap, leftcheck, lChecked, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , mVar , k := 0, Style, blInit
    LOCAL ControlHandle , FontHandle, cBmp
    LOCAL lDialogInMemory
@@ -101,7 +99,6 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       aBitmap := Array( 2 )
       aBitmap[1] := iif( Empty( cBmp ), GetCheckBmp(), cBmp )
    ENDIF
-
 
    mVar := '_' + ParentFormName + '_' + ControlName
    k := _GetControlFree()
@@ -151,25 +148,24 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
          w := GetWindowWidth  ( Controlhandle )
          h := GetWindowHeight ( Controlhandle )
 
-
          IF ValType( caption ) != "U"
             SetWindowText ( ControlHandle , caption )
          ENDIF
 
          SetWindowStyle ( ControlHandle, Style, .T. )
 
-/*          TODO
+         /*          TODO
 
          if ( hb_parl (12) )
-            {
-            ExStyle = ExStyle | WS_EX_CLIENTEDGE;
-               }
+         {
+         ExStyle = ExStyle | WS_EX_CLIENTEDGE;
+         }
 
-            if ( hb_parl (15) )
-               {
-               ExStyle = ExStyle | WS_EX_TRANSPARENT;
-                  }
-*/
+         if ( hb_parl (15) )
+         {
+         ExStyle = ExStyle | WS_EX_TRANSPARENT;
+         }
+         */
       ENDIF
 
    ELSE
@@ -203,7 +199,7 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  "CHECKLABEL"
    _HMG_aControlNames  [k] :=  ControlName
@@ -245,11 +241,11 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
    _HMG_aControlEnabled   [k] :=  .T.
    _HMG_aControlMiscData1 [k] :=  { 0, blink, .T. }
    _HMG_aControlMiscData2 [k] :=  ''
-/*
+   /*
    IF _HMG_lOOPEnabled
-      Eval ( _HMG_bOnControlInit, k, mVar )
+   Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
-*/
+   */
    IF blink == .T. .AND. .NOT. lDialogInMemory
       _DefineTimer ( 'BlinkTimer' + hb_ntos( k ) , ParentFormName , 500 , {|| _HMG_aControlMiscData1 [k] [3] := ! _HMG_aControlMiscData1 [k] [3], ;
          iif( _HMG_aControlMiscData1 [k] [3] == .T. , _ShowControl ( ControlName , ParentFormName ), _HideControl ( ControlName , ParentFormName ) ) } )
@@ -262,15 +258,14 @@ FUNCTION _DefineChkLabel ( ControlName, ParentFormName, x, y, Caption, w, h, ;
       RedrawWindow ( ControlHandle )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION GetCheckBmp()
-*-----------------------------------------------------------------------------*
+
    LOCAL uAnsi, cBmp, nHandle, nWrite, cBmpFile
 
    LOCAL cStock := "42 4D F6 00 00 00 00 00 00 00 76 00 00 00 28 00" + ; // check bmp
-      "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
+   "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
       "00 00 80 00 00 00 C4 0E 00 00 C4 0E 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -295,6 +290,7 @@ STATIC FUNCTION GetCheckBmp()
    ENDIF
 
    IF ( nHandle := FCreate( cBmpFile ) ) < 0
+
       RETURN ''
    ENDIF
 
@@ -306,11 +302,12 @@ STATIC FUNCTION GetCheckBmp()
 
    FClose( nHandle )
 
-RETURN cBmpFile
+   RETURN cBmpFile
 
-// ============================================================================
-// FUNCTION cAnsi2Bmp() Version 9.0 Nov/30/2009
-// ============================================================================
+   // ============================================================================
+   // FUNCTION cAnsi2Bmp() Version 9.0 Nov/30/2009
+   // ============================================================================
+
 STATIC FUNCTION cAnsi2Bmp( cAnsi )
 
    LOCAL cLong, ;
@@ -326,11 +323,12 @@ STATIC FUNCTION cAnsi2Bmp( cAnsi )
       cBmp += cHex2Bin( cAnsi2Hex( PadR( cAnsi, 4, "0" ) ) )
    ENDIF
 
-RETURN cBmp
+   RETURN cBmp
 
-// ============================================================================
-// FUNCTION cAnsi2Hex() Version 9.0 Nov/30/2009
-// ============================================================================
+   // ============================================================================
+   // FUNCTION cAnsi2Hex() Version 9.0 Nov/30/2009
+   // ============================================================================
+
 STATIC FUNCTION cAnsi2Hex( cAnsi )
 
    LOCAL cDig, ;
@@ -344,11 +342,12 @@ STATIC FUNCTION cAnsi2Hex( cAnsi )
       cAnsi := Stuff( cAnsi, 1, 2, "" )
    ENDDO
 
-RETURN cHex
+   RETURN cHex
 
-// ============================================================================
-// FUNCTION cHex2Bin() Version 9.0 Nov/30/2009
-// ============================================================================
+   // ============================================================================
+   // FUNCTION cHex2Bin() Version 9.0 Nov/30/2009
+   // ============================================================================
+
 STATIC FUNCTION cHex2Bin( cHex )
 
    LOCAL nPos, nEle, ;
@@ -364,4 +363,5 @@ STATIC FUNCTION cHex2Bin( cHex )
       nExp ++
    NEXT
 
-RETURN iif( Len( cHex ) > 4, L2Bin( Int( nDec ) ), iif( Len( cHex ) > 2, I2Bin( Int( nDec ) ), Chr( Int( nDec ) ) ) )
+   RETURN iif( Len( cHex ) > 4, L2Bin( Int( nDec ) ), iif( Len( cHex ) > 2, I2Bin( Int( nDec ) ), Chr( Int( nDec ) ) ) )
+

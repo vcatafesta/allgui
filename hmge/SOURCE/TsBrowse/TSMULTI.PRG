@@ -12,20 +12,28 @@
 
 CLASS TSMulti FROM TControl
 
-   CLASSDATA lRegistered AS LOGICAL
+CLASSDATA lRegistered AS LOGICAL
    DATA  Atx, lAppend , lChanged
    DATA  nPos
-   Method New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
+
+METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
       nClrFore, nClrBack, cControl, cWnd )
 
-   METHOD Default( )
-   METHOD HandleEvent( nMsg, nWParam, nLParam )
-   METHOD GetDlgCode( nLastKey, nFlags )
-   Method KeyChar( nKey, nFlags )
-   Method KeyDown( nKey, nFlags )
-   Method LostFocus( hCtlFocus )
-   Method lValid()
-   METHOD Command( nWParam, nLParam )
+METHOD Default( )
+
+METHOD HandleEvent( nMsg, nWParam, nLParam )
+
+METHOD GetDlgCode( nLastKey, nFlags )
+
+METHOD KeyChar( nKey, nFlags )
+
+METHOD KeyDown( nKey, nFlags )
+
+METHOD LostFocus( hCtlFocus )
+
+METHOD lValid()
+
+METHOD Command( nWParam, nLParam )
 
 ENDCLASS
 
@@ -34,28 +42,28 @@ ENDCLASS
 * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
-             nClrFore, nClrBack,  cControl, cWnd ) CLASS TSMulti
+      nClrFore, nClrBack,  cControl, cWnd ) CLASS TSMulti
 
    DEFAULT nClrFore  := GetSysColor( COLOR_WINDOWTEXT ),;
-           nClrBack  := GetSysColor( COLOR_WINDOW ),;
-           nHeight   := 12
+      nClrBack  := GetSysColor( COLOR_WINDOW ),;
+      nHeight   := 12
 
    ::nTop         := nRow
    ::nLeft        := nCol
    ::nBottom      := ::nTop + nHeight - 1
    ::nRight       := ::nLeft + nWidth - 1
-   if oWnd == Nil
+   IF oWnd == Nil
       oWnd        := Self
       oWnd:hWnd   := GetFormHandle (cWnd)
-   endif
+   ENDIF
    ::oWnd         := oWnd
    IF _HMG_BeginWindowMDIActive
       cWnd := _GetWindowProperty ( GetActiveMdiHandle(), "PROP_FORMNAME" )
-   endif
+   ENDIF
 
    ::nId          := ::GetNewId()
    ::nStyle       := nOR( ES_MULTILINE, ES_WANTRETURN , WS_CHILD, WS_BORDER,;
-                         WS_THICKFRAME ,WS_VSCROLL , WS_HSCROLL)
+      WS_THICKFRAME ,WS_VSCROLL , WS_HSCROLL)
 
    ::cControlName := cControl
    ::cParentWnd   := cWnd
@@ -76,173 +84,176 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
    ::nRight   = ::nLeft + nWidth - 1
    ::Atx      = 0
 
-   if ! Empty( ::oWnd:hWnd )
+   IF ! Empty( ::oWnd:hWnd )
 
       ::Create( "EDIT" )
       ::AddVars( ::hWnd )
       ::Default()
 
-      if hFont != nil
+      IF hFont != nil
          ::hFont := hFont
-      endif
+      ENDIF
       oWnd:AddControl( ::hWnd )
-   endif
+   ENDIF
 
-Return Self
+   RETURN Self
 
-* ============================================================================
-* METHOD TSMulti:Default() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:Default() Version 7.0 Jul/15/2004
+   * ============================================================================
+
 METHOD Default() CLASS TSMulti
 
    LOCAL Value := Eval( ::bSetGet )
 
-   If !Empty (Value)
+   IF !Empty (Value)
       SetWindowText ( ::hWnd , Value )
-   endif
+   ENDIF
 
-Return NIL
+   RETURN NIL
 
-* ============================================================================
-* METHOD TSMulti:HandleEvent() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:HandleEvent() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TSMulti
 
-Return ::Super:HandleEvent( nMsg, nWParam, nLParam )
+   RETURN ::Super:HandleEvent( nMsg, nWParam, nLParam )
 
-* ============================================================================
-* METHOD TSMulti:GetDlgCode() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:GetDlgCode() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD GetDlgCode( nLastKey, nFlags ) CLASS TSMulti
 
    HB_SYMBOL_UNUSED( nFlags )
    ::nLastKey := nLastKey
 
-RETURN DLGC_WANTALLKEYS + DLGC_WANTCHARS
+   RETURN DLGC_WANTALLKEYS + DLGC_WANTCHARS
 
-* ============================================================================
-* METHOD TSMulti:KeyChar() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:KeyChar() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD KeyChar( nKey, nFlags ) CLASS TSMulti
 
    HB_SYMBOL_UNUSED( nFlags )
 
-   If _GetKeyState( VK_CONTROL )
+   IF _GetKeyState( VK_CONTROL )
       nKey := If( Upper( Chr( nKey ) ) == "W" .or. nKey == VK_RETURN, VK_TAB, nKey )
-   EndIf
+   ENDIF
 
-   If nKey == VK_TAB .or. nKey == VK_ESCAPE
-      Return 0
-   Endif
+   IF nKey == VK_TAB .or. nKey == VK_ESCAPE
 
-RETURN ::Super:KeyChar( nKey, nFlags )
+      RETURN 0
+   ENDIF
 
-* ============================================================================
-* METHOD TSMulti:KeyDown() Version 7.0 Jul/15/2004
-* ============================================================================
+   RETURN ::Super:KeyChar( nKey, nFlags )
+
+   * ============================================================================
+   * METHOD TSMulti:KeyDown() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD KeyDown( nKey, nFlags ) CLASS TSMulti
 
-   If _GetKeyState( VK_CONTROL )
+   IF _GetKeyState( VK_CONTROL )
       nKey := If( Upper( Chr( nKey ) ) == "W" .or. nKey == VK_RETURN, VK_TAB, nKey )
-   EndIf
+   ENDIF
 
    ::nLastKey := nKey
 
-   If nKey == VK_TAB .or. nKey == VK_ESCAPE
+   IF nKey == VK_TAB .or. nKey == VK_ESCAPE
 
-      If ::lValid()
+      IF ::lValid()
 
-         If nKey != VK_ESCAPE
-            If ::bSetGet != Nil
+         IF nKey != VK_ESCAPE
+            IF ::bSetGet != Nil
                Eval( ::bSetGet, GetWindowText( ::hWnd ) )
-            EndIf
-         EndIf
+            ENDIF
+         ENDIF
 
          ::bLostFocus := Nil
          Eval( ::bKeyDown, nKey, nFlags, .T. )
 
-      EndIf
+      ENDIF
 
-   Endif
+   ENDIF
 
-RETURN 0
+   RETURN 0
 
-* ============================================================================
-* METHOD TSMulti:lValid() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:lValid() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD lValid() CLASS TSMulti
 
-   Local lRet := .T.
+   LOCAL lRet := .T.
 
-   If ValType( ::bValid ) == "B"
+   IF ValType( ::bValid ) == "B"
       lRet := Eval( ::bValid, ::GetText() )
-   EndIf
+   ENDIF
 
-Return lRet
+   RETURN lRet
 
-* ============================================================================
-* METHOD TSMulti:LostFocus() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:LostFocus() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD LostFocus( hCtlFocus ) CLASS TSMulti
 
    ::lFocused := .F.
 
    ::nPos := LoWord( ::SendMsg( EM_GETSEL ) )
-   If ::bLostFocus != Nil
+   IF ::bLostFocus != Nil
       Eval( ::bLostFocus, ::nLastKey, hCtlFocus )
-   EndIf
+   ENDIF
 
-Return 0
+   RETURN 0
 
-* ============================================================================
-* METHOD TSMulti:Command() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:Command() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD Command( nWParam, nLParam ) CLASS TSMulti
 
-   local nNotifyCode, hWndCtl
+   LOCAL nNotifyCode, hWndCtl
 
    nNotifyCode := HiWord( nWParam )
-//   nID         := LoWord( nWParam )
+   //   nID         := LoWord( nWParam )
    hWndCtl     := nLParam
 
-   do case
-   case hWndCtl == 0
+   DO CASE
+   CASE hWndCtl == 0
 
       * Enter ..........................................
-      if HiWord(nWParam) == 0 .And. LoWord(nWParam) == 1
+      IF HiWord(nWParam) == 0 .And. LoWord(nWParam) == 1
          ::KeyDown( VK_RETURN, 0 )
-      EndIf
+      ENDIF
 
       * Escape .........................................
-      if HiWord(nwParam) == 0 .And. LoWord(nwParam) == 2
+      IF HiWord(nwParam) == 0 .And. LoWord(nwParam) == 2
          ::KeyDown( VK_ESCAPE, 0 )
-      endif
+      ENDIF
 
-   case hWndCtl != 0
+   CASE hWndCtl != 0
 
-      do case
-         case nNotifyCode == EN_CHANGE
-           ::lChanged := .T.
-         case nNotifyCode == EN_KILLFOCUS
-           ::LostFocus()
-         case nNotifyCode == EN_UPDATE
-           If _GetKeyState( VK_ESCAPE )
-              ::KeyDown( VK_ESCAPE, 0 )
-           Endif
-           If _GetKeyState( VK_CONTROL )
-              IF GetKeyState(VK_RETURN) == -127 .or._GetKeyState( VK_RETURN )
-                 ::KeyDown( VK_RETURN, 0 )
-              Endif
-           endif
-      endcase
+      DO CASE
+      CASE nNotifyCode == EN_CHANGE
+         ::lChanged := .T.
+      CASE nNotifyCode == EN_KILLFOCUS
+         ::LostFocus()
+      CASE nNotifyCode == EN_UPDATE
+         IF _GetKeyState( VK_ESCAPE )
+            ::KeyDown( VK_ESCAPE, 0 )
+         ENDIF
+         IF _GetKeyState( VK_CONTROL )
+            IF GetKeyState(VK_RETURN) == -127 .or._GetKeyState( VK_RETURN )
+               ::KeyDown( VK_RETURN, 0 )
+            ENDIF
+         ENDIF
+      ENDCASE
 
-   endcase
+   ENDCASE
 
-Return nil
+   RETURN NIL
+

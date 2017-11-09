@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -59,7 +59,7 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define KEY_WOW64_64KEY 0x0100   // Access a 64-bit key from either a 32-bit or 64-bit application
 
 /*
- * TReg32 Class
+* TReg32 Class
 */
 
 CREATE CLASS TReg32
@@ -70,16 +70,21 @@ CREATE CLASS TReg32
    VAR nError
    VAR lError
 
-   METHOD New( nKey, cRegKey, lShowError )
-   METHOD Create( nKey, cRegKey, lShowError )
-   METHOD Get( cRegVar, uVar )
-   METHOD Set( cRegVar, uVar )
-   METHOD Delete( cRegVar )
-   METHOD KeyDelete( cSubKey )
-   METHOD Close() BLOCK {|Self| iif( ::lError, , RegCloseKey( ::nHandle ) ) }
+METHOD New( nKey, cRegKey, lShowError )
+
+METHOD Create( nKey, cRegKey, lShowError )
+
+METHOD Get( cRegVar, uVar )
+
+METHOD Set( cRegVar, uVar )
+
+METHOD Delete( cRegVar )
+
+METHOD KeyDelete( cSubKey )
+
+METHOD Close() BLOCK {|Self| iif( ::lError, , RegCloseKey( ::nHandle ) ) }
 
 ENDCLASS
-
 
 METHOD New( nKey, cRegKey, lShowError ) CLASS TReg32
 
@@ -103,8 +108,7 @@ METHOD New( nKey, cRegKey, lShowError ) CLASS TReg32
       ::nHandle := nHandle
    ENDIF
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Create( nKey, cRegKey, lShowError ) CLASS TReg32
 
@@ -126,8 +130,7 @@ METHOD Create( nKey, cRegKey, lShowError ) CLASS TReg32
       ::nHandle := nHandle
    ENDIF
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Get( cRegVar, uVar ) CLASS TReg32
 
@@ -157,8 +160,7 @@ METHOD Get( cRegVar, uVar ) CLASS TReg32
       ENDIF
    ENDIF
 
-RETURN uVar
-
+   RETURN uVar
 
 METHOD Set( cRegVar, uVar ) CLASS TReg32
 
@@ -184,8 +186,7 @@ METHOD Set( cRegVar, uVar ) CLASS TReg32
       ::nError := RegSetValueExA( ::nHandle, cRegVar, 0, nType, @uVar )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD Delete( cRegVar ) CLASS TReg32
 
@@ -193,8 +194,7 @@ METHOD Delete( cRegVar ) CLASS TReg32
       ::nError := RegDeleteValueA( ::nHandle, cRegVar )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD KeyDelete( cSubKey ) CLASS TReg32
 
@@ -202,18 +202,17 @@ METHOD KeyDelete( cSubKey ) CLASS TReg32
       ::nError := RegDeleteKey( ::nHandle, cSubkey )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION Bin2U( c )
 
    LOCAL l := Bin2L( c )
 
-RETURN iif( l < 0, l + 4294967296, l )
+   RETURN iif( l < 0, l + 4294967296, l )
 
-/*
- * Registry Access Functions
-*/
+   /*
+   * Registry Access Functions
+   */
 
 FUNCTION IsRegistryKey( nKey, cRegKey )
 
@@ -225,8 +224,7 @@ FUNCTION IsRegistryKey( nKey, cRegKey )
 
    oReg:Close()
 
-RETURN lExist
-
+   RETURN lExist
 
 FUNCTION CreateRegistryKey( nKey, cRegKey )
 
@@ -238,8 +236,7 @@ FUNCTION CreateRegistryKey( nKey, cRegKey )
 
    oReg:Close()
 
-RETURN lSuccess
-
+   RETURN lSuccess
 
 FUNCTION GetRegistryValue( nKey, cRegKey, cRegVar, cType )
 
@@ -272,8 +269,7 @@ FUNCTION GetRegistryValue( nKey, cRegKey, cRegVar, cType )
 
    oReg:Close()
 
-RETURN uVal
-
+   RETURN uVal
 
 FUNCTION SetRegistryValue( nKey, cRegKey, cRegVar, uVal )
 
@@ -291,8 +287,7 @@ FUNCTION SetRegistryValue( nKey, cRegKey, cRegVar, uVal )
 
    oReg:Close()
 
-RETURN lSuccess
-
+   RETURN lSuccess
 
 FUNCTION DeleteRegistryVar( nKey, cRegKey, cRegVar )
 
@@ -310,8 +305,7 @@ FUNCTION DeleteRegistryVar( nKey, cRegKey, cRegVar )
 
    oReg:Close()
 
-RETURN lSuccess
-
+   RETURN lSuccess
 
 FUNCTION DeleteRegistryKey( nKey, cRegKey, cSubKey )
 
@@ -327,11 +321,11 @@ FUNCTION DeleteRegistryKey( nKey, cRegKey, cSubKey )
 
    oReg:Close()
 
-RETURN lSuccess
+   RETURN lSuccess
 
-/*
- * C-level
-*/
+   /*
+   * C-level
+   */
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -355,3 +349,4 @@ HB_FUNC( ISWOW64 )
 }
 
 #pragma ENDDUMP
+

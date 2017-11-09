@@ -1,391 +1,404 @@
 /*
- * $Id: MpmCommon.prg,v 1.2 2014/07/11 19:38:40 migsoft Exp $
- */
+* $Id: MpmCommon.prg,v 1.2 2014/07/11 19:38:40 migsoft Exp $
+*/
 
 #include "oohg.ch"
 
-   DECLARE WINDOW main
+DECLARE WINDOW main
 
-Procedure CPUArch()
-    If !IsOS64()
-       main.check_64.value := .F.
-    Endif
-Return
+PROCEDURE CPUArch()
 
-Function IsOS64()
-    Local Win64 := GetENV("ProgramFiles(x86)")
-Return( iif( Empty(Win64), .F. , .T. ) )
+   IF !IsOS64()
+      main.check_64.value := .F.
+   ENDIF
 
-Function VerifyTop( cFile )
-    Local aDirectry := {}
-    Local aPickList := {}
-    Local lVer := .F.
+   RETURN
 
-    aDirectry := Directory( "*.rc" )
+FUNCTION IsOS64()
 
-    If Len( aDirectry ) > 0
-       For x := 1 to Len( aDirectry )
-           aadd( aPickList, aDirectry[ x, 1 ] )
-       Next
+   LOCAL Win64 := GetENV("ProgramFiles(x86)")
 
-       ASort( aPickList )
+   RETURN( iif( Empty(Win64), .F. , .T. ) )
 
-       cFileName := trim( aPickList[ 1 ] )
+FUNCTION VerifyTop( cFile )
 
-       If File( cFileName )
-          If Upper( DelExt(GetName(cFile))+".rc" ) = Upper( cFileName )
-             lVer := .T.
-          Endif
-       Endif
-    Else
-       lVer := .T.
-    Endif
+   LOCAL aDirectry := {}
+   LOCAL aPickList := {}
+   LOCAL lVer := .F.
 
-Return( lVer)
+   aDirectry := Directory( "*.rc" )
 
-Function IsEqualPath(cPath)
-    Local lEqu := .F.
-    If AT( Upper(main.Text_1.value), Upper( AllTrim( cPath ) ) )  <> 0
-       lEqu := .T.
-    Endif
-Return( lEqu )
+   IF Len( aDirectry ) > 0
+      FOR x := 1 to Len( aDirectry )
+         aadd( aPickList, aDirectry[ x, 1 ] )
+      NEXT
 
-Function FilPathInList( cExt )
-    Local aDirectry := {}
-    Local aPickList := {}
-    Local aFiles    := {}
-    Local aFmgFiles := {}
-    Local cFmg      := ""
+      ASort( aPickList )
 
-    If main.List_1.ItemCount > 0
+      cFileName := trim( aPickList[ 1 ] )
 
-       For i := 1 To main.List_1.ItemCount
-          DO EVENTS
-          Aadd ( aFiles , Alltrim(main.List_1.Item(i)) )
-       Next i
+      IF File( cFileName )
+         IF Upper( DelExt(GetName(cFile))+".rc" ) = Upper( cFileName )
+            lVer := .T.
+         ENDIF
+      ENDIF
+   ELSE
+      lVer := .T.
+   ENDIF
 
-       For i := 1 To Len ( aFiles )
-          DO EVENTS
-          If upper(Right( aFiles [i] , 3 )) = Upper( cExt )
-             cFmg := aFiles [i]
-          Endif
-       Next i
+   RETURN( lVer)
 
-    Endif
+FUNCTION IsEqualPath(cPath)
 
-    If Len( cFmg ) > 0
-       cFmg := SubStr(GetPath(cFmg),1,( Len(GetPath(cFmg))-Len(GetName(cFmg)) -1 ))
-    Endif
+   LOCAL lEqu := .F.
 
-Return( cFmg )
+   IF AT( Upper(main.Text_1.value), Upper( AllTrim( cPath ) ) )  <> 0
+      lEqu := .T.
+   ENDIF
 
-Function FilPath( cFile )
-    Local cFmg := "", cPath:= ''
+   RETURN( lEqu )
 
-    If Len( cFile ) > 0
-       cPath := SubStr(GetPath(cFile),1,( Len(GetPath(cFile))-Len(GetName(cFile)) -1 ))
-    Endif
+FUNCTION FilPathInList( cExt )
 
-Return( cPath )
+   LOCAL aDirectry := {}
+   LOCAL aPickList := {}
+   LOCAL aFiles    := {}
+   LOCAL aFmgFiles := {}
+   LOCAL cFmg      := ""
 
-*---------------------------------------------------------------------*
+   IF main.List_1.ItemCount > 0
+
+      FOR i := 1 To main.List_1.ItemCount
+         DO EVENTS
+         Aadd ( aFiles , Alltrim(main.List_1.Item(i)) )
+      NEXT i
+
+      FOR i := 1 To Len ( aFiles )
+         DO EVENTS
+         IF upper(Right( aFiles [i] , 3 )) = Upper( cExt )
+            cFmg := aFiles [i]
+         ENDIF
+      NEXT i
+
+   ENDIF
+
+   IF Len( cFmg ) > 0
+      cFmg := SubStr(GetPath(cFmg),1,( Len(GetPath(cFmg))-Len(GetName(cFmg)) -1 ))
+   ENDIF
+
+   RETURN( cFmg )
+
+FUNCTION FilPath( cFile )
+
+   LOCAL cFmg := "", cPath:= ''
+
+   IF Len( cFile ) > 0
+      cPath := SubStr(GetPath(cFile),1,( Len(GetPath(cFile))-Len(GetName(cFile)) -1 ))
+   ENDIF
+
+   RETURN( cPath )
+
 FUNCTION AddSlash(cInFolder)
-*---------------------------------------------------------------------*
-  LOCAL cOutFolder := ALLTRIM(cInFolder)
 
-  IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) != '\'
-     cOutFolder += '\'
-  ENDIF
+   LOCAL cOutFolder := ALLTRIM(cInFolder)
 
-RETURN( cOutFolder )
-*---------------------------------------------------------------------*
+   IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) != '\'
+      cOutFolder += '\'
+   ENDIF
+
+   RETURN( cOutFolder )
+
 FUNCTION DelSlash(cInFolder)
-*---------------------------------------------------------------------*
-  LOCAL cOutFolder := ALLTRIM(cInFolder)
 
-  IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) == '\'
-     cOutFolder := LEFT(cOutFolder, LEN(cOutFolder) - 1)
-  ENDIF
+   LOCAL cOutFolder := ALLTRIM(cInFolder)
 
-RETURN( cOutFolder )
-*---------------------------------------------------------------------*
+   IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) == '\'
+      cOutFolder := LEFT(cOutFolder, LEN(cOutFolder) - 1)
+   ENDIF
+
+   RETURN( cOutFolder )
+
 FUNCTION AddQuote(cInPath)
-*---------------------------------------------------------------------*
-  LOCAL cOutPath := ALLTRIM(cInPath)
-  LOCAL cQuote   := '"'
-  LOCAL cSpace   := SPACE(1)
 
-  IF cSpace $ cOutPath .AND. ;
-    !(LEFT(cOutPath, 1) == cQuote) .AND. !(RIGHT(cOutPath, 1) == cQuote)
-    cOutPath := cQuote + cOutPath + cQuote
-  ENDIF
-RETURN( cOutPath )
-*---------------------------------------------------------------------*
+   LOCAL cOutPath := ALLTRIM(cInPath)
+   LOCAL cQuote   := '"'
+   LOCAL cSpace   := SPACE(1)
+
+   IF cSpace $ cOutPath .AND. ;
+         !(LEFT(cOutPath, 1) == cQuote) .AND. !(RIGHT(cOutPath, 1) == cQuote)
+      cOutPath := cQuote + cOutPath + cQuote
+   ENDIF
+
+   RETURN( cOutPath )
+
 FUNCTION GetPath(cFileName)
-*---------------------------------------------------------------------*
-  LOCAL cTrim  := ALLTRIM(cFileName)
-  LOCAL nColon := AT(':', cTrim)
-  LOCAL cDrive
-  LOCAL cPath
 
-  IF EMPTY(nColon)
-    cDrive := Upper(DISKNAME())
-    IF LEFT(cTrim, 1) == '\'
-      cPath := cDrive + ':' + cTrim
-    ELSE
-      cPath := cDrive + ':\' + CURDIR(cDrive) + '\' + cTrim
-    ENDIF
-  ELSE
-    IF SUBSTR(cTrim, nColon + 1, 1) == '\'
-      cPath := cTrim
-    ELSE
-      cDrive := LEFT(cTrim, nColon - 1)
-      cPath  := cDrive + ':\' + CURDIR(cDrive) + '\' + ;
-        SUBSTR(cTrim, nColon + 1)
-    ENDIF
-  ENDIF
-RETURN( cPath )
-*---------------------------------------------------------------------*
+   LOCAL cTrim  := ALLTRIM(cFileName)
+   LOCAL nColon := AT(':', cTrim)
+   LOCAL cDrive
+   LOCAL cPath
+
+   IF EMPTY(nColon)
+      cDrive := Upper(DISKNAME())
+      IF LEFT(cTrim, 1) == '\'
+         cPath := cDrive + ':' + cTrim
+      ELSE
+         cPath := cDrive + ':\' + CURDIR(cDrive) + '\' + cTrim
+      ENDIF
+   ELSE
+      IF SUBSTR(cTrim, nColon + 1, 1) == '\'
+         cPath := cTrim
+      ELSE
+         cDrive := LEFT(cTrim, nColon - 1)
+         cPath  := cDrive + ':\' + CURDIR(cDrive) + '\' + ;
+            SUBSTR(cTrim, nColon + 1)
+      ENDIF
+   ENDIF
+
+   RETURN( cPath )
+
 FUNCTION GetSub(cFileName, lGetDefault)
-*---------------------------------------------------------------------*
-  LOCAL cTrim  := ;
-    IF(EMPTY(lGetDefault), ALLTRIM(cFileName), GetPath(cFileName))
-  LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
-  LOCAL cSub   := LEFT(cTrim, nSlash - 1)
 
-RETURN cSub
-*---------------------------------------------------------------------*
+   LOCAL cTrim  := ;
+      IF(EMPTY(lGetDefault), ALLTRIM(cFileName), GetPath(cFileName))
+   LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
+   LOCAL cSub   := LEFT(cTrim, nSlash - 1)
+
+   RETURN cSub
+
 FUNCTION GetName(cFileName)
-*---------------------------------------------------------------------*
-  LOCAL cTrim  := ALLTRIM(cFileName)
-  LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
-  LOCAL cName  := IF(EMPTY(nSlash), cTrim, SUBSTR(cTrim, nSlash + 1))
-RETURN( cName )
-*---------------------------------------------------------------------*
+
+   LOCAL cTrim  := ALLTRIM(cFileName)
+   LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
+   LOCAL cName  := IF(EMPTY(nSlash), cTrim, SUBSTR(cTrim, nSlash + 1))
+
+   RETURN( cName )
+
 FUNCTION GetExt(cFileName)
-*---------------------------------------------------------------------*
-  LOCAL cTrim  := ALLTRIM(cFileName)
-  LOCAL nDot   := RAT('.', cTrim)
-  LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
-  LOCAL cExt   := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
-    '', SUBSTR(cTrim, nDot))
-RETURN( cExt )
-*---------------------------------------------------------------------*
+
+   LOCAL cTrim  := ALLTRIM(cFileName)
+   LOCAL nDot   := RAT('.', cTrim)
+   LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
+   LOCAL cExt   := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
+      '', SUBSTR(cTrim, nDot))
+
+   RETURN( cExt )
+
 FUNCTION DelExt(cFileName)
-*---------------------------------------------------------------------*
-  LOCAL cTrim  := ALLTRIM(cFileName)
-  LOCAL nDot   := RAT('.', cTrim)
-  LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
-  LOCAL cBase  := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
-                  cTrim, LEFT(cTrim, nDot - 1))
-RETURN( cBase )
-*---------------------------------------------------------------------*
-Function cFilePath( cPathMask )
-*---------------------------------------------------------------------*
-   local n := RAt( "\", cPathMask ), cDisk
 
-Return If( n > 0, Upper( Left( cPathMask, n ) ),;
-       ( cDisk := cFileDisc( cPathMask ) ) + If( ! Empty( cDisk ), "\", "" ) )
-*---------------------------------------------------------------------*
-Function cFileDisc( cPathMask )
-*---------------------------------------------------------------------*
-Return If( At( ":", cPathMask ) == 2, Upper( Left( cPathMask, 2 ) ), "" )
+   LOCAL cTrim  := ALLTRIM(cFileName)
+   LOCAL nDot   := RAT('.', cTrim)
+   LOCAL nSlash := MAX(RAT('\', cTrim), AT(':', cTrim))
+   LOCAL cBase  := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
+      cTrim, LEFT(cTrim, nDot - 1))
 
-*---------------------------------------------------------------------*
+   RETURN( cBase )
+
+FUNCTION cFilePath( cPathMask )
+
+   LOCAL n := RAt( "\", cPathMask ), cDisk
+
+   RETURN If( n > 0, Upper( Left( cPathMask, n ) ),;
+      ( cDisk := cFileDisc( cPathMask ) ) + If( ! Empty( cDisk ), "\", "" ) )
+
+FUNCTION cFileDisc( cPathMask )
+
+   RETURN If( At( ":", cPathMask ) == 2, Upper( Left( cPathMask, 2 ) ), "" )
+
 FUNCTION FDateTime(dDate, cTime)
-*---------------------------------------------------------------------*
-  LOCAL nDateTime := (dDate - CTOD('')) + SECS(cTime)/86400
-RETURN nDateTime
-*---------------------------------------------------------------------*
-Procedure BorraOBJ(cPROJFOLDER1,cOBJFOLDER1)
-*---------------------------------------------------------------------*
-   If hb_DirExists ( cPROJFOLDER1 + cOBJFOLDER1 )
-      ZapDirectory ( cPROJFOLDER1 + '\' + MyOBJName() + Chr(0) )
-   Endif
-Return
 
-Function DispMem()
+   LOCAL nDateTime := (dDate - CTOD('')) + SECS(cTime)/86400
 
-    Save to MigMem All
-    ReadMem("MigMem.mem")
-    cArquivo := "MigMemory.txt"
-    Editor   := "Notepad"
+   RETURN nDateTime
 
-    EXECUTE FILE Editor PARAMETERS cArquivo
+PROCEDURE BorraOBJ(cPROJFOLDER1,cOBJFOLDER1)
 
-Return Nil
+   IF hb_DirExists ( cPROJFOLDER1 + cOBJFOLDER1 )
+      ZAPDirectory ( cPROJFOLDER1 + '\' + MyOBJName() + Chr(0) )
+   ENDIF
 
-Procedure READMEM( cFileName )
-    local x
-    local aMemVars  := {}
-    local nLine     := 0
+   RETURN
 
-    SET PRINTER TO MigMemory.txt
-    SET DEVICE TO PRINTER
+FUNCTION DispMem()
 
-    @  1, 1 say PADC( "Display Memory", 79 )
+   SAVE to MigMem All
+   READMem("MigMem.mem")
+   cArquivo := "MigMemory.txt"
+   Editor   := "Notepad"
 
-    Do while .T.
+   EXECUTE FILE Editor PARAMETERS cArquivo
 
-       aMemVars := GETVARFROM( cFileName )
+   RETURN NIL
 
-       @  3,  5 say "Name"
-       @  3, 18 say "Type"
-       @  3, 23 say "Value"
-       @  3, 60 say "File: MigMemory.txt"
+PROCEDURE READMEM( cFileName )
 
-       nLine := 4
+   LOCAL x
+   LOCAL aMemVars  := {}
+   LOCAL nLine     := 0
 
-       For x := 1 to len( aMemVars )
-           ++ nLine
-           @ nLine,  5 say aMemVars[ x, 1 ]
-           @ nLine, 18 say aMemVars[ x, 2 ]
-           @ nLine, 23 say aMemVars[ x, 3 ]
-       Next
+   SET PRINTER TO MigMemory.txt
+   SET DEVICE TO PRINTER
 
-       Exit
+   @  1, 1 say PADC( "Display Memory", 79 )
 
-   Enddo
+   DO WHILE .T.
+
+      aMemVars := GETVARFROM( cFileName )
+
+      @  3,  5 say "Name"
+      @  3, 18 say "Type"
+      @  3, 23 say "Value"
+      @  3, 60 say "File: MigMemory.txt"
+
+      nLine := 4
+
+      FOR x := 1 to len( aMemVars )
+         ++ nLine
+         @ nLine,  5 say aMemVars[ x, 1 ]
+         @ nLine, 18 say aMemVars[ x, 2 ]
+         @ nLine, 23 say aMemVars[ x, 3 ]
+      NEXT
+
+      EXIT
+
+   ENDDO
 
    SET PRINTER TO
    SET DEVICE TO SCREEN
 
-Return
+   RETURN
 
+FUNCTION GETVARFROM( cMemFile )
 
-Function GETVARFROM( cMemFile )
+   LOCAL xVarValue    := NIL
+   LOCAL nHandle
+   LOCAL nFilePoint
+   LOCAL cMemBuff
+   LOCAL cVarName
+   LOCAL cID
+   LOCAL nSize
+   LOCAL nLen
+   LOCAL cBuffer
+   LOCAL cData
+   LOCAL nHi
+   LOCAL nLo
+   LOCAL lFlag
+   LOCAL nB1
+   LOCAL nB2
+   LOCAL nB3
+   LOCAL nB4
+   LOCAL nTotal
+   LOCAL nOutput
+   LOCAL nValue
+   LOCAL aMemVar
+   LOCAL aMemVarArray := {}
 
-local xVarValue    := NIL
-local nHandle
-local nFilePoint
-local cMemBuff
-local cVarName
-local cID
-local nSize
-local nLen
-local cBuffer
-local cData
-local nHi
-local nLo
-local lFlag
-local nB1
-local nB2
-local nB3
-local nB4
-local nTotal
-local nOutput
-local nValue
-local aMemVar
-local aMemVarArray := {}
+   IF valtype( cMemFile ) = "C" .and. file( cMemFile )
 
-if valtype( cMemFile ) = "C" .and. file( cMemFile )
+      nHandle    := fopen( cMemFile )
+      nFilePoint := fseek( nHandle, 0, 2 )
+      fseek( nHandle, 0 )
 
-   nHandle    := fopen( cMemFile )
-   nFilePoint := fseek( nHandle, 0, 2 )
-   fseek( nHandle, 0 )
+      IF nFilePoint > 1
 
-   if nFilePoint > 1
+         xVarValue := ""
 
-      xVarValue := ""
+         DO WHILE fseek( nHandle, 0, 1 ) + 1 < nFilePoint .and. !FEOF( nHandle )
 
-      do while fseek( nHandle, 0, 1 ) + 1 < nFilePoint .and. !FEOF( nHandle )
+            cMemBuff := space( 18 )
+            fread( nHandle, @cMemBuff, 18 )
+            cVarName := left( cMemBuff, at( chr( 0 ), cMemBuff ) - 1 )
+            cID      := substr( cMemBuff, 12, 1 )
+            nSize    := bin2w( right( cMemBuff, 2 ) )
+            nLen     := if( cID $ "ÃÌ", 14 + nSize, 22 )
+            cBuffer  := space( nLen )
+            fread( nHandle, @cBuffer, nLen )
+            cData := substr( cBuffer, 15 )
 
-         cMemBuff := space( 18 )
-         fread( nHandle, @cMemBuff, 18 )
-         cVarName := left( cMemBuff, at( chr( 0 ), cMemBuff ) - 1 )
-         cID      := substr( cMemBuff, 12, 1 )
-         nSize    := bin2w( right( cMemBuff, 2 ) )
-         nLen     := if( cID $ "ÃÌ", 14 + nSize, 22 )
-         cBuffer  := space( nLen )
-         fread( nHandle, @cBuffer, nLen )
-         cData := substr( cBuffer, 15 )
+            IF cID == chr( 195 )            // character
 
-         if cID == chr( 195 )            // character
+               aMemVar   := { cVarName, "C", cData }
+               xVarValue := cData
 
-            aMemVar   := { cVarName, "C", cData }
-            xVarValue := cData
+            ELSEIF cID == chr( 204 )        // logic
 
-         elseif cID == chr( 204 )        // logic
+               aMemVar   := { cVarName, "L", asc( cData ) == 1 }
+               xVarValue := asc( cData ) == 1
 
-            aMemVar   := { cVarName, "L", asc( cData ) == 1 }
-            xVarValue := asc( cData ) == 1
+            ELSEIF cID == chr( 206 )        // Numeric
 
-         elseif cID == chr( 206 )        // Numeric
+               cBuffer   := substr( cBuffer, 15 )
+               nHi       := MODULUS( asc( substr( cBuffer, 8, 1 ) ), 128 ) * 16
+               nLo       := int( asc( substr( cBuffer, 7, 1 ) ) / 16 )
+               nValue    := nHi + nLo - 1023
+               lFlag     := int( asc( substr( cBuffer, 8, 1 ) ) / 16 ) >= 8
+               nB1       := MODULUS( asc( substr( cBuffer, 7, 1 ) ), 16 ) / 16
+               nB2       := bin2w( substr( cBuffer, 5, 2 ) ) / ( 65536 * 16 )
+               nB3       := bin2w( substr( cBuffer, 3, 2 ) ) / ( 65536 * 65536 * 16 )
+               nB4       := bin2w( substr( cBuffer, 1, 2 ) ) / ( 65536 * 65536 * 65536 * 16 )
+               nTotal    := nB1 + nB2 + nB3 + nB4
+               nOutput   := if( lFlag, - ( 1 + nTotal ) * 2 ^ nValue, ( 1 + nTotal ) * 2 ^ nValue )
+               xVarValue := val( transform( nOutput, "@B" ) )
 
-            cBuffer   := substr( cBuffer, 15 )
-            nHi       := MODULUS( asc( substr( cBuffer, 8, 1 ) ), 128 ) * 16
-            nLo       := int( asc( substr( cBuffer, 7, 1 ) ) / 16 )
-            nValue    := nHi + nLo - 1023
-            lFlag     := int( asc( substr( cBuffer, 8, 1 ) ) / 16 ) >= 8
-            nB1       := MODULUS( asc( substr( cBuffer, 7, 1 ) ), 16 ) / 16
-            nB2       := bin2w( substr( cBuffer, 5, 2 ) ) / ( 65536 * 16 )
-            nB3       := bin2w( substr( cBuffer, 3, 2 ) ) / ( 65536 * 65536 * 16 )
-            nB4       := bin2w( substr( cBuffer, 1, 2 ) ) / ( 65536 * 65536 * 65536 * 16 )
-            nTotal    := nB1 + nB2 + nB3 + nB4
-            nOutput   := if( lFlag, - ( 1 + nTotal ) * 2 ^ nValue, ( 1 + nTotal ) * 2 ^ nValue )
-            xVarValue := val( transform( nOutput, "@B" ) )
+               aMemVar := { cVarName, "N", xVarValue }
 
-            aMemVar := { cVarName, "N", xVarValue }
+            ELSEIF cID == chr( 196 )        // Date
 
-         elseif cID == chr( 196 )        // Date
+               cBuffer   := substr( cBuffer, 15 )
+               nHi       := MODULUS( asc( substr( cBuffer, 8, 1 ) ), 128 ) * 16
+               nLo       := int( asc( substr( cBuffer, 7, 1 ) ) / 16 )
+               nValue    := nHi + nLo - 1023
+               lFlag     := int( asc( substr( cBuffer, 8, 1 ) ) / 16 ) >= 8
+               nB1       := MODULUS( asc( substr( cBuffer, 7, 1 ) ), 16 ) / 16
+               nB2       := bin2w( substr( cBuffer, 5, 2 ) ) / ( 65536 * 16 )
+               nB3       := bin2w( substr( cBuffer, 3, 2 ) ) / ( 65536 * 65536 * 16 )
+               nB4       := bin2w( substr( cBuffer, 1, 2 ) ) / ( 65536 * 65536 * 65536 * 16 )
+               nTotal    := nB1 + nB2 + nB3 + nB4
+               nOutput   := if( lFlag, - ( 1 + nTotal ) * 2 ^ nValue, ( 1 + nTotal ) * 2 ^ nValue )
+               xVarValue := dtoc( ctod( "01/01/0100" ) + nOutput - 1757585 )
 
-            cBuffer   := substr( cBuffer, 15 )
-            nHi       := MODULUS( asc( substr( cBuffer, 8, 1 ) ), 128 ) * 16
-            nLo       := int( asc( substr( cBuffer, 7, 1 ) ) / 16 )
-            nValue    := nHi + nLo - 1023
-            lFlag     := int( asc( substr( cBuffer, 8, 1 ) ) / 16 ) >= 8
-            nB1       := MODULUS( asc( substr( cBuffer, 7, 1 ) ), 16 ) / 16
-            nB2       := bin2w( substr( cBuffer, 5, 2 ) ) / ( 65536 * 16 )
-            nB3       := bin2w( substr( cBuffer, 3, 2 ) ) / ( 65536 * 65536 * 16 )
-            nB4       := bin2w( substr( cBuffer, 1, 2 ) ) / ( 65536 * 65536 * 65536 * 16 )
-            nTotal    := nB1 + nB2 + nB3 + nB4
-            nOutput   := if( lFlag, - ( 1 + nTotal ) * 2 ^ nValue, ( 1 + nTotal ) * 2 ^ nValue )
-            xVarValue := dtoc( ctod( "01/01/0100" ) + nOutput - 1757585 )
+               aMemVar := { cVarName, "D", xVarValue }
 
-            aMemVar := { cVarName, "D", xVarValue }
+            ENDIF
 
-         endif
+            aadd( aMemVarArray, aMemVar )
 
-         aadd( aMemVarArray, aMemVar )
+         ENDDO
 
-      enddo
+      ENDIF
 
-   endif
+      fclose( nHandle )
 
-   fclose( nHandle )
+   ENDIF
 
-endif
+   RETURN aMemVarArray
 
-return aMemVarArray
+FUNCTION FEOF( nHandle )
 
+   LOCAL nCurrPos
+   LOCAL nFileSize
 
-Function FEOF( nHandle )
+   nCurrPos  := fseek( nHandle, 0, 1 )
+   nFileSize := fseek( nHandle, 0, 2 )
+   fseek( nHandle, nCurrPos, 0 )
 
-local nCurrPos
-local nFileSize
+   RETURN nFileSize < nCurrPos
 
-nCurrPos  := fseek( nHandle, 0, 1 )
-nFileSize := fseek( nHandle, 0, 2 )
-fseek( nHandle, nCurrPos, 0 )
+FUNCTION MODULUS( nParm1, nParm2 )
 
-return nFileSize < nCurrPos
+   LOCAL x
+   LOCAL nRetVal := 0
 
+   IF valtype( nParm1 ) = "N" .and. valtype( nParm2 ) = "N"
+      IF nParm2 = 0
+         nRetVal := nParm1
+      ELSE
+         x       := nParm1 % nParm2
+         nRetVal := if( x * nParm2 < 0, x + nParm2, x )
+      ENDIF
+   ENDIF
 
-Function MODULUS( nParm1, nParm2 )
-
-local x
-local nRetVal := 0
-
-if valtype( nParm1 ) = "N" .and. valtype( nParm2 ) = "N"
-   if nParm2 = 0
-      nRetVal := nParm1
-   else
-      x       := nParm1 % nParm2
-      nRetVal := if( x * nParm2 < 0, x + nParm2, x )
-   endif
-endif
-
-return nRetVal
+   RETURN nRetVal
 
 #pragma BEGINDUMP
 
@@ -403,17 +416,17 @@ return nRetVal
 
 HB_FUNC ( ZAPDIRECTORY )
 {
-	SHFILEOPSTRUCT sh;
+   SHFILEOPSTRUCT sh;
 
-	sh.hwnd   = GetActiveWindow();
-	sh.wFunc  = FO_DELETE;
-	sh.pFrom  = hb_parc(1);
-	sh.pTo    = NULL;
-	sh.fFlags = FOF_NOCONFIRMATION | FOF_SILENT;
-	sh.hNameMappings = 0;
-	sh.lpszProgressTitle = NULL;
+   sh.hwnd   = GetActiveWindow();
+   sh.wFunc  = FO_DELETE;
+   sh.pFrom  = hb_parc(1);
+   sh.pTo    = NULL;
+   sh.fFlags = FOF_NOCONFIRMATION | FOF_SILENT;
+   sh.hNameMappings = 0;
+   sh.lpszProgressTitle = NULL;
 
-	SHFileOperation (&sh);
+   SHFileOperation (&sh);
 }
 
 HB_FUNC( CURSORARROW2 )
@@ -438,28 +451,29 @@ HB_FUNC( GETEXEFILENAME )
 HB_FUNC( SETTRANSPARENT )
 {
 
-	typedef BOOL (__stdcall *PFN_SETLAYEREDWINDOWATTRIBUTES) (HWND, COLORREF, BYTE, DWORD);
+   typedef BOOL (__stdcall *PFN_SETLAYEREDWINDOWATTRIBUTES) (HWND, COLORREF, BYTE, DWORD);
 
-	PFN_SETLAYEREDWINDOWATTRIBUTES pfnSetLayeredWindowAttributes = NULL;
+   PFN_SETLAYEREDWINDOWATTRIBUTES pfnSetLayeredWindowAttributes = NULL;
 
-	HINSTANCE hLib = LoadLibrary("user32.dll");
+   HINSTANCE hLib = LoadLibrary("user32.dll");
 
-	if (hLib != NULL)
-	{
-		pfnSetLayeredWindowAttributes = (PFN_SETLAYEREDWINDOWATTRIBUTES) GetProcAddress(hLib, "SetLayeredWindowAttributes");
-	}
+   if (hLib != NULL)
+   {
+      pfnSetLayeredWindowAttributes = (PFN_SETLAYEREDWINDOWATTRIBUTES) GetProcAddress(hLib, "SetLayeredWindowAttributes");
+   }
 
-	if (pfnSetLayeredWindowAttributes)
-	{
-		SetWindowLong((HWND) hb_parnl (1), GWL_EXSTYLE, GetWindowLong((HWND) hb_parnl (1), GWL_EXSTYLE) | WS_EX_LAYERED);
-		pfnSetLayeredWindowAttributes((HWND) hb_parnl (1), 0, hb_parni (2), LWA_ALPHA);
-	}
+   if (pfnSetLayeredWindowAttributes)
+   {
+      SetWindowLong((HWND) hb_parnl (1), GWL_EXSTYLE, GetWindowLong((HWND) hb_parnl (1), GWL_EXSTYLE) | WS_EX_LAYERED);
+      pfnSetLayeredWindowAttributes((HWND) hb_parnl (1), 0, hb_parni (2), LWA_ALPHA);
+   }
 
-	if (!hLib)
-	{
-		FreeLibrary(hLib);
-	}
+   if (!hLib)
+   {
+      FreeLibrary(hLib);
+   }
 
 }
 
 #pragma ENDDUMP
+

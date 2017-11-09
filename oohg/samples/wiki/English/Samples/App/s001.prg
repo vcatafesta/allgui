@@ -1,30 +1,29 @@
 /*
- * App Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to use Application object.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* App Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to use Application object.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 MEMVAR oApp, oBtn2, oBtn3, oLbl12, oLbl13
 
 FUNCTION Main( ... )
+
    PUBLIC oApp, oBtn2, oBtn3, oLbl12, oLbl13
 
    oApp := TApplication()
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      CLIENTAREA WIDTH 640 HEIGHT 480 ;
-      TITLE "Application Class Sample" ;
-      MAIN ;
-      HELPBUTTON
+         AT 0,0 ;
+         CLIENTAREA WIDTH 640 HEIGHT 480 ;
+         TITLE "Application Class Sample" ;
+         MAIN ;
+         HELPBUTTON
 
       @ 10, 10 LABEL lbl_1 ;
          AUTOSIZE ;
@@ -100,24 +99,25 @@ FUNCTION Main( ... )
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ColorToStr( nColor )
-  LOCAL cRet
 
-  IF HB_IsNil( nColor )
-     cRet := "NIL (COLOR_BTNFACE)"
-  ELSE
-     cRet := "{ " + ;
-             LTRIM( STR( GetRed( nColor ) ) ) + ;
-             ", " + ;
-             LTRIM( STR( GetGreen( nColor ) ) ) + ;
-             ", " + ;
-             LTRIM( STR( GetBlue( nColor ) ) ) + ;
-             " }"
-  ENDIF
+   LOCAL cRet
 
-RETURN cRet
+   IF HB_IsNil( nColor )
+      cRet := "NIL (COLOR_BTNFACE)"
+   ELSE
+      cRet := "{ " + ;
+         LTRIM( STR( GetRed( nColor ) ) ) + ;
+         ", " + ;
+         LTRIM( STR( GetGreen( nColor ) ) ) + ;
+         ", " + ;
+         LTRIM( STR( GetBlue( nColor ) ) ) + ;
+         " }"
+   ENDIF
+
+   RETURN cRet
 
 STATIC FUNCTION ChangeTopmost()
 
@@ -131,7 +131,7 @@ STATIC FUNCTION ChangeTopmost()
       oLbl12:Value := "Topmost: " + ".T."
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
 STATIC FUNCTION ChangeHelpButton()
 
@@ -145,8 +145,9 @@ STATIC FUNCTION ChangeHelpButton()
       oLbl13:Value := "Help Button: " + ".T."
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

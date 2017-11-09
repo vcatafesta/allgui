@@ -1,50 +1,50 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- FOLDER form source code
- (C)2009 Janusz Pora <januszpora@onet.eu>
+FOLDER form source code
+(C)2009 Janusz Pora <januszpora@onet.eu>
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-    Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-     Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -83,9 +83,7 @@
 
 STATIC aHwndFolderPages := {}
 
-*------------------------------------------------------------------------------*
 FUNCTION _BeginFolder( name , parent , lRes , x , y , w , h, caption , fontname , fontsize , folderproc, cancelproc, initproc , helpproc, modal, apply , bold, italic , underline, strikeout, buttons , flat , hottrack , vertical , bottom, multiline )
-*------------------------------------------------------------------------------*
 
    IF _HMG_BeginDialogActive
       MsgMiniGuiError( "DEFINE FOLDER Structures can't be nested." )
@@ -102,11 +100,10 @@ FUNCTION _BeginFolder( name , parent , lRes , x , y , w , h, caption , fontname 
 
    _DefineFolder ( name , parent , lRes , x , y , w , h, caption , fontname , fontsize , folderproc, cancelproc , initproc , helpproc, modal, apply, bold, italic, underline, strikeout, buttons , flat , hottrack , vertical , bottom, multiline )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , fontname , fontsize , folderProcedure, CancelProcedure , InitProcedure , HelpProcedure, modal, apply, bold, italic, underline, strikeout, buttons , flat , hottrack , vertical , bottom, multiline  )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , mVar, k
    LOCAL ParentHandle, style, styleEx
    LOCAL lOkBtn := .F. , lApplyBtn := .F. , lCancelBtn := .F. , lHelpBtn
@@ -184,7 +181,7 @@ FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , 
 
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames [k] := FormName
       _HMG_aFormHandles  [k] :=  0
@@ -236,15 +233,15 @@ FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , 
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-#endif
+      #endif
 
    ELSE
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames , FormName )
       AAdd ( _HMG_aFormHandles , 0 )
@@ -296,26 +293,25 @@ FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , 
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1  , {} )
       AAdd ( _HMG_aFormMiscData2  , '' )
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-#endif
+      #endif
    ENDIF
 
    _SetThisFormInfo( k )
-/*
+   /*
    IF _HMG_lOOPEnabled
-      Eval ( _HMG_bOnFormInit, k, mVar )
+   Eval ( _HMG_bOnFormInit, k, mVar )
    ENDIF
-*/
+   */
    IF Len( _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ] ) > 0
       _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ,1] := &mVar.
    ENDIF
 
-RETURN 0
+   RETURN 0
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineFolderPage ( FolderName , Id, cTitle, cImageName )
-*------------------------------------------------------------------------------*
+
    LOCAL style := WS_POPUP + WS_CHILD + DS_CONTROL
 
    DEFAULT Id := 0
@@ -343,11 +339,10 @@ FUNCTION _DefineFolderPage ( FolderName , Id, cTitle, cImageName )
    _HMG_ActiveDialogName      := ""
    _HMG_BeginDialogActive     := .F.
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _BeginFolderPage ( FolderName, Id, cTitle, cImageName  )
-*------------------------------------------------------------------------------*
+
    LOCAL Style := WS_POPUP + WS_CHILD + DS_CONTROL
 
    DEFAULT Id := 0
@@ -367,11 +362,10 @@ FUNCTION _BeginFolderPage ( FolderName, Id, cTitle, cImageName  )
 
    _HMG_aFolderInfo[_HMG_FldID,FLD_PGT ] := { cTitle, Id, Style, cImageName }
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _EndFolderPage()
-*------------------------------------------------------------------------------*
+
    LOCAL aFldPageTemp, nPos
 
    IF _HMG_BeginDialogActive
@@ -394,11 +388,10 @@ FUNCTION _EndFolderPage()
    _HMG_BeginDialogActive     := .F.
    _HMG_DialogInMemory        := .F.
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _EndFolder()
-*------------------------------------------------------------------------------*
+
    LOCAL Formhandle, k, ModalFolderReturn
 
    _PopEventInfo()
@@ -413,7 +406,8 @@ FUNCTION _EndFolder()
       _HMG_InitDialogProcedure := ""
       _HMG_ModalDialogProcedure := ""
       _HMG_aDialogItems := {}
-      RETURN Nil
+
+      RETURN NIL
    ELSE
       Formhandle := CreateDlgFolder ( _HMG_FldID, _HMG_aFolderInfo[_HMG_FldID,FLD_AFH], aHwndFolderPages, _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ], _HMG_aFolderInfo[_HMG_FldID,FLD_FIT], _HMG_aFolderInfo[_HMG_FldID,FLD_INM] )
       IF _HMG_aFolderInfo[_HMG_FldID, FLD_FLT, 1] > 0
@@ -429,11 +423,10 @@ FUNCTION _EndFolder()
       _SetFont ( Folder_GetTabHandle( FormHandle ), _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ,11], _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ,12], _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ,13], _HMG_aFolderInfo[_HMG_FldID,FLD_FLT ,14], .F. , .F. )   //,bold,italic,underline,strikeout)
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
-*-----------------------------------------------------------------------------*
+
    LOCAL mVar , k
 
    mVar := '_' + FormName
@@ -444,7 +437,7 @@ FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
    k := AScan ( _HMG_aFormDeleted , .T. )
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames [k] := FormName
       _HMG_aFormHandles  [k] :=  FormHandle
@@ -496,15 +489,15 @@ FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-#endif
+      #endif
 
    ELSE
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames , FormName )
       AAdd ( _HMG_aFormHandles , FormHandle )
@@ -556,22 +549,22 @@ FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1   , {} )
       AAdd ( _HMG_aFormMiscData2   , '' )
-#ifdef _HMG_COMPAT_
+      #ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-#endif
+      #endif
    ENDIF
 
    _SetThisFormInfo( k )
-/*
+   /*
    IF _HMG_lOOPEnabled
-      Eval ( _HMG_bOnFormInit, k, mVar )
+   Eval ( _HMG_bOnFormInit, k, mVar )
    ENDIF
-*/
-RETURN Nil
+   */
 
-*-----------------------------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION InitPageFldProc( hWndParent, hwndDlg, idDlg )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, n, aDialogItems, k_old, nId, k, blInit
    LOCAL FontHandle, ControlHandle
 
@@ -651,11 +644,10 @@ FUNCTION InitPageFldProc( hWndParent, hwndDlg, idDlg )
    _HMG_ActiveDlgProcHandle    := 0
    _HMG_ActiveDlgProcId        := 0
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION FolderProc( hwndDlg, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL ret := FALSE , i, ControlHandle
 
    _HMG_ActiveDlgProcHandle    := hwndDlg
@@ -707,11 +699,10 @@ FUNCTION FolderProc( hwndDlg, nMsg, wParam, lParam )
    _HMG_ActiveDlgProcId        := 0
    _HMG_ActiveDlgProcNotify    := 0
 
-RETURN ret
+   RETURN ret
 
-*------------------------------------------------------------------------------*
 FUNCTION PageFldProc( hWndDlg, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL lRet := FALSE, i, ControlHandle, x, hwndFolder, nFldID
 
    _HMG_ActiveDlgProcHandle    := hwndDlg
@@ -823,11 +814,11 @@ FUNCTION PageFldProc( hWndDlg, nMsg, wParam, lParam )
          EXIT
       CASE FLN_KILLACTIVE
          EXIT
-#ifndef __XHARBOUR__
+         #ifndef __XHARBOUR__
       OTHERWISE
-#else
+         #else
          DEFAULT
-#endif
+         #endif
          IF GetDialogITemHandle( hwndDlg, LOWORD( wParam ) ) != 0
             Events( hwndDlg, nMsg, wParam, lParam )
          ENDIF
@@ -850,18 +841,16 @@ FUNCTION PageFldProc( hWndDlg, nMsg, wParam, lParam )
    _HMG_ActiveDlgProcId        := 0
    _HMG_ActiveDlgProcNotify    := 0
 
-RETURN  lRet
+   RETURN  lRet
 
-*-----------------------------------------------------------------------------*
 FUNCTION GetFolderHandle( hwndDlg )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aFormHandles , hwndDlg )
 
-RETURN iif( i > 0, _HMG_aFormParentHandle[i], 0 )
+   RETURN iif( i > 0, _HMG_aFormParentHandle[i], 0 )
 
-*------------------------------------------------------------------------------*
 FUNCTION EraseFolder( hwndDlg, lModal )
-*------------------------------------------------------------------------------*
+
    LOCAL i, x, ControlCount, mVar
 
    i := AScan ( _HMG_aFormhandles , hwndDlg )
@@ -932,34 +921,32 @@ FUNCTION EraseFolder( hwndDlg, lModal )
       _HMG_aFormMiscData2  [i] := ''
 
       IF lModal
-         EndDialog( hwndDlg, 0 )
-      ELSE
-         DestroyWindow( hwndDlg )
-      ENDIF
+      EndDialog( hwndDlg, 0 )
+   ELSE
+      DestroyWindow( hwndDlg )
    ENDIF
+ENDIF
 
 RETURN TRUE
 
-*-----------------------------------------------------------------------------*
 FUNCTION _ReleaseFolder( hwndFolder )
-*-----------------------------------------------------------------------------*
+
    LOCAL n , nFldID
 
    nFldID := Folder_GetIdFld( hwndFolder, _HMG_FldID )
    IF hwndFolder != 0
       FOR n := 1 TO Len( _HMG_aFormParentHandle )
          IF _HMG_aFormParentHandle [n] == hwndFolder
-            EraseFolder( _HMG_aFormHandles [n], .F. )
+            ERASEFolder( _HMG_aFormHandles [n], .F. )
          ENDIF
       NEXT
-      EraseFolder( hwndFolder, _HMG_aFolderInfo[nFldID, FLD_MOD] )
+      ERASEFolder( hwndFolder, _HMG_aFolderInfo[nFldID, FLD_MOD] )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION RetValue( lRet, def )
-*-----------------------------------------------------------------------------*
+
    IF lRet == Nil .OR. ValType( lRet ) != 'L'
       IF ValType( lRet ) == "N"
          lRet := iif( lRet == 0, FALSE, TRUE )
@@ -968,4 +955,5 @@ STATIC FUNCTION RetValue( lRet, def )
       ENDIF
    ENDIF
 
-RETURN lRet
+   RETURN lRet
+

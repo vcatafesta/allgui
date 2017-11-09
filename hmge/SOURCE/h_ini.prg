@@ -17,79 +17,85 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include 'minigui.ch'
 #include 'fileio.ch'
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetGetLogFile( cFile )
-*-----------------------------------------------------------------------------*
+
    LOCAL cOld
+
    STATIC MLog_File
 
    cOld := MLog_File
    IF cFile != NIL
       MLog_File := cFile
+
       RETURN MLog_File
    ENDIF
 
-RETURN cOld
+   RETURN cOld
 
-*-----------------------------------------------------------------------------*
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
+
 FUNCTION _LogFile( lCrLf, ... )
-#else
+
+   #else
+
 FUNCTION _LogFile( ... )
-#endif
-*-----------------------------------------------------------------------------*
+
+   #endif
    LOCAL hFile, i, xVal, cTp
    LOCAL aParams := hb_AParams()
    LOCAL nParams := Len( aParams )
    LOCAL cFile := hb_defaultValue( _SetGetLogFile(), GetStartUpFolder() + "\_MsgLog.txt" )
-#ifdef __XHARBOUR__
+
+   #ifdef __XHARBOUR__
    LOCAL lCrLf
-#endif
+
+   #endif
    IF !Empty( cFile )
       hFile := iif( File( cFile ), FOpen( cFile, FO_READWRITE ), FCreate( cFile, FC_NORMAL ) )
       IF hFile == F_ERROR
+
          RETURN .F.
       ENDIF
       FSeek( hFile, 0, FS_END )
       IF nParams > 1
-#ifdef __XHARBOUR__
+         #ifdef __XHARBOUR__
          lCrLf := aParams[ 1 ]
-#endif
+         #endif
          IF hb_defaultValue( lCrLf, .T. )
             FWrite( hFile, CRLF, 2 )
          ENDIF
@@ -99,11 +105,11 @@ FUNCTION _LogFile( ... )
             IF     cTp == 'C' ; xVal := iif( Empty( xVal ), "'" + "'", Trim( xVal ) )
             ELSEIF cTp == 'N' ; xVal := hb_ntos( xVal )
             ELSEIF cTp == 'L' ; xVal := iif( xVal, ".T.", ".F." )
-#ifdef __XHARBOUR__
+               #ifdef __XHARBOUR__
             ELSEIF cTp == 'D' ; xVal := DToC( xVal )
-#else
+               #else
             ELSEIF cTp == 'D' ; xVal := hb_DToC( xVal, 'DD.MM.YYYY' )
-#endif
+               #endif
             ELSEIF cTp == 'A' ; xVal := "ARRAY["  + hb_ntos( Len( xVal ) ) + "]"
             ELSEIF cTp == 'H' ; xVal :=  "HASH["  + hb_ntos( Len( xVal ) ) + "]"
             ELSEIF cTp == 'B' ; xVal := "'" + "B" + "'"
@@ -119,41 +125,40 @@ FUNCTION _LogFile( ... )
       FClose( hFile )
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginIni( cIniFile )
-*-----------------------------------------------------------------------------*
+
    LOCAL hFile
 
    IF At( "\", cIniFile ) == 0
       cIniFile := ".\" + cIniFile
    ENDIF
 
-#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+   #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
    hFile := iif( File( cIniFile ), FOpen( cIniFile, FO_READ + FO_SHARED ), FCreate( cIniFile ) )
    IF hFile == F_ERROR
-#else
-   hFile := hb_vfOpen( cIniFile, iif( hb_vfExists( cIniFile ), FO_READ + FO_SHARED, FO_CREAT + FO_READWRITE ) )
-   IF hFile == NIL
-#endif
-      MsgInfo( "Error opening a file INI. DOS ERROR: " + hb_ntos( FError() ) )
-      Return( -1 )
-   ELSE
-      _HMG_ActiveIniFile := cIniFile
-   ENDIF
+      #else
+      hFile := hb_vfOpen( cIniFile, iif( hb_vfExists( cIniFile ), FO_READ + FO_SHARED, FO_CREAT + FO_READWRITE ) )
+      IF hFile == NIL
+         #endif
+         MsgInfo( "Error opening a file INI. DOS ERROR: " + hb_ntos( FError() ) )
 
-#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
-   FClose( hFile )
-#else
-   hb_vfClose( hFile )
-#endif
+         RETURN( -1 )
+      ELSE
+         _HMG_ActiveIniFile := cIniFile
+      ENDIF
 
-RETURN( 0 )
+      #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+      FClose( hFile )
+      #else
+      hb_vfClose( hFile )
+      #endif
 
-*-----------------------------------------------------------------------------*
+      RETURN( 0 )
+
 FUNCTION _GetIni( cSection, cEntry, cDefault, uVar )
-*-----------------------------------------------------------------------------*
+
    LOCAL cVar As String
 
    IF !Empty( _HMG_ActiveIniFile )
@@ -168,51 +173,46 @@ FUNCTION _GetIni( cSection, cEntry, cDefault, uVar )
 
    uVar := xValue( cVar, ValType( uVar ) )
 
-RETURN uVar
+   RETURN uVar
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetIni( cSection, cEntry, cValue )
-*-----------------------------------------------------------------------------*
+
    LOCAL ret As Logical
 
    IF !Empty( _HMG_ActiveIniFile )
       ret := WritePrivateProfileString( cSection, cEntry, xChar( cValue ), _HMG_ActiveIniFile )
    ENDIF
 
-RETURN ret
+   RETURN ret
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DelIniEntry( cSection, cEntry )
-*-----------------------------------------------------------------------------*
+
    LOCAL ret As Logical
 
    IF !Empty( _HMG_ActiveIniFile )
       ret := DelIniEntry( cSection, cEntry, _HMG_ActiveIniFile )
    ENDIF
 
-RETURN ret
+   RETURN ret
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DelIniSection( cSection )
-*-----------------------------------------------------------------------------*
+
    LOCAL ret As Logical
 
    IF !Empty( _HMG_ActiveIniFile )
       ret := DelIniSection( cSection, _HMG_ActiveIniFile )
    ENDIF
 
-RETURN ret
+   RETURN ret
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndIni()
-*-----------------------------------------------------------------------------*
+
    _HMG_ActiveIniFile := ''
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION xChar( xValue )
-*-----------------------------------------------------------------------------*
+
    LOCAL cType := ValType( xValue )
    LOCAL cValue := "", nDecimals := Set( _SET_DECIMALS )
 
@@ -227,11 +227,10 @@ FUNCTION xChar( xValue )
    CASE cType == "O" ;  cValue := "{" + xValue:className + "}"
    ENDCASE
 
-RETURN cValue
+   RETURN cValue
 
-*-----------------------------------------------------------------------------*
 FUNCTION xValue( cValue, cType )
-*-----------------------------------------------------------------------------*
+
    LOCAL xValue
 
    DO CASE
@@ -243,11 +242,10 @@ FUNCTION xValue( cValue, cType )
    OTHERWISE;           xValue := NIL                   // Nil, Block, Object
    ENDCASE
 
-RETURN xValue
+   RETURN xValue
 
-*-----------------------------------------------------------------------------*
 FUNCTION AToC( aArray )
-*-----------------------------------------------------------------------------*
+
    LOCAL elem, cElement, cType, cArray := ""
 
    FOR EACH elem IN aArray
@@ -259,11 +257,10 @@ FUNCTION AToC( aArray )
       ENDIF
    NEXT
 
-RETURN( "A" + Str( Len( cArray ), 4 ) + cArray )
+   RETURN( "A" + Str( Len( cArray ), 4 ) + cArray )
 
-*-----------------------------------------------------------------------------*
 FUNCTION CToA( cArray )
-*-----------------------------------------------------------------------------*
+
    LOCAL cType, nLen, aArray := {}
 
    cArray := SubStr( cArray, 6 )    // strip off array and length
@@ -277,12 +274,12 @@ FUNCTION CToA( cArray )
       cArray := SubStr( cArray, 6 + nLen )
    END
 
-RETURN aArray
+   RETURN aArray
 
-// JK HMG 1.0 experimental build 6
-*-----------------------------------------------------------------------------*
+   // JK HMG 1.0 experimental build 6
+
 FUNCTION _GetSectionNames( cIniFile )
-*-----------------------------------------------------------------------------*
+
    // return 1-dimensional array with section list in cIniFile
    // or empty array if no sections are present
    LOCAL aSectionList := {}, cLista, aLista
@@ -297,11 +294,10 @@ FUNCTION _GetSectionNames( cIniFile )
       MsgStop( "Can`t open " + cIniFile, "Error" )
    ENDIF
 
-RETURN aSectionList
+   RETURN aSectionList
 
-*-----------------------------------------------------------------------------*
 FUNCTION _GetSection( cSection, cIniFile )
-*-----------------------------------------------------------------------------*
+
    // return 2-dimensional array with {key,value} pairs from section cSection in cIniFile
    LOCAL aKeyValueList := {}, cLista, aLista, i, n
 
@@ -319,4 +315,5 @@ FUNCTION _GetSection( cSection, cIniFile )
       MsgStop( "Can`t open " + cIniFile, "Error" )
    ENDIF
 
-RETURN aKeyValueList
+   RETURN aKeyValueList
+

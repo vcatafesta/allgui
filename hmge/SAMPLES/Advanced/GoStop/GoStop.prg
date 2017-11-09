@@ -1,10 +1,8 @@
 /*
- * MiniGUI Shutdown Process Demo
- *
- * Last modifed 2007.11.07 by 
- * Grigory Filatov <gfilatov@inbox.ru> and
- * Kevin Carmody <i@kevincarmody.com>
- *
+* MiniGUI Shutdown Process Demo
+* Last modifed 2007.11.07 by
+* Grigory Filatov <gfilatov@inbox.ru> and
+* Kevin Carmody <i@kevincarmody.com>
 */
 
 ANNOUNCE RDDSYS
@@ -14,45 +12,41 @@ ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 
-//***************************************************************************
-
 PROCEDURE Main
 
    LOCAL lProcess := .N.
    LOCAL nProcess := 0
 
    DEFINE WINDOW wMain ;
-      AT 100,200 WIDTH 230 HEIGHT 100 ;
-      TITLE "Go Stop" ;
-      ICON "Toad.ico" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         AT 100,200 WIDTH 230 HEIGHT 100 ;
+         TITLE "Go Stop" ;
+         ICON "Toad.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE BUTTON btOpen
-      ROW 10
-      COL 20
-      WIDTH 80
-      HEIGHT 50
-      CAPTION 'Open file'
-      ACTION OpenFile(@lProcess, @nProcess)
+         ROW 10
+         COL 20
+         WIDTH 80
+         HEIGHT 50
+         CAPTION 'Open file'
+         ACTION OpenFile(@lProcess, @nProcess)
       END BUTTON
 
       DEFINE BUTTON btClose
-      ROW 10
-      COL 120
-      WIDTH 80
-      HEIGHT 50
-      CAPTION 'Close file'
-      ACTION CloseFile(@lProcess, @nProcess)
+         ROW 10
+         COL 120
+         WIDTH 80
+         HEIGHT 50
+         CAPTION 'Close file'
+         ACTION CloseFile(@lProcess, @nProcess)
       END BUTTON
 
    END WINDOW
 
    ACTIVATE WINDOW wMain
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 PROCEDURE OpenFile(lProcess, nProcess)
 
@@ -75,7 +69,7 @@ PROCEDURE OpenFile(lProcess, nProcess)
       MsgStop('Program is already running.')
    ELSE
       cFile := GetFile( {{'Executive files (*.exe)', '*.exe'}, {'All files (*.*)', '*.*'}}, ;
-                       'Open file', IF(IsWinNT(), GetSystemFolder(), GetWindowsFolder()) )
+         'Open file', IF(IsWinNT(), GetSystemFolder(), GetWindowsFolder()) )
       IF !EMPTY(cFile)
          IF (cExt := GetExt(cFile)) # ".exe"
             cOpen := cFile
@@ -100,63 +94,59 @@ PROCEDURE OpenFile(lProcess, nProcess)
       ENDIF
    ENDIF
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 FUNCTION GetProcessID( cFileName )
 
-LOCAL cExeName := "", nProcessID := 0, i
-LOCAL aProcessInfo := IF(IsWinNT(), GetProcessesNT(), GetProcessesW9x())
+   LOCAL cExeName := "", nProcessID := 0, i
+   LOCAL aProcessInfo := IF(IsWinNT(), GetProcessesNT(), GetProcessesW9x())
 
    FOR i := 1 TO LEN(aProcessInfo) Step 2
-	IF !EMPTY( aProcessInfo[i] )
-		cExeName := UPPER( aProcessInfo[i+1] )
-		IF cExeName == cFileName
-			nProcessID := aProcessInfo[i]
-			EXIT
-		ENDIF
-	ENDIF
+      IF !EMPTY( aProcessInfo[i] )
+         cExeName := UPPER( aProcessInfo[i+1] )
+         IF cExeName == cFileName
+            nProcessID := aProcessInfo[i]
+            EXIT
+         ENDIF
+      ENDIF
    NEXT
 
-RETURN nProcessID
-
-//***************************************************************************
+   RETURN nProcessID
 
 FUNCTION GetOpenCommand( cExt )
-Local oReg, cVar1 := "", cVar2 := "", nPos
 
-	If ! ValType( cExt ) == "C"
-		Return ""
-	Endif
+   LOCAL oReg, cVar1 := "", cVar2 := "", nPos
 
-	If ! Left( cExt, 1 ) == "."
-		cExt := "." + cExt
-	Endif
+   IF ! ValType( cExt ) == "C"
 
-	oReg := TReg32():New( HKEY_CLASSES_ROOT, cExt, .f. )
-	cVar1 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) ) // i.e look for (Default) key
-	oReg:close()
+      RETURN ""
+   ENDIF
 
-	If ! Empty( cVar1 )
-		oReg := TReg32():New( HKEY_CLASSES_ROOT, cVar1 + "\shell\open\command", .f. )
-		cVar2 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) )  // i.e look for (Default) key
-		oReg:close()
+   IF ! Left( cExt, 1 ) == "."
+      cExt := "." + cExt
+   ENDIF
 
-		If ( nPos := RAt( " %1", cVar2 ) ) > 0        // look for param placeholder without the quotes (ie notepad)
-			cVar2 := SubStr( cVar2, 1, nPos )
-		Elseif ( nPos := RAt( '"%', cVar2 ) ) > 0     // look for stuff like "%1", "%L", and so forth (ie, with quotes)
-			cVar2 := SubStr( cVar2, 1, nPos - 1 )
-		Elseif ( nPos := RAt( '%', cVar2 ) ) > 0      // look for stuff like "%1", "%L", and so forth (ie, without quotes)
-			cVar2 := SubStr( cVar2, 1, nPos - 1 )
-		Elseif ( nPos := RAt( ' /', cVar2 ) ) > 0     // look for stuff like "/"
-			cVar2 := SubStr( cVar2, 1, nPos - 1 )
-		Endif
-	Endif
+   oReg := TReg32():New( HKEY_CLASSES_ROOT, cExt, .f. )
+   cVar1 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) ) // i.e look for (Default) key
+   oReg:close()
 
-Return StrTran( RTrim( cVar2 ), '"', '' )
+   IF ! Empty( cVar1 )
+      oReg := TReg32():New( HKEY_CLASSES_ROOT, cVar1 + "\shell\open\command", .f. )
+      cVar2 := RTrim( StrTran( oReg:Get( Nil, "" ), Chr(0), " " ) )  // i.e look for (Default) key
+      oReg:close()
 
-//***************************************************************************
+      IF ( nPos := RAt( " %1", cVar2 ) ) > 0        // look for param placeholder without the quotes (ie notepad)
+         cVar2 := SubStr( cVar2, 1, nPos )
+      ELSEIF ( nPos := RAt( '"%', cVar2 ) ) > 0     // look for stuff like "%1", "%L", and so forth (ie, with quotes)
+         cVar2 := SubStr( cVar2, 1, nPos - 1 )
+      ELSEIF ( nPos := RAt( '%', cVar2 ) ) > 0      // look for stuff like "%1", "%L", and so forth (ie, without quotes)
+         cVar2 := SubStr( cVar2, 1, nPos - 1 )
+      ELSEIF ( nPos := RAt( ' /', cVar2 ) ) > 0     // look for stuff like "/"
+         cVar2 := SubStr( cVar2, 1, nPos - 1 )
+      ENDIF
+   ENDIF
+
+   RETURN StrTran( RTrim( cVar2 ), '"', '' )
 
 PROCEDURE CloseFile(lProcess, nProcess)
 
@@ -167,11 +157,11 @@ PROCEDURE CloseFile(lProcess, nProcess)
       nShutdown := ShutdownProcess(nProcess, 2000)
       DO CASE
       CASE nShutdown > 0
-         if nShutdown = 1
+         IF nShutdown = 1
             MsgInfo('Program terminated normally.', 'Success')
-         else
+         ELSE
             MsgInfo('Program killed normally.', 'Success')
-         endif
+         ENDIF
       CASE nShutdown == 0
          MsgAlert('Unable to terminate program.', 'Warning')
       CASE nShutdown == -1
@@ -184,9 +174,7 @@ PROCEDURE CloseFile(lProcess, nProcess)
       MsgAlert('No program is running.', 'Warning')
    ENDIF
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 FUNCTION AddQuote(cInPath)
 
@@ -195,45 +183,39 @@ FUNCTION AddQuote(cInPath)
    LOCAL cSpace := SPACE(1)
 
    IF cSpace $ cOutPath .AND.;
-      !(LEFT(cOutPath, 1) == cQuote) .AND. !(RIGHT(cOutPath, 1) == cQuote)
+         !(LEFT(cOutPath, 1) == cQuote) .AND. !(RIGHT(cOutPath, 1) == cQuote)
       cOutPath := cQuote + cOutPath + cQuote
    ENDIF
 
-RETURN cOutPath
-
-//***************************************************************************
+   RETURN cOutPath
 
 FUNCTION GetExt(cFileName)
-  
-  LOCAL cTrim  := ALLTRIM(cFileName)  
-  LOCAL nDot   := RAT('.', cTrim)
-  LOCAL nSlash := RAT('\', cTrim)
-  LOCAL cExt   := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
-    '', SUBSTR(cTrim, nDot))
 
-RETURN LOWER(cExt)
+   LOCAL cTrim  := ALLTRIM(cFileName)
+   LOCAL nDot   := RAT('.', cTrim)
+   LOCAL nSlash := RAT('\', cTrim)
+   LOCAL cExt   := IF(nDot <= nSlash .OR. nDot == nSlash + 1, ;
+      '', SUBSTR(cTrim, nDot))
 
-//***************************************************************************
+   RETURN LOWER(cExt)
 
 PROCEDURE SysWait( nWait )
 
-LOCAL iTime := Seconds()
+   LOCAL iTime := Seconds()
 
-	DEFAULT nWait TO 2
+   DEFAULT nWait TO 2
 
-	REPEAT
-		DO EVENTS
-	UNTIL Seconds() - iTime < nWait
+   REPEAT
+   DO EVENTS
+   UNTIL Seconds() - iTime < nWait
 
-RETURN
+   RETURN
 
-//***************************************************************************
-
-/*
+   /*
    ShutdownProcess()
    Adapted from http://support.microsoft.com/kb/178893
    by Kevin Carmody <i@kevincarmody.com>
-*/
+   */
 
 #pragma BEGINDUMP
 
@@ -252,6 +234,7 @@ RETURN
       GetWindowThreadProcessId( hwnd, &dwID );
       if( dwID == (DWORD) lParam )
          PostMessage( hwnd, WM_CLOSE, 0, 0 );
+
       return TRUE;
    }
 
@@ -287,3 +270,4 @@ RETURN
    }
 
 #pragma ENDDUMP
+

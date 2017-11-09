@@ -1,25 +1,23 @@
 /*
- * Ejemplo Grid n° 19
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo desplegar un menú cuando el
- * usuario hace click con el botón derecho del ratón sobre
- * el cabezal de un control Grid, Browse o XBrowse.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 19
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo desplegar un menú cuando el
+* usuario hace click con el botón derecho del ratón sobre
+* el cabezal de un control Grid, Browse o XBrowse.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 PROCEDURE MAIN
 
    DEFINE WINDOW MAIN ;
-      CLIENTAREA ;
-      TITLE "Clic Derecho sobre los Cabezales" ;
-      WIDTH 400 HEIGHT 400
+         CLIENTAREA ;
+         TITLE "Clic Derecho sobre los Cabezales" ;
+         WIDTH 400 HEIGHT 400
 
       @ 10, 10 GRID Grid ;
          WIDTH 300 HEIGHT 300 ;
@@ -27,9 +25,9 @@ PROCEDURE MAIN
          HEADERS { "Uno", "Dos", "Tres" } ;
          WIDTHS  { 50, 50, 50 } ;
          ITEMS { { "1111111111", "1", "1" }, ;
-                 { "2", "2", "2222222222" },  ;
-                 { "3", "3333333333", "3" }, ;
-                 { "4444", "4444", "4444" } } ;
+         { "2", "2", "2222222222" },  ;
+         { "3", "3333333333", "3" }, ;
+         { "4444", "4444", "4444" } } ;
          VALUE 1 ;
          ONHEADRCLICK {|nColumna| VerMenu( nColumna ) }
 
@@ -43,7 +41,8 @@ PROCEDURE MAIN
 
    CENTER WINDOW MAIN
    ACTIVATE WINDOW MAIN
-RETURN
+
+   RETURN
 
 FUNCTION VerMenu( nColumn )
 
@@ -55,18 +54,17 @@ FUNCTION VerMenu( nColumn )
 
    oMenu:Activate()
 
-/*
- * Valores de retorno:
- *
- *    .F. previene que el grid haga scroll a la izquierda hasta que la
- *    primera columna quede visible.
- *
- *   otros valores: el grid hace scroll a la izquierda hasta que la
- *   primera columna queda visible (acción por defecto).
- */
+   /*
+   * Valores de retorno:
+   *    .F. previene que el grid haga scroll a la izquierda hasta que la
+   *    primera columna quede visible.
+   *   otros valores: el grid hace scroll a la izquierda hasta que la
+   *   primera columna queda visible (acción por defecto).
+   */
 
-RETURN .F.
+   RETURN .F.
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

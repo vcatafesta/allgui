@@ -1,6 +1,5 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 ANNOUNCE RDDSYS
@@ -13,115 +12,110 @@ ANNOUNCE RDDSYS
 
 STATIC nCountdown := 120, nStyle
 
-*--------------------------------------------------------*
-Procedure Main( param )
-*--------------------------------------------------------*
+PROCEDURE Main( param )
 
-	IF ValType( param ) == "C"
+   IF ValType( param ) == "C"
 
-		IF Val( param ) > 0
-			nCountdown := Val( param )
-		ENDIF
-
-	ENDIF
-
-	Default nStyle To Random( 3 )
-
-	DEFINE WINDOW Form_1 		;
-		TITLE PROGRAM 		;
-		MAIN NOSHOW 		;
-		NOTIFYTOOLTIP PROGRAM	;
-		ON INIT Start()		;
-		ON RELEASE ShowNotifyIcon( This.Handle, .F., NIL, NIL )
-
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 1000 ;
-			ACTION ChangeTrayIcon()
-
-	END WINDOW
-
-	ACTIVATE WINDOW Form_1
-
-Return
-
-*--------------------------------------------------------*
-Static Procedure Start()
-*--------------------------------------------------------*
-Local i := GetFormIndex( This.Name )
-Local hIcon := CreateIcon( This.Handle, nCountdown, nStyle )
-
-	CLEAN MEMORY
-
-	ShowNotifyIcon( This.Handle, .T., hIcon, _HMG_aFormNotifyIconToolTip [i] )
-
-	DEFINE NOTIFY MENU OF Form_1
-
-		ITEM 'About...'			ACTION ShellAbout( "About " + PROGRAM + "# ", ;
-			PROGRAM + VERSION + CRLF + "Copyright " + Chr(169) + COPYRIGHT, hIcon )
-
-		SEPARATOR	
-
-		POPUP 'Icon Style'
-
-			ITEM 'Stylized'	ACTION ( nStyle := 1, ;
-				Form_1.Dig.Checked := .f., Form_1.Num.Checked := .t., Form_1.Bit.Checked := .f. ) NAME NUM
-
-			ITEM 'Squares'	ACTION ( nStyle := 2, ;
-				Form_1.Dig.Checked := .t., Form_1.Num.Checked := .f., Form_1.Bit.Checked := .f. ) NAME DIG
-
-			ITEM 'Bits'	ACTION ( nStyle := 3, ;
-				Form_1.Dig.Checked := .f., Form_1.Num.Checked := .f., Form_1.Bit.Checked := .t. ) NAME BIT
-
-		END POPUP
-
-		SEPARATOR	
-
-		ITEM 'Exit'		ACTION Form_1.Release
-
-	END MENU
-
-	Form_1.Num.Checked := ( nStyle == 1 )
-	Form_1.Dig.Checked := ( nStyle == 2 )
-	Form_1.Bit.Checked := ( nStyle == 3 )
-
-Return
-
-*--------------------------------------------------------*
-Static Procedure ChangeTrayIcon()
-*--------------------------------------------------------*
-Local i := GetFormIndex( ThisWindow.Name )
-Local hIcon := CreateIcon( ThisWindow.Handle, --nCountdown, nStyle )
-
-   IF nCountdown < 1
-
-	Form_1.Timer_1.Release
-
-	Form_1.NotifyTooltip := "It's time!"
-
-	ChangeNotifyIcon( ThisWindow.Handle, hIcon, _HMG_aFormNotifyIconToolTip [i] )
-
-	MsgInfo( "It's time!" )
-
-   ELSE
-
-	Form_1.NotifyTooltip := TimeAsString( nCountdown ) + " remaining"
-
-	ChangeNotifyIcon( ThisWindow.Handle, hIcon, _HMG_aFormNotifyIconToolTip [i] )
+      IF Val( param ) > 0
+         nCountdown := Val( param )
+      ENDIF
 
    ENDIF
 
-Return
+   DEFAULT nStyle To Random( 3 )
 
-*--------------------------------------------------------*
-Function TimeAsString( nSeconds )
-*--------------------------------------------------------*
-Return StrZero(Int(Mod(nSeconds / 3600, 24)), 1, 0) + ":" + ;
-	  StrZero(Int(Mod(nSeconds / 60, 60)), 2, 0) + ":" + ;
-	  StrZero(Int(Mod(nSeconds, 60)), 2, 0)
+   DEFINE WINDOW Form_1       ;
+         TITLE PROGRAM       ;
+         MAIN NOSHOW       ;
+         NOTIFYTOOLTIP PROGRAM   ;
+         ON INIT Start()      ;
+         ON RELEASE ShowNotifyIcon( This.Handle, .F., NIL, NIL )
 
-/*
- * C-level code was borrowed from the OOHG sample Clocks
-*/
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 1000 ;
+         ACTION ChangeTrayIcon()
+
+   END WINDOW
+
+   ACTIVATE WINDOW Form_1
+
+   RETURN
+
+STATIC PROCEDURE Start()
+
+   LOCAL i := GetFormIndex( This.Name )
+   LOCAL hIcon := CreateIcon( This.Handle, nCountdown, nStyle )
+
+   CLEAN MEMORY
+
+   ShowNotifyIcon( This.Handle, .T., hIcon, _HMG_aFormNotifyIconToolTip [i] )
+
+   DEFINE NOTIFY MENU OF Form_1
+
+      ITEM 'About...'         ACTION ShellAbout( "About " + PROGRAM + "# ", ;
+         PROGRAM + VERSION + CRLF + "Copyright " + Chr(169) + COPYRIGHT, hIcon )
+
+      SEPARATOR
+
+      POPUP 'Icon Style'
+
+         ITEM 'Stylized'   ACTION ( nStyle := 1, ;
+            Form_1.Dig.Checked := .f., Form_1.Num.Checked := .t., Form_1.Bit.Checked := .f. ) NAME NUM
+
+         ITEM 'Squares'   ACTION ( nStyle := 2, ;
+            Form_1.Dig.Checked := .t., Form_1.Num.Checked := .f., Form_1.Bit.Checked := .f. ) NAME DIG
+
+         ITEM 'Bits'   ACTION ( nStyle := 3, ;
+            Form_1.Dig.Checked := .f., Form_1.Num.Checked := .f., Form_1.Bit.Checked := .t. ) NAME BIT
+
+      END POPUP
+
+      SEPARATOR
+
+      ITEM 'Exit'      ACTION Form_1.Release
+
+   END MENU
+
+   Form_1.Num.Checked := ( nStyle == 1 )
+   Form_1.Dig.Checked := ( nStyle == 2 )
+   Form_1.Bit.Checked := ( nStyle == 3 )
+
+   RETURN
+
+STATIC PROCEDURE ChangeTrayIcon()
+
+   LOCAL i := GetFormIndex( ThisWindow.Name )
+   LOCAL hIcon := CreateIcon( ThisWindow.Handle, --nCountdown, nStyle )
+
+   IF nCountdown < 1
+
+      Form_1.Timer_1.Release
+
+      Form_1.NotifyTooltip := "It's time!"
+
+      ChangeNotifyIcon( ThisWindow.Handle, hIcon, _HMG_aFormNotifyIconToolTip [i] )
+
+      MsgInfo( "It's time!" )
+
+   ELSE
+
+      Form_1.NotifyTooltip := TimeAsString( nCountdown ) + " remaining"
+
+      ChangeNotifyIcon( ThisWindow.Handle, hIcon, _HMG_aFormNotifyIconToolTip [i] )
+
+   ENDIF
+
+   RETURN
+
+FUNCTION TimeAsString( nSeconds )
+
+   RETURN StrZero(Int(Mod(nSeconds / 3600, 24)), 1, 0) + ":" + ;
+      StrZero(Int(Mod(nSeconds / 60, 60)), 2, 0) + ":" + ;
+      StrZero(Int(Mod(nSeconds, 60)), 2, 0)
+
+   /*
+   * C-level code was borrowed from the OOHG sample Clocks
+   */
 
 #pragma BEGINDUMP
 
@@ -451,3 +445,4 @@ HB_FUNC( CREATEICON )   // ( hWnd, nTiempo, nNumeros )
 }
 
 #pragma ENDDUMP
+

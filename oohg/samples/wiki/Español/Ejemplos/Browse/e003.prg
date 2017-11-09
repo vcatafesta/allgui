@@ -1,19 +1,16 @@
 /*
- * Ejemplo Browse n° 3
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG mantenida
- * por Ciro Vargas Clemow <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo habilitar las teclas F1 y F2
- * mientras el control está en modo edición, usando la
- * cláusula EDITKEYS.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 3
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG mantenida
+* por Ciro Vargas Clemow <cvc@oohg.org>
+* Este ejemplo muestra cómo habilitar las teclas F1 y F2
+* mientras el control está en modo edición, usando la
+* cláusula EDITKEYS.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -29,30 +26,30 @@ FUNCTION Main
    SET BROWSESYNC ON
 
    DEFINE WINDOW Form_1 OBJ oForm1 ;
-      AT 0,0 ;
-      WIDTH 508 HEIGHT 380 ;
-      TITLE 'Teclas Rápidas en Modo Edición' ;
-      MAIN ;
-      ON INIT OpenTables() ;
-      ON RELEASE dbCloseAll()
+         AT 0,0 ;
+         WIDTH 508 HEIGHT 380 ;
+         TITLE 'Teclas Rápidas en Modo Edición' ;
+         MAIN ;
+         ON INIT OpenTables() ;
+         ON RELEASE dbCloseAll()
 
       @ 10,10 BROWSE Browse_1 OBJ oBrowse1 ;
          WIDTH 480 ;
          HEIGHT 300 ;
          HEADERS { 'Código', ;
-                   'Nombre', ;
-                   'Apellido', ;
-                   'Nacimiento', ;
-                   'Casamiento', ;
-                   'Biografía' } ;
+         'Nombre', ;
+         'Apellido', ;
+         'Nacimiento', ;
+         'Casamiento', ;
+         'Biografía' } ;
          WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
          WORKAREA test ;
          FIELDS { 'Test->Code', ;
-                  'Test->First', ;
-                  'Test->Last', ;
-                  'Test->Birth', ;
-                  'Test->Married', ;
-                  'Test->Bio' } ;
+         'Test->First', ;
+         'Test->Last', ;
+         'Test->Birth', ;
+         'Test->Married', ;
+         'Test->Bio' } ;
          FONT "Courier New" SIZE 10 ;
          DELETE ;
          LOCK ;
@@ -66,9 +63,8 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN Nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------//
 FUNCTION OpenTables()
 
    LOCAL aDbf[6][4]
@@ -123,34 +119,34 @@ FUNCTION OpenTables()
 
    Form_1.Browse_1.Value := RECNO()
 
-RETURN Nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------//
 FUNCTION SetCellValue
 
-  LOCAL oCtrl
+   LOCAL oCtrl
 
-  oCtrl := GetControlObjectByHandle( GetFocus() )
+   oCtrl := GetControlObjectByHandle( GetFocus() )
 
-  DO CASE
-  CASE This.CellColIndex == 1
-    oCtrl:Value := 12345
-  CASE This.CellColIndex == 2
-    oCtrl:Value := "NOMBRE"
-  CASE This.CellColIndex == 3
-    oCtrl:Value := "APELLIDO"
-  CASE This.CellColIndex == 4
-    oCtrl:Value := date()
-  CASE This.CellColIndex == 5
-    oCtrl:Value := 2
-  CASE This.CellColIndex == 6
-    oCtrl:Value := ""
-  ENDCASE
+   DO CASE
+   CASE This.CellColIndex == 1
+      oCtrl:Value := 12345
+   CASE This.CellColIndex == 2
+      oCtrl:Value := "NOMBRE"
+   CASE This.CellColIndex == 3
+      oCtrl:Value := "APELLIDO"
+   CASE This.CellColIndex == 4
+      oCtrl:Value := date()
+   CASE This.CellColIndex == 5
+      oCtrl:Value := 2
+   CASE This.CellColIndex == 6
+      oCtrl:Value := ""
+   ENDCASE
 
-  oCtrl:Setfocus()
+   oCtrl:Setfocus()
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

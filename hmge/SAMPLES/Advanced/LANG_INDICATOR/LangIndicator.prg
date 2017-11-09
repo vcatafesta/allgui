@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -13,147 +11,144 @@
 #define VERSION ' version 1.02'
 #define COPYRIGHT ' 2003-2006 Grigory Filatov'
 
-Static nOldMode := 0, nNewMode := 0, lSound := .F.
+STATIC nOldMode := 0, nNewMode := 0, lSound := .F.
 
-Procedure Main( lStartUp )
-	Local lWinRun := .F., lAbout := .F.
+PROCEDURE Main( lStartUp )
 
-	If !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
-		!Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Indicator" ))
-		lWinRun := .T.
-	EndIf
+   LOCAL lWinRun := .F., lAbout := .F.
 
-	SET MULTIPLE OFF
+   IF !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
+         !Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Indicator" ))
+      lWinRun := .T.
+   ENDIF
 
-	DEFINE WINDOW Form_1 		;
-		AT 0,0 			;
-		WIDTH 0 HEIGHT 0 		;
-		TITLE PROGRAM 		;
-		MAIN NOSHOW 		;
-		ON INIT UpdateNotify() 	;
-		NOTIFYICON 'EN' 		;
-		NOTIFYTOOLTIP PROGRAM 	;
-		ON NOTIFYCLICK ( lAbout := !lAbout, IF(lAbout, MsgAbout(), lAbout := .F.) )
+   SET MULTIPLE OFF
 
-		DEFINE NOTIFY MENU 
+   DEFINE WINDOW Form_1       ;
+         AT 0,0          ;
+         WIDTH 0 HEIGHT 0       ;
+         TITLE PROGRAM       ;
+         MAIN NOSHOW       ;
+         ON INIT UpdateNotify()    ;
+         NOTIFYICON 'EN'       ;
+         NOTIFYTOOLTIP PROGRAM    ;
+         ON NOTIFYCLICK ( lAbout := !lAbout, IF(lAbout, MsgAbout(), lAbout := .F.) )
 
-			ITEM 'Auto&Run'		ACTION ( lWinRun := !lWinRun, ;
-				Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
-				NAME Auto_Run
+      DEFINE NOTIFY MENU
 
-			SEPARATOR	
+         ITEM 'Auto&Run'      ACTION ( lWinRun := !lWinRun, ;
+            Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
+            NAME Auto_Run
 
-			ITEM 'Disable &Sound'	ACTION ( lSound := !lSound, ;
-				Form_1.Sound.Checked := !lSound ) ;
-				NAME Sound CHECKED
+         SEPARATOR
 
-			ITEM 'A&bout...'		ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
-				"Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "AMAIN", 32, 32 ) )
+         ITEM 'Disable &Sound'   ACTION ( lSound := !lSound, ;
+            Form_1.Sound.Checked := !lSound ) ;
+            NAME Sound CHECKED
 
-			SEPARATOR	
+         ITEM 'A&bout...'      ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
+            "Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "AMAIN", 32, 32 ) )
 
-			ITEM 'E&xit'		ACTION Form_1.Release
+         SEPARATOR
 
-		END MENU
+         ITEM 'E&xit'      ACTION Form_1.Release
 
-		Form_1.Auto_Run.Checked := lWinRun
+      END MENU
 
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 100 ;
-			ACTION UpdateNotify()
+      Form_1.Auto_Run.Checked := lWinRun
 
-	END WINDOW
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 100 ;
+         ACTION UpdateNotify()
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
-Static Procedure UpdateNotify()
-*--------------------------------------------------------*
-  Local cFlag, cTip, nNewMode := GetKeyboardMode()
+   RETURN
 
-	if nNewMode != nOldMode
+STATIC PROCEDURE UpdateNotify()
 
-		nOldMode := nNewMode
+   LOCAL cFlag, cTip, nNewMode := GetKeyboardMode()
 
-		DO CASE
-			CASE nNewMode == 1049  // Russian
-				cFlag := "RU"
-				cTip := "Russian"
-				if lSound ;	SoundBeep(4000) ;	endif
+   IF nNewMode != nOldMode
 
-			CASE nNewMode == 1033  // English
-				cFlag := "EN"
-				cTip := "English (USA)"
-				if lSound ;	SoundBeep(4500) ;	endif
+      nOldMode := nNewMode
 
-			CASE nNewMode == 1058  // Ukrainian
-				cFlag := "UA"
-				cTip := "Ukrainian"
-				if lSound ;	SoundBeep(5000) ;	endif
+      DO CASE
+      CASE nNewMode == 1049  // Russian
+         cFlag := "RU"
+         cTip := "Russian"
+         IF lSound ;   SoundBeep(4000) ;   endif
 
-			CASE nNewMode == 1031  // German
-				cFlag := "DE"
-				cTip := "German (St)"
-				if lSound ;	SoundBeep(5500) ;	endif
+         CASE nNewMode == 1033  // English
+            cFlag := "EN"
+            cTip := "English (USA)"
+            IF lSound ;   SoundBeep(4500) ;   endif
 
-			CASE nNewMode == 1034  // Spanish
-				cFlag := "ES"
-				cTip := "Spanish (Tr)"
-				if lSound ;	SoundBeep(6000) ;	endif
+            CASE nNewMode == 1058  // Ukrainian
+               cFlag := "UA"
+               cTip := "Ukrainian"
+               IF lSound ;   SoundBeep(5000) ;   endif
 
-			CASE nNewMode == 1036  // French
-				cFlag := "FR"
-				cTip := "French (St)"
-				if lSound ;	SoundBeep(6500) ;	endif
+               CASE nNewMode == 1031  // German
+                  cFlag := "DE"
+                  cTip := "German (St)"
+                  IF lSound ;   SoundBeep(5500) ;   endif
 
-			CASE nNewMode == 1040  // Italian
-				cFlag := "IT"
-				cTip := "Italian (St)"
-				if lSound ;	SoundBeep(6500) ;	endif
+                  CASE nNewMode == 1034  // Spanish
+                     cFlag := "ES"
+                     cTip := "Spanish (Tr)"
+                     IF lSound ;   SoundBeep(6000) ;   endif
 
-			CASE nNewMode == 1045  // Polish
-				cFlag := "PL"
-				cTip := "Polski "
-				if lSound ;	SoundBeep(6500) ;	endif
-				
-			CASE nNewMode == 1026  // Bulgarian
-				cFlag := "BG"
-				cTip := "Bulgarian "
-				if lSound ;	SoundBeep(6500) ;	endif	
+                     CASE nNewMode == 1036  // French
+                        cFlag := "FR"
+                        cTip := "French (St)"
+                        IF lSound ;   SoundBeep(6500) ;   endif
 
-			OTHERWISE
-				cFlag := "AMAIN"
-				cTip := "Not determined"
-				if lSound ;	SoundBeep(1000) ;	endif
-		ENDCASE
+                        CASE nNewMode == 1040  // Italian
+                           cFlag := "IT"
+                           cTip := "Italian (St)"
+                           IF lSound ;   SoundBeep(6500) ;   endif
 
-		Form_1.NotifyIcon := cFlag
-		Form_1.NotifyTooltip := cTip
+                           CASE nNewMode == 1045  // Polish
+                              cFlag := "PL"
+                              cTip := "Polski "
+                              IF lSound ;   SoundBeep(6500) ;   endif
 
-	endif
+                              CASE nNewMode == 1026  // Bulgarian
+                                 cFlag := "BG"
+                                 cTip := "Bulgarian "
+                                 IF lSound ;   SoundBeep(6500) ;   endif
 
-Return
+                                 OTHERWISE
+                                    cFlag := "AMAIN"
+                                    cTip := "Not determined"
+                                    IF lSound ;   SoundBeep(1000) ;   endif
+                                    ENDCASE
 
-*--------------------------------------------------------*
-Static Function MsgAbout()
-*--------------------------------------------------------*
+                                    Form_1.NotifyIcon := cFlag
+                                    Form_1.NotifyTooltip := cTip
 
-Return MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
-	padc("Copyright " + Chr(169) + COPYRIGHT, 40) + CRLF + CRLF + ;
-	hb_compiler() + CRLF + ;
-	version() + CRLF + ;
-	Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
-	padc("This program is Freeware!", 40) + CRLF + ;
-	padc("Copying is allowed!", 44), "About..." )
+                                 ENDIF
 
-*--------------------------------------------------------*
-Static Procedure WinRun( lMode )
-*--------------------------------------------------------*
-   Local cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
-         cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
-         cRegKey  := GETREGVAR( NIL, cRunKey, "Indicator" )
+                                 RETURN
+
+STATIC FUNCTION MsgAbout()
+
+   RETURN MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
+      padc("Copyright " + Chr(169) + COPYRIGHT, 40) + CRLF + CRLF + ;
+      hb_compiler() + CRLF + ;
+      version() + CRLF + ;
+      Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
+      padc("This program is Freeware!", 40) + CRLF + ;
+      padc("Copying is allowed!", 44), "About..." )
+
+STATIC PROCEDURE WinRun( lMode )
+
+   LOCAL cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
+      cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
+      cRegKey  := GETREGVAR( NIL, cRunKey, "Indicator" )
 
    IF lMode
       IF Empty(cRegKey) .OR. cRegKey # cRunName
@@ -163,11 +158,10 @@ Static Procedure WinRun( lMode )
       DELREGVAR( NIL, cRunKey, "Indicator" )
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -176,11 +170,10 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -189,11 +182,10 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg, nValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -201,8 +193,7 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    nValue := oReg:Delete(cSubKey)
    oReg:Close()
 
-RETURN nValue
-
+   RETURN nValue
 
 #pragma BEGINDUMP
 
@@ -210,23 +201,24 @@ RETURN nValue
 
 HB_FUNC( SOUNDBEEP )
 {
-	Beep( hb_parni( 1 ), 50 );
+   Beep( hb_parni( 1 ), 50 );
 }
 
 HB_FUNC( GETKEYBOARDMODE )
 {
-	HKL   kbl;
-	HWND  CurApp;
-	DWORD idthd;
-	int   newmode;
+   HKL   kbl;
+   HWND  CurApp;
+   DWORD idthd;
+   int   newmode;
 
-	CurApp  = GetForegroundWindow();
-	idthd   = GetWindowThreadProcessId( CurApp, NULL );
+   CurApp  = GetForegroundWindow();
+   idthd   = GetWindowThreadProcessId( CurApp, NULL );
 
-	kbl     = GetKeyboardLayout( idthd );
-	newmode = ( int ) LOWORD( kbl );
+   kbl     = GetKeyboardLayout( idthd );
+   newmode = ( int ) LOWORD( kbl );
 
-	hb_retnl( newmode );
+   hb_retnl( newmode );
 }
 
 #pragma ENDDUMP
+

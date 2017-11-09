@@ -1,33 +1,33 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Timer Test' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Timer Test' ;
+         MAIN
 
-		DEFINE TIMER Timer_1 ;
-		INTERVAL 10000 ;
-		ACTION TimerTest() 
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 10000 ;
+         ACTION TimerTest()
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return
+   RETURN
 
-Procedure TimerTest()
+PROCEDURE TimerTest()
 
-*	If time() == "11:00:00"
-*		RELEASE WINDOW MAIN
-*	EndIf
+   *   If time() == "11:00:00"
+   *      RELEASE WINDOW MAIN
+   *   EndIf
 
-	Form_1.Timer_1.Enabled := .F.
-	MsgInfo ('Hey')
-	Form_1.Timer_1.Enabled := .T.
+   Form_1.Timer_1.Enabled := .F.
+   MsgInfo ('Hey')
+   Form_1.Timer_1.Enabled := .T.
 
-Return
+   RETURN

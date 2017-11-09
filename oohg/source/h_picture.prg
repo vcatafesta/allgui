@@ -1,70 +1,59 @@
 /*
- * $Id: h_picture.prg,v 1.33 2017/08/25 19:42:22 fyurisich Exp $
- */
+* $Id: h_picture.prg,v 1.33 2017/08/25 19:42:22 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * Picture control
- *
- * Copyright 2009-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* Picture control
+* Copyright 2009-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "hbclass.ch"
 #include "i_windefs.ch"
 
 CLASS TPicture FROM TControl
+
    DATA Type               INIT "PICTURE" READONLY
    DATA nWidth             INIT 100
    DATA nHeight            INIT 100
@@ -80,37 +69,55 @@ CLASS TPicture FROM TControl
    DATA lNoTransparent     INIT .F.
    DATA aExcludeArea       INIT {}
 
-   METHOD Define
-   METHOD RePaint
-   METHOD Release
-   METHOD SizePos
-   METHOD Picture          SETGET
-   METHOD Buffer           SETGET
-   METHOD HBitMap          SETGET
-   METHOD Zoom             SETGET
-   METHOD Rotate           SETGET
-   METHOD OnClick          SETGET
-   METHOD HorizontalScroll SETGET
-   METHOD VerticalScroll   SETGET
-   METHOD Events
-   METHOD nDegree          SETGET
-   METHOD Redraw
-   METHOD ToolTip          SETGET
-   METHOD OriginalSize
-   METHOD CurrentSize
-   METHOD Blend
-   METHOD Copy
+METHOD Define
+
+METHOD RePaint
+
+METHOD Release
+
+METHOD SizePos
+
+METHOD Picture          SETGET
+
+METHOD Buffer           SETGET
+
+METHOD HBitMap          SETGET
+
+METHOD Zoom             SETGET
+
+METHOD Rotate           SETGET
+
+METHOD OnClick          SETGET
+
+METHOD HorizontalScroll SETGET
+
+METHOD VerticalScroll   SETGET
+
+METHOD Events
+
+METHOD nDegree          SETGET
+
+METHOD Redraw
+
+METHOD ToolTip          SETGET
+
+METHOD OriginalSize
+
+METHOD CurrentSize
+
+METHOD Blend
+
+METHOD Copy
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, x, y, FileName, w, h, cBuffer, hBitMap, ;
-               stretch, autofit, imagesize, BORDER, CLIENTEDGE, BackColor, ;
-               ProcedureName, ToolTip, HelpId, lRtl, invisible, lNoLoadTrans, ;
-               lNo3DColors, lNoDIB, lStyleTransp, aArea, lDisabled ) CLASS TPicture
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle, nStyleEx
+      stretch, autofit, imagesize, BORDER, CLIENTEDGE, BackColor, ;
+ProcedureName, ToolTip, HelpId, lRtl, invisible, lNoLoadTrans, ;
+      lNo3DColors, lNoDIB, lStyleTransp, aArea, lDisabled ) CLASS TPicture
+   LOCAL ControlHandle, nStyle, nStyleEx
 
    ASSIGN ::nCol           VALUE x            TYPE "N"
    ASSIGN ::nRow           VALUE y            TYPE "N"
@@ -125,16 +132,16 @@ Local ControlHandle, nStyle, nStyleEx
    ASSIGN ::aExcludeArea   VALUE aArea        TYPE "A"
    ASSIGN lDisabled        VALUE lDisabled    TYPE "L" DEFAULT .F.
 
-/*
+   /*
    IF BackColor== NIL
-      BackColor := GetSysColor( COLOR_3DFACE )
+   BackColor := GetSysColor( COLOR_3DFACE )
    ENDIF
-*/
+   */
 
    ::SetForm( ControlName, ParentForm,,,, BackColor, , lRtl )
 
    nStyle := ::InitStyle( ,, Invisible, .T., lDisabled  ) + ;
-             if( ValType( BORDER ) == "L" .AND. BORDER, WS_BORDER, 0 )
+      if( ValType( BORDER ) == "L" .AND. BORDER, WS_BORDER, 0 )
 
    nStyleEx := if( ValType( CLIENTEDGE ) == "L" .AND. CLIENTEDGE, WS_EX_CLIENTEDGE, 0 )
    IF HB_IsLogical( lStyleTransp ) .AND. lStyleTransp
@@ -146,23 +153,23 @@ Local ControlHandle, nStyle, nStyleEx
    ::Register( ControlHandle, ControlName, HelpId,, ToolTip )
 
    ::Picture := FileName
-   If ! ValidHandler( ::hImage )
+   IF ! ValidHandler( ::hImage )
       ::Buffer := cBuffer
-      If ! ValidHandler( ::hImage )
+      IF ! ValidHandler( ::hImage )
          ::HBitMap := hBitMap
-      EndIf
-   EndIf
+      ENDIF
+   ENDIF
 
    ASSIGN ::OnClick VALUE ProcedureName TYPE "B"
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD Picture( cPicture, lNoRepaint ) CLASS TPicture
-*------------------------------------------------------------------------------*
-LOCAL nAttrib, aPictSize
+
+   LOCAL nAttrib, aPictSize
+
    IF VALTYPE( cPicture ) $ "CM"
-      DeleteObject( ::hImage )
+      DELETEObject( ::hImage )
       ::cPicture := cPicture
 
       IF ::lNoDIBSection
@@ -170,12 +177,12 @@ LOCAL nAttrib, aPictSize
 
          nAttrib := LR_DEFAULTCOLOR
          IF aPictSize[ 3 ] <= 8
-           IF ! ::lNo3DColors
-              nAttrib += LR_LOADMAP3DCOLORS
-           ENDIF
-           IF ! ::lNoTransparent
-              nAttrib += LR_LOADTRANSPARENT
-           ENDIF
+            IF ! ::lNo3DColors
+               nAttrib += LR_LOADMAP3DCOLORS
+            ENDIF
+            IF ! ::lNoTransparent
+               nAttrib += LR_LOADTRANSPARENT
+            ENDIF
          ENDIF
       ELSE
          nAttrib := LR_CREATEDIBSECTION
@@ -183,83 +190,84 @@ LOCAL nAttrib, aPictSize
 
       // load image at full size
       ::hImage := _OOHG_BitmapFromFile( Self, cPicture, nAttrib, .F. )
-      If ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
+      IF ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
          ::RePaint()
-      EndIf
-   EndIf
-Return ::cPicture
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN ::cPicture
+
 METHOD HBitMap( hBitMap, lNoRepaint ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If ValType( hBitMap ) $ "NP"
-      DeleteObject( ::hImage )
+
+   IF ValType( hBitMap ) $ "NP"
+      DELETEObject( ::hImage )
       ::hImage := hBitMap
-      If ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
+      IF ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
          ::RePaint()
-      EndIf
+      ENDIF
       ::cPicture := ""
-   EndIf
-Return ::hImage
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN ::hImage
+
 METHOD Buffer( cBuffer, lNoRepaint ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If VALTYPE( cBuffer ) $ "CM"
-      DeleteObject( ::hImage )
+
+   IF VALTYPE( cBuffer ) $ "CM"
+      DELETEObject( ::hImage )
       ::hImage := _OOHG_BitmapFromBuffer( Self, cBuffer, .F. )
-      If ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
+      IF ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
          ::RePaint()
-      EndIf
+      ENDIF
       ::cPicture := ""
-   EndIf
-Return nil
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 METHOD Zoom( nZoom, lNoRepaint ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If HB_IsNumeric( nZoom )
+
+   IF HB_IsNumeric( nZoom )
       ::nZoom := nZoom
-      If ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
+      IF ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
          ::RePaint()
-      EndIf
-   EndIf
-Return ::nZoom
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN ::nZoom
+
 METHOD Rotate( nDegree, lNoRepaint ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If HB_IsNumeric( nDegree )
-      ::nDegree := nDegree
-      If ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
-         ::RePaint()
-      EndIf
-   EndIf
-Return ::nDegree
 
-*------------------------------------------------------------------------------*
+   IF HB_IsNumeric( nDegree )
+      ::nDegree := nDegree
+      IF ! HB_IsLogical( lNoRepaint ) .OR. ! lNoRepaint
+         ::RePaint()
+      ENDIF
+   ENDIF
+
+   RETURN ::nDegree
+
 METHOD OnClick( bOnClick ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If PCOUNT() > 0
+
+   IF PCOUNT() > 0
       ::bOnClick := bOnClick
       TPicture_SetNotify( Self, HB_IsBlock( bOnClick ) )
-   EndIf
-Return ::bOnClick
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN ::bOnClick
+
 METHOD ToolTip( cToolTip ) CLASS TPicture
-*------------------------------------------------------------------------------*
-   If PCOUNT() > 0
-      TPicture_SetToolTip( Self,  ( ValType( cToolTip ) $ "CM" .AND. ! Empty( cToolTip ) ) .OR. HB_IsBlock( cToolTip ) )
-   EndIf
-Return ::Super:ToolTip( cToolTip )
 
-*------------------------------------------------------------------------------*
+   IF PCOUNT() > 0
+      TPicture_SetToolTip( Self,  ( ValType( cToolTip ) $ "CM" .AND. ! Empty( cToolTip ) ) .OR. HB_IsBlock( cToolTip ) )
+   ENDIF
+
+   RETURN ::Super:ToolTip( cToolTip )
+
 METHOD RePaint( lMoving ) CLASS TPicture
-*------------------------------------------------------------------------------*
-LOCAL nWidth, nHeight, nAux
+
+   LOCAL nWidth, nHeight, nAux
+
    IF ValidHandler( ::AuxHandle ) .AND. ! ::AuxHandle == ::hImage
-      DeleteObject( ::AuxHandle )
+      DELETEObject( ::AuxHandle )
    ENDIF
    IF ( ::Stretch .OR. ::AutoFit ) .AND. ! ::ImageSize
       // TO DO: ROTATE
@@ -287,67 +295,72 @@ LOCAL nWidth, nHeight, nAux
    IF ( ! HB_IsLogical( lMoving ) .OR. ! lMoving )
       ::ReDraw()
    ENDIF
-RETURN Self
 
-*------------------------------------------------------------------------------*
+   RETURN Self
+
 METHOD SizePos( Row, Col, Width, Height ) CLASS TPicture
-*------------------------------------------------------------------------------*
-LOCAL uRet
+
+   LOCAL uRet
+
    uRet := ::Super:SizePos( Row, Col, Width, Height )
    ::RePaint( .T. )
-RETURN uRet
 
-*------------------------------------------------------------------------------*
+   RETURN uRet
+
 METHOD Release() CLASS TPicture
-*------------------------------------------------------------------------------*
-   DeleteObject( ::hImage )
-RETURN ::Super:Release()
 
-*------------------------------------------------------------------------------*
+   DELETEObject( ::hImage )
+
+   RETURN ::Super:Release()
+
 METHOD HorizontalScroll( nPosition ) CLASS TPicture
-*------------------------------------------------------------------------------*
-Local nRangeMin, nRangeMax, nPos
+
+   LOCAL nRangeMin, nRangeMax, nPos
+
    nPos := GetScrollPos( ::hWnd, SB_HORZ )
-   If HB_IsNumeric( nPosition )
+   IF HB_IsNumeric( nPosition )
       nRangeMin := GetScrollRangeMin( ::hWnd, SB_HORZ )
       nRangeMax := GetScrollRangeMax( ::hWnd, SB_HORZ )
-      If nRangeMin != nRangeMax
+      IF nRangeMin != nRangeMax
          nPos := MIN( nRangeMax, MAX( nRangeMin, nPosition ) )
          SetScrollPos( ::hWnd, SB_HORZ, nPos, .T. )
-      EndIf
-   EndIf
-Return nPos
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN nPos
+
 METHOD VerticalScroll( nPosition ) CLASS TPicture
-*------------------------------------------------------------------------------*
-Local nRangeMin, nRangeMax, nPos
+
+   LOCAL nRangeMin, nRangeMax, nPos
+
    nPos := GetScrollPos( ::hWnd, SB_VERT )
-   If HB_IsNumeric( nPosition )
+   IF HB_IsNumeric( nPosition )
       nRangeMin := GetScrollRangeMin( ::hWnd, SB_VERT )
       nRangeMax := GetScrollRangeMax( ::hWnd, SB_VERT )
-      If nRangeMin != nRangeMax
+      IF nRangeMin != nRangeMax
          nPos := MIN( nRangeMax, MAX( nRangeMin, nPosition ) )
          SetScrollPos( ::hWnd, SB_VERT, nPos, .T. )
-      EndIf
-   EndIf
-Return nPos
+      ENDIF
+   ENDIF
 
-*------------------------------------------------------------------------------*
+   RETURN nPos
+
 METHOD OriginalSize() CLASS TPicture
-*------------------------------------------------------------------------------*
-Local aRet
+
+   LOCAL aRet
+
    IF ValidHandler( ::hImage )
       aRet := { _OOHG_BitMapWidth( ::hImage ), _OOHG_BitMapHeight( ::hImage ) }
    ELSE
       aRet := { 0, 0 }
    ENDIF
-RETURN aRet
 
-*------------------------------------------------------------------------------*
+   RETURN aRet
+
 METHOD CurrentSize() CLASS TPicture
-*------------------------------------------------------------------------------*
-Local aRet
+
+   LOCAL aRet
+
    IF ValidHandler( ::AuxHandle )
       aRet := { _OOHG_BitMapWidth( ::AuxHandle ), _OOHG_BitMapHeight( ::AuxHandle ) }
    ELSEIF ValidHandler( ::hImage )
@@ -355,22 +368,22 @@ Local aRet
    ELSE
       aRet := { 0, 0 }
    ENDIF
-RETURN aRet
 
-*------------------------------------------------------------------------------*
+   RETURN aRet
+
 METHOD Blend( hSprite, nImgX, nImgY, nImgW, nImgH, aColor, nSprX, nSprY, nSprW, nSprH ) CLASS TPicture
-*------------------------------------------------------------------------------*
+
    _OOHG_BlendImage( ::hImage, nImgX, nImgY, nImgW, nImgH, hSprite, aColor, nSprX, nSprY, nSprW, nSprH )
    ::RePaint()
-RETURN Self
 
-*------------------------------------------------------------------------------*
+   RETURN Self
+
 METHOD Copy( lAsDIB ) CLASS TPicture
-*------------------------------------------------------------------------------*
+
    DEFAULT lAsDIB TO ! ::lNoDIBSection
    // Do not forget to call DeleteObject
-RETURN _OOHG_CopyBitmap( ::hImage, 0, 0 )
 
+   RETURN _OOHG_CopyBitmap( ::hImage, 0, 0 )
 
 #pragma BEGINDUMP
 
@@ -402,11 +415,13 @@ static BOOL bRegistered = 0;
 
 static LRESULT APIENTRY SubClassFunc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProc );
 }
 
 static LRESULT CALLBACK _OOHG_PictureControl_WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
+
    return DefWindowProc( hWnd, message, wParam, lParam );
 }
 
@@ -477,6 +492,7 @@ void _OOHG_PictureControl_RePaint( PHB_ITEM pSelf, RECT *rect, HDC hdc )
    hWnd = oSelf->hWnd;
    if( ! ValidHandler( hWnd ) )
    {
+
       return;
    }
 
@@ -920,6 +936,7 @@ HB_FUNC( SCROLLS )   // ( hWnd, nWidth, nHeight )
    if( ! ValidHandler( hWnd ) )
    {
       hb_retl( 0 );
+
       return;
    }
 
@@ -1031,3 +1048,4 @@ HB_FUNC( SCROLLS )   // ( hWnd, nWidth, nHeight )
 }
 
 #pragma ENDDUMP
+

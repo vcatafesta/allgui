@@ -6,32 +6,32 @@ STATIC cSearchString := "", cWindowName, cBrowseName
 
 FUNCTION Main()
 
-REQUEST DBFNSX
+   REQUEST DBFNSX
 
-SET BROWSESYNC ON
+   SET BROWSESYNC ON
 
-dbUseArea( .T., "DBFNSX", "MUSIC", .F. )
-ordSetFocus( 1 )
-dbGoTop()
+   dbUseArea( .T., "DBFNSX", "MUSIC", .F. )
+   ordSetFocus( 1 )
+   dbGoTop()
 
-DEFINE WINDOW wndMainForm;
-      AT 0, 0;
-      WIDTH 645;
-      HEIGHT 403;
-      TITLE "Browse Quick Search Demo";
-      MAIN;
-      ON INIT cWindowName := This.Name ;
-      ON RELEASE dbCloseArea( "MUSIC" )
+   DEFINE WINDOW wndMainForm;
+         AT 0, 0;
+         WIDTH 645;
+         HEIGHT 403;
+         TITLE "Browse Quick Search Demo";
+         MAIN;
+         ON INIT cWindowName := This.Name ;
+         ON RELEASE dbCloseArea( "MUSIC" )
 
       DEFINE STATUSBAR
-            STATUSITEM "Type to QuickSearch"
-            KEYBOARD
+         STATUSITEM "Type to QuickSearch"
+         KEYBOARD
       END STATUSBAR
 
       ON KEY ESCAPE ACTION ThisWindow.Release()
-END WINDOW
+   END WINDOW
 
-@ 5, 5 BROWSE brsMainBrowse;
+   @ 5, 5 BROWSE brsMainBrowse;
       OF wndMainForm;
       WIDTH 620;
       HEIGHT 332;
@@ -42,13 +42,14 @@ END WINDOW
       JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT };
       ON GOTFOCUS cBrowseName := This.Name
 
-CREATE EVENT PROCNAME BrowseQuickIndexSearch()
+   CREATE EVENT PROCNAME BrowseQuickIndexSearch()
 
-wndMainForm.Center()
-wndMainForm.Activate()
+   wndMainForm.Center()
+   wndMainForm.Activate()
 
-RETURN NIL
-// ------------------------------------------------------------ //
+   RETURN NIL
+   // ------------------------------------------------------------ //
+
 FUNCTION BrowseQuickIndexSearch( hWnd, nMsg, wParam, lParam )
 
    LOCAL nKey, cKey
@@ -68,31 +69,38 @@ FUNCTION BrowseQuickIndexSearch( hWnd, nMsg, wParam, lParam )
 
             CASE nKey == VK_UP
                _BrowseUp( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             CASE nKey == VK_DOWN
                _BrowseDown( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             CASE nKey == VK_HOME
                _BrowseHome( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             CASE nKey == VK_END
                _BrowseEnd( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             CASE nKey == VK_PRIOR
                _BrowsePrior( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             CASE nKey == VK_NEXT
                _BrowseNext( cBrowseName, cWindowName )
+
                RETURN ClearSearch()
 
             OTHERWISE
                cKey := Chr( nKey )
                IF IsAlpha( cKey ) .OR. IsDigit( cKey ) .OR. nKey == VK_BACK
+
                   RETURN IncrementalSearch( cKey, nKey )
                ENDIF
 
@@ -104,15 +112,17 @@ FUNCTION BrowseQuickIndexSearch( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN NIL
-// ------------------------------------------------------------ //
+   RETURN NIL
+   // ------------------------------------------------------------ //
+
 STATIC FUNCTION ClearSearch()
 
    cSearchString := ""
    SetProperty( cWindowName, "StatusBar", "Item", 1, "" )
 
-RETURN 1
-// ------------------------------------------------------------ //
+   RETURN 1
+   // ------------------------------------------------------------ //
+
 STATIC FUNCTION IncrementalSearch( cKey, nKey )
 
    LOCAL nOldRec
@@ -134,4 +144,5 @@ STATIC FUNCTION IncrementalSearch( cKey, nKey )
    SetProperty( cWindowName, "StatusBar", "Item", 1, "Quicksearch: " + iif( Empty( cSearchString ), "", cSearchString ) )
    DoMethod( cWindowName, cBrowseName, 'Setfocus' )
 
-RETURN 1
+   RETURN 1
+

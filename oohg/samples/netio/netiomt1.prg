@@ -1,20 +1,17 @@
 /*
- * $Id: netiomt1.prg 16111 2011-01-25 22:33:36Z vszakats $
- */
+* $Id: netiomt1.prg 16111 2011-01-25 22:33:36Z vszakats $
+*/
 
 /*
- * Harbour Project source code:
- *    demonstration/test code for NETIOSRV remote management
- *
- * Copyright 2010-2011 Viktor Szakats (harbour.01 syenar.hu)
- * www - http://harbour-project.org
- *
- */
+* Harbour Project source code:
+*    demonstration/test code for NETIOSRV remote management
+* Copyright 2010-2011 Viktor Szakats (harbour.01 syenar.hu)
+* www - http://harbour-project.org
+*/
 
 #define NETSERVER  "127.0.0.1"
 #define NETPORT    2940
 #define NETPASSWD  "toptopsecret"
-
 
 proc main()
 
@@ -30,4 +27,5 @@ proc main()
    /* close the connection to the server */
    ? "NETIO_DISCONNECT():", netio_disconnect( NETSERVER, NETPORT )
 
-return
+   RETURN
+

@@ -1,30 +1,29 @@
 /*
- * Ejemplo MDI n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo cambiar los controles de las
- * ventanas hijas de una aplicación MDI.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo MDI n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo cambiar los controles de las
+* ventanas hijas de una aplicación MDI.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 PROCEDURE MAIN()
+
    LOCAL oMain
 
    DEFINE WINDOW wMain OBJ oMain ;
-      AT 50,0 ;
-      WIDTH  800 ;
-      HEIGHT 600 ;
-      TITLE "MDI" ;
-      MDI
+         AT 50,0 ;
+         WIDTH  800 ;
+         HEIGHT 600 ;
+         TITLE "MDI" ;
+         MDI
 
       DEFINE STATUSBAR
-        STATUSITEM "El poder de OOHG !!!"
+         STATUSITEM "El poder de OOHG !!!"
       END STATUSBAR
 
       DEFINE TOOLBAR TB BUTTONSIZE 70, 22 BORDER
@@ -65,9 +64,11 @@ PROCEDURE MAIN()
    END WINDOW
 
    ACTIVATE WINDOW wMain
-RETURN
+
+   RETURN
 
 PROCEDURE OrdenarChilds( oMain, nAccion )
+
    IF HB_IsObject( oMain:oWndClient )
       IF Len( oMain:oWndClient:SplitChildList ) > 0
          DO CASE
@@ -82,17 +83,21 @@ PROCEDURE OrdenarChilds( oMain, nAccion )
          ENDCASE
       ENDIF
    ENDIF
-RETURN
+
+   RETURN
 
 PROCEDURE NombreChildActiva( oMain )
+
    LOCAL cNombre := "No hay childs activas !!!"
 
    IF HB_IsObject( oMain:oWndClient )
       cNombre := oMain:oWndClient:ActiveChild():Name
    ENDIF
-RETURN cNombre
+
+   RETURN cNombre
 
 PROCEDURE MostrarEstado( oMain )
+
    LOCAL oChild, aEstado := {}
 
    IF HB_IsObject( oMain:oWndClient )
@@ -103,9 +108,11 @@ PROCEDURE MostrarEstado( oMain )
    ELSE
       AutoMsgBox( "No hay childs activas !!!" )
    ENDIF
-RETURN
+
+   RETURN
 
 PROCEDURE MostrarChilds( oMain )
+
    LOCAL oChild, aNombres := {}
 
    IF HB_IsObject( oMain:oWndClient )
@@ -116,18 +123,20 @@ PROCEDURE MostrarChilds( oMain )
    ELSE
       AutoMsgBox( "No hay childs activas !!!" )
    ENDIF
-RETURN
+
+   RETURN
 
 PROCEDURE NuevaChild( oMain )
+
    DEFINE WINDOW 0 ;
-      AT 0, 0 ;
-      PARENT wMain ;
-      WIDTH 300 ;
-      HEIGHT 200 ;
-      MDICHILD ;
-      ON INIT IniciarChild( oMain, _OOHG_ThisForm ) ;
-      ON RELEASE oMain:StatusBar:Item( 1, "" ) ;
-      ON GOTFOCUS oMain:StatusBar:Item( 1, "Activa: " + ThisWindow:Title )
+         AT 0, 0 ;
+         PARENT wMain ;
+         WIDTH 300 ;
+         HEIGHT 200 ;
+         MDICHILD ;
+         ON INIT IniciarChild( oMain, _OOHG_ThisForm ) ;
+         ON RELEASE oMain:StatusBar:Item( 1, "" ) ;
+         ON GOTFOCUS oMain:StatusBar:Item( 1, "Activa: " + ThisWindow:Title )
 
       DEFINE STATUSBAR
          STATUSITEM ""
@@ -145,9 +154,10 @@ PROCEDURE NuevaChild( oMain )
       ON KEY ESCAPE ACTION ThisWindow.Release()
    END WINDOW
 
-RETURN
+   RETURN
 
 PROCEDURE IniciarChild( oMain, oChild )
+
    LOCAL nPos
 
    nPos := Len( oMain:oWndClient:SplitChildList )
@@ -164,16 +174,20 @@ PROCEDURE IniciarChild( oMain, oChild )
    oMain:StatusBar:Item( 1, "Nueva child: " + oChild:Name )
 
    /*
-    * Note que en este punto ocurre un error en tiempo de ejecución
-    * si se intenta acceder a los controles oChild:StatusBar u oChild:lbl_1.
-    */
-RETURN
+   * Note que en este punto ocurre un error en tiempo de ejecución
+   * si se intenta acceder a los controles oChild:StatusBar u oChild:lbl_1.
+   */
+
+   RETURN
 
 PROCEDURE MiMensaje( oWin )
+
    MsgBox( "Acabas de hacer clic sobre lbl_1 de " + oWin:Name )
-RETURN
+
+   RETURN
 
 PROCEDURE CambiarValorLabel( oMain )
+
    LOCAL oActiveChild
 
    IF HB_IsObject( oMain:oWndClient )
@@ -182,9 +196,10 @@ PROCEDURE CambiarValorLabel( oMain )
    ELSE
       MsgBox( "No hay ventanas hijas !!!" )
    ENDIF
-RETURN
 
+   RETURN
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

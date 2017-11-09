@@ -1,15 +1,13 @@
 /*
- * Ejemplo Listbox n° 4
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo definir un listbox con items
- * arrastrables y también el uso de diferentes métodos.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Listbox n° 4
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo definir un listbox con items
+* arrastrables y también el uso de diferentes métodos.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -18,11 +16,11 @@ FUNCTION Main
    LOCAL oList2
 
    DEFINE WINDOW Win1 ;
-      AT 0,0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'ListBox con items arrastrables' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'ListBox con items arrastrables' ;
+         MAIN
 
       DEFINE MAIN MENU
          POPUP "Acciones"
@@ -37,7 +35,7 @@ FUNCTION Main
       END MENU
 
       @ 10,20 LISTBOX lst_1 OBJ oList1 ;         // no se requiere declarar oList1, se crea PRIVATE
-         WIDTH 100 ;
+      WIDTH 100 ;
          HEIGHT 200 ;
          ITEMS { '01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20' } ;
          DRAGITEMS ;
@@ -62,8 +60,9 @@ FUNCTION Main
    CENTER WINDOW Win1
    ACTIVATE WINDOW Win1
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

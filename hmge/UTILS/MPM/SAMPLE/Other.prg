@@ -2,12 +2,12 @@
 
 DECLARE WINDOW FORM_1
 
-Procedure InOtherPrg()
+PROCEDURE InOtherPrg()
 
-	Form_1.Title := 'Title Changed In Other Prg' 
+   Form_1.Title := 'Title Changed In Other Prg'
 
-Return
+   RETURN
 
 STATIC PROCEDURE TEST
 
-RETURN
+   RETURN

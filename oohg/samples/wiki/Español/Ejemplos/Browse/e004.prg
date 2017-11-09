@@ -1,19 +1,16 @@
 /*
- * Ejemplo Browse n° 4
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG mantenida
- * por Ciro Vargas Clemow <cvc@oohg.org>
- *
- * Este ejemplo muestra el comportamiento del Browse cuando se
- * edita un archivo dbf (con o sin índice activo) junto con las
- * cláusulas FULLMOVE, INPLACE, FORCEREFRESH y NOREFRESH.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 4
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG mantenida
+* por Ciro Vargas Clemow <cvc@oohg.org>
+* Este ejemplo muestra el comportamiento del Browse cuando se
+* edita un archivo dbf (con o sin índice activo) junto con las
+* cláusulas FULLMOVE, INPLACE, FORCEREFRESH y NOREFRESH.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -29,15 +26,15 @@ FUNCTION Main
    SET BROWSESYNC ON
 
    DEFINE WINDOW Form_1 OBJ Form_1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 500 HEIGHT 380 ;
-      MINWIDTH 500 MINHEIGHT 380 ;
-      TITLE 'ooHG Demo - Edición en el Browse' ;
-      MAIN NOMAXIMIZE ;
-      ON INIT { || OnPaint( Form_1 ), OpenTables() } ;
-      ON RELEASE dbCloseAll() ;
-      ON SIZE OnPaint( Form_1 )
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 500 HEIGHT 380 ;
+         MINWIDTH 500 MINHEIGHT 380 ;
+         TITLE 'ooHG Demo - Edición en el Browse' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT { || OnPaint( Form_1 ), OpenTables() } ;
+         ON RELEASE dbCloseAll() ;
+         ON SIZE OnPaint( Form_1 )
 
       DEFINE MAIN MENU
          ITEM "Index" ;
@@ -52,63 +49,63 @@ FUNCTION Main
             ITEM "Force" ;
                NAME mnu_1 ;
                ACTION { || Browse_1:RefreshType := 0, ;
-                           Form_1:mnu_1:Checked := .T., ;
-                           Form_1:mnu_2:Checked := .F., ;
-                           Form_1:mnu_3:Checked := .F. }
+               Form_1:mnu_1:Checked := .T., ;
+               Form_1:mnu_2:Checked := .F., ;
+               Form_1:mnu_3:Checked := .F. }
             ITEM "No" ;
                NAME mnu_2 ;
                ACTION { || Browse_1:RefreshType := 1, ;
-                           Form_1:mnu_1:Checked := .F., ;
-                           Form_1:mnu_2:Checked := .T., ;
-                           Form_1:mnu_3:Checked := .F. }
+               Form_1:mnu_1:Checked := .F., ;
+               Form_1:mnu_2:Checked := .T., ;
+               Form_1:mnu_3:Checked := .F. }
             ITEM "Default" ;
                NAME mnu_3 ;
                CHECKED ;
                ACTION { || Browse_1:RefreshType := NIL, ;
-                           Form_1:mnu_1:Checked := .F., ;
-                           Form_1:mnu_2:Checked := .F., ;
-                           Form_1:mnu_3:Checked := .T. }
+               Form_1:mnu_1:Checked := .F., ;
+               Form_1:mnu_2:Checked := .F., ;
+               Form_1:mnu_3:Checked := .T. }
          END POPUP
          ITEM "Data" ;
             ACTION Form_1.StatusBar.Item( 1 ) := ;
-                      IF( lIndex, "INDX - ", "NO INDX - " ) + ;
-                      IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
-                      IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
-                      IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
-                      "RecNo: " + LTrim( Str( test->(RecNo()) ) ) + ;
-                      " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
-                      " Append: " + DataAppend
+            IF( lIndex, "INDX - ", "NO INDX - " ) + ;
+            IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
+            IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
+            IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
+            "RecNo: " + LTrim( Str( test->(RecNo()) ) ) + ;
+            " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
+            " Append: " + DataAppend
       END MENU
 
       DEFINE STATUSBAR
-        STATUSITEM "El Poder de OOHG !!!"
+         STATUSITEM "El Poder de OOHG !!!"
       END STATUSBAR
 
       @ 10, 10 BROWSE Browse_1 OBJ Browse_1 ;
          WIDTH 610 ;
          HEIGHT 390 ;
          HEADERS { 'Código', ;
-                   'Nombre', ;
-                   'Apellido', ;
-                   'Nacido', ;
-                   'Casado' } ;
+         'Nombre', ;
+         'Apellido', ;
+         'Nacido', ;
+         'Casado' } ;
          WIDTHS { 150, ;
-                  150, ;
-                  150, ;
-                  150, ;
-                  150 } ;
+         150, ;
+         150, ;
+         150, ;
+         150 } ;
          WORKAREA test ;
          FIELDS { 'Code', ;
-                  'First', ;
-                  'Last', ;
-                  'Birth', ;
-                  'Married' } ;
+         'First', ;
+         'Last', ;
+         'Birth', ;
+         'Married' } ;
          FONT "Courier New" SIZE 10 ;
          JUSTIFY { BROWSE_JTFY_RIGHT, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER, ;
-                   BROWSE_JTFY_CENTER } ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER, ;
+         BROWSE_JTFY_CENTER } ;
          DELETE ;
          LOCK ;
          EDIT ;
@@ -116,23 +113,23 @@ FUNCTION Main
          FULLMOVE ;
          APPEND ;
          ON CHANGE Form_1.StatusBar.Item( 1 ) := ;
-                      IF( lIndex, "INDX - ", "NO INDX - " ) + ;
-                      IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
-                      IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
-                      IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
-                      "RecNo: " + LTRIM( Str( test->(RecNo()) ) ) + ;
-                      " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
-                      " Append: " + DataAppend ;
+         IF( lIndex, "INDX - ", "NO INDX - " ) + ;
+         IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
+         IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
+         IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
+         "RecNo: " + LTRIM( Str( test->(RecNo()) ) ) + ;
+         " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
+         " Append: " + DataAppend ;
          ON APPEND Form_1.StatusBar.Item( 1 ) := ;
-                      IF( lIndex, "INDX - ", "NO INDX - " ) + ;
-                      IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
-                      IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
-                      IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
-                      "RecNo: " + LTrim( Str( test->(RecNo()) ) ) + ;
-                      " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
-                      " Append: " + ;
-                      ( DataAppend := LTrim( Str( test->(RecNo()) ) ) + ;
-                                      " " + LTrim( Str( Browse_1:Value )) )
+         IF( lIndex, "INDX - ", "NO INDX - " ) + ;
+         IF( SetBrowseSync(), "SYNC - ", "NO SYNC - " ) + ;
+         IF( Browse_1:InPlace, "INPL - ", "NO INPL - " ) + ;
+         IF( Browse_1:FullMove, "FULL - ", "NO FULL - " ) + ;
+         "RecNo: " + LTrim( Str( test->(RecNo()) ) ) + ;
+         " Value: " + LTrim( Str( Browse_1:Value ) ) + ;
+         " Append: " + ;
+         ( DataAppend := LTrim( Str( test->(RecNo()) ) ) + ;
+         " " + LTrim( Str( Browse_1:Value )) )
 
       ON KEY ESCAPE ACTION Form_1.Release
    END WINDOW
@@ -141,9 +138,8 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OpenTables()
 
    LOCAL aDbf[ 5, 4 ]
@@ -193,20 +189,20 @@ FUNCTION OpenTables()
 
    Form_1.Browse_1.Value := RecNo()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION OnPaint( Form )
 
-  WITH OBJECT Form
-    :Browse_1:Row    := ;
-    :Browse_1:Col    := 20
-    :Browse_1:Width  := :ClientWidth - :Browse_1:Col * 2
-    :Browse_1:Height := :ClientHeight - :Browse_1:Row * 2 + :StatusBar:ClientHeightUsed
-  END WITH
+   WITH OBJECT Form
+      :Browse_1:Row    := ;
+         :Browse_1:Col    := 20
+      :Browse_1:Width  := :ClientWidth - :Browse_1:Col * 2
+      :Browse_1:Height := :ClientHeight - :Browse_1:Row * 2 + :StatusBar:ClientHeightUsed
+   END WITH
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,16 +1,14 @@
 /*
- * Zip Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to build a zip file of a folder and
- * it's subfolders. Notice that HB_ZipFile() do not recurse
- * subfolders in Harbour 3.0
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Zip Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to build a zip file of a folder and
+* it's subfolders. Notice that HB_ZipFile() do not recurse
+* subfolders in Harbour 3.0
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include 'oohg.ch'
 #include 'directry.ch'
@@ -18,11 +16,11 @@
 FUNCTION Main()
 
    DEFINE WINDOW MainForm ;
-      AT 114,218 ;
-      WIDTH 534 ;
-      HEIGHT 276 ;
-      TITLE 'How to Zip a Folder with SubFolders Using MiniZip Library' ;
-      MAIN
+         AT 114,218 ;
+         WIDTH 534 ;
+         HEIGHT 276 ;
+         TITLE 'How to Zip a Folder with SubFolders Using MiniZip Library' ;
+         MAIN
 
       @ 20,20 BUTTON btn_1 ;
          CAPTION 'Choose folder' ;
@@ -42,13 +40,14 @@ FUNCTION Main()
    MainForm.Center
    MainForm.Activate
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ZipFolder
 
    LOCAL cFolder, hZip, aFiles, i
 
    IF EMPTY( cFolder := GetFolder( 'Folder to Zip', 'C:\' ) )
+
       RETURN NIL
    ENDIF
 
@@ -59,6 +58,7 @@ FUNCTION ZipFolder
    hZip := HB_ZipOpen( 'ziptest.zip' )
    IF EMPTY( hZip )
       MsgExclamation( "Can't create ziptest.zip !!!" )
+
       RETURN NIL
    ENDIF
 
@@ -73,8 +73,8 @@ FUNCTION ZipFolder
          EVAL( {|cFile, nPos| ProgressUpdate( nPos, cFile ) }, aFiles[ i ], i )
 
          HB_ZipStoreFile( hZip, ;
-                          aFiles[ i ], ;
-                          substr( aFiles[ i ], LEN( cFolder ) + 2 ) )
+            aFiles[ i ], ;
+            substr( aFiles[ i ], LEN( cFolder ) + 2 ) )
       NEXT
 
       HB_ZipClose( hZip )
@@ -84,7 +84,7 @@ FUNCTION ZipFolder
       MsgExclamation( "No files were found !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ProcessFiles( cFolder, aFiles )
 
@@ -104,15 +104,16 @@ FUNCTION ProcessFiles( cFolder, aFiles )
       ENDIF
    NEXT
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ProgressUpdate( nPos, cFile )
 
    MainForm.prg_1.Value := nPos
    MainForm.lbl_1.Value := cFile
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

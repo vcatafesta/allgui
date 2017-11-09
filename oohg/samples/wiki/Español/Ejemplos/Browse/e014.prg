@@ -1,18 +1,16 @@
 /*
- * Ejemplo Browse n° 14
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplos muestra cómo borrar un registro agregado
- * "a medias". Para probarlo: agregue un nuevo registro,
- * ingrese datos en la primera columna y oprima la tecla
- * ESC en la segunda columnas. El registro recién agregado
- * será borraddo.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 14
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplos muestra cómo borrar un registro agregado
+* "a medias". Para probarlo: agregue un nuevo registro,
+* ingrese datos en la primera columna y oprima la tecla
+* ESC en la segunda columnas. El registro recién agregado
+* será borraddo.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -20,6 +18,7 @@
 STATIC nLastAppended := 0
 
 FUNCTION Main
+
    LOCAL oForm1, oBrw1
 
    REQUEST DBFCDX
@@ -30,13 +29,13 @@ FUNCTION Main
    AbrirTablas()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm1 ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 640 HEIGHT 480 ;
-      TITLE 'Como borrar un registro agregado "a medias"' ;
-      MAIN ;
-      ON RELEASE CerrarTablas()
+         OBJ oForm1 ;
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Como borrar un registro agregado "a medias"' ;
+         MAIN ;
+         ON RELEASE CerrarTablas()
 
       @ 10, 10 BROWSE Browse_1 OBJ oBrw1 ;
          WIDTH 620 ;
@@ -57,9 +56,8 @@ FUNCTION Main
    oForm1:Center()
    oForm1:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTablas
 
    LOCAL aDbf1[ 4 ][ 4 ]
@@ -143,25 +141,22 @@ FUNCTION AbrirTablas
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION CerrarTablas
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Data.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION RecienAgregado( oBrw1 )
 
    nLastAppended := data->(RECNO())
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION EdicionAbortada( oBrw1 )
 
    IF data->(RECNO()) == nLastAppended
@@ -170,8 +165,9 @@ FUNCTION EdicionAbortada( oBrw1 )
       oBrw1:Refresh()
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

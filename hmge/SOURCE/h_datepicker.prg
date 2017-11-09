@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -52,13 +52,11 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define DTS_SHOWNONE        0x0002 // allow a NONE selection
 #define DTS_RIGHTALIGN      0x0020 // right-align popup instead of left-align it
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineDatePick ( ControlName, ParentFormName, x, y, w, h, value, ;
       fontname, fontsize, tooltip, change, lostfocus, ;
       gotfocus, shownone, updown, rightalign, HelpId, ;
       invisible, notabstop , bold, italic, underline, strikeout , ;
       Field, Enter, backcolor, fontcolor, titlebkclr, titlefrclr, trlfontclr, cDateFormat, dRangeMin, dRangeMax, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , mVar , k , Style , blInit
    LOCAL ControlHandle , FontHandle , WorkArea
    LOCAL lDialogInMemory
@@ -193,7 +191,7 @@ FUNCTION _DefineDatePick ( ControlName, ParentFormName, x, y, w, h, value, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "DATEPICK"
    _HMG_aControlNames  [k] :=  ControlName
@@ -278,15 +276,13 @@ FUNCTION _DefineDatePick ( ControlName, ParentFormName, x, y, w, h, value, ;
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineTimePick ( ControlName, ParentFormName, x, y, w, h, value, ;
       fontname, fontsize, tooltip, change, lostfocus, ;
       gotfocus, shownone, HelpId, ;
       invisible, notabstop , bold, italic, underline, strikeout , ;
       Field, Enter, cTimeFormat, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , mVar , k , Style , blInit
    LOCAL ControlHandle , FontHandle , WorkArea
    LOCAL lDialogInMemory
@@ -420,7 +416,7 @@ FUNCTION _DefineTimePick ( ControlName, ParentFormName, x, y, w, h, value, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "TIMEPICK"
    _HMG_aControlNames  [k] :=  ControlName
@@ -470,32 +466,30 @@ FUNCTION _DefineTimePick ( ControlName, ParentFormName, x, y, w, h, value, ;
    IF SetDatePickerDateFormat( ControlHandle , cTimeFormat )
       _HMG_aControlSpacing [k] := cTimeFormat
       IF AScan( _HMG_aControlFontAttributes [k], .T. ) > 0 .OR. ;
-         FontName != _HMG_DefaultFontName .OR. FontSize != _HMG_DefaultFontSize
+            FontName != _HMG_DefaultFontName .OR. FontSize != _HMG_DefaultFontSize
          _SetFontName ( ControlName, ParentFormName , fontname )
       ENDIF
    ELSE
       MsgMiniGuiError ( "Control: " + ControlName + " Of " + ParentFormName + ": Wrong format string." )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogDatePicker( ParentFormName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    ParentFormName := Nil
    ControlHandle  := Nil
 
    _SetValue ( ,  , _HMG_aControlValue [k] , k )
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetGetDatePickerDateFormat( ControlName, ParentForm, cFormat )
-*-----------------------------------------------------------------------------*
+
    LOCAL ix, T
 
    ix := GetControlIndex ( ControlName, ParentForm )
@@ -512,11 +506,10 @@ FUNCTION _SetGetDatePickerDateFormat( ControlName, ParentForm, cFormat )
       ENDIF
    ENDIF
 
-RETURN cFormat
+   RETURN cFormat
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetDatePickerRange( ControlHandle, dRangeMin, dRangeMax, Index )
-*-----------------------------------------------------------------------------*
+
    LOCAL lOK
 
    IF !ISDATE( dRangeMin )
@@ -530,4 +523,5 @@ FUNCTION _SetDatePickerRange( ControlHandle, dRangeMin, dRangeMax, Index )
       _HMG_aControlRangeMax [Index] := dRangeMax
    ENDIF
 
-RETURN lOK
+   RETURN lOK
+

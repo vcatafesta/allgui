@@ -10,9 +10,9 @@ HB_FUNC ( ENABLEWINDOWREDRAW )
    HWND hWnd          = (HWND) HB_PARNL (1);
    BOOL lRedrawOnOff  = (BOOL) hb_parl  (2);
    BOOL lRedrawWindow = (BOOL) hb_parl  (3);
-   
+
    SendMessage ( hWnd, WM_SETREDRAW, (WPARAM) lRedrawOnOff, 0 );
-   
+
    if ((lRedrawOnOff == TRUE) && (lRedrawWindow == TRUE))
        RedrawWindow (hWnd, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
 }
@@ -45,12 +45,12 @@ HB_FUNC (HMG_STRCMP)
    TCHAR *Text2 = (TCHAR *) hb_parc (2);
    BOOL  lCaseSensitive = (BOOL) hb_parl (3);
    int CmpValue;
-   
+
    if ( lCaseSensitive == FALSE )
       CmpValue = lstrcmpi (Text1, Text2);
    else
       CmpValue = lstrcmp  (Text1, Text2);
-   
+
    hb_retni ((int) CmpValue);
 }
 
@@ -83,7 +83,7 @@ HB_FUNC ( ISMAXIMIZED )
    hb_retl ((BOOL) IsZoomed ( hWnd ) );
 }
 
-//       ScreenToClientCol (hWnd, Col) --> New_Col 
+//       ScreenToClientCol (hWnd, Col) --> New_Col
 HB_FUNC (SCREENTOCLIENTCOL)
 {
    HWND hWnd = (HWND) HB_PARNL (1);
@@ -206,3 +206,4 @@ HB_FUNC( GETCOPYDATASTRING )
 }
 
 #pragma ENDDUMP
+

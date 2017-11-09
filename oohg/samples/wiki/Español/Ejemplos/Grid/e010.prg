@@ -1,18 +1,15 @@
 /*
- * Ejemplo Grid n° 10
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG mantenida por
- * Ciro Vargas C. <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo dimensionar un Grid para que
- * muestre únicamente filas enteras.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Grid n° 10
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG mantenida por
+* Ciro Vargas C. <cvc@oohg.org>
+* Este ejemplo muestra cómo dimensionar un Grid para que
+* muestre únicamente filas enteras.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "i_windefs.ch"
@@ -22,12 +19,12 @@ FUNCTION Main
    LOCAL aFilas[ 20 ]
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE 'GRID - Mostrar Solo Filas Enteras' ;
-      MAIN ;
-      ON INIT oGrid:Height := EstableceAlturaParaFilasEnteras( 10 )
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'GRID - Mostrar Solo Filas Enteras' ;
+         MAIN ;
+         ON INIT oGrid:Height := EstableceAlturaParaFilasEnteras( 10 )
 
       aFilas[ 01 ] := {'Simpson, Homer'}
       aFilas[ 02 ] := {'Mulder, Fox'}
@@ -65,21 +62,22 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION EstableceAlturaParaFilasEnteras( CantidadDeFilasEnteras )
 
    LOCAL AltoNecesario
 
    AltoNecesario := CantidadDeFilasEnteras * oGrid:ItemHeight() + ;
-                    oGrid:HeaderHeight + ;
-                    IF( IsWindowStyle( oGrid:hWnd, WS_HSCROLL ), ;
-                        GetHScrollBarHeight(), 0 ) + ;
-                    IF( IsWindowExStyle( oGrid:hWnd, WS_EX_CLIENTEDGE ), ;
-                        GetEdgeHeight() * 2, 0 )
+      oGrid:HeaderHeight + ;
+      IF( IsWindowStyle( oGrid:hWnd, WS_HSCROLL ), ;
+      GetHScrollBarHeight(), 0 ) + ;
+      IF( IsWindowExStyle( oGrid:hWnd, WS_EX_CLIENTEDGE ), ;
+      GetEdgeHeight() * 2, 0 )
 
-RETURN AltoNecesario
+   RETURN AltoNecesario
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

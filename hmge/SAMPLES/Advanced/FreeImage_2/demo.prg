@@ -1,15 +1,12 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Static FreeImage usage
- * (c) 2012 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Static FreeImage usage
+* (c) 2012 Vladimir Chumachenko <ChVolodymyr@yandex.ru>
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "FreeImage.ch"
 #include "MiniGUI.ch"
-
 
 // Области вывода изображений имеют фиксированные размеры
 
@@ -41,121 +38,110 @@
 #define JPG_TOWN            'TOWN'
 #define JPG_WATERFALL       'WATERFALL'
 
-
 // Имя файла, имя ресурса
 
-Static cFileImg 
-Static cResImg
-
+STATIC cFileImg
+STATIC cResImg
 
 /******
-*
 *       Вывод графики из файла и ресурса
-*
 */
 
-Procedure Main
+PROCEDURE Main
 
-FI_Initialise()
+   FI_Initialise()
 
-Set font to 'Tahoma', 9
+   SET font to 'Tahoma', 9
 
-Define window wMain                 ;
-       At 0, 0                      ;
-       Width 810                    ;
-       Height 525                   ;
-       Title 'FreeImage Demo'       ;
-       NoMaximize                   ;
-       NoSize                       ;
-       Icon 'MAINICON'              ;
-       Main                         ;
-       BackColor WHITE              ;
-       On Init ( OpenImgFile( GetStartupFolder() + "\Res\Bird.png" ), OpenImgRes( PNG_BIRD, 'PNG' ) ) ;
-       On Release FI_DeInitialise() ;
-       On Paint { || ShowFile(), ShowRes() }
+   DEFINE WINDOW wMain                 ;
+         At 0, 0                      ;
+         Width 810                    ;
+         Height 525                   ;
+         Title 'FreeImage Demo'       ;
+         NoMaximize                   ;
+         NoSize                       ;
+         Icon 'MAINICON'              ;
+         Main                         ;
+         BackColor WHITE              ;
+         On Init ( OpenImgFile( GetStartupFolder() + "\Res\Bird.png" ), OpenImgRes( PNG_BIRD, 'PNG' ) ) ;
+         On Release FI_DeInitialise() ;
+         On Paint { || ShowFile(), ShowRes() }
 
-  Define main menu
+      DEFINE MAIN MENU
 
-    Define Popup '&File'
-      MenuItem '&Open'       Action OpenImgFile()
-      Separator
-      MenuItem 'E&xit Alt+X' Action ReleaseAllWindows()
-    End Popup
+         DEFINE POPUP '&File'
+            MenuItem '&Open'       Action OpenImgFile()
+            Separator
+            MenuItem 'E&xit Alt+X' Action ReleaseAllWindows()
+         End Popup
 
-    // !!! Все пункты меню связаны с именем соответствующего ресурса
+         // !!! Все пункты меню связаны с именем соответствующего ресурса
 
-    Define Popup '&Resourse'
-      MenuItem 'Bird      (png)' Action OpenImgRes( PNG_BIRD     , 'PNG' )
-      MenuItem 'Sea       (png)' Action OpenImgRes( PNG_SEA      , 'PNG' )
-      MenuItem 'Town      (jpg)' Action OpenImgRes( JPG_TOWN     , 'JPG' )
-      MenuItem 'Waterfall (jpg)' Action OpenImgRes( JPG_WATERFALL, 'JPG' )
-    End Popup
+         DEFINE POPUP '&Resourse'
+            MenuItem 'Bird      (png)' Action OpenImgRes( PNG_BIRD     , 'PNG' )
+            MenuItem 'Sea       (png)' Action OpenImgRes( PNG_SEA      , 'PNG' )
+            MenuItem 'Town      (jpg)' Action OpenImgRes( JPG_TOWN     , 'JPG' )
+            MenuItem 'Waterfall (jpg)' Action OpenImgRes( JPG_WATERFALL, 'JPG' )
+         End Popup
 
-  End menu
+      End menu
 
-  @ ( FI_TOP - 25 ), ( FI_LEFT - 25 ) Frame frmFile             ;
-                                      Caption 'File'            ;
-                                      Width ( FI_WIDTH   + 45 ) ;
-                                      Height ( FI_HEIGHT + 45 ) ;
-                                      BackColor WHITE
+      @ ( FI_TOP - 25 ), ( FI_LEFT - 25 ) Frame frmFile             ;
+         Caption 'File'            ;
+         Width ( FI_WIDTH   + 45 ) ;
+         Height ( FI_HEIGHT + 45 ) ;
+         BackColor WHITE
 
-  @ ( RES_TOP - 25 ), ( RES_LEFT - 25 ) Frame frmResource          ;
-                                        Caption 'Resource'         ;
-                                        Width ( RES_WIDTH   + 45 ) ;
-                                        Height ( RES_HEIGHT + 45 ) ;
-                                        BackColor WHITE
+      @ ( RES_TOP - 25 ), ( RES_LEFT - 25 ) Frame frmResource          ;
+         Caption 'Resource'         ;
+         Width ( RES_WIDTH   + 45 ) ;
+         Height ( RES_HEIGHT + 45 ) ;
+         BackColor WHITE
 
-End window
+   END WINDOW
 
-On Key Alt+X of wMain Action ReleaseAllWindows()
+   On Key Alt+X of wMain Action ReleaseAllWindows()
 
-Center window wMain
-Activate window wMain
+   CENTER WINDOW wMain
+   ACTIVATE WINDOW wMain
 
-Return
+   RETURN
 
-****** End of Main ******
+   ****** End of Main ******
 
+   /******
+   *       OpenImgFile()
+   *       Выбор файла для загрузки
+   */
 
-/******
-*
-*       OpenImgFile()
-*
-*       Выбор файла для загрузки
-*
-*/
+STATIC PROCEDURE OpenImgFile( cFile )
 
-Static Procedure OpenImgFile( cFile )
+   IF Empty( cFile )
+      cFile := GetFile( { { 'Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png;*.psd;*.tif;*.ico)', ;
+         '*.bmp;*.jpg;*.jpeg;*.gif;*.png;*.psd;*.tif;*.ico'                ;
+         }                                                                   ;
+         }, 'Select image', GetCurrentFolder(), .F., .T. )
+   ENDIF
 
-If Empty( cFile )
-   cFile := GetFile( { { 'Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png;*.psd;*.tif;*.ico)', ;
-                            '*.bmp;*.jpg;*.jpeg;*.gif;*.png;*.psd;*.tif;*.ico'                ;
-                          }                                                                   ;
-                        }, 'Select image', GetCurrentFolder(), .F., .T. )
-Endif
+   IF !Empty( cFile )
+      cFileImg := cFile
+      wMain.frmFile.Caption := cFileNoPath( cFile )
+      ShowFile()
+   ENDIF
 
-If !Empty( cFile )
-   cFileImg := cFile
-   wMain.frmFile.Caption := cFileNoPath( cFile )
-   ShowFile()
-Endif
+   RETURN
 
-Return
+   ****** End of OpenImgFile ******
 
-****** End of OpenImgFile ******
+   /******
+   *       ShowFile()
+   *       Вывод изображения из файла
+   */
 
+STATIC PROCEDURE ShowFile
 
-/******
-*
-*       ShowFile()
-*
-*       Вывод изображения из файла
-*
-*/
-
-Static Procedure ShowFile
-Static nHandleFileImg
-Local nTop         := FI_TOP   , ;
+   STATIC nHandleFileImg
+   LOCAL nTop         := FI_TOP   , ;
       nLeft        := FI_LEFT  , ;
       nBottom      := FI_BOTTOM, ;
       nRight       := FI_RIGHT , ;
@@ -166,98 +152,93 @@ Local nTop         := FI_TOP   , ;
       nKoeff                   , ;
       nHandleClone
 
-If !( nHandleFileImg == nil )
-   FI_Unload( nHandleFileImg )
-   nHandleFileImg := nil
-Endif
+   IF !( nHandleFileImg == nil )
+      FI_Unload( nHandleFileImg )
+      nHandleFileImg := nil
+   ENDIF
 
-If IsNil( cFileImg )
-   Return
-Else
-   nHandleFileImg := FI_Load( FI_GetFileType( cFileImg ), cFileImg, 0 )  // Загрузка рисунка
-Endif
+   IF IsNil( cFileImg )
 
-InvalidateRect( Application.Handle, 1, FI_LEFT, FI_TOP, FI_RIGHT, FI_BOTTOM )
+      RETURN
+   ELSE
+      nHandleFileImg := FI_Load( FI_GetFileType( cFileImg ), cFileImg, 0 )  // Загрузка рисунка
+   ENDIF
 
-nWidth  := FI_GetWidth( nHandleFileImg )
-nHeight := FI_GetHeight( nHandleFileImg )
+   InvalidateRect( Application.Handle, 1, FI_LEFT, FI_TOP, FI_RIGHT, FI_BOTTOM )
 
-If ( ( nHeight > FI_HEIGHT ) .or. ( nWidth > FI_WIDTH )  )
+   nWidth  := FI_GetWidth( nHandleFileImg )
+   nHeight := FI_GetHeight( nHandleFileImg )
 
-   If ( ( nHeight - FI_HEIGHT ) > ( nWidth - FI_WIDTH ) )
-      nKoeff := ( FI_HEIGHT / nHeight )
-   Else
-      nKoeff := ( FI_WIDTH / nWidth )
-   Endif
-   
-   nHeight := Round( ( nHeight * nKoeff ), 0 )
-   nWidth  := Round( ( nWidth  * nKoeff ), 0 )
-   
-   nHandleClone := FI_Clone( nHandleFileImg )
-   FI_Unload( nHandleFileImg )
-   
-   nHandleFileImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
-   FI_Unload( nHandleClone )
-   
-Endif
+   IF ( ( nHeight > FI_HEIGHT ) .or. ( nWidth > FI_WIDTH )  )
 
-If ( nWidth < FI_WIDTH )
-   nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
-   nRight := ( nLeft + nWidth )
-Endif
+      IF ( ( nHeight - FI_HEIGHT ) > ( nWidth - FI_WIDTH ) )
+         nKoeff := ( FI_HEIGHT / nHeight )
+      ELSE
+         nKoeff := ( FI_WIDTH / nWidth )
+      ENDIF
 
-If ( nHeight < FI_HEIGHT )
-   nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
-   nBottom := ( nTop + nHeight )
-Endif
+      nHeight := Round( ( nHeight * nKoeff ), 0 )
+      nWidth  := Round( ( nWidth  * nKoeff ), 0 )
 
-hDC := BeginPaint( Application.Handle, @pps )
+      nHandleClone := FI_Clone( nHandleFileImg )
+      FI_Unload( nHandleFileImg )
 
-FI_WinDraw( nHandleFileImg, hDC, nTop, nLeft, nBottom, nRight )
+      nHandleFileImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
+      FI_Unload( nHandleClone )
+
+   ENDIF
+
+   IF ( nWidth < FI_WIDTH )
+      nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
+      nRight := ( nLeft + nWidth )
+   ENDIF
+
+   IF ( nHeight < FI_HEIGHT )
+      nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
+      nBottom := ( nTop + nHeight )
+   ENDIF
+
+   hDC := BeginPaint( Application.Handle, @pps )
+
+   FI_WinDraw( nHandleFileImg, hDC, nTop, nLeft, nBottom, nRight )
 
 EndPaint( Application.Handle, pps )
 ReleaseDC( Application.Handle, hDC )
 
-Return
+RETURN
 
 ****** End of ShowFile ******
 
-
 /******
-*
 *       OpenImgRes( cRes, cType )
-*
 *       Загрузка рисунка из ресурса
-*
 */
 
-Static Procedure OpenImgRes( cRes, cType )
-Local cData := Win_LoadResource( cRes, cType )
+STATIC PROCEDURE OpenImgRes( cRes, cType )
 
-If !Empty( cData )
-   cResImg := cData
-   wMain.frmResource.Caption := ( cRes + ' (' + cType + ')' )
-   ShowRes()
-Else
-   MsgExclamation( cRes + ' not found.', 'Error' )
-Endif
+   LOCAL cData := Win_LoadResource( cRes, cType )
 
-Return
+   IF !Empty( cData )
+      cResImg := cData
+      wMain.frmResource.Caption := ( cRes + ' (' + cType + ')' )
+      ShowRes()
+   ELSE
+      MsgExclamation( cRes + ' not found.', 'Error' )
+   ENDIF
 
-****** End of OpenImgRes ******
+   RETURN
 
+   ****** End of OpenImgRes ******
 
-/******
-*
-*       ShowRes()
-*
-*       Вывод рисунка из переменной (ресурса, загруженного в память)
-*
-*/
+   /******
+   *       ShowRes()
+   *       Вывод рисунка из переменной (ресурса, загруженного в память)
+   */
 
-Static Procedure ShowRes
-Static nHandleResImg
-Local nTop         := RES_TOP   , ;
+STATIC PROCEDURE ShowRes
+
+   STATIC nHandleResImg
+   LOCAL nTop         := RES_TOP   , ;
       nLeft        := RES_LEFT  , ;
       nBottom      := RES_BOTTOM, ;
       nRight       := RES_RIGHT , ;
@@ -268,58 +249,60 @@ Local nTop         := RES_TOP   , ;
       nKoeff                    , ;
       nHandleClone
 
-If !( nHandleResImg == nil )
-   FI_Unload( nHandleResImg )
-   nHandleResImg := nil
-Endif
+   IF !( nHandleResImg == nil )
+      FI_Unload( nHandleResImg )
+      nHandleResImg := nil
+   ENDIF
 
-If Empty( cResImg )
-   Return
-Else
-   nHandleResImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cResImg, Len( cResImg ) ), cResImg, 0 )
-Endif
+   IF Empty( cResImg )
 
-InvalidateRect( Application.Handle, 1, RES_LEFT, RES_TOP, RES_RIGHT, RES_BOTTOM )
+      RETURN
+   ELSE
+      nHandleResImg := FI_LoadFromMemory( FI_GetFileTypeFromMemory( cResImg, Len( cResImg ) ), cResImg, 0 )
+   ENDIF
 
-nWidth  := FI_GetWidth( nHandleResImg )
-nHeight := FI_GetHeight( nHandleResImg )
+   InvalidateRect( Application.Handle, 1, RES_LEFT, RES_TOP, RES_RIGHT, RES_BOTTOM )
 
-If ( ( nHeight > RES_HEIGHT ) .or. ( nWidth > RES_WIDTH )  )
+   nWidth  := FI_GetWidth( nHandleResImg )
+   nHeight := FI_GetHeight( nHandleResImg )
 
-   If ( ( nHeight - RES_HEIGHT ) > ( nWidth - RES_WIDTH ) )
-      nKoeff := ( RES_HEIGHT / nHeight )
-   Else
-      nKoeff := ( RES_WIDTH / nWidth )
-   Endif
+   IF ( ( nHeight > RES_HEIGHT ) .or. ( nWidth > RES_WIDTH )  )
 
-   nHeight := Round( ( nHeight * nKoeff ), 0 )
-   nWidth  := Round( ( nWidth  * nKoeff ), 0 )
+      IF ( ( nHeight - RES_HEIGHT ) > ( nWidth - RES_WIDTH ) )
+         nKoeff := ( RES_HEIGHT / nHeight )
+      ELSE
+         nKoeff := ( RES_WIDTH / nWidth )
+      ENDIF
 
-   nHandleClone := FI_Clone( nHandleResImg )
-   FI_Unload( nHandleResImg )
+      nHeight := Round( ( nHeight * nKoeff ), 0 )
+      nWidth  := Round( ( nWidth  * nKoeff ), 0 )
 
-   nHandleResImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
-   FI_Unload( nHandleClone )
+      nHandleClone := FI_Clone( nHandleResImg )
+      FI_Unload( nHandleResImg )
 
-Endif
+      nHandleResImg := FI_Rescale( nHandleClone, nWidth, nHeight, FILTER_BICUBIC )
+      FI_Unload( nHandleClone )
 
-If ( nWidth < FI_WIDTH )
-   nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
-   nRight := ( nLeft + nWidth )
-Endif
+   ENDIF
 
-If ( nHeight < FI_HEIGHT )
-   nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
-   nBottom := ( nTop + nHeight )
-Endif
+   IF ( nWidth < FI_WIDTH )
+      nLeft  += Int( ( FI_WIDTH - nWidth ) / 2 )
+      nRight := ( nLeft + nWidth )
+   ENDIF
 
-hDC := BeginPaint( Application.Handle, @pps )
+   IF ( nHeight < FI_HEIGHT )
+      nTop    += Int( ( FI_HEIGHT - nHeight ) / 2 )
+      nBottom := ( nTop + nHeight )
+   ENDIF
 
-FI_WinDraw( nHandleResImg, hDC, nTop, nLeft, nBottom, nRight )
+   hDC := BeginPaint( Application.Handle, @pps )
+
+   FI_WinDraw( nHandleResImg, hDC, nTop, nLeft, nBottom, nRight )
 
 EndPaint( Application.Handle, pps )
 ReleaseDC( Application.Handle, hDC )
 
-Return
+RETURN
 
 ****** End of ShowRes ******
+

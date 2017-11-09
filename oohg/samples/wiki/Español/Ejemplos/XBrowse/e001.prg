@@ -1,16 +1,14 @@
 /*
- * Ejemplo XBrowse n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar las cláusulas
- * BEFORECOLMOVE, AFTERCOLMOVE, BEFORECOLSIZE, AFTERCOLSIZE y
- * BEFOREAUTOFIT, y el método ColumnOrder.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo XBrowse n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar las cláusulas
+* BEFORECOLMOVE, AFTERCOLMOVE, BEFORECOLSIZE, AFTERCOLSIZE y
+* BEFOREAUTOFIT, y el método ColumnOrder.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -30,12 +28,12 @@ FUNCTION Main
    AbrirTabla()
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0, 0 ;
-      CLIENTAREA ;
-      WIDTH 420 HEIGHT 420 ;
-      TITLE 'Cabezales en Controles XBrowse' ;
-      MAIN ;
-      ON RELEASE Limpiar()
+         AT 0, 0 ;
+         CLIENTAREA ;
+         WIDTH 420 HEIGHT 420 ;
+         TITLE 'Cabezales en Controles XBrowse' ;
+         MAIN ;
+         ON RELEASE Limpiar()
 
       @ 10, 10 XBROWSE XBrowse_1 OBJ oXBr ;
          WIDTH 400 ;
@@ -54,14 +52,14 @@ FUNCTION Main
          WIDTH 190 ;
          CAPTION "Mostrar orden de columnas" ;
          ACTION oLbl:Value := "Orden de columnas: " + ;
-                              AUTOTYPE( oXBr:ColumnOrder )
+         AUTOTYPE( oXBr:ColumnOrder )
 
       @ 220, 220 BUTTON btn_SetOrden ;
          WIDTH 190 ;
          CAPTION "Cambiar orden de columnas" ;
          ACTION ( oXBr:ColumnOrder := {3, 1, 2}, ;
-                  oLbl:Value := "Orden de columnas: " + ;
-                                AUTOTYPE( oXBr:ColumnOrder ) )
+         oLbl:Value := "Orden de columnas: " + ;
+         AUTOTYPE( oXBr:ColumnOrder ) )
 
       @ 260, 10 LABEL lbl_Orden OBJ oLbl ;
          WIDTH 400 ;
@@ -71,11 +69,11 @@ FUNCTION Main
          WIDTH 400 ;
          HEIGHT 100 ;
          VALUE "Mueva o cambie el tamaño de un cabezal, o haga " + ;
-               "dobleclic en un separador. No se permite mover " + ;
-               "la columna 1, ni se permite modificar su tamaño " + ;
-               "(ya sea por arrastre o utilizando el ajuste " + ;
-               "automático). El tamaño mínimo de las columnas" + ;
-               "2 y 3 debe ser 50." ;
+         "dobleclic en un separador. No se permite mover " + ;
+         "la columna 1, ni se permite modificar su tamaño " + ;
+         "(ya sea por arrastre o utilizando el ajuste " + ;
+         "automático). El tamaño mínimo de las columnas" + ;
+         "2 y 3 debe ser 50." ;
          FONTCOLOR RED
 
       ON KEY ESCAPE ACTION oForm:Release()
@@ -84,9 +82,8 @@ FUNCTION Main
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTabla()
 
    LOCAL aDbf1[ 3 ][ 4 ]
@@ -155,71 +152,70 @@ FUNCTION AbrirTabla()
 
    GO TOP
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION Limpiar()
 
-  DBCLOSEALL()
+   DBCLOSEALL()
 
-  ERASE Data.dbf
+   ERASE Data.dbf
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AntesDeMover( nCol )
 
    IF nCol == 1
       MSGBOX("No se permite mover la columna 1 !!!")
+
       RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION DespuesDeMover( nCol, nPosicion )
 
    MEMVAR oLbl
 
    AUTOMSGBOX( "La columna " + LTRIM(STR(nCol)) + ;
-               " será movida a la posición " + LTRIM(STR(nPosicion)) )
+      " será movida a la posición " + LTRIM(STR(nPosicion)) )
 
    oLbl:Value := "Haga clic en el botón para ver el orden de las columnas."
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION AntesDeCambiar( nCol )
 
    IF nCol == 1
-     // No se permite modificar el tamaño de la columna 1
-     RETURN .F.
+      // No se permite modificar el tamaño de la columna 1
+
+      RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-//--------------------------------------------------------------------------//
 FUNCTION DespuesDeCambiar( nCol, nTam )
 
    IF nCol # 1
       IF nTam < 50
          // El tamaño mínimo de las columnas debe ser 50
+
          RETURN 50
       ENDIF
    ENDIF
 
-RETURN nTam
+   RETURN nTam
 
-//--------------------------------------------------------------------------//
 FUNCTION AntesDeAutoAjuste( nCol )
 
    IF nCol == 1
-     // No se permite el tamaño automático de la columna 1
-     RETURN .F.
+      // No se permite el tamaño automático de la columna 1
+
+      RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

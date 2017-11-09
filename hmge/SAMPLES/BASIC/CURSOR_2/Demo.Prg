@@ -1,23 +1,24 @@
 /*
-   Mouse's Cursor Demo - Windows/HMG internal/RC/Animated and custom
-   Author: Pablo César Arrascaeta
-   Date: September 22nd, 2016
-   Version: 1.0
+Mouse's Cursor Demo - Windows/HMG internal/RC/Animated and custom
+Author: Pablo César Arrascaeta
+Date: September 22nd, 2016
+Version: 1.0
 */
 
 #include <hmg.ch>
 
-Function Main
+FUNCTION Main
 
-        Load Window Demo
-        Demo.Center
-        Demo.Activate
+   LOAD WINDOW Demo
+   Demo.Center
+   Demo.Activate
 
-Return Nil
+   RETURN NIL
 
-Function SetCursorOnControls(xCursor)
+FUNCTION SetCursorOnControls(xCursor)
 
-	SetWindowCursor (ThisWindow.Handle, xCursor)
-	SetWindowCursor (This.Handle, xCursor)    // All Controls associated with the class
+   SetWindowCursor (ThisWindow.Handle, xCursor)
+   SetWindowCursor (This.Handle, xCursor)    // All Controls associated with the class
 
-Return Nil
+   RETURN NIL
+

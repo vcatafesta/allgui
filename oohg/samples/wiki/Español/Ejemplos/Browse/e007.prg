@@ -1,15 +1,13 @@
 /*
- * Ejemplo Browse n° 7
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo cambiar el area de trabajo y
- * otros datos de un control Browse en forma dinámica.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 7
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo cambiar el area de trabajo y
+* otros datos de un control Browse en forma dinámica.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -18,13 +16,13 @@ FUNCTION Main
    LOCAL oForm, oBrw, myDbf := "Test1"
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE 'Browse: cambiar propiedades en forma dinámica' ;
-      MAIN ;
-      ON INIT AbrirTablas() ;
-      ON RELEASE CerrarTablas()
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE 'Browse: cambiar propiedades en forma dinámica' ;
+         MAIN ;
+         ON INIT AbrirTablas() ;
+         ON RELEASE CerrarTablas()
 
       @ 13, 10 LABEL Lbl_1 ;
          WIDTH 60 ;
@@ -56,17 +54,16 @@ FUNCTION Main
    oForm:Center()
    oForm:Activate()
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION AbrirTablas()
 
    LOCAL i
 
    DBCREATE( "Test3", ;
-             { {"Code3", "N", 10, 0}, ;
-               {"Name3", "C", 25, 0}, ;
-               {"Data3", "D",  8, 0} } )
+      { {"Code3", "N", 10, 0}, ;
+      {"Name3", "C", 25, 0}, ;
+      {"Data3", "D",  8, 0} } )
 
    USE Test3 NEW
    ZAP
@@ -81,8 +78,8 @@ FUNCTION AbrirTablas()
    GO TOP
 
    DBCREATE( "Test2", ;
-             { {"Code2", "N", 10, 0}, ;
-               {"Name2", "C", 25, 0} } )
+      { {"Code2", "N", 10, 0}, ;
+      {"Name2", "C", 25, 0} } )
 
    USE Test2 NEW
    ZAP
@@ -96,8 +93,8 @@ FUNCTION AbrirTablas()
    GO TOP
 
    DBCREATE( "Test1", ;
-             { {"Code1", "N", 10, 0}, ;
-               {"Name1", "C", 25, 0} } )
+      { {"Code1", "N", 10, 0}, ;
+      {"Name1", "C", 25, 0} } )
 
    USE Test1 NEW
    ZAP
@@ -110,49 +107,47 @@ FUNCTION AbrirTablas()
 
    GO TOP
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION CerrarTablas()
 
-  CLOSE DATABASES
+   CLOSE DATABASES
 
-  IF MsgYesNo( "¿ Borrar las tablas ?", "" )
-     ERASE Test1.dbf
-     ERASE Test2.dbf
-     ERASE Test3.dbf
-  ENDIF
+   IF MsgYesNo( "¿ Borrar las tablas ?", "" )
+      ERASE Test1.dbf
+      ERASE Test2.dbf
+      ERASE Test3.dbf
+   ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION ChangeDbf( oDbf, oBrw, oForm )
 
    LOCAL aDbfData := ;
-         { { "Test1", ;
-           { "Código del Artículo", "Nombre del Artículo"}, ;
-           { "Code1", "Name1" }, ;
-           { 100, 150 }, ;
-           { BROWSE_JTFY_RIGHT, ;
-             BROWSE_JTFY_LEFT } }, ;
-         { "Test2", ;
-           { "Código del Proveedor", "Nombre del Proveedor" }, ;
-           { "Code2", "Name2" }, ;
-           { 120, 170 }, ;
-           { BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT } }, ;
-         { "Test3", ;
-           { "Código del Cliente", "Nombre del Cliente", "Último Contacto" }, ;
-           { "Code3", "Name3", "Data3" }, ;
-           { 120, 170, 90 }, ;
-           { BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER } } }
+      { { "Test1", ;
+      { "Código del Artículo", "Nombre del Artículo"}, ;
+      { "Code1", "Name1" }, ;
+      { 100, 150 }, ;
+      { BROWSE_JTFY_RIGHT, ;
+      BROWSE_JTFY_LEFT } }, ;
+      { "Test2", ;
+      { "Código del Proveedor", "Nombre del Proveedor" }, ;
+      { "Code2", "Name2" }, ;
+      { 120, 170 }, ;
+      { BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT } }, ;
+      { "Test3", ;
+      { "Código del Cliente", "Nombre del Cliente", "Último Contacto" }, ;
+      { "Code3", "Name3", "Data3" }, ;
+      { 120, 170, 90 }, ;
+      { BROWSE_JTFY_CENTER, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER } } }
 
-   Do While oBrw:ColumnCount() < LEN( aDbfData[ oDbf:Value ] [ 3 ] )
+   DO WHILE oBrw:ColumnCount() < LEN( aDbfData[ oDbf:Value ] [ 3 ] )
       // El segundo parámetro no debe ser NIL
       oBrw:AddColumn( NIL, "" )
-   EndDo
-   Do While oBrw:ColumnCount() > LEN( aDbfData[ oDbf:Value ] [ 3 ] )
+   ENDDO
+   DO WHILE oBrw:ColumnCount() > LEN( aDbfData[ oDbf:Value ] [ 3 ] )
       oBrw:DeleteColumn()
-   EndDo
+   ENDDO
 
    oBrw:WorkArea := aDbfData[ oDbf:Value ] [ 1 ]
    oBrw:aHeaders := aDbfData[ oDbf:Value ] [ 2 ]
@@ -163,8 +158,9 @@ FUNCTION ChangeDbf( oDbf, oBrw, oForm )
    oBrw:Value := 1
    oBrw:Refresh()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

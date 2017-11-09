@@ -1,12 +1,12 @@
 /*
-  MINIGUI - Harbour Win32 GUI library Demo
+MINIGUI - Harbour Win32 GUI library Demo
 
-  Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
-  http://harbourminigui.googlepages.com
+Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com
 
-  Author: S.Rathinagiri <srgiri@dataone.in>
+Author: S.Rathinagiri <srgiri@dataone.in>
 
-  Revised by Grigory Filatov <gfilatov@inbox.ru>
+Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include <minigui.ch>
@@ -18,10 +18,10 @@ FUNCTION Main
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 300 HEIGHT 200 ;
-      TITLE "ComboBox AutoComplete Demo" ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 300 HEIGHT 200 ;
+         TITLE "ComboBox AutoComplete Demo" ;
+         MAIN
 
       DEFINE COMBOBOX cmb_1
          ROW 60
@@ -48,4 +48,5 @@ FUNCTION Main
    Win_1.Center()
    Win_1.Activate()
 
-RETURN NIL
+   RETURN NIL
+

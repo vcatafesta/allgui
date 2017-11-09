@@ -1,11 +1,9 @@
 /*
- *$Id: hcwindow.prg,v 1.29 2008/10/09 20:21:50 lfbasso Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCustomWindow class
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+*$Id: hcwindow.prg,v 1.29 2008/10/09 20:21:50 lfbasso Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HCustomWindow class
+* Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -17,24 +15,26 @@
 #define EVENTS_ACTIONS  2
 
 STATIC aCustomEvents := { ;
-       { WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, WM_CTLCOLORLISTBOX, ;
-         WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY }, ;
-       { ;
-         { | o, w, l | onNotify( o, w, l ) }                                 , ;
-         { | o, w |   IIf( o:bPaint != NIL, Eval( o:bPaint, o, w ), - 1 ) }  , ;
-         { | o, w, l | onCtlColor( o, w, l ) }                               , ;
-         { | o, w, l | onCtlColor( o, w, l ) }                               , ;
-         { | o, w, l | onCtlColor( o, w, l ) }                               , ;
-         { | o, w, l | onCtlColor( o, w, l ) }                               , ;
-         { | o, w, l | onCommand( o, w, l ) }                                , ;
-         { | o, w, l | onDrawItem( o, w, l ) }                               , ;
-         { | o, w, l | onSize( o, w, l ) }                                   , ;
-         { | o |     onDestroy( o ) }                                          ;
-       } ;
-     }
+   { WM_NOTIFY, WM_PAINT, WM_CTLCOLORSTATIC, WM_CTLCOLOREDIT, WM_CTLCOLORBTN, WM_CTLCOLORLISTBOX, ;
+   WM_COMMAND, WM_DRAWITEM, WM_SIZE, WM_DESTROY }, ;
+   { ;
+   { | o, w, l | onNotify( o, w, l ) }                                 , ;
+   { | o, w |   IIf( o:bPaint != NIL, Eval( o:bPaint, o, w ), - 1 ) }  , ;
+   { | o, w, l | onCtlColor( o, w, l ) }                               , ;
+   { | o, w, l | onCtlColor( o, w, l ) }                               , ;
+   { | o, w, l | onCtlColor( o, w, l ) }                               , ;
+   { | o, w, l | onCtlColor( o, w, l ) }                               , ;
+   { | o, w, l | onCommand( o, w, l ) }                                , ;
+   { | o, w, l | onDrawItem( o, w, l ) }                               , ;
+   { | o, w, l | onSize( o, w, l ) }                                   , ;
+   { | o |     onDestroy( o ) }                                          ;
+   } ;
+   }
 
 CLASS HObject
+
    // DATA classname
+
 ENDCLASS
 
 CLASS HCustomWindow INHERIT HObject
@@ -71,36 +71,48 @@ CLASS VAR oDefaultParent SHARED
    DATA HelpId        INIT 0
    DATA nHolder       INIT 0
    DATA nInitFocus    INIT 0  // Keeps the ID of the object to receive focus when dialog is created
-                              // you can change the object that receives focus adding
-                              // ON INIT {|| nInitFocus:=object:[handle] }  to the dialog definition
+   // you can change the object that receives focus adding
+   // ON INIT {|| nInitFocus:=object:[handle] }  to the dialog definition
 
+METHOD AddControl( oCtrl ) INLINE AAdd( ::aControls, oCtrl )
 
-   METHOD AddControl( oCtrl ) INLINE AAdd( ::aControls, oCtrl )
-   METHOD DelControl( oCtrl )
-   METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName )
-   METHOD FindControl( nId, nHandle )
-   METHOD Hide()              INLINE ( ::lHide := .T., HideWindow( ::handle ) )
-   METHOD Show()              INLINE ( ::lHide := .F., ShowWindow( ::handle ) )
-   METHOD Move( x1, y1, width, height )
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD END()
-   METHOD RefreshCtrl( oCtrl )
-   METHOD SetFocusCtrl( oCtrl )
-   METHOD Refresh()
-   METHOD Anchor(oCtrl, x,y, w, h) 
-   
+METHOD DelControl( oCtrl )
+
+METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName )
+
+METHOD FindControl( nId, nHandle )
+
+METHOD Hide()              INLINE ( ::lHide := .T., HideWindow( ::handle ) )
+
+METHOD Show()              INLINE ( ::lHide := .F., ShowWindow( ::handle ) )
+
+METHOD Move( x1, y1, width, height )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD END()
+
+METHOD RefreshCtrl( oCtrl )
+
+METHOD SetFocusCtrl( oCtrl )
+
+METHOD Refresh()
+
+METHOD Anchor(oCtrl, x,y, w, h)
+
 ENDCLASS
 
 METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName ) CLASS HCustomWindow
 
    AAdd( IIf( lNotify == NIL .OR. ! lNotify, ::aEvents, ::aNotify ), ;
-         { nEvent, IIf( ValType( oCtrl ) == "N", oCtrl, oCtrl:id ), bAction } )
+      { nEvent, IIf( ValType( oCtrl ) == "N", oCtrl, oCtrl:id ), bAction } )
    IF bAction != Nil .AND. ValType( oCtrl ) == "O"  //.AND. ValType(oCtrl) != "N"
       IF cMethName != Nil //.AND. !__objHasMethod( oCtrl, cMethName )
          __objAddInline( oCtrl, cMethName, bAction )
       ENDIF
    ENDIF
-   RETURN nil
+
+   RETURN NIL
 
 METHOD FindControl( nId, nHandle ) CLASS HCustomWindow
 
@@ -110,17 +122,21 @@ METHOD FindControl( nId, nHandle ) CLASS HCustomWindow
 
    DO WHILE i > 0
       IF Len( ::aControls[ i ]:aControls ) > 0 .and. ;
-         ( oCtrl := ::aControls[ i ]:FindControl( nId, nHandle ) ) != nil
+            ( oCtrl := ::aControls[ i ]:FindControl( nId, nHandle ) ) != nil
+
          RETURN oCtrl
       ENDIF
       IF Eval( bSearch, ::aControls[ i ] )
+
          RETURN ::aControls[ i ]
       ENDIF
       i --
    ENDDO
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD DelControl( oCtrl ) CLASS HCustomWindow
+
    LOCAL h := oCtrl:handle, id := oCtrl:id
    LOCAL i := AScan( ::aControls, { | o | o:handle == h } )
 
@@ -175,23 +191,26 @@ METHOD Move( x1, y1, width, height )  CLASS HCustomWindow
    RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HCustomWindow
+
    LOCAL i
 
    // Writelog( "== "+::Classname()+Str(msg)+IIF(wParam!=NIL,Str(wParam),"NIL")+IIF(lParam!=NIL,Str(lParam),"NIL") )
 
-   IF msg = WM_GETMINMAXINFO 
+   IF msg = WM_GETMINMAXINFO
       IF ::minWidth  > -1 .OR. ::maxWidth  > -1 .OR.;
-			   ::minHeight > -1 .OR. ::maxHeight > -1 
+            ::minHeight > -1 .OR. ::maxHeight > -1
          MINMAXWINDOW(::handle, lParam,;
-         IIF(::minWidth  > -1,::minWidth,nil),;
-				 IIF(::minHeight > -1,::minHeight,nil),;
-         IIF(::maxWidth  > -1,::maxWidth,nil),;
-				 IIF(::maxHeight > -1,::maxHeight,nil))
+            IIF(::minWidth  > -1,::minWidth,nil),;
+            IIF(::minHeight > -1,::minHeight,nil),;
+            IIF(::maxWidth  > -1,::maxWidth,nil),;
+            IIF(::maxHeight > -1,::maxHeight,nil))
+
          RETURN 0
-      ENDIF   
-	 ENDIF
+      ENDIF
+   ENDIF
 
    IF ( i := AScan( aCustomEvents[ EVENTS_MESSAGES ], msg ) ) != 0
+
       RETURN Eval( aCustomEvents[ EVENTS_ACTIONS, i ], Self, wParam, lParam )
 
    ELSEIF ::bOther != NIL
@@ -213,9 +232,8 @@ METHOD END()  CLASS HCustomWindow
 
    RETURN NIL
 
-//----------------------------------------------------------------------------//
-
 METHOD RefreshCtrl( oCtrl, nSeek ) CLASS HCustomWindow
+
    LOCAL nPos, n
 
    DEFAULT nSeek := 1
@@ -234,8 +252,8 @@ METHOD RefreshCtrl( oCtrl, nSeek ) CLASS HCustomWindow
 
    RETURN NIL
 
-//----------------------------------------------------------------------------//
 METHOD SetFocusCtrl( oCtrl ) CLASS HCustomWindow
+
    LOCAL nPos
 
    nPos := AScan( ::aControls, { | x | x[ 1 ] == oCtrl } )
@@ -247,13 +265,15 @@ METHOD SetFocusCtrl( oCtrl ) CLASS HCustomWindow
    RETURN NIL
 
 METHOD Refresh( oCtrl ) CLASS HCustomWindow
+
    LOCAL nlen , i, hCtrl := GetFocus()
+
    oCtrl := IIf( oCtrl = Nil, Self, oCtrl )
    nlen := Len( oCtrl:aControls )
    IF IsWindowVisible( ::handle )
       FOR i = 1 TO nlen
          IF ! oCtrl:aControls[ i ]:lHide .AND. ;
-            oCtrl:aControls[ i ]:handle != hCtrl
+               oCtrl:aControls[ i ]:handle != hCtrl
             IF __ObjHasMethod( oCtrl:aControls[ i ], "REFRESH" )
                oCtrl:aControls[ i ]:refresh()
             ELSE
@@ -265,26 +285,29 @@ METHOD Refresh( oCtrl ) CLASS HCustomWindow
          ENDIF
       NEXT
    ENDIF
+
    RETURN .T.
-   
+
 METHOD Anchor(oCtrl,x,y,w,h) CLASS HCustomWindow
-Local nlen , i, x1, y1
-	nlen := LEN(oCtrl:aControls)
-  FOR i = 1 to nLen
-     IF __ObjHasMsg(oCtrl:aControls[ i ],"ANCHOR") .AND. oCtrl:aControls[ i ]:anchor > 0
+
+   LOCAL nlen , i, x1, y1
+
+   nlen := LEN(oCtrl:aControls)
+   FOR i = 1 to nLen
+      IF __ObjHasMsg(oCtrl:aControls[ i ],"ANCHOR") .AND. oCtrl:aControls[ i ]:anchor > 0
          x1 := oCtrl:aControls[ i ]:nWidth
-         y1 := oCtrl:aControls[ i ]:nHeight 
+         y1 := oCtrl:aControls[ i ]:nHeight
          oCtrl:aControls[ i ]:onAnchor(x,y, w, h )
-   	     IF LEN(oCtrl:aControls[ i ]:aControls) > 0
-    	       ::Anchor(oCtrl:aControls[ i ],x1,y1,oCtrl:nWidth, oCtrl:nHeight )
-	  	   ENDIF   
+         IF LEN(oCtrl:aControls[ i ]:aControls) > 0
+            ::Anchor(oCtrl:aControls[ i ],x1,y1,oCtrl:nWidth, oCtrl:nHeight )
+         ENDIF
       ENDIF
    NEXT
-RETURN .T.
-  
-*---------------------------------------------------------
+
+   RETURN .T.
 
 STATIC FUNCTION onNotify( oWnd, wParam, lParam )
+
    LOCAL iItem, oCtrl := oWnd:FindControl( wParam ), nCode, res
    LOCAL n
 
@@ -300,15 +323,18 @@ STATIC FUNCTION onNotify( oWnd, wParam, lParam )
    IF oCtrl != NIL
 
       IF __ObjHasMsg( oCtrl, "NOTIFY" )
+
          RETURN oCtrl:Notify( PTRTOULONG( lParam ))
       ELSE
          nCode := GetNotifyCode( lParam )
          IF nCode == EN_PROTECTED
+
             RETURN 1
          ELSEIF oWnd:aNotify != NIL .AND. ! oWnd:lSuspendMsgsHandling .AND. ;
-            ( iItem := AScan( oWnd:aNotify, { | a | a[ 1 ] == nCode .AND. ;
-                                              a[ 2 ] == wParam } ) ) > 0
+               ( iItem := AScan( oWnd:aNotify, { | a | a[ 1 ] == nCode .AND. ;
+               a[ 2 ] == wParam } ) ) > 0
             IF ( res := Eval( oWnd:aNotify[ iItem, 3 ], oWnd, wParam ) ) != NIL
+
                RETURN res
             ENDIF
          ENDIF
@@ -318,6 +344,7 @@ STATIC FUNCTION onNotify( oWnd, wParam, lParam )
    RETURN - 1
 
 STATIC FUNCTION onDestroy( oWnd )
+
    LOCAL aControls := oWnd:aControls
    LOCAL i, nLen   := Len( aControls )
 
@@ -329,8 +356,10 @@ STATIC FUNCTION onDestroy( oWnd )
    RETURN 1
 
 STATIC FUNCTION onCtlColor( oWnd, wParam, lParam )
+
    LOCAL oCtrl
-//lParam := HANDLETOPTR( lParam)
+
+   //lParam := HANDLETOPTR( lParam)
    oCtrl := oWnd:FindControl( , lParam )
 
    IF oCtrl != NIL
@@ -341,8 +370,10 @@ STATIC FUNCTION onCtlColor( oWnd, wParam, lParam )
       IF oCtrl:bcolor != NIL
          SetBkColor( wParam, oCtrl:bcolor )
          IF oCtrl:brush != Nil
+
             RETURN oCtrl:brush:handle
          ELSE   //IF oCtrl:oParent:brush != Nil
+
             RETURN oCtrl:oParent:brush:handle
          ENDIF
       ENDIF
@@ -351,10 +382,13 @@ STATIC FUNCTION onCtlColor( oWnd, wParam, lParam )
    RETURN - 1
 
 STATIC FUNCTION onDrawItem( oWnd, wParam, lParam )
+
    LOCAL oCtrl
+
    IF wParam != 0 .AND. ( oCtrl := oWnd:FindControl( wParam ) ) != NIL .AND. ;
-                          oCtrl:bPaint != NIL
+         oCtrl:bPaint != NIL
       Eval( oCtrl:bPaint, oCtrl, lParam )
+
       RETURN 1
 
    ENDIF
@@ -362,12 +396,13 @@ STATIC FUNCTION onDrawItem( oWnd, wParam, lParam )
    RETURN - 1
 
 STATIC FUNCTION onCommand( oWnd, wParam, lParam )
+
    LOCAL iItem, iParHigh := HIWORD( wParam ), iParLow := LOWORD( wParam )
 
    HB_SYMBOL_UNUSED( lParam )
    IF oWnd:aEvents != NIL .AND. ! oWnd:lSuspendMsgsHandling .AND. ;
-      ( iItem := AScan( oWnd:aEvents, { | a | a[ 1 ] == iParHigh .AND. ;
-                                        a[ 2 ] == iParLow } ) ) > 0
+         ( iItem := AScan( oWnd:aEvents, { | a | a[ 1 ] == iParHigh .AND. ;
+         a[ 2 ] == iParLow } ) ) > 0
 
       Eval( oWnd:aEvents[ iItem, 3 ], oWnd, iParLow )
 
@@ -376,44 +411,46 @@ STATIC FUNCTION onCommand( oWnd, wParam, lParam )
    RETURN 1
 
 STATIC FUNCTION onSize( oWnd, wParam, lParam )
+
    LOCAL aControls := oWnd:aControls, nControls := Len( aControls )
    LOCAL oItem, iCont, nw1, nh1, aCoors
 
    HB_SYMBOL_UNUSED( wParam )
-   
-   nw1 := oWnd:nWidth 
+
+   nw1 := oWnd:nWidth
    nh1 := oWnd:nHeight
    aCoors := GetWindowRect( oWnd:handle )
-   *oWnd:nWidth := LoWord( lParam )  //aControls[3]-aControls[1] 
-   *oWnd:nHeight := HiWord( lParam ) //aControls[4]-aControls[2] 
-   oWnd:nWidth := aCoors[3] - aCoors[1] 
-   oWnd:nHeight := aCoors[4] - aCoors[2] 
+   *oWnd:nWidth := LoWord( lParam )  //aControls[3]-aControls[1]
+   *oWnd:nHeight := HiWord( lParam ) //aControls[4]-aControls[2]
+   oWnd:nWidth := aCoors[3] - aCoors[1]
+   oWnd:nHeight := aCoors[4] - aCoors[2]
    oWnd:Anchor(oWnd,nw1,nh1, oWnd:nWidth, oWnd:nHeight )
 
    #ifdef __XHARBOUR__
 
-      HB_SYMBOL_UNUSED( iCont )
+   HB_SYMBOL_UNUSED( iCont )
 
-      FOR EACH oItem IN aControls
-         IF oItem:bSize != NIL
-            Eval( oItem:bSize, oItem, LOWORD( lParam ), HIWORD( lParam ) )
-         ENDIF
-      NEXT
+   FOR EACH oItem IN aControls
+      IF oItem:bSize != NIL
+         Eval( oItem:bSize, oItem, LOWORD( lParam ), HIWORD( lParam ) )
+      ENDIF
+   NEXT
    #else
 
-      HB_SYMBOL_UNUSED( oItem )
+   HB_SYMBOL_UNUSED( oItem )
 
-      FOR iCont := 1 TO nControls
-         IF aControls[ iCont ]:bSize != NIL
-            Eval( aControls[ iCont ]:bSize, aControls[ iCont ], ;
-                  LOWORD( lParam ), HIWORD( lParam ) )
-         ENDIF
-      NEXT
+   FOR iCont := 1 TO nControls
+      IF aControls[ iCont ]:bSize != NIL
+         Eval( aControls[ iCont ]:bSize, aControls[ iCont ], ;
+            LOWORD( lParam ), HIWORD( lParam ) )
+      ENDIF
+   NEXT
    #endif
 
    RETURN - 1
 
 FUNCTION onTrackScroll( oWnd, msg, wParam, lParam )
+
    LOCAL oCtrl := oWnd:FindControl( , lParam )
 
    IF oCtrl != NIL
@@ -421,20 +458,23 @@ FUNCTION onTrackScroll( oWnd, msg, wParam, lParam )
       IF msg == TB_ENDTRACK
          IF ISBLOCK( oCtrl:bChange )
             Eval( oCtrl:bChange, oCtrl )
+
             RETURN 0
          ENDIF
       ELSEIF msg == TB_THUMBTRACK .OR. ;
-         msg == TB_PAGEUP     .OR. ;
-         msg == TB_PAGEDOWN
+            msg == TB_PAGEUP     .OR. ;
+            msg == TB_PAGEDOWN
 
          IF ISBLOCK( oCtrl:bThumbDrag )
             Eval( oCtrl:bThumbDrag, oCtrl )
+
             RETURN 0
          ENDIF
       ENDIF
    ELSE
       IF ISBLOCK( oWnd:bScroll )
          Eval( oWnd:bScroll, oWnd, msg, wParam, lParam )
+
          RETURN 0
       ENDIF
    ENDIF
@@ -442,4 +482,6 @@ FUNCTION onTrackScroll( oWnd, msg, wParam, lParam )
    RETURN - 1
 
 PROCEDURE HB_GT_DEFAULT_NUL()
+
    RETURN
+

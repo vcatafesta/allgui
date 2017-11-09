@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -52,9 +52,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 #define TB_SETHOTITEM     (WM_USER+72)
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineToolBar ( ControlName, ParentForm, x, y, caption, ProcedureName, w, h, fontname, fontsize, tooltip, flat, bottom, righttext, break, bold, italic, underline, strikeout, border, mixedbuttons, rows, tbsize, imagelst, hotimagelst, wrap, custom )
-*-----------------------------------------------------------------------------*
+
    LOCAL cParentForm , mVar , k
    LOCAL FontHandle , ControlHandle , id
 
@@ -106,7 +105,7 @@ FUNCTION _DefineToolBar ( ControlName, ParentForm, x, y, caption, ProcedureName,
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType  [k] := "TOOLBAR"
    _HMG_aControlNames   [k] := ControlName
@@ -153,20 +152,19 @@ FUNCTION _DefineToolBar ( ControlName, ParentForm, x, y, caption, ProcedureName,
       Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-RETURN ControlHandle
+   RETURN ControlHandle
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndToolBar()
-*-----------------------------------------------------------------------------*
+
    LOCAL ix, h, i, ParentForm, nRow, nBand, aSize
 
    ParentForm := iif( _HMG_BeginWindowActive, _HMG_ActiveFormName, _HMG_ActiveToolBarFormName )
    h := GetControlHandle ( _HMG_ActiveToolBarName , ParentForm )
 
    IF _HMG_BeginPagerActive
-#ifdef _PAGER_
+      #ifdef _PAGER_
       _AddChildToPager ( _HMG_ActiveToolBarName , ParentForm )
-#endif
+      #endif
    ELSE
       IF _HMG_ActiveSplitBox
          _AddToolBarToSplitBox ( _HMG_ActiveToolBarName , _HMG_ActiveToolBarBreak , _HMG_ActiveToolBarCaption , ParentForm )
@@ -192,11 +190,10 @@ FUNCTION _EndToolBar()
 
    _HMG_ToolBarActive         := .F.
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineToolButton ( ControlName, ParentControl, x, y, Caption, ProcedureName, w, h, image , tooltip , gotfocus , lostfocus , flat , separator , autosize , check , group , dropdown , WholeDropDown, adjust , imageindex )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , cParentForm , mVar , ParentForm , hParentForm , k
    LOCAL ControlHandle
    LOCAL id, imagelst, hotimagelst, aImage
@@ -251,7 +248,7 @@ FUNCTION _DefineToolButton ( ControlName, ParentControl, x, y, Caption, Procedur
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "TOOLBUTTON"
    _HMG_aControlNames  [k] :=  ControlName
@@ -305,16 +302,15 @@ FUNCTION _DefineToolButton ( ControlName, ParentControl, x, y, Caption, Procedur
    IF i > 0
       IF WholeDropDown == .T.
          nToolBarIndex := AScan ( _HMG_aControlHandles , ParentForm )
-         ProcedureName := { || _DropDownShortcut ( Id , hParentForm , nToolBarIndex , nPos ) }
-      ENDIF
-      _DefineLetterOrDigitHotKey ( Caption, i, cParentForm, ProcedureName )
-   ENDIF
+ProcedureName := { || _DropDownShortcut ( Id , hParentForm , nToolBarIndex , nPos ) }
+ENDIF
+_DefineLetterOrDigitHotKey ( Caption, i, cParentForm, ProcedureName )
+ENDIF
 
-RETURN Nil
+RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _AddToolBarToSplitBox ( ControlName , break , Caption , ParentForm )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, c, w, MinWidth, MinHeight, ix, tbsize, wrap
 
    i := GetFormIndex ( _HMG_ActiveSplitBoxParentFormName )
@@ -343,11 +339,9 @@ STATIC FUNCTION _AddToolBarToSplitBox ( ControlName , break , Caption , ParentFo
       AddSplitBoxItem ( c , _HMG_aFormReBarHandle [i] , w , break , Caption, MinWidth, MinHeight , _HMG_ActiveSplitBoxInverted , tbsize )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginToolBar ( name, parent, row, col, w, h, caption, ProcedureName, fontname, fontsize, tooltip, flat, bottom, righttext, break, bold, italic, underline, strikeout, border, wrap, custom )
-*-----------------------------------------------------------------------------*
 
    _HMG_ToolBarActive       := .T.
    _HMG_ActiveToolBarExtend := .F.
@@ -380,11 +374,9 @@ FUNCTION _BeginToolBar ( name, parent, row, col, w, h, caption, ProcedureName, f
 
    _DefineToolBar ( name , parent , col , row , caption , ProcedureName , w , h , fontname , fontsize , tooltip , flat , bottom , righttext , break , bold , italic , underline , strikeout , border , .F. , 0 , 0 , , , wrap, custom )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginToolBarEx( name, parent, row, col, w, h, caption, ProcedureName, fontname, fontsize, tooltip, flat, bottom, righttext, break, bold, italic, underline, strikeout, border , mixedbuttons , rows , tbsize, imagelst , hotimagelst , wrap, custom )
-*-----------------------------------------------------------------------------*
 
    _HMG_ToolBarActive       := .T.
    _HMG_ActiveToolBarExtend := .T.
@@ -431,11 +423,10 @@ FUNCTION _BeginToolBarEx( name, parent, row, col, w, h, caption, ProcedureName, 
 
    _DefineToolBar ( name , parent , col , row , caption , ProcedureName , w , h , fontname , fontsize , tooltip , flat , bottom , righttext , break , bold , italic , underline , strikeout , border , mixedbuttons , rows , tbsize, imagelst , hotimagelst , wrap, custom )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _CreatePopUpChevron ( hWnd, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL aChevronInfo, i, k, n, hMenu, aBtnInfo, hImage, aPos, cMenu, TbHwnd, image, lEnable
 
    i := AScan ( _HMG_aFormhandles , hWnd )
@@ -458,7 +449,7 @@ FUNCTION _CreatePopUpChevron ( hWnd, wParam, lParam )
             ELSE
                cMenu := 'Button ' + hb_ntos( n )
             ENDIF
-            AppendMenuString ( hMenu , aBtnInfo[2] , cMenu )
+            APPENDMenuString ( hMenu , aBtnInfo[2] , cMenu )
             image := _HMG_aControlPicture  [k]
             IF Len( image ) != 0
                MenuItem_SetBitMaps ( hMenu , aBtnInfo[2] , image , image )
@@ -479,11 +470,10 @@ FUNCTION _CreatePopUpChevron ( hWnd, wParam, lParam )
    DefWindowProc( hWnd, RBN_CHEVRONPUSHED, wParam, lParam )
    DestroyMenu( hMenu )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , nButtonPos )
-*-----------------------------------------------------------------------------*
+
    LOCAL aPos, aSize
    LOCAL x := AScan ( _HMG_aControlIds , nToolButtonId )
 
@@ -499,4 +489,5 @@ STATIC PROCEDURE _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , n
       SendMessage( _HMG_aControlHandles [i] , TB_SETHOTITEM, -1 , 0 )
    ENDIF
 
-RETURN
+   RETURN
+

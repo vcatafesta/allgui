@@ -1,3 +1,4 @@
-function main
 
-return
+FUNCTION main
+
+   RETURN

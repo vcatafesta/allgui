@@ -13,47 +13,45 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineChkListbox ( ControlName, ParentFormName, x, y, w, h, arows, value, ;
       fontname, fontsize, tooltip, changeprocedure, dblclick, gotfocus, lostfocus, break, HelpId, ;
       invisible, notabstop, sort, bold, italic, underline, strikeout, backcolor, fontcolor, ;
       multiselect, aCheck, nItemHeight, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , blInit , mVar , ControlHandle , Style
    LOCAL FontHandle , rows := {} , i , k ,  aChkItem := {} , nPos
    LOCAL lDialogInMemory
@@ -134,7 +132,6 @@ FUNCTION _DefineChkListbox ( ControlName, ParentFormName, x, y, w, h, arows, val
          Style += LBS_SORT
       ENDIF
 
-
       IF lDialogInMemory         //Dialog Template
 
          //          {{'ID',k/hwnd,class,Style,ExStyle,x,y,w,h,caption,HelpId,tooltip,font,size, bold, italic, underline, strikeout}}  --->_HMG_aDialogItems
@@ -212,7 +209,7 @@ FUNCTION _DefineChkListbox ( ControlName, ParentFormName, x, y, w, h, arows, val
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := iif ( multiselect , "MULTICHKLIST" , "CHKLIST" )
    _HMG_aControlNames  [k] :=  ControlName
@@ -279,11 +276,10 @@ FUNCTION _DefineChkListbox ( ControlName, ParentFormName, x, y, w, h, arows, val
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogChkListBox( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL Rows, Value, FontSize, FontHandle
 
    HB_SYMBOL_UNUSED( ParentName )
@@ -310,16 +306,15 @@ FUNCTION InitDialogChkListBox( ParentName, ControlHandle, k )
          ListboxSetCurSel ( ControlHandle , Value )
       ENDIF
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate [3]  // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
-*-----------------------------------------------------------------------------*
+
    LOCAL RetVal As Logical
    LOCAL i, t, uSel
 
@@ -330,9 +325,9 @@ FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
          IF item > 0 .AND. item <= ListBoxGetItemCount ( _HMG_aControlHandles [i] )
             IF ISLOGICAL ( lState )
                IF T == "MULTICHKLIST"
-                  uSel := ListBoxGetMultiSel ( _HMG_aControlHandles [i] )
+                  USEl := ListBoxGetMultiSel ( _HMG_aControlHandles [i] )
                ELSE
-                  uSel := ListBoxGetCursel ( _HMG_aControlHandles [i] )
+                  USEl := ListBoxGetCursel ( _HMG_aControlHandles [i] )
                ENDIF
                ChkList_SetCheckBox ( _HMG_aControlHandles [i], Item, iif( lState, 2, 1 ) )
                IF T == "MULTICHKLIST"
@@ -347,4 +342,5 @@ FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
       ENDIF
    ENDIF
 
-RETURN RetVal
+   RETURN RetVal
+

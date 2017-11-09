@@ -1,20 +1,17 @@
 /*
- * Combobox Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to load items and images using
- * data from a database (ITEMSOURCE, ITEMIMAGENUMBER and
- * IMAGESOURCE clauses), and how to change the images
- * after control creation.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * You can download all the images from
- * https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/ComboBox
- */
+* Combobox Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to load items and images using
+* data from a database (ITEMSOURCE, ITEMIMAGENUMBER and
+* IMAGESOURCE clauses), and how to change the images
+* after control creation.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* You can download all the images from
+* https://github.com/fyurisich/OOHG_Samples/tree/master/English/Samples/ComboBox
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -26,11 +23,11 @@ FUNCTION Main()
    CreateDatabase()
 
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 428 ;
-      HEIGHT 300 ;
-      TITLE "ooHG - COMBOBOX with Images" ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 428 ;
+         HEIGHT 300 ;
+         TITLE "ooHG - COMBOBOX with Images" ;
+         MAIN
 
       @ 20,20 COMBOBOX cmb_1 ;
          OBJ oCmb_1 ;
@@ -48,7 +45,7 @@ FUNCTION Main()
          WIDTH 100 ;
          HEIGHT 28 ;
          ACTION {|| oCmb_1:ImageSource := {|| test->image2}, ;
-                    oCmb_1:Refresh() }
+         oCmb_1:Refresh() }
 
       ON KEY ESCAPE ACTION ThisWindow.Release()
    END WINDOW
@@ -59,7 +56,7 @@ FUNCTION Main()
    CLOSE DATABASES
    ERASE Test.dbf
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CreateDatabase()
 
@@ -102,8 +99,9 @@ FUNCTION CreateDatabase()
    REPLACE Image  WITH "info.png"
    REPLACE Image2 WITH "globe.png"
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

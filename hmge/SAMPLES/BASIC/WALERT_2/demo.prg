@@ -20,4 +20,5 @@ PROCEDURE MAIN
 
    _alert( "Test Alert", , "Alert" )
 
-RETURN
+   RETURN
+

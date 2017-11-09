@@ -1,7 +1,6 @@
 /*
- * GDI+ demo
- *
- * Author: P.Chornyj <myorg63@mail.ru>
+* GDI+ demo
+* Author: P.Chornyj <myorg63@mail.ru>
 */
 
 #include "minigui.ch"
@@ -16,87 +15,86 @@
 
 #xtranslate gSave => GPlusSaveHBitmapToFile
 
-memvar cPicture
-memvar hPicture
-//////////////////////////////////////////////////////////////////////////////
-procedure Main()
+MEMVAR cPicture
+MEMVAR hPicture
 
-   if StatusOk != GdiplusInitExt( _GDI_GRAPHICS )
-      quit
-   endif
+PROCEDURE Main()
+
+   IF StatusOk != GdiplusInitExt( _GDI_GRAPHICS )
+      QUIT
+   ENDIF
 
    _GdiplusInitLocal()
 
-   public cPicture := 'demo'
-   public hPicture := LoadBitmap( cPicture )
+   PUBLIC cPicture := 'demo'
+   PUBLIC hPicture := LoadBitmap( cPicture )
 
-   define window Form_Main ;
-      at 0,0 ;
-      width 320 height 240 ;
-      title 'GDI+: Save Bitmap To File Demo' ;
-      main ;
-      nomaximize nosize
+   DEFINE WINDOW Form_Main ;
+         at 0,0 ;
+         width 320 height 240 ;
+         title 'GDI+: Save Bitmap To File Demo' ;
+         main ;
+         nomaximize nosize
 
       s_CreateMenu()
 
       @ 20,20 image Image_1 picture cPicture
-   end window
+   END WINDOW
 
    on key Escape of Form_Main action ThisWindow.Release
 
    center   window Form_Main
-   activate window Form_Main
+   ACTIVATE WINDOW Form_Main
 
-return
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
-static procedure s_CreateMenu()
+STATIC PROCEDURE s_CreateMenu()
 
-   local i
-   local aPictInfo := BmpSize( cPicture ) 
-   local aMimeType := Array( GPlusGetEncodersNum() )
+   LOCAL i
+   LOCAL aPictInfo := BmpSize( cPicture )
+   LOCAL aMimeType := Array( GPlusGetEncodersNum() )
 
-   for i := 1 to Len( aMimeType )
+   FOR i := 1 to Len( aMimeType )
       aMimeType[i] := GPlusGetEncodersMimeType()[i]
-   next
+   NEXT
 
-   define main menu
-      define popup "&File" 
-         for i := 1 TO Len( aMimeType )
-            if "bmp" $ aMimeType[i]
-               loop
-            else
+   DEFINE MAIN MENU
+      DEFINE POPUP "&File"
+         FOR i := 1 TO Len( aMimeType )
+            IF "bmp" $ aMimeType[i]
+               LOOP
+            ELSE
 
                #xtranslate _PICT_INFO => aPictInfo[BM_WIDTH], aPictInfo[BM_HEIGHT]
 
-               if "jpeg" $ aMimeType[i]
+               IF "jpeg" $ aMimeType[i]
                   menuitem '&Save as '+ aMimeType[i] action;
                      MsgInfo( iif( gSave( hPicture, cPicture+".jpeg", _PICT_INFO, "image/jpeg", 90 ), "Saved", "Failure" ), "Result" )
-               endif
+               ENDIF
 
-               if "gif" $ aMimeType[i]
+               IF "gif" $ aMimeType[i]
                   menuitem '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".gif", _PICT_INFO, "image/gif", 100 ), "Saved", "Failure" ), "Result" )
-               endif
+               ENDIF
 
-               if "tif" $ aMimeType[i]
+               IF "tif" $ aMimeType[i]
                   menuitem '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".tif", _PICT_INFO, "image/tiff", 100 ), "Saved", "Failure" ), "Result" )
-               endif
+               ENDIF
 
-               if "png" $ aMimeType[i]
+               IF "png" $ aMimeType[i]
                   menuitem '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".png", _PICT_INFO, "image/png", 100 ), "Saved", "Failure" ), "Result" )
-               endif
-            endif
-         next 
+               ENDIF
+            ENDIF
+         NEXT
 
          separator
 
          menuitem "E&xit" action ( DeleteObject( hPicture ), ThisWindow.Release )
       end popup
 
-      define popup "&?" 
+      DEFINE POPUP "&?"
          menuitem '&Get number of image coders' action ;
             MsgInfo( "Number of image coders"  + c1Tab + ": " + NTrim( gPlusGetEncodersNum() ), "Info" )
 
@@ -109,16 +107,15 @@ static procedure s_CreateMenu()
       end popup
    end menu
 
-return
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
-static procedure s_GetImageInfo( cFile )
+STATIC PROCEDURE s_GetImageInfo( cFile )
 
-   local image 
-   local width := 0, height := 0
-   local cMsg
+   LOCAL image
+   LOCAL width := 0, height := 0
+   LOCAL cMsg
 
-   if StatusOk == GdipLoadImageFromFile( cFile, @image )
+   IF StatusOk == GdipLoadImageFromFile( cFile, @image )
       GdipGetImageDimension( image, @width, @height )
 
       cMsg := "Picture name" + c1Tab + ": " + cFileNoPath( cFile ) + CRLF
@@ -128,26 +125,22 @@ static procedure s_GetImageInfo( cFile )
       MsgInfo( cMsg, "Image Info" )
 
       GdipDisposeImage( image )
-   endif
+   ENDIF
 
-return
+   RETURN
 
-//////////////////////////////////////////////////////////////////////////////
 #pragma BEGINDUMP
 /*
  * This source file is part of the hbGdiPlus library source
  * Copyright 2007-2017 P.Chornyj <myorg63@mail.ru>
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
  */
 
 #include <mgdefs.h>
@@ -265,21 +258,27 @@ unsigned char * MimeTypeOld;
 static GpStatus _LoadExt( void )
 {
    if( NULL == g_GpModule )
+
       return FALSE;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageEncodersSize ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageEncoders ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipCreateBitmapFromHBITMAP ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipSaveImageToFile ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageThumbnail ) )
+
       return NotImplemented;
 
    return TRUE;
@@ -328,6 +327,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    if( size == 0 )
    {
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -336,6 +336,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    if( pImageCodecInfo == NULL )
    {
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -345,6 +346,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    {
       hb_xfree( pImageCodecInfo );
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -383,12 +385,15 @@ static BOOL GetEnCodecClsid( const char * MimeType, CLSID * Clsid )
    hb_xmemset( Clsid, 0, sizeof( CLSID ) );
 
    if( ( MimeType == NULL ) || ( Clsid == NULL ) || ( g_GpModule == NULL ) )
+
       return FALSE;
 
    if( fn_GdipGetImageEncodersSize( &num, &size ) )
+
       return FALSE;
 
    if( ( pImageCodecInfo = hb_xalloc( size ) ) == NULL )
+
       return FALSE;
 
    hb_xmemset( pImageCodecInfo, 0, sizeof( ImageCodecInfo ) );
@@ -567,3 +572,4 @@ BOOL SaveHBitmapToFile( void * HBitmap, const char * FileName, unsigned int Widt
 }
 
 #pragma ENDUMP
+

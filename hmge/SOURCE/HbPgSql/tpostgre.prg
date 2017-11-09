@@ -1,48 +1,38 @@
 /*
- * PostgreSQL RDBMS low level (client api) interface code.
- *
- * Copyright 2003 Rodrigo Moreno rodrigo_moreno@yahoo.com
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.txt.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site https://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* PostgreSQL RDBMS low level (client api) interface code.
+* Copyright 2003 Rodrigo Moreno rodrigo_moreno@yahoo.com
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.txt.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site https://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "hbclass.ch"
 #include "postgres.ch"
@@ -65,30 +55,45 @@ CREATE CLASS TPQServer
    VAR lTrace    INIT .F.
    VAR pTrace
 
-   METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom )
-   METHOD Destroy()
-   METHOD Close()              INLINE ::Destroy()
+METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom )
 
-   METHOD StartTransaction()
-   METHOD TransactionStatus()  INLINE PQtransactionStatus( ::pDb )
-   METHOD Commit()
-   METHOD Rollback()
+METHOD Destroy()
 
-   METHOD Query( cQuery )
-   METHOD Execute( cQuery )    INLINE ::Query( cQuery )
-   METHOD SetSchema( cSchema )
+METHOD Close()              INLINE ::Destroy()
 
-   METHOD NetErr()             INLINE ::lError
-   METHOD ErrorMsg()           INLINE ::cError
+METHOD StartTransaction()
 
-   METHOD TableExists( cTable )
-   METHOD ListTables()
-   METHOD TableStruct( cTable )
-   METHOD CreateTable( cTable, aStruct )
-   METHOD DeleteTable( cTable  )
-   METHOD TraceOn( cFile )
-   METHOD TraceOff()
-   METHOD SetVerbosity( num )  INLINE PQsetErrorVerbosity( ::pDb, iif( num >= 0 .AND. num <= 2, num, 1 )  )
+METHOD TransactionStatus()  INLINE PQtransactionStatus( ::pDb )
+
+METHOD Commit()
+
+METHOD Rollback()
+
+METHOD Query( cQuery )
+
+METHOD Execute( cQuery )    INLINE ::Query( cQuery )
+
+METHOD SetSchema( cSchema )
+
+METHOD NetErr()             INLINE ::lError
+
+METHOD ErrorMsg()           INLINE ::cError
+
+METHOD TableExists( cTable )
+
+METHOD ListTables()
+
+METHOD TableStruct( cTable )
+
+METHOD CreateTable( cTable, aStruct )
+
+METHOD DeleteTable( cTable  )
+
+METHOD TraceOn( cFile )
+
+METHOD TraceOff()
+
+METHOD SetVerbosity( num )  INLINE PQsetErrorVerbosity( ::pDb, iif( num >= 0 .AND. num <= 2, num, 1 )  )
 
 ENDCLASS
 
@@ -187,6 +192,7 @@ METHOD Rollback() CLASS TPQserver
    RETURN ::lError
 
 METHOD Query( cQuery ) CLASS TPQserver
+
    RETURN TPQQuery():New( ::pDB, cQuery, ::lAllCols, ::Schema )
 
 METHOD TableExists( cTable ) CLASS TPQserver
@@ -435,7 +441,6 @@ METHOD PROCEDURE TraceOff() CLASS TPQserver
 
    RETURN
 
-
 CREATE CLASS TPQQuery
 
    VAR pQuery
@@ -462,46 +467,67 @@ CREATE CLASS TPQQuery
    VAR Schema
    VAR rows     INIT 0
 
-   METHOD New( pDB, cQuery, lAllCols, cSchema, res )
-   METHOD Destroy()
-   METHOD Close()            INLINE ::Destroy()
+METHOD New( pDB, cQuery, lAllCols, cSchema, res )
 
-   METHOD Refresh( lQuery, lMeta )
-   METHOD Fetch()            INLINE ::Skip()
-   METHOD Read()
-   METHOD Skip( nRecno )
+METHOD Destroy()
 
-   METHOD Bof()              INLINE ::lBof
-   METHOD Eof()              INLINE ::lEof
-   METHOD RecNo()            INLINE ::nRecno
-   METHOD LastRec()          INLINE ::nLastrec
-   METHOD Goto( nRecno )
+METHOD Close()            INLINE ::Destroy()
 
-   METHOD NetErr()           INLINE ::lError
-   METHOD ErrorMsg()         INLINE ::cError
+METHOD Refresh( lQuery, lMeta )
 
-   METHOD FCount()           INLINE ::nFields
-   METHOD FieldName( nField )
-   METHOD FieldPos( cField )
-   METHOD FieldLen( nField )
-   METHOD FieldDec( nField )
-   METHOD FieldType( nField )
-   METHOD Update( oRow )
-   METHOD Delete( oRow )
-   METHOD Append( oRow )
-   METHOD SetKey()
+METHOD Fetch()            INLINE ::Skip()
 
-   METHOD Changed( nField )  INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
-   METHOD Blank()            INLINE ::GetBlankRow()
+METHOD Read()
 
-   METHOD Struct()
+METHOD Skip( nRecno )
 
-   METHOD FieldGet( nField, nRow )
-   METHOD GetRow( nRow )
-   METHOD GetBlankRow()
+METHOD Bof()              INLINE ::lBof
+
+METHOD Eof()              INLINE ::lEof
+
+METHOD RecNo()            INLINE ::nRecno
+
+METHOD LastRec()          INLINE ::nLastrec
+
+METHOD Goto( nRecno )
+
+METHOD NetErr()           INLINE ::lError
+
+METHOD ErrorMsg()         INLINE ::cError
+
+METHOD FCount()           INLINE ::nFields
+
+METHOD FieldName( nField )
+
+METHOD FieldPos( cField )
+
+METHOD FieldLen( nField )
+
+METHOD FieldDec( nField )
+
+METHOD FieldType( nField )
+
+METHOD Update( oRow )
+
+METHOD Delete( oRow )
+
+METHOD Append( oRow )
+
+METHOD SetKey()
+
+METHOD Changed( nField )  INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
+
+METHOD Blank()            INLINE ::GetBlankRow()
+
+METHOD Struct()
+
+METHOD FieldGet( nField, nRow )
+
+METHOD GetRow( nRow )
+
+METHOD GetBlankRow()
 
 ENDCLASS
-
 
 METHOD New( pDB, cQuery, lAllCols, cSchema, res ) CLASS TPQquery
 
@@ -677,13 +703,13 @@ METHOD Refresh( lQuery, lMeta ) CLASS TPQquery
 
    ELSE
 
-      IF ::nResultStatus == PGRES_COMMAND_OK 
-         ::lError := .F. 
-         ::cError := "" 
-         ::rows   := Val( PQcmdTuples( res ) ) 
-      ELSE 
-         ::lError := .T. 
-         ::cError := PQresultErrorMessage( res ) 
+      IF ::nResultStatus == PGRES_COMMAND_OK
+         ::lError := .F.
+         ::cError := ""
+         ::rows   := Val( PQcmdTuples( res ) )
+      ELSE
+         ::lError := .T.
+         ::cError := PQresultErrorMessage( res )
       ENDIF
 
    ENDIF
@@ -765,6 +791,7 @@ METHOD FieldName( nField ) CLASS TPQquery
    ENDIF
 
    IF nField > 0
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDNAME ]
    ENDIF
 
@@ -779,6 +806,7 @@ METHOD FieldType( nField ) CLASS TPQquery
    ENDIF
 
    IF nField > 0
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDTYPE ]
    ENDIF
 
@@ -793,6 +821,7 @@ METHOD FieldLen( nField ) CLASS TPQquery
    ENDIF
 
    IF nField > 0
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDLEN ]
    ENDIF
 
@@ -807,6 +836,7 @@ METHOD FieldDec( nField ) CLASS TPQquery
    ENDIF
 
    IF nField > 0
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDDEC ]
    ENDIF
 
@@ -1172,21 +1202,29 @@ CREATE CLASS TPQRow
    VAR aOld
    VAR aStruct
 
-   METHOD New( row, old, struct )
+METHOD New( row, old, struct )
 
-   METHOD FCount()              INLINE Len( ::aRow )
-   METHOD FieldGet( nField )
-   METHOD FieldPut( nField, Value )
-   METHOD FieldName( nField )
-   METHOD FieldPos( cField )
-   METHOD FieldLen( nField )
-   METHOD FieldDec( nField )
-   METHOD FieldType( nField )
-   METHOD Changed( nField )     INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
-   METHOD FieldGetOld( nField ) INLINE ::aOld[ nField ]
+METHOD FCount()              INLINE Len( ::aRow )
+
+METHOD FieldGet( nField )
+
+METHOD FieldPut( nField, Value )
+
+METHOD FieldName( nField )
+
+METHOD FieldPos( cField )
+
+METHOD FieldLen( nField )
+
+METHOD FieldDec( nField )
+
+METHOD FieldType( nField )
+
+METHOD Changed( nField )     INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
+
+METHOD FieldGetOld( nField ) INLINE ::aOld[ nField ]
 
 ENDCLASS
-
 
 METHOD New( row, old, struct ) CLASS TPQrow
 
@@ -1203,6 +1241,7 @@ METHOD FieldGet( nField ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aRow )
+
       RETURN ::aRow[ nField ]
    ENDIF
 
@@ -1215,6 +1254,7 @@ METHOD FieldPut( nField, Value ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aRow )
+
       RETURN ::aRow[ nField ] := Value
    ENDIF
 
@@ -1227,6 +1267,7 @@ METHOD FieldName( nField ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aStruct )
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDNAME ]
    ENDIF
 
@@ -1245,6 +1286,7 @@ METHOD FieldType( nField ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aStruct )
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDTYPE ]
    ENDIF
 
@@ -1257,6 +1299,7 @@ METHOD FieldLen( nField ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aStruct )
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDLEN ]
    ENDIF
 
@@ -1269,6 +1312,7 @@ METHOD FieldDec( nField ) CLASS TPQrow
    ENDIF
 
    IF nField >= 1 .AND. nField <= Len( ::aStruct )
+
       RETURN ::aStruct[ nField ][ _STRU_FIELDDEC ]
    ENDIF
 
@@ -1305,3 +1349,4 @@ STATIC FUNCTION ValueToString( xField )
    ENDSWITCH
 
    RETURN NIL
+

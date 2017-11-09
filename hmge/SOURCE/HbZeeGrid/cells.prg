@@ -1,7 +1,7 @@
 /*
- * This file is a part of HbZeeGrid library.
- * Copyright 2017 (C) P.Chornyj <myorg63@mail.ru>
- */
+* This file is a part of HbZeeGrid library.
+* Copyright 2017 (C) P.Chornyj <myorg63@mail.ru>
+*/
 
 #include "hbclass.ch"
 #include "zeegrid.ch"
@@ -9,11 +9,11 @@
 CREATE CLASS _Cells
 
    EXPORTED:
-      VAR hGrid READONLY 
+   VAR hGrid READONLY
 
-      METHOD Init( hGrid )
+METHOD Init( hGrid )
 
-      OPERATOR "[]" ARG nIndex INLINE _Cell():New( ::hGrid, nIndex )
+   OPERATOR "[]" ARG nIndex INLINE _Cell():New( ::hGrid, nIndex )
 
 ENDCLASS
 
@@ -21,20 +21,25 @@ METHOD _Cells:Init( hGrid )
 
    ::hGrid := hGrid
 
-RETURN self
+   RETURN self
 
 CREATE CLASS _Cell
 
    EXPORTED:
-      VAR hGrid      READONLY 
-      VAR nIndex
-   
-      METHOD Init( hGrid, nIndex )
-      METHOD SetBColor( nClrIndex )   
-      METHOD SetFColor( nClrIndex )
-      METHOD GetBColor()   
-      METHOD GetFColor()
-      // and more
+   VAR hGrid      READONLY
+   VAR nIndex
+
+METHOD Init( hGrid, nIndex )
+
+METHOD SetBColor( nClrIndex )
+
+METHOD SetFColor( nClrIndex )
+
+METHOD GetBColor()
+
+METHOD GetFColor()
+
+   // and more
 
 ENDCLASS
 
@@ -45,26 +50,29 @@ METHOD _Cell:Init( hGrid, nIndex )
    ::hGrid  := hGrid
    ::nIndex := nIndex
 
-RETURN self
+   RETURN self
 
 METHOD PROCEDURE _Cell:SetBColor( nClrIndex  )
 
-   if HB_ISNUMERIC( nClrIndex )
+   IF HB_ISNUMERIC( nClrIndex )
       zgm_setCellBColor( ::hGrid, ::nIndex, nClrIndex )
-   endif
+   ENDIF
 
-RETURN
+   RETURN
 
 METHOD PROCEDURE _Cell:SetFColor( nClrIndex  )
 
-   if HB_ISNUMERIC( nClrIndex )
+   IF HB_ISNUMERIC( nClrIndex )
       zgm_setCellFColor( ::hGrid, ::nIndex, nClrIndex )
-   endif
+   ENDIF
 
-RETURN
+   RETURN
 
 METHOD _Cell:GetBColor()
-RETURN zgm_getCellBColor( ::hGrid, ::nIndex )
+
+   RETURN zgm_getCellBColor( ::hGrid, ::nIndex )
 
 METHOD _Cell:GetFColor()
-RETURN zgm_getCellFColor( ::hGrid, ::nIndex )
+
+   RETURN zgm_getCellFColor( ::hGrid, ::nIndex )
+

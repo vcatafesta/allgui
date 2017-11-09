@@ -1,12 +1,10 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- */
+* MINIGUI - Harbour Win32 GUI library Demo
+*/
 
 #include "minigui.ch"
 #include "hbclass.ch"
 
-////////////////////////////////////////////////////////////////////////////////
 FUNCTION Main()
 
    LOCAL cTxt, aTxt, oLbl
@@ -26,51 +24,50 @@ FUNCTION Main()
    aTxt := hb_ATokens( cTxt, c )
 
    DEFINE WINDOW _T ;
-      AT 0, 0 WIDTH 100 HEIGHT 100 ;
-      TITLE 'Colored Label Demo' ;
-      MAIN ;
-      BACKCOLOR BColor
+         AT 0, 0 WIDTH 100 HEIGHT 100 ;
+         TITLE 'Colored Label Demo' ;
+         MAIN ;
+         BACKCOLOR BColor
 
-   oLbl := cLbl():New( BColor )
+      oLbl := cLbl():New( BColor )
 
-   oLbl:Add( 'Harbour', BLUE )
-   oLbl:Add( 'Project', GREEN, .T., .F., .T. )
-   oLbl:Add( 'Free', BLUE )
-   oLbl:Add( 'Software', GREEN, .T., .T., .T., 'Tooltip' )
-   oLbl:Add( 'General', BLUE )
-   oLbl:Add( 'Public', YELLOW, .T., .F., .T., 'Click me', .T., ;
-      {|o| MsgInfo( 'Value: ' + _GetValue( _HMG_ThisControlName, _HMG_ThisFormName ), 'Class: ' + o:ClassName ) } )
-   oLbl:Add( 'License', BLUE )
-   oLbl:Add( 'exception', RED  )
+      oLbl:Add( 'Harbour', BLUE )
+      oLbl:Add( 'Project', GREEN, .T., .F., .T. )
+      oLbl:Add( 'Free', BLUE )
+      oLbl:Add( 'Software', GREEN, .T., .T., .T., 'Tooltip' )
+      oLbl:Add( 'General', BLUE )
+      oLbl:Add( 'Public', YELLOW, .T., .F., .T., 'Click me', .T., ;
+         {|o| MsgInfo( 'Value: ' + _GetValue( _HMG_ThisControlName, _HMG_ThisFormName ), 'Class: ' + o:ClassName ) } )
+      oLbl:Add( 'License', BLUE )
+      oLbl:Add( 'exception', RED  )
 
-   y := x := s
+      y := x := s
 
-   FOR EACH cTxt IN aTxt
-      IF ! Empty( cTxt )
-         oLbl:Def( cTxt )
-         a := oLbl:Out( y, x )
-         y += a[ 1 ] + s
-         h += a[ 1 ] + s
-         w := Max( w, a[ 2 ] )
-      ENDIF
-   NEXT
+      FOR EACH cTxt IN aTxt
+         IF ! Empty( cTxt )
+            oLbl:Def( cTxt )
+            a := oLbl:Out( y, x )
+            y += a[ 1 ] + s
+            h += a[ 1 ] + s
+            w := Max( w, a[ 2 ] )
+         ENDIF
+      NEXT
 
-   h += s * 2
-   w += s * 2
+      h += s * 2
+      w += s * 2
 
-   This.Width  := w + GetBorderWidth () * 2
-   This.Height := h + GetBorderHeight() * 2 + GetTitleHeight()
+      This.Width  := w + GetBorderWidth () * 2
+      This.Height := h + GetBorderHeight() * 2 + GetTitleHeight()
 
    END WINDOW
 
    CENTER   WINDOW _T
    ACTIVATE WINDOW _T
 
-RETURN NIL
-
-////////////////////////////////////////////////////////////////////////////////
+   RETURN NIL
 
 CLASS cLbl
+
    VAR cForm
    VAR cFont
    VAR nSize
@@ -86,15 +83,18 @@ CLASS cLbl
    VAR cLbl     INIT '_Out_'
    VAR cSpace   INIT ' '
 
-   METHOD New( BColor, cFont, nSize )
-   METHOD Out( nRow, nCol )
-   METHOD Def( cTxt, cChr )
-   METHOD Add( cSub, FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct ) INLINE ;
+METHOD New( BColor, cFont, nSize )
+
+METHOD Out( nRow, nCol )
+
+METHOD Def( cTxt, cChr )
+
+METHOD Add( cSub, FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct ) INLINE ;
       ( hb_HSet( ::aSub, Lower( cSub ), { FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct } ) )
-   METHOD Block()
+
+METHOD Block()
 
 ENDCLASS
-
 
 METHOD New( BColor, cFont, nSize ) CLASS cLbl
 
@@ -110,8 +110,7 @@ METHOD New( BColor, cFont, nSize ) CLASS cLbl
    IF nSize  != Nil; ::nSize  := nSize
    ENDIF
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Def( cTxt, cChr ) CLASS cLbl
 
@@ -125,8 +124,7 @@ METHOD Def( cTxt, cChr ) CLASS cLbl
       ::aTxt := cTxt
    ENDIF
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Out( nRow, nCol ) CLASS cLbl
 
@@ -169,23 +167,23 @@ METHOD Out( nRow, nCol ) CLASS cLbl
       ::nLbl += 1
 
       DEFINE LABEL    &c
-        ROW           y
-        COL           x
-        VALUE         j + cS
-        FONTNAME      cF
-        FONTSIZE      nS
-        FONTBOLD      lB
-        FONTITALIC    lI
-        FONTUNDERLINE lU
-        BACKCOLOR     BC
-        FONTCOLOR     FC
-        TOOLTIP       cT
-        VCENTERALIGN  .T.
-        AUTOSIZE      .T.
-        ACTION        o:Block()
-        IF lH
-           ON MOUSEHOVER CursorHand()
-        ENDIF
+         ROW           y
+         COL           x
+         VALUE         j + cS
+         FONTNAME      cF
+         FONTSIZE      nS
+         FONTBOLD      lB
+         FONTITALIC    lI
+         FONTUNDERLINE lU
+         BACKCOLOR     BC
+         FONTCOLOR     FC
+         TOOLTIP       cT
+         VCENTERALIGN  .T.
+         AUTOSIZE      .T.
+         ACTION        o:Block()
+         IF lH
+            ON MOUSEHOVER CursorHand()
+         ENDIF
       END LABEL
 
       l := This.&(c).Width
@@ -194,8 +192,7 @@ METHOD Out( nRow, nCol ) CLASS cLbl
       h := Max( h, This.&(c).Height )
    NEXT
 
-RETURN { h, w }
-
+   RETURN { h, w }
 
 METHOD Block() CLASS cLbl
 
@@ -206,8 +203,7 @@ METHOD Block() CLASS cLbl
       Eval( a[ 7 ], Self )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION Create_txt( cFile )
 
@@ -223,4 +219,5 @@ STATIC FUNCTION Create_txt( cFile )
 
    hb_MemoWrit( cFile, t )
 
-RETURN NIL
+   RETURN NIL
+

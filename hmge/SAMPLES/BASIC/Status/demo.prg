@@ -1,50 +1,50 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	SET CENTURY ON
+   SET CENTURY ON
 
-	SET DATE AMERICAN
+   SET DATE AMERICAN
 
-//	SET DATE GERMAN
+   //   SET DATE GERMAN
 
-	SET FONT TO _GetSysFont() , 10
+   SET FONT TO _GetSysFont() , 10
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 600 ;
-		HEIGHT 400 ;
-		TITLE 'Statusbar Demo' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'Statusbar Demo' ;
+         MAIN
 
-		DEFINE STATUSBAR
+      DEFINE STATUSBAR
 
-			STATUSITEM MiniGUIVersion() FONTCOLOR BLUE
+         STATUSITEM MiniGUIVersion() FONTCOLOR BLUE
 
-//			KEYBOARD
+         //         KEYBOARD
 
-			STATUSDATE FONTCOLOR BLUE
+         STATUSDATE FONTCOLOR BLUE
 
-			IF "/" $ Set( 4 )
+         IF "/" $ Set( 4 )
 
-				CLOCK AMPM FONTCOLOR BLUE
-			ELSE
-				CLOCK FONTCOLOR BLUE
-			ENDIF
+            CLOCK AMPM FONTCOLOR BLUE
+         ELSE
+            CLOCK FONTCOLOR BLUE
+         ENDIF
 
-		END STATUSBAR
- 
-	END WINDOW
+      END STATUSBAR
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
+
+   RETURN
+

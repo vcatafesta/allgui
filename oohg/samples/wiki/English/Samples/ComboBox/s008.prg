@@ -1,16 +1,14 @@
 /*
- * ComboBox Sample n° 8
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to get the selected value and the
- * corresponding item of a ComboBox with ITEMSOURCE and
- * VALUESOURCE clauses.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* ComboBox Sample n° 8
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to get the selected value and the
+* corresponding item of a ComboBox with ITEMSOURCE and
+* VALUESOURCE clauses.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -21,10 +19,10 @@ FUNCTION Main
    OpenTables()
 
    DEFINE WINDOW MAIN OBJ oWnd ;
-      TITLE "Combobox's Selected Value and Item" ;
-      WIDTH 370 ;
-      HEIGHT 400 ;
-      ON RELEASE CloseTables()
+         TITLE "Combobox's Selected Value and Item" ;
+         WIDTH 370 ;
+         HEIGHT 400 ;
+         ON RELEASE CloseTables()
 
       @ 10,10 COMBOBOX Combo1 OBJ oCombo1 ;
          WIDTH 200 ;
@@ -32,13 +30,13 @@ FUNCTION Main
          ITEMSOURCE 'test->Name' ;
          VALUESOURCE 'test->Code' ;
          ON CHANGE ( oValue1:value := "Value (code) is: " + ;
-                                      AutoType(oCombo1:Value), ;
-                     oItem1:value := "Item (name) is: " + ;
-                                     oCombo1:ItemBySource(oCombo1:Value) )
-/*
- * You can replace ItemBySource(oCombo1:Value) with
- * Item(ASCAN(oCombo1:aValues, oCombo1:Value)).
- */
+         AutoType(oCombo1:Value), ;
+         oItem1:value := "Item (name) is: " + ;
+         oCombo1:ItemBySource(oCombo1:Value) )
+      /*
+      * You can replace ItemBySource(oCombo1:Value) with
+      * Item(ASCAN(oCombo1:aValues, oCombo1:Value)).
+      */
 
       @ 13,220 LABEL Dummy1 VALUE "WITH VALUESOURCE" AUTOSIZE
 
@@ -55,13 +53,13 @@ FUNCTION Main
          DISPLAYEDIT ;
          ITEMSOURCE 'test->Name' ;
          ON CHANGE ( oValue2:value := "Value (recno) is: " + ;
-                                      AutoType(oCombo2:Value), ;
-                     oItem2:value := "Item (name) is: " + ;
-                                     oCombo2:ItemBySource(oCombo2:Value) )
-/*
- * You can replace ItemBySource(oCombo2:Value) with
- * Item(oCombo2:Value).
- */
+         AutoType(oCombo2:Value), ;
+         oItem2:value := "Item (name) is: " + ;
+         oCombo2:ItemBySource(oCombo2:Value) )
+      /*
+      * You can replace ItemBySource(oCombo2:Value) with
+      * Item(oCombo2:Value).
+      */
 
       @ 213,220 LABEL Dummy2 VALUE "WITHOUT" AUTOSIZE
 
@@ -79,7 +77,7 @@ FUNCTION Main
    CENTER WINDOW MAIN
    ACTIVATE WINDOW MAIN
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION OpenTables()
 
@@ -100,7 +98,7 @@ FUNCTION OpenTables()
 
    INDEX ON Code TO code
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CloseTables()
 
@@ -108,8 +106,9 @@ FUNCTION CloseTables()
    ERASE ("code" + INDEXEXT())
    ERASE Test.dbf
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

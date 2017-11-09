@@ -5,37 +5,36 @@
 
 PROCEDURE MAIN()
 
-	DEFINE WINDOW main_form ;
-		AT 114,218 ;
-		WIDTH 334 ;
-		HEIGHT 276 ;
-		TITLE 'OLE TEST' ;
-		MAIN
+   DEFINE WINDOW main_form ;
+         AT 114,218 ;
+         WIDTH 334 ;
+         HEIGHT 276 ;
+         TITLE 'OLE TEST' ;
+         MAIN
 
-		DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-			DEFINE POPUP "Test"
-				MENUITEM 'Word Test' ACTION MSWORD()
-				MENUITEM 'IE Test' ACTION IEXPLORER()
-				MENUITEM 'OutLook Test' ACTION OUTLOOK()
-				MENUITEM 'Excel Test' ACTION EXCEL()
-			END POPUP
+         DEFINE POPUP "Test"
+            MENUITEM 'Word Test' ACTION MSWORD()
+            MENUITEM 'IE Test' ACTION IEXPLORER()
+            MENUITEM 'OutLook Test' ACTION OUTLOOK()
+            MENUITEM 'Excel Test' ACTION EXCEL()
+         END POPUP
 
-		END MENU
+      END MENU
 
-	END WINDOW 
+   END WINDOW
 
-	Main_form.center
-	Main_form.activate
+   Main_form.center
+   Main_form.activate
 
-Return NIL
+   RETURN NIL
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE Excel()
-LOCAL oExcel, oHoja
+
+   LOCAL oExcel, oHoja
 
    oExcel := CreateObject( "Excel.Application" )
 
@@ -70,57 +69,49 @@ LOCAL oExcel, oHoja
 
    oExcel:Visible := .T.
 
-
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE MsWord()
 
-	LOCAL oWord, oText
+   LOCAL oWord, oText
 
-	oWord := CreateObject( "Word.Application" )
+   oWord := CreateObject( "Word.Application" )
 
-	oWord:Documents:Add()
+   oWord:Documents:Add()
 
-	oTexto := oWord:Selection()
+   oTexto := oWord:Selection()
 
-	oTexto:Text := "OLE desde HMG" + CRLF
-	oTexto:Font:Name := "Arial"
-	oTexto:Font:Size := 48
-	oTexto:Font:Bold := .T.
+   oTexto:Text := "OLE desde HMG" + CRLF
+   oTexto:Font:Name := "Arial"
+   oTexto:Font:Size := 48
+   oTexto:Font:Bold := .T.
 
-	oWord:Visible := .T.
-	oWord:WindowState := 1 
+   oWord:Visible := .T.
+   oWord:WindowState := 1
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE IEXPLORER()
 
-	LOCAL oIE
+   LOCAL oIE
 
-	oIE := CreateObject( "InternetExplorer.Application" )
+   oIE := CreateObject( "InternetExplorer.Application" )
 
-	oIE:Visible := .T.
+   oIE:Visible := .T.
 
-	oIE:Navigate( "http://www.hmgforum.com/" )
+   oIE:Navigate( "http://www.hmgforum.com/" )
 
-RETURN
-
-//--------------------------------------------------------------------
+   RETURN
 
 STATIC PROCEDURE OUTLOOK()
 
-	LOCAL oOL, oList, oMail, i
+   LOCAL oOL, oList, oMail, i
 
-	oOL := CreateObject( "Outlook.Application" )
+   oOL := CreateObject( "Outlook.Application" )
 
-	oList := oOL:CreateItem( 7 )
-	oList:DLName := "Distribution List"
-	oList:Display(.F.)
+   oList := oOL:CreateItem( 7 )
+   oList:DLName := "Distribution List"
+   oList:Display(.F.)
 
-RETURN
+   RETURN
 
-//--------------------------------------------------------------------

@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2014 Dr. Claudio Soto <srvet@adinet.com.uy>
- * Based on the contribution of Marek Olszewski and B. P. Davis
- *
- * Adapted for MiniGUI Extended Edition by Grigory Filatov
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2014 Dr. Claudio Soto <srvet@adinet.com.uy>
+* Based on the contribution of Marek Olszewski and B. P. Davis
+* Adapted for MiniGUI Extended Edition by Grigory Filatov
 */
 
 #include "hmg.ch"
@@ -14,57 +12,55 @@ FUNCTION MAIN
    LOCAL i, cLabelName
 
    DEFINE WINDOW Form_1;
-      AT 0, 0;
-      WIDTH 700;
-      HEIGHT 400;
-      TITLE "Move and Resize Control With Cursor";
-      MAIN
+         AT 0, 0;
+         WIDTH 700;
+         HEIGHT 400;
+         TITLE "Move and Resize Control With Cursor";
+         MAIN
 
-   @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
+      @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
 
-   @ 320, 10 LABEL Label_00 VALUE "Press F7 - Toggle On/Off for Move and Resize Control With Cursor" AUTOSIZE
+      @ 320, 10 LABEL Label_00 VALUE "Press F7 - Toggle On/Off for Move and Resize Control With Cursor" AUTOSIZE
 
-   DEFINE button Button_1
-      ROW 120
-      COL 15
-      WIDTH 120
-      HEIGHT 30
-      CAPTION "New Form"
-      ACTION New_Form()
-   END BUTTON
+      DEFINE BUTTON Button_1
+         ROW 120
+         COL 15
+         WIDTH 120
+         HEIGHT 30
+         CAPTION "New Form"
+         ACTION New_Form()
+      END BUTTON
 
+      FOR i := 1 TO 3
+         cLabelName := "Label_" + hb_ntos( i, 1 )
 
-   FOR i := 1 TO 3
-      cLabelName := "Label_" + hb_ntos( i, 1 )
+         DEFINE LABEL &cLabelName
+            PARENT Form_1
+            ROW 20
+            COL 120 * ( i - 1 ) + 40
+            VALUE "Label no. " + Str( i, 1 )
+            WIDTH 110
+            HEIGHT 40
+            FONTSIZE 10
+            TOOLTIP "this is label no.  " + Str( i, 1 )
+            ALIGNMENT CENTER
+            ALIGNMENT VCENTER
+            BACKCOLOR { 255, 255, 0 }
+         END LABEL
 
-      DEFINE LABEL &cLabelName
-         PARENT Form_1
-         ROW 20
-         COL 120 * ( i - 1 ) + 40
-         VALUE "Label no. " + Str( i, 1 )
-         WIDTH 110
-         HEIGHT 40
-         FONTSIZE 10
-         TOOLTIP "this is label no.  " + Str( i, 1 )
-         ALIGNMENT CENTER
-         ALIGNMENT VCENTER
-         BACKCOLOR { 255, 255, 0 }
-      END LABEL
+      NEXT i
 
-   NEXT i
-
-   ON KEY F3 ACTION OnKeyPress( VK_F3 )
-   ON KEY F5 ACTION OnKeyPress( VK_F5 )
-   ON KEY F7 ACTION HMG_EnableKeyControlWithCursor ( ! HMG_EnableKeyControlWithCursor() )
-   ON KEY F9 ACTION OnKeyPress( VK_F9 )
+      ON KEY F3 ACTION OnKeyPress( VK_F3 )
+      ON KEY F5 ACTION OnKeyPress( VK_F5 )
+      ON KEY F7 ACTION HMG_EnableKeyControlWithCursor ( ! HMG_EnableKeyControlWithCursor() )
+      ON KEY F9 ACTION OnKeyPress( VK_F9 )
 
    END WINDOW
 
    Form_1.Center ()
    Form_1.Activate ()
 
-RETURN NIL
-
+   RETURN NIL
 
 PROCEDURE New_Form
 
@@ -83,40 +79,39 @@ PROCEDURE New_Form
       aRows[9] := { 'Pedemonti', 'Flavio', '000-0000' }
 
       DEFINE WINDOW Form_2 ;
-         AT 0, 0 ;
-         WIDTH 800 ;
-         HEIGHT 600 ;
-         TITLE "Form 2" ;
-         WINDOWTYPE STANDARD
+            AT 0, 0 ;
+            WIDTH 800 ;
+            HEIGHT 600 ;
+            TITLE "Form 2" ;
+            WINDOWTYPE STANDARD
 
-      @ 100, 100 GRID Grid_1 ;
-         WIDTH 400 ;
-         HEIGHT 300 ;
-         HEADERS { 'Last Name', 'First Name', 'Phone' } ;
-         WIDTHS { 140, 140, 140 } ;
-         ITEMS aRows ;
-         VALUE 1 ;
-         JUSTIFY { GRID_JTFY_LEFT, GRID_JTFY_LEFT, GRID_JTFY_RIGHT }
+         @ 100, 100 GRID Grid_1 ;
+            WIDTH 400 ;
+            HEIGHT 300 ;
+            HEADERS { 'Last Name', 'First Name', 'Phone' } ;
+            WIDTHS { 140, 140, 140 } ;
+            ITEMS aRows ;
+            VALUE 1 ;
+            JUSTIFY { GRID_JTFY_LEFT, GRID_JTFY_LEFT, GRID_JTFY_RIGHT }
 
-      ON KEY F3 ACTION OnKeyPress( VK_F3 )
-      ON KEY F5 ACTION OnKeyPress( VK_F5 )
-      ON KEY F9 ACTION OnKeyPress( VK_F9 )
+         ON KEY F3 ACTION OnKeyPress( VK_F3 )
+         ON KEY F5 ACTION OnKeyPress( VK_F5 )
+         ON KEY F9 ACTION OnKeyPress( VK_F9 )
 
       END WINDOW
       ACTIVATE WINDOW Form_2
    ENDIF
 
-RETURN
+   RETURN
 
-
-// ***************************************************************
-// GENERAL FUNCTIONS for Move and Resize Control With Cursor  *
-// ***************************************************************
-
+   // ***************************************************************
+   // GENERAL FUNCTIONS for Move and Resize Control With Cursor  *
+   // ***************************************************************
 
 FUNCTION OnKeyPress( nVKey )
 
    IF HMG_EnableKeyControlWithCursor() <> .T.
+
       RETURN NIL
    ENDIF
 
@@ -131,8 +126,7 @@ FUNCTION OnKeyPress( nVKey )
 
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION HMG_EnableKeyControlWithCursor( lOnOff )
 
@@ -141,8 +135,7 @@ FUNCTION HMG_EnableKeyControlWithCursor( lOnOff )
       lOn := lOnOff
    ENDIF
 
-RETURN lOn
-
+   RETURN lOn
 
 PROCEDURE HMG_InfoControlWithCursor
 
@@ -161,8 +154,7 @@ PROCEDURE HMG_InfoControlWithCursor
          "Height : ", GetProperty ( cFormName, cControlName, "Height" ) }, "Control Info" )
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE HMG_MoveControlWithCursor
 
@@ -181,8 +173,7 @@ PROCEDURE HMG_MoveControlWithCursor
       SetProperty ( cFormName, cControlName, "Row", aPos[ 2 ] )
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE HMG_ResizeControlWithCursor
 
@@ -203,8 +194,7 @@ PROCEDURE HMG_ResizeControlWithCursor
       SetProperty ( cFormName, cControlName, "Height", nHeight )
    ENDIF
 
-RETURN
-
+   RETURN
 
 FUNCTION GetControlNameByHandle ( hWnd, cControlName, cFormParentName )
 
@@ -222,8 +212,7 @@ FUNCTION GetControlNameByHandle ( hWnd, cControlName, cFormParentName )
       ENDIF
    ENDIF
 
-RETURN nIndexControl
-
+   RETURN nIndexControl
 
 FUNCTION GetControlIndexByHandle ( hWnd, nControlSubIndex1, nControlSubIndex2 )
 
@@ -237,8 +226,7 @@ FUNCTION GetControlIndexByHandle ( hWnd, nControlSubIndex1, nControlSubIndex2 )
       ENDIF
    NEXT
 
-RETURN nIndex
-
+   RETURN nIndex
 
 FUNCTION HMG_CompareHandle ( Handle1, Handle2, nSubIndex1, nSubIndex2 )
 
@@ -248,6 +236,7 @@ FUNCTION HMG_CompareHandle ( Handle1, Handle2, nSubIndex1, nSubIndex2 )
 
    IF ValType ( Handle1 ) == "N" .AND. ValType ( Handle2 ) == "N"
       IF Handle1 == Handle2
+
          RETURN .T.
       ENDIF
 
@@ -255,6 +244,7 @@ FUNCTION HMG_CompareHandle ( Handle1, Handle2, nSubIndex1, nSubIndex2 )
       FOR i = 1 TO Len ( Handle1 )
          IF Handle1[i ] == Handle2
             nSubIndex1 := i
+
             RETURN .T.
          ENDIF
       NEXT
@@ -262,6 +252,7 @@ FUNCTION HMG_CompareHandle ( Handle1, Handle2, nSubIndex1, nSubIndex2 )
       FOR k = 1 TO Len ( Handle2 )
          IF Handle1 == Handle2[k ]
             nSubIndex2 := k
+
             RETURN .T.
          ENDIF
       NEXT
@@ -272,14 +263,14 @@ FUNCTION HMG_CompareHandle ( Handle1, Handle2, nSubIndex1, nSubIndex2 )
             IF Handle1[i ] == Handle2[k ]
                nSubIndex1 := i
                nSubIndex2 := k
+
                RETURN .T.
             ENDIF
          NEXT
       NEXT
    ENDIF
 
-RETURN .F.
-
+   RETURN .F.
 
 #pragma BEGINDUMP
 
@@ -308,3 +299,4 @@ HB_FUNC ( HMG_INTERACTIVESIZE )
 }
 
 #pragma ENDDUMP
+

@@ -1,11 +1,9 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2003-2008 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Modificado: 27/11/2008 por Walter H.TAVERNA <walhug@yahoo.com.ar>
- *             para evitar el parpadeo del reloj.
- *             in order to avoid the blinking of the clock
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2003-2008 Grigory Filatov <gfilatov@inbox.ru>
+* Modificado: 27/11/2008 por Walter H.TAVERNA <walhug@yahoo.com.ar>
+*             para evitar el parpadeo del reloj.
+*             in order to avoid the blinking of the clock
 */
 
 ANNOUNCE RDDSYS
@@ -19,25 +17,24 @@ ANNOUNCE RDDSYS
 
 #define PS_SOLID   0
 
-Static ParentHandle
-Static ahPen, ahUPen, nDiametr, xcent, ycent
-Static nlseg, nlmin, nlhor, radio
+STATIC ParentHandle
+STATIC ahPen, ahUPen, nDiametr, xcent, ycent
+STATIC nlseg, nlmin, nlhor, radio
 
-Static lInit := .T.
+STATIC lInit := .T.
 
-Memvar nWidth, nHeight
+MEMVAR nWidth, nHeight
 
-*-----------------------------------------------------------------------------*
 PROCEDURE Main( cParameters )
-*-----------------------------------------------------------------------------*
-   Private nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
+
+   PRIVATE nWidth := GetDesktopWidth(), nHeight := GetDesktopHeight()
 
    ahPen  := Array(4)
    ahUPen := Array(4)  // WHT 26/11/2008
 
    IF cParameters # NIL .AND. ( LOWER(cParameters) $ "-p/p" .OR. ;
-      LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
-      LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
+         LOWER(cParameters) = "/a" .OR. LOWER(cParameters) = "-a" .OR. ;
+         LOWER(cParameters) = "/c" .OR. LOWER(cParameters) = "-c" )
 
       DEFINE SCREENSAVER ;
          WINDOW Form_SSaver ;
@@ -49,7 +46,7 @@ PROCEDURE Main( cParameters )
          WINDOW Form_SSaver ;
          MAIN ;
          ON RELEASE ( Aeval(ahPen, {|e| DeleteObject( e )}), ;
-                      Aeval(ahUPen, {|e,i| iif(i>1, DeleteObject( e ), )}), .T. ) ;
+         Aeval(ahUPen, {|e,i| iif(i>1, DeleteObject( e ), )}), .T. ) ;
          ON PAINT DrawClock() ;
          INTERVAL 1 ;
          BACKCOLOR BLACK
@@ -63,17 +60,16 @@ PROCEDURE Main( cParameters )
       WINDOW Form_SSaver ;
       PARAMETERS cParameters
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE DrawClock()
-*-----------------------------------------------------------------------------*
-   Local hDC, hOldPen, ntime := time()
-   Local ngseg, ngmin, nghor, t
 
-   Static nGSeg1, nGMin1, nGHor1   // WHT 26/11/2008
+   LOCAL hDC, hOldPen, ntime := time()
+   LOCAL ngseg, ngmin, nghor, t
 
-   if lInit
+   STATIC nGSeg1, nGMin1, nGHor1   // WHT 26/11/2008
+
+   IF lInit
       // Cuadrante
       ahPen[1] := CREATEPEN( PS_SOLID, 6, RGB( 255, 255, 255 ) )
       // Segundos
@@ -95,7 +91,7 @@ PROCEDURE DrawClock()
       nlhor    := radio / 2
 
       ParentHandle := _HMG_MainHandle
-   endif
+   ENDIF
 
    // Manecilla Segundos
    nGSeg := val(substr(ntime,7))*6
@@ -106,10 +102,10 @@ PROCEDURE DrawClock()
    // Manecilla Horas
    nGHor := mod(val(substr(ntime,1,2)),12)*30 + int(ngmin/12)
 
-   if lInit
-      nGSeg1 := nGSeg	;      nGHor1 := nGHor	;      nGMin1 := nGMin
+   IF lInit
+      nGSeg1 := nGSeg   ;      nGHor1 := nGHor   ;      nGMin1 := nGMin
       lInit := .F.
-   endif
+   ENDIF
 
    hDC := GetDC( ParentHandle )
 
@@ -120,10 +116,10 @@ PROCEDURE DrawClock()
 
    // Cuadrante
    SelectObject( hDC, ahPen[1] )
-   for t = 0 to 330 step 30
+   FOR t = 0 to 330 step 30
       MoveTo(hDC, xCent+nLSeg*Sin(t), yCent-nLSeg*Cos(t))
       LineTo(hDC, xCent+(nLSeg+5)*Sin(t), yCent-(nLSeg+5)*Cos(t), ahPen[1])
-   next
+   NEXT
 
    // Minutos
    SelectObject( hDC, ahUPen[3] )
@@ -155,41 +151,44 @@ PROCEDURE DrawClock()
 
    ReleaseDC( ParentHandle, hDC )
 
-   nGSeg1 := nGSeg	;   nGMin1 := nGMin	;   nGHor1 := nGHor
+   nGSeg1 := nGSeg   ;   nGMin1 := nGMin   ;   nGHor1 := nGHor
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION MsgAbout()
-*-----------------------------------------------------------------------------*
-RETURN MsgInfo( PROGRAM + VERSION + CRLF +;
+
+   RETURN MsgInfo( PROGRAM + VERSION + CRLF +;
       "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF +;
       "eMail: gfilatov@inbox.ru" + CRLF + CRLF +;
       "This Screen Saver is Freeware!" + CRLF +;
       padc("Copying is allowed!", 30), "About..." )
 
-
 FUNCTION RadToDeg(x); RETURN 180.0*x/PI()
-/*
-*/
+   /*
+   */
+
 FUNCTION DegToRad(x); RETURN x*PI()/180.0
-/*
-*/
+   /*
+   */
+
 FUNCTION Signo(nValue); RETURN if(nValue<0, -1.0, 1.0)
-/*
-*/
+   /*
+   */
+
 FUNCTION Sin(nAngle,lRad)
-   Local nHalfs:=0, nDouble, nFact:=1, nPower, nSquare, nCont, lMinus
-   Local nSin, nSin0, nQuadrant
+
+   LOCAL nHalfs:=0, nDouble, nFact:=1, nPower, nSquare, nCont, lMinus
+   LOCAL nSin, nSin0, nQuadrant
+
    lRad:=if(lRad=nil,.F.,lRad)
    nAngle:=Angle360(nAngle,lRad,@nQuadrant)
    nAngle:=Abs(nAngle)
    nAngle:=if(lRad,nAngle,DegToRad(nAngle))
 
-   do while nAngle>=0.001
+   DO WHILE nAngle>=0.001
       nAngle/=2
       nHalfs++
-   enddo
+   ENDDO
    nPower:=nAngle
    nSquare:=nAngle^2
    nSin:=nPower
@@ -200,40 +199,48 @@ FUNCTION Sin(nAngle,lRad)
       nPower*=nSquare
       nFact*=(nCont+1)*(nCont+2)
       nSin+=if(lMinus,-1,+1)*nPower/nFact
-      if Abs(nSin-nSin0)<10^-10
-         exit
-      endif
+      IF Abs(nSin-nSin0)<10^-10
+         EXIT
+      ENDIF
       nCont+=2
       lMinus:=!lMinus
    ENDDO
-   for nDouble:=1 to nHalfs
+   FOR nDouble:=1 to nHalfs
       nSin:=2*nSin*(1-nSin^2)^(1/2)
-   next
-RETURN Round(if(nQuadrant>=3,-1.0,1.0)*nSin,6)
-/*
-*/
+   NEXT
+
+   RETURN Round(if(nQuadrant>=3,-1.0,1.0)*nSin,6)
+   /*
+   */
+
 FUNCTION Cos(nAngle,lRad)
-   Local nQuadrant, lMinus
+
+   LOCAL nQuadrant, lMinus
+
    Angle360(nAngle,lRad,@nQuadrant)
    lMinus:=(nQuadrant=2) .or. (nQuadrant=3)
-RETURN Round(if(lMinus,-1.0,1.0)*(1.0-Sin(nAngle,lRad)^2)^0.5,6)
-/*
-*/
+
+   RETURN Round(if(lMinus,-1.0,1.0)*(1.0-Sin(nAngle,lRad)^2)^0.5,6)
+   /*
+   */
+
 FUNCTION Angle360(nAngle,lRad,nQuadrant)
-   Local nAngInt, nAngFrac, nSigno:=Signo(nAngle)
+
+   LOCAL nAngInt, nAngFrac, nSigno:=Signo(nAngle)
+
    lRad:=if(lRad=nil,.F.,lRad)
    nAngle:=Abs(nAngle)
    nAngle:=if(lRad,RadToDeg(nAngle),nAngle)
 
    nAngInt:=Int(nAngle); nAngFrac:=nAngle-nAngInt
    nQuadrant:=Int(nAngInt/90)%4+1
-   if nSigno<0
+   IF nSigno<0
       nQuadrant:=5-nQuadrant
-   endif
+   ENDIF
    nAngle:=nAngInt%360+nAngFrac
    nAngle:=if(lRad,DegToRad(nAngle),nAngle)
-RETURN nSigno*nAngle
 
+   RETURN nSigno*nAngle
 
 #pragma BEGINDUMP
 
@@ -267,10 +274,11 @@ HB_FUNC ( ROUNDRECT ) // hDC, nLeftRect, nTopRect, nRightRect, nBottomRect,
 HB_FUNC ( CREATEPEN )
 {
    hb_retnl( (LONG) CreatePen(
-                               hb_parni( 1 ),	// pen style
-                               hb_parni( 2 ),	// pen width
-                    (COLORREF) hb_parnl( 3 ) 	// pen color
+                               hb_parni( 1 ),   // pen style
+                               hb_parni( 2 ),   // pen width
+                    (COLORREF) hb_parnl( 3 )    // pen color
                  ) );
 }
 
 #pragma ENDDUMP
+

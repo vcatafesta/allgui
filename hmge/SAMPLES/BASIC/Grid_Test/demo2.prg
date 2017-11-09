@@ -1,18 +1,19 @@
 #include "minigui.ch"
 
-Function Main
-   Local aItems := {}
+FUNCTION Main
+
+   LOCAL aItems := {}
 
    aeval( array(15), {|| aadd( aItems, { 0, '', '' } ) } )
 
    SET CELLNAVIGATIONMODE VERTICAL
-//   SET CELLNAVIGATION MODE HORIZONTAL
+   //   SET CELLNAVIGATION MODE HORIZONTAL
 
-   define window win_1 at 0, 0 width 528 height 300 ;
-      title 'Cell Navigation Downwards Demo' ;
-      main nomaximize nosize
+   DEFINE WINDOW win_1 at 0, 0 width 528 height 300 ;
+         title 'Cell Navigation Downwards Demo' ;
+         main nomaximize nosize
 
-      define grid grid_1
+      DEFINE GRID grid_1
          row 10
          col 10
          width 501
@@ -26,13 +27,14 @@ Function Main
          allowedit .t.
          cellnavigation .t.
          value {1, 1}
-      end grid
+      END GRID
 
       on key escape action thiswindow.release()
 
-   end window
+   END WINDOW
 
    win_1.center
    win_1.activate
 
-Return Nil
+   RETURN NIL
+

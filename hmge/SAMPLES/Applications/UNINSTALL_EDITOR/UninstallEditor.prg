@@ -1,585 +1,573 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
 */
 ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 
-#define PROGRAM		'Uninstall Editor'
-#define VERSION		' version 1.4'
-#define VERS		' ver. 1.4'
-#define COPYRIGHT	' 2003-2006 Grigory Filatov'
+#define PROGRAM      'Uninstall Editor'
+#define VERSION      ' version 1.4'
+#define VERS      ' ver. 1.4'
+#define COPYRIGHT   ' 2003-2006 Grigory Filatov'
 
-#define IDI_MAIN	1001
-#define MsgAlert( c )	MsgEXCLAMATION( c, "Attention", , .f. )
+#define IDI_MAIN   1001
+#define MsgAlert( c )   MsgEXCLAMATION( c, "Attention", , .f. )
 
-Static nPageNumber := 1
+STATIC nPageNumber := 1
 
 DECLARE WINDOW Form_2
 
 MEMVAR aInstall, aResult
-*--------------------------------------------------------*
-Procedure Main( lStartUp )
-*--------------------------------------------------------*
-Local lWinRun := .F.
 
-	If !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
-		!Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Uninstall Editor" ))
-		lWinRun := .T.
-	EndIf
+PROCEDURE Main( lStartUp )
 
-	SET MULTIPLE OFF
+   LOCAL lWinRun := .F.
 
-	SET FONT TO _GetSysFont() , 10
+   IF !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
+         !Empty(GETREGVAR( NIL, "Software\Microsoft\Windows\CurrentVersion\Run", "Uninstall Editor" ))
+      lWinRun := .T.
+   ENDIF
 
-	DEFINE WINDOW Form_1 				;
-		AT 0,0 					;
-		WIDTH 0 HEIGHT 0 				;
-		TITLE PROGRAM 				;
-		MAIN NOSHOW 					;
-		ON INIT ( IF(lWinRun, , StartUp(.F.)) ) 	;
-		NOTIFYICON IDI_MAIN				;
-		NOTIFYTOOLTIP PROGRAM 			;
-		ON NOTIFYCLICK StartUp(.T.)
+   SET MULTIPLE OFF
 
-		DEFINE NOTIFY MENU 
-			ITEM '&Open' 	ACTION {|| IF(IsWindowDefined( Form_2 ),	;
-				(nPageNumber := Form_2.Tab_1.Value, Form_2.Release), ;
-				StartUp()) } DEFAULT
-			SEPARATOR	
-			ITEM 'Auto&Run'	ACTION {|| lWinRun := !lWinRun, ;
-				Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) } ;
-				NAME Auto_Run
-			SEPARATOR	
-			ITEM 'A&bout...'	ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
-				"Copyright " + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), IDI_MAIN, 32, 32) )
-			ITEM 'E&xit'	ACTION Form_1.Release
-		END MENU
+   SET FONT TO _GetSysFont() , 10
 
-		Form_1.Auto_Run.Checked := lWinRun
+   DEFINE WINDOW Form_1             ;
+         AT 0,0                ;
+         WIDTH 0 HEIGHT 0             ;
+         TITLE PROGRAM             ;
+         MAIN NOSHOW                ;
+         ON INIT ( IF(lWinRun, , StartUp(.F.)) )    ;
+         NOTIFYICON IDI_MAIN            ;
+         NOTIFYTOOLTIP PROGRAM          ;
+         ON NOTIFYCLICK StartUp(.T.)
 
-	END WINDOW
+      DEFINE NOTIFY MENU
+         ITEM '&Open'    ACTION {|| IF(IsWindowDefined( Form_2 ),   ;
+            (nPageNumber := Form_2.Tab_1.Value, Form_2.Release), ;
+            StartUp()) } DEFAULT
+         SEPARATOR
+         ITEM 'Auto&Run'   ACTION {|| lWinRun := !lWinRun, ;
+            Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) } ;
+            NAME Auto_Run
+         SEPARATOR
+         ITEM 'A&bout...'   ACTION ShellAbout( "", PROGRAM + VERSION + CRLF + ;
+            "Copyright " + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), IDI_MAIN, 32, 32) )
+         ITEM 'E&xit'   ACTION Form_1.Release
+      END MENU
 
-	ACTIVATE WINDOW Form_1
+      Form_1.Auto_Run.Checked := lWinRun
 
-Return
+   END WINDOW
 
-*--------------------------------------------------------*
-Static Procedure StartUp( lSwitch )
-*--------------------------------------------------------*
-Local aImage := {"no", "ok"}
-PRIVATE aInstall := GetInstallArray()
+   ACTIVATE WINDOW Form_1
 
-   if !IsWindowDefined( Form_2 )
+   RETURN
 
-	DEFINE WINDOW Form_2	; 
-        AT 0,0			; 
-        WIDTH 430		; 
-        HEIGHT IF(IsXPThemeActive(), 400, 396)	;
-        TITLE PROGRAM		; 
-        ICON IDI_MAIN		;
-        NOMAXIMIZE NOSIZE	;
-        ON INIT IF( lSwitch, SetForeGroundWindow( GetFormHandle( "Form_2" ) ), )
+STATIC PROCEDURE StartUp( lSwitch )
 
-        DEFINE TAB Tab_1	;
-		AT 7,7 		;
-		WIDTH 410 	;
-		HEIGHT 326	;
-		VALUE 1		;
-		ON CHANGE IF( Form_2.Tab_1.Value < 2, SetArrowCursor( GetControlHandle("Label_1", "Form_2") ), ;
-			SetHandCursor( GetControlHandle("Image_1", "Form_2") ) )
+   LOCAL aImage := {"no", "ok"}
+   PRIVATE aInstall := GetInstallArray()
 
-		PAGE 'I&nstalled programs'
+   IF !IsWindowDefined( Form_2 )
 
-			@ 34, 20 LABEL Label_1			;
-				VALUE "The following software can be automatically removed by Windows:" ;
-				WIDTH 370        		;
-				HEIGHT 16 TRANSPARENT		;
-				FONT "Arial" SIZE 9
+      DEFINE WINDOW Form_2   ;
+            AT 0,0         ;
+            WIDTH 430      ;
+            HEIGHT IF(IsXPThemeActive(), 400, 396)   ;
+            TITLE PROGRAM      ;
+            ICON IDI_MAIN      ;
+            NOMAXIMIZE NOSIZE   ;
+            ON INIT IF( lSwitch, SetForeGroundWindow( GetFormHandle( "Form_2" ) ), )
 
-			@ 60, 15 GRID Grid_1 						;
-				WIDTH 380 						;
-				HEIGHT 220 						;
-				HEADERS { '', 'Program Name', 'Uninstall Command' } 	;
-				WIDTHS { 20, 240, 480 } 				;
-				ITEMS aInstall VALUE 1 					;
-				TOOLTIP 'Right click for context menu'		 	;
-				NOLINES 						;
-				IMAGE aImage 						;
-				ON DBLCLICK EditKey( Form_2.Tab_1.Value, .t. )
+         DEFINE TAB Tab_1   ;
+               AT 7,7       ;
+               WIDTH 410    ;
+               HEIGHT 326   ;
+               VALUE 1      ;
+               ON CHANGE IF( Form_2.Tab_1.Value < 2, SetArrowCursor( GetControlHandle("Label_1", "Form_2") ), ;
+               SetHandCursor( GetControlHandle("Image_1", "Form_2") ) )
 
-			@ if(IsWinNT(), 290, 292), 160 BUTTON Button_3 ; 
-				CAPTION 'New...' ; 
-				ACTION EditKey( Form_2.Tab_1.Value, .f. ) ; 
-				WIDTH 74 ; 
-				HEIGHT 24 ; 
-				FONT "Arial" SIZE 9
+            PAGE 'I&nstalled programs'
 
-			@ if(IsWinNT(), 290, 292), 241 BUTTON Button_4 ; 
-				CAPTION 'Remove' ; 
-				ACTION DeleteKey( Form_2.Tab_1.Value ) ; 
-				WIDTH 74 ; 
-				HEIGHT 24 ; 
-				FONT "Arial" SIZE 9
+               @ 34, 20 LABEL Label_1         ;
+                  VALUE "The following software can be automatically removed by Windows:" ;
+                  WIDTH 370              ;
+                  HEIGHT 16 TRANSPARENT      ;
+                  FONT "Arial" SIZE 9
 
-			@ if(IsWinNT(), 290, 292), 322 BUTTON Button_5 ; 
-				CAPTION 'Edit' ; 
-				ACTION EditKey( Form_2.Tab_1.Value, .t. ) ; 
-				WIDTH 74 ; 
-				HEIGHT 24 ; 
-				FONT "Arial" SIZE 9
+               @ 60, 15 GRID Grid_1                   ;
+                  WIDTH 380                   ;
+                  HEIGHT 220                   ;
+                  HEADERS { '', 'Program Name', 'Uninstall Command' }    ;
+                  WIDTHS { 20, 240, 480 }             ;
+                  ITEMS aInstall VALUE 1                ;
+                  TOOLTIP 'Right click for context menu'          ;
+                  NOLINES                   ;
+                  IMAGE aImage                   ;
+                  ON DBLCLICK EditKey( Form_2.Tab_1.Value, .t. )
 
-		END PAGE
+               @ if(IsWinNT(), 290, 292), 160 BUTTON Button_3 ;
+                  CAPTION 'New...' ;
+                  ACTION EditKey( Form_2.Tab_1.Value, .f. ) ;
+                  WIDTH 74 ;
+                  HEIGHT 24 ;
+                  FONT "Arial" SIZE 9
 
-		PAGE 'A&bout'
+               @ if(IsWinNT(), 290, 292), 241 BUTTON Button_4 ;
+                  CAPTION 'Remove' ;
+                  ACTION DeleteKey( Form_2.Tab_1.Value ) ;
+                  WIDTH 74 ;
+                  HEIGHT 24 ;
+                  FONT "Arial" SIZE 9
 
-			@ 34, 42 LABEL Label_2		;
-				VALUE PROGRAM + VERS	;
-				ACTION MsgAbout()	;
-				AUTOSIZE		;
-				FONT 'Arial' SIZE 22 	;
-				BOLD TRANSPARENT
+               @ if(IsWinNT(), 290, 292), 322 BUTTON Button_5 ;
+                  CAPTION 'Edit' ;
+                  ACTION EditKey( Form_2.Tab_1.Value, .t. ) ;
+                  WIDTH 74 ;
+                  HEIGHT 24 ;
+                  FONT "Arial" SIZE 9
 
-			@ 72, 42 LABEL Label_3		;
-				VALUE "Copyright " + Chr(169) + COPYRIGHT ;
-				WIDTH 310        	;
-				HEIGHT 16		;
-				FONT "MS Sans Serif" SIZE 9 ;
-				ACTION MsgAbout() CENTERALIGN TRANSPARENT
+            END PAGE
 
-			@ 96, 15 FRAME TabFrame_6 WIDTH 380 HEIGHT 84
+            PAGE 'A&bout'
 
-			@ 106, 30 LABEL Label_4		;
-				VALUE "Author:   Grigory Filatov (Ukraine)" ;
-				ACTION MsgAbout()	;
-				AUTOSIZE
+               @ 34, 42 LABEL Label_2      ;
+                  VALUE PROGRAM + VERS   ;
+                  ACTION MsgAbout()   ;
+                  AUTOSIZE      ;
+                  FONT 'Arial' SIZE 22    ;
+                  BOLD TRANSPARENT
 
-			@ 128, 33 LABEL Label_5		;
-				VALUE "E-mail:"		;
-				WIDTH 42        	;
-				HEIGHT 18
+               @ 72, 42 LABEL Label_3      ;
+                  VALUE "Copyright " + Chr(169) + COPYRIGHT ;
+                  WIDTH 310           ;
+                  HEIGHT 16      ;
+                  FONT "MS Sans Serif" SIZE 9 ;
+                  ACTION MsgAbout() CENTERALIGN TRANSPARENT
 
-			@ 127, 84 HYPERLINK Link_1	;
-				VALUE "gfilatov@inbox.ru" ;
-				ADDRESS "gfilatov@inbox.ru?cc=&bcc=" + ;
-					"&subject=Uninstall%20Editor%20Feedback:" ;
-				WIDTH 104        	;
-				HEIGHT 18		;
-				TOOLTIP "E-mail me if you have any comments or suggestions"
+               @ 96, 15 FRAME TabFrame_6 WIDTH 380 HEIGHT 84
 
-			@ 150, 37 LABEL Label_6		;
-				VALUE "Bugs:" 		;
-				WIDTH 36        	;
-				HEIGHT 18
+               @ 106, 30 LABEL Label_4      ;
+                  VALUE "Author:   Grigory Filatov (Ukraine)" ;
+                  ACTION MsgAbout()   ;
+                  AUTOSIZE
 
-			@ 149, 84 HYPERLINK Link_2	;
-				VALUE "report" 		;
-				ADDRESS "gfilatov@inbox.ru?cc=&bcc=" + ;
-					"&subject=Uninstall%20Editor%20Bug:" + ;
-					"&body=" + GetReport() ;
-				WIDTH 50        	;
-				HEIGHT 18		;
-				TOOLTIP "Send me a bug-report if you experience any problems"
+               @ 128, 33 LABEL Label_5      ;
+                  VALUE "E-mail:"      ;
+                  WIDTH 42           ;
+                  HEIGHT 18
 
-			@ 120, 280 IMAGE Image_1	;
-				PICTURE IF(IsXPThemeActive(), "UNINSTALLXP", ;
-					IF(IsWinNT(), "UNINSTALLNT", "UNINSTALL")) ;
-				WIDTH 32 HEIGHT 32	;
-				ACTION MsgAbout()
+               @ 127, 84 HYPERLINK Link_1   ;
+                  VALUE "gfilatov@inbox.ru" ;
+                  ADDRESS "gfilatov@inbox.ru?cc=&bcc=" + ;
+                  "&subject=Uninstall%20Editor%20Feedback:" ;
+                  WIDTH 104           ;
+                  HEIGHT 18      ;
+                  TOOLTIP "E-mail me if you have any comments or suggestions"
 
-			@ 190, 15 IMAGE Image_2 PICTURE "HARBOUR" WIDTH 380 HEIGHT 120 ;
-				ACTION ShellExecute(0, "open", "http://harbour-project.org/")
+               @ 150, 37 LABEL Label_6      ;
+                  VALUE "Bugs:"       ;
+                  WIDTH 36           ;
+                  HEIGHT 18
 
-		END PAGE
+               @ 149, 84 HYPERLINK Link_2   ;
+                  VALUE "report"       ;
+                  ADDRESS "gfilatov@inbox.ru?cc=&bcc=" + ;
+                  "&subject=Uninstall%20Editor%20Bug:" + ;
+                  "&body=" + GetReport() ;
+                  WIDTH 50           ;
+                  HEIGHT 18      ;
+                  TOOLTIP "Send me a bug-report if you experience any problems"
 
-        END TAB
+               @ 120, 280 IMAGE Image_1   ;
+                  PICTURE IF(IsXPThemeActive(), "UNINSTALLXP", ;
+                  IF(IsWinNT(), "UNINSTALLNT", "UNINSTALL")) ;
+                  WIDTH 32 HEIGHT 32   ;
+                  ACTION MsgAbout()
 
-        Form_2.Tab_1.Value := nPageNumber
+               @ 190, 15 IMAGE Image_2 PICTURE "HARBOUR" WIDTH 380 HEIGHT 120 ;
+                  ACTION ShellExecute(0, "open", "http://harbour-project.org/")
 
-        @ if(IsWinNT(), 338, 340), 262 BUTTON Button_1 ; 
-            CAPTION 'OK' ; 
-            ACTION ( nPageNumber := Form_2.Tab_1.Value, Form_2.Release ) ; 
-            WIDTH 74 ; 
-            HEIGHT 24 ; 
+            END PAGE
+
+         END TAB
+
+         Form_2.Tab_1.Value := nPageNumber
+
+         @ if(IsWinNT(), 338, 340), 262 BUTTON Button_1 ;
+            CAPTION 'OK' ;
+            ACTION ( nPageNumber := Form_2.Tab_1.Value, Form_2.Release ) ;
+            WIDTH 74 ;
+            HEIGHT 24 ;
             FONT "Arial" SIZE 9
 
-        @ if(IsWinNT(), 338, 340), 343 BUTTON Button_2 ; 
-            CAPTION 'Cancel' ; 
-            ACTION ReleaseAllWindows() ; 
-            WIDTH 74 ; 
-            HEIGHT 24 ; 
+         @ if(IsWinNT(), 338, 340), 343 BUTTON Button_2 ;
+            CAPTION 'Cancel' ;
+            ACTION ReleaseAllWindows() ;
+            WIDTH 74 ;
+            HEIGHT 24 ;
             FONT "Arial" SIZE 9
 
-		DEFINE CONTEXT MENU CONTROL Grid_1
-			ITEM '&New...'		ACTION EditKey( Form_2.Tab_1.Value, .f. )
-			ITEM '&Edit...'		ACTION EditKey( Form_2.Tab_1.Value, .t. )
-			ITEM '&Remove' 		ACTION DeleteKey( Form_2.Tab_1.Value )
-			SEPARATOR	
-			ITEM '&Uninstall'	ACTION UninstallPrg( Form_2.Tab_1.Value )
-			SEPARATOR	
-			ITEM '&Properties'	ACTION PrgProp( Form_2.Tab_1.Value )
-		END MENU
+         DEFINE CONTEXT MENU CONTROL Grid_1
+            ITEM '&New...'      ACTION EditKey( Form_2.Tab_1.Value, .f. )
+            ITEM '&Edit...'      ACTION EditKey( Form_2.Tab_1.Value, .t. )
+            ITEM '&Remove'       ACTION DeleteKey( Form_2.Tab_1.Value )
+            SEPARATOR
+            ITEM '&Uninstall'   ACTION UninstallPrg( Form_2.Tab_1.Value )
+            SEPARATOR
+            ITEM '&Properties'   ACTION PrgProp( Form_2.Tab_1.Value )
+         END MENU
 
-	END WINDOW
+      END WINDOW
 
-	CENTER WINDOW Form_2
+      CENTER WINDOW Form_2
 
-	ACTIVATE WINDOW Form_2
+      ACTIVATE WINDOW Form_2
 
-   Else
+   ELSE
 
-	nPageNumber := Form_2.Tab_1.Value
-	Form_2.Release
+      nPageNumber := Form_2.Tab_1.Value
+      Form_2.Release
 
-   EndIf
+   ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Function GetReport()
-*--------------------------------------------------------*
-Local cRet := "***%20Uninstall%20Editor%20BugReport%20***%0A%0A"
+STATIC FUNCTION GetReport()
 
-	cRet += "OPERATING%20SYSTEM%3A" + space( 3 ) + OS() + "%0A%0A"
-	cRet += "AMOUNT OF RAM (MB)%3A" + space( 3 ) + Ltrim( Str( MemoryStatus(1) + 1 ) ) + "%0A%0A"
-	cRet += "SWAP-FILE SIZE (MB)%3A" + space( 3 ) + Ltrim( Str( MemoryStatus(3) ) ) + "%0A%0A"
-	cRet += "PROBLEM DESCRIPTION%3A"
+   LOCAL cRet := "***%20Uninstall%20Editor%20BugReport%20***%0A%0A"
 
-Return cRet
+   cRet += "OPERATING%20SYSTEM%3A" + space( 3 ) + OS() + "%0A%0A"
+   cRet += "AMOUNT OF RAM (MB)%3A" + space( 3 ) + Ltrim( Str( MemoryStatus(1) + 1 ) ) + "%0A%0A"
+   cRet += "SWAP-FILE SIZE (MB)%3A" + space( 3 ) + Ltrim( Str( MemoryStatus(3) ) ) + "%0A%0A"
+   cRet += "PROBLEM DESCRIPTION%3A"
 
-*--------------------------------------------------------*
-Static Procedure EditKey(nPage, lExist)
-*--------------------------------------------------------*
-Local nActItem, nItem, cPath, cFile, nVerify, ;
-	aLabels, aInitValues := { "", "" }, aFormats, aResults
-Local oReg, cReg := "", oKey, nId:= 0, cName, hKey := HKEY_LOCAL_MACHINE, ;
-	cRunKey := "Software\Microsoft\Windows\CurrentVersion\Uninstall"
+   RETURN cRet
+
+STATIC PROCEDURE EditKey(nPage, lExist)
+
+   LOCAL nActItem, nItem, cPath, cFile, nVerify, ;
+      aLabels, aInitValues := { "", "" }, aFormats, aResults
+   LOCAL oReg, cReg := "", oKey, nId:= 0, cName, hKey := HKEY_LOCAL_MACHINE, ;
+      cRunKey := "Software\Microsoft\Windows\CurrentVersion\Uninstall"
 
    IF nPage < 2
 
-	nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
+      nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
 
-	IF lExist .AND. !EMPTY(nActItem)
+      IF lExist .AND. !EMPTY(nActItem)
 
-		aInitValues[1]	:= aInstall[nActItem][2]
-		aInitValues[2]	:= aInstall[nActItem][3]
+         aInitValues[1]   := aInstall[nActItem][2]
+         aInitValues[2]   := aInstall[nActItem][3]
 
-	ELSE
+      ELSE
 
-		lExist := .F.
+         lExist := .F.
 
-	ENDIF
+      ENDIF
 
-	aLabels		:= { "Description:", "Uninstaller:" }
+      aLabels      := { "Description:", "Uninstaller:" }
 
-	aFormats	:= { 60, 150 }
+      aFormats   := { 60, 150 }
 
-	aResults	:= MyInputWindow( "Program Properties", aLabels, aInitValues, aFormats )
+      aResults   := MyInputWindow( "Program Properties", aLabels, aInitValues, aFormats )
 
-	IF aResults[1] # Nil
+      IF aResults[1] # Nil
 
-		IF !Empty( aResults[2] )
+         IF !Empty( aResults[2] )
 
-			IF lExist
+            IF lExist
 
-				oReg := TReg32():New( hKey, cRunKey )
+               oReg := TReg32():New( hKey, cRunKey )
 
-				While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-					oKey := TReg32():New( hKey, cRunKey + "\" + cReg )
+               WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+                  oKey := TReg32():New( hKey, cRunKey + "\" + cReg )
 
-					cName := oKey:Get("DisplayName")
+                  cName := oKey:Get("DisplayName")
 
-					IF cName == aInstall[nActItem][2]
-						oKey:Set("DisplayName", aResults[1])
-						oKey:Set("UninstallString", aResults[2])
-						oKey:Close()
-						EXIT
-					ENDIF
+                  IF cName == aInstall[nActItem][2]
+                     oKey:Set("DisplayName", aResults[1])
+                     oKey:Set("UninstallString", aResults[2])
+                     oKey:Close()
+                     EXIT
+                  ENDIF
 
-					oKey:Close()
+                  oKey:Close()
 
-				EndDo
+               ENDDO
 
-				oReg:Close()
+               oReg:Close()
 
-				aInstall[nActItem][2] := aResults[1]
-				aInstall[nActItem][3] := aResults[2]
+               aInstall[nActItem][2] := aResults[1]
+               aInstall[nActItem][3] := aResults[2]
 
-			ELSE
+            ELSE
 
-				SETREGVAR( hKey, cRunKey + "\" + aResults[1], "DisplayName", aResults[1] )
-				SETREGVAR( hKey, cRunKey + "\" + aResults[1], "UninstallString", aResults[2] )
+               SETREGVAR( hKey, cRunKey + "\" + aResults[1], "DisplayName", aResults[1] )
+               SETREGVAR( hKey, cRunKey + "\" + aResults[1], "UninstallString", aResults[2] )
 
-				AADD(aInstall, { 1, aResults[1], aResults[2] })
-				nActItem := LEN(aInstall)
+               AADD(aInstall, { 1, aResults[1], aResults[2] })
+               nActItem := LEN(aInstall)
 
-			ENDIF
+            ENDIF
 
-			DELETE ITEM ALL FROM Grid_1 OF Form_2
+            DELETE ITEM ALL FROM Grid_1 OF Form_2
 
-			FOR nItem := 1 TO LEN(aInstall)
+            FOR nItem := 1 TO LEN(aInstall)
 
-				cPath := aInstall[nItem][3]
+               cPath := aInstall[nItem][3]
 
-				nVerify := IF(FILE(GetWindowsFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
-				nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
+               nVerify := IF(FILE(GetWindowsFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
+               nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
 
-				IF EMPTY(nVerify)
-					DO CASE
-						CASE FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')) == .T.
-							nVerify := 1
-						CASE FILE(StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', '')) == .T.
-							nVerify := 1
-						CASE FILE((cFile := StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))) == .T.
-							nVerify := 1
-						CASE FILE(GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
-							nVerify := 1
-						CASE FILE(GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
-							nVerify := 1
-					END CASE
+               IF EMPTY(nVerify)
+                  DO CASE
+                  CASE FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')) == .T.
+                     nVerify := 1
+                  CASE FILE(StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', '')) == .T.
+                     nVerify := 1
+                  CASE FILE((cFile := StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))) == .T.
+                     nVerify := 1
+                  CASE FILE(GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
+                     nVerify := 1
+                  CASE FILE(GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
+                     nVerify := 1
+                  END CASE
 
-				ELSE
-					IF AT(".exe", Lower(cPath)) > 0
-						nVerify := IF(FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')), 1, 0)
-					ENDIF
+               ELSE
+                  IF AT(".exe", Lower(cPath)) > 0
+                     nVerify := IF(FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')), 1, 0)
+                  ENDIF
 
-				ENDIF
+               ENDIF
 
-				ADD ITEM { nVerify, aInstall[nItem][2], aInstall[nItem][3] } TO Grid_1 OF Form_2
+               ADD ITEM { nVerify, aInstall[nItem][2], aInstall[nItem][3] } TO Grid_1 OF Form_2
 
-			NEXT
+            NEXT
 
-			Form_2.Grid_1.Value := nActItem
+            Form_2.Grid_1.Value := nActItem
 
-	      ELSE
+         ELSE
 
-			MsgAlert( "Please enter the path to the uninstall program!" )
+            MsgAlert( "Please enter the path to the uninstall program!" )
 
-	      ENDIF
+         ENDIF
 
-	ENDIF
-
-   ENDIF
-
-Return
-
-*--------------------------------------------------------*
-Static Procedure DeleteKey(nPage)
-*--------------------------------------------------------*
-Local nActItem, oReg, oKey, cReg := "", cName := "", nId := 0, ;
-	hKey := HKEY_LOCAL_MACHINE, ;
-	cRunKey := "Software\Microsoft\Windows\CurrentVersion\Uninstall"
-
-IF nPage < 2
-
-   nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
-
-   IF !EMPTY(nActItem)
-
-		IF MsgYesNo( "Are you sure you want to remove the selected item?", "Confirm", , , .f. )
-
-			if IsWinNT()
-			      EnablePermissions()
-			endif
-
-			oReg := TReg32():New( hKey, cRunKey )
-
-			While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-				oKey := TReg32():New( hKey, cRunKey + "\" + cReg )
-
-				cName := oKey:Get("DisplayName")
-
-				IF cName == aInstall[nActItem][2]
-					oKey:Delete( "DisplayName" )
-					oKey:Delete( "UninstallString" )
-					nId := 0
-					While RegEnumValue( oKey:nHandle, nId++, @cName ) == 0
-						oKey:Delete( cName )
-					EndDo
-					oKey:Close()
-					EXIT
-				ENDIF
-
-				oKey:Close()
-
-			EndDo
-
-			oReg:Close()
-
-			DELREGKEY( hKey, cRunKey, aInstall[nActItem][2] )
-
-			DELETE ITEM nActItem FROM Grid_1 OF Form_2
-
-			aDel( aInstall, nActItem )
-			aSize( aInstall, Len(aInstall) - 1 )
-
-			Form_2.Grid_1.Value := IF(nActItem > 1, nActItem - 1, nActItem)
-
-		ENDIF
-
-	ENDIF
+      ENDIF
 
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure UninstallPrg(nPage)
-*--------------------------------------------------------*
-Local nActItem, cPath, cPrg, cData
+STATIC PROCEDURE DeleteKey(nPage)
 
-IF nPage < 2
+   LOCAL nActItem, oReg, oKey, cReg := "", cName := "", nId := 0, ;
+      hKey := HKEY_LOCAL_MACHINE, ;
+      cRunKey := "Software\Microsoft\Windows\CurrentVersion\Uninstall"
 
-   nActItem := GetProperty( "Form_2", "Grid_"+Ltrim(Str(nPage)), "Value" )
+   IF nPage < 2
 
-   IF !EMPTY(nActItem)
+      nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
 
-		IF MsgYesNo( "Are you sure you want to uninstall the selected program?", "Confirm", , , .f. )
+      IF !EMPTY(nActItem)
 
-			Form_2.Release
+         IF MsgYesNo( "Are you sure you want to remove the selected item?", "Confirm", , , .f. )
 
-			cPath := aInstall[nActItem][3]
+            IF IsWinNT()
+               EnablePermissions()
+            ENDIF
 
-			cPrg := StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')
+            oReg := TReg32():New( hKey, cRunKey )
 
-			cData := Ltrim(StrTran(StrTran(cPath, cPrg, ""), '"', ''))
+            WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+               oKey := TReg32():New( hKey, cRunKey + "\" + cReg )
 
-			ShellExecute(0, "open", cPrg, cData, , 1)
+               cName := oKey:Get("DisplayName")
 
-		ENDIF
+               IF cName == aInstall[nActItem][2]
+                  oKey:Delete( "DisplayName" )
+                  oKey:Delete( "UninstallString" )
+                  nId := 0
+                  WHILE RegEnumValue( oKey:nHandle, nId++, @cName ) == 0
+                     oKey:Delete( cName )
+                  ENDDO
+                  oKey:Close()
+                  EXIT
+               ENDIF
 
-	ENDIF
+               oKey:Close()
+
+            ENDDO
+
+            oReg:Close()
+
+            DELREGKEY( hKey, cRunKey, aInstall[nActItem][2] )
+
+            DELETE ITEM nActItem FROM Grid_1 OF Form_2
+
+            aDel( aInstall, nActItem )
+            aSize( aInstall, Len(aInstall) - 1 )
+
+            Form_2.Grid_1.Value := IF(nActItem > 1, nActItem - 1, nActItem)
+
+         ENDIF
+
+      ENDIF
 
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Static Procedure PrgProp(nPage)
-*--------------------------------------------------------*
-Local nActItem, aFile, cPath, cFile, cDesc := "", cVers := "", cLC := "", hIcon
-Local aInfo := { "FileDescription", "FileVersion", "LegalCopyright" }
+STATIC PROCEDURE UninstallPrg(nPage)
 
-IF nPage < 2
+   LOCAL nActItem, cPath, cPrg, cData
 
-   nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
+   IF nPage < 2
 
-   IF !EMPTY(nActItem)
-	cPath := aInstall[nActItem][3]
-	cFile := StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')
-	cFile := IF(FILE(cFile), cFile, StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', ''))
-	cFile := IF(FILE(cFile), cFile, StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))
-	cFile := IF(FILE(cFile), cFile, GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe')
-	cFile := IF(FILE(cFile), cFile, GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe')
+      nActItem := GetProperty( "Form_2", "Grid_"+Ltrim(Str(nPage)), "Value" )
 
-	aFile := FileVersInfo(aInfo, GetInstance(), cFile)
+      IF !EMPTY(nActItem)
 
-	IF LEN(aFile) > 0
-		IF valtype(aFile[1]) == "C"
-			cDesc := aFile[1]
-		ENDIF
-		IF valtype(aFile[2]) == "C"
-			cVers := aFile[2]
-		ENDIF
-		IF valtype(aFile[3]) == "C"
-			cLC := aFile[3]
-		ENDIF
-	ENDIF
+         IF MsgYesNo( "Are you sure you want to uninstall the selected program?", "Confirm", , , .f. )
 
-	hIcon := ExtractIcon(cFile, 0)
+            Form_2.Release
 
-	ShellAbout( aInstall[nActItem][2], cDesc + ", " + cVers + CRLF + cLC, hIcon ) 
+            cPath := aInstall[nActItem][3]
 
-	DestroyIcon(hIcon)
+            cPrg := StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')
+
+            cData := Ltrim(StrTran(StrTran(cPath, cPrg, ""), '"', ''))
+
+            ShellExecute(0, "open", cPrg, cData, , 1)
+
+         ENDIF
+
+      ENDIF
+
    ENDIF
 
-ENDIF
+   RETURN
 
-Return
+STATIC PROCEDURE PrgProp(nPage)
 
-*--------------------------------------------------------*
-Static Function GetInstallArray(hKey)
-*--------------------------------------------------------*
-Local aInst := {}, oReg, cReg := "", oKey, cFile, ;
-	cName, cPath, nId := 0, nVerify
+   LOCAL nActItem, aFile, cPath, cFile, cDesc := "", cVers := "", cLC := "", hIcon
+   LOCAL aInfo := { "FileDescription", "FileVersion", "LegalCopyright" }
+
+   IF nPage < 2
+
+      nActItem := GetProperty( "Form_2", "Grid_" + Ltrim( Str( nPage ) ), "Value" )
+
+      IF !EMPTY(nActItem)
+         cPath := aInstall[nActItem][3]
+         cFile := StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')
+         cFile := IF(FILE(cFile), cFile, StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', ''))
+         cFile := IF(FILE(cFile), cFile, StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))
+         cFile := IF(FILE(cFile), cFile, GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe')
+         cFile := IF(FILE(cFile), cFile, GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe')
+
+         aFile := FileVersInfo(aInfo, GetInstance(), cFile)
+
+         IF LEN(aFile) > 0
+            IF valtype(aFile[1]) == "C"
+               cDesc := aFile[1]
+            ENDIF
+            IF valtype(aFile[2]) == "C"
+               cVers := aFile[2]
+            ENDIF
+            IF valtype(aFile[3]) == "C"
+               cLC := aFile[3]
+            ENDIF
+         ENDIF
+
+         hIcon := ExtractIcon(cFile, 0)
+
+         ShellAbout( aInstall[nActItem][2], cDesc + ", " + cVers + CRLF + cLC, hIcon )
+
+         DestroyIcon(hIcon)
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+STATIC FUNCTION GetInstallArray(hKey)
+
+   LOCAL aInst := {}, oReg, cReg := "", oKey, cFile, ;
+      cName, cPath, nId := 0, nVerify
 
    hKey := IF(hKey == NIL, HKEY_LOCAL_MACHINE, hKey)
 
    oReg := TReg32():New( hKey, "Software\Microsoft\Windows\CurrentVersion\Uninstall" )
 
-   While RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
-	oKey := TReg32():New( hKey, "Software\Microsoft\Windows\CurrentVersion\Uninstall\" + cReg )
+   WHILE RegEnumKey( oReg:nHandle, nId++, @cReg ) == 0
+      oKey := TReg32():New( hKey, "Software\Microsoft\Windows\CurrentVersion\Uninstall\" + cReg )
 
-	cName := oKey:Get("DisplayName")
-	cPath := oKey:Get("UninstallString")
-	oKey:Close()
+      cName := oKey:Get("DisplayName")
+      cPath := oKey:Get("UninstallString")
+      oKey:Close()
 
-	IF !EMPTY(cName) .AND. !EMPTY(cPath)
+      IF !EMPTY(cName) .AND. !EMPTY(cPath)
 
-		nVerify := IF(FILE(GetWindowsFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
-		nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
+         nVerify := IF(FILE(GetWindowsFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
+         nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + cFileNoExt(cPath) + '.exe'), 1, 0)
 
-		IF EMPTY(nVerify)
+         IF EMPTY(nVerify)
 
-			DO CASE
-				CASE FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')) == .T.
-					nVerify := 1
-				CASE FILE(StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', '')) == .T.
-					nVerify := 1
-				CASE FILE((cFile := StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))) == .T.
-					nVerify := 1
-				CASE FILE(GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
-					nVerify := 1
-				CASE FILE(GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
-					nVerify := 1
-			END CASE
+            DO CASE
+            CASE FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')) == .T.
+               nVerify := 1
+            CASE FILE(StrTran(SubStr(cPath, 1, AT(".", cPath) + 3), '"', '')) == .T.
+               nVerify := 1
+            CASE FILE((cFile := StrTran(SubStr(cPath, 1, AT(" ", cPath) - 1), '"', ''))) == .T.
+               nVerify := 1
+            CASE FILE(GetWindowsFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
+               nVerify := 1
+            CASE FILE(GetSystemFolder() + '\' + cFileNoExt(cFile) + '.exe') == .T.
+               nVerify := 1
+            END CASE
 
-		ELSE
+         ELSE
 
-			IF AT(".exe", Lower(cPath)) > 0
-				nVerify := IF(FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')), 1, 0)
-			ENDIF
+            IF AT(".exe", Lower(cPath)) > 0
+               nVerify := IF(FILE(StrTran(SubStr(cPath, 1, AT(".exe", Lower(cPath)) + 4), '"', '')), 1, 0)
+            ENDIF
 
-		ENDIF
+         ENDIF
 
-		nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + SubStr(cPath, 1, AT(" ", cPath) - 1) + '.exe'), 1, 0)
+         nVerify := IF(!EMPTY(nVerify) .OR. FILE(GetSystemFolder() + '\' + SubStr(cPath, 1, AT(" ", cPath) - 1) + '.exe'), 1, 0)
 
-		aAdd( aInst, { nVerify, cName, cPath } )
+         aAdd( aInst, { nVerify, cName, cPath } )
 
-	ENDIF
+      ENDIF
 
-   EndDo
+   ENDDO
 
    oReg:Close()
 
-RETURN ASORT(aInst, , , {|a,b| UPPER(a[2]) < UPPER(b[2])})
+   RETURN ASORT(aInst, , , {|a,b| UPPER(a[2]) < UPPER(b[2])})
 
-*--------------------------------------------------------*
-Static Function MsgAbout()
-*--------------------------------------------------------*
+STATIC FUNCTION MsgAbout()
 
-return MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	hb_compiler() + CRLF + version() + CRLF + ;
-	Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
-	padc("This program is Freeware!", 40) + CRLF + ;
-	padc("Copying is allowed!", 42), "About", IDI_MAIN, .f. )
+   RETURN MsgInfo( padc(PROGRAM + VERSION, 40) + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      hb_compiler() + CRLF + version() + CRLF + ;
+      Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
+      padc("This program is Freeware!", 40) + CRLF + ;
+      padc("Copying is allowed!", 42), "About", IDI_MAIN, .f. )
 
-*--------------------------------------------------------*
-Static Procedure WinRun( lMode )
-*--------------------------------------------------------*
-   Local cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
-         cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
-         cRegKey  := GETREGVAR( NIL, cRunKey, "Uninstall Editor" )
+STATIC PROCEDURE WinRun( lMode )
 
-   if IsWinNT()
+   LOCAL cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
+      cRunKey  := "Software\Microsoft\Windows\CurrentVersion\Run", ;
+      cRegKey  := GETREGVAR( NIL, cRunKey, "Uninstall Editor" )
+
+   IF IsWinNT()
       EnablePermissions()
-   endif
+   ENDIF
 
    IF lMode
       IF Empty(cRegKey) .OR. cRegKey # cRunName
@@ -589,11 +577,10 @@ Static Procedure WinRun( lMode )
       DELREGVAR( NIL, cRunKey, "Uninstall Editor" )
    ENDIF
 
-return
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -602,11 +589,10 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -615,11 +601,10 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -627,11 +612,10 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    oReg:Delete(cSubKey)
    oReg:Close()
 
-RETURN NIL
+   RETURN NIL
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGKEY(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg, nValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -639,144 +623,140 @@ STATIC FUNCTION DELREGKEY(nKey, cRegKey, cSubKey)
    nValue := oReg:KeyDelete(cSubKey)
    oReg:Close()
 
-RETURN nValue
+   RETURN nValue
 
-*--------------------------------------------------------*
-Function MyInputWindow( Title, aLabels, aValues, aFormats )
-*--------------------------------------------------------*
-Local i , l , ControlRow , LN , CN , PB , cFile
+FUNCTION MyInputWindow( Title, aLabels, aValues, aFormats )
 
-	l := Len( aLabels )
+   LOCAL i , l , ControlRow , LN , CN , PB , cFile
 
-	Private aResult[l]
+   l := Len( aLabels )
 
-	DEFINE WINDOW _MyInputWindow ;
-		AT 0,0 ;
-		WIDTH 430 ;
-		HEIGHT (l*30) + 80 ;
-		TITLE Title ;
-		ICON IDI_MAIN ;
-		MODAL ;
-		NOSIZE
+   PRIVATE aResult[l]
 
-		ControlRow :=  10
+   DEFINE WINDOW _MyInputWindow ;
+         AT 0,0 ;
+         WIDTH 430 ;
+         HEIGHT (l*30) + 80 ;
+         TITLE Title ;
+         ICON IDI_MAIN ;
+         MODAL ;
+         NOSIZE
 
-		For i := 1 to l
+      ControlRow :=  10
 
-			LN := 'Label_' + Ltrim(Str(i))
-			CN := 'Control_' + Ltrim(Str(i))
-			PB := 'PicButton_' + Ltrim(Str(i))
+      FOR i := 1 to l
 
-			@ ControlRow + 3, 10 LABEL &LN VALUE aLabels[i] ;
-				FONT "MS Sans Serif" SIZE 11
+         LN := 'Label_' + Ltrim(Str(i))
+         CN := 'Control_' + Ltrim(Str(i))
+         PB := 'PicButton_' + Ltrim(Str(i))
 
-			do case
+         @ ControlRow + 3, 10 LABEL &LN VALUE aLabels[i] ;
+            FONT "MS Sans Serif" SIZE 11
 
-			case ValType ( aValues [i] ) == 'D'
+         DO CASE
 
-				@ ControlRow , 140 DATEPICKER &CN VALUE aValues[i] WIDTH 140
-				ControlRow := ControlRow + 30
+         CASE ValType ( aValues [i] ) == 'D'
 
-			case ValType( aValues[i] ) == 'N'
+            @ ControlRow , 140 DATEPICKER &CN VALUE aValues[i] WIDTH 140
+            ControlRow := ControlRow + 30
 
-				If  ValType( aFormats[i] ) == 'C'
+         CASE ValType( aValues[i] ) == 'N'
 
-					If AT ( '.' , aFormats [i] ) > 0
-						@ ControlRow , 140 TEXTBOX &CN VALUE aValues[i] ;
-							WIDTH 140 NUMERIC INPUTMASK aFormats[i] 
-					Else
-						@ ControlRow , 140 TEXTBOX &CN VALUE aValues[i] ;
-							WIDTH 140 MAXLENGTH Len(aFormats[i]) NUMERIC
-					EndIf
+            IF  ValType( aFormats[i] ) == 'C'
 
-					ControlRow := ControlRow + 30
-				Endif
+               IF AT ( '.' , aFormats [i] ) > 0
+                  @ ControlRow , 140 TEXTBOX &CN VALUE aValues[i] ;
+                     WIDTH 140 NUMERIC INPUTMASK aFormats[i]
+               ELSE
+                  @ ControlRow , 140 TEXTBOX &CN VALUE aValues[i] ;
+                     WIDTH 140 MAXLENGTH Len(aFormats[i]) NUMERIC
+               ENDIF
 
-			case ValType( aValues[i] ) == 'C'
+               ControlRow := ControlRow + 30
+            ENDIF
 
-				If ValType ( aFormats [i] ) == 'N'
-					@ ControlRow, 91 TEXTBOX &CN VALUE aValues[i] ;
-						WIDTH 295 MAXLENGTH aFormats[i] ;
-						ON ENTER _MyInputWindow.BUTTON_1.SetFocus
+         CASE ValType( aValues[i] ) == 'C'
 
-					@ ControlRow, 394 BUTTON &PB PICTURE "OPEN" ;
-						ACTION {|| cFile := ;
-						GetFile( {{"Programs", "*.exe"}, {"All files", "*.*"}}, ;
-						"Select the program's executable" ), ;
-						IF(EMPTY(_MyInputWindow.Control_1.Value), ;
-						_MyInputWindow.Control_1.Value := cFileNoExt(cFile), ), ;
-						_MyInputWindow.Control_2.Value := cFile, ;
-						_MyInputWindow.BUTTON_1.SetFocus } ;
-						WIDTH 24 HEIGHT 24 TOOLTIP "Browse for file"
+            IF ValType ( aFormats [i] ) == 'N'
+               @ ControlRow, 91 TEXTBOX &CN VALUE aValues[i] ;
+                  WIDTH 295 MAXLENGTH aFormats[i] ;
+                  ON ENTER _MyInputWindow.BUTTON_1.SetFocus
 
-					ControlRow := ControlRow + 30
-				EndIf
+               @ ControlRow, 394 BUTTON &PB PICTURE "OPEN" ;
+                  ACTION {|| cFile := ;
+                  GetFile( {{"Programs", "*.exe"}, {"All files", "*.*"}}, ;
+                  "Select the program's executable" ), ;
+                  IF(EMPTY(_MyInputWindow.Control_1.Value), ;
+                  _MyInputWindow.Control_1.Value := cFileNoExt(cFile), ), ;
+                  _MyInputWindow.Control_2.Value := cFile, ;
+                  _MyInputWindow.BUTTON_1.SetFocus } ;
+                  WIDTH 24 HEIGHT 24 TOOLTIP "Browse for file"
 
-			endcase
+               ControlRow := ControlRow + 30
+            ENDIF
 
-		Next i
+         ENDCASE
 
-		@ ControlRow + 8, 230 BUTTON BUTTON_1 ;
-			CAPTION '&OK' ;
-			ACTION _MyInputWindowOk() ;
-			WIDTH 74 ;
-			HEIGHT 24 ;
-			FONT "Arial" SIZE 9
+      NEXT i
 
-		@ ControlRow + 8, 312 BUTTON BUTTON_2 ;
-			CAPTION '&Cancel' ;
-			ACTION _MyInputWindowCancel() ;
-			WIDTH 74 ;
-			HEIGHT 24 ;
-			FONT "Arial" SIZE 9
+      @ ControlRow + 8, 230 BUTTON BUTTON_1 ;
+         CAPTION '&OK' ;
+         ACTION _MyInputWindowOk() ;
+         WIDTH 74 ;
+         HEIGHT 24 ;
+         FONT "Arial" SIZE 9
 
-		ON KEY ESCAPE ACTION _MyInputWindow.BUTTON_2.OnClick
+      @ ControlRow + 8, 312 BUTTON BUTTON_2 ;
+         CAPTION '&Cancel' ;
+         ACTION _MyInputWindowCancel() ;
+         WIDTH 74 ;
+         HEIGHT 24 ;
+         FONT "Arial" SIZE 9
 
-		_MyInputWindow.Control_1.SetFocus
+      ON KEY ESCAPE ACTION _MyInputWindow.BUTTON_2.OnClick
 
-	END WINDOW
+      _MyInputWindow.Control_1.SetFocus
 
-	CENTER WINDOW _MyInputWindow
+   END WINDOW
 
-	ACTIVATE WINDOW _MyInputWindow
+   CENTER WINDOW _MyInputWindow
 
-Return ( aResult )
+   ACTIVATE WINDOW _MyInputWindow
 
-*--------------------------------------------------------*
-Function _MyInputWindowOk 
-*--------------------------------------------------------*
-Local i , ControlName , l 
+   RETURN ( aResult )
 
-	l := len (aResult)
+FUNCTION _MyInputWindowOk
 
-	For i := 1 to l
+   LOCAL i , ControlName , l
 
-		ControlName := 'Control_' + Alltrim ( Str ( i ) )
-		aResult [i] := GetProperty( '_MyInputWindow', ControlName, 'Value' )
+   l := len (aResult)
 
-	Next i
+   FOR i := 1 to l
 
-	RELEASE WINDOW _MyInputWindow
+      ControlName := 'Control_' + Alltrim ( Str ( i ) )
+      aResult [i] := GetProperty( '_MyInputWindow', ControlName, 'Value' )
 
-Return Nil
+   NEXT i
 
-*--------------------------------------------------------*
-Function _MyInputWindowCancel
-*--------------------------------------------------------*
-Local i , l
+   RELEASE WINDOW _MyInputWindow
 
-	l := len (aResult)
+   RETURN NIL
 
-	For i := 1 to l
+FUNCTION _MyInputWindowCancel
 
-		aResult [i] := Nil
+   LOCAL i , l
 
-	Next i
+   l := len (aResult)
 
-	RELEASE WINDOW _MyInputWindow
+   FOR i := 1 to l
 
-Return Nil
+      aResult [i] := Nil
 
+   NEXT i
+
+   RELEASE WINDOW _MyInputWindow
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -924,3 +904,4 @@ HB_FUNC( FILEVERSINFO )
 }
 
 #pragma ENDDUMP
+

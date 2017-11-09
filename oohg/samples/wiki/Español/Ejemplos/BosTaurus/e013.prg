@@ -1,27 +1,22 @@
 /*
- * Ejemplo Zebra n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo crear códigos de barras
- * utilizando la librería Zebra.
- *
- * Adaptado del ejemplo "HMG_Zebra" incluido en el paquete HMG Extended.
- *
- * Para construir el exe ejecute:
- *    BUILDAPP demo -ic:\oohg\hb32\contrib\hbzebra
- * o:
- *    COMPILE demo -ic:\oohg\hb32\contrib\hbzebra
- * o:
- *    CREAR.BAT
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * Puede descargar demo.ico y crear.bat desde
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Zebra
- */
+* Ejemplo Zebra n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo crear códigos de barras
+* utilizando la librería Zebra.
+* Adaptado del ejemplo "HMG_Zebra" incluido en el paquete HMG Extended.
+* Para construir el exe ejecute:
+*    BUILDAPP demo -ic:\oohg\hb32\contrib\hbzebra
+* o:
+*    COMPILE demo -ic:\oohg\hb32\contrib\hbzebra
+* o:
+*    CREAR.BAT
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* Puede descargar demo.ico y crear.bat desde
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Zebra
+*/
 
 #include "oohg.ch"
 #include "bostaurus.ch"
@@ -34,45 +29,46 @@ MEMVAR aColorBarra
 MEMVAR aColorFondo
 
 FUNCTION Main
+
    PRIVATE aTipos := { "EAN13", ;
-                       "EAN8", ;
-                       "UPCA", ;
-                       "UPCE", ;
-                       "CODE39", ;
-                       "ITF", ;
-                       "MSI", ;
-                       "CODABAR", ;
-                       "CODE93", ;
-                       "CODE11", ;
-                       "CODE128", ;
-                       "PDF417", ;
-                       "DATAMATRIX", ;
-                       "QRCODE" }
+      "EAN8", ;
+      "UPCA", ;
+      "UPCE", ;
+      "CODE39", ;
+      "ITF", ;
+      "MSI", ;
+      "CODABAR", ;
+      "CODE93", ;
+      "CODE11", ;
+      "CODE128", ;
+      "PDF417", ;
+      "DATAMATRIX", ;
+      "QRCODE" }
    PRIVATE aValores := { "477012345678", ;
-                         "1234567", ;
-                         "01234567891", ;
-                         "123456", ;
-                         "ABC123", ;
-                         "12345678901", ;
-                         "1234", ;
-                         "1234567", ;
-                         "-1234", ;
-                         "ABC-123", ;
-                         "Code 128", ;
-                         "Hola, Mundo de Harbour! Es un código 2D PDF417", ;
-                         "Hola, Mundo de Harbour! Es un código 2D DataMatrix", ;
-                         "https://harbour.github.io/" }
+      "1234567", ;
+      "01234567891", ;
+      "123456", ;
+      "ABC123", ;
+      "12345678901", ;
+      "1234", ;
+      "1234567", ;
+      "-1234", ;
+      "ABC-123", ;
+      "Code 128", ;
+      "Hola, Mundo de Harbour! Es un código 2D PDF417", ;
+      "Hola, Mundo de Harbour! Es un código 2D DataMatrix", ;
+      "https://harbour.github.io/" }
    PRIVATE aColorBarra := { 0, 0, 0 }
    PRIVATE aColorFondo := { 255, 255, 255 }
 
    SET DEFAULT ICON TO 'demo.ico'
 
    DEFINE WINDOW form ;
-      AT 0, 0 ;
-      WIDTH 450 HEIGHT 270 ;
-      MAIN ;
-      TITLE 'Generador de Códigos de Barra' ;
-      NOMAXIMIZE NOSIZE
+         AT 0, 0 ;
+         WIDTH 450 HEIGHT 270 ;
+         MAIN ;
+         TITLE 'Generador de Códigos de Barra' ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE LABEL lbl_tipo
          ROW 10
@@ -215,25 +211,27 @@ FUNCTION Main
    form.cmb_tipo.Value := 1
    form.Center
    form.Activate
-RETURN Nil
 
+   RETURN NIL
 
 FUNCTION MostrarCodigoBarras
+
    LOCAL hBitMap
 
    hBitMap := CrearCodigoDeBarras( form.txt_codigo.Value, ;
-                                   form.cmb_tipo.Item( form.cmb_tipo.Value ), ;
-                                   form.spn_ancholinea.Value, ;
-                                   form.spn_altolinea.Value, ;
-                                   form.chk_mostrardigitos.Value, ;
-                                   '', ;
-                                   aColorBarra, ;
-                                   aColorFondo, ;
-                                   form.chk_digitocontrol.Value, ;
-                                   form.chk_ancho2_5.Value, ;
-                                   form.chk_ancho3.Value )
+      form.cmb_tipo.Item( form.cmb_tipo.Value ), ;
+      form.spn_ancholinea.Value, ;
+      form.spn_altolinea.Value, ;
+      form.chk_mostrardigitos.Value, ;
+      '', ;
+      aColorBarra, ;
+      aColorFondo, ;
+      form.chk_digitocontrol.Value, ;
+      form.chk_ancho2_5.Value, ;
+      form.chk_ancho3.Value )
    IF hBitMap == 0
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    IF OSisWinXPorLater()
@@ -241,12 +239,12 @@ FUNCTION MostrarCodigoBarras
    ENDIF
 
    DEFINE WINDOW frm_mostrarcodigobarras ;
-      AT BT_DesktopHeight() / 2, BT_DesktopWidth() / 2 ;
-      WIDTH  BT_BitmapWidth( hBitmap ) + 300 ;
-      HEIGHT BT_BitmapHeight( hBitmap ) + 150 ;
-      TITLE 'Código de Barras' ;
-      MODAL NOMAXIMIZE ;
-      ON RELEASE {|| BT_BitmapRelease( hBitmap ), IIF( OSisWinXPorLater(), SET WINDOW form TRANSPARENT TO OPAQUE, Nil ) }
+         AT BT_DesktopHeight() / 2, BT_DesktopWidth() / 2 ;
+         WIDTH  BT_BitmapWidth( hBitmap ) + 300 ;
+         HEIGHT BT_BitmapHeight( hBitmap ) + 150 ;
+         TITLE 'Código de Barras' ;
+         MODAL NOMAXIMIZE ;
+         ON RELEASE {|| BT_BitmapRelease( hBitmap ), IIF( OSisWinXPorLater(), SET WINDOW form TRANSPARENT TO OPAQUE, Nil ) }
 
       @ 10, 10 IMAGE img_imagen HBITMAP hBitmap
    END WINDOW
@@ -254,69 +252,75 @@ FUNCTION MostrarCodigoBarras
    FLASH WINDOW frm_mostrarcodigobarras COUNT 5 INTERVAL 50
 
    ACTIVATE WINDOW frm_mostrarcodigobarras
-RETURN Nil
 
+   RETURN NIL
 
 FUNCTION GuardarCodigoEnPNG
+
    LOCAL cNombreImagen
 
    cNombreImagen := PutFile( { { "Archivos PNG", "*.png" } }, "Guardar Código de Barras en Archivo PNG" )
    IF LEN( cNombreImagen ) == 0
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    IF FILE( cNombreImagen )
       IF MsgYesNo( 'El archivo ya existe. ¿Desea sobrescribirlo?', 'Confirmación' )
          FERASE( cNombreImagen )
       ELSE
-         RETURN Nil
+
+         RETURN NIL
       ENDIF
    ENDIF
    CrearCodigoDeBarras( form.txt_codigo.Value, ;
-                        form.cmb_tipo.Item( form.cmb_tipo.Value ), ;
-                        form.spn_ancholinea.Value, ;
-                        form.spn_altolinea.Value, ;
-                        form.chk_mostrardigitos.Value, ;
-                        cNombreImagen, ;
-                        aColorBarra, ;
-                        aColorFondo, ;
-                        form.chk_digitocontrol.Value, ;
-                        form.chk_ancho2_5.Value, ;
-                        form.chk_ancho3.Value )
+      form.cmb_tipo.Item( form.cmb_tipo.Value ), ;
+      form.spn_ancholinea.Value, ;
+      form.spn_altolinea.Value, ;
+      form.chk_mostrardigitos.Value, ;
+      cNombreImagen, ;
+      aColorBarra, ;
+      aColorFondo, ;
+      form.chk_digitocontrol.Value, ;
+      form.chk_ancho2_5.Value, ;
+      form.chk_ancho3.Value )
    IF FILE( cNombreImagen )
       EXECUTE FILE cNombreImagen
    ENDIF
-RETURN Nil
 
+   RETURN NIL
 
 FUNCTION CambiarColorBarra
+
    LOCAL aColor := GetColor( form.lbl_barcolor.FontColor )
 
    IF VALTYPE( aColor[ 1 ] ) == 'N'
       form.lbl_barcolor.FontColor := aColor
       aColorBarra := aColor
    ENDIF
-RETURN Nil
-   
+
+   RETURN NIL
 
 FUNCTION CambiarColorFondo
+
    LOCAL aColor := GetColor( form.lbl_backgroundcolor.BackColor )
 
    IF VALTYPE( aColor[ 1 ] ) == 'N'
       form.lbl_backgroundcolor.BackColor := aColor
       aColorFondo := aColor
    ENDIF
-RETURN Nil
 
+   RETURN NIL
 
-/*
-  La función CrearCodigoDeBarras() puede ser usada para crear imágenes en formato PNG de códigos de barras si se incluye el parámetro cNombreImagen.
-  Si cNombreImagen se omite, la función retorna el hBitMap de la imagen.
-  Los tipos de código de barras permitidos son:
-  { "EAN13", "EAN8", "UPCA", "UPCE", "CODE39", "ITF", "MSI", "CODABAR", "CODE93", "CODE11", "CODE128", "PDF417", "DATAMATRIX", "QRCODE" }
-  En caso de omitirse, el dígito de control será generado por la librería.
-*/
+   /*
+   La función CrearCodigoDeBarras() puede ser usada para crear imágenes en formato PNG de códigos de barras si se incluye el parámetro cNombreImagen.
+   Si cNombreImagen se omite, la función retorna el hBitMap de la imagen.
+   Los tipos de código de barras permitidos son:
+   { "EAN13", "EAN8", "UPCA", "UPCE", "CODE39", "ITF", "MSI", "CODABAR", "CODE93", "CODE11", "CODE128", "PDF417", "DATAMATRIX", "QRCODE" }
+   En caso de omitirse, el dígito de control será generado por la librería.
+   */
 
 FUNCTION CrearCodigoDeBarras( cCodigo, cTipo, nAnchoLinea, nAltoLinea, lMostrarDigitos, cNombreImagen, aColorBarra, aColorFondo, lDigitoControl, lAncho2_5, lAncho3 )
+
    LOCAL hBitmap, cTexto, nFlags
 
    DEFAULT nAnchoLinea := 2
@@ -348,18 +352,21 @@ FUNCTION CrearCodigoDeBarras( cCodigo, cTipo, nAnchoLinea, nAltoLinea, lMostrarD
    hBitmap := Zebra_CreateBitmapBarcode( aColorBarra, aColorFondo, nAnchoLinea, nAltoLinea, cTipo, cCodigo, nFlags, lMostrarDigitos, @cTexto )
 
    IF hBitmap == 0
+
       RETURN hBitmap
    ENDIF
 
    IF LEN( cNombreImagen ) <> 0
       BT_BitmapSaveFile( hBitmap, cNombreImagen, BT_FILEFORMAT_PNG )
       BT_BitmapRelease( hBitmap )
+
       RETURN 1
    ENDIF
-RETURN hBitmap
 
+   RETURN hBitmap
 
 FUNCTION Zebra_CreateBitmapBarcode( aColorBarra, aColorFondo, nAnchoLinea, nAltoLinea, cTipo, cCodigo, nFlags, lMostrarDigitos, cTexto )
+
    LOCAL hBitmap := 0, hZebra
    LOCAL hDC, BTstruct, nTamanioFuente
    LOCAL nAncho, nAlto
@@ -402,40 +409,48 @@ FUNCTION Zebra_CreateBitmapBarcode( aColorBarra, aColorFondo, nAnchoLinea, nAlto
    ELSE
       MsgStop( "Tipo de código no válido !", cTipo )
    ENDIF
-RETURN hBitmap
 
+   RETURN hBitmap
 
 FUNCTION Zebra_Draw( hZebra, hDC, aColorBarra, nRow, nCol, nAnchoLinea, nAltoLinea, iFlags )
+
    IF hb_zebra_GetError( hZebra ) != 0
+
       RETURN HB_ZEBRA_ERROR_INVALIDZEBRA
    ENDIF
-//     hb_zebra_draw( hZebra, bCodeBlock,                                                            dX,   dY,   dWidth,     dHeight,     iFlags )
-RETURN hb_zebra_draw( hZebra, { |x, y, w, h| BT_DrawFillRectangle( hDC, y, x, w, h, aColorBarra ) }, nCol, nRow, nAnchoLinea, nAltoLinea, iFlags )
+   //     hb_zebra_draw( hZebra, bCodeBlock,                                                            dX,   dY,   dWidth,     dHeight,     iFlags )
 
+   RETURN hb_zebra_draw( hZebra, { |x, y, w, h| BT_DrawFillRectangle( hDC, y, x, w, h, aColorBarra ) }, nCol, nRow, nAnchoLinea, nAltoLinea, iFlags )
 
 FUNCTION Zebra_GetWidth( hZebra, nAnchoLinea, nAltoLinea, iFlags )
+
    LOCAL x1 := 0, y1 := 0, nAncho := 0, nAlto := 0
 
    // always --> nAlto = nAltoLinea
    IF hb_zebra_GetError( hZebra ) != 0
+
       RETURN HB_ZEBRA_ERROR_INVALIDZEBRA
    ENDIF
-// hb_zebra_draw( hZebra, bCodeBlock,                                                         dX, dY, dWidth,     dHeight,     iFlags )
+   // hb_zebra_draw( hZebra, bCodeBlock,                                                         dX, dY, dWidth,     dHeight,     iFlags )
    hb_zebra_draw( hZebra, { |x, y, w, h| nAncho := x + w - x1, nAlto := y + h - y1 }, x1, y1, nAnchoLinea, nAltoLinea, iFlags )
-RETURN nAncho
 
+   RETURN nAncho
 
 FUNCTION Zebra_GetHeight( hZebra, nAnchoLinea, nAltoLinea, iFlags )
+
    LOCAL x1 := 0, y1 := 0, nAncho := 0, nAlto := 0
 
    // always --> nAlto = nAltoLinea
    IF hb_zebra_GetError( hZebra ) != 0
+
       RETURN HB_ZEBRA_ERROR_INVALIDZEBRA
    ENDIF
-// hb_zebra_draw( hZebra, bCodeBlock,                                                          dX, dY, dWidth,     dHeight,     iFlags )
+   // hb_zebra_draw( hZebra, bCodeBlock,                                                          dX, dY, dWidth,     dHeight,     iFlags )
    hb_zebra_draw( hZebra, { |x, y, w, h | nAncho := x + w - x1, nAlto := y + h - y1 }, x1, y1, nAnchoLinea, nAltoLinea, iFlags )
-RETURN nAlto
 
-/*
- * EOF
- */
+   RETURN nAlto
+
+   /*
+   * EOF
+   */
+

@@ -1,18 +1,15 @@
 /*
- * Ejemplo Browse n° 9
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Basado en un ejemplo de la distribución de OOHG mantenida
- * por Ciro Vargas Clemow <cvc@oohg.org>
- *
- * Este ejemplo muestra cómo pintar con colores alternados
- * las filas de un control Browse indexado.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Browse n° 9
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Basado en un ejemplo de la distribución de OOHG mantenida
+* por Ciro Vargas Clemow <cvc@oohg.org>
+* Este ejemplo muestra cómo pintar con colores alternados
+* las filas de un control Browse indexado.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 #include "dbstruct.ch"
@@ -29,15 +26,15 @@ FUNCTION Main
    SET LANGUAGE TO SPANISH
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      CLIENTAREA ;
-      WIDTH 500 HEIGHT 380 ;
-      MINWIDTH 500 MINHEIGHT 380 ;
-      TITLE 'Pintar en forma alternada un Browse "Indexado"' ;
-      MAIN ;
-      NOMAXIMIZE ;
-      ON INIT AbrirTablas() ;
-      ON RELEASE dbCloseAll()
+         AT 0,0 ;
+         CLIENTAREA ;
+         WIDTH 500 HEIGHT 380 ;
+         MINWIDTH 500 MINHEIGHT 380 ;
+         TITLE 'Pintar en forma alternada un Browse "Indexado"' ;
+         MAIN ;
+         NOMAXIMIZE ;
+         ON INIT AbrirTablas() ;
+         ON RELEASE dbCloseAll()
 
       @ 10,10 BROWSE Browse_1 OBJ oBrowse ;
          WIDTH oForm:ClientWidth - 20 ;
@@ -63,9 +60,8 @@ FUNCTION Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
 FUNCTION AbrirTablas()
 
    LOCAL aDbf[2][4]
@@ -97,8 +93,9 @@ FUNCTION AbrirTablas()
 
    Form_1.Browse_1.Value := RECNO()
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,37 +1,38 @@
 /*
- * $Id: activexdemo.prg,v 1.1 2007/03/25 22:41:42 guerra000 Exp $
- */
+* $Id: activexdemo.prg,v 1.1 2007/03/25 22:41:42 guerra000 Exp $
+*/
 /*
-   Marcelo Torres, Noviembre de 2006.
-   TActivex para [x]Harbour Minigui.
-   Adaptacion del trabajo de:
-   ---------------------------------------------
-   Lira Lira Oscar Joel [oSkAr]
-   Clase TAxtiveX_FreeWin para Fivewin
-   Noviembre 8 del 2006
-   email: oscarlira78@hotmail.com
-   http://freewin.sytes.net
-   @CopyRight 2006 Todos los Derechos Reservados
-   ---------------------------------------------
+Marcelo Torres, Noviembre de 2006.
+TActivex para [x]Harbour Minigui.
+Adaptacion del trabajo de:
+---------------------------------------------
+Lira Lira Oscar Joel [oSkAr]
+Clase TAxtiveX_FreeWin para Fivewin
+Noviembre 8 del 2006
+email: oscarlira78@hotmail.com
+http://freewin.sytes.net
+@CopyRight 2006 Todos los Derechos Reservados
+---------------------------------------------
 */
 
 #include "oohg.ch"
 #include "hbclass.ch"
 
-Static oActiveX, bVerde, WinDemo
+STATIC oActiveX, bVerde, WinDemo
 
 FUNCTION Main()
+
    DEFINE WINDOW WinDemo obj Windemo ;
-      AT 118,73 ;
-      WIDTH 808 ;
-      HEIGHT 534 ;
-      TITLE 'ActiveX Support QAC Sample for OOHG' ;
-      MAIN ;
-      ON SIZE Ajust() ;
-      ON MAXIMIZE Ajust() ;
-      BACKCOLOR {236 , 233 , 216 } ;
-      FONT 'Verdana' ;
-      SIZE 10 ;
+         AT 118,73 ;
+         WIDTH 808 ;
+         HEIGHT 534 ;
+         TITLE 'ActiveX Support QAC Sample for OOHG' ;
+         MAIN ;
+         ON SIZE Ajust() ;
+         ON MAXIMIZE Ajust() ;
+         BACKCOLOR {236 , 233 , 216 } ;
+         FONT 'Verdana' ;
+         SIZE 10 ;
 
       @ Windemo:height - 60 , 10 LABEL LSemaforo ;
          VALUE " " ;
@@ -64,32 +65,37 @@ FUNCTION Main()
 
    END WINDOW
 
-   Center window WinDemo
+   CENTER WINDOW WinDemo
 
-   Activate window WinDemo
+   ACTIVATE WINDOW WinDemo
 
-RETURN NIL
+   RETURN NIL
 
-Procedure SwitchSemaforo()
-   if oActiveX:Busy()
-      if bVerde
+PROCEDURE SwitchSemaforo()
+
+   IF oActiveX:Busy()
+      IF bVerde
          bVerde := .F.
          WinDemo:LSemaforo:BackColor := {255,0,0}
-      endif
-   else
-      if !bVerde
+      ENDIF
+   ELSE
+      IF !bVerde
          bVerde := .T.
          WinDemo:LSemaforo:BackColor := {0,255,0}
          windemo:URL_tonavigate:value := oActiveX:LocationURL()
-      endif
-   endif
-Return
+      ENDIF
+   ENDIF
 
-Procedure Navegar()
+   RETURN
+
+PROCEDURE Navegar()
+
    oActivex:Navigate(windemo:URL_tonavigate:value)
-Return
 
-Procedure Ajust()
+   RETURN
+
+PROCEDURE Ajust()
+
    windemo:lsemaforo:row := WinDemo:height - 60
    windemo:URL_tonavigate:row := WinDemo:height - 57
    windemo:URL_tonavigate:width :=  WinDemo:width- 165
@@ -97,4 +103,6 @@ Procedure Ajust()
    windemo:bnavigate:col := WinDemo:width- 115
    oActiveX:width := WinDemo:width - 7
    oActiveX:height := WinDemo:height - 72
-Return
+
+   RETURN
+

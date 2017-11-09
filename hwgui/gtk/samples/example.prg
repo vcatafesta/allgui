@@ -8,9 +8,11 @@ REQUEST DBUSEAREA
 REQUEST DBCREATEINDEX
 REQUEST DBSEEK
 
-Function Main
-Local oForm := HFormTmpl():Read( "example.xml" )
+FUNCTION Main
 
- oForm:ShowMain()
+   LOCAL oForm := HFormTmpl():Read( "example.xml" )
 
-Return Nil
+   oForm:ShowMain()
+
+   RETURN NIL
+

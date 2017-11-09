@@ -5,12 +5,12 @@
 
 #include <hmg.ch>
 
-Function Main
+FUNCTION Main
 
    SET CELLNAVIGATIONMODE EXCEL
 
-   define window sample at 0, 0 width 320 height 200 title 'Sample Cell Navigation Downwards...' main
-      define grid grid_1
+   DEFINE WINDOW sample at 0, 0 width 320 height 200 title 'Sample Cell Navigation Downwards...' main
+      DEFINE GRID grid_1
          row 10
          col 10
          width 300
@@ -22,8 +22,9 @@ Function Main
          columncontrols { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
          allowedit .t.
          items { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
-      end grid         
-   end window
+      END GRID
+   END WINDOW
    sample.center
    sample.activate
-   Return
+
+   RETURN

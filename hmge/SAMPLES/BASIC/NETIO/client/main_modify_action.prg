@@ -1,56 +1,59 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
-Function main_modify_action
-LOCAL I , nRecNo
-LOCAL cFirst , cLast , cStreet , cCity , cState , cZip , dHireDate , lMarried , nAge , nSalary
-LOCAL Title , aLabels , aInitValues , aFormats , aValues
+FUNCTION main_modify_action
 
-IF Main.Query_Server.Enabled == .T.
+   LOCAL I , nRecNo
+   LOCAL cFirst , cLast , cStreet , cCity , cState , cZip , dHireDate , lMarried , nAge , nSalary
+   LOCAL Title , aLabels , aInitValues , aFormats , aValues
 
-	I := Main.Grid_1.Value
+   IF Main.Query_Server.Enabled == .T.
 
-	IF I == 0
-		MsgStop('You must select a row!')
-		Return Nil
-	ENDIF
+      I := Main.Grid_1.Value
 
-	nRecNo		:= Val( Main.Grid_1.Cell(I,1) )
+      IF I == 0
+         MsgStop('You must select a row!')
 
-	cFirst		:= Main.Grid_1.Cell(I,3)
-	cLast		:= Main.Grid_1.Cell(I,2)
-	cStreet 	:= Main.Grid_1.Cell(I,4)
-	cCity		:= Main.Grid_1.Cell(I,5)
-	cState		:= Main.Grid_1.Cell(I,6)
-	cZip		:= Main.Grid_1.Cell(I,7) 
-	dHireDate	:= CTOD( Main.Grid_1.Cell(I,8) )
-	lMarried	:= iif( Main.Grid_1.Cell(I,9)='.T.', .T., .F. )
-	nAge		:= Val( Main.Grid_1.Cell(I,10) )
-	nSalary		:= Val( Main.Grid_1.Cell(I,11) )
+         RETURN NIL
+      ENDIF
 
-	Title 		:= 'Modify Record'
+      nRecNo      := Val( Main.Grid_1.Cell(I,1) )
 
-	aLabels 	:= { 'First:'	, 'Last:'	,'Street:'		,'City:'	,'State:'	,'Zip:' , 'Hire Date'	, 'Married'	, 'Age'	, 'Salary'	}
-	aInitValues 	:= { cFirst	, cLast		, cStreet		, cCity 	, cState	, cZip 	, dHireDate	, lMarried	, nAge	, nSalary	}
-	aFormats 	:= { 32		, 32 		, 32			, 32 		, 32		, 32 	, NIL		, NIL		, '99'	, '999999'	}
+      cFirst      := Main.Grid_1.Cell(I,3)
+      cLast      := Main.Grid_1.Cell(I,2)
+      cStreet    := Main.Grid_1.Cell(I,4)
+      cCity      := Main.Grid_1.Cell(I,5)
+      cState      := Main.Grid_1.Cell(I,6)
+      cZip      := Main.Grid_1.Cell(I,7)
+      dHireDate   := CTOD( Main.Grid_1.Cell(I,8) )
+      lMarried   := iif( Main.Grid_1.Cell(I,9)='.T.', .T., .F. )
+      nAge      := Val( Main.Grid_1.Cell(I,10) )
+      nSalary      := Val( Main.Grid_1.Cell(I,11) )
 
-	aValues 	:= InputWindow ( Title , aLabels , aInitValues , aFormats )
+      Title       := 'Modify Record'
 
-	If aValues [1] == Nil
+      aLabels    := { 'First:'   , 'Last:'   ,'Street:'      ,'City:'   ,'State:'   ,'Zip:' , 'Hire Date'   , 'Married'   , 'Age'   , 'Salary'   }
+      aInitValues    := { cFirst   , cLast      , cStreet      , cCity    , cState   , cZip    , dHireDate   , lMarried   , nAge   , nSalary   }
+      aFormats    := { 32      , 32       , 32         , 32       , 32      , 32    , NIL      , NIL      , '99'   , '999999'   }
 
-		MsgInfo('Canceled', 'New Record')
+      aValues    := InputWindow ( Title , aLabels , aInitValues , aFormats )
 
-	Else
+      IF aValues [1] == Nil
 
-		netio_funcexec( "query_004" , nRecNo , aValues )
+         MsgInfo('Canceled', 'New Record')
 
-		main_query_server_action()
+      ELSE
 
-		MsgInfo('Operation Completed!')
+         netio_funcexec( "query_004" , nRecNo , aValues )
 
-	EndIf
+         main_query_server_action()
 
-ENDIF
+         MsgInfo('Operation Completed!')
 
-Return Nil
+      ENDIF
+
+   ENDIF
+
+   RETURN NIL
+

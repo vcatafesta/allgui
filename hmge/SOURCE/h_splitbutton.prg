@@ -1,27 +1,22 @@
 /*
- * MINIGUI - Harbour Win32 GUI library source code
- *
- * Copyright 2017 Grigory Filatov <gfilatov@inbox.ru>
- */
+* MINIGUI - Harbour Win32 GUI library source code
+* Copyright 2017 Grigory Filatov <gfilatov@inbox.ru>
+*/
 
 #include "minigui.ch"
 
 #ifdef _USERINIT_
-*------------------------------------------------------------------------------*
 INIT PROCEDURE _InitSPButton
-*------------------------------------------------------------------------------*
 
    InstallEventHandler  ( 'SPButtonEventHandler' )
    InstallMethodHandler ( 'SetFocus', 'SPButtonSetFocus' )
    InstallMethodHandler ( 'Enable', 'SPButtonEnable' )
    InstallMethodHandler ( 'Disable', 'SPButtonDisable' )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE _DefineSplitButton ( cName, nRow, nCol, cCaption, bAction, cParent, ;
-   lDefault, w, h, tooltip, fontname, fontsize, bold, italic, underline, strikeout )
-*------------------------------------------------------------------------------*
+      lDefault, w, h, tooltip, fontname, fontsize, bold, italic, underline, strikeout )
    LOCAL hControlHandle, nId, hParentFormHandle, k, mVar
    LOCAL FontHandle
 
@@ -69,7 +64,7 @@ PROCEDURE _DefineSplitButton ( cName, nRow, nCol, cCaption, bAction, cParent, ;
       FontHandle := _SetFont ( hControlHandle, FontName, FontSize, bold, italic, underline, strikeout )
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType[k] := 'SPBUTTON'
    _HMG_aControlNames[k] :=  cName
@@ -120,16 +115,16 @@ PROCEDURE _DefineSplitButton ( cName, nRow, nCol, cCaption, bAction, cParent, ;
       SetToolTip ( hControlHandle , tooltip , GetFormToolTipHandle ( cParent ) )
    ENDIF
 
-RETURN
+   RETURN
 
-#define WM_COMMAND   0x0111
-#define BN_CLICKED   0
-#define WM_NOTIFY    0x004E
-#define BCN_FIRST    -1250
-#define BCN_DROPDOWN (BCN_FIRST + 0x0002)
-*------------------------------------------------------------------------------*
+   #define WM_COMMAND   0x0111
+   #define BN_CLICKED   0
+   #define WM_NOTIFY    0x004E
+   #define BCN_FIRST    -1250
+   #define BCN_DROPDOWN (BCN_FIRST + 0x0002)
+
 FUNCTION SPButtonEventHandler ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL i
    LOCAL xRetVal := Nil
 
@@ -157,14 +152,14 @@ FUNCTION SPButtonEventHandler ( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN xRetVal
+   RETURN xRetVal
 
-#define BM_SETSTYLE        244
-#define BS_SPLITBUTTON     0x0000000C
-#define BS_DEFSPLITBUTTON  0x0000000D
-*------------------------------------------------------------------------------*
+   #define BM_SETSTYLE        244
+   #define BS_SPLITBUTTON     0x0000000C
+   #define BS_DEFSPLITBUTTON  0x0000000D
+
 PROCEDURE SPButtonSetFocus ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL hWnd, x, ControlCount, ParentFormHandle
 
    IF GetControlType ( cControl, cWindow ) == 'SPBUTTON'
@@ -192,11 +187,9 @@ PROCEDURE SPButtonSetFocus ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE SPButtonEnable ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'SPBUTTON'
 
@@ -210,11 +203,9 @@ PROCEDURE SPButtonEnable ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE SPButtonDisable ( cWindow, cControl )
-*------------------------------------------------------------------------------*
 
    IF GetControlType ( cControl, cWindow ) == 'SPBUTTON'
 
@@ -228,11 +219,10 @@ PROCEDURE SPButtonDisable ( cWindow, cControl )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 STATIC FUNCTION LaunchDropdownMenu( nHwnd )
-*------------------------------------------------------------------------------*
+
    LOCAL nIdx
    LOCAL aPos := {0, 0, 0, 0}
 
@@ -243,15 +233,13 @@ STATIC FUNCTION LaunchDropdownMenu( nHwnd )
       GetWindowRect( nHwnd, aPos )
 
       TrackPopupMenu( _HMG_aControlRangeMax[ nIdx ], aPos[ 1 ] + 1, ;
-      	aPos[ 2 ] + _HMG_aControlHeight[ nIdx ], _HMG_aControlParentHandles[ nIdx ] )
+         aPos[ 2 ] + _HMG_aControlHeight[ nIdx ], _HMG_aControlParentHandles[ nIdx ] )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
@@ -288,4 +276,5 @@ HB_FUNC( INITSPLITBUTTON )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

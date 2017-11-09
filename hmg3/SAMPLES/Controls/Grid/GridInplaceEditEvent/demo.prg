@@ -1,14 +1,14 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 800 ;
-      HEIGHT 550 ;
-      TITLE 'Grid Inplace Edit Event' ;
-      MAIN 
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 550 ;
+         TITLE 'Grid Inplace Edit Event' ;
+         MAIN
 
       aItems := {}
       AADD (aItems, {"Carrot",        5, 30, DATE()+1 })
@@ -24,17 +24,17 @@ Function Main
       @ 200, 10 LABEL Label_5 VALUE "" AUTOSIZE
 
       @ 250,10 GRID Grid_1 ;
-            WIDTH 760 ;
-            HEIGHT 240 ;
-            HEADERS {'Character','Number','Number','Date'} ;
-            WIDTHS {140,140,140,140};
-            ITEMS aItems ;
-            EDIT;
-            CELLNAVIGATION;
-            COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}, {'TEXTBOX','NUMERIC'}, {'SPINNER', 1, 50}, {'DATEPICKER','DROPDOWN'} };
-            ON INPLACEEDITEVENT ProcGridInplaceEditEvent();
-            ON KEY ProcOnKeyEvent();
-            ON CLICK ProcOnClickEvent()
+         WIDTH 760 ;
+         HEIGHT 240 ;
+         HEADERS {'Character','Number','Number','Date'} ;
+         WIDTHS {140,140,140,140};
+         ITEMS aItems ;
+         EDIT;
+         CELLNAVIGATION;
+         COLUMNCONTROLS { {'TEXTBOX','CHARACTER'}, {'TEXTBOX','NUMERIC'}, {'SPINNER', 1, 50}, {'DATEPICKER','DROPDOWN'} };
+         ON INPLACEEDITEVENT ProcGridInplaceEditEvent();
+         ON KEY ProcOnKeyEvent();
+         ON CLICK ProcOnClickEvent()
 
    END WINDOW
 
@@ -42,44 +42,48 @@ Function Main
 
    ACTIVATE WINDOW Form_1
 
-Return
-
+   RETURN
 
 FUNCTION ProcGridInplaceEditEvent()
-STATIC cControlName, cFormParentName
+
+   STATIC cControlName, cFormParentName
 
    DO CASE
 
-      CASE This.IsInplaceEditEventInit == .T.
+   CASE This.IsInplaceEditEventInit == .T.
 
-         Form_1.Label_1.VALUE := { "Grid Control: ", This.InplaceEditParentName, ".", This.InplaceEditGridName }
+      Form_1.Label_1.VALUE := { "Grid Control: ", This.InplaceEditParentName, ".", This.InplaceEditGridName }
 
-         GetControlNameByHandle ( This.InplaceEditControlHandle, @cControlName, @cFormParentName )
+      GetControlNameByHandle ( This.InplaceEditControlHandle, @cControlName, @cFormParentName )
 
-         Form_1.Label_2.VALUE := { "InplaceEdit Control: ", cFormParentName, ".", cControlName,;
-                                   " --> ", GetControlTypeByIndex ( This.InplaceEditControlIndex ) }
+      Form_1.Label_2.VALUE := { "InplaceEdit Control: ", cFormParentName, ".", cControlName,;
+         " --> ", GetControlTypeByIndex ( This.InplaceEditControlIndex ) }
 
-      CASE This.IsInplaceEditEventRun == .T.
+   CASE This.IsInplaceEditEventRun == .T.
 
-         Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(),; 
-                                   "    Last Char Press: ", HMG_GetLastCharacter(),; 
-                                   "    Current Value: ", GetProperty(cFormParentName, cControlName, "VALUE") }
+      Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(),;
+         "    Last Char Press: ", HMG_GetLastCharacter(),;
+         "    Current Value: ", GetProperty(cFormParentName, cControlName, "VALUE") }
 
-      CASE This.IsInplaceEditEventFinish == .T.
+   CASE This.IsInplaceEditEventFinish == .T.
 
-         Form_1.Label_1.VALUE := "" 
-         Form_1.Label_2.VALUE := ""
-         Form_1.Label_3.VALUE := ""
+      Form_1.Label_1.VALUE := ""
+      Form_1.Label_2.VALUE := ""
+      Form_1.Label_3.VALUE := ""
 
    ENDCASE
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION ProcOnKeyEvent()
-   Form_1.Label_4.VALUE := "Last On Key Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" ) 
-RETURN NIL
+
+   Form_1.Label_4.VALUE := "Last On Key Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" )
+
+   RETURN NIL
 
 FUNCTION ProcOnClickEvent()
+
    Form_1.Label_5.VALUE := "Last On Click Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" )
-RETURN NIL
+
+   RETURN NIL
+

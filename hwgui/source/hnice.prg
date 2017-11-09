@@ -1,11 +1,8 @@
 /*
- * $Id: hnice.prg,v 1.8 2008/06/20 23:43:00 mlacecilia Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- *
- *
- * Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: hnice.prg,v 1.8 2008/06/20 23:43:00 mlacecilia Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
 
 #include "windows.ch"
@@ -19,11 +16,11 @@
 CLASS HNiceButton INHERIT HControl
 
    DATA winclass INIT "NICEBUTT"
-   Data TEXT, id, nTop, nLeft, nwidth, nheight
-   CLASSDATA oSelected INIT Nil
+   DATA TEXT, id, nTop, nLeft, nwidth, nheight
+CLASSDATA oSelected INIT Nil
    DATA State INIT 0
-   Data ExStyle
-   Data bClick, cTooltip
+   DATA ExStyle
+   DATA bClick, cTooltip
 
    DATA lPress INIT .F.
    DATA r INIT 30
@@ -32,34 +29,45 @@ CLASS HNiceButton INHERIT HControl
    DATA lFlat
    DATA nOrder
 
-   METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
-   bInit, bClick, ;
-   cText, cTooltip, r, g, b )
+METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b )
 
-   METHOD Redefine( oWndParent, nId, nStyleEx, ;
-   bInit, bClick, ;
-   cText, cTooltip, r, g, b )
+METHOD Redefine( oWndParent, nId, nStyleEx, ;
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b )
 
-   METHOD Activate()
-   METHOD INIT()
-   METHOD Create( )
-   METHOD Size( )
-   METHOD Moving( )
-   METHOD Paint()
-   METHOD MouseMove( wParam, lParam )
-   METHOD MDown()
-   METHOD MUp()
-   METHOD Press() INLINE( ::lPress := .T., ::MDown() )
-   METHOD RELEASE()
-   METHOD END ()
+METHOD Activate()
+
+METHOD INIT()
+
+METHOD Create( )
+
+METHOD Size( )
+
+METHOD Moving( )
+
+METHOD Paint()
+
+METHOD MouseMove( wParam, lParam )
+
+METHOD MDown()
+
+METHOD MUp()
+
+METHOD Press() INLINE( ::lPress := .T., ::MDown() )
+
+METHOD RELEASE()
+
+METHOD END ()
 
 ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
-               bInit, bClick, ;
-               cText, cTooltip, r, g, b ) CLASS HNiceButton
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b ) CLASS HNiceButton
    Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,, bInit, ;
-              ,, ctooltip )
+      ,, ctooltip )
    DEFAULT g := ::g
    DEFAULT b := ::b
 
@@ -81,12 +89,11 @@ METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
    hwg_Regnice()
    ::Activate()
 
-RETURN Self
-
+   RETURN Self
 
 METHOD Redefine( oWndParent, nId, nStyleEx, ;
-                    bInit, bClick, ;
-                    cText, cTooltip, r, g, b ) CLASS HNiceButton
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b ) CLASS HNiceButton
 
    Super:New( oWndParent, nId, 0, 0, 0, 0, 0,, bInit,,, ctooltip )
 
@@ -106,16 +113,17 @@ METHOD Redefine( oWndParent, nId, nStyleEx, ;
 
    hwg_Regnice()
 
-RETURN Self
+   RETURN Self
 
 METHOD Activate CLASS HNiceButton
 
-   IF !empty( ::oParent:handle ) 
+   IF !empty( ::oParent:handle )
       ::handle := CreateNiceBtn( ::oParent:handle, ::id, ;
-                                 ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::ExStyle, ::Text )
+         ::Style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::ExStyle, ::Text )
       ::Init()
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 METHOD INIT CLASS HNiceButton
 
@@ -123,14 +131,17 @@ METHOD INIT CLASS HNiceButton
       Super:Init()
       ::Create()
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 FUNCTION NICEBUTTPROC( hBtn, msg, wParam, lParam )
 
-LOCAL oBtn
+   LOCAL oBtn
+
    IF msg != WM_CREATE
       IF Ascan( { WM_MOUSEMOVE, WM_PAINT, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_LBUTTONDBLCLK, WM_DESTROY, WM_MOVING, WM_SIZE }, msg ) > 0
          IF ( oBtn := FindSelf( hBtn ) ) == Nil
+
             RETURN .F.
          ENDIF
 
@@ -147,12 +158,14 @@ LOCAL oBtn
 
          ELSEIF msg == WM_DESTROY
             oBtn:End()
+
             RETURN .T.
          ENDIF
       ENDIF
 
    ENDIF
-RETURN .F.
+
+   RETURN .F.
 
 METHOD Create( ) CLASS HNICEButton
 
@@ -172,21 +185,21 @@ METHOD Create( ) CLASS HNICEButton
    SetWindowRgn( ::Handle, Region, .T. )
    InvalidateRect( ::Handle, 0, 0 )
 
-RETURN self
+   RETURN self
 
 METHOD Size( ) CLASS HNICEButton
 
    ::State := OBTN_NORMAL
    InvalidateRect( ::Handle, 0, 0 )
 
-RETURN Self
+   RETURN Self
 
 METHOD Moving( ) CLASS HNICEButton
 
    ::State := .f.
    InvalidateRect( ::Handle, 0, 0 )
 
-RETURN Self
+   RETURN Self
 
 METHOD MouseMove( wParam, lParam ) CLASS HNICEButton
 
@@ -196,7 +209,7 @@ METHOD MouseMove( wParam, lParam ) CLASS HNICEButton
    LOCAL otmp
    LOCAL res    := .F.
 
-HB_SYMBOL_UNUSED(wParam)
+   HB_SYMBOL_UNUSED(wParam)
 
    IF ::lFlat .AND. ::state != OBTN_INIT
       otmp := SetNiceBtnSelected()
@@ -222,7 +235,7 @@ HB_SYMBOL_UNUSED(wParam)
       ENDIF
    ENDIF
 
-RETURN self
+   RETURN self
 
 METHOD MUp( ) CLASS HNICEButton
 
@@ -240,7 +253,7 @@ METHOD MUp( ) CLASS HNICEButton
       ENDIF
    ENDIF
 
-RETURN SELF
+   RETURN SELF
 
 METHOD MDown() CLASS HNICEButton
 
@@ -252,7 +265,7 @@ METHOD MDown() CLASS HNICEButton
       SetNiceBtnSelected( Self )
    ENDIF
 
-RETURN SELF
+   RETURN SELF
 
 METHOD PAINT() CLASS HNICEButton
 
@@ -268,6 +281,7 @@ METHOD PAINT() CLASS HNICEButton
    LOCAL w
    LOCAL h
    LOCAL p
+
    //  *******************
 
    Rct  := GetClientRect( ::Handle )
@@ -293,19 +307,19 @@ METHOD PAINT() CLASS HNICEButton
 
    IF ( ::State == OBTN_MOUSOVER )
       p := SetTextColor( hDC, VCOLOR( "FF0000" ) )
-      TextOut( hDC, XCtr - ( Size[ 1 ] / 2 ) + 1, YCtr - ( Size[ 2 ] / 2 ) + 1, T )
+      TEXTOut( hDC, XCtr - ( Size[ 1 ] / 2 ) + 1, YCtr - ( Size[ 2 ] / 2 ) + 1, T )
    ELSE
       p := SetTextColor( hDC, VCOLOR( "0000FF" ) )
-      TextOut( hDC, XCtr - Size[ 1 ] / 2, YCtr - Size[ 2 ] / 2, T )
+      TEXTOut( hDC, XCtr - Size[ 1 ] / 2, YCtr - Size[ 2 ] / 2, T )
    ENDIF
 
-   EndPaint( ::Handle, ps )
+EndPaint( ::Handle, ps )
 
 RETURN Self
 
 METHOD END () CLASS HNiceButton
 
-RETURN Nil
+   RETURN NIL
 
 METHOD RELEASE() CLASS HNiceButton
 
@@ -314,7 +328,7 @@ METHOD RELEASE() CLASS HNiceButton
    InvalidateRect( ::handle, 0 )
    PostMessage( ::handle, WM_PAINT, 0, 0 )
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION SetNiceBtnSelected( oBtn )
 
@@ -324,5 +338,5 @@ FUNCTION SetNiceBtnSelected( oBtn )
       HNiceButton() :oSelected := oBtn
    ENDIF
 
-RETURN otmp
+   RETURN otmp
 

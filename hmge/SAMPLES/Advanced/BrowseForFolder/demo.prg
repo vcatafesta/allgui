@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2008 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2008 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -17,59 +16,56 @@
 #define BIF_BROWSEINCLUDEFILES 16384  // The browse dialog will display files as well as folders
 */
 
-*-----------------------------------------------------------------------------*
-Procedure Main()
-*-----------------------------------------------------------------------------*
-Local cCurDir := CurDrive() + ":\" + CurDir()
-Local cMsg := "Please select a location to store data files"
+PROCEDURE Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 WIDTH 530 HEIGHT 150 ;
-		MAIN ;
-		TITLE "Custom Browse For Folder Function Demo" ;
-		NOSIZE
+   LOCAL cCurDir := CurDrive() + ":\" + CurDir()
+   LOCAL cMsg := "Please select a location to store data files"
 
-		DEFINE MAIN MENU
-			DEFINE POPUP 'Tests'
-				MENUITEM 'BrowseForFolder()' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
-                                     BIF_RETURNONLYFSDIRS + BIF_STATUSTEXT, ;
-                                     cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
-				MENUITEM 'BrowseForFolder() allow direct entry' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
-                                     BIF_STATUSTEXT + BIF_EDITBOX, ;
-                                     cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
-				MENUITEM 'BrowseForFolder() allow and validate direct entry' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
-                                     BIF_STATUSTEXT + BIF_EDITBOX + BIF_VALIDATE, ;
-                                     cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
-				MENUITEM 'BrowseForFolder() show files' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
-                                     BIF_STATUSTEXT + BIF_EDITBOX + BIF_VALIDATE + BIF_BROWSEINCLUDEFILES, ;
-                                     cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
-				MENUITEM 'BrowseForFolder() use "New Style" dialog' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
-                                     BIF_EDITBOX + BIF_VALIDATE + BIF_NEWDIALOGSTYLE, ;
-                                     cMsg, Form_1.Textbox_1.Value),"Result")
-				SEPARATOR
-				MENUITEM 'Exit' ACTION Form_1.Release
-			END POPUP
-		END MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 WIDTH 530 HEIGHT 150 ;
+         MAIN ;
+         TITLE "Custom Browse For Folder Function Demo" ;
+         NOSIZE
 
-		@ 25,460 BUTTON Button_1 PICTURE 'OPEN_BMP' WIDTH 39 HEIGHT 24 ;
-		         ACTION  {|| Form_1.Textbox_1.Value := RunBrowseForFolder(NIL, BIF_STATUSTEXT, cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value) }
-		@ 26,95  TEXTBOX TextBox_1 VALUE cCurDir WIDTH 359 HEIGHT 21 FONT "MS Sans Serif"
-		@ 27,20  LABEL Label_1 VALUE "Folder" WIDTH 73 HEIGHT 20 FONT "MS Sans serif" BOLD TRANSPARENT
-		@ 0,2    FRAME Frame_1 CAPTION "" WIDTH 518 HEIGHT 70
-		@ 75,20  CHECKBOX Check_1 CAPTION "Center dialog on screen" WIDTH 150 HEIGHT 21 FONT "MS Sans Serif" 
+      DEFINE MAIN MENU
+         DEFINE POPUP 'Tests'
+            MENUITEM 'BrowseForFolder()' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
+               BIF_RETURNONLYFSDIRS + BIF_STATUSTEXT, ;
+               cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
+            MENUITEM 'BrowseForFolder() allow direct entry' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
+               BIF_STATUSTEXT + BIF_EDITBOX, ;
+               cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
+            MENUITEM 'BrowseForFolder() allow and validate direct entry' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
+               BIF_STATUSTEXT + BIF_EDITBOX + BIF_VALIDATE, ;
+               cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
+            MENUITEM 'BrowseForFolder() show files' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
+               BIF_STATUSTEXT + BIF_EDITBOX + BIF_VALIDATE + BIF_BROWSEINCLUDEFILES, ;
+               cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value),"Result")
+            MENUITEM 'BrowseForFolder() use "New Style" dialog' ACTION MsgInfo(RunBrowseForFolder(NIL, ;
+               BIF_EDITBOX + BIF_VALIDATE + BIF_NEWDIALOGSTYLE, ;
+               cMsg, Form_1.Textbox_1.Value),"Result")
+            SEPARATOR
+            MENUITEM 'Exit' ACTION Form_1.Release
+         END POPUP
+      END MENU
 
-	END WINDOW
+      @ 25,460 BUTTON Button_1 PICTURE 'OPEN_BMP' WIDTH 39 HEIGHT 24 ;
+         ACTION  {|| Form_1.Textbox_1.Value := RunBrowseForFolder(NIL, BIF_STATUSTEXT, cMsg, Form_1.Textbox_1.Value, Form_1.Check_1.Value) }
+      @ 26,95  TEXTBOX TextBox_1 VALUE cCurDir WIDTH 359 HEIGHT 21 FONT "MS Sans Serif"
+      @ 27,20  LABEL Label_1 VALUE "Folder" WIDTH 73 HEIGHT 20 FONT "MS Sans serif" BOLD TRANSPARENT
+      @ 0,2    FRAME Frame_1 CAPTION "" WIDTH 518 HEIGHT 70
+      @ 75,20  CHECKBOX Check_1 CAPTION "Center dialog on screen" WIDTH 150 HEIGHT 21 FONT "MS Sans Serif"
 
-	Form_1.Center
-	Form_1.Activate
+   END WINDOW
 
-Return
+   Form_1.Center
+   Form_1.Activate
 
-*-----------------------------------------------------------------------------*
-Function RunBrowseForFolder( nfolder, nflag, cTitle, cInitPath, lCenter )
-*-----------------------------------------------------------------------------*
-Return hb_BrowseForFolder( NIL, cTitle, nflag, nfolder, cInitPath, lCenter )
+   RETURN
 
+FUNCTION RunBrowseForFolder( nfolder, nflag, cTitle, cInitPath, lCenter )
+
+   RETURN hb_BrowseForFolder( NIL, cTitle, nflag, nfolder, cInitPath, lCenter )
 
 #pragma BEGINDUMP
 
@@ -151,3 +147,4 @@ HB_FUNC( HB_BROWSEFORFOLDER )  // Syntax: hb_BrowseForFolder([<hWnd>],[<cTitle>]
 }
 
 #pragma ENDDUMP
+

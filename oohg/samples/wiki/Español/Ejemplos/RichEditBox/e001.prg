@@ -1,18 +1,16 @@
 /*
- * Ejemplo RichEditBox n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo destacar la fila corriente en un
- * control RichEditBox, utilizando los métodos GetCurrentLine,
- * GetSelection, SetSelection, SetSelectionTextColor,
- * SetSelectionBackColor, GetLineIndex y GetLineLength y el
- * evento OnSelChange.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo RichEditBox n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo destacar la fila corriente en un
+* control RichEditBox, utilizando los métodos GetCurrentLine,
+* GetSelection, SetSelection, SetSelectionTextColor,
+* SetSelectionBackColor, GetLineIndex y GetLineLength y el
+* evento OnSelChange.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -21,10 +19,10 @@ FUNCTION Main
    LOCAL oWnd, oRch
 
    DEFINE WINDOW Win_1 OBJ oWnd ;
-      AT 0,0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE 'OOHG - Destacar Línea en Control Richedit'
+         AT 0,0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE 'OOHG - Destacar Línea en Control Richedit'
 
       ON KEY ESCAPE ACTION oWnd:Release()
 
@@ -40,23 +38,26 @@ FUNCTION Main
    ownd:Center()
    ownd:Activate()
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION Destacar( oRch )
 
    LOCAL aPos, aColor, nCurrent
+
    STATIC nPrevious := -1
 
    // Previene el cambio del formato por defecto
    IF EMPTY( oRch:Value )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    // Si se cambia el color una segunda vez,
    // la línea será pintada con el color por defecto
    nCurrent := oRch:GetCurrentLine()
    IF nCurrent == nPrevious
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    nPrevious := nCurrent
 
@@ -69,8 +70,8 @@ FUNCTION Destacar( oRch )
    // Restaurar los colores por defecto
    // Si FontColor es Nil se asume COLOR_WINDOWTEXT
    // Si BackColor es Nil se asume COLOR_WINDOW
-    oRch:SetSelectionTextColor( oRch:FontColor )
-    oRch:SetSelectionBackColor( oRch:BackColor )
+   oRch:SetSelectionTextColor( oRch:FontColor )
+   oRch:SetSelectionBackColor( oRch:BackColor )
 
    // Seleccionar la línea corriente
    oRch:SetSelection( oRch:GetLineIndex( nCurrent ), oRch:GetLineIndex( nCurrent ) + oRch:GetLineLength( nCurrent ) )
@@ -82,8 +83,9 @@ FUNCTION Destacar( oRch )
    // Restaurar la selección
    oRch:SetSelection( aPos[ 1 ], aPos[ 2 ] )
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

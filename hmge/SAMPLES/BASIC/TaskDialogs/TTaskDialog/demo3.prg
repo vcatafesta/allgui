@@ -1,28 +1,29 @@
-/* 
-   demo3.prg - Using of the inheritance for TaskDialog 
- */ 
- 
-#include "minigui.ch" 
-#include "hbclass.ch" 
-#include "TaskDlgs.ch" 
+/*
+demo3.prg - Using of the inheritance for TaskDialog
+*/
+
+#include "minigui.ch"
+#include "hbclass.ch"
+#include "TaskDlgs.ch"
 
 #define APP_TITLE          'TaskDialog with expandable text & footer with hyperlink'
-#define BUTTON_CAPTION_RU  'Œ ' 
-#define BUTTON_CAPTION_EN  'OK' 
+#define BUTTON_CAPTION_RU  'Œ '
+#define BUTTON_CAPTION_EN  'OK'
 
 #define COUNT_TIMES 20
 
-///////////////////////////////////////////////////////////////////////////////
-CREATE CLASS TTimedTaskDialog FUNCTION TimedTaskDialog FROM TaskDialog 
-///////////////////////////////////////////////////////////////////////////////
-   EXPORTED: 
+CREATE CLASS TTimedTaskDialog FUNCTION TimedTaskDialog FROM TaskDialog
+
+   EXPORTED:
    VAR lUserActivity INIT .F. READONLY
 
-   METHOD UpdateButton( cCaption ) 
+METHOD UpdateButton( cCaption )
 
-   METHOD Listener( hWnd, nNotification, nWParam, nLParam )
-   METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam )
-   METHOD OnTimer( hWnd, nNotification, nWParam, nLParam )
+METHOD Listener( hWnd, nNotification, nWParam, nLParam )
+
+METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam )
+
+METHOD OnTimer( hWnd, nNotification, nWParam, nLParam )
 
    PROTECTED:
    VAR hButton       INIT 0
@@ -30,18 +31,17 @@ CREATE CLASS TTimedTaskDialog FUNCTION TimedTaskDialog FROM TaskDialog
    VAR cTimeCount    INIT ""
    VAR nTimeCount    INIT COUNT_TIMES
 
-ENDCLASS 
-///////////////////////////////////////////////////////////////////////////////
+ENDCLASS
 
 METHOD UpdateButton( cCaption ) CLASS TTimedTaskDialog
 
    hb_default( @cCaption, ::cButtonTitle )
 
    IF GetClassName( ::hButton, .T. ) == "Button"
-     SetWindowText( ::hButton, If ( !Empty( ::cTimeCount ), cCaption + ::cTimeCount, cCaption ) )
+      SetWindowText( ::hButton, If ( !Empty( ::cTimeCount ), cCaption + ::cTimeCount, cCaption ) )
    ENDIF
 
-RETURN ""
+   RETURN ""
 
 METHOD Listener( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
 
@@ -52,7 +52,7 @@ METHOD Listener( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
 
    SWITCH nNotification
    CASE TDN_RADIO_BUTTON_CLICKED
-   CASE TDN_VERIFICATION_CLICKED 
+   CASE TDN_VERIFICATION_CLICKED
    CASE TDN_HELP
    CASE TDN_EXPANDO_BUTTON_CLICKED
       ::lUserActivity := .T.
@@ -73,10 +73,11 @@ METHOD Listener( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
    CASE TDN_DESTROYED
       EXIT
    ENDSWITCH
-   /* 
-   To prevent the task dialog from closing, the application must return FALSE, 
-   otherwise the task dialog is closed  
-   */ 
+   /*
+   To prevent the task dialog from closing, the application must return FALSE,
+   otherwise the task dialog is closed
+   */
+
    RETURN .F.
 
 METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
@@ -86,9 +87,9 @@ METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedT
 
    ::lUserActivity := .T.
 
-   ShellExecute( hWnd, "open", nLParam, , , SW_SHOW ) 
+   ShellExecute( hWnd, "open", nLParam, , , SW_SHOW )
 
-RETURN .T.
+   RETURN .T.
 
 METHOD OnTimer( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
 
@@ -97,63 +98,60 @@ METHOD OnTimer( hWnd, nNotification, nWParam, nLParam ) CLASS TTimedTaskDialog
    HB_SYMBOL_UNUSED( hWnd )
    HB_SYMBOL_UNUSED( nNotification )
    HB_SYMBOL_UNUSED( nLParam )
- 
+
    IF ! ::TimedOut
       ::TimedOut := ::lUserActivity
       ::cTimeCount := hb_strFormat( " (%d)", ::nTimeCount - Int( nWParam/1000 ) )
    ELSE
-     ::MainInstruction := 'What do you think about of the Windows Vista TaskDialog?' 
-     ::cTimeCount := ""
+      ::MainInstruction := 'What do you think about of the Windows Vista TaskDialog?'
+      ::cTimeCount := ""
    ENDIF
 
-   IF ::cTimeCount != cOldVal         
+   IF ::cTimeCount != cOldVal
       ::UpdateButton()
    ENDIF
-  
-RETURN ::TimedOut   // if .F. timer is reset
 
-///////////////////////////////////////////////////////////////////////////////
-PROCEDURE main() 
-///////////////////////////////////////////////////////////////////////////////
+   RETURN ::TimedOut   // if .F. timer is reset
+
+PROCEDURE main()
+
    LOCAL cMsg
    LOCAL oDialog := CreateTimedDialog()
 
    WITH OBJECT oDialog
-      :Instruction := "The Timed Dialog will be closed automatically after " + hb_NtoS( COUNT_TIMES ) + " secs!" 
+      :Instruction := "The Timed Dialog will be closed automatically after " + hb_NtoS( COUNT_TIMES ) + " secs!"
       :timeoutMS   := COUNT_TIMES * 1000
 
-      :ShowDialog() 
+      :ShowDialog()
 
       cMsg := If( :TimedOut() .AND. ! :lUserActivity, "Time out!", "Selected button #" + hb_NtoS( :SelectedButton() ) )
-   ENDWITH 
+   ENDWITH
 
    MsgInfo( cMsg, "Info" )
 
-RETURN 
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////////
 FUNCTION CreateTimedDialog()
 
-   LOCAL oDialog := TimedTaskDialog() 
+   LOCAL oDialog := TimedTaskDialog()
 
    WITH OBJECT oDialog
 
       :WindowTitle       := APP_TITLE
-      :Content           := 'The new TaskDialog provides a standard & enhanced way for interacting with the user' 
+      :Content           := 'The new TaskDialog provides a standard & enhanced way for interacting with the user'
       :Footer            := 'Optional footer text with an icon and even <A HREF="http://hmgextended.com/">hyperlink</A> can be included'
-      :MainIcon          := TD_QUESTION 
-      :FooterIcon        := TD_WARNING_ICON 
-      :ExpandedInfo      := "Any expanded content text for the task dialog is shown " + ; 
-                            "here and the text will automatically wrap as needed." 
-      :CollapsedCtrlText := "Click to see more" 
-      :ExpandedCtrlText  := "Hide Expanded Text" 
+      :MainIcon          := TD_QUESTION
+      :FooterIcon        := TD_WARNING_ICON
+      :ExpandedInfo      := "Any expanded content text for the task dialog is shown " + ;
+         "here and the text will automatically wrap as needed."
+      :CollapsedCtrlText := "Click to see more"
+      :ExpandedCtrlText  := "Hide Expanded Text"
 
       :EnableHyperlinks  := .T.
 
-   ENDWITH 
+   ENDWITH
 
-RETURN oDialog
-///////////////////////////////////////////////////////////////////////////////
+   RETURN oDialog
 
 #pragma BEGINDUMP
 
@@ -161,7 +159,6 @@ RETURN oDialog
 #include "hbapiitm.h"
 
 static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam );
-///////////////////////////////////////////////////////////////////////////////
 // based on http://forums.fivetechsupport.com/viewtopic.php?p=57503
 HB_FUNC( ENUMCHILDWINDOWS )
 {
@@ -190,3 +187,4 @@ static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam )
 }
 
 #pragma ENDDUMP
+

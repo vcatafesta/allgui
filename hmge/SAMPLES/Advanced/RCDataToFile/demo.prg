@@ -1,27 +1,28 @@
 /*
- * Author: P.Chornyj <myorg63@mail.ru>
- */
+* Author: P.Chornyj <myorg63@mail.ru>
+*/
 
 ANNOUNCE RDDSYS
 
-#define IDR_HELLO 1001 
-///////////////////////////////////////////////////////////////////////////////
-procedure main()
+#define IDR_HELLO 1001
 
-   local cDiskFile := hb_dirTemp() + "\" + "he$$o.tmp"
-   local nResult, hProcess, nRet
+PROCEDURE main()
 
-   delete file cDiskFile
+   LOCAL cDiskFile := hb_dirTemp() + "\" + "he$$o.tmp"
+   LOCAL nResult, hProcess, nRet
+
+   DELETE file cDiskFile
 
    nResult := RCDataToFile( IDR_HELLO, cDiskFile )
 
-   if nResult > 0
+   IF nResult > 0
       hProcess := hb_processOpen( cDiskFile )
       nRet := hb_processValue( hProcess, .T. )
 
       MsgInfo( "Exit Code: " + hb_NtoS( nRet ), "he$$o.tmp" )
-   else
+   ELSE
       MsgInfo( "Code: " + hb_NtoS( nResult ), "Error" )
-   endif
+   ENDIF
 
-return
+   RETURN
+

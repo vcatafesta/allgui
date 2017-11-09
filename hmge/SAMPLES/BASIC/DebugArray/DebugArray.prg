@@ -37,62 +37,60 @@
 #include "Minigui.ch"
 #define CRLF chr(13)+chr(10)
 
-procedure Main
+PROCEDURE Main
 
-local Arr, ArrMulti
-local nConta, Txt := "DebugArray.txt"
+   LOCAL Arr, ArrMulti
+   LOCAL nConta, Txt := "DebugArray.txt"
 
-Arr := array( 10 ) //dim the array nonodimensional
-ArrMulti := array( 10, 4 ) //dim the array MultiDimensional
+   Arr := array( 10 ) //dim the array nonodimensional
+   ArrMulti := array( 10, 4 ) //dim the array MultiDimensional
 
-for nConta = 1 to len( arr )
-  Arr[ nConta ] := nConta //assign a number to fill the array with some value
-next
+   FOR nConta = 1 to len( arr )
+      Arr[ nConta ] := nConta //assign a number to fill the array with some value
+   NEXT
 
-for nConta = 1 to len( arr )
-  ArrMulti[ nConta, 1 ] := nConta //assign a number for to fill the array
-  ArrMulti[ nConta, 2 ] := date() + nConta //assign a date for second element of Sub Array
-  ArrMulti[ nConta, 3 ] := time() //assign a time for thirt element of Sub Array
-  ArrMulti[ nConta, 4 ] := "Paper " + str( nConta, 6 ) + " Col 4 "
-next
+   FOR nConta = 1 to len( arr )
+      ArrMulti[ nConta, 1 ] := nConta //assign a number for to fill the array
+      ArrMulti[ nConta, 2 ] := date() + nConta //assign a date for second element of Sub Array
+      ArrMulti[ nConta, 3 ] := time() //assign a time for thirt element of Sub Array
+      ArrMulti[ nConta, 4 ] := "Paper " + str( nConta, 6 ) + " Col 4 "
+   NEXT
 
-DebugArray(Arr, .f., txt) //array monodimensional
-DebugArray( ArrMulti, .T., txt ) //array multidimensional
+   DebugArray(Arr, .f., txt) //array monodimensional
+   DebugArray( ArrMulti, .T., txt ) //array multidimensional
 
-return
+   RETURN
 
+PROCEDURE DebugArray( Arr, MultiDim, OutPut )
 
-procedure DebugArray( Arr, MultiDim, OutPut )
+   LOCAL temptext := ""
+   LOCAL I
+   LOCAL I0
+   LOCAL TempArr
 
-local temptext := ""
-local I
-local I0
-local TempArr
+   IF MultiDim
+      Output := "Multi" + Output //Adapt the name of array
+      TempArr := Arr[ 1 ]
+      FOR i = 1 to len( Arr )
+         FOR I0 = 1 to len( TempArr )
+            IF I0 = 1
+               temptext += "Row " + str( I, 6 ) + ":"
+            ENDIF
+            temptext += space( 1 ) + ValueToText( Arr[ I, I0 ] )
+         NEXT
+         temptext += CRLF //change the line
+      NEXT
+   ELSE
+      Output := "Mono" + Output //Adapt the name of array
+      FOR i = 1 to len( arr )
+         temptext += "Row " + str( I, 6 ) + ":" + space( 1 ) + ValueToText( Arr[ I ] ) + CRLF
+      NEXT
+   ENDIF
 
-if MultiDim
-  Output := "Multi" + Output //Adapt the name of array
-  TempArr := Arr[ 1 ]
-  for i = 1 to len( Arr )
-    for I0 = 1 to len( TempArr )
-     if I0 = 1
-        temptext += "Row " + str( I, 6 ) + ":"
-     endif
-     temptext += space( 1 ) + ValueToText( Arr[ I, I0 ] )
-    next
-    temptext += CRLF //change the line
-  next
-else
-  Output := "Mono" + Output //Adapt the name of array
-  for i = 1 to len( arr )
-    temptext += "Row " + str( I, 6 ) + ":" + space( 1 ) + ValueToText( Arr[ I ] ) + CRLF
-  next
-endif
+   hb_memowrit( OutPut, temptext )
+   ShellExecute( 0, "open", "notepad.exe", OutPut,, 1 )
 
-hb_memowrit( OutPut, temptext )
-ShellExecute( 0, "open", "notepad.exe", OutPut,, 1 )
-
-return
-
+   RETURN
 
 FUNCTION ValueToText( uValue )
 
@@ -115,6 +113,7 @@ FUNCTION ValueToText( uValue )
       cText := hb_ValToStr( uValue )
    ENDCASE
 
-RETURN "[" + cType + "]>>>" + cText + "<<<"
+   RETURN "[" + cType + "]>>>" + cText + "<<<"
 
-*+ EOF: DebugArray.PRG
+   *+ EOF: DebugArray.PRG
+

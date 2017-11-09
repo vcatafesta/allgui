@@ -1,9 +1,8 @@
 /*
- * DBCHW - DBC ( Harbour + HWGUI )
- * SQL queries
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* DBCHW - DBC ( Harbour + HWGUI )
+* SQL queries
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -13,11 +12,13 @@
 #include "ads.ch"
 #endif
 
-memvar mypath, numdriv
-Static cQuery := ""
+MEMVAR mypath, numdriv
 
-Function OpenQuery
-Local fname := SelectFile( "Query files( *.que )", "*.que", mypath )
+STATIC cQuery := ""
+
+FUNCTION OpenQuery
+
+   LOCAL fname := SelectFile( "Query files( *.que )", "*.que", mypath )
 
    IF !Empty( fname )
       mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
@@ -25,10 +26,11 @@ Local fname := SelectFile( "Query files( *.que )", "*.que", mypath )
       Query( .T. )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function Query( lEdit )
-Local aModDlg
+FUNCTION Query( lEdit )
+
+   LOCAL aModDlg
 
    IF !lEdit
       cQuery := ""
@@ -36,38 +38,45 @@ Local aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DLG_QUERY" ON INIT {|| InitQuery() }
    DIALOG ACTIONS OF aModDlg ;
-        ON 0,IDCANCEL     ACTION {|| EndQuery(.F.) }  ;
-        ON BN_CLICKED,IDC_BTNEXEC ACTION {|| EndQuery(.T.) } ;
-        ON BN_CLICKED,IDC_BTNSAVE ACTION {|| QuerySave() }
+      ON 0,IDCANCEL     ACTION {|| EndQuery(.F.) }  ;
+      ON BN_CLICKED,IDC_BTNEXEC ACTION {|| EndQuery(.T.) } ;
+      ON BN_CLICKED,IDC_BTNSAVE ACTION {|| QuerySave() }
    aModDlg:Activate()
 
-Return Nil
+   RETURN NIL
 
-Static Function InitQuery()
-Local hDlg := getmodalhandle()
+STATIC FUNCTION InitQuery()
+
+   LOCAL hDlg := getmodalhandle()
+
    SetDlgItemText( hDlg, IDC_EDITQUERY, cQuery )
    SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
-Return Nil
 
-Static Function EndQuery( lOk )
-Local hDlg := getmodalhandle()
-Local oldArea := Alias(), tmpdriv, tmprdonly
-Local id1
-Local aChildWnd, hChild
-Static lConnected := .F.
+   RETURN NIL
+
+STATIC FUNCTION EndQuery( lOk )
+
+   LOCAL hDlg := getmodalhandle()
+   LOCAL oldArea := Alias(), tmpdriv, tmprdonly
+   LOCAL id1
+   LOCAL aChildWnd, hChild
+
+   STATIC lConnected := .F.
 
    IF lOk
       cQuery := GetEditText( hDlg, IDC_EDITQUERY )
       IF Empty( cQuery )
          SetFocus( GetDlgItem( hDlg, IDC_EDITQUERY ) )
-         Return Nil
+
+         RETURN NIL
       ENDIF
 
       IF numdriv == 2
          MsgStop( "You shoud switch to ADS_CDX or ADS_ADT to run query" )
-         Return .F.
+
+         RETURN .F.
       ENDIF
-#ifdef RDD_ADS
+      #ifdef RDD_ADS
       IF !lConnected
          IF Empty( mypath )
             AdsConnect( "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" ) )
@@ -77,7 +86,7 @@ Static lConnected := .F.
          lConnected := .T.
       ENDIF
       IF Select( "ADSSQL" ) > 0
-         Select ADSSQL
+         SELECT ADSSQL
          USE
       ELSE
          SELECT 0
@@ -87,7 +96,8 @@ Static lConnected := .F.
          IF !Empty( oldArea )
             Select( oldArea )
          ENDIF
-         Return .F.
+
+         RETURN .F.
       ENDIF
       SetDlgItemText( hDlg, IDC_TEXTMSG, "Wait ..." )
       IF !AdsExecuteSqlDirect( cQuery )
@@ -95,7 +105,8 @@ Static lConnected := .F.
          IF !Empty( oldArea )
             Select( oldArea )
          ENDIF
-         Return .F.
+
+         RETURN .F.
       ELSE
          IF Alias() == "ADSSQL"
             improc := Select( "ADSSQL" )
@@ -116,19 +127,25 @@ Static lConnected := .F.
                Select( oldArea )
             ENDIF
             MsgStop( "Statement doesn't returns cursor" )
-            Return .F.
+
+            RETURN .F.
          ENDIF
       ENDIF
-#endif
+      #endif
    ENDIF
 
-   EndDialog( hDlg )
-Return .T.
+EndDialog( hDlg )
 
-Function QuerySave
-Local fname := SaveFile( "*.que","Query files( *.que )", "*.que", mypath )
+RETURN .T.
+
+FUNCTION QuerySave
+
+   LOCAL fname := SaveFile( "*.que","Query files( *.que )", "*.que", mypath )
+
    cQuery := GetDlgItemText( getmodalhandle(), IDC_EDITQUERY, 400 )
    IF !Empty( fname )
       MemoWrit( fname,cQuery )
    ENDIF
-Return Nil
+
+   RETURN NIL
+

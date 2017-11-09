@@ -4,49 +4,49 @@
 
 #include "minigui.ch"
 
-#define TAB	Chr(9)
+#define TAB   Chr(9)
 #define MsgInfo( c ) MsgInfo( c, , , .f. )
 
-Procedure Main
+PROCEDURE Main
 
-Local cVolName
-Local nSerNum
-Local nMaxName
-Local nFlags
-Local cFATName
-Local cDiskSerial
-Local cInfo := ""
+   LOCAL cVolName
+   LOCAL nSerNum
+   LOCAL nMaxName
+   LOCAL nFlags
+   LOCAL cFATName
+   LOCAL cDiskSerial
+   LOCAL cInfo := ""
 
-	If GetVolumeInformation( "c:\" , @cVolName, @nSerNum , @nMaxName , @nFlags , @cFATName )
+   IF GetVolumeInformation( "c:\" , @cVolName, @nSerNum , @nMaxName , @nFlags , @cFATName )
 
-		cDiskSerial := I2Hex( nSerNum / 65535 ) + "-" + I2Hex( nSerNum )
+      cDiskSerial := I2Hex( nSerNum / 65535 ) + "-" + I2Hex( nSerNum )
 
-		cInfo += "Drive Name :" + TAB + "C:" + CRLF
-		cInfo += "Volume Name :" + TAB + cVolName + CRLF
-		cInfo += "Serial Number :" + TAB + cDiskSerial + CRLF
-		cInfo += "File System :" + TAB + cFATName
-	EndIf
+      cInfo += "Drive Name :" + TAB + "C:" + CRLF
+      cInfo += "Volume Name :" + TAB + cVolName + CRLF
+      cInfo += "Serial Number :" + TAB + cDiskSerial + CRLF
+      cInfo += "File System :" + TAB + cFATName
+   ENDIF
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 300 ;
-		TITLE 'Volume Information' ;
-		ICON "HD.ICO" ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 300 ;
+         TITLE 'Volume Information' ;
+         ICON "HD.ICO" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
-		@ 10,10 BUTTON Button1 CAPTION "Get Info" ACTION IF(Empty(cInfo), MsgStop( "Error!" ), MsgInfo( cInfo )) DEFAULT
+      @ 10,10 BUTTON Button1 CAPTION "Get Info" ACTION IF(Empty(cInfo), MsgStop( "Error!" ), MsgInfo( cInfo )) DEFAULT
 
-		@ 50,10 BUTTON Button2 CAPTION "Close" ACTION ThisWindow.Release
+      @ 50,10 BUTTON Button2 CAPTION "Close" ACTION ThisWindow.Release
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Win_1
+   CENTER WINDOW Win_1
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -121,3 +121,4 @@ HB_FUNC(GETVOLUMEINFORMATION)
 }
 
 #pragma ENDDUMP
+

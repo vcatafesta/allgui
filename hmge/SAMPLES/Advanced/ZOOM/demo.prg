@@ -1,22 +1,19 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2012 Rossine <qiinfo@ig.com.br>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2012 Rossine <qiinfo@ig.com.br>
 */
 
 #include "minigui.ch"
 
 #define SRCCOPY  0x00CC0020
 
-**************
 PROCEDURE Main
-**************
 
    DEFINE WINDOW Form_1 ;
-      MAIN ;
-      CLIENTAREA 550, 350 ;
-      TITLE 'Zoom' ;
-      NOMAXIMIZE NOSIZE
+         MAIN ;
+         CLIENTAREA 550, 350 ;
+         TITLE 'Zoom' ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE LABEL Label_1
          ROW 5
@@ -46,13 +43,13 @@ PROCEDURE Main
 
          POPUP 'Zoom'
 
-         ITEM 'Factor 1' NAME Factor1 ACTION check_menu( 1 )
-         ITEM 'Factor 2' NAME Factor2 ACTION check_menu( 2 )
-         ITEM 'Factor 3' NAME Factor3 ACTION check_menu( 3 ) CHECKED
-         ITEM 'Factor 4' NAME Factor4 ACTION check_menu( 4 )
-         ITEM 'Factor 5' NAME Factor5 ACTION check_menu( 5 )
-         SEPARATOR
-         ITEM 'Exit' ACTION Form_1.Release
+            ITEM 'Factor 1' NAME Factor1 ACTION check_menu( 1 )
+            ITEM 'Factor 2' NAME Factor2 ACTION check_menu( 2 )
+            ITEM 'Factor 3' NAME Factor3 ACTION check_menu( 3 ) CHECKED
+            ITEM 'Factor 4' NAME Factor4 ACTION check_menu( 4 )
+            ITEM 'Factor 5' NAME Factor5 ACTION check_menu( 5 )
+            SEPARATOR
+            ITEM 'Exit' ACTION Form_1.Release
 
          END POPUP
 
@@ -68,11 +65,9 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-*************************************
 STATIC FUNCTION check_menu( nFactor )
-*************************************
 
    LOCAL n
 
@@ -80,11 +75,9 @@ STATIC FUNCTION check_menu( nFactor )
       SetProperty( "Form_1", "Factor" + Str( n, 1 ), "Checked", ( n == nFactor ) )
    NEXT
 
-RETURN NIL
+   RETURN NIL
 
-*************************
 STATIC FUNCTION GetZoom()
-*************************
 
    LOCAL n
    LOCAL nZoom := 3
@@ -96,11 +89,9 @@ STATIC FUNCTION GetZoom()
       ENDIF
    NEXT
 
-RETURN nZoom
+   RETURN nZoom
 
-***************************
 STATIC FUNCTION ZoomImage()
-***************************
 
    LOCAL nZoom
    LOCAL hDeskTop
@@ -147,14 +138,13 @@ STATIC FUNCTION ZoomImage()
    Lineto( hDC, nLeft + nWidth + 1, nTop + nHeight / 2 + 1 )
 
    SelectObject( hDC, hOldPen )
-   DeleteObject( hPen )
+   DELETEObject( hPen )
 
    ReleaseDC( hWnd, hDC )
 
    ReleaseDC( 0, hDeskTop )
 
-RETURN NIL
-
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -182,3 +172,4 @@ HB_FUNC( GETPIXEL )
 }
 
 #pragma ENDDUMP
+

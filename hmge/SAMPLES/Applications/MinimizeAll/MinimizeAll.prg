@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2010 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2010 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -14,89 +13,88 @@ ANNOUNCE RDDSYS
 
 #define WS_EX_TOOLWINDOW        0x00000080
 
-*--------------------------------------------------------*
-Function Main
-*--------------------------------------------------------*
-   Local hRegionHandle
-   Local aWinSize := BmpSize( "BUTTON" )
-   Local nTop := GetDesktopHeight() - GetTaskBarHeight() - aWinSize [2]
-   Local nLeft := 0
+FUNCTION Main
 
-	SET MULTIPLE OFF WARNING
+   LOCAL hRegionHandle
+   LOCAL aWinSize := BmpSize( "BUTTON" )
+   LOCAL nTop := GetDesktopHeight() - GetTaskBarHeight() - aWinSize [2]
+   LOCAL nLeft := 0
 
-	DEFINE WINDOW Form_1 ;
-		AT nTop, nLeft ;
-		WIDTH aWinSize [1] ;
-		HEIGHT aWinSize [2] ;
-		MAIN ;
-		TOPMOST ;
-		NOCAPTION ;
-		NOSIZE ;
-		ON INIT ( SET REGION OF Form_1 BITMAP BUTTON ;
-			TRANSPARENT COLOR FUCHSIA TO hRegionHandle ) ;
-		ON RELEASE DeleteObject( hRegionHandle )
+   SET MULTIPLE OFF WARNING
 
-		@ 0,0 IMAGE Image_1 ;
-			PICTURE 'BUTTON' ;
-			WIDTH Form_1.Width HEIGHT Form_1.Height ;
-			ACTION Keybd_Win_D()
+   DEFINE WINDOW Form_1 ;
+         AT nTop, nLeft ;
+         WIDTH aWinSize [1] ;
+         HEIGHT aWinSize [2] ;
+         MAIN ;
+         TOPMOST ;
+         NOCAPTION ;
+         NOSIZE ;
+         ON INIT ( SET REGION OF Form_1 BITMAP BUTTON ;
+         TRANSPARENT COLOR FUCHSIA TO hRegionHandle ) ;
+         ON RELEASE DeleteObject( hRegionHandle )
 
-		DEFINE CONTEXT MENU CONTROL Image_1
-			MENUITEM "About" ACTION MsgInfo(PROGRAM + VERSION + CRLF + CRLF + COPYRIGHT, "About")
-			SEPARATOR
-			MENUITEM "Exit" ACTION Form_1.Release
-		END MENU
+      @ 0,0 IMAGE Image_1 ;
+         PICTURE 'BUTTON' ;
+         WIDTH Form_1.Width HEIGHT Form_1.Height ;
+         ACTION Keybd_Win_D()
 
-	END WINDOW
+      DEFINE CONTEXT MENU CONTROL Image_1
+         MENUITEM "About" ACTION MsgInfo(PROGRAM + VERSION + CRLF + CRLF + COPYRIGHT, "About")
+         SEPARATOR
+         MENUITEM "Exit" ACTION Form_1.Release
+      END MENU
 
-	/* Remove the program button from Task Bar via changing a Main window style
-	*/
-	ChangeStyle( Application.Handle, WS_EX_TOOLWINDOW, , .t. )
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   /* Remove the program button from Task Bar via changing a Main window style
+   */
+   ChangeStyle( Application.Handle, WS_EX_TOOLWINDOW, , .t. )
 
-Return Nil
+   ACTIVATE WINDOW Form_1
 
+   RETURN NIL
 
 #pragma BEGINDUMP
 
 #include <windows.h>
 #include "hbapi.h"
 
-#define VK_D	68
+#define VK_D   68
 
 HB_FUNC( KEYBD_WIN_D )
 {
-	keybd_event(
-		VK_LWIN,	// virtual-key code
-		0,		// hardware scan code
-		0,		// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
+   keybd_event(
+      VK_LWIN,   // virtual-key code
+      0,      // hardware scan code
+      0,      // flags specifying various function options
+      0      // additional data associated with keystroke
+   );
 
-	keybd_event(
-		VK_D,		// virtual-key code
-		0,		// hardware scan code
-		0,		// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
+   keybd_event(
+      VK_D,      // virtual-key code
+      0,      // hardware scan code
+      0,      // flags specifying various function options
+      0      // additional data associated with keystroke
+   );
 
-	keybd_event
-	(
-		VK_D,		// virtual-key code
-		0,		// hardware scan code
-		KEYEVENTF_KEYUP,// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
+   keybd_event
+   (
+      VK_D,      // virtual-key code
+      0,      // hardware scan code
+      KEYEVENTF_KEYUP,// flags specifying various function options
+      0      // additional data associated with keystroke
+   );
 
-	keybd_event
-	(
-		VK_LWIN,	// virtual-key code
-		0,		// hardware scan code
-		KEYEVENTF_KEYUP,// flags specifying various function options
-		0		// additional data associated with keystroke
-	);
+   keybd_event
+   (
+      VK_LWIN,   // virtual-key code
+      0,      // hardware scan code
+      KEYEVENTF_KEYUP,// flags specifying various function options
+      0      // additional data associated with keystroke
+   );
 
 }
 
 #pragma ENDDUMP
+

@@ -1,8 +1,7 @@
 /*
- * A simple example of some of the features of the hbLpng/MiniGUI library.
- *
- * Copyright 2017 (C) P.Chornyj <myorg63@mail.ru>
- */
+* A simple example of some of the features of the hbLpng/MiniGUI library.
+* Copyright 2017 (C) P.Chornyj <myorg63@mail.ru>
+*/
 
 ANNOUNCE RDDSYS
 
@@ -10,8 +9,6 @@ ANNOUNCE RDDSYS
 #include "i_winuser.ch"
 
 MEMVAR hPng1, hPng2, hPng3, hPng4
-
-//////////////////////////////////////////////////////////
 
 PROCEDURE main()
 
@@ -25,49 +22,47 @@ PROCEDURE main()
    hPng4 := hmg_LoadPng( 'IMAGE1', 'PNG',, .T.  )
 
    DEFINE WINDOW Form_1 ;
-      BACKCOLOR WHITE ;
-      CLIENTAREA 400, 220 ;
-      TITLE 'PNG with Alpha Channel sample (Lpng)' ;
-      WINDOWTYPE MAIN ;
-      NOMAXIMIZE ;
-      NOSIZE ;
-      ON RELEASE ;
-      ( ;
-         DeleteObject( hPng1 ), DeleteObject( hPng2 ), ;
-         DeleteObject( hPng3 ), DeleteObject( hPng4 ) ;
-      ) ;
+         BACKCOLOR WHITE ;
+         CLIENTAREA 400, 220 ;
+         TITLE 'PNG with Alpha Channel sample (Lpng)' ;
+         WINDOWTYPE MAIN ;
+         NOMAXIMIZE ;
+         NOSIZE ;
+         ON RELEASE ;
+         ( ;
+         DELETEObject( hPng1 ), DeleteObject( hPng2 ), ;
+         DELETEObject( hPng3 ), DeleteObject( hPng4 ) ;
+         ) ;
 
       ON KEY ESCAPE ACTION ThisWindow.Release
 
       DEFINE MAIN MENU
          POPUP 'BkColor'
-            ITEM 'YELLOW'     Action ChangeBkClr( YELLOW )  
-            ITEM 'PINK'       Action ChangeBkClr( PINK   )  
-            ITEM 'RED'        Action ChangeBkClr( RED    )  
-            ITEM 'FUCHSIA'    Action ChangeBkClr( FUCHSIA)  
-            ITEM 'BROWN'      Action ChangeBkClr( BROWN  )  
-            ITEM 'ORANGE'     Action ChangeBkClr( ORANGE )  
-            ITEM 'LGREEN'     Action ChangeBkClr( LGREEN )  
-            ITEM 'PURPLE'     Action ChangeBkClr( PURPLE )  
-            ITEM 'BLACK'      Action ChangeBkClr( BLACK  )  
-            ITEM 'WHITE'      Action ChangeBkClr( WHITE  )  
-            ITEM 'GRAY'       Action ChangeBkClr( GRAY   )  
-            ITEM 'BLUE'       Action ChangeBkClr( BLUE   )  
-            ITEM 'Custom CLR' Action ChangeBkClr( { 127,255,127 } )  
+            ITEM 'YELLOW'     Action ChangeBkClr( YELLOW )
+            ITEM 'PINK'       Action ChangeBkClr( PINK   )
+            ITEM 'RED'        Action ChangeBkClr( RED    )
+            ITEM 'FUCHSIA'    Action ChangeBkClr( FUCHSIA)
+            ITEM 'BROWN'      Action ChangeBkClr( BROWN  )
+            ITEM 'ORANGE'     Action ChangeBkClr( ORANGE )
+            ITEM 'LGREEN'     Action ChangeBkClr( LGREEN )
+            ITEM 'PURPLE'     Action ChangeBkClr( PURPLE )
+            ITEM 'BLACK'      Action ChangeBkClr( BLACK  )
+            ITEM 'WHITE'      Action ChangeBkClr( WHITE  )
+            ITEM 'GRAY'       Action ChangeBkClr( GRAY   )
+            ITEM 'BLUE'       Action ChangeBkClr( BLUE   )
+            ITEM 'Custom CLR' Action ChangeBkClr( { 127,255,127 } )
 
-            SEPARATOR                       
+            SEPARATOR
             ITEM 'Exit'       ACTION Form_1.Release
          END POPUP
       END MENU
-  
+
    END WINDOW
 
    CENTER   WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
    RETURN
-
-//////////////////////////////////////////////////////////
 
 FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
@@ -83,8 +78,6 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    RETURN result
 
-//////////////////////////////////////////////////////////
-
 STATIC PROCEDURE ChangeBkClr( aBackColor )
 
    Form_1.BackColor := aBackColor
@@ -92,8 +85,6 @@ STATIC PROCEDURE ChangeBkClr( aBackColor )
    InvalidateRect( Form_1.Handle, 1 )
 
    RETURN
-
-//////////////////////////////////////////////////////////
 
 #pragma BEGINDUMP
 
@@ -108,7 +99,7 @@ HB_FUNC( APP_ONPAINT )
    HDC hdc_mem;
 
    if( IsWindow( hwnd ) )
-   {      
+   {
       hdc     = BeginPaint( hwnd, &ps );
       hdc_mem = CreateCompatibleDC( hdc );
       {
@@ -137,3 +128,4 @@ HB_FUNC( APP_ONPAINT )
 }
 
 #pragma ENDDUMP
+

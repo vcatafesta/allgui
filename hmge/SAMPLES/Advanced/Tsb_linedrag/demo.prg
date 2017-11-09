@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Author: Igor Nazarov
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Author: Igor Nazarov
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -41,31 +39,30 @@ PROCEDURE Main
    END
 
    DEFINE WINDOW Form_0 ;
-      At 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 400 ;
-      TITLE "TsBrowse Save/Restore Settings Demo" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      ON RELEASE dbCloseArea( "TEST" )
+         At 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 400 ;
+         TITLE "TsBrowse Save/Restore Settings Demo" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON RELEASE dbCloseArea( "TEST" )
 
-   DEFINE STATUSBAR
-      STATUSITEM "Item 1" WIDTH 0
-      STATUSITEM "TsBrowse Power Ready" WIDTH 230 FONTCOLOR BLUE
-      DATE
-      CLOCK
-      KEYBOARD
-   END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM "Item 1" WIDTH 0
+         STATUSITEM "TsBrowse Power Ready" WIDTH 230 FONTCOLOR BLUE
+         DATE
+         CLOCK
+         KEYBOARD
+      END STATUSBAR
 
-   CreateBrowse()
+      CreateBrowse()
 
    END WINDOW
 
    DoMethod( "Form_0", "Center" )
    DoMethod( "Form_0", "Activate" )
 
-RETURN
-
+   RETURN
 
 FUNCTION CreateBrowse()
 
@@ -77,48 +74,47 @@ FUNCTION CreateBrowse()
       OF Form_0 ;
       WIDTH Form_0.Width - 2 * GetBorderWidth() ;
       HEIGHT Form_0.Height - GetTitleHeight() - ;
-         GetProperty( "Form_0", "StatusBar", "Height" ) - 2 * GetBorderHeight() ;
+      GetProperty( "Form_0", "StatusBar", "Height" ) - 2 * GetBorderHeight() ;
       GRID ;
       COLORS { CLR_BLACK, CLR_BLUE } ;
       FONT "MS Sans Serif" ;
       SIZE 8
 
-      :SetAppendMode( .F. )
-      :SetDeleteMode( .F. )
+   :SetAppendMode( .F. )
+   :SetDeleteMode( .F. )
 
-      :lNoHScroll  := .T.
-      :lCellBrw    := .F.
-      :lInsertMode := .T.
+   :lNoHScroll  := .T.
+   :lCellBrw    := .F.
+   :lInsertMode := .T.
 
-   END TBROWSE
+END TBROWSE
 
-   // Restoring settings from INI
-   ReadSettings( oBrw )
+// Restoring settings from INI
+READSettings( oBrw )
 
-   oBrw:nWheelLines  := 1
-   oBrw:nClrLine     := COLOR_GRID
-   oBrw:lNoChangeOrd := TRUE
-   oBrw:lCellBrw     := TRUE
-   oBrw:lNoVScroll   := TRUE
-   oBrw:hBrush       := CreateSolidBrush( 242, 245, 204 )
+oBrw:nWheelLines  := 1
+oBrw:nClrLine     := COLOR_GRID
+oBrw:lNoChangeOrd := TRUE
+oBrw:lCellBrw     := TRUE
+oBrw:lNoVScroll   := TRUE
+oBrw:hBrush       := CreateSolidBrush( 242, 245, 204 )
 
-   // prepare for showing of Double cursor
-   AEval( oBrw:aColumns, {| oCol | oCol:lFixLite := oCol:lEdit := TRUE } )
+// prepare for showing of Double cursor
+AEval( oBrw:aColumns, {| oCol | oCol:lFixLite := oCol:lEdit := TRUE } )
 
-   oBrw:nHeightCell += 10
-   oBrw:nHeightHead += 5
+oBrw:nHeightCell += 10
+oBrw:nHeightHead += 5
 
-   oBrw:SetColor( { 1 }, { RGB( 0, 12, 120 ) } )
-   oBrw:SetColor( { 2 }, { RGB( 242, 245, 204 ) } )
-   oBrw:SetColor( { 5 }, { RGB( 0, 0, 0 ) } )
-   oBrw:SetColor( { 6 }, { { | a, b, oBr | IF( oBr:nCell == b, { RGB( 66, 255, 236 ), RGB( 111, 183, 155 ) }, ;
-      { RGB( 255, 255, 255 ), RGB( 200, 200, 200 ) } ) } } )  // cursor backcolor
+oBrw:SetColor( { 1 }, { RGB( 0, 12, 120 ) } )
+oBrw:SetColor( { 2 }, { RGB( 242, 245, 204 ) } )
+oBrw:SetColor( { 5 }, { RGB( 0, 0, 0 ) } )
+oBrw:SetColor( { 6 }, { { | a, b, oBr | IF( oBr:nCell == b, { RGB( 66, 255, 236 ), RGB( 111, 183, 155 ) }, ;
+   { RGB( 255, 255, 255 ), RGB( 200, 200, 200 ) } ) } } )  // cursor backcolor
 
-   oBrw:bLineDrag    := { | a, b, oBr | SaveSettings( a, b, oBr, "Width" ) }
-   oBrw:bColDrag     := { | a, b, oBr | SaveSettings( a, b, oBr, "Position" ) }
+oBrw:bLineDrag    := { | a, b, oBr | SaveSettings( a, b, oBr, "Width" ) }
+oBrw:bColDrag     := { | a, b, oBr | SaveSettings( a, b, oBr, "Position" ) }
 
 RETURN NIL
-
 
 STATIC FUNCTION SaveSettings( a, b, oBr, cKey )
 
@@ -140,8 +136,7 @@ STATIC FUNCTION SaveSettings( a, b, oBr, cKey )
 
    MsgInfo( iif( Upper( cKey ) == "WIDTH", "Width changed and stored in INI", "Position changed and stored in INI" ) )
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION ReadSettings( oBrw )
 
@@ -186,9 +181,10 @@ STATIC FUNCTION ReadSettings( oBrw )
    oBrw:SetColSize( oBrw:nColumn( "F4" ), CTON( hIni[ "F4" ][ "Width" ] ) )
 
    // Set columns header
-   oBrw:GetColumn( "F1" ):cHeading := hIni[ "F1" ][ "Heading" ] 
-   oBrw:GetColumn( "F2" ):cHeading := hIni[ "F2" ][ "Heading" ] 
-   oBrw:GetColumn( "F3" ):cHeading := hIni[ "F3" ][ "Heading" ] 
-   oBrw:GetColumn( "F4" ):cHeading := hIni[ "F4" ][ "Heading" ] 
+   oBrw:GetColumn( "F1" ):cHeading := hIni[ "F1" ][ "Heading" ]
+   oBrw:GetColumn( "F2" ):cHeading := hIni[ "F2" ][ "Heading" ]
+   oBrw:GetColumn( "F3" ):cHeading := hIni[ "F3" ][ "Heading" ]
+   oBrw:GetColumn( "F4" ):cHeading := hIni[ "F4" ][ "Heading" ]
 
-RETURN NIL
+   RETURN NIL
+

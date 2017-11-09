@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 * Value property selects a record by its number (RecNo())
@@ -22,84 +21,88 @@
 
 #include "minigui.ch"
 
-Function Main
-	Local bColor := { || if ( recno()/2 == int(recno()/2) , { 255,255,255 } , { 240,240,240 } ) }	
+FUNCTION Main
 
-	SET CENTURY ON
+   LOCAL bColor := { || if ( recno()/2 == int(recno()/2) , { 255,255,255 } , { 240,240,240 } ) }
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'MiniGUI Browse Demo ' ;
-		MAIN NOMAXIMIZE ;
-		ON INIT OpenTables() ;
-		ON RELEASE CloseTables()
+   SET CENTURY ON
 
-		DEFINE MAIN MENU
-			POPUP 'File'
-				ITEM 'Set Browse Value'	ACTION Form_1.Browse_1.Value := 500
-				ITEM 'Get Browse Value'	ACTION MsgInfo ( Str ( Form_1.Browse_1.Value ) )
-				ITEM 'Refresh Browse'	ACTION Form_1.Browse_1.Refresh
-				SEPARATOR
-				ITEM 'Exit'		ACTION Form_1.Release
-			END POPUP
-			POPUP 'Help'
-				ITEM 'About'		ACTION MsgInfo ("MiniGUI Browse Demo")
-			END POPUP
-		END MENU
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI Browse Demo ' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT OpenTables() ;
+         ON RELEASE CloseTables()
 
-		DEFINE STATUSBAR
-			STATUSITEM 'Edit Record, Change "TYPE" and Bitmap will be Updated'
-		END STATUSBAR
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Set Browse Value'   ACTION Form_1.Browse_1.Value := 500
+            ITEM 'Get Browse Value'   ACTION MsgInfo ( Str ( Form_1.Browse_1.Value ) )
+            ITEM 'Refresh Browse'   ACTION Form_1.Browse_1.Refresh
+            SEPARATOR
+            ITEM 'Exit'      ACTION Form_1.Release
+         END POPUP
+         POPUP 'Help'
+            ITEM 'About'      ACTION MsgInfo ("MiniGUI Browse Demo")
+         END POPUP
+      END MENU
 
-		@ 10,10 BROWSE Browse_1									;
-		WIDTH 610  										;
-		HEIGHT 390 										;
-                HEADERS { 'Type', 'First Name' , 'Last Name', 'Birth Date',  'Biography' } ;
-		WIDTHS { 22, 150 , 150 , 150 , 116 } ;
-		WORKAREA Test ;
-		FIELDS { 'Test->Types' , 'Test->First' , 'Test->Last' , 'Test->Birth' ,  'Test->Bio' } ;
-		VALUE 1 ;
-		DYNAMICBACKCOLOR { , bColor, bColor, bColor, bColor } ;
-		FONT "MS Sans Serif" SIZE 9;
-		EDIT ;
-		NOLINES ;
-		IMAGE {"br0","br1","br2","br3","br4","br5","br6","br7","br8","br9"};
-		JUSTIFY { ,, BROWSE_JTFY_CENTER, } // BROWSE_JTFY_LEFT por defecto, no es necesario escribirlo
+      DEFINE STATUSBAR
+         STATUSITEM 'Edit Record, Change "TYPE" and Bitmap will be Updated'
+      END STATUSBAR
 
-	END WINDOW
+      @ 10,10 BROWSE Browse_1                           ;
+         WIDTH 610                                ;
+         HEIGHT 390                               ;
+         HEADERS { 'Type', 'First Name' , 'Last Name', 'Birth Date',  'Biography' } ;
+         WIDTHS { 22, 150 , 150 , 150 , 116 } ;
+         WORKAREA Test ;
+         FIELDS { 'Test->Types' , 'Test->First' , 'Test->Last' , 'Test->Birth' ,  'Test->Bio' } ;
+         VALUE 1 ;
+         DYNAMICBACKCOLOR { , bColor, bColor, bColor, bColor } ;
+         FONT "MS Sans Serif" SIZE 9;
+         EDIT ;
+         NOLINES ;
+         IMAGE {"br0","br1","br2","br3","br4","br5","br6","br7","br8","br9"};
+         JUSTIFY { ,, BROWSE_JTFY_CENTER, } // BROWSE_JTFY_LEFT por defecto, no es necesario escribirlo
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return Nil
+   ACTIVATE WINDOW Form_1
 
-Procedure OpenTables()
-/*
-	Use test
-	zap
+   RETURN NIL
 
-	For i:= 1 To 500000
-		append blank
-		Replace code with i
-		Replace First With 'First Name '+ Str(i)
-		Replace Last With 'Last Name '+ Str(i)
-		Replace Married With .t.
-		replace birth with date()+i-10000
-	Next i
+PROCEDURE OpenTables()
 
-	Index On Code To Code
-	Use
+   /*
+   Use test
+   zap
 
-*/
-	Use test New
+   For i:= 1 To 500000
+   append blank
+   Replace code with i
+   Replace First With 'First Name '+ Str(i)
+   Replace Last With 'Last Name '+ Str(i)
+   Replace Married With .t.
+   replace birth with date()+i-10000
+   Next i
 
-	Form_1.Title := Form_1.Title + '(' + Ltrim(Str(Test->(LastRec()))) + ' Records)'
+   Index On Code To Code
+   Use
 
-Return
+   */
+   USE test New
 
-Procedure CloseTables()
-	Use
-Return
+   Form_1.Title := Form_1.Title + '(' + Ltrim(Str(Test->(LastRec()))) + ' Records)'
+
+   RETURN
+
+PROCEDURE CloseTables()
+
+   USE
+
+   RETURN
 

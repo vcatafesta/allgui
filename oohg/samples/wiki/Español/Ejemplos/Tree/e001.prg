@@ -1,27 +1,24 @@
 /*
- * Ejemplo Tree n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra como:
- *    Arrastrar y soltar entre dos controles TREE.
- *    Utilizar los métodos EditLabel, Expand, FirstVisible,
- *    IsItemExpanded, IsItemVisible, ItemCount, ItemDraggable,
- *    ItemEnabled, ItemHeight, ItemVisible, LastVisible,
- *    NextVisible, Value y VisibleCount.
- *    Obtener los items visibles y los actualmente mostrados
- *    en la ventana del control.
- *    Obtener los números de referencia de los items visibles
- *    y los números de referencia de los items actualmente
- *    mostrados en la ventana del control.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * El archivo de recursos y las imágenes pueden descargarse desde:
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Tree
- */
+* Ejemplo Tree n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra como:
+*    Arrastrar y soltar entre dos controles TREE.
+*    Utilizar los métodos EditLabel, Expand, FirstVisible,
+*    IsItemExpanded, IsItemVisible, ItemCount, ItemDraggable,
+*    ItemEnabled, ItemHeight, ItemVisible, LastVisible,
+*    NextVisible, Value y VisibleCount.
+*    Obtener los items visibles y los actualmente mostrados
+*    en la ventana del control.
+*    Obtener los números de referencia de los items visibles
+*    y los números de referencia de los items actualmente
+*    mostrados en la ventana del control.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* El archivo de recursos y las imágenes pueden descargarse desde:
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Tree
+*/
 
 #include "oohg.ch"
 
@@ -32,25 +29,25 @@ FUNCTION Main
    SET LANGUAGE TO SPANISH
 
    DEFINE WINDOW Form_1 OBJ oForm ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 530 ;
-      TITLE 'Tree - Arrastrar/Soltar y otras cosas' ;
-      MAIN
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 530 ;
+         TITLE 'Tree - Arrastrar/Soltar y otras cosas' ;
+         MAIN
 
       DEFINE TREE Tree_1 OBJ oTree1 ;
-         AT 10,10 ;
-         WIDTH 300 ;
-         HEIGHT 202 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WINDOW", "WATCH"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         SELBOLD ;
-         INDENT 25 ;
-         VALUE 1 ;
-         BACKCOLOR YELLOW
+            AT 10,10 ;
+            WIDTH 300 ;
+            HEIGHT 202 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WINDOW", "WATCH"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            SELBOLD ;
+            INDENT 25 ;
+            VALUE 1 ;
+            BACKCOLOR YELLOW
 
          ON KEY F2 OF (oTree1) ACTION {|| Form_1.Tree_1.EditLabel }
 
@@ -60,9 +57,9 @@ FUNCTION Main
                   NODE 'T1 Item ' + LTRIM(STR(i)) + '.' + LTRIM(STR(j))
                      FOR k := 1 TO 5
                         TREEITEM 'T1 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k))
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k))
                      NEXT
                   END NODE
                NEXT
@@ -81,19 +78,18 @@ FUNCTION Main
       Form_1.Tree_1.ItemEnabled(5, .F.)
       Form_1.Tree_1.ItemEnabled(6, .F.)
 
-
       DEFINE TREE Tree_2 OBJ oTree2 ;
-         AT 10,320 ;
-         WIDTH 300 ;
-         HEIGHT 200 ;
-         ENABLEDRAG ;
-         ENABLEDROP ;
-         TARGET { {|| oTree1 }, {|| oTree2 } } ;
-         NODEIMAGES {"WATCH", "WINDOW"} ;
-         ITEMIMAGES {"LED_OFF", "LED_ON"} ;
-         VALUE 1 ;
-         SELBOLD ;
-         INDENT 25 ;
+            AT 10,320 ;
+            WIDTH 300 ;
+            HEIGHT 200 ;
+            ENABLEDRAG ;
+            ENABLEDROP ;
+            TARGET { {|| oTree1 }, {|| oTree2 } } ;
+            NODEIMAGES {"WATCH", "WINDOW"} ;
+            ITEMIMAGES {"LED_OFF", "LED_ON"} ;
+            VALUE 1 ;
+            SELBOLD ;
+            INDENT 25 ;
 
          ON KEY F2 OF (oTree2) ACTION {|| Form_1.Tree_2.EditLabel }
 
@@ -103,9 +99,9 @@ FUNCTION Main
                   NODE 'T2 Item ' + LTRIM(STR(i)) + '.' + LTRIM(STR(j))
                      FOR k := 1 TO 5
                         TREEITEM 'T2 Item ' + ;
-                                 LTRIM(STR(i)) + '.' + ;
-                                 LTRIM(STR(j)) + '.' + ;
-                                 LTRIM(STR(k))
+                           LTRIM(STR(i)) + '.' + ;
+                           LTRIM(STR(j)) + '.' + ;
+                           LTRIM(STR(k))
                      NEXT
                   END NODE
                NEXT
@@ -190,12 +186,14 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * cómo saber si un ítem está expandido.
- */
+   /*
+   * cómo saber si un ítem está expandido.
+   */
+
 FUNCTION EstaExpandido( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Ítem a verificar'))
@@ -206,38 +204,42 @@ FUNCTION EstaExpandido( oTree )
       MsgStop( "Ítem no valido !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * Ítems que son visible ahora o que serán visibles
- * cuando se haga scroll del control.
- */
+   /*
+   * Ítems que son visible ahora o que serán visibles
+   * cuando se haga scroll del control.
+   */
+
 FUNCTION ItemsVisibles( oTree )
-  LOCAL i, Item, lFound
 
-  i := 1
-  Item := oTree:FirstVisible()
-  lFound := .F.
+   LOCAL i, Item, lFound
 
-  DO WHILE Item # 0
-     AutoMsgBox(Item)
+   i := 1
+   Item := oTree:FirstVisible()
+   lFound := .F.
 
-     i ++
-     lFound := .T.
+   DO WHILE Item # 0
+      AutoMsgBox(Item)
 
-     Item := oTree:NextVisible(Item)
-  ENDDO
+      i ++
+      lFound := .T.
 
-  IF ! lFound
-     MsgBox("No existen ítems visibles !!!")
-  ENDIF
+      Item := oTree:NextVisible(Item)
+   ENDDO
 
-RETURN NIL
+   IF ! lFound
+      MsgBox("No existen ítems visibles !!!")
+   ENDIF
 
-/*
- * cómo mostrar un ítem
- */
+   RETURN NIL
+
+   /*
+   * cómo mostrar un ítem
+   */
+
 FUNCTION MostrarItem( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Item a mostrar'))
@@ -248,38 +250,42 @@ FUNCTION MostrarItem( oTree )
       MsgStop( "Ítem no valido!!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/* Ítems que se muestran ahora.
- * El segundo parámetro en IsItemVisible indica si el método
- * debe considerar visible a un item mostrado parcialmente.
- */
+   /* Ítems que se muestran ahora.
+   * El segundo parámetro en IsItemVisible indica si el método
+   * debe considerar visible a un item mostrado parcialmente.
+   */
+
 FUNCTION ItemsEnLaVentana( oTree )
-  LOCAL i, Item, Partial, lFound
 
-  i := 1
-  Item := oTree:FirstVisible()
-  lFound := .F.
+   LOCAL i, Item, Partial, lFound
 
-  DO WHILE Item # 0 .AND. oTree:IsItemVisible(Item, .F.)
-     AutoMsgBox({Item, IF(oTree:IsItemVisible(Item, .T.), ;
-                          "completo", "parcial")})
-     i ++
-     lFound := .T.
+   i := 1
+   Item := oTree:FirstVisible()
+   lFound := .F.
 
-     Item := oTree:NextVisible(Item)
-  ENDDO
+   DO WHILE Item # 0 .AND. oTree:IsItemVisible(Item, .F.)
+      AutoMsgBox({Item, IF(oTree:IsItemVisible(Item, .T.), ;
+         "completo", "parcial")})
+      i ++
+      lFound := .T.
 
-  IF ! lFound
-     MsgBox("No se muestran ítems en la ventana !!!")
-  ENDIF
+      Item := oTree:NextVisible(Item)
+   ENDDO
 
-RETURN NIL
+   IF ! lFound
+      MsgBox("No se muestran ítems en la ventana !!!")
+   ENDIF
 
-/*
- * cómo saber si un ítem esta visible (esté o no en la ventana)
- */
+   RETURN NIL
+
+   /*
+   * cómo saber si un ítem esta visible (esté o no en la ventana)
+   */
+
 FUNCTION EstaVisible( oTree )
+
    LOCAL uItem
 
    uItem := VAL(InputBox('Ítem a verificar'))
@@ -290,11 +296,13 @@ FUNCTION EstaVisible( oTree )
       MsgStop( "Ítem no valido !!!" )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ColorToCode( aColor )
-RETURN aColor[3] * 256 * 256 + aColor[2] * 256 + aColor[1]
 
-/*
- * EOF
- */
+   RETURN aColor[3] * 256 * 256 + aColor[2] * 256 + aColor[1]
+
+   /*
+   * EOF
+   */
+

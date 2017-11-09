@@ -2,7 +2,6 @@
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-///////////////////////////////////////////////////////////////////////////
 #define WM_APP       0x8000
 
 #define ev_Fire1     (WM_USER + 100)
@@ -10,10 +9,9 @@
 #define ev_Fire3     (WM_APP + 2)
 #define ev_FireOnce  (WM_APP + 64)
 
-///////////////////////////////////////////////////////////////////////////
 FUNCTION Main(...)
 
-   LOCAL hwnd 
+   LOCAL hwnd
 
    LOCAL bEvent1 := {|h,m| HB_SYMBOL_UNUSED(h), MsgInfo('ID:'+hb_NtoS(m), 'Event fired:[1]')}
    LOCAL bEvent2 := {|h,m| HB_SYMBOL_UNUSED(h), MsgInfo('ID:'+hb_NtoS(m), 'Event fired:[2]')}
@@ -39,10 +37,10 @@ FUNCTION Main(...)
    // REMOVE WINEVENT ALL OF ThisWindow.Handle ONCE
 
    DEFINE WINDOW WinMain ;
-      CLIENTAREA 600, 400 ;
-      TITLE 'WndEvents(HWND_MESSAGE) Demo-3' ;
-      MAIN ;
-      ON RELEASE DestroyWindow( hwnd )
+         CLIENTAREA 600, 400 ;
+         TITLE 'WndEvents(HWND_MESSAGE) Demo-3' ;
+         MAIN ;
+         ON RELEASE DestroyWindow( hwnd )
 
       DEFINE BUTTONEX FireButton1
          ROW      290
@@ -103,33 +101,31 @@ FUNCTION Main(...)
    WinMain.Center
    WinMain.Activate
 
-RETURN 0
+   RETURN 0
 
-//////////////////////////////////////////////////////////////////////////////
 STATIC PROCEDURE GetInfo( hwnd, lOnce )
 
    LOCAL aInfo := GetAppEventsInfo( hwnd,lOnce )
    LOCAL cMsgs
 
-   IF ! Empty( aInfo )   
-#ifndef __XHARBOUR__
+   IF ! Empty( aInfo )
+      #ifndef __XHARBOUR__
       cMsgs := hb_strFormat ;
-      ( ;
+         ( ;
          e"Holder:\t\t%d\nCount of events:\t%d\nUsed events:\t%d\nStatus:\t\t%s", ;
          aInfo[1], aInfo[2], aInfo[3], Iif( aInfo[4], "active", "not active" ) ;
-      )
-#else
+         )
+      #else
       cMsgs := "" // FIXME
-#endif
+      #endif
    ELSE
       cMsgs := "Not Installed."
    ENDIF
 
    MsgInfo( cMsgs, If( lOnce, "Once", "On" ) )
 
-RETURN
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////
 FUNCTION MyWndEvents( hWnd, message, ... )
 
    LOCAL result := 0
@@ -142,4 +138,5 @@ FUNCTION MyWndEvents( hWnd, message, ... )
       result := 1
    ENDIF
 
-RETURN result
+   RETURN result
+

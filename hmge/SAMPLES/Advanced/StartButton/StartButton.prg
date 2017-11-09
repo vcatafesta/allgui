@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2007-2011 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2007-2011 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -22,151 +20,146 @@ ANNOUNCE RDDSYS
 #define MESSAGE1 'Press Ctrl+F6 to swap images of Start Button' + CRLF + 'Click Tray Icon to close program'
 #define MESSAGE2 'Press Ctrl+F6 to swap images, Click Me to close program'
 
-Static nOldMode := 0, nNewMode := 0, lSound := .t., cBitmap1 := "", cBitmap2 := ""
+STATIC nOldMode := 0, nNewMode := 0, lSound := .t., cBitmap1 := "", cBitmap2 := ""
 
-Memvar cPath
+MEMVAR cPath
 
-Procedure Main( lStartUp )
-LOCAL lWinRun := .F.
-PRIVATE cPath := GetStartUpFolder() + "\"
+PROCEDURE Main( lStartUp )
 
-	SET MULTIPLE OFF
+   LOCAL lWinRun := .F.
+   PRIVATE cPath := GetStartUpFolder() + "\"
 
-	SET GLOBAL HOTKEYS ON
+   SET MULTIPLE OFF
 
-	If !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
-		!Empty(GETREGVAR( NIL, REGKEY, REGNAME ))
-		lWinRun := .T.
-	EndIf
+   SET GLOBAL HOTKEYS ON
 
-	cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
-	cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
+   IF !Empty(lStartUp) .AND. Upper(Substr(lStartUp, 2)) == "STARTUP" .OR. ;
+         !Empty(GETREGVAR( NIL, REGKEY, REGNAME ))
+      lWinRun := .T.
+   ENDIF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 0 ;
-		HEIGHT 0 ;
-		TITLE PROGRAM ;
-		MAIN NOSHOW ;
-		ON INIT ( UpdateImage(), ;
-			IF( IsWinXPorLater(), ( MsgBalloon( MESSAGE1 ), Inkey(6) ), ), ;
-			ActivateNotifyMenu( lWinRun ) ) ;
-		NOTIFYICON 'MAIN' ;
-		NOTIFYTOOLTIP MESSAGE2 ;
-		ON NOTIFYCLICK ThisWindow.Release
+   cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
+   cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
 
-		ON KEY CONTROL+F6 ACTION SwapImages()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 0 ;
+         HEIGHT 0 ;
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         ON INIT ( UpdateImage(), ;
+         IF( IsWinXPorLater(), ( MsgBalloon( MESSAGE1 ), Inkey(6) ), ), ;
+         ActivateNotifyMenu( lWinRun ) ) ;
+         NOTIFYICON 'MAIN' ;
+         NOTIFYTOOLTIP MESSAGE2 ;
+         ON NOTIFYCLICK ThisWindow.Release
 
-		DEFINE TIMER Timer_1 ;
-			INTERVAL 50 ;
-			ACTION UpdateImage()
+      ON KEY CONTROL+F6 ACTION SwapImages()
 
-	END WINDOW
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 50 ;
+         ACTION UpdateImage()
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
-Static Procedure UpdateImage()
-*--------------------------------------------------------*
-Local nNewMode := GetKeyboardMode()
+   RETURN
 
-	IF nNewMode != nOldMode
+STATIC PROCEDURE UpdateImage()
 
-		nOldMode := nNewMode
+   LOCAL nNewMode := GetKeyboardMode()
 
-		IF nNewMode == 1033  // English
+   IF nNewMode != nOldMode
 
-			SetStartButtonImage( cBitmap1 )
+      nOldMode := nNewMode
 
-		ELSE
+      IF nNewMode == 1033  // English
 
-			SetStartButtonImage( cBitmap2 )
+         SetStartButtonImage( cBitmap1 )
 
-		ENDIF
+      ELSE
 
-		IF lSound
-			Tone( 1000, 1 )
-		ENDIF
+         SetStartButtonImage( cBitmap2 )
 
-	ENDIF
+      ENDIF
 
-Return
+      IF lSound
+         Tone( 1000, 1 )
+      ENDIF
 
-*--------------------------------------------------------*
-Static Procedure SwapImages()
-*--------------------------------------------------------*
+   ENDIF
 
-	IF lSound
-		Tone( 5000, 1 )
-	ENDIF
+   RETURN
 
-	IF Val( cFileNoExt( cBitmap1 ) ) == 2
+STATIC PROCEDURE SwapImages()
 
-		cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
-		cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
+   IF lSound
+      Tone( 5000, 1 )
+   ENDIF
 
-	ELSE
+   IF Val( cFileNoExt( cBitmap1 ) ) == 2
 
-		cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
-		cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
+      cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
+      cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
 
-	ENDIF
+   ELSE
 
-Return
+      cBitmap1 := cPath + IF( IsWinXPorLater(), "img_xp\2.bmp", "img_98\2.bmp" )
+      cBitmap2 := cPath + IF( IsWinXPorLater(), "img_xp\1.bmp", "img_98\1.bmp" )
 
-*--------------------------------------------------------*
-Static Procedure MsgBalloon( cMessage, cTitle )
-*--------------------------------------------------------*
-	Local i := Ascan( _HMG_aFormhandles, GetFormHandle("Form_1") )
+   ENDIF
 
-	Default cMessage := "Prompt", cTitle := PROGRAM
+   RETURN
 
-	ShowNotifyIcon( _HMG_aFormhandles[i], .F. , NIL, NIL )
+STATIC PROCEDURE MsgBalloon( cMessage, cTitle )
 
-	ShowNotifyInfo( _HMG_aFormhandles[i], .T. , LoadTrayIcon( GetInstance(), ;
-		_HMG_aFormNotifyIconName[i] ), _HMG_aFormNotifyIconToolTip[i], cMessage, cTitle )
+   LOCAL i := Ascan( _HMG_aFormhandles, GetFormHandle("Form_1") )
 
-Return
+   DEFAULT cMessage := "Prompt", cTitle := PROGRAM
 
-*--------------------------------------------------------*
-Static Procedure ActivateNotifyMenu( lWinRun )
-*--------------------------------------------------------*
-	Local i := Ascan( _HMG_aFormhandles, GetFormHandle("Form_1") )
+   ShowNotifyIcon( _HMG_aFormhandles[i], .F. , NIL, NIL )
 
-	ShowNotifyInfo( _HMG_aFormhandles[i], .F. , NIL, NIL, NIL, NIL )
+   ShowNotifyInfo( _HMG_aFormhandles[i], .T. , LoadTrayIcon( GetInstance(), ;
+      _HMG_aFormNotifyIconName[i] ), _HMG_aFormNotifyIconToolTip[i], cMessage, cTitle )
 
-	ShowNotifyIcon( _HMG_aFormhandles[i], .T. , LoadTrayIcon( GetInstance(), ;
-		_HMG_aFormNotifyIconName[i] ), _HMG_aFormNotifyIconToolTip[i] )
+   RETURN
 
-	DEFINE NOTIFY MENU OF Form_1
-		ITEM 'Auto&Run'		ACTION ( lWinRun := !lWinRun, ;
-				Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
-				NAME Auto_Run
-		SEPARATOR	
-		ITEM 'Disable &Sound'	ACTION ( lSound := !lSound, ;
-				Form_1.Sound.Checked := !lSound ) ;
-				NAME Sound
-		ITEM 'A&bout...'	ACTION ShellAbout( "About#", PROGRAM + VERSION + CRLF + ;
-				"Copyright " + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), "MAIN", 32, 32) )
-		SEPARATOR	
-		ITEM 'E&xit'		ACTION Form_1.Release
-	END MENU
+STATIC PROCEDURE ActivateNotifyMenu( lWinRun )
 
-	Form_1.Auto_Run.Checked := lWinRun
-	Form_1.Sound.Checked := !lSound
+   LOCAL i := Ascan( _HMG_aFormhandles, GetFormHandle("Form_1") )
 
-Return
+   ShowNotifyInfo( _HMG_aFormhandles[i], .F. , NIL, NIL, NIL, NIL )
 
-*--------------------------------------------------------*
-Static Procedure WinRun( lMode )
-*--------------------------------------------------------*
-   Local cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
-         cRunKey  := REGKEY, ;
-         cRegKey  := GETREGVAR( NIL, cRunKey, REGNAME )
+   ShowNotifyIcon( _HMG_aFormhandles[i], .T. , LoadTrayIcon( GetInstance(), ;
+      _HMG_aFormNotifyIconName[i] ), _HMG_aFormNotifyIconToolTip[i] )
+
+   DEFINE NOTIFY MENU OF Form_1
+      ITEM 'Auto&Run'      ACTION ( lWinRun := !lWinRun, ;
+         Form_1.Auto_Run.Checked := lWinRun, WinRun(lWinRun) ) ;
+         NAME Auto_Run
+      SEPARATOR
+      ITEM 'Disable &Sound'   ACTION ( lSound := !lSound, ;
+         Form_1.Sound.Checked := !lSound ) ;
+         NAME Sound
+      ITEM 'A&bout...'   ACTION ShellAbout( "About#", PROGRAM + VERSION + CRLF + ;
+         "Copyright " + Chr(169) + COPYRIGHT, LoadTrayIcon(GetInstance(), "MAIN", 32, 32) )
+      SEPARATOR
+      ITEM 'E&xit'      ACTION Form_1.Release
+   END MENU
+
+   Form_1.Auto_Run.Checked := lWinRun
+   Form_1.Sound.Checked := !lSound
+
+   RETURN
+
+STATIC PROCEDURE WinRun( lMode )
+
+   LOCAL cRunName := Upper( GetModuleFileName( GetInstance() ) ) + " /STARTUP", ;
+      cRunKey  := REGKEY, ;
+      cRegKey  := GETREGVAR( NIL, cRunKey, REGNAME )
 
    IF lMode
       IF Empty(cRegKey) .OR. cRegKey # cRunName
@@ -176,11 +169,10 @@ Static Procedure WinRun( lMode )
       DELREGVAR( NIL, cRunKey, REGNAME )
    ENDIF
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -189,11 +181,10 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
-*--------------------------------------------------------*
+
    LOCAL oReg, cValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -202,11 +193,10 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-RETURN cValue
+   RETURN cValue
 
-*--------------------------------------------------------*
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
-*--------------------------------------------------------*
+
    LOCAL oReg, nValue
 
    nKey := IF(nKey == NIL, HKEY_CURRENT_USER, nKey)
@@ -214,8 +204,7 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    nValue := oReg:Delete(cSubKey)
    oReg:Close()
 
-RETURN nValue
-
+   RETURN nValue
 
 #pragma BEGINDUMP
 
@@ -234,98 +223,99 @@ static void ShowNotifyInfo(HWND hWnd, BOOL bAdd, HICON hIcon, LPSTR szText, LPST
 
 HB_FUNC ( SHOWNOTIFYINFO )
 {
-	ShowNotifyInfo( (HWND) hb_parnl(1), (BOOL) hb_parl(2), (HICON) hb_parnl(3), (LPSTR) hb_parc(4), 
-			(LPSTR) hb_parc(5), (LPSTR) hb_parc(6) );
+   ShowNotifyInfo( (HWND) hb_parnl(1), (BOOL) hb_parl(2), (HICON) hb_parnl(3), (LPSTR) hb_parc(4),
+         (LPSTR) hb_parc(5), (LPSTR) hb_parc(6) );
 }
 
 static void ShowNotifyInfo(HWND hWnd, BOOL bAdd, HICON hIcon, LPSTR szText, LPSTR szInfo, LPSTR szInfoTitle)
 {
-	NOTIFYICONDATA nid;
+   NOTIFYICONDATA nid;
 
-	ZeroMemory( &nid, sizeof(nid) );
+   ZeroMemory( &nid, sizeof(nid) );
 
-	nid.cbSize		= sizeof(NOTIFYICONDATA);
-	nid.hIcon		= hIcon;
-	nid.hWnd		= hWnd;
-	nid.uID			= 0;
-	nid.uFlags		= NIF_INFO | NIF_TIP | NIF_ICON;
-	nid.dwInfoFlags		= NIIF_INFO;
+   nid.cbSize      = sizeof(NOTIFYICONDATA);
+   nid.hIcon      = hIcon;
+   nid.hWnd      = hWnd;
+   nid.uID         = 0;
+   nid.uFlags      = NIF_INFO | NIF_TIP | NIF_ICON;
+   nid.dwInfoFlags      = NIIF_INFO;
 
-	lstrcpy( nid.szTip, TEXT(szText) );
-	lstrcpy( nid.szInfo, TEXT(szInfo) );
-	lstrcpy( nid.szInfoTitle, TEXT(szInfoTitle) );
+   lstrcpy( nid.szTip, TEXT(szText) );
+   lstrcpy( nid.szInfo, TEXT(szInfo) );
+   lstrcpy( nid.szInfoTitle, TEXT(szInfoTitle) );
 
-	if(bAdd)
-		Shell_NotifyIcon( NIM_ADD, &nid );
-	else
-		Shell_NotifyIcon( NIM_DELETE, &nid );
+   if(bAdd)
+      Shell_NotifyIcon( NIM_ADD, &nid );
+   else
+      Shell_NotifyIcon( NIM_DELETE, &nid );
 
-	if(hIcon)
-		DestroyIcon( hIcon );
+   if(hIcon)
+      DestroyIcon( hIcon );
 }
 
 HB_FUNC ( SETSTARTBUTTONIMAGE )
 {
-	HWND hButton = GetStartButton();
-	HDC  hDCButton = GetDC(hButton);
-	HDC  hDcCompatibleButton;
-	RECT rc;
-	int  nWidth, nHeight;
+   HWND hButton = GetStartButton();
+   HDC  hDCButton = GetDC(hButton);
+   HDC  hDcCompatibleButton;
+   RECT rc;
+   int  nWidth, nHeight;
 
-	HBITMAP hBitmap, hBitmapOld;
-	BITMAP bitmap;
+   HBITMAP hBitmap, hBitmapOld;
+   BITMAP bitmap;
 
-	GetWindowRect(hButton, &rc);
-	nWidth = rc.right - rc.left;
-	nHeight = rc.bottom - rc.top;
+   GetWindowRect(hButton, &rc);
+   nWidth = rc.right - rc.left;
+   nHeight = rc.bottom - rc.top;
 
-	hDcCompatibleButton = CreateCompatibleDC(hDCButton);
+   hDcCompatibleButton = CreateCompatibleDC(hDCButton);
 
-	hBitmap = (HBITMAP)LoadImage (NULL, hb_parc(1), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+   hBitmap = (HBITMAP)LoadImage (NULL, hb_parc(1), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
-	hBitmapOld = (HBITMAP)SelectObject(hDcCompatibleButton, hBitmap);
-	GetObject(hBitmap, sizeof(BITMAP), &bitmap);
+   hBitmapOld = (HBITMAP)SelectObject(hDcCompatibleButton, hBitmap);
+   GetObject(hBitmap, sizeof(BITMAP), &bitmap);
 
-	if (nWidth > bitmap.bmWidth - 3 && nWidth < bitmap.bmWidth + 3 && nHeight > bitmap.bmHeight - 3 && nHeight < bitmap.bmHeight + 3)
-		BitBlt(hDCButton, 0, 0, nWidth, nHeight, hDcCompatibleButton, 0, 0, SRCCOPY);
-	else
-		StretchBlt(hDCButton, 0, 0, nWidth, nHeight, hDcCompatibleButton, 0, 0, bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+   if (nWidth > bitmap.bmWidth - 3 && nWidth < bitmap.bmWidth + 3 && nHeight > bitmap.bmHeight - 3 && nHeight < bitmap.bmHeight + 3)
+      BitBlt(hDCButton, 0, 0, nWidth, nHeight, hDcCompatibleButton, 0, 0, SRCCOPY);
+   else
+      StretchBlt(hDCButton, 0, 0, nWidth, nHeight, hDcCompatibleButton, 0, 0, bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
 
-	SelectObject(hDcCompatibleButton, hBitmapOld);
+   SelectObject(hDcCompatibleButton, hBitmapOld);
 
-	DeleteDC(hDcCompatibleButton);
-	DeleteDC(hDCButton);
-	DeleteObject(hBitmap);
-} 
+   DeleteDC(hDcCompatibleButton);
+   DeleteDC(hDCButton);
+   DeleteObject(hBitmap);
+}
 
 static HWND GetStartButton()
 {
-	static HWND hKnownButton=0;
-	HWND hTaskBar, hButton;
+   static HWND hKnownButton=0;
+   HWND hTaskBar, hButton;
 
-	hTaskBar = FindWindow( "Shell_TrayWnd", NULL );
-	hButton = GetWindow( hTaskBar, GW_CHILD );
+   hTaskBar = FindWindow( "Shell_TrayWnd", NULL );
+   hButton = GetWindow( hTaskBar, GW_CHILD );
 
-	if (hButton)
-		hKnownButton = hButton;
-	else
-		hButton = hKnownButton;
+   if (hButton)
+      hKnownButton = hButton;
+   else
+      hButton = hKnownButton;
 
-	return hButton;
+   return hButton;
 }
 
 HB_FUNC( GETKEYBOARDMODE )
 {
-	HKL kbl;
-	HWND CurApp;
-	DWORD idthd;
-	int newmode;
+   HKL kbl;
+   HWND CurApp;
+   DWORD idthd;
+   int newmode;
 
-	CurApp=GetForegroundWindow();
-	idthd=GetWindowThreadProcessId(CurApp,NULL);
-	kbl=GetKeyboardLayout(idthd);
-	newmode=(int)LOWORD(kbl);
-	hb_retnl(newmode);
+   CurApp=GetForegroundWindow();
+   idthd=GetWindowThreadProcessId(CurApp,NULL);
+   kbl=GetKeyboardLayout(idthd);
+   newmode=(int)LOWORD(kbl);
+   hb_retnl(newmode);
 }
 
 #pragma ENDDUMP
+

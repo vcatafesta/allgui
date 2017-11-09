@@ -1,36 +1,30 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * NoAutoRelease Style Demo - ACTIVATE WINDOW ALL command usage
- *
- * Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
+* HMG - Harbour Win32 GUI library Demo
+* NoAutoRelease Style Demo - ACTIVATE WINDOW ALL command usage
+* Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
 */
 
 #include "minigui.ch"
 
 /******
-*
 *       Template for application
-*
 */
 
-Function Main
+FUNCTION Main
 
    SET FONT TO GetDefaultFontName(), GetDefaultFontSize()
 
    SET DEFAULT ICON TO ".\..\..\..\RESOURCES\DEFAULT.ICO"
 
-   If .Not. IsWindowDefined( MainWin )
+   IF .Not. IsWindowDefined( MainWin )
 
-      *--------------------------------------------------------------------*
       * Main Form Definition
-      *--------------------------------------------------------------------*
       DEFINE WINDOW MainWin ;
-         MAIN ;
-         CLIENTAREA 600, 400 ;
-         TITLE 'NoAutoRelease Template Demo' ;
-         BKBRUSH 'PAPER.GIF' ;
-         ON INIT OnInit()
+            MAIN ;
+            CLIENTAREA 600, 400 ;
+            TITLE 'NoAutoRelease Template Demo' ;
+            BKBRUSH 'PAPER.GIF' ;
+            ON INIT OnInit()
 
          CreateMainMenu()
 
@@ -42,29 +36,25 @@ Function Main
 
       END WINDOW
 
-      *--------------------------------------------------------------------*
       * Child Form Definition
-      *--------------------------------------------------------------------*
       DEFINE WINDOW ChildWin ;
-         CHILD ;
-         CLIENTAREA 400, 300 ;
-         MINWIDTH 200 ;
-         MINHEIGHT 200 ;
-         TITLE 'Child Window'
+            CHILD ;
+            CLIENTAREA 400, 300 ;
+            MINWIDTH 200 ;
+            MINHEIGHT 200 ;
+            TITLE 'Child Window'
 
          ON KEY ESCAPE ACTION ThisWindow.Hide()
 
       END WINDOW
 
-      *--------------------------------------------------------------------*
       * Modal Form Definition
-      *--------------------------------------------------------------------*
       DEFINE WINDOW ModalWin ;
-         MODAL ;
-         CLIENTAREA 400, 300 ;
-         MINWIDTH 200 ;
-         MINHEIGHT 200 ;
-         TITLE 'Modal Window'
+            MODAL ;
+            CLIENTAREA 400, 300 ;
+            MINWIDTH 200 ;
+            MINHEIGHT 200 ;
+            TITLE 'Modal Window'
 
          ON KEY ESCAPE ACTION ThisWindow.Hide()
 
@@ -72,43 +62,41 @@ Function Main
 
       CENTER WINDOW MainWin
 
-      * Using ACTIVATE WINDOW ALL command, all defined windows will be activated 
-      * simultaneously. NOAUTORELEASE and NOSHOW styles in the non-main windows 
+      * Using ACTIVATE WINDOW ALL command, all defined windows will be activated
+      * simultaneously. NOAUTORELEASE and NOSHOW styles in the non-main windows
       * are forced.
 
-      ACTIVATE WINDOW ALL 
+      ACTIVATE WINDOW ALL
 
-   EndIf
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-
-Static Procedure OnInit()
+STATIC PROCEDURE OnInit()
 
    CENTER WINDOW ChildWin
    CENTER WINDOW ModalWin
 
-Return
+   RETURN
 
-
-Static Procedure CreateMainMenu
+STATIC PROCEDURE CreateMainMenu
 
    DEFINE MAIN MENU OF MainWin
-          
+
       POPUP '&File'
-        ITEM '&Child Window' ACTION ( ChildWin.Show(), ChildWin.SetFocus() )
-        ITEM '&Modal Window' ACTION ModalWin.Show()
-        SEPARATOR
-        ITEM 'E&xit' + Chr(9) + 'Alt+X' ACTION {|| QuickExit() }
+         ITEM '&Child Window' ACTION ( ChildWin.Show(), ChildWin.SetFocus() )
+         ITEM '&Modal Window' ACTION ModalWin.Show()
+         SEPARATOR
+         ITEM 'E&xit' + Chr(9) + 'Alt+X' ACTION {|| QuickExit() }
       END POPUP
-                  
+
    END MENU
 
-Return
+   RETURN
 
-
-Static Procedure QuickExit
+STATIC PROCEDURE QuickExit
 
    QUIT
 
-Return
+   RETURN
+

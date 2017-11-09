@@ -1,7 +1,7 @@
 /*
- * HMG Read XLS Demo
- * Contributed by Ismael Elias <farfa890@gmail.com>
- */
+* HMG Read XLS Demo
+* Contributed by Ismael Elias <farfa890@gmail.com>
+*/
 
 #include "MiniGUI.ch"
 
@@ -13,42 +13,42 @@ STATIC aTypes
 FUNCTION Main()
 
    DEFINE WINDOW winmain ;
-      TITLE 'LEER UN EXCEL !!!! ' ;
-      MAIN
+         TITLE 'LEER UN EXCEL !!!! ' ;
+         MAIN
 
-   @050, 003 GRID Grid_1 ;
-      WIDTH winmain.Width - 20 ;
-      HEIGHT winmain.Height - 90 ;
-      HEADERS { "" } ;
-      WIDTHS { 100 } ;
-      ITEMS  { { "" } } ;
-      VALUE  1 ;
-      FONT "Helv" SIZE 10 ;
-      PAINTDOUBLEBUFFER
+      @050, 003 GRID Grid_1 ;
+         WIDTH winmain.Width - 20 ;
+         HEIGHT winmain.Height - 90 ;
+         HEADERS { "" } ;
+         WIDTHS { 100 } ;
+         ITEMS  { { "" } } ;
+         VALUE  1 ;
+         FONT "Helv" SIZE 10 ;
+         PAINTDOUBLEBUFFER
 
-   DEFINE BUTTON cmdxls
-      ROW 015
-      COL 005
-      WIDTH  98
-      HEIGHT 24
-      CAPTION "&Abrir XLS"
-      FONTNAME "Ms Sans Serif"
-      FONTSIZE 9
-      ACTION FAR_OpenXLS()
-      FLAT .T.
-   END BUTTON
+      DEFINE BUTTON cmdxls
+         ROW 015
+         COL 005
+         WIDTH  98
+         HEIGHT 24
+         CAPTION "&Abrir XLS"
+         FONTNAME "Ms Sans Serif"
+         FONTSIZE 9
+         ACTION FAR_OpenXLS()
+         FLAT .T.
+      END BUTTON
 
-   DEFINE BUTTON cmdxls2dbf
-      ROW 015
-      COL 120
-      WIDTH  98
-      HEIGHT 24
-      CAPTION "&Export To DBF"
-      FONTNAME "Ms Sans Serif"
-      FONTSIZE 9
-      ACTION FAR_XLS2DBF()
-      FLAT .T.
-   END BUTTON
+      DEFINE BUTTON cmdxls2dbf
+         ROW 015
+         COL 120
+         WIDTH  98
+         HEIGHT 24
+         CAPTION "&Export To DBF"
+         FONTNAME "Ms Sans Serif"
+         FONTSIZE 9
+         ACTION FAR_XLS2DBF()
+         FLAT .T.
+      END BUTTON
 
    END WINDOW
 
@@ -56,8 +56,7 @@ FUNCTION Main()
 
    ACTIVATE WINDOW winmain
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION FAR_OpenXLS()
 
@@ -66,13 +65,13 @@ STATIC FUNCTION FAR_OpenXLS()
    ccFile := GetFile( { { "Archivos excel (*.xls)", "*.xls" } }, "Seleccione un archivo excel", GetCurrentFolder(), .F. )
 
    IF Empty( ccFile )
+
       RETURN NIL
    ENDIF
 
    Load_XLS_CLI( ccFile )
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION Load_XLS_CLI( cArchivo )
 
@@ -97,6 +96,7 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
    oExcel := CreateObject( "Excel.Application" )
    IF Ole2TxtError() != "S_OK"
       MsgStop( 'Excel no está instalado!', 'Error' )
+
       RETURN NIL
    ENDIF
 
@@ -106,28 +106,19 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
    oHoja := oExcel:ActiveSheet()
    oExcel:Visible       := .F.     // <---- No Mostrar
    oExcel:DisplayAlerts := .F.     // <---- esta elimina mensajes
-   //
    // ************** LOOP LECTURA PLANILLA EXCEL *****************
-   //
    // ------------ Averiguo Cantida de Filas    ------------------
-   //
    nFilas := oHoja:UsedRange:Rows:Count()
-   //
    // ------------ Averiguo Cantida de Columnas ------------------
-   //
    nnColumn := oHoja:UsedRange:Columns:Count
-   //
    aNamis  := {}
-   //
    nColumns := Len( GetProperty( "winmain", "Grid_1", "Item", 1 ) )
 
    DO WHILE nColumns > 0
       winmain.Grid_1.DeleteColumn( nColumns )
       nColumns--
    ENDDO
-   //
    // ------------------------------------------------------------
-   //
    FOR i = 1 TO nnColumn STEP 1
 
       ccValue := AnyToString( oHoja:cells( 2, i ):value )
@@ -141,14 +132,10 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
       AAdd( aWitis, nnWiti )
 
    NEXT i
-   //
    winmain.Grid_1.SetFocus
-   //
    // ------------------------------------------------------------
-   //
    aFila  := {}
    aCellTypes := {}
-   //
    FOR i = 2 TO nFilas STEP 1
 
       FOR j = 1 TO nnColumn STEP 1
@@ -171,11 +158,8 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
       aCellTypes := {}
 
    NEXT i
-   //
    winmain.Grid_1.Value := 1
-   //
    // ------------------------------------------------------------
-   //
    FOR j = 1 TO nnColumn - 1 STEP 1
 
       ccNameIs := AnyToString( oHoja:cells( 1, j ):value )
@@ -188,9 +172,7 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
 
    NEXT j
    winmain.Grid_1.ColumnWidth( nnColumn ) := GetProperty( 'winmain', 'Grid_1', "ColumnWidth", nnColumn ) - 12
-   //
    // ------------------------------------------------------------
-   //
    oExcel:DisplayAlerts := .F.   // <---- esta elimina mensajes
    oWorkBook:Close()
    oExcel:Quit()
@@ -202,11 +184,9 @@ STATIC FUNCTION Load_XLS_CLI( cArchivo )
    winmain.title := cArchivo
    winmain.cmdxls2dbf.Enabled := TRUE
 
-RETURN NIL
+   RETURN NIL
 
-*----------------------------------------------------------------------*
 STATIC FUNCTION ItemChar( aLine, aType )
-*----------------------------------------------------------------------*
 
    LOCAL aRet, x, l
 
@@ -226,40 +206,36 @@ STATIC FUNCTION ItemChar( aLine, aType )
       ENDCASE
    NEXT
 
-RETURN aRet
+   RETURN aRet
 
-
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
    #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-#endif
+   #endif
 
-*----------------------------------------------------------------------*
 STATIC FUNCTION FAR_XLS2DBF()
-*----------------------------------------------------------------------*
 
    LOCAL i, aStruct := {}, cAlias, lOK := .T.
 
    FOR i := 1 TO Len( aNamis )
-	AAdd( aStruct, { aNamis[i], iif(aTypes[i]=="T", "D", aTypes[i]), iif(aTypes[i]=="T", 8, aWitis[i]/10), 0 } )
+      AAdd( aStruct, { aNamis[i], iif(aTypes[i]=="T", "D", aTypes[i]), iif(aTypes[i]=="T", 8, aWitis[i]/10), 0 } )
    NEXT
 
    TRY
-	DbCreate( "EXPORT", aStruct, , .T., cAlias := "TEMP" + hb_ntos( _GetId() ) )
+      DbCreate( "EXPORT", aStruct, , .T., cAlias := "TEMP" + hb_ntos( _GetId() ) )
    CATCH
-	MsgAlert( "Can not create an export database.", "Warning" )
-	lOK := .F.
+      MsgAlert( "Can not create an export database.", "Warning" )
+      lOK := .F.
    END
 
    IF lOK
-	IF ( cAlias )->( HMG_ArrayToDBF( aHojita ) )
-		( cAlias )->( DbCloseArea() )
-		MsgInfo( "Export to DBF was done." )
-	ENDIF
+      IF ( cAlias )->( HMG_ArrayToDBF( aHojita ) )
+         ( cAlias )->( DbCloseArea() )
+         MsgInfo( "Export to DBF was done." )
+      ENDIF
    ENDIF
 
-RETURN lOK
-
+   RETURN lOK
 
 STATIC FUNCTION AnyToString( csValue )
 
@@ -293,8 +269,7 @@ STATIC FUNCTION AnyToString( csValue )
 
    ENDCASE
 
-RETURN( ccValor )
-
+   RETURN( ccValor )
 
 STATIC FUNCTION GetLenColumn( nnLen )
 
@@ -317,4 +292,5 @@ STATIC FUNCTION GetLenColumn( nnLen )
 
    ENDIF
 
-RETURN( nnValor )
+   RETURN( nnValor )
+

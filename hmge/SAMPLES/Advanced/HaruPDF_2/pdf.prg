@@ -1,7 +1,5 @@
-*----------------------------------------------------------------
 * PDFClass
 * Author: José M. C. Quintas
-*----------------------------------------------------------------
 
 #require "hbhpdf"
 #include "hbclass.ch"
@@ -24,24 +22,42 @@ CREATE CLASS PDFClass
    VAR    nPageNumber       INIT 0
    VAR    cHeader           INIT {}
    VAR    cCodePage         INIT "CP1252"
-   METHOD AddPage()
-   METHOD RowToPDFRow( nRow )
-   METHOD ColToPDFCol( nCol )
-   METHOD MaxRow()
-   METHOD MaxCol()
-   METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anRGB )
-   METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize )
-   METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB )
-   METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight )
-   METHOD Cancel()
-   METHOD PrnToPdf( cInputFile )
-   METHOD SetType( nType )
-   METHOD PageHeader()
-   METHOD MaxRowTest( nRows )
-   METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject )
-   METHOD Begin()
-   METHOD End()
-   ENDCLASS
+
+METHOD AddPage()
+
+METHOD RowToPDFRow( nRow )
+
+METHOD ColToPDFCol( nCol )
+
+METHOD MaxRow()
+
+METHOD MaxCol()
+
+METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anRGB )
+
+METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize )
+
+METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB )
+
+METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight )
+
+METHOD Cancel()
+
+METHOD PrnToPdf( cInputFile )
+
+METHOD SetType( nType )
+
+METHOD PageHeader()
+
+METHOD MaxRowTest( nRows )
+
+METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject )
+
+METHOD Begin()
+
+METHOD End()
+
+ENDCLASS
 
 METHOD Begin() CLASS PDFClass
 
@@ -61,6 +77,7 @@ METHOD Begin() CLASS PDFClass
          HPDF_SetCurrentEncoder( ::oPDF, ::cCodePage )
       ENDIF
    ENDIF
+
    RETURN NIL
 
 METHOD End() CLASS PDFClass
@@ -86,6 +103,7 @@ METHOD End() CLASS PDFClass
 METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject ) CLASS PDFClass
 
    IF ::nType == PDF_TXT .OR. Empty( ::oPDF )
+
       RETURN NIL
    ENDIF
    cAuthor  := iif( cAuthor == NIL, "JPA Tecnologia", cAuthor )
@@ -98,6 +116,7 @@ METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject ) CLASS PDFClass
    HPDF_SetInfoAttr( ::oPdf, HPDF_INFO_SUBJECT, cSubject )
    HPDF_SetInfoDateAttr( ::oPDF, HPDF_INFO_CREATION_DATE, { Year( Date() ), Month( Date() ), Day( Date() ), ;
       Val( Substr( Time(), 1, 2 ) ), Val( Substr( Time(), 4, 2 ) ), Val( Substr( Time(), 7, 2 ) ), "+", 4, 0 } )
+
    RETURN NIL
 
 METHOD SetType( nType ) CLASS PDFClass
@@ -106,6 +125,7 @@ METHOD SetType( nType ) CLASS PDFClass
       ::nType := nType
    ENDIF
    ::nFontSize := iif( ::nType == 1, 9, 6 )
+
    RETURN NIL
 
 METHOD AddPage() CLASS PDFClass
@@ -116,6 +136,7 @@ METHOD AddPage() CLASS PDFClass
       HPDF_Page_SetFontAndSize( ::oPage, HPDF_GetFont( ::oPdf, ::cFontName, ::cCodePage ), ::nFontSize )
    ENDIF
    ::nRow := 0
+
    RETURN NIL
 
 METHOD Cancel() CLASS PDFClass
@@ -123,6 +144,7 @@ METHOD Cancel() CLASS PDFClass
    IF ::nType != PDF_TXT
       HPDF_Free( ::oPdf )
    ENDIF
+
    RETURN NIL
 
 METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anRGB ) CLASS PDFClass
@@ -155,6 +177,7 @@ METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anR
          HPDF_Page_SetRGBStroke( ::oPage, 0, 0, 0 )
       ENDIF
    ENDIF
+
    RETURN NIL
 
 METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize ) CLASS PDFClass
@@ -175,6 +198,7 @@ METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize ) CLASS PDFClass
       HPDF_Page_LineTo( ::oPage, nColf, nRowf )
       HPDF_Page_Stroke( ::oPage )
    ENDIF
+
    RETURN NIL
 
 METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight ) CLASS PDFClass
@@ -182,6 +206,7 @@ METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight ) CLASS PDFClass
    LOCAL oImage
 
    IF ::nType == PDF_TXT
+
       RETURN NIL
    ENDIF
    nRow    := ::RowToPDFRow( nRow )
@@ -190,11 +215,13 @@ METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight ) CLASS PDFClass
    nHeight := nHeight * ::nFontSize
    oImage := HPDF_LoadJPEGImageFromFile( ::oPdf, cJPEGFile )
    HPDF_Page_DrawImage( ::oPage, oImage, nCol, nRow, nWidth, nHeight )
+
    RETURN NIL
 
 METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB ) CLASS PDFClass
 
    IF ::nType == PDF_TXT
+
       RETURN NIL
    ENDIF
    nFillType := iif( nFillType == NIL, 1, nFillType )
@@ -220,6 +247,7 @@ METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB )
       HPDF_Page_SetRGBStroke( ::oPage, 0, 0, 0 )
       HPDF_Page_SetRGBFill( ::oPage, 0, 0, 0 )
    ENDIF
+
    RETURN NIL
 
 METHOD RowToPDFRow( nRow ) CLASS PDFClass
@@ -235,10 +263,12 @@ METHOD MaxRow() CLASS PDFClass
    LOCAL nPageHeight, nMaxRow
 
    IF ::nType == PDF_TXT
+
       RETURN 63
    ENDIF
    nPageHeight := HPDF_Page_GetHeight( ::oPage ) - ( ::nMargin * 2 )
    nMaxRow     := Int( nPageHeight / ( ::nFontSize * ::nLineHeight )  )
+
    RETURN nMaxRow
 
 METHOD MaxCol() CLASS PDFClass
@@ -246,10 +276,12 @@ METHOD MaxCol() CLASS PDFClass
    LOCAL nPageWidth, nMaxCol
 
    IF ::nType == PDF_TXT
+
       RETURN 132
    ENDIF
    nPageWidth := HPDF_Page_GetWidth( ::oPage ) - ( ::nMargin * 2 )
    nMaxCol    := Int( nPageWidth / ::nFontSize * 1.666 )
+
    RETURN nMaxCol
 
 METHOD PrnToPdf( cInputFile ) CLASS PDFClass
@@ -273,6 +305,7 @@ METHOD PrnToPdf( cInputFile ) CLASS PDFClass
          ENDDO
       ENDIF
    ENDDO
+
    RETURN NIL
 
 METHOD PageHeader() CLASS PDFClass
@@ -287,6 +320,7 @@ METHOD PageHeader() CLASS PDFClass
    ::DrawLine( 0.5, 0, 0.5, ::MaxCol() )
    ::nRow := 2
    ::nCol := 0
+
    RETURN NIL
 
 METHOD MaxRowTest( nRows ) CLASS PDFClass
@@ -295,8 +329,10 @@ METHOD MaxRowTest( nRows ) CLASS PDFClass
    IF ::nRow > ::MaxRow() - 2 - nRows
       ::PageHeader()
    ENDIF
+
    RETURN NIL
 
 FUNCTION MyTempFile( cExtensao )
 
    RETURN "temp." + cExtensao
+

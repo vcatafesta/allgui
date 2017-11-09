@@ -23,9 +23,9 @@ PROCEDURE main
    test->( dbGoTop() )
 
    DEFINE WINDOW o_dlu AT 0, 0 WIDTH 600 HEIGHT 400 ;
-      TITLE 'TsBrowse last row sticking workaround' ;
-      MAIN ICON "MAIN" ;
-      FONT 'Arial' SIZE 12
+         TITLE 'TsBrowse last row sticking workaround' ;
+         MAIN ICON "MAIN" ;
+         FONT 'Arial' SIZE 12
 
       ON KEY ESCAPE OF o_dlu ACTION o_dlu.RELEASE
 
@@ -34,27 +34,27 @@ PROCEDURE main
       DEFINE TBROWSE Br_zaw AT 15, 10 OF o_dlu ALIAS "test" WIDTH 450 HEIGHT 330 ;
          ON CHANGE {|| CorrectionFirstLast( Br_zaw ) }
 
-         ADD COLUMN TO br_zaw DATA {|| test->nazwa } ALIGN DT_LEFT, DT_CENTER, DT_CENTER ;
-            TITLE 'Nazwa' SIZE 150 FOOTER 'Pozycji ' + LTrim( Str( test->( LastRec() ) ) )
-         ADD COLUMN TO br_zaw DATA {|| test->ilosc } ALIGN DT_RIGHT, DT_CENTER, DT_CENTER TITLE 'Ilosc' SIZE 100
-         ADD COLUMN TO br_zaw DATA {|| test->cena } ALIGN DT_RIGHT, DT_CENTER, DT_CENTER TITLE 'Cena' SIZE 100
+      ADD COLUMN TO br_zaw DATA {|| test->nazwa } ALIGN DT_LEFT, DT_CENTER, DT_CENTER ;
+         TITLE 'Nazwa' SIZE 150 FOOTER 'Pozycji ' + LTrim( Str( test->( LastRec() ) ) )
+      ADD COLUMN TO br_zaw DATA {|| test->ilosc } ALIGN DT_RIGHT, DT_CENTER, DT_CENTER TITLE 'Ilosc' SIZE 100
+      ADD COLUMN TO br_zaw DATA {|| test->cena } ALIGN DT_RIGHT, DT_CENTER, DT_CENTER TITLE 'Cena' SIZE 100
 
-         br_zaw:SetColor( { 2 }, { {|| iif( test->( ordKeyNo() ) % 2 == 0, RGB( 255, 255, 255 ), RGB( 230, 230, 230 ) ) } } )
+      br_zaw:SetColor( { 2 }, { {|| iif( test->( ordKeyNo() ) % 2 == 0, RGB( 255, 255, 255 ), RGB( 230, 230, 230 ) ) } } )
 
-         br_zaw:nHeightCell += 6
-         br_zaw:nHeightFoot += 4
-         br_zaw:nWheelLines := 1
+      br_zaw:nHeightCell += 6
+      br_zaw:nHeightFoot += 4
+      br_zaw:nWheelLines := 1
 
-         br_zaw:nHeightHead := o_dlu .sp. value
+      br_zaw:nHeightHead := o_dlu .sp. value
 
-      END TBROWSE
+   END TBROWSE
 
-   END WINDOW
+END WINDOW
 
-   o_dlu.br_zaw.setfocus
+o_dlu.br_zaw.setfocus
 
-   CENTER WINDOW o_dlu
-   ACTIVATE WINDOW o_dlu
+CENTER WINDOW o_dlu
+ACTIVATE WINDOW o_dlu
 
 RETURN
 
@@ -70,4 +70,5 @@ PROCEDURE CorrectionFirstLast( oBrw )
       oBrw:Refresh( .F. )
    ENDIF
 
-RETURN
+   RETURN
+

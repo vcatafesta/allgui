@@ -1,34 +1,30 @@
 /*
- * Ejemplo Button n° 2
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Parcialmente adaptado a partir de un ejemplo de la
- * distribution de OOHG (ver samples\button_mix) mantenida
- * por Ciro Vargas Clemow <pcman2010@yahoo.com>
- *
- * Este ejemplo muestra cómo definir botones con texto
- * y/o imágenes.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- *
- * La imagen Button6.bmp puede descargarse desde
- * https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Button
- */
+* Ejemplo Button n° 2
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Parcialmente adaptado a partir de un ejemplo de la
+* distribution de OOHG (ver samples\button_mix) mantenida
+* por Ciro Vargas Clemow <pcman2010@yahoo.com>
+* Este ejemplo muestra cómo definir botones con texto
+* y/o imágenes.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+* La imagen Button6.bmp puede descargarse desde
+* https://github.com/fyurisich/OOHG_Samples/tree/master/Español/Ejemplos/Button
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 320 ;
-      HEIGHT 600 ;
-      MAIN ;
-      TITLE "ooHG - Botones varios" ;
-      BACKCOLOR YELLOW
+         AT 0,0 ;
+         WIDTH 320 ;
+         HEIGHT 600 ;
+         MAIN ;
+         TITLE "ooHG - Botones varios" ;
+         BACKCOLOR YELLOW
 
       @ 10,80 BUTTON btn_1 ;
          OBJ But1 ;
@@ -113,8 +109,9 @@ FUNCTION Main()
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

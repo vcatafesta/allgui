@@ -2,9 +2,7 @@
 
 MEMVAR aColor
 
-*------------------------------------------------------------------------------*
 FUNCTION Main()
-*------------------------------------------------------------------------------*
 
    // AVAILABLE LIBRARY INTERFACE LANGUAGES
 
@@ -29,11 +27,11 @@ FUNCTION Main()
    aColor[ 10 ] := BLUE
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'MiniPrint Test' ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'MiniPrint Test' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP 'File'
@@ -50,10 +48,9 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 PROCEDURE PrintTest1()
-*------------------------------------------------------------------------------*
 
    SELECT PRINTER DEFAULT ;
       ORIENTATION PRINTER_ORIENT_PORTRAIT ;
@@ -64,15 +61,16 @@ PROCEDURE PrintTest1()
 
    MsgInfo( 'Print Finished' )
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest2()
-*------------------------------------------------------------------------------*
+
    LOCAL cPrinter
 
    cPrinter := GetPrinter()
 
    IF Empty ( cPrinter )
+
       RETURN
    ENDIF
 
@@ -85,10 +83,10 @@ PROCEDURE PrintTest2()
 
    MsgInfo( 'Print Finished' )
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest3()
-*------------------------------------------------------------------------------*
+
    LOCAL lSuccess
 
    SELECT PRINTER DIALOG TO lSuccess
@@ -98,10 +96,10 @@ PROCEDURE PrintTest3()
       MsgInfo( 'Print Finished' )
    ENDIF
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintTest4()
-*------------------------------------------------------------------------------*
+
    LOCAL lSuccess
 
    SELECT PRINTER DIALOG TO lSuccess PREVIEW
@@ -111,47 +109,48 @@ PROCEDURE PrintTest4()
       MsgInfo( 'Print Finished' )
    ENDIF
 
-RETURN
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE PrintDoc
-*------------------------------------------------------------------------------*
+
    LOCAL i
 
    // Measure Units Are Millimeters
 
    START PRINTDOC
 
-   FOR i := 1 TO 10
+      FOR i := 1 TO 10
 
-      START PRINTPAGE
+         START PRINTPAGE
 
-      @ 20, 20 PRINT RECTANGLE ;
-         TO 50, 190 ;
-         PENWIDTH 0.1
+            @ 20, 20 PRINT RECTANGLE ;
+               TO 50, 190 ;
+               PENWIDTH 0.1
 
-      @ 25, 25 PRINT IMAGE "hmg.bmp" ;
-         WIDTH 20 ;
-         HEIGHT 20
+            @ 25, 25 PRINT IMAGE "hmg.bmp" ;
+               WIDTH 20 ;
+               HEIGHT 20
 
-      @ 30, 85 PRINT "PRINT DEMO" ;
-         FONT "Courier New" ;
-         SIZE 24 ;
-         BOLD ;
-         COLOR aColor[ i ]
+            @ 30, 85 PRINT "PRINT DEMO" ;
+               FONT "Courier New" ;
+               SIZE 24 ;
+               BOLD ;
+               COLOR aColor[ i ]
 
-      @ 140, 60 PRINT "Page Number :" + Str( i, 2 ) ;
-         FONT "Arial" ;
-         SIZE 20 ;
-         COLOR aColor[ i ]
+            @ 140, 60 PRINT "Page Number :" + Str( i, 2 ) ;
+               FONT "Arial" ;
+               SIZE 20 ;
+               COLOR aColor[ i ]
 
-      @ 260, 20 PRINT LINE ;
-         TO 260, 190 ;
-         PENWIDTH 0.1
+            @ 260, 20 PRINT LINE ;
+               TO 260, 190 ;
+               PENWIDTH 0.1
 
-      END PRINTPAGE
+         END PRINTPAGE
 
-   NEXT i
+      NEXT i
 
    END PRINTDOC
 
-RETURN
+   RETURN
+

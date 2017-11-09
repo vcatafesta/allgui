@@ -1,12 +1,8 @@
 /*
- * HARBOUR MINIGUI PROJECT MANAGER - Command Line Version
- *
- * Copyright 2003-2004 Roberto Lopez <harbourminigui@gmail.com>
- *
- * Modified for MiniGUI Extended Distribution by MiniGUI team
+* HARBOUR MINIGUI PROJECT MANAGER - Command Line Version
+* Copyright 2003-2004 Roberto Lopez <harbourminigui@gmail.com>
+* Modified for MiniGUI Extended Distribution by MiniGUI team
 */
-
-//***************************************************************************
 
 ANNOUNCE RDDSYS
 
@@ -14,8 +10,6 @@ ANNOUNCE RDDSYS
 
 MEMVAR zs , os , as , ms , prg , pf , bf , mf , hf , DebugActive , CleanActive
 MEMVAR DBS
-
-//***************************************************************************
 
 PROCEDURE Main ( ProjectFile , Param1 , Param2 )
 
@@ -32,6 +26,7 @@ PROCEDURE Main ( ProjectFile , Param1 , Param2 )
       ? "Usage: mpmc <ProjectFile> [/d] [/c]"
       ? ''
       WAIT
+
       RETURN
    ENDIF
 
@@ -39,6 +34,7 @@ PROCEDURE Main ( ProjectFile , Param1 , Param2 )
       ? 'Project File Is Not Found'
       ? ''
       WAIT
+
       RETURN
    ENDIF
 
@@ -78,7 +74,7 @@ PROCEDURE Main ( ProjectFile , Param1 , Param2 )
       ENDIF
 
    NEXT i
-		
+
    IF ! Empty ( Projectfile )
 
       C := MemoRead ( ProjectFile )
@@ -136,9 +132,7 @@ PROCEDURE Main ( ProjectFile , Param1 , Param2 )
    ? ''
    WAIT
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 PROCEDURE Build
 
@@ -163,23 +157,23 @@ PROCEDURE Build
    CreateFolder ( PROJECTFOLDER + 'OBJ' )
 
    Out := Out + 'HARBOUR_EXE = ' + HARBOURFOLDER + 'BIN\HARBOUR.EXE'  + Chr( 13 ) + Chr( 10 )
-   Out := Out + 'CC = ' + BCCFOLDER + 'BIN\BCC32.EXE'  + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'ILINK_EXE = ' + BCCFOLDER + 'BIN\ILINK32.EXE'  + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'BRC_EXE = ' + BCCFOLDER + 'BIN\BRC32.EXE'  + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'APP_NAME = ' + PROJECTFOLDER + Left ( PRGFILES [1] , Len( PRGFILES [1] ) - 4 ) + '.Exe' + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'RC_FILE = ' + MINIGUIFOLDER + 'RESOURCES\MINIGUI.RC'  + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'INCLUDE_DIR = ' + HARBOURFOLDER + 'INCLUDE;' + MINIGUIFOLDER + 'INCLUDE' + ';' + pf + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'CC_LIB_DIR = ' + BCCFOLDER + 'LIB'  + Chr( 13 ) + Chr( 10 ) 
+   Out := Out + 'CC = ' + BCCFOLDER + 'BIN\BCC32.EXE'  + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'ILINK_EXE = ' + BCCFOLDER + 'BIN\ILINK32.EXE'  + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'BRC_EXE = ' + BCCFOLDER + 'BIN\BRC32.EXE'  + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'APP_NAME = ' + PROJECTFOLDER + Left ( PRGFILES [1] , Len( PRGFILES [1] ) - 4 ) + '.Exe' + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'RC_FILE = ' + MINIGUIFOLDER + 'RESOURCES\MINIGUI.RC'  + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'INCLUDE_DIR = ' + HARBOURFOLDER + 'INCLUDE;' + MINIGUIFOLDER + 'INCLUDE' + ';' + pf + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'CC_LIB_DIR = ' + BCCFOLDER + 'LIB'  + Chr( 13 ) + Chr( 10 )
    Out := Out + 'HRB_LIB_DIR = ' + HARBOURFOLDER + 'LIB'  + Chr( 13 ) + Chr( 10 )
-   Out := Out + 'OBJ_DIR = ' + PROJECTFOLDER + 'OBJ' + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'C_DIR = ' + PROJECTFOLDER + 'OBJ' + Chr( 13 ) + Chr( 10 ) 
-   Out := Out + 'USER_FLAGS = ' + Chr( 13 ) + Chr( 10 ) 
+   Out := Out + 'OBJ_DIR = ' + PROJECTFOLDER + 'OBJ' + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'C_DIR = ' + PROJECTFOLDER + 'OBJ' + Chr( 13 ) + Chr( 10 )
+   Out := Out + 'USER_FLAGS = ' + Chr( 13 ) + Chr( 10 )
 
    IF DebugActive == .T.
       MemoWrit ( PROJECTFOLDER +  'Init.Cld' , 'OPTIONS NORUNATSTARTUP' )
-      Out := Out + 'HARBOUR_FLAGS = /i$(INCLUDE_DIR)  /n /b $(USER_FLAGS)' + Chr( 13 ) + Chr( 10 ) 
+      Out := Out + 'HARBOUR_FLAGS = /i$(INCLUDE_DIR)  /n /b $(USER_FLAGS)' + Chr( 13 ) + Chr( 10 )
    ELSE
-      Out := Out + 'HARBOUR_FLAGS = /i$(INCLUDE_DIR)  /n $(USER_FLAGS)' + Chr( 13 ) + Chr( 10 ) 
+      Out := Out + 'HARBOUR_FLAGS = /i$(INCLUDE_DIR)  /n $(USER_FLAGS)' + Chr( 13 ) + Chr( 10 )
    ENDIF
 
    Out := Out + 'COBJFLAGS =  -c -O2 -tW -M  -I' + BCCFOLDER + 'INCLUDE -I$(INCLUDE_DIR) -L' + BCCFOLDER + 'LIB' + Chr( 13 ) + Chr( 10 )
@@ -216,7 +210,7 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\dll.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\calldll.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\gtgui.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    Out := Out + ' echo $(HRB_LIB_DIR)\rtl.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\vm.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\rdd.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
@@ -233,7 +227,7 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\pcrepos.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\ct.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\libmisc.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-#else
+   #else
    Out := Out + ' echo $(HRB_LIB_DIR)\hbcplr.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbrtl.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbvm.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
@@ -252,26 +246,26 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\hbct.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbmisc.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbole.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-#endif
+   #endif
    Out := Out + ' echo $(HRB_LIB_DIR)\hbprinter.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\miniprint.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\socket.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
 
-   IF ZIPSUPPORT == .T.     
+   IF ZIPSUPPORT == .T.
       Out := Out + ' echo $(HRB_LIB_DIR)\ziparchive.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    ENDIF
 
-   IF ODBCSUPPORT == .T.     
+   IF ODBCSUPPORT == .T.
       Out := Out + ' echo $(HRB_LIB_DIR)\hbodbc.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
       Out := Out + ' echo $(HRB_LIB_DIR)\odbc32.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    ENDIF
 
-   IF ADSSUPPORT == .T.     
+   IF ADSSUPPORT == .T.
       Out := Out + ' echo $(HRB_LIB_DIR)\rddads.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
       Out := Out + ' echo $(HRB_LIB_DIR)\ace32.lib  + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    ENDIF
 
-   IF MYSQLSUPPORT == .T.     
+   IF MYSQLSUPPORT == .T.
       Out := Out + ' echo $(HRB_LIB_DIR)\mysql.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
       Out := Out + ' echo $(HRB_LIB_DIR)\libmysql.lib  + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    ENDIF
@@ -332,9 +326,7 @@ PROCEDURE Build
 
    ENDIF
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 PROCEDURE Clean ( deleteexe )
 
@@ -355,7 +347,7 @@ PROCEDURE Clean ( deleteexe )
    ADir ( PROJECTFOLDER + '*.MAP'     , aMapFiles )
    ADir ( PROJECTFOLDER + '*.TDS'     , aTdsFiles )
    ADir ( PROJECTFOLDER + '*.RES'     , aResFiles )
-	
+
    FOR i := 1 TO Len ( aCFiles )
       DELETE FILE ( PROJECTFOLDER + 'OBJ\' +  aCFiles[i] )
    NEXT i
@@ -380,9 +372,7 @@ PROCEDURE Clean ( deleteexe )
       DELETE FILE ( PROJECTFOLDER + Left ( prg[1] , Len ( prg[1] ) - 4 ) + '.exe' )
    ENDIF
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 PROCEDURE SaveEnvironment ( WinFolder )
 
@@ -395,9 +385,7 @@ PROCEDURE SaveEnvironment ( WinFolder )
 
    MemoWrit ( WinFolder + 'mpm.ini' , c )
 
-RETURN
-
-//***************************************************************************
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -426,4 +414,3 @@ HB_FUNC ( SETCURRENTFOLDER )
 
 #pragma ENDDUMP
 
-//***************************************************************************

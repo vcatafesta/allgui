@@ -1,7 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2003-2011 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2003-2011 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -9,480 +8,466 @@ ANNOUNCE RDDSYS
 #include "minigui.ch"
 
 #ifndef __XHARBOUR__
-   #xcommand DEFAULT => OTHERWISE
+#xcommand DEFAULT => OTHERWISE
 #endif
 
 #define PROGRAM 'Tray Player'
 #define VERSION ' version 1.5.2'
 #define COPYRIGHT ' 2003-2011 Grigory Filatov'
 
-#define NTRIM( n )	hb_ntos( n )
+#define NTRIM( n )   hb_ntos( n )
 
 MEMVAR nDevice, aFiles, aDuration, nCurItem, cCommand, lWinNT, cIniFile, lShuffle
-*--------------------------------------------------------*
-Procedure Main( ... )
-*--------------------------------------------------------*
-Local cPrgPath := cFilePath(_GetErrorlogFile()), aParams := HB_aParams(), ;
-	aArray1 := {}, aArray2 := {}, cFolder := GetMyDocumentsFolder()
 
-	PUBLIC nDevice := 0, aFiles := {}, aDuration := {}, ;
-		nCurItem := 1, cCommand := "STOP", lWinNT := IsWinNT(), ;
-		cIniFile := cPrgPath + "\mru.ini", lShuffle := .F.
+PROCEDURE Main( ... )
 
-	SET MULTIPLE OFF
+   LOCAL cPrgPath := cFilePath(_GetErrorlogFile()), aParams := HB_aParams(), ;
+      aArray1 := {}, aArray2 := {}, cFolder := GetMyDocumentsFolder()
 
-	Set ShowDetailError Off
+   PUBLIC nDevice := 0, aFiles := {}, aDuration := {}, ;
+      nCurItem := 1, cCommand := "STOP", lWinNT := IsWinNT(), ;
+      cIniFile := cPrgPath + "\mru.ini", lShuffle := .F.
 
-	IF PCOUNT() == 0
+   SET MULTIPLE OFF
 
-		IF FILE(cIniFile)
+   SET ShowDetailError Off
 
-			BEGIN INI FILE cIniFile
+   IF PCOUNT() == 0
 
-				GET aArray1 SECTION "MRU" ENTRY "Files"
-				GET aArray2 SECTION "MRU" ENTRY "Duration"
-				GET cFolder SECTION "MRU" ENTRY "Folder"
-				GET nCurItem SECTION "MRU" ENTRY "Item"
+      IF FILE(cIniFile)
 
-				GET lShuffle SECTION "Options" ENTRY "Shuffle" DEFAULT lShuffle
-			END INI
+         BEGIN INI FILE cIniFile
 
-			AEVAL( aArray1, {|e,i| IF(FILE(e), ( AADD(aFiles, e), AADD(aDuration, aArray2[i]) ), )} )
-			nCurItem := IF( nCurItem > LEN(aFiles), 1, nCurItem )
+            GET aArray1 SECTION "MRU" ENTRY "Files"
+            GET aArray2 SECTION "MRU" ENTRY "Duration"
+            GET cFolder SECTION "MRU" ENTRY "Folder"
+            GET nCurItem SECTION "MRU" ENTRY "Item"
 
-		ENDIF
+            GET lShuffle SECTION "Options" ENTRY "Shuffle" DEFAULT lShuffle
+         END INI
 
-	ENDIF
+         AEVAL( aArray1, {|e,i| IF(FILE(e), ( AADD(aFiles, e), AADD(aDuration, aArray2[i]) ), )} )
+         nCurItem := IF( nCurItem > LEN(aFiles), 1, nCurItem )
 
-	SET EVENTS FUNCTION TO MYEVENTS
+      ENDIF
 
-	DEFINE WINDOW Form_1 					;
-		AT 0,0 						;
-		WIDTH 0 HEIGHT 0 				;
-		TITLE PROGRAM 					;
-		MAIN NOSHOW 					;
-		ON INIT OnInit( aParams, cPrgPath, cFolder )	;
-		ON RELEASE SaveMRU()				;
-		NOTIFYICON 'STOP' 				;
-		NOTIFYTOOLTIP 'Stop (nothing to play)' 		;
-		ON NOTIFYCLICK PlayFiles()
+   ENDIF
 
-	END WINDOW
+   SET EVENTS FUNCTION TO MYEVENTS
 
-	ACTIVATE WINDOW Form_1
+   DEFINE WINDOW Form_1                ;
+         AT 0,0                   ;
+         WIDTH 0 HEIGHT 0             ;
+         TITLE PROGRAM                ;
+         MAIN NOSHOW                ;
+         ON INIT OnInit( aParams, cPrgPath, cFolder )   ;
+         ON RELEASE SaveMRU()            ;
+         NOTIFYICON 'STOP'             ;
+         NOTIFYTOOLTIP 'Stop (nothing to play)'       ;
+         ON NOTIFYCLICK PlayFiles()
 
-Return
+   END WINDOW
 
-*--------------------------------------------------------*
-Procedure OnInit( aParams, cPrgPath, cFolder )
-*--------------------------------------------------------*
-Local i, cFile, nLen := LEN(aParams)
+   ACTIVATE WINDOW Form_1
 
-	IF nLen > 0
+   RETURN
 
-		For i = 1 To nLen
+PROCEDURE OnInit( aParams, cPrgPath, cFolder )
 
-			cFile := aParams[i]
+   LOCAL i, cFile, nLen := LEN(aParams)
 
-			IF AT("\", cFile) == 0
+   IF nLen > 0
 
-				cFile := cPrgPath + "\" + cFile
+      FOR i = 1 To nLen
 
-			ENDIF
+         cFile := aParams[i]
 
-			IF FILE( _GetShortPathName(cFile) )
+         IF AT("\", cFile) == 0
 
-				cFolder := cFilePath(cFile)
-				AADD( aFiles, cFile )
-				AADD( aDuration, GetMP3Duration(cFile) )
+            cFile := cPrgPath + "\" + cFile
 
-			ENDIF
+         ENDIF
 
-		Next
+         IF FILE( _GetShortPathName(cFile) )
 
-	ENDIF
+            cFolder := cFilePath(cFile)
+            AADD( aFiles, cFile )
+            AADD( aDuration, GetMP3Duration(cFile) )
 
-	BuildMenu()
+         ENDIF
 
-	SetCurrentFolder( cFolder )
+      NEXT
 
-	IF LEN(aFiles) > 0
-		PlayAudioFile()
-	ENDIF
+   ENDIF
 
-Return
+   BuildMenu()
 
-*--------------------------------------------------------*
-Static Procedure BuildMenu()
-*--------------------------------------------------------*
-Local i, cItem
+   SetCurrentFolder( cFolder )
 
-	DEFINE NOTIFY MENU OF Form_1
+   IF LEN(aFiles) > 0
+      PlayAudioFile()
+   ENDIF
 
-		ITEM 'E&xit'		ACTION ( IF(EMPTY(nDevice), , C_MCICLOSE(nDevice)), Form_1.Release ) IMAGE "EXIT"
-		SEPARATOR	
-		ITEM 'A&bout...'	ACTION ShellAbout( "About " + PROGRAM + "#", PROGRAM + VERSION + CRLF + ;
-			"Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) ) IMAGE "INFO"
-		ITEM '&Mail to author...' ACTION ShellExecute(0, "open", "rundll32.exe", ;
-				"url.dll,FileProtocolHandler " + ;
-				"mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
-				"&subject=Tray%20Player%20Feedback:" + ;
-				"&body=Dear%20Author%2C%0A%0A", , 1) IMAGE "MAIL"
-		SEPARATOR	
+   RETURN
 
-		IF LEN(aFiles) > 0
+STATIC PROCEDURE BuildMenu()
 
-			ITEM '&Shuffle'	ACTION ( lShuffle := !lShuffle, Form_1.Shuffle.Checked := lShuffle ) NAME Shuffle
-			Form_1.Shuffle.Checked := lShuffle
+   LOCAL i, cItem
 
-			POPUP "Playlist"
-				For i = 1 To LEN(aFiles)
-					cItem := "Item_" + NTRIM(i)
-					ITEM StrTran( SubStr( cFileNoExt( aFiles[i] ), 1, 56 ), "_", " " ) + " (" + aDuration[i] + ")" ;
-						ACTION PlayThisFile() NAME &cItem
-				Next
-			END POPUP
+   DEFINE NOTIFY MENU OF Form_1
 
-			cItem := "Item_" + NTRIM(nCurItem)
-			Form_1.&(cItem).Checked := .T.
+      ITEM 'E&xit'      ACTION ( IF(EMPTY(nDevice), , C_MCICLOSE(nDevice)), Form_1.Release ) IMAGE "EXIT"
+      SEPARATOR
+      ITEM 'A&bout...'   ACTION ShellAbout( "About " + PROGRAM + "#", PROGRAM + VERSION + CRLF + ;
+         "Copyright " + Chr(169) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) ) IMAGE "INFO"
+      ITEM '&Mail to author...' ACTION ShellExecute(0, "open", "rundll32.exe", ;
+         "url.dll,FileProtocolHandler " + ;
+         "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
+         "&subject=Tray%20Player%20Feedback:" + ;
+         "&body=Dear%20Author%2C%0A%0A", , 1) IMAGE "MAIL"
+      SEPARATOR
 
-			SEPARATOR	
-			ITEM '&Previous'	ACTION PlayControl(-1)	IMAGE "BACK"
-			ITEM '&Next'		ACTION PlayControl(1)	IMAGE "NEXT"
-			SEPARATOR	
+      IF LEN(aFiles) > 0
 
-		ENDIF
+         ITEM '&Shuffle'   ACTION ( lShuffle := !lShuffle, Form_1.Shuffle.Checked := lShuffle ) NAME Shuffle
+         Form_1.Shuffle.Checked := lShuffle
 
-		ITEM '&Open...'		ACTION IF( OpenFiles(), PlayFiles(), ) IMAGE "OPEN"
+         POPUP "Playlist"
+            FOR i = 1 To LEN(aFiles)
+               cItem := "Item_" + NTRIM(i)
+               ITEM StrTran( SubStr( cFileNoExt( aFiles[i] ), 1, 56 ), "_", " " ) + " (" + aDuration[i] + ")" ;
+                  ACTION PlayThisFile() NAME &cItem
+            NEXT
+         END POPUP
 
-	END MENU
+         cItem := "Item_" + NTRIM(nCurItem)
+         Form_1.&(cItem).Checked := .T.
 
-Return
+         SEPARATOR
+         ITEM '&Previous'   ACTION PlayControl(-1)   IMAGE "BACK"
+         ITEM '&Next'      ACTION PlayControl(1)   IMAGE "NEXT"
+         SEPARATOR
 
-*--------------------------------------------------------*
-Static Procedure PlayThisFile()
-*--------------------------------------------------------*
-Local cItem := This.Name
+      ENDIF
 
-	nCurItem := Val( SubStr(cItem, At("_", cItem) + 1) )
+      ITEM '&Open...'      ACTION IF( OpenFiles(), PlayFiles(), ) IMAGE "OPEN"
 
-	IF !EMPTY(nDevice)
-		C_MCICLOSE( nDevice )
-		nDevice := 0
-	ENDIF
+   END MENU
 
-	BuildMenu()
-	PlayAudioFile()
+   RETURN
 
-	cCommand := "PREVNEXT"
+STATIC PROCEDURE PlayThisFile()
 
-Return
+   LOCAL cItem := This.Name
 
-*--------------------------------------------------------*
-Static Procedure PlayFiles()
-*--------------------------------------------------------*
+   nCurItem := Val( SubStr(cItem, At("_", cItem) + 1) )
 
-	IF cCommand == "PAUSE"
+   IF !EMPTY(nDevice)
+      C_MCICLOSE( nDevice )
+      nDevice := 0
+   ENDIF
 
-		C_MCIRESUME( nDevice )
+   BuildMenu()
+   PlayAudioFile()
 
-		cCommand := "PLAY"
-		Form_1.NotifyIcon := 'MAIN'
+   cCommand := "PREVNEXT"
 
-	ELSEIF cCommand == "PLAY"
+   RETURN
 
-		C_MCIPAUSE( nDevice )
+STATIC PROCEDURE PlayFiles()
 
-		cCommand := "PAUSE"
-		Form_1.NotifyIcon := 'PAUSE'
+   IF cCommand == "PAUSE"
 
-	ELSEIF cCommand == "STOP"
+      C_MCIRESUME( nDevice )
 
-		IF LEN(aFiles) == 0
+      cCommand := "PLAY"
+      Form_1.NotifyIcon := 'MAIN'
 
-			OpenFiles()
+   ELSEIF cCommand == "PLAY"
 
-		ENDIF
+      C_MCIPAUSE( nDevice )
 
-		IF LEN(aFiles) <> 0
+      cCommand := "PAUSE"
+      Form_1.NotifyIcon := 'PAUSE'
 
-			IF !lWinNT
-				DO EVENTS
-			ENDIF
+   ELSEIF cCommand == "STOP"
 
-			PlayAudioFile()
+      IF LEN(aFiles) == 0
 
-		ENDIF
+         OpenFiles()
 
-	ENDIF
+      ENDIF
 
-Return
+      IF LEN(aFiles) <> 0
 
-*--------------------------------------------------------*
-Static Procedure PlayAudioFile()
-*--------------------------------------------------------*
+         IF !lWinNT
+            DO EVENTS
+         ENDIF
 
-	IF lWinNT .AND. ( cCommand == "STOP" .OR. cCommand == "PREVNEXT" )
-		DO EVENTS
-	ENDIF
+         PlayAudioFile()
 
-	IF C_MCIOPEN( "WaveAudio", aFiles[nCurItem], @nDevice ) == 0
+      ENDIF
 
-		IF C_MCIPLAY( nDevice, Application.Handle ) == 0
+   ENDIF
 
-			cCommand := "PLAY"
+   RETURN
 
-			Form_1.NotifyIcon := 'MAIN'
-			Form_1.NotifyTooltip := StrTran( SubStr( cFileNoExt( aFiles[nCurItem] ), 1, 56 ), "_", " " ) + ;
-				" (" + aDuration[nCurItem] + ")"
+STATIC PROCEDURE PlayAudioFile()
 
-		ELSE
+   IF lWinNT .AND. ( cCommand == "STOP" .OR. cCommand == "PREVNEXT" )
+      DO EVENTS
+   ENDIF
 
-			IF LEN(aFiles) > 1
+   IF C_MCIOPEN( "WaveAudio", aFiles[nCurItem], @nDevice ) == 0
 
-				PlayControl(1)
+      IF C_MCIPLAY( nDevice, Application.Handle ) == 0
 
-			ENDIF
+         cCommand := "PLAY"
 
-		ENDIF
+         Form_1.NotifyIcon := 'MAIN'
+         Form_1.NotifyTooltip := StrTran( SubStr( cFileNoExt( aFiles[nCurItem] ), 1, 56 ), "_", " " ) + ;
+            " (" + aDuration[nCurItem] + ")"
 
-	ELSE
-		IF LEN(aFiles) > 1
+      ELSE
 
-			PlayControl(1)
+         IF LEN(aFiles) > 1
 
-		ENDIF
+            PlayControl(1)
 
-	ENDIF
+         ENDIF
 
-Return
+      ENDIF
 
-*--------------------------------------------------------*
-Static Procedure PlayControl( nMode )
-*--------------------------------------------------------*
-Local nOldItem
+   ELSE
+      IF LEN(aFiles) > 1
 
-	IF LEN(aFiles) > 0 .AND. cCommand <> "STOP"
+         PlayControl(1)
 
-		IF lShuffle
+      ENDIF
 
-			nOldItem := nCurItem
-			nCurItem := MAX( 1, Random( LEN(aFiles) ) )
+   ENDIF
 
-			IF nOldItem == nCurItem
-				nCurItem := MAX( 1, Random( LEN(aFiles) ) )
-			ENDIF
+   RETURN
 
-		ELSE
+STATIC PROCEDURE PlayControl( nMode )
 
-			IF nMode > 0
+   LOCAL nOldItem
 
-				IF nCurItem < LEN(aFiles)
+   IF LEN(aFiles) > 0 .AND. cCommand <> "STOP"
 
-					nCurItem++
+      IF lShuffle
 
-				ELSE
+         nOldItem := nCurItem
+         nCurItem := MAX( 1, Random( LEN(aFiles) ) )
 
-					nCurItem := 1
+         IF nOldItem == nCurItem
+            nCurItem := MAX( 1, Random( LEN(aFiles) ) )
+         ENDIF
 
-				ENDIF
+      ELSE
 
-			ELSE
+         IF nMode > 0
 
-				IF nCurItem > 1
+            IF nCurItem < LEN(aFiles)
 
-					nCurItem--
+               nCurItem++
 
-				ELSE
+            ELSE
 
-					nCurItem := LEN(aFiles)
+               nCurItem := 1
 
-				ENDIF
+            ENDIF
 
-			ENDIF
+         ELSE
 
-		ENDIF
+            IF nCurItem > 1
 
-		IF !EMPTY(nDevice)
-			C_MCICLOSE( nDevice )
-			nDevice := 0
-		ENDIF
+               nCurItem--
 
-		BuildMenu()
-		PlayAudioFile()
+            ELSE
 
-		cCommand := "PREVNEXT"
+               nCurItem := LEN(aFiles)
 
-	ENDIF
+            ENDIF
 
-Return
+         ENDIF
 
-*--------------------------------------------------------*
-Static Function GetMP3Duration( cFile )
-*--------------------------------------------------------*
-Local nLength
+      ENDIF
 
-	@0,0 PLAYER Play_1		;
-		OF Form_1		;
-		WIDTH 0 HEIGHT 0	;
-		FILE cFile
+      IF !EMPTY(nDevice)
+         C_MCICLOSE( nDevice )
+         nDevice := 0
+      ENDIF
 
-	nLength := Form_1.Play_1.Length / 60000
+      BuildMenu()
+      PlayAudioFile()
 
-	Form_1.Play_1.Release
+      cCommand := "PREVNEXT"
 
-Return NTRIM( Int(nLength) ) + "'" + StrZero( Int( ( nLength - Int(nLength) ) * 60 ), 2 )
+   ENDIF
 
-*--------------------------------------------------------*
-Static Function OpenFiles()
-*--------------------------------------------------------*
-Local lRet := .F., cCurPath := CurDrive() + ":\" + CurDir()
-Local aGetFiles := GetFile( { {"Audio Files", "*.mp3;*.wma;*.wav;*.mid"} }, "Select a File(s)", StrTran(cCurPath, "\\", "\"), .T., .F. )
+   RETURN
 
-	IF LEN(aGetFiles) > 0
+STATIC FUNCTION GetMP3Duration( cFile )
 
-		lRet := .T.
+   LOCAL nLength
 
-		aFiles := {}
-		AEVAL( aGetFiles, {|e| AADD(aFiles, e)} )
-		ASORT( aFiles )
+   @0,0 PLAYER Play_1      ;
+      OF Form_1      ;
+      WIDTH 0 HEIGHT 0   ;
+      FILE cFile
 
-		aDuration := {}
-		AEVAL( aFiles, {|e| AADD(aDuration, GetMP3Duration(e))} )
+   nLength := Form_1.Play_1.Length / 60000
 
-		IF !EMPTY(nDevice)
-			C_MCICLOSE( nDevice )
-			nDevice := 0
-		ENDIF
+   Form_1.Play_1.Release
 
-		nCurItem := 1
-		BuildMenu()
+   RETURN NTRIM( Int(nLength) ) + "'" + StrZero( Int( ( nLength - Int(nLength) ) * 60 ), 2 )
 
-		cCommand := "STOP"
-		Form_1.NotifyIcon := 'STOP'
-		Form_1.NotifyTooltip := 'Stop'
+STATIC FUNCTION OpenFiles()
 
-	ENDIF
+   LOCAL lRet := .F., cCurPath := CurDrive() + ":\" + CurDir()
+   LOCAL aGetFiles := GetFile( { {"Audio Files", "*.mp3;*.wma;*.wav;*.mid"} }, "Select a File(s)", StrTran(cCurPath, "\\", "\"), .T., .F. )
 
-Return lRet
+   IF LEN(aGetFiles) > 0
 
-*--------------------------------------------------------*
-Static Procedure SaveMRU()
-*--------------------------------------------------------*
+      lRet := .T.
 
-	IF LEN(aFiles) > 0
+      aFiles := {}
+      AEVAL( aGetFiles, {|e| AADD(aFiles, e)} )
+      ASORT( aFiles )
 
-		BEGIN INI FILE cIniFile
+      aDuration := {}
+      AEVAL( aFiles, {|e| AADD(aDuration, GetMP3Duration(e))} )
 
-			SET SECTION "MRU" ENTRY "Files" TO aFiles
-			SET SECTION "MRU" ENTRY "Duration" TO aDuration
-			SET SECTION "MRU" ENTRY "Folder" TO cFilePath(aFiles[1])
-			SET SECTION "MRU" ENTRY "Item" TO nCurItem
+      IF !EMPTY(nDevice)
+         C_MCICLOSE( nDevice )
+         nDevice := 0
+      ENDIF
 
-			SET SECTION "Options" ENTRY "Shuffle" TO lShuffle
-		END INI
+      nCurItem := 1
+      BuildMenu()
 
-	ENDIF
+      cCommand := "STOP"
+      Form_1.NotifyIcon := 'STOP'
+      Form_1.NotifyTooltip := 'Stop'
 
-Return
+   ENDIF
 
-*--------------------------------------------------------*
-Function cFileNoExt( cPathMask )
-*--------------------------------------------------------*
-LOCAL cName := AllTrim( cFileNoPath( cPathMask ) )
-LOCAL n     := rAt( ".", cName )
+   RETURN lRet
 
-Return AllTrim( If( n > 0, Left( cName, n - 1 ), cName ) )
+STATIC PROCEDURE SaveMRU()
 
-#define MM_MCINOTIFY    953     // 0x3B9
-#define WM_MENUSELECT   287
-*--------------------------------------------------------*
-Function MyEvents( hWnd, nMsg, wParam, lParam )
-*--------------------------------------------------------*
-Local nOldItem
+   IF LEN(aFiles) > 0
 
-    SWITCH nMsg
+      BEGIN INI FILE cIniFile
 
-	CASE MM_MCINOTIFY
+         SET SECTION "MRU" ENTRY "Files" TO aFiles
+         SET SECTION "MRU" ENTRY "Duration" TO aDuration
+         SET SECTION "MRU" ENTRY "Folder" TO cFilePath(aFiles[1])
+         SET SECTION "MRU" ENTRY "Item" TO nCurItem
 
-		IF cCommand == "STOP"
+         SET SECTION "Options" ENTRY "Shuffle" TO lShuffle
+      END INI
 
-		ELSEIF cCommand == "PREVNEXT"
+   ENDIF
 
-			cCommand := "PLAY"
+   RETURN
 
-		ELSE
+FUNCTION cFileNoExt( cPathMask )
 
-			IF lShuffle
+   LOCAL cName := AllTrim( cFileNoPath( cPathMask ) )
+   LOCAL n     := rAt( ".", cName )
 
-				nOldItem := nCurItem
-				nCurItem := MAX( 1, Random( LEN(aFiles) ) )
+   RETURN AllTrim( If( n > 0, Left( cName, n - 1 ), cName ) )
 
-				IF nOldItem == nCurItem
-					nCurItem := MAX( 1, Random( LEN(aFiles) ) )
-				ENDIF
+   #define MM_MCINOTIFY    953     // 0x3B9
+   #define WM_MENUSELECT   287
 
-				IF !EMPTY(nDevice)
-					C_MCICLOSE( nDevice )
-					nDevice := 0
-				ENDIF
+FUNCTION MyEvents( hWnd, nMsg, wParam, lParam )
 
-				IF lWinNT
-					cCommand := "PREVNEXT"
-				ENDIF
+   LOCAL nOldItem
 
-				BuildMenu()
-				PlayAudioFile()
+   SWITCH nMsg
 
-			ELSE
+   CASE MM_MCINOTIFY
 
-				IF nCurItem < LEN(aFiles)
+      IF cCommand == "STOP"
 
-					nCurItem++
+      ELSEIF cCommand == "PREVNEXT"
 
-					IF !EMPTY(nDevice)
-						C_MCICLOSE( nDevice )
-						nDevice := 0
-					ENDIF
+         cCommand := "PLAY"
 
-					IF lWinNT
-						cCommand := "PREVNEXT"
-					ENDIF
+      ELSE
 
-					BuildMenu()
-					PlayAudioFile()
+         IF lShuffle
 
-				ELSE
+            nOldItem := nCurItem
+            nCurItem := MAX( 1, Random( LEN(aFiles) ) )
 
-					IF !EMPTY(nDevice)
-						C_MCICLOSE( nDevice )
-						nDevice := 0
-					ENDIF
+            IF nOldItem == nCurItem
+               nCurItem := MAX( 1, Random( LEN(aFiles) ) )
+            ENDIF
 
-					cCommand := "STOP"
-					Form_1.NotifyIcon := 'STOP'
-					Form_1.NotifyTooltip := 'Stop'
+            IF !EMPTY(nDevice)
+               C_MCICLOSE( nDevice )
+               nDevice := 0
+            ENDIF
 
-				ENDIF
+            IF lWinNT
+               cCommand := "PREVNEXT"
+            ENDIF
 
-			ENDIF
+            BuildMenu()
+            PlayAudioFile()
 
-		ENDIF
+         ELSE
 
-		EXIT
+            IF nCurItem < LEN(aFiles)
 
-	CASE WM_MENUSELECT
+               nCurItem++
 
-		EXIT
+               IF !EMPTY(nDevice)
+                  C_MCICLOSE( nDevice )
+                  nDevice := 0
+               ENDIF
 
-	DEFAULT
+               IF lWinNT
+                  cCommand := "PREVNEXT"
+               ENDIF
 
-		Return Events ( hWnd, nMsg, wParam, lParam )
+               BuildMenu()
+               PlayAudioFile()
 
-    END
+            ELSE
 
-Return (0)
+               IF !EMPTY(nDevice)
+                  C_MCICLOSE( nDevice )
+                  nDevice := 0
+               ENDIF
 
+               cCommand := "STOP"
+               Form_1.NotifyIcon := 'STOP'
+               Form_1.NotifyTooltip := 'Stop'
+
+            ENDIF
+
+         ENDIF
+
+      ENDIF
+
+      EXIT
+
+   CASE WM_MENUSELECT
+
+      EXIT
+
+      DEFAULT
+
+      RETURN Events ( hWnd, nMsg, wParam, lParam )
+
+   END
+
+   RETURN (0)
 
 #pragma BEGINDUMP
 
@@ -517,29 +502,30 @@ HB_FUNC ( C_MCIPLAY )
    mciPlayParms.dwCallback = ( DWORD ) ( LPVOID ) hb_parnl( 2 );
 
    hb_retnl( mciSendCommand( hb_parni( 1 ),         // Device ID
-		MCI_PLAY, MCI_NOTIFY,
-		( DWORD ) &mciPlayParms ) );
+      MCI_PLAY, MCI_NOTIFY,
+      ( DWORD ) &mciPlayParms ) );
 }
 
 HB_FUNC ( C_MCIRESUME )
 {
    hb_retnl( mciSendCommand( hb_parni( 1 ),         // Device ID
-		MCI_RESUME, 0,
-		NULL ) );
+      MCI_RESUME, 0,
+      NULL ) );
 }
 
 HB_FUNC ( C_MCIPAUSE )
 {
    hb_retnl( mciSendCommand( hb_parni( 1 ),         // Device ID
-		MCI_PAUSE, 0,
-		NULL ) );
+      MCI_PAUSE, 0,
+      NULL ) );
 }
 
 HB_FUNC ( C_MCICLOSE )
 {
    hb_retnl( mciSendCommand( hb_parni( 1 ),         // Device ID
-		MCI_CLOSE, 0,
-		NULL ) );
+      MCI_CLOSE, 0,
+      NULL ) );
 }
 
 #pragma ENDDUMP
+

@@ -1,135 +1,134 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006-2008 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2008 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006-2008 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-#define GW_HWNDFIRST		0
-#define GW_HWNDLAST		1
-#define GW_HWNDNEXT		2
-#define GW_HWNDPREV		3
-#define GW_OWNER		4
-#define GW_CHILD		5
+#define GW_HWNDFIRST      0
+#define GW_HWNDLAST      1
+#define GW_HWNDNEXT      2
+#define GW_HWNDPREV      3
+#define GW_OWNER      4
+#define GW_CHILD      5
 
 #define APP_TITLE_EN 'Notepad'
-#define APP_TITLE_RU "Блокнот"	// Russian
+#define APP_TITLE_RU "Блокнот"   // Russian
 
 FUNCTION Main()
 
-	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 400 HEIGHT 200 ;
-		TITLE "Minimize/Maximize Notepad Demo" ;
-		MAIN ;
-		TOPMOST ;
-		ON INIT StartIt() ;
-		ON RELEASE CloseIt()
+   DEFINE WINDOW Form_Main ;
+         AT 0,0 ;
+         WIDTH 400 HEIGHT 200 ;
+         TITLE "Minimize/Maximize Notepad Demo" ;
+         MAIN ;
+         TOPMOST ;
+         ON INIT StartIt() ;
+         ON RELEASE CloseIt()
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	180
-			CAPTION 'Minimize/Maximize Notepad'
-			ACTION MinimizeIt()
-			DEFAULT .T.
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   180
+         CAPTION 'Minimize/Maximize Notepad'
+         ACTION MinimizeIt()
+         DEFAULT .T.
+      END BUTTON
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	180
-			CAPTION 'Cancel'
-			ACTION ThisWindow.Release
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   180
+         CAPTION 'Cancel'
+         ACTION ThisWindow.Release
+      END BUTTON
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_Main
+   CENTER WINDOW Form_Main
 
-	ACTIVATE WINDOW Form_Main
+   ACTIVATE WINDOW Form_Main
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION StartIt()
-Local aTitles := GetTitles( This.Handle )
 
-	IF EMPTY( aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) )
+   LOCAL aTitles := GetTitles( This.Handle )
 
-		_Execute ( 0, , "Notepad", , , 5 )
+   IF EMPTY( aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) )
 
-	ENDIF
+      _Execute ( 0, , "Notepad", , , 5 )
 
-RETURN Nil
+   ENDIF
 
+   RETURN NIL
 
 FUNCTION CloseIt()
-Local aTitles := GetTitles( This.Handle )
-#define WM_CLOSE          16
 
-	IF ( n := aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) ) > 0
+   LOCAL aTitles := GetTitles( This.Handle )
 
-		hWnd := aTitles[ n ][ 2 ]
+   #define WM_CLOSE          16
 
-		PostMessage ( hWnd, WM_CLOSE, 0, 0 )
+   IF ( n := aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) ) > 0
 
-	ENDIF
+      hWnd := aTitles[ n ][ 2 ]
 
-RETURN Nil
+      PostMessage ( hWnd, WM_CLOSE, 0, 0 )
 
+   ENDIF
+
+   RETURN NIL
 
 FUNCTION MinimizeIt()
-Local aTitles := GetTitles( Application.Handle )
-Local hWnd, n
 
-	IF ( n := aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) ) > 0
+   LOCAL aTitles := GetTitles( Application.Handle )
+   LOCAL hWnd, n
 
-		hWnd := aTitles[ n ][ 2 ]
+   IF ( n := aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) ) > 0
 
-		IF IsIconic( hWnd )
+      hWnd := aTitles[ n ][ 2 ]
 
-			_Maximize( hWnd )
+      IF IsIconic( hWnd )
 
-		ELSE
+         _Maximize( hWnd )
 
-			_Minimize( hWnd )
+      ELSE
 
-		ENDIF
+         _Minimize( hWnd )
 
-	ELSE
+      ENDIF
 
-		MsgStop( "Cannot find application window!", "Error" )
+   ELSE
 
-	ENDIF
+      MsgStop( "Cannot find application window!", "Error" )
 
-RETURN Nil
+   ENDIF
 
-*--------------------------------------------------------*
-Function GetTitles( hOwnWnd )
-*--------------------------------------------------------*
-Local aTasks := {}, cTitle := "", ;
-	hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )        // Get the first window
+   RETURN NIL
 
-	WHILE hWnd != 0                                   // Loop through all the windows
+FUNCTION GetTitles( hOwnWnd )
 
-		cTitle := GetWindowText( hWnd )
+   LOCAL aTasks := {}, cTitle := "", ;
+      hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )        // Get the first window
 
-		IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
-			IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
-			hWnd != hOwnWnd .AND.;             // If it is not this app
-			!EMPTY( cTitle ) .AND.;            // If the window has a title
-			!( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
-			!( cTitle == "Program Manager" )   // If it is not the Program Manager
+   WHILE hWnd != 0                                   // Loop through all the windows
 
-			aAdd( aTasks, { cTitle, hWnd } )
-		ENDIF
+      cTitle := GetWindowText( hWnd )
 
-		hWnd := GetWindow( hWnd, GW_HWNDNEXT )     // Get the next window
-	ENDDO
+      IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
+         IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
+         hWnd != hOwnWnd .AND.;             // If it is not this app
+         !EMPTY( cTitle ) .AND.;            // If the window has a title
+         !( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
+         !( cTitle == "Program Manager" )   // If it is not the Program Manager
 
-Return ( aTasks )
+         aAdd( aTasks, { cTitle, hWnd } )
+      ENDIF
+
+      hWnd := GetWindow( hWnd, GW_HWNDNEXT )     // Get the next window
+   ENDDO
+
+   RETURN ( aTasks )
+

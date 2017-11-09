@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -78,11 +78,9 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 STATIC lXPThemeActive  := .F.
 STATIC lDialogInMemory := .F.
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineButton ( ControlName, ParentFormName, x, y, Caption, ;
-   ProcedureName, w, h, fontname, fontsize, tooltip, gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
-   invisible, bold, italic, underline, strikeout, multiline, default, key, nId )
-*-----------------------------------------------------------------------------*
+ProcedureName, w, h, fontname, fontsize, tooltip, gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
+      invisible, bold, italic, underline, strikeout, multiline, default, key, nId )
    LOCAL ParentFormHandle , mVar , ControlHandle , blInit , FontHandle , k , Style
 
    hb_default( @w, 100 )
@@ -186,7 +184,7 @@ FUNCTION _DefineButton ( ControlName, ParentFormName, x, y, Caption, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "BUTTON"
    _HMG_aControlNames [k] := ControlName
@@ -247,13 +245,11 @@ FUNCTION _DefineButton ( ControlName, ParentFormName, x, y, Caption, ;
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineImageButton ( ControlName, ParentFormName, x, y, Caption, ;
-   ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
-   invisible, notabstop, default, icon, extract, nIdx, noxpstyle, key, nId )
-*-----------------------------------------------------------------------------*
+ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
+      invisible, notabstop, default, icon, extract, nIdx, noxpstyle, key, nId )
    LOCAL ParentFormHandle , mVar , ControlHandle , blInit , k , Style
    LOCAL nhImage , cPicture , aRet
 
@@ -264,7 +260,8 @@ FUNCTION _DefineImageButton ( ControlName, ParentFormName, x, y, Caption, ;
    hb_default( @nIdx, 0 )
 
    IF _HMG_ToolBarActive
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    IF _HMG_BeginWindowActive .OR. _HMG_BeginDialogActive
@@ -345,7 +342,7 @@ FUNCTION _DefineImageButton ( ControlName, ParentFormName, x, y, Caption, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  "BUTTON"
    _HMG_aControlNames [k] :=  ControlName
@@ -406,31 +403,28 @@ FUNCTION _DefineImageButton ( ControlName, ParentFormName, x, y, Caption, ;
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogButtonImage( ParentFormName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL image
 
    image := _HMG_aControlPicture  [k]
    IF !Empty( image ) .AND. ValType( ParentFormName ) <> 'U'
       _SetBtnPicture( ControlHandle, image )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]  // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
-   ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
-   invisible, notabstop, default, icon, fontname, fontsize, bold, italic, underline, ;
-   strikeout, lvertical, lefttext, uptext, aRGB_bk, aRGB_font, lnohotlight, lnoxpstyle, ;
-   ladjust, handcursor, imagewidth, imageheight, aGradInfo, lhorizontal )
-*-----------------------------------------------------------------------------*
+ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
+      invisible, notabstop, default, icon, fontname, fontsize, bold, italic, underline, ;
+      strikeout, lvertical, lefttext, uptext, aRGB_bk, aRGB_font, lnohotlight, lnoxpstyle, ;
+      ladjust, handcursor, imagewidth, imageheight, aGradInfo, lhorizontal )
    LOCAL cParentForm , mVar , ControlHandle , k
    LOCAL cPicture , FontHandle , aRet
 
@@ -455,7 +449,8 @@ FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
    ENDIF
 
    IF _HMG_ToolBarActive
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    IF ( FontHandle := GetFontHandle( FontName ) ) != 0
@@ -519,7 +514,7 @@ FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] :=  "OBUTTON"
    _HMG_aControlNames [k] :=   ControlName
@@ -566,12 +561,12 @@ FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
       Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-// HMG 1.0 Experimental Build 9a (JK)
-*-----------------------------------------------------------------------------*
+   // HMG 1.0 Experimental Build 9a (JK)
+
 FUNCTION OBTNEVENTS( hWnd, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aControlHandles, hWnd )
 
    HB_SYMBOL_UNUSED( wParam )
@@ -609,13 +604,13 @@ FUNCTION OBTNEVENTS( hWnd, nMsg, wParam, lParam )
 
    ENDIF
 
-RETURN 0
+   RETURN 0
 
-// HMG 1.0 Experimental Build 9a (JK)
-// (C) 2005 Jacek Kubica <kubica@wssk.wroc.pl>
-*-----------------------------------------------------------------------------*
+   // HMG 1.0 Experimental Build 9a (JK)
+   // (C) 2005 Jacek Kubica <kubica@wssk.wroc.pl>
+
 FUNCTION OwnButtonPaint( pdis )
-*-----------------------------------------------------------------------------*
+
    LOCAL hDC, itemState, itemAction, i, rgbTrans, hWnd, lFlat, lNotrans
    LOCAL oldBkMode, oldTextColor, hOldFont, hBrush, nFreeSpace
    LOCAL x1, y1, x2, y2, xp1, yp1, xp2, yp2
@@ -628,6 +623,7 @@ FUNCTION OwnButtonPaint( pdis )
    hDC := GETOWNBTNDC( pdis )
 
    IF Empty( hDC ) .OR. GETOWNBTNCTLTYPE( pdis ) <> ODT_BUTTON
+
       RETURN ( 1 )
    ENDIF
 
@@ -637,6 +633,7 @@ FUNCTION OwnButtonPaint( pdis )
    loSelect := ( AND( itemAction, ODA_SELECT ) == ODA_SELECT )
 
    IF ! lDrawEntire .AND. ! loFocus .AND. ! loSelect
+
       RETURN ( 1 )
    ENDIF
 
@@ -647,6 +644,7 @@ FUNCTION OwnButtonPaint( pdis )
    i := AScan ( _HMG_aControlHandles , hWnd )
 
    IF ( i <= 0 .OR. _HMG_aControlType[ i ] <> "OBUTTON" )
+
       RETURN ( 1 )
    ENDIF
 
@@ -700,7 +698,7 @@ FUNCTION OwnButtonPaint( pdis )
 
       hTheme := OpenThemeData( hWnd, ToUnicode( "BUTTON" ) )
       DrawThemeBackground( hTheme, hDC, BP_PUSHBUTTON, nStyle, aBtnRc, aBtnClipRc )
-      CloseThemeData( hTheme )
+      CLOSEThemeData( hTheme )
 
    ELSE
 
@@ -739,7 +737,7 @@ FUNCTION OwnButtonPaint( pdis )
                ReplaceGradInfo( aGradient, 1, 2 )
             ENDIF
 
-            IF lSelected 
+            IF lSelected
                IF Len( aGradient [ 1 ] ) == 3
                   IF IsArrayRGB( _HMG_aControlBkColor [ i ] ) .AND. ValType( _HMG_aControlBkColor [ i, 1 ] ) == "N"
                      _HMG_aControlBkColor [ i ] := { { 1, _HMG_aControlBkColor [ i ], Darker( _HMG_aControlBkColor [ i ], 82 ) } }
@@ -748,7 +746,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 2, yp2 - 2, aGradient [ 1 ][ 2 ], aGradient [ 1 ][ 1 ] )
                   FillRect( hDC, xp1 + 2, xp2 + 2, yp1 - 2, yp2 - 2, hBrush )
-                  DeleteObject( hBrush )
+                  DELETEObject( hBrush )
                ENDIF
             ELSEIF ! ( _HMG_aControlRangeMax [ i ] == 1 )
                IF Len( aGradient [ 1 ] ) == 3
@@ -756,7 +754,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 1, yp2 - 1, aGradient [ 1 ][ 1 ], aGradient [ 1 ][ 2 ] )
                   FillRect( hDC, xp1 + 1, xp2 + 1, yp1 - 1, yp2 - 1, hBrush )
-                  DeleteObject( hBrush )
+                  DELETEObject( hBrush )
                ENDIF
             ELSE
                IF Len( aGradient [ 1 ] ) == 3
@@ -765,7 +763,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 1, yp2 - 1, aGradient [ 1 ][ 2 ], aGradient [ 1 ][ 1 ] )
                   FillRect( hDC, xp1 + 1, xp2 + 1, yp1 - 1, yp2 - 1, hBrush )
-                  DeleteObject( hBrush )
+                  DELETEObject( hBrush )
                ENDIF
             ENDIF
 
@@ -787,7 +785,7 @@ FUNCTION OwnButtonPaint( pdis )
             ELSE
                FillRect( hDC, xp1 + 2, xp2 + 2, yp1 - 3, yp2 - 3, hBrush )
             ENDIF
-            DeleteObject( hBrush )
+            DELETEObject( hBrush )
 
          ENDIF
 
@@ -995,11 +993,10 @@ FUNCTION OwnButtonPaint( pdis )
    SetBkMode( hDC, oldBkMode )
    SetTextColor( hDC, oldTextColor )
 
-RETURN ( 1 )
+   RETURN ( 1 )
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION ToUnicode( cString )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, cTemp := ""
 
    FOR i := 1 TO Len( cString )
@@ -1007,17 +1004,17 @@ STATIC FUNCTION ToUnicode( cString )
    NEXT
    cTemp += Chr( 0 )
 
-RETURN cTemp
+   RETURN cTemp
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetBtnPictureMask( hWnd, ControlIndex )
-*-----------------------------------------------------------------------------*
+
    LOCAL hDC := GetDC( hWnd ), aBMP
    LOCAL aBtnRc := Array( 4 )
    LOCAL i := ControlIndex
    LOCAL x, y
 
    IF Empty( hDC ) .OR. Empty( _HMG_aControlBrushHandle [i] )
+
       RETURN NIL
    ENDIF
 
@@ -1034,33 +1031,30 @@ FUNCTION _SetBtnPictureMask( hWnd, ControlIndex )
 
    ReleaseDC( hWnd, hDC )
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DestroyBtnPictureMask( hWnd, ControlIndex )
-*-----------------------------------------------------------------------------*
+
    LOCAL MaskHwnd := _GetBtnPictureHandle( hWnd )
 
    IF ! Empty( MaskHwnd ) .AND. MaskHwnd <> _HMG_aControlBrushHandle [ ControlIndex ]
-      DeleteObject( MaskHwnd )
+      DELETEObject( MaskHwnd )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DestroyBtnPicture( hWnd, ControlIndex )
-*-----------------------------------------------------------------------------*
+
    LOCAL BtnPicHwnd := _GetBtnPictureHandle( hWnd )
 
    IF ! Empty( BtnPicHwnd ) .AND. BtnPicHwnd == _HMG_aControlBrushHandle [ ControlIndex ]
-      DeleteObject( BtnPicHwnd )
+      DELETEObject( BtnPicHwnd )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION Darker( aColor, Percent )
-*-----------------------------------------------------------------------------*
+
    LOCAL aDark := Array( 3 )
 
    Percent := Percent / 100
@@ -1069,11 +1063,10 @@ FUNCTION Darker( aColor, Percent )
    aDark [2] := Round( aColor [2] * Percent, 0 )
    aDark [3] := Round( aColor [3] * Percent, 0 )
 
-RETURN aDark
+   RETURN aDark
 
-*-----------------------------------------------------------------------------*
 FUNCTION Lighter( aColor, Percent )
-*-----------------------------------------------------------------------------*
+
    LOCAL Light, aLight := Array( 3 )
 
    Percent := Percent / 100
@@ -1083,11 +1076,10 @@ FUNCTION Lighter( aColor, Percent )
    aLight [2] := Round( aColor [2] * Percent, 0 ) + Light
    aLight [3] := Round( aColor [3] * Percent, 0 ) + Light
 
-RETURN aLight
+   RETURN aLight
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION CountIt( cText )
-*-----------------------------------------------------------------------------*
+
    LOCAL nPoz, nCount := 0
 
    IF At( CRLF, cText ) > 0
@@ -1097,11 +1089,10 @@ STATIC FUNCTION CountIt( cText )
       ENDDO
    ENDIF
 
-RETURN nCount
+   RETURN nCount
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION InvertGradInfo( aGradInfo )
-*-----------------------------------------------------------------------------*
+
    LOCAL aGradInvert := {}
 
    IF ! Empty( aGradInfo ) .AND. ValType( aGradInfo ) == "A"
@@ -1110,11 +1101,10 @@ STATIC FUNCTION InvertGradInfo( aGradInfo )
 
    ENDIF
 
-RETURN aGradInvert
+   RETURN aGradInvert
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION ModifGradInfo( aGradInfo )
-*-----------------------------------------------------------------------------*
+
    LOCAL nClr, aReturn := {}
 
    IF ! Empty( aGradInfo ) .AND. ValType( aGradInfo ) == "A"
@@ -1128,11 +1118,10 @@ STATIC FUNCTION ModifGradInfo( aGradInfo )
 
    ENDIF
 
-RETURN aReturn
+   RETURN aReturn
 
-*-----------------------------------------------------------------------------*
 STATIC PROCEDURE ReplaceGradInfo( aGradInfo, nClr, nItem )
-*-----------------------------------------------------------------------------*
+
    LOCAL aColor
 
    aColor := aGradInfo[ nClr ][ nItem ]
@@ -1140,11 +1129,10 @@ STATIC PROCEDURE ReplaceGradInfo( aGradInfo, nClr, nItem )
       aGradInfo[ nClr ][ nItem ] := RGB( aColor[ 1 ], aColor[ 2 ], aColor[ 3 ] )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _GradientFill( hDC, nTop, nLeft, nBottom, nRight, aGradInfo, lVertical )
-*-----------------------------------------------------------------------------*
+
    LOCAL nClr, nClrs, nSize, nSlice
 
    IF ! Empty( aGradInfo ) .AND. ValType( aGradInfo ) == "A"
@@ -1199,4 +1187,5 @@ STATIC FUNCTION _GradientFill( hDC, nTop, nLeft, nBottom, nRight, aGradInfo, lVe
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

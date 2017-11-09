@@ -1,11 +1,9 @@
 /*
- * $Id: htimer.prg,v 1.6 2008/09/26 15:17:26 mlacecilia Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTimer class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
+* $Id: htimer.prg,v 1.6 2008/09/26 15:17:26 mlacecilia Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* HTimer class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://www.geocities.com/alkresin/
 */
 
 #include "windows.ch"
@@ -17,56 +15,59 @@
 
 CLASS HTimer INHERIT HObject
 
-   CLASS VAR aTimers   INIT {}
+CLASS VAR aTimers   INIT {}
+
    DATA id
    DATA value
    DATA oParent
    DATA bAction
-   
+
    DATA   xName        HIDDEN
    ACCESS Name         INLINE ::xName
    ASSIGN Name(cName)  INLINE ::xName := cName, ;
-	                           __objAddData(::oParent, cName),;
-                              ::oParent:&(cName) := self
+      __objAddData(::oParent, cName),;
+      ::oParent:&(cName) := self
 
-	DATA   xInterval    HIDDEN
+   DATA   xInterval    HIDDEN
    ACCESS Interval     INLINE ::xInterval
    ASSIGN Interval(x)  INLINE ::xInterval := x, ;
-                              IIF( ::xInterval == 0, ;
-										     ::End(), ;
-											  SetTimer( ::oParent:handle, ::id, ::xInterval ))
+      IIF( ::xInterval == 0, ;
+      ::End(), ;
+      SetTimer( ::oParent:handle, ::id, ::xInterval ))
 
-   METHOD New( oParent,id,value,bAction )
-   METHOD End()
+METHOD New( oParent,id,value,bAction )
+
+METHOD End()
 
 ENDCLASS
 
 METHOD New( oParent,nId,value,bAction ) CLASS HTimer
 
    ::oParent := Iif( oParent==Nil, HWindow():GetMain(), oParent )
-   if nId != nil
-      if  Ascan( ::aTimers,{|o|o:id == nId} ) != 0
-			MsgStop("Error: attempt to createtimer with duplicated id")
-		   QUIT
-      endif
-   else
-	   nId := TIMER_FIRST_ID
-      do While Ascan( ::aTimers,{|o|o:id == nId} ) !=  0
+   IF nId != nil
+      IF  Ascan( ::aTimers,{|o|o:id == nId} ) != 0
+         MsgStop("Error: attempt to createtimer with duplicated id")
+         QUIT
+      ENDIF
+   ELSE
+      nId := TIMER_FIRST_ID
+      DO WHILE Ascan( ::aTimers,{|o|o:id == nId} ) !=  0
          nId++
-      enddo
-   endif
+      ENDDO
+   ENDIF
    ::id      := nId
    ::value   := value
    ::bAction := bAction
-	if ::value > 0
+   IF ::value > 0
       SetTimer( oParent:handle, ::id, ::value )
-   endif
+   ENDIF
    Aadd( ::aTimers,Self )
 
-Return Self
+   RETURN Self
 
 METHOD End() CLASS HTimer
-Local i
+
+   LOCAL i
 
    KillTimer( ::oParent:handle, ::id )
    i := Ascan( ::aTimers,{|o| o:id == ::id} )
@@ -75,25 +76,27 @@ Local i
       Asize( ::aTimers, Len( ::aTimers ) - 1 )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function TimerProc( hWnd, idTimer, time )
-Local i := Ascan( HTimer():aTimers,{|o| o:id == idTimer} )
+FUNCTION TimerProc( hWnd, idTimer, time )
 
-HB_SYMBOL_UNUSED(hWnd)
+   LOCAL i := Ascan( HTimer():aTimers,{|o| o:id == idTimer} )
+
+   HB_SYMBOL_UNUSED(hWnd)
 
    IF i != 0
       Eval( HTimer():aTimers[i]:bAction, time )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-EXIT PROCEDURE CleanTimers
-Local oTimer, i
+   EXIT PROCEDURE CleanTimers
+   LOCAL oTimer, i
 
-   For i := 1 TO Len( HTimer():aTimers )
+   FOR i := 1 TO Len( HTimer():aTimers )
       oTimer := HTimer():aTimers[i]
       KillTimer( oTimer:oParent:handle, oTimer:id )
    NEXT
 
-Return
+   RETURN
+

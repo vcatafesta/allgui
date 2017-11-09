@@ -1,61 +1,54 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Based on MEMIO sample included in Harbour distribution
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
+* Based on MEMIO sample included in Harbour distribution
 */
 
 #include "minigui.ch"
 
 REQUEST HB_MEMIO
 
-*--------------------------------------------------------*
-Function Main()
-*--------------------------------------------------------*
+FUNCTION Main()
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'Memory File System Demo' ;
-		MAIN NOMAXIMIZE ;
-		ON INIT OpenTable() ;
-		ON RELEASE CloseTable()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Memory File System Demo' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT OpenTable() ;
+         ON RELEASE CloseTable()
 
-		DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-			DEFINE POPUP 'Test'
-				ITEM "Exit"		ACTION ThisWindow.Release()
-			END POPUP
+         DEFINE POPUP 'Test'
+            ITEM "Exit"      ACTION ThisWindow.Release()
+         END POPUP
 
-		END MENU
+      END MENU
 
-		@ 10,10 BROWSE Browse_1	;
-			WIDTH 610	;
-			HEIGHT 390	;	
-			HEADERS { 'Code' , 'Name' , 'Residents' } ;
-			WIDTHS { 50 , 160 , 100 } ;
-			WORKAREA memarea ;
-			FIELDS { 'Code' , 'Name' , 'Residents' } ;
-			JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT } ;
-			EDIT ;
-			INPLACE ;
-			READONLY { .T. , .F. , .F. }
+      @ 10,10 BROWSE Browse_1   ;
+         WIDTH 610   ;
+         HEIGHT 390   ;
+         HEADERS { 'Code' , 'Name' , 'Residents' } ;
+         WIDTHS { 50 , 160 , 100 } ;
+         WORKAREA memarea ;
+         FIELDS { 'Code' , 'Name' , 'Residents' } ;
+         JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT } ;
+         EDIT ;
+         INPLACE ;
+         READONLY { .T. , .F. , .F. }
 
-	END WINDOW
+   END WINDOW
 
-	CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-Return nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Procedure OpenTable
-*--------------------------------------------------------*
+PROCEDURE OpenTable
 
    CreateTable()
 
@@ -63,20 +56,16 @@ Procedure OpenTable
 
    GO TOP
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Procedure CloseTable
-*--------------------------------------------------------*
+PROCEDURE CloseTable
 
    DBCLOSEAREA()
    DBDROP("mem:test")  // Free memory resource
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Function CreateTable
-*--------------------------------------------------------*
+FUNCTION CreateTable
 
    DBCREATE("mem:test", {{"CODE", "C", 3, 0},{"NAME", "C", 50, 0},{"RESIDENTS", "N", 11, 0}},, .T., "memarea")
 
@@ -95,4 +84,5 @@ Function CreateTable
    DBAPPEND()
    REPLACE CODE WITH 'RUS', NAME WITH 'Russia', RESIDENTS WITH 141900000
 
-Return Nil
+   RETURN NIL
+

@@ -18,12 +18,13 @@ PROCEDURE main()
 
    cumple()
 
-RETURN
-
+   RETURN
 
 PROCEDURE cumple()
+
    LOCAL IRBR2, FECCUM, LAMADA
-   Set Navigation Extended //TAB y ENTER
+
+   SET Navigation Extended //TAB y ENTER
    SET DATE FORMAT "dd-mm-yyyy"
    SET EPOCH TO YEAR(DATE())-50
    SET DELETE ON
@@ -33,7 +34,7 @@ PROCEDURE cumple()
 
    AbrirDBF("cumple")
 
-***BUSCAR SEMANA DATE()***
+   ***BUSCAR SEMANA DATE()***
    IF LASTREC()<1
       IRBR2:=1
    ELSE
@@ -52,33 +53,32 @@ PROCEDURE cumple()
       IRBR2:=RECNO()
       SET SOFTSEEK OFF
    ENDIF
-***FIN BUSCAR SEMANA DATE()***
+   ***FIN BUSCAR SEMANA DATE()***
 
    DEFINE WINDOW WinBRcum1 ;
-      AT 0,0     ;
-      WIDTH 810  ;
-      HEIGHT 640 ;
-      TITLE "Cumples" ;
-      ICON "MAIN" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE ;
-      BACKCOLOR MiColor("ROSACLARO")
-
+         AT 0,0     ;
+         WIDTH 810  ;
+         HEIGHT 640 ;
+         TITLE "Cumples" ;
+         ICON "MAIN" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         BACKCOLOR MiColor("ROSACLARO")
 
       @ 10,10 BROWSE BR_cum1 ;
-      HEIGHT 210 ;
-      WIDTH 255 ;
-      TOOLTIP 'Consulta cumples' ;
-      HEADERS {'Fecha','Nombre'} ;
-      WIDTHS { 60,170 } ;
-      WORKAREA cumple ;
-      FIELDS {'DIA(cumple->Feccum,8)','cumple->Nomcum'} ;
-      JUSTIFY {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT} ;
-      VALUE IRBR2 ;
-      ON CHANGE ( Actualiz_cumple("BROWSE") )
-*      ON HEADCLICK { {|| AbrirDBF("cumple"),DBSETORDER(1), WinBRcum1.BR_cum1.Refresh, Actualiz_cumple("BROWSE")} , ;
-*                     {|| AbrirDBF("cumple"),DBSETORDER(2), WinBRcum1.BR_cum1.Refresh, Actualiz_cumple("BROWSE")} }
-*      ON DBLCLICK Datos_alumno(WinBRcum1.BR_cum1.Value,"Consultar") ;
+         HEIGHT 210 ;
+         WIDTH 255 ;
+         TOOLTIP 'Consulta cumples' ;
+         HEADERS {'Fecha','Nombre'} ;
+         WIDTHS { 60,170 } ;
+         WORKAREA cumple ;
+         FIELDS {'DIA(cumple->Feccum,8)','cumple->Nomcum'} ;
+         JUSTIFY {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT} ;
+         VALUE IRBR2 ;
+         ON CHANGE ( Actualiz_cumple("BROWSE") )
+      *      ON HEADCLICK { {|| AbrirDBF("cumple"),DBSETORDER(1), WinBRcum1.BR_cum1.Refresh, Actualiz_cumple("BROWSE")} , ;
+      *                     {|| AbrirDBF("cumple"),DBSETORDER(2), WinBRcum1.BR_cum1.Refresh, Actualiz_cumple("BROWSE")} }
+      *      ON DBLCLICK Datos_alumno(WinBRcum1.BR_cum1.Value,"Consultar") ;
 
       @0,0 TEXTBOX RegNuevo WIDTH 100 VALUE 0 NUMERIC RIGHTALIGN INVISIBLE
       @0,0 TEXTBOX FecNuevo WIDTH 100 VALUE DATE() DATE INVISIBLE
@@ -211,30 +211,28 @@ PROCEDURE cumple()
       @305,645 LABEL CueDia27 VALUE '' WIDTH 70 HEIGHT 35 CENTERALIGN ACTION Ir_Cumple(DIACAR(WinBRcum1.CabDia27.Value))
       @305,720 LABEL CueDia28 VALUE '' WIDTH 70 HEIGHT 35 CENTERALIGN ACTION Ir_Cumple(DIACAR(WinBRcum1.CabDia28.Value))
 
-
       @345,270 BUTTON Bt_MesAnt CAPTION '<<-Mes anterior' WIDTH 100 HEIGHT 25 ;
-              ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)-28), ;
-                       WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
+         ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)-28), ;
+         WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
 
       @345,375 BUTTON Bt_SemAnt CAPTION '<-Semana ant.' WIDTH 100 HEIGHT 25 ;
-              ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)-7), ;
-                       WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
+         ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)-7), ;
+         WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
 
       @345,480 BUTTON Bt_VerHoy CAPTION '<-Ver hoy->' WIDTH 100 HEIGHT 25 ;
-              ACTION ( VerSemanaCumple(DATE()), ;
-                       WinBRcum1.FecNuevo.Value:=DATE() ) NOTABSTOP
+         ACTION ( VerSemanaCumple(DATE()), ;
+         WinBRcum1.FecNuevo.Value:=DATE() ) NOTABSTOP
 
       @345,590 BUTTON Bt_SemSig CAPTION 'Semana sig.->' WIDTH 100 HEIGHT 25 ;
-              ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)+7,"Bt_SemSig"), ;
-                       WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
+         ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)+7,"Bt_SemSig"), ;
+         WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
 
       @345,695 BUTTON Bt_MesSig CAPTION 'Mes sig.->>' WIDTH 100 HEIGHT 25 ;
-              ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)+28), ;
-                       WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
-
+         ACTION ( VerSemanaCumple(DIACAR(WinBRcum1.CabDia1.value)+28), ;
+         WinBRcum1.FecNuevo.Value:=DIACAR(WinBRcum1.CabDia1.value) ) NOTABSTOP
 
       @355,10 LABEL L_Feccum VALUE 'Fecha cumple' AUTOSIZE TRANSPARENT
-      @350,100 TEXTBOX D_Feccum WIDTH 85 HEIGHT 25 DATE 
+      @350,100 TEXTBOX D_Feccum WIDTH 85 HEIGHT 25 DATE
       @355,190 LABEL L_HoraCum VALUE 'Hora' AUTOSIZE TRANSPARENT
       @350,220 TEXTBOX T_HoraCum WIDTH 45 VALUE "  :  " INPUTMASK '99:99'
 
@@ -244,20 +242,20 @@ PROCEDURE cumple()
       @230,170 IMAGE I_Foto1 PICTURE '' WIDTH  81 HEIGHT 108 //STRETCH (AJUSTAR)
 
       @415,10 LABEL L_Nomcum VALUE 'Nombre cumple' AUTOSIZE TRANSPARENT
-      @410,110 TEXTBOX T_Nomcum WIDTH 300 VALUE "" MAXLENGTH 30 
+      @410,110 TEXTBOX T_Nomcum WIDTH 300 VALUE "" MAXLENGTH 30
 
       @445,10 LABEL L_Fecnac VALUE 'Fecha Nacimiento' AUTOSIZE TRANSPARENT
-      @440,110 TEXTBOX D_Fecnac WIDTH 85 HEIGHT 25 DATE 
+      @440,110 TEXTBOX D_Fecnac WIDTH 85 HEIGHT 25 DATE
 
       @475,10 LABEL L_NomMadre VALUE 'Nombre madre' AUTOSIZE TRANSPARENT
-      @470,110 TEXTBOX T_NomMadre WIDTH 300 VALUE "" MAXLENGTH 30 
+      @470,110 TEXTBOX T_NomMadre WIDTH 300 VALUE "" MAXLENGTH 30
 
       @505,10 LABEL L_Tel1 VALUE 'Telefono' AUTOSIZE TRANSPARENT
       @500,110 TEXTBOX T_Tel1 ;
-              WIDTH 150 ;
-              VALUE "" ;
-              TOOLTIP 'Telefono' ;
-              MAXLENGTH 15
+         WIDTH 150 ;
+         VALUE "" ;
+         TOOLTIP 'Telefono' ;
+         MAXLENGTH 15
 
       @375,450 LABEL L_Invi VALUE 'Invitaciones' AUTOSIZE TRANSPARENT
       @395,450 TEXTBOX T_Invi WIDTH 50 HEIGHT 20 VALUE 0 NUMERIC MAXLENGTH 3 RIGHTALIGN
@@ -272,46 +270,46 @@ PROCEDURE cumple()
       @425,550 TEXTBOX T_Papas WIDTH 50 HEIGHT 20 VALUE 0 NUMERIC MAXLENGTH 3 RIGHTALIGN
 
       @450,450 CHECKBOX C_SiReserva CAPTION 'Reserva' WIDTH 80 HEIGHT 20 VALUE .F. ;
-              TOOLTIP 'Reserva cumpleaños' ;
-              ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
+         TOOLTIP 'Reserva cumpleaños' ;
+         ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
 
       @450,550 TEXTBOX T_ImpReserva ;
-              WIDTH 100 HEIGHT 20 ;
-              VALUE 0 ;
-              NUMERIC INPUTMASK '9,999,999,999.99' FORMAT 'E' ;
-              RIGHTALIGN
+         WIDTH 100 HEIGHT 20 ;
+         VALUE 0 ;
+         NUMERIC INPUTMASK '9,999,999,999.99' FORMAT 'E' ;
+         RIGHTALIGN
       @450,685 TEXTBOX D_Freserva ;
-              WIDTH 80 HEIGHT 20 ;
-              TOOLTIP 'Fecha de la reserva' ;
-              DATE
+         WIDTH 80 HEIGHT 20 ;
+         TOOLTIP 'Fecha de la reserva' ;
+         DATE
 
       @477,450 LABEL L_Rbo VALUE 'Recibo' AUTOSIZE TRANSPARENT
       @475,550 TEXTBOX T_Rbo ;
-              WIDTH 50 HEIGHT 20 ;
-              VALUE 0 ;
-              NUMERIC ;
-              RIGHTALIGN
+         WIDTH 50 HEIGHT 20 ;
+         VALUE 0 ;
+         NUMERIC ;
+         RIGHTALIGN
 
       @475,650 CHECKBOX C_Promocion CAPTION 'Promocion' WIDTH 80 HEIGHT 20 VALUE .F. ;
-              TOOLTIP 'Aplicar promocion publicitaria' TRANSPARENT NOTABSTOP
+         TOOLTIP 'Aplicar promocion publicitaria' TRANSPARENT NOTABSTOP
 
       @500,350 CHECKBOX C_fotosCD CAPTION 'Fotos CD' WIDTH 80 HEIGHT 20 VALUE .F. ;
-              TOOLTIP 'Realizar CD de fotos' ;
-              ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
+         TOOLTIP 'Realizar CD de fotos' ;
+         ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
 
       @500,450 CHECKBOX C_SiEntCD CAPTION 'Entrega CD' WIDTH 80 HEIGHT 20 VALUE .F. ;
-              TOOLTIP 'Entrega CD de fotos' ;
-              ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
+         TOOLTIP 'Entrega CD de fotos' ;
+         ON CHANGE Modifcum1(.t.,"RESERVA") TRANSPARENT NOTABSTOP
 
       @500,550 TEXTBOX T_CEntCD ;
-              WIDTH 125 HEIGHT 20 ;
-              VALUE '' ;
-              TOOLTIP 'Persona a la que se entrega el CD de fotos' ;
-              MAXLENGTH 20
+         WIDTH 125 HEIGHT 20 ;
+         VALUE '' ;
+         TOOLTIP 'Persona a la que se entrega el CD de fotos' ;
+         MAXLENGTH 20
       @500,685 TEXTBOX D_FEntCD ;
-              WIDTH 80 HEIGHT 20 ;
-              TOOLTIP 'Fecha de entrega del CD de fotos' ;
-              DATE
+         WIDTH 80 HEIGHT 20 ;
+         TOOLTIP 'Fecha de entrega del CD de fotos' ;
+         DATE
 
       @565,010 BUTTONEX Bt_Nuevo ;
          CAPTION 'Nuevo' ;
@@ -361,15 +359,14 @@ PROCEDURE cumple()
          TOOLTIP 'Salir' ;
          NOTABSTOP
 
-   Modifcum1(.F.)
+      Modifcum1(.F.)
 
    END WINDOW
 
    CENTER WINDOW WinBRcum1
    ACTIVATE WINDOW WinBRcum1
 
-RETURN
-
+   RETURN
 
 PROCEDURE Nuevocum1(LLAMADA)
 
@@ -402,10 +399,10 @@ PROCEDURE Nuevocum1(LLAMADA)
    ENDIF
    WinBRcum1.T_Horacum.SetFocus
 
-RETURN
-
+   RETURN
 
 PROCEDURE Modifcum1(Modifcum1,LLAMADA)
+
    LOCAL LAMADA:=IF(LLAMADA=NIL,' ',LLAMADA)
 
    ***reserva***
@@ -439,6 +436,7 @@ PROCEDURE Modifcum1(Modifcum1,LLAMADA)
       WinBRcum1.D_FEntCD.Enabled :=.F.
    ENDIF
    IF LLAMADA="RESERVA"
+
       RETURN
    ENDIF
    ***FIN reserva***
@@ -493,8 +491,7 @@ PROCEDURE Modifcum1(Modifcum1,LLAMADA)
    ENDIF
    VerSemanaCumple(WinBRcum1.D_Feccum.value)
 
-RETURN
-
+   RETURN
 
 PROCEDURE Guardarcum1()
 
@@ -505,64 +502,65 @@ PROCEDURE Guardarcum1()
    ELSE
       GO WinBRcum1.BR_cum1.Value
       IF MSGYESNO("¡Atencion!"+chr(13)+chr(10)+ ;
-               "¿Desea modificar los datos del cumple?")=.F.
+            "¿Desea modificar los datos del cumple?")=.F.
+
          RETURN
       ENDIF
    ENDIF
 
-IF RLOCK()
-   IF WinBRcum1.RegNuevo.Value=1
-      REPLACE FECALTA WITH DATE()
-      REPLACE HORALTA WITH TIME()
-   ELSE
-      REPLACE FECMODIF WITH DATE()
-      REPLACE HORMODIF WITH TIME()
-   ENDIF
-   REPLACE FECCUM WITH WinBRcum1.D_Feccum.value
-   REPLACE HORACUM WITH WinBRcum1.T_Horacum.value
-   REPLACE FECNAC WITH WinBRcum1.D_Fecnac.value
-   REPLACE CODALU WITH WinBRcum1.T_CodAlu.value
-   REPLACE NOMCUM WITH WinBRcum1.T_Nomcum.value
-   REPLACE NOMMADRE WITH WinBRcum1.T_NomMadre.value
-   REPLACE INVITACION WITH WinBRcum1.T_Invi.value
-   REPLACE AMIGOS WITH WinBRcum1.T_Amigos.value
-   REPLACE CONFIR WITH WinBRcum1.T_Confir.value
-   REPLACE PAPAS  WITH WinBRcum1.T_Papas.value
-   REPLACE TEL1   WITH WinBRcum1.T_Tel1.value
-   REPLACE SIRESERVA WITH WinBRcum1.C_SiReserva.value
-   REPLACE IMPRESERVA WITH WinBRcum1.T_ImpReserva.value
-   IF FIELD->SIRESERVA=.T.
-      REPLACE FRESERVA WITH WinBRcum1.D_Freserva.value
-   ELSE
-      REPLACE FRESERVA WITH CTOD("  -  -    ")
-   ENDIF
-   REPLACE FOTOSCD WITH WinBRcum1.C_FotosCD.Value
-   REPLACE SIENTCD WITH WinBRcum1.C_SiEntCD.value
-   REPLACE CENTCD WITH WinBRcum1.T_CEntCd.value
-   IF FIELD->SIENTCD=.T.
-      REPLACE FENTCD WITH WinBRcum1.D_FEntCd.value
-   ELSE
-      REPLACE FENTCD WITH CTOD("  -  -    ")
-   ENDIF
-   REPLACE PROMOCION WITH WinBRcum1.C_Promocion.Value
+   IF RLOCK()
+      IF WinBRcum1.RegNuevo.Value=1
+         REPLACE FECALTA WITH DATE()
+         REPLACE HORALTA WITH TIME()
+      ELSE
+         REPLACE FECMODIF WITH DATE()
+         REPLACE HORMODIF WITH TIME()
+      ENDIF
+      REPLACE FECCUM WITH WinBRcum1.D_Feccum.value
+      REPLACE HORACUM WITH WinBRcum1.T_Horacum.value
+      REPLACE FECNAC WITH WinBRcum1.D_Fecnac.value
+      REPLACE CODALU WITH WinBRcum1.T_CodAlu.value
+      REPLACE NOMCUM WITH WinBRcum1.T_Nomcum.value
+      REPLACE NOMMADRE WITH WinBRcum1.T_NomMadre.value
+      REPLACE INVITACION WITH WinBRcum1.T_Invi.value
+      REPLACE AMIGOS WITH WinBRcum1.T_Amigos.value
+      REPLACE CONFIR WITH WinBRcum1.T_Confir.value
+      REPLACE PAPAS  WITH WinBRcum1.T_Papas.value
+      REPLACE TEL1   WITH WinBRcum1.T_Tel1.value
+      REPLACE SIRESERVA WITH WinBRcum1.C_SiReserva.value
+      REPLACE IMPRESERVA WITH WinBRcum1.T_ImpReserva.value
+      IF FIELD->SIRESERVA=.T.
+         REPLACE FRESERVA WITH WinBRcum1.D_Freserva.value
+      ELSE
+         REPLACE FRESERVA WITH CTOD("  -  -    ")
+      ENDIF
+      REPLACE FOTOSCD WITH WinBRcum1.C_FotosCD.Value
+      REPLACE SIENTCD WITH WinBRcum1.C_SiEntCD.value
+      REPLACE CENTCD WITH WinBRcum1.T_CEntCd.value
+      IF FIELD->SIENTCD=.T.
+         REPLACE FENTCD WITH WinBRcum1.D_FEntCd.value
+      ELSE
+         REPLACE FENTCD WITH CTOD("  -  -    ")
+      ENDIF
+      REPLACE PROMOCION WITH WinBRcum1.C_Promocion.Value
 
-   DBCOMMIT()
-   DBUNLOCK()
-   MsgInfo('Los datos han sido guardados en fecha: '+DIA(FIELD->FECCUM,10),'Datos guardados')
-   WinBRcum1.BR_cum1.Value:=RECNO()
-   WinBRcum1.BR_cum1.Refresh
-ELSE
-   MsgStop('No se han podigo guardar los datos - '+CHR(13)+ ;
-        'El registro esta siendo utilizado por otro usuario'+CHR(13)+ ;
-        'Por favor, intentelo mas tarde','Error')
-ENDIF
+      DBCOMMIT()
+      DBUNLOCK()
+      MsgInfo('Los datos han sido guardados en fecha: '+DIA(FIELD->FECCUM,10),'Datos guardados')
+      WinBRcum1.BR_cum1.Value:=RECNO()
+      WinBRcum1.BR_cum1.Refresh
+   ELSE
+      MsgStop('No se han podigo guardar los datos - '+CHR(13)+ ;
+         'El registro esta siendo utilizado por otro usuario'+CHR(13)+ ;
+         'Por favor, intentelo mas tarde','Error')
+   ENDIF
 
    Modifcum1(.f.)
 
-RETURN
-
+   RETURN
 
 PROCEDURE Actualiz_cumple(LLAMADA)
+
    AbrirDBF("cumple")
 
    IF LLAMADA="BROWSE" .OR. LLAMADA="CANCELAR"
@@ -617,10 +615,10 @@ PROCEDURE Actualiz_cumple(LLAMADA)
 
    Modifcum1(.f.)
 
-RETURN
-
+   RETURN
 
 PROCEDURE Eliminar_cumple()
+
    AbrirDBF("cumple")
    IF WinBRcum1.BR_cum1.Value=0
       MsgStop("No ha selecionado ningun registro","Error")
@@ -646,16 +644,17 @@ PROCEDURE Eliminar_cumple()
       ENDIF
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
+
    LOCAL N, DATOS2, LAMADA:=IF(LLAMADA=NIL,' ',LLAMADA)
 
    IF YEAR(FEC2)=0
+
       RETURN
    ENDIF
-***Esta en la segunda semana***
+   ***Esta en la segunda semana***
    IF LLAMADA<>"Bt_SemSig"
       IF FEC2-DIACAR(WinBRcum1.CabDia1.Value)>=7 .AND. FEC2-DIACAR(WinBRcum1.CabDia1.Value)<=13
          FEC2:=FEC2-7
@@ -667,7 +666,7 @@ PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
          FEC2:=FEC2-21
       ENDIF
    ENDIF
-***FIN Esta en la segunda semana***
+   ***FIN Esta en la segunda semana***
    FOR N= 1 TO 7
       IF UPPER(DIANOM(FEC2))="LUNES"
          EXIT
@@ -675,10 +674,11 @@ PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
       FEC2:=FEC2-1
    NEXT
    IF UPPER(DIANOM(FEC2))<>"LUNES"
+
       RETURN
    ENDIF
 
-***Resaltar la fecha actual***
+   ***Resaltar la fecha actual***
    FOR N=1 TO 28
       IF DATE()=FEC2+N-1
          SetProperty("WinBRcum1","Dia"+LTRIM(STR(N)),"BACKCOLOR",MiColor("ROJO"))
@@ -686,7 +686,7 @@ PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
          SetProperty("WinBRcum1","Dia"+LTRIM(STR(N)),"BACKCOLOR",MiColor("ROSACLARO"))
       ENDIF
    NEXT
-***FIN Resaltar la fecha actual***
+   ***FIN Resaltar la fecha actual***
 
    FOR N=1 TO 28
       SetProperty("WinBRcum1","CabDia"+LTRIM(STR(N)),"Value",DIA(FEC2+N-1,11))
@@ -700,8 +700,8 @@ PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
          SetProperty("WinBRcum1","CumDia"+LTRIM(STR(N)),"Value",'Cumple: '+LTRIM(STR(DATOS2[1])) )
          IF DATOS2[5]=0
             SetProperty("WinBRcum1","CueDia"+LTRIM(STR(N)),"Value", ;
-            'Niños: ' +LTRIM(STR(DATOS2[3]))+"/"+LTRIM(STR(DATOS2[2])) +chr(13)+chr(10)+ ;
-            'Papas: ' +LTRIM(STR(DATOS2[4])) )
+               'Niños: ' +LTRIM(STR(DATOS2[3]))+"/"+LTRIM(STR(DATOS2[2])) +chr(13)+chr(10)+ ;
+               'Papas: ' +LTRIM(STR(DATOS2[4])) )
          ENDIF
       ELSE
          SetProperty("WinBRcum1","CumDia"+LTRIM(STR(N)),"Value","" )
@@ -726,18 +726,18 @@ PROCEDURE VerSemanaCumple(FEC2,LLAMADA)
       ENDIF
    NEXT
 
-***Resaltar la fecha del browse***
+   ***Resaltar la fecha del browse***
    FOR N=1 TO 28
       IF WinBRcum1.D_Feccum.Value=FEC2+N-1
          SetProperty("WinBRcum1","CueDia"+LTRIM(STR(N)),"BACKCOLOR",MiColor("NARANJAFUERTE"))
       ENDIF
    NEXT
-***FIN Resaltar la fecha del browse***
+   ***FIN Resaltar la fecha del browse***
 
-RETURN
-
+   RETURN
 
 FUNCTION DatosCumpleHoy(FEC3)
+
    LOCAL NCUM2:=0
    LOCAL NCON2:=0
    LOCAL NAMI2:=0
@@ -745,6 +745,7 @@ FUNCTION DatosCumpleHoy(FEC3)
    LOCAL NNOC2:=0
    LOCAL NEDU2:=0
    LOCAL DATOS
+
    AbrirDBF("cumple")
 
    SEEK DTOS(FEC3)
@@ -764,22 +765,23 @@ FUNCTION DatosCumpleHoy(FEC3)
 
    DATOS:={NCUM2,NAMI2,NCON2,NPAP2,NNOC2,NEDU2}
 
-RETURN(DATOS)
-
+   RETURN(DATOS)
 
 PROCEDURE Ir_Cumple(IRFEC2)
+
    LOCAL FEC2, N
+
    AbrirDBF("cumple")
-*   SET SOFTSEEK ON
+   *   SET SOFTSEEK ON
    SEEK DTOS(IRFEC2)
-*   SET SOFTSEEK OFF
+   *   SET SOFTSEEK OFF
    IF .NOT. EOF()
       WinBRcum1.BR_cum1.Value := RECNO()
       WinBRcum1.BR_cum1.Refresh
    ENDIF
 
    WinBRcum1.FecNuevo.Value:=IRFEC2 //SIEMPRE DESPUES DE WinBRcum1.BR_cum1.Value
-***Resaltar la fecha del raton***
+   ***Resaltar la fecha del raton***
    FEC2:=DIACAR( GetProperty("WinBRcum1","CabDia1","Value") )
    FOR N=1 TO 28
       IF WinBRcum1.FecNuevo.Value=FEC2+N-1 .AND. WinBRcum1.D_Feccum.Value<>FEC2+N-1
@@ -790,12 +792,13 @@ PROCEDURE Ir_Cumple(IRFEC2)
          ENDIF
       ENDIF
    NEXT
-***FIN Resaltar la fecha del raton***
+   ***FIN Resaltar la fecha del raton***
 
-RETURN
-*------------------------------ Archivos --------------------------------------*
-***libreria***
-#Include "l_abrir.prg"
-#Include "l_color.prg"
-#Include "l_dia.prg"
-#Include "l_festa.prg"
+   RETURN
+   *------------------------------ Archivos --------------------------------------*
+   ***libreria***
+   #include "l_abrir.prg"
+   #include "l_color.prg"
+   #include "l_dia.prg"
+   #include "l_festa.prg"
+

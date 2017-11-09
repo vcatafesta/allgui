@@ -1,6 +1,7 @@
 #include "minigui.ch"
 
 PROCEDURE Main()
+
    LOCAL aDir := {}
 
    SET DATE FORMAT "dd-mm-yyyy"
@@ -9,12 +10,12 @@ PROCEDURE Main()
    SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Ventana1 ;
-      AT 0,0 ;
-      WIDTH 800 ;
-      HEIGHT 600 ;
-      TITLE "Programa de aplicaciones" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 600 ;
+         TITLE "Programa de aplicaciones" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
       @015,020 LABEL L_Ruta1 VALUE 'Ruta:' AUTOSIZE TRANSPARENT
       @010,100 TEXTBOX T_Ruta1 ;
@@ -43,23 +44,24 @@ PROCEDURE Main()
       @075,600 LABEL L_Total VALUE 'Total ficheros:'+LTRIM(STR(LEN(aDIR))) AUTOSIZE TRANSPARENT
 
       @100,020 GRID BR_Fic ;
-      HEIGHT 400 ;
-      WIDTH 750 ;
-      TOOLTIP 'Ficheros' ;
-      HEADERS { 'Fichero', 'Tamaño', 'Fecha', 'Hora', 'Atributos' } ;
-      WIDTHS { 400, 100, 80, 70, 70 } ;
-      ITEMS aDir ;
-      JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
-      VALUE 1
+         HEIGHT 400 ;
+         WIDTH 750 ;
+         TOOLTIP 'Ficheros' ;
+         HEADERS { 'Fichero', 'Tamaño', 'Fecha', 'Hora', 'Atributos' } ;
+         WIDTHS { 400, 100, 80, 70, 70 } ;
+         ITEMS aDir ;
+         JUSTIFY {BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+         VALUE 1
 
    END WINDOW
 
    CENTER WINDOW Ventana1
    ACTIVATE WINDOW Ventana1
 
-RETURN
+   RETURN
 
 STATIC FUNCTION llenarBR_Fic()
+
    LOCAL n, cDir := IF(RIGHT(Ventana1.T_Ruta1.Value,1)=='\',LEFT(Ventana1.T_Ruta1.Value,LEN(Ventana1.T_Ruta1.Value)-1),Ventana1.T_Ruta1.Value)
    LOCAL aDir := DirectoryRecurse(cDir+"\"+Ventana1.T_Extension.Value)
 
@@ -76,4 +78,5 @@ STATIC FUNCTION llenarBR_Fic()
 
    Ventana1.BR_Fic.Refresh
 
-RETURN NIL
+   RETURN NIL
+

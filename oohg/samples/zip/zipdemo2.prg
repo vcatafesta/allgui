@@ -1,23 +1,22 @@
 /*
- * Importante: Enlazar librería hbmzip
- *
- */
+* Importante: Enlazar librería hbmzip
+*/
 
 #include "oohg.ch"
 
-Function main()
+FUNCTION main()
 
    DEFINE WINDOW form_1 ;
-      AT 114,218 ;
-      WIDTH 334 ;
-      HEIGHT 276 ;
-      TITLE 'ZIP TEST' ;
-      MAIN
+         AT 114,218 ;
+         WIDTH 334 ;
+         HEIGHT 276 ;
+         TITLE 'ZIP TEST' ;
+         MAIN
 
       DEFINE MAIN MENU
          DEFINE POPUP "Test"
-             MENUITEM 'Create Zip' ACTION CreateZip()
-             MENUITEM 'UnZip File' ACTION UnPackZip()
+            MENUITEM 'Create Zip' ACTION CreateZip()
+            MENUITEM 'UnZip File' ACTION UnPackZip()
          END POPUP
 
       END MENU
@@ -26,100 +25,92 @@ Function main()
 
       @ 120,120 LABEL label_1 VALUE ''
 
-
    END WINDOW
 
    form_1.center
    form_1.activate
 
-Return NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
-Function CreateZip()  
-*------------------------------------------------------------------------------*
-local aDir:=Directory("*.txt")
-local afiles:={}
-Local x
-local nLen
+FUNCTION CreateZip()
 
-	For x:=1 to len(aDir)
-	    aadd(afiles,adir[x,1])
-	next
+   LOCAL aDir:=Directory("*.txt")
+   LOCAL afiles:={}
+   LOCAL x
+   LOCAL nLen
 
-    COMPRESSFILES("ziptest.zip", afiles, {|cFile,nPos| ProgressUpdate( nPos,cFile ) } , .T. )
+   FOR x:=1 to len(aDir)
+      aadd(afiles,adir[x,1])
+   NEXT
 
-Return nil
+   COMPRESSFILES("ziptest.zip", afiles, {|cFile,nPos| ProgressUpdate( nPos,cFile ) } , .T. )
 
-*------------------------------------------------------------------------------*
-function ProgressUpdate(nPos , cFile )
-*------------------------------------------------------------------------------*
+   RETURN NIL
 
-	Form_1.Progress_1.Value := nPos
-	Form_1.Label_1.Value := cFile
+FUNCTION ProgressUpdate(nPos , cFile )
 
-Return Nil
-*------------------------------------------------------------------------------*
-Function UnPackZip() 
-*------------------------------------------------------------------------------*
+   Form_1.Progress_1.Value := nPos
+   Form_1.Label_1.Value := cFile
 
-    UNCOMPRESSFILES( "ziptest.zip", {|cFile,nPos| ProgressUpdate( nPos,cFile ) } )
+   RETURN NIL
 
-Return nil
+FUNCTION UnPackZip()
 
+   UNCOMPRESSFILES( "ziptest.zip", {|cFile,nPos| ProgressUpdate( nPos,cFile ) } )
 
-*------------------------------------------------------------------------------*
+   RETURN NIL
+
 PROCEDURE COMPRESSFILES ( cFileName , aDir , bBlock , lOvr )
-*------------------------------------------------------------------------------*
-* Based upon HBMZIP Harbour contribution library samples.
-LOCAL hZip , i , cPassword
 
-	if valtype (lOvr) == 'L'
-		if lOvr == .t.
-			if file (cFileName)
-				delete file (cFileName)
-			endif
-		endif
-	endif
+   * Based upon HBMZIP Harbour contribution library samples.
+   LOCAL hZip , i , cPassword
 
-	hZip := HB_ZIPOPEN( cFileName )
-	IF ! EMPTY( hZip )
-		FOR i := 1 To Len (aDir)
-			if valtype (bBlock) == 'B'
-				Eval ( bBlock , aDir [i] , i )     
-			endif
-			HB_ZipStoreFile( hZip, aDir [ i ], aDir [ i ] , cPassword )
-		NEXT
-	ENDIF
+   IF valtype (lOvr) == 'L'
+      IF lOvr == .t.
+         IF file (cFileName)
+            DELETE file (cFileName)
+         ENDIF
+      ENDIF
+   ENDIF
 
-	HB_ZIPCLOSE( hZip )
+   hZip := HB_ZIPOPEN( cFileName )
+   IF ! EMPTY( hZip )
+      FOR i := 1 To Len (aDir)
+         IF valtype (bBlock) == 'B'
+            Eval ( bBlock , aDir [i] , i )
+         ENDIF
+         HB_ZipStoreFile( hZip, aDir [ i ], aDir [ i ] , cPassword )
+      NEXT
+   ENDIF
 
-RETURN
+   HB_ZIPCLOSE( hZip )
 
-*------------------------------------------------------------------------------*
+   RETURN
+
 PROCEDURE UNCOMPRESSFILES ( cFileName , bBlock )
-*------------------------------------------------------------------------------*
-* Based upon HBMZIP Harbour contribution library samples.
-Local i := 0 , hUnzip , nErr, cFile, dDate, cTime, nSize, nCompSize , f
 
-	hUnzip := HB_UNZIPOPEN( cFileName )
+   * Based upon HBMZIP Harbour contribution library samples.
+   LOCAL i := 0 , hUnzip , nErr, cFile, dDate, cTime, nSize, nCompSize , f
 
-	nErr := HB_UNZIPFILEFIRST( hUnzip )
+   hUnzip := HB_UNZIPOPEN( cFileName )
 
-	DO WHILE nErr == 0
+   nErr := HB_UNZIPFILEFIRST( hUnzip )
 
-		HB_UnzipFileInfo( hUnzip, @cFile, @dDate, @cTime,,,, @nSize, @nCompSize )
+   DO WHILE nErr == 0
 
-		i++
-		if valtype (bBlock) = 'B'
-			Eval ( bBlock , cFile , i )     
-		endif
+      HB_UnzipFileInfo( hUnzip, @cFile, @dDate, @cTime,,,, @nSize, @nCompSize )
 
-		HB_UnzipExtractCurrentFile( hUnzip, NIL, NIL )
+      i++
+      IF valtype (bBlock) = 'B'
+         Eval ( bBlock , cFile , i )
+      ENDIF
 
-		nErr := HB_UNZIPFILENEXT( hUnzip )
+      HB_UnzipExtractCurrentFile( hUnzip, NIL, NIL )
 
-	ENDDO
+      nErr := HB_UNZIPFILENEXT( hUnzip )
 
-	HB_UNZIPCLOSE( hUnzip )
+   ENDDO
 
-RETURN
+   HB_UNZIPCLOSE( hUnzip )
+
+   RETURN

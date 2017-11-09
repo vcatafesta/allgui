@@ -1,25 +1,24 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2005-2015 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2005-2015 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
 
 #include "minigui.ch"
 
-#define PROGRAM		'JustToTray'
-#define COPYRIGHT	' 2005-2015 Grigory Filatov'
+#define PROGRAM      'JustToTray'
+#define COPYRIGHT   ' 2005-2015 Grigory Filatov'
 
-#define NTRIM( n )	hb_ntos( n )
+#define NTRIM( n )   hb_ntos( n )
 #define WM_CLOSE        0x0010
 
-#define GW_HWNDFIRST	0
-#define GW_HWNDLAST	1
-#define GW_HWNDNEXT	2
-#define GW_HWNDPREV	3
-#define GW_OWNER	4
-#define GW_CHILD	5
+#define GW_HWNDFIRST   0
+#define GW_HWNDLAST   1
+#define GW_HWNDNEXT   2
+#define GW_HWNDPREV   3
+#define GW_OWNER   4
+#define GW_CHILD   5
 
 #define WM_GETICON      0x007F
 #define ICON_SMALL      0
@@ -32,9 +31,8 @@ ANNOUNCE RDDSYS
 
 STATIC nWnd := 1, aList := {}, cINIPath := "", cFilePath := "", cFileTitle := "", cFileParam := ""
 
-*--------------------------------------------------------*
 PROCEDURE Main( cCmdLine )
-*--------------------------------------------------------*
+
    LOCAL lNew := .F.
 
    DEFAULT cCmdLine := ""
@@ -67,6 +65,7 @@ PROCEDURE Main( cCmdLine )
          "Select a File", GetWindowsFolder(), .F., .T. )
 
       IF Empty( cFilePath )
+
          RETURN
       ENDIF
 
@@ -82,58 +81,56 @@ PROCEDURE Main( cCmdLine )
    ENDIF
 
    DEFINE WINDOW Form_1 ;
-      TITLE PROGRAM ;
-      MAIN NOSHOW ;
-      ON INIT ( IF( lNew, FindApp( lNew ), FindApp() ), ;
-      iif( Empty( aList ), ( StartApp( .T. ), FindApp() ), ), MakeMenu() ) ;
-      NOTIFYICON "MAIN" ;
-      NOTIFYTOOLTIP PROGRAM ;
-      ON NOTIFYCLICK iif( Empty( aList ), StartApp(), IF( Form_1.WinShow.Enabled, RestoreAppWindow(), HideAppWindow() ) )
+         TITLE PROGRAM ;
+         MAIN NOSHOW ;
+         ON INIT ( IF( lNew, FindApp( lNew ), FindApp() ), ;
+         iif( Empty( aList ), ( StartApp( .T. ), FindApp() ), ), MakeMenu() ) ;
+         NOTIFYICON "MAIN" ;
+         NOTIFYTOOLTIP PROGRAM ;
+         ON NOTIFYCLICK iif( Empty( aList ), StartApp(), IF( Form_1.WinShow.Enabled, RestoreAppWindow(), HideAppWindow() ) )
 
    END WINDOW
 
    ACTIVATE WINDOW Form_1
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE MakeMenu()
-*--------------------------------------------------------*
 
    DEFINE NOTIFY MENU OF Form_1
 
-   IF Empty( aList )
-      ITEM '&Start ' + cFileTitle ACTION StartApp()
-   ELSE
-      ITEM '&Show ' + cFileTitle ACTION RestoreAppWindow() NAME WinShow
-      ITEM '&Hide ' + cFileTitle ACTION HideAppWindow() NAME WinHide
-      ITEM '&Close ' + cFileTitle  ACTION CloseAppWindow()
+      IF Empty( aList )
+         ITEM '&Start ' + cFileTitle ACTION StartApp()
+      ELSE
+         ITEM '&Show ' + cFileTitle ACTION RestoreAppWindow() NAME WinShow
+         ITEM '&Hide ' + cFileTitle ACTION HideAppWindow() NAME WinHide
+         ITEM '&Close ' + cFileTitle  ACTION CloseAppWindow()
 
-      Form_1.WinShow.Enabled := .F.
-      Form_1.WinHide.Enabled := .T.
-   ENDIF
-   SEPARATOR
-   ITEM '&Mail to author...' ;
-      ACTION ShellExecute( 0, "open", "rundll32.exe", ;
-      "url.dll,FileProtocolHandler " + ;
-      "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
-      "&subject=JustToTray%20Feedback:" + ;
-      "&body=How%20are%20you%2C%20Grigory%3F", , 1 )
-   ITEM '&About...' ACTION ShellAbout( "", PROGRAM + ' version 1.0.5' + ;
-      CRLF + "Copyright " + Chr( 169 ) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
-   SEPARATOR
-   ITEM 'E&xit'  ACTION iif( lReleaseCheck(), Form_1.Release, )
+         Form_1.WinShow.Enabled := .F.
+         Form_1.WinHide.Enabled := .T.
+      ENDIF
+      SEPARATOR
+      ITEM '&Mail to author...' ;
+         ACTION ShellExecute( 0, "open", "rundll32.exe", ;
+         "url.dll,FileProtocolHandler " + ;
+         "mailto:gfilatov@inbox.ru?cc=&bcc=" + ;
+         "&subject=JustToTray%20Feedback:" + ;
+         "&body=How%20are%20you%2C%20Grigory%3F", , 1 )
+      ITEM '&About...' ACTION ShellAbout( "", PROGRAM + ' version 1.0.5' + ;
+         CRLF + "Copyright " + Chr( 169 ) + COPYRIGHT, LoadIconByName( "MAIN", 32, 32 ) )
+      SEPARATOR
+      ITEM 'E&xit'  ACTION iif( lReleaseCheck(), Form_1.Release, )
 
    END MENU
 
-RETURN
+   RETURN
 
-#define IDYES  1
-#define IDNO  0
-#define IDCANCEL -1
-*--------------------------------------------------------*
+   #define IDYES  1
+   #define IDNO  0
+   #define IDCANCEL -1
+
 FUNCTION lReleaseCheck()
-*--------------------------------------------------------*
+
    LOCAL nRet, lRet := .T.
 
    IF !Empty( aList )
@@ -158,11 +155,10 @@ FUNCTION lReleaseCheck()
 
    ENDIF
 
-RETURN lRet
+   RETURN lRet
 
-*--------------------------------------------------------*
 PROCEDURE FindApp( ... )
-*--------------------------------------------------------*
+
    LOCAL aTitles := GetTitles( _HMG_MainHandle )
    LOCAL nChoice := AScan( aTitles, {| e| Upper( cFilePath ) == e[ 3 ] .OR. cFileTitle $ e[ 1 ] } )
 
@@ -228,11 +224,9 @@ PROCEDURE FindApp( ... )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE StartApp( lMinimize )
-*--------------------------------------------------------*
 
    DEFAULT lMinimize := .F.
 
@@ -271,11 +265,9 @@ PROCEDURE StartApp( lMinimize )
       MsgStop( "Can't find an application" + CRLF + cFilePath, "Error" )
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE CloseAppWindow()
-*--------------------------------------------------------*
 
    IF !Empty( aList )
 
@@ -294,11 +286,9 @@ PROCEDURE CloseAppWindow()
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE HideAppWindow()
-*--------------------------------------------------------*
 
    IF !Empty( aList )
 
@@ -310,11 +300,9 @@ PROCEDURE HideAppWindow()
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE RestoreAppWindow()
-*--------------------------------------------------------*
 
    IF !Empty( aList )
 
@@ -331,11 +319,10 @@ PROCEDURE RestoreAppWindow()
 
    ENDIF
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 STATIC FUNCTION GetTitles( hOwnWnd )
-*--------------------------------------------------------*
+
    LOCAL aTasks := {}, cTitle, cExeName := "", ;
       hWnd := GetWindow( hOwnWnd, GW_HWNDFIRST )      // Get the first window
 
@@ -346,7 +333,7 @@ STATIC FUNCTION GetTitles( hOwnWnd )
       IF IsWindowVisible( hWnd ) .AND. ;     // If it is a visible window OR
          !Empty( cTitle ) .AND. ;            // If the window has a title
          !"About" $ cTitle .AND. ;
-         hWnd != hOwnWnd .AND. ;             // If it is not this app
+            hWnd != hOwnWnd .AND. ;             // If it is not this app
          !( "DOS Session" $ cTitle ) .AND. ; // If it is not DOS session
          !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
@@ -358,11 +345,10 @@ STATIC FUNCTION GetTitles( hOwnWnd )
 
    ENDDO
 
-RETURN aTasks
+   RETURN aTasks
 
-*--------------------------------------------------------*
 STATIC FUNCTION GetWindowIcon( hwnd )
-*--------------------------------------------------------*
+
    LOCAL icon
 
    IF Empty( icon := SendMessage( hwnd, WM_GETICON, ICON_SMALL, 0 ) )
@@ -383,8 +369,7 @@ STATIC FUNCTION GetWindowIcon( hwnd )
 
    ENDIF
 
-RETURN icon
-
+   RETURN icon
 
 #pragma BEGINDUMP
 
@@ -434,7 +419,7 @@ void GetExeName( HWND hWnd, char *szFileName )
    lpfnEnumProcessModules( hProc, ahMods, sizeof( ahMods ), &dwSize );
 
    lpfnGetModuleFileNameEx( hProc, ahMods[0], szFileName, _MAX_PATH );
-		
+
    CloseHandle( hProc );
 
    FreeLibrary( hInstLib );
@@ -467,3 +452,4 @@ HB_FUNC( ISICONIC )
 }
 
 #pragma ENDDUMP
+

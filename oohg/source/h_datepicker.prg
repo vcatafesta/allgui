@@ -1,64 +1,52 @@
 /*
- * $Id: h_datepicker.prg,v 1.28 2017/08/25 19:42:18 fyurisich Exp $
- */
+* $Id: h_datepicker.prg,v 1.28 2017/08/25 19:42:18 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * DatePicker and TimePicker controls
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* DatePicker and TimePicker controls
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "common.ch"
@@ -66,26 +54,29 @@
 #include "i_windefs.ch"
 
 CLASS TDatePick FROM TControl
+
    DATA Type      INIT "DATEPICK" READONLY
    DATA nWidth    INIT 120
    DATA nHeight   INIT 24
 
-   METHOD Define
-   METHOD Value            SETGET
-   METHOD Events_Notify
-   METHOD SetRange
+METHOD Define
+
+METHOD Value            SETGET
+
+METHOD Events_Notify
+
+METHOD SetRange
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
-               fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;
-               updown, rightalign, HelpId, invisible, notabstop, bold, ;
-               italic, underline, strikeout, Field, Enter, lRtl, lDisabled, ;
-               lNoBorder, DateFrom, DateTo ) CLASS TDatePick
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle, nStyleEx
+      fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;
+      updown, rightalign, HelpId, invisible, notabstop, bold, ;
+      italic, underline, strikeout, Field, Enter, lRtl, lDisabled, ;
+      lNoBorder, DateFrom, DateTo ) CLASS TDatePick
+   LOCAL ControlHandle, nStyle, nStyleEx
 
    ASSIGN ::nCol    VALUE x TYPE "N"
    ASSIGN ::nRow    VALUE y TYPE "N"
@@ -95,9 +86,9 @@ Local ControlHandle, nStyle, nStyleEx
    ::SetForm( ControlName, ParentForm, FontName, FontSize, , , .t. , lRtl )
 
    nStyle := ::InitStyle( ,, Invisible, NoTabStop, lDisabled ) + ;
-             IF( HB_IsLogical( shownone   ) .AND. shownone,    DTS_SHOWNONE,   0 ) + ;
-             IF( HB_IsLogical( updown     ) .AND. updown,      DTS_UPDOWN,     0 ) + ;
-             IF( HB_IsLogical( rightalign ) .AND. rightalign,  DTS_RIGHTALIGN, 0 )
+      IF( HB_IsLogical( shownone   ) .AND. shownone,    DTS_SHOWNONE,   0 ) + ;
+      IF( HB_IsLogical( updown     ) .AND. updown,      DTS_UPDOWN,     0 ) + ;
+      IF( HB_IsLogical( rightalign ) .AND. rightalign,  DTS_RIGHTALIGN, 0 )
 
    nStyleEx := IF( ! HB_IsLogical( lNoBorder ) .OR. ! lNoBorder, WS_EX_CLIENTEDGE, 0 )
 
@@ -114,12 +105,11 @@ Local ControlHandle, nStyle, nStyleEx
    ASSIGN ::OnGotFocus  VALUE gotfocus  TYPE "B"
    ASSIGN ::OnChange    VALUE Change    TYPE "B"
    ASSIGN ::OnEnter     VALUE Enter     TYPE "B"
-   
-Return Self
 
-*------------------------------------------------------------------------------*
+   RETURN Self
+
 METHOD Value( uValue ) CLASS TDatePick
-*------------------------------------------------------------------------------*
+
    IF HB_IsDate( uValue )
       IF EMPTY( uValue )
          SetDatePickNull( ::hWnd )
@@ -131,57 +121,56 @@ METHOD Value( uValue ) CLASS TDatePick
       SetDatePickNull( ::hWnd )
       ::DoChange()
    ENDIF
-Return GetDatePick( ::hWnd )
 
-*------------------------------------------------------------------------------*
+   RETURN GetDatePick( ::hWnd )
+
 METHOD Events_Notify( wParam, lParam ) CLASS TDatePick
-*------------------------------------------------------------------------------*
-Local nNotify := GetNotifyCode( lParam )
 
-   If nNotify == DTN_DATETIMECHANGE
+   LOCAL nNotify := GetNotifyCode( lParam )
+
+   IF nNotify == DTN_DATETIMECHANGE
       ::DoChange()
-      Return nil
 
-   EndIf
+      RETURN NIL
 
-Return ::Super:Events_Notify( wParam, lParam )
+   ENDIF
 
-
-
-
+   RETURN ::Super:Events_Notify( wParam, lParam )
 
 CLASS TTimePick FROM TControl
+
    DATA Type      INIT "TIMEPICK" READONLY
    DATA nWidth    INIT 120
    DATA nHeight   INIT 24
 
-   METHOD Define
-   METHOD Value            SETGET
-   METHOD Events_Notify
+METHOD Define
+
+METHOD Value            SETGET
+
+METHOD Events_Notify
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
-               fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;
-               updown, rightalign, HelpId, invisible, notabstop, bold, ;
-               italic, underline, strikeout, Field, Enter, lRtl, lDisabled, ;
-               lNoBorder ) CLASS TTimePick
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle, nStyleEx
+      fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;
+      updown, rightalign, HelpId, invisible, notabstop, bold, ;
+      italic, underline, strikeout, Field, Enter, lRtl, lDisabled, ;
+      lNoBorder ) CLASS TTimePick
+   LOCAL ControlHandle, nStyle, nStyleEx
 
    ASSIGN ::nCol    VALUE x TYPE "N"
    ASSIGN ::nRow    VALUE y TYPE "N"
    ASSIGN ::nWidth  VALUE w TYPE "N"
    ASSIGN ::nHeight VALUE h TYPE "N"
 
-////   DEFAULT cTimeFormat  TO "HH:mm:ss"
+   ////   DEFAULT cTimeFormat  TO "HH:mm:ss"
 
    ::SetForm( ControlName, ParentForm, FontName, FontSize, , , .t. , lRtl )
 
    nStyle := ::InitStyle( ,, Invisible, NoTabStop, lDisabled ) + ;
-             IF( HB_IsLogical( shownone   ) .AND. shownone,    DTS_SHOWNONE,   0 ) /* + ;
-             IF( HB_IsLogical( updown     ) .AND. updown,      DTS_UPDOWN,     0 ) + ;
-             IF( HB_IsLogical( rightalign ) .AND. rightalign,  DTS_RIGHTALIGN, 0 ) */
+      IF( HB_IsLogical( shownone   ) .AND. shownone,    DTS_SHOWNONE,   0 ) /* + ;
+      IF( HB_IsLogical( updown     ) .AND. updown,      DTS_UPDOWN,     0 ) + ;
+      IF( HB_IsLogical( rightalign ) .AND. rightalign,  DTS_RIGHTALIGN, 0 ) */
    EMPTY( updown )
    EMPTY( rightalign )
 
@@ -199,36 +188,32 @@ Local ControlHandle, nStyle, nStyleEx
    ASSIGN ::OnChange    VALUE Change    TYPE "B"
    ASSIGN ::OnEnter     VALUE Enter     TYPE "B"
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD Value( uValue ) CLASS TTimePick
-*------------------------------------------------------------------------------*
+
    IF VALTYPE( uValue ) == "C"
       SetTimePick( ::hWnd, VAL(left(uValue,2)),VAL(SUBSTR(uValue,4,2)),VAL( SUBSTR(uValue,7,2 )) )
-       ::DoChange()
+      ::DoChange()
    ELSEIF PCOUNT() > 0
       SetTimePick( ::hWnd, VAL(left(TIME(),2)),VAL(SUBSTR(TIME(),4,2)),VAL( SUBSTR(TIME(),7,2) ))
-       ::DoChange()
-   ENDIF
-Return StrZero( GetDatePickHour( ::hWnd ), 2 ) + ":" + StrZero( GetDatePickMinute( ::hWnd ), 2 ) + ":" + StrZero( GetDatePickSecond( ::hWnd ), 2 )
-
-*------------------------------------------------------------------------------*
-METHOD Events_Notify( wParam, lParam ) CLASS TTimePick
-*------------------------------------------------------------------------------*
-Local nNotify := GetNotifyCode( lParam )
-
-   If nNotify == DTN_DATETIMECHANGE
       ::DoChange()
-      Return nil
+   ENDIF
 
-   EndIf
+   RETURN StrZero( GetDatePickHour( ::hWnd ), 2 ) + ":" + StrZero( GetDatePickMinute( ::hWnd ), 2 ) + ":" + StrZero( GetDatePickSecond( ::hWnd ), 2 )
 
-Return ::Super:Events_Notify( wParam, lParam )
+METHOD Events_Notify( wParam, lParam ) CLASS TTimePick
 
+   LOCAL nNotify := GetNotifyCode( lParam )
 
+   IF nNotify == DTN_DATETIMECHANGE
+      ::DoChange()
 
+      RETURN NIL
 
+   ENDIF
+
+   RETURN ::Super:Events_Notify( wParam, lParam )
 
 #pragma BEGINDUMP
 
@@ -268,11 +253,13 @@ static WNDPROC lpfnOldWndProcB = 0;
 
 static LRESULT APIENTRY SubClassFuncA( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProcA );
 }
 
 static LRESULT APIENTRY SubClassFuncB( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProcB );
 }
 
@@ -455,3 +442,4 @@ HB_FUNC( GETDATEPICKSECOND )
 }
 
 #pragma ENDDUMP
+

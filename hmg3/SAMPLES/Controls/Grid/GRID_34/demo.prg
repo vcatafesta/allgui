@@ -5,172 +5,165 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-Local aValue := { 0 , 0 }
+   LOCAL aValue := { 0 , 0 }
 
-	* Grid Column Controls Definitions
+   * Grid Column Controls Definitions
 
-	aCtrl_1 := {'TEXTBOX','NUMERIC','9999999999'}
-	aCtrl_2 := {'TEXTBOX','CHARACTER'}
-	aCtrl_3 := {'TEXTBOX','CHARACTER'}
-	aCtrl_4 := {'DATEPICKER','UPDOWN'}
-	aCtrl_5 := { 'CHECKBOX' , 'Yes' , 'No' }
-	aCtrl_6 := { 'EDITBOX' }
+   aCtrl_1 := {'TEXTBOX','NUMERIC','9999999999'}
+   aCtrl_2 := {'TEXTBOX','CHARACTER'}
+   aCtrl_3 := {'TEXTBOX','CHARACTER'}
+   aCtrl_4 := {'DATEPICKER','UPDOWN'}
+   aCtrl_5 := { 'CHECKBOX' , 'Yes' , 'No' }
+   aCtrl_6 := { 'EDITBOX' }
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 800 ;
-		HEIGHT 510 ;
-		TITLE 'GRID ONSAVE TEST' ;
-		MAIN 
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 800 ;
+         HEIGHT 510 ;
+         TITLE 'GRID ONSAVE TEST' ;
+         MAIN
 
-		DEFINE MAIN MENU 
-			POPUP 'File'
-				ITEM 'Append (Alt+A)'				ACTION Form_1.Grid_1.Append
-				ITEM 'Get RecNo'				ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
-				ITEM 'Set RecNo'				ACTION Form_1.Grid_1.RecNo := val(InputBox('','')) 
-				ITEM 'Get Value'				ACTION ( aValue := Form_1.Grid_1.Value , MsgInfo( Str( aValue [1] ) + ' , ' + Str( aValue [2] ) ) )
-				ITEM 'Set Value'				ACTION ( aValue [ 1 ] :=  val(InputBox('New Row','Selected Cell (Value)')) , aValue [ 2 ] :=  val(InputBox('New Col','Selected Cell (Value)')) , Form_1.Grid_1.Value := { aValue [ 1 ] , aValue [ 2 ] } )
-				ITEM 'Delete (Alt+D)'				ACTION Form_1.Grid_1.Delete
-				ITEM 'Recall (Alt+R)'				ACTION Form_1.Grid_1.Recall
-				ITEM 'Save Pending Changes (Alt+S)'		ACTION Form_1.Grid_1.Save
-				ITEM 'Clear Changes Buffer (Undo) (ALt+U)'	ACTION Form_1.Grid_1.ClearBuffer
-			END POPUP
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Append (Alt+A)'            ACTION Form_1.Grid_1.Append
+            ITEM 'Get RecNo'            ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
+            ITEM 'Set RecNo'            ACTION Form_1.Grid_1.RecNo := val(InputBox('',''))
+            ITEM 'Get Value'            ACTION ( aValue := Form_1.Grid_1.Value , MsgInfo( Str( aValue [1] ) + ' , ' + Str( aValue [2] ) ) )
+            ITEM 'Set Value'            ACTION ( aValue [ 1 ] :=  val(InputBox('New Row','Selected Cell (Value)')) , aValue [ 2 ] :=  val(InputBox('New Col','Selected Cell (Value)')) , Form_1.Grid_1.Value := { aValue [ 1 ] , aValue [ 2 ] } )
+            ITEM 'Delete (Alt+D)'            ACTION Form_1.Grid_1.Delete
+            ITEM 'Recall (Alt+R)'            ACTION Form_1.Grid_1.Recall
+            ITEM 'Save Pending Changes (Alt+S)'      ACTION Form_1.Grid_1.Save
+            ITEM 'Clear Changes Buffer (Undo) (ALt+U)'   ACTION Form_1.Grid_1.ClearBuffer
+         END POPUP
+      END MENU
 
-		USE TEST SHARED
+      USE TEST SHARED
 
-		GO TOP
+      GO TOP
 
-		@ 10,10 GRID Grid_1 ;
-			WIDTH 770 ;
-			HEIGHT 440 ;
-			HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'} ;
-			WIDTHS {140,140,140,100,100,100};
-			VALUE { 1 , 1 } ;
-			ROWSOURCE "Test" ;
-			COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' } ;
-			COLUMNCONTROLS { aCtrl_1 , aCtrl_2 , aCtrl_3 , aCtrl_4 , aCtrl_5 , aCtrl_6 } ;
-			EDIT ;
-			ALLOWAPPEND ;
-			ALLOWDELETE ;
-			ON SAVE OnSaveTest()
-		
-	END WINDOW
+      @ 10,10 GRID Grid_1 ;
+         WIDTH 770 ;
+         HEIGHT 440 ;
+         HEADERS {'Column 1','Column 2','Column 3','Column 4','Column 5','Column 6'} ;
+         WIDTHS {140,140,140,100,100,100};
+         VALUE { 1 , 1 } ;
+         ROWSOURCE "Test" ;
+         COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' } ;
+         COLUMNCONTROLS { aCtrl_1 , aCtrl_2 , aCtrl_3 , aCtrl_4 , aCtrl_5 , aCtrl_6 } ;
+         EDIT ;
+         ALLOWAPPEND ;
+         ALLOWDELETE ;
+         ON SAVE OnSaveTest()
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
-*******************************************************************************
-Procedure OnSaveTest()
-*******************************************************************************
-Local i
-Local s
-Local cMark
-Local j
+   ACTIVATE WINDOW Form_1
 
+   RETURN
 
-	* Show Edited Cells ***************************************************
+PROCEDURE OnSaveTest()
 
-	For i := 1 To len( This.EditBuffer )
+   LOCAL i
+   LOCAL s
+   LOCAL cMark
+   LOCAL j
 
-		s := ''
+   * Show Edited Cells ***************************************************
 
-		nLogicalRow	:= This.EditBuffer [ i ] [ 1 ] 
+   FOR i := 1 To len( This.EditBuffer )
 
-		nLogicalCol	:= This.EditBuffer [ i ] [ 2 ] 
+      s := ''
 
-		xValue		:= This.EditBuffer [ i ] [ 3 ] 
+      nLogicalRow   := This.EditBuffer [ i ] [ 1 ]
 
-		nPhysicalRow	:= This.EditBuffer [ i ] [ 4 ] 
+      nLogicalCol   := This.EditBuffer [ i ] [ 2 ]
 
-		s += 'RecNo():' + Str( nPhysicalRow ) + chr(13) + chr(10)
-		s += 'Logical Row: ' + Str( nLogicalRow )  + chr(13) + chr(10)
-		s += 'Logical Col: ' + Str( nLogicalCol )  + chr(13) + chr(10)
-		s += 'Value:       ' + xToC( xValue )      + chr(13) + chr(10)
+      xValue      := This.EditBuffer [ i ] [ 3 ]
 
-		MsgInfo ( s , 'Edited Cell #' + str(i) )
+      nPhysicalRow   := This.EditBuffer [ i ] [ 4 ]
 
-	Next i
+      s += 'RecNo():' + Str( nPhysicalRow ) + chr(13) + chr(10)
+      s += 'Logical Row: ' + Str( nLogicalRow )  + chr(13) + chr(10)
+      s += 'Logical Col: ' + Str( nLogicalCol )  + chr(13) + chr(10)
+      s += 'Value:       ' + xToC( xValue )      + chr(13) + chr(10)
 
+      MsgInfo ( s , 'Edited Cell #' + str(i) )
 
-	* Show Deleted / Recalled Records *****************************************
+   NEXT i
 
-	For i := 1 To len( This.MarkBuffer )
+   * Show Deleted / Recalled Records *****************************************
 
-		s := ''
+   FOR i := 1 To len( This.MarkBuffer )
 
-		nLogicalRow	:= This.MarkBuffer [ i ] [ 1 ] 
+      s := ''
 
-		nPhysicalRow	:= This.MarkBuffer [ i ] [ 2 ] 
+      nLogicalRow   := This.MarkBuffer [ i ] [ 1 ]
 
-		cMark		:= This.MarkBuffer [ i ] [ 3 ] 
+      nPhysicalRow   := This.MarkBuffer [ i ] [ 2 ]
 
+      cMark      := This.MarkBuffer [ i ] [ 3 ]
 
-		s += 'RecNo():' + Str( nPhysicalRow ) + chr(13) + chr(10)
-		s += 'Logical Row: ' + Str( nLogicalRow )  + chr(13) + chr(10)
-		s += 'Mark:       ' + if ( cMark == 'D' , 'Delete' , 'Recall' ) + chr(13) + chr(10)
+      s += 'RecNo():' + Str( nPhysicalRow ) + chr(13) + chr(10)
+      s += 'Logical Row: ' + Str( nLogicalRow )  + chr(13) + chr(10)
+      s += 'Mark:       ' + if ( cMark == 'D' , 'Delete' , 'Recall' ) + chr(13) + chr(10)
 
+      MsgInfo ( s , 'Marked Row #' + str(i) )
 
-		MsgInfo ( s , 'Marked Row #' + str(i) )
+   NEXT i
 
-	Next i
+   * Show Appended Records ************************************************
 
+   FOR i := 1 To len( This.AppendBuffer )
 
-	* Show Appended Records ************************************************
+      s := ''
 
-	For i := 1 To len( This.AppendBuffer )
+      s+= xToC ( This.AppendBuffer [ i ] [ 1 ] ) + ' , '
+      s+= xToC ( This.AppendBuffer [ i ] [ 2 ] ) + ' , '
+      s+= xToC ( This.AppendBuffer [ i ] [ 3 ] ) + ' , '
+      s+= xToC ( This.AppendBuffer [ i ] [ 4 ] ) + ' , '
+      s+= xToC ( This.AppendBuffer [ i ] [ 5 ] ) + ' , '
+      s+= xToC ( This.AppendBuffer [ i ] [ 6 ] )
 
-		s := ''
+      MsgInfo ( s , 'Appended Record #' + str(i) )
 
-		s+= xToC ( This.AppendBuffer [ i ] [ 1 ] ) + ' , ' 
-		s+= xToC ( This.AppendBuffer [ i ] [ 2 ] ) + ' , ' 
-		s+= xToC ( This.AppendBuffer [ i ] [ 3 ] ) + ' , ' 
-		s+= xToC ( This.AppendBuffer [ i ] [ 4 ] ) + ' , ' 
-		s+= xToC ( This.AppendBuffer [ i ] [ 5 ] ) + ' , ' 
-		s+= xToC ( This.AppendBuffer [ i ] [ 6 ] ) 
+   NEXT i
 
-		MsgInfo ( s , 'Appended Record #' + str(i) )
+   RETURN
 
-	Next i
+FUNCTION xToC ( x )
 
-Return
+   LOCAL c
 
-*******************
-Function xToC ( x )
-***
-Local c
+   IF ValType ( x ) == 'C'
 
-	If ValType ( x ) == 'C'
+      c := x
 
-		c := x
+      IF empty(c)
 
-		if empty(c) 
+         c := '"' + c + '"'
 
-		        c := '"' + c + '"'
+      ENDIF
 
-		endif			
+   ELSEIF ValType ( x ) == 'N'
 
-	ElseIf ValType ( x ) == 'N'
+      c := Str(x)
 
-		c := Str(x)
+   ELSEIF ValType ( x ) == 'D'
 
-	ElseIf ValType ( x ) == 'D'
+      c := dToC (x)
 
-		c := dToC (x)
+   ELSEIF ValType ( x ) == 'L'
 
-	ElseIf ValType ( x ) == 'L'
+      c := if ( x , '.T.' , '.F.' )
 
-		c := if ( x , '.T.' , '.F.' )
+   ELSEIF ValType ( x ) == 'U'
 
-	ElseIf ValType ( x ) == 'U'
+      c := 'Nil'
 
-		c := 'Nil'
+   ENDIF
 
-	EndIf
-
-
-Return c
+   RETURN c

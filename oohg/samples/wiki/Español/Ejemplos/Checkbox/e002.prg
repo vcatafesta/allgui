@@ -1,27 +1,25 @@
 /*
- * Ejemplo Checkbox n° 2
- * Authr: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Ese ejemplo muestra cómo definir y trabajar con
- * diferentes tipos de controles CheckBox.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Checkbox n° 2
+* Authr: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Ese ejemplo muestra cómo definir y trabajar con
+* diferentes tipos de controles CheckBox.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
-    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 408 ;
-      HEIGHT 176 ;
-      TITLE 'ooHg - Controles CheckBox' ;
-      MAIN ;
-      NOSIZE
+   DEFINE WINDOW Form1 ;
+         AT 0,0 ;
+         WIDTH 408 ;
+         HEIGHT 176 ;
+         TITLE 'ooHg - Controles CheckBox' ;
+         MAIN ;
+         NOSIZE
 
       DEFINE MAIN MENU
          POPUP 'CheckBox'
@@ -54,7 +52,7 @@ FUNCTION Main
          CAPTION 'Chk3 Sintaxis Alternativa'
          VALUE .T.
          LEFTALIGN .T.
-       END CHECKBOX
+      END CHECKBOX
 
       DEFINE CHECKBOX Chk4
          ROW 60
@@ -74,8 +72,7 @@ FUNCTION Main
    CENTER WINDOW Form1
    ACTIVATE WINDOW Form1
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION SetChkState( nState )
 
@@ -88,10 +85,10 @@ FUNCTION SetChkState( nState )
       Form1.Chk2.Value := Nil
    ENDCASE
 
-RETURN Nil
-
+   RETURN NIL
 
 FUNCTION ShowState()
+
    LOCAL ret := Form1.Chk4.Value
 
    DO CASE
@@ -103,8 +100,9 @@ FUNCTION ShowState()
       MsgInfo('El estado de Chk4 es DESMARCADO')
    ENDCASE
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

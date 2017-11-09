@@ -1,72 +1,60 @@
 /*
- * $Id: h_checkbox.prg,v 1.49 2017/08/25 19:42:18 fyurisich Exp $
- */
+* $Id: h_checkbox.prg,v 1.49 2017/08/25 19:42:18 fyurisich Exp $
+*/
 /*
- * ooHG source code:
- * CheckBox control
- *
- * Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
- * https://sourceforge.net/projects/oohg/
- *
- * Portions of this project are based upon Harbour MiniGUI library.
- * Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
- *
- * Portions of this project are based upon Harbour GUI framework for Win32.
- * Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
- * Copyright 2001 Antonio Linares <alinares@fivetech.com>
- *
- * Portions of this project are based upon Harbour Project.
- * Copyright 1999-2017, https://harbour.github.io/
- */
+* ooHG source code:
+* CheckBox control
+* Copyright 2005-2017 Vicente Guerra <vicente@guerra.com.mx>
+* https://sourceforge.net/projects/oohg/
+* Portions of this project are based upon Harbour MiniGUI library.
+* Copyright 2002-2005 Roberto Lopez <roblez@ciudad.com.ar>
+* Portions of this project are based upon Harbour GUI framework for Win32.
+* Copyright 2001 Alexander S. Kresin <alex@belacy.belgorod.su>
+* Copyright 2001 Antonio Linares <alinares@fivetech.com>
+* Portions of this project are based upon Harbour Project.
+* Copyright 1999-2017, https://harbour.github.io/
+*/
 /*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
- *
- * As a special exception, the ooHG Project gives permission for
- * additional uses of the text contained in its release of ooHG.
- *
- * The exception is that, if you link the ooHG libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the ooHG library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the ooHG
- * Project under the name ooHG. If you copy code from other
- * ooHG Project or Free Software Foundation releases into a copy of
- * ooHG, as the General Public License permits, the exception does
- * not apply to the code that you add in this way. To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for ooHG, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- */
-
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1335,USA (or download from http://www.gnu.org/licenses/).
+* As a special exception, the ooHG Project gives permission for
+* additional uses of the text contained in its release of ooHG.
+* The exception is that, if you link the ooHG libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the ooHG library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the ooHG
+* Project under the name ooHG. If you copy code from other
+* ooHG Project or Free Software Foundation releases into a copy of
+* ooHG, as the General Public License permits, the exception does
+* not apply to the code that you add in this way. To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for ooHG, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "oohg.ch"
 #include "common.ch"
 #include "hbclass.ch"
 #include "i_windefs.ch"
 
-
 CLASS TCheckBox FROM TLabel
+
    DATA Type       INIT "CHECKBOX" READONLY
    DATA cPicture   INIT ""
    DATA IconWidth  INIT 19
@@ -77,24 +65,27 @@ CLASS TCheckBox FROM TLabel
    DATA LeftAlign  INIT .F.
    DATA lLibDraw   INIT .F.
 
-   METHOD Define
-   METHOD Value       SETGET
-   METHOD Events_Command
-   METHOD Events_Color
-   METHOD Events_Notify
+METHOD Define
+
+METHOD Value       SETGET
+
+METHOD Events_Command
+
+METHOD Events_Color
+
+METHOD Events_Notify
 
    EMPTY( _OOHG_AllVars )
+
 ENDCLASS
 
-*------------------------------------------------------------------------------*
 METHOD Define( ControlName, ParentForm, x, y, Caption, Value, fontname, ;
-               fontsize, tooltip, changeprocedure, w, h, lostfocus, gotfocus, ;
-               HelpId, invisible, notabstop, bold, italic, underline, ;
-               strikeout, field, backcolor, fontcolor, transparent, autosize, ;
-               lRtl, lDisabled, threestate, leftalign, drawby ) CLASS TCheckBox
-*------------------------------------------------------------------------------*
-Local ControlHandle, nStyle, nStyleEx := 0
-Local oTab
+      fontsize, tooltip, changeprocedure, w, h, lostfocus, gotfocus, ;
+      HelpId, invisible, notabstop, bold, italic, underline, ;
+      strikeout, field, backcolor, fontcolor, transparent, autosize, ;
+      lRtl, lDisabled, threestate, leftalign, drawby ) CLASS TCheckBox
+   LOCAL ControlHandle, nStyle, nStyleEx := 0
+   LOCAL oTab
 
    ASSIGN ::lLibDraw    VALUE drawby      TYPE "L" DEFAULT _OOHG_UsesVisualStyle()
    ASSIGN ::nCol        VALUE x           TYPE "N"
@@ -117,17 +108,17 @@ Local oTab
    ::SetForm( ControlName, ParentForm, FontName, FontSize, FontColor, BackColor,, lRtl )
 
    nStyle := ::InitStyle( ,, Invisible, NoTabStop, lDisabled )
-   If ::Threestate
+   IF ::Threestate
       nStyle += BS_AUTO3STATE
-   Else
+   ELSE
       nStyle += BS_AUTOCHECKBOX
-   Endif
-   If ::LeftAlign
+   ENDIF
+   IF ::LeftAlign
       nStyle += BS_LEFTTEXT
-   Endif
-   If ::Transparent
+   ENDIF
+   IF ::Transparent
       nStyleEx += WS_EX_TRANSPARENT
-   EndIf
+   ENDIF
 
    Controlhandle := InitCheckBox( ::ContainerhWnd, Caption, 0, ::ContainerCol, ::ContainerRow, '', 0 , ::nWidth, ::nHeight, nStyle, nStyleEx, ::lRtl )
 
@@ -151,12 +142,11 @@ Local oTab
    ASSIGN ::OnGotFocus  VALUE gotfocus  TYPE "B"
    ASSIGN ::OnChange    VALUE ChangeProcedure TYPE "B"
 
-Return Self
+   RETURN Self
 
-*------------------------------------------------------------------------------*
 METHOD Value( uValue ) CLASS TCheckBox
-*------------------------------------------------------------------------------*
-Local uState
+
+   LOCAL uState
 
    IF HB_IsLogical( uValue )
       SendMessage( ::hWnd, BM_SETCHECK, if( uValue, BST_CHECKED, BST_UNCHECKED ), 0 )
@@ -166,7 +156,7 @@ Local uState
       ::DoChange()
    ELSE
       uState := SendMessage( ::hWnd, BM_GETCHECK , 0 , 0 )
-      
+
       IF uState == BST_CHECKED
          uValue := .T.
       ELSEIF uState == BST_UNCHECKED
@@ -175,40 +165,37 @@ Local uState
          uValue := Nil
       ENDIF
    ENDIF
-RETURN uValue
 
-*------------------------------------------------------------------------------*
+   RETURN uValue
+
 METHOD Events_Command( wParam ) CLASS TCheckBox
-*------------------------------------------------------------------------------*
-Local Hi_wParam := HIWORD( wParam )
-   If Hi_wParam == BN_CLICKED
+
+   LOCAL Hi_wParam := HIWORD( wParam )
+
+   IF Hi_wParam == BN_CLICKED
       ::DoChange()
-      Return nil
-   EndIf
-Return ::Super:Events_Command( wParam )
 
-*------------------------------------------------------------------------------*
+      RETURN NIL
+   ENDIF
+
+   RETURN ::Super:Events_Command( wParam )
+
 METHOD Events_Color( wParam, nDefColor ) CLASS TCheckBox
-*------------------------------------------------------------------------------*
 
-Return Events_Color_InTab( Self, wParam, nDefColor )    // see h_controlmisc.prg
+   RETURN Events_Color_InTab( Self, wParam, nDefColor )    // see h_controlmisc.prg
 
-*------------------------------------------------------------------------------*
 METHOD Events_Notify( wParam, lParam ) CLASS TCheckBox
-*------------------------------------------------------------------------------*
-Local nNotify := GetNotifyCode( lParam )
 
-   If nNotify == NM_CUSTOMDRAW
-      If ::lLibDraw .AND. ::IsVisualStyled .AND. _OOHG_UsesVisualStyle()
-         Return TCheckBox_Notify_CustomDraw( Self, lParam, ::Caption, ::LeftAlign )
-      EndIf
-   EndIf
+   LOCAL nNotify := GetNotifyCode( lParam )
 
-Return ::Super:Events_Notify( wParam, lParam )
+   IF nNotify == NM_CUSTOMDRAW
+      IF ::lLibDraw .AND. ::IsVisualStyled .AND. _OOHG_UsesVisualStyle()
 
+         RETURN TCheckBox_Notify_CustomDraw( Self, lParam, ::Caption, ::LeftAlign )
+      ENDIF
+   ENDIF
 
-
-
+   RETURN ::Super:Events_Notify( wParam, lParam )
 
 #pragma BEGINDUMP
 
@@ -251,48 +238,49 @@ This files are not present in BCC 551
 */
 
 typedef struct _MARGINS {
-	int cxLeftWidth;
-	int cxRightWidth;
-	int cyTopHeight;
-	int cyBottomHeight;
+   int cxLeftWidth;
+   int cxRightWidth;
+   int cyTopHeight;
+   int cyBottomHeight;
 } MARGINS, *PMARGINS;
 
 typedef HANDLE HTHEME;
 
 enum {
-	BP_PUSHBUTTON = 1,
-	BP_RADIOBUTTON = 2,
-	BP_CHECKBOX = 3,
-	BP_GROUPBOX = 4,
-	BP_USERBUTTON = 5
+   BP_PUSHBUTTON = 1,
+   BP_RADIOBUTTON = 2,
+   BP_CHECKBOX = 3,
+   BP_GROUPBOX = 4,
+   BP_USERBUTTON = 5
 };
 
 enum {
-	CBS_UNCHECKEDNORMAL = 1,
-	CBS_UNCHECKEDHOT = 2,
-	CBS_UNCHECKEDPRESSED = 3,
-	CBS_UNCHECKEDDISABLED = 4,
-	CBS_CHECKEDNORMAL = 5,
-	CBS_CHECKEDHOT = 6,
-	CBS_CHECKEDPRESSED = 7,
-	CBS_CHECKEDDISABLED = 8,
-	CBS_MIXEDNORMAL = 9,
-	CBS_MIXEDHOT = 10,
-	CBS_MIXEDPRESSED = 11,
-	CBS_MIXEDDISABLED = 12
+   CBS_UNCHECKEDNORMAL = 1,
+   CBS_UNCHECKEDHOT = 2,
+   CBS_UNCHECKEDPRESSED = 3,
+   CBS_UNCHECKEDDISABLED = 4,
+   CBS_CHECKEDNORMAL = 5,
+   CBS_CHECKEDHOT = 6,
+   CBS_CHECKEDPRESSED = 7,
+   CBS_CHECKEDDISABLED = 8,
+   CBS_MIXEDNORMAL = 9,
+   CBS_MIXEDHOT = 10,
+   CBS_MIXEDPRESSED = 11,
+   CBS_MIXEDDISABLED = 12
 };
 
 static WNDPROC lpfnOldWndProc = 0;
 
 static LRESULT APIENTRY SubClassFunc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+
    return _OOHG_WndProcCtrl( hWnd, msg, wParam, lParam, lpfnOldWndProc );
 }
 
 HB_FUNC( INITCHECKBOX )
 {
-	HWND hwnd;
-	HWND hbutton;
+   HWND hwnd;
+   HWND hbutton;
    int Style, StyleEx;
 
    hwnd = HWNDparam( 1 );
@@ -302,9 +290,9 @@ HB_FUNC( INITCHECKBOX )
    StyleEx = hb_parni( 11 ) | _OOHG_RTL_Status( hb_parl( 12 ) );
 
    hbutton = CreateWindowEx( StyleEx, "button" , hb_parc(2) ,
-	Style ,
-	hb_parni(4), hb_parni(5) , hb_parni(8), hb_parni(9) ,
-	hwnd,(HMENU)hb_parni(3) , GetModuleHandle(NULL) , NULL ) ;
+   Style ,
+   hb_parni(4), hb_parni(5) , hb_parni(8), hb_parni(9) ,
+   hwnd,(HMENU)hb_parni(3) , GetModuleHandle(NULL) , NULL ) ;
 
    lpfnOldWndProc = ( WNDPROC ) SetWindowLong( hbutton, GWL_WNDPROC, ( LONG ) SubClassFunc );
 
@@ -342,11 +330,12 @@ int TCheckBox_Notify_CustomDraw( PHB_ITEM pSelf, LPARAM lParam, LPCSTR cCaption,
       { CBS_MIXEDNORMAL,     CBS_MIXEDHOT,     CBS_MIXEDPRESSED,     CBS_MIXEDDISABLED,     CBS_MIXEDNORMAL }
    };
 
- 	if( pCustomDraw->dwDrawStage == CDDS_PREERASE || pCustomDraw->dwDrawStage == CDDS_PREPAINT )
+    if( pCustomDraw->dwDrawStage == CDDS_PREERASE || pCustomDraw->dwDrawStage == CDDS_PREPAINT )
    {
       hInstDLL = LoadLibrary( "UXTHEME.DLL" );
       if( ! hInstDLL )
       {
+
          return CDRF_DODEFAULT;
       }
 
@@ -360,6 +349,7 @@ int TCheckBox_Notify_CustomDraw( PHB_ITEM pSelf, LPARAM lParam, LPCSTR cCaption,
       if( ! ( dwProcOpenThemeData && dwProcCloseThemeData && dwProcIsThemeBackgroundPartiallyTransparent && dwProcDrawThemeParentBackground && dwProcGetThemeBackgroundContentRect && dwProcDrawThemeBackground ) )
       {
          FreeLibrary( hInstDLL );
+
          return CDRF_DODEFAULT;
       }
 
@@ -367,6 +357,7 @@ int TCheckBox_Notify_CustomDraw( PHB_ITEM pSelf, LPARAM lParam, LPCSTR cCaption,
       if( ! hTheme )
       {
          FreeLibrary( hInstDLL );
+
          return CDRF_DODEFAULT;
       }
 
@@ -477,3 +468,4 @@ HB_FUNC( TCHECKBOX_NOTIFY_CUSTOMDRAW )
 }
 
 #pragma ENDDUMP
+

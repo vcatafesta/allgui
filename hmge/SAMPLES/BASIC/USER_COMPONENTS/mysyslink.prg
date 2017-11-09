@@ -1,239 +1,223 @@
 #include "i_winuser.ch"
 
-*------------------------------------------------------------------------------*
-Init Procedure _InitMySysLink
-*------------------------------------------------------------------------------*
-
-	InstallEventHandler ( 'MySysLinkEventHandler' )
-	InstallMethodHandler ( 'SetFocus' , 'MySysLinkSetFocus' )
-	InstallMethodHandler ( 'Enable' , 'MySysLinkEnable' )
-	InstallMethodHandler ( 'Disable' , 'MySysLinkDisable' )
-	InstallPropertyHandler ( 'Handle' , 'SetMySysLinkHandle' , 'GetMySysLinkHandle' )
-	InstallPropertyHandler ( 'Caption' , 'SetMySysLinkCaption' , 'GetMySysLinkCaption' )
-
-Return
-
-*------------------------------------------------------------------------------*
-Procedure _DefineMySysLink ( cName , nRow , nCol , cCaption , bAction , cParent )
-*------------------------------------------------------------------------------*
-Local hControlHandle, nId, hParentFormHandle, k, cMacroVar
-
-	If .Not. _IsWindowDefined (cParent)
-		MsgMiniGuiError("Window: "+ cParent + " is not defined.")
-	Endif
-
-	If _IsControlDefined (cName,cParent)
-		MsgMiniGuiError ("Control: " + cName + " Of " + cParent + " Already defined.")
-	Endif
-
-	cMacroVar := '_' + cParent + '_' + cName
-	k			:= _GetControlFree()
-	nId			:= _GetId() 
-	hParentFormHandle	:= GetFormHandle (cParent)
-	hControlHandle		:= InitMySysLink ( ;
-							hParentFormHandle , ;
-							nRow , ;
-							nCol , ;
-							cCaption , ;
-							nId ;
-						)
-
-	Public &cMacroVar. := k
-
-	_HMG_aControlType [k] := 'MYSYSLINK'
-	_HMG_aControlNames  [k] :=  cName
-	_HMG_aControlHandles  [k] := hControlHandle
-	_HMG_aControlParenthandles [k] := hParentFormHandle
-	_HMG_aControlIds  [k] :=  0 
-	_HMG_aControlProcedures  [k] := bAction
-	_HMG_aControlPageMap  [k] :=  {} 
-	_HMG_aControlValue  [k] :=  Nil 
-	_HMG_aControlInputMask  [k] :=  "" 
-	_HMG_aControllostFocusProcedure  [k] :=  "" 
-	_HMG_aControlGotFocusProcedure  [k] :=  "" 
-	_HMG_aControlChangeProcedure  [k] :=  "" 
-	_HMG_aControlDeleted  [k] :=  .F. 
-	_HMG_aControlBkColor [k] :=   Nil 
-	_HMG_aControlFontColor  [k] :=  Nil 
-	_HMG_aControlDblClick  [k] :=  "" 
-	_HMG_aControlHeadClick  [k] :=  {} 
-	_HMG_aControlRow   [k] := 0
-	_HMG_aControlCol   [k] := 0 
-	_HMG_aControlWidth   [k] := 0 
-	_HMG_aControlHeight   [k] := 0 
-	_HMG_aControlSpacing   [k] := 0 
-	_HMG_aControlContainerRow  [k] :=  -1 
-	_HMG_aControlContainerCol  [k] :=  -1 
-	_HMG_aControlPicture  [k] :=  "" 
-	_HMG_aControlContainerHandle [k] :=   0 
-	_HMG_aControlFontName  [k] :=  Nil
-	_HMG_aControlFontSize  [k] :=  Nil
-	_HMG_aControlFontAttributes  [k] :=  {} 
-	_HMG_aControlToolTip   [k] :=  '' 
-	_HMG_aControlRangeMin  [k] :=   0  
-	_HMG_aControlRangeMax  [k] :=   0  
-	_HMG_aControlCaption  [k] :=   ''
-	_HMG_aControlVisible  [k] :=   .t. 
-	_HMG_aControlHelpId  [k] :=   0 
-	_HMG_aControlFontHandle  [k] :=   Nil
-	_HMG_aControlBrushHandle  [k] :=   0 
-	_HMG_aControlEnabled  [k] :=   .T. 
-	_HMG_aControlMiscData1 [k] := 0
-	_HMG_aControlMiscData2 [k] := ''
+INIT PROCEDURE _InitMySysLink
+
+   InstallEventHandler ( 'MySysLinkEventHandler' )
+   InstallMethodHandler ( 'SetFocus' , 'MySysLinkSetFocus' )
+   InstallMethodHandler ( 'Enable' , 'MySysLinkEnable' )
+   InstallMethodHandler ( 'Disable' , 'MySysLinkDisable' )
+   InstallPropertyHandler ( 'Handle' , 'SetMySysLinkHandle' , 'GetMySysLinkHandle' )
+   InstallPropertyHandler ( 'Caption' , 'SetMySysLinkCaption' , 'GetMySysLinkCaption' )
+
+   RETURN
+
+PROCEDURE _DefineMySysLink ( cName , nRow , nCol , cCaption , bAction , cParent )
+
+   LOCAL hControlHandle, nId, hParentFormHandle, k, cMacroVar
+
+   IF .Not. _IsWindowDefined (cParent)
+      MsgMiniGuiError("Window: "+ cParent + " is not defined.")
+   ENDIF
+
+   IF _IsControlDefined (cName,cParent)
+      MsgMiniGuiError ("Control: " + cName + " Of " + cParent + " Already defined.")
+   ENDIF
+
+   cMacroVar := '_' + cParent + '_' + cName
+   k         := _GetControlFree()
+   nId         := _GetId()
+   hParentFormHandle   := GetFormHandle (cParent)
+   hControlHandle      := InitMySysLink ( ;
+      hParentFormHandle , ;
+      nRow , ;
+      nCol , ;
+      cCaption , ;
+      nId ;
+      )
 
-Return
+   PUBLIC &cMacroVar. := k
 
-*------------------------------------------------------------------------------*
-Function MySysLinkEventhandler ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
-Local i
-Local RetVal := Nil
-hWnd := Nil // Unused variable
+   _HMG_aControlType [k] := 'MYSYSLINK'
+   _HMG_aControlNames  [k] :=  cName
+   _HMG_aControlHandles  [k] := hControlHandle
+   _HMG_aControlParenthandles [k] := hParentFormHandle
+   _HMG_aControlIds  [k] :=  0
+   _HMG_aControlProcedures  [k] := bAction
+   _HMG_aControlPageMap  [k] :=  {}
+   _HMG_aControlValue  [k] :=  Nil
+   _HMG_aControlInputMask  [k] :=  ""
+   _HMG_aControllostFocusProcedure  [k] :=  ""
+   _HMG_aControlGotFocusProcedure  [k] :=  ""
+   _HMG_aControlChangeProcedure  [k] :=  ""
+   _HMG_aControlDeleted  [k] :=  .F.
+   _HMG_aControlBkColor [k] :=   Nil
+   _HMG_aControlFontColor  [k] :=  Nil
+   _HMG_aControlDblClick  [k] :=  ""
+   _HMG_aControlHeadClick  [k] :=  {}
+   _HMG_aControlRow   [k] := 0
+   _HMG_aControlCol   [k] := 0
+   _HMG_aControlWidth   [k] := 0
+   _HMG_aControlHeight   [k] := 0
+   _HMG_aControlSpacing   [k] := 0
+   _HMG_aControlContainerRow  [k] :=  -1
+   _HMG_aControlContainerCol  [k] :=  -1
+   _HMG_aControlPicture  [k] :=  ""
+   _HMG_aControlContainerHandle [k] :=   0
+   _HMG_aControlFontName  [k] :=  Nil
+   _HMG_aControlFontSize  [k] :=  Nil
+   _HMG_aControlFontAttributes  [k] :=  {}
+   _HMG_aControlToolTip   [k] :=  ''
+   _HMG_aControlRangeMin  [k] :=   0
+   _HMG_aControlRangeMax  [k] :=   0
+   _HMG_aControlCaption  [k] :=   ''
+   _HMG_aControlVisible  [k] :=   .t.
+   _HMG_aControlHelpId  [k] :=   0
+   _HMG_aControlFontHandle  [k] :=   Nil
+   _HMG_aControlBrushHandle  [k] :=   0
+   _HMG_aControlEnabled  [k] :=   .T.
+   _HMG_aControlMiscData1 [k] := 0
+   _HMG_aControlMiscData2 [k] := ''
 
-	if nMsg == WM_NOTIFY
+   RETURN
 
-		i := Ascan ( _HMG_aControlHandles , GetHwndFrom (lParam) )
+FUNCTION MySysLinkEventhandler ( hWnd, nMsg, wParam, lParam )
 
-		If i > 0
+   LOCAL i
+   LOCAL RetVal := Nil
 
-			IF GetNotifyCode ( lParam ) == NM_CLICK .Or. GetNotifyCode ( lParam ) == NM_RETURN
-				RetVal := 0
-				_DoControlEventProcedure ( _HMG_aControlProcedures [i] , i )
-			Endif
+   hWnd := Nil // Unused variable
 
-		Endif
+   IF nMsg == WM_NOTIFY
 
-	endif
+      i := Ascan ( _HMG_aControlHandles , GetHwndFrom (lParam) )
 
-Return RetVal
+      IF i > 0
 
-*------------------------------------------------------------------------------*
-Procedure MySysLinkSetFocus ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+         IF GetNotifyCode ( lParam ) == NM_CLICK .Or. GetNotifyCode ( lParam ) == NM_RETURN
+            RetVal := 0
+            _DoControlEventProcedure ( _HMG_aControlProcedures [i] , i )
+         ENDIF
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+      ENDIF
 
-		SetFocus ( GetControlHandle ( cControl , cWindow ) )
+   ENDIF
 
-		_HMG_UserComponentProcess := .T.
+   RETURN RetVal
 
-	else
+PROCEDURE MySysLinkSetFocus ( cWindow , cControl )
 
-		_HMG_UserComponentProcess := .F.
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-	endif
+      SetFocus ( GetControlHandle ( cControl , cWindow ) )
 
-Return
+      _HMG_UserComponentProcess := .T.
 
-*------------------------------------------------------------------------------*
-Procedure MySysLinkEnable ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+   ELSE
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+      _HMG_UserComponentProcess := .F.
 
-		EnableWindow ( GetControlHandle ( cControl , cWindow ) )
+   ENDIF
 
-		_HMG_UserComponentProcess := .T.
+   RETURN
 
-	else
+PROCEDURE MySysLinkEnable ( cWindow , cControl )
 
-		_HMG_UserComponentProcess := .F.
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-	endif
+      EnableWindow ( GetControlHandle ( cControl , cWindow ) )
 
-Return
+      _HMG_UserComponentProcess := .T.
 
-*------------------------------------------------------------------------------*
-Procedure MySysLinkDisable ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+   ELSE
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+      _HMG_UserComponentProcess := .F.
 
-		DisableWindow ( GetControlHandle ( cControl , cWindow ) )
+   ENDIF
 
-		_HMG_UserComponentProcess := .T.
+   RETURN
 
-	else
+PROCEDURE MySysLinkDisable ( cWindow , cControl )
 
-		_HMG_UserComponentProcess := .F.
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-	endif
+      DisableWindow ( GetControlHandle ( cControl , cWindow ) )
 
-Return
+      _HMG_UserComponentProcess := .T.
 
-*------------------------------------------------------------------------------*
-Function SetMySysLinkHandle ( cWindow , cControl )
-*------------------------------------------------------------------------------*
+   ELSE
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+      _HMG_UserComponentProcess := .F.
 
-		MsgExclamation ( 'This Property is Read Only!' , 'Warning' )
+   ENDIF
 
-	endif
+   RETURN
 
-	_HMG_UserComponentProcess := .F.
+FUNCTION SetMySysLinkHandle ( cWindow , cControl )
 
-Return Nil
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-*------------------------------------------------------------------------------*
-Function GetMySysLinkHandle ( cWindow , cControl )
-*------------------------------------------------------------------------------*
-Local RetVal := Nil
+      MsgExclamation ( 'This Property is Read Only!' , 'Warning' )
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+   ENDIF
 
-		_HMG_UserComponentProcess := .T.
-		RetVal := GetControlHandle ( cControl , cWindow )
+   _HMG_UserComponentProcess := .F.
 
-	else
+   RETURN NIL
 
-		_HMG_UserComponentProcess := .F.
+FUNCTION GetMySysLinkHandle ( cWindow , cControl )
 
-	endif
+   LOCAL RetVal := Nil
 
-Return RetVal
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-*------------------------------------------------------------------------------*
-Function SetMySysLinkCaption ( cWindow , cControl , cProperty , cValue )
-*------------------------------------------------------------------------------*
-cProperty := Nil // Unused variable
+      _HMG_UserComponentProcess := .T.
+      RetVal := GetControlHandle ( cControl , cWindow )
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+   ELSE
 
-		_HMG_UserComponentProcess := .T.
+      _HMG_UserComponentProcess := .F.
 
-		SetWindowText ( GetControlHandle ( cControl , cWindow ) , cValue )
+   ENDIF
 
-	else
+   RETURN RetVal
 
-		_HMG_UserComponentProcess := .F.
+FUNCTION SetMySysLinkCaption ( cWindow , cControl , cProperty , cValue )
 
-	endif
+   cProperty := Nil // Unused variable
 
-Return Nil
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
 
-*------------------------------------------------------------------------------*
-Function GetMySysLinkCaption ( cWindow , cControl )
-*------------------------------------------------------------------------------*
-Local RetVal := Nil
+      _HMG_UserComponentProcess := .T.
 
-	If GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+      SetWindowText ( GetControlHandle ( cControl , cWindow ) , cValue )
 
-		_HMG_UserComponentProcess := .T.
+   ELSE
 
-		RetVal := GetWindowText ( GetControlHandle ( cControl , cWindow ) )
+      _HMG_UserComponentProcess := .F.
 
-	else
+   ENDIF
 
-		_HMG_UserComponentProcess := .F.
+   RETURN NIL
 
-	endif
+FUNCTION GetMySysLinkCaption ( cWindow , cControl )
 
-Return RetVal
+   LOCAL RetVal := Nil
 
-*------------------------------------------------------------------------------*
-* Low Level C Routines
-*------------------------------------------------------------------------------*
+   IF GetControlType ( cControl , cWindow ) == 'MYSYSLINK'
+
+      _HMG_UserComponentProcess := .T.
+
+      RetVal := GetWindowText ( GetControlHandle ( cControl , cWindow ) )
+
+   ELSE
+
+      _HMG_UserComponentProcess := .F.
+
+   ENDIF
+
+   RETURN RetVal
+
+   * Low Level C Routines
 
 #pragma BEGINDUMP
 
@@ -253,18 +237,18 @@ Return RetVal
 
 HB_FUNC( INITMYSYSLINK )
 {
-	HWND hwnd = (HWND) hb_parnl (1);
-	HWND hSysLink;
+   HWND hwnd = (HWND) hb_parnl (1);
+   HWND hSysLink;
 
-	INITCOMMONCONTROLSEX icex;
-	icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
-	icex.dwICC  = ICC_LINK_CLASS;
-	InitCommonControlsEx(&icex);
+   INITCOMMONCONTROLSEX icex;
+   icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
+   icex.dwICC  = ICC_LINK_CLASS;
+   InitCommonControlsEx(&icex);
 
-	hSysLink = CreateWindowEx ( WS_EX_TOPMOST,
+   hSysLink = CreateWindowEx ( WS_EX_TOPMOST,
                            WC_LINK,
                            L"For more information, <A HREF=\"http://www.microsoft.com\">click here</A> " \
-                           L"or <A ID=\"idInfo\">here</A>.", 
+                           L"or <A ID=\"idInfo\">here</A>.",
                            WS_TABSTOP|WS_VISIBLE|WS_CHILD,
                            hb_parni(3) ,
                            hb_parni(2) ,
@@ -275,8 +259,9 @@ HB_FUNC( INITMYSYSLINK )
                            GetModuleHandle(NULL) ,
                            NULL );
 
-	hb_retnl ( (LONG) hSysLink );
+   hb_retnl ( (LONG) hSysLink );
 
 }
 
 #pragma ENDDUMP
+

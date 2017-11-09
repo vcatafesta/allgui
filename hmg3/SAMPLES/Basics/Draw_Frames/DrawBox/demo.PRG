@@ -1,46 +1,44 @@
 /*
 * HMG - Harbour Win32 GUI library Demo
-*
 * Copyright 2002-2010 Roberto Lopez <mail.box.hmg@gmail.com>
 * http://www.hmgforum.com//
-*
 */
 
 #include "hmg.ch"
 
 #xcommand DRAW PANEL IN WINDOW <parent> ;
-      AT <frow>,<fcol> ;
-      TO <trow>,<tcol> ;
-          =>;
-      DrawWindowBoxRaised( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
+   AT <frow>,<fcol> ;
+   TO <trow>,<tcol> ;
+   =>;
+   DrawWindowBoxRaised( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
 
 #xcommand DRAW BOX IN WINDOW <parent> ;
-      AT <frow>,<fcol> ;
-      TO <trow>,<tcol> ;
-          =>;
-      DrawWindowBoxIn( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
+   AT <frow>,<fcol> ;
+   TO <trow>,<tcol> ;
+   =>;
+   DrawWindowBoxIn( <"parent">, <frow>, <fcol>, <trow>, <tcol> )
 
-function main
+FUNCTION main
 
-   define window x ;
-      at 0,0 ;
-      width 640 ;
-      height 480 ;
-      title "Draw Box And Panel Sample By Grigory Filatov" ;
-      main nomaximize nosize ;
-      on init x.Button_1.Setfocus
+   DEFINE WINDOW x ;
+         at 0,0 ;
+         width 640 ;
+         height 480 ;
+         title "Draw Box And Panel Sample By Grigory Filatov" ;
+         main nomaximize nosize ;
+         on init x.Button_1.Setfocus
 
       DRAW BOX         ;
-      IN WINDOW x         ;
-      AT 20,20         ;
-      TO 200,300
+         IN WINDOW x         ;
+         AT 20,20         ;
+         TO 200,300
 
       @ 110, 140 LABEL Label_1 VALUE "Box In" AUTOSIZE
 
       DRAW PANEL         ;
-      IN WINDOW x         ;
-      AT 20,320         ;
-      TO 200,610
+         IN WINDOW x         ;
+         AT 20,320         ;
+         TO 200,610
 
       @ 110, 440 LABEL Label_2 VALUE "Panel" AUTOSIZE
 
@@ -62,37 +60,37 @@ function main
          ACTION ThisWindow.Release ;
          WIDTH 78 HEIGHT 26
 
-   end window
+   END WINDOW
 
    x.center
 
-   Activate Window x
+   ACTIVATE WINDOW x
 
-Return
+   RETURN
 
+FUNCTION DrawWindowBoxIn(window,row,col,rowr,colr)
 
-function DrawWindowBoxIn(window,row,col,rowr,colr)
-   Local i := GetFormIndex ( Window )
-   Local FormHandle := GetFormHandle ( Window )
-   Local hDC := GetDC( FormHandle )
+   LOCAL i := GetFormIndex ( Window )
+   LOCAL FormHandle := GetFormHandle ( Window )
+   LOCAL hDC := GetDC( FormHandle )
 
    WndBoxIn( hDC, row, col, rowr, colr )
    aadd ( _HMG_SYSDATA [ 102 ] [i] , { || WndBoxIn( hDC := GetDC( FormHandle ), row, col, rowr, colr ), ReleaseDC( FormHandle, hDC ) } )
    ReleaseDC( FormHandle, hDC )
 
-return nil
+   RETURN NIL
 
-function DrawWindowBoxRaised(window,row,col,rowr,colr)
-   Local i := GetFormIndex ( Window )
-   Local FormHandle := GetFormHandle ( Window )
-   Local hDC := GetDC( FormHandle )
+FUNCTION DrawWindowBoxRaised(window,row,col,rowr,colr)
+
+   LOCAL i := GetFormIndex ( Window )
+   LOCAL FormHandle := GetFormHandle ( Window )
+   LOCAL hDC := GetDC( FormHandle )
 
    WndBoxIn( hDC, row, col, rowr, colr )
    aadd ( _HMG_SYSDATA [ 102 ] [i] , { || WndBoxRaised( hDC := GetDC( FormHandle ), row, col, rowr, colr ), ReleaseDC( FormHandle, hDC ) } )
    ReleaseDC( FormHandle, hDC )
 
-return nil
-
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -176,20 +174,17 @@ HB_FUNC( WNDBOXRAISED )
 
 #pragma ENDDUMP
 
+   /*
 
+   Procedure _RefreshDataControls (i)
 
-/*
-	
-*------------------------------------------------------------------------------*
-Procedure _RefreshDataControls (i)
-*------------------------------------------------------------------------------*
-Local SplitIndex
-Local x
-Local w
+   Local SplitIndex
+   Local x
+   Local w
 
    If Len ( _HMG_SYSDATA [ 102 ] [i] ) > 0
-      SendMessage( _HMG_SYSDATA [ 67 ] [i] , WM_PAINT , 0 , 0 )
+   SendMessage( _HMG_SYSDATA [ 67 ] [i] , WM_PAINT , 0 , 0 )
    EndIf
-...
+   ...
 
-*/
+   */

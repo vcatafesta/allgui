@@ -4,18 +4,15 @@
 #ifdef _USERINIT_
 #include "i_winuser.ch"
 
-*------------------------------------------------------------------------------*
 INIT PROCEDURE _InitWebCam
-*------------------------------------------------------------------------------*
 
    InstallMethodHandler ( 'Start', '_StartWebCam' )
    InstallMethodHandler ( 'Release', '_ReleaseWebCam' )
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineWebCam ( ControlName, ParentForm, x, y, w, h, lStart, nRate, tooltip, HelpId )
-*------------------------------------------------------------------------------*
+
    LOCAL cParentForm, mVar, ControlHandle
 
    DEFAULT w     TO 320
@@ -41,7 +38,7 @@ FUNCTION _DefineWebCam ( ControlName, ParentForm, x, y, w, h, lStart, nRate, too
    ENDIF
 
    mVar := '_' + ParentForm + '_' + ControlName
-   Public &mVar. := Len( _HMG_aControlNames ) + 1
+   PUBLIC &mVar. := Len( _HMG_aControlNames ) + 1
 
    cParentForm := ParentForm
 
@@ -104,17 +101,14 @@ FUNCTION _DefineWebCam ( ControlName, ParentForm, x, y, w, h, lStart, nRate, too
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _CreateWebCam ( ParentForm, x, y, w, h )
-*------------------------------------------------------------------------------*
 
-RETURN cap_CreateCaptureWindow( "WebCam", hb_bitOr( WS_CHILD, WS_VISIBLE ), y, x, w, h, ParentForm, 0 )
+   RETURN cap_CreateCaptureWindow( "WebCam", hb_bitOr( WS_CHILD, WS_VISIBLE ), y, x, w, h, ParentForm, 0 )
 
-*------------------------------------------------------------------------------*
 FUNCTION _StartWebCam ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL hWnd
    LOCAL lSuccess
 
@@ -138,11 +132,10 @@ FUNCTION _StartWebCam ( cWindow, cControl )
 
    _HMG_aControlVisible [ GetControlIndex ( cControl, cWindow ) ] := lSuccess
 
-RETURN lSuccess
+   RETURN lSuccess
 
-*------------------------------------------------------------------------------*
 PROCEDURE _ReleaseWebCam ( cWindow, cControl )
-*------------------------------------------------------------------------------*
+
    LOCAL hWnd
 
    IF _IsControlDefined ( cControl, cWindow ) .AND. GetControlType ( cControl, cWindow ) == 'WEBCAM'
@@ -167,8 +160,7 @@ PROCEDURE _ReleaseWebCam ( cWindow, cControl )
 
    ENDIF
 
-RETURN
-
+   RETURN
 
 #pragma BEGINDUMP
 
@@ -221,4 +213,5 @@ HB_FUNC( CAP_EDITCOPY )
 
 #pragma ENDDUMP
 
-#endif
+   #endif
+

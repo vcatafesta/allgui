@@ -20,51 +20,56 @@
 
 REQUEST SDDMY, SQLMIX
 
-Function Main
-LOCAL hConn
+FUNCTION Main
 
-	RDDSETDEFAULT("SQLMIX")
+   LOCAL hConn
 
-	IF RDDINFO(RDDI_CONNECT, {"MYSQL", "localhost", "root","1234", "test"}) == 0
-		MSGSTOP("Unable connect to the server")
-		RETURN 
-	ENDIF
+   RDDSETDEFAULT("SQLMIX")
 
-	CreateTable()
+   IF RDDINFO(RDDI_CONNECT, {"MYSQL", "localhost", "root","1234", "test"}) == 0
+      MSGSTOP("Unable connect to the server")
 
-	DBUSEAREA( .T.,, "SELECT * FROM country", "country" )
+      RETURN
+   ENDIF
 
-	DEFINE WINDOW Win_1 ;
-		ROW 0 ;
-		COL 0 ;
-		WIDTH 500 ;
-		HEIGHT 400 ;
-		TITLE 'RDD SQL' ;
-		WINDOWTYPE MAIN  
+   CreateTable()
 
-		DEFINE GRID grid1
-			ROW 		10
-			COL 		10
-			WIDTH		470			
-			HEIGHT		330
-			HEADERS 	{'Code','Name','Residents'}
-			WIDTHS		{135,155,135}
-			ROWSOURCE	"COUNTRY"
-			COLUMNFIELDS	{'Code','Name','Residents'}
-		END GRID
+   DBUSEAREA( .T.,, "SELECT * FROM country", "country" )
 
-	END WINDOW
+   DEFINE WINDOW Win_1 ;
+         ROW 0 ;
+         COL 0 ;
+         WIDTH 500 ;
+         HEIGHT 400 ;
+         TITLE 'RDD SQL' ;
+         WINDOWTYPE MAIN
 
-	Win_1.Center
+      DEFINE GRID grid1
+         ROW       10
+         COL       10
+         WIDTH      470
+         HEIGHT      330
+         HEADERS    {'Code','Name','Residents'}
+         WIDTHS      {135,155,135}
+         ROWSOURCE   "COUNTRY"
+         COLUMNFIELDS   {'Code','Name','Residents'}
+      END GRID
 
-	Win_1.Activate
+   END WINDOW
 
-Return
+   Win_1.Center
 
-STATIC PROC CreateTable()
-   ? RDDINFO(RDDI_EXECUTE, "DROP TABLE country")
-   ? RDDINFO(RDDI_EXECUTE, "CREATE TABLE country (CODE char(3), NAME char(50), RESIDENTS int(11))")
-   ? RDDINFO(RDDI_EXECUTE, "INSERT INTO country values ('LTU', 'Lithuania', 3369600), ('USA', 'United States of America', 305397000), ('POR', 'Portugal', 10617600), ('POL', 'Poland', 38115967), ('AUS', 'Australia', 21446187), ('FRA', 'France', 64473140), ('RUS', 'Russia', 141900000)")
-RETURN
+   Win_1.Activate
 
-PROC RDDSYS();  RETURN
+   RETURN
+
+   STATIC PROC CreateTable()
+
+      ? RDDINFO(RDDI_EXECUTE, "DROP TABLE country")
+      ? RDDINFO(RDDI_EXECUTE, "CREATE TABLE country (CODE char(3), NAME char(50), RESIDENTS int(11))")
+      ? RDDINFO(RDDI_EXECUTE, "INSERT INTO country values ('LTU', 'Lithuania', 3369600), ('USA', 'United States of America', 305397000), ('POR', 'Portugal', 10617600), ('POL', 'Poland', 38115967), ('AUS', 'Australia', 21446187), ('FRA', 'France', 64473140), ('RUS', 'Russia', 141900000)")
+
+      RETURN
+
+      PROC RDDSYS();  RETURN
+

@@ -4,17 +4,18 @@
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	SET AUTOADJUST ON NOBUTTONS
+   SET AUTOADJUST ON NOBUTTONS
 
-	Load Window Demo
-	Activate Window Demo
+   LOAD WINDOW Demo
+   ACTIVATE WINDOW Demo
 
-Return Nil
+   RETURN NIL
 
-Procedure demo_button_1_action
+PROCEDURE demo_button_1_action
 
-	Demo.Activex_1.Object:Navigate("http://hmgextended.com")
+   Demo.Activex_1.Object:Navigate("http://hmgextended.com")
 
-Return
+   RETURN
+

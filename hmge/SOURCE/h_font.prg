@@ -1,54 +1,54 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
-   ---------------------------------------------------------------------------*/
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+---------------------------------------------------------------------------*/
 
 #include 'minigui.ch'
 
-#define WM_SETFONT	0x0030
+#define WM_SETFONT   0x0030
 
-#define _FORMNAME_	'Main'
+#define _FORMNAME_   'Main'
 
 PROCEDURE _DefineFont( FontName, fName, fSize, bold, italic, underline, strikeout, nAngle, default, charset )
 
@@ -130,8 +130,7 @@ PROCEDURE _DefineFont( FontName, fName, fSize, bold, italic, underline, strikeou
       Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE _ReleaseFont( FontName )
 
@@ -141,14 +140,13 @@ PROCEDURE _ReleaseFont( FontName )
       _EraseFontDef( i )
    ENDIF
 
-RETURN
-
+   RETURN
 
 PROCEDURE _EraseFontDef( i )
 
    LOCAL mVar
 
-   DeleteObject( _HMG_aControlFontHandle [i] )
+   DELETEObject( _HMG_aControlFontHandle [i] )
 
    IF _HMG_lOOPEnabled
       Eval ( _HMG_bOnControlDestroy, i )
@@ -157,11 +155,11 @@ PROCEDURE _EraseFontDef( i )
    mVar := '_' + _FORMNAME_ + '_' + _HMG_aControlNames [i]
 
    IF __mvExist( mVar )
-#ifndef _PUBLIC_RELEASE_
+      #ifndef _PUBLIC_RELEASE_
       __mvPut( mVar, 0 )
-#else
+      #else
       __mvXRelease( mVar )
-#endif
+      #endif
    ENDIF
 
    _HMG_aControlDeleted [i] := .T.
@@ -205,19 +203,18 @@ PROCEDURE _EraseFontDef( i )
    _HMG_aControlMiscData1 [i] := 0
    _HMG_aControlMiscData2 [i] := ''
 
-RETURN
-
+   RETURN
 
 FUNCTION GetFontHandle( FontName )
 
    LOCAL i := AScan( _HMG_aControlNames, FontName )
 
    IF i > 0 .AND. _HMG_aControlType [i] == "FONT"
+
       RETURN _HMG_aControlHandles [i]
    ENDIF
 
-RETURN 0
-
+   RETURN 0
 
 FUNCTION GetFontParam( FontHandle )
 
@@ -236,38 +233,40 @@ FUNCTION GetFontParam( FontHandle )
          iif( Len( _HMG_aControlFontAttributes[ i ] ) == 5, _HMG_aControlFontAttributes[ i, FONT_ATTR_ANGLE ], 0 ) }
    ENDIF
 
-RETURN aFontAttr
-
+   RETURN aFontAttr
 
 FUNCTION _GetFontAttr( ControlName, ParentForm, nType )
 
    LOCAL i := GetControlIndex( ControlName, ParentForm )
 
    IF nType == FONT_ATTR_NAME
+
       RETURN _HMG_aControlFontName[ i ]
 
    ELSEIF nType == FONT_ATTR_SIZE
+
       RETURN _HMG_aControlFontSize[ i ]
 
    ELSEIF nType >= FONT_ATTR_BOLD .AND. nType <= FONT_ATTR_ANGLE
+
       RETURN _HMG_aControlFontAttributes[ i ][ nType ]
 
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION _SetFontAttr( ControlName, ParentForm, Value, nType )
 
    LOCAL i, h, n, s, ab, ai, au, as, aa
 
    IF nType < FONT_ATTR_BOLD .OR. nType > FONT_ATTR_NAME
+
       RETURN .F.
    ENDIF
 
    i := GetControlIndex ( ControlName, ParentForm )
 
-   DeleteObject ( _HMG_aControlFontHandle[ i ] )
+   DELETEObject ( _HMG_aControlFontHandle[ i ] )
 
    IF nType == FONT_ATTR_NAME
       _HMG_aControlFontName[ i ] := Value
@@ -310,8 +309,7 @@ FUNCTION _SetFontAttr( ControlName, ParentForm, Value, nType )
       ENDIF
    ENDIF
 
-RETURN .T.
-
+   RETURN .T.
 
 FUNCTION GetFontParamByRef( FontHandle, FontName, FontSize, bold, italic, underline, strikeout, angle )
 
@@ -319,72 +317,72 @@ FUNCTION GetFontParamByRef( FontHandle, FontName, FontSize, bold, italic, underl
 
    lExpr := ( i > 0 .AND. GetObjectType( _HMG_aControlHandles[ i ] ) == OBJ_FONT )
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    IF HB_IsByRef( @FontName )
-#else
-   IF hb_PIsByRef( 2 )
-#endif
-      FontName := iif( lExpr, _HMG_aControlFontName[ i ], _HMG_DefaultFontName )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @FontSize )
-#else
-   IF hb_PIsByRef( 3 )
-#endif
-      FontSize := iif( lExpr, _HMG_aControlFontSize[ i ], _HMG_DefaultFontSize )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @bold )
-#else
-   IF hb_PIsByRef( 4 )
-#endif
-      bold := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_BOLD ], .F. )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @italic )
-#else
-   IF hb_PIsByRef( 5 )
-#endif
-      italic := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_ITALIC ], .F. )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @underline )
-#else
-   IF hb_PIsByRef( 6 )
-#endif
-      underline := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_UNDERLINE ], .F. )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @strikeout )
-#else
-   IF hb_PIsByRef( 7 )
-#endif
-      strikeout := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_STRIKEOUT ], .F. )
-   ENDIF
-#ifdef __XHARBOUR__
-   IF HB_IsByRef( @angle )
-#else
-   IF hb_PIsByRef( 8 )
-#endif
-      angle := iif( lExpr, ;
-        iif( Len( _HMG_aControlFontAttributes[ i ] ) > 4, _HMG_aControlFontAttributes[ i, FONT_ATTR_ANGLE ], 0 ), ;
-        0 )
-   ENDIF
+      #else
+      IF hb_PIsByRef( 2 )
+         #endif
+         FontName := iif( lExpr, _HMG_aControlFontName[ i ], _HMG_DefaultFontName )
+      ENDIF
+      #ifdef __XHARBOUR__
+      IF HB_IsByRef( @FontSize )
+         #else
+         IF hb_PIsByRef( 3 )
+            #endif
+            FontSize := iif( lExpr, _HMG_aControlFontSize[ i ], _HMG_DefaultFontSize )
+         ENDIF
+         #ifdef __XHARBOUR__
+         IF HB_IsByRef( @bold )
+            #else
+            IF hb_PIsByRef( 4 )
+               #endif
+               bold := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_BOLD ], .F. )
+            ENDIF
+            #ifdef __XHARBOUR__
+            IF HB_IsByRef( @italic )
+               #else
+               IF hb_PIsByRef( 5 )
+                  #endif
+                  italic := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_ITALIC ], .F. )
+               ENDIF
+               #ifdef __XHARBOUR__
+               IF HB_IsByRef( @underline )
+                  #else
+                  IF hb_PIsByRef( 6 )
+                     #endif
+                     underline := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_UNDERLINE ], .F. )
+                  ENDIF
+                  #ifdef __XHARBOUR__
+                  IF HB_IsByRef( @strikeout )
+                     #else
+                     IF hb_PIsByRef( 7 )
+                        #endif
+                        strikeout := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_STRIKEOUT ], .F. )
+                     ENDIF
+                     #ifdef __XHARBOUR__
+                     IF HB_IsByRef( @angle )
+                        #else
+                        IF hb_PIsByRef( 8 )
+                           #endif
+                           angle := iif( lExpr, ;
+                              iif( Len( _HMG_aControlFontAttributes[ i ] ) > 4, _HMG_aControlFontAttributes[ i, FONT_ATTR_ANGLE ], 0 ), ;
+                              0 )
+                        ENDIF
 
-RETURN lExpr
+                        RETURN lExpr
 
-//*********************************************
-// by Dr. Claudio Soto (January 2014)
-//*********************************************
+                        // by Dr. Claudio Soto (January 2014)
 
 FUNCTION GetFontList( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, lSortCaseSensitive, aFontName )
+
    // return is array { { cFontName, nCharSet, nPitchAndFamily, nFontType } , ... }
    LOCAL SortCodeBlock
 
    IF hb_defaultValue ( lSortCaseSensitive , .F. ) == .T.
-      SortCodeBlock := { |x, y| x[1] < y[1] }
+      SORTCodeBlock := { |x, y| x[1] < y[1] }
    ELSE
-      SortCodeBlock := { |x, y| Upper ( x[1] ) < Upper ( y[1] ) }
+      SORTCodeBlock := { |x, y| Upper ( x[1] ) < Upper ( y[1] ) }
    ENDIF
 
-RETURN EnumFontsEx ( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, SortCodeBlock, @aFontName )
+   RETURN EnumFontsEx ( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, SortCodeBlock, @aFontName )
+

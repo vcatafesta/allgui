@@ -1,317 +1,325 @@
 /*
- * .Exe to .C (Pcode) Harbour Recover Code
- *
- * Copyright 2008-2009 Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
- * Donated to Public Domain.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- */
+* .Exe to .C (Pcode) Harbour Recover Code
+* Copyright 2008-2009 Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
+* Donated to Public Domain.
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 #include "minigui.ch"
 
 FUNCTION MAIN
- LOAD WINDOW DECOMPILER
- CENTER WINDOW DECOMPILER
- ACTIVATE WINDOW DECOMPILER
-RETURN NIL
 
-function E2CHD
-Local cFileName:="", aReturn:={},aPrgName:="",cPrgName:=""
-Local aStringa:={},cReturn:="",aLatest:={},cValue1:="",cValue2:=""
-Local cFuncName:="", cFuncScope:="" ,aFuncName:={},nFuncAdr:=0
-Local BaseMemory:=0, Offset:=0, aTrans:={},cTrans,nStartReadBufferAddress:=0
-Local RvaDataSection:=0,RvaCodeSection:=0, VaDataSection:=0,VaCodeSection:=0
-Local OffsetDataSection:=0,OffsetCodeSection:=0
-Local nLen:=0,nLen1:=0,I:=0
-Local aGlobalByteCode:={},aByteCodeFunc:={},aReturnByteCodeFunc:={}
-Local j:=0,nTime:=0,aComodo:={},OffsetImageBase:=0
-Local aSaddress:={},nSectionAlignement:=0,nFileAlignement:=0
-Local cEndReadFunc:="",DataEntryPoint:=0,OffsetOfEntryPoint:=0
-Local flag:=.t., q:=1,cNumero:="",nNumero:=0,cPcodeFile:=""
-Local aAddrName:={},aScopeFunc:={},aCodeFunc:={},aNullFunc:={},aNameFunc:={}
+   LOAD WINDOW DECOMPILER
+   CENTER WINDOW DECOMPILER
+   ACTIVATE WINDOW DECOMPILER
 
-DECLARE WINDOW DECOMPILER
-SET DECIMALS TO 0
-SET DATE BRITISH
- cFilename:=HBChoose_File()
-   if empty(cFilename)
-      return nil
-   endif
- cReturn:=HBPeFileCheck(cFileName)
- IF (cReturn<>"S_OK") 
-     MsgInfo("Check Failed - Not a PE file","EXIT PROGRAM")
-     return nil
- ENDIF
- aSaddress         := HBLoadBasicAddresses(cFilename)
- BaseMemory        := asAddress[1]
- RVaCodeSection    := asAddress[2]
- RVaDataSection    := asAddress[3]
- nSectionAlignement:= asAddress[4]
- nFileAlignement   := asAddress[5]
- VaCodeSection     := asAddress[6]
- VaDataSection     := asAddress[7]
- DataEntryPoint    := asAddress[8]
- OffsetImageBase   := asAddress[9]
- OffsetCodeSection := asAddress[10]
- OffsetDataSection := asAddress[11]
- OffsetOfEntryPoint:= asAddress[12]
+   RETURN NIL
 
- aadd(aComodo,"0x"+;
-   IF(Empty( DecToHexa(asAddress[13]) ),"00",IF(LEN(DecToHexa(asAddress[13]))<2,"0"+DecToHexa(asAddress[13]),DecToHexa(asAddress[13])))+;
-   IF(Empty( DecToHexa(asAddress[14]) ),"00",IF(LEN(DecToHexa(asAddress[14]))<2,"0"+DecToHexa(asAddress[14]),DecToHexa(asAddress[14])))+;
-   IF(Empty( DecToHexa(asAddress[15]) ),"00",IF(LEN(DecToHexa(asAddress[15]))<2,"0"+DecToHexa(asAddress[15]),DecToHexa(asAddress[15])))+;
-   IF(Empty( DecToHexa(asAddress[16]) ),"00",IF(LEN(DecToHexa(asAddress[16]))<2,"0"+DecToHexa(asAddress[16]),DecToHexa(asAddress[16]))))
+FUNCTION E2CHD
+
+   LOCAL cFileName:="", aReturn:={},aPrgName:="",cPrgName:=""
+   LOCAL aStringa:={},cReturn:="",aLatest:={},cValue1:="",cValue2:=""
+   LOCAL cFuncName:="", cFuncScope:="" ,aFuncName:={},nFuncAdr:=0
+   LOCAL BaseMemory:=0, Offset:=0, aTrans:={},cTrans,nStartReadBufferAddress:=0
+   LOCAL RvaDataSection:=0,RvaCodeSection:=0, VaDataSection:=0,VaCodeSection:=0
+   LOCAL OffsetDataSection:=0,OffsetCodeSection:=0
+   LOCAL nLen:=0,nLen1:=0,I:=0
+   LOCAL aGlobalByteCode:={},aByteCodeFunc:={},aReturnByteCodeFunc:={}
+   LOCAL j:=0,nTime:=0,aComodo:={},OffsetImageBase:=0
+   LOCAL aSaddress:={},nSectionAlignement:=0,nFileAlignement:=0
+   LOCAL cEndReadFunc:="",DataEntryPoint:=0,OffsetOfEntryPoint:=0
+   LOCAL flag:=.t., q:=1,cNumero:="",nNumero:=0,cPcodeFile:=""
+   LOCAL aAddrName:={},aScopeFunc:={},aCodeFunc:={},aNullFunc:={},aNameFunc:={}
+
+   DECLARE WINDOW DECOMPILER
+   SET DECIMALS TO 0
+   SET DATE BRITISH
+   cFilename:=HBChoose_File()
+   IF empty(cFilename)
+
+      RETURN NIL
+   ENDIF
+   cReturn:=HBPeFileCheck(cFileName)
+   IF (cReturn<>"S_OK")
+      MsgInfo("Check Failed - Not a PE file","EXIT PROGRAM")
+
+      RETURN NIL
+   ENDIF
+   aSaddress         := HBLoadBasicAddresses(cFilename)
+   BaseMemory        := asAddress[1]
+   RVaCodeSection    := asAddress[2]
+   RVaDataSection    := asAddress[3]
+   nSectionAlignement:= asAddress[4]
+   nFileAlignement   := asAddress[5]
+   VaCodeSection     := asAddress[6]
+   VaDataSection     := asAddress[7]
+   DataEntryPoint    := asAddress[8]
+   OffsetImageBase   := asAddress[9]
+   OffsetCodeSection := asAddress[10]
+   OffsetDataSection := asAddress[11]
+   OffsetOfEntryPoint:= asAddress[12]
+
+   aadd(aComodo,"0x"+;
+      IF(Empty( DecToHexa(asAddress[13]) ),"00",IF(LEN(DecToHexa(asAddress[13]))<2,"0"+DecToHexa(asAddress[13]),DecToHexa(asAddress[13])))+;
+      IF(Empty( DecToHexa(asAddress[14]) ),"00",IF(LEN(DecToHexa(asAddress[14]))<2,"0"+DecToHexa(asAddress[14]),DecToHexa(asAddress[14])))+;
+      IF(Empty( DecToHexa(asAddress[15]) ),"00",IF(LEN(DecToHexa(asAddress[15]))<2,"0"+DecToHexa(asAddress[15]),DecToHexa(asAddress[15])))+;
+      IF(Empty( DecToHexa(asAddress[16]) ),"00",IF(LEN(DecToHexa(asAddress[16]))<2,"0"+DecToHexa(asAddress[16]),DecToHexa(asAddress[16]))))
 
    nStartReadBufferAddress:=HBRvaToOffset(cFilename,(HexaToDec(aComodo[1])-BaseMemory))
    nNumero:=HexaToDec(RIGHT(aComodo[1],4))+12
    cNumero:=DecToHexa(nNumero)
-   cEndReadFunc:=SUBSTR(aComodo[1],3,4)+cNumero   
- q:=0
- do while (flag = .t.)
-   aReturn:=HBRead16Offset(cFileName,nStartReadBufferAddress+12)
-   for i:=1 to 16 step 4
-     aadd(aStringa,;
-     IF(Empty( DecToHexa(aReturn[i+3]) ),"00",IF(LEN(DecToHexa(aReturn[i+3]))<2,"0"+DecToHexa(aReturn[i+3]),DecToHexa(aReturn[i+3])))+;
-     IF(Empty( DecToHexa(aReturn[i+2]) ),"00",IF(LEN(DecToHexa(aReturn[i+2]))<2,"0"+DecToHexa(aReturn[i+2]),DecToHexa(aReturn[i+2])))+;
-     IF(Empty( DecToHexa(aReturn[i+1]) ),"00",IF(LEN(DecToHexa(aReturn[i+1]))<2,"0"+DecToHexa(aReturn[i+1]),DecToHexa(aReturn[i+1])))+;
-     IF(Empty( DecToHexa(aReturn[i] )  ),"00",IF(LEN(DecToHexa(aReturn[i] ) )<2,"0"+DecToHexa(aReturn[i]  ),DecToHexa(aReturn[i]  ))))
-   next i
-   IF (aStringa[4*q+1] == cEndReadFunc)
-     I:=0
-     for i=1 to 4
-       ASIZE(aStringa,len(aStringa)-1)
-     next i
-     Flag:=.f.
-     EXIT
-   ELSE
-     q++
-     nStartReadBufferAddress:=nStartReadBufferAddress+16
-   ENDIF
- enddo
- nLen:=LEN(aStringa)
- for i= 1 to nLen step 4
-   Offset:= HBRvaToOffset(cFilename,(HexaToDec(aStringa[i])-BaseMemory))
-   aFuncName:=HBReadFunctionName(cFileName,Offset)
-   for nTime =1 to len(aFuncName)
-        cFuncName:=cFuncName+CHR(aFuncName[nTime][1])
-   next nTime
-   aadd(aStringa,cFuncName)
-   cFuncName:=""
-   aFuncName:={}
- next i
- i:=0
- nLen:=0
- nLen:=len(aStringa)* 0.80
- nLen1:=len(aStringa)* 0.20
- aAddrName:={}
- aScopeFunc:={}
- aCodeFunc:={}
- aNullFunc:={}
- aNameFunc:={}
- for i=1 to nLen  Step 4
-    aadd(aAddrName,aStringa[i])
-    aadd(aScopeFunc,aStringa[i+1])
-    aTrans:= HBRead04Offset (cFilename, HBRvaToOffset(cFilename,( HexaToDec("0x"+aStringa[i+2])-BaseMemory+7)))
-    cTrans:="0x"+;
-    IF(Empty( DecToHexa(aTrans[4]) ),"00",IF(LEN(DecToHexa(aTrans[4]))<2,"0"+DecToHexa(aTrans[4]),DecToHexa(aTrans[4])))+;
-    IF(Empty( DecToHexa(aTrans[3]) ),"00",IF(LEN(DecToHexa(aTrans[3]))<2,"0"+DecToHexa(aTrans[3]),DecToHexa(aTrans[3])))+;
-    IF(Empty( DecToHexa(aTrans[2]) ),"00",IF(LEN(DecToHexa(aTrans[2]))<2,"0"+DecToHexa(aTrans[2]),DecToHexa(aTrans[2])))+;
-    IF(Empty( DecToHexa(aTrans[1]) ),"00",IF(LEN(DecToHexa(aTrans[1]))<2,"0"+DecToHexa(aTrans[1]),DecToHexa(aTrans[1])))
-    aadd( aCodeFunc, { aStringa[i+2],cTrans } )
-    aadd(aNullFunc,aStringa[i+3])
- next i
- i:=0
- for i = nLen+1 to (nLen+nLen1)
+   cEndReadFunc:=SUBSTR(aComodo[1],3,4)+cNumero
+   q:=0
+   DO WHILE (flag = .t.)
+      aReturn:=HBRead16Offset(cFileName,nStartReadBufferAddress+12)
+      FOR i:=1 to 16 step 4
+         aadd(aStringa,;
+            IF(Empty( DecToHexa(aReturn[i+3]) ),"00",IF(LEN(DecToHexa(aReturn[i+3]))<2,"0"+DecToHexa(aReturn[i+3]),DecToHexa(aReturn[i+3])))+;
+            IF(Empty( DecToHexa(aReturn[i+2]) ),"00",IF(LEN(DecToHexa(aReturn[i+2]))<2,"0"+DecToHexa(aReturn[i+2]),DecToHexa(aReturn[i+2])))+;
+            IF(Empty( DecToHexa(aReturn[i+1]) ),"00",IF(LEN(DecToHexa(aReturn[i+1]))<2,"0"+DecToHexa(aReturn[i+1]),DecToHexa(aReturn[i+1])))+;
+            IF(Empty( DecToHexa(aReturn[i] )  ),"00",IF(LEN(DecToHexa(aReturn[i] ) )<2,"0"+DecToHexa(aReturn[i]  ),DecToHexa(aReturn[i]  ))))
+      NEXT i
+      IF (aStringa[4*q+1] == cEndReadFunc)
+         I:=0
+         FOR i=1 to 4
+            ASIZE(aStringa,len(aStringa)-1)
+         NEXT i
+         Flag:=.f.
+         EXIT
+      ELSE
+         q++
+         nStartReadBufferAddress:=nStartReadBufferAddress+16
+      ENDIF
+   ENDDO
+   nLen:=LEN(aStringa)
+   FOR i= 1 to nLen step 4
+      Offset:= HBRvaToOffset(cFilename,(HexaToDec(aStringa[i])-BaseMemory))
+      aFuncName:=HBReadFunctionName(cFileName,Offset)
+      FOR nTime =1 to len(aFuncName)
+         cFuncName:=cFuncName+CHR(aFuncName[nTime][1])
+      NEXT nTime
+      aadd(aStringa,cFuncName)
+      cFuncName:=""
+      aFuncName:={}
+   NEXT i
+   i:=0
+   nLen:=0
+   nLen:=len(aStringa)* 0.80
+   nLen1:=len(aStringa)* 0.20
+   aAddrName:={}
+   aScopeFunc:={}
+   aCodeFunc:={}
+   aNullFunc:={}
+   aNameFunc:={}
+   FOR i=1 to nLen  Step 4
+      aadd(aAddrName,aStringa[i])
+      aadd(aScopeFunc,aStringa[i+1])
+      aTrans:= HBRead04Offset (cFilename, HBRvaToOffset(cFilename,( HexaToDec("0x"+aStringa[i+2])-BaseMemory+7)))
+      cTrans:="0x"+;
+         IF(Empty( DecToHexa(aTrans[4]) ),"00",IF(LEN(DecToHexa(aTrans[4]))<2,"0"+DecToHexa(aTrans[4]),DecToHexa(aTrans[4])))+;
+         IF(Empty( DecToHexa(aTrans[3]) ),"00",IF(LEN(DecToHexa(aTrans[3]))<2,"0"+DecToHexa(aTrans[3]),DecToHexa(aTrans[3])))+;
+         IF(Empty( DecToHexa(aTrans[2]) ),"00",IF(LEN(DecToHexa(aTrans[2]))<2,"0"+DecToHexa(aTrans[2]),DecToHexa(aTrans[2])))+;
+         IF(Empty( DecToHexa(aTrans[1]) ),"00",IF(LEN(DecToHexa(aTrans[1]))<2,"0"+DecToHexa(aTrans[1]),DecToHexa(aTrans[1])))
+      aadd( aCodeFunc, { aStringa[i+2],cTrans } )
+      aadd(aNullFunc,aStringa[i+3])
+   NEXT i
+   i:=0
+   FOR i = nLen+1 to (nLen+nLen1)
       aadd(aNameFunc,aStringa[i])
- next i
- i:=0
- nLen:=LEN(aCodeFunc)
- aGlobalByteCode:={}
- for i = 1 to nLen
+   NEXT i
+   i:=0
+   nLen:=LEN(aCodeFunc)
+   aGlobalByteCode:={}
+   FOR i = 1 to nLen
       aByteCodeFunc:={}
       aReturnByteCodeFunc:={}
-      if aCodeFunc[i][1]<>"00000000"
-        nFuncAdr:= HBRvaToOffset(cFilename,(HexaToDec(aCodeFunc[i][2])-BaseMemory))
-        IF nFuncAdr<>0
-          aReturnByteCodeFunc:=HBReadByteCode(cFilename,nFuncAdr)
-        ENDIF
-      endif
-        aadd(aByteCodeFunc,aReturnByteCodeFunc)
-        aadd(aGlobalByteCode,aByteCodeFunc[1])
- next i
-  aLatest:=HBRead16Offset(cFileName,OffsetOfEntryPoint+336)
-  cVaLUE1:="0x"+IF(Empty( DecToHexa(aLatest[4]) ),"0",IF(LEN(DecToHexa(aLatest[4]))<2,"0"+DecToHexa(aLatest[4]),DecToHexa(aLatest[4])))
-  cValue2:="0x"+IF(Empty( DecToHexa(aLatest[2]) ),"0000",IF(LEN(DecToHexa(aLatest[2]))<2,"000"+DecToHexa(aLatest[2]),"0"+DecToHexa(aLatest[2])))
-  cTrans:="0x"+;
-    IF(Empty( DecToHexa(aLatest[9]) ),"00",IF(LEN(DecToHexa(aLatest[9]))<2,"0"+DecToHexa(aLatest[9]),DecToHexa(aLatest[9])))+;
-    IF(Empty( DecToHexa(aLatest[8]) ),"00",IF(LEN(DecToHexa(aLatest[8]))<2,"0"+DecToHexa(aLatest[8]),DecToHexa(aLatest[8])))+;
-    IF(Empty( DecToHexa(aLatest[7]) ),"00",IF(LEN(DecToHexa(aLatest[7]))<2,"0"+DecToHexa(aLatest[7]),DecToHexa(aLatest[7])))+;
-    IF(Empty( DecToHexa(aLatest[6]) ),"00",IF(LEN(DecToHexa(aLatest[6]))<2,"0"+DecToHexa(aLatest[6]),DecToHexa(aLatest[6])))
-  Offset:= HBRvaToOffset(cFilename,(HexaToDec(cTrans)-BaseMemory))
-  aPrgName:=HBReadFunctionName(cFileName,Offset)
-  nLen:=LEN(aPrgNamE)
-  FOR i= 1 TO nLen
-      cPrgName:=cPrgName+CHR(aPrgName[i][1])
-  NEXT i
-  wri_file(cPrgName,cValue1,cValue2,aNameFunc,aScopeFunc,aGlobalByteCode)
-  cPcodeFile:=substr(cPrgName,1,len(cPrgName)-4)+".c"
-  decompiler.RichEdit_1.value:=memoread(cPcodeFile)  
-  decode_c2prg(cPcodeFile)
-return nil
-
-Function HBChoose_File()
-Local cFileName
- cFileName := Getfile ( { {'*.Exe Files','*.exe'} } , 'Open a File' , , .f. , .t. )
- //msginfo ( IF (EMPTY( cFilename), "Empty Filename!", cFilename ) )
-Return cFileName
-
-function HBReadFunctionScope(cScope)
-Local cStringScope:=""
-if cScope =="00000205"
-  cStringScope:="{HB_FS_PUBLIC | HB_FS_FIRST | HB_FS_LOCAL}"
-elseif cScope =="00000201"
-  cStringScope:="{HB_FS_PUBLIC | HB_FS_LOCAL}"
-elseif cScope =="00000202"
-  cStringScope:="{HB_FS_STATIC | HB_FS_LOCAL}"
-elseif cScope =="00000001"
-  cStringScope:="{HB_FS_PUBLIC}"
-elseif cScope =="00000081"
-  cStringScope:="{HB_FS_PUBLIC | HB_FS_MEMVAR}"
-elseif cScope =="00000218"
-  cStringScope:="{HB_FS_INITEXIT | HB_FS_LOCAL}"
-endif
-return cStringScope
-
-function wri_file(cPrgName,cValue1,cValue2,aFuncName,aFuncScope,aGlobalByteCode)
-Local cRecover:=substr(cPrgName,1,len(cPrgName)-4)+".c"
-Local nLenA:=LEN(aFuncName), i:=0,k:=0
-Local nLenB:=0,aFunctionNumber:=aGlobalByteCode[1],aAtomFunc:={}
-Local cString:="",cString1:="",cString2:="",cCompVer:=""
-Local cHarbVers:="",cHarbDecVers:="",cOs:="",cHarbBuildDate:="",cPcodeVer:=""
-cCompVer:=HB_COMPILER()
-cHarbVers:=VERSION()
-cOs:=OS()
-cHarbBuildDate:=HB_BUILDDATE()
-cHarbDecVers:="Harbour Decompiler Alpha 0.1"
-cPcodeVer:=HB_PCODEVER()
-cString:="/*"+CRLF+;
-         " * "+cHarbDecVers+" "+CRLF+;
-         " * "+cHarbVers+" "+CRLF+;
-         " * Built on "+cHarbBuildDate+" "+CRLF+;
-         " * "+cPcodeVer+" "+CRLF+;
-         " * "+cCompVer+" "+CRLF+;
-         " * "+cOs+" "+CRLF+;
-         " * Recovered C source from "+'"'+cPrgName+'"'+CRLF+;
-         "*/"+CRLF+CRLF+;
-         "#include " + '"'+"hbvmpub.h"+'"'+CRLF+;
-         "#include " + '"'+"hbinit.h"+'"'+CRLF+CRLF+CRLF
-
-      FOR I= 1 TO nLena
-        IF aFuncScope[i]=="00000205"
-          cString:=cString+"HB_FUNC( " + aFuncName[i] + " );" +CRLF
-        ENDIF
-      NEXT I               /* Main Original Function */
-
-      FOR I= 1 TO nLena
-        IF aFuncScope[i]=="00000201"
-          cString:=cString+"HB_FUNC( " + aFuncName[i] + " );" +CRLF
-        ENDIF
-      NEXT I               /* Other Original Functions */
-
-      FOR I= 1 TO nLena
-        IF aFuncScope[i]=="00000202"
-          cString:=cString+"HB_FUNC_STATIC( " + aFuncName[i] + " );" +CRLF
-        ENDIF
-      NEXT I               /* Static Original Functions */
-
-
-      FOR I= 1 TO nLena
-        IF aFuncScope[i]=="00000218"
-           cString:=cString+"HB_FUNC"+substr(aFuncName[i],2,LEN(aFuncName[i])-2) + "();" +CRLF
-        ENDIF
-      NEXT I               /* Other Original Functions */
-
-
-      FOR I= 1 TO nLena
-        IF (aFuncScope[i]=="00000001" .OR. aFuncScope[i]=="00000081")
-          cString:=cString+"HB_FUNC_EXTERN( " + aFuncName[i] + " );" +CRLF
-        ENDIF
-      NEXT I               /* External Function */
-
-cString1:="HB_INIT_SYMBOLS_BEGIN( hb_vm_SymbolInit_"+ UPPER(Substr(cPrgName,1,len(cPrgName)-4))+" )"+CRLF
-
-     cString:=cString+CRLF+CRLF+CRLF+cString1
-
-       FOR I = 1 TO nLenA
-        cString:=cString+;
-          "{ "+'"'+aFuncName[I]+'"'+", "+HBReadFunctionScope(aFuncScope[i])+", "
-        if aFuncScope[i]=="00000081"
-           cString:=cString+"{NULL}, NULL },"+CRLF
-
-        elseif aFuncScope[i]=="00000218"
-           cString:=cString+ "{hb"+SUBSTR(aFuncName[I],2,LEN(aFuncName[I])-2)+ "}, NULL },"+CRLF
-        else
-           cString:=cString+"{HB_FUNCNAME( "+aFuncName[I]+ " )}, NULL },"+CRLF
-        endif
-       NEXT I
-
-cString:=substr(cString,1,LEN(cString)-3)+CRLF
-cString2:="HB_INIT_SYMBOLS_EX_END( hb_vm_SymbolInit_" +UPPER(Substr(cPrgName,1,len(cPrgName)-4))+", "+'"'+ cPrgName+'", ' + cValue1 +", "+ cValue2 + ")"+CRLF+CRLF
-cString:=cString+cString2
-cString1:="#if defined( HB_PRAGMA_STARTUP )"+CRLF+;
-          "   #pragma startup hb_vm_SymbolInit_"+UPPER(Substr(cPrgName,1,len(cPrgName)-4))+CRLF+;
-          "#elif defined( HB_MSC_STARTUP )"+CRLF+;
-          "   #if defined( HB_OS_WIN_64 )" +CRLF+;
-          "      #pragma section( HB_MSC_START_SEGMENT, long, read )"+CRLF+;
-          "   #endif"+CRLF+;
-          "   #pragma data_seg( HB_MSC_START_SEGMENT )"+CRLF+;
-          "   static HB_$INITSYM hb_vm_auto_SymbolInit_"+UPPER(Substr(cPrgName,1,len(cPrgName)-4))+;
-          " = hb_vm_SymbolInit_"+ UPPER(Substr(cPrgName,1,len(cPrgName)-4))+";"+CRLF+;
-          "   #pragma data_seg()"+CRLF+;
-          "#endif"+CRLF+CRLF
-       cString:=cString+cString1
-       I:=0
-       K:=0
-       FOR I=1 TO nLena
-         nLenB:=LEN(aGlobalByteCode[i])
-         IF (aFuncScope[i]<>"00000001" .AND. aFuncScope[i]<>"00000081")
-           IF aFuncScope[i]=="00000218"
-               cString1:="HB_FUNC"+SUBSTR(aFuncName[i],2,len(aFuncName[i])-2)+"()"+CRLF
-           ELSEIF aFuncScope[i]=="00000202"
-               cString1:="HB_FUNC_STATIC( "+aFuncName[i]+" )"+CRLF
-           ELSE
-               cString1:="HB_FUNC( "+SUBSTR(aFuncName[i],1,len(aFuncName[i]))+" )"+CRLF
-           ENDIF
-             cString1:=cString1+"{"+CRLF+;
-                     "      static const BYTE pcode[] ="+CRLF+;
-                     "      {"+CRLF+;
-                     "            "
-                     for k= 1 to nLenB 
-                       cString1:=cString1+ALLTRIM(STR(aGlobalByteCode[i][k][1]))+","
-                       IF ( (K/14=INT(K/14)) .AND. (K<>nLenB) )
-                         cString1:=cString1+CRLF+"            "
-                       ENDIF
-                     next k                     
-                IF (RIGHT(alltrim(cString1),1)==",")
-                   cString1:=substr(ALLTRIM(cString1),1,len(cstring1)-1)
-                endif
-                cString:=cString+cString1
-                cString:=cString+CRLF+"       };"+CRLF+CRLF
-                cString:=cString+"       hb_vmExecute( pcode, symbols );"+CRLF+"}"+CRLF+CRLF
-                cString1:=""
+      IF aCodeFunc[i][1]<>"00000000"
+         nFuncAdr:= HBRvaToOffset(cFilename,(HexaToDec(aCodeFunc[i][2])-BaseMemory))
+         IF nFuncAdr<>0
+            aReturnByteCodeFunc:=HBReadByteCode(cFilename,nFuncAdr)
          ENDIF
-       NEXT I
-       memowrit(cRecover,cString)
-return nil
+      ENDIF
+      aadd(aByteCodeFunc,aReturnByteCodeFunc)
+      aadd(aGlobalByteCode,aByteCodeFunc[1])
+   NEXT i
+   aLatest:=HBRead16Offset(cFileName,OffsetOfEntryPoint+336)
+   cVaLUE1:="0x"+IF(Empty( DecToHexa(aLatest[4]) ),"0",IF(LEN(DecToHexa(aLatest[4]))<2,"0"+DecToHexa(aLatest[4]),DecToHexa(aLatest[4])))
+   cValue2:="0x"+IF(Empty( DecToHexa(aLatest[2]) ),"0000",IF(LEN(DecToHexa(aLatest[2]))<2,"000"+DecToHexa(aLatest[2]),"0"+DecToHexa(aLatest[2])))
+   cTrans:="0x"+;
+      IF(Empty( DecToHexa(aLatest[9]) ),"00",IF(LEN(DecToHexa(aLatest[9]))<2,"0"+DecToHexa(aLatest[9]),DecToHexa(aLatest[9])))+;
+      IF(Empty( DecToHexa(aLatest[8]) ),"00",IF(LEN(DecToHexa(aLatest[8]))<2,"0"+DecToHexa(aLatest[8]),DecToHexa(aLatest[8])))+;
+      IF(Empty( DecToHexa(aLatest[7]) ),"00",IF(LEN(DecToHexa(aLatest[7]))<2,"0"+DecToHexa(aLatest[7]),DecToHexa(aLatest[7])))+;
+      IF(Empty( DecToHexa(aLatest[6]) ),"00",IF(LEN(DecToHexa(aLatest[6]))<2,"0"+DecToHexa(aLatest[6]),DecToHexa(aLatest[6])))
+   Offset:= HBRvaToOffset(cFilename,(HexaToDec(cTrans)-BaseMemory))
+   aPrgName:=HBReadFunctionName(cFileName,Offset)
+   nLen:=LEN(aPrgNamE)
+   FOR i= 1 TO nLen
+      cPrgName:=cPrgName+CHR(aPrgName[i][1])
+   NEXT i
+   wri_file(cPrgName,cValue1,cValue2,aNameFunc,aScopeFunc,aGlobalByteCode)
+   cPcodeFile:=substr(cPrgName,1,len(cPrgName)-4)+".c"
+   decompiler.RichEdit_1.value:=memoread(cPcodeFile)
+   decode_c2prg(cPcodeFile)
 
+   RETURN NIL
+
+FUNCTION HBChoose_File()
+
+   LOCAL cFileName
+
+   cFileName := Getfile ( { {'*.Exe Files','*.exe'} } , 'Open a File' , , .f. , .t. )
+   //msginfo ( IF (EMPTY( cFilename), "Empty Filename!", cFilename ) )
+
+   RETURN cFileName
+
+FUNCTION HBReadFunctionScope(cScope)
+
+   LOCAL cStringScope:=""
+
+   IF cScope =="00000205"
+      cStringScope:="{HB_FS_PUBLIC | HB_FS_FIRST | HB_FS_LOCAL}"
+   ELSEIF cScope =="00000201"
+      cStringScope:="{HB_FS_PUBLIC | HB_FS_LOCAL}"
+   ELSEIF cScope =="00000202"
+      cStringScope:="{HB_FS_STATIC | HB_FS_LOCAL}"
+   ELSEIF cScope =="00000001"
+      cStringScope:="{HB_FS_PUBLIC}"
+   ELSEIF cScope =="00000081"
+      cStringScope:="{HB_FS_PUBLIC | HB_FS_MEMVAR}"
+   ELSEIF cScope =="00000218"
+      cStringScope:="{HB_FS_INITEXIT | HB_FS_LOCAL}"
+   ENDIF
+
+   RETURN cStringScope
+
+FUNCTION wri_file(cPrgName,cValue1,cValue2,aFuncName,aFuncScope,aGlobalByteCode)
+
+   LOCAL cRecover:=substr(cPrgName,1,len(cPrgName)-4)+".c"
+   LOCAL nLenA:=LEN(aFuncName), i:=0,k:=0
+   LOCAL nLenB:=0,aFunctionNumber:=aGlobalByteCode[1],aAtomFunc:={}
+   LOCAL cString:="",cString1:="",cString2:="",cCompVer:=""
+   LOCAL cHarbVers:="",cHarbDecVers:="",cOs:="",cHarbBuildDate:="",cPcodeVer:=""
+
+   cCompVer:=HB_COMPILER()
+   cHarbVers:=VERSION()
+   cOs:=OS()
+   cHarbBuildDate:=HB_BUILDDATE()
+   cHarbDecVers:="Harbour Decompiler Alpha 0.1"
+   cPcodeVer:=HB_PCODEVER()
+   cString:="/*"+CRLF+;
+      " * "+cHarbDecVers+" "+CRLF+;
+      " * "+cHarbVers+" "+CRLF+;
+      " * Built on "+cHarbBuildDate+" "+CRLF+;
+      " * "+cPcodeVer+" "+CRLF+;
+      " * "+cCompVer+" "+CRLF+;
+      " * "+cOs+" "+CRLF+;
+      " * Recovered C source from "+'"'+cPrgName+'"'+CRLF+;
+      "*/"+CRLF+CRLF+;
+      "#include " + '"'+"hbvmpub.h"+'"'+CRLF+;
+      "#include " + '"'+"hbinit.h"+'"'+CRLF+CRLF+CRLF
+
+   FOR I= 1 TO nLena
+      IF aFuncScope[i]=="00000205"
+         cString:=cString+"HB_FUNC( " + aFuncName[i] + " );" +CRLF
+      ENDIF
+   NEXT I               /* Main Original Function */
+
+   FOR I= 1 TO nLena
+      IF aFuncScope[i]=="00000201"
+         cString:=cString+"HB_FUNC( " + aFuncName[i] + " );" +CRLF
+      ENDIF
+   NEXT I               /* Other Original Functions */
+
+   FOR I= 1 TO nLena
+      IF aFuncScope[i]=="00000202"
+         cString:=cString+"HB_FUNC_STATIC( " + aFuncName[i] + " );" +CRLF
+      ENDIF
+   NEXT I               /* Static Original Functions */
+
+   FOR I= 1 TO nLena
+      IF aFuncScope[i]=="00000218"
+         cString:=cString+"HB_FUNC"+substr(aFuncName[i],2,LEN(aFuncName[i])-2) + "();" +CRLF
+      ENDIF
+   NEXT I               /* Other Original Functions */
+
+   FOR I= 1 TO nLena
+      IF (aFuncScope[i]=="00000001" .OR. aFuncScope[i]=="00000081")
+         cString:=cString+"HB_FUNC_EXTERN( " + aFuncName[i] + " );" +CRLF
+      ENDIF
+   NEXT I               /* External Function */
+
+   cString1:="HB_INIT_SYMBOLS_BEGIN( hb_vm_SymbolInit_"+ UPPER(Substr(cPrgName,1,len(cPrgName)-4))+" )"+CRLF
+
+   cString:=cString+CRLF+CRLF+CRLF+cString1
+
+   FOR I = 1 TO nLenA
+      cString:=cString+;
+         "{ "+'"'+aFuncName[I]+'"'+", "+HBReadFunctionScope(aFuncScope[i])+", "
+      IF aFuncScope[i]=="00000081"
+         cString:=cString+"{NULL}, NULL },"+CRLF
+
+      ELSEIF aFuncScope[i]=="00000218"
+         cString:=cString+ "{hb"+SUBSTR(aFuncName[I],2,LEN(aFuncName[I])-2)+ "}, NULL },"+CRLF
+      ELSE
+         cString:=cString+"{HB_FUNCNAME( "+aFuncName[I]+ " )}, NULL },"+CRLF
+      ENDIF
+   NEXT I
+
+   cString:=substr(cString,1,LEN(cString)-3)+CRLF
+   cString2:="HB_INIT_SYMBOLS_EX_END( hb_vm_SymbolInit_" +UPPER(Substr(cPrgName,1,len(cPrgName)-4))+", "+'"'+ cPrgName+'", ' + cValue1 +", "+ cValue2 + ")"+CRLF+CRLF
+   cString:=cString+cString2
+   cString1:="#if defined( HB_PRAGMA_STARTUP )"+CRLF+;
+      "   #pragma startup hb_vm_SymbolInit_"+UPPER(Substr(cPrgName,1,len(cPrgName)-4))+CRLF+;
+      "#elif defined( HB_MSC_STARTUP )"+CRLF+;
+      "   #if defined( HB_OS_WIN_64 )" +CRLF+;
+      "      #pragma section( HB_MSC_START_SEGMENT, long, read )"+CRLF+;
+      "   #endif"+CRLF+;
+      "   #pragma data_seg( HB_MSC_START_SEGMENT )"+CRLF+;
+      "   static HB_$INITSYM hb_vm_auto_SymbolInit_"+UPPER(Substr(cPrgName,1,len(cPrgName)-4))+;
+      " = hb_vm_SymbolInit_"+ UPPER(Substr(cPrgName,1,len(cPrgName)-4))+";"+CRLF+;
+      "   #pragma data_seg()"+CRLF+;
+      "#endif"+CRLF+CRLF
+   cString:=cString+cString1
+   I:=0
+   K:=0
+   FOR I=1 TO nLena
+      nLenB:=LEN(aGlobalByteCode[i])
+      IF (aFuncScope[i]<>"00000001" .AND. aFuncScope[i]<>"00000081")
+         IF aFuncScope[i]=="00000218"
+            cString1:="HB_FUNC"+SUBSTR(aFuncName[i],2,len(aFuncName[i])-2)+"()"+CRLF
+         ELSEIF aFuncScope[i]=="00000202"
+            cString1:="HB_FUNC_STATIC( "+aFuncName[i]+" )"+CRLF
+         ELSE
+            cString1:="HB_FUNC( "+SUBSTR(aFuncName[i],1,len(aFuncName[i]))+" )"+CRLF
+         ENDIF
+         cString1:=cString1+"{"+CRLF+;
+            "      static const BYTE pcode[] ="+CRLF+;
+            "      {"+CRLF+;
+            "            "
+         FOR k= 1 to nLenB
+            cString1:=cString1+ALLTRIM(STR(aGlobalByteCode[i][k][1]))+","
+            IF ( (K/14=INT(K/14)) .AND. (K<>nLenB) )
+               cString1:=cString1+CRLF+"            "
+            ENDIF
+         NEXT k
+         IF (RIGHT(alltrim(cString1),1)==",")
+            cString1:=substr(ALLTRIM(cString1),1,len(cstring1)-1)
+         ENDIF
+         cString:=cString+cString1
+         cString:=cString+CRLF+"       };"+CRLF+CRLF
+         cString:=cString+"       hb_vmExecute( pcode, symbols );"+CRLF+"}"+CRLF+CRLF
+         cString1:=""
+      ENDIF
+   NEXT I
+   memowrit(cRecover,cString)
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 #define _WIN32_IE      0x0500
@@ -336,7 +344,7 @@ DWORD RvaToOffset( IMAGE_NT_HEADERS *NtHeaders, DWORD Rva);
 HB_FUNC( HBPEFILECHECK )
 {
 
-   HANDLE                hFile;   
+   HANDLE                hFile;
    HANDLE                hMapFile;
    LPTSTR                pBuf;
    const char            *filename = hb_parc(1);
@@ -345,7 +353,7 @@ HB_FUNC( HBPEFILECHECK )
    IMAGE_NT_HEADERS      *ImageNtHeaders;
    IMAGE_DOS_HEADER      *ImageDosHeader;
    IMAGE_SECTION_HEADER  *ImageSectionHeader;
-   IMAGE_OPTIONAL_HEADER *ImageOptionalHeader; 
+   IMAGE_OPTIONAL_HEADER *ImageOptionalHeader;
    DWORD                 BR;
 
    hFile = CreateFile( filename, GENERIC_READ,FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL );
@@ -353,6 +361,7 @@ HB_FUNC( HBPEFILECHECK )
          {
             MessageBox(NULL,"Could not open file","ABORT PROGRAM",MB_ICONWARNING);
             hb_retc("Could not open file");
+
             return;
          }
 
@@ -364,8 +373,9 @@ HB_FUNC( HBPEFILECHECK )
        {
          free(BaseAddress);
          CloseHandle(hFile);
-         MessageBox(NULL,"Could not allocate memory buffer","ABORT PROGRAM",MB_ICONWARNING);         
+         MessageBox(NULL,"Could not allocate memory buffer","ABORT PROGRAM",MB_ICONWARNING);
          hb_retc("Could not allocate buffer memory");
+
          return;
        }
 
@@ -377,6 +387,7 @@ HB_FUNC( HBPEFILECHECK )
          CloseHandle(hFile);
          MessageBox(NULL,"Invalid DOS Header","ABORT PROGRAM",MB_ICONWARNING);
          hb_retc("Invalid Dos Header");
+
          return;
       }
 
@@ -388,12 +399,13 @@ HB_FUNC( HBPEFILECHECK )
          CloseHandle(hFile);
          MessageBox(NULL,"Invalid PE Header","ABORT PROGRAM",MB_ICONWARNING);
          hb_retc("Invalid PE Header");
+
          return;
       }
 
-    hMapFile = CreateFileMapping( hFile , 0, PAGE_READONLY , 0, 0,0); 
-    if (hMapFile == NULL) 
-      {  
+    hMapFile = CreateFileMapping( hFile , 0, PAGE_READONLY , 0, 0,0);
+    if (hMapFile == NULL)
+      {
         MessageBox(NULL,"Could not create file mapping object","ABORT PROGRAM",MB_ICONWARNING);
         free(BaseAddress);
         CloseHandle( hFile );
@@ -403,13 +415,14 @@ HB_FUNC( HBPEFILECHECK )
       pBuf =   MapViewOfFile(hMapFile,FILE_MAP_READ,0,0,0);
 
    if (pBuf == NULL)
-     { 
+     {
         MessageBox(NULL,"Could not map view of file","ABORT PROGRAM",MB_ICONWARNING);
         CloseHandle(hMapFile);
         CloseHandle( hFile );
         free(BaseAddress);
         UnmapViewOfFile(pBuf);
         hb_retc( "Could not map view of file" );
+
         return;
      }
 
@@ -418,8 +431,9 @@ HB_FUNC( HBPEFILECHECK )
    CloseHandle( hFile );
    free(BaseAddress);
    hb_retc("S_OK");
+
    return;
-   
+
 }
 
 HB_FUNC(HBREADFUNCTIONNAME)
@@ -429,7 +443,7 @@ HB_FUNC(HBREADFUNCTIONNAME)
    const char             *ImageName = hb_parc(1);
    PSTR                   DllPath = NULL;
    BOOL                   DotDll= 0;
-   BOOL                   ReadOnly = 1 ; 
+   BOOL                   ReadOnly = 1 ;
    LOADED_IMAGE           LoadedImage;
    PUCHAR                 pBuf;
    DWORD                  NewOffset = hb_parnl(2);
@@ -447,19 +461,20 @@ HB_FUNC(HBREADFUNCTIONNAME)
    pBuf = LoadedImage.MappedAddress;
 
    if (pBuf == NULL)
-     { 
-        printf("Could not map view of file - error (%d).\n",GetLastError()); 
+     {
+        printf("Could not map view of file - error (%d).\n",GetLastError());
         UnMapAndLoad(&LoadedImage);
         FreeLibrary( hLib );
         hb_itemRelease(pData);
         hb_itemRelease(pReturn);
         hb_retc( "Map view of file failed !" );
+
         return;
      }
 
-      j=NewOffset;     
+      j=NewOffset;
       while (*(pBuf+j+scroll-1) !=0)
-      {       
+      {
        hb_arraySetNL(pData,1,*(pBuf+j+scroll-1));
        hb_arrayAdd(pReturn,pData);
        ++scroll;
@@ -470,9 +485,9 @@ HB_FUNC(HBREADFUNCTIONNAME)
    FreeLibrary( hLib );
    hb_itemRelease(pData);
    hb_itemRelease(hb_itemReturn(pReturn));
-   return;   
-}
 
+   return;
+}
 
 HB_FUNC(HBRVATOOFFSET)
  {
@@ -482,7 +497,7 @@ HB_FUNC(HBRVATOOFFSET)
    PIMAGE_NT_HEADERS       NtHeaders;
    DWORD                   ImageBase;
    BOOL                    DotDll= 0;
-   BOOL                    ReadOnly = 1 ; 
+   BOOL                    ReadOnly = 1 ;
    DWORD                   Offset ;
    DWORD                   Rva=hb_parnl(2);
    HINSTANCE              hLib = LoadLibrary( "ImageHlp.Dll" );
@@ -492,16 +507,16 @@ HB_FUNC(HBRVATOOFFSET)
    UnMapAndLoad(&LoadedImage);
    FreeLibrary( hLib );
    hb_retnl(Offset);
+
    return;
  }
-
 
 HB_FUNC( HBREAD16OFFSET )
 {
    const char             *ImageName = hb_parc(1);
    PSTR                   DllPath = NULL;
    BOOL                   DotDll= 0;
-   BOOL                   ReadOnly = 1 ; 
+   BOOL                   ReadOnly = 1 ;
    LOADED_IMAGE           LoadedImage;
    PUCHAR                 pBuf;
    DWORD                  Offset = hb_parnl(2);
@@ -516,12 +531,13 @@ HB_FUNC( HBREAD16OFFSET )
    hb_arrayNew(pReturn,0);
    hb_arrayNew(pData,16);
    if (pBuf == NULL)
-     { 
+     {
 
         MessageBox(NULL,"Could not map view of file","ABORT PROGRAM",MB_ICONWARNING);
         UnMapAndLoad(&LoadedImage);
         FreeLibrary( hLib );
         hb_retc( "Map view of file failed !" );
+
         return;
      }
    hb_arraySetNI(pData,1, *(pBuf+Offset));
@@ -544,6 +560,7 @@ HB_FUNC( HBREAD16OFFSET )
    UnMapAndLoad(&LoadedImage);
    FreeLibrary( hLib );
    hb_itemRelease(hb_itemReturn(pData));
+
    return;
   }
 
@@ -552,7 +569,7 @@ HB_FUNC( HBREAD04OFFSET )
    const char             *ImageName = hb_parc(1);
    PSTR                   DllPath = NULL;
    BOOL                   DotDll= 0;
-   BOOL                   ReadOnly = 1 ; 
+   BOOL                   ReadOnly = 1 ;
    LOADED_IMAGE           LoadedImage;
    PUCHAR                 pBuf;
    DWORD                  Offset = hb_parnl(2);
@@ -560,16 +577,17 @@ HB_FUNC( HBREAD04OFFSET )
    HINSTANCE              hLib = LoadLibrary( "ImageHlp.Dll" );
 
    MapAndLoad( (char *) ImageName,DllPath, &LoadedImage, DotDll, ReadOnly );
-   pBuf = LoadedImage.MappedAddress;   
+   pBuf = LoadedImage.MappedAddress;
    pData = hb_itemNew(NULL);
    hb_arrayNew(pData,4);
    if (pBuf == NULL)
-     { 
-        printf("Could not map view of file - error (%d).\n",GetLastError()); 
+     {
+        printf("Could not map view of file - error (%d).\n",GetLastError());
         UnMapAndLoad(&LoadedImage);
         FreeLibrary( hLib );
         hb_itemRelease(pData);
         hb_retc( "Map view of file failed !" );
+
         return;
      }
    hb_arraySetNI(pData,1, *(pBuf+Offset));
@@ -579,9 +597,9 @@ HB_FUNC( HBREAD04OFFSET )
    UnMapAndLoad(&LoadedImage);
    FreeLibrary( hLib );
    hb_itemRelease(hb_itemReturn(pData));
+
    return;
   }
-
 
 HB_FUNC( HBREADBYTECODE )
 {
@@ -589,8 +607,8 @@ HB_FUNC( HBREADBYTECODE )
    const char             *ImageName = hb_parc(1);
    PSTR                   DllPath = NULL;
    BOOL                   DotDll= 0;
-   BOOL                   ReadOnly = 1 ; 
-   BOOL                   lFlag = 0 ; 
+   BOOL                   ReadOnly = 1 ;
+   BOOL                   lFlag = 0 ;
    LOADED_IMAGE           LoadedImage;
    PUCHAR                 pBuf;
    int                    j=1;
@@ -605,13 +623,14 @@ HB_FUNC( HBREADBYTECODE )
    hb_arrayNew(pReturn,0);
    hb_arrayNew(pData,1);
    if (pBuf == NULL)
-     { 
-        printf("Could not map view of file - error (%d).\n",GetLastError()); 
+     {
+        printf("Could not map view of file - error (%d).\n",GetLastError());
         UnMapAndLoad(&LoadedImage);
         FreeLibrary( hLib );
         hb_itemRelease(pData);
         hb_itemRelease(pReturn);
         hb_retc( "Map view of file failed !" );
+
         return;
      }
 
@@ -627,7 +646,7 @@ HB_FUNC( HBREADBYTECODE )
                    {
                      lFlag=1;
                    }
-                }          
+                }
 
      }  while ( !lFlag );
 
@@ -644,11 +663,11 @@ HB_FUNC( HBREADBYTECODE )
    FreeLibrary( hLib );
    hb_itemRelease(pData);
    hb_itemRelease(hb_itemReturn(pReturn));
+
    return;
   }
 
-
-HB_FUNC( HBLOADBASICADDRESSES ) 
+HB_FUNC( HBLOADBASICADDRESSES )
 {
    const char             *ImageName = hb_parc(1);
    PSTR                   DllPath = NULL;
@@ -658,7 +677,7 @@ HB_FUNC( HBLOADBASICADDRESSES )
    DWORD                  k;
    DWORD                  Offset;
    BOOL                   DotDll= 0;
-   BOOL                   ReadOnly = 1 ; 
+   BOOL                   ReadOnly = 1 ;
    HINSTANCE              hLib = LoadLibrary( "ImageHlp.Dll" );
    PHB_ITEM               pData;
    pData = hb_itemNew(NULL);
@@ -668,25 +687,26 @@ HB_FUNC( HBLOADBASICADDRESSES )
 
    hb_arraySetNL(pData,1,NtHeaders->OptionalHeader.ImageBase );
    hb_arraySetNL(pData,2,NtHeaders->OptionalHeader.BaseOfCode);
-   hb_arraySetNL(pData,3,NtHeaders->OptionalHeader.BaseOfData);   
-   hb_arraySetNL(pData,4,NtHeaders->OptionalHeader.SectionAlignment);   
-   hb_arraySetNL(pData,5,NtHeaders->OptionalHeader.FileAlignment);   
-   hb_arraySetNL(pData,6,(NtHeaders->OptionalHeader.ImageBase)+(NtHeaders->OptionalHeader.BaseOfCode));   
-   hb_arraySetNL(pData,7,(NtHeaders->OptionalHeader.ImageBase)+(NtHeaders->OptionalHeader.BaseOfData));   
+   hb_arraySetNL(pData,3,NtHeaders->OptionalHeader.BaseOfData);
+   hb_arraySetNL(pData,4,NtHeaders->OptionalHeader.SectionAlignment);
+   hb_arraySetNL(pData,5,NtHeaders->OptionalHeader.FileAlignment);
+   hb_arraySetNL(pData,6,(NtHeaders->OptionalHeader.ImageBase)+(NtHeaders->OptionalHeader.BaseOfCode));
+   hb_arraySetNL(pData,7,(NtHeaders->OptionalHeader.ImageBase)+(NtHeaders->OptionalHeader.BaseOfData));
    hb_arraySetNL(pData,8,NtHeaders->OptionalHeader.AddressOfEntryPoint);
    hb_arraySetNL(pData,9 ,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.ImageBase));
    hb_arraySetNL(pData,10,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.BaseOfCode));
-   hb_arraySetNL(pData,11,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.BaseOfData));   
-   hb_arraySetNL(pData,12,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.AddressOfEntryPoint));   
+   hb_arraySetNL(pData,11,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.BaseOfData));
+   hb_arraySetNL(pData,12,RvaToOffset(NtHeaders,NtHeaders->OptionalHeader.AddressOfEntryPoint));
 
    pBuf = LoadedImage.MappedAddress;
    if (pBuf == NULL)
-     { 
-        MessageBox(NULL,"Could not map view of file ","ABORT PROGRAM",MB_ICONWARNING);         
+     {
+        MessageBox(NULL,"Could not map view of file ","ABORT PROGRAM",MB_ICONWARNING);
         UnMapAndLoad(&LoadedImage);
         FreeLibrary( hLib );
         hb_itemRelease(pData);
         hb_retc( "Map view of file failed !" );
+
         return;
      }
 
@@ -702,9 +722,9 @@ HB_FUNC( HBLOADBASICADDRESSES )
    UnMapAndLoad( &LoadedImage );
    FreeLibrary( hLib );
    hb_itemRelease(hb_itemReturn(pData));
+
    return;
  }
-
 
 DWORD RvaToOffset( IMAGE_NT_HEADERS *NtHeaders, DWORD Rva)
 {
@@ -714,29 +734,32 @@ DWORD RvaToOffset( IMAGE_NT_HEADERS *NtHeaders, DWORD Rva)
 
    Section = IMAGE_FIRST_SECTION ( NtHeaders );
    if (Rva < Section->PointerToRawData)
+
         return Rva ;
    for (i = 0; i < NtHeaders->FileHeader.NumberOfSections; i++)
-	{
+   {
           if (Section[i].SizeOfRawData)
                   Limit = Section[i].SizeOfRawData;
           else
                   Limit = Section[i].Misc.VirtualSize;
 
           if (Rva >= Section[i].VirtualAddress && Rva < (Section[i].VirtualAddress + Limit))
-		{
+      {
                     if (Section[i].PointerToRawData != 0)
                       {
                            Offset -= Section[i].VirtualAddress;
                            Offset += Section[i].PointerToRawData;
-                       }                        
+                       }
 
                       return Offset;
-		}
+      }
            }
+
      return NULL;
  }
 
 #pragma ENDDUMP
 
-#include "rcvrdbl.prg"
-#include "recc2prg.prg"
+   #include "rcvrdbl.prg"
+   #include "recc2prg.prg"
+

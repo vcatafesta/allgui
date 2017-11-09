@@ -1,49 +1,48 @@
 /*
- * Author: P.Chornyj <myorg63@mail.ru>
- *
- * A Quick & Easy guide to Microsoft Windows Icon Size
- * https://www.creativefreedom.co.uk/icon-designers-blog/windows-7-icon-sizes/
- */
+* Author: P.Chornyj <myorg63@mail.ru>
+* A Quick & Easy guide to Microsoft Windows Icon Size
+* https://www.creativefreedom.co.uk/icon-designers-blog/windows-7-icon-sizes/
+*/
 
 ANNOUNCE RDDSYS
 
 #include "minigui.ch"
-///////////////////////////////////////////////////////////////////////////////
-procedure main()
 
-   local cIcon := 'IconVista.ico', hIcon
-   local aInfo, w, h
+PROCEDURE main()
 
-   if IsVistaOrLater()
+   LOCAL cIcon := 'IconVista.ico', hIcon
+   LOCAL aInfo, w, h
+
+   IF IsVistaOrLater()
       hIcon := LoadIconByName( cIcon, 256, 256 )
-   elseif IsWinXPorLater()
+   ELSEIF IsWinXPorLater()
       hIcon := LoadIconByName( cIcon, 128, 128 )
-   endif
+   ENDIF
 
-   if Empty( hIcon )
-      quit
-   endif
+   IF Empty( hIcon )
+      QUIT
+   ENDIF
 
    aInfo := GetIconSize( hIcon )
    w := aInfo[ 1 ]
    h := aInfo[ 2 ]
 
-   define window Form_Main ;
-      clientarea w, h + GetMenuBarHeight() ;
-      title 'Icons Demo' ;
-      main ;
-      nomaximize nosize ;
-      on release ;
-      ( ;
+   DEFINE WINDOW Form_Main ;
+         clientarea w, h + GetMenuBarHeight() ;
+         title 'Icons Demo' ;
+         main ;
+         nomaximize nosize ;
+         on release ;
+         ( ;
          DestroyIcon( hIcon ) ;
-      )
+         )
 
-      define main menu
-         define popup "&File" 
+      DEFINE MAIN MENU
+         DEFINE POPUP "&File"
             menuitem "E&xit" action ThisWindow.Release
          end popup
       end menu
-   end window
+   END WINDOW
 
    draw icon in window Form_Main at 0, 0 hicon hIcon width w height h
 
@@ -52,4 +51,5 @@ procedure main()
    Form_Main.Center()
    Form_Main.Activate()
 
-return
+   RETURN
+

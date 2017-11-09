@@ -1,12 +1,9 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Read a text from another program / Прочитать текст из другой программы
- *
- * Copyright 2015 Verchenko Andrey <verchenkoag@gmail.com>
- * Copyright 2015 Sidorov Aleksandr <aksidorov@mail.ru>
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru> and Petr Chornyj <myorg63@mail.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Read a text from another program / Прочитать текст из другой программы
+* Copyright 2015 Verchenko Andrey <verchenkoag@gmail.com>
+* Copyright 2015 Sidorov Aleksandr <aksidorov@mail.ru>
+* Revised by Grigory Filatov <gfilatov@inbox.ru> and Petr Chornyj <myorg63@mail.ru>
 */
 
 #include "minigui.ch"
@@ -16,51 +13,50 @@ STATIC cAppTitle := "InputMask Demo"
 FUNCTION Main()
 
    DEFINE WINDOW Form_Main ;
-      AT 0, 0 ;
-      WIDTH 600 HEIGHT 400 ;
-      TITLE "Read a text of the program: " + cAppTitle ;
-      MAIN TOPMOST ;
-      BACKCOLOR { 231, 178, 30 } ;
-      ON RELEASE CloseIt()
+         AT 0, 0 ;
+         WIDTH 600 HEIGHT 400 ;
+         TITLE "Read a text of the program: " + cAppTitle ;
+         MAIN TOPMOST ;
+         BACKCOLOR { 231, 178, 30 } ;
+         ON RELEASE CloseIt()
 
-   DEFINE BUTTONEX Button_1
-      ROW 20
-      COL 20
-      WIDTH 250
-      CAPTION 'Read the textbox "Edit"'
-      BACKCOLOR LGREEN
-      FONTCOLOR WHITE
-      NOXPSTYLE .T.
-      HANDCURSOR .T.
-      ACTION ReadGetIt()
-   END BUTTONEX
+      DEFINE BUTTONEX Button_1
+         ROW 20
+         COL 20
+         WIDTH 250
+         CAPTION 'Read the textbox "Edit"'
+         BACKCOLOR LGREEN
+         FONTCOLOR WHITE
+         NOXPSTYLE .T.
+         HANDCURSOR .T.
+         ACTION ReadGetIt()
+      END BUTTONEX
 
-   DEFINE BUTTONEX Button_3
-      ROW 20
-      COL 310
-      WIDTH 250
-      CAPTION 'Cancel'
-      BACKCOLOR MAROON
-      FONTCOLOR WHITE
-      NOXPSTYLE .T.
-      HANDCURSOR .T.
-      ACTION ThisWindow.Release
-   END BUTTONEX
+      DEFINE BUTTONEX Button_3
+         ROW 20
+         COL 310
+         WIDTH 250
+         CAPTION 'Cancel'
+         BACKCOLOR MAROON
+         FONTCOLOR WHITE
+         NOXPSTYLE .T.
+         HANDCURSOR .T.
+         ACTION ThisWindow.Release
+      END BUTTONEX
 
-   @ 60, 20 EDITBOX Edit_Result ;
-      WIDTH 540 HEIGHT 290      ;
-      VALUE ''                  ;
-      NOHSCROLL
+      @ 60, 20 EDITBOX Edit_Result ;
+         WIDTH 540 HEIGHT 290      ;
+         VALUE ''                  ;
+         NOHSCROLL
 
    END WINDOW
 
    CENTER WINDOW   Form_Main
    ACTIVATE WINDOW Form_Main
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////
-#define WM_CLOSE     0x0010
+   #define WM_CLOSE     0x0010
 
 FUNCTION CloseIt()
 
@@ -70,14 +66,13 @@ FUNCTION CloseIt()
       PostMessage( hWnd, WM_CLOSE, 0, 0 )  // close programm
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////
-#ifdef __XHARBOUR__
-#define ENUMINDEX hb_EnumIndex()
-#else
-#define ENUMINDEX c:__EnumIndex
-#endif
+   #ifdef __XHARBOUR__
+   #define ENUMINDEX hb_EnumIndex()
+   #else
+   #define ENUMINDEX c:__EnumIndex
+   #endif
 
 FUNCTION ReadGetIt()
 
@@ -106,13 +101,12 @@ FUNCTION ReadGetIt()
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-///////////////////////////////////////////////////////////////
 STATIC FUNCTION GetEditText( hChild )
-RETURN If( GetClassName( hChild ) == "Edit", MyGetEditText( hChild ), "" )
 
-///////////////////////////////////////////////////////////////
+   RETURN If( GetClassName( hChild ) == "Edit", MyGetEditText( hChild ), "" )
+
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -142,7 +136,6 @@ HB_FUNC( MYGETEDITTEXT )
 }
 
 static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam );
-///////////////////////////////////////////////////////////////
 // based on http://forums.fivetechsupport.com/viewtopic.php?p=57503
 HB_FUNC( ENUMCHILDWINDOWS )
 {
@@ -171,3 +164,4 @@ static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam )
 }
 
 #pragma ENDDUMP
+

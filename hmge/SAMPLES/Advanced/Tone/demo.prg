@@ -1,44 +1,41 @@
 /*
- * Harbour MiniGUI Tone Demo
- *
- * (c) 2009-2011 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Revised by Alexey L. Gustow <gustow33@mail.ru>
+* Harbour MiniGUI Tone Demo
+* (c) 2009-2011 Grigory Filatov <gfilatov@inbox.ru>
+* Revised by Alexey L. Gustow <gustow33@mail.ru>
 */
 
 #include "minigui.ch"
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 ;
-		TITLE 'Tone function via sound card Demo' ;
-		MAIN
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Tone function via sound card Demo' ;
+         MAIN
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			CAPTION 'Play Tones'
-			ACTION HappyBirthday()
-			DEFAULT .T.
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         CAPTION 'Play Tones'
+         ACTION HappyBirthday()
+         DEFAULT .T.
+      END BUTTON
 
-		DEFINE BUTTON Button_2
-			ROW	45
-			COL	10
-			CAPTION 'Cancel'
-			ACTION ThisWindow.Release
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   45
+         COL   10
+         CAPTION 'Cancel'
+         ACTION ThisWindow.Release
+      END BUTTON
 
-	END WINDOW
+   END WINDOW
 
-	Form_1.Center
-	Form_1.Activate
+   Form_1.Center
+   Form_1.Activate
 
-Return Nil
-
+   RETURN NIL
 
 PROCEDURE HappyBirthday
 
@@ -91,10 +88,10 @@ PROCEDURE HappyBirthday
    VALTONE("C3 ",1/4)   //GAL
    VALTONE("P ",1/2)
 
-RETURN
-
+   RETURN
 
 FUNCTION VALTONE( val_note, val_time )
+
    val_time *= 24
 
    DO CASE
@@ -202,8 +199,7 @@ FUNCTION VALTONE( val_note, val_time )
 
    DO EVENTS
 
-RETURN Nil
-
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -349,3 +345,4 @@ void HB_EXPORT hb_winTone( UINT uFrequency, double dwDuration, BOOL bSmoothing, 
 }
 
 #pragma ENDDUMP
+

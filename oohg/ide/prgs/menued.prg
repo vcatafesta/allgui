@@ -1,26 +1,21 @@
 /*
- * $Id: menued.prg,v 1.17 2017/08/25 18:20:41 fyurisich Exp $
- */
+* $Id: menued.prg,v 1.17 2017/08/25 18:20:41 fyurisich Exp $
+*/
 /*
- * ooHG IDE+ form generator
- *
- * Copyright 2002-2017 Ciro Vargas Clemow <cvc@oohg.org>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software. If not, visit the web site:
- * <http://www.gnu.org/licenses/>
- *
- */
+* ooHG IDE+ form generator
+* Copyright 2002-2017 Ciro Vargas Clemow <cvc@oohg.org>
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software. If not, visit the web site:
+* <http://www.gnu.org/licenses/>
+*/
 
 #include "dbstruct.ch"
 #include "oohg.ch"
@@ -29,6 +24,7 @@
 #define CRLF Chr(13) + Chr(10)
 
 CLASS TMyMenuEditor
+
    DATA cID       INIT ''
    DATA cMnFile   INIT ''
    DATA cMnName   INIT ''
@@ -39,51 +35,78 @@ CLASS TMyMenuEditor
    DATA nType     INIT 0
    DATA oEditor   INIT NIL
 
-   METHOD AddItem
-   METHOD CloseWorkArea
-   METHOD CreateMenuCtrl
-   METHOD CreateMenuFromFile
-   METHOD DeleteItem
-   METHOD Discard
-   METHOD Edit
-   METHOD Exit
-   METHOD FmgOutput
-   METHOD InsertItem
-   METHOD MoveDown
-   METHOD MoveUp
-   METHOD OpenWorkArea
-   METHOD ParseData
-   METHOD ParseItem
-   METHOD Save
-   METHOD WriteAction
-   METHOD WriteBreakMenu
-   METHOD WriteCaption
-   METHOD WriteChecked
-   METHOD WriteDisabled
-   METHOD WriteHilited
-   METHOD WriteImage
-   METHOD WriteLevel
-   METHOD WriteName
-   METHOD WriteObj
-   METHOD WriteRight
-   METHOD WriteStretch
-   METHOD WriteSubclass
+METHOD AddItem
+
+METHOD CloseWorkArea
+
+METHOD CreateMenuCtrl
+
+METHOD CreateMenuFromFile
+
+METHOD DeleteItem
+
+METHOD Discard
+
+METHOD Edit
+
+METHOD Exit
+
+METHOD FmgOutput
+
+METHOD InsertItem
+
+METHOD MoveDown
+
+METHOD MoveUp
+
+METHOD OpenWorkArea
+
+METHOD ParseData
+
+METHOD ParseItem
+
+METHOD Save
+
+METHOD WriteAction
+
+METHOD WriteBreakMenu
+
+METHOD WriteCaption
+
+METHOD WriteChecked
+
+METHOD WriteDisabled
+
+METHOD WriteHilited
+
+METHOD WriteImage
+
+METHOD WriteLevel
+
+METHOD WriteName
+
+METHOD WriteObj
+
+METHOD WriteRight
+
+METHOD WriteStretch
+
+METHOD WriteSubclass
 
 ENDCLASS
 
-//------------------------------------------------------------------------------
 METHOD AddItem() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbAppend() )
    ::FormEdit:browse_101:Refresh()
    ::FormEdit:browse_101:Value := ( ::cID )->( RecCount() )
    ::FormEdit:browse_101:SetFocus()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD CloseWorkArea() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL cFile
+
+   LOCAL cFile
 
    ( ::cID )->( dbCloseArea() )
    cFile := ::cID + '.dbf'
@@ -91,12 +114,12 @@ LOCAL cFile
       ERASE ( cFile )
    ENDIF
    ::nType := 0
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD CreateMenuCtrl( oButton ) CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL nNxtLvl, nLvl, nPopupCount := 0
+
+   LOCAL nNxtLvl, nLvl, nPopupCount := 0
 
    DO CASE
    CASE ::nType == 1
@@ -108,7 +131,7 @@ LOCAL nNxtLvl, nLvl, nPopupCount := 0
       ( ::cID )->( dbGoTop() )
       IF ! ( ::cID )->( Eof() )
          DEFINE MAIN MENU OF ( ::oEditor:oDesignForm ) ;
-            OBJ ::oEditor:myMMCtrl
+               OBJ ::oEditor:myMMCtrl
 
             DO WHILE ! ( ::cID )->( Eof() )
                ( ::cID )->( dbSkip() )
@@ -155,124 +178,124 @@ LOCAL nNxtLvl, nLvl, nPopupCount := 0
                   ENDIF
 
                   DO WHILE nNxtLvl < nLvl
-                     END POPUP
-                     nPopupCount --
-                     nLvl --
-                  ENDDO
-               ENDIF
+                  END POPUP
+                  nPopupCount --
+                  nLvl --
+               ENDDO
+            ENDIF
 
-               ( ::cID )->( dbSkip() )
-            ENDDO
+            ( ::cID )->( dbSkip() )
+         ENDDO
 
-            DO WHILE nPopupCount > 0
-               END POPUP
-               nPopupCount --
-            ENDDO
-         END MENU
-      ENDIF
-   CASE ::nType == 2
-      IF HB_IsObject( ::oEditor:myCMCtrl )
-         ::oEditor:myCMCtrl:Release()
-         ::oEditor:myCMCtrl := NIL
-      ENDIF
+         DO WHILE nPopupCount > 0
+         END POPUP
+         nPopupCount --
+      ENDDO
+   END MENU
+ENDIF
+CASE ::nType == 2
+IF HB_IsObject( ::oEditor:myCMCtrl )
+   ::oEditor:myCMCtrl:Release()
+   ::oEditor:myCMCtrl := NIL
+ENDIF
 
-      ( ::cID )->( dbGoTop() )
-      IF ! ( ::cID )->( Eof() )
-         DEFINE MENU DYNAMIC OF ( ::oEditor:oDesignForm ) ;
-            OBJ ::oEditor:myCMCtrl
+( ::cID )->( dbGoTop() )
+IF ! ( ::cID )->( Eof() )
+   DEFINE MENU DYNAMIC OF ( ::oEditor:oDesignForm ) ;
+         OBJ ::oEditor:myCMCtrl
 
-            DO WHILE ! ( ::cID )->( Eof() )
-               IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
-                  TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
-               ELSE
-                  TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
-                     NIL, ;
-                     NIL, ;
-                     AllTrim( ( ::cID )->image ), ;
-                     ( ::cID )->checked == 'X', ;
-                     ( ::cID )->enabled == 'X', ;
-                     NIL, ;
-                     ( ::cID )->hilited == 'X', ;
-                     ( ::cID )->right == 'X', ;
-                     ( ::cID )->stretch == 'X', ;
-                     IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
-               ENDIF
+      DO WHILE ! ( ::cID )->( Eof() )
+         IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
+            TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
+         ELSE
+            TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
+               NIL, ;
+               NIL, ;
+               AllTrim( ( ::cID )->image ), ;
+               ( ::cID )->checked == 'X', ;
+               ( ::cID )->enabled == 'X', ;
+               NIL, ;
+               ( ::cID )->hilited == 'X', ;
+               ( ::cID )->right == 'X', ;
+               ( ::cID )->stretch == 'X', ;
+               IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
+         ENDIF
 
-               ( ::cID )->( dbSkip() )
-            ENDDO
-         END MENU
-      ENDIF
-   CASE ::nType == 3
-      IF HB_IsObject( ::oEditor:myNMCtrl )
-         ::oEditor:myNMCtrl:Release()
-         ::oEditor:myNMCtrl := NIL
-      ENDIF
+         ( ::cID )->( dbSkip() )
+      ENDDO
+   END MENU
+ENDIF
+CASE ::nType == 3
+IF HB_IsObject( ::oEditor:myNMCtrl )
+   ::oEditor:myNMCtrl:Release()
+   ::oEditor:myNMCtrl := NIL
+ENDIF
 
-      ( ::cID )->( dbGoTop() )
-      IF ! ( ::cID )->( Eof() )
-         DEFINE MENU DYNAMIC OF ( ::oEditor:oDesignForm ) ;
-            OBJ ::oEditor:myNMCtrl
+( ::cID )->( dbGoTop() )
+IF ! ( ::cID )->( Eof() )
+   DEFINE MENU DYNAMIC OF ( ::oEditor:oDesignForm ) ;
+         OBJ ::oEditor:myNMCtrl
 
-            DO WHILE ! ( ::cID )->( Eof() )
-               IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
-                  TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
-               ELSE
-                  TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
-                     NIL, ;
-                     NIL, ;
-                     AllTrim( ( ::cID )->image ), ;
-                     ( ::cID )->checked == 'X', ;
-                     ( ::cID )->enabled == 'X', ;
-                     NIL, ;
-                     ( ::cID )->hilited == 'X', ;
-                     ( ::cID )->right == 'X', ;
-                     ( ::cID )->stretch == 'X', ;
-                     IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
-               ENDIF
+      DO WHILE ! ( ::cID )->( Eof() )
+         IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
+            TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
+         ELSE
+            TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
+               NIL, ;
+               NIL, ;
+               AllTrim( ( ::cID )->image ), ;
+               ( ::cID )->checked == 'X', ;
+               ( ::cID )->enabled == 'X', ;
+               NIL, ;
+               ( ::cID )->hilited == 'X', ;
+               ( ::cID )->right == 'X', ;
+               ( ::cID )->stretch == 'X', ;
+               IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
+         ENDIF
 
-               ( ::cID )->( dbSkip() )
-            ENDDO
-         END MENU
-      ENDIF
+         ( ::cID )->( dbSkip() )
+      ENDDO
+   END MENU
+ENDIF
 
-   CASE ::nType == 4
-      IF HB_IsObject( ::oEditor:myDMCtrl )
-         ::oEditor:myDMCtrl:Release()
-         ::oEditor:myDMCtrl := NIL
-      ENDIF
+CASE ::nType == 4
+IF HB_IsObject( ::oEditor:myDMCtrl )
+   ::oEditor:myDMCtrl:Release()
+   ::oEditor:myDMCtrl := NIL
+ENDIF
 
-      ( ::cID )->( dbGoTop() )
-      IF ! ( ::cID )->( Eof() )
-         DEFINE DROPDOWN MENU BUTTON ( oButton ) ;
-            OBJ ::oEditor:myDMCtrl
+( ::cID )->( dbGoTop() )
+IF ! ( ::cID )->( Eof() )
+   DEFINE DROPDOWN MENU BUTTON ( oButton ) ;
+         OBJ ::oEditor:myDMCtrl
 
-            DO WHILE ! ( ::cID )->( Eof() )
-               IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
-                  TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
-               ELSE
-                  TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
-                     NIL, ;
-                     NIL, ;
-                     AllTrim( ( ::cID )->image ), ;
-                     ( ::cID )->checked == 'X', ;
-                     ( ::cID )->enabled == 'X', ;
-                     NIL, ;
-                     ( ::cID )->hilited == 'X', ;
-                     ( ::cID )->right == 'X', ;
-                     ( ::cID )->stretch == 'X', ;
-                     IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
-               ENDIF
+      DO WHILE ! ( ::cID )->( Eof() )
+         IF Lower( AllTrim( ( ::cID )->item ) ) == 'separator'
+            TMenuItem():DefineSeparator( NIL, NIL, ( ::cID )->right == 'X' )
+         ELSE
+            TMenuItem():DefineItem( AllTrim( ( ::cID )->item ), ;
+               NIL, ;
+               NIL, ;
+               AllTrim( ( ::cID )->image ), ;
+               ( ::cID )->checked == 'X', ;
+               ( ::cID )->enabled == 'X', ;
+               NIL, ;
+               ( ::cID )->hilited == 'X', ;
+               ( ::cID )->right == 'X', ;
+               ( ::cID )->stretch == 'X', ;
+               IIF( ( ::cID )->breakmenu == 'X', 1, NIL ) )
+         ENDIF
 
-               ( ::cID )->( dbSkip() )
-            ENDDO
-         END MENU
-      ENDIF
-   ENDCASE
+         ( ::cID )->( dbSkip() )
+      ENDDO
+   END MENU
+ENDIF
+ENDCASE
+
 RETURN NIL
 
-//------------------------------------------------------------------------------
 METHOD CreateMenuFromFile( oEditor, nType, cButton, oButton ) CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    IF HB_IsObject( oEditor )
       ::oEditor := oEditor
    ENDIF
@@ -283,31 +306,31 @@ METHOD CreateMenuFromFile( oEditor, nType, cButton, oButton ) CLASS TMyMenuEdito
    ::ParseData()
    ::CreateMenuCtrl( oButton )
    ::CloseWorkArea()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD DeleteItem() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->( dbDelete() )
    ( ::cID )->( __dbPack() )
    ::FormEdit:browse_101:Refresh()
    ::FormEdit:browse_101:Value := 1
    ::FormEdit:browse_101:SetFocus()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD Discard() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ::FormEdit:Release()
    ::FormEdit := NIL
    ::CloseWorkArea()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD Edit( oEditor, nType, cButton ) CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-Local cTitulo := {'Main', 'Context', 'Notify', 'Drop Down'}
+
+   LOCAL cTitulo := {'Main', 'Context', 'Notify', 'Drop Down'}
 
    IF HB_IsObject( oEditor )
       ::oEditor := oEditor
@@ -333,12 +356,12 @@ Local cTitulo := {'Main', 'Context', 'Notify', 'Drop Down'}
       ::FormEdit := NIL
       ::oEditor:oDesignForm:SetFocus()
    ENDIF
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD Exit() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL cFile
+
+   LOCAL cFile
 
    ( ::cID )->( dbGoTop() )
    IF ! ( ::cID )->( Eof() )
@@ -366,12 +389,12 @@ LOCAL cFile
       ERASE ( ::cID + ".dbf" )
    ENDIF
    ::oEditor:lFSave := .F.
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD FmgOutput( oEditor, nType, nSpacing, cButton ) CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL Output := "", nNxtLvl, nLvl, nPopupCount := 0
+
+   LOCAL Output := "", nNxtLvl, nLvl, nPopupCount := 0
 
    IF HB_IsObject( oEditor )
       ::oEditor := oEditor
@@ -759,13 +782,13 @@ LOCAL Output := "", nNxtLvl, nLvl, nPopupCount := 0
    ENDIF
 
    ::CloseWorkArea()
-RETURN Output
 
-//------------------------------------------------------------------------------
+   RETURN Output
+
 METHOD InsertItem() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL nRegAux, wauxit, witem, wname, waction, wlevel, wchecked, wenabled
-LOCAL wimage, wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
+
+   LOCAL nRegAux, wauxit, witem, wname, waction, wlevel, wchecked, wenabled
+   LOCAL wimage, wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
 
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    nRegAux := ( ::cID )->( RecNo() )
@@ -838,19 +861,20 @@ LOCAL wimage, wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
    ::FormEdit:checkbox_104:Value := .F.
    ::FormEdit:checkbox_105:Value := .F.
    ::FormEdit:checkbox_106:Value := .F.
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD MoveDown() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL nRegAux, xauxit, xitem, xname, xaction, xlevel, xchecked, xenabled
-LOCAL ximage, xobj, xstretch, xhilited, xright, xbreakmenu, xsubclass
-LOCAL wauxit, witem, wname, waction, wlevel, wchecked, wenabled, wimage
-LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
+
+   LOCAL nRegAux, xauxit, xitem, xname, xaction, xlevel, xchecked, xenabled
+   LOCAL ximage, xobj, xstretch, xhilited, xright, xbreakmenu, xsubclass
+   LOCAL wauxit, witem, wname, waction, wlevel, wchecked, wenabled, wimage
+   LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
 
    nRegAux := ::FormEdit:browse_101:Value
    IF nRegAux == ( ::cID )->( RecCount() )
       PlayBeep()
+
       RETURN NIL
    ENDIF
 
@@ -920,19 +944,20 @@ LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
    ::FormEdit:browse_101:Refresh()
    ::FormEdit:browse_101:Value := nRegAux + 1
    ::FormEdit:browse_101:SetFocus()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD MoveUp() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL nRegAux, xauxit, xitem, xname, xaction, xlevel, xchecked, xenabled
-LOCAL ximage, xobj, xstretch, xhilited, xright, xbreakmenu, xsubclass
-LOCAL wauxit, witem, wname, waction, wlevel, wchecked, wenabled, wimage
-LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
+
+   LOCAL nRegAux, xauxit, xitem, xname, xaction, xlevel, xchecked, xenabled
+   LOCAL ximage, xobj, xstretch, xhilited, xright, xbreakmenu, xsubclass
+   LOCAL wauxit, witem, wname, waction, wlevel, wchecked, wenabled, wimage
+   LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
 
    nRegAux := ::FormEdit:browse_101:Value
    IF nRegAux == 1
       PlayBeep()
+
       RETURN NIL
    ENDIF
 
@@ -1002,12 +1027,12 @@ LOCAL wobj, wstretch, whilited, wright, wbreakmenu, wsubclass
    ::FormEdit:browse_101:Refresh()
    ::FormEdit:browse_101:Value := nRegAux - 1
    ::FormEdit:browse_101:SetFocus()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD OpenWorkArea( cButton ) CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL aDbf[14][4]
+
+   LOCAL aDbf[14][4]
 
    aDbf[01][ DBS_NAME ] := "Auxit"
    aDbf[01][ DBS_TYPE ] := "Character"
@@ -1096,6 +1121,7 @@ LOCAL aDbf[14][4]
    CASE ::nType == 4
       ::cMnFile := ::oEditor:cFName + '.' + AllTrim( cButton ) + '.mnd'
    OTHERWISE
+
       RETURN NIL
    ENDCASE
 
@@ -1104,12 +1130,12 @@ LOCAL aDbf[14][4]
       ( ::cID )->( __dbPack() )
       ( ::cID )->( dbGoTop() )
    ENDIF
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD ParseData() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL i, nProps := 3, aPar := array( nProps ), wVar, nStart, nIndex
+
+   LOCAL i, nProps := 3, aPar := array( nProps ), wVar, nStart, nIndex
 
    ( ::cID )->( dbGoTop() )
    wVar  := AllTrim( ( ::cID )->auxit )
@@ -1147,11 +1173,11 @@ LOCAL i, nProps := 3, aPar := array( nProps ), wVar, nStart, nIndex
       ::FormEdit:text_2:Value     := ::cObj
       ::FormEdit:text_3:Value     := ::cSubclass
    ENDIF
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD ParseItem() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ::nLevel                      := ( ::cID )->level
    ::FormEdit:text_101:Value     := AllTrim( ( ::cID )->item )
@@ -1166,141 +1192,147 @@ METHOD ParseItem() CLASS TMyMenuEditor
    ::FormEdit:checkbox_104:Value := ( ( ::cID )->breakmenu == 'X' )
    ::FormEdit:checkbox_105:Value := ( ( ::cID )->stretch == 'X' )
    ::FormEdit:checkbox_106:Value := ( ( ::cID )->hilited == 'X' )
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD Save() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
-LOCAL wVar
-                                                         // Length
+
+   LOCAL wVar
+
+   // Length
    wVar := ::cMnName + ',' + ;                           //  30 + 1
-           ::cObj + ',' + ;                              //  30 + 1
-           ::cSubclass                                   //  30
-                                                         //  90 + 2
+   ::cObj + ',' + ;                              //  30 + 1
+   ::cSubclass                                   //  30
+   //  90 + 2
    ( ::cID )->( dbGoTop() )
    ( ::cID )->auxit  := SubStr(wVar, 1, Len( ( ::cID )->auxit ) )
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteAction() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->action := AllTrim( ::FormEdit:edit_101:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteBreakMenu() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->breakmenu := IIF( ::FormEdit:checkbox_104:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteCaption() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->item := Space( ::nLevel * 3 ) + AllTrim( ::FormEdit:text_101:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteChecked() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    IF Empty( ::FormEdit:text_102:Value ) .AND. ::FormEdit:checkbox_101:Value
       ::FormEdit:checkbox_101:Value := .F.
       MsgStop( 'You must first define a name for this item.', 'OOHG IDE+' )
+
       RETURN NIL
    ENDIF
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->checked := IIF( ::FormEdit:checkbox_101:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteDisabled() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    IF Empty( ::FormEdit:text_102:Value ) .AND. ::FormEdit:checkbox_102:Value
       ::FormEdit:checkbox_102:Value := .F.
       MsgStop( 'You must first define a name for this item.', 'OOHG IDE+' )
+
       RETURN NIL
    ENDIF
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->enabled := IIF( ::FormEdit:checkbox_102:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteHilited() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->hilited := IIF( ::FormEdit:checkbox_106:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteImage() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->image := AllTrim( ::FormEdit:text_103:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteLevel() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->item := Space( ::nLevel * 3 ) + AllTrim( ( ::cID )->item )
    ( ::cID )->level := ::nLevel
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteName() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->named := AllTrim( ::FormEdit:text_102:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteObj() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->obj := AllTrim( ::FormEdit:text_5:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteRight() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->right := IIF( ::FormEdit:checkbox_103:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteSubclass() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->subclass := AllTrim( ::FormEdit:text_6:Value )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-//------------------------------------------------------------------------------
+   RETURN NIL
+
 METHOD WriteStretch() CLASS TMyMenuEditor
-//------------------------------------------------------------------------------
+
    IF Empty( ::FormEdit:text_103:Value ) .AND. ::FormEdit:checkbox_105:Value
       ::FormEdit:checkbox_105:Value := .F.
       MsgStop( 'You must first define an image for this item.', 'OOHG IDE+' )
+
       RETURN NIL
    ENDIF
    ( ::cID )->( dbGoTo( ::FormEdit:browse_101:Value ) )
    ( ::cID )->stretch := IIF( ::FormEdit:checkbox_105:Value, 'X', ' ' )
    ::FormEdit:browse_101:Refresh()
-RETURN NIL
 
-/*
- * EOF
- */
+   RETURN NIL
+
+   /*
+   * EOF
+   */
+

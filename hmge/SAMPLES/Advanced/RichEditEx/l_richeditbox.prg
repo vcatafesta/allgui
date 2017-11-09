@@ -1,198 +1,200 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2009, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2009, http://harbour-project.org/
 
-
-   Copyright 2003-2009 Janusz Pora <JanuszPora@onet.eu>
+Copyright 2003-2009 Janusz Pora <JanuszPora@onet.eu>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 
-#define CFM_BOLD	0x00000001
-#define CFM_ITALIC	0x00000002
-#define CFM_UNDERLINE	0x00000004
-#define CFM_STRIKEOUT	0x00000008
-#define CFM_PROTECTED	0x00000010
-#define CFM_LINK	0x00000020      /* Exchange hyperlink extension */
-#define CFM_SIZE	0x80000000
-#define CFM_COLOR	0x40000000
-#define CFM_FACE	0x20000000
-#define CFM_OFFSET	0x10000000
-#define CFM_CHARSET	0x08000000
+#define CFM_BOLD   0x00000001
+#define CFM_ITALIC   0x00000002
+#define CFM_UNDERLINE   0x00000004
+#define CFM_STRIKEOUT   0x00000008
+#define CFM_PROTECTED   0x00000010
+#define CFM_LINK   0x00000020      /* Exchange hyperlink extension */
+#define CFM_SIZE   0x80000000
+#define CFM_COLOR   0x40000000
+#define CFM_FACE   0x20000000
+#define CFM_OFFSET   0x10000000
+#define CFM_CHARSET   0x08000000
 
-*-----------------------------------------------------------------------------*
-Function _SetFontNameRTF (ParentForm,ControlName, Value , lAllText)
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+FUNCTION _SetFontNameRTF (ParentForm,ControlName, Value , lAllText)
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_FACE
    aFont := GetFontRTF(H, 1 )
-Return SetFontRTF(H, Sel, Value, aFont[2], aFont[3], aFont[4], aFont[5], aFont[6], aFont[7], mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFontSizeRTF ( ParentForm , ControlName , Value , lAllText )
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+   RETURN SetFontRTF(H, Sel, Value, aFont[2], aFont[3], aFont[4], aFont[5], aFont[6], aFont[7], mask)
+
+FUNCTION _SetFontSizeRTF ( ParentForm , ControlName , Value , lAllText )
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_SIZE
    aFont := GetFontRTF(H, 0 )
-Return SetFontRTF(H, Sel, aFont[1], Value, aFont[3], aFont[4], aFont[5], aFont[6], aFont[7], mask)
 
+   RETURN SetFontRTF(H, Sel, aFont[1], Value, aFont[3], aFont[4], aFont[5], aFont[6], aFont[7], mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFontBoldRTF ( ParentForm , ControlName , Value , lAllText  )
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+FUNCTION _SetFontBoldRTF ( ParentForm , ControlName , Value , lAllText  )
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_BOLD
    aFont := GetFontRTF(H, 1 )
-Return SetFontRTF(H, Sel, aFont[1], aFont[2], Value, aFont[4], aFont[5], aFont[6], aFont[7], mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFontItalicRTF ( ParentForm , ControlName , Value , lAllText  )
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+   RETURN SetFontRTF(H, Sel, aFont[1], aFont[2], Value, aFont[4], aFont[5], aFont[6], aFont[7], mask)
+
+FUNCTION _SetFontItalicRTF ( ParentForm , ControlName , Value , lAllText  )
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_ITALIC
    aFont := GetFontRTF(H, 1 )
-Return SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], Value, aFont[5], aFont[6], aFont[7], mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFontUnderlineRTF ( ParentForm , ControlName , Value , lAllText  )
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+   RETURN SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], Value, aFont[5], aFont[6], aFont[7], mask)
+
+FUNCTION _SetFontUnderlineRTF ( ParentForm , ControlName , Value , lAllText  )
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_UNDERLINE
    aFont := GetFontRTF(H, 1 )
-Return SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], aFont[4], aFont[5], Value, aFont[7], mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFontStrikeOutRTF ( ParentForm , ControlName , Value , lAllText  )
-*-----------------------------------------------------------------------------*
-Local Sel:= -1 ,H , aFont, mask
+   RETURN SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], aFont[4], aFont[5], Value, aFont[7], mask)
+
+FUNCTION _SetFontStrikeOutRTF ( ParentForm , ControlName , Value , lAllText  )
+
+   LOCAL Sel:= -1 ,H , aFont, mask
+
    DEFAULT lAllText TO .f.
    H := GetControlHandle( ControlName , ParentForm )
-   if !lAllText
-       Sel := RangeSelRTF(H)
-   endif
+   IF !lAllText
+      Sel := RangeSelRTF(H)
+   ENDIF
    mask := CFM_STRIKEOUT
    aFont := GetFontRTF(H, 1 )
-Return SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], aFont[4], aFont[5], aFont[6], Value, mask)
 
-*-----------------------------------------------------------------------------*
-Function _SetFormatLeftRTF ( ParentForm , ControlName , Value  )
-*-----------------------------------------------------------------------------*
+   RETURN SetFontRTF(H, Sel, aFont[1], aFont[2], aFont[3], aFont[4], aFont[5], aFont[6], Value, mask)
+
+FUNCTION _SetFormatLeftRTF ( ParentForm , ControlName , Value  )
+
    LOCAL aParForm, H
+
    H := GetControlHandle( ControlName , ParentForm )
    aParForm := GetParForm( H )
 
    aParForm[3] := .f.
    aParForm[2] := .f.
 
-Return SetParForm(H, Value, aParForm[2], aParForm[3], aParForm[4], aParForm[5])
+   RETURN SetParForm(H, Value, aParForm[2], aParForm[3], aParForm[4], aParForm[5])
 
-*-----------------------------------------------------------------------------*
-Function _SetFormatCenterRTF ( ParentForm , ControlName , Value  )
-*-----------------------------------------------------------------------------*
+FUNCTION _SetFormatCenterRTF ( ParentForm , ControlName , Value  )
+
    LOCAL aParForm, H
+
    H := GetControlHandle( ControlName , ParentForm )
    aParForm := GetParForm( H )
 
    aParForm[1] := .f.
    aParForm[3] := .f.
 
-Return SetParForm(H, aParForm[1], Value, aParForm[3], aParForm[4], aParForm[5])
+   RETURN SetParForm(H, aParForm[1], Value, aParForm[3], aParForm[4], aParForm[5])
 
-*-----------------------------------------------------------------------------*
-Function _SetFormatRightRTF ( ParentForm , ControlName , Value  )
-*-----------------------------------------------------------------------------*
+FUNCTION _SetFormatRightRTF ( ParentForm , ControlName , Value  )
+
    LOCAL aParForm, H
+
    H := GetControlHandle( ControlName , ParentForm )
    aParForm := GetParForm( H )
 
    aParForm[1] := .f.
    aParForm[2] := .f.
 
-Return SetParForm(H, aParForm[1], aParForm[2], Value, aParForm[4], aParForm[5])
+   RETURN SetParForm(H, aParForm[1], aParForm[2], Value, aParForm[4], aParForm[5])
 
-*-----------------------------------------------------------------------------*
-Function _SetFormatTabRTF ( ParentForm , ControlName , Value  )
-*-----------------------------------------------------------------------------*
+FUNCTION _SetFormatTabRTF ( ParentForm , ControlName , Value  )
+
    LOCAL aParForm, H
+
    H := GetControlHandle( ControlName , ParentForm )
    aParForm := GetParForm( H )
 
-Return SetParForm(H, aParForm[1], aParForm[2], aParForm[3], Value, aParForm[5])
+   RETURN SetParForm(H, aParForm[1], aParForm[2], aParForm[3], Value, aParForm[5])
 
-*-----------------------------------------------------------------------------*
-Function RangeSelRTF(ControlHandle)
-*-----------------------------------------------------------------------------*
-   Local aRange
+FUNCTION RangeSelRTF(ControlHandle)
+
+   LOCAL aRange
+
    aRange = GetSelRange(ControlHandle)
 
-Return aRange[2]-aRange[1]
+   RETURN aRange[2]-aRange[1]
 
-*=============================================================
-
+   *=============================================================
 
 #pragma BEGINDUMP
-
 
 #define _WIN32_IE 0x0500
 #define HB_OS_WIN_USED
@@ -226,6 +228,7 @@ static BOOL IsWinxpSp1Min(void)
    osvi.dwOSVersionInfoSize = sizeof( osvi );
 
    if ( !GetVersionEx(&osvi) )
+
       return FALSE;
 
    if ( osvi.dwMajorVersion >= 5 )
@@ -234,10 +237,13 @@ static BOOL IsWinxpSp1Min(void)
       {
          pch = strstr( osvi.szCSDVersion, "Service Pack" );
          if ( lstrcmpi( pch, "Service Pack 1" ) >= 0 )
+
             return TRUE;
          else
+
             return FALSE;
       }
+
       return TRUE;
    }
 
@@ -1211,3 +1217,4 @@ HB_FUNC( SETSCROLLPOSRTF )                         // SetScrollPosRtf(HWND hwnd,
 }
 
 #pragma ENDDUMP
+

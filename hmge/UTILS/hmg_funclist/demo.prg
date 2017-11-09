@@ -1,14 +1,13 @@
 /*
- * HMG - Harbour Win32 GUI library Demo
- *
- * Copyright 2015 Dr. Claudio Soto <srvet@adinet.com.uy>
- *
- * Adapted for MiniGUI Extended Edition by Grigory Filatov
+* HMG - Harbour Win32 GUI library Demo
+* Copyright 2015 Dr. Claudio Soto <srvet@adinet.com.uy>
+* Adapted for MiniGUI Extended Edition by Grigory Filatov
 */
 
 #include "hmg.ch"
 
 PROCEDURE Main
+
    LOCAL aRows1 := HMG_GetHBFunctions()
    LOCAL aRows2 := {}
    LOCAL aData := HMG_GetDLLFunctions( "user32.dll" )
@@ -18,14 +17,14 @@ PROCEDURE Main
    SET FONT TO "Tahoma", 12
 
    DEFINE WINDOW Form_1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 660 ;
-      TITLE "Harbour Registered And WinAPI Available Functions" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 660 ;
+         TITLE "Harbour Registered And WinAPI Available Functions" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
-      ON KEY ESCAPE ACTION ThisWindow.Release      
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
       @ 10,10 GRID Grid_1 ;
          WIDTH 614 ;
@@ -46,10 +45,10 @@ PROCEDURE Main
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN
-
+   RETURN
 
 FUNCTION HMG_GetHBFunctions()
+
    LOCAL nSymbols, nFunctions, n, aSym := {}
 
    nSymbols := __dynsCount()
@@ -61,8 +60,7 @@ FUNCTION HMG_GetHBFunctions()
       ENDIF
    NEXT
 
-RETURN aSym
-
+   RETURN aSym
 
 #pragma BEGINDUMP
 
@@ -95,11 +93,12 @@ _DLL_FUNC_RET _DLL_FUNC_TYPE _FUNC_NAME _DLL_FUNC_PARAM \
       pfunc = (PFUNC) GetProcAddress( hLib, _DLL_FUNC_NAMESTRINGAW );\
    }\
    if( pfunc == NULL )\
+
       return( (_DLL_FUNC_RET) _DLL_FUNC_RETFAILCALL );\
    else\
+
       return pfunc _DLL_FUNC_CALLPARAM;\
 }
-
 
 HMG_DEFINE_DLL_FUNC ( win_MapAndLoad,                              // user function name
                       "Imagehlp.dll",                              // dll name
@@ -141,7 +140,6 @@ HMG_DEFINE_DLL_FUNC ( win_ImageRvaToVa,                            // user funct
                       NULL                                         // return value if fail call function of dll
                     )
 
-
 HB_FUNC ( HMG_GETDLLFUNCTIONS )
 {
     CHAR *cDllName = ( CHAR * ) hb_parc( 1 );
@@ -170,3 +168,4 @@ HB_FUNC ( HMG_GETDLLFUNCTIONS )
 }
 
 #pragma ENDDUMP
+

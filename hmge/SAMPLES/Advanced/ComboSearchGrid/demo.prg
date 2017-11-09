@@ -1,19 +1,19 @@
 #include <hmg.ch>
 #include "combosearchgrid.ch"
 
-Function Main
+FUNCTION Main
 
-   local aItems := randomdatafill()
+   LOCAL aItems := randomdatafill()
 
-   define window csg at 0, 0 width 600 height 500 main title 'ComboSearchGrid - Sample'
-      define label namelabel
+   DEFINE WINDOW csg at 0, 0 width 600 height 500 main title 'ComboSearchGrid - Sample'
+      DEFINE LABEL namelabel
          row 10
          col 10
          width 60
          value 'Name'
          vcenteralign .t.
-      end label
-      define combosearchgrid name
+      END LABEL
+      DEFINE COMBOSEARCHgrid name
          row 10
          col 80
          width 480
@@ -23,66 +23,71 @@ Function Main
          justify { 0, 0, 1 }
          anywheresearch .t.
          showheaders .t.
-      end combosearchgrid
-      define label label2
+      END COMBOSEARCHgrid
+      DEFINE LABEL label2
          row 40
          col 10
          width 60
          value 'Label 2'
          vcenteralign .t.
-      end label
-      define textbox textbox2
+      END LABEL
+      DEFINE TEXTBOX textbox2
          row 40
          col 80
          width 200
-      end textbox
-      define button selected
+      END TEXTBOX
+      DEFINE BUTTON selected
          row 40
          col 300
          caption 'Click after selecting an item'
          width 200
          action findselecteditem()
-      end button
-   end window
+      END BUTTON
+   END WINDOW
    csg.center
    csg.activate
 
-Return Nil
+   RETURN NIL
 
-function findselecteditem
-   local aData := {}
-   local i
-   local cMsg
+FUNCTION findselecteditem
+
+   LOCAL aData := {}
+   LOCAL i
+   LOCAL cMsg
 
    aData := _HMG_CSG_ItemSelected( 'csg', 'name' )
-   if len( aData ) > 0
+   IF len( aData ) > 0
       cMsg := '{'
-      for i := 1 to len( aData )
-         cMsg := cMsg + aData[ i ] 
-         if i < len( aData )
-            cMsg := cMsg + ', ' 
-         endif
-      next i
+      FOR i := 1 to len( aData )
+         cMsg := cMsg + aData[ i ]
+         IF i < len( aData )
+            cMsg := cMsg + ', '
+         ENDIF
+      NEXT i
       cMsg := cMsg + '}'
       msginfo( 'You have selected the item - ' + cMsg )
-   endif
-   return nil
+   ENDIF
 
-function randomdatafill
-   local aItems := {}
-   local i, j
-   local c := ''
-   local d := ''
+   RETURN NIL
 
-   for i := 1 to 10000
+FUNCTION randomdatafill
+
+   LOCAL aItems := {}
+   LOCAL i, j
+   LOCAL c := ''
+   LOCAL d := ''
+
+   FOR i := 1 to 10000
       c := ''
-      for j := 1 to 10
+      FOR j := 1 to 10
          c := c + chr( int( random( 26 ) ) + 65 )
-      next j
+      NEXT j
       d := ''
-      for j := 1 to 5
+      FOR j := 1 to 5
          d := d + chr( int( random( 26 ) ) + 65 )
-      next j
+      NEXT j
       aadd( aItems, { c, d, alltrim( str( i ) ) } )
-   next i
-   return aItems
+   NEXT i
+
+   RETURN aItems
+

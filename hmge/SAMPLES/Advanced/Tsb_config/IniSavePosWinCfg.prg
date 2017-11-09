@@ -1,30 +1,28 @@
 /*
- * MINIGUI - Harbour Win32 GUI library
- *
- * Copyright 2012 Janusz Pora <januszpora@onet.eu>
- *
- * 2014: Modified by Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
- *
+* MINIGUI - Harbour Win32 GUI library
+* Copyright 2012 Janusz Pora <januszpora@onet.eu>
+* 2014: Modified by Andrey Verchenko <verchenkoag@gmail.com>. Dmitrov, Russia
 */
 
 #include "minigui.ch"
 
 // store config file to current folder
-#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".config" ) 
+#define INI_FILE_WIN_CFG  ChangeFileExt( Application.ExeName, ".config" )
 // OR store config file to temporary folder
 //#define INI_FILE_WIN_CFG  GetTempFolder() + "\" + cFileNoPath( ChangeFileExt( Application.ExeName, ".config" ) )
 
-/////////////////////////////////////////////////////////////////////
 // Function: Restore the window coordinates of the ini-file
-Function IniGetPosWindow( FormName, cProgName )
-   Local cSection, actpos := {0,0,0,0}
-   Local col , row , width , height
-   Local cPathFileConfig
 
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := GetProperty(FormName, "Title")
+FUNCTION IniGetPosWindow( FormName, cProgName )
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+   LOCAL cSection, actpos := {0,0,0,0}
+   LOCAL col , row , width , height
+   LOCAL cPathFileConfig
+
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := GetProperty(FormName, "Title")
+
+   cPathFileConfig := INI_FILE_WIN_CFG
 
    GetWindowRect( GetFormHandle( FormName ), actpos )
    cSection := FormName
@@ -43,21 +41,22 @@ Function IniGetPosWindow( FormName, cProgName )
       IF width > 0 .AND. height > 0
          MoveWindow( GetFormHandle( FormName ) , col , row , width , height , .t. )
       ENDIF
-   ENDIF 
+   ENDIF
 
-Return Nil
+   RETURN NIL
 
-/////////////////////////////////////////////////////////////////////
-// Function: Save the coordinates of the window in the ini-file
-Function IniSetPosWindow( FormName, cProgName )
-   Local cSection, actpos := {0,0,0,0}
-   Local col , row , width , height
-   Local cText, cPathFileConfig
+   // Function: Save the coordinates of the window in the ini-file
 
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := GetProperty(FormName, "Title")
+FUNCTION IniSetPosWindow( FormName, cProgName )
 
-   cPathFileConfig := INI_FILE_WIN_CFG 
+   LOCAL cSection, actpos := {0,0,0,0}
+   LOCAL col , row , width , height
+   LOCAL cText, cPathFileConfig
+
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := GetProperty(FormName, "Title")
+
+   cPathFileConfig := INI_FILE_WIN_CFG
 
    GetWindowRect( GetFormHandle( FormName ), actpos )
    cSection := FormName
@@ -87,11 +86,13 @@ Function IniSetPosWindow( FormName, cProgName )
    WriteIni( cSection, "width"    , HB_NToS(width)  , cPathFileConfig )
    WriteIni( cSection, "height"   , HB_NToS(height) , cPathFileConfig )
 
-Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-STATIC Function GetIni( cSection, cEntry, cDefault, cFile )
-RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
-*--------------------------------------------------------*
-STATIC Function WriteIni( cSection, cEntry, cValue, cFile )
-RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+STATIC FUNCTION GetIni( cSection, cEntry, cDefault, cFile )
+
+   RETURN GetPrivateProfileString(cSection, cEntry, cDefault, cFile )
+
+STATIC FUNCTION WriteIni( cSection, cEntry, cValue, cFile )
+
+   RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
+

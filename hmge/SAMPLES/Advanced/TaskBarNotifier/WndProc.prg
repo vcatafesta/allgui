@@ -1,9 +1,7 @@
 /*
- * WNDPROC for Harbour TTaskbarNotifier Class 
- * Copyright 2007 P.Chornyj <myorg63@mail.ru>
- *
- * Last revision 19.09.2007
- *
+* WNDPROC for Harbour TTaskbarNotifier Class
+* Copyright 2007 P.Chornyj <myorg63@mail.ru>
+* Last revision 19.09.2007
 */
 
 #include "taskbarnotifier.ch"
@@ -11,7 +9,7 @@
 ANNOUNCE CLASS_TTASKBARNOTIFIER_WP
 
 /*
- (WNDPROC) _OnTaskbarNotifierEvents  
+(WNDPROC) _OnTaskbarNotifierEvents
 */
 
 #define WM_USER       1024
@@ -24,43 +22,44 @@ ANNOUNCE CLASS_TTASKBARNOTIFIER_WP
 #define WM_MOUSELEAVE 675
 
 FUNCTION _OnTaskbarNotifierEvents( hWnd, Msg, nwParam, nlParam )
-LOCAL TN := TTaskbarNotifier():GetById( hWnd )
-LOCAL nResult := 0
 
-IF ( Hb_IsObject( TN ) )
+   LOCAL TN := TTaskbarNotifier():GetById( hWnd )
+   LOCAL nResult := 0
 
-   SWITCH Msg
-   CASE WM_PAINT
+   IF ( Hb_IsObject( TN ) )
+
+      SWITCH Msg
+      CASE WM_PAINT
          TN:OnPaint()
          nResult := 0
          EXIT
 
-   CASE WM_MOUSEENTER
+      CASE WM_MOUSEENTER
          TN:OnMouseEnter( nwParam, nlParam )
          nResult := 1
          EXIT
 
-   CASE WM_MOUSEMOVE
-   CASE WM_MOUSEHOVER
+      CASE WM_MOUSEMOVE
+      CASE WM_MOUSEHOVER
          TN:OnMouseMove( nwParam, nlParam )
          nResult := 1
          EXIT
 
-   CASE WM_MOUSELEAVE
+      CASE WM_MOUSELEAVE
          TN:OnMouseLeave( nwParam, nlParam )
          nResult := 1
          EXIT
 
-   CASE WM_LBUTTONDBLCLK
+      CASE WM_LBUTTONDBLCLK
          TN:OnMouseDblClick( nwParam, nlParam )
          nResult := 1
          EXIT
 
-   END SWITCH
+      END SWITCH
 
-ENDIF
+   ENDIF
 
-RETURN ( nResult )
+   RETURN ( nResult )
 
 #pragma BEGINDUMP
 
@@ -168,15 +167,18 @@ LRESULT CALLBACK TTaskbarNotifierWndProc( HWND hWnd, UINT message, WPARAM wParam
 
       lRes = hb_parnl( -1 );
    }
-   
+
    if ( lRes != 0 )
    {
+
            return lRes;
    }
    else
    {
+
            return( DefWindowProc( hWnd, message, wParam, lParam ));
    }
 }
 
 #pragma ENDDUMP
+

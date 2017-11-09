@@ -1,18 +1,10 @@
 ﻿/**
- *
- * WordScribe
- *
- * Based on the Rich Edit demo.
- *
- * Copyright 2003-2009 by Janusz Pora <JanuszPora@onet.eu>
- *
- * Adapted and Enhanced for HMG by Dr. Claudio Soto, April 2014
- *
- * Enhanced for HMG by Kevin Carmody, April 2016
- *
+* WordScribe
+* Based on the Rich Edit demo.
+* Copyright 2003-2009 by Janusz Pora <JanuszPora@onet.eu>
+* Adapted and Enhanced for HMG by Dr. Claudio Soto, April 2014
+* Enhanced for HMG by Kevin Carmody, April 2016
 */
-
-//***************************************************************************
 
 #include "hmg.ch"
 #include "hfcl.ch"
@@ -20,8 +12,6 @@
 #define MIN_PARAINDENT   0 // in mm
 #define MAX_PARAINDENT   150 // in mm
 #define OFFSET_DLG       30
-
-//***************************************************************************
 
 MEMVAR _HMG_SYSDATA
 
@@ -75,19 +65,19 @@ STATIC aSpaceLabel      := {'1.0', '1.5', '2.0', '2.5', '3.0'}
 STATIC aSpaceValue      := { 1.0,   1.5,   2.0,   2.5,   3.0 }
 STATIC aNumFormatLabel  := { ;
    'No bullets or numbering' , ; // RTF_NOBULLETNUMBER
-   'Bullets'                 , ; // RTF_BULLET
-   'Arabic numerals'         , ; // RTF_ARABICNUMBER
-   'Lowercase letters'       , ; // RTF_LOWERCASELETTER
-   'Lowercase Roman numerals', ; // RTF_UPPERCASELETTER
-   'Uppercase letters'       , ; // RTF_LOWERCASEROMANNUMBER
-   'Uppercase Roman numerals'  } // RTF_UPPERCASEROMANNUMBER
+'Bullets'                 , ; // RTF_BULLET
+'Arabic numerals'         , ; // RTF_ARABICNUMBER
+'Lowercase letters'       , ; // RTF_LOWERCASELETTER
+'Lowercase Roman numerals', ; // RTF_UPPERCASELETTER
+'Uppercase letters'       , ; // RTF_LOWERCASEROMANNUMBER
+'Uppercase Roman numerals'  } // RTF_UPPERCASEROMANNUMBER
 STATIC aNumStyleLabel  := { ;
    'Right parenthesis', ; // RTF_PAREN
-   'Two parentheses'  , ; // RTF_PARENS
-   'Period'           , ; // RTF_PERIOD
-   'No punctuation'   , ; // RTF_PLAIN
-   'Hidden number'      } // RTF_NONUMBER
-  
+'Two parentheses'  , ; // RTF_PARENS
+'Period'           , ; // RTF_PERIOD
+'No punctuation'   , ; // RTF_PLAIN
+'Hidden number'      } // RTF_NONUMBER
+
 STATIC cFileName        := ''
 STATIC cFileFolder      := ''
 STATIC cFileBase        := ''
@@ -106,8 +96,6 @@ STATIC aWriteFilter     := { ;
    {'UTF-8 Text Document (*.txt)'              , '*.txt'}  }
 STATIC nWriteFilter     := 1
 
-//***************************************************************************
-
 PROCEDURE Main(cInitFile)
 
    LOCAL aViewRect := {}
@@ -115,16 +103,16 @@ PROCEDURE Main(cInitFile)
    LOCAL cTab      := E"\t"
 
    DEFINE WINDOW wMain ;
-      AT nMainRow, nMainCol ;
-      WIDTH nMainWidth HEIGHT nMainHeight ;
-      TITLE cTitle ;
-      ICON 'MainIcon' ;
-      ON INIT Refresh() ;
-      ON SIZE MainSize(.N.) ;
-      ON MAXIMIZE MainSize(.Y.) ;
-      ON RELEASE MainExit(.N.) ;
-      MAIN
-  
+         AT nMainRow, nMainCol ;
+         WIDTH nMainWidth HEIGHT nMainHeight ;
+         TITLE cTitle ;
+         ICON 'MainIcon' ;
+         ON INIT Refresh() ;
+         ON SIZE MainSize(.N.) ;
+         ON MAXIMIZE MainSize(.Y.) ;
+         ON RELEASE MainExit(.N.) ;
+         MAIN
+
       DEFINE STATUSBAR
          STATUSITEM ''          TOOLTIP 'Current file'
          STATUSITEM '' WIDTH 25 TOOLTIP 'Document modified'
@@ -136,13 +124,14 @@ PROCEDURE Main(cInitFile)
 
       DEFINE TIMER tiStatus INTERVAL 200 ;
          ACTION {||
-            wMain.STATUSBAR.ITEM(2) := IF(lModified         , '✽', '') // U+273D HEAVY TEARDROP-SPOKED ASTERISK
-            wMain.STATUSBAR.ITEM(3) := IF(ISCAPSLOCKACTIVE(), 'CAP', '')
-            wMain.STATUSBAR.ITEM(4) := IF(ISNUMLOCKACTIVE() , 'NUM', '')
-            wMain.STATUSBAR.ITEM(5) := IF(ISINSERTACTIVE()  , 'INS', '')
-            RETURN NIL
-            }
-  
+      wMain.STATUSBAR.ITEM(2) := IF(lModified         , '✽', '') // U+273D HEAVY TEARDROP-SPOKED ASTERISK
+      wMain.STATUSBAR.ITEM(3) := IF(ISCAPSLOCKACTIVE(), 'CAP', '')
+      wMain.STATUSBAR.ITEM(4) := IF(ISNUMLOCKACTIVE() , 'NUM', '')
+      wMain.STATUSBAR.ITEM(5) := IF(ISINSERTACTIVE()  , 'INS', '')
+
+      RETURN NIL
+      }
+
       ON KEY CONTROL+N  ACTION NewFile()
       ON KEY CONTROL+O  ACTION OpenFile()
       ON KEY CONTROL+S  ACTION SaveFile()
@@ -155,7 +144,7 @@ PROCEDURE Main(cInitFile)
       ON KEY CONTROL+H  ACTION ReplaceText()
       ON KEY F1         ACTION ShortCuts()
 
-      DEFINE MAIN MENU 
+      DEFINE MAIN MENU
 
          POPUP '&File'
             ITEM '&New'               + cTab + 'Ctrl+N'  ACTION NewFile()
@@ -223,7 +212,7 @@ PROCEDURE Main(cInitFile)
 
       END MENU
 
-      DEFINE CONTEXT MENU  
+      DEFINE CONTEXT MENU
 
          ITEM '&Copy'               ACTION Copy()
          ITEM 'C&ut'                ACTION Cut()
@@ -260,7 +249,7 @@ PROCEDURE Main(cInitFile)
 
             BUTTON btSave ;
                TOOLTIP 'Save' ;
-               PICTURE 'Save' ; 
+               PICTURE 'Save' ;
                ACTION SaveFile() ;
                SEPARATOR
 
@@ -315,7 +304,7 @@ PROCEDURE Main(cInitFile)
                TOOLTIP 'Delete' ;
                PICTURE 'Delete' ;
                ACTION Deleter()
-               SEPARATOR
+            SEPARATOR
 
             BUTTON btUndo ;
                TOOLTIP 'Undo' ;
@@ -340,7 +329,7 @@ PROCEDURE Main(cInitFile)
 
             BUTTON btRepl ;
                TOOLTIP 'Replace' ;
-               PICTURE 'Replace' ; 
+               PICTURE 'Replace' ;
                ACTION ReplaceText() ;
                SEPARATOR
 
@@ -368,7 +357,7 @@ PROCEDURE Main(cInitFile)
             ON DISPLAYCHANGE FontSizeSelect(.Y.) ;
             ON ENTER (FontSizeSelect(.Y.), wMain.ebDoc.SETFOCUS())
 
-         DEFINE TOOLBAR tlText BUTTONSIZE 23,23 SIZE 8  FLAT 
+         DEFINE TOOLBAR tlText BUTTONSIZE 23,23 SIZE 8  FLAT
 
             BUTTON btBold ;
                TOOLTIP 'Bold' ;
@@ -392,21 +381,21 @@ PROCEDURE Main(cInitFile)
                TOOLTIP 'Strikeout' ;
                PICTURE 'Strike' ;
                ACTION wMain.ebDoc.FONTSTRIKEOUT := wMain.btStrikeOut.VALUE ;
-               CHECK ;    
+               CHECK ;
                SEPARATOR
 
             BUTTON btSubScript ;
                TOOLTIP 'Subscript' ;
                PICTURE 'Subscript' ;
-               ACTION  (wMain.ebDoc.FONTSCRIPT := IF(wMain.btSubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT), ; 
-                         wMain.btSuperScript.VALUE := .N.) ;  
+               ACTION  (wMain.ebDoc.FONTSCRIPT := IF(wMain.btSubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT), ;
+               wMain.btSuperScript.VALUE := .N.) ;
                CHECK
 
             BUTTON btSuperScript ;
                TOOLTIP 'Superscript' ;
                PICTURE 'Superscript' ;
-               ACTION  (wMain.ebDoc.FONTSCRIPT := IF(wMain.btSuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT), ; 
-                         wMain.btSubScript.VALUE := .N.) ; 
+               ACTION  (wMain.ebDoc.FONTSCRIPT := IF(wMain.btSuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT), ;
+               wMain.btSubScript.VALUE := .N.) ;
                CHECK ;
                SEPARATOR
 
@@ -419,7 +408,7 @@ PROCEDURE Main(cInitFile)
 
             BUTTON btFontColor ;
                TOOLTIP 'Set font foreground color' ;
-               PICTURE 'FontColor' ; 
+               PICTURE 'FontColor' ;
                ACTION FontForeColor()
 
             BUTTON btFontBackColor ;
@@ -451,14 +440,14 @@ PROCEDURE Main(cInitFile)
                PICTURE 'Justify' ;
                ACTION (wMain.ebDoc.PARAALIGNMENT := RTF_JUSTIFY, Refresh()) ;
                CHECK GROUP ;
-               SEPARATOR 
+               SEPARATOR
 
             BUTTON btBulleted ;
                TOOLTIP 'Bulleted paragraphs' ;
                PICTURE 'Number' ;
                ACTION (wMain.ebDoc.PARANUMBERING := ;
-                        IF(wMain.btBulleted.VALUE, RTF_BULLET, RTF_NOBULLETNUMBER), ;
-                        Refresh()) ;
+               IF(wMain.btBulleted.VALUE, RTF_BULLET, RTF_NOBULLETNUMBER), ;
+               Refresh()) ;
                CHECK
 
             BUTTON btOffset2 ;
@@ -470,13 +459,13 @@ PROCEDURE Main(cInitFile)
                TOOLTIP 'Increase indent' ;
                PICTURE 'Indent1' ;
                ACTION (wMain.ebDoc.PARAINDENT := MIN(MAX_PARAINDENT, wMain.ebDoc.PARAINDENT + 5))
-      
+
             BUTTON btLineSpacing ;
                TOOLTIP 'Line spacing' ;
                PICTURE 'ParaLineSpacing' ;
                ACTION NIL ;
                WHOLEDROPDOWN ;
-               SEPARATOR 
+               SEPARATOR
 
             DEFINE DROPDOWN MENU BUTTON btLineSpacing
                ITEM '1.0 ' ACTION wMain.ebDoc.PARALINESPACING := 1.0
@@ -524,7 +513,7 @@ PROCEDURE Main(cInitFile)
       wMain.ebDoc.FONTBACKCOLOR   := aFontBackColor
       wMain.ebDoc.UNSELECTALL()
       wMain.ebDoc.CARETPOS        := 0
-      ClearUndoBuffer()
+      CLEARUndoBuffer()
 
    END WINDOW
 
@@ -538,8 +527,6 @@ PROCEDURE Main(cInitFile)
    ACTIVATE WINDOW wMain
 
    RETURN // Main
-
-//***************************************************************************
 
 INIT PROCEDURE MainInit
 
@@ -601,8 +588,6 @@ INIT PROCEDURE MainInit
 
    RETURN // MainInit
 
-//***************************************************************************
-
 STATIC PROCEDURE RegRead(cKey, xVal)
 
    LOCAL xRead  := REGISTRYREAD(cRegBase + cKey)
@@ -619,8 +604,6 @@ STATIC PROCEDURE RegRead(cKey, xVal)
    END
 
    RETURN // RegRead
-
-//***************************************************************************
 
 STATIC PROCEDURE MainExit(lSub)
 
@@ -687,8 +670,6 @@ STATIC PROCEDURE MainExit(lSub)
 
    RETURN // MainExit
 
-//***************************************************************************
-
 STATIC PROCEDURE RegWrite(cKey, xVal)
 
    LOCAL xWrite := 0
@@ -706,8 +687,6 @@ STATIC PROCEDURE RegWrite(cKey, xVal)
    REGISTRYWRITE(cRegBase + cKey, xWrite)
 
    RETURN // RegWrite
-
-//***************************************************************************
 
 STATIC PROCEDURE MainSize(lSetMax)
 
@@ -735,8 +714,6 @@ STATIC PROCEDURE MainSize(lSetMax)
 
    RETURN // MainSize
 
-//***************************************************************************
-
 STATIC PROCEDURE EditKey
 
    LOCAL cKey := HMG_GETLASTCHARACTEREX()
@@ -749,8 +726,6 @@ STATIC PROCEDURE EditKey
    END
 
    RETURN // EditKey
-
-//***************************************************************************
 
 STATIC PROCEDURE Refresh
 
@@ -793,16 +768,14 @@ STATIC PROCEDURE Refresh
 
    RETURN // Refresh
 
-//***************************************************************************
-
 STATIC PROCEDURE DoLink
 
    LOCAL cLink := ALLTRIM(THISRICHEDITBOX.GETCLICKLINKTEXT)
 
    DO CASE
    CASE HMG_LOWER(HB_USUBSTR(cLink,1,7)) == 'http://' .OR. ;
-      HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
-      HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.' 
+         HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
+         HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.'
       SHELLEXECUTE(NIL, 'Open', cLink, NIL, NIL, SW_SHOWNORMAL)
    CASE '@' $ cLink .AND. '.' $ cLink .AND. .NOT.(' ' $ cLink)
       SHELLEXECUTE(NIL, 'Open', 'rundll32.exe', 'url.dll,FileProtocolHandler mailto:' + cLink, NIL, SW_SHOWNORMAL)
@@ -811,8 +784,6 @@ STATIC PROCEDURE DoLink
    END
 
    RETURN // DoLink
-
-//***************************************************************************
 
 STATIC PROCEDURE NewFileName(cNewName)
 
@@ -846,39 +817,33 @@ STATIC PROCEDURE NewFileName(cNewName)
 
    RETURN // NewFileName
 
-//***************************************************************************
-
 STATIC PROCEDURE NewFile
 
    IF ! lModified .OR. MSGYESNO('Clear the current file?', 'New')
-     NewFileName('')
-     wMain.ebDoc.VALUE := ''
-     lModified := .N.
+      NewFileName('')
+      wMain.ebDoc.VALUE := ''
+      lModified := .N.
    END
 
    RETURN // NewFile
 
-//***************************************************************************
-
 STATIC PROCEDURE OpenFile(cAuxFileName)
 
    IF lModified .AND. MSGYESNO('Save changes?', 'Open')
-     SaveFile()
+      SaveFile()
    END
 
    IF EMPTY(cAuxFileName)
-     cAuxFileName := GETFILE(aReadFilter, 'Open', cFileFolder, NIL, NIL, nReadFilter)
+      cAuxFileName := GETFILE(aReadFilter, 'Open', cFileFolder, NIL, NIL, nReadFilter)
    END
 
    IF ! EMPTY(cAuxFileName)
-     NewFileName(cAuxFileName)
-     ReadFile()
-     lModified := .N.
+      NewFileName(cAuxFileName)
+      READFile()
+      lModified := .N.
    END
 
    RETURN // OpenFile
-
-//***************************************************************************
 
 STATIC PROCEDURE ReadFile
 
@@ -920,8 +885,6 @@ STATIC PROCEDURE ReadFile
 
    RETURN // ReadFile
 
-//***************************************************************************
-
 STATIC PROCEDURE CloseFile
 
    IF MSGYESNO('Close the current file?', 'Close')
@@ -930,8 +893,6 @@ STATIC PROCEDURE CloseFile
    END
 
    RETURN // CloseFile
-
-//***************************************************************************
 
 STATIC PROCEDURE SaveFile
 
@@ -942,8 +903,6 @@ STATIC PROCEDURE SaveFile
    END
 
    RETURN // SaveFile
-
-//***************************************************************************
 
 STATIC PROCEDURE SaveFileAs
 
@@ -964,14 +923,12 @@ STATIC PROCEDURE SaveFileAs
       NIL, cFileName, @cFileExt, @nWriteFilter)
 
    IF ! EMPTY(cAuxFileName) .AND. (! lUnicode .OR. nWriteFilter != 2 .OR. ;
-      MsgYesNo('This document contains Unicode characters, which will be lost if you save to an ANSI file.  Proceed?', cTitle))
+         MsgYesNo('This document contains Unicode characters, which will be lost if you save to an ANSI file.  Proceed?', cTitle))
       NewFileName(cAuxFileName)
       WriteFile()
    END
 
    RETURN // SaveFile
-
-//***************************************************************************
 
 STATIC PROCEDURE WriteFile
 
@@ -1005,8 +962,6 @@ STATIC PROCEDURE WriteFile
 
    RETURN // WriteFile
 
-//***************************************************************************
-
 STATIC PROCEDURE Print
 
    LOCAL lPrint  := .N.
@@ -1025,8 +980,6 @@ STATIC PROCEDURE Print
 
    RETURN // Print
 
-//***************************************************************************
-
 STATIC PROCEDURE PrintPreview
 
    LOCAL lPrint  := .N.
@@ -1040,7 +993,7 @@ STATIC PROCEDURE PrintPreview
    LOCAL nCol    := OPENPRINTERGETPAGEWIDTH() / 2   // in millimeters
    LOCAL bPage   := {||@nRow, nCol PRINT 'Page ' + HB_NTOS(nPage++) CENTER}
 
-   SELECT PRINTER DIALOG TO lPrint PREVIEW 
+   SELECT PRINTER DIALOG TO lPrint PREVIEW
 
    IF lPrint
       wMain.ebDoc.RTFPRINT(aSelect, nLeft, nTop, nRight, nBottom, bPage)
@@ -1048,20 +1001,18 @@ STATIC PROCEDURE PrintPreview
 
    RETURN // PrintPreview
 
-//***************************************************************************
-
 STATIC PROCEDURE Associations
 
    LOCAL lRtfAssoc, lTxtAssoc
 
-   DEFINE WINDOW wAssoc ; 
-      AT wMain.ROW + 160, wMain.COL + 40 ;
-      WIDTH 440 ;
-      HEIGHT 150 ; 
-      TITLE 'File associations' ; 
-      MODAL ;
-      NOSIZE ;
-      ON INIT AssocInit(@lRtfAssoc, @lTxtAssoc)
+   DEFINE WINDOW wAssoc ;
+         AT wMain.ROW + 160, wMain.COL + 40 ;
+         WIDTH 440 ;
+         HEIGHT 150 ;
+         TITLE 'File associations' ;
+         MODAL ;
+         NOSIZE ;
+         ON INIT AssocInit(@lRtfAssoc, @lTxtAssoc)
 
       @  10, 10 CHECKBOX ckRtfMenu ;
          CAPTION 'Include "Open with WordScribe" item on right click menu for RTF files' ;
@@ -1074,12 +1025,12 @@ STATIC PROCEDURE Associations
          VALUE .N.
 
       @  80,135 BUTTON btOk ;
-         CAPTION 'OK' ;  
+         CAPTION 'OK' ;
          ACTION AssocSet(lRtfAssoc, lTxtAssoc) ;
          WIDTH 80 HEIGHT 25
 
-      @  80,225 BUTTON btCancel ; 
-         CAPTION 'Cancel' ;  
+      @  80,225 BUTTON btCancel ;
+         CAPTION 'Cancel' ;
          ACTION wAssoc.Release ;
          WIDTH 80 HEIGHT 25
 
@@ -1087,13 +1038,11 @@ STATIC PROCEDURE Associations
       ON KEY ESCAPE ACTION wAssoc.RELEASE
       ON KEY F1     ACTION Shortcuts()
 
-   END WINDOW 
+   END WINDOW
 
    ACTIVATE WINDOW wAssoc
 
    RETURN // Associations
-
-//***************************************************************************
 
 STATIC PROCEDURE AssocInit(lRtfAssoc, lTxtAssoc)
 
@@ -1109,7 +1058,7 @@ STATIC PROCEDURE AssocInit(lRtfAssoc, lTxtAssoc)
       END
       cRegExe := REGISTRYREAD('HKCR\' + cClass + '\shell\' + cMenuItem + '\command\')
       IF HB_ISSTRING(cRegExe) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cRegExe)
-         lRtfAssoc := .Y.    
+         lRtfAssoc := .Y.
          BREAK
       END
       lRtfAssoc := .N.
@@ -1123,7 +1072,7 @@ STATIC PROCEDURE AssocInit(lRtfAssoc, lTxtAssoc)
       END
       cRegExe := REGISTRYREAD('HKCR\' + cClass + '\shell\' + cMenuItem + '\command\')
       IF HB_ISSTRING(cRegExe) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cRegExe)
-         lTxtAssoc := .Y.    
+         lTxtAssoc := .Y.
          BREAK
       END
       lTxtAssoc := .N.
@@ -1133,8 +1082,6 @@ STATIC PROCEDURE AssocInit(lRtfAssoc, lTxtAssoc)
    wAssoc.ckTxtMenu.VALUE := lTxtAssoc
 
    RETURN // AssocInit
-
-//***************************************************************************
 
 STATIC PROCEDURE AssocSet(lRtfAssoc, lTxtAssoc)
 
@@ -1167,16 +1114,12 @@ STATIC PROCEDURE AssocSet(lRtfAssoc, lTxtAssoc)
 
    RETURN // AssocSet
 
-//***************************************************************************
-
 STATIC PROCEDURE Bold
 
    wMain.ebDoc.FONTBOLD := ! (wMain.ebDoc.FONTBOLD)
    Refresh()
 
    RETURN // Bold
-
-//***************************************************************************
 
 STATIC PROCEDURE Italic
 
@@ -1185,8 +1128,6 @@ STATIC PROCEDURE Italic
 
    RETURN // Italic
 
-//***************************************************************************
-
 STATIC PROCEDURE Underline
 
    wMain.ebDoc.FONTUNDERLINE := ! (wMain.ebDoc.FONTUNDERLINE)
@@ -1194,23 +1135,17 @@ STATIC PROCEDURE Underline
 
    RETURN // Underline
 
-//***************************************************************************
-
 STATIC PROCEDURE Undo
 
    wMain.ebDoc.UNDO()
 
    RETURN // Undo
 
-//***************************************************************************
-
 STATIC PROCEDURE Redo
 
    wMain.ebDoc.REDO()
 
    RETURN // Redo
-
-//***************************************************************************
 
 STATIC PROCEDURE ClearUndoBuffer
 
@@ -1220,15 +1155,11 @@ STATIC PROCEDURE ClearUndoBuffer
 
    RETURN // ClearUndoBuffer
 
-//***************************************************************************
-
 STATIC PROCEDURE Copy
 
    wMain.ebDoc.SELCOPY()
 
    RETURN // Copy
-
-//***************************************************************************
 
 STATIC PROCEDURE Cut
 
@@ -1236,15 +1167,11 @@ STATIC PROCEDURE Cut
 
    RETURN // Cut
 
-//***************************************************************************
-
 STATIC PROCEDURE Paste
 
    wMain.ebDoc.SELPASTE()
 
    RETURN // Paste
-
-//***************************************************************************
 
 STATIC PROCEDURE PasteUnformatted
 
@@ -1256,23 +1183,17 @@ STATIC PROCEDURE PasteUnformatted
 
    RETURN // PasteUnformatted
 
-//***************************************************************************
-
 STATIC PROCEDURE Deleter
 
    wMain.ebDoc.SELCLEAR()
 
    RETURN // Deleter
 
-//***************************************************************************
-
 STATIC PROCEDURE SelectAll
 
    wMain.ebDoc.SELECTALL()
 
    RETURN // SelectAll
-
-//***************************************************************************
 
 STATIC PROCEDURE FindText
 
@@ -1284,8 +1205,6 @@ STATIC PROCEDURE FindText
 
    RETURN // FindText
 
-//***************************************************************************
-
 STATIC PROCEDURE ReplaceText
 
    cFind := wMain.ebDoc.GETSELECTTEXT
@@ -1295,8 +1214,6 @@ STATIC PROCEDURE ReplaceText
       CHECKWHOLEWORD lWholeWord
 
    RETURN // ReplaceText
-
-//***************************************************************************
 
 STATIC PROCEDURE DoFindReplace
 
@@ -1338,8 +1255,6 @@ STATIC PROCEDURE DoFindReplace
 
    RETURN // DoFindReplace
 
-//***************************************************************************
-
 STATIC PROCEDURE MoveFindReplace(nPos)
 
    LOCAL aCharPos := wMain.ebDoc.GETPOSCHAR(nPos)
@@ -1354,8 +1269,6 @@ STATIC PROCEDURE MoveFindReplace(nPos)
    END
 
    RETURN // MoveFindReplace
-
-//***************************************************************************
 
 STATIC PROCEDURE FontNameSelect(lDisplay)
 
@@ -1374,8 +1287,6 @@ STATIC PROCEDURE FontNameSelect(lDisplay)
 
    RETURN // FontNameSelect
 
-//***************************************************************************
-
 STATIC PROCEDURE FontSizeSelect(lDisplay)
 
    LOCAL nPos := wMain.coFontSize.VALUE
@@ -1392,8 +1303,6 @@ STATIC PROCEDURE FontSizeSelect(lDisplay)
    END
 
    RETURN // FontSizeSelect
-
-//***************************************************************************
 
 STATIC PROCEDURE FontFormat
 
@@ -1422,18 +1331,16 @@ STATIC PROCEDURE FontFormat
 
    RETURN // FontFormat
 
-//***************************************************************************
-
 STATIC PROCEDURE TextFormat
 
-   DEFINE WINDOW wText ; 
-      AT wMain.ROW + 160, wMain.COL + 40 ;
-      WIDTH 340 ;
-      HEIGHT 160 ; 
-      TITLE 'Text' ; 
-      MODAL ;
-      NOSIZE ;
-      ON INIT TextInit()
+   DEFINE WINDOW wText ;
+         AT wMain.ROW + 160, wMain.COL + 40 ;
+         WIDTH 340 ;
+         HEIGHT 160 ;
+         TITLE 'Text' ;
+         MODAL ;
+         NOSIZE ;
+         ON INIT TextInit()
 
       @  5, 10 FRAME frAlign ;
          CAPTION 'Alignment' ;
@@ -1441,10 +1348,10 @@ STATIC PROCEDURE TextFormat
          HEIGHT 110
 
       @ 25, 15 RADIOGROUP rgScript ;
-         OPTIONS aScriptLabel ;  
-         VALUE 1 ;  
+         OPTIONS aScriptLabel ;
+         VALUE 1 ;
          WIDTH 90 ;
-         SPACING 25 
+         SPACING 25
 
       @  5,115 FRAME frIndent ;
          CAPTION 'Attributes' ;
@@ -1457,12 +1364,12 @@ STATIC PROCEDURE TextFormat
          VALUE .N.
 
       @ 25,240 BUTTON btOk ;
-         CAPTION 'OK' ;  
+         CAPTION 'OK' ;
          ACTION TextSet() ;
          WIDTH 80 HEIGHT 25
 
-      @ 55,240 BUTTON btCancel ; 
-         CAPTION 'Cancel' ;  
+      @ 55,240 BUTTON btCancel ;
+         CAPTION 'Cancel' ;
          ACTION wText.Release ;
          WIDTH 80 HEIGHT 25
 
@@ -1470,13 +1377,11 @@ STATIC PROCEDURE TextFormat
       ON KEY ESCAPE ACTION wText.RELEASE
       ON KEY F1     ACTION Shortcuts()
 
-   END WINDOW 
+   END WINDOW
 
    ACTIVATE WINDOW wText
 
    RETURN // TextFormat
-
-//***************************************************************************
 
 STATIC PROCEDURE TextInit
 
@@ -1484,8 +1389,6 @@ STATIC PROCEDURE TextInit
    wText.ckLink.VALUE   := wMain.ebDoc.LINK
 
    RETURN // TextInit
-
-//***************************************************************************
 
 STATIC PROCEDURE TextSet
 
@@ -1495,21 +1398,19 @@ STATIC PROCEDURE TextSet
 
    RETURN // TextSet
 
-//***************************************************************************
-
 STATIC PROCEDURE ParagraphFormat
 
    LOCAL lNum
    LOCAL xNew, xOld
 
-   DEFINE WINDOW wPar ; 
-      AT wMain.ROW + 160, wMain.COL + 40 ;
-      WIDTH 370 ;
-      HEIGHT 440 ; 
-      TITLE 'Paragraph' ; 
-      MODAL ;
-      NOSIZE ;
-      ON INIT ParagraphInit()
+   DEFINE WINDOW wPar ;
+         AT wMain.ROW + 160, wMain.COL + 40 ;
+         WIDTH 370 ;
+         HEIGHT 440 ;
+         TITLE 'Paragraph' ;
+         MODAL ;
+         NOSIZE ;
+         ON INIT ParagraphInit()
 
       @   5, 10 FRAME frAlign ;
          CAPTION 'Alignment' ;
@@ -1517,39 +1418,39 @@ STATIC PROCEDURE ParagraphFormat
          HEIGHT 135
 
       @  25, 15 RADIOGROUP rgAlign ;
-         OPTIONS aAlignLabel ;  
-         VALUE 1 ;  
+         OPTIONS aAlignLabel ;
+         VALUE 1 ;
          WIDTH 60 ;
-         SPACING 25 
+         SPACING 25
 
       @   5, 85 FRAME frIndent ;
          CAPTION 'Spacing' ;
          WIDTH 175 ;
          HEIGHT 135
 
-      @  30, 95 LABEL laLeftIndent ; 
+      @  30, 95 LABEL laLeftIndent ;
          VALUE 'Left indent (mm)' ;
-         WIDTH 90 ; 
+         WIDTH 90 ;
          HEIGHT 23
 
       @  30,195 TEXTBOX tbLeftIndent ;
-         WIDTH 40 ;  
+         WIDTH 40 ;
          VALUE 1 ;
          NUMERIC INPUTMASK '999'
 
-      @  60, 95 LABEL laLeftOffset ; 
+      @  60, 95 LABEL laLeftOffset ;
          VALUE 'Left offset (mm)' ;
-         WIDTH 90 ; 
+         WIDTH 90 ;
          HEIGHT 23
 
       @  60,195 TEXTBOX tbLeftOffset ;
-         WIDTH 40 ;  
+         WIDTH 40 ;
          VALUE 1 ;
          NUMERIC INPUTMASK '999'
 
-      @  90, 95 LABEL laLineSpace ; 
+      @  90, 95 LABEL laLineSpace ;
          VALUE 'Line spacing' ;
-         WIDTH 80 ; 
+         WIDTH 80 ;
          HEIGHT 23
 
       @  90,180 COMBOBOX coLineSpace ;
@@ -1560,8 +1461,8 @@ STATIC PROCEDURE ParagraphFormat
          DISPLAYEDIT ;
          ON GOTFOCUS  (xOld := wPar.coLineSpace.DISPLAYVALUE) ;
          ON LOSTFOCUS (xNew := VAL(wPar.coLineSpace.DISPLAYVALUE), ;
-                       IF(xNew >= 0.2 .AND. xNew < 100, ;
-                       NIL, wPar.coLineSpace.DISPLAYVALUE := xOld))
+         IF(xNew >= 0.2 .AND. xNew < 100, ;
+         NIL, wPar.coLineSpace.DISPLAYVALUE := xOld))
 
       @ 145, 10 FRAME frNum ;
          CAPTION 'Bullets and numbering' ;
@@ -1569,24 +1470,24 @@ STATIC PROCEDURE ParagraphFormat
          HEIGHT 250
 
       @ 165, 15 RADIOGROUP rgNumFormat ;
-         OPTIONS aNumFormatLabel ;  
-         VALUE 1 ;  
+         OPTIONS aNumFormatLabel ;
+         VALUE 1 ;
          WIDTH 185 ;
          SPACING 25 ;
          ON CHANGE (lNum := (wPar.rgNumFormat.VALUE >= RTF_ARABICNUMBER), ;
-                    wPar.rgNumStyle.ENABLED := lNum, ;
-                    wPar.laNumStart.ENABLED := lNum, ;
-                    wPar.tbNumStart.ENABLED := lNum  )
+         wPar.rgNumStyle.ENABLED := lNum, ;
+         wPar.laNumStart.ENABLED := lNum, ;
+         wPar.tbNumStart.ENABLED := lNum  )
 
       @ 165,210 RADIOGROUP rgNumStyle ;
-         OPTIONS aNumStyleLabel ;  
-         VALUE 1 ;  
+         OPTIONS aNumStyleLabel ;
+         VALUE 1 ;
          WIDTH 185 ;
-         SPACING 25 
+         SPACING 25
 
-      @ 360, 15 LABEL laNumStart ; 
+      @ 360, 15 LABEL laNumStart ;
          VALUE 'Starting number' ;
-         WIDTH 140 ; 
+         WIDTH 140 ;
          HEIGHT 23
 
       @ 360,110 TEXTBOX tbNumStart ;
@@ -1595,12 +1496,12 @@ STATIC PROCEDURE ParagraphFormat
          NUMERIC INPUTMASK '999'
 
       @  25,270 BUTTON btOk ;
-         CAPTION 'OK' ;  
+         CAPTION 'OK' ;
          ACTION ParagraphSet() ;
          WIDTH 80 HEIGHT 25
 
-      @  55,270 BUTTON btCancel ; 
-         CAPTION 'Cancel' ;  
+      @  55,270 BUTTON btCancel ;
+         CAPTION 'Cancel' ;
          ACTION wPar.Release ;
          WIDTH 80 HEIGHT 25
 
@@ -1608,13 +1509,11 @@ STATIC PROCEDURE ParagraphFormat
       ON KEY ESCAPE ACTION wPar.RELEASE
       ON KEY F1     ACTION Shortcuts()
 
-   END WINDOW 
+   END WINDOW
 
    ACTIVATE WINDOW wPar
 
    RETURN // ParagraphFormat
-
-//***************************************************************************
 
 STATIC PROCEDURE ParagraphInit
 
@@ -1639,8 +1538,6 @@ STATIC PROCEDURE ParagraphInit
    wPar.tbNumStart.ENABLED       := lNum
 
    RETURN // ParagraphInit
-
-//***************************************************************************
 
 STATIC PROCEDURE ParagraphSet
 
@@ -1669,8 +1566,6 @@ STATIC PROCEDURE ParagraphSet
 
    RETURN // ParagraphSet
 
-//***************************************************************************
-
 STATIC PROCEDURE Zoom
 
    LOCAL aZoomOpts := ACLONE(aZoomLabel)
@@ -1678,14 +1573,14 @@ STATIC PROCEDURE Zoom
 
    AADD(aZoomOpts, 'Custom')
 
-   DEFINE WINDOW wZoom ; 
-      AT wMain.ROW + 160, wMain.COL + 40 ;
-      WIDTH 205 ;
-      HEIGHT 340 ; 
-      TITLE 'Zoom' ; 
-      MODAL ;
-      NOSIZE ;
-      ON INIT ZoomInit(aZoomOpts, nZoomOpts)
+   DEFINE WINDOW wZoom ;
+         AT wMain.ROW + 160, wMain.COL + 40 ;
+         WIDTH 205 ;
+         HEIGHT 340 ;
+         TITLE 'Zoom' ;
+         MODAL ;
+         NOSIZE ;
+         ON INIT ZoomInit(aZoomOpts, nZoomOpts)
 
       @   5, 10 FRAME frZoom ;
          CAPTION 'Zoom level' ;
@@ -1693,29 +1588,29 @@ STATIC PROCEDURE Zoom
          HEIGHT 255
 
       @  25, 15 RADIOGROUP rgZoom ;
-         OPTIONS aZoomOpts ;  
-         VALUE 1 ;  
+         OPTIONS aZoomOpts ;
+         VALUE 1 ;
          WIDTH 60 ;
          SPACING 25 ;
          ON CHANGE (wZoom.tbZoomCustom.ENABLED := (wZoom.rgZoom.VALUE == nZoomOpts))
 
       @ 225,100 TEXTBOX tbZoomCustom ;
-         WIDTH 55 ;  
+         WIDTH 55 ;
          VALUE 1 ;
          NUMERIC INPUTMASK '9999'
 
-      @ 230,160 LABEL laZoomCustom ; 
+      @ 230,160 LABEL laZoomCustom ;
          VALUE '%' ;
-         WIDTH 10 ; 
+         WIDTH 10 ;
          HEIGHT 23
 
       @ 270, 15 BUTTON btOk ;
-         CAPTION 'OK' ;  
+         CAPTION 'OK' ;
          ACTION ZoomSet(aZoomOpts, nZoomOpts) ;
          WIDTH 80 HEIGHT 25
 
-      @ 270,105 BUTTON btCancel ; 
-         CAPTION 'Cancel' ;  
+      @ 270,105 BUTTON btCancel ;
+         CAPTION 'Cancel' ;
          ACTION wZoom.Release ;
          WIDTH 80 HEIGHT 25
 
@@ -1723,13 +1618,11 @@ STATIC PROCEDURE Zoom
       ON KEY ESCAPE ACTION wZoom.RELEASE
       ON KEY F1     ACTION Shortcuts()
 
-   END WINDOW 
+   END WINDOW
 
    ACTIVATE WINDOW wZoom
 
    RETURN // Zoom
-
-//***************************************************************************
 
 STATIC PROCEDURE ZoomInit(aZoomOpts, nZoomOpts)
 
@@ -1746,8 +1639,6 @@ STATIC PROCEDURE ZoomInit(aZoomOpts, nZoomOpts)
    wZoom.tbZoomCustom.VALUE := nZoomValue
 
    RETURN // ZoomInit
-
-//***************************************************************************
 
 STATIC PROCEDURE ZoomSet(aZoomOpts, nZoomOpts)
 
@@ -1767,8 +1658,6 @@ STATIC PROCEDURE ZoomSet(aZoomOpts, nZoomOpts)
 
    RETURN // ZoomSet
 
-//***************************************************************************
-
 STATIC PROCEDURE ZoomSelect(lDisplay)
 
    LOCAL nPos := wMain.coZoom.VALUE
@@ -1786,8 +1675,6 @@ STATIC PROCEDURE ZoomSelect(lDisplay)
 
    RETURN // ZoomSelect
 
-//***************************************************************************
-
 STATIC PROCEDURE FontForeColor
 
    LOCAL aGetColor := GETCOLOR(aFontColor, NIL, .N.)
@@ -1797,8 +1684,6 @@ STATIC PROCEDURE FontForeColor
    END
 
    RETURN // FontForeColor
-
-//***************************************************************************
 
 STATIC PROCEDURE FontBackColor
 
@@ -1810,8 +1695,6 @@ STATIC PROCEDURE FontBackColor
 
    RETURN // FontBackColor
 
-//***************************************************************************
-
 STATIC PROCEDURE BackgroundColor
 
    LOCAL aGetColor := GetColor(aBackgroundColor, NIL, .N.)
@@ -1822,28 +1705,26 @@ STATIC PROCEDURE BackgroundColor
 
    RETURN // BackgroundColor
 
-//***************************************************************************
-
 STATIC PROCEDURE Shortcuts
 
    DEFINE WINDOW wShort ;
-      AT nShortRow, nShortCol ;
-      WIDTH nShortWidth HEIGHT nShortHeight ;
-      TITLE 'Shortcut Keys' ;
-      ICON 'ShortcutsIcon' ;
-      ON SIZE     ShortSize(.N.) ;
-      ON MAXIMIZE ShortSize(.Y.) ;
-      ON INIT     (EX.wShort.ebText.LOADFILE('Shortcuts', .N., RICHEDITFILEEX_RTF)) ;
-      ON RELEASE  ShortExit()
+         AT nShortRow, nShortCol ;
+         WIDTH nShortWidth HEIGHT nShortHeight ;
+         TITLE 'Shortcut Keys' ;
+         ICON 'ShortcutsIcon' ;
+         ON SIZE     ShortSize(.N.) ;
+         ON MAXIMIZE ShortSize(.Y.) ;
+         ON INIT     (EX.wShort.ebText.LOADFILE('Shortcuts', .N., RICHEDITFILEEX_RTF)) ;
+         ON RELEASE  ShortExit()
 
       @ 10,10 RICHEDITBOX ebText ;
-              WIDTH 610 ;
-              HEIGHT 400 ;
-              MAXLENGTH -1 ;
-              NOHSCROLL ;
-              READONLY ;
-              BACKCOLOR YELLOW
-      
+         WIDTH 610 ;
+         HEIGHT 400 ;
+         MAXLENGTH -1 ;
+         NOHSCROLL ;
+         READONLY ;
+         BACKCOLOR YELLOW
+
       ON KEY RETURN ACTION wShort.RELEASE
       ON KEY ESCAPE ACTION wShort.RELEASE
 
@@ -1853,8 +1734,6 @@ STATIC PROCEDURE Shortcuts
    ACTIVATE WINDOW wShort
 
    RETURN // Shortcuts
-
-//***************************************************************************
 
 STATIC PROCEDURE ShortSize(lSetMax)
 
@@ -1872,67 +1751,63 @@ STATIC PROCEDURE ShortSize(lSetMax)
 
    RETURN // ShortSize
 
-//***************************************************************************
-
 STATIC PROCEDURE ShortExit()
 
    IF ! lShortMax
-     nShortRow    := wShort.ROW
-     nShortCol    := wShort.COL
-     nShortWidth  := wShort.WIDTH
-     nShortHeight := wShort.HEIGHT
+      nShortRow    := wShort.ROW
+      nShortCol    := wShort.COL
+      nShortWidth  := wShort.WIDTH
+      nShortHeight := wShort.HEIGHT
    END
 
    RETURN // ShortExit
 
-//***************************************************************************
-
 STATIC PROCEDURE About
 
    DEFINE WINDOW wAbout ;
-      AT 0,0 ;
-      WIDTH 450 ;
-      HEIGHT 225 ;
-      TITLE 'About ' + cTitle ;
-      MODAL ;
-      NOSIZE
+         AT 0,0 ;
+         WIDTH 450 ;
+         HEIGHT 225 ;
+         TITLE 'About ' + cTitle ;
+         MODAL ;
+         NOSIZE
 
       @  10, 10 IMAGE imProduct ;
-                PICTURE 'MainImage'
+         PICTURE 'MainImage'
 
       @  10,160 LABEL laName ;
-                VALUE   cTitle ;
-                HEIGHT 35 ;
-                WIDTH 280 ;
-                FONT 'Arial' ;
-                SIZE 24
+         VALUE   cTitle ;
+         HEIGHT 35 ;
+         WIDTH 280 ;
+         FONT 'Arial' ;
+         SIZE 24
 
       @  50,160 LABEL laVersion ;
-                VALUE 'Version ' + cVersion ;
-                WIDTH 280
+         VALUE 'Version ' + cVersion ;
+         WIDTH 280
 
       @  70,160 LABEL laCopyright ;
-                VALUE cCopyright ;
-                WIDTH 280
+         VALUE cCopyright ;
+         WIDTH 280
 
       @  90,160 LABEL laByline2 ;
-                VALUE cByline2 ;
-                WIDTH 280
+         VALUE cByline2 ;
+         WIDTH 280
 
       @ 110,160 LABEL laByline3 ;
-                VALUE cByline3 ;
-                WIDTH 280
+         VALUE cByline3 ;
+         WIDTH 280
 
       @ 130,160 HYPERLINK hyProduct ;
-                VALUE   'Made with HMG' ;
-                ADDRESS cInfoAddr ;
-                WIDTH 280
+         VALUE   'Made with HMG' ;
+         ADDRESS cInfoAddr ;
+         WIDTH 280
 
       @ 155,195 BUTTON btOk ;
-                CAPTION '&Ok' ;
-                ACTION wAbout.RELEASE ;
-                WIDTH 55 ;
-                HEIGHT 25
+         CAPTION '&Ok' ;
+         ACTION wAbout.RELEASE ;
+         WIDTH 55 ;
+         HEIGHT 25
 
       ON KEY RETURN ACTION wAbout.RELEASE
       ON KEY ESCAPE ACTION wAbout.RELEASE
@@ -1945,8 +1820,6 @@ STATIC PROCEDURE About
    ACTIVATE WINDOW wAbout
 
    RETURN // About
-
-//***************************************************************************
 
 PROCEDURE MsgDbg(cStat, ...)
 
@@ -2009,11 +1882,9 @@ PROCEDURE MsgDbg(cStat, ...)
    NEXT
 
    IF ! MsgYesNo(cVars + CRLF + CRLF + 'Continue?', ;
-      IF(EMPTY(cStat), 'Debug', cStat))
+         IF(EMPTY(cStat), 'Debug', cStat))
       wMain.RELEASE
    END
 
    RETURN // MsgDbg
-
-//***************************************************************************
 

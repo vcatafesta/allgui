@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -50,9 +50,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 STATIC lDialogInMemory := .F.
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginTab( ControlName , ParentFormName , row , col , w , h , value , f , s , tooltip , change , buttons , flat , hottrack , vertical , bottom , notabstop , bold, italic, underline, strikeout, multiline , backcolor, nId )
-*-----------------------------------------------------------------------------*
+
    LOCAL aMnemonic := Array( 16 )
 
    __defaultNIL( @change, "" )
@@ -131,11 +130,10 @@ FUNCTION _BeginTab( ControlName , ParentFormName , row , col , w , h , value , f
 
    _HMG_ActiveTabMnemonic := aMnemonic
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _DefineTab ( ControlName, ParentFormName, x, y, w, h, aCaptions, aPageMap, value, fontname, fontsize, tooltip, change, Buttons, Flat, HotTrack, Vertical, Bottom, notabstop, aMnemonic, bold, italic, underline, strikeout, Images, multiline, backcolor, nId )
-*-----------------------------------------------------------------------------*
+
    LOCAL ParentFormHandle, mVar, ImageFlag := .F., k, Style
    LOCAL ControlHandle, FontHandle, blInit, hBrush := 0
 
@@ -245,7 +243,7 @@ STATIC FUNCTION _DefineTab ( ControlName, ParentFormName, x, y, w, h, aCaptions,
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "TAB"
    _HMG_aControlNames [k] :=   ControlName
@@ -296,15 +294,15 @@ STATIC FUNCTION _DefineTab ( ControlName, ParentFormName, x, y, w, h, aCaptions,
       InitDialogTab( ParentFormName, ControlHandle, k )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    /* FOR EACH hb_enumIndex() */
    #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-#endif
-*-----------------------------------------------------------------------------*
+   #endif
+
 FUNCTION InitDialogTab( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL aCaptions, Caption, tabpage, c, z, i, aMnemonic
 
    aMnemonic := _HMG_aControlMiscData1 [k,3]
@@ -362,11 +360,10 @@ FUNCTION InitDialogTab( ParentName, ControlHandle, k )
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION UpdateTab ( y )  // Internal Function
-*-----------------------------------------------------------------------------*
+
    LOCAL tabpage, w, s, z
 
    // Hide All Pages
@@ -396,11 +393,11 @@ FUNCTION UpdateTab ( y )  // Internal Function
             IF _IsControlVisibleFromHandle ( w )
 
                CShowControl ( w )
-#ifdef _PANEL_
+               #ifdef _PANEL_
             ELSEIF _IsWindowVisibleFromHandle ( w )
-		
+
                CShowControl ( w )
-#endif
+               #endif
             ENDIF
 
          ELSE
@@ -419,11 +416,10 @@ FUNCTION UpdateTab ( y )  // Internal Function
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginTabPage ( caption , image , tooltip )
-*-----------------------------------------------------------------------------*
+
    // JD 11/05/2006
    hb_default( @Caption, "" )
    hb_default( @Image, "" )
@@ -447,11 +443,9 @@ FUNCTION _BeginTabPage ( caption , image , tooltip )
       AFill( _HMG_ActiveTabTooltip, '' )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndTabPage()
-*-----------------------------------------------------------------------------*
 
    IF lDialogInMemory
       _HMG_aDialogItems[len(_HMG_aDialogItems),21] := .T.
@@ -460,11 +454,9 @@ FUNCTION _EndTabPage()
       _HMG_ActiveTabCurrentPageMap := {}
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EndTab()
-*-----------------------------------------------------------------------------*
 
    _DefineTab ( _HMG_ActiveTabName, _HMG_ActiveTabParentFormName, _HMG_ActiveTabCol, ;
       _HMG_ActiveTabRow, _HMG_ActiveTabWidth, _HMG_ActiveTabHeight, ;
@@ -478,11 +470,10 @@ FUNCTION _EndTab()
    _HMG_BeginTabActive := .F.
    _HMG_FrameLevel--
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _AddTabPage ( ControlName , ParentForm , Position , Caption , Image , tooltip )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, ImageFlag := .F.  // JD 11/05/2006
 
    hb_default( @Caption, "" )
@@ -525,11 +516,10 @@ FUNCTION _AddTabPage ( ControlName , ParentForm , Position , Caption , Image , t
       UpdateTab ( i )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _AddTabControl ( TabName , ControlName , ParentForm , PageNumber , Row , Col )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , x , t
 
    i := GetControlIndex ( TabName , ParentForm )
@@ -569,11 +559,10 @@ FUNCTION _AddTabControl ( TabName , ControlName , ParentForm , PageNumber , Row 
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DeleteTabPage ( ControlName , ParentForm , Position )
-*-----------------------------------------------------------------------------*
+
    LOCAL i , j , NewValue , NewMap := {} , ImageFlag := .F.
 
    i := GetControlIndex ( Controlname , ParentForm )
@@ -667,12 +656,12 @@ FUNCTION _DeleteTabPage ( ControlName , ParentForm , Position )
 
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-#define DT_CENTER     1
-*------------------------------------------------------------------------------*
+   #define DT_CENTER     1
+
 FUNCTION OwnTabPaint ( lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL i, hDC, nItemId, aBtnRc, hBrush, oldBkMode, bkColor
    LOCAL hOldFont, aMetr, oldTextColor, nTextColor, hImage
    LOCAL aBkColor, aForeColor, aInactiveColor, aBmp
@@ -684,6 +673,7 @@ FUNCTION OwnTabPaint ( lParam )
    i := AScan( _HMG_aControlHandles, GETOWNBTNHANDLE( lParam ) )
 
    IF Empty( hDC ) .OR. i == 0
+
       RETURN( 1 )
    ENDIF
 
@@ -701,14 +691,14 @@ FUNCTION OwnTabPaint ( lParam )
    oldTextColor := SetTextColor( hDC, GetRed( nTextColor ), GetGreen( nTextColor ), GetBlue( nTextColor ) )
 
    IF ISARRAY( _HMG_aControlMiscData2 [i] ) .AND. nItemId <= Len( _HMG_aControlMiscData2 [i] ) .AND. ;
-      IsArrayRGB( _HMG_aControlMiscData2 [i] [nItemId] )
+         IsArrayRGB( _HMG_aControlMiscData2 [i] [nItemId] )
       aBkColor := _HMG_aControlMiscData2 [i] [nItemId]
    ELSE
       aBkColor := _HMG_aControlBkColor [i]
    ENDIF
    hBrush := CreateSolidBrush( aBkColor [1], aBkColor [2], aBkColor [3] )
    FillRect( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-   DeleteObject( hBrush )
+   DELETEObject( hBrush )
 
    bkColor := RGB( aBkColor [1], aBkColor [2], aBkColor [3] )
    SetBkColor( hDC, bkColor )
@@ -743,7 +733,7 @@ FUNCTION OwnTabPaint ( lParam )
          ENDIF
       ENDIF
 
-      DeleteObject( hImage )
+      DELETEObject( hImage )
    ENDIF
 
    IF lSelected
@@ -782,4 +772,5 @@ FUNCTION OwnTabPaint ( lParam )
    SetBkMode( hDC, oldBkMode )
    SetTextColor( hDC, oldTextColor )
 
-RETURN( 0 )
+   RETURN( 0 )
+

@@ -1,22 +1,20 @@
 /*
- * Ejemplo Métricas de Windows n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo obtener el separador decimal actual.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Métricas de Windows n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo obtener el separador decimal actual.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
-Function Main
+FUNCTION Main
 
    MsgInfo( "El separador decimal es " + GetDecimalSeparator(), "Información" )
 
-Return Nil
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -45,6 +43,7 @@ HB_FUNC ( GETDECIMALSEPARATOR )
 
 #pragma ENDDUMP
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

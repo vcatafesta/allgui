@@ -1,180 +1,172 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2011-2017 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2011-2017 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 #include "hbgdip.ch"
 
-*-----------------------------------------------------------------------------*
-Procedure Main
-*-----------------------------------------------------------------------------*
+PROCEDURE Main
 
-	IF StatusOk != GdiplusInitExt( _GDI_GRAPHICS )
-		MsgStop( "Init GDI+ Error", "Error" )
-		RETURN
-	ENDIF
+   IF StatusOk != GdiplusInitExt( _GDI_GRAPHICS )
+      MsgStop( "Init GDI+ Error", "Error" )
 
-	_GdiplusInitLocal()
+      RETURN
+   ENDIF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 440 + GetBorderWidth() ;
-		HEIGHT 300 + GetTitleHeight() + GetBorderHeight() ;
-		TITLE 'WebCam Preview Demo' ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		ON INIT ( ;
-			CaptureImage() ;  // capture initialization
-			) ;
-		ON RELEASE ( ;
-			CloseWebCam() ;
-			)
+   _GdiplusInitLocal()
 
-		@ 20,60 WEBCAM WebCam_1 ;
-			WIDTH 250 HEIGHT 210 ;
-			RATE 20 ;
-			START
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 440 + GetBorderWidth() ;
+         HEIGHT 300 + GetTitleHeight() + GetBorderHeight() ;
+         TITLE 'WebCam Preview Demo' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INIT ( ;
+         CaptureImage() ;  // capture initialization
+      ) ;
+         ON RELEASE ( ;
+         CLOSEWebCam() ;
+         )
 
-		DEFINE IMAGE Image_1
-			ROW	120
-			COL	280
-			WIDTH   150
-			HEIGHT  110
-			STRETCH .T.
-		END IMAGE
+      @ 20,60 WEBCAM WebCam_1 ;
+         WIDTH 250 HEIGHT 210 ;
+         RATE 20 ;
+         START
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	20
-			WIDTH   120
-			CAPTION 'Start WebCam'
-			ACTION  CreateWebCam()
-		END BUTTON
+      DEFINE IMAGE Image_1
+         ROW   120
+         COL   280
+         WIDTH   150
+         HEIGHT  110
+         STRETCH .T.
+      END IMAGE
 
-		DEFINE BUTTON Button_2
-			ROW	10
-			COL	150
-			WIDTH   120
-			CAPTION 'Stop WebCam'
-			ACTION  CloseWebCam()
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   20
+         WIDTH   120
+         CAPTION 'Start WebCam'
+         ACTION  CreateWebCam()
+      END BUTTON
 
-		DEFINE BUTTON Button_3
-			ROW	80
-			COL	315
-			WIDTH   80
-			CAPTION 'Capture'
-			ACTION  CaptureImage()
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   10
+         COL   150
+         WIDTH   120
+         CAPTION 'Stop WebCam'
+         ACTION  CloseWebCam()
+      END BUTTON
 
-		DEFINE LABEL Label_1
-			ROW	59
-			COL	19
-			WIDTH   252
-			HEIGHT  212
-			BORDER  .T.
-		END LABEL
+      DEFINE BUTTON Button_3
+         ROW   80
+         COL   315
+         WIDTH   80
+         CAPTION 'Capture'
+         ACTION  CaptureImage()
+      END BUTTON
 
-		DEFINE LABEL Label_2
-			ROW	119
-			COL	279
-			WIDTH   152
-			HEIGHT  112
-			BORDER  .T.
-		END LABEL
+      DEFINE LABEL Label_1
+         ROW   59
+         COL   19
+         WIDTH   252
+         HEIGHT  212
+         BORDER  .T.
+      END LABEL
 
-		ON KEY ESCAPE ACTION ThisWindow.Release
+      DEFINE LABEL Label_2
+         ROW   119
+         COL   279
+         WIDTH   152
+         HEIGHT  112
+         BORDER  .T.
+      END LABEL
 
-	END WINDOW
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*-----------------------------------------------------------------------------*
-Procedure CreateWebCam
-*-----------------------------------------------------------------------------*
+   RETURN
 
-	If ! IsControlDefined( WebCam_1, Form_1 )
+PROCEDURE CreateWebCam
 
-		@ 20,60 WEBCAM WebCam_1 OF Form_1 ;
-			WIDTH 250 HEIGHT 210 ;
-			RATE 20
+   IF ! IsControlDefined( WebCam_1, Form_1 )
 
-		Form_1.WebCam_1.Start()
+      @ 20,60 WEBCAM WebCam_1 OF Form_1 ;
+         WIDTH 250 HEIGHT 210 ;
+         RATE 20
 
-		Form_1.Button_3.Enabled := .T.
+      Form_1.WebCam_1.Start()
 
-	EndIf
+      Form_1.Button_3.Enabled := .T.
 
-Return
+   ENDIF
 
-*-----------------------------------------------------------------------------*
-Procedure CloseWebCam
-*-----------------------------------------------------------------------------*
+   RETURN
 
-	If IsControlDefined( WebCam_1, Form_1 )
+PROCEDURE CloseWebCam
 
-		Form_1.WebCam_1.Release()
+   IF IsControlDefined( WebCam_1, Form_1 )
 
-		Form_1.Button_3.Enabled := .F.
+      Form_1.WebCam_1.Release()
 
-	EndIf
+      Form_1.Button_3.Enabled := .F.
 
-Return
+   ENDIF
 
-*-----------------------------------------------------------------------------*
-Procedure CaptureImage
-*-----------------------------------------------------------------------------*
-  Local hBitmap
-  Local nWidth
-  Local nHeight
+   RETURN
 
-  If cap_EditCopy( GetControlHandle ( 'WebCam_1', 'Form_1' ) )
+PROCEDURE CaptureImage
 
-     nWidth := GetProperty( "Form_1", "Image_1", "Width" )
-     nHeight := GetProperty( "Form_1", "Image_1", "Height" )
+   LOCAL hBitmap
+   LOCAL nWidth
+   LOCAL nHeight
 
-     hBitmap := LoadFromClpbrd( GetFormHandle( 'Form_1' ), nWidth, nHeight )
+   IF cap_EditCopy( GetControlHandle ( 'WebCam_1', 'Form_1' ) )
 
-     If !Empty( hBitmap )
+      nWidth := GetProperty( "Form_1", "Image_1", "Width" )
+      nHeight := GetProperty( "Form_1", "Image_1", "Height" )
 
-        Form_1.Image_1.hBitmap := hBitmap
+      hBitmap := LoadFromClpbrd( GetFormHandle( 'Form_1' ), nWidth, nHeight )
 
-        System.Clipboard := ""
+      IF !Empty( hBitmap )
 
-        gPlusSaveHBitmapToFile( hBitmap, "webcam.png", nWidth, nHeight, "image/png", 100 )
+         Form_1.Image_1.hBitmap := hBitmap
 
-     EndIf
+         System.Clipboard := ""
 
-  Else
+         gPlusSaveHBitmapToFile( hBitmap, "webcam.png", nWidth, nHeight, "image/png", 100 )
 
-     MsgAlert( 'Capture is failure!', 'Error' )
+      ENDIF
 
-  EndIf
+   ELSE
 
-Return
+      MsgAlert( 'Capture is failure!', 'Error' )
 
-#define CF_BITMAP     2
-*-----------------------------------------------------------------------------*
-Static Function LoadFromClpbrd( hWnd, w, h )
-*-----------------------------------------------------------------------------*
-  Local hBmp
+   ENDIF
 
-  If OpenClipboard( hWnd )
+   RETURN
 
-     hBmp := GetClipboardData( CF_BITMAP, w, h )
+   #define CF_BITMAP     2
 
-     CloseClipboard()
+STATIC FUNCTION LoadFromClpbrd( hWnd, w, h )
 
-  EndIf
+   LOCAL hBmp
 
-Return( hBmp )
+   IF OpenClipboard( hWnd )
 
+      hBmp := GetClipboardData( CF_BITMAP, w, h )
+
+      CLOSEClipboard()
+
+   ENDIF
+
+   RETURN( hBmp )
 
 #pragma BEGINDUMP
 
@@ -252,22 +244,18 @@ HB_FUNC( GETCLIPBOARDDATA )
 
 #pragma ENDDUMP
 
-//////////////////////////////////////////////////////////////////////////////
 #pragma BEGINDUMP
 /*
  * This source file is part of the hbGdiPlus library source
  * Copyright 2007-2017 P.Chornyj <myorg63@mail.ru>
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
  */
 
 #include <mgdefs.h>
@@ -385,21 +373,27 @@ unsigned char * MimeTypeOld;
 static GpStatus _LoadExt( void )
 {
    if( NULL == g_GpModule )
+
       return FALSE;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageEncodersSize ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageEncoders ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipCreateBitmapFromHBITMAP ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipSaveImageToFile ) )
+
       return NotImplemented;
 
    if( _EMPTY_PTR( g_GpModule, GdipGetImageThumbnail ) )
+
       return NotImplemented;
 
    return TRUE;
@@ -448,6 +442,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    if( size == 0 )
    {
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -456,6 +451,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    if( pImageCodecInfo == NULL )
    {
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -465,6 +461,7 @@ HB_FUNC( GPLUSGETENCODERSMIMETYPE )
    {
       hb_xfree( pImageCodecInfo );
       hb_itemReturnRelease( pResult );
+
       return;
    }
 
@@ -503,12 +500,15 @@ static BOOL GetEnCodecClsid( const char * MimeType, CLSID * Clsid )
    hb_xmemset( Clsid, 0, sizeof( CLSID ) );
 
    if( ( MimeType == NULL ) || ( Clsid == NULL ) || ( g_GpModule == NULL ) )
+
       return FALSE;
 
    if( fn_GdipGetImageEncodersSize( &num, &size ) )
+
       return FALSE;
 
    if( ( pImageCodecInfo = hb_xalloc( size ) ) == NULL )
+
       return FALSE;
 
    hb_xmemset( pImageCodecInfo, 0, sizeof( ImageCodecInfo ) );

@@ -1,15 +1,16 @@
 #include "hmg.ch"
 
-declare window Main
+DECLARE window Main
 
-Function main_button_1_action
+FUNCTION main_button_1_action
 
-	Use Test
+   USE Test
 
-	LOAD REPORT Test
+   LOAD REPORT Test
 
-	EXECUTE REPORT Test PREVIEW SELECTPRINTER
+   EXECUTE REPORT Test PREVIEW SELECTPRINTER
 
-	Use
+   USE
 
-Return Nil
+   RETURN NIL
+

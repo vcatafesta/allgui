@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "minigui.ch"
@@ -15,9 +14,9 @@ FUNCTION Main()
    SET DATE AMERICAN
 
    DEFINE WINDOW Form_1 ;
-      CLIENTAREA 640, 400 ;
-      TITLE 'STATUSBAR with PROGRESSBAR Demo' ;
-      MAIN
+         CLIENTAREA 640, 400 ;
+         TITLE 'STATUSBAR with PROGRESSBAR Demo' ;
+         MAIN
 
       DEFINE STATUSBAR
 
@@ -42,7 +41,7 @@ FUNCTION Main()
       @ 120,145 BUTTON Button_2 ;
          CAPTION 'Reset ProgressBar' ;
          ACTION ;
-            {|| SET ProgressItem OF Form_1 POSITION TO, Form_1.StatusBar.Item( 3 ) := "  0%" + TOOLTIP_STATUS } ;
+         {|| SET ProgressItem OF Form_1 POSITION TO, Form_1.StatusBar.Item( 3 ) := "  0%" + TOOLTIP_STATUS } ;
          TOOLTIP "Reset" ;
          WIDTH 180 HEIGHT 26
 
@@ -51,15 +50,16 @@ FUNCTION Main()
    CENTER   WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
+   RETURN NIL
 
-//////////////////////////////////////////////////////////////////////////////
 PROCEDURE Start
 
    LOCAL n, nValue
+
    STATIC lBusy := .F.
 
    IF lBusy
+
       RETURN
    ENDIF
 
@@ -85,4 +85,5 @@ PROCEDURE Start
    lBusy := .F.
    Form_1.Button_2.Enabled := .T.
 
-RETURN
+   RETURN
+

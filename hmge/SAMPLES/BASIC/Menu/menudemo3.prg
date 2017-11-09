@@ -1,5 +1,5 @@
 /*
- * MiniGUI Menu Demo
+* MiniGUI Menu Demo
 */
 
 #include "hmg.ch"
@@ -7,12 +7,12 @@
 PROCEDURE Main
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 400 ;
-      TITLE 'Menu Demo 3' ;
-      MAIN ;
-      ON INIT buildmenu()
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Menu Demo 3' ;
+         MAIN ;
+         ON INIT buildmenu()
 
       @ 10, 10 LABEL LABEL_1 VALUE "[F2] - ENABLE MENU" AUTOSIZE
 
@@ -25,8 +25,7 @@ PROCEDURE Main
 
    ACTIVATE WINDOW Win_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE buildmenu()
 
@@ -47,46 +46,41 @@ PROCEDURE buildmenu()
 
       POPUP "&Option"
 
-      FOR n := 1 TO 3
-         m_char := StrZero( n, 2 )
-         m_executar := "ACT_" + m_char + "()"
-         MENUITEM 'EXE ' + m_char ACTION &m_executar NAME &m_char
-      NEXT
+         FOR n := 1 TO 3
+            m_char := StrZero( n, 2 )
+            m_executar := "ACT_" + m_char + "()"
+            MENUITEM 'EXE ' + m_char ACTION &m_executar NAME &m_char
+         NEXT
 
       END POPUP
 
    END MENU
 
-RETURN
-
+   RETURN
 
 PROCEDURE clearmenu()
 
    RELEASE MAIN MENU OF Win_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE act_01()
 
    DisableMainMenu ( 'Win_1' )
 
-RETURN
-
+   RETURN
 
 PROCEDURE act_02()
 
    MsgInfo ( 'Action 02' )
 
-RETURN
-
+   RETURN
 
 PROCEDURE act_03()
 
    MsgInfo ( 'Action 03' )
 
-RETURN
-
+   RETURN
 
 FUNCTION DisableMainMenu( cFormName )
 
@@ -107,8 +101,7 @@ FUNCTION DisableMainMenu( cFormName )
 
    NEXT i
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION EnableMainMenu( cFormName )
 
@@ -129,4 +122,5 @@ FUNCTION EnableMainMenu( cFormName )
 
    NEXT i
 
-RETURN NIL
+   RETURN NIL
+

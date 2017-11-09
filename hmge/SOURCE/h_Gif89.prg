@@ -1,18 +1,15 @@
 /*
- * Harbour TGif Class v1.2
- * Copyright 2009-2017 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Last revision 22.09.2017
- *
+* Harbour TGif Class v1.2
+* Copyright 2009-2017 Grigory Filatov <gfilatov@inbox.ru>
+* Last revision 22.09.2017
 */
 
 ANNOUNCE CLASS_TGIF
 
 #include "minigui.ch"
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineAniGif ( cControlName, cParentForm, cFilename, nRow, nCol, nWidth, nHeight, nDelay, aBKColor )
-*------------------------------------------------------------------------------*
+
    LOCAL mVar, k, nControlHandle, nParentFormHandle, oGif
 
    // If defined inside DEFINE WINDOW structure, determine cParentForm
@@ -61,7 +58,7 @@ FUNCTION _DefineAniGif ( cControlName, cParentForm, cFilename, nRow, nCol, nWidt
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType[ k ] := "ANIGIF"
    _HMG_aControlNames[ k ] :=  cControlName
@@ -104,8 +101,7 @@ FUNCTION _DefineAniGif ( cControlName, cParentForm, cFilename, nRow, nCol, nWidt
    _HMG_aControlMiscData1[ k ] :=  0
    _HMG_aControlMiscData2[ k ] :=  ''
 
-RETURN oGif
-
+   RETURN oGif
 
 PROCEDURE _ReleaseAniGif ( GifName, FormName )
 
@@ -116,15 +112,14 @@ PROCEDURE _ReleaseAniGif ( GifName, FormName )
       hWnd := GetFormHandle ( FormName )
       FOR x := 1 TO Len ( _HMG_aControlHandles )
          IF _HMG_aControlParentHandles [x] == hWnd .AND. _HMG_aControlType [x] == "ANIGIF"
-             oGif := _HMG_aControlIds [x]
-             oGif:End()
+            oGif := _HMG_aControlIds [x]
+            oGif:End()
             _EraseGifDef ( FormName, x )
          ENDIF
       NEXT x
    ENDIF
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE _EraseGifDef ( FormName, i )
 
@@ -133,11 +128,11 @@ STATIC PROCEDURE _EraseGifDef ( FormName, i )
    mVar := '_' + FormName + '_' + _HMG_aControlNames [i]
 
    IF __mvExist( mVar )
-#ifndef _PUBLIC_RELEASE_
+      #ifndef _PUBLIC_RELEASE_
       __mvPut( mVar, 0 )
-#else
+      #else
       __mvXRelease( mVar )
-#endif
+      #endif
    ENDIF
 
    _HMG_aControlDeleted        [i] := .T.
@@ -181,10 +176,9 @@ STATIC PROCEDURE _EraseGifDef ( FormName, i )
    _HMG_aControlMiscData1      [i] := 0
    _HMG_aControlMiscData2      [i] := ''
 
-RETURN
+   RETURN
 
-
-#include "hbclass.ch"
+   #include "hbclass.ch"
 
 CLASS TGif
 
@@ -205,26 +199,29 @@ CLASS TGif
    DATA  lLopping
    DATA  nDelay
 
-   METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName )
+METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName )
 
-   METHOD PlayGif( cControlName, cParentName )
+METHOD PlayGif( cControlName, cParentName )
 
-   METHOD Play() INLINE GifPlay( ::hGif, ::cParentName )
-   METHOD Stop() INLINE GifStop( ::hGif, ::cParentName )
+METHOD Play() INLINE GifPlay( ::hGif, ::cParentName )
 
-   METHOD UpdateGif( cControlName, cParentName )
-   METHOD Update() INLINE ::UpdateGif( ::hGif, ::cParentName )
+METHOD Stop() INLINE GifStop( ::hGif, ::cParentName )
 
-   METHOD RestartGif( cControlName, cParentName )
-   METHOD Restart() INLINE ::RestartGif( ::hGif, ::cParentName )
+METHOD UpdateGif( cControlName, cParentName )
 
-   METHOD IsRunning() INLINE GifIsRunning( ::hGif, ::cParentName )
+METHOD Update() INLINE ::UpdateGif( ::hGif, ::cParentName )
 
-   METHOD DestroyGif( cControlName, cParentName )
-   METHOD End() INLINE ::DestroyGif( ::hGif, ::cParentName )
+METHOD RestartGif( cControlName, cParentName )
+
+METHOD Restart() INLINE ::RestartGif( ::hGif, ::cParentName )
+
+METHOD IsRunning() INLINE GifIsRunning( ::hGif, ::cParentName )
+
+METHOD DestroyGif( cControlName, cParentName )
+
+METHOD End() INLINE ::DestroyGif( ::hGif, ::cParentName )
 
 ENDCLASS
-
 
 METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName ) CLASS TGif
 
@@ -247,10 +244,12 @@ METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlN
    ::cFileName   := cFileName
 
    IF ! Empty( cFileName ) .AND. ! File( cFileName )
+
       RETURN NIL
    ENDIF
 
    IF ! LoadGif( cFileName, @aPictInfo, @aPictures, @aImageInfo )
+
       RETURN NIL
    ENDIF
 
@@ -285,8 +284,7 @@ METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlN
 
    ENDIF
 
-RETURN Self
-
+   RETURN Self
 
 METHOD PlayGif( cControlName, cParentName ) CLASS TGif
 
@@ -302,8 +300,7 @@ METHOD PlayGif( cControlName, cParentName ) CLASS TGif
 
    DoMethod( cParentName, cControlName, 'Refresh' )
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD UpdateGif( cControlName, cParentName ) CLASS TGif
 
@@ -318,8 +315,7 @@ METHOD UpdateGif( cControlName, cParentName ) CLASS TGif
    ::nBottom := nHeight + ::nTop
    ::nRight  := nWidth + ::nLeft
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD RestartGif( cControlName, cParentName ) CLASS TGif
 
@@ -354,8 +350,7 @@ METHOD RestartGif( cControlName, cParentName ) CLASS TGif
 
    GifPlay( cControlName, cParentName )
 
-RETURN NIL
-
+   RETURN NIL
 
 METHOD DestroyGif( cControlName, cParentName ) CLASS TGif
 
@@ -370,10 +365,11 @@ METHOD DestroyGif( cControlName, cParentName ) CLASS TGif
 
    _ReleaseControl ( cControlName, cParentName )
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 STATIC FUNCTION GifPlay( cControlName, cParentName )
 
    LOCAL TotalFrames := GetProperty( cParentName, cControlName, 'Cargo' )[ 3 ]
@@ -382,10 +378,11 @@ STATIC FUNCTION GifPlay( cControlName, cParentName )
       SetProperty( cParentName, GetProperty( cParentName, cControlName, 'Cargo' )[ 1 ], 'Enabled', .T. )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 STATIC FUNCTION GifStop( cControlName, cParentName )
 
    LOCAL TotalFrames := GetProperty( cParentName, cControlName, 'Cargo' )[ 3 ]
@@ -394,10 +391,11 @@ STATIC FUNCTION GifStop( cControlName, cParentName )
       SetProperty( cParentName, GetProperty( cParentName, cControlName, 'Cargo' )[ 1 ], 'Enabled', .F. )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-/*
-*/
+   /*
+   */
+
 STATIC FUNCTION GifIsRunning( cControlName, cParentName )
 
    LOCAL lRunning := .F.
@@ -407,25 +405,24 @@ STATIC FUNCTION GifIsRunning( cControlName, cParentName )
       lRunning := GetProperty( cParentName, GetProperty( cParentName, cControlName, 'Cargo' )[ 1 ], 'Enabled' )
    ENDIF
 
-RETURN lRunning
+   RETURN lRunning
 
-/*
- * h_Gif89.prg
- *
- * Author: P.Chornyj <myorg63@mail.ru>
- *
-*/
+   /*
+   * h_Gif89.prg
+   * Author: P.Chornyj <myorg63@mail.ru>
+   */
 
-#include "fileio.ch"
+   #include "fileio.ch"
 
-#ifndef __XHARBOUR__
-  #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
-#endif
+   #ifndef __XHARBOUR__
+   #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
+   #endif
 
-#define Alert( c ) MsgExclamation( c, "LoadGif", , .f. )
+   #define Alert( c ) MsgExclamation( c, "LoadGif", , .f. )
 
-/*
-*/
+   /*
+   */
+
 FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
 
    LOCAL cGifHeader, cGifEnd := Chr( 0 ) + Chr( 33 ) + Chr( 249 )
@@ -440,11 +437,13 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
 
    IF ! File( GIF )
       Alert( "File " + GIF + " is not found!" )
+
       RETURN FALSE
    ENDIF
 
    IF ! ReadFromStream( GIF, @cStream )
       Alert( "Error when reading file " + GIF )
+
       RETURN FALSE
    ENDIF
 
@@ -456,6 +455,7 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
 
    IF  Left( cGifHeader, 3 ) <> "GIF"
       Alert( "This file is not a GIF file!" )
+
       RETURN FALSE
    ENDIF
 
@@ -466,7 +466,7 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
    i := j + 2
 
    /* Split GIF Files at separate pictures
-      and load them into ImageList */
+   and load them into ImageList */
 
    DO WHILE .T.
       nImgCount++
@@ -475,9 +475,10 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
          cFile := path + "\" + cFileNoExt( GIF ) + "_frame_" + StrZero( nImgCount, 4 ) + ".gif"
          nFileHandle := FCreate( cFile, FC_NORMAL )
          IF FError() <> 0
-#ifdef _DEBUG_
+            #ifdef _DEBUG_
             Alert( "Error while creating a temp file:" + Str( FError() ) )
-#endif
+            #endif
+
             RETURN FALSE
          ENDIF
 
@@ -485,16 +486,18 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
          imgHeader = Left( SubStr ( cStream, i -1, j - i ), 16 )
 
          IF FWrite( nFileHandle, cPicBuf ) <> Len( cPicBuf )
-#ifdef _DEBUG_
+            #ifdef _DEBUG_
             Alert( "Error while writing a file:" + Str( FError() ) )
-#endif
+            #endif
+
             RETURN FALSE
          ENDIF
 
          IF .NOT. FClose( nFileHandle )
-#ifdef _DEBUG_
+            #ifdef _DEBUG_
             Alert( "Error while closing a file:" + Str( FError() ) )
-#endif
+            #endif
+
             RETURN FALSE
          ENDIF
 
@@ -518,9 +521,10 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       cFile := path + "\" + cFileNoExt( GIF ) + "_frame_" + StrZero( nImgCount, 4 ) + ".gif"
       nFileHandle := FCreate( cFile, FC_NORMAL )
       IF FError() <> 0
-#ifdef _DEBUG_
+         #ifdef _DEBUG_
          Alert( "Error while creating a temp file:" + Str( FError() ) )
-#endif
+         #endif
+
          RETURN FALSE
       ENDIF
 
@@ -528,16 +532,18 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       imgHeader := Left( SubStr( cStream, i -1, Len( cStream ) - i ), 16 )
 
       IF FWrite( nFileHandle, cPicBuf ) <> Len( cPicBuf )
-#ifdef _DEBUG_
+         #ifdef _DEBUG_
          Alert( "Error while writing a file:" + Str( FError() ) )
-#endif
+         #endif
+
          RETURN FALSE
       ENDIF
 
       IF .NOT. FClose( nFileHandle )
-#ifdef _DEBUG_
+         #ifdef _DEBUG_
          Alert( "Error while closing a file:" + Str( FError() ) )
-#endif
+         #endif
+
          RETURN FALSE
       ENDIF
 
@@ -548,16 +554,18 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       aImgInfo[ nImgCount ] := imgHeader
    ENDIF
 
-RETURN bLoadGif
+   RETURN bLoadGif
 
-/*
-*/
+   /*
+   */
+
 FUNCTION ReadFromStream( cFile, cStream )
 
    LOCAL nFileHandle := FOpen( cFile )
    LOCAL nFileSize
 
    IF FError() <> 0
+
       RETURN FALSE
    ENDIF
 
@@ -567,11 +575,14 @@ FUNCTION ReadFromStream( cFile, cStream )
    FRead( nFileHandle, @cStream, nFileSize )
    FClose( nFileHandle )
 
-RETURN ( FError() == 0 .AND. .NOT. Empty( cStream ) )
+   RETURN ( FError() == 0 .AND. .NOT. Empty( cStream ) )
 
-/*
-*/
+   /*
+   */
+
 FUNCTION GetFrameDelay( cImageInfo, nDelay )
+
    DEFAULT nDelay TO 10
 
-RETURN ( Bin2W( SubStr( cImageInfo, 4, 2 ) ) * nDelay )
+   RETURN ( Bin2W( SubStr( cImageInfo, 4, 2 ) ) * nDelay )
+

@@ -16,19 +16,19 @@
 
 #include "minigui.ch"
 
-Function Main ()
+FUNCTION Main ()
 
    // criando a janela principal, sendo que nos
    // eventos ON SIZE e ON MAXIMIZE será executada
    // uma rotina para ajustar o tamanho do calendário
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 760 ;
-      HEIGHT 522 ;
-      TITLE "Mais meses no controle MonthCalendar" ;
-      MAIN ;
-      ON SIZE {||AjustarTamanho()} ;
-      ON MAXIMIZE {||AjustarTamanho()}
+         AT 0,0 ;
+         WIDTH 760 ;
+         HEIGHT 522 ;
+         TITLE "Mais meses no controle MonthCalendar" ;
+         MAIN ;
+         ON SIZE {||AjustarTamanho()} ;
+         ON MAXIMIZE {||AjustarTamanho()}
 
       // criando o controle MonthCalendar padrão
       // nas coordenadas 0,0
@@ -51,19 +51,21 @@ Function Main ()
    // ativando a janela
    ACTIVATE WINDOW Form1
 
-   Return Nil
+   RETURN NIL
 
-Static Function AjustarTamanho ()
+STATIC FUNCTION AjustarTamanho ()
 
    IF GetDesktopWidth() > 800 .AND. GetDesktopHeight() > 600
-	Form1.Width := 571
-	Form1.Height := 682
-	// centralizando a janela
-	CENTER WINDOW Form1
+      Form1.Width := 571
+      Form1.Height := 682
+      // centralizando a janela
+      CENTER WINDOW Form1
    ENDIF
 
    // ajustando a largura
    Form1.Month1.Width := Form1.Width - GetBorderWidth()*2
    // ajustando a altura
    Form1.Month1.Height := Form1.Height - GetTitleHeight() - GetBorderHeight()*2
-   Return Nil
+
+   RETURN NIL
+

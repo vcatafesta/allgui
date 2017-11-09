@@ -1,59 +1,55 @@
 /*
- * demo.prg - Load frmError
- * ------------------------
- * Para probar la captura de errores
- *
- * Adalberto del Rosario - Diciembre/2005
+* demo.prg - Load frmError
+* ------------------------
+* Para probar la captura de errores
+* Adalberto del Rosario - Diciembre/2005
 */
-
 
 #include "MiniGui.ch"
 
-
 PROCEDURE Main()
 
-	LOAD WINDOW frmError
+   LOAD WINDOW frmError
 
-	frmError.Activate
+   frmError.Activate
 
-RETURN
-
+   RETURN
 
 STATIC PROCEDURE fncSuma( )
 
-	LOCAL oErrAntes, oErr	// oErrorAntes = Para almacenar el ErrorBlock Anterior
+   LOCAL oErrAntes, oErr   // oErrorAntes = Para almacenar el ErrorBlock Anterior
 
-	LOCAL lMyError := .F.	// lMyError = .t. - Si ocurrio realmente un error, .f. - para controlar los BREAK
-    
-	LOCAL A := "UNO", B := 1, C := 0
-             
-	oErrAntes := ERRORBLOCK( { | objErr | BREAK( objErr ) } )
+   LOCAL lMyError := .F.   // lMyError = .t. - Si ocurrio realmente un error, .f. - para controlar los BREAK
 
-	BEGIN SEQUENCE
+   LOCAL A := "UNO", B := 1, C := 0
 
-		if MsgYesNo( "Seguro que dese continuar ?", "Pregunta" )
-			C := A + B
-		else
-			BREAK	// Si uso RETURN el compilador dice que no puedo incluirlo dentro de un BEGIN SEQUENCE
-		endif
+   oErrAntes := ERRORBLOCK( { | objErr | BREAK( objErr ) } )
 
-	RECOVER USING oErr
+   BEGIN SEQUENCE
 
-		if oErr <> NIL
-			lMyError := .T.	// Especifica que realmente ha ocurrido un error
+      IF MsgYesNo( "Seguro que dese continuar ?", "Pregunta" )
+         C := A + B
+      ELSE
+         BREAK   // Si uso RETURN el compilador dice que no puedo incluirlo dentro de un BEGIN SEQUENCE
+      ENDIF
 
-			MyErrorFunc( oErr )
-		endif
+   RECOVER USING oErr
 
-	END
+      IF oErr <> NIL
+         lMyError := .T.   // Especifica que realmente ha ocurrido un error
 
-	ERRORBLOCK( oErrAntes )
+         MyErrorFunc( oErr )
+      ENDIF
 
-	if lMyError
-		MsgBox( "Ocurrio un error y el sistema no pudo completar la operacion", "Error" )
-	endif
+   END
 
-RETURN
+   ERRORBLOCK( oErrAntes )
 
+   IF lMyError
+      MsgBox( "Ocurrio un error y el sistema no pudo completar la operacion", "Error" )
+   ENDIF
 
-#include "fncMyError.prg"
+   RETURN
+
+   #include "fncMyError.prg"
+

@@ -1,241 +1,245 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Program : Test01.prg
- * Purpose : TData class test showing multiple browses of same data file
- *           in MDI-child windows.
- * Note    : Each press of the button will open a new browse of the same file.
+* MINIGUI - Harbour Win32 GUI library Demo
+* Program : Test01.prg
+* Purpose : TData class test showing multiple browses of same data file
+*           in MDI-child windows.
+* Note    : Each press of the button will open a new browse of the same file.
 */
 
 #include "minigui.ch"
 
-#define CLR_DEFAULT	0xff000000
+#define CLR_DEFAULT   0xff000000
 
-Static nChild := 0
+STATIC nChild := 0
 
-
-function Main()
+FUNCTION Main()
 
    SET FONT TO "Arial", 10
 
    DEFINE WINDOW Form_1 ;
-      CLIENTAREA 640, 480 ;
-      TITLE 'Browse MDI demo' ;
-      MAIN ;
-      MDI
+         CLIENTAREA 640, 480 ;
+         TITLE 'Browse MDI demo' ;
+         MAIN ;
+         MDI
 
       DEFINE MAIN MENU
 
-	POPUP 'File'
-		ITEM 'Open'		ACTION Customer()
-		ITEM 'Close'		ACTION CloseMdi() 
-		SEPARATOR
-		ITEM 'Exit'		ACTION Form_1.Release
-	END POPUP
+         POPUP 'File'
+            ITEM 'Open'      ACTION Customer()
+            ITEM 'Close'      ACTION CloseMdi()
+            SEPARATOR
+            ITEM 'Exit'      ACTION Form_1.Release
+         END POPUP
 
-	POPUP 'Child Windows'
-		POPUP '&Tiled' 		    
-		    ITEM '&Horizontal '	ACTION WinChildTile(.f.)
-		    ITEM '&Vertical '	ACTION WinChildTile(.t.)
-		END POPUP
-		ITEM '&Cascade'		ACTION WinChildCascade()
-		ITEM 'Arrange &Icons' 	ACTION WinChildIcons()
-		SEPARATOR
-		ITEM 'Close &All'	ACTION WinChildCloseAll()
-		ITEM '&Restore All'	ACTION WinChildRestoreAll()
-	END POPUP
+         POPUP 'Child Windows'
+            POPUP '&Tiled'
+               ITEM '&Horizontal '   ACTION WinChildTile(.f.)
+               ITEM '&Vertical '   ACTION WinChildTile(.t.)
+            END POPUP
+            ITEM '&Cascade'      ACTION WinChildCascade()
+            ITEM 'Arrange &Icons'    ACTION WinChildIcons()
+            SEPARATOR
+            ITEM 'Close &All'   ACTION WinChildCloseAll()
+            ITEM '&Restore All'   ACTION WinChildRestoreAll()
+         END POPUP
 
       END MENU
 
       DEFINE IMAGELIST ImageList_1 ;
-         BUTTONSIZE 24, 24 ;
-         IMAGE { 'tb_24.bmp' } ;
-         COLORMASK CLR_DEFAULT ;
-         IMAGECOUNT 19 ;
-         MASK
+            BUTTONSIZE 24, 24 ;
+            IMAGE { 'tb_24.bmp' } ;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 19 ;
+            MASK
 
-      DEFINE SPLITBOX 
+         DEFINE SPLITBOX
 
-         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT 
+            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT
 
-		BUTTON Btn_Open ;
-		        PICTUREINDEX 0 ;
-			TOOLTIP 'Browse customer' ;
-			ACTION Customer()
+               BUTTON Btn_Open ;
+                  PICTUREINDEX 0 ;
+                  TOOLTIP 'Browse customer' ;
+                  ACTION Customer()
 
-		BUTTON Btn_Close ;
-			PICTUREINDEX 5 ;
-			TOOLTIP 'Close Active Child Window' ;
-			ACTION CloseMdi()
+               BUTTON Btn_Close ;
+                  PICTUREINDEX 5 ;
+                  TOOLTIP 'Close Active Child Window' ;
+                  ACTION CloseMdi()
 
-         END TOOLBAR
+            END TOOLBAR
 
-      END SPLITBOX
+         END SPLITBOX
 
-      Form_1.Btn_Close.Enabled := .f.
+         Form_1.Btn_Close.Enabled := .f.
 
-   END WINDOW
+      END WINDOW
 
-   CENTER WINDOW Form_1
+      CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1 
+      ACTIVATE WINDOW Form_1
 
-return nil
+      RETURN NIL
 
+PROCEDURE CloseMdi()
 
-Procedure CloseMdi()
+   CLOSE ACTIVE MDICHILD
+   Form_1.Btn_Close.Enabled := nChild > 0
 
-    CLOSE ACTIVE MDICHILD
-    Form_1.Btn_Close.Enabled := nChild > 0
+   RETURN
 
-Return
+   // You can call this as many times as you want
+   // and you'll get a new browse window each time.
 
+FUNCTION Customer()
 
-// You can call this as many times as you want
-// and you'll get a new browse window each time.
-function Customer()
+   LOCAL a_fields, a_width, a_headers, i
 
-   Local a_fields, a_width, a_headers, i
+   LOCAL oCust := tdata():new(,"cust")
 
-   local oCust := tdata():new(,"cust")
+   IF oCust:use()
 
-   if oCust:use()
-
-      if ! file("cust2.ntx")
+      IF ! file("cust2.ntx")
          oCust:createIndex("cust2",,"upper(company)")
          oCust:closeIndex()
-      endif
+      ENDIF
       oCust:addIndex( "cust2" )
       oCust:goTop()
 
       a_fields := {}
-      for i:=1 to oCust:lastRec()
+      FOR i:=1 to oCust:lastRec()
          aadd( a_fields, { oCust:company, oCust:address1, oCust:city } )
          oCust:skip()
-      next
+      NEXT
       a_headers := { "Customer", "Address", "City" }
       a_width := { 200, 250, 120 }
 
       nChild++
 
       DEFINE WINDOW ChildMdi ;
-	TITLE "Child " + hb_ntos(nChild) + ": " + oCust:cAlias ;
-	MDICHILD ;
-	ON INIT ( ResizeEdit() ) ; 
-	ON RELEASE ( oCust:close(), ReleaseMdiChild() ) ;
-	ON SIZE ResizeEdit();
-	ON MAXIMIZE ResizeEdit();
-	ON MINIMIZE ResizeEdit();
-	ON MOUSECLICK SetEditFocus()
+            TITLE "Child " + hb_ntos(nChild) + ": " + oCust:cAlias ;
+            MDICHILD ;
+            ON INIT ( ResizeEdit() ) ;
+            ON RELEASE ( oCust:close(), ReleaseMdiChild() ) ;
+            ON SIZE ResizeEdit();
+            ON MAXIMIZE ResizeEdit();
+            ON MINIMIZE ResizeEdit();
+            ON MOUSECLICK SetEditFocus()
 
-	@ 0,0 GRID BrwMdi								;
-		WIDTH 200  										;
-		HEIGHT 200										;	
-		HEADERS a_headers ;
-		WIDTHS a_width ;
-		ITEMS a_fields
+         @ 0,0 GRID BrwMdi                        ;
+            WIDTH 200                                ;
+            HEIGHT 200                              ;
+            HEADERS a_headers ;
+            WIDTHS a_width ;
+            ITEMS a_fields
 
       END WINDOW
- 
+
       Form_1.Btn_Close.Enabled := .t.
 
-   endif
+   ENDIF
 
-return nil
+   RETURN NIL
 
+PROCEDURE ResizeEdit()
 
-Procedure ResizeEdit() 
-    Local ChildHandle, ChildName
-    Local i
+   LOCAL ChildHandle, ChildName
+   LOCAL i
 
-    ChildHandle := GetActiveMdiHandle() 
-    i := aScan ( _HMG_aFormHandles , ChildHandle )
-    if i > 0  
-        ChildName := _HMG_aFormNames [i]
-        ResizeChildEdit(ChildName)
-    endif
+   ChildHandle := GetActiveMdiHandle()
+   i := aScan ( _HMG_aFormHandles , ChildHandle )
+   IF i > 0
+      ChildName := _HMG_aFormNames [i]
+      ResizeChildEdit(ChildName)
+   ENDIF
 
-Return
+   RETURN
 
+PROCEDURE ResizeChildEdit(ChildName)
 
-Procedure ResizeChildEdit(ChildName) 
-    Local hwndCln, actpos := {0,0,0,0}
-    Local i, w, h 
+   LOCAL hwndCln, actpos := {0,0,0,0}
+   LOCAL i, w, h
 
-    i := aScan ( _HMG_aFormNames , ChildName )
-    if i > 0  
-        hwndCln := _HMG_aFormHandles  [i]
-        GetClientRect(hwndCln, actpos)
-        w := actpos[3]-actpos[1]
-        h := actpos[4]-actpos[2]
-        _SetControlHeight( "BrwMdi", ChildName, h)
-        _SetControlWidth( "BrwMdi", ChildName, w)
-    endif
+   i := aScan ( _HMG_aFormNames , ChildName )
+   IF i > 0
+      hwndCln := _HMG_aFormHandles  [i]
+      GetClientRect(hwndCln, actpos)
+      w := actpos[3]-actpos[1]
+      h := actpos[4]-actpos[2]
+      _SetControlHeight( "BrwMdi", ChildName, h)
+      _SetControlWidth( "BrwMdi", ChildName, w)
+   ENDIF
 
-Return
+   RETURN
 
+PROCEDURE SetEditFocus()
 
-Procedure SetEditFocus()
-    Local ChildHandle, ChildName
-    Local i
+   LOCAL ChildHandle, ChildName
+   LOCAL i
 
-    ChildHandle := GetActiveMdiHandle() 
-    i := aScan ( _HMG_aFormHandles , ChildHandle )
-    if i > 0  
-        ChildName := _HMG_aFormNames [i]
-        _SetFocus ( "BrwMdi", ChildName )
-        DoMethod ( ChildName, "BrwMdi", "Refresh" )
-    endif
+   ChildHandle := GetActiveMdiHandle()
+   i := aScan ( _HMG_aFormHandles , ChildHandle )
+   IF i > 0
+      ChildName := _HMG_aFormNames [i]
+      _SetFocus ( "BrwMdi", ChildName )
+      DoMethod ( ChildName, "BrwMdi", "Refresh" )
+   ENDIF
 
-Return
+   RETURN
 
+PROCEDURE ReleaseMdiChild()
 
-Procedure ReleaseMdiChild()
-    nChild--
-    Form_1.Btn_Close.Enabled := nChild > 0
-Return
+   nChild--
+   Form_1.Btn_Close.Enabled := nChild > 0
 
+   RETURN
 
-Procedure ResizeAllChildEdit()
-    Local nfrm, ChildName, n
+PROCEDURE ResizeAllChildEdit()
 
-    nFrm := len(_HMG_aFormHandles)
-    For n:=1 to nFrm
-        if _HMG_aFormType [n] == 'Y' 
-            ChildName := _HMG_aFormNames [n]
-            ResizeChildEdit(ChildName) 
-        endif
-    Next
+   LOCAL nfrm, ChildName, n
 
-Return
+   nFrm := len(_HMG_aFormHandles)
+   FOR n:=1 to nFrm
+      IF _HMG_aFormType [n] == 'Y'
+         ChildName := _HMG_aFormNames [n]
+         ResizeChildEdit(ChildName)
+      ENDIF
+   NEXT
 
+   RETURN
 
-Procedure WinChildTile( lVert )
-    if lVert
-        TILE MDICHILDS VERTICAL
-    else
-        TILE MDICHILDS HORIZONTAL
-    endif
-    ResizeAllChildEdit()
-Return
+PROCEDURE WinChildTile( lVert )
 
+   IF lVert
+      TILE MDICHILDS VERTICAL
+   ELSE
+      TILE MDICHILDS HORIZONTAL
+   ENDIF
+   ResizeAllChildEdit()
 
-Procedure WinChildCascade()
-    CASCADE MDICHILDS
-    ResizeAllChildEdit()
-Return
+   RETURN
 
+PROCEDURE WinChildCascade()
 
-Procedure WinChildIcons()
-    ARRANGE MDICHILD ICONS
-Return
+   CASCADE MDICHILDS
+   ResizeAllChildEdit()
 
+   RETURN
 
-Procedure WinChildCloseAll()
-    CLOSE MDICHILDS ALL
-Return
+PROCEDURE WinChildIcons()
 
+   ARRANGE MDICHILD ICONS
 
-Procedure WinChildRestoreAll()
-    RESTORE MDICHILDS ALL
-Return
+   RETURN
+
+PROCEDURE WinChildCloseAll()
+
+   CLOSE MDICHILDS ALL
+
+   RETURN
+
+PROCEDURE WinChildRestoreAll()
+
+   RESTORE MDICHILDS ALL
+
+   RETURN
+

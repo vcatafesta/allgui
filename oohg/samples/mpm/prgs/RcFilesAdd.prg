@@ -1,57 +1,56 @@
 /*
- * $Id: RcFilesAdd.prg,v 1.1 2013/11/18 20:40:25 migsoft Exp $
- */
+* $Id: RcFilesAdd.prg,v 1.1 2013/11/18 20:40:25 migsoft Exp $
+*/
 
 #include "oohg.ch"
-*---------------------------------------------------------------------*
-Procedure AddRcfiles
-*---------------------------------------------------------------------*
-   Local Files , x , i , Exists
+
+PROCEDURE AddRcfiles
+
+   LOCAL Files , x , i , Exists
 
    DECLARE WINDOW main
    DECLARE WINDOW MigMess
 
    Files :=  GetRcFiles( )
-   For x := 1 To Len ( Files )
-       DO EVENTS
-       Exists := .F.
-       For i := 1 To main.List_4.ItemCount
-           DO EVENTS
-           If Upper(alltrim(Files [x])) == Upper(alltrim(main.List_4.Item(i)))
-              Exists := .T.
-              Exit
-           EndIf
-       Next i
-       If .Not. Exists
-          main.List_4.AddItem ( Files [x] )
-       EndIf
-   Next x
+   FOR x := 1 To Len ( Files )
+      DO EVENTS
+      Exists := .F.
+      FOR i := 1 To main.List_4.ItemCount
+         DO EVENTS
+         IF Upper(alltrim(Files [x])) == Upper(alltrim(main.List_4.Item(i)))
+            Exists := .T.
+            EXIT
+         ENDIF
+      NEXT i
+      IF .Not. Exists
+         main.List_4.AddItem ( Files [x] )
+      ENDIF
+   NEXT x
 
-Return
+   RETURN
 
-*---------------------------------------------------------------------*
-Function GetRcFiles()
-*---------------------------------------------------------------------*
-   Local RetVal := {} , BaseFolder, aFiles := {}
+FUNCTION GetRcFiles()
 
-   If Empty ( main.text_1.Value )
+   LOCAL RetVal := {} , BaseFolder, aFiles := {}
+
+   IF Empty ( main.text_1.Value )
       MsgStop('You must select project base folder first','')
-      Return ( {} )
-   EndIf
+
+      RETURN ( {} )
+   ENDIF
 
    cDirOld := GetCurrentFolder() // NIL
    cDirNew := GetFolder("Folder:",cDirOld)
 
    IF !EMPTY(cDirNew)
-     cDirOld  :=cDirNew
-     aFiles :=DIRECTORY(cDirNew + "\" +"*.RC")
-     AEVAL(aFiles,{|x,y| aFiles[y] :=cDirNew + "\" + x[1]})
+      cDirOld  :=cDirNew
+      aFiles :=DIRECTORY(cDirNew + "\" +"*.RC")
+      AEVAL(aFiles,{|x,y| aFiles[y] :=cDirNew + "\" + x[1]})
 
+      aFiles :=ASORT(aFiles,{|x,y| UPPER(x) < UPPER(y)})
 
-     aFiles :=ASORT(aFiles,{|x,y| UPPER(x) < UPPER(y)})
-
-   DEFINE WINDOW GetRcFiles AT 0,0 WIDTH 533 HEIGHT 384 TITLE 'Select RC Files' ;
-      ICON "mpm" MODAL NOMINIMIZE NOMAXIMIZE NOSIZE BACKCOLOR {255,255,255}
+      DEFINE WINDOW GetRcFiles AT 0,0 WIDTH 533 HEIGHT 384 TITLE 'Select RC Files' ;
+            ICON "mpm" MODAL NOMINIMIZE NOMAXIMIZE NOSIZE BACKCOLOR {255,255,255}
 
          DEFINE FRAME Frame_21
             ROW    0
@@ -63,15 +62,15 @@ Function GetRcFiles()
 
          DEFINE LISTBOX List_rc
             ITEMS aFiles
-            ROW	20
-            COL	20
+            ROW   20
+            COL   20
             WIDTH 490
             HEIGHT 284
             FONTNAME "Segoe UI"
             ONGOTFOCUS This.BackColor := {211,237,250}
             ONLOSTFOCUS This.BackColor := {255,255,225}
             BACKCOLOR {255,255,225}
-            MULTISELECT	.T.
+            MULTISELECT   .T.
          END LISTBOX
 
          DEFINE BUTTON ALL
@@ -110,48 +109,49 @@ Function GetRcFiles()
             TRANSPARENT .T.
          END LABEL
 
-   END WINDOW
+      END WINDOW
 
-   CENTER WINDOW GetRcFiles
-   GetRcFiles.Ok.Setfocus
-   ACTIVATE WINDOW GetRcFiles
+      CENTER WINDOW GetRcFiles
+      GetRcFiles.Ok.Setfocus
+      ACTIVATE WINDOW GetRcFiles
 
-     Else
-         MsgInfo("RC Files not found","RC Files")
-         RetVal := {}
-   Endif
+   ELSE
+      MsgInfo("RC Files not found","RC Files")
+      RetVal := {}
+   ENDIF
 
-Return ( RetVal )
+   RETURN ( RetVal )
 
-*---------------------------------------------------------------------*
-Function GetRcFilesOk( aFiles , aSelected )
-*---------------------------------------------------------------------*
-   Local aNew := {} , i
+FUNCTION GetRcFilesOk( aFiles , aSelected )
 
-   If Empty( aSelected )
+   LOCAL aNew := {} , i
+
+   IF Empty( aSelected )
       aNew := aFiles
-   Else
-      For i := 1 To Len ( aSelected )
-          DO EVENTS
-          aadd ( aNew , aFiles [ aSelected [i] ] )
-      Next i
-   Endif
+   ELSE
+      FOR i := 1 To Len ( aSelected )
+         DO EVENTS
+         aadd ( aNew , aFiles [ aSelected [i] ] )
+      NEXT i
+   ENDIF
 
-Return( aNew )
+   RETURN( aNew )
 
-*---------------------------------------------------------------------*
-Procedure RemoveFileRc()
-*---------------------------------------------------------------------*
-   Local a_Mig := main.List_4.value
-   If !Empty(a_Mig)
-      If MsgYesNo('Remove File(s) ' + UPPER( main.List_4.Item( main.List_4.Value ) ) + ' From Project ?','Confirm')
-         While Len(a_Mig) > 0
+PROCEDURE RemoveFileRc()
+
+   LOCAL a_Mig := main.List_4.value
+
+   IF !Empty(a_Mig)
+      IF MsgYesNo('Remove File(s) ' + UPPER( main.List_4.Item( main.List_4.Value ) ) + ' From Project ?','Confirm')
+         WHILE Len(a_Mig) > 0
             main.List_4.DeleteItem( a_Mig[ 1 ] )
             a_Mig := main.List_4.value
-         Enddo
-      EndIf
-      if main.list_4.ItemCount > 0
+         ENDDO
+      ENDIF
+      IF main.list_4.ItemCount > 0
          main.List_4.value := {1}
-      endif
-   Endif
-Return
+      ENDIF
+   ENDIF
+
+   RETURN
+

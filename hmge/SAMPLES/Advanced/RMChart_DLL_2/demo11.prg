@@ -1,8 +1,6 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2016 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 ANNOUNCE RDDSYS
@@ -21,120 +19,111 @@ ANNOUNCE RDDSYS
 #define ID_CHART   5001
 #define ID_CHART_2 5002
 
-Static oRMChart, lDraw := .F.
+STATIC oRMChart, lDraw := .F.
 
 SET PROCEDURE TO rmchart.prg
 
-*-----------------------------------------------------------------------------*
-Procedure Main
-*-----------------------------------------------------------------------------*
+PROCEDURE Main
 
-	SET FONT TO "Times New Roman" , 10
+   SET FONT TO "Times New Roman" , 10
 
-        oRMChart := RMChart():New()
+   oRMChart := RMChart():New()
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 745 ;
-		HEIGHT 370 ;
-		TITLE APP_TITLE ;
-		ICON "demo.ico" ;
-		MAIN ;
-		NOMAXIMIZE NOSIZE ;
-		ON INTERACTIVECLOSE iif( MsgYesNo("Really want to quit ?", "Exit"), EndWindow( .F. ), .F. )
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 745 ;
+         HEIGHT 370 ;
+         TITLE APP_TITLE ;
+         ICON "demo.ico" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE ;
+         ON INTERACTIVECLOSE iif( MsgYesNo("Really want to quit ?", "Exit"), EndWindow( .F. ), .F. )
 
-		@ 295, 120 BUTTON Btn_Chart ;
-			CAPTION "RMCHART" ;
-			ACTION CreateCharts( thiswindow.Handle ) ;
-			WIDTH 150 HEIGHT 30 DEFAULT
+      @ 295, 120 BUTTON Btn_Chart ;
+         CAPTION "RMCHART" ;
+         ACTION CreateCharts( thiswindow.Handle ) ;
+         WIDTH 150 HEIGHT 30 DEFAULT
 
-		@ 295, 290 BUTTON Btn_Print ;
-			CAPTION "SAVE RMC" ;
-			ACTION SaveCharts() ;
-			WIDTH 150 HEIGHT 30
+      @ 295, 290 BUTTON Btn_Print ;
+         CAPTION "SAVE RMC" ;
+         ACTION SaveCharts() ;
+         WIDTH 150 HEIGHT 30
 
-		@ 295, 460 BUTTON Btn_Cancel ;
-			CAPTION "Close" ;
-			ACTION EndWindow() ;
-			WIDTH 150 HEIGHT 30
+      @ 295, 460 BUTTON Btn_Cancel ;
+         CAPTION "Close" ;
+         ACTION EndWindow() ;
+         WIDTH 150 HEIGHT 30
 
-		ON KEY ESCAPE ACTION Win_1.Btn_Cancel.OnClick
+      ON KEY ESCAPE ACTION Win_1.Btn_Cancel.OnClick
 
-	END WINDOW
+   END WINDOW
 
-	Win_1.Btn_Print.Enabled := .F.
+   Win_1.Btn_Print.Enabled := .F.
 
-	CENTER WINDOW Win_1
-	ACTIVATE WINDOW Win_1
+   CENTER WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure CreateCharts( hWnd )
-*-----------------------------------------------------------------------------*
+PROCEDURE CreateCharts( hWnd )
 
-    IF !lDraw
-        lDraw := .T.
+   IF !lDraw
+      lDraw := .T.
 
-        // Create a Pie Chart
-        IF FILE( "chart11.rmc" )
-           oRMChart:CreateChartFromFile( hWnd, ID_CHART, 20, 20, 0, "chart11.rmc" )
-        ELSE
-           Graphic11( hWnd, oRMChart, ID_CHART )
-        ENDIF
-        oRMChart:Draw( ID_CHART )
+      // Create a Pie Chart
+      IF FILE( "chart11.rmc" )
+         oRMChart:CreateChartFromFile( hWnd, ID_CHART, 20, 20, 0, "chart11.rmc" )
+      ELSE
+         Graphic11( hWnd, oRMChart, ID_CHART )
+      ENDIF
+      oRMChart:Draw( ID_CHART )
 
-        // Create a line Chart
-        IF FILE( "chart12.rmc" )
-           oRMChart:CreateChartFromFile( hWnd, ID_CHART_2, 380, 20, 0, "chart12.rmc" )
-        ELSE
-           Graphic12( hWnd, oRMChart, ID_CHART_2 )
-        ENDIF
-        oRMChart:Draw( ID_CHART_2 )
+      // Create a line Chart
+      IF FILE( "chart12.rmc" )
+         oRMChart:CreateChartFromFile( hWnd, ID_CHART_2, 380, 20, 0, "chart12.rmc" )
+      ELSE
+         Graphic12( hWnd, oRMChart, ID_CHART_2 )
+      ENDIF
+      oRMChart:Draw( ID_CHART_2 )
 
-	Win_1.Btn_Print.Enabled := .T.
-    ENDIF
+      Win_1.Btn_Print.Enabled := .T.
+   ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure SaveCharts()
-*-----------------------------------------------------------------------------*
+PROCEDURE SaveCharts()
 
-    LOCAL nError, nError_2
+   LOCAL nError, nError_2
 
-    oRmChart:WriteRMCFile( ID_CHART, "chart11.rmc" )
-    nError := oRmChart:nError
+   oRmChart:WriteRMCFile( ID_CHART, "chart11.rmc" )
+   nError := oRmChart:nError
 
-    oRmChart:WriteRMCFile( ID_CHART_2, "chart12.rmc" )
-    nError_2 := oRmChart:nError
+   oRmChart:WriteRMCFile( ID_CHART_2, "chart12.rmc" )
+   nError_2 := oRmChart:nError
 
-    IF nError == 0 .AND. nError_2 == 0
-       MsgInfo( 'RMC files were saved successfully.' )
-    ENDIF
+   IF nError == 0 .AND. nError_2 == 0
+      MsgInfo( 'RMC files were saved successfully.' )
+   ENDIF
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure endwindow( lClose )
-*-----------------------------------------------------------------------------*
-    Default lClose To .T.
+PROCEDURE endwindow( lClose )
 
-    IF lDraw
-        oRmChart:DeleteChart( ID_CHART )
-        oRmChart:DeleteChart( ID_CHART_2 )
-        oRMChart:Destroy()
-    ENDIF
+   DEFAULT lClose To .T.
 
-    IF lClose
-        Win_1.Release
-    ENDIF
+   IF lDraw
+      oRmChart:DeleteChart( ID_CHART )
+      oRmChart:DeleteChart( ID_CHART_2 )
+      oRMChart:Destroy()
+   ENDIF
 
-Return
+   IF lClose
+      Win_1.Release
+   ENDIF
 
-*-----------------------------------------------------------------------------*
+   RETURN
+
 FUNCTION GetSampleData()
-*-----------------------------------------------------------------------------*
 
    LOCAL aData := Array(10)
 
@@ -151,9 +140,7 @@ FUNCTION GetSampleData()
 
    RETURN aData
 
-*-----------------------------------------------------------------------------*
 FUNCTION Graphic11( hWnd, oRMChart11, nIdChart, MAX_SIZE_ONE, MAX_SIZE_TWO )
-*-----------------------------------------------------------------------------*
 
    LOCAL aData1 := GetSampleData()
 
@@ -165,9 +152,7 @@ FUNCTION Graphic11( hWnd, oRMChart11, nIdChart, MAX_SIZE_ONE, MAX_SIZE_TWO )
 
    RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION Graphic12( hWnd, oRMChart12, nIdChart, MAX_SIZE_ONE, MAX_SIZE_TWO )
-*-----------------------------------------------------------------------------*
 
    LOCAL aData2 := GetSampleData()
 
@@ -182,3 +167,4 @@ FUNCTION Graphic12( hWnd, oRMChart12, nIdChart, MAX_SIZE_ONE, MAX_SIZE_TWO )
    oRMChart12:SetSeriesData(nIdChart, 1, 1, aData2, 10, 0)
 
    RETURN NIL
+

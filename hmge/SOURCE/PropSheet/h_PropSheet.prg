@@ -1,53 +1,52 @@
 /*----------------------------------------------------------------------------
- MINIGUI - Harbour Win32 GUI library source code
+MINIGUI - Harbour Win32 GUI library source code
 
- Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
- http://harbourminigui.googlepages.com/
+Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
+http://harbourminigui.googlepages.com/
 
- Property Sheet control source code
- (C)2008 Janusz Pora <januszpora@onet.eu>
+Property Sheet control source code
+(C)2008 Janusz Pora <januszpora@onet.eu>
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
- visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
- contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other
- files to produce an executable, this does not by itself cause the resulting
- executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
- Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
- Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
-    Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2012, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2012, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-     Copyright 2001-2009 Alexander S.Kresin <alex@belacy.belgorod.su>
+"HWGUI"
+Copyright 2001-2009 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
-
 
 #include "minigui.ch"
 #include "i_PropSheet.ch"
@@ -68,7 +67,6 @@
 #define IDNO                7
 #define IDCLOSE             8
 #define IDHELP              9
-
 
 #define PSH_DEFAULT             0x00000000
 #define PSH_PROPTITLE           0x00000001
@@ -99,7 +97,6 @@
 #define PSH_NOCONTEXTHELP       0x02000000
 // ----------------------------------------
 
-
 #define PSP_DEFAULT                0x00000000
 #define PSP_DLGINDIRECT            0x00000001
 #define PSP_USEHICON               0x00000002
@@ -115,7 +112,6 @@
 #define PSP_HIDEHEADER             0x00000800
 #define PSP_USEHEADERTITLE         0x00001000
 #define PSP_USEHEADERSUBTITLE      0x00002000
-
 
 #define PSCB_INITIALIZED  1
 #define PSCB_PRECREATE    2
@@ -137,7 +133,6 @@
 
 #define PSN_FIRST               -200
 
-
 #define PSN_SETACTIVE           (PSN_FIRST-0)
 #define PSN_KILLACTIVE          (PSN_FIRST-1)
 #define PSN_APPLY               (PSN_FIRST-2)
@@ -154,7 +149,6 @@
 #define DWL_MSGRESULT       0
 #define DS_SETFONT          64   /* User specified font for Dlg controls */
 
-
 MEMVAR mVar
 
 MEMVAR _HMG_ActivePropSheetHandle, _HMG_ActivePropSheetModeless, _HMG_ActivePropSheetWizard
@@ -165,11 +159,9 @@ MEMVAR _HMG_aPropSheetPagesTemp, _HMG_aPropSheetTemplate, _HMG_aPropSheetPages, 
 STATIC aHwndSheetPages := {}
 STATIC _HMG_PropSheetButton := 0
 
-*------------------------------------------------------------------------------*
 FUNCTION _BeginPropSheet(  FormName, ParentForm, row, col, width, height, caption, icon, fontname, fontsize, ;
       dialogproc, initproc, applyproc, cancelproc, validproc, bold, italic, underline, strikeout, ;
       modal, wizard, watermark, headerbmp, lite )
-*------------------------------------------------------------------------------*
    LOCAL aFont, FontHandle
 
    IF _HMG_BeginDialogActive = .T.
@@ -201,11 +193,10 @@ FUNCTION _BeginPropSheet(  FormName, ParentForm, row, col, width, height, captio
 
    _DefinePropSheet (  FormName, ParentForm, row, col, width, height, caption, icon, fontname, fontsize, dialogproc, initproc, applyproc, cancelproc, validproc, bold, italic, underline, strikeout, modal, wizard, watermark, headerbmp, lite )
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefinePropSheet ( FormName, ParentForm,  y, x, w, h,  caption, IdIcon, fontname, fontsize, PropSheetProcedure, InitProcedure, ApplyProcedure, CancelProcedure, ValidProcedure,  bold, italic, underline, strikeout, modal, wizard, IdWaterMark, IdHeader, lite )
-*------------------------------------------------------------------------------*
+
    LOCAL i, htooltip := NIL, mVar, k, modeless
    LOCAL FormHandle := Nil, ParentHandle, cWaterMark := "", cHeader := "", cIcon := "", Style := PSH_USECALLBACK + DS_SETFONT
 
@@ -307,6 +298,7 @@ FUNCTION _DefinePropSheet ( FormName, ParentForm,  y, x, w, h,  caption, IdIcon,
    _HMG_ActivePropSheetHandle := 0
 
    IF !modeless
+
       RETURN NIL
    ENDIF
 
@@ -326,7 +318,7 @@ FUNCTION _DefinePropSheet ( FormName, ParentForm,  y, x, w, h,  caption, IdIcon,
 
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames[ k ]              :=  FormName
       _HMG_aFormHandles[ k ]           :=  FormHandle
@@ -383,7 +375,7 @@ FUNCTION _DefinePropSheet ( FormName, ParentForm,  y, x, w, h,  caption, IdIcon,
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames, FormName )
       AAdd ( _HMG_aFormHandles, FormHandle )
@@ -441,12 +433,12 @@ FUNCTION _DefinePropSheet ( FormName, ParentForm,  y, x, w, h,  caption, IdIcon,
       _HMG_aPropSheetTemplate[ 1 ]  := &mVar.
    ENDIF
 
-RETURN ( FormHandle )
+   RETURN ( FormHandle )
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineSheetPage ( DialogName, Id, cTitle, HdTitle, SubHdTitle, HideHeader )
-*------------------------------------------------------------------------------*
+
    LOCAL style := PSP_USETITLE
+
    DEFAULT Id := 0, SubHdTitle := ""
    IF Id == 0
       MsgMiniGuiError( "PROPERTY SHEET Structures only from Resourses." )
@@ -481,12 +473,12 @@ FUNCTION _DefineSheetPage ( DialogName, Id, cTitle, HdTitle, SubHdTitle, HideHea
    _HMG_ActiveDialogName         := ""
    _HMG_BeginDialogActive        := .F.
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _BeginSheetPage ( DialogName, Id, cTitle, HdTitle, SubHdTitle, HideHeader )
-*------------------------------------------------------------------------------*
+
    LOCAL Style := PSP_USETITLE
+
    DEFAULT Id := 0, SubHdTitle := ""
 
    _HMG_ActiveDialogHandle    := 0
@@ -513,11 +505,10 @@ FUNCTION _BeginSheetPage ( DialogName, Id, cTitle, HdTitle, SubHdTitle, HideHead
 
    _HMG_aPropSheetPagesTemp := { cTitle, Id, Style, HdTitle, SubHdTitle }
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _EndSheetPage()
-*------------------------------------------------------------------------------*
+
    IF _HMG_BeginDialogActive
       _HMG_ActiveDialogHandle := CreatePropSeeetPageIndirect( _HMG_aPropSheetPagesTemp, _HMG_aPropSheetTemplate, _HMG_aDialogItems )
       AAdd( aHwndSheetPages, _HMG_ActiveDialogHandle  )
@@ -531,12 +522,12 @@ FUNCTION _EndSheetPage()
    _HMG_BeginDialogActive        := .F.
    _HMG_DialogInMemory           := .F.
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _EndPropSheet()
-*------------------------------------------------------------------------------*
+
    LOCAL Formhandle, k
+
    Formhandle := CreatePropertySheet( _HMG_ActivePropSheetHandle, aHwndSheetPages, ;
       _HMG_aPropSheetTemplate, _HMG_ActivePropSheetModeless )
 
@@ -549,11 +540,10 @@ FUNCTION _EndPropSheet()
       _HMG_aFormToolTipHandle[ k ]  :=  InitToolTip( FormHandle )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _DefineSheetDialog ( FormName, Id_resource, FormHandle, hWndParent  )
-*------------------------------------------------------------------------------*
+
    LOCAL mVar, k
 
    HB_SYMBOL_UNUSED( Id_resource )
@@ -567,7 +557,7 @@ FUNCTION _DefineSheetDialog ( FormName, Id_resource, FormHandle, hWndParent  )
 
    IF k > 0
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       _HMG_aFormNames [k] := FormName
       _HMG_aFormHandles [k] :=  FormHandle
@@ -624,7 +614,7 @@ FUNCTION _DefineSheetDialog ( FormName, Id_resource, FormHandle, hWndParent  )
 
       k := Len( _HMG_aFormNames ) + 1
 
-      Public &mVar. := k
+      PUBLIC &mVar. := k
 
       AAdd ( _HMG_aFormNames, FormName )
       AAdd ( _HMG_aFormHandles, FormHandle )
@@ -678,13 +668,13 @@ FUNCTION _DefineSheetDialog ( FormName, Id_resource, FormHandle, hWndParent  )
       AAdd ( _HMG_aFormMiscData2, '' )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION InitPageDlgProc( hwndDlg, idDlg, hWndParent )
-*------------------------------------------------------------------------------*
+
    LOCAL i, n, aDialogItems, k_old, nId, k, blInit
    LOCAL FontHandle, ControlHandle
+
    _HMG_ActiveDialogHandle     := hwndDlg
    _HMG_BeginDialogActive      := .T.
    _HMG_ActiveDlgProcHandle    := hwndDlg
@@ -753,12 +743,12 @@ FUNCTION InitPageDlgProc( hwndDlg, idDlg, hWndParent )
    _HMG_ActiveDlgProcHandle    := 0
    _HMG_ActiveDlgProcId        := 0
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION ButtonPageDlgProc( hwndDlg, Msg, IdDlg, nPage )
-*------------------------------------------------------------------------------*
+
    LOCAL i, lRet := TRUE, lChd := .F.
+
    _HMG_ActiveDialogHandle     := hwndDlg
    _HMG_BeginDialogActive      := .T.
    _HMG_ActiveDlgProcHandle    := hwndDlg
@@ -813,11 +803,10 @@ FUNCTION ButtonPageDlgProc( hwndDlg, Msg, IdDlg, nPage )
    _HMG_ActiveDlgProcHandle    := 0
    _HMG_ActiveDlgProcId        := 0
 
-RETURN IF( lRet, 1, 0 )
+   RETURN IF( lRet, 1, 0 )
 
-*------------------------------------------------------------------------------*
 FUNCTION PropSheetProc( hwndPropSheet, nMsg, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL lRet := TRUE, k
 
    DO CASE
@@ -839,12 +828,12 @@ FUNCTION PropSheetProc( hwndPropSheet, nMsg, lParam )
       _HMG_PropSheetButton := lParam
    ENDCASE
 
-RETURN IF( lRet, 1, 0 )
+   RETURN IF( lRet, 1, 0 )
 
-*------------------------------------------------------------------------------*
 FUNCTION PageDlgProc( hwndParent, hwndDlg, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
+
    LOCAL lRet := FALSE, i, nPage, nPageMode, NotifyCode, hwndActive, ControlHandle
+
    _HMG_ActiveDlgProcHandle    := hwndDlg
    _HMG_ActiveDlgProcMsg       := nMsg
    _HMG_ActiveDlgProcId        := wParam
@@ -894,7 +883,7 @@ FUNCTION PageDlgProc( hwndParent, hwndDlg, nMsg, wParam, lParam )
 
       nPage := PropSheetHwndToIndex( hwndParent, hwndDlg )
       NotifyCode := GetNotifyCode( lParam )
-      switch  NotifyCode
+      SWITCH  NotifyCode
       CASE PSN_APPLY   // sent when OK or Apply button pressed
          IF nPage + 1 <= Len( _HMG_aPropSheetPages )
             _HMG_aPropSheetPages[ nPage + 1, 6 ] := .F.
@@ -947,22 +936,21 @@ FUNCTION PageDlgProc( hwndParent, hwndDlg, nMsg, wParam, lParam )
    _HMG_ActiveDlgProcId        := 0
    _HMG_ActiveDlgProcNotify    := 0
 
-RETURN  lRet
+   RETURN  lRet
 
-*------------------------------------------------------------------------------*
 FUNCTION PropSheet_Chd( hWndParent, hWndDlg )
-*------------------------------------------------------------------------------*
+
    LOCAL  i := AScan ( _HMG_aPropSheetPages, {| x| x[ 3 ] == hWndDlg } )
+
    IF i > 0
       _HMG_aPropSheetPages[ i, 6 ] := .T.
    ENDIF
    PropSheet_Changed( hWndParent, hWndDlg )
 
-RETURN NIL
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION RetValue( lRet, def )
-*------------------------------------------------------------------------------*
+
    IF lRet == NIL .OR. ValType( lRet ) != 'L'
       IF ValType( lRet ) == "N"
          lRet := if( lRet == 0, FALSE, TRUE )
@@ -971,29 +959,28 @@ FUNCTION RetValue( lRet, def )
       ENDIF
    ENDIF
 
-RETURN lRet
+   RETURN lRet
 
-*------------------------------------------------------------------------------*
 FUNCTION _ReleasePropertySheet( hwndPropSheet, hWndDlg )
-*------------------------------------------------------------------------------*
+
    LOCAL n
+
    FOR n := 1 TO Len( _HMG_aFormParentHandle )
       IF _HMG_aFormParentHandle[ n ] == hwndPropSheet
-         EraseDialog( _HMG_aFormHandles[ n ] )
+         ERASEDialog( _HMG_aFormHandles[ n ] )
       ENDIF
    NEXT
    IF _HMG_ActivePropSheetModeless
-      ErasePropSheet( hwndPropSheet )
+      ERASEPropSheet( hwndPropSheet )
       DestroyWindow( hwndPropSheet )
    ELSE
-      EndDialog( hwndDlg, 0 )
-   ENDIF
+   EndDialog( hwndDlg, 0 )
+ENDIF
 
 RETURN NIL
 
-*------------------------------------------------------------------------------*
 STATIC FUNCTION ErasePropSheet( hWnd )
-*------------------------------------------------------------------------------*
+
    LOCAL i
 
    i := AScan ( _HMG_aFormhandles, hWnd )
@@ -1001,11 +988,11 @@ STATIC FUNCTION ErasePropSheet( hWnd )
 
       mVar := '_' + _HMG_aFormNames[ i ]
       IF Type ( mVar ) != 'U'
-#ifdef _ZEROPUBLIC_
+         #ifdef _ZEROPUBLIC_
          __mvPut ( mVar, 0 )
-#else
+         #else
          __mvXRelease( mVar )
-#endif
+         #endif
       ENDIF
 
       _HMG_aFormDeleted[ i ]   := .T.
@@ -1063,4 +1050,5 @@ STATIC FUNCTION ErasePropSheet( hWnd )
 
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

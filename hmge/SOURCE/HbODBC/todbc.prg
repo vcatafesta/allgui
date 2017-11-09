@@ -1,71 +1,57 @@
 /*
- * Harbour Project source code:
- * ODBC Access Class
- *
- * Copyright 1999 Felipe G. Coury <fcoury@creation.com.br>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.txt.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* ODBC Access Class
+* Copyright 1999 Felipe G. Coury <fcoury@creation.com.br>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.txt.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 /*
- * The following parts are Copyright of the individual authors.
- * www - http://www.xharbour.org
- *
- * Copyright 1996 Marcelo Lombardo <lombardo@uol.com.br>
- *
- * METHOD SetCnnOptions( nType, uBuffer )
- * METHOD GetCnnOptions( nType )
- * METHOD Commit()
- * METHOD RollBack()
- * METHOD SetStmtOptions( nType, uBuffer )
- * METHOD GetStmtOptions( nType )
- * METHOD SetAutoCommit( lEnable )
- *
- */
+* The following parts are Copyright of the individual authors.
+* www - http://www.xharbour.org
+* Copyright 1996 Marcelo Lombardo <lombardo@uol.com.br>
+* METHOD SetCnnOptions( nType, uBuffer )
+* METHOD GetCnnOptions( nType )
+* METHOD Commit()
+* METHOD RollBack()
+* METHOD SetStmtOptions( nType, uBuffer )
+* METHOD GetStmtOptions( nType )
+* METHOD SetAutoCommit( lEnable )
+*/
 
 #include "hbclass.ch"
 #include "sql.ch"
 
-//
 // Class TODBCField
 // Fields information collection
 // -----------------------------------------------------------------
@@ -80,17 +66,17 @@ CREATE CLASS TODBCField
    VAR AllowNull    INIT .F.
    VAR Value        INIT NIL
 
-   METHOD New()
+METHOD New()
 
 ENDCLASS
 
 METHOD New() CLASS TODBCField
+
    RETURN Self
 
-//
-// Class TODBC
-// Manages ODBC access
-// -----------------------------------------------------------------
+   // Class TODBC
+   // Manages ODBC access
+   // -----------------------------------------------------------------
 
 CREATE CLASS TODBC
 
@@ -112,42 +98,65 @@ CREATE CLASS TODBC
 
    VAR lAutoCommit AS LOGICAL INIT .T.   // Autocommit is usually on at startup
 
-   METHOD New( cODBCStr, cUserName, cPassword, lCache )
-   METHOD Destroy()
+METHOD New( cODBCStr, cUserName, cPassword, lCache )
 
-   METHOD SetSQL( cSQL )
-   METHOD Open()
-   METHOD ExecSQL()
-   METHOD Close()
+METHOD Destroy()
 
-   METHOD LoadData( nPos )
-   METHOD ClearData() INLINE AEval( ::Fields, {| oField | oField:Value := NIL } )
-   METHOD FieldByName( cField )
+METHOD SetSQL( cSQL )
 
-   METHOD Fetch( nFetchType, nOffSet )
+METHOD Open()
 
-   METHOD Next()
-   METHOD Prior()
-   METHOD First()
-   METHOD Last()
-   METHOD MoveBy( nSteps )
-   METHOD GoTo( nRecNo )
-   METHOD Skip()
-   METHOD Eof()
-   METHOD Bof()
-   METHOD RecNo()
-   METHOD RecCount()
-   METHOD LastRec()
+METHOD ExecSQL()
 
-   METHOD SQLErrorMessage()
+METHOD Close()
 
-   METHOD SetCnnOptions( nType, uBuffer )
-   METHOD GetCnnOptions( nType )
-   METHOD Commit()
-   METHOD RollBack()
-   METHOD SetStmtOptions( nType, uBuffer )
-   METHOD GetStmtOptions( nType )
-   METHOD SetAutoCommit( lEnable )
+METHOD LoadData( nPos )
+
+METHOD ClearData() INLINE AEval( ::Fields, {| oField | oField:Value := NIL } )
+
+METHOD FieldByName( cField )
+
+METHOD Fetch( nFetchType, nOffSet )
+
+METHOD Next()
+
+METHOD Prior()
+
+METHOD First()
+
+METHOD Last()
+
+METHOD MoveBy( nSteps )
+
+METHOD GoTo( nRecNo )
+
+METHOD Skip()
+
+METHOD Eof()
+
+METHOD Bof()
+
+METHOD RecNo()
+
+METHOD RecCount()
+
+METHOD LastRec()
+
+METHOD SQLErrorMessage()
+
+METHOD SetCnnOptions( nType, uBuffer )
+
+METHOD GetCnnOptions( nType )
+
+METHOD Commit()
+
+METHOD RollBack()
+
+METHOD SetStmtOptions( nType, uBuffer )
+
+METHOD GetStmtOptions( nType )
+
+METHOD SetAutoCommit( lEnable )
 
 ENDCLASS
 
@@ -171,6 +180,7 @@ METHOD New( cODBCStr, cUserName, cPassword, lCache ) CLASS TODBC
    // Allocates SQL Environment
    IF ( nRet := SQLAllocEnv( @::hEnv ) ) != SQL_SUCCESS
       ::nRetCode := nRet
+
       RETURN NIL
    ENDIF
 
@@ -357,7 +367,8 @@ METHOD Open() CLASS TODBC
 
    RETURN nRet == SQL_SUCCESS
 
-// Only executes the SQL Statement
+   // Only executes the SQL Statement
+
 METHOD ExecSQL() CLASS TODBC
 
    LOCAL nRet
@@ -375,7 +386,8 @@ METHOD ExecSQL() CLASS TODBC
 
    RETURN nRet
 
-// Closes the dataset
+   // Closes the dataset
+
 METHOD Close() CLASS TODBC
 
    // Frees the statement
@@ -392,7 +404,8 @@ METHOD Close() CLASS TODBC
 
    RETURN NIL
 
-// Returns the Field object for a named field
+   // Returns the Field object for a named field
+
 METHOD FieldByName( cField ) CLASS TODBC
 
    LOCAL nRet
@@ -411,7 +424,8 @@ METHOD FieldByName( cField ) CLASS TODBC
 
    RETURN xRet
 
-// General fetch wrapper - used by next methods
+   // General fetch wrapper - used by next methods
+
 METHOD Fetch( nFetchType, nOffset ) CLASS TODBC
 
    LOCAL nResult
@@ -491,7 +505,8 @@ METHOD Fetch( nFetchType, nOffset ) CLASS TODBC
 
    RETURN nResult
 
-// Moves to next record on DataSet
+   // Moves to next record on DataSet
+
 METHOD Next() CLASS TODBC
 
    LOCAL nResult := ::Fetch( SQL_FETCH_NEXT, 1 )
@@ -508,7 +523,8 @@ METHOD Next() CLASS TODBC
 
    RETURN nResult
 
-// Moves to prior record on DataSet
+   // Moves to prior record on DataSet
+
 METHOD Prior() CLASS TODBC
 
    LOCAL nResult := ::Fetch( SQL_FETCH_PRIOR, 1 )
@@ -525,7 +541,8 @@ METHOD Prior() CLASS TODBC
 
    RETURN nResult
 
-// Moves to first record on DataSet
+   // Moves to first record on DataSet
+
 METHOD First() CLASS TODBC
 
    LOCAL nResult := ::Fetch( SQL_FETCH_FIRST, 1 )
@@ -538,7 +555,8 @@ METHOD First() CLASS TODBC
 
    RETURN nResult
 
-// Moves to the last record on DataSet
+   // Moves to the last record on DataSet
+
 METHOD Last() CLASS TODBC
 
    LOCAL nResult := ::Fetch( SQL_FETCH_LAST, 1 )
@@ -551,7 +569,8 @@ METHOD Last() CLASS TODBC
 
    RETURN nResult
 
-// Moves the DataSet nSteps from the current record
+   // Moves the DataSet nSteps from the current record
+
 METHOD MoveBy( nSteps ) CLASS TODBC
 
    // TODO: Check if nSteps goes beyond eof
@@ -565,7 +584,8 @@ METHOD MoveBy( nSteps ) CLASS TODBC
 
    RETURN nResult
 
-// Moves the DataSet to absolute record number
+   // Moves the DataSet to absolute record number
+
 METHOD GoTo( nRecNo ) CLASS TODBC
 
    LOCAL nResult := ::Fetch( SQL_FETCH_ABSOLUTE, nRecNo )
@@ -578,39 +598,45 @@ METHOD GoTo( nRecNo ) CLASS TODBC
 
    RETURN nResult
 
-// Skips dataset to the next record - wrapper to Next()
+   // Skips dataset to the next record - wrapper to Next()
+
 METHOD Skip() CLASS TODBC
 
    RETURN ::Next()
 
-// Checks for End of File (End of DataSet, actually)
-// NOTE: Current implementation usable only with drivers that report number of records in last select
+   // Checks for End of File (End of DataSet, actually)
+   // NOTE: Current implementation usable only with drivers that report number of records in last select
+
 METHOD Eof() CLASS TODBC
 
    RETURN ::nRecCount == 0 .OR. ::nRecNo > ::nRecCount
 
+   // Checks for Begining of File
 
-// Checks for Begining of File
 METHOD Bof() CLASS TODBC
 
    RETURN ::lBof
 
-// Returns the current row in dataset
+   // Returns the current row in dataset
+
 METHOD RecNo() CLASS TODBC
 
    RETURN ::nRecNo
 
-// Returns number of rows ( if that function is supported by ODBC driver )
+   // Returns number of rows ( if that function is supported by ODBC driver )
+
 METHOD RecCount() CLASS TODBC
 
    RETURN ::nRecCount
 
-// Returns number of rows ( if that function is supported by ODBC driver )
+   // Returns number of rows ( if that function is supported by ODBC driver )
+
 METHOD LastRec() CLASS TODBC
 
    RETURN ::nRecCount
 
-// Loads current record data into the Fields collection
+   // Loads current record data into the Fields collection
+
 METHOD LoadData( nPos ) CLASS TODBC
 
    LOCAL xValue
@@ -619,7 +645,7 @@ METHOD LoadData( nPos ) CLASS TODBC
    FOR EACH oField IN ::Fields
       IF ::lCacheRS .AND. ::Active
          xValue := iif( nPos > 0 .AND. nPos <= ::nRecCount, ;
-                        ::aRecordSet[ nPos, oField:__enumIndex() ], NIL )
+            ::aRecordSet[ nPos, oField:__enumIndex() ], NIL )
       ELSE
          SQLGetData( ::hStmt, oField:FieldID, oField:DataType,, @xValue )
 
@@ -646,3 +672,4 @@ METHOD LoadData( nPos ) CLASS TODBC
    NEXT
 
    RETURN NIL
+

@@ -1,120 +1,116 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
-
 
 #include "minigui.ch"
 #include "Dbstruct.ch"
 
-Function Main
-Local bColor := { || if ( deleted() , RGB( 255, 0, 0 ) , RGB( 255, 255, 255 ) ) }	
-Local var := 'Test'
+FUNCTION Main
 
-	REQUEST DBFCDX
+   LOCAL bColor := { || if ( deleted() , RGB( 255, 0, 0 ) , RGB( 255, 255, 255 ) ) }
+   LOCAL var := 'Test'
 
-	SET EXCLUSIVE ON
-	SET CENTURY ON
-	SET DELETED OFF
+   REQUEST DBFCDX
 
-	SET BROWSESYNC ON	
+   SET EXCLUSIVE ON
+   SET CENTURY ON
+   SET DELETED OFF
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'Browse Demo' ;
-		MAIN NOMAXIMIZE ;
-		ON INIT OpenTable() ;
-		ON RELEASE CloseTable()
+   SET BROWSESYNC ON
 
-		DEFINE MAIN MENU 
-			POPUP 'File'
-				ITEM 'Append'	ACTION Append_record()
-				ITEM 'Delete/Undelete'	ACTION Delete_record()
-				SEPARATOR
-				ITEM 'Exit'	ACTION Form_1.Release
-			END POPUP
-			POPUP 'Help'
-				ITEM 'About'	ACTION MsgInfo ("MiniGUI Browse Demo") 
-			END POPUP
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Browse Demo' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT OpenTable() ;
+         ON RELEASE CloseTable()
 
-		END MENU
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Append'   ACTION Append_record()
+            ITEM 'Delete/Undelete'   ACTION Delete_record()
+            SEPARATOR
+            ITEM 'Exit'   ACTION Form_1.Release
+         END POPUP
+         POPUP 'Help'
+            ITEM 'About'   ACTION MsgInfo ("MiniGUI Browse Demo")
+         END POPUP
 
-		DEFINE STATUSBAR
-			STATUSITEM ''
-		END STATUSBAR
+      END MENU
 
-		@ 10,10 BROWSE Browse_1 ;
-			WIDTH 610 ; 
-			HEIGHT 313 ; 	
-			HEADERS { 'X' , 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
-			WIDTHS { 30 , 150 , 150 , 150 , 150 , 150 , 150 } ;
-			WORKAREA &var ;
-			FIELDS {'Test->(iif(deleted(),"*"," "))' , 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
-			ON CHANGE ChangeTest() ;
-			JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
-			TOOLTIP 'Browse Test' ;
-			DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor, bColor } ;
-                        READONLY { .T. , .F. , .F. , .F. , .F. , .F. , .F. } ;
-			EDIT
+      DEFINE STATUSBAR
+         STATUSITEM ''
+      END STATUSBAR
 
-                @ 350,150 BUTTON Button_1 ;
-                          CAPTION 'Append record' ;
-                          WIDTH 140 ;
-                          ACTION Append_record() ;
-                          TOOLTIP 'Append a new record'
+      @ 10,10 BROWSE Browse_1 ;
+         WIDTH 610 ;
+         HEIGHT 313 ;
+         HEADERS { 'X' , 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
+         WIDTHS { 30 , 150 , 150 , 150 , 150 , 150 , 150 } ;
+         WORKAREA &var ;
+         FIELDS {'Test->(iif(deleted(),"*"," "))' , 'Test->Code' , 'Test->First' , 'Test->Last' , 'Test->Birth' , 'Test->Married' , 'Test->Bio' } ;
+         ON CHANGE ChangeTest() ;
+         JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER,BROWSE_JTFY_CENTER} ;
+         TOOLTIP 'Browse Test' ;
+         DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor, bColor } ;
+         READONLY { .T. , .F. , .F. , .F. , .F. , .F. , .F. } ;
+         EDIT
 
-                @ 350,300 BUTTON Button_2 ;
-                          CAPTION 'Delete/Undelete' ;
-                          WIDTH 140 ;
-                          ACTION Delete_record() ;
-                          TOOLTIP 'Delete / Recall the current record'
+      @ 350,150 BUTTON Button_1 ;
+         CAPTION 'Append record' ;
+         WIDTH 140 ;
+         ACTION Append_record() ;
+         TOOLTIP 'Append a new record'
 
-	END WINDOW
+      @ 350,300 BUTTON Button_2 ;
+         CAPTION 'Delete/Undelete' ;
+         WIDTH 140 ;
+         ACTION Delete_record() ;
+         TOOLTIP 'Delete / Recall the current record'
 
-	CENTER WINDOW Form_1
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   CENTER WINDOW Form_1
 
-Return Nil
+   ACTIVATE WINDOW Form_1
 
+   RETURN NIL
 
-Procedure OpenTable()
+PROCEDURE OpenTable()
 
-	if !file("test.dbf")
-		CreateTable()
-	endif
+   IF !file("test.dbf")
+      CreateTable()
+   ENDIF
 
-	Use Test Index Code Via "DBFCDX"
-	Go Top
+   USE Test Index Code Via "DBFCDX"
+   GO TOP
 
-	Form_1.Browse_1.Value := RecNo()
+   Form_1.Browse_1.Value := RecNo()
 
-	Form_1.Browse_1.ColumnsAutoFitH
+   Form_1.Browse_1.ColumnsAutoFitH
 
-	Form_1.Browse_1.SetFocus
+   Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
+PROCEDURE CloseTable()
 
-Procedure CloseTable()
+   USE
 
-	Use
+   RETURN
 
-Return
+PROCEDURE ChangeTest()
 
+   Form_1.StatusBar.Item(1) := 'RecNo: ' + Alltrim ( Str ( GetProperty ( 'Form_1', 'Browse_1', 'Value' ) ) )
 
-Procedure ChangeTest()
+   RETURN
 
-	Form_1.StatusBar.Item(1) := 'RecNo: ' + Alltrim ( Str ( GetProperty ( 'Form_1', 'Browse_1', 'Value' ) ) )
+PROCEDURE Append_record()
 
-Return 
-
-
-Procedure Append_record()
-Local i := GetControlIndex ( "Browse_1", "Form_1" ), n
+   LOCAL i := GetControlIndex ( "Browse_1", "Form_1" ), n
 
    Test->( DbGoBottom() )
    n := Test->Code
@@ -129,67 +125,62 @@ Local i := GetControlIndex ( "Browse_1", "Form_1" ), n
 
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
-
-Procedure Delete_record()
+PROCEDURE Delete_record()
 
    iif(Test->(Deleted()), Test->(DbRecall()), Test->(DbDelete()))
 
    Form_1.Browse_1.Refresh
    Form_1.Browse_1.SetFocus
 
-Return
+   RETURN
 
+PROCEDURE CreateTable
 
-Procedure CreateTable
-LOCAL aDbf[6][4], i
+   LOCAL aDbf[6][4], i
 
-        aDbf[1][ DBS_NAME ] := "Code"
-        aDbf[1][ DBS_TYPE ] := "Numeric"
-        aDbf[1][ DBS_LEN ]  := 10
-        aDbf[1][ DBS_DEC ]  := 0
-        //
-        aDbf[2][ DBS_NAME ] := "First"
-        aDbf[2][ DBS_TYPE ] := "Character"
-        aDbf[2][ DBS_LEN ]  := 25
-        aDbf[2][ DBS_DEC ]  := 0
-        //
-        aDbf[3][ DBS_NAME ] := "Last"
-        aDbf[3][ DBS_TYPE ] := "Character"
-        aDbf[3][ DBS_LEN ]  := 25
-        aDbf[3][ DBS_DEC ]  := 0
-        //
-        aDbf[4][ DBS_NAME ] := "Married"
-        aDbf[4][ DBS_TYPE ] := "Logical"
-        aDbf[4][ DBS_LEN ]  := 1
-        aDbf[4][ DBS_DEC ]  := 0
-        //
-        aDbf[5][ DBS_NAME ] := "Birth"
-        aDbf[5][ DBS_TYPE ] := "Date"
-        aDbf[5][ DBS_LEN ]  := 8
-        aDbf[5][ DBS_DEC ]  := 0
-        //
-        aDbf[6][ DBS_NAME ] := "Bio"
-        aDbf[6][ DBS_TYPE ] := "Memo"
-        aDbf[6][ DBS_LEN ]  := 10
-        aDbf[6][ DBS_DEC ]  := 0
+   aDbf[1][ DBS_NAME ] := "Code"
+   aDbf[1][ DBS_TYPE ] := "Numeric"
+   aDbf[1][ DBS_LEN ]  := 10
+   aDbf[1][ DBS_DEC ]  := 0
+   aDbf[2][ DBS_NAME ] := "First"
+   aDbf[2][ DBS_TYPE ] := "Character"
+   aDbf[2][ DBS_LEN ]  := 25
+   aDbf[2][ DBS_DEC ]  := 0
+   aDbf[3][ DBS_NAME ] := "Last"
+   aDbf[3][ DBS_TYPE ] := "Character"
+   aDbf[3][ DBS_LEN ]  := 25
+   aDbf[3][ DBS_DEC ]  := 0
+   aDbf[4][ DBS_NAME ] := "Married"
+   aDbf[4][ DBS_TYPE ] := "Logical"
+   aDbf[4][ DBS_LEN ]  := 1
+   aDbf[4][ DBS_DEC ]  := 0
+   aDbf[5][ DBS_NAME ] := "Birth"
+   aDbf[5][ DBS_TYPE ] := "Date"
+   aDbf[5][ DBS_LEN ]  := 8
+   aDbf[5][ DBS_DEC ]  := 0
+   aDbf[6][ DBS_NAME ] := "Bio"
+   aDbf[6][ DBS_TYPE ] := "Memo"
+   aDbf[6][ DBS_LEN ]  := 10
+   aDbf[6][ DBS_DEC ]  := 0
 
-        DBCREATE("Test", aDbf, "DBFCDX")
+   DBCREATE("Test", aDbf, "DBFCDX")
 
-	Use test Via "DBFCDX"
+   USE test Via "DBFCDX"
 
-	For i:= 1 To 100
-		append blank
-		Replace code with i 
-		Replace First With 'First Name '+ Ltrim(Str(i))
-		Replace Last With 'Last Name '+ Ltrim(Str(i))
-		Replace Married With ( i/2 == int(i/2) )
-		replace birth with date()-Max(10000, Random(20000))+Random(LastRec())
-	Next i
+   FOR i:= 1 To 100
+      APPEND BLANK
+      REPLACE code with i
+      REPLACE First With 'First Name '+ Ltrim(Str(i))
+      REPLACE Last With 'Last Name '+ Ltrim(Str(i))
+      REPLACE Married With ( i/2 == int(i/2) )
+      REPLACE birth with date()-Max(10000, Random(20000))+Random(LastRec())
+   NEXT i
 
-	Index on field->code to code
+   INDEX ON field->code to code
 
-	Use
+   USE
 
-Return
+   RETURN
+

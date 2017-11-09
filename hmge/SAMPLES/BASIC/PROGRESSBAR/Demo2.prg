@@ -1,8 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "hmg.ch"
@@ -10,28 +9,28 @@
 FUNCTION Main
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 365 HEIGHT 245 ;
-      TITLE "MiniGUI ProgressBar Demo" ;
-      MAIN
+         AT 0, 0 ;
+         WIDTH 365 HEIGHT 245 ;
+         TITLE "MiniGUI ProgressBar Demo" ;
+         MAIN
 
-   @ 20, 145 BUTTON Button_1 ;
-      CAPTION 'Start' ;
-      ACTION OnStart() ;
-      WIDTH 80 HEIGHT 26 DEFAULT
+      @ 20, 145 BUTTON Button_1 ;
+         CAPTION 'Start' ;
+         ACTION OnStart() ;
+         WIDTH 80 HEIGHT 26 DEFAULT
 
-   @ 70, 31 PROGRESSBAR Progress_1 ;
-      RANGE 0, 100 ;
-      WIDTH 300 HEIGHT 26 ;
-      TOOLTIP "ProgressBar"
+      @ 70, 31 PROGRESSBAR Progress_1 ;
+         RANGE 0, 100 ;
+         WIDTH 300 HEIGHT 26 ;
+         TOOLTIP "ProgressBar"
 
-   @ 120, 155 TEXTBOX TextBox_1 ;
-      VALUE " 50 %" WIDTH 60 MAXLENGTH 5
+      @ 120, 155 TEXTBOX TextBox_1 ;
+         VALUE " 50 %" WIDTH 60 MAXLENGTH 5
 
-   @ 150, 80 SLIDER Slider_1 ;
-      RANGE 0, 100 VALUE 50 ;
-      WIDTH 200 HEIGHT 40 ;
-      ON CHANGE {|| Slider_Change() }
+      @ 150, 80 SLIDER Slider_1 ;
+         RANGE 0, 100 VALUE 50 ;
+         WIDTH 200 HEIGHT 40 ;
+         ON CHANGE {|| Slider_Change() }
 
    END WINDOW
 
@@ -48,8 +47,7 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION Slider_Change
 
@@ -59,8 +57,7 @@ FUNCTION Slider_Change
 
    Form_1.Progress_1.Value := nValue
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION OnStart
 
@@ -100,15 +97,12 @@ FUNCTION OnStart
 
    SetCursorSystem( IDC_ARROW )
 
-RETURN NIL
-
+   RETURN NIL
 
 #pragma BEGINDUMP
 
-
 #include <windows.h>
 #include "hbapi.h"
-
 
 HB_FUNC( SUPPRESSKEYANDMOUSEEVENTS )
 {
@@ -120,5 +114,5 @@ HB_FUNC( SUPPRESSKEYANDMOUSEEVENTS )
 
 }
 
-
 #pragma ENDDUMP
+

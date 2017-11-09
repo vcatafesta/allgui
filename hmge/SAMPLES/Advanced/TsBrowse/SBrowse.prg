@@ -3,25 +3,23 @@
 
 //#define CLR_HBROWN  nRGB( 205, 192, 176 )
 
-Function SBrwTest()
+FUNCTION SBrwTest()
 
-   Local cTitle := "Customer List", ;
-         bSetup := { |oBrw| SetMyBrowser( oBrw ) }
+   LOCAL cTitle := "Customer List", ;
+      bSetup := { |oBrw| SetMyBrowser( oBrw ) }
 
    DbSelectArea( "Employee" )
 
    SBrowse( "Employee", cTitle, bSetup )
 
-Return Nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------//
+FUNCTION SetMyBrowser( oBrw )
 
-Function SetMyBrowser( oBrw )
+   oBrw:nHeightCell += 5
+   oBrw:nHeightHead += 5
+   oBrw:nClrFocuFore := CLR_BLACK
+   oBrw:nClrFocuBack := COLOR_GRID
 
-       oBrw:nHeightCell += 5
-       oBrw:nHeightHead += 5
-       oBrw:nClrFocuFore := CLR_BLACK
-       oBrw:nClrFocuBack := COLOR_GRID
-
-Return .T.
+   RETURN .T.
 

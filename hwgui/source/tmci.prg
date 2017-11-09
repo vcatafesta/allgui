@@ -1,21 +1,16 @@
 /*
- * $Id: tmci.prg,v 1.3 2004/09/29 05:24:52 alkresin Exp $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Windows errorsys replacement
- *
- * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: tmci.prg,v 1.3 2004/09/29 05:24:52 alkresin Exp $
+* HWGUI - Harbour Win32 GUI library source code:
+* Windows errorsys replacement
+* Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
-
 
 #include "hbclass.ch"
 #include "windows.ch"
 #include "guilib.ch"
 #include "common.ch"
 #define BUF_SIZE  200
-
-//----------------------------------------------------------------------------//
 
 CLASS TMci
 
@@ -24,25 +19,22 @@ CLASS TMci
    DATA   oWnd
    DATA   cBuffer
 
-   METHOD New( cDevice, cFileName )  CONSTRUCTOR
+METHOD New( cDevice, cFileName )  CONSTRUCTOR
 
-   METHOD lOpen() 
+METHOD lOpen()
 
-   METHOD Play( nFrom, nTo, hWnd ) inline;
-    ::nError := nMciPlay( ::nId, nFrom, nTo, hWnd ) 
+METHOD Play( nFrom, nTo, hWnd ) inline;
+      ::nError := nMciPlay( ::nId, nFrom, nTo, hWnd )
 
-   METHOD cGetError() 
+METHOD cGetError()
 
+METHOD SetWindow( oWnd ) inline ;
+      ::oWnd := oWnd,;
+      ::nError := nMciWindow( ::nId, oWnd:handle )
 
-   METHOD SetWindow( oWnd ) inline ;
-                       ::oWnd := oWnd,;
-                       ::nError := nMciWindow( ::nId, oWnd:handle ) 
-
-   METHOD SendStr( cMciStr )
+METHOD SendStr( cMciStr )
 
 ENDCLASS
-
-//----------------------------------------------------------------------------//
 
 METHOD New( cDevice, cFileName ) CLASS TMci
 
@@ -54,27 +46,31 @@ METHOD New( cDevice, cFileName ) CLASS TMci
    ::cFileName = cFileName
    ::cBuffer   = Space( BUF_SIZE )
 
-return Self
-
-//----------------------------------------------------------------------------//
+   RETURN Self
 
 METHOD SendStr( cMciStr ) CLASS TMci
 
-   local cBuffer := ::cBuffer
+   LOCAL cBuffer := ::cBuffer
 
    MciSendString( cMciStr, @cBuffer, ::oWnd:hWnd )
    ::cBuffer = cBuffer
 
-return nil
+   RETURN NIL
 
-//----------------------------------------------------------------------------//
 METHOD lOpen() CLASS TMci
-   Local nId
+
+   LOCAL nId
+
    ::nError := nMciOpen( ::cType, ::cFileName, @nId )
    ::nId := nId
-return ::nError == 0
+
+   RETURN ::nError == 0
 
 METHOD cGetError() Class Tmci
-   Local cError
+
+   LOCAL cError
+
    mciGetErrorString( ::nError, @cError )
-return    cError
+
+   RETURN    cError
+

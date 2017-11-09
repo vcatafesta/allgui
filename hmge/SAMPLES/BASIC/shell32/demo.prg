@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2004-07 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2004-07 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -13,115 +11,116 @@
 #define MsgInfo( c ) MsgInfo( c, "Information", , .f. )
 #define MsgAlert( c ) MsgExclamation( c, "Attention", , .f. )
 
-Procedure Main( nOper, cFile, cCopy )
-	Local aFile:={}, aCopy:={}
-	Local cPath := GetStartupFolder() + "\"
+PROCEDURE Main( nOper, cFile, cCopy )
 
-	DEFAULT cFile := "compile.bat"
-	DEFAULT cCopy := cPath + "Test Directory\compile.bat"
-	DEFAULT nOper := FO_COPY
+   LOCAL aFile:={}, aCopy:={}
+   LOCAL cPath := GetStartupFolder() + "\"
 
-	nOper := IF( Valtype(nOper) == "C", Val(nOper), nOper )
+   DEFAULT cFile := "compile.bat"
+   DEFAULT cCopy := cPath + "Test Directory\compile.bat"
+   DEFAULT nOper := FO_COPY
 
-	aadd(aFile, cFile)
-	aadd(aFile, "demo.prg")
-	aadd(aCopy, cPath + "Test Directory")
+   nOper := IF( Valtype(nOper) == "C", Val(nOper), nOper )
 
-	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'Shell Files Operation sample by Grigory Filatov' ;
-		MAIN ;
-		NOSIZE NOMAXIMIZE
+   aadd(aFile, cFile)
+   aadd(aFile, "demo.prg")
+   aadd(aCopy, cPath + "Test Directory")
 
-		define button x
-		      row 10
-		      col 10
-		      caption "Test 1"
-                      default .t.
-		      action test( aFile, aCopy, nOper, cCopy )
-		end button
+   DEFINE WINDOW Form_Main ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'Shell Files Operation sample by Grigory Filatov' ;
+         MAIN ;
+         NOSIZE NOMAXIMIZE
 
-		define button x2
-		      row 40
-		      col 10
-		      caption "Test 2"
-                      default .t.
-		      action test2( aFile, aCopy, nOper )
-		end button
+      DEFINE BUTTON x
+         row 10
+         col 10
+         caption "Test 1"
+         DEFAULT .t.
+         action test( aFile, aCopy, nOper, cCopy )
+      END BUTTON
 
-		define button y
-		      row 70
-		      col 10
-		      caption "Exit"
-		      action ThisWindow.Release
-		end button
+      DEFINE BUTTON x2
+         row 40
+         col 10
+         caption "Test 2"
+         DEFAULT .t.
+         action test2( aFile, aCopy, nOper )
+      END BUTTON
 
-	END WINDOW
+      DEFINE BUTTON y
+         row 70
+         col 10
+         caption "Exit"
+         action ThisWindow.Release
+      END BUTTON
 
-	CENTER WINDOW Form_Main
+   END WINDOW
 
-	ACTIVATE WINDOW Form_Main
+   CENTER WINDOW Form_Main
 
-return
+   ACTIVATE WINDOW Form_Main
 
-Procedure test( aFile, aCopy, nOper, cCopy )
+   RETURN
 
-	IF ( ShellFiles( Application.Handle, aFile, aCopy, nOper, FOF_NOCONFIRMMKDIR ) == 0 )
+PROCEDURE test( aFile, aCopy, nOper, cCopy )
 
-		MsgInfo("The Test Directory is maked and the files are copied.")
+   IF ( ShellFiles( Application.Handle, aFile, aCopy, nOper, FOF_NOCONFIRMMKDIR ) == 0 )
 
-		IF ShFileDelete( , cCopy, .T. )
+      MsgInfo("The Test Directory is maked and the files are copied.")
 
-			MsgInfo( "The file " + aFile[1] + " is deleted from the Test Directory." )
+      IF ShFileDelete( , cCopy, .T. )
 
-		ELSE
+         MsgInfo( "The file " + aFile[1] + " is deleted from the Test Directory." )
 
-			MsgAlert( "Error of deleting!" )
+      ELSE
 
-		ENDIF
+         MsgAlert( "Error of deleting!" )
 
-	ENDIF
+      ENDIF
 
-return
-
-Procedure test2( aFile, aCopy, nOper )
-
-	IF ( ShellFiles( Application.Handle, aFile, aCopy, nOper, FOF_NOCONFIRMMKDIR ) == 0 )
-
-		MsgInfo("The Test Directory is maked and the files are copied.")
-
-		IF ShFolderDelete( , aCopy[1], .F. )
-
-			IF lIsDir( aCopy[1] )
-
-				MsgInfo( "The folder " + aCopy[1] + " is NOT erased." )
-
-			ELSE
-
-				MsgInfo( "The folder " + aCopy[1] + " is erased." )
-
-			ENDIF
-
-		ELSE
-
-			MsgAlert( "Error of deleting!" )
-
-		ENDIF
-
-	ENDIF
-
-return
-
-*--------------------------------------------------------*
-STATIC FUNCTION lIsDir( cDir )
-*--------------------------------------------------------*
-LOCAL lExist := .T.
-
-   IF DirChange( cDir ) > 0
-	lExist := .F.
-   ELSE
-	DirChange( GetStartupFolder() )
    ENDIF
 
-RETURN lExist
+   RETURN
+
+PROCEDURE test2( aFile, aCopy, nOper )
+
+   IF ( ShellFiles( Application.Handle, aFile, aCopy, nOper, FOF_NOCONFIRMMKDIR ) == 0 )
+
+      MsgInfo("The Test Directory is maked and the files are copied.")
+
+      IF ShFolderDelete( , aCopy[1], .F. )
+
+         IF lIsDir( aCopy[1] )
+
+            MsgInfo( "The folder " + aCopy[1] + " is NOT erased." )
+
+         ELSE
+
+            MsgInfo( "The folder " + aCopy[1] + " is erased." )
+
+         ENDIF
+
+      ELSE
+
+         MsgAlert( "Error of deleting!" )
+
+      ENDIF
+
+   ENDIF
+
+   RETURN
+
+STATIC FUNCTION lIsDir( cDir )
+
+   LOCAL lExist := .T.
+
+   IF DirChange( cDir ) > 0
+      lExist := .F.
+   ELSE
+      DirChange( GetStartupFolder() )
+   ENDIF
+
+   RETURN lExist
+

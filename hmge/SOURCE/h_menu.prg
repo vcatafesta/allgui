@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -49,9 +49,7 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 STATIC _HMG_xPopupMenuFont, _HMG_xContextPopupMenuFont
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineMainMenu ( Parent )
-*-----------------------------------------------------------------------------*
 
    IF ValType( Parent ) == 'U'
       Parent := _HMG_ActiveFormName
@@ -67,11 +65,10 @@ PROCEDURE _DefineMainMenu ( Parent )
 
    _HMG_xMenuPopupLevel := 0
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
-*-----------------------------------------------------------------------------*
+
    LOCAL mVar, k, FormName
 
    IF _HMG_xMenuType $ 'MAIN,CONTEXT,OWNCONTEXT,NOTIFY,DROPDOWN'
@@ -96,7 +93,7 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
 
          IF _HMG_xMenuPopupLevel > 1
 
-            AppendMenuPopup ( _HMG_xMenuPopuphandle[_HMG_xMenuPopupLevel - 1 ], ;
+            APPENDMenuPopup ( _HMG_xMenuPopuphandle[_HMG_xMenuPopupLevel - 1 ], ;
                _HMG_xMenuPopuphandle[ _HMG_xMenuPopupLevel ], ;
                _HMG_xMenuPopupCaption[ _HMG_xMenuPopupLevel ], 2, Font )
 
@@ -139,7 +136,7 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
 
          IF _HMG_xContextPopupLevel > 1
 
-            AppendMenuPopup ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel - 1 ], ;
+            APPENDMenuPopup ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel - 1 ], ;
                _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ], ;
                _HMG_xContextPopupCaption[ _HMG_xContextPopupLevel ], k, Font )
 
@@ -151,15 +148,16 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-#ifndef _EMPTY_MENU_
+         #ifndef _EMPTY_MENU_
          Name := 'DummyPopupName' + hb_ntos( k )
-#else
+         #else
          Name := ''
-#endif
+         #endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + FormName + '_' + Name
-         Public &mVar. := k
+         PUBLIC &mVar. := k
+
       ENDIF
 
       _HMG_aControlType [k] :=  "POPUP"
@@ -222,11 +220,10 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _EndMenuPopup()
-*-----------------------------------------------------------------------------*
+
    LOCAL k
 
    IF _HMG_xMenuType == 'MAIN'
@@ -235,7 +232,7 @@ PROCEDURE _EndMenuPopup()
 
       IF _HMG_xMenuPopupLevel == 0
 
-         AppendMenuPopup( _HMG_xMainMenuHandle, _HMG_xMenuPopupHandle[ 1 ], ;
+         APPENDMenuPopup( _HMG_xMainMenuHandle, _HMG_xMenuPopupHandle[ 1 ], ;
             _HMG_xMenuPopupCaption[ 1 ], 1, _HMG_xPopupMenuFont )
 
       ENDIF
@@ -258,7 +255,7 @@ PROCEDURE _EndMenuPopup()
             k := 5
          ENDSWITCH
 
-         AppendMenuPopup( _HMG_xContextMenuHandle, _HMG_xContextPopupHandle[ 1 ], ;
+         APPENDMenuPopup( _HMG_xContextMenuHandle, _HMG_xContextPopupHandle[ 1 ], ;
             _HMG_xContextPopupCaption[ 1 ], k, _HMG_xContextPopupMenuFont )
 
       ENDIF
@@ -269,11 +266,10 @@ PROCEDURE _EndMenuPopup()
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMessage, font, check_image, lBreakMenu, lSeparator, icon, default )
-*-----------------------------------------------------------------------------*
+
    LOCAL ControlHandle , mVar , k , id , hBitmap := 0 , ContextMenuHandle , nBreakCode := 6
 
    hb_default( @checked, .F. )
@@ -294,7 +290,7 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
 
       IF !( caption == '-' )
          ControlHandle := _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ]
-         AppendMenuString( ControlHandle , id , caption , nBreakCode )
+         APPENDMenuString( ControlHandle , id , caption , nBreakCode )
       ENDIF
 
       IF ValType ( image ) != 'U'
@@ -314,15 +310,16 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-#ifndef _EMPTY_MENU_
+         #ifndef _EMPTY_MENU_
          Name := 'DummyMenuName' + hb_ntos( k )
-#else
+         #else
          Name := ''
-#endif
+         #endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + _HMG_xMainMenuParentName + '_' + Name
-         Public &mVar. := k
+         PUBLIC &mVar. := k
+
       ENDIF
 
       _HMG_aControlType [k] :=  "MENU"
@@ -388,10 +385,10 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       IF !( caption == '-' )
          IF _HMG_xContextPopupLevel > 0
             ContextMenuHandle := _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ]
-            AppendMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 7 ) )
+            APPENDMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 7 ) )
          ELSE
             ContextMenuHandle := _HMG_xContextMenuHandle
-            AppendMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 8 ) )
+            APPENDMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 8 ) )
          ENDIF
          ControlHandle := ContextMenuHandle
       ENDIF
@@ -411,15 +408,16 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-#ifndef _EMPTY_MENU_
+         #ifndef _EMPTY_MENU_
          Name := 'DummyMenuName' + hb_ntos( k )
-#else
+         #else
          Name := ''
-#endif
+         #endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + _HMG_xContextMenuParentName + '_' + Name
-         Public &mVar. := k
+         PUBLIC &mVar. := k
+
       ENDIF
 
       _HMG_aControlType  [k] :=  "MENU"
@@ -482,25 +480,23 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineSeparator ()
-*-----------------------------------------------------------------------------*
 
    IF _HMG_xMenuType == 'MAIN'
 
-      AppendMenuSeparator ( _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ] )
+      APPENDMenuSeparator ( _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ] )
 
    ELSE
 
       IF _HMG_xContextPopupLevel > 0
 
-         AppendMenuSeparator ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ] )
+         APPENDMenuSeparator ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ] )
 
       ELSE
 
-         AppendMenuSeparator ( _HMG_xContextMenuHandle )
+         APPENDMenuSeparator ( _HMG_xContextMenuHandle )
 
       ENDIF
 
@@ -510,11 +506,10 @@ PROCEDURE _DefineSeparator ()
       _DefineMenuItem ( '-' )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _EndMenu()
-*-----------------------------------------------------------------------------*
+
    LOCAL i, j, image
 
    SWITCH Left( _HMG_xMenuType, 1 )
@@ -585,11 +580,10 @@ PROCEDURE _EndMenu()
 
    NEXT
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION _GetMenuIds ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL h, id, x
 
    IF ( x := GetControlIndex ( ItemName , FormName ) ) > 0
@@ -608,70 +602,61 @@ STATIC FUNCTION _GetMenuIds ( ItemName , FormName )
 
    ENDIF
 
-RETURN { h, id }
+   RETURN { h, id }
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefaultMenuItem ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    SetMenuDefaultItem ( a [1] , a [2] )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DisableMenuItem ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    xDisableMenuItem ( a [1] , a [2] )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _EnableMenuItem ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    xEnableMenuItem ( a [1] , a [2] )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _CheckMenuItem ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    xCheckMenuItem ( a [1] , a [2] )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _UncheckMenuItem ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    xUncheckMenuItem ( a [1] , a [2] )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _IsMenuItemChecked ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN xGetMenuCheckState ( a [1] , a [2] )
+   RETURN xGetMenuCheckState ( a [1] , a [2] )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _IsMenuItemEnabled ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN xGetMenuEnabledState ( a [1] , a [2] )
+   RETURN xGetMenuEnabledState ( a [1] , a [2] )
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineContextMenu ( Parent )
-*-----------------------------------------------------------------------------*
 
    _HMG_xContextMenuHandle := 0
    _HMG_xContextMenuParentHandle := 0
@@ -690,11 +675,9 @@ PROCEDURE _DefineContextMenu ( Parent )
    _HMG_xContextMenuParentName := Parent
    _HMG_xContextMenuHandle := CreatePopupMenu( 3 )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineNotifyMenu ( Parent )
-*-----------------------------------------------------------------------------*
 
    _HMG_xContextMenuHandle := 0
    _HMG_xContextMenuParentHandle := 0
@@ -713,11 +696,9 @@ PROCEDURE _DefineNotifyMenu ( Parent )
    _HMG_xContextMenuParentName := Parent
    _HMG_xContextMenuHandle := CreatePopupMenu( 4 )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DefineDropDownMenu ( Button , Parent )
-*-----------------------------------------------------------------------------*
 
    _HMG_xContextMenuHandle := 0
    _HMG_xContextMenuParentHandle := 0
@@ -737,12 +718,11 @@ PROCEDURE _DefineDropDownMenu ( Button , Parent )
    _HMG_xContextMenuParentName := Parent
    _HMG_xContextMenuHandle := CreatePopupMenu( 5 )
 
-RETURN
+   RETURN
 
-// Added HMG Ex v.1.3 build 38
-*-----------------------------------------------------------------------------*
+   // Added HMG Ex v.1.3 build 38
+
 PROCEDURE _DefineControlContextMenu ( Control , Parent )
-*-----------------------------------------------------------------------------*
 
    _HMG_xContextMenuHandle := 0
    _HMG_xContextMenuParentHandle := 0
@@ -768,11 +748,10 @@ PROCEDURE _DefineControlContextMenu ( Control , Parent )
    _HMG_xContextMenuParentName := Parent
    _HMG_xContextMenuHandle := CreatePopupMenu( 5 )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _ShowControlContextMenu ( Control , Parent , lShow )
-*-----------------------------------------------------------------------------*
+
    LOCAL h := GetControlHandle ( Control, Parent )
    LOCAL i, j
 
@@ -792,51 +771,46 @@ PROCEDURE _ShowControlContextMenu ( Control , Parent , lShow )
       NEXT
    ENDIF
 
-RETURN
+   RETURN
 
-// Added HMG Ex v.1.3 build 35
-*-----------------------------------------------------------------------------*
+   // Added HMG Ex v.1.3 build 35
+
 FUNCTION _GetMenuItemCaption ( ItemName , FormName )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN xGetMenuCaption( a [1] , a [2] )
+   RETURN xGetMenuCaption( a [1] , a [2] )
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetMenuItemCaption ( ItemName , FormName , Caption )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN xSetMenuCaption( a [1] , a [2] , Caption )
+   RETURN xSetMenuCaption( a [1] , a [2] , Caption )
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetMenuItemBitmap ( ItemName , FormName , Bitmap )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    _HMG_aControlBrushHandle [ GetControlIndex ( ItemName , FormName ) ] := MenuItem_SetBitMaps ( a [1] , a [2] , Bitmap , '' )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _SetMenuItemIcon ( ItemName , FormName , Icon )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    _HMG_aControlBrushHandle [ GetControlIndex ( ItemName , FormName ) ] := MenuItem_SetIcon ( a [1] , a [2] , Icon )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION _SetMenuItemFont ( ItemName , FormName , Font )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN MenuItem_SetFont ( a [1] , a [2] , Font )
+   RETURN MenuItem_SetFont ( a [1] , a [2] , Font )
 
-*------------------------------------------------------------------------------*
 FUNCTION _InsertMenuItem ( ItemName , FormName , caption , action , name , Image )
-*------------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
    LOCAL Id, mVar, Controlhandle := a [1], hBitmap := 0
 
@@ -844,10 +818,12 @@ FUNCTION _InsertMenuItem ( ItemName , FormName , caption , action , name , Image
 
    IF ValType ( name ) != 'U'
       mVar := '_' + _HMG_xMainMenuParentName + '_' + Name
-      Public &mVar. := Len( _HMG_aControlNames ) + 1
+      PUBLIC &mVar. := Len( _HMG_aControlNames ) + 1
+
    ELSE
       mVar := '_MenuDummyVar'
-      Public &mVar. := 0
+      PUBLIC &mVar. := 0
+
    ENDIF
 
    InsertMenuItem ( Controlhandle , a [2] , Id , caption )
@@ -863,12 +839,12 @@ FUNCTION _InsertMenuItem ( ItemName , FormName , caption , action , name , Image
    AAdd ( _HMG_aControlIds , id )
    AAdd ( _HMG_aControlProcedures , action )
    AAdd ( _HMG_aControlPageMap , a [1] )
-   AAdd ( _HMG_aControlValue , Nil ) 
-   AAdd ( _HMG_aControlInputMask , "" ) 
-   AAdd ( _HMG_aControllostFocusProcedure , "" ) 
-   AAdd ( _HMG_aControlGotFocusProcedure , "" ) 
-   AAdd ( _HMG_aControlChangeProcedure , "" ) 
-   AAdd ( _HMG_aControlDeleted , .F. ) 
+   AAdd ( _HMG_aControlValue , Nil )
+   AAdd ( _HMG_aControlInputMask , "" )
+   AAdd ( _HMG_aControllostFocusProcedure , "" )
+   AAdd ( _HMG_aControlGotFocusProcedure , "" )
+   AAdd ( _HMG_aControlChangeProcedure , "" )
+   AAdd ( _HMG_aControlDeleted , .F. )
    AAdd ( _HMG_aControlBkColor , Nil )
    AAdd ( _HMG_aControlFontColor , Nil )
    AAdd ( _HMG_aControlDblClick , "" )
@@ -901,11 +877,10 @@ FUNCTION _InsertMenuItem ( ItemName , FormName , caption , action , name , Image
       Eval ( _HMG_bOnControlInit, Len( _HMG_aControlNames ), mVar )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _ModifyMenuItem ( ItemName , FormName , Caption , action , name , Image )
-*------------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
    LOCAL x := GetControlIndex ( ItemName , FormName )
    LOCAL Id , mVar
@@ -914,16 +889,18 @@ FUNCTION _ModifyMenuItem ( ItemName , FormName , Caption , action , name , Image
 
    IF ValType ( name ) != 'U'
       mVar := '_' + _HMG_xMainMenuParentName + '_' + Name
-      Public &mVar. := x
+      PUBLIC &mVar. := x
+
    ELSE
       mVar := '_MenuDummyVar'
-      Public &mVar. := 0
+      PUBLIC &mVar. := 0
+
    ENDIF
 
    ModifyMenuItem ( a [1] , a [2] , Id , Caption )
 
    IF ValType ( image ) != 'U'
-      DeleteObject ( _HMG_aControlBrushHandle [x] )
+      DELETEObject ( _HMG_aControlBrushHandle [x] )
       _HMG_aControlBrushHandle [x] := MenuItem_SetBitMaps ( a [1] , Id , image , '' )
    ENDIF
 
@@ -931,11 +908,11 @@ FUNCTION _ModifyMenuItem ( ItemName , FormName , Caption , action , name , Image
    _HMG_aControlProcedures [x] := action
    _HMG_aControlCaption [x] := Caption
 
-RETURN Nil
+   RETURN NIL
 
-*------------------------------------------------------------------------------*
 FUNCTION _RemoveMenuItem ( ItemName , FormName  )
-*------------------------------------------------------------------------------*
+
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
-RETURN RemoveMenuItem ( a [1] , a [2] )
+   RETURN RemoveMenuItem ( a [1] , a [2] )
+

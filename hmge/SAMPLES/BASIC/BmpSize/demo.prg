@@ -1,25 +1,25 @@
 /*
- * Author: P.Chornyj <myorg63@mail.ru>
+* Author: P.Chornyj <myorg63@mail.ru>
 */
 ANNOUNCE RDDSYS
 
 #include "minigui.ch"
-///////////////////////////////////////////////////////////////////////////////
-procedure main()
 
-   define window Form_Main ;
-      at 0,0 ;
-      width 320 height 240 ;
-      title 'fn:BmpSize() Demo' ;
-      main ;
-      nomaximize nosize
+PROCEDURE main()
 
-      define main menu
-         define popup "&File" 
+   DEFINE WINDOW Form_Main ;
+         at 0,0 ;
+         width 320 height 240 ;
+         title 'fn:BmpSize() Demo' ;
+         main ;
+         nomaximize nosize
+
+      DEFINE MAIN MENU
+         DEFINE POPUP "&File"
             menuitem '&Open' action( ;
                Form_Main.Image_1.Picture := ;
-                  GetFile( { {'Bmp Files', '*.bmp'} }, 'Open a File', GetCurrentFolder(), .f., .t. ) ;
-             )
+               GetFile( { {'Bmp Files', '*.bmp'} }, 'Open a File', GetCurrentFolder(), .f., .t. ) ;
+               )
             separator
             menuitem "E&xit" action ThisWindow.Release
          end popup
@@ -31,18 +31,17 @@ procedure main()
          adjust ;
          tooltip 'Click Me'
 
-   end window
+   END WINDOW
 
    Form_Main.Center()
    Form_Main.Activate()
 
-return
+   RETURN
 
-///////////////////////////////////////////////////////////////////////////////
-static procedure Image_1_OnClick( cName )
+STATIC PROCEDURE Image_1_OnClick( cName )
 
-   local aPictInfo := BmpSize( cName )
-   local cMsg
+   LOCAL aPictInfo := BmpSize( cName )
+   LOCAL cMsg
 
    cMsg := "Picture name:" + Chr(9) + cFileNoPath( cName ) + CRLF
    cMsg += "Image Width:"  + Chr(9) + hb_NtoS( aPictInfo[1] ) + CRLF
@@ -53,4 +52,5 @@ static procedure Image_1_OnClick( cName )
 
    MsgInfo( cMsg, 'Bitmap Info' )
 
-return
+   RETURN
+

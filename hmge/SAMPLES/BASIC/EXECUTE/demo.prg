@@ -4,62 +4,56 @@
 
 #include "minigui.ch"
 
-Static lContinue
+STATIC lContinue
 
-Function Main
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Execute File Demo' ;
-		MAIN
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Execute File Demo' ;
+         MAIN
 
-		DEFINE BUTTON B1
-			ROW 10
-			COL 10
-			CAPTION 'Execute'
-			ACTION ExecTest()
-		END BUTTON
+      DEFINE BUTTON B1
+         ROW 10
+         COL 10
+         CAPTION 'Execute'
+         ACTION ExecTest()
+      END BUTTON
 
-		DEFINE BUTTON B2
-			ROW 45
-			COL 10
-			CAPTION 'Execute Wait'
-			ACTION ExecTest2()
-		END BUTTON
+      DEFINE BUTTON B2
+         ROW 45
+         COL 10
+         CAPTION 'Execute Wait'
+         ACTION ExecTest2()
+      END BUTTON
 
-	END WINDOW
+   END WINDOW
 
-	ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Procedure ExecTest()
-*-----------------------------------------------------------------------------*
+PROCEDURE ExecTest()
 
-	lContinue := .F.
+   lContinue := .F.
 
-	EXECUTE FILE "NOTEPAD.EXE"
+   EXECUTE FILE "NOTEPAD.EXE"
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Procedure ExecTest2()
-*-----------------------------------------------------------------------------*
+PROCEDURE ExecTest2()
 
-	lContinue := .T.
+   lContinue := .T.
 
-	EXECUTE FILE "NOTEPAD.EXE" WAIT WHILE DoWhile() INTERVAL 500
+   EXECUTE FILE "NOTEPAD.EXE" WAIT WHILE DoWhile() INTERVAL 500
 
-Return
+   RETURN
 
-*-----------------------------------------------------------------------------*
-Function DoWhile
-*-----------------------------------------------------------------------------*
-  
-  DO EVENTS
+FUNCTION DoWhile
 
-Return lContinue
+   DO EVENTS
+
+   RETURN lContinue
 

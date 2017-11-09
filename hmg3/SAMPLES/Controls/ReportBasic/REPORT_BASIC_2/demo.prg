@@ -1,26 +1,30 @@
 #include 'hmg.ch'
 
-function main()
-       declare window form_1
-       define window form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'hola' ; 
+FUNCTION main()
+
+   DECLARE window form_1
+   DEFINE WINDOW form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'hola' ;
          main
 
-       @ 40,10 button b_2 caption 'Do External Report (.rpt)' action testrepo() WIDTH 150 
+      @ 40,10 button b_2 caption 'Do External Report (.rpt)' action testrepo() WIDTH 150
 
-       end window
-       activate window form_1
-return
+   END WINDOW
+   ACTIVATE WINDOW form_1
 
-function testrepo()
-       wempresa:='sistemas c.v.c'
-       use mtiempo 
-       index on usuario to lista
-       go top
-       DO REPORT FORM repdemo
-	use
-return
+   RETURN
+
+FUNCTION testrepo()
+
+   wempresa:='sistemas c.v.c'
+   USE mtiempo
+   INDEX ON usuario to lista
+   GO TOP
+   DO REPORT FORM repdemo
+   USE
+
+   RETURN
 

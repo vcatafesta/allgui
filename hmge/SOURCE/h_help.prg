@@ -13,44 +13,43 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "fileio.ch"
 
-*-----------------------------------------------------------------------------*
 PROCEDURE SetHelpFile( cFile )
-*-----------------------------------------------------------------------------*
+
    LOCAL hFile
 
    IF File( cFile )
@@ -71,14 +70,14 @@ PROCEDURE SetHelpFile( cFile )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE DisplayHelpTopic( xTopic , nMet )
-*-----------------------------------------------------------------------------*
+
    LOCAL cParam := ""
 
    IF Empty( _HMG_ActiveHelpFile )
+
       RETURN
    ENDIF
 
@@ -110,16 +109,16 @@ PROCEDURE DisplayHelpTopic( xTopic , nMet )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*=============================================================================*
-*                          Auxiliary Functions
-*=============================================================================*
+   *=============================================================================*
+   *                          Auxiliary Functions
+   *=============================================================================*
 
-// cFieldList is a comma delimited list of fields, f.e. "First,Last,Birth,Age".
-*-----------------------------------------------------------------------------*
+   // cFieldList is a comma delimited list of fields, f.e. "First,Last,Birth,Age".
+
 FUNCTION HMG_DbfToArray( cFieldList, bFor, bWhile, nNext, nRec, lRest )
-*-----------------------------------------------------------------------------*
+
    LOCAL aRet := {}, nRecNo := RecNo(), bLine
 
    IF Empty( cFieldList )
@@ -134,11 +133,10 @@ FUNCTION HMG_DbfToArray( cFieldList, bFor, bWhile, nNext, nRec, lRest )
 
    dbGoto( nRecNo )
 
-RETURN aRet
+   RETURN aRet
 
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_ArrayToDBF( aData, cFieldList, bProgress )
-*-----------------------------------------------------------------------------*
+
    LOCAL aFldName, aFieldPos, aFieldTyp, lFldName
    LOCAL nCols, nCol, nRow, nRows, aRow, uVal
 
@@ -166,7 +164,7 @@ FUNCTION HMG_ArrayToDBF( aData, cFieldList, bProgress )
 
       aRow := aData[ nRow ]
       REPEAT
-         dbAppend()
+      dbAppend()
       UNTIL NetErr()
 
       FOR nCol := 1 TO nCols
@@ -200,17 +198,17 @@ FUNCTION HMG_ArrayToDBF( aData, cFieldList, bProgress )
 
    NEXT nRow
 
-RETURN .T.
+   RETURN .T.
 
-#ifdef __XHARBOUR__
-#include "hbcompat.ch"
-#else
-#xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
-#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-#endif
-*-----------------------------------------------------------------------------*
+   #ifdef __XHARBOUR__
+   #include "hbcompat.ch"
+   #else
+   #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
+   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+   #endif
+
 STATIC FUNCTION ConvertType( uVal, cTypeDst )
-*-----------------------------------------------------------------------------*
+
    LOCAL cTypeSrc := ValType( uVal )
 
    IF cTypeDst != cTypeSrc
@@ -263,11 +261,10 @@ STATIC FUNCTION ConvertType( uVal, cTypeDst )
 
    ENDIF
 
-RETURN uVal
+   RETURN uVal
 
-*-----------------------------------------------------------------------------*
 FUNCTION HMG_DbfToExcel( cFieldList, aHeader, bFor, bWhile, nNext, nRec, lRest )
-*-----------------------------------------------------------------------------*
+
    LOCAL nRecNo := RecNo(), bLine
    LOCAL oExcel, oBook, oSheet, oRange
    LOCAL nCols, nRow := 1
@@ -283,11 +280,13 @@ FUNCTION HMG_DbfToExcel( cFieldList, aHeader, bFor, bWhile, nNext, nRec, lRest )
    TRY
       oExcel := CreateObject( "Excel.Application" )
    CATCH
+
       RETURN .F.
    END
 
    IF oExcel == Nil
       MsgAlert( "Excel not installed", "Warning" )
+
       RETURN .F.
    ENDIF
 
@@ -315,4 +314,5 @@ FUNCTION HMG_DbfToExcel( cFieldList, aHeader, bFor, bWhile, nNext, nRec, lRest )
    oExcel:ScreenUpdating := .T.
    oExcel:Visible := .T.
 
-RETURN .T.
+   RETURN .T.
+

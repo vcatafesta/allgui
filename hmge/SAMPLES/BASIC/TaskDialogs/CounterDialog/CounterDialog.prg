@@ -1,24 +1,23 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- * An example of using of TaskDialogIndirect0 with custom buttons and callback function
- *
- * Copyright 2016, Petr Chornyj
+* MINIGUI - Harbour Win32 GUI library Demo
+* An example of using of TaskDialogIndirect0 with custom buttons and callback function
+* Copyright 2016, Petr Chornyj
 */
 
 #include "minigui.ch"
 #include "TaskDlgs.ch"
 
 STATIC s_nCounter
-      
+
 PROCEDURE main()
 
    LOCAL aConfig := Array( TDC_CONFIG )
    LOCAL nResult
    LOCAL nButton := NIL
    LOCAL aCustButton  := { ;
-                          { 1100, "Increment" }, ;
-                          { 1101, "Decrement" } ;
-                         }
+      { 1100, "Increment" }, ;
+      { 1101, "Decrement" } ;
+      }
 
    aConfig[ TDC_WINDOWTITLE ]       := "Counter Sample"
    aConfig[ TDC_TASKDIALOG_FLAGS ]  := TDF_ALLOW_DIALOG_CANCELLATION  /* [x] button in caption */
@@ -27,11 +26,11 @@ PROCEDURE main()
 
    aConfig[TDC_CALLBACK] := {|h,n,w,l| __cb_counter( h,n,w,l )}
 
-   IF ( nResult := win_TaskDialogIndirect0( aConfig, @nButton, NIL, NIL ) ) == NOERROR 
-      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. ) 
+   IF ( nResult := win_TaskDialogIndirect0( aConfig, @nButton, NIL, NIL ) ) == NOERROR
+      MsgInfo( hb_strFormat( "Button with ID %d was pressed", nButton ), , , .F. )
    ELSE
       IF nResult != E_OUTOFMEMORY
-         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. ) 
+         MsgStop( hb_strFormat( "ERROR: TaskDialogIndirect() => %d", nResult ), , , .F. )
       ELSE
          // Do Something
          QUIT
@@ -40,11 +39,11 @@ PROCEDURE main()
 
    RETURN
 
-
 STATIC FUNCTION __cb_counter( hWnd, nNotification, wParam, lParam )
+
    /*
-      To prevent the task dialog from closing, the application must return FALSE,
-      otherwise the task dialog is closed 
+   To prevent the task dialog from closing, the application must return FALSE,
+   otherwise the task dialog is closed
    */
    LOCAL lResult := .F.
 
@@ -69,6 +68,7 @@ STATIC FUNCTION __cb_counter( hWnd, nNotification, wParam, lParam )
       ENDIF
       EXIT
 
-   END SWITCH   
+   END SWITCH
 
    RETURN lResult
+

@@ -17,35 +17,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -54,12 +54,10 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 #define EM_SETCUEBANNER       0x1501
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       cValue, FontName, FontSize, ToolTip, nMaxLength, lUpper, lLower, lNumeric, lPassword, ;
       uLostFocus, uGotFocus, uChange, uEnter, right, HelpId, readonly, bold, italic, underline, ;
       strikeout, field, backcolor, fontcolor, invisible, notabstop, noborder, cuetext, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle, ControlHandle := 0
    LOCAL mVar, FontHandle
    LOCAL WorkArea, blInit, k, Style, lDialogInMemory
@@ -106,12 +104,12 @@ FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
    ENDIF
    lDialogInMemory := _HMG_DialogInMemory
 
-// Check if the window/form is defined.
+   // Check if the window/form is defined.
    IF .NOT. _IsWindowDefined( ParentFormName ) .AND. .NOT. lDialogInMemory
       MsgMiniGuiError( "Window: " + IFNIL( ParentFormName, "Parent", ParentFormName ) + " is not defined." )
    ENDIF
 
-// Check if the control is already defined.
+   // Check if the control is already defined.
    IF _IsControlDefined( ControlName, ParentFormName ) .AND. .NOT. lDialogInMemory
       MsgMiniGuiError( "Control: " + ControlName + " of " + ParentFormName + " already defined." )
    ENDIF
@@ -201,7 +199,7 @@ FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       ENDIF
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := iif( lNumeric, "NUMTEXT", "TEXT" )
    _HMG_aControlNames  [k] :=  ControlName
@@ -261,7 +259,7 @@ FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
          SetWindowText( ControlHandle , cValue )
       ENDIF
 
-      IF !Empty( cuetext ) .AND. IsVistaOrLater() 
+      IF !Empty( cuetext ) .AND. IsVistaOrLater()
          SendMessageWideString( ControlHandle, EM_SETCUEBANNER, .T. /*show on focus*/, cuetext )
       ENDIF
 
@@ -270,15 +268,15 @@ FUNCTION _DefineTextBox ( ControlName, ParentFormName, x, y, w, h, ;
       ENDIF
    ENDIF
 
-RETURN nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogTextBox( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL readonly, nMaxLength, Field, cValue, lNumeric
    Field       := _HMG_aControlPageMap  [k]
+
    nMaxLength  := _HMG_aControlRangeMax  [k]
-   readonly    := _HMG_aControlMiscData1 [k,2]
+   READonly    := _HMG_aControlMiscData1 [k,2]
    cValue      := _HMG_aControlValue  [k]
    lNumeric    := ( _HMG_aControlType [k] == "NUMTEXT" )
 
@@ -304,16 +302,15 @@ FUNCTION InitDialogTextBox( ParentName, ControlHandle, k )
    IF ValType ( Field ) != 'U'
       AAdd ( _HMG_aFormBrowseList [ GetFormIndex ( ParentName ) ] , k )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w, value, fontname, fontsize, tooltip, lostfocus, gotfocus, change, h, enter, rightalign, HelpId, Format, bold, italic, underline, strikeout, field, backcolor, fontcolor, readonly, invisible, notabstop, noborder, cuetext, nId )
-*-----------------------------------------------------------------------------*
+
    LOCAL i, ParentFormHandle , c , mVar , WorkArea , k , Style
    LOCAL ControlHandle, blInit, FontHandle, lDialogInMemory
 
@@ -454,7 +451,7 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w,
       ENDIF
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "MASKEDTEXT"
    _HMG_aControlNames  [k] :=  ControlName
@@ -502,7 +499,7 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w,
    ENDIF
 
    IF .NOT. lDialogInMemory
-      IF !Empty( cuetext ) .AND. IsVistaOrLater() 
+      IF !Empty( cuetext ) .AND. IsVistaOrLater()
          SendMessageWideString( ControlHandle, EM_SETCUEBANNER, .T. /*show on focus*/, cuetext )
       ENDIF
 
@@ -513,13 +510,13 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentFormName, x, y, inputmask, w,
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogMaskedTextBox( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field, cValue, date
    Field  := _HMG_aControlPageMap  [k]
+
    date   := _HMG_aControlMiscData1 [k,2]
    cValue := _HMG_aControlValue  [k]
 
@@ -533,12 +530,12 @@ FUNCTION InitDialogMaskedTextBox( ParentName, ControlHandle, k )
       AAdd ( _HMG_aFormBrowseList [ GetFormIndex ( ParentName ) ] , k )
    ENDIF
 
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION GetNumFromText ( Text , i )
 
@@ -561,7 +558,7 @@ FUNCTION GetNumFromText ( Text , i )
 
    s := Transform ( Val( s ) , _HMG_aControlInputMask [i] )
 
-RETURN Val( s )
+   RETURN Val( s )
 
 STATIC FUNCTION GetNumMask ( Text )
 
@@ -582,13 +579,11 @@ STATIC FUNCTION GetNumMask ( Text )
 
    NEXT i
 
-RETURN s
+   RETURN s
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask , w , value , ;
       fontname, fontsize , tooltip , lostfocus , gotfocus , change , h , enter , rightalign , HelpId , ;
       bold, italic, underline, strikeout, field, backcolor, fontcolor, date, readonly, invisible, notabstop, noborder, cuetext, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , mVar , WorkArea , dateformat , k , Style
    LOCAL ControlHandle, blInit, FontHandle, lDialogInMemory
 
@@ -710,7 +705,6 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
          w := GetWindowWidth  ( Controlhandle )
          h := GetWindowHeight ( Controlhandle )
 
-
          SetWindowStyle ( ControlHandle, Style, .T. )
 
       ENDIF
@@ -739,7 +733,7 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "CHARMASKTEXT"
    _HMG_aControlNames [k] := ControlName
@@ -788,7 +782,7 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
 
    IF .NOT. lDialogInMemory
 
-      IF !Empty( cuetext ) .AND. IsVistaOrLater() 
+      IF !Empty( cuetext ) .AND. IsVistaOrLater()
          IF Empty( Value )
             Value := NIL
          ENDIF
@@ -808,11 +802,10 @@ FUNCTION _DefineCharMaskTextbox ( ControlName, ParentFormName, x, y, inputmask ,
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 PROCEDURE ProcessCharMask ( i , d )
-*-----------------------------------------------------------------------------*
+
    LOCAL InBuffer , icp , x , CB , CM , InBufferLeft , InBufferRight , Mask , OldChar , BackInbuffer
    LOCAL BadEntry As Logical , pFlag As Logical , NegativeZero As Logical , OutBuffer As String
    LOCAL pc As Numeric , fnb As Numeric , dc As Numeric , ol As Numeric
@@ -820,6 +813,7 @@ PROCEDURE ProcessCharMask ( i , d )
 
    IF ValType ( _HMG_aControlSpacing [i] ) == 'L'
       IF _HMG_aControlSpacing [i] == .F.
+
          RETURN
       ENDIF
    ENDIF
@@ -960,7 +954,7 @@ PROCEDURE ProcessCharMask ( i , d )
 
          OutBuffer += CM
 
-      End CASE
+      END CASE
 
    NEXT x
 
@@ -1026,11 +1020,10 @@ PROCEDURE ProcessCharMask ( i , d )
 
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 STATIC FUNCTION CharMaskTekstOK( cString, cMask )
-*-----------------------------------------------------------------------------*
+
    LOCAL lPassed := .F. , CB, CM, x
    LOCAL nCount := Min( Len( cString ), Len( cMask ) )
 
@@ -1054,17 +1047,18 @@ STATIC FUNCTION CharMaskTekstOK( cString, cMask )
       ENDIF
    NEXT
 
-RETURN lPassed
+   RETURN lPassed
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataTextBoxRefresh ( i )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field
 
    IF _HMG_aControlType [i] == "MASKEDTEXT"
       Field := _HMG_aControlHeadClick [i]
+
    ELSE
       Field := _HMG_aControlPageMap [i]
+
    ENDIF
 
    IF ValType ( Field ) != 'U'
@@ -1073,30 +1067,30 @@ PROCEDURE _DataTextBoxRefresh ( i )
       RedrawWindow ( _HMG_aControlHandles [i] )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataTextBoxSave ( ControlName, ParentForm )
-*-----------------------------------------------------------------------------*
+
    LOCAL Field , i
 
    i := GetControlIndex ( ControlName , ParentForm )
 
    IF _HMG_aControlType [i] == "MASKEDTEXT"
       Field := _HMG_aControlHeadClick [i]
+
    ELSE
       Field := _HMG_aControlPageMap [i]
+
    ENDIF
 
    IF _IsFieldExists ( Field )
       REPLACE &Field WITH _GetValue ( Controlname , ParentForm )
    ENDIF
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 PROCEDURE ProcessNumText ( i )
-*-----------------------------------------------------------------------------*
+
    LOCAL BadEntry As Logical , OutBuffer As String
    LOCAL InBuffer , icp , x , CB , BackInBuffer , fnb
 
@@ -1126,7 +1120,7 @@ PROCEDURE ProcessNumText ( i )
       CB := SubStr ( InBuffer , x , 1 )
 
       IF IsDigit ( CB ) .OR. ( CB == '-' .AND. x == fnb ) .OR. ;
-         ( ( CB == '.' .OR. CB == ',' ) .AND. At ( '.', OutBuffer ) == 0 )
+            ( ( CB == '.' .OR. CB == ',' ) .AND. At ( '.', OutBuffer ) == 0 )
 
          OutBuffer += CB
 
@@ -1150,11 +1144,10 @@ PROCEDURE ProcessNumText ( i )
    // Restore Initial CaretPos
    SendMessage ( _HMG_aControlhandles [i] , EM_SETSEL , icp , icp )
 
-RETURN
+   RETURN
 
-*-----------------------------------------------------------------------------*
 FUNCTION GETNumFromTextSP( Text, i )
-*-----------------------------------------------------------------------------*
+
    LOCAL s As String
    LOCAL x , c
 
@@ -1184,11 +1177,10 @@ FUNCTION GETNumFromTextSP( Text, i )
 
    s := Transform ( Val( s ) , _HMG_aControlInputMask [i] )
 
-RETURN Val( s )
+   RETURN Val( s )
 
-*-----------------------------------------------------------------------------*
 FUNCTION OEDITEVENTS( hWnd, nMsg, wParam, lParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL i := AScan ( _HMG_aControlHandles , hWnd ), icp, icpe, inbuffer
    LOCAL ParentForm
 
@@ -1236,10 +1228,12 @@ FUNCTION OEDITEVENTS( hWnd, nMsg, wParam, lParam )
             setfocus( wParam )
             _HMG_xControlsContextMenuID := _HMG_aControlsContextMenu[i, 3]
             TrackPopupMenu ( _HMG_aControlsContextMenu[i, 2] , LOWORD( lparam ) , HIWORD( lparam ) , ParentForm )
+
             RETURN 1
          ENDIF
       ENDIF
 
    ENDSWITCH
 
-RETURN 0
+   RETURN 0
+

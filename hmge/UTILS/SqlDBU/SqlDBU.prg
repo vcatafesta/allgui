@@ -4,7 +4,6 @@
 #include "hbsqlit3.ch"
 #include "TSBrowse.ch"
 
-
 #define PROGRAM 'SQLITE Browser'
 #define VERSION ' Ver. 1.3'
 #define COPYRIGHT ' 2012-2016 Janusz Pora'
@@ -19,34 +18,29 @@
 ANNOUNCE RDDSYS
 REQUEST SDDSQLITE3, SQLMIX, DBFNTX
 
-
 MEMVAR SqlDbuscrwidth, SqlDbuscrheight, SqlDbuwindowwidth, SqlDbuwindowheight
 MEMVAR cLastDDir, SqlDbuTableName, SqlDbName, SqlDbulastpath, pDb
 MEMVAR DBUgreen, DBUblue
 
 #define SqlDbu_VERSION  '1.3'
 
-
 #define SQLITE_ENABLE_COLUMN_METADATA
 
+FUNCTION MAIN()
 
-//------------------------------------------------------------------------------
-Function MAIN()
-//------------------------------------------------------------------------------
+   PUBLIC SqlDbName := ""
+   PUBLIC SqlDbuTableName := ""
 
-public SqlDbName := ""
-public SqlDbuTableName := ""
+   PUBLIC SqlDbuscrwidth := Min(870,getdesktopwidth())
+   PUBLIC SqlDbuscrheight := Min(600,getdesktopheight())
+   PUBLIC SqlDbuwindowwidth  := getdesktopwidth() * 0.85
+   PUBLIC SqlDbuwindowheight := getdesktopheight() * 0.85
 
-public SqlDbuscrwidth := Min(870,getdesktopwidth())
-public SqlDbuscrheight := Min(600,getdesktopheight())
-public SqlDbuwindowwidth  := getdesktopwidth() * 0.85
-public SqlDbuwindowheight := getdesktopheight() * 0.85
+   PUBLIC DBUgreen := {200,255,200}
+   PUBLIC DBUblue := {200,200,255}
+   PUBLIC pDb  := 0
 
-public DBUgreen := {200,255,200}
-public DBUblue := {200,200,255}
-public pDb  := 0
-
-   public cLastDDir :=''
+   PUBLIC cLastDDir :=''
 
    SET DATE TO    BRITISH
    SET CENTURY    ON
@@ -62,73 +56,72 @@ public pDb  := 0
    SET DEFAULT ICON TO GetStartupFolder() + "\sqlite.ico"
 
    DEFINE WINDOW FrameDbu at 0,0 ;
-      WIDTH SqlDbuscrwidth height SqlDbuscrheight ;
-      TITLE "Harbour Minigui DataBase SQLITE Utility" ;
-      MAIN ;
-      ON INIT GetRegPosWindow("FrameDbu") ;
-      ON RELEASE ( Ferase("mru.ini"), SetRegPosWindow("FrameDbu") )
+         WIDTH SqlDbuscrwidth height SqlDbuscrheight ;
+         TITLE "Harbour Minigui DataBase SQLITE Utility" ;
+         MAIN ;
+         ON INIT GetRegPosWindow("FrameDbu") ;
+         ON RELEASE ( Ferase("mru.ini"), SetRegPosWindow("FrameDbu") )
 
-   DEFINE STATUSBAR
-      STATUSITEM "DataBase SQLITE Utility" //action SqlDbuopendbf()
-      statusitem "Database:" width 80
-      statusitem SqlDbName width 260
-      statusitem "Table: " width 80
-      statusitem SqlDbuTableName width 160
-   end statusbar
+      DEFINE STATUSBAR
+         STATUSITEM "DataBase SQLITE Utility" //action SqlDbuopendbf()
+         statusitem "Database:" width 80
+         statusitem SqlDbName width 260
+         statusitem "Table: " width 80
+         statusitem SqlDbuTableName width 160
+      END STATUSBAR
 
-   DEFINE MAIN MENU
+      DEFINE MAIN MENU
 
-      DEFINE POPUP "&File"
-         ITEM " Create &New SQL Base" + Chr(9) + 'Ctrl+N' ACTION CreateDatabase() IMAGE 'MENUNEW.bmp'
-         ITEM " Create New &Table "    ACTION CreateStru() NAME AddTableSql IMAGE 'MENUNEW.bmp'
-         SEPARATOR
-         ITEM " &Open Database "  + Chr(9) + 'Ctrl+O'     ACTION OpenDataBase()  NAME SqlDbuopen IMAGE 'MENUOPEN.bmp'
-         SEPARATOR
-         DEFINE POPUP  " &Open Table "    NAME SqlOpenTable IMAGE 'MENUOPEN.bmp'
-                MRU ' (Empty) '
+         DEFINE POPUP "&File"
+            ITEM " Create &New SQL Base" + Chr(9) + 'Ctrl+N' ACTION CreateDatabase() IMAGE 'MENUNEW.bmp'
+            ITEM " Create New &Table "    ACTION CreateStru() NAME AddTableSql IMAGE 'MENUNEW.bmp'
+            SEPARATOR
+            ITEM " &Open Database "  + Chr(9) + 'Ctrl+O'     ACTION OpenDataBase()  NAME SqlDbuopen IMAGE 'MENUOPEN.bmp'
+            SEPARATOR
+            DEFINE POPUP  " &Open Table "    NAME SqlOpenTable IMAGE 'MENUOPEN.bmp'
+               MRU ' (Empty) '
+            END POPUP
+            ITEM " &Close Database"       ACTION CloseDataBase()   NAME SqlDbuClose IMAGE 'MENUCLOSE.bmp'
+            SEPARATOR
+            ITEM " E&xit"+Chr(9)+'Ctrl+X' ACTION FrameDbu.release() IMAGE 'MENUEXIT.bmp'
          END POPUP
-         ITEM " &Close Database"       ACTION CloseDataBase()   NAME SqlDbuClose IMAGE 'MENUCLOSE.bmp'
-         SEPARATOR
-         ITEM " E&xit"+Chr(9)+'Ctrl+X' ACTION FrameDbu.release() IMAGE 'MENUEXIT.bmp'
-      END POPUP
 
-      POPUP "&View"
-         ITEM " Browse Mode"  ACTION BrowseTable(SqlDbuTableName,FALSE)  NAME SqlDbuBrowse IMAGE 'MENUBROW.bmp'
-         ITEM " Edit Mode"    ACTION BrowseTable(SqlDbuTableName,TRUE)  NAME SqlDbuEdit IMAGE 'MENUEDIT.bmp'
-         SEPARATOR
-         ITEM "Table struct (Fields)"        ACTION StructInfo( SqlDbuTableName)  NAME SqlDbuStru IMAGE 'MENUBROW.bmp'
-      END POPUP
+         POPUP "&View"
+            ITEM " Browse Mode"  ACTION BrowseTable(SqlDbuTableName,FALSE)  NAME SqlDbuBrowse IMAGE 'MENUBROW.bmp'
+            ITEM " Edit Mode"    ACTION BrowseTable(SqlDbuTableName,TRUE)  NAME SqlDbuEdit IMAGE 'MENUEDIT.bmp'
+            SEPARATOR
+            ITEM "Table struct (Fields)"        ACTION StructInfo( SqlDbuTableName)  NAME SqlDbuStru IMAGE 'MENUBROW.bmp'
+         END POPUP
 
+         POPUP "&Edit"
+            ITEM " &Insert"     ACTION SqlEdit(SqlDbuTableName, pDb)  NAME SqlInsItem IMAGE 'MENUREPL.bmp'
+            SEPARATOR
+            ITEM " Zap Table"   ACTION ZapTable(SqlDbuTableName,pDb)  NAME SqlZapTable IMAGE 'MENUZAP.bmp'
+            ITEM " Drop Table"  ACTION DropTable(SqlDbuTableName,pDb)  NAME SqlDropTable IMAGE 'MENUZAP.bmp'
+         END POPUP
+         POPUP "&Tools"
+            ITEM " &Create from Dbf"     ACTION  CreatefromDBF( ) NAME SqlDbuitem10 IMAGE 'MENUDBFCRE.bmp'
+            ITEM " &Add Table from Dbf"  ACTION  CreatefromDBF(,pDb,SqlDbName ) NAME SqlDbuitem11 IMAGE 'MENUDBFCRE.bmp'
+            ITEM " Create &Backup"       ACTION  BackupDb() name SqlBackDB IMAGE 'MENUDBFCRE.bmp'
 
-      POPUP "&Edit"
-         ITEM " &Insert"     ACTION SqlEdit(SqlDbuTableName, pDb)  NAME SqlInsItem IMAGE 'MENUREPL.bmp'
-         SEPARATOR
-         ITEM " Zap Table"   ACTION ZapTable(SqlDbuTableName,pDb)  NAME SqlZapTable IMAGE 'MENUZAP.bmp'
-         ITEM " Drop Table"  ACTION DropTable(SqlDbuTableName,pDb)  NAME SqlDropTable IMAGE 'MENUZAP.bmp'
-      END POPUP
-      POPUP "&Tools"
-         ITEM " &Create from Dbf"     ACTION  CreatefromDBF( ) NAME SqlDbuitem10 IMAGE 'MENUDBFCRE.bmp'
-         ITEM " &Add Table from Dbf"  ACTION  CreatefromDBF(,pDb,SqlDbName ) NAME SqlDbuitem11 IMAGE 'MENUDBFCRE.bmp'
-         ITEM " Create &Backup"       ACTION  BackupDb() name SqlBackDB IMAGE 'MENUDBFCRE.bmp'
+         END POPUP
 
-      END POPUP
+         POPUP "&Help"
+            ITEM ' Version'  ACTION MsgInfo ("SqlDbu version: " + SqlDbu_VERSION  + CRLF + ;
+               "GUI Library : " + MiniGuiVersion() + CRLF + ;
+               "Compiler     : " + Version(), 'Versions') IMAGE 'MENUVER.bmp'
 
-      POPUP "&Help"
-         ITEM ' Version'  ACTION MsgInfo ("SqlDbu version: " + SqlDbu_VERSION  + CRLF + ;
-                              "GUI Library : " + MiniGuiVersion() + CRLF + ;
-                             "Compiler     : " + Version(), 'Versions') IMAGE 'MENUVER.bmp'
-
-         ITEM ' SQLITE Version'  ACTION MsgInfo ( "Version library = " + sqlite3_libversion() + CRLF + ;
+            ITEM ' SQLITE Version'  ACTION MsgInfo ( "Version library = " + sqlite3_libversion() + CRLF + ;
                "number version library = " + LTRIM(STR( sqlite3_libversion_number() )), ;
                "SQLITE INFO" )
 
-      END POPUP
+         END POPUP
 
-   END MENU
+      END MENU
 
-     ON KEY CONTROL+N ACTION CreateDatabase()
-     ON KEY CONTROL+O ACTION OpenDataBase()
-     ON KEY CONTROL+X ACTION FrameDbu.release()
+      ON KEY CONTROL+N ACTION CreateDatabase()
+      ON KEY CONTROL+O ACTION OpenDataBase()
+      ON KEY CONTROL+X ACTION FrameDbu.release()
 
    END WINDOW
 
@@ -146,18 +139,21 @@ public pDb  := 0
 
    CENTER WINDOW FrameDbu
    ACTIVATE WINDOW  FrameDbu
-return nil
 
-Static Function GetRegPosWindow(FormName, cProgName)
-   Local hKey:= HKEY_CURRENT_USER
-   Local cKey
-   local col , row , width , height
-   Local actpos := {0,0,0,0}
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := SubStr(cFileNoPath( HB_ArgV( 0 ) ),1,RAt('.',cFileNoPath( HB_ArgV( 0 ) ))-1)
+   RETURN NIL
+
+STATIC FUNCTION GetRegPosWindow(FormName, cProgName)
+
+   LOCAL hKey:= HKEY_CURRENT_USER
+   LOCAL cKey
+   LOCAL col , row , width , height
+   LOCAL actpos := {0,0,0,0}
+
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := SubStr(cFileNoPath( HB_ArgV( 0 ) ),1,RAt('.',cFileNoPath( HB_ArgV( 0 ) ))-1)
    cKey := "Software\MiniGui\"+cProgName+"\"+FormName
    GetWindowRect( GetFormHandle( FormName ), actpos )
-   if IsRegistryKey(hKey,cKey)
+   IF IsRegistryKey(hKey,cKey)
       col := GetRegistryValue( hKey, cKey, "col", 'N' )
       row := GetRegistryValue( hKey, cKey, "row", 'N' )
       width := GetRegistryValue( hKey, cKey, "width", 'N' )
@@ -168,26 +164,29 @@ Static Function GetRegPosWindow(FormName, cProgName)
       height:= IFNIL( height, actpos[4] - actpos[2], height )
 
       MoveWindow ( GetFormHandle( FormName ) , col , row , width , height , TRUE )
-   endif
-Return Nil
+   ENDIF
 
-Static Function SetRegPosWindow(FormName,cProgName)
-   Local hKey:= HKEY_CURRENT_USER
-   Local cKey
-   Local actpos := {0,0,0,0}
-   local col , row , width , height
+   RETURN NIL
 
-   Default FormName := _HMG_ThisFormName
-   Default cProgName := SubStr(cFileNoPath( HB_ArgV( 0 ) ),1,RAt('.',cFileNoPath( HB_ArgV( 0 ) ))-1)
+STATIC FUNCTION SetRegPosWindow(FormName,cProgName)
+
+   LOCAL hKey:= HKEY_CURRENT_USER
+   LOCAL cKey
+   LOCAL actpos := {0,0,0,0}
+   LOCAL col , row , width , height
+
+   DEFAULT FormName := _HMG_ThisFormName
+   DEFAULT cProgName := SubStr(cFileNoPath( HB_ArgV( 0 ) ),1,RAt('.',cFileNoPath( HB_ArgV( 0 ) ))-1)
 
    cKey := "Software\MiniGui\"+cProgName+"\"+FormName
    GetWindowRect( GetFormHandle( FormName ), actpos )
-   if !IsRegistryKey(hKey,cKey)
-      if !CreateRegistryKey( hKey, cKey)
-         Return Nil
-      endif
-   endif
-   if IsRegistryKey(hKey,cKey)
+   IF !IsRegistryKey(hKey,cKey)
+      IF !CreateRegistryKey( hKey, cKey)
+
+         RETURN NIL
+      ENDIF
+   ENDIF
+   IF IsRegistryKey(hKey,cKey)
       col   :=  actpos[1]
       row   :=  actpos[2]
       width :=  actpos[3] - actpos[1]
@@ -196,43 +195,45 @@ Static Function SetRegPosWindow(FormName,cProgName)
       SetRegistryValue( hKey, cKey, "row", row )
       SetRegistryValue( hKey, cKey, "width", width )
       SetRegistryValue( hKey, cKey, "height", height )
-   endif
-Return Nil
+   ENDIF
 
-*--------------------------------------------------------*
+   RETURN NIL
+
 FUNCTION OpenDataBase(cFileName,lCreate)
-*--------------------------------------------------------*
 
    LOCAL  aTable, n
    LOCAL lCreateIfNotExist := FALSE
-   Default lCreate := FALSE
+
+   DEFAULT lCreate := FALSE
    lCreateIfNotExist := lCreate
 
-   If empty(cFileName)
+   IF empty(cFileName)
       cFileName := GetFile ( {{ "SQLITE3 Files", "*.s3db"},{ "Database Files", "*.db"},{ "All Files", "*.*"} } ,;
-                           "Open Database" , cLastDDir, FALSE , TRUE )
-   endif
-   If !empty(cFileName)
+         "Open Database" , cLastDDir, FALSE , TRUE )
+   ENDIF
+   IF !empty(cFileName)
 
-      ClearMRUList( )
+      CLEARMRUList( )
 
       pDb := sqlite3_open( cFileName, lCreateIfNotExist )
 
       IF !DB_IS_OPEN( pDb )
          pDb:=0
          MsgStop("Unable open a database!", "Error")
-         Return FALSE
-      endif
+
+         RETURN FALSE
+      ENDIF
 
       SqlDbName := cFileName
       aTable := SQLITE_TABLES(pDb)
-      for n:=1 to Len(aTable)
+      FOR n:=1 to Len(aTable)
          AddMRUItem( aTable[n] , "SeleTable()" )
-      next
+      NEXT
 
       IF RDDINFO( RDDI_CONNECT, {"SQLITE3", cFileName} ) == 0
          MsgStop("Unable connect to the server!", "Error")
-         Return FALSE
+
+         RETURN FALSE
       ENDIF
 
       FrameDbu.SqlDbuClose.Enabled   := TRUE
@@ -244,12 +245,11 @@ FUNCTION OpenDataBase(cFileName,lCreate)
       SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,5 , '' )
    ENDIF
 
-RETURN TRUE
+   RETURN TRUE
 
-*--------------------------------------------------------*
 FUNCTION CloseDataBase()
-*--------------------------------------------------------*
-   ClearMRUList( )
+
+   CLEARMRUList( )
    FrameDbu.SqlDbuClose.Enabled   := FALSE
    FrameDbu.SqlOpenTable.Enabled  := FALSE
    FrameDbu.SqlDbuBrowse.Enabled  := FALSE
@@ -267,43 +267,39 @@ FUNCTION CloseDataBase()
    SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,3 , SqlDbName )
    SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,5 , SqlDbuTableName )
 
-Return NIL
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function SeleTable(cTable)
-*--------------------------------------------------------*
+FUNCTION SeleTable(cTable)
+
    IF SQLITE_TABLEEXISTS( cTable, pDb )
-     SqlDbuTableName  := cTable
-     FrameDbu.SqlDbuBrowse.Enabled := TRUE
-     FrameDbu.SqlDbuEdit.Enabled   := TRUE
-     FrameDbu.SqlDbuStru.Enabled   := TRUE
-     FrameDbu.SqlDropTable.Enabled := TRUE
-     FrameDbu.SqlZapTable.Enabled  := TRUE
-     FrameDbu.SqlInsItem.Enabled   := TRUE
-     SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,5 , SqlDbuTableName )
+      SqlDbuTableName  := cTable
+      FrameDbu.SqlDbuBrowse.Enabled := TRUE
+      FrameDbu.SqlDbuEdit.Enabled   := TRUE
+      FrameDbu.SqlDbuStru.Enabled   := TRUE
+      FrameDbu.SqlDropTable.Enabled := TRUE
+      FrameDbu.SqlZapTable.Enabled  := TRUE
+      FrameDbu.SqlInsItem.Enabled   := TRUE
+      SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,5 , SqlDbuTableName )
 
-   endif
-Return Nil
+   ENDIF
 
-*--------------------------------------------------------*
-Procedure CloseTable
-*--------------------------------------------------------*
+   RETURN NIL
+
+PROCEDURE CloseTable
 
    DBCLOSEALL()
    SetProperty ( 'FrameDbu', 'StatusBar', 'Item' ,5 , '' )
 
-Return
+   RETURN
 
+FUNCTION StructInfo( cTable )
 
-*--------------------------------------------------------*
- FUNCTION StructInfo( cTable )
-*--------------------------------------------------------*
-* Shows Information about fields...
-*--------------------------------------------------------*
-  LOCAL aResult,aInfo :={}
-  LOCAL DBUstruct :={}, aSeq :={}
+   * Shows Information about fields...
+   LOCAL aResult,aInfo :={}
+   LOCAL DBUstruct :={}, aSeq :={}
 
-  IF VALTYPE( cTable ) != "C" .OR. EMPTY( cTable ) .OR. cTable == NIL
+   IF VALTYPE( cTable ) != "C" .OR. EMPTY( cTable ) .OR. cTable == NIL
+
       RETURN 0
    ELSE
       aSeq := SQLITE_TABLESEQUENCE( pDb, cTable )
@@ -311,65 +307,60 @@ Return
    ENDIF
 
    IF len(aResult) > 0
-     nSeq := if(len(aSeq)> 0,aSeq[2],0)
-     AEval( aResult, {|x,y| aAdd(DBUstruct,{y,x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8],if(x[8],nSeq,'')})})
-     BrowStru(DBUstruct,aResult,cTable, ,aSeq)
-  ENDIF
+      nSeq := if(len(aSeq)> 0,aSeq[2],0)
+      AEval( aResult, {|x,y| aAdd(DBUstruct,{y,x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8],if(x[8],nSeq,'')})})
+      BrowStru(DBUstruct,aResult,cTable, ,aSeq)
+   ENDIF
 
-RETURN nil
+   RETURN NIL
 
+FUNCTION CreateDatabase()
 
-*--------------------------------------------------------*
-Function CreateDatabase()
-*--------------------------------------------------------*
-   Local cFileName:=''
+   LOCAL cFileName:=''
 
-   DEFINE window FrameNewBase ;
-      AT 0,0 WIDTH 500 HEIGHT 300 ;
-      TITLE "Create a new SQLITE Database" NOSIZE //nosysmenu
+   DEFINE WINDOW FrameNewBase ;
+         AT 0,0 WIDTH 500 HEIGHT 300 ;
+         TITLE "Create a new SQLITE Database" NOSIZE //nosysmenu
 
-   @ 10,10 FRAME Frame_1 ;
-      WIDTH 550;
-      HEIGHT 200;
-      CAPTION "Info"
+      @ 10,10 FRAME Frame_1 ;
+         WIDTH 550;
+         HEIGHT 200;
+         CAPTION "Info"
 
-   @ 40,40 LABEL Lbl_Path ;
-      VALUE "Path";
-      WIDTH 60 ;
-      BACKCOLOR DBUblue
+      @ 40,40 LABEL Lbl_Path ;
+         VALUE "Path";
+         WIDTH 60 ;
+         BACKCOLOR DBUblue
 
+      @ 40,110 BTNTEXTBOX Text_Path;
+         width 350 ;
+         VALUE ""   ;
+         BACKCOLOR DBUgreen ;
+         Action  {|| FrameNewBase.Text_Path.value := GetFolder (,FrameNewBase.Text_Path.value),cFileName:= FileNameCreta() }
 
-   @ 40,110 BTNTEXTBOX Text_Path;
-      width 350 ;
-      VALUE ""   ;
-      BACKCOLOR DBUgreen ;
-      Action  {|| FrameNewBase.Text_Path.value := GetFolder (,FrameNewBase.Text_Path.value),cFileName:= FileNameCreta() }
+      @ 80,40 LABEL Lbl_Name;
+         VALUE "Name" ;
+         WIDTH 60;
+         BACKCOLOR DBUblue
 
-   @ 80,40 LABEL Lbl_Name;
-      VALUE "Name" ;
-      WIDTH 60;
-      BACKCOLOR DBUblue
+      @ 80,110 TEXTBOX Text_Name ;
+         WIDTH 150 ;
+         UPPERCASE ;
+         BACKCOLOR DBUgreen;
+         VALUE "";
+         ON CHANGE {|| cFileName:= FileNameCreta(),FrameNewBase.Btn_Create.Enabled := !empty(FrameNewBase.Text_Name.Value) }
 
+      @ 120,110 LABEL Lbl_File;
+         VALUE cFileName ;
+         AUTOSIZE BOLD
 
-   @ 80,110 TEXTBOX Text_Name ;
-      WIDTH 150 ;
-      UPPERCASE ;
-      BACKCOLOR DBUgreen;
-      VALUE "";
-      ON CHANGE {|| cFileName:= FileNameCreta(),FrameNewBase.Btn_Create.Enabled := !empty(FrameNewBase.Text_Name.Value) }
-
-   @ 120,110 LABEL Lbl_File;
-      VALUE cFileName ;
-      AUTOSIZE BOLD
-
-   DEFINE BUTTON Btn_Create
-      ROW 160
-      COL 75
-      CAPTION "Create"
-      WIDTH 100
-      ACTION OpenDataBase(cFileName,TRUE)
-   END BUTTON
-
+      DEFINE BUTTON Btn_Create
+         ROW 160
+         COL 75
+         CAPTION "Create"
+         WIDTH 100
+         ACTION OpenDataBase(cFileName,TRUE)
+      END BUTTON
 
    END WINDOW
    FrameNewBase.Btn_Create.Enabled := FALSE
@@ -377,63 +368,62 @@ Function CreateDatabase()
 
    ACTIVATE WINDOW FrameNewBase
 
-   Return Nil
+   RETURN NIL
 
-*--------------------------------------------------------*
-Function FileNameCreta()
-*--------------------------------------------------------*
-   Local cFile, cName
+FUNCTION FileNameCreta()
+
+   LOCAL cFile, cName
 
    cFile:= FrameNewBase.Text_Name.value
-   if !empty(cFile) .and. at('.',cFile) == 0
+   IF !empty(cFile) .and. at('.',cFile) == 0
       cFile:= cFile+'.s3db'
-   endif
+   ENDIF
    cName := FrameNewBase.Text_Path.value+'\'+cFile
    FrameNewBase.lbl_File.value := cName
-Return cName
 
-*--------------------------------------------------------*
-Function CreateStru()
-*--------------------------------------------------------*
-   Local DBUstruct :={}
+   RETURN cName
+
+FUNCTION CreateStru()
+
+   LOCAL DBUstruct :={}
 
    BrowStru(DBUstruct,{},'',TRUE)
-return Nil
 
-*--------------------------------------------------------*
-Function CreateNewTable( oGrid, cTable )
-*--------------------------------------------------------*
-   Local cQuery, i, aTable, aStru
-   Local  lRet := FALSE
+   RETURN NIL
+
+FUNCTION CreateNewTable( oGrid, cTable )
+
+   LOCAL cQuery, i, aTable, aStru
+   LOCAL  lRet := FALSE
 
    cQuery := QueryNewTbl(oGrid,cTable)
 
    IF !sqlite3_exec( pDb, cQuery ) == SQLITE_OK
       MsgStop( "Can't create " + cTable, "Error" )
-   else
-      ClearMRUList( )
+   ELSE
+      CLEARMRUList( )
       aTable := SQLITE_TABLES(pDb)
-      for i:=1 to Len(aTable)
+      FOR i:=1 to Len(aTable)
          AddMRUItem( aTable[i] , "SeleTable()" )
-      next
+      NEXT
       MsgStop( "Table "+cTable+" create successful." , "Note" )
       lRet := TRUE
       aStru:={}
       AEval(oGrid:aArray, {|x| aAdd(aStru,{x[2],x[3],x[4],x[5]})})
 
-   endif
-Return lRet
+   ENDIF
 
-*--------------------------------------------------------*
- FUNCTION CreatefromDBF( cDBase, db, cSbase )
-*--------------------------------------------------------*
+   RETURN lRet
+
+FUNCTION CreatefromDBF( cDBase, db, cSbase )
+
    LOCAL cHeader, cQuery := "", NrReg:= 0, cTable := cFileNoExt(cDBase)
    LOCAL lCreateIfNotExist := FALSE, cOldRdd, aDbStru
 
-   if empty( cDBase )
+   IF empty( cDBase )
       cDBase := GetFile ( {{ "DBASE Files", "*.dbf"},{ "All Files", "*.*"} }, "Open Database" ,;
-                           cLastDDir, FALSE , FALSE )
-   endif
+         cLastDDir, FALSE , FALSE )
+   ENDIF
    IF FILE( cDBase )
       cTable := SubStr(cFileNoPath(cDBase ),1,RAt('.',cDBase )-1)
       cTable := cFileNoExt(cTable)
@@ -441,17 +431,19 @@ Return lRet
       db := sqlite3_open( cSbase, .not. File(cSbase) )
       IF !DB_IS_OPEN( db )
          MsgStop( "Can't open/create " + cSbase, "Error" )
-         Return Nil
-      endif
+
+         RETURN NIL
+      ENDIF
       sqlite3_exec( db, "PRAGMA auto_vacuum=0" )
       IF SQLITE_TABLEEXISTS( cTable, db )
-         if !SQLITE_DROPTABLE(cSbase, cTable)
+         IF !SQLITE_DROPTABLE(cSbase, cTable)
             MsgStop( "Can't drop table " + cTable, "Error" )
-            Return Nil
-         else
+
+            RETURN NIL
+         ELSE
             db := sqlite3_open( cSbase, .not. File(cSbase) )
-         endif
-      endif
+         ENDIF
+      ENDIF
 
       * Create table
       IF ( RDDSETDEFAULT() != "DBFNTX" )
@@ -465,26 +457,25 @@ Return lRet
          IF sqlite3_exec( db, cHeader ) == SQLITE_OK
             aDbStru := dbstruct()
             aDbStru:=SetFieldType(aDbStru)
-         endif
-      endif
+         ENDIF
+      ENDIF
       IF SQLITE_TABLEEXISTS( cTable, db )
 
-
-         go top
-         Do While !Eof()
+         GO TOP
+         DO WHILE !Eof()
             cQuery += QueryCrea(cTable,1)
             NrReg++
-            skip
-         EndDo
-         use
+            SKIP
+         ENDDO
+         USE
 
          IF sqlite3_exec( db, ;
-            "BEGIN TRANSACTION;" + ;
-            cQuery + ;
-            "COMMIT;" ) == SQLITE_OK
+               "BEGIN TRANSACTION;" + ;
+               cQuery + ;
+               "COMMIT;" ) == SQLITE_OK
 
             MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable, "Result" )
-         else
+         ELSE
             MsgInfo(substr(cQuery,1,300))
          ENDIF
 
@@ -497,56 +488,57 @@ Return lRet
       SeleTable(cTable)
       BrowseTable(cTable, FALSE)
    ENDIF
-RETURN 0
 
-*--------------------------------------------------------*
-Function SetFieldType(aDbStru)
-*--------------------------------------------------------*
-   Local i
-      for i:= 1 to len( aDbStru )
-        do case
-         case aDbStru[i, 2] $ "CDT"
-           aDbStru[i, 2] := "SQLITE_TEXT"
-           aDbStru[i, 3] := 50
-         case aDbStru[i, 2] = "N"
-            if aDbStru[i, 4] > 0
-               aDbStru[i, 2] := "SQLITE_FLOAT"
-               aDbStru[i, 3] := 12
-               aDbStru[i, 4] := 2
-            else
-               aDbStru[i, 2] := "SQLITE_INTEGER"
-            endif
-         case aDbStru[i, 2] = "F"
+   RETURN 0
+
+FUNCTION SetFieldType(aDbStru)
+
+   LOCAL i
+
+   FOR i:= 1 to len( aDbStru )
+      DO CASE
+      CASE aDbStru[i, 2] $ "CDT"
+         aDbStru[i, 2] := "SQLITE_TEXT"
+         aDbStru[i, 3] := 50
+      CASE aDbStru[i, 2] = "N"
+         IF aDbStru[i, 4] > 0
             aDbStru[i, 2] := "SQLITE_FLOAT"
-         case aDbStru[i, 2] = "I"
+            aDbStru[i, 3] := 12
+            aDbStru[i, 4] := 2
+         ELSE
             aDbStru[i, 2] := "SQLITE_INTEGER"
-         case aDbStru[i, 2] = "B"
-            aDbStru[i, 2] := "SQLITE_FLOAT"
-         case aDbStru[i, 2] = "Y"
-            aDbStru[i, 2] := "SQLITE_FLOAT"
-         case aDbStru[i, 2] = "L"
-            aDbStru[i, 2] := "SQLITE_INTEGER"
-         case aDbStru[i, 2] = "M"
-            aDbStru[i, 2] := "SQLITE_TEXT"
-         case aDbStru[i, 2] = "G"
-            aDbStru[i, 2] := "SQLITE_BLOB"
-         otherwise
-            aDbStru[i, 2] := "SQLITE_NULL"
-         endcase
-      next
-Return  aDbStru
+         ENDIF
+      CASE aDbStru[i, 2] = "F"
+         aDbStru[i, 2] := "SQLITE_FLOAT"
+      CASE aDbStru[i, 2] = "I"
+         aDbStru[i, 2] := "SQLITE_INTEGER"
+      CASE aDbStru[i, 2] = "B"
+         aDbStru[i, 2] := "SQLITE_FLOAT"
+      CASE aDbStru[i, 2] = "Y"
+         aDbStru[i, 2] := "SQLITE_FLOAT"
+      CASE aDbStru[i, 2] = "L"
+         aDbStru[i, 2] := "SQLITE_INTEGER"
+      CASE aDbStru[i, 2] = "M"
+         aDbStru[i, 2] := "SQLITE_TEXT"
+      CASE aDbStru[i, 2] = "G"
+         aDbStru[i, 2] := "SQLITE_BLOB"
+      OTHERWISE
+         aDbStru[i, 2] := "SQLITE_NULL"
+      ENDCASE
+   NEXT
 
-*--------------------------------------------------------*
-function QueryCrea(cTable, met, cTable2, aDbStru)
-*--------------------------------------------------------*
-   local cQuery := "",i
-   local cFldName, cFldType, cFldLen, cFldDec, lNull, lKey, lIncr
+   RETURN  aDbStru
 
-   default aDbStru := dbstruct(), cTable2 := cTable+"Tmp"
-   do Case
-   case met ==0
+FUNCTION QueryCrea(cTable, met, cTable2, aDbStru)
+
+   LOCAL cQuery := "",i
+   LOCAL cFldName, cFldType, cFldLen, cFldDec, lNull, lKey, lIncr
+
+   DEFAULT aDbStru := dbstruct(), cTable2 := cTable+"Tmp"
+   DO CASE
+   CASE met ==0
       cQuery := "CREATE TABLE IF NOT EXISTS " + cTable + " ( "
-      for i:= 1 to len( aDbStru )
+      FOR i:= 1 to len( aDbStru )
 
          cFldName := aDbStru[i, 1]
          cFldType := aDbStru[i, 2]
@@ -556,185 +548,178 @@ function QueryCrea(cTable, met, cTable2, aDbStru)
          lKey     := aDbStru[i, 7]
          lIncr    := aDbStru[i, 8]
 
-
-         if i > 1
+         IF i > 1
             cQuery += ", "
-         endif
+         ENDIF
          cQuery += alltrim(cFldName)+" "
 
-         do case
-         case cFldType = "C"
+         DO CASE
+         CASE cFldType = "C"
             cQuery += "CHAR("+LTRIM(STR(cFldLen))+")"
-         case cFldType = "D"
+         CASE cFldType = "D"
             cQuery += "DATE"
-         case cFldType = "T"
+         CASE cFldType = "T"
             cQuery += "DATETIME"
-         case cFldType = "N"
-            if cFldDec > 0
+         CASE cFldType = "N"
+            IF cFldDec > 0
                cQuery += "FLOAT"
-            else
+            ELSE
                cQuery += "INTEGER"
-            endif
-         case cFldType = "F"
+            ENDIF
+         CASE cFldType = "F"
             cQuery += "FLOAT"
-         case cFldType = "I"
+         CASE cFldType = "I"
             cQuery += "INTEGER"
-         case cFldType = "B"
+         CASE cFldType = "B"
             cQuery += "DOUBLE"
-         case cFldType = "Y"
+         CASE cFldType = "Y"
             cQuery += "FLOAT"
-         case cFldType = "L"
+         CASE cFldType = "L"
             cQuery += "BOOL"
-         case cFldType = "M"
+         CASE cFldType = "M"
             cQuery += "TEXT"
-         case cFldType = "G"
+         CASE cFldType = "G"
             cQuery += "BLOB"
-         otherwise
+         OTHERWISE
             msginfo("Invalid Field Type: "+cFldType)
-            return nil
-         endcase
-      next
+
+            RETURN NIL
+         ENDCASE
+      NEXT
 
       cQuery += ")"
 
-
-   case met == 1
+   CASE met == 1
 
       cQuery := "INSERT INTO "+cTable+" VALUES ("
-      for i := 1 to len(aDbStru)
+      FOR i := 1 to len(aDbStru)
          cFldName := aDbStru[i, 1]
-         if i > 1
+         IF i > 1
             cQuery += ", "
-         endif
+         ENDIF
          cQuery += c2sql(&cFldName)
-      next
+      NEXT
       cQuery += "); "
 
-   case met == 2
+   CASE met == 2
       cQuery := "CREATE TEMPORARY TABLE "+cTable2+ " ( "
-      for i := 1 to len(aDbStru)
+      FOR i := 1 to len(aDbStru)
          cFldName := aDbStru[i, 1]
-         if i > 1
+         IF i > 1
             cQuery += ", "
-         endif
+         ENDIF
          cQuery += alltrim(cFldName)+" "
 
-      next
+      NEXT
       cQuery += "); "
 
-   case met == 3
+   CASE met == 3
       cQuery := "INSERT INTO "+cTable2+"  SELECT "
-      for i := 1 to len(aDbStru)
+      FOR i := 1 to len(aDbStru)
          cFldName := aDbStru[i, 1]
-         if i > 1
+         IF i > 1
             cQuery += ", "
-         endif
+         ENDIF
          cQuery += alltrim(cFldName)+" "
 
-      next
+      NEXT
       cQuery += "FROM " + cTable +" ;"
 
-    endcase
-Return cQuery
+   ENDCASE
 
-*--------------------------------------------------------*
-function c2Sql(Value)
-*--------------------------------------------------------*
-local cValue := ""
-local cdate := ""
-if valtype(value) == "C" .and. len(alltrim(value)) > 0
-   value := strtran(value,"'","''")
-endif
-do case
-   case Valtype(Value) == "N"
+   RETURN cQuery
+
+FUNCTION c2Sql(Value)
+
+   LOCAL cValue := ""
+   LOCAL cdate := ""
+
+   IF valtype(value) == "C" .and. len(alltrim(value)) > 0
+      value := strtran(value,"'","''")
+   ENDIF
+   DO CASE
+   CASE Valtype(Value) == "N"
       cValue := AllTrim(Str(Value))
-   case Valtype(Value) == "D"
-      if !Empty(Value)
+   CASE Valtype(Value) == "D"
+      IF !Empty(Value)
          cdate := dtos(value)
          cValue := "'"+substr(cDate,1,4)+"-"+substr(cDate,5,2)+"-"+substr(cDate,7,2)+"'"
-      else
+      ELSE
          cValue := "''"
-      endif
-   case Valtype(Value) $ "CM"
+      ENDIF
+   CASE Valtype(Value) $ "CM"
       IF Empty( Value)
          cValue="''"
       ELSE
          cValue := "'" + value + "'"
       ENDIF
-   case Valtype(Value) == "L"
+   CASE Valtype(Value) == "L"
       cValue := AllTrim(Str(iif(Value == FALSE, 0, 1)))
-   otherwise
+   OTHERWISE
       cValue := "''"       // NOTE: Here we lose values we cannot convert
-endcase
-return cValue
+   ENDCASE
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_TABLEEXISTS( cTable,db )
-*--------------------------------------------------------*
-* Uses a (special) master table where the names of all tables are stored
-*---------------------------------------------------------------------------
-  LOCAL cStatement, lRet := FALSE
-  LOCAL lCreateIfNotExist := FALSE
+   RETURN cValue
 
-  cStatement := "SELECT name FROM sqlite_master "    +;
-                "WHERE type ='table' AND tbl_name='" +;
-                cTable + "'"
+FUNCTION SQLITE_TABLEEXISTS( cTable,db )
 
-  IF DB_IS_OPEN( db )
-    lRet := ( LEN( SQLITE_QUERY( db, cStatement ) ) > 0 )
-  ENDIF
+   * Uses a (special) master table where the names of all tables are stored
+   LOCAL cStatement, lRet := FALSE
+   LOCAL lCreateIfNotExist := FALSE
 
-RETURN( lRet )
+   cStatement := "SELECT name FROM sqlite_master "    +;
+      "WHERE type ='table' AND tbl_name='" +;
+      cTable + "'"
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_TABLESEQUENCE( db, cTable )
-*--------------------------------------------------------*
-* Uses a (special) sqlite_sequence table where the names of sequence tables are stored
-*---------------------------------------------------------------------------
-   LOCAL cStatement,aFields :={}
-   Default cTable := ""
-   cStatement := "SELECT name,seq FROM sqlite_sequence "
-   if !empty(cTable)
-      cStatement +=  "WHERE name='" + cTable + "'"
-   endif
    IF DB_IS_OPEN( db )
-     aFields :=  SQLITE_QUERY( db, cStatement )
+      lRet := ( LEN( SQLITE_QUERY( db, cStatement ) ) > 0 )
    ENDIF
 
-RETURN( aFields )
+   RETURN( lRet )
 
+FUNCTION SQLITE_TABLESEQUENCE( db, cTable )
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_DROPTABLE(cBase, cTable)
-*--------------------------------------------------------*
-* Deletes a table from current database
-* WARNING !!   It deletes forever...
-*---------------------------------------------------------------------------
-  LOCAL db, lRet := FALSE
+   * Uses a (special) sqlite_sequence table where the names of sequence tables are stored
+   LOCAL cStatement,aFields :={}
 
-  IF !EMPTY(cTable)
-   IF MsgYesNo("The  table "+cTable+" will be erased" + CRLF + ;
-      "without any choice to recover." + CRLF + CRLF + ;
-      "       Continue ?", "Warning!" )
+   DEFAULT cTable := ""
+   cStatement := "SELECT name,seq FROM sqlite_sequence "
+   IF !empty(cTable)
+      cStatement +=  "WHERE name='" + cTable + "'"
+   ENDIF
+   IF DB_IS_OPEN( db )
+      aFields :=  SQLITE_QUERY( db, cStatement )
+   ENDIF
 
-      db := sqlite3_open_v2( cBase, SQLITE_OPEN_READWRITE + SQLITE_OPEN_EXCLUSIVE )
-      IF DB_IS_OPEN( db )
-         IF sqlite3_exec( db, "drop table " + cTable ) == SQLITE_OK
-            IF sqlite3_exec( db, "vacuum" ) == SQLITE_OK
-               lRet := TRUE
+   RETURN( aFields )
+
+FUNCTION SQLITE_DROPTABLE(cBase, cTable)
+
+   * Deletes a table from current database
+   * WARNING !!   It deletes forever...
+   LOCAL db, lRet := FALSE
+
+   IF !EMPTY(cTable)
+      IF MsgYesNo("The  table "+cTable+" will be erased" + CRLF + ;
+            "without any choice to recover." + CRLF + CRLF + ;
+            "       Continue ?", "Warning!" )
+
+         db := sqlite3_open_v2( cBase, SQLITE_OPEN_READWRITE + SQLITE_OPEN_EXCLUSIVE )
+         IF DB_IS_OPEN( db )
+            IF sqlite3_exec( db, "drop table " + cTable ) == SQLITE_OK
+               IF sqlite3_exec( db, "vacuum" ) == SQLITE_OK
+                  lRet := TRUE
+               ENDIF
             ENDIF
          ENDIF
       ENDIF
    ENDIF
-  ENDIF
 
-RETURN lRet
+   RETURN lRet
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_COLUMNS( cTable, db )
-*--------------------------------------------------------*
-* Returns an 2-dimensional array with field names and types
-*---------------------------------------------------------------------------
+FUNCTION SQLITE_COLUMNS( cTable, db )
+
+   * Returns an 2-dimensional array with field names and types
    LOCAL aCType :=  { "SQLITE_INTEGER", "SQLITE_FLOAT", "SQLITE_TEXT", "SQLITE_BLOB", "SQLITE_NULL" }
    LOCAL aFields := {}, cStatement := "SELECT * FROM " + cTable
    LOCAL lCreateIfNotExist := FALSE
@@ -757,17 +742,16 @@ RETURN lRet
 
    sqlite3_finalize( stmt )
 
-RETURN( aFields )
+   RETURN( aFields )
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_COLUMNS_METADATA( db, cTable)
-*--------------------------------------------------------*
-* Returns an 2-dimensional array with field names and types
-*---------------------------------------------------------------------------
+FUNCTION SQLITE_COLUMNS_METADATA( db, cTable)
+
+   * Returns an 2-dimensional array with field names and types
    LOCAL aCType :=  { "SQLITE_INTEGER", "SQLITE_FLOAT", "SQLITE_TEXT", "SQLITE_BLOB", "SQLITE_NULL" }
    LOCAL aFields := {}, cStatement := "SELECT * FROM " + cTable
    LOCAL stmt, nCCount, nI, nCType, cName, aInfo := {'','',FALSE,FALSE,FALSE,''}
-   Local cType, aSize
+   LOCAL cType, aSize
+
    stmt := sqlite3_prepare( db, cStatement )
 
    sqlite3_step( stmt )
@@ -779,11 +763,11 @@ RETURN( aFields )
          cType  := upper(alltrim(sqlite3_column_decltype( stmt,nI)))
          aSize  := FieldSize(cType,cname,db, cTable)
 
-#ifdef SQLITE_ENABLE_COLUMN_METADATA
+         #ifdef SQLITE_ENABLE_COLUMN_METADATA
          aInfo  := sqlite3_table_column_metadata( db,,cTable,cName)
-#endif
+         #endif
 
-//VIEW cTable,cName,aInfo
+         //VIEW cTable,cName,aInfo
          AADD( aFields, { cName, aCType[ nCType ],cType ,aSize[1],aSize[2],aInfo[3],aInfo[4],aInfo[5] } )
 
       NEXT nI
@@ -791,81 +775,78 @@ RETURN( aFields )
 
    sqlite3_finalize( stmt )
 
-RETURN( aFields )
+   RETURN( aFields )
 
+FUNCTION SQLITE_TABLES(db)
 
-*--------------------------------------------------------*
- FUNCTION SQLITE_TABLES(db)
-*--------------------------------------------------------*
-* Uses a (special) master table where the names of all tables are stored
-* Returns an array with names of tables inside of the database
-*---------------------------------------------------------------------------
-  LOCAL aTables, cStatement
+   * Uses a (special) master table where the names of all tables are stored
+   * Returns an array with names of tables inside of the database
+   LOCAL aTables, cStatement
 
-  cStatement := "SELECT name FROM sqlite_master "      +;
-                "WHERE type IN ('table','view') "      +;
-                "AND name NOT LIKE 'sqlite_%' "        +;
-                "UNION ALL "                           +;
-                "SELECT name FROM sqlite_temp_master " +;
-                "WHERE type IN ('table','view') "      +;
-                "ORDER BY 1;"
+   cStatement := "SELECT name FROM sqlite_master "      +;
+      "WHERE type IN ('table','view') "      +;
+      "AND name NOT LIKE 'sqlite_%' "        +;
+      "UNION ALL "                           +;
+      "SELECT name FROM sqlite_temp_master " +;
+      "WHERE type IN ('table','view') "      +;
+      "ORDER BY 1;"
 
-  IF DB_IS_OPEN( db )
-    aTables := SQLITE_QUERY( db, cStatement )
-  ENDIF
-
-RETURN( aTables )
-
-*--------------------------------------------------------*
-FUNCTION SQLITE_QUERY( db, cStatement )
-*--------------------------------------------------------*
-  LOCAL stmt, nCCount, nI, nCType
-  LOCAL aRet := {}
-
-  stmt := sqlite3_prepare( db, cStatement )
-
-  IF STMT_IS_PREPARED( stmt )
-    DO WHILE sqlite3_step( stmt ) == SQLITE_ROW
-   nCCount := sqlite3_column_count( stmt )
-
-   IF nCCount > 0
-      FOR nI := 1 TO nCCount
-         nCType := sqlite3_column_type( stmt, nI )
-
-         SWITCH nCType
-            CASE SQLITE_NULL
-                    AADD( aRet, "NULL")
-               EXIT
-
-            CASE SQLITE_FLOAT
-            CASE SQLITE_INTEGER
-                    AADD( aRet, LTRIM(STR( sqlite3_column_int( stmt, nI ) )) )
-               EXIT
-
-            CASE SQLITE_TEXT
-                    AADD( aRet, sqlite3_column_text( stmt, nI ) )
-               EXIT
-         END SWITCH
-      NEXT nI
+   IF DB_IS_OPEN( db )
+      aTables := SQLITE_QUERY( db, cStatement )
    ENDIF
-    ENDDO
-    sqlite3_finalize( stmt )
-  ENDIF
 
-RETURN( aRet )
+   RETURN( aTables )
 
-*--------------------------------------------------------*
+FUNCTION SQLITE_QUERY( db, cStatement )
+
+   LOCAL stmt, nCCount, nI, nCType
+   LOCAL aRet := {}
+
+   stmt := sqlite3_prepare( db, cStatement )
+
+   IF STMT_IS_PREPARED( stmt )
+      DO WHILE sqlite3_step( stmt ) == SQLITE_ROW
+         nCCount := sqlite3_column_count( stmt )
+
+         IF nCCount > 0
+            FOR nI := 1 TO nCCount
+               nCType := sqlite3_column_type( stmt, nI )
+
+               SWITCH nCType
+               CASE SQLITE_NULL
+                  AADD( aRet, "NULL")
+                  EXIT
+
+               CASE SQLITE_FLOAT
+               CASE SQLITE_INTEGER
+                  AADD( aRet, LTRIM(STR( sqlite3_column_int( stmt, nI ) )) )
+                  EXIT
+
+               CASE SQLITE_TEXT
+                  AADD( aRet, sqlite3_column_text( stmt, nI ) )
+                  EXIT
+               END SWITCH
+            NEXT nI
+         ENDIF
+      ENDDO
+      sqlite3_finalize( stmt )
+   ENDIF
+
+   RETURN( aRet )
+
 FUNCTION SQLITE_SET_BLOB( cTable, cField, db, cFile )
-*--------------------------------------------------------*
+
    LOCAL stmt, nI, cQuery, aFields
    LOCAL Buff, lRet := FALSE
-//      sqlite3_exec( db, "PRAGMA auto_vacuum=0" )
-//      sqlite3_exec( db, "PRAGMA page_size=8192" )
+
+   //      sqlite3_exec( db, "PRAGMA auto_vacuum=0" )
+   //      sqlite3_exec( db, "PRAGMA page_size=8192" )
 
    aFields :=SQLITE_COLUMNS( cTable, db )
-   If (nI := ascan(aFields,{|x| x[1] == cField .and. x[3] =='BLOB'} )) == 0
-      Return lRet
-   endif
+   IF (nI := ascan(aFields,{|x| x[1] == cField .and. x[3] =='BLOB'} )) == 0
+
+      RETURN lRet
+   ENDIF
    cQuery := "INSERT INTO "+cTable+" ("+cField+ ') VALUES ( :'+cField+ ');'
 
    stmt := sqlite3_prepare( db, cQuery )
@@ -884,28 +865,28 @@ FUNCTION SQLITE_SET_BLOB( cTable, cField, db, cFile )
 
    ENDIF
 
-RETURN( lRet )
+   RETURN( lRet )
 
-*--------------------------------------------------------*
 FUNCTION SQLITE_GET_BLOB( cTable, cField, db, cFile )
-*--------------------------------------------------------*
+
    LOCAL stmt, nI, cQuery, aFields, i, cFldName
    LOCAL Buff, lRet := FALSE
 
    aFields :=SQLITE_COLUMNS( cTable, db )
-   If (nI := ascan(aFields,{|x| x[1] == cField .and. x[3] =='BLOB'} )) == 0
-      Return lRet
-   endif
+   IF (nI := ascan(aFields,{|x| x[1] == cField .and. x[3] =='BLOB'} )) == 0
+
+      RETURN lRet
+   ENDIF
    cQuery := "SELECT "+cField+ " FROM "+cTable+" WHERE "
-   for i := 1 to len(aFields)
-      if aFields[i, 3] != 'BLOB'
+   FOR i := 1 to len(aFields)
+      IF aFields[i, 3] != 'BLOB'
          cFldName := aFields[i, 1]
-         if i > 1
+         IF i > 1
             cQuery += " AND "
-         endif
+         ENDIF
          cQuery += cFldName + " = "+  c2sql(&cFldName)
-      endif
-   next
+      ENDIF
+   NEXT
 
    stmt := sqlite3_prepare( db, cQuery )
 
@@ -924,54 +905,55 @@ FUNCTION SQLITE_GET_BLOB( cTable, cField, db, cFile )
 
    ENDIF
 
-RETURN( lRet )
+   RETURN( lRet )
 
-*--------------------------------------------------------*
-Function FieldSize(cType,cFieldName,db,cTable)
-*--------------------------------------------------------*
-   Local aSize := {0,0}, cQuery, aLength
+FUNCTION FieldSize(cType,cFieldName,db,cTable)
 
-   do Case
-   case substr(ctype,1,4) == 'CHAR'
+   LOCAL aSize := {0,0}, cQuery, aLength
+
+   DO CASE
+   CASE substr(ctype,1,4) == 'CHAR'
       aSize[1] := val(CHARONLY ("0123456789",cType))
-   case ctype == 'TEXT'
+   CASE ctype == 'TEXT'
       aSize[1] := 0
       cQuery := 'select max( length( ' + cFieldName + ' ) ) from ' +  cTable
       aLength := SQLITE_QUERY( db, cQuery )
-      if len( aLength ) > 0
+      IF len( aLength ) > 0
          aSize[2] := val( alltrim( aLength[ 1 ] ) )
-      endif
-   case ctype == "INTEGER"
+      ENDIF
+   CASE ctype == "INTEGER"
       aSize[1]:= INT_LNG  //8
-   case  ctype == "REAL" .or. ctype == "FLOAT" .or. ctype == "DOUBLE"
+   CASE  ctype == "REAL" .or. ctype == "FLOAT" .or. ctype == "DOUBLE"
       aSize[1]:= FL_LNG   //14
       aSize[2]:= FL_DEC   //5
-   case ctype == "DATE" .or. ctype == "TIME"
+   CASE ctype == "DATE" .or. ctype == "TIME"
       aSize[1]:= DAT_LNG //10
-   case  ctype == "DATETIME"
+   CASE  ctype == "DATETIME"
       aSize[1]:=DATTIM_LNG //19
-   case ctype == "BOOL"
+   CASE ctype == "BOOL"
       aSize[1]:= BOOL_LNG //1
-   endcase
-Return aSize
+   ENDCASE
 
-*--------------------------------------------------------*
-Function BackupDb()
-*--------------------------------------------------------*
-  Local cFileDest, pDbDest, nDbFlags, pBackup
+   RETURN aSize
+
+FUNCTION BackupDb()
+
+   LOCAL cFileDest, pDbDest, nDbFlags, pBackup
 
    cFileDest := cFileNoExt(SqlDbName)+'.s3bac'
 
    IF sqlite3_libversion_number() < 3006011
+
       RETURN 0
    ENDIF
 
    IF Empty( pDb )
+
       RETURN 0
    ENDIF
 
    nDbFlags := SQLITE_OPEN_CREATE + SQLITE_OPEN_READWRITE + ;
-               SQLITE_OPEN_EXCLUSIVE
+      SQLITE_OPEN_EXCLUSIVE
    pDbDest := sqlite3_open_v2( cFileDest, nDbFlags )
 
    IF Empty( pDbDest )
@@ -982,18 +964,21 @@ Function BackupDb()
 
    pBackup := sqlite3_backup_init( pDbDest, "main", pDb, "main" )
    IF Empty( pBackup )
-     MsgInfo( "Can't initialize backup" )
+      MsgInfo( "Can't initialize backup" )
+
       RETURN 0
    ENDIF
 
-  If MsgYesNo( "Backup File "+SqlDbName+ " to "+cFileDest+CRLF+ "Start backup ?", "Backup Database" )
+   IF MsgYesNo( "Backup File "+SqlDbName+ " to "+cFileDest+CRLF+ "Start backup ?", "Backup Database" )
 
       IF sqlite3_backup_step(pBackup, -1) == SQLITE_DONE
          MsgInfo( "Backup successful."+CRLF+'File created : '+cFileDest )
       ENDIF
       sqlite3_backup_finish( pBackup )
-   endif
-Return 1
+   ENDIF
 
-#include 'SqlEdit.Prg'
-#include 'SqlBrowse.Prg'
+   RETURN 1
+
+   #include 'SqlEdit.Prg'
+   #include 'SqlBrowse.Prg'
+

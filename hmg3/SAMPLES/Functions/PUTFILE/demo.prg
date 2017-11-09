@@ -4,25 +4,26 @@
 
 #include "hmg.ch"
 
-Function Main
-Local nTask
+FUNCTION Main
 
-	DEFINE WINDOW Win_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		MAIN 
+   LOCAL nTask
 
-		DEFINE MAIN MENU
-			POPUP 'Common &Dialog Functions'
-				ITEM 'PutFile()'	ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image' , 'C:\' ) )
-			END POPUP
-		END MENU
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Hello World!' ;
+         MAIN
 
-	END WINDOW
+      DEFINE MAIN MENU
+         POPUP 'Common &Dialog Functions'
+            ITEM 'PutFile()'   ACTION MsgInfo ( Putfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Save Image' , 'C:\' ) )
+         END POPUP
+      END MENU
 
-	ACTIVATE WINDOW Win_1
+   END WINDOW
 
-Return
+   ACTIVATE WINDOW Win_1
+
+   RETURN
 

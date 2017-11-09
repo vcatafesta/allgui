@@ -1,9 +1,7 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Based on the original work "Picture_Coords" of Verchenko Andrey <verchenkoag@gmail.com>
- *
- * Last Revised By P.Chornyj <myorg63@mail.ru> 10.24.2016
+* MINIGUI - Harbour Win32 GUI library Demo
+* Based on the original work "Picture_Coords" of Verchenko Andrey <verchenkoag@gmail.com>
+* Last Revised By P.Chornyj <myorg63@mail.ru> 10.24.2016
 */
 
 #include "minigui.ch"
@@ -18,22 +16,22 @@ MEMVAR m_TrackingTT, m_TrackingMouse
 
 FUNCTION Main()
 
-   LOCAL nWidth := 0, nHeight := 0 
-   
+   LOCAL nWidth := 0, nHeight := 0
+
    IF IsMousePresent() .AND. GetImageInfo( "logo.jpg", @nWidth, @nHeight )
 
       DEFINE WINDOW Form_1 ;
-         MAIN ;
-         CLIENTAREA nWidth, nHeight + 70 ;
-         TITLE "ToolTip Sample (" + __FILE__ + ")" ;
-         ON RELEASE ReleaseControl( m_TrackingTT ) 
+            MAIN ;
+            CLIENTAREA nWidth, nHeight + 70 ;
+            TITLE "ToolTip Sample (" + __FILE__ + ")" ;
+            ON RELEASE ReleaseControl( m_TrackingTT )
 
-      @ 0,0 IMAGE Img_Logo PICTURE "logo.jpg" WIDTH nWidth HEIGHT nHeight ;
+         @ 0,0 IMAGE Img_Logo PICTURE "logo.jpg" WIDTH nWidth HEIGHT nHeight ;
             ON MOUSEHOVER Img_Logo_OnMouseHover() ;
             ON MOUSELEAVE Img_Logo_OnMouseLeave()
 
-      @ 155,30 LABEL Label_1 VALUE "Move a mouse cursor over part # of picture" TRANSPARENT FONT "ARIAL" SIZE 34 ;
-         FONTCOLOR PINK BACKCOLOR YELLOW AUTOSIZE
+         @ 155,30 LABEL Label_1 VALUE "Move a mouse cursor over part # of picture" TRANSPARENT FONT "ARIAL" SIZE 34 ;
+            FONTCOLOR PINK BACKCOLOR YELLOW AUTOSIZE
 
       END WINDOW
 
@@ -46,19 +44,17 @@ FUNCTION Main()
 
    RETURN 0
 
-/////////////////////////////////////////////////////////////////////////////
 PROCEDURE CreateTrackingToolTip()
 
    LOCAL nStyle := TTS_ALWAYSTIP
    LOCAL nFlags := hb_bitOr( TTF_IDISHWND, TTF_TRACK, TTF_ABSOLUTE )
 
    PUBLIC m_TrackingTT := ;
-            InitToolTipEx( Form_1.Img_Logo.Handle, Nil, "", "Position:", If( IsVistaOrLater(), 4, 1 ), nStyle, nFlags )
+      InitToolTipEx( Form_1.Img_Logo.Handle, Nil, "", "Position:", If( IsVistaOrLater(), 4, 1 ), nStyle, nFlags )
 
    PUBLIC m_TrackingMouse := .F.
 
    RETURN
-
 
 PROCEDURE Img_Logo_OnMouseHover()
 
@@ -85,7 +81,6 @@ PROCEDURE Img_Logo_OnMouseHover()
 
    RETURN
 
-
 PROCEDURE Img_Logo_OnMouseLeave()
 
    // Deactivate the tooltip
@@ -94,35 +89,35 @@ PROCEDURE Img_Logo_OnMouseLeave()
 
    RETURN
 
-/////////////////////////////////////////////////////////////////////////////
 FUNCTION Determine_The_Portion_Of_The_Picture( aPoint )
 
    STATIC s_aImage := { { 0, 0, 200, 149 }, { 202, 0, 691, 149 }, { 693, 0, 933, 149 } }
    LOCAL nArea
    LOCAL cMsg  := ""
-           
+
    IF ( nArea := Ascan( s_aImage, { |aRect| PtInRect( aPoint, aRect ) } ) ) > 0
 
-      cMsg += "Pos Y: " + hb_NtoS( aPoint[ 2 ] ) + "; " 
+      cMsg += "Pos Y: " + hb_NtoS( aPoint[ 2 ] ) + "; "
       cMsg += "Pos X: " + hb_NtoS( aPoint[ 1 ] )
       cMsg += CRLF + CRLF + "Area #" + hb_NtoS( nArea )
-      cMsg += CRLF + "Part " + hb_NtoS( nArea ) + " of a picture." 
-   
-   ENDIF 
+      cMsg += CRLF + "Part " + hb_NtoS( nArea ) + " of a picture."
+
+   ENDIF
 
    RETURN cMsg
 
-
 STATIC FUNCTION IsMousePresent()
-/*
+
+   /*
+
    RETURN ( GetSystemMetrics( SM_MOUSEPRESENT ) != 0  )
 
    This   value  is  rarely  zero,  because of support for virtual mice and
    because  some   systems  detect the presence of the port  instead of the
    presence of a mouse.
-*/
-   RETURN ( GetSystemMetrics( SM_CMOUSEBUTTONS ) > 0  )
+   */
 
+   RETURN ( GetSystemMetrics( SM_CMOUSEBUTTONS ) > 0  )
 
 STATIC FUNCTION GetImageInfo( cPicFile, nPicWidth, nPicHeight )
 
@@ -132,3 +127,4 @@ STATIC FUNCTION GetImageInfo( cPicFile, nPicWidth, nPicHeight )
    nPicHeight := aSize[ 2 ]
 
    RETURN ( nPicWidth > 0 )
+

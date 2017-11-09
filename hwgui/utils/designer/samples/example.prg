@@ -12,12 +12,13 @@ REQUEST SLEEP
 REQUEST BARCODE
 REQUEST HWG_CHOOSECOLOR
 
-
 // #include "example.frm"
 
-Function Main
-Local oForm := HFormTmpl():Read( "example.xml" )
+FUNCTION Main
 
- oForm:ShowMain()
+   LOCAL oForm := HFormTmpl():Read( "example.xml" )
 
-Return Nil
+   oForm:ShowMain()
+
+   RETURN NIL
+

@@ -1,19 +1,19 @@
 /*
-  Name:  SET TOOLTIP ON | OFF Demo
-  Description: Enable/Disable ToolTip Messages.
+Name:  SET TOOLTIP ON | OFF Demo
+Description: Enable/Disable ToolTip Messages.
 
-  Note: The change of the swith on|off do not function "on the fly", if SET TOOLTIP is ON,
-        changing the value for OFF only affect to the new TOOLTIP definitions.
+Note: The change of the swith on|off do not function "on the fly", if SET TOOLTIP is ON,
+changing the value for OFF only affect to the new TOOLTIP definitions.
 
-  Author: Antonio Novo <antonionovo@gmail.com>
-  Date Created: 31/10/2005
+Author: Antonio Novo <antonionovo@gmail.com>
+Date Created: 31/10/2005
 
-  Revised: Grigory Filatov <gfilatov@inbox.ru>
-  Date: 01/11/2005
+Revised: Grigory Filatov <gfilatov@inbox.ru>
+Date: 01/11/2005
 
-  Revised: Petr Chornyj <myorg63@mail.ru>
-  Date: 10/23/2016
- */
+Revised: Petr Chornyj <myorg63@mail.ru>
+Date: 10/23/2016
+*/
 
 #include "minigui.ch"
 
@@ -27,11 +27,11 @@ FUNCTION Main()
    SET TOOLTIPBALLOON ON
 
    DEFINE WINDOW Form1 ;
-      AT 0,0 ;
-      WIDTH 350 ;
-      HEIGHT 300 ;
-      TITLE "SET TOOLTIP ON | OFF Demo (" + __FILE__ + ")" ;
-      MAIN NOMAXIMIZE NOSIZE
+         AT 0,0 ;
+         WIDTH 350 ;
+         HEIGHT 300 ;
+         TITLE "SET TOOLTIP ON | OFF Demo (" + __FILE__ + ")" ;
+         MAIN NOMAXIMIZE NOSIZE
 
       AAdd( aBtnTips, "Set ToolTip ON" )
       @ 20,120 BUTTON Button1 CAPTION "ToolTip ON" ACTION ToolTipOn() ;
@@ -55,7 +55,7 @@ FUNCTION Main()
 
       DEFINE STATUSBAR
 
-         STATUSITEM "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" ) ACTION MsgInfo( 'Click!' ) 
+         STATUSITEM "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" ) ACTION MsgInfo( 'Click!' )
 
       END STATUSBAR
 
@@ -68,28 +68,27 @@ FUNCTION Main()
       ADD TOOLTIPICON WARNING_LARGE WITH MESSAGE "Action:" TO Form1
    ELSE
       ADD TOOLTIPICON WARNING       WITH MESSAGE "Action:" TO Form1
-   ENDIF   
+   ENDIF
 
    CENTER   WINDOW Form1
    ACTIVATE WINDOW Form1
 
    RETURN NIL
 
-
 PROCEDURE Button3_Click()
 
    DEFINE WINDOW Form2 ;
-      AT 0,0 ;
-      WIDTH 400 HEIGHT 200 ;
-      TITLE 'Modal Test'  ;
-      MODAL NOSIZE
+         AT 0,0 ;
+         WIDTH 400 HEIGHT 200 ;
+         TITLE 'Modal Test'  ;
+         MODAL NOSIZE
 
       @ 110,150 BUTTON Button1 CAPTION "Exit" ACTION ThisWindow.Release ;
-            TOOLTIP "Click Here to Close this Window"
+         TOOLTIP "Click Here to Close this Window"
 
       DEFINE STATUSBAR
 
-         STATUSITEM "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" ) ACTION MsgInfo( 'Click!' ) 
+         STATUSITEM "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" ) ACTION MsgInfo( 'Click!' )
 
       END STATUSBAR
    END WINDOW
@@ -98,13 +97,12 @@ PROCEDURE Button3_Click()
       ADD TOOLTIPICON INFO_LARGE WITH MESSAGE "Info:" TO Form2
    ELSE
       ADD TOOLTIPICON INFO       WITH MESSAGE "Info:" TO Form2
-   ENDIF   
-   
+   ENDIF
+
    Form2.Center
    Form2.Activate
 
    RETURN
-
 
 STATIC PROCEDURE ToolTipOn()
 
@@ -118,11 +116,10 @@ STATIC PROCEDURE ToolTipOn()
    Form1.StatusBar.Item( 1 ) := "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" )
 
    FOR i := 1 to Len( aBtnTips )
-       SetProperty( "Form1", "Button" + hb_NToS( i ), "ToolTip", aBtnTips[ i ] ) 
+      SetProperty( "Form1", "Button" + hb_NToS( i ), "ToolTip", aBtnTips[ i ] )
    NEXT
 
    RETURN
-
 
 STATIC PROCEDURE ToolTipOff()
 
@@ -136,7 +133,8 @@ STATIC PROCEDURE ToolTipOff()
    Form1.StatusBar.Item( 1 ) := "ToolTip Status is " + iif( IsToolTipActive, "ON", "OFF" )
 
    FOR i := 1 to Len( aBtnTips )
-       SetProperty( "Form1", "Button" + hb_NToS( i ), "ToolTip", "" )
+      SetProperty( "Form1", "Button" + hb_NToS( i ), "ToolTip", "" )
    NEXT
 
-   RETURN 
+   RETURN
+

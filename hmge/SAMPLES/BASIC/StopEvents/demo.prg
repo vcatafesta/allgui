@@ -1,19 +1,18 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
+* MINIGUI - Harbour Win32 GUI library Demo
 */
 
 #include "hmg.ch"
-
 
 FUNCTION Main
 
    SET FONT TO 'MS Sans Serif', 10
 
    DEFINE WINDOW Form_1 ;
-      CLIENTAREA 400, 200 ; 
-      TITLE "Demo: Enable/Disable Window/Control Events" ;
-      ON GOTFOCUS Form_ONGOTFOCUS() ;
-      MAIN 
+         CLIENTAREA 400, 200 ;
+         TITLE "Demo: Enable/Disable Window/Control Events" ;
+         ON GOTFOCUS Form_ONGOTFOCUS() ;
+         MAIN
 
       @ 30,  50 BUTTON Button_1 CAPTION "Click" ACTION MsgInfo ("Hello")
       @ 80,  50 BUTTON Button_2 CAPTION "Minimize" ACTION Form_1.Minimize
@@ -25,10 +24,10 @@ FUNCTION Main
 
    ACTIVATE WINDOW Form_1
 
-RETURN NIL
-
+   RETURN NIL
 
 PROCEDURE Form_ONGOTFOCUS
+
    LOCAL i := GetLastActiveControlIndex ()
 
    DISABLE WINDOW EVENT OF Form_1
@@ -37,10 +36,10 @@ PROCEDURE Form_ONGOTFOCUS
 
    ENABLE WINDOW EVENT OF Form_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE Control_ONGOTFOCUS
+
    LOCAL i := GetLastActiveFormIndex ()
 
    DISABLE WINDOW EVENT OF Form_1                  //   -->   StopWindowEventProcedure ("Form_1", .T.)
@@ -51,4 +50,5 @@ PROCEDURE Control_ONGOTFOCUS
    ENABLE CONTROL EVENT TimePicker_1 OF Form_1     //   -->   StopControlEventProcedure ("TimePicker_1", "Form_1", .F.)
    ENABLE WINDOW EVENT OF Form_1                   //   -->   StopWindowEventProcedure ("Form_1", .F.)
 
-RETURN
+   RETURN
+

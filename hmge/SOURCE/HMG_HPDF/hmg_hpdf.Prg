@@ -17,22 +17,23 @@ FUNCTION _HMG_HPDF_INIT ( cPDFFile, nOrientation, nPaperSize, nPaperLength, nPap
    IF ValType( _HMG_HPDFDATA[ 1 ] ) == 'U'
       _HMG_HPDFDATA[ 1 ] := { ;
          NIL, ;                  // 1 PDF Object
-         cPDFFile, ;             // 2 PDF File to Save
-         0, ;                    // 3 PDF PaperSize
-         0, ;                    // 4 PDF PaperWidth
-         0, ;                    // 5 PDF PaperHeight
-         nOrientation, ;         // 6 PDF Orientation
-         NIL, ;                  // 7 PDF Current Page
-         'Helvetica', ;          // 8 PDF default font
-         12, ;                   // 9 PDF default fontsize
-         "StandardEncoding", ;   // 10 PDF default encoding
-         {}, ;                   // 11 PDF Outlines Array
-         {}, ;                   // 12 PDF Pages Array
-         0, ;                    // 13 PDF Current Page Number
-         }
+      cPDFFile, ;             // 2 PDF File to Save
+      0, ;                    // 3 PDF PaperSize
+      0, ;                    // 4 PDF PaperWidth
+      0, ;                    // 5 PDF PaperHeight
+      nOrientation, ;         // 6 PDF Orientation
+      NIL, ;                  // 7 PDF Current Page
+      'Helvetica', ;          // 8 PDF default font
+      12, ;                   // 9 PDF default fontsize
+      "StandardEncoding", ;   // 10 PDF default encoding
+      {}, ;                   // 11 PDF Outlines Array
+      {}, ;                   // 12 PDF Pages Array
+      0, ;                    // 13 PDF Current Page Number
+      }
       _HMG_HPDFDATA[ 1 ][ 1 ] := HPDF_New()
       IF _HMG_HPDFDATA[ 1 ][ 1 ] == nil
          _HMG_HPDF_Error( 2 )
+
          RETURN .F.
       ENDIF
       _HMG_HPDFDATA[ 1 ][ 3 ] := nPaperSize
@@ -49,36 +50,40 @@ FUNCTION _HMG_HPDF_INIT ( cPDFFile, nOrientation, nPaperSize, nPaperLength, nPap
       ENDIF
    ELSE
       _HMG_HPDF_Error( 1 )
+
       RETURN .F.
    ENDIF
 
-RETURN .T.
+   RETURN .T.
 
 FUNCTION _hmg_hpdf_setencoding( cEncoding )
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    HPDF_SetCurrentEncoder( _HMG_HPDFDATA[ 1 ][ 1 ], cEncoding )
    _HMG_HPDFDATA[ 1 ][ 10 ] := cEncoding
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _hmg_hpdf_startdoc()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _hmg_hpdf_startpage()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // Page is free
       _HMG_HPDFDATA[ 1 ][ 7 ] := HPDF_AddPage( _HMG_HPDFDATA[ 1 ][ 1 ] )
       IF Empty( _HMG_HPDFDATA[ 1 ][ 7 ] )
          _HMG_HPDF_Error( 9, "Start Page" )
+
          RETURN NIL
       ELSE
          // add current page to the pages array
@@ -92,7 +97,7 @@ FUNCTION _hmg_hpdf_startpage()
       _HMG_HPDF_Error( 4 )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_InsertPage( nPage )
 
@@ -101,21 +106,25 @@ FUNCTION _HMG_HPDF_InsertPage( nPage )
 
    IF nPage > Len( aPages ) .OR. nPage < 1
       _HMG_HPDF_Error( 16 )
+
       RETURN NIL
    ENDIF
    oOldPage := aPages[ nPage ]
    IF Empty( oOldPage )
       _HMG_HPDF_Error( 16 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // Page is free
       _HMG_HPDFDATA[ 1 ][ 7 ] := HPDF_InsertPage( _HMG_HPDFDATA[ 1 ][ 1 ], oOldPage )
       IF Empty( _HMG_HPDFDATA[ 1, 7 ] )
          _HMG_HPDF_Error( 9, "Insert Page" )
+
          RETURN NIL
       ELSE
          // insert current page to the pages array
@@ -131,7 +140,7 @@ FUNCTION _HMG_HPDF_InsertPage( nPage )
       _HMG_HPDF_Error( 4 )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_GoToPage( nPage )
 
@@ -140,69 +149,79 @@ FUNCTION _HMG_HPDF_GoToPage( nPage )
 
    IF nPage > Len( aPages ) .OR. nPage < 1
       _HMG_HPDF_Error( 18 )
+
       RETURN NIL
    ENDIF
    oPage := aPages[ nPage ]
    IF Empty( oPage )
       _HMG_HPDF_Error( 18 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // Page is free
       _HMG_HPDFDATA[ 1 ][ 7 ] := aPages[ nPage ]
       IF Empty( _HMG_HPDFDATA[ 1, 7 ] )
          _HMG_HPDF_Error( 19 )
+
          RETURN NIL
       ENDIF
       _HMG_HPDFDATA[ 1 ][ 13 ] := nPage
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _hmg_hpdf_endpage()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // Page is free
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ELSE
       _HMG_HPDFDATA[ 1 ][ 7 ] := nil
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION HMG_HPDF_PageCount()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
 
-RETURN Len( _HMG_HPDFDATA[ 1 ][ 12 ] )
+   RETURN Len( _HMG_HPDFDATA[ 1 ][ 12 ] )
 
 FUNCTION HMG_HPDF_PageNo()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // Page is free
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
-RETURN _HMG_HPDFDATA[ 1 ][ 13 ]
+   RETURN _HMG_HPDFDATA[ 1 ][ 13 ]
 
 FUNCTION _hmg_hpdf_enddoc()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF HPDF_SaveToFile( _HMG_HPDFDATA[ 1 ][ 1 ], _HMG_HPDFDATA[ 1 ][ 2 ] ) != 0
@@ -211,18 +230,19 @@ FUNCTION _hmg_hpdf_enddoc()
    HPDF_Free( _HMG_HPDFDATA[ 1 ][ 1 ] )
    _HMG_HPDFDATA[ 1 ] := nil
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _hmg_hpdf_abortdoc()
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    HPDF_Free( _HMG_HPDFDATA[ 1 ][ 1 ] )
    _HMG_HPDFDATA[ 1 ][ 1 ] := nil
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, nBColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign, nAngle )
 
@@ -251,10 +271,12 @@ FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, n
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -269,6 +291,7 @@ FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, n
    cFont := _HMG_HPDF_SetFont( cFontName, lBold, lItalic )
    IF Len( AllTrim( cFont ) ) == 0
       _HMG_HPDF_Error( 6, cFontName )
+
       RETURN NIL
    ELSE
       IF Upper( AllTrim( cFont ) ) == "SYMBOL" .OR. Upper( AllTrim( cFont ) ) == "ZAPFDINGBATS"
@@ -279,6 +302,7 @@ FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, n
    ENDIF
    IF oFont == Nil
       _HMG_HPDF_Error( 6 )
+
       RETURN NIL
    ELSE
       HPDF_Page_SetFontAndSize( _HMG_HPDFDATA[ 1 ][ 7 ], oFont, nFontSize )
@@ -319,7 +343,7 @@ FUNCTION _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, n
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFontSize, nRColor, nGColor, nBColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign, nAngle )
 
@@ -354,10 +378,12 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
    DEFAULT nAngle := 0
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -372,6 +398,7 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
    cFont := _HMG_HPDF_SetFont( cFontName, lBold, lItalic )
    IF Len( AllTrim( cFont ) ) == 0
       _HMG_HPDF_Error( 6 )
+
       RETURN NIL
    ELSE
       IF Upper( AllTrim( cFont ) ) == "SYMBOL" .OR. Upper( AllTrim( cFont ) ) == "ZAPFDINGBATS"
@@ -382,6 +409,7 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
    ENDIF
    IF oFont == Nil
       _HMG_HPDF_Error( 6 )
+
       RETURN NIL
    ELSE
       IF nAngle != 0
@@ -452,7 +480,7 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_IMAGE ( cImage, nRow, nCol, nImageheight, nImageWidth, lStretch )
 
@@ -464,10 +492,12 @@ FUNCTION _HMG_HPDF_IMAGE ( cImage, nRow, nCol, nImageheight, nImageWidth, lStret
    DEFAULT lStretch := .F.
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
    IF File( cImage )
@@ -479,15 +509,17 @@ FUNCTION _HMG_HPDF_IMAGE ( cImage, nRow, nCol, nImageheight, nImageWidth, lStret
       ENDIF
    ELSE
       _HMG_HPDF_Error( 7 )
+
       RETURN NIL
    ENDIF
    IF Empty( oImage )
       _HMG_HPDF_Error( 7 )
+
       RETURN NIL
    ENDIF
    HPDF_Page_DrawImage( _HMG_HPDFDATA[ 1 ][ 7 ], oImage, nxPos, nyPos - _HMG_HPDF_MM2Pixel( nImageHeight ), _HMG_HPDF_MM2Pixel( nImageWidth ), _HMG_HPDF_MM2Pixel( nImageHeight ) )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_LINE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
 
@@ -506,10 +538,12 @@ FUNCTION _HMG_HPDF_LINE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGCol
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -529,7 +563,7 @@ FUNCTION _HMG_HPDF_LINE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGCol
    HPDF_Page_LineTo( _HMG_HPDFDATA[ 1 ][ 7 ], nToxPos, nToyPos )
    HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_RECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
 
@@ -547,10 +581,12 @@ FUNCTION _HMG_HPDF_RECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, 
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -576,7 +612,7 @@ FUNCTION _HMG_HPDF_RECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, 
       HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_ROUNDRECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled, nRoundness )
 
@@ -598,10 +634,12 @@ FUNCTION _HMG_HPDF_ROUNDRECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRCo
    DEFAULT nRoundness := 0
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
    // set color
@@ -624,6 +662,7 @@ FUNCTION _HMG_HPDF_ROUNDRECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRCo
    ELSE
       IF nRoundness > Int( Min( nRectWidth, nRectHeight ) / 2 )
          _HMG_HPDF_Error( 8 )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -648,7 +687,7 @@ FUNCTION _HMG_HPDF_ROUNDRECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRCo
       HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_CIRCLE( nRow, nCol, nR, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
 
@@ -662,10 +701,12 @@ FUNCTION _HMG_HPDF_CIRCLE( nRow, nCol, nR, nLineWidth, nRColor, nGColor, nBColor
    DEFAULT lFilled := .F.
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -691,7 +732,7 @@ FUNCTION _HMG_HPDF_CIRCLE( nRow, nCol, nR, nLineWidth, nRColor, nGColor, nBColor
       HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_ELLIPSE( nRow, nCol, nHR, nVR, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
 
@@ -705,10 +746,12 @@ FUNCTION _HMG_HPDF_ELLIPSE( nRow, nCol, nHR, nVR, nLineWidth, nRColor, nGColor, 
    DEFAULT lFilled := .F.
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -734,7 +777,7 @@ FUNCTION _HMG_HPDF_ELLIPSE( nRow, nCol, nHR, nVR, nLineWidth, nRColor, nGColor, 
       HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_ARC( nRow, nCol, nR, nFromAngle, nToAngle, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
 
@@ -747,10 +790,12 @@ FUNCTION _HMG_HPDF_ARC( nRow, nCol, nR, nFromAngle, nToAngle, nLineWidth, nRColo
    DEFAULT lColor := .F.
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -769,7 +814,7 @@ FUNCTION _HMG_HPDF_ARC( nRow, nCol, nR, nFromAngle, nToAngle, nLineWidth, nRColo
    HPDF_Page_Arc( _HMG_HPDFDATA[ 1 ][ 7 ], nxPos, nyPos, _HMG_HPDF_MM2Pixel( nR ), nFromAngle, nToAngle )
    HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_CURVE ( nRow, nCol, nFromRow, nFromCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
 
@@ -790,10 +835,12 @@ FUNCTION _HMG_HPDF_CURVE ( nRow, nCol, nFromRow, nFromCol, nToRow, nToCol, nLine
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -813,24 +860,26 @@ FUNCTION _HMG_HPDF_CURVE ( nRow, nCol, nFromRow, nFromCol, nToRow, nToCol, nLine
    HPDF_Page_CurveTo2( _HMG_HPDFDATA[ 1 ][ 7 ], nFromxPos, nFromyPos, nToxPos, nToyPos )
    HPDF_Page_Stroke( _HMG_HPDFDATA[ 1 ][ 7 ] )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetPassword( cOwnerPass, cUserPass )
 
    DEFAULT cUserPass := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    HPDF_SetPassword( _HMG_HPDFDATA[ 1 ][ 1 ], cOwnerPass, cUserPass )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetCompression( cMode )
 
    DEFAULT cMode := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    cMode := Upper( cMode )
@@ -849,13 +898,14 @@ FUNCTION _HMG_HPDF_SetCompression( cMode )
       HPDF_SetCompressionMode( _HMG_HPDFDATA[ 1 ][ 1 ], HPDF_COMP_NONE )
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetPermission( cMode )
 
    DEFAULT cMode := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    cMode := Upper( cMode )
@@ -872,13 +922,14 @@ FUNCTION _HMG_HPDF_SetPermission( cMode )
       HPDF_SetPermission( _HMG_HPDFDATA[ 1 ][ 1 ], HPDF_ENABLE_EDIT_ALL )
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetPageMode( cMode )
 
    DEFAULT cMode := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    cMode := Upper( cMode )
@@ -895,7 +946,7 @@ FUNCTION _HMG_HPDF_SetPageMode( cMode )
       HPDF_SetPageMode( _HMG_HPDFDATA[ 1 ][ 1 ], HPDF_PAGE_MODE_EOF )
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_RootOutline( cTitle, cName, cParent )
 
@@ -905,20 +956,24 @@ FUNCTION _HMG_HPDF_RootOutline( cTitle, cName, cParent )
    DEFAULT cParent := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF Len( AllTrim( cTitle ) ) == 0
       _HMG_HPDF_Error( 11 )
+
       RETURN NIL
    ENDIF
    IF Len( AllTrim( cName ) ) == 0
       _HMG_HPDF_Error( 12 )
+
       RETURN NIL
    ENDIF
    IF Len( AllTrim( cParent ) ) == 0 // make this a root outline
       oOutline := HPDF_CreateOutline( _HMG_HPDFDATA[ 1 ][ 1 ], Nil, cTitle, HPDF_GetCurrentEncoder() )
       IF Empty( oOutLine )
          _HMG_HPDF_Error( 10 )
+
          RETURN NIL
       ELSE
          AAdd( _HMG_HPDFDATA[ 1 ][ 11 ], { oOutline, cName } )
@@ -930,6 +985,7 @@ FUNCTION _HMG_HPDF_RootOutline( cTitle, cName, cParent )
             oOutline := HPDF_CreateOutline( _HMG_HPDFDATA[ 1 ][ 1 ], aOutLines[ i, 1 ], cTitle, HPDF_GetCurrentEncoder() )
             IF Empty( oOutLine )
                _HMG_HPDF_Error( 10 )
+
                RETURN NIL
             ELSE
                AAdd( _HMG_HPDFDATA[ 1 ][ 11 ], { oOutline, cName } )
@@ -939,7 +995,7 @@ FUNCTION _HMG_HPDF_RootOutline( cTitle, cName, cParent )
       NEXT i
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_PageOutline( cTitle, cParent, cName )
 
@@ -951,21 +1007,25 @@ FUNCTION _HMG_HPDF_PageOutline( cTitle, cParent, cName )
    DEFAULT cName := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
    oDestination := HPDF_Page_CreateDestination( _HMG_HPDFDATA[ 1 ][ 7 ] )
    IF Empty( oDestination )
       _HMG_HPDF_Error( 13 )
+
       RETURN NIL
    ENDIF
    IF Len( AllTrim( cParent ) ) == 0 // No parent make this page root element
       oOutline := HPDF_CreateOutline( _HMG_HPDFDATA[ 1 ][ 1 ], Nil, cTitle, HPDF_GetCurrentEncoder() )
       IF Empty( oOutline )
          _HMG_HPDF_Error( 13 )
+
          RETURN NIL
       ENDIF
    ELSE
@@ -978,6 +1038,7 @@ FUNCTION _HMG_HPDF_PageOutline( cTitle, cParent, cName )
       NEXT i
       IF Empty( oOutline )
          _HMG_HPDF_Error( 14 )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -986,7 +1047,7 @@ FUNCTION _HMG_HPDF_PageOutline( cTitle, cParent, cName )
    ENDIF
    HPDF_Outline_SetDestination( oOutline, oDestination )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetTextAnnot( nRow, nCol, cToolTip, cIcon )
 
@@ -1002,15 +1063,18 @@ FUNCTION _HMG_HPDF_SetTextAnnot( nRow, nCol, cToolTip, cIcon )
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
    oAnnot := HPDF_Page_CreateTextAnnot ( _HMG_HPDFDATA[ 1 ][ 7 ], aRect, cTooltip, HPDF_GetCurrentEncoder() )
    IF Empty( oAnnot )
       _HMG_HPDF_Error( 15 )
+
       RETURN NIL
    ENDIF
    DO CASE
@@ -1030,7 +1094,7 @@ FUNCTION _HMG_HPDF_SetTextAnnot( nRow, nCol, cToolTip, cIcon )
       HPDF_TextAnnot_SetIcon ( oAnnot, HPDF_ANNOT_ICON_INSERT )
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, nRColor, nGColor, nBColor, cAlign, lColor, lFont, lSize, lBorder, lWidth, nBorderWidth )
 
@@ -1061,27 +1125,32 @@ FUNCTION _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, 
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
    aPages := AClone( _HMG_HPDFDATA[ 1 ][ 12 ] )
    IF nPage > Len( aPages ) .OR. nPage < 1
       _HMG_HPDF_Error( 17 )
+
       RETURN NIL
    ENDIF
 
    oLinkPage := aPages[ nPage ]
    IF Empty( oLinkPage )
       _HMG_HPDF_Error( 17 )
+
       RETURN NIL
    ENDIF
    oDest := HPDF_Page_CreateDestination( oLinkPage )
    IF Empty( oDest )
       _HMG_HPDF_Error( 17 )
+
       RETURN NIL
    ENDIF
 
@@ -1101,6 +1170,7 @@ FUNCTION _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, 
          cFont := HPDF_LOADTTFONTFROMFILE( _HMG_HPDFDATA[ 1 ][ 1 ], cFontName, .T. )
          IF Len( AllTrim( cFont ) ) == 0
             _HMG_HPDF_Error( 6 )
+
             RETURN NIL
          ENDIF
          oFont := HPDF_GetFont( _HMG_HPDFDATA[ 1 ][ 1 ], cFont, _HMG_HPDFDATA[ 1 ][ 10 ] )
@@ -1114,6 +1184,7 @@ FUNCTION _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, 
    ENDIF
    IF oFont == Nil
       _HMG_HPDF_Error( 6 )
+
       RETURN NIL
    ELSE
       HPDF_Page_SetFontAndSize( _HMG_HPDFDATA[ 1 ][ 7 ], oFont, nFontSize )
@@ -1141,7 +1212,7 @@ FUNCTION _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, 
       HPDF_Page_EndText( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, nRColor, nGColor, nBColor, cAlign, lColor, lFont, lSize  )
 
@@ -1166,10 +1237,12 @@ FUNCTION _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, n
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
 
@@ -1189,6 +1262,7 @@ FUNCTION _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, n
          cFont := HPDF_LOADTTFONTFROMFILE( _HMG_HPDFDATA[ 1 ][ 1 ], cFontName, .T. )
          IF Len( AllTrim( cFont ) ) == 0
             _HMG_HPDF_Error( 6 )
+
             RETURN NIL
          ENDIF
          oFont := HPDF_GetFont( _HMG_HPDFDATA[ 1 ][ 1 ], cFont, _HMG_HPDFDATA[ 1 ][ 10 ] )
@@ -1202,6 +1276,7 @@ FUNCTION _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, n
    ENDIF
    IF oFont == Nil
       _HMG_HPDF_Error( 6 )
+
       RETURN NIL
    ELSE
       HPDF_Page_SetFontAndSize( _HMG_HPDFDATA[ 1 ][ 7 ], oFont, nFontSize )
@@ -1219,21 +1294,23 @@ FUNCTION _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, n
       HPDF_Page_EndText( _HMG_HPDFDATA[ 1 ][ 7 ] )
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetLineSpacing( nSpacing )
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    IF _HMG_HPDFDATA[ 1 ][ 7 ] == NIL // PDF Page object not found!
       _HMG_HPDF_Error( 5 )
+
       RETURN NIL
    ENDIF
    HPDF_Page_SetTextLeading( _HMG_HPDFDATA[ 1 ][ 7 ], _HMG_HPDF_MM2Pixel( nSpacing ) )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetInfo( cAttrib, xValue, cTime )
 
@@ -1246,6 +1323,7 @@ FUNCTION _HMG_HPDF_SetInfo( cAttrib, xValue, cTime )
    DEFAULT cTime := ''
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    DO CASE
@@ -1281,7 +1359,7 @@ FUNCTION _HMG_HPDF_SetInfo( cAttrib, xValue, cTime )
       HPDF_SetInfoDateAttr( _HMG_HPDFDATA[ 1 ][ 1 ], HPDF_INFO_MOD_DATE, { Year( dValue ), Month( dVAlue ), Day( dValue ), nHours, nMinutes, nSeconds } )
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_GetInfo( cAttrib )
 
@@ -1289,6 +1367,7 @@ FUNCTION _HMG_HPDF_GetInfo( cAttrib )
 
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    DO CASE
@@ -1316,7 +1395,7 @@ FUNCTION _HMG_HPDF_GetInfo( cAttrib )
       SET( _SET_DATEFORMAT, bd )
    ENDIF
 
-RETURN cRetValue
+   RETURN cRetValue
 
 FUNCTION _HMG_HPDF_SetPageLabel( nPage, cStyle, cCase, cPrefix )
 
@@ -1326,6 +1405,7 @@ FUNCTION _HMG_HPDF_SetPageLabel( nPage, cStyle, cCase, cPrefix )
    DEFAULT cPrefix := ""
    IF _HMG_HPDFDATA[ 1 ][ 1 ] == NIL // PDF object not found!
       _HMG_HPDF_Error( 3 )
+
       RETURN NIL
    ENDIF
    DO CASE
@@ -1345,7 +1425,7 @@ FUNCTION _HMG_HPDF_SetPageLabel( nPage, cStyle, cCase, cPrefix )
       ENDIF
    ENDCASE
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_Error( nErr, cExtraInfo )
 
@@ -1397,19 +1477,23 @@ FUNCTION _HMG_HPDF_Error( nErr, cExtraInfo )
    cErr += CRLF + cExtraInfo
    msgstop( cErr )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_Inch2Pixel( nInches )
-RETURN ( nInches * 72 )
+
+   RETURN ( nInches * 72 )
 
 FUNCTION _HMG_HPDF_Pixel2Inch( nPixels )
-RETURN ( nPixels / 72 )
+
+   RETURN ( nPixels / 72 )
 
 FUNCTION _HMG_HPDF_MM2Pixel( nMM )
-RETURN ( ( nMM / 25.4 ) * 72 )
+
+   RETURN ( ( nMM / 25.4 ) * 72 )
 
 FUNCTION _HMG_HPDF_Pixel2MM( nPixel )
-RETURN ( ( nPixel / 72 ) * 25.4 )
+
+   RETURN ( ( nPixel / 72 ) * 25.4 )
 
 FUNCTION _HMG_HPDF_INIT_PAPERSIZE( nPaperSize )
 
@@ -1777,7 +1861,7 @@ FUNCTION _HMG_HPDF_INIT_PAPERSIZE( nPaperSize )
       _HMG_HPDFDATA[ 1 ][ 4 ] := nTemp
    ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetFont( cFontName, lBold, lItalic )
 
@@ -1852,13 +1936,14 @@ FUNCTION _HMG_HPDF_SetFont( cFontName, lBold, lItalic )
       ENDIF
       cFont := HPDF_LOADTTFONTFROMFILE( _HMG_HPDFDATA[ 1 ][ 1 ], cFontName, .T. )
       IF Len( AllTrim( cFont ) ) == 0
+
          RETURN ''
       ENDIF
    ELSE
       cFont := cFontName
    ENDIF
 
-RETURN cFont
+   RETURN cFont
 
 FUNCTION _HMG_HPDF_SetDash( nMode )
 
@@ -1881,7 +1966,7 @@ FUNCTION _HMG_HPDF_SetDash( nMode )
    ENDCASE
    HPDF_Page_SetDash ( _HMG_HPDFDATA[ 1 ][ 7 ], @aPtn, nNum, nFase )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION _HMG_HPDF_SetOrientation( nMode )
 
@@ -1903,4 +1988,5 @@ FUNCTION _HMG_HPDF_SetOrientation( nMode )
       ENDIF
    ENDIF
 
-RETURN NIL
+   RETURN NIL
+

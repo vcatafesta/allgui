@@ -1,9 +1,7 @@
 /*
- * Harbour MiniGui Hyperlink Demo
- *
- * Copyright 2003 Jacek Kubica <kubica@wssk.wroc.pl>
- *
- * Copyright 2008 Grigory Filatov <gfilatov@inbox.ru>
+* Harbour MiniGui Hyperlink Demo
+* Copyright 2003 Jacek Kubica <kubica@wssk.wroc.pl>
+* Copyright 2008 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -15,17 +13,17 @@
 #define TITLE_4  "HYPERLINK"
 #define TITLE_5  "MY PROCEDURE"
 
-Procedure Main
+PROCEDURE Main
 
    SET FONT TO "Arial" , 9
 
    DEFINE WINDOW Main_form ;
-      AT 0,0 ;
-      WIDTH 300 ;
-      HEIGHT 170 ;
-      TITLE 'HyperLink Demo' ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         AT 0,0 ;
+         WIDTH 300 ;
+         HEIGHT 170 ;
+         TITLE 'HyperLink Demo' ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
       DEFINE MAIN MENU
 
@@ -43,11 +41,11 @@ Procedure Main
          ROW      10
          COL      10
          VALUE      'http://hmgextended.com'
-         AUTOSIZE   .T. 
+         AUTOSIZE   .T.
          ADDRESS      'http://hmgextended.com'
          HANDCURSOR   .T.
       END HYPERLINK
-         
+
       @ 30,10 HYPERLINK hl2 ;
          VALUE 'gfilatov@inbox.ru' ;
          AUTOSIZE ;
@@ -82,16 +80,17 @@ Procedure Main
 
    ACTIVATE WINDOW Main_form
 
-Return
+   RETURN
 
-Function MyProc(cText)
-  MsgInfo(cText, TITLE_5)
-return 
+FUNCTION MyProc(cText)
 
+   MsgInfo(cText, TITLE_5)
+
+   RETURN
 
 FUNCTION SetLinkBackColor()
 
-  DO CASE
+   DO CASE
 
    CASE FindWindow( 0, TITLE_1 ) > 0
       Main_form.hl1.FontColor := DARKBLUE
@@ -104,47 +103,46 @@ FUNCTION SetLinkBackColor()
 
    CASE FindWindow( 0, TITLE_4 ) > 0
       Main_form.hl4.FontColor := DARKBLUE
-   
+
    CASE FindWindow( 0, TITLE_5 ) > 0
-      Main_form.hl5.FontColor := DARKBLUE   
+      Main_form.hl5.FontColor := DARKBLUE
 
-  END CASE
+   END CASE
 
-RETURN nil
+   RETURN NIL
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
    #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
-#endif
+   #endif
 
 FUNCTION GetFileInPath(cFile)
-  
-  LOCAL cPath  := GETENV('PATH') + ';'
-  LOCAL lFound := .N.
-  LOCAL nLPos  := 0
-  LOCAL nRPos  := 0
-  LOCAL cSearch
 
-  WHILE nRPos < LEN(cPath) .AND. !lFound
-    nRPos   := AT(';', cPath, nLPos + 1)
-    cSearch := AddSlash(SUBSTR(cPath, nLPos + 1, nRPos - nLPos - 1))
-    lFound  := FILE(cSearch + cFile)
-    nLPos   := nRPos
-  END WHILE
+   LOCAL cPath  := GETENV('PATH') + ';'
+   LOCAL lFound := .N.
+   LOCAL nLPos  := 0
+   LOCAL nRPos  := 0
+   LOCAL cSearch
 
-RETURN (cSearch + cFile)
+   WHILE nRPos < LEN(cPath) .AND. !lFound
+      nRPos   := AT(';', cPath, nLPos + 1)
+      cSearch := AddSlash(SUBSTR(cPath, nLPos + 1, nRPos - nLPos - 1))
+      lFound  := FILE(cSearch + cFile)
+      nLPos   := nRPos
+   END WHILE
 
+   RETURN (cSearch + cFile)
 
 FUNCTION AddSlash(cInFolder)
 
-  LOCAL cOutFolder := ALLTRIM(cInFolder)
+   LOCAL cOutFolder := ALLTRIM(cInFolder)
 
-  IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) != '\'
-    cOutFolder += '\'
-  ENDIF
+   IF !EMPTY(cOutFolder) .AND. RIGHT(cOutfolder, 1) != '\'
+      cOutFolder += '\'
+   ENDIF
 
-RETURN cOutFolder
+   RETURN cOutFolder
 
+   DECLARE DLL_TYPE_LONG ;
+      FindWindow ( DLL_TYPE_LPSTR lpClassName, DLL_TYPE_LPSTR lpWindowName ) ;
+      IN USER32.DLL
 
-DECLARE DLL_TYPE_LONG ;
-   FindWindow ( DLL_TYPE_LPSTR lpClassName, DLL_TYPE_LPSTR lpWindowName ) ;
-   IN USER32.DLL

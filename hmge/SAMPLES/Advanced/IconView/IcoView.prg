@@ -1,7 +1,6 @@
 /*
- * MiniGUI Icon Viewer Demo
- *
- * Copyright (c) 2004-2005 Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI Icon Viewer Demo
+* Copyright (c) 2004-2005 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -10,143 +9,151 @@
 #define VERSION " v.1.0"
 #define COPYRIGHT " 2004-2005 Grigory Filatov"
 
-Static cFileName := "", lOpened := .f.
+STATIC cFileName := "", lOpened := .f.
 
 /*
- *	Main()
- */
-Procedure Main
-Local hWnd, w := GetDesktopRectWidth(), h := GetDesktopRectHeight()
+*   Main()
+*/
 
-	SET DATE GERMAN
+PROCEDURE Main
 
-	DEFINE WINDOW Win_1 ;
-		AT GetDesktopRectTop(), GetDesktopRectLeft() ;
-		WIDTH w ;
-		HEIGHT h ;
-		TITLE APP_TITLE ;
-		ICON "MAIN" ;
-		MAIN ;
-		ON PAINT IconShow() ;
-		ON SIZE ButtonsResize() ;
-		ON MAXIMIZE IF( lOpened, DoMethod( "Win_1", "Restore" ), ButtonsResize() ) ;
-		FONT "Tahoma" SIZE 9
+   LOCAL hWnd, w := GetDesktopRectWidth(), h := GetDesktopRectHeight()
 
-		DEFINE STATUSBAR 
-			STATUSITEM "Copyright " + Chr(169) + COPYRIGHT
-			KEYBOARD
-			DATE
-			CLOCK
-		END STATUSBAR
+   SET DATE GERMAN
 
-		@ h-90, w-270 BUTTON Btn_Open ; 
-			CAPTION '&Open a file...' ; 
-			ACTION OpenFile() ; 
-			WIDTH 120 ; 
-			HEIGHT 26 ; 
-			TOOLTIP "Open a file for view of icon" ;
-			BOLD
+   DEFINE WINDOW Win_1 ;
+         AT GetDesktopRectTop(), GetDesktopRectLeft() ;
+         WIDTH w ;
+         HEIGHT h ;
+         TITLE APP_TITLE ;
+         ICON "MAIN" ;
+         MAIN ;
+         ON PAINT IconShow() ;
+         ON SIZE ButtonsResize() ;
+         ON MAXIMIZE IF( lOpened, DoMethod( "Win_1", "Restore" ), ButtonsResize() ) ;
+         FONT "Tahoma" SIZE 9
 
-		@ h-90, w-146 BUTTON Btn_Exit ; 
-			CAPTION 'E&xit' ; 
-			ACTION Win_1.Release ; 
-			WIDTH 120 ; 
-			HEIGHT 26 ; 
-			TOOLTIP "Close this program" ;
-			BOLD
+      DEFINE STATUSBAR
+         STATUSITEM "Copyright " + Chr(169) + COPYRIGHT
+         KEYBOARD
+         DATE
+         CLOCK
+      END STATUSBAR
 
-		DEFINE CONTEXT MENU 
-			ITEM 'Open a file...'	ACTION OpenFile()
-			SEPARATOR	
-			ITEM 'About'			ACTION MsgAbout()
-		END MENU
+      @ h-90, w-270 BUTTON Btn_Open ;
+         CAPTION '&Open a file...' ;
+         ACTION OpenFile() ;
+         WIDTH 120 ;
+         HEIGHT 26 ;
+         TOOLTIP "Open a file for view of icon" ;
+         BOLD
 
-	END WINDOW
+      @ h-90, w-146 BUTTON Btn_Exit ;
+         CAPTION 'E&xit' ;
+         ACTION Win_1.Release ;
+         WIDTH 120 ;
+         HEIGHT 26 ;
+         TOOLTIP "Close this program" ;
+         BOLD
 
-	ACTIVATE WINDOW Win_1
+      DEFINE CONTEXT MENU
+         ITEM 'Open a file...'   ACTION OpenFile()
+         SEPARATOR
+         ITEM 'About'         ACTION MsgAbout()
+      END MENU
 
-Return
+   END WINDOW
 
-/*
- *	IconShow()
- */
+   ACTIVATE WINDOW Win_1
+
+   RETURN
+
+   /*
+   *   IconShow()
+   */
+
 FUNCTION IconShow()
-Local i, y, z, x, bb, IcoL, s_, w
 
-	Win_1.Btn_Open.Setfocus
+   LOCAL i, y, z, x, bb, IcoL, s_, w
 
-	if lOpened
-		Win_1.Row := GetDesktopRectTop()
-		Win_1.Col := GetDesktopRectLeft()
-		Win_1.Width := GetDesktopRectWidth()
-		Win_1.Height := GetDesktopRectHeight()
-		z := -32
-		bb := -1
-		x := ExtractIconEx(cFileName, -1, s_, IcoL, 1)
-		if x == 0
-			lOpened := .f.
-			MsgStop('Icons is missing!', 'Warning', , .f.)
-			Win_1.Title := APP_TITLE
-		else
-			w := Win_1.Width / 32
-			for i := 0 to x / w
-				x := -32 ; z += 32
-				for y := 0 to w
-					x+=32 ; bb++
-					IcoL := ExtractIcon(cFileName, bb)
-					DrawIcon(_HMG_MainHandle, x, z, IcoL)
-					DestroyIcon(IcoL)
-				next
-				if z > 95
-					x := 0
-				endif
-			next
-		endif
-	endif
+   Win_1.Btn_Open.Setfocus
 
-RETURN NIL
+   IF lOpened
+      Win_1.Row := GetDesktopRectTop()
+      Win_1.Col := GetDesktopRectLeft()
+      Win_1.Width := GetDesktopRectWidth()
+      Win_1.Height := GetDesktopRectHeight()
+      z := -32
+      bb := -1
+      x := ExtractIconEx(cFileName, -1, s_, IcoL, 1)
+      IF x == 0
+         lOpened := .f.
+         MsgStop('Icons is missing!', 'Warning', , .f.)
+         Win_1.Title := APP_TITLE
+      ELSE
+         w := Win_1.Width / 32
+         FOR i := 0 to x / w
+            x := -32 ; z += 32
+            FOR y := 0 to w
+               x+=32 ; bb++
+               IcoL := ExtractIcon(cFileName, bb)
+               DrawIcon(_HMG_MainHandle, x, z, IcoL)
+               DestroyIcon(IcoL)
+            NEXT
+            IF z > 95
+               x := 0
+            ENDIF
+         NEXT
+      ENDIF
+   ENDIF
 
-/*
- *	OpenFile()
- */
+   RETURN NIL
+
+   /*
+   *   OpenFile()
+   */
+
 FUNCTION OpenFile()
-Local cOpenFile := Getfile( { {"All files with icons", "*.dll;*.exe;*.ico"}, ;
-		{"All files", "*.*"} }, "Open a File" )
 
-	cFileName := cOpenFile
+   LOCAL cOpenFile := Getfile( { {"All files with icons", "*.dll;*.exe;*.ico"}, ;
+      {"All files", "*.*"} }, "Open a File" )
 
-	if !empty(cFileName).and.file(cFileName)
-		Win_1.Title := cFileName + " - " + APP_TITLE
-		lOpened := .t.
-		InvalidateRect( GetFormHandle("Win_1") )
-		Win_1.Maximize
-		Win_1.Restore
-	endif
+   cFileName := cOpenFile
 
-RETURN NIL
+   IF !empty(cFileName).and.file(cFileName)
+      Win_1.Title := cFileName + " - " + APP_TITLE
+      lOpened := .t.
+      InvalidateRect( GetFormHandle("Win_1") )
+      Win_1.Maximize
+      Win_1.Restore
+   ENDIF
 
-/*
- *	ButtonsResize()
- */
+   RETURN NIL
+
+   /*
+   *   ButtonsResize()
+   */
+
 FUNCTION ButtonsResize()
 
-	Win_1.Btn_Open.Row := Win_1.Height-90
-	Win_1.Btn_Open.Col := Win_1.Width-270
-	Win_1.Btn_Exit.Row := Win_1.Height-90
-	Win_1.Btn_Exit.Col := Win_1.Width-146
+   Win_1.Btn_Open.Row := Win_1.Height-90
+   Win_1.Btn_Open.Col := Win_1.Width-270
+   Win_1.Btn_Exit.Row := Win_1.Height-90
+   Win_1.Btn_Exit.Col := Win_1.Width-146
 
-RETURN NIL
+   RETURN NIL
 
-/*
- *	MsgAbout()
- */
-Function MsgAbout()
-return MsgInfo( APP_TITLE + VERSION + " - FREEWARE" + CRLF + ;
-	"Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
-	"eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
-	padc("This program is Freeware!", 30) + CRLF + ;
-	padc("Copying is allowed!", 36), "About", , .f. )
+   /*
+   *   MsgAbout()
+   */
 
+FUNCTION MsgAbout()
+
+   RETURN MsgInfo( APP_TITLE + VERSION + " - FREEWARE" + CRLF + ;
+      "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
+      "eMail: gfilatov@inbox.ru" + CRLF + CRLF + ;
+      padc("This program is Freeware!", 30) + CRLF + ;
+      padc("Copying is allowed!", 36), "About", , .f. )
 
 #pragma BEGINDUMP
 
@@ -155,66 +162,67 @@ return MsgInfo( APP_TITLE + VERSION + " - FREEWARE" + CRLF + ;
 #include <windows.h>
 #include "hbapi.h"
 
-HB_FUNC (GETDESKTOPRECTTOP) 
+HB_FUNC (GETDESKTOPRECTTOP)
 {
-	RECT rect;
-	SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
+   RECT rect;
+   SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
 
-	hb_retni(rect.top);
+   hb_retni(rect.top);
 }
 
-HB_FUNC (GETDESKTOPRECTLEFT) 
+HB_FUNC (GETDESKTOPRECTLEFT)
 {
-	RECT rect;
-	SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
+   RECT rect;
+   SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
 
-	hb_retni(rect.left);
+   hb_retni(rect.left);
 }
 
 HB_FUNC ( GETDESKTOPRECTWIDTH )
 {
-	RECT rect;
-	SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
+   RECT rect;
+   SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
 
-	hb_retni(rect.right - rect.left);
+   hb_retni(rect.right - rect.left);
 }
 
 HB_FUNC ( GETDESKTOPRECTHEIGHT )
 {
-	RECT rect;
-	SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
+   RECT rect;
+   SystemParametersInfo( SPI_GETWORKAREA, 1, &rect, 0 );
 
-	hb_retni(rect.bottom - rect.top);
+   hb_retni(rect.bottom - rect.top);
 }
 
 HB_FUNC ( EXTRACTICONEX )
 {
-	HICON iLarge;
-	HICON iSmall;
-	UINT  nIcons=hb_parni(5);
+   HICON iLarge;
+   HICON iSmall;
+   UINT  nIcons=hb_parni(5);
 
-	hb_retni( ExtractIconEx( (LPCSTR) hb_parc( 1 ),
-					hb_parni( 2 )     ,
-					&iLarge           ,
-					&iSmall           ,
-					nIcons	) );
+   hb_retni( ExtractIconEx( (LPCSTR) hb_parc( 1 ),
+               hb_parni( 2 )     ,
+               &iLarge           ,
+               &iSmall           ,
+               nIcons   ) );
 }
 
 HB_FUNC ( DRAWICON )
 {
-	HWND hwnd;
-	HDC hdc;
+   HWND hwnd;
+   HDC hdc;
 
-	hwnd  = (HWND) hb_parnl( 1 ) ;
-	hdc   = GetDC( hwnd ) ;
- 
-	hb_retl( DrawIcon( (HDC) hdc , hb_parni( 2 ) , hb_parni( 3 ) , (HICON) hb_parnl( 4 ) ) ) ;
-	ReleaseDC( hwnd, hdc ) ;
+   hwnd  = (HWND) hb_parnl( 1 ) ;
+   hdc   = GetDC( hwnd ) ;
+
+   hb_retl( DrawIcon( (HDC) hdc , hb_parni( 2 ) , hb_parni( 3 ) , (HICON) hb_parnl( 4 ) ) ) ;
+   ReleaseDC( hwnd, hdc ) ;
 }
 
 HB_FUNC ( DESTROYICON )
 {
-	DestroyIcon( (HICON) hb_parnl( 1 ) );
+   DestroyIcon( (HICON) hb_parnl( 1 ) );
 }
 
 #pragma ENDDUMP
+

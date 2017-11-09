@@ -13,35 +13,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -57,14 +57,12 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define CBEM_GETCOMBOCONTROL  1030
 #define CBEM_GETEDITCONTROL   1031
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineCombo ( ControlName, ParentFormName, x, y, w, rows, value, ;
-   fontname, fontsize, tooltip, changeprocedure, h, gotfocus, lostfocus, uEnter, ;
-   HelpId, invisible, notabstop, sort, bold, italic, underline, strikeout , ;
-   itemsource , valuesource , displaychange , ondisplaychangeprocedure , break , ;
-   GripperText , ListWidth , nId, OnListDisplayProcedure, OnListCloseProcedure, ;
-   backcolor, fontcolor, lUpper, lLower, cuetext, OnCancel, AutoComplete, lShowDropDown, nItemHeight )
-*-----------------------------------------------------------------------------*
+      fontname, fontsize, tooltip, changeprocedure, h, gotfocus, lostfocus, uEnter, ;
+      HelpId, invisible, notabstop, sort, bold, italic, underline, strikeout , ;
+      itemsource , valuesource , displaychange , ondisplaychangeprocedure , break , ;
+      GripperText , ListWidth , nId, OnListDisplayProcedure, OnListCloseProcedure, ;
+      backcolor, fontcolor, lUpper, lLower, cuetext, OnCancel, AutoComplete, lShowDropDown, nItemHeight )
    LOCAL i , ParentFormHandle , mVar , ControlHandle , FontHandle , WorkArea , cField , ContainerHandle := 0 , k
    LOCAL Style, blInit
    LOCAL lDialogInMemory
@@ -252,7 +250,7 @@ FUNCTION _DefineCombo ( ControlName, ParentFormName, x, y, w, rows, value, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "COMBO"
    _HMG_aControlNames  [k] :=  ControlName
@@ -303,11 +301,10 @@ FUNCTION _DefineCombo ( ControlName, ParentFormName, x, y, w, rows, value, ;
       InitDialogComboBox( ParentFormName, ControlHandle, k )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL WorkArea , BackRec , rcount := 0 , cset := 0 , ItemHeight , ;
       Value , rows , DisplayChange , ItemSource , cField , ListWidth , cuetext
 
@@ -315,7 +312,7 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
    cField        := _HMG_aControlPageMap [k]
    Value         := _HMG_aControlValue [k]
    rows          := _HMG_aControlMiscData1 [k,4]
-   DisplayChange := _HMG_aControlMiscData1 [k,2]
+   DISPLAYChange := _HMG_aControlMiscData1 [k,2]
    ItemSource    := _HMG_aControlMiscData1 [k,3]
    ListWidth     := _HMG_aControlMiscData1 [k,5]
    cuetext       := _HMG_aControlMiscData1 [k,6]
@@ -329,12 +326,12 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
          SetToolTip ( _HMG_aControlRangeMin [k] , _HMG_aControlToolTip [k] , GetFormToolTipHandle( ParentName ) )
       ENDIF
 
-      IF !Empty( cuetext ) .AND. IsVistaOrLater() 
+      IF !Empty( cuetext ) .AND. IsVistaOrLater()
          value := 0
          SendMessageWideString( _HMG_aControlRangeMin [k], EM_SETCUEBANNER, .T., cuetext )
       ENDIF
 
-   ELSEIF !Empty( cuetext ) .AND. IsVistaOrLater() 
+   ELSEIF !Empty( cuetext ) .AND. IsVistaOrLater()
 
       value := 0
       SendMessageWideString( ControlHandle, CB_SETCUEBANNER, .T., cuetext )
@@ -390,47 +387,46 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-// (JK) Extend combobox control -  COMBOBOXEX
-// HMG 1.0 Experimental Build 8
-*-----------------------------------------------------------------------------*
+   // (JK) Extend combobox control -  COMBOBOXEX
+   // HMG 1.0 Experimental Build 8
+
 FUNCTION _DefineComboEx ( ;
       ControlName, ; // 1
-      ParentForm, ;  // 2
-      x, ;           // 3
-      y, ;           // 4
-      w, ;           // 5
-      rows, ;        // 6
-      value, ;       // 7
-      fontname, ;    // 8
-      fontsize, ;    // 9
-      tooltip, ;         // 10
-      changeprocedure, ; // 11
-      h, ;               // 12
-      gotfocus, ;        // 13
-      lostfocus, ;       // 14
-      uEnter, ;          // 15
-      HelpId, ;          // 16
-      invisible, ;       // 17
-      notabstop, ;       // 18
-      sort , ;           // 19   // not used with extend COMBO
-      bold, ;            // 20
-      italic, ;          // 21
-      underline, ;         // 22
-      strikeout , ;        // 23
-      itemsource , ;       // 24
-      valuesource , ;      // 25
-      displaychange , ;    // 26
-      ondisplaychangeprocedure , ; // 27
-      break , ;            // 28
-      GripperText, ;       // 29
-      aImage , ;           // 30
-      ListWidth, ;         // 31
-      OnListDisplayProcedure, ; // 32
-      OnListCloseProcedure, ;   // 33
-      backcolor, fontcolor, ImageList, nItemHeight )
-*-----------------------------------------------------------------------------*
+   ParentForm, ;  // 2
+   x, ;           // 3
+   y, ;           // 4
+   w, ;           // 5
+   rows, ;        // 6
+   value, ;       // 7
+   fontname, ;    // 8
+   fontsize, ;    // 9
+   tooltip, ;         // 10
+   changeprocedure, ; // 11
+   h, ;               // 12
+   gotfocus, ;        // 13
+   lostfocus, ;       // 14
+   uEnter, ;          // 15
+   HelpId, ;          // 16
+   invisible, ;       // 17
+   notabstop, ;       // 18
+   SORT , ;           // 19   // not used with extend COMBO
+   bold, ;            // 20
+   italic, ;          // 21
+   underline, ;         // 22
+   strikeout , ;        // 23
+   itemsource , ;       // 24
+   valuesource , ;      // 25
+   DISPLAYchange , ;    // 26
+   ondisplaychangeprocedure , ; // 27
+   break , ;            // 28
+   GripperText, ;       // 29
+   aImage , ;           // 30
+   ListWidth, ;         // 31
+   OnListDisplayProcedure, ; // 32
+   OnListCloseProcedure, ;   // 33
+   backcolor, fontcolor, ImageList, nItemHeight )
    LOCAL i , cParentForm , mVar , ControlHandle , FontHandle , rcount := 0
    LOCAL BackRec , cset := 0 , WorkArea , cField , ContainerHandle := 0 , k
    LOCAL im , aImages := {}
@@ -575,7 +571,7 @@ FUNCTION _DefineComboEx ( ;
 
    k := _GetControlFree()
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "COMBO"
    _HMG_aControlNames  [k] :=  ControlName
@@ -676,11 +672,10 @@ FUNCTION _DefineComboEx ( ;
       AAdd ( _HMG_aFormBrowseList [ GetFormIndex ( cParentForm ) ] , k )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 PROCEDURE _DataComboRefresh ( i )  // (JK) Modified for extend COMBO HMG 1.0 Build 8
-*-----------------------------------------------------------------------------*
+
    LOCAL BackValue , BackRec , WorkArea , cField , ControlHandle
 
    IF Empty ( _HMG_aControlCaption [i] )
@@ -719,11 +714,11 @@ PROCEDURE _DataComboRefresh ( i )  // (JK) Modified for extend COMBO HMG 1.0 Bui
       _SetValue ( , , BackValue , i )
    ENDIF
 
-RETURN
-// (JK) HMG 1.0 Experimental Build 8e
-*-----------------------------------------------------------------------------*
+   RETURN
+   // (JK) HMG 1.0 Experimental Build 8e
+
 FUNCTION _SetGetDropDownWidth ( ControlName, ParentForm, nWidth )
-*-----------------------------------------------------------------------------*
+
    LOCAL h
 
    IF _IsComboExtend( ControlName, ParentForm )
@@ -741,4 +736,5 @@ FUNCTION _SetGetDropDownWidth ( ControlName, ParentForm, nWidth )
       nWidth := GetDropDownWidth ( h )
    ENDIF
 
-RETURN nWidth
+   RETURN nWidth
+

@@ -27,8 +27,10 @@ STATIC tss_nmenu := 1, ts_zx_poz := 0, tss_zx_poz := 0, ts_nkla := 0, tss_nkla :
 STATIC ts_y := 0, ts_x := 0, ts_color1, ts_color2, ts_color3, runonce := .F.
 
 // ------------------------------------------------------------------------------------------------
+
 PROCEDURE TsMenu
-// ------------------------------------------------------------------------------------------------
+
+   // ------------------------------------------------------------------------------------------------
 
    LOCAL i, iv, v, cwybor := '', tab_m := {}, o
    PRIVATE zpp := 1
@@ -106,38 +108,40 @@ PROCEDURE TsMenu
          &ob:bUserKeys := {| ts_nkey, nFlags| f_ts_key( ts_nkey, nflags ) } // use a key
          &ob:ChangeFont( afont[ 11 ], 3, 1 )
 
-         END TBROWSE
-         &ob:hide()
-      ENDIF
-      ztsm_szer := 1
-   NEXT
+      END TBROWSE
+      &ob:hide()
+   ENDIF
+   ztsm_szer := 1
+NEXT
 
-   ts_ob1:show()
-   ts_ob1:reset()
-   ts_ob1:setfocus()
-   ts_ob1:DrawSelect()
-   SetProperty( ts_okno, 'L1', 'BackColor', ts_color3 ) // first LABEL horizontal menu
-   SetProperty( ts_okno, 'L1', 'FontColor', ts_color1 )
+ts_ob1:show()
+ts_ob1:reset()
+ts_ob1:setfocus()
+ts_ob1:DrawSelect()
+SetProperty( ts_okno, 'L1', 'BackColor', ts_color3 ) // first LABEL horizontal menu
+SetProperty( ts_okno, 'L1', 'FontColor', ts_color1 )
 
-   FOR i := 1 TO Len( zhotkey ) // horizontal menu, declare the hot keys
-      v := ntrim( i )
-      zzob := '{|| f_ts_lr(' + v + ',.t.) }'
-      _DefineHotKey ( ts_okno, 1, Asc( SubStr( zhotkey, i, 1 ) ), &zzob  ) // hot key of labels
-   NEXT
-   SetProperty( ts_okno, 'ts_ob1', 'show' ) // show first vertical menu
+FOR i := 1 TO Len( zhotkey ) // horizontal menu, declare the hot keys
+   v := ntrim( i )
+   zzob := '{|| f_ts_lr(' + v + ',.t.) }'
+   _DefineHotKey ( ts_okno, 1, Asc( SubStr( zhotkey, i, 1 ) ), &zzob  ) // hot key of labels
+NEXT
+SetProperty( ts_okno, 'ts_ob1', 'show' ) // show first vertical menu
 
-   // ON KEY RETURN OF &ts_okno ACTION f_tsrun()        // selected items - letter - enter - DBLCLICK
-   ON KEY ESCAPE OF &ts_okno ACTION DoMethod ( ts_okno, "release" ) // exit
-   DoMethod ( ts_okno, "restore" )
-   SetProperty( ts_okno, 'ts_ob1', 'show' )
+// ON KEY RETURN OF &ts_okno ACTION f_tsrun()        // selected items - letter - enter - DBLCLICK
+ON KEY ESCAPE OF &ts_okno ACTION DoMethod ( ts_okno, "release" ) // exit
+DoMethod ( ts_okno, "restore" )
+SetProperty( ts_okno, 'ts_ob1', 'show' )
 
 RETURN
 // ------------------------------------------------------------------------------------------------------------
+
 STATIC PROCEDURE f_tsrun() // selected items
 
    LOCAL zob := 'ts_ob' + Str( ts_dpl, 1 )
    LOCAL tx := MEG[ ts_dpl, 2, &zob:nat, 2 ]
    LOCAL zKol, oCol, nRow
+
    IF ValType( tx ) = 'B'
       Eval( tx )     // procedure to perform
    ELSE
@@ -153,8 +157,9 @@ STATIC PROCEDURE f_tsrun() // selected items
       ENDIF
    ENDIF
 
-RETURN
-// ------------------------------------------------------------------------------------------------------------
+   RETURN
+   // ------------------------------------------------------------------------------------------------------------
+
 STATIC PROCEDURE f_ts_key( ts_nkey, nflags ) // pressed a key, main menu
 
    LOCAL zob := 'ts_ob' + Str( ts_dpl, 1 )     // assignment  handle array
@@ -168,6 +173,7 @@ STATIC PROCEDURE f_ts_key( ts_nkey, nflags ) // pressed a key, main menu
       ts_nkey := 38
       ts_nkla := 38
       ts_zx_poz := -1
+
       RETURN
    ELSEIF ts_nkey = 38 .AND. ts_zx_poz = 1 // if the cursor up and the pointer to the beginning
       &zob:nat := nl
@@ -175,6 +181,7 @@ STATIC PROCEDURE f_ts_key( ts_nkey, nflags ) // pressed a key, main menu
       ts_zx_poz := -nl       // pointer position at the end of the negative
       ts_nkey := 40
       ts_nkla := 40
+
       RETURN
    ELSE
       ts_nkla := ts_nkey
@@ -182,10 +189,12 @@ STATIC PROCEDURE f_ts_key( ts_nkey, nflags ) // pressed a key, main menu
    IF ts_nkey = 37     // if the cursor to the left
       ts_zx_poz := 0    // pointer to zero position
       f_ts_lr( -1, .F. )    // transfer to another menu to the left
+
       RETURN
    ELSEIF ts_nkey = 39   // if the cursor to the right
       ts_zx_poz := 0    // pointer to zero position
       f_ts_lr( 1, .F. )     // transfer to another menu to the right
+
       RETURN
    ENDIF
 
@@ -203,8 +212,9 @@ STATIC PROCEDURE f_ts_key( ts_nkey, nflags ) // pressed a key, main menu
       SetProperty( ts_okno, zob, 'Refresh' )
    ENDIF
 
-RETURN
-// ------------------------------------------------------------------------------------------------------------
+   RETURN
+   // ------------------------------------------------------------------------------------------------------------
+
 STATIC PROCEDURE f_ts_change    // If the pointer change
 
    LOCAL nl := 0
@@ -216,6 +226,7 @@ STATIC PROCEDURE f_ts_change    // If the pointer change
       &zob:nat := Abs( ts_zx_poz )    // new position
       &zob:UpAStable()        // show cursor menu
       ts_zx_poz := Abs( ts_zx_poz )   // save old position
+
       RETURN
    ENDIF
 
@@ -238,8 +249,9 @@ STATIC PROCEDURE f_ts_change    // If the pointer change
       ENDIF
    ENDIF
 
-RETURN
-// ------------------------------------------------------------------------------------------------------------
+   RETURN
+   // ------------------------------------------------------------------------------------------------------------
+
 PROCEDURE f_ts_lr( zco, jak )     // transfer to other menu, right or left
 
    LOCAL lob := 'L' + Str( ts_dpl, 1 )    // label holder
@@ -279,8 +291,9 @@ PROCEDURE f_ts_lr( zco, jak )     // transfer to other menu, right or left
    &zob:UpAStable()          //
    ts_zx_poz := &zob:nat     // recording a pointer array
 
-RETURN
-// ---------------------------------------------------------------
+   RETURN
+   // ---------------------------------------------------------------
+
 FUNCTION fmenu()  // submenu or menu from key
 
    LOCAL zsze := 1, zcenter := .F., o_pm, ncap := 0, nszy := 0, i
@@ -359,16 +372,18 @@ FUNCTION fmenu()  // submenu or menu from key
    _ActivateWindow ( { o_pm }, .F. )
    tss_nmenu -= 1
 
-RETURN ( tss_wyb )
-// --------------------------------------------------------------------------------------
+   RETURN ( tss_wyb )
+   // --------------------------------------------------------------------------------------
+
 PROCEDURE f_tss_close()
 
    LOCAL o_pm := 'okm' + Str( tss_nmenu, 1 )
 
    RELEASE WINDOW &o_pm
 
-RETURN
-// --------------------------------------------------------------------------------------
+   RETURN
+   // --------------------------------------------------------------------------------------
+
 STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
 
    LOCAL zpp, zkol, nrow, ocol, ncrow, nl
@@ -383,6 +398,7 @@ STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
       IF ValType( ax[ zpp, 2 ] ) = 'B'
          IF runonce
             runonce := .F.
+
             RETURN
          ENDIF
          runonce := .T.
@@ -399,6 +415,7 @@ STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
       ELSE
          tss_wyb := ax[ zpp, 2 ]
          f_tss_close()
+
          RETURN
       ENDIF
    ENDIF
@@ -410,6 +427,7 @@ STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
       ts_nkey := 38
       tss_nkla := 38
       tss_zx_poz := -1
+
       RETURN
    ELSEIF ts_nkey = 38 .AND. tss_zx_poz = 1
       &mob:nat := nl
@@ -417,6 +435,7 @@ STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
       tss_zx_poz := -nl
       ts_nkey := 40
       tss_nkla := 40
+
       RETURN
    ELSE
       tss_nkla := ts_nkey
@@ -440,13 +459,15 @@ STATIC PROCEDURE f_ts_key_pod( ts_nkey, nflags )
          ELSE
             tss_wyb := ax[ zpp, 2 ]
             f_tss_close()
+
             RETURN
          ENDIF
       ENDIF
    ENDIF
 
-RETURN
-// ------------------------------------------------------------------------------------------------------------
+   RETURN
+   // ------------------------------------------------------------------------------------------------------------
+
 STATIC PROCEDURE f_tss_run()
 
    LOCAL zkol, nrow, ocol, ncrow
@@ -458,6 +479,7 @@ STATIC PROCEDURE f_tss_run()
    IF ValType( ax[ zpp, 2 ] ) = 'B'
       IF runonce
          runonce := .F.
+
          RETURN
       ENDIF
       runonce := .T.
@@ -475,21 +497,25 @@ STATIC PROCEDURE f_tss_run()
       ELSE
          tss_wyb := ax[ zpp, 2 ]
          f_tss_close()
+
          RETURN
       ENDIF
    ENDIF
 
-RETURN
-// --------------------------------------------------------------------------------------
+   RETURN
+   // --------------------------------------------------------------------------------------
+
 PROCEDURE f_tss_change()
 
    LOCAL nl := 0
    LOCAL mob := 'obm' + Str( tss_nmenu, 1 )
+
    IF tss_zx_poz < 0
       tss_nkla := 0
       &mob:nat := Abs( tss_zx_poz )
       &mob:UpAStable()
       tss_zx_poz := Abs( tss_zx_poz )
+
       RETURN
    ENDIF
    IF ( tss_nkla = 40 )
@@ -505,4 +531,5 @@ PROCEDURE f_tss_change()
    ENDIF
    tss_zx_poz := &mob:nat
 
-RETURN
+   RETURN
+

@@ -1,19 +1,17 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2003-06 Grigory Filatov <gfilatov@inbox.ru>
 */
 ANNOUNCE RDDSYS
 
 #include <minigui.ch>
 
 STATIC cIniFile
-*------------------------------------------------------------------------------*
+
 PROCEDURE Main()
-*------------------------------------------------------------------------------*
+
    LOCAL cDefCharSet := "QqWwEeRr456_TtYyUuIi#OoPpAaSs123-DdFfGgHhJj#KkL_Zz7890XxC-cVvBbNnMm"
    LOCAL nPassword := 10, cCharSet := cDefCharSet
 
@@ -40,11 +38,10 @@ PROCEDURE Main()
 
    ACTIVATE WINDOW main
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE GenPass( nLen, cSet )
-*------------------------------------------------------------------------------*
+
    LOCAL nCnt := Len( cSet ), cPass := "", i, cLet
 
    FOR i := 1 TO nLen
@@ -56,11 +53,9 @@ PROCEDURE GenPass( nLen, cSet )
 
    main.text_12.value := cPass
 
-RETURN
+   RETURN
 
-*------------------------------------------------------------------------------*
 PROCEDURE SaveIni( nLen, cSet )
-*------------------------------------------------------------------------------*
 
    BEGIN INI FILE cIniFile
 
@@ -69,15 +64,15 @@ PROCEDURE SaveIni( nLen, cSet )
 
    END INI
 
-RETURN
+   RETURN
 
-#define MsgInfo( c, t ) MsgInfo( c, t, , .F. )
-*------------------------------------------------------------------------------*
+   #define MsgInfo( c, t ) MsgInfo( c, t, , .F. )
+
 FUNCTION MsgAbout()
-*------------------------------------------------------------------------------*
 
-RETURN MsgInfo( PadC( 'Password Generator - FREEWARE', 40 ) + CRLF + ;
+   RETURN MsgInfo( PadC( 'Password Generator - FREEWARE', 40 ) + CRLF + ;
       "Copyright " + Chr( 169 ) + " 2003-2006 Grigory Filatov" + CRLF + CRLF + ;
       PadC( "eMail: gfilatov@inbox.ru", 40 ) + CRLF + CRLF + ;
       PadC( "This program is Freeware!", 40 ) + CRLF + ;
       PadC( "Copying is allowed!", 42 ), 'About' )
+

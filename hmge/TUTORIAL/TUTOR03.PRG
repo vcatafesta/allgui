@@ -1,19 +1,19 @@
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-    DEFINE WINDOW Win_1 ;
-        AT 0,0 ;
-        WIDTH 400 ;
-        HEIGHT 200 ;
-        TITLE 'Tutor 03 - Label Test' ;
-        MAIN 
+   DEFINE WINDOW Win_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'Tutor 03 - Label Test' ;
+         MAIN
 
-        @ 100,10 LABEL Label_1 VALUE 'This is a Label!'
+      @ 100,10 LABEL Label_1 VALUE 'This is a Label!'
 
-    END WINDOW
+   END WINDOW
 
-    ACTIVATE WINDOW Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
+   RETURN
 

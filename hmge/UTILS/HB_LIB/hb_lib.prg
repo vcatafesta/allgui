@@ -1,8 +1,7 @@
 /*
- * Program: Harbour librarian utility
- * Author: Igor Nazarov
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* Program: Harbour librarian utility
+* Author: Igor Nazarov
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -16,10 +15,13 @@ REQUEST SQLMIX
 MEMVAR cIniFile
 MEMVAR cTLibPath
 MEMVAR cLibPath
+
 STATIC BRW_1
 
 /****************************************************************************/
+
 FUNCTION Main()
+
    LOCAL lIniFile := .F.
 
    PUBLIC cIniFile   := ""
@@ -54,120 +56,120 @@ FUNCTION Main()
 
    // Drawing Main form
    DEFINE WINDOW Form_0 ;
-      AT 0, 0 ;
-      WIDTH 800 ;
-      HEIGHT 590 ;
-      TITLE 'Content of libraries of HARBOUR compiler for Borland C++' ;
-      MAIN ;
-      NOSIZE ;
-      NOMAXIMIZE ;
-      ON INIT { || ScanLib() }
+         AT 0, 0 ;
+         WIDTH 800 ;
+         HEIGHT 590 ;
+         TITLE 'Content of libraries of HARBOUR compiler for Borland C++' ;
+         MAIN ;
+         NOSIZE ;
+         NOMAXIMIZE ;
+         ON INIT { || ScanLib() }
 
       DEFINE CHECKBOX CHECK_LIB
-            ROW	   5
-            COL    10
-            WIDTH  200
-            HEIGHT 16
-            VALUE .F.
-            FONTNAME "ARIAL"
-            FONTSIZE 8
-            CAPTION 'Filter of LIB files'
-            ON CHANGE FILTER_LIB()
-            TABSTOP .F.
+         ROW      5
+         COL    10
+         WIDTH  200
+         HEIGHT 16
+         VALUE .F.
+         FONTNAME "ARIAL"
+         FONTSIZE 8
+         CAPTION 'Filter of LIB files'
+         ON CHANGE FILTER_LIB()
+         TABSTOP .F.
       END CHECKBOX
 
       DEFINE COMBOBOX Combo_LIB
-            ROW    25
-            COL    10
-            WIDTH  200
-            HEIGHT 200
-            ITEMS {}
-            FONTNAME 'Arial'
-            FONTSIZE 8
-            VALUE 0
-            ONCHANGE FILTER_LIB()
+         ROW    25
+         COL    10
+         WIDTH  200
+         HEIGHT 200
+         ITEMS {}
+         FONTNAME 'Arial'
+         FONTSIZE 8
+         VALUE 0
+         ONCHANGE FILTER_LIB()
       END COMBOBOX
 
       DEFINE LABEL Label_Func
-            ROW    5
-            COL    480
-            WIDTH  300
-            HEIGHT 16
-            VALUE "Search by content in the function name"
+         ROW    5
+         COL    480
+         WIDTH  300
+         HEIGHT 16
+         VALUE "Search by content in the function name"
       END LABEL
 
       DEFINE GETBOX GetBox_Func
-            ROW    25
-            COL    480
-            WIDTH  300
-            HEIGHT 20
-            VALUE ''
-            PICTURE Replicate( 'X', 300 )
-            FONTNAME 'Arial'
-            FONTSIZE 9
-            TOOLTIP 'Search by content in the function name'
-            ON CHANGE FILTER_LIB()
-      END GETBOX
+      ROW    25
+      COL    480
+      WIDTH  300
+      HEIGHT 20
+      VALUE ''
+      PICTURE Replicate( 'X', 300 )
+      FONTNAME 'Arial'
+      FONTSIZE 9
+      TOOLTIP 'Search by content in the function name'
+      ON CHANGE FILTER_LIB()
+   END GETBOX
 
-      DEFINE BUTTONEX Button_Exit
-            ROW    520
-            COL    670
-            WIDTH  110
-            HEIGHT 26
-            ACTION ThisWindow.Release
-            CAPTION "Close"
-            TOOLTIP 'Exit from program'
-      END BUTTONEX
+   DEFINE BUTTONEX Button_Exit
+      ROW    520
+      COL    670
+      WIDTH  110
+      HEIGHT 26
+      ACTION ThisWindow.Release
+      CAPTION "Close"
+      TOOLTIP 'Exit from program'
+   END BUTTONEX
 
-      DEFINE BUTTONEX Button_Path
-            ROW    520
-            COL    10
-            WIDTH  110
-            HEIGHT 26
-            ACTION SetupPath()
-            CAPTION "Tuning"
-            TOOLTIP 'Program settings'
-      END BUTTONEX
+   DEFINE BUTTONEX Button_Path
+      ROW    520
+      COL    10
+      WIDTH  110
+      HEIGHT 26
+      ACTION SetupPath()
+      CAPTION "Tuning"
+      TOOLTIP 'Program settings'
+   END BUTTONEX
 
-      DEFINE TBROWSE BRW_1 ;
-            At 55, 10 ;
-            ALIAS "HB_LIB" ;
-            WIDTH  770 ;
-            HEIGHT 450 ;
-            COLORS { CLR_BLACK, CLR_BLUE } ;
-            FONT "MS Sans Serif" ;
-            SIZE 9 ;
-            SELECTOR TRUE
-      END TBROWSE
+   DEFINE TBROWSE BRW_1 ;
+      At 55, 10 ;
+      ALIAS "HB_LIB" ;
+      WIDTH  770 ;
+      HEIGHT 450 ;
+      COLORS { CLR_BLACK, CLR_BLUE } ;
+      FONT "MS Sans Serif" ;
+      SIZE 9 ;
+      SELECTOR TRUE
+END TBROWSE
 
-      BRW_1:LoadFields( TRUE )
-      BRW_1:lCellBrw := FALSE
+BRW_1:LoadFields( TRUE )
+BRW_1:lCellBrw := FALSE
 
-      BRW_1:nSelWidth := 16
-      BRW_1:lNoChangeOrd := TRUE
-      BRW_1:nHeightCell += 1
-      BRW_1:nWheelLines   := 1
-      BRW_1:nHeightHead   := 30
-      BRW_1:Setcolor( { 1, 2 }, { RGB(0,0,128),  RGB(255, 255, 210)},  )
+BRW_1:nSelWidth := 16
+BRW_1:lNoChangeOrd := TRUE
+BRW_1:nHeightCell += 1
+BRW_1:nWheelLines   := 1
+BRW_1:nHeightHead   := 30
+BRW_1:Setcolor( { 1, 2 }, { RGB(0,0,128),  RGB(255, 255, 210)},  )
 
-      BRW_1:SetColSize( 1, 200 )
-      BRW_1:aColumns[ 1 ]:cHeading := "Name of" + CRLF + "LIB file"
-      BRW_1:aColumns[ 1 ]:lEdit    := FALSE
+BRW_1:SetColSize( 1, 200 )
+BRW_1:aColumns[ 1 ]:cHeading := "Name of" + CRLF + "LIB file"
+BRW_1:aColumns[ 1 ]:lEdit    := FALSE
 
-      BRW_1:SetColSize( 2, 250 )
-      BRW_1:aColumns[ 2 ]:cHeading := "Name of" + CRLF + "module"
-      BRW_1:aColumns[ 2 ]:lEdit    := FALSE
+BRW_1:SetColSize( 2, 250 )
+BRW_1:aColumns[ 2 ]:cHeading := "Name of" + CRLF + "module"
+BRW_1:aColumns[ 2 ]:lEdit    := FALSE
 
-      BRW_1:SetColSize( 3, 250 )
-      BRW_1:aColumns[ 3 ]:cHeading := "Function"
-      BRW_1:aColumns[ 3 ]:lEdit    := FALSE
+BRW_1:SetColSize( 3, 250 )
+BRW_1:aColumns[ 3 ]:cHeading := "Function"
+BRW_1:aColumns[ 3 ]:lEdit    := FALSE
 
-   END WINDOW
+END WINDOW
 
-   FILTER_LIB()
+FILTER_LIB()
 
-   // Drawing form with progress bar
-   DEFINE WINDOW Gauge ;
+// Drawing form with progress bar
+DEFINE WINDOW Gauge ;
       AT 0 , 0 ;
       WIDTH 660 HEIGHT 100 ;
       TITLE 'Please, wait...' ;
@@ -176,34 +178,36 @@ FUNCTION Main()
       NOSIZE ;
       NOMAXIMIZE
 
-      DEFINE PROGRESSBAR ProgressBar_1
-            ROW    30
-            COL    6
-            WIDTH  640
-            HEIGHT 28
-            RANGEMIN 0
-            RANGEMAX 100
-      END PROGRESSBAR
+   DEFINE PROGRESSBAR ProgressBar_1
+      ROW    30
+      COL    6
+      WIDTH  640
+      HEIGHT 28
+      RANGEMIN 0
+      RANGEMAX 100
+   END PROGRESSBAR
 
-      DEFINE LABEL Label_1
-            ROW    8
-            COL    10
-            WIDTH  620
-            HEIGHT 16
-            VALUE ""
-      END LABEL
+   DEFINE LABEL Label_1
+      ROW    8
+      COL    10
+      WIDTH  620
+      HEIGHT 16
+      VALUE ""
+   END LABEL
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW Gauge
-   CENTER WINDOW Form_0
+CENTER WINDOW Gauge
+CENTER WINDOW Form_0
 
-   ACTIVATE WINDOW ALL
+ACTIVATE WINDOW ALL
 
 RETURN NIL
 
 /****************************************************************************/
+
 FUNCTION ScanLib()
+
    LOCAL cLog := "LST.$$$"
    LOCAL aPath    := {}
    LOCAL cPath
@@ -225,7 +229,7 @@ FUNCTION ScanLib()
    // Redraw of empty browse
    BRW_1:Reset()
    IF BRW_1:nLen > 0
-       BRW_1:GoTop()
+      BRW_1:GoTop()
    END
    BRW_1:Refresh(.T.)
 
@@ -262,7 +266,6 @@ FUNCTION ScanLib()
          nPass := 0
          oFile := TFileRead():New( cLog )
          oFile:Open( FO_EXCLUSIVE )
-
 
          WHILE oFile:Error() .AND. nPass < 200  // do up to 200 attempts of exclusive access for waiting of ending output of list to cLog
             nPass ++
@@ -303,125 +306,135 @@ FUNCTION ScanLib()
    ELSE
       MsgBox(" Can not found the required EXE moduke " + CRLF + cTLibPath + '\tlib.exe ')
    END
-RETURN NIL
 
-/****************************************************************************/
-// Database filter
+   RETURN NIL
+
+   /****************************************************************************/
+   // Database filter
+
 FUNCTION FILTER_LIB()
-LOCAL cFilter := ""
-LOCAL bFilter
 
-     Form_0.Combo_lib.Enabled := Form_0.Check_lib.Value
+   LOCAL cFilter := ""
+   LOCAL bFilter
 
-    IF !Empty(AllTrim(Form_0.GetBox_Func.Value))
+   Form_0.Combo_lib.Enabled := Form_0.Check_lib.Value
+
+   IF !Empty(AllTrim(Form_0.GetBox_Func.Value))
       cFilter := "'" + Upper(AllTrim(Form_0.GetBox_Func.Value)) + "' $ UPPER(FUNCTION)"
-    END
+   END
 
-    IF Form_0.Check_lib.Value
-       cFilter += IF( !Empty( cFilter), " .AND. ", "") + "LIBRARY = '" + Form_0.Combo_lib.DisplayValue + "'"
-    END
+   IF Form_0.Check_lib.Value
+      cFilter += IF( !Empty( cFilter), " .AND. ", "") + "LIBRARY = '" + Form_0.Combo_lib.DisplayValue + "'"
+   END
 
-    IF !Empty(cFilter)
-       bFilter := &( "{|| " + cFilter + " }" )
-       HB_LIB->(DBSETFILTER(bFilter, cFilter))
-    ELSE
-       HB_LIB->(DBSETFILTER())
-    END
+   IF !Empty(cFilter)
+      bFilter := &( "{|| " + cFilter + " }" )
+      HB_LIB->(DBSETFILTER(bFilter, cFilter))
+   ELSE
+      HB_LIB->(DBSETFILTER())
+   END
 
-    HB_LIB->(DBGoTop())
-    BRW_1:Reset()
+   HB_LIB->(DBGoTop())
+   BRW_1:Reset()
 
-    IF BRW_1:nLen > 0
-       BRW_1:GoTop()
-    END
+   IF BRW_1:nLen > 0
+      BRW_1:GoTop()
+   END
 
-    BRW_1:Refresh(.T.)
+   BRW_1:Refresh(.T.)
 
-RETURN NIL
+   RETURN NIL
 
-/****************************************************************************/
+   /****************************************************************************/
+
 FUNCTION SetupPath()
 
    DEFINE WINDOW Form_1 ;
-      AT 0, 0 ;
-      WIDTH 600 ;
-      HEIGHT 150 ;
-      TITLE 'Paths tuning' ;
-      MODAL ;
-      ON INIT {|| ISTLIB()}
+         AT 0, 0 ;
+         WIDTH 600 ;
+         HEIGHT 150 ;
+         TITLE 'Paths tuning' ;
+         MODAL ;
+         ON INIT {|| ISTLIB()}
 
       DEFINE LABEL Label_Tlib
-            ROW    20
-            COL    10
-            WIDTH  100
-            HEIGHT 16
-            VALUE "Path to TLib.exe"
+         ROW    20
+         COL    10
+         WIDTH  100
+         HEIGHT 16
+         VALUE "Path to TLib.exe"
       END LABEL
 
       DEFINE GETBOX TLIB
-            ROW    20
-            COL    120
-            WIDTH  450
-            HEIGHT 20
-            VALUE M->cTLibPath
-            PICTURE Replicate( 'X', 200 )
-            FONTNAME 'Arial'
-            FONTSIZE 9
-            TOOLTIP 'Path to tLib.exe'
-            ON CHANGE ISTLIB()
-      END GETBOX
+      ROW    20
+      COL    120
+      WIDTH  450
+      HEIGHT 20
+      VALUE M->cTLibPath
+      PICTURE Replicate( 'X', 200 )
+      FONTNAME 'Arial'
+      FONTSIZE 9
+      TOOLTIP 'Path to tLib.exe'
+      ON CHANGE ISTLIB()
+   END GETBOX
 
-      DEFINE LABEL Label_LIb
-            ROW    50
-            COL    10
-            WIDTH  100
-            HEIGHT 16
-            VALUE "Paths to *.lib"
-      END LABEL
+   DEFINE LABEL Label_LIb
+      ROW    50
+      COL    10
+      WIDTH  100
+      HEIGHT 16
+      VALUE "Paths to *.lib"
+   END LABEL
 
-      DEFINE GETBOX LIB
-            ROW    50
-            COL    120
-            WIDTH  450
-            HEIGHT 20
-            VALUE cLibPath
-            PICTURE Replicate( 'X', 200 )
-            FONTNAME 'Arial'
-            FONTSIZE 9
-            TOOLTIP 'Paths to *.lib divided via ;'
-            ON CHANGE NIL
-      END GETBOX
+   DEFINE GETBOX LIB
+   ROW    50
+   COL    120
+   WIDTH  450
+   HEIGHT 20
+   VALUE cLibPath
+   PICTURE Replicate( 'X', 200 )
+   FONTNAME 'Arial'
+   FONTSIZE 9
+   TOOLTIP 'Paths to *.lib divided via ;'
+   ON CHANGE NIL
+END GETBOX
 
-      DEFINE BUTTONEX Button_Exit
-            ROW    80
-            COL    460
-            WIDTH  110
-            HEIGHT 25
-            ACTION SavePath()
-            CAPTION "Save"
-            TOOLTIP 'Save settings'
-      END BUTTONEX
+DEFINE BUTTONEX Button_Exit
+   ROW    80
+   COL    460
+   WIDTH  110
+   HEIGHT 25
+   ACTION SavePath()
+   CAPTION "Save"
+   TOOLTIP 'Save settings'
+END BUTTONEX
 
-      ON KEY ESCAPE ACTION ThisWindow.Release
+ON KEY ESCAPE ACTION ThisWindow.Release
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW Form_1
-   ACTIVATE WINDOW Form_1
+CENTER WINDOW Form_1
+ACTIVATE WINDOW Form_1
+
 RETURN NIL
 
 /****************************************************************************/
+
 FUNCTION ISTLIB()
+
    IF File(AllTrim(Form_1.Tlib.Value )+ "\Tlib.exe" )
       Form_1.Tlib.BackColor := { 206, 250, 191 }
    ELSE
       Form_1.Tlib.BackColor := { 243, 208, 210 }
    END
    Form_1.lib.BackColor := { 206, 250, 191 }
-RETURN NIL
 
-/****************************************************************************/
+   RETURN NIL
+
+   /****************************************************************************/
+
 FUNCTION SavePAth()
+
    M->cTLibPath := RemRight( AllTrim(Form_1.Tlib.Value ), "\")
    M->cLibPath := RemRight( AllTrim(Form_1.lib.Value ), "\")
    BEGIN INI FILENAME ( cIniFile )
@@ -430,6 +443,7 @@ FUNCTION SavePAth()
    END INI
    Form_1.Release
    ScanLib()
-RETURN NIL
 
-/****************************************************************************/
+   RETURN NIL
+
+   /****************************************************************************/

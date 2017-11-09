@@ -1,144 +1,140 @@
 /*
- * MiniGUI WMI Service Demo
- *
- * (c) 2009 Logoshniy Sergey <serlogosh@yandex.ru>
- *
- * Revised by Grigory Filatov <gfilatov@inbox.ru>
+* MiniGUI WMI Service Demo
+* (c) 2009 Logoshniy Sergey <serlogosh@yandex.ru>
+* Revised by Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 
-Procedure Main
-  
-	Set Century On
-	Set Date Ansi
+PROCEDURE Main
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 400 ;
-		HEIGHT 200 ;
-		TITLE 'WMI Service Demo 2' ;
-		MAIN ;
-		ON INTERACTIVECLOSE MsgYesNo ( 'Are You Sure ?', 'Exit' )
+   SET CENTURY ON
+   SET DATE ANSI
 
-		DEFINE BUTTON Button_1
-			ROW	10
-			COL	10
-			WIDTH	120
-			CAPTION 'OS Info'
-			ACTION OSInfo()
-		END BUTTON
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'WMI Service Demo 2' ;
+         MAIN ;
+         ON INTERACTIVECLOSE MsgYesNo ( 'Are You Sure ?', 'Exit' )
 
-		DEFINE BUTTON Button_2
-			ROW	40
-			COL	10
-			WIDTH	120
-			CAPTION 'Bios Info'
-			ACTION BiosInfo()
-		END BUTTON
+      DEFINE BUTTON Button_1
+         ROW   10
+         COL   10
+         WIDTH   120
+         CAPTION 'OS Info'
+         ACTION OSInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_3
-			ROW	70
-			COL	10
-			WIDTH	120
-			CAPTION 'Video Info'
-			ACTION VideoInfo()
-		END BUTTON
+      DEFINE BUTTON Button_2
+         ROW   40
+         COL   10
+         WIDTH   120
+         CAPTION 'Bios Info'
+         ACTION BiosInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_4
-			ROW	100
-			COL	10
-			WIDTH	120
-			CAPTION 'Monitor Info'
-			ACTION MonitorInfo()
-		END BUTTON
+      DEFINE BUTTON Button_3
+         ROW   70
+         COL   10
+         WIDTH   120
+         CAPTION 'Video Info'
+         ACTION VideoInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_5
-			ROW	130
-			COL	10
-			WIDTH	120
-			CAPTION 'Logical Disk Info'
-			ACTION LogicalDiskInfo()
-		END BUTTON
+      DEFINE BUTTON Button_4
+         ROW   100
+         COL   10
+         WIDTH   120
+         CAPTION 'Monitor Info'
+         ACTION MonitorInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_6
-			ROW	10
-			COL	160
-			WIDTH	120
-			CAPTION 'Memory Info'
-			ACTION MemoryInfo()
-		END BUTTON
+      DEFINE BUTTON Button_5
+         ROW   130
+         COL   10
+         WIDTH   120
+         CAPTION 'Logical Disk Info'
+         ACTION LogicalDiskInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_7
-			ROW	40
-			COL	160
-			WIDTH	120
-			CAPTION 'Printer Info'
-			ACTION PrinterInfo()
-		END BUTTON
+      DEFINE BUTTON Button_6
+         ROW   10
+         COL   160
+         WIDTH   120
+         CAPTION 'Memory Info'
+         ACTION MemoryInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_8
-			ROW	70
-			COL	160
-			WIDTH	120
-			CAPTION 'Net Adapter Info'
-			ACTION NetAdapterInfo()
-		END BUTTON
+      DEFINE BUTTON Button_7
+         ROW   40
+         COL   160
+         WIDTH   120
+         CAPTION 'Printer Info'
+         ACTION PrinterInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_9
-			ROW	100
-			COL	160
-			WIDTH	120
-			CAPTION 'Sound Info'
-			ACTION SoundInfo()
-		END BUTTON
+      DEFINE BUTTON Button_8
+         ROW   70
+         COL   160
+         WIDTH   120
+         CAPTION 'Net Adapter Info'
+         ACTION NetAdapterInfo()
+      END BUTTON
 
-		DEFINE BUTTON Button_10
-			ROW	130
-			COL	160
-			WIDTH	120
-			CAPTION 'Environment vars'
-			ACTION EnvVarInfo()
-		END BUTTON
+      DEFINE BUTTON Button_9
+         ROW   100
+         COL   160
+         WIDTH   120
+         CAPTION 'Sound Info'
+         ACTION SoundInfo()
+      END BUTTON
 
-	END WINDOW
+      DEFINE BUTTON Button_10
+         ROW   130
+         COL   160
+         WIDTH   120
+         CAPTION 'Environment vars'
+         ACTION EnvVarInfo()
+      END BUTTON
 
-	CENTER WINDOW Form_1
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
-#translate IFNOTCHAR( <exp1>,<exp2> ) ;
-=> ;
-IF( VALTYPE( <exp1> ) != "C",<exp2>,<exp1> )
+   RETURN
 
-#define IS_DATE(x)                   (VALTYPE(x) == "D")
-#define IS_LOGICAL(x)                (VALTYPE(x) == "L")
-#define IS_NUMERIC(x)                (VALTYPE(x) == "N")
-#define CASE_AT(x,y,z)               z[AT(x,y)+1]
-#define TRIM_NUMBER(x)               LTRIM(STR(x))
-#define NULL                         ""
+   #translate IFNOTCHAR( <exp1>,<exp2> ) ;
+      => ;
+      IF( VALTYPE( <exp1> ) != "C",<exp2>,<exp1> )
 
-#define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
-                             { NULL, ;
-                               x, ;
-                               IF(IS_NUMERIC(x),;
-                                  TRIM_NUMBER(x), ;
-                                  NULL), ;
-                               IF(IS_DATE(x),DTOC(x),NULL),;
-                               IF(IS_LOGICAL(x),;
-                                  IF(x,".T.",".F."), ;
-                                  NULL), ;
-                               x })
-*--------------------------------------------------------*
+   #define IS_DATE(x)                   (VALTYPE(x) == "D")
+   #define IS_LOGICAL(x)                (VALTYPE(x) == "L")
+   #define IS_NUMERIC(x)                (VALTYPE(x) == "N")
+   #define CASE_AT(x,y,z)               z[AT(x,y)+1]
+   #define TRIM_NUMBER(x)               LTRIM(STR(x))
+   #define NULL                         ""
+
+   #define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
+      { NULL, ;
+      x, ;
+      IF(IS_NUMERIC(x),;
+      TRIM_NUMBER(x), ;
+      NULL), ;
+      IF(IS_DATE(x),DTOC(x),NULL),;
+      IF(IS_LOGICAL(x),;
+      IF(x,".T.",".F."), ;
+      NULL), ;
+      x })
 
 FUNCTION MemoryInfo()
 
-   Local oWmi, oMemory
-   Local cInfo := ""
+   LOCAL oWmi, oMemory
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oMemory IN oWmi:ExecQuery( "SELECT * FROM Win32_LogicalMemoryConfiguration" )
 
@@ -146,17 +142,16 @@ FUNCTION MemoryInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION BiosInfo()
 
-   Local oWmi, oBios
-   Local cInfo := ""
+   LOCAL oWmi, oBios
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oBios IN oWmi:ExecQuery( "SELECT * FROM Win32_BIOS" )
 
@@ -166,17 +161,16 @@ FUNCTION BiosInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION MonitorInfo()
 
-   Local oWmi, oMonitor
-   Local cInfo := ""
+   LOCAL oWmi, oMonitor
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oMonitor IN oWmi:ExecQuery( "SELECT * FROM Win32_DesktopMonitor" )
 
@@ -186,17 +180,16 @@ FUNCTION MonitorInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION NetAdapterInfo()
 
-   Local oWmi, oNetA
-   Local cInfo := ""
+   LOCAL oWmi, oNetA
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oNetA IN oWmi:ExecQuery( "SELECT * FROM Win32_NetworkAdapter" )
 
@@ -208,17 +201,16 @@ FUNCTION NetAdapterInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION VideoInfo()
 
-   Local oWmi, oVideo
-   Local cInfo := ""
+   LOCAL oWmi, oVideo
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oVideo IN oWmi:ExecQuery( "SELECT * FROM Win32_VideoController" )
 
@@ -227,41 +219,39 @@ FUNCTION VideoInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION SoundInfo()
 
-   Local oWmi, oSound
-   Local cInfo := ""
+   LOCAL oWmi, oSound
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oSound IN oWmi:ExecQuery( "SELECT * FROM Win32_SoundDevice" )
 
       cInfo+="Name: " +  oSound:ProductName+ CRLF
 
-      if IsWinNT()
+      IF IsWinNT()
 
          cInfo+="Manuf: " +  oSound:Manufacturer+ CRLF
 
-      endif
+      ENDIF
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION CdRomInfo()
 
-   Local oWmi, oCdRom
-   Local cInfo := ""
+   LOCAL oWmi, oCdRom
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oCdRom IN oWmi:ExecQuery( "SELECT * FROM Win32_CDROMDrive" )
 
@@ -271,18 +261,16 @@ FUNCTION CdRomInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
-
+   RETURN NIL
 
 FUNCTION ModemInfo()
 
-   Local oWmi, oModem
-   Local cInfo := ""
+   LOCAL oWmi, oModem
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oModem IN oWmi:ExecQuery( "SELECT * FROM Win32_POTSModem" )
 
@@ -293,18 +281,16 @@ FUNCTION ModemInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
-
+   RETURN NIL
 
 FUNCTION MouseInfo()
 
-   Local oWmi, oMouse
-   Local cInfo := ""
+   LOCAL oWmi, oMouse
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oMouse IN oWmi:ExecQuery( "SELECT * FROM Win32_PointingDevice" )
 
@@ -316,18 +302,16 @@ FUNCTION MouseInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
-
+   RETURN NIL
 
 FUNCTION PrinterInfo()
 
-   Local oWmi, oPrinter
-   Local cInfo := ""
+   LOCAL oWmi, oPrinter
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oPrinter IN oWmi:ExecQuery( "SELECT * FROM Win32_Printer" )
 
@@ -338,17 +322,16 @@ FUNCTION PrinterInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION LogicalDiskInfo()
 
-   Local oWmi, oDrive, cSerialNumber
-   Local cInfo := ""
+   LOCAL oWmi, oDrive, cSerialNumber
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oDrive IN oWmi:ExecQuery( "SELECT * FROM Win32_LogicalDisk" )
 
@@ -364,15 +347,14 @@ FUNCTION LogicalDiskInfo()
 
    MsgInfo( cInfo )
 
-Return nil 
-
+   RETURN NIL
 
 FUNCTION OSInfo()
 
-   Local oWmi, oOs
-   Local cInfo := ""
+   LOCAL oWmi, oOs
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oOs IN oWmi:ExecQuery( "SELECT * FROM Win32_OperatingSystem" )
 
@@ -384,59 +366,57 @@ FUNCTION OSInfo()
       cInfo+="Serial Number: " +  oOs:SerialNumber+ CRLF
       cInfo+="Registered User: " +  oOs:RegisteredUser+ CRLF
 
-      if IsVistaOrLater()
+      IF IsVistaOrLater()
 
          cInfo+="OS Type: " + GetProductType(oOs:OperatingSystemSKU)+ CRLF
 
-      endif
-      if IsWinNT()
+      ENDIF
+      IF IsWinNT()
 
          cInfo+="Install Date: " + DtoC(StoD(Left(oOs:InstallDate, 8)))+ CRLF
          cInfo+="Last BootUp: " + DtoC(StoD(Left(oOs:LastBootUpTime, 8)))+ CRLF
 
-      endif
+      ENDIF
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION GetProductType( nType )
 
-   Local cName := ""
+   LOCAL cName := ""
 
-   Do Case
-      Case nType == 1
-           cName := "Ultimate Edition"
+   DO CASE
+   CASE nType == 1
+      cName := "Ultimate Edition"
 
-      Case nType == 2  // ?
-           cName := "Home Basic Edition"
+   CASE nType == 2  // ?
+      cName := "Home Basic Edition"
 
-      Case nType == 3  // ?
-           cName := "Home Premium Edition"
+   CASE nType == 3  // ?
+      cName := "Home Premium Edition"
 
-      Case nType == 4  // ?
-           cName := "Enterprise Edition"
+   CASE nType == 4  // ?
+      cName := "Enterprise Edition"
 
-      Case nType == 6  // ?
-           cName := "Business Edition"
+   CASE nType == 6  // ?
+      cName := "Business Edition"
 
-      Case nType == 48
-           cName := "Professional Edition"
+   CASE nType == 48
+      cName := "Professional Edition"
 
-   EndCase
+   ENDCASE
 
-RETURN cName
-
+   RETURN cName
 
 FUNCTION EnvVarInfo()
 
-   Local oWmi, oEnvVar
-   Local cInfo := ""
+   LOCAL oWmi, oEnvVar
+   LOCAL cInfo := ""
 
-   oWmi := WmiService() 
+   oWmi := WmiService()
 
    FOR EACH oEnvVar IN oWmi:ExecQuery( "SELECT * FROM Win32_Environment" )
 
@@ -444,22 +424,22 @@ FUNCTION EnvVarInfo()
 
    NEXT
 
-  MsgInfo(cInfo)
+   MsgInfo(cInfo)
 
-RETURN NIL
-
+   RETURN NIL
 
 STATIC FUNCTION WMIService()
 
-   Static oWMI
+   STATIC oWMI
 
-   Local oLocator
+   LOCAL oLocator
 
-   if oWMI == NIL
+   IF oWMI == NIL
 
       oLocator   := CreateObject( "wbemScripting.SwbemLocator" )
       oWMI       := oLocator:ConnectServer()
 
-   endif
+   ENDIF
 
-RETURN oWMI
+   RETURN oWMI
+

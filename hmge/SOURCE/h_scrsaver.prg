@@ -16,35 +16,35 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -54,9 +54,8 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #define SC_SCREENSAVE           61760  // &HF140
 #define SPI_SCREENSAVERRUNNING  97
 
-*-----------------------------------------------------------------------------*
 FUNCTION _BeginScrSaver( cSSaver, lNoShow, cInit, cRelease, cPaint, nTimer, aBackClr )
-*-----------------------------------------------------------------------------*
+
    LOCAL a := {}, x := GetDesktopWidth(), y := GetDesktopHeight(), Dummy := ""
 
    PUBLIC _HMG_SCRSAVERDATA[ 5 ]
@@ -73,52 +72,51 @@ FUNCTION _BeginScrSaver( cSSaver, lNoShow, cInit, cRelease, cPaint, nTimer, aBac
    IF lNoShow
 
       DEFINE WINDOW &cSSaver AT 0, 0;
-         WIDTH x HEIGHT y;
-         MAIN NOSHOW;
-         TOPMOST NOSIZE NOCAPTION;
-         ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
-         ON INIT ( ShowCursor( .F. ), ;
+            WIDTH x HEIGHT y;
+            MAIN NOSHOW;
+            TOPMOST NOSIZE NOCAPTION;
+            ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
+            ON INIT ( ShowCursor( .F. ), ;
             SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) );
-         ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
-         ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
-         ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
+            ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
+            ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
+            ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
             iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) );
-         BACKCOLOR aBackClr
-   ELSE
+            BACKCOLOR aBackClr
+      ELSE
 
-      DEFINE WINDOW &cSSaver AT 0, 0;
-         WIDTH x HEIGHT y;
-         MAIN;
-         TOPMOST NOSIZE NOCAPTION;
-         ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
-         ON INIT ( ShowCursor( .F. ), ;
-            SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) );
-         ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
-         ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
-         ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
-            iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) );
-         BACKCOLOR aBackClr
-   ENDIF
+         DEFINE WINDOW &cSSaver AT 0, 0;
+               WIDTH x HEIGHT y;
+               MAIN;
+               TOPMOST NOSIZE NOCAPTION;
+               ON GOTFOCUS SetCursorPos( x / 2, y / 2 );
+               ON INIT ( ShowCursor( .F. ), ;
+               SystemParametersInfo( SPI_SCREENSAVERRUNNING, 1, @Dummy, 0 ) );
+               ON RELEASE _ReleaseScrSaver( cRelease, cSSaver, cPaint );
+               ON MOUSECLICK iif( _lValidScrSaver(), DoMethod ( cSSaver, 'Release' ), );
+               ON MOUSEMOVE ( a := GetCursorPos(), iif( a[1] # y / 2 .AND. a[2] # x / 2,;
+               iif( _lValidScrSaver(), DoMethod( cSSaver, 'Release' ) , ), ) );
+               BACKCOLOR aBackClr
+         ENDIF
 
-   IF cPaint # NIL
-      DEFINE TIMER Timer_SSaver;
-         INTERVAL nTimer * 1000;
-         ACTION Eval( cPaint )
-   ENDIF
+         IF cPaint # NIL
+            DEFINE TIMER Timer_SSaver;
+               INTERVAL nTimer * 1000;
+               ACTION Eval( cPaint )
+         ENDIF
 
-   END WINDOW
+      END WINDOW
 
-   IF cInit # NIL
+      IF cInit # NIL
 
-      Eval( cInit )
+         Eval( cInit )
 
-   ENDIF
+      ENDIF
 
-RETURN Nil
+      RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _ActivateScrSaver( aForm, cParam )
-*-----------------------------------------------------------------------------*
+
    LOCAL cFileScr, cFileDes
 
    DEFAULT cParam TO iif( _ScrSaverInstall, "-i", "-s" )
@@ -185,11 +183,10 @@ FUNCTION _ActivateScrSaver( aForm, cParam )
 
    ENDCASE
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _ReleaseScrSaver( cRelease, cSSaver, cPaint )
-*-----------------------------------------------------------------------------*
+
    LOCAL Dummy := ""
 
    IF cRelease # NIL
@@ -204,11 +201,10 @@ FUNCTION _ReleaseScrSaver( cRelease, cSSaver, cPaint )
 
    SystemParametersInfo( SPI_SCREENSAVERRUNNING, 0, @Dummy, 0 )
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _lValidScrSaver()
-*-----------------------------------------------------------------------------*
+
    LOCAL oReg, nValue := 1, lRet, ;
       cKey := "ScreenSave" + iif( _HMG_IsXPorLater, "rIsSecure", "UsePassword" )
 
@@ -224,4 +220,5 @@ FUNCTION _lValidScrSaver()
       lRet := .T.
    ENDIF
 
-RETURN lRet
+   RETURN lRet
+

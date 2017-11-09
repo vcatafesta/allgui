@@ -1,11 +1,11 @@
 #include "minigui.ch"
 #include "TSBrowse.ch"
 
-
 PROCEDURE MAIN
 
    LOCAL oBrw, aDatos, aArray, aHead, aSize, aFoot, aPict, aAlign, aName, aFontHF
    LOCAL aFont := {}
+
    // Local hFontHead, hFontFoot
    LOCAL cFontName := _HMG_DefaultFontName
    LOCAL nFontSize := 11
@@ -23,27 +23,27 @@ PROCEDURE MAIN
    AAdd( aFont, GetFontHandle( "Font_2" ) )
 
    DEFINE WINDOW test ;
-      TITLE "SetArray For Report Demo" ;
-      MAIN ;
-      NOMAXIMIZE NOSIZE
+         TITLE "SetArray For Report Demo" ;
+         MAIN ;
+         NOMAXIMIZE NOSIZE
 
-   DEFINE STATUSBAR FONT cFontName SIZE nFontSize
-      STATUSITEM "0"                 // WIDTH 0 FONTCOLOR BLACK
-      STATUSITEM "Item 1" WIDTH 230  // FONTCOLOR BLACK
-      STATUSITEM "Item 2" WIDTH 230  // FONTCOLOR BLACK
-      STATUSITEM "Item 3" WIDTH 230  // FONTCOLOR BLACK
-   END STATUSBAR
+      DEFINE STATUSBAR FONT cFontName SIZE nFontSize
+         STATUSITEM "0"                 // WIDTH 0 FONTCOLOR BLACK
+         STATUSITEM "Item 1" WIDTH 230  // FONTCOLOR BLACK
+         STATUSITEM "Item 2" WIDTH 230  // FONTCOLOR BLACK
+         STATUSITEM "Item 3" WIDTH 230  // FONTCOLOR BLACK
+      END STATUSBAR
 
-   DEFINE TBROWSE oBrw ;
-      AT 1 + iif( IsVistaOrLater(), GetBorderWidth()/2, 0 ), ;
+      DEFINE TBROWSE oBrw ;
+         AT 1 + iif( IsVistaOrLater(), GetBorderWidth()/2, 0 ), ;
          1 + iif( IsVistaOrLater(), GetBorderHeight()/2, 0 ) ;
-      WIDTH test.WIDTH - 2 * GetBorderWidth() ;
-      HEIGHT test.HEIGHT - GetTitleHeight() - ;
+         WIDTH test.WIDTH - 2 * GetBorderWidth() ;
+         HEIGHT test.HEIGHT - GetTitleHeight() - ;
          GetProperty( "test", "StatusBar", "Height" ) - ;
          2 * GetBorderHeight() ;
-      ENUMERATOR ;
-      FONT  cFontName  SIZE  nFontSize ;
-      GRID  EDIT
+         ENUMERATOR ;
+         FONT  cFontName  SIZE  nFontSize ;
+         GRID  EDIT
 
       aDatos   := CreateDatos()
 
@@ -55,11 +55,11 @@ PROCEDURE MAIN
       aAlign   := aDatos[ 6 ]
       aName    := aDatos[ 7 ]
 
-   // hFontHead := aFont[1]                // normal Header
-   // hFontFoot := aFont[2]                //  bold  Footer
-   // aFontHF   := { hFontHead, hFontFoot }
+      // hFontHead := aFont[1]                // normal Header
+      // hFontFoot := aFont[2]                //  bold  Footer
+      // aFontHF   := { hFontHead, hFontFoot }
 
-   // aFontHF   := aFont[1]                // normal Header, Footer
+      // aFontHF   := aFont[1]                // normal Header, Footer
       aFontHF   := aFont[2]                //  bold  Header, Footer
 
       oBrw := SetArrayTo( "oBrw", "test", aArray, aFontHF, aHead, aSize, aFoot, aPict, aAlign, aName )
@@ -77,9 +77,9 @@ PROCEDURE MAIN
 
    END TBROWSE
 
-   END WINDOW
+END WINDOW
 
-   DoMethod( "test", "Activate" )
+DoMethod( "test", "Activate" )
 
 RETURN
 
@@ -92,19 +92,19 @@ STATIC FUNCTION CreateDatos()
    aDatos := Array( k )
    FOR i := 1 TO k
       aDatos[ i ] := { " ", ;                         // 1
-         i, ;                                         // 2
-         ntoc( i ) + "_123", ;                        // 3
-         Date() + i, ;                                // 4
-         PadR( "Test line - " + ntoc( i ), 20 ), ;    // 5
-         Round( ( 10000 -i ) * i / 3, 2 ), ;          // 6
-         100.00 * i, ;                                // 7
-         0.12, ;                                      // 8
-         Round( 100.00 * i * 0.12, 2 ), ;             // 9
-         Round( 1234567.00 / i, 3 ), ;                // 10
-         PadR( "Line " + StrZero( i, 5 ), 20 ), ;     // 11
-         Date(), ;                                    // 12
-         Time(), ;                                    // 13
-         i % 2 == 0 }                                 // 14
+      i, ;                                         // 2
+      ntoc( i ) + "_123", ;                        // 3
+      Date() + i, ;                                // 4
+      PadR( "Test line - " + ntoc( i ), 20 ), ;    // 5
+      Round( ( 10000 -i ) * i / 3, 2 ), ;          // 6
+      100.00 * i, ;                                // 7
+      0.12, ;                                      // 8
+      Round( 100.00 * i * 0.12, 2 ), ;             // 9
+      Round( 1234567.00 / i, 3 ), ;                // 10
+      PadR( "Line " + StrZero( i, 5 ), 20 ), ;     // 11
+      Date(), ;                                    // 12
+      Time(), ;                                    // 13
+      i % 2 == 0 }                                 // 14
    NEXT
 
    aHead  := AClone( aDatos[ 1 ] )
@@ -124,9 +124,10 @@ STATIC FUNCTION CreateDatos()
 
    aAlign    := Array( Len( aDatos[ 1 ] ) )   // тип поля C   - DT_LEFT
    aAlign[ 2 ] := DT_CENTER                   // D,L - DT_CENTER
-                                              // N   - DT_RIGHT
+   // N   - DT_RIGHT
 
    aName     := Array( Len( aDatos[ 1 ] ) )
    AEval( aName, {| x, n| aName[ n ] := "MyName_" + hb_ntos( n ) } )
 
-RETURN { aDatos, aHead, aSize, aFoot, aPict, aAlign, aName }
+   RETURN { aDatos, aHead, aSize, aFoot, aPict, aAlign, aName }
+

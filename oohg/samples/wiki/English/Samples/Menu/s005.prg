@@ -1,15 +1,13 @@
 /*
- * Menu Sample n° 5
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to open a menu item (dynamicaly
- * defined) using it's shortcut key.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Menu Sample n° 5
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to open a menu item (dynamicaly
+* defined) using it's shortcut key.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -19,12 +17,12 @@ FUNCTION Main()
    cShortcut := SUBSTR( cMenuItem, AT( "&", cMenuItem ) + 1, 1 )
 
    DEFINE WINDOW Win_1 ;
-      AT 0,0 ;
-      WIDTH 640 ;
-      HEIGHT 480 ;
-      TITLE "Open Menu" ;
-      MAIN ;
-      ON INIT INSERT_ALT_KEY( ASC( cShortcut ) )
+         AT 0,0 ;
+         WIDTH 640 ;
+         HEIGHT 480 ;
+         TITLE "Open Menu" ;
+         MAIN ;
+         ON INIT INSERT_ALT_KEY( ASC( cShortcut ) )
 
       DEFINE MAIN MENU OF Win_1
          POPUP cMenuItem
@@ -39,7 +37,9 @@ FUNCTION Main()
       The trick is done by defining an accelerator key for the menu,
       using an & before the corresponding letter (in this case F),
       and simulating that the user has pressed Alt+F with the
+
       function INSERT_ALT_F().
+
       */
 
       @ 100, 10 LABEL Lbl_1 ;
@@ -52,7 +52,7 @@ FUNCTION Main()
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN NIL
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -68,6 +68,7 @@ HB_FUNC( INSERT_ALT_KEY )
 
 #pragma ENDDUMP
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

@@ -1,24 +1,22 @@
 /*
- * Windows Registry Sample n° 1
- * Author: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licensed under The Code Project Open License (CPOL) 1.02
- * See <http://www.codeproject.com/info/cpol10.aspx>
- *
- * This sample shows how to save the position and size of a
- * form and how to restore them when the form is initialized.
- *
- * Visit us at https://github.com/fyurisich/OOHG_Samples or at
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Windows Registry Sample n° 1
+* Author: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licensed under The Code Project Open License (CPOL) 1.02
+* See <http://www.codeproject.com/info/cpol10.aspx>
+* This sample shows how to save the position and size of a
+* form and how to restore them when the form is initialized.
+* Visit us at https://github.com/fyurisich/OOHG_Samples or at
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main
 
    DEFINE WINDOW FormMain ;
-      OBJ oForm ;
-      TITLE 'Registry Operations' ;
-      ON INIT LoadReg()
+         OBJ oForm ;
+         TITLE 'Registry Operations' ;
+         ON INIT LoadReg()
 
       @ 20, 20 BUTTON btn_Save ;
          CAPTION 'Save' ;
@@ -34,14 +32,13 @@ FUNCTION Main
    CENTER WINDOW FormMain
    ACTIVATE WINDOW FormMain
 
-RETURN NIL
+   RETURN NIL
 
-
-#define hKey HKEY_CURRENT_USER
-#define cKey 'Software\OOHG\RegistrySample\FormMain'
-
+   #define hKey HKEY_CURRENT_USER
+   #define cKey 'Software\OOHG\RegistrySample\FormMain'
 
 FUNCTION LoadReg
+
    LOCAL col, row, width, height
 
    IF IsRegistryKey( hKey, cKey )
@@ -63,13 +60,13 @@ FUNCTION LoadReg
       ENDIF
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION SaveReg
 
    IF ! IsRegistryKey( hKey, cKey )
       IF ! CreateRegistryKey( hKey, cKey )
+
          RETURN NIL
       ENDIF
    ENDIF
@@ -81,21 +78,21 @@ FUNCTION SaveReg
       SetRegistryValue( hKey, cKey, 'height', oForm:Height )
    ENDIF
 
-RETURN NIL
-
+   RETURN NIL
 
 FUNCTION DeleteReg
 
-   DeleteRegistryVar( hKey, cKey, 'col' )
-   DeleteRegistryVar( hKey, cKey, 'row' )
-   DeleteRegistryVar( hKey, cKey, 'width' )
-   DeleteRegistryVar( hKey, cKey, 'height' )
-   DeleteRegistryKey( hKey, 'Software\OOHG\RegistrySample', 'FormMain' )
-   DeleteRegistryKey( hKey, 'Software\OOHG', 'RegistrySample' )
-   DeleteRegistryKey( hKey, 'Software', 'OOHG' )
+   DELETERegistryVar( hKey, cKey, 'col' )
+   DELETERegistryVar( hKey, cKey, 'row' )
+   DELETERegistryVar( hKey, cKey, 'width' )
+   DELETERegistryVar( hKey, cKey, 'height' )
+   DELETERegistryKey( hKey, 'Software\OOHG\RegistrySample', 'FormMain' )
+   DELETERegistryKey( hKey, 'Software\OOHG', 'RegistrySample' )
+   DELETERegistryKey( hKey, 'Software', 'OOHG' )
 
-RETURN NIL
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

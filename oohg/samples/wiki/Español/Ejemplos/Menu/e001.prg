@@ -1,32 +1,30 @@
 /*
- * Ejemplo Menu n° 1
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar la cláusula
- * BREAKMENU [SEPARATOR] para cambiar la forma en
- * que un menú es mostrado.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Menu n° 1
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar la cláusula
+* BREAKMENU [SEPARATOR] para cambiar la forma en
+* que un menú es mostrado.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
 FUNCTION Main()
 
    DEFINE WINDOW Form_1 ;
-      OBJ oForm_1 ;
-      AT 0,0 ;
-      WIDTH 400 ;
-      HEIGHT 200 ;
-      TITLE 'OOHG - Menú con la cláusula BREAKMENU' ;
-      MAIN
+         OBJ oForm_1 ;
+         AT 0,0 ;
+         WIDTH 400 ;
+         HEIGHT 200 ;
+         TITLE 'OOHG - Menú con la cláusula BREAKMENU' ;
+         MAIN
 
       DEFINE STATUSBAR
-        KEYBOARD
-        DATE
+         KEYBOARD
+         DATE
       END STATUSBAR
 
       DEFINE MAIN MENU
@@ -106,8 +104,9 @@ FUNCTION Main()
 
    ACTIVATE WINDOW Form_1
 
-RETURN Nil
+   RETURN NIL
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

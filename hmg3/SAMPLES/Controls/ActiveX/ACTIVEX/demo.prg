@@ -4,15 +4,15 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
-	Load Window Demo
-	Activate Window Demo
+   LOAD WINDOW Demo
+   ACTIVATE WINDOW Demo
 
-Return
+   RETURN
 
-Procedure demo_button_1_action
+PROCEDURE demo_button_1_action
 
-	Demo.Activex_1.Object:Navigate("http://www.hmgforum.com/")
+   Demo.Activex_1.Object:Navigate("http://www.hmgforum.com/")
 
-Return
+   RETURN

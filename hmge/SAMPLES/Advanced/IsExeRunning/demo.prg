@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -13,45 +11,45 @@
 #define MsgAlert( c ) MsgEXCLAMATION( c, "Warning", , .f. )
 
 FUNCTION Main()
-Local hWnd
 
-    IF IsExeRunning( cFileNoPath( HB_ArgV( 0 ) ) )
+   LOCAL hWnd
 
-	MsgAlert( "The " + APP_TITLE + " is already running!" )
+   IF IsExeRunning( cFileNoPath( HB_ArgV( 0 ) ) )
 
-	hWnd := FindWindow( APP_TITLE )
+      MsgAlert( "The " + APP_TITLE + " is already running!" )
 
-	IF hWnd > 0
+      hWnd := FindWindow( APP_TITLE )
 
-		IF IsIconic( hWnd )
-			_Restore( hWnd )
-		ELSE
-			SetForeGroundWindow( hWnd )
-		ENDIF
-	ELSE
+      IF hWnd > 0
 
-		MsgStop( "Cannot find application window!", "Error", , .f. )
+         IF IsIconic( hWnd )
+            _Restore( hWnd )
+         ELSE
+            SetForeGroundWindow( hWnd )
+         ENDIF
+      ELSE
 
-	ENDIF
+         MsgStop( "Cannot find application window!", "Error", , .f. )
 
-    ELSE
+      ENDIF
 
-	DEFINE WINDOW Form_Main ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE APP_TITLE ;
-		MAIN
+   ELSE
 
-	END WINDOW
+      DEFINE WINDOW Form_Main ;
+            AT 0,0 ;
+            WIDTH 640 HEIGHT 480 ;
+            TITLE APP_TITLE ;
+            MAIN
 
-	CENTER WINDOW Form_Main
+      END WINDOW
 
-	ACTIVATE WINDOW Form_Main
+      CENTER WINDOW Form_Main
 
-    ENDIF
+      ACTIVATE WINDOW Form_Main
 
-RETURN NIL
+   ENDIF
 
+   RETURN NIL
 
 #pragma BEGINDUMP
 
@@ -64,3 +62,4 @@ HB_FUNC ( FINDWINDOW )
 }
 
 #pragma ENDDUMP
+

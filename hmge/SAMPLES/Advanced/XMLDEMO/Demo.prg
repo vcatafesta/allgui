@@ -1,89 +1,84 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
- *
- * This sample demonstrates reading/writing XML file and handling menu items
- * while run-time.
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2005 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* This sample demonstrates reading/writing XML file and handling menu items
+* while run-time.
 */
 
 #include "minigui.ch"
 #include "i_xml.ch"
 
-Memvar cFileIni
-Memvar oXmlDoc, lIniChanged, cId, cIdXML
-Memvar mVar
+MEMVAR cFileIni
+MEMVAR oXmlDoc, lIniChanged, cId, cIdXML
+MEMVAR mVar
 
-*-----------------------------------------------------------------------------*
-Function Main
-*-----------------------------------------------------------------------------*
-	Local oXmlNode, i, fname := "", action
+FUNCTION Main
 
-	Public cFileIni := "demo.xml"
+   LOCAL oXmlNode, i, fname := "", action
 
-	cFileIni := CurDrive()+':\'+Curdir()+'\'+cFileIni
+   PUBLIC cFileIni := "demo.xml"
 
-	Private oXmlDoc, lIniChanged := .F., cId := 'XML_', cIdXML
+   cFileIni := CurDrive()+':\'+Curdir()+'\'+cFileIni
 
-	oXmlDoc := HXMLDoc():Read( cFileIni )
+   PRIVATE oXmlDoc, lIniChanged := .F., cId := 'XML_', cIdXML
 
-	DEFINE FONT font_0 FONTNAME 'Tahoma' SIZE 9 DEFAULT
+   oXmlDoc := HXMLDoc():Read( cFileIni )
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'MiniGUI XML Demo' ;
-		ICON 'DEMO.ICO' ;
-		MAIN ;
-		ON RELEASE SaveOptions()
+   DEFINE FONT font_0 FONTNAME 'Tahoma' SIZE 9 DEFAULT
 
-		DEFINE STATUSBAR
-			STATUSITEM '[x] Harbour Power Ready!' 
-		END STATUSBAR
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI XML Demo' ;
+         ICON 'DEMO.ICO' ;
+         MAIN ;
+         ON RELEASE SaveOptions()
 
-		DEFINE MAIN MENU 
-			POPUP '&File'
-				MENUITEM "New item" ACTION NewItem(0)
-		        	SEPARATOR 
-				IF !Empty( oXmlDoc:aItems )
-					FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
-						oXmlNode := oXmlDoc:aItems[1]:aItems[i]
-						fname := oXmlNode:GetAttribute("name")
-						action := &( "{||NewItem("+LTrim(Str( i, 2 ))+")}" )
-						IF i == 1
-							cIdXML := cId+LTrim(Str( i ))
-							ITEM '' ACTION {|| Nil } NAME &cIdXML
-							_ModifyMenuItem ( cIdXML , 'Form_1' , fname , action )
-						ELSE
-							_InsertMenuItem ( cIdXML , 'Form_1' , fname , action, cId+LTrim(Str( i )) )
-						ENDIF
-					NEXT
-					SEPARATOR
-				ENDIF
-				ITEM 'E&xit'	ACTION Thiswindow.release
-			END POPUP
-			POPUP '&Info'
-				ITEM 'About'	ACTION  MsgInfo ( MiniGUIVersion(), "MiniGUI XML Demo" )
-			END POPUP
-		END MENU
+      DEFINE STATUSBAR
+         STATUSITEM '[x] Harbour Power Ready!'
+      END STATUSBAR
 
-	END WINDOW
+      DEFINE MAIN MENU
+         POPUP '&File'
+            MENUITEM "New item" ACTION NewItem(0)
+            SEPARATOR
+            IF !Empty( oXmlDoc:aItems )
+               FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
+                  oXmlNode := oXmlDoc:aItems[1]:aItems[i]
+                  fname := oXmlNode:GetAttribute("name")
+                  action := &( "{||NewItem("+LTrim(Str( i, 2 ))+")}" )
+                  IF i == 1
+                     cIdXML := cId+LTrim(Str( i ))
+                     ITEM '' ACTION {|| Nil } NAME &cIdXML
+                     _ModifyMenuItem ( cIdXML , 'Form_1' , fname , action )
+                  ELSE
+                     _InsertMenuItem ( cIdXML , 'Form_1' , fname , action, cId+LTrim(Str( i )) )
+                  ENDIF
+               NEXT
+               SEPARATOR
+            ENDIF
+            ITEM 'E&xit'   ACTION Thiswindow.release
+         END POPUP
+         POPUP '&Info'
+            ITEM 'About'   ACTION  MsgInfo ( MiniGUIVersion(), "MiniGUI XML Demo" )
+         END POPUP
+      END MENU
 
-	Form_1.Center
+   END WINDOW
 
-	ACTIVATE WINDOW Form_1
+   Form_1.Center
 
-Return Nil
+   ACTIVATE WINDOW Form_1
 
-*-----------------------------------------------------------------------------*
-Function NewItem( nItem )
-*-----------------------------------------------------------------------------*
-Local oDlg, aItemFont, aFontNew := { "" }
-Local oXmlNode, fname, i, action, nId
-Local cName, cInfo, lResult := .F.
+   RETURN NIL
+
+FUNCTION NewItem( nItem )
+
+   LOCAL oDlg, aItemFont, aFontNew := { "" }
+   LOCAL oXmlNode, fname, i, action, nId
+   LOCAL cName, cInfo, lResult := .F.
 
    IF nItem > 0
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
@@ -101,55 +96,55 @@ Local cName, cInfo, lResult := .F.
       aItemFont := { 'Times New Roman' , 12 , .f. , .f. , {0,0,0} , .f. , .f. , 0 }
    ENDIF
 
-	DEFINE WINDOW Form_2 ;
-		AT 0,0 ;
-		WIDTH 308 HEIGHT 178 ;
-		TITLE IIF( nItem == 0, "New item", "Change item" )  ;
-		MODAL NOSIZE ;
-		FONT 'Times New Roman' SIZE 12
+   DEFINE WINDOW Form_2 ;
+         AT 0,0 ;
+         WIDTH 308 HEIGHT 178 ;
+         TITLE IIF( nItem == 0, "New item", "Change item" )  ;
+         MODAL NOSIZE ;
+         FONT 'Times New Roman' SIZE 12
 
-		@ 24,20 LABEL Label_1 VALUE 'Name:' AUTOSIZE
+      @ 24,20 LABEL Label_1 VALUE 'Name:' AUTOSIZE
 
-		@ 20,80 TEXTBOX Text_1 ;
-			VALUE cName ;
-			WIDTH 150 ;
-			HEIGHT 26 ;
-			ON CHANGE cName := Form_2.Text_1.Value
+      @ 20,80 TEXTBOX Text_1 ;
+         VALUE cName ;
+         WIDTH 150 ;
+         HEIGHT 26 ;
+         ON CHANGE cName := Form_2.Text_1.Value
 
-		@ 20,240 BUTTON Button_0 ;
-			CAPTION "Font" ;
-			ACTION aFontNew := GetFont( aItemFont[1], aItemFont[2], aItemFont[3], ;
-			aItemFont[4], aItemFont[5], aItemFont[6], aItemFont[7], aItemFont[8] ) ;
-			WIDTH 44 ;
-			HEIGHT 26
+      @ 20,240 BUTTON Button_0 ;
+         CAPTION "Font" ;
+         ACTION aFontNew := GetFont( aItemFont[1], aItemFont[2], aItemFont[3], ;
+         aItemFont[4], aItemFont[5], aItemFont[6], aItemFont[7], aItemFont[8] ) ;
+         WIDTH 44 ;
+         HEIGHT 26
 
-		@ 54,20 LABEL Label_2 VALUE 'Info:' AUTOSIZE
+      @ 54,20 LABEL Label_2 VALUE 'Info:' AUTOSIZE
 
-		@ 50,80 TEXTBOX Text_2 ;
-			VALUE cInfo ;
-			WIDTH 150 ;
-			HEIGHT 26 ;
-			ON CHANGE cInfo := Form_2.Text_2.Value
+      @ 50,80 TEXTBOX Text_2 ;
+         VALUE cInfo ;
+         WIDTH 150 ;
+         HEIGHT 26 ;
+         ON CHANGE cInfo := Form_2.Text_2.Value
 
-		@ 110,20 BUTTON Button_1 ;
-			CAPTION "Ok" ;
-			ACTION ( lResult:=.T., ThisWindow.Release ) ;
-			WIDTH 100 ;
-			HEIGHT 30
+      @ 110,20 BUTTON Button_1 ;
+         CAPTION "Ok" ;
+         ACTION ( lResult:=.T., ThisWindow.Release ) ;
+         WIDTH 100 ;
+         HEIGHT 30
 
-		@ 110,184 BUTTON Button_2 ;
-			CAPTION "Cancel" ;
-			ACTION ThisWindow.Release ;
-			WIDTH 100 ;
-			HEIGHT 30
+      @ 110,184 BUTTON Button_2 ;
+         CAPTION "Cancel" ;
+         ACTION ThisWindow.Release ;
+         WIDTH 100 ;
+         HEIGHT 30
 
-		ON KEY ESCAPE ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
-	END WINDOW
+   END WINDOW
 
-	Form_2.Center
+   Form_2.Center
 
-	Form_2.Activate
+   Form_2.Activate
 
    IF lResult == .T. .AND. !Empty(cName) .AND. !Empty(cInfo)
       IF nItem == 0
@@ -186,47 +181,45 @@ Local cName, cInfo, lResult := .F.
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
-Function FontFromXML( oXmlNode )
-*-----------------------------------------------------------------------------*
-Local height  := oXmlNode:GetAttribute( "height" )
-Local bold := oXmlNode:GetAttribute( "bold" )
-Local italic := oXmlNode:GetAttribute( "italic" )
-Local under := oXmlNode:GetAttribute( "underline" )
-Local strike := oXmlNode:GetAttribute( "strikeout" )
-Local charset := oXmlNode:GetAttribute( "charset" )
+FUNCTION FontFromXML( oXmlNode )
 
-  IF height != Nil
-     height := Val( height )
-  ENDIF
+   LOCAL height  := oXmlNode:GetAttribute( "height" )
+   LOCAL bold := oXmlNode:GetAttribute( "bold" )
+   LOCAL italic := oXmlNode:GetAttribute( "italic" )
+   LOCAL under := oXmlNode:GetAttribute( "underline" )
+   LOCAL strike := oXmlNode:GetAttribute( "strikeout" )
+   LOCAL charset := oXmlNode:GetAttribute( "charset" )
 
-  IF bold != Nil
-     bold := ( bold == "1" )
-  ENDIF
-  IF italic != Nil
-     italic := ( italic == "1" )
-  ENDIF
-  IF under != Nil
-     under := ( under == "1" )
-  ENDIF
-  IF strike != Nil
-     strike := ( strike == "1" )
-  ENDIF
+   IF height != Nil
+      height := Val( height )
+   ENDIF
 
-  default bold := .f., italic := .f., under := .f., strike := .f.
+   IF bold != Nil
+      bold := ( bold == "1" )
+   ENDIF
+   IF italic != Nil
+      italic := ( italic == "1" )
+   ENDIF
+   IF under != Nil
+      under := ( under == "1" )
+   ENDIF
+   IF strike != Nil
+      strike := ( strike == "1" )
+   ENDIF
 
-  IF charset != Nil
-     charset := Val( charset )
-  ENDIF
+   DEFAULT bold := .f., italic := .f., under := .f., strike := .f.
 
-Return { oXmlNode:GetAttribute( "name" ) , height , bold , italic , {0,0,0} , under , strike , charset }
+   IF charset != Nil
+      charset := Val( charset )
+   ENDIF
 
-*-----------------------------------------------------------------------------*
-Function Font2XML( aFont )
-*-----------------------------------------------------------------------------*
-Local aAttr := {}
+   RETURN { oXmlNode:GetAttribute( "name" ) , height , bold , italic , {0,0,0} , under , strike , charset }
+
+FUNCTION Font2XML( aFont )
+
+   LOCAL aAttr := {}
 
    Aadd( aAttr, { "name", aFont[1] } )
    Aadd( aAttr, { "height", Ltrim(Str(aFont[2])) } )
@@ -247,14 +240,14 @@ Local aAttr := {}
       Aadd( aAttr, { "charset", Ltrim(Str(aFont[8])) } )
    ENDIF
 
-Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
+   RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
-*-----------------------------------------------------------------------------*
-Function SaveOptions()
-*-----------------------------------------------------------------------------*
-    IF lIniChanged
-	oXmlDoc:Save( cFileIni )
-    ENDIF
-    CLOSE ALL
-Return Nil
+FUNCTION SaveOptions()
+
+   IF lIniChanged
+      oXmlDoc:Save( cFileIni )
+   ENDIF
+   CLOSE ALL
+
+   RETURN NIL
 

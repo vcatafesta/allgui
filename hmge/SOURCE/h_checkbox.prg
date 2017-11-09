@@ -13,47 +13,45 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License along with
-   this software; see the file COPYING. If not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
-   visit the web site http://www.gnu.org/).
+You should have received a copy of the GNU General Public License along with
+this software; see the file COPYING. If not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+visit the web site http://www.gnu.org/).
 
-   As a special exception, you have permission for additional uses of the text
-   contained in this release of Harbour Minigui.
+As a special exception, you have permission for additional uses of the text
+contained in this release of Harbour Minigui.
 
-   The exception is that, if you link the Harbour Minigui library with other
-   files to produce an executable, this does not by itself cause the resulting
-   executable to be covered by the GNU General Public License.
-   Your use of that executable is in no way restricted on account of linking the
-   Harbour-Minigui library code into it.
+The exception is that, if you link the Harbour Minigui library with other
+files to produce an executable, this does not by itself cause the resulting
+executable to be covered by the GNU General Public License.
+Your use of that executable is in no way restricted on account of linking the
+Harbour-Minigui library code into it.
 
-   Parts of this project are based upon:
+Parts of this project are based upon:
 
-   "Harbour GUI framework for Win32"
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
-   Copyright 2001 Antonio Linares <alinares@fivetech.com>
-   www - http://harbour-project.org
+"Harbour GUI framework for Win32"
+Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+Copyright 2001 Antonio Linares <alinares@fivetech.com>
+www - http://harbour-project.org
 
-   "Harbour Project"
-   Copyright 1999-2017, http://harbour-project.org/
+"Harbour Project"
+Copyright 1999-2017, http://harbour-project.org/
 
-   "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net>
+"WHAT32"
+Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-   "HWGUI"
-   Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+"HWGUI"
+Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
 #include "minigui.ch"
 #include "i_winuser.ch"
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
       fontname, fontsize, tooltip, changeprocedure, w, h, lostfocus, gotfocus, ;
       HelpId, invisible, notabstop, bold, italic, underline, strikeout, field, ;
       backcolor, fontcolor, transparent, leftjustify, threestate, Enter, autosize, multiline, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , blInit , mVar , k , style
    LOCAL ControlHandle , FontHandle , WorkArea
    LOCAL lDialogInMemory
@@ -190,7 +188,7 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "CHECKBOX"
    _HMG_aControlNames [k] :=  ControlName
@@ -255,14 +253,12 @@ FUNCTION _DefineCheckBox ( ControlName, ParentFormName, x, y, Caption, Value, ;
       AAdd ( _HMG_aFormBrowseList [ GetFormIndex ( ParentFormName ) ] , k )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineCheckButton ( ControlName, ParentFormName, x, y, Caption, Value, ;
       fontname, fontsize, tooltip, changeprocedure, ;
       w, h, lostfocus, gotfocus, HelpId, invisible, ;
       notabstop , bold, italic, underline, strikeout, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , blInit, mVar , k , Style
    LOCAL ControlHandle , FontHandle
    LOCAL lDialogInMemory
@@ -364,7 +360,7 @@ FUNCTION _DefineCheckButton ( ControlName, ParentFormName, x, y, Caption, Value,
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "CHECKBOX"
    _HMG_aControlNames [k] :=   ControlName
@@ -415,11 +411,10 @@ FUNCTION _DefineCheckButton ( ControlName, ParentFormName, x, y, Caption, Value,
       SendMessage( Controlhandle , BM_SETCHECK , BST_CHECKED , 0 )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION InitDialogCheckButton ( ParentName, ControlHandle, k )
-*-----------------------------------------------------------------------------*
+
    LOCAL Value , BitMap , threestate
 
    BitMap := _HMG_aControlPicture [k]
@@ -433,19 +428,17 @@ FUNCTION InitDialogCheckButton ( ParentName, ControlHandle, k )
    ELSEIF threestate .AND. value == NIL
       SendMessage( Controlhandle , BM_SETCHECK , BST_INDETERMINATE , 0 )
    ENDIF
-// JP 62
+   // JP 62
    IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
-*-----------------------------------------------------------------------------*
 FUNCTION _DefineImageCheckButton ( ControlName, ParentFormName, x, y, BitMap, ;
       Value, fontname, fontsize, tooltip, ;
       changeprocedure, w, h, lostfocus, gotfocus, ;
       HelpId, invisible, notabstop, nId )
-*-----------------------------------------------------------------------------*
    LOCAL ParentFormHandle , blInit , mVar , k , Style
    LOCAL ControlHandle , nhImage , aRet
    LOCAL lDialogInMemory
@@ -531,7 +524,7 @@ FUNCTION _DefineImageCheckButton ( ControlName, ParentFormName, x, y, BitMap, ;
 
    ENDIF
 
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_aControlType [k] := "CHECKBOX"
    _HMG_aControlNames [k] :=   ControlName
@@ -582,4 +575,5 @@ FUNCTION _DefineImageCheckButton ( ControlName, ParentFormName, x, y, BitMap, ;
       SendMessage( Controlhandle , BM_SETCHECK , BST_CHECKED , 0 )
    ENDIF
 
-RETURN Nil
+   RETURN NIL
+

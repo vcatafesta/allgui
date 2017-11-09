@@ -1,15 +1,13 @@
 /*
- * Ejemplo Form n° 9
- * Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
- * Licenciado bajo The Code Project Open License (CPOL) 1.02
- * Ver <http://www.codeproject.com/info/cpol10.aspx>
- *
- * Este ejemplo muestra cómo utilizar el método SaveAs para
- * guardar la ventana de un form en un archivo.
- *
- * Visítenos en https://github.com/fyurisich/OOHG_Samples o en
- * http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
- */
+* Ejemplo Form n° 9
+* Autor: Fernando Yurisich <fernando.yurisich@gmail.com>
+* Licenciado bajo The Code Project Open License (CPOL) 1.02
+* Ver <http://www.codeproject.com/info/cpol10.aspx>
+* Este ejemplo muestra cómo utilizar el método SaveAs para
+* guardar la ventana de un form en un archivo.
+* Visítenos en https://github.com/fyurisich/OOHG_Samples o en
+* http://oohg.wikia.com/wiki/Object_Oriented_Harbour_GUI_Wiki
+*/
 
 #include "oohg.ch"
 
@@ -18,10 +16,10 @@ PROCEDURE Main
    PUBLIC oWin
 
    DEFINE WINDOW Win_1 ;
-      MAIN ;
-      TITLE 'Guardar una instantánea de un formulario en un archivo' ;
-      OBJ oWin ;
-      WIDTH 700 HEIGHT 300
+         MAIN ;
+         TITLE 'Guardar una instantánea de un formulario en un archivo' ;
+         OBJ oWin ;
+         WIDTH 700 HEIGHT 300
 
       @ 010,10 TEXTBOX Txt0 VALUE "Cliquee para guardar"
 
@@ -36,15 +34,15 @@ PROCEDURE Main
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN
-
+   RETURN
 
 PROCEDURE Save( cType )
 
    oWin:SaveAs( "SnapShot." + cType, .T., cType )
 
-RETURN
+   RETURN
 
-/*
- * EOF
- */
+   /*
+   * EOF
+   */
+

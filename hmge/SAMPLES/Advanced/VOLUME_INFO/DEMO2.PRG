@@ -1,7 +1,5 @@
 /*
- *
- * MiniGUI DLL Demo
- *
+* MiniGUI DLL Demo
 */
 
 #include "minigui.ch"
@@ -22,12 +20,12 @@ PROCEDURE Main
    ENDIF
 
    DEFINE WINDOW Win_1 ;
-      AT 0, 0 ;
-      WIDTH 400 ;
-      HEIGHT 300 ;
-      TITLE 'Volume Information' ;
-      ICON "HD.ICO" ;
-      MAIN NOMAXIMIZE NOSIZE
+         AT 0, 0 ;
+         WIDTH 400 ;
+         HEIGHT 300 ;
+         TITLE 'Volume Information' ;
+         ICON "HD.ICO" ;
+         MAIN NOMAXIMIZE NOSIZE
 
       @ 10, 10 BUTTON Button1 CAPTION "Get Info" ACTION IF( Empty( cInfo ), MsgStop( "Error!" ), MsgInfo( cInfo ) ) DEFAULT
 
@@ -38,10 +36,11 @@ PROCEDURE Main
    CENTER WINDOW Win_1
    ACTIVATE WINDOW Win_1
 
-RETURN
+   RETURN
 
-/*
-*/
+   /*
+   */
+
 FUNCTION GetVolumeInfo( cDrive )
 
    LOCAL lpRoot    := cDrive
@@ -74,22 +73,25 @@ FUNCTION GetVolumeInfo( cDrive )
 
    ENDIF
 
-RETURN aInfo
+   RETURN aInfo
 
-/*
-*/
+   /*
+   */
+
 FUNCTION SZ2Str( cStr )
-RETURN StrTran( RTrim( cStr ), Chr( 0 ), "" )
 
-/*
-*/
-DECLARE DLL_TYPE_BOOL GetVolumeInformationA( DLL_TYPE_LPCSTR lpRoot, DLL_TYPE_LPCSTR lpVolName, ;
+   RETURN StrTran( RTrim( cStr ), Chr( 0 ), "" )
+
+   /*
+   */
+   DECLARE DLL_TYPE_BOOL GetVolumeInformationA( DLL_TYPE_LPCSTR lpRoot, DLL_TYPE_LPCSTR lpVolName, ;
       DLL_TYPE_LONG nVolName, DLL_TYPE_LPCSTR lpSerial, ;
       DLL_TYPE_LONG lpMaxLen, DLL_TYPE_LONG lpFlags, ;
       DLL_TYPE_LPCSTR lpSysName, DLL_TYPE_LONG nSysName ) ;
       IN KERNEL32.DLL ;
       ALIAS GetVolInfo
 
-#ifdef __XHARBOUR__
-  #include <hex.prg>
-#endif
+   #ifdef __XHARBOUR__
+   #include <hex.prg>
+   #endif
+

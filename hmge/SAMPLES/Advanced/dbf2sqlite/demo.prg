@@ -1,306 +1,314 @@
 #include <minigui.ch>
 #include <dbstruct.ch>
 
-Set Proc To hmgsqlite
+SET Proc To hmgsqlite
 
-memvar oDB, oDB1
-memvar cTableName, cNewTable
-memvar lOpened
+MEMVAR oDB, oDB1
+MEMVAR cTableName, cNewTable
+MEMVAR lOpened
 
-Function Main
+FUNCTION Main
 
-public oDB := nil
-public oDB1 := nil
-private cTableName := ''
-private cNewTable := ''
-private lOpened := .f.
+   PUBLIC oDB := nil
+   PUBLIC oDB1 := nil
+   PRIVATE cTableName := ''
+   PRIVATE cNewTable := ''
+   PRIVATE lOpened := .f.
 
+   SET navigation extended
+   SET DATE ital
+   SET CENTURY ON
 
-set navigation extended
-set date ital
-set century on
+   DEFINE WINDOW sql at 0, 0 width 370 height 290 main title "DBF<-->SQLite Exporter" nosize nomaximize
+      DEFINE TAB dbtab at 10, 10 width 350 height 250
+         DEFINE PAGE 'DBF -> SQLite'
+            DEFINE FRAME dbfframe
+               row 25
+               col 5
+               width 160
+               caption 'DBF to be converted'
+               height 110
+            END FRAME
+            DEFINE BUTTON browsedbf
+               row 50
+               col 10
+               width 150
+               caption "Select a DBF File"
+               action browsefordbf()
+            END BUTTON
+            DEFINE LABEL dbfname
+               row 85
+               col 10
+               width 150
+               fontbold .t.
+            END LABEL
+            DEFINE LABEL dbfconnection
+               row 110
+               col 10
+               width 150
+               value "DBF is not yet connected"
+               fontbold .t.
+               fontcolor {255,0,0}
+            END LABEL
+            DEFINE FRAME sqliteframe
+               row 25
+               col 185
+               width 160
+               caption 'Create/Select SQLite DB'
+               height 110
+            END FRAME
+            DEFINE BUTTON createfile
+               row 50
+               col 190
+               width 150
+               caption 'Create New...'
+               action createadb()
+            END BUTTON
+            DEFINE BUTTON selectfile
+               row 80
+               col 190
+               width 150
+               caption 'Select Existing...'
+               action selectdb()
+            END BUTTON
+            DEFINE LABEL connection
+               row 110
+               col 190
+               width 150
+               value "DB Not Yet Connected"
+               fontbold .t.
+               fontcolor {255,0,0}
+            END LABEL
+            DEFINE BUTTON export
+               row 140
+               col 150
+               width 50
+               caption "Export"
+               fontbold .t.
+               action export2sql()
+            END BUTTON
+            define progressbar progress
+               row 170
+               col 10
+               width 330
+            end progressbar
+            DEFINE LABEL status
+               row 200
+               col 10
+               width 200
+               value ""
+            END LABEL
+         END PAGE
+         DEFINE PAGE 'SQLite -> DBF'
+            DEFINE FRAME sqliteframe1
+               row 25
+               col 5
+               width 160
+               caption 'SQLite to be converted'
+               height 110
+            END FRAME
+            DEFINE BUTTON browsesql1
+               row 50
+               col 10
+               width 150
+               caption "Select a SQLite DB"
+               action browseforsqlite()
+            END BUTTON
+            DEFINE LABEL tableslabel
+               row 85
+               col 10
+               width 50
+               value 'Table'
+            END LABEL
+            DEFINE COMBOBOX tables
+               row 80
+               col 60
+               width 100
+               SORT .t.
+            END COMBOBOX
+            DEFINE LABEL sqlconnection1
+               row 110
+               col 10
+               width 150
+               value "DB is not yet connected"
+               fontbold .t.
+               fontcolor {255,0,0}
+            END LABEL
+            DEFINE FRAME dbfframe1
+               row 25
+               col 185
+               width 160
+               caption 'Enter Table Name'
+               height 110
+            END FRAME
+            DEFINE BUTTON newtable
+               row 50
+               col 190
+               width 150
+               action createnewdbf()
+               caption 'Save to...'
+            END BUTTON
+            DEFINE LABEL newtablename
+               row 85
+               col 190
+               width 150
+               value ''
+               fontbold .t.
+            END LABEL
+            DEFINE BUTTON export1
+               row 140
+               col 150
+               width 50
+               caption "Export"
+               fontbold .t.
+               action export2dbf()
+            END BUTTON
+            define progressbar progress1
+               row 170
+               col 10
+               width 330
+            end progressbar
+            DEFINE LABEL status1
+               row 200
+               col 10
+               width 200
+               value ""
+            END LABEL
+         END PAGE
+      END TAB
+   END WINDOW
+   on key ESCAPE of sql action sql.release()
+   sql.progress.visible := .f.
+   sql.status.visible := .f.
+   sql.center
+   sql.activate
 
-define window sql at 0, 0 width 370 height 290 main title "DBF<-->SQLite Exporter" nosize nomaximize
-   define tab dbtab at 10, 10 width 350 height 250 
-      define page 'DBF -> SQLite'
-         define frame dbfframe
-            row 25
-            col 5
-            width 160
-            caption 'DBF to be converted'
-            height 110
-         end frame
-         define button browsedbf
-            row 50
-            col 10
-            width 150
-            caption "Select a DBF File"
-            action browsefordbf()
-         end button
-         define label dbfname
-            row 85
-            col 10
-            width 150
-            fontbold .t.
-         end label
-         define label dbfconnection
-            row 110
-            col 10
-            width 150
-            value "DBF is not yet connected"
-            fontbold .t.
-            fontcolor {255,0,0}
-         end label
-         define frame sqliteframe
-            row 25
-            col 185
-            width 160
-            caption 'Create/Select SQLite DB'
-            height 110
-         end frame
-         define button createfile
-            row 50
-            col 190
-            width 150
-            caption 'Create New...'
-            action createadb()
-         end button      
-         define button selectfile
-            row 80
-            col 190
-            width 150
-            caption 'Select Existing...'
-            action selectdb()
-         end button      
-         define label connection
-            row 110
-            col 190
-            width 150
-            value "DB Not Yet Connected"
-            fontbold .t.
-            fontcolor {255,0,0}
-         end label
-         define button export
-            row 140
-            col 150
-            width 50
-            caption "Export"
-            fontbold .t.
-            action export2sql()
-         end button
-         define progressbar progress
-            row 170
-            col 10
-            width 330
-         end progressbar
-         define label status
-            row 200
-            col 10
-            width 200
-            value ""
-         end label
-      end page
-      define page 'SQLite -> DBF'
-         define frame sqliteframe1
-            row 25
-            col 5
-            width 160
-            caption 'SQLite to be converted'
-            height 110
-         end frame
-         define button browsesql1
-            row 50
-            col 10
-            width 150
-            caption "Select a SQLite DB"
-            action browseforsqlite()
-         end button
-         define label tableslabel
-            row 85
-            col 10
-            width 50
-            value 'Table'
-         end label
-         define combobox tables
-            row 80
-            col 60
-            width 100
-            sort .t.
-         end combobox
-         define label sqlconnection1
-            row 110
-            col 10
-            width 150
-            value "DB is not yet connected"
-            fontbold .t.
-            fontcolor {255,0,0}
-         end label
-         define frame dbfframe1
-            row 25
-            col 185
-            width 160
-            caption 'Enter Table Name'
-            height 110
-         end frame
-         define button newtable
-            row 50
-            col 190
-            width 150
-            action createnewdbf()
-            caption 'Save to...'
-         end button
-         define label newtablename
-            row 85
-            col 190
-            width 150
-            value ''
-            fontbold .t.
-         end label
-         define button export1
-            row 140
-            col 150
-            width 50
-            caption "Export"
-            fontbold .t.
-            action export2dbf()
-         end button
-         define progressbar progress1
-            row 170
-            col 10
-            width 330
-         end progressbar
-         define label status1
-            row 200
-            col 10
-            width 200
-            value ""
-         end label
-      end page
-   end tab   
-end window
-on key ESCAPE of sql action sql.release()
-sql.progress.visible := .f.
-sql.status.visible := .f.
-sql.center
-sql.activate
-Return nil
+   RETURN NIL
 
-function browsefordbf
-local fname := sql.dbfname.value
-local structarr := {}
-local i := 0
-local nDot := 0
-local nSlash := 0
-fname := GetFile( { { "DBF Files", "*.dbf" } }, "Select a dbf file" , , .f., .f. )
-sql.dbfname.value := alltrim(fname)
-if len(alltrim(fname)) > 0
-   cTableName := fname
-   nSlash := rat( '\', cTableName )
-   if nSlash > 0
-      cTableName := substr( cTableName, nSlash + 1 )
-   endif
-   nDot := at( '.', cTableName )
-   if nDot > 0
-      cTableName := substr( cTableName, 1, nDot - 1 )
-   endif
-   if file(fname)
-      use &fname
-      if used()
-         lOpened := .t.
-         sql.dbfconnection.value := alltrim( cTableName ) + ' is Connected'
-         sql.dbfconnection.fontcolor := { 0, 98, 0 }
-      else
+FUNCTION browsefordbf
+
+   LOCAL fname := sql.dbfname.value
+   LOCAL structarr := {}
+   LOCAL i := 0
+   LOCAL nDot := 0
+   LOCAL nSlash := 0
+
+   fname := GetFile( { { "DBF Files", "*.dbf" } }, "Select a dbf file" , , .f., .f. )
+   sql.dbfname.value := alltrim(fname)
+   IF len(alltrim(fname)) > 0
+      cTableName := fname
+      nSlash := rat( '\', cTableName )
+      IF nSlash > 0
+         cTableName := substr( cTableName, nSlash + 1 )
+      ENDIF
+      nDot := at( '.', cTableName )
+      IF nDot > 0
+         cTableName := substr( cTableName, 1, nDot - 1 )
+      ENDIF
+      IF file(fname)
+         USE &fname
+         IF used()
+            lOpened := .t.
+            sql.dbfconnection.value := alltrim( cTableName ) + ' is Connected'
+            sql.dbfconnection.fontcolor := { 0, 98, 0 }
+         ELSE
+            lOpened := .f.
+            sql.dbfconnection.value := 'DBF is not yet connected'
+            sql.dbfconnection.fontcolor := { 255, 0, 0 }
+         ENDIF
+      ELSE
          lOpened := .f.
-         sql.dbfconnection.value := 'DBF is not yet connected'
-         sql.dbfconnection.fontcolor := { 255, 0, 0 }
-      endif      
-   else
-      lOpened := .f.
-   endif
-endif
-return nil      
+      ENDIF
+   ENDIF
 
-Function export2sql()
-   local aStruct := {}, cSql, i, mFldNm, mFldtype, mFldLen, mFldDec, mSql
-   local totrec, nrec, nvalues, count1
-   
-   if oDB == nil
+   RETURN NIL
+
+FUNCTION export2sql()
+
+   LOCAL aStruct := {}, cSql, i, mFldNm, mFldtype, mFldLen, mFldDec, mSql
+   LOCAL totrec, nrec, nvalues, count1
+
+   IF oDB == nil
       msgstop( "No Connection to SQLite DB! Try to create a new SQLite DB or select an existing SQLite DB", 'DBF->SQLite Exporter' )
-      return nil
-   endif
-      
-   do while .not. lOpened
-      if msgyesno("You had not selected a DBF table. Do you want to do now?")
+
+      RETURN NIL
+   ENDIF
+
+   DO WHILE .not. lOpened
+      IF msgyesno("You had not selected a DBF table. Do you want to do now?")
          browsefordbf()
-      else
-         return nil
-      endif
-   enddo
+      ELSE
+
+         RETURN NIL
+      ENDIF
+   ENDDO
 
    && for i := 1 to sql.tables.itemcount
-      && if upper(alltrim(sql.tables.item(i))) == upper(alltrim(cTablename))
-         && msgstop("Destination table already exists. Either you can give a new name or select an existing table from the list","DBF2MySQL")
-         && sql.newtable.setfocus()
-         && return nil
-      && endif
+   && if upper(alltrim(sql.tables.item(i))) == upper(alltrim(cTablename))
+   && msgstop("Destination table already exists. Either you can give a new name or select an existing table from the list","DBF2MySQL")
+   && sql.newtable.setfocus()
+   && return nil
+   && endif
    && next i
 
    aStruct = DbStruct()
 
    mSql := "CREATE TABLE IF NOT EXISTS "+cTablename+" ("
 
-   for i := 1 to len(aStruct)
+   FOR i := 1 to len(aStruct)
       mFldNm := aStruct[i, DBS_NAME]
       mFldType := aStruct[i, DBS_TYPE]
       mFldLen := aStruct[i, DBS_LEN]
       mFldDec := aStruct[i, DBS_DEC]
 
-      if i > 1
+      IF i > 1
          mSql += ", "
-      endif
+      ENDIF
       mSql += alltrim(mFldnm)+" "
 
-      do case
-      case mFldType = "C"
+      DO CASE
+      CASE mFldType = "C"
          mSql += "CHAR("+LTRIM(STR(mFldLen))+")"
-      case mFldType = "D"
+      CASE mFldType = "D"
          mSql += "DATE"
-      case mFldType = "T"
+      CASE mFldType = "T"
          mSql += "DATETIME"
-      case mFldType = "N"
-         if mFldDec > 0
+      CASE mFldType = "N"
+         IF mFldDec > 0
             mSql += "FLOAT"
-         else
+         ELSE
             mSql += "INTEGER"
-         endif
-      case mFldType = "F"
+         ENDIF
+      CASE mFldType = "F"
          mSql += "FLOAT"
-      case mFldType = "I"
+      CASE mFldType = "I"
          mSql += "INTEGER"
-      case mFldType = "B"
+      CASE mFldType = "B"
          mSql += "DOUBLE"
-      case mFldType = "Y"
+      CASE mFldType = "Y"
          mSql += "FLOAT"
-      case mFldType = "L"
+      CASE mFldType = "L"
          mSql += "BOOL"
-      case mFldType = "M"
+      CASE mFldType = "M"
          mSql += "TEXT"
-      case mFldType = "G"
+      CASE mFldType = "G"
          mSql += "BLOB"
-      otherwise
+      OTHERWISE
          msginfo("Invalid Field Type: "+mFldType)
-         return nil
-      endcase
-   next
+
+         RETURN NIL
+      ENDCASE
+   NEXT
 
    mSql += ")"
 
    //msginfo(mSql)
 
-   if !miscsql( oDB, mSql )
+   IF !miscsql( oDB, mSql )
       msginfo( 'Table Creation Error!', 'DBF2SQLite' )
-      return nil
-   endif
+
+      RETURN NIL
+   ENDIF
 
    sql.progress.value := 0
    sql.progress.visible := .t.
@@ -308,110 +316,125 @@ Function export2sql()
    sql.status.visible := .t.
    totrec := reccount()
    nrec := 1
-   go top
-   if !miscsql( oDB, 'begin transaction' )
-      return nil
-   endif
-   do while !eof()
+   GO TOP
+   IF !miscsql( oDB, 'begin transaction' )
+
+      RETURN NIL
+   ENDIF
+   DO WHILE !eof()
       sql.progress.value := nrec/totrec *100
       sql.status.value := alltrim(str(nrec))+" of "+alltrim(str(totrec))+" Records processed."
 
       mSql := "INSERT INTO "+cTablename+" VALUES "
       msql := msql + "("
-      for i := 1 to len(aStruct)
+      FOR i := 1 to len(aStruct)
          mFldNm := aStruct[i, DBS_NAME]
-         if i > 1
+         IF i > 1
             mSql += ", "
-         endif
+         ENDIF
          mSql += c2sql(&mFldNm)
-      next
+      NEXT
       mSql += ")"
-      if !miscsql( oDB, mSql)
-      	msgbox("Problem in Query: "+mSql)
-         return nil
-      endif
+      IF !miscsql( oDB, mSql)
+         msgbox("Problem in Query: "+mSql)
+
+         RETURN NIL
+      ENDIF
       nrec := nrec + 1
-      skip
-   enddo
-   if !miscsql( oDB, 'end transaction' )
-      return nil
-   endif
+      SKIP
+   ENDDO
+   IF !miscsql( oDB, 'end transaction' )
+
+      RETURN NIL
+   ENDIF
    sql.status.value := ""
    sql.progress.value := 0
    sql.progress.visible := .f.
    sql.status.visible := .f.
-   msginfo("Successfully exported")   
-   close all
+   msginfo("Successfully exported")
+   CLOSE all
    lOpened := .f.
    sql.dbfname.value := ''
    sql.dbfconnection.value := "DBF is not yet Connected"
    sql.dbfconnection.fontcolor := { 255, 0, 0 }
-return nil
 
-function selectdb
-   local cFileName := ''
-   local cDBName := ''
-   local nSlash := 0
-   local nDot := 0
+   RETURN NIL
+
+FUNCTION selectdb
+
+   LOCAL cFileName := ''
+   LOCAL cDBName := ''
+   LOCAL nSlash := 0
+   LOCAL nDot := 0
+
    cFileName := GetFile ( { { 'SQLite Files', '*.sqlite' }, { 'All Files', '*.*' } }, 'Select an Existing SQLite File' )
-   if len( alltrim( cFileName ) ) > 0
+   IF len( alltrim( cFileName ) ) > 0
       cDBName := cFileName
       nSlash := rat( '\', cDBName )
-      if nSlash > 0
+      IF nSlash > 0
          cDBName := substr( cDBName, nSlash + 1 )
-      endif
+      ENDIF
       nDot := at( '.', cDBName )
-      if nDot > 0
+      IF nDot > 0
          cDBName := substr( cDBName, 1, nDot - 1 )
-      endif
+      ENDIF
       oDB := Connect2DB( cFileName, .f. )
-      if oDB == Nil
+      IF oDB == Nil
          msgstop( 'Not a valid SQLite file.', 'SQLite File Selection' )
          sql.connection.value := "DB Not Connected"
          sql.connection.fontcolor := { 255, 0, 0 }
-         return nil
-      else
+
+         RETURN NIL
+      ELSE
          sql.connection.value := alltrim( cDBName ) + " is Connected!"
          sql.connection.fontcolor := { 0, 98, 0 }
-      endif
-   else
+      ENDIF
+   ELSE
       msgstop( 'You have to select a SQLite File!', 'DBF2SQLite Exporter' )
-      return nil
-   endif   
-return nil
 
-function createadb
-   local cFileName := ''
-   local cDBName := ''
-   local nSlash := 0
-   local nDot := 0
+      RETURN NIL
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION createadb
+
+   LOCAL cFileName := ''
+   LOCAL cDBName := ''
+   LOCAL nSlash := 0
+   LOCAL nDot := 0
+
    cFileName := PutFile ( { { 'SQLite Files', '*.sqlite' }, { 'All Files', '*.*' } }, 'Create a SQLite File' )
-   if len( alltrim( cFileName ) ) == 0
+   IF len( alltrim( cFileName ) ) == 0
       msgstop( 'File name can not be empty!', 'DBF2SQLite Exporter' )
-      return nil
-   endif   
-   if at( '.', cFileName ) == 0
+
+      RETURN NIL
+   ENDIF
+   IF at( '.', cFileName ) == 0
       cFileName := cFileName + '.sqlite'
-   endif
+   ENDIF
    cDBName := cFileName
    nSlash := rat( '\', cDBName )
-   if nSlash > 0
+   IF nSlash > 0
       cDBName := substr( cDBName, nSlash + 1 )
-   endif
+   ENDIF
    nDot := at( '.', cDBName )
-   if nDot > 0
+   IF nDot > 0
       cDBName := substr( cDBName, 1, nDot - 1 )
-   endif
+   ENDIF
    oDB := Connect2DB( cFileName, .t. )
-   if oDB == Nil
+   IF oDB == Nil
       msgstop( 'Not a valid SQLite file.', 'SQLite File Selection' )
       sql.connection.value := "DB Not Connected"
       sql.connection.fontcolor := { 255, 0, 0 }
-      return nil
-   else
+
+      RETURN NIL
+   ELSE
       sql.connection.value := cDBName + " is Connected!"
       sql.connection.fontcolor := { 0, 98, 0 }
-   endif
-return nil
+   ENDIF
 
-#include <sqlite2dbf.prg>
+   RETURN NIL
+
+   #include <sqlite2dbf.prg>
+

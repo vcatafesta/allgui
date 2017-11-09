@@ -3,18 +3,16 @@
 
 REQUEST DBFCDX
 
-//----------------------------------------------------------------------------//
-
 FUNCTION AutoCols()
 
-   Local oBrw, aArr, nEle, ;
-         aLine := AFill( Array( 40 ), Space( 10 ) )
+   LOCAL oBrw, aArr, nEle, ;
+      aLine := AFill( Array( 40 ), Space( 10 ) )
 
    aArr := {}
 
-   For nEle := 1 To 40
+   FOR nEle := 1 To 40
       AAdd( aArr, AClone( aLine ) )
-   Next
+   NEXT
 
    DEFINE WINDOW Form_14 At 40,60 ;
          WIDTH 600 HEIGHT 600 ;
@@ -23,20 +21,19 @@ FUNCTION AutoCols()
          CHILD
 
       @  30, 50 TBROWSE oBrw ARRAY aArr WIDTH 500 HEIGHT 500 CELLED AUTOCOLS SELECTOR .T. EDITABLE ;
-            COLORS CLR_BLACK, CLR_WHITE, CLR_BLUE, { CLR_WHITE, GetSysColor( COLOR_GRADIENTINACTIVECAPTION ) }
+         COLORS CLR_BLACK, CLR_WHITE, CLR_BLUE, { CLR_WHITE, GetSysColor( COLOR_GRADIENTINACTIVECAPTION ) }
 
       oBrw:nClrLine := GetSysColor( COLOR_GRADIENTINACTIVECAPTION )
 
    END WINDOW
    ACTIVATE WINDOW Form_14
 
-Return Nil
+   RETURN NIL
 
+FUNCTION TestLbx()
 
-Function TestLbx()
-
-   Local oBrw, ;
-         aItems := { Padr("One", 12), Padr("Two", 12), Padr("Three", 12) }
+   LOCAL oBrw, ;
+      aItems := { Padr("One", 12), Padr("Two", 12), Padr("Three", 12) }
 
    DEFINE WINDOW Form_15 At 140,160 ;
          WIDTH 300 HEIGHT 250 ;
@@ -54,4 +51,5 @@ Function TestLbx()
    END WINDOW
    ACTIVATE WINDOW Form_15
 
-Return Nil
+   RETURN NIL
+

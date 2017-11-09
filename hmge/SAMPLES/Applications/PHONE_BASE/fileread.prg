@@ -1,11 +1,11 @@
 /*
- * $Id: fileread.prg 9438 2008-09-18 09:48:55Z vszakats $
- */
+* $Id: fileread.prg 9438 2008-09-18 09:48:55Z vszakats $
+*/
 
 /* Harbour Project source code
- * A class that reads a file one line at a time
-   http://harbour-project.org/
-   Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
+* A class that reads a file one line at a time
+http://harbour-project.org/
+Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
 */
 
 #include "hbclass.ch"
@@ -29,22 +29,31 @@ CREATE CLASS TFileRead
    VAR nLastOp                 // The last operation done (for error messages)
    VAR cBuffer                 // The readahead buffer
    VAR nReadSize               // How much to add to the readahead buffer on
-                               // each read from the file
+   // each read from the file
 
-   METHOD New( cFile, nSize )  // Create a new class instance
-   METHOD Open( nMode )        // Open the file for reading
-   METHOD Close()              // Close the file when done
-   METHOD ReadLine()           // Read a line from the file
-   METHOD Name()               // Retunrs the file name
-   METHOD IsOpen()             // Returns .T. if file is open
-   METHOD MoreToRead()         // Returns .T. if more to be read
-   METHOD Error()              // Returns .T. if error occurred
-   METHOD ErrorNo()            // Returns current error code
-   METHOD ErrorMsg( cText )    // Returns formatted error message
+METHOD New( cFile, nSize )  // Create a new class instance
+
+METHOD Open( nMode )        // Open the file for reading
+
+METHOD Close()              // Close the file when done
+
+METHOD ReadLine()           // Read a line from the file
+
+METHOD Name()               // Retunrs the file name
+
+METHOD IsOpen()             // Returns .T. if file is open
+
+METHOD MoreToRead()         // Returns .T. if more to be read
+
+METHOD Error()              // Returns .T. if error occurred
+
+METHOD ErrorNo()            // Returns current error code
+
+METHOD ErrorMsg( cText )    // Returns formatted error message
 
    PROTECTED:
 
-   METHOD EOL_pos()
+METHOD EOL_pos()
 
 END CLASS
 
@@ -95,6 +104,7 @@ METHOD Open( nMode ) CLASS TFileRead
    RETURN Self
 
 METHOD ReadLine() CLASS TFileRead
+
    LOCAL cLine := ""
    LOCAL nPos
 
@@ -143,17 +153,17 @@ METHOD ReadLine() CLASS TFileRead
          ENDIF
          // Deal with multiple possible end of line conditions.
          DO CASE
-            CASE SUBSTR( ::cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
-               // It's a messed up DOS newline (such as that created by a program
-               // that uses "\r\n" as newline when writing to a text mode file,
-               // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
-               nPos += 3
-            CASE SUBSTR( ::cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
-               // It's a standard DOS newline
-               nPos += 2
-            OTHERWISE
-               // It's probably a Mac or Unix newline
-               nPos++
+         CASE SUBSTR( ::cBuffer, nPos, 3 ) == CHR( 13 ) + CHR( 13 ) + CHR( 10 )
+            // It's a messed up DOS newline (such as that created by a program
+            // that uses "\r\n" as newline when writing to a text mode file,
+            // which causes the '\n' to expand to "\r\n", giving "\r\r\n").
+            nPos += 3
+         CASE SUBSTR( ::cBuffer, nPos, 2 ) == CHR( 13 ) + CHR( 10 )
+            // It's a standard DOS newline
+            nPos += 2
+         OTHERWISE
+            // It's probably a Mac or Unix newline
+            nPos++
          ENDCASE
          ::cBuffer := SUBSTR( ::cBuffer, nPos )
       ENDIF
@@ -162,21 +172,22 @@ METHOD ReadLine() CLASS TFileRead
    RETURN cLine
 
 METHOD EOL_pos() CLASS TFileRead
+
    LOCAL nCRpos, nLFpos, nPos
 
    // Look for both CR and LF in the file read buffer.
    nCRpos := AT( CHR( 13 ), ::cBuffer )
    nLFpos := AT( CHR( 10 ), ::cBuffer )
    DO CASE
-      CASE nCRpos == 0
-         // If there's no CR, use the LF position.
-         nPos := nLFpos
-      CASE nLFpos == 0
-         // If there's no LF, use the CR position.
-         nPos := nCRpos
-      OTHERWISE
-         // If there's both a CR and an LF, use the position of the first one.
-         nPos := MIN( nCRpos, nLFpos )
+   CASE nCRpos == 0
+      // If there's no CR, use the LF position.
+      nPos := nLFpos
+   CASE nLFpos == 0
+      // If there's no LF, use the CR position.
+      nPos := nCRpos
+   OTHERWISE
+      // If there's both a CR and an LF, use the position of the first one.
+      nPos := MIN( nCRpos, nLFpos )
    ENDCASE
 
    RETURN nPos
@@ -200,27 +211,38 @@ METHOD Close() CLASS TFileRead
    RETURN Self
 
 METHOD Name() CLASS TFileRead
+
    // Returns the filename associated with this class instance.
+
    RETURN ::cFile
 
 METHOD IsOpen() CLASS TFileRead
+
    // Returns .T. if the file is open.
+
    RETURN ::nHan != -1
 
 METHOD MoreToRead() CLASS TFileRead
+
    // Returns .T. if there is more to be read from either the file or the
    // readahead buffer. Only when both are exhausted is there no more to read.
+
    RETURN !::lEOF .OR. !EMPTY( ::cBuffer )
 
 METHOD Error() CLASS TFileRead
+
    // Returns .T. if an error was recorded.
+
    RETURN ::nError != 0
 
 METHOD ErrorNo() CLASS TFileRead
+
    // Returns the last error code that was recorded.
+
    RETURN ::nError
 
 METHOD ErrorMsg( cText ) CLASS TFileRead
+
    STATIC s_cAction := {"on", "creating object for", "opening", "reading from", "closing"}
 
    LOCAL cMessage, nTemp
@@ -240,3 +262,4 @@ METHOD ErrorMsg( cText ) CLASS TFileRead
    ENDIF
 
    RETURN cMessage
+

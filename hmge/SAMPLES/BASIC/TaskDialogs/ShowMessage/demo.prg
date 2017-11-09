@@ -1,105 +1,102 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- * Quick Message functions
- *
- * (c) 2016 Grigory Filatov <gfilatov@inbox.ru>
- *
+* MINIGUI - Harbour Win32 GUI library Demo
+* Quick Message functions
+* (c) 2016 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
 #include "TaskDlgs.ch"
 
-
 PROCEDURE main()
+
    LOCAL lIsVistaOrLater := IsVistaOrLater()
    LOCAL nButton
 
-IF lIsVistaOrLater
+   IF lIsVistaOrLater
 
-   ShowMessage( , 'This uses the "ShowMessage" function', ;
-      "Just use an additional parameter (optional) to add this extra text.", ;
-      "And another parameter for yet more text. And another parameter for the footer.", ;
-      'This is the footer with hyperlink <a href="www.hmgextended.com">MiniGUI Software Page</a>', , TD_INFORMATION_ICON )
-ELSE
-
-   MsgInfo( 'This uses the "ShowMessage" function' + CRLF + CRLF + ;
-      "Just use an additional parameter (optional) to add this extra text.", , , .F. )
-
-ENDIF
-
-IF lIsVistaOrLater
-
-   nButton := VerifyYesNo( "A Verify function", ;
-      'You can use the "VerifyYesNo" function', ;
-      "Would you use this one?" )
-
-   ShowMessage( , 'You answered ' + iif( nButton == 6, '"Yes"', '"No"') )
-
-ELSE
-
-   IF MsgYesNo( 'You can use the "VerifyYesNo" function' + CRLF + CRLF + ;
-      "Would you use this one?", "Confirm" )
-
-      MsgInfo( 'You answered "Yes"', , , .F. )
-
+      ShowMessage( , 'This uses the "ShowMessage" function', ;
+         "Just use an additional parameter (optional) to add this extra text.", ;
+         "And another parameter for yet more text. And another parameter for the footer.", ;
+         'This is the footer with hyperlink <a href="www.hmgextended.com">MiniGUI Software Page</a>', , TD_INFORMATION_ICON )
    ELSE
 
-      MsgInfo( 'You answered "No"', , , .F. )
+      MsgInfo( 'This uses the "ShowMessage" function' + CRLF + CRLF + ;
+         "Just use an additional parameter (optional) to add this extra text.", , , .F. )
 
    ENDIF
 
-ENDIF
+   IF lIsVistaOrLater
 
-IF lIsVistaOrLater
+      nButton := VerifyYesNo( "A Verify function", ;
+         'You can use the "VerifyYesNo" function', ;
+         "Would you use this one?" )
 
-   nButton := VerifyYesNoCancel( "Another Verify function", ;
-      'Or you can use the "VerifyYesNoCancel" function', ;
-      "Would you use this one?" )
+      ShowMessage( , 'You answered ' + iif( nButton == 6, '"Yes"', '"No"') )
 
-   ShowMessage( , 'You clicked on ' + iif( nButton == 2, '"Cancel"', iif( nButton == 6, '"Yes"', '"No"') ) )
+   ELSE
 
-ELSE
+      IF MsgYesNo( 'You can use the "VerifyYesNo" function' + CRLF + CRLF + ;
+            "Would you use this one?", "Confirm" )
 
-   nButton := MsgYesNoCancel( 'Or you can use the "VerifyYesNoCancel" function' + CRLF + CRLF + ;
-      "Would you use this one?" , "Confirm" )
+         MsgInfo( 'You answered "Yes"', , , .F. )
 
-   MsgInfo( 'You clicked on ' + iif( nButton == -1, '"Cancel"', iif( nButton == 1, '"Yes"', '"No"') ), , , .F. )
+      ELSE
 
-ENDIF
+         MsgInfo( 'You answered "No"', , , .F. )
 
-IF lIsVistaOrLater
+      ENDIF
 
-   nButton := VerifySave( , "Do you want to save your work?", ;
-      "If you wish to keep any changes you should save your work." )
+   ENDIF
 
-   ShowMessage( , 'You clicked ' + iif( nButton == 2, '"Cancel"', iif( nButton == IDYES, '"Save"', ["Don't save"]) ) )
+   IF lIsVistaOrLater
 
-ELSE
+      nButton := VerifyYesNoCancel( "Another Verify function", ;
+         'Or you can use the "VerifyYesNoCancel" function', ;
+         "Would you use this one?" )
 
-   nButton := MsgYesNoCancel( 'Do you want to save your work?' + CRLF + CRLF + ;
-      "If you wish to keep any changes you should save your work." , "Confirm" )
+      ShowMessage( , 'You clicked on ' + iif( nButton == 2, '"Cancel"', iif( nButton == 6, '"Yes"', '"No"') ) )
 
-   MsgInfo( 'You clicked ' + iif( nButton == -1, '"Cancel"', iif( nButton == 1, '"Save"', ["Don't save"]) ), , , .F. )
+   ELSE
 
-ENDIF
+      nButton := MsgYesNoCancel( 'Or you can use the "VerifyYesNoCancel" function' + CRLF + CRLF + ;
+         "Would you use this one?" , "Confirm" )
 
-IF lIsVistaOrLater
+      MsgInfo( 'You clicked on ' + iif( nButton == -1, '"Cancel"', iif( nButton == 1, '"Yes"', '"No"') ), , , .F. )
 
-   ShowErrorMessage( , 'This uses the "ShowErrorMessage" function', 'With more text here.' )
+   ENDIF
 
-   ShowWarningMessage( , 'This uses the "ShowWarningMessage" function' )
+   IF lIsVistaOrLater
 
-ELSE
+      nButton := VerifySave( , "Do you want to save your work?", ;
+         "If you wish to keep any changes you should save your work." )
 
-   MsgStop( 'This uses the "ShowErrorMessage" function' + CRLF + CRLF + ;
-      "With more text here.", "Error" )
+      ShowMessage( , 'You clicked ' + iif( nButton == 2, '"Cancel"', iif( nButton == IDYES, '"Save"', ["Don't save"]) ) )
 
-   MsgExclamation( 'This uses the "ShowWarningMessage" function', "Warning" )
+   ELSE
 
-ENDIF
+      nButton := MsgYesNoCancel( 'Do you want to save your work?' + CRLF + CRLF + ;
+         "If you wish to keep any changes you should save your work." , "Confirm" )
+
+      MsgInfo( 'You clicked ' + iif( nButton == -1, '"Cancel"', iif( nButton == 1, '"Save"', ["Don't save"]) ), , , .F. )
+
+   ENDIF
+
+   IF lIsVistaOrLater
+
+      ShowErrorMessage( , 'This uses the "ShowErrorMessage" function', 'With more text here.' )
+
+      ShowWarningMessage( , 'This uses the "ShowWarningMessage" function' )
+
+   ELSE
+
+      MsgStop( 'This uses the "ShowErrorMessage" function' + CRLF + CRLF + ;
+         "With more text here.", "Error" )
+
+      MsgExclamation( 'This uses the "ShowWarningMessage" function', "Warning" )
+
+   ENDIF
 
    RETURN
-
 
 FUNCTION ShowMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter, nIcon, nFooterIcon )
 
@@ -139,20 +136,17 @@ FUNCTION ShowMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter, nI
       aConfig[ TDC_FOOTER ]               := cFooter
    ENDIF
 
-   aConfig[ TDC_CALLBACK ]                := {|h,n,w,l| callback( h,n,w,l )} 
+   aConfig[ TDC_CALLBACK ]                := {|h,n,w,l| callback( h,n,w,l )}
 
    RETURN win_TaskDialogIndirect0( aConfig, @nButton, @nRadioButton, @lVerificationFlagChecked )
-
 
 FUNCTION ShowErrorMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter )
 
    RETURN ShowMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter, TD_ERROR_ICON )
 
-
 FUNCTION ShowWarningMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter )
 
    RETURN ShowMessage( cTitle, cMainMessage, cContent, cExpandedInfo, cFooter, TD_WARNING_ICON )
-
 
 FUNCTION VerifySave( cTitle, cMainMessage, cContent )
 
@@ -179,22 +173,24 @@ FUNCTION VerifySave( cTitle, cMainMessage, cContent )
       aConfig[ TDC_CONTENT ]        := cContent
    ENDIF
 
-   aConfig[ TDC_CALLBACK ]             := {|h,n,w,l| callback( h,n,w,l )} 
+   aConfig[ TDC_CALLBACK ]             := {|h,n,w,l| callback( h,n,w,l )}
 
    nResult := win_TaskDialogIndirect0( aConfig, @nButton, @nRadioButton, @lVerificationFlagChecked )
 
    IF nResult == 0           // no error occurs
+
       RETURN nButton
    ENDIF
 
    RETURN nResult
 
-
 STATIC FUNCTION callback( hWnd, nNotification, wParam, lParam )
+
    LOCAL lResult := .F.
+
    /*
    To prevent the task dialog from closing, the application must return FALSE,
-   otherwise the task dialog is closed 
+   otherwise the task dialog is closed
    */
    LOCAL hResp := { 1=>"OK", 2=>"CANCEL", 3=>"ABORT", 4=>"RETRY", 5=>"IGNORE", 6=>"YES", 7=>"NO", 8=>"CLOSE" }
 
@@ -212,7 +208,6 @@ STATIC FUNCTION callback( hWnd, nNotification, wParam, lParam )
 
    RETURN lResult
 
-
 FUNCTION VerifyYesNo( cWindowTitle, cMainMessage, cContent )
 
    LOCAL dwCommonButtons
@@ -227,11 +222,11 @@ FUNCTION VerifyYesNo( cWindowTitle, cMainMessage, cContent )
    win_TaskDialog0( ,, cWindowTitle, cMainMessage, cContent, dwCommonButtons, TD_QUESTION, @nButton )
 
    IF ! HB_ISNIL( nButton )
+
       RETURN nButton
    ENDIF
 
    RETURN -1
-
 
 FUNCTION VerifyYesNoCancel( cWindowTitle, cMainMessage, cContent )
 
@@ -247,7 +242,9 @@ FUNCTION VerifyYesNoCancel( cWindowTitle, cMainMessage, cContent )
    win_TaskDialog0( ,, cWindowTitle, cMainMessage, cContent, dwCommonButtons, TD_QUESTION, @nButton )
 
    IF ! HB_ISNIL( nButton )
+
       RETURN nButton
    ENDIF
 
    RETURN -1
+

@@ -1,37 +1,35 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Based on sample provided by Honorio and modified by Jacek Kubica
- * Adapted by MigSoft for Harbour MiniGUI IDE
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Based on sample provided by Honorio and modified by Jacek Kubica
+* Adapted by MigSoft for Harbour MiniGUI IDE
 */
 
 #include <minigui.ch>
 
- Procedure Main()
+PROCEDURE Main()
 
-   Set Multiple Off Warning
+   SET MULTIPLE OFF Warning
 
-   Use Cuentas
-   Index On field->nombre To cuentas
+   USE Cuentas
+   INDEX ON field->nombre To cuentas
 
-   Load window Win_1
-   Center window Win_1
+   LOAD WINDOW Win_1
+   CENTER WINDOW Win_1
    Win_1.Text_1.Setfocus
-   Activate window Win_1
+   ACTIVATE WINDOW Win_1
 
-Return
-*--------------------------------------------------------------*
-Function Captura()
-*--------------------------------------------------------------*
-   Local cCapt       := Upper(AllTrim(win_1.Text_1.value))
-   Local nTaman      := Len(cCapt)
-   Local nRegProc    := 0
-   Local nMaxRegGrid := 70
-   Memvar cCampo
-   Private cCampo    := "NOMBRE"
+   RETURN
+
+FUNCTION Captura()
+
+   LOCAL cCapt       := Upper(AllTrim(win_1.Text_1.value))
+   LOCAL nTaman      := Len(cCapt)
+   LOCAL nRegProc    := 0
+   LOCAL nMaxRegGrid := 70
+   MEMVAR cCampo
+   PRIVATE cCampo    := "NOMBRE"
 
    DBSELECTAREA("Cuentas")
    DBSeek(cCapt)
@@ -39,38 +37,44 @@ Function Captura()
    win_1.Grid_1.DisableUpdate
    DELETE ITEM ALL FROM Grid_1 OF Win_1
 
-   Do While !EOF()
-      If Substr(FIELD->&cCampo,1,nTaman) == cCapt
+   DO WHILE !EOF()
+      IF Substr(FIELD->&cCampo,1,nTaman) == cCapt
          nRegProc += 1
-         If nRegProc > nMaxRegGrid
+         IF nRegProc > nMaxRegGrid
             EXIT
-         Endif
+         ENDIF
          ADD ITEM { TRANSF(Cuentas->Imputacion,"9999999") , ;
-                           Cuentas->Nombre } TO Grid_1 of Win_1
-      ElseIf Substr(FIELD->&cCampo,1,nTaman) > cCapt
+            Cuentas->Nombre } TO Grid_1 of Win_1
+      ELSEIF Substr(FIELD->&cCampo,1,nTaman) > cCapt
          EXIT
-      Endif
+      ENDIF
       DBSkip()
-   Enddo
+   ENDDO
    win_1.Grid_1.EnableUpdate
-Return NIL
-*--------------------------------------------------------------*
-Procedure VerItem()
-*--------------------------------------------------------------*
+
+   RETURN NIL
+
+PROCEDURE VerItem()
+
    MsgInfo( 'Col 1: ' + GetColValue( "Grid_1", "Win_1", 1 )+'  ';
-          + 'Col 2: ' + GetColValue( "Grid_1", "Win_1", 2 ) )
-Return
-*--------------------------------------------------------------*
-Function GetColValue( xObj, xForm, nCol )
-*--------------------------------------------------------------*
-  Local nPos:= GetProperty(xForm, xObj, 'Value')
-  Local aRet:= GetProperty(xForm, xObj, 'Item', nPos)
-Return aRet[nCol]
-*--------------------------------------------------------------*
-Function SetColValue( xObj, xForm, nCol, xValue )
-*--------------------------------------------------------------*
-  Local nPos:= GetProperty(xForm, xObj, 'Value')
-  Local aRet:= GetProperty(xForm, xObj, 'Item', nPos)
-      aRet[nCol] := xValue
-      SetProperty(xForm, xObj, 'Item', nPos, aRet)
-Return NIL
+      + 'Col 2: ' + GetColValue( "Grid_1", "Win_1", 2 ) )
+
+   RETURN
+
+FUNCTION GetColValue( xObj, xForm, nCol )
+
+   LOCAL nPos:= GetProperty(xForm, xObj, 'Value')
+   LOCAL aRet:= GetProperty(xForm, xObj, 'Item', nPos)
+
+   RETURN aRet[nCol]
+
+FUNCTION SetColValue( xObj, xForm, nCol, xValue )
+
+   LOCAL nPos:= GetProperty(xForm, xObj, 'Value')
+   LOCAL aRet:= GetProperty(xForm, xObj, 'Item', nPos)
+
+   aRet[nCol] := xValue
+   SetProperty(xForm, xObj, 'Item', nPos, aRet)
+
+   RETURN NIL
+

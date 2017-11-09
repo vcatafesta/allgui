@@ -1,8 +1,8 @@
 /*
-   HMG Fill Directory List Demo
+HMG Fill Directory List Demo
 
-   (c) 2011 Bicahi Esgici
-   
+(c) 2011 Bicahi Esgici
+
 */
 
 #include "minigui.ch"
@@ -10,12 +10,12 @@
 PROCEDURE MAIN()
 
    DEFINE WINDOW frmTestDirList;
-      AT 0, 0;
-      WIDTH  500 ;
-      HEIGHT 500 ;
-      TITLE "Test DIR List" ;
-      MAIN ; 
-      ON INIT FillDirList(.t.)
+         AT 0, 0;
+         WIDTH  500 ;
+         HEIGHT 500 ;
+         TITLE "Test DIR List" ;
+         MAIN ;
+         ON INIT FillDirList(.t.)
 
       ON KEY ESCAPE ACTION ThisWindow.Release
 
@@ -27,39 +27,36 @@ PROCEDURE MAIN()
    frmTestDirList.Center
    frmTestDirList.Activate
 
-RETURN // MAIN()
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RETURN // MAIN()
 
 PROCEDURE FillDirList(lInit)
 
-LOCAL cDIRName   := GetFolder( "Choose a folder" ) 
-LOCAL aDirList   AS ARRAY
-LOCAL nDirElemNo
+   LOCAL cDIRName   := GetFolder( "Choose a folder" )
+   LOCAL aDirList   AS ARRAY
+   LOCAL nDirElemNo
 
-DEFAULT lInit := .f.
+   DEFAULT lInit := .f.
 
-IF !EMPTY( cDIRName ) 
+   IF !EMPTY( cDIRName )
 
-   cDIRName += "\*.*"
-   cDIRName := STRTRAN( cDIRName, "\\", "\" )
+      cDIRName += "\*.*"
+      cDIRName := STRTRAN( cDIRName, "\\", "\" )
 
-   ASSIGN aDirList := Directory( cDIRName )
-   IF EMPTY( aDirList )
-      MsgInfo( cDIRName + CRLF + " This folder doesn't contains ordinary file.")
-   ELSE
+      ASSIGN aDirList := Directory( cDIRName )
+      IF EMPTY( aDirList )
+         MsgInfo( cDIRName + CRLF + " This folder doesn't contains ordinary file.")
+      ELSE
 
-      IF !lInit
-         frmTestDirList.lstbxDirList.DeleteAllItems()
-      ENDIF !lInit
+         IF !lInit
+            frmTestDirList.lstbxDirList.DeleteAllItems()
+         ENDIF !lInit
 
-      FOR nDirElemNo := 1 to LEN( aDirList )
-         frmTestDirList.lstbxDirList.AddItem( aDirList[ nDirElemNo, 1 ] )  
-      NEXT
-   ENDIF EMPTY( aDirList )
+         FOR nDirElemNo := 1 to LEN( aDirList )
+            frmTestDirList.lstbxDirList.AddItem( aDirList[ nDirElemNo, 1 ] )
+         NEXT
+      ENDIF EMPTY( aDirList )
 
-ENDIF !EMPTY( cDIRName ) 
+   ENDIF !EMPTY( cDIRName )
 
-RETURN // FillDirList()
+   RETURN // FillDirList()
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

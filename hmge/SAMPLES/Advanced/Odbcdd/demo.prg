@@ -1,12 +1,9 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
- *
- * Based on RDDSQL ODBC sample included in Harbour distribution
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-2009 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2009 Grigory Filatov <gfilatov@inbox.ru>
+* Based on RDDSQL ODBC sample included in Harbour distribution
 */
 
 #include "minigui.ch"
@@ -16,103 +13,99 @@
 ANNOUNCE RDDSYS
 REQUEST SQLMIX, SDDODBC
 
-*--------------------------------------------------------*
-Function Main()
-*--------------------------------------------------------*
-LOCAL nConnection
+FUNCTION Main()
 
-	RDDSETDEFAULT( "SQLMIX" )
+   LOCAL nConnection
 
-	SET( _SET_DATEFORMAT, "yyyy-mm-dd" )
+   RDDSETDEFAULT( "SQLMIX" )
 
-	nConnection := RDDINFO( RDDI_CONNECT, { "ODBC", "Server=localhost;Driver={MySQL ODBC 3.51 Driver};dsn=;User=root;database=test;" } )
-	IF nConnection == 0
-		MsgStop("Unable connect to the server!", "Error")
-		Return nil
-	ENDIF
+   SET( _SET_DATEFORMAT, "yyyy-mm-dd" )
 
-	DEFINE WINDOW Form_1 ;
-		AT 0,0 ;
-		WIDTH 640 HEIGHT 480 ;
-		TITLE 'MiniGUI ODBC Database Driver Demo' ;
-		MAIN NOMAXIMIZE ;
-		ON INIT OpenTable() ;
-		ON RELEASE CloseTable()
+   nConnection := RDDINFO( RDDI_CONNECT, { "ODBC", "Server=localhost;Driver={MySQL ODBC 3.51 Driver};dsn=;User=root;database=test;" } )
+   IF nConnection == 0
+      MsgStop("Unable connect to the server!", "Error")
 
-		DEFINE MAIN MENU
+      RETURN NIL
+   ENDIF
 
-			DEFINE POPUP 'File'
-				ITEM "Exit"		ACTION ThisWindow.Release()
-			END POPUP
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI ODBC Database Driver Demo' ;
+         MAIN NOMAXIMIZE ;
+         ON INIT OpenTable() ;
+         ON RELEASE CloseTable()
 
-		END MENU
+      DEFINE MAIN MENU
 
-		@ 10,10 BROWSE Browse_1	;
-			WIDTH 610	;
-			HEIGHT 390	;	
-			HEADERS { 'Code' , 'Name' , 'Residents' } ;
-			WIDTHS { 50 , 160 , 100 } ;
-			WORKAREA country ;
-			FIELDS { 'country->Code' , 'country->Name' , 'country->Residents' } ;
-			JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT }
+         DEFINE POPUP 'File'
+            ITEM "Exit"      ACTION ThisWindow.Release()
+         END POPUP
 
-	END WINDOW
+      END MENU
 
-	CENTER WINDOW Form_1
+      @ 10,10 BROWSE Browse_1   ;
+         WIDTH 610   ;
+         HEIGHT 390   ;
+         HEADERS { 'Code' , 'Name' , 'Residents' } ;
+         WIDTHS { 50 , 160 , 100 } ;
+         WORKAREA country ;
+         FIELDS { 'country->Code' , 'country->Name' , 'country->Residents' } ;
+         JUSTIFY { BROWSE_JTFY_LEFT, BROWSE_JTFY_LEFT, BROWSE_JTFY_RIGHT }
 
-	ACTIVATE WINDOW Form_1
+   END WINDOW
 
-Return nil
+   CENTER WINDOW Form_1
 
-*--------------------------------------------------------*
-Procedure OpenTable
-*--------------------------------------------------------*
+   ACTIVATE WINDOW Form_1
 
-   If CreateTable()
+   RETURN NIL
 
-	DBUSEAREA( .T.,, "SELECT * FROM country", "country" )
+PROCEDURE OpenTable
 
-	INDEX ON FIELD->RESIDENTS TAG residents TO country
+   IF CreateTable()
 
-	GO TOP
+      DBUSEAREA( .T.,, "SELECT * FROM country", "country" )
 
-   Else
+      INDEX ON FIELD->RESIDENTS TAG residents TO country
 
-	Form_1.Release()
+      GO TOP
 
-   EndIf
+   ELSE
 
-Return
+      Form_1.Release()
 
-*--------------------------------------------------------*
-Procedure CloseTable
-*--------------------------------------------------------*
+   ENDIF
+
+   RETURN
+
+PROCEDURE CloseTable
 
    DBCLOSEALL()
 
-Return
+   RETURN
 
-*--------------------------------------------------------*
-Function CreateTable
-*--------------------------------------------------------*
-Local ret := .T.
+FUNCTION CreateTable
+
+   LOCAL ret := .T.
 
    RDDINFO(RDDI_EXECUTE, "DROP TABLE country")
 
-   If RDDINFO(RDDI_EXECUTE, "CREATE TABLE country (CODE char(3), NAME char(50), RESIDENTS int(11))")
+   IF RDDINFO(RDDI_EXECUTE, "CREATE TABLE country (CODE char(3), NAME char(50), RESIDENTS int(11))")
 
-      If ! RDDINFO(RDDI_EXECUTE, "INSERT INTO country values ('LTU', 'Lithuania', 3369600), ('USA', 'United States of America', 305397000), ('POR', 'Portugal', 10617600), ('POL', 'Poland', 38115967), ('AUS', 'Australia', 21446187), ('FRA', 'France', 64473140), ('RUS', 'Russia', 141900000)")
+      IF ! RDDINFO(RDDI_EXECUTE, "INSERT INTO country values ('LTU', 'Lithuania', 3369600), ('USA', 'United States of America', 305397000), ('POR', 'Portugal', 10617600), ('POL', 'Poland', 38115967), ('AUS', 'Australia', 21446187), ('FRA', 'France', 64473140), ('RUS', 'Russia', 141900000)")
 
-	MsgStop("Can't fill table Country!", "Error")
-	ret := .F.
+         MsgStop("Can't fill table Country!", "Error")
+         ret := .F.
 
-      EndIf
+      ENDIF
 
-   Else
+   ELSE
 
-	MsgStop("Can't create table Country!", "Error")
-	ret := .F.
+      MsgStop("Can't create table Country!", "Error")
+      ret := .F.
 
-   EndIf
+   ENDIF
 
-Return ret
+   RETURN ret
+

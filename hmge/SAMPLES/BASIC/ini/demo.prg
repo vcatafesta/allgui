@@ -1,33 +1,34 @@
 #include "minigui.ch"
 
 FUNCTION main()
-LOCAL cIniFile := GetStartupFolder() + '\demo.ini'
-LOCAL aRet
 
-SetIniValue(cIniFile)
+   LOCAL cIniFile := GetStartupFolder() + '\demo.ini'
+   LOCAL aRet
 
-aRet := GetIniValue(cIniFile)
+   SetIniValue(cIniFile)
 
-AEVAL( aRet, { |x| MsgInfo( x, 'Type is ' + ValType(x) ) } )
+   aRet := GetIniValue(cIniFile)
 
-RETURN NIL
+   AEVAL( aRet, { |x| MsgInfo( x, 'Type is ' + ValType(x) ) } )
 
+   RETURN NIL
 
 PROCEDURE SetIniValue( cIni )
 
-BEGIN INI FILE cIni
-  SET SECTION 'Project' ENTRY 'Name' TO 'My Project'
-END INI
+   BEGIN INI FILE cIni
+      SET SECTION 'Project' ENTRY 'Name' TO 'My Project'
+   END INI
 
-RETURN
-
+   RETURN
 
 FUNCTION GetIniValue( cIni )
-LOCAL cName, nVers
 
-BEGIN INI FILE (cIni)
-  GET cName SECTION 'Project' ENTRY 'Name' DEFAULT ''
-  GET nVers SECTION 'Project' ENTRY 'Vers' DEFAULT 1.01
-END INI
+   LOCAL cName, nVers
 
-RETURN { cName, nVers }
+   BEGIN INI FILE (cIni)
+      GET cName SECTION 'Project' ENTRY 'Name' DEFAULT ''
+      GET nVers SECTION 'Project' ENTRY 'Vers' DEFAULT 1.01
+   END INI
+
+   RETURN { cName, nVers }
+

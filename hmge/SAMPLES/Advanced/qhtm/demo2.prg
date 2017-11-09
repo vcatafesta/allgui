@@ -1,81 +1,79 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "MiniGUI.ch"
 #include "i_qhtm.ch"
 #include "i_winuser.ch"
 
-Procedure Main
-local cfile := "about.htm"
-local cHtml := Memoread( cfile )
+PROCEDURE Main
 
-if !qhtm_init()
-	return
-endif
+   LOCAL cfile := "about.htm"
+   LOCAL cHtml := Memoread( cfile )
 
-SET EVENTS FUNCTION TO MYEVENTS
+   IF !qhtm_init()
 
-DEFINE WINDOW Form_1 AT 0, 0		;
-	WIDTH 415			;
-	HEIGHT 230			;
-	TITLE "QHTM demo"		;
-	ICON "demo.ico"			;
-	MAIN NOMAXIMIZE NOSIZE		;
-	ON RELEASE qhtm_end()
+      RETURN
+   ENDIF
 
-	if !file(cfile)
-	      cfile := GetFile( { {"HTML files (*.htm)", "*.htm"}, {"All files (*.*)", "*.*"} }, ;
-			"Select a file", GetStartupFolder(), , .T. )
-	endif
+   SET EVENTS FUNCTION TO MYEVENTS
 
-	@ 10,12 QHTM Html_1 ;
-		VALUE cHtml ;
-		WIDTH Form_1.Width - 28 ;
-		HEIGHT Form_1.Height - GetTitleHeight() - 32 ;
-		ON CHANGE {|lParam| QHTM_MessageBox( "The link is: " + QHTM_GetLink( lParam ) ) } ;
-		BORDER
-END WINDOW
+   DEFINE WINDOW Form_1 AT 0, 0      ;
+         WIDTH 415         ;
+         HEIGHT 230         ;
+         TITLE "QHTM demo"      ;
+         ICON "demo.ico"         ;
+         MAIN NOMAXIMIZE NOSIZE      ;
+         ON RELEASE qhtm_end()
 
-Center Window Form_1
+      IF !file(cfile)
+         cfile := GetFile( { {"HTML files (*.htm)", "*.htm"}, {"All files (*.*)", "*.*"} }, ;
+            "Select a file", GetStartupFolder(), , .T. )
+      ENDIF
 
-Activate Window Form_1
+      @ 10,12 QHTM Html_1 ;
+         VALUE cHtml ;
+         WIDTH Form_1.Width - 28 ;
+         HEIGHT Form_1.Height - GetTitleHeight() - 32 ;
+         ON CHANGE {|lParam| QHTM_MessageBox( "The link is: " + QHTM_GetLink( lParam ) ) } ;
+         BORDER
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_1
 
+   ACTIVATE WINDOW Form_1
 
-*------------------------------------------------------------------------------*
-function MyEvents ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
-Local i
+   RETURN
 
-	do case
+FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
-        ***********************************************************************
-	case nMsg == WM_NOTIFY
-        ***********************************************************************
+   LOCAL i
 
-		i := Ascan ( _HMG_aControlIds , wParam )
+   DO CASE
 
-		If i > 0
+   CASE nMsg == WM_NOTIFY
 
-			If _HMG_aControlType [i] = "QHTM"
+      i := Ascan ( _HMG_aControlIds , wParam )
 
-				if valtype( _HMG_aControlChangeProcedure [i] ) == 'B'
-					Eval( _HMG_aControlChangeProcedure [i], lParam )
-				EndIf
+      IF i > 0
 
-			EndIf
+         IF _HMG_aControlType [i] = "QHTM"
 
-		EndIf
+            IF valtype( _HMG_aControlChangeProcedure [i] ) == 'B'
+               Eval( _HMG_aControlChangeProcedure [i], lParam )
+            ENDIF
 
-	otherwise
+         ENDIF
 
-		Return Events ( hWnd, nMsg, wParam, lParam )
+      ENDIF
 
-    endcase
+   OTHERWISE
 
-Return (0)
+      RETURN Events ( hWnd, nMsg, wParam, lParam )
+
+   ENDCASE
+
+   RETURN (0)
+

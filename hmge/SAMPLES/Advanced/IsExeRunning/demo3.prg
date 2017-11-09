@@ -1,39 +1,39 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2013 Simon Norbert <simon.n@t-online.hu>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-10 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2013 Simon Norbert <simon.n@t-online.hu>
 */
 
 #include <minigui.ch>
 
-Procedure MAIN
-Local cTitle := 'One Instance Sample'
- 
-OnlyOneInstance( cTitle )
- 
-DEFINE WINDOW Main ;
-   WIDTH 600       ;
-   HEIGHT 400      ;
-   TITLE cTitle    ;
-   MAIN
+PROCEDURE MAIN
 
-END WINDOW
+   LOCAL cTitle := 'One Instance Sample'
 
-Main.Center
-Main.Activate
+   OnlyOneInstance( cTitle )
 
-Return
+   DEFINE WINDOW Main ;
+         WIDTH 600       ;
+         HEIGHT 400      ;
+         TITLE cTitle    ;
+         MAIN
 
+   END WINDOW
 
-Function OnlyOneInstance( cAppTitle )
-Local hWnd := FindWindowEx( ,,, cAppTitle )
- 
-if hWnd # 0
-   iif( IsIconic( hWnd ), _Restore( hWnd ), SetForeGroundWindow( hWnd ) )
-   ExitProcess( 0 )
-endif
+   Main.Center
+   Main.Activate
 
-Return NIL
+   RETURN
+
+FUNCTION OnlyOneInstance( cAppTitle )
+
+   LOCAL hWnd := FindWindowEx( ,,, cAppTitle )
+
+   IF hWnd # 0
+      iif( IsIconic( hWnd ), _Restore( hWnd ), SetForeGroundWindow( hWnd ) )
+      EXITProcess( 0 )
+   ENDIF
+
+   RETURN NIL
+

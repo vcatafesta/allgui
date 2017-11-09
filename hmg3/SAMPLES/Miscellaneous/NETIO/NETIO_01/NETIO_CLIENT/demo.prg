@@ -1,9 +1,11 @@
 REQUEST HB_GT_WIN_DEFAULT
+
 FUNCTION MAIN
 
-	NETIO_CONNECT()
+   NETIO_CONNECT()
 
-	use "net:test"
-	browse()
+   USE "net:test"
+   browse()
 
-RETURN
+   RETURN
+

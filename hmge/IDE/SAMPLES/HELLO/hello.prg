@@ -4,10 +4,10 @@
 
 #include "minigui.ch"
 
-Procedure Main
+PROCEDURE Main
 
-	Load Window Hello
-	Activate Window Hello
+   LOAD WINDOW Hello
+   ACTIVATE WINDOW Hello
 
-Return
+   RETURN
 

@@ -1,10 +1,8 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
- *
- * Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-06 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
+* Copyright 2006 Grigory Filatov <gfilatov@inbox.ru>
 */
 
 #include "minigui.ch"
@@ -14,190 +12,182 @@
 #define COPYRIGHT ' 2006 by Grigory Filatov'
 #define MsgInfo( c, t ) MsgInfo( c, t, , .f. )
 
-*--------------------------------------------------------*
 PROCEDURE Main
-*--------------------------------------------------------*
-Local aHeaders := { 'Code', 'Description' }, ;
-  aFields := { 'T1', 'T2' }, aJustify := { 1, 0 }
 
-  SET EXCLUSIVE OFF
+   LOCAL aHeaders := { 'Code', 'Description' }, ;
+      aFields := { 'T1', 'T2' }, aJustify := { 1, 0 }
 
-  DEFINE WINDOW Form_1 ;
-    AT 0,0 ;
-    WIDTH 529 HEIGHT 339 + IF(IsXPThemeActive(), 6, 0 ) ;
-    TITLE PROGRAM ;
-    MAIN ;
-    ICON "MAINICON" ;
-    NOMAXIMIZE NOSIZE ;
-    ON INIT OnInit() ;
-    ON RELEASE OnExit() ;
-    FONT "MS Sans Serif" SIZE 8
+   SET EXCLUSIVE OFF
 
-    @ 8,10 LABEL Label_1        ;
-      VALUE ""        ;
-      WIDTH Form_1.Width - 24           ;
-      HEIGHT 18       ;
-      FONT 'MS Sans Serif' SIZE 9     ;
-      BOLD          ;
-      CENTERALIGN       ;
-      TRANSPARENT
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 529 HEIGHT 339 + IF(IsXPThemeActive(), 6, 0 ) ;
+         TITLE PROGRAM ;
+         MAIN ;
+         ICON "MAINICON" ;
+         NOMAXIMIZE NOSIZE ;
+         ON INIT OnInit() ;
+         ON RELEASE OnExit() ;
+         FONT "MS Sans Serif" SIZE 8
 
-    DEFINE BROWSE Browse_1
-      ROW 30
-      COL 10
-      WIDTH Form_1.Width - 30
-      HEIGHT 152
-      HEADERS aHeaders
-      WIDTHS { 40, 438 }
-      FIELDS aFields
-      JUSTIFY aJustify
-      WORKAREA ERRMSG
-      NOLINES .T.
-    END BROWSE
+      @ 8,10 LABEL Label_1        ;
+         VALUE ""        ;
+         WIDTH Form_1.Width - 24           ;
+         HEIGHT 18       ;
+         FONT 'MS Sans Serif' SIZE 9     ;
+         BOLD          ;
+         CENTERALIGN       ;
+         TRANSPARENT
 
-    DEFINE BROWSE Browse_2
-      ROW 30
-      COL 10
-      WIDTH Form_1.Width - 30
-      HEIGHT 152
-      HEADERS aHeaders
-      WIDTHS { 90, 388 }
-      FIELDS aFields
-      JUSTIFY aJustify
-      WORKAREA ERRMSG2
-      NOLINES .T.
-    END BROWSE
+      DEFINE BROWSE Browse_1
+         ROW 30
+         COL 10
+         WIDTH Form_1.Width - 30
+         HEIGHT 152
+         HEADERS aHeaders
+         WIDTHS { 40, 438 }
+         FIELDS aFields
+         JUSTIFY aJustify
+         WORKAREA ERRMSG
+         NOLINES .T.
+      END BROWSE
 
-    @ 200,10 IMAGE Image_1 ;
-      PICTURE 'LOGO' ;
-      ON CLICK Form_1.Text_1.SetFocus;
-      WIDTH 317 HEIGHT 105
+      DEFINE BROWSE Browse_2
+         ROW 30
+         COL 10
+         WIDTH Form_1.Width - 30
+         HEIGHT 152
+         HEADERS aHeaders
+         WIDTHS { 90, 388 }
+         FIELDS aFields
+         JUSTIFY aJustify
+         WORKAREA ERRMSG2
+         NOLINES .T.
+      END BROWSE
 
-    @ 268,182 TEXTBOX Text_1 ; 
-      HEIGHT 20 ;
-      WIDTH 120 ;
-      MAXLENGTH 10 ;
-      ON CHANGE OnCodeChange(Form_1.Text_1.Value) ;
-      RIGHTALIGN
+      @ 200,10 IMAGE Image_1 ;
+         PICTURE 'LOGO' ;
+         ON CLICK Form_1.Text_1.SetFocus;
+         WIDTH 317 HEIGHT 105
 
-    @ 240,Form_1.Width - 174 BUTTONEX Image_2 ;
-      PICTURE 'HELP' ;
-      WIDTH 54 HEIGHT 54 ;
-      TOOLTIP 'Help' ;
-      ACTION ( MsgInfo('Enter the error code number of scroll down the available list.', PROGRAM), ;
-        Form_1.Text_1.Setfocus )
+      @ 268,182 TEXTBOX Text_1 ;
+         HEIGHT 20 ;
+         WIDTH 120 ;
+         MAXLENGTH 10 ;
+         ON CHANGE OnCodeChange(Form_1.Text_1.Value) ;
+         RIGHTALIGN
 
-    @ 200,Form_1.Width - 178 RADIOGROUP Radio_1 ;
-      OPTIONS { 'Win Errors', 'OLE Errors' } ;
-      VALUE 1 ;
-      WIDTH 70 ;
-      SPACING 16 ;
-      ON CHANGE OnErrChange() ;
-      HORIZONTAL
+      @ 240,Form_1.Width - 174 BUTTONEX Image_2 ;
+         PICTURE 'HELP' ;
+         WIDTH 54 HEIGHT 54 ;
+         TOOLTIP 'Help' ;
+         ACTION ( MsgInfo('Enter the error code number of scroll down the available list.', PROGRAM), ;
+         Form_1.Text_1.Setfocus )
 
-    @ 240,Form_1.Width - 98 BUTTONEX Button_1 ;
-      CAPTION '&About' ;
-      WIDTH 80 HEIGHT 24 ;
-      TOOLTIP 'About the program' ;
-      ACTION ( MsgInfo( padc(PROGRAM + VERSION, 38) + CRLF + ;
-        padc("Copyright " + Chr(169) + COPYRIGHT, 38) + CRLF + CRLF + ;
-        hb_compiler() + CRLF + version() + CRLF + ;
-        Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
-        padc("This program is Freeware!", 38) + CRLF + ;
-        padc("Copying is allowed!", 42), "About" ), ;
-        Form_1.Text_1.Setfocus )
+      @ 200,Form_1.Width - 178 RADIOGROUP Radio_1 ;
+         OPTIONS { 'Win Errors', 'OLE Errors' } ;
+         VALUE 1 ;
+         WIDTH 70 ;
+         SPACING 16 ;
+         ON CHANGE OnErrChange() ;
+         HORIZONTAL
 
-    @ 280,Form_1.Width - 98 BUTTONEX Button_2 ;
-      CAPTION '&Close' ;
-      WIDTH 80 HEIGHT 24 ;
-      TOOLTIP 'Close the program' ;
-      ACTION Form_1.Release
+      @ 240,Form_1.Width - 98 BUTTONEX Button_1 ;
+         CAPTION '&About' ;
+         WIDTH 80 HEIGHT 24 ;
+         TOOLTIP 'About the program' ;
+         ACTION ( MsgInfo( padc(PROGRAM + VERSION, 38) + CRLF + ;
+         padc("Copyright " + Chr(169) + COPYRIGHT, 38) + CRLF + CRLF + ;
+         hb_compiler() + CRLF + version() + CRLF + ;
+         Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
+         padc("This program is Freeware!", 38) + CRLF + ;
+         padc("Copying is allowed!", 42), "About" ), ;
+         Form_1.Text_1.Setfocus )
 
-    ON KEY ALT+X ACTION Form_1.Release
+      @ 280,Form_1.Width - 98 BUTTONEX Button_2 ;
+         CAPTION '&Close' ;
+         WIDTH 80 HEIGHT 24 ;
+         TOOLTIP 'Close the program' ;
+         ACTION Form_1.Release
 
-  END WINDOW
+      ON KEY ALT+X ACTION Form_1.Release
 
-  Form_1.Center
+   END WINDOW
 
-  ACTIVATE WINDOW Form_1
+   Form_1.Center
 
-Return
+   ACTIVATE WINDOW Form_1
 
-*--------------------------------------------------------*
+   RETURN
+
 PROCEDURE OnInit
-*--------------------------------------------------------*
-Local cProgramPath := GetStartUpFolder() + "\"
 
-  IF !FILE(cProgramPath + "ERRMSG.DBF") .OR. !FILE(cProgramPath + "ERRMSG2.DBF")
-    MsgStop( "Databases don't exist!", "Stop" )
-    ReleaseAllWindows()
-  ENDIF
+   LOCAL cProgramPath := GetStartUpFolder() + "\"
 
-  USE ERRMSG NEW READONLY
-  USE ERRMSG2 NEW READONLY
+   IF !FILE(cProgramPath + "ERRMSG.DBF") .OR. !FILE(cProgramPath + "ERRMSG2.DBF")
+      MsgStop( "Databases don't exist!", "Stop" )
+      ReleaseAllWindows()
+   ENDIF
 
-  OnErrChange()
+   USE ERRMSG NEW READONLY
+   USE ERRMSG2 NEW READONLY
 
-RETURN
+   OnErrChange()
 
-*--------------------------------------------------------*
+   RETURN
+
 PROCEDURE OnExit
-*--------------------------------------------------------*
 
-  CLOSE DATABASES
+   CLOSE DATABASES
 
-RETURN
+   RETURN
 
-*--------------------------------------------------------*
 PROCEDURE OnCodeChange( cSeek )
-*--------------------------------------------------------*
-Local nCode := Form_1.Radio_1.Value, cBrowse := "Browse_" + Str(nCode, 1)
 
-IF nCode == 1
-  IF EMPTY(cSeek)
-    SET FILTER TO
-  ELSE
-    SET FILTER TO STR(VAL(Form_1.Text_1.Value)) $ STR(FIELD->T1, 4)
-  ENDIF
-ELSE
-  IF EMPTY(cSeek)
-    SET FILTER TO
-  ELSE
-    SET FILTER TO UPPER(Form_1.Text_1.Value) $ FIELD->T1
-  ENDIF
-ENDIF
+   LOCAL nCode := Form_1.Radio_1.Value, cBrowse := "Browse_" + Str(nCode, 1)
 
-GO TOP
-SetProperty( 'Form_1', cBrowse, 'Value', RecNo() )
+   IF nCode == 1
+      IF EMPTY(cSeek)
+         SET FILTER TO
+      ELSE
+         SET FILTER TO STR(VAL(Form_1.Text_1.Value)) $ STR(FIELD->T1, 4)
+      ENDIF
+   ELSE
+      IF EMPTY(cSeek)
+         SET FILTER TO
+      ELSE
+         SET FILTER TO UPPER(Form_1.Text_1.Value) $ FIELD->T1
+      ENDIF
+   ENDIF
 
-RETURN
+   GO TOP
+   SetProperty( 'Form_1', cBrowse, 'Value', RecNo() )
 
-*--------------------------------------------------------*
+   RETURN
+
 PROCEDURE OnErrChange
-*--------------------------------------------------------*
-Local nCode := Form_1.Radio_1.Value
 
-IF nCode == 1
-  SELECT ERRMSG
-  Form_1.Browse_2.Hide
-  Form_1.Browse_1.Show
-ELSE
-  SELECT ERRMSG2
-  Form_1.Browse_1.Hide
-  Form_1.Browse_2.Show
-ENDIF
+   LOCAL nCode := Form_1.Radio_1.Value
 
-Form_1.Label_1.Value := Ltrim(Str(LastRec())) + " " + ;
-  IF(nCode = 1, "Win", "OLE") + " error codes"
+   IF nCode == 1
+      SELECT ERRMSG
+      Form_1.Browse_2.Hide
+      Form_1.Browse_1.Show
+   ELSE
+      SELECT ERRMSG2
+      Form_1.Browse_1.Hide
+      Form_1.Browse_2.Show
+   ENDIF
 
-IF !EMPTY(DBfilter())
-  SET FILTER TO
-ENDIF
-Form_1.Text_1.Setfocus
+   Form_1.Label_1.Value := Ltrim(Str(LastRec())) + " " + ;
+      IF(nCode = 1, "Win", "OLE") + " error codes"
 
-RETURN
+   IF !EMPTY(DBfilter())
+      SET FILTER TO
+   ENDIF
+   Form_1.Text_1.Setfocus
 
-
+   RETURN
 
 #pragma BEGINDUMP
 

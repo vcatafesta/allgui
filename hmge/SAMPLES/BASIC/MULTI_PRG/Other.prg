@@ -1,25 +1,24 @@
 #include "minigui.ch"
 
-Procedure InOtherPrg()
+PROCEDURE InOtherPrg()
 
-	MsgInfo( Application.Title, "Original Title Of " + Application.FormName )
+   MsgInfo( Application.Title, "Original Title Of " + Application.FormName )
 
-	Application.Title := 'Title Changed In Other Prg'
+   Application.Title := 'Title Changed In Other Prg'
 
-Return
+   RETURN
 
+   EXIT PROCEDURE _OtherProcedure
 
-EXIT PROCEDURE _OtherProcedure
+   WAITWindow('OTHER EXIT PROCEDURE')
 
-WaitWindow('OTHER EXIT PROCEDURE')
+   RETURN
 
-RETURN
-
-
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
 
 STATIC PROCEDURE TEST
 
-RETURN
+   RETURN
 
-#endif
+   #endif
+

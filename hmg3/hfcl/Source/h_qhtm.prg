@@ -5,69 +5,68 @@
 #define WM_SETREDRAW        0x0b
 
 /******
-*
 *       Define QHTM control
-*
 */
-Function _DefineQhtm( ControlName, ParentForm, x, y, w, h, Value, fname, resname, fontname, fontsize, Change, lBorder, bold, italic, underline, strikeout)
-Local mVar, k := 0, ControlHandle, FontHandle, nId 
 
-   if _HMG_SYSDATA [ 264 ] = .T.
+FUNCTION _DefineQhtm( ControlName, ParentForm, x, y, w, h, Value, fname, resname, fontname, fontsize, Change, lBorder, bold, italic, underline, strikeout)
+
+   LOCAL mVar, k := 0, ControlHandle, FontHandle, nId
+
+   IF _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
-      if .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
+      IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
          FontName := _HMG_SYSDATA [ 224 ]
-      EndIf
-      if .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
+      ENDIF
+      IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
          FontSize := _HMG_SYSDATA [ 182 ]
-      EndIf
-   endif
-   
-   if _HMG_SYSDATA [ 183 ] > 0
+      ENDIF
+   ENDIF
+
+   IF _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
          x  := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-         y  := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
+         y  := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-         cParentTabName := _HMG_SYSDATA [ 225 ] 
+         cParentTabName := _HMG_SYSDATA [ 225 ]
       ENDIF
-   EndIf
+   ENDIF
 
-   If .Not. _IsWindowDefined (ParentForm)
+   IF .Not. _IsWindowDefined (ParentForm)
       MsgHMGError(_HMG_SYSDATA [ 136 ][1]+ ParentForm + _HMG_SYSDATA [ 136 ][2])
-   Endif
+   ENDIF
 
-   If _IsControlDefined (ControlName,ParentForm)
+   IF _IsControlDefined (ControlName,ParentForm)
       MsgHMGError (_HMG_SYSDATA [ 136 ][4] + ControlName + _HMG_SYSDATA [ 136 ][5] + ParentForm + _HMG_SYSDATA [ 136 ][6])
-   endif
-   
+   ENDIF
+
    mVar := '_' + ParentForm + '_' + ControlName
 
    cParentForm = ParentForm
 
    ParentForm = GetFormHandle (ParentForm)
-   
+
    nId := _GetId()
 
    ControlHandle := CreateQHTM(ParentForm, nId, IIF (lBorder ==.T., WS_BORDER, 0), y, x, w, h)
 
-   if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
+   IF ValType(fontname) != "U" .and. ValType(fontsize) != "U"
       FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
-   Else
-     FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
-   endif
+   ELSE
+      FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
+   ENDIF
 
-
-   If ( Valtype( Value ) == 'C' )
+   IF ( Valtype( Value ) == 'C' )
       SetWindowText( ControlHandle, Value )
-   ElseIf ( Valtype( fname ) == 'C' )
+   ELSEIF ( Valtype( fname ) == 'C' )
       QHTM_LoadFile( ControlHandle, fname )
-   ElseIf ( Valtype( resname ) == 'C' )
+   ELSEIF ( Valtype( resname ) == 'C' )
       QHTM_LoadRes( ControlHandle, resname )
-   Endif
+   ENDIF
 
    QHTM_FormCallBack( ControlHandle )
 
    k := _GetControlFree()
-   Public &mVar. := k
+   PUBLIC &mVar. := k
 
    _HMG_SYSDATA [  1 ]   [k] := 'QHTM'
    _HMG_SYSDATA [  2 ]   [k] := ControlName
@@ -91,8 +90,8 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    _HMG_SYSDATA [ 20 ]   [k] := w
    _HMG_SYSDATA [ 21 ]   [k] := h
    _HMG_SYSDATA [ 22 ]   [k] := 0
-   _HMG_SYSDATA [ 23 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-   _HMG_SYSDATA [ 24 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
+   _HMG_SYSDATA [ 23 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
    _HMG_SYSDATA [ 25 ]   [k] := ''
    _HMG_SYSDATA [ 26 ]   [k] := 0
    _HMG_SYSDATA [ 27 ]   [k] := fontname
@@ -102,7 +101,7 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    _HMG_SYSDATA [ 31 ]   [k] := 0
    _HMG_SYSDATA [ 32 ]   [k] := 0
    _HMG_SYSDATA [ 33 ]   [k] := ''
-   _HMG_SYSDATA [ 34 ]   [k] := .T.  
+   _HMG_SYSDATA [ 34 ]   [k] := .T.
    _HMG_SYSDATA [ 35 ]   [k] := 0
    _HMG_SYSDATA [ 36 ]   [k] := ''
    _HMG_SYSDATA [ 37 ]   [k] := 0
@@ -110,186 +109,175 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    _HMG_SYSDATA [ 39 ]   [k] := 0
    _HMG_SYSDATA [ 40 ]   [k] := ''
 
-Return Nil
+   RETURN NIL
 
+   /******
+   *       QHTM_LoadFromVal( ControlName, ParentForm, cValue )
+   *       Load web-page from variable
+   */
 
+PROCEDURE QHTM_LoadFromVal( ControlName, ParentForm, cValue )
 
-/******
-*
-*       QHTM_LoadFromVal( ControlName, ParentForm, cValue )
-*
-*       Load web-page from variable
-*
-*/
-Procedure QHTM_LoadFromVal( ControlName, ParentForm, cValue )
-Local nHandle := GetControlHandle( ControlName, ParentForm )
+   LOCAL nHandle := GetControlHandle( ControlName, ParentForm )
 
-If ( nHandle > 0 )
-   SetWindowText( nHandle, cValue )
-Endif
+   IF ( nHandle > 0 )
+      SetWindowText( nHandle, cValue )
+   ENDIF
 
-Return
+   RETURN
 
-/******
-*
-*       QHTM_LoadFromFile( ControlName, ParentForm, cFile )
-*
-*       Load web-page from file
-*
-*/
-Procedure QHTM_LoadFromFile( ControlName, ParentForm, cFile )
-Local nHandle := GetControlHandle( ControlName, ParentForm )
+   /******
+   *       QHTM_LoadFromFile( ControlName, ParentForm, cFile )
+   *       Load web-page from file
+   */
 
-If ( nHandle > 0 )
-   QHTM_LoadFile( nHandle, cFile )
-Endif
+PROCEDURE QHTM_LoadFromFile( ControlName, ParentForm, cFile )
 
-Return
+   LOCAL nHandle := GetControlHandle( ControlName, ParentForm )
 
-/******
-*
-*       QHTM_LoadFromRes( ControlName, ParentForm, cResName )
-*
-*       Load web-page from resource
-*
-*/
-Procedure QHTM_LoadFromRes( ControlName, ParentForm, cResName )
-Local nHandle := GetControlHandle( ControlName, ParentForm )
+   IF ( nHandle > 0 )
+      QHTM_LoadFile( nHandle, cFile )
+   ENDIF
 
-If ( nHandle > 0 )
-   QHTM_LoadRes( nHandle, cResName )
-Endif
+   RETURN
 
-Return
+   /******
+   *       QHTM_LoadFromRes( ControlName, ParentForm, cResName )
+   *       Load web-page from resource
+   */
 
-/******
-*
-*       QHTM_GetLink( lParam )
-*
-*       Receive QHTM link
-*
-*/
-Function QHTM_GetLink( lParam )
-Local cLink := QHTM_GetNotify( lParam )
+PROCEDURE QHTM_LoadFromRes( ControlName, ParentForm, cResName )
 
-QHTM_SetReturnValue( lParam, .F. )
+   LOCAL nHandle := GetControlHandle( ControlName, ParentForm )
 
-Return cLink
+   IF ( nHandle > 0 )
+      QHTM_LoadRes( nHandle, cResName )
+   ENDIF
 
-/******
-*
-*       QHTM_ScrollPos( nHandle, nPos )
-*
-*       nHandle - descriptor of QHTM
-*       nPos - old/new position of scrollbar
-*       
-*       Get/Set position of scrollbar QHTM
-*
-*/
-Function QHTM_ScrollPos( nHandle, nPos )
-Local nParamCount := PCount()
+   RETURN
 
-Switch nParamCount
+   /******
+   *       QHTM_GetLink( lParam )
+   *       Receive QHTM link
+   */
 
-   Case 0  
-     nPos := 0
-     Exit
+FUNCTION QHTM_GetLink( lParam )
 
-   Case 1
+   LOCAL cLink := QHTM_GetNotify( lParam )
 
-     If HB_ISNUMERIC( nHandle )
-        nPos := QHTM_GetScrollPos( nHandle )
-     Endif
-     Exit
+   QHTM_SetReturnValue( lParam, .F. )
 
-   Case 2
+   RETURN cLink
 
-     If ( HB_ISNUMERIC( nHandle ) .and. HB_ISNUMERIC( nPos ) )
-        QHTM_SetScrollPos( nHandle, nPos )
-     Else
-        nPos := 0
-     Endif
-   
-End Switch
+   /******
+   *       QHTM_ScrollPos( nHandle, nPos )
+   *       nHandle - descriptor of QHTM
+   *       nPos - old/new position of scrollbar
+   *       Get/Set position of scrollbar QHTM
+   */
 
-Return nPos
+FUNCTION QHTM_ScrollPos( nHandle, nPos )
 
-/******
-*
-*       QHTM_ScrollPercent( nHandle, nPercent )
-*
-*       nHandle  - descriptor of QHTM
-*       nPercent - old/new position of scrollbar (in percentage)
-*       
-*       Get/Set position of scrollbar QHTM
-*
-*/
-Function QHTM_ScrollPercent( nHandle, nPercent )
-Local nParamCount := PCount(), ;
+   LOCAL nParamCount := PCount()
+
+   SWITCH nParamCount
+
+   CASE 0
+      nPos := 0
+      EXIT
+
+   CASE 1
+
+      IF HB_ISNUMERIC( nHandle )
+         nPos := QHTM_GetScrollPos( nHandle )
+      ENDIF
+      EXIT
+
+   CASE 2
+
+      IF ( HB_ISNUMERIC( nHandle ) .and. HB_ISNUMERIC( nPos ) )
+         QHTM_SetScrollPos( nHandle, nPos )
+      ELSE
+         nPos := 0
+      ENDIF
+
+   END SWITCH
+
+   RETURN nPos
+
+   /******
+   *       QHTM_ScrollPercent( nHandle, nPercent )
+   *       nHandle  - descriptor of QHTM
+   *       nPercent - old/new position of scrollbar (in percentage)
+   *       Get/Set position of scrollbar QHTM
+   */
+
+FUNCTION QHTM_ScrollPercent( nHandle, nPercent )
+
+   LOCAL nParamCount := PCount(), ;
       nHeight                , ;
       aSize                  , ;
       nPos
 
-If HB_ISNUMERIC( nHandle )
+   IF HB_ISNUMERIC( nHandle )
 
-   nHeight := GetWindowHeight( nHandle )
-   aSize := QHTM_GetSize( nHandle )
-            
-   If ( aSize[ 2 ] > nHeight )
-      aSize[ 2 ] -= nHeight
-    Endif
-    
-Endif
+      nHeight := GetWindowHeight( nHandle )
+      aSize := QHTM_GetSize( nHandle )
 
-Switch nParamCount
+      IF ( aSize[ 2 ] > nHeight )
+         aSize[ 2 ] -= nHeight
+      ENDIF
 
-   Case 0
-     nPercent := 0
-     Exit
+   ENDIF
 
-   Case 1
-   
-     nPos  := QHTM_GetScrollPos( nHandle )
-     nPercent := Min( Round( ( ( nPos / aSize[ 2 ] ) * 100 ), 2 ), 100.00 )
-     Exit
+   SWITCH nParamCount
 
-   Case 2
+   CASE 0
+      nPercent := 0
+      EXIT
 
-     If HB_ISNUMERIC( nPercent )
-        nPos := Round( ( nPercent * aSize[ 2 ] * 0.01 ), 0 )
-        QHTM_SetScrollPos( nHandle, nPos )
-     Else
-        nPercent := 0
-     Endif
+   CASE 1
 
-End Switch
+      nPos  := QHTM_GetScrollPos( nHandle )
+      nPercent := Min( Round( ( ( nPos / aSize[ 2 ] ) * 100 ), 2 ), 100.00 )
+      EXIT
 
-Return nPercent
+   CASE 2
 
-/******
-*
-*       QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
-*
-*       Enable/disable redraw of control
-*
-*/
-Procedure QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
+      IF HB_ISNUMERIC( nPercent )
+         nPos := Round( ( nPercent * aSize[ 2 ] * 0.01 ), 0 )
+         QHTM_SetScrollPos( nHandle, nPos )
+      ELSE
+         nPercent := 0
+      ENDIF
 
-IF Valtype(lEnable) == "U" 
-   lEnable := .T.
-ENDIF
+   END SWITCH
 
-If ( PCount() < 2 )
-   Return
-Endif
- 
-SendMessage( GetControlHandle( ControlName, ParentForm ), WM_SETREDRAW, Iif( lEnable, 1, 0 ), 0 )
+   RETURN nPercent
 
-Return
+   /******
+   *       QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
+   *       Enable/disable redraw of control
+   */
 
+PROCEDURE QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
 
-********************************************************************************************
+   IF Valtype(lEnable) == "U"
+      lEnable := .T.
+   ENDIF
 
-Function QHTM_Zoom ( ControlName, ParentForm, nLevel )
+   IF ( PCount() < 2 )
+
+      RETURN
+   ENDIF
+
+   SendMessage( GetControlHandle( ControlName, ParentForm ), WM_SETREDRAW, Iif( lEnable, 1, 0 ), 0 )
+
+   RETURN
+
+FUNCTION QHTM_Zoom ( ControlName, ParentForm, nLevel )
+
    QHTM_SetZoomLevel(GetControlHandle( ControlName, ParentForm ), nLevel)
-Return Nil
+
+   RETURN NIL
+

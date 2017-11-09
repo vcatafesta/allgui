@@ -1,92 +1,91 @@
 /*
- * MINIGUI - Harbour Win32 GUI library Demo
- *
- * Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
- * http://harbourminigui.googlepages.com/
+* MINIGUI - Harbour Win32 GUI library Demo
+* Copyright 2002-05 Roberto Lopez <harbourminigui@gmail.com>
+* http://harbourminigui.googlepages.com/
 */
 
 #include "MiniGUI.ch"
 #include "i_qhtm.ch"
 #include "i_winuser.ch"
 
-Procedure Main
-local cfile := "winlist.htm"
+PROCEDURE Main
 
-if !qhtm_init()
-	return
-endif
+   LOCAL cfile := "winlist.htm"
 
-SET EVENTS FUNCTION TO MYEVENTS
+   IF !qhtm_init()
 
-DEFINE WINDOW Form_1 AT 0, 0		;
-	WIDTH 830			;
-	HEIGHT 600			;
-	TITLE "QHTM demo"		;
-	ICON "demo.ico"			;
-	MAIN 				;
-	ON MAXIMIZE qhtm_resize()	;
-	ON SIZE qhtm_resize()		;
-	ON RELEASE qhtm_end()		;
-	BACKCOLOR WHITE
+      RETURN
+   ENDIF
 
-	if !file(cfile)
-	      cfile := GetFile( { {"HTML files (*.htm)", "*.htm"}, {"All files (*.*)", "*.*"} }, ;
-			"Select a file", GetStartupFolder(), , .T. )
-	endif
+   SET EVENTS FUNCTION TO MYEVENTS
 
-	@ 0,0 QHTM Html_1 ;
-		FILE cfile ;
-		WIDTH Form_1.Width - GetBorderWidth()*2 ;
-		HEIGHT Form_1.Height - GetTitleHeight() - GetBorderHeight()*2 ;
-		ON CHANGE {|lParam| QHTM_MessageBox( "The link is: " + QHTM_GetLink( lParam ) ) }
+   DEFINE WINDOW Form_1 AT 0, 0      ;
+         WIDTH 830         ;
+         HEIGHT 600         ;
+         TITLE "QHTM demo"      ;
+         ICON "demo.ico"         ;
+         MAIN             ;
+         ON MAXIMIZE qhtm_resize()   ;
+         ON SIZE qhtm_resize()      ;
+         ON RELEASE qhtm_end()      ;
+         BACKCOLOR WHITE
 
-END WINDOW
+      IF !file(cfile)
+         cfile := GetFile( { {"HTML files (*.htm)", "*.htm"}, {"All files (*.*)", "*.*"} }, ;
+            "Select a file", GetStartupFolder(), , .T. )
+      ENDIF
 
-Center Window Form_1
+      @ 0,0 QHTM Html_1 ;
+         FILE cfile ;
+         WIDTH Form_1.Width - GetBorderWidth()*2 ;
+         HEIGHT Form_1.Height - GetTitleHeight() - GetBorderHeight()*2 ;
+         ON CHANGE {|lParam| QHTM_MessageBox( "The link is: " + QHTM_GetLink( lParam ) ) }
 
-Activate Window Form_1
+   END WINDOW
 
-Return
+   CENTER WINDOW Form_1
 
-Procedure qhtm_resize
-local width := Form_1.Width - GetBorderWidth()*2, height := Form_1.Height - GetTitleHeight() - GetBorderHeight()*2
+   ACTIVATE WINDOW Form_1
 
-//	Form_1.Html_1.Width := width
-//	Form_1.Html_1.Height := height
-	_SetControlSizePos ( "Html_1", "Form_1", 0, 0, width, height )
+   RETURN
 
-Return
+PROCEDURE qhtm_resize
 
+   LOCAL width := Form_1.Width - GetBorderWidth()*2, height := Form_1.Height - GetTitleHeight() - GetBorderHeight()*2
 
-*------------------------------------------------------------------------------*
-function MyEvents ( hWnd, nMsg, wParam, lParam )
-*------------------------------------------------------------------------------*
-Local i
+   //   Form_1.Html_1.Width := width
+   //   Form_1.Html_1.Height := height
+   _SetControlSizePos ( "Html_1", "Form_1", 0, 0, width, height )
 
-	do case
+   RETURN
 
-        ***********************************************************************
-	case nMsg == WM_NOTIFY
-        ***********************************************************************
+FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
-		i := Ascan ( _HMG_aControlIds , wParam )
+   LOCAL i
 
-		If i > 0
+   DO CASE
 
-			If _HMG_aControlType [i] = "QHTM"
+   CASE nMsg == WM_NOTIFY
 
-				if valtype( _HMG_aControlChangeProcedure [i] ) == 'B'
-					Eval( _HMG_aControlChangeProcedure [i], lParam )
-				EndIf
+      i := Ascan ( _HMG_aControlIds , wParam )
 
-			EndIf
+      IF i > 0
 
-		EndIf
+         IF _HMG_aControlType [i] = "QHTM"
 
-	otherwise
+            IF valtype( _HMG_aControlChangeProcedure [i] ) == 'B'
+               Eval( _HMG_aControlChangeProcedure [i], lParam )
+            ENDIF
 
-		Return Events ( hWnd, nMsg, wParam, lParam )
+         ENDIF
 
-    endcase
+      ENDIF
 
-Return (0)
+   OTHERWISE
+
+      RETURN Events ( hWnd, nMsg, wParam, lParam )
+
+   ENDCASE
+
+   RETURN (0)
+

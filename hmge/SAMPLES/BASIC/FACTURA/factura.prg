@@ -3,10 +3,11 @@
 #include "minigui.ch"
 #include "winprint.ch"
 
-memvar aDatosFac
+MEMVAR aDatosFac
 
 PROCEDURE main()
-   local N
+
+   LOCAL N
 
    ***CODIGO DE PAGINA español***
    REQUEST HB_CODEPAGE_ESWIN
@@ -18,7 +19,7 @@ PROCEDURE main()
    SET AUTOPEN OFF //no abrir los indices automaticamente
 
    ***DATOS DE INICIALIZACION***
-   Set Navigation Extended //TAB y ENTER
+   SET Navigation Extended //TAB y ENTER
    SET DATE FORMAT "dd-mm-yyyy"
    SET EPOCH TO YEAR(DATE())-50
 
@@ -29,46 +30,48 @@ PROCEDURE main()
    NEXT
    ***fin crear datos para este ejemplo***
 
-factura()
+   factura()
 
-RETURN
+   RETURN
 
-Function Factura()
+FUNCTION Factura()
 
    DEFINE WINDOW W_Imp1 ;
-      AT 10,10 ;
-      WIDTH 400 HEIGHT 275 ;
-      TITLE 'SUIZO Factura v1.0' ;
-      MAIN
+         AT 10,10 ;
+         WIDTH 400 HEIGHT 275 ;
+         TITLE 'SUIZO Factura v1.0' ;
+         MAIN
 
       @ 10,10 LABEL Texto1 VALUE "Impresion de una factura"       AUTOSIZE FONT "Arial" SIZE 14 TRANSPARENT
       @ 40,10 LABEL Texto2 VALUE "con una mascara de Open Office" AUTOSIZE FONT "Arial" SIZE 14 TRANSPARENT
 
       @ 80,10 BUTTON B_Acerca CAPTION 'Aceca de' WIDTH 90 HEIGHT 25 ;
-              ACTION Acercade()
+         ACTION Acercade()
 
       @210, 10 BUTTON B_Imprimir CAPTION 'Imprimir' WIDTH 90 HEIGHT 25 ;
-               ACTION Facturai()
+         ACTION Facturai()
 
       @210,110 BUTTON B_Salir CAPTION 'Salir'  WIDTH 80 HEIGHT 25 ;
-               ACTION W_Imp1.release
+         ACTION W_Imp1.release
 
-      END WINDOW
-      CENTER WINDOW W_Imp1
-      ACTIVATE WINDOW W_Imp1
+   END WINDOW
+   CENTER WINDOW W_Imp1
+   ACTIVATE WINDOW W_Imp1
 
-Return Nil
+   RETURN NIL
 
-procedure Facturai()
-local oServiceManager,oDesktop,oDocument,oVCurs,oPageStyleName,oPageStyles,oStyle,oCursor
-local MARGENSUP:=10,MARGENINF:=10,MARGENIZQ:=10,MARGENDER:=10,TOTAL1:=0
-local FicheroMas2, N, TOTLIN
+PROCEDURE Facturai()
+
+   LOCAL oServiceManager,oDesktop,oDocument,oVCurs,oPageStyleName,oPageStyles,oStyle,oCursor
+   LOCAL MARGENSUP:=10,MARGENINF:=10,MARGENIZQ:=10,MARGENDER:=10,TOTAL1:=0
+   LOCAL FicheroMas2, N, TOTLIN
 
    // inicializa
    oServiceManager := TOleAuto():New("com.sun.star.ServiceManager")
    oDesktop := oServiceManager:createInstance("com.sun.star.frame.Desktop")
    IF oDesktop = NIL
       MsgStop('OpenOffice Writer no esta disponible')
+
       RETURN
    ENDIF
 
@@ -80,7 +83,7 @@ local FicheroMas2, N, TOTLIN
       oDocument := oDesktop:loadComponentFromURL("private:factory/swriter","_blank", 0, {})
    ENDIF
 
-   oVCurs:= oDocument:CurrentController:getViewCursor() 
+   oVCurs:= oDocument:CurrentController:getViewCursor()
    oPageStyleName:= oVCurs:PageStyleName
    oPageStyles:= oDocument:StyleFamilies:getByName("PageStyles")
    oStyle := oPageStyles:getByName(oPageStyleName)
@@ -144,7 +147,6 @@ local FicheroMas2, N, TOTLIN
    oDocument:Text:InsertString(oCursor, " "+"Bultos   " , .F.)
    oDocument:Text:InsertString(oCursor, STR(1,3)+CHR(13) , .F.)
 
-
    oDocument:Text:InsertString(oCursor, SPACE(1) , .F.)
    oDocument:Text:InsertString(oCursor, "Vendedor          " , .F.)
    oDocument:Text:InsertString(oCursor, PADR("7-Pedro",17," ") , .F.)
@@ -166,7 +168,6 @@ local FicheroMas2, N, TOTLIN
    oDocument:Text:InsertString(oCursor, " "+PADC("UNIDADES",14," ") , .F.)
    oDocument:Text:InsertString(oCursor, " "+PADC("PRECIO",14," ") , .F.)
    oDocument:Text:InsertString(oCursor, " "+PADC("IMPORTE",15," ")+CHR(13) , .F.)
-
 
    oDocument:Text:InsertString(oCursor, CHR(13) , .F.)
 
@@ -213,7 +214,8 @@ local FicheroMas2, N, TOTLIN
    oDocument:Text:InsertString(oCursor, CHR(13) , .F.)
    oDocument:Text:InsertString(oCursor, CHR(13) , .F.)
 
+FUNCTION Acercade()
 
-Function Acercade()
-RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+HB_OsNewLine()+"<josemisu@yahoo.com.ar>"+HB_OsNewLine()+HB_OsNewLine()+ ;
-   hb_compiler()+HB_OsNewLine()+Version()+HB_OsNewLine()+MiniGuiVersion(),W_Imp1.Title)
+   RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+HB_OsNewLine()+"<josemisu@yahoo.com.ar>"+HB_OsNewLine()+HB_OsNewLine()+ ;
+      hb_compiler()+HB_OsNewLine()+Version()+HB_OsNewLine()+MiniGuiVersion(),W_Imp1.Title)
+
