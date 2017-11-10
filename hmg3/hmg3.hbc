@@ -22,3 +22,5 @@ libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc hbvpd
 # link compiled resources
 
 sources=resources\hmg3.rc
+
+gui=yes

@@ -16,3 +16,7 @@ libs=hmge_shell32 hmge_socket
 libs=hmge_tmsagent
 libs=hbct.hbc hbziparc.hbc
 libs=msvfw32 vfw32
+gui=yes
+{hbexe}sources=resources/minigui.rc
+{hbexe}sources=resources/hbprinter.rc
+{hbexe}sources=resources/miniprint.rc
