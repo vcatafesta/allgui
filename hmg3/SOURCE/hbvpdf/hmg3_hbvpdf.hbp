@@ -1,6 +1,6 @@
 -hblib
 -o${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}/${hb_name}
--hbx=${hb_install_prefix}/addons/hmg3/${h_name}_.hbx
+-hbx=${hb_install_prefix}/addons/hmg3/${hb_name}.hbx
 -w3 -es2
 -instfile=inc:hbvpdf.ch
 hbvpdf.prg
