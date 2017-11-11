@@ -2002,93 +2002,93 @@ METHOD TIFFInfo( cFile )
             /*nTemp := 0
             IF nFieldType == SHORT
             nTemp := bin2w( cValues )
-         ENDIF*/
-      CASE nTag == 262
-         cTag := "PhotometricInterpretation"
-         /*nTemp := -1
-         IF nFieldType == SHORT
-         nTemp := bin2w( cValues )
-      ENDIF*/
-   CASE nTag == 264
-      cTag := "CellWidth"
-   CASE nTag == 265
-      cTag := "CellLength"
-   CASE nTag == 266
-      cTag := "FillOrder"
-   CASE nTag == 273
-      cTag := "StripOffsets"
-      IF nFieldType ==  SHORT
-         nFrom := bin2w(HB_USUBSTR( cValues, 1, 2 ))
-      ELSEIF nFieldType ==  LONG
-         nFrom := bin2l(HB_USUBSTR( cValues, 1, 4 ))
-      ENDIF
+            ENDIF*/
+         CASE nTag == 262
+            cTag := "PhotometricInterpretation"
+            /*nTemp := -1
+            IF nFieldType == SHORT
+            nTemp := bin2w( cValues )
+            ENDIF*/
+         CASE nTag == 264
+            cTag := "CellWidth"
+         CASE nTag == 265
+            cTag := "CellLength"
+         CASE nTag == 266
+            cTag := "FillOrder"
+         CASE nTag == 273
+            cTag := "StripOffsets"
+            IF nFieldType ==  SHORT
+               nFrom := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+            ELSEIF nFieldType ==  LONG
+               nFrom := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+            ENDIF
 
-   CASE nTag == 277
-      cTag := "SamplesPerPixel"
-   CASE nTag == 278
-      cTag := "RowsPerStrip"
-   CASE nTag == 279
-      cTag := "StripByteCounts"
-      IF nFieldType ==  SHORT
-         nLength := bin2w(HB_USUBSTR( cValues, 1, 2 ))
-      ELSEIF nFieldType ==  LONG
-         nLength := bin2l(HB_USUBSTR( cValues, 1, 4 ))
-      ENDIF
+         CASE nTag == 277
+            cTag := "SamplesPerPixel"
+         CASE nTag == 278
+            cTag := "RowsPerStrip"
+         CASE nTag == 279
+            cTag := "StripByteCounts"
+            IF nFieldType ==  SHORT
+               nLength := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+            ELSEIF nFieldType ==  LONG
+               nLength := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+            ENDIF
 
-      nLength *= nCount // Count all strips !!!
+            nLength *= nCount // Count all strips !!!
 
-   CASE nTag == 282
-      cTag := "XResolution"
-      xRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
-   CASE nTag == 283
-      cTag := "YResolution"
-      yRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
-   CASE nTag == 284
-      cTag := "PlanarConfiguration"
-   CASE nTag == 288
-      cTag := "FreeOffsets"
-   CASE nTag == 289
-      cTag := "FreeByteCounts"
-   CASE nTag == 296
-      cTag := "ResolutionUnit"
-      /*nTemp := 0
-      IF nFieldType == SHORT
-      nTemp := bin2w( cValues )
-   ENDIF*/
-CASE nTag == 305
-   cTag := "Software"
-CASE nTag == 306
-   cTag := "DateTime"
-CASE nTag == 315
-   cTag := "Artist"
-CASE nTag == 320
-   cTag := "ColorMap"
-CASE nTag == 338
-   cTag := "ExtraSamples"
-CASE nTag == 33432
-   cTag := "Copyright"
-OTHERWISE
-   cTag := "Unknown"
-ENDCASE
-NEXT
-fread( nHandle, @cIFDNext, 4 )
-ENDDO
-HB_SYMBOL_UNUSED( cTag )  // TOFIX
-fclose( nHandle )
+         CASE nTag == 282
+            cTag := "XResolution"
+            xRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+         CASE nTag == 283
+            cTag := "YResolution"
+            yRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+         CASE nTag == 284
+            cTag := "PlanarConfiguration"
+         CASE nTag == 288
+            cTag := "FreeOffsets"
+         CASE nTag == 289
+            cTag := "FreeByteCounts"
+         CASE nTag == 296
+            cTag := "ResolutionUnit"
+            /*nTemp := 0
+            IF nFieldType == SHORT
+            nTemp := bin2w( cValues )
+            ENDIF*/
+         CASE nTag == 305
+            cTag := "Software"
+         CASE nTag == 306
+            cTag := "DateTime"
+         CASE nTag == 315
+            cTag := "Artist"
+         CASE nTag == 320
+            cTag := "ColorMap"
+         CASE nTag == 338
+            cTag := "ExtraSamples"
+         CASE nTag == 33432
+            cTag := "Copyright"
+         OTHERWISE
+            cTag := "Unknown"
+         ENDCASE
+      NEXT
+      fread( nHandle, @cIFDNext, 4 )
+   ENDDO
+   HB_SYMBOL_UNUSED( cTag )  // TOFIX
+   fclose( nHandle )
 
-aadd( aTemp, nWidth )
-aadd( aTemp, nHeight )
-aadd( aTemp, xRes )
-aadd( aTemp, yRes )
-aadd( aTemp, nBits )
-aadd( aTemp, nFrom )
-aadd( aTemp, nLength )
+   aadd( aTemp, nWidth )
+   aadd( aTemp, nHeight )
+   aadd( aTemp, xRes )
+   aadd( aTemp, yRes )
+   aadd( aTemp, nBits )
+   aadd( aTemp, nFrom )
+   aadd( aTemp, nLength )
 
-RETURN aTemp
+   RETURN aTemp
 
-//-------------------------\\
+   //-------------------------\\
 
-#ifdef __XPP__
+   #ifdef __XPP__
 
 METHOD tPdf:JPEGInfo( cFile )
 

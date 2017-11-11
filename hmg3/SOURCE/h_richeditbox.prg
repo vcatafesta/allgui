@@ -348,23 +348,23 @@ FUNCTION RichEditBox_AddTextAndSelect ( hWndControl , nPos, cText )
 
    RichEditBox_SetText ( hWndControl, .T., cText )
    RichEditBox_SetCaretPos ( hWndControl , -1 )
-EndCaretPos := RichEditBox_GetCaretPos ( hWndControl )
+   EndCaretPos := RichEditBox_GetCaretPos ( hWndControl )
 
-RichEditBox_SetSelRange ( hWndControl, { StartCaretPos, EndCaretPos } )
+   RichEditBox_SetSelRange ( hWndControl, { StartCaretPos, EndCaretPos } )
 
-IF nPos <= -1 .OR. nPos > EndCaretPos
-   RichEditBox_SetSelRange ( hWndControl, { StartCaretPos, -1 } )
-ELSE
-   DeltaCaretPos := EndCaretPos - StartCaretPos
+   IF nPos <= -1 .OR. nPos > EndCaretPos
+      RichEditBox_SetSelRange ( hWndControl, { StartCaretPos, -1 } )
+   ELSE
+      DeltaCaretPos := EndCaretPos - StartCaretPos
 
-   RichEditBox_SelClear ( hWndControl )
+      RichEditBox_SelClear ( hWndControl )
 
-   RichEditBox_SetCaretPos ( hWndControl , nPos )
-   RichEditBox_SetText ( hWndControl, .T., cText )
-   RichEditBox_SetSelRange ( hWndControl, { nPos, nPos + DeltaCaretPos } )
-ENDIF
+      RichEditBox_SetCaretPos ( hWndControl , nPos )
+      RichEditBox_SetText ( hWndControl, .T., cText )
+      RichEditBox_SetSelRange ( hWndControl, { nPos, nPos + DeltaCaretPos } )
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION RichEditBox_RTFPrint ( hWndControl, aSelRange, nLeft, nTop, nRight, nBottom, PrintPageCodeBlock )
 

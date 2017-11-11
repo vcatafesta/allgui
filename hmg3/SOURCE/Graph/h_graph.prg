@@ -777,10 +777,10 @@ STATIC FUNCTION RGB2HSL( nR, nG, nB )
 
    nH := Int( (nH * 239) / 6 )
    IF nH < 0 ; nH += 240 ; ENDIF
-      nS := Int( nS * 239 )
-      nL := Int( nL * 239 )
+   nS := Int( nS * 239 )
+   nL := Int( nL * 239 )
 
-      RETURN { nH, nS, nL }
+   RETURN { nH, nS, nL }
 
 STATIC FUNCTION HSL2RGB( nH, nS, nL )
 

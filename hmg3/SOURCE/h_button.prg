@@ -64,7 +64,7 @@ MEMVAR _HMG_SYSDATA
 #define BUTTON_IMAGELIST_ALIGN_CENTER 4
 
 FUNCTION _DefineButton ( ControlName, ParentForm, x, y, Caption, ;
-ProcedureName, w, h, fontname, fontsize, tooltip, ;
+      ProcedureName, w, h, fontname, fontsize, tooltip, ;
       gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
       invisible , bold, italic, underline, strikeout , multiline )
    LOCAL cParentForm , mVar , ControlHandle , FontHandle , k := 0 , cParentTabName
@@ -172,7 +172,7 @@ ProcedureName, w, h, fontname, fontsize, tooltip, ;
    RETURN NIL
 
 FUNCTION _DefineImageButton ( ControlName, ParentForm, x, y, Caption, ;
-ProcedureName, w, h, image, tooltip, gotfocus, ;
+      ProcedureName, w, h, image, tooltip, gotfocus, ;
       lostfocus, flat, notrans, HelpId, invisible, ;
       notabstop )
    LOCAL cParentForm , mVar , ControlHandle , k := 0
@@ -275,7 +275,7 @@ ProcedureName, w, h, image, tooltip, gotfocus, ;
    RETURN NIL
 
 FUNCTION _DefineMixedButton ( ControlName, ParentForm, x, y, Caption, ;
-ProcedureName, w, h, fontname, fontsize, tooltip, ;
+      ProcedureName, w, h, fontname, fontsize, tooltip, ;
       gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
       invisible , bold, italic, underline, strikeout , ;
       picture , alignment , multiline, notrans )
@@ -296,133 +296,133 @@ ProcedureName, w, h, fontname, fontsize, tooltip, ;
          aWinver [1] = 'Windows Server 2003 family'
 
       _DefineButton ( ControlName, ParentForm, x, y, Caption, ;
-ProcedureName, w, h, fontname, fontsize, tooltip, ;
-      gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
-      invisible , bold, italic, underline, strikeout , multiline )
+         ProcedureName, w, h, fontname, fontsize, tooltip, ;
+         gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
+         invisible , bold, italic, underline, strikeout , multiline )
 
-   RETURN NIL
+      RETURN NIL
 
-ENDIF
+   ENDIF
 
-DEFAULT w         TO 100
-DEFAULT h         TO 28
-DEFAULT lostfocus TO ""
-DEFAULT gotfocus  TO ""
-DEFAULT invisible TO FALSE
+   DEFAULT w         TO 100
+   DEFAULT h         TO 28
+   DEFAULT lostfocus TO ""
+   DEFAULT gotfocus  TO ""
+   DEFAULT invisible TO FALSE
 
-IF valtype (alignment) = 'U'
-   alignment := BUTTON_IMAGELIST_ALIGN_TOP
-ELSEIF valtype (alignment) = 'C'
-   IF   ALLTRIM(HMG_UPPER(alignment)) == 'LEFT'
-      alignment := BUTTON_IMAGELIST_ALIGN_LEFT
-   ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'RIGHT'
-      alignment := BUTTON_IMAGELIST_ALIGN_RIGHT
-   ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'TOP'
+   IF valtype (alignment) = 'U'
       alignment := BUTTON_IMAGELIST_ALIGN_TOP
-   ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'BOTTOM'
-      alignment := BUTTON_IMAGELIST_ALIGN_BOTTOM
+   ELSEIF valtype (alignment) = 'C'
+      IF   ALLTRIM(HMG_UPPER(alignment)) == 'LEFT'
+         alignment := BUTTON_IMAGELIST_ALIGN_LEFT
+      ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'RIGHT'
+         alignment := BUTTON_IMAGELIST_ALIGN_RIGHT
+      ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'TOP'
+         alignment := BUTTON_IMAGELIST_ALIGN_TOP
+      ELSEIF   ALLTRIM(HMG_UPPER(alignment)) == 'BOTTOM'
+         alignment := BUTTON_IMAGELIST_ALIGN_BOTTOM
+      ELSE
+         alignment := BUTTON_IMAGELIST_ALIGN_TOP
+      ENDIF
    ELSE
       alignment := BUTTON_IMAGELIST_ALIGN_TOP
    ENDIF
-ELSE
-   alignment := BUTTON_IMAGELIST_ALIGN_TOP
-ENDIF
 
-IF _HMG_SYSDATA [ 264 ] = TRUE
-   ParentForm := _HMG_SYSDATA [ 223 ]
-   IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
-      FontName := _HMG_SYSDATA [ 224 ]
+   IF _HMG_SYSDATA [ 264 ] = TRUE
+      ParentForm := _HMG_SYSDATA [ 223 ]
+      IF .Not. Empty (_HMG_SYSDATA [ 224 ]) .And. ValType(FontName) == "U"
+         FontName := _HMG_SYSDATA [ 224 ]
+      ENDIF
+      IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
+         FontSize := _HMG_SYSDATA [ 182 ]
+      ENDIF
    ENDIF
-   IF .Not. Empty (_HMG_SYSDATA [ 182 ]) .And. ValType(FontSize) == "U"
-      FontSize := _HMG_SYSDATA [ 182 ]
+
+   IF _HMG_SYSDATA [ 183 ] > 0
+      IF _HMG_SYSDATA [ 240 ] == .F.
+         x    := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
+         y    := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
+         ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
+         cParentTabName := _HMG_SYSDATA [ 225 ]
+      ENDIF
    ENDIF
-ENDIF
 
-IF _HMG_SYSDATA [ 183 ] > 0
-   IF _HMG_SYSDATA [ 240 ] == .F.
-      x    := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-      y    := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
-      ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-      cParentTabName := _HMG_SYSDATA [ 225 ]
+   IF .Not. _IsWindowDefined (ParentForm)
+      MsgHMGError("Window: "+ ParentForm + " is not defined. Program terminated" )
    ENDIF
-ENDIF
 
-IF .Not. _IsWindowDefined (ParentForm)
-   MsgHMGError("Window: "+ ParentForm + " is not defined. Program terminated" )
-ENDIF
+   IF _IsControlDefined (ControlName,ParentForm)
+      MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " Already defined. Program Terminated" )
+   ENDIF
 
-IF _IsControlDefined (ControlName,ParentForm)
-   MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " Already defined. Program Terminated" )
-ENDIF
+   mVar := '_' + ParentForm + '_' + ControlName
 
-mVar := '_' + ParentForm + '_' + ControlName
+   cParentForm := ParentForm
 
-cParentForm := ParentForm
+   ParentForm = GetFormHandle (ParentForm)
 
-ParentForm = GetFormHandle (ParentForm)
+   aRet := InitMixedButton ( ParentForm, Caption, 0, x, y, w, h, '', 0, flat, NoTabStop, invisible, picture, alignment, multiline, notrans )
 
-aRet := InitMixedButton ( ParentForm, Caption, 0, x, y, w, h, '', 0, flat, NoTabStop, invisible, picture, alignment, multiline, notrans )
+   ControlHandle := aRet [1]
 
-ControlHandle := aRet [1]
+   IF valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+      FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
+   ELSE
+      FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
+   ENDIF
 
-IF valtype(fontname) != "U" .and. valtype(fontsize) != "U"
-   FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
-ELSE
-   FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
-ENDIF
+   IF _HMG_SYSDATA [ 265 ] = TRUE
+      aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
+   ENDIF
 
-IF _HMG_SYSDATA [ 265 ] = TRUE
-   aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
-ENDIF
+   IF valtype(tooltip) != "U"
+      SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
+   ENDIF
 
-IF valtype(tooltip) != "U"
-   SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
-ENDIF
+   k := _GetControlFree()
 
-k := _GetControlFree()
+   PUBLIC &mVar. := k
 
-PUBLIC &mVar. := k
+   _HMG_SYSDATA [1] [k] := "BUTTON"
+   _HMG_SYSDATA [2] [k] := ControlName
+   _HMG_SYSDATA [3] [k] := ControlHandle
+   _HMG_SYSDATA [4] [k] := ParentForm
+   _HMG_SYSDATA [  5 ] [k] := 0
+   _HMG_SYSDATA [  6 ] [k] := ProcedureName
+   _HMG_SYSDATA [  7 ] [k] := {}
+   _HMG_SYSDATA [  8 ] [k] := Nil
+   _HMG_SYSDATA [  9 ] [k] := ""
+   _HMG_SYSDATA [ 10 ] [k] := lostfocus
+   _HMG_SYSDATA [ 11 ] [k] := gotfocus
+   _HMG_SYSDATA [ 12 ] [k] := ""
+   _HMG_SYSDATA [ 13 ] [k] := FALSE
+   _HMG_SYSDATA [ 14 ] [k] := NIL
+   _HMG_SYSDATA [ 15 ] [k] := Nil
+   _HMG_SYSDATA [ 16 ] [k] := ""
+   _HMG_SYSDATA [ 17 ] [k] := {}
+   _HMG_SYSDATA [ 18 ] [k] := y
+   _HMG_SYSDATA [ 19 ] [k] := x
+   _HMG_SYSDATA [ 20 ] [k] := w
+   _HMG_SYSDATA [ 21 ] [k] := h
+   _HMG_SYSDATA [ 22 ] [k] := 'M'
+   _HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 25 ] [k] := picture
+   _HMG_SYSDATA [ 26 ] [k] := alignment
+   _HMG_SYSDATA [ 27 ] [k] := fontname
+   _HMG_SYSDATA [ 28 ] [k] := fontsize
+   _HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout}
+   _HMG_SYSDATA [ 30 ] [k] := tooltip
+   _HMG_SYSDATA [ 31 ] [k] := cParentTabName
+   _HMG_SYSDATA [ 32 ] [k] := notrans // ADD
+   _HMG_SYSDATA [ 33 ] [k] := Caption
+   _HMG_SYSDATA [ 34 ] [k] := if(invisible,FALSE,TRUE)
+   _HMG_SYSDATA [ 35 ] [k] := HelpId
+   _HMG_SYSDATA [ 36 ] [k] := FontHandle
+   _HMG_SYSDATA [ 37 ] [k] := aRet [2]
+   _HMG_SYSDATA [ 38 ] [k] := .T.
+   _HMG_SYSDATA [ 39 ] [k] := 0
+   _HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
-_HMG_SYSDATA [1] [k] := "BUTTON"
-_HMG_SYSDATA [2] [k] := ControlName
-_HMG_SYSDATA [3] [k] := ControlHandle
-_HMG_SYSDATA [4] [k] := ParentForm
-_HMG_SYSDATA [  5 ] [k] := 0
-_HMG_SYSDATA [  6 ] [k] := ProcedureName
-_HMG_SYSDATA [  7 ] [k] := {}
-_HMG_SYSDATA [  8 ] [k] := Nil
-_HMG_SYSDATA [  9 ] [k] := ""
-_HMG_SYSDATA [ 10 ] [k] := lostfocus
-_HMG_SYSDATA [ 11 ] [k] := gotfocus
-_HMG_SYSDATA [ 12 ] [k] := ""
-_HMG_SYSDATA [ 13 ] [k] := FALSE
-_HMG_SYSDATA [ 14 ] [k] := NIL
-_HMG_SYSDATA [ 15 ] [k] := Nil
-_HMG_SYSDATA [ 16 ] [k] := ""
-_HMG_SYSDATA [ 17 ] [k] := {}
-_HMG_SYSDATA [ 18 ] [k] := y
-_HMG_SYSDATA [ 19 ] [k] := x
-_HMG_SYSDATA [ 20 ] [k] := w
-_HMG_SYSDATA [ 21 ] [k] := h
-_HMG_SYSDATA [ 22 ] [k] := 'M'
-_HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
-_HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
-_HMG_SYSDATA [ 25 ] [k] := picture
-_HMG_SYSDATA [ 26 ] [k] := alignment
-_HMG_SYSDATA [ 27 ] [k] := fontname
-_HMG_SYSDATA [ 28 ] [k] := fontsize
-_HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout}
-_HMG_SYSDATA [ 30 ] [k] := tooltip
-_HMG_SYSDATA [ 31 ] [k] := cParentTabName
-_HMG_SYSDATA [ 32 ] [k] := notrans // ADD
-_HMG_SYSDATA [ 33 ] [k] := Caption
-_HMG_SYSDATA [ 34 ] [k] := if(invisible,FALSE,TRUE)
-_HMG_SYSDATA [ 35 ] [k] := HelpId
-_HMG_SYSDATA [ 36 ] [k] := FontHandle
-_HMG_SYSDATA [ 37 ] [k] := aRet [2]
-_HMG_SYSDATA [ 38 ] [k] := .T.
-_HMG_SYSDATA [ 39 ] [k] := 0
-_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
-
-RETURN NIL
+   RETURN NIL
 

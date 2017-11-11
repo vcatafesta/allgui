@@ -32,7 +32,7 @@ PROC Main()
          value "Countries"
       END LABEL
 
-      DEFINE COMBOSEARCHbox s1
+      DEFINE COMBOSEARCHBOX s1
          row 25
          col 190
          width 200
@@ -48,7 +48,7 @@ PROC Main()
          additive .t.
          rowoffset 50
          coloffset 0
-      END COMBOSEARCHbox
+      END COMBOSEARCHBOX
 
    END WINDOW // frmCSBTest
 

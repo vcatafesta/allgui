@@ -116,74 +116,74 @@ FUNCTION _DefineImage ( ControlName, ParentForm, x, y, FileName, w, h, Procedure
    ENDIF
 
    IF valtype(ProcedureName) == "U"
-ProcedureName := ""
-ENDIF
+      ProcedureName := ""
+   ENDIF
 
-ControlHandle := InitImage ( ParentForm, x, y, invisible, lActionTooltip )
+   ControlHandle := InitImage ( ParentForm, x, y, invisible, lActionTooltip )
 
-IF _HMG_SYSDATA [ 265 ] = .T.
-   aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
-ENDIF
+   IF _HMG_SYSDATA [ 265 ] = .T.
+      aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
+   ENDIF
 
-IF ValType( cToolTip ) != "U"
-   SetToolTip ( ControlHandle , cToolTip , GetFormToolTipHandle (cParentForm) )
-ENDIF
+   IF ValType( cToolTip ) != "U"
+      SetToolTip ( ControlHandle , cToolTip , GetFormToolTipHandle (cParentForm) )
+   ENDIF
 
-k := _GetControlFree()
+   k := _GetControlFree()
 
-PUBLIC &mVar. := k
+   PUBLIC &mVar. := k
 
-_HMG_SYSDATA [  1 ]  [k] :=   "IMAGE"
-_HMG_SYSDATA [  2 ]  [k] :=   ControlName
-_HMG_SYSDATA [  3 ]  [k] :=   ControlHandle
-_HMG_SYSDATA [  4 ]  [k] :=   ParentForm
-_HMG_SYSDATA [  5 ]  [k] :=   0
-_HMG_SYSDATA [  6 ]  [k] :=   ProcedureName
-_HMG_SYSDATA [  7 ]  [k] :=   {}
-_HMG_SYSDATA [  8 ]  [k] :=   if ( stretch == .t. , 1 , 0 )
-_HMG_SYSDATA [  9 ]  [k] :=   ""
-_HMG_SYSDATA [ 10 ]  [k] :=   ""
-_HMG_SYSDATA [ 11 ]  [k] :=   ""
-_HMG_SYSDATA [ 12 ]  [k] :=   ""
-_HMG_SYSDATA [ 13 ]  [k] :=   .F.   // Is Deleted
-_HMG_SYSDATA [ 14 ]  [k] :=   Nil
-_HMG_SYSDATA [ 15 ]  [k] :=   Nil
-_HMG_SYSDATA [ 16 ]  [k] :=   ""
-_HMG_SYSDATA [ 17 ]  [k] :=   {}
-_HMG_SYSDATA [ 18 ]  [k] :=   y
-_HMG_SYSDATA [ 19 ]  [k] :=   x
-_HMG_SYSDATA [ 20 ]  [k] :=   w
-_HMG_SYSDATA [ 21 ]  [k] :=   h
-_HMG_SYSDATA [ 22 ]  [k] :=   0
-_HMG_SYSDATA [ 23 ]  [k] :=   if ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
-_HMG_SYSDATA [ 24 ]  [k] :=   if ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
-_HMG_SYSDATA [ 25 ]  [k] :=   FileName
-_HMG_SYSDATA [ 26 ]  [k] :=   BackgroundColor
-_HMG_SYSDATA [ 27 ]  [k] :=   ''
-_HMG_SYSDATA [ 28 ]  [k] :=   TransparentColor
-_HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.}
-_HMG_SYSDATA [ 30 ]  [k] :=   cToolTip
-_HMG_SYSDATA [ 31 ]  [k] :=   w   // original Width
-_HMG_SYSDATA [ 32 ]  [k] :=   h   // original Height
-_HMG_SYSDATA [ 33 ]  [k] :=   ''
-_HMG_SYSDATA [ 34 ]  [k] :=   if( invisible, .f., .t.)
-_HMG_SYSDATA [ 35 ]  [k] :=   HelpId
-_HMG_SYSDATA [ 36 ]  [k] :=   if ( adjustimage == .t. , 1 , 0)
-_HMG_SYSDATA [ 37 ]  [k] :=   0
-_HMG_SYSDATA [ 38 ]  [k] :=   .T.
-_HMG_SYSDATA [ 39 ]  [k] :=   if ( transparent == .t. , 1 , 0 )
-_HMG_SYSDATA [ 40 ]  [k] :=   { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
+   _HMG_SYSDATA [  1 ]  [k] :=   "IMAGE"
+   _HMG_SYSDATA [  2 ]  [k] :=   ControlName
+   _HMG_SYSDATA [  3 ]  [k] :=   ControlHandle
+   _HMG_SYSDATA [  4 ]  [k] :=   ParentForm
+   _HMG_SYSDATA [  5 ]  [k] :=   0
+   _HMG_SYSDATA [  6 ]  [k] :=   ProcedureName
+   _HMG_SYSDATA [  7 ]  [k] :=   {}
+   _HMG_SYSDATA [  8 ]  [k] :=   if ( stretch == .t. , 1 , 0 )
+   _HMG_SYSDATA [  9 ]  [k] :=   ""
+   _HMG_SYSDATA [ 10 ]  [k] :=   ""
+   _HMG_SYSDATA [ 11 ]  [k] :=   ""
+   _HMG_SYSDATA [ 12 ]  [k] :=   ""
+   _HMG_SYSDATA [ 13 ]  [k] :=   .F.   // Is Deleted
+   _HMG_SYSDATA [ 14 ]  [k] :=   Nil
+   _HMG_SYSDATA [ 15 ]  [k] :=   Nil
+   _HMG_SYSDATA [ 16 ]  [k] :=   ""
+   _HMG_SYSDATA [ 17 ]  [k] :=   {}
+   _HMG_SYSDATA [ 18 ]  [k] :=   y
+   _HMG_SYSDATA [ 19 ]  [k] :=   x
+   _HMG_SYSDATA [ 20 ]  [k] :=   w
+   _HMG_SYSDATA [ 21 ]  [k] :=   h
+   _HMG_SYSDATA [ 22 ]  [k] :=   0
+   _HMG_SYSDATA [ 23 ]  [k] :=   if ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ]  [k] :=   if ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 25 ]  [k] :=   FileName
+   _HMG_SYSDATA [ 26 ]  [k] :=   BackgroundColor
+   _HMG_SYSDATA [ 27 ]  [k] :=   ''
+   _HMG_SYSDATA [ 28 ]  [k] :=   TransparentColor
+   _HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.}
+   _HMG_SYSDATA [ 30 ]  [k] :=   cToolTip
+   _HMG_SYSDATA [ 31 ]  [k] :=   w   // original Width
+   _HMG_SYSDATA [ 32 ]  [k] :=   h   // original Height
+   _HMG_SYSDATA [ 33 ]  [k] :=   ''
+   _HMG_SYSDATA [ 34 ]  [k] :=   if( invisible, .f., .t.)
+   _HMG_SYSDATA [ 35 ]  [k] :=   HelpId
+   _HMG_SYSDATA [ 36 ]  [k] :=   if ( adjustimage == .t. , 1 , 0)
+   _HMG_SYSDATA [ 37 ]  [k] :=   0
+   _HMG_SYSDATA [ 38 ]  [k] :=   .T.
+   _HMG_SYSDATA [ 39 ]  [k] :=   if ( transparent == .t. , 1 , 0 )
+   _HMG_SYSDATA [ 40 ]  [k] :=   { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
-// Claudio Soto (May 2013)
-_HMG_SYSDATA [ 37 ]  [k] :=   C_SetPicture    ( ControlHandle , FileName , w , h , if ( stretch == .t. , 1 , 0 ) , if ( transparent == .t. , 1 , 0 ), BackgroundColor, if ( adjustimage == .t. , 1 , 0), TransparentColor)
-_HMG_SYSDATA [ 20 ]  [k] :=   GetWindowWidth  ( ControlHandle )
-_HMG_SYSDATA [ 21 ]  [k] :=   GetWindowHeight ( ControlHandle )
+   // Claudio Soto (May 2013)
+   _HMG_SYSDATA [ 37 ]  [k] :=   C_SetPicture    ( ControlHandle , FileName , w , h , if ( stretch == .t. , 1 , 0 ) , if ( transparent == .t. , 1 , 0 ), BackgroundColor, if ( adjustimage == .t. , 1 , 0), TransparentColor)
+   _HMG_SYSDATA [ 20 ]  [k] :=   GetWindowWidth  ( ControlHandle )
+   _HMG_SYSDATA [ 21 ]  [k] :=   GetWindowHeight ( ControlHandle )
 
-RETURN NIL
+   RETURN NIL
 
-// Claudio Soto (August 2013)
+   // Claudio Soto (August 2013)
 
-// HMG_GetImageInfo ( [ cFileName | hBitmap ], @nWidth, @nHeight, @aBackColor, [ nRowColor ], [ nColColor ] ) --> Return lBoolean
+   // HMG_GetImageInfo ( [ cFileName | hBitmap ], @nWidth, @nHeight, @aBackColor, [ nRowColor ], [ nColColor ] ) --> Return lBoolean
 
 FUNCTION HMG_GetImageInfo ( xFile, nWidth, nHeight, aBackColor, nRowColor, nColColor )
 

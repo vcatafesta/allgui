@@ -504,21 +504,21 @@ FUNCTION  My_Abre_uma_conexao_com_MySql()
    /* Verifica se já está conectado */
    IF oServer != Nil ; Return Nil ; Endif
 
-      /* Abre Conexao com MySql  */
-      oServer := TMySQLServer():New(cHostName, cUser, cPassWord )
+   /* Abre Conexao com MySql  */
+   oServer := TMySQLServer():New(cHostName, cUser, cPassWord )
 
-      /* Verifica se ocorreu algum erro na Conexão */
-      IF oServer:NetErr()
-         MsGInfo("Erro de Conexão com Servidor / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
+   /* Verifica se ocorreu algum erro na Conexão */
+   IF oServer:NetErr()
+      MsGInfo("Erro de Conexão com Servidor / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
 
-      *** Obs: a Variável oServer será sempre a referência em todo o sistema para qualquer tipo de operação
+   *** Obs: a Variável oServer será sempre a referência em todo o sistema para qualquer tipo de operação
 
-      RETURN NIL
-      /*
-      */
+   RETURN NIL
+   /*
+   */
 
 FUNCTION  My_Cria_uma_Base_De_Dados( cBaseDeDados )
 
@@ -530,38 +530,38 @@ FUNCTION  My_Cria_uma_Base_De_Dados( cBaseDeDados )
    /*  Verifica se esta conectado ao MySql */
    IF oServer == Nil ; MsgInfo("Conexão com MySql não foi Iniciada!!") ; Return Nil ; EndIf
 
-      /*  Antes de criar Verifica se a Base de Dados já existe */
-      aBaseDeDadosExistentes  := oServer:ListDBs()
+   /*  Antes de criar Verifica se a Base de Dados já existe */
+   aBaseDeDadosExistentes  := oServer:ListDBs()
 
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro verificando Lista de base de Dados / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro verificando Lista de base de Dados / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
 
-      /* Verifica se na Array aBaseDeDadosExistentes tem a Base de Dados */
-      IF AScan( aBaseDeDadosExistentes, Lower( cBaseDeDados ) ) != 0
-         MsgINFO( "Base de Dados "+cBaseDeDados+" Já Existe!!")
-
-         RETURN NIL
-      ENDIF
-
-      /* Cria a Base De Dados */
-      oServer:CreateDatabase( cBaseDeDados )
-
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro Criando Base de Dados "+cBaseDeDados+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
-
-      ////MsgInfo("Base de Dados << "+cBaseDeDados+" >> Criada com Sucesso!!" )
+   /* Verifica se na Array aBaseDeDadosExistentes tem a Base de Dados */
+   IF AScan( aBaseDeDadosExistentes, Lower( cBaseDeDados ) ) != 0
+      MsgINFO( "Base de Dados "+cBaseDeDados+" Já Existe!!")
 
       RETURN NIL
-      /*
-      */
+   ENDIF
+
+   /* Cria a Base De Dados */
+   oServer:CreateDatabase( cBaseDeDados )
+
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro Criando Base de Dados "+cBaseDeDados+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
+
+   ////MsgInfo("Base de Dados << "+cBaseDeDados+" >> Criada com Sucesso!!" )
+
+   RETURN NIL
+   /*
+   */
 
 FUNCTION My_Conecta_Banco_de_Dados( cBaseDeDados )
 
@@ -573,38 +573,38 @@ FUNCTION My_Conecta_Banco_de_Dados( cBaseDeDados )
    /*  Verifica se esta conectado ao MySql */
    IF oServer == Nil ; MsgInfo("Conexão com MySql não foi Iniciada!!") ; Return Nil ; EndIf
 
-      /*  Antes de Conectar Verifica se a Base de Dados já existe */
-      aBaseDeDadosExistentes := oServer:ListDBs()
+   /*  Antes de Conectar Verifica se a Base de Dados já existe */
+   aBaseDeDadosExistentes := oServer:ListDBs()
 
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro verificando Lista de base de Dados / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro verificando Lista de base de Dados / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
 
-      /* Verifica se na Array aBaseDeDadosExistentes tem a Base de Dados */
-      IF AScan( aBaseDeDadosExistentes, Lower( cBaseDeDados ) ) == 0
-         MsgINFO( "Base de Dados "+cBaseDeDados+" Não Existe!!")
-
-         RETURN NIL
-      ENDIF
-
-      /* Conecta a Base De Dados */
-      oServer:SelectDB( cBaseDeDados )
-
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro Conectando à Base de Dados "+cBaseDeDados+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
-
-      ///MsgInfo("Banco de Dados << "+cBaseDeDados+" >> Aberto!!" )
+   /* Verifica se na Array aBaseDeDadosExistentes tem a Base de Dados */
+   IF AScan( aBaseDeDadosExistentes, Lower( cBaseDeDados ) ) == 0
+      MsgINFO( "Base de Dados "+cBaseDeDados+" Não Existe!!")
 
       RETURN NIL
-      /*
-      */
+   ENDIF
+
+   /* Conecta a Base De Dados */
+   oServer:SelectDB( cBaseDeDados )
+
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro Conectando à Base de Dados "+cBaseDeDados+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
+
+   ///MsgInfo("Banco de Dados << "+cBaseDeDados+" >> Aberto!!" )
+
+   RETURN NIL
+   /*
+   */
 
 FUNCTION My_Cria_Tabela( cTabela )
 
@@ -619,43 +619,43 @@ FUNCTION My_Cria_Tabela( cTabela )
    /*  Verifica se esta conectado ao MySql */
    IF oServer == Nil ; MsgInfo("Conexão com MySql não foi Iniciada!!") ; Return Nil ; EndIf
 
-      /*  Antes de criar Verifica se a Tabela  já existe */
-      aTabelasExistentes  := oServer:ListTables()
+   /*  Antes de criar Verifica se a Tabela  já existe */
+   aTabelasExistentes  := oServer:ListTables()
 
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro verificando Lista de Tabelas / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro verificando Lista de Tabelas / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
 
-      /* Verifica se na Array aTabelasExistentes tem a Tabela */
-      IF AScan( aTabelasExistentes, Lower( cTabela ) ) != 0
-         MsgINFO( "Tabela "+cTabela+" Já Existe!!")
-
-         RETURN NIL
-      ENDIF
-
-      /* Cria a Tabela */
-      oQuery := oServer:Query( cQuery )
-
-      /*  Verifica se ocorreu algum erro */
-      IF oServer:NetErr()
-         MsGInfo("Erro Criando Tabela "+cTabela+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
-         RELEASE WINDOW ALL
-         QUIT
-      ENDIF
-
-      /*  Elimina Objeto Query */
-      oQuery:Destroy()
-
-      ////MsgInfo("Tabela << "+cTabela+" >> Criada com Sucesso!!" )
+   /* Verifica se na Array aTabelasExistentes tem a Tabela */
+   IF AScan( aTabelasExistentes, Lower( cTabela ) ) != 0
+      MsgINFO( "Tabela "+cTabela+" Já Existe!!")
 
       RETURN NIL
+   ENDIF
 
-      /*
-      Insere registros (importa Registros da tabela Nomes.DBF
-      */
+   /* Cria a Tabela */
+   oQuery := oServer:Query( cQuery )
+
+   /*  Verifica se ocorreu algum erro */
+   IF oServer:NetErr()
+      MsGInfo("Erro Criando Tabela "+cTabela+" / <TMySQLServer> " + oServer:Error(),SISTEMA )
+      RELEASE WINDOW ALL
+      QUIT
+   ENDIF
+
+   /*  Elimina Objeto Query */
+   oQuery:Destroy()
+
+   ////MsgInfo("Tabela << "+cTabela+" >> Criada com Sucesso!!" )
+
+   RETURN NIL
+
+   /*
+   Insere registros (importa Registros da tabela Nomes.DBF
+   */
 
 FUNCTION Insere_Registros_na_Tabela( cTabela )
 

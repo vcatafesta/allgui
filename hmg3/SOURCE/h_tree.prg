@@ -564,11 +564,11 @@ FUNCTION TreeItemGetChildValue ( ControlName , ParentForm , nItem )
    ChildItem := TreeView_GetChild ( nControlHandle , ItemHandle )
    WHILE (ChildItem <> 0)
       AADD (aChildValues, TreeItemGetValueByItemHandle(ControlName, ParentForm, ChildItem) )
-   NEXTItem = TreeView_GetNextSibling ( nControlHandle , ChildItem )
-   ChildItem = NextItem
-ENDDO
+      NEXTItem = TreeView_GetNextSibling ( nControlHandle , ChildItem )
+      ChildItem = NextItem
+   ENDDO
 
-RETURN IF (EMPTY(aChildValues), NIL, aChildValues)
+   RETURN IF (EMPTY(aChildValues), NIL, aChildValues)
 
 FUNCTION TreeItemGetSiblingValue ( ControlName , ParentForm , nItem )
 
@@ -587,12 +587,12 @@ FUNCTION TreeItemGetSiblingValue ( ControlName , ParentForm , nItem )
       SiblingItem := FirstItem
       WHILE (SiblingItem <> 0)
          AADD (aSiblingValues, TreeItemGetValueByItemHandle(ControlName, ParentForm, SiblingItem) )
-      NEXTItem = TreeView_GetNextSibling ( nControlHandle , SiblingItem )
-      SiblingItem = NextItem
-   ENDDO
-ENDIF
+         NEXTItem = TreeView_GetNextSibling ( nControlHandle , SiblingItem )
+         SiblingItem = NextItem
+      ENDDO
+   ENDIF
 
-RETURN IF (EMPTY(aSiblingValues), NIL, aSiblingValues)
+   RETURN IF (EMPTY(aSiblingValues), NIL, aSiblingValues)
 
 FUNCTION TreeItemGetDisplayLevel ( ControlName , ParentForm , nItem )
 

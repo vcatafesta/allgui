@@ -1211,229 +1211,417 @@ FUNCTION printpdfstart
       //   @ Row - lh + nPrintGap ,Col-1  print line TO Row - lh + nPrintGap,col+maxcol1-1 penwidth 0.25
       FOR count1 := 1 to hmg_len(mergehead)
          startcol := mergehead[count1,1]
-      endcol := mergehead[count1,2]
-      headdata := mergehead[count1,3]
-      printpdfstart := 0
-      printend := 0
-      FOR count2 := 1 to endcol
-         IF count2 < startcol
-            IF columnarr[count2,1] == 1
-               printpdfstart := printpdfstart + columnarr[count2,3] + 2
-            ENDIF
-         ENDIF
-         IF columnarr[count2,1] == 1
-            printend := printend + columnarr[count2,3] + 2
-         ENDIF
-      NEXT count2
-      IF printend > printpdfstart
-         IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
-            COUNT3 := hmg_len(headdata)
-            DO WHILE pdfprintlen(substr(headdata,1,count3),size1,fontname) > (printend - printpdfstart)
-               COUNT3 := count3 - 1
-            ENDDO
-         ENDIF
-         _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-         _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
-      ENDIF
-   NEXT count1
-   _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
-   _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
-   IF pdfgrid.collines.value
-      colcount := 0
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
-            totcol := totcol + columnarr[count2,3]
-            colcount := colcount + 1
-            colreqd := .t.
-            FOR count3 := 1 to hmg_len(mergehead)
-               startcol := mergehead[count3,1]
-            endcol := mergehead[count3,2]
-            IF count2 >= startcol
-               IF count2 < endcol
-                  IF columnarr[endcol,1] == 1
-                     colreqd := .f.
-                  ELSE
-                     FOR count7 := count2+1 to endcol
-                        IF columnarr[count7,1] == 1
-                           colreqd := .f.
-                        ENDIF
-                     NEXT count7
-                  ENDIF
-               ELSE
-                  colreqd := .t.
+         endcol := mergehead[count1,2]
+         headdata := mergehead[count1,3]
+         printpdfstart := 0
+         printend := 0
+         FOR count2 := 1 to endcol
+            IF count2 < startcol
+               IF columnarr[count2,1] == 1
+                  printpdfstart := printpdfstart + columnarr[count2,3] + 2
                ENDIF
             ENDIF
-         NEXT count3
-         IF colreqd
-            _HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
+            IF columnarr[count2,1] == 1
+               printend := printend + columnarr[count2,3] + 2
+            ENDIF
+         NEXT count2
+         IF printend > printpdfstart
+            IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
+               COUNT3 := hmg_len(headdata)
+               DO WHILE pdfprintlen(substr(headdata,1,count3),size1,fontname) > (printend - printpdfstart)
+                  COUNT3 := count3 - 1
+               ENDDO
+            ENDIF
+            _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+            _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
          ENDIF
+      NEXT count1
+      _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
+      _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
+      IF pdfgrid.collines.value
+         colcount := 0
+         FOR count2 := 1 to hmg_len(columnarr)
+            IF columnarr[count2,1] == 1
+               totcol := totcol + columnarr[count2,3]
+               colcount := colcount + 1
+               colreqd := .t.
+               FOR count3 := 1 to hmg_len(mergehead)
+                  startcol := mergehead[count3,1]
+                  endcol := mergehead[count3,2]
+                  IF count2 >= startcol
+                     IF count2 < endcol
+                        IF columnarr[endcol,1] == 1
+                           colreqd := .f.
+                        ELSE
+                           FOR count7 := count2+1 to endcol
+                              IF columnarr[count7,1] == 1
+                                 colreqd := .f.
+                              ENDIF
+                           NEXT count7
+                        ENDIF
+                     ELSE
+                        colreqd := .t.
+                     ENDIF
+                  ENDIF
+               NEXT count3
+               IF colreqd
+                  _HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
+               ENDIF
+            ENDIF
+         NEXT count2
       ENDIF
-   NEXT count2
-ENDIF
-row := row + lh
-ELSE
-_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-ENDIF
-
-firstrow := Row
-
-ASize(printdata,0)
-ASize(justifyarr,0)
-asize(sizesarr,0)
-FOR count1 := 1 TO hmg_len(columnarr)
-   IF columnarr[count1,1] == 1
-      size := columnarr[count1,3]
-      data1 := columnarr[count1,2]
-      IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-         AAdd(printdata,alltrim(data1))
-      ELSE // header size bigger than column! to be truncated.
-         COUNT2 := hmg_len(data1)
-         DO WHILE pdfprintlen(substr(data1,1,count2),size1,fontname) > size
-            COUNT2 := count2 - 1
-         ENDDO
-         AAdd(printdata,substr(data1,1,count2))
-      ENDIF
-      AAdd(justifyarr,columnarr[count1,4])
-      aadd(sizesarr,columnarr[count1,3])
-   ENDIF
-NEXT count1
-pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
-row := row + lh
-_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-FOR count1 := 1 TO totrows
-   IF lArrayMode
-      linedata := aData[count1]
+      row := row + lh
    ELSE
-      linedata := getproperty(windowname,gridname,"item",count1)
+      _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
    ENDIF
+
+   firstrow := Row
+
    ASize(printdata,0)
-   asize(nextline,0)
-   FOR count2 := 1 TO hmg_len(columnarr)
-      IF columnarr[count2,1] == 1
-         size := columnarr[count2,3]
-         DO CASE
-         CASE ValType(linedata[count2]) == "N"
-            IF .not. lArrayMode
-               xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
-               AEC := XRES [1]
-               AITEMS := XRES [5]
-               IF AEC == 'COMBOBOX'
-                  cPrintdata := aitems[linedata[count2]]
+   ASize(justifyarr,0)
+   asize(sizesarr,0)
+   FOR count1 := 1 TO hmg_len(columnarr)
+      IF columnarr[count1,1] == 1
+         size := columnarr[count1,3]
+         data1 := columnarr[count1,2]
+         IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+            AAdd(printdata,alltrim(data1))
+         ELSE // header size bigger than column! to be truncated.
+            COUNT2 := hmg_len(data1)
+            DO WHILE pdfprintlen(substr(data1,1,count2),size1,fontname) > size
+               COUNT2 := count2 - 1
+            ENDDO
+            AAdd(printdata,substr(data1,1,count2))
+         ENDIF
+         AAdd(justifyarr,columnarr[count1,4])
+         aadd(sizesarr,columnarr[count1,3])
+      ENDIF
+   NEXT count1
+   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
+   row := row + lh
+   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+   FOR count1 := 1 TO totrows
+      IF lArrayMode
+         linedata := aData[count1]
+      ELSE
+         linedata := getproperty(windowname,gridname,"item",count1)
+      ENDIF
+      ASize(printdata,0)
+      asize(nextline,0)
+      FOR count2 := 1 TO hmg_len(columnarr)
+         IF columnarr[count2,1] == 1
+            size := columnarr[count2,3]
+            DO CASE
+            CASE ValType(linedata[count2]) == "N"
+               IF .not. lArrayMode
+                  xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
+                  AEC := XRES [1]
+                  AITEMS := XRES [5]
+                  IF AEC == 'COMBOBOX'
+                     cPrintdata := aitems[linedata[count2]]
+                  ELSE
+                     cPrintdata := LTrim( Str( linedata[count2] ) )
+                  ENDIF
                ELSE
                   cPrintdata := LTrim( Str( linedata[count2] ) )
                ENDIF
-            ELSE
-               cPrintdata := LTrim( Str( linedata[count2] ) )
-            ENDIF
-         CASE ValType(linedata[count2]) == "D"
-            cPrintdata := dtoc( linedata[count2])
-         CASE ValType(linedata[count2]) == "L"
-            IF .not. lArrayMode
-               xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
-               AEC := XRES [1]
-               AITEMS := XRES [8]
-               IF AEC == 'CHECKBOX'
-                  cPrintdata := iif(linedata[count2],aitems[1],aitems[2])
+            CASE ValType(linedata[count2]) == "D"
+               cPrintdata := dtoc( linedata[count2])
+            CASE ValType(linedata[count2]) == "L"
+               IF .not. lArrayMode
+                  xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
+                  AEC := XRES [1]
+                  AITEMS := XRES [8]
+                  IF AEC == 'CHECKBOX'
+                     cPrintdata := iif(linedata[count2],aitems[1],aitems[2])
+                  ELSE
+                     cPrintdata := iif(linedata[count2],"T","F")
+                  ENDIF
                ELSE
                   cPrintdata := iif(linedata[count2],"T","F")
                ENDIF
-            ELSE
-               cPrintdata := iif(linedata[count2],"T","F")
+            OTHERWISE
+               cPrintdata := linedata[count2]
+            ENDCASE
+            IF hmg_len(sumarr) > 0
+               IF sumarr[count2,1]
+                  cPrintdata := transform(val(stripcomma(cPrintdata,".",",")),sumarr[count2,2])
+               ENDIF
             ENDIF
-         OTHERWISE
-            cPrintdata := linedata[count2]
-         ENDCASE
-         IF hmg_len(sumarr) > 0
-            IF sumarr[count2,1]
-               cPrintdata := transform(val(stripcomma(cPrintdata,".",",")),sumarr[count2,2])
+            data1 := cPrintdata
+            IF hmg_len(sumarr) > 0
+               IF sumarr[count2,1]
+                  totalarr[count2] := totalarr[count2] + val(stripcomma(cPrintdata,".",","))
+               ENDIF
             ENDIF
-         ENDIF
-         data1 := cPrintdata
-         IF hmg_len(sumarr) > 0
-            IF sumarr[count2,1]
-               totalarr[count2] := totalarr[count2] + val(stripcomma(cPrintdata,".",","))
-            ENDIF
-         ENDIF
-         IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-            aadd(printdata,alltrim(data1))
-            aadd(nextline,0)
-         ELSE  // truncate or wordwrap!
-            IF pdfgrid.wordwrap.value == 2 // truncate
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               AAdd(printdata,substr(data1,1,count3))
+            IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+               aadd(printdata,alltrim(data1))
                aadd(nextline,0)
-            ELSE // wordwrap
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               data1 := substr(data1,1,count3)
-               IF rat(" ",data1) > 0
-                  COUNT3 := rat(" ",data1)
+            ELSE  // truncate or wordwrap!
+               IF pdfgrid.wordwrap.value == 2 // truncate
+                  COUNT3 := hmg_len(data1)
+                  DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                     COUNT3 := count3 - 1
+                  ENDDO
+                  AAdd(printdata,substr(data1,1,count3))
+                  aadd(nextline,0)
+               ELSE // wordwrap
+                  COUNT3 := hmg_len(data1)
+                  DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                     COUNT3 := count3 - 1
+                  ENDDO
+                  data1 := substr(data1,1,count3)
+                  IF rat(" ",data1) > 0
+                     COUNT3 := rat(" ",data1)
+                  ENDIF
+                  AAdd(printdata,substr(data1,1,count3))
+                  aadd(nextline,count3)
                ENDIF
-               AAdd(printdata,substr(data1,1,count3))
-               aadd(nextline,count3)
             ENDIF
+         ELSE
+            aadd(nextline,0)
          ENDIF
-      ELSE
-         aadd(nextline,0)
-      ENDIF
-   NEXT count2
-   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-   Row := Row + lh
-   dataprintover := .t.
-   FOR count2 := 1 to hmg_len(nextline)
-      IF nextline[count2] > 0
-         dataprintover := .f.
-      ENDIF
-   NEXT count2
-   DO WHILE .not. dataprintover
-      ASize(printdata,0)
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
-            size := columnarr[count2,3]
-            data1 := linedata[count2]
-            IF nextline[count2] > 0 //there is some next line
-               data1 := substr(data1,nextline[count2]+1,hmg_len(data1))
-               IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-                  aadd(printdata,alltrim(data1))
-               NEXTline[count2] := 0
-            ELSE // there are further lines!
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               data1 := substr(data1,1,count3)
-               IF rat(" ",data1) > 0
-                  COUNT3 := rat(" ",data1)
+      NEXT count2
+      pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
+      Row := Row + lh
+      dataprintover := .t.
+      FOR count2 := 1 to hmg_len(nextline)
+         IF nextline[count2] > 0
+            dataprintover := .f.
+         ENDIF
+      NEXT count2
+      DO WHILE .not. dataprintover
+         ASize(printdata,0)
+         FOR count2 := 1 to hmg_len(columnarr)
+            IF columnarr[count2,1] == 1
+               size := columnarr[count2,3]
+               data1 := linedata[count2]
+               IF nextline[count2] > 0 //there is some next line
+                  data1 := substr(data1,nextline[count2]+1,hmg_len(data1))
+                  IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+                     aadd(printdata,alltrim(data1))
+                     NEXTline[count2] := 0
+                  ELSE // there are further lines!
+                     COUNT3 := hmg_len(data1)
+                     DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                        COUNT3 := count3 - 1
+                     ENDDO
+                     data1 := substr(data1,1,count3)
+                     IF rat(" ",data1) > 0
+                        COUNT3 := rat(" ",data1)
+                     ENDIF
+                     AAdd(printdata,substr(data1,1,count3))
+                     NEXTline[count2] := nextline[count2]+count3
+                  ENDIF
+               ELSE
+                  AAdd(printdata,"")
+                  NEXTline[count2] := 0
                ENDIF
-               AAdd(printdata,substr(data1,1,count3))
-            NEXTline[count2] := nextline[count2]+count3
+            ENDIF
+         NEXT count2
+         pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
+         Row := Row + lh
+         dataprintover := .t.
+         FOR count2 := 1 to hmg_len(nextline)
+            IF nextline[count2] > 0
+               dataprintover := .f.
+            ENDIF
+         NEXT count2
+      ENDDO
+
+      IF Row+iif(hmg_len(sumarr)>0,(3*lh),lh)+iif(hmg_len(alltrim(pdfgrid.footer1.value))>0,lh,0) >= maxrow1 // 2 lines for total & 1 line for footer
+         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         IF hmg_len(sumarr) > 0
+            row := row + lh
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+            ASize(printdata,0)
+            FOR count5 := 1 TO hmg_len(columnarr)
+               IF columnarr[count5,1] == 1
+                  size := columnarr[count5,3]
+                  IF sumarr[count5,1]
+                     cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
+                  ELSE
+                     cPrintdata := ""
+                  ENDIF
+                  aadd(printdata,alltrim(cPrintdata))
+               ENDIF
+            NEXT count5
+            pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
+            Row := Row + lh
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         ELSE
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         ENDIF
+         lastrow := Row
+         totcol := 0
+         _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. )
+         IF pdfgrid.collines.value
+            colcount := 0
+            FOR count2 := 1 to hmg_len(columnarr)
+               IF columnarr[count2,1] == 1
+                  totcol := totcol + columnarr[count2,3]
+                  colcount := colcount + 1
+                  _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
+               ENDIF
+            NEXT count2
+         ENDIF
+         _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
+            _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+            row := row + lh + lh
+         ENDIF
+         IF pdfgrid.pageno.value == 3
+            Row := Row + lh
+            _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
+         ENDIF
+         _hmg_hpdf_endpage()
+         pageno := pageno + 1
+         row := pdfgrid.top.value
+         _hmg_hpdf_startpage()
+         IF pdfgrid.pageno.value == 2
+            _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
+            row := row + lh
+         ENDIF
+         IF hmg_len(AllTrim(pdfgrid.header1.value)) > 0
+            _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+            row := row + lh + lh
+         ENDIF
+         IF hmg_len(AllTrim(pdfgrid.header2.value)) > 0
+            _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+            //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header2.value) font fontname size size1+2 center
+            row := row + lh + lh
+         ENDIF
+         IF hmg_len(AllTrim(pdfgrid.header3.value)) > 0
+            _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+            //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header3.value) font fontname size size1+2 center
+            row := row + lh + lh
+         ENDIF
+         IF hmg_len(mergehead) > 0
+            _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+            FOR count4 := 1 to hmg_len(mergehead)
+               startcol := mergehead[count4,1]
+               endcol := mergehead[count4,2]
+               headdata := mergehead[count4,3]
+               printpdfstart := 0
+               printend := 0
+               FOR count5 := 1 to endcol
+                  IF count5 < startcol
+                     IF columnarr[count5,1] == 1
+                        printpdfstart := printpdfstart + columnarr[count5,3] + 2
+                     ENDIF
+                  ENDIF
+                  IF columnarr[count5,1] == 1
+                     printend := printend + columnarr[count5,3] + 2
+                  ENDIF
+               NEXT count5
+               IF printend > printpdfstart
+                  IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
+                     COUNT6 := hmg_len(headdata)
+                     DO WHILE pdfprintlen(substr(headdata,1,count6),size1,fontname) > (printend - printpdfstart)
+                        COUNT6 := count6 - 1
+                     ENDDO
+                  ENDIF
+                  _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+                  _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
+                  && @ Row,col+printpdfstart+int((printend-printpdfstart)/2) print headdata font fontname size size1 center
+                  && @ Row+ nPrintGap,col-1+printpdfstart print line TO Row + nPrintGap,col-1+printend penwidth 0.25
+               ENDIF
+            NEXT count4
+            _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
+            _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
+
+            && @ row-lh+ nPrintGap,col-1 print line to row+ nPrintGap,col-1 penwidth 0.25
+            && @ row-lh+ nPrintGap,col-1+maxcol1 print line to row+ nPrintGap,col-1+maxcol1 penwidth 0.25
+            totcol := 0
+            IF pdfgrid.collines.value
+               colcount := 0
+               FOR count5 := 1 to hmg_len(columnarr)
+                  IF columnarr[count5,1] == 1
+                     totcol := totcol + columnarr[count5,3]
+                     colcount := colcount + 1
+                     colreqd := .t.
+                     FOR count6 := 1 to hmg_len(mergehead)
+                        startcol := mergehead[count6,1]
+                        endcol := mergehead[count6,2]
+                        IF count5 >= startcol
+                           IF count5 < endcol
+                              IF columnarr[endcol,1] == 1
+                                 colreqd := .f.
+                              ELSE
+                                 FOR count7 := (count5) + 1 to endcol
+                                    IF columnarr[count7,1] == 1
+                                       colreqd := .f.
+                                    ENDIF
+                                 NEXT count7
+                              ENDIF
+                           ELSE
+                              colreqd := .t.
+                           ENDIF
+                        ENDIF
+                     NEXT count6
+                     IF colreqd
+                        _HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
+                        && @ row-lh+ nPrintGap,col+totcol+(colcount * 2)-1 print line TO row+ nPrintGap,col+totcol+(colcount * 2)-1 penwidth 0.25
+                     ENDIF
+                  ENDIF
+               NEXT count5
+            ENDIF
+            row := row + lh
+         ELSE
+            _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+            && @ Row - lh+ nPrintGap ,Col-1  print line TO Row -lh+ nPrintGap,col+maxcol1-1 penwidth 0.25
+         ENDIF
+         firstrow := Row
+         ASize(printdata,0)
+         ASize(justifyarr,0)
+         asize(sizesarr,0)
+         FOR count2 := 1 TO hmg_len(columnarr)
+            IF columnarr[count2,1] == 1
+               size := columnarr[count2,3]
+               data1 := columnarr[count2,2]
+               IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+                  AAdd(printdata,alltrim(data1))
+               ELSE // header size bigger than column! truncated as of now.
+                  COUNT3 := hmg_len(data1)
+                  DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                     COUNT3 := count3 - 1
+                  ENDDO
+                  AAdd(printdata,substr(data1,1,count3))
+               ENDIF
+               AAdd(justifyarr,columnarr[count2,4])
+               aadd(sizesarr,columnarr[count2,3])
+            ENDIF
+         NEXT count2
+         pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
+         row := row + lh
+         @ Row-lh+ nPrintGap,Col-1 print line TO Row-lh+ nPrintGap,col+maxcol1-1 penwidth 0.25
+         IF hmg_len(sumarr) > 0
+            ASize(printdata,0)
+            FOR count5 := 1 TO hmg_len(columnarr)
+               IF columnarr[count5,1] == 1
+                  size := columnarr[count5,3]
+                  IF sumarr[count5,1]
+                     cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
+                  ELSE
+                     cPrintdata := ""
+                  ENDIF
+                  aadd(printdata,alltrim(cPrintdata))
+               ENDIF
+            NEXT count5
+            pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
+            Row := Row + lh
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+            Row := Row + lh
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
          ENDIF
       ELSE
-         AAdd(printdata,"")
-      NEXTline[count2] := 0
-   ENDIF
-ENDIF
-NEXT count2
-pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-Row := Row + lh
-dataprintover := .t.
-FOR count2 := 1 to hmg_len(nextline)
-   IF nextline[count2] > 0
-      dataprintover := .f.
-   ENDIF
-NEXT count2
-ENDDO
-
-IF Row+iif(hmg_len(sumarr)>0,(3*lh),lh)+iif(hmg_len(alltrim(pdfgrid.footer1.value))>0,lh,0) >= maxrow1 // 2 lines for total & 1 line for footer
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         IF pdfgrid.rowlines.value
+            _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         ENDIF
+      ENDIF
+   NEXT count1
+   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
    IF hmg_len(sumarr) > 0
-      row := row + lh
-      _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
       ASize(printdata,0)
       FOR count5 := 1 TO hmg_len(columnarr)
          IF columnarr[count5,1] == 1
@@ -1448,18 +1636,16 @@ IF Row+iif(hmg_len(sumarr)>0,(3*lh),lh)+iif(hmg_len(alltrim(pdfgrid.footer1.valu
       NEXT count5
       pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
       Row := Row + lh
-      _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-   ELSE
-      _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+      _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
    ENDIF
    lastrow := Row
    totcol := 0
+   colcount := 0
    _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. )
    IF pdfgrid.collines.value
-      colcount := 0
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
-            totcol := totcol + columnarr[count2,3]
+      FOR count1 := 1 to hmg_len(columnarr)
+         IF columnarr[count1,1] == 1
+            totcol := totcol + columnarr[count1,3]
             colcount := colcount + 1
             _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
          ENDIF
@@ -1474,201 +1660,15 @@ IF Row+iif(hmg_len(sumarr)>0,(3*lh),lh)+iif(hmg_len(alltrim(pdfgrid.footer1.valu
       Row := Row + lh
       _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
    ENDIF
+
    _hmg_hpdf_endpage()
-   pageno := pageno + 1
-   row := pdfgrid.top.value
-   _hmg_hpdf_startpage()
-   IF pdfgrid.pageno.value == 2
-      _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
-      row := row + lh
+   _hmg_hpdf_enddoc()
+   WAIT clear
+   IF iswindowactive(pdfgrid)
+      pdfgrid.release
    ENDIF
-   IF hmg_len(AllTrim(pdfgrid.header1.value)) > 0
-      _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-      row := row + lh + lh
-   ENDIF
-   IF hmg_len(AllTrim(pdfgrid.header2.value)) > 0
-      _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-      //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header2.value) font fontname size size1+2 center
-      row := row + lh + lh
-   ENDIF
-   IF hmg_len(AllTrim(pdfgrid.header3.value)) > 0
-      _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-      //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header3.value) font fontname size size1+2 center
-      row := row + lh + lh
-   ENDIF
-   IF hmg_len(mergehead) > 0
-      _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-      FOR count4 := 1 to hmg_len(mergehead)
-         startcol := mergehead[count4,1]
-      endcol := mergehead[count4,2]
-      headdata := mergehead[count4,3]
-      printpdfstart := 0
-      printend := 0
-      FOR count5 := 1 to endcol
-         IF count5 < startcol
-            IF columnarr[count5,1] == 1
-               printpdfstart := printpdfstart + columnarr[count5,3] + 2
-            ENDIF
-         ENDIF
-         IF columnarr[count5,1] == 1
-            printend := printend + columnarr[count5,3] + 2
-         ENDIF
-      NEXT count5
-      IF printend > printpdfstart
-         IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
-            COUNT6 := hmg_len(headdata)
-            DO WHILE pdfprintlen(substr(headdata,1,count6),size1,fontname) > (printend - printpdfstart)
-               COUNT6 := count6 - 1
-            ENDDO
-         ENDIF
-         _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-         _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
-         && @ Row,col+printpdfstart+int((printend-printpdfstart)/2) print headdata font fontname size size1 center
-         && @ Row+ nPrintGap,col-1+printpdfstart print line TO Row + nPrintGap,col-1+printend penwidth 0.25
-      ENDIF
-   NEXT count4
-   _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
-   _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
 
-   && @ row-lh+ nPrintGap,col-1 print line to row+ nPrintGap,col-1 penwidth 0.25
-   && @ row-lh+ nPrintGap,col-1+maxcol1 print line to row+ nPrintGap,col-1+maxcol1 penwidth 0.25
-   totcol := 0
-   IF pdfgrid.collines.value
-      colcount := 0
-      FOR count5 := 1 to hmg_len(columnarr)
-         IF columnarr[count5,1] == 1
-            totcol := totcol + columnarr[count5,3]
-            colcount := colcount + 1
-            colreqd := .t.
-            FOR count6 := 1 to hmg_len(mergehead)
-               startcol := mergehead[count6,1]
-            endcol := mergehead[count6,2]
-            IF count5 >= startcol
-               IF count5 < endcol
-                  IF columnarr[endcol,1] == 1
-                     colreqd := .f.
-                  ELSE
-                     FOR count7 := (count5) + 1 to endcol
-                        IF columnarr[count7,1] == 1
-                           colreqd := .f.
-                        ENDIF
-                     NEXT count7
-                  ENDIF
-               ELSE
-                  colreqd := .t.
-               ENDIF
-            ENDIF
-         NEXT count6
-         IF colreqd
-            _HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
-            && @ row-lh+ nPrintGap,col+totcol+(colcount * 2)-1 print line TO row+ nPrintGap,col+totcol+(colcount * 2)-1 penwidth 0.25
-         ENDIF
-      ENDIF
-   NEXT count5
-ENDIF
-row := row + lh
-ELSE
-_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-&& @ Row - lh+ nPrintGap ,Col-1  print line TO Row -lh+ nPrintGap,col+maxcol1-1 penwidth 0.25
-ENDIF
-firstrow := Row
-ASize(printdata,0)
-ASize(justifyarr,0)
-asize(sizesarr,0)
-FOR count2 := 1 TO hmg_len(columnarr)
-   IF columnarr[count2,1] == 1
-      size := columnarr[count2,3]
-      data1 := columnarr[count2,2]
-      IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-         AAdd(printdata,alltrim(data1))
-      ELSE // header size bigger than column! truncated as of now.
-         COUNT3 := hmg_len(data1)
-         DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-            COUNT3 := count3 - 1
-         ENDDO
-         AAdd(printdata,substr(data1,1,count3))
-      ENDIF
-      AAdd(justifyarr,columnarr[count2,4])
-      aadd(sizesarr,columnarr[count2,3])
-   ENDIF
-NEXT count2
-pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
-row := row + lh
-@ Row-lh+ nPrintGap,Col-1 print line TO Row-lh+ nPrintGap,col+maxcol1-1 penwidth 0.25
-IF hmg_len(sumarr) > 0
-   ASize(printdata,0)
-   FOR count5 := 1 TO hmg_len(columnarr)
-      IF columnarr[count5,1] == 1
-         size := columnarr[count5,3]
-         IF sumarr[count5,1]
-            cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
-         ELSE
-            cPrintdata := ""
-         ENDIF
-         aadd(printdata,alltrim(cPrintdata))
-      ENDIF
-   NEXT count5
-   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-   Row := Row + lh
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-   Row := Row + lh
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-ENDIF
-ELSE
-IF pdfgrid.rowlines.value
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-ENDIF
-ENDIF
-NEXT count1
-_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-IF hmg_len(sumarr) > 0
-   ASize(printdata,0)
-   FOR count5 := 1 TO hmg_len(columnarr)
-      IF columnarr[count5,1] == 1
-         size := columnarr[count5,3]
-         IF sumarr[count5,1]
-            cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
-         ELSE
-            cPrintdata := ""
-         ENDIF
-         aadd(printdata,alltrim(cPrintdata))
-      ENDIF
-   NEXT count5
-   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-   Row := Row + lh
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-ENDIF
-lastrow := Row
-totcol := 0
-colcount := 0
-_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. )
-IF pdfgrid.collines.value
-   FOR count1 := 1 to hmg_len(columnarr)
-      IF columnarr[count1,1] == 1
-         totcol := totcol + columnarr[count1,3]
-         colcount := colcount + 1
-         _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
-      ENDIF
-   NEXT count2
-ENDIF
-_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
-IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
-   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
-   row := row + lh + lh
-ENDIF
-IF pdfgrid.pageno.value == 3
-   Row := Row + lh
-   _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
-ENDIF
-
-_hmg_hpdf_endpage()
-_hmg_hpdf_enddoc()
-WAIT clear
-IF iswindowactive(pdfgrid)
-   pdfgrid.release
-ENDIF
-
-RETURN NIL
+   RETURN NIL
 
 FUNCTION pdfgridtoggle
 
@@ -1938,227 +1938,259 @@ FUNCTION pdfgridpreview
       DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
       FOR count1 := 1 to hmg_len(mergehead)
          startcol := mergehead[count1,1]
-      endcol := mergehead[count1,2]
-      headdata := mergehead[count1,3]
-      printpdfstart := 0
-      printend := 0
-      FOR count2 := 1 to endcol
-         IF count2 < startcol
-            IF columnarr[count2,1] == 1
-               printpdfstart := printpdfstart + columnarr[count2,3] + 2
-            ENDIF
-         ENDIF
-         IF columnarr[count2,1] == 1
-            printend := printend + columnarr[count2,3] + 2
-         ENDIF
-      NEXT count2
-      IF printend > printpdfstart
-         IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
-            COUNT3 := hmg_len(headdata)
-            DO WHILE pdfprintlen(substr(headdata,1,count3),size1,fontname) > (printend - printpdfstart)
-               COUNT3 := count3 - 1
-            ENDDO
-         ENDIF
-         pl := pdfprintlen(AllTrim(headdata),size1,fontname)
-         DRAW LINE in window pdfgrid at curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize) to curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize)+(pl*resize)
-         DRAW LINE in window pdfgrid at curx+lh,cury+(printpdfstart*resize) TO curx+lh,cury+(printend*resize)
-      ENDIF
-   NEXT count1
-   DRAW LINE in window pdfgrid at curx,cury to curx+lh,cury
-   DRAW LINE in window pdfgrid at curx,cury+maxcol1-(1*resize) to curx+lh,cury+maxcol1-(1*resize)
-   IF pdfgrid.collines.value
-      colcount := 0
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
-            totcol := totcol + columnarr[count2,3]
-            colcount := colcount + 1
-            colreqd := .t.
-            FOR count3 := 1 to hmg_len(mergehead)
-               startcol := mergehead[count3,1]
-            endcol := mergehead[count3,2]
-            IF count2 >= startcol
-               IF count2 < endcol
-                  IF columnarr[endcol,1] == 1
-                     colreqd := .f.
-                  ELSE
-                     FOR count7 := count2+1 to endcol
-                        IF columnarr[count7,1] == 1
-                           colreqd := .f.
-                        ENDIF
-                     NEXT count7
-                  ENDIF
-               ELSE
-                  colreqd := .t.
+         endcol := mergehead[count1,2]
+         headdata := mergehead[count1,3]
+         printpdfstart := 0
+         printend := 0
+         FOR count2 := 1 to endcol
+            IF count2 < startcol
+               IF columnarr[count2,1] == 1
+                  printpdfstart := printpdfstart + columnarr[count2,3] + 2
                ENDIF
             ENDIF
-         NEXT count3
-         IF colreqd
-            DRAW LINE in window pdfgrid at curx,cury-1+((totcol+(colcount * 2)) * resize) to curx+lh,cury-1+((totcol+(colcount * 2)) * resize)
+            IF columnarr[count2,1] == 1
+               printend := printend + columnarr[count2,3] + 2
+            ENDIF
+         NEXT count2
+         IF printend > printpdfstart
+            IF pdfprintlen(AllTrim(headdata),size1,fontname) > (printend - printpdfstart)
+               COUNT3 := hmg_len(headdata)
+               DO WHILE pdfprintlen(substr(headdata,1,count3),size1,fontname) > (printend - printpdfstart)
+                  COUNT3 := count3 - 1
+               ENDDO
+            ENDIF
+            pl := pdfprintlen(AllTrim(headdata),size1,fontname)
+            DRAW LINE in window pdfgrid at curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize) to curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize)+(pl*resize)
+            DRAW LINE in window pdfgrid at curx+lh,cury+(printpdfstart*resize) TO curx+lh,cury+(printend*resize)
          ENDIF
+      NEXT count1
+      DRAW LINE in window pdfgrid at curx,cury to curx+lh,cury
+      DRAW LINE in window pdfgrid at curx,cury+maxcol1-(1*resize) to curx+lh,cury+maxcol1-(1*resize)
+      IF pdfgrid.collines.value
+         colcount := 0
+         FOR count2 := 1 to hmg_len(columnarr)
+            IF columnarr[count2,1] == 1
+               totcol := totcol + columnarr[count2,3]
+               colcount := colcount + 1
+               colreqd := .t.
+               FOR count3 := 1 to hmg_len(mergehead)
+                  startcol := mergehead[count3,1]
+                  endcol := mergehead[count3,2]
+                  IF count2 >= startcol
+                     IF count2 < endcol
+                        IF columnarr[endcol,1] == 1
+                           colreqd := .f.
+                        ELSE
+                           FOR count7 := count2+1 to endcol
+                              IF columnarr[count7,1] == 1
+                                 colreqd := .f.
+                              ENDIF
+                           NEXT count7
+                        ENDIF
+                     ELSE
+                        colreqd := .t.
+                     ENDIF
+                  ENDIF
+               NEXT count3
+               IF colreqd
+                  DRAW LINE in window pdfgrid at curx,cury-1+((totcol+(colcount * 2)) * resize) to curx+lh,cury-1+((totcol+(colcount * 2)) * resize)
+               ENDIF
+            ENDIF
+         NEXT count2
       ENDIF
-   NEXT count2
-ENDIF
-curx := curx + lh
-ELSE
-DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-ENDIF
-
-firstrow := curx
-//draw line in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-ASize(printdata,0)
-ASize(justifyarr,0)
-asize(sizesarr,0)
-FOR count1 := 1 TO hmg_len(columnarr)
-   IF columnarr[count1,1] == 1
-      size := columnarr[count1,3]
-      data1 := columnarr[count1,2]
-      IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-         AAdd(printdata,alltrim(data1))
-      ELSE // header size bigger than column! to be truncated.
-         COUNT2 := hmg_len(data1)
-         DO WHILE pdfprintlen(substr(data1,1,count2),size1,fontname) > size
-            COUNT2 := count2 - 1
-         ENDDO
-         AAdd(printdata,substr(data1,1,count2))
-      ENDIF
-      AAdd(justifyarr,columnarr[count1,4])
-      aadd(sizesarr,columnarr[count1,3])
-   ENDIF
-NEXT count1
-pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
-curx := curx + lh
-DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-FOR count1 := 1 TO totrows
-   IF lArrayMode
-      linedata := aData[count1]
+      curx := curx + lh
    ELSE
-      linedata := getproperty(windowname,gridname,"item",count1)
+      DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
    ENDIF
+
+   firstrow := curx
+   //draw line in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
    ASize(printdata,0)
-   asize(nextline,0)
-   FOR count2 := 1 TO hmg_len(columnarr)
-      IF columnarr[count2,1] == 1
-         size := columnarr[count2,3]
-         DO CASE
-         CASE ValType(linedata[count2]) == "N"
-            IF .not. lArrayMode
-               xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
-               AEC := XRES [1]
-               AITEMS := XRES [5]
-               IF AEC == 'COMBOBOX'
-                  cPrintdata := aitems[linedata[count2]]
+   ASize(justifyarr,0)
+   asize(sizesarr,0)
+   FOR count1 := 1 TO hmg_len(columnarr)
+      IF columnarr[count1,1] == 1
+         size := columnarr[count1,3]
+         data1 := columnarr[count1,2]
+         IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+            AAdd(printdata,alltrim(data1))
+         ELSE // header size bigger than column! to be truncated.
+            COUNT2 := hmg_len(data1)
+            DO WHILE pdfprintlen(substr(data1,1,count2),size1,fontname) > size
+               COUNT2 := count2 - 1
+            ENDDO
+            AAdd(printdata,substr(data1,1,count2))
+         ENDIF
+         AAdd(justifyarr,columnarr[count1,4])
+         aadd(sizesarr,columnarr[count1,3])
+      ENDIF
+   NEXT count1
+   pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
+   curx := curx + lh
+   DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
+   FOR count1 := 1 TO totrows
+      IF lArrayMode
+         linedata := aData[count1]
+      ELSE
+         linedata := getproperty(windowname,gridname,"item",count1)
+      ENDIF
+      ASize(printdata,0)
+      asize(nextline,0)
+      FOR count2 := 1 TO hmg_len(columnarr)
+         IF columnarr[count2,1] == 1
+            size := columnarr[count2,3]
+            DO CASE
+            CASE ValType(linedata[count2]) == "N"
+               IF .not. lArrayMode
+                  xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
+                  AEC := XRES [1]
+                  AITEMS := XRES [5]
+                  IF AEC == 'COMBOBOX'
+                     cPrintdata := aitems[linedata[count2]]
+                  ELSE
+                     cPrintdata := LTrim( Str( linedata[count2] ) )
+                  ENDIF
                ELSE
                   cPrintdata := LTrim( Str( linedata[count2] ) )
                ENDIF
-            ELSE
-               cPrintdata := LTrim( Str( linedata[count2] ) )
-            ENDIF
-         CASE ValType(linedata[count2]) == "D"
-            cPrintdata := dtoc( linedata[count2])
-         CASE ValType(linedata[count2]) == "L"
-            IF .not. lArrayMode
-               xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
-               AEC := XRES [1]
-               AITEMS := XRES [8]
-               IF AEC == 'CHECKBOX'
-                  cPrintdata := iif(linedata[count2],aitems[1],aitems[2])
-               ELSE
-                  cPrintdata := iif(linedata[count2],"T","F")
+            CASE ValType(linedata[count2]) == "D"
+               cPrintdata := dtoc( linedata[count2])
+            CASE ValType(linedata[count2]) == "L"
+               IF .not. lArrayMode
+                  xres := _HMG_PARSEGRIDCONTROLS ( AEDITCONTROLS , count2 )
+                  AEC := XRES [1]
+                  AITEMS := XRES [8]
+                  IF AEC == 'CHECKBOX'
+                     cPrintdata := iif(linedata[count2],aitems[1],aitems[2])
+                  ELSE
+                     cPrintdata := iif(linedata[count2],"T","F")
+                  ENDIF
                ENDIF
-            ENDIF
-         OTHERWISE
-            cPrintdata := linedata[count2]
-         ENDCASE
-         data1 := cPrintdata
-         IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-            aadd(printdata,alltrim(data1))
-            aadd(nextline,0)
-         ELSE
-            IF pdfgrid.wordwrap.value == 2
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               AAdd(printdata,substr(data1,1,count3))
+            OTHERWISE
+               cPrintdata := linedata[count2]
+            ENDCASE
+            data1 := cPrintdata
+            IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+               aadd(printdata,alltrim(data1))
                aadd(nextline,0)
             ELSE
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               data1 := substr(data1,1,count3)
-               IF rat(" ",data1) > 0
-                  COUNT3 := rat(" ",data1)
+               IF pdfgrid.wordwrap.value == 2
+                  COUNT3 := hmg_len(data1)
+                  DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                     COUNT3 := count3 - 1
+                  ENDDO
+                  AAdd(printdata,substr(data1,1,count3))
+                  aadd(nextline,0)
+               ELSE
+                  COUNT3 := hmg_len(data1)
+                  DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                     COUNT3 := count3 - 1
+                  ENDDO
+                  data1 := substr(data1,1,count3)
+                  IF rat(" ",data1) > 0
+                     COUNT3 := rat(" ",data1)
+                  ENDIF
+                  AAdd(printdata,substr(data1,1,count3))
+                  aadd(nextline,count3)
                ENDIF
-               AAdd(printdata,substr(data1,1,count3))
-               aadd(nextline,count3)
             ENDIF
+         ELSE
+            aadd(nextline,0)
          ENDIF
-      ELSE
-         aadd(nextline,0)
-      ENDIF
-   NEXT count2
-   pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
-   curx := curx + lh
-   dataprintover := .t.
-   FOR count2 := 1 to hmg_len(nextline)
-      IF nextline[count2] > 0
-         dataprintover := .f.
-      ENDIF
-   NEXT count2
-   DO WHILE .not. dataprintover
-      ASize(printdata,0)
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
-            size := columnarr[count2,3]
-            data1 := linedata[count2]
-            IF nextline[count2] > 0 //there is some next line
-               data1 := substr(data1,nextline[count2]+1,hmg_len(data1))
-               IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
-                  aadd(printdata,alltrim(data1))
-               NEXTline[count2] := 0
-            ELSE // there are further lines!
-               COUNT3 := hmg_len(data1)
-               DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               data1 := substr(data1,1,count3)
-               IF rat(" ",data1) > 0
-                  COUNT3 := rat(" ",data1)
+      NEXT count2
+      pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
+      curx := curx + lh
+      dataprintover := .t.
+      FOR count2 := 1 to hmg_len(nextline)
+         IF nextline[count2] > 0
+            dataprintover := .f.
+         ENDIF
+      NEXT count2
+      DO WHILE .not. dataprintover
+         ASize(printdata,0)
+         FOR count2 := 1 to hmg_len(columnarr)
+            IF columnarr[count2,1] == 1
+               size := columnarr[count2,3]
+               data1 := linedata[count2]
+               IF nextline[count2] > 0 //there is some next line
+                  data1 := substr(data1,nextline[count2]+1,hmg_len(data1))
+                  IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
+                     aadd(printdata,alltrim(data1))
+                     NEXTline[count2] := 0
+                  ELSE // there are further lines!
+                     COUNT3 := hmg_len(data1)
+                     DO WHILE pdfprintlen(substr(data1,1,count3),size1,fontname) > size
+                        COUNT3 := count3 - 1
+                     ENDDO
+                     data1 := substr(data1,1,count3)
+                     IF rat(" ",data1) > 0
+                        COUNT3 := rat(" ",data1)
+                     ENDIF
+                     AAdd(printdata,substr(data1,1,count3))
+                     NEXTline[count2] := nextline[count2]+count3
+                  ENDIF
+               ELSE
+                  AAdd(printdata,"")
+                  NEXTline[count2] := 0
                ENDIF
-               AAdd(printdata,substr(data1,1,count3))
-            NEXTline[count2] := nextline[count2]+count3
-         ENDIF
-      ELSE
-         AAdd(printdata,"")
-      NEXTline[count2] := 0
-   ENDIF
-ENDIF
-NEXT count2
-pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
-curx := curx + lh
-dataprintover := .t.
-FOR count2 := 1 to hmg_len(nextline)
-   IF nextline[count2] > 0
-      dataprintover := .f.
-   ENDIF
-NEXT count2
-ENDDO
+            ENDIF
+         NEXT count2
+         pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
+         curx := curx + lh
+         dataprintover := .t.
+         FOR count2 := 1 to hmg_len(nextline)
+            IF nextline[count2] > 0
+               dataprintover := .f.
+            ENDIF
+         NEXT count2
+      ENDDO
 
-IF curx+lh >= maxrow1
+      IF curx+lh >= maxrow1
+         DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
+         lastrow := curx
+         totcol := 0
+         DRAW LINE in window pdfgrid at firstrow,cury to lastrow,cury
+         IF pdfgrid.collines.value
+            colcount := 0
+            FOR count2 := 1 to hmg_len(columnarr)
+               IF columnarr[count2,1] == 1
+                  colcount := colcount + 1
+                  totcol := totcol + columnarr[count2,3]
+                  DRAW LINE in window pdfgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
+               ENDIF
+            NEXT count2
+         ENDIF
+         DRAW LINE in window pdfgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
+         IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
+            pl := pdfprintlen(AllTrim(pdfgrid.footer1.value),size1,fontname) * resize
+            DRAW LINE in window pdfgrid at curx+(lh/2),cury + ((maxcol1 - pl)/2) to curx+(lh/2),cury + ((maxcol1 - pl)/2) + pl
+            curx := curx + lh + lh
+         ENDIF
+         IF pdfgrid.pageno.value == 3
+            pl := pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname)*resize
+            DRAW LINE in window pdfgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
+            curx := curx + lh
+         ENDIF
+         COUNT1 := totrows
+      ELSE
+         IF pdfgrid.rowlines.value
+            DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
+         ENDIF
+      ENDIF
+   NEXT count1
    DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
    lastrow := curx
    totcol := 0
+   colcount := 0
    DRAW LINE in window pdfgrid at firstrow,cury to lastrow,cury
    IF pdfgrid.collines.value
-      colcount := 0
-      FOR count2 := 1 to hmg_len(columnarr)
-         IF columnarr[count2,1] == 1
+      FOR count1 := 1 to hmg_len(columnarr)
+         IF columnarr[count1,1] == 1
+            totcol := totcol + columnarr[count1,3]
             colcount := colcount + 1
-            totcol := totcol + columnarr[count2,3]
             DRAW LINE in window pdfgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
          ENDIF
-      NEXT count2
+      NEXT count1
    ENDIF
    DRAW LINE in window pdfgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
    IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
@@ -2171,40 +2203,8 @@ IF curx+lh >= maxrow1
       DRAW LINE in window pdfgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
       curx := curx + lh
    ENDIF
-   COUNT1 := totrows
-ELSE
-   IF pdfgrid.rowlines.value
-      DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-   ENDIF
-ENDIF
-NEXT count1
-DRAW LINE in window pdfgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-lastrow := curx
-totcol := 0
-colcount := 0
-DRAW LINE in window pdfgrid at firstrow,cury to lastrow,cury
-IF pdfgrid.collines.value
-   FOR count1 := 1 to hmg_len(columnarr)
-      IF columnarr[count1,1] == 1
-         totcol := totcol + columnarr[count1,3]
-         colcount := colcount + 1
-         DRAW LINE in window pdfgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
-      ENDIF
-   NEXT count1
-ENDIF
-DRAW LINE in window pdfgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
-IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
-   pl := pdfprintlen(AllTrim(pdfgrid.footer1.value),size1,fontname) * resize
-   DRAW LINE in window pdfgrid at curx+(lh/2),cury + ((maxcol1 - pl)/2) to curx+(lh/2),cury + ((maxcol1 - pl)/2) + pl
-   curx := curx + lh + lh
-ENDIF
-IF pdfgrid.pageno.value == 3
-   pl := pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname)*resize
-   DRAW LINE in window pdfgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
-   curx := curx + lh
-ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION pdfprintpreviewline(row,col,aitems,ajustify,sizesarr,fontname,size1,resize)
 
