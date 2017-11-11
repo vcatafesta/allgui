@@ -1,17 +1,18 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
-Local oFont
-Local oAgent, oEdit
-Private oMainWindow, oChar
+FUNCTION Main
+
+   LOCAL oFont
+   LOCAL oAgent, oEdit
+   PRIVATE oMainWindow, oChar
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
-     AT 200,0 SIZE 400,250                       ;
-     FONT oFont
+      COLOR COLOR_3DLIGHT+1                       ;
+      AT 200,0 SIZE 400,250                       ;
+      FONT oFont
 
    oAgent:=Win_OleCreateObject("Agent.Control.2") //TOleAuto():New("Agent.Control.2")
    IF oAgent == Nil //.OR. oAgent:hObj == 0
@@ -40,15 +41,18 @@ Private oMainWindow, oChar
       oAgent:End()
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Static Function SpeakIt( oEdit )
-Local aTop := hwg_Clienttoscreen( oMainWindow:handle,0,0 )
-Local cText := hwg_Getedittext( oEdit:oParent:handle, oEdit:id )
+STATIC FUNCTION SpeakIt( oEdit )
+
+   LOCAL aTop := hwg_Clienttoscreen( oMainWindow:handle,0,0 )
+   LOCAL cText := hwg_Getedittext( oEdit:oParent:handle, oEdit:id )
 
    oChar:Show()
    oChar:Moveto( aTop[1]+20, aTop[2]+70 )
    oChar:LanguageID := Iif( Asc(cText)>122,"&H0419","&H0409" )
    oChar:Speak( cText )
    oChar:Hide()
-Return Nil
+
+   RETURN NIL
+

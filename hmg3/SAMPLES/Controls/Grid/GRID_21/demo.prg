@@ -98,3 +98,4 @@ FUNCTION GetSelectionValue
    MsgInfo( Str (  a [1] ) + ' ' + Str (  a [2] ) )
 
    RETURN NIL
+

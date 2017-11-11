@@ -1,67 +1,55 @@
 /*
- * $Id: debugger.prg 2365 2015-01-30 07:54:44Z alkresin $
- */
+* $Id: debugger.prg 2365 2015-01-30 07:54:44Z alkresin $
+*/
 
 /*
- * Harbour Project source code:
- * The Debugger
- *
- * Copyright 1999 Antonio Linares <alinares@fivetechsoft.com>
- * Copyright 2003-2006 Phil Krylov <phil@newstar.rinet.ru>
- * Copyright 2013 Alexander Kresin <alex@kresin.ru>
- * www - http://harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version, with one exception:
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* The Debugger
+* Copyright 1999 Antonio Linares <alinares@fivetechsoft.com>
+* Copyright 2003-2006 Phil Krylov <phil@newstar.rinet.ru>
+* Copyright 2013 Alexander Kresin <alex@kresin.ru>
+* www - http://harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version, with one exception:
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 /*
- * ALTD() debuger function
- *
- * Copyright 2003 Przemyslaw Czerpak <druzus@acn.waw.pl>
- * www - http://www.xharbour.org
- */
+* ALTD() debuger function
+* Copyright 2003 Przemyslaw Czerpak <druzus@acn.waw.pl>
+* www - http://www.xharbour.org
+*/
 
 #pragma DEBUGINFO=OFF
 
@@ -74,7 +62,6 @@
 #include "inkey.ch"
 #include "set.ch"
 
-
 /* Information structure stored in DATA aCallStack */
 #define CSTACK_MODULE           1  // module name (.prg file)
 #define CSTACK_FUNCTION         2  // function name
@@ -84,7 +71,7 @@
 #define CSTACK_STATICS          6  // an array with static variables
 
 /* Information structure stored in aCallStack[ n ][ CSTACK_LOCALS ]
-   { cLocalName, nLocalIndex, "Local", ProcName( 1 ), nLevel } */
+{ cLocalName, nLocalIndex, "Local", ProcName( 1 ), nLevel } */
 #define VAR_NAME                1
 #define VAR_POS                 2
 #define VAR_TYPE                3
@@ -129,7 +116,7 @@
 THREAD STATIC t_oDebugger
 #else
 STATIC t_oDebugger
-#endif 
+#endif
 
 #ifdef __XHARBOUR__
 #xtranslate __DBGADDBREAK([<n,...>]) =>  HB_DBG_ADDBREAK(<n>)
@@ -159,19 +146,19 @@ STATIC t_oDebugger
 #xtranslate hb_ntos([<n,...>]) =>  Ltrim(Str((<n>)))
 #endif
 
-
 PROCEDURE __dbgAltDEntry()
 
    /* do not activate the debugger imediatelly because the module
-      where ALTD() was called can have no debugger info - stop
-      on first LINE with debugged info
-    */
+   where ALTD() was called can have no debugger info - stop
+   on first LINE with debugged info
+   */
 
    __dbgInvokeDebug( Set( _SET_DEBUG ) )
 
    RETURN
 
-/* debugger entry point */
+   /* debugger entry point */
+
 PROCEDURE __dbgEntry( nMode, uParam1, uParam2, uParam3, uParam4, uParam5 )
 
    LOCAL lStartup
@@ -194,6 +181,7 @@ PROCEDURE __dbgEntry( nMode, uParam1, uParam2, uParam3, uParam4, uParam5 )
       IF lStartup
          IF !t_oDebugger:lRunAtStartup
             __dbgSetGo( uParam1 )
+
             RETURN
          ENDIF
       ENDIF
@@ -231,26 +219,33 @@ CLASS HBDebugger
    VAR lCBTrace          INIT .T.   // stores if codeblock tracing is allowed
    VAR lRunAtStartup     INIT .T.
 
-   METHOD New()
-   METHOD Activate()
+METHOD New()
 
-   METHOD CodeblockTrace()
-   METHOD GetExprValue( xExpr, lValid )
-   METHOD GetSourceFiles()
+METHOD Activate()
 
-   METHOD Go()
-   METHOD HandleEvent()
-   METHOD LoadCallStack()
+METHOD CodeblockTrace()
 
-   METHOD Quit()
-   METHOD ShowCodeLine( nProc )
+METHOD GetExprValue( xExpr, lValid )
 
-   METHOD VarGetInfo( aVar )
-   METHOD VarGetValue( aVar )
-   METHOD VarSetValue( aVar, uValue )
+METHOD GetSourceFiles()
+
+METHOD Go()
+
+METHOD HandleEvent()
+
+METHOD LoadCallStack()
+
+METHOD Quit()
+
+METHOD ShowCodeLine( nProc )
+
+METHOD VarGetInfo( aVar )
+
+METHOD VarGetValue( aVar )
+
+METHOD VarSetValue( aVar, uValue )
 
 ENDCLASS
-
 
 METHOD New() CLASS HBDebugger
 
@@ -277,13 +272,11 @@ METHOD Activate() CLASS HBDebugger
 
    RETURN NIL
 
-
 METHOD CodeblockTrace()
 
    __dbgSetCBTrace( ::pInfo, ::lCBTrace )
 
    RETURN NIL
-
 
 METHOD GetExprValue( xExpr, lValid ) CLASS HBDebugger
 
@@ -292,7 +285,7 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HBDebugger
 
    lValid := .F.
 
-   bOldError := Errorblock( {|oErr|Break(oErr)} ) 
+   bOldError := Errorblock( {|oErr|Break(oErr)} )
    BEGIN SEQUENCE
       xResult := __dbgGetExprValue( ::pInfo, xExpr, @lValid )
       IF ! lValid
@@ -306,21 +299,19 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HBDebugger
       ENDIF
       lValid := .F.
    END SEQUENCE
-   Errorblock( bOldError ) 
+   Errorblock( bOldError )
 
    RETURN xResult
 
-
 METHOD GetSourceFiles() CLASS HBDebugger
-   RETURN __dbgGetSourceFiles( ::pInfo )
 
+   RETURN __dbgGetSourceFiles( ::pInfo )
 
 METHOD Go() CLASS HBDebugger
 
    __dbgSetGo( ::pInfo )
 
    RETURN NIL
-
 
 METHOD HandleEvent() CLASS HBDebugger
 
@@ -333,30 +324,37 @@ METHOD HandleEvent() CLASS HBDebugger
       DO CASE
       CASE nKey == CMD_QUIT
          t_oDebugger:Quit()
+
          RETURN NIL
 
       CASE nKey == CMD_EXIT
          ::Go()
+
          RETURN NIL
 
       CASE nKey == CMD_GO
          ::Go()
+
          RETURN NIL
 
       CASE nKey == CMD_STEP
+
          RETURN NIL
 
       CASE nKey == CMD_TRACE
          __dbgSetTrace( ::pInfo )
+
          RETURN NIL
 
       CASE nKey == CMD_NEXTR
          __dbgSetNextRoutine( ::pInfo )
+
          RETURN NIL
 
       CASE nKey == CMD_TOCURS
          IF __dbgIsValidStopLine( ::pInfo, p1, p2 )
             __dbgSetToCursor( ::pInfo, p1, p2 )
+
             RETURN NIL
          ELSE
             hwg_dbg_SetActiveLine( ".", 0 )
@@ -457,16 +455,16 @@ METHOD HandleEvent() CLASS HBDebugger
          ENDIF
 
       CASE nKey == CMD_AREAS
-            hwg_dbg_Answer( "valueareas", SendAreas() )
+         hwg_dbg_Answer( "valueareas", SendAreas() )
 
       CASE nKey == CMD_REC
-            hwg_dbg_Answer( "valuerec", SendRec( p1 ) )
+         hwg_dbg_Answer( "valuerec", SendRec( p1 ) )
 
       CASE nKey == CMD_OBJECT
-            hwg_dbg_Answer( "valueobj", SendObject( p1 ) )
+         hwg_dbg_Answer( "valueobj", SendObject( p1 ) )
 
       CASE nKey == CMD_ARRAY
-            hwg_dbg_Answer( "valuearr", SendArray( p1,Val(p2),Val(p3) ) )
+         hwg_dbg_Answer( "valuearr", SendArray( p1,Val(p2),Val(p3) ) )
 
       CASE nKey == CMD_CALC
          IF Left( p1,1 ) == "?"
@@ -514,7 +512,6 @@ METHOD Quit() CLASS HBDebugger
 
    RETURN NIL
 
-
 METHOD ShowCodeLine( nProc ) CLASS HBDebugger
 
    LOCAL nLine
@@ -528,26 +525,26 @@ METHOD ShowCodeLine( nProc ) CLASS HBDebugger
       IF nLine == NIL
          hwg_dbg_Msg( ::aProcStack[ nProc ][ CSTACK_FUNCTION ] + ;
             ": Code not available" )
+
          RETURN NIL
       ENDIF
 
       IF ! Empty( cPrgName )
          hwg_dbg_SetActiveLine( cPrgName, nLine, ;
-               Iif( ::lViewStack, SendStack(), Nil ),  ;
-               Iif( ::lShowLocals, SendLocal(), ;
-                  Iif( ::lShowStatic, SendStatic(), ;
-                     Iif( ::lShowPrivate, SendPrivate(), ;
-                        Iif( ::lShowPublic, SendPublic(), Nil ) ) ) ), ;
-               Iif( ::lShowWatch .AND. (::nWatches > 0), SendWatch(), Nil ), ;
-               Iif( ::lShowLocals, 1, ;
-                  Iif( ::lShowPrivate, 2, ;
-                     Iif( ::lShowPublic, 3, ;
-                        Iif( ::lShowStatic, 4, Nil ) ) ) ) )
+            Iif( ::lViewStack, SendStack(), Nil ),  ;
+            Iif( ::lShowLocals, SendLocal(), ;
+            Iif( ::lShowStatic, SendStatic(), ;
+            Iif( ::lShowPrivate, SendPrivate(), ;
+            Iif( ::lShowPublic, SendPublic(), Nil ) ) ) ), ;
+            Iif( ::lShowWatch .AND. (::nWatches > 0), SendWatch(), Nil ), ;
+            Iif( ::lShowLocals, 1, ;
+            Iif( ::lShowPrivate, 2, ;
+            Iif( ::lShowPublic, 3, ;
+            Iif( ::lShowStatic, 4, Nil ) ) ) ) )
       ENDIF
    ENDIF
 
    RETURN NIL
-
 
 METHOD VarGetInfo( aVar ) CLASS HBDebugger
 
@@ -565,7 +562,6 @@ METHOD VarGetInfo( aVar ) CLASS HBDebugger
 
    RETURN ""
 
-
 METHOD VarGetValue( aVar ) CLASS HBDebugger
 
    LOCAL cType := Left( aVar[ VAR_TYPE ], 1 )
@@ -580,7 +576,6 @@ METHOD VarGetValue( aVar ) CLASS HBDebugger
    // ; Never reached
 
    RETURN NIL
-
 
 METHOD VarSetValue( aVar, uValue ) CLASS HBDebugger
 
@@ -606,14 +601,14 @@ METHOD VarSetValue( aVar, uValue ) CLASS HBDebugger
 
    RETURN Self
 
-
 FUNCTION __Dbg()
+
    RETURN t_oDebugger
 
-
 STATIC FUNCTION SendStack()
-Local aStack := t_oDebugger:aProcStack
-Local arr := Array( Len( aStack ) * 3 + 1 ), i, j := 2
+
+   LOCAL aStack := t_oDebugger:aProcStack
+   LOCAL arr := Array( Len( aStack ) * 3 + 1 ), i, j := 2
 
    arr[1] := Ltrim( Str( Len( aStack ) ) )
    FOR i := 1 TO Len( aStack )
@@ -625,8 +620,9 @@ Local arr := Array( Len( aStack ) * 3 + 1 ), i, j := 2
    RETURN arr
 
 STATIC FUNCTION SendLocal()
-Local aVars := t_oDebugger:aProcStack[1,CSTACK_LOCALS]
-Local arr := Array( Len( aVars ) * 3 + 1 ), i, j := 1, xVal
+
+   LOCAL aVars := t_oDebugger:aProcStack[1,CSTACK_LOCALS]
+   LOCAL arr := Array( Len( aVars ) * 3 + 1 ), i, j := 1, xVal
 
    arr[1] := Ltrim( Str( Len( aVars ) ) )
    FOR i := 1 TO Len( aVars )
@@ -642,8 +638,9 @@ Local arr := Array( Len( aVars ) * 3 + 1 ), i, j := 1, xVal
    RETURN arr
 
 STATIC FUNCTION SendPrivate()
-Local nCount := __mvDbgInfo( HB_MV_PRIVATE )
-Local arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
+
+   LOCAL nCount := __mvDbgInfo( HB_MV_PRIVATE )
+   LOCAL arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
 
    arr[1] := Ltrim( Str( nCount ) )
    FOR i := 1 TO nCount
@@ -659,8 +656,9 @@ Local arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
    RETURN arr
 
 STATIC FUNCTION SendPublic()
-Local nCount := __mvDbgInfo( HB_MV_PUBLIC )
-Local arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
+
+   LOCAL nCount := __mvDbgInfo( HB_MV_PUBLIC )
+   LOCAL arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
 
    arr[1] := Ltrim( Str( nCount ) )
    FOR i := 1 TO nCount
@@ -676,8 +674,9 @@ Local arr := Array( nCount * 3 + 1 ), cName, xValue, i, j := 1
    RETURN arr
 
 STATIC FUNCTION SendStatic()
-Local aVars, nAll := 0
-Local arr, i, j := 1, xVal
+
+   LOCAL aVars, nAll := 0
+   LOCAL arr, i, j := 1, xVal
 
    xVal := t_oDebugger:aProcStack[ 1,CSTACK_MODULE ]
    i := AScan( t_oDebugger:aModules, {|a| hb_FileMatch( a[MODULE_NAME], xVal ) } )
@@ -717,7 +716,8 @@ Local arr, i, j := 1, xVal
    RETURN arr
 
 STATIC FUNCTION SendWatch()
-Local arr := Array( t_oDebugger:nWatches + 1 ), i
+
+   LOCAL arr := Array( t_oDebugger:nWatches + 1 ), i
 
    arr[1] := Ltrim( Str( t_oDebugger:nWatches ) )
 
@@ -727,10 +727,11 @@ Local arr := Array( t_oDebugger:nWatches + 1 ), i
 
    RETURN arr
 
-#define WA_ITEMS  12
+   #define WA_ITEMS  12
 
 STATIC FUNCTION SendAreas()
-Local arr, arr1[512], n, i, nAreas := 0, nAlias
+
+   LOCAL arr, arr1[512], n, i, nAreas := 0, nAlias
 
    FOR n := 1 TO 512
       IF ( (n)->( Used() ) )
@@ -763,13 +764,15 @@ Local arr, arr1[512], n, i, nAreas := 0, nAlias
    RETURN arr
 
 STATIC FUNCTION SendRec( cAlias )
-Local af, nCount, arr, i, j := 3
+
+   LOCAL af, nCount, arr, i, j := 3
 
    IF Empty( cAlias )
       cAlias := Alias()
    ENDIF
    IF Empty( cAlias ) .OR. ( i := Select( cAlias ) ) == 0
-      Return { "0", "", "0" }
+
+      RETURN { "0", "", "0" }
    ENDIF
    af := (cAlias)->(dbStruct())
    nCount := Len( af )
@@ -790,9 +793,11 @@ Local af, nCount, arr, i, j := 3
 
    RETURN arr
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
+
 STATIC FUNCTION SendObject( cObjName )
-Local aVars, aMethods, arr, obj, i, j := 1
+
+   LOCAL aVars, aMethods, arr, obj, i, j := 1
 
    obj := t_oDebugger:GetExprValue( cObjName )
    IF Valtype( obj ) == "O"
@@ -816,13 +821,16 @@ Local aVars, aMethods, arr, obj, i, j := 1
       NEXT
 
    ELSE
-      Return { "0" }
+
+      RETURN { "0" }
    ENDIF
 
    RETURN arr
-#else
+   #else
+
 STATIC FUNCTION SendObject( cObjName )
-Local aVars, aMethods, arr, obj, i, j := 1, xVal
+
+   LOCAL aVars, aMethods, arr, obj, i, j := 1, xVal
 
    obj := t_oDebugger:GetExprValue( cObjName )
    IF Valtype( obj ) == "O"
@@ -848,14 +856,16 @@ Local aVars, aMethods, arr, obj, i, j := 1, xVal
       NEXT
 
    ELSE
-      Return { "0" }
+
+      RETURN { "0" }
    ENDIF
 
    RETURN arr
-#endif
+   #endif
 
 STATIC FUNCTION SendArray( cArrName, nFirst, nCount )
-Local arr, arrFrom, xValue, i, j := 3
+
+   LOCAL arr, arrFrom, xValue, i, j := 3
 
    arrFrom := t_oDebugger:GetExprValue( cArrName )
    IF Valtype( arrFrom ) == "A"
@@ -874,18 +884,20 @@ Local arr, arrFrom, xValue, i, j := 3
          ENDIF
       NEXT
    ELSE
-      Return { "0", "0", "0" }
+
+      RETURN { "0", "0", "0" }
    ENDIF
 
    RETURN arr
 
+   /* Check if a string starts with another string */
 
-/* Check if a string starts with another string */
 STATIC FUNCTION starts( cLine, cStart )
+
    RETURN cStart == Left( cLine, Len( cStart ) )
 
+   /* Strip path from filename */
 
-/* Strip path from filename */
 STATIC FUNCTION strip_path( cFileName )
 
    LOCAL cName
@@ -893,9 +905,9 @@ STATIC FUNCTION strip_path( cFileName )
 
    IF cFileName == Nil; cFileName := ""; ENDIF
 
-   hb_FNameSplit( cFileName, NIL, @cName, @cExt )
+      hb_FNameSplit( cFileName, NIL, @cName, @cExt )
 
-   RETURN cName + cExt
+      RETURN cName + cExt
 
 FUNCTION __dbgValToStr( uVal )
 
@@ -904,7 +916,7 @@ FUNCTION __dbgValToStr( uVal )
    DO CASE
    CASE uVal == NIL  ; RETURN "NIL"
    CASE cType == "B" ; RETURN "{|| ... }"
-   CASE cType == "A" 
+   CASE cType == "A"
       s := ""
       nLen := Min( 8, Len( uVal ) )
       FOR i := 1 TO nLen
@@ -913,13 +925,14 @@ FUNCTION __dbgValToStr( uVal )
       IF nLen < Len( uVal )
          s += ", ..."
       ENDIF
+
       RETURN "Array(" + hb_ntos( Len( uVal ) ) + "): { " + s + " }"
    CASE cType $ "CM" ; RETURN '"' + uVal + '"'
    CASE cType == "L" ; RETURN Iif( uVal, ".T.", ".F." )
    CASE cType == "D" ; RETURN DToC( uVal )
-#ifndef __XHARBOUR__
+      #ifndef __XHARBOUR__
    CASE cType == "T" ; RETURN hb_TToC( uVal )
-#endif
+      #endif
    CASE cType == "N" ; RETURN Str( uVal )
    CASE cType == "O" ; RETURN "Class " + uVal:ClassName() + " object"
    CASE cType == "H" ; RETURN "Hash(" + hb_ntos( Len( uVal ) ) + ")"
@@ -928,7 +941,8 @@ FUNCTION __dbgValToStr( uVal )
 
    RETURN "U"
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
+
 STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
 
    LOCAL nProcLevel := __Dbg():nProcLevel
@@ -950,23 +964,26 @@ STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
    END SEQUENCE
 
    RETURN xResult
-#endif
+   #endif
 
-#ifdef __XHARBOUR__
-#define ALTD_DISABLE   0
-#define ALTD_ENABLE    1
+   #ifdef __XHARBOUR__
+   #define ALTD_DISABLE   0
+   #define ALTD_ENABLE    1
 
-function ALTD( nAction )
-   if pcount() == 0
-      if SET( _SET_DEBUG ) .AND. TYPE( "__DBGALTDENTRY()" ) == "UI"
+FUNCTION ALTD( nAction )
+
+   IF pcount() == 0
+      IF SET( _SET_DEBUG ) .AND. TYPE( "__DBGALTDENTRY()" ) == "UI"
          &("__DBGALTDENTRY()")
-      endif
-   elseif valtype( nAction ) == "N"
-      if nAction == ALTD_DISABLE
+      ENDIF
+   ELSEIF valtype( nAction ) == "N"
+      IF nAction == ALTD_DISABLE
          SET( _SET_DEBUG, .F. )
-      elseif nAction == ALTD_ENABLE
+      ELSEIF nAction == ALTD_ENABLE
          SET( _SET_DEBUG, .T. )
-      endif
-   endif
-return nil
-#endif
+      ENDIF
+   ENDIF
+
+   RETURN NIL
+   #endif
+

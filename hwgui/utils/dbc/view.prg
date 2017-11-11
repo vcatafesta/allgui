@@ -1,10 +1,9 @@
 /*
- * $Id: view.prg 2026 2013-04-21 12:16:54Z alkresin $
- * DBCHW - DBC ( Harbour + HWGUI )
- * Views save and load functions
- *
- * Copyright 2013 Alexander S.Kresin <alex@kresin.ru>
- * www - http://www.kresin.ru
+* $Id: view.prg 2026 2013-04-21 12:16:54Z alkresin $
+* DBCHW - DBC ( Harbour + HWGUI )
+* Views save and load functions
+* Copyright 2013 Alexander S.Kresin <alex@kresin.ru>
+* www - http://www.kresin.ru
 */
 
 #include "dbchw.h"
@@ -15,6 +14,7 @@ STATIC crlf := e"\r\n"
 MEMVAR aFiles, numdriv, improc
 
 FUNCTION RdView( fname )
+
    LOCAL aLines, nLine, res := .T.
    LOCAL scom, sword, i, n
    LOCAL aRel := {}, aFlt := {}
@@ -29,31 +29,31 @@ FUNCTION RdView( fname )
          IF ( scom := Upper( hb_TokenPtr( aLines[nLine], @nPos, " " ) ) ) == "DRIVER"
             sword := hb_TokenPtr( aLines[nLine], @nPos, " " )
             IF hb_TokenPtr( aLines[nLine], @nPos, " " ) == "REMOTE"
-#if defined( RDD_ADS )
+               #if defined( RDD_ADS )
                AdsSetServerType( 6 )
-#elif !defined( RDD_LETO )
+               #elif !defined( RDD_LETO )
                res := .F.
                EXIT
-#endif
+               #endif
             ELSE
                nServerType := LOCAL_SERVER
-#if defined( RDD_ADS )
+               #if defined( RDD_ADS )
                AdsSetServerType( ADS_LOCAL_SERVER )
-#elif defined( RDD_LETO )
+               #elif defined( RDD_LETO )
                res := .F.
                EXIT
-#endif
+               #endif
             ENDIF
             IF ( n := Ascan( aDrivers, sword ) ) == 0
                res := .F.
                EXIT
             ENDIF
             numdriv := n
-#if defined( RDD_ADS )
+            #if defined( RDD_ADS )
             AdsSetFileType( Iif( n == 1,2,Iif( n == 2,1,3 ) ) )
-#elif !defined( RDD_LETO )
+            #elif !defined( RDD_LETO )
             rddSetDefault( aDrivers[n] )
-#endif
+            #endif
          ELSEIF scom == "FILE"
             lShared := ( hb_TokenPtr( aLines[nLine], @nPos, " " ) == "SHARED" )
             Set( _SET_EXCLUSIVE, !lShared )
@@ -92,14 +92,15 @@ FUNCTION RdView( fname )
       ENDIF
    ENDIF
 
-RETURN Nil
+   RETURN NIL
 
 FUNCTION WrView()
 
-LOCAL fname, i, han, j, strlen, obl, cTmp
+   LOCAL fname, i, han, j, strlen, obl, cTmp
 
    IF Empty( fname := hwg_Savefile( "*.vew","View files( *.vew )", "*.vew", mypath ) )
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
    obl := SELECT()
@@ -111,8 +112,8 @@ LOCAL fname, i, han, j, strlen, obl, cTmp
                iif( nServerType == LOCAL_SERVER, " LOCAL", " REMOTE" ) + crlf )
 
             FWrite( han, "FILE " + Iif(aFiles[i,AF_EXCLU],"EXCLUSIVE ","SHARED ") + ;
-                  Iif(aFiles[i,AF_RDONLY],"READ ","WRITE ") + ;
-                  aFiles[i,AF_NAME] + crlf )
+               Iif(aFiles[i,AF_RDONLY],"READ ","WRITE ") + ;
+               aFiles[i,AF_NAME] + crlf )
 
             IF !Empty( cTmp := OrdSetFocus() )
                FWrite( han, "ORDER " + cTmp + crlf )
@@ -131,4 +132,6 @@ LOCAL fname, i, han, j, strlen, obl, cTmp
       Fclose( han )
    ENDIF
    SELECT( obl )
-RETURN Nil
+
+   RETURN NIL
+

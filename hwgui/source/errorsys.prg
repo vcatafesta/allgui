@@ -1,11 +1,9 @@
 /*
- * $Id: errorsys.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Windows errorsys replacement
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: errorsys.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+* HWGUI - Harbour Win32 GUI library source code:
+* Windows errorsys replacement
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "common.ch"
@@ -23,6 +21,7 @@ PROCEDURE ErrorSys
    RETURN
 
 STATIC FUNCTION DefError( oError )
+
    LOCAL cMessage
    LOCAL cDOSError
 
@@ -30,21 +29,24 @@ STATIC FUNCTION DefError( oError )
 
    // By default, division by zero results in zero
    IF oError:genCode == EG_ZERODIV
+
       RETURN 0
    ENDIF
 
    // Set NetErr() of there was a database open error
    IF oError:genCode == EG_OPEN .AND. ;
-      oError:osCode == 32 .AND. ;
-      oError:canDefault
+         oError:osCode == 32 .AND. ;
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
    // Set NetErr() if there was a lock error on dbAppend()
    IF oError:genCode == EG_APPENDLOCK .AND. ;
-      oError:canDefault
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
@@ -70,7 +72,6 @@ STATIC FUNCTION DefError( oError )
    cMessage += Chr( 13 ) + Chr( 10 ) + "Date:" + DToC( Date() )
    cMessage += Chr( 13 ) + Chr( 10 ) + "Time:" + Time()
 
-
    MemoWrit( LogInitialPath + "Error.log", cMessage )
 
    ErrorPreview( cMessage )
@@ -79,8 +80,8 @@ STATIC FUNCTION DefError( oError )
 
    RETURN .F.
 
-
 FUNCTION ErrorMessage( oError )
+
    LOCAL cMessage
 
    // start error message
@@ -115,13 +116,14 @@ FUNCTION ErrorMessage( oError )
 
    /*
    IF ! Empty( oError:Args )
-      cMessage += "Arguments: " + ValToPrgExp( oError:Args )
+   cMessage += "Arguments: " + ValToPrgExp( oError:Args )
    ENDIF
    */
 
    RETURN cMessage
 
 FUNCTION hwg_WriteLog( cText, fname )
+
    LOCAL nHand
 
    fname := LogInitialPath + IIf( fname == Nil, "a.log", fname )
@@ -134,13 +136,14 @@ FUNCTION hwg_WriteLog( cText, fname )
    FWrite( nHand, cText + Chr( 10 ) )
    FClose( nHand )
 
-   RETURN nil
+   RETURN NIL
 
 STATIC FUNCTION ErrorPreview( cMess )
+
    LOCAL oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;
-        At 92, 61 SIZE 500, 500
+      At 92, 61 SIZE 500, 500
 
    @ 10, 10 EDITBOX oEdit CAPTION cMess SIZE 480, 440 STYLE WS_VSCROLL + WS_HSCROLL + ES_MULTILINE + ES_READONLY ;
       COLOR 16777088 BACKCOLOR 0 ;
@@ -149,4 +152,6 @@ STATIC FUNCTION ErrorPreview( cMess )
    @ 200, 460 BUTTON "Close" ON CLICK { || EndDialog() } SIZE 100, 32
 
    oDlg:Activate()
-   RETURN Nil
+
+   RETURN NIL
+

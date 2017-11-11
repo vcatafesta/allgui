@@ -105,3 +105,4 @@ PROCEDURE RemoveTransparency( hWnd )
    DLL_TYPE_LONG hWnd, DLL_TYPE_INT crKey, DLL_TYPE_UINT bAlpha, DLL_TYPE_DWORD dwFlags ) ;
    IN USER32.DLL
    */
+

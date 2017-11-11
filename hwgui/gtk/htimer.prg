@@ -1,11 +1,9 @@
 /*
- *$Id: htimer.prg 2039 2013-05-21 12:23:25Z alkresin $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HTimer class
- *
- * Copyright 2004 Alexander S.Kresin <alex@kresin.ru>
- * www - http://www.kresin.ru
+*$Id: htimer.prg 2039 2013-05-21 12:23:25Z alkresin $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HTimer class
+* Copyright 2004 Alexander S.Kresin <alex@kresin.ru>
+* www - http://www.kresin.ru
 */
 
 #include "windows.ch"
@@ -16,14 +14,16 @@
 
 CLASS HTimer INHERIT HObject
 
-   CLASS VAR aTimers   INIT {}
+CLASS VAR aTimers   INIT {}
+
    DATA id, tag
    DATA value
    DATA oParent
    DATA bAction
 
-   METHOD New( oParent, id, value, bAction )
-   METHOD End()
+METHOD New( oParent, id, value, bAction )
+
+METHOD End()
 
 ENDCLASS
 
@@ -47,6 +47,7 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
    RETURN Self
 
 METHOD End() CLASS HTimer
+
    LOCAL i
 
    hwg_KillTimer( ::tag )
@@ -56,7 +57,7 @@ METHOD End() CLASS HTimer
       ASize( ::aTimers, Len( ::aTimers ) - 1 )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION hwg_TimerProc( idTimer )
 
@@ -66,14 +67,15 @@ FUNCTION hwg_TimerProc( idTimer )
       Eval( HTimer():aTimers[i]:bAction )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
    EXIT PROCEDURE CleanTimers
    LOCAL oTimer, i
 
-   For i := 1 TO Len( HTimer():aTimers )
+   FOR i := 1 TO Len( HTimer():aTimers )
       oTimer := HTimer():aTimers[i]
       hwg_KillTimer( oTimer:tag )
    NEXT
 
    RETURN
+

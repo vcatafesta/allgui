@@ -240,3 +240,4 @@ STATIC FUNCTION rodape()
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
    RETURN(nil)
+

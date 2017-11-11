@@ -1,11 +1,9 @@
 /*
- * $Id: menu.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Prg level menu functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.geocities.com/alkresin/
+* $Id: menu.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+* HWGUI - Harbour Win32 GUI library source code:
+* Prg level menu functions
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://www.geocities.com/alkresin/
 */
 
 #include "windows.ch"
@@ -18,15 +16,21 @@
 STATIC _aMenuDef, _oWnd, _aAccel, _nLevel, _Id, _oMenu
 
 CLASS HMenu INHERIT HObject
+
    DATA handle
-   DATA aMenu 
-   METHOD New()  INLINE Self
-   METHOD End()  INLINE Hwg_DestroyMenu(::handle)
-   METHOD Show( oWnd,xPos,yPos,lWnd )
+   DATA aMenu
+
+METHOD New()  INLINE Self
+
+METHOD End()  INLINE Hwg_DestroyMenu(::handle)
+
+METHOD Show( oWnd,xPos,yPos,lWnd )
+
 ENDCLASS
 
 METHOD Show( oWnd,xPos,yPos,lWnd ) CLASS HMenu
-Local aCoor
+
+   LOCAL aCoor
 
    oWnd:oPopup := Self
    IF Pcount() == 1 .OR. lWnd == Nil .OR. !lWnd
@@ -41,18 +45,20 @@ Local aCoor
       Hwg_trackmenu( ::handle,aCoor[1],aCoor[2],oWnd:handle )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function Hwg_CreateMenu
-Local hMenu
+FUNCTION Hwg_CreateMenu
+
+   LOCAL hMenu
 
    IF ( hMenu := hwg__CreateMenu() ) == 0
-      Return Nil
+
+      RETURN NIL
    ENDIF
 
-Return { {},,, hMenu }
+   RETURN { {},,, hMenu }
 
-Function Hwg_SetMenu( oWnd, aMenu )
+FUNCTION Hwg_SetMenu( oWnd, aMenu )
 
    IF oWnd:type == WND_MDICHILD
       oWnd:menu := aMenu
@@ -61,37 +67,40 @@ Function Hwg_SetMenu( oWnd, aMenu )
       IF hwg__SetMenu( oWnd:handle, aMenu[5] )
          oWnd:menu := aMenu
       ELSE
-         Return .F.
+
+         RETURN .F.
       ENDIF
 
    ELSEIF oWnd:type == WND_MAIN
       IF hwg__SetMenu( oWnd:handle, aMenu[5] )
          oWnd:menu := aMenu
       ELSE
-         Return .F.
+
+         RETURN .F.
       ENDIF
 
    ELSEIF oWnd:type == WND_CHILD
       IF hwg__SetMenu( oWnd:handle, aMenu[5] )
          oWnd:menu := aMenu
       ELSE
-         Return .F.
+
+         RETURN .F.
       ENDIF
 
    ENDIF
 
+   RETURN .T.
 
-Return .T.
+   /*
+   *  AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,[bItem] [,nPos [,lPos]] ) --> aMenuItem
+   *  If nPos is omitted, the function adds menu item to the end of menu,
+   *  else if lPos is omitted or TRUE, it inserts menu item in nPos position,
+   *  else if lPos is FALSE - before item with ID == nPos
+   */
 
-/*
- *  AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,[bItem] [,nPos [,lPos]] ) --> aMenuItem
- *
- *  If nPos is omitted, the function adds menu item to the end of menu,
- *  else if lPos is omitted or TRUE, it inserts menu item in nPos position,
- *  else if lPos is FALSE - before item with ID == nPos
- */
-Function Hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos,lPos )
-Local hSubMenu
+FUNCTION Hwg_AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,bItem,nPos,lPos )
+
+   LOCAL hSubMenu
 
    IF nPos == Nil
       nPos := Len( aMenu[1] ) + 1
@@ -101,19 +110,22 @@ Local hSubMenu
    ENDIF
    IF !lPos
       IF ( aMenu := Hwg_FindMenuItem( aMenu, nMenuId, @nPos ) ) == Nil
-         Return Nil
+
+         RETURN NIL
       ENDIF
    ENDIF
    hSubMenu := aMenu[5]
    hSubMenu := hwg__AddMenuItem( hSubMenu, cItem, nPos, .T., nMenuId,,lSubMenu )
    /*
    IF !hwg__AddMenuItem( hSubMenu, cItem, nPos, .T., nMenuId )
-      Return Nil
+
+   Return Nil
    ENDIF
    IF lSubmenu
-      IF ( hSubMenu := hwg__CreateSubMenu( hSubMenu,nMenuId ) ) == 0
-         Return Nil
-      ENDIF
+   IF ( hSubMenu := hwg__CreateSubMenu( hSubMenu,nMenuId ) ) == 0
+
+   Return Nil
+   ENDIF
    ENDIF
    */
    IF nPos > Len( aMenu[1] )
@@ -122,7 +134,8 @@ Local hSubMenu
       ELSE
          Aadd( aMenu[1],{ bItem,cItem,nMenuId } )
       ENDIF
-      Return ATail( aMenu[1] )
+
+      RETURN ATail( aMenu[1] )
    ELSE
       Aadd( aMenu[1],Nil )
       Ains( aMenu[1],nPos )
@@ -131,35 +144,47 @@ Local hSubMenu
       ELSE
          aMenu[ 1,nPos ] := { bItem,cItem,nMenuId }
       ENDIF
-      Return aMenu[ 1,nPos ]
-   ENDIF
-Return Nil
 
-Function Hwg_FindMenuItem( aMenu, nId, nPos )
-Local nPos1, aSubMenu
+      RETURN aMenu[ 1,nPos ]
+   ENDIF
+
+   RETURN NIL
+
+FUNCTION Hwg_FindMenuItem( aMenu, nId, nPos )
+
+   LOCAL nPos1, aSubMenu
+
    nPos := 1
    DO WHILE nPos <= Len( aMenu[1] )
       IF aMenu[ 1,npos,3 ] == nId
-         Return aMenu
+
+         RETURN aMenu
       ELSEIF Len( aMenu[ 1,npos ] ) > 4
          IF ( aSubMenu := Hwg_FindMenuItem( aMenu[ 1,nPos ] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
-            Return aSubMenu
+
+            RETURN aSubMenu
          ENDIF
       ENDIF
       nPos ++
    ENDDO
-Return Nil
 
-Function Hwg_GetSubMenuHandle( aMenu,nId )
-Local nPos
+   RETURN NIL
+
+FUNCTION Hwg_GetSubMenuHandle( aMenu,nId )
+
+   LOCAL nPos
+
    IF ( aMenu := Hwg_FindMenuItem( aMenu, nId, nPos ) ) != Nil
-      Return aMenu[1,nPos,5]
-   ENDIF
-Return 0
 
-Function BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
-Local hMenu, nPos, aMenu
+      RETURN aMenu[1,nPos,5]
+   ENDIF
+
+   RETURN 0
+
+FUNCTION BuildMenu( aMenuInit, hWnd, oWnd, nPosParent,lPopup )
+
+   LOCAL hMenu, nPos, aMenu
 
    IF nPosParent == Nil
       IF lPopup == Nil .OR. !lPopup
@@ -193,7 +218,7 @@ Local hMenu, nPos, aMenu
          //hwg__AddMenuItem( hMenu, aMenu[1,npos,2], nPos, .T., aMenu[1,nPos,3], ;
          //          aMenu[1,npos,4],.F. )
          hwg__AddMenuItem( hMenu, aMenu[1,npos,2][1], nPos, .T., aMenu[1,nPos,3], ;
-                   aMenu[1,npos,4],.F. )
+            aMenu[1,npos,4],.F. )
       ENDIF
       nPos ++
    ENDDO
@@ -203,10 +228,13 @@ Local hMenu, nPos, aMenu
       _oMenu:handle := aMenu[5]
       _oMenu:aMenu := aMenu
    ENDIF
-Return Nil
 
-Function Hwg_BeginMenu( oWnd,nId,cTitle )
-Local aMenu, i
+   RETURN NIL
+
+FUNCTION Hwg_BeginMenu( oWnd,nId,cTitle )
+
+   LOCAL aMenu, i
+
    IF oWnd != Nil
       _aMenuDef := {}
       _aAccel   := {}
@@ -224,22 +252,26 @@ Local aMenu, i
       //Aadd( aMenu, { {},cTitle,nId,.T. } )
       Aadd( aMenu, { {},{cTitle,Nil},nId,.T. } )
    ENDIF
-Return .T.
 
-Function Hwg_ContextMenu()
+   RETURN .T.
+
+FUNCTION Hwg_ContextMenu()
+
    _aMenuDef := {}
    _oWnd := Nil
    _nLevel := 0
    _Id := CONTEXTMENU_FIRST_ID
    _oMenu := HMenu():New()
-Return _oMenu
 
-Function Hwg_EndMenu()
+   RETURN _oMenu
+
+FUNCTION Hwg_EndMenu()
+
    IF _nLevel > 0
       _nLevel --
    ELSE
       BuildMenu( Aclone(_aMenuDef), Iif( _oWnd!=Nil,_oWnd:handle,Nil ), ;
-                   _oWnd,,Iif( _oWnd!=Nil,.F.,.T. ) )
+         _oWnd,,Iif( _oWnd!=Nil,.F.,.T. ) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. !Empty( _aAccel )
          _oWnd:hAccel := CreateAcceleratorTable( _aAccel )
       ENDIF
@@ -248,11 +280,15 @@ Function Hwg_EndMenu()
       _oWnd     := Nil
       _oMenu    := Nil
    ENDIF
-Return .T.
 
-//Function Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey )
-Function Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, cMessage )
-Local aMenu, i
+   RETURN .T.
+
+   //Function Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey )
+
+FUNCTION Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, cMessage )
+
+   LOCAL aMenu, i
+
    aMenu := _aMenuDef
    FOR i := 1 TO _nLevel
       aMenu := Atail(aMenu)[1]
@@ -263,4 +299,6 @@ Local aMenu, i
    IF accFlag != Nil .AND. accKey != Nil
       Aadd( _aAccel, { accFlag,accKey,nId } )
    ENDIF
-Return .T.
+
+   RETURN .T.
+

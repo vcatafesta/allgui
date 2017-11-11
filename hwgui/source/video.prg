@@ -1,19 +1,15 @@
 /*
- * $Id: video.prg 1993 2013-01-14 15:35:26Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * TVideo component
- *
- * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: video.prg 1993 2013-01-14 15:35:26Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* TVideo component
+* Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
 #include "hbclass.ch"
 #include "windows.ch"
 #include "guilib.ch"
 
 #include "common.ch"
-
-//----------------------------------------------------------------------------//
 
 CLASS TVideo FROM hControl
 
@@ -22,18 +18,16 @@ CLASS TVideo FROM hControl
 
    METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, ;
          bWhen, bValid, lNoBorder , nid ) CONSTRUCTOR
-
    METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CONSTRUCTOR
    METHOD Initiate( )
    METHOD Play( nFrom, nTo ) INLINE  ::oMci:Play( nFrom, nTo, ::oparent:handle )
 
-ENDCLASS
+   ENDCLASS
 
-//----------------------------------------------------------------------------//
 METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS TVideo
 
    DEFAULT nWidth TO 200, nHeight TO 200, cFileName TO "", ;
-   lNoBorder TO .f.
+      lNoBorder TO .f.
 
    ::nTop      := nRow *  VID_CHARPIX_H  // 8
    ::nLeft     := nCol * VID_CHARPIX_W   // 14
@@ -56,7 +50,6 @@ METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS
 
    RETURN Self
 
-//----------------------------------------------------------------------------//
 METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CLASS TVideo
 
    ::nId      = nId
@@ -70,7 +63,6 @@ METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CLASS TVideo
 
    RETURN Self
 
-//----------------------------------------------------------------------------//
 METHOD Initiate( ) CLASS TVideo
 
    ::Super:Init(  )
@@ -78,3 +70,4 @@ METHOD Initiate( ) CLASS TVideo
    ::oMci:SetWindow( Self )
 
    RETURN NIL
+

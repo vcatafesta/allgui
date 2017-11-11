@@ -1,20 +1,17 @@
- /*
- * $Id: hgrid.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
+/*
+* $Id: hgrid.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HGrid class
+* Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
 */
 
 /*
 TODO: 1) In line edit
-         The better way is using listview_hittest to determine the item and subitem position
-      2) Imagelist
-         The way is using the ListView_SetImageList
-      3) Checkbox
-         The way is using the NM_CUSTOMDRAW and hwg_Drawframecontrol()
+The better way is using listview_hittest to determine the item and subitem position
+2) Imagelist
+The way is using the ListView_SetImageList
+3) Checkbox
+The way is using the NM_CUSTOMDRAW and hwg_Drawframecontrol()
 
 */
 
@@ -37,6 +34,7 @@ TODO: 1) In line edit
 CLASS HGrid INHERIT HControl
 
 CLASS VAR winclass INIT "SYSLISTVIEW32"
+
    DATA aBitMaps   INIT { }
    DATA ItemCount
    DATA color
@@ -59,9 +57,8 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    DATA bLfocus
 
    METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
-               bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-               nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit )
-
+         bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
+         nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit )
    METHOD Activate()
    METHOD Init()
    METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
@@ -70,16 +67,16 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD SetItemCount( nItem )                    INLINE hwg_Listview_setitemcount( ::handle, nItem )
    METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
    METHOD Notify( lParam )
-ENDCLASS
 
+   ENDCLASS
 
 METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
-            bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-            nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit ) CLASS HGrid
+      bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
+      nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit ) CLASS HGrid
 
    nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), LVS_SHOWSELALWAYS + WS_TABSTOP + IIf( lNoBord, 0, WS_BORDER ) + LVS_REPORT + LVS_OWNERDATA + LVS_SINGLESEL )
    ::Super:New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, ;
-              bSize, bPaint )
+      bSize, bPaint )
    DEFAULT aBit TO { }
    ::ItemCount := nItemCount
    ::aBitMaps := aBit
@@ -106,14 +103,17 @@ METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint,
    RETURN Self
 
 METHOD Activate() CLASS HGrid
+
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_Listview_create ( ::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ::lNoScroll )
 
       ::Init()
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Init() CLASS HGrid
+
    LOCAL i, nPos
    LOCAL aButton := { }
    LOCAL aBmpSize
@@ -142,7 +142,7 @@ METHOD Init() CLASS HGrid
             aBmpSize := hwg_Getbitmapsize( aButton[ nPos ] )
 
             IF aBmpSize[ 3 ] == 24
-//             hwg_Imagelist_addmasked( ::hIm,aButton[nPos],hwg_Rgb(236,223,216) )
+               //             hwg_Imagelist_addmasked( ::hIm,aButton[nPos],hwg_Rgb(236,223,216) )
                hwg_Imagelist_add( ::hIm, aButton[ nPos ] )
             ELSE
                hwg_Imagelist_add( ::hIm, aButton[ nPos ] )
@@ -170,9 +170,11 @@ METHOD Init() CLASS HGrid
          hwg_Listview_settextbkcolor( ::handle, ::bkcolor )
       ENDIF
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Refresh() CLASS HGrid
+
    LOCAL iFirst, iLast
 
    iFirst := hwg_Listview_gettopindex( ::handle )
@@ -180,9 +182,11 @@ METHOD Refresh() CLASS HGrid
    iLast := iFirst + hwg_Listview_getcountperpage( ::handle )
 
    hwg_Listview_redrawitems( ::handle , iFirst, iLast )
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Notify( lParam ) CLASS HGrid
+
    RETURN hwg_ListViewNotify( Self, lParam )
 
 FUNCTION hwg_ListViewNotify( oCtrl, lParam )
@@ -194,7 +198,7 @@ FUNCTION hwg_ListViewNotify( oCtrl, lParam )
 
    ELSEIF hwg_Getnotifycode ( lParam ) == NM_DBLCLK .and. oCtrl:bEnter != nil
       aCord := hwg_Listview_hittest( oCtrl:handle, hwg_GetCursorPos()[2] - hwg_GetWindowRect(oCtrl:handle)[2], ;
-                                 hwg_GetCursorPos()[1] - hwg_GetWindowRect(oCtrl:handle)[1] )
+         hwg_GetCursorPos()[1] - hwg_GetWindowRect(oCtrl:handle)[1] )
       oCtrl:nRow := aCord[ 1 ]
       oCtrl:nCol := aCord[ 2 ]
 
@@ -222,6 +226,6 @@ FUNCTION hwg_ListViewNotify( oCtrl, lParam )
       hwg_Listview_setdispinfo( lParam, Eval( oCtrl:bDispInfo, oCtrl, oCtrl:nRow, oCtrl:nCol ) )
 
    ENDIF
-   RETURN 0
 
+   RETURN 0
 

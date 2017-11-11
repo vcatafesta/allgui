@@ -136,3 +136,4 @@ PROCEDURE DrawPointsGraph ( aSer )
       SHOWLEGENDS
 
    RETURN
+

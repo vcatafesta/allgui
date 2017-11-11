@@ -320,3 +320,4 @@ PROCEDURE ServiceProcess( mode )
    #ifdef __XHARBOUR__
    #include <fileread.prg>
    #endif
+

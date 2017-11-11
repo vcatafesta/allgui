@@ -1,11 +1,8 @@
 /*
- * $Id: hrebar.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- *
- *
- * Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: hrebar.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
 
 #include "windows.ch"
@@ -39,7 +36,7 @@ CLASS hrebar INHERIT HControl
    METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
    METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lvert ) CLASS hrebar
@@ -49,7 +46,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    DEFAULT  lvert  TO .f.
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0,  RBS_BANDBORDERS ), WS_CHILD )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor )
+      bSize, bPaint, ctooltip, tcolor, bcolor )
    ::Title := ""
    HWG_InitCommonControlsEx()
 
@@ -64,7 +61,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ;
 
    DEFAULT  lVert TO .f.
    ::Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, bSize, bPaint, ;
-         ctooltip, tcolor, bcolor )
+      ctooltip, tcolor, bcolor )
    HWG_InitCommonControlsEx()
 
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
@@ -75,7 +72,7 @@ METHOD Activate() CLASS hrebar
 
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_Createrebar( ::oParent:handle, ::id, ;
-            ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
 
@@ -92,13 +89,15 @@ METHOD INIT() CLASS hrebar
    RETURN NIL
 
 METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hrebar
+
    LOCAL i
 
    IF pBar != NIL
       AADD( ::aBands, { pBar, pszText, clrFore, clrBack, pbmp, dwStyle } )
    ENDIF
    IF ! ::lInit
-       RETURN NIL
+
+      RETURN NIL
    ENDIF
    dwStyle := RBBS_GRIPPERALWAYS + RBBS_USECHEVRON
    FOR i = 1 TO LEN( ::aBands )
@@ -116,3 +115,4 @@ METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hreba
    ::aBands := {}
 
    RETURN NIL
+

@@ -1,22 +1,21 @@
 /*
- * $Id: drawwidg.prg 2052 2013-05-28 07:39:48Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Pens, brushes, fonts, bitmaps, icons handling
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: drawwidg.prg 2052 2013-05-28 07:39:48Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* Pens, brushes, fonts, bitmaps, icons handling
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "hbclass.ch"
 #include "windows.ch"
 #include "guilib.ch"
 
-   //- HFont
+//- HFont
 
 CLASS HFont INHERIT HObject
 
    CLASS VAR aFonts   INIT { }
+
    DATA handle
    DATA name, width, height , weight
    DATA charset, italic, Underline, StrikeOut
@@ -27,7 +26,7 @@ CLASS HFont INHERIT HObject
    METHOD RELEASE()
    METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Add( fontName, nWidth, nHeight , fnWeight, ;
       fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle ) CLASS HFont
@@ -55,6 +54,7 @@ METHOD Add( fontName, nWidth, nHeight , fnWeight, ;
          IF nHandle != Nil
             hwg_Deleteobject( nHandle )
          ENDIF
+
          RETURN ::aFonts[ i ]
       ENDIF
    NEXT
@@ -79,15 +79,18 @@ METHOD Add( fontName, nWidth, nHeight , fnWeight, ;
    RETURN Self
 
 METHOD SELECT( oFont, nCharSet  ) CLASS HFont
+
    LOCAL af := hwg_SelectFont( oFont )
 
    IF af == Nil
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    RETURN ::Add( af[ 2 ], af[ 3 ], af[ 4 ], af[ 5 ], iif( Empty( nCharSet ), af[ 6 ], nCharSet ), af[ 7 ], af[ 8 ], af[ 9 ], af[ 1 ] )
 
 METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight ) CLASS HFont
+
    LOCAL  weight, Italic, Underline, StrikeOut
 
    IF lBold != Nil
@@ -105,11 +108,12 @@ METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight ) CLASS 
       nCharSet, Italic, Underline, StrikeOut )
 
 METHOD RELEASE() CLASS HFont
+
    LOCAL i, nlen := Len( ::aFonts )
 
    ::nCounter --
    IF ::nCounter == 0
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       FOR EACH i IN ::aFonts
          IF i:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -118,7 +122,7 @@ METHOD RELEASE() CLASS HFont
             EXIT
          ENDIF
       NEXT
-#else
+      #else
       FOR i := 1 TO nlen
          IF ::aFonts[ i ]:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -127,16 +131,17 @@ METHOD RELEASE() CLASS HFont
             EXIT
          ENDIF
       NEXT
-#endif
+      #endif
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
    //- HPen
 
 CLASS HPen INHERIT HObject
 
    CLASS VAR aPens   INIT { }
+
    DATA handle
    DATA style, width, color
    DATA nCounter   INIT 1
@@ -145,36 +150,39 @@ CLASS HPen INHERIT HObject
    METHOD Get( nStyle, nWidth, nColor )
    METHOD RELEASE()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Add( nStyle, nWidth, nColor ) CLASS HPen
+
    LOCAL i
 
    nStyle := iif( nStyle == Nil, BS_SOLID, nStyle )
    nWidth := iif( nWidth == Nil, 1, nWidth )
    nColor := iif( nColor == Nil, 0, nColor )
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN ::aPens
       IF i:style == nStyle .AND. ;
             i:width == nWidth .AND. ;
             i:color == nColor
 
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aPens )
       IF ::aPens[ i ]:style == nStyle .AND. ;
             ::aPens[ i ]:width == nWidth .AND. ;
             ::aPens[ i ]:color == nColor
 
          ::aPens[ i ]:nCounter ++
+
          RETURN ::aPens[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
 
    ::handle := hwg_Createpen( nStyle, nWidth, nColor )
    ::style  := nStyle
@@ -185,13 +193,14 @@ METHOD Add( nStyle, nWidth, nColor ) CLASS HPen
    RETURN Self
 
 METHOD Get( nStyle, nWidth, nColor ) CLASS HPen
+
    LOCAL i
 
    nStyle := iif( nStyle == Nil, PS_SOLID, nStyle )
    nWidth := iif( nWidth == Nil, 1, nWidth )
    nColor := iif( nColor == Nil, 0, nColor )
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN ::aPens
       IF i:style == nStyle .AND. ;
             i:width == nWidth .AND. ;
@@ -200,7 +209,7 @@ METHOD Get( nStyle, nWidth, nColor ) CLASS HPen
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aPens )
       IF ::aPens[ i ]:style == nStyle .AND. ;
             ::aPens[ i ]:width == nWidth .AND. ;
@@ -209,16 +218,17 @@ METHOD Get( nStyle, nWidth, nColor ) CLASS HPen
          RETURN ::aPens[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD RELEASE() CLASS HPen
+
    LOCAL i, nlen := Len( ::aPens )
 
    ::nCounter --
    IF ::nCounter == 0
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       FOR EACH i  IN ::aPens
          IF i:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -227,7 +237,7 @@ METHOD RELEASE() CLASS HPen
             EXIT
          ENDIF
       NEXT
-#else
+      #else
       FOR i := 1 TO nlen
          IF ::aPens[ i ]:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -236,16 +246,17 @@ METHOD RELEASE() CLASS HPen
             EXIT
          ENDIF
       NEXT
-#endif
+      #endif
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
    //- HBrush
 
 CLASS HBrush INHERIT HObject
 
    CLASS VAR aBrushes   INIT { }
+
    DATA handle
    DATA COLOR
    DATA nHatch   INIT 99
@@ -254,9 +265,10 @@ CLASS HBrush INHERIT HObject
    METHOD Add( nColor, nHatch )
    METHOD RELEASE()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Add( nColor, nHatch ) CLASS HBrush
+
    LOCAL i
 
    IF nHatch == Nil
@@ -265,22 +277,24 @@ METHOD Add( nColor, nHatch ) CLASS HBrush
    IF ValType( nColor ) == "P"
       nColor := hwg_Ptrtoulong( nColor )
    ENDIF
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN ::aBrushes
 
       IF i:color == nColor .AND. i:nHatch == nHatch
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aBrushes )
       IF ::aBrushes[ i ]:color == nColor .AND. ::aBrushes[ i ]:nHatch == nHatch
          ::aBrushes[ i ]:nCounter ++
+
          RETURN ::aBrushes[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    IF nHatch != 99
       ::handle := hwg_Createhatchbrush( nHatch, nColor )
    ELSE
@@ -292,11 +306,12 @@ METHOD Add( nColor, nHatch ) CLASS HBrush
    RETURN Self
 
 METHOD RELEASE() CLASS HBrush
+
    LOCAL i, nlen := Len( ::aBrushes )
 
    ::nCounter --
    IF ::nCounter == 0
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       FOR EACH i IN ::aBrushes
          IF i:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -305,7 +320,7 @@ METHOD RELEASE() CLASS HBrush
             EXIT
          ENDIF
       NEXT
-#else
+      #else
       FOR i := 1 TO nlen
          IF ::aBrushes[ i ]:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -314,10 +329,10 @@ METHOD RELEASE() CLASS HBrush
             EXIT
          ENDIF
       NEXT
-#endif
+      #endif
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
    //- HBitmap
 
@@ -325,6 +340,7 @@ CLASS HBitmap INHERIT HObject
 
    CLASS VAR aBitmaps   INIT { }
    CLASS VAR lSelFile   INIT .T.
+
    DATA handle
    DATA name
    DATA nFlags
@@ -338,9 +354,10 @@ CLASS HBitmap INHERIT HObject
    METHOD Draw( hDC, x1, y1, width, height )  INLINE hwg_Drawbitmap( hDC, ::handle, SRCCOPY, x1, y1, width, height )
    METHOD RELEASE()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight ) CLASS HBitmap
+
    LOCAL lPreDefined := .F. , i, aBmpSize
 
    IF nFlags == nil
@@ -353,25 +370,27 @@ METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight ) CLASS HBitmap
       name := LTrim( Str( name ) )
       lPreDefined := .T.
    ENDIF
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i  IN  ::aBitmaps
       IF i:name == name .AND. i:nFlags == nFlags .AND. ;
             ( ( nWidth == nil .OR. nHeight == nil ) .OR. ;
             ( i:nWidth == nWidth .AND. i:nHeight == nHeight ) )
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aBitmaps )
       IF ::aBitmaps[ i ]:name == name .AND. ::aBitmaps[ i ]:nFlags == nFlags .AND. ;
             ( ( nWidth == nil .OR. nHeight == nil ) .OR. ;
             ( ::aBitmaps[ i ]:nWidth == nWidth .AND. ::aBitmaps[ i ]:nHeight == nHeight ) )
          ::aBitmaps[ i ]:nCounter ++
+
          RETURN ::aBitmaps[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    IF lOEM
       ::handle := hwg_Loadimage( 0, Val( name ), IMAGE_BITMAP, nil, nil, Hwg_bitor( nFlags, LR_SHARED ) )
    ELSE
@@ -388,24 +407,27 @@ METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight ) CLASS HBitmap
    RETURN Self
 
 METHOD AddStandard( nId ) CLASS HBitmap
+
    LOCAL i, aBmpSize, name := "s" + LTrim( Str( nId ) )
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
 
    FOR EACH i  IN  ::aBitmaps
       IF i:name == name
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aBitmaps )
       IF ::aBitmaps[ i ]:name == name
          ::aBitmaps[ i ]:nCounter ++
+
          RETURN ::aBitmaps[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    ::handle :=   hwg_Loadbitmap( nId, .T. )
    ::name   := name
    aBmpSize  := hwg_Getbitmapsize( ::handle )
@@ -416,23 +438,26 @@ METHOD AddStandard( nId ) CLASS HBitmap
    RETURN Self
 
 METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight ) CLASS HBitmap
+
    LOCAL i, aBmpSize, cname := CutPath( name ), cCurDir
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN ::aBitmaps
       IF i:name == cname .AND. ( nWidth == nil .OR. nHeight == nil )
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aBitmaps )
       IF ::aBitmaps[ i ]:name == cname .AND. ( nWidth == nil .OR. nHeight == nil )
          ::aBitmaps[ i ]:nCounter ++
+
          RETURN ::aBitmaps[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    name := iif( ! File( name ) .AND. File( cname ), cname, name )
    IF ::lSelFile .AND. !File( name )
       cCurDir  := DiskName() + ':\' + CurDir()
@@ -454,7 +479,8 @@ METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight ) CLASS HBitmap
       ENDIF
    ENDIF
    IF Empty( ::handle )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    ::name := cname
    aBmpSize  := hwg_Getbitmapsize( ::handle )
@@ -465,6 +491,7 @@ METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight ) CLASS HBitmap
    RETURN Self
 
 METHOD AddWindow( oWnd, lFull ) CLASS HBitmap
+
    LOCAL aBmpSize
 
    ::handle := hwg_Window2bitmap( oWnd:handle, lFull )
@@ -477,11 +504,12 @@ METHOD AddWindow( oWnd, lFull ) CLASS HBitmap
    RETURN Self
 
 METHOD RELEASE() CLASS HBitmap
+
    LOCAL i, nlen := Len( ::aBitmaps )
 
    ::nCounter --
    IF ::nCounter == 0
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       FOR EACH i IN ::aBitmaps
          IF i:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -490,7 +518,7 @@ METHOD RELEASE() CLASS HBitmap
             EXIT
          ENDIF
       NEXT
-#else
+      #else
       FOR i := 1 TO nlen
          IF ::aBitmaps[ i ]:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -499,10 +527,10 @@ METHOD RELEASE() CLASS HBitmap
             EXIT
          ENDIF
       NEXT
-#endif
+      #endif
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
    //- HIcon
 
@@ -510,6 +538,7 @@ CLASS HIcon INHERIT HObject
 
    CLASS VAR aIcons   INIT { }
    CLASS VAR lSelFile   INIT .T.
+
    DATA handle
    DATA name
    DATA nWidth, nHeight
@@ -520,9 +549,10 @@ CLASS HIcon INHERIT HObject
    METHOD Draw( hDC, x, y )   INLINE hwg_Drawicon( hDC, ::handle, x, y )
    METHOD RELEASE()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM ) CLASS HIcon
+
    LOCAL lPreDefined := .F. , i, aIconSize
 
    IF nWidth == nil
@@ -541,21 +571,23 @@ METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM ) CLASS HIcon
       name := LTrim( Str( name ) )
       lPreDefined := .T.
    ENDIF
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN ::aIcons
       IF i:name == name
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aIcons )
       IF ::aIcons[ i ]:name == name
          ::aIcons[ i ]:nCounter ++
+
          RETURN ::aIcons[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    // ::classname:= "HICON"
    IF lOEM // LR_SHARED is required for OEM images
       ::handle := hwg_Loadimage( 0, Val( name ), IMAGE_ICON, nWidth, nHeight, Hwg_bitor( nFlags, LR_SHARED ) )
@@ -572,6 +604,7 @@ METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM ) CLASS HIcon
    RETURN Self
 
 METHOD AddFile( name, nWidth, nHeight ) CLASS HIcon
+
    LOCAL i, aIconSize, cname := CutPath( name ), cCurDir
 
    IF nWidth == nil
@@ -580,21 +613,23 @@ METHOD AddFile( name, nWidth, nHeight ) CLASS HIcon
    IF nHeight == nil
       nHeight := 0
    ENDIF
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
    FOR EACH i IN  ::aIcons
       IF i:name == cname
          i:nCounter ++
+
          RETURN i
       ENDIF
    NEXT
-#else
+   #else
    FOR i := 1 TO Len( ::aIcons )
       IF ::aIcons[ i ]:name == cname
          ::aIcons[ i ]:nCounter ++
+
          RETURN ::aIcons[ i ]
       ENDIF
    NEXT
-#endif
+   #endif
    // ::classname:= "HICON"
    name := iif( ! File( name ) .AND. File( cname ), cname, name )
    IF ::lSelFile .AND. !File( name )
@@ -615,11 +650,12 @@ METHOD AddFile( name, nWidth, nHeight ) CLASS HIcon
    RETURN Self
 
 METHOD RELEASE() CLASS HIcon
+
    LOCAL i, nlen := Len( ::aIcons )
 
    ::nCounter --
    IF ::nCounter == 0
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       FOR EACH i IN ::aIcons
          IF i:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -628,7 +664,7 @@ METHOD RELEASE() CLASS HIcon
             EXIT
          ENDIF
       NEXT
-#else
+      #else
       FOR i := 1 TO nlen
          IF ::aIcons[ i ]:handle == ::handle
             hwg_Deleteobject( ::handle )
@@ -637,12 +673,12 @@ METHOD RELEASE() CLASS HIcon
             EXIT
          ENDIF
       NEXT
-#endif
+      #endif
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
-EXIT PROCEDURE CleanDrawWidg
+   EXIT PROCEDURE CleanDrawWidg
    LOCAL i
 
    FOR i := 1 TO Len( HPen():aPens )

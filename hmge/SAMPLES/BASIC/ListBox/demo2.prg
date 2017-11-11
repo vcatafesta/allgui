@@ -130,3 +130,4 @@ FUNCTION main()
                         msginfo( xx_var , 'Items: ' + alltrim( str(form_1.listbox_1.ItemCount) ) )
 
                         RETURN
+

@@ -359,3 +359,4 @@ FUNCTION timeMsg( tBegin, tEnd )
 
    RETURN( sRet )
    #include "sBufCLS.prg"
+

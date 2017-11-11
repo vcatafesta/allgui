@@ -130,3 +130,4 @@ FUNCTION Define_Column_ToolTip(cParentForm,cControl)
    ENDCASE
 
    RETURN NIL
+

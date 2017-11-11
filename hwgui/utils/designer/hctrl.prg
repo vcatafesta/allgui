@@ -1,11 +1,9 @@
 /*
- * $Id: hctrl.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * Designer
- * HControlGen class
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hctrl.prg 2012 2013-03-07 09:03:56Z alkresin $
+* Designer
+* HControlGen class
+* Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -16,9 +14,9 @@
 
 #include "designer.ch"
 
-Static aBDown := { NIL,0,0,.F. }
-Static vBDown := { NIL,0,0,.F. }
-Static oPenSel
+STATIC aBDown := { NIL,0,0,.F. }
+STATIC vBDown := { NIL,0,0,.F. }
+STATIC oPenSel
 
 // :LFB
 STATIC aSels := {}
@@ -28,7 +26,8 @@ STATIC aSels := {}
 
 CLASS HControlGen INHERIT HControl
 
-   CLASS VAR winclass INIT "STATIC"
+CLASS VAR winclass INIT "STATIC"
+
    DATA  cClass
    DATA lContainer    INIT .F.
    DATA oContainer, nPage
@@ -41,17 +40,24 @@ CLASS HControlGen INHERIT HControl
    DATA lEmbed        INIT .F.
    DATA LocalOnClickParam init ""
 
-   METHOD New( oWndParent, xClass, aProp )
-   METHOD Activate()
-   METHOD Paint( lpdis )
-   METHOD GetProp( cName,i )
-   METHOD GetPropIndex( cName,i )
-   METHOD SetProp( xName,xValue )
-   METHOD SetCoor( xName,nValue )
+METHOD New( oWndParent, xClass, aProp )
+
+METHOD Activate()
+
+METHOD Paint( lpdis )
+
+METHOD GetProp( cName,i )
+
+METHOD GetPropIndex( cName,i )
+
+METHOD SetProp( xName,xValue )
+
+METHOD SetCoor( xName,nValue )
 
 ENDCLASS
 
 METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
+
    LOCAL oXMLDesc
    LOCAL oPaint, bmp, cPropertyName
    LOCAL i, j, xProperty, cProperty
@@ -111,8 +117,8 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
                xProperty := oXMLDesc:aItems[i]:GetAttribute( "value" )
             ENDIF
             Aadd( ::aProp, { oXMLDesc:aItems[i]:GetAttribute( "name" ),  ;
-                             xProperty, ;
-                             oXMLDesc:aItems[i]:GetAttribute( "type" ) } )
+               xProperty, ;
+               oXMLDesc:aItems[i]:GetAttribute( "type" ) } )
             IF oXMLDesc:aItems[i]:GetAttribute( "hidden" ) != NIL
                Aadd( Atail( ::aProp ),.T. )
             ENDIF
@@ -170,11 +176,12 @@ METHOD Activate() CLASS HControlGen
 
    IF ::oParent != NIL .AND. !empty(::oParent:handle) // != 0
       IF ::cCreate != NIL
-         Private oCtrl := Self
+         PRIVATE oCtrl := Self
+
          ::handle := &( ::cCreate )
       ELSE
          ::handle := hwg_Createstatic( ::oParent:handle, ::id, ;
-               ::style, ::nLeft, ::nTop, ::nWidth,::nHeight )
+            ::style, ::nLeft, ::nTop, ::nWidth,::nHeight )
       ENDIF
       ::Init()
    ENDIF
@@ -182,6 +189,7 @@ METHOD Activate() CLASS HControlGen
    RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HControlGen
+
    LOCAL drawInfo := hwg_Getdrawiteminfo( lpdis )
    LOCAL i,octrl2
    MEMVAR hDC, oCtrl
@@ -210,20 +218,25 @@ METHOD Paint( lpdis ) CLASS HControlGen
    RETURN NIL
 
 METHOD GetProp( cName,i ) CLASS HControlGen
+
    //FP get property index
    i := ::GetPropIndex( cName )
 
    RETURN Iif( i==0, NIL, ::aProp[i,2] )
 
 METHOD GetPropIndex(cName ) CLASS HControlGen
+
    LOCAL i := 0
+
    cName := Lower( cName )
    i := Ascan( ::aProp,{|a|Lower(a[1])==cName} )
 
    RETURN (i)
 
 METHOD SetProp( xName,xValue )
+
    LOCAL iIndex := 0
+
    IF Valtype( xName ) == "C"
       xName := Lower( xName )
       //xName := Ascan( ::aProp,{|a|Lower(a[1])==xName} )
@@ -244,6 +257,7 @@ METHOD SetProp( xName,xValue )
    RETURN xValue
 
 METHOD SetCoor( xName,nValue )
+
    MEMVAR oDesigner
 
    IF oDesigner:lReport
@@ -253,8 +267,10 @@ METHOD SetCoor( xName,nValue )
 
    RETURN nValue
 
-// -----------------------------------------------
+   // -----------------------------------------------
+
 FUNCTION ctrlOnSize( oCtrl, x, y )
+
    LOCAL aControls := oCtrl:oParent:aControls,i,oCtrls
    MEMVAR oDesigner
 
@@ -302,25 +318,27 @@ FUNCTION ctrlOnSize( oCtrl, x, y )
    RETURN NIL
 
 FUNCTION CreateName( cPropertyName, oCtrl )
+
    LOCAL i, j, aControls := oCtrl:oParent:aControls, arr := {}
    LOCAL cName := IIF(cPropertyName!="v","o","v") + Upper( Left( oCtrl:cClass,1 ) ) + Substr( oCtrl:cClass,2 )
    LOCAL nLen := Len( cName )
 
    FOR i := 1 TO Len( aControls )
       IF( j := Ascan( aControls[i]:aProp, {|a|a[1]==cPropertyName} ) ) > 0
-         IF Left( aControls[i]:aProp[j,2],nLen ) == cName
-            Aadd( arr,Substr( aControls[i]:aProp[j,2],nLen+1 ) )
-         ENDIF
+      IF Left( aControls[i]:aProp[j,2],nLen ) == cName
+         Aadd( arr,Substr( aControls[i]:aProp[j,2],nLen+1 ) )
       ENDIF
-   NEXT
-   i := 1
-   DO WHILE Ascan( arr,Ltrim(Str(i)) ) > 0
-      i ++
-   ENDDO
+   ENDIF
+NEXT
+i := 1
+DO WHILE Ascan( arr,Ltrim(Str(i)) ) > 0
+   i ++
+ENDDO
 
-   RETURN cName+Ltrim(Str(i))
+RETURN cName+Ltrim(Str(i))
 
 FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
+
    LOCAL i, dx, dy , vdx , vdy ,mdx , mdy
    MEMVAR oDesigner
 
@@ -346,6 +364,7 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
 
    IF dx != 0 .OR. dy != 0
       IF !lChild .AND. lMouse .AND. Abs( xPos - aBDown[BDOWN_XPOS] ) < 3 .AND. Abs( yPos - aBDown[BDOWN_YPOS] ) < 3
+
          RETURN .F.
       ENDIF
 
@@ -428,6 +447,7 @@ FUNCTION CtrlMove( oCtrl,xPos,yPos,lMouse,lChild )
    RETURN .F.
 
 FUNCTION CtrlResize( oCtrl,xPos,yPos )
+
    LOCAL dx, dy
    MEMVAR oDesigner
 
@@ -527,6 +547,7 @@ FUNCTION GetvBDown
    RETURN vBDown
 
 FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
+
    LOCAL oFrm := Iif( oDlg:oParent:Classname()=="HPANEL",oDlg:oParent:oParent:oParent,oDlg:oParent ), handle, i, nSh
    MEMVAR oDesigner
 
@@ -550,6 +571,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
             NEXT
          ELSEIF oCtrl == NIL
             // CASO ELE CLICOU NO FORM
+
             RETURN NIL
          ELSE
             // CASO ELE QUER DESMARCAR UM
@@ -559,11 +581,11 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
                   oCtrl:nLeft-4, oCtrl:nTop-4, ;
                   oCtrl:nLeft+oCtrl:nWidth+3,  ;
                   oCtrl:nTop+oCtrl:nHeight+3 )
-                  ADEL(aSels,i)
-                  ASIZE(Asels,LEN(aSels)-1)
+               ADEL(aSels,i)
+               ASIZE(Asels,LEN(aSels)-1)
+
                RETURN NIL
             ENDIF
-            //
          ENDIF
       ENDIF
       // nando pos
@@ -571,7 +593,6 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
       IF oCtrl != NIL
          AADD(aSels,oCtrl)
       ENDIF
-      //
       oFrm:oCtrlSelected := oCtrl
       IF oCtrl != NIL
          hwg_Invalidaterect( oCtrl:oParent:handle, 0, ;
@@ -580,6 +601,7 @@ FUNCTION SetCtrlSelected( oDlg,oCtrl,n ,nShift)   // nando pos nshift
             oCtrl:nTop+oCtrl:nHeight+3 )
          // nando pos
          IF nShift != NIL
+
             RETURN NIL
          ENDIF
          IF oDesigner:oDlgInsp != NIL
@@ -605,24 +627,29 @@ FUNCTION GetCtrlSelected( oDlg )
    RETURN Iif( oDlg!=NIL,Iif( oDlg:oParent:Classname()=="HPANEL",oDlg:oParent:oParent:oParent:oCtrlSelected,oDlg:oParent:oCtrlSelected),NIL )
 
 FUNCTION CheckResize( oCtrl,xPos,yPos )
+
    IF xPos > oCtrl:nLeft-5 .AND. xPos < oCtrl:nLeft+3 .AND. ;
-      yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
+         yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
+
          RETURN 1
       ENDIF
    ELSEIF xPos > oCtrl:nLeft+oCtrl:nWidth-5 .AND. xPos < oCtrl:nLeft+oCtrl:nWidth+3 .AND. ;
-      yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
+         yPos >= oCtrl:nTop .AND. yPos < oCtrl:nTop + oCtrl:nHeight
       IF oCtrl:nWidth > 3
+
          RETURN 3
       ENDIF
    ELSEIF yPos > oCtrl:nTop-5 .AND. yPos < oCtrl:nTop+3 .AND. ;
-      xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
+         xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
       IF oCtrl:nHeight > 3
+
          RETURN 2
       ENDIF
    ELSEIF yPos > oCtrl:nTop+oCtrl:nHeight-5 .AND. yPos < oCtrl:nTop+oCtrl:nHeight+3 .AND. ;
-      xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
+         xPos >= oCtrl:nLeft .AND. xPos < oCtrl:nLeft + oCtrl:nWidth
       IF oCtrl:nHeight > 3
+
          RETURN 4
       ENDIF
    ENDIF
@@ -643,10 +670,12 @@ FUNCTION MoveCtrl( oCtrl )
    RETURN NIL
 
 FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
+
    LOCAL i, aControls := Iif( oCtrl:oContainer != NIL, oCtrl:oContainer:aControls, oCtrl:oParent:aControls )
    LOCAL lRes := .F., xPos, yPos, delta := 15
 
    IF oCtrl:lEmbed
+
       RETURN NIL
    ENDIF
    IF lLeft == NIL .AND. lTop == NIL .AND. lRight == NIL .AND. lBottom == NIL
@@ -657,8 +686,8 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
    FOR i := Len( aControls ) To 1 STEP -1
       IF !aControls[i]:lHide
          IF lLeft .AND. aControls[i]:nLeft+aControls[i]:nWidth < oCtrl:nLeft .AND. ;
-            aControls[i]:nLeft+aControls[i]:nWidth + delta > oCtrl:nLeft .AND. ;
-            aControls[i]:nTop <= oCtrl:nTop .AND. aControls[i]:nTop + aControls[i]:nHeight > oCtrl:nTop
+               aControls[i]:nLeft+aControls[i]:nWidth + delta > oCtrl:nLeft .AND. ;
+               aControls[i]:nTop <= oCtrl:nTop .AND. aControls[i]:nTop + aControls[i]:nHeight > oCtrl:nTop
             lRes := .T.
             xPos := aControls[i]:nLeft+aControls[i]:nWidth + 1
             yPos := aControls[i]:nTop
@@ -671,8 +700,8 @@ FUNCTION AdjustCtrl( oCtrl, lLeft, lTop, lRight, lBottom )
             yPos := aControls[i]:nTop + aControls[i]:nHeight + 1
             EXIT
          ELSEIF lRight .AND. oCtrl:nLeft+oCtrl:nWidth < aControls[i]:nLeft .AND. ;
-            oCtrl:nLeft+oCtrl:nWidth >= aControls[i]:nLeft - delta .AND. ;
-            oCtrl:nTop >= aControls[i]:nTop .AND. aControls[i]:nTop + aControls[i]:nHeight > oCtrl:nTop
+               oCtrl:nLeft+oCtrl:nWidth >= aControls[i]:nLeft - delta .AND. ;
+               oCtrl:nTop >= aControls[i]:nTop .AND. aControls[i]:nTop + aControls[i]:nHeight > oCtrl:nTop
             lRes := .T.
             xPos := aControls[i]:nLeft-oCtrl:nWidth - 1
             yPos := aControls[i]:nTop
@@ -717,6 +746,7 @@ FUNCTION FitLine( oCtrl )
    RETURN NIL
 
 FUNCTION Page_New( oTab )
+
    LOCAL aTabs := oTab:GetProp( "Tabs" )
 
    IF aTabs == NIL
@@ -731,16 +761,19 @@ FUNCTION Page_New( oTab )
    RETURN NIL
 
 FUNCTION Page_Next( oTab )
+
    HB_SYMBOL_UNUSED( oTab )
 
    RETURN NIL
 
 FUNCTION Page_Prev( oTab )
+
    HB_SYMBOL_UNUSED( oTab )
 
    RETURN NIL
 
 FUNCTION Page_Upd( oTab, arr )
+
    LOCAL i, nTabs := hwg_Sendmessage( oTab:handle,TCM_GETITEMCOUNT,0,0 )
 
    FOR i := 1 TO Len( arr )
@@ -754,7 +787,8 @@ FUNCTION Page_Upd( oTab, arr )
    RETURN NIL
 
 FUNCTION Page_Select( oTab, nTab, lForce )
-LOCAL i, j, oCtrl
+
+   LOCAL i, j, oCtrl
 
    IF ( lForce != NIL .AND. lForce ) .OR. hwg_Getcurrenttab( oTab:handle ) != nTab
       hwg_Sendmessage( oTab:handle, TCM_SETCURSEL, nTab-1, 0 )
@@ -778,6 +812,7 @@ LOCAL i, j, oCtrl
    RETURN NIL
 
 FUNCTION EditMenu()
+
    LOCAL oDlg, oTree, i, aMenu
    MEMVAR nMaxID, oDesigner
    PRIVATE nMaxId := 0
@@ -824,6 +859,7 @@ FUNCTION EditMenu()
    RETURN NIL
 
 STATIC FUNCTION BuildTree( oParent, aMenu )
+
    LOCAL i := Len( aMenu ), oNode
    MEMVAR nMaxId
 
@@ -839,6 +875,7 @@ STATIC FUNCTION BuildTree( oParent, aMenu )
    RETURN NIL
 
 STATIC FUNCTION VldItemChange( aTree,oNode,cText )
+
    LOCAL nPos, aSubarr
 
    IF ( aSubarr := FindTreeItem( aTree, oNode:cargo, @nPos ) ) != NIL
@@ -848,15 +885,18 @@ STATIC FUNCTION VldItemChange( aTree,oNode,cText )
    RETURN .T.
 
 STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
+
    LOCAL nPos1, aSubarr
 
    nPos := 1
    DO WHILE nPos <= Len( aTree )
       IF aTree[npos,3] == nId
+
          RETURN aTree
       ELSEIF Valtype(aTree[npos,1]) == "A"
          IF ( aSubarr := FindTreeItem( aTree[nPos,1] , nId, @nPos1 ) ) != NIL
             nPos := nPos1
+
             RETURN aSubarr
          ENDIF
       ENDIF
@@ -866,6 +906,7 @@ STATIC FUNCTION FindTreeItem( aTree, nId, nPos )
    RETURN NIL
 
 STATIC FUNCTION EditTree( aTree,oTree,nAction )
+
    LOCAL oNode, cMethod
    LOCAL nPos, aSubarr
    MEMVAR nMaxID
@@ -943,6 +984,7 @@ STATIC FUNCTION EditTree( aTree,oTree,nAction )
    RETURN NIL
 
 FUNCTION GetMenu()
+
    LOCAL oDlg, i, aMenu
    MEMVAR nMaxID, oDesigner
    PRIVATE nMaxId := 0
@@ -961,15 +1003,15 @@ FUNCTION GetMenu()
 
    RETURN aMenu
 
-//....................................................................
-// : LFB
-//
+   //....................................................................
+   // : LFB
+
 FUNCTION aselCtrls
 
    RETURN aSels
 
-
 FUNCTION asels_ajustar(najuste)
+
    // align left  sides
    // align right  sides
    // align top edges
@@ -983,6 +1025,7 @@ FUNCTION asels_ajustar(najuste)
    LOCAL asels := aselCtrls()
 
    IF LEN(aSels) <= 1 .AND. nAjuste <7
+
       RETURN NIL
    ENDIF
    oCtrl := asels[1]
@@ -1001,10 +1044,11 @@ FUNCTION asels_ajustar(najuste)
          SetBDown( ,0,0,0 )
          CtrlMove(oCtrl,0,(nCenterTop-INT(oCtrl:nHeight/2))-oCtrl:nTop,.F.,.F.)
       ELSEIF nAjuste = 7
-        // center vertically
+         // center vertically
          SetBDown( ,0,0,0 )
          CtrlMove(oCtrl,(nCenterLeft-INT(oCtrl:nWidth/2))-oCtrl:nLeft,0,.F.,.F.)
       ENDIF
+
       RETURN NIL
    ENDIF
 
@@ -1057,6 +1101,7 @@ FUNCTION asels_ajustar(najuste)
    RETURN NIL
 
 FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
+
    LOCAL pps, hDC, xf,yf
 
    pps := hwg_Definepaintstru()
@@ -1081,8 +1126,8 @@ FUNCTION RegionSelect(odlg,xi,yi,xPos,yPos)
 
    RETURN NIL
 
-
 FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
+
    LOCAL Octrl, i, xf,yf
 
    IF xpos < xi
@@ -1109,6 +1154,7 @@ FUNCTION selsobjetos(odlg,xi,yi,xpos,ypos)
    RETURN NIL
 
 FUNCTION AUTOSIZE(oCtrl)
+
    LOCAL aSize :={}
 
    IF oCtrl:oFont != NIL
@@ -1117,6 +1163,7 @@ FUNCTION AUTOSIZE(oCtrl)
       asize :=  GETTEXTWIDTH(oCtrl:title+" ",oCtrl:oparent:oFont,hwg_Getdc(oCtrl:handle)) //nHdc)
    ENDIF
    IF octrl:nLeft = NIL
+
       RETURN NIL
    ENDIF
    SetBDown( , oCtrl:nWidth,oCtrl:nHeight,3 )
@@ -1127,6 +1174,7 @@ FUNCTION AUTOSIZE(oCtrl)
    RETURN NIL
 
 FUNCTION GetTextWidth( cString, oFont ,hdc)
+
    LOCAL arr, hFont
 
    IF oFont != NIL
@@ -1137,11 +1185,13 @@ FUNCTION GetTextWidth( cString, oFont ,hdc)
       hwg_Selectobject( hDC,hFont )
    ENDIF
 
-RETURN arr
+   RETURN arr
 
-// :END LFB
+   // :END LFB
 
-#ifdef __XHARBOUR__
+   #ifdef __XHARBOUR__
+
 FUNCTION hb_At( s1, s2, n )
-RETURN At( s1, s2, n )
-#endif
+
+   RETURN At( s1, s2, n )
+   #endif

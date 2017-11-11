@@ -1960,3 +1960,4 @@ STATIC FUNCTION mostra_detalhamento_2()
    ENDIF
 
    RETURN(nil)
+

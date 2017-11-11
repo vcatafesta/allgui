@@ -1,11 +1,9 @@
 /*
- * $Id: hctrlex.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HStaticEx, HButtonEx, HGroupEx
- *
- * Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
- * www - http://sites.uol.com.br/culikr/
+* $Id: hctrlex.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HStaticEx, HButtonEx, HGroupEx
+* Copyright 2007 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
+* www - http://sites.uol.com.br/culikr/
 */
 
 #include "windows.ch"
@@ -33,17 +31,18 @@
 
 CLASS HStaticEx INHERIT HStatic
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
+
    DATA AutoSize INIT .F.
    DATA nStyleHS
    DATA bClick, bDblClick
    DATA hBrushDefault  HIDDEN
 
    METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-      bColor, lTransp, bClick, bDblClick, bOther )
+         cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+         bColor, lTransp, bClick, bDblClick, bOther )
    METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-      bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther )
+         bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther )
    METHOD SetText( value ) INLINE ::SetValue( value )
    METHOD SetValue( cValue )
    METHOD Auto_Size( cValue )  HIDDEN
@@ -53,7 +52,7 @@ CLASS HStaticEx INHERIT HStatic
    METHOD onDblClick()
    METHOD OnEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
@@ -139,14 +138,17 @@ METHOD Init() CLASS HStaticEx
    RETURN  NIL
 
 METHOD OnEvent( msg, wParam, lParam ) CLASS  HStaticEx
+
    LOCAL nEval, pos
 
    IF ::bOther != NIL
       IF ( nEval := Eval( ::bOther, Self, msg, wParam, lParam ) ) != - 1 .AND. nEval != NIL
+
          RETURN 0
       ENDIF
    ENDIF
    IF msg == WM_ERASEBKGND
+
       RETURN 0
    ELSEIF msg = WM_KEYUP
       IF wParam = VK_DOWN
@@ -156,13 +158,16 @@ METHOD OnEvent( msg, wParam, lParam ) CLASS  HStaticEx
       ELSEIF wParam = VK_TAB
          hwg_GetSkip( ::oParent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
       ENDIF
+
       RETURN 0
    ELSEIF msg == WM_SYSKEYUP
       IF ( pos := At( "&", ::title ) ) > 0 .AND. wParam == Asc( Upper( SubStr( ::title, ++ pos, 1 ) ) )
          hwg_GetSkip( ::oparent, ::handle, , 1 )
+
          RETURN  0
       ENDIF
    ELSEIF msg = WM_GETDLGCODE
+
       RETURN DLGC_WANTARROWS + DLGC_WANTTAB
    ENDIF
 
@@ -185,6 +190,7 @@ METHOD SetValue( cValue )  CLASS HStaticEx
    RETURN NIL
 
 METHOD Paint( lpDis ) CLASS HStaticEx
+
    LOCAL drawInfo := hwg_Getdrawiteminfo( lpDis )
    LOCAL client_rect, szText
    LOCAL dwtext, nstyle, brBackground
@@ -241,6 +247,7 @@ METHOD onDblClick()  CLASS HStaticEx
    RETURN NIL
 
 METHOD Auto_Size( cValue ) CLASS HStaticEx
+
    LOCAL  ASize, nLeft, nAlign
 
    IF ::autosize
@@ -265,15 +272,16 @@ METHOD Auto_Size( cValue ) CLASS HStaticEx
 CLASS HButtonX INHERIT HButton
 
    CLASS VAR winclass   INIT "BUTTON"
+
    DATA bClick
    DATA cNote  HIDDEN
    DATA lFlat INIT .F.
 
    METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-      tcolor, bColor, bGFocus )
+         cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+         tcolor, bColor, bGFocus )
    METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-      cTooltip, tcolor, bColor, cCaption, bGFocus )
+         cTooltip, tcolor, bColor, cCaption, bGFocus )
    METHOD Init()
    METHOD onClick()
    METHOD onGetFocus()
@@ -281,7 +289,7 @@ CLASS HButtonX INHERIT HButton
    METHOD onEvent( msg, wParam, lParam )
    METHOD NoteCaption( cNote )  SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -358,31 +366,38 @@ METHOD onevent( msg, wParam, lParam ) CLASS HButtonX
    ELSEIF msg = WM_KEYDOWN
       IF ( wParam == VK_RETURN   .OR. wParam == VK_SPACE )
          hwg_Sendmessage( ::handle, WM_LBUTTONDOWN, 0, hwg_Makelparam( 1, 1 ) )
+
          RETURN 0
       ENDIF
       IF ! hwg_ProcKeyList( Self, wParam )
          IF wParam = VK_TAB
             hwg_GetSkip( ::oparent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 )  )
+
             RETURN 0
          ELSEIF wParam = VK_LEFT .OR. wParam = VK_UP
             hwg_GetSkip( ::oparent, ::handle, , - 1 )
+
             RETURN 0
          ELSEIF wParam = VK_RIGHT .OR. wParam = VK_DOWN
             hwg_GetSkip( ::oparent, ::handle, , 1 )
+
             RETURN 0
          ENDIF
       ENDIF
    ELSEIF msg == WM_KEYUP
       IF ( wParam == VK_RETURN .OR. wParam == VK_SPACE )
          hwg_Sendmessage( ::handle, WM_LBUTTONUP, 0, hwg_Makelparam( 1, 1 ) )
+
          RETURN 0
       ENDIF
    ELSEIF  msg = WM_GETDLGCODE .AND. ! Empty( lParam )
       IF wParam = VK_RETURN .OR. wParam = VK_TAB
       ELSEIF hwg_Getdlgmessage( lParam ) = WM_KEYDOWN .AND. wParam != VK_ESCAPE
       ELSEIF hwg_Getdlgmessage( lParam ) = WM_CHAR .OR. wParam = VK_ESCAPE
+
          RETURN - 1
       ENDIF
+
       RETURN DLGC_WANTMESSAGE
    ENDIF
 
@@ -409,9 +424,11 @@ METHOD NoteCaption( cNote )  CLASS HButtonX
    RETURN ::cNote
 
 METHOD onGetFocus()  CLASS HButtonX
+
    LOCAL res := .T. , nSkip
 
    IF ! hwg_CheckFocus( Self, .F. ) .OR. ::bGetFocus = NIL
+
       RETURN .T.
    ENDIF
    IF ::bGetFocus != NIL
@@ -443,7 +460,6 @@ METHOD onLostFocus()  CLASS HButtonX
 
    RETURN NIL
 
-
 CLASS HButtonEX INHERIT HButtonX
 
    DATA hBitmap
@@ -472,8 +488,8 @@ CLASS HButtonEX INHERIT HButtonX
    DATA bMouseOverButton INIT .F.
 
    METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-      tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther )
+         cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+         tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther )
    METHOD Paint( lpDis )
    METHOD SetBitmap( hBitMap )
    METHOD SetIcon( hIcon )
@@ -482,19 +498,19 @@ CLASS HButtonEX INHERIT HButtonX
    METHOD CancelHover()
    METHOD END()
    METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-      cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin )
+         cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin )
    METHOD PaintBk( hdc )
    METHOD Setcolor( tcolor, bcolor ) INLINE ::SetDefaultColor( tcolor, bcolor ) //, ::SetDefaultColor( .T. )
    METHOD SetDefaultColor( tColor, bColor, lPaint )
    METHOD SetColorEx( nIndex, nColor, lPaint )
    METHOD SetText( c ) INLINE ::title := c,  ;
-      hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE ), ;
-      iif( ::oParent != NIL .AND. hwg_Iswindowvisible( ::Handle ) , ;
-      hwg_Invalidaterect( ::oParent:Handle, 1 , ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight  ), ), ;
-      hwg_Setwindowtext( ::handle, ::title )
-   //   METHOD SaveParentBackground()
+         hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE ), ;
+         iif( ::oParent != NIL .AND. hwg_Iswindowvisible( ::Handle ) , ;
+         hwg_Invalidaterect( ::oParent:Handle, 1 , ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight  ), ), ;
+         hwg_Setwindowtext( ::handle, ::title )
+      //   METHOD SaveParentBackground()
 
-END CLASS
+   END CLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -585,6 +601,7 @@ METHOD END() CLASS HButtonEX
    RETURN Self
 
 METHOD INIT() CLASS HButtonEx
+
    LOCAL nbs
 
    IF ! ::lInit
@@ -627,10 +644,13 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
       ENDIF
       ::m_bFirstTime := .T.
       hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
+
       RETURN 0
    ELSEIF msg == WM_ERASEBKGND
+
       RETURN 0
    ELSEIF msg == BM_SETSTYLE
+
       RETURN hwg_Buttonexonsetstyle( wParam, lParam, ::handle, @::m_bIsDefault )
    ELSEIF msg == WM_MOUSEMOVE
       IF wParam = MK_LBUTTON
@@ -641,6 +661,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
          IF ( ! hwg_Ptinrect( rectButton, acoor ) )
             hwg_Sendmessage( ::handle, BM_SETSTATE, ::m_bToggled, 0 )
             ::bMouseOverButton := .F.
+
             RETURN 0
          ENDIF
       ENDIF
@@ -649,13 +670,16 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
          hwg_Invalidaterect( ::handle, .F. )
          hwg_Trackmousevent( ::handle )
       ENDIF
+
       RETURN 0
    ELSEIF msg == WM_MOUSELEAVE
       ::CancelHover()
+
       RETURN 0
    ENDIF
    IF ::bOther != NIL
       IF ( nEval := Eval( ::bOther, Self, msg, wParam, lParam ) ) != - 1 .AND. nEval != NIL
+
          RETURN 0
       ENDIF
    ENDIF
@@ -808,7 +832,6 @@ METHOD SetDefaultColor( tColor, bColor, lPaint ) CLASS HBUTTONEx
    ::m_crColors[ BTNST_COLOR_FG_OUT ]   := iif( ::tColor = NIL, hwg_Getsyscolor( COLOR_BTNTEXT ), ::tColor )
    ::m_crColors[ BTNST_COLOR_BK_FOCUS ] := iif( ::bColor = NIL, hwg_Getsyscolor( COLOR_BTNFACE ), ::bColor )
    ::m_crColors[ BTNST_COLOR_FG_FOCUS ] := iif( ::tColor = NIL, hwg_Getsyscolor( COLOR_BTNTEXT ), ::tColor )
-   //
    ::m_crBrush[ BTNST_COLOR_BK_IN ] := HBrush():Add( ::m_crColors[ BTNST_COLOR_BK_IN ] )
    ::m_crBrush[ BTNST_COLOR_BK_OUT ] := HBrush():Add( ::m_crColors[ BTNST_COLOR_BK_OUT ] )
    ::m_crBrush[ BTNST_COLOR_BK_FOCUS ] := HBrush():Add( ::m_crColors[ BTNST_COLOR_BK_FOCUS ] )
@@ -822,6 +845,7 @@ METHOD SetColorEx( nIndex, nColor, lPaint ) CLASS HBUTTONEx
 
    DEFAULT lPaint TO .F.
    IF nIndex > BTNST_MAX_COLORS
+
       RETURN - 1
    ENDIF
    ::m_crColors[ nIndex ]    := nColor
@@ -832,6 +856,7 @@ METHOD SetColorEx( nIndex, nColor, lPaint ) CLASS HBUTTONEx
    RETURN 0
 
 METHOD Paint( lpDis ) CLASS HBUTTONEx
+
    LOCAL drawInfo := hwg_Getdrawiteminfo( lpDis )
    LOCAL dc := drawInfo[ 3 ]
    LOCAL bIsPressed     := HWG_BITAND( drawInfo[ 9 ], ODS_SELECTED ) != 0
@@ -922,7 +947,7 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
          ELSEIF bIsFocused
             uState := HWG_BITOR( ;
                HWG_BITOR( DFCS_BUTTONPUSH + DFCS_MONO , ; // DFCS_FLAT , ;
-            iif( ::bMouseOverButton, DFCS_HOT, 0 ) ), ;
+               iif( ::bMouseOverButton, DFCS_HOT, 0 ) ), ;
                iif( bIsPressed, DFCS_PUSHED, 0 ) )
             hwg_Drawframecontrol( dc, itemRect, DFC_BUTTON, uState )
          ENDIF
@@ -964,7 +989,6 @@ METHOD Paint( lpDis ) CLASS HBUTTONEx
    ENDIF
 
    captionRect := { drawInfo[ 4 ], drawInfo[ 5 ], drawInfo[ 6 ], drawInfo[ 7 ] }
-   //
    IF ( ValType( ::hbitmap ) == "N" .OR. ValType( ::hicon ) == "N" ) .AND. lMultiline
       IF ::iStyle = ST_ALIGN_HORIZ
          captionRect := { drawInfo[ 4 ] + ::PictureMargin , drawInfo[ 5 ], drawInfo[ 6 ] , drawInfo[ 7 ] }
@@ -1150,11 +1174,11 @@ CLASS HGroupEx INHERIT HGroup
    DATA lTransparent HIDDEN
 
    METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup )
+         cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup )
    METHOD Init()
    METHOD Paint( lpDis )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup ) CLASS HGroupEx
@@ -1169,6 +1193,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
    RETURN Self
 
 METHOD Init() CLASS HGroupEx
+
    LOCAL nbs
 
    IF ! ::lInit
@@ -1198,6 +1223,7 @@ METHOD Init() CLASS HGroupEx
    RETURN NIL
 
 METHOD PAINT( lpdis ) CLASS HGroupEx
+
    LOCAL drawInfo := hwg_Getdrawiteminfo( lpdis )
    LOCAL DC := drawInfo[ 3 ]
    LOCAL ppnOldPen, pnFrmDark,   pnFrmLight, iUpDist
@@ -1211,7 +1237,7 @@ METHOD PAINT( lpdis ) CLASS HGroupEx
    // distance from window top to group rect
    iUpDist := ( aSize[ 2 ] / 2 )
    dwStyle := ::Style //HWG_GETWINDOWSTYLE( ::handle ) //GetStyle();
-   rcText := { 0, rc[ 2 ] + iUpDist , 0, rc[ 2 ] + iUpDist  }
+      rcText := { 0, rc[ 2 ] + iUpDist , 0, rc[ 2 ] + iUpDist  }
    IF Empty( szText )
    ELSEIF hb_BitAnd( dwStyle, BS_CENTER ) == BS_RIGHT // right aligned
       rcText[ 3 ] := rc[ 3 ] + 2 - OFS_X
@@ -1280,3 +1306,4 @@ METHOD PAINT( lpdis ) CLASS HGroupEx
    hwg_Selectobject( dc, ppnOldPen )
 
    RETURN NIL
+

@@ -705,3 +705,4 @@ FUNCTION EraseAll()
    ERASE WINDOW Y
 
    RETURN NIL
+

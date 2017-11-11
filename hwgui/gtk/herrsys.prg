@@ -1,11 +1,9 @@
 /*
- * $Id: herrsys.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Windows errorsys replacement
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: herrsys.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* Windows errorsys replacement
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "common.ch"
@@ -13,7 +11,7 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Static LogInitialPath := ""
+STATIC LogInitialPath := ""
 
 PROCEDURE hwg_ErrSys
 
@@ -23,6 +21,7 @@ PROCEDURE hwg_ErrSys
    RETURN
 
 STATIC FUNCTION DefError( oError )
+
    LOCAL cMessage
    LOCAL cDOSError
 
@@ -33,21 +32,24 @@ STATIC FUNCTION DefError( oError )
 
    // By default, division by zero results in zero
    IF oError:genCode == EG_ZERODIV
+
       RETURN 0
    ENDIF
 
    // Set NetErr() of there was a database open error
    IF oError:genCode == EG_OPEN .AND. ;
-      oError:osCode == 32 .AND. ;
-      oError:canDefault
+         oError:osCode == 32 .AND. ;
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
    // Set NetErr() if there was a lock error on dbAppend()
    IF oError:genCode == EG_APPENDLOCK .AND. ;
-      oError:canDefault
+         oError:canDefault
       NetErr( .T. )
+
       RETURN .F.
    ENDIF
 
@@ -63,9 +65,9 @@ STATIC FUNCTION DefError( oError )
    n := 2
    WHILE ! Empty( ProcName( n ) )
       #ifdef __XHARBOUR__
-         cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
+      cMessage +=Chr(13)+Chr(10) + "Called from " + ProcFile(n) + "->" + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
       #else
-         cMessage += Chr(13)+Chr(10) + "Called from " + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
+      cMessage += Chr(13)+Chr(10) + "Called from " + ProcName( n ) + "(" + AllTrim( Str( ProcLine( n++ ) ) ) + ")"
       #endif
    ENDDO
 
@@ -74,10 +76,10 @@ STATIC FUNCTION DefError( oError )
    hwg_gtk_exit()
    QUIT
 
-RETURN .F.
-
+   RETURN .F.
 
 FUNCTION hwg_ErrMsg( oError )
+
    LOCAL cMessage
 
    // start error message
@@ -112,36 +114,35 @@ FUNCTION hwg_ErrMsg( oError )
 
    RETURN cMessage
 
-function hwg_WriteLog( cText,fname )
+FUNCTION hwg_WriteLog( cText,fname )
 
-Local nHand
+   LOCAL nHand
 
-  fname := LogInitialPath + Iif( fname == Nil,"a.log",fname )
-  if !File( fname )
-     nHand := Fcreate( fname )
-  else
-     nHand := Fopen( fname,1 )
-  endif
-  Fseek( nHand,0,2 )
-  Fwrite( nHand, cText + chr(10) )
-  Fclose( nHand )
+   fname := LogInitialPath + Iif( fname == Nil,"a.log",fname )
+   IF !File( fname )
+      nHand := Fcreate( fname )
+   ELSE
+      nHand := Fopen( fname,1 )
+   ENDIF
+   Fseek( nHand,0,2 )
+   Fwrite( nHand, cText + chr(10) )
+   Fclose( nHand )
 
-return nil
+   RETURN NIL
 
-Static Function ErrorPreview( cMess )
-Local oDlg, oEdit
+STATIC FUNCTION ErrorPreview( cMess )
+
+   LOCAL oDlg, oEdit
 
    INIT DIALOG oDlg TITLE "Error.log" ;
-        AT 92,61 SIZE 400,400
-        
+      AT 92,61 SIZE 400,400
 
    @ 10,10 EDITBOX oEdit CAPTION cMess SIZE 380,340 STYLE WS_VSCROLL+WS_HSCROLL+ES_MULTILINE+ES_READONLY ;
-        COLOR 16777088 BACKCOLOR 0
+      COLOR 16777088 BACKCOLOR 0
 
-   @ 150,360 BUTTON "Close" ON CLICK {||hwg_EndDialog()} SIZE 100,32 
+   @ 150,360 BUTTON "Close" ON CLICK {||hwg_EndDialog()} SIZE 100,32
 
    oDlg:Activate()
 
-Return Nil 
-
+   RETURN NIL
 

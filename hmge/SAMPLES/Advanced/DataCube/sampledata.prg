@@ -901,3 +901,4 @@ FUNCTION initdata
       }
 
    RETURN aclone(aData)
+

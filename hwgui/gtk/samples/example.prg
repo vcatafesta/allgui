@@ -11,9 +11,11 @@ REQUEST DBSEEK
 ANNOUNCE HB_GTSYS
 REQUEST HB_GT_CGI_DEFAULT
 
-Function Main
-Local oForm := HFormTmpl():Read( "example.xml" )
+FUNCTION Main
 
- oForm:ShowMain()
+   LOCAL oForm := HFormTmpl():Read( "example.xml" )
 
-Return Nil
+   oForm:ShowMain()
+
+   RETURN NIL
+

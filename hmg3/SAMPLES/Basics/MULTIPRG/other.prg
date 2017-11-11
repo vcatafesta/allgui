@@ -18,3 +18,4 @@ FUNCTION InOtherPrg()
    Form_1.Button_1.SetFocus
 
    RETURN NIL
+

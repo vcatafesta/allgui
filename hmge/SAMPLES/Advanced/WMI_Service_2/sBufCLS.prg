@@ -53,3 +53,4 @@ STATIC FUNCTION aJoin( aIn, sDelim )
    ENDCASE
 
    RETURN( sRet )
+

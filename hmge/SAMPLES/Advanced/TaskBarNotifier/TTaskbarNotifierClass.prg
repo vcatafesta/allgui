@@ -920,3 +920,4 @@ HB_FUNC( _DRAWTEXT )
 }
 
 #pragma ENDDUMP
+

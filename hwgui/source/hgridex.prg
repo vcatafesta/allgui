@@ -1,14 +1,10 @@
- /*
- * $Id: hgridex.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGrid class
- *
- * Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
- *
- * Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
+/*
+* $Id: hgridex.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HGrid class
+* Copyright 2004 Rodrigo Moreno <rodrigo_moreno@yahoo.com>
+* Extended function Copyright 2006 Luiz Rafael Culik Guimaraes <luiz@xharbour.com.br>
 */
-
 
 #include "windows.ch"
 #include "guilib.ch"
@@ -27,10 +23,10 @@
 #define NM_SETFOCUS            - 7
 #define NM_KILLFOCUS           - 8
 
-
 CLASS HGridEX INHERIT HControl
 
 CLASS VAR winclass INIT "SYSLISTVIEW32"
+
    DATA aBitMaps   INIT { }
    DATA aItems     INIT { }
    DATA ItemCount
@@ -62,9 +58,8 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    DATA iRowSelect INIT  0
 
    METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
-               bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-               nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems )
-
+         bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
+         nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems )
    METHOD Activate()
    METHOD Init()
    METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
@@ -74,7 +69,6 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
    METHOD AddRow( a, bUpdate )
    METHOD Notify( lParam )
-
    METHOD DELETEROW()    INLINE IIF( ::bFlag , ( hwg_Sendmessage( ::HANDLE, LVM_DELETEITEM, ::iRowSelect , 0 ), ::bFlag := .f. ), .T. )
    METHOD DELETEALLROW() INLINE ::aItems := NIL, ::aColors := { }, hwg_Sendmessage( ::Handle, LVM_DELETEALLITEMS, 0, 0 )
    METHOD SELECTALL()    INLINE hwg_Listviewselectall( ::Handle )
@@ -82,19 +76,19 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )
    METHOD UpdateData()
    METHOD SETVIEW( style )  INLINE hwg_Listview_setview( ::handle, style )
-ENDCLASS
 
+   ENDCLASS
 
 METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
-            bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-            nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems ) CLASS HGridEx
+      bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
+      nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit, aItems ) CLASS HGridEx
 
    HB_SYMBOL_UNUSED( nItemCount )
 
    //nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_VISIBLE + WS_CHILD + WS_TABSTOP + LVS_REPORT )
    nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP + WS_BORDER   )
    ::Super:New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, ;
-              bSize, bPaint )
+      bSize, bPaint )
    DEFAULT aBit TO { }
    ::aItems := aItems
    ::ItemCount := Len( aItems )
@@ -115,23 +109,24 @@ METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint,
    ::bPosChg   := bPosChg
    ::bDispInfo := bDispInfo
 
-
    HWG_InitCommonControlsEx()
 
    ::Activate()
 
-
    RETURN Self
 
 METHOD Activate() CLASS HGridEx
+
    IF ! Empty( ::oParent:handle )
       ::Style :=  ::Style - WS_BORDER
       ::handle := hwg_Listview_create ( ::oParent:handle, ::id, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::style, ::lNoHeader, ::lNoScroll )
       ::Init()
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Init() CLASS HGridEx
+
    LOCAL i, nPos
    LOCAL aButton := { }
    LOCAL aBmpSize
@@ -155,7 +150,6 @@ METHOD Init() CLASS HGridEx
             aBmpSize := hwg_Getbitmapsize( aButton[ n ] )
             nmax := Max( nmax, aBmpSize[ 3 ] )
          NEXT
-
 
          IF nmax == 4
             ::hIm := hwg_Createimagelist( { } , aBmpSize[ 1 ], aBmpSize[ 2 ], 1, ILC_COLOR4 + ILC_MASK )
@@ -207,9 +201,11 @@ METHOD Init() CLASS HGridEx
          hwg_Listview_settextbkcolor( ::handle, ::bkcolor )
       ENDIF
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Refresh() CLASS HGridEx
+
    LOCAL iFirst, iLast
 
    iFirst := hwg_Listview_gettopindex( ::handle )
@@ -217,16 +213,16 @@ METHOD Refresh() CLASS HGridEx
    iLast := iFirst + hwg_Listview_getcountperpage( ::handle )
 
    hwg_Listview_redrawitems( ::handle , iFirst, iLast )
-   RETURN Nil
 
+   RETURN NIL
 
 METHOD AddRow( a , bupdate ) CLASS HGRIDEX
+
    LOCAL nLen := Len( a )
    LOCAL n
    LOCAL aTmp := { }
    LOCAL aTmp1 := { }
    LOCAL aTmp2 := { }
-
 
    DEFAULT bupdate TO .f.
    FOR n := 1 TO nLen STEP 4
@@ -234,7 +230,6 @@ METHOD AddRow( a , bupdate ) CLASS HGRIDEX
       AAdd( aTmp,  IIF( ValType( a[ n + 1 ] ) == "N", a[ n + 1 ], - 1 ) )
 
       AAdd( aTmp2,  IIF( ValType( a[ n + 2  ] ) == "N", a[ n + 2 ], hwg_Rgb( 12, 15, 46 ) ) )
-
 
       AAdd( aTmp2,  IIF( ValType( a[ n + 3  ] ) == "N", a[ n + 3 ], hwg_Rgb( 192, 192, 192 ) ) )
 
@@ -248,15 +243,17 @@ METHOD AddRow( a , bupdate ) CLASS HGRIDEX
       ::updatedata()
    ENDIF
 
-   RETURN nil
+   RETURN NIL
 
 METHOD Notify( lParam )  CLASS HGRIDEX
+
    LOCAL nCode := hwg_Getnotifycode( lParam )
    LOCAL Res, iSelect, oParent := hwg_GetParentForm(Self)
 
    IF nCode == NM_CUSTOMDRAW .and. hwg_Getnotifycodefrom( lParam ) == ::Handle
       Res := hwg_Processcustu( ::handle, lParam, ::aColors )
       Hwg_SetDlgResult( oParent:Handle, Res )
+
       RETURN Res
    ENDIF
 
@@ -264,45 +261,49 @@ METHOD Notify( lParam )  CLASS HGRIDEX
       iSelect = hwg_Sendmessage( ::handle, LVM_GETNEXTITEM, - 1, LVNI_FOCUSED )
 
       IF( iSelect == - 1 )
-         RETURN 0
-      ENDIF
 
-      ::iRowSelect := iSelect
-      ::bFlag := .t.
-      RETURN 1
+      RETURN 0
    ENDIF
 
-   IF nCode == LVN_COLUMNCLICK //.and. hwg_Getnotifycodefrom(lParam) == ::Handle
-      IF Empty( ::hsort )
-         ::hSort := hwg_Listviewsortinfonew( lParam, nil )
-      ENDIF
-      hwg_Listviewsort( ::handle, lParam, ::hSort )
-      RETURN  0
-   ENDIF
-   IF nCode == NM_SETFOCUS
-   ELSEIF nCode == NM_KILLFOCUS
-   ENDIF
-   IF nCode == NM_RETURN
-   ENDIF
-   IF nCode == LVN_KEYDOWN
-   ENDIF
+   ::iRowSelect := iSelect
+   ::bFlag := .t.
 
-   Res := hwg_ListViewNotify( Self, lParam )
-   IF ValType( Res ) == "N"
-      Hwg_SetDlgResult( oParent:Handle, Res )
-      //RETURN 1
+   RETURN 1
+ENDIF
+
+IF nCode == LVN_COLUMNCLICK //.and. hwg_Getnotifycodefrom(lParam) == ::Handle
+   IF Empty( ::hsort )
+      ::hSort := hwg_Listviewsortinfonew( lParam, nil )
    ENDIF
-   RETURN Res
+   hwg_Listviewsort( ::handle, lParam, ::hSort )
+
+   RETURN  0
+ENDIF
+IF nCode == NM_SETFOCUS
+ELSEIF nCode == NM_KILLFOCUS
+ENDIF
+IF nCode == NM_RETURN
+ENDIF
+IF nCode == LVN_KEYDOWN
+ENDIF
+
+Res := hwg_ListViewNotify( Self, lParam )
+IF ValType( Res ) == "N"
+   Hwg_SetDlgResult( oParent:Handle, Res )
+   //RETURN 1
+ENDIF
+
+RETURN Res
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-                 bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )  CLASS hGridex
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )  CLASS hGridex
 
    HB_SYMBOL_UNUSED( cCaption )
    HB_SYMBOL_UNUSED( lTransp )
 
    DEFAULT  aItem TO { }
    ::Super:New( oWndParent, nId, 0, 0, 0, 0, 0, oFont, bInit, ;
-              bSize, bPaint, ctooltip, tcolor, bcolor )
+      bSize, bPaint, ctooltip, tcolor, bcolor )
    HWG_InitCommonControlsEx()
    ::arow := aItem
 
@@ -311,6 +312,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    RETURN Self
 
 METHOD UpdateData() CLASS hGridex
+
    LOCAL n := Len( ::aRow ), n1
    LOCAL aTemp, atemp1
 
@@ -323,3 +325,4 @@ METHOD UpdateData() CLASS hGridex
    NEXT
 
    RETURN .t.
+

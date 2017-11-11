@@ -1,34 +1,36 @@
 /*
- * HWGUI using sample
- * Property sheet
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* HWGUI using sample
+* Property sheet
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
-Local oMainWindow
+FUNCTION Main
+
+   LOCAL oMainWindow
 
    INIT WINDOW oMainWindow MAIN TITLE "Example" ;
-     AT 200,0 SIZE 400,150
+      AT 200,0 SIZE 400,150
 
    MENU OF oMainWindow
-      MENUITEM "&Exit" ACTION hwg_EndWindow()
-      MENUITEM "&Property Sheet" ACTION OpenConfig()
-   ENDMENU
+   MENUITEM "&Exit" ACTION hwg_EndWindow()
+   MENUITEM "&Property Sheet" ACTION OpenConfig()
+ENDMENU
 
-   ACTIVATE WINDOW oMainWindow
-Return Nil
+ACTIVATE WINDOW oMainWindow
 
-Function OpenConfig
-Local aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
-Local oBrw1, oBrw2
-Local aSample1 := { {"Alex",17}, {"Victor",42}, {"John",31} }
-Local aSample2 := { {"Line 1",10}, {"Line 2",22}, {"Line 3",40} }
-Local e1 := "Xxxx"
+RETURN NIL
+
+FUNCTION OpenConfig
+
+   LOCAL aDlg1, aDlg2, aCombo := { "Aaaa","Bbbb" }
+   LOCAL oBrw1, oBrw2
+   LOCAL aSample1 := { {"Alex",17}, {"Victor",42}, {"John",31} }
+   LOCAL aSample2 := { {"Line 1",10}, {"Line 2",22}, {"Line 3",40} }
+   LOCAL e1 := "Xxxx"
 
    INIT DIALOG aDlg1 FROM RESOURCE  "PAGE_1" ON EXIT {||hwg_Msginfo("Exit"),.T.}
    REDEFINE GET e1 ID 103
@@ -43,4 +45,5 @@ Local e1 := "Xxxx"
 
    hwg_PropertySheet( hwg_Getactivewindow(),{ aDlg1, aDlg2 }, "Sheet Example" )
 
-Return Nil
+   RETURN NIL
+

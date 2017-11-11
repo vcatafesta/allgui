@@ -1,59 +1,60 @@
 /*
- * $Id: testxml.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * This sample demonstrates reading/writing XML file and handling menu items
- * while run-time.
- */
+* $Id: testxml.prg 2012 2013-03-07 09:03:56Z alkresin $
+* This sample demonstrates reading/writing XML file and handling menu items
+* while run-time.
+*/
 
 #include "windows.ch"
 #include "guilib.ch"
 #include "hxml.ch"
 
-Function Main
-Local oXmlNode
-Local i, j, fname := ""
-Private oXmlDoc, lIniChanged := .F., nCurrentItem
-Private oMainWindow, oFont
+FUNCTION Main
+
+   LOCAL oXmlNode
+   LOCAL i, j, fname := ""
+   PRIVATE oXmlDoc, lIniChanged := .F., nCurrentItem
+   PRIVATE oMainWindow, oFont
 
    oXmlDoc := HXMLDoc():Read( "testxml.xml" )
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 204
 
    INIT WINDOW oMainWindow MAIN TITLE "XML Sample"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
-     AT 200,0 SIZE 600,300                       ;
-     ON EXIT {||SaveOptions()}                   ;
-     FONT oFont
+      COLOR COLOR_3DLIGHT+1                       ;
+      AT 200,0 SIZE 600,300                       ;
+      ON EXIT {||SaveOptions()}                   ;
+      FONT oFont
 
    MENU OF oMainWindow
-      MENU TITLE "File"
-         MENUITEM "New item" ACTION NewItem(0)
-         SEPARATOR
-         IF !Empty( oXmlDoc:aItems )
-            nCurrentItem := 1
-            FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
-               oXmlNode := oXmlDoc:aItems[1]:aItems[i]
-               fname := oXmlNode:GetAttribute("name")
-               Hwg_DefineMenuItem( fname, 1020+i, &( "{||NewItem("+LTrim(Str(i,2))+")}" ) )
-            NEXT
-            SEPARATOR
-         ENDIF
-         MENUITEM "Exit" ACTION hwg_EndWindow()
-      ENDMENU
+   MENU TITLE "File"
+   MENUITEM "New item" ACTION NewItem(0)
+   SEPARATOR
+   IF !Empty( oXmlDoc:aItems )
+      nCurrentItem := 1
+      FOR i := 1 TO Len( oXmlDoc:aItems[1]:aItems )
+         oXmlNode := oXmlDoc:aItems[1]:aItems[i]
+         fname := oXmlNode:GetAttribute("name")
+         Hwg_DefineMenuItem( fname, 1020+i, &( "{||NewItem("+LTrim(Str(i,2))+")}" ) )
+      NEXT
+      SEPARATOR
+   ENDIF
+   MENUITEM "Exit" ACTION hwg_EndWindow()
+ENDMENU
 
-      MENU TITLE "Help"
-         MENUITEM "About" ACTION hwg_Shellabout("","")
-      ENDMENU
-   ENDMENU
+MENU TITLE "Help"
+MENUITEM "About" ACTION hwg_Shellabout("","")
+ENDMENU
+ENDMENU
 
-   ACTIVATE WINDOW oMainWindow
+ACTIVATE WINDOW oMainWindow
 
-Return Nil
+RETURN NIL
 
-Function NewItem( nItem )
-Local oDlg, oItemFont, oFontNew
-Local oXmlNode, fname, i, j, aMenu, nId
-Local cName, cInfo
+FUNCTION NewItem( nItem )
+
+   LOCAL oDlg, oItemFont, oFontNew
+   LOCAL oXmlNode, fname, i, j, aMenu, nId
+   LOCAL cName, cInfo
 
    IF nItem > 0
       oXmlNode := oXmlDoc:aItems[1]:aItems[nItem]
@@ -72,7 +73,7 @@ Local cName, cInfo
    ENDIF
 
    INIT DIALOG oDlg TITLE Iif( nItem==0,"New item","Change item" )  ;
-   AT 210,10  SIZE 300,150  FONT oFont
+      AT 210,10  SIZE 300,150  FONT oFont
 
    @ 20,20 SAY "Name:" SIZE 60, 22
    @ 80,20 GET cName SIZE 150, 26
@@ -98,7 +99,7 @@ Local cName, cInfo
          aMenu := oMainWindow:menu[1,1]
          nId := aMenu[1][Len(aMenu[1])-2,3]+1
          Hwg_AddMenuItem( aMenu, cName, nId, .F., ;
-              &( "{||NewItem("+LTrim(Str(nId-1020,2))+")}" ), Len(aMenu[1])-1 )
+            &( "{||NewItem("+LTrim(Str(nId-1020,2))+")}" ), Len(aMenu[1])-1 )
 
       ELSE
          IF oXmlNode:GetAttribute( "name" ) != cName
@@ -122,41 +123,43 @@ Local cName, cInfo
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function FontFromXML( oXmlNode )
-Local width  := oXmlNode:GetAttribute( "width" )
-Local height := oXmlNode:GetAttribute( "height" )
-Local weight := oXmlNode:GetAttribute( "weight" )
-Local charset := oXmlNode:GetAttribute( "charset" )
-Local ita   := oXmlNode:GetAttribute( "italic" )
-Local under := oXmlNode:GetAttribute( "underline" )
+FUNCTION FontFromXML( oXmlNode )
 
-  IF width != Nil
-     width := Val( width )
-  ENDIF
-  IF height != Nil
-     height := Val( height )
-  ENDIF
-  IF weight != Nil
-     weight := Val( weight )
-  ENDIF
-  IF charset != Nil
-     charset := Val( charset )
-  ENDIF
-  IF ita != Nil
-     ita := Val( ita )
-  ENDIF
-  IF under != Nil
-     under := Val( under )
-  ENDIF
+   LOCAL width  := oXmlNode:GetAttribute( "width" )
+   LOCAL height := oXmlNode:GetAttribute( "height" )
+   LOCAL weight := oXmlNode:GetAttribute( "weight" )
+   LOCAL charset := oXmlNode:GetAttribute( "charset" )
+   LOCAL ita   := oXmlNode:GetAttribute( "italic" )
+   LOCAL under := oXmlNode:GetAttribute( "underline" )
 
-Return HFont():Add( oXmlNode:GetAttribute( "name" ),  ;
-                    width, height, weight, charset,   ;
-                    ita, under )
+   IF width != Nil
+      width := Val( width )
+   ENDIF
+   IF height != Nil
+      height := Val( height )
+   ENDIF
+   IF weight != Nil
+      weight := Val( weight )
+   ENDIF
+   IF charset != Nil
+      charset := Val( charset )
+   ENDIF
+   IF ita != Nil
+      ita := Val( ita )
+   ENDIF
+   IF under != Nil
+      under := Val( under )
+   ENDIF
 
-Function Font2XML( oFont )
-Local aAttr := {}
+   RETURN HFont():Add( oXmlNode:GetAttribute( "name" ),  ;
+      width, height, weight, charset,   ;
+      ita, under )
+
+FUNCTION Font2XML( oFont )
+
+   LOCAL aAttr := {}
 
    Aadd( aAttr, { "name",oFont:name } )
    Aadd( aAttr, { "width",Ltrim(Str(oFont:width,5)) } )
@@ -174,11 +177,14 @@ Local aAttr := {}
       Aadd( aAttr, { "underline",Ltrim(Str(oFont:Underline,5)) } )
    ENDIF
 
-Return HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
+   RETURN HXMLNode():New( "font", HBXML_TYPE_SINGLE, aAttr )
 
-Function SaveOptions()
+FUNCTION SaveOptions()
+
    IF lIniChanged
       oXmlDoc:Save( "testxml.xml" )
    ENDIF
    CLOSE ALL
-Return Nil
+
+   RETURN NIL
+

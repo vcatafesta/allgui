@@ -1639,3 +1639,4 @@ STATIC FUNCTION fecha_janela()
    ENDIF
 
    RETURN(nil)
+

@@ -7,9 +7,9 @@ PROCEDURE Main ()
    LOCAL oCtrl
 
    INIT WINDOW oWnd MAIN ;
-        TITLE "Test animation" ;
-        AT 0, 0 ;
-        SIZE 300, 430
+      TITLE "Test animation" ;
+      AT 0, 0 ;
+      SIZE 300, 430
 
    @ 0,0 PANEL oPanel
 
@@ -41,4 +41,5 @@ PROCEDURE Main ()
 
    ACTIVATE WINDOW oWnd
 
-Return
+   RETURN
+

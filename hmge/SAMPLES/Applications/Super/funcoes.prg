@@ -476,3 +476,4 @@ FUNCTION DbfVazio( cParametro )
    ENDIF
 
    RETURN( .f. )
+

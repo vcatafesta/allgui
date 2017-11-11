@@ -1,21 +1,22 @@
 #include "windows.ch"
 #include "guilib.ch"
 
-Function Main
-Local oMainWindow, oBtn, aCombo := {"First","Second" }, cTool := "Example", oFont
-Local aTabs := { "A","B","C","D","E","F","G","H","I","J","K","L","M","N" }, oTab
-Local acho := { {"First item",180}, {"Second item",200} }
-Local oEdit, oGetTab, oTree, oItem
-Private aGetsTab := { "","","","","","","","","","","","","","" }
+FUNCTION Main
+
+   LOCAL oMainWindow, oBtn, aCombo := {"First","Second" }, cTool := "Example", oFont
+   LOCAL aTabs := { "A","B","C","D","E","F","G","H","I","J","K","L","M","N" }, oTab
+   LOCAL acho := { {"First item",180}, {"Second item",200} }
+   LOCAL oEdit, oGetTab, oTree, oItem
+   PRIVATE aGetsTab := { "","","","","","","","","","","","","","" }
 
    // PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17 CHARSET 4
 
    INIT WINDOW oMainWindow MAIN TITLE "Example"  ;
-     COLOR COLOR_3DLIGHT+1                       ;
-     AT 200,0 SIZE 420,300                       ;
-     FONT oFont                                  ;
-     ON EXIT {||hwg_Msgyesno("Really want to quit ?")}
+      COLOR COLOR_3DLIGHT+1                       ;
+      AT 200,0 SIZE 420,300                       ;
+      FONT oFont                                  ;
+      ON EXIT {||hwg_Msgyesno("Really want to quit ?")}
 
    @ 20,10 RICHEDIT oEdit TEXT "Hello, world !"  SIZE 200,30
 
@@ -26,12 +27,12 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
    @ 20,50 LINE LENGTH 100
 
    @ 20,60 TAB oTab ITEMS aTabs SIZE 140,100      ;
-         STYLE TCS_FIXEDWIDTH+TCS_FORCELABELLEFT  ;
-         ON CHANGE {|n,o|ChangeTab(o,oGetTab,n)}
+      STYLE TCS_FIXEDWIDTH+TCS_FORCELABELLEFT  ;
+      ON CHANGE {|n,o|ChangeTab(o,oGetTab,n)}
 
    hwg_Settabsize( oTab:handle,20,20 )
    @ 10,30 RICHEDIT oGetTab TEXT "" OF oTab SIZE 120,60 ;
-          STYLE ES_MULTILINE
+      STYLE ES_MULTILINE
 
    @ 180,60 SAY "" SIZE 70,22 STYLE WS_BORDER BACKCOLOR 12507070
 
@@ -43,53 +44,55 @@ Private aGetsTab := { "","","","","","","","","","","","","","" }
    oItem:AddNode( "Third-1" )
    oTree:AddNode( "Forth" )
 
-
    @ 100,180 BUTTON "Close"  SIZE 150,30  ON CLICK {||hwg_EndWindow()}
 
    MENU OF oMainWindow
-      MENU TITLE "File"
-         MENUITEM "Ps" ACTION Ps1(oMainWindow)
-         SEPARATOR
-         MENUITEM "YYYYY" ACTION hwg_MsgGet( "Example","Input anything")
-      ENDMENU
-      MENU TITLE "Help"
-         MENUITEM "About" ACTION hwg_Msginfo("About")
-         MENUITEM "Info" ACTION hwg_Msgtemp("")
-      ENDMENU
-      MENU TITLE "Third"
-         MENUITEM "Wchoice" ACTION hwg_WChoice( acho,"Select",,,,,15132390,,hwg_VColor( "008000" ) )
-         MENUITEM "SelectFolder" ACTION hwg_Msginfo( hwg_Selectfolder("!!!") )
-         MENU TITLE "Submenu"
-            MENUITEM "ShellExecute" ACTION (hwg_Shellexecute("d:\temp\podst.doc"),hwg_Msginfo(str(oMainWindow:handle)))
-            MENUITEM "S2" ACTION hwg_Msgstop("S2")
-         ENDMENU
-      ENDMENU
-   ENDMENU
+   MENU TITLE "File"
+   MENUITEM "Ps" ACTION Ps1(oMainWindow)
+   SEPARATOR
+   MENUITEM "YYYYY" ACTION hwg_MsgGet( "Example","Input anything")
+ENDMENU
+MENU TITLE "Help"
+MENUITEM "About" ACTION hwg_Msginfo("About")
+MENUITEM "Info" ACTION hwg_Msgtemp("")
+ENDMENU
+MENU TITLE "Third"
+MENUITEM "Wchoice" ACTION hwg_WChoice( acho,"Select",,,,,15132390,,hwg_VColor( "008000" ) )
+MENUITEM "SelectFolder" ACTION hwg_Msginfo( hwg_Selectfolder("!!!") )
+MENU TITLE "Submenu"
+MENUITEM "ShellExecute" ACTION (hwg_Shellexecute("d:\temp\podst.doc"),hwg_Msginfo(str(oMainWindow:handle)))
+MENUITEM "S2" ACTION hwg_Msgstop("S2")
+ENDMENU
+ENDMENU
+ENDMENU
 
-/*   
-   aMenu := { ;
-     { { { {||hwg_Msginfo("Xxxx")},"XXXXX",130 }, ;
-         { ,,131 }, ;
-         { {||hwg_Msginfo("Yyyy")},"YYYYY",132 } ;
-       },"File",120 }, ;
-     { {||hwg_Msginfo("Help")},"Help",121 } ;
-   }
-   hwg_BuildMenu( aMenu,hWnd,aMainWindow )
+/*
+aMenu := { ;
+{ { { {||hwg_Msginfo("Xxxx")},"XXXXX",130 }, ;
+{ ,,131 }, ;
+{ {||hwg_Msginfo("Yyyy")},"YYYYY",132 } ;
+},"File",120 }, ;
+{ {||hwg_Msginfo("Help")},"Help",121 } ;
+}
+hwg_BuildMenu( aMenu,hWnd,aMainWindow )
 */
 
-   ACTIVATE WINDOW oMainWindow
+ACTIVATE WINDOW oMainWindow
 
-Return nil
+RETURN NIL
 
-Static Function ChangeTab( oWnd,oGet,n )
-Static lastTab := 1
+STATIC FUNCTION ChangeTab( oWnd,oGet,n )
+
+   STATIC lastTab := 1
    aGetsTab[lastTab] := hwg_Getedittext( oGet:oParent:handle,oGet:id )
    hwg_Setdlgitemtext( oGet:oParent:handle,oGet:id,aGetsTab[n] )
    lastTab := n
-Return Nil
 
-Function PS1( oWnd )
-Local oDlg1, oDlg2
+   RETURN NIL
+
+FUNCTION PS1( oWnd )
+
+   LOCAL oDlg1, oDlg2
 
    INIT DIALOG oDlg1 TITLE "PAGE_1" STYLE WS_CHILD + WS_VISIBLE + WS_BORDER
    @ 20,15 EDITBOX "" SIZE 160, 26 STYLE WS_BORDER
@@ -100,4 +103,5 @@ Local oDlg1, oDlg2
 
    hwg_PropertySheet( hwg_Getactivewindow(), { oDlg1, oDlg2 }, "Sheet Example",210,10,300,300 )
 
-Return
+   RETURN
+

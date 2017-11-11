@@ -544,3 +544,4 @@ FUNCTION Imprimir()
    Tipos->(DbGoTo(RecTipos))
 
    RETURN NIL
+

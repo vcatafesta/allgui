@@ -70,3 +70,4 @@ PROCEDURE Test()
    Win1.Test.Object:url := cOut + 'sample.wav'
 
    RETURN
+

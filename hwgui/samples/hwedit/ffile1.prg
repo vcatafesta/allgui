@@ -1,54 +1,44 @@
 /*
- * $Id: ffile1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
- */
+* $Id: ffile1.prg 1615 2011-02-18 13:53:35Z mlacecilia $
+*/
 
 /*
- * Harbour Project source code:
- * FFILE1.PRG Filebase class for hbdoc
- *
- * Copyright 2000 Luiz Rafael Culik <culik@sl.conex.net>
- * www - http://www.harbour-project.org
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
- *
- * As a special exception, the Harbour Project gives permission for
- * additional uses of the text contained in its release of Harbour.
- *
- * The exception is that, if you link the Harbour libraries with other
- * files to produce an executable, this does not by itself cause the
- * resulting executable to be covered by the GNU General Public License.
- * Your use of that executable is in no way restricted on account of
- * linking the Harbour library code into it.
- *
- * This exception does not however invalidate any other reasons why
- * the executable file might be covered by the GNU General Public License.
- *
- * This exception applies only to the code released by the Harbour
- * Project under the name Harbour.  If you copy code from other
- * Harbour Project or Free Software Foundation releases into a copy of
- * Harbour, as the General Public License permits, the exception does
- * not apply to the code that you add in this way.  To avoid misleading
- * anyone as to the status of such modified files, you must delete
- * this exception notice from them.
- *
- * If you write modifications of your own for Harbour, it is your choice
- * whether to permit this exception to apply to your modifications.
- * If you do not wish that, delete this exception notice.
- *
- */
+* Harbour Project source code:
+* FFILE1.PRG Filebase class for hbdoc
+* Copyright 2000 Luiz Rafael Culik <culik@sl.conex.net>
+* www - http://www.harbour-project.org
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License
+* along with this software; see the file COPYING.  If not, write to
+* the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+* Boston, MA 02111-1307 USA (or visit the web site http://www.gnu.org/).
+* As a special exception, the Harbour Project gives permission for
+* additional uses of the text contained in its release of Harbour.
+* The exception is that, if you link the Harbour libraries with other
+* files to produce an executable, this does not by itself cause the
+* resulting executable to be covered by the GNU General Public License.
+* Your use of that executable is in no way restricted on account of
+* linking the Harbour library code into it.
+* This exception does not however invalidate any other reasons why
+* the executable file might be covered by the GNU General Public License.
+* This exception applies only to the code released by the Harbour
+* Project under the name Harbour.  If you copy code from other
+* Harbour Project or Free Software Foundation releases into a copy of
+* Harbour, as the General Public License permits, the exception does
+* not apply to the code that you add in this way.  To avoid misleading
+* anyone as to the status of such modified files, you must delete
+* this exception notice from them.
+* If you write modifications of your own for Harbour, it is your choice
+* whether to permit this exception to apply to your modifications.
+* If you do not wish that, delete this exception notice.
+*/
 
 #include "hbclass.ch"
 #include 'common.ch'
@@ -60,6 +50,7 @@
 *+
 *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
 *+
+
 CLASS HBMake_FileBase FROM FileMan
 
    DATA nOpenMode   // Holds the value to use when opening the file
@@ -73,33 +64,52 @@ CLASS HBMake_FileBase FROM FileMan
    DATA lAtBottom   // This is a value to show if at bottom of file
    DATA lAtTop      // This is a value to show if at top of file
 
-   METHOD new( cname )                  // This is the constructor for the file
-   METHOD FOPEN()   // This opens the specified file
-   METHOD closefile()                   // This closes the specified file
-   METHOD fskip( n )                    // Moves the byte pointer within the file
-   METHOD FWRITE( c )                   // Write passed data to file w/ len() == nSkipLenght
-   METHOD retrieve()                    // Returns the contents of the file at current pos
-   METHOD fgoTop()  // Move the byte pointer to the top of the file
-   METHOD fgoBottom()                   // Move the byte pointer to the bottom of the file
-   METHOD fgoto()   // Moves the byte pointer to a specific location
-   METHOD create()
+METHOD new( cname )                  // This is the constructor for the file
+
+METHOD FOPEN()   // This opens the specified file
+
+METHOD closefile()                   // This closes the specified file
+
+METHOD fskip( n )                    // Moves the byte pointer within the file
+
+METHOD FWRITE( c )                   // Write passed data to file w/ len() == nSkipLenght
+
+METHOD retrieve()                    // Returns the contents of the file at current pos
+
+METHOD fgoTop()  // Move the byte pointer to the top of the file
+
+METHOD fgoBottom()                   // Move the byte pointer to the bottom of the file
+
+METHOD fgoto()   // Moves the byte pointer to a specific location
+
+METHOD create()
+
    message fappend METHOD fappendByte( cByte )
    message BuffGet METHOD BufferGet( lDirection )
-   METHOD SKIP( nRecord )               // Moves the byte pointer within the file
-   METHOD WRITE( cChar )                // Write passed data to file w/ len() == nSkipLenght
-   METHOD goTop()   // Move the byte pointer to the top of the file
-   METHOD goBottom()                    // Move the byte pointer to the bottom of the file
-   METHOD GOTO( nValue )                // Moves the byte pointer to a specific location
-   METHOD OPEN()
+
+METHOD SKIP( nRecord )               // Moves the byte pointer within the file
+
+METHOD WRITE( cChar )                // Write passed data to file w/ len() == nSkipLenght
+
+METHOD goTop()   // Move the byte pointer to the top of the file
+
+METHOD goBottom()                    // Move the byte pointer to the bottom of the file
+
+METHOD GOTO( nValue )                // Moves the byte pointer to a specific location
+
+METHOD OPEN()
+
    message append METHOD appendLine( cline )
 
 ENDCLASS
 
-   /* Method:  Init/New
-   Params:  N/A
-   Returns: Self
-   Purpose: Constructor
+/* Method:  Init/New
+Params:  N/A
+
+Returns: Self
+Purpose: Constructor
 */
+
 METHOD new( cName ) CLASS HBMake_FileBase
 
    super:new()
@@ -115,12 +125,14 @@ METHOD new( cName ) CLASS HBMake_FileBase
 
    /* Method:  skip( <nRecords> )
    Params:  <nRecords>
+
    Returns: Self
    Purpose: This method moves the file's byte pointer <nRecords> position
-            from the current location.  The actualy movement is determined
-            on the value of ::nSkipLength which holds the skipping base.
-            This class's purpose is to do one byte movements.
-*/
+   from the current location.  The actualy movement is determined
+   on the value of ::nSkipLength which holds the skipping base.
+   This class's purpose is to do one byte movements.
+   */
+
 METHOD fskip( nRecords ) CLASS HBMake_FileBase
 
    DEFAULT nRecords TO 1
@@ -130,14 +142,14 @@ METHOD fskip( nRecords ) CLASS HBMake_FileBase
       ::nLastDosMessage := FERROR()
       ::nPosition       := FSEEK( ::nDosHandle, 0, 1 )
       DO CASE
-         CASE ::nPosition == ::nEndOfFile
-            ::lAtBottom := pTRUE
-            ::lAtTop    := pFALSE
-         CASE ::nPosition <= 1
-            ::lAtTop    := pTRUE
-            ::lAtBottom := pFALSE
-         OTHERWISE
-            ::lAtBottom := ::lAtTop := pFALSE
+      CASE ::nPosition == ::nEndOfFile
+         ::lAtBottom := pTRUE
+         ::lAtTop    := pFALSE
+      CASE ::nPosition <= 1
+         ::lAtTop    := pTRUE
+         ::lAtBottom := pFALSE
+      OTHERWISE
+         ::lAtBottom := ::lAtTop := pFALSE
       ENDCASE
    ENDIF
 
@@ -145,9 +157,11 @@ METHOD fskip( nRecords ) CLASS HBMake_FileBase
 
    /* Method:  gotop()
    Params:  N/A
+
    Returns: Self
    Purpose: Move the byte pointer to the top of the file
-*/
+   */
+
 METHOD fgotop() CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
@@ -161,9 +175,11 @@ METHOD fgotop() CLASS HBMake_FileBase
 
    /* Method:  gobottom()
    Params:  N/A
+
    Returns: Self
    Purpose: Move hte byte pointer of the file to tbe bottom.
-*/
+   */
+
 METHOD fgoBottom() CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
@@ -177,9 +193,11 @@ METHOD fgoBottom() CLASS HBMake_FileBase
 
    /* Method:  close()
    Params:  N/A
+
    Returns: Self
    Purpose: To close the file
-*/
+   */
+
 METHOD closefile() CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
@@ -194,10 +212,12 @@ METHOD closefile() CLASS HBMake_FileBase
 
    /* Method:  retrieve
    Params:  N/A
+
    Returns: <cChar>
    Purpose: To return the contents of the file at the current position based
-            on the length of ::nSkipLength.
-*/
+   on the length of ::nSkipLength.
+   */
+
 METHOD retrieve() CLASS HBMake_FileBase
 
    LOCAL cReturn       // as char
@@ -214,10 +234,12 @@ METHOD retrieve() CLASS HBMake_FileBase
 
    /* Method:  write(<cChar>)
    Params:  <cChar>
+
    Returns: Self
    Purpose: To write out to the contents of the file the value in the
-            parameter <cChar>.
-*/
+   parameter <cChar>.
+   */
+
 METHOD FWRITE( cChar ) CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
@@ -234,29 +256,31 @@ METHOD FWRITE( cChar ) CLASS HBMake_FileBase
 
    /* Method:  goto(<nRecord>)
    Params:  <nRecord>       The record byte to move to
+
    Returns: Self
    Purpose: This method moves the byte marker to the <nRecord> position
-            within the file.  It is also based on the value stored to the
-            ::nSkipLength instance variable
-*/
+   within the file.  It is also based on the value stored to the
+   ::nSkipLength instance variable
+   */
+
 METHOD fgoto( nValue ) CLASS HBMake_FileBase
 
    IF ::noDosError() .AND. ::nDosHandle > 0
       IF nValue IS pNUMERIC
          IF nValue > 0 .AND. ;
-                    ( nValue * ::nSkipLength ) <= ::nEndOfFile
+               ( nValue * ::nSkipLength ) <= ::nEndOfFile
             FSEEK( ::nDosHandle, ( nValue * ::nSkipLength ), 0 )
             ::nLastDosMessage := FERROR()
             ::nPosition       := FSEEK( ::nDosHandle, 0, 1 )
             DO CASE
-               CASE ::nPosition == ::nEndOfFile
-                  ::lAtBottom := pTRUE
-                  ::lAtTop    := pFALSE
-               CASE ::nPosition <= 1
-                  ::lAtTop    := pTRUE
-                  ::lAtBottom := pFALSE
-               OTHERWISE
-                  ::lAtBottom := ::lAtTop := pFALSE
+            CASE ::nPosition == ::nEndOfFile
+               ::lAtBottom := pTRUE
+               ::lAtTop    := pFALSE
+            CASE ::nPosition <= 1
+               ::lAtTop    := pTRUE
+               ::lAtBottom := pFALSE
+            OTHERWISE
+               ::lAtBottom := ::lAtTop := pFALSE
             ENDCASE
          ENDIF
       ENDIF
@@ -266,9 +290,11 @@ METHOD fgoto( nValue ) CLASS HBMake_FileBase
 
    /* Method:  create()
    Params:  N/A
+
    Returns: Self
    Purpose: Creates the specified file with the proper access code
-*/
+   */
+
 METHOD Create() CLASS HBMake_FileBase
 
    LOCAL nFile         // as int
@@ -286,9 +312,11 @@ METHOD Create() CLASS HBMake_FileBase
 
    /* Method:  open()
    Params:  N/A
+
    Returns: Self
    Purpose: Opens the file with the proper access code
-*/
+   */
+
 METHOD FOPEN() CLASS HBMake_FileBase
 
    IF ::noDosError()
@@ -299,7 +327,7 @@ METHOD FOPEN() CLASS HBMake_FileBase
       ::lAtBottom  := pFALSE
    ENDIF
 
-RETURN ( self )
+   RETURN ( self )
 
 METHOD fappendByte( cByte ) CLASS HBMake_FileBase
 
@@ -316,9 +344,10 @@ METHOD fappendByte( cByte ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( self )
+   RETURN ( self )
 
-// End of File: FFile1.prg
+   // End of File: FFile1.prg
+
 METHOD OPEN() CLASS HBMake_FileBase
 
    Self:nDosHandle := Self:openfile( ::cName, ::nOpenMode )
@@ -328,13 +357,16 @@ METHOD OPEN() CLASS HBMake_FileBase
    ::lAtTop      := pTRUE
    ::lAtBottom   := pFALSE
    ::nHan        := Self:nDosHandle
+
    RETURN ( self )
 
    /* Method:  gotop()
    Params:  N/A
+
    Returns: Self
    Purpose: Move the byte pointer to the top of the file
-*/
+   */
+
 METHOD gotop() CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
@@ -346,9 +378,11 @@ METHOD gotop() CLASS HBMake_FileBase
 
    /* Method:  gobottom()
    Params:  N/A
+
    Returns: Self
    Purpose: Move hte byte pointer of the file to tbe bottom.
-*/
+   */
+
 METHOD goBottom() CLASS HBMake_FileBase
 
    LOCAL cBuffer       // as char
@@ -376,31 +410,35 @@ METHOD goBottom() CLASS HBMake_FileBase
 
    /* Method:  close()
    Params:  N/A
+
    Returns: Self
    Purpose: To close the file
-*/
+   */
 
-/* Should not any more exist here ... Not sure so I just keep it remed */
-/* JFL in all case it is not anymore declared from the Class */
-/*
-METHOD FCLOSE() CLASS HBMake_FileBase
+   /* Should not any more exist here ... Not sure so I just keep it remed */
+   /* JFL in all case it is not anymore declared from the Class */
+   /*
+
+   METHOD FCLOSE() CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
-      FCLOSE( Self:nDosHandle )
-      Self:nLastDosMessage := FERROR()
-      Self:delItem( Self:nDosHandle )
-      Self:lAtTop    := Self:lAtBottom := pFALSE
-      Self:nPosition := 0
+   FCLOSE( Self:nDosHandle )
+   Self:nLastDosMessage := FERROR()
+   Self:delItem( Self:nDosHandle )
+   Self:lAtTop    := Self:lAtBottom := pFALSE
+   Self:nPosition := 0
    ENDIF
 
    RETURN ( self )
-*/
+   */
    /* Method:  write(<cChar>)
    Params:  <cChar>
+
    Returns: Self
    Purpose: To write out to the contents of the file the value in the
-            parameter <cChar>.
-*/
+   parameter <cChar>.
+   */
+
 METHOD WRITE( cChar ) CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
@@ -422,22 +460,23 @@ METHOD WRITE( cChar ) CLASS HBMake_FileBase
 
    /* Method:  getBuffer( <lDirection> )
    Params:  <lDirection>    Logical toggle for direction
+
    Returns: <nBytes>
    Purpose: To return the number of bytes either forward or backward from
-            the present file pointer position in which the next CRLF char
-            appears.  If <lDirection> is a logical false (.F.) value, them
-            the operation will go in reverse order; otherwise, it will go
-            in a forward direction.  The default value is a logical true
-            (.T.) value.
-*/
+   the present file pointer position in which the next CRLF char
+   appears.  If <lDirection> is a logical false (.F.) value, them
+   the operation will go in reverse order; otherwise, it will go
+   in a forward direction.  The default value is a logical true
+   (.T.) value.
+   */
 
+   /* Should not any more exist here ... Not sure so I just keep it remed */
+   /* JFL in all case it is not anymore declared from the Class */
+   /*
 
-/* Should not any more exist here ... Not sure so I just keep it remed */
-/* JFL in all case it is not anymore declared from the Class */
-/*
+   /*
 
-/* 
-METHOD Buffget( lForward ) CLASS HBMake_FileBase
+   METHOD Buffget( lForward ) CLASS HBMake_FileBase
 
    LOCAL cBuffer       // as char
    LOCAL nLocation     // as int
@@ -448,50 +487,52 @@ METHOD Buffget( lForward ) CLASS HBMake_FileBase
 
    IF !lForward
 
-      nRead := FSEEK( Self:nDosHandle, ;
-                      - ( IF( ::nposition < pBUFFER_LENGTH, ;
-                      ::nposition, ;
-                      pBUFFER_LENGTH ) ), ;
-                      1 )               // rewind backwards
+   nRead := FSEEK( Self:nDosHandle, ;
+   - ( IF( ::nposition < pBUFFER_LENGTH, ;
+   ::nposition, ;
+   pBUFFER_LENGTH ) ), ;
+   1 )               // rewind backwards
 
-      cBuffer := SPACE( ::nposition - nRead )
-      FREAD( Self:nDosHandle, @cBuffer, ( ::nposition - nRead ) )
+   cBuffer := SPACE( ::nposition - nRead )
+   FREAD( Self:nDosHandle, @cBuffer, ( ::nposition - nRead ) )
 
-      IF RIGHT( cBuffer, 2 ) == pCRLF   // with line already
-         cBuffer   := LEFT( cBuffer, LEN( cBuffer ) - 2 )
-         lWithCRLF := pTRUE
-      ENDIF
-      nLocation := LEN( cBuffer ) - ( RAT( pCRLF, cBuffer ) )
+   IF RIGHT( cBuffer, 2 ) == pCRLF   // with line already
+   cBuffer   := LEFT( cBuffer, LEN( cBuffer ) - 2 )
+   lWithCRLF := pTRUE
+   ENDIF
+   nLocation := LEN( cBuffer ) - ( RAT( pCRLF, cBuffer ) )
 
    ELSE
-      cBuffer := SPACE( pBUFFER_LENGTH )
-      nRead   := FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
-      FSEEK( Self:nDosHandle, - ( IF( nRead < pBUFFER_LENGTH, nRead, ;
-             pBUFFER_LENGTH ) ), 1 )    // Rewind
+   cBuffer := SPACE( pBUFFER_LENGTH )
+   nRead   := FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
+   FSEEK( Self:nDosHandle, - ( IF( nRead < pBUFFER_LENGTH, nRead, ;
+   pBUFFER_LENGTH ) ), 1 )    // Rewind
 
-      // Now, parse the string. and file
+   // Now, parse the string. and file
 
-      nLocation := AT( pCRLF, cBuffer )
+   nLocation := AT( pCRLF, cBuffer )
 
-      // Now, if there is NO CRLF in the buffer and if the value of the
-      // number of bytes read is less than the buffer length, then we
-      // have an end of file condition.
-      IF nLocation == 0 .AND. ( nRead < pBUFFER_LENGTH )
-         // If so, then set the appropriate flags accordingly.
-         ::lAtBottom := pTRUE
-         ::lAtTop    := pFALSE
-      ENDIF
+   // Now, if there is NO CRLF in the buffer and if the value of the
+   // number of bytes read is less than the buffer length, then we
+   // have an end of file condition.
+   IF nLocation == 0 .AND. ( nRead < pBUFFER_LENGTH )
+   // If so, then set the appropriate flags accordingly.
+   ::lAtBottom := pTRUE
+   ::lAtTop    := pFALSE
+   ENDIF
    ENDIF
 
    RETURN ( nLocation )
-*/
+   */
    /* Method:  appendLine( <cLine )
    Params:  <cLine>         Character line to append
+
    Returns: Self
    Purpose: To append a blank CRLF delimited line at the end of the file.
-            If <cLine> is not passed or if it an empty line with 0 bytes
-            in length, the function will not operate.
-*/
+   If <cLine> is not passed or if it an empty line with 0 bytes
+   in length, the function will not operate.
+   */
+
 METHOD appendLine( cLine ) CLASS HBMake_FileBase
 
    DEFAULT cLine TO ""
@@ -514,12 +555,13 @@ METHOD appendLine( cLine ) CLASS HBMake_FileBase
 
    /* Method:  skip( <nRecords> )
    Params:  <nRecords>
+
    Returns: Self
    Purpose: This method moves the file's byte pointer <nRecords> position
-            from the current location.  The actualy movement is determined
-            on the value of Self:nSkipLength which holds the skipping base.
-            This class's purpose is to do one byte movements.
-*/
+   from the current location.  The actualy movement is determined
+   on the value of Self:nSkipLength which holds the skipping base.
+   This class's purpose is to do one byte movements.
+   */
 
 METHOD SKIP( nRecords ) CLASS HBMake_FileBase
 
@@ -533,17 +575,17 @@ METHOD SKIP( nRecords ) CLASS HBMake_FileBase
 
    IF Self:noDosError() .AND. Self:nDosHandle > 0
       DO CASE
-         CASE nRecords > 0              // It's positive movement
-            WHILE nCount ++ != nRecords
-               ::fskip()
-               ::nSkipLength := Self:Buffget()
-            ENDDO
+      CASE nRecords > 0              // It's positive movement
+         WHILE nCount ++ != nRecords
+            ::fskip()
+            ::nSkipLength := Self:Buffget()
+         ENDDO
 
-         CASE nRecords < 0              // It's negative movement
-            WHILE nCount -- != nRecords
-               ::nSkipLength := Self:Buffget( pFALSE )
-               ::fskip( - 1 )
-            ENDDO
+      CASE nRecords < 0              // It's negative movement
+         WHILE nCount -- != nRecords
+            ::nSkipLength := Self:Buffget( pFALSE )
+            ::fskip( - 1 )
+         ENDDO
 
       ENDCASE
    ENDIF
@@ -552,11 +594,13 @@ METHOD SKIP( nRecords ) CLASS HBMake_FileBase
 
    /* Method:  goto(<nRecord>)
    Params:  <nRecord>       The record byte to move to
+
    Returns: Self
    Purpose: This method moves the byte marker to the <nRecord> position
-            within the file.  It is also based on the value stored to the
-            Self:nSkipLength instance variable
-*/
+   within the file.  It is also based on the value stored to the
+   Self:nSkipLength instance variable
+   */
+
 METHOD GOTO( nValue ) CLASS HBMake_FileBase
 
    LOCAL cLine     := ""                   // as char
@@ -573,7 +617,7 @@ METHOD GOTO( nValue ) CLASS HBMake_FileBase
             WHILE lContinue
                cBuffer   := SPACE( pBUFFER_LENGTH )
                lContinue := ( FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH ) == ;
-                              pBUFFER_LENGTH )
+                  pBUFFER_LENGTH )
                cBuffer := cLine + cBuffer
                WHILE pCRLF $ cBuffer
                   IF ++ nCount == nValue
@@ -587,8 +631,8 @@ METHOD GOTO( nValue ) CLASS HBMake_FileBase
             IF nCount == nValue         // We have a match
                FSEEK( Self:nDosHandle, - ( pBUFFER_LENGTH ), 1 )                // Back off from here
                ::nposition := FSEEK( Self:nDosHandle, ;
-                                     ( pBUFFER_LENGTH - LEN( cBuffer ) ), ;
-                                     1 )                    // Move
+                  ( pBUFFER_LENGTH - LEN( cBuffer ) ), ;
+                  1 )                    // Move
                ::nSkipLength := Self:Buffget()
             ELSE
                FSEEK( Self:nDosHandle, ::nposition, 0 )
@@ -598,9 +642,9 @@ METHOD GOTO( nValue ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( nCount )
+   RETURN ( nCount )
 
-// End of File: FFile2.prg
+   // End of File: FFile2.prg
 
 METHOD BufferGet( lForward ) CLASS HBMake_FileBase
 
@@ -614,10 +658,10 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
    IF !lForward
 
       nRead := FSEEK( Self:nDosHandle, ;
-                      - ( IF( ::nposition < pBUFFER_LENGTH, ;
-                      ::nposition, ;
-                      pBUFFER_LENGTH ) ), ;
-                      1 )               // rewind backwards
+         - ( IF( ::nposition < pBUFFER_LENGTH, ;
+         ::nposition, ;
+         pBUFFER_LENGTH ) ), ;
+         1 )               // rewind backwards
 
       cBuffer := SPACE( ::nposition - nRead )
       FREAD( Self:nDosHandle, @cBuffer, ( ::nposition - nRead ) )
@@ -632,7 +676,7 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
       cBuffer := SPACE( pBUFFER_LENGTH )
       nRead   := FREAD( Self:nDosHandle, @cBuffer, pBUFFER_LENGTH )
       FSEEK( Self:nDosHandle, - ( IF( nRead < pBUFFER_LENGTH, nRead, ;
-             pBUFFER_LENGTH ) ), 1 )    // Rewind
+         pBUFFER_LENGTH ) ), 1 )    // Rewind
 
       // Now, parse the string. and file
 
@@ -648,6 +692,7 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
       ENDIF
    ENDIF
 
-RETURN ( nLocation )
+   RETURN ( nLocation )
 
-*+ EOF: FFILE1.PRG
+   *+ EOF: FFILE1.PRG
+

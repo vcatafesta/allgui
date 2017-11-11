@@ -6,23 +6,22 @@ FUNCTION main
    LOCAL oMain, i
 
    INIT WINDOW oMain main TITLE "Scrollbar example"  ;
-        COLOR COLOR_3DLIGHT + 1                       ;
-        At 200, 100 SIZE 400, 250 ;
-        STYLE WS_VSCROLL + WS_HSCROLL
+      COLOR COLOR_3DLIGHT + 1                       ;
+      At 200, 100 SIZE 400, 250 ;
+      STYLE WS_VSCROLL + WS_HSCROLL
 
    FOR i := 0 TO 200 STEP 20
       @ 0, i  say StrZero(i, 3) + "  -  " + "01234567890123456789012345678901234567890" + "  -  " + StrZero(i, 3) size 420, 20
-   next
-
+   NEXT
 
    oMain:bScroll := { | o, msg, wParam, lParam | stdScroll( o, msg, wParam, lParam ) }
 
-   ACTIVATE window oMain
+   ACTIVATE WINDOW oMain
 
-   RETURN nil
-
+   RETURN NIL
 
 STATIC FUNCTION stdScroll( oDlg, msg, wParam, lParam, nIncr )
+
    LOCAL nScrollCode := hwg_Loword( wParam )
    LOCAL nNewPos := hwg_Hiword( wParam )
    LOCAL x, y, xx, yy, pg
@@ -52,7 +51,7 @@ STATIC FUNCTION stdScroll( oDlg, msg, wParam, lParam, nIncr )
       ELSEIF nScrollCode == SB_PAGEUP
          y -= pg
          IF y < 0
-               y := 0
+            y := 0
          ENDIF
       ELSEIF nScrollCode == SB_THUMBTRACK .or. nScrollCode == SB_THUMBPOSITION
          y := nNewPos

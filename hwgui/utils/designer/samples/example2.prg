@@ -9,12 +9,13 @@ REQUEST DBCREATEINDEX
 REQUEST DBSEEK
 REQUEST HWG_SHELLABOUT
 
+FUNCTION Main
 
-Function Main
-Local oForm := HFormTmpl():Read( example() )
+   LOCAL oForm := HFormTmpl():Read( example() )
 
-oForm:ShowMain()
+   oForm:ShowMain()
 
-Return Nil
+   RETURN NIL
 
-#include "example.frm"
+   #include "example.frm"
+

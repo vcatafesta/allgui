@@ -1,10 +1,9 @@
 /*
- * $Id: move.prg 2023 2013-04-19 06:24:23Z alkresin $
- * DBCHW - DBC ( Harbour + HWGUI )
- * Move functions ( Locate, seek, ... )
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.kresin.ru
+* $Id: move.prg 2023 2013-04-19 06:24:23Z alkresin $
+* DBCHW - DBC ( Harbour + HWGUI )
+* Move functions ( Locate, seek, ... )
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://www.kresin.ru
 */
 
 #include "windows.ch"
@@ -17,11 +16,13 @@
 STATIC cLocate := "", cFilter := "", cSeek := ""
 
 FUNCTION Move( nMove )
+
    LOCAL oDlg, aTitle := { "Locate", "Seek", "Filter", "Go to" }, aSay := { "locate expression", "seek key", "filter expression", "record number" }
    LOCAL cExpr := "", oBrw, nRec, key
 
    IF Empty( oBrw := GetBrwActive() )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    INIT DIALOG oDlg TITLE aTitle[nMove] ;
@@ -78,9 +79,10 @@ FUNCTION Move( nMove )
 
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION F_Locate( oBrw, cExpres )
+
    LOCAL nrec, i, res
 
    cLocate := cExpres
@@ -113,9 +115,10 @@ FUNCTION F_Locate( oBrw, cExpres )
       hwg_Msginfo( "Wrong expression" )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION F_Filter( oBrw, cExpres )
+
    LOCAL i, nrec, cArr, lRes := .F.
 
    cFilter := cExpres
@@ -165,11 +168,11 @@ FUNCTION F_Filter( oBrw, cExpres )
       oBrw:bEof   := {|o|  (o:alias)->(Eof())}
       oBrw:bBof   := {|o|  (o:alias)->(Bof())}
       oBrw:bGoTo  := {|o,n|(o:alias)->(dbGoto(n) ) }
-      oBrw:bRecno := {|o|  (o:alias)->(RecNo()) }     
+      oBrw:bRecno := {|o|  (o:alias)->(RecNo()) }
       hwg_WriteStatus( HMainWindow():GetMdiActive(), 1, LTrim( Str(RecCount(),10 ) ) + " records" )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION FGOTOP( oBrw )
 
@@ -177,13 +180,15 @@ FUNCTION FGOTOP( oBrw )
       oBrw:nCurrent := 1
       GO carr_Get( oBrw:aArray, 1 )
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 FUNCTION FGOBOT( oBrw )
 
    oBrw:nCurrent := oBrw:nRecords
    GO carr_Get( oBrw:aArray, oBrw:nRecords )
-RETURN Nil
+
+   RETURN NIL
 
 FUNCTION FGOTO( oBrw, nRec )
 
@@ -191,13 +196,15 @@ FUNCTION FGOTO( oBrw, nRec )
       oBrw:nCurrent := nRec
       GO carr_Get( oBrw:aArray, nRec )
    ENDIF
-RETURN Nil
+
+   RETURN NIL
 
 PROCEDURE FSKIP( oBrw, kolskip )
 
-LOCAL tekzp1
+   LOCAL tekzp1
 
    IF oBrw:nRecords == 0
+
       RETURN
    ENDIF
    tekzp1 := oBrw:nCurrent
@@ -213,10 +220,14 @@ LOCAL tekzp1
    ELSE
       GO carr_Get( oBrw:aArray, oBrw:nCurrent )
    ENDIF
-RETURN
+
+   RETURN
 
 FUNCTION FBof( oBrw )
-RETURN ( oBrw:nCurrent == 0 )
+
+   RETURN ( oBrw:nCurrent == 0 )
 
 FUNCTION FEof( oBrw )
-RETURN ( oBrw:nCurrent > oBrw:nRecords )
+
+   RETURN ( oBrw:nCurrent > oBrw:nRecords )
+

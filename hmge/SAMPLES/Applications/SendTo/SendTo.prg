@@ -81,3 +81,4 @@ HB_FUNC ( OPENSENDTOFOLDER )
 }
 
 #pragma ENDDUMP
+

@@ -1,12 +1,10 @@
 
 /*
- *$Id: hedit.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HEdit class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+*$Id: hedit.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HEdit class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 STATIC lColorinFocus := .F.
@@ -21,7 +19,7 @@ STATIC bDisablecolor :=  Nil
 #include "hblang.ch"
 #include "guilib.ch"
 #ifdef __XHARBOUR__
-   #xtranslate hb_RAScan([<x,...>])        => RAScan(<x>)
+#xtranslate hb_RAScan([<x,...>])        => RAScan(<x>)
 #endif
 
 #define VK_C  67
@@ -30,7 +28,8 @@ STATIC bDisablecolor :=  Nil
 
 CLASS HEdit INHERIT HControl
 
-   CLASS VAR winclass   INIT "EDIT"
+CLASS VAR winclass   INIT "EDIT"
+
    DATA tColorOld, bColorOld
    DATA lMultiLine   INIT .F.
    DATA lWantReturn  INIT .F.  HIDDEN
@@ -52,43 +51,72 @@ CLASS HEdit INHERIT HControl
    DATA cSelText   INIT "" HIDDEN
    DATA nSelLength INIT 0 HIDDEN
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, ;
       lNoBorder, nMaxLength, lPassword, bKeyDown, bChange, bOther )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
+
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
       bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange )
-   METHOD Init()
-   METHOD SetGet( value ) INLINE Eval( ::bSetGet, value, Self )
-   METHOD Refresh()
-   METHOD SetText( c )
-   METHOD ParsePict( cPicture, vari )
 
-   METHOD VarPut( value ) INLINE ::SetGet( value )
-   METHOD VarGet() INLINE ::SetGet()
+METHOD Init()
 
-   METHOD IsEditable( nPos, lDel ) PROTECTED
-   METHOD KeyRight( nPos ) PROTECTED
-   METHOD KeyLeft( nPos ) PROTECTED
-   METHOD DeleteChar( lBack ) PROTECTED
-   METHOD INPUT( cChar, nPos ) PROTECTED
-   METHOD GetApplyKey( cKey ) PROTECTED
-   METHOD Valid() //PROTECTED BECAUSE IS CALL IN HDIALOG
-   METHOD When() //PROTECTED
-   METHOD onChange( lForce ) //PROTECTED
-   METHOD IsBadDate( cBuffer ) PROTECTED
-   METHOD Untransform( cBuffer ) PROTECTED
-   METHOD FirstEditable() PROTECTED
-   METHOD FirstNotEditable( nPos ) PROTECTED
-   METHOD LastEditable() PROTECTED
-   METHOD SetGetUpdated() PROTECTED
-   METHOD ReadOnly( lreadOnly ) SETGET
-   METHOD SelLength( Length ) SETGET
-   METHOD SelStart( Start ) SETGET
-   METHOD SelText( cText ) SETGET
-   METHOD Value ( Value ) SETGET
-   METHOD SetCueBanner ( cText, lshowFoco )
+METHOD SetGet( value ) INLINE Eval( ::bSetGet, value, Self )
+
+METHOD Refresh()
+
+METHOD SetText( c )
+
+METHOD ParsePict( cPicture, vari )
+
+METHOD VarPut( value ) INLINE ::SetGet( value )
+
+METHOD VarGet() INLINE ::SetGet()
+
+METHOD IsEditable( nPos, lDel ) PROTECTED
+
+METHOD KeyRight( nPos ) PROTECTED
+
+METHOD KeyLeft( nPos ) PROTECTED
+
+METHOD DeleteChar( lBack ) PROTECTED
+
+METHOD INPUT( cChar, nPos ) PROTECTED
+
+METHOD GetApplyKey( cKey ) PROTECTED
+
+METHOD Valid() //PROTECTED BECAUSE IS CALL IN HDIALOG
+
+METHOD When() //PROTECTED
+
+METHOD onChange( lForce ) //PROTECTED
+
+METHOD IsBadDate( cBuffer ) PROTECTED
+
+METHOD Untransform( cBuffer ) PROTECTED
+
+METHOD FirstEditable() PROTECTED
+
+METHOD FirstNotEditable( nPos ) PROTECTED
+
+METHOD LastEditable() PROTECTED
+
+METHOD SetGetUpdated() PROTECTED
+
+METHOD ReadOnly( lreadOnly ) SETGET
+
+METHOD SelLength( Length ) SETGET
+
+METHOD SelStart( Start ) SETGET
+
+METHOD SelText( cText ) SETGET
+
+METHOD Value ( Value ) SETGET
+
+METHOD SetCueBanner ( cText, lshowFoco )
 
 ENDCLASS
 
@@ -173,7 +201,7 @@ METHOD Activate() CLASS HEdit
       ::Init()
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Init()  CLASS HEdit
 
@@ -186,15 +214,17 @@ METHOD Init()  CLASS HEdit
       ::oParent:AddEvent( EN_CHANGE, Self, { | | ::onChange( ) }, , "onChange"  )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
+
    LOCAL oParent := ::oParent, nPos
    LOCAL nextHandle, nShiftAltCtrl, lRes
    LOCAL cClipboardText
 
    IF ::bOther != Nil
       IF Eval( ::bOther, Self, msg, wParam, lParam ) != - 1
+
          RETURN 0
       ENDIF
    ENDIF
@@ -203,10 +233,12 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
       IF ::bSetGet != Nil
          IF msg = WM_COPY .OR. msg = WM_CUT
             ::lcopy := .T.
+
             RETURN - 1
          ELSEIF ::lCopy .AND. ( msg = WM_MOUSELEAVE .OR. ( msg = WM_KEYUP .AND. ( wParam = VK_C .OR. wParam = VK_X ) ) )
             ::lcopy := .F.
             hwg_Copystringtoclipboard( ::UnTransform( hwg_Getclipboardtext() ) )
+
             RETURN - 1
          ELSEIF msg = WM_PASTE .AND. ! ::lNoPaste
             ::lFirst := iif( ::cType = "N" .AND. "E" $ ::cPicFunc, .T. , .F. )
@@ -221,6 +253,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                ::title := ::UnTransform( hwg_Getedittext( ::oParent:handle, ::id ) )
                hwg_Sendmessage(  ::handle, EM_SETSEL, nPos - 1 , nPos - 1 )
             ENDIF
+
             RETURN 0
          ELSEIF msg == WM_CHAR
             IF ! hwg_Checkbit( lParam, 32 ) .AND. ::bKeyDown != Nil .AND. ValType( ::bKeyDown ) == 'B'
@@ -231,6 +264,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                lRes := Eval( ::bKeyDown, Self, wParam, nShiftAltCtrl  )
                ::oparent:lSuspendMsgsHandling := .F.
                IF Empty( lRes )
+
                   RETURN 0
                ENDIF
             ENDIF
@@ -239,22 +273,27 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                ::lFocu := .F.
                ::SetGetUpdated()
                ::DeleteChar( .T. )
+
                RETURN 0
             ELSEIF wParam == VK_RETURN
                IF ! hwg_ProcOkCancel( Self, wParam, hwg_GetParentForm( Self ):Type >= WND_DLG_RESOURCE ) .AND. ;
                      ( hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE .OR. ;
                      ! hwg_GetParentForm( Self ):lModal )
                   hwg_GetSkip( oParent, ::handle, , 1 )
+
                   RETURN 0
                ELSEIF  hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE
+
                   RETURN 0
                ENDIF
+
                RETURN - 1
             ELSEIF wParam == VK_TAB
                IF ( hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE .OR. ;
                      ! hwg_GetParentForm( Self ):lModal )
                   //- hwg_GetSkip( oParent, ::handle, , iif( hwg_IsCtrlShift(.f., .t.), -1, 1) )
                ENDIF
+
                RETURN 0
             ELSEIF wParam == VK_ESCAPE
                oParent := hwg_GetParentForm( Self )
@@ -266,11 +305,12 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                IF ( oParent:Type < WND_DLG_RESOURCE .OR. ! oParent:lModal )
                   hwg_Setfocus( 0 )
                   hwg_ProcOkCancel( Self, VK_ESCAPE )
+
                   RETURN 0
                ENDIF
+
                RETURN 0
             ENDIF
-            //
             IF ::lFocu
                IF ::cType = "N" .AND. Set( _SET_INSERT )
                   ::lFirst := .T.
@@ -283,8 +323,8 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                ENDIF
                ::lFocu := .F.
             ENDIF
-            //
             IF ! hwg_IsCtrlShift( , .F. )
+
                RETURN ::GetApplyKey( Chr( wParam ) )
             ENDIF
 
@@ -298,33 +338,40 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                lRes := Eval( ::bKeyDown, Self, wParam, nShiftAltCtrl  )
                ::oparent:lSuspendMsgsHandling := .F.
                IF Empty( lRes )
+
                   RETURN 0
                ENDIF
             ENDIF
             IF wParam == 40 .AND. ::oUpDown != Nil // KeyDown
+
                RETURN - 1
             ELSEIF wParam == 40 //.OR. ( wParam == 399 .AND. ::oUpDown != Nil )   // KeyDown
                IF ! hwg_IsCtrlShift()
                   hwg_GetSkip( oParent, ::handle, , 1 )
+
                   RETURN 0
                ENDIF
             ELSEIF wParam == 38 .AND. ::oUpDown != Nil   // KeyUp
+
                RETURN - 1
             ELSEIF wParam == 38 //.OR.( wParam == 377 .AND. ::oUpDown != Nil )   // KeyUp
                IF ! hwg_IsCtrlShift()
                   hwg_GetSkip( oParent, ::handle, , - 1 )
+
                   RETURN 0
                ENDIF
             ELSEIF wParam == 39     // KeyRight
                ::lFocu := .F.
                IF ! hwg_IsCtrlShift()
                   ::lFirst := .F.
+
                   RETURN ::KeyRight()
                ENDIF
             ELSEIF wParam == 37     // KeyLeft
                ::lFocu := .F.
                IF ! hwg_IsCtrlShift()
                   ::lFirst := .F.
+
                   RETURN ::KeyLeft()
                ENDIF
             ELSEIF wParam == 35     // End
@@ -335,6 +382,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                      //nPos := Len( Trim( ::title ) )
                      nPos := Len( Trim( hwg_Getedittext( ::oParent:handle, ::id ) ) )
                      hwg_Sendmessage( ::handle, EM_SETSEL, nPos, nPos )
+
                      RETURN 0
                   ENDIF
                ENDIF
@@ -342,6 +390,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                ::lFocu := .F.
                IF ! hwg_IsCtrlShift()
                   hwg_Sendmessage( ::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1 )
+
                   RETURN 0
                ENDIF
             ELSEIF wParam == 45     // Insert
@@ -352,13 +401,16 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
                ::lFirst := .F.
                ::SetGetUpdated()
                ::DeleteChar( .F. )
+
                RETURN 0
             ELSEIF wParam == VK_TAB     // Tab
                hwg_GetSkip( oParent, ::handle, , ;
                   iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
+
                RETURN 0
             ELSEIF wParam == VK_RETURN  // Enter
                //hwg_GetSkip( oParent, ::handle, .T., 1 )
+
                RETURN 0
             ENDIF
             IF "K" $ ::cPicFunc .AND. ::lFocu  .AND. ! Empty( ::Title )
@@ -381,108 +433,121 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
          // no bsetget
          IF msg == WM_CHAR
             IF wParam == VK_TAB .OR. wParam == VK_ESCAPE .OR. wParam == VK_RETURN
+
                RETURN 0
             ENDIF
+
             RETURN - 1
          ELSEIF msg == WM_KEYDOWN
             IF wParam == VK_TAB .AND. hwg_GetParentForm( Self ):Type >= WND_DLG_RESOURCE    // Tab
-               nexthandle := hwg_Getnextdlgtabitem ( hwg_Getactivewindow(), hwg_Getfocus(), ;
-                  hwg_IsCtrlShift( .F. , .T. ) )
-               hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle, 1 )
-               RETURN 0
-            ELSEIF  ( wParam == VK_RETURN .OR. wParam == VK_ESCAPE ) .AND. hwg_ProcOkCancel( Self, wParam, hwg_GetParentForm( Self ):Type >= WND_DLG_RESOURCE )
-               RETURN - 1
-            ELSEIF ( wParam == VK_RETURN .OR. wParam == VK_TAB ) .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE
-               hwg_GetSkip( oParent, ::handle, , 1 )
+            NEXThandle := hwg_Getnextdlgtabitem ( hwg_Getactivewindow(), hwg_Getfocus(), ;
+               hwg_IsCtrlShift( .F. , .T. ) )
+            hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle, 1 )
 
-               RETURN 0
-            ENDIF
-         ENDIF
-      ENDIF
-      IF lColorinFocus
-         IF msg == WM_SETFOCUS
-            ::nSelStart := iif( Empty( ::title ), 0, ::nSelStart )
-            ::Setcolor( tColorSelect, bColorSelect )
-            hwg_Sendmessage( ::handle, EM_SETSEL, ::selStart, ::selStart ) // era -1
-         ELSEIF msg == WM_KILLFOCUS .AND. ! lPersistColorSelect
-            ::Setcolor( ::tcolorOld, ::bColorOld, .T. )
-            ::bColor := ::bColorOld
-            ::brush := iif( ::bColorOld = Nil, Nil, ::brush )
-            hwg_Sendmessage( ::handle, WM_MOUSEMOVE, 0, hwg_Makelparam( 1, 1 ) )
-         ENDIF
-      ENDIF
-      IF msg == WM_SETFOCUS
-         ::lFocu := .T.
-         ::lnoValid := .F.
-         IF "K" $ ::cPicFunc
-            hwg_Sendmessage( ::handle, EM_SETSEL, 0, - 1 )
-         ELSEIF ::selstart = 0 .AND. "R" $ ::cPicFunc
-            hwg_Sendmessage( ::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1 )
-         ENDIF
-         IF ::lPicComplex .AND. ::cType <> "N" .AND. ! ::lFirst
-            ::Title := Transform( ::Title, ::cPicFunc + " " + ::cPicMask )
-         ENDIF
-      ENDIF
-   ELSE
-      // multiline
-      IF msg = WM_SETFOCUS
-         hwg_Postmessage( ::handle, EM_SETSEL, 0, 0 )
-      ELSEIF msg == WM_MOUSEWHEEL
-         nPos := hwg_Hiword( wParam )
-         nPos := iif( nPos > 32768, nPos - 65535, nPos )
-         hwg_Sendmessage( ::handle, EM_SCROLL, iif( nPos > 0, SB_LINEUP, SB_LINEDOWN ), 0 )
-      ELSEIF msg == WM_CHAR
-         IF wParam == VK_TAB
-            hwg_GetSkip( oParent, ::handle, , ;
-               iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
             RETURN 0
-         ELSEIF wParam == VK_ESCAPE
-            RETURN 0
-         ELSEIF wParam == VK_RETURN .AND. ! ::lWantReturn .AND. ::bSetGet != Nil
-            hwg_GetSkip( oParent, ::handle, , 1 )
-            RETURN 0
-         ENDIF
-      ELSEIF msg == WM_KEYDOWN
-         IF wParam == VK_TAB     // Tab
-         ELSEIF wParam == VK_ESCAPE
+         ELSEIF  ( wParam == VK_RETURN .OR. wParam == VK_ESCAPE ) .AND. hwg_ProcOkCancel( Self, wParam, hwg_GetParentForm( Self ):Type >= WND_DLG_RESOURCE )
+
             RETURN - 1
-         ENDIF
-         IF ::bKeyDown != Nil .AND. ValType( ::bKeyDown ) == 'B'
-            IF !Eval( ::bKeyDown, Self, wParam )
-               RETURN 0
-            ENDIF
-         ENDIF
-      ENDIF
-      // END multiline
-   ENDIF
+         ELSEIF ( wParam == VK_RETURN .OR. wParam == VK_TAB ) .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE
+            hwg_GetSkip( oParent, ::handle, , 1 )
 
-   IF ( msg == WM_KEYUP .OR. msg == WM_SYSKEYUP ) .AND. wParam != VK_ESCAPE     /* BETTER FOR DESIGNER */
-      IF ! hwg_ProcKeyList( Self, wParam )
-         IF ::bKeyUp != Nil
-            IF !Eval( ::bKeyUp, Self, wParam )
-               RETURN - 1
-            ENDIF
+            RETURN 0
          ENDIF
       ENDIF
-      IF msg != WM_SYSKEYUP
+   ENDIF
+   IF lColorinFocus
+      IF msg == WM_SETFOCUS
+         ::nSelStart := iif( Empty( ::title ), 0, ::nSelStart )
+         ::Setcolor( tColorSelect, bColorSelect )
+         hwg_Sendmessage( ::handle, EM_SETSEL, ::selStart, ::selStart ) // era -1
+      ELSEIF msg == WM_KILLFOCUS .AND. ! lPersistColorSelect
+         ::Setcolor( ::tcolorOld, ::bColorOld, .T. )
+         ::bColor := ::bColorOld
+         ::brush := iif( ::bColorOld = Nil, Nil, ::brush )
+         hwg_Sendmessage( ::handle, WM_MOUSEMOVE, 0, hwg_Makelparam( 1, 1 ) )
+      ENDIF
+   ENDIF
+   IF msg == WM_SETFOCUS
+      ::lFocu := .T.
+      ::lnoValid := .F.
+      IF "K" $ ::cPicFunc
+         hwg_Sendmessage( ::handle, EM_SETSEL, 0, - 1 )
+      ELSEIF ::selstart = 0 .AND. "R" $ ::cPicFunc
+         hwg_Sendmessage( ::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1 )
+      ENDIF
+      IF ::lPicComplex .AND. ::cType <> "N" .AND. ! ::lFirst
+         ::Title := Transform( ::Title, ::cPicFunc + " " + ::cPicMask )
+      ENDIF
+   ENDIF
+ELSE
+   // multiline
+   IF msg = WM_SETFOCUS
+      hwg_Postmessage( ::handle, EM_SETSEL, 0, 0 )
+   ELSEIF msg == WM_MOUSEWHEEL
+      nPos := hwg_Hiword( wParam )
+      nPos := iif( nPos > 32768, nPos - 65535, nPos )
+      hwg_Sendmessage( ::handle, EM_SCROLL, iif( nPos > 0, SB_LINEUP, SB_LINEDOWN ), 0 )
+   ELSEIF msg == WM_CHAR
+      IF wParam == VK_TAB
+         hwg_GetSkip( oParent, ::handle, , ;
+            iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
+
+         RETURN 0
+      ELSEIF wParam == VK_ESCAPE
+
+         RETURN 0
+      ELSEIF wParam == VK_RETURN .AND. ! ::lWantReturn .AND. ::bSetGet != Nil
+         hwg_GetSkip( oParent, ::handle, , 1 )
+
          RETURN 0
       ENDIF
+   ELSEIF msg == WM_KEYDOWN
+      IF wParam == VK_TAB     // Tab
+      ELSEIF wParam == VK_ESCAPE
 
-   ELSEIF msg == WM_GETDLGCODE
-      IF wParam = VK_ESCAPE   .AND. ;          // DIALOG MODAL
-            ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != Nil .AND. ! oParent:IsEnabled()
-         RETURN DLGC_WANTMESSAGE
+         RETURN - 1
       ENDIF
-      IF ! ::lMultiLine .OR. wParam = VK_ESCAPE
-         IF ::bSetGet != Nil
-            RETURN DLGC_WANTARROWS + DLGC_WANTTAB + DLGC_WANTCHARS
+      IF ::bKeyDown != Nil .AND. ValType( ::bKeyDown ) == 'B'
+         IF !Eval( ::bKeyDown, Self, wParam )
+
+            RETURN 0
          ENDIF
       ENDIF
-   ELSEIF msg == WM_DESTROY
-      ::END()
+   ENDIF
+   // END multiline
+ENDIF
+
+IF ( msg == WM_KEYUP .OR. msg == WM_SYSKEYUP ) .AND. wParam != VK_ESCAPE     /* BETTER FOR DESIGNER */
+   IF ! hwg_ProcKeyList( Self, wParam )
+      IF ::bKeyUp != Nil
+         IF !Eval( ::bKeyUp, Self, wParam )
+
+            RETURN - 1
+         ENDIF
+      ENDIF
+   ENDIF
+   IF msg != WM_SYSKEYUP
+
+      RETURN 0
    ENDIF
 
-   RETURN - 1
+ELSEIF msg == WM_GETDLGCODE
+   IF wParam = VK_ESCAPE   .AND. ;          // DIALOG MODAL
+      ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != Nil .AND. ! oParent:IsEnabled()
+
+      RETURN DLGC_WANTMESSAGE
+   ENDIF
+   IF ! ::lMultiLine .OR. wParam = VK_ESCAPE
+      IF ::bSetGet != Nil
+
+         RETURN DLGC_WANTARROWS + DLGC_WANTTAB + DLGC_WANTCHARS
+      ENDIF
+   ENDIF
+ELSEIF msg == WM_DESTROY
+   ::END()
+ENDIF
+
+RETURN - 1
 
 METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
       bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange )  CLASS HEdit
@@ -528,6 +593,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
    RETURN Self
 
 METHOD Value( Value )  CLASS HEdit
+
    LOCAL vari
 
    IF Value != Nil
@@ -543,6 +609,7 @@ METHOD Value( Value )  CLASS HEdit
    RETURN vari
 
 METHOD Refresh()  CLASS HEdit
+
    LOCAL vari
 
    IF ::bSetGet != Nil
@@ -561,14 +628,15 @@ METHOD Refresh()  CLASS HEdit
       hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE + RDW_FRAME + RDW_UPDATENOW ) //+ RDW_NOCHILDREN )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetText( c ) CLASS HEdit
 
    IF c != Nil
       IF ValType( c ) = "O"
          //in run time return object
-         RETURN nil
+
+         RETURN NIL
       ENDIF
       IF ! Empty( ::cPicFunc ) .OR. ! Empty( ::cPicMask )
          ::title := Transform( c, ::cPicFunc + iif( Empty( ::cPicFunc ), "", " " ) + ::cPicMask )
@@ -594,15 +662,17 @@ FUNCTION hwg_IsCtrlShift( lCtrl, lShift )
    IF lShift == Nil ; lShift := .T. ; ENDIF
 
    RETURN ( lCtrl .AND. ( Asc( SubStr( cKeyb, VK_CONTROL + 1, 1 ) ) >= 128 ) ) .OR. ;
-      ( lShift .AND. ( Asc( SubStr( cKeyb, VK_SHIFT + 1, 1 ) ) >= 128 ) )
+         ( lShift .AND. ( Asc( SubStr( cKeyb, VK_SHIFT + 1, 1 ) ) >= 128 ) )
 
 METHOD ParsePict( cPicture, vari ) CLASS HEdit
+
    LOCAL nAt, i, masklen, cChar
 
    ::cPicture := cPicture
    ::cPicFunc := ::cPicMask := ""
    IF ::bSetGet == Nil
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    IF cPicture != Nil
@@ -655,32 +725,40 @@ METHOD ParsePict( cPicture, vari ) CLASS HEdit
       hwg_Setdlgitemtext( ::oParent:handle, ::id, ::title )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD IsEditable( nPos, lDel ) CLASS HEdit
+
    LOCAL cChar
 
    IF Empty( ::cPicMask )
+
       RETURN .T.
    ENDIF
    IF nPos > Len( ::cPicMask )
+
       RETURN .F.
    ENDIF
 
    cChar := SubStr( ::cPicMask, nPos, 1 )
    IF ::cType == "C"
+
       RETURN cChar $ "!ANX9#"
    ELSEIF ::cType == "N"       // nando add
+
       RETURN cChar $ "9#$*Z" + iif( !Empty( lDel ), iif( "E" $ ::cPicFunc, ",", "" ), "" )
    ELSEIF ::cType == "D"
+
       RETURN cChar == "9"
    ELSEIF ::cType == "L"
+
       RETURN cChar $ "TFYN"
    ENDIF
 
    RETURN .F.
 
 METHOD KeyRight( nPos ) CLASS HEdit
+
    LOCAL masklen, newpos
 
    IF nPos == Nil
@@ -734,6 +812,7 @@ METHOD KeyLeft( nPos ) CLASS HEdit
    RETURN 0
 
 METHOD DeleteChar( lBack ) CLASS HEdit
+
    LOCAL nSel := hwg_Sendmessage( ::handle, EM_GETSEL, 0, 0 )
    LOCAL nPosEnd   := hwg_Hiword( nSel )
    LOCAL nPosStart := hwg_Loword( nSel )
@@ -741,7 +820,8 @@ METHOD DeleteChar( lBack ) CLASS HEdit
    LOCAL cBuf, nPosEdit
 
    IF Hwg_BitAnd( hwg_Getwindowlong( ::handle, GWL_STYLE ), ES_READONLY ) != 0
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    IF nGetLen == 0
       nGetLen := Len( ::title )
@@ -760,7 +840,8 @@ METHOD DeleteChar( lBack ) CLASS HEdit
          nPosStart -= iif( ::cType <> "N", 1, 0 )
          IF nPosStart < 0
             hwg_Sendmessage( ::handle, EM_SETSEL, ::FirstEditable() - 1, ::FirstEditable() - 1 )
-            RETURN Nil
+
+            RETURN NIL
          ENDIF
       ENDIF
       IF  ::lPicComplex .AND. ::cType <> "N" .AND. ::FirstNotEditable( nPosStart ) > 0 .AND. ;
@@ -812,34 +893,40 @@ METHOD DeleteChar( lBack ) CLASS HEdit
    hwg_Setdlgitemtext( ::oParent:handle, ::id, ::title )
    hwg_Sendmessage( ::handle, EM_SETSEL, nPosStart, nPosStart )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD INPUT( cChar, nPos ) CLASS HEdit
+
    LOCAL cPic
 
    IF ! Empty( ::cPicMask ) .AND. nPos > Len( ::cPicMask )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    IF ::cType == "N"
       IF cChar == "-"
          IF nPos != 1
-            RETURN Nil
+
+            RETURN NIL
          ENDIF
          ::lFirst := .F.
       ELSEIF ! ( cChar $ "0123456789" )
-         RETURN Nil
+
+         RETURN NIL
       ENDIF
 
    ELSEIF ::cType == "D"
 
       IF ! ( cChar $ "0123456789" )
-         RETURN Nil
+
+         RETURN NIL
       ENDIF
 
    ELSEIF ::cType == "L"
 
       IF ! ( Upper( cChar ) $ "YNTF" )
-         RETURN Nil
+
+         RETURN NIL
       ENDIF
 
    ENDIF
@@ -876,11 +963,13 @@ METHOD INPUT( cChar, nPos ) CLASS HEdit
    RETURN cChar
 
 METHOD GetApplyKey( cKey ) CLASS HEdit
+
    LOCAL nPos, nGetLen, nLen, vari, i, x, newPos
    LOCAL nDecimals, lSignal := .F.
 
    /* AJ: 11-03-2007 */
    IF Hwg_BitAnd( hwg_Getwindowlong( ::handle, GWL_STYLE ), ES_READONLY ) != 0
+
       RETURN 0
    ENDIF
 
@@ -1013,6 +1102,7 @@ METHOD ReadOnly( lreadOnly )
    RETURN ::lReadOnly
 
 METHOD SelStart( Start ) CLASS HEdit
+
    LOCAL nPos
 
    IF Start != Nil
@@ -1053,7 +1143,7 @@ METHOD SelText( cText ) CLASS HEdit
 
 METHOD SetCueBanner( cText, lShowFoco ) CLASS HEdit
 
-#define EM_SETCUEBANNER 0x1501
+   #define EM_SETCUEBANNER 0x1501
    LOCAL lRet := .F.
 
    IF ! ::lMultiLine
@@ -1064,9 +1154,11 @@ METHOD SetCueBanner( cText, lShowFoco ) CLASS HEdit
    RETURN lRet
 
 METHOD When() CLASS HEdit
+
    LOCAL res := .T. , nSkip, vari
 
    IF ! hwg_CheckFocus( Self, .F. )
+
       RETURN .F.
    ENDIF
 
@@ -1097,9 +1189,11 @@ METHOD When() CLASS HEdit
    RETURN res
 
 METHOD Valid( ) CLASS HEdit
+
    LOCAL res := .T. , vari, oDlg
 
    IF ( ! hwg_CheckFocus( Self, .T. ) .OR. ::lNoValid ) .AND. ::bLostFocus != Nil
+
       RETURN .T.
    ENDIF
    IF ::bSetGet != Nil
@@ -1112,6 +1206,7 @@ METHOD Valid( ) CLASS HEdit
                ::Setfocus( .T. )
                hwg_Msgbeep()
                hwg_Sendmessage( ::handle, EM_SETSEL, 0, 0 )
+
                RETURN .F.
             ENDIF
             vari := CToD( vari )
@@ -1149,6 +1244,7 @@ METHOD Valid( ) CLASS HEdit
                ENDIF
                ::Setfocus( .T. )
                ::oparent:lSuspendMsgsHandling := .F.
+
                RETURN .F.
             ENDIF
             IF Empty( hwg_Getfocus() )
@@ -1175,6 +1271,7 @@ METHOD Valid( ) CLASS HEdit
          IF ! res
             ::Setfocus()
             ::oparent:lSuspendMsgsHandling := .F.
+
             RETURN .F.
          ENDIF
          IF Empty( hwg_Getfocus() )
@@ -1191,7 +1288,8 @@ METHOD onChange( lForce ) CLASS HEdit
    LOCAL vari
 
    IF ! hwg_Selffocus( ::handle ) .AND. Empty( lForce )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    vari := ::Value( )
    IF ::bSetGet != Nil
@@ -1203,9 +1301,10 @@ METHOD onChange( lForce ) CLASS HEdit
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Untransform( cBuffer ) CLASS HEdit
+
    LOCAL xValue, cChar, nFor, minus
 
    IF ::cType == "C"
@@ -1299,14 +1398,17 @@ METHOD Untransform( cBuffer ) CLASS HEdit
    RETURN xValue
 
 METHOD FirstEditable( ) CLASS HEdit
+
    LOCAL nFor, nMaxLen := Len( ::cPicMask )
 
    IF ::IsEditable( 1 )
+
       RETURN 1
    ENDIF
 
    FOR nFor := 2 TO nMaxLen
       IF ::IsEditable( nFor )
+
          RETURN nFor
       ENDIF
    NEXT
@@ -1314,10 +1416,12 @@ METHOD FirstEditable( ) CLASS HEdit
    RETURN 0
 
 METHOD FirstNotEditable( nPos ) CLASS HEdit
+
    LOCAL nFor, nMaxLen := Len( ::cPicMask )
 
    FOR nFor := ++ nPos TO nMaxLen
       IF ! ::IsEditable( nFor )
+
          RETURN nFor
       ENDIF
    NEXT
@@ -1325,10 +1429,12 @@ METHOD FirstNotEditable( nPos ) CLASS HEdit
    RETURN 0
 
 METHOD LastEditable() CLASS HEdit
+
    LOCAL nFor, nMaxLen := Len( ::cPicMask )
 
    FOR nFor := nMaxLen TO 1 STEP - 1
       IF ::IsEditable( nFor )
+
          RETURN nFor
       ENDIF
    NEXT
@@ -1336,14 +1442,17 @@ METHOD LastEditable() CLASS HEdit
    RETURN 0
 
 METHOD IsBadDate( cBuffer ) CLASS HEdit
+
    LOCAL i, nLen
 
    IF ! Empty( CToD( cBuffer ) )
+
       RETURN .F.
    ENDIF
    nLen := Len( cBuffer )
    FOR i := 1 TO nLen
       IF IsDigit( SubStr( cBuffer, i, 1 ) )
+
          RETURN .T.
       ENDIF
    NEXT
@@ -1359,7 +1468,7 @@ METHOD SetGetUpdated() CLASS HEdit
       oParent:lUpdated := .T.
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION hwg_CreateGetList( oDlg, oCnt )
 
@@ -1390,66 +1499,68 @@ FUNCTION hwg_GetSkip( oParent, hCtrl, lClipper, nSkip )
 
    DEFAULT nSkip := 1
    IF oParent == Nil .OR. ( lClipper != Nil .AND. lClipper .AND. ! oForm:lClipper )
+
       RETURN .F.
    ENDIF
    i := AScan( oParent:acontrols, { | o | hwg_Ptrtoulong( o:handle ) == hwg_Ptrtoulong( hCtrl ) } )
    oCtrl := iif( i > 0, oParent:acontrols[ i ], oParent )
 
    IF nSkip != 0
-      nextHandle := iif( oParent:className == "HTAB", NextFocusTab( oParent, hCtrl, nSkip ), ;
-         iif( oParent:className == oForm:ClassName, NextFocus( oParent, hCtrl, nSkip ), ;
-         NextFocuscontainer( oParent, hCtrl, nSkip ) ) )
+   NEXTHandle := iif( oParent:className == "HTAB", NextFocusTab( oParent, hCtrl, nSkip ), ;
+      iif( oParent:className == oForm:ClassName, NextFocus( oParent, hCtrl, nSkip ), ;
+   NEXTFocuscontainer( oParent, hCtrl, nSkip ) ) )
+ELSE
+NEXTHandle := hCtrl
+ENDIF
+
+IF i > 0
+   oCtrl:nGetSkip := nSkip
+   oCtrl:oParent:lGetSkipLostFocus := .T.
+ENDIF
+IF ! Empty( nextHandle )
+   IF oForm:classname == oParent:classname  .OR. oParent:className != "HTAB"
+      IF oParent:Type = Nil .OR. oParent:Type < WND_DLG_RESOURCE
+         hwg_Setfocus( nextHandle )
+      ELSE
+         hwg_Postmessage( oParent:handle, WM_NEXTDLGCTL, nextHandle , 1 )
+      ENDIF
    ELSE
-      nextHandle := hCtrl
-   ENDIF
-
-   IF i > 0
-      oCtrl:nGetSkip := nSkip
-      oCtrl:oParent:lGetSkipLostFocus := .T.
-   ENDIF
-   IF ! Empty( nextHandle )
-      IF oForm:classname == oParent:classname  .OR. oParent:className != "HTAB"
-         IF oParent:Type = Nil .OR. oParent:Type < WND_DLG_RESOURCE
-            hwg_Setfocus( nextHandle )
-         ELSE
-            hwg_Postmessage( oParent:handle, WM_NEXTDLGCTL, nextHandle , 1 )
-         ENDIF
+      IF oForm:Type < WND_DLG_RESOURCE .AND. hwg_Ptrtoulong( oParent:handle ) = hwg_Ptrtoulong( hwg_Getfocus() ) //oParent:oParent:Type < WND_DLG_RESOURCE
+         hwg_Setfocus( nextHandle )
+      ELSEIF hwg_Ptrtoulong( oParent:handle ) = hwg_Ptrtoulong( hwg_Getfocus() )
+         hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle , 1 )
       ELSE
-         IF oForm:Type < WND_DLG_RESOURCE .AND. hwg_Ptrtoulong( oParent:handle ) = hwg_Ptrtoulong( hwg_Getfocus() ) //oParent:oParent:Type < WND_DLG_RESOURCE
-            hwg_Setfocus( nextHandle )
-         ELSEIF hwg_Ptrtoulong( oParent:handle ) = hwg_Ptrtoulong( hwg_Getfocus() )
-            hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle , 1 )
-         ELSE
-            hwg_Postmessage( oParent:handle, WM_NEXTDLGCTL, nextHandle , 1 )
-         ENDIF
-      ENDIF
-      IF oForm:Type < WND_DLG_RESOURCE
-         oForm:nFocus := NextHandle
-      ENDIF
-      IF  oParent:nScrollBars > - 1  .OR. oForm:nScrollBars > - 1
-         oForm := iif( oParent:nScrollBars > - 1, oParent, oForm )
-         IF ( i := AScan( oparent:acontrols, { | o | o:handle == NEXTHANDLE } ) ) = 0 .AND.  oParent:oParent != Nil
-            i := AScan( oParent:oParent:acontrols, { | o | o:handle == NEXTHANDLE } )
-            oCtrl := iif( i > 0, oParent:oParent:aControls[i], oParent )
-         ELSE
-            oCtrl := iif( i > 0, oParent:aControls[i], oParent )
-         ENDIF
-         GetSkipScroll( oForm, oCtrl )
+         hwg_Postmessage( oParent:handle, WM_NEXTDLGCTL, nextHandle , 1 )
       ENDIF
    ENDIF
-   IF nSkip != 0 .AND. hwg_Selffocus( hctrl, nextHandle ) .AND. oCtrl != Nil
-      // necessary when FORM have only one object and ! CLIPPER
-      IF  __ObjHasMsg( oCtrl, "BLOSTFOCUS" ) .AND. oCtrl:blostfocus != Nil .AND. ! oForm:lClipper
-         hwg_Sendmessage( nexthandle, WM_KILLFOCUS, 0,  0 )
+   IF oForm:Type < WND_DLG_RESOURCE
+      oForm:nFocus := NextHandle
+   ENDIF
+   IF  oParent:nScrollBars > - 1  .OR. oForm:nScrollBars > - 1
+      oForm := iif( oParent:nScrollBars > - 1, oParent, oForm )
+      IF ( i := AScan( oparent:acontrols, { | o | o:handle == NEXTHANDLE } ) ) = 0 .AND.  oParent:oParent != Nil
+         i := AScan( oParent:oParent:acontrols, { | o | o:handle == NEXTHANDLE } )
+         oCtrl := iif( i > 0, oParent:oParent:aControls[i], oParent )
       ELSE
-         hwg_Setfocus( 0 )
-         oCtrl:Setfocus( )
+         oCtrl := iif( i > 0, oParent:aControls[i], oParent )
       ENDIF
+      GetSkipScroll( oForm, oCtrl )
    ENDIF
+ENDIF
+IF nSkip != 0 .AND. hwg_Selffocus( hctrl, nextHandle ) .AND. oCtrl != Nil
+   // necessary when FORM have only one object and ! CLIPPER
+   IF  __ObjHasMsg( oCtrl, "BLOSTFOCUS" ) .AND. oCtrl:blostfocus != Nil .AND. ! oForm:lClipper
+      hwg_Sendmessage( nexthandle, WM_KILLFOCUS, 0,  0 )
+   ELSE
+      hwg_Setfocus( 0 )
+      oCtrl:Setfocus( )
+   ENDIF
+ENDIF
 
-   RETURN .T.
+RETURN .T.
 
 STATIC FUNCTION GetSkipScroll( oForm, oCtrl )
+
    LOCAL lScroll := .T.
    LOCAL nWidthScroll := 2
 
@@ -1503,9 +1614,10 @@ STATIC FUNCTION GetSkipScroll( oForm, oCtrl )
       ENDDO
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 STATIC FUNCTION NextFocusTab( oParent, hCtrl, nSkip )
+
    LOCAL nextHandle := NIL, i, nPage, nFirst , nLast , k := 0
 
    IF Len( oParent:aPages ) > 0
@@ -1515,43 +1627,47 @@ STATIC FUNCTION NextFocusTab( oParent, hCtrl, nSkip )
          i :=  AScan( oParent:acontrols, { | o | o:handle == hCtrl } )
          i += iif( i == 0, nFirst, nSkip ) //nLast, nSkip)
          IF i >= nFirst .AND. i <= nLast
-            nextHandle := hwg_Getnextdlgtabitem ( oParent:handle , hCtrl, ( nSkip < 0 ) )
-            IF  i != AScan( oParent:aControls, { | o | o:handle == nextHandle } ) .AND. oParent:aControls[ i ]:CLASSNAME = "HRADIOB"
-               nextHandle := hwg_Getnextdlggroupitem( oParent:handle , hCtrl, ( nSkip < 0 ) )
-            ENDIF
-            k := AScan( oParent:acontrols, { | o | o:Handle == nextHandle } )
-            IF Len( oParent:aControls[ k ]:aControls ) > 0 .AND. hCtrl != nextHandle .AND. oParent:aControls[ k ]:classname != "HTAB"
-               nextHandle := NextFocusContainer( oParent:aControls[ k ], oParent:aControls[ k ]:Handle, nSkip )
-               RETURN iif( !Empty( nextHandle ), nextHandle, NextFocusTab( oParent, oParent:aControls[ k ]:Handle, nSkip ) )
-            ENDIF
-         ENDIF
-      ELSE
-         hwg_Setfocus( oParent:aPages[ nPage, 1 ]:aControls[ 1 ]:Handle )
-         RETURN 0
+         NEXTHandle := hwg_Getnextdlgtabitem ( oParent:handle , hCtrl, ( nSkip < 0 ) )
+         IF  i != AScan( oParent:aControls, { | o | o:handle == nextHandle } ) .AND. oParent:aControls[ i ]:CLASSNAME = "HRADIOB"
+         NEXTHandle := hwg_Getnextdlggroupitem( oParent:handle , hCtrl, ( nSkip < 0 ) )
       ENDIF
-      IF ( nSkip < 0 .AND. ( k > i .OR. k == 0 ) ) .OR. ( nSkip > 0 .AND. i > k )
-         IF oParent:oParent:classname = "HTAB" .AND. oParent:oParent:classname != oParent:classname
-            NextFocusTab( oParent:oParent, nextHandle, nSkip )
-         ENDIF
-         IF Type( "oParent:oParent:Type" ) = "N" .AND. oParent:oParent:Type < WND_DLG_RESOURCE
-            nextHandle := hwg_Getnextdlgtabitem ( oParent:oParent:handle , hctrl, ( nSkip < 0 ) )
-         ELSE
-            nextHandle := hwg_Getnextdlgtabitem ( hwg_Getactivewindow(), hCtrl, ( nSkip < 0 ) )
-         ENDIF
-         IF AScan( oParent:oParent:acontrols, { | o | o:handle == hCtrl } ) = 0
-            RETURN iif( nSkip > 0, NextFocus( oParent:oParent, oParent:Handle, nSkip ), oParent:Handle )
-         ELSE
-            hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle , 1 )
-         ENDIF
-         IF !Empty( nextHandle ) .AND. Hwg_BitaND( HWG_GETWINDOWSTYLE( nextHandle ), WS_TABSTOP ) = 0
-            NextFocusTab( oParent, nextHandle, nSkip )
-         ENDIF
-      ENDIF
-   ENDIF
+      k := AScan( oParent:acontrols, { | o | o:Handle == nextHandle } )
+      IF Len( oParent:aControls[ k ]:aControls ) > 0 .AND. hCtrl != nextHandle .AND. oParent:aControls[ k ]:classname != "HTAB"
+      NEXTHandle := NextFocusContainer( oParent:aControls[ k ], oParent:aControls[ k ]:Handle, nSkip )
 
-   RETURN nextHandle
+      RETURN iif( !Empty( nextHandle ), nextHandle, NextFocusTab( oParent, oParent:aControls[ k ]:Handle, nSkip ) )
+   ENDIF
+ENDIF
+ELSE
+hwg_Setfocus( oParent:aPages[ nPage, 1 ]:aControls[ 1 ]:Handle )
+
+RETURN 0
+ENDIF
+IF ( nSkip < 0 .AND. ( k > i .OR. k == 0 ) ) .OR. ( nSkip > 0 .AND. i > k )
+   IF oParent:oParent:classname = "HTAB" .AND. oParent:oParent:classname != oParent:classname
+   NEXTFocusTab( oParent:oParent, nextHandle, nSkip )
+ENDIF
+IF Type( "oParent:oParent:Type" ) = "N" .AND. oParent:oParent:Type < WND_DLG_RESOURCE
+NEXTHandle := hwg_Getnextdlgtabitem ( oParent:oParent:handle , hctrl, ( nSkip < 0 ) )
+ELSE
+NEXTHandle := hwg_Getnextdlgtabitem ( hwg_Getactivewindow(), hCtrl, ( nSkip < 0 ) )
+ENDIF
+IF AScan( oParent:oParent:acontrols, { | o | o:handle == hCtrl } ) = 0
+
+   RETURN iif( nSkip > 0, NextFocus( oParent:oParent, oParent:Handle, nSkip ), oParent:Handle )
+ELSE
+   hwg_Postmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, nextHandle , 1 )
+ENDIF
+IF !Empty( nextHandle ) .AND. Hwg_BitaND( HWG_GETWINDOWSTYLE( nextHandle ), WS_TABSTOP ) = 0
+NEXTFocusTab( oParent, nextHandle, nSkip )
+ENDIF
+ENDIF
+ENDIF
+
+RETURN nextHandle
 
 STATIC FUNCTION NextFocus( oParent, hCtrl, nSkip )
+
    LOCAL nextHandle := 0,  i, nWindow
    LOCAL lGroup := Hwg_BitAND( HWG_GETWINDOWSTYLE(  hctrl ), WS_GROUP ) != 0
    LOCAL lHradio
@@ -1563,21 +1679,22 @@ STATIC FUNCTION NextFocus( oParent, hCtrl, nSkip )
    i := AScan( oparent:acontrols, { | o | hwg_Selffocus( o:Handle, hCtrl ) } )
    IF i > 0 .AND. Len( oParent:acontrols[ i ]:aControls ) > 0 .AND. ;
          oParent:aControls[ i ]:className != "HTAB" .AND. ( hwg_Ptrtoulong( hCtrl ) != hwg_Ptrtoulong( nextHandle ) )
-      nextHandle := NextFocusContainer( oParent:aControls[ i ], hCtrl , nSkip )
+      NEXTHandle := NextFocusContainer( oParent:aControls[ i ], hCtrl , nSkip )
       IF !Empty( nextHandle  )
+
          RETURN nextHandle
       ENDIF
    ENDIF
    lHradio :=  i > 0 .AND. oParent:acontrols[ i ]:CLASSNAME = "HRADIOB"
-   nextHandle := hwg_Getnextdlgtabitem( nWindow , hctrl, ( nSkip < 0 ) )
+   NEXTHandle := hwg_Getnextdlgtabitem( nWindow , hctrl, ( nSkip < 0 ) )
    IF  lHradio .OR.  lGroup
-      nexthandle := hwg_Getnextdlggroupitem( nWindow , hctrl, ( nSkip < 0 ) )
+      NEXThandle := hwg_Getnextdlggroupitem( nWindow , hctrl, ( nSkip < 0 ) )
       i := AScan( oParent:aControls, { | o | hwg_Ptrtoulong( o:Handle ) == hwg_Ptrtoulong( nextHandle ) } )
       lnoTabStop := !( i > 0 .AND. oParent:aControls[ i ]:CLASSNAME = "HRADIOB" )
    ENDIF
 
    IF ( lGroup .AND. nSkip < 0 ) .OR. lnoTabStop
-      nextHandle := hwg_Getnextdlgtabitem ( nWindow , hCtrl, ( nSkip < 0 ) )
+      NEXTHandle := hwg_Getnextdlgtabitem ( nWindow , hCtrl, ( nSkip < 0 ) )
       lnoTabStop :=  Hwg_BitaND( HWG_GETWINDOWSTYLE( nexthandle ), WS_TABSTOP ) = 0
    ELSE
       lnoTabStop := .F.
@@ -1586,12 +1703,14 @@ STATIC FUNCTION NextFocus( oParent, hCtrl, nSkip )
 
    IF ( lnoTabStop .AND. i > 0 .AND. !hwg_Selffocus( hCtrl, NextHandle ) ) .OR. ( i > 0 .AND. i <= Len( oParent:aControls ) .AND. ;
          oparent:acontrols[ i ]:classname = "HGROUP" ) .OR. ( i = 0 .AND. !Empty( nextHandle ) )
+
       RETURN NextFocus( oParent, nextHandle, nSkip )
    ENDIF
 
    RETURN nextHandle
 
 STATIC FUNCTION NextFocusContainer( oParent, hCtrl, nSkip )
+
    LOCAL nextHandle := NIL,  i, i2, nWindow
    LOCAL lGroup := Hwg_BitAND( HWG_GETWINDOWSTYLE(  hctrl ), WS_GROUP ) != 0
    LOCAL lHradio
@@ -1599,22 +1718,23 @@ STATIC FUNCTION NextFocusContainer( oParent, hCtrl, nSkip )
 
    AEval( oParent:aControls, { | o | iif( Hwg_BitAND( HWG_GETWINDOWSTYLE(  o:handle ), WS_TABSTOP ) != 0, lnoTabStop := .T. , .T. ) } )
    IF !lnoTabStop .OR. Empty( hCtrl )
-      RETURN nil //nexthandle
+
+      RETURN NIL //nexthandle
    ENDIF
    nWindow := oParent:handle
    i := AScan( oparent:acontrols, { | o | hwg_Ptrtoulong( o:handle ) == hwg_Ptrtoulong( hCtrl ) } )
    lHradio :=  i > 0 .AND. oParent:acontrols[ i ]:CLASSNAME = "HRADIOB"
    // TABs DO resource
    IF oParent:Type = WND_DLG_RESOURCE
-      nexthandle := hwg_Getnextdlggroupitem( oParent:handle , hctrl, ( nSkip < 0 ) )
+      NEXThandle := hwg_Getnextdlggroupitem( oParent:handle , hctrl, ( nSkip < 0 ) )
    ELSE
       IF  lHradio .OR. lGroup
-         nextHandle := hwg_Getnextdlggroupitem( nWindow , hCtrl, ( nSkip < 0 ) )
+         NEXTHandle := hwg_Getnextdlggroupitem( nWindow , hCtrl, ( nSkip < 0 ) )
          i := AScan( oParent:aControls, { | o | o:Handle == nextHandle } )
          lnoTabStop := !( i > 0 .AND. oParent:aControls[ i ]:CLASSNAME = "HRADIOB" )  //Hwg_BitAND( HWG_GETWINDOWSTYLE( nexthandle ), WS_TABSTOP ) = 0
       ENDIF
       IF ( lGroup .AND. nSkip < 0 ) .OR. lnoTabStop
-         nextHandle := hwg_Getnextdlgtabitem ( nWindow , hctrl, ( nSkip < 0 ) )
+         NEXTHandle := hwg_Getnextdlgtabitem ( nWindow , hctrl, ( nSkip < 0 ) )
          lnoTabStop :=  Hwg_BitaND( HWG_GETWINDOWSTYLE( nextHandle ), WS_TABSTOP ) = 0
       ELSE
          lnoTabStop := .F.
@@ -1622,23 +1742,25 @@ STATIC FUNCTION NextFocusContainer( oParent, hCtrl, nSkip )
       i2 := AScan( oParent:aControls, { | o | hwg_Ptrtoulong( o:Handle ) == hwg_Ptrtoulong( nextHandle ) } )
       IF ( ( ( i2 < i .AND. nSkip > 0 ) .OR. ( i2 > i .AND. nSkip < 0 ) ) .OR. hCtrl == nextHandle )
          IF ( ( i2 > i .OR. hCtrl == nextHandle ) .AND. nSkip < 0 )  .AND.  Hwg_BitaND( HWG_GETWINDOWSTYLE( oParent:Handle ), WS_TABSTOP ) != 0
+
             RETURN oParent:Handle
          ENDIF
+
          RETURN iif( oParent:oParent:className == "HTAB", NextFocusTab( oParent:oParent, nWindow, nSkip ), ;
             iif( hwg_GetParentForm( oParent ):ClassName == oParent:oParent:Classname, ;
-            NextFocus( oParent:oparent, hCtrl, nSkip ), NextFocusContainer( oParent:oparent, hCtrl, nSkip ) ) )
+            NEXTFocus( oParent:oparent, hCtrl, nSkip ), NextFocusContainer( oParent:oparent, hCtrl, nSkip ) ) )
       ENDIF
       i := i2
       IF i = 0
-         nextHandle := oParent:aControls[ Len( oParent:aControls ) ]:Handle
+         NEXTHandle := oParent:aControls[ Len( oParent:aControls ) ]:Handle
       ELSEIF lnoTabStop .OR. ( i > 0 .AND. i <= Len( oParent:acontrols ) .AND. oParent:aControls[i]:classname $ "HGROUP" ) .OR. i = 0
-         nextHandle := hwg_Getnextdlgtabitem ( nWindow , nextHandle, ( nSkip < 0 ) )
+         NEXTHandle := hwg_Getnextdlgtabitem ( nWindow , nextHandle, ( nSkip < 0 ) )
       ELSEIF nSkip < 0 .AND. Len( oParent:aControls[ i2 ]:aControls ) > 0
          IF ( nextHandle := hb_RASCAN( oParent:aControls[ i2 ]:aControls, ;
-               { | o | Hwg_BitaND( HWG_GETWINDOWSTYLE( o:Handle ), WS_TABSTOP ) != 0 .AND. ! o:lHide .AND. o:Enabled } ) ) > 0
-            nextHandle := oParent:aControls[ i2 ]:aControls[ nexthandle ]:handle
+            { | o | Hwg_BitaND( HWG_GETWINDOWSTYLE( o:Handle ), WS_TABSTOP ) != 0 .AND. ! o:lHide .AND. o:Enabled } ) ) > 0
+            NEXTHandle := oParent:aControls[ i2 ]:aControls[ nexthandle ]:handle
          ELSE
-            nextHandle :=  oParent:aControls[ i2 ]:Handle
+            NEXTHandle :=  oParent:aControls[ i2 ]:Handle
          ENDIF
       ENDIF
    ENDIF
@@ -1647,12 +1769,12 @@ STATIC FUNCTION NextFocusContainer( oParent, hCtrl, nSkip )
 
 FUNCTION hwg_SetColorinFocus( lDef, tcolor, bcolor, lFixed, lPersist )
 
-
    IF ValType( lDef ) <> "L"
       lDef := ( ValType( lDef ) = "C" .AND. Upper( lDef ) = "ON" )
    ENDIF
    lColorinFocus := lDef
    IF ! lDef
+
       RETURN .F.
    ENDIF
    lFixedColor   := iif( lFixed != Nil, ! lFixed, lFixedColor )
@@ -1664,12 +1786,12 @@ FUNCTION hwg_SetColorinFocus( lDef, tcolor, bcolor, lFixed, lPersist )
 
 FUNCTION hwg_SetDisableBackColor( lDef, bcolor )
 
-
    IF ValType( lDef ) <> "L"
       lDef := ( ValType( lDef ) = "C" .AND. Upper( lDef ) = "ON" )
    ENDIF
    IF ! lDef
       bDisablecolor := Nil
+
       RETURN .F.
    ENDIF
    IF  Empty( bColor )

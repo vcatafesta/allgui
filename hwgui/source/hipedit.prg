@@ -1,11 +1,9 @@
 /*
- * $Id: hipedit.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTab class
- *
- * Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: hipedit.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HTab class
+* Copyright 2004 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
 
 #include "windows.ch"
@@ -19,6 +17,7 @@
 CLASS HIPedit INHERIT HControl
 
 CLASS VAR winclass   INIT "SysIPAddress32"
+
    DATA bSetGet
    DATA bChange
    DATA bKillFocus
@@ -26,7 +25,7 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    DATA lnoValid   INIT .F.
 
    METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               oFont, bGetFocus, bKillFocus )
+         oFont, bGetFocus, bKillFocus )
    METHOD Activate()
    METHOD Init()
    METHOD SetValue( aValue )
@@ -37,10 +36,10 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    HIDDEN:
    DATA  aValue           // Valor atual
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            oFont, bGetFocus, bKillFocus ) CLASS HIPedit
+      oFont, bGetFocus, bKillFocus ) CLASS HIPedit
 
    nStyle   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_TABSTOP )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont )
@@ -56,7 +55,6 @@ METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeig
    HWG_InitCommonControlsEx()
    ::Activate()
 
-
    IF bGetFocus != Nil
       ::lnoValid := .T.
    ENDIF
@@ -68,16 +66,17 @@ METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeig
    ::oParent:AddEvent( EN_SETFOCUS , Self, { | o, id | __GetFocus( o:FindControl( id ) ) },, "onGotFocus" )
    ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o, id | __KillFocus( o:FindControl( id ) ) },, "onLostFocus" )
 
-
    RETURN Self
 
 METHOD Activate() CLASS HIPedit
+
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_InitIPAddress( ::oParent:handle, ::id, ::style , ;
-                                  ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Init() CLASS HIPedit
 
@@ -87,36 +86,41 @@ METHOD Init() CLASS HIPedit
       ::lInit := .t.
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetValue( aValue ) CLASS HIPedit
+
    hwg_SetIpAddress( ::handle , aValue[ 1 ], aValue[ 2 ], aValue[ 3 ], aValue[ 4 ] )
    ::aValue := aValue
-   RETURN Nil
 
+   RETURN NIL
 
 METHOD GetValue( ) CLASS HIPedit
+
    ::aValue := hwg_GetIpAddress( ::handle )
+
    RETURN ( ::aValue )
 
 METHOD Clear( ) CLASS HIPedit
+
    hwg_ClearIpAddress( ::handle )
    ::aValue := { 0, 0, 0, 0 }
-   RETURN ( ::aValue )
 
+   RETURN ( ::aValue )
 
 METHOD END() CLASS HIPedit
 
    // Nothing to do here, yet!
    ::Super:END()
 
-   RETURN Nil
-
+   RETURN NIL
 
 STATIC FUNCTION __GetFocus( oCtrl )
+
    LOCAL xRet
 
    IF ! hwg_CheckFocus( oCtrl, .f. )
+
       RETURN .t.
    ENDIF
 
@@ -130,11 +134,12 @@ STATIC FUNCTION __GetFocus( oCtrl )
 
    RETURN xRet
 
-
 STATIC FUNCTION __KillFocus( oCtrl )
+
    LOCAL xRet
 
    IF ! hwg_CheckFocus( oCtrl, .t. ) .or. oCtrl:lNoValid
+
       RETURN .t.
    ENDIF
 
@@ -145,3 +150,4 @@ STATIC FUNCTION __KillFocus( oCtrl )
    ENDIF
 
    RETURN xRet
+

@@ -18,3 +18,4 @@ FUNCTION Main()
       hb_UChar(0x2663)+hb_UChar(0x2752)+hb_UChar(0x2713),"Box Drawing")
 
    RETURN NIL
+

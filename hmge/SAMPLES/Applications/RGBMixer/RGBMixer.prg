@@ -323,3 +323,4 @@ FUNCTION HexaToDec(cString)
    RETURN nNumber
 
    #endif
+

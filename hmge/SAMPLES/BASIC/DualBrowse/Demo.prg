@@ -702,3 +702,4 @@ FUNCTION UpdtSearchText
 
    RETURN NIL
    * EOF()
+

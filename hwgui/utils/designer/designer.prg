@@ -1,11 +1,9 @@
 /*
- * $Id: designer.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * Designer
- * Main file
- *
- * Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: designer.prg 2012 2013-03-07 09:03:56Z alkresin $
+* Designer
+* Main file
+* Copyright 2004 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 // LFB pos
@@ -35,18 +33,21 @@ REQUEST BARCODE
 REQUEST HWG_GETPRINTERS
 
 #ifndef __XHARBOUR__
-   ANNOUNCE GTSYS
-   REQUEST HB_GT_NUL_DEFAULT
+ANNOUNCE GTSYS
+REQUEST HB_GT_NUL_DEFAULT
 #endif
 
 FUNCTION _AppMain( p0, p1, p2 )
+
    LOCAL oPanel, oTab, oFont, oStatus1, cResForm, i
+
    // LOCAL oMainWin
    MEMVAR oDesigner, cCurDir, oDlgx
    MEMVAR crossCursor, vertCursor, horzCursor, handCursor
 
    PUBLIC oDesigner, cCurDir, oMenuTool
    PUBLIC crossCursor, vertCursor, horzCursor, handCursor
+
    // :LFB
    REQUEST DBFCDX,DBFFPT
    RDDSETDEFAULT("DBFCDX")   // Set up DBFNTX as default driver
@@ -67,13 +68,13 @@ FUNCTION _AppMain( p0, p1, p2 )
       ENDIF
    ENDIF
 
-#ifdef INTEGRATED
-// #ifdef MODAL
+   #ifdef INTEGRATED
+   // #ifdef MODAL
    IF p0 == "-s" .OR. p0 == "/s"
       oDesigner:lSingleForm := .T.
    ENDIF
-// #endif
-#endif
+   // #endif
+   #endif
 
    //IF !__mvExist( "cCurDir" )
    //   __mvPublic( "cCurDir" )
@@ -85,7 +86,8 @@ FUNCTION _AppMain( p0, p1, p2 )
    oDesigner:ds_mypath := cCurDir
 
    IF !ReadIniFiles()
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13
@@ -98,261 +100,262 @@ FUNCTION _AppMain( p0, p1, p2 )
       // :END LFB
    ENDIF
 
-#ifdef INTEGRATED
+   #ifdef INTEGRATED
    INIT DIALOG oDesigner:oMainWnd AT 0,0 SIZE 400,200 TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
       FONT oFont                          ;
       ON INIT {|o|StartDes(o,p0,p1)}   ;
       ON EXIT {||EndIde()}
-#else
+   #else
 
- //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0,0 SIZE 280,200 TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
+   //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0,0 SIZE 280,200 TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
 
    INIT WINDOW oDesigner:oMainWnd MAIN AT 0,0 SIZE 400,200 ;
       TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
       FONT oFont                                                ;
       ON EXIT {||EndIde()}
 
-#endif
+   #endif
 
    MENU OF oDesigner:oMainWnd
-      MENU TITLE "&File"
-         IF !oDesigner:lSingleForm
-            MENUITEM "&New "+iif(!oDesigner:lReport,"Form","Report")  ACTION HFormGen():New()
-            MENUITEM "&Open "+iif(!oDesigner:lReport,"Form","Report") ACTION HFormGen():Open()
-            SEPARATOR
-            MENUITEM "&Save "+iif(!oDesigner:lReport,"Form","Report")   ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_Msgstop("No Form in use!", "Designer"))
-            MENUITEM "&Save as ..." ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_Msgstop("No Form in use!"))
-            MENUITEM "&Close "+iif(!oDesigner:lReport,"Form","Report")  ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:End(),hwg_Msgstop("No Form in use!", "Designer"))
-         ELSE
-            IF !lOmmitMenuFile
-               MENUITEM "&Open "+iif(!oDesigner:lReport,"Form","Report") ACTION HFormGen():OpenR()
-               SEPARATOR
-               MENUITEM "&Save as ..." ACTION ( oDesigner:lSingleForm:=.F.,HFormGen():oDlgSelected:oParent:Save(.T.),oDesigner:lSingleForm:=.T. )
-            ENDIF
-         ENDIF
-         SEPARATOR
-         MENU TITLE "Recent "+iif(!oDesigner:lReport,"Form","Report")
-         IF !lOmmitMenuFile
-            i := 1
-            DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != Nil
-               Hwg_DefineMenuItem( oDesigner:aRecent[i], 1020+i, ;
-                  &( "{||HFormGen():Open('"+oDesigner:aRecent[i]+"')}" ) )
-               i ++
-            ENDDO
-         ENDIF
-         ENDMENU
-         SEPARATOR
-         MENUITEM If(!lOmmitMenuFile,"&Exit","&Close Designer") ACTION oDesigner:oMainWnd:Close()
-      ENDMENU
-      MENU TITLE "&Edit"
-         MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
-         MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
-      ENDMENU
-      MENU TITLE "&View"
-         MENUITEM "&Object Inspector" ID 1010 ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),oDesigner:oDlgInsp:Close() )
-         SEPARATOR
-         MENUITEM "&Show Grid 5px" ID 1050 ACTION ShowGrid5px()
-         MENUITEM "&Show Grid 10px" ID 1052 ACTION ShowGrid10px()
-         MENUITEM "S&nap to Grid" ID 1051 ACTION hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1051,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1051))
-         SEPARATOR
-         MENUITEM "&Preview"  ACTION DoPreview()
-         SEPARATOR
-         MENUITEM "&ToolBars"  ACTION socontroles()
-      ENDMENU
-      MENU TITLE "&Control"
-         MENUITEM "&Delete"  ACTION DeleteCtrl()
-      ENDMENU
-      MENU TITLE "&Options"
-         MENUITEM "&AutoAdjust" ID 1011 ACTION hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1011,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1011))
-      ENDMENU
-      MENU TITLE "&Help"
-         MENUITEM "&About" ACTION hwg_Msginfo("Visual Designer", "Designer")
-      ENDMENU
-   ENDMENU
-
-   IF ( oDesigner:nPixelGrid == 12 )
-       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1050,.T.)
-   ELSE
-       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1052,.T.)
-   ENDIF
-
-   @ 0,0 PANEL oPanel SIZE 280,200 ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,y-21),statusbarmsg('')}
-
+   MENU TITLE "&File"
    IF !oDesigner:lSingleForm
-      @ 2,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||HFormGen():New()} ;
-          SIZE 24,24 FLAT               ;
-          BITMAP "BMP_NEW" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "New Form"
-      @ 26,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||HFormGen():Open()} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "BMP_OPEN" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Open Form"
-
-      @ 55,6 LINE LENGTH 18 VERTICAL
-
-      @ 60,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_Msgstop("No Form in use!"))} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "BMP_SAVE" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Save Form"
-      @ 84,6 LINE LENGTH 18 VERTICAL
-
-      @ 89,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {||doPreview()} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smNext" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Preview Form"
-
-      // : LFB pos
-      @ 164,6 LINE LENGTH 18 VERTICAL
-      @ 166,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smProprie" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Propriedades"
-      @ 192,6 LINE LENGTH 18 VERTICAL
-      @ 194,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(1)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smAlignLeft" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Align left sides"
-      @ 218,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(2)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smAlignRight" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Align Right sides"
-      @ 242,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(3)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smAlignTop" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Align Top Edges"
-      @ 268,6 LINE LENGTH 18 VERTICAL
-      @ 270,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(5)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smSameWidth" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Same Width"
-      @ 294,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(6)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smSameHeight" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Same Height"
-      @ 320,6 LINE LENGTH 18 VERTICAL
-      @ 322,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(7)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smCenterHorz" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "Center Horizontally"
-      @ 344,3 OWNERBUTTON OF oPanel       ;
-          ON CLICK {|| Asels_ajustar(8)} ;
-          SIZE 24,24 FLAT                ;
-          BITMAP "smCentervert" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
-          TOOLTIP "center Vertically"
-
-      // : END LFB
-
-   ENDIF
-
-   ADD STATUS oStatus1 TO oDesigner:oMainWnd ;
-      PARTS oDesigner:oMainWnd:nWidth-280,80,80, 40,40,40 ;
-      FONT HFont():Add( "MS Sans Serif",0,-12,400,,,)
-
-   @ 3,30 TAB oTab ITEMS {} OF oPanel SIZE 380,310 FONT oFont ;
-      ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
-
-   BuildSet( oTab )
-
-   CONTEXT MENU oDesigner:oCtrlMenu
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
+      MENUITEM "&New "+iif(!oDesigner:lReport,"Form","Report")  ACTION HFormGen():New()
+      MENUITEM "&Open "+iif(!oDesigner:lReport,"Form","Report") ACTION HFormGen():Open()
       SEPARATOR
-      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
-      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
-      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
-      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
-      // : LFB
-      SEPARATOR
-      MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
-      MENUITEM "Align Right sides"  ACTION Asels_ajustar(2)
-      MENUITEM "Align Top Edges"  ACTION Asels_ajustar(3)
-      //MENUITEM "Align Bottom Edges"  ACTION Asels_ajustar(4)
-      MENUITEM "Same Width"  ACTION Asels_ajustar(5)
-      MENUITEM "Same Height"  ACTION Asels_ajustar(6)
-      // :END LFB
-      SEPARATOR
-      IF oDesigner:lReport
-         MENUITEM "Fit into box" ID 1030 ACTION FitLine( GetCtrlSelected(HFormGen():oDlgSelected) )
+      MENUITEM "&Save "+iif(!oDesigner:lReport,"Form","Report")   ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_Msgstop("No Form in use!", "Designer"))
+      MENUITEM "&Save as ..." ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(.T.),hwg_Msgstop("No Form in use!"))
+      MENUITEM "&Close "+iif(!oDesigner:lReport,"Form","Report")  ACTION Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:End(),hwg_Msgstop("No Form in use!", "Designer"))
+   ELSE
+      IF !lOmmitMenuFile
+         MENUITEM "&Open "+iif(!oDesigner:lReport,"Form","Report") ACTION HFormGen():OpenR()
          SEPARATOR
+         MENUITEM "&Save as ..." ACTION ( oDesigner:lSingleForm:=.F.,HFormGen():oDlgSelected:oParent:Save(.T.),oDesigner:lSingleForm:=.T. )
       ENDIF
-      MENUITEM "Delete" ACTION DeleteCtrl()
-      SEPARATOR
-      MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
-      MENUITEM "Objetos" ACTION socontroles()
-      SEPARATOR
-      MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
-           //Iif( oDesigner:oDlgInsp==Nil,InspOpen(), HWG_BRINGWINDOWTOTOP(oDesigner:oDlgInsp:handle) )
-   ENDMENU
+   ENDIF
+   SEPARATOR
+   MENU TITLE "Recent "+iif(!oDesigner:lReport,"Form","Report")
+   IF !lOmmitMenuFile
+      i := 1
+      DO WHILE i <= MAX_RECENT_FILES .AND. oDesigner:aRecent[i] != Nil
+         Hwg_DefineMenuItem( oDesigner:aRecent[i], 1020+i, ;
+            &( "{||HFormGen():Open('"+oDesigner:aRecent[i]+"')}" ) )
+         i ++
+      ENDDO
+   ENDIF
+ENDMENU
+SEPARATOR
+MENUITEM If(!lOmmitMenuFile,"&Exit","&Close Designer") ACTION oDesigner:oMainWnd:Close()
+ENDMENU
+MENU TITLE "&Edit"
+MENUITEM "&Copy control" ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
+MENUITEM "&Paste" ID 1012 ACTION oDesigner:addItem := oDesigner:oClipbrd
+ENDMENU
+MENU TITLE "&View"
+MENUITEM "&Object Inspector" ID 1010 ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),oDesigner:oDlgInsp:Close() )
+SEPARATOR
+MENUITEM "&Show Grid 5px" ID 1050 ACTION ShowGrid5px()
+MENUITEM "&Show Grid 10px" ID 1052 ACTION ShowGrid10px()
+MENUITEM "S&nap to Grid" ID 1051 ACTION hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1051,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1051))
+SEPARATOR
+MENUITEM "&Preview"  ACTION DoPreview()
+SEPARATOR
+MENUITEM "&ToolBars"  ACTION socontroles()
+ENDMENU
+MENU TITLE "&Control"
+MENUITEM "&Delete"  ACTION DeleteCtrl()
+ENDMENU
+MENU TITLE "&Options"
+MENUITEM "&AutoAdjust" ID 1011 ACTION hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1011,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1011))
+ENDMENU
+MENU TITLE "&Help"
+MENUITEM "&About" ACTION hwg_Msginfo("Visual Designer", "Designer")
+ENDMENU
+ENDMENU
 
-   CONTEXT MENU oDesigner:oTabMenu
-      MENUITEM "New Page" ACTION Page_New( GetCtrlSelected(HFormGen():oDlgSelected) )
-      MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
-      MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
-      SEPARATOR
-      MENUITEM "Copy"   ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
-      MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
-      MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
-      MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
-      MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
-      // : LFB
-      SEPARATOR
-      MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
-      MENUITEM "Align Right sides"  ACTION Asels_ajustar(2)
-      MENUITEM "Align Top Edges"  ACTION Asels_ajustar(3)
-      //MENUITEM "Align Bottom Edges"  ACTION Asels_ajustar(4)
-      MENUITEM "Same Width"  ACTION Asels_ajustar(5)
-      MENUITEM "Same Height"  ACTION Asels_ajustar(6)
-      // : END LFB
-         SEPARATOR
-      MENUITEM "Delete" ACTION DeleteCtrl()
-      SEPARATOR
-      MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
-      MENUITEM "Objetos" ACTION socontroles()
-      SEPARATOR
-      MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
-   ENDMENU
+IF ( oDesigner:nPixelGrid == 12 )
+   hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1050,.T.)
+ELSE
+   hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1052,.T.)
+ENDIF
 
-   CONTEXT MENU oDesigner:oDlgMenu
-      MENUITEM "Paste" ACTION oDesigner:addItem := oDesigner:oClipbrd
-      MENUITEM "Preview" ACTION DoPreview()
-      SEPARATOR
-      MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
-      MENUITEM "Objetos" ACTION socontroles()
-      SEPARATOR
-      MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
-   ENDMENU
+@ 0,0 PANEL oPanel SIZE 280,200 ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,y-21),statusbarmsg('')}
 
-   HWG_InitCommonControlsEx()
+IF !oDesigner:lSingleForm
+   @ 2,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {||HFormGen():New()} ;
+      SIZE 24,24 FLAT               ;
+      BITMAP "BMP_NEW" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "New Form"
+   @ 26,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {||HFormGen():Open()} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "BMP_OPEN" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Open Form"
 
+   @ 55,6 LINE LENGTH 18 VERTICAL
+
+   @ 60,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {||Iif(HFormGen():oDlgSelected!=Nil,HFormGen():oDlgSelected:oParent:Save(),hwg_Msgstop("No Form in use!"))} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "BMP_SAVE" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Save Form"
+   @ 84,6 LINE LENGTH 18 VERTICAL
+
+   @ 89,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {||doPreview()} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smNext" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Preview Form"
+
+   // : LFB pos
+   @ 164,6 LINE LENGTH 18 VERTICAL
+   @ 166,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smProprie" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Propriedades"
+   @ 192,6 LINE LENGTH 18 VERTICAL
+   @ 194,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(1)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smAlignLeft" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Align left sides"
+   @ 218,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(2)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smAlignRight" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Align Right sides"
+   @ 242,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(3)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smAlignTop" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Align Top Edges"
+   @ 268,6 LINE LENGTH 18 VERTICAL
+   @ 270,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(5)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smSameWidth" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Same Width"
+   @ 294,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(6)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smSameHeight" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Same Height"
+   @ 320,6 LINE LENGTH 18 VERTICAL
+   @ 322,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(7)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smCenterHorz" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "Center Horizontally"
+   @ 344,3 OWNERBUTTON OF oPanel       ;
+      ON CLICK {|| Asels_ajustar(8)} ;
+      SIZE 24,24 FLAT                ;
+      BITMAP "smCentervert" FROM RESOURCE TRANSPARENT COORDINATES 0,4,0,0  ;
+      TOOLTIP "center Vertically"
+
+   // : END LFB
+
+ENDIF
+
+ADD STATUS oStatus1 TO oDesigner:oMainWnd ;
+   PARTS oDesigner:oMainWnd:nWidth-280,80,80, 40,40,40 ;
+   FONT HFont():Add( "MS Sans Serif",0,-12,400,,,)
+
+@ 3,30 TAB oTab ITEMS {} OF oPanel SIZE 380,310 FONT oFont ;
+   ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
+
+BuildSet( oTab )
+
+CONTEXT MENU oDesigner:oCtrlMenu
+MENUITEM "Copy"   ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
+SEPARATOR
+MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
+MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
+MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
+MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
+// : LFB
+SEPARATOR
+MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
+MENUITEM "Align Right sides"  ACTION Asels_ajustar(2)
+MENUITEM "Align Top Edges"  ACTION Asels_ajustar(3)
+//MENUITEM "Align Bottom Edges"  ACTION Asels_ajustar(4)
+MENUITEM "Same Width"  ACTION Asels_ajustar(5)
+MENUITEM "Same Height"  ACTION Asels_ajustar(6)
+// :END LFB
+SEPARATOR
+IF oDesigner:lReport
+   MENUITEM "Fit into box" ID 1030 ACTION FitLine( GetCtrlSelected(HFormGen():oDlgSelected) )
+   SEPARATOR
+ENDIF
+MENUITEM "Delete" ACTION DeleteCtrl()
+SEPARATOR
+MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+MENUITEM "Objetos" ACTION socontroles()
+SEPARATOR
+MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
+//Iif( oDesigner:oDlgInsp==Nil,InspOpen(), HWG_BRINGWINDOWTOTOP(oDesigner:oDlgInsp:handle) )
+ENDMENU
+
+CONTEXT MENU oDesigner:oTabMenu
+MENUITEM "New Page" ACTION Page_New( GetCtrlSelected(HFormGen():oDlgSelected) )
+MENUITEM "Next Page" ACTION Page_Next( GetCtrlSelected(HFormGen():oDlgSelected) )
+MENUITEM "Previous Page" ACTION Page_Prev( GetCtrlSelected(HFormGen():oDlgSelected) )
+SEPARATOR
+MENUITEM "Copy"   ACTION (oDesigner:oClipBrd:=GetCtrlSelected(HFormGen():oDlgSelected),Iif(oDesigner:oClipBrd!=Nil,hwg_Enablemenuitem(,1012,.T.,.T.),.F.))
+MENUITEM "Adjust to left"  ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.T.,.F.,.F.,.F. )
+MENUITEM "Adjust to top"   ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.T.,.F.,.F. )
+MENUITEM "Adjust to right" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.T.,.F. )
+MENUITEM "Adjust to bottom" ACTION AdjustCtrl( GetCtrlSelected(HFormGen():oDlgSelected),.F.,.F.,.F.,.T. )
+// : LFB
+SEPARATOR
+MENUITEM "Align left sides"  ACTION Asels_ajustar(1)
+MENUITEM "Align Right sides"  ACTION Asels_ajustar(2)
+MENUITEM "Align Top Edges"  ACTION Asels_ajustar(3)
+//MENUITEM "Align Bottom Edges"  ACTION Asels_ajustar(4)
+MENUITEM "Same Width"  ACTION Asels_ajustar(5)
+MENUITEM "Same Height"  ACTION Asels_ajustar(6)
+// : END LFB
+SEPARATOR
+MENUITEM "Delete" ACTION DeleteCtrl()
+SEPARATOR
+MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+MENUITEM "Objetos" ACTION socontroles()
+SEPARATOR
+MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
+ENDMENU
+
+CONTEXT MENU oDesigner:oDlgMenu
+MENUITEM "Paste" ACTION oDesigner:addItem := oDesigner:oClipbrd
+MENUITEM "Preview" ACTION DoPreview()
+SEPARATOR
+MENUITEM "Properties" ACTION Iif( oDesigner:oDlgInsp==Nil,InspOpen(),InspShow())
+MENUITEM "Objetos" ACTION socontroles()
+SEPARATOR
+MENUITEM "Classe Objeto" ACTION objinspector(GetCtrlSelected(HFormGen():oDlgSelected))
+ENDMENU
+
+HWG_InitCommonControlsEx()
 
 #ifdef INTEGRATED
 #ifdef MODAL
-   ACTIVATE DIALOG oDesigner:oMainWnd
-   cResForm := oDesigner:cResForm
-   oDesigner := NIL
+ACTIVATE DIALOG oDesigner:oMainWnd
+cResForm := oDesigner:cResForm
+oDesigner := NIL
 #else
-   ACTIVATE DIALOG oDesigner:oMainWnd NOMODAL
+ACTIVATE DIALOG oDesigner:oMainWnd NOMODAL
 #endif
 #else
-   StartDes( oDesigner:oMainWnd,p0,p1 )
-   ACTIVATE WINDOW oDesigner:oMainWnd
+StartDes( oDesigner:oMainWnd,p0,p1 )
+ACTIVATE WINDOW oDesigner:oMainWnd
 #endif
 
-   RETURN cResForm
+RETURN cResForm
 
 STATIC FUNCTION ShowGrid10px()
+
    // local nForm, nForms
    MEMVAR oDesigner
+
    IF ( oDesigner:oDlgInsp == NIL )
       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1052,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1052))
       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1050,.F.)
@@ -366,11 +369,14 @@ STATIC FUNCTION ShowGrid10px()
    ELSE
       hwg_Msginfo( "Close the form(s) first to change the grid status","Warning")
    ENDIF
+
    RETURN ( NIL )
 
 STATIC FUNCTION ShowGrid5px()
+
    //local nForm, nForms
    MEMVAR oDesigner
+
    IF ( oDesigner:oDlgInsp == NIL )
       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1050,!hwg_Ischeckedmenuitem(oDesigner:oMainWnd:handle,1050))
       hwg_Checkmenuitem(oDesigner:oMainWnd:handle,1052,.F.)
@@ -387,7 +393,8 @@ STATIC FUNCTION ShowGrid5px()
 
    RETURN ( NIL )
 
-// -----------------
+   // -----------------
+
 CLASS HDesigner
 
    DATA oMainWnd, oDlgInsp
@@ -409,8 +416,10 @@ CLASS HDesigner
    DATA lShowGrid    INIT .F.
    DATA lSnapToGrid  INIT .F.
 
-   METHOD New   INLINE Self
+METHOD New   INLINE Self
+
 ENDCLASS
+
 // -----------------
 
 STATIC FUNCTION StartDes( oDlg,p1,cForm )
@@ -426,8 +435,8 @@ STATIC FUNCTION StartDes( oDlg,p1,cForm )
          ELSE
             HFormGen():Open( cForm )
          ENDIF
-#ifdef INTEGRATED
-// #ifdef MODAL
+         #ifdef INTEGRATED
+         // #ifdef MODAL
       ELSEIF p1 == "s"
          IF cForm == NIL
             HFormGen():New()
@@ -436,14 +445,15 @@ STATIC FUNCTION StartDes( oDlg,p1,cForm )
          ENDIF
          Hwg_SetForegroundWindow( HFormGen():aForms[1]:oDlg:handle )
          hwg_Setfocus( HFormGen():aForms[1]:oDlg:handle )
-// #endif
-#endif
+         // #endif
+         #endif
       ENDIF
    ENDIF
 
    RETURN NIL
 
 STATIC FUNCTION ReadIniFiles()
+
    LOCAL oIni := HXMLDoc():Read( "Designer.iml" )
    LOCAL i, oNode, cWidgetsFileName, cwitem, cfitem, critem, l_ds_mypath, j
    MEMVAR oDesigner, cCurDir
@@ -499,12 +509,14 @@ STATIC FUNCTION ReadIniFiles()
    ENDIF
    IF oDesigner:oWidgetsSet == Nil .OR. Empty( oDesigner:oWidgetsSet:aItems )
       hwg_Msgstop( "Widgets file isn't found!","Designer error" )
+
       RETURN .F.
    ENDIF
 
    RETURN .T.
 
 STATIC FUNCTION BuildSet( oTab )
+
    LOCAL i, j, j1, aSet, oWidget, oProperty, b1, b2, b3, cDlg, arr, b4
    LOCAL x1, cText,cBmp, oButton
    MEMVAR oDesigner
@@ -583,6 +595,7 @@ STATIC FUNCTION BuildSet( oTab )
    RETURN NIL
 
 STATIC FUNCTION ArrangeBtn( oTab,x,y )
+
    LOCAL i, x1, y1, oBtn
 
    oTab:Move( ,, x-6, y-33 )
@@ -608,6 +621,7 @@ STATIC FUNCTION ArrangeBtn( oTab,x,y )
    RETURN NIL
 
 STATIC FUNCTION ClickBtn( oTab,nId ) //, cItem,cText,nWidth,nHeight )
+
    LOCAL oBtn := oTab:FindControl( nId )
    MEMVAR oDesigner
 
@@ -623,6 +637,7 @@ STATIC FUNCTION ClickBtn( oTab,nId ) //, cItem,cText,nWidth,nHeight )
    RETURN NIL
 
 FUNCTION DeleteCtrl()
+
    LOCAL oDlg := HFormGen():oDlgSelected, oCtrl, i
    MEMVAR oDesigner
 
@@ -647,12 +662,14 @@ FUNCTION DeleteCtrl()
    RETURN NIL
 
 FUNCTION FindWidget( cClass )
+
    MEMVAR  odesigner
    LOCAL i, aSet := oDesigner:oWidgetsSet:aItems[1]:aItems, oNode
 
    FOR i := 1 TO Len( aSet )
       IF aSet[i]:title == "set"
          IF ( oNode := aSet[i]:Find( "widget",1,{|o|o:GetAttribute("class")==cClass} ) ) != Nil
+
             RETURN oNode
          ENDIF
       ENDIF
@@ -661,6 +678,7 @@ FUNCTION FindWidget( cClass )
    RETURN NIL
 
 FUNCTION Evalcode( xCode )
+
    LOCAL nLines
 
    IF Valtype( xCode ) == "C"
@@ -672,14 +690,17 @@ FUNCTION Evalcode( xCode )
       ENDIF
    ENDIF
    IF Valtype( xCode ) == "A"
+
       RETURN DoScript( xCode )
    ELSE
+
       RETURN Eval( xCode )
    ENDIF
 
    RETURN NIL
 
 STATIC FUNCTION CreateIni( oIni )
+
    LOCAL oNode := oIni:Add( HXMLNode():New( "designer" ) )
 
    oNode:Add( HXMLNode():New( "widgetset",,,"widgets.xml" ) )
@@ -688,6 +709,7 @@ STATIC FUNCTION CreateIni( oIni )
    RETURN NIL
 
 FUNCTION AddRecent( oForm )
+
    LOCAL i, cItem := Lower( Trim( oForm:path+oForm:filename ) )
    MEMVAR oDesigner
 
@@ -707,6 +729,7 @@ FUNCTION AddRecent( oForm )
    RETURN NIL
 
 STATIC FUNCTION EndIde
+
    LOCAL i, j, alen := Len( HFormGen():aForms ), lRes := .T., oIni, critem, oNode
    MEMVAR oDesigner, cCurDir
 
@@ -760,9 +783,9 @@ STATIC FUNCTION EndIde
       IF HDTheme():lChanged
          SaveEdOptions()
       ENDIF
-#ifndef MODAL
+      #ifndef MODAL
       oDesigner := Nil
-#endif
+      #endif
    ENDIF
 
    RETURN lRes
@@ -773,8 +796,10 @@ FUNCTION SetOmmitMenuFile(lom)
 
    RETURN lOm
 
-// : LFB
+   // : LFB
+
 FUNCTION StatusBarMsg(cfile,cpos,ctam)
+
    MEMVAR oDesigner
 
    //cfile := IIF(cfile = Nil,'',cfile)
@@ -793,12 +818,14 @@ FUNCTION StatusBarMsg(cfile,cpos,ctam)
    RETURN NIL
 
 FUNCTION SoControles
+
    LOCAL opanelx, oTabx
    LOCAL oFont
 
    IF !empty(hwg_findwindow(0,"Toolbars - Classes ") )// > 0
       hwg_Showwindow(oDlgx:handle)
       hwg_Setfocus( oDlgx:handle )
+
       RETURN NIL
    ENDIF
 
@@ -816,22 +843,23 @@ FUNCTION SoControles
       ON SIZE {|o,x,y|ArrangeBtn(o,x,y)}
 
    CONTEXT MENU oMenuTool
-      MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( 0, .t. )
-      //{||oDesigner:oDlgInsp:Close(),inspOpen(.T.)}
-      MENUITEM "Normal" ACTION ActiveTopMost( 0, .f. )
-      //{||oDesigner:oDlgInsp:Close(),inspOpen(.F.)}
-      MENUITEM "Hide" ACTION oDlgX:CLOSE()
-   ENDMENU
+   MENUITEM "AlwaysOnTop" ACTION ActiveTopMost( 0, .t. )
+   //{||oDesigner:oDlgInsp:Close(),inspOpen(.T.)}
+   MENUITEM "Normal" ACTION ActiveTopMost( 0, .f. )
+   //{||oDesigner:oDlgInsp:Close(),inspOpen(.F.)}
+   MENUITEM "Hide" ACTION oDlgX:CLOSE()
+ENDMENU
 
-   BuildSet( oTabx )
+BuildSet( oTabx )
 
-   HWG_InitCommonControlsEx()
+HWG_InitCommonControlsEx()
 
-   ACTIVATE DIALOG ODLGx NOMODAL
+ACTIVATE DIALOG ODLGx NOMODAL
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION InspShow()
+
    MEMVAR oDesigner
 
    Iif( oDesigner:oDlgInsp==Nil,InspOpen(),oDesigner:oDlgInsp:show() )
@@ -840,9 +868,12 @@ FUNCTION InspShow()
    RETURN NIL
 
 FUNCTION HWLASTKEY
+
    LOCAL ckeyb := hwg_Getkeyboardstate() ,i
+
    FOR i= 1 to 255
       IF Asc(Substr(ckeyb,i,1)) >= 128
+
          RETURN i - 1
       ENDIF
    NEXT

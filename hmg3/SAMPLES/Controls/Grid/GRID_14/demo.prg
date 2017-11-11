@@ -73,3 +73,4 @@ PROCEDURE Test()
    ENDIF
 
    RETURN
+

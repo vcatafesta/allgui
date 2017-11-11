@@ -3700,3 +3700,4 @@ FUNCTION init_messages
    ENDCASE
 
    RETURN NIL
+

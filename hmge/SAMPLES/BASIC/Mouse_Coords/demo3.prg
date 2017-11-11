@@ -45,3 +45,4 @@ FUNCTION LeftMouseClick
 FUNCTION RightMouseClick
 
    RETURN ( _HMG_MouseState == 2 )
+

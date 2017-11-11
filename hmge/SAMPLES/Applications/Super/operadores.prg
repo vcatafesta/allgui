@@ -1267,3 +1267,4 @@ STATIC FUNCTION gravar_acesso(parametro,tipo)
    ENDIF
 
    RETURN(nil)
+

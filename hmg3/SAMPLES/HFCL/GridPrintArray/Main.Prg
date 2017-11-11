@@ -208,3 +208,4 @@ FUNCTION printarray
    PRINT array aArray headers {"Heading 1","Heading 2"} ARRAYHEADERS {"Head1","Head2","Head3"} ARRAYJUSTIFY {0,0,0}
 
    RETURN NIL
+

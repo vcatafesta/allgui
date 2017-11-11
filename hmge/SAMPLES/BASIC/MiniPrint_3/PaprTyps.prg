@@ -44,3 +44,4 @@ FUNCTION MakPaprArr()
    NEXT c1Line
 
    RETURN aRVal // MakPapArrs()
+

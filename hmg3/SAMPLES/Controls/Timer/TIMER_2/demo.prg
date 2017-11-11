@@ -31,3 +31,4 @@ PROCEDURE TimerTest()
    Form_1.Timer_1.Enabled := .T.
 
    RETURN
+

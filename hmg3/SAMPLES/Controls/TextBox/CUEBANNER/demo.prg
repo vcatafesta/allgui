@@ -101,3 +101,4 @@ HB_FUNC( SETCUEBANNER )                   // (nEditHandle, cMsg, lGetFocus) -> n
 }
 
 #pragma ENDDUMP
+

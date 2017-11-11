@@ -1246,3 +1246,4 @@ PROCEDURE Child_CLick
    ChildTest.Activate
 
    RETURN NIL
+

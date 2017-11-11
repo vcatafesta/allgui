@@ -1,11 +1,9 @@
 /*
- * $Id: hownbtn.prg 2027 2013-04-21 12:57:17Z alkresin $
- *
- * HWGUI - Harbour Linux (GTK) GUI library source code:
- * HOwnButton class, which implements owner drawn buttons
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hownbtn.prg 2027 2013-04-21 12:57:17Z alkresin $
+* HWGUI - Harbour Linux (GTK) GUI library source code:
+* HOwnButton class, which implements owner drawn buttons
+* Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "inkey.ch"
@@ -14,7 +12,8 @@
 
 CLASS HOwnButton INHERIT HControl
 
-   CLASS VAR cPath SHARED
+CLASS VAR cPath SHARED
+
    DATA winclass   INIT "OWNBTN"
    DATA lFlat
    DATA state
@@ -27,24 +26,35 @@ CLASS HOwnButton INHERIT HControl
    DATA lEnabled INIT .T.
    DATA nOrder
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lflat,              ;
       cText, color, font, xt, yt, widtht, heightt,        ;
       bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
       cTooltip, lEnabled )
 
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Paint()
-   METHOD MouseMove( wParam, lParam )
-   METHOD MDown()
-   METHOD MUp()
-   METHOD Press()   INLINE ( ::lPress := .T. , ::MDown() )
-   METHOD RELEASE()
-   METHOD End()
-   METHOD Enable()
-   METHOD Disable()
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Paint()
+
+METHOD MouseMove( wParam, lParam )
+
+METHOD MDown()
+
+METHOD MUp()
+
+METHOD Press()   INLINE ( ::lPress := .T. , ::MDown() )
+
+METHOD RELEASE()
+
+METHOD End()
+
+METHOD Enable()
+
+METHOD Disable()
 
 ENDCLASS
 
@@ -109,7 +119,7 @@ METHOD Activate CLASS HOwnButton
 
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HOwnButton
 
@@ -134,9 +144,10 @@ METHOD Init CLASS HOwnButton
       hwg_Setwindowobject( ::handle, Self )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Paint() CLASS HOwnButton
+
    LOCAL hDC := hwg_Getdc( ::handle )
    LOCAL aCoors, aMetr, oPen, oldBkColor, x1, y1, x2, y2
 
@@ -205,9 +216,10 @@ METHOD Paint() CLASS HOwnButton
    // hwg_Setbkcolor( hDC,oldBkColor )
    hwg_Releasedc( ::handle, hDC )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD MouseMove( wParam, lParam )  CLASS HOwnButton
+
    LOCAL lEnter := ( hwg_BitAnd( wParam,16 ) > 0 )
    LOCAL res := .F.
 
@@ -222,7 +234,7 @@ METHOD MouseMove( wParam, lParam )  CLASS HOwnButton
       ENDIF
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD MDown()  CLASS HOwnButton
 
@@ -232,7 +244,7 @@ METHOD MDown()  CLASS HOwnButton
       hwg_Setfocus( ::handle )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD MUp() CLASS HOwnButton
 
@@ -246,7 +258,7 @@ METHOD MUp() CLASS HOwnButton
       ENDIF
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD RELEASE()  CLASS HOwnButton
 
@@ -254,7 +266,7 @@ METHOD RELEASE()  CLASS HOwnButton
    ::state := OBTN_NORMAL
    hwg_Redrawwindow( ::handle )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD End()  CLASS HOwnButton
 
@@ -268,7 +280,7 @@ METHOD End()  CLASS HOwnButton
       ::oBitmap := Nil
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Enable() CLASS HOwnButton
 
@@ -276,7 +288,7 @@ METHOD Enable() CLASS HOwnButton
    ::lEnabled := .T.
    hwg_Redrawwindow( ::handle )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Disable() CLASS HOwnButton
 
@@ -285,4 +297,5 @@ METHOD Disable() CLASS HOwnButton
    hwg_Redrawwindow( ::handle )
    hwg_Enablewindow( ::handle, .F. )
 
-   RETURN Nil
+   RETURN NIL
+

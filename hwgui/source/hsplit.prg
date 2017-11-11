@@ -1,11 +1,9 @@
 /*
- * $Id: hsplit.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HSplitter class
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hsplit.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HSplitter class
+* Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -17,7 +15,8 @@
 
 CLASS HSplitter INHERIT HControl
 
-   CLASS VAR winclass INIT "STATIC"
+CLASS VAR winclass INIT "STATIC"
+
    DATA aLeft
    DATA aRight
    DATA lVertical
@@ -36,13 +35,13 @@ CLASS HSplitter INHERIT HControl
    METHOD Drag( lParam )
    METHOD DragAll( lScroll )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
       bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling ) CLASS HSplitter
    //+  WS_CLIPCHILDREN
    ::Super:New( oWndParent, nId, WS_VISIBLE + SS_OWNERDRAW , nLeft, nTop, nWidth, nHeight,,, ;
-         bSize, bDraw,, color, bcolor )
+      bSize, bDraw,, color, bcolor )
 
    ::title := ""
 
@@ -59,9 +58,10 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
    RETURN Self
 
 METHOD Activate() CLASS HSplitter
+
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_Createstatic( ::oParent:handle, ::id, ;
-            ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight, ::extStyle )
       ::Init()
    ENDIF
 
@@ -116,6 +116,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
    RETURN - 1
 
 METHOD Paint() CLASS HSplitter
+
    LOCAL pps, hDC, aCoors, x1, y1, x2, y2, oBrushFill
 
    pps := hwg_Definepaintstru()
@@ -133,12 +134,12 @@ METHOD Paint() CLASS HSplitter
       IF ::bPaint != NIL
          Eval( ::bPaint, Self )
       ELSEIF ! ::lScrolling
-        IF ::lCaptured
-           oBrushFill := HBrush():Add( hwg_Rgb( 156, 156, 156 ) )
-           hwg_Selectobject( hDC, oBrushFill:handle )
-           hwg_Drawedge( hDC, x1, y1, x2, y2, EDGE_ETCHED, Iif( ::lVertical,BF_RECT,BF_TOP ) + BF_MIDDLE )
-           hwg_Fillrect( hDC, x1, y1, x2, y2, oBrushFill:handle )
-        ELSEIF ::BackStyle = OPAQUE
+         IF ::lCaptured
+            oBrushFill := HBrush():Add( hwg_Rgb( 156, 156, 156 ) )
+            hwg_Selectobject( hDC, oBrushFill:handle )
+            hwg_Drawedge( hDC, x1, y1, x2, y2, EDGE_ETCHED, Iif( ::lVertical,BF_RECT,BF_TOP ) + BF_MIDDLE )
+            hwg_Fillrect( hDC, x1, y1, x2, y2, oBrushFill:handle )
+         ELSEIF ::BackStyle = OPAQUE
             hwg_Drawedge( hDC, x1, y1, x2, y2, EDGE_ETCHED, IIf( ::lVertical, BF_LEFT, BF_TOP ) )
          ENDIF
       ELSEIF !::lMoved .AND. ::BackStyle = OPAQUE
@@ -150,6 +151,7 @@ METHOD Paint() CLASS HSplitter
    RETURN NIL
 
 METHOD Drag( lParam ) CLASS HSplitter
+
    LOCAL xPos := hwg_Loword( lParam ), yPos := hwg_Hiword( lParam )
 
    IF ::lVertical
@@ -174,6 +176,7 @@ METHOD Drag( lParam ) CLASS HSplitter
    RETURN NIL
 
 METHOD DragAll( lScroll ) CLASS HSplitter
+
    LOCAL i, oCtrl, xDiff := 0, yDiff := 0
 
    lScroll := IIF(  Len( ::aLeft ) = 0 .OR. Len( ::aRight ) = 0, .F., lScroll )
@@ -201,7 +204,7 @@ METHOD DragAll( lScroll ) CLASS HSplitter
          //oCtrl:nWidth += nDiff
       ELSE
          yDiff := ::nTop - ( oCtrl:nTop + oCtrl:nHeight )
-        // oCtrl:nHeight += nDiff
+         // oCtrl:nHeight += nDiff
       ENDIF
       oCtrl:Move( oCtrl:nLeft, oCtrl:nTop, oCtrl:nWidth + xDiff, oCtrl:nHeight + yDiff , ! lScroll )
       IF ( yDiff > 0.OR. xDiff > 0 ) .OR. ! lScroll
@@ -221,3 +224,4 @@ METHOD DragAll( lScroll ) CLASS HSplitter
    ENDIF
 
    RETURN NIL
+

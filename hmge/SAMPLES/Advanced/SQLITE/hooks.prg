@@ -245,3 +245,4 @@ STATIC FUNCTION PrepareDB( cFile )
    sqlite3_finalize( pStmt )
 
    RETURN pDb
+

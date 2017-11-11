@@ -1,80 +1,70 @@
 /*
- * $Id: barcode.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * Create Barcode for HWGUI application
- *
- * see example at utils\designer\samples\barcode.xml
- *
- * Copyright 2006 Richard Roesnadi <roesnadi8@yahoo.co.id>
+* $Id: barcode.prg 2012 2013-03-07 09:03:56Z alkresin $
+* Create Barcode for HWGUI application
+* see example at utils\designer\samples\barcode.xml
+* Copyright 2006 Richard Roesnadi <roesnadi8@yahoo.co.id>
 */
 
 #include "hbclass.ch"
 #include "guilib.ch"
 #include "windows.ch"
 
-
 //#DEFINE __DEVELOP__
 
 #ifdef __DEVELOP__
 
-   #define CODE39          1
-   #define CODE39CHECK     2
-   #define CODE128AUTO     3
-   #define CODE128A        4
-   #define CODE128B        5
-   #define CODE128C        6
-   #define EAN8            7
-   #define EAN13           8
-   #define UPCA            9
-   #define CODABAR         10
-   #define SUPLEMENTO5     11
-   #define INDUST25        12
-   #define INDUST25CHECK   13
-   #define INTER25         14
-   #define INTER25CHECK    15
-   #define MATRIX25        16
-   #define MATRIX25CHECK   17
+#define CODE39          1
+#define CODE39CHECK     2
+#define CODE128AUTO     3
+#define CODE128A        4
+#define CODE128B        5
+#define CODE128C        6
+#define EAN8            7
+#define EAN13           8
+#define UPCA            9
+#define CODABAR         10
+#define SUPLEMENTO5     11
+#define INDUST25        12
+#define INDUST25CHECK   13
+#define INTER25         14
+#define INTER25CHECK    15
+#define MATRIX25        16
+#define MATRIX25CHECK   17
 
-
-   #xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; END
+#xcommand DEFAULT < v1 > := < x1 >  => IF < v1 > == NIL ; < v1 > := < x1 > ; END
 
 #xcommand @ < nTop >, < nLeft > BARCODE < oBC >   ;
-[DEVICE <hDC>                ] ;
-< label: PROMPT, VAR > < cText >   ;
-Type < nBCodeType >              ;
-[ SIZE <nWidth>, <nHeight>   ] ;
-[ COLORTEXT <nColText>       ] ;
-[ COLORPANE <nColPane>       ] ;
-[ PINWIDTH <nPinWidth>       ] ;
-[ VERTICAL <lVert>           ] ;
-[ TRANSPARENT <lTransparent> ] ;
-=> ;
-< oBC > := Barcode():New( [ <hDC> ], < cText >, < nTop >, < nLeft >, ;
-                          [ <nWidth>       ], [ <nHeight>   ], [ <nBCodeType> ], ;
-                          [ <nColText>     ], [ <nColPane>  ], [ !<lVert>     ], ;
-                          [ <lTransparent> ], [ <nPinWidth> ] )
+   [DEVICE <hDC>                ] ;
+   < label: PROMPT, VAR > < cText >   ;
+   Type < nBCodeType >              ;
+   [ SIZE <nWidth>, <nHeight>   ] ;
+   [ COLORTEXT <nColText>       ] ;
+   [ COLORPANE <nColPane>       ] ;
+   [ PINWIDTH <nPinWidth>       ] ;
+   [ VERTICAL <lVert>           ] ;
+   [ TRANSPARENT <lTransparent> ] ;
+   => ;
+   < oBC > := Barcode():New( [ <hDC> ], < cText >, < nTop >, < nLeft >, ;
+   [ <nWidth>       ], [ <nHeight>   ], [ <nBCodeType> ], ;
+   [ <nColText>     ], [ <nColPane>  ], [ !<lVert>     ], ;
+   [ <lTransparent> ], [ <nPinWidth> ] )
 
-//------------------------------------------------------------------------------
 #xcommand SHOWBARCODE < oBC > => < oBC > :ShowBarcode()
 
-
 FUNCTION main
-
 
    LOCAL oMainWindow, oFont, oEdit1, oEdit2
    LOCAL oBC
    LOCAL nTop, nLeft, nWidth, nHeight, nBCodeType
    LOCAL nColText, nColPane, lHorz, lTransparent, nPinWidth
 
-
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT - 13
 
    INIT WINDOW oMainWindow TITLE "Barcode"  ;
-        COLOR COLOR_3DLIGHT + 1                       ;
-        At 200, 0 SIZE 420, 300                       ;
-        FONT oFont ;
-        ON PAINT { || oBC:showBarcode() }
-
+      COLOR COLOR_3DLIGHT + 1                       ;
+      At 200, 0 SIZE 420, 300                       ;
+      FONT oFont ;
+      ON PAINT { || oBC:showBarcode() }
 
    @ 20, 113 EDITBOX oEdit2 CAPTION "Example"  SIZE 24, 130
 
@@ -92,24 +82,22 @@ FUNCTION main
    nHeight   := 40
 
    oBC := Barcode():New( hwg_Getdc( oMainWindow:handle ) , "993198042124", nTop, nLeft, ;
-                         nWidth, nHeight, nBCodeType, ;
-                         nColText, nColPane, lHorz, ;
-                         lTransparent, nPinWidth )
-
+      nWidth, nHeight, nBCodeType, ;
+      nColText, nColPane, lHorz, ;
+      lTransparent, nPinWidth )
 
    @ 163, 10 EDITBOX oEdit1 CAPTION oBC:InitEAN13()  SIZE 100, 20
 
    ACTIVATE WINDOW oMainWindow
 
-   RETURN nil
+   RETURN NIL
 
+   #endif
 
-#endif
+   *-- CLASS DEFINITION ---------------------------------------------------------
+   *         Name: Barcode
+   *  Description:
 
-*-- CLASS DEFINITION ---------------------------------------------------------
-*         Name: Barcode
-*  Description:
-*-----------------------------------------------------------------------------
 CLASS Barcode
 
    DATA hDC           // handle of the window, dialog or printer object
@@ -143,7 +131,7 @@ CLASS Barcode
    //  17 = Matrix 2 of 5 check digit
 
    METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
-               nColText, nColPane, lHorz, lTransparent,  nPinWidth ) CONSTRUCTOR
+         nColText, nColPane, lHorz, lTransparent,  nPinWidth ) CONSTRUCTOR
    METHOD ShowBarcode()
    METHOD CreateBarcode( cCode )
    METHOD InitCode39( lCheck )
@@ -157,15 +145,14 @@ CLASS Barcode
    METHOD InitInterleave25( lMode )
    METHOD InitMatrix25( lCheck )
 
-ENDCLASS
+   ENDCLASS
 
 *-- METHOD -------------------------------------------------------------------
 *         Name: New
 *  Description:
-*-----------------------------------------------------------------------------
 
 METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
-            nColText, nColPane, lHorz, lTransparent, nPinWidth ) CLASS Barcode
+      nColText, nColPane, lHorz, lTransparent, nPinWidth ) CLASS Barcode
 
    DEFAULT nWidth       := 200
    DEFAULT nHeight      := 20
@@ -175,7 +162,6 @@ METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
    DEFAULT lHorz        := .T.
    DEFAULT lTransparent := .F.
    DEFAULT nPinWidth    := 1
-
 
    //DEFAULT hDC    := hwg_Getdc(hwg_Getactivewindow())
 
@@ -194,11 +180,10 @@ METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
 
    RETURN ( Self )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: ShowBarcode
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: ShowBarcode
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD ShowBarcode() CLASS BarCode
 
    LOCAL cCode, cCode2
@@ -252,11 +237,10 @@ METHOD ShowBarcode() CLASS BarCode
 
    RETURN ( NIL )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: CreateBarcode
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: CreateBarcode
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD CreateBarcode( cCode ) CLASS BarCode
 
    LOCAL i, hPen, hOldPen, hBrush, hOldBrush
@@ -289,9 +273,9 @@ METHOD CreateBarcode( cCode ) CLASS BarCode
       IF SubStr( cCode, i, 1 ) = "1"
          IF ::lHorizontal = .F.
             RICH_Rectangle( ::hDC, nX, nY, nX + ::nHeight, ( nY += ::nPinWidth ) )
-        *RICH_Rectangle( ::hDC, nX, nY, nX + ::nWidth, ( nY += ::nPinWidth ) )
+            *RICH_Rectangle( ::hDC, nX, nY, nX + ::nWidth, ( nY += ::nPinWidth ) )
          ELSE
-           *RICH_Rectangle( ::hDC, nX, nY, ( nX += ::nPinWidth ), nY + ::nWidth )
+            *RICH_Rectangle( ::hDC, nX, nY, ( nX += ::nPinWidth ), nY + ::nWidth )
             RICH_Rectangle( ::hDC, nX, nY, ( nX += ::nPinWidth ), nY + ::nHeight )
          ENDIF
       ELSE
@@ -311,58 +295,58 @@ METHOD CreateBarcode( cCode ) CLASS BarCode
 
    RETURN ( NIL )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitCode39
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitCode39
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitCode39( lCheck ) CLASS BarCode
 
    LOCAL cCars   := "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-. *$/+%"
    LOCAL aBarras := { '1110100010101110', ;
-         '1011100010101110', ;
-         '1110111000101010', ;
-         '1010001110101110', ;
-         '1110100011101010', ;
-         '1011100011101010', ;
-         '1010001011101110', ;
-         '1110100010111010', ;
-         '1011100010111010', ;
-         '1010001110111010', ;
-         '1110101000101110', ;
-         '1011101000101110', ;
-         '1110111010001010', ;
-         '1010111000101110', ;
-         '1110101110001010', ;    //E
-         '1011101110001010', ;
-         '1010100011101110', ;
-         '1110101000111010', ;
-         '1011101000111010', ;
-         '1010111000111010', ;
-         '1110101010001110', ;    //K
-         '1011101010001110', ;
-         '1110111010100010', ;
-         '1010111010001110', ;
-         '1110101110100010', ;
-         '1011101110100010', ;    //p
-         '1010101110001110', ;
-         '1110101011100010', ;
-         '1011101011100010', ;
-         '1010111011100010', ;
-         '1110001010101110', ;
-         '1000111010101110', ;
-         '1110001110101010', ;
-         '1000101110101110', ;
-         '1110001011101010', ;
-         '1000111011101010', ;    //Z
-         '1000101011101110', ;
-         '1110001010111010', ;
-         '1000111010111010', ;    // ' '
-         '1000101110111010', ;
-         '1000100010100010', ;
-         '1000100010100010', ;
-         '1000101000100010', ;
-         '1010001000100010' }
+      '1011100010101110', ;
+      '1110111000101010', ;
+      '1010001110101110', ;
+      '1110100011101010', ;
+      '1011100011101010', ;
+      '1010001011101110', ;
+      '1110100010111010', ;
+      '1011100010111010', ;
+      '1010001110111010', ;
+      '1110101000101110', ;
+      '1011101000101110', ;
+      '1110111010001010', ;
+      '1010111000101110', ;
+      '1110101110001010', ;    //E
+
+   '1011101110001010', ;
+      '1010100011101110', ;
+      '1110101000111010', ;
+      '1011101000111010', ;
+      '1010111000111010', ;
+      '1110101010001110', ;    //K
+   '1011101010001110', ;
+      '1110111010100010', ;
+      '1010111010001110', ;
+      '1110101110100010', ;
+      '1011101110100010', ;    //p
+   '1010101110001110', ;
+      '1110101011100010', ;
+      '1011101011100010', ;
+      '1010111011100010', ;
+      '1110001010101110', ;
+      '1000111010101110', ;
+      '1110001110101010', ;
+      '1000101110101110', ;
+      '1110001011101010', ;
+      '1000111011101010', ;    //Z
+   '1000101011101110', ;
+      '1110001010111010', ;
+      '1000111010111010', ;    // ' '
+   '1000101110111010', ;
+      '1000100010100010', ;
+      '1000100010100010', ;
+      '1000101000100010', ;
+      '1010001000100010' }
 
    LOCAL cCar, m, n
    LOCAL cBarra := ""
@@ -394,31 +378,30 @@ METHOD InitCode39( lCheck ) CLASS BarCode
 
    RETURN ( cBarra )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitCode128
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitCode128
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitCode128( cMode ) CLASS BarCode
 
    LOCAL aCode := { "212222", "222122", "222221", "121223", "121322", "131222", ;
-         "122213", "122312", "132212", "221213", "221312", "231212", ;
-         "112232", "122132", "122231", "113222", "123122", "123221", ;
-         "223211", "221132", "221231", "213212", "223112", "312131", ;
-         "311222", "321122", "321221", "312212", "322112", "322211", ;
-         "212123", "212321", "232121", "111323", "131123", "131321", ;
-         "112313", "132113", "132311", "211313", "231113", "231311", ;
-         "112133", "112331", "132131", "113123", "113321", "133121", ;
-         "313121", "211331", "231131", "213113", "213311", "213131", ;
-         "311123", "311321", "331121", "312113", "312311", "332111", ;
-         "314111", "221411", "431111", "111224", "111422", "121124", ;
-         "121421", "141122", "141221", "112214", "112412", "122114", ;
-         "122411", "142112", "142211", "241211", "221114", "213111", ;
-         "241112", "134111", "111242", "121142", "121241", "114212", ;
-         "124112", "124211", "411212", "421112", "421211", "212141", ;
-         "214121", "412121", "111143", "111341", "131141", "114113", ;
-         "114311", "411113", "411311", "113141", "114131", "311141", ;
-         "411131", "211412", "211214", "211232", "2331112" }
+      "122213", "122312", "132212", "221213", "221312", "231212", ;
+      "112232", "122132", "122231", "113222", "123122", "123221", ;
+      "223211", "221132", "221231", "213212", "223112", "312131", ;
+      "311222", "321122", "321221", "312212", "322112", "322211", ;
+      "212123", "212321", "232121", "111323", "131123", "131321", ;
+      "112313", "132113", "132311", "211313", "231113", "231311", ;
+      "112133", "112331", "132131", "113123", "113321", "133121", ;
+      "313121", "211331", "231131", "213113", "213311", "213131", ;
+      "311123", "311321", "331121", "312113", "312311", "332111", ;
+      "314111", "221411", "431111", "111224", "111422", "121124", ;
+      "121421", "141122", "141221", "112214", "112412", "122114", ;
+      "122411", "142112", "142211", "241211", "221114", "213111", ;
+      "241112", "134111", "111242", "121142", "121241", "114212", ;
+      "124112", "124211", "411212", "421112", "421211", "212141", ;
+      "214121", "412121", "111143", "111341", "131141", "114113", ;
+      "114311", "411113", "411311", "113141", "114131", "311141", ;
+      "411131", "211412", "211214", "211232", "2331112" }
 
    LOCAL cBarra, cCar, cTemp, n, nCar
    LOCAL cCode  := ::cText
@@ -430,6 +413,7 @@ METHOD InitCode128( cMode ) CLASS BarCode
    // Errors
    IF ValType( cCode ) <> "C"
       hwg_Msginfo( "Barcode Code 128 requires a character value." )
+
       RETURN NIL
    ENDIF
 
@@ -525,11 +509,10 @@ METHOD InitCode128( cMode ) CLASS BarCode
 
    RETURN ( cBarra )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitEAN13
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitEAN13
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitEAN13() CLASS BarCode
 
    LOCAL derecha := [1110010110011011011001000010101110010011101010000100010010010001110100]
@@ -596,11 +579,10 @@ METHOD InitEAN13() CLASS BarCode
 
    RETURN ( cadena )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitUPC
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitUPC
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitUPC( nLen ) CLASS BarCode
 
    LOCAL derecha := [1110010110011011011001000010101110010011101010000100010010010001110100]
@@ -658,33 +640,31 @@ METHOD InitUPC( nLen ) CLASS BarCode
 
    RETURN ( cadena )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitE13BL
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitE13BL
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitE13BL( nLen ) CLASS BarCode
 
    nLen := Int( nLen / 2 )
 
    RETURN "101" + Replicate( "0", nLen * 7 ) + "01010" + Replicate( "0", nLen * 7 ) + "101"
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitCodabar
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitCodabar
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitCodabar() CLASS BarCode
 
    //this system not test the start/end code
 
    LOCAL cChar := "0123456789-$:/.+ABCDTN*E"
    LOCAL abar := { "101010001110", "101011100010", "101000101110", "111000101010", ;
-         "101110100010", "111010100010", "100010101110", "100010111010", ;
-         "100011101010", "111010001010", "101000111010", "101110001010", ;
-         "11101011101110", "11101110101110", "11101110111010", "10111011101110", ;
-         "10111000100010", "10001000101110", '10100011100010', '10111000100010', ;
-         '10001000101110', '10100010001110', '10100011100010' }
+      "101110100010", "111010100010", "100010101110", "100010111010", ;
+      "100011101010", "111010001010", "101000111010", "101110001010", ;
+      "11101011101110", "11101110101110", "11101110111010", "10111011101110", ;
+      "10111000100010", "10001000101110", '10100011100010', '10111000100010', ;
+      '10001000101110', '10100010001110', '10100011100010' }
 
    LOCAL n, nCar
    LOCAL cBarra := ""
@@ -698,17 +678,17 @@ METHOD InitCodabar() CLASS BarCode
 
    RETURN ( cBarra )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitSup5
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitSup5
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitSub5() CLASS BarCode
 
    LOCAL izda1   := [0001101001100100100110111101010001101100010101111011101101101110001011]
    LOCAL izda2   := [0100111011001100110110100001001110101110010000101001000100010010010111]
    LOCAL primero := [ooooooooeoeeooeeoeooeeeooeooeeoeeooeoeeeoooeoeoeoeoeeooeeoeo]
-//   LOCAL parity  := [eeoooeoeooeooeoeoooeoeeooooeeooooeeoeoeooeooeooeoe]
+
+   //   LOCAL parity  := [eeoooeoeooeooeoeoooeoeeooooeeooooeeoeoeooeooeooeoe]
 
    LOCAL k, control, n, nCar
    LOCAL cCode   := ::cText
@@ -717,8 +697,8 @@ METHOD InitSub5() CLASS BarCode
    k := Left( AllTrim( cCode ) + "00000", 5 ) // padding with '0'
 
    control := Right( Str( Val( SubStr( k, 1, 1 ) ) * 3 + Val( SubStr( k, 3, 1 ) ) * 3 + ;
-                          Val( SubStr( k, 5, 1 ) ) * 3 + Val( SubStr( k, 2, 1 ) ) * 9 + ;
-                          Val( SubStr( k, 4, 1 ) ) * 9, 5, 0 ), 1 )
+      Val( SubStr( k, 5, 1 ) ) * 3 + Val( SubStr( k, 2, 1 ) ) * 9 + ;
+      Val( SubStr( k, 4, 1 ) ) * 9, 5, 0 ), 1 )
    control := SubStr( primero, Val( control ) * 6 + 2, 5 )
 
    FOR n := 1 TO 5
@@ -735,16 +715,15 @@ METHOD InitSub5() CLASS BarCode
 
    RETURN ( cBarras )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitIndustrial25
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitIndustrial25
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitIndustrial25( lCheck ) CLASS BarCode
 
    LOCAL n
    LOCAL aBar     := { "00110", "10001", "01001", "11000", "00101", ;
-         "10100", "01100", "00011", "10010", "01010" }
+      "10100", "01100", "00011", "10010", "01010" }
    LOCAL cInStart := "110" // industrial 2 of 5 start
    LOCAL cInStop  := "101" // industrial 2 of 5 stop
    LOCAL cBar     := ""
@@ -779,16 +758,15 @@ METHOD InitIndustrial25( lCheck ) CLASS BarCode
 
    RETURN ( cBarra )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitInterleave25
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitInterleave25
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitInterleave25( lMode ) CLASS BarCode
 
    LOCAL n, m
    LOCAL aBar   := { "00110", "10001", "01001", "11000", "00101", ;
-                     "10100", "01100", "00011", "10010", "01010" }
+      "10100", "01100", "00011", "10010", "01010" }
    LOCAL cStart := "0000"
    LOCAL cStop  := "100"
    LOCAL cBar   := ""
@@ -841,16 +819,15 @@ METHOD InitInterleave25( lMode ) CLASS BarCode
 
    RETURN ( cBar )
 
+   *-- METHOD -------------------------------------------------------------------
+   *         Name: InitIndust25
+   *  Description:
 
-*-- METHOD -------------------------------------------------------------------
-*         Name: InitIndust25
-*  Description:
-*-----------------------------------------------------------------------------
 METHOD InitMatrix25( lCheck ) CLASS BarCode
 
    LOCAL n
    LOCAL aBar   := { "00110", "10001", "01001", "11000", "00101", ;
-                     "10100", "01100", "00011", "10010", "01010" }
+      "10100", "01100", "00011", "10010", "01010" }
    LOCAL cMtSt  := "10000" // matrix start/stop
    LOCAL cBar   := ""
    LOCAL cBarra := ""
@@ -903,7 +880,6 @@ HB_FUNC_STATIC( RICH_RECTANGLE )
                        ) ) ;
 }
 
-
 HB_FUNC_STATIC( RICH_CREATEPEN )
 {
    HB_RETHANDLE( CreatePen( hb_parni( 1 ),   // pen style
@@ -912,13 +888,10 @@ HB_FUNC_STATIC( RICH_CREATEPEN )
                            ) );
 }
 
-
 HB_FUNC_STATIC( RICH_SELECTOBJECT )
 {
    HB_RETHANDLE( SelectObject( (HDC) HB_PARHANDLE( 1 ), (HGDIOBJ) HB_PARHANDLE( 2 ) ) ) ;
 }
-
-
 
 HB_FUNC_STATIC( RICH_CREATESOLIDBRUSH )
 {
@@ -926,3 +899,4 @@ HB_FUNC_STATIC( RICH_CREATESOLIDBRUSH )
 }
 
 #pragma ENDDUMP
+

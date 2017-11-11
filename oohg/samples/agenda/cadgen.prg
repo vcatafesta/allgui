@@ -412,3 +412,4 @@ FUNCTION GenericOpen( oArea , cAlias )
    ENDIF
 
    RETURN NIL
+

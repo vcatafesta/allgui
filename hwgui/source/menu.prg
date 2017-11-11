@@ -1,11 +1,9 @@
 /*
- * $Id: menu.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * Prg level menu functions
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: menu.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* Prg level menu functions
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -18,17 +16,23 @@
 #define  FLAG_CHECK      2
 
 STATIC _aMenuDef, _oWnd, _aAccel, _nLevel, _Id, _oMenu, _oBitmap
-STATIC s_nWidthBmp, s_nHeightBmp,s_nbkColor  
+STATIC s_nWidthBmp, s_nHeightBmp,s_nbkColor
 
 CLASS HMenu INHERIT HObject
+
    DATA handle
    DATA aMenu
-   METHOD New()  INLINE Self
-   METHOD END()  INLINE Hwg_DestroyMenu( ::handle )
-   METHOD Show( oWnd, xPos, yPos, lWnd )
+
+METHOD New()  INLINE Self
+
+METHOD END()  INLINE Hwg_DestroyMenu( ::handle )
+
+METHOD Show( oWnd, xPos, yPos, lWnd )
+
 ENDCLASS
 
 METHOD Show( oWnd, xPos, yPos, lWnd ) CLASS HMenu
+
    LOCAL aCoor
 
    oWnd:oPopup := Self
@@ -44,13 +48,15 @@ METHOD Show( oWnd, xPos, yPos, lWnd ) CLASS HMenu
       Hwg_trackmenu( ::handle, aCoor[ 1 ], aCoor[ 2 ], oWnd:handle )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION Hwg_CreateMenu
+
    LOCAL hMenu
 
    IF Empty( hMenu := hwg__CreateMenu() )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    RETURN { { },,, hMenu }
@@ -61,6 +67,7 @@ FUNCTION Hwg_SetMenu( oWnd, aMenu )
       IF hwg__SetMenu( oWnd:handle, aMenu[ 5 ] )
          oWnd:menu := aMenu
       ELSE
+
          RETURN .F.
       ENDIF
    ELSE
@@ -69,13 +76,14 @@ FUNCTION Hwg_SetMenu( oWnd, aMenu )
 
    RETURN .T.
 
-/*
- *  AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,[bItem] [,nPos] ) --> aMenuItem
- *
- *  If nPos is omitted, the function adds menu item to the end of menu,
- *  else it inserts menu item in nPos position.
- */
+   /*
+   *  AddMenuItem( aMenu,cItem,nMenuId,lSubMenu,[bItem] [,nPos] ) --> aMenuItem
+   *  If nPos is omitted, the function adds menu item to the end of menu,
+   *  else it inserts menu item in nPos position.
+   */
+
 FUNCTION Hwg_AddMenuItem( aMenu, cItem, nMenuId, lSubMenu, bItem, nPos )
+
    LOCAL hSubMenu
 
    IF nPos == Nil
@@ -91,6 +99,7 @@ FUNCTION Hwg_AddMenuItem( aMenu, cItem, nMenuId, lSubMenu, bItem, nPos )
       ELSE
          AAdd( aMenu[ 1 ], { bItem, cItem, nMenuId, 0 } )
       ENDIF
+
       RETURN ATail( aMenu[ 1 ] )
    ELSE
       AAdd( aMenu[ 1 ], Nil )
@@ -100,28 +109,35 @@ FUNCTION Hwg_AddMenuItem( aMenu, cItem, nMenuId, lSubMenu, bItem, nPos )
       ELSE
          aMenu[ 1, nPos ] := { bItem, cItem, nMenuId, 0 }
       ENDIF
+
       RETURN aMenu[ 1, nPos ]
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 FUNCTION Hwg_FindMenuItem( aMenu, nId, nPos )
+
    LOCAL nPos1, aSubMenu
+
    nPos := 1
    DO WHILE nPos <= Len( aMenu[ 1 ] )
       IF aMenu[ 1, nPos, 3 ] == nId
+
          RETURN aMenu
       ELSEIF Len( aMenu[ 1, nPos ] ) > 4
          IF ( aSubMenu := Hwg_FindMenuItem( aMenu[ 1, nPos ] , nId, @nPos1 ) ) != Nil
             nPos := nPos1
+
             RETURN aSubMenu
          ENDIF
       ENDIF
       nPos ++
    ENDDO
-   RETURN Nil
+
+   RETURN NIL
 
 FUNCTION Hwg_GetSubMenuHandle( aMenu, nId )
+
    LOCAL aSubMenu := Hwg_FindMenuItem( aMenu, nId )
 
    RETURN IIf( aSubMenu == Nil, 0, aSubMenu[ 5 ] )
@@ -160,7 +176,7 @@ FUNCTION hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
             /* This code just for sure menu runtime hfrmtmpl.prg is enable */
             IIf( ValType( aMenu[ 1, nPos, 4 ] ) == "L", aMenu[ 1, nPos, 4 ] := .f., )
             hwg__AddMenuItem( hMenu, aMenu[ 1, nPos, 2 ], nPos, .T., ;
-                              aMenu[ 1, nPos, 3 ], aMenu[ 1, nPos, 4 ], .F. )
+               aMenu[ 1, nPos, 3 ], aMenu[ 1, nPos, 4 ], .F. )
             oBmp := Hwg_SearchPosBitmap( aMenu[ 1, nPos, 3 ] )
             IF oBmp[ 1 ]
                hwg__SetMenuItemBitmaps( hMenu, aMenu[ 1, nPos, 3 ], oBmp[ 2 ], "" )
@@ -174,15 +190,18 @@ FUNCTION hwg_BuildMenu( aMenuInit, hWnd, oWnd, nPosParent, lPopup )
       Hwg_SetMenu( oWnd, aMenu )
       IF s_nbkColor != Nil
          Hwg_SetMenuInfo( oWnd:Handle, s_nbkColor )
-      ENDIF   
+      ENDIF
    ELSEIF _oMenu != Nil
       _oMenu:handle := aMenu[ 5 ]
       _oMenu:aMenu := aMenu
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 FUNCTION Hwg_BeginMenu( oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp )
+
    LOCAL aMenu, i
+
    IF oWnd != Nil
       _aMenuDef := { }
       _aAccel   := { }
@@ -193,7 +212,7 @@ FUNCTION Hwg_BeginMenu( oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp )
       _Id       := IIf( nId == Nil, MENU_FIRST_ID, nId )
       s_nWidthBmp  := IIF( nWidthBmp = Nil .OR. ! HWG_ISWIN7(), hwg_Getsystemmetrics( SM_CXMENUCHECK ), nWidthBmp )
       s_nHeightBmp := IIF( nHeightBmp = Nil .OR. ! HWG_ISWIN7(), hwg_Getsystemmetrics( SM_CYMENUCHECK ), nHeightBmp )
-      s_nbkColor   := nbkColor 
+      s_nbkColor   := nbkColor
    ELSE
       nId   := IIf( nId == Nil, ++ _Id, nId )
       aMenu := _aMenuDef
@@ -203,23 +222,27 @@ FUNCTION Hwg_BeginMenu( oWnd, nId, cTitle, nbkColor, nWidthBmp, nHeightBmp )
       _nLevel ++
       AAdd( aMenu, { { }, cTitle, nId, 0 } )
    ENDIF
+
    RETURN .T.
 
 FUNCTION Hwg_ContextMenu()
+
    _aMenuDef := { }
    _oBitmap  := { }
    _oWnd := Nil
    _nLevel := 0
    _Id := CONTEXTMENU_FIRST_ID
    _oMenu := HMenu():New()
+
    RETURN _oMenu
 
 FUNCTION Hwg_EndMenu()
+
    IF _nLevel > 0
       _nLevel --
    ELSE
       hwg_BuildMenu( AClone( _aMenuDef ), IIf( _oWnd != Nil, _oWnd:handle, Nil ), ;
-                 _oWnd,, IIf( _oWnd != Nil, .F., .T. ) )
+         _oWnd,, IIf( _oWnd != Nil, .F., .T. ) )
       IF _oWnd != Nil .AND. _aAccel != Nil .AND. ! Empty( _aAccel )
          _oWnd:hAccel := hwg_Createacceleratortable( _aAccel )
       ENDIF
@@ -229,9 +252,11 @@ FUNCTION Hwg_EndMenu()
       _oWnd     := Nil
       _oMenu    := Nil
    ENDIF
+
    RETURN .T.
 
 FUNCTION Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, lBitmap, lResource, lCheck )
+
    LOCAL aMenu, i, oBmp, nFlag
 
    lCheck := IIf( lCheck == Nil, .F., lCheck )
@@ -248,7 +273,9 @@ FUNCTION Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, lBit
    nId := IIf( nId == Nil .AND. cItem != Nil, ++ _Id, nId )
    AAdd( aMenu, { bItem, cItem, nId, nFlag } )
    IF lBitmap != Nil .or. ! Empty( lBitmap )
-      IF lResource == Nil ;lResource := .F. ; ENDIF
+      IF lResource == Nil
+         lResource := .F.
+      ENDIF
       IF lResource .OR. AT("." ,lBitmap ) = 0
          oBmp := HBitmap():AddResource( lBitmap, LR_LOADMAP3DCOLORS + LR_SHARED + LR_LOADTRANSPARENT , ,s_nWidthBmp, s_nHeightBmp  )
       ELSE
@@ -261,10 +288,13 @@ FUNCTION Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, lBit
    IF accFlag != Nil .AND. accKey != Nil
       AAdd( _aAccel, { accFlag, accKey, nId } )
    ENDIF
+
    RETURN .T.
 
 FUNCTION Hwg_DefineAccelItem( nId, bItem, accFlag, accKey )
+
    LOCAL aMenu, i
+
    aMenu := _aMenuDef
    FOR i := 1 TO _nLevel
       aMenu := ATail( aMenu )[ 1 ]
@@ -272,18 +302,21 @@ FUNCTION Hwg_DefineAccelItem( nId, bItem, accFlag, accKey )
    nId := IIf( nId == Nil, ++ _Id, nId )
    AAdd( aMenu, { bItem, Nil, nId, 0 } )
    AAdd( _aAccel, { accFlag, accKey, nId } )
+
    RETURN .T.
 
-
 FUNCTION Hwg_SetMenuItemBitmaps( aMenu, nId, abmp1, abmp2 )
+
    LOCAL aSubMenu := Hwg_FindMenuItem( aMenu, nId )
    LOCAL oMenu
 
    oMenu := IIf( aSubMenu == Nil, 0, aSubMenu[ 5 ] )
    hwg__SetMenuItemBitmaps( oMenu, nId, abmp1, abmp2 )
-   RETURN Nil
+
+   RETURN NIL
 
 FUNCTION Hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
+
    LOCAL aSubMenu := Hwg_FindMenuItem( aMenu, nId )
    LOCAL oMenu, oBmp
 
@@ -295,7 +328,8 @@ FUNCTION Hwg_InsertBitmapMenu( aMenu, nId, lBitmap, oResource )
    ENDIF
    oMenu := IIf( aSubMenu == Nil, 0, aSubMenu[ 5 ] )
    HWG__InsertBitmapMenu( oMenu, nId, oBmp:handle )
-   RETURN Nil
+
+   RETURN NIL
 
 FUNCTION Hwg_SearchPosBitmap( nPos_Id )
 
@@ -325,5 +359,6 @@ FUNCTION hwg_DeleteMenuItem( oWnd, nId )
 
       hwg_DeleteMenu( hwg_Getmenuhandle( oWnd:handle ), nId )
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 

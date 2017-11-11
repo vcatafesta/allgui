@@ -1,11 +1,9 @@
 /*
- * $Id: htrackbr.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HTrackBar class
- *
- * Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
- * www - http://geocities.yahoo.com.br/marcosgambeta/
+* $Id: htrackbr.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HTrackBar class
+* Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
+* www - http://geocities.yahoo.com.br/marcosgambeta/
 */
 
 #include "windows.ch"
@@ -19,10 +17,10 @@
 #define TBS_BOTH                     8
 #define TBS_NOTICKS                 16
 
-
 CLASS HTrackBar INHERIT HControl
 
-   CLASS VAR winclass INIT "msctls_trackbar32"
+CLASS VAR winclass INIT "msctls_trackbar32"
+
    DATA value
    DATA bChange
    DATA bThumbDrag
@@ -40,7 +38,7 @@ CLASS HTrackBar INHERIT HControl
    METHOD GetValue()
    METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
@@ -52,12 +50,12 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       TickStyle := Hwg_BitOr( TickStyle, TBS_AUTOTICKS )
    ENDIF
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
-         WS_CHILD + WS_VISIBLE + WS_TABSTOP )
+            WS_CHILD + WS_VISIBLE + WS_TABSTOP )
    nStyle += IIf( lVertical != NIL .AND. lVertical, TBS_VERT, 0 )
    nStyle += TickStyle + TickMarks
 
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,, ;
-         bInit, bSize, bPaint, cTooltip )
+            bInit, bSize, bPaint, cTooltip )
 
    ::value      := IIf( ValType( vari ) == "N", vari, 0 )
    ::bChange    := bChange
@@ -71,21 +69,24 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    RETURN Self
 
 METHOD Activate() CLASS HTrackBar
+
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_InitTrackbar ( ::oParent:handle, ::id, ::style, ;
-            ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
-            ::nLow, ::nHigh )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight, ;
+         ::nLow, ::nHigh )
       ::Init()
    ENDIF
 
    RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
+
    LOCAL aCoors
 
    IF msg == WM_PAINT
       IF ::bPaint != NIL
          Eval( ::bPaint, Self )
+
          RETURN 0
       ENDIF
    ELSEIF msg == WM_MOUSEMOVE
@@ -96,7 +97,8 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
       IF ::brush != NIL
          aCoors := hwg_Getclientrect( ::handle )
          hwg_Fillrect( wParam, aCoors[ 1 ], aCoors[ 2 ], aCoors[ 3 ] + 1, ;
-               aCoors[ 4 ] + 1, ::brush:handle )
+            aCoors[ 4 ] + 1, ::brush:handle )
+
          RETURN 1
       ENDIF
    ELSEIF msg == WM_DESTROY
@@ -104,20 +106,24 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HTrackBar
    ELSEIF msg == WM_CHAR
       IF wParam = VK_TAB
          hwg_GetSkip( ::oParent, ::handle, , ;
-               iif( hwg_IsCtrlShift(.f., .t.), -1, 1) )
+            iif( hwg_IsCtrlShift(.f., .t.), -1, 1) )
+
          RETURN 0
       ENDIF
-    ELSEIF msg = WM_KEYDOWN
-       IF hwg_ProcKeyList( Self, wParam )
-          RETURN 0
+   ELSEIF msg = WM_KEYDOWN
+      IF hwg_ProcKeyList( Self, wParam )
+
+         RETURN 0
       ENDIF
    ELSEIF ::bOther != NIL
+
       RETURN Eval( ::bOther, Self, msg, wParam, lParam )
    ENDIF
 
    RETURN - 1
 
 METHOD Init() CLASS HTrackBar
+
    IF ! ::lInit
       ::Super:Init()
       hwg_TrackbarSetrange( ::handle, ::nLow, ::nHigh )
@@ -132,6 +138,7 @@ METHOD Init() CLASS HTrackBar
    RETURN NIL
 
 METHOD SetValue( nValue ) CLASS HTrackBar
+
    IF ValType( nValue ) == "N"
       hwg_Sendmessage( ::handle, TBM_SETPOS, 1, nValue )
       ::value := nValue
@@ -140,6 +147,7 @@ METHOD SetValue( nValue ) CLASS HTrackBar
    RETURN NIL
 
 METHOD GetValue() CLASS HTrackBar
+
    ::value := hwg_Sendmessage( ::handle, TBM_GETPOS, 0, 0 )
 
    RETURN ( ::value )

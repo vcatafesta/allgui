@@ -2324,3 +2324,4 @@ HB_FUNC (_HPDF_LOAD_JPG)
 }
 
 #pragma ENDDUMP
+

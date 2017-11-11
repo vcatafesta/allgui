@@ -1186,3 +1186,4 @@ HB_FUNC ( RECTDRAW )
 }
 
 #pragma ENDDUMP
+

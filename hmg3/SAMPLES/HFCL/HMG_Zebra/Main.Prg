@@ -237,3 +237,4 @@ FUNCTION changebackcolor
    ENDIF
 
    RETURN NIL
+

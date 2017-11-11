@@ -804,3 +804,4 @@ STATIC FUNCTION filtra_fornecedor(parametro)
    end
 
    RETURN(nil)
+

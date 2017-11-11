@@ -1,21 +1,19 @@
 /*
- * $Id: hprogres.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HProgressBar class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hprogres.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HProgressBar class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
 #include "hbclass.ch"
 #include "guilib.ch"
 
-
 CLASS HProgressBar INHERIT HControl
 
-   CLASS VAR winclass   INIT "msctls_progress32"
+CLASS VAR winclass   INIT "msctls_progress32"
+
    DATA  maxPos
    DATA  nRange
    DATA  lNewBox
@@ -38,7 +36,7 @@ CLASS HProgressBar INHERIT HControl
    METHOD Close()
    METHOD End() INLINE hwg_Destroywindow( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical ) CLASS HProgressBar
 
@@ -77,11 +75,11 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
    ::lPercent := lPercent
 
    INIT DIALOG ::oParent TITLE cTitle       ;
-         At nLeft, nTop SIZE nWidth, nHeight   ;
-         STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + IIf( nTop == 0, DS_CENTER, 0 ) + DS_SYSMODAL + MB_USERICON
+      At nLeft, nTop SIZE nWidth, nHeight   ;
+      STYLE WS_POPUP + WS_VISIBLE + WS_CAPTION + WS_SYSMENU + WS_SIZEBOX + IIf( nTop == 0, DS_CENTER, 0 ) + DS_SYSMODAL + MB_USERICON
 
    @ ::nLeft, nTop + 5 SAY ::LabelBox CAPTION IIF( EMPTY( lPercent ), "", "%" )  SIZE ::nWidth, 19 ;
-         STYLE SS_CENTER
+      STYLE SS_CENTER
 
    IF bExit != NIL
       ::oParent:bDestroy := bExit
@@ -100,7 +98,7 @@ METHOD Activate() CLASS HProgressBar
 
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_Createprogressbar( ::oParent:handle, ::maxPos, ::style, ;
-            ::nLeft, ::nTop, ::nWidth, IIF( ::nHeight = 0, NIL, ::nHeight ) )
+         ::nLeft, ::nTop, ::nWidth, IIF( ::nHeight = 0, NIL, ::nHeight ) )
       ::Init()
    ENDIF
 
@@ -110,12 +108,12 @@ METHOD Init()  CLASS HProgressBar
 
    IF ! ::lInit
       ::Super:Init()
-       IF ::nAnimation != NIL .AND. ::nAnimation > 0
-          hwg_Sendmessage( ::handle, PBM_SETMARQUEE, 1, ::nAnimation )
-       ENDIF
+      IF ::nAnimation != NIL .AND. ::nAnimation > 0
+         hwg_Sendmessage( ::handle, PBM_SETMARQUEE, 1, ::nAnimation )
+      ENDIF
    ENDIF
 
-  RETURN NIL
+   RETURN NIL
 
 METHOD STEP( cTitle )
 
@@ -128,6 +126,7 @@ METHOD STEP( cTitle )
          ::nPercent += ::maxPos  //::nLimit
          ::setLabel( LTRIM( STR( ::nPercent, 3 ) ) + " %" )
       ENDIF
+
       RETURN .T.
    ENDIF
 
@@ -155,17 +154,17 @@ METHOD SetLabel( cCaption ) CLASS HProgressBar
 METHOD SetAnimation( nAnimation ) CLASS HProgressBar
 
    IF nAnimation != NIL
-       IF nAnimation <= 0
-          hwg_Sendmessage( ::handle, PBM_SETMARQUEE, 0, NIL )
-          hwg_Modifystyle( ::Handle, PBS_MARQUEE, 0 )
-          hwg_Sendmessage( ::handle, PBM_SETPOS, 0, 0)
-       ELSE
+      IF nAnimation <= 0
+         hwg_Sendmessage( ::handle, PBM_SETMARQUEE, 0, NIL )
+         hwg_Modifystyle( ::Handle, PBS_MARQUEE, 0 )
+         hwg_Sendmessage( ::handle, PBM_SETPOS, 0, 0)
+      ELSE
          IF Hwg_BitAND( ::Style, PBS_MARQUEE ) = 0
             hwg_Modifystyle( ::Handle, PBS_MARQUEE, PBS_MARQUEE )
          ENDIF
          hwg_Sendmessage( ::handle, PBM_SETMARQUEE, 1, nAnimation)
-       ENDIF
-       ::nAnimation := nAnimation
+      ENDIF
+      ::nAnimation := nAnimation
    ENDIF
 
    RETURN IIF( ::nAnimation != NIL, ::nAnimation, 0 )
@@ -178,3 +177,4 @@ METHOD Close()
    ENDIF
 
    RETURN NIL
+

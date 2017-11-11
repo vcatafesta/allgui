@@ -1,12 +1,10 @@
 /*
- * $Id: hshbtn.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HShadeButton class, inherited from HOwnButton
- * It implements some kind of owner drawn buttons
- *
- * Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hshbtn.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HShadeButton class, inherited from HOwnButton
+* It implements some kind of owner drawn buttons
+* Copyright 2006 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "hbclass.ch"
@@ -31,7 +29,7 @@ CLASS HShadeButton INHERIT HOwnButton
    METHOD Paint()
    METHOD END()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lFlat,              ;
@@ -41,10 +39,10 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       granularity, highlight, coloring, shcolor ) CLASS HShadeButton
 
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,    ;
-         bInit, bSize, bPaint, bClick, lFlat,             ;
-         cText, color, font, xt, yt,,,                    ;
-         bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
-         cTooltip, lEnabled )
+      bInit, bSize, bPaint, bClick, lFlat,             ;
+      cText, color, font, xt, yt,,,                    ;
+      bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
+      cTooltip, lEnabled )
 
    ::hShade := hwg_Shade_new( 0, 0, nWidth, nHeight, lFlat )
    hwg_Shade_set( ::hShade, shadeID, palette, granularity, highlight, coloring, shcolor )
@@ -52,6 +50,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    RETURN Self
 
 METHOD Paint() CLASS HShadeButton
+
    LOCAL pps, hDC
    LOCAL nState
 
@@ -64,8 +63,8 @@ METHOD Paint() CLASS HShadeButton
 
    IF ::lEnabled
       nState := IIf( ::state == OBTN_PRESSED, STATE_SELECTED, STATE_DEFAULT + ;
-            IIf( ::state == OBTN_MOUSOVER, STATE_OVER, 0 ) ) + ;
-            IIf( hwg_Getfocus() == ::handle, STATE_FOCUS, 0 )
+         IIf( ::state == OBTN_MOUSOVER, STATE_OVER, 0 ) ) + ;
+         IIf( hwg_Getfocus() == ::handle, STATE_FOCUS, 0 )
    ELSE
       nState := STATE_DISABLED
    ENDIF
@@ -84,3 +83,4 @@ METHOD END() CLASS HShadeButton
    hwg_Shade_release( ::hShade )
 
    RETURN NIL
+

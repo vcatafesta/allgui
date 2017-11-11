@@ -1,10 +1,9 @@
 /*
- * $Id: query.prg 2023 2013-04-19 06:24:23Z alkresin $
- * DBCHW - DBC ( Harbour + HWGUI )
- * SQL queries
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://www.kresin.ru
+* $Id: query.prg 2023 2013-04-19 06:24:23Z alkresin $
+* DBCHW - DBC ( Harbour + HWGUI )
+* SQL queries
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://www.kresin.ru
 */
 
 #include "windows.ch"
@@ -14,10 +13,11 @@
 #include "ads.ch"
 #endif
 
-Static cQuery := ""
+STATIC cQuery := ""
 
-Function OpenQuery
-Local fname := hwg_Selectfile( "Query files( *.que )", "*.que", mypath )
+FUNCTION OpenQuery
+
+   LOCAL fname := hwg_Selectfile( "Query files( *.que )", "*.que", mypath )
 
    IF !Empty( fname )
       mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
@@ -25,20 +25,23 @@ Local fname := hwg_Selectfile( "Query files( *.que )", "*.que", mypath )
       Query( .T. )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function Query( lEdit )
-Local oDlg
-Local bBtnSave := {||
-   Local fname := hwg_Savefile( "*.que","Query files( *.que )", "*.que", mypath )
+FUNCTION Query( lEdit )
+
+   LOCAL oDlg
+   LOCAL bBtnSave := {||
+   LOCAL fname := hwg_Savefile( "*.que","Query files( *.que )", "*.que", mypath )
+
    IF !Empty( fname )
       hb_MemoWrit( fname,cQuery )
    ENDIF
    }
-Local oldArea := Alias(), tmpdriv, tmprdonly
-Local id1
-Local aChildWnd, hChild
-Static lConnected := .F.
+   LOCAL oldArea := Alias(), tmpdriv, tmprdonly
+   LOCAL id1
+   LOCAL aChildWnd, hChild
+
+   STATIC lConnected := .F.
 
    IF !lEdit
       cQuery := ""
@@ -60,14 +63,16 @@ Static lConnected := .F.
 
    IF oDlg:lResult
       IF Empty( cQuery )
-         Return Nil
+
+         RETURN NIL
       ENDIF
 
       IF numdriv == 2
          hwg_Msgstop( "You shoud switch to ADS_CDX or ADS_ADT to run query" )
-         Return .F.
+
+         RETURN .F.
       ENDIF
-#ifdef RDD_ADS
+      #ifdef RDD_ADS
       IF !lConnected
          IF Empty( mypath )
             AdsConnect( "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" ) )
@@ -77,7 +82,7 @@ Static lConnected := .F.
          lConnected := .T.
       ENDIF
       IF Select( "ADSSQL" ) > 0
-         Select ADSSQL
+         SELECT ADSSQL
          USE
       ELSE
          SELECT 0
@@ -87,14 +92,16 @@ Static lConnected := .F.
          IF !Empty( oldArea )
             Select( oldArea )
          ENDIF
-         Return .F.
+
+         RETURN .F.
       ENDIF
       IF !AdsExecuteSqlDirect( cQuery )
          hwg_Msgstop( "SQL execution failed" )
          IF !Empty( oldArea )
             Select( oldArea )
          ENDIF
-         Return .F.
+
+         RETURN .F.
       ELSE
          IF Alias() == "ADSSQL"
             improc := Select( "ADSSQL" )
@@ -114,10 +121,12 @@ Static lConnected := .F.
                Select( oldArea )
             ENDIF
             hwg_Msgstop( "Statement doesn't returns cursor" )
-            Return .F.
+
+            RETURN .F.
          ENDIF
       ENDIF
-#endif
+      #endif
    ENDIF
-Return Nil
+
+   RETURN NIL
 

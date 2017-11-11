@@ -2579,3 +2579,4 @@ STATIC FUNCTION adiciona_borda()
    _preco_antes_borda := x_preco
 
    RETURN(nil)
+

@@ -1,15 +1,13 @@
 /*
- * $Id: hprogres.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HProgressBar class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hprogres.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HProgressBar class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 /*
- * Copyright 2008 Luiz Rafal Culik Guimaraes <luiz at xharbour.com.br>
- * port for linux version
+* Copyright 2008 Luiz Rafal Culik Guimaraes <luiz at xharbour.com.br>
+* port for linux version
 */
 
 #include "windows.ch"
@@ -18,19 +16,26 @@
 
 CLASS HProgressBar INHERIT HControl
 
-   CLASS VAR winclass   INIT "ProgressBar"
+CLASS VAR winclass   INIT "ProgressBar"
+
    DATA  maxPos
    DATA  lNewBox
    DATA  nCount INIT 0
    DATA  nLimit
 
-   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange, bInit,bSize,bPaint,ctooltip )
-   METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit,bInit,bSize,bPaint,ctooltip )
-   METHOD Activate()
-   METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
-   METHOD Step()
-   METHOD Set( cTitle,nPos )
-   METHOD Close()
+METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange, bInit,bSize,bPaint,ctooltip )
+
+METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit,bInit,bSize,bPaint,ctooltip )
+
+METHOD Activate()
+
+METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
+
+METHOD Step()
+
+METHOD Set( cTitle,nPos )
+
+METHOD Close()
 
 ENDCLASS
 
@@ -44,7 +49,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,b
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HProgressBar
 
@@ -65,8 +70,8 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
    ::nLimit := Iif( nRange != Nil,Int( nRange/::maxPos ),1 )
 
    INIT DIALOG ::oParent TITLE cTitle       ;
-        AT nLeft,nTop SIZE nWidth,nHeight   ;
-        STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+Iif( nTop==0,DS_CENTER,0 )+DS_SYSMODAL
+      AT nLeft,nTop SIZE nWidth,nHeight   ;
+      STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX+Iif( nTop==0,DS_CENTER,0 )+DS_SYSMODAL
 
    IF bExit != Nil
       ::oParent:bDestroy := bExit
@@ -78,16 +83,17 @@ METHOD NewBox( cTitle,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bExit ) CLASS HPro
    ::Activate()
    ::oParent:AddControl( Self )
 
-Return Self
+   RETURN Self
 
 METHOD Activate CLASS HProgressBar
 
    IF !empty(::oParent:handle )
       ::handle := hwg_Createprogressbar( ::oParent:handle, ::maxPos, ;
-                  ::nLeft, ::nTop, ::nWidth,::nHeight )
+         ::nLeft, ::nTop, ::nWidth,::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD Step()
 
@@ -97,7 +103,7 @@ METHOD Step()
       hwg_Updateprogressbar( ::handle )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Set( cTitle,nPos ) CLASS HProgressBar
 
@@ -108,7 +114,7 @@ METHOD Set( cTitle,nPos ) CLASS HProgressBar
       hwg_Setprogressbar( ::handle,nPos )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Close()
 
@@ -117,5 +123,5 @@ METHOD Close()
       hwg_EndDialog( ::oParent:handle )
    ENDIF
 
-Return Nil
+   RETURN NIL
 

@@ -271,3 +271,4 @@ PROCEDURE Cancel()
    Form_1.Grid_1.SetFocus
 
    RETURN
+

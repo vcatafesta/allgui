@@ -100,3 +100,4 @@ FUNCTION ISAPPXPTHEMED()
 
    RETURN ( OS_ISWINXP_OR_LATER() ;     // <= hrb\contrib/hbwin/legacycv.c
    .AND. IsAppThemed() )       // <= HMG\h_window.prg
+

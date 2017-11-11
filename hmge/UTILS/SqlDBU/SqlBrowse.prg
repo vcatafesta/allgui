@@ -852,3 +852,4 @@ FUNCTION SqlDelete(cTable,lAll )
    ENDIF
 
    RETURN TRUE
+

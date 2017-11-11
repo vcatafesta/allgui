@@ -1,9 +1,7 @@
 /*
- * HWinPrn using sample
- * 
- *
- * Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* HWinPrn using sample
+* Copyright 2005 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "hwgui.ch"
@@ -17,23 +15,24 @@ REQUEST HB_CODEPAGE_RU1251
 #endif
 */
 
-Function Main
-Local oWinPrn, i
+FUNCTION Main
 
-#ifdef __PLATFORM__Linux__
+   LOCAL oWinPrn, i
+
+   #ifdef __PLATFORM__Linux__
    oWinPrn := HWinPrn():New( ,"RU866","RUKOI8" )
    oWinPrn:StartDoc( .T.,"/apps/a2.ps" )
-#else
+   #else
    oWinPrn := HWinPrn():New( ,"RU866","RU1251" )
    oWinPrn:StartDoc( .T. )
-#endif
+   #endif
 
    oWinPrn:PrintLine( oWinPrn:oFont:name + " " + Str(oWinPrn:oFont:height) + " " + Str(oWinPrn:nCharW) + " " + Str(oWinPrn:nLineHeight) )
    oWinPrn:PrintLine( "A123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )
-/*
+   /*
    oWinPrn:PrintLine( " ¡¢£¤¥¦§¨©ª«¬­®¯àáâãäåæçèéêëìíîï" )
    oWinPrn:PrintLine( "€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œŸ" )
-*/
+   */
    oWinPrn:PrintLine( "abcdefghijklmnopqrstuvwxyz" )
    oWinPrn:PrintLine( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" )
    oWinPrn:PrintLine( "ÚÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿" )
@@ -73,4 +72,5 @@ Local oWinPrn, i
 
    oWinPrn:End()
 
-Return Nil
+   RETURN NIL
+

@@ -250,3 +250,4 @@ FUNCTION CerrarTablas
    // FErase("Contactos.cdx") --> not good habit
 
    RETURN NIL
+

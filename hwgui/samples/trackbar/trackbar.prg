@@ -1,60 +1,51 @@
-//--------------------------------------------------------------------------//
 
 #include "windows.ch"
 #include "guilib.ch"
 
-//--------------------------------------------------------------------------//
+STATIC oWnd
+STATIC oDlg1
+STATIC oDlg2
+STATIC oTB
+STATIC oTB1
+STATIC oTB2
+STATIC oSay
+STATIC oSayDlg1
+STATIC oSayDlg2
 
-Static oWnd
-Static oDlg1
-Static oDlg2
-Static oTB
-Static oTB1
-Static oTB2
-Static oSay
-Static oSayDlg1
-Static oSayDlg2
-
-//--------------------------------------------------------------------------//
-
-Function Main ()
+FUNCTION Main ()
 
    INIT WINDOW oWnd MAIN TITLE "TrackBar Control - Demo" ;
       COLOR COLOR_3DLIGHT+1 ;
       AT 100,100 SIZE 640,480
 
    MENU OF oWnd
-      MENUITEM "&Dialog 1" ACTION Dlg1()
-      MENUITEM "&Dialog 2" ACTION Dlg2()
-      MENUITEM "&Exit"     ACTION hwg_EndWindow()
-   ENDMENU
+   MENUITEM "&Dialog 1" ACTION Dlg1()
+   MENUITEM "&Dialog 2" ACTION Dlg2()
+   MENUITEM "&Exit"     ACTION hwg_EndWindow()
+ENDMENU
 
-   @ 20,20 TRACKBAR oTB ;
-      SIZE 300,50 ;
-      RANGE 0,10 ;
-      INIT 5 AUTOTICKS ;
-      ON CHANGE {||UpdateSay()}
+@ 20,20 TRACKBAR oTB ;
+   SIZE 300,50 ;
+   RANGE 0,10 ;
+   INIT 5 AUTOTICKS ;
+   ON CHANGE {||UpdateSay()}
 
-   @ 300,200 BUTTON "Get Value" ON CLICK {||hwg_Msginfo(str(oTB:GetValue()))} SIZE 100,40
-   @ 300,300 BUTTON "Set Value" ON CLICK {||oTB:SetValue(5),UpdateSay()} SIZE 100,40
+@ 300,200 BUTTON "Get Value" ON CLICK {||hwg_Msginfo(str(oTB:GetValue()))} SIZE 100,40
+@ 300,300 BUTTON "Set Value" ON CLICK {||oTB:SetValue(5),UpdateSay()} SIZE 100,40
 
-   @ 100,100 SAY oSay CAPTION "5" SIZE 40,40
+@ 100,100 SAY oSay CAPTION "5" SIZE 40,40
 
-   ACTIVATE WINDOW oWnd
+ACTIVATE WINDOW oWnd
 
-   Return Nil
+RETURN NIL
 
-//--------------------------------------------------------------------------//
-
-Function UpdateSay ()
+FUNCTION UpdateSay ()
 
    oSay:SetValue( str( oTB:GetValue() ) )
 
-   Return Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
-
-Function Dlg1 ()
+FUNCTION Dlg1 ()
 
    INIT DIALOG oDlg1 TITLE "Dialog 1" ;
       AT 20,20 SIZE 500,300
@@ -73,19 +64,15 @@ Function Dlg1 ()
 
    ACTIVATE DIALOG oDlg1
 
-   Return Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
-
-Function UpdateSayDlg1 ()
+FUNCTION UpdateSayDlg1 ()
 
    oSayDlg1:SetValue( str( oTB1:GetValue() ) )
 
-   Return Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
-
-Function Dlg2 ()
+FUNCTION Dlg2 ()
 
    INIT DIALOG oDlg2 TITLE "Dialog 2" ;
       AT 20,20 SIZE 500,300
@@ -105,15 +92,11 @@ Function Dlg2 ()
 
    ACTIVATE DIALOG oDlg2
 
-   Return Nil
+   RETURN NIL
 
-//--------------------------------------------------------------------------//
-
-Function UpdateSayDlg2 ()
+FUNCTION UpdateSayDlg2 ()
 
    oSayDlg2:SetValue( str( oTB2:GetValue() ) )
 
-   Return Nil
-
-//--------------------------------------------------------------------------//
+   RETURN NIL
 

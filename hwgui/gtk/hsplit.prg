@@ -1,11 +1,9 @@
 /*
- * $Id: hsplit.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HSplitter class
- *
- * Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hsplit.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HSplitter class
+* Copyright 2003 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -15,7 +13,7 @@
 
 CLASS HSplitter INHERIT HControl
 
-   CLASS VAR winclass INIT "STATIC"
+CLASS VAR winclass INIT "STATIC"
 
    DATA aLeft
    DATA aRight
@@ -25,23 +23,30 @@ CLASS HSplitter INHERIT HControl
    DATA lMoved INIT .F.
    DATA bEndDrag
 
-   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
-                  bSize,bPaint,color,bcolor,aLeft,aRight )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Paint( lpdis )
-   METHOD Move( x1,y1,width,height )
-   METHOD Drag( lParam )
-   METHOD DragAll()
+METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
+      bSize,bPaint,color,bcolor,aLeft,aRight )
+
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Paint( lpdis )
+
+METHOD Move( x1,y1,width,height )
+
+METHOD Drag( lParam )
+
+METHOD DragAll()
 
 ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
-                  bSize,bDraw,color,bcolor,aLeft,aRight ) CLASS HSplitter
+      bSize,bDraw,color,bcolor,aLeft,aRight ) CLASS HSplitter
 
    ::Super:New( oWndParent,nId,WS_CHILD+WS_VISIBLE+SS_OWNERDRAW,nLeft,nTop,nWidth,nHeight,,, ;
-                  bSize,bDraw,,color,bcolor )
+      bSize,bDraw,,color,bcolor )
 
    ::title   := ""
    ::aLeft   := Iif( aLeft==Nil, {}, aLeft )
@@ -50,15 +55,17 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
 
    ::Activate()
 
-Return Self
+   RETURN Self
 
 METHOD Activate() CLASS HSplitter
+
    IF !Empty( ::oParent:handle )
       ::handle := hwg_Createsplitter( ::oParent:handle, ::id, ;
-                  ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
 
@@ -85,7 +92,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HSplitter
       ::End()
    ENDIF
 
-Return -1
+   RETURN -1
 
 METHOD Init CLASS HSplitter
 
@@ -94,10 +101,11 @@ METHOD Init CLASS HSplitter
       hwg_Setwindowobject( ::handle,Self )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HSplitter
-Local hDC
+
+   LOCAL hDC
 
    IF ::bPaint != Nil
       Eval( ::bPaint,Self )
@@ -107,15 +115,17 @@ Local hDC
       hwg_Releasedc( ::handle, hDC )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
 METHOD Move( x1,y1,width,height )  CLASS HSplitter
 
    ::Super:Move( x1,y1,width,height,.T. )
-Return Nil
+
+   RETURN NIL
 
 METHOD Drag( lParam ) CLASS HSplitter
-Local xPos := hwg_Loword( lParam ), yPos := hwg_Hiword( lParam )
+
+   LOCAL xPos := hwg_Loword( lParam ), yPos := hwg_Hiword( lParam )
 
    IF ::lVertical
       IF xPos > 32000
@@ -130,10 +140,11 @@ Local xPos := hwg_Loword( lParam ), yPos := hwg_Hiword( lParam )
    ENDIF
    ::lMoved := .T.
 
-Return Nil
+   RETURN NIL
 
 METHOD DragAll() CLASS HSplitter
-Local i, oCtrl, nDiff
+
+   LOCAL i, oCtrl, nDiff
 
    FOR i := 1 TO Len( ::aRight )
       oCtrl := ::aRight[i]
@@ -143,7 +154,7 @@ Local i, oCtrl, nDiff
       ELSE
          nDiff := ::nTop+::nHeight - oCtrl:nTop
          oCtrl:Move( ,oCtrl:nTop+nDiff,,oCtrl:nHeight-nDiff )
-      ENDIF   
+      ENDIF
    NEXT
    FOR i := 1 TO Len( ::aLeft )
       oCtrl := ::aLeft[i]
@@ -157,4 +168,5 @@ Local i, oCtrl, nDiff
    NEXT
    ::lMoved := .F.
 
-Return Nil
+   RETURN NIL
+

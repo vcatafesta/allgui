@@ -1,11 +1,9 @@
 /*
- * $Id: hdc.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HPAINTDC and HDC Classes
- *
- * Copyright 2005 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
- * www - http://sites.uol.com.br/culikr/
+* $Id: hdc.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HPAINTDC and HDC Classes
+* Copyright 2005 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
+* www - http://sites.uol.com.br/culikr/
 */
 
 #include "hbclass.ch"
@@ -21,7 +19,7 @@ CLASS HPAINTDC FROM HDC
    HIDDEN:
    DATA m_hWnd
 
-ENDCLASS
+   ENDCLASS
 
 METHOD NEW( nWnd ) CLASS HPAINTDC
 
@@ -71,10 +69,10 @@ CLASS HDC
    METHOD Gettextmetric() INLINE hwg_Gettextmetric( ::m_hDC )
    METHOD Setrop2( nDrawMode )
    METHOD Bitblt( x,  y,  nWidth,  nHeight,  pSrcDC,  xSrc, ySrc,  dwRop ) INLINE    hwg_Bitblt( ::m_hDc, x, y, nWidth, nHeight,  pSrcDC,       xSrc,  ySrc,  dwRop )
-
    METHOD Pie( arect, apt1, apt2 )
    METHOD Deletedc()
-ENDCLASS
+
+   ENDCLASS
 
 METHOD NEW( ) CLASS HDC
 
@@ -84,11 +82,13 @@ METHOD NEW( ) CLASS HDC
    RETURN Self
 
 METHOD Moveto( x1, y1 ) CLASS HDC
+
    hwg_Moveto( ::m_hDC, x1, y1 )
 
    RETURN Self
 
 METHOD Lineto( x1, y1 ) CLASS HDC
+
    hwg_Lineto( ::m_hDC, x1, y1 )
 
    RETURN Self
@@ -96,6 +96,7 @@ METHOD Lineto( x1, y1 ) CLASS HDC
 METHOD Attach( hDC ) CLASS HDC
 
    IF Empty( hDC )
+
       RETURN .F.
    ENDIF
 
@@ -106,6 +107,7 @@ METHOD Attach( hDC ) CLASS HDC
    RETURN .T.
 
 METHOD Deletedc(  ) CLASS HDC
+
    hwg_Deletedc( ::m_hDC )
    ::m_hDC := NIL
    ::m_hAttribDC := NIL
@@ -168,6 +170,7 @@ METHOD Createcompatibledc( x ) CLASS HDC
    RETURN ::Attach( hwg_Createcompatibledc( x ) )
 
 METHOD Savedc() CLASS HDC
+
    LOCAL nRetVal := 0
 
    IF ( ! Empty( ::m_hAttribDC ) )
@@ -180,6 +183,7 @@ METHOD Savedc() CLASS HDC
    RETURN nRetVal
 
 METHOD Restoredc( nSavedDC ) CLASS HDC
+
    // if two distinct DCs, nSavedDC can only be -1
 
    LOCAL bRetVal := .T.
@@ -207,6 +211,7 @@ METHOD Setmapmode( nMapMode ) CLASS HDC
    RETURN nRetVal
 
 METHOD SetWindowOrg( x, y ) CLASS HDC
+
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -219,6 +224,7 @@ METHOD SetWindowOrg( x, y ) CLASS HDC
    RETURN point
 
 METHOD SetWindowExt( x, y ) CLASS HDC
+
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -231,6 +237,7 @@ METHOD SetWindowExt( x, y ) CLASS HDC
    RETURN point
 
 METHOD SetViewportOrg( x, y ) CLASS HDC
+
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -243,6 +250,7 @@ METHOD SetViewportOrg( x, y ) CLASS HDC
    RETURN point
 
 METHOD SetViewportExt( x, y ) CLASS HDC
+
    LOCAL point
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -255,6 +263,7 @@ METHOD SetViewportExt( x, y ) CLASS HDC
    RETURN point
 
 METHOD Setarcdirection( nArcDirection )
+
    LOCAL nResult := 0
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -266,12 +275,12 @@ METHOD Setarcdirection( nArcDirection )
 
    RETURN nResult
 
-
 METHOD Pie( arect, apt1, apt2 )
 
    RETURN hwg_Pie( ::m_hdc, arect[ 1 ], arect[ 2 ], arect[ 3 ], arect[ 4 ], apt1[ 1 ], apt1[ 2 ], apt2[ 1 ], apt2[ 2 ] )
 
 METHOD Setrop2( nDrawMode )
+
    LOCAL nRetVal := 0
 
    IF ( ::m_hDC != ::m_hAttribDC )
@@ -291,7 +300,7 @@ CLASS HCLIENTDC FROM HDC
    HIDDEN:
    DATA m_hWnd
 
-ENDCLASS
+   ENDCLASS
 
 METHOD NEW( nWnd ) CLASS HCLIENTDC
 
@@ -308,3 +317,4 @@ METHOD END () CLASS HCLIENTDC
    ::m_hAttribDC := NIL
 
    RETURN NIL
+

@@ -1,9 +1,8 @@
 /*
- * Mysql client ( Harbour + HWGUI )
- * Main file
- *
- * Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* Mysql client ( Harbour + HWGUI )
+* Main file
+* Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "fileio.ch"
@@ -18,85 +17,86 @@ REQUEST PADL
 REQUEST OEMTOANSI
 REQUEST OPENREPORT
 
-Memvar connHandle, cServer, cDatabase, cUser, cDataDef, queHandle, nNumFields
-Memvar nNumRows, aQueries
+MEMVAR connHandle, cServer, cDatabase, cUser, cDataDef, queHandle, nNumFields
+MEMVAR nNumRows, aQueries
 
-Function Main()
-Local oFont, oIcon := HIcon():AddResource("ICON_1")
-Public hBitmap := hwg_Loadbitmap( "BITMAP_1" )
-Public connHandle := 0, cServer := "", cDatabase := "", cUser := ""
-Public cDataDef := ""
-Public mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
-Public queHandle := 0, nNumFields, nNumRows
-Public aQueries := {}, nHistCurr, nHistoryMax := 20
-Private oBrw, BrwFont := Nil, oBrwFont := Nil
-Private oMainWindow, oEdit, oPanel, oPanelE
+FUNCTION Main()
+
+   LOCAL oFont, oIcon := HIcon():AddResource("ICON_1")
+   PUBLIC hBitmap := hwg_Loadbitmap( "BITMAP_1" )
+   PUBLIC connHandle := 0, cServer := "", cDatabase := "", cUser := ""
+   PUBLIC cDataDef := ""
+   PUBLIC mypath := "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" )
+   PUBLIC queHandle := 0, nNumFields, nNumRows
+   PUBLIC aQueries := {}, nHistCurr, nHistoryMax := 20
+   PRIVATE oBrw, BrwFont := Nil, oBrwFont := Nil
+   PRIVATE oMainWindow, oEdit, oPanel, oPanelE
 
    SET EPOCH TO 1960
    SET DATE FORMAT "dd/mm/yyyy"
 
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -12
    INIT WINDOW oMainWindow MAIN ICON oIcon COLOR COLOR_3DLIGHT ;
-       TITLE "Harbour mySQL client"                            ;
-       AT 20,20 SIZE 500,500
+      TITLE "Harbour mySQL client"                            ;
+      AT 20,20 SIZE 500,500
 
    ADD STATUS TO oMainWindow PARTS 0,0,0
    @ 0,380 EDITBOX oEdit CAPTION ""      ;
-       SIZE 476,95                       ;
-       ON SIZE {|o,x,y|ResizeEditQ(x,y)} ;
-       STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
+      SIZE 476,95                       ;
+      ON SIZE {|o,x,y|ResizeEditQ(x,y)} ;
+      STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL
 
    @ 0,0 PANEL oPanel SIZE 0,44
 
    @ 2,3 OWNERBUTTON OF oPanel ID 108 ON CLICK {||Connect()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Connect" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_NETWORK" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "Connect" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_NETWORK" FROM RESOURCE COORDINATES 0,4,0,0
    @ 82,3 OWNERBUTTON OF oPanel ID 109 ON CLICK {||Databases()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Database" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_OPNPRJ" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "Database" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_OPNPRJ" FROM RESOURCE COORDINATES 0,4,0,0
    @ 162,3 OWNERBUTTON OF oPanel ID 110 ON CLICK {||Tables()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Tables" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_TABLE" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "Tables" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_TABLE" FROM RESOURCE COORDINATES 0,4,0,0
    @ 242,3 OWNERBUTTON OF oPanel ID 111 ON CLICK {||Execute()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Execute" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_BROWSE" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "Execute" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_BROWSE" FROM RESOURCE COORDINATES 0,4,0,0
    @ 322,3 OWNERBUTTON OF oPanel ID 112 ON CLICK {||About()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "About" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "About" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_HELP" FROM RESOURCE COORDINATES 0,4,0,0
    @ 402,3 OWNERBUTTON OF oPanel ID 113 ON CLICK {||hwg_EndWindow()} ;
-        SIZE 80,40 FLAT ;
-        TEXT "Exit" FONT oFont COORDINATES 0,20,0,0;
-        BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0,4,0,0
+      SIZE 80,40 FLAT ;
+      TEXT "Exit" FONT oFont COORDINATES 0,20,0,0;
+      BITMAP "BMP_EXIT" FROM RESOURCE COORDINATES 0,4,0,0
 
    @ 0,0 PANEL oPanelE OF oMainWindow SIZE 0,24 ON SIZE {||.T.}
 
    @ 0,2 OWNERBUTTON OF oPanelE ID 114 ON CLICK {||oEdit:SetText( Memoread( hwg_SelectFile( "Script files( *.scr )", "*.scr", mypath )))} ;
-        SIZE 20,22 FLAT ;
-        BITMAP "BMP_OPEN" FROM RESOURCE TOOLTIP "Load script"
+      SIZE 20,22 FLAT ;
+      BITMAP "BMP_OPEN" FROM RESOURCE TOOLTIP "Load script"
    @ 0,24 OWNERBUTTON OF oPanelE ID 115 ON CLICK {||SaveScript()} ;
-        SIZE 20,22 FLAT ;
-        BITMAP "BMP_SAVE" FROM RESOURCE TOOLTIP "Save script"
+      SIZE 20,22 FLAT ;
+      BITMAP "BMP_SAVE" FROM RESOURCE TOOLTIP "Save script"
    @ 0,46 OWNERBUTTON OF oPanelE ID 116 ON CLICK {||BrowHistory()} ;
-        SIZE 20,22 FLAT ;
-        BITMAP "BMP_HIST" FROM RESOURCE TOOLTIP "Show history"
+      SIZE 20,22 FLAT ;
+      BITMAP "BMP_HIST" FROM RESOURCE TOOLTIP "Show history"
    @ 0,68 OWNERBUTTON OF oPanelE ID 117 ON CLICK {||oEdit:SetText(""),hwg_Setfocus(oEdit:handle)} ;
-        SIZE 20,22 FLAT ;
-        BITMAP "BMP_CLEAR" FROM RESOURCE TOOLTIP "Clear"
+      SIZE 20,22 FLAT ;
+      BITMAP "BMP_CLEAR" FROM RESOURCE TOOLTIP "Clear"
 
    @ 0,0 BROWSE oBrw ARRAY OF oMainWindow SIZE 500,376 ;
-           ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
+      ON SIZE {|o,x,y|ResizeBrwQ(o,x,y)}
    oBrw:active := .F.
 
    Rdini( "demo.ini" )
    IF Valtype( BrwFont ) == "A"
       oBrwFont := HFont():Add( BrwFont[1], BrwFont[2], BrwFont[3] )
    ENDIF
-   ReadHistory( "qhistory.txt" )
+   READHistory( "qhistory.txt" )
 
    hwg_WriteStatus( Hwindow():GetMain(),1,"Not Connected" )
    hwg_Setfocus( oEdit:handle )
@@ -107,36 +107,43 @@ Private oMainWindow, oEdit, oPanel, oPanelE
 
    WriteHistory( "qhistory.txt" )
 
-Return Nil
+   RETURN NIL
 
-Function About
-Local oModDlg, oFont
+FUNCTION About
+
+   LOCAL oModDlg, oFont
 
    INIT DIALOG oModDlg FROM RESOURCE "ABOUTDLG" ON PAINT {||AboutDraw()}
    PREPARE FONT oFont NAME "MS Sans Serif" WIDTH 0 HEIGHT -13 ITALIC UNDERLINE
 
    REDEFINE OWNERBUTTON OF oModDlg ID IDC_OWNB1 ON CLICK {|| hwg_EndDialog( hwg_GetModalHandle() )} ;
-       FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
+      FLAT TEXT "Close" COLOR hwg_VColor("0000FF") FONT oFont
 
    oModDlg:Activate()
-Return Nil
 
-Function AboutDraw
-Local pps
-Local hDC
+   RETURN NIL
+
+FUNCTION AboutDraw
+
+   LOCAL pps
+   LOCAL hDC
+
    pps := hwg_Definepaintstru()
    hDC := hwg_Beginpaint( hwg_GetModalHandle(), pps )
    hwg_Drawbitmap( hDC, hBitmap,, 0, 0 )
    hwg_Endpaint( hwg_GetModalHandle(), pps )
-Return Nil
 
-Function DataBases
-Local aBases, nChoic
+   RETURN NIL
+
+FUNCTION DataBases
+
+   LOCAL aBases, nChoic
 
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+
+         RETURN .F.
       ENDIF
    ENDIF
    aBases := sqlListDB( connHandle )
@@ -151,22 +158,25 @@ Local aBases, nChoic
       ENDIF
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function Tables
-Local aTables, nChoic
-Local cTable
+FUNCTION Tables
+
+   LOCAL aTables, nChoic
+   LOCAL cTable
 
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+
+         RETURN .F.
       ENDIF
    ENDIF
    aTables := sqlListTbl( connHandle )
    IF Empty( aTables )
       hwg_Msginfo( "No tables !" )
-      Return .F.
+
+      RETURN .F.
    ENDIF
 
    nChoic := hwg_WChoice( aTables,cDataBase+"  tables",50,50 )
@@ -175,21 +185,25 @@ Local cTable
       execSQL( "SHOW COLUMNS FROM " + cTable )
    ENDIF
 
-Return Nil
+   RETURN NIL
 
-Function Connect
-Local aModDlg
+FUNCTION Connect
+
+   LOCAL aModDlg
 
    INIT DIALOG aModDlg FROM RESOURCE "DIALOG_1" ON INIT {|| InitConnect() }
    DIALOG ACTIONS OF aModDlg ;
-          ON 0,IDOK     ACTION {|| EndConnect() } ;
-          ON 0,IDCANCEL ACTION {|| hwg_EndDialog( hwg_GetModalHandle() )}
+      ON 0,IDOK     ACTION {|| EndConnect() } ;
+      ON 0,IDCANCEL ACTION {|| hwg_EndDialog( hwg_GetModalHandle() )}
 
    aModDlg:Activate()
-Return Nil
 
-Function InitConnect
-Local hDlg := hwg_GetModalHandle()
+   RETURN NIL
+
+FUNCTION InitConnect
+
+   LOCAL hDlg := hwg_GetModalHandle()
+
    hwg_Setdlgitemtext( hDlg, IDC_EDIT1, cServer )
    hwg_Setdlgitemtext( hDlg, IDC_EDIT2, cUser )
    hwg_Setdlgitemtext( hDlg, IDC_EDIT4, cDataDef )
@@ -200,10 +214,13 @@ Local hDlg := hwg_GetModalHandle()
    ELSE
       hwg_Setfocus( hwg_Getdlgitem( hDlg, IDC_EDIT3 ) )
    ENDIF
-Return .F.
 
-Function EndConnect
-Local hDlg := hwg_GetModalHandle()
+   RETURN .F.
+
+FUNCTION EndConnect
+
+   LOCAL hDlg := hwg_GetModalHandle()
+
    IF connHandle > 0
       sqlClose( connHandle )
       connHandle := 0
@@ -241,28 +258,34 @@ Local hDlg := hwg_GetModalHandle()
       hwg_EndDialog( hDlg )
       hwg_Setfocus( oEdit:handle )
    ENDIF
-Return
 
-Function ResizeEditQ( nWidth, nHeight )
+   RETURN
+
+FUNCTION ResizeEditQ( nWidth, nHeight )
 
    hwg_Movewindow( oEdit:handle, 0, nHeight-oMainWindow:aOffset[4]-95, nWidth-24, 95 )
    hwg_Movewindow( oPanelE:handle, nWidth-23, nHeight-oMainWindow:aOffset[4]-95, 24, 95 )
-Return Nil
 
-Function ResizeBrwQ( oBrw, nWidth, nHeight )
-Local aRect, i, nHbusy := oMainWindow:aOffset[4]
+   RETURN NIL
+
+FUNCTION ResizeBrwQ( oBrw, nWidth, nHeight )
+
+   LOCAL aRect, i, nHbusy := oMainWindow:aOffset[4]
 
    aRect := hwg_Getclientrect( oEdit:handle )
    nHbusy += aRect[ 4 ]
    hwg_Movewindow( oBrw:handle, 0, oPanel:nHeight+1, nWidth, nHeight-nHBusy-oPanel:nHeight-8 )
-Return Nil
 
-Function Execute
-Local cQuery := Ltrim( oEdit:GetText() )
-Local arScr, nError, nLineEr
+   RETURN NIL
+
+FUNCTION Execute
+
+   LOCAL cQuery := Ltrim( oEdit:GetText() )
+   LOCAL arScr, nError, nLineEr
 
    IF Empty( cQuery )
-      Return .F.
+
+      RETURN .F.
    ENDIF
    IF Left( cQuery,2 ) == "//"
       IF ( arScr := RdScript( ,cQuery ) ) <> Nil
@@ -275,15 +298,17 @@ Local arScr, nError, nLineEr
       execSQL( cQuery )
    ENDIF
 
-Return .T.
+   RETURN .T.
 
-Function execSQL( cQuery )
-Local res, stroka, poz := 0, lFirst := .T., i := 1
+FUNCTION execSQL( cQuery )
+
+   LOCAL res, stroka, poz := 0, lFirst := .T., i := 1
 
    IF connHandle == 0
       Connect()
       IF connHandle == 0
-         Return .F.
+
+         RETURN .F.
       ENDIF
    ENDIF
    IF ( res := sqlQuery( connHandle, cQuery) ) != 0
@@ -321,14 +346,18 @@ Local res, stroka, poz := 0, lFirst := .T., i := 1
          ENDIF
       ENDIF
    ENDIF
-Return res == 0
 
-Function sqlBrowse( queHandle )
-Local aQueRows, i, j, vartmp, af := {}
+   RETURN res == 0
+
+FUNCTION sqlBrowse( queHandle )
+
+   LOCAL aQueRows, i, j, vartmp, af := {}
+
    nNumRows := sqlNRows( queHandle )
    hwg_WriteStatus( Hwindow():GetMain(), 3, Str( nNumRows,5 ) + " rows" )
    IF nNumRows == 0
-      Return Nil
+
+      RETURN NIL
    ENDIF
    oBrw:InitBrw()
    oBrw:active := .T.
@@ -366,43 +395,49 @@ Local aQueRows, i, j, vartmp, af := {}
    oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont      := oBrwFont
    hwg_Redrawwindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
-Return Nil
 
-Function BrowHistory()
+   RETURN NIL
+
+FUNCTION BrowHistory()
 
    IF nHistCurr == 0
-      Return Nil
+
+      RETURN NIL
    ENDIF
    oBrw:active := .T.
    oBrw:InitBrw()
    oBrw:aArray := aQueries
    oBrw:AddColumn( HColumn():New( "History of queries", ;
-            {|value,o|o:aArray[o:nCurrent,1] },             ;
-            "C",76,0  ) )
+      {|value,o|o:aArray[o:nCurrent,1] },             ;
+      "C",76,0  ) )
 
    oBrw:bcolorSel := hwg_VColor( "800080" )
    oBrw:ofont := oBrwFont
    oBrw:bEnter := {|h,o|GetFromHistory(h,o)}
    hwg_Redrawwindow( oBrw:handle, RDW_ERASE + RDW_INVALIDATE )
-Return Nil
 
-Static Function GetFromHistory()
-Local cQuery := "", i := oBrw:nCurrent
+   RETURN NIL
+
+STATIC FUNCTION GetFromHistory()
+
+   LOCAL cQuery := "", i := oBrw:nCurrent
 
    IF !Empty( oBrw:aArray[ i,1 ] )
       DO WHILE !oBrw:aArray[ i,2 ]; i--; ENDDO
-      DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[ i,1 ] )
-         cQuery += Rtrim( oBrw:aArray[ i,1 ] ) + Chr( 13 ) + Chr( 10 )
-         i++
-      ENDDO
-      oEdit:SetText( cQuery )
-      hwg_Setfocus( oEdit:handle )
-   ENDIF
-Return Nil
+         DO WHILE i <= oBrw:nRecords .AND. !Empty( oBrw:aArray[ i,1 ] )
+            cQuery += Rtrim( oBrw:aArray[ i,1 ] ) + Chr( 13 ) + Chr( 10 )
+            i++
+         ENDDO
+         oEdit:SetText( cQuery )
+         hwg_Setfocus( oEdit:handle )
+      ENDIF
 
-Static Function ReadHistory( fname )
-Local han, stroka, lFirst := .T., lEmpty := .F.
-LOCAL strbuf := Space(512), poz := 513
+      RETURN NIL
+
+STATIC FUNCTION ReadHistory( fname )
+
+   LOCAL han, stroka, lFirst := .T., lEmpty := .F.
+   LOCAL strbuf := Space(512), poz := 513
 
    nHistCurr := 0
    han := FOPEN( fname, FO_READ + FO_SHARED )
@@ -429,10 +464,13 @@ LOCAL strbuf := Space(512), poz := 513
       ENDDO
       FCLOSE( han )
    ENDIF
-Return nHistCurr
 
-Static Function WriteHistory( fname )
-Local han, i, lEmpty := .T.
+   RETURN nHistCurr
+
+STATIC FUNCTION WriteHistory( fname )
+
+   LOCAL han, i, lEmpty := .T.
+
    IF !Empty( aQueries )
       han := FCREATE( fname )
       IF han <> - 1
@@ -445,12 +483,16 @@ Local han, i, lEmpty := .T.
          FCLOSE( han )
       ENDIF
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 FUNCTION DoSQL( cQuery )
-Local aRes, qHandle, nNumFields, nNumRows, i
+
+   LOCAL aRes, qHandle, nNumFields, nNumRows, i
+
    IF sqlQuery( connHandle, cQuery) != 0
-      Return { 1 }
+
+      RETURN { 1 }
    ELSE
       IF ( qHandle := sqlStoreR( connHandle ) ) != 0
          nNumRows := sqlNRows( qHandle )
@@ -463,43 +505,57 @@ Local aRes, qHandle, nNumFields, nNumRows, i
             aRes[ 3,i ] := sqlFetchR( qHandle )
          NEXT
          sqlFreeR( qHandle )
-         Return aRes
+
+         RETURN aRes
       ELSE
          // Should query have returned rows? (Was it a SELECT like query?)
          IF sqlFiCou( connHandle ) == 0
             // Was not a SELECT so reset ResultHandle changed by previous sqlStoreR()
-            Return { 0, sqlAffRows( connHandle ) }
+
+            RETURN { 0, sqlAffRows( connHandle ) }
          ELSE
-            Return { 2 }
+
+            RETURN { 2 }
          ENDIF
       ENDIF
    ENDIF
-Return Nil
+
+   RETURN NIL
 
 FUNCTION FilExten( fname )
-LOCAL i
-RETURN IIF( ( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ) )
 
-Function SaveScript
-Local fname := hwg_SaveFile( "*.scr","Script files( *.scr )", "*.scr", mypath )
+   LOCAL i
+
+   RETURN IIF( ( i := RAT( '.', fname ) ) = 0, "", SUBSTR( fname, i + 1 ) )
+
+FUNCTION SaveScript
+
+   LOCAL fname := hwg_SaveFile( "*.scr","Script files( *.scr )", "*.scr", mypath )
+
    cQuery := oEdit:GetText()
    IF !Empty( fname )
       MemoWrit( fname,cQuery )
    ENDIF
-Return Nil
 
-Function WndOut()
-Return Nil
+   RETURN NIL
 
-Function MsgSay( cText )
+FUNCTION WndOut()
+
+   RETURN NIL
+
+FUNCTION MsgSay( cText )
+
    hwg_Msgstop( cText )
-Return Nil
 
-EXIT PROCEDURE cleanup
+   RETURN NIL
+
+   EXIT PROCEDURE cleanup
    IF connHandle > 0
       sqlClose( connHandle )
       IF queHandle > 0
          sqlFreeR( queHandle )
       ENDIF
    ENDIF
-Return
+
+   RETURN
+

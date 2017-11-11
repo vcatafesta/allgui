@@ -18,9 +18,9 @@
 
 //================================================================//
 
-Function Main
+FUNCTION Main
 
-   Local oWnd
+   LOCAL oWnd
 
    SET DATE BRITISH
    SET CENTURY ON
@@ -31,22 +31,22 @@ Function Main
       AT 100,100 SIZE 640,480
 
    MENU OF oWnd
-      MENUITEM "&Calendário 1" ACTION Dlg1()
-      MENUITEM "&Calendário 2" ACTION Dlg2()
-      MENUITEM "&Sair"         ACTION hwg_EndWindow()
-   ENDMENU
+   MENUITEM "&Calendário 1" ACTION Dlg1()
+   MENUITEM "&Calendário 2" ACTION Dlg2()
+   MENUITEM "&Sair"         ACTION hwg_EndWindow()
+ENDMENU
 
-   ACTIVATE WINDOW oWnd
+ACTIVATE WINDOW oWnd
 
-   Return Nil
+RETURN NIL
 
 //================================================================//
 
-Function Dlg1
+FUNCTION Dlg1
 
-   Local oDlg
-   Local oMC
-   Local oFont
+   LOCAL oDlg
+   LOCAL oMC
+   LOCAL oFont
 
    INIT DIALOG oDlg TITLE "Calendário - Exemplo 1" ;
       AT 20,20 SIZE 500,300
@@ -67,15 +67,15 @@ Function Dlg1
 
    ACTIVATE DIALOG oDlg
 
-   Return Nil
+   RETURN NIL
 
-//================================================================//
+   //================================================================//
 
-Function Dlg2
+FUNCTION Dlg2
 
-   Local oDlg
-   Local oMC
-   Local oFont
+   LOCAL oDlg
+   LOCAL oMC
+   LOCAL oFont
 
    INIT DIALOG oDlg TITLE "Calendário - Exemplo 2" ;
       AT 20,20 SIZE 500,300
@@ -92,7 +92,7 @@ Function Dlg2
 
    ACTIVATE DIALOG oDlg
 
-   Return Nil
+   RETURN NIL
 
-//================================================================//
+   //================================================================//
 

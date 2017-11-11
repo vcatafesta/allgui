@@ -1,11 +1,9 @@
 /*
- * $Id: hgraph.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HGraph class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
+* $Id: hgraph.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HGraph class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -15,6 +13,7 @@
 CLASS HGraph INHERIT HControl
 
 CLASS VAR winclass   INIT "STATIC"
+
    DATA aValues
    DATA aSignX, aSignY
    DATA nGraphs    INIT 1
@@ -35,23 +34,23 @@ CLASS VAR winclass   INIT "STATIC"
    DATA xmax, ymax, xmin, ymin PROTECTED
 
    METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-               bSize, ctooltip, tcolor, bcolor )
+         bSize, ctooltip, tcolor, bcolor )
    METHOD Activate()
    METHOD Redefine( oWndParent, nId, aValues, oFont, ;
-                    bSize, ctooltip, tcolor, bcolor )
+         bSize, ctooltip, tcolor, bcolor )
    METHOD Init()
    METHOD CalcMinMax()
    METHOD Paint( lpDis )
    METHOD Rebuild( aValues, nType )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-            bSize, ctooltip, tcolor, bcolor ) CLASS HGraph
+      bSize, ctooltip, tcolor, bcolor ) CLASS HGraph
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, nLeft, nTop, nWidth, nHeight, oFont,, ;
-              bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
-              IIf( tcolor == Nil, hwg_VColor( "FFFFFF" ), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
+      bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
+      IIf( tcolor == Nil, hwg_VColor( "FFFFFF" ), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
 
    ::aValues := aValues
    ::nType   := 1
@@ -62,36 +61,42 @@ METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
    RETURN Self
 
 METHOD Redefine( oWndParent, nId, aValues, oFont, ;
-                 bSize, ctooltip, tcolor, bcolor )  CLASS HGraph
+      bSize, ctooltip, tcolor, bcolor )  CLASS HGraph
 
    ::Super:New( oWndParent, nId, SS_OWNERDRAW, 0, 0, 0, 0, oFont,, ;
-              bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
-              IIf( tcolor == Nil, hwg_VColor( "FFFFFF" ), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
+      bSize, { | o, lpdis | o:Paint( lpdis ) }, ctooltip, ;
+      IIf( tcolor == Nil, hwg_VColor( "FFFFFF" ), tcolor ), IIf( bcolor == Nil, 0, bcolor ) )
 
    ::aValues := aValues
 
    RETURN Self
 
 METHOD Activate() CLASS HGraph
+
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_Createstatic( ::oParent:handle, ::id, ;
-                                ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::style, ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD Init()  CLASS HGraph
+
    IF ! ::lInit
       ::Super:Init()
       ::CalcMinMax()
    ENDIF
-   RETURN Nil
+
+   RETURN NIL
 
 METHOD CalcMinMax() CLASS HGraph
+
    LOCAL i, j, nLen
 
    IF ::nType == 0
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    ::xmax := ::xmin := ::ymax := ::ymin := 0
    IF !Empty( ::ymaxSet )
@@ -109,8 +114,8 @@ METHOD CalcMinMax() CLASS HGraph
       ELSEIF ::nType == 2
          FOR j := 1 TO nLen
             IF ::aValues[ i,j,2 ] != Nil
-              ::ymax := Max( ::ymax, ::aValues[ i,j,2 ] )
-              ::ymin := Min( ::ymin, ::aValues[ i,j,2 ] )
+               ::ymax := Max( ::ymax, ::aValues[ i,j,2 ] )
+               ::ymin := Min( ::ymin, ::aValues[ i,j,2 ] )
             ENDIF
          NEXT
          ::xmax := nLen
@@ -121,16 +126,18 @@ METHOD CalcMinMax() CLASS HGraph
       ENDIF
    NEXT
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Paint( lpdis ) CLASS HGraph
+
    LOCAL drawInfo := hwg_Getdrawiteminfo( lpdis )
    LOCAL hDC := drawInfo[ 3 ], x1 := drawInfo[ 4 ], y1 := drawInfo[ 5 ], x2 := drawInfo[ 6 ], y2 := drawInfo[ 7 ]
    LOCAL i, j, nLen
    LOCAL x0, y0, px1, px2, py1, py2, nWidth
 
    IF ::nType == 0
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    x1 += ::x1Def
@@ -210,7 +217,7 @@ METHOD Paint( lpdis ) CLASS HGraph
             hwg_Drawline( hDC, x0-4, py1, x0+1, py1 )
             IF ::aSignY[ i,2 ] != Nil
                hwg_Drawtext( hDC, Iif( Valtype(::aSignY[i,2])=="C",::aSignY[i,2], ;
-                     Ltrim(Str(::aSignY[i,2]))), drawInfo[4], py1-8, x0-4, py1+8, DT_RIGHT )
+                  Ltrim(Str(::aSignY[i,2]))), drawInfo[4], py1-8, x0-4, py1+8, DT_RIGHT )
                IF ::lGridY
                   hwg_Drawline( hDC, x0+1, py1, x2, py1 )
                ENDIF
@@ -229,7 +236,7 @@ METHOD Paint( lpdis ) CLASS HGraph
          hwg_Drawline( hDC, px1, y0+4, px1, y0-1 )
          IF ::aSignX[ i,2 ] != Nil
             hwg_Drawtext( hDC, Iif( Valtype(::aSignX[i,2])=="C",::aSignX[i,2], ;
-                  Ltrim(Str(::aSignX[i,2]))), px1-40, y0+4, px1+40, y0+20, DT_CENTER )
+               Ltrim(Str(::aSignX[i,2]))), px1-40, y0+4, px1+40, y0+20, DT_CENTER )
             IF ::lGridX
                hwg_Drawline( hDC, px1, y0-1, px1, y1 )
             ENDIF
@@ -237,7 +244,7 @@ METHOD Paint( lpdis ) CLASS HGraph
       NEXT
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Rebuild( aValues, nType ) CLASS HGraph
 
@@ -250,4 +257,5 @@ METHOD Rebuild( aValues, nType ) CLASS HGraph
       hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
+

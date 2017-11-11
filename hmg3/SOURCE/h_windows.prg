@@ -6618,3 +6618,4 @@ FUNCTION GetWindowDataByIndex (k)
    AADD ( aWinData, _HMG_StopWindowEventProcedure  [k] )   // .F.
 
    RETURN aWinData
+

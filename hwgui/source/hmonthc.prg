@@ -1,14 +1,10 @@
 /*
- * $Id: hmonthc.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HMonthCalendar class
- *
- * Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
- * www - http://geocities.yahoo.com.br/marcosgambeta/
+* $Id: hmonthc.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HMonthCalendar class
+* Copyright 2004 Marcos Antonio Gambeta <marcos_gambeta@hotmail.com>
+* www - http://geocities.yahoo.com.br/marcosgambeta/
 */
-
-//--------------------------------------------------------------------------//
 
 #include "windows.ch"
 #include "hbclass.ch"
@@ -20,19 +16,17 @@
 #define MCS_NOTODAYCIRCLE        8
 #define MCS_NOTODAY             16
 
-//--------------------------------------------------------------------------//
-
 CLASS HMonthCalendar INHERIT HControl
 
-CLASS VAR winclass   INIT "SysMonthCal32"
+   CLASS VAR winclass   INIT "SysMonthCal32"
 
    DATA value
    DATA bChange
    DATA bSelect
 
    METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
-               oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-               lWeekNumbers, bSelect )
+         oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
+         lWeekNumbers, bSelect )
    METHOD Activate()
    METHOD Init()
    METHOD SetValue( dValue )
@@ -40,21 +34,18 @@ CLASS VAR winclass   INIT "SysMonthCal32"
    METHOD onChange( )
    METHOD onSelect( )
 
-
-ENDCLASS
-
-//--------------------------------------------------------------------------//
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
-            oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-            lWeekNumbers, bSelect ) CLASS HMonthCalendar
+      oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
+      lWeekNumbers, bSelect ) CLASS HMonthCalendar
 
    nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), 0 ) //WS_TABSTOP )
    nStyle   += IIf( lNoToday == Nil.OR. ! lNoToday, 0, MCS_NOTODAY )
    nStyle   += IIf( lNoTodayCircle == Nil.OR. ! lNoTodayCircle, 0, MCS_NOTODAYCIRCLE )
    nStyle   += IIf( lWeekNumbers == Nil.OR. ! lWeekNumbers, 0, MCS_WEEKNUMBERS )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
-              ,, cTooltip )
+      ,, cTooltip )
 
    ::value   := IIf( ValType( vari ) == "D" .And. ! Empty( vari ), vari, Date() )
 
@@ -65,27 +56,24 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    /*
    IF bChange != Nil
-      ::oParent:AddEvent( MCN_SELECT, Self, bChange, .T., "onChange" )
-      ::oParent:AddEvent( MCN_SELCHANGE, Self, bChange, .T., "onChange" )
+   ::oParent:AddEvent( MCN_SELECT, Self, bChange, .T., "onChange" )
+   ::oParent:AddEvent( MCN_SELCHANGE, Self, bChange, .T., "onChange" )
    ENDIF
    */
 
    ::Activate()
-   RETURN Self
 
-//--------------------------------------------------------------------------//
+   RETURN Self
 
 METHOD Activate() CLASS HMonthCalendar
 
    IF ! Empty( ::oParent:handle )
       ::handle := hwg_InitMonthCalendar ( ::oParent:handle, ::id, ::style, ;
-                                      ::nLeft, ::nTop, ::nWidth, ::nHeight )
+         ::nLeft, ::nTop, ::nWidth, ::nHeight )
       ::Init()
    ENDIF
 
-   RETURN Nil
-
-//--------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD Init() CLASS HMonthCalendar
 
@@ -99,9 +87,7 @@ METHOD Init() CLASS HMonthCalendar
 
    ENDIF
 
-   RETURN Nil
-
-//--------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD SetValue( dValue ) CLASS HMonthCalendar
 
@@ -110,9 +96,7 @@ METHOD SetValue( dValue ) CLASS HMonthCalendar
       ::value := dValue
    ENDIF
 
-   RETURN Nil
-
-//--------------------------------------------------------------------------//
+   RETURN NIL
 
 METHOD GetValue() CLASS HMonthCalendar
 
@@ -127,7 +111,7 @@ METHOD onChange( ) CLASS HMonthCalendar
       ::oparent:lSuspendMsgsHandling := .T.
       Eval( ::bChange, ::value, Self )
       ::oparent:lSuspendMsgsHandling := .F.
-    ENDIF
+   ENDIF
 
    RETURN 0
 
@@ -137,11 +121,9 @@ METHOD onSelect( ) CLASS HMonthCalendar
       ::oparent:lSuspendMsgsHandling := .T.
       Eval( ::bSelect, ::value, Self )
       ::oparent:lSuspendMsgsHandling := .F.
-    ENDIF
+   ENDIF
 
-   RETURN Nil
-
-//--------------------------------------------------------------------------//
+   RETURN NIL
 
 #pragma BEGINDUMP
 

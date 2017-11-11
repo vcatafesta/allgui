@@ -126,3 +126,4 @@ FUNCTION AutoConvert()
    ENDIF
 
    RETURN cTemp
+

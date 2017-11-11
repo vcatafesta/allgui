@@ -1,17 +1,13 @@
 /*
- * $Id: hcombo.prg 2012 2013-03-07 09:03:56Z alkresin $
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCombo class
- *
- * Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
- * www - http://kresin.belgorod.su
- *
- * HWGUI - Harbour Win32 GUI library source code:
- * HCheckComboEx class
- *
- * Copyright 2007 Luiz Rafale Culik Guimaraes (Luiz at xharbour.com.br)
- * www - http://kresin.belgorod.su
+* $Id: hcombo.prg 2012 2013-03-07 09:03:56Z alkresin $
+* HWGUI - Harbour Win32 GUI library source code:
+* HCombo class
+* Copyright 2002 Alexander S.Kresin <alex@belacy.belgorod.su>
+* www - http://kresin.belgorod.su
+* HWGUI - Harbour Win32 GUI library source code:
+* HCheckComboEx class
+* Copyright 2007 Luiz Rafale Culik Guimaraes (Luiz at xharbour.com.br)
+* www - http://kresin.belgorod.su
 */
 
 #include "windows.ch"
@@ -34,12 +30,13 @@ HB_FUNC( COPYDATA )
 #pragma enddump
 
 #ifndef __XHARBOUR__
-   #xtranslate RAScan([<x,...>])        => hb_RAScan(<x>)
+#xtranslate RAScan([<x,...>])        => hb_RAScan(<x>)
 #endif
 
 CLASS HComboBox INHERIT HControl
 
    CLASS VAR winclass INIT "COMBOBOX"
+
    DATA aItems
    DATA aItemsBound
    DATA bSetGet
@@ -67,10 +64,9 @@ CLASS HComboBox INHERIT HControl
    DATA ldropshow INIT .F.
    DATA nMaxLength     INIT Nil
 
-
    METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, ;
-      bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength )
+         aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, ;
+         bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength )
    METHOD Activate()
    METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, bGFocus, bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext )
    METHOD INIT()
@@ -95,7 +91,7 @@ CLASS HComboBox INHERIT HControl
    METHOD SetCueBanner( cText, lShowFoco )
    METHOD MaxLength( nMaxLength ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, ;
@@ -160,7 +156,6 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       ENDIF
       // By Luiz Henrique dos Santos (luizhsantos@gmail.com) 03/06/2006
       ::oParent:AddEvent( CBN_KILLFOCUS, Self, { | o, id | ::Valid( o:FindControl( id ) ) }, .F. , "onLostFocus" )
-      //---------------------------------------------------------------------------
    ELSE
       IF bGFocus != Nil
          ::lnoValid := .T.
@@ -191,7 +186,7 @@ METHOD Activate() CLASS HComboBox
       ::nHeight := Int( ::nHeightBox / 0.75 )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
       bChange, ctooltip, bGFocus, bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext  ) CLASS HComboBox
@@ -230,7 +225,6 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bP
    ::RowSource( aItems )
    ::aItemsBound   := {}
    ::bSetGet := bSetGet
-
 
    IF bSetGet != Nil
       ::bChangeSel := bChange
@@ -274,7 +268,6 @@ METHOD INIT() CLASS HComboBox
       IF ::aItems != Nil .AND. !Empty( ::aItems )
          ::RowSource( ::aItems )
          LongComboWidth := ::Populate()
-         //
          IF ::lText
             IF ::lEdit
                hwg_Setdlgitemtext( hwg_GetModalHandle(), ::id, ::value )
@@ -318,18 +311,21 @@ METHOD INIT() CLASS HComboBox
       hwg_Sendmessage( ::handle, WM_SETREDRAW, 1 , 0 )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
+
    LOCAL oCtrl
 
    IF ::bOther != Nil
       IF Eval( ::bOther, Self, msg, wParam, lParam ) != - 1
+
          RETURN 0
       ENDIF
    ENDIF
    IF msg = WM_MOUSEWHEEL .AND. ::oParent:nScrollBars != - 1 .AND. ::oParent:bScroll = Nil
       hwg_ScrollHV( ::oParent, msg, wParam, lParam )
+
       RETURN 0
    ELSEIF msg = CB_SHOWDROPDOWN
       ::ldropshow := iif( wParam = 1, .T. , ::ldropshow )
@@ -340,38 +336,47 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
             ! hwg_GetParentForm( Self ) :lModal )
          IF wParam = VK_TAB
             hwg_GetSkip( ::oParent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
+
             RETURN 0
          ELSEIF wParam == VK_RETURN .AND. ;
                ! hwg_ProcOkCancel( Self, wParam, hwg_GetParentForm( Self ):Type >= WND_DLG_RESOURCE ) .AND. ;
                ( hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE .OR. ;
                ! hwg_GetParentForm( Self ):lModal )
             hwg_GetSkip( ::oParent, ::handle, , 1 )
+
             RETURN 0
          ENDIF
       ELSEIF msg == WM_GETDLGCODE
          IF wParam = VK_RETURN
+
             RETURN DLGC_WANTMESSAGE
          ELSEIF wParam = VK_ESCAPE  .AND. ;
                ( oCtrl := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != Nil .AND. ! oCtrl:IsEnabled()
+
             RETURN DLGC_WANTMESSAGE
          ENDIF
+
          RETURN  DLGC_WANTCHARS + DLGC_WANTARROWS
 
       ELSEIF msg = WM_KEYDOWN
          IF wparam =  VK_RIGHT .OR. wParam == VK_RETURN //.AND. ! ::lEdit
             hwg_GetSkip( ::oParent, ::handle, , 1 )
+
             RETURN 0
          ELSEIF wparam =  VK_LEFT //.AND. ! ::lEdit
             hwg_GetSkip( ::oParent, ::handle, , - 1 )
+
             RETURN 0
          ELSEIF wParam = VK_ESCAPE .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE //.OR.;
-            RETURN 0
+
+               RETURN 0
          ENDIF
 
       ELSEIF msg = WM_KEYUP
          hwg_ProcKeyList( Self, wParam )        //working in MDICHILD AND DIALOG
       ELSEIF msg =  WM_COMMAND  .AND. ::lEdit  .AND. ! ::ldropshow
          IF hwg_Getkeystate( VK_DOWN ) + hwg_Getkeystate( VK_UP ) < 0 .AND. hwg_Getkeystate( VK_SHIFT ) > 0 .AND. hwg_Hiword( wParam ) = 1
+
             RETURN 0
          ENDIF
       ELSEIF msg = CB_GETDROPPEDSTATE  .AND. ! ::ldropshow
@@ -387,15 +392,18 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
                //  hwg_GetSkip( ::oParent, hwg_Getancestor( ::handle, GA_PARENT ),, 1 )
             ENDIF
             hwg_GetSkip( ::oParent, ::handle, , 1 )
+
             RETURN 0
          ELSEIF hwg_Getkeystate( VK_UP ) < 0 .AND.  hwg_Getkeystate( VK_SHIFT ) > 0
             IF ::oParent:oParent = Nil
                //  hwg_GetSkip( ::oParent, hwg_Getancestor( ::handle, GA_PARENT ),, 1 )
             ENDIF
             hwg_GetSkip( ::oParent, ::handle, , - 1 )
+
             RETURN 0
          ENDIF
          IF ( hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE .OR. ! hwg_GetParentForm( Self ):lModal )
+
             RETURN 1
          ENDIF
       ENDIF
@@ -425,9 +433,10 @@ METHOD Requery( aItems, xValue ) CLASS HComboBox
       ::SetItem( 1 )
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Refresh() CLASS HComboBox
+
    LOCAL vari
 
    IF ::bSetGet != Nil
@@ -455,7 +464,7 @@ METHOD Refresh() CLASS HComboBox
    ENDIF
    ::valueBound := ::GetValueBound()
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetItem( nPos ) CLASS HComboBox
 
@@ -482,9 +491,10 @@ METHOD SetItem( nPos ) CLASS HComboBox
       ENDIF
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetValue( xItem ) CLASS HComboBox
+
    LOCAL nPos
 
    IF ::lText .AND. ValType( xItem ) = "C"
@@ -499,9 +509,10 @@ METHOD SetValue( xItem ) CLASS HComboBox
    ENDIF
    ::setItem( nPos )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD GetValue() CLASS HComboBox
+
    LOCAL nPos := hwg_Sendmessage( ::handle, CB_GETCURSEL, 0, 0 ) + 1
 
    IF ::lText
@@ -528,10 +539,12 @@ METHOD GetValue() CLASS HComboBox
    RETURN ::value
 
 METHOD GetValueBound( xItem ) CLASS HComboBox
+
    LOCAL nPos := hwg_Sendmessage( ::handle, CB_GETCURSEL, 0, 0 ) + 1
 
    IF ::columnBound = 1
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    IF xItem = Nil
       IF ::lText
@@ -540,6 +553,7 @@ METHOD GetValueBound( xItem ) CLASS HComboBox
    ELSE
       nPos := AScan( ::aItemsBound, xItem, , , .T. )
       ::setItem( nPos )
+
       RETURN iif( nPos > 0, ::aItems[ nPos ], xItem )
    ENDIF
    IF nPos > 0 .AND. nPos <=  Len( ::aItemsBound )
@@ -560,6 +574,7 @@ METHOD DisplayValue( cValue ) CLASS HComboBox
    RETURN iif( ! ::lEdit, hwg_Getwindowtext( ::handle ), ::cDisplayValue )
 
 METHOD DeleteItem( xIndex ) CLASS HComboBox
+
    LOCAL nIndex
 
    IF ::lText .AND. ValType( xIndex ) = "C"
@@ -574,6 +589,7 @@ METHOD DeleteItem( xIndex ) CLASS HComboBox
          ADel( ::AitemsBound, nIndex )
          ASize( ::AitemsBound, Len( ::aitemsBound ) - 1 )
       ENDIF
+
       RETURN .T.
    ENDIF
 
@@ -612,6 +628,7 @@ METHOD AddItem( cItem, cItemBound, nPos ) CLASS HComboBox
    RETURN nCount
 
 METHOD SetCueBanner( cText, lShowFoco ) CLASS HComboBox
+
    LOCAL lRet := .F.
 
    IF ::lEdit
@@ -633,7 +650,7 @@ METHOD InteractiveChange( ) CLASS HComboBox
 
    hwg_Sendmessage( ::handle, CB_SETEDITSEL, 0, ::SelStart )
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onSelect() CLASS HComboBox
 
@@ -648,11 +665,13 @@ METHOD onSelect() CLASS HComboBox
 METHOD onChange( lForce ) CLASS HComboBox
 
    IF ! hwg_Selffocus( ::handle ) .AND. Empty( lForce )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    IF  ! hwg_Iswindowvisible( ::handle )
       ::SetItem( ::Value )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
 
    ::SetItem( hwg_Sendmessage( ::handle, CB_GETCURSEL, 0, 0 ) + 1 )
@@ -662,13 +681,14 @@ METHOD onChange( lForce ) CLASS HComboBox
       ::oparent:lSuspendMsgsHandling := .F.
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD When( ) CLASS HComboBox
 
    LOCAL res := .T. , oParent, nSkip
 
    IF !hwg_CheckFocus( Self, .F. )
+
       RETURN .T.
    ENDIF
 
@@ -703,10 +723,12 @@ METHOD When( ) CLASS HComboBox
    RETURN res
 
 METHOD Valid( ) CLASS HComboBox
+
    LOCAL oDlg, nSkip, res, hCtrl := hwg_Getfocus()
    LOCAL ltab := hwg_Getkeystate( VK_TAB ) < 0
 
    IF  ::lNoValid .OR. !hwg_CheckFocus( Self, .T. )
+
       RETURN .T.
    ENDIF
 
@@ -726,6 +748,7 @@ METHOD Valid( ) CLASS HComboBox
                oDlg:nLastKey := 0
             ENDIF
             ::oparent:lSuspendMsgsHandling := .F.
+
             RETURN .F.
          ENDIF
 
@@ -738,7 +761,7 @@ METHOD Valid( ) CLASS HComboBox
          hwg_GetSkip( ::oparent, ::handle, , nSkip )
       ENDIF
       ::oparent:lSuspendMsgsHandling := .F.
-      IF Empty( hwg_Getfocus() ) // getfocus return pointer = 0 
+      IF Empty( hwg_Getfocus() ) // getfocus return pointer = 0
          hwg_GetSkip( ::oParent, ::handle, , ::nGetSkip )
       ENDIF
    ENDIF
@@ -761,12 +784,14 @@ METHOD RowSource( xSource ) CLASS HComboBox
    RETURN ::xRowSource
 
 METHOD Populate() CLASS HComboBox
+
    LOCAL cAlias, nRecno, value, cValueBound
    LOCAL i, numofchars, LongComboWidth := 0
    LOCAL xRowSource
 
    IF Empty( ::aItems )
-      RETURN Nil
+
+      RETURN NIL
    ENDIF
    xRowSource := iif( hb_IsArray( ::xRowSource[ 1 ] ), ::xRowSource[ 1, 1 ], ::xRowSource[ 1 ] )
    IF xRowSource != Nil .AND. ( i := At( "->", xRowSource ) ) > 0
@@ -836,12 +861,12 @@ METHOD Populate() CLASS HComboBox
 
    RETURN LongComboWidth
 
-   //***************************************************
-#define TRANSPARENT        1
+   #define TRANSPARENT        1
 
 CLASS HCheckComboBox INHERIT HComboBox
 
    CLASS VAR winclass  INIT "COMBOBOX"
+
    DATA m_bTextUpdated INIT .F.
 
    DATA m_bItemHeightSet INIT .F.
@@ -856,31 +881,26 @@ CLASS HCheckComboBox INHERIT HComboBox
 
    METHOD onGetText( wParam, lParam )
    METHOD OnGetTextLength( wParam, lParam )
-
    METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-      aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
-      tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth, aImages )
+         aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
+         tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth, aImages )
    METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-      bChange, ctooltip, bGFocus, acheck )
+         bChange, ctooltip, bGFocus, acheck )
    METHOD INIT()
    METHOD Requery()
    METHOD Refresh()
    METHOD Paint( lpDis )
    METHOD SetCheck( nIndex, bFlag )
    METHOD RecalcText()
-
    METHOD GetCheck( nIndex )
-
    METHOD SelectAll( bCheck )
    METHOD MeasureItem( l )
-
    METHOD onEvent( msg, wParam, lParam )
    METHOD GetAllCheck()
-
    METHOD EnabledItem( nItem, lEnabled )
    METHOD SkipItems( nNav )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
@@ -915,6 +935,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bP
    RETURN Self
 
 METHOD INIT() CLASS hCheckComboBox
+
    LOCAL i, nSize, hImage
 
    IF !::lInit
@@ -948,9 +969,10 @@ METHOD INIT() CLASS hCheckComboBox
       ENDIF
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
+
    LOCAL nIndex
    LOCAL rcItem, rcClient
    LOCAL pt
@@ -960,24 +982,30 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
 
    IF msg == WM_RBUTTONDOWN
    ELSEIF msg == LB_GETCURSEL
+
       RETURN - 1
 
    ELSEIF msg == WM_MEASUREITEM
       ::MeasureItem( lParam )
+
       RETURN 0
    ELSEIF msg == WM_GETTEXT
+
       RETURN ::OnGetText( wParam, lParam )
 
    ELSEIF msg == WM_GETTEXTLENGTH
+
       RETURN ::OnGetTextLength( wParam, lParam )
 
    ELSEIF msg = WM_MOUSEWHEEL
+
       RETURN ::SkipItems( iif( hwg_Hiword( wParam ) > 32768, 1, - 1 ) )
 
    ELSEIF msg = WM_COMMAND
       IF hwg_Hiword( wParam ) = CBN_SELCHANGE
          nPos := hwg_Sendmessage( ::handle, CB_GETCURSEL, 0, 0 )
          IF Left( ::Title, 2 ) == "\]" .OR. Left( ::Title, 2 ) == "\-"
+
             RETURN 0
          ELSE
             ::nCurPos := nPos
@@ -996,12 +1024,15 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
       IF ( hwg_GetParentForm( Self ) :Type < WND_DLG_RESOURCE .OR. !hwg_GetParentForm( Self ) :lModal )
          IF wParam = VK_TAB
             hwg_GetSkip( ::oParent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 ) )
+
             RETURN 0
          ELSEIF wParam == VK_RETURN
             hwg_GetSkip( ::oParent, ::handle, , 1 )
+
             RETURN 0
          ENDIF
       ENDIF
+
       RETURN 0
    ELSEIF msg = WM_KEYDOWN
 
@@ -1014,9 +1045,11 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
             hwg_Sendmessage( ::handle, CB_SETCURSEL, nPos - 1, 0 )
             hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makelong( ::id, CBN_SELCHANGE ), ::handle )
             ::nCurPos := nPos - 1
+
             RETURN 0
          ENDIF
       ELSEIF ( wParam = VK_UP .OR. wParam = VK_DOWN )
+
          RETURN ::SkipItems( iif( wParam = VK_DOWN, 1, - 1 ) )
       ENDIF
       hwg_ProcKeyList( Self, wParam )
@@ -1024,10 +1057,10 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
    ELSEIF msg = WM_KEYUP
       IF ( wParam = VK_DOWN .OR. wParam = VK_UP )
          IF Left( ::Title, 2 ) == "\]" .OR. Left( ::Title, 2 ) == "\-"
+
             RETURN 0
          ENDIF
       ENDIF
-
 
    ELSEIF msg == WM_LBUTTONDOWN
 
@@ -1060,12 +1093,14 @@ METHOD onEvent( msg, wParam, lParam ) CLASS hCheckComboBox
       ENDIF
 
    ELSEIF msg == WM_LBUTTONUP
+
       RETURN - 1    //0
    ENDIF
 
    RETURN - 1
 
 METHOD Requery() CLASS hCheckComboBox
+
    LOCAL i
 
    ::Super:Requery()
@@ -1078,19 +1113,20 @@ METHOD Requery() CLASS hCheckComboBox
       NEXT
    ENDIF
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD Refresh() CLASS hCheckComboBox
 
    ::Super:refresh()
 
-   RETURN Nil
+   RETURN NIL
 
 METHOD SetCheck( nIndex, bFlag ) CLASS hCheckComboBox
 
    LOCAL nResult := hwg_Comboboxsetitemdata( ::handle, nIndex - 1, bFlag )
 
    IF ( nResult < 0 )
+
       RETURN nResult
    ENDIF
 
@@ -1120,9 +1156,10 @@ METHOD SelectAll( bCheck ) CLASS hCheckComboBox
       ::SetCheck( i, bCheck )
    NEXT
 
-   RETURN nil
+   RETURN NIL
 
 METHOD RecalcText() CLASS hCheckComboBox
+
    LOCAL strtext
    LOCAL ncount
    LOCAL strSeparator
@@ -1229,6 +1266,7 @@ METHOD Paint( lpDis ) CLASS hCheckComboBox
    IF cTmp == "\]" .OR. cTmp == "\-"
       IF ! lDroped
          hwg_Exttextout( dc, 0, 0, iif( ::lCheck, rcText[ 1 ], 0 ), rcText[ 2 ], rcText[ 3 ], rcText[ 4 ] )
+
          RETURN 0
       ENDIF
    ENDIF
@@ -1283,6 +1321,7 @@ METHOD Paint( lpDis ) CLASS hCheckComboBox
    RETURN Self
 
 METHOD MeasureItem( l ) CLASS hCheckComboBox
+
    LOCAL dc                  := HCLIENTDC():new( ::handle )
    LOCAL lpMeasureItemStruct := hwg_Getmeasureiteminfo( l )
    LOCAL metrics
@@ -1316,6 +1355,7 @@ METHOD OnGetText( wParam, lParam ) CLASS hCheckComboBox
    ::RecalcText()
 
    IF ( lParam == 0 )
+
       RETURN 0
    ENDIF
 
@@ -1334,6 +1374,7 @@ METHOD OnGetTextLength( WPARAM, LPARAM ) CLASS hCheckComboBox
    RETURN iif( Empty( ::m_strText ), 0, Len( ::m_strText ) )
 
 METHOD GetAllCheck() CLASS hCheckComboBox
+
    LOCAL aCheck := { }
    LOCAL n
 
@@ -1346,6 +1387,7 @@ METHOD GetAllCheck() CLASS hCheckComboBox
    RETURN aCheck
 
 METHOD EnabledItem( nItem, lEnabled ) CLASS hCheckComboBox
+
    LOCAL cItem
 
    IF lEnabled != Nil
@@ -1366,6 +1408,7 @@ METHOD EnabledItem( nItem, lEnabled ) CLASS hCheckComboBox
    RETURN  ! Left( ::aItems[ nItem ], 2 ) == "\]"
 
 METHOD SkipItems( nNav ) CLASS hCheckComboBox
+
    LOCAL nPos
    LOCAL strText := ""
 
@@ -1381,6 +1424,7 @@ METHOD SkipItems( nNav ) CLASS hCheckComboBox
          hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makelong( ::id, CBN_SELCHANGE ), ::handle )
       ENDIF
       ::nCurPos := nPos
+
       RETURN 0
    ENDIF
 
@@ -1401,3 +1445,4 @@ FUNCTION hwg_multibitor( ... )
    NEXT
 
    RETURN result
+

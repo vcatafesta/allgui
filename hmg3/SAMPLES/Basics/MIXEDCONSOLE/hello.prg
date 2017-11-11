@@ -103,3 +103,4 @@ HB_FUNC ( TERMINATEPROCESS )
 }
 */
 #pragma ENDDUMP
+

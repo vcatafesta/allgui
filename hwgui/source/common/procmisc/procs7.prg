@@ -1,14 +1,12 @@
 /*
- * $Id: procs7.prg 2168 2013-07-23 11:40:15Z alkresin $
- *
- * Common procedures
- *
- *
- * Author: Alexander S.Kresin <alex@kresin.ru>
- *         www - http://www.kresin.ru
+* $Id: procs7.prg 2168 2013-07-23 11:40:15Z alkresin $
+* Common procedures
+* Author: Alexander S.Kresin <alex@kresin.ru>
+*         www - http://www.kresin.ru
 */
 
 FUNCTION RDSTR( han, strbuf, poz, buflen )
+
    LOCAL stro := "", rez, oldpoz, poz1
 
    oldpoz := poz
@@ -18,6 +16,7 @@ FUNCTION RDSTR( han, strbuf, poz, buflen )
          stro += SubStr( strbuf, oldpoz )
          rez  := FRead( han, @strbuf, buflen )
          IF rez = 0
+
             RETURN ""
          ELSEIF rez < buflen
             strbuf := SubStr( strbuf, 1, rez ) + Chr( 10 ) + Chr( 13 )
@@ -28,6 +27,7 @@ FUNCTION RDSTR( han, strbuf, poz, buflen )
          stro += RTrim( SubStr( strbuf, oldpoz ) )
          poz  := oldpoz + Len( stro )
          IF Len( stro ) == 0
+
             RETURN ""
          ENDIF
       ENDIF
@@ -51,6 +51,7 @@ FUNCTION getNextVar( stroka, varValue )
    LOCAL varName, iPosEnd, iPos3
 
    IF Empty( stroka )
+
       RETURN ""
    ELSE
       IF ( iPosEnd := Find_Z( stroka ) ) == 0
@@ -94,13 +95,13 @@ FUNCTION FIND_Z( stroka, symb )
 
    RETURN poz
 
-#ifdef __WINDOWS__
+   #ifdef __WINDOWS__
 
 FUNCTION Fchoice()
 
    RETURN 1
 
-#endif
+   #endif
 
 FUNCTION CutExten( fname )
 
@@ -134,11 +135,11 @@ FUNCTION AddPath( fname, cPath )
 
    IF Empty( FilePath( fname ) ) .AND. !Empty( cPath )
       IF !( Right( cPath,1 ) $ "\/" )
-#ifdef __PLATFORM__UNIX
+         #ifdef __PLATFORM__UNIX
          cPath += "/"
-#else
+         #else
          cPath += "\"
-#endif
+         #endif
       ENDIF
       fname := cPath + fname
    ENDIF
@@ -160,11 +161,14 @@ FUNCTION NextItem( stroka, lFirst, cSep )
       oldPos := nPos
       IF ( i := At( cSep, SubStr( stroka, nPos ) ) ) == 0
          nPos := 99999
+
          RETURN LTrim( RTrim( SubStr( stroka, oldPos ) ) )
       ELSE
          nPos += i
+
          RETURN LTrim( RTrim( SubStr( stroka, oldPos, i - 1 ) ) )
       ENDIF
    ENDIF
 
    RETURN ""
+

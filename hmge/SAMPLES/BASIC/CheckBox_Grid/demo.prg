@@ -130,3 +130,4 @@ PROCEDURE initcheckboxes()
    Form_1.Grid_1.CheckboxItem (9) := .t.
 
    RETURN
+

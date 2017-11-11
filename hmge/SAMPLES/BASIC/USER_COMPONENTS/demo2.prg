@@ -49,3 +49,4 @@ PROCEDURE OnInit
    RETURN
 
    #include "MySysLink.prg"
+
