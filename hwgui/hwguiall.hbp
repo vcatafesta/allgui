@@ -1,0 +1,8 @@
+-hbcontainer
+hwgui_contrib.hbp
+hwgui_core.hbp
+hwgui_debug.hbp
+hwgui_hbactivex.hbp
+hwgui_hbxml.hbp
+hwgui_procmisc.hbp
+-beep

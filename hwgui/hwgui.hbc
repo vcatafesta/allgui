@@ -6,10 +6,9 @@
 #   'hbmk2 hwgui.hbc test.prg'
 
 incpaths=include
-libpaths=lib
+libpaths=${hb_install_prefix}/addons/hwgui/lib/win/${hb_comp}
 
-{win}gt=gtgui
+gui=yes
 
-#libs=hwgui procmisc hbxml hwgdebug
-libs=hwgui procmisc hbactivex
-#{win&!allmingw}libs=hbactivex
+libs=hwgui_core hwgui_hbxml hwgui_contrib hwgui_debug hwgui_procmisc hwgui_hbactivex
+cflags=-DHWG_USE_POINTER_ITEM

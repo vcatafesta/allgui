@@ -1,0 +1,8 @@
+-hblib
+-o${hb_install_prefix}/addons/hwgui/lib/win/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/hwgui/${hb_name}.hbx
+-m -n -mt -ge1 -quiet -w1 -es1
+hwgui.hbc
+-beep
+source/procmisc/*.c
+source/procmisc/*.prg

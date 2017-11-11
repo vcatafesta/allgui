@@ -1,6 +1,6 @@
 -hblib
 -o${hb_install_prefix}/addons/hmg3/lib/win/${hb_comp}/${hb_name}
--hbx=${hb_install_prefix}/addons/hmg3/lib/${hb_name}.hbx
+-hbx=${hb_install_prefix}/addons/hmg3/${hb_name}.hbx
 hmg3.hbc
 -beep
 -D__HBIDE__
