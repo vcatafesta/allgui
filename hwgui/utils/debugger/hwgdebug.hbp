@@ -1,0 +1,7 @@
+#
+# $Id: $
+#
+
+..\..\hwgui.hbc
+-n 
+hwgdebug.prg

@@ -1,0 +1,23 @@
+#
+# $Id: hbxml.hbp 1615 2011-02-18 13:53:35Z mlacecilia $
+#
+
+-inc
+
+-hblib
+-olib/hbxml
+
+#-n -q0 -w -es2
+
+-m
+-n
+-mt
+-ge1
+-quiet
+-w1
+-es1
+
+-iinclude
+
+source/xml/*.c
+source/xml/*.prg

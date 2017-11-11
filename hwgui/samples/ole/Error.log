@@ -1,0 +1,8 @@
+Error WINOLE/1006  Não há suporte para esta interface
+ (0x80004002): Agent.Control.2 (DOS Error -2147352567)
+Called from ->WIN_OLEAUTO:_CONNECTED(0)
+Called from ->MAIN(20)
+
+HwGUI 2.17 Harbour 3.4.0dev (e625a37) (2016-04-30 05:06)
+Date:04/30/16
+Time:19:31:04
