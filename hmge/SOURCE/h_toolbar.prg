@@ -302,12 +302,12 @@ FUNCTION _DefineToolButton ( ControlName, ParentControl, x, y, Caption, Procedur
    IF i > 0
       IF WholeDropDown == .T.
          nToolBarIndex := AScan ( _HMG_aControlHandles , ParentForm )
-ProcedureName := { || _DropDownShortcut ( Id , hParentForm , nToolBarIndex , nPos ) }
-ENDIF
-_DefineLetterOrDigitHotKey ( Caption, i, cParentForm, ProcedureName )
-ENDIF
+         ProcedureName := { || _DropDownShortcut ( Id , hParentForm , nToolBarIndex , nPos ) }
+      ENDIF
+      _DefineLetterOrDigitHotKey ( Caption, i, cParentForm, ProcedureName )
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION _AddToolBarToSplitBox ( ControlName , break , Caption , ParentForm )
 

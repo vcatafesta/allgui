@@ -21,21 +21,32 @@ CLASS HPanel INHERIT HControl, HScrollArea
    DATA lBorder INIT .F.
    DATA nRePaint  INIT  - 1
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         bInit, bSize, bPaint, bcolor )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor )
-   METHOD Paint()
-   METHOD BackColor( bcolor ) INLINE ::SetColor(, bcolor, .T. )
-   METHOD Hide()
-   METHOD Show()
-   METHOD Release()
-   METHOD Resize()
-   METHOD ResizeOffSet( nMode )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      bInit, bSize, bPaint, bcolor )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor )
+
+METHOD Paint()
+
+METHOD BackColor( bcolor ) INLINE ::SetColor(, bcolor, .T. )
+
+METHOD Hide()
+
+METHOD Show()
+
+METHOD Release()
+
+METHOD Resize()
+
+METHOD ResizeOffSet( nMode )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bcolor ) CLASS HPanel

@@ -980,11 +980,11 @@ STATIC FUNCTION OneLineIfEndif( cThisLine )
          cThisLine := TRIM( LTRIM( SUBSTR( cThisLine, AT( ";", cThisLine ) + 1 )))
       ENDDO
       IF nSemiColons > 1 .AND. LEFT( cThisLine, 4 ) == "ENDI"                   // must be at least two semicolons to complete IF;command;ENDIF
-         RETU .T.
-      ENDIF
+      RETU .T.
    ENDIF
+ENDIF
 
-   RETURN .F.
+RETURN .F.
 
 STATIC FUNCTION PutItBack( cPrgFile, nLastLine, aFuncList, aFuncType, aWindList, aRetuList, nFuncList )
 

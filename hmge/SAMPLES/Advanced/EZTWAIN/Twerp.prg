@@ -191,12 +191,12 @@ FUNCTION OnPaint()
       MainWnd.TW_APP_SAVEAS.Enabled := .T.
    ENDIF
 
-EndPaint( _HMG_MainHandle, pps )
+   EndPaint( _HMG_MainHandle, pps )
 
-RETURN NIL
-// *********
+   RETURN NIL
+   // *********
 
-// ************************************
+   // ************************************
 
 FUNCTION OnOpen()
 

@@ -35,7 +35,7 @@ HB_FUNC( COPYDATA )
 
 CLASS HComboBox INHERIT HControl
 
-   CLASS VAR winclass INIT "COMBOBOX"
+CLASS VAR winclass INIT "COMBOBOX"
 
    DATA aItems
    DATA aItemsBound
@@ -64,34 +64,57 @@ CLASS HComboBox INHERIT HControl
    DATA ldropshow INIT .F.
    DATA nMaxLength     INIT Nil
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, ;
-         bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength )
-   METHOD Activate()
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, bGFocus, bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext )
-   METHOD INIT()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Requery( aItems, xValue )
-   METHOD Refresh()
-   METHOD Setitem( nPos )
-   METHOD SetValue( xItem )
-   METHOD GetValue()
-   METHOD AddItem( cItem, cItemBound, nPos )
-   METHOD DeleteItem( xIndex )
-   METHOD Valid( )
-   METHOD When( )
-   METHOD onSelect()
-   METHOD InteractiveChange( )
-   METHOD onChange( lForce )
-   METHOD Populate() HIDDEN
-   METHOD GetValueBound( xItem )
-   METHOD RowSource( xSource ) SETGET
-   METHOD DisplayValue( cValue ) SETGET
-   METHOD onDropDown( ) INLINE ::ldropshow := .T.
-   METHOD SetCueBanner( cText, lShowFoco )
-   METHOD MaxLength( nMaxLength ) SETGET
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, ;
+      bcolor, bLFocus, bIChange, nDisplay, nhItem, ncWidth, nMaxLength )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, bGFocus, bLFocus, bIChange, nDisplay, nMaxLength, ledit, ltext )
+
+METHOD INIT()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Requery( aItems, xValue )
+
+METHOD Refresh()
+
+METHOD Setitem( nPos )
+
+METHOD SetValue( xItem )
+
+METHOD GetValue()
+
+METHOD AddItem( cItem, cItemBound, nPos )
+
+METHOD DeleteItem( xIndex )
+
+METHOD Valid( )
+
+METHOD When( )
+
+METHOD onSelect()
+
+METHOD InteractiveChange( )
+
+METHOD onChange( lForce )
+
+METHOD Populate() HIDDEN
+
+METHOD GetValueBound( xItem )
+
+METHOD RowSource( xSource ) SETGET
+
+METHOD DisplayValue( cValue ) SETGET
+
+METHOD onDropDown( ) INLINE ::ldropshow := .T.
+
+METHOD SetCueBanner( cText, lShowFoco )
+
+METHOD MaxLength( nMaxLength ) SETGET
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, ;
@@ -369,7 +392,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HComboBox
             RETURN 0
          ELSEIF wParam = VK_ESCAPE .AND. hwg_GetParentForm( Self ):Type < WND_DLG_RESOURCE //.OR.;
 
-               RETURN 0
+            RETURN 0
          ENDIF
 
       ELSEIF msg = WM_KEYUP
@@ -865,7 +888,7 @@ METHOD Populate() CLASS HComboBox
 
 CLASS HCheckComboBox INHERIT HComboBox
 
-   CLASS VAR winclass  INIT "COMBOBOX"
+CLASS VAR winclass  INIT "COMBOBOX"
 
    DATA m_bTextUpdated INIT .F.
 
@@ -879,28 +902,44 @@ CLASS HCheckComboBox INHERIT HComboBox
    DATA nCurPos      INIT 0
    DATA aHimages, aImages
 
-   METHOD onGetText( wParam, lParam )
-   METHOD OnGetTextLength( wParam, lParam )
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
-         tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth, aImages )
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-         bChange, ctooltip, bGFocus, acheck )
-   METHOD INIT()
-   METHOD Requery()
-   METHOD Refresh()
-   METHOD Paint( lpDis )
-   METHOD SetCheck( nIndex, bFlag )
-   METHOD RecalcText()
-   METHOD GetCheck( nIndex )
-   METHOD SelectAll( bCheck )
-   METHOD MeasureItem( l )
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD GetAllCheck()
-   METHOD EnabledItem( nItem, lEnabled )
-   METHOD SkipItems( nNav )
+METHOD onGetText( wParam, lParam )
 
-   ENDCLASS
+METHOD OnGetTextLength( wParam, lParam )
+
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      aItems, oFont, bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, ;
+      tcolor, bcolor, bValid, acheck, nDisplay, nhItem, ncWidth, aImages )
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
+      bChange, ctooltip, bGFocus, acheck )
+
+METHOD INIT()
+
+METHOD Requery()
+
+METHOD Refresh()
+
+METHOD Paint( lpDis )
+
+METHOD SetCheck( nIndex, bFlag )
+
+METHOD RecalcText()
+
+METHOD GetCheck( nIndex )
+
+METHOD SelectAll( bCheck )
+
+METHOD MeasureItem( l )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD GetAllCheck()
+
+METHOD EnabledItem( nItem, lEnabled )
+
+METHOD SkipItems( nNav )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;

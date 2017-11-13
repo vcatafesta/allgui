@@ -250,7 +250,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
 
    _HMG_BeginWindowActive := .T.
 
-ClassName := "HMG_FORM_" + FormName
+   ClassName := "HMG_FORM_" + FormName
    UnRegisterWindow ( ClassName )
 
    IF mdi
@@ -548,7 +548,7 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
    _HMG_ActiveFormName := FormName
    _HMG_BeginWindowActive := .T.
 
-ClassName := "HMG_FORM_" + FormName
+   ClassName := "HMG_FORM_" + FormName
    UnRegisterWindow ( ClassName )
 
    BrushHandle := RegisterWindow( icon, ClassName, aRGB )
@@ -1882,10 +1882,10 @@ FUNCTION IsAppXPThemed()
    IF _HMG_IsXPorLater
       InitUxTheme()
       uResult := IsAppThemed()
-   EndUxTheme()
-ENDIF
+      EndUxTheme()
+   ENDIF
 
-RETURN uResult
+   RETURN uResult
 
 FUNCTION IsXPThemeActive()
 
@@ -1894,10 +1894,10 @@ FUNCTION IsXPThemeActive()
    IF _HMG_IsXPorLater
       InitUxTheme()
       uResult := IsThemeActive()
-   EndUxTheme()
-ENDIF
+      EndUxTheme()
+   ENDIF
 
-RETURN uResult
+   RETURN uResult
 
 PROCEDURE VirtualChildControlFocusProcess ( nControlHandle, nWindowHandle )
 

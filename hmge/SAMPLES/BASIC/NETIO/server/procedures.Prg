@@ -42,21 +42,21 @@ FUNCTION Query_002(nRecNo)
 
       DO WHILE .NOT. RLOCK() ; ENDDO
 
-         DBDELETE()
+      DBDELETE()
 
-         UNLOCK
+      UNLOCK
 
-         lResult := .T.
+      lResult := .T.
 
-      ELSE
+   ELSE
 
-         lResult := .F.
+      lResult := .F.
 
-      ENDIF
+   ENDIF
 
-      USE
+   USE
 
-      RETURN lResult
+   RETURN lResult
 
 FUNCTION Query_003(aValues)
 
@@ -86,15 +86,15 @@ FUNCTION Query_004(nRecNo,aValues)
 
    DO WHILE .NOT. RLOCK() ; ENDDO
 
-      FOR I := 1 TO LEN(aValues)
+   FOR I := 1 TO LEN(aValues)
 
-         FIELDPUT( I , aValues[I] )
+      FIELDPUT( I , aValues[I] )
 
-      NEXT I
+   NEXT I
 
-      UNLOCK
+   UNLOCK
 
-      USE
+   USE
 
-      RETURN NIL
+   RETURN NIL
 

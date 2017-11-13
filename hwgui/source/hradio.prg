@@ -13,8 +13,9 @@
 
 CLASS HRadioGroup INHERIT HControl //HObject
 
-   CLASS VAR winclass   INIT "STATIC"
-   CLASS VAR oGroupCurrent
+CLASS VAR winclass   INIT "STATIC"
+
+CLASS VAR oGroupCurrent
 
    DATA aButtons
    DATA nValue  INIT 1
@@ -23,22 +24,34 @@ CLASS HRadioGroup INHERIT HControl //HObject
    DATA lEnabled  INIT .T.
    DATA bClick
 
-   METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle )
-   METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize,tcolor, bColor, bClick, bGFocus, lTransp )
-   METHOD EndGroup( nSelected )
-   METHOD SetValue( nValue )
-   METHOD GetValue()  INLINE ::nValue
-   METHOD Value ( nValue ) SETGET
-   METHOD Refresh()
-   //METHOD IsEnabled() INLINE ::lEnabled
-   METHOD Enable()
-   METHOD Disable()
-   //METHOD Enabled( lEnabled ) SETGET
-   METHOD Init()
-   METHOD Activate() VIRTUAL
+METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle )
 
-   ENDCLASS
+METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize,tcolor, bColor, bClick, bGFocus, lTransp )
+
+METHOD EndGroup( nSelected )
+
+METHOD SetValue( nValue )
+
+METHOD GetValue()  INLINE ::nValue
+
+METHOD Value ( nValue ) SETGET
+
+METHOD Refresh()
+
+   //METHOD IsEnabled() INLINE ::lEnabled
+
+METHOD Enable()
+
+METHOD Disable()
+
+   //METHOD Enabled( lEnabled ) SETGET
+
+METHOD Init()
+
+METHOD Activate() VIRTUAL
+
+ENDCLASS
 
 METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
 

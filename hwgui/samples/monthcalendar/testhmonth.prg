@@ -34,13 +34,13 @@ FUNCTION Main
    MENUITEM "&Calendário 1" ACTION Dlg1()
    MENUITEM "&Calendário 2" ACTION Dlg2()
    MENUITEM "&Sair"         ACTION hwg_EndWindow()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oWnd
+   ACTIVATE WINDOW oWnd
 
-RETURN NIL
+   RETURN NIL
 
-//================================================================//
+   //================================================================//
 
 FUNCTION Dlg1
 

@@ -38,69 +38,69 @@ FUNCTION Main
    MENUITEM "&Open" ACTION FileOpen()
    SEPARATOR
    MENUITEM "&Exit" ACTION oWndMain:Close()
-ENDMENU
-MENU TITLE "&Index" ID 31010
-MENUITEM "&Select order" ACTION SelectIndex()
-MENUITEM "&New order" ACTION NewIndex()
-MENUITEM "&Open index file" ACTION OpenIndex()
-SEPARATOR
-MENUITEM "&Reindex all" ACTION ReIndex()
-SEPARATOR
-MENUITEM "&Close all indexes" ACTION CloseIndex()
-ENDMENU
-MENU TITLE "&Structure" ID 31020
-MENUITEM "&Modify structure" ACTION ModiStru( .F. )
-ENDMENU
-MENU TITLE "&Move" ID 31030
-MENUITEM "&Go To" ACTION dbv_Goto()
-MENUITEM "&Seek" ACTION dbv_Seek()
-MENUITEM "&Locate" ACTION dbv_Locate()
-MENUITEM "&Continue" ACTION dbv_Continue()
-ENDMENU
-MENU TITLE "&Command" ID 31040
-MENUITEM "&Delete record" ACTION dbv_DelRec()
-MENUITEM "&Pack" ACTION dbv_Pack()
-MENUITEM "&Zap" ACTION dbv_Zap()
-ENDMENU
-MENU TITLE "&View"
-MENUITEM "&Font" ACTION ChangeFont()
-MENU TITLE "&Local codepage"
-MENUITEMCHECK "EN" ACTION hb_SetCodepage( "EN" )
-MENUITEMCHECK "RUKOI8" ACTION hb_SetCodepage( "RUKOI8" )
-MENUITEMCHECK "RU1251" ACTION hb_SetCodepage( "RU1251" )
-ENDMENU
-MENU TITLE "&Data's codepage"
-MENUITEMCHECK "EN" ACTION SetDataCP( "EN" )
-MENUITEMCHECK "RUKOI8" ACTION SetDataCP( "RUKOI8" )
-MENUITEMCHECK "RU1251" ACTION SetDataCP( "RU1251" )
-MENUITEMCHECK "RU866"  ACTION SetDataCP( "RU866" )
-ENDMENU
-ENDMENU
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION hwg_Msginfo("Dbf Files Browser" + Chr(10) + "2005" )
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Index" ID 31010
+   MENUITEM "&Select order" ACTION SelectIndex()
+   MENUITEM "&New order" ACTION NewIndex()
+   MENUITEM "&Open index file" ACTION OpenIndex()
+   SEPARATOR
+   MENUITEM "&Reindex all" ACTION ReIndex()
+   SEPARATOR
+   MENUITEM "&Close all indexes" ACTION CloseIndex()
+   ENDMENU
+   MENU TITLE "&Structure" ID 31020
+   MENUITEM "&Modify structure" ACTION ModiStru( .F. )
+   ENDMENU
+   MENU TITLE "&Move" ID 31030
+   MENUITEM "&Go To" ACTION dbv_Goto()
+   MENUITEM "&Seek" ACTION dbv_Seek()
+   MENUITEM "&Locate" ACTION dbv_Locate()
+   MENUITEM "&Continue" ACTION dbv_Continue()
+   ENDMENU
+   MENU TITLE "&Command" ID 31040
+   MENUITEM "&Delete record" ACTION dbv_DelRec()
+   MENUITEM "&Pack" ACTION dbv_Pack()
+   MENUITEM "&Zap" ACTION dbv_Zap()
+   ENDMENU
+   MENU TITLE "&View"
+   MENUITEM "&Font" ACTION ChangeFont()
+   MENU TITLE "&Local codepage"
+   MENUITEMCHECK "EN" ACTION hb_SetCodepage( "EN" )
+   MENUITEMCHECK "RUKOI8" ACTION hb_SetCodepage( "RUKOI8" )
+   MENUITEMCHECK "RU1251" ACTION hb_SetCodepage( "RU1251" )
+   ENDMENU
+   MENU TITLE "&Data's codepage"
+   MENUITEMCHECK "EN" ACTION SetDataCP( "EN" )
+   MENUITEMCHECK "RUKOI8" ACTION SetDataCP( "RUKOI8" )
+   MENUITEMCHECK "RU1251" ACTION SetDataCP( "RU1251" )
+   MENUITEMCHECK "RU866"  ACTION SetDataCP( "RU866" )
+   ENDMENU
+   ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION hwg_Msginfo("Dbf Files Browser" + Chr(10) + "2005" )
+   ENDMENU
+   ENDMENU
 
-@ 0,0 BROWSE oBrw                 ;
-   SIZE 300,272                   ;
-   STYLE WS_VSCROLL + WS_HSCROLL  ;
-   FONT oFont                     ;
-   ON SIZE {|o,x,y|o:Move(,,x-1,y-28)}
+   @ 0,0 BROWSE oBrw                 ;
+      SIZE 300,272                   ;
+      STYLE WS_VSCROLL + WS_HSCROLL  ;
+      FONT oFont                     ;
+      ON SIZE {|o,x,y|o:Move(,,x-1,y-28)}
 
-oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
+   oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
 
-@ 0,272 PANEL oPanel SIZE 0,26 ON SIZE {|o,x,y|o:Move(0,y-26,x-1,y-8)}
-@ 5,4 SAY oSay1 CAPTION "" OF oPanel SIZE 150,22 FONT oFont
-@ 160,4 SAY oSay2 CAPTION "" OF oPanel SIZE 100,22 FONT oFont
+   @ 0,272 PANEL oPanel SIZE 0,26 ON SIZE {|o,x,y|o:Move(0,y-26,x-1,y-8)}
+   @ 5,4 SAY oSay1 CAPTION "" OF oPanel SIZE 150,22 FONT oFont
+   @ 160,4 SAY oSay2 CAPTION "" OF oPanel SIZE 100,22 FONT oFont
 
-hwg_Enablemenuitem( ,31010,.F. )
-hwg_Enablemenuitem( ,31020,.F. )
-hwg_Enablemenuitem( ,31030,.F. )
-hwg_Enablemenuitem( ,31040,.F. )
+   hwg_Enablemenuitem( ,31010,.F. )
+   hwg_Enablemenuitem( ,31020,.F. )
+   hwg_Enablemenuitem( ,31030,.F. )
+   hwg_Enablemenuitem( ,31040,.F. )
 
-ACTIVATE WINDOW oWndMain
+   ACTIVATE WINDOW oWndMain
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION FileOpen
 

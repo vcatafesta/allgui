@@ -179,229 +179,229 @@ FUNCTION Main()
       END MENU
 
       DEFINE IMAGELIST imagelst_1 ;
-            BUTTONSIZE 16 , 16 ;
-            IMAGE {'br_list'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 9;
-            MASK
+         BUTTONSIZE 16 , 16 ;
+         IMAGE {'br_list'} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 9;
+         MASK
 
-         DEFINE IMAGELIST imagelst_2 ;
-               BUTTONSIZE 16 , 16 ;
-               IMAGE {} ;
-               COLORMASK CLR_DEFAULT;
-               IMAGECOUNT 0;
-               MASK
+      DEFINE IMAGELIST imagelst_2 ;
+         BUTTONSIZE 16 , 16 ;
+         IMAGE {} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 0;
+         MASK
 
-            ADD IMAGE  'br0' TO imagelst_2 OF  Form_1
-            ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
-            ADD IMAGE  'br0' TO imagelst_2 OF  Form_1
-            ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
-            ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
-            ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br0' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br0' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
+      ADD IMAGE  'br2' TO imagelst_2 OF  Form_1
 
-            DEFINE IMAGELIST imagelst_3 ;
-                  BUTTONSIZE 16 , 16 ;
-                  IMAGE {} ;
-                  COLORMASK CLR_DEFAULT;
-                  IMAGECOUNT 0;
-                  MASK
-               FOR n:=1 TO 12
-                  ADD IMAGE  'mse' TO imagelst_3 OF  Form_1
-               NEXT
+      DEFINE IMAGELIST imagelst_3 ;
+         BUTTONSIZE 16 , 16 ;
+         IMAGE {} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 0;
+         MASK
+      FOR n:=1 TO 12
+         ADD IMAGE  'mse' TO imagelst_3 OF  Form_1
+      NEXT
 
-               DEFINE IMAGELIST DriveImagelst ;
-                     BUTTONSIZE 16 , 16 ;
-                     IMAGE {} ;
-                     COLORMASK CLR_DEFAULT;
-                     IMAGECOUNT 0;
-                     MASK
+      DEFINE IMAGELIST DriveImagelst ;
+         BUTTONSIZE 16 , 16 ;
+         IMAGE {} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 0;
+         MASK
 
-                  FOR n:=1 TO Len(aDriveImage)
-                     ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
-                     ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
-                     ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
-                  NEXT
+      FOR n:=1 TO Len(aDriveImage)
+         ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
+         ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
+         ADD IMAGE aDriveImage[n] TO DriveImagelst OF  Form_1
+      NEXT
 
-                  // first extend combo  by JP 30
-                  @ 10,10 COMBOBOXEX ComboEx_1 ;
-                     WIDTH 150 ;
-                     ITEMS aDriveTypes ;
-                     VALUE 1 ;
-                     ON ENTER TONE(800) ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     IMAGELIST "DriveImagelst"   ;
-                     TOOLTIP "Extend Combo ComboEx_1 - Edit disabled"
+      // first extend combo  by JP 30
+      @ 10,10 COMBOBOXEX ComboEx_1 ;
+         WIDTH 150 ;
+         ITEMS aDriveTypes ;
+         VALUE 1 ;
+         ON ENTER TONE(800) ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         IMAGELIST "DriveImagelst"   ;
+         TOOLTIP "Extend Combo ComboEx_1 - Edit disabled"
 
-                  @ 33,10 Label Label_1ex Value "Extend ComboEx_1"
+      @ 33,10 Label Label_1ex Value "Extend ComboEx_1"
 
-                  // 2nd extend combo - ITEMSOURCE (Data combo ) by JP 30
-                  @ 60,10 COMBOBOXEX ComboEx_2 ;
-                     WIDTH 150 ;
-                     ITEMSOURCE CITIES->NAME;
-                     VALUE 1 ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
-                     IMAGELIST "imagelst_2" ;
-                     Tooltip "Extend Data ComboEx_2 - Edit disabled"
+      // 2nd extend combo - ITEMSOURCE (Data combo ) by JP 30
+      @ 60,10 COMBOBOXEX ComboEx_2 ;
+         WIDTH 150 ;
+         ITEMSOURCE CITIES->NAME;
+         VALUE 1 ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
+         IMAGELIST "imagelst_2" ;
+         Tooltip "Extend Data ComboEx_2 - Edit disabled"
 
-                  @ 83,10 Label Label_2ex Value "Extend Data ComboEx_2" AUTOSIZE
+      @ 83,10 Label Label_2ex Value "Extend Data ComboEx_2" AUTOSIZE
 
-                  // 3rd extend COMBO    by JP 30
-                  @ 110,10 COMBOBOXEX ComboEx_3 ;
-                     WIDTH 150 ;
-                     ITEMS {"one            ","two            ","tree           "} ;
-                     VALUE 1 ;
-                     DISPLAYEDIT;
-                     ON ENTER MsgBox(This.DisplayValue,Str(this.Value)) ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     TOOLTIP "Extend ComboEx_3 - Edit enabled" ;
-                     IMAGELIST "imagelst_1"
+      // 3rd extend COMBO    by JP 30
+      @ 110,10 COMBOBOXEX ComboEx_3 ;
+         WIDTH 150 ;
+         ITEMS {"one            ","two            ","tree           "} ;
+         VALUE 1 ;
+         DISPLAYEDIT;
+         ON ENTER MsgBox(This.DisplayValue,Str(this.Value)) ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         TOOLTIP "Extend ComboEx_3 - Edit enabled" ;
+         IMAGELIST "imagelst_1"
 
-                  @ 133,10 Label Label_3ex Value "Extend ComboEx_3 - Edit" AUTOSIZE
+      @ 133,10 Label Label_3ex Value "Extend ComboEx_3 - Edit" AUTOSIZE
 
-                  @ 160,10 COMBOBOXEX ComboEx_4 ;
-                     WIDTH 530 ;
-                     ITEMS {"http://harbourminigui.googlepages.com","http://harbourminigui.blogspot.com","http://harbour-project.org","http://groups.yahoo.com/group/harbourminigui"} ;
-                     VALUE 1 ;
-                     DISPLAYEDIT;
-                     ON ENTER RunMSIE(This.DisplayValue) ;
-                     FONT 'MS Sans serif' SIZE 10 ;
-                     Tooltip "Select or modify URL and press RETURN Key to open Browser" ;
-                     IMAGELIST "imagelst_3"
+      @ 160,10 COMBOBOXEX ComboEx_4 ;
+         WIDTH 530 ;
+         ITEMS {"http://harbourminigui.googlepages.com","http://harbourminigui.blogspot.com","http://harbour-project.org","http://groups.yahoo.com/group/harbourminigui"} ;
+         VALUE 1 ;
+         DISPLAYEDIT;
+         ON ENTER RunMSIE(This.DisplayValue) ;
+         FONT 'MS Sans serif' SIZE 10 ;
+         Tooltip "Select or modify URL and press RETURN Key to open Browser" ;
+         IMAGELIST "imagelst_3"
 
-                  @ 185,10 Label Label_4ex Value "URL Extend ComboEx_4 - Edit enabled" AUTOSIZE
+      @ 185,10 Label Label_4ex Value "URL Extend ComboEx_4 - Edit enabled" AUTOSIZE
 
-                  @ 160,545 BUTTON Button_URL CAPTION "Go!" WIDTH 35 HEIGHT 25 FONT 'MS Sans serif' SIZE 9 BOLD ;
-                     ACTION RunMSIE(Form_1.ComboEx_4.DisplayValue)
+      @ 160,545 BUTTON Button_URL CAPTION "Go!" WIDTH 35 HEIGHT 25 FONT 'MS Sans serif' SIZE 9 BOLD ;
+         ACTION RunMSIE(Form_1.ComboEx_4.DisplayValue)
 
-                  // 1st standard COMBO
+      // 1st standard COMBO
 
-                  @ 10,200 COMBOBOX Combo_1std ;
-                     WIDTH 50 ;
-                     LISTWIDTH 150;
-                     ITEMS aDriveTypes ;
-                     VALUE 1 ;
-                     ON ENTER TONE(800) ;
-                     FONT 'MS Sans serif' SIZE 9    ;
-                     TOOLTIP "Standard Combo_1std - Edit disabled"
+      @ 10,200 COMBOBOX Combo_1std ;
+         WIDTH 50 ;
+         LISTWIDTH 150;
+         ITEMS aDriveTypes ;
+         VALUE 1 ;
+         ON ENTER TONE(800) ;
+         FONT 'MS Sans serif' SIZE 9    ;
+         TOOLTIP "Standard Combo_1std - Edit disabled"
 
-                  @ 33,200 Label Label_1std Value "Standard Combo_1std" AUTOSIZE
+      @ 33,200 Label Label_1std Value "Standard Combo_1std" AUTOSIZE
 
-                  // 2nd standard COMBO with ITEMSOURCE set
+      // 2nd standard COMBO with ITEMSOURCE set
 
-                  @ 60,200 COMBOBOX Combo_2std ;
-                     WIDTH 150 ;
-                     ITEMSOURCE CITIES->NAME;
-                     VALUE 5 ;
-                     ON ENTER msgbox("Here I am") ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
-                     TOOLTIP "Standard Data Combo_2std";
+      @ 60,200 COMBOBOX Combo_2std ;
+         WIDTH 150 ;
+         ITEMSOURCE CITIES->NAME;
+         VALUE 5 ;
+         ON ENTER msgbox("Here I am") ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
+         TOOLTIP "Standard Data Combo_2std";
 
-                  @ 83,200 Label Label_2std Value "Standard Data Combo_2std" AUTOSIZE
+      @ 83,200 Label Label_2std Value "Standard Data Combo_2std" AUTOSIZE
 
-                  // 3rd standard COMBO with with DISPLAYEDIT clause set
+      // 3rd standard COMBO with with DISPLAYEDIT clause set
 
-                  @ 110,200 COMBOBOX Combo_3std ;
-                     WIDTH 150 ;
-                     ITEMS  {"one","two","three","four","five","six"} ;
-                     VALUE 1 ;
-                     DISPLAYEDIT ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     TOOLTIP "Standard Combo_3std - Edit enabled"
+      @ 110,200 COMBOBOX Combo_3std ;
+         WIDTH 150 ;
+         ITEMS  {"one","two","three","four","five","six"} ;
+         VALUE 1 ;
+         DISPLAYEDIT ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         TOOLTIP "Standard Combo_3std - Edit enabled"
 
-                  @ 133,200 Label Label_3std Value "Standard Combo_3std - Edit"  AUTOSIZE
+      @ 133,200 Label Label_3std Value "Standard Combo_3std - Edit"  AUTOSIZE
 
-                  // 1st extend COMBO without image list set
+      // 1st extend COMBO without image list set
 
-                  @ 10,390 COMBOBOXEX ComboEx_1wi ;
-                     WIDTH 150 ;
-                     ITEMS aDriveTypes ;
-                     VALUE 1 ;
-                     ON GOTFOCUS  {|| (This.FontBold := .T.) };
-                     ON LOSTFOCUS {|| (This.FontBold := .F.)};
-                     ON ENTER MsgBox ( Str(This.value),"This.Value" ) ;
-                     FONT 'MS Sans serif' SIZE 9;
-                     TOOLTIP "Extend ComboEx_1wi without images - Edit disabled"
+      @ 10,390 COMBOBOXEX ComboEx_1wi ;
+         WIDTH 150 ;
+         ITEMS aDriveTypes ;
+         VALUE 1 ;
+         ON GOTFOCUS  {|| (This.FontBold := .T.) };
+         ON LOSTFOCUS {|| (This.FontBold := .F.)};
+         ON ENTER MsgBox ( Str(This.value),"This.Value" ) ;
+         FONT 'MS Sans serif' SIZE 9;
+         TOOLTIP "Extend ComboEx_1wi without images - Edit disabled"
 
-                  @ 33,390 Label Label_1wi Value "Extend ComboEx_1wi w/o img." AUTOSIZE
+      @ 33,390 Label Label_1wi Value "Extend ComboEx_1wi w/o img." AUTOSIZE
 
-                  // 2nd extend COMBO without image list set
+      // 2nd extend COMBO without image list set
 
-                  @ 60,390 COMBOBOXEX ComboEx_2wi ;
-                     WIDTH 150 ;
-                     ITEMSOURCE CITIES->NAME;
-                     VALUE 2 ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
-                     TOOLTIP "Extend Data ComboEx_2wi without images - Edit disabled"
+      @ 60,390 COMBOBOXEX ComboEx_2wi ;
+         WIDTH 150 ;
+         ITEMSOURCE CITIES->NAME;
+         VALUE 2 ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         ON CHANGE MsgBox("RecNo. "+alltrim(str(This.Value))+" "+This.DisplayValue+" selected");
+         TOOLTIP "Extend Data ComboEx_2wi without images - Edit disabled"
 
-                  @ 83,390 Label Label_2wi Value "Extend ComboEx_2wi w/o img." AUTOSIZE
+      @ 83,390 Label Label_2wi Value "Extend ComboEx_2wi w/o img." AUTOSIZE
 
-                  // 3rd extend COMBO without image list set
+      // 3rd extend COMBO without image list set
 
-                  @ 110,390 COMBOBOXEX ComboEx_3wi ;
-                     WIDTH 150 ;
-                     ITEMS  {"one","two","three","four","five","six"} ;
-                     VALUE 1 ;
-                     DISPLAYEDIT ;
-                     FONT 'MS Sans serif' SIZE 9 ;
-                     ON DISPLAYCHANGE {|| TONE(100)} ;
-                     TOOLTIP "Extend ComboEx_3wi without images - Edit enabled"
+      @ 110,390 COMBOBOXEX ComboEx_3wi ;
+         WIDTH 150 ;
+         ITEMS  {"one","two","three","four","five","six"} ;
+         VALUE 1 ;
+         DISPLAYEDIT ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         ON DISPLAYCHANGE {|| TONE(100)} ;
+         TOOLTIP "Extend ComboEx_3wi without images - Edit enabled"
 
-                  @ 133,390 Label Label_3wi Value "Extend ComboEx_3wi - Edit w/o img." AUTOSIZE
+      @ 133,390 Label Label_3wi Value "Extend ComboEx_3wi - Edit w/o img." AUTOSIZE
 
-                  // AltSyntax test
+      // AltSyntax test
 
-                  DEFINE COMBOBOXEX ComboEx_1alt
-                     ROW   210
-                     COL   10
-                     WIDTH 150
-                     FONTNAME  'MS Sans serif'
-                     FONTSIZE  9
-                     LISTWIDTH 150
-                     ITEMS {'One','Two','Three'}
-                     IMAGELIST "imagelst_1"          // JP 30
-                     VALUE 3
-                     TOOLTIP 'ComboEx_1alt AltSyntax'
-                  END COMBOBOXEX
+      DEFINE COMBOBOXEX ComboEx_1alt
+      ROW   210
+      COL   10
+      WIDTH 150
+      FONTNAME  'MS Sans serif'
+      FONTSIZE  9
+      LISTWIDTH 150
+      ITEMS {'One','Two','Three'}
+      IMAGELIST "imagelst_1"          // JP 30
+      VALUE 3
+      TOOLTIP 'ComboEx_1alt AltSyntax'
+   END COMBOBOXEX
 
-                  @ 235,10 Label Label_ComboEx_1alt Value "Ext. ComboEx_1alt - AltSynt." AUTOSIZE
+   @ 235,10 Label Label_ComboEx_1alt Value "Ext. ComboEx_1alt - AltSynt." AUTOSIZE
 
-                  DEFINE COMBOBOXEX ComboEx_2alt
-                     ROW   210
-                     COL   200
-                     WIDTH 150
-                     FONTNAME  'MS Sans serif'
-                     FONTSIZE  9
-                     ITEMSOURCE CITIES->NAME
-                     LISTWIDTH 150
-                     IMAGELIST "imagelst_2"   //JP 30
-                     VALUE 2
-                     TOOLTIP 'ComboEx_2alt AltSyntax - Data'
-                  END COMBOBOXEX
+   DEFINE COMBOBOXEX ComboEx_2alt
+   ROW   210
+   COL   200
+   WIDTH 150
+   FONTNAME  'MS Sans serif'
+   FONTSIZE  9
+   ITEMSOURCE CITIES->NAME
+   LISTWIDTH 150
+   IMAGELIST "imagelst_2"   //JP 30
+   VALUE 2
+   TOOLTIP 'ComboEx_2alt AltSyntax - Data'
+END COMBOBOXEX
 
-                  @ 235,200 Label Label_ComboEx_2alt Value "Ext. ComboEx_2alt - AltSynt." AUTOSIZE
+@ 235,200 Label Label_ComboEx_2alt Value "Ext. ComboEx_2alt - AltSynt." AUTOSIZE
 
-                  DEFINE COMBOBOXEX ComboEx_3alt
-                     ROW   210
-                     COL   390
-                     WIDTH 150
-                     DISPLAYEDIT .t.
-                     FONTNAME  'MS Sans serif'
-                     FONTSIZE  9
-                     ITEMS  {"one","two","three","four","five","six"}
-                     VALUE 2
-                     TOOLTIP 'ComboEx_3alt AltSyntax - Edit enabled'
-                  END COMBOBOXEX
+DEFINE COMBOBOXEX ComboEx_3alt
+ROW   210
+COL   390
+WIDTH 150
+DISPLAYEDIT .t.
+FONTNAME  'MS Sans serif'
+FONTSIZE  9
+ITEMS  {"one","two","three","four","five","six"}
+VALUE 2
+TOOLTIP 'ComboEx_3alt AltSyntax - Edit enabled'
+END COMBOBOXEX
 
-                  @ 235,390 Label Label_ComboEx_3alt Value "Ext. ComboEx_3alt - AltSynt." AUTOSIZE
-               END WINDOW
+@ 235,390 Label Label_ComboEx_3alt Value "Ext. ComboEx_3alt - AltSynt." AUTOSIZE
+END WINDOW
 
-               Form_1.Center
-               Form_1.Activate
+Form_1.Center
+Form_1.Activate
 
-               RETURN NIL
+RETURN NIL
 
 FUNCTION RunMSIE(cURL)
 

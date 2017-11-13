@@ -25,11 +25,11 @@ FUNCTION Main
    MENUITEM "&Exit"     ACTION oMain:Close()
    MENUITEM "&Direct"   ACTION TestForm()
    MENUITEM "&Indirect" ACTION IndirectDialog()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN .T.
+   RETURN .T.
 
 FUNCTION IndirectDialog
 

@@ -131,107 +131,107 @@ PROCEDURE PrintEti(modulo,ncopie)
    IF used()
       DBSetOrder(1)
       DBGoTop()
-   end_pr=quantirec_o()
-ELSE
-end_pr=1
-ENDIF
-
-mx_pg:=ROUND(((end_pr/ABody)+.5),0)
-
-IF "MINILABEL" $ upper(modulo)
-   USEprint := m->P_Label
-   str1 := "PORT"+if(m->Prev_label,"/PREV","")
-ELSE
-   USEprint := m->P_Report
-   Str1 := if (pos_setup > 0,upper(left(MainSetup[Pos_Setup,2],4)),"PORT")+ if(m->Prev_report,"/PREV","")
-ENDIF
-
-SET order to
-SET delete off
-dbgotop()
-att := Rd_Fld(modulo)
-MainSetup := settore(att,0)
-Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "ORIENTATION" })
-Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "BODYLEN" })
-abody := max(1,if (pos_setup > 0,val(MainSetup[Pos_Setup,2]),1))
-Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "PRINTERNAME" })
-USEprint := if (pos_setup > 0,MainSetup[Pos_Setup,2],useprint)
-Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "REPORTNAME" })
-ReportName := if (pos_setup > 0,MainSetup[Pos_Setup,2],ReportName)
-
-IF abody = 1
-   IF "LAND" $ Str1
-      Abody := 40
+      end_pr=quantirec_o()
    ELSE
-      Abody := 60
+      end_pr=1
    ENDIF
-ENDIF
 
-IF len(att) < 1
-   errore:=.t.
-ENDIF
+   mx_pg:=ROUND(((end_pr/ABody)+.5),0)
 
-IF .not. errore
-   IF "LAND" $ Str1 ;landscape:=.t.; endif
+   IF "MINILABEL" $ upper(modulo)
+      USEprint := m->P_Label
+      str1 := "PORT"+if(m->Prev_label,"/PREV","")
+   ELSE
+      USEprint := m->P_Report
+      Str1 := if (pos_setup > 0,upper(left(MainSetup[Pos_Setup,2],4)),"PORT")+ if(m->Prev_report,"/PREV","")
+   ENDIF
+
+   SET order to
+   SET delete off
+   dbgotop()
+   att := Rd_Fld(modulo)
+   MainSetup := settore(att,0)
+   Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "ORIENTATION" })
+   Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "BODYLEN" })
+   abody := max(1,if (pos_setup > 0,val(MainSetup[Pos_Setup,2]),1))
+   Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "PRINTERNAME" })
+   USEprint := if (pos_setup > 0,MainSetup[Pos_Setup,2],useprint)
+   Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "REPORTNAME" })
+   ReportName := if (pos_setup > 0,MainSetup[Pos_Setup,2],ReportName)
+
+   IF abody = 1
+      IF "LAND" $ Str1
+         Abody := 40
+      ELSE
+         Abody := 60
+      ENDIF
+   ENDIF
+
+   IF len(att) < 1
+      errore:=.t.
+   ENDIF
+
+   IF .not. errore
+      IF "LAND" $ Str1 ;landscape:=.t.; endif
       IF "PREV" $ Str1 ;lpreview:=.t. ; endif
-         IF "SELE" $ Str1 ;lselect :=.t. ; endif
+      IF "SELE" $ Str1 ;lselect :=.t. ; endif
 
-            IF lselect .and. lpreview
-               SELECT PRINTER DIALOG PREVIEW
-            ENDIF
-            IF lselect .and. .not. lpreview
-               SELECT PRINTER DIALOG
-            ENDIF
-            IF .not. lselect .and. lpreview
-               IF ascan(Stampanti,useprint) > 0
-                  SELECT PRINTER useprint ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie PREVIEW
-               ELSE
-                  SELECT PRINTER DEFAULT ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie PREVIEW
+      IF lselect .and. lpreview
+         SELECT PRINTER DIALOG PREVIEW
+      ENDIF
+      IF lselect .and. .not. lpreview
+         SELECT PRINTER DIALOG
+      ENDIF
+      IF .not. lselect .and. lpreview
+         IF ascan(Stampanti,useprint) > 0
+            SELECT PRINTER useprint ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie PREVIEW
+         ELSE
+            SELECT PRINTER DEFAULT ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie PREVIEW
+         ENDIF
+      ENDIF
+      IF .not. lselect .and. .not. lpreview
+         IF ascan(Stampanti,useprint) > 0
+            SELECT PRINTER useprint ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie
+         ELSE
+            SELECT PRINTER DEFAULT ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie
+         ENDIF
+      ENDIF
+
+      START PRINTDOC NAME reportname
+         DO WHILE !(db_arc)->(Eof())
+            IF npag = 0  .or. c_pag > 0
+               START PRINTPAGE
+                  npag ++
+                  c_pag := 0
+                  EtiHead(modulo) //Page Header
                ENDIF
-            ENDIF
-            IF .not. lselect .and. .not. lpreview
-               IF ascan(Stampanti,useprint) > 0
-                  SELECT PRINTER useprint ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie
-               ELSE
-                  SELECT PRINTER DEFAULT ORIENTATION if(Landscape,PRINTER_ORIENT_LANDSCAPE,PRINTER_ORIENT_PORTRAIT) COPIES ncopie
-               ENDIF
-            ENDIF
-
-            START PRINTDOC NAME reportname
-               DO WHILE !(db_arc)->(Eof())
-                  IF npag = 0  .or. c_pag > 0
-                     START PRINTPAGE
-                        npag ++
-                        c_pag := 0
-                        EtiHead(modulo) //Page Header
-                     ENDIF
-                     c_rec := 0
-                     DO WHILE c_rec < Abody .and. !eof()
-                        Etibody(modulo)
-                        c_rec ++
-                        dbskip(1)
-                     ENDDO
-
-                     IF eof()    // Document Footer
-                        last_pag := .t.
-                        c_rec ++
-                     ELSE
-                        c_pag := 1
-                     ENDIF
-                     EtiFeet(modulo)   // Page footer
-                  END PRINTPAGE
+               c_rec := 0
+               DO WHILE c_rec < Abody .and. !eof()
+                  Etibody(modulo)
+                  c_rec ++
+                  dbskip(1)
                ENDDO
-            END PRINTDOC
-            SELECT PRINTER stampanti[ascan(Stampanti,useprint)] ;
-               ORIENTATION PRINTER_ORIENT_PORTRAIT
-            IF used();dbgoto(oldrec);endif
-            ELSE
-               msgExclamation("I have not found the report necessary "+CRLF+;
-                  "In order to create them confirmation printing in the SetPrinter section")
-            ENDIF
-            RELEASE att,linestep,c_rec,nPag,last_pag,eLine
 
-            RETURN
+               IF eof()    // Document Footer
+                  last_pag := .t.
+                  c_rec ++
+               ELSE
+                  c_pag := 1
+               ENDIF
+               EtiFeet(modulo)   // Page footer
+            END PRINTPAGE
+         ENDDO
+      END PRINTDOC
+      SELECT PRINTER stampanti[ascan(Stampanti,useprint)] ;
+         ORIENTATION PRINTER_ORIENT_PORTRAIT
+      IF used();dbgoto(oldrec);endif
+   ELSE
+      msgExclamation("I have not found the report necessary "+CRLF+;
+         "In order to create them confirmation printing in the SetPrinter section")
+   ENDIF
+   RELEASE att,linestep,c_rec,nPag,last_pag,eLine
+
+   RETURN
 
 PROCEDURE EtiHead(Modulo)
 
@@ -475,14 +475,14 @@ FUNCTION stripskel(filespec)
    outspec := ""
    lenspec := len(filespec)
    FOR i = lenspec  to 1 step -1
-   NEXTletr = subst(filespec,i,1)
-   IF nextletr $ "/\:"
-      outspec := left(filespec,i)
-      EXIT
-   ENDIF
-NEXT
+      NEXTletr = subst(filespec,i,1)
+      IF nextletr $ "/\:"
+         outspec := left(filespec,i)
+         EXIT
+      ENDIF
+   NEXT
 
-RETURN outspec
+   RETURN outspec
 
 FUNCTION TRUESVAL(string)
 
@@ -740,64 +740,64 @@ FUNCTION fgetline(handle)
 
       *- if we didn't read anything in, guess we're at the EOF
       IF LEN(chunk)=0
-      endof_file = .T.
+         endof_file = .T.
 
-      IF !EMPTY(bigchunk)
+         IF !EMPTY(bigchunk)
 
-         RETURN_line = bigchunk
+            RETURN_line = bigchunk
+         ENDIF
+         EXIT
+      ELSEIF len(bigchunk) > 1024
+         EXIT
       ENDIF
-      EXIT
-   ELSEIF len(bigchunk) > 1024
-      EXIT
-   ENDIF
 
-   *- add this chunk to the big chunk
-   bigchunk += chunk
+      *- add this chunk to the big chunk
+      bigchunk += chunk
 
-   *- if we've got a CR , we've read in a line
-   *- otherwise we'll loop again and read in another chunk
-   IF AT(CHR(13),bigchunk) > 0
-      at_chr13 =AT(CHR(13),bigchunk)
+      *- if we've got a CR , we've read in a line
+      *- otherwise we'll loop again and read in another chunk
+      IF AT(CHR(13),bigchunk) > 0
+         at_chr13 =AT(CHR(13),bigchunk)
 
-      *- go back to beginning of line
-      FSEEK(handle,oldoffset)
+         *- go back to beginning of line
+         FSEEK(handle,oldoffset)
 
-      *- read in from here to next CR (-1)
+         *- read in from here to next CR (-1)
 
-      RETURN_line = Freadstr(handle,at_chr13-1)
+         RETURN_line = Freadstr(handle,at_chr13-1)
 
-      *- move the pointer 1 byte
-      FSEEK(handle,1,1)
+         *- move the pointer 1 byte
+         FSEEK(handle,1,1)
 
-      EXIT
-   ENDIF
-ENDDO
+         EXIT
+      ENDIF
+   ENDDO
 
-*- move the pointer 1 byte
-*- this should put us at the beginning of the next line
-FSEEK(handle,1,1)
+   *- move the pointer 1 byte
+   *- this should put us at the beginning of the next line
+   FSEEK(handle,1,1)
 
-*- return the contents of the line
+   *- return the contents of the line
 
-RETURN return_line
+   RETURN return_line
 
-func quantirec_o(Warea,_nrec)            //count record that will be print
-   LOCAL conta:=0,query_exp
+   func quantirec_o(Warea,_nrec)            //count record that will be print
+      LOCAL conta:=0,query_exp
 
-   _nrec:=iif(_nrec==NIL,0,_nrec)
-   IF !EMPTY(query_exp:=dbfilter())
-      DBGOTOP()
-      COUNT to conta FOR &query_exp
-      DBGOTOP()
-   ELSE
-      IF _NREC < 1
-         conta:= reccount()
+      _nrec:=iif(_nrec==NIL,0,_nrec)
+      IF !EMPTY(query_exp:=dbfilter())
+         DBGOTOP()
+         COUNT to conta FOR &query_exp
+         DBGOTOP()
       ELSE
-         conta:= _NREC
+         IF _NREC < 1
+            conta:= reccount()
+         ELSE
+            conta:= _NREC
+         ENDIF
       ENDIF
-   ENDIF
 
-   RETURN CONTA
+      RETURN CONTA
 
 FUNCTION MyIn(Title,arg1,argd)
 

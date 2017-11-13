@@ -196,227 +196,227 @@ FUNCTION venda_delivery()
          fontcolor _preto_001;
          transparent
       DEFINE COMBOBOXex cbo_tamanhos
-         row 30
-         col 410
-         width 300
-         height 400
-         items a_tamanhos_pedacos
-         value 1
-         fontname 'courier new'
-         fontsize 12
-         fontcolor BLUE
-         onchange pega_tamanho()
-      END COMBOBOXex
+      row 30
+      col 410
+      width 300
+      height 400
+      items a_tamanhos_pedacos
+      value 1
+      fontname 'courier new'
+      fontsize 12
+      fontcolor BLUE
+      onchange pega_tamanho()
+   END COMBOBOXex
 
-      * grids
+   * grids
 
-      * pizzas
-      @ 060,410 label label_sabores;
-         of form_delivery;
-         value 'Defina os sabores';
-         autosize;
-         font 'courier new' size 12;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 080,410 label label_sabores_2;
-         of form_delivery;
-         value 'duplo-clique/enter seleciona';
-         autosize;
-         font 'courier new' size 12;
-         bold;
-         fontcolor _azul_001;
-         transparent
-      DEFINE GRID grid_pizzas
-         parent form_delivery
-         col 410
-         row 100
-         width n_largura_grid
-         height 300
-         headers {'','Nome','.','.','.','.','.','.'}
-         widths {1,200,100,100,100,100,100,100}
-         showheaders .T.
-         nolines .T.
-         fontname 'courier new'
-         fontsize 12
-         backcolor _ciano_001
-         fontcolor _preto_001
-         ondblclick adiciona_montagem()
-      END GRID
-      @ 440,410 Browse grid_montagem        ;
-         Of         form_delivery   ;
-         Width      n_largura_grid              ;
-         Height     100              ;
-         Headers    {'ID','Nome'};
-         Widths     {1,n_largura_grid - 30}         ;
-         Workarea   montagem ;
-         Fields     {'montagem->codigo','montagem->nome'};
-         Value      1                 ;
-         Font        'courier new'        ;
-         Size 12                      ;
-         Justify     {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT};
-         BackColor   _amarelo_001            ;
-         FontColor   _preto_001
+   * pizzas
+   @ 060,410 label label_sabores;
+      of form_delivery;
+      value 'Defina os sabores';
+      autosize;
+      font 'courier new' size 12;
+      bold;
+      fontcolor _preto_001;
+      transparent
+   @ 080,410 label label_sabores_2;
+      of form_delivery;
+      value 'duplo-clique/enter seleciona';
+      autosize;
+      font 'courier new' size 12;
+      bold;
+      fontcolor _azul_001;
+      transparent
+   DEFINE GRID grid_pizzas
+      parent form_delivery
+      col 410
+      row 100
+      width n_largura_grid
+      height 300
+      headers {'','Nome','.','.','.','.','.','.'}
+      widths {1,200,100,100,100,100,100,100}
+      showheaders .T.
+      nolines .T.
+      fontname 'courier new'
+      fontsize 12
+      backcolor _ciano_001
+      fontcolor _preto_001
+      ondblclick adiciona_montagem()
+   END GRID
+   @ 440,410 Browse grid_montagem        ;
+      Of         form_delivery   ;
+      Width      n_largura_grid              ;
+      Height     100              ;
+      Headers    {'ID','Nome'};
+      Widths     {1,n_largura_grid - 30}         ;
+      Workarea   montagem ;
+      Fields     {'montagem->codigo','montagem->nome'};
+      Value      1                 ;
+      Font        'courier new'        ;
+      Size 12                      ;
+      Justify     {BROWSE_JTFY_CENTER,BROWSE_JTFY_LEFT};
+      BackColor   _amarelo_001            ;
+      FontColor   _preto_001
 
-      @ 403,410 buttonex botao_fecha_pizza;
-         parent form_delivery;
-         caption 'Pizza montada';
-         width 120 height 35;
-         picture path_imagens+'adicionar.bmp';
-         action fecha_montagem_pizza()
-      @ 403,535 buttonex botao_exclui_pizza;
-         parent form_delivery;
-         caption 'Excluir sabor';
-         width 120 height 35;
-         picture path_imagens+'img_cancela.bmp';
-         action excluir_sabor()
+   @ 403,410 buttonex botao_fecha_pizza;
+      parent form_delivery;
+      caption 'Pizza montada';
+      width 120 height 35;
+      picture path_imagens+'adicionar.bmp';
+      action fecha_montagem_pizza()
+   @ 403,535 buttonex botao_exclui_pizza;
+      parent form_delivery;
+      caption 'Excluir sabor';
+      width 120 height 35;
+      picture path_imagens+'img_cancela.bmp';
+      action excluir_sabor()
 
-      * observações da pizza, borda e TOTAL
-      @ 403,(410 + n_largura_grid + 10) textbox tbox_obs_1;
-         of form_delivery;
-         height 027;
-         width 250;
-         value x_observacao_1;
-         maxlength 30;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         uppercase
-      @ 431,(410 + n_largura_grid + 10) textbox tbox_obs_2;
-         of form_delivery;
-         height 027;
-         width 250;
-         value x_observacao_2;
-         maxlength 30;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         uppercase
-      DEFINE COMBOBOXex cbo_bordas
-         row 460
-         col (410 + n_largura_grid + 10)
-         width 250
-         height 400
-         items a_bordas
-         value 1
-         fontname 'courier new'
-         fontsize 12
-         fontcolor BLUE
-         onchange adiciona_borda()
-      END COMBOBOXex
-      @ 490,(410 + n_largura_grid + 10) label label_total_0;
-         of form_delivery;
-         width 250;
-         height 20;
-         value 'TOTAL DO PEDIDO';
-         font 'courier new' size 12;
-         bold;
-         fontcolor _branco_001;
-         backcolor _azul_002;
-         centeralign
-      @ 510,(410 + n_largura_grid + 10) label label_total;
-         of form_delivery;
-         width 250;
-         height 50;
-         value '0,00';
-         font 'courier new' size 24;
-         bold;
-         fontcolor _vermelho_001;
-         backcolor _ciano_001;
-         rightalign
-      * botão para imprimir o cupom
-      @ 520,(410 + n_largura_grid + 265) buttonex botao_cupom;
-         parent form_delivery;
-         caption '';
-         width 40 height 40;
-         picture path_imagens+'img_relatorio.bmp';
-         action imprimir_cupom('-',0,0,0,0,0);
-         tooltip 'Emitir CUPOM'
+   * observações da pizza, borda e TOTAL
+   @ 403,(410 + n_largura_grid + 10) textbox tbox_obs_1;
+      of form_delivery;
+      height 027;
+      width 250;
+      value x_observacao_1;
+      maxlength 30;
+      font 'tahoma' size 010;
+      backcolor _fundo_get;
+      fontcolor _letra_get_1;
+      uppercase
+   @ 431,(410 + n_largura_grid + 10) textbox tbox_obs_2;
+      of form_delivery;
+      height 027;
+      width 250;
+      value x_observacao_2;
+      maxlength 30;
+      font 'tahoma' size 010;
+      backcolor _fundo_get;
+      fontcolor _letra_get_1;
+      uppercase
+   DEFINE COMBOBOXex cbo_bordas
+   row 460
+   col (410 + n_largura_grid + 10)
+   width 250
+   height 400
+   items a_bordas
+   value 1
+   fontname 'courier new'
+   fontsize 12
+   fontcolor BLUE
+   onchange adiciona_borda()
+END COMBOBOXex
+@ 490,(410 + n_largura_grid + 10) label label_total_0;
+   of form_delivery;
+   width 250;
+   height 20;
+   value 'TOTAL DO PEDIDO';
+   font 'courier new' size 12;
+   bold;
+   fontcolor _branco_001;
+   backcolor _azul_002;
+   centeralign
+@ 510,(410 + n_largura_grid + 10) label label_total;
+   of form_delivery;
+   width 250;
+   height 50;
+   value '0,00';
+   font 'courier new' size 24;
+   bold;
+   fontcolor _vermelho_001;
+   backcolor _ciano_001;
+   rightalign
+* botão para imprimir o cupom
+@ 520,(410 + n_largura_grid + 265) buttonex botao_cupom;
+   parent form_delivery;
+   caption '';
+   width 40 height 40;
+   picture path_imagens+'img_relatorio.bmp';
+   action imprimir_cupom('-',0,0,0,0,0);
+   tooltip 'Emitir CUPOM'
 
-      * bebidas e outros
-      @ 060,(410 + n_largura_grid + 10) label label_bebidas;
-         of form_delivery;
-         value 'Bebidas / Outros';
-         autosize;
-         font 'courier new' size 12;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 080,(410 + n_largura_grid + 10) label label_bebidas_2;
-         of form_delivery;
-         value 'duplo-clique/enter seleciona';
-         autosize;
-         font 'courier new' size 12;
-         bold;
-         fontcolor _azul_001;
-         transparent
-      DEFINE GRID grid_produtos
-         parent form_delivery
-         col 410 + n_largura_grid + 10
-         row 100
-         width n_largura_grid - 20
-         height 300
-         headers {'','Nome','Preço'}
-         widths {1,250,150}
-         showheaders .F.
-         nolines .T.
-         fontname 'courier new'
-         fontsize 12
-         backcolor _ciano_001
-         fontcolor _preto_001
-         ondblclick pede_quantidade()
-      END GRID
+* bebidas e outros
+@ 060,(410 + n_largura_grid + 10) label label_bebidas;
+   of form_delivery;
+   value 'Bebidas / Outros';
+   autosize;
+   font 'courier new' size 12;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 080,(410 + n_largura_grid + 10) label label_bebidas_2;
+   of form_delivery;
+   value 'duplo-clique/enter seleciona';
+   autosize;
+   font 'courier new' size 12;
+   bold;
+   fontcolor _azul_001;
+   transparent
+DEFINE GRID grid_produtos
+   parent form_delivery
+   col 410 + n_largura_grid + 10
+   row 100
+   width n_largura_grid - 20
+   height 300
+   headers {'','Nome','Preço'}
+   widths {1,250,150}
+   showheaders .F.
+   nolines .T.
+   fontname 'courier new'
+   fontsize 12
+   backcolor _ciano_001
+   fontcolor _preto_001
+   ondblclick pede_quantidade()
+END GRID
 
-      * pedido completo
-      @ 545,410 label label_pedido;
-         of form_delivery;
-         value 'Pedido do cliente';
-         autosize;
-         font 'courier new' size 12;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 540,585 buttonex botao_exclui_item_pedido;
-         parent form_delivery;
-         caption 'excluir item pedido';
-         width 130 height 25;
-         fontcolor RED;
-         action excluir_item_pedido()
+* pedido completo
+@ 545,410 label label_pedido;
+   of form_delivery;
+   value 'Pedido do cliente';
+   autosize;
+   font 'courier new' size 12;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 540,585 buttonex botao_exclui_item_pedido;
+   parent form_delivery;
+   caption 'excluir item pedido';
+   width 130 height 25;
+   fontcolor RED;
+   action excluir_item_pedido()
 
-      @ 565,410 Browse grid_pedido        ;
-         Of         form_delivery   ;
-         Width      form_delivery.width - 420              ;
-         Height     form_delivery.height - 670              ;
-         Headers    {'SEQ','Item','Qtd','Unit.R$','SubTotal R$'};
-         Widths     {1,400,60,140,150}         ;
-         Workarea   tmp_tela ;
-         Fields     {'tmp_tela->seq','tmp_tela->item','tmp_tela->qtd','tmp_tela->unitario','tmp_tela->subtotal'};
-         Value      1                 ;
-         Font        'courier new'        ;
-         Size 12                      ;
-         Justify     {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT};
-         BackColor   _branco_001            ;
-         FontColor   _azul_002
+@ 565,410 Browse grid_pedido        ;
+   Of         form_delivery   ;
+   Width      form_delivery.width - 420              ;
+   Height     form_delivery.height - 670              ;
+   Headers    {'SEQ','Item','Qtd','Unit.R$','SubTotal R$'};
+   Widths     {1,400,60,140,150}         ;
+   Workarea   tmp_tela ;
+   Fields     {'tmp_tela->seq','tmp_tela->item','tmp_tela->qtd','tmp_tela->unitario','tmp_tela->subtotal'};
+   Value      1                 ;
+   Font        'courier new'        ;
+   Size 12                      ;
+   Justify     {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT,BROWSE_JTFY_RIGHT};
+   BackColor   _branco_001            ;
+   FontColor   _azul_002
 
-      separa_pizza()
-      separa_produto()
+separa_pizza()
+separa_produto()
 
-      on key F9 action fecha_pedido()
-      on key escape action thiswindow.release
+on key F9 action fecha_pedido()
+on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_delivery.grid_pizzas.Header(3) := alltrim(_tamanho_001)
-   form_delivery.grid_pizzas.Header(4) := alltrim(_tamanho_002)
-   form_delivery.grid_pizzas.Header(5) := alltrim(_tamanho_003)
-   form_delivery.grid_pizzas.Header(6) := alltrim(_tamanho_004)
-   form_delivery.grid_pizzas.Header(7) := alltrim(_tamanho_005)
-   form_delivery.grid_pizzas.Header(8) := alltrim(_tamanho_006)
+form_delivery.grid_pizzas.Header(3) := alltrim(_tamanho_001)
+form_delivery.grid_pizzas.Header(4) := alltrim(_tamanho_002)
+form_delivery.grid_pizzas.Header(5) := alltrim(_tamanho_003)
+form_delivery.grid_pizzas.Header(6) := alltrim(_tamanho_004)
+form_delivery.grid_pizzas.Header(7) := alltrim(_tamanho_005)
+form_delivery.grid_pizzas.Header(8) := alltrim(_tamanho_006)
 
-   form_delivery.maximize
-   form_delivery.activate
+form_delivery.maximize
+form_delivery.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION procura_cliente(cform,ctextbtn)
 
@@ -1108,7 +1108,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_incluir_novo_cliente.width-225
          row form_incluir_novo_cliente.height-085
@@ -1121,7 +1121,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_incluir_novo_cliente.width-100
          row form_incluir_novo_cliente.height-085

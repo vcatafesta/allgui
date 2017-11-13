@@ -493,60 +493,60 @@ FUNCTION dbInsert( lBefore )
 
    IF lBefore = nil; lBefore := .f.; ENDIF
 
-      IF lBefore
+   IF lBefore
 
-         // stop moving records when the current record is reached
-         --nRec
+      // stop moving records when the current record is reached
+      --nRec
 
-      ENDIF
+   ENDIF
 
-      // build the array of field get/set blocks with cargo space for field values
-      aeval( dbstruct(), { | a | ;
-         aadd( aFields, { fieldblock( a[ DBS_NAME ] ), nil } ) } )
+   // build the array of field get/set blocks with cargo space for field values
+   aeval( dbstruct(), { | a | ;
+      aadd( aFields, { fieldblock( a[ DBS_NAME ] ), nil } ) } )
 
-      // process in physical order for speed
-      dbsetorder( 0 )
+   // process in physical order for speed
+   dbsetorder( 0 )
 
-      // add a new record at eof
-      dbappend()
+   // add a new record at eof
+   dbappend()
 
-      // back up through the file moving records down as we go
-      WHILE recno() > nRec
+   // back up through the file moving records down as we go
+   WHILE recno() > nRec
 
-         // store all values from previous record in the appropriate cargo space
-         dbskip( -1 )
-         aeval( aFields, { | a | a[ FLD_VAL ] := eval( a[ FLD_BLK ] ) } )
+      // store all values from previous record in the appropriate cargo space
+      dbskip( -1 )
+      aeval( aFields, { | a | a[ FLD_VAL ] := eval( a[ FLD_BLK ] ) } )
 
-         // save deleted status
-         lDeleted := deleted()
+      // save deleted status
+      lDeleted := deleted()
 
-         // replace all values in next record with stored cargo values
-         dbskip()
-         aeval( aFields, { | a | eval( a[ FLD_BLK ], a[ FLD_VAL ] ) } )
+      // replace all values in next record with stored cargo values
+      dbskip()
+      aeval( aFields, { | a | eval( a[ FLD_BLK ], a[ FLD_VAL ] ) } )
 
-         // set deleted status
-         iif( lDeleted, dbdelete(), dbrecall() )
+      // set deleted status
+      iif( lDeleted, dbdelete(), dbrecall() )
 
-         // go to previous record
-         dbskip( -1 )
+      // go to previous record
+      dbskip( -1 )
 
-      END
+   END
 
-      // blank out the "inserted" record
-      aeval( aFields, { | a, cType | ;
-         cType := valtype( eval( a[ FLD_BLK ] ) ), ;
-         eval( a[ FLD_BLK ], ;
-         iif( cType $ 'CM', '', ;
-         iif( cType = 'N',  0, ;
-         iif( cType = 'D',  ctod( '  /  /  ' ), ;
-         iif( cType = 'L',  .f., nil ) ) ) ) ) } )
+   // blank out the "inserted" record
+   aeval( aFields, { | a, cType | ;
+      cType := valtype( eval( a[ FLD_BLK ] ) ), ;
+      eval( a[ FLD_BLK ], ;
+      iif( cType $ 'CM', '', ;
+      iif( cType = 'N',  0, ;
+      iif( cType = 'D',  ctod( '  /  /  ' ), ;
+      iif( cType = 'L',  .f., nil ) ) ) ) ) } )
 
-      // make sure it's not deleted
-      dbrecall()
+   // make sure it's not deleted
+   dbrecall()
 
-      // leave things the way we found them
-      dbsetorder( nSavOrd )
-      SET( _SET_DELETED, lSavDel )
+   // leave things the way we found them
+   dbsetorder( nSavOrd )
+   SET( _SET_DELETED, lSavDel )
 
-      RETURN NIL
+   RETURN NIL
 

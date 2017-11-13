@@ -156,101 +156,101 @@ FUNCTION Main( fname )
       @ 8, 336 TEXTBOX Text_1 HEIGHT 20 WIDTH 80 VALUE iif( Empty( nLen ), "", hb_ntos( nItem ) + "/" + hb_ntos( nLen ) )
 
       DEFINE IMAGELIST ImageList_1 ;
-            BUTTONSIZE 24, 24 ;
-            IMAGE { 'tb_24' } ;
-            COLORMASK CLR_DEFAULT ;
-            IMAGECOUNT 19 ;
-            MASK
+         BUTTONSIZE 24, 24 ;
+         IMAGE { 'tb_24' } ;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 19 ;
+         MASK
 
-         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 24, 24 IMAGELIST 'ImageList_1' FLAT BORDER
+      DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 24, 24 IMAGELIST 'ImageList_1' FLAT BORDER
 
-            BUTTON Button_1  ;
-               PICTUREINDEX 0 ;
-               ADJUST ;
-               TOOLTIP 'Open' ;
-               ACTION FileOpen()
+      BUTTON Button_1  ;
+         PICTUREINDEX 0 ;
+         ADJUST ;
+         TOOLTIP 'Open' ;
+         ACTION FileOpen()
 
-            BUTTON Button_2 ;
-               PICTUREINDEX 3 ;
-               ADJUST ;
-               TOOLTIP 'Save as' ;
-               ACTION FileSaveAs()
+      BUTTON Button_2 ;
+         PICTUREINDEX 3 ;
+         ADJUST ;
+         TOOLTIP 'Save as' ;
+         ACTION FileSaveAs()
 
-            BUTTON Button_3;
-               PICTUREINDEX 4 ;
-               ADJUST ;
-               TOOLTIP 'Print' ;
-               ACTION FilePrint() SEPARATOR
+      BUTTON Button_3;
+         PICTUREINDEX 4 ;
+         ADJUST ;
+         TOOLTIP 'Print' ;
+         ACTION FilePrint() SEPARATOR
 
-            BUTTON Button_4;
-               PICTUREINDEX 10 ;
-               ADJUST ;
-               TOOLTIP 'Info' ;
-               ACTION PictInfo()
+      BUTTON Button_4;
+         PICTUREINDEX 10 ;
+         ADJUST ;
+         TOOLTIP 'Info' ;
+         ACTION PictInfo()
 
-            BUTTON Button_5 ;
-               PICTUREINDEX 11 ;
-               ADJUST ;
-               TOOLTIP 'Zoom out' ;
-               ACTION Zoom( 1 )
+      BUTTON Button_5 ;
+         PICTUREINDEX 11 ;
+         ADJUST ;
+         TOOLTIP 'Zoom out' ;
+         ACTION Zoom( 1 )
 
-            BUTTON Button_6 ;
-               PICTUREINDEX 12 ;
-               ADJUST ;
-               TOOLTIP 'Zoom in' ;
-               ACTION Zoom( -1 )
+      BUTTON Button_6 ;
+         PICTUREINDEX 12 ;
+         ADJUST ;
+         TOOLTIP 'Zoom in' ;
+         ACTION Zoom( -1 )
 
-            BUTTON Button_7 ;
-               PICTUREINDEX 15 ;
-               ADJUST ;
-               TOOLTIP 'Rotate Left' ;
-               ACTION Rotate( 90 )
+      BUTTON Button_7 ;
+         PICTUREINDEX 15 ;
+         ADJUST ;
+         TOOLTIP 'Rotate Left' ;
+         ACTION Rotate( 90 )
 
-            BUTTON Button_8 ;
-               PICTUREINDEX 16 ;
-               ADJUST ;
-               TOOLTIP 'Rotate Right' ;
-               ACTION Rotate( -90 ) SEPARATOR
+      BUTTON Button_8 ;
+         PICTUREINDEX 16 ;
+         ADJUST ;
+         TOOLTIP 'Rotate Right' ;
+         ACTION Rotate( -90 ) SEPARATOR
 
-            BUTTON Button_9 ;
-               PICTUREINDEX 13 ;
-               ADJUST ;
-               TOOLTIP 'Previous' ;
-               ACTION Next( -1 )
+      BUTTON Button_9 ;
+         PICTUREINDEX 13 ;
+         ADJUST ;
+         TOOLTIP 'Previous' ;
+         ACTION Next( -1 )
 
-            BUTTON Button_10 ;
-               PICTUREINDEX 14 ;
-               ADJUST ;
-               TOOLTIP 'Next' ;
-               ACTION Next( 1 )
+      BUTTON Button_10 ;
+         PICTUREINDEX 14 ;
+         ADJUST ;
+         TOOLTIP 'Next' ;
+         ACTION Next( 1 )
 
-         END TOOLBAR
+   END TOOLBAR
 
-         Form_Main.Button_2.Enabled := !Empty( nLen )
-         Form_Main.Button_3.Enabled := !Empty( nLen )
-         Form_Main.Button_4.Enabled := !Empty( nLen )
-         Form_Main.Button_5.Enabled := !Empty( nLen )
-         Form_Main.Button_6.Enabled := !Empty( nLen )
-         Form_Main.Button_7.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
-         Form_Main.Button_8.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
-         Form_Main.Button_9.Enabled := ( nLen > 1 )
-         Form_Main.Button_10.Enabled := ( nLen > 1 )
+   Form_Main.Button_2.Enabled := !Empty( nLen )
+   Form_Main.Button_3.Enabled := !Empty( nLen )
+   Form_Main.Button_4.Enabled := !Empty( nLen )
+   Form_Main.Button_5.Enabled := !Empty( nLen )
+   Form_Main.Button_6.Enabled := !Empty( nLen )
+   Form_Main.Button_7.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
+   Form_Main.Button_8.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
+   Form_Main.Button_9.Enabled := ( nLen > 1 )
+   Form_Main.Button_10.Enabled := ( nLen > 1 )
 
-         DEFINE STATUSBAR
-            STATUSITEM "No file loaded" WIDTH 80
-            STATUSITEM "" WIDTH 60
-            STATUSITEM "" WIDTH 52 ACTION Zoom( 0 )
-            STATUSITEM "" WIDTH 80
-            STATUSITEM "" WIDTH 124
-         END STATUSBAR
+   DEFINE STATUSBAR
+      STATUSITEM "No file loaded" WIDTH 80
+      STATUSITEM "" WIDTH 60
+      STATUSITEM "" WIDTH 52 ACTION Zoom( 0 )
+      STATUSITEM "" WIDTH 80
+      STATUSITEM "" WIDTH 124
+   END STATUSBAR
 
-      END WINDOW
+END WINDOW
 
-      CENTER WINDOW Form_Main
+CENTER WINDOW Form_Main
 
-      ACTIVATE WINDOW Form_Main
+ACTIVATE WINDOW Form_Main
 
-      RETURN NIL
+RETURN NIL
 
 STATIC FUNCTION FileOpen( fname, lInit )
 
@@ -294,43 +294,43 @@ STATIC FUNCTION FileOpen( fname, lInit )
       nHeight := FI_GetHeight( handle )
 
       DO WHILE.T.
-         nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
-         nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + IF( IsWinNT(), 60, 56 )
-         IF ( nFormWidth <= nScrWidth.AND. nFormHeight <= nScrHeight ).OR. nKoef < 0.11
-            EXIT
-         ENDIF
-         nKoef -= 0.01
-      ENDDO
-
-      Form_Main.Width := IF( nFormWidth < 400, 400, nFormWidth )
-      Form_Main.Height := IF( nFormHeight < 100, 100, nFormHeight )
-
-      IF !Form_Main.Button_2.Enabled.OR. lInit
-         Form_Main.Button_2.Enabled :=.T.
-         Form_Main.Button_3.Enabled :=.T.
-         Form_Main.Button_4.Enabled :=.T.
-         Form_Main.Button_5.Enabled :=.T.
-         Form_Main.Button_6.Enabled :=.T.
-         Form_Main.Button_7.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
-         Form_Main.Button_8.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
-         Form_Main.Button_9.Enabled := ( nLen > 1 )
-         Form_Main.Button_10.Enabled := ( nLen > 1 )
+      nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
+      nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + IF( IsWinNT(), 60, 56 )
+      IF ( nFormWidth <= nScrWidth.AND. nFormHeight <= nScrHeight ).OR. nKoef < 0.11
+         EXIT
       ENDIF
-      Form_Main.Text_1.Value := hb_ntos( nItem ) + "/" + hb_ntos( nLen )
+      nKoef -= 0.01
+   ENDDO
 
-      Form_Main.Title := cFileNoPath( fname ) + ' - ' + PROGRAM + ;
-         IF( nKoef # 1, " (Zoom: " + hb_ntos( Round( nKoef * nWidth, 0 ) ) + " x " + hb_ntos( Round( nKoef * nHeight, 0 ) ) + ")", "" )
-      Form_Main.StatusBar.Item( 1 ) := hb_ntos( nWidth ) + " x " + hb_ntos( nHeight )
-      Form_Main.StatusBar.Item( 2 ) := hb_ntos( nItem ) + "/" + hb_ntos( nLen )
-      Form_Main.StatusBar.Item( 3 ) := Str( nKoef * 100, 4 ) + " %"
-      Form_Main.StatusBar.Item( 4 ) := LTrim( Str( aFiles[ nItem ][ 2 ] / 1024 ) ) + " KB"
-      Form_Main.StatusBar.Item( 5 ) := DToC( aFiles[ nItem ][ 3 ] ) + " / " + aFiles[ nItem ][ 4 ]
+   Form_Main.Width := IF( nFormWidth < 400, 400, nFormWidth )
+   Form_Main.Height := IF( nFormHeight < 100, 100, nFormHeight )
 
-      PaintWindow()
-      Form_Main.Center
+   IF !Form_Main.Button_2.Enabled.OR. lInit
+      Form_Main.Button_2.Enabled :=.T.
+      Form_Main.Button_3.Enabled :=.T.
+      Form_Main.Button_4.Enabled :=.T.
+      Form_Main.Button_5.Enabled :=.T.
+      Form_Main.Button_6.Enabled :=.T.
+      Form_Main.Button_7.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
+      Form_Main.Button_8.Enabled := ( nLen > 1.OR. fname <> "FreeView.jpg" )
+      Form_Main.Button_9.Enabled := ( nLen > 1 )
+      Form_Main.Button_10.Enabled := ( nLen > 1 )
    ENDIF
+   Form_Main.Text_1.Value := hb_ntos( nItem ) + "/" + hb_ntos( nLen )
 
-   RETURN NIL
+   Form_Main.Title := cFileNoPath( fname ) + ' - ' + PROGRAM + ;
+      IF( nKoef # 1, " (Zoom: " + hb_ntos( Round( nKoef * nWidth, 0 ) ) + " x " + hb_ntos( Round( nKoef * nHeight, 0 ) ) + ")", "" )
+   Form_Main.StatusBar.Item( 1 ) := hb_ntos( nWidth ) + " x " + hb_ntos( nHeight )
+   Form_Main.StatusBar.Item( 2 ) := hb_ntos( nItem ) + "/" + hb_ntos( nLen )
+   Form_Main.StatusBar.Item( 3 ) := Str( nKoef * 100, 4 ) + " %"
+   Form_Main.StatusBar.Item( 4 ) := LTrim( Str( aFiles[ nItem ][ 2 ] / 1024 ) ) + " KB"
+   Form_Main.StatusBar.Item( 5 ) := DToC( aFiles[ nItem ][ 3 ] ) + " / " + aFiles[ nItem ][ 4 ]
+
+   PaintWindow()
+   Form_Main.Center
+ENDIF
+
+RETURN NIL
 
 STATIC FUNCTION FileSave()
 
@@ -578,20 +578,20 @@ STATIC FUNCTION FilePrint()
 
       DO WHILE.T.
 
-         nX := Round( nHeight * nScale, 0 )
-         nY := Round( nWidth * nScale, 0 )
+      nX := Round( nHeight * nScale, 0 )
+      nY := Round( nWidth * nScale, 0 )
 
-         IF ( nX <= nH.AND. nY <= nW ).OR. nScale < 0.15
-            EXIT
-         ENDIF
+      IF ( nX <= nH.AND. nY <= nW ).OR. nScale < 0.15
+         EXIT
+      ENDIF
 
-         nScale -= 0.05
+      nScale -= 0.05
 
-      ENDDO
+   ENDDO
 
-      @ 15, 20 PICTURE cTmpFile SIZE nX, nY
+   @ 15, 20 PICTURE cTmpFile SIZE nX, nY
 
-   END PAGE
+END PAGE
 
 END DOC
 
@@ -750,23 +750,23 @@ STATIC FUNCTION Rotate( n )
       nKoef := 1
 
       DO WHILE.T.
-         nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
-         nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + IF( IsWinNT(), 60, 56 )
-         IF ( nFormWidth <= nScrWidth.AND. nFormHeight <= nScrHeight ).OR. nKoef < 0.11
-            EXIT
-         ENDIF
-         nKoef -= 0.01
-      ENDDO
+      nFormWidth  := Round( nWidth * nKoef, 0 ) + GetBorderWidth() + 4
+      nFormHeight := Round( nHeight * nKoef, 0 ) + GetTitleHeight() + 2 * GetBorderHeight() + GetMenuBarHeight() + IF( IsWinNT(), 60, 56 )
+      IF ( nFormWidth <= nScrWidth.AND. nFormHeight <= nScrHeight ).OR. nKoef < 0.11
+         EXIT
+      ENDIF
+      nKoef -= 0.01
+   ENDDO
 
-      Form_Main.Width := IF( nFormWidth < 400, 400, nFormWidth )
-      Form_Main.Height := IF( nFormHeight < 100, 100, nFormHeight )
+   Form_Main.Width := IF( nFormWidth < 400, 400, nFormWidth )
+   Form_Main.Height := IF( nFormHeight < 100, 100, nFormHeight )
 
-      PaintWindow()
-      Form_Main.Center
+   PaintWindow()
+   Form_Main.Center
 
-   ENDIF
+ENDIF
 
-   RETURN NIL
+RETURN NIL
 
 STATIC FUNCTION PaintWindow()
 
@@ -781,11 +781,11 @@ STATIC FUNCTION PaintWindow()
 
    FI_WinDraw( handle, hDC, 36, 0, Round( nHeight * nKoef, 0 ) + 36, Round( nWidth * nKoef, 0 ) )
 
-EndPaint( Application.Handle, pps )
+   EndPaint( Application.Handle, pps )
 
-InvalidateRect( Application.Handle, 0 )
+   InvalidateRect( Application.Handle, 0 )
 
-RETURN 0
+   RETURN 0
 
 STATIC FUNCTION MsgAbout()
 

@@ -1549,184 +1549,184 @@ FUNCTION _OOHG_TForm_Events2( Self, hWnd, nMsg, wParam, lParam ) // CLASS TForm
 
       IF LoWord( lParam ) != 0
          // wParam contains next control's handler
-      NEXTControlHandle := wParam
-   ELSE
-      // wParam indicates next control's direction
-   NEXTControlHandle := GetNextDlgTabItem( hWnd, GetFocus(), wParam )
-ENDIF
-
-oCtrl := GetControlObjectByHandle( NextControlHandle )
-
-IF oCtrl:hWnd == NextControlHandle
-   oCtrl:SetFocus()
-ELSE
-   SetFocus( NextControlHandle )
-ENDIF
-
-* To update the default pushbutton border!
-* To set the default control identifier!
-* Return 0
-
-CASE nMsg == WM_PAINT
-
-::DefWindowProc( nMsg, wParam, lParam )
-
-AEVAL( ::SplitChildList, { |o| AEVAL( o:GraphTasks, { |b| _OOHG_EVAL( b ) } ), _OOHG_EVAL( o:GraphCommand, o:hWnd, o:GraphData ) } )
-
-::DoEvent( ::OnPaint, "WINDOW_PAINT" )
-
-AEVAL( ::GraphTasks, { |b| _OOHG_EVAL( b ) } )
-_OOHG_EVAL( ::GraphCommand, ::hWnd, ::GraphData )
-
-IF ::nBorders[ 1 ] + ::nBorders[ 2 ] + ::nBorders[ 3 ] > 0
-   ::GetDc()
-   // external border
-   ::Fill( 0, 0, ::nBorders[ 1 ], ::ClientWidth, ::aBEColors[ 1 ] )
-   ::Fill( 0, ::ClientWidth, ::ClientHeight - ::nBorders[ 1 ], ::ClientWidth - ::nBorders[ 1 ], ::aBEColors[ 2 ] )
-   ::Fill( ::ClientHeight, ::ClientWidth, ::ClientHeight - ::nBorders[ 1 ], 0, ::aBEColors[ 3 ] )
-   ::Fill( 0, 0, ::ClientHeight, ::nBorders[ 1 ], ::aBEColors[ 4 ] )
-   //internal border
-   nOffSet := ::nBorders[ 1 ] + ::nBorders[ 2 ]
-   nDesp := ::nBorders[ 1 ] + ::nBorders[ 2 ] + ::nBorders[ 3 ]
-   ::Fill( nOffSet, nOffSet, nDesp, ::ClientWidth - nOffSet, ::aBIColors[ 1 ] )
-   ::Fill( nOffSet, ::ClientWidth - nOffSet, ::Clientheight - nOffSet, ::Clientwidth - nDesp, ::aBIColors[ 2 ] )
-   ::Fill( ::ClientHeight - nOffSet, ::ClientWidth - nOffSet, ::ClientHeight - nDesp, nOffSet, ::aBIColors[ 3 ] )
-   ::Fill( nOffSet, nOffSet, ::ClientHeight - nDesp, nDesp, ::aBIColors[4])
-   ::ReleaseDc()
-ENDIF
-
-RETURN 1
-
-CASE nMsg == WM_ENTERSIZEMOVE
-
-IF ! ! _OOHG_AutoAdjust .OR. ! ::lAdjust
-   ::lEnterSizeMove := .T.
-ENDIF
-
-CASE nMsg == WM_MOVE
-
-::DoEvent( ::OnMove, "WINDOW_MOVE" )
-
-CASE nMsg == WM_SIZE
-
-IF ! ::lEnterSizeMove
-   ValidateScrolls( Self, .T. )
-   IF ::Active
-      lMinim := .F.
-      DO CASE
-      CASE wParam == SIZE_MAXIMIZED
-         ::DoEvent( ::OnMaximize, "WINDOW_MAXIMIZE" )
-
-      CASE wParam == SIZE_MINIMIZED
-         ::DoEvent( ::OnMinimize, "WINDOW_MINIMIZE" )
-         lMinim := .T.
-
-      CASE wParam == SIZE_RESTORED
-         ::DoEvent( ::OnRestore, "WINDOW_RESTORE" )
-
-      ENDCASE
-
-      IF ! lMinim
-         ::AdjustWindowSize( lMinim )
-      ENDIF
-      ::DoEvent( ::OnSize, "WINDOW_SIZE" )
-   ELSE
-      IF ::lDefined
-         ::AdjustWindowSize()
+         NEXTControlHandle := wParam
+      ELSE
+         // wParam indicates next control's direction
+         NEXTControlHandle := GetNextDlgTabItem( hWnd, GetFocus(), wParam )
       ENDIF
 
-   ENDIF
-ENDIF
+      oCtrl := GetControlObjectByHandle( NextControlHandle )
 
-IF ::oWndClient != NIL
-   // It was already done
-   // ::oWndClient:Events_Size()
+      IF oCtrl:hWnd == NextControlHandle
+         oCtrl:SetFocus()
+      ELSE
+         SetFocus( NextControlHandle )
+      ENDIF
 
-   RETURN 0
-ENDIF
+      * To update the default pushbutton border!
+      * To set the default control identifier!
+      * Return 0
 
-CASE nMsg == WM_EXITSIZEMOVE    //// cuando se cambia el tamaño por reajuste con el mouse
+   CASE nMsg == WM_PAINT
 
-IF ::Active .AND. ( ! _OOHG_AutoAdjust .OR. ! ::lAdjust .OR. ( ::nOldW # NIL .OR. ::nOldH # NIL ) .AND. ( ::nOldW # ::Width .OR. ::nOldH # ::Height ) )
-   ::AdjustWindowSize()
-   ::DoEvent( ::OnSize, "WINDOW_SIZE" )
-ENDIF
-::lEnterSizeMove := .F.
+      ::DefWindowProc( nMsg, wParam, lParam )
 
-CASE nMsg == WM_SIZING
+      AEVAL( ::SplitChildList, { |o| AEVAL( o:GraphTasks, { |b| _OOHG_EVAL( b ) } ), _OOHG_EVAL( o:GraphCommand, o:hWnd, o:GraphData ) } )
 
-IF _TForm_Sizing( wParam, lParam, ::MinWidth, ::MaxWidth, ::MinHeight, ::MaxHeight )
-   ::DefWindowProc( nMsg, wParam, lParam )
+      ::DoEvent( ::OnPaint, "WINDOW_PAINT" )
 
-   RETURN 1
-ENDIF
+      AEVAL( ::GraphTasks, { |b| _OOHG_EVAL( b ) } )
+      _OOHG_EVAL( ::GraphCommand, ::hWnd, ::GraphData )
 
-CASE nMsg == WM_MOVING
-
-IF _TForm_Moving( lParam, ::ForceRow, ::ForceCol )
-   ::DefWindowProc( nMsg, wParam, lParam )
-
-   RETURN 1
-ENDIF
-
-CASE nMsg == WM_CLOSE
-
-NOTE : Since ::lReleasing could be changed on each process, it must be validated any time
-
-// Process Interactive Close Event / Setting
-IF ! ::lReleasing .AND. HB_IsBlock( ::OnInteractiveClose )
-   xRetVal := ::DoEvent( ::OnInteractiveClose, "WINDOW_ONINTERACTIVECLOSE" )
-   IF HB_IsLogical( xRetVal ) .AND. ! xRetVal
+      IF ::nBorders[ 1 ] + ::nBorders[ 2 ] + ::nBorders[ 3 ] > 0
+         ::GetDc()
+         // external border
+         ::Fill( 0, 0, ::nBorders[ 1 ], ::ClientWidth, ::aBEColors[ 1 ] )
+         ::Fill( 0, ::ClientWidth, ::ClientHeight - ::nBorders[ 1 ], ::ClientWidth - ::nBorders[ 1 ], ::aBEColors[ 2 ] )
+         ::Fill( ::ClientHeight, ::ClientWidth, ::ClientHeight - ::nBorders[ 1 ], 0, ::aBEColors[ 3 ] )
+         ::Fill( 0, 0, ::ClientHeight, ::nBorders[ 1 ], ::aBEColors[ 4 ] )
+         //internal border
+         nOffSet := ::nBorders[ 1 ] + ::nBorders[ 2 ]
+         nDesp := ::nBorders[ 1 ] + ::nBorders[ 2 ] + ::nBorders[ 3 ]
+         ::Fill( nOffSet, nOffSet, nDesp, ::ClientWidth - nOffSet, ::aBIColors[ 1 ] )
+         ::Fill( nOffSet, ::ClientWidth - nOffSet, ::Clientheight - nOffSet, ::Clientwidth - nDesp, ::aBIColors[ 2 ] )
+         ::Fill( ::ClientHeight - nOffSet, ::ClientWidth - nOffSet, ::ClientHeight - nDesp, nOffSet, ::aBIColors[ 3 ] )
+         ::Fill( nOffSet, nOffSet, ::ClientHeight - nDesp, nDesp, ::aBIColors[4])
+         ::ReleaseDc()
+      ENDIF
 
       RETURN 1
-   ENDIF
-ENDIF
 
-IF ! ::lReleasing .AND. ! ::CheckInteractiveClose()
+   CASE nMsg == WM_ENTERSIZEMOVE
 
-   RETURN 1
-ENDIF
+      IF ! ! _OOHG_AutoAdjust .OR. ! ::lAdjust
+         ::lEnterSizeMove := .T.
+      ENDIF
 
-// Process AutoRelease Property
-IF ! ::lReleasing .AND. ! ::AutoRelease
-   ::Hide()
+   CASE nMsg == WM_MOVE
 
-   RETURN 1
-ENDIF
+      ::DoEvent( ::OnMove, "WINDOW_MOVE" )
 
-// If Not AutoRelease Destroy Window
+   CASE nMsg == WM_SIZE
 
-_ReleaseWindowList( { Self } )
+      IF ! ::lEnterSizeMove
+         ValidateScrolls( Self, .T. )
+         IF ::Active
+            lMinim := .F.
+            DO CASE
+            CASE wParam == SIZE_MAXIMIZED
+               ::DoEvent( ::OnMaximize, "WINDOW_MAXIMIZE" )
 
-IF ::Type == "A"
-   // Main window
-   ReleaseAllWindows()
-ELSE
-   ::OnHideFocusManagement()
-ENDIF
+            CASE wParam == SIZE_MINIMIZED
+               ::DoEvent( ::OnMinimize, "WINDOW_MINIMIZE" )
+               lMinim := .T.
 
-/*
-* This function must return NIL after processing WM_CLOSE so the
-* OS can do it's default processing. This processing ends with
-* (a) the posting of a WM_DESTROY message to the queue (will be
-* processed by this same function), immediately followed by
-* (b) the sending of a WM_NCDESTROY message to the form's
-* WindowProc (redirected to _OOHG_WndProcForm()).
-*/
+            CASE wParam == SIZE_RESTORED
+               ::DoEvent( ::OnRestore, "WINDOW_RESTORE" )
 
-CASE nMsg == WM_DESTROY
+            ENDCASE
 
-::Events_Destroy()
+            IF ! lMinim
+               ::AdjustWindowSize( lMinim )
+            ENDIF
+            ::DoEvent( ::OnSize, "WINDOW_SIZE" )
+         ELSE
+            IF ::lDefined
+               ::AdjustWindowSize()
+            ENDIF
 
-OTHERWISE
+         ENDIF
+      ENDIF
 
-// return ::Super:Events( hWnd, nMsg, wParam, lParam )
+      IF ::oWndClient != NIL
+         // It was already done
+         // ::oWndClient:Events_Size()
 
-RETURN ::TWindow:Events( hWnd, nMsg, wParam, lParam )
+         RETURN 0
+      ENDIF
 
-ENDCASE
+   CASE nMsg == WM_EXITSIZEMOVE    //// cuando se cambia el tamaño por reajuste con el mouse
 
-RETURN NIL
+      IF ::Active .AND. ( ! _OOHG_AutoAdjust .OR. ! ::lAdjust .OR. ( ::nOldW # NIL .OR. ::nOldH # NIL ) .AND. ( ::nOldW # ::Width .OR. ::nOldH # ::Height ) )
+         ::AdjustWindowSize()
+         ::DoEvent( ::OnSize, "WINDOW_SIZE" )
+      ENDIF
+      ::lEnterSizeMove := .F.
+
+   CASE nMsg == WM_SIZING
+
+      IF _TForm_Sizing( wParam, lParam, ::MinWidth, ::MaxWidth, ::MinHeight, ::MaxHeight )
+         ::DefWindowProc( nMsg, wParam, lParam )
+
+         RETURN 1
+      ENDIF
+
+   CASE nMsg == WM_MOVING
+
+      IF _TForm_Moving( lParam, ::ForceRow, ::ForceCol )
+         ::DefWindowProc( nMsg, wParam, lParam )
+
+         RETURN 1
+      ENDIF
+
+   CASE nMsg == WM_CLOSE
+
+      NOTE : Since ::lReleasing could be changed on each process, it must be validated any time
+
+      // Process Interactive Close Event / Setting
+      IF ! ::lReleasing .AND. HB_IsBlock( ::OnInteractiveClose )
+         xRetVal := ::DoEvent( ::OnInteractiveClose, "WINDOW_ONINTERACTIVECLOSE" )
+         IF HB_IsLogical( xRetVal ) .AND. ! xRetVal
+
+            RETURN 1
+         ENDIF
+      ENDIF
+
+      IF ! ::lReleasing .AND. ! ::CheckInteractiveClose()
+
+         RETURN 1
+      ENDIF
+
+      // Process AutoRelease Property
+      IF ! ::lReleasing .AND. ! ::AutoRelease
+         ::Hide()
+
+         RETURN 1
+      ENDIF
+
+      // If Not AutoRelease Destroy Window
+
+      _ReleaseWindowList( { Self } )
+
+      IF ::Type == "A"
+         // Main window
+         ReleaseAllWindows()
+      ELSE
+         ::OnHideFocusManagement()
+      ENDIF
+
+      /*
+      * This function must return NIL after processing WM_CLOSE so the
+      * OS can do it's default processing. This processing ends with
+      * (a) the posting of a WM_DESTROY message to the queue (will be
+      * processed by this same function), immediately followed by
+      * (b) the sending of a WM_NCDESTROY message to the form's
+      * WindowProc (redirected to _OOHG_WndProcForm()).
+      */
+
+   CASE nMsg == WM_DESTROY
+
+      ::Events_Destroy()
+
+   OTHERWISE
+
+      // return ::Super:Events( hWnd, nMsg, wParam, lParam )
+
+      RETURN ::TWindow:Events( hWnd, nMsg, wParam, lParam )
+
+   ENDCASE
+
+   RETURN NIL
 
 #pragma BEGINDUMP
 int _OOHG_AdjustSize( int iBorder, RECT * rect, int iMinWidth, int iMaxWidth, int iMinHeight, int iMaxHeight )

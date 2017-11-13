@@ -25,18 +25,25 @@ CLASS hrebar INHERIT HControl
    DATA m_nWidth, m_nHeight
    DATA aBands INIT  {}
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
-   METHOD Activate()
-   METHOD INIT()
-   METHOD ADDBARColor( pBar, clrFore, clrBack, pszText, dwStyle ) INLINE hwg_Addbarcolors( ::handle, pBar, clrFore, clrBack, pszText, dwStyle )
-   METHOD Addbarbitmap( pBar, pszText, pbmp, dwStyle ) INLINE hwg_Addbarbitmap( ::handle, pBar, pszText, pbmp, dwStyle )
-   METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
-   METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
+
+METHOD Activate()
+
+METHOD INIT()
+
+METHOD ADDBARColor( pBar, clrFore, clrBack, pszText, dwStyle ) INLINE hwg_Addbarcolors( ::handle, pBar, clrFore, clrBack, pszText, dwStyle )
+
+METHOD Addbarbitmap( pBar, pszText, pbmp, dwStyle ) INLINE hwg_Addbarbitmap( ::handle, pBar, pszText, pbmp, dwStyle )
+
+METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+
+METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lvert ) CLASS hrebar

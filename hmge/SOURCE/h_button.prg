@@ -79,7 +79,7 @@ STATIC lXPThemeActive  := .F.
 STATIC lDialogInMemory := .F.
 
 FUNCTION _DefineButton ( ControlName, ParentFormName, x, y, Caption, ;
-ProcedureName, w, h, fontname, fontsize, tooltip, gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
+      ProcedureName, w, h, fontname, fontsize, tooltip, gotfocus, lostfocus, flat, NoTabStop, HelpId, ;
       invisible, bold, italic, underline, strikeout, multiline, default, key, nId )
    LOCAL ParentFormHandle , mVar , ControlHandle , blInit , FontHandle , k , Style
 
@@ -248,7 +248,7 @@ ProcedureName, w, h, fontname, fontsize, tooltip, gotfocus, lostfocus, flat, NoT
    RETURN NIL
 
 FUNCTION _DefineImageButton ( ControlName, ParentFormName, x, y, Caption, ;
-ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
+      ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
       invisible, notabstop, default, icon, extract, nIdx, noxpstyle, key, nId )
    LOCAL ParentFormHandle , mVar , ControlHandle , blInit , k , Style
    LOCAL nhImage , cPicture , aRet
@@ -421,7 +421,7 @@ FUNCTION InitDialogButtonImage( ParentFormName, ControlHandle, k )
    RETURN NIL
 
 FUNCTION _DefineOwnerButton ( ControlName, ParentForm, x, y, Caption, ;
-ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
+      ProcedureName, w, h, image, tooltip, gotfocus, lostfocus, flat, notrans, HelpId, ;
       invisible, notabstop, default, icon, fontname, fontsize, bold, italic, underline, ;
       strikeout, lvertical, lefttext, uptext, aRGB_bk, aRGB_font, lnohotlight, lnoxpstyle, ;
       ladjust, handcursor, imagewidth, imageheight, aGradInfo, lhorizontal )

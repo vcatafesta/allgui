@@ -17,7 +17,7 @@ CLASS HToolBar INHERIT HControl
 
    DATA winclass INIT "ToolbarWindow32"
    DATA TEXT, id, nTop, nLeft, nwidth, nheight
-CLASSDATA oSelected INIT Nil
+   CLASSDATA oSelected INIT Nil
    DATA State INIT 0
    DATA ExStyle
    DATA bClick, cTooltip

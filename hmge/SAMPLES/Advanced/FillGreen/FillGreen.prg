@@ -49,7 +49,7 @@ FUNCTION FillGreen( hWnd, clrFrom, clrTo )
 
    FillGradient( hDC, 0, 0, Form_1.Height, Form_1.Width, .T., clrFrom, clrTo )
 
-EndPaint( hWnd, pps )
+   EndPaint( hWnd, pps )
 
-RETURN NIL
+   RETURN NIL
 

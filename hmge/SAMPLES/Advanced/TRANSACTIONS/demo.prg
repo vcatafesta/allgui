@@ -24,92 +24,92 @@ PROCEDURE main
    /*Open a Table with Table Class */
    DEFINE TABLE oTable FILE test ALIAS Table SHARED NEW
 
-      /*Adding an Index to This Table */
-      DEFINE ORDER ON KEY "name" TAG _1 IN oTable
+   /*Adding an Index to This Table */
+   DEFINE ORDER ON KEY "name" TAG _1 IN oTable
 
-      IF !FILE( 'test.cdx' )
+   IF !FILE( 'test.cdx' )
 
-         /* Force the index Creating */
-         oTable:Reindex()
+      /* Force the index Creating */
+      oTable:Reindex()
 
-      ENDIF
+   ENDIF
 
-      IF oTable:LastRec() == 0
+   IF oTable:LastRec() == 0
 
-         WHILE x <= 100
+      WHILE x <= 100
 
-            oTable:ReadBlank()
+         oTable:ReadBlank()
 
-            oTable:name   := Str( x, 20 )
-            oTable:street := Str( x + 1, 20 )
-            oTable:city   := Str( x + 2, 20 )
-            oTable:code   := x
-            oTable:today  := Date()
-            oTable:pay    := ( x % 2 ) == 0
+         oTable:name   := Str( x, 20 )
+         oTable:street := Str( x + 1, 20 )
+         oTable:city   := Str( x + 2, 20 )
+         oTable:code   := x
+         oTable:today  := Date()
+         oTable:pay    := ( x % 2 ) == 0
 
-            oTable:Append()
+         oTable:Append()
 
-            oTable:Write()
+         oTable:Write()
 
-            x ++
+         x ++
 
-         ENDDO
+      ENDDO
 
-         oTable:GoTop()
+      oTable:GoTop()
 
-      ENDIF
+   ENDIF
 
-      cAlias := oTable:Alias
+   cAlias := oTable:Alias
 
-      DEFINE WINDOW Form_1 ;
-            AT 0,0 ;
-            WIDTH 640 HEIGHT 480 ;
-            TITLE 'MiniGUI Table Class Demo' ;
-            MAIN NOMAXIMIZE ;
-            ON RELEASE CloseTable()
+   DEFINE WINDOW Form_1 ;
+         AT 0,0 ;
+         WIDTH 640 HEIGHT 480 ;
+         TITLE 'MiniGUI Table Class Demo' ;
+         MAIN NOMAXIMIZE ;
+         ON RELEASE CloseTable()
 
-         DEFINE MAIN MENU
-            POPUP 'File'
-               ITEM 'Append record'      ACTION Append_record(oTable)
-               ITEM 'Undo the last writing'      ACTION Undo_record(oTable)
-               ITEM 'Delete record'      ACTION Delete_record(oTable)
-               ITEM 'Roolback the ALL deleting'   ACTION Undo_delete(oTable)
-               SEPARATOR
-               ITEM 'Exit'         ACTION Form_1.Release
-            END POPUP
-            POPUP 'Help'
-               ITEM 'About'         ACTION MsgInfo ("MiniGUI Table Class Demo")
-            END POPUP
+      DEFINE MAIN MENU
+         POPUP 'File'
+            ITEM 'Append record'      ACTION Append_record(oTable)
+            ITEM 'Undo the last writing'      ACTION Undo_record(oTable)
+            ITEM 'Delete record'      ACTION Delete_record(oTable)
+            ITEM 'Roolback the ALL deleting'   ACTION Undo_delete(oTable)
+            SEPARATOR
+            ITEM 'Exit'         ACTION Form_1.Release
+         END POPUP
+         POPUP 'Help'
+            ITEM 'About'         ACTION MsgInfo ("MiniGUI Table Class Demo")
+         END POPUP
 
-         END MENU
+      END MENU
 
-         DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
-         END STATUSBAR
+      DEFINE STATUSBAR KEYBOARD FONT 'Tahoma' SIZE 9
+      END STATUSBAR
 
-         @ 10,10 BROWSE Browse_1   ;
-            WIDTH 610   ;
-            HEIGHT 382   ;
-            HEADERS { 'Code' , 'Name' , 'Street' , 'City' , 'Date' , 'Pay' } ;
-            WIDTHS { 80 , 100 , 100 , 100 , 100 , 50 } ;
-            WORKAREA &cAlias ;
-            FIELDS { 'Code' , 'Name' , 'Street' , 'City' , 'Today' , 'Pay' } ;
-            JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER } ;
-            DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor } ;
-            EDIT INPLACE ;
-            LOCK ;
-            WHEN { {|| Empty(Field->Code) }, , , , , }
+      @ 10,10 BROWSE Browse_1   ;
+         WIDTH 610   ;
+         HEIGHT 382   ;
+         HEADERS { 'Code' , 'Name' , 'Street' , 'City' , 'Date' , 'Pay' } ;
+         WIDTHS { 80 , 100 , 100 , 100 , 100 , 50 } ;
+         WORKAREA &cAlias ;
+         FIELDS { 'Code' , 'Name' , 'Street' , 'City' , 'Today' , 'Pay' } ;
+         JUSTIFY { BROWSE_JTFY_RIGHT, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_CENTER, BROWSE_JTFY_LEFT, BROWSE_JTFY_CENTER } ;
+         DYNAMICBACKCOLOR { bColor, bColor, bColor, bColor, bColor, bColor } ;
+         EDIT INPLACE ;
+         LOCK ;
+         WHEN { {|| Empty(Field->Code) }, , , , , }
 
-         ON KEY ESCAPE ACTION ThisWindow.Release()
+      ON KEY ESCAPE ACTION ThisWindow.Release()
 
-      END WINDOW
+   END WINDOW
 
-      CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-      Form_1.Browse_1.SetFocus
+   Form_1.Browse_1.SetFocus
 
-      ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-      RETURN
+   RETURN
 
 PROCEDURE Append_record(oTable)
 

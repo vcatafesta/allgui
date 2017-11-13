@@ -16,7 +16,7 @@ ANNOUNCE CLASS_TTIMER
 CLASS TTimer
 
    PROTECTED:
-CLASSDATA aTimers    INIT {}
+   CLASSDATA aTimers    INIT {}
 
    DATA Name            INIT ""
    DATA ID              INIT 0

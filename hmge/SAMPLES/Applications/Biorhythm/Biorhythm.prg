@@ -146,12 +146,12 @@ PROCEDURE Main()
    LOAD WINDOW Biorhythm AS oBiorhythm
 
    BEGIN()
-      ShowCycles()
+   ShowCycles()
 
-      CENTER WINDOW oBiorhythm
-      ACTIVATE WINDOW oBiorhythm
+   CENTER WINDOW oBiorhythm
+   ACTIVATE WINDOW oBiorhythm
 
-      RETURN
+   RETURN
 
 PROCEDURE SelectLanguage(xPath)
 

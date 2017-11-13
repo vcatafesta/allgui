@@ -56,19 +56,27 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    DATA bGfocus
    DATA bLfocus
 
-   METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
-         bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
-         nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit )
-   METHOD Activate()
-   METHOD Init()
-   METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
-   METHOD Refresh()
-   METHOD RefreshLine()                          INLINE hwg_Listview_update( ::handle, hwg_Listview_getfirstitem( ::handle ) )
-   METHOD SetItemCount( nItem )                    INLINE hwg_Listview_setitemcount( ::handle, nItem )
-   METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
-   METHOD Notify( lParam )
+METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
+      bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
+      nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
+
+METHOD Refresh()
+
+METHOD RefreshLine()                          INLINE hwg_Listview_update( ::handle, hwg_Listview_getfirstitem( ::handle ) )
+
+METHOD SetItemCount( nItem )                    INLINE hwg_Listview_setitemcount( ::handle, nItem )
+
+METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
+
+METHOD Notify( lParam )
+
+ENDCLASS
 
 METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
       bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;

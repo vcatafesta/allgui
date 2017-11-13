@@ -519,35 +519,35 @@ STATIC FUNCTION WriteScript( han,cScript,lPrg )
    LOCAL lastC := Chr(10), cQuote, lFirst := .T.
 
    IF lPrg == Nil; lPrg := .F.; ENDIF
-      IF cScript != Nil .AND. !Empty( cScript )
-         IF !lPrg
-            Fwrite( han,"#SCRIPT"+Chr(10) )
-         ENDIF
-         DO WHILE .T.
-            stroka := RDSTR( , cScript, @poz )
-            IF LEN( stroka ) = 0
-               IF lPrg
-                  Fwrite( han,Chr(10) )
-               ENDIF
-               EXIT
-            ENDIF
-            IF Left( stroka,1 ) != Chr(10)
-               IF lPrg
-                  cQuote := Iif(!( '"' $ stroka),'"', ;
-                     Iif(!( "'" $ stroka),"'","["))
-                  Fwrite( han,Iif(lFirst,"",";"+Chr(10))+Space(5)+;
-                     Iif(lFirst,"","+ ")+cQuote+stroka+cQuote+"+cEnd" )
-                  lFirst := .F.
-               ELSE
-                  Fwrite( han,Iif( Asc(lastC)<20,"",Chr(10) )+stroka )
-                  lastC := Right( stroka,1 )
-               ENDIF
-            ENDIF
-         ENDDO
-         IF !lPrg
-            Fwrite( han, Iif( Asc(lastC)<20,"",Chr(10) )+"#ENDSCRIPT"+Chr(10) )
-         ENDIF
+   IF cScript != Nil .AND. !Empty( cScript )
+      IF !lPrg
+         Fwrite( han,"#SCRIPT"+Chr(10) )
       ENDIF
+      DO WHILE .T.
+         stroka := RDSTR( , cScript, @poz )
+         IF LEN( stroka ) = 0
+            IF lPrg
+               Fwrite( han,Chr(10) )
+            ENDIF
+            EXIT
+         ENDIF
+         IF Left( stroka,1 ) != Chr(10)
+            IF lPrg
+               cQuote := Iif(!( '"' $ stroka),'"', ;
+                  Iif(!( "'" $ stroka),"'","["))
+               Fwrite( han,Iif(lFirst,"",";"+Chr(10))+Space(5)+;
+                  Iif(lFirst,"","+ ")+cQuote+stroka+cQuote+"+cEnd" )
+               lFirst := .F.
+            ELSE
+               Fwrite( han,Iif( Asc(lastC)<20,"",Chr(10) )+stroka )
+               lastC := Right( stroka,1 )
+            ENDIF
+         ENDIF
+      ENDDO
+      IF !lPrg
+         Fwrite( han, Iif( Asc(lastC)<20,"",Chr(10) )+"#ENDSCRIPT"+Chr(10) )
+      ENDIF
+   ENDIF
 
-      RETURN NIL
+   RETURN NIL
 

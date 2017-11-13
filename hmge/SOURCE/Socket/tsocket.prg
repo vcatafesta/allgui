@@ -110,12 +110,12 @@ METHOD PrintDebugMessage( cMsg )
 
    // Debug method
 
-CLASSDATA m_hSocket       HIDDEN AS STRING INIT space(4)
-CLASSDATA nSendTimeout    HIDDEN INIT -1
-CLASSDATA nReceiveTimeout HIDDEN INIT -1
+   CLASSDATA m_hSocket       HIDDEN AS STRING INIT space(4)
+   CLASSDATA nSendTimeout    HIDDEN INIT -1
+   CLASSDATA nReceiveTimeout HIDDEN INIT -1
 
    // Debugger active for all classes
-CLASSDATA bDebug    HIDDEN INIT .F.
+   CLASSDATA bDebug    HIDDEN INIT .F.
 
 ENDCLASS
 

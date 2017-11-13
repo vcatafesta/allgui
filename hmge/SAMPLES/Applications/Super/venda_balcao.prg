@@ -1056,7 +1056,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_incluir_novo_cliente.width-225
          row form_incluir_novo_cliente.height-085
@@ -1069,7 +1069,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_incluir_novo_cliente.width-100
          row form_incluir_novo_cliente.height-085

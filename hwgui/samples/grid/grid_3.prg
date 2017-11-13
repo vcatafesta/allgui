@@ -29,19 +29,19 @@ FUNCTION Main()
    MENU OF oMain
    MENUITEM "&Exit"   ACTION oMain:Close()
    MENUITEM "&Demo" ACTION Test()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-res := PQexec(conn, 'CLOSE cursor_1')
-PQclear(res)
+   res := PQexec(conn, 'CLOSE cursor_1')
+   PQclear(res)
 
-res = PQexec(conn, "END")
-PQclear(res)
+   res = PQexec(conn, "END")
+   PQclear(res)
 
-PQClose(conn)
+   PQClose(conn)
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test()
 
@@ -195,3 +195,4 @@ FUNCTION MyVal( xValue, type )
    ENDIF
 
    RETURN result
+

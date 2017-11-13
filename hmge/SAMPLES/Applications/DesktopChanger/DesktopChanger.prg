@@ -1058,9 +1058,9 @@ PROCEDURE SysWait( nWait )
       nUsage := CpuUsage()
    ENDDO
 
-EndCpu()
+   EndCpu()
 
-RETURN
+   RETURN
 
 STATIC FUNCTION InitCpu()
 

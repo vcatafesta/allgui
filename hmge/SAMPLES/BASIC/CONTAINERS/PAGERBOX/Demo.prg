@@ -36,58 +36,58 @@ FUNCTION Main
 
       DEFINE PAGERBOX Pager_1 CAPTION "Demo PagerBox" SCROLLSIZE 5 WIDTH 900 HEIGHT 65 BACKCOLOR GREEN AUTOSCROLL
 
-         DEFINE TOOLBAR ToolBar_a BUTTONSIZE 45,40 FONT 'ARIAL' SIZE 8 FLAT
+      DEFINE TOOLBAR ToolBar_a BUTTONSIZE 45,40 FONT 'ARIAL' SIZE 8 FLAT
 
-            BUTTON Button_1b ;
-               CAPTION 'More Pager...' ;
-               PICTURE 'button7.bmp' ;
-               TOOLTIP 'More PagerBox button';
-               ACTION Vert_CLick()
+         BUTTON Button_1b ;
+            CAPTION 'More Pager...' ;
+            PICTURE 'button7.bmp' ;
+            TOOLTIP 'More PagerBox button';
+            ACTION Vert_CLick()
 
-            BUTTON Button_2b ;
-               CAPTION 'Button 2' ;
-               PICTURE 'button8.bmp' ;
-               TOOLTIP 'This is button 2';
-               ACTION MsgInfo('Click! 2');
+         BUTTON Button_2b ;
+            CAPTION 'Button 2' ;
+            PICTURE 'button8.bmp' ;
+            TOOLTIP 'This is button 2';
+            ACTION MsgInfo('Click! 2');
 
-            BUTTON Button_3b ;
-               CAPTION 'Button 3' ;
-               PICTURE 'button6.bmp' ;
-               TOOLTIP 'This is button 3';
-               ACTION MsgInfo('Click! 3');
-               SEPARATOR
+         BUTTON Button_3b ;
+            CAPTION 'Button 3' ;
+            PICTURE 'button6.bmp' ;
+            TOOLTIP 'This is button 3';
+            ACTION MsgInfo('Click! 3');
+            SEPARATOR
 
-            BUTTON Button_1a ;
-               CAPTION 'Undo' ;
-               PICTURE 'button4.bmp' ;
-               TOOLTIP 'Undo button';
-               ACTION MsgInfo('Click! 4')
+         BUTTON Button_1a ;
+            CAPTION 'Undo' ;
+            PICTURE 'button4.bmp' ;
+            TOOLTIP 'Undo button';
+            ACTION MsgInfo('Click! 4')
 
-            BUTTON Button_2a ;
-               CAPTION 'Save' ;
-               PICTURE 'button5.bmp' ;
-               TOOLTIP 'Save button';
-               ACTION MsgInfo('Click! 5')
+         BUTTON Button_2a ;
+            CAPTION 'Save' ;
+            PICTURE 'button5.bmp' ;
+            TOOLTIP 'Save button';
+            ACTION MsgInfo('Click! 5')
 
-            BUTTON Button_3a ;
-               CAPTION 'Close' ;
-               PICTURE 'button6.bmp' ;
-               TOOLTIP 'Close button';
-               ACTION MsgInfo('Click! 6') ;
+         BUTTON Button_3a ;
+            CAPTION 'Close' ;
+            PICTURE 'button6.bmp' ;
+            TOOLTIP 'Close button';
+            ACTION MsgInfo('Click! 6') ;
 
-         END TOOLBAR
+      END TOOLBAR
 
-      END PAGERBOX
+   END PAGERBOX
 
-   END WINDOW
+END WINDOW
 
-   Form_1.Btn_Size_1.enabled := .f.
+Form_1.Btn_Size_1.enabled := .f.
 
-   CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-   RETURN NIL
+RETURN NIL
 
 PROCEDURE Vert_CLick
 
@@ -100,48 +100,48 @@ PROCEDURE Vert_CLick
 
          DEFINE PAGERBOX Pager_2 CAPTION "PagerBox" SCROLLSIZE 5 WIDTH 60 HEIGHT 400 BACKCOLOR BLUE VERTICAL
 
-            DEFINE TOOLBAR ToolBar_d BUTTONSIZE 45,40 FONT 'Arial' SIZE 8 FLAT WRAP
+         DEFINE TOOLBAR ToolBar_d BUTTONSIZE 45,40 FONT 'Arial' SIZE 8 FLAT WRAP
 
-               BUTTON Button_1c ;
-                  CAPTION 'Check 1' ;
-                  TOOLTIP 'This is button Check 1';
-                  PICTURE 'button4.bmp' ;
-                  ACTION _dummy() ;
-                  CHECK GROUP
+            BUTTON Button_1c ;
+               CAPTION 'Check 1' ;
+               TOOLTIP 'This is button Check 1';
+               PICTURE 'button4.bmp' ;
+               ACTION _dummy() ;
+               CHECK GROUP
 
-               BUTTON Button_2c ;
-                  CAPTION 'Check 2' ;
-                  PICTURE 'button5.bmp' ;
-                  TOOLTIP 'This is button Check 2';
-                  ACTION _dummy();
-                  CHECK GROUP
+            BUTTON Button_2c ;
+               CAPTION 'Check 2' ;
+               PICTURE 'button5.bmp' ;
+               TOOLTIP 'This is button Check 2';
+               ACTION _dummy();
+               CHECK GROUP
 
-               BUTTON Button_3c ;
-                  CAPTION 'Check 3' ;
-                  PICTURE 'button6.bmp' ;
-                  TOOLTIP 'This is button Check 3';
-                  ACTION _dummy() ;
-                  CHECK GROUP
+            BUTTON Button_3c ;
+               CAPTION 'Check 3' ;
+               PICTURE 'button6.bmp' ;
+               TOOLTIP 'This is button Check 3';
+               ACTION _dummy() ;
+               CHECK GROUP
 
-               BUTTON Button_4c ;
-                  CAPTION 'Help Check' ;
-                  PICTURE 'button9.bmp' ;
-                  ACTION _dummy() ;
-                  CHECK
+            BUTTON Button_4c ;
+               CAPTION 'Help Check' ;
+               PICTURE 'button9.bmp' ;
+               ACTION _dummy() ;
+               CHECK
 
-            END TOOLBAR
+         END TOOLBAR
 
-         END PAGERBOX
+      END PAGERBOX
 
-      END WINDOW
+   END WINDOW
 
-      Form_2.Center
+   Form_2.Center
 
-      Form_2.Activate
+   Form_2.Activate
 
-   ENDIF
+ENDIF
 
-   RETURN
+RETURN
 
 FUNCTION SetBtnSize(lDbl)
 

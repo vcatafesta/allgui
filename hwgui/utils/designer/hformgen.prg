@@ -181,43 +181,43 @@ METHOD End( lDlg,lCloseDes ) CLASS HFormGen
    MEMVAR oDesigner
 
    IF lDlg == NIL; lDlg := .F.; ENDIF
-      IF ::lChanged
-         IF hwg_Msgyesno( ::name + " was changed. Save it ?", "Designer" )
-            ::Save()
-         ENDIF
+   IF ::lChanged
+      IF hwg_Msgyesno( ::name + " was changed. Save it ?", "Designer" )
+         ::Save()
       ENDIF
+   ENDIF
 
-      FOR i := 1 TO Len( HFormGen():aForms )
-         IF HFormGen():aForms[i]:oDlg:handle != ::oDlg:handle
-            oDlgSel := HFormGen():aForms[i]:oDlg
-         ELSE
-            j := i
-         ENDIF
-      NEXT
-      IF oDlgSel != NIL
-         SetDlgSelected( oDlgSel )
+   FOR i := 1 TO Len( HFormGen():aForms )
+      IF HFormGen():aForms[i]:oDlg:handle != ::oDlg:handle
+         oDlgSel := HFormGen():aForms[i]:oDlg
       ELSE
-         HFormGen():oDlgSelected := NIL
-         IF oDesigner:oDlgInsp != NIL
-            oDesigner:oDlgInsp:Close()
-            // InspSetCombo()
-         ENDIF
-         // : LFB
-         statusbarmsg('')
-         // :END LFB
+         j := i
       ENDIF
+   NEXT
+   IF oDlgSel != NIL
+      SetDlgSelected( oDlgSel )
+   ELSE
+      HFormGen():oDlgSelected := NIL
+      IF oDesigner:oDlgInsp != NIL
+         oDesigner:oDlgInsp:Close()
+         // InspSetCombo()
+      ENDIF
+      // : LFB
+      statusbarmsg('')
+      // :END LFB
+   ENDIF
 
-      Adel( ::aForms,j )
-      Asize( ::aForms, Len(::aForms)-1 )
-      IF !lDlg
-         ::oDlg:bDestroy := NIL
-         hwg_EndDialog( ::oDlg:handle )
-      ENDIF
-      IF oDesigner:lSingleForm .AND. ( lCloseDes == NIL .OR. lCloseDes )
-         oDesigner:oMainWnd:Close()
-      ENDIF
+   Adel( ::aForms,j )
+   Asize( ::aForms, Len(::aForms)-1 )
+   IF !lDlg
+      ::oDlg:bDestroy := NIL
+      hwg_EndDialog( ::oDlg:handle )
+   ENDIF
+   IF oDesigner:lSingleForm .AND. ( lCloseDes == NIL .OR. lCloseDes )
+      oDesigner:oMainWnd:Close()
+   ENDIF
 
-      RETURN .T.
+   RETURN .T.
 
 METHOD Save( lAs ) CLASS HFormGen
 
@@ -227,55 +227,55 @@ METHOD Save( lAs ) CLASS HFormGen
    PRIVATE oForm := Self, aCtrlTable
 
    IF lAs == NIL; lAs := .F.; ENDIF
-      IF !::lChanged .AND. !lAs
-         hwg_Msgstop( "Nothing to save", "Designer" )
-
-         RETURN NIL
-      ENDIF
-
-      IF ( oDesigner:lSingleForm .AND. !lAs ) .OR. ;
-            ( ( Empty( ::filename ) .OR. lAs ) .AND. FileDlg( Self,.F. ) ) .OR. !Empty( ::filename )
-         FrmSort( Self,Iif( oDesigner:lReport,::oDlg:aControls[1]:aControls[1]:aControls,::oDlg:aControls ) )
-         IF ::type == 1
-            aControls := WriteForm( Self )
-            /*
-            // : LFB
-            //  salvar PRG diretamente sem necessidade de ficar mudando
-            ::type := 3
-            ::filename := STRTRAN( ::filename, 'xml', 'prg' )
-            IF Valtype( aFormats[ ::type,5 ] ) == "C"
-            aFormats[ ::type,5 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,5 ] )
-            ENDIF
-            IF Valtype( aFormats[ ::type,5 ] ) == "A"
-            DoScript( aFormats[ ::type,5 ] )
-            ENDIF
-            ::type := 1
-            ::filename := STRTRAN(::filename,'prg','xml')
-            // :END LFB
-            */
-         ELSE
-            IF Valtype( aFormats[ ::type,5 ] ) == "C"
-               aFormats[ ::type,5 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,5 ] )
-            ENDIF
-            IF Valtype( aFormats[ ::type,6 ] ) == "C"
-               aFormats[ ::type,6 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,6 ] )
-            ENDIF
-            IF Valtype( aFormats[ ::type,6 ] ) == "A"
-               DoScript( aFormats[ ::type,6 ] )
-            ENDIF
-            IF Valtype( aFormats[ ::type,5 ] ) == "A"
-               DoScript( aFormats[ ::type,5 ] )
-            ENDIF
-         ENDIF
-         IF !oDesigner:lSingleForm .AND. !( ::filename == "__tmp.xml" )
-            AddRecent( Self )
-         ENDIF
-      ENDIF
-      IF !lAs
-         ::lChanged := .F.
-      ENDIF
+   IF !::lChanged .AND. !lAs
+      hwg_Msgstop( "Nothing to save", "Designer" )
 
       RETURN NIL
+   ENDIF
+
+   IF ( oDesigner:lSingleForm .AND. !lAs ) .OR. ;
+         ( ( Empty( ::filename ) .OR. lAs ) .AND. FileDlg( Self,.F. ) ) .OR. !Empty( ::filename )
+      FrmSort( Self,Iif( oDesigner:lReport,::oDlg:aControls[1]:aControls[1]:aControls,::oDlg:aControls ) )
+      IF ::type == 1
+         aControls := WriteForm( Self )
+         /*
+         // : LFB
+         //  salvar PRG diretamente sem necessidade de ficar mudando
+         ::type := 3
+         ::filename := STRTRAN( ::filename, 'xml', 'prg' )
+         IF Valtype( aFormats[ ::type,5 ] ) == "C"
+         aFormats[ ::type,5 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,5 ] )
+         ENDIF
+         IF Valtype( aFormats[ ::type,5 ] ) == "A"
+         DoScript( aFormats[ ::type,5 ] )
+         ENDIF
+         ::type := 1
+         ::filename := STRTRAN(::filename,'prg','xml')
+         // :END LFB
+         */
+      ELSE
+         IF Valtype( aFormats[ ::type,5 ] ) == "C"
+            aFormats[ ::type,5 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,5 ] )
+         ENDIF
+         IF Valtype( aFormats[ ::type,6 ] ) == "C"
+            aFormats[ ::type,6 ] := OpenScript( cCurDir + aFormats[ ::type,3 ], aFormats[ ::type,6 ] )
+         ENDIF
+         IF Valtype( aFormats[ ::type,6 ] ) == "A"
+            DoScript( aFormats[ ::type,6 ] )
+         ENDIF
+         IF Valtype( aFormats[ ::type,5 ] ) == "A"
+            DoScript( aFormats[ ::type,5 ] )
+         ENDIF
+      ENDIF
+      IF !oDesigner:lSingleForm .AND. !( ::filename == "__tmp.xml" )
+         AddRecent( Self )
+      ENDIF
+   ENDIF
+   IF !lAs
+      ::lChanged := .F.
+   ENDIF
+
+   RETURN NIL
 
 METHOD CreateDialog( aProp ) CLASS HFormGen
 
@@ -1697,3 +1697,4 @@ FUNCTION DoPreview()
 FUNCTION _CHR( n )
 
    RETURN CHR( n )
+

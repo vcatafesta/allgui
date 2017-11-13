@@ -15,11 +15,11 @@ FUNCTION Main
    MENUITEM "Exclamation" ACTION hwg_Msgexclamation("Are You Sure ?", "Warning")
    MENUITEM "Retry Cancel" ACTION hwg_Msgretrycancel("Are You Sure ?", "Retry")
    MENUITEM "Calc" ACTION hwg_Shellexecute("calc")
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION DlgGet
 
@@ -81,3 +81,4 @@ IF oModDlg:lResult
 ENDIF
 
 RETURN NIL
+

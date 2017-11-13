@@ -272,11 +272,11 @@ PROCEDURE Build2( ProjectName )  // Executable MinGW
 
       QUITarEspera()
 
-   EndBuild()
+      EndBuild()
 
-   Procesando(2)
+      Procesando(2)
 
-   RETURN
+      RETURN
 
 PROCEDURE CreaGT(nOpt)
 

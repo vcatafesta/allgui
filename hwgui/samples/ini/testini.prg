@@ -27,11 +27,11 @@ FUNCTION Main
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION hwg_EndWindow()
    MENUITEM "&Read Ini" ACTION ReadIni()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ReadIni()
 

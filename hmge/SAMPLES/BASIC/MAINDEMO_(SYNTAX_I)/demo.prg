@@ -916,81 +916,81 @@ PROCEDURE Standard_CLick
             ACTION _dummy() WIDTH 180 DEFAULT
 
          DEFINE IMAGELIST ImageList_1 ;
-               BUTTONSIZE 24, 24 ;
-               IMAGE { 'toolbar.bmp' } ;
-               COLORMASK CLR_DEFAULT ;
-               IMAGECOUNT 9 ;
-               MASK
+            BUTTONSIZE 24, 24 ;
+            IMAGE { 'toolbar.bmp' } ;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 9 ;
+            MASK
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 30,30 IMAGELIST 'ImageList_1' FLAT BORDER
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 30,30 IMAGELIST 'ImageList_1' FLAT BORDER
 
-               BUTTON Button_1 ;
-                  PICTUREINDEX 0 ;
-                  TOOLTIP "Exit" ;
-                  ACTION ThisWindow.Release ;
-                  SEPARATOR
+         BUTTON Button_1 ;
+            PICTUREINDEX 0 ;
+            TOOLTIP "Exit" ;
+            ACTION ThisWindow.Release ;
+            SEPARATOR
 
-               BUTTON Button_2 ;
-                  PICTUREINDEX 1 ;
-                  TOOLTIP "Create new item" ;
-                  ACTION _dummy() ;
-                  SEPARATOR
+         BUTTON Button_2 ;
+            PICTUREINDEX 1 ;
+            TOOLTIP "Create new item" ;
+            ACTION _dummy() ;
+            SEPARATOR
 
-               BUTTON Button_3 ;
-                  PICTUREINDEX 2 ;
-                  TOOLTIP "Edit selected item" ;
-                  ACTION _dummy()
+         BUTTON Button_3 ;
+            PICTUREINDEX 2 ;
+            TOOLTIP "Edit selected item" ;
+            ACTION _dummy()
 
-               BUTTON Button_4 ;
-                  PICTUREINDEX 3 ;
-                  TOOLTIP "Delete selected item" ;
-                  ACTION _dummy() ;
-                  SEPARATOR
+         BUTTON Button_4 ;
+            PICTUREINDEX 3 ;
+            TOOLTIP "Delete selected item" ;
+            ACTION _dummy() ;
+            SEPARATOR
 
-               BUTTON Button_5 ;
-                  PICTUREINDEX 4 ;
-                  TOOLTIP "Refresh" ;
-                  ACTION _dummy() ;
-                  SEPARATOR
+         BUTTON Button_5 ;
+            PICTUREINDEX 4 ;
+            TOOLTIP "Refresh" ;
+            ACTION _dummy() ;
+            SEPARATOR
 
-               BUTTON Button_6 ;
-                  PICTUREINDEX 5 ;
-                  TOOLTIP "Launch selected item" ;
-                  ACTION ( Form_Std.ToolBar_1.Button_6.PictureIndex := nIndex++, ;
-                  nIndex := iif(nIndex > 8, 0, nIndex) )
+         BUTTON Button_6 ;
+            PICTUREINDEX 5 ;
+            TOOLTIP "Launch selected item" ;
+            ACTION ( Form_Std.ToolBar_1.Button_6.PictureIndex := nIndex++, ;
+            nIndex := iif(nIndex > 8, 0, nIndex) )
 
-               BUTTON Button_7 ;
-                  PICTUREINDEX 6 ;
-                  TOOLTIP "Selected item properties" ;
-                  ACTION _dummy() ;
-                  SEPARATOR
+         BUTTON Button_7 ;
+            PICTUREINDEX 6 ;
+            TOOLTIP "Selected item properties" ;
+            ACTION _dummy() ;
+            SEPARATOR
 
-               BUTTON Button_8 ;
-                  PICTUREINDEX 7 ;
-                  TOOLTIP "Options" ;
-                  ACTION _dummy() ;
-                  SEPARATOR
+         BUTTON Button_8 ;
+            PICTUREINDEX 7 ;
+            TOOLTIP "Options" ;
+            ACTION _dummy() ;
+            SEPARATOR
 
-               BUTTON Button_9 ;
-                  PICTUREINDEX 8 ;
-                  TOOLTIP "About" ;
-                  ACTION MsgInfo ( APP_ABOUT ) ;
-                  SEPARATOR
+         BUTTON Button_9 ;
+            PICTUREINDEX 8 ;
+            TOOLTIP "About" ;
+            ACTION MsgInfo ( APP_ABOUT ) ;
+            SEPARATOR
 
-            END TOOLBAR
+      END TOOLBAR
 
-         END WINDOW
+   END WINDOW
 
-         Form_Std.Button_Change.Action := {|| Form_Std.Button_6.OnClick }
-         Form_Std.ToolBar_1.Button_5.Action := {|| Form_Std.Button_6.OnClick }
+   Form_Std.Button_Change.Action := {|| Form_Std.Button_6.OnClick }
+   Form_Std.ToolBar_1.Button_5.Action := {|| Form_Std.Button_6.OnClick }
 
-         Form_Std.Activate
+   Form_Std.Activate
 
-      ELSE
-         MsgInfo ("Window Already Active","Warning!")
-      ENDIF
+ELSE
+   MsgInfo ("Window Already Active","Warning!")
+ENDIF
 
-      RETURN
+RETURN
 
 PROCEDURE OnReleaseTest()
 

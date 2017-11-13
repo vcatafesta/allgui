@@ -13,13 +13,14 @@ CLASS HPAINTDC FROM HDC
 
    DATA m_ps
 
-   METHOD NEW( nWnd )
-   METHOD END ()
+METHOD NEW( nWnd )
+
+METHOD END ()
 
    HIDDEN:
    DATA m_hWnd
 
-   ENDCLASS
+ENDCLASS
 
 METHOD NEW( nWnd ) CLASS HPAINTDC
 
@@ -43,36 +44,63 @@ CLASS HDC
    DATA m_hDC
    DATA m_hAttribDC
 
-   METHOD NEW( )
-   METHOD SetAttribDC( hDC )
-   METHOD ATTACH( hDc )
-   METHOD Moveto( x1, y1 )
-   METHOD Lineto( x1, y1 )
-   METHOD fillsolidrect( lpRect, clr )
-   METHOD Fillrect( lpRect, clr )
-   METHOD Selectcliprgn( pRgn )
-   METHOD Settextcolor( xColor )
-   METHOD Setbkmode( xMode )
-   METHOD Setbkcolor(  clr ) INLINE    hwg_Setbkcolor( ::m_hDC, clr )
-   METHOD Selectobject( xMode )
-   METHOD Drawtext( strText, Rect, dwFlags )
-   METHOD Createcompatibledc( x )
-   METHOD Patblt( a, s, d, f, g ) INLINE hwg_Patblt( ::m_hDc, a, s, d, f, g )
-   METHOD Savedc()
-   METHOD Restoredc( nSavedDC )
-   METHOD Setmapmode( nMapMode )
-   METHOD SetWindowOrg( x, y )
-   METHOD SetWindowExt( x, y )
-   METHOD SetViewportOrg( x, y )
-   METHOD SetViewportExt( x, y )
-   METHOD Setarcdirection( nArcDirection )
-   METHOD Gettextmetric() INLINE hwg_Gettextmetric( ::m_hDC )
-   METHOD Setrop2( nDrawMode )
-   METHOD Bitblt( x,  y,  nWidth,  nHeight,  pSrcDC,  xSrc, ySrc,  dwRop ) INLINE    hwg_Bitblt( ::m_hDc, x, y, nWidth, nHeight,  pSrcDC,       xSrc,  ySrc,  dwRop )
-   METHOD Pie( arect, apt1, apt2 )
-   METHOD Deletedc()
+METHOD NEW( )
 
-   ENDCLASS
+METHOD SetAttribDC( hDC )
+
+METHOD ATTACH( hDc )
+
+METHOD Moveto( x1, y1 )
+
+METHOD Lineto( x1, y1 )
+
+METHOD fillsolidrect( lpRect, clr )
+
+METHOD Fillrect( lpRect, clr )
+
+METHOD Selectcliprgn( pRgn )
+
+METHOD Settextcolor( xColor )
+
+METHOD Setbkmode( xMode )
+
+METHOD Setbkcolor(  clr ) INLINE    hwg_Setbkcolor( ::m_hDC, clr )
+
+METHOD Selectobject( xMode )
+
+METHOD Drawtext( strText, Rect, dwFlags )
+
+METHOD Createcompatibledc( x )
+
+METHOD Patblt( a, s, d, f, g ) INLINE hwg_Patblt( ::m_hDc, a, s, d, f, g )
+
+METHOD Savedc()
+
+METHOD Restoredc( nSavedDC )
+
+METHOD Setmapmode( nMapMode )
+
+METHOD SetWindowOrg( x, y )
+
+METHOD SetWindowExt( x, y )
+
+METHOD SetViewportOrg( x, y )
+
+METHOD SetViewportExt( x, y )
+
+METHOD Setarcdirection( nArcDirection )
+
+METHOD Gettextmetric() INLINE hwg_Gettextmetric( ::m_hDC )
+
+METHOD Setrop2( nDrawMode )
+
+METHOD Bitblt( x,  y,  nWidth,  nHeight,  pSrcDC,  xSrc, ySrc,  dwRop ) INLINE    hwg_Bitblt( ::m_hDc, x, y, nWidth, nHeight,  pSrcDC,       xSrc,  ySrc,  dwRop )
+
+METHOD Pie( arect, apt1, apt2 )
+
+METHOD Deletedc()
+
+ENDCLASS
 
 METHOD NEW( ) CLASS HDC
 
@@ -294,13 +322,14 @@ METHOD Setrop2( nDrawMode )
 
 CLASS HCLIENTDC FROM HDC
 
-   METHOD NEW( nWnd )
-   METHOD END ()
+METHOD NEW( nWnd )
+
+METHOD END ()
 
    HIDDEN:
    DATA m_hWnd
 
-   ENDCLASS
+ENDCLASS
 
 METHOD NEW( nWnd ) CLASS HCLIENTDC
 

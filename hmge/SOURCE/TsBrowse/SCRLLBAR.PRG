@@ -27,7 +27,7 @@ CLASS TSBScrlBar FROM TControl
    DATA   bWhen                                      // TWindow
    DATA   bValid                                     // TWindow
 
-CLASSDATA aProperties INIT { "cVarName", "nMin", "nMax",;
+   CLASSDATA aProperties INIT { "cVarName", "nMin", "nMax",;
       "nPgStep", "nTop", "nLeft", "Cargo" }
 
 METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;

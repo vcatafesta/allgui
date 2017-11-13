@@ -57,63 +57,63 @@ FUNCTION Main
    MENU OF oMainWnd
    MENU TITLE "File"
    MENUITEM "E&xit" ACTION oMainWnd:Close()
-ENDMENU
-ENDMENU
+   ENDMENU
+   ENDMENU
 
-@ 0,0 PANEL oPanelTool SIZE 500,32
+   @ 0,0 PANEL oPanelTool SIZE 500,32
 
-@ 5,4 BUTTON "Show" OF oPanelTool SIZE 50,24 ;
-   ON CLICK {||oChart:Show()}
+   @ 5,4 BUTTON "Show" OF oPanelTool SIZE 50,24 ;
+      ON CLICK {||oChart:Show()}
 
-@ 55,4 BUTTON "Hide" OF oPanelTool SIZE 50,24 ;
-   ON CLICK {||oChart:Hide()}
+   @ 55,4 BUTTON "Hide" OF oPanelTool SIZE 50,24 ;
+      ON CLICK {||oChart:Hide()}
 
-@ 105,4 BUTTON "Enable" OF oPanelTool SIZE 50,24 ;
-   ON CLICK {||oChart:Enable()}
+   @ 105,4 BUTTON "Enable" OF oPanelTool SIZE 50,24 ;
+      ON CLICK {||oChart:Enable()}
 
-@ 155,4 BUTTON "Disable" OF oPanelTool SIZE 50,24 ;
-   ON CLICK {||oChart:Disable()}
+   @ 155,4 BUTTON "Disable" OF oPanelTool SIZE 50,24 ;
+      ON CLICK {||oChart:Disable()}
 
-@ 205,4 BUTTON "Redraw" OF oPanelTool SIZE 50,24 ;
-   ON CLICK {||oChart:Draw(.T.) }
+   @ 205,4 BUTTON "Redraw" OF oPanelTool SIZE 50,24 ;
+      ON CLICK {||oChart:Draw(.T.) }
 
-@ 0,34 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y), oChart:Move(,,x,y-32), oChart:Refresh() }
+   @ 0,34 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y), oChart:Move(,,x,y-32), oChart:Refresh() }
 
-oChart := RmChart():New( oPanel, "RMChart.RMChartX", 0, 0, oPanel:nHeight, oPanel:nWidth )
+   oChart := RmChart():New( oPanel, "RMChart.RMChartX", 0, 0, oPanel:nHeight, oPanel:nWidth )
 
-oChart:Clear()
-oChart:Reset()
-oChart:Font             := "Tahoma"
-oChart:RMCStyle         := RMC_CTRLSTYLEFLAT
-oChart:RMCUserWatermark := "Test Test Test"
-oChart:AddRegion()
-r1 := oChart:Region( 1 )
-r1:Footer = "hwgui does ocx too!"
-r1:AddCaption()
-WITH OBJECT r1          // oChart:Region( 1 )
-   WITH OBJECT :Caption()
-      :Titel     := "rmchart test"
-      :FontSize  := 10
-      :Bold      := .T.
+   oChart:Clear()
+   oChart:Reset()
+   oChart:Font             := "Tahoma"
+   oChart:RMCStyle         := RMC_CTRLSTYLEFLAT
+   oChart:RMCUserWatermark := "Test Test Test"
+   oChart:AddRegion()
+   r1 := oChart:Region( 1 )
+   r1:Footer = "hwgui does ocx too!"
+   r1:AddCaption()
+   WITH OBJECT r1          // oChart:Region( 1 )
+      WITH OBJECT :Caption()
+         :Titel     := "rmchart test"
+         :FontSize  := 10
+         :Bold      := .T.
+      END
+      :AddGridlessSeries()
+      WITH OBJECT :GridLessSeries
+         :SeriesStyle      := RMC_PIE_GRADIENT
+         :Alignment        := RMC_FULL
+         :Explodemode      := RMC_EXPLODE_NONE
+         :Lucent           := .F.
+         :ValueLabelOn     := RMC_VLABEL_ABSOLUTE
+         :HatchMode        := RMC_HATCHBRUSH_OFF
+         :StartAngle       := 0
+         :DataString       := "30*15*40*35"
+      END
    END
-   :AddGridlessSeries()
-   WITH OBJECT :GridLessSeries
-      :SeriesStyle      := RMC_PIE_GRADIENT
-      :Alignment        := RMC_FULL
-      :Explodemode      := RMC_EXPLODE_NONE
-      :Lucent           := .F.
-      :ValueLabelOn     := RMC_VLABEL_ABSOLUTE
-      :HatchMode        := RMC_HATCHBRUSH_OFF
-      :StartAngle       := 0
-      :DataString       := "30*15*40*35"
-   END
-END
-oChart:Draw2Clipboard( RMC_EMF )  // Copy in clipboard
-ris = oChart:Draw( .T. )
-oChart:Enable()
-oChart:Show()
+   oChart:Draw2Clipboard( RMC_EMF )  // Copy in clipboard
+   ris = oChart:Draw( .T. )
+   oChart:Enable()
+   oChart:Show()
 
-ACTIVATE WINDOW oMainWnd
+   ACTIVATE WINDOW oMainWnd
 
-RETURN
+   RETURN
 

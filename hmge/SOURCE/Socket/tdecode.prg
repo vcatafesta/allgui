@@ -76,7 +76,7 @@ METHOD MD5( cData )
 
 METHOD HMAC_MD5( cLogin, cPwd, cChallenge )
 
-CLASSDATA cCharPos      HIDDEN
+   CLASSDATA cCharPos      HIDDEN
 
 ENDCLASS
 

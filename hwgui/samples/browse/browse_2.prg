@@ -21,11 +21,11 @@ FUNCTION Main
    MENU OF oMain
    MENUITEM "&Exit"   ACTION oMain:Close()
    MENUITEM "&Browse" ACTION BrowseTest_2()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION BrowseTest_2()
 
@@ -230,3 +230,4 @@ FUNCTION ReplaceIndex(oPos)
    oBrowse:Refresh()
 
    RETURN NIL
+

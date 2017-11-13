@@ -53,26 +53,26 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
    ::bSetGet := bSetGet
 
    IF nLower != Nil ; ::nLower := nLower ; ENDIF
-      IF nUpper != Nil ; ::nUpper := nUpper ; ENDIF
-         IF nUpDWidth != Nil ; ::nUpDownWidth := nUpDWidth ; ENDIF
+   IF nUpper != Nil ; ::nUpper := nUpper ; ENDIF
+   IF nUpDWidth != Nil ; ::nUpDownWidth := nUpDWidth ; ENDIF
 
-            ::Activate()
+   ::Activate()
 
-            IF bSetGet != Nil
-               ::bGetFocus := bGFocus
-               ::bLostFocus := bLFocus
-               ::oParent:AddEvent( EN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
-               ::oParent:AddEvent( EN_KILLFOCUS,::id,{|o,id|__Valid(o:FindControl(id))} )
-            ELSE
-               IF bGfocus != Nil
-                  ::oParent:AddEvent( EN_SETFOCUS,::id,bGfocus )
-               ENDIF
-               IF bLfocus != Nil
-                  ::oParent:AddEvent( EN_KILLFOCUS,::id,bLfocus )
-               ENDIF
-            ENDIF
+   IF bSetGet != Nil
+      ::bGetFocus := bGFocus
+      ::bLostFocus := bLFocus
+      ::oParent:AddEvent( EN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
+      ::oParent:AddEvent( EN_KILLFOCUS,::id,{|o,id|__Valid(o:FindControl(id))} )
+   ELSE
+      IF bGfocus != Nil
+         ::oParent:AddEvent( EN_SETFOCUS,::id,bGfocus )
+      ENDIF
+      IF bLfocus != Nil
+         ::oParent:AddEvent( EN_KILLFOCUS,::id,bLfocus )
+      ENDIF
+   ENDIF
 
-            RETURN Self
+   RETURN Self
 
 METHOD Activate CLASS HUpDown
 

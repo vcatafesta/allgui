@@ -18,11 +18,11 @@ FUNCTION Main()
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION hwg_EndWindow()
    MENUITEM "&Create a child" ACTION CreateMdiChild()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow  MAXIMIZED
+   ACTIVATE WINDOW oMainWindow  MAXIMIZED
 
-RETURN (NIL)
+   RETURN (NIL)
 
 FUNCTION CreateMdiChild(  )
 

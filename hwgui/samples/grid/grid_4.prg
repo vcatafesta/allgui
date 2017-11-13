@@ -30,13 +30,13 @@ FUNCTION Main()
    MENU OF oMain
    MENUITEM "&Exit" ACTION oMain:Close()
    MENUITEM "&Open File" ACTION FileOpen()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-oServer:Close()
+   oServer:Close()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test()
 

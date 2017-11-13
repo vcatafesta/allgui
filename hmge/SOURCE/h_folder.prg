@@ -921,13 +921,13 @@ FUNCTION EraseFolder( hwndDlg, lModal )
       _HMG_aFormMiscData2  [i] := ''
 
       IF lModal
-      EndDialog( hwndDlg, 0 )
-   ELSE
-      DestroyWindow( hwndDlg )
+         EndDialog( hwndDlg, 0 )
+      ELSE
+         DestroyWindow( hwndDlg )
+      ENDIF
    ENDIF
-ENDIF
 
-RETURN TRUE
+   RETURN TRUE
 
 FUNCTION _ReleaseFolder( hwndFolder )
 

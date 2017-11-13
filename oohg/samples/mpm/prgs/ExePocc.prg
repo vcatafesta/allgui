@@ -229,9 +229,9 @@ PROCEDURE Build4(ProjectName) //(x)Harbour - Pelles C
 
    QUITarEspera()
 
-EndBuild()
+   EndBuild()
 
-Procesando(2)
+   Procesando(2)
 
-RETURN
+   RETURN
 

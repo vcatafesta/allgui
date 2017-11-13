@@ -19,17 +19,22 @@ CLASS TMci
    DATA   oWnd
    DATA   cBuffer
 
-   METHOD New( cDevice, cFileName )  CONSTRUCTOR
-   METHOD lOpen()
-   METHOD Play( nFrom, nTo, hWnd ) INLINE ;
-         ::nError := hwg_Nmciplay( ::nId, nFrom, nTo, hWnd )
-   METHOD cGetError()
-   METHOD SetWindow( oWnd ) INLINE ;
-         ::oWnd := oWnd, ;
-         ::nError := hwg_Nmciwindow( ::nId, oWnd:handle )
-   METHOD SendStr( cMciStr )
+METHOD New( cDevice, cFileName )  CONSTRUCTOR
 
-   ENDCLASS
+METHOD lOpen()
+
+METHOD Play( nFrom, nTo, hWnd ) INLINE ;
+      ::nError := hwg_Nmciplay( ::nId, nFrom, nTo, hWnd )
+
+METHOD cGetError()
+
+METHOD SetWindow( oWnd ) INLINE ;
+      ::oWnd := oWnd, ;
+      ::nError := hwg_Nmciwindow( ::nId, oWnd:handle )
+
+METHOD SendStr( cMciStr )
+
+ENDCLASS
 
 METHOD New( cDevice, cFileName ) CLASS TMci
 

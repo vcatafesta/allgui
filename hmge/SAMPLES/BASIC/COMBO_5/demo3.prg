@@ -52,25 +52,25 @@ FUNCTION Main()
          ON LISTCLOSE PlayAsterisk()
 
       DEFINE COMBOBOXEX Combo_2
-         ROW 10
-         COL 250
-         ITEMSOURCE CIDADES->DESCRICAO
-         VALUE 2
-         WIDTH 200
-         HEIGHT 220
-         IMAGE aImages
-         LISTWIDTH 350
-         ONLISTDISPLAY PlayBeep()
-         ON LISTCLOSE PlayAsterisk()
-      END COMBOBOXEX
+      ROW 10
+      COL 250
+      ITEMSOURCE CIDADES->DESCRICAO
+      VALUE 2
+      WIDTH 200
+      HEIGHT 220
+      IMAGE aImages
+      LISTWIDTH 350
+      ONLISTDISPLAY PlayBeep()
+      ON LISTCLOSE PlayAsterisk()
+   END COMBOBOXEX
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW   Form_1
+CENTER WINDOW   Form_1
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-   RETURN NIL
+RETURN NIL
 
 PROCEDURE Opentables()
 

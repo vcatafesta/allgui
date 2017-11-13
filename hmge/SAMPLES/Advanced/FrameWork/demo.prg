@@ -103,69 +103,69 @@ PROCEDURE BuildToolBar( lShow )
    IF lShow
 
       DEFINE IMAGELIST ImageList_1 ;
-            OF Form_1 ;
-            BUTTONSIZE 16, 15 ;
-            IMAGE { 'ID_TOOLBAR' } ;
-            COLORMASK CLR_DEFAULT ;
-            IMAGECOUNT 8 ;
-            MASK
+         OF Form_1 ;
+         BUTTONSIZE 16, 15 ;
+         IMAGE { 'ID_TOOLBAR' } ;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 8 ;
+         MASK
 
-         DEFINE TOOLBAREX ToolBar_1 OF Form_1 BUTTONSIZE 20, 20 IMAGELIST 'ImageList_1' FLAT
+      DEFINE TOOLBAREX ToolBar_1 OF Form_1 BUTTONSIZE 20, 20 IMAGELIST 'ImageList_1' FLAT
 
-            BUTTON Button_1 ;
-               PICTUREINDEX IDX_FILE_NEW ;
-               TOOLTIP GetResStr( ID_FILE_NEW ) ;
-               ACTION _dummy()
+      BUTTON Button_1 ;
+         PICTUREINDEX IDX_FILE_NEW ;
+         TOOLTIP GetResStr( ID_FILE_NEW ) ;
+         ACTION _dummy()
 
-            BUTTON Button_2 ;
-               PICTUREINDEX IDX_FILE_OPEN ;
-               TOOLTIP GetResStr( ID_FILE_OPEN ) ;
-               ACTION _dummy()
+      BUTTON Button_2 ;
+         PICTUREINDEX IDX_FILE_OPEN ;
+         TOOLTIP GetResStr( ID_FILE_OPEN ) ;
+         ACTION _dummy()
 
-            BUTTON Button_3 ;
-               PICTUREINDEX IDX_FILE_SAVE ;
-               TOOLTIP GetResStr( ID_FILE_SAVE ) ;
-               ACTION _dummy() ;
-               SEPARATOR
+      BUTTON Button_3 ;
+         PICTUREINDEX IDX_FILE_SAVE ;
+         TOOLTIP GetResStr( ID_FILE_SAVE ) ;
+         ACTION _dummy() ;
+         SEPARATOR
 
-            BUTTON Button_4 ;
-               PICTUREINDEX IDX_EDIT_CUT ;
-               TOOLTIP GetResStr( ID_EDIT_CUT ) ;
-               ACTION _dummy()
+      BUTTON Button_4 ;
+         PICTUREINDEX IDX_EDIT_CUT ;
+         TOOLTIP GetResStr( ID_EDIT_CUT ) ;
+         ACTION _dummy()
 
-            BUTTON Button_5 ;
-               PICTUREINDEX IDX_EDIT_COPY ;
-               TOOLTIP GetResStr( ID_EDIT_COPY ) ;
-               ACTION _dummy()
+      BUTTON Button_5 ;
+         PICTUREINDEX IDX_EDIT_COPY ;
+         TOOLTIP GetResStr( ID_EDIT_COPY ) ;
+         ACTION _dummy()
 
-            BUTTON Button_6 ;
-               PICTUREINDEX IDX_EDIT_PASTE ;
-               TOOLTIP GetResStr( ID_EDIT_PASTE ) ;
-               ACTION _dummy() ;
-               SEPARATOR
+      BUTTON Button_6 ;
+         PICTUREINDEX IDX_EDIT_PASTE ;
+         TOOLTIP GetResStr( ID_EDIT_PASTE ) ;
+         ACTION _dummy() ;
+         SEPARATOR
 
-            BUTTON Button_7 ;
-               PICTUREINDEX IDX_FILE_PRINT ;
-               TOOLTIP GetResStr( ID_FILE_PRINT ) ;
-               ACTION _dummy() ;
-               SEPARATOR
+      BUTTON Button_7 ;
+         PICTUREINDEX IDX_FILE_PRINT ;
+         TOOLTIP GetResStr( ID_FILE_PRINT ) ;
+         ACTION _dummy() ;
+         SEPARATOR
 
-            BUTTON Button_8 ;
-               PICTUREINDEX IDX_HELP_ABOUT ;
-               TOOLTIP GetResStr( ID_HELP_ABOUT ) ;
-               ACTION dlg_about()
+      BUTTON Button_8 ;
+         PICTUREINDEX IDX_HELP_ABOUT ;
+         TOOLTIP GetResStr( ID_HELP_ABOUT ) ;
+         ACTION dlg_about()
 
-         END TOOLBAR
+   END TOOLBAR
 
-      ELSE
+ELSE
 
-         Form_1.ToolBar_1.Release
+   Form_1.ToolBar_1.Release
 
-         RELEASE IMAGELIST ImageList_1 OF Form_1
+   RELEASE IMAGELIST ImageList_1 OF Form_1
 
-      ENDIF
+ENDIF
 
-      RETURN
+RETURN
 
 PROCEDURE BuildStatusBar( lShow )
 

@@ -887,13 +887,13 @@ FUNCTION hwg_hfrm_Str2Arr( stroka )
    IF Len( stroka ) > 2
       DO WHILE pos2 > 0
          DO WHILE SubStr( stroka, pos1, 1 ) <= ' ' ; pos1 ++ ; ENDDO
-            pos2 := hb_At( ',', stroka, pos1 )
-            AAdd( arr, Trim( SubStr( stroka,pos1,iif( pos2 > 0,pos2 - pos1,hb_At('}',stroka,pos1 ) - pos1 ) ) ) )
-            pos1 := pos2 + 1
-         ENDDO
-      ENDIF
+         pos2 := hb_At( ',', stroka, pos1 )
+         AAdd( arr, Trim( SubStr( stroka,pos1,iif( pos2 > 0,pos2 - pos1,hb_At('}',stroka,pos1 ) - pos1 ) ) ) )
+         pos1 := pos2 + 1
+      ENDDO
+   ENDIF
 
-      RETURN arr
+   RETURN arr
 
 FUNCTION hwg_hfrm_Arr2Str( arr )
 

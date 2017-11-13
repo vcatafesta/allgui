@@ -310,10 +310,10 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
                               _SetFontBold( cButnNam,  cMWinName, ( nButton == nCurPagNo ) )
                               nBegColm += nBtnWidth
                               _ShowControl ( cButnNam, cMWinName )
-                           ENDI
-                        NEXT nButton
+                              ENDI
+                           NEXT nButton
 
-                        RETU // FB_ScalTabs()
+                           RETU // FB_ScalTabs()
 
-                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+                           *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 

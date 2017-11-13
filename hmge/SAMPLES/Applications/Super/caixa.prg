@@ -21,7 +21,7 @@ FUNCTION caixa()
          nosize
 
       * botões (toolbar)
-      DEFINE BUTTONex button_incluir
+      DEFINE BUTTONEX button_incluir
          picture path_imagens+'incluir.bmp'
          col 005
          row 002
@@ -38,7 +38,7 @@ FUNCTION caixa()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_alterar
+      DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
          row 002
@@ -55,7 +55,7 @@ FUNCTION caixa()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_excluir
+      DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
          row 002
@@ -72,7 +72,7 @@ FUNCTION caixa()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_atualizar
+      DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
          row 002
@@ -89,7 +89,7 @@ FUNCTION caixa()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_sair
+      DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
          row 002
@@ -316,7 +316,7 @@ STATIC FUNCTION dados(parametro)
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_dados.width-225
          row form_dados.height-085
@@ -329,7 +329,7 @@ STATIC FUNCTION dados(parametro)
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
          row form_dados.height-085

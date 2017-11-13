@@ -112,69 +112,69 @@ PROCEDURE print()
    SET page orientation DMORIENT_PORTRAIT papersize DMPAPER_A4 font "f0"
 
    DEFINE IMAGElist "ILIST1" picture "flags"
-      DEFINE IMAGElist "ILIST2" picture "mytoolbar" iconcount 11
+   DEFINE IMAGElist "ILIST2" picture "mytoolbar" iconcount 11
 
-         define font "f0" name "courier new" size 12 bold
-         define font "f1" name "times new roman" size 30 width 30 bold italic underline strikeout
-         define font "f2" name "times new roman" size 30 bold
-         define font "f3" name "times new roman" size 12 bold
+   define font "f0" name "courier new" size 12 bold
+   define font "f1" name "times new roman" size 30 width 30 bold italic underline strikeout
+   define font "f2" name "times new roman" size 30 bold
+   define font "f3" name "times new roman" size 12 bold
 
-         define pen "p0" style PS_SOLID width 1 color 0x000000
-         define pen "p1" style PS_SOLID width 10 color 0xFF0000
-         define pen "p2" style PS_NULL
+   define pen "p0" style PS_SOLID width 1 color 0x000000
+   define pen "p1" style PS_SOLID width 10 color 0xFF0000
+   define pen "p2" style PS_NULL
 
-         define brush "b0" style BS_SOLID color 0xCCFFAA
-         define brush "b1" style BS_HATCHED color hbprn:dxcolors("YELLOW") hatch HS_DIAGCROSS
-         define brush "b2" style BS_NULL
+   define brush "b0" style BS_SOLID color 0xCCFFAA
+   define brush "b1" style BS_HATCHED color hbprn:dxcolors("YELLOW") hatch HS_DIAGCROSS
+   define brush "b2" style BS_NULL
 
-         define elliptic region "r0" at 0 ,0 ,20,30
-         define elliptic region "r1" at 0 ,hbprnmaxcol-30,20,hbprnmaxcol
-         define elliptic region "r2" at 10,20,40,hbprnmaxcol-20
-         combine regions "r0","r1" to "r4" style WINDING
-         combine regions "r4","r2" to "r5" style WINDING
+   define elliptic region "r0" at 0 ,0 ,20,30
+   define elliptic region "r1" at 0 ,hbprnmaxcol-30,20,hbprnmaxcol
+   define elliptic region "r2" at 10,20,40,hbprnmaxcol-20
+   combine regions "r0","r1" to "r4" style WINDING
+   combine regions "r4","r2" to "r5" style WINDING
 
-         SELECT font "f0"
-         SELECT pen "p0"
+   SELECT font "f0"
+   SELECT pen "p0"
 
-         START DOC NAME f1.title
-
-         START PAGE
-         @0,0,hbprnmaxrow+1,hbprnmaxcol+1 RECTANGLE pen "p1" brush "b1"
-         @10,10 PICTURE prys SIZE 5,5 EXTEND HBPRNMAXROW-20,HBPRNMAXCOL-20
-         POLYGON apoly PEN "p0" BRUSH "b1"
-         @5,1 SAY "FONT F1 BOLD ITALIC UNDERLINE STRIKEOUT 30%WIDTH" FONT "f1" TO PRINT
-         @8,1 SAY "FONT F2 BOLD" FONT "f2" TO PRINT
-      END PAGE
-
-      START PAGE
-      SELECT CLIP REGION "r5"
-      @ 0,0 PICTURE prys size 41,HBPRNMAXCOL+1
-      @15,20 SAY "Mickey Mouse !!!" TO PRINT
-      @17,20 SAY "Regions demo" TO PRINT
-      DELETE CLIP REGION
-   END PAGE
+   START DOC NAME f1.title
 
    START PAGE
-   SELECT PEN   "P1"
-   SELECT BRUSH "B0"
+   @0,0,hbprnmaxrow+1,hbprnmaxcol+1 RECTANGLE pen "p1" brush "b1"
+   @10,10 PICTURE prys SIZE 5,5 EXTEND HBPRNMAXROW-20,HBPRNMAXCOL-20
+   POLYGON apoly PEN "p0" BRUSH "b1"
+   @5,1 SAY "FONT F1 BOLD ITALIC UNDERLINE STRIKEOUT 30%WIDTH" FONT "f1" TO PRINT
+   @8,1 SAY "FONT F2 BOLD" FONT "f2" TO PRINT
+END PAGE
 
-   @1,0,5,30 RECTANGLE
-   @3,1 say "RECTANGLE" to print
+START PAGE
+SELECT CLIP REGION "r5"
+@ 0,0 PICTURE prys size 41,HBPRNMAXCOL+1
+@15,20 SAY "Mickey Mouse !!!" TO PRINT
+@17,20 SAY "Regions demo" TO PRINT
+DELETE CLIP REGION
+END PAGE
 
-   @1,31,5,60 FILLRECT
-   @3,32 say "FILLRECT" to print
+START PAGE
+SELECT PEN   "P1"
+SELECT BRUSH "B0"
 
-   @6,0,10,30 ROUNDRECT ROUNDR 1 ROUNDC 1
-   @8,1 say "ROUNDRECT" to print
+@1,0,5,30 RECTANGLE
+@3,1 say "RECTANGLE" to print
 
-   @6,31,10,60 FRAMERECT BRUSH "b1"
-   @8,32 say "FRAMERECT" to print
+@1,31,5,60 FILLRECT
+@3,32 say "FILLRECT" to print
 
-   @13,1 say "INVERTRECT" to print
-   @11,0,15,30 INVERTRECT
+@6,0,10,30 ROUNDRECT ROUNDR 1 ROUNDC 1
+@8,1 say "ROUNDRECT" to print
 
-   @11,31,15,60 ELLIPSE
-   @13,32 say "ELLIPSE" to print
+@6,31,10,60 FRAMERECT BRUSH "b1"
+@8,32 say "FRAMERECT" to print
+
+@13,1 say "INVERTRECT" to print
+@11,0,15,30 INVERTRECT
+
+@11,31,15,60 ELLIPSE
+@13,32 say "ELLIPSE" to print
 END PAGE
 
 SET PAGE  ORIENTATION DMORIENT_PORTRAIT PAPERSIZE DMPAPER_A4 FONT "f0"

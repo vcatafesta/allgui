@@ -29,26 +29,39 @@ CLASS HNiceButton INHERIT HControl
    DATA lFlat
    DATA nOrder
 
-   METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
-         bInit, bClick, ;
-         cText, cTooltip, r, g, b )
-   METHOD Redefine( oWndParent, nId, nStyleEx, ;
-         bInit, bClick, ;
-         cText, cTooltip, r, g, b )
-   METHOD Activate()
-   METHOD INIT()
-   METHOD Create( )
-   METHOD Size( )
-   METHOD Moving( )
-   METHOD Paint()
-   METHOD MouseMove( wParam, lParam )
-   METHOD MDown()
-   METHOD MUp()
-   METHOD Press() INLINE( ::lPress := .T., ::MDown() )
-   METHOD RELEASE()
-   METHOD END ()
+METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, nStyleEx, ;
+      bInit, bClick, ;
+      cText, cTooltip, r, g, b )
+
+METHOD Activate()
+
+METHOD INIT()
+
+METHOD Create( )
+
+METHOD Size( )
+
+METHOD Moving( )
+
+METHOD Paint()
+
+METHOD MouseMove( wParam, lParam )
+
+METHOD MDown()
+
+METHOD MUp()
+
+METHOD Press() INLINE( ::lPress := .T., ::MDown() )
+
+METHOD RELEASE()
+
+METHOD END ()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
       bInit, bClick, ;

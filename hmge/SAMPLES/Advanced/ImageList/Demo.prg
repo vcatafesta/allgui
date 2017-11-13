@@ -68,101 +68,101 @@ FUNCTION Main
          BACKCOLOR { 192, 192, 64 }
 
       DEFINE IMAGELIST imagelst_1 ;
-            BUTTONSIZE 35, 35  ;
-            IMAGE { 'dog.bmp' } ;
-            IMAGEMASK { 'dogmask.bmp' } ;
-            IMAGECOUNT 30 ;
-            MASK
+         BUTTONSIZE 35, 35  ;
+         IMAGE { 'dog.bmp' } ;
+         IMAGEMASK { 'dogmask.bmp' } ;
+         IMAGECOUNT 30 ;
+         MASK
 
-         DEFINE STATUSBAR
-            STATUSITEM '[x] Harbour Power Ready!'
-         END STATUSBAR
+      DEFINE STATUSBAR
+         STATUSITEM '[x] Harbour Power Ready!'
+      END STATUSBAR
 
-         DEFINE MAIN MENU
-            POPUP '&Image'
-               ITEM 'Masked ImageList '  ACTION CreateImageList( 1, 1 )
-               ITEM 'Color Masked ImageList ' ACTION CreateImageList( 2, 1 )
-               SEPARATOR
-               ITEM 'Erase Image'  ACTION EraseImage( 3 )
-               SEPARATOR
-               ITEM '&Exit'   ACTION Form_1.Release
-            END POPUP
-            /*
-            POPUP '&Animation'
-            ITEM 'Heappy Dog'  ACTION SetPlayImage(4)
-            ITEM 'Running Dog'  ACTION SetPlayImage(3)
-            ITEM 'Sitdown Dog'  ACTION SetPlayImage(5)
-            ITEM 'Lying Dog'  ACTION SetPlayImage(6)
-            ITEM 'Sleeping Dog'  ACTION SetPlayImage(9)
-            END POPUP
-            */
-            POPUP '&Help'
-               ITEM '&About'   ACTION MsgInfo ( "MiniGUI ImageList demo" )
-            END POPUP
-         END MENU
+      DEFINE MAIN MENU
+         POPUP '&Image'
+            ITEM 'Masked ImageList '  ACTION CreateImageList( 1, 1 )
+            ITEM 'Color Masked ImageList ' ACTION CreateImageList( 2, 1 )
+            SEPARATOR
+            ITEM 'Erase Image'  ACTION EraseImage( 3 )
+            SEPARATOR
+            ITEM '&Exit'   ACTION Form_1.Release
+         END POPUP
+         /*
+         POPUP '&Animation'
+         ITEM 'Heappy Dog'  ACTION SetPlayImage(4)
+         ITEM 'Running Dog'  ACTION SetPlayImage(3)
+         ITEM 'Sitdown Dog'  ACTION SetPlayImage(5)
+         ITEM 'Lying Dog'  ACTION SetPlayImage(6)
+         ITEM 'Sleeping Dog'  ACTION SetPlayImage(9)
+         END POPUP
+         */
+         POPUP '&Help'
+            ITEM '&About'   ACTION MsgInfo ( "MiniGUI ImageList demo" )
+         END POPUP
+      END MENU
 
-         DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-            DEFINE TOOLBAR ToolBar_a BUTTONSIZE 85, 35 SIZE 8  FLAT RIGHTTEXT
+         DEFINE TOOLBAR ToolBar_a BUTTONSIZE 85, 35 SIZE 8  FLAT RIGHTTEXT
 
-               BUTTON Button_1a ;
-                  CAPTION '&Run' ;
-                  PICTURE 'm5.bmp' ;
-                  TOOLTIP 'Running Dog';
-                  ACTION ImageAnimat( 3 )
+            BUTTON Button_1a ;
+               CAPTION '&Run' ;
+               PICTURE 'm5.bmp' ;
+               TOOLTIP 'Running Dog';
+               ACTION ImageAnimat( 3 )
 
-               BUTTON Button_2a ;
-                  CAPTION '&Sit' ;
-                  PICTURE 'm20.bmp' ;
-                  TOOLTIP 'Sitdown Dog';
-                  ACTION ImageAnimat( 5 )
+            BUTTON Button_2a ;
+               CAPTION '&Sit' ;
+               PICTURE 'm20.bmp' ;
+               TOOLTIP 'Sitdown Dog';
+               ACTION ImageAnimat( 5 )
 
-               BUTTON Button_3a ;
-                  CAPTION '&Heappy' ;
-                  PICTURE 'm3.bmp' ;
-                  TOOLTIP 'Heaping Dog';
-                  ACTION ImageAnimat( 4 )
+            BUTTON Button_3a ;
+               CAPTION '&Heappy' ;
+               PICTURE 'm3.bmp' ;
+               TOOLTIP 'Heaping Dog';
+               ACTION ImageAnimat( 4 )
 
-               BUTTON Button_4a ;
-                  CAPTION '&Lie' ;
-                  PICTURE 'm22.bmp' ;
-                  TOOLTIP 'Lying Dog';
-                  ACTION ImageAnimat( 6 )
+            BUTTON Button_4a ;
+               CAPTION '&Lie' ;
+               PICTURE 'm22.bmp' ;
+               TOOLTIP 'Lying Dog';
+               ACTION ImageAnimat( 6 )
 
-               BUTTON Button_5a ;
-                  CAPTION '&Sleep' ;
-                  PICTURE 'm29.bmp' ;
-                  TOOLTIP 'Sleeping Dog';
-                  ACTION ImageAnimat( 9 )
+            BUTTON Button_5a ;
+               CAPTION '&Sleep' ;
+               PICTURE 'm29.bmp' ;
+               TOOLTIP 'Sleeping Dog';
+               ACTION ImageAnimat( 9 )
 
-            END TOOLBAR
+         END TOOLBAR
 
-         END SPLITBOX
+      END SPLITBOX
 
-         @ 150,200   IMAGE image_1 ;
-            PICTURE 'dog.gif' ;
-            WIDTH 100 HEIGHT 100 ;
-            STRETCH TRANSPARENT BACKGROUNDCOLOR { 192, 192, 64 }
+      @ 150,200   IMAGE image_1 ;
+         PICTURE 'dog.gif' ;
+         WIDTH 100 HEIGHT 100 ;
+         STRETCH TRANSPARENT BACKGROUNDCOLOR { 192, 192, 64 }
 
-         @ 200, 40 LABEL label_1;
-            VALUE 'Click here!' + CRLF + 'or drag Dog.';
-            ACTION SetPlayImage( 0 );
-            HEIGHT 40;
-            TRANSPARENT
+      @ 200, 40 LABEL label_1;
+         VALUE 'Click here!' + CRLF + 'or drag Dog.';
+         ACTION SetPlayImage( 0 );
+         HEIGHT 40;
+         TRANSPARENT
 
-         DEFINE TIMER Timer_1 ;
-            INTERVAL 70 ;
-            ACTION TimerPlayImage()
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 70 ;
+         ACTION TimerPlayImage()
 
-         Form_1.Timer_1.Enabled := .F.
+      Form_1.Timer_1.Enabled := .F.
 
-      END WINDOW
+   END WINDOW
 
-      CENTER WINDOW Form_1
+   CENTER WINDOW Form_1
 
-      ACTIVATE WINDOW Form_1
+   ACTIVATE WINDOW Form_1
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION initIL()
 
@@ -191,16 +191,16 @@ FUNCTION SetPlayImage( typ )
       HotSpotY = _HMG_MouseRow - Image_Row
 
       BEGINDRAG IMAGE imagelst_1 OF Form_1 AT _HMG_MouseRow - HotSpotY, _HMG_MouseCol - HotSpotX ;
-            IMAGEINDEX Image_Index
+         IMAGEINDEX Image_Index
 
-         ENTERDRAG IMAGE AT _HMG_MouseRow - HotSpotY, _HMG_MouseCol - HotSpotX
-         lDrag := .T.
-      ELSE
-         bPlayImage := {|| MoveImage() }
-         Form_1.Timer_1.Enabled := .T.
-      ENDIF
+      ENTERDRAG IMAGE AT _HMG_MouseRow - HotSpotY, _HMG_MouseCol - HotSpotX
+      lDrag := .T.
+   ELSE
+      bPlayImage := {|| MoveImage() }
+      Form_1.Timer_1.Enabled := .T.
+   ENDIF
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION ImageAnimat( typ )
 
@@ -239,23 +239,23 @@ FUNCTION CreateImageList( typ )
 
    IF typ == 1
       DEFINE IMAGELIST imagelst_1 ;
-            OF Form_1 ;
-            BUTTONSIZE 35, 35  ;
-            IMAGE { 'dog.bmp' } ;
-            IMAGEMASK { 'dogmask.bmp' } ;
-            IMAGECOUNT 30 ;
-            MASK
-      ELSE
-         DEFINE IMAGELIST imagelst_1 ;
-               OF Form_1 ;
-               BUTTONSIZE 35, 35  ;
-               IMAGE { 'dog.bmp' } ;
-               COLORMASK ColorMask ;
-               IMAGECOUNT 30 ;
-               MASK
-         ENDIF
+         OF Form_1 ;
+         BUTTONSIZE 35, 35  ;
+         IMAGE { 'dog.bmp' } ;
+         IMAGEMASK { 'dogmask.bmp' } ;
+         IMAGECOUNT 30 ;
+         MASK
+   ELSE
+      DEFINE IMAGELIST imagelst_1 ;
+         OF Form_1 ;
+         BUTTONSIZE 35, 35  ;
+         IMAGE { 'dog.bmp' } ;
+         COLORMASK ColorMask ;
+         IMAGECOUNT 30 ;
+         MASK
+   ENDIF
 
-         RETURN NIL
+   RETURN NIL
 
 FUNCTION DelImage( ImgIndex )
 
@@ -364,12 +364,12 @@ FUNCTION DragImage()
 FUNCTION StopDragImage()
 
    IF lDrag == .T.
-   ENDDRAG IMAGE
-   RePaintImage()
-   lDrag := .F.
-ENDIF
+      ENDDRAG IMAGE
+      RePaintImage()
+      lDrag := .F.
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION RePaintImage()
 

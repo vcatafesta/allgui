@@ -23,11 +23,11 @@ FUNCTION Main
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION oMainWindow:Close()
    MENUITEM "&Get a value" ACTION DlgGet()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION DlgGet()
 

@@ -12,7 +12,7 @@
 
 CLASS TSMulti FROM TControl
 
-CLASSDATA lRegistered AS LOGICAL
+   CLASSDATA lRegistered AS LOGICAL
    DATA  Atx, lAppend , lChanged
    DATA  nPos
 

@@ -24,30 +24,30 @@ PROCEDURE Main()
          ON INIT InitWatch()
 
       DEFINE IMAGELIST ImageList_1 ;
-            OF Form_1 ;
-            BUTTONSIZE 32, 48  ;
-            IMAGE {'Nums.bmp'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 12 ;
-            MASK
+         OF Form_1 ;
+         BUTTONSIZE 32, 48  ;
+         IMAGE {'Nums.bmp'} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 12 ;
+         MASK
 
-         @ 0,0 IMAGE Image_1 PICTURE "Dat1.bmp" WIDTH 200 HEIGHT 64
+      @ 0,0 IMAGE Image_1 PICTURE "Dat1.bmp" WIDTH 200 HEIGHT 64
 
-         DEFINE TIMER Timer_1 ;
-            INTERVAL 2000 ;
-            ACTION ( DrawNums( TIME() ), ProcessMessages() )
+      DEFINE TIMER Timer_1 ;
+         INTERVAL 2000 ;
+         ACTION ( DrawNums( TIME() ), ProcessMessages() )
 
-         DEFINE TIMER Timer_2 ;
-            INTERVAL 1000 ;
-            ACTION DrawDefis()
+      DEFINE TIMER Timer_2 ;
+         INTERVAL 1000 ;
+         ACTION DrawDefis()
 
-         ON KEY ESCAPE ACTION Form_1.Release
+      ON KEY ESCAPE ACTION Form_1.Release
 
-      END WINDOW
+   END WINDOW
 
-      Form_1.Activate
+   Form_1.Activate
 
-      RETURN
+   RETURN
 
 PROCEDURE InitWatch()
 

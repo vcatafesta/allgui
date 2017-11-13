@@ -21,7 +21,7 @@ FUNCTION crec()
          nosize
 
       * botões (toolbar)
-      DEFINE BUTTONex button_incluir_2
+      DEFINE BUTTONEX button_incluir_2
          picture path_imagens+'incluir.bmp'
          col 005
          row 002
@@ -38,7 +38,7 @@ FUNCTION crec()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_alterar_2
+      DEFINE BUTTONEX button_alterar_2
          picture path_imagens+'alterar.bmp'
          col 107
          row 002
@@ -55,7 +55,7 @@ FUNCTION crec()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_excluir_2
+      DEFINE BUTTONEX button_excluir_2
          picture path_imagens+'excluir.bmp'
          col 209
          row 002
@@ -72,7 +72,7 @@ FUNCTION crec()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_atualizar_2
+      DEFINE BUTTONEX button_atualizar_2
          picture path_imagens+'atualizar.bmp'
          col 311
          row 002
@@ -89,7 +89,7 @@ FUNCTION crec()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_sair_2
+      DEFINE BUTTONEX button_sair_2
          picture path_imagens+'sair.bmp'
          col 413
          row 002
@@ -372,7 +372,7 @@ STATIC FUNCTION dados_crec(parametro)
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_dados.width-225
          row form_dados.height-085
@@ -385,7 +385,7 @@ STATIC FUNCTION dados_crec(parametro)
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
          row form_dados.height-085

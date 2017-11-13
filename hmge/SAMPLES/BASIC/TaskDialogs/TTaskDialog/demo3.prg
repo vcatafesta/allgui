@@ -125,11 +125,11 @@ PROCEDURE main()
       :ShowDialog()
 
       cMsg := If( :TimedOut() .AND. ! :lUserActivity, "Time out!", "Selected button #" + hb_NtoS( :SelectedButton() ) )
-   ENDWITH
+      ENDWITH
 
-   MsgInfo( cMsg, "Info" )
+      MsgInfo( cMsg, "Info" )
 
-   RETURN
+      RETURN
 
 FUNCTION CreateTimedDialog()
 
@@ -149,9 +149,9 @@ FUNCTION CreateTimedDialog()
 
       :EnableHyperlinks  := .T.
 
-   ENDWITH
+      ENDWITH
 
-   RETURN oDialog
+      RETURN oDialog
 
 #pragma BEGINDUMP
 

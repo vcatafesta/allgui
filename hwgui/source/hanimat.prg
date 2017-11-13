@@ -12,24 +12,33 @@
 
 CLASS HAnimation INHERIT HControl
 
-   CLASS VAR winclass   INIT "SysAnimate32"
+CLASS VAR winclass   INIT "SysAnimate32"
 
    DATA cFileName
    DATA xResID
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cFilename, lAutoPlay, lCenter, lTransparent, xResID )
-   METHOD Activate()
-   METHOD Init()
-   METHOD Open( cFileName )
-   METHOD Play( nFrom, nTo, nRep )
-   METHOD Seek( nFrame )
-   METHOD Stop()
-   METHOD Close()
-   METHOD Destroy()
-   METHOD End() INLINE ::Destroy()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cFilename, lAutoPlay, lCenter, lTransparent, xResID )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD Open( cFileName )
+
+METHOD Play( nFrom, nTo, nRep )
+
+METHOD Seek( nFrame )
+
+METHOD Stop()
+
+METHOD Close()
+
+METHOD Destroy()
+
+METHOD End() INLINE ::Destroy()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cFilename, lAutoPlay, lCenter, lTransparent, xResID ) CLASS HAnimation

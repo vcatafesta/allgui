@@ -219,46 +219,46 @@ FUNCTION EditDan(aHead,aFld,aWidth)
 
             DEFINE SPLITBOX
                DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Save'
-                  BUTTON saveItem PICTURE "save" ACTION SaveDan(aFld) TOOLTIP "Save date"  SEPARATOR
-                  BUTTON exititem PICTURE "exit2" ACTION thiswindow.release TOOLTIP "Exit"
-               END TOOLBAR
-            END SPLITBOX
+               BUTTON saveItem PICTURE "save" ACTION SaveDan(aFld) TOOLTIP "Save date"  SEPARATOR
+               BUTTON exititem PICTURE "exit2" ACTION thiswindow.release TOOLTIP "Exit"
+            END TOOLBAR
+         END SPLITBOX
 
-            @ 50,20  FRAME Frame_2 CAPTION "Fields" WIDTH 120 HEIGHT 30*Len(aHead)+30
+         @ 50,20  FRAME Frame_2 CAPTION "Fields" WIDTH 120 HEIGHT 30*Len(aHead)+30
 
-            FOR n:=1 TO Len(aHead)
-               cLbl := "Lbl_"+AllTrim(Str(n))
-               cGBox:= "GBox_"+AllTrim(Str(n))
-               cValue:="EMPLOYEE->"+aFld[n]
-
-               @ 50+n*30,30 LABEL &cLbl ;
-                  VALUE aHead[n] ;
-                  AUTO
-
-               @ 50+n*30,160 GETBOX &cGBox ;
-                  HEIGHT 24 WIDTH aWidth[n];
-                  VALUE &cValue ;
-                  FONT "Arial" SIZE 9
-            NEXT
-
-         END WINDOW
-
-         Form_Ed.Activate
-
-      ELSE
          FOR n:=1 TO Len(aHead)
-            cValue:="EMPLOYEE->"+aFld[n]
+            cLbl := "Lbl_"+AllTrim(Str(n))
             cGBox:= "GBox_"+AllTrim(Str(n))
-            SetProperty("Form_Ed",cGBox,'Value',&cValue)
+            cValue:="EMPLOYEE->"+aFld[n]
+
+            @ 50+n*30,30 LABEL &cLbl ;
+               VALUE aHead[n] ;
+               AUTO
+
+            @ 50+n*30,160 GETBOX &cGBox ;
+               HEIGHT 24 WIDTH aWidth[n];
+               VALUE &cValue ;
+               FONT "Arial" SIZE 9
          NEXT
 
-         RESTORE WINDOW Form_Ed
+      END WINDOW
 
-      ENDIF
+      Form_Ed.Activate
+
+   ELSE
+      FOR n:=1 TO Len(aHead)
+         cValue:="EMPLOYEE->"+aFld[n]
+         cGBox:= "GBox_"+AllTrim(Str(n))
+         SetProperty("Form_Ed",cGBox,'Value',&cValue)
+      NEXT
+
+      RESTORE WINDOW Form_Ed
 
    ENDIF
 
-   RETURN NIL
+ENDIF
+
+RETURN NIL
 
 FUNCTION SaveDan(aFld)
 
@@ -313,148 +313,148 @@ FUNCTION ViewState(met,nVer)
             ON RELEASE CloseTable()
 
          DEFINE IMAGELIST Im_edit ;
-               BUTTONSIZE 26 , 26  ;
-               IMAGE {'edit'} ;
-               COLORMASK CLR_DEFAULT;
-               IMAGECOUNT 5;
-               MASK
+            BUTTONSIZE 26 , 26  ;
+            IMAGE {'edit'} ;
+            COLORMASK CLR_DEFAULT;
+            IMAGECOUNT 5;
+            MASK
 
-            DEFINE IMAGELIST im_navi ;
-                  BUTTONSIZE 20 , 20  ;
-                  IMAGE {'navi2'} ;
-                  COLORMASK CLR_DEFAULT;
-                  IMAGECOUNT 6;
-                  MASK
+         DEFINE IMAGELIST im_navi ;
+            BUTTONSIZE 20 , 20  ;
+            IMAGE {'navi2'} ;
+            COLORMASK CLR_DEFAULT;
+            IMAGECOUNT 6;
+            MASK
 
-               DEFINE SPLITBOX
+         DEFINE SPLITBOX
 
-                  DEFINE TOOLBAREX Tb_Edit BUTTONSIZE 26,26 IMAGELIST "im_edit" FLAT CAPTION 'Edition'
+            DEFINE TOOLBAREX Tb_Edit BUTTONSIZE 26,26 IMAGELIST "im_edit" FLAT CAPTION 'Edition'
 
-                     BUTTON Button_2 PICTUREINDEX 2 TOOLTIP 'Edit record' ACTION {||EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON Button_3 PICTUREINDEX 3 TOOLTIP 'Add record' ACTION MsgInfo('Click!')
-                     BUTTON Button_4 PICTUREINDEX 1 TOOLTIP 'Delete record' ACTION MsgInfo('Click!') SEPARATOR
+            BUTTON Button_2 PICTUREINDEX 2 TOOLTIP 'Edit record' ACTION {||EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1)}
+            BUTTON Button_3 PICTUREINDEX 3 TOOLTIP 'Add record' ACTION MsgInfo('Click!')
+            BUTTON Button_4 PICTUREINDEX 1 TOOLTIP 'Delete record' ACTION MsgInfo('Click!') SEPARATOR
 
-                  END TOOLBAR
+         END TOOLBAR
 
-                  DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
+         DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
 
-                     BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||TbMove(1, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||TbMove(2, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record"  ACTION {||TbMove(3, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||TbMove(4, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"  ACTION {||TbMove(5, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
-                     BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table" ACTION {||TbMove(6, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||TbMove(1, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||TbMove(2, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record"  ACTION {||TbMove(3, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||TbMove(4, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"  ACTION {||TbMove(5, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
+         BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table" ACTION {||TbMove(6, Brw_1), Refresh_Win("Form_Gr", Brw_1)}
 
-                  END TOOLBAR
+      END TOOLBAR
 
-                  DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
-                     BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_Gr") TOOLTIP "Exit"
-                  END TOOLBAR
+      DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
+      BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_Gr") TOOLTIP "Exit"
+   END TOOLBAR
 
-               END SPLITBOX
+END SPLITBOX
 
-               SetProperty("Form_Gr","Button_3","Enabled",.f.)
-               SetProperty("Form_Gr","Button_4","Enabled",.f.)
+SetProperty("Form_Gr","Button_3","Enabled",.f.)
+SetProperty("Form_Gr","Button_4","Enabled",.f.)
 
-               aHead := { 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' }
-               aWidth:= { 110 , 150 ,150, 150, 50, 80,50,80, 200 }
-               aFld  := {'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' }
+aHead := { 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' }
+aWidth:= { 110 , 150 ,150, 150, 50, 80,50,80, 200 }
+aFld  := {'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' }
 
-               DBGoTo(nRec)
+DBGoTo(nRec)
 
-               DO CASE
+DO CASE
 
-               CASE nVer == 1
+CASE nVer == 1
 
-                  DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
-                     WIDTH 710   ;
-                     HEIGHT 390   ;
-                     HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-                     WIDTHS  110 , 150 ,150, 150,50, 80, 50, 80, 200 ;
-                     FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
-                     ENUMERATOR ;
-                     VALUE nRec;
-                     ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
-                     ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
-               END TBROWSE
+   DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
+      WIDTH 710   ;
+      HEIGHT 390   ;
+      HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+      WIDTHS  110 , 150 ,150, 150,50, 80, 50, 80, 200 ;
+      FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
+      ENUMERATOR ;
+      VALUE nRec;
+      ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
+      ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
+END TBROWSE
 
-            CASE nVer == 2
+CASE nVer == 2
 
-               DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
-                  WIDTH 710   ;
-                  HEIGHT 390   ;
-                  HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-                  WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-                  FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
-                  AUTOSEARCH  ;
-                  CELLED EDIT;
-                  VALUE nRec;
-                  ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
-                  ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
+DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
+   WIDTH 710   ;
+   HEIGHT 390   ;
+   HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+   WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+   FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
+   AUTOSEARCH  ;
+   CELLED EDIT;
+   VALUE nRec;
+   ON CHANGE Refresh_Win("Form_Gr",Brw_1) ;
+   ON DBLCLICK  (EditDan(aHead,aFld,aWidth), Refresh_Win("Form_Gr", Brw_1))
 
-               :aColumns[ 1 ]:lEdit := .t.
-               :aColumns[ 3 ]:lEditSpec := .F.
+:aColumns[ 1 ]:lEdit := .t.
+:aColumns[ 3 ]:lEditSpec := .F.
 
-            END TBROWSE
+END TBROWSE
 
-         CASE nVer == 3
+CASE nVer == 3
 
-            IF met== 2
+IF met== 2
 
-               DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
-                  WIDTH 710   ;
-                  HEIGHT 390   ;
-                  HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-                  WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-                  FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
-                  AUTOFILTER USERFILTER {|x,y,z| SetFlt(x,y,z) } ;
-                  CELLED EDIT;
-                  VALUE nRec;
-                  ON CHANGE Refresh_Win("Form_Gr",Brw_1)
+   DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
+      WIDTH 710   ;
+      HEIGHT 390   ;
+      HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+      WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+      FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
+      AUTOFILTER USERFILTER {|x,y,z| SetFlt(x,y,z) } ;
+      CELLED EDIT;
+      VALUE nRec;
+      ON CHANGE Refresh_Win("Form_Gr",Brw_1)
 
-            END TBROWSE
+END TBROWSE
 
-         ELSE
+ELSE
 
-            DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
-               WIDTH 710   ;
-               HEIGHT 390   ;
-               HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-               WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-               FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
-               AUTOFILTER  ;
-               CELLED EDIT;
-               VALUE nRec;
-               ON CHANGE Refresh_Win("Form_Gr",Brw_1)
+DEFINE TBROWSE Brw_1 AT 50,10 ALIAS 'EMPLOYEE' ;
+   WIDTH 710   ;
+   HEIGHT 390   ;
+   HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+   WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+   FIELDS EMPLOYEE->First , EMPLOYEE->Last, EMPLOYEE->Street, EMPLOYEE->City,EMPLOYEE->State, EMPLOYEE->Zip,EMPLOYEE->Age,EMPLOYEE->Salary, EMPLOYEE->Notes ;
+   AUTOFILTER  ;
+   CELLED EDIT;
+   VALUE nRec;
+   ON CHANGE Refresh_Win("Form_Gr",Brw_1)
 
-         END TBROWSE
+END TBROWSE
 
-      ENDIF
+ENDIF
 
-   ENDCASE
+ENDCASE
 
-   Brw_1:nHeightHead += 5
+Brw_1:nHeightHead += 5
 
-   Brw_1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
-      { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
-      { CLR_HBLUE, CLR_BLUE }, ;     // degraded cursor background color
-   CLR_HGREEN, CLR_BLACK } )      // text colors
-   Brw_1:SetColor( { 2, 4, 14 }, ;
-      { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-   { CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
-   { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
+Brw_1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
+   { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
+   { CLR_HBLUE, CLR_BLUE }, ;     // degraded cursor background color
+CLR_HGREEN, CLR_BLACK } )      // text colors
+Brw_1:SetColor( { 2, 4, 14 }, ;
+   { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
+{ CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
+{ CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
 
-   Brw_1:nLineStyle := LINES_VERT
-   Brw_1:aColumns[ 1 ]:cOrder := "FIRST"
-   Brw_1:aColumns[ 4 ]:cOrder := "CITY"
-   Brw_1:SetAppendMode( .T. )
-   Brw_1:SetIndexCols( 1, 2 )
+Brw_1:nLineStyle := LINES_VERT
+Brw_1:aColumns[ 1 ]:cOrder := "FIRST"
+Brw_1:aColumns[ 4 ]:cOrder := "CITY"
+Brw_1:SetAppendMode( .T. )
+Brw_1:SetIndexCols( 1, 2 )
 
-   Brw_1:GoPos(nRec)
+Brw_1:GoPos(nRec)
 
-   cInfo := AllTrim(Str(recno()))+"/"+ AllTrim(Str(RecCount()))
-   @ 510, 520 LABEL Lbl_10a VALUE "Recno:" AUTO
-   @ 510, 620 LABEL Lbl_10b VALUE cInfo AUTO BOLD
+cInfo := AllTrim(Str(recno()))+"/"+ AllTrim(Str(RecCount()))
+@ 510, 520 LABEL Lbl_10a VALUE "Recno:" AUTO
+@ 510, 620 LABEL Lbl_10b VALUE cInfo AUTO BOLD
 
 END WINDOW
 
@@ -654,110 +654,110 @@ FUNCTION TsSQL (nVer)
             ON INIT {|| LoadTabSQL(Grid1,pDb) }
 
          DEFINE IMAGELIST im_navi ;
-               BUTTONSIZE 20 , 20  ;
-               IMAGE {'navi2'} ;
-               COLORMASK CLR_DEFAULT;
-               IMAGECOUNT 6;
-               MASK
+            BUTTONSIZE 20 , 20  ;
+            IMAGE {'navi2'} ;
+            COLORMASK CLR_DEFAULT;
+            IMAGECOUNT 6;
+            MASK
 
-            DEFINE SPLITBOX
+         DEFINE SPLITBOX
 
-               DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
+            DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
 
-                  BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||TbMove(1, Grid1)}
-                  BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||TbMove(2, Grid1)}
-                  BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record"  ACTION {||TbMove(3, Grid1)}
-                  BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||TbMove(4, Grid1)}
-                  BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"  ACTION {||TbMove(5, Grid1)}
-                  BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table" ACTION {||TbMove(6, Grid1)}
+            BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||TbMove(1, Grid1)}
+            BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||TbMove(2, Grid1)}
+            BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record"  ACTION {||TbMove(3, Grid1)}
+            BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||TbMove(4, Grid1)}
+            BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"  ACTION {||TbMove(5, Grid1)}
+            BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table" ACTION {||TbMove(6, Grid1)}
 
-               END TOOLBAR
+         END TOOLBAR
 
-               DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
-                  BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_SQL") TOOLTIP "Exit"
-               END TOOLBAR
+         DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
+         BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_SQL") TOOLTIP "Exit"
+      END TOOLBAR
 
-            END SPLITBOX
+   END SPLITBOX
 
-            DO CASE
+   DO CASE
 
-            CASE nVer == 1
+   CASE nVer == 1
 
-               DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
-                  WIDTH 710   ;
-                  HEIGHT 390   ;
-                  HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-                  WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-                  ENUMERATOR ;
-                  ON CHANGE Change_TsSql(pDb,Grid1);
+      DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+         WIDTH 710   ;
+         HEIGHT 390   ;
+         HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+         WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+         ENUMERATOR ;
+         ON CHANGE Change_TsSql(pDb,Grid1);
 
-            END TBROWSE
+   END TBROWSE
 
-         CASE nVer == 2
+CASE nVer == 2
 
-            DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
-               WIDTH 710   ;
-               HEIGHT 390   ;
-               HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-               WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-               AUTOSEARCH  ;
-               CELLED EDIT;
-               ON CHANGE Change_TsSql(pDb,Grid1);
+   DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+      WIDTH 710   ;
+      HEIGHT 390   ;
+      HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+      WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+      AUTOSEARCH  ;
+      CELLED EDIT;
+      ON CHANGE Change_TsSql(pDb,Grid1);
 
-            :aColumns[ 3 ]:lEditSpec := .F.
-            :aColumns[ 6 ]:lEditSpec := .F.
-            :aColumns[ 7 ]:lEditSpec := .F.
-            :aColumns[ 8 ]:lEditSpec := .F.
-            :aColumns[ 9 ]:lEditSpec := .F.
+   :aColumns[ 3 ]:lEditSpec := .F.
+   :aColumns[ 6 ]:lEditSpec := .F.
+   :aColumns[ 7 ]:lEditSpec := .F.
+   :aColumns[ 8 ]:lEditSpec := .F.
+   :aColumns[ 9 ]:lEditSpec := .F.
 
-         END TBROWSE
+END TBROWSE
 
-      CASE nVer == 3
+CASE nVer == 3
 
-         DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
-            WIDTH 710   ;
-            HEIGHT 390   ;
-            HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
-            WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
-            AUTOFILTER USERFILTER {|x,y,z| SetFltSQL(x,y,z) } ;
-            CELLED EDIT;
-            ON CHANGE Change_TsSql(pDb,Grid1);
+DEFINE TBROWSE Grid1 AT 50,10  ARRAY aTab;
+   WIDTH 710   ;
+   HEIGHT 390   ;
+   HEADERS 'First' , 'Last', 'Street', 'City','State', 'Zip','Age','Salary', 'Notes' ;
+   WIDTHS  110 , 150 ,150, 150,50, 80,50,80, 200 ;
+   AUTOFILTER USERFILTER {|x,y,z| SetFltSQL(x,y,z) } ;
+   CELLED EDIT;
+   ON CHANGE Change_TsSql(pDb,Grid1);
 
-         :aColumns[ 3 ]:lEditSpec := .F.
-         :aColumns[ 6 ]:lEditSpec := .F.
-         :aColumns[ 7 ]:lEditSpec := .F.
-         :aColumns[ 8 ]:lEditSpec := .F.
-         :aColumns[ 9 ]:lEditSpec := .F.
+:aColumns[ 3 ]:lEditSpec := .F.
+:aColumns[ 6 ]:lEditSpec := .F.
+:aColumns[ 7 ]:lEditSpec := .F.
+:aColumns[ 8 ]:lEditSpec := .F.
+:aColumns[ 9 ]:lEditSpec := .F.
 
-      END TBROWSE
+END TBROWSE
 
-      @ 450, 20 LABEL Lb1 VALUE "Note:" BOLD
+@ 450, 20 LABEL Lb1 VALUE "Note:" BOLD
 
-      @ 470, 40 LABEL Lb2 VALUE "Try filtering on any piece of text, for example enter '%OO' in SpecHader of Colunm 'Last' " ;
-         WIDTH 500 HEIGHT 40
+@ 470, 40 LABEL Lb2 VALUE "Try filtering on any piece of text, for example enter '%OO' in SpecHader of Colunm 'Last' " ;
+   WIDTH 500 HEIGHT 40
 
-   ENDCASE
+ENDCASE
 
-   Grid1:nHeightHead += 5
+Grid1:nHeightHead += 5
 
-   Grid1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
-      { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
-      { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-   CLR_HGREEN, CLR_BLACK } )  // text colors
-   Grid1:SetColor( { 2, 4, 14 }, ;
-      { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-   { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
-   { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
+Grid1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
+   { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
+   { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
+CLR_HGREEN, CLR_BLACK } )  // text colors
+Grid1:SetColor( { 2, 4, 14 }, ;
+   { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
+{ CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
+{ CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
 
-   Grid1:nLineStyle := LINES_VERT
-   Grid1:SetAppendMode( .T. )
-   Grid1:SetDeleteMode( .T., .F.)   // Activate Key DEL and confirm
+Grid1:nLineStyle := LINES_VERT
+Grid1:SetAppendMode( .T. )
+Grid1:SetDeleteMode( .T., .F.)   // Activate Key DEL and confirm
 
-   FOR n:=1 TO 5
-      Grid1:acolumns[n]:lEdit:=.T.
-      Grid1:aColumns[n]:bPrevEdit := { || nEditRec := Grid1:nAt  }
-      Grid1:aColumns[n]:bPostEdit := { || lChangeRecSql := IF(Grid1:lChanged, .t., lChangeRecSql ) }
-   NEXT
+FOR n:=1 TO 5
+   Grid1:acolumns[n]:lEdit:=.T.
+   Grid1:aColumns[n]:bPrevEdit := { || nEditRec := Grid1:nAt  }
+   Grid1:aColumns[n]:bPostEdit := { || lChangeRecSql := IF(Grid1:lChanged, .t., lChangeRecSql ) }
+NEXT
 
 END WINDOW
 

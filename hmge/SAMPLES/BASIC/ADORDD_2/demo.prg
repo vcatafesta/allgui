@@ -174,95 +174,95 @@ FUNCTION ViewState(title,cState,nRec)
             ON RELEASE DelFlt()
 
          DEFINE IMAGELIST Im_edit ;
-               BUTTONSIZE 26 , 26  ;
-               IMAGE {'edit'} ;
-               COLORMASK CLR_DEFAULT;
-               IMAGECOUNT 5;
-               MASK
+            BUTTONSIZE 26 , 26  ;
+            IMAGE {'edit'} ;
+            COLORMASK CLR_DEFAULT;
+            IMAGECOUNT 5;
+            MASK
 
-            DEFINE IMAGELIST im_navi ;
-                  BUTTONSIZE 20 , 20  ;
-                  IMAGE {'navi2'} ;
-                  COLORMASK CLR_DEFAULT;
-                  IMAGECOUNT 6;
-                  MASK
+         DEFINE IMAGELIST im_navi ;
+            BUTTONSIZE 20 , 20  ;
+            IMAGE {'navi2'} ;
+            COLORMASK CLR_DEFAULT;
+            IMAGECOUNT 6;
+            MASK
 
-               DEFINE SPLITBOX
-                  DEFINE TOOLBAREX Tb_Edit BUTTONSIZE 26,26 IMAGELIST "im_edit" FLAT CAPTION 'Edition'
+         DEFINE SPLITBOX
+            DEFINE TOOLBAREX Tb_Edit BUTTONSIZE 26,26 IMAGELIST "im_edit" FLAT CAPTION 'Edition'
 
-                     BUTTON Button_2 PICTUREINDEX 2 TOOLTIP 'Edit record' ACTION {||EditDan(aHead,aFld,aWidth,aItemState), Refresh_Win("Form_Gr")}
-                     BUTTON Button_3 PICTUREINDEX 3 TOOLTIP 'Add record' ACTION MsgInfo('Click!')
-                     BUTTON Button_4 PICTUREINDEX 1 TOOLTIP 'Delete record' ACTION MsgInfo('Click!') SEPARATOR
-                  END TOOLBAR
+            BUTTON Button_2 PICTUREINDEX 2 TOOLTIP 'Edit record' ACTION {||EditDan(aHead,aFld,aWidth,aItemState), Refresh_Win("Form_Gr")}
+            BUTTON Button_3 PICTUREINDEX 3 TOOLTIP 'Add record' ACTION MsgInfo('Click!')
+            BUTTON Button_4 PICTUREINDEX 1 TOOLTIP 'Delete record' ACTION MsgInfo('Click!') SEPARATOR
+         END TOOLBAR
 
-                  DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
+         DEFINE TOOLBAREX Tb_Navi BUTTONSIZE 20,20 IMAGELIST "im_navi" FLAT CAPTION 'Navigations'
 
-                     BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||BrMove(1), Refresh_Win("Form_Gr")}
-                     BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||BrMove(2), Refresh_Win("Form_Gr")}
-                     BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record" ACTION {||BrMove(3), Refresh_Win("Form_Gr")}
-                     BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||BrMove(4), Refresh_Win("Form_Gr")}
-                     BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"   ACTION {||BrMove(5), Refresh_Win("Form_Gr")}
-                     BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table"      ACTION {||BrMove(6), Refresh_Win("Form_Gr")}
-                  END TOOLBAR
+         BUTTON top  PICTUREINDEX 0 TOOLTIP "Top Table"    ACTION {||BrMove(1), Refresh_Win("Form_Gr")}
+         BUTTON prve PICTUREINDEX 1 TOOLTIP "Prev Screen"  ACTION {||BrMove(2), Refresh_Win("Form_Gr")}
+         BUTTON prev PICTUREINDEX 2 TOOLTIP "Prev Record" ACTION {||BrMove(3), Refresh_Win("Form_Gr")}
+         BUTTON next PICTUREINDEX 3 TOOLTIP "Next Record"  ACTION {||BrMove(4), Refresh_Win("Form_Gr")}
+         BUTTON nxte PICTUREINDEX 4 TOOLTIP "Next Screen"   ACTION {||BrMove(5), Refresh_Win("Form_Gr")}
+         BUTTON bott PICTUREINDEX 5 TOOLTIP "Botton Table"      ACTION {||BrMove(6), Refresh_Win("Form_Gr")}
+      END TOOLBAR
 
-                  DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
-                     BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_Gr") TOOLTIP "Exit"
-                  END TOOLBAR
+      DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Exit'
+      BUTTON Exit PICTURE "exit2" ACTION Release_Brw1("Form_Gr") TOOLTIP "Exit"
+   END TOOLBAR
 
-               END SPLITBOX
+END SPLITBOX
 
-               SetProperty("Form_Gr","Button_3","Enabled",.f.)
-               SetProperty("Form_Gr","Button_4","Enabled",.f.)
+SetProperty("Form_Gr","Button_3","Enabled",.f.)
+SetProperty("Form_Gr","Button_4","Enabled",.f.)
 
-               aHead := { 'First' , 'Last', 'Street', 'City', 'Zip','Age','Salary', 'Notes' }
-               aWidth:= { 110 , 150 ,150, 150, 80,50,80, 200 }
-               aFld  := {'First' , 'Last', 'Street', 'City', 'Zip','Age','Salary', 'Notes' }
+aHead := { 'First' , 'Last', 'Street', 'City', 'Zip','Age','Salary', 'Notes' }
+aWidth:= { 110 , 150 ,150, 150, 80,50,80, 200 }
+aFld  := {'First' , 'Last', 'Street', 'City', 'Zip','Age','Salary', 'Notes' }
 
-               IF RecCount() > 0
-                  WHILE  !eof()
-                     aRow:={}
-                     FOR n:= 1 to len(aFld)
-                        dan:= fieldget(FieldPos(aFld[n]))
-                        dan:= IF(ValType(dan)=='N',Str(dan,6),dan)
-                        aadd(aRow,dan)
-                     NEXT
-                     aadd(aItemState, aRow)
-                     DBSkip(1)
-                  ENDDO
-                  aItemState := SortCol(1,aItemState)
-               ELSE
-                  aadd(aItemState, {Space(20),Space(20),Space(30),Space(30),Space(10),Space(2),Space(6),Space(70)})
-               ENDIF
-               IF nRec != 0
-                  IF (nPos:=AScan(aItemState,{|x,y| AllTrim(x[1]) == AllTrim(cPos) })) != 0
-                     nRec:= nPos
-                  ENDIF
-               ENDIF
+IF RecCount() > 0
+   WHILE  !eof()
+      aRow:={}
+      FOR n:= 1 to len(aFld)
+         dan:= fieldget(FieldPos(aFld[n]))
+         dan:= IF(ValType(dan)=='N',Str(dan,6),dan)
+         aadd(aRow,dan)
+      NEXT
+      aadd(aItemState, aRow)
+      DBSkip(1)
+   ENDDO
+   aItemState := SortCol(1,aItemState)
+ELSE
+   aadd(aItemState, {Space(20),Space(20),Space(30),Space(30),Space(10),Space(2),Space(6),Space(70)})
+ENDIF
+IF nRec != 0
+   IF (nPos:=AScan(aItemState,{|x,y| AllTrim(x[1]) == AllTrim(cPos) })) != 0
+      nRec:= nPos
+   ENDIF
+ENDIF
 
-               @ 50,10 GRID Brw_1;
-                  WIDTH 710 ;
-                  HEIGHT 390;
-                  HEADERS aHead ;
-                  WIDTHS aWidth ;
-                  ITEMS aItemState;
-                  VALUE nRec;
-                  ON CHANGE Refresh_Win("Form_Gr") ;
-                  ON HEADCLICK {{||SortCol(1,aItemState)},{||  SortCol(2,aItemState)},{|| SortCol(3,aItemState)},{|| SortCol(4,aItemState)},{|| SortCol(5,aItemState)},{|| SortCol(6,aItemState)},{|| SortCol(7,aItemState)},{|| SortCol(8,aItemState)}} ;
-                  ON DBLCLICK  {||EditDan(aHead,aFld,aWidth,aItemState), Refresh_Win("Form_Gr")} ;
-                  ON GOTFOCUS  _GridScrollToPos ( "Brw_1" , "Form_Gr" )
+@ 50,10 GRID Brw_1;
+   WIDTH 710 ;
+   HEIGHT 390;
+   HEADERS aHead ;
+   WIDTHS aWidth ;
+   ITEMS aItemState;
+   VALUE nRec;
+   ON CHANGE Refresh_Win("Form_Gr") ;
+   ON HEADCLICK {{||SortCol(1,aItemState)},{||  SortCol(2,aItemState)},{|| SortCol(3,aItemState)},{|| SortCol(4,aItemState)},{|| SortCol(5,aItemState)},{|| SortCol(6,aItemState)},{|| SortCol(7,aItemState)},{|| SortCol(8,aItemState)}} ;
+   ON DBLCLICK  {||EditDan(aHead,aFld,aWidth,aItemState), Refresh_Win("Form_Gr")} ;
+   ON GOTFOCUS  _GridScrollToPos ( "Brw_1" , "Form_Gr" )
 
-               cInfo :=AllTrim(Str(GetProperty("Form_Gr","Brw_1","Value")))+'/'+ AllTrim(Str(recno()))
-               @ 510, 520 LABEL Lbl_10a VALUE "Row/Recno:" AUTO
-               @ 510, 620 LABEL Lbl_10b VALUE cInfo AUTO BOLD
+cInfo :=AllTrim(Str(GetProperty("Form_Gr","Brw_1","Value")))+'/'+ AllTrim(Str(recno()))
+@ 510, 520 LABEL Lbl_10a VALUE "Row/Recno:" AUTO
+@ 510, 620 LABEL Lbl_10b VALUE cInfo AUTO BOLD
 
-            END WINDOW
+END WINDOW
 
-            ACTIVATE WINDOW Form_Gr
-         ELSE
-            RESTORE WINDOW Form_Gr
-         ENDIF
+ACTIVATE WINDOW Form_Gr
+ELSE
+RESTORE WINDOW Form_Gr
+ENDIF
 
-         RETURN NIL
+RETURN NIL
 
 FUNCTION SetFlt(cState,nRec)
 
@@ -368,41 +368,41 @@ FUNCTION EditDan(aHead,aFld,aWidth,aItemState)
 
             DEFINE SPLITBOX
                DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 FONT "Arial" SIZE 9 FLAT CAPTION 'Save'
-                  BUTTON saveItem PICTURE "save" ACTION SaveDan(aFld,nPos,aItemState) TOOLTIP "Save date"  SEPARATOR
-                  BUTTON exititem PICTURE "exit2" ACTION thiswindow.release TOOLTIP "Exit"
-               END TOOLBAR
-            END SPLITBOX
+               BUTTON saveItem PICTURE "save" ACTION SaveDan(aFld,nPos,aItemState) TOOLTIP "Save date"  SEPARATOR
+               BUTTON exititem PICTURE "exit2" ACTION thiswindow.release TOOLTIP "Exit"
+            END TOOLBAR
+         END SPLITBOX
 
-            @ 50,20  FRAME Frame_2 CAPTION "Fields" WIDTH 120 HEIGHT 30*Len(aHead)+30
+         @ 50,20  FRAME Frame_2 CAPTION "Fields" WIDTH 120 HEIGHT 30*Len(aHead)+30
 
-            FOR n:=1 TO Len(aHead)
-               cLbl := "Lbl_"+AllTrim(Str(n))
-               cGBox:= "GBox_"+AllTrim(Str(n))
-               cValue:="EMPLOYEE->"+aFld[n]
-
-               @ 50+n*30,30 LABEL &cLbl ;
-                  VALUE aHead[n] ;
-                  AUTO
-
-               @  50+n*30,160 GETBOX &cGBox ;
-                  HEIGHT 24 WIDTH aWidth[n];
-                  VALUE &cValue ;
-                  FONT "Arial" SIZE 9
-            NEXT
-         END WINDOW
-
-         Form_Ed.Activate
-      ELSE
          FOR n:=1 TO Len(aHead)
-            cValue:="EMPLOYEE->"+aFld[n]
+            cLbl := "Lbl_"+AllTrim(Str(n))
             cGBox:= "GBox_"+AllTrim(Str(n))
-            SetProperty("Form_Ed",cGBox,'Value',&cValue)
-         NEXT
-         RESTORE WINDOW Form_Ed
-      ENDIF
-   ENDIF
+            cValue:="EMPLOYEE->"+aFld[n]
 
-   RETURN NIL
+            @ 50+n*30,30 LABEL &cLbl ;
+               VALUE aHead[n] ;
+               AUTO
+
+            @  50+n*30,160 GETBOX &cGBox ;
+               HEIGHT 24 WIDTH aWidth[n];
+               VALUE &cValue ;
+               FONT "Arial" SIZE 9
+         NEXT
+      END WINDOW
+
+      Form_Ed.Activate
+   ELSE
+      FOR n:=1 TO Len(aHead)
+         cValue:="EMPLOYEE->"+aFld[n]
+         cGBox:= "GBox_"+AllTrim(Str(n))
+         SetProperty("Form_Ed",cGBox,'Value',&cValue)
+      NEXT
+      RESTORE WINDOW Form_Ed
+   ENDIF
+ENDIF
+
+RETURN NIL
 
 FUNCTION SaveDan(aFld,nPos,aItemState)
 

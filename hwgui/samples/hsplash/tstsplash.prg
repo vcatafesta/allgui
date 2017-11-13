@@ -11,12 +11,12 @@ FUNCTION Main
 
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION oMainWindow:Close()
-ENDMENU
+   ENDMENU
 
-//oSplash := HSplash():Create( "Hwgui.bmp",2000)
-SPLASH oSplash TO "hwgui.bmp" TIME 2000
+   //oSplash := HSplash():Create( "Hwgui.bmp",2000)
+   SPLASH oSplash TO "hwgui.bmp" TIME 2000
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 

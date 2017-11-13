@@ -202,17 +202,17 @@ STATIC PROCEDURE ShowFile
 
    FI_WinDraw( nHandleFileImg, hDC, nTop, nLeft, nBottom, nRight )
 
-EndPaint( Application.Handle, pps )
-ReleaseDC( Application.Handle, hDC )
+   EndPaint( Application.Handle, pps )
+   ReleaseDC( Application.Handle, hDC )
 
-RETURN
+   RETURN
 
-****** End of ShowFile ******
+   ****** End of ShowFile ******
 
-/******
-*       OpenImgRes( cRes, cType )
-*       Загрузка рисунка из ресурса
-*/
+   /******
+   *       OpenImgRes( cRes, cType )
+   *       Загрузка рисунка из ресурса
+   */
 
 STATIC PROCEDURE OpenImgRes( cRes, cType )
 
@@ -299,10 +299,10 @@ STATIC PROCEDURE ShowRes
 
    FI_WinDraw( nHandleResImg, hDC, nTop, nLeft, nBottom, nRight )
 
-EndPaint( Application.Handle, pps )
-ReleaseDC( Application.Handle, hDC )
+   EndPaint( Application.Handle, pps )
+   ReleaseDC( Application.Handle, hDC )
 
-RETURN
+   RETURN
 
-****** End of ShowRes ******
+   ****** End of ShowRes ******
 

@@ -46,48 +46,48 @@ FUNCTION Main
    SEPARATOR
    MENUITEM "&Exit"+Chr(9)+"Alt+x" ACTION hwg_EndWindow() ;
       ACCELERATOR FALT,Asc("X")
-ENDMENU
-MENU TITLE "&View"
-MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
-MENUITEM "Zoom &out" ACTION Zoom( oMainWindow,1 )
-MENUITEM "Ori&ginal size" ACTION Zoom( oMainWindow,0 )
-ENDMENU
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION hwg_Msginfo("About")
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "&View"
+   MENUITEM "Zoom &in" ACTION Zoom( oMainWindow,-1 )
+   MENUITEM "Zoom &out" ACTION Zoom( oMainWindow,1 )
+   MENUITEM "Ori&ginal size" ACTION Zoom( oMainWindow,0 )
+   ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION hwg_Msginfo("About")
+   ENDMENU
+   ENDMENU
 
-@ 0,0 PANEL oToolBar SIZE oMainWindow:nWidth,28 ;
-   ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,o:nHeight)}
+   @ 0,0 PANEL oToolBar SIZE oMainWindow:nWidth,28 ;
+      ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,o:nHeight)}
 
-@ 2,2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
-   SIZE 24,24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
-   TOOLTIP "Open file"
-@ 26,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,1 )} ;
-   SIZE 24,24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
-   TOOLTIP "Zoom out"
-@ 50,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,-1)} ;
-   SIZE 24,24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
-   TOOLTIP "Zoom in"
-@ 74,2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
-   SIZE 24,24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
-   TOOLTIP "Info"
+   @ 2,2 OWNERBUTTON OF oToolBar ON CLICK {||FileOpen(oMainWindow)} ;
+      SIZE 24,24 BITMAP "BMP_OPEN" FROM RESOURCE FLAT             ;
+      TOOLTIP "Open file"
+   @ 26,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,1 )} ;
+      SIZE 24,24 BITMAP "BMP_ZOUT" FROM RESOURCE FLAT              ;
+      TOOLTIP "Zoom out"
+   @ 50,2 OWNERBUTTON OF oToolBar ON CLICK {||Zoom( oMainWindow,-1)} ;
+      SIZE 24,24 BITMAP "BMP_ZIN" FROM RESOURCE FLAT               ;
+      TOOLTIP "Zoom in"
+   @ 74,2 OWNERBUTTON OF oToolBar ON CLICK {||ImageInfo()} ;
+      SIZE 24,24 BITMAP "BMP_INFO" FROM RESOURCE TRANSPARENT FLAT  ;
+      TOOLTIP "Info"
 
-@ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
-   FONT oFont BACKCOLOR 12507070
+   @ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
+      FONT oFont BACKCOLOR 12507070
 
-#ifdef __FREEIMAGE__
-@ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
-#else
-@ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
-#endif
+   #ifdef __FREEIMAGE__
+   @ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   #else
+   @ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
+   #endif
 
-aScreen := GetWorkareaRect()
-// writelog( str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]) )
+   aScreen := GetWorkareaRect()
+   // writelog( str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]) )
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION MessagesProc( oWnd, msg, wParam, lParam )
 

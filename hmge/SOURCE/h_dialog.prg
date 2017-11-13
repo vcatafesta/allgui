@@ -488,33 +488,33 @@ FUNCTION ModalDialogProc( hwndDlg, nMsg, wParam, lParam )
       ENDIF
       ret := TRUE
    CASE nMsg == WM_CLOSE
-   EndDialog( hwndDlg, 0 )
-   ret := TRUE
-CASE nMsg == WM_COMMAND
-   DO CASE
-   CASE LOWORD( wParam ) == IDOK .AND. HIWORD( wParam ) == BN_CLICKED
-   EndDialog( hwndDlg, IDOK )
-   ret := TRUE
-CASE LOWORD( wParam ) == IDCANCEL .AND. HIWORD( wParam ) == BN_CLICKED
-EndDialog( hwndDlg, IDCANCEL )
-ret := TRUE
-CASE LOWORD( wParam ) == IDIGNORE .AND. HIWORD( wParam ) == BN_CLICKED
-ret := TRUE
-OTHERWISE
-IF ValType( _HMG_ModalDialogProcedure ) == 'B'
-   Eval( _HMG_ModalDialogProcedure, hwndDlg, nMsg, LOWORD( wParam ), HIWORD( wParam ) )
-ENDIF
-ret := TRUE
-ENDCASE
-OTHERWISE
-ret := FALSE
-ENDCASE
-_HMG_ActiveDlgProcHandle    := 0
-_HMG_ActiveDlgProcMsg       := 0
-_HMG_ActiveDlgProcId        := 0
-_HMG_ActiveDlgProcNotify    := 0
+      EndDialog( hwndDlg, 0 )
+      ret := TRUE
+   CASE nMsg == WM_COMMAND
+      DO CASE
+      CASE LOWORD( wParam ) == IDOK .AND. HIWORD( wParam ) == BN_CLICKED
+         EndDialog( hwndDlg, IDOK )
+         ret := TRUE
+      CASE LOWORD( wParam ) == IDCANCEL .AND. HIWORD( wParam ) == BN_CLICKED
+         EndDialog( hwndDlg, IDCANCEL )
+         ret := TRUE
+      CASE LOWORD( wParam ) == IDIGNORE .AND. HIWORD( wParam ) == BN_CLICKED
+         ret := TRUE
+      OTHERWISE
+         IF ValType( _HMG_ModalDialogProcedure ) == 'B'
+            Eval( _HMG_ModalDialogProcedure, hwndDlg, nMsg, LOWORD( wParam ), HIWORD( wParam ) )
+         ENDIF
+         ret := TRUE
+      ENDCASE
+   OTHERWISE
+      ret := FALSE
+   ENDCASE
+   _HMG_ActiveDlgProcHandle    := 0
+   _HMG_ActiveDlgProcMsg       := 0
+   _HMG_ActiveDlgProcId        := 0
+   _HMG_ActiveDlgProcNotify    := 0
 
-RETURN ret
+   RETURN ret
 
 FUNCTION DisableDialogItem ( hDlg, Id )
 
@@ -617,11 +617,11 @@ FUNCTION _ReleaseDialog( hwndDlg )
    DEFAULT  hwndDlg TO _HMG_ActiveDlgProcHandle
    IF hwndDlg != 0
       IF _HMG_ActiveDlgProcModal
-      EndDialog( hwndDlg, 0 )
-   ELSE
-      ERASEDialog( hwndDlg )
+         EndDialog( hwndDlg, 0 )
+      ELSE
+         ERASEDialog( hwndDlg )
+      ENDIF
    ENDIF
-ENDIF
 
-RETURN NIL
+   RETURN NIL
 

@@ -24,19 +24,25 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    DATA bGetFocus
    DATA lnoValid   INIT .F.
 
-   METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bGetFocus, bKillFocus )
-   METHOD Activate()
-   METHOD Init()
-   METHOD SetValue( aValue )
-   METHOD GetValue(  )
-   METHOD Clear(  )
-   METHOD END()
+METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      oFont, bGetFocus, bKillFocus )
+
+METHOD Activate()
+
+METHOD Init()
+
+METHOD SetValue( aValue )
+
+METHOD GetValue(  )
+
+METHOD Clear(  )
+
+METHOD END()
 
    HIDDEN:
    DATA  aValue           // Valor atual
 
-   ENDCLASS
+ENDCLASS
 
 METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bGetFocus, bKillFocus ) CLASS HIPedit

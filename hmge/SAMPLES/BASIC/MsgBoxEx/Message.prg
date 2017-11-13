@@ -127,56 +127,56 @@ FUNCTION MsgBoxEx( cMsg, cTitle, nStyle, lNoSound )
       nStyle   := MB_ICONEXCLAMATION + MB_OK
       IF !(lNoSound); MessageBeep( MB_ICONEXCLAMATION ); endif
 
-      CASE nStyle == MSG_INFO               // 1 opcion
-         DEFAULT   cTitle   := "Información ..."
-         nStyle   := MB_ICONINFORMATION + MB_OK
-         IF !(lNoSound); MessageBeep( MB_ICONINFORMATION ); endif
+   CASE nStyle == MSG_INFO               // 1 opcion
+      DEFAULT   cTitle   := "Información ..."
+      nStyle   := MB_ICONINFORMATION + MB_OK
+      IF !(lNoSound); MessageBeep( MB_ICONINFORMATION ); endif
 
-         CASE nStyle == MSG_ERROR            // 1 opcion
-            DEFAULT   cTitle   := "Error ..."
-            nStyle   := MB_ICONHAND + MB_OK
-            IF !(lNoSound); MessageBeep( MB_ICONHAND ); endif
+   CASE nStyle == MSG_ERROR            // 1 opcion
+      DEFAULT   cTitle   := "Error ..."
+      nStyle   := MB_ICONHAND + MB_OK
+      IF !(lNoSound); MessageBeep( MB_ICONHAND ); endif
 
-            CASE nStyle == MSG_YESNO            // 2 opciones
-               DEFAULT   cTitle   := "Confirme ..."
-               nStyle   := MB_ICONQUESTION + MB_YESNO
-               IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_YESNO            // 2 opciones
+      DEFAULT   cTitle   := "Confirme ..."
+      nStyle   := MB_ICONQUESTION + MB_YESNO
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-               CASE nStyle == MSG_NOYES            // 2 opciones
-                  DEFAULT   cTitle   := "Confirme ..."
-                  nStyle   := MB_ICONQUESTION + MB_YESNO + MB_DEFBUTTON2
-                  IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_NOYES            // 2 opciones
+      DEFAULT   cTitle   := "Confirme ..."
+      nStyle   := MB_ICONQUESTION + MB_YESNO + MB_DEFBUTTON2
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-                  CASE nStyle == MSG_YESNOCANCEL            // 3 opciones
-                     DEFAULT   cTitle   := "Seleccione ..."
-                     nStyle   := MB_ICONQUESTION + MB_YESNOCANCEL
-                     IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_YESNOCANCEL            // 3 opciones
+      DEFAULT   cTitle   := "Seleccione ..."
+      nStyle   := MB_ICONQUESTION + MB_YESNOCANCEL
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-                     CASE nStyle == MSG_RETRYCANCEL            // 2 opciones
-                        DEFAULT   cTitle   := "Seleccione ..."
-                        nStyle   := MB_ICONQUESTION + MB_RETRYCANCEL
-                        IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_RETRYCANCEL            // 2 opciones
+      DEFAULT   cTitle   := "Seleccione ..."
+      nStyle   := MB_ICONQUESTION + MB_RETRYCANCEL
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-                        CASE nStyle == MSG_ABORTRETRYIGNORE         // 3 opciones
-                           DEFAULT   cTitle   := "Seleccione ..."
-                           nStyle   := MB_ICONQUESTION + MB_ABORTRETRYIGNORE + MB_DEFBUTTON3
-                           IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_ABORTRETRYIGNORE         // 3 opciones
+      DEFAULT   cTitle   := "Seleccione ..."
+      nStyle   := MB_ICONQUESTION + MB_ABORTRETRYIGNORE + MB_DEFBUTTON3
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-                           CASE nStyle == MSG_OKCANCEL            // 2 opciones
-                              DEFAULT   cTitle   := "Confirme ..."
-                              nStyle   := MB_ICONQUESTION + MB_OKCANCEL
-                              IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
+   CASE nStyle == MSG_OKCANCEL            // 2 opciones
+      DEFAULT   cTitle   := "Confirme ..."
+      nStyle   := MB_ICONQUESTION + MB_OKCANCEL
+      IF !(lNoSound); MessageBeep( MB_ICONQUESTION ); endif
 
-                              OTHERWISE
-                                 DEFAULT   cTitle   := "Información ..."      // 1 opcion
-                                 nStyle   := MB_ICONINFORMATION + MB_OK
-                                 IF !(lNoSound); MessageBeep( MB_ICONINFORMATION ); endif
+   OTHERWISE
+      DEFAULT   cTitle   := "Información ..."      // 1 opcion
+      nStyle   := MB_ICONINFORMATION + MB_OK
+      IF !(lNoSound); MessageBeep( MB_ICONINFORMATION ); endif
 
-                                 end
+   end
 
-                                 nReturn   := MessageBox( cMsg, cTitle, nStyle )
+   nReturn   := MessageBox( cMsg, cTitle, nStyle )
 
-                                 RETURN nReturn
+   RETURN nReturn
 
 FUNCTION MessageBox( cText, cCaption, nType )
 

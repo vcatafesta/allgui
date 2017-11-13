@@ -102,30 +102,30 @@ STATIC FUNCTION DrawCurves()
          DELETEObject( hPen )
       NEXT
 
-   EndPaint( hWnd, pPS )
+      EndPaint( hWnd, pPS )
 
-   lBusy := .T.
-ENDIF
+      lBusy := .T.
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
-#ifdef __XHARBOUR__
-/*
-Declaration of DLLs using syntax in CallDll.Lib borrowed from HMG official
-Carlos Britos
-*/
+   #ifdef __XHARBOUR__
+   /*
+   Declaration of DLLs using syntax in CallDll.Lib borrowed from HMG official
+   Carlos Britos
+   */
 
-DECLARE PolyBezier( hDC, Points, Amount ) IN GDI32.DLL
+   DECLARE PolyBezier( hDC, Points, Amount ) IN GDI32.DLL
 
-DECLARE CreatePen( Style, Width, Color ) IN GDI32.DLL
+   DECLARE CreatePen( Style, Width, Color ) IN GDI32.DLL
 
-#else
+   #else
 
-DECLARE DLL_TYPE_LONG PolyBezier( DLL_TYPE_LONG hDC, DLL_TYPE_LPSTR Points, DLL_TYPE_LONG Amount ) ;
-   IN GDI32.DLL
+   DECLARE DLL_TYPE_LONG PolyBezier( DLL_TYPE_LONG hDC, DLL_TYPE_LPSTR Points, DLL_TYPE_LONG Amount ) ;
+      IN GDI32.DLL
 
-DECLARE DLL_TYPE_LONG CreatePen( DLL_TYPE_LONG Style, DLL_TYPE_LONG Width, DLL_TYPE_LONG Color ) ;
-   IN GDI32.DLL
+   DECLARE DLL_TYPE_LONG CreatePen( DLL_TYPE_LONG Style, DLL_TYPE_LONG Width, DLL_TYPE_LONG Color ) ;
+      IN GDI32.DLL
 
-#endif
+   #endif
 

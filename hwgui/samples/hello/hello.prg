@@ -51,35 +51,35 @@ FUNCTION Main
    MENUITEM "Ps" ACTION Ps1(oMainWindow)
    SEPARATOR
    MENUITEM "YYYYY" ACTION hwg_MsgGet( "Example","Input anything")
-ENDMENU
-MENU TITLE "Help"
-MENUITEM "About" ACTION hwg_Msginfo("About")
-MENUITEM "Info" ACTION hwg_Msgtemp("")
-ENDMENU
-MENU TITLE "Third"
-MENUITEM "Wchoice" ACTION hwg_WChoice( acho,"Select",,,,,15132390,,hwg_VColor( "008000" ) )
-MENUITEM "SelectFolder" ACTION hwg_Msginfo( hwg_Selectfolder("!!!") )
-MENU TITLE "Submenu"
-MENUITEM "ShellExecute" ACTION (hwg_Shellexecute("d:\temp\podst.doc"),hwg_Msginfo(str(oMainWindow:handle)))
-MENUITEM "S2" ACTION hwg_Msgstop("S2")
-ENDMENU
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "Help"
+   MENUITEM "About" ACTION hwg_Msginfo("About")
+   MENUITEM "Info" ACTION hwg_Msgtemp("")
+   ENDMENU
+   MENU TITLE "Third"
+   MENUITEM "Wchoice" ACTION hwg_WChoice( acho,"Select",,,,,15132390,,hwg_VColor( "008000" ) )
+   MENUITEM "SelectFolder" ACTION hwg_Msginfo( hwg_Selectfolder("!!!") )
+   MENU TITLE "Submenu"
+   MENUITEM "ShellExecute" ACTION (hwg_Shellexecute("d:\temp\podst.doc"),hwg_Msginfo(str(oMainWindow:handle)))
+   MENUITEM "S2" ACTION hwg_Msgstop("S2")
+   ENDMENU
+   ENDMENU
+   ENDMENU
 
-/*
-aMenu := { ;
-{ { { {||hwg_Msginfo("Xxxx")},"XXXXX",130 }, ;
-{ ,,131 }, ;
-{ {||hwg_Msginfo("Yyyy")},"YYYYY",132 } ;
-},"File",120 }, ;
-{ {||hwg_Msginfo("Help")},"Help",121 } ;
-}
-hwg_BuildMenu( aMenu,hWnd,aMainWindow )
-*/
+   /*
+   aMenu := { ;
+   { { { {||hwg_Msginfo("Xxxx")},"XXXXX",130 }, ;
+   { ,,131 }, ;
+   { {||hwg_Msginfo("Yyyy")},"YYYYY",132 } ;
+   },"File",120 }, ;
+   { {||hwg_Msginfo("Help")},"Help",121 } ;
+   }
+   hwg_BuildMenu( aMenu,hWnd,aMainWindow )
+   */
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ChangeTab( oWnd,oGet,n )
 

@@ -91,14 +91,14 @@ METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
 METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 
    IF lElite != Nil; ::lElite := lElite;  ENDIF
-      IF lCond != Nil; ::lCond := lCond;  ENDIF
-         IF nLineInch != Nil; ::nLineInch := nLineInch;  ENDIF
-            IF lBold != Nil; ::lBold := lBold;  ENDIF
-               IF lItalic != Nil; ::lItalic := lItalic;  ENDIF
-                  IF lUnder != Nil; ::lUnder := lUnder;  ENDIF
-                     ::lChanged := .T.
+   IF lCond != Nil; ::lCond := lCond;  ENDIF
+   IF nLineInch != Nil; ::nLineInch := nLineInch;  ENDIF
+   IF lBold != Nil; ::lBold := lBold;  ENDIF
+   IF lItalic != Nil; ::lItalic := lItalic;  ENDIF
+   IF lUnder != Nil; ::lUnder := lUnder;  ENDIF
+   ::lChanged := .T.
 
-                     RETURN NIL
+   RETURN NIL
 
 METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 
@@ -133,25 +133,25 @@ METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
       ENDIF
 
       IF ::lElite; nMode ++ ; ENDIF
-         IF ::lCond; nMode += 2; ENDIF
+      IF ::lCond; nMode += 2; ENDIF
 
-            ::nLineHeight := ( ::nStdHeight / aKoef[nMode+1] ) * ::oPrinter:nVRes
-            ::nLined := ( 25.4 * ::oPrinter:nVRes ) / ::nLineInch - ::nLineHeight
+      ::nLineHeight := ( ::nStdHeight / aKoef[nMode+1] ) * ::oPrinter:nVRes
+      ::nLined := ( 25.4 * ::oPrinter:nVRes ) / ::nLineInch - ::nLineHeight
 
-            oFont := ::oPrinter:AddFont( cFont, ::nLineHeight, ::lBold, ::lItalic, ::lUnder, 204 )
+      oFont := ::oPrinter:AddFont( cFont, ::nLineHeight, ::lBold, ::lItalic, ::lUnder, 204 )
 
-            IF ::oFont != Nil
-               ::oFont:Release()
-            ENDIF
-            ::oFont := oFont
+      IF ::oFont != Nil
+         ::oFont:Release()
+      ENDIF
+      ::oFont := oFont
 
-            ::oPrinter:SetFont( ::oFont )
-            ::nCharW := ::oPrinter:GetTextWidth( "ABCDEFGHIJ", oFont ) / 10
-            ::lChanged := .F.
+      ::oPrinter:SetFont( ::oFont )
+      ::nCharW := ::oPrinter:GetTextWidth( "ABCDEFGHIJ", oFont ) / 10
+      ::lChanged := .F.
 
-         ENDIF
+   ENDIF
 
-         RETURN NIL
+   RETURN NIL
 
 METHOD StartDoc( lPreview, cMetaName ) CLASS HWinPrn
 

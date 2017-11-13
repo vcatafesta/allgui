@@ -528,159 +528,159 @@ FUNCTION InputPgData ( cInputPrompt , cDialogCaption , cDefValue, cDefData, ItTy
          nPos := IF(Empty(cDefValue),1,AScan(aColorName, cDefValue))
 
          DEFINE IMAGELIST Imagelst_1 ;
-               BUTTONSIZE BmpW, BmpH ;
-               IMAGE {}
+            BUTTONSIZE BmpW, BmpH ;
+            IMAGE {}
 
-            FOR n:=1 TO Len(aSysColor)
-               HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
-               HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
-               HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
-            NEXT
+         FOR n:=1 TO Len(aSysColor)
+            HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
+            HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
+            HMG_SetSysColorBtm(aSysColor[n,1], BmpW, BmpH)
+         NEXT
+
+         @ 30 ,10  COMBOBOXEX  _DataBox ;
+            HEIGHT 100 WIDTH 220 ;
+            ITEMS aColorName ;
+            VALUE nPos ;
+            ON ENTER Eval( bRetVal) ;
+            IMAGELIST "Imagelst_1"   ;
+
+      CASE ItType == PG_ENUM .or. ItType == PG_LIST
+
+         @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
+            HEIGHT 26  WIDTH 220    ;
+            ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+
+      CASE ItType == PG_DATE
+
+         bRetVal := {|| DToC( _InputPG._DataBox.Value)  }
+         cDefValue := IF(Empty(cDefValue),CToD(""), CToD(cDefValue))
+
+         @ 30,10 DATEPICKE _DataBox  VALUE cDefValue   ;
+            WIDTH 220    ;
+            ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+
+      CASE ItType == PG_IMAGE
+
+         aFltr := PgIdentData( cDefData,PG_IMAGE )
+         @ 30 ,10  BTNTEXTBOX _DataBox ;
+            HEIGHT 26 WIDTH 220            ;
+            VALUE cDefValue ;
+            ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "Image File", cDefValue , .f. , .t.)  }
+
+      CASE ItType == PG_SYSINFO
+
+         IF lData
+            aData:= {"SYSTEM","USERHOME","USERID", "USERNAME"}
+            bRetVal := {|| nPos:= _InputPG._DataBox.Value, IF(nPos > 0, aData[nPos],cDefValue)  }
+            nPos := IF(Empty(cDefValue),1,AScan(aData, cDefValue))
 
             @ 30 ,10  COMBOBOXEX  _DataBox ;
                HEIGHT 100 WIDTH 220 ;
-               ITEMS aColorName ;
+               ITEMS aData ;
                VALUE nPos ;
-               ON ENTER Eval( bRetVal) ;
-               IMAGELIST "Imagelst_1"   ;
-
-         CASE ItType == PG_ENUM .or. ItType == PG_LIST
-
-            @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-               HEIGHT 26  WIDTH 220    ;
-               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-
-         CASE ItType == PG_DATE
-
-            bRetVal := {|| DToC( _InputPG._DataBox.Value)  }
-            cDefValue := IF(Empty(cDefValue),CToD(""), CToD(cDefValue))
-
-            @ 30,10 DATEPICKE _DataBox  VALUE cDefValue   ;
-               WIDTH 220    ;
-               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-
-         CASE ItType == PG_IMAGE
-
-            aFltr := PgIdentData( cDefData,PG_IMAGE )
-            @ 30 ,10  BTNTEXTBOX _DataBox ;
-               HEIGHT 26 WIDTH 220            ;
-               VALUE cDefValue ;
-               ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "Image File", cDefValue , .f. , .t.)  }
-
-         CASE ItType == PG_SYSINFO
-
-            IF lData
-               aData:= {"SYSTEM","USERHOME","USERID", "USERNAME"}
-               bRetVal := {|| nPos:= _InputPG._DataBox.Value, IF(nPos > 0, aData[nPos],cDefValue)  }
-               nPos := IF(Empty(cDefValue),1,AScan(aData, cDefValue))
-
-               @ 30 ,10  COMBOBOXEX  _DataBox ;
-                  HEIGHT 100 WIDTH 220 ;
-                  ITEMS aData ;
-                  VALUE nPos ;
-                  ON ENTER Eval( bRetVal)
-            ELSE
-               IF cDefData == "USERHOME"
-                  cDefValue := IF(cDefValue == "USERHOME","",cDefValue )
-                  @ 30 ,10  BTNTEXTBOX _DataBox ;
-                     HEIGHT 26 WIDTH 220            ;
-                     VALUE cDefValue ;
-                     ACTION {|| _InputPG._DataBox.Value :=GetMyDocumentsFolder ( ) }
-               ELSE
-                  bRetVal := {|| ""  }
-                  @ 25 ,10  Label _DataBox ;
-                     HEIGHT 33 WIDTH 220  ;
-                     VALUE "Value for Item Data of type"+cDefData+ " does not be required" ;
-                     BOLD FONTCOLOR BLUE
-               ENDIF
-            ENDIF
-
-         CASE ItType == PG_FLAG
-
-            bRetVal := {|| '['+_InputPG._DataBox.Value+']' }
-            @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-               HEIGHT 26  WIDTH 220    ;
-               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-
-         CASE ItType == PG_CHECK
-
-            IF lData
-               IF Empty(cDefValue) .or. cDefValue == cDefData
-                  cDefValue := "False;True"
-               ELSE
-                  cDefValue := CHARREPL (',', cDefValue, ';')
-               ENDIF
-            ELSE
-               IF Empty(cDefValue)
-                  cDefValue := "False"
-               ELSE
-                  IF !Empty(cDefData)
-                     aData := PgIdentData(cDefData)
-                     IF ValType(aData) == 'A'
-                        cDefValue := aData[1]
-                     ELSE
-                        cDefValue := cDefData
-                     ENDIF
-                  ENDIF
-               ENDIF
-            ENDIF
-            @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-               HEIGHT 26  WIDTH 220    ;
-               ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-
-         CASE ItType == PG_SIZE
-
-            @ 30 ,10  BTNTEXTBOX _DataBox ;
-               HEIGHT 26 WIDTH 220            ;
-               VALUE cDefValue ;
-               ACTION {|| _InputPG._DataBox.Value := InsertSize( cDefValue,cDefData )   }
-
-         CASE ItType == PG_FILE
-
-            aFltr := PgIdentData( cDefData,PG_FILE )
-            @ 30 ,10  BTNTEXTBOX _DataBox ;
-               HEIGHT 26 WIDTH 220            ;
-               VALUE cDefValue ;
-               ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "File", cDefValue , .f. , .t.)  }
-
-         CASE ItType == PG_FOLDER
-
-            IF lData
-               @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
-                  HEIGHT 26  WIDTH 220    ;
-                  ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
-
-            ELSE
+               ON ENTER Eval( bRetVal)
+         ELSE
+            IF cDefData == "USERHOME"
+               cDefValue := IF(cDefValue == "USERHOME","",cDefValue )
                @ 30 ,10  BTNTEXTBOX _DataBox ;
                   HEIGHT 26 WIDTH 220            ;
                   VALUE cDefValue ;
-                  ACTION {|| _InputPG._DataBox.Value := GetFolder( cDefData, cDefValue ) }
+                  ACTION {|| _InputPG._DataBox.Value :=GetMyDocumentsFolder ( ) }
+            ELSE
+               bRetVal := {|| ""  }
+               @ 25 ,10  Label _DataBox ;
+                  HEIGHT 33 WIDTH 220  ;
+                  VALUE "Value for Item Data of type"+cDefData+ " does not be required" ;
+                  BOLD FONTCOLOR BLUE
             ENDIF
+         ENDIF
 
-         CASE ItType == PG_USERFUN
+      CASE ItType == PG_FLAG
 
+         bRetVal := {|| '['+_InputPG._DataBox.Value+']' }
+         @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
+            HEIGHT 26  WIDTH 220    ;
+            ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+
+      CASE ItType == PG_CHECK
+
+         IF lData
+            IF Empty(cDefValue) .or. cDefValue == cDefData
+               cDefValue := "False;True"
+            ELSE
+               cDefValue := CHARREPL (',', cDefValue, ';')
+            ENDIF
+         ELSE
+            IF Empty(cDefValue)
+               cDefValue := "False"
+            ELSE
+               IF !Empty(cDefData)
+                  aData := PgIdentData(cDefData)
+                  IF ValType(aData) == 'A'
+                     cDefValue := aData[1]
+                  ELSE
+                     cDefValue := cDefData
+                  ENDIF
+               ENDIF
+            ENDIF
+         ENDIF
+         @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
+            HEIGHT 26  WIDTH 220    ;
+            ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
+
+      CASE ItType == PG_SIZE
+
+         @ 30 ,10  BTNTEXTBOX _DataBox ;
+            HEIGHT 26 WIDTH 220            ;
+            VALUE cDefValue ;
+            ACTION {|| _InputPG._DataBox.Value := InsertSize( cDefValue,cDefData )   }
+
+      CASE ItType == PG_FILE
+
+         aFltr := PgIdentData( cDefData,PG_FILE )
+         @ 30 ,10  BTNTEXTBOX _DataBox ;
+            HEIGHT 26 WIDTH 220            ;
+            VALUE cDefValue ;
+            ACTION {|| _InputPG._DataBox.Value := GetFile ( aFltr , "File", cDefValue , .f. , .t.)  }
+
+      CASE ItType == PG_FOLDER
+
+         IF lData
             @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
                HEIGHT 26  WIDTH 220    ;
                ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
 
-         ENDCASE
+         ELSE
+            @ 30 ,10  BTNTEXTBOX _DataBox ;
+               HEIGHT 26 WIDTH 220            ;
+               VALUE cDefValue ;
+               ACTION {|| _InputPG._DataBox.Value := GetFolder( cDefData, cDefValue ) }
+         ENDIF
 
-         @ 67,20 BUTTON _Ok      ;
-            CAPTION _HMG_MESSAGE [6] ;
-            ACTION ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal) ,   _InputPG.Release )
+      CASE ItType == PG_USERFUN
 
-         @ 67,130 BUTTON _Cancel  ;
-            CAPTION _HMG_MESSAGE [7] ;
-            ACTION   ( _HMG_DialogCancelled := .T. , _InputPG.Release )
+         @ 30,10 TEXTBOX _DataBox  VALUE cDefValue   ;
+            HEIGHT 26  WIDTH 220    ;
+            ON ENTER ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal), _InputPG.Release )
 
-      END WINDOW
+      ENDCASE
 
-      _InputPG._DataBox.SetFocus
+      @ 67,20 BUTTON _Ok      ;
+         CAPTION _HMG_MESSAGE [6] ;
+         ACTION ( _HMG_DialogCancelled := .F. , RetVal := Eval(bRetVal) ,   _InputPG.Release )
 
-      CENTER WINDOW _InputPG
-      ACTIVATE WINDOW _InputPG
+      @ 67,130 BUTTON _Cancel  ;
+         CAPTION _HMG_MESSAGE [7] ;
+         ACTION   ( _HMG_DialogCancelled := .T. , _InputPG.Release )
 
-      RETURN ( RetVal )
+   END WINDOW
+
+   _InputPG._DataBox.SetFocus
+
+   CENTER WINDOW _InputPG
+   ACTIVATE WINDOW _InputPG
+
+   RETURN ( RetVal )
 
 FUNCTION InsertFont( cValue ,lData)
 
@@ -868,7 +868,7 @@ FUNCTION DisplPGValue(PGname,cForm,nId)
    CASE cType == "N" ;  MsgInfo(cStr+cType+CRLF+Str( xValue ))
    CASE cType == "L" ;  MsgInfo(cStr+cType+CRLF+if(xValue == .t.,'TRUE','FALSE') )
    CASE cType == "A" ;  MsgInfo(cStr+cType+CRLF+ AToC( xValue ))
-   OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
+      OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
    ENDCASE
 
    RETURN NIL
@@ -906,7 +906,7 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
          CASE ValType(xValue) == "N" .and. n==PGI_TYPE;  cStr += PgIdentType( xValue )+CRLF
          CASE ValType(xValue) == "N" .and. n==PGI_ID;  cStr += Str( xValue )+CRLF
          CASE ValType(xValue) == "L" ;  cStr += if(xValue == .t.,'TRUE','FALSE') +CRLF
-         OTHERWISE;                     cStr += 'NIL' +CRLF
+            OTHERWISE;                     cStr += 'NIL' +CRLF
          ENDCASE
       NEXT
    ENDIF

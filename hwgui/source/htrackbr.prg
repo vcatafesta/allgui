@@ -28,17 +28,23 @@ CLASS VAR winclass INIT "msctls_trackbar32"
    DATA nHigh
    DATA hCursor
 
-   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
-         lVertical, TickStyle, TickMarks )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD SetValue( nValue )
-   METHOD GetValue()
-   METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
+METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
+      lVertical, TickStyle, TickMarks )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD SetValue( nValue )
+
+METHOD GetValue()
+
+METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
@@ -50,12 +56,12 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       TickStyle := Hwg_BitOr( TickStyle, TBS_AUTOTICKS )
    ENDIF
    nStyle := Hwg_BitOr( IIf( nStyle == NIL, 0, nStyle ), ;
-            WS_CHILD + WS_VISIBLE + WS_TABSTOP )
+      WS_CHILD + WS_VISIBLE + WS_TABSTOP )
    nStyle += IIf( lVertical != NIL .AND. lVertical, TBS_VERT, 0 )
    nStyle += TickStyle + TickMarks
 
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,, ;
-            bInit, bSize, bPaint, cTooltip )
+      bInit, bSize, bPaint, cTooltip )
 
    ::value      := IIf( ValType( vari ) == "N", vari, 0 )
    ::bChange    := bChange

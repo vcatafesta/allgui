@@ -65,46 +65,46 @@ FUNCTION Main()
    MENUITEM "&Print full" ID IDM_PREVIEW ACTION (ClonePaintRep(aPaintRep),PrintReport(,,.T.))
    SEPARATOR
    MENUITEM "&Exit" ID IDM_EXIT ACTION hwg_EndWindow()
-ENDMENU
-MENU TITLE "&Items"
-MENUITEM "&Text" ID IDM_ITEMTEXT ACTION nAddItem:=TYPE_TEXT
-MENUITEM "&Horizontal Line" ID IDM_ITEMHLINE ACTION nAddItem:=TYPE_HLINE
-MENUITEM "&Vertical Line" ID IDM_ITEMVLINE ACTION nAddItem:=TYPE_VLINE
-MENUITEM "&Box" ID IDM_ITEMBOX ACTION nAddItem:=TYPE_BOX
-MENUITEM "B&itmap" ID IDM_ITEMBITM ACTION nAddItem:=TYPE_BITMAP
-SEPARATOR
-MENU TITLE "&Markers"
-MENUITEM "&Page Header" ID IDM_ITEMPH ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_PH)
-MENUITEM "&Start line" ID IDM_ITEMSL ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_SL)
-MENUITEM "&End line" ID IDM_ITEMEL ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_EL)
-MENUITEM "Page &Footer" ID IDM_ITEMPF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_PF)
-MENUITEM "E&nd of Page Footer" ID IDM_ITEMEPF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_EPF)
-MENUITEM "&Document Footer" ID IDM_ITEMDF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_DF)
-ENDMENU
-SEPARATOR
-MENUITEM "&Delete item" ID IDM_ITEMDEL ACTION DeleteItem()
-ENDMENU
-MENU TITLE "&Options"
-MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
-MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_Showscrollbar(oMainWindow:handle,SB_VERT,hwg_Ischeckedmenuitem(,IDM_VIEW1)),hwg_Checkmenuitem(,IDM_VIEW1,!hwg_Ischeckedmenuitem(,IDM_VIEW1)),Iif(hwg_Ischeckedmenuitem(,IDM_VIEW1),DeselectAll(),),hwg_Redrawwindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-// MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_Showscrollbar(oMainWindow:handle,SB_VERT,hwg_Ischeckedmenuitem(,IDM_VIEW1)),hwg_Checkmenuitem(,IDM_VIEW1,!hwg_Ischeckedmenuitem(,IDM_VIEW1)),Iif(hwg_Ischeckedmenuitem(,IDM_VIEW1),DeselectAll(),.F.),hwg_Redrawwindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
-MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (hwg_Checkmenuitem(,IDM_MOUSE2,!hwg_Ischeckedmenuitem(,IDM_MOUSE2)))
-ENDMENU
-MENUITEM "&About" ID IDM_ABOUT ACTION About()
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Items"
+   MENUITEM "&Text" ID IDM_ITEMTEXT ACTION nAddItem:=TYPE_TEXT
+   MENUITEM "&Horizontal Line" ID IDM_ITEMHLINE ACTION nAddItem:=TYPE_HLINE
+   MENUITEM "&Vertical Line" ID IDM_ITEMVLINE ACTION nAddItem:=TYPE_VLINE
+   MENUITEM "&Box" ID IDM_ITEMBOX ACTION nAddItem:=TYPE_BOX
+   MENUITEM "B&itmap" ID IDM_ITEMBITM ACTION nAddItem:=TYPE_BITMAP
+   SEPARATOR
+   MENU TITLE "&Markers"
+   MENUITEM "&Page Header" ID IDM_ITEMPH ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_PH)
+   MENUITEM "&Start line" ID IDM_ITEMSL ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_SL)
+   MENUITEM "&End line" ID IDM_ITEMEL ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_EL)
+   MENUITEM "Page &Footer" ID IDM_ITEMPF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_PF)
+   MENUITEM "E&nd of Page Footer" ID IDM_ITEMEPF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_EPF)
+   MENUITEM "&Document Footer" ID IDM_ITEMDF ACTION (nAddItem:=TYPE_MARKER,nMarkerType:=MARKER_DF)
+   ENDMENU
+   SEPARATOR
+   MENUITEM "&Delete item" ID IDM_ITEMDEL ACTION DeleteItem()
+   ENDMENU
+   MENU TITLE "&Options"
+   MENUITEM "&Form options" ID IDM_FOPT ACTION FormOptions()
+   MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_Showscrollbar(oMainWindow:handle,SB_VERT,hwg_Ischeckedmenuitem(,IDM_VIEW1)),hwg_Checkmenuitem(,IDM_VIEW1,!hwg_Ischeckedmenuitem(,IDM_VIEW1)),Iif(hwg_Ischeckedmenuitem(,IDM_VIEW1),DeselectAll(),),hwg_Redrawwindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+   // MENUITEM "&Preview" ID IDM_VIEW1 ACTION (hwg_Showscrollbar(oMainWindow:handle,SB_VERT,hwg_Ischeckedmenuitem(,IDM_VIEW1)),hwg_Checkmenuitem(,IDM_VIEW1,!hwg_Ischeckedmenuitem(,IDM_VIEW1)),Iif(hwg_Ischeckedmenuitem(,IDM_VIEW1),DeselectAll(),.F.),hwg_Redrawwindow(Hwindow():GetMain():handle,RDW_ERASE+RDW_INVALIDATE))
+   MENUITEM "&Mouse limit" ID IDM_MOUSE2 ACTION (hwg_Checkmenuitem(,IDM_MOUSE2,!hwg_Ischeckedmenuitem(,IDM_MOUSE2)))
+   ENDMENU
+   MENUITEM "&About" ID IDM_ABOUT ACTION About()
+   ENDMENU
 
-hwg_Enablemenuitem( ,IDM_CLOSE, .F., .T. )
-hwg_Enablemenuitem( ,IDM_SAVE, .F., .T. )
-hwg_Enablemenuitem( ,IDM_SAVEAS, .F., .T. )
-hwg_Enablemenuitem( ,IDM_PRINT, .F., .T. )
-hwg_Enablemenuitem( ,IDM_PREVIEW, .F., .T. )
-hwg_Enablemenuitem( ,IDM_FOPT, .F., .T. )
-hwg_Enablemenuitem( ,1, .F., .F. )
-hwg_Checkmenuitem( ,IDM_MOUSE2, .t. )
+   hwg_Enablemenuitem( ,IDM_CLOSE, .F., .T. )
+   hwg_Enablemenuitem( ,IDM_SAVE, .F., .T. )
+   hwg_Enablemenuitem( ,IDM_SAVEAS, .F., .T. )
+   hwg_Enablemenuitem( ,IDM_PRINT, .F., .T. )
+   hwg_Enablemenuitem( ,IDM_PREVIEW, .F., .T. )
+   hwg_Enablemenuitem( ,IDM_FOPT, .F., .T. )
+   hwg_Enablemenuitem( ,1, .F., .F. )
+   hwg_Checkmenuitem( ,IDM_MOUSE2, .t. )
 
-oMainWindow:Activate()
+   oMainWindow:Activate()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION About
 

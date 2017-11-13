@@ -130,22 +130,34 @@ CLASS Barcode
    //  16 = Matrix 2 of 5
    //  17 = Matrix 2 of 5 check digit
 
-   METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
-         nColText, nColPane, lHorz, lTransparent,  nPinWidth ) CONSTRUCTOR
-   METHOD ShowBarcode()
-   METHOD CreateBarcode( cCode )
-   METHOD InitCode39( lCheck )
-   METHOD InitCode128( cMode )
-   METHOD InitEAN13()
-   METHOD InitUPC( nLen )
-   METHOD InitE13BL( nLen )
-   METHOD InitCodabar()
-   METHOD InitSub5()
-   METHOD InitIndustrial25( lCheck )
-   METHOD InitInterleave25( lMode )
-   METHOD InitMatrix25( lCheck )
+METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
+      nColText, nColPane, lHorz, lTransparent,  nPinWidth ) CONSTRUCTOR
 
-   ENDCLASS
+METHOD ShowBarcode()
+
+METHOD CreateBarcode( cCode )
+
+METHOD InitCode39( lCheck )
+
+METHOD InitCode128( cMode )
+
+METHOD InitEAN13()
+
+METHOD InitUPC( nLen )
+
+METHOD InitE13BL( nLen )
+
+METHOD InitCodabar()
+
+METHOD InitSub5()
+
+METHOD InitIndustrial25( lCheck )
+
+METHOD InitInterleave25( lMode )
+
+METHOD InitMatrix25( lCheck )
+
+ENDCLASS
 
 *-- METHOD -------------------------------------------------------------------
 *         Name: New
@@ -317,19 +329,18 @@ METHOD InitCode39( lCheck ) CLASS BarCode
       '1110111010001010', ;
       '1010111000101110', ;
       '1110101110001010', ;    //E
-
-   '1011101110001010', ;
+      '1011101110001010', ;
       '1010100011101110', ;
       '1110101000111010', ;
       '1011101000111010', ;
       '1010111000111010', ;
       '1110101010001110', ;    //K
-   '1011101010001110', ;
+      '1011101010001110', ;
       '1110111010100010', ;
       '1010111010001110', ;
       '1110101110100010', ;
       '1011101110100010', ;    //p
-   '1010101110001110', ;
+      '1010101110001110', ;
       '1110101011100010', ;
       '1011101011100010', ;
       '1010111011100010', ;
@@ -339,10 +350,10 @@ METHOD InitCode39( lCheck ) CLASS BarCode
       '1000101110101110', ;
       '1110001011101010', ;
       '1000111011101010', ;    //Z
-   '1000101011101110', ;
+      '1000101011101110', ;
       '1110001010111010', ;
       '1000111010111010', ;    // ' '
-   '1000101110111010', ;
+      '1000101110111010', ;
       '1000100010100010', ;
       '1000100010100010', ;
       '1000101000100010', ;

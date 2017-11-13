@@ -86,7 +86,7 @@ FUNCTION addnewcontrol2(ctrl)
       tabsample.&(ctrl).release
    ENDIF
 
-   DEFINE BUTTONex &ctrl
+   DEFINE BUTTONEX &ctrl
       parent tabsample
       row 10
       col 10

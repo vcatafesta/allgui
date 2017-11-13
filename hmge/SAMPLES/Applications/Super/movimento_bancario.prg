@@ -31,7 +31,7 @@ FUNCTION movimento_bancario()
          nosize
 
       * botões (toolbar)
-      DEFINE BUTTONex button_incluir
+      DEFINE BUTTONEX button_incluir
          picture path_imagens+'incluir.bmp'
          col 005
          row 002
@@ -48,7 +48,7 @@ FUNCTION movimento_bancario()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_alterar
+      DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
          row 002
@@ -65,7 +65,7 @@ FUNCTION movimento_bancario()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_excluir
+      DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
          row 002
@@ -82,7 +82,7 @@ FUNCTION movimento_bancario()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_atualizar
+      DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
          row 002
@@ -99,7 +99,7 @@ FUNCTION movimento_bancario()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex button_sair
+      DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
          row 002
@@ -148,80 +148,80 @@ FUNCTION movimento_bancario()
          transparent .T.
       END LABEL
       DEFINE COMBOBOXex cbo_001
-         row   500
-         col   140
-         width 300
-         height 200
-         items a_001
-         value 1
-      END COMBOBOXex
+      row   500
+      col   140
+      width 300
+      height 200
+      items a_001
+      value 1
+   END COMBOBOXex
 
-      DEFINE LABEL rodape_001
-         parent form_movban
-         col 005
-         row 545
-         value 'Escolha o período'
-         autosize .T.
-         fontname 'verdana'
-         fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
-         transparent .T.
-      END LABEL
-      DEFINE LABEL rodape_002
-         parent form_movban
-         col 250
-         row 545
-         value 'até'
-         autosize .T.
-         fontname 'verdana'
-         fontsize 010
-         fontbold .T.
-         fontcolor _cinza_001
-         transparent .T.
-      END LABEL
-      @ 540,140 datepicker dp_inicio;
-         parent form_movban;
-         value date();
-         width 100;
-         font 'verdana' size 010
-      @ 540,280 datepicker dp_final;
-         parent form_movban;
-         value date();
-         width 100;
-         font 'verdana' size 010
-      @ 540,390 buttonex botao_filtrar;
-         parent form_movban;
-         caption 'Filtrar';
-         width 100 height 030;
-         action atualizar();
-         bold;
-         tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
+   DEFINE LABEL rodape_001
+      parent form_movban
+      col 005
+      row 545
+      value 'Escolha o período'
+      autosize .T.
+      fontname 'verdana'
+      fontsize 010
+      fontbold .T.
+      fontcolor _cinza_001
+      transparent .T.
+   END LABEL
+   DEFINE LABEL rodape_002
+      parent form_movban
+      col 250
+      row 545
+      value 'até'
+      autosize .T.
+      fontname 'verdana'
+      fontsize 010
+      fontbold .T.
+      fontcolor _cinza_001
+      transparent .T.
+   END LABEL
+   @ 540,140 datepicker dp_inicio;
+      parent form_movban;
+      value date();
+      width 100;
+      font 'verdana' size 010
+   @ 540,280 datepicker dp_final;
+      parent form_movban;
+      value date();
+      width 100;
+      font 'verdana' size 010
+   @ 540,390 buttonex botao_filtrar;
+      parent form_movban;
+      caption 'Filtrar';
+      width 100 height 030;
+      action atualizar();
+      bold;
+      tooltip 'Clique aqui para mostrar as informações com base no período selecionado'
 
-      DEFINE LABEL rodape_003
-         parent form_movban
-         col form_movban.width - 270
-         row 545
-         value 'DUPLO CLIQUE : Alterar informação'
-         autosize .T.
-         fontname 'verdana'
-         fontsize 010
-         fontbold .T.
-         fontcolor _verde_002
-         transparent .T.
-      END LABEL
+   DEFINE LABEL rodape_003
+      parent form_movban
+      col form_movban.width - 270
+      row 545
+      value 'DUPLO CLIQUE : Alterar informação'
+      autosize .T.
+      fontname 'verdana'
+      fontsize 010
+      fontbold .T.
+      fontcolor _verde_002
+      transparent .T.
+   END LABEL
 
-      on key F5 action dados(1)
-      on key F6 action dados(2)
-      on key F7 action excluir()
-      on key escape action thiswindow.release
+   on key F5 action dados(1)
+   on key F6 action dados(2)
+   on key F7 action excluir()
+   on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_movban.center
-   form_movban.activate
+form_movban.center
+form_movban.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION dados(parametro)
 
@@ -375,7 +375,7 @@ STATIC FUNCTION dados(parametro)
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_dados.width-225
          row form_dados.height-085
@@ -388,7 +388,7 @@ STATIC FUNCTION dados(parametro)
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
          row form_dados.height-085

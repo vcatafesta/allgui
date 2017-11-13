@@ -51,30 +51,47 @@ CLASS HStaticLink FROM HSTATICEX
    DATA lOverTitle    INIT .F.
    DATA nWidthOver
 
-   CLASS VAR winclass INIT "STATIC"
+CLASS VAR winclass INIT "STATIC"
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor )
-   METHOD INIT()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD GoToLinkUrl( csLink )
-   METHOD GetLinkText()
-   METHOD SetLinkUrl( csUrl )
-   METHOD GetLinkUrl()
-   METHOD SetVisitedColor( sVisitedColor )
-   METHOD SetHoverColor( cHoverColor )
-   METHOD SetFireChild( lFlag )  INLINE ::m_bFireChild := lFlag
-   METHOD OnClicked()
-   METHOD OnSetCursor( pWnd, nHitTest, message )
-   METHOD SetLinkText( csLinkText )
-   METHOD SetLinkColor( sLinkColor )
-   METHOD PAint( lpDis )
-   METHOD OnMouseMove( nFlags, lParam )
-   METHOD Resize( x, y )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor )
+
+METHOD INIT()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD GoToLinkUrl( csLink )
+
+METHOD GetLinkText()
+
+METHOD SetLinkUrl( csUrl )
+
+METHOD GetLinkUrl()
+
+METHOD SetVisitedColor( sVisitedColor )
+
+METHOD SetHoverColor( cHoverColor )
+
+METHOD SetFireChild( lFlag )  INLINE ::m_bFireChild := lFlag
+
+METHOD OnClicked()
+
+METHOD OnSetCursor( pWnd, nHitTest, message )
+
+METHOD SetLinkText( csLinkText )
+
+METHOD SetLinkColor( sLinkColor )
+
+METHOD PAint( lpDis )
+
+METHOD OnMouseMove( nFlags, lParam )
+
+METHOD Resize( x, y )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick ) CLASS HStaticLink

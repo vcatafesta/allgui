@@ -249,7 +249,7 @@ FUNCTION main()
       end menu
 
       * botões (toolbar)
-      DEFINE BUTTONex venda_delivery
+      DEFINE BUTTONEX venda_delivery
          parent form_main
          picture path_imagens+'delivery.bmp'
          col 000
@@ -268,7 +268,7 @@ FUNCTION main()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex venda_mesas
+      DEFINE BUTTONEX venda_mesas
          parent form_main
          picture path_imagens+'mesas.bmp'
          col 170
@@ -287,7 +287,7 @@ FUNCTION main()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex venda_balcao
+      DEFINE BUTTONEX venda_balcao
          parent form_main
          picture path_imagens+'balcao.bmp'
          col 340
@@ -306,7 +306,7 @@ FUNCTION main()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex clientes
+      DEFINE BUTTONEX clientes
          parent form_main
          picture path_imagens+'clientes.bmp'
          col 510
@@ -325,7 +325,7 @@ FUNCTION main()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex produtos
+      DEFINE BUTTONEX produtos
          parent form_main
          picture path_imagens+'produtos.bmp'
          col 680
@@ -344,7 +344,7 @@ FUNCTION main()
          noxpstyle .T.
          backcolor _branco_001
       END BUTTONex
-      DEFINE BUTTONex sair_programa
+      DEFINE BUTTONEX sair_programa
          parent form_main
          picture path_imagens+'sair_programa.bmp'
          col 850
@@ -2392,38 +2392,38 @@ STATIC FUNCTION configurar_venda()
          transparent .T.
       END LABEL
       DEFINE COMBOBOXex cbo_tipo
-         row 120
-         col 010
-         width 380
-         height 400
-         items a_tipos
-         value x_tipo
-         fontname 'courier new'
-         fontsize 12
-         fontcolor BLACK
-      END COMBOBOXex
+      row 120
+      col 010
+      width 380
+      height 400
+      items a_tipos
+      value x_tipo
+      fontname 'courier new'
+      fontsize 12
+      fontcolor BLACK
+   END COMBOBOXex
 
-      @ 005,290 button btn_sair;
-         parent form_configurar;
-         caption 'Sair';
-         action form_configurar.release;
-         width 100;
-         height 030
-      @ 200,290 button btn_gravar;
-         parent form_configurar;
-         caption 'Gravar';
-         action gravar_config();
-         width 100;
-         height 030
+   @ 005,290 button btn_sair;
+      parent form_configurar;
+      caption 'Sair';
+      action form_configurar.release;
+      width 100;
+      height 030
+   @ 200,290 button btn_gravar;
+      parent form_configurar;
+      caption 'Gravar';
+      action gravar_config();
+      width 100;
+      height 030
 
-      on key escape action thiswindow.release
+   on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_configurar.center
-   form_configurar.activate
+form_configurar.center
+form_configurar.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION gravar_config()
 

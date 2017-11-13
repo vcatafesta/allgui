@@ -313,59 +313,59 @@ FUNCTION Main()
       // AltSyntax test
 
       DEFINE COMBOBOXEX ComboEx_1alt
-         ROW   210
-         COL   10
-         WIDTH 150
-         FONTNAME  'MS Sans serif'
-         FONTSIZE  9
-         LISTWIDTH 150
-         ITEMS {'One','Two','Three'}
-         IMAGE {"br0","br2","br1"}
-         VALUE 3
-         TOOLTIP 'ComboEx_1alt AltSyntax'
-      END COMBOBOXEX
+      ROW   210
+      COL   10
+      WIDTH 150
+      FONTNAME  'MS Sans serif'
+      FONTSIZE  9
+      LISTWIDTH 150
+      ITEMS {'One','Two','Three'}
+      IMAGE {"br0","br2","br1"}
+      VALUE 3
+      TOOLTIP 'ComboEx_1alt AltSyntax'
+   END COMBOBOXEX
 
-      @ 235,10 Label Label_ComboEx_1alt Value "Ext. ComboEx_1alt - AltSynt." AUTOSIZE
+   @ 235,10 Label Label_ComboEx_1alt Value "Ext. ComboEx_1alt - AltSynt." AUTOSIZE
 
-      DEFINE COMBOBOXEX ComboEx_2alt
-         ROW   210
-         COL   200
-         WIDTH 50
-         FONTNAME  'MS Sans serif'
-         FONTSIZE  9
-         ITEMSOURCE CITIES->NAME
-         LISTWIDTH 150
-         IMAGE {{"br0","br2"}}
-         VALUE 2
-         TOOLTIP 'ComboEx_2alt AltSyntax - Data'
-      END COMBOBOXEX
+   DEFINE COMBOBOXEX ComboEx_2alt
+   ROW   210
+   COL   200
+   WIDTH 50
+   FONTNAME  'MS Sans serif'
+   FONTSIZE  9
+   ITEMSOURCE CITIES->NAME
+   LISTWIDTH 150
+   IMAGE {{"br0","br2"}}
+   VALUE 2
+   TOOLTIP 'ComboEx_2alt AltSyntax - Data'
+END COMBOBOXEX
 
-      @ 235,200 Label Label_ComboEx_2alt Value "Ext. ComboEx_2alt - AltSynt." AUTOSIZE
+@ 235,200 Label Label_ComboEx_2alt Value "Ext. ComboEx_2alt - AltSynt." AUTOSIZE
 
-      DEFINE COMBOBOXEX ComboEx_3alt
-         ROW   210
-         COL   390
-         WIDTH 150
-         DISPLAYEDIT .t.
-         FONTNAME  'MS Sans serif'
-         FONTSIZE  9
-         ITEMS  {"one","two","three","four","five","six"}
-         VALUE 2
-         TOOLTIP 'ComboEx_3alt AltSyntax - Edit enabled'
-      END COMBOBOXEX
+DEFINE COMBOBOXEX ComboEx_3alt
+ROW   210
+COL   390
+WIDTH 150
+DISPLAYEDIT .t.
+FONTNAME  'MS Sans serif'
+FONTSIZE  9
+ITEMS  {"one","two","three","four","five","six"}
+VALUE 2
+TOOLTIP 'ComboEx_3alt AltSyntax - Edit enabled'
+END COMBOBOXEX
 
-      @ 235,390 Label Label_ComboEx_3alt Value "Ext. ComboEx_3alt - AltSynt." AUTOSIZE
+@ 235,390 Label Label_ComboEx_3alt Value "Ext. ComboEx_3alt - AltSynt." AUTOSIZE
 
-   END WINDOW
+END WINDOW
 
-   IF IsVistaOrLater()
-      Form_1.ComboEx_4.SetFocus
-   ENDIF
+IF IsVistaOrLater()
+   Form_1.ComboEx_4.SetFocus
+ENDIF
 
-   Form_1.Center
-   Form_1.Activate
+Form_1.Center
+Form_1.Activate
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION RunMSIE(cURL)
 

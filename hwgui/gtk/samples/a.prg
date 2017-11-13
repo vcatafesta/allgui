@@ -38,26 +38,26 @@ FUNCTION Main
    SEPARATOR
    MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
    MENUITEM "&Exit" ACTION hwg_EndWindow()
-ENDMENU
-MENU TITLE "&Samples"
-MENUITEMCHECK "&Checked" ID 1001
-SEPARATOR
-MENUITEM "&Test Tab" ACTION TestTab()
-SEPARATOR
-MENUITEM "&MsgGet" ;
-   ACTION hwg_Copystringtoclipboard(hwg_MsgGet("Dialog Sample","Input table name"))
-MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
-#ifdef TEST_PRINT
-SEPARATOR
-MENUITEM "&Print Preview" ACTION PrnTest()
-#endif
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Samples"
+   MENUITEMCHECK "&Checked" ID 1001
+   SEPARATOR
+   MENUITEM "&Test Tab" ACTION TestTab()
+   SEPARATOR
+   MENUITEM "&MsgGet" ;
+      ACTION hwg_Copystringtoclipboard(hwg_MsgGet("Dialog Sample","Input table name"))
+   MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
+   #ifdef TEST_PRINT
+   SEPARATOR
+   MENUITEM "&Print Preview" ACTION PrnTest()
+   #endif
+   ENDMENU
 
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION FileOpen
 

@@ -222,7 +222,7 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
 
       END TBROWSE
 
-      DEFINE BUTTONeX Button_1
+      DEFINE BUTTONEX Button_1
          ROW    318
          COL    70
          WIDTH  100
@@ -247,7 +247,7 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
          Picture "Minigui_EDIT_OK"
       END BUTTONEX
 
-      DEFINE BUTTONex Button_2
+      DEFINE BUTTONEX Button_2
          ROW    318
          COL    310
          WIDTH  100
@@ -401,7 +401,7 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
 
          END TBROWSE
 
-         DEFINE BUTTONeX Button_1
+         DEFINE BUTTONEX Button_1
             ROW    nBrwHeight+ 25
             COL    70
             WIDTH  100
@@ -425,7 +425,7 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
             Picture "Minigui_EDIT_ADD"
          END BUTTONEX
 
-         DEFINE BUTTONeX Button_2
+         DEFINE BUTTONEX Button_2
             ROW    nBrwHeight+ 25
             COL    (nHw/2)-50
             WIDTH  100
@@ -442,7 +442,7 @@ FUNCTION TagIt(aTagged, aFields, aFieldNames, cTitle, nFreeze, cell,nHw,nVw)
             Picture "Minigui_EDIT_OK"
          END BUTTONEX
 
-         DEFINE BUTTONex Button_3
+         DEFINE BUTTONEX Button_3
             ROW    nBrwHeight+ 25
             COL    nBrwWidth-170
             WIDTH  100

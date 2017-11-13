@@ -19,13 +19,13 @@ FUNCTION Parametros
    PRIVATE cPass:='root'          //Password de acceso
 
    IF !File('Parametros.Ini') ; CrearIniPar() ; EndIf
-      LOAD WINDOW Parametros ; Center Window Parametros
-      CargarIniPar()
-      ACTIVATE WINDOW Parametros
+   LOAD WINDOW Parametros ; Center Window Parametros
+   CargarIniPar()
+   ACTIVATE WINDOW Parametros
 
-      RETURN NIL
+   RETURN NIL
 
-      * CrearIniPar() Genera un archivo INI para Configuración de Parámetros.        *
+   * CrearIniPar() Genera un archivo INI para Configuración de Parámetros.        *
 
 FUNCTION CrearIniPar
 

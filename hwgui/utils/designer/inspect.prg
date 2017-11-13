@@ -392,17 +392,17 @@ FUNCTION InspOpen(lShow)
    MENUITEM "Normal" ACTION ActiveTopMost( oDesigner:oDlgInsp:Handle, .f. )
    //{||oDesigner:oDlgInsp:Close(),inspOpen(0)}
    MENUITEM "Hide" ACTION oDesigner:oDlgInsp:close()
-ENDMENU
+   ENDMENU
 
-ACTIVATE DIALOG oDesigner:oDlgInsp NOMODAL
-hwg_Checkmenuitem( oDesigner:oMainWnd:handle, 1010, .T. )
+   ACTIVATE DIALOG oDesigner:oDlgInsp NOMODAL
+   hwg_Checkmenuitem( oDesigner:oMainWnd:handle, 1010, .T. )
 
-InspSetCombo()
+   InspSetCombo()
 
-oDesigner:oDlgInsp:AddEvent( 0,IDOK,{||DlgOk()} )
-oDesigner:oDlgInsp:AddEvent( 0,IDCANCEL,{||DlgCancel()} )
+   oDesigner:oDlgInsp:AddEvent( 0,IDOK,{||DlgOk()} )
+   oDesigner:oDlgInsp:AddEvent( 0,IDCANCEL,{||DlgCancel()} )
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION DlgOk()
 
@@ -811,3 +811,4 @@ STATIC FUNCTION resettodefault(oBrw1)
    RETURN NIL
 
    // :END LFB
+

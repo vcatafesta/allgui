@@ -13,7 +13,7 @@
 
 CLASS HCheckButton INHERIT HControl
 
-   CLASS VAR winclass INIT "BUTTON"
+CLASS VAR winclass INIT "BUTTON"
 
    DATA bSetGet
    DATA lValue
@@ -21,25 +21,39 @@ CLASS HCheckButton INHERIT HControl
    DATA lFocu INIT .f.
    DATA bClick
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
-         bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus )
-   METHOD Activate()
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter )
-   METHOD Init()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Refresh()
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+      bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus )
+
+METHOD Activate()
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter )
+
+METHOD Init()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Refresh()
+
    // METHOD Disable()
    // METHOD Enable()
-   METHOD SetValue( lValue )
-   METHOD GetValue() INLINE ( hwg_Sendmessage( ::handle, BM_GETCHECK, 0, 0 ) == 1 )
-   METHOD onGotFocus()
-   METHOD onClick()
-   METHOD KillFocus()
-   METHOD Valid()
-   METHOD When()
-   METHOD Value ( lValue ) SETGET
 
-   ENDCLASS
+METHOD SetValue( lValue )
+
+METHOD GetValue() INLINE ( hwg_Sendmessage( ::handle, BM_GETCHECK, 0, 0 ) == 1 )
+
+METHOD onGotFocus()
+
+METHOD onClick()
+
+METHOD KillFocus()
+
+METHOD Valid()
+
+METHOD When()
+
+METHOD Value ( lValue ) SETGET
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus ) CLASS HCheckButton

@@ -224,9 +224,9 @@ PROCEDURE Build( ProjectName )  // Borland C
 
    QUITarEspera()
 
-EndBuild()
+   EndBuild()
 
-Procesando(2)
+   Procesando(2)
 
-RETURN
+   RETURN
 

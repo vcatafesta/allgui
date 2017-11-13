@@ -12,11 +12,11 @@ FUNCTION Main
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION oMainWindow:Close()
    MENUITEM "&Teste" ACTION Teste()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Teste
 

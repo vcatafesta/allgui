@@ -49,7 +49,7 @@ Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 #include "i_winuser.ch"
 
 FUNCTION _DefineImage ( ControlName, ParentFormName, x, y, FileName, w, h, ;
-ProcedureName, tooltip, HelpId, invisible, stretch, aBKColor, transparent, adjustimage, ;
+      ProcedureName, tooltip, HelpId, invisible, stretch, aBKColor, transparent, adjustimage, ;
       mouseover, mouseleave, nAlphaLevel, nId )
    LOCAL ParentFormHandle , blInit , mVar , action := .F. , k , Style , aSize
    LOCAL ControlHandle , lDialogInMemory , BackgroundColor , lCheckAlpha := ISNUMBER( nAlphaLevel )
@@ -86,128 +86,128 @@ ProcedureName, tooltip, HelpId, invisible, stretch, aBKColor, transparent, adjus
    ENDIF
 
    IF ValType( ProcedureName ) == "U"
-ProcedureName := ""
-ELSE
-   action := .T.
-ENDIF
-
-IF IsArrayRGB( aBKColor )
-   BackgroundColor := RGB ( aBKColor [1], aBKColor [2], aBKColor [3] )
-ENDIF
-
-DEFAULT stretch TO FALSE, BackgroundColor TO -1, transparent TO FALSE, adjustimage TO FALSE
-
-IF ValType( nAlphaLevel ) == "N" .AND. ( nAlphaLevel < 0 .OR. nAlphaLevel > 255 )
-   nAlphaLevel := 255
-ENDIF
-
-mVar := '_' + ParentFormName + '_' + ControlName
-k := _GetControlFree()
-
-IF _HMG_BeginDialogActive
-
-   ParentFormHandle := _HMG_ActiveDialogHandle
-
-   Style := WS_CHILD + SS_BITMAP
-
-   IF !invisible
-      Style += WS_VISIBLE
+      ProcedureName := ""
+   ELSE
+      action := .T.
    ENDIF
 
-   IF action
-      Style += SS_NOTIFY
+   IF IsArrayRGB( aBKColor )
+      BackgroundColor := RGB ( aBKColor [1], aBKColor [2], aBKColor [3] )
    ENDIF
 
-   IF lDialogInMemory         //Dialog Template
-      //      {{'ID',k/hwnd,class,Style,ExStyle,x,y,w,h,caption,HelpId,tooltip,font,size, bold, italic, underline, strikeout}}  --->_HMG_aDialogItems
-      blInit := {|x, y, z| InitDialogImage( x, y, z ) }
-      AAdd( _HMG_aDialogItems, { nId, k, "static", style, 0, x, y, w, h, "", HelpId, "", "", , , , , , blInit, _HMG_BeginTabActive, .F. , _HMG_ActiveTabPage } )
+   DEFAULT stretch TO FALSE, BackgroundColor TO -1, transparent TO FALSE, adjustimage TO FALSE
+
+   IF ValType( nAlphaLevel ) == "N" .AND. ( nAlphaLevel < 0 .OR. nAlphaLevel > 255 )
+      nAlphaLevel := 255
+   ENDIF
+
+   mVar := '_' + ParentFormName + '_' + ControlName
+   k := _GetControlFree()
+
+   IF _HMG_BeginDialogActive
+
+      ParentFormHandle := _HMG_ActiveDialogHandle
+
+      Style := WS_CHILD + SS_BITMAP
+
+      IF !invisible
+         Style += WS_VISIBLE
+      ENDIF
+
+      IF action
+         Style += SS_NOTIFY
+      ENDIF
+
+      IF lDialogInMemory         //Dialog Template
+         //      {{'ID',k/hwnd,class,Style,ExStyle,x,y,w,h,caption,HelpId,tooltip,font,size, bold, italic, underline, strikeout}}  --->_HMG_aDialogItems
+         blInit := {|x, y, z| InitDialogImage( x, y, z ) }
+         AAdd( _HMG_aDialogItems, { nId, k, "static", style, 0, x, y, w, h, "", HelpId, "", "", , , , , , blInit, _HMG_BeginTabActive, .F. , _HMG_ActiveTabPage } )
+
+      ELSE
+
+         ControlHandle := GetDialogItemHandle( ParentFormHandle, nId )
+
+         x := GetWindowCol ( Controlhandle )
+         y := GetWindowRow ( Controlhandle )
+         w := GetWindowWidth  ( Controlhandle )
+         h := GetWindowHeight ( Controlhandle )
+
+         SetWindowStyle ( ControlHandle, Style, .T. )
+
+      ENDIF
 
    ELSE
 
-      ControlHandle := GetDialogItemHandle( ParentFormHandle, nId )
+      ParentFormHandle := GetFormHandle ( ParentFormName )
 
-      x := GetWindowCol ( Controlhandle )
-      y := GetWindowRow ( Controlhandle )
-      w := GetWindowWidth  ( Controlhandle )
-      h := GetWindowHeight ( Controlhandle )
-
-      SetWindowStyle ( ControlHandle, Style, .T. )
+      ControlHandle := InitImage ( ParentFormHandle, 0, x, y, invisible, ( action .OR. ISSTRING( tooltip ) ), ( ISBLOCK( mouseover ) .OR. ISBLOCK( mouseleave ) ) )
 
    ENDIF
 
-ELSE
+   IF .NOT. lDialogInMemory
 
-   ParentFormHandle := GetFormHandle ( ParentFormName )
+      IF _HMG_BeginTabActive
+         AAdd ( _HMG_ActiveTabCurrentPageMap , ControlHandle )
+      ENDIF
 
-   ControlHandle := InitImage ( ParentFormHandle, 0, x, y, invisible, ( action .OR. ISSTRING( tooltip ) ), ( ISBLOCK( mouseover ) .OR. ISBLOCK( mouseleave ) ) )
+      IF ValType( tooltip ) != "U"
+         SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle ( ParentFormName ) )
+      ENDIF
 
-ENDIF
-
-IF .NOT. lDialogInMemory
-
-   IF _HMG_BeginTabActive
-      AAdd ( _HMG_ActiveTabCurrentPageMap , ControlHandle )
    ENDIF
 
-   IF ValType( tooltip ) != "U"
-      SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle ( ParentFormName ) )
+   PUBLIC &mVar. := k
+
+   _HMG_aControlType  [k] :=  "IMAGE"
+   _HMG_aControlNames [k] :=  ControlName
+   _HMG_aControlHandles [k] :=  ControlHandle
+   _HMG_aControlParentHandles  [k] :=  ParentFormHandle
+   _HMG_aControlIds  [k] :=  nId
+   _HMG_aControlProcedures [k] :=  ProcedureName
+   _HMG_aControlPageMap   [k] :=  {}
+   _HMG_aControlValue  [k] :=  iif ( stretch, 1, 0 )
+   _HMG_aControlInputMask  [k] :=  iif ( transparent, 1, 0 )
+   _HMG_aControllostFocusProcedure  [k] :=  mouseleave
+   _HMG_aControlGotFocusProcedure  [k] :=  mouseover
+   _HMG_aControlChangeProcedure  [k] :=  ""
+   _HMG_aControlDeleted  [k] :=  .F.
+   _HMG_aControlBkColor  [k] :=  Nil
+   _HMG_aControlFontColor  [k] :=  Nil
+   _HMG_aControlDblClick  [k] :=  lCheckAlpha
+   _HMG_aControlHeadClick  [k] :=  {}
+   _HMG_aControlRow  [k] :=  y
+   _HMG_aControlCol  [k] :=  x
+   _HMG_aControlWidth  [k] :=  w
+   _HMG_aControlHeight  [k] :=  h
+   _HMG_aControlSpacing  [k] :=  BackgroundColor
+   _HMG_aControlContainerRow  [k] :=  iif ( _HMG_FrameLevel > 0 , _HMG_ActiveFrameRow [_HMG_FrameLevel] , -1 )
+   _HMG_aControlContainerCol  [k] :=  iif ( _HMG_FrameLevel > 0 , _HMG_ActiveFrameCol [_HMG_FrameLevel] , -1 )
+   _HMG_aControlPicture  [k] :=  FileName
+   _HMG_aControlContainerHandle [k] :=  0
+   _HMG_aControlFontName  [k] :=  ''
+   _HMG_aControlFontSize  [k] :=  0
+   _HMG_aControlFontAttributes  [k] :=  { .F. , .F. , .F. , .F. }
+   _HMG_aControlToolTip   [k] :=  tooltip
+   _HMG_aControlRangeMin  [k] :=  w
+   _HMG_aControlRangeMax  [k] :=  h
+   _HMG_aControlCaption  [k] :=  iif ( adjustimage, 1, 0 )
+   _HMG_aControlVisible  [k] :=  iif( invisible, .F. , .T. )
+   _HMG_aControlHelpId  [k] :=  HelpId
+   _HMG_aControlFontHandle  [k] :=   0
+   _HMG_aControlBrushHandle  [k] :=  0
+   _HMG_aControlEnabled  [k] :=  .T.
+   _HMG_aControlMiscData1 [k] := nAlphaLevel
+   _HMG_aControlMiscData2 [k] := ''
+
+   IF _HMG_lOOPEnabled
+      Eval ( _HMG_bOnControlInit, k, mVar )
    ENDIF
 
-ENDIF
+   IF .NOT. lDialogInMemory
+      InitDialogImage( ParentFormName, ControlHandle, k )
+   ENDIF
 
-PUBLIC &mVar. := k
-
-_HMG_aControlType  [k] :=  "IMAGE"
-_HMG_aControlNames [k] :=  ControlName
-_HMG_aControlHandles [k] :=  ControlHandle
-_HMG_aControlParentHandles  [k] :=  ParentFormHandle
-_HMG_aControlIds  [k] :=  nId
-_HMG_aControlProcedures [k] :=  ProcedureName
-_HMG_aControlPageMap   [k] :=  {}
-_HMG_aControlValue  [k] :=  iif ( stretch, 1, 0 )
-_HMG_aControlInputMask  [k] :=  iif ( transparent, 1, 0 )
-_HMG_aControllostFocusProcedure  [k] :=  mouseleave
-_HMG_aControlGotFocusProcedure  [k] :=  mouseover
-_HMG_aControlChangeProcedure  [k] :=  ""
-_HMG_aControlDeleted  [k] :=  .F.
-_HMG_aControlBkColor  [k] :=  Nil
-_HMG_aControlFontColor  [k] :=  Nil
-_HMG_aControlDblClick  [k] :=  lCheckAlpha
-_HMG_aControlHeadClick  [k] :=  {}
-_HMG_aControlRow  [k] :=  y
-_HMG_aControlCol  [k] :=  x
-_HMG_aControlWidth  [k] :=  w
-_HMG_aControlHeight  [k] :=  h
-_HMG_aControlSpacing  [k] :=  BackgroundColor
-_HMG_aControlContainerRow  [k] :=  iif ( _HMG_FrameLevel > 0 , _HMG_ActiveFrameRow [_HMG_FrameLevel] , -1 )
-_HMG_aControlContainerCol  [k] :=  iif ( _HMG_FrameLevel > 0 , _HMG_ActiveFrameCol [_HMG_FrameLevel] , -1 )
-_HMG_aControlPicture  [k] :=  FileName
-_HMG_aControlContainerHandle [k] :=  0
-_HMG_aControlFontName  [k] :=  ''
-_HMG_aControlFontSize  [k] :=  0
-_HMG_aControlFontAttributes  [k] :=  { .F. , .F. , .F. , .F. }
-_HMG_aControlToolTip   [k] :=  tooltip
-_HMG_aControlRangeMin  [k] :=  w
-_HMG_aControlRangeMax  [k] :=  h
-_HMG_aControlCaption  [k] :=  iif ( adjustimage, 1, 0 )
-_HMG_aControlVisible  [k] :=  iif( invisible, .F. , .T. )
-_HMG_aControlHelpId  [k] :=  HelpId
-_HMG_aControlFontHandle  [k] :=   0
-_HMG_aControlBrushHandle  [k] :=  0
-_HMG_aControlEnabled  [k] :=  .T.
-_HMG_aControlMiscData1 [k] := nAlphaLevel
-_HMG_aControlMiscData2 [k] := ''
-
-IF _HMG_lOOPEnabled
-   Eval ( _HMG_bOnControlInit, k, mVar )
-ENDIF
-
-IF .NOT. lDialogInMemory
-   InitDialogImage( ParentFormName, ControlHandle, k )
-ENDIF
-
-RETURN NIL
+   RETURN NIL
 
 FUNCTION InitDialogImage( ParentName, ControlHandle, k )
 

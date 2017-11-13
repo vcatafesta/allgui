@@ -117,10 +117,11 @@ CLASS HCtrlTmpl
    DATA aControls INIT { }
    DATA aProp, aMethods
 
-   METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls, Self ), Self )
-   METHOD F( nId )
+METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls, Self ), Self )
 
-   ENDCLASS
+METHOD F( nId )
+
+ENDCLASS
 
 METHOD F( nId ) CLASS HCtrlTmpl
 
@@ -140,8 +141,9 @@ METHOD F( nId ) CLASS HCtrlTmpl
 
 CLASS HFormTmpl
 
-   CLASS VAR aForms   INIT { }
-   CLASS VAR maxId    INIT 0
+CLASS VAR aForms   INIT { }
+
+CLASS VAR maxId    INIT 0
 
    DATA oDlg
    DATA aControls     INIT { }
@@ -158,15 +160,21 @@ CLASS HFormTmpl
    DATA lDebug        INIT .F.
    DATA cargo
 
-   METHOD Read( fname, cId )
-   METHOD Show( nMode, p1, p2, p3 )
-   METHOD ShowMain( params )   INLINE ::Show( 1, params )
-   METHOD ShowModal( params )  INLINE ::Show( 2, params )
-   METHOD Close()
-   METHOD F( id, n )
-   METHOD Find( cId )
+METHOD Read( fname, cId )
 
-   ENDCLASS
+METHOD Show( nMode, p1, p2, p3 )
+
+METHOD ShowMain( params )   INLINE ::Show( 1, params )
+
+METHOD ShowModal( params )  INLINE ::Show( 2, params )
+
+METHOD Close()
+
+METHOD F( id, n )
+
+METHOD Find( cId )
+
+ENDCLASS
 
 METHOD Read( fname, cId ) CLASS HFormTmpl
 
@@ -537,66 +545,66 @@ STATIC FUNCTION CompileMethod( pp, cMethod, oForm, oCtrl, cName )
    IF Lower( Left( cMethod ,11 ) ) == "parameters " .AND. ;
          ( nPos := At( Chr(10),cMethod ) ) != 0
       DO WHILE Substr( cMethod, --nPos, 1 ) <= ' '; ENDDO
-         cParam := Alltrim( Substr( Left( cMethod,nPos ), 12 ) )
-      ENDIF
-      IF oForm:lDebug
-         arr := {}
-      ELSE
-         arr := ParseMethod( cMethod )
-      ENDIF
-      IF Len( arr ) == 1
-         cCode := Iif( Lower( Left(arr[1],6) ) == "return", Ltrim( Substr( arr[1],8 ) ), arr[1] )
+      cParam := Alltrim( Substr( Left( cMethod,nPos ), 12 ) )
+   ENDIF
+   IF oForm:lDebug
+      arr := {}
+   ELSE
+      arr := ParseMethod( cMethod )
+   ENDIF
+   IF Len( arr ) == 1
+      cCode := Iif( Lower( Left(arr[1],6) ) == "return", Ltrim( Substr( arr[1],8 ) ), arr[1] )
+      bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
+      BEGIN SEQUENCE
+         bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
+      END SEQUENCE
+      ERRORBLOCK( bOldError )
+
+      RETURN bRes
+   ELSEIF !Empty(arr) .AND. !Empty( cParam )
+      IF Len( arr ) == 2
+         cCode := Iif( Lower( Left(arr[2],6) ) == "return", Ltrim( Substr( arr[2],8 ) ), arr[2] )
+         cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
          bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
          BEGIN SEQUENCE
-            bRes := &( "{||" + __pp_process( pp, cCode ) + "}" )
+            bRes := &cCode
          END SEQUENCE
          ERRORBLOCK( bOldError )
 
          RETURN bRes
-      ELSEIF !Empty(arr) .AND. !Empty( cParam )
-         IF Len( arr ) == 2
-            cCode := Iif( Lower( Left(arr[2],6) ) == "return", Ltrim( Substr( arr[2],8 ) ), arr[2] )
-            cCode := "{|" + cParam + "|" + __pp_process( pp, cCode ) + "}"
-            bOldError := ERRORBLOCK( {|e|CompileErr(e,cCode)} )
-            BEGIN SEQUENCE
-               bRes := &cCode
-            END SEQUENCE
-            ERRORBLOCK( bOldError )
+      ELSE
+         cCode1 := Iif( nContainer==0, ;
+            "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
+            "F("+Ltrim(Str(oCtrl:nId))+")" )
+         arrExe := Array(2)
+         arrExe[2] := RdScript( ,cMethod,1,.T.,cName )
+         cCode :=  "{|" + cParam + ;
+            "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+Iif(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
+            Iif( oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2],{", ;
+            cCode1+":aMethods["+ ;
+            Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2],{" ) + ;
+            cParam + "})" + "}"
+         arrExe[1] := &cCode
 
-            RETURN bRes
-         ELSE
-            cCode1 := Iif( nContainer==0, ;
-               "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
-               "F("+Ltrim(Str(oCtrl:nId))+")" )
-            arrExe := Array(2)
-            arrExe[2] := RdScript( ,cMethod,1,.T.,cName )
-            cCode :=  "{|" + cParam + ;
-               "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+Iif(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
-               Iif( oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2],{", ;
-               cCode1+":aMethods["+ ;
-               Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2],{" ) + ;
-               cParam + "})" + "}"
-            arrExe[1] := &cCode
-
-            RETURN arrExe
-         ENDIF
+         RETURN arrExe
       ENDIF
+   ENDIF
 
-      cCode1 := Iif( nContainer==0, ;
-         "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
-         "F("+Ltrim(Str(oCtrl:nId))+")" )
-      arrExe := Array(2)
-      arrExe[2] := RdScript( ,cMethod,,.T.,cName )
-      cCode := "{|" + Iif( Empty(cParam),"",cParam ) + ;
-         "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+Iif(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
-         Iif( oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2]" + ;
-         Iif( Empty(cParam),"",",{"+cParam+"}" ) + ")", ;
-         cCode1+":aMethods["+   ;
-         Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2]" + ;
-         Iif( Empty(cParam),"",",{"+cParam+"}" ) + ")" ) + "}"
-      arrExe[1] := &cCode
+   cCode1 := Iif( nContainer==0, ;
+      "aControls["+Ltrim(Str(Len(oForm:aControls)))+"]", ;
+      "F("+Ltrim(Str(oCtrl:nId))+")" )
+   arrExe := Array(2)
+   arrExe[2] := RdScript( ,cMethod,,.T.,cName )
+   cCode := "{|" + Iif( Empty(cParam),"",cParam ) + ;
+      "|DoScript(HFormTmpl():F("+Ltrim(Str(oForm:id))+Iif(nContainer!=0,","+Ltrim(Str(nContainer)),"")+"):" + ;
+      Iif( oCtrl==Nil,"aMethods["+Ltrim(Str(Len(oForm:aMethods)+1))+",2,2]" + ;
+      Iif( Empty(cParam),"",",{"+cParam+"}" ) + ")", ;
+      cCode1+":aMethods["+   ;
+      Ltrim(Str(Len(oCtrl:aMethods)+1))+",2,2]" + ;
+      Iif( Empty(cParam),"",",{"+cParam+"}" ) + ")" ) + "}"
+   arrExe[1] := &cCode
 
-      RETURN arrExe
+   RETURN arrExe
 
 STATIC PROCEDURE CompileErr( e, stroka )
 
@@ -1186,13 +1194,13 @@ FUNCTION hfrm_Str2Arr( stroka )
    IF Len( stroka ) > 2
       DO WHILE pos2 > 0
          DO WHILE SubStr( stroka, pos1, 1 ) <= ' ' ; pos1 ++ ; ENDDO
-            pos2 := hb_At( ',', stroka, pos1 )
-            AAdd( arr, Trim( SubStr( stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 ) ) ) )
-            pos1 := pos2 + 1
-         ENDDO
-      ENDIF
+         pos2 := hb_At( ',', stroka, pos1 )
+         AAdd( arr, Trim( SubStr( stroka, pos1, IIf( pos2 > 0, pos2 - pos1, hb_At( '}', stroka, pos1 ) - pos1 ) ) ) )
+         pos1 := pos2 + 1
+      ENDDO
+   ENDIF
 
-      RETURN arr
+   RETURN arr
 
 FUNCTION hfrm_Arr2Str( arr )
 

@@ -216,7 +216,7 @@ FUNCTION NewUsrFrm()
       cFormName:=alltrim(maschera1.GetBox_1.Value)
       nWidth:=maschera1.GetBox_2.Value
       nHeigth:=maschera1.GetBox_3.Value
-   ELSEIF(maschera1.Button_1.caption=="Save User Form")
+      ELSEIF(maschera1.Button_1.caption=="Save User Form")
       IF MSGYESNO("Add New Form ?","Confirm")
          cFormName:=alltrim(maschera1.GetBox_1.Value)
          nWidth:=maschera1.GetBox_2.Value

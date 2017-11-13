@@ -192,223 +192,223 @@ FUNCTION Main
 
          DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 23,23 FLAT //RIGHTTEXT
 
-            BUTTON Btn_New ;
-               TOOLTIP 'New File' ;
-               PICTURE 'NEW' ;
-               ACTION New_File()
+         BUTTON Btn_New ;
+            TOOLTIP 'New File' ;
+            PICTURE 'NEW' ;
+            ACTION New_File()
 
-            BUTTON Btn_Open ;
-               TOOLTIP 'Open File' ;
-               PICTURE 'OPEN' ;
-               ACTION Open_File()
+         BUTTON Btn_Open ;
+            TOOLTIP 'Open File' ;
+            PICTURE 'OPEN' ;
+            ACTION Open_File()
 
-            BUTTON Btn_Close ;
-               TOOLTIP 'Close' ;
-               PICTURE 'CLOSE' ;
-               ACTION Close_File()
+         BUTTON Btn_Close ;
+            TOOLTIP 'Close' ;
+            PICTURE 'CLOSE' ;
+            ACTION Close_File()
 
-            BUTTON Btn_Save ;
-               TOOLTIP 'Save' ;
-               PICTURE 'SAVE' ;
-               ACTION Save_File(0)
+         BUTTON Btn_Save ;
+            TOOLTIP 'Save' ;
+            PICTURE 'SAVE' ;
+            ACTION Save_File(0)
 
-            BUTTON Btn_SaveAll ;
-               TOOLTIP 'Save all Files' ;
-               PICTURE 'SAVEALL' ;
-               ACTION Save_AllFile();
-               SEPARATOR
+         BUTTON Btn_SaveAll ;
+            TOOLTIP 'Save all Files' ;
+            PICTURE 'SAVEALL' ;
+            ACTION Save_AllFile();
+            SEPARATOR
 
-            BUTTON Btn_Print ;
-               TOOLTIP 'Print' ;
-               PICTURE 'Printer' ;
-               ACTION   PrintRTF_Click(1)
+         BUTTON Btn_Print ;
+            TOOLTIP 'Print' ;
+            PICTURE 'Printer' ;
+            ACTION   PrintRTF_Click(1)
 
-            BUTTON Btn_Prev ;
-               TOOLTIP 'Preview' ;
-               PICTURE 'Preview' ;
-               ACTION   PrintRTF_Click(0)
-         END TOOLBAR
+         BUTTON Btn_Prev ;
+            TOOLTIP 'Preview' ;
+            PICTURE 'Preview' ;
+            ACTION   PrintRTF_Click(0)
+      END TOOLBAR
 
-         COMBOBOX Combo_3 ;
-            ITEMS aRatioZoom;
-            VALUE 4 ;
-            HEIGHT 200;
-            FONT 'Tahoma' SIZE 9 ;
-            WIDTH 80;
-            TOOLTIP 'Zoom Ratio';
-            ON CHANGE SetZoom_Click();
+      COMBOBOX Combo_3 ;
+         ITEMS aRatioZoom;
+         VALUE 4 ;
+         HEIGHT 200;
+         FONT 'Tahoma' SIZE 9 ;
+         WIDTH 80;
+         TOOLTIP 'Zoom Ratio';
+         ON CHANGE SetZoom_Click();
 
-         DEFINE TOOLBAREX ToolBar_2 BUTTONSIZE 23,23 FONT 'ARIAL' SIZE 8  FLAT //RIGHTTEXT MIXEDBUTTONS
+      DEFINE TOOLBAREX ToolBar_2 BUTTONSIZE 23,23 FONT 'ARIAL' SIZE 8  FLAT //RIGHTTEXT MIXEDBUTTONS
 
-            BUTTON Btn_Copy ;
-               TOOLTIP 'Copy' ;
-               PICTURE 'copy' ;
-               ACTION Copy_click()
+      BUTTON Btn_Copy ;
+         TOOLTIP 'Copy' ;
+         PICTURE 'copy' ;
+         ACTION Copy_click()
 
-            BUTTON Btn_Paste ;
-               TOOLTIP 'Paste' ;
-               PICTURE 'Paste' ;
-               ACTION Paste_Click()
+      BUTTON Btn_Paste ;
+         TOOLTIP 'Paste' ;
+         PICTURE 'Paste' ;
+         ACTION Paste_Click()
 
-            BUTTON Btn_Cut ;
-               TOOLTIP 'Cut' ;
-               PICTURE 'cut' ;
-               ACTION Cut_Click();
+      BUTTON Btn_Cut ;
+         TOOLTIP 'Cut' ;
+         PICTURE 'cut' ;
+         ACTION Cut_Click();
 
-            BUTTON Btn_Clear ;
-               TOOLTIP 'Clear' ;
-               PICTURE 'Clear' ;
-               ACTION Clear_Click();
-               SEPARATOR
+      BUTTON Btn_Clear ;
+         TOOLTIP 'Clear' ;
+         PICTURE 'Clear' ;
+         ACTION Clear_Click();
+         SEPARATOR
 
-            BUTTON Btn_Undo ;
-               TOOLTIP 'Undo' ;
-               PICTURE 'undo' ;
-               ACTION Undo_Click();
-               DROPDOWN
+      BUTTON Btn_Undo ;
+         TOOLTIP 'Undo' ;
+         PICTURE 'undo' ;
+         ACTION Undo_Click();
+         DROPDOWN
 
-            DEFINE DROPDOWN MENU BUTTON Btn_Undo
-               ITEM emumUndo[1]   ACTION {|| Nil } NAME It_DrDwn
-               SEPARATOR
-               ITEM '&Clear Undo'      ACTION ClearUndo_Click() NAME ItU_Clear
-            END MENU
+      DEFINE DROPDOWN MENU BUTTON Btn_Undo
+         ITEM emumUndo[1]   ACTION {|| Nil } NAME It_DrDwn
+         SEPARATOR
+         ITEM '&Clear Undo'      ACTION ClearUndo_Click() NAME ItU_Clear
+      END MENU
 
-            BUTTON Btn_Redo ;
-               TOOLTIP 'Redo' ;
-               PICTURE 'redo' ;
-               ACTION Redo_Click();
-               SEPARATOR
+      BUTTON Btn_Redo ;
+         TOOLTIP 'Redo' ;
+         PICTURE 'redo' ;
+         ACTION Redo_Click();
+         SEPARATOR
 
-            BUTTON Btn_Find ;
-               TOOLTIP 'Find' ;
-               PICTURE 'find2' ;
-               ACTION Search_click(0)
+      BUTTON Btn_Find ;
+         TOOLTIP 'Find' ;
+         PICTURE 'find2' ;
+         ACTION Search_click(0)
 
-            BUTTON Btn_Repl ;
-               TOOLTIP 'Replace' ;
-               PICTURE 'repeat' ;
-               ACTION  Search_click(1)
+      BUTTON Btn_Repl ;
+         TOOLTIP 'Replace' ;
+         PICTURE 'repeat' ;
+         ACTION  Search_click(1)
 
-         END TOOLBAR
+   END TOOLBAR
 
-         COMBOBOX Combo_1 ;
-            ITEMS aListFont;
-            VALUE 2 ;
-            WIDTH 170;
-            HEIGHT 200;
-            FONT 'Tahoma' SIZE 9 ;
-            TOOLTIP 'Font Name';
-            ON CHANGE SetName_Click();
-            SORT;
-            BREAK
+   COMBOBOX Combo_1 ;
+      ITEMS aListFont;
+      VALUE 2 ;
+      WIDTH 170;
+      HEIGHT 200;
+      FONT 'Tahoma' SIZE 9 ;
+      TOOLTIP 'Font Name';
+      ON CHANGE SetName_Click();
+      SORT;
+      BREAK
 
-         COMBOBOX Combo_2 ;
-            ITEMS aSizeFont ;
-            VALUE 3 ;
-            WIDTH 40;
-            TOOLTIP 'Font Size' ;
-            ON CHANGE SetSize_Click()
+   COMBOBOX Combo_2 ;
+      ITEMS aSizeFont ;
+      VALUE 3 ;
+      WIDTH 40;
+      TOOLTIP 'Font Size' ;
+      ON CHANGE SetSize_Click()
 
-         DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 23,23 SIZE 8  FLAT //RIGHTTEXT //MIXEDBUTTONS
+   DEFINE TOOLBAREX ToolBar_3 BUTTONSIZE 23,23 SIZE 8  FLAT //RIGHTTEXT //MIXEDBUTTONS
 
-            BUTTON Btn_Bold ;
-               TOOLTIP 'Bold' ;
-               PICTURE 'bold' ;
-               ACTION SetBold_click();
-               CHECK
+   BUTTON Btn_Bold ;
+      TOOLTIP 'Bold' ;
+      PICTURE 'bold' ;
+      ACTION SetBold_click();
+      CHECK
 
-            BUTTON Btn_Italic ;
-               TOOLTIP 'Italic' ;
-               PICTURE 'Italic' ;
-               ACTION SetItalic_Click();
-               CHECK
+   BUTTON Btn_Italic ;
+      TOOLTIP 'Italic' ;
+      PICTURE 'Italic' ;
+      ACTION SetItalic_Click();
+      CHECK
 
-            BUTTON Btn_Under ;
-               TOOLTIP 'Underline' ;
-               PICTURE 'under' ;
-               ACTION SetUnderLine_Click();
-               CHECK
+   BUTTON Btn_Under ;
+      TOOLTIP 'Underline' ;
+      PICTURE 'under' ;
+      ACTION SetUnderLine_Click();
+      CHECK
 
-            BUTTON Btn_Strike ;
-               TOOLTIP 'StrikeOut' ;
-               PICTURE 'strike' ;
-               ACTION SetStrikeOut_Click();
-               CHECK  SEPARATOR
+   BUTTON Btn_Strike ;
+      TOOLTIP 'StrikeOut' ;
+      PICTURE 'strike' ;
+      ACTION SetStrikeOut_Click();
+      CHECK  SEPARATOR
 
-            BUTTON Btn_Left ;
-               TOOLTIP 'Left Tekst' ;
-               PICTURE 'left' ;
-               ACTION  SetLeft_Click();
-               CHECK GROUP
+   BUTTON Btn_Left ;
+      TOOLTIP 'Left Tekst' ;
+      PICTURE 'left' ;
+      ACTION  SetLeft_Click();
+      CHECK GROUP
 
-            BUTTON Btn_Center ;
-               TOOLTIP 'Center Tekst' ;
-               PICTURE 'center' ;
-               ACTION  SetCenter_Click();
-               CHECK GROUP
+   BUTTON Btn_Center ;
+      TOOLTIP 'Center Tekst' ;
+      PICTURE 'center' ;
+      ACTION  SetCenter_Click();
+      CHECK GROUP
 
-            BUTTON Btn_Right ;
-               TOOLTIP 'Right Text' ;
-               PICTURE 'Right' ;
-               ACTION SetRight_Click() ;
-               CHECK GROUP
+   BUTTON Btn_Right ;
+      TOOLTIP 'Right Text' ;
+      PICTURE 'Right' ;
+      ACTION SetRight_Click() ;
+      CHECK GROUP
 
-            BUTTON Btn_Justify ;
-               TOOLTIP 'Justify Text' ;
-               PICTURE 'Justify' ;
-               ACTION SetJustify_Click() ;
-               CHECK GROUP       SEPARATOR
+   BUTTON Btn_Justify ;
+      TOOLTIP 'Justify Text' ;
+      PICTURE 'Justify' ;
+      ACTION SetJustify_Click() ;
+      CHECK GROUP       SEPARATOR
 
-            BUTTON Btn_Color ;
-               TOOLTIP 'Font Color' ;
-               PICTURE 'Color' ;
-               ACTION SetColor_Click() ;
-               SEPARATOR
+   BUTTON Btn_Color ;
+      TOOLTIP 'Font Color' ;
+      PICTURE 'Color' ;
+      ACTION SetColor_Click() ;
+      SEPARATOR
 
-            BUTTON Btn_Numb ;
-               TOOLTIP 'Numbering' ;
-               PICTURE 'Number' ;
-               ACTION SetNumb_Click() ;
-               CHECK
+   BUTTON Btn_Numb ;
+      TOOLTIP 'Numbering' ;
+      PICTURE 'Number' ;
+      ACTION SetNumb_Click() ;
+      CHECK
 
-            BUTTON Btn_Offset1 ;
-               TOOLTIP 'Offset in' ;
-               PICTURE 'Offset1' ;
-               ACTION SetOffset_Click(1)
+   BUTTON Btn_Offset1 ;
+      TOOLTIP 'Offset in' ;
+      PICTURE 'Offset1' ;
+      ACTION SetOffset_Click(1)
 
-            BUTTON Btn_Offset2 ;
-               TOOLTIP 'Offset Out' ;
-               PICTURE 'Offset2' ;
-               ACTION SetOffset_Click(0)
+   BUTTON Btn_Offset2 ;
+      TOOLTIP 'Offset Out' ;
+      PICTURE 'Offset2' ;
+      ACTION SetOffset_Click(0)
 
-         END TOOLBAR
+END TOOLBAR
 
-      END SPLITBOX
+END SPLITBOX
 
-      DEFINE TAB Tab_1 ;
-            AT 35,0 ;
-            WIDTH nWidth HEIGHT nHeight-40 ;
-            VALUE 1 ;
-            TOOLTIP 'Tab Control';
-            HOTTRACK;
-            ON CHANGE TabChange()
+DEFINE TAB Tab_1 ;
+      AT 35,0 ;
+      WIDTH nWidth HEIGHT nHeight-40 ;
+      VALUE 1 ;
+      TOOLTIP 'Tab Control';
+      HOTTRACK;
+      ON CHANGE TabChange()
 
-         PAGE '&No File'
+   PAGE '&No File'
 
-         END PAGE
+   END PAGE
 
-      END TAB
+END TAB
 
-   END WINDOW
+END WINDOW
 
-   DefSplash(0)
+DefSplash(0)
 
-   Form_1.Center
-   Form_Splash.Center
+Form_1.Center
+Form_Splash.Center
 
-   ACTIVATE WINDOW Form_Splash , Form_1
+ACTIVATE WINDOW Form_Splash , Form_1
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION WinEnd_Click(mod)
 

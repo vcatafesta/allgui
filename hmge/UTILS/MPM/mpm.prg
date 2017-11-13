@@ -764,12 +764,12 @@ PROCEDURE New
    aSouFiles := {}
    RefreshSource()
    SWITCHDebug( .N. )
-      SWITCHRebuild( .N. )
-         StatusLabel()
-         cProjSpec := ProjSpec()
-         GetBaseFolder()
+   SWITCHRebuild( .N. )
+   StatusLabel()
+   cProjSpec := ProjSpec()
+   GetBaseFolder()
 
-         RETURN
+   RETURN
 
 PROCEDURE Open( cProjOpen )
 
@@ -917,12 +917,12 @@ PROCEDURE Open( cProjOpen )
 
       RefreshSource()
       SWITCHDebug( .N. )
-         SWITCHRebuild( .N. )
-            StatusLabel()
+      SWITCHRebuild( .N. )
+      StatusLabel()
 
-         END SEQUENCE
+   END SEQUENCE
 
-         RETURN
+   RETURN
 
 FUNCTION ProjSpec
 

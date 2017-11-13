@@ -39,32 +39,48 @@ CLASS VAR winclass   INIT "EDIT"
 
    DATA lCreate    INIT .F. HIDDEN //
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-         oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
-         nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
-         bKeyDown, bChange, bOther, bClickUp ,bClickDown )
-   METHOD Activate()
-   METHOD Init()
-   METHOD CreateUpDown()
-   METHOD SetValue( nValue )
-   METHOD Value( Value ) SETGET
-   METHOD Refresh()
-   METHOD SetColor( tColor, bColor, lRedraw ) INLINE ::super:SetColor(tColor, bColor, lRedraw ), IIF( ::oEditUpDown != Nil, ;
-         ::oEditUpDown:SetColor( tColor, bColor, lRedraw ),)
-   METHOD DisableBackColor( DisableBColor ) SETGET
-   METHOD Hide() INLINE (::lHide := .T., hwg_Hidewindow( ::handle ), hwg_Hidewindow( ::hwndUpDown ) )
-   METHOD Show() INLINE (::lHide := .F., hwg_Showwindow( ::handle ), hwg_Showwindow( ::hwndUpDown ) )
-   METHOD Enable()  INLINE ( ::Super:Enable(), hwg_Enablewindow( ::hwndUpDown, .T. ), hwg_Invalidaterect( ::hwndUpDown, 0 ) )
-   //  hwg_Invalidaterect( ::oParent:Handle, 1,  ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight ) )
-   METHOD Disable() INLINE ( ::Super:Disable(), hwg_Enablewindow( ::hwndUpDown, .F. ) )
-   METHOD Valid()
-   METHOD SetRange( nLower, nUpper )
-   METHOD Move( x1, y1, width, height, nRepaint ) INLINE ;                             // + hwg_Getclientrect( ::hwndUpDown )[ 3 ] - 1
-      ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) ,;
-         hwg_Sendmessage( ::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0 ),;
-         IIF( ::lHide, ::Hide(), ::Show() )
+METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+      oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
+      nUpDWidth, nLower,nUpper, nIncr,cPicture,lNoBorder, nMaxLength,;
+      bKeyDown, bChange, bOther, bClickUp ,bClickDown )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD CreateUpDown()
+
+METHOD SetValue( nValue )
+
+METHOD Value( Value ) SETGET
+
+METHOD Refresh()
+
+METHOD SetColor( tColor, bColor, lRedraw ) INLINE ::super:SetColor(tColor, bColor, lRedraw ), IIF( ::oEditUpDown != Nil, ;
+      ::oEditUpDown:SetColor( tColor, bColor, lRedraw ),)
+
+METHOD DisableBackColor( DisableBColor ) SETGET
+
+METHOD Hide() INLINE (::lHide := .T., hwg_Hidewindow( ::handle ), hwg_Hidewindow( ::hwndUpDown ) )
+
+METHOD Show() INLINE (::lHide := .F., hwg_Showwindow( ::handle ), hwg_Showwindow( ::hwndUpDown ) )
+
+METHOD Enable()  INLINE ( ::Super:Enable(), hwg_Enablewindow( ::hwndUpDown, .T. ), hwg_Invalidaterect( ::hwndUpDown, 0 ) )
+
+   //  hwg_Invalidaterect( ::oParent:Handle, 1,  ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight ) )
+
+METHOD Disable() INLINE ( ::Super:Disable(), hwg_Enablewindow( ::hwndUpDown, .F. ) )
+
+METHOD Valid()
+
+METHOD SetRange( nLower, nUpper )
+
+METHOD Move( x1, y1, width, height, nRepaint ) INLINE ;                             // + hwg_Getclientrect( ::hwndUpDown )[ 3 ] - 1
+   ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) ,;
+      hwg_Sendmessage( ::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0 ),;
+      IIF( ::lHide, ::Hide(), ::Show() )
+
+ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
@@ -274,12 +290,16 @@ METHOD Valid() CLASS HUpDown
 CLASS HEditUpDown INHERIT HEdit
 
    //DATA Value
-   METHOD INIT()
-   METHOD Notify( lParam )
-   METHOD Refresh()
-   METHOD Move()  VIRTUAL
 
-   ENDCLASS
+METHOD INIT()
+
+METHOD Notify( lParam )
+
+METHOD Refresh()
+
+METHOD Move()  VIRTUAL
+
+ENDCLASS
 
 METHOD Init() CLASS HEditUpDown
 

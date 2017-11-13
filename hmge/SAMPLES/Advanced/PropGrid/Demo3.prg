@@ -255,7 +255,7 @@ FUNCTION DisplPGValue(PGname,cForm,nId)
    CASE cType == "N" ;  MsgInfo(cStr+cType+CRLF+Str( xValue ))
    CASE cType == "L" ;  MsgInfo(cStr+cType+CRLF+if(xValue == .t.,'TRUE','FALSE') )
    CASE cType == "A" ;  MsgInfo(cStr+cType+CRLF+ AToC( xValue ))
-   OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
+      OTHERWISE;           MsgInfo(cStr+cType+CRLF+'NIL' )
    ENDCASE
 
    RETURN NIL
@@ -293,7 +293,7 @@ FUNCTION DisplPGInfo(PGname,cForm,nId)
          CASE ValType(xValue) == "N" .and. n==7;  cStr += PgIdentType( xValue )+CRLF
          CASE ValType(xValue) == "N" .and. n==8;  cStr += Str( xValue )+CRLF
          CASE ValType(xValue) == "L" ;  cStr += if(xValue == .t.,'TRUE','FALSE') +CRLF
-         OTHERWISE;                     cStr += 'NIL' +CRLF
+            OTHERWISE;                     cStr += 'NIL' +CRLF
          ENDCASE
       NEXT
    ENDIF

@@ -21,24 +21,24 @@ FUNCTION Main
    MENUITEM "&Open file" ACTION OpenFile(oIE,oEdit)
    SEPARATOR
    MENUITEM "E&xit" ACTION oMainWnd:Close()
-ENDMENU
-ENDMENU
+   ENDMENU
+   ENDMENU
 
-@ 0,0 PANEL oPanelTool SIZE 500,32
+   @ 0,0 PANEL oPanelTool SIZE 500,32
 
-@ 5,4 EDITBOX oEdit CAPTION "http://kresin.belgorod.su" OF oPanelTool SIZE 400,24
-@ 405,4 BUTTON "Go!" OF oPanelTool SIZE 30,24 ;
-   ON CLICK {||Iif(!Empty(cUrl:=hwg_Getedittext(oEdit:oParent:handle,oEdit:id)),oIE:DisplayPage(cUrl),.T.)}
-@ 435,4 BUTTON "Search" OF oPanelTool SIZE 55,24 ;
-   ON CLICK {||Iif(!Empty(cUrl:=hwg_Getedittext(oEdit:oParent:handle,oEdit:id)),FindInGoogle(cUrl,oIE,oEdit),.T.)}
+   @ 5,4 EDITBOX oEdit CAPTION "http://kresin.belgorod.su" OF oPanelTool SIZE 400,24
+   @ 405,4 BUTTON "Go!" OF oPanelTool SIZE 30,24 ;
+      ON CLICK {||Iif(!Empty(cUrl:=hwg_Getedittext(oEdit:oParent:handle,oEdit:id)),oIE:DisplayPage(cUrl),.T.)}
+   @ 435,4 BUTTON "Search" OF oPanelTool SIZE 55,24 ;
+      ON CLICK {||Iif(!Empty(cUrl:=hwg_Getedittext(oEdit:oParent:handle,oEdit:id)),FindInGoogle(cUrl,oIE,oEdit),.T.)}
 
-@ 0,34 PANEL oPanelIE SIZE 500,366 ON SIZE {|o,x,y|o:Move(,,x,y-34)}
+   @ 0,34 PANEL oPanelIE SIZE 500,366 ON SIZE {|o,x,y|o:Move(,,x,y-34)}
 
-oIE := HHtml():New( oPanelIE )
+   oIE := HHtml():New( oPanelIE )
 
-ACTIVATE WINDOW oMainWnd
+   ACTIVATE WINDOW oMainWnd
 
-RETURN
+   RETURN
 
 STATIC FUNCTION OpenFile( oIE,oEdit )
 

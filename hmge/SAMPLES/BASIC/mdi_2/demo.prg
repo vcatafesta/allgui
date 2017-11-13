@@ -84,39 +84,39 @@ FUNCTION Main
       END STATUSBAR
 
       DEFINE IMAGELIST imagelst_1 ;
-            OF Form_1 ;
-            BUTTONSIZE 16 , 16  ;
-            IMAGE {'BtnLst.bmp'} ;
-            COLORMASK CLR_DEFAULT;
-            IMAGECOUNT 6 MASK
+         OF Form_1 ;
+         BUTTONSIZE 16 , 16  ;
+         IMAGE {'BtnLst.bmp'} ;
+         COLORMASK CLR_DEFAULT;
+         IMAGECOUNT 6 MASK
 
-         DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 20,20 IMAGELIST 'imagelst_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 20,20 IMAGELIST 'imagelst_1' FLAT
 
-               BUTTON Btn_Open ;
-                  PICTUREINDEX 1 ;
-                  TOOLTIP 'Open a File' ;
-                  ACTION OpenMDIClient()
+         BUTTON Btn_Open ;
+            PICTUREINDEX 1 ;
+            TOOLTIP 'Open a File' ;
+            ACTION OpenMDIClient()
 
-               BUTTON Btn_Close ;
-                  PICTUREINDEX 2 ;
-                  TOOLTIP 'Close Active Child Window' ;
-                  ACTION CloseMdi()
+         BUTTON Btn_Close ;
+            PICTUREINDEX 2 ;
+            TOOLTIP 'Close Active Child Window' ;
+            ACTION CloseMdi()
 
-            END TOOLBAR
+      END TOOLBAR
 
-         END SPLITBOX
+   END SPLITBOX
 
-         Form_1.Btn_Close.Enabled := .f.
+   Form_1.Btn_Close.Enabled := .f.
 
-      END WINDOW
+END WINDOW
 
-      CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-      ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-      RETURN NIL
+RETURN NIL
 
 FUNCTION OpenMDIClient()
 

@@ -14,11 +14,13 @@ CLASS HSplash
    DATA oTimer
    DATA oDlg
 
-   METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CONSTRUCTOR
-   METHOD CountSeconds( oTime, oDlg )
-   METHOD Release() INLINE ::oDlg:Close()
+METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CONSTRUCTOR
 
-   ENDCLASS
+METHOD CountSeconds( oTime, oDlg )
+
+METHOD Release() INLINE ::oDlg:Close()
+
+ENDCLASS
 
 METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CLASS HSplash
 

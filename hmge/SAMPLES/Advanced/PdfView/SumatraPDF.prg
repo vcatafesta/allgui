@@ -352,7 +352,7 @@ FUNCTION Sumatra_PageGoTo(cPanel, nAction)
       CASE  1;   nWParam := 430 /*IDM_GOTO_NEXT_PAGE*/  ; EXIT
       CASE -2;   nWParam := 432 /*IDM_GOTO_FIRST_PAGE*/ ; EXIT
       CASE  2;   nWParam := 433 /*IDM_GOTO_LAST_PAGE*/  ; EXIT
-      OTHERWISE; nWParam := 434 /*IDM_GOTO_PAGE*/
+         OTHERWISE; nWParam := 434 /*IDM_GOTO_PAGE*/
       ENDSWITCH
 
       PostMessage(nHFrame, 273 /*WM_COMMAND*/, nWParam, 0)
@@ -467,7 +467,7 @@ FUNCTION Sumatra_FindText(cPanel, nAction)
       SWITCH nAction
       CASE -1;   nWParam := 437 /*IDM_FIND_PREV*/ ; EXIT
       CASE  1;   nWParam := 436 /*IDM_FIND_NEXT*/ ; EXIT
-      OTHERWISE; nWParam := 435 /*IDM_FIND_FIRST*/
+         OTHERWISE; nWParam := 435 /*IDM_FIND_FIRST*/
       ENDSWITCH
 
       PostMessage(nHFrame, 273 /*WM_COMMAND*/, nWParam, 0)

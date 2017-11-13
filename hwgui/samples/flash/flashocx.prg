@@ -22,16 +22,16 @@ FUNCTION Main
    MENU OF oMainWnd
    MENU TITLE "File"
    MENUITEM "E&xit" ACTION oMainWnd:Close()
-ENDMENU
-ENDMENU
+   ENDMENU
+   ENDMENU
 
-@ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y)}
+   @ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y)}
 
-oFlash := FlashPlayer( oPanel, mypath+"mma.swf", 0, 0, 500, 366 )
+   oFlash := FlashPlayer( oPanel, mypath+"mma.swf", 0, 0, 500, 366 )
 
-ACTIVATE WINDOW oMainWnd
+   ACTIVATE WINDOW oMainWnd
 
-RETURN
+   RETURN
 
 CLASS ShockwaveFlash FROM HActiveX
 

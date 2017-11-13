@@ -53,7 +53,7 @@
 #xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
    BEGIN SEQUENCE
    #xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
-   RECOVER[USING < oErr > ] <- oErr->;;
+      RECOVER[USING < oErr > ] <- oErr->;;
       ErrorBlock( bError )
    #else
    #include "usrrdd.ch"

@@ -21,14 +21,14 @@ FUNCTION GnEncheTabela(oArea,nValorCombo,cCodigo,aCombo1,aCombo2,cVar)
    DO WHILE ! (oArea)->(Eof())
       nPos += 1
       IF (oArea)->Codigo == cCodigo ; nValorCombo := nPos ; Endif
-         Aadd(aCombo1,(oArea)->Descricao)
-         Aadd(aCombo2,(oArea)->Codigo   )
-         (oArea)->(DBSkip())
-      ENDDO
+      Aadd(aCombo1,(oArea)->Descricao)
+      Aadd(aCombo2,(oArea)->Codigo   )
+      (oArea)->(DBSkip())
+   ENDDO
 
-      RETURN NIL
-      /*
-      */
+   RETURN NIL
+   /*
+   */
 
 FUNCTION BloqueiaRegistroNaRede( marea )
 

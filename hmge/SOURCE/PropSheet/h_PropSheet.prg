@@ -974,10 +974,10 @@ FUNCTION _ReleasePropertySheet( hwndPropSheet, hWndDlg )
       ERASEPropSheet( hwndPropSheet )
       DestroyWindow( hwndPropSheet )
    ELSE
-   EndDialog( hwndDlg, 0 )
-ENDIF
+      EndDialog( hwndDlg, 0 )
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ErasePropSheet( hWnd )
 

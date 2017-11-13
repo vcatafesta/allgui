@@ -84,14 +84,14 @@ METHOD SetReceiveTimeout( nMilliSec )
 
 METHOD Value2String( aPair )
 
-CLASSDATA oSocket       HIDDEN
-CLASSDATA cProxyAddress HIDDEN
-CLASSDATA nProxyPort    HIDDEN
-CLASSDATA cLogin        HIDDEN
-CLASSDATA cLoginRemote  HIDDEN
-CLASSDATA cHostAddress  HIDDEN
-CLASSDATA nHostPort     HIDDEN
-CLASSDATA cUserAgent    HIDDEN
+   CLASSDATA oSocket       HIDDEN
+   CLASSDATA cProxyAddress HIDDEN
+   CLASSDATA nProxyPort    HIDDEN
+   CLASSDATA cLogin        HIDDEN
+   CLASSDATA cLoginRemote  HIDDEN
+   CLASSDATA cHostAddress  HIDDEN
+   CLASSDATA nHostPort     HIDDEN
+   CLASSDATA cUserAgent    HIDDEN
 
 ENDCLASS
 

@@ -57,192 +57,192 @@ FUNCTION promocao()
          fontcolor _preto_001;
          transparent
       DEFINE COMBOBOXex cbo_001
-         row   030
-         col   005
-         width 200
-         height 200
-         items a_001
-         value 1
-      END COMBOBOXex
+      row   030
+      col   005
+      width 200
+      height 200
+      items a_001
+      value 1
+   END COMBOBOXex
 
-      * fase 2
-      @ 070,005 label lbl_002;
-         of form_promocao;
-         value 'Selecione a Categoria';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      DEFINE COMBOBOXex cbo_002
-         row   090
-         col   005
-         width 200
-         height 400
-         items a_002
-         value 1
-         listwidth 300
-      END COMBOBOXex
+   * fase 2
+   @ 070,005 label lbl_002;
+      of form_promocao;
+      value 'Selecione a Categoria';
+      autosize;
+      font 'tahoma' size 010;
+      bold;
+      fontcolor _preto_001;
+      transparent
+   DEFINE COMBOBOXex cbo_002
+   row   090
+   col   005
+   width 200
+   height 400
+   items a_002
+   value 1
+   listwidth 300
+END COMBOBOXex
 
-      * fase 3
-      @ 130,005 label lbl_003;
-         of form_promocao;
-         value 'Selecione a Subcategoria';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      DEFINE COMBOBOXex cbo_003
-         row   150
-         col   005
-         width 200
-         height 400
-         items a_003
-         value 1
-         listwidth 300
-      END COMBOBOXex
+* fase 3
+@ 130,005 label lbl_003;
+   of form_promocao;
+   value 'Selecione a Subcategoria';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+DEFINE COMBOBOXex cbo_003
+row   150
+col   005
+width 200
+height 400
+items a_003
+value 1
+listwidth 300
+END COMBOBOXex
 
-      * fase 4
-      @ 200,005 label lbl_004;
-         of form_promocao;
-         value 'DIMINUIR';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _vermelho_002;
-         transparent
-      @ 200,070 getbox tbox_004;
-         of form_promocao;
-         height 027;
-         width 070;
-         value 0;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         picture '@E 9,999.99'
-      @ 200,150 label lbl_0044;
-         of form_promocao;
-         value 'no preço';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 230,005 label lbl_00444;
-         of form_promocao;
-         value 'de venda já existente';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* fase 4
+@ 200,005 label lbl_004;
+   of form_promocao;
+   value 'DIMINUIR';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _vermelho_002;
+   transparent
+@ 200,070 getbox tbox_004;
+   of form_promocao;
+   height 027;
+   width 070;
+   value 0;
+   font 'tahoma' size 010;
+   backcolor _fundo_get;
+   fontcolor _letra_get_1;
+   picture '@E 9,999.99'
+@ 200,150 label lbl_0044;
+   of form_promocao;
+   value 'no preço';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 230,005 label lbl_00444;
+   of form_promocao;
+   value 'de venda já existente';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      @ 250,040 label lbl_ou;
-         of form_promocao;
-         value 'ou então';
-         autosize;
-         font 'tahoma' size 018;
-         bold;
-         fontcolor _preto_001;
-         transparent
+@ 250,040 label lbl_ou;
+   of form_promocao;
+   value 'ou então';
+   autosize;
+   font 'tahoma' size 018;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * fase 5
-      @ 290,005 label lbl_005;
-         of form_promocao;
-         value 'APLICAR';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _vermelho_002;
-         transparent
-      @ 290,070 getbox tbox_005;
-         of form_promocao;
-         height 027;
-         width 060;
-         value 0;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         picture '@R 999.99'
-      @ 290,150 label lbl_0055;
-         of form_promocao;
-         value '%';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 320,005 label lbl_00555;
-         of form_promocao;
-         value 'a menos sobre preço de venda';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* fase 5
+@ 290,005 label lbl_005;
+   of form_promocao;
+   value 'APLICAR';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _vermelho_002;
+   transparent
+@ 290,070 getbox tbox_005;
+   of form_promocao;
+   height 027;
+   width 060;
+   value 0;
+   font 'tahoma' size 010;
+   backcolor _fundo_get;
+   fontcolor _letra_get_1;
+   picture '@R 999.99'
+@ 290,150 label lbl_0055;
+   of form_promocao;
+   value '%';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 320,005 label lbl_00555;
+   of form_promocao;
+   value 'a menos sobre preço de venda';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * botão filtrar
-      @ 360,005 buttonex botao_filtrar;
-         parent form_promocao;
-         caption 'Filtrar informações';
-         width 200 height 040;
-         picture path_imagens+'img_filtro.bmp';
-         action filtrar_informacoes_2();
-         tooltip 'Clique aqui para separar as informações e visualizar as promoções antes de efetivá-las'
+* botão filtrar
+@ 360,005 buttonex botao_filtrar;
+   parent form_promocao;
+   caption 'Filtrar informações';
+   width 200 height 040;
+   picture path_imagens+'img_filtro.bmp';
+   action filtrar_informacoes_2();
+   tooltip 'Clique aqui para separar as informações e visualizar as promoções antes de efetivá-las'
 
-      * separar a tela em 2 partes
-      DEFINE LABEL label_separador
-         col 210
-         row 000
-         value ''
-         width 002
-         height 600
-         transparent .F.
-         backcolor _cinza_002
-      END LABEL
+* separar a tela em 2 partes
+DEFINE LABEL label_separador
+   col 210
+   row 000
+   value ''
+   width 002
+   height 600
+   transparent .F.
+   backcolor _cinza_002
+END LABEL
 
-      * grid e opções do reajuste
-      @ 010,220 label lbl_reajuste;
-         of form_promocao;
-         value 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* grid e opções do reajuste
+@ 010,220 label lbl_reajuste;
+   of form_promocao;
+   value 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * botões
-      @ 520,250 buttonex botao_excluir_promocao;
-         parent form_promocao;
-         caption 'Excluir promoção';
-         width 150 height 040;
-         picture path_imagens+'img_rpromo.bmp';
-         action tira_da_promocao();
-         tooltip 'Clique aqui para retirar da promoção todos os produtos selecionados'
-      @ 520,405 buttonex botao_reajustar;
-         parent form_promocao;
-         caption 'Ativar as promoções com base na projeção';
-         width 300 height 040;
-         picture path_imagens+'img_aplicar.bmp';
-         action gravar_reajuste_2();
-         tooltip 'Clique aqui para gravar a promoção no banco de dados'
-      @ 520,710 buttonex botao_sair;
-         parent form_promocao;
-         caption 'Sair desta tela';
-         width 180 height 040;
-         picture path_imagens+'img_sair.bmp';
-         action (zera_acesso_2(),form_promocao.release);
-         tooltip 'Clique aqui para sair'
+* botões
+@ 520,250 buttonex botao_excluir_promocao;
+   parent form_promocao;
+   caption 'Excluir promoção';
+   width 150 height 040;
+   picture path_imagens+'img_rpromo.bmp';
+   action tira_da_promocao();
+   tooltip 'Clique aqui para retirar da promoção todos os produtos selecionados'
+@ 520,405 buttonex botao_reajustar;
+   parent form_promocao;
+   caption 'Ativar as promoções com base na projeção';
+   width 300 height 040;
+   picture path_imagens+'img_aplicar.bmp';
+   action gravar_reajuste_2();
+   tooltip 'Clique aqui para gravar a promoção no banco de dados'
+@ 520,710 buttonex botao_sair;
+   parent form_promocao;
+   caption 'Sair desta tela';
+   width 180 height 040;
+   picture path_imagens+'img_sair.bmp';
+   action (zera_acesso_2(),form_promocao.release);
+   tooltip 'Clique aqui para sair'
 
-      on key escape action thiswindow.release
+on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_promocao.center
-   form_promocao.activate
+form_promocao.center
+form_promocao.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION filtrar_informacoes_2()
 

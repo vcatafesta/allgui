@@ -81,58 +81,58 @@ STATIC PROCEDURE UpdateNotify()
          cTip := "Russian"
          IF lSound ;   SoundBeep(4000) ;   endif
 
-         CASE nNewMode == 1033  // English
-            cFlag := "EN"
-            cTip := "English (USA)"
-            IF lSound ;   SoundBeep(4500) ;   endif
+      CASE nNewMode == 1033  // English
+         cFlag := "EN"
+         cTip := "English (USA)"
+         IF lSound ;   SoundBeep(4500) ;   endif
 
-            CASE nNewMode == 1058  // Ukrainian
-               cFlag := "UA"
-               cTip := "Ukrainian"
-               IF lSound ;   SoundBeep(5000) ;   endif
+      CASE nNewMode == 1058  // Ukrainian
+         cFlag := "UA"
+         cTip := "Ukrainian"
+         IF lSound ;   SoundBeep(5000) ;   endif
 
-               CASE nNewMode == 1031  // German
-                  cFlag := "DE"
-                  cTip := "German (St)"
-                  IF lSound ;   SoundBeep(5500) ;   endif
+      CASE nNewMode == 1031  // German
+         cFlag := "DE"
+         cTip := "German (St)"
+         IF lSound ;   SoundBeep(5500) ;   endif
 
-                  CASE nNewMode == 1034  // Spanish
-                     cFlag := "ES"
-                     cTip := "Spanish (Tr)"
-                     IF lSound ;   SoundBeep(6000) ;   endif
+      CASE nNewMode == 1034  // Spanish
+         cFlag := "ES"
+         cTip := "Spanish (Tr)"
+         IF lSound ;   SoundBeep(6000) ;   endif
 
-                     CASE nNewMode == 1036  // French
-                        cFlag := "FR"
-                        cTip := "French (St)"
-                        IF lSound ;   SoundBeep(6500) ;   endif
+      CASE nNewMode == 1036  // French
+         cFlag := "FR"
+         cTip := "French (St)"
+         IF lSound ;   SoundBeep(6500) ;   endif
 
-                        CASE nNewMode == 1040  // Italian
-                           cFlag := "IT"
-                           cTip := "Italian (St)"
-                           IF lSound ;   SoundBeep(6500) ;   endif
+      CASE nNewMode == 1040  // Italian
+         cFlag := "IT"
+         cTip := "Italian (St)"
+         IF lSound ;   SoundBeep(6500) ;   endif
 
-                           CASE nNewMode == 1045  // Polish
-                              cFlag := "PL"
-                              cTip := "Polski "
-                              IF lSound ;   SoundBeep(6500) ;   endif
+      CASE nNewMode == 1045  // Polish
+         cFlag := "PL"
+         cTip := "Polski "
+         IF lSound ;   SoundBeep(6500) ;   endif
 
-                              CASE nNewMode == 1026  // Bulgarian
-                                 cFlag := "BG"
-                                 cTip := "Bulgarian "
-                                 IF lSound ;   SoundBeep(6500) ;   endif
+      CASE nNewMode == 1026  // Bulgarian
+         cFlag := "BG"
+         cTip := "Bulgarian "
+         IF lSound ;   SoundBeep(6500) ;   endif
 
-                                 OTHERWISE
-                                    cFlag := "AMAIN"
-                                    cTip := "Not determined"
-                                    IF lSound ;   SoundBeep(1000) ;   endif
-                                    ENDCASE
+      OTHERWISE
+         cFlag := "AMAIN"
+         cTip := "Not determined"
+         IF lSound ;   SoundBeep(1000) ;   endif
+      ENDCASE
 
-                                    Form_1.NotifyIcon := cFlag
-                                    Form_1.NotifyTooltip := cTip
+      Form_1.NotifyIcon := cFlag
+      Form_1.NotifyTooltip := cTip
 
-                                 ENDIF
+   ENDIF
 
-                                 RETURN
+   RETURN
 
 STATIC FUNCTION MsgAbout()
 

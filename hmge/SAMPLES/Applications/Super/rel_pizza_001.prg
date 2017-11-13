@@ -67,61 +67,61 @@ FUNCTION relatorio_pizza_001()
          height 030;
          font 'verdana' size 014
       DEFINE COMBOBOXex cbo_001
-         row   110
-         col   010
-         width 310
-         height 200
-         items a_001
-         value 1
-      END COMBOBOXex
+      row   110
+      col   010
+      width 310
+      height 200
+      items a_001
+      value 1
+   END COMBOBOXex
 
-      * linha separadora
-      DEFINE LABEL linha_rodape
-         col 000
-         row form_pizzas_001.height-090
-         value ''
-         width form_pizzas_001.width
-         height 001
-         backcolor _preto_001
-         transparent .F.
-      END LABEL
+   * linha separadora
+   DEFINE LABEL linha_rodape
+      col 000
+      row form_pizzas_001.height-090
+      value ''
+      width form_pizzas_001.width
+      height 001
+      backcolor _preto_001
+      transparent .F.
+   END LABEL
 
-      * botões
-      DEFINE BUTTONex button_ok
-         picture path_imagens+'img_relatorio.bmp'
-         col form_pizzas_001.width-255
-         row form_pizzas_001.height-085
-         width 150
-         height 050
-         caption 'Ok, imprimir'
-         action relatorio()
-         fontbold .T.
-         tooltip 'Gerar o relatório'
-         flat .F.
-         noxpstyle .T.
-      END BUTTONex
-      DEFINE BUTTONex button_cancela
-         picture path_imagens+'img_sair.bmp'
-         col form_pizzas_001.width-100
-         row form_pizzas_001.height-085
-         width 090
-         height 050
-         caption 'Voltar'
-         action form_pizzas_001.release
-         fontbold .T.
-         tooltip 'Sair desta tela'
-         flat .F.
-         noxpstyle .T.
-      END BUTTONex
+   * botões
+   DEFINE BUTTONEX button_ok
+      picture path_imagens+'img_relatorio.bmp'
+      col form_pizzas_001.width-255
+      row form_pizzas_001.height-085
+      width 150
+      height 050
+      caption 'Ok, imprimir'
+      action relatorio()
+      fontbold .T.
+      tooltip 'Gerar o relatório'
+      flat .F.
+      noxpstyle .T.
+   END BUTTONex
+   DEFINE BUTTONEX button_cancela
+      picture path_imagens+'img_sair.bmp'
+      col form_pizzas_001.width-100
+      row form_pizzas_001.height-085
+      width 090
+      height 050
+      caption 'Voltar'
+      action form_pizzas_001.release
+      fontbold .T.
+      tooltip 'Sair desta tela'
+      flat .F.
+      noxpstyle .T.
+   END BUTTONex
 
-      on key escape action thiswindow.release
+   on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_pizzas_001.center
-   form_pizzas_001.activate
+form_pizzas_001.center
+form_pizzas_001.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION relatorio()
 

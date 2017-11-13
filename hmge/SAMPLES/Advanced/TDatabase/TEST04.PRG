@@ -51,40 +51,40 @@ FUNCTION main()
          MDI
 
       DEFINE IMAGELIST ImageList_1 ;
-            OF Form_1 ;
-            BUTTONSIZE 24, 24 ;
-            IMAGE { 'tb_24.bmp' } ;
-            COLORMASK CLR_DEFAULT ;
-            IMAGECOUNT 19 ;
-            MASK
+         OF Form_1 ;
+         BUTTONSIZE 24, 24 ;
+         IMAGE { 'tb_24.bmp' } ;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 19 ;
+         MASK
 
-         DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 32,32 IMAGELIST 'ImageList_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 32,32 IMAGELIST 'ImageList_1' FLAT
 
-               BUTTON Btn_Open ;
-                  PICTUREINDEX 0 ;
-                  TOOLTIP 'Browse customer' ;
-                  ACTION TCustomer():new():browse()
+         BUTTON Btn_Open ;
+            PICTUREINDEX 0 ;
+            TOOLTIP 'Browse customer' ;
+            ACTION TCustomer():new():browse()
 
-               BUTTON Btn_Exit ;
-                  PICTUREINDEX 5 ;
-                  TOOLTIP 'Exit' ;
-                  ACTION ReleaseAllWindows()
-            END TOOLBAR
+         BUTTON Btn_Exit ;
+            PICTUREINDEX 5 ;
+            TOOLTIP 'Exit' ;
+            ACTION ReleaseAllWindows()
+      END TOOLBAR
 
-         END SPLITBOX
+   END SPLITBOX
 
-      END WINDOW
+END WINDOW
 
-      CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-      ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-      RETURN NIL
-      //--- End test
+RETURN NIL
+//--- End test
 
-      //--- Customer class
+//--- Customer class
 
 CLASS TCustomer from TData
 
@@ -145,47 +145,47 @@ METHOD browse()
          ON MINIMIZE ResizeEdit()
 
       DEFINE IMAGELIST ImageList_1 ;
-            BUTTONSIZE 24, 24 ;
-            IMAGE { 'tb_24.bmp' } ;
-            COLORMASK CLR_DEFAULT ;
-            IMAGECOUNT 19 ;
-            MASK
+         BUTTONSIZE 24, 24 ;
+         IMAGE { 'tb_24.bmp' } ;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 19 ;
+         MASK
 
-         DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT
 
-               BUTTON Btn_New ;
-                  PICTUREINDEX 0 ;
-                  TOOLTIP 'Add' ;
-                  ACTION (::add(),SetEditFocus(::RecNo()))
+         BUTTON Btn_New ;
+            PICTUREINDEX 0 ;
+            TOOLTIP 'Add' ;
+            ACTION (::add(),SetEditFocus(::RecNo()))
 
-               BUTTON Btn_New ;
-                  PICTUREINDEX 17 ;
-                  TOOLTIP 'Edit' ;
-                  ACTION (::edit(),SetEditFocus(::RecNo()))
+         BUTTON Btn_New ;
+            PICTUREINDEX 17 ;
+            TOOLTIP 'Edit' ;
+            ACTION (::edit(),SetEditFocus(::RecNo()))
 
-               BUTTON Btn_Delete ;
-                  PICTUREINDEX 5 ;
-                  TOOLTIP 'Delete' ;
-                  ACTION (::delete(),::skip(-1),iif(::Bof(),,::skip()),SetEditFocus(::RecNo()))
+         BUTTON Btn_Delete ;
+            PICTUREINDEX 5 ;
+            TOOLTIP 'Delete' ;
+            ACTION (::delete(),::skip(-1),iif(::Bof(),,::skip()),SetEditFocus(::RecNo()))
 
-            END TOOLBAR
+      END TOOLBAR
 
-         END SPLITBOX
+   END SPLITBOX
 
-         @ 40,0 BROWSE BrwMdi ;
-            WIDTH 200 ;
-            HEIGHT 200 ;
-            HEADERS a_headers ;
-            WIDTHS a_width ;
-            FIELDS a_fields ;
-            WORKAREA &(::cAlias) ;
-            ON DBLCLICK (::edit(),SetEditFocus(::RecNo()))
+   @ 40,0 BROWSE BrwMdi ;
+      WIDTH 200 ;
+      HEIGHT 200 ;
+      HEADERS a_headers ;
+      WIDTHS a_width ;
+      FIELDS a_fields ;
+      WORKAREA &(::cAlias) ;
+      ON DBLCLICK (::edit(),SetEditFocus(::RecNo()))
 
-      END WINDOW
+END WINDOW
 
-      RETURN self
+RETURN self
 
 METHOD add()
 

@@ -100,7 +100,7 @@ METHOD Version                 BLOCK { |Self| ::aInfo[ 1 ] }
 ENDCLASS
 
 METHOD Define( ControlName, ParentForm, nCol, nRow, cFile, nWidth, nHeight, ;
-ProcedureName, nHelpId, lInvisible, lWhiteBack, lRtl, uBkClr, ;
+      ProcedureName, nHelpId, lInvisible, lWhiteBack, lRtl, uBkClr, ;
       cTooltip, lBorder, lClientedge, lDisabled ) CLASS TAniGIF
 
    ::Load( cFile )

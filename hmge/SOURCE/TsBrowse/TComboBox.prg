@@ -17,7 +17,7 @@
 
 CLASS TComboBox FROM TControl
 
-CLASSDATA lRegistered AS LOGICAL
+   CLASSDATA lRegistered AS LOGICAL
    DATA   Atx, lAppend, nAt
    DATA   aItems AS ARRAY                     // Combo array
    DATA   bCloseUp                            // Block to be evaluated on Close Combo

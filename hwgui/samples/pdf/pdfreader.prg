@@ -21,16 +21,16 @@ FUNCTION Main
    MENU OF oMainWnd
    MENU TITLE "File"
    MENUITEM "E&xit" ACTION oMainWnd:Close()
-ENDMENU
-ENDMENU
+   ENDMENU
+   ENDMENU
 
-@ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
+   @ 0,0 PANEL oPanel SIZE 500,366 ON SIZE {|o,x, y| o:Move(,,x,y), opdf:Move(,,x,y), opdf:Refresh() }
 
-opdf := ViewPdf( oPanel, "SAMPLE.PDF", 0, 0, 500, 366 )
+   opdf := ViewPdf( oPanel, "SAMPLE.PDF", 0, 0, 500, 366 )
 
-ACTIVATE WINDOW oMainWnd
+   ACTIVATE WINDOW oMainWnd
 
-RETURN
+   RETURN
 
 CLASS PdfReader  FROM HActiveX
 

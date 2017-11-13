@@ -25,30 +25,42 @@
 
 CLASS HDatePicker INHERIT HControl
 
-   CLASS VAR winclass   INIT "SYSDATETIMEPICK32"
+CLASS VAR winclass   INIT "SYSDATETIMEPICK32"
 
    DATA bSetGet
    DATA dValue, tValue
    DATA bChange
    DATA lShowTime      INIT .T.
 
-   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
-   METHOD Activate()
-   METHOD Init()
-   METHOD OnEvent( msg, wParam, lParam )
-   METHOD Refresh()
-   METHOD GetValue()
-   METHOD SetValue( xValue )
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
-         bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
-   METHOD onChange( nMess )
-   METHOD When( )
-   METHOD Valid( )
-   METHOD Value ( Value ) SETGET
-   METHOD Checkvalue ( lValue ) SETGET
+METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      oFont, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD OnEvent( msg, wParam, lParam )
+
+METHOD Refresh()
+
+METHOD GetValue()
+
+METHOD SetValue( xValue )
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
+      bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
+
+METHOD onChange( nMess )
+
+METHOD When( )
+
+METHOD Valid( )
+
+METHOD Value ( Value ) SETGET
+
+METHOD Checkvalue ( lValue ) SETGET
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime ) CLASS HDatePicker

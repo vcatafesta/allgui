@@ -38,21 +38,30 @@ CLASS VAR winclass   INIT "STATIC"
    DATA bClick, bDblClick
    DATA hBrushDefault  HIDDEN
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-         bColor, lTransp, bClick, bDblClick, bOther )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther )
-   METHOD SetText( value ) INLINE ::SetValue( value )
-   METHOD SetValue( cValue )
-   METHOD Auto_Size( cValue )  HIDDEN
-   METHOD Init()
-   METHOD PAINT( lpDis )
-   METHOD onClick()
-   METHOD onDblClick()
-   METHOD OnEvent( msg, wParam, lParam )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+      bColor, lTransp, bClick, bDblClick, bOther )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther )
+
+METHOD SetText( value ) INLINE ::SetValue( value )
+
+METHOD SetValue( cValue )
+
+METHOD Auto_Size( cValue )  HIDDEN
+
+METHOD Init()
+
+METHOD PAINT( lpDis )
+
+METHOD onClick()
+
+METHOD onDblClick()
+
+METHOD OnEvent( msg, wParam, lParam )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
@@ -271,25 +280,32 @@ METHOD Auto_Size( cValue ) CLASS HStaticEx
 
 CLASS HButtonX INHERIT HButton
 
-   CLASS VAR winclass   INIT "BUTTON"
+CLASS VAR winclass   INIT "BUTTON"
 
    DATA bClick
    DATA cNote  HIDDEN
    DATA lFlat INIT .F.
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-         tcolor, bColor, bGFocus )
-   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-         cTooltip, tcolor, bColor, cCaption, bGFocus )
-   METHOD Init()
-   METHOD onClick()
-   METHOD onGetFocus()
-   METHOD onLostFocus()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD NoteCaption( cNote )  SETGET
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor, bGFocus )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
+      cTooltip, tcolor, bColor, cCaption, bGFocus )
+
+METHOD Init()
+
+METHOD onClick()
+
+METHOD onGetFocus()
+
+METHOD onLostFocus()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD NoteCaption( cNote )  SETGET
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -487,30 +503,43 @@ CLASS HButtonEX INHERIT HButtonX
    DATA m_bmpBk, m_pbmpOldBk
    DATA bMouseOverButton INIT .F.
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-         tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther )
-   METHOD Paint( lpDis )
-   METHOD SetBitmap( hBitMap )
-   METHOD SetIcon( hIcon )
-   METHOD Init()
-   METHOD onevent( msg, wParam, lParam )
-   METHOD CancelHover()
-   METHOD END()
-   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
-         cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin )
-   METHOD PaintBk( hdc )
-   METHOD Setcolor( tcolor, bcolor ) INLINE ::SetDefaultColor( tcolor, bcolor ) //, ::SetDefaultColor( .T. )
-   METHOD SetDefaultColor( tColor, bColor, lPaint )
-   METHOD SetColorEx( nIndex, nColor, lPaint )
-   METHOD SetText( c ) INLINE ::title := c,  ;
-         hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE ), ;
-         iif( ::oParent != NIL .AND. hwg_Iswindowvisible( ::Handle ) , ;
-         hwg_Invalidaterect( ::oParent:Handle, 1 , ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight  ), ), ;
-         hwg_Setwindowtext( ::handle, ::title )
-      //   METHOD SaveParentBackground()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther )
 
-   END CLASS
+METHOD Paint( lpDis )
+
+METHOD SetBitmap( hBitMap )
+
+METHOD SetIcon( hIcon )
+
+METHOD Init()
+
+METHOD onevent( msg, wParam, lParam )
+
+METHOD CancelHover()
+
+METHOD END()
+
+METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
+      cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin )
+
+METHOD PaintBk( hdc )
+
+METHOD Setcolor( tcolor, bcolor ) INLINE ::SetDefaultColor( tcolor, bcolor ) //, ::SetDefaultColor( .T. )
+
+METHOD SetDefaultColor( tColor, bColor, lPaint )
+
+METHOD SetColorEx( nIndex, nColor, lPaint )
+
+METHOD SetText( c ) INLINE ::title := c,  ;
+      hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE ), ;
+      iif( ::oParent != NIL .AND. hwg_Iswindowvisible( ::Handle ) , ;
+      hwg_Invalidaterect( ::oParent:Handle, 1 , ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight  ), ), ;
+      hwg_Setwindowtext( ::handle, ::title )
+   //   METHOD SaveParentBackground()
+
+END CLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -684,124 +713,137 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
       ENDIF
    ENDIF
    IF msg == WM_KEYDOWN
-#ifdef __XHARBOUR__
+      #ifdef __XHARBOUR__
       IF hb_BitIsSet( hwg_Ptrtoulong( lParam ), 30 )  // the key was down before ?
-#else
-      IF hb_BitTest( lParam, 30 )   // the key was down before ?
-#endif
-         RETURN 0
-      ENDIF
-      IF ( ( wParam == VK_SPACE ) .OR. ( wParam == VK_RETURN ) )
-         hwg_Sendmessage( ::handle, WM_LBUTTONDOWN, 0, hwg_Makelparam( 1, 1 ) )
-         RETURN 0
-      ENDIF
-      IF wParam == VK_LEFT .OR. wParam == VK_UP
-         hwg_GetSkip( ::oParent, ::handle, , - 1 )
-         RETURN 0
-      ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
-         hwg_GetSkip( ::oParent, ::handle, , 1 )
-         RETURN 0
-      ELSEIF  wParam = VK_TAB
-         hwg_GetSkip( ::oparent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 )  )
-      ENDIF
-      hwg_ProcKeyList( Self, wParam )
-   ELSEIF msg == WM_SYSKEYUP .OR. ( msg == WM_KEYUP .AND. ;
-         ASCAN( { VK_SPACE, VK_RETURN, VK_ESCAPE }, wParam ) = 0 )
-      IF hwg_Checkbit( lParam, 23 ) .AND. ( wParam > 95 .AND. wParam < 106 )
-         wParam -= 48
-      ENDIF
-      IF ! Empty( ::title ) .AND. ( pos := At( "&", ::title ) ) > 0 .AND. wParam == Asc( Upper( SubStr( ::title, ++ pos, 1 ) ) )
-         IF ValType( ::bClick ) == "B" .OR. ::id < 3
-            hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::id, BN_CLICKED ), ::handle )
-         ENDIF
-      ELSEIF ( nID := Ascan( ::oparent:acontrols, { | o | iif( ValType( o:title ) = "C", ( pos := At( "&", o:title ) ) > 0 .AND. ;
-            wParam == Asc( Upper( SubStr( o:title, ++ pos, 1 ) ) ), ) } ) ) > 0
-         IF __ObjHasMsg( ::oParent:aControls[ nID ], "BCLICK" ) .AND. ;
-               ValType( ::oParent:aControls[ nID ]:bClick ) == "B" .OR. ::oParent:aControls[ nID]:id < 3
-            hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::oParent:aControls[ nID ]:id, BN_CLICKED ), ::oParent:aControls[ nID ]:handle )
-         ENDIF
-      ENDIF
-      IF msg != WM_SYSKEYUP
-         RETURN 0
-      ENDIF
-   ELSEIF msg == WM_KEYUP
-      IF ( wParam == VK_SPACE .OR. wParam == VK_RETURN  )
-         ::bMouseOverButton := .T.
-         hwg_Sendmessage( ::handle, WM_LBUTTONUP, 0, hwg_Makelparam( 1, 1 ) )
-         ::bMouseOverButton := .F.
-         RETURN 0
-      ENDIF
-   ELSEIF msg == WM_LBUTTONUP
-      ::m_bLButtonDown := .F.
-      IF ( ::m_bSent )
-         hwg_Sendmessage( ::handle, BM_SETSTATE, 0, 0 )
-         ::m_bSent := .F.
-      ENDIF
-      IF ::m_bIsToggle
-         pt[ 1 ] := hwg_Loword( lParam )
-         pt[ 2 ] := hwg_Hiword( lParam )
-         acoor := hwg_Clienttoscreen( ::handle, pt[ 1 ], pt[ 2 ] )
-         rectButton := hwg_Getwindowrect( ::handle )
-         IF ( ! hwg_Ptinrect( rectButton, acoor ) )
-            ::m_bToggled := ! ::m_bToggled
-            hwg_Invalidaterect( ::handle, 0 )
-            hwg_Sendmessage( ::handle, BM_SETSTATE, 0, 0 )
-            ::m_bLButtonDown := .T.
-         ENDIF
-      ENDIF
-      IF ( ! ::bMouseOverButton )
-         hwg_Setfocus( 0 )
-         ::Setfocus()
-         RETURN 0
-      ENDIF
-      RETURN - 1
-   ELSEIF msg == WM_LBUTTONDOWN
-      ::m_bLButtonDown := .T.
-      IF ( ::m_bIsToggle )
-         ::m_bToggled := ! ::m_bToggled
-         hwg_Invalidaterect( ::handle, 0 )
-      ENDIF
-      RETURN - 1
-   ELSEIF msg == WM_LBUTTONDBLCLK
-      IF ( ::m_bIsToggle )
-         // for toggle buttons, treat doubleclick as singleclick
-         hwg_Sendmessage( ::handle, BM_SETSTATE, ::m_bToggled, 0 )
-      ELSE
-         hwg_Sendmessage( ::handle, BM_SETSTATE, 1, 0 )
-         ::m_bSent := TRUE
-      ENDIF
-      RETURN 0
-   ELSEIF msg == WM_GETDLGCODE
-      IF wParam = VK_ESCAPE .AND. ( hwg_Getdlgmessage( lParam ) = WM_KEYDOWN .OR. hwg_Getdlgmessage( lParam ) = WM_KEYUP )
-         oParent := hwg_GetParentForm( Self )
-         IF ! hwg_ProcKeyList( Self, wParam )  .AND. ( oParent:Type < WND_DLG_RESOURCE .OR. ! oParent:lModal )
-            hwg_Sendmessage( oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, 0 ), ::handle )
-         ELSEIF oParent:FindControl( IDCANCEL ) != NIL .AND. ! oParent:FindControl( IDCANCEL ):IsEnabled() .AND. oParent:lExitOnEsc
-            hwg_Sendmessage( oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, 0 ), ::handle )
+         #else
+         IF hb_BitTest( lParam, 30 )   // the key was down before ?
+            #endif
+
             RETURN 0
          ENDIF
-      ENDIF
-      RETURN iif( wParam = VK_ESCAPE, - 1, hwg_Buttongetdlgcode( lParam ) )
-   ELSEIF msg == WM_SYSCOLORCHANGE
-      ::SetDefaultColors()
-   ELSEIF msg == WM_CHAR
-      IF wParam == VK_RETURN .OR. wParam == VK_SPACE
+         IF ( ( wParam == VK_SPACE ) .OR. ( wParam == VK_RETURN ) )
+            hwg_Sendmessage( ::handle, WM_LBUTTONDOWN, 0, hwg_Makelparam( 1, 1 ) )
+
+            RETURN 0
+         ENDIF
+         IF wParam == VK_LEFT .OR. wParam == VK_UP
+            hwg_GetSkip( ::oParent, ::handle, , - 1 )
+
+            RETURN 0
+         ELSEIF wParam == VK_RIGHT .OR. wParam == VK_DOWN
+            hwg_GetSkip( ::oParent, ::handle, , 1 )
+
+            RETURN 0
+         ELSEIF  wParam = VK_TAB
+            hwg_GetSkip( ::oparent, ::handle, , iif( hwg_IsCtrlShift( .F. , .T. ), - 1, 1 )  )
+         ENDIF
+         hwg_ProcKeyList( Self, wParam )
+      ELSEIF msg == WM_SYSKEYUP .OR. ( msg == WM_KEYUP .AND. ;
+            ASCAN( { VK_SPACE, VK_RETURN, VK_ESCAPE }, wParam ) = 0 )
+         IF hwg_Checkbit( lParam, 23 ) .AND. ( wParam > 95 .AND. wParam < 106 )
+            wParam -= 48
+         ENDIF
+         IF ! Empty( ::title ) .AND. ( pos := At( "&", ::title ) ) > 0 .AND. wParam == Asc( Upper( SubStr( ::title, ++ pos, 1 ) ) )
+            IF ValType( ::bClick ) == "B" .OR. ::id < 3
+               hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::id, BN_CLICKED ), ::handle )
+            ENDIF
+         ELSEIF ( nID := Ascan( ::oparent:acontrols, { | o | iif( ValType( o:title ) = "C", ( pos := At( "&", o:title ) ) > 0 .AND. ;
+               wParam == Asc( Upper( SubStr( o:title, ++ pos, 1 ) ) ), ) } ) ) > 0
+            IF __ObjHasMsg( ::oParent:aControls[ nID ], "BCLICK" ) .AND. ;
+                  ValType( ::oParent:aControls[ nID ]:bClick ) == "B" .OR. ::oParent:aControls[ nID]:id < 3
+               hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::oParent:aControls[ nID ]:id, BN_CLICKED ), ::oParent:aControls[ nID ]:handle )
+            ENDIF
+         ENDIF
+         IF msg != WM_SYSKEYUP
+
+            RETURN 0
+         ENDIF
+      ELSEIF msg == WM_KEYUP
+         IF ( wParam == VK_SPACE .OR. wParam == VK_RETURN  )
+            ::bMouseOverButton := .T.
+            hwg_Sendmessage( ::handle, WM_LBUTTONUP, 0, hwg_Makelparam( 1, 1 ) )
+            ::bMouseOverButton := .F.
+
+            RETURN 0
+         ENDIF
+      ELSEIF msg == WM_LBUTTONUP
+         ::m_bLButtonDown := .F.
+         IF ( ::m_bSent )
+            hwg_Sendmessage( ::handle, BM_SETSTATE, 0, 0 )
+            ::m_bSent := .F.
+         ENDIF
+         IF ::m_bIsToggle
+            pt[ 1 ] := hwg_Loword( lParam )
+            pt[ 2 ] := hwg_Hiword( lParam )
+            acoor := hwg_Clienttoscreen( ::handle, pt[ 1 ], pt[ 2 ] )
+            rectButton := hwg_Getwindowrect( ::handle )
+            IF ( ! hwg_Ptinrect( rectButton, acoor ) )
+               ::m_bToggled := ! ::m_bToggled
+               hwg_Invalidaterect( ::handle, 0 )
+               hwg_Sendmessage( ::handle, BM_SETSTATE, 0, 0 )
+               ::m_bLButtonDown := .T.
+            ENDIF
+         ENDIF
+         IF ( ! ::bMouseOverButton )
+            hwg_Setfocus( 0 )
+            ::Setfocus()
+
+            RETURN 0
+         ENDIF
+
+         RETURN - 1
+      ELSEIF msg == WM_LBUTTONDOWN
+         ::m_bLButtonDown := .T.
          IF ( ::m_bIsToggle )
             ::m_bToggled := ! ::m_bToggled
             hwg_Invalidaterect( ::handle, 0 )
+         ENDIF
+
+         RETURN - 1
+      ELSEIF msg == WM_LBUTTONDBLCLK
+         IF ( ::m_bIsToggle )
+            // for toggle buttons, treat doubleclick as singleclick
+            hwg_Sendmessage( ::handle, BM_SETSTATE, ::m_bToggled, 0 )
          ELSE
             hwg_Sendmessage( ::handle, BM_SETSTATE, 1, 0 )
-            //::m_bSent := .t.
+            ::m_bSent := TRUE
          ENDIF
-         // remove because repet click  2 times
-         //hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::id, BN_CLICKED ), ::handle )
-      ELSEIF wParam == VK_ESCAPE
-         hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, BN_CLICKED ), ::handle )
-      ENDIF
-      RETURN 0
-   ENDIF
 
-   RETURN - 1
+         RETURN 0
+      ELSEIF msg == WM_GETDLGCODE
+         IF wParam = VK_ESCAPE .AND. ( hwg_Getdlgmessage( lParam ) = WM_KEYDOWN .OR. hwg_Getdlgmessage( lParam ) = WM_KEYUP )
+            oParent := hwg_GetParentForm( Self )
+            IF ! hwg_ProcKeyList( Self, wParam )  .AND. ( oParent:Type < WND_DLG_RESOURCE .OR. ! oParent:lModal )
+               hwg_Sendmessage( oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, 0 ), ::handle )
+            ELSEIF oParent:FindControl( IDCANCEL ) != NIL .AND. ! oParent:FindControl( IDCANCEL ):IsEnabled() .AND. oParent:lExitOnEsc
+               hwg_Sendmessage( oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, 0 ), ::handle )
+
+               RETURN 0
+            ENDIF
+         ENDIF
+
+         RETURN iif( wParam = VK_ESCAPE, - 1, hwg_Buttongetdlgcode( lParam ) )
+      ELSEIF msg == WM_SYSCOLORCHANGE
+         ::SetDefaultColors()
+      ELSEIF msg == WM_CHAR
+         IF wParam == VK_RETURN .OR. wParam == VK_SPACE
+            IF ( ::m_bIsToggle )
+               ::m_bToggled := ! ::m_bToggled
+               hwg_Invalidaterect( ::handle, 0 )
+            ELSE
+               hwg_Sendmessage( ::handle, BM_SETSTATE, 1, 0 )
+               //::m_bSent := .t.
+            ENDIF
+            // remove because repet click  2 times
+            //hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( ::id, BN_CLICKED ), ::handle )
+         ELSEIF wParam == VK_ESCAPE
+            hwg_Sendmessage( ::oParent:handle, WM_COMMAND, hwg_Makewparam( IDCANCEL, BN_CLICKED ), ::handle )
+         ENDIF
+
+         RETURN 0
+      ENDIF
+
+      RETURN - 1
 
 METHOD CancelHover() CLASS HBUTTONEx
 
@@ -1173,12 +1215,14 @@ CLASS HGroupEx INHERIT HGroup
    DATA oBrush
    DATA lTransparent HIDDEN
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup )
-   METHOD Init()
-   METHOD Paint( lpDis )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup )
 
-   ENDCLASS
+METHOD Init()
+
+METHOD Paint( lpDis )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup ) CLASS HGroupEx

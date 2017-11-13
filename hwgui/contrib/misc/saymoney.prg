@@ -223,26 +223,26 @@ STATIC FUNCTION tigades( mvc, n)    // created: 28 mei 1993
    LOCAL say := "", x1 := left(mvc,1), x2:=subs(mvc,2,1), x3:=right(mvc,1)
 
    IF n==4 .and. mvc=="001"; RETURN "se"; ENDIF
-      IF mvc=="000"; RETURN "";  end
+   IF mvc=="000"; RETURN "";  end
 
-         IF     x1=="0"   // do nothing
-         ELSEIF x1=="1";  say += "SERATUS "
+      IF     x1=="0"   // do nothing
+      ELSEIF x1=="1";  say += "SERATUS "
          ELSE;            say += bil(x1)+ "RATUS "
-         ENDIF
+      ENDIF
 
-         IF     x2 == "0";  say += bil(x3)
-         ELSEIF x2 == "1"
-            IF     x3 == "0";  say += "SEPULUH "
-            ELSEIF x3 == "1";  say += "SEBELAS "
+      IF     x2 == "0";  say += bil(x3)
+      ELSEIF x2 == "1"
+         IF     x3 == "0";  say += "SEPULUH "
+         ELSEIF x3 == "1";  say += "SEBELAS "
             ELSE;              say += bil(x3) +"BELAS "
-            ENDIF
-         ELSE;     say += bil(x2)+"PULUH "+bil(x3)
          ENDIF
+         ELSE;     say += bil(x2)+"PULUH "+bil(x3)
+      ENDIF
 
-         RETURN (say)
+      RETURN (say)
 
-         #define  bil_asli { "SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH",;
-            "DELAPAN","SEMBILAN" }
+      #define  bil_asli { "SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH",;
+         "DELAPAN","SEMBILAN" }
 
 STATIC FUNCTION  bil(x)
 

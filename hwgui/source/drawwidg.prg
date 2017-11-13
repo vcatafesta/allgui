@@ -14,19 +14,22 @@
 
 CLASS HFont INHERIT HObject
 
-   CLASS VAR aFonts   INIT { }
+CLASS VAR aFonts   INIT { }
 
    DATA handle
    DATA name, width, height , weight
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
-   METHOD Add( fontName, nWidth, nHeight , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle )
-   METHOD SELECT( oFont, nCharSet )
-   METHOD RELEASE()
-   METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
+METHOD Add( fontName, nWidth, nHeight , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle )
 
-   ENDCLASS
+METHOD SELECT( oFont, nCharSet )
+
+METHOD RELEASE()
+
+METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
+
+ENDCLASS
 
 METHOD Add( fontName, nWidth, nHeight , fnWeight, ;
       fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle ) CLASS HFont
@@ -140,17 +143,19 @@ METHOD RELEASE() CLASS HFont
 
 CLASS HPen INHERIT HObject
 
-   CLASS VAR aPens   INIT { }
+CLASS VAR aPens   INIT { }
 
    DATA handle
    DATA style, width, color
    DATA nCounter   INIT 1
 
-   METHOD Add( nStyle, nWidth, nColor )
-   METHOD Get( nStyle, nWidth, nColor )
-   METHOD RELEASE()
+METHOD Add( nStyle, nWidth, nColor )
 
-   ENDCLASS
+METHOD Get( nStyle, nWidth, nColor )
+
+METHOD RELEASE()
+
+ENDCLASS
 
 METHOD Add( nStyle, nWidth, nColor ) CLASS HPen
 
@@ -255,17 +260,18 @@ METHOD RELEASE() CLASS HPen
 
 CLASS HBrush INHERIT HObject
 
-   CLASS VAR aBrushes   INIT { }
+CLASS VAR aBrushes   INIT { }
 
    DATA handle
    DATA COLOR
    DATA nHatch   INIT 99
    DATA nCounter INIT 1
 
-   METHOD Add( nColor, nHatch )
-   METHOD RELEASE()
+METHOD Add( nColor, nHatch )
 
-   ENDCLASS
+METHOD RELEASE()
+
+ENDCLASS
 
 METHOD Add( nColor, nHatch ) CLASS HBrush
 
@@ -338,8 +344,9 @@ METHOD RELEASE() CLASS HBrush
 
 CLASS HBitmap INHERIT HObject
 
-   CLASS VAR aBitmaps   INIT { }
-   CLASS VAR lSelFile   INIT .T.
+CLASS VAR aBitmaps   INIT { }
+
+CLASS VAR lSelFile   INIT .T.
 
    DATA handle
    DATA name
@@ -347,14 +354,19 @@ CLASS HBitmap INHERIT HObject
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-   METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight )
-   METHOD AddStandard( nId )
-   METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight )
-   METHOD AddWindow( oWnd, lFull )
-   METHOD Draw( hDC, x1, y1, width, height )  INLINE hwg_Drawbitmap( hDC, ::handle, SRCCOPY, x1, y1, width, height )
-   METHOD RELEASE()
+METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight )
 
-   ENDCLASS
+METHOD AddStandard( nId )
+
+METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight )
+
+METHOD AddWindow( oWnd, lFull )
+
+METHOD Draw( hDC, x1, y1, width, height )  INLINE hwg_Drawbitmap( hDC, ::handle, SRCCOPY, x1, y1, width, height )
+
+METHOD RELEASE()
+
+ENDCLASS
 
 METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight ) CLASS HBitmap
 
@@ -536,20 +548,24 @@ METHOD RELEASE() CLASS HBitmap
 
 CLASS HIcon INHERIT HObject
 
-   CLASS VAR aIcons   INIT { }
-   CLASS VAR lSelFile   INIT .T.
+CLASS VAR aIcons   INIT { }
+
+CLASS VAR lSelFile   INIT .T.
 
    DATA handle
    DATA name
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-   METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM )
-   METHOD AddFile( name, nWidth, nHeight )
-   METHOD Draw( hDC, x, y )   INLINE hwg_Drawicon( hDC, ::handle, x, y )
-   METHOD RELEASE()
+METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM )
 
-   ENDCLASS
+METHOD AddFile( name, nWidth, nHeight )
+
+METHOD Draw( hDC, x, y )   INLINE hwg_Drawicon( hDC, ::handle, x, y )
+
+METHOD RELEASE()
+
+ENDCLASS
 
 METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM ) CLASS HIcon
 

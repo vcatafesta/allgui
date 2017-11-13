@@ -115,7 +115,7 @@ ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, FileName, w, h, cBuffer, hBitMap, ;
       stretch, autofit, imagesize, BORDER, CLIENTEDGE, BackColor, ;
-ProcedureName, ToolTip, HelpId, lRtl, invisible, lNoLoadTrans, ;
+      ProcedureName, ToolTip, HelpId, lRtl, invisible, lNoLoadTrans, ;
       lNo3DColors, lNoDIB, lStyleTransp, aArea, lDisabled ) CLASS TPicture
    LOCAL ControlHandle, nStyle, nStyleEx
 

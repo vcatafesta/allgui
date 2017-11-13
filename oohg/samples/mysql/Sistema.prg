@@ -35,16 +35,16 @@ FUNCTION Main
    PRIVATE lMaxi:=.t.     //Maximizar Pantalla principal del Sistema
 
    IF !File('Parametros.Ini') ; CrearIniPar() ; EndIf
-      BEGIN INI FILE "Parametros.Ini"
-         GET lMaxi SECTION "General" ENTRY 'Maximizar'
-      END INI
-      CENTER WINDOW Sistema
-      IF lMaxi ; Sistema.Maximize ; EndIf
-         ACTIVATE WINDOW Sistema
+   BEGIN INI FILE "Parametros.Ini"
+      GET lMaxi SECTION "General" ENTRY 'Maximizar'
+   END INI
+   CENTER WINDOW Sistema
+   IF lMaxi ; Sistema.Maximize ; EndIf
+   ACTIVATE WINDOW Sistema
 
-         RETURN
+   RETURN
 
-         * Arranco() Utilizada por el InitInicio del Sistema!                           *
+   * Arranco() Utilizada por el InitInicio del Sistema!                           *
 
 STATIC FUNCTION Arranco
 
@@ -63,18 +63,18 @@ STATIC FUNCTION ConectoMySql
    PRIVATE cHostName:="", cUser:="", cPassWord:=""
 
    IF !File('Parametros.Ini') ; CrearIniPar() ; EndIf
-      BEGIN INI FILE "Parametros.Ini"
-         GET cHostName      SECTION "Acceso"     ENTRY 'Host'
-         GET cUser          SECTION "Acceso"     ENTRY 'Usuario'
-         GET cPassWord      SECTION "Acceso"     ENTRY 'Pass'
-      END INI
-      IF !Conexion(cHostName, cUser, cPassWord, cDataBase )
-         MsgStop('No se pudo conectar con Mysql','Sistema ooSQL')
-      ENDIF
+   BEGIN INI FILE "Parametros.Ini"
+      GET cHostName      SECTION "Acceso"     ENTRY 'Host'
+      GET cUser          SECTION "Acceso"     ENTRY 'Usuario'
+      GET cPassWord      SECTION "Acceso"     ENTRY 'Pass'
+   END INI
+   IF !Conexion(cHostName, cUser, cPassWord, cDataBase )
+      MsgStop('No se pudo conectar con Mysql','Sistema ooSQL')
+   ENDIF
 
-      RETURN
+   RETURN
 
-      * Conexion() Realiza la conexión con el Servidor MySQL                         *
+   * Conexion() Realiza la conexión con el Servidor MySQL                         *
 
 STATIC FUNCTION Conexion(cHostName, cUser, cPassWord, cDataBase )
 

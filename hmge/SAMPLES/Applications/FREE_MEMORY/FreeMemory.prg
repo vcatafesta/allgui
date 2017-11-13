@@ -137,9 +137,9 @@ STATIC PROCEDURE OnClosePrg()
    #ifdef PRO
    Ferase(cRunFile)
    #endif
-EndCpu()
+   EndCpu()
 
-RETURN
+   RETURN
 
 STATIC PROCEDURE MainForm()
 

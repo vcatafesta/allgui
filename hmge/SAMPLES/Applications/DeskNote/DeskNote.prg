@@ -149,51 +149,51 @@ PROCEDURE EditNote( cForm )
             FONT 'Tahoma' SIZE 8
 
          DEFINE IMAGELIST ImageList_1 ;
-               BUTTONSIZE 32, 32 ;
-               IMAGE { IF( IsXPThemeActive(), 'MENUXP', 'MENU' ) } ;
-               COLORMASK CLR_DEFAULT ;
-               IMAGECOUNT 3 ;
-               MASK
+            BUTTONSIZE 32, 32 ;
+            IMAGE { IF( IsXPThemeActive(), 'MENUXP', 'MENU' ) } ;
+            COLORMASK CLR_DEFAULT ;
+            IMAGECOUNT 3 ;
+            MASK
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 30,30 IMAGELIST 'ImageList_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 30,30 IMAGELIST 'ImageList_1' FLAT
 
-               BUTTON Button_1 ;
-                  PICTUREINDEX 0 ;
-                  TOOLTIP "Post note (Ctrl+P)" ;
-                  ACTION PostNote( cForm ) ;
-                  SEPARATOR
+         BUTTON Button_1 ;
+            PICTUREINDEX 0 ;
+            TOOLTIP "Post note (Ctrl+P)" ;
+            ACTION PostNote( cForm ) ;
+            SEPARATOR
 
-               BUTTON Button_2 ;
-                  PICTUREINDEX 1 ;
-                  TOOLTIP "Change font (Ctrl+F)" ;
-                  ACTION ( aNotes[nForm][IDX_FORM_FONT] := ChangeFont( cForm, aFont ), ;
-                  aFont := aNotes[nForm][IDX_FORM_FONT] )
+         BUTTON Button_2 ;
+            PICTUREINDEX 1 ;
+            TOOLTIP "Change font (Ctrl+F)" ;
+            ACTION ( aNotes[nForm][IDX_FORM_FONT] := ChangeFont( cForm, aFont ), ;
+            aFont := aNotes[nForm][IDX_FORM_FONT] )
 
-               BUTTON Button_3 ;
-                  PICTUREINDEX 2 ;
-                  TOOLTIP "Change color (Ctrl+L)" ;
-                  ACTION ( aNotes[nForm][IDX_FORM_COLOR] := ChangeColor( cForm, aColor, aFont ), ;
-                  aColor := aNotes[nForm][IDX_FORM_COLOR] )
+         BUTTON Button_3 ;
+            PICTUREINDEX 2 ;
+            TOOLTIP "Change color (Ctrl+L)" ;
+            ACTION ( aNotes[nForm][IDX_FORM_COLOR] := ChangeColor( cForm, aColor, aFont ), ;
+            aColor := aNotes[nForm][IDX_FORM_COLOR] )
 
-            END TOOLBAR
+      END TOOLBAR
 
-            CreateEdit_1( cForm, cText, aColor, aFont )
+      CreateEdit_1( cForm, cText, aColor, aFont )
 
-            ON KEY CONTROL+P ACTION PostNote( cForm )
-            ON KEY CONTROL+F ACTION DoMethod( cForm, "Button_2", "OnClick" )
-            ON KEY CONTROL+L ACTION DoMethod( cForm, "Button_3", "OnClick" )
+      ON KEY CONTROL+P ACTION PostNote( cForm )
+      ON KEY CONTROL+F ACTION DoMethod( cForm, "Button_2", "OnClick" )
+      ON KEY CONTROL+L ACTION DoMethod( cForm, "Button_3", "OnClick" )
 
-            DEFINE TIMER Timer_1    ;
-               INTERVAL 50   ;
-               ACTION ( DoMethod( cForm, "Timer_1", "Release" ), ;
-               SetForeGroundWindow( GetFormHandle(cForm) ), DoMethod( cForm, "Edit_1", "Setfocus" ) )
+      DEFINE TIMER Timer_1    ;
+         INTERVAL 50   ;
+         ACTION ( DoMethod( cForm, "Timer_1", "Release" ), ;
+         SetForeGroundWindow( GetFormHandle(cForm) ), DoMethod( cForm, "Edit_1", "Setfocus" ) )
 
-         END WINDOW
+   END WINDOW
 
-         DoMethod( cForm, 'Activate' )
-      ENDIF
+   DoMethod( cForm, 'Activate' )
+ENDIF
 
-      RETURN
+RETURN
 
 PROCEDURE CreateEdit_1( cForm, cText, aColor, aFont )
 

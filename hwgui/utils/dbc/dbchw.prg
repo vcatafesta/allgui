@@ -159,106 +159,106 @@ FUNCTION Main( ... )
    MENUITEM "Op&tions" ACTION Options()
    SEPARATOR
    MENUITEM "&Exit" ACTION  hwg_EndWindow()
-ENDMENU
-MENU TITLE  "&View"
-MENUITEM "&Font" ACTION ChangeBrwFont()
-SEPARATOR
-MENUITEM "Zoom &In"+Chr(9)+"Ctrl++" ACTION ChangeFont( , 2 ) ACCELERATOR FCONTROL,VK_ADD
-MENUITEM "Zoom &Out"+Chr(9)+"Ctrl+-" ACTION ChangeFont( , -2 ) ACCELERATOR FCONTROL,VK_SUBTRACT
-ENDMENU
-MENU TITLE  "&Index"
-MENUITEM "&Select current" ACTION  SelectIndex()
-MENUITEM "&New index" ACTION  NewIndex()
-MENUITEM "&Open index" ACTION  OpenIndex()
-SEPARATOR
-MENUITEM "&Close all" ACTION CloseIndex()
-ENDMENU
-MENU TITLE "Fie&lds"
-MENUITEM "&Modify structure" ACTION StruMan( .F. )
-SEPARATOR
-MENUITEM "&Edit record"+Chr(9)+"Ctrl+E" ACTION EditRec() ACCELERATOR FCONTROL,Asc("E")
-ENDMENU
-MENU TITLE  "&Move"
-MENUITEM "&Locate" ACTION  Move( 1 )
-MENUITEM "&Continue" ACTION .T.
-MENUITEM "&Seek"+Chr(9)+"Ctrl+S" ACTION  Move( 2 ) ACCELERATOR FCONTROL,Asc("S")
-MENUITEM "&Filter"+Chr(9)+"Ctrl+F" ACTION  Move( 3 ) ACCELERATOR FCONTROL,Asc("F")
-MENUITEM "&Go To"+Chr(9)+"Ctrl+G" ACTION  Move( 4 ) ACCELERATOR FCONTROL,Asc("G")
-ENDMENU
-MENU TITLE  "&Commands"
-MENUITEM "&Replace" ACTION  C_Repl()
-MENUITEM "&Delete" ACTION  C_4( 1 )
-MENUITEM "Reca&ll" ACTION  C_4( 2 )
-MENUITEM "&Count" ACTION  C_4( 3 )
-MENUITEM "&Sum" ACTION  C_4( 4 )
-MENUITEM "&Append from"  ACTION  C_Append()
-MENUITEM "Copy &To" ACTION C_Copy()
-MENUITEM "Re&index" ACTION  C_RPZ( 1 )
-MENUITEM "&Pack" ACTION  C_RPZ( 2 )
-MENUITEM "&Zap" ACTION  C_RPZ( 3 )
-SEPARATOR
-MENUITEM "D&o script" ACTION  Scripts( 1 )
-MENUITEM "&Memo" ACTION .T.
-MENUITEM "Set Relatio&n" ACTION C_Rel()
-ENDMENU
-MENU TITLE  "V&iews"
-MENUITEM "&Open view" ACTION RdView()
-MENUITEM "&Save view" ACTION WrView()
-ENDMENU
-MENU TITLE  "&More..."
-MENUITEM "&Calculator" ACTION  Calcul()
-MENUITEM "&Do script" ACTION  Scripts( 2 )
-ENDMENU
-MENU TITLE  "&Windows"
-MENUITEM "&Vertically" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDITILE, MDITILE_VERTICAL, 0 )
-MENUITEM "&Horizontally" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0 )
-MENUITEM "&Cascade" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDICASCADE, 0, 0 )
-ENDMENU
-#ifdef RDD_LETO
-#endif
-#ifdef RDD_ADS
-MENU TITLE  "&Query"
-MENUITEM "&New query" ACTION  Query( .F. )
-MENUITEM "&Open query" ACTION  OpenQuery()
-MENUITEM "&Edit query" ACTION  Query( .T. )
-ENDMENU
-#endif
-MENUITEM "&About" ACTION  About()
-ENDMENU
+   ENDMENU
+   MENU TITLE  "&View"
+   MENUITEM "&Font" ACTION ChangeBrwFont()
+   SEPARATOR
+   MENUITEM "Zoom &In"+Chr(9)+"Ctrl++" ACTION ChangeFont( , 2 ) ACCELERATOR FCONTROL,VK_ADD
+   MENUITEM "Zoom &Out"+Chr(9)+"Ctrl+-" ACTION ChangeFont( , -2 ) ACCELERATOR FCONTROL,VK_SUBTRACT
+   ENDMENU
+   MENU TITLE  "&Index"
+   MENUITEM "&Select current" ACTION  SelectIndex()
+   MENUITEM "&New index" ACTION  NewIndex()
+   MENUITEM "&Open index" ACTION  OpenIndex()
+   SEPARATOR
+   MENUITEM "&Close all" ACTION CloseIndex()
+   ENDMENU
+   MENU TITLE "Fie&lds"
+   MENUITEM "&Modify structure" ACTION StruMan( .F. )
+   SEPARATOR
+   MENUITEM "&Edit record"+Chr(9)+"Ctrl+E" ACTION EditRec() ACCELERATOR FCONTROL,Asc("E")
+   ENDMENU
+   MENU TITLE  "&Move"
+   MENUITEM "&Locate" ACTION  Move( 1 )
+   MENUITEM "&Continue" ACTION .T.
+   MENUITEM "&Seek"+Chr(9)+"Ctrl+S" ACTION  Move( 2 ) ACCELERATOR FCONTROL,Asc("S")
+   MENUITEM "&Filter"+Chr(9)+"Ctrl+F" ACTION  Move( 3 ) ACCELERATOR FCONTROL,Asc("F")
+   MENUITEM "&Go To"+Chr(9)+"Ctrl+G" ACTION  Move( 4 ) ACCELERATOR FCONTROL,Asc("G")
+   ENDMENU
+   MENU TITLE  "&Commands"
+   MENUITEM "&Replace" ACTION  C_Repl()
+   MENUITEM "&Delete" ACTION  C_4( 1 )
+   MENUITEM "Reca&ll" ACTION  C_4( 2 )
+   MENUITEM "&Count" ACTION  C_4( 3 )
+   MENUITEM "&Sum" ACTION  C_4( 4 )
+   MENUITEM "&Append from"  ACTION  C_Append()
+   MENUITEM "Copy &To" ACTION C_Copy()
+   MENUITEM "Re&index" ACTION  C_RPZ( 1 )
+   MENUITEM "&Pack" ACTION  C_RPZ( 2 )
+   MENUITEM "&Zap" ACTION  C_RPZ( 3 )
+   SEPARATOR
+   MENUITEM "D&o script" ACTION  Scripts( 1 )
+   MENUITEM "&Memo" ACTION .T.
+   MENUITEM "Set Relatio&n" ACTION C_Rel()
+   ENDMENU
+   MENU TITLE  "V&iews"
+   MENUITEM "&Open view" ACTION RdView()
+   MENUITEM "&Save view" ACTION WrView()
+   ENDMENU
+   MENU TITLE  "&More..."
+   MENUITEM "&Calculator" ACTION  Calcul()
+   MENUITEM "&Do script" ACTION  Scripts( 2 )
+   ENDMENU
+   MENU TITLE  "&Windows"
+   MENUITEM "&Vertically" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDITILE, MDITILE_VERTICAL, 0 )
+   MENUITEM "&Horizontally" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0 )
+   MENUITEM "&Cascade" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDICASCADE, 0, 0 )
+   ENDMENU
+   #ifdef RDD_LETO
+   #endif
+   #ifdef RDD_ADS
+   MENU TITLE  "&Query"
+   MENUITEM "&New query" ACTION  Query( .F. )
+   MENUITEM "&Open query" ACTION  OpenQuery()
+   MENUITEM "&Edit query" ACTION  Query( .T. )
+   ENDMENU
+   #endif
+   MENUITEM "&About" ACTION  About()
+   ENDMENU
 
-@ 0,0 PANEL oPanel OF oWndMain SIZE oWndMain:nWidth-2,24
+   @ 0,0 PANEL oPanel OF oWndMain SIZE oWndMain:nWidth-2,24
 
-@ 2,0 OWNERBUTTON aButtons[1] OF oPanel ON CLICK {||GetBrwActive():Top()} ;
-   SIZE 24,24 FLAT BITMAP "TOP" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Top"
+   @ 2,0 OWNERBUTTON aButtons[1] OF oPanel ON CLICK {||GetBrwActive():Top()} ;
+      SIZE 24,24 FLAT BITMAP "TOP" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Top"
 
-@ 26,0 OWNERBUTTON aButtons[2] OF oPanel ON CLICK {||GetBrwActive():Pageup()} ;
-   SIZE 24,24 FLAT BITMAP "PREV" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Page up"
+   @ 26,0 OWNERBUTTON aButtons[2] OF oPanel ON CLICK {||GetBrwActive():Pageup()} ;
+      SIZE 24,24 FLAT BITMAP "PREV" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Page up"
 
-@ 50,0 OWNERBUTTON aButtons[3] OF oPanel ON CLICK {||GetBrwActive():Pagedown()} ;
-   SIZE 24,24 FLAT BITMAP "NEXT" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Page down"
+   @ 50,0 OWNERBUTTON aButtons[3] OF oPanel ON CLICK {||GetBrwActive():Pagedown()} ;
+      SIZE 24,24 FLAT BITMAP "NEXT" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Page down"
 
-@ 74,0 OWNERBUTTON aButtons[4] OF oPanel ON CLICK {||GetBrwActive():Bottom()} ;
-   SIZE 24,24 FLAT BITMAP "BOTTOM" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Bottom"
+   @ 74,0 OWNERBUTTON aButtons[4] OF oPanel ON CLICK {||GetBrwActive():Bottom()} ;
+      SIZE 24,24 FLAT BITMAP "BOTTOM" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Bottom"
 
-@ 104,2 LINE OF oPanel LENGTH 22 VERTICAL
+   @ 104,2 LINE OF oPanel LENGTH 22 VERTICAL
 
-@ 108,0 OWNERBUTTON aButtons[5] OF oPanel ON CLICK {||OpenFile()} ;
-   SIZE 24,24 FLAT BITMAP "OPEN" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Open file"
+   @ 108,0 OWNERBUTTON aButtons[5] OF oPanel ON CLICK {||OpenFile()} ;
+      SIZE 24,24 FLAT BITMAP "OPEN" FROM RESOURCE TRANSPARENT COLOR 12632256 TOOLTIP "Open file"
 
-oWndMain:bActivate := {|| ReadParams( aParams ) }
+   oWndMain:bActivate := {|| ReadParams( aParams ) }
 
-hwg_Enablemenuitem( , 2, .F. , .F. )
-hwg_Enablemenuitem( , 3, .F. , .F. )
-hwg_Enablemenuitem( , 4, .F. , .F. )
-hwg_Enablemenuitem( , 5, .F. , .F. )
-aButtons[1]:Disable()
-aButtons[2]:Disable()
-aButtons[3]:Disable()
-aButtons[4]:Disable()
+   hwg_Enablemenuitem( , 2, .F. , .F. )
+   hwg_Enablemenuitem( , 3, .F. , .F. )
+   hwg_Enablemenuitem( , 4, .F. , .F. )
+   hwg_Enablemenuitem( , 5, .F. , .F. )
+   aButtons[1]:Disable()
+   aButtons[2]:Disable()
+   aButtons[3]:Disable()
+   aButtons[4]:Disable()
 
-oWndMain:Activate()
+   oWndMain:Activate()
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ReadIni( cPath )
 

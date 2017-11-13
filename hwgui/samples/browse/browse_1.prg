@@ -22,11 +22,11 @@ FUNCTION Main
    MENUITEM "&Exit"   ACTION oMain:Close()
    MENUITEM "&Browse" ACTION BrowseTest()
    MENUITEM "&Count"  ACTION hwg_Msginfo(str(nCount))
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION BrowseTest()
 

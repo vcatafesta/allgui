@@ -31,8 +31,9 @@ STATIC aMessModalDlg := { ;
 
 CLASS HDialog INHERIT HWindow
 
-   CLASS VAR aDialogs       SHARED INIT { }
-   CLASS VAR aModalDialogs  SHARED INIT { }
+CLASS VAR aDialogs       SHARED INIT { }
+
+CLASS VAR aModalDialogs  SHARED INIT { }
 
    DATA lModal   INIT .T.
    DATA lResult  INIT .F.     // Becomes TRUE if the OK button is pressed
@@ -45,19 +46,27 @@ CLASS HDialog INHERIT HWindow
    // you can change the object that receives focus adding
    // ON INIT {|| nInitFocus:=object:[handle] }  to the dialog definition
 
-   METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
-         bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, ;
-         xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable )
-   METHOD Activate( lNoModal, bOnActivate, nShow )
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD AddItem()      INLINE AAdd( iif( ::lModal, ::aModalDialogs, ::aDialogs ), Self )
-   METHOD DelItem()
-   METHOD FindDialog( hWndTitle, lAll )
-   METHOD GetActive()
-   METHOD CLOSE()    INLINE hwg_EndDialog( ::handle )
-   METHOD RELEASE()  INLINE ::Close( ), Self := Nil
+METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
+      bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, ;
+      xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable )
 
-   ENDCLASS
+METHOD Activate( lNoModal, bOnActivate, nShow )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD AddItem()      INLINE AAdd( iif( ::lModal, ::aModalDialogs, ::aDialogs ), Self )
+
+METHOD DelItem()
+
+METHOD FindDialog( hWndTitle, lAll )
+
+METHOD GetActive()
+
+METHOD CLOSE()    INLINE hwg_EndDialog( ::handle )
+
+METHOD RELEASE()  INLINE ::Close( ), Self := Nil
+
+ENDCLASS
 
 METHOD NEW( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
       bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, ;
@@ -763,30 +772,30 @@ FUNCTION hwg_SetDlgKey( oDlg, nctrl, nkey, block )
    LOCAL i, aKeys, bOldSet
 
    IF oDlg == Nil ; oDlg := HCustomWindow():oDefaultParent ; ENDIF
-      IF nctrl == Nil ; nctrl := 0 ; ENDIF
+   IF nctrl == Nil ; nctrl := 0 ; ENDIF
 
-         IF ! __ObjHasMsg( oDlg, "KEYLIST" )
+   IF ! __ObjHasMsg( oDlg, "KEYLIST" )
 
-            RETURN NIL
-         ENDIF
-         aKeys := oDlg:KeyList
-         IF ( i := AScan( aKeys, { | a | a[ 1 ] == nctrl .AND. a[ 2 ] == nkey } ) ) > 0
-            bOldSet := aKeys[ i, 3 ]
-         ENDIF
-         IF block == Nil
-            IF i > 0
-               ADel( oDlg:KeyList, i )
-               ASize( oDlg:KeyList, Len( oDlg:KeyList ) - 1 )
-            ENDIF
-         ELSE
-            IF i == 0
-               AAdd( aKeys, { nctrl, nkey, block } )
-            ELSE
-               aKeys[ i, 3 ] := block
-            ENDIF
-         ENDIF
+      RETURN NIL
+   ENDIF
+   aKeys := oDlg:KeyList
+   IF ( i := AScan( aKeys, { | a | a[ 1 ] == nctrl .AND. a[ 2 ] == nkey } ) ) > 0
+      bOldSet := aKeys[ i, 3 ]
+   ENDIF
+   IF block == Nil
+      IF i > 0
+         ADel( oDlg:KeyList, i )
+         ASize( oDlg:KeyList, Len( oDlg:KeyList ) - 1 )
+      ENDIF
+   ELSE
+      IF i == 0
+         AAdd( aKeys, { nctrl, nkey, block } )
+      ELSE
+         aKeys[ i, 3 ] := block
+      ENDIF
+   ENDIF
 
-         RETURN bOldSet
+   RETURN bOldSet
 
 STATIC FUNCTION onSysCommand( oDlg, wParam, lParam )
 

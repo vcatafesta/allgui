@@ -30,16 +30,16 @@ FUNCTION Main
    MENUITEM "&Demo for TAB DBF " ID 303 ACTION Cadastro()
    SEPARATOR
    MENUITEM "&Exit" ACTION {||dbCloseAll(), hwg_EndWindow()}
-ENDMENU
+   ENDMENU
 
-MENU TITLE "&Help"
-MENUITEM "&As" ACTION hwg_Msginfo("HwGUI Harbour Win32 GUI","Copyright (c) Alexander Kresin")
-ENDMENU
-ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&As" ACTION hwg_Msginfo("HwGUI Harbour Win32 GUI","Copyright (c) Alexander Kresin")
+   ENDMENU
+   ENDMENU
 
-Form_Main:Activate()
+   Form_Main:Activate()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Cadastro()
 

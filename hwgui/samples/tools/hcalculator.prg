@@ -371,3 +371,4 @@ METHOD GetRefresh( ) CLASS HCalculator
    RETURN .T.
 
    /* end */
+

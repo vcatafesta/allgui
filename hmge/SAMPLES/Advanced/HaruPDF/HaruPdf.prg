@@ -1003,17 +1003,17 @@ STATIC FUNCTION show_stripe_pattern( page, x, y)
    LOCAL iy := 0
 
    DO WHILE(iy < 50)
-      HPDF_Page_SetRGBStroke(page, 0.0, 0.0, 0.5)
-      HPDF_Page_SetLineWidth(page, 1)
-      HPDF_Page_MoveTo(page, x, y + iy)
-      HPDF_Page_LineTo(page, x + HPDF_Page_TextWidth(page, "ABCabc123"), y + iy)
-      HPDF_Page_Stroke(page)
-      iy += 3
-   ENDDO
+   HPDF_Page_SetRGBStroke(page, 0.0, 0.0, 0.5)
+   HPDF_Page_SetLineWidth(page, 1)
+   HPDF_Page_MoveTo(page, x, y + iy)
+   HPDF_Page_LineTo(page, x + HPDF_Page_TextWidth(page, "ABCabc123"), y + iy)
+   HPDF_Page_Stroke(page)
+   iy += 3
+ENDDO
 
-   HPDF_Page_SetLineWidth(page, 2.5)
+HPDF_Page_SetLineWidth(page, 2.5)
 
-   RETURN NIL
+RETURN NIL
 
 STATIC FUNCTION show_description( page, x, y, text )
 

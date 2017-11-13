@@ -158,47 +158,47 @@ FUNCTION Main()
    SEPARATOR
    MENUITEM "&"+m_sair ACTION hwg_EndWindow()
 
-ENDMENU
-MENU TITLE "&"+m_editar
-MENUITEM "&"+m_seleciona+chr(9)+'CTRL+A' ACTION {||seleciona()} //;               ACCELERATOR FCONTROL,Asc("A")
-ENDMENU
+   ENDMENU
+   MENU TITLE "&"+m_editar
+   MENUITEM "&"+m_seleciona+chr(9)+'CTRL+A' ACTION {||seleciona()} //;               ACCELERATOR FCONTROL,Asc("A")
+   ENDMENU
 
-MENU TITLE "&"+m_Pesquisa
-MENUITEM "&"+m_localizar+chr(9)+'CTRL+F' ACTION {|o,m,wp,lp|Pesquisa(o,m,wp,lp)} ;
-   ACCELERATOR FCONTROL,Asc("F")
-MENUITEM "&"+m_Linha+chr(9)+'CTRL+J' ACTION {||vai()} ;
-   ACCELERATOR FCONTROL,Asc("J")
-MENUITEM "&"+m_pesq+chr(9)+'CTRL+G' ACTION {||pesquisaglobal()} ;
-   ACCELERATOR FCONTROL,Asc("G")
+   MENU TITLE "&"+m_Pesquisa
+   MENUITEM "&"+m_localizar+chr(9)+'CTRL+F' ACTION {|o,m,wp,lp|Pesquisa(o,m,wp,lp)} ;
+      ACCELERATOR FCONTROL,Asc("F")
+   MENUITEM "&"+m_Linha+chr(9)+'CTRL+J' ACTION {||vai()} ;
+      ACCELERATOR FCONTROL,Asc("J")
+   MENUITEM "&"+m_pesq+chr(9)+'CTRL+G' ACTION {||pesquisaglobal()} ;
+      ACCELERATOR FCONTROL,Asc("G")
 
-ENDMENU
+   ENDMENU
 
-MENU TITLE "&"+m_config
-MENUITEM "&"+m_fonte ACTION ID_FONT:=HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
-MENUITEM "&"+m_colorb ACTION cor_fundo()
-MENUITEM "&"+m_colorf ACTION cor_fonte()
-MENU TITLE "&"+m_indioma
-MENUITEM "&Portugues Brazil " ID 8001 ACTION indioma(8001)
-MENUITEM "&Ingles " ID 8002  ACTION indioma(8002)
-ENDMENU
-ENDMENU
-MENU TITLE "&"+m_janela
-MENUITEM "&"+m_lado  ;
-   ACTION  hwg_Sendmessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0)
-ENDMENU
+   MENU TITLE "&"+m_config
+   MENUITEM "&"+m_fonte ACTION ID_FONT:=HFont():Select(ID_FONT);ID_FONT:Release();save all like ID_* to config.dat
+   MENUITEM "&"+m_colorb ACTION cor_fundo()
+   MENUITEM "&"+m_colorf ACTION cor_fonte()
+   MENU TITLE "&"+m_indioma
+   MENUITEM "&Portugues Brazil " ID 8001 ACTION indioma(8001)
+   MENUITEM "&Ingles " ID 8002  ACTION indioma(8002)
+   ENDMENU
+   ENDMENU
+   MENU TITLE "&"+m_janela
+   MENUITEM "&"+m_lado  ;
+      ACTION  hwg_Sendmessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0)
+   ENDMENU
 
-MENU TITLE "&"+m_ajuda
-MENUITEM "&"+m_sobre ACTION aguarde()
-MENUITEM "&"+m_site ACTION ajuda('www.lumainformatica.com.br')
-ENDMENU
-ENDMENU
-painel(oMainWindow)
-SET TIMER tp1 OF oMainWindow ID 1001 VALUE 30 ACTION {||funcao()}
-//ADD STATUS TO oMainWindow ID IDC_STATUS 50,50,400,12,90,95,90
-hwg_Checkmenuitem( ,id_indioma, !hwg_Ischeckedmenuitem( ,id_indioma ) )
-ACTIVATE WINDOW oMainWindow
+   MENU TITLE "&"+m_ajuda
+   MENUITEM "&"+m_sobre ACTION aguarde()
+   MENUITEM "&"+m_site ACTION ajuda('www.lumainformatica.com.br')
+   ENDMENU
+   ENDMENU
+   painel(oMainWindow)
+   SET TIMER tp1 OF oMainWindow ID 1001 VALUE 30 ACTION {||funcao()}
+   //ADD STATUS TO oMainWindow ID IDC_STATUS 50,50,400,12,90,95,90
+   hwg_Checkmenuitem( ,id_indioma, !hwg_Ischeckedmenuitem( ,id_indioma ) )
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION novo(tipo)
 

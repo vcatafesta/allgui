@@ -2047,391 +2047,391 @@ FUNCTION pdfTIFFInfo( cFile )
             nTemp := Bin2W( cValues )
             ELSE
             // Alert( "Wrong Type for Compression" )
-         ENDIF*/
-         // IF nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 32773
-         //    Alert( "Wrong Value for Compression" )
-         // ENDIF
-      CASE nTag == 262
-         /*
-         PhotometricInterpretation
-         Tag = 262 (106.H)
-         Type = SHORT
-         Values:
-         0 = WhiteIsZero. For bilevel and grayscale images: 0 is imaged as white. The maxi-mum
-         value is imaged as black. This is the normal value for Compression=2.
-         1 = BlackIsZero. For bilevel and grayscale images: 0 is imaged as black. The maxi-mum
-         value is imaged as white. If this value is specified for Compression=2, the
-         image should display and print reversed.
-         */
-         // ?? "PhotometricInterpretation"
-         // cTag := "PhotometricInterpretation"
-         nTemp := -1
-         IF nFieldType == SHORT
-            nTemp := Bin2W( cValues )
-         ELSE
-            // Alert( "Wrong Type for PhotometricInterpretation" )
-         ENDIF
-         IF nTemp != 0 .AND. nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 3
-            // Alert( "Wrong Value for PhotometricInterpretation" )
-         ENDIF
-      CASE nTag == 264
-         /*
-         CellWidth
-         The width of the dithering or halftoning matrix used to create a dithered or
-         halftoned bilevel file.Tag = 264 (108.H)
-         Type = SHORT
-         N = 1
-         No default. See also Threshholding.
-         */
-         // ?? "CellWidth"
-         // cTag := "CellWidth"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for CellWidth" )
-         ENDIF
-      CASE nTag == 265
-         /*
-         CellLength
-         The length of the dithering or halftoning matrix used to create a dithered or
-         halftoned bilevel file.
-         Tag = 265 (109.H)
-         Type = SHORT
-         N = 1
-         This field should only be present if Threshholding = 2
-         No default. See also Threshholding.
-         */
-         // ?? "CellLength"
-         // cTag := "CellLength"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for CellLength" )
-         ENDIF
-      CASE nTag == 266
-         /*
-         FillOrder
-         The logical order of bits within a byte.
-         Tag = 266 (10A.H)
-         Type = SHORT
-         N = 1
-         */
-         // ?? "FillOrder"
-         // cTag := "FillOrder"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for FillOrder" )
-         ENDIF
-      CASE nTag == 273
-         /*
-         StripOffsets
-         Tag = 273 (111.H)
-         Type = SHORT or LONG
-         For each strip, the byte offset of that strip.
-         */
-         // ?? "StripOffsets"
-         // cTag := "StripOffsets"
-         IF nFieldType != SHORT .AND. nFieldType != LONG
-            // Alert( "Wrong Type for StripOffsets" )
-         ENDIF
+            ENDIF*/
+            // IF nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 32773
+            //    Alert( "Wrong Value for Compression" )
+            // ENDIF
+         CASE nTag == 262
+            /*
+            PhotometricInterpretation
+            Tag = 262 (106.H)
+            Type = SHORT
+            Values:
+            0 = WhiteIsZero. For bilevel and grayscale images: 0 is imaged as white. The maxi-mum
+            value is imaged as black. This is the normal value for Compression=2.
+            1 = BlackIsZero. For bilevel and grayscale images: 0 is imaged as black. The maxi-mum
+            value is imaged as white. If this value is specified for Compression=2, the
+            image should display and print reversed.
+            */
+            // ?? "PhotometricInterpretation"
+            // cTag := "PhotometricInterpretation"
+            nTemp := -1
+            IF nFieldType == SHORT
+               nTemp := Bin2W( cValues )
+            ELSE
+               // Alert( "Wrong Type for PhotometricInterpretation" )
+            ENDIF
+            IF nTemp != 0 .AND. nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 3
+               // Alert( "Wrong Value for PhotometricInterpretation" )
+            ENDIF
+         CASE nTag == 264
+            /*
+            CellWidth
+            The width of the dithering or halftoning matrix used to create a dithered or
+            halftoned bilevel file.Tag = 264 (108.H)
+            Type = SHORT
+            N = 1
+            No default. See also Threshholding.
+            */
+            // ?? "CellWidth"
+            // cTag := "CellWidth"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for CellWidth" )
+            ENDIF
+         CASE nTag == 265
+            /*
+            CellLength
+            The length of the dithering or halftoning matrix used to create a dithered or
+            halftoned bilevel file.
+            Tag = 265 (109.H)
+            Type = SHORT
+            N = 1
+            This field should only be present if Threshholding = 2
+            No default. See also Threshholding.
+            */
+            // ?? "CellLength"
+            // cTag := "CellLength"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for CellLength" )
+            ENDIF
+         CASE nTag == 266
+            /*
+            FillOrder
+            The logical order of bits within a byte.
+            Tag = 266 (10A.H)
+            Type = SHORT
+            N = 1
+            */
+            // ?? "FillOrder"
+            // cTag := "FillOrder"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for FillOrder" )
+            ENDIF
+         CASE nTag == 273
+            /*
+            StripOffsets
+            Tag = 273 (111.H)
+            Type = SHORT or LONG
+            For each strip, the byte offset of that strip.
+            */
+            // ?? "StripOffsets"
+            // cTag := "StripOffsets"
+            IF nFieldType != SHORT .AND. nFieldType != LONG
+               // Alert( "Wrong Type for StripOffsets" )
+            ENDIF
 
-         IF nFieldType ==  SHORT
-            nFrom := Bin2W( SubStr( cValues, 1, 2 ) )
-         ELSEIF nFieldType ==  LONG
-            nFrom := Bin2L( SubStr( cValues, 1, 4 ) )
-         ENDIF
+            IF nFieldType ==  SHORT
+               nFrom := Bin2W( SubStr( cValues, 1, 2 ) )
+            ELSEIF nFieldType ==  LONG
+               nFrom := Bin2L( SubStr( cValues, 1, 4 ) )
+            ENDIF
 
-      CASE nTag == 277
-         /*
-         SamplesPerPixel
-         Tag = 277 (115.H)
-         Type = SHORT
-         The number of components per pixel. This number is 3 for RGB images, unless
-         extra samples are present. See the ExtraSamples field for further information.
-         */
-         // ?? "SamplesPerPixel"
-         // cTag := "SamplesPerPixel"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for SamplesPerPixel" )
-         ENDIF
-      CASE nTag == 278
-         /*
-         RowsPerStrip
-         Tag = 278 (116.H)
-         Type = SHORT or LONG
-         The number of rows in each strip (except possibly the last strip.)
-         For example, if ImageLength is 24, and RowsPerStrip is 10, then there are 3
-         strips, with 10 rows in the first strip, 10 rows in the second strip, and 4 rows in the
-         third strip. (The data in the last strip is not padded with 6 extra rows of dummy
-         data.)
-         */
-         // ?? "RowsPerStrip"
-         // cTag := "RowsPerStrip"
-         IF nFieldType != SHORT .AND. nFieldType != LONG
-            // Alert( "Wrong Type for RowsPerStrip" )
-         ENDIF
-      CASE nTag == 279
-         /*
-         StripByteCounts
-         Tag = 279 (117.H)
-         Type = SHORT or LONG
-         For each strip, the number of bytes in that strip after any compression.
-         */
-         // ?? "StripByteCounts"
-         // cTag := "StripByteCounts"
-         IF nFieldType != SHORT .AND. nFieldType != LONG
-            // Alert( "Wrong Type for StripByteCounts" )
-         ENDIF
+         CASE nTag == 277
+            /*
+            SamplesPerPixel
+            Tag = 277 (115.H)
+            Type = SHORT
+            The number of components per pixel. This number is 3 for RGB images, unless
+            extra samples are present. See the ExtraSamples field for further information.
+            */
+            // ?? "SamplesPerPixel"
+            // cTag := "SamplesPerPixel"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for SamplesPerPixel" )
+            ENDIF
+         CASE nTag == 278
+            /*
+            RowsPerStrip
+            Tag = 278 (116.H)
+            Type = SHORT or LONG
+            The number of rows in each strip (except possibly the last strip.)
+            For example, if ImageLength is 24, and RowsPerStrip is 10, then there are 3
+            strips, with 10 rows in the first strip, 10 rows in the second strip, and 4 rows in the
+            third strip. (The data in the last strip is not padded with 6 extra rows of dummy
+            data.)
+            */
+            // ?? "RowsPerStrip"
+            // cTag := "RowsPerStrip"
+            IF nFieldType != SHORT .AND. nFieldType != LONG
+               // Alert( "Wrong Type for RowsPerStrip" )
+            ENDIF
+         CASE nTag == 279
+            /*
+            StripByteCounts
+            Tag = 279 (117.H)
+            Type = SHORT or LONG
+            For each strip, the number of bytes in that strip after any compression.
+            */
+            // ?? "StripByteCounts"
+            // cTag := "StripByteCounts"
+            IF nFieldType != SHORT .AND. nFieldType != LONG
+               // Alert( "Wrong Type for StripByteCounts" )
+            ENDIF
 
-         IF nFieldType ==  SHORT
-            nLength := Bin2W( SubStr( cValues, 1, 2 ) )
-         ELSEIF nFieldType ==  LONG
-            nLength := Bin2L( SubStr( cValues, 1, 4 ) )
-         ENDIF
+            IF nFieldType ==  SHORT
+               nLength := Bin2W( SubStr( cValues, 1, 2 ) )
+            ELSEIF nFieldType ==  LONG
+               nLength := Bin2L( SubStr( cValues, 1, 4 ) )
+            ENDIF
 
-         nLength *= nCount // Count all strips !!!
+            nLength *= nCount // Count all strips !!!
 
-      CASE nTag == 282
-         /*
-         XResolution
-         Tag = 282 (11A.H)
-         Type = RATIONAL
-         The number of pixels per ResolutionUnit in the ImageWidth (typically, horizontal
-         - see Orientation) direction.
-         */
-         // ?? "XResolution"
-         // cTag := "XResolution"
-         IF nFieldType != RATIONAL
-            // Alert( "Wrong Type for XResolution" )
-         ENDIF
-         xRes := Bin2L( SubStr( cValues, 1, 4 ) )
-      CASE nTag == 283
-         /*
-         YResolution
-         Tag = 283 (11B.H)
-         Type = RATIONAL
-         The number of pixels per ResolutionUnit in the ImageLength (typically, vertical)
-         direction.
-         */
-         // ?? "YResolution"
-         // cTag := "YResolution"
-         IF nFieldType != RATIONAL
-            // Alert( "Wrong Type for YResolution" )
-         ENDIF
-         yRes := Bin2L( SubStr( cValues, 1, 4 ) )
-      CASE nTag == 284
-         // ?? "PlanarConfiguration"
-         // cTag := "PlanarConfiguration"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for PlanarConfiguration" )
-         ENDIF
-      CASE nTag == 288
-         /*
-         FreeOffsets
-         For each string of contiguous unused bytes in a TIFF file, the byte offset of the
-         string.
-         Tag = 288 (120.H)
-         Type = LONG
-         Not recommended for general interchange.
-         See also FreeByteCounts.
-         */
-         // ?? "FreeOffsets"
-         // cTag := "FreeOffsets"
-         IF nFieldType != LONG
-            // Alert( "Wrong Type for FreeOffsets" )
-         ENDIF
-      CASE nTag == 289
-         /*
-         FreeByteCounts
-         For each string of contiguous unused bytes in a TIFF file, the number of bytes in
-         the string.
-         Tag = 289 (121.H)
-         Type = LONG
-         Not recommended for general interchange.
-         See also FreeOffsets.
-         */
-         // ?? "FreeByteCounts"
-         // cTag := "FreeByteCounts"
-         IF nFieldType != LONG
-            // Alert( "Wrong Type for FreeByteCounts" )
-         ENDIF
-      CASE nTag == 296
-         /*
-         ResolutionUnit
-         Tag = 296 (128.H)
-         Type = SHORT
-         Values:
-         1 = No absolute unit of measurement. Used for images that may have a non-square
-         aspect ratio but no meaningful absolute dimensions.
-         2 = Inch.
-         3 = Centimeter.
-         Default = 2 (inch).
-         */
-         // ?? "ResolutionUnit"
-         // cTag := "ResolutionUnit"
-         nTemp := 0
-         IF nFieldType == SHORT
-            nTemp := Bin2W( cValues )
-         ELSE
-            // Alert( "Wrong Type for ResolutionUnit" )
-         ENDIF
-         IF nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 3
-            // Alert( "Wrong Value for ResolutionUnit" )
-         ENDIF
-      CASE nTag == 305
-         // ?? "Software"
-         // cTag := "Software"
-         IF nFieldType != ASCII
-            // Alert( "Wrong Type for Software" )
-         ENDIF
-      CASE nTag == 306
-         /*
-         DateTime
-         Date and time of image creation.
-         Tag = 306 (132.H)
-         Type = ASCII
-         N = 2 0
-         The format is: YYYY:MM:DD HH:MM:SS, with hours like those on a 24-hour
-         clock, and one space character between the date and the time. The length of the
-         string, including the terminating NUL, is 20 bytes.
-         */
-         // ?? "DateTime"
-         // cTag := "DateTime"
-         IF nFieldType != ASCII
-            // Alert( "Wrong Type for DateTime" )
-         ENDIF
-      CASE nTag == 315
-         /*
-         Artist
-         Person who created the image.
-         Tag = 315 (13B.H)
-         Type = ASCII
-         Note: some older TIFF files used this tag for storing Copyright information.
-         */
-         // ?? "Artist"
-         // cTag := "Artist"
-         IF nFieldType != ASCII
-            // Alert( "Wrong Type for Artist" )
-         ENDIF
-      CASE nTag == 320
-         /*
-         ColorMap
-         Tag = 320 (140.H)
-         Type = SHORT
-         N = 3 * (2**BitsPerSample)
-         This field defines a Red-Green-Blue color map (often called a lookup table) for
-         palette color images. In a palette-color image, a pixel value is used to index into an
-         RGB-lookup table. For example, a palette-color pixel having a value of 0 would
-         be displayed according to the 0th Red, Green, Blue triplet.
-         In a TIFF ColorMap, all the Red values come first, followed by the Green values,
-         then the Blue values. In the ColorMap, black is represented by 0,0,0 and white is
-         represented by 65535, 65535, 65535.
-         */
-         // ?? "ColorMap"
-         // cTag := "ColorMap"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for ColorMap" )
-         ENDIF
-      CASE nTag == 338
-         /*
-         ExtraSamples
-         Description of extra components.
-         Tag = 338 (152.H)
-         Type = SHORT
-         N = m
-         */
-         // ?? "ExtraSamples"
-         // cTag := "ExtraSamples"
-         IF nFieldType != SHORT
-            // Alert( "Wrong Type for ExtraSamples" )
-         ENDIF
-      CASE nTag == 33432
-         /*
-         Copyright
-         Copyright notice.
-         Tag = 33432 (8298.H)
-         Type = ASCII
-         Copyright notice of the person or organization that claims the copyright to the
-         image. The complete copyright statement should be listed in this field including
-         any dates and statements of claims. For example, Copyright, John Smith, 19xx.
-         All rights reserved.
-         */
-         // ?? "Copyright"
-         // cTag := "Copyright"
-         IF nFieldType != ASCII
-            // Alert( "Wrong Type for Copyright" )
-         ENDIF
-      OTHERWISE
-         // ?? "Unknown"
-         // cTag := "Unknown"
-      ENDCASE
-      #if 0
-      ?? PadR( cTag, 30 )
-      ?? " type " + PadR( aType[ nFieldType ], 10 ) + " count " + hb_ntos( nCount ) + " <"
-      DO CASE
-      CASE nFieldType ==  BYTE
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Asc( SubStr( cValues, nI, 1 ) ) )
-         NEXT
-      CASE nFieldType ==  ASCII
-         ?? " "
-         FOR nI := 1 TO nCount
-            ?? SubStr( cValues, nI, 1 )
-         NEXT
-      CASE nFieldType ==  SHORT
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2W( SubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ) ) )
-         NEXT
-      CASE nFieldType ==  LONG
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ) ) )
-         NEXT
-      CASE nFieldType ==  RATIONAL
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 8 + 1, 4 ) ) ) + "/" + hb_ntos( Bin2L( SubStr( cValues, nI + 4, 4 ) ) )
-         NEXT
-      CASE nFieldType ==  SBYTE
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Asc( SubStr( cValues, nI, 1 ) ) )
-         NEXT
-      CASE nFieldType ==  UNDEFINED
-         FOR nI := 1 TO nCount
-            ?? " " + SubStr( cValues, nI, 1 )
-         NEXT
-      CASE nFieldType ==  SSHORT
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2I( SubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ) ) )
-         NEXT
-      CASE nFieldType ==  SLONG
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ) ) )
-         NEXT
-      CASE nFieldType == SRATIONAL
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 8 + 1, 4 ) ) ) + "/" + hb_ntos( Bin2L( SubStr( cValues, nI + 4, 4 ) ) )
-         NEXT
-      CASE nFieldType == FLOAT
-      CASE nFieldType == DOUBLE
-         FOR nI := 1 TO nCount
-            ?? " " + hb_ntos( CToF( SubStr( cValues, ( nI - 1 ) * 8 + 1, 8 ) ) )
-         NEXT
+         CASE nTag == 282
+            /*
+            XResolution
+            Tag = 282 (11A.H)
+            Type = RATIONAL
+            The number of pixels per ResolutionUnit in the ImageWidth (typically, horizontal
+            - see Orientation) direction.
+            */
+            // ?? "XResolution"
+            // cTag := "XResolution"
+            IF nFieldType != RATIONAL
+               // Alert( "Wrong Type for XResolution" )
+            ENDIF
+            xRes := Bin2L( SubStr( cValues, 1, 4 ) )
+         CASE nTag == 283
+            /*
+            YResolution
+            Tag = 283 (11B.H)
+            Type = RATIONAL
+            The number of pixels per ResolutionUnit in the ImageLength (typically, vertical)
+            direction.
+            */
+            // ?? "YResolution"
+            // cTag := "YResolution"
+            IF nFieldType != RATIONAL
+               // Alert( "Wrong Type for YResolution" )
+            ENDIF
+            yRes := Bin2L( SubStr( cValues, 1, 4 ) )
+         CASE nTag == 284
+            // ?? "PlanarConfiguration"
+            // cTag := "PlanarConfiguration"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for PlanarConfiguration" )
+            ENDIF
+         CASE nTag == 288
+            /*
+            FreeOffsets
+            For each string of contiguous unused bytes in a TIFF file, the byte offset of the
+            string.
+            Tag = 288 (120.H)
+            Type = LONG
+            Not recommended for general interchange.
+            See also FreeByteCounts.
+            */
+            // ?? "FreeOffsets"
+            // cTag := "FreeOffsets"
+            IF nFieldType != LONG
+               // Alert( "Wrong Type for FreeOffsets" )
+            ENDIF
+         CASE nTag == 289
+            /*
+            FreeByteCounts
+            For each string of contiguous unused bytes in a TIFF file, the number of bytes in
+            the string.
+            Tag = 289 (121.H)
+            Type = LONG
+            Not recommended for general interchange.
+            See also FreeOffsets.
+            */
+            // ?? "FreeByteCounts"
+            // cTag := "FreeByteCounts"
+            IF nFieldType != LONG
+               // Alert( "Wrong Type for FreeByteCounts" )
+            ENDIF
+         CASE nTag == 296
+            /*
+            ResolutionUnit
+            Tag = 296 (128.H)
+            Type = SHORT
+            Values:
+            1 = No absolute unit of measurement. Used for images that may have a non-square
+            aspect ratio but no meaningful absolute dimensions.
+            2 = Inch.
+            3 = Centimeter.
+            Default = 2 (inch).
+            */
+            // ?? "ResolutionUnit"
+            // cTag := "ResolutionUnit"
+            nTemp := 0
+            IF nFieldType == SHORT
+               nTemp := Bin2W( cValues )
+            ELSE
+               // Alert( "Wrong Type for ResolutionUnit" )
+            ENDIF
+            IF nTemp != 1 .AND. nTemp != 2 .AND. nTemp != 3
+               // Alert( "Wrong Value for ResolutionUnit" )
+            ENDIF
+         CASE nTag == 305
+            // ?? "Software"
+            // cTag := "Software"
+            IF nFieldType != ASCII
+               // Alert( "Wrong Type for Software" )
+            ENDIF
+         CASE nTag == 306
+            /*
+            DateTime
+            Date and time of image creation.
+            Tag = 306 (132.H)
+            Type = ASCII
+            N = 2 0
+            The format is: YYYY:MM:DD HH:MM:SS, with hours like those on a 24-hour
+            clock, and one space character between the date and the time. The length of the
+            string, including the terminating NUL, is 20 bytes.
+            */
+            // ?? "DateTime"
+            // cTag := "DateTime"
+            IF nFieldType != ASCII
+               // Alert( "Wrong Type for DateTime" )
+            ENDIF
+         CASE nTag == 315
+            /*
+            Artist
+            Person who created the image.
+            Tag = 315 (13B.H)
+            Type = ASCII
+            Note: some older TIFF files used this tag for storing Copyright information.
+            */
+            // ?? "Artist"
+            // cTag := "Artist"
+            IF nFieldType != ASCII
+               // Alert( "Wrong Type for Artist" )
+            ENDIF
+         CASE nTag == 320
+            /*
+            ColorMap
+            Tag = 320 (140.H)
+            Type = SHORT
+            N = 3 * (2**BitsPerSample)
+            This field defines a Red-Green-Blue color map (often called a lookup table) for
+            palette color images. In a palette-color image, a pixel value is used to index into an
+            RGB-lookup table. For example, a palette-color pixel having a value of 0 would
+            be displayed according to the 0th Red, Green, Blue triplet.
+            In a TIFF ColorMap, all the Red values come first, followed by the Green values,
+            then the Blue values. In the ColorMap, black is represented by 0,0,0 and white is
+            represented by 65535, 65535, 65535.
+            */
+            // ?? "ColorMap"
+            // cTag := "ColorMap"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for ColorMap" )
+            ENDIF
+         CASE nTag == 338
+            /*
+            ExtraSamples
+            Description of extra components.
+            Tag = 338 (152.H)
+            Type = SHORT
+            N = m
+            */
+            // ?? "ExtraSamples"
+            // cTag := "ExtraSamples"
+            IF nFieldType != SHORT
+               // Alert( "Wrong Type for ExtraSamples" )
+            ENDIF
+         CASE nTag == 33432
+            /*
+            Copyright
+            Copyright notice.
+            Tag = 33432 (8298.H)
+            Type = ASCII
+            Copyright notice of the person or organization that claims the copyright to the
+            image. The complete copyright statement should be listed in this field including
+            any dates and statements of claims. For example, Copyright, John Smith, 19xx.
+            All rights reserved.
+            */
+            // ?? "Copyright"
+            // cTag := "Copyright"
+            IF nFieldType != ASCII
+               // Alert( "Wrong Type for Copyright" )
+            ENDIF
+         OTHERWISE
+            // ?? "Unknown"
+            // cTag := "Unknown"
+         ENDCASE
+         #if 0
+         ?? PadR( cTag, 30 )
+         ?? " type " + PadR( aType[ nFieldType ], 10 ) + " count " + hb_ntos( nCount ) + " <"
+         DO CASE
+         CASE nFieldType ==  BYTE
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Asc( SubStr( cValues, nI, 1 ) ) )
+            NEXT
+         CASE nFieldType ==  ASCII
+            ?? " "
+            FOR nI := 1 TO nCount
+               ?? SubStr( cValues, nI, 1 )
+            NEXT
+         CASE nFieldType ==  SHORT
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2W( SubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ) ) )
+            NEXT
+         CASE nFieldType ==  LONG
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ) ) )
+            NEXT
+         CASE nFieldType ==  RATIONAL
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 8 + 1, 4 ) ) ) + "/" + hb_ntos( Bin2L( SubStr( cValues, nI + 4, 4 ) ) )
+            NEXT
+         CASE nFieldType ==  SBYTE
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Asc( SubStr( cValues, nI, 1 ) ) )
+            NEXT
+         CASE nFieldType ==  UNDEFINED
+            FOR nI := 1 TO nCount
+               ?? " " + SubStr( cValues, nI, 1 )
+            NEXT
+         CASE nFieldType ==  SSHORT
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2I( SubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ) ) )
+            NEXT
+         CASE nFieldType ==  SLONG
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ) ) )
+            NEXT
+         CASE nFieldType == SRATIONAL
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( Bin2L( SubStr( cValues, ( nI - 1 ) * 8 + 1, 4 ) ) ) + "/" + hb_ntos( Bin2L( SubStr( cValues, nI + 4, 4 ) ) )
+            NEXT
+         CASE nFieldType == FLOAT
+         CASE nFieldType == DOUBLE
+            FOR nI := 1 TO nCount
+               ?? " " + hb_ntos( CToF( SubStr( cValues, ( nI - 1 ) * 8 + 1, 8 ) ) )
+            NEXT
 
-      ENDCASE
-      ?? " >"
-      #endif
-   NEXT
-   FRead( nHandle, @cIFDNext, 4 )
-ENDDO
+         ENDCASE
+         ?? " >"
+         #endif
+      NEXT
+      FRead( nHandle, @cIFDNext, 4 )
+   ENDDO
 
-FClose( nHandle )
+   FClose( nHandle )
 
-AAdd( aTemp, nWidth )
-AAdd( aTemp, nHeight )
-AAdd( aTemp, xRes )
-AAdd( aTemp, yRes )
-AAdd( aTemp, nBits )
-AAdd( aTemp, nFrom )
-AAdd( aTemp, nLength )
+   AAdd( aTemp, nWidth )
+   AAdd( aTemp, nHeight )
+   AAdd( aTemp, xRes )
+   AAdd( aTemp, yRes )
+   AAdd( aTemp, nBits )
+   AAdd( aTemp, nFrom )
+   AAdd( aTemp, nLength )
 
-nSpace := 0
-AAdd( aTemp, nSpace )
+   nSpace := 0
+   AAdd( aTemp, nSpace )
 
-RETURN aTemp
+   RETURN aTemp
 
 FUNCTION pdfJPEGInfo( cFile )
 

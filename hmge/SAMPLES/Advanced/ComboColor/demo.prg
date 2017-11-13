@@ -112,53 +112,53 @@ FUNCTION Main()
       END MENU
 
       DEFINE IMAGELIST Imagelst_1 ;
-            BUTTONSIZE BmpW, BmpH ;
-            IMAGE {}
+         BUTTONSIZE BmpW, BmpH ;
+         IMAGE {}
 
-         FOR n:=1 TO Len(aColor)
-            HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
-            HMG_SetColorBtm(aColor[n,1], 1, BmpW, BmpH)
-            HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
-         NEXT
+      FOR n:=1 TO Len(aColor)
+         HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
+         HMG_SetColorBtm(aColor[n,1], 1, BmpW, BmpH)
+         HMG_SetColorBtm(aColor[n,1], 0, BmpW, BmpH)
+      NEXT
 
-         DEFINE IMAGELIST Imagelst_2 ;
-               BUTTONSIZE BmpW, BmpH ;
-               IMAGE {}
+      DEFINE IMAGELIST Imagelst_2 ;
+         BUTTONSIZE BmpW, BmpH ;
+         IMAGE {}
 
-            FOR n:=1 TO Len(aSysColor)
-               HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
-               HMG_SetSysColorBtm(aSysColor[n,1], 1, BmpW, BmpH)
-               HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
-            NEXT
+      FOR n:=1 TO Len(aSysColor)
+         HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
+         HMG_SetSysColorBtm(aSysColor[n,1], 1, BmpW, BmpH)
+         HMG_SetSysColorBtm(aSysColor[n,1], 0, BmpW, BmpH)
+      NEXT
 
-            @ 10,20 Label Label_1 Value "HMG Colors ComboColor" AUTOSIZE
+      @ 10,20 Label Label_1 Value "HMG Colors ComboColor" AUTOSIZE
 
-            @ 33,20 COMBOBOXEX ComboEx_1 ;
-               WIDTH 150 HEIGHT 200;
-               ITEMS aColorName ;
-               VALUE 1 ;
-               ON ENTER GetHMGColor(aColor) ;
-               FONT 'MS Sans Serif' SIZE 9 ;
-               IMAGELIST "Imagelst_1"   ;
-               TOOLTIP "Extend Combo HMG color"
+      @ 33,20 COMBOBOXEX ComboEx_1 ;
+         WIDTH 150 HEIGHT 200;
+         ITEMS aColorName ;
+         VALUE 1 ;
+         ON ENTER GetHMGColor(aColor) ;
+         FONT 'MS Sans Serif' SIZE 9 ;
+         IMAGELIST "Imagelst_1"   ;
+         TOOLTIP "Extend Combo HMG color"
 
-            @ 10,190 Label Label_2 Value "System Colors ComboColor" AUTOSIZE
+      @ 10,190 Label Label_2 Value "System Colors ComboColor" AUTOSIZE
 
-            @ 33,190 COMBOBOXEX ComboEx_2 ;
-               WIDTH 250  HEIGHT 200;
-               ITEMS aSysColorName ;
-               VALUE 1 ;
-               ON ENTER GetSystemColor(aSysColor) ;
-               FONT 'MS Sans serif' SIZE 9 ;
-               IMAGELIST "Imagelst_2"   ;
-               TOOLTIP "Extend Combo System Color"
+      @ 33,190 COMBOBOXEX ComboEx_2 ;
+         WIDTH 250  HEIGHT 200;
+         ITEMS aSysColorName ;
+         VALUE 1 ;
+         ON ENTER GetSystemColor(aSysColor) ;
+         FONT 'MS Sans serif' SIZE 9 ;
+         IMAGELIST "Imagelst_2"   ;
+         TOOLTIP "Extend Combo System Color"
 
-         END WINDOW
+   END WINDOW
 
-         Form_1.Center
-         Form_1.Activate
+   Form_1.Center
+   Form_1.Activate
 
-         RETURN NIL
+   RETURN NIL
 
 FUNCTION HMG_SetColorBtm(aColor, bChecked, BmpWidh, BmpHeight)
 

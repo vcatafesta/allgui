@@ -19,102 +19,102 @@ FUNCTION Main()
          NOMAXIMIZE NOSIZE
 
       DEFINE CHECKLISTBOX ListBox_1
-         ROW 10
-         COL 10
-         WIDTH 150
-         HEIGHT 160
-         ITEMS aItems_1
-         VALUE 2
-         CHECKBOXITEM {3,5}
-         ON DBLCLICK clb_Check()
-         ITEMHEIGHT 19
-         FONTNAME 'Arial'
-         FONTSIZE 9
-      END CHECKLISTBOX
+      ROW 10
+      COL 10
+      WIDTH 150
+      HEIGHT 160
+      ITEMS aItems_1
+      VALUE 2
+      CHECKBOXITEM {3,5}
+      ON DBLCLICK clb_Check()
+      ITEMHEIGHT 19
+      FONTNAME 'Arial'
+      FONTSIZE 9
+   END CHECKLISTBOX
 
-      @ 10,200 CHECKLISTBOX ListBox_2 ;
-         WIDTH 150 HEIGHT 160 ;
-         ITEMS aItems_2 ;
-         VALUE {2} ;
-         CHECKBOXITEM {4,5};
-         ON DBLCLICK cmlb_Check() ;
-         MULTISELECT ;
-         ITEMHEIGHT 19 ;
-         FONT 'Arial' SIZE 9
+   @ 10,200 CHECKLISTBOX ListBox_2 ;
+      WIDTH 150 HEIGHT 160 ;
+      ITEMS aItems_2 ;
+      VALUE {2} ;
+      CHECKBOXITEM {4,5};
+      ON DBLCLICK cmlb_Check() ;
+      MULTISELECT ;
+      ITEMHEIGHT 19 ;
+      FONT 'Arial' SIZE 9
 
-      @ 200,10 button bt1 caption 'Add'     action clb_add()
-      @ 230,10 button bt2 caption 'Del'     action clb_del()
-      @ 260,10 button bt3 caption 'Del All' action clb_delete_all()
-      @ 290,10 button bt4 caption 'Modify'  action clb_modify()
-      @ 320,10 button bt5 caption 'Check'   action clb_Check()
-      @ 350,10 button bt6 caption 'Check #4'   action clb_Check(4)
+   @ 200,10 button bt1 caption 'Add'     action clb_add()
+   @ 230,10 button bt2 caption 'Del'     action clb_del()
+   @ 260,10 button bt3 caption 'Del All' action clb_delete_all()
+   @ 290,10 button bt4 caption 'Modify'  action clb_modify()
+   @ 320,10 button bt5 caption 'Check'   action clb_Check()
+   @ 350,10 button bt6 caption 'Check #4'   action clb_Check(4)
 
-      @ 200,200 button btm1 caption 'Add'     action cmlb_add()
-      @ 230,200 button btm2 caption 'Del'     action cmlb_del()
-      @ 260,200 button btm3 caption 'Del All' action cmlb_delete_all()
-      @ 290,200 button btm4 caption 'Modify'  action cmlb_modify()
-      @ 320,200 button btm5 caption 'Check'   action cmlb_Check()
-      @ 350,200 button btm6 caption 'Check #4'   action cmlb_Check(4)
+   @ 200,200 button btm1 caption 'Add'     action cmlb_add()
+   @ 230,200 button btm2 caption 'Del'     action cmlb_del()
+   @ 260,200 button btm3 caption 'Del All' action cmlb_delete_all()
+   @ 290,200 button btm4 caption 'Modify'  action cmlb_modify()
+   @ 320,200 button btm5 caption 'Check'   action cmlb_Check()
+   @ 350,200 button btm6 caption 'Check #4'   action cmlb_Check(4)
 
-      on key space action OnPressSpacebar()
+   on key space action OnPressSpacebar()
 
-   END WINDOW
+END WINDOW
 
-   Form_1.Center ; Form_1.Activate
+Form_1.Center ; Form_1.Activate
 
-   RETURN NIL
+RETURN NIL
+
+*.....................................................*
+
+proc clb_add
+
+   LOCAL nn := form_1.ListBox_1.ItemCount + 1
+
+   form_1.ListBox_1.AddItem( 'ITEM_' + alltrim(str( nn )) )
+   form_1.ListBox_1.value := nn
+
+   RETURN
 
    *.....................................................*
 
-   proc clb_add
+   proc clb_del
 
-      LOCAL nn := form_1.ListBox_1.ItemCount + 1
+      LOCAL n1
+      LOCAL nn := form_1.ListBox_1.value
 
-      form_1.ListBox_1.AddItem( 'ITEM_' + alltrim(str( nn )) )
-      form_1.ListBox_1.value := nn
+      form_1.ListBox_1.DeleteItem( nn )
+      n1 := form_1.ListBox_1.ItemCount
+      IF nn <= n1
+         form_1.ListBox_1.value := nn
+      ELSE
+         form_1.ListBox_1.value := n1
+      ENDIF
 
       RETURN
 
       *.....................................................*
 
-      proc clb_del
+      proc clb_delete_all
 
-         LOCAL n1
-         LOCAL nn := form_1.ListBox_1.value
-
-         form_1.ListBox_1.DeleteItem( nn )
-         n1 := form_1.ListBox_1.ItemCount
-         IF nn <= n1
-            form_1.ListBox_1.value := nn
-         ELSE
-            form_1.ListBox_1.value := n1
-         ENDIF
+         form_1.ListBox_1.DeleteAllItems
+         form_1.ListBox_1.value := 1
 
          RETURN
 
          *.....................................................*
 
-         proc clb_delete_all
+         proc clb_modify
 
-            form_1.ListBox_1.DeleteAllItems
-            form_1.ListBox_1.value := 1
+            LOCAL nn := form_1.ListBox_1.value
+
+            IF nn > 0
+               form_1.ListBox_1.item( nn ) := 'New ' + alltrim( str(nn) )
+            ENDIF
+            form_1.ListBox_1.Setfocus
 
             RETURN
 
             *.....................................................*
-
-            proc clb_modify
-
-               LOCAL nn := form_1.ListBox_1.value
-
-               IF nn > 0
-                  form_1.ListBox_1.item( nn ) := 'New ' + alltrim( str(nn) )
-               ENDIF
-               form_1.ListBox_1.Setfocus
-
-               RETURN
-
-               *.....................................................*
 
 FUNCTION clb_Check(nn)
 

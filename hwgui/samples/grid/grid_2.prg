@@ -27,13 +27,13 @@ FUNCTION Main()
    MENU OF oMain
    MENUITEM "&Exit"   ACTION oMain:Close()
    MENUITEM "&Demo" ACTION Test()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-oServer:Close()
+   oServer:Close()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test()
 

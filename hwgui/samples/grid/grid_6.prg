@@ -25,11 +25,11 @@ FUNCTION Main()
    MENU OF oMain
    MENUITEM "&Exit"      ACTION oMain:Close()
    MENUITEM "&Grid Demo" ACTION Test()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test()
 

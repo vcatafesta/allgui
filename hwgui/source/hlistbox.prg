@@ -12,7 +12,7 @@
 
 CLASS HListBox INHERIT HControl
 
-   CLASS VAR winclass   INIT "LISTBOX"
+CLASS VAR winclass   INIT "LISTBOX"
 
    DATA  aItems
    DATA  bSetGet
@@ -22,25 +22,39 @@ CLASS HListBox INHERIT HControl
    DATA  bkeydown, bDblclick
    DATA  bValid
 
-   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
-         aItems,oFont,bInit,bSize,bPaint,bChange,cTooltip,tColor,bcolor,bGFocus,bLFocus, bKeydown, bDblclick,bOther )
-   METHOD Activate()
-   METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
-         bChange, cTooltip, bKeydown, bOther  )
-   METHOD Init()
-   METHOD Refresh()
-   METHOD Requery()
-   METHOD Setitem( nPos )
-   METHOD AddItems( p )
-   METHOD DeleteItem( nPos )
-   METHOD Valid( oCtrl )
-   METHOD When( oCtrl )
-   METHOD onChange( oCtrl )
-   METHOD onDblClick()
-   METHOD Clear()
-   METHOD onEvent( msg, wParam, lParam )
+METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+      aItems,oFont,bInit,bSize,bPaint,bChange,cTooltip,tColor,bcolor,bGFocus,bLFocus, bKeydown, bDblclick,bOther )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
+      bChange, cTooltip, bKeydown, bOther  )
+
+METHOD Init()
+
+METHOD Refresh()
+
+METHOD Requery()
+
+METHOD Setitem( nPos )
+
+METHOD AddItems( p )
+
+METHOD DeleteItem( nPos )
+
+METHOD Valid( oCtrl )
+
+METHOD When( oCtrl )
+
+METHOD onChange( oCtrl )
+
+METHOD onDblClick()
+
+METHOD Clear()
+
+METHOD onEvent( msg, wParam, lParam )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, cTooltip, tColor, bcolor, bGFocus, bLFocus,bKeydown, bDblclick,bOther )  CLASS HListBox

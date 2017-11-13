@@ -90,116 +90,178 @@ CLASS RichText
    DATA oPrinter
    // Methods for opening & closing output file, and setting defaults
 
-   METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CONSTRUCTOR
-   METHOD END() INLINE ::TextCode( "par\pard" ), ::CloseGroup(), FClose( ::hFile )
+METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CONSTRUCTOR
+
+METHOD END() INLINE ::TextCode( "par\pard" ), ::CloseGroup(), FClose( ::hFile )
+
    // Core methods for writing control codes & data to the output file
-   METHOD TextCode( cCode ) //INLINE FWRITE(::hFile, FormatCode(cCode) )
-   METHOD NumCode( cCode, nValue, lScale )
-   METHOD LogicCode( cCode, lTest )
-   METHOD Write( xData, lCodesOK )
+
+METHOD TextCode( cCode ) //INLINE FWRITE(::hFile, FormatCode(cCode) )
+
+METHOD NumCode( cCode, nValue, lScale )
+
+METHOD LogicCode( cCode, lTest )
+
+METHOD Write( xData, lCodesOK )
+
    // Groups and Sections (basic RTF structures)
-   METHOD OpenGroup() INLINE FWrite( ::hFile, "{" )
-   METHOD CloseGroup() INLINE FWrite( ::hFile, "}" )
-   METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
-         nWidth, nHeight, cVertAlign, lDefault )
+
+METHOD OpenGroup() INLINE FWrite( ::hFile, "{" )
+
+METHOD CloseGroup() INLINE FWrite( ::hFile, "}" )
+
+METHOD NewSection( lLandscape, nColumns, nLeft, nRight, nTop, nBottom, ;
+      nWidth, nHeight, cVertAlign, lDefault )
    // Higher-level page setup methods
-   METHOD PageSetup( nLeft, nRight, nTop, nBottom, nWidth, nHeight, ;
-         nTabWidth, lLandscape, lNoWidow, cVertAlign, ;
-         cPgNumPos, lPgNumTop )
-   METHOD BeginHeader() INLINE ::OpenGroup(), ;
-         IIf( ! ::lFacing, ::TextCode( "header \pard" ), ::TextCode( "headerr \pard" ) )
-   METHOD EndHeader() INLINE ::TextCode( "par" ), ::CloseGroup()
-   METHOD BeginFooter() INLINE ::OpenGroup(), ;
-         IIf( ! ::lFacing, ::TextCode( "footer \pard" ), ::TextCode( "footerr \pard" ) )
-   METHOD EndFooter() INLINE ::TextCode( "par" ), ::CloseGroup()
-   METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
-         cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
-         lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
-         lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
-         nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
-         nStyle, lChar )
+
+METHOD PageSetup( nLeft, nRight, nTop, nBottom, nWidth, nHeight, ;
+      nTabWidth, lLandscape, lNoWidow, cVertAlign, ;
+      cPgNumPos, lPgNumTop )
+
+METHOD BeginHeader() INLINE ::OpenGroup(), ;
+      IIf( ! ::lFacing, ::TextCode( "header \pard" ), ::TextCode( "headerr \pard" ) )
+
+METHOD EndHeader() INLINE ::TextCode( "par" ), ::CloseGroup()
+
+METHOD BeginFooter() INLINE ::OpenGroup(), ;
+      IIf( ! ::lFacing, ::TextCode( "footer \pard" ), ::TextCode( "footerr \pard" ) )
+
+METHOD EndFooter() INLINE ::TextCode( "par" ), ::CloseGroup()
+
+METHOD Paragraph( cText, nFontNumber, nFontSize, cAppear, ;
+      cHorzAlign, aTabPos, nIndent, nFIndent, nRIndent, nSpace, ;
+      lSpExact, nBefore, nAfter, lNoWidow, lBreak, ;
+      lBullet, cBulletChar, lHang, lDefault, lNoPar, ;
+      nFontColor, cTypeBorder, cBordStyle, nBordCol, nShdPct, cShadPat, ;
+      nStyle, lChar )
    // Table Management
-   METHOD DefineTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
-         cCellAppear, cCellHAlign, nTblRows, ;
-         nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
-         lTblNoSplit, nTblHdRows, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-         nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor )
-   METHOD BeginRow() INLINE ::TextCode( "trowd" ), ::nCurrRow += 1
-   METHOD EndRow()   INLINE ::TextCode( "row" )
-   METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
-         nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault )
+
+METHOD DefineTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
+      cCellAppear, cCellHAlign, nTblRows, ;
+      nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
+      lTblNoSplit, nTblHdRows, nTblHdHgt, nTblHdPct, nTblHdFont, ;
+      nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor )
+
+METHOD BeginRow() INLINE ::TextCode( "trowd" ), ::nCurrRow += 1
+
+METHOD EndRow()   INLINE ::TextCode( "row" )
+
+METHOD WriteCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+      nSpace, lSpExact, cCellBorder, nCellPct, nFontColor, lDefault )
    // Methods for formatting data
-   METHOD Appearance( cAppear )
-   METHOD HAlignment( cAlign )
-   METHOD LineSpacing( nSpace, lSpExact )
-   METHOD Borders( cEntity, cBorder )
-   METHOD NewFont( nFontNumber )
-   METHOD SetFontSize( nFontSize )
-   METHOD SetFontColor( nFontColor )
-   METHOD NewLine() INLINE FWrite( ::hFile, CRLF ), ::TextCode( "par" )
-   METHOD NewPage() INLINE ::TextCode( "page" + CRLF )
-   METHOD NumPage() INLINE ::TextCode( "chpgn" )
-   METHOD CurrDate( cFormat )
+
+METHOD Appearance( cAppear )
+
+METHOD HAlignment( cAlign )
+
+METHOD LineSpacing( nSpace, lSpExact )
+
+METHOD Borders( cEntity, cBorder )
+
+METHOD NewFont( nFontNumber )
+
+METHOD SetFontSize( nFontSize )
+
+METHOD SetFontColor( nFontColor )
+
+METHOD NewLine() INLINE FWrite( ::hFile, CRLF ), ::TextCode( "par" )
+
+METHOD NewPage() INLINE ::TextCode( "page" + CRLF )
+
+METHOD NumPage() INLINE ::TextCode( "chpgn" )
+
+METHOD CurrDate( cFormat )
+
    // General service methods
-   METHOD BorderCode( cBorderID )
-   METHOD ShadeCode( cShadeID )
-   METHOD ParaBorder( cBorder, cType )
-   METHOD BegBookMark( texto )
-   METHOD EndBookMark()
+
+METHOD BorderCode( cBorderID )
+
+METHOD ShadeCode( cShadeID )
+
+METHOD ParaBorder( cBorder, cType )
+
+METHOD BegBookMark( texto )
+
+METHOD EndBookMark()
+
    // Someday maybe we'll handle:
    // Styles
-   METHOD SetStlDef()
-   METHOD IncStyle( cName, styletype, nFontNumber, nFontSize, ;
-         nFontColor, cAppear, cHorzAlign, nIndent, cKeys, ;
-         cTypeBorder, cBordStyle, nBordColor, nShdPct, cShadPat, lAdd, LUpdate )
-   METHOD BeginStly()
-   METHOD WriteStly()
-   METHOD ParaStyle( nStyle )
-   METHOD CharStyle( nStyle )
+
+METHOD SetStlDef()
+
+METHOD IncStyle( cName, styletype, nFontNumber, nFontSize, ;
+      nFontColor, cAppear, cHorzAlign, nIndent, cKeys, ;
+      cTypeBorder, cBordStyle, nBordColor, nShdPct, cShadPat, lAdd, LUpdate )
+
+METHOD BeginStly()
+
+METHOD WriteStly()
+
+METHOD ParaStyle( nStyle )
+
+METHOD CharStyle( nStyle )
+
    // Alternating shading of table rows
    // Footnotes & Endnotes
-   METHOD FootNote( cTexto, cChar, nFontNumber, nFontSize, cAppear, nFontColor, lEnd, lAuto, lUpper )
+
+METHOD FootNote( cTexto, cChar, nFontNumber, nFontSize, cAppear, nFontColor, lEnd, lAuto, lUpper )
+
    // Shaded text
    // Frames
    // Text Boxes
-   METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
-         lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd )
-   METHOD EndTextBox()
-   METHOD SetFrame( ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos )
+
+METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
+      lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd )
+
+METHOD EndTextBox()
+
+METHOD SetFrame( ASize, cHorzAlign, cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos )
+
    // Font Colors
-   METHOD SetClrTab()
+
+METHOD SetClrTab()
+
    // Lines, Bitmaps & Graphics
-   METHOD Linea( aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
-         aColores, nWidth, nPatron, lSombra, aSombra )
-   METHOD Image( cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign, ;
-         cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos )
+
+METHOD Linea( aInicio, aFinal, nxoffset, nyoffset, ASize, cTipo, ;
+      aColores, nWidth, nPatron, lSombra, aSombra )
+
+METHOD Image( cName, ASize, nPercent, lCell, lInclude, lFrame, aFSize, cHorzAlign, ;
+      cVertAlign, lNoWrap, cXAlign, xpos, cYAlign, ypos )
    //    METHOD RtfJpg(cName,aSize,nPercent)
    //  METHOD Wmf2Rtf(cName,aSize,nPercent)
    // METHOD Bmp2Wmf(cName,aSize,nPercent)
    // Information
-   METHOD InfoDoc( cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
-         cCategor, cKeyWords, cComment )
-   METHOD DocFormat( nTab, nLineStart, lBackup, nDefLang, nDocType, ;
-         cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, cProtect, lFacing, nGutter )
+
+METHOD InfoDoc( cTitle, cSubject, cAuthor, cManager, cCompany, cOperator, ;
+      cCategor, cKeyWords, cComment )
+
+METHOD DocFormat( nTab, nLineStart, lBackup, nDefLang, nDocType, ;
+      cFootType, cFootNotes, cEndNotes, cFootNumber, nPage, cProtect, lFacing, nGutter )
    // Lots of other cool stuff
    // New Methods for table managament
-   METHOD EndTable() INLINE ::CloseGroup()
-   METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct )
-   METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
-         nSpace, lSpExact, nFontColor, ;
-         lDefault, lHeader, lPage, lDate )
-   METHOD CellFormat( cCellBorder, aCellPct )
-   METHOD DefNewTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
-         cCellAppear, cCellHAlign, nTblRows, ;
-         nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
-         lTblNoSplit, nTblHdRows, aHeadTit, nTblHdHgt, nTblHdPct, nTblHdFont, ;
-         nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor, aTblCJoin )
+
+METHOD EndTable() INLINE ::CloseGroup()
+
+METHOD TableDef( lHeader, nRowHead, cCellBorder, aColPct )
+
+METHOD TableCell( cText, nFontNumber, nFontSize, cAppear, cHorzAlign, ;
+      nSpace, lSpExact, nFontColor, ;
+      lDefault, lHeader, lPage, lDate )
+
+METHOD CellFormat( cCellBorder, aCellPct )
+
+METHOD DefNewTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
+      cCellAppear, cCellHAlign, nTblRows, ;
+      nTblColumns, nTblRHgt, aTableCWid, cRowBorder, cCellBorder, aColPct, nCellPct, ;
+      lTblNoSplit, nTblHdRows, aHeadTit, nTblHdHgt, nTblHdPct, nTblHdFont, ;
+      nTblHdFSize, cHeadAppear, cHeadHAlign, nTblHdColor , nTblHdFColor, aTblCJoin )
 
    HIDDEN:
 
    DATA nFile INIT 1
 
-   ENDCLASS
+ENDCLASS
 
 METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CLASS RichText
 
@@ -1293,37 +1355,37 @@ METHOD FootNote( cTexto, cChar, nFontNumber, ;
 
    IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
 
-      ::CloseGroup()
+   ::CloseGroup()
 
-      ::OpenGroup()
-      ::TextCode( "footnote" )
-      IF lEnd ; ::TextCode( "ftnalt" ) ; ENDIF
+   ::OpenGroup()
+   ::TextCode( "footnote" )
+   IF lEnd ; ::TextCode( "ftnalt" ) ; ENDIF
 
-         ::NewFont( nFontNumber )
-         ::SetFontSize( nFontSize )
-         ::SetFontColor( nFontColor )
-         ::Appearance( cAppear )
+   ::NewFont( nFontNumber )
+   ::SetFontSize( nFontSize )
+   ::SetFontColor( nFontColor )
+   ::Appearance( cAppear )
 
-         ::OpenGroup()
-         IF lUpper
-            ::TextCode( "super " + cChar )
-         ELSE
-            IF ! Empty( cChar )
-               ::Write( cChar )
-            ENDIF
-         ENDIF
+   ::OpenGroup()
+   IF lUpper
+      ::TextCode( "super " + cChar )
+   ELSE
+      IF ! Empty( cChar )
+         ::Write( cChar )
+      ENDIF
+   ENDIF
 
-         IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
+   IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
 
-            ::CloseGroup()
+   ::CloseGroup()
 
-            ::Write( cTexto )
+   ::Write( cTexto )
 
-            ::CloseGroup()
+   ::CloseGroup()
 
-            ::CloseGroup()
+   ::CloseGroup()
 
-            RETURN NIL
+   RETURN NIL
 
 METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
       lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd ) CLASS RichText
@@ -2304,7 +2366,7 @@ FUNCTION cFileExt( cFile )
 
    RETURN SubStr( cFile, At( '.', cFile ) + 1 )
 
-#ifndef __XHARBOUR__
+   #ifndef __XHARBOUR__
 
 FUNCTION CStr( xExp )
 
@@ -2319,33 +2381,45 @@ FUNCTION CStr( xExp )
 
    DO CASE
    CASE cType == 'C'
+
       RETURN xExp
    CASE cType == 'D'
+
       RETURN DToC( xExp )
    CASE cType == 'L'
+
       RETURN IIf( xExp, '.T.', '.F.' )
    CASE cType == 'N'
+
       RETURN Str( xExp )
    CASE cType == 'M'
+
       RETURN xExp
    CASE cType == 'A'
+
       RETURN "{ Array of " +  LTrim( Str( Len( xExp ) ) ) + " Items }"
    CASE cType == 'B'
+
       RETURN '{|| Block }'
    CASE cType == 'O'
+
       RETURN "{ " + xExp:ClassName() + " Object }"
    CASE cType == 'P'
-#if defined( __XHARBOUR__ )
+      #if defined( __XHARBOUR__ )
+
       RETURN NumToHex( xExp )
-#else
+      #else
+
       RETURN hb_NumToHex( xExp )
-#endif
+      #endif
    CASE cType == 'H'
+
       RETURN "{ Hash of " +  LTrim( Str( Len( xExp ) ) ) + " Items }"
    OTHERWISE
+
       RETURN "Type: " + cType
    ENDCASE
 
    RETURN ""
-#endif
+   #endif
 

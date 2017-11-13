@@ -24,19 +24,29 @@ CLASS VAR winclass   INIT "msctls_progress32"
    DATA  nPercent INIT 0
    DATA  lPercent INIT .F.
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical )
-   METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent )
-   METHOD Init()
-   METHOD Activate()
-   METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
-   METHOD STEP( cTitle )
-   METHOD SET( cTitle, nPos )
-   METHOD SetLabel( cCaption )
-   METHOD SetAnimation( nAnimation ) SETGET
-   METHOD Close()
-   METHOD End() INLINE hwg_Destroywindow( ::handle )
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical )
 
-   ENDCLASS
+METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent )
+
+METHOD Init()
+
+METHOD Activate()
+
+METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
+
+METHOD STEP( cTitle )
+
+METHOD SET( cTitle, nPos )
+
+METHOD SetLabel( cCaption )
+
+METHOD SetAnimation( nAnimation ) SETGET
+
+METHOD Close()
+
+METHOD End() INLINE hwg_Destroywindow( ::handle )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical ) CLASS HProgressBar
 

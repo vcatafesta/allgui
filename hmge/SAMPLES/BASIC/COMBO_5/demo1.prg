@@ -70,20 +70,20 @@ FUNCTION Main
       END MENU
 
       DEFINE COMBOBOXEX Combo_1
-         ROW   10
-         COL   10
-         WIDTH   100
-         HEIGHT   250
-         ITEMS   aItems
-         VALUE   1
-         IMAGE   aImages
-      END COMBOBOXEX
+      ROW   10
+      COL   10
+      WIDTH   100
+      HEIGHT   250
+      ITEMS   aItems
+      VALUE   1
+      IMAGE   aImages
+   END COMBOBOXEX
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-   RETURN NIL
+RETURN NIL
 

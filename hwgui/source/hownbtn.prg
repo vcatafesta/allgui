@@ -32,36 +32,55 @@ CLASS VAR cPath SHARED
    DATA hTheme
    DATA Themed INIT .F.
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
-         bInit, bSize, bPaint, bClick, lflat,             ;
-         cText, color, oFont, xt, yt, widtht, heightt,       ;
-         bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
-         cTooltip, lEnabled, lCheck, bColor,bGfocus, bLfocus, themed )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Redefine( oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, ;
-         cText, color, font, xt, yt, widtht, heightt,     ;
-         bmp, lResour, xb, yb, widthb, heightb, lTr,      ;
-         cTooltip, lEnabled, lCheck )
-   METHOD Paint()
-   METHOD DrawItems( hDC )
-   METHOD MouseMove( wParam, lParam )
-   METHOD MDown()
-   METHOD MUp()
-   METHOD Press()   INLINE ( ::lPress := .T., ::MDown() )
-   METHOD Release()
-   METHOD END()
-   METHOD Enable()
-   METHOD Disable()
-   METHOD onClick()
-   METHOD onGetFocus()
-   METHOD onLostFocus()
-   METHOD Refresh()
-   METHOD SetText( cCaption ) INLINE ::title := cCaption, ;
-         hwg_Redrawwindow( ::oParent:Handle, RDW_ERASE + RDW_INVALIDATE , ::nLeft, ::nTop, ::nWidth, ::nHeight )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
+      bInit, bSize, bPaint, bClick, lflat,             ;
+      cText, color, oFont, xt, yt, widtht, heightt,       ;
+      bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
+      cTooltip, lEnabled, lCheck, bColor,bGfocus, bLfocus, themed )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Redefine( oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, ;
+      cText, color, font, xt, yt, widtht, heightt,     ;
+      bmp, lResour, xb, yb, widthb, heightb, lTr,      ;
+      cTooltip, lEnabled, lCheck )
+
+METHOD Paint()
+
+METHOD DrawItems( hDC )
+
+METHOD MouseMove( wParam, lParam )
+
+METHOD MDown()
+
+METHOD MUp()
+
+METHOD Press()   INLINE ( ::lPress := .T., ::MDown() )
+
+METHOD Release()
+
+METHOD END()
+
+METHOD Enable()
+
+METHOD Disable()
+
+METHOD onClick()
+
+METHOD onGetFocus()
+
+METHOD onLostFocus()
+
+METHOD Refresh()
+
+METHOD SetText( cCaption ) INLINE ::title := cCaption, ;
+      hwg_Redrawwindow( ::oParent:Handle, RDW_ERASE + RDW_INVALIDATE , ::nLeft, ::nTop, ::nWidth, ::nHeight )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
       bInit, bSize, bPaint, bClick, lflat,             ;

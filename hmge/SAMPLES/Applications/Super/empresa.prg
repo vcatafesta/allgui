@@ -266,7 +266,7 @@ FUNCTION empresa()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_gravar.bmp'
          col form_empresa.width-225
          row form_empresa.height-085
@@ -279,7 +279,7 @@ FUNCTION empresa()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_empresa.width-100
          row form_empresa.height-085

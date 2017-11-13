@@ -57,185 +57,185 @@ FUNCTION reajuste()
          fontcolor _preto_001;
          transparent
       DEFINE COMBOBOXex cbo_001
-         row   030
-         col   005
-         width 200
-         height 200
-         items a_001
-         value 1
-      END COMBOBOXex
+      row   030
+      col   005
+      width 200
+      height 200
+      items a_001
+      value 1
+   END COMBOBOXex
 
-      * fase 2
-      @ 070,005 label lbl_002;
-         of form_reajuste;
-         value 'Selecione a Categoria';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      DEFINE COMBOBOXex cbo_002
-         row   090
-         col   005
-         width 200
-         height 400
-         items a_002
-         value 1
-         listwidth 300
-      END COMBOBOXex
+   * fase 2
+   @ 070,005 label lbl_002;
+      of form_reajuste;
+      value 'Selecione a Categoria';
+      autosize;
+      font 'tahoma' size 010;
+      bold;
+      fontcolor _preto_001;
+      transparent
+   DEFINE COMBOBOXex cbo_002
+   row   090
+   col   005
+   width 200
+   height 400
+   items a_002
+   value 1
+   listwidth 300
+END COMBOBOXex
 
-      * fase 3
-      @ 130,005 label lbl_003;
-         of form_reajuste;
-         value 'Selecione a Subcategoria';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      DEFINE COMBOBOXex cbo_003
-         row   150
-         col   005
-         width 200
-         height 400
-         items a_003
-         value 1
-         listwidth 300
-      END COMBOBOXex
+* fase 3
+@ 130,005 label lbl_003;
+   of form_reajuste;
+   value 'Selecione a Subcategoria';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+DEFINE COMBOBOXex cbo_003
+row   150
+col   005
+width 200
+height 400
+items a_003
+value 1
+listwidth 300
+END COMBOBOXex
 
-      * fase 4
-      @ 200,005 label lbl_004;
-         of form_reajuste;
-         value 'SOMAR';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor BLUE;
-         transparent
-      @ 200,060 getbox tbox_004;
-         of form_reajuste;
-         height 027;
-         width 080;
-         value 0;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         picture '@E 9,999.99'
-      @ 200,150 label lbl_0044;
-         of form_reajuste;
-         value 'ao preço';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 230,005 label lbl_00444;
-         of form_reajuste;
-         value 'de venda já existente';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* fase 4
+@ 200,005 label lbl_004;
+   of form_reajuste;
+   value 'SOMAR';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor BLUE;
+   transparent
+@ 200,060 getbox tbox_004;
+   of form_reajuste;
+   height 027;
+   width 080;
+   value 0;
+   font 'tahoma' size 010;
+   backcolor _fundo_get;
+   fontcolor _letra_get_1;
+   picture '@E 9,999.99'
+@ 200,150 label lbl_0044;
+   of form_reajuste;
+   value 'ao preço';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 230,005 label lbl_00444;
+   of form_reajuste;
+   value 'de venda já existente';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      @ 250,040 label lbl_ou;
-         of form_reajuste;
-         value 'ou então';
-         autosize;
-         font 'tahoma' size 018;
-         bold;
-         fontcolor _preto_001;
-         transparent
+@ 250,040 label lbl_ou;
+   of form_reajuste;
+   value 'ou então';
+   autosize;
+   font 'tahoma' size 018;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * fase 5
-      @ 290,005 label lbl_005;
-         of form_reajuste;
-         value 'APLICAR';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor BLUE;
-         transparent
-      @ 290,070 getbox tbox_005;
-         of form_reajuste;
-         height 027;
-         width 070;
-         value 0;
-         font 'tahoma' size 010;
-         backcolor _fundo_get;
-         fontcolor _letra_get_1;
-         picture '@R 999.99'
-      @ 290,150 label lbl_0055;
-         of form_reajuste;
-         value '% sobre';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
-      @ 320,005 label lbl_00555;
-         of form_reajuste;
-         value 'o preço de venda já existente';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* fase 5
+@ 290,005 label lbl_005;
+   of form_reajuste;
+   value 'APLICAR';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor BLUE;
+   transparent
+@ 290,070 getbox tbox_005;
+   of form_reajuste;
+   height 027;
+   width 070;
+   value 0;
+   font 'tahoma' size 010;
+   backcolor _fundo_get;
+   fontcolor _letra_get_1;
+   picture '@R 999.99'
+@ 290,150 label lbl_0055;
+   of form_reajuste;
+   value '% sobre';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
+@ 320,005 label lbl_00555;
+   of form_reajuste;
+   value 'o preço de venda já existente';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * botão filtrar
-      @ 360,005 buttonex botao_filtrar;
-         parent form_reajuste;
-         caption 'Filtrar informações';
-         width 200 height 040;
-         picture path_imagens+'img_filtro.bmp';
-         action filtrar_informacoes();
-         tooltip 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
+* botão filtrar
+@ 360,005 buttonex botao_filtrar;
+   parent form_reajuste;
+   caption 'Filtrar informações';
+   width 200 height 040;
+   picture path_imagens+'img_filtro.bmp';
+   action filtrar_informacoes();
+   tooltip 'Clique aqui para separar as informações e visualizar os reajustes antes de efetivá-los'
 
-      * separar a tela em 2 partes
-      DEFINE LABEL label_separador
-         col 210
-         row 000
-         value ''
-         width 002
-         height 600
-         transparent .F.
-         backcolor _cinza_002
-      END LABEL
+* separar a tela em 2 partes
+DEFINE LABEL label_separador
+   col 210
+   row 000
+   value ''
+   width 002
+   height 600
+   transparent .F.
+   backcolor _cinza_002
+END LABEL
 
-      * grid e opções do reajuste
-      @ 010,220 label lbl_reajuste;
-         of form_reajuste;
-         value 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
-         autosize;
-         font 'tahoma' size 010;
-         bold;
-         fontcolor _preto_001;
-         transparent
+* grid e opções do reajuste
+@ 010,220 label lbl_reajuste;
+   of form_reajuste;
+   value 'Aqui serão visualizadas as informações filtradas com base nos critérios ao lado';
+   autosize;
+   font 'tahoma' size 010;
+   bold;
+   fontcolor _preto_001;
+   transparent
 
-      * botões
-      @ 520,405 buttonex botao_reajustar;
-         parent form_reajuste;
-         caption 'Reajustar os preços com base na projeção';
-         width 300 height 040;
-         picture path_imagens+'img_aplicar.bmp';
-         action gravar_reajuste();
-         tooltip 'Clique aqui para gravar as informações com reajuste no banco de dados'
-      @ 520,710 buttonex botao_sair;
-         parent form_reajuste;
-         caption 'Sair desta tela';
-         width 180 height 040;
-         picture path_imagens+'img_sair.bmp';
-         action (zera_acesso(),form_reajuste.release);
-         tooltip 'Clique aqui para sair'
+* botões
+@ 520,405 buttonex botao_reajustar;
+   parent form_reajuste;
+   caption 'Reajustar os preços com base na projeção';
+   width 300 height 040;
+   picture path_imagens+'img_aplicar.bmp';
+   action gravar_reajuste();
+   tooltip 'Clique aqui para gravar as informações com reajuste no banco de dados'
+@ 520,710 buttonex botao_sair;
+   parent form_reajuste;
+   caption 'Sair desta tela';
+   width 180 height 040;
+   picture path_imagens+'img_sair.bmp';
+   action (zera_acesso(),form_reajuste.release);
+   tooltip 'Clique aqui para sair'
 
-      on key escape action thiswindow.release
+on key escape action thiswindow.release
 
-   END WINDOW
+END WINDOW
 
-   form_reajuste.center
-   form_reajuste.activate
+form_reajuste.center
+form_reajuste.activate
 
-   RETURN(nil)
+RETURN(nil)
 
 STATIC FUNCTION filtrar_informacoes()
 

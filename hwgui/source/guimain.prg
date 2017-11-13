@@ -96,14 +96,14 @@ FUNCTION hwg_FindParent( hCtrl, nLevel )
       ENDIF
    ENDIF
    IF nLevel == Nil ; nLevel := 0 ; ENDIF
-      IF nLevel < 2
-         IF ( oParent := hwg_FindParent( hParent, nLevel + 1 ) ) != Nil
+   IF nLevel < 2
+      IF ( oParent := hwg_FindParent( hParent, nLevel + 1 ) ) != Nil
 
-            RETURN oParent:FindControl( , hParent )
-         ENDIF
+         RETURN oParent:FindControl( , hParent )
       ENDIF
+   ENDIF
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION hwg_FindSelf( hCtrl )
 
@@ -247,6 +247,7 @@ FUNCTION hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrB
       lArray := .F.
       aLen := RecCount()
       IF ( nField := FieldPos( arr ) ) == 0
+
          RETURN 0
       ENDIF
       nLen := dbFieldInfo( 3, nField )
@@ -276,11 +277,11 @@ FUNCTION hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrB
    width := Max( aMetr[ 2 ] * 2 * nLen + addX, minWidth )
 
    INIT DIALOG oDlg TITLE cTitle ;
-         At nLeft, nTop           ;
-         SIZE width, height       ;
-         STYLE nStyle            ;
-         FONT oFont              ;
-         ON INIT { | o | hwg_Resetwindowpos( o:handle ), o:nInitFocus := oBrw }
+      At nLeft, nTop           ;
+      SIZE width, height       ;
+      STYLE nStyle            ;
+      FONT oFont              ;
+      ON INIT { | o | hwg_Resetwindowpos( o:handle ), o:nInitFocus := oBrw }
    IF lArray
       @ 0, 0 Browse oBrw Array
       oBrw:aArray := arr
@@ -323,7 +324,7 @@ FUNCTION hwg_WChoice( arr, cTitle, nLeft, nTop, oFont, clrT, clrB, clrTSel, clrB
 
    oDlg:Activate()
    IF lNewFont
-                  oFont:Release()
+      oFont:Release()
    ENDIF
 
    RETURN nChoice

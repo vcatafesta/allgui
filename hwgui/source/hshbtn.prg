@@ -20,16 +20,18 @@ CLASS HShadeButton INHERIT HOwnButton
 
    DATA hShade
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         bInit, bSize, bPaint, bClick, lflat,              ;
-         cText, color, font, xt, yt,                       ;
-         bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
-         cTooltip, lEnabled, shadeID, palette,         ;
-         granularity, highlight, coloring, shcolor )
-   METHOD Paint()
-   METHOD END()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      bInit, bSize, bPaint, bClick, lflat,              ;
+      cText, color, font, xt, yt,                       ;
+      bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
+      cTooltip, lEnabled, shadeID, palette,         ;
+      granularity, highlight, coloring, shcolor )
 
-   ENDCLASS
+METHOD Paint()
+
+METHOD END()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lFlat,              ;

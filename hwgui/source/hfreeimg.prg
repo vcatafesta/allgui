@@ -24,13 +24,17 @@ CLASS VAR aImages   INIT { }
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-   METHOD AddFile( name )
-   METHOD AddFromVar( cImage, cType )
-   METHOD FromBitmap( oBitmap )
-   METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight )
-   METHOD Release()
+METHOD AddFile( name )
 
-   ENDCLASS
+METHOD AddFromVar( cImage, cType )
+
+METHOD FromBitmap( oBitmap )
+
+METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight )
+
+METHOD Release()
+
+ENDCLASS
 
 METHOD AddFile( name ) CLASS HFreeImage
 
@@ -137,13 +141,16 @@ CLASS HSayFImage INHERIT HSayImage
    DATA nOffsetH  INIT 0
    DATA nZoom
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
-         bSize, ctooltip, cType )
-   METHOD Redefine( oWndParent, nId, Image, bInit, bSize, ctooltip )
-   METHOD ReplaceImage( Image, cType )
-   METHOD Paint( lpdis )
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
+      bSize, ctooltip, cType )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, Image, bInit, bSize, ctooltip )
+
+METHOD ReplaceImage( Image, cType )
+
+METHOD Paint( lpdis )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
       bSize, ctooltip, cType ) CLASS HSayFImage

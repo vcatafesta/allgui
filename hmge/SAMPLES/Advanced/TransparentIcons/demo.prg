@@ -114,45 +114,45 @@ PROCEDURE Main
       END LABEL
 
       DEFINE COMBOBOXEX Combo_1
-         ROW   229
-         COL   30
-         WIDTH   220
-         HEIGHT   250
-         ITEMS   aThemesName
-         FONTSIZE 12
-         BACKCOLOR aWinBackColor
-         VALUE   1
-         IMAGE   aImages
-         TOOLTIP 'Choosing a theme'
-         ONCHANGE ChangeThemes(This.Value,This.DisplayValue)
-      END COMBOBOXEX
+      ROW   229
+      COL   30
+      WIDTH   220
+      HEIGHT   250
+      ITEMS   aThemesName
+      FONTSIZE 12
+      BACKCOLOR aWinBackColor
+      VALUE   1
+      IMAGE   aImages
+      TOOLTIP 'Choosing a theme'
+      ONCHANGE ChangeThemes(This.Value,This.DisplayValue)
+   END COMBOBOXEX
 
-      // The word "Exit_Button" is reserved for the buttons. Only use it. See the file themes.prg
-      DEFINE BUTTONEX Exit_Button
-         ROW    270
-         COL    280
-         WIDTH  120
-         HEIGHT 60
-         CAPTION "EXIT"
-         ICON "ICO_EXIT"
-         FONTNAME 'MS Sans serif'
-         FONTSIZE 15
-         BACKCOLOR aWinBackColor
-         TOOLTIP 'Exit program'
-         ON CLICK ReleaseAllWindows()
-      END BUTTONEX
+   // The word "Exit_Button" is reserved for the buttons. Only use it. See the file themes.prg
+   DEFINE BUTTONEX Exit_Button
+      ROW    270
+      COL    280
+      WIDTH  120
+      HEIGHT 60
+      CAPTION "EXIT"
+      ICON "ICO_EXIT"
+      FONTNAME 'MS Sans serif'
+      FONTSIZE 15
+      BACKCOLOR aWinBackColor
+      TOOLTIP 'Exit program'
+      ON CLICK ReleaseAllWindows()
+   END BUTTONEX
 
-      DEFINE STATUSBAR
-         STATUSITEM COPYRIGHT
-         DATE
-         CLOCK
-      END STATUSBAR
+   DEFINE STATUSBAR
+      STATUSITEM COPYRIGHT
+      DATE
+      CLOCK
+   END STATUSBAR
 
-   END WINDOW
+END WINDOW
 
-   ACTIVATE WINDOW &MyForm
+ACTIVATE WINDOW &MyForm
 
-   RETURN
+RETURN
 
 FUNCTION OnInit(aText, aIcons, nColor, nRadioGroup )
 

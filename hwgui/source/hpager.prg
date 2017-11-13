@@ -24,28 +24,45 @@ CLASS HPager INHERIT HControl
    DATA hTool
    DATA m_nWidth, m_nHeight
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
-   METHOD SetScrollArea( nWidth, nHeight ) INLINE  ::m_nWidth := nWidth, ::m_nHeight := nHeight
-   METHOD Activate()
-   METHOD INIT()
-   METHOD Notify( lParam )
-   METHOD Pagersetchild( b ) INLINE ::hTool := b, hwg_Pagersetchild( ::handle, b )
-   METHOD Pagerrecalcsize( ) INLINE hwg_Pagerrecalcsize( ::handle )
-   METHOD Pagerforwardmouse( b ) INLINE hwg_Pagerforwardmouse( ::handle, b )
-   METHOD Pagersetbkcolor(  b ) INLINE hwg_Pagersetbkcolor( ::handle, b )
-   METHOD Pagergetbkcolor( ) INLINE hwg_Pagergetbkcolor( ::handle )
-   METHOD Pagersetborder(  b ) INLINE hwg_Pagersetborder( ::handle, b )
-   METHOD Pagergetborder( ) INLINE hwg_Pagergetborder( ::handle )
-   METHOD Pagersetpos(  b ) INLINE hwg_Pagersetpos( ::handle, b )
-   METHOD Pagergetpos(  ) INLINE hwg_Pagergetpos( ::handle )
-   METHOD Pagersetbuttonsize(  b ) INLINE hwg_Pagersetbuttonsize( ::handle, b )
-   METHOD Pagergetbuttonsize( ) INLINE hwg_Pagergetbuttonsize( ::handle )
-   METHOD Pagergetbuttonstate() INLINE hwg_Pagergetbuttonstate( ::handle )
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
+
+METHOD SetScrollArea( nWidth, nHeight ) INLINE  ::m_nWidth := nWidth, ::m_nHeight := nHeight
+
+METHOD Activate()
+
+METHOD INIT()
+
+METHOD Notify( lParam )
+
+METHOD Pagersetchild( b ) INLINE ::hTool := b, hwg_Pagersetchild( ::handle, b )
+
+METHOD Pagerrecalcsize( ) INLINE hwg_Pagerrecalcsize( ::handle )
+
+METHOD Pagerforwardmouse( b ) INLINE hwg_Pagerforwardmouse( ::handle, b )
+
+METHOD Pagersetbkcolor(  b ) INLINE hwg_Pagersetbkcolor( ::handle, b )
+
+METHOD Pagergetbkcolor( ) INLINE hwg_Pagergetbkcolor( ::handle )
+
+METHOD Pagersetborder(  b ) INLINE hwg_Pagersetborder( ::handle, b )
+
+METHOD Pagergetborder( ) INLINE hwg_Pagergetborder( ::handle )
+
+METHOD Pagersetpos(  b ) INLINE hwg_Pagersetpos( ::handle, b )
+
+METHOD Pagergetpos(  ) INLINE hwg_Pagergetpos( ::handle )
+
+METHOD Pagersetbuttonsize(  b ) INLINE hwg_Pagersetbuttonsize( ::handle, b )
+
+METHOD Pagergetbuttonsize( ) INLINE hwg_Pagergetbuttonsize( ::handle )
+
+METHOD Pagergetbuttonstate() INLINE hwg_Pagergetbuttonstate( ::handle )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lvert ) CLASS HPager

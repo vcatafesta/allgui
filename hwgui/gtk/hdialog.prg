@@ -118,23 +118,23 @@ METHOD Activate( lNoModal ) CLASS HDialog
    hwg_CreateGetList( Self )
 
    IF lNoModal==Nil ; lNoModal:=.F. ; ENDIF
-      ::lModal := !lNoModal
-      ::lResult := .F.
-      ::AddItem( Self,!lNoModal )
-      IF !lNoModal
-         hParent := Iif( ::oParent!=Nil .AND. ;
-            __ObjHasMsg( ::oParent,"HANDLE") .AND. ::oParent:handle != NIL ;
-            .AND. !Empty(::oParent:handle ), ::oParent:handle, ;
-            Iif( ( oWnd:=HWindow():GetMain() ) != Nil,    ;
-            oWnd:handle,Nil ) )
-         hwg_Set_Modal( ::handle, hParent )
-      ENDIF
-      hwg_ShowAll( ::handle )
-      InitModalDlg( Self )
-      ::lActivated := .T.
-      hwg_ActivateDialog( ::handle,lNoModal  )
+   ::lModal := !lNoModal
+   ::lResult := .F.
+   ::AddItem( Self,!lNoModal )
+   IF !lNoModal
+      hParent := Iif( ::oParent!=Nil .AND. ;
+         __ObjHasMsg( ::oParent,"HANDLE") .AND. ::oParent:handle != NIL ;
+         .AND. !Empty(::oParent:handle ), ::oParent:handle, ;
+         Iif( ( oWnd:=HWindow():GetMain() ) != Nil,    ;
+         oWnd:handle,Nil ) )
+      hwg_Set_Modal( ::handle, hParent )
+   ENDIF
+   hwg_ShowAll( ::handle )
+   InitModalDlg( Self )
+   ::lActivated := .T.
+   hwg_ActivateDialog( ::handle,lNoModal  )
 
-      RETURN NIL
+   RETURN NIL
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HDialog
 
@@ -342,30 +342,30 @@ FUNCTION hwg_SetDlgKey( oDlg, nctrl, nkey, block )
    LOCAL i, aKeys
 
    IF oDlg == Nil ; oDlg := HCustomWindow():oDefaultParent ; ENDIF
-      IF nctrl == Nil ; nctrl := 0 ; ENDIF
+   IF nctrl == Nil ; nctrl := 0 ; ENDIF
 
-         IF !__ObjHasMsg( oDlg,"KEYLIST" )
+   IF !__ObjHasMsg( oDlg,"KEYLIST" )
 
-            RETURN .F.
-         ENDIF
-         nKey := hwg_gtk_convertkey( nKey )
-         aKeys := oDlg:KeyList
-         IF block == Nil
+      RETURN .F.
+   ENDIF
+   nKey := hwg_gtk_convertkey( nKey )
+   aKeys := oDlg:KeyList
+   IF block == Nil
 
-            IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
+      IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
 
-               RETURN .F.
-            ELSE
-               Adel( oDlg:KeyList, i )
-               Asize( oDlg:KeyList, Len(oDlg:KeyList)-1 )
-            ENDIF
-         ELSE
-            IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
-               Aadd( aKeys, { nctrl,nkey,block } )
-            ELSE
-               aKeys[i,3] := block
-            ENDIF
-         ENDIF
+         RETURN .F.
+      ELSE
+         Adel( oDlg:KeyList, i )
+         Asize( oDlg:KeyList, Len(oDlg:KeyList)-1 )
+      ENDIF
+   ELSE
+      IF ( i := Ascan( aKeys,{|a|a[1]==nctrl.AND.a[2]==nkey} ) ) == 0
+         Aadd( aKeys, { nctrl,nkey,block } )
+      ELSE
+         aKeys[i,3] := block
+      ENDIF
+   ENDIF
 
-         RETURN .T.
+   RETURN .T.
 

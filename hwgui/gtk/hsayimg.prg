@@ -75,23 +75,23 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
 
    IF Image != Nil
       IF lRes == Nil ; lRes := .F. ; ENDIF
-         ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
-            HBitmap():AddResource( Image ), ;
-            Iif( Valtype(Image) == "C",     ;
-            HBitmap():AddFile( Image ), Image ) )
-         IF !Empty( ::oImage )
-            IF nWidth == Nil .OR. nHeight == Nil
-               ::nWidth  := ::oImage:nWidth
-               ::nHeight := ::oImage:nHeight
-            ENDIF
-         ELSE
-
-            RETURN NIL
+      ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
+         HBitmap():AddResource( Image ), ;
+         Iif( Valtype(Image) == "C",     ;
+         HBitmap():AddFile( Image ), Image ) )
+      IF !Empty( ::oImage )
+         IF nWidth == Nil .OR. nHeight == Nil
+            ::nWidth  := ::oImage:nWidth
+            ::nHeight := ::oImage:nHeight
          ENDIF
-      ENDIF
-      ::Activate()
+      ELSE
 
-      RETURN Self
+         RETURN NIL
+      ENDIF
+   ENDIF
+   ::Activate()
+
+   RETURN Self
 
 METHOD INIT CLASS HSayBmp
 
@@ -133,14 +133,14 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
       ::oImage:Release()
    ENDIF
    IF lRes == Nil ; lRes := .F. ; ENDIF
-      ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
-         HBitmap():AddResource( Image ), ;
-         Iif( Valtype(Image) == "C",     ;
-         HBitmap():AddFile( Image ), Image ) )
+   ::oImage := Iif( lRes .OR. Valtype(Image)=="N",     ;
+      HBitmap():AddResource( Image ), ;
+      Iif( Valtype(Image) == "C",     ;
+      HBitmap():AddFile( Image ), Image ) )
 
-      RETURN NIL
+   RETURN NIL
 
-      //- HSayIcon
+   //- HSayIcon
 
 CLASS HSayIcon INHERIT HSayImage
 
@@ -155,11 +155,11 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    ::Super:New( oWndParent,nId,SS_ICON,nLeft,nTop,nWidth,nHeight,bInit,bSize,ctoolt )
 
    IF lRes == Nil ; lRes := .F. ; ENDIF
-      ::oImage := Iif( lRes .OR. Valtype(Image)=="N",    ;
-         HIcon():AddResource( Image ),  ;
-         Iif( Valtype(Image) == "C",    ;
-         HIcon():AddFile( Image ), Image ) )
-      ::Activate()
+   ::oImage := Iif( lRes .OR. Valtype(Image)=="N",    ;
+      HIcon():AddResource( Image ),  ;
+      Iif( Valtype(Image) == "C",    ;
+      HIcon():AddFile( Image ), Image ) )
+   ::Activate()
 
-      RETURN Self
+   RETURN Self
 

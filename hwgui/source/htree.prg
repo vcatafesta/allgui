@@ -98,16 +98,23 @@ CLASS HTreeNode INHERIT HObject
    DATA image1, image2
    DATA lchecked INIT .F.
 
-   METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick )
-   METHOD AddNode( cTitle, oPrev, oNext, bAction, aImages, lCheck, bClick )
-   METHOD Delete( lInternal )
-   METHOD FindChild( h )
-   METHOD GetText()  INLINE hwg_Treegetnodetext( ::oTree:handle, ::handle )
-   METHOD SetText( cText ) INLINE hwg_Treesetitem( ::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText ), ::title := cText
-   METHOD Checked( lChecked )  SETGET
-   METHOD GetLevel( h )
+METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick )
 
-   ENDCLASS
+METHOD AddNode( cTitle, oPrev, oNext, bAction, aImages, lCheck, bClick )
+
+METHOD Delete( lInternal )
+
+METHOD FindChild( h )
+
+METHOD GetText()  INLINE hwg_Treegetnodetext( ::oTree:handle, ::handle )
+
+METHOD SetText( cText ) INLINE hwg_Treesetitem( ::oTree:handle, ::handle, TREE_SETITEM_TEXT, cText ), ::title := cText
+
+METHOD Checked( lChecked )  SETGET
+
+METHOD GetLevel( h )
+
+ENDCLASS
 
 METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick ) CLASS HTreeNode
 
@@ -282,29 +289,48 @@ CLASS VAR winclass   INIT "SysTreeView32"
    DATA  hitemDrag, hitemDrop HIDDEN
    DATA hTreeEdit
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
-         aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lCheckbox,  bCheck, lDragDrop, bDrag, bDrop, bOther )
-   METHOD Init()
-   METHOD Activate()
-   METHOD AddNode( cTitle, oPrev, oNext, bAction, aImages, lCheck, bClick )
-   METHOD FindChild( h )
-   METHOD FindChildPos( oNode, h )
-   METHOD GetSelected() INLINE IIF( VALTYPE( ::oItem := hwg_Treegetselected( ::handle ) ) = "O", ::oItem, Nil )
-   METHOD EditLabel( oNode ) BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_EDITLABEL, 0, o:handle ) }
-   METHOD Expand( oNode, lAllNode )   //BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_EXPAND, TVE_EXPAND, o:handle ), hwg_Redrawwindow( ::handle , RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE  )}
-   METHOD Select( oNode ) BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_SELECTITEM, TVGN_CARET, o:handle ), ::oItem := hwg_Treegetselected( ::handle ) }
-   METHOD Clean()
-   METHOD Notify( lParam )
-   METHOD END()   INLINE ( ::Super:END(), ReleaseTree( ::aItems ) )
-   METHOD isExpand( oNodo ) INLINE ! hwg_Checkbit( oNodo, TVE_EXPAND )
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD ItemHeight( nHeight ) SETGET
-   METHOD SearchString( cText, iNivel, oNode, inodo )
-   METHOD Selecteds( oItem, aSels )
-   METHOD Top()    INLINE IIF( !Empty( ::aItems ), ( ::Select( ::aItems[ 1 ] ), hwg_Sendmessage( ::Handle, WM_VSCROLL, hwg_Makewparam( 0, SB_TOP ), Nil ) ), )
-   METHOD Bottom() INLINE IIF( !Empty( ::aItems ), ( ::Select( ::aItems[ LEN( ::aItems ) ] ), hwg_Sendmessage( ::Handle, WM_VSCROLL, hwg_Makewparam( 0, SB_BOTTOM ), Nil ) ),)
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
+      aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lCheckbox,  bCheck, lDragDrop, bDrag, bDrop, bOther )
 
-   ENDCLASS
+METHOD Init()
+
+METHOD Activate()
+
+METHOD AddNode( cTitle, oPrev, oNext, bAction, aImages, lCheck, bClick )
+
+METHOD FindChild( h )
+
+METHOD FindChildPos( oNode, h )
+
+METHOD GetSelected() INLINE IIF( VALTYPE( ::oItem := hwg_Treegetselected( ::handle ) ) = "O", ::oItem, Nil )
+
+METHOD EditLabel( oNode ) BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_EDITLABEL, 0, o:handle ) }
+
+METHOD Expand( oNode, lAllNode )   //BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_EXPAND, TVE_EXPAND, o:handle ), hwg_Redrawwindow( ::handle , RDW_NOERASE + RDW_FRAME + RDW_INVALIDATE  )}
+
+METHOD Select( oNode ) BLOCK { | Self, o | hwg_Sendmessage( ::handle, TVM_SELECTITEM, TVGN_CARET, o:handle ), ::oItem := hwg_Treegetselected( ::handle ) }
+
+METHOD Clean()
+
+METHOD Notify( lParam )
+
+METHOD END()   INLINE ( ::Super:END(), ReleaseTree( ::aItems ) )
+
+METHOD isExpand( oNodo ) INLINE ! hwg_Checkbit( oNodo, TVE_EXPAND )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD ItemHeight( nHeight ) SETGET
+
+METHOD SearchString( cText, iNivel, oNode, inodo )
+
+METHOD Selecteds( oItem, aSels )
+
+METHOD Top()    INLINE IIF( !Empty( ::aItems ), ( ::Select( ::aItems[ 1 ] ), hwg_Sendmessage( ::Handle, WM_VSCROLL, hwg_Makewparam( 0, SB_TOP ), Nil ) ), )
+
+METHOD Bottom() INLINE IIF( !Empty( ::aItems ), ( ::Select( ::aItems[ LEN( ::aItems ) ] ), hwg_Sendmessage( ::Handle, WM_VSCROLL, hwg_Makewparam( 0, SB_BOTTOM ), Nil ) ),)
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
       aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lcheckbox,  bCheck, lDragDrop, bDrag, bDrop, bOther ) CLASS HTree
@@ -797,3 +823,4 @@ STATIC PROCEDURE DragDropTree( oDrag, oItem, oDrop )
    NEXT
 
    RETURN
+

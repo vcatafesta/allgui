@@ -43,9 +43,9 @@ FUNCTION OnPaint()
 
    FillGradientEx( hDC )
 
-EndPaint( This.Handle, pps )
+   EndPaint( This.Handle, pps )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ShowRGB()
 

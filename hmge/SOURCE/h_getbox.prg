@@ -349,16 +349,16 @@ STATIC PROCEDURE _GetBoxSetNextFocus( lPrevious )
 
    LOCAL NextControlHandle, i
 
-NEXTControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
-setfocus ( NextControlHandle )
-i := AScan ( _HMG_aControlHandles , NextControlHandle )
-IF i > 0
-   IF _HMG_aControlType [i] == 'BUTTON'
-      SendMessage ( NextControlHandle , BM_SETSTYLE , LOWORD ( BS_DEFPUSHBUTTON ) , 1 )
+   NEXTControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
+   setfocus ( NextControlHandle )
+   i := AScan ( _HMG_aControlHandles , NextControlHandle )
+   IF i > 0
+      IF _HMG_aControlType [i] == 'BUTTON'
+         SendMessage ( NextControlHandle , BM_SETSTYLE , LOWORD ( BS_DEFPUSHBUTTON ) , 1 )
+      ENDIF
    ENDIF
-ENDIF
 
-RETURN
+   RETURN
 
 PROCEDURE _DataGetBoxRefresh ( i )
 

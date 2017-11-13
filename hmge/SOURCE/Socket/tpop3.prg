@@ -76,7 +76,7 @@ METHOD GetMessageText( cMessageID )
 
 METHOD DeleteMessage( cMessageID )
 
-CLASSDATA oSocket HIDDEN
+   CLASSDATA oSocket HIDDEN
 
 ENDCLASS
 

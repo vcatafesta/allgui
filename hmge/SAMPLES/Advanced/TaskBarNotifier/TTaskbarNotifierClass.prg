@@ -57,7 +57,7 @@ CLASS TTaskbarNotifier
    DATA nPaintLevel           INIT 0
 
    PROTECTED:
-CLASSDATA aTaskbarNotifiers INIT {}
+   CLASSDATA aTaskbarNotifiers INIT {}
 
    DATA Name                  INIT ""         // TaskbarNotifier control name
    DATA TaskbarState          INIT TNS_HIDDEN

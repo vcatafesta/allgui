@@ -11,12 +11,12 @@ FUNCTION Main
    MENUITEM "Message"  ACTION hwg_Msginfo( "Tray Message !" )
    SEPARATOR
    MENUITEM "Exit"  ACTION hwg_EndWindow()
-ENDMENU
+   ENDMENU
 
-oMainWindow:InitTray( oIcon,,oTrayMenu,"TestTray" )
+   oMainWindow:InitTray( oIcon,,oTrayMenu,"TestTray" )
 
-ACTIVATE WINDOW oMainWindow NOSHOW
-oTrayMenu:End()
+   ACTIVATE WINDOW oMainWindow NOSHOW
+   oTrayMenu:End()
 
-RETURN NIL
+   RETURN NIL
 

@@ -24,7 +24,7 @@ FUNCTION backup()
          modal ;
          nosize
 
-      DEFINE BUTTONex button_backup
+      DEFINE BUTTONEX button_backup
          picture path_imagens+'img_zip.bmp'
          col 060
          row 140
@@ -36,7 +36,7 @@ FUNCTION backup()
          fontsize 9
          fontcolor _preto_001
       END BUTTONex
-      DEFINE BUTTONex button_destino
+      DEFINE BUTTONEX button_destino
          picture path_imagens+'img_destino.bmp'
          col 280
          row 010
@@ -48,7 +48,7 @@ FUNCTION backup()
          fontsize 9
          fontcolor _preto_001
       END BUTTONex
-      DEFINE BUTTONex button_sair
+      DEFINE BUTTONEX button_sair
          picture path_imagens+'img_sair.bmp'
          col 250
          row 140

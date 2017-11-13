@@ -65,16 +65,16 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
    CASE nMsg=WM_PAINT
       dc := BeginPaint( hWnd, @ps )
       OnDraw( dc )
-   EndPaint( hWnd, ps )
+      EndPaint( hWnd, ps )
 
-OTHERWISE
-   result := Events( hWnd, nMsg, wParam, lParam )
+   OTHERWISE
+      result := Events( hWnd, nMsg, wParam, lParam )
 
-ENDCASE
+   ENDCASE
 
-RETURN result
+   RETURN result
 
-// JR
+   // JR
 
 FUNCTION MyGetControlHandle( cControlName )
 

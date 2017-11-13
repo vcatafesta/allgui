@@ -63,102 +63,102 @@ FUNCTION Main
 
          DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 35,40 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Hiden Buttons 1 with Chevron' TOOLBARSIZE 70 BREAK
 
-            BUTTON Button_1 ;
-               CAPTION '&New' ;
-               PICTURE 'Btn01.bmp' ;
-               ACTION MsgInfo('Click! 1');
+         BUTTON Button_1 ;
+            CAPTION '&New' ;
+            PICTURE 'Btn01.bmp' ;
+            ACTION MsgInfo('Click! 1');
 
-            BUTTON Button_2 ;
-               CAPTION '&Open' ;
-               PICTURE 'Btn02.bmp' ;
-               TOOLTIP 'Open file';
-               ACTION MsgInfo('Click! 2')
+         BUTTON Button_2 ;
+            CAPTION '&Open' ;
+            PICTURE 'Btn02.bmp' ;
+            TOOLTIP 'Open file';
+            ACTION MsgInfo('Click! 2')
 
-            BUTTON Button_3 ;
-               CAPTION '&Close' ;
-               PICTURE 'Btn03.bmp' ;
-               ACTION MsgInfo('Click! 3')
+         BUTTON Button_3 ;
+            CAPTION '&Close' ;
+            PICTURE 'Btn03.bmp' ;
+            ACTION MsgInfo('Click! 3')
 
-            BUTTON Button_4 ;
-               CAPTION '&Save' ;
-               PICTURE 'Btn04.bmp' ;
-               ACTION MsgInfo('Click! 4');
-               SEPARATOR
+         BUTTON Button_4 ;
+            CAPTION '&Save' ;
+            PICTURE 'Btn04.bmp' ;
+            ACTION MsgInfo('Click! 4');
+            SEPARATOR
 
-            BUTTON Button_5 ;
-               CAPTION '&Printer' ;
-               PICTURE 'Btn11.bmp' ;
-               ACTION MsgInfo('Click! 5');
+         BUTTON Button_5 ;
+            CAPTION '&Printer' ;
+            PICTURE 'Btn11.bmp' ;
+            ACTION MsgInfo('Click! 5');
 
-            BUTTON Button_6 ;
-               CAPTION 'Pre&view' ;
-               PICTURE 'Btn12.bmp' ;
-               ACTION MsgInfo('Click! 6');
+         BUTTON Button_6 ;
+            CAPTION 'Pre&view' ;
+            PICTURE 'Btn12.bmp' ;
+            ACTION MsgInfo('Click! 6');
 
-         END TOOLBAR
+      END TOOLBAR
 
-         DEFINE TOOLBAREX ToolBar_2 BUTTONSIZE 35,40 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Hiden Buttons 2 with Chevron' TOOLBARSIZE 70
+      DEFINE TOOLBAREX ToolBar_2 BUTTONSIZE 35,40 FONT 'ARIAL' SIZE 7 FLAT CAPTION 'Hiden Buttons 2 with Chevron' TOOLBARSIZE 70
 
-            BUTTON Button_1a ;
-               CAPTION '&New' ;
-               PICTURE 'Btn01.bmp' ;
-               ACTION MsgInfo('Click! 1');
+      BUTTON Button_1a ;
+         CAPTION '&New' ;
+         PICTURE 'Btn01.bmp' ;
+         ACTION MsgInfo('Click! 1');
 
-            BUTTON Button_2a ;
-               CAPTION '&Open' ;
-               PICTURE 'Btn02.bmp' ;
-               TOOLTIP 'Open file';
-               ACTION MsgInfo('Click! 2')
+      BUTTON Button_2a ;
+         CAPTION '&Open' ;
+         PICTURE 'Btn02.bmp' ;
+         TOOLTIP 'Open file';
+         ACTION MsgInfo('Click! 2')
 
-            BUTTON Button_3a ;
-               CAPTION '&Close' ;
-               PICTURE 'Btn03.bmp' ;
-               ACTION MsgInfo('Click! 3')
+      BUTTON Button_3a ;
+         CAPTION '&Close' ;
+         PICTURE 'Btn03.bmp' ;
+         ACTION MsgInfo('Click! 3')
 
-            BUTTON Button_4a ;
-               CAPTION '&Save' ;
-               PICTURE 'Btn04.bmp' ;
-               ACTION MsgInfo('Click! 4');
-               SEPARATOR
+      BUTTON Button_4a ;
+         CAPTION '&Save' ;
+         PICTURE 'Btn04.bmp' ;
+         ACTION MsgInfo('Click! 4');
+         SEPARATOR
 
-            BUTTON Button_5a ;
-               CAPTION '&Printer' ;
-               PICTURE 'Btn11.bmp' ;
-               ACTION MsgInfo('Click! 5');
+      BUTTON Button_5a ;
+         CAPTION '&Printer' ;
+         PICTURE 'Btn11.bmp' ;
+         ACTION MsgInfo('Click! 5');
 
-            BUTTON Button_6a ;
-               CAPTION 'Pre&view' ;
-               PICTURE 'Btn12.bmp' ;
-               ACTION MsgInfo('Click! 6');
+      BUTTON Button_6a ;
+         CAPTION 'Pre&view' ;
+         PICTURE 'Btn12.bmp' ;
+         ACTION MsgInfo('Click! 6');
 
-         END TOOLBAR
+   END TOOLBAR
 
-      END SPLITBOX
+END SPLITBOX
 
-      @ 100 , 50 LABEL Label_1 ;
-         VALUE " Info: " ;
-         HEIGHT 32 AUTOSIZE ;
-         FONTCOLOR RED ;
-         FONT "Arial" SIZE 20 BOLD BORDER
+@ 100 , 50 LABEL Label_1 ;
+   VALUE " Info: " ;
+   HEIGHT 32 AUTOSIZE ;
+   FONTCOLOR RED ;
+   FONT "Arial" SIZE 20 BOLD BORDER
 
-      @ 105 , 150 LABEL Label_2 ;
-         VALUE " Disabled Button with Chevron " ;
-         HEIGHT 35 AUTOSIZE ;
-         FONTCOLOR BLUE ;
-         FONT "Arial" SIZE 16
+@ 105 , 150 LABEL Label_2 ;
+   VALUE " Disabled Button with Chevron " ;
+   HEIGHT 35 AUTOSIZE ;
+   FONTCOLOR BLUE ;
+   FONT "Arial" SIZE 16
 
-      Form_1.Button_3.Enabled  := .F.
-      Form_1.Button_5.Enabled  := .F.
-      Form_1.Button_4a.Enabled  := .F.
-      Form_1.Button_5a.Enabled  := .F.
+Form_1.Button_3.Enabled  := .F.
+Form_1.Button_5.Enabled  := .F.
+Form_1.Button_4a.Enabled  := .F.
+Form_1.Button_5a.Enabled  := .F.
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-   RETURN NIL
+RETURN NIL
 
 #pragma BEGINDUMP
 

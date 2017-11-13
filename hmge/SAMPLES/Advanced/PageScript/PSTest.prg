@@ -427,18 +427,18 @@ STATIC FUNCTION RotatedText()
       @200, 100 TEXTOUT "            Rotated text is easy using PageScript !" ANGLE nLoop JUSTIFY APS_CENTER
    NEXT nLoop
 
-ENDDOC
+   ENDDOC
 
-RETURN NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Function ...: AbeePageSize()
+   Function ...: AbeePageSize()
 
-Description : Return current printer page size
-Author .....: Stephan St-Denis
-Date .......: April 2001
------------------------------------------------------------------------------*/
+   Description : Return current printer page size
+   Author .....: Stephan St-Denis
+   Date .......: April 2001
+   -----------------------------------------------------------------------------*/
 
 STATIC FUNCTION AbeePageSize()
 
@@ -569,94 +569,94 @@ STATIC FUNCTION AbeeInvoice()
    USE InvMaste exclusive
 
    BEGINDOC WITH 0 TITLE "Abee invoice" ORIENTATION APS_PORTRAIT
-      PSSetDecimalSep(".")
+   PSSetDecimalSep(".")
 
-      // Default unit = milimeters
-      PSFrame(10, 140, 20, 200, 0, , APS_PALEGRAY)
-      PSFrame(25, 155, 35, 190, 0, , APS_PALEGRAY)
+   // Default unit = milimeters
+   PSFrame(10, 140, 20, 200, 0, , APS_PALEGRAY)
+   PSFrame(25, 155, 35, 190, 0, , APS_PALEGRAY)
 
-      // WARNING : Make sure that this is a valid path
-      PSBitmap(10, 10, 32, 85, "\" + CurDir() + "\LOGOABEE.BMP", , .t.)
+   // WARNING : Make sure that this is a valid path
+   PSBitmap(10, 10, 32, 85, "\" + CurDir() + "\LOGOABEE.BMP", , .t.)
 
-      PSFrame( 73,  10,  80, 206, 0, , APS_PALEGRAY)
-      PSFrame( 86,  10,  92, 206, 0, , APS_PALEGRAY)
-      PSFrame( 99,  10, 105, 206, 0, , APS_PALEGRAY)
-      PSFrame(215,  10, 265, 130, 0, , APS_PALEGRAY)
+   PSFrame( 73,  10,  80, 206, 0, , APS_PALEGRAY)
+   PSFrame( 86,  10,  92, 206, 0, , APS_PALEGRAY)
+   PSFrame( 99,  10, 105, 206, 0, , APS_PALEGRAY)
+   PSFrame(215,  10, 265, 130, 0, , APS_PALEGRAY)
 
-      PSLine( 73,   10,  73, 206, .5, APS_BLUE)
-      PSLine( 80,   10,  80, 206, .5, APS_BLACK)
-      PSLine( 86,   10,  86, 206, .5, APS_BLACK)
-      PSLine( 92,   10,  92, 206, .5, APS_BLACK)
-      PSLine( 99,   10,  99, 206, .5, APS_BLACK)
-      PSLine(105,   10, 105, 206, .5, APS_BLACK)
-      PSLine(215,   10, 215, 206, .5, APS_BLACK)
-      PSLine(265,   10, 265, 206, .5, APS_BLACK)
+   PSLine( 73,   10,  73, 206, .5, APS_BLUE)
+   PSLine( 80,   10,  80, 206, .5, APS_BLACK)
+   PSLine( 86,   10,  86, 206, .5, APS_BLACK)
+   PSLine( 92,   10,  92, 206, .5, APS_BLACK)
+   PSLine( 99,   10,  99, 206, .5, APS_BLACK)
+   PSLine(105,   10, 105, 206, .5, APS_BLACK)
+   PSLine(215,   10, 215, 206, .5, APS_BLACK)
+   PSLine(265,   10, 265, 206, .5, APS_BLACK)
 
-      PSLine(215,  130, 215, 206, .5, APS_BLACK)
-      PSLine(223,  130, 223, 206, .5, APS_BLACK)
-      PSLine(231,  130, 231, 206, .5, APS_BLACK)
-      PSLine(240,  130, 240, 206, .5, APS_BLACK)
-      PSLine(248,  130, 248, 206, .5, APS_BLACK)
-      PSLine(257,  130, 257, 206, .5, APS_BLACK)
+   PSLine(215,  130, 215, 206, .5, APS_BLACK)
+   PSLine(223,  130, 223, 206, .5, APS_BLACK)
+   PSLine(231,  130, 231, 206, .5, APS_BLACK)
+   PSLine(240,  130, 240, 206, .5, APS_BLACK)
+   PSLine(248,  130, 248, 206, .5, APS_BLACK)
+   PSLine(257,  130, 257, 206, .5, APS_BLACK)
 
-      PSLine(215,  130, 265, 130, .5, APS_BLACK)
-      PSLine(215,  169, 265, 169, .5, APS_BLACK)
+   PSLine(215,  130, 265, 130, .5, APS_BLACK)
+   PSLine(215,  169, 265, 169, .5, APS_BLACK)
 
-      PSLine( 73,   10, 265,  10, .5, APS_BLACK)
-      PSLine( 73,  206, 265, 206, .5, APS_BLACK)
+   PSLine( 73,   10, 265,  10, .5, APS_BLACK)
+   PSLine( 73,  206, 265, 206, .5, APS_BLACK)
 
-      PSLine( 73,   30,  86,  30, .5, APS_BLACK)
-      PSLine( 73,   70,  86,  70, .5, APS_BLACK)
-      PSLine( 73,  124,  86, 124, .5, APS_BLACK)
-      PSLine( 73,  165,  86, 165, .5, APS_BLACK)
+   PSLine( 73,   30,  86,  30, .5, APS_BLACK)
+   PSLine( 73,   70,  86,  70, .5, APS_BLACK)
+   PSLine( 73,  124,  86, 124, .5, APS_BLACK)
+   PSLine( 73,  165,  86, 165, .5, APS_BLACK)
 
-      PSLine( 86,   81,  99,  81, .5, APS_BLACK)
-      PSLine( 86,  125,  99, 125, .5, APS_BLACK)
-      PSLine( 86,  156,  99, 156, .5, APS_BLACK)
-      PSLine( 86,  177,  99, 177, .5, APS_BLACK)
+   PSLine( 86,   81,  99,  81, .5, APS_BLACK)
+   PSLine( 86,  125,  99, 125, .5, APS_BLACK)
+   PSLine( 86,  156,  99, 156, .5, APS_BLACK)
+   PSLine( 86,  177,  99, 177, .5, APS_BLACK)
 
-      PSLine( 99,  123, 105, 123, .5, APS_BLACK)
-      PSLine( 99,  151, 105, 151, .5, APS_BLACK)
-      PSLine( 99,  179, 105, 179, .5, APS_BLACK)
+   PSLine( 99,  123, 105, 123, .5, APS_BLACK)
+   PSLine( 99,  151, 105, 151, .5, APS_BLACK)
+   PSLine( 99,  179, 105, 179, .5, APS_BLACK)
 
-      PSSetFont(APS_TIMES,, 8, APS_BLACK)
-      @ 12,170 TEXTOUT "INVOICE"            JUSTIFY APS_CENTER  FONT APS_ARIAL  STYLE APS_BOLD  POINT 14
-      @ 28,158 TEXTOUT "No"                 FONT APS_ARIAL
-      @ 13,90  TEXTOUT "Working"
-      @ 16,90  TEXTOUT "like bees,"
-      @ 19,90  TEXTOUT "to bring you"
-      @ 22,90  TEXTOUT "the best software."
-      @ 33,50  TEXTOUT "70, de la Gare Street, St.Jerome, (Quebec), Canada, J7Z 2B8"  JUSTIFY APS_CENTER
-      @ 36,50  TEXTOUT "Phone: 555 555-5555 - Fax: (555) 555-5550"                    JUSTIFY APS_CENTER
+   PSSetFont(APS_TIMES,, 8, APS_BLACK)
+   @ 12,170 TEXTOUT "INVOICE"            JUSTIFY APS_CENTER  FONT APS_ARIAL  STYLE APS_BOLD  POINT 14
+   @ 28,158 TEXTOUT "No"                 FONT APS_ARIAL
+   @ 13,90  TEXTOUT "Working"
+   @ 16,90  TEXTOUT "like bees,"
+   @ 19,90  TEXTOUT "to bring you"
+   @ 22,90  TEXTOUT "the best software."
+   @ 33,50  TEXTOUT "70, de la Gare Street, St.Jerome, (Quebec), Canada, J7Z 2B8"  JUSTIFY APS_CENTER
+   @ 36,50  TEXTOUT "Phone: 555 555-5555 - Fax: (555) 555-5550"                    JUSTIFY APS_CENTER
 
-      PSSetFont(APS_ARIAL,, 7)
-      @ 75, 20 TEXTOUT "CUSTOMER #"         JUSTIFY APS_CENTER
-      @ 75, 52 TEXTOUT "PURCHASE ORDER #"   JUSTIFY APS_CENTER
-      @ 75, 98 TEXTOUT "SHIP VIA"           JUSTIFY APS_CENTER
-      @ 75,145 TEXTOUT "PHONE #"            JUSTIFY APS_CENTER
-      @ 75,185 TEXTOUT "FAX #"              JUSTIFY APS_CENTER
+   PSSetFont(APS_ARIAL,, 7)
+   @ 75, 20 TEXTOUT "CUSTOMER #"         JUSTIFY APS_CENTER
+   @ 75, 52 TEXTOUT "PURCHASE ORDER #"   JUSTIFY APS_CENTER
+   @ 75, 98 TEXTOUT "SHIP VIA"           JUSTIFY APS_CENTER
+   @ 75,145 TEXTOUT "PHONE #"            JUSTIFY APS_CENTER
+   @ 75,185 TEXTOUT "FAX #"              JUSTIFY APS_CENTER
 
-      @ 88, 45 TEXTOUT "SALESPERSON"        JUSTIFY APS_CENTER
-      @ 88,103 TEXTOUT "TERMS"              JUSTIFY APS_CENTER
-      @ 88,140 TEXTOUT "DATE"               JUSTIFY APS_CENTER
-      @ 88,167 TEXTOUT "OUR ORDER #"        JUSTIFY APS_CENTER
-      @ 88,191 TEXTOUT "SHIP DATE"          JUSTIFY APS_CENTER
+   @ 88, 45 TEXTOUT "SALESPERSON"        JUSTIFY APS_CENTER
+   @ 88,103 TEXTOUT "TERMS"              JUSTIFY APS_CENTER
+   @ 88,140 TEXTOUT "DATE"               JUSTIFY APS_CENTER
+   @ 88,167 TEXTOUT "OUR ORDER #"        JUSTIFY APS_CENTER
+   @ 88,191 TEXTOUT "SHIP DATE"          JUSTIFY APS_CENTER
 
-      @101, 75 TEXTOUT "DESCRIPTION"        JUSTIFY APS_CENTER
-      @101,138 TEXTOUT "QTY"                JUSTIFY APS_CENTER
-      @101,165 TEXTOUT "UNIT PRICE"         JUSTIFY APS_CENTER
-      @101,192 TEXTOUT "EXTENSION"          JUSTIFY APS_CENTER
+   @101, 75 TEXTOUT "DESCRIPTION"        JUSTIFY APS_CENTER
+   @101,138 TEXTOUT "QTY"                JUSTIFY APS_CENTER
+   @101,165 TEXTOUT "UNIT PRICE"         JUSTIFY APS_CENTER
+   @101,192 TEXTOUT "EXTENSION"          JUSTIFY APS_CENTER
 
-      @218,150 TEXTOUT "SUB-TOTAL"          JUSTIFY APS_CENTER
-      @226,150 TEXTOUT "SALES TAX 1"        JUSTIFY APS_CENTER
-      @234,150 TEXTOUT "SALES TAX 2"        JUSTIFY APS_CENTER
-      @243,150 TEXTOUT "TOTAL"              JUSTIFY APS_CENTER
-      @252,150 TEXTOUT "AMOUNT RECEIVED"    JUSTIFY APS_CENTER
-      @260,150 TEXTOUT "BALANCE DUE"        JUSTIFY APS_CENTER
+   @218,150 TEXTOUT "SUB-TOTAL"          JUSTIFY APS_CENTER
+   @226,150 TEXTOUT "SALES TAX 1"        JUSTIFY APS_CENTER
+   @234,150 TEXTOUT "SALES TAX 2"        JUSTIFY APS_CENTER
+   @243,150 TEXTOUT "TOTAL"              JUSTIFY APS_CENTER
+   @252,150 TEXTOUT "AMOUNT RECEIVED"    JUSTIFY APS_CENTER
+   @260,150 TEXTOUT "BALANCE DUE"        JUSTIFY APS_CENTER
 
-      InvoiceHeader()  // Print the header
-      InvoiceDetail()  // Print the detail
-      InvoiceTotal()   // Print the total
+   InvoiceHeader()  // Print the header
+   InvoiceDetail()  // Print the detail
+   InvoiceTotal()   // Print the total
 
    ENDDOC
 
@@ -782,78 +782,78 @@ STATIC FUNCTION AbeePuroLater()
       "Los the Irrational battles Emau with Silence; Emau triumphs; light returns to Paradise."
 
    BEGINDOC WITH 0 TITLE "Bill of Lading example"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_MILL)
+   PSSetUnit(APS_MILL)
 
-      // Puro Logo
-      PSBitmap(15, 8, 22, 50, "\" + CurDir() + "\PUROLOGO.BMP")
+   // Puro Logo
+   PSBitmap(15, 8, 22, 50, "\" + CurDir() + "\PUROLOGO.BMP")
 
-      // Top/Left Two frames
-      PSFrame(25,  8,  62, 100, 2, APS_BLACK, APS_WHITE, APS_SOLID)
-      PSFrame(65,  8, 112, 100, 2, APS_BLACK, APS_WHITE, APS_SOLID)
+   // Top/Left Two frames
+   PSFrame(25,  8,  62, 100, 2, APS_BLACK, APS_WHITE, APS_SOLID)
+   PSFrame(65,  8, 112, 100, 2, APS_BLACK, APS_WHITE, APS_SOLID)
 
-      @ 27, 55 TEXTOUT "SENDER (FROM)"          FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
-      @ 33, 10 TEXTOUT "AbeeLabs Systems Inc."  FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
-      @ 37, 10 TEXTOUT "70, de la Gare Street"  FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
-      @ 42, 10 TEXTOUT "St. Jerome, Quebec"     FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
-      @ 51, 10 TEXTOUT "J7Z 2B8"                FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
-      @ 56, 10 TEXTOUT "(999) 555-5555"         FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @ 27, 55 TEXTOUT "SENDER (FROM)"          FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
+   @ 33, 10 TEXTOUT "AbeeLabs Systems Inc."  FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @ 37, 10 TEXTOUT "70, de la Gare Street"  FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @ 42, 10 TEXTOUT "St. Jerome, Quebec"     FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @ 51, 10 TEXTOUT "J7Z 2B8"                FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @ 56, 10 TEXTOUT "(999) 555-5555"         FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
 
-      @ 67, 55 TEXTOUT "RECEIVER (TO)"          FONT APS_ARIAL  SIZE 10                  JUSTIFY APS_CENTER
-      @ 72, 10 TEXTOUT "Liza Peabody"           FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
-      @ 78, 10 TEXTOUT "Mistral Floors Ltd."    FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
-      @ 84, 10 TEXTOUT "2211, Industrial blvd." FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
-      @ 95, 10 TEXTOUT "Springfield, Ill 24551" FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
-      @101, 10 TEXTOUT "(888) 555-1111"         FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @ 67, 55 TEXTOUT "RECEIVER (TO)"          FONT APS_ARIAL  SIZE 10                  JUSTIFY APS_CENTER
+   @ 72, 10 TEXTOUT "Liza Peabody"           FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @ 78, 10 TEXTOUT "Mistral Floors Ltd."    FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @ 84, 10 TEXTOUT "2211, Industrial blvd." FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @ 95, 10 TEXTOUT "Springfield, Ill 24551" FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @101, 10 TEXTOUT "(888) 555-1111"         FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
 
-      @ 10,112 TEXTOUT "PACKAGE I.D. NO."       FONT APS_ARIAL  SIZE 8
-      @  8,143 TEXTOUT "7 0 3  8 2 3  8 7 3 4"  FONT APS_ARIAL  SIZE 16  STYLE APS_BOLD
-      @ 18,60  TEXTOUT "0 1 5 1 8 1 6 9 6"      FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
-      @ 25,120 TEXTOUT "BILL CHARGES TO"        FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
-      @ 25,145 TEXTOUT "TOTAL WEIGHT"           FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
-      @ 25,170 TEXTOUT "PIECES"                 FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
-      @ 25,192 TEXTOUT "DATE"                   FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
+   @ 10,112 TEXTOUT "PACKAGE I.D. NO."       FONT APS_ARIAL  SIZE 8
+   @  8,143 TEXTOUT "7 0 3  8 2 3  8 7 3 4"  FONT APS_ARIAL  SIZE 16  STYLE APS_BOLD
+   @ 18,60  TEXTOUT "0 1 5 1 8 1 6 9 6"      FONT APS_ARIAL  SIZE 14  STYLE APS_BOLD
+   @ 25,120 TEXTOUT "BILL CHARGES TO"        FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
+   @ 25,145 TEXTOUT "TOTAL WEIGHT"           FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
+   @ 25,170 TEXTOUT "PIECES"                 FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
+   @ 25,192 TEXTOUT "DATE"                   FONT APS_ARIAL  SIZE 8                   JUSTIFY APS_CENTER
 
-      @ 29,145 TEXTOUT "SUBJECT TO AUDIT"       FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
-      @ 29,192 TEXTOUT "MO  DAY  YEAR"          FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @ 29,145 TEXTOUT "SUBJECT TO AUDIT"       FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @ 29,192 TEXTOUT "MO  DAY  YEAR"          FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
 
-      @ 34,120 TEXTOUT "RECEIVER"               FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
-      @ 34,145 TEXTOUT "1 POUND"                FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
-      @ 34,170 TEXTOUT "1 OF 1"                 FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
-      @ 34,192 TEXTOUT Date()                   FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @ 34,120 TEXTOUT "RECEIVER"               FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @ 34,145 TEXTOUT "1 POUND"                FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @ 34,170 TEXTOUT "1 OF 1"                 FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @ 34,192 TEXTOUT Date()                   FONT APS_ARIAL  SIZE 10  STYLE APS_BOLD  JUSTIFY APS_CENTER
 
-      @ 45,155 TEXTOUT "SERVICE OPTIONS"        FONT APS_ARIAL  SIZE 11  STYLE APS_BOLD + APS_ITALIC  JUSTIFY APS_CENTER
+   @ 45,155 TEXTOUT "SERVICE OPTIONS"        FONT APS_ARIAL  SIZE 11  STYLE APS_BOLD + APS_ITALIC  JUSTIFY APS_CENTER
 
-      @109,135 TEXTOUT "PIN"                    FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
-      @108,160 TEXTOUT "7 0 3  8 2 3  8 7 3 4"  FONT APS_ARIAL  SIZE 10                  JUSTIFY APS_CENTER
+   @109,135 TEXTOUT "PIN"                    FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @108,160 TEXTOUT "7 0 3  8 2 3  8 7 3 4"  FONT APS_ARIAL  SIZE 10                  JUSTIFY APS_CENTER
 
-      @115, 14 TEXTOUT "UNICODE"                FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
-      @115, 60 TEXTOUT "AIRPORT CODE"           FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
-      @115, 95 TEXTOUT "SERVICE GARANTEE"       FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @115, 14 TEXTOUT "UNICODE"                FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @115, 60 TEXTOUT "AIRPORT CODE"           FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
+   @115, 95 TEXTOUT "SERVICE GARANTEE"       FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_CENTER
 
-      @125, 14 TEXTOUT "32"                     FONT APS_ARIAL  SIZE 36  STYLE APS_BOLD  JUSTIFY APS_CENTER
-      @141,205 TEXTOUT "45333 4.0000426033411"  FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_RIGHT
-      @143,  8 TEXTOUT "Fold this Bill of Lading on the dotted line and insert it into the labelope. Attach a Bill of Lading to each package." ;
-         FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @125, 14 TEXTOUT "32"                     FONT APS_ARIAL  SIZE 36  STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @141,205 TEXTOUT "45333 4.0000426033411"  FONT APS_ARIAL  SIZE 6                   JUSTIFY APS_RIGHT
+   @143,  8 TEXTOUT "Fold this Bill of Lading on the dotted line and insert it into the labelope. Attach a Bill of Lading to each package." ;
+      FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
 
-      PSBarCode(112, 110, "A7038238734", 64, 1, .f., APS_BC39)
+   PSBarCode(112, 110, "A7038238734", 64, 1, .f., APS_BC39)
 
-      FOR nLoop := 8 to 205 step 2
-         PSLine(140, nLoop, 140, nLoop + 1, 1, APS_BLACK)
-      NEXT nLoop
+   FOR nLoop := 8 to 205 step 2
+      PSLine(140, nLoop, 140, nLoop + 1, 1, APS_BLACK)
+   NEXT nLoop
 
-      @157,  8 TEXTOUT "Description :"          FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
-      PSLine(160, 27, 160, 115, 1, APS_BLACK)
-      @162,  8 TEXTOUT "No Declared Value Entered in Software By Sender" FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   @157,  8 TEXTOUT "Description :"          FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
+   PSLine(160, 27, 160, 115, 1, APS_BLACK)
+   @162,  8 TEXTOUT "No Declared Value Entered in Software By Sender" FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD
 
-      @176,107 TEXTOUT "TRANSPORTATION CONDITIONS"                       FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD  JUSTIFY APS_CENTER
+   @176,107 TEXTOUT "TRANSPORTATION CONDITIONS"                       FONT APS_ARIAL  SIZE 8   STYLE APS_BOLD  JUSTIFY APS_CENTER
 
-      @180, 8 TO 192, 205 TEXTBOX "1)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @193, 8 TO 205, 205 TEXTBOX "2)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @206, 8 TO 212, 205 TEXTBOX "3)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @213, 8 TO 216, 205 TEXTBOX "4)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @218, 8 TO 230, 205 TEXTBOX "5)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @231, 8 TO 238, 205 TEXTBOX "6)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
-      @239, 8 TO 254, 205 TEXTBOX "7)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @180, 8 TO 192, 205 TEXTBOX "1)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @193, 8 TO 205, 205 TEXTBOX "2)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @206, 8 TO 212, 205 TEXTBOX "3)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @213, 8 TO 216, 205 TEXTBOX "4)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @218, 8 TO 230, 205 TEXTBOX "5)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @231, 8 TO 238, 205 TEXTBOX "6)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
+   @239, 8 TO 254, 205 TEXTBOX "7)  " + cText  FONT APS_ARIAL  SIZE 7  COLOR APS_BLACK, APS_NONE
 
    ENDDOC
 
@@ -1003,18 +1003,18 @@ STATIC FUNCTION AbeeGraphic()
       nLine += 15
    NEXT nLoop
 
-ENDDOC
+   ENDDOC
 
-RETURN NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Function ...: AbeeText()
+   Function ...: AbeeText()
 
-Description : Simulating a plain text report
-Author .....: Stephan St-Denis
-Date .......: August 1999
------------------------------------------------------------------------------*/
+   Description : Simulating a plain text report
+   Author .....: Stephan St-Denis
+   Date .......: August 1999
+   -----------------------------------------------------------------------------*/
 
 STATIC FUNCTION AbeeText()
 
@@ -1142,16 +1142,16 @@ STATIC FUNCTION AbeePixels()
    LOCAL aCaps
 
    BEGINDOC WITH 0  TITLE "Printing using pixel unit"  ORIENTATION APS_PORTRAIT
-      aCaps := PSGetPrinterCaps()
+   aCaps := PSGetPrinterCaps()
 
-      PSSetUnit(APS_PIXEL)
-      PSFrame((aCaps[APC_AREAHEIGHT] / 2) - (aCaps[APC_VPIXELS] / 2), ;
-         (aCaps[APC_AREAWIDTH]  / 2) - (aCaps[APC_VPIXELS] / 2), ;
-         (aCaps[APC_AREAHEIGHT] / 2) + (aCaps[APC_VPIXELS] / 2), ;
-         (aCaps[APC_AREAWIDTH]  / 2) + (aCaps[APC_VPIXELS] / 2), ;
-         1, APS_BLACK, APS_PALEGRAY)
-      PSLine (0, 0, aCaps[APC_AREAHEIGHT], aCaps[APC_AREAWIDTH], 2, APS_BLACK) // Big X
-      PSLine (aCaps[APC_AREAHEIGHT], 0, 0, aCaps[APC_AREAWIDTH], 2, APS_BLACK) // Big X
+   PSSetUnit(APS_PIXEL)
+   PSFrame((aCaps[APC_AREAHEIGHT] / 2) - (aCaps[APC_VPIXELS] / 2), ;
+      (aCaps[APC_AREAWIDTH]  / 2) - (aCaps[APC_VPIXELS] / 2), ;
+      (aCaps[APC_AREAHEIGHT] / 2) + (aCaps[APC_VPIXELS] / 2), ;
+      (aCaps[APC_AREAWIDTH]  / 2) + (aCaps[APC_VPIXELS] / 2), ;
+      1, APS_BLACK, APS_PALEGRAY)
+   PSLine (0, 0, aCaps[APC_AREAHEIGHT], aCaps[APC_AREAWIDTH], 2, APS_BLACK) // Big X
+   PSLine (aCaps[APC_AREAHEIGHT], 0, 0, aCaps[APC_AREAWIDTH], 2, APS_BLACK) // Big X
    ENDDOC
 
    RETURN NIL
@@ -1216,23 +1216,23 @@ STATIC FUNCTION AbeeBarCode()
 
    BEGINDOC WITH 0  TITLE "Printing barcodes"  ORIENTATION APS_PORTRAIT
 
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_ARIAL, APS_PLAIN, 12)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_ARIAL, APS_PLAIN, 12)
 
-      @0,20 TEXTOUT "Barcode Symbol 128B"    JUSTIFY APS_CENTER
-      @0,60 TEXTOUT "Barcode Symbol 3 of 9"  JUSTIFY APS_CENTER
+   @0,20 TEXTOUT "Barcode Symbol 128B"    JUSTIFY APS_CENTER
+   @0,60 TEXTOUT "Barcode Symbol 3 of 9"  JUSTIFY APS_CENTER
 
-      PSSetUnit(APS_MILL)
-      PSBarCode( 20, 20, "Barcode 128B"  , 24,  .5, .t., APS_BC128)
-      PSBarCode( 20,120, "BARCODE 3 OF 9", 24,  .5, .t., APS_BC39)
+   PSSetUnit(APS_MILL)
+   PSBarCode( 20, 20, "Barcode 128B"  , 24,  .5, .t., APS_BC128)
+   PSBarCode( 20,120, "BARCODE 3 OF 9", 24,  .5, .t., APS_BC39)
 
-      PSBarCode( 40, 20, "BarCode128"    , 24,  .5, .t., APS_BC128)
-      PSBarCode( 60, 20, "BarCode128"    , 24, .75, .t., APS_BC128)
-      PSBarCode( 80, 20, "BarCode128"    , 24,   1, .t., APS_BC128)
+   PSBarCode( 40, 20, "BarCode128"    , 24,  .5, .t., APS_BC128)
+   PSBarCode( 60, 20, "BarCode128"    , 24, .75, .t., APS_BC128)
+   PSBarCode( 80, 20, "BarCode128"    , 24,   1, .t., APS_BC128)
 
-      PSBarCode( 40,120, "BarCode39"     , 24,  .5, .t., APS_BC39)
-      PSBarCode( 60,120, "barcode39"     , 24, .75, .t., APS_BC39)
-      PSBarCode( 80,120, "BARCODE39"     , 24,   1, .t., APS_BC39)
+   PSBarCode( 40,120, "BarCode39"     , 24,  .5, .t., APS_BC39)
+   PSBarCode( 60,120, "barcode39"     , 24, .75, .t., APS_BC39)
+   PSBarCode( 80,120, "BARCODE39"     , 24,   1, .t., APS_BC39)
 
    ENDDOC
 
@@ -1254,16 +1254,16 @@ STATIC FUNCTION AbeePrinters()
    LOCAL aPrinters := PSGetPrinters()
 
    BEGINDOC WITH 0  TITLE "List of printers"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_ARIAL, APS_PLAIN, 12)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_ARIAL, APS_PLAIN, 12)
 
-      FOR nLoop := 1 to Len(aPrinters)
-         @nRow,5 TEXTOUT aPrinters[nLoop]
-         IF ++nRow > 50
-            nRow := 0
-            PSNewPage()
-         ENDIF
-      NEXT nLoop
+   FOR nLoop := 1 to Len(aPrinters)
+      @nRow,5 TEXTOUT aPrinters[nLoop]
+      IF ++nRow > 50
+         nRow := 0
+         PSNewPage()
+      ENDIF
+   NEXT nLoop
    ENDDOC
 
    RETURN NIL
@@ -1286,21 +1286,21 @@ STATIC FUNCTION AbeePaperBins()
    aBins := PSGetPaperBins()
 
    BEGINDOC WITH 0 TITLE "List of paper bins for the selected printer"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_TEXT)
-      PSSetRowCol(50, 80)
-      PSSetFont(APS_ARIAL, APS_PLAIN, 12)
+   PSSetUnit(APS_TEXT)
+   PSSetRowCol(50, 80)
+   PSSetFont(APS_ARIAL, APS_PLAIN, 12)
 
-      @0,5 TEXTOUT "List of paper bins for the selected printer"
+   @0,5 TEXTOUT "List of paper bins for the selected printer"
 
-      FOR nLoop := 1 to Len(aBins)
-         @nRow,5 TEXTOUT aBins[nLoop, 1] PICTURE "9999"
-         @nRow,9 TEXTOUT aBins[nLoop, 2]
-         IF ++nRow > 45
-            nRow := 3
-            PSNewPage()
-            @0,5 TEXTOUT "List of paper bins for the selected printer"
-         ENDIF
-      NEXT nLoop
+   FOR nLoop := 1 to Len(aBins)
+      @nRow,5 TEXTOUT aBins[nLoop, 1] PICTURE "9999"
+      @nRow,9 TEXTOUT aBins[nLoop, 2]
+      IF ++nRow > 45
+         nRow := 3
+         PSNewPage()
+         @0,5 TEXTOUT "List of paper bins for the selected printer"
+      ENDIF
+   NEXT nLoop
    ENDDOC
 
    RETURN NIL
@@ -1321,20 +1321,20 @@ STATIC FUNCTION AbeeFonts()
    LOCAL aFonts
 
    BEGINDOC WITH 0  TITLE "List of available fonts"  ORIENTATION APS_PORTRAIT
-      aFonts := aSort(PSGetFonts())
+   aFonts := aSort(PSGetFonts())
 
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_ARIAL, APS_PLAIN, 8)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_ARIAL, APS_PLAIN, 8)
 
-      FOR nLoop := 1 to Len(aFonts)
-         @nRow,0  TEXTOUT aFonts[nLoop]
-         @nRow,39 TEXTOUT aFonts[nLoop]  FONT aFonts[nLoop]
-         PSLine(nRow + 1, 0, nRow + 1, 80, 1, APS_BLACK)
-         IF ++nRow > 56
-            nRow := 0
-            PSNewPage()
-         ENDIF
-      NEXT nLoop
+   FOR nLoop := 1 to Len(aFonts)
+      @nRow,0  TEXTOUT aFonts[nLoop]
+      @nRow,39 TEXTOUT aFonts[nLoop]  FONT aFonts[nLoop]
+      PSLine(nRow + 1, 0, nRow + 1, 80, 1, APS_BLACK)
+      IF ++nRow > 56
+         nRow := 0
+         PSNewPage()
+      ENDIF
+   NEXT nLoop
 
    ENDDOC
 
@@ -1355,13 +1355,13 @@ STATIC FUNCTION AbeePointSize()
    LOCAL nPoint    := 4
 
    BEGINDOC WITH 0  TITLE "Point size test"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_ARIAL, APS_PLAIN, nPoint)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_ARIAL, APS_PLAIN, nPoint)
 
-      FOR nLoop := 0 to 31
-         @nLoop,0  TEXTOUT "This is printed at " + Str(nPoint, 5, 2) + " points." POINT nPoint
-         nPoint += .25
-      NEXT nLoop
+   FOR nLoop := 0 to 31
+      @nLoop,0  TEXTOUT "This is printed at " + Str(nPoint, 5, 2) + " points." POINT nPoint
+      nPoint += .25
+   NEXT nLoop
 
    ENDDOC
 
@@ -1404,18 +1404,18 @@ STATIC FUNCTION AbeePrnCaps()
       @nLoop + 5, 31 TEXTOUT aCaps[nLoop]
    NEXT nLoop
 
-ENDDOC
+   ENDDOC
 
-RETURN NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Function ...: CalcTop(<n>) -> nTopCoor
+   Function ...: CalcTop(<n>) -> nTopCoor
 
-Description : Calculates the top coor. of a bar
-Author .....: Stephan St-Denis
-Date .......: August 1999
------------------------------------------------------------------------------*/
+   Description : Calculates the top coor. of a bar
+   Author .....: Stephan St-Denis
+   Date .......: August 1999
+   -----------------------------------------------------------------------------*/
 
 STATIC FUNCTION CalcTop(nAmnt)
 
@@ -1435,23 +1435,23 @@ STATIC FUNCTION AbeeConvert()
    LOCAL nLoop
 
    BEGINDOC WITH 0  TITLE "Ascii to Ansi convertion test"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_COURIER, APS_PLAIN, 10)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_COURIER, APS_PLAIN, 10)
 
-      @0,0  TEXTOUT "Converted"
-      @0,40 TEXTOUT "Not converted"
+   @0,0  TEXTOUT "Converted"
+   @0,40 TEXTOUT "Not converted"
 
-      FOR nLoop := 1 to 42
-         PSSetAsciiToAnsi(.t.)
-         @nLoop + 1,  0 TEXTOUT Str(nLoop + 127, 3, 0) + " = " + Chr(nLoop + 127)
-         @nLoop + 1, 10 TEXTOUT Str(nLoop + 169, 3, 0) + " = " + Chr(nLoop + 169)
-         @nLoop + 1, 20 TEXTOUT Str(nLoop + 211, 3, 0) + " = " + Chr(nLoop + 211)
+   FOR nLoop := 1 to 42
+      PSSetAsciiToAnsi(.t.)
+      @nLoop + 1,  0 TEXTOUT Str(nLoop + 127, 3, 0) + " = " + Chr(nLoop + 127)
+      @nLoop + 1, 10 TEXTOUT Str(nLoop + 169, 3, 0) + " = " + Chr(nLoop + 169)
+      @nLoop + 1, 20 TEXTOUT Str(nLoop + 211, 3, 0) + " = " + Chr(nLoop + 211)
 
-         PSSetAsciiToAnsi(.f.)
-         @nloop + 1, 40 TEXTOUT Str(nLoop + 127, 3, 0) + " = " + Chr(nLoop + 127)
-         @nLoop + 1, 50 TEXTOUT Str(nLoop + 169, 3, 0) + " = " + Chr(nLoop + 169)
-         @nLoop + 1, 60 TEXTOUT Str(nLoop + 211, 3, 0) + " = " + Chr(nLoop + 211)
-      NEXT nLoop
+      PSSetAsciiToAnsi(.f.)
+      @nloop + 1, 40 TEXTOUT Str(nLoop + 127, 3, 0) + " = " + Chr(nLoop + 127)
+      @nLoop + 1, 50 TEXTOUT Str(nLoop + 169, 3, 0) + " = " + Chr(nLoop + 169)
+      @nLoop + 1, 60 TEXTOUT Str(nLoop + 211, 3, 0) + " = " + Chr(nLoop + 211)
+   NEXT nLoop
 
    ENDDOC
 
@@ -1472,18 +1472,18 @@ STATIC FUNCTION AbeeDuplex()
    LOCAL nCopies
 
    BEGINDOC WITH 0 TITLE "Duplex mode test"  ORIENTATION APS_PORTRAIT
-      PSSetUnit(APS_TEXT)
-      PSSetFont(APS_COURIER, APS_PLAIN, 10)
+   PSSetUnit(APS_TEXT)
+   PSSetFont(APS_COURIER, APS_PLAIN, 10)
 
-      FOR nCopies := 1 to 2
-         FOR nLoop := 1 to 25
-            @nLoop, 10 TEXTOUT "This is a Duplex test"
-         NEXT nLoop
+   FOR nCopies := 1 to 2
+      FOR nLoop := 1 to 25
+         @nLoop, 10 TEXTOUT "This is a Duplex test"
+      NEXT nLoop
 
-         IF nCopies < 2
-            PSNewPage()
-         ENDIF
-      NEXT nCopies
+      IF nCopies < 2
+         PSNewPage()
+      ENDIF
+   NEXT nCopies
    ENDDOC
 
    RETURN NIL
@@ -1505,26 +1505,26 @@ STATIC FUNCTION AbeeLegal()
    PSSetPageSize(DMPAPER_LEGAL)
 
    BEGINDOC WITH 0  TITLE "Printing on Legal format"
-      PSSetUnit(APS_TEXT)
-      PSSetCPI(10)
-      PSSetLPI(6)
-      PSSetFont(APS_COURIER, APS_PLAIN, 12)
+   PSSetUnit(APS_TEXT)
+   PSSetCPI(10)
+   PSSetLPI(6)
+   PSSetFont(APS_COURIER, APS_PLAIN, 12)
 
-      nMax := Int(PSGetMaxHeight()) - 1
+   nMax := Int(PSGetMaxHeight()) - 1
 
-      @0,  0 TEXTOUT "This is the first line"
-      @0, 29 TEXTOUT "This is the first line"
-      @0, 58 TEXTOUT "This is the first line"
+   @0,  0 TEXTOUT "This is the first line"
+   @0, 29 TEXTOUT "This is the first line"
+   @0, 58 TEXTOUT "This is the first line"
 
-      FOR nLoop := 1 to nMax - 1
-         @nLoop,  0 TEXTOUT "This is a test"
-         @nLoop, 29 TEXTOUT "This is a test"
-         @nLoop, 58 TEXTOUT "This is a test"
-      NEXT nLoop
+   FOR nLoop := 1 to nMax - 1
+      @nLoop,  0 TEXTOUT "This is a test"
+      @nLoop, 29 TEXTOUT "This is a test"
+      @nLoop, 58 TEXTOUT "This is a test"
+   NEXT nLoop
 
-      @nMax,  0 TEXTOUT "This is the last line"
-      @nMax, 29 TEXTOUT "This is the last line"
-      @nMax, 58 TEXTOUT "This is the last line"
+   @nMax,  0 TEXTOUT "This is the last line"
+   @nMax, 29 TEXTOUT "This is the last line"
+   @nMax, 58 TEXTOUT "This is the last line"
 
    ENDDOC
 
@@ -1696,18 +1696,18 @@ STATIC FUNCTION AbeeAutoTextCoor()
    PSTextOut( , , "and fonts "       , , , APS_VERDANA,  9, APS_BOLD + APS_ITALIC)
    PSTextOut( , , "on the same line.", , , APS_ARIAL  , 10)
 
-ENDDOC
+   ENDDOC
 
-RETURN NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Function ...: AbeeEncryptedPDF()
+   Function ...: AbeeEncryptedPDF()
 
-Description :
-Author .....: Stephan St-Denis
-Date .......: April 2007
------------------------------------------------------------------------------*/
+   Description :
+   Author .....: Stephan St-Denis
+   Date .......: April 2007
+   -----------------------------------------------------------------------------*/
 
 STATIC FUNCTION AbeeEncryptedPDF()
 
@@ -1725,18 +1725,18 @@ STATIC FUNCTION AbeeEncryptedPDF()
 
    @10, 10 TEXTOUT "This document is protected using a password."
 
-ENDDOC
+   ENDDOC
 
-RETURN NIL
+   RETURN NIL
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Function ...: AbeeChangePWColor()
+   Function ...: AbeeChangePWColor()
 
-Description :
-Author .....: Stephan St-Denis
-Date .......: April 2007
------------------------------------------------------------------------------*/
+   Description :
+   Author .....: Stephan St-Denis
+   Date .......: April 2007
+   -----------------------------------------------------------------------------*/
 
 STATIC FUNCTION AbeeChangePWColor()
 

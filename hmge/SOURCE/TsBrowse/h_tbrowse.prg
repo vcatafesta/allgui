@@ -455,11 +455,11 @@ FUNCTION SetArrayTo( ControlName, ParentForm, Arr, uFontHF, aHead, aSizes, uFoot
 
 CLASS TSBrowse FROM TControl
 
-CLASSDATA lRegistered AS LOGICAL
+   CLASSDATA lRegistered AS LOGICAL
 
-CLASSDATA aProperties AS ARRAY INIT { "aColumns", "cVarName", "nTop", "nLeft", "nWidth", "nHeight" }
+   CLASSDATA aProperties AS ARRAY INIT { "aColumns", "cVarName", "nTop", "nLeft", "nWidth", "nHeight" }
 
-CLASSDATA lVScroll, lHScroll
+   CLASSDATA lVScroll, lHScroll
 
    DATA   aActions                                   // actions to be executed on header's click
    DATA   aCheck                                     // stock bitmaps for check box
@@ -4407,249 +4407,249 @@ METHOD Excel2( cFile, lActivate, hProgress, cTitle, lSave, bPrintRow ) CLASS TSB
          FOR i := 1 to LEN( ::aColumns[ nCol ]:cPicture )
             cc := substr( ::aColumns[ nCol ]:cPicture, i, 1 )
             IF cc=='9';   cc := '0';   endif
-               IF cc=='.';   cc := ',';   endif
-                  IF cc=='@' .or. cc=='K' .or. cc=='Z';   loop;   endif
-                     IF !Empty(cPic);   cPic += cc
-                     ELSEIF cc # '0';   cPic += ( '#0' + cc )
-                     ENDIF
-                  NEXT
-                  IF Empty(cPic)
-                     cPic := '#0'
-                  ENDIF
-                  IF "@Z " $ ::aColumns[ nCol ]:cPicture .or. LEN(cPic) > 3
-                     IF "," $ cPic
-                        cPic1 := SubStr( cPic, 2, At( ",", cPic ) - 2 )
-                        cPic := StrTran( cPic1, '0', '#' ) + SubStr( cPic, At( ",", cPic ) - 1, LEN(cPic) - 2 )
-                     ELSE
-                        cPic1 := SubStr( cPic, 2, LEN(cPic) - 2 )
-                        cPic := StrTran( cPic1, '0', '#' ) + '0'
-                     ENDIF
-                  ENDIF
-               ENDIF
-               nPic := iif( !Empty(cPic), AScan( aPic, {|x| x==cPic} ), 0 )
-               IF nPic == 0
-                  AAdd( aPic, cPic );  nPic := LEN(aPic)
-               ENDIF
-               AADD( anPIC, nPic )
-            NEXT
-
-            IF ( nHandle := FCreate( cWork, 0 ) ) < 0
-               MsgStop( "Can't create XLS file", cWork )
-
-               RETURN NIL
+            IF cc=='.';   cc := ',';   endif
+            IF cc=='@' .or. cc=='K' .or. cc=='Z';   loop;   endif
+            IF !Empty(cPic);   cPic += cc
+            ELSEIF cc # '0';   cPic += ( '#0' + cc )
             ENDIF
-
-            FWrite( nHandle, BiffRec( 9 ) )
-            // set CodePage
-            FWrite( nHandle, BiffRec( 66, GetACP() ) )
-            FWrite( nHandle, BiffRec( 12 ) )
-            FWrite( nHandle, BiffRec( 13 ) )
-
-            IF ::hFont != Nil
-               AAdd( aFont,  GetFontParam( ::hFont ) )
+         NEXT
+         IF Empty(cPic)
+            cPic := '#0'
+         ENDIF
+         IF "@Z " $ ::aColumns[ nCol ]:cPicture .or. LEN(cPic) > 3
+            IF "," $ cPic
+               cPic1 := SubStr( cPic, 2, At( ",", cPic ) - 2 )
+               cPic := StrTran( cPic1, '0', '#' ) + SubStr( cPic, At( ",", cPic ) - 1, LEN(cPic) - 2 )
             ELSE
-               IF ( hFont := GetFontHandle( ::cFont ) ) != 0
-                  AAdd(aFont, GetFontParam( hFont ) )
-               ENDIF
+               cPic1 := SubStr( cPic, 2, LEN(cPic) - 2 )
+               cPic := StrTran( cPic1, '0', '#' ) + '0'
+            ENDIF
+         ENDIF
+      ENDIF
+      nPic := iif( !Empty(cPic), AScan( aPic, {|x| x==cPic} ), 0 )
+      IF nPic == 0
+         AAdd( aPic, cPic );  nPic := LEN(aPic)
+      ENDIF
+      AADD( anPIC, nPic )
+   NEXT
+
+   IF ( nHandle := FCreate( cWork, 0 ) ) < 0
+      MsgStop( "Can't create XLS file", cWork )
+
+      RETURN NIL
+   ENDIF
+
+   FWrite( nHandle, BiffRec( 9 ) )
+   // set CodePage
+   FWrite( nHandle, BiffRec( 66, GetACP() ) )
+   FWrite( nHandle, BiffRec( 12 ) )
+   FWrite( nHandle, BiffRec( 13 ) )
+
+   IF ::hFont != Nil
+      AAdd( aFont,  GetFontParam( ::hFont ) )
+   ELSE
+      IF ( hFont := GetFontHandle( ::cFont ) ) != 0
+         AAdd(aFont, GetFontParam( hFont ) )
+      ENDIF
+   ENDIF
+
+   FOR nCol := 1 To Len( ::aColumns )
+
+      IF Empty( ::aColumns[ nCol ]:hFont ) .and. Empty( ::aColumns[ nCol ]:hFontHead )
+         LOOP
+      ENDIF
+
+      hFont := ::aColumns[ nCol ]:hFont
+
+      IF hFont != Nil
+         aFontTmp := GetFontParam( hFont )
+         IF AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
+               e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
+               e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } ) == 0
+
+            AAdd( aFont, aFontTmp )
+         ENDIF
+
+      ENDIF
+
+      hFont := ::aColumns[ nCol ]:hFontHead
+
+      IF hFont != Nil
+         aFontTmp := GetFontParam( hFont )
+         IF AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
+               e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
+               e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } ) == 0
+
+            AAdd( aFont, aFontTmp )
+         ENDIF
+
+      ENDIF
+
+   NEXT
+
+   IF Len( aFont ) > 4
+      ASize( aFont, 4 )
+   ENDIF
+
+   IF ! Empty( aFont )
+      FOR nCol := 1 To Len( aFont )
+         FWrite( nHandle, BiffRec( 49, aFont[ nCol ] ) )
+      NEXT
+   ENDIF
+
+   FWrite( nHandle, BiffRec( 31, 1 ) )
+   FWrite( nHandle, BiffRec( 30, "General" ) )
+
+   IF ! Empty( aPic )
+      AEval( aPic, {|e| FWrite( nHandle, BiffRec( 30, e ) ) } )
+   ENDIF
+
+   AEval( aLen, { |e,n| FWrite( nHandle, BiffRec( 36, e, n - 1, n - 1 ) ) } )
+   IF hProgress != Nil
+      nTotal := ( ::nLen + 1 ) * Len( ::aColumns )
+      SetProgressBarRange ( hProgress , 1 , nTotal )
+      SendMessage(hProgress, PBM_SETPOS,0,0)
+      nEvery := Max( 1, Int( nTotal * .02 ) ) // refresh hProgress every 2 %
+   ENDIF
+
+   IF ::lIsDbf
+      ( ::cAlias )->( Eval( ::bGoTop ) )
+   ENDIF
+
+   FOR nRow := 1 To ( ::nLen )
+
+      IF nRow == 1
+
+         IF ! Empty( cTitle )
+            cTitle := StrTran( cTitle, CRLF, Chr( 10 ) )
+            nAlign := If( Chr( 10 ) $ cTitle, 5, 1 )
+            FWrite( nHandle, BiffRec( 4, cTitle, 0, 0,, nAlign ) )
+            nLine := 3
+         ENDIF
+
+         FOR nCol := 1 To Len( ::aColumns )
+
+            uData := If( ValType( ::aColumns[ nCol ]:cHeading ) == "B", ;
+               Eval( ::aColumns[ nCol ]:cHeading ), ;
+               ::aColumns[ nCol ]:cHeading )
+
+            IF ValType( uData ) != "C"
+               LOOP
             ENDIF
 
-            FOR nCol := 1 To Len( ::aColumns )
+            uData  := Trim( StrTran( uData, CRLF, Chr( 10 ) ) )
+            nAlign := Min( LoWord( ::aColumns[ nCol ]:nHAlign ), 2 )
+            nAlign := If( Chr( 10 ) $ uData, 4, nAlign )
+            hFont  := ::aColumns[ nCol ]:hFontHead
+            aFontTmp := GetFontParam( hFont )
+            nFont  := AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
+               e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
+               e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } )
 
-               IF Empty( ::aColumns[ nCol ]:hFont ) .and. Empty( ::aColumns[ nCol ]:hFontHead )
-                  LOOP
-               ENDIF
-
-               hFont := ::aColumns[ nCol ]:hFont
-
-               IF hFont != Nil
-                  aFontTmp := GetFontParam( hFont )
-                  IF AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
-                        e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
-                        e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } ) == 0
-
-                     AAdd( aFont, aFontTmp )
-                  ENDIF
-
-               ENDIF
-
-               hFont := ::aColumns[ nCol ]:hFontHead
-
-               IF hFont != Nil
-                  aFontTmp := GetFontParam( hFont )
-                  IF AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
-                        e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
-                        e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } ) == 0
-
-                     AAdd( aFont, aFontTmp )
-                  ENDIF
-
-               ENDIF
-
-            NEXT
-
-            IF Len( aFont ) > 4
-               ASize( aFont, 4 )
-            ENDIF
-
-            IF ! Empty( aFont )
-               FOR nCol := 1 To Len( aFont )
-                  FWrite( nHandle, BiffRec( 49, aFont[ nCol ] ) )
-               NEXT
-            ENDIF
-
-            FWrite( nHandle, BiffRec( 31, 1 ) )
-            FWrite( nHandle, BiffRec( 30, "General" ) )
-
-            IF ! Empty( aPic )
-               AEval( aPic, {|e| FWrite( nHandle, BiffRec( 30, e ) ) } )
-            ENDIF
-
-            AEval( aLen, { |e,n| FWrite( nHandle, BiffRec( 36, e, n - 1, n - 1 ) ) } )
-            IF hProgress != Nil
-               nTotal := ( ::nLen + 1 ) * Len( ::aColumns )
-               SetProgressBarRange ( hProgress , 1 , nTotal )
-               SendMessage(hProgress, PBM_SETPOS,0,0)
-               nEvery := Max( 1, Int( nTotal * .02 ) ) // refresh hProgress every 2 %
-            ENDIF
-
-            IF ::lIsDbf
-               ( ::cAlias )->( Eval( ::bGoTop ) )
-            ENDIF
-
-            FOR nRow := 1 To ( ::nLen )
-
-               IF nRow == 1
-
-                  IF ! Empty( cTitle )
-                     cTitle := StrTran( cTitle, CRLF, Chr( 10 ) )
-                     nAlign := If( Chr( 10 ) $ cTitle, 5, 1 )
-                     FWrite( nHandle, BiffRec( 4, cTitle, 0, 0,, nAlign ) )
-                     nLine := 3
-                  ENDIF
-
-                  FOR nCol := 1 To Len( ::aColumns )
-
-                     uData := If( ValType( ::aColumns[ nCol ]:cHeading ) == "B", ;
-                        Eval( ::aColumns[ nCol ]:cHeading ), ;
-                        ::aColumns[ nCol ]:cHeading )
-
-                     IF ValType( uData ) != "C"
-                        LOOP
-                     ENDIF
-
-                     uData  := Trim( StrTran( uData, CRLF, Chr( 10 ) ) )
-                     nAlign := Min( LoWord( ::aColumns[ nCol ]:nHAlign ), 2 )
-                     nAlign := If( Chr( 10 ) $ uData, 4, nAlign )
-                     hFont  := ::aColumns[ nCol ]:hFontHead
-                     aFontTmp := GetFontParam( hFont )
-                     nFont  := AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
-                        e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
-                        e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } )
-
-                     FWrite( nHandle, BiffRec( 4, uData, nLine - 1, nCol - 1, .T., nAlign + 1,, ;
-                        Max( 0, nFont - 1 ) ) )
-
-                     IF hProgress != Nil
-
-                        IF nCount % nEvery == 0
-                           SendMessage(hProgress, PBM_SETPOS, nCount, 0)
-                        ENDIF
-
-                        nCount ++
-
-                     ENDIF
-
-                  NEXT
-
-                  ++nLine
-
-               ENDIF
-
-               IF bPrintRow != Nil .and. ! Eval( bPrintRow, nRow )
-                  ::Skip( 1 )
-                  LOOP
-               ENDIF
-
-               FOR nCol := 1 To Len( ::aColumns )
-
-                  IF ::aColumns[ nCol ]:lBitMap
-                     LOOP
-                  ENDIF
-
-                  uData  := Eval( ::aColumns[ nCol ]:bData )
-                  nAlign := LoWord( ::aColumns[ nCol ]:nAlign )
-                  hFont  := ::aColumns[ nCol ]:hFont
-                  aFontTmp := GetFontParam( hFont )
-                  nFont  := AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
-                     e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
-                     e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } )
-
-                  nPic := If( ! Empty( ::aColumns[ nCol ]:cPicture ), anPIC[ nCol ], Nil )
-
-                  IF ValType( uData ) == "N"
-                     FWrite( nHandle, BiffRec( 3, uData, nLine - 1, nCol - 1,, nAlign + 1, nPic, ;
-                        Max( 0, nFont - 1 ) ) )
-                  ELSE
-                     uData := Trim( StrTran( cValToChar( uData ), CRLF, Chr( 10 ) ) )
-                     nAlign := If( Chr( 10 ) $ uData, 4, nAlign )
-                     FWrite( nHandle, BiffRec( 4, uData, nLine - 1, nCol - 1,, nAlign + 1, nPic, ;
-                        Max( 0, nFont - 1 ) ) )
-                  ENDIF
-
-                  IF hProgress != Nil
-
-                     IF nCount % nEvery == 0
-                        SendMessage(hProgress, PBM_SETPOS, nCount, 0)
-                     ENDIF
-
-                     nCount ++
-
-                  ENDIF
-
-               NEXT
-
-               nSkip := ::Skip( 1 )
-
-               ++nLine
-               SysRefresh()
-               IF nSkip ==0
-                  EXIT
-               ENDIF
-            NEXT
-
-            FWrite( nHandle, BiffRec( 10 ) )
-            FClose( nHandle )
+            FWrite( nHandle, BiffRec( 4, uData, nLine - 1, nCol - 1, .T., nAlign + 1,, ;
+               Max( 0, nFont - 1 ) ) )
 
             IF hProgress != Nil
-               SendMessage(hProgress, PBM_SETPOS, nTotal, 0)
+
+               IF nCount % nEvery == 0
+                  SendMessage(hProgress, PBM_SETPOS, nCount, 0)
+               ENDIF
+
+               nCount ++
+
             ENDIF
 
-            IF lSave
-               FileRename( Self, cWork, cFile )
+         NEXT
+
+         ++nLine
+
+      ENDIF
+
+      IF bPrintRow != Nil .and. ! Eval( bPrintRow, nRow )
+         ::Skip( 1 )
+         LOOP
+      ENDIF
+
+      FOR nCol := 1 To Len( ::aColumns )
+
+         IF ::aColumns[ nCol ]:lBitMap
+            LOOP
+         ENDIF
+
+         uData  := Eval( ::aColumns[ nCol ]:bData )
+         nAlign := LoWord( ::aColumns[ nCol ]:nAlign )
+         hFont  := ::aColumns[ nCol ]:hFont
+         aFontTmp := GetFontParam( hFont )
+         nFont  := AScan( aFont, {|e| e[ 1 ] == aFontTmp[ 1 ] .and. e[ 2 ] == aFontTmp[ 2 ] .and. ;
+            e[ 3 ] == aFontTmp[ 3 ] .and. e[ 4 ] == aFontTmp[ 4 ] .and. ;
+            e[ 5 ] == aFontTmp[ 5 ] .and. e[ 6 ] == aFontTmp[ 6 ] } )
+
+         nPic := If( ! Empty( ::aColumns[ nCol ]:cPicture ), anPIC[ nCol ], Nil )
+
+         IF ValType( uData ) == "N"
+            FWrite( nHandle, BiffRec( 3, uData, nLine - 1, nCol - 1,, nAlign + 1, nPic, ;
+               Max( 0, nFont - 1 ) ) )
+         ELSE
+            uData := Trim( StrTran( cValToChar( uData ), CRLF, Chr( 10 ) ) )
+            nAlign := If( Chr( 10 ) $ uData, 4, nAlign )
+            FWrite( nHandle, BiffRec( 4, uData, nLine - 1, nCol - 1,, nAlign + 1, nPic, ;
+               Max( 0, nFont - 1 ) ) )
+         ENDIF
+
+         IF hProgress != Nil
+
+            IF nCount % nEvery == 0
+               SendMessage(hProgress, PBM_SETPOS, nCount, 0)
             ENDIF
 
-            CursorArrow()
+            nCount ++
 
-            IF ::lIsDbf
-               ( ::cAlias )->( DbGoTo( nRecNo ) )
-               ::GoPos(nOldRow, nOldCol)
-            ENDIF
+         ENDIF
 
-            ::nAt := nAt
+      NEXT
 
-            IF lActivate
-               ShellExecute( 0, "Open", If( lSave, cFile, cWork ),,, 3 )
-            ENDIF
+      nSkip := ::Skip( 1 )
 
-            ::Display()
+      ++nLine
+      SysRefresh()
+      IF nSkip ==0
+         EXIT
+      ENDIF
+   NEXT
 
-            RETURN NIL
+   FWrite( nHandle, BiffRec( 10 ) )
+   FClose( nHandle )
 
-            * ============================================================================
-            * METHOD TSBrowse:ExcelOle() Version 9.0 Nov/30/2009
-            * Requires TOleAuto class
-            * Many thanks to Victor Manuel Tomás for the core of this method
-            * ============================================================================
+   IF hProgress != Nil
+      SendMessage(hProgress, PBM_SETPOS, nTotal, 0)
+   ENDIF
+
+   IF lSave
+      FileRename( Self, cWork, cFile )
+   ENDIF
+
+   CursorArrow()
+
+   IF ::lIsDbf
+      ( ::cAlias )->( DbGoTo( nRecNo ) )
+      ::GoPos(nOldRow, nOldCol)
+   ENDIF
+
+   ::nAt := nAt
+
+   IF lActivate
+      ShellExecute( 0, "Open", If( lSave, cFile, cWork ),,, 3 )
+   ENDIF
+
+   ::Display()
+
+   RETURN NIL
+
+   * ============================================================================
+   * METHOD TSBrowse:ExcelOle() Version 9.0 Nov/30/2009
+   * Requires TOleAuto class
+   * Many thanks to Victor Manuel Tomás for the core of this method
+   * ============================================================================
 
 METHOD ExcelOle( cXlsFile, lActivate, hProgress, cTitle, hFont, lSave, bExtern, aColSel, bPrintRow ) CLASS TSBrowse
 

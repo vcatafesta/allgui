@@ -16,11 +16,11 @@ FUNCTION Main ()
    MENU OF oMain
    MENUITEM "&Exit" ACTION oMain:Close()
    MENUITEM "&Demo" ACTION Calculator()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION calculator( )
 

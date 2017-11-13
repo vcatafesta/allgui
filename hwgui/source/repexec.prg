@@ -290,14 +290,14 @@ FUNCTION PrintReport( printerName, oPrn, lPreview )
       RETURN .F.
    ENDIF
 
-#ifdef __DEBUG__
+   #ifdef __DEBUG__
    oPrinter:END()
    // Writelog( "Startdoc" )
    // Writelog( "Startpage" )
-#else
+   #else
    oPrinter:StartDoc( lPreview )
    oPrinter:StartPage()
-#endif
+   #endif
 
    DO WHILE .T.
       iItem := 1
@@ -484,9 +484,9 @@ FUNCTION PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc
    y2 := Round( y2 * prnYCoef, 0 )
    // writelog( "PrintItem-2: "+str(x1)+str(y1)+str(x2)+str(y2))
 
-#ifdef __DEBUG__
+   #ifdef __DEBUG__
    // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+Iif(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+Iif(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
-#else
+   #else
    // Writelog( Str(aItem[ITEM_TYPE])+": "+Str(x1)+" "+Str(y1)+" "+Str(x2)+" "+Str(y2)+" "+Iif(aItem[ITEM_TYPE] == TYPE_TEXT,aItem[ITEM_CAPTION]+Iif(aItem[ITEM_VAR]>0,"("+&( aItem[ITEM_CAPTION] )+")",""),"") )
    IF aItem[ ITEM_TYPE ] == TYPE_TEXT
       IF aItem[ ITEM_VAR ] > 0
@@ -512,7 +512,7 @@ FUNCTION PrintItem( oPrinter, aPaintRep, aItem, prnXCoef, prnYCoef, nYadd, lCalc
       DELETEObject( hBitmap )
       // DrawBitmap( hDC, aItem[ITEM_BITMAP],SRCAND, x1, y1, x2-x1+1, y2-y1+1 )
    ENDIF
-#endif
+   #endif
 
    RETURN NIL
 

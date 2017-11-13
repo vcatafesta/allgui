@@ -47,27 +47,27 @@ FUNCTION Main
    MENUITEM "&Test in Preview        " ACTION TestPreview()
    SEPARATOR
    MENUITEM "&Exit" ACTION hwg_EndWindow()
-ENDMENU
+   ENDMENU
 
-MENU TITLE "T&est to Print"
-MENUITEM "&Print DOS CLASS"     ACTION TestDosClass()
-MENUITEM "&CLASS Style Clipper" ACTION TestDosClipper()
-MENUITEM "&Print in DeskJet   " ACTION DeskJet("LPT2")
+   MENU TITLE "T&est to Print"
+   MENUITEM "&Print DOS CLASS"     ACTION TestDosClass()
+   MENUITEM "&CLASS Style Clipper" ACTION TestDosClipper()
+   MENUITEM "&Print in DeskJet   " ACTION DeskJet("LPT2")
 
-ENDMENU
-MENU TITLE "Te&st to WinPrinters"
-MENUITEM "&Using Select   "        ACTION TestDosClass("SELECT")
-MENUITEM "U&sing Default Printerr" ACTION TestDosClipper("DEFAULT")
-ENDMENU
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION hwg_Shellabout("Test PrintDos","By Sandro R. R. Freire")
-ENDMENU
+   ENDMENU
+   MENU TITLE "Te&st to WinPrinters"
+   MENUITEM "&Using Select   "        ACTION TestDosClass("SELECT")
+   MENUITEM "U&sing Default Printerr" ACTION TestDosClipper("DEFAULT")
+   ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION hwg_Shellabout("Test PrintDos","By Sandro R. R. Freire")
+   ENDMENU
 
-ENDMENU
+   ENDMENU
 
-oMain:Activate()
+   oMain:Activate()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION TestDosClass(oTest)
 

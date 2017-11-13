@@ -41,11 +41,13 @@ CLASS HObject
 
    DATA aObjects     INIT { }
 
-   METHOD AddObject( oCtrl ) INLINE AAdd( ::aObjects, oCtrl )
-   METHOD DelObject( oCtrl )
-   METHOD Release()  INLINE ::DelObject( Self )
+METHOD AddObject( oCtrl ) INLINE AAdd( ::aObjects, oCtrl )
 
-   ENDCLASS
+METHOD DelObject( oCtrl )
+
+METHOD Release()  INLINE ::DelObject( Self )
+
+ENDCLASS
 
 METHOD DelObject( oCtrl ) CLASS HObject
 
@@ -62,8 +64,9 @@ METHOD DelObject( oCtrl ) CLASS HObject
 
 CLASS HCustomWindow INHERIT HObject
 
-   CLASS VAR oDefaultParent SHARED
-   CLASS VAR WindowsManifest INIT !EMPTY(hwg_Findresource( , 1 , RT_MANIFEST ) ) SHARED
+CLASS VAR oDefaultParent SHARED
+
+CLASS VAR WindowsManifest INIT !EMPTY(hwg_Findresource( , 1 , RT_MANIFEST ) ) SHARED
 
    DATA handle        INIT 0
    DATA oParent
@@ -101,23 +104,37 @@ CLASS HCustomWindow INHERIT HObject
 
    DATA lClosable     INIT .T. //disable Menu and Button Close in WINDOW
 
-   METHOD AddControl( oCtrl ) INLINE AAdd( ::aControls, oCtrl )
-   METHOD DelControl( oCtrl )
-   METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName )
-   METHOD FindControl( nId, nHandle )
-   METHOD Hide()              INLINE ( ::lHide := .T., hwg_Hidewindow( ::handle ) )
-   METHOD Show( nShow )       INLINE ( ::lHide := .F., hwg_Showwindow( ::handle, nShow )  )
-   METHOD Move( x1, y1, width, height, nRePaint )
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD END()
-   METHOD SetColor( tcolor, bColor, lRepaint )
-   METHOD Refresh( lAll, oCtrl )
-   METHOD Anchor( oCtrl, x, y, w, h )
-   METHOD SetTextClass ( x ) HIDDEN
-   METHOD Closable( lClosable ) SETGET
-   METHOD Release()        INLINE ::DelControl( Self )
+METHOD AddControl( oCtrl ) INLINE AAdd( ::aControls, oCtrl )
 
-   ENDCLASS
+METHOD DelControl( oCtrl )
+
+METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName )
+
+METHOD FindControl( nId, nHandle )
+
+METHOD Hide()              INLINE ( ::lHide := .T., hwg_Hidewindow( ::handle ) )
+
+METHOD Show( nShow )       INLINE ( ::lHide := .F., hwg_Showwindow( ::handle, nShow )  )
+
+METHOD Move( x1, y1, width, height, nRePaint )
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD END()
+
+METHOD SetColor( tcolor, bColor, lRepaint )
+
+METHOD Refresh( lAll, oCtrl )
+
+METHOD Anchor( oCtrl, x, y, w, h )
+
+METHOD SetTextClass ( x ) HIDDEN
+
+METHOD Closable( lClosable ) SETGET
+
+METHOD Release()        INLINE ::DelControl( Self )
+
+ENDCLASS
 
 METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName ) CLASS HCustomWindow
 
@@ -605,11 +622,13 @@ CLASS HScrollArea INHERIT HObject
    DATA nVscrollMax
    DATA nHscrollMax
 
-   METHOD ResetScrollbars()
-   METHOD SetupScrollbars()
-   METHOD RedefineScrollbars()
+METHOD ResetScrollbars()
 
-   ENDCLASS
+METHOD SetupScrollbars()
+
+METHOD RedefineScrollbars()
+
+ENDCLASS
 
 METHOD RedefineScrollbars() CLASS HScrollArea
 

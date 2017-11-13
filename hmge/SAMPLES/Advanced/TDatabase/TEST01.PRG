@@ -46,39 +46,39 @@ FUNCTION Main()
       END MENU
 
       DEFINE IMAGELIST ImageList_1 ;
-            BUTTONSIZE 24, 24 ;
-            IMAGE { 'tb_24.bmp' } ;
-            COLORMASK CLR_DEFAULT ;
-            IMAGECOUNT 19 ;
-            MASK
+         BUTTONSIZE 24, 24 ;
+         IMAGE { 'tb_24.bmp' } ;
+         COLORMASK CLR_DEFAULT ;
+         IMAGECOUNT 19 ;
+         MASK
 
-         DEFINE SPLITBOX
+      DEFINE SPLITBOX
 
-            DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT
+         DEFINE TOOLBAREX ToolBar_1 BUTTONSIZE 28,28 IMAGELIST 'ImageList_1' FLAT
 
-               BUTTON Btn_Open ;
-                  PICTUREINDEX 0 ;
-                  TOOLTIP 'Browse customer' ;
-                  ACTION Customer()
+         BUTTON Btn_Open ;
+            PICTUREINDEX 0 ;
+            TOOLTIP 'Browse customer' ;
+            ACTION Customer()
 
-               BUTTON Btn_Close ;
-                  PICTUREINDEX 5 ;
-                  TOOLTIP 'Close Active Child Window' ;
-                  ACTION CloseMdi()
+         BUTTON Btn_Close ;
+            PICTUREINDEX 5 ;
+            TOOLTIP 'Close Active Child Window' ;
+            ACTION CloseMdi()
 
-            END TOOLBAR
+      END TOOLBAR
 
-         END SPLITBOX
+   END SPLITBOX
 
-         Form_1.Btn_Close.Enabled := .f.
+   Form_1.Btn_Close.Enabled := .f.
 
-      END WINDOW
+END WINDOW
 
-      CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-      ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-      RETURN NIL
+RETURN NIL
 
 PROCEDURE CloseMdi()
 

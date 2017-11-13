@@ -21,11 +21,11 @@ FUNCTION Main
    MENUITEM "&Get using SetcolorinFocus" ACTION DlgGet(.T.)
    MENUITEM "&Text Ballon" ACTION TestBallon()
    MENUITEM "&Hd Serial  " ACTION hwg_Msginfo( hwg_HdSerial("C:\"),"HD Serial number" )
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION DlgGet(lColor)
 

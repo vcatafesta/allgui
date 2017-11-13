@@ -83,9 +83,9 @@ FUNCTION App_OnPaint( hWnd )
    AlphaBlend( hdc, 200, 100+10, 200, 100, hdc_mem, 0, 0, 200, 100, 255, 1 )
 
    DELETEDC( hdc_mem )
-EndPaint( hWnd, pps )
+   EndPaint( hWnd, pps )
 
-RETURN 0
+   RETURN 0
 
 STATIC PROCEDURE ChangeBkClr( aBackColor )
 

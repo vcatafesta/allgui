@@ -161,42 +161,42 @@ STATIC FUNCTION Borro
    PlayOk()
    IF cTipo='D'
       IF !MsgYesNo(AllTrim(oBaseClie:FieldGet('NOMBRE'))+' es un Cliente DESHABILITADO!, desea Habilitarlo ???','Habilitar Clientes...') ; Return ; EndIf
-      ELSEIF cTipo='H'
-         IF !MsgYesNo(AllTrim(oBaseClie:FieldGet('NOMBRE'))+' es un Cliente HABILITADO!, desea DesHabilitarlo ???','Deshabilitar Clientes...') ; Return ; EndIf
-         ENDIF
-         BEGIN Sequence
-            oQuery:=oServer:Query("START TRANSACTION")
-            IF oQuery:NetErr()
-               MsgStop(oQuery:Error(),'Error de TRANSACTION') ; BREAK
-            ENDIF
-            oQuery:=oServer:Query(cSQL)
-            IF oQuery:NetErr()
-               Msgstop(oQuery:Error(),'Habilitar/deshabilitar Cliente...') ; BREAK
-            ENDIF
-            oQuery:=oServer:Query("COMMIT")
-            IF oQuery:NetErr()
-               Msgstop(oQuery:Error(),'Error en COMMIT') ; BREAK
-            ENDIF
-            oQuery:Destroy()
-            oQuery:=oServer:Query("Select c.NOMBRE, c.CODIGO, c.FECHAEGRE, c.CLIEID From CLIENTES c Order By c.NOMBRE")
-            IF oQuery:NetErr()
-               PlayExclamation() ; MsgExclamation('Error'+chr(13)+oQuery:Error(),'Actualizando Clientes...') ; BREAK
-            ENDIF
-            oBaseClie:oQuery:=oQuery       //Actualizo oBaseClie con el nuevo oQuery -Actualiza automaticamente el WorkArea del xBrowse-
-            oQuery:Gotop()                 //Posiciona el Recno() -provoca una actualizacion del xBrowse desde el 1er.registro-
-            AbmClie.Browse_1.Refresh
-            ArrancoAbmClie()
-         RECOVER
-            oQuery:=oServer:Query("ROLLBACK")
-            IF oQuery:NetErr()
-               Msgstop(oQuery:Error(),'Error en roolback')
-            ENDIF
-            oQuery:Destroy()
-         End
+   ELSEIF cTipo='H'
+      IF !MsgYesNo(AllTrim(oBaseClie:FieldGet('NOMBRE'))+' es un Cliente HABILITADO!, desea DesHabilitarlo ???','Deshabilitar Clientes...') ; Return ; EndIf
+   ENDIF
+   BEGIN Sequence
+      oQuery:=oServer:Query("START TRANSACTION")
+      IF oQuery:NetErr()
+         MsgStop(oQuery:Error(),'Error de TRANSACTION') ; BREAK
+      ENDIF
+      oQuery:=oServer:Query(cSQL)
+      IF oQuery:NetErr()
+         Msgstop(oQuery:Error(),'Habilitar/deshabilitar Cliente...') ; BREAK
+      ENDIF
+      oQuery:=oServer:Query("COMMIT")
+      IF oQuery:NetErr()
+         Msgstop(oQuery:Error(),'Error en COMMIT') ; BREAK
+      ENDIF
+      oQuery:Destroy()
+      oQuery:=oServer:Query("Select c.NOMBRE, c.CODIGO, c.FECHAEGRE, c.CLIEID From CLIENTES c Order By c.NOMBRE")
+      IF oQuery:NetErr()
+         PlayExclamation() ; MsgExclamation('Error'+chr(13)+oQuery:Error(),'Actualizando Clientes...') ; BREAK
+      ENDIF
+      oBaseClie:oQuery:=oQuery       //Actualizo oBaseClie con el nuevo oQuery -Actualiza automaticamente el WorkArea del xBrowse-
+      oQuery:Gotop()                 //Posiciona el Recno() -provoca una actualizacion del xBrowse desde el 1er.registro-
+      AbmClie.Browse_1.Refresh
+      ArrancoAbmClie()
+   RECOVER
+      oQuery:=oServer:Query("ROLLBACK")
+      IF oQuery:NetErr()
+         Msgstop(oQuery:Error(),'Error en roolback')
+      ENDIF
+      oQuery:Destroy()
+   End
 
-         RETURN
+   RETURN
 
-         * Navego() Actualiza el contenido de los TextBox con la Tabla de MySQL         *
+   * Navego() Actualiza el contenido de los TextBox con la Tabla de MySQL         *
 
 STATIC FUNCTION Navego
 

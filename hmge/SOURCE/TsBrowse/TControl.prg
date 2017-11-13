@@ -84,7 +84,7 @@ CLASS TControl
    DATA   aControls  INIT {}                         // New
    DATA   oWndlAppendMode INIT .f.                   // New
 
-CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText",;
+   CLASSDATA aProperties INIT { "cTitle", "cVarName", "nClrText",;
       "nClrPane", "nAlign", "nTop", "nLeft",;
       "nWidth", "nHeight", "Cargo" }
 
@@ -172,7 +172,7 @@ METHOD SuperKeyDown( nKey, nFlags )
    MESSAGE BeginPaint METHOD _BeginPaint()
 
 METHOD EndPaint() INLINE ::nPaintCount--,;
-   EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
+      EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
 
 METHOD Register( nClsStyle )            //TWindow
 
@@ -671,7 +671,7 @@ METHOD Register( nClsStyle )  CLASS TControl
 
    hUser := GetInstance()
 
-ClassName := ::cControlName
+   ClassName := ::cControlName
 
    DEFAULT nClsStyle  := nOr( CS_VREDRAW, CS_HREDRAW ),;
       ::nClrPane := GetSysColor( COLOR_WINDOW ),;

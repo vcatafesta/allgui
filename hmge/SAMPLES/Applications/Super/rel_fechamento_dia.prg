@@ -82,7 +82,7 @@ FUNCTION fechamento_dia()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_relatorio.bmp'
          col form_fechamento.width-255
          row form_fechamento.height-085
@@ -95,7 +95,7 @@ FUNCTION fechamento_dia()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_fechamento.width-100
          row form_fechamento.height-085

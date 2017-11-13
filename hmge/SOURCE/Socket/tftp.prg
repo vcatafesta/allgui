@@ -67,9 +67,9 @@ METHOD Close()
 
 METHOD List()
 
-CLASSDATA oSocket       HIDDEN
-CLASSDATA cHostAddress  HIDDEN
-CLASSDATA nHostPort     HIDDEN
+   CLASSDATA oSocket       HIDDEN
+   CLASSDATA cHostAddress  HIDDEN
+   CLASSDATA nHostPort     HIDDEN
 
 ENDCLASS
 

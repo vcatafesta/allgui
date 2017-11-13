@@ -174,7 +174,7 @@ FUNCTION xValue( cValue, cType )
    CASE cType == "L" ;  xValue := ( cValue == 'T' )
    CASE cType == "T" ;  xValue := SToT( cValue )
    CASE cType == "A" ;  xValue := CToA( cValue )
-   OTHERWISE;           xValue := NIL                     // nil, block, object
+      OTHERWISE;           xValue := NIL                     // nil, block, object
    ENDCASE
 
    RETURN xValue

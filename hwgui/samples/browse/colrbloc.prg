@@ -49,21 +49,21 @@ FUNCTION Main()
    MENU OF oWinMain
    MENU TITLE "&Arquivo"
    MENUITEM "&Sair"              ACTION hwg_EndWindow()
-ENDMENU
-MENU TITLE "&Browse"
-MENUITEM "&Database"           ACTION BrwDbs(.f.)
-MENUITEM "Database &EDITABLE"  ACTION BrwDbs(.t.)
-MENUITEM "Database &Zebra"     ACTION BrwDbs(.f., .T.)
-SEPARATOR
-MENUITEM "&Array"              ACTION BrwArr(.f.)
-MENUITEM "Array E&DITABLE"     ACTION BrwArr(.t.)
-MENUITEM "Array Ze&bra"        ACTION BrwArr(.f., .T.)
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Browse"
+   MENUITEM "&Database"           ACTION BrwDbs(.f.)
+   MENUITEM "Database &EDITABLE"  ACTION BrwDbs(.t.)
+   MENUITEM "Database &Zebra"     ACTION BrwDbs(.f., .T.)
+   SEPARATOR
+   MENUITEM "&Array"              ACTION BrwArr(.f.)
+   MENUITEM "Array E&DITABLE"     ACTION BrwArr(.t.)
+   MENUITEM "Array Ze&bra"        ACTION BrwArr(.f., .T.)
+   ENDMENU
+   ENDMENU
 
-oWinMain:Activate()
+   oWinMain:Activate()
 
-RETURN(NIL)
+   RETURN(NIL)
 
 STATIC FUNCTION BrwDbs( lEdit, lZebra )
 

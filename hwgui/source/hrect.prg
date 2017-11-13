@@ -59,16 +59,18 @@ METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle ) CLASS HRe
 
 CLASS HRect_Line INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
 
    DATA lVert
    DATA oPen
 
-   METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor )
-   METHOD Activate()
-   METHOD Paint( lpDis )
+METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Paint( lpDis )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor ) CLASS HRect_Line
 
@@ -118,10 +120,10 @@ METHOD Paint( lpdis ) CLASS HRect_Line
 
 CLASS HShape INHERIT HControl
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
-         nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle )  //, bClick, bDblClick)
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
+      nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle )  //, bClick, bDblClick)
 
-   ENDCLASS
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
       nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle ) CLASS HShape
@@ -136,9 +138,9 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, 
 
 CLASS HLContainer INHERIT HControl
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit )  //, bClick, bDblClick)
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit )  //, bClick, bDblClick)
 
-   ENDCLASS
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit ) CLASS HLContainer
 
@@ -149,7 +151,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBor
 
 CLASS HDrawShape INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
 
    DATA oPen, oBrush
    DATA ncStyle, nbStyle, nfStyle
@@ -158,15 +160,20 @@ CLASS HDrawShape INHERIT HControl
    DATA brushFill
    DATA bClick, bDblClick
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
-         lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )
-   METHOD Activate()
-   METHOD Paint( lpDis )
-   METHOD SetColor( tcolor, bcolor, lRedraw )
-   METHOD Curvature( nCurvature )
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
+      lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )
+
+METHOD Activate()
+
+METHOD Paint( lpDis )
+
+METHOD SetColor( tcolor, bcolor, lRedraw )
+
+METHOD Curvature( nCurvature )
+
    //METHOD Refresh() INLINE hwg_Sendmessage( ::handle, WM_PAINT, 0, 0 ), hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
 
-   ENDCLASS
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
       lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )  CLASS HDrawShape
@@ -285,7 +292,7 @@ FUNCTION hwg_Rect( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nST )
 
 CLASS HContainer INHERIT HControl, HScrollArea
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
 
    DATA oPen, oBrush
    DATA ncStyle   INIT 3
@@ -297,16 +304,22 @@ CLASS HContainer INHERIT HControl, HScrollArea
    DATA xVisible  INIT .T. HIDDEN
    DATA lTABSTOP INIT .F. HIDDEN
 
-   METHOD New( oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
-         lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther)  //, bClick, bDblClick)
-   METHOD Activate()
-   METHOD Init()
-   METHOD Create( ) INLINE ::lCreate := .T.
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Paint( lpDis )
-   METHOD Visible( lVisibled ) SETGET
+METHOD New( oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
+      lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther)  //, bClick, bDblClick)
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD Create( ) INLINE ::lCreate := .T.
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Paint( lpDis )
+
+METHOD Visible( lVisibled ) SETGET
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
       lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)

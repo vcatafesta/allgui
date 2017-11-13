@@ -57,49 +57,49 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,
       bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor ) CLASS HComboBox
 
    IF lEdit == Nil; lEdit := .f.; endif
-      IF lText == Nil; lText := .f.; endif
+   IF lText == Nil; lText := .f.; endif
 
-         nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),Iif( lEdit,CBS_DROPDOWN,CBS_DROPDOWNLIST )+WS_TABSTOP )
-         ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctoolt,tcolor,bcolor )
+   nStyle := Hwg_BitOr( Iif( nStyle==Nil,0,nStyle ),Iif( lEdit,CBS_DROPDOWN,CBS_DROPDOWNLIST )+WS_TABSTOP )
+   ::Super:New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,bInit, bSize,bPaint,ctoolt,tcolor,bcolor )
 
-         ::lEdit := lEdit
-         ::lText := lText
+   ::lEdit := lEdit
+   ::lText := lText
 
-         IF lEdit
-            ::lText := .t.
-         ENDIF
+   IF lEdit
+      ::lText := .t.
+   ENDIF
 
-         IF ::lText
-            ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
-         ELSE
-            ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
-         ENDIF
+   IF ::lText
+      ::value := Iif( vari==Nil .OR. Valtype(vari)!="C","",vari )
+   ELSE
+      ::value := Iif( vari==Nil .OR. Valtype(vari)!="N",1,vari )
+   ENDIF
 
-         ::bSetGet := bSetGet
-         ::aItems  := aItems
+   ::bSetGet := bSetGet
+   ::aItems  := aItems
 
-         ::Activate()
-         /*
-         IF bSetGet != Nil
-         ::bChangeSel := bChange
-         ::bGetFocus  := bGFocus
-         ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
-         ::oParent:AddEvent( CBN_SELCHANGE,::id,{|o,id|__Valid(o:FindControl(id))} )
-         ELSEIF bChange != Nil
-         ::oParent:AddEvent( CBN_SELCHANGE,::id,bChange )
-         ENDIF
+   ::Activate()
+   /*
+   IF bSetGet != Nil
+   ::bChangeSel := bChange
+   ::bGetFocus  := bGFocus
+   ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
+   ::oParent:AddEvent( CBN_SELCHANGE,::id,{|o,id|__Valid(o:FindControl(id))} )
+   ELSEIF bChange != Nil
+   ::oParent:AddEvent( CBN_SELCHANGE,::id,bChange )
+   ENDIF
 
-         IF bGFocus != Nil .AND. bSetGet == Nil
-         ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
-         ENDIF
-         */
-         ::bGetFocus := bGFocus
-         ::bLostFocus := bChange
+   IF bGFocus != Nil .AND. bSetGet == Nil
+   ::oParent:AddEvent( CBN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
+   ENDIF
+   */
+   ::bGetFocus := bGFocus
+   ::bLostFocus := bChange
 
-         hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS,0,0 )
-         hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS,0,0 )
+   hwg_SetEvent( ::hEdit,"focus_in_event",EN_SETFOCUS,0,0 )
+   hwg_SetEvent( ::hEdit,"focus_out_event",EN_KILLFOCUS,0,0 )
 
-         RETURN Self
+   RETURN Self
 
 METHOD Activate CLASS HComboBox
 

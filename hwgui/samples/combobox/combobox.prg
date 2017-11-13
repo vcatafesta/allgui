@@ -18,11 +18,11 @@ FUNCTION Main ()
    MENUITEM "&Exit" ACTION oMain:Close()
    MENUITEM "&Demo" ACTION Test()
    MENUITEM "&Bound demo" ACTION BoundTest()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMain
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test ()
 

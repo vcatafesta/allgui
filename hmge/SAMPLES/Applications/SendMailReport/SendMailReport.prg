@@ -1013,14 +1013,14 @@ STATIC PROCEDURE SaveData(out)
          NEXT i
 
       END INI
-   endi
-   aGet[12] := CHARXOR( aGet[12], cCryptKey )
-   lchg := .F.
-   SaveEnable()
+      endi
+      aGet[12] := CHARXOR( aGet[12], cCryptKey )
+      lchg := .F.
+      SaveEnable()
 
-   RETURN
-   /*
-   */
+      RETURN
+      /*
+      */
 
 PROCEDURE SaveEnable(nogui)
 

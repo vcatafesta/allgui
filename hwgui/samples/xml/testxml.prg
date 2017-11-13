@@ -39,16 +39,16 @@ FUNCTION Main
       SEPARATOR
    ENDIF
    MENUITEM "Exit" ACTION hwg_EndWindow()
-ENDMENU
+   ENDMENU
 
-MENU TITLE "Help"
-MENUITEM "About" ACTION hwg_Shellabout("","")
-ENDMENU
-ENDMENU
+   MENU TITLE "Help"
+   MENUITEM "About" ACTION hwg_Shellabout("","")
+   ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION NewItem( nItem )
 

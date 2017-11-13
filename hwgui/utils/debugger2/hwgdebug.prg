@@ -104,116 +104,116 @@ FUNCTION Main( ... )
    SEPARATOR
    MENUITEM "&Close debugger" ID MENU_EXIT ACTION DoCommand( CMD_EXIT )
    MENUITEM "&Exit and terminate program" ID MENU_QUIT ACTION DoCommand( CMD_QUIT )
-ENDMENU
-MENU TITLE "&Locate"
-MENUITEM "&Find"+Chr(9)+"Ctrl+F" ACTION Locate( 0 ) ACCELERATOR FCONTROL,Asc("F")
-MENUITEM "&Next" +Chr(9)+"F3" ACTION Locate( 1 ) ACCELERATOR 0,VK_F3
-MENUITEM "&Previous" ACTION Locate( -1 )
-SEPARATOR
-MENUITEM "Functions &list" ACTION Funclist()
-ENDMENU
-MENU ID MENU_VIEW TITLE "&View"
-MENUITEM "&Stack" ID MENU_STACK ACTION StackToggle()
-MENUITEM "&Local vars" ID MENU_LOCAL ACTION LocalsToggle()
-MENUITEM "&Watches" ID MENU_WATCH ACTION WatchesToggle()
-SEPARATOR
-MENUITEM "Work&Areas"+Chr(9)+"F6" ACTION AreasToggle() ACCELERATOR 0,VK_F6
-ENDMENU
-MENU ID MENU_RUN TITLE "&Run"
-MENUITEM "&Animate" ACTION Animate()
-MENUITEM "&Go"+Chr(9)+"F5" ACTION DoCommand( CMD_GO ) ACCELERATOR 0,VK_F5
-MENUITEM "&Step"+Chr(9)+"F8" ACTION DoCommand( CMD_STEP ) ACCELERATOR 0,VK_F8
-MENUITEM "To &cursor"+Chr(9)+"F7" ACTION DoCommand( CMD_TOCURS ) ACCELERATOR 0,VK_F7
-MENUITEM "&Trace"+Chr(9)+"F10" ACTION DoCommand( CMD_TRACE ) ACCELERATOR 0,VK_F10
-MENUITEM "&Next Routine"+Chr(9)+"Ctrl+F5" ACTION DoCommand( CMD_NEXTR ) ACCELERATOR FCONTROL,VK_F5
-ENDMENU
-MENU ID MENU_BRP TITLE "&BreakPoints"
-MENUITEM "&Add"+Chr(9)+"F9" ACTION AddBreakPoint() ACCELERATOR 0,VK_F9
-MENUITEM "&Delete"+Chr(9)+"F9" ACTION AddBreakPoint()
-ENDMENU
-MENU TITLE "&Options"
-MENUITEM "&Font" ACTION SetFont()
-SEPARATOR
-MENUITEM "&Save Settings" ACTION SaveIni()
-ENDMENU
-MENUITEM "&About" ACTION About()
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Locate"
+   MENUITEM "&Find"+Chr(9)+"Ctrl+F" ACTION Locate( 0 ) ACCELERATOR FCONTROL,Asc("F")
+   MENUITEM "&Next" +Chr(9)+"F3" ACTION Locate( 1 ) ACCELERATOR 0,VK_F3
+   MENUITEM "&Previous" ACTION Locate( -1 )
+   SEPARATOR
+   MENUITEM "Functions &list" ACTION Funclist()
+   ENDMENU
+   MENU ID MENU_VIEW TITLE "&View"
+   MENUITEM "&Stack" ID MENU_STACK ACTION StackToggle()
+   MENUITEM "&Local vars" ID MENU_LOCAL ACTION LocalsToggle()
+   MENUITEM "&Watches" ID MENU_WATCH ACTION WatchesToggle()
+   SEPARATOR
+   MENUITEM "Work&Areas"+Chr(9)+"F6" ACTION AreasToggle() ACCELERATOR 0,VK_F6
+   ENDMENU
+   MENU ID MENU_RUN TITLE "&Run"
+   MENUITEM "&Animate" ACTION Animate()
+   MENUITEM "&Go"+Chr(9)+"F5" ACTION DoCommand( CMD_GO ) ACCELERATOR 0,VK_F5
+   MENUITEM "&Step"+Chr(9)+"F8" ACTION DoCommand( CMD_STEP ) ACCELERATOR 0,VK_F8
+   MENUITEM "To &cursor"+Chr(9)+"F7" ACTION DoCommand( CMD_TOCURS ) ACCELERATOR 0,VK_F7
+   MENUITEM "&Trace"+Chr(9)+"F10" ACTION DoCommand( CMD_TRACE ) ACCELERATOR 0,VK_F10
+   MENUITEM "&Next Routine"+Chr(9)+"Ctrl+F5" ACTION DoCommand( CMD_NEXTR ) ACCELERATOR FCONTROL,VK_F5
+   ENDMENU
+   MENU ID MENU_BRP TITLE "&BreakPoints"
+   MENUITEM "&Add"+Chr(9)+"F9" ACTION AddBreakPoint() ACCELERATOR 0,VK_F9
+   MENUITEM "&Delete"+Chr(9)+"F9" ACTION AddBreakPoint()
+   ENDMENU
+   MENU TITLE "&Options"
+   MENUITEM "&Font" ACTION SetFont()
+   SEPARATOR
+   MENUITEM "&Save Settings" ACTION SaveIni()
+   ENDMENU
+   MENUITEM "&About" ACTION About()
+   ENDMENU
 
-@ 0,0 BROWSE oBrwText ARRAY SIZE 600,436  ;
-   FONT oMainFont STYLE WS_BORDER+WS_VSCROLL ;
-   ON SIZE {|o,x,y|o:Move(,,x,y-108)}
+   @ 0,0 BROWSE oBrwText ARRAY SIZE 600,436  ;
+      FONT oMainFont STYLE WS_BORDER+WS_VSCROLL ;
+      ON SIZE {|o,x,y|o:Move(,,x,y-108)}
 
-oBrwText:aArray := {}
+   oBrwText:aArray := {}
 
-oBrwText:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==nCurrLine,'>',Iif(getBP(o:nCurrent)!=0,'#',' '))},"C",2,0 ) )
-oBrwText:aColumns[1]:oFont := oMainFont:SetFontStyle( .T. )
-oBrwText:aColumns[1]:bColorBlock := {||Iif(getBP(oBrwText:nCurrent)!=0, { 65535, 255, 16777215, 255 }, { oBrwText:tColor, oBrwText:bColor, oBrwText:tColorSel, oBrwText:bColorSel } )}
+   oBrwText:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==nCurrLine,'>',Iif(getBP(o:nCurrent)!=0,'#',' '))},"C",2,0 ) )
+   oBrwText:aColumns[1]:oFont := oMainFont:SetFontStyle( .T. )
+   oBrwText:aColumns[1]:bColorBlock := {||Iif(getBP(oBrwText:nCurrent)!=0, { 65535, 255, 16777215, 255 }, { oBrwText:tColor, oBrwText:bColor, oBrwText:tColorSel, oBrwText:bColorSel } )}
 
-oBrwText:AddColumn( HColumn():New( "",{|v,o|o:nCurrent},"N",5,0 ) )
-oBrwText:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent]},"C",80,0 ) )
+   oBrwText:AddColumn( HColumn():New( "",{|v,o|o:nCurrent},"N",5,0 ) )
+   oBrwText:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent]},"C",80,0 ) )
 
-oBrwText:bEnter:= {||AddBreakPoint()}
-oBrwText:lDispHead := .F.
-oBrwText:bcolorSel := oBrwText:htbcolor := CLR_LGREEN
-oBrwText:tcolorSel := 0
+   oBrwText:bEnter:= {||AddBreakPoint()}
+   oBrwText:lDispHead := .F.
+   oBrwText:bcolorSel := oBrwText:htbcolor := CLR_LGREEN
+   oBrwText:tcolorSel := 0
 
-@ 4,444 BROWSE oBrwRes ARRAY SIZE 592,72 STYLE WS_BORDER + WS_VSCROLL ;
-   ON SIZE {|o,x,y|o:Move(,y-104,x-8)}
+   @ 4,444 BROWSE oBrwRes ARRAY SIZE 592,72 STYLE WS_BORDER + WS_VSCROLL ;
+      ON SIZE {|o,x,y|o:Move(,y-104,x-8)}
 
-oBrwRes:aArray := {}
-oBrwRes:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,1]},"C",80,0 ) )
-oBrwRes:lDispHead := .F.
-oBrwRes:bcolor := CLR_LIGHT1
-oBrwRes:bcolorSel := oBrwRes:htbcolor := CLR_LGREEN
-oBrwRes:tcolorSel := oBrwRes:httcolor := 0
-oBrwRes:bEnter := {|o| Iif( o:nCurrent>0.AND.o:nCurrent<=o:nRecords,oEditExpr:SetText(o:aArray[o:nCurrent,2]),.T. ) }
+   oBrwRes:aArray := {}
+   oBrwRes:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,1]},"C",80,0 ) )
+   oBrwRes:lDispHead := .F.
+   oBrwRes:bcolor := CLR_LIGHT1
+   oBrwRes:bcolorSel := oBrwRes:htbcolor := CLR_LGREEN
+   oBrwRes:tcolorSel := oBrwRes:httcolor := 0
+   oBrwRes:bEnter := {|o| Iif( o:nCurrent>0.AND.o:nCurrent<=o:nRecords,oEditExpr:SetText(o:aArray[o:nCurrent,2]),.T. ) }
 
-@ 4,516 SAY oSayState CAPTION "" SIZE 80,28 STYLE WS_BORDER+SS_CENTER ON SIZE {|o,x,y|o:Move(,y-32)}
-SET KEY 0,VK_RETURN TO KeyPress( VK_RETURN )
-SET KEY 0,VK_UP TO KeyPress( VK_UP )
-SET KEY 0,VK_DOWN TO KeyPress( VK_DOWN )
-@ 84,516 EDITBOX oEditExpr CAPTION "" ID EDIT_RES SIZE 452,26 STYLE ES_AUTOHSCROLL ON SIZE {|o,x,y|o:Move(,y-32,x-148)}
+   @ 4,516 SAY oSayState CAPTION "" SIZE 80,28 STYLE WS_BORDER+SS_CENTER ON SIZE {|o,x,y|o:Move(,y-32)}
+   SET KEY 0,VK_RETURN TO KeyPress( VK_RETURN )
+   SET KEY 0,VK_UP TO KeyPress( VK_UP )
+   SET KEY 0,VK_DOWN TO KeyPress( VK_DOWN )
+   @ 84,516 EDITBOX oEditExpr CAPTION "" ID EDIT_RES SIZE 452,26 STYLE ES_AUTOHSCROLL ON SIZE {|o,x,y|o:Move(,y-32,x-148)}
 
-@ 536,516 BUTTON "-" SIZE 24, 14 ON CLICK {||PrevExpr(1)} ON SIZE {|o,x,y|o:Move(x-64,y-32)}
-@ 536,530 BUTTON "-" SIZE 24, 14 ON CLICK {||PrevExpr(-1)} ON SIZE {|o,x,y|o:Move(x-64,y-18)}
-@ 560,516 BUTTON oBtnExp CAPTION "Ok" SIZE 36, 28 ON CLICK {||Calc()} ON SIZE {|o,x,y|o:Move(x-40,y-32)}
+   @ 536,516 BUTTON "-" SIZE 24, 14 ON CLICK {||PrevExpr(1)} ON SIZE {|o,x,y|o:Move(x-64,y-32)}
+   @ 536,530 BUTTON "-" SIZE 24, 14 ON CLICK {||PrevExpr(-1)} ON SIZE {|o,x,y|o:Move(x-64,y-18)}
+   @ 560,516 BUTTON oBtnExp CAPTION "Ok" SIZE 36, 28 ON CLICK {||Calc()} ON SIZE {|o,x,y|o:Move(x-40,y-32)}
 
-SetMode( MODE_INIT )
+   SetMode( MODE_INIT )
 
-cBuffer := Space( BUFF_LEN )
+   cBuffer := Space( BUFF_LEN )
 
-FOR i := 1 TO Len( aParams)
-   IF Left( aParams[i],1 ) == "-"
-      IF Left( aParams[i],2 ) == "-c"
-         cFile := Substr( aParams[i], 3 )
-      ELSEIF Left( aParams[i],2 ) == "-w"
-         cDirWait := Substr( aParams[i], 3 )
+   FOR i := 1 TO Len( aParams)
+      IF Left( aParams[i],1 ) == "-"
+         IF Left( aParams[i],2 ) == "-c"
+            cFile := Substr( aParams[i], 3 )
+         ELSEIF Left( aParams[i],2 ) == "-w"
+            cDirWait := Substr( aParams[i], 3 )
+         ENDIF
+      ELSE
+         cExe := aParams[i]
       ENDIF
-   ELSE
-      cExe := aParams[i]
+   NEXT
+
+   IF !Empty( cFile )
+      hwg_Enablemenuitem( ,MENU_INIT, .F., .T. )
+      handl1 := FOpen( cFile + ".d1", FO_READWRITE + FO_SHARED )
+      handl2 := FOpen( cFile + ".d2", FO_READ + FO_SHARED )
+      IF handl1 != -1 .AND. handl2 != -1
+      ELSE
+         handl1 := handl2 := -1
+         hwg_MsgStop( "No connection" )
+      ENDIF
+   ELSEIF !Empty( cExe )
+      DebugNewExe( cExe )
+   ELSEIF !Empty( cDirWait )
+      WAIT4Conn( cDirWait )
    ENDIF
-NEXT
 
-IF !Empty( cFile )
-   hwg_Enablemenuitem( ,MENU_INIT, .F., .T. )
-   handl1 := FOpen( cFile + ".d1", FO_READWRITE + FO_SHARED )
-   handl2 := FOpen( cFile + ".d2", FO_READ + FO_SHARED )
-   IF handl1 != -1 .AND. handl2 != -1
-   ELSE
-      handl1 := handl2 := -1
-      hwg_MsgStop( "No connection" )
-   ENDIF
-ELSEIF !Empty( cExe )
-   DebugNewExe( cExe )
-ELSEIF !Empty( cDirWait )
-   WAIT4Conn( cDirWait )
-ENDIF
+   SET TIMER oTimer OF oMainW VALUE 30 ACTION {||TimerProc()}
 
-SET TIMER oTimer OF oMainW VALUE 30 ACTION {||TimerProc()}
+   ACTIVATE WINDOW oMainW
 
-ACTIVATE WINDOW oMainW
-
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ReadIni( cDir )
 
@@ -713,29 +713,29 @@ STATIC FUNCTION SetBrwText( cName, lClear )
 
    IF cName == Nil; cName := cPrgName; ENDIF
 
-      IF File( cName ) .AND. !Empty( cBuff := MemoRead( cName ) )
-         IF !( cNewLine $ cBuff )
-            cNewLine := Chr(10)
-         ENDIF
-         cCurrPath := FilePath( cName )
-         cPrgName := CutPath( cName )
-         oBrwText:aArray := hb_aTokens( cBuff, cNewLine )
-         FOR i := 1 TO Len( oBrwText:aArray )
-            IF Chr(9) $ oBrwText:aArray[i]
-               oBrwText:aArray[i] := StrTran( oBrwText:aArray[i], Chr(9), Space(4) )
-            ENDIF
-         NEXT
-         hwg_Invalidaterect( oBrwText:handle, 1 )
-         oBrwText:Refresh()
-
-         RETURN .T.
-      ELSEIF !Empty( lClear )
-         oBrwText:aArray := {}
-         hwg_Invalidaterect( oBrwText:handle, 1 )
-         oBrwText:Refresh()
+   IF File( cName ) .AND. !Empty( cBuff := MemoRead( cName ) )
+      IF !( cNewLine $ cBuff )
+         cNewLine := Chr(10)
       ENDIF
+      cCurrPath := FilePath( cName )
+      cPrgName := CutPath( cName )
+      oBrwText:aArray := hb_aTokens( cBuff, cNewLine )
+      FOR i := 1 TO Len( oBrwText:aArray )
+         IF Chr(9) $ oBrwText:aArray[i]
+            oBrwText:aArray[i] := StrTran( oBrwText:aArray[i], Chr(9), Space(4) )
+         ENDIF
+      NEXT
+      hwg_Invalidaterect( oBrwText:handle, 1 )
+      oBrwText:Refresh()
 
-      RETURN .F.
+      RETURN .T.
+   ELSEIF !Empty( lClear )
+      oBrwText:aArray := {}
+      hwg_Invalidaterect( oBrwText:handle, 1 )
+      oBrwText:Refresh()
+   ENDIF
+
+   RETURN .F.
 
 STATIC FUNCTION PrevExpr( nDirection )
 
@@ -977,30 +977,30 @@ STATIC FUNCTION WatchesToggle()
       MENU OF oWatchDlg
       MENUITEM "&Add" ACTION WatchAdd()
       MENUITEM "&Delete" ACTION WatchDel()
-   ENDMENU
+      ENDMENU
 
-   @ 0,0 BROWSE oBrw ARRAY OF oWatchDlg     ;
-      SIZE 340,120                       ;
-      FONT HWindow():GetMain():oFont     ;
-      STYLE WS_VSCROLL                   ;
-      ON SIZE {|o,x,y|o:Move(0,0,x,y)}
+      @ 0,0 BROWSE oBrw ARRAY OF oWatchDlg     ;
+         SIZE 340,120                       ;
+         FONT HWindow():GetMain():oFont     ;
+         STYLE WS_VSCROLL                   ;
+         ON SIZE {|o,x,y|o:Move(0,0,x,y)}
 
-   oBrw:aArray := aWatches
-   oBrw:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,1]},"C",16,0 ) )
-   oBrw:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,2]},"C",60,0 ) )
+      oBrw:aArray := aWatches
+      oBrw:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,1]},"C",16,0 ) )
+      oBrw:AddColumn( HColumn():New( "",{|v,o|o:aArray[o:nCurrent,2]},"C",60,0 ) )
 
-   oBrw:bcolorSel := oBrw:htbcolor := CLR_LGREEN
-   oBrw:tcolorSel := oBrw:httcolor := 0
+      oBrw:bcolorSel := oBrw:htbcolor := CLR_LGREEN
+      oBrw:tcolorSel := oBrw:httcolor := 0
 
-   ACTIVATE DIALOG oWatchDlg NOMODAL
+      ACTIVATE DIALOG oWatchDlg NOMODAL
 
-   Send( "view", "watch", "on" )
-   nAnsType := ANS_WATCH
-   SetMode( MODE_WAIT_ANS )
-   hwg_Checkmenuitem( ,MENU_WATCH, .T. )
-ENDIF
+      Send( "view", "watch", "on" )
+      nAnsType := ANS_WATCH
+      SetMode( MODE_WAIT_ANS )
+      hwg_Checkmenuitem( ,MENU_WATCH, .T. )
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 STATIC FUNCTION ShowWatch( arr, n )
 

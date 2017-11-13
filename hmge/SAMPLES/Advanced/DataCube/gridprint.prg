@@ -38,7 +38,7 @@ INIT PROCEDURE _InitPrintGrid
 
 PROCEDURE MyGridPrint (  cWindowName , cControlName , MethodName )
 
-MethodName := Nil
+   MethodName := Nil
 
    IF GetControlType ( cControlName , cWindowName ) == 'GRID'
 
@@ -857,142 +857,142 @@ FUNCTION printstart
                         data1 := substr(data1,nextline[count2]+1,len(data1))
                         IF printLen(AllTrim(data1),size1,fontname) <= size
                            aadd(printdata,alltrim(data1))
+                           NEXTline[count2] := 0
+                        ELSE // there are further lines!
+                           COUNT3 := len(data1)
+                           DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
+                              COUNT3 := count3 - 1
+                           ENDDO
+                           data1 := substr(data1,1,count3)
+                           IF rat(" ",data1) > 0
+                              COUNT3 := rat(" ",data1)
+                           ENDIF
+                           AAdd(printdata,substr(data1,1,count3))
+                           NEXTline[count2] := nextline[count2]+count3
+                        ENDIF
+                     ELSE
+                        AAdd(printdata,"")
                         NEXTline[count2] := 0
-                     ELSE // there are further lines!
+                     ENDIF
+                  ENDIF
+               NEXT count2
+               printline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
+               Row := Row + lh
+               dataprintover := .t.
+               FOR count2 := 1 to len(nextline)
+                  IF nextline[count2] > 0
+                     dataprintover := .f.
+                  ENDIF
+               NEXT count2
+            ENDDO
+
+            IF Row+lh >= maxrow1
+               @ Row,Col-1 print line TO Row,col+maxcol1-1  penwidth 0.25
+               lastrow := Row
+               totcol := 0
+               @ firstrow,Col-1 print line TO lastrow,Col-1  penwidth 0.25
+               IF printgrid.collines.value
+                  colcount := 0
+                  FOR count2 := 1 to len(columnarr)
+                     IF columnarr[count2,1] == 1
+                        totcol := totcol + columnarr[count2,3]
+                        colcount := colcount + 1
+                        @ firstrow,col+totcol+(colcount * 2)-1 print line TO lastrow,col+totcol+(colcount * 2)-1 penwidth 0.25
+                     ENDIF
+                  NEXT count2
+               ENDIF
+               @ firstrow,col+maxcol1-1 print line TO lastrow,col+maxcol1-1 penwidth 0.25
+               IF Len(AllTrim(printgrid.footer1.value)) > 0
+                  @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
+                  row := row + lh + lh
+               ENDIF
+               IF printgrid.pageno.value == 3
+                  Row := Row + lh
+                  @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
+               ENDIF
+            END PRINTPAGE
+            pageno := pageno + 1
+            row := printgrid.top.value
+            START PRINTPAGE
+               IF printgrid.pageno.value == 2
+                  @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
+                  row := row + lh
+               ENDIF
+               IF Len(AllTrim(printgrid.header1.value)) > 0
+                  @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header1.value) font fontname size size1+2 center
+                  row := row + lh + lh
+               ENDIF
+               IF Len(AllTrim(printgrid.header2.value)) > 0
+                  @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header2.value) font fontname size size1+2 center
+                  row := row + lh + lh
+               ENDIF
+               IF Len(AllTrim(printgrid.header3.value)) > 0
+                  @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header3.value) font fontname size size1+2 center
+                  row := row + lh + lh
+               ENDIF
+
+               firstrow := Row
+               @ Row ,Col-1  print line TO Row ,col+maxcol1-1 penwidth 0.25
+               ASize(printdata,0)
+               ASize(justifyarr,0)
+               asize(sizesarr,0)
+               FOR count2 := 1 TO Len(columnarr)
+                  IF columnarr[count2,1] == 1
+                     size := columnarr[count2,3]
+                     data1 := columnarr[count2,2]
+                     IF printLen(AllTrim(data1),size1,fontname) <= size
+                        AAdd(printdata,alltrim(data1))
+                     ELSE // header size bigger than column! truncated as of now.
                         COUNT3 := len(data1)
                         DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
                            COUNT3 := count3 - 1
                         ENDDO
-                        data1 := substr(data1,1,count3)
-                        IF rat(" ",data1) > 0
-                           COUNT3 := rat(" ",data1)
-                        ENDIF
                         AAdd(printdata,substr(data1,1,count3))
-                     NEXTline[count2] := nextline[count2]+count3
+                     ENDIF
+                     AAdd(justifyarr,columnarr[count2,4])
+                     aadd(sizesarr,columnarr[count2,3])
                   ENDIF
-               ELSE
-                  AAdd(printdata,"")
-               NEXTline[count2] := 0
+               NEXT count2
+               printline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
+               row := row + lh
+               @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
+            ELSE
+               IF printgrid.rowlines.value
+                  @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
+               ENDIF
             ENDIF
-         ENDIF
-      NEXT count2
-      printline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-      Row := Row + lh
-      dataprintover := .t.
-      FOR count2 := 1 to len(nextline)
-         IF nextline[count2] > 0
-            dataprintover := .f.
-         ENDIF
-      NEXT count2
-   ENDDO
-
-   IF Row+lh >= maxrow1
-      @ Row,Col-1 print line TO Row,col+maxcol1-1  penwidth 0.25
-      lastrow := Row
-      totcol := 0
-      @ firstrow,Col-1 print line TO lastrow,Col-1  penwidth 0.25
-      IF printgrid.collines.value
-         colcount := 0
-         FOR count2 := 1 to len(columnarr)
-            IF columnarr[count2,1] == 1
-               totcol := totcol + columnarr[count2,3]
-               colcount := colcount + 1
-               @ firstrow,col+totcol+(colcount * 2)-1 print line TO lastrow,col+totcol+(colcount * 2)-1 penwidth 0.25
-            ENDIF
-         NEXT count2
-      ENDIF
-      @ firstrow,col+maxcol1-1 print line TO lastrow,col+maxcol1-1 penwidth 0.25
-      IF Len(AllTrim(printgrid.footer1.value)) > 0
-         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
-         row := row + lh + lh
-      ENDIF
-      IF printgrid.pageno.value == 3
-         Row := Row + lh
-         @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-      ENDIF
-   END PRINTPAGE
-   pageno := pageno + 1
-   row := printgrid.top.value
-   START PRINTPAGE
-      IF printgrid.pageno.value == 2
-         @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-         row := row + lh
-      ENDIF
-      IF Len(AllTrim(printgrid.header1.value)) > 0
-         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header1.value) font fontname size size1+2 center
-         row := row + lh + lh
-      ENDIF
-      IF Len(AllTrim(printgrid.header2.value)) > 0
-         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header2.value) font fontname size size1+2 center
-         row := row + lh + lh
-      ENDIF
-      IF Len(AllTrim(printgrid.header3.value)) > 0
-         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.header3.value) font fontname size size1+2 center
-         row := row + lh + lh
-      ENDIF
-
-      firstrow := Row
-      @ Row ,Col-1  print line TO Row ,col+maxcol1-1 penwidth 0.25
-      ASize(printdata,0)
-      ASize(justifyarr,0)
-      asize(sizesarr,0)
-      FOR count2 := 1 TO Len(columnarr)
-         IF columnarr[count2,1] == 1
-            size := columnarr[count2,3]
-            data1 := columnarr[count2,2]
-            IF printLen(AllTrim(data1),size1,fontname) <= size
-               AAdd(printdata,alltrim(data1))
-            ELSE // header size bigger than column! truncated as of now.
-               COUNT3 := len(data1)
-               DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                  COUNT3 := count3 - 1
-               ENDDO
-               AAdd(printdata,substr(data1,1,count3))
-            ENDIF
-            AAdd(justifyarr,columnarr[count2,4])
-            aadd(sizesarr,columnarr[count2,3])
-         ENDIF
-      NEXT count2
-      printline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
-      row := row + lh
-      @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
-   ELSE
-      IF printgrid.rowlines.value
+         NEXT count1
          @ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
-      ENDIF
+         lastrow := Row
+         totcol := 0
+         colcount := 0
+         @ firstrow,Col-1 print line TO lastrow,Col-1 penwidth 0.25
+         IF printgrid.collines.value
+            FOR count1 := 1 to len(columnarr)
+               IF columnarr[count1,1] == 1
+                  totcol := totcol + columnarr[count1,3]
+                  colcount := colcount + 1
+                  @ firstrow,col+totcol+(colcount * 2)-1 print line TO lastrow,col+totcol+(colcount * 2)-1 penwidth 0.25
+               ENDIF
+            NEXT count2
+         ENDIF
+         @ firstrow,col+maxcol1-1 print line TO lastrow,col+maxcol1-1 penwidth 0.25
+
+         IF Len(AllTrim(printgrid.footer1.value)) > 0
+            @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
+            row := row + lh + lh
+         ENDIF
+         IF printgrid.pageno.value == 3
+            Row := Row + lh
+            @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
+         ENDIF
+      END PRINTPAGE
+   END PRINTDOC
+   IF iswindowactive(printgrid)
+      printgrid.release
    ENDIF
-NEXT count1
-@ Row,Col-1 print line TO Row,col+maxcol1-1 penwidth 0.25
-lastrow := Row
-totcol := 0
-colcount := 0
-@ firstrow,Col-1 print line TO lastrow,Col-1 penwidth 0.25
-IF printgrid.collines.value
-   FOR count1 := 1 to len(columnarr)
-      IF columnarr[count1,1] == 1
-         totcol := totcol + columnarr[count1,3]
-         colcount := colcount + 1
-         @ firstrow,col+totcol+(colcount * 2)-1 print line TO lastrow,col+totcol+(colcount * 2)-1 penwidth 0.25
-      ENDIF
-   NEXT count2
-ENDIF
-@ firstrow,col+maxcol1-1 print line TO lastrow,col+maxcol1-1 penwidth 0.25
 
-IF Len(AllTrim(printgrid.footer1.value)) > 0
-   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(printgrid.footer1.value) font fontname size size1+2 center
-   row := row + lh + lh
-ENDIF
-IF printgrid.pageno.value == 3
-   Row := Row + lh
-   @ Row,(col+maxcol1 - printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-ENDIF
-END PRINTPAGE
-END PRINTDOC
-IF iswindowactive(printgrid)
-   printgrid.release
-ENDIF
-
-RETURN NIL
+   RETURN NIL
 
 FUNCTION printgridtoggle
 
@@ -1290,49 +1290,81 @@ FUNCTION printgridpreview
                   data1 := substr(data1,nextline[count2]+1,len(data1))
                   IF printLen(AllTrim(data1),size1,fontname) <= size
                      aadd(printdata,alltrim(data1))
-                  NEXTline[count2] := 0
-               ELSE // there are further lines!
-                  COUNT3 := len(data1)
-                  DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                     COUNT3 := count3 - 1
-                  ENDDO
-                  data1 := substr(data1,1,count3)
-                  IF rat(" ",data1) > 0
-                     COUNT3 := rat(" ",data1)
+                     NEXTline[count2] := 0
+                  ELSE // there are further lines!
+                     COUNT3 := len(data1)
+                     DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
+                        COUNT3 := count3 - 1
+                     ENDDO
+                     data1 := substr(data1,1,count3)
+                     IF rat(" ",data1) > 0
+                        COUNT3 := rat(" ",data1)
+                     ENDIF
+                     AAdd(printdata,substr(data1,1,count3))
+                     NEXTline[count2] := nextline[count2]+count3
                   ENDIF
-                  AAdd(printdata,substr(data1,1,count3))
-               NEXTline[count2] := nextline[count2]+count3
+               ELSE
+                  AAdd(printdata,"")
+                  NEXTline[count2] := 0
+               ENDIF
             ENDIF
-         ELSE
-            AAdd(printdata,"")
-         NEXTline[count2] := 0
-      ENDIF
-   ENDIF
-NEXT count2
-printpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
-curx := curx + lh
-dataprintover := .t.
-FOR count2 := 1 to len(nextline)
-   IF nextline[count2] > 0
-      dataprintover := .f.
-   ENDIF
-NEXT count2
-ENDDO
+         NEXT count2
+         printpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
+         curx := curx + lh
+         dataprintover := .t.
+         FOR count2 := 1 to len(nextline)
+            IF nextline[count2] > 0
+               dataprintover := .f.
+            ENDIF
+         NEXT count2
+      ENDDO
 
-IF curx+lh >= maxrow1
+      IF curx+lh >= maxrow1
+         DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)
+         lastrow := curx
+         totcol := 0
+         DRAW LINE in window printgrid at firstrow,cury to lastrow,cury
+         IF printgrid.collines.value
+            colcount := 0
+            FOR count2 := 1 to len(columnarr)
+               IF columnarr[count2,1] == 1
+                  colcount := colcount + 1
+                  totcol := totcol + columnarr[count2,3]
+                  DRAW LINE in window printgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
+               ENDIF
+            NEXT count2
+         ENDIF
+         DRAW LINE in window printgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
+         IF Len(AllTrim(printgrid.footer1.value)) > 0
+            pl := printlen(AllTrim(printgrid.footer1.value),size1,fontname) * resize
+            DRAW LINE in window printgrid at curx+(lh/2),cury + ((maxcol1 - pl)/2) to curx+(lh/2),cury + ((maxcol1 - pl)/2) + pl
+            curx := curx + lh + lh
+         ENDIF
+         IF printgrid.pageno.value == 3
+            pl := printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname)*resize
+            DRAW LINE in window printgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
+            curx := curx + lh
+         ENDIF
+         COUNT1 := totrows
+      ELSE
+         IF printgrid.rowlines.value
+            DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)
+         ENDIF
+      ENDIF
+   NEXT count1
    DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)
    lastrow := curx
    totcol := 0
+   colcount := 0
    DRAW LINE in window printgrid at firstrow,cury to lastrow,cury
    IF printgrid.collines.value
-      colcount := 0
-      FOR count2 := 1 to len(columnarr)
-         IF columnarr[count2,1] == 1
+      FOR count1 := 1 to len(columnarr)
+         IF columnarr[count1,1] == 1
+            totcol := totcol + columnarr[count1,3]
             colcount := colcount + 1
-            totcol := totcol + columnarr[count2,3]
             DRAW LINE in window printgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
          ENDIF
-      NEXT count2
+      NEXT count1
    ENDIF
    DRAW LINE in window printgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
    IF Len(AllTrim(printgrid.footer1.value)) > 0
@@ -1345,40 +1377,8 @@ IF curx+lh >= maxrow1
       DRAW LINE in window printgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
       curx := curx + lh
    ENDIF
-   COUNT1 := totrows
-ELSE
-   IF printgrid.rowlines.value
-      DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-   ENDIF
-ENDIF
-NEXT count1
-DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)
-lastrow := curx
-totcol := 0
-colcount := 0
-DRAW LINE in window printgrid at firstrow,cury to lastrow,cury
-IF printgrid.collines.value
-   FOR count1 := 1 to len(columnarr)
-      IF columnarr[count1,1] == 1
-         totcol := totcol + columnarr[count1,3]
-         colcount := colcount + 1
-         DRAW LINE in window printgrid at firstrow,cury+(totcol+(colcount * 2)-1) * resize to lastrow,cury+(totcol+(colcount * 2)-1) * resize
-      ENDIF
-   NEXT count1
-ENDIF
-DRAW LINE in window printgrid at firstrow,cury+maxcol1-(1*resize) to lastrow,cury+maxcol1-(1*resize)
-IF Len(AllTrim(printgrid.footer1.value)) > 0
-   pl := printlen(AllTrim(printgrid.footer1.value),size1,fontname) * resize
-   DRAW LINE in window printgrid at curx+(lh/2),cury + ((maxcol1 - pl)/2) to curx+(lh/2),cury + ((maxcol1 - pl)/2) + pl
-   curx := curx + lh + lh
-ENDIF
-IF printgrid.pageno.value == 3
-   pl := printlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname)*resize
-   DRAW LINE in window printgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
-   curx := curx + lh
-ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION printpreviewline(row,col,aitems,ajustify,sizesarr,fontname,size1,resize)
 

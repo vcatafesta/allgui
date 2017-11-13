@@ -18,11 +18,11 @@ FUNCTION Main
    MENU OF oMainWindow
    MENUITEM "&Exit" ACTION hwg_EndWindow()
    MENUITEM "&Property Sheet" ACTION OpenConfig()
-ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow
+   ACTIVATE WINDOW oMainWindow
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION OpenConfig
 

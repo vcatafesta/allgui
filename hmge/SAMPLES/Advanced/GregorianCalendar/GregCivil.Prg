@@ -196,463 +196,463 @@ STATIC FUNCTION ButtonOk()
    LOCAL EndOfYear := CTOD("")
 
    LOCAL CurrentMonth := 0,;
-   EndDate := CTOD("")
+      EndDate := CTOD("")
 
-LOCAL NbrOfWeek := 0
+   LOCAL NbrOfWeek := 0
 
-LOCAL aGregorianColumn_ := {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
+   LOCAL aGregorianColumn_ := {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
 
-// LOCAL Variable declaration, exlusively used in formatting //
-//   Microsoft Excel thru HMG OLE.                           //
-LOCAL oExcel, oSheet, nSheets, oSelection, oWindow
+   // LOCAL Variable declaration, exlusively used in formatting //
+   //   Microsoft Excel thru HMG OLE.                           //
+   LOCAL oExcel, oSheet, nSheets, oSelection, oWindow
 
-LOCAL xCounter    := 0,;
-   nArrayIndex := 0
+   LOCAL xCounter    := 0,;
+      nArrayIndex := 0
 
-LOCAL nRow := 1, nColumn := 1
+   LOCAL nRow := 1, nColumn := 1
 
-LOCAL acMonths_    := {"J A N U A R Y","F E B R U A R Y","M A R C H","A P R I L","M A Y","J U N E",;
-   "J U L Y","A U G U S T","S E P T E M B E R","O C T O B E R","N O V E M B E R",;
-   "D E C E M B E R"},;
-   cYear        := "",;
-   ColSwitch    := 0,;
-   BorderSwitch := 0,;
-   BorderTop    := 0,;
-   BorderBottom := 0,;
-   RowReset     := .T.,;
-   ForLoopStart := 1,;
-   ForLoopEnd   := 0,;
-   cRange       := ""
+   LOCAL acMonths_    := {"J A N U A R Y","F E B R U A R Y","M A R C H","A P R I L","M A Y","J U N E",;
+      "J U L Y","A U G U S T","S E P T E M B E R","O C T O B E R","N O V E M B E R",;
+      "D E C E M B E R"},;
+      cYear        := "",;
+      ColSwitch    := 0,;
+      BorderSwitch := 0,;
+      BorderTop    := 0,;
+      BorderBottom := 0,;
+      RowReset     := .T.,;
+      ForLoopStart := 1,;
+      ForLoopEnd   := 0,;
+      cRange       := ""
 
-LOCAL lHolidayBaIto := .F.,;
-   acHolidayDesc_ := {},;
-   acShortMonthNm_ := {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
+   LOCAL lHolidayBaIto := .F.,;
+      acHolidayDesc_ := {},;
+      acShortMonthNm_ := {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
 
-// Variable decalarations used to determine Pre-Vatican II Feast Related to Easter //
-LOCAL ChristmasDay
-LOCAL acFeastDays_ := {}
-LOCAL LoopStart, LoopEnd
+   // Variable decalarations used to determine Pre-Vatican II Feast Related to Easter //
+   LOCAL ChristmasDay
+   LOCAL acFeastDays_ := {}
+   LOCAL LoopStart, LoopEnd
 
-*- variables to format Liturgical Feast Days in Excel
-LOCAL dEaster      := CTOD(""),;
-   dGFriday     := CTOD(""),;
-   dMThursday   := CTOD(""),;
-   adFeastDays_ := {},;
-   xx
+   *- variables to format Liturgical Feast Days in Excel
+   LOCAL dEaster      := CTOD(""),;
+      dGFriday     := CTOD(""),;
+      dMThursday   := CTOD(""),;
+      adFeastDays_ := {},;
+      xx
 
-LOCAL pBarCounter := 0        // variable to update progress bar
+   LOCAL pBarCounter := 0        // variable to update progress bar
 
-PRIVATE aHolidays_   := {}    // array to hold all regular holidays. The values are built on fly.
+   PRIVATE aHolidays_   := {}    // array to hold all regular holidays. The values are built on fly.
 
-// needed to be private to read it's contents anywhere on this source code.
+   // needed to be private to read it's contents anywhere on this source code.
 
-BEGIN SEQUENCE
+   BEGIN SEQUENCE
 
-   frmGregCivil.pBarCalendar.Show
-   frmGregCivil.lblFormat.Show
+      frmGregCivil.pBarCalendar.Show
+      frmGregCivil.lblFormat.Show
 
-   * do some validation routine againts the entered information
-   DO CASE
-   CASE frmGregCivil.txbYear.Value = 0
-      MSGSTOP( "No year has been specified.","Try again" )
-      frmGregCivil.txbYear.Setfocus
-      BREAK
-
-   CASE frmGregCivil.txbYear.Value < 1582
-      IF .NOT. ChkYear1582(frmGregCivil.txbYear.Value)
+      * do some validation routine againts the entered information
+      DO CASE
+      CASE frmGregCivil.txbYear.Value = 0
+         MSGSTOP( "No year has been specified.","Try again" )
          frmGregCivil.txbYear.Setfocus
          BREAK
-      ENDIF
-   ENDCASE
 
-   IF .NOT. frmGregCivil.chkCivilNormal.Value
-      MSGSTOP("Please put a check or thick mark on Civil Calendar (includes Regular Holidays)", "Try again!")
-      frmGregCivil.chkCivilNormal.Setfocus
-      BREAK
-   ENDIF
-
-   BEGINOfYear := CTOD("01/01/" + ALLTRIM(STR(nYear)))
-   EndOfYear   := CTOD("12/31/" + ALLTRIM(STR(nYear)))
-
-   BaseDate := BeginOfYear
-
-   *- make a character year to be used as calendar title
-   cYear := SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),1,1) + " " +;
-      SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),2,1) + " " +;
-      SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),3,1) + " " +;
-      SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),4,1)
-
-   *- calculate Easter Sunday
-   dEaster    := EASTER(nYear)
-   dGFriday   := dEaster - 2
-   dMThursday := dEaster - 3
-   ChristmasDay := CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) )
-
-   **- Build the list of Philippines Regular Holidays and Holiday descriptions
-   **- accounting for EDSA revolution in 1986
-   IF nYear < 1986
-      aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
-      CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
-      CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
-      CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
-      CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
-      CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
-      CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
-      CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
-      CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
-      CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
-      }
-
-      *--> define holiday descriptions
-      acHolidayDesc_ := { "New Year's Day",;
-         "Bataan Day",;
-         "Labor Day",;
-         "Araw ng Kagitingan",;
-         "Independence Day",;
-         "National Heroes Day",;
-         "All Saints Day",;
-         "Bonifacio Day",;
-         "Christmas Day",;
-         "Rizal Day",;
-         "Easter Sunday",;
-         "Good Friday",;
-         "Mundy Thursday"}
-
-   ELSE
-      aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
-      CTOD( "02/25/" + ALLTRIM( STR( nYear ) ) ),;  // Edsa Revolution
-      CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
-      CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
-      CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
-      CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
-      CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
-      CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
-      CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
-      CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
-      CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
-      }
-
-      *--> define holiday descriptions
-      acHolidayDesc_ := { "New Year's Day",;
-         "Edsa Revolution",;
-         "Bataan Day",;
-         "Labor Day",;
-         "Araw ng Kagitingan",;
-         "Independence Day",;
-         "National Heroes Day",;
-         "All Saints Day",;
-         "Bonifacio Day",;
-         "Christmas Day",;
-         "Rizal Day",;
-         "Easter Sunday",;
-         "Good Friday",;
-         "Mundy Thursday"}
-   ENDIF
-
-   AADD( aHolidays_, dEaster )
-   AADD( aHolidays_, dGFriday )
-   AADD( aHolidays_, dMThursday )
-
-   // Calculate Pre-Vatican II Feast Days Related to Easter assembled into  //
-   // code blocks confined in an array.                                     //
-   adFeastDays_ := {;
-      {| SolemnityofMary | CTOD( "1/1/"   + ALLTRIM( STR( nYear ) ) ) },;          // January 1
-   {| Septuagesima  | dEaster - 63 },;                                          // 3rd Sunday before Lent  or 9th Sunday
-   {| Quinquagesima | dEaster - 49 },;                                          // The Sunday before Ash Wednesday beginning of Lent
-   {| PresentationoftheLord  | CTOD( "2/2/"   + ALLTRIM( STR( nYear ) ) ) },;   // February 2
-   {| AshWednesday  | dEaster - 46 },;                                          // 7th Wednesday before Easter, first day of Lent
-   ;                                                                            // the day following the Mardi Gras (Fat Tuesday)
-   ;                                                                            // and the day of fasting and repentance.
-   {| TheAnnunciation        | CTOD( "3/25/"  + ALLTRIM( STR( nYear ) ) ) },;   // 25 March
-   {| PalmSunday | dEaster - 7 },;                                              // Sunday before Easter
-   {| dMThursday | dEaster - 3 },;
-      {| dGFriday   | dEaster -2  },;
-      {||  dEaster  },;
-      {| RogationSunday | dEaster + 35 },;                                         // Solemn supplication ceremony prescribed by Church
-   {| Ascension  | dEaster + 39 },;                                             // Ascencion of Christ into heaven, observed on the
-   ;                                                                            // 40th day after Easter.
-   {| Pentecost | dEaster + 49 },;                                              // 7th Sunday after Easter; commemorates the
-   ;                                                                            // emanation of the Holy Spirit to the Apostles;
-      ;                                                                            // Jewish: 6th of Sivan to celebrate Moses receiving
-   ;                                                                            // the Ten Commandments;
-      ;                                                                            // Scotland: Quarter day
-   {| TrinitySunday |  dEaster + 56 },;                                         // 8th Sunday after Easter
-   {| CorpusChristi |  dEaster + 60 },;                                         // Thursday after Trinity Sunday; first celebrated
-   ;                                                                            // in the year 1246 AD.
-   {| TransfigurationofJesus | CTOD( "8/6/"   + ALLTRIM( STR( nYear ) ) ) },;   // August 6
-   {| TheAssumptionofMary    | CTOD( "8/15/"  + ALLTRIM( STR( nYear ) ) ) },;   // August 15
-   {| BirthofVirginMary      | CTOD( "9/8/"   + ALLTRIM( STR( nYear ) ) ) },;   // September 8
-   {| Santacruzan            | CTOD( "9/14/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 14 (To commemorate St. Helena's quest for the Cross of Calvary)
-   {| CelebrationofHolyCross | CTOD( "9/18/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 18
-   {| TheMassoftheArchangels | CTOD( "9/29/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 29
-   {| AllSaintsDay           | CTOD( "11/1/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 1
-   {| AllSoulsDay            | CTOD( "11/2/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 2
-   ;
-      {|| FindSunday( CTOD( "11/20/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Christ the King, Sunday on or After November 20
-   ;//
-   ;// * Find or calculate the Sundays of Advent
-   {|| FindSunday( CTOD( "11/27/" + ALLTRIM( STR( nYear ) ) ) ) },;             // First Sunday of Advent on or after November 27
-   {|| FindSunday( CTOD( "12/4/"  + ALLTRIM( STR( nYear ) ) ) ) },;             // Second Sunday of Advent on or After December 4
-   {|| FindSunday( CTOD( "12/11/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Third Sunday of Advent on or after December 11
-   {|| FindSunday( CTOD( "12/18/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Fourth Sunday of Advent on or after December 18
-   {| ChristmasDay           | CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ) },;   // December 25
-   {| Epiphany1 | ChristmasDay + 12 },;                                         // 12 days after Christmas - Traditional Ephiphany Three Kings
-   {|| EpiphanySunday(ChristmasDay) } }                                         // 2nd Sunday after Christmas
-
-   acFeastDays_ := { "Solemnity of Mary",;
-      "Septuagesima",;
-      "Quinquagesima",;
-      "Presentation of the Lord",;
-      "Ash Wednesday",;
-      "The Annunciation",;
-      "Palm Sunday",;
-      "Mundy Thursday",;
-      "Good Friday",;
-      "Easter Sunday",;
-      "Rogation Sunday",;
-      "Ascension",;
-      "Pentecost",;
-      "Trinity Sunday",;
-      "Corpus Christi",;
-      "Transfiguration of Jesus",;
-      "The Assumption of Mary",;
-      "Birth of Virgin Mary",;
-      "Santacruzan",;
-      "Celebration of Holy Cross",;
-      "The Mass of the Archangels",;
-      "All Saints Day",;
-      "All Souls Day",;
-      "Christ The King",;
-      "First Sunday of Advent",;
-      "Second Sunday of Advent",;
-      "Third Sunday of Advent",;
-      "Fourth Sunday of Advent",;
-      "Christmas Day",;
-      "Epiphany (Traditional - Three Kings)",;
-      "Epiphany - 2nd Sunday after Christmas" }
-
-   oExcel := CreateObject("Excel.Application")   // Open Microsoft Excel
-   oExcel:Workbooks:Add()                        // Add a Workbook
-   nSheets := oExcel:Sheets:Count()               // Get the number of sheets contained in the Workbook
-   oExcel:DisplayAlerts := .F.                  // Force Excel to work in background
-
-   //- step #1 delete other empty sheets if there is any //
-   FOR xCounter = 1 TO nSheets - 1
-      oExcel:Worksheets(xCounter):Delete()
-   NEXT
-
-   oSheet := oExcel:ActiveSheet()         // select the actual worksheet
-   oSheet:Name := cYear                   // set name of the excel sheet in the bottom tab
-
-   // -step #2 set standard fonts for all cells, change row height and column width. Center everything.  //
-   oSheet:Cells:Font:Name := "Arial"
-   oSheet:Cells:Font:Size := 10
-   oSheet:Cells:RowHeight := 20
-   oSheet:Cells:ColumnWidth := 4
-   oSheet:Cells:HorizontalAlignment := xlCenter
-   oSheet:Cells:VerticalAlignment := xlCenter
-
-EndDate := BaseDate
-CurrentMonth := 13
-DO WHILE EndDate <= EndOfYear
-
-   *- write out the column headings if month is not the same
-   IF CurrentMonth <> MONTH(EndDate)
-
-      *---> put borders around the monthly calendars
-      IF BorderSwitch = 0
-         BorderSwitch++
-      ELSE
-         IF ColSwitch = 0
-            cRange := "A" + ALLTRIM(STR(BorderTop)) + ":" + "G" + ALLTRIM(STR(nRow))
-         ELSE
-            cRange := "I" + ALLTRIM(STR(BorderTop)) + ":" + "O" + ALLTRIM(STR(nRow))
+      CASE frmGregCivil.txbYear.Value < 1582
+         IF .NOT. ChkYear1582(frmGregCivil.txbYear.Value)
+            frmGregCivil.txbYear.Setfocus
+            BREAK
          ENDIF
-         oSelection := oSheet:Range(cRange)
-         oSelection:Borders:Weight := xlThin
+      ENDCASE
+
+      IF .NOT. frmGregCivil.chkCivilNormal.Value
+         MSGSTOP("Please put a check or thick mark on Civil Calendar (includes Regular Holidays)", "Try again!")
+         frmGregCivil.chkCivilNormal.Setfocus
+         BREAK
       ENDIF
 
-      *----> Month heading controls, counters and switches
-      IF MONTH(EndDate) > 6
-         ForLoopStart := LEN(aGregorianColumn_) + 2
-         ForLoopEnd   := LEN(aGregorianColumn_) * 2 + 1
-         ColSwitch    := 1
+      BEGINOfYear := CTOD("01/01/" + ALLTRIM(STR(nYear)))
+      EndOfYear   := CTOD("12/31/" + ALLTRIM(STR(nYear)))
+
+      BaseDate := BeginOfYear
+
+      *- make a character year to be used as calendar title
+      cYear := SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),1,1) + " " +;
+         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),2,1) + " " +;
+         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),3,1) + " " +;
+         SUBSTR(ALLTRIM(STR(YEAR(EndOfYear))),4,1)
+
+      *- calculate Easter Sunday
+      dEaster    := EASTER(nYear)
+      dGFriday   := dEaster - 2
+      dMThursday := dEaster - 3
+      ChristmasDay := CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) )
+
+      **- Build the list of Philippines Regular Holidays and Holiday descriptions
+      **- accounting for EDSA revolution in 1986
+      IF nYear < 1986
+         aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
+         CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
+         CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
+         CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
+         CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
+         CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
+         CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
+         CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
+         CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
+         CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
+         }
+
+         *--> define holiday descriptions
+         acHolidayDesc_ := { "New Year's Day",;
+            "Bataan Day",;
+            "Labor Day",;
+            "Araw ng Kagitingan",;
+            "Independence Day",;
+            "National Heroes Day",;
+            "All Saints Day",;
+            "Bonifacio Day",;
+            "Christmas Day",;
+            "Rizal Day",;
+            "Easter Sunday",;
+            "Good Friday",;
+            "Mundy Thursday"}
+
       ELSE
-         ForLoopStart := 1
-         ForLoopEnd   := LEN(aGregorianColumn_)
-         ColSwitch    := 0
+         aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
+         CTOD( "02/25/" + ALLTRIM( STR( nYear ) ) ),;  // Edsa Revolution
+         CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
+         CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
+         CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
+         CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
+         CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
+         CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
+         CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
+         CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
+         CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
+         }
+
+         *--> define holiday descriptions
+         acHolidayDesc_ := { "New Year's Day",;
+            "Edsa Revolution",;
+            "Bataan Day",;
+            "Labor Day",;
+            "Araw ng Kagitingan",;
+            "Independence Day",;
+            "National Heroes Day",;
+            "All Saints Day",;
+            "Bonifacio Day",;
+            "Christmas Day",;
+            "Rizal Day",;
+            "Easter Sunday",;
+            "Good Friday",;
+            "Mundy Thursday"}
       ENDIF
 
-      *---> Row counter and reset logic to display the calendar in second set
-      IF ColSwitch = 1 .AND. RowReset = .T.
-         RowReset := .F.
-         nRow     := 1
-      ENDIF
+      AADD( aHolidays_, dEaster )
+      AADD( aHolidays_, dGFriday )
+      AADD( aHolidays_, dMThursday )
 
-      nRow +=2
+      // Calculate Pre-Vatican II Feast Days Related to Easter assembled into  //
+      // code blocks confined in an array.                                     //
+      adFeastDays_ := {;
+         {| SolemnityofMary | CTOD( "1/1/"   + ALLTRIM( STR( nYear ) ) ) },;          // January 1
+      {| Septuagesima  | dEaster - 63 },;                                          // 3rd Sunday before Lent  or 9th Sunday
+      {| Quinquagesima | dEaster - 49 },;                                          // The Sunday before Ash Wednesday beginning of Lent
+      {| PresentationoftheLord  | CTOD( "2/2/"   + ALLTRIM( STR( nYear ) ) ) },;   // February 2
+      {| AshWednesday  | dEaster - 46 },;                                          // 7th Wednesday before Easter, first day of Lent
+      ;                                                                            // the day following the Mardi Gras (Fat Tuesday)
+      ;                                                                            // and the day of fasting and repentance.
+      {| TheAnnunciation        | CTOD( "3/25/"  + ALLTRIM( STR( nYear ) ) ) },;   // 25 March
+      {| PalmSunday | dEaster - 7 },;                                              // Sunday before Easter
+      {| dMThursday | dEaster - 3 },;
+         {| dGFriday   | dEaster -2  },;
+         {||  dEaster  },;
+         {| RogationSunday | dEaster + 35 },;                                         // Solemn supplication ceremony prescribed by Church
+      {| Ascension  | dEaster + 39 },;                                             // Ascencion of Christ into heaven, observed on the
+      ;                                                                            // 40th day after Easter.
+      {| Pentecost | dEaster + 49 },;                                              // 7th Sunday after Easter; commemorates the
+      ;                                                                            // emanation of the Holy Spirit to the Apostles;
+         ;                                                                            // Jewish: 6th of Sivan to celebrate Moses receiving
+      ;                                                                            // the Ten Commandments;
+         ;                                                                            // Scotland: Quarter day
+      {| TrinitySunday |  dEaster + 56 },;                                         // 8th Sunday after Easter
+      {| CorpusChristi |  dEaster + 60 },;                                         // Thursday after Trinity Sunday; first celebrated
+      ;                                                                            // in the year 1246 AD.
+      {| TransfigurationofJesus | CTOD( "8/6/"   + ALLTRIM( STR( nYear ) ) ) },;   // August 6
+      {| TheAssumptionofMary    | CTOD( "8/15/"  + ALLTRIM( STR( nYear ) ) ) },;   // August 15
+      {| BirthofVirginMary      | CTOD( "9/8/"   + ALLTRIM( STR( nYear ) ) ) },;   // September 8
+      {| Santacruzan            | CTOD( "9/14/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 14 (To commemorate St. Helena's quest for the Cross of Calvary)
+      {| CelebrationofHolyCross | CTOD( "9/18/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 18
+      {| TheMassoftheArchangels | CTOD( "9/29/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 29
+      {| AllSaintsDay           | CTOD( "11/1/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 1
+      {| AllSoulsDay            | CTOD( "11/2/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 2
+      ;
+         {|| FindSunday( CTOD( "11/20/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Christ the King, Sunday on or After November 20
+      ;//
+      ;// * Find or calculate the Sundays of Advent
+      {|| FindSunday( CTOD( "11/27/" + ALLTRIM( STR( nYear ) ) ) ) },;             // First Sunday of Advent on or after November 27
+      {|| FindSunday( CTOD( "12/4/"  + ALLTRIM( STR( nYear ) ) ) ) },;             // Second Sunday of Advent on or After December 4
+      {|| FindSunday( CTOD( "12/11/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Third Sunday of Advent on or after December 11
+      {|| FindSunday( CTOD( "12/18/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Fourth Sunday of Advent on or after December 18
+      {| ChristmasDay           | CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ) },;   // December 25
+      {| Epiphany1 | ChristmasDay + 12 },;                                         // 12 days after Christmas - Traditional Ephiphany Three Kings
+      {|| EpiphanySunday(ChristmasDay) } }                                         // 2nd Sunday after Christmas
 
-      IF ColSwitch = 0
-         nColumn := 1
-         cRange := "A" + ALLTRIM(STR(nRow)) + ":" + "G" + ALLTRIM(STR(nRow))
-      ELSE
-         nColumn := LEN(aGregorianColumn_) + 2
-         cRange := "I" + ALLTRIM(STR(nRow)) + ":" + "O" + ALLTRIM(STR(nRow))
-      ENDIF
+      acFeastDays_ := { "Solemnity of Mary",;
+         "Septuagesima",;
+         "Quinquagesima",;
+         "Presentation of the Lord",;
+         "Ash Wednesday",;
+         "The Annunciation",;
+         "Palm Sunday",;
+         "Mundy Thursday",;
+         "Good Friday",;
+         "Easter Sunday",;
+         "Rogation Sunday",;
+         "Ascension",;
+         "Pentecost",;
+         "Trinity Sunday",;
+         "Corpus Christi",;
+         "Transfiguration of Jesus",;
+         "The Assumption of Mary",;
+         "Birth of Virgin Mary",;
+         "Santacruzan",;
+         "Celebration of Holy Cross",;
+         "The Mass of the Archangels",;
+         "All Saints Day",;
+         "All Souls Day",;
+         "Christ The King",;
+         "First Sunday of Advent",;
+         "Second Sunday of Advent",;
+         "Third Sunday of Advent",;
+         "Fourth Sunday of Advent",;
+         "Christmas Day",;
+         "Epiphany (Traditional - Three Kings)",;
+         "Epiphany - 2nd Sunday after Christmas" }
 
-      *--> step #3 write out the month name, centered, black background and white foreground
-      oSheet:Cells(nRow, nColumn):Value := acMonths_[MONTH(EndDate)]
-      oSheet:Cells(nRow, nColumn):Font:Size := 14
-      oSheet:Cells(nRow, nColumn):Font:Bold := .T.
+      oExcel := CreateObject("Excel.Application")   // Open Microsoft Excel
+      oExcel:Workbooks:Add()                        // Add a Workbook
+      nSheets := oExcel:Sheets:Count()               // Get the number of sheets contained in the Workbook
+      oExcel:DisplayAlerts := .F.                  // Force Excel to work in background
 
-      oSelection := oSheet:Range(cRange)          // define cell range
-      oSelection:MergeCells := .T.                // and merge the month name and center it
-
-      oSelection:Interior:ColorIndex := 1
-      oSelection:Font:ColorIndex := 2
-
-      nRow++
-
-      FOR xCounter := ForLoopStart TO ForLoopEnd
-
-         IF ColSwitch = 0
-            nArrayIndex := xCounter
-         ELSE
-            nArrayIndex := (xCounter - (LEN(aGregorianColumn_) + 1))
-         ENDIF
-
-         oSheet:Cells(nRow, nColumn):Value := aGregorianColumn_[nArrayIndex]
-         oSheet:Cells(nRow, nColumn):Font:Bold := .T.
-
-         nColumn++
+      //- step #1 delete other empty sheets if there is any //
+      FOR xCounter = 1 TO nSheets - 1
+         oExcel:Worksheets(xCounter):Delete()
       NEXT
 
-      *---> change Day Names background and foreground to match the month names and year
-      IF ColSwitch = 0
-         cRange := "A" + ALLTRIM(STR(nRow)) + ":" + "G" + ALLTRIM(STR(nRow))
-      ELSE
-         cRange := "I" + ALLTRIM(STR(nRow)) + ":" + "O" + ALLTRIM(STR(nRow))
-      ENDIF
-      oSelection := oSheet:Range(cRange)      // define cell range
-      oSelection:Interior:ColorIndex := 1     // set selected range cell backbround to BLACK
-      oSelection:Font:ColorIndex := 2         // set selected range cell font color to WHITE
+      oSheet := oExcel:ActiveSheet()         // select the actual worksheet
+      oSheet:Name := cYear                   // set name of the excel sheet in the bottom tab
 
-      nRow++
-      CurrentMonth := MONTH(EndDate)
-      BorderTop := nRow
+      // -step #2 set standard fonts for all cells, change row height and column width. Center everything.  //
+      oSheet:Cells:Font:Name := "Arial"
+      oSheet:Cells:Font:Size := 10
+      oSheet:Cells:RowHeight := 20
+      oSheet:Cells:ColumnWidth := 4
+      oSheet:Cells:HorizontalAlignment := xlCenter
+      oSheet:Cells:VerticalAlignment := xlCenter
 
-   ENDIF
+      EndDate := BaseDate
+      CurrentMonth := 13
+      DO WHILE EndDate <= EndOfYear
 
-   IF DOW(EndDate) = 1    // Check for sunday and make it red
-      *- make Sunday on red background and fontcolor to white
-      cRange := IF(ColSwitch = 0,"A","I") + ALLTRIM(STR(nRow))
+         *- write out the column headings if month is not the same
+         IF CurrentMonth <> MONTH(EndDate)
+
+            *---> put borders around the monthly calendars
+            IF BorderSwitch = 0
+               BorderSwitch++
+            ELSE
+               IF ColSwitch = 0
+                  cRange := "A" + ALLTRIM(STR(BorderTop)) + ":" + "G" + ALLTRIM(STR(nRow))
+               ELSE
+                  cRange := "I" + ALLTRIM(STR(BorderTop)) + ":" + "O" + ALLTRIM(STR(nRow))
+               ENDIF
+               oSelection := oSheet:Range(cRange)
+               oSelection:Borders:Weight := xlThin
+            ENDIF
+
+            *----> Month heading controls, counters and switches
+            IF MONTH(EndDate) > 6
+               ForLoopStart := LEN(aGregorianColumn_) + 2
+               ForLoopEnd   := LEN(aGregorianColumn_) * 2 + 1
+               ColSwitch    := 1
+            ELSE
+               ForLoopStart := 1
+               ForLoopEnd   := LEN(aGregorianColumn_)
+               ColSwitch    := 0
+            ENDIF
+
+            *---> Row counter and reset logic to display the calendar in second set
+            IF ColSwitch = 1 .AND. RowReset = .T.
+               RowReset := .F.
+               nRow     := 1
+            ENDIF
+
+            nRow +=2
+
+            IF ColSwitch = 0
+               nColumn := 1
+               cRange := "A" + ALLTRIM(STR(nRow)) + ":" + "G" + ALLTRIM(STR(nRow))
+            ELSE
+               nColumn := LEN(aGregorianColumn_) + 2
+               cRange := "I" + ALLTRIM(STR(nRow)) + ":" + "O" + ALLTRIM(STR(nRow))
+            ENDIF
+
+            *--> step #3 write out the month name, centered, black background and white foreground
+            oSheet:Cells(nRow, nColumn):Value := acMonths_[MONTH(EndDate)]
+            oSheet:Cells(nRow, nColumn):Font:Size := 14
+            oSheet:Cells(nRow, nColumn):Font:Bold := .T.
+
+            oSelection := oSheet:Range(cRange)          // define cell range
+            oSelection:MergeCells := .T.                // and merge the month name and center it
+
+            oSelection:Interior:ColorIndex := 1
+            oSelection:Font:ColorIndex := 2
+
+            nRow++
+
+            FOR xCounter := ForLoopStart TO ForLoopEnd
+
+               IF ColSwitch = 0
+                  nArrayIndex := xCounter
+               ELSE
+                  nArrayIndex := (xCounter - (LEN(aGregorianColumn_) + 1))
+               ENDIF
+
+               oSheet:Cells(nRow, nColumn):Value := aGregorianColumn_[nArrayIndex]
+               oSheet:Cells(nRow, nColumn):Font:Bold := .T.
+
+               nColumn++
+            NEXT
+
+            *---> change Day Names background and foreground to match the month names and year
+            IF ColSwitch = 0
+               cRange := "A" + ALLTRIM(STR(nRow)) + ":" + "G" + ALLTRIM(STR(nRow))
+            ELSE
+               cRange := "I" + ALLTRIM(STR(nRow)) + ":" + "O" + ALLTRIM(STR(nRow))
+            ENDIF
+            oSelection := oSheet:Range(cRange)      // define cell range
+            oSelection:Interior:ColorIndex := 1     // set selected range cell backbround to BLACK
+            oSelection:Font:ColorIndex := 2         // set selected range cell font color to WHITE
+
+            nRow++
+            CurrentMonth := MONTH(EndDate)
+            BorderTop := nRow
+
+         ENDIF
+
+         IF DOW(EndDate) = 1    // Check for sunday and make it red
+            *- make Sunday on red background and fontcolor to white
+            cRange := IF(ColSwitch = 0,"A","I") + ALLTRIM(STR(nRow))
+            oSelection := oSheet:Range(cRange)
+            oSelection:Interior:ColorIndex := 3
+            oSelection:Font:ColorIndex := 2
+         ENDIF
+
+         *- check EndDate if it falls on Regular Holidays, Sundays are ignored, because it's a Holiday already
+         lHolidayBaIto := IsHoliday( EndDate )
+
+         IF ColSwitch = 0
+            nColumn := DOW(EndDate)
+         ELSE
+            nColumn := LEN(aGregorianColumn_) + 1 + DOW(EndDate)
+         ENDIF
+
+         // Move one Row Below if Sat Column is updated. //
+         IF DOW(EndDate) = 7  && Saturday
+            oSheet:Cells(nRow,nColumn):Value := DAY(EndDate)
+            oSheet:Cells(nRow,nColumn):Font:Bold := .T.
+
+            *- set font color to red if the day falls on holiday
+            IF .NOT. IsHoliday( EndDate )
+               oSheet:Cells(nRow,nColumn):Font:ColorIndex := 3
+            ENDIF
+            nRow++
+         ELSE
+            oSheet:Cells(nRow,nColumn):Value := DAY(EndDate)
+            oSheet:Cells(nRow,nColumn):Font:Bold := .T.
+            IF .NOT. IsHoliday( EndDate ) .AND. DOW( EndDate ) # 1
+               oSheet:Cells(nRow,nColumn):Font:ColorIndex := 3
+            ENDIF
+
+         ENDIF
+
+         EndDate++
+         frmGregCivil.pBarCalendar.Value := pBarCounter++
+
+      ENDDO
+
+      *--> Border for the Month of December
+      cRange := "I" + ALLTRIM(STR(BorderTop)) + ":" + "O" + ALLTRIM(STR(nRow))
       oSelection := oSheet:Range(cRange)
-      oSelection:Interior:ColorIndex := 3
-      oSelection:Font:ColorIndex := 2
-   ENDIF
+      oSelection:Borders:Weight := xlThin
 
-   *- check EndDate if it falls on Regular Holidays, Sundays are ignored, because it's a Holiday already
-   lHolidayBaIto := IsHoliday( EndDate )
+      *---> write out the main title
+      oSheet:Cells(1,1):Value      := "C A L E N D A R  " + cYear    // define title
+      oSheet:Cells(1,1):Font:Size  := 16                             // define font size
+      oSheet:Cells(1,1):Font:Bold := .T.
+      oSelection := oSheet:Range("A1:O1")                            // select title range
+      oSelection:MergeCells := .T.                                   // merge cells
+      oSheet:Cells(2,1)                                              // reposition the cursor
 
-   IF ColSwitch = 0
-      nColumn := DOW(EndDate)
-   ELSE
-      nColumn := LEN(aGregorianColumn_) + 1 + DOW(EndDate)
-   ENDIF
-
-   // Move one Row Below if Sat Column is updated. //
-   IF DOW(EndDate) = 7  && Saturday
-      oSheet:Cells(nRow,nColumn):Value := DAY(EndDate)
-      oSheet:Cells(nRow,nColumn):Font:Bold := .T.
-
-      *- set font color to red if the day falls on holiday
-      IF .NOT. IsHoliday( EndDate )
-         oSheet:Cells(nRow,nColumn):Font:ColorIndex := 3
-      ENDIF
-      nRow++
-   ELSE
-      oSheet:Cells(nRow,nColumn):Value := DAY(EndDate)
-      oSheet:Cells(nRow,nColumn):Font:Bold := .T.
-      IF .NOT. IsHoliday( EndDate ) .AND. DOW( EndDate ) # 1
-         oSheet:Cells(nRow,nColumn):Font:ColorIndex := 3
-      ENDIF
-
-   ENDIF
-
-EndDate++
-frmGregCivil.pBarCalendar.Value := pBarCounter++
-
-ENDDO
-
-*--> Border for the Month of December
-cRange := "I" + ALLTRIM(STR(BorderTop)) + ":" + "O" + ALLTRIM(STR(nRow))
-oSelection := oSheet:Range(cRange)
-oSelection:Borders:Weight := xlThin
-
-*---> write out the main title
-oSheet:Cells(1,1):Value      := "C A L E N D A R  " + cYear    // define title
-oSheet:Cells(1,1):Font:Size  := 16                             // define font size
-oSheet:Cells(1,1):Font:Bold := .T.
-oSelection := oSheet:Range("A1:O1")                            // select title range
-oSelection:MergeCells := .T.                                   // merge cells
-oSheet:Cells(2,1)                                              // reposition the cursor
-
-*---> write out the regular Holidays
-nRow := 3
-nColumn := 17
-LOOPEnd := LEN( aHolidays_ )
-oSheet:Cells(nRow, nColumn):ColumnWidth := 49
-oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
-
-oSheet:Cells(nRow, nColumn):Value := "Regular Holidays:"
-oSheet:Cells(nRow, nColumn):Font:ColorIndex := 11
-oSheet:Cells(nRow++, nColumn):Font:Bold := .T.
-
-FOR LoopStart = 1 TO LoopEnd
-   oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
-   oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH(aHolidays_[LoopStart])] + " " + ALLTRIM( STR( DAY( aHolidays_[ LoopStart ] ) ) ) + " - " + acHolidayDesc_[ LoopStart ]
-   oSheet:Cells(nRow++, nColumn):Font:ColorIndex := 11
-NEXT
-
-IF IsLiturgyFeast
-   ++nRow
-   LOOPEnd := LEN( acFeastDays_ )
-   oSheet:Cells(nRow, nColumn):Value := "Liturgical Feast Days:"
-   oSheet:Cells(nRow, nColumn):Font:ColorIndex := 11
-   oSheet:Cells(nRow, nColumn):Font:Bold := .T.
-   oSheet:Cells(nRow++, nColumn):HorizontalAlignment := xlLeft
-
-   FOR LoopStart = 1 TO LoopEnd
-      xx := EVAL(adFeastDays_[LoopStart])
-      IF YEAR( xx ) # YEAR( EndOfYear )
-         oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
-            ". " + ALLTRIM( STR( DAY( xx ) ) ) +;
-            ", " + ALLTRIM( STR( YEAR( xx ) ) ) +;
-            " - " + acFeastDays_[ LoopStart ]
-
-      ELSE
-         oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
-            " " + ALLTRIM( STR( DAY( xx ) ) ) +;
-            " - " + acFeastDays_[ LoopStart ]
-      ENDIF
+      *---> write out the regular Holidays
+      nRow := 3
+      nColumn := 17
+      LOOPEnd := LEN( aHolidays_ )
+      oSheet:Cells(nRow, nColumn):ColumnWidth := 49
       oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
-      oSheet:Cells(nRow++, nColumn):Font:ColorIndex := 11
-   NEXT
-ENDIF
 
-oWindow := oExcel:ActiveWindow     // Get active Window
+      oSheet:Cells(nRow, nColumn):Value := "Regular Holidays:"
+      oSheet:Cells(nRow, nColumn):Font:ColorIndex := 11
+      oSheet:Cells(nRow++, nColumn):Font:Bold := .T.
 
-oExcel:Visible := .T.   // Show Microsoft Excel Window
+      FOR LoopStart = 1 TO LoopEnd
+         oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
+         oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH(aHolidays_[LoopStart])] + " " + ALLTRIM( STR( DAY( aHolidays_[ LoopStart ] ) ) ) + " - " + acHolidayDesc_[ LoopStart ]
+         oSheet:Cells(nRow++, nColumn):Font:ColorIndex := 11
+      NEXT
 
-*---------------------------- OLE commands Ends Here ---------------------------------------------*
+      IF IsLiturgyFeast
+         ++nRow
+         LOOPEnd := LEN( acFeastDays_ )
+         oSheet:Cells(nRow, nColumn):Value := "Liturgical Feast Days:"
+         oSheet:Cells(nRow, nColumn):Font:ColorIndex := 11
+         oSheet:Cells(nRow, nColumn):Font:Bold := .T.
+         oSheet:Cells(nRow++, nColumn):HorizontalAlignment := xlLeft
 
-MSGINFO("Calendar has been built for the year requested is completed successfuly.","Calculation Done")
+         FOR LoopStart = 1 TO LoopEnd
+            xx := EVAL(adFeastDays_[LoopStart])
+            IF YEAR( xx ) # YEAR( EndOfYear )
+               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
+                  ". " + ALLTRIM( STR( DAY( xx ) ) ) +;
+                  ", " + ALLTRIM( STR( YEAR( xx ) ) ) +;
+                  " - " + acFeastDays_[ LoopStart ]
 
-END SEQUENCE
-frmGregCivil.pBarCalendar.Hide
-frmGregCivil.pBarCalendar.Value := 0
-frmGregCivil.lblFormat.Hide
+            ELSE
+               oSheet:Cells(nRow, nColumn):Value := "   " + acShortMonthNm_[ MONTH( xx ) ] +;
+                  " " + ALLTRIM( STR( DAY( xx ) ) ) +;
+                  " - " + acFeastDays_[ LoopStart ]
+            ENDIF
+            oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
+            oSheet:Cells(nRow++, nColumn):Font:ColorIndex := 11
+         NEXT
+      ENDIF
 
-RETURN NIL
+      oWindow := oExcel:ActiveWindow     // Get active Window
+
+      oExcel:Visible := .T.   // Show Microsoft Excel Window
+
+      *---------------------------- OLE commands Ends Here ---------------------------------------------*
+
+      MSGINFO("Calendar has been built for the year requested is completed successfuly.","Calculation Done")
+
+   END SEQUENCE
+   frmGregCivil.pBarCalendar.Hide
+   frmGregCivil.pBarCalendar.Value := 0
+   frmGregCivil.lblFormat.Hide
+
+   RETURN NIL
 
 STATIC FUNCTION IsHoliday(ThisDate)
 

@@ -55,7 +55,7 @@ FUNCTION relatorio_crec_001()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_relatorio.bmp'
          col form_mov_crec.width-255
          row form_mov_crec.height-085
@@ -68,7 +68,7 @@ FUNCTION relatorio_crec_001()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_mov_crec.width-100
          row form_mov_crec.height-085

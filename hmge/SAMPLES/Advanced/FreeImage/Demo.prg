@@ -193,7 +193,7 @@ STATIC PROCEDURE SwitchTab
       ListFiles()
       wMain.grdFiles.SetFocus       // Вкладка файлов
 
-   ELSEIF( nValue == 2 )
+      ELSEIF( nValue == 2 )
 
       ListRecords()
       wMain.grdRecords.SetFocus     // Вкладка записей
@@ -489,16 +489,16 @@ STATIC PROCEDURE ShowMe
 
    FI_WinDraw( nHandleImg, hDC, nTop, nLeft, nBottom, nRight )
 
-EndPaint( Application.Handle, pps )
+   EndPaint( Application.Handle, pps )
 
-RETURN
+   RETURN
 
-****** End of ShowMe ******
+   ****** End of ShowMe ******
 
-/******
-*       RefreshMe()
-*       Перерисовка изображения
-*/
+   /******
+   *       RefreshMe()
+   *       Перерисовка изображения
+   */
 
 STATIC PROCEDURE RefreshMe
 

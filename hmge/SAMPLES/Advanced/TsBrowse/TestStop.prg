@@ -20,32 +20,32 @@ FUNCTION TestStop()
       DEFINE SPLITBOX
          DEFINE TOOLBAREX Bar_1 BUTTONSIZE 35, 20
 
-            BUTTON Btn_1 CAPTION "Stop" CHECK ;
-               ACTION { ||oBrw:lDontChange := ! oBrw:lDontChange, oBrw:SetFocus()} ;
-               TOOLTIP "Disable/Enable Browser's cursor..."
+         BUTTON Btn_1 CAPTION "Stop" CHECK ;
+            ACTION { ||oBrw:lDontChange := ! oBrw:lDontChange, oBrw:SetFocus()} ;
+            TOOLTIP "Disable/Enable Browser's cursor..."
 
-            BUTTON Btn_3 CAPTION  "Exit" AUTOSIZE  ;
-               ACTION Form_12.Release ;
-               TOOLTIP "Exit"
-         END TOOLBAR
+         BUTTON Btn_3 CAPTION  "Exit" AUTOSIZE  ;
+            ACTION Form_12.Release ;
+            TOOLTIP "Exit"
+      END TOOLBAR
 
-      END SPLITBOX
+   END SPLITBOX
 
-      DEFINE STATUSBAR
-         STATUSITEM '' DEFAULT
-      END STATUSBAR
+   DEFINE STATUSBAR
+      STATUSITEM '' DEFAULT
+   END STATUSBAR
 
-      @ 50, 20 TBROWSE oBrw ALIAS "Employee"  WIDTH 760 HEIGHT 430  ;
-         AUTOCOLS SELECTOR .F. EDITABLE FONT 'Font_12' ;
-         MESSAGE   "Press Stop button to enable/disable the Browser's cursor"
+   @ 50, 20 TBROWSE oBrw ALIAS "Employee"  WIDTH 760 HEIGHT 430  ;
+      AUTOCOLS SELECTOR .F. EDITABLE FONT 'Font_12' ;
+      MESSAGE   "Press Stop button to enable/disable the Browser's cursor"
 
-   END WINDOW
+END WINDOW
 
-   ACTIVATE WINDOW Form_12
+ACTIVATE WINDOW Form_12
 
-   RELEASE FONT Font_12
+RELEASE FONT Font_12
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION TestUserMenu()
 

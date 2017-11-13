@@ -84,93 +84,93 @@ FUNCTION Main
    MENUITEM "&Save"  ACTION  SaveBuildFile()
    SEPARATOR
    MENUITEM "&Exit"  ACTION hwg_EndDialog()
-ENDMENU
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION OpenAbout()
-MENUITEM "&Version HwGUI" ACTION hwg_Msginfo(HwG_Version())
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION OpenAbout()
+   MENUITEM "&Version HwGUI" ACTION hwg_Msginfo(HwG_Version())
+   ENDMENU
+   ENDMENU
 
-@ 14,16 TAB oTAB ITEMS {} SIZE 391,242
+   @ 14,16 TAB oTAB ITEMS {} SIZE 391,242
 
-BEGIN PAGE "Config" Of oTAB
-   @  20,44 SAY oLabel1 CAPTION "Exe Name" TRANSPARENT SIZE 80,22
-   @ 136,44 GET oExeName VAR vGt1 ID ID_EXENAME  SIZE 206,24
+   BEGIN PAGE "Config" Of oTAB
+      @  20,44 SAY oLabel1 CAPTION "Exe Name" TRANSPARENT SIZE 80,22
+      @ 136,44 GET oExeName VAR vGt1 ID ID_EXENAME  SIZE 206,24
 
-   @  20,74 SAY oLabel2 CAPTION "Lib Folder" TRANSPARENT SIZE 80,22
-   @ 136,74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234,24
+      @  20,74 SAY oLabel2 CAPTION "Lib Folder" TRANSPARENT SIZE 80,22
+      @ 136,74 GET oLibFolder  VAR vGt2 ID ID_LIBFOLDER SIZE 234,24
 
-   @  20,104 SAY oLabel3 CAPTION "Include Folder" TRANSPARENT SIZE 105,22
-   @ 136,104 GET oIncFolder VAR vGt3 ID ID_INCFOLDER   SIZE 234,24
+      @  20,104 SAY oLabel3 CAPTION "Include Folder" TRANSPARENT SIZE 105,22
+      @ 136,104 GET oIncFolder VAR vGt3 ID ID_INCFOLDER   SIZE 234,24
 
-   @  20,134 SAY oLabel4 CAPTION "PRG Flags" TRANSPARENT SIZE 80,22
-   @ 136,134 GET oPrgFlag VAR vGt4 ID ID_PRGFLAG  SIZE 234,24
+      @  20,134 SAY oLabel4 CAPTION "PRG Flags" TRANSPARENT SIZE 80,22
+      @ 136,134 GET oPrgFlag VAR vGt4 ID ID_PRGFLAG  SIZE 234,24
 
-   @  20,164 SAY oLabel5 CAPTION "C Flags" TRANSPARENT SIZE 80,22
-   @ 136,164 GET oCFlag VAR vGt5  ID ID_CFLAG SIZE 234,24
+      @  20,164 SAY oLabel5 CAPTION "C Flags" TRANSPARENT SIZE 80,22
+      @ 136,164 GET oCFlag VAR vGt5  ID ID_CFLAG SIZE 234,24
 
-   @  20,194 SAY oLabel6 CAPTION "Main PRG" TRANSPARENT SIZE 80,22
-   @ 136,194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206,24
-   @ 347,194 OWNERBUTTON    SIZE 24,24   ;
-      ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT;
-      TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0,0,0,0 ;
-      TOOLTIP "Search main file"
+      @  20,194 SAY oLabel6 CAPTION "Main PRG" TRANSPARENT SIZE 80,22
+      @ 136,194 GET oMainPrg VAR vGt6 ID ID_PRGMAIN  SIZE 206,24
+      @ 347,194 OWNERBUTTON    SIZE 24,24   ;
+         ON CLICK {||searchFileName("xBase Files *.prg ", oMainPrg, "*.prg")};//       FLAT;
+         TEXT "..." ;//BITMAP "SEARCH" FROM RESOURCE TRANSPARENT COORDINATES 0,0,0,0 ;
+         TOOLTIP "Search main file"
 
-END PAGE of oTAB
-BEGIN PAGE "Prg (Files)" of oTAB
-   @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
-      STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
-   hwg_CREATEARLIST(oBrowse1,aFiles1)
-   obrowse1:acolumns[1]:heading := "File Names"
-   obrowse1:acolumns[1]:length := 50
-   oBrowse1:bcolorSel := hwg_VColor( "800080" )
-   oBrowse1:ofont := HFont():Add( 'Arial',0,-12 )
-   @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse1, "*.prg")}
-   @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse1)}
+   END PAGE of oTAB
+   BEGIN PAGE "Prg (Files)" of oTAB
+      @ 21,29 BROWSE oBrowse1 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse1,"*.prg")};
+         STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
+      hwg_CREATEARLIST(oBrowse1,aFiles1)
+      obrowse1:acolumns[1]:heading := "File Names"
+      obrowse1:acolumns[1]:length := 50
+      oBrowse1:bcolorSel := hwg_VColor( "800080" )
+      oBrowse1:ofont := HFont():Add( 'Arial',0,-12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse1, "*.prg")}
+      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse1)}
 
-END PAGE of oTAB
-BEGIN PAGE "C (Files)" of oTAB
-   @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
-      STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
-   hwg_CREATEARLIST(oBrowse2,aFiles2)
-   obrowse2:acolumns[1]:heading := "File Names"
-   obrowse2:acolumns[1]:length := 50
-   oBrowse2:bcolorSel := hwg_VColor( "800080" )
-   oBrowse2:ofont := HFont():Add( 'Arial',0,-12 )
-   @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse2, "*.c")}
-   @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse2)}
-END PAGE of oTAB
-BEGIN PAGE "Lib (Files)" of oTAB
-   @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
-      STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
-   hwg_CREATEARLIST(oBrowse3,aFiles3)
-   obrowse3:acolumns[1]:heading := "File Names"
-   obrowse3:acolumns[1]:length := 50
-   oBrowse3:bcolorSel := hwg_VColor( "800080" )
-   oBrowse3:ofont := HFont():Add( 'Arial',0,-12 )
-   @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse3, "*.lib")}
-   @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse3)}
-END PAGE of oTAB
-BEGIN PAGE "Resource (Files)" of oTAB
-   @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
-      STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
-   hwg_CREATEARLIST(oBrowse4,aFiles4)
-   obrowse4:acolumns[1]:heading := "File Names"
-   obrowse4:acolumns[1]:length := 50
-   oBrowse4:bcolorSel := hwg_VColor( "800080" )
-   oBrowse4:ofont := HFont():Add( 'Arial',0,-12 )
-   @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse4, "*.rc")}
-   @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse4)}
-END PAGE of oTAB
+   END PAGE of oTAB
+   BEGIN PAGE "C (Files)" of oTAB
+      @ 21,29 BROWSE oBrowse2 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse2, "*.c")};
+         STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
+      hwg_CREATEARLIST(oBrowse2,aFiles2)
+      obrowse2:acolumns[1]:heading := "File Names"
+      obrowse2:acolumns[1]:length := 50
+      oBrowse2:bcolorSel := hwg_VColor( "800080" )
+      oBrowse2:ofont := HFont():Add( 'Arial',0,-12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse2, "*.c")}
+      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse2)}
+   END PAGE of oTAB
+   BEGIN PAGE "Lib (Files)" of oTAB
+      @ 21,29 BROWSE oBrowse3 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.lib")};
+         STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
+      hwg_CREATEARLIST(oBrowse3,aFiles3)
+      obrowse3:acolumns[1]:heading := "File Names"
+      obrowse3:acolumns[1]:length := 50
+      oBrowse3:bcolorSel := hwg_VColor( "800080" )
+      oBrowse3:ofont := HFont():Add( 'Arial',0,-12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse3, "*.lib")}
+      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse3)}
+   END PAGE of oTAB
+   BEGIN PAGE "Resource (Files)" of oTAB
+      @ 21,29 BROWSE oBrowse4 ARRAY of oTAB ON CLICK {||SearchFile(oBrowse3, "*.rc")};
+         STYLE WS_VSCROLL + WS_HSCROLL   SIZE 341,170
+      hwg_CREATEARLIST(oBrowse4,aFiles4)
+      obrowse4:acolumns[1]:heading := "File Names"
+      obrowse4:acolumns[1]:length := 50
+      oBrowse4:bcolorSel := hwg_VColor( "800080" )
+      oBrowse4:ofont := HFont():Add( 'Arial',0,-12 )
+      @ 10, 205 BUTTON "Add"     SIZE 60,25  on click {||SearchFile(oBrowse4, "*.rc")}
+      @ 70, 205 BUTTON "Delete"  SIZE 60,25  on click {||BrwdelIten(oBrowse4)}
+   END PAGE of oTAB
 
-@ 419, 20 BUTTONex oBtBuild CAPTION "Build" BITMAP oImgBuild:Handle on Click {||BuildApp()}      SIZE 88,52
-@ 419, 80 BUTTONex oBtExit  CAPTION "Exit"  BITMAP oImgExit:Handle  on Click {||hwg_EndDialog()}     SIZE 88,52
-@ 419,140 BUTTONex oBtOpen  CAPTION "Open"  BITMAP oImgOpen:Handle  on Click {||ReadBuildFile()} SIZE 88,52
-@ 419,200 BUTTONex oBtSave  CAPTION "Save"  BITMAP oImgSave:Handle  on Click {||SaveBuildFile()} SIZE 88,52
+   @ 419, 20 BUTTONex oBtBuild CAPTION "Build" BITMAP oImgBuild:Handle on Click {||BuildApp()}      SIZE 88,52
+   @ 419, 80 BUTTONex oBtExit  CAPTION "Exit"  BITMAP oImgExit:Handle  on Click {||hwg_EndDialog()}     SIZE 88,52
+   @ 419,140 BUTTONex oBtOpen  CAPTION "Open"  BITMAP oImgOpen:Handle  on Click {||ReadBuildFile()} SIZE 88,52
+   @ 419,200 BUTTONex oBtSave  CAPTION "Save"  BITMAP oImgSave:Handle  on Click {||SaveBuildFile()} SIZE 88,52
 
-ACTIVATE DIALOG oDlg
+   ACTIVATE DIALOG oDlg
 
-RETURN
+   RETURN
 
 STATIC FUNCTION SearchFile(oBrow, oFile)
 
@@ -215,52 +215,52 @@ FUNCTION ReadBuildFile()
    LOCAL cFolderFile:=hwg_SelectFile("HwGUI File Build (*.bld)", "*.bld" )
 
    IF empty(cFolderFile); Return Nil; Endif
-      oStatus:SetTextPanel(1,cFolderFile)
-      oExeName:SetText( Hwg_GetIni( 'Config', 'ExeName' , , cFolderFile ))
-      oLibFolder:SetText(Hwg_GetIni( 'Config', 'LibFolder' , , cFolderFile ))
-      oIncFolder:SetText(Hwg_GetIni( 'Config', 'IncludeFolder' , , cFolderFile ))
-      oPrgFlag:SetText(Hwg_GetIni( 'Config', 'PrgFlags' , , cFolderFile ))
-      oCFlag:SetText(Hwg_GetIni( 'Config', 'CFlags' , , cFolderFile ))
-      oMainPrg:SetText(Hwg_GetIni( 'Config', 'PrgMain' , , cFolderFile ))
+   oStatus:SetTextPanel(1,cFolderFile)
+   oExeName:SetText( Hwg_GetIni( 'Config', 'ExeName' , , cFolderFile ))
+   oLibFolder:SetText(Hwg_GetIni( 'Config', 'LibFolder' , , cFolderFile ))
+   oIncFolder:SetText(Hwg_GetIni( 'Config', 'IncludeFolder' , , cFolderFile ))
+   oPrgFlag:SetText(Hwg_GetIni( 'Config', 'PrgFlags' , , cFolderFile ))
+   oCFlag:SetText(Hwg_GetIni( 'Config', 'CFlags' , , cFolderFile ))
+   oMainPrg:SetText(Hwg_GetIni( 'Config', 'PrgMain' , , cFolderFile ))
 
-      FOR i:=1 to 300
-         oSel1:=Hwg_GetIni( 'FilesPRG', Alltrim(Str(i)) , , cFolderFile )
-         IF !empty(oSel1) //.or. oSel1#Nil
-            AADD(oBr1, oSel1)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel1:=Hwg_GetIni( 'FilesPRG', Alltrim(Str(i)) , , cFolderFile )
+      IF !empty(oSel1) //.or. oSel1#Nil
+         AADD(oBr1, oSel1)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel2:=Hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , cFolderFile )
-         IF !empty(oSel2) //.or. oSel2#Nil
-            AADD(oBr2, oSel2)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel2:=Hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , cFolderFile )
+      IF !empty(oSel2) //.or. oSel2#Nil
+         AADD(oBr2, oSel2)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel3:=Hwg_GetIni( 'FilesLIB', Alltrim(Str(i)) , , cFolderFile )
-         IF !empty(oSel3) //.or. oSel3#Nil
-            AADD(oBr3, oSel3)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel3:=Hwg_GetIni( 'FilesLIB', Alltrim(Str(i)) , , cFolderFile )
+      IF !empty(oSel3) //.or. oSel3#Nil
+         AADD(oBr3, oSel3)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel4:=Hwg_GetIni( 'FilesRES', Alltrim(Str(i)) , , cFolderFile )
-         IF !empty(oSel4) //.or. oSel4#Nil
-            AADD(oBr4, oSel4)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel4:=Hwg_GetIni( 'FilesRES', Alltrim(Str(i)) , , cFolderFile )
+      IF !empty(oSel4) //.or. oSel4#Nil
+         AADD(oBr4, oSel4)
+      ENDIF
+   NEXT
 
-      oBrowse1:aArray:=oBr1
-      oBrowse2:aArray:=oBr2
-      oBrowse3:aArray:=oBr3
-      oBrowse4:aArray:=oBr4
-      oBrowse1:Refresh()
-      oBrowse2:Refresh()
-      oBrowse3:Refresh()
-      oBrowse4:Refresh()
+   oBrowse1:aArray:=oBr1
+   oBrowse2:aArray:=oBr2
+   oBrowse3:aArray:=oBr3
+   oBrowse4:aArray:=oBr4
+   oBrowse1:Refresh()
+   oBrowse2:Refresh()
+   oBrowse3:Refresh()
+   oBrowse4:Refresh()
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION cPathNoFile( cArq )
 
@@ -314,63 +314,63 @@ FUNCTION SaveBuildFile()
    LOCAL cFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 
    IF empty(cFolderFile); Return Nil; Endif
-      IF file(cFolderFile)
-         If(hwg_Msgyesno("File "+cFolderFile+" EXIT ..Replace?"))
-         ERASE( cFolderFile )
-      ELSE
-         hwg_Msginfo("No file SAVED.", "HwMake")
+   IF file(cFolderFile)
+      If(hwg_Msgyesno("File "+cFolderFile+" EXIT ..Replace?"))
+      ERASE( cFolderFile )
+   ELSE
+      hwg_Msginfo("No file SAVED.", "HwMake")
 
-         RETURN NIL
+      RETURN NIL
+   ENDIF
+ENDIF
+Hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), cFolderFile )
+Hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), cFolderFile )
+Hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), cFolderFile )
+Hwg_WriteIni( 'Config', 'PrgFlags'      ,oPrgFlag:GetText(), cFolderFile )
+Hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), cFolderFile )
+Hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), cFolderFile )
+oNome:=""
+
+IF Len(oBrowse1:aArray)>=1
+   FOR i:=1 to Len(oBrowse1:aArray)
+
+      IF !empty(oBrowse1:aArray[i])
+
+         Hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)),oBrowse1:aArray[i], cFolderFile )
+
       ENDIF
-   ENDIF
-   Hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), cFolderFile )
-   Hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), cFolderFile )
-   Hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), cFolderFile )
-   Hwg_WriteIni( 'Config', 'PrgFlags'      ,oPrgFlag:GetText(), cFolderFile )
-   Hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), cFolderFile )
-   Hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), cFolderFile )
-   oNome:=""
 
-   IF Len(oBrowse1:aArray)>=1
-      FOR i:=1 to Len(oBrowse1:aArray)
+   NEXT
 
-         IF !empty(oBrowse1:aArray[i])
+ENDIF
 
-            Hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)),oBrowse1:aArray[i], cFolderFile )
+IF Len(oBrowse2:aArray)>=1
+   FOR i:=1 to Len(oBrowse2:aArray)
+      IF !empty(oBrowse2:aArray[i])
+         Hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], cFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-         ENDIF
+IF Len(oBrowse3:aArray)>=1
+   FOR i:=1 to Len(oBrowse3:aArray)
+      IF !empty(oBrowse3:aArray[i])
+         Hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], cFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-      NEXT
+IF Len(oBrowse4:aArray)>=1
+   FOR i:=1 to Len(oBrowse4:aArray)
+      IF !empty(oBrowse4:aArray[i])
+         Hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], cFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-   ENDIF
+hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
 
-   IF Len(oBrowse2:aArray)>=1
-      FOR i:=1 to Len(oBrowse2:aArray)
-         IF !empty(oBrowse2:aArray[i])
-            Hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], cFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   IF Len(oBrowse3:aArray)>=1
-      FOR i:=1 to Len(oBrowse3:aArray)
-         IF !empty(oBrowse3:aArray[i])
-            Hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], cFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   IF Len(oBrowse4:aArray)>=1
-      FOR i:=1 to Len(oBrowse4:aArray)
-         IF !empty(oBrowse4:aArray[i])
-            Hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], cFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   hwg_Msginfo("File "+cFolderFile+" saved","HwGUI Build", "HwMake")
-
-   RETURN NIL
+RETURN NIL
 
 FUNCTION BuildApp()
 
@@ -675,3 +675,4 @@ STATIC FUNCTION ErrorPreview( cMess )
    oDlg:Activate()
 
    RETURN NIL
+

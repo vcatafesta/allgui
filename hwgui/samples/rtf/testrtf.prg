@@ -24,15 +24,15 @@ FUNCTION Main
    MENUITEM "&Test RTF" ACTION TestRTF()
    SEPARATOR
    MENUITEM "&Exit" ACTION hwg_EndWindow()
-ENDMENU
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION hwg_Shellabout("Info","RTF Demo")
-ENDMENU
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION hwg_Shellabout("Info","RTF Demo")
+   ENDMENU
+   ENDMENU
 
-oMainWindow:Activate()
+   oMainWindow:Activate()
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION TestRtf()
 
@@ -237,17 +237,17 @@ STATIC FUNCTION SetupRTF(cOutFile)
    DEFLANG 1034;           // Lenguaje del documento
    FOOTTYPE BOTH;          // Notas Pie de Pagina y Final Documento
    FOOTNOTES SECTION;      // Al final de la seccion
-ENDNOTES SECTION;
-   FOOTNUMBER SIMBOL;      // Numeracion por simbolos
-PAGESTART 1;            // Pagina Inicial
-PROTECT NONE;           // Tipo de proteccion
-FACING;                 // Diferencia entre paginas pares o impares
-GUTTER 1.0              // Encuadernado 0.5
+   ENDNOTES SECTION;
+      FOOTNUMBER SIMBOL;      // Numeracion por simbolos
+   PAGESTART 1;            // Pagina Inicial
+   PROTECT NONE;           // Tipo de proteccion
+   FACING;                 // Diferencia entre paginas pares o impares
+   GUTTER 1.0              // Encuadernado 0.5
 
-// Trim trailing spaces from data, to save file space.
-oRTF:lTrimSpaces := .T.
+   // Trim trailing spaces from data, to save file space.
+   oRTF:lTrimSpaces := .T.
 
-DEFINE PAGESETUP oRTF MARGINS 0.5, 0.5, 0.5, 0.5 ;
+   DEFINE PAGESETUP oRTF MARGINS 0.5, 0.5, 0.5, 0.5 ;
       PAGEWIDTH (aSize[2]/25.4) ;
       PAGEHEIGHT (aSize[1]/25.4);
       TABWIDTH .5 ;

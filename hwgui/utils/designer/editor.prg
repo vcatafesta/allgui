@@ -188,44 +188,44 @@ FUNCTION EditMethod( cMethName, cMethod )
    FOR i := 1 TO Len( HDTheme():aThemes )
       Hwg_DefineMenuItem( HDTheme():aThemes[i]:name, 1020+i, &( "{||ChangeTheme("+LTrim(Str(i,2))+"),HDTheme():lChanged:=.T.}" ) )
    NEXT
-ENDMENU
-MENUITEM "&Configure" ACTION EditColors()
-ENDMENU
+   ENDMENU
+   MENUITEM "&Configure" ACTION EditColors()
+   ENDMENU
 
-MENUITEM "&Parameters" ACTION Iif(!Empty(cParamString).and.Upper(Left(oEdit:Gettext(),10))!="PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged:=.T.),.F.)
+   MENUITEM "&Parameters" ACTION Iif(!Empty(cParamString).and.Upper(Left(oEdit:Gettext(),10))!="PARAMETERS",(editShow("Parameters "+cParamString+Chr(10)+oEdit:Gettext()),oEdit:lChanged:=.T.),.F.)
 
-MENU TITLE "&Templates "+cMethName
+   MENU TITLE "&Templates "+cMethName
 
-MENUITEM "&Insert Field"     ACTION InsertField(1)
-MENUITEM "&Field:=xVarField" ACTION InsertField(0)
+   MENUITEM "&Insert Field"     ACTION InsertField(1)
+   MENUITEM "&Field:=xVarField" ACTION InsertField(0)
 
-ENDMENU
+   ENDMENU
 
-MENUITEM "&Exit" ACTION oDlg:Close()
-ENDMENU
+   MENUITEM "&Exit" ACTION oDlg:Close()
+   ENDMENU
 
-@ 0,0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
-   STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_WANTRETURN ;
-   ON INIT {||ChangeTheme( HDTheme():nSelected )}                 ;
-   ON GETFOCUS {||Iif(oEdit:cargo,(hwg_Sendmessage(oEdit:handle,EM_SETSEL,0,0),oEdit:cargo:=.F.),.F.)} ;
-   ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
-   FONT oFont
-//           STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL+ES_WANTRETURN+WS_VSCROLL+WS_HSCROLL
-oEdit:cargo := .T.
+   @ 0,0 RICHEDIT oEdit TEXT cMethod SIZE 400,oDlg:nHeight            ;
+      STYLE WS_HSCROLL+WS_VSCROLL+ES_LEFT+ES_MULTILINE+ES_WANTRETURN ;
+      ON INIT {||ChangeTheme( HDTheme():nSelected )}                 ;
+      ON GETFOCUS {||Iif(oEdit:cargo,(hwg_Sendmessage(oEdit:handle,EM_SETSEL,0,0),oEdit:cargo:=.F.),.F.)} ;
+      ON SIZE {|o,x,y|o:Move(,,x,y)}                                 ;
+      FONT oFont
+   //           STYLE ES_MULTILINE+ES_AUTOVSCROLL+ES_AUTOHSCROLL+ES_WANTRETURN+WS_VSCROLL+WS_HSCROLL
+   oEdit:cargo := .T.
 
-// oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
+   // oEdit:oParent:AddEvent( EN_SELCHANGE,oEdit:id,{||EnChange(1)},.T. )
 
-// oEdit:title := cMethod
-*-hwg_SetDlgKey( odlg, 0,VK_TAB, {hwg_Msginfo('tab')})
-*-{hwg_Sendmessage(oEdit:handle,EM_SETTABSTOPS  ,space(2),0)})
-ACTIVATE DIALOG oDlg
-*-hwg_SetDlgKey( oEdit, 0,9)
-IF lRes
+   // oEdit:title := cMethod
+   *-hwg_SetDlgKey( odlg, 0,VK_TAB, {hwg_Msginfo('tab')})
+   *-{hwg_Sendmessage(oEdit:handle,EM_SETTABSTOPS  ,space(2),0)})
+   ACTIVATE DIALOG oDlg
+   *-hwg_SetDlgKey( oEdit, 0,9)
+   IF lRes
 
-   RETURN cMethod
-ENDIF
+      RETURN cMethod
+   ENDIF
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION ChangeTheme( nTheme )
 
@@ -594,3 +594,4 @@ HB_FUNC( NEXTWORD )
 }
 
 #pragma ENDDUMP
+

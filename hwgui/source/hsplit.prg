@@ -26,16 +26,22 @@ CLASS VAR winclass INIT "STATIC"
    DATA bEndDrag
    DATA lScrolling
 
-   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
-         bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling )
-   METHOD Activate()
-   METHOD onEvent( msg, wParam, lParam )
-   METHOD Init()
-   METHOD Paint()
-   METHOD Drag( lParam )
-   METHOD DragAll( lScroll )
+METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
+      bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD onEvent( msg, wParam, lParam )
+
+METHOD Init()
+
+METHOD Paint()
+
+METHOD Drag( lParam )
+
+METHOD DragAll( lScroll )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
       bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling ) CLASS HSplitter

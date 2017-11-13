@@ -34,30 +34,49 @@ CLASS HControl INHERIT HCustomWindow
    ACCESS Name            INLINE ::xName
    ASSIGN Name( cName )   INLINE ::AddName( cName )
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
-   METHOD Init()
-   METHOD AddName( cName ) HIDDEN
-   METHOD NewId()
-   METHOD Show( nShow ) INLINE ::Super:Show( nShow ), iif( ::oParent:lGetSkipLostFocus, ;
-         hwg_Postmessage(  hwg_Getactivewindow() , WM_NEXTDLGCTL, iif( ::oParent:FindControl(, hwg_Getfocus() ) != NIL, 0, ::handle ), 1 ) , .T. )
-   METHOD Hide() INLINE ( ::oParent:lGetSkipLostFocus := .F. , ::Super:Hide() )
-   METHOD Disable() INLINE ( iif( hwg_Selffocus( ::Handle ), hwg_Sendmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, 0, 0 ) , ), hwg_Enablewindow( ::handle, .F. ) )
-   METHOD Enable()
-   METHOD IsEnabled() INLINE hwg_Iswindowenabled( ::Handle )
-   METHOD Enabled( lEnabled ) SETGET
-   METHOD SetFont( oFont )
-   METHOD Setfocus( lValid )
-   METHOD GetText()     INLINE hwg_Getwindowtext( ::handle )
-   METHOD SetText( c )  INLINE hwg_Setwindowtext( ::Handle, c ), ::title := c, ::Refresh()
-   METHOD Refresh()     VIRTUAL
-   METHOD onAnchor( x, y, w, h )
-   METHOD SetToolTip( ctooltip )
-   METHOD ControlSource( cControlSource ) SETGET
-   METHOD DisableBackColor( DisableBColor ) SETGET
-   METHOD END()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      oFont, bInit, bSize, bPaint, cTooltip, tcolor, bColor )
 
-   ENDCLASS
+METHOD Init()
+
+METHOD AddName( cName ) HIDDEN
+
+METHOD NewId()
+
+METHOD Show( nShow ) INLINE ::Super:Show( nShow ), iif( ::oParent:lGetSkipLostFocus, ;
+      hwg_Postmessage(  hwg_Getactivewindow() , WM_NEXTDLGCTL, iif( ::oParent:FindControl(, hwg_Getfocus() ) != NIL, 0, ::handle ), 1 ) , .T. )
+
+METHOD Hide() INLINE ( ::oParent:lGetSkipLostFocus := .F. , ::Super:Hide() )
+
+METHOD Disable() INLINE ( iif( hwg_Selffocus( ::Handle ), hwg_Sendmessage( hwg_Getactivewindow(), WM_NEXTDLGCTL, 0, 0 ) , ), hwg_Enablewindow( ::handle, .F. ) )
+
+METHOD Enable()
+
+METHOD IsEnabled() INLINE hwg_Iswindowenabled( ::Handle )
+
+METHOD Enabled( lEnabled ) SETGET
+
+METHOD SetFont( oFont )
+
+METHOD Setfocus( lValid )
+
+METHOD GetText()     INLINE hwg_Getwindowtext( ::handle )
+
+METHOD SetText( c )  INLINE hwg_Setwindowtext( ::Handle, c ), ::title := c, ::Refresh()
+
+METHOD Refresh()     VIRTUAL
+
+METHOD onAnchor( x, y, w, h )
+
+METHOD SetToolTip( ctooltip )
+
+METHOD ControlSource( cControlSource ) SETGET
+
+METHOD DisableBackColor( DisableBColor ) SETGET
+
+METHOD END()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
       bInit, bSize, bPaint, cTooltip, tcolor, bColor ) CLASS HControl
@@ -407,27 +426,37 @@ METHOD onAnchor( x, y, w, h ) CLASS HControl
 
 CLASS HStatus INHERIT HControl
 
-   CLASS VAR winclass INIT "msctls_statusbar32"
+CLASS VAR winclass INIT "msctls_statusbar32"
 
    DATA aParts
    DATA nStatusHeight INIT 0
    DATA bDblClick
    DATA bRClick
 
-   METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight )
-   METHOD Activate()
-   METHOD Init()
-   METHOD Notify( lParam )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )
-   METHOD SetTextPanel( nPart, cText, lRedraw )
-   METHOD GetTextPanel( nPart )
-   METHOD SetIconPanel( nPart, cIcon, nWidth, nHeight )
-   METHOD StatusHeight( nHeight )
-   METHOD Resize( xIncrSize )
-   METHOD onAnchor( x, y, w, h )
+METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD Notify( lParam )
+
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aParts )
+
+METHOD SetTextPanel( nPart, cText, lRedraw )
+
+METHOD GetTextPanel( nPart )
+
+METHOD SetIconPanel( nPart, cIcon, nWidth, nHeight )
+
+METHOD StatusHeight( nHeight )
+
+METHOD Resize( xIncrSize )
+
+METHOD onAnchor( x, y, w, h )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight ) CLASS HStatus
 
@@ -592,18 +621,22 @@ METHOD onAnchor( x, y, w, h ) CLASS HStatus
 
 CLASS HStatic INHERIT HControl
 
-   CLASS VAR winclass   INIT "STATIC"
+CLASS VAR winclass   INIT "STATIC"
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
-         bColor, lTransp )
-   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
-         bSize, bPaint, cTooltip, tcolor, bColor, lTransp )
-   METHOD Activate()
-   METHOD SetValue( value ) INLINE hwg_Setwindowtext( ::handle, value )
-   METHOD Init()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
+      bColor, lTransp )
 
-   ENDCLASS
+METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+      bSize, bPaint, cTooltip, tcolor, bColor, lTransp )
+
+METHOD Activate()
+
+METHOD SetValue( value ) INLINE hwg_Setwindowtext( ::handle, value )
+
+METHOD Init()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
@@ -678,17 +711,20 @@ METHOD Init() CLASS HStatic
 
 CLASS HButton INHERIT HControl
 
-   CLASS VAR winclass INIT "BUTTON"
+CLASS VAR winclass INIT "BUTTON"
 
    DATA bClick
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-         tcolor, bColor )
-   METHOD Activate()
-   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
-         tcolor, bColor, cCaption )
-   METHOD Init()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor )
+
+METHOD Activate()
+
+METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
+      tcolor, bColor, cCaption )
+
+METHOD Init()
 
 ENDCLASS
 
@@ -754,13 +790,14 @@ METHOD Init() CLASS HButton
 
 CLASS HGroup INHERIT HControl
 
-   CLASS VAR winclass   INIT "BUTTON"
+CLASS VAR winclass   INIT "BUTTON"
 
-   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor )
-   METHOD Activate()
+METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor )
 
-   ENDCLASS
+METHOD Activate()
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor ) CLASS HGroup
@@ -796,11 +833,13 @@ CLASS VAR winclass   INIT "STATIC"
    DATA nBorder
    DATA oPenLight, oPenGray
 
-   METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder )
-   METHOD Activate()
-   METHOD Paint( lpDis )
+METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Paint( lpDis )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder ) CLASS HLine
 

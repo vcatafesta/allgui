@@ -637,9 +637,9 @@ STATIC FUNCTION strip_path( cFileName )
 
    IF cFileName == Nil; cFileName := ""; ENDIF
 
-      hb_FNameSplit( cFileName, NIL, @cName, @cExt )
+   hb_FNameSplit( cFileName, NIL, @cName, @cExt )
 
-      RETURN cName + cExt
+   RETURN cName + cExt
 
 FUNCTION __dbgValToStr( uVal )
 

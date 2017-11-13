@@ -222,80 +222,80 @@ METHOD Do( oEdit, nLine, lCheck ) CLASS Hilight
    IF lComm != Nil .AND. lComm
       IF ( nPos := At( ::cMcomm2, cLine ) ) == 0
          IF !lCheck; ::AddItem( 1, hced_Len(::oEdit,cLine), HILIGHT_COMM ); ENDIF
-            ::lMultiComm := .T.
-            ::aDop[nLine] := 1
+         ::lMultiComm := .T.
+         ::aDop[nLine] := 1
 
-            RETURN NIL
-         ELSE
-            IF !lCheck; ::AddItem( 1, nPos, HILIGHT_COMM ); ENDIF
-               nPos += nLenM
+         RETURN NIL
+      ELSE
+         IF !lCheck; ::AddItem( 1, nPos, HILIGHT_COMM ); ENDIF
+         nPos += nLenM
+      ENDIF
+   ELSE
+      nPos := 1
+   ENDIF
+
+   IF Empty( ::cScomm )
+      cs := ""
+   ELSE
+      cs := Left( ::cScomm,1 )
+      nLenS := Len(::cScomm)
+   ENDIF
+
+   DO WHILE nPos <= nLen
+      DO WHILE nPos <= nLen .AND. hced_Substr( ::oEdit,cLine,nPos,1 ) $ cSpaces; nPos++; ENDDO
+      DO WHILE nPos <= nLen
+         IF ( c := hced_Substr( ::oEdit,cLine,nPos,1 ) ) $ cQuotes
+            nPos1 := nPos
+            IF ( nPos := hced_At( ::oEdit, c, cLine, nPos1+1 ) ) == 0
+               nPos := hced_Len( ::oEdit,cLine )
             ENDIF
-         ELSE
-            nPos := 1
+            IF !lCheck; ::AddItem( nPos1, nPos, HILIGHT_QUOTE ); ENDIF
+
+         ELSEIF c == cs .AND. hced_Substr( ::oEdit, cLine, nPos, nLenS ) == ::cScomm
+            IF !lCheck; ::AddItem( nPos, hced_Len( ::oEdit, cLine ), HILIGHT_COMM ); ENDIF
+            nPos := hced_Len( ::oEdit, cLine ) + 1
+            EXIT
+
+         ELSEIF c == cm .AND. hced_Substr( ::oEdit, cLine, nPos, nLenM ) == ::cMcomm1
+            nPos1 := nPos
+            IF ( nPos := hced_At( ::oEdit, ::cMcomm2, cLine, nPos1+1 ) ) == 0
+               nPos := hced_Len( ::oEdit, cLine )
+               ::lMultiComm := .T.
+               ::aDop[nLine] := 1
+            ENDIF
+            IF !lCheck; ::AddItem( nPos1, nPos, HILIGHT_COMM ); ENDIF
+            nPos += nLenM - 1
+
+         ELSEIF !lCheck .AND. IsLetter( c )
+            nPos1 := nPos
+            //nPos ++
+            nPrev := nPos
+            nPos := hced_NextPos( ::oEdit, cLine, nPos )
+            DO WHILE IsLetter( hced_Substr( ::oEdit, cLine,nPos,1 ) )
+               //nPos++
+               nPrev := nPos
+               nPos := hced_NextPos( ::oEdit, cLine, nPos )
+            ENDDO
+            cWord := " " + Iif( ::lCase, hced_Substr( ::oEdit, cLine, nPos1, nPos-nPos1 ), ;
+               Lower( hced_Substr( ::oEdit, cLine, nPos1, nPos-nPos1 ) ) ) + " "
+            //nPos --
+            nPos := nPrev
+            IF !Empty(::cCommands ) .AND. cWord $ ::cCommands
+               ::AddItem( nPos1, nPos, HILIGHT_KEYW )
+            ELSEIF !Empty(::cFuncs ) .AND. cWord $ ::cFuncs
+               ::AddItem( nPos1, nPos, HILIGHT_FUNC )
+            ENDIF
+
          ENDIF
+         //nPos ++
+         nPos := hced_NextPos( ::oEdit, cLine, nPos )
+      ENDDO
+   ENDDO
+   IF !lCheck
+      ::nLine := nLine
+   ENDIF
 
-         IF Empty( ::cScomm )
-            cs := ""
-         ELSE
-            cs := Left( ::cScomm,1 )
-            nLenS := Len(::cScomm)
-         ENDIF
-
-         DO WHILE nPos <= nLen
-            DO WHILE nPos <= nLen .AND. hced_Substr( ::oEdit,cLine,nPos,1 ) $ cSpaces; nPos++; ENDDO
-               DO WHILE nPos <= nLen
-                  IF ( c := hced_Substr( ::oEdit,cLine,nPos,1 ) ) $ cQuotes
-                     nPos1 := nPos
-                     IF ( nPos := hced_At( ::oEdit, c, cLine, nPos1+1 ) ) == 0
-                        nPos := hced_Len( ::oEdit,cLine )
-                     ENDIF
-                     IF !lCheck; ::AddItem( nPos1, nPos, HILIGHT_QUOTE ); ENDIF
-
-                     ELSEIF c == cs .AND. hced_Substr( ::oEdit, cLine, nPos, nLenS ) == ::cScomm
-                        IF !lCheck; ::AddItem( nPos, hced_Len( ::oEdit, cLine ), HILIGHT_COMM ); ENDIF
-                           nPos := hced_Len( ::oEdit, cLine ) + 1
-                           EXIT
-
-                        ELSEIF c == cm .AND. hced_Substr( ::oEdit, cLine, nPos, nLenM ) == ::cMcomm1
-                           nPos1 := nPos
-                           IF ( nPos := hced_At( ::oEdit, ::cMcomm2, cLine, nPos1+1 ) ) == 0
-                              nPos := hced_Len( ::oEdit, cLine )
-                              ::lMultiComm := .T.
-                              ::aDop[nLine] := 1
-                           ENDIF
-                           IF !lCheck; ::AddItem( nPos1, nPos, HILIGHT_COMM ); ENDIF
-                              nPos += nLenM - 1
-
-                           ELSEIF !lCheck .AND. IsLetter( c )
-                              nPos1 := nPos
-                              //nPos ++
-                              nPrev := nPos
-                              nPos := hced_NextPos( ::oEdit, cLine, nPos )
-                              DO WHILE IsLetter( hced_Substr( ::oEdit, cLine,nPos,1 ) )
-                                 //nPos++
-                                 nPrev := nPos
-                                 nPos := hced_NextPos( ::oEdit, cLine, nPos )
-                              ENDDO
-                              cWord := " " + Iif( ::lCase, hced_Substr( ::oEdit, cLine, nPos1, nPos-nPos1 ), ;
-                                 Lower( hced_Substr( ::oEdit, cLine, nPos1, nPos-nPos1 ) ) ) + " "
-                              //nPos --
-                              nPos := nPrev
-                              IF !Empty(::cCommands ) .AND. cWord $ ::cCommands
-                                 ::AddItem( nPos1, nPos, HILIGHT_KEYW )
-                              ELSEIF !Empty(::cFuncs ) .AND. cWord $ ::cFuncs
-                                 ::AddItem( nPos1, nPos, HILIGHT_FUNC )
-                              ENDIF
-
-                           ENDIF
-                           //nPos ++
-                           nPos := hced_NextPos( ::oEdit, cLine, nPos )
-                        ENDDO
-                     ENDDO
-                     IF !lCheck
-                        ::nLine := nLine
-                     ENDIF
-
-                     RETURN NIL
+   RETURN NIL
 
 METHOD AddItem( nPos1, nPos2, nType ) CLASS Hilight
 

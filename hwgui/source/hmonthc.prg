@@ -18,23 +18,29 @@
 
 CLASS HMonthCalendar INHERIT HControl
 
-   CLASS VAR winclass   INIT "SysMonthCal32"
+CLASS VAR winclass   INIT "SysMonthCal32"
 
    DATA value
    DATA bChange
    DATA bSelect
 
-   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
-         oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
-         lWeekNumbers, bSelect )
-   METHOD Activate()
-   METHOD Init()
-   METHOD SetValue( dValue )
-   METHOD GetValue()
-   METHOD onChange( )
-   METHOD onSelect( )
+METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+      oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
+      lWeekNumbers, bSelect )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Init()
+
+METHOD SetValue( dValue )
+
+METHOD GetValue()
+
+METHOD onChange( )
+
+METHOD onSelect( )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;

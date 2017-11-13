@@ -872,107 +872,107 @@ METHOD LineOut( nstroka, vybfld, hDC, lSelected, lClear ) CLASS HBrowse
    ::xpos := x := ::x1
    IF lClear == Nil ; lClear := .F. ; ENDIF
 
-      IF ::bLineOut != Nil
-         Eval( ::bLineOut,Self,lSelected )
-      ENDIF
-      IF ::nRecords > 0
-         oldBkColor := hwg_Setbkcolor(   hDC, iif( vybfld >= 1,::htbcolor, iif( lSelected,::bcolorSel,::bcolor ) ) )
-         oldTColor  := hwg_Settextcolor( hDC, iif( vybfld >= 1,::httcolor, iif( lSelected,::tcolorSel,::tcolor ) ) )
-         fldname := SPACE( 8 )
-         fif     := IIF( ::freeze > 0, 1, ::nLeftCol )
+   IF ::bLineOut != Nil
+      Eval( ::bLineOut,Self,lSelected )
+   ENDIF
+   IF ::nRecords > 0
+      oldBkColor := hwg_Setbkcolor(   hDC, iif( vybfld >= 1,::htbcolor, iif( lSelected,::bcolorSel,::bcolor ) ) )
+      oldTColor  := hwg_Settextcolor( hDC, iif( vybfld >= 1,::httcolor, iif( lSelected,::tcolorSel,::tcolor ) ) )
+      fldname := SPACE( 8 )
+      fif     := IIF( ::freeze > 0, 1, ::nLeftCol )
 
-         WHILE x < ::x2 - 2
-            IF ::aColumns[fif]:bColorBlock != Nil
-               aCores := eval(::aColumns[fif]:bColorBlock)
-               IF lSelected
-                  ::aColumns[fif]:tColor := aCores[3]
-                  ::aColumns[fif]:bColor := aCores[4]
+      WHILE x < ::x2 - 2
+         IF ::aColumns[fif]:bColorBlock != Nil
+            aCores := eval(::aColumns[fif]:bColorBlock)
+            IF lSelected
+               ::aColumns[fif]:tColor := aCores[3]
+               ::aColumns[fif]:bColor := aCores[4]
+            ELSE
+               ::aColumns[fif]:tColor := aCores[1]
+               ::aColumns[fif]:bColor := aCores[2]
+            ENDIF
+            ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor   )
+         ENDIF
+         xSize := ::aColumns[fif]:width
+         IF ::lAdjRight .and. fif == LEN( ::aColumns )
+            xSize := Max( ::x2 - x, xSize )
+         ENDIF
+         IF i == ::colpos
+            ::xpos := x
+         ENDIF
+
+         IF vybfld == 0 .OR. vybfld == i
+            IF ::aColumns[fif]:bColor != Nil .AND. ::aColumns[fif]:brush == Nil
+               ::aColumns[fif]:brush := HBrush():Add( ::aColumns[fif]:bColor )
+            ENDIF
+            hBReal := Iif( ::aColumns[fif]:brush != Nil, ;
+               ::aColumns[fif]:brush:handle,   ;
+               oLineBrush:handle )
+            hwg_Fillrect( hDC, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-Iif(::lSep3d,2,1)-1,::y1+(::height+1)*nstroka, hBReal )
+            IF !lClear
+               IF ::aColumns[fif]:aBitmaps != Nil .AND. !Empty( ::aColumns[fif]:aBitmaps )
+                  FOR j := 1 TO Len( ::aColumns[fif]:aBitmaps )
+                     IF Eval( ::aColumns[fif]:aBitmaps[j,1],EVAL( ::aColumns[fif]:block,,Self,fif ),lSelected )
+                        ob := ::aColumns[fif]:aBitmaps[j,2]
+                        // IF ob:nHeight > ::height
+                        y1 := 0
+                        bh := ::height
+                        bw := Int( ob:nWidth * ( ob:nHeight / ::height ) )
+                        hwg_Drawbitmap( hDC, ob:handle,, x, y1+::y1+(::height+1)*(nstroka-1)+1, bw, bh )
+                        /*
+                        ELSE
+                        y1 := Int( (::height-ob:nHeight)/2 )
+                        bh := ob:nHeight
+                        bw := ob:nWidth
+                        hwg_Drawtransparentbitmap( hDC, ob:handle, x, y1+::y1+(::height+1)*(nstroka-1)+1 )
+                        ENDIF
+                        */
+                        EXIT
+                     ENDIF
+                  NEXT
                ELSE
-                  ::aColumns[fif]:tColor := aCores[1]
-                  ::aColumns[fif]:bColor := aCores[2]
-               ENDIF
-               ::aColumns[fif]:brush := HBrush():Add(::aColumns[fif]:bColor   )
-            ENDIF
-            xSize := ::aColumns[fif]:width
-            IF ::lAdjRight .and. fif == LEN( ::aColumns )
-               xSize := Max( ::x2 - x, xSize )
-            ENDIF
-            IF i == ::colpos
-               ::xpos := x
-            ENDIF
-
-            IF vybfld == 0 .OR. vybfld == i
-               IF ::aColumns[fif]:bColor != Nil .AND. ::aColumns[fif]:brush == Nil
-                  ::aColumns[fif]:brush := HBrush():Add( ::aColumns[fif]:bColor )
-               ENDIF
-               hBReal := Iif( ::aColumns[fif]:brush != Nil, ;
-                  ::aColumns[fif]:brush:handle,   ;
-                  oLineBrush:handle )
-               hwg_Fillrect( hDC, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-Iif(::lSep3d,2,1)-1,::y1+(::height+1)*nstroka, hBReal )
-               IF !lClear
-                  IF ::aColumns[fif]:aBitmaps != Nil .AND. !Empty( ::aColumns[fif]:aBitmaps )
-                     FOR j := 1 TO Len( ::aColumns[fif]:aBitmaps )
-                        IF Eval( ::aColumns[fif]:aBitmaps[j,1],EVAL( ::aColumns[fif]:block,,Self,fif ),lSelected )
-                           ob := ::aColumns[fif]:aBitmaps[j,2]
-                           // IF ob:nHeight > ::height
-                           y1 := 0
-                           bh := ::height
-                           bw := Int( ob:nWidth * ( ob:nHeight / ::height ) )
-                           hwg_Drawbitmap( hDC, ob:handle,, x, y1+::y1+(::height+1)*(nstroka-1)+1, bw, bh )
-                           /*
-                           ELSE
-                           y1 := Int( (::height-ob:nHeight)/2 )
-                           bh := ob:nHeight
-                           bw := ob:nWidth
-                           hwg_Drawtransparentbitmap( hDC, ob:handle, x, y1+::y1+(::height+1)*(nstroka-1)+1 )
-                           ENDIF
-                           */
-                           EXIT
-                        ENDIF
-                     NEXT
-                  ELSE
-                     sviv := AllTrim( FldStr( Self,fif ) )
-                     // Ahora lineas Justificadas !!
-                     IF ::aColumns[fif]:tColor != Nil
-                        oldT1Color := hwg_Settextcolor( hDC, ::aColumns[fif]:tColor )
+                  sviv := AllTrim( FldStr( Self,fif ) )
+                  // Ahora lineas Justificadas !!
+                  IF ::aColumns[fif]:tColor != Nil
+                     oldT1Color := hwg_Settextcolor( hDC, ::aColumns[fif]:tColor )
+                  ENDIF
+                  IF ::aColumns[fif]:bColor != Nil
+                     oldBk1Color := hwg_Setbkcolor( hDC, ::aColumns[fif]:bColor )
+                  ENDIF
+                  IF ::aColumns[fif]:oFont != Nil
+                     hwg_Selectobject( hDC, ::aColumns[fif]:oFont:handle )
+                     lColumnFont := .T.
+                  ELSEIF lColumnFont
+                     IF ::oFont != Nil
+                        hwg_Selectobject( hDC, ::ofont:handle )
                      ENDIF
-                     IF ::aColumns[fif]:bColor != Nil
-                        oldBk1Color := hwg_Setbkcolor( hDC, ::aColumns[fif]:bColor )
-                     ENDIF
-                     IF ::aColumns[fif]:oFont != Nil
-                        hwg_Selectobject( hDC, ::aColumns[fif]:oFont:handle )
-                        lColumnFont := .T.
-                     ELSEIF lColumnFont
-                        IF ::oFont != Nil
-                           hwg_Selectobject( hDC, ::ofont:handle )
-                        ENDIF
-                        lColumnFont := .F.
-                     ENDIF
-                     hwg_Drawtext( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
-                     IF ::aColumns[fif]:tColor != Nil
-                        hwg_Settextcolor( hDC, oldT1Color )
-                     ENDIF
-                     IF ::aColumns[fif]:bColor != Nil
-                        hwg_Setbkcolor( hDC, oldBk1Color )
-                     ENDIF
+                     lColumnFont := .F.
+                  ENDIF
+                  hwg_Drawtext( hDC, sviv, x, ::y1+(::height+1)*(nstroka-1)+1, x+xSize-2,::y1+(::height+1)*nstroka-1, ::aColumns[fif]:nJusLin )
+                  IF ::aColumns[fif]:tColor != Nil
+                     hwg_Settextcolor( hDC, oldT1Color )
+                  ENDIF
+                  IF ::aColumns[fif]:bColor != Nil
+                     hwg_Setbkcolor( hDC, oldBk1Color )
                   ENDIF
                ENDIF
             ENDIF
-            x += xSize
-            fif := IIF( fif = ::freeze, ::nLeftCol, fif + 1 )
-            i ++
-            IF ! ::lAdjRight .and. fif > LEN( ::aColumns )
-               EXIT
-            ENDIF
-         ENDDO
-         hwg_Settextcolor( hDC,oldTColor )
-         hwg_Setbkcolor( hDC,oldBkColor )
-         IF lColumnFont
-            hwg_Selectobject( hDC, ::ofont:handle )
          ENDIF
+         x += xSize
+         fif := IIF( fif = ::freeze, ::nLeftCol, fif + 1 )
+         i ++
+         IF ! ::lAdjRight .and. fif > LEN( ::aColumns )
+            EXIT
+         ENDIF
+      ENDDO
+      hwg_Settextcolor( hDC,oldTColor )
+      hwg_Setbkcolor( hDC,oldBkColor )
+      IF lColumnFont
+         hwg_Selectobject( hDC, ::ofont:handle )
       ENDIF
+   ENDIF
 
-      RETURN NIL
+   RETURN NIL
 
 METHOD SetColumn( nCol ) CLASS HBrowse
 

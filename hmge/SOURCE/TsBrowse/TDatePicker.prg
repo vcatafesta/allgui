@@ -15,7 +15,7 @@
 
 CLASS TDatePicker FROM TControl
 
-CLASSDATA lRegistered AS LOGICAL
+   CLASSDATA lRegistered AS LOGICAL
    DATA Atx, lAppend
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;

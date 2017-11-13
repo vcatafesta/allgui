@@ -39,48 +39,48 @@ FUNCTION Main
    SEPARATOR
    MENUITEM "&Move Main Window" ACTION oMainWindow:Move(50, 60, 200, 300)
    MENUITEM "&Exit" ACTION hwg_EndWindow()
-ENDMENU
-MENU TITLE "&Samples"
-MENUITEM "&Checked" ID 1001 ;
-   ACTION hwg_Checkmenuitem( ,1001, !hwg_Ischeckedmenuitem( ,1001 ) )
-SEPARATOR
-MENUITEM "&Test Tab" ACTION TestTab()
-MENUITEM "&Class HRect" ACTION RRectangle()
-SEPARATOR
-MENUITEM "&MsgGet" ;
-   ACTION hwg_Copystringtoclipboard(hwg_MsgGet("Dialog Sample","Input table name"))
-MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
-MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg( )
-MENUITEM "&DOS print" ACTION PrintDos()
-// MENUITEM "&Windows print" ;
-//       ACTION Iif( OpenReport("a.rpt","Simple"),PrintReport(,,.T.),.F.)
-MENUITEM "&Print Preview" ACTION PrnTest()
-MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
-MENUITEM "&Command ProgressBar" ACTION TestProgres()
-SEPARATOR
-MENUITEM "&Test No Exit" ACTION NoExit()
-ENDMENU
+   ENDMENU
+   MENU TITLE "&Samples"
+   MENUITEM "&Checked" ID 1001 ;
+      ACTION hwg_Checkmenuitem( ,1001, !hwg_Ischeckedmenuitem( ,1001 ) )
+   SEPARATOR
+   MENUITEM "&Test Tab" ACTION TestTab()
+   MENUITEM "&Class HRect" ACTION RRectangle()
+   SEPARATOR
+   MENUITEM "&MsgGet" ;
+      ACTION hwg_Copystringtoclipboard(hwg_MsgGet("Dialog Sample","Input table name"))
+   MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
+   MENUITEM "&MdiChild from prg" ACTION MdiChildFromPrg( )
+   MENUITEM "&DOS print" ACTION PrintDos()
+   // MENUITEM "&Windows print" ;
+   //       ACTION Iif( OpenReport("a.rpt","Simple"),PrintReport(,,.T.),.F.)
+   MENUITEM "&Print Preview" ACTION PrnTest()
+   MENUITEM "&Sending e-mail using Outlook" ACTION Sendemail("test@test.com")
+   MENUITEM "&Command ProgressBar" ACTION TestProgres()
+   SEPARATOR
+   MENUITEM "&Test No Exit" ACTION NoExit()
+   ENDMENU
 
-MENU TITLE "&TopMost"
-MENUITEM "&Active" ACTION ActiveTopMost( oMainWindow:Handle, .T. )
-MENUITEM "&Desactive" ACTION ActiveTopMost( oMainWindow:Handle, .F. )
-ENDMENU
+   MENU TITLE "&TopMost"
+   MENUITEM "&Active" ACTION ActiveTopMost( oMainWindow:Handle, .T. )
+   MENUITEM "&Desactive" ACTION ActiveTopMost( oMainWindow:Handle, .F. )
+   ENDMENU
 
-MENU TITLE "&Help"
-MENUITEM "&About" ACTION OpenAbout()
-MENUITEM "&Window2Bitmap" ACTION About2()
-MENUITEM "&Version HwGUI and Compilator" ACTION hwg_Msginfo(HwG_Version(1))
-MENUITEM "&Version HwGUI" ACTION hwg_Msginfo(HwG_Version())
-ENDMENU
-MENU TITLE "&Windows"
-MENUITEM "&Tile"  ;
-   ACTION  hwg_Sendmessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0)
-ENDMENU
-ENDMENU
+   MENU TITLE "&Help"
+   MENUITEM "&About" ACTION OpenAbout()
+   MENUITEM "&Window2Bitmap" ACTION About2()
+   MENUITEM "&Version HwGUI and Compilator" ACTION hwg_Msginfo(HwG_Version(1))
+   MENUITEM "&Version HwGUI" ACTION hwg_Msginfo(HwG_Version())
+   ENDMENU
+   MENU TITLE "&Windows"
+   MENUITEM "&Tile"  ;
+      ACTION  hwg_Sendmessage(HWindow():GetMain():handle,WM_MDITILE,MDITILE_HORIZONTAL,0)
+   ENDMENU
+   ENDMENU
 
-ACTIVATE WINDOW oMainWindow MAXIMIZED
+   ACTIVATE WINDOW oMainWindow MAXIMIZED
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION CreateChildWindow
 
@@ -328,24 +328,24 @@ FUNCTION FileOpen
       MENU OF oModDlg
       MENUITEM "&Font" ACTION ( oBrw:oFont:=HFont():Select(oFont),oBrw:Refresh() )
       MENUITEM "&Exit" ACTION hwg_EndDialog( oModDlg:handle )
-   ENDMENU
+      ENDMENU
 
-   @ 0,0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
-      SIZE 500,300                           ;
-      STYLE WS_VSCROLL + WS_HSCROLL          ;
-      ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,y)} ;
-      ON GETFOCUS {|n,o|dbSelectArea(o:alias)}
-   hwg_CreateList( oBrw,.T. )
-   oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
-   IF oFont != Nil
-      oBrw:ofont := oFont
+      @ 0,0 BROWSE oBrw DATABASE OF oModDlg ID nId ;
+         SIZE 500,300                           ;
+         STYLE WS_VSCROLL + WS_HSCROLL          ;
+         ON SIZE {|o,x,y|hwg_Movewindow(o:handle,0,0,x,y)} ;
+         ON GETFOCUS {|n,o|dbSelectArea(o:alias)}
+      hwg_CreateList( oBrw,.T. )
+      oBrw:bScrollPos := {|o,n,lEof,nPos|hwg_VScrollPos(o,n,lEof,nPos)}
+      IF oFont != Nil
+         oBrw:ofont := oFont
+      ENDIF
+      AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_Msginfo("Column number "+Str(n))}})
+
+      ACTIVATE DIALOG oModDlg NOMODAL
    ENDIF
-   AEval(oBrw:aColumns, {|o| o:bHeadClick := {|oB, n| hwg_Msginfo("Column number "+Str(n))}})
 
-   ACTIVATE DIALOG oModDlg NOMODAL
-ENDIF
-
-RETURN NIL
+   RETURN NIL
 
 FUNCTION FileClose( oDlg )
 

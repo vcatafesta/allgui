@@ -242,9 +242,9 @@ PROCEDURE Build5(ProjectName) //(x)Harbour - Visual C
 
    QUITarEspera()
 
-EndBuild()
+   EndBuild()
 
-Procesando(2)
+   Procesando(2)
 
-RETURN
+   RETURN
 

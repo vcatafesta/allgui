@@ -33,17 +33,23 @@ CLASS VAR winclass   INIT "STATIC"
    DATA oPen, oPenCoor
    DATA xmax, ymax, xmin, ymin PROTECTED
 
-   METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
-         bSize, ctooltip, tcolor, bcolor )
-   METHOD Activate()
-   METHOD Redefine( oWndParent, nId, aValues, oFont, ;
-         bSize, ctooltip, tcolor, bcolor )
-   METHOD Init()
-   METHOD CalcMinMax()
-   METHOD Paint( lpDis )
-   METHOD Rebuild( aValues, nType )
+METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
+      bSize, ctooltip, tcolor, bcolor )
 
-   ENDCLASS
+METHOD Activate()
+
+METHOD Redefine( oWndParent, nId, aValues, oFont, ;
+      bSize, ctooltip, tcolor, bcolor )
+
+METHOD Init()
+
+METHOD CalcMinMax()
+
+METHOD Paint( lpDis )
+
+METHOD Rebuild( aValues, nType )
+
+ENDCLASS
 
 METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
       bSize, ctooltip, tcolor, bcolor ) CLASS HGraph

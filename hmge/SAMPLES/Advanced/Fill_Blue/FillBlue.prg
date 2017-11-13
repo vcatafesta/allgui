@@ -64,9 +64,9 @@ FUNCTION App_OnPaint( hWnd )
       FONTCOLOR WHITE TRANSPARENT ;
       ONCE
 
-EndPaint( hWnd, pPS )
+   EndPaint( hWnd, pPS )
 
-RETURN 0
+   RETURN 0
 
 FUNCTION FillBlue( hWnd )
 

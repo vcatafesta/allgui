@@ -73,58 +73,58 @@ FUNCTION Main
       DEFINE SPLITBOX
          DEFINE TOOLBAREX oBar  BUTTONSIZE 55,35 FONT "Arial" SIZE 7
 
-            BUTTON Btn_1  PICTURE "Super16" ;
-               CAPTION "Sample 1";
-               TOOLTIP "Sample 1" ACTION fWindow( 1 )
+         BUTTON Btn_1  PICTURE "Super16" ;
+            CAPTION "Sample 1";
+            TOOLTIP "Sample 1" ACTION fWindow( 1 )
 
-            BUTTON Btn_2 PICTURE "Super16"  ;
-               CAPTION "Sample 2";
-               TOOLTIP "Sample 2" ACTION fWindow( 2 )
+         BUTTON Btn_2 PICTURE "Super16"  ;
+            CAPTION "Sample 2";
+            TOOLTIP "Sample 2" ACTION fWindow( 2 )
 
-            BUTTON Btn_3 PICTURE "Super16" ;
-               CAPTION "Sample 3";
-               TOOLTIP "Sample 3" ACTION fWindow( 3 )
+         BUTTON Btn_3 PICTURE "Super16" ;
+            CAPTION "Sample 3";
+            TOOLTIP "Sample 3" ACTION fWindow( 3 )
 
-            BUTTON Btn_4 PICTURE "Super16"  ;
-               CAPTION "Sample 4";
-               TOOLTIP "Sample 4" ACTION fWindow( 4 )
+         BUTTON Btn_4 PICTURE "Super16"  ;
+            CAPTION "Sample 4";
+            TOOLTIP "Sample 4" ACTION fWindow( 4 )
 
-            BUTTON Btn_5 PICTURE "Super16"  ;
-               CAPTION "Sample 5";
-               TOOLTIP "Sample 5" ACTION fWindow( 5 )
+         BUTTON Btn_5 PICTURE "Super16"  ;
+            CAPTION "Sample 5";
+            TOOLTIP "Sample 5" ACTION fWindow( 5 )
 
-            BUTTON Btn_6 PICTURE "Super16"  ;
-               CAPTION "Sample 6";
-               TOOLTIP "Sample 6" ACTION fWindow( 6 )
+         BUTTON Btn_6 PICTURE "Super16"  ;
+            CAPTION "Sample 6";
+            TOOLTIP "Sample 6" ACTION fWindow( 6 )
 
-            BUTTON Btn_7 PICTURE "Super16"  ;
-               CAPTION "Sample 7";
-               TOOLTIP "Sample 7" ACTION fWindow( 7 )
+         BUTTON Btn_7 PICTURE "Super16"  ;
+            CAPTION "Sample 7";
+            TOOLTIP "Sample 7" ACTION fWindow( 7 )
 
-            BUTTON Btn_8 PICTURE "Super16"  ;
-               CAPTION "Sample 8";
-               TOOLTIP "Sample 8" ACTION fWindow( 8 )
+         BUTTON Btn_8 PICTURE "Super16"  ;
+            CAPTION "Sample 8";
+            TOOLTIP "Sample 8" ACTION fWindow( 8 )
 
-            BUTTON Btn_9 PICTURE "ExitB16"  ;
-               CAPTION "Exit";
-               ACTION Form_1.Release ;
-               TOOLTIP "Exit"
-         END TOOLBAR
-      END SPLITBOX
+         BUTTON Btn_9 PICTURE "ExitB16"  ;
+            CAPTION "Exit";
+            ACTION Form_1.Release ;
+            TOOLTIP "Exit"
+      END TOOLBAR
+   END SPLITBOX
 
-      DEFINE STATUSBAR FONT 'MS Sans Serif' SIZE 9
-         STATUSITEM "HMG Power Ready!"
-         CLOCK
-         DATE
-      END STATUSBAR
+   DEFINE STATUSBAR FONT 'MS Sans Serif' SIZE 9
+      STATUSITEM "HMG Power Ready!"
+      CLOCK
+      DATE
+   END STATUSBAR
 
-   END WINDOW
+END WINDOW
 
-   CENTER WINDOW Form_1
+CENTER WINDOW Form_1
 
-   ACTIVATE WINDOW Form_1
+ACTIVATE WINDOW Form_1
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION BuildMenu()
 

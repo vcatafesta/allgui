@@ -13,7 +13,7 @@ FUNCTION Main
          value 'Name'
          vcenteralign .t.
       END LABEL
-      DEFINE COMBOSEARCHgrid name
+      DEFINE COMBOSEARCHGRID name
          row 10
          col 80
          width 480
@@ -23,7 +23,7 @@ FUNCTION Main
          justify { 0, 0, 1 }
          anywheresearch .t.
          showheaders .t.
-      END COMBOSEARCHgrid
+      END COMBOSEARCHGRID
       DEFINE LABEL label2
          row 40
          col 10

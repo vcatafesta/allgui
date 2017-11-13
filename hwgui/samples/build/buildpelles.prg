@@ -170,51 +170,51 @@ FUNCTION ReadBuildFile()
 
    IF empty(oFolderFile); Return Nil; Endif
 
-      oExeName:SetText( Hwg_GetIni( 'Config', 'ExeName' , , oFolderFile ))
-      oLibFolder:SetText(Hwg_GetIni( 'Config', 'LibFolder' , , oFolderFile ))
-      oIncFolder:SetText(Hwg_GetIni( 'Config', 'IncludeFolder' , , oFolderFile ))
-      oPrgFlag:SetText(Hwg_GetIni( 'Config', 'PrgFlags' , , oFolderFile ))
-      oCFlag:SetText(Hwg_GetIni( 'Config', 'CFlags' , , oFolderFile ))
-      oMainPrg:SetText(Hwg_GetIni( 'Config', 'PrgMain' , , oFolderFile ))
+   oExeName:SetText( Hwg_GetIni( 'Config', 'ExeName' , , oFolderFile ))
+   oLibFolder:SetText(Hwg_GetIni( 'Config', 'LibFolder' , , oFolderFile ))
+   oIncFolder:SetText(Hwg_GetIni( 'Config', 'IncludeFolder' , , oFolderFile ))
+   oPrgFlag:SetText(Hwg_GetIni( 'Config', 'PrgFlags' , , oFolderFile ))
+   oCFlag:SetText(Hwg_GetIni( 'Config', 'CFlags' , , oFolderFile ))
+   oMainPrg:SetText(Hwg_GetIni( 'Config', 'PrgMain' , , oFolderFile ))
 
-      FOR i:=1 to 300
-         oSel1:=Hwg_GetIni( 'FilesPRG', Alltrim(Str(i)) , , oFolderFile )
-         IF !empty(oSel1) //.or. oSel1#Nil
-            AADD(oBr1, oSel1)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel1:=Hwg_GetIni( 'FilesPRG', Alltrim(Str(i)) , , oFolderFile )
+      IF !empty(oSel1) //.or. oSel1#Nil
+         AADD(oBr1, oSel1)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel2:=Hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , oFolderFile )
-         IF !empty(oSel2) //.or. oSel2#Nil
-            AADD(oBr2, oSel2)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel2:=Hwg_GetIni( 'FilesC', Alltrim(Str(i)) , , oFolderFile )
+      IF !empty(oSel2) //.or. oSel2#Nil
+         AADD(oBr2, oSel2)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel3:=Hwg_GetIni( 'FilesLIB', Alltrim(Str(i)) , , oFolderFile )
-         IF !empty(oSel3) //.or. oSel3#Nil
-            AADD(oBr3, oSel3)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel3:=Hwg_GetIni( 'FilesLIB', Alltrim(Str(i)) , , oFolderFile )
+      IF !empty(oSel3) //.or. oSel3#Nil
+         AADD(oBr3, oSel3)
+      ENDIF
+   NEXT
 
-      FOR i:=1 to 300
-         oSel4:=Hwg_GetIni( 'FilesRES', Alltrim(Str(i)) , , oFolderFile )
-         IF !empty(oSel4) //.or. oSel4#Nil
-            AADD(oBr4, oSel4)
-         ENDIF
-      NEXT
+   FOR i:=1 to 300
+      oSel4:=Hwg_GetIni( 'FilesRES', Alltrim(Str(i)) , , oFolderFile )
+      IF !empty(oSel4) //.or. oSel4#Nil
+         AADD(oBr4, oSel4)
+      ENDIF
+   NEXT
 
-      oBrowse1:aArray:=oBr1
-      oBrowse2:aArray:=oBr2
-      oBrowse3:aArray:=oBr3
-      oBrowse4:aArray:=oBr4
-      oBrowse1:Refresh()
-      oBrowse2:Refresh()
-      oBrowse3:Refresh()
-      oBrowse4:Refresh()
+   oBrowse1:aArray:=oBr1
+   oBrowse2:aArray:=oBr2
+   oBrowse3:aArray:=oBr3
+   oBrowse4:aArray:=oBr4
+   oBrowse1:Refresh()
+   oBrowse2:Refresh()
+   oBrowse3:Refresh()
+   oBrowse4:Refresh()
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION SaveBuildFile()
 
@@ -222,63 +222,63 @@ FUNCTION SaveBuildFile()
    LOCAL oFolderFile:=hwg_SaveFile("*.bld", "HwGUI File Build (*.bld)", "*.bld" )
 
    IF empty(oFolderFile); Return Nil; Endif
-      IF file(oFolderFile)
-         If(hwg_Msgyesno("File "+oFolderFile+" EXIT ..Replace?"))
-         ERASE( oFolderFile )
-      ELSE
-         hwg_Msginfo("No file SAVED.")
+   IF file(oFolderFile)
+      If(hwg_Msgyesno("File "+oFolderFile+" EXIT ..Replace?"))
+      ERASE( oFolderFile )
+   ELSE
+      hwg_Msginfo("No file SAVED.")
 
-         RETURN NIL
+      RETURN NIL
+   ENDIF
+ENDIF
+Hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), oFolderFile )
+Hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), oFolderFile )
+Hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), oFolderFile )
+Hwg_WriteIni( 'Config', 'PrgFlags'      ,oPrgFlag:GetText(), oFolderFile )
+Hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), oFolderFile )
+Hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), oFolderFile )
+oNome:=""
+
+IF Len(oBrowse1:aArray)>=1
+   FOR i:=1 to Len(oBrowse1:aArray)
+
+      IF !empty(oBrowse1:aArray[i])
+
+         Hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)),oBrowse1:aArray[i], oFolderFile )
+
       ENDIF
-   ENDIF
-   Hwg_WriteIni( 'Config', 'ExeName'       ,oExeName:GetText(), oFolderFile )
-   Hwg_WriteIni( 'Config', 'LibFolder'     ,oLibFolder:GetText(), oFolderFile )
-   Hwg_WriteIni( 'Config', 'IncludeFolder' ,oIncFolder:GetText(), oFolderFile )
-   Hwg_WriteIni( 'Config', 'PrgFlags'      ,oPrgFlag:GetText(), oFolderFile )
-   Hwg_WriteIni( 'Config', 'CFlags'        ,oCFlag:GetText(), oFolderFile )
-   Hwg_WriteIni( 'Config', 'PrgMain'       ,oMainPrg:GetText(), oFolderFile )
-   oNome:=""
 
-   IF Len(oBrowse1:aArray)>=1
-      FOR i:=1 to Len(oBrowse1:aArray)
+   NEXT
 
-         IF !empty(oBrowse1:aArray[i])
+ENDIF
 
-            Hwg_WriteIni( 'FilesPRG', Alltrim(Str(i)),oBrowse1:aArray[i], oFolderFile )
+IF Len(oBrowse2:aArray)>=1
+   FOR i:=1 to Len(oBrowse2:aArray)
+      IF !empty(oBrowse2:aArray[i])
+         Hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], oFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-         ENDIF
+IF Len(oBrowse3:aArray)>=1
+   FOR i:=1 to Len(oBrowse3:aArray)
+      IF !empty(oBrowse3:aArray[i])
+         Hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], oFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-      NEXT
+IF Len(oBrowse4:aArray)>=1
+   FOR i:=1 to Len(oBrowse4:aArray)
+      IF !empty(oBrowse4:aArray[i])
+         Hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], oFolderFile )
+      ENDIF
+   NEXT
+ENDIF
 
-   ENDIF
+hwg_Msginfo("File "+oFolderFile+" saved","HwGUI Build")
 
-   IF Len(oBrowse2:aArray)>=1
-      FOR i:=1 to Len(oBrowse2:aArray)
-         IF !empty(oBrowse2:aArray[i])
-            Hwg_WriteIni( 'FilesC', Alltrim(Str(i)),oBrowse2:aArray[i], oFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   IF Len(oBrowse3:aArray)>=1
-      FOR i:=1 to Len(oBrowse3:aArray)
-         IF !empty(oBrowse3:aArray[i])
-            Hwg_WriteIni( 'FilesLIB', Alltrim(Str(i)),oBrowse3:aArray[i], oFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   IF Len(oBrowse4:aArray)>=1
-      FOR i:=1 to Len(oBrowse4:aArray)
-         IF !empty(oBrowse4:aArray[i])
-            Hwg_WriteIni( 'FilesRES', Alltrim(Str(i)),oBrowse4:aArray[i], oFolderFile )
-         ENDIF
-      NEXT
-   ENDIF
-
-   hwg_Msginfo("File "+oFolderFile+" saved","HwGUI Build")
-
-   RETURN NIL
+RETURN NIL
 
 FUNCTION BuildApp()
 

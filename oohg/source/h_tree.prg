@@ -1731,35 +1731,35 @@ STATIC FUNCTION AddChildren( Self, ParentHandle, ChildHandle, aItems )
       ENDIF
       ParentItem := if( Self:ItemIds, Self:aTreeIdMap[ ParentPos ], ParentPos )
 
-   NEXTChild := ChildHandle
+      NEXTChild := ChildHandle
 
-   DO WHILE NextChild != 0
-   NEXTPos := aScan( ::aTreeMap, NextChild )
-   IF NextPos == 0
-      MsgOOHGError( "AddChildren Function: Invalid Child Item. Program Terminated." )
+      DO WHILE NextChild != 0
+         NEXTPos := aScan( ::aTreeMap, NextChild )
+         IF NextPos == 0
+            MsgOOHGError( "AddChildren Function: Invalid Child Item. Program Terminated." )
+         ENDIF
+         NEXTItem := if( Self:ItemIds, Self:aTreeIdMap[ NextPos ], NextPos )
+
+         aAdd( aItems, { NextItem, ;
+            Self:Item( NextItem ), ;
+            ParentItem, ;
+            if( Self:ItemIds, NextItem, Self:aTreeIdMap[ NextItem ] ), ;
+            Self:ItemImages( NextItem ), ;
+            Self:CheckItem( NextItem ), ;
+            Self:ItemReadonly( NextItem ), ;
+            Self:BoldItem( NextItem ), ;
+            ! Self:ItemEnabled( NextItem ), ;                               // disabled
+         ! Self:ItemDraggable( NextItem ) } )                            // no drag
+
+         // add sub-children
+         AddChildren( Self, NextChild, TreeView_GetChild( Self:hWnd, NextChild ), aItems )
+
+         // next sibling
+         NEXTChild := TreeView_GetNextSibling( Self:hWnd, NextChild )
+      ENDDO
    ENDIF
-NEXTItem := if( Self:ItemIds, Self:aTreeIdMap[ NextPos ], NextPos )
 
-aAdd( aItems, { NextItem, ;
-   Self:Item( NextItem ), ;
-   ParentItem, ;
-   if( Self:ItemIds, NextItem, Self:aTreeIdMap[ NextItem ] ), ;
-   Self:ItemImages( NextItem ), ;
-   Self:CheckItem( NextItem ), ;
-   Self:ItemReadonly( NextItem ), ;
-   Self:BoldItem( NextItem ), ;
-   ! Self:ItemEnabled( NextItem ), ;                               // disabled
-! Self:ItemDraggable( NextItem ) } )                            // no drag
-
-// add sub-children
-AddChildren( Self, NextChild, TreeView_GetChild( Self:hWnd, NextChild ), aItems )
-
-// next sibling
-NEXTChild := TreeView_GetNextSibling( Self:hWnd, NextChild )
-ENDDO
-ENDIF
-
-RETURN NIL
+   RETURN NIL
 
 METHOD EditLabel() CLASS TTree
 

@@ -25,9 +25,9 @@ PROCEDURE main()
          ENDIF
       ENDIF
 
-   ENDWITH
+      ENDWITH
 
-   RETURN
+      RETURN
 
 STATIC FUNCTION CreateCustomDialog()
 
@@ -51,9 +51,9 @@ STATIC FUNCTION CreateCustomDialog()
       :AllowDialogCancellation := .T.
       :EnableHyperlinks := .T.
 
-   ENDWITH
+      ENDWITH
 
-   RETURN oDialog
+      RETURN oDialog
 
 STATIC FUNCTION __cb_Dialog( oSender, nNotification, wParam, lParam )
 
@@ -105,7 +105,7 @@ STATIC PROCEDURE ShowResult( obj )
          If( :lError, ".T.", ".F." ), ;
          If( :nResult == S_OK, "S_OK", hb_nToS( :nResult ) ) ;
          ), , , .F. )
-   ENDWITH
+      ENDWITH
 
-   RETURN
+      RETURN
 

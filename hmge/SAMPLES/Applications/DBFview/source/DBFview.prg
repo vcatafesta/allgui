@@ -2581,9 +2581,9 @@ STATIC PROCEDURE CascadeWnd()
       Aeval(aForms, {|e,i| IF(!IsWindowVisible( GetFormHandle( e ) ), DoMethod( e, 'Show' ), )})
       DO EVENTS
       SWITCHToThisWindow( GetFormHandle( Atail(aForms) ) )
-      ENDIF
+   ENDIF
 
-      RETURN
+   RETURN
 
 STATIC PROCEDURE TileWnd()
 
@@ -3003,9 +3003,9 @@ STATIC PROCEDURE TileWnd()
    DO EVENTS
    IF !Empty( nWndOpened )
       SWITCHToThisWindow( GetFormHandle( Atail(aForms) ) )
-      ENDIF
+   ENDIF
 
-      RETURN
+   RETURN
 
 STATIC PROCEDURE SetThisWindow( nActiveWnd )
 
@@ -3020,9 +3020,9 @@ STATIC PROCEDURE SetThisWindow( nActiveWnd )
          _Restore( hWnd )
       ENDIF
       SWITCHToThisWindow( hWnd, .T. )
-      ENDIF
+   ENDIF
 
-      RETURN
+   RETURN
 
 FUNCTION MsgAbout()
 

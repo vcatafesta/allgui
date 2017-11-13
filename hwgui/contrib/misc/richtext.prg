@@ -1325,30 +1325,30 @@ METHOD FootNote( cTexto, cChar, nFontNumber, ;
    ENDIF
 
    IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
-      ::CloseGroup()
-      ::OpenGroup()
-      ::TextCode( "footnote" )
-      IF lEnd ; ::TextCode( "ftnalt" ) ; ENDIF
-         ::NewFont( nFontNumber )
-         ::SetFontSize( nFontSize )
-         ::SetFontColor( nFontColor )
-         ::Appearance( cAppear )
-         ::OpenGroup()
-         IF lUpper
-            ::TextCode( "super " + cChar )
-         ELSE
-            IF ! Empty( cChar )
-               ::Write( cChar )
-            ENDIF
-         ENDIF
+   ::CloseGroup()
+   ::OpenGroup()
+   ::TextCode( "footnote" )
+   IF lEnd ; ::TextCode( "ftnalt" ) ; ENDIF
+   ::NewFont( nFontNumber )
+   ::SetFontSize( nFontSize )
+   ::SetFontColor( nFontColor )
+   ::Appearance( cAppear )
+   ::OpenGroup()
+   IF lUpper
+      ::TextCode( "super " + cChar )
+   ELSE
+      IF ! Empty( cChar )
+         ::Write( cChar )
+      ENDIF
+   ENDIF
 
-         IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
-            ::CloseGroup()
-            ::Write( cTexto )
-            ::CloseGroup()
-            ::CloseGroup()
+   IF lAuto ; ::TextCode( "chftn" ) ; ENDIF
+   ::CloseGroup()
+   ::Write( cTexto )
+   ::CloseGroup()
+   ::CloseGroup()
 
-            RETURN NIL
+   RETURN NIL
 
 METHOD BegTextBox( cTexto, aOffset, ASize, cTipo, aColores, nWidth, nPatron, ;
       lSombra, aSombra, nFontNumber, nFontSize, cAppear, nFontColor, nIndent, lRounded, lEnd ) CLASS RichText

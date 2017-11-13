@@ -13,7 +13,7 @@
 
 CLASS TBtnBox FROM TControl
 
-CLASSDATA lRegistered AS LOGICAL
+   CLASSDATA lRegistered AS LOGICAL
 
    DATA Atx, lAppend, bAction, nCell, lChanged
    DATA hWndChild

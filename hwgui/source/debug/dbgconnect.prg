@@ -219,40 +219,40 @@ FUNCTION hwg_dbg_SetActiveLine( cPrgName, nLine, aStack, aLocals, aWatch )
 
    IF !lDebugRun ; Return Nil; ENDIF
 
-      IF nId2 == 0
-         s += ",ver," + Ltrim(Str(DEBUG_PROTO_VERSION))
-      ENDIF
-      IF aStack != Nil
-         s += ",stack"
-         nLen := Len( aStack )
-         FOR i := 1 TO nLen
-            s += "," + aStack[i]
-         NEXT
-      ENDIF
-      IF aLocals != Nil
-         s += ",valuelocal," + aLocals[1]
-         nLen := Len( aLocals )
-         FOR i := 2 TO nLen
-            s += "," + Str2Hex(aLocals[i])
-         NEXT
-      ENDIF
-      IF aWatch != Nil
-         s += ",valuewatch," + aWatch[1]
-         nLen := Len( aWatch )
-         FOR i := 2 TO nLen
-            s += "," + Str2Hex(aWatch[i])
-         NEXT
-      ENDIF
+   IF nId2 == 0
+      s += ",ver," + Ltrim(Str(DEBUG_PROTO_VERSION))
+   ENDIF
+   IF aStack != Nil
+      s += ",stack"
+      nLen := Len( aStack )
+      FOR i := 1 TO nLen
+         s += "," + aStack[i]
+      NEXT
+   ENDIF
+   IF aLocals != Nil
+      s += ",valuelocal," + aLocals[1]
+      nLen := Len( aLocals )
+      FOR i := 2 TO nLen
+         s += "," + Str2Hex(aLocals[i])
+      NEXT
+   ENDIF
+   IF aWatch != Nil
+      s += ",valuewatch," + aWatch[1]
+      nLen := Len( aWatch )
+      FOR i := 2 TO nLen
+         s += "," + Str2Hex(aWatch[i])
+      NEXT
+   ENDIF
 
-      hwg_dbg_Send( "a"+Ltrim(Str(++nId2)), s  )
+   hwg_dbg_Send( "a"+Ltrim(Str(++nId2)), s  )
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION hwg_dbg_Wait( nWait )
 
    IF !lDebugRun ; Return Nil; ENDIF
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION hwg_dbg_Input( p1, p2 )
 
@@ -260,89 +260,89 @@ FUNCTION hwg_dbg_Input( p1, p2 )
 
    IF !lDebugRun ; Return CMD_GO; ENDIF
 
-      DO WHILE .T.
+   DO WHILE .T.
 
-         IF !Empty( arr := hwg_dbg_Read() )
-            IF ( n := Val( arr[1] ) ) > nId1 .AND. arr[Len(arr)] == "!"
-               nId1 := n
-               IF arr[2] == "cmd"
-                  IF ( cmd := arr[3] ) == "go"
+      IF !Empty( arr := hwg_dbg_Read() )
+         IF ( n := Val( arr[1] ) ) > nId1 .AND. arr[Len(arr)] == "!"
+            nId1 := n
+            IF arr[2] == "cmd"
+               IF ( cmd := arr[3] ) == "go"
 
-                     RETURN CMD_GO
-                  ELSEIF cmd == "step"
+                  RETURN CMD_GO
+               ELSEIF cmd == "step"
 
-                     RETURN CMD_STEP
-                  ELSEIF cmd == "trace"
+                  RETURN CMD_STEP
+               ELSEIF cmd == "trace"
 
-                     RETURN CMD_TRACE
-                  ELSEIF cmd == "nextr"
+                  RETURN CMD_TRACE
+               ELSEIF cmd == "nextr"
 
-                     RETURN CMD_NEXTR
-                  ELSEIF cmd == "to"
-                     p1 := arr[4]
-                     p2 := Val( arr[5] )
+                  RETURN CMD_NEXTR
+               ELSEIF cmd == "to"
+                  p1 := arr[4]
+                  p2 := Val( arr[5] )
 
-                     RETURN CMD_TOCURS
-                  ELSEIF cmd == "quit"
+                  RETURN CMD_TOCURS
+               ELSEIF cmd == "quit"
 
-                     RETURN CMD_QUIT
-                  ELSEIF cmd == "exit"
-                     lDebugRun := .F.
+                  RETURN CMD_QUIT
+               ELSEIF cmd == "exit"
+                  lDebugRun := .F.
 
-                     RETURN CMD_EXIT
-                  ENDIF
-               ELSEIF arr[2] == "brp"
-                  IF arr[3] == "add"
-                     p1 := arr[4]
-                     p2 := Val( arr[5] )
-
-                     RETURN CMD_BADD
-                  ELSEIF arr[3] == "del"
-                     p1 := arr[4]
-                     p2 := Val( arr[5] )
-
-                     RETURN CMD_BDEL
-                  ENDIF
-               ELSEIF arr[2] == "watch"
-                  IF arr[3] == "add"
-                     p1 := Hex2Str( arr[4] )
-
-                     RETURN CMD_WADD
-                  ELSEIF arr[3] == "del"
-                     p1 := Val( arr[4] )
-
-                     RETURN CMD_WDEL
-                  ENDIF
-               ELSEIF arr[2] == "exp"
-                  p1 := Hex2Str( arr[3] )
-
-                  RETURN CMD_CALC
-               ELSEIF arr[2] == "view"
-                  IF arr[3] == "stack"
-                     p1 := arr[4]
-
-                     RETURN CMD_STACK
-                  ELSEIF arr[3] == "local"
-                     p1 := arr[4]
-
-                     RETURN CMD_LOCAL
-                  ELSEIF arr[3] == "watch"
-                     p1 := arr[4]
-
-                     RETURN CMD_WATCH
-                  ELSEIF arr[3] == "areas"
-
-                     RETURN CMD_AREAS
-                  ENDIF
+                  RETURN CMD_EXIT
                ENDIF
-               hwg_dbg_Send( "e"+Ltrim(Str(++nId2)) )
+            ELSEIF arr[2] == "brp"
+               IF arr[3] == "add"
+                  p1 := arr[4]
+                  p2 := Val( arr[5] )
+
+                  RETURN CMD_BADD
+               ELSEIF arr[3] == "del"
+                  p1 := arr[4]
+                  p2 := Val( arr[5] )
+
+                  RETURN CMD_BDEL
+               ENDIF
+            ELSEIF arr[2] == "watch"
+               IF arr[3] == "add"
+                  p1 := Hex2Str( arr[4] )
+
+                  RETURN CMD_WADD
+               ELSEIF arr[3] == "del"
+                  p1 := Val( arr[4] )
+
+                  RETURN CMD_WDEL
+               ENDIF
+            ELSEIF arr[2] == "exp"
+               p1 := Hex2Str( arr[3] )
+
+               RETURN CMD_CALC
+            ELSEIF arr[2] == "view"
+               IF arr[3] == "stack"
+                  p1 := arr[4]
+
+                  RETURN CMD_STACK
+               ELSEIF arr[3] == "local"
+                  p1 := arr[4]
+
+                  RETURN CMD_LOCAL
+               ELSEIF arr[3] == "watch"
+                  p1 := arr[4]
+
+                  RETURN CMD_WATCH
+               ELSEIF arr[3] == "areas"
+
+                  RETURN CMD_AREAS
+               ENDIF
             ENDIF
+            hwg_dbg_Send( "e"+Ltrim(Str(++nId2)) )
          ENDIF
-         hb_ReleaseCpu()
+      ENDIF
+      hb_ReleaseCpu()
 
-      ENDDO
+   ENDDO
 
-      RETURN 0
+   RETURN 0
 
 FUNCTION hwg_dbg_Answer( ... )
 
@@ -350,29 +350,29 @@ FUNCTION hwg_dbg_Answer( ... )
 
    IF !lDebugRun ; Return Nil; ENDIF
 
-      FOR i := 1 TO Len( arr )
-         IF Valtype( arr[i] ) == "A"
-            lConvert := ( i > 1 .AND. Valtype(arr[i-1]) == "C" .AND. Left( arr[i-1],5 ) == "value" )
-            FOR j := 1 TO Len( arr[i] )
-               s += Iif( j>1.AND.lConvert, Str2Hex(arr[i,j]), arr[i,j] ) + ","
-            NEXT
+   FOR i := 1 TO Len( arr )
+      IF Valtype( arr[i] ) == "A"
+         lConvert := ( i > 1 .AND. Valtype(arr[i-1]) == "C" .AND. Left( arr[i-1],5 ) == "value" )
+         FOR j := 1 TO Len( arr[i] )
+            s += Iif( j>1.AND.lConvert, Str2Hex(arr[i,j]), arr[i,j] ) + ","
+         NEXT
+      ELSE
+         IF arr[i] == "value" .AND. i < Len( arr )
+            s += arr[i] + "," + Str2Hex( arr[++i] ) + ","
          ELSE
-            IF arr[i] == "value" .AND. i < Len( arr )
-               s += arr[i] + "," + Str2Hex( arr[++i] ) + ","
-            ELSE
-               s += arr[i] + ","
-            ENDIF
+            s += arr[i] + ","
          ENDIF
-      NEXT
-      hwg_dbg_Send( "b"+Ltrim(Str(nId1)), Left( s,Len(s)-1 ) )
+      ENDIF
+   NEXT
+   hwg_dbg_Send( "b"+Ltrim(Str(nId1)), Left( s,Len(s)-1 ) )
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION hwg_dbg_Msg( cMessage )
 
    IF !lDebugRun ; Return Nil; ENDIF
 
-      RETURN NIL
+   RETURN NIL
 
 FUNCTION hwg_dbg_Alert( cMessage )
 

@@ -50,38 +50,38 @@ FUNCTION MAIN
 
       @ 200,350 BUTTON Button_2 CAPTION 'Fill EditBox' ACTION EDITBOX_INFO()
 
-   NEXTRoutine()
+      NEXTRoutine()
 
-   Form1.TITLE := "Break Point 2"
+      Form1.TITLE := "Break Point 2"
 
-   FOR z = 1 TO 10
-      b = z ^ 2
-      c = b * 5
-      d = c * 44 + 1
-      e = d ^ 3 + 22
-      IF z == 5
-         //  MsgInfo ( z )
-      ENDIF
-      c = z * 3
-   NEXT
+      FOR z = 1 TO 10
+         b = z ^ 2
+         c = b * 5
+         d = c * 44 + 1
+         e = d ^ 3 + 22
+         IF z == 5
+            //  MsgInfo ( z )
+         ENDIF
+         c = z * 3
+      NEXT
 
-   ON KEY F3 ACTION  Test_Form()
+      ON KEY F3 ACTION  Test_Form()
 
-   ON KEY F7 ACTION FuncBP()
+      ON KEY F7 ACTION FuncBP()
 
-END WINDOW
+   END WINDOW
 
-SHOW WINDOW Form1
+   SHOW WINDOW Form1
 
-private_x := 'stop'
+   private_x := 'stop'
 
-CENTER WINDOW Form1
+   CENTER WINDOW Form1
 
-FuncBP()
+   FuncBP()
 
-ACTIVATE WINDOW Form1
+   ACTIVATE WINDOW Form1
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION VarInfo(aVar)
 

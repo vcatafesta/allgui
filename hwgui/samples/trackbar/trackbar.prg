@@ -22,22 +22,22 @@ FUNCTION Main ()
    MENUITEM "&Dialog 1" ACTION Dlg1()
    MENUITEM "&Dialog 2" ACTION Dlg2()
    MENUITEM "&Exit"     ACTION hwg_EndWindow()
-ENDMENU
+   ENDMENU
 
-@ 20,20 TRACKBAR oTB ;
-   SIZE 300,50 ;
-   RANGE 0,10 ;
-   INIT 5 AUTOTICKS ;
-   ON CHANGE {||UpdateSay()}
+   @ 20,20 TRACKBAR oTB ;
+      SIZE 300,50 ;
+      RANGE 0,10 ;
+      INIT 5 AUTOTICKS ;
+      ON CHANGE {||UpdateSay()}
 
-@ 300,200 BUTTON "Get Value" ON CLICK {||hwg_Msginfo(str(oTB:GetValue()))} SIZE 100,40
-@ 300,300 BUTTON "Set Value" ON CLICK {||oTB:SetValue(5),UpdateSay()} SIZE 100,40
+   @ 300,200 BUTTON "Get Value" ON CLICK {||hwg_Msginfo(str(oTB:GetValue()))} SIZE 100,40
+   @ 300,300 BUTTON "Set Value" ON CLICK {||oTB:SetValue(5),UpdateSay()} SIZE 100,40
 
-@ 100,100 SAY oSay CAPTION "5" SIZE 40,40
+   @ 100,100 SAY oSay CAPTION "5" SIZE 40,40
 
-ACTIVATE WINDOW oWnd
+   ACTIVATE WINDOW oWnd
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION UpdateSay ()
 

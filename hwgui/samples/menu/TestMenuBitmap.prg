@@ -29,14 +29,14 @@ FUNCTION Main()
    MENUITEM "&Demo"    ID 1004 ACTION Test()
    separator
    MENUITEM "&Bitmap and a Text"  ID 1005 ACTION Test()
-ENDMENU
-ENDMENU
-//The number ID is very important to use bitmap in menu
-MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
-//Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
-ACTIVATE WINDOW oMain
+   ENDMENU
+   ENDMENU
+   //The number ID is very important to use bitmap in menu
+   MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
+   //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
+   ACTIVATE WINDOW oMain
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION Test()
 

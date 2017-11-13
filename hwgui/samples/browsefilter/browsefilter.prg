@@ -124,3 +124,4 @@ FUNCTION Main()
             ACTIVATE WINDOW frmTesteBrowse
 
             RETURN NIL
+

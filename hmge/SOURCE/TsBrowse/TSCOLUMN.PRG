@@ -11,8 +11,8 @@
 
 CLASS TSColumn
 
-CLASSDATA aProperties INIT { "cHeading", "cPicture", "nWidth" }
-CLASSDATA aEvents     INIT { "OnEdit" }
+   CLASSDATA aProperties INIT { "cHeading", "cPicture", "nWidth" }
+   CLASSDATA aEvents     INIT { "OnEdit" }
 
    DATA aColors                                  // Column's Color Kit
    DATA aColorsBack                              // Column's Color saved   JP 1.55

@@ -33,72 +33,72 @@ FUNCTION SBExcel()
       DEFINE SPLITBOX
          DEFINE TOOLBAREX Bar_1 BUTTONSIZE 28, 28
 
-            BUTTON Btn_1 PICTURE "Report" ;
-               ACTION fReport(oBrw) ;
-               TOOLTIP "Report from TSBrowse"
+         BUTTON Btn_1 PICTURE "Report" ;
+            ACTION fReport(oBrw) ;
+            TOOLTIP "Report from TSBrowse"
 
-            BUTTON Btn_2 PICTURE "Excel16" ;
-               ACTION fExcel( oBrw ) ;
-               TOOLTIP "Export Browse to Excel"
+         BUTTON Btn_2 PICTURE "Excel16" ;
+            ACTION fExcel( oBrw ) ;
+            TOOLTIP "Export Browse to Excel"
 
-            BUTTON Btn_3 PICTURE "Exitb16" ;
-               ACTION Form_10.Release ;
-               TOOLTIP "Exit"
-         END TOOLBAR
+         BUTTON Btn_3 PICTURE "Exitb16" ;
+            ACTION Form_10.Release ;
+            TOOLTIP "Exit"
+      END TOOLBAR
 
-         DEFINE TOOLBAREX Bar_2 CAPTION "Set Filter" BUTTONSIZE 28, 28
+      DEFINE TOOLBAREX Bar_2 CAPTION "Set Filter" BUTTONSIZE 28, 28
 
-            BUTTON Btn_1a PICTURE "Tick" ;
-               ACTION {|| ChangeFiltr(oBrw)};
-               CHECK ;
-               TOOLTIP "Activate Filter on TSBrowse"
+      BUTTON Btn_1a PICTURE "Tick" ;
+         ACTION {|| ChangeFiltr(oBrw)};
+         CHECK ;
+         TOOLTIP "Activate Filter on TSBrowse"
 
-         END TOOLBAR
+   END TOOLBAR
 
-         COMBOBOX Combo_1 ;
-            ITEMS aStates;
-            VALUE 1 ;
-            HEIGHT 200 WIDTH 250 ;
-            FONT 'Tahoma' SIZE 9 ;
-            TOOLTIP 'List of States';
-            ON CHANGE ChangeFiltr(oBrw)
+   COMBOBOX Combo_1 ;
+      ITEMS aStates;
+      VALUE 1 ;
+      HEIGHT 200 WIDTH 250 ;
+      FONT 'Tahoma' SIZE 9 ;
+      TOOLTIP 'List of States';
+      ON CHANGE ChangeFiltr(oBrw)
 
-         DEFINE TOOLBAREX Bar_3 CAPTION "Hide/Show Column" BUTTONSIZE 28, 28
+   DEFINE TOOLBAREX Bar_3 CAPTION "Hide/Show Column" BUTTONSIZE 28, 28
 
-            BUTTON Btn_31 PICTURE "Tick" ;
-               ACTION {|| HideCol(oBrw, 3 ,1)};
-               CHECK ;
-               TOOLTIP "Hide/show  1 column in TSBrowse"
+   BUTTON Btn_31 PICTURE "Tick" ;
+      ACTION {|| HideCol(oBrw, 3 ,1)};
+      CHECK ;
+      TOOLTIP "Hide/show  1 column in TSBrowse"
 
-            BUTTON Btn_32 PICTURE "Tick" ;
-               ACTION {|| HideCol(oBrw, {3,4,5},2 )};
-               CHECK ;
-               TOOLTIP "Hide/show  3 columns in TSBrowse"
+   BUTTON Btn_32 PICTURE "Tick" ;
+      ACTION {|| HideCol(oBrw, {3,4,5},2 )};
+      CHECK ;
+      TOOLTIP "Hide/show  3 columns in TSBrowse"
 
-         END TOOLBAR
+END TOOLBAR
 
-      END SPLITBOX
+END SPLITBOX
 
-      @ 35, 0 TBROWSE oBrw ALIAS "Employee"  WIDTH 800 HEIGHT 480  ;
-         FONT "Font_1" CELL
-      oBrw:LoadFields()
-      oBrw:Exchange(3, 5)
-      oBrw:ChangeFont(GetFontHandle( "Font_4" ), 0, 2 )
-      oBrw:ChangeFont(GetFontHandle( "Font_1" ), 0, 1 )
-      oBrw:ChangeFont(GetFontHandle( "Font_3" ), 3, 1 )
-      oBrw:nWheelLines := 1
+@ 35, 0 TBROWSE oBrw ALIAS "Employee"  WIDTH 800 HEIGHT 480  ;
+   FONT "Font_1" CELL
+oBrw:LoadFields()
+oBrw:Exchange(3, 5)
+oBrw:ChangeFont(GetFontHandle( "Font_4" ), 0, 2 )
+oBrw:ChangeFont(GetFontHandle( "Font_1" ), 0, 1 )
+oBrw:ChangeFont(GetFontHandle( "Font_3" ), 3, 1 )
+oBrw:nWheelLines := 1
 
-   END WINDOW
+END WINDOW
 
-   ACTIVATE WINDOW Form_10
+ACTIVATE WINDOW Form_10
 
-   RELEASE FONT Font_1
-   RELEASE FONT Font_2
-   RELEASE FONT Font_3
-   RELEASE FONT Font_4
-   RELEASE FONT Font_5
+RELEASE FONT Font_1
+RELEASE FONT Font_2
+RELEASE FONT Font_3
+RELEASE FONT Font_4
+RELEASE FONT Font_5
 
-   RETURN NIL
+RETURN NIL
 
 FUNCTION HideCol(oBrw,nCol,met)
 

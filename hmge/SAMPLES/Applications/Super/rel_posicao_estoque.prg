@@ -66,7 +66,7 @@ FUNCTION posicao_estoque()
       END LABEL
 
       * botões
-      DEFINE BUTTONex button_ok
+      DEFINE BUTTONEX button_ok
          picture path_imagens+'img_relatorio.bmp'
          col form_estoque_produtos.width-255
          row form_estoque_produtos.height-085
@@ -79,7 +79,7 @@ FUNCTION posicao_estoque()
          flat .F.
          noxpstyle .T.
       END BUTTONex
-      DEFINE BUTTONex button_cancela
+      DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_estoque_produtos.width-100
          row form_estoque_produtos.height-085

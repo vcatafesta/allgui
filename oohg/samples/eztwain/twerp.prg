@@ -180,9 +180,9 @@ FUNCTION OnPaint()
       Win_1.TW_APP_SAVEAS.Enabled := .T.
    ENDIF
 
-EndPaint( hWnd, pps )
+   EndPaint( hWnd, pps )
 
-RETURN NIL
+   RETURN NIL
 
 FUNCTION OnOpen()
 
