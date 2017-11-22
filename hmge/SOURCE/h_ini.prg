@@ -144,7 +144,7 @@ FUNCTION _BeginIni( cIniFile )
          #endif
          MsgInfo( "Error opening a file INI. DOS ERROR: " + hb_ntos( FError() ) )
 
-         RETURN( -1 )
+         Return( -1 )
       ELSE
          _HMG_ActiveIniFile := cIniFile
       ENDIF

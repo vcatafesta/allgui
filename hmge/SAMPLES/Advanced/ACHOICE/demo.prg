@@ -203,7 +203,7 @@ FUNCTION _aChoiceDoUpKey()
    IF _HMG_aChoice._List.value > 1
       _HMG_aChoice._List.value := _HMG_aChoice._List.value - 1
       _HMG_aChoice._edit.value := _HMG_aChoice._List.item(_HMG_aChoice._List.value)
-      TEXTboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
+      textboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
    ENDIF
 
    RETURN NIL
@@ -213,7 +213,7 @@ FUNCTION _aChoiceDoDownKey()
    IF _HMG_aChoice._List.value < _HMG_aChoice._List.ItemCount
       _HMG_aChoice._List.value := _HMG_aChoice._List.value + 1
       _HMG_aChoice._edit.value := _HMG_aChoice._List.item(_HMG_aChoice._List.value)
-      TEXTboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
+      textboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
    ENDIF
 
    RETURN NIL
@@ -227,7 +227,7 @@ FUNCTION _aChoicePgUpKey()
          _HMG_aChoice._List.value := _HMG_aChoice._List.value - 23
       ENDIF
       _HMG_aChoice._edit.value := _HMG_aChoice._List.item(_HMG_aChoice._List.value)
-      TEXTboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
+      textboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
    ENDIF
 
    RETURN NIL
@@ -241,7 +241,7 @@ FUNCTION _aChoicePgDownKey()
          _HMG_aChoice._List.value := _HMG_aChoice._List.value + 23
       ENDIF
       _HMG_aChoice._edit.value := _HMG_aChoice._List.item(_HMG_aChoice._List.value)
-      TEXTboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
+      textboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
    ENDIF
 
    RETURN NIL
@@ -257,7 +257,7 @@ FUNCTION _achoicelistchanged
 
    IF upper(this.name) == "_EDIT" .and. upper(thiswindow.name) == "_HMG_ACHOICE" .and. .not. lAnyWhereSearch
       _HMG_aChoice._edit.value := _HMG_aChoice._List.item(_HMG_aChoice._List.value)
-      TEXTboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
+      textboxeditsetsel("_HMG_aChoice","_Edit",0,-1)
    ENDIF
 
    RETURN NIL

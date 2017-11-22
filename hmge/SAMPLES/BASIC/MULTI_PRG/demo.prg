@@ -35,7 +35,7 @@ STATIC PROCEDURE TEST
    EXIT PROCEDURE _AlwaysProcedure
 
    Application.Title := 'Press any key for close this window'
-   WAITWindow('ALWAYS EXIT PROCEDURE')
+   WaitWindow('ALWAYS EXIT PROCEDURE')
 
    RETURN
 

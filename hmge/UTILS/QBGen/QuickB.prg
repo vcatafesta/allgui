@@ -51,7 +51,7 @@ FUNCTION MAIN()
    m->aProperties := {}; m->aControlsOrder := {}
    m->aColorWinB := {0,255,255} ; m->aColorWinF := {0,0,0}
 
-   //    SET CODEPAGE TO SPANISH   // Put here your codepage
+   // SET CODEPAGE TO SPANISH   // Put here your codepage
    SET TOOLTIPSTYLE BALLOON
    SET DATE FORMAT "dd/mm/yyyy"
 
@@ -487,7 +487,7 @@ FUNCTION MyScreen(nOption)
 
    cDbF := aFilesDBF[nOption]
 
-   USE &cDBF NEW SHARED
+   USE &cDBF VIA "DBFCDX" NEW SHARED
 
    aStruc     := dbStruct()
    lstruct    := Len(aStruc)
@@ -545,7 +545,7 @@ FUNCTION MyScreen(nOption)
          BACKCOLOR m->aColorWinB ;
          ON MOUSECLICK SelectControl(This.Name) ;
          ON INIT (AddControls(),AddFields() ) ;
-         ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F. );
+         ON RELEASE ( dbcloseall(), form_1.setfocus , Form_1.HEIGHT := 180 , Form_1.WIDTH := 180 ,(aControlsOrder := {}), Form_1.Button_1.Visible:= .F., CloseForm() );
          ON PAINT ReDrawgrid()
 
       DEFINE STATUSBAR FONT 'Arial' SIZE 12
@@ -673,6 +673,16 @@ FUNCTION MyScreen(nOption)
    form_1.combo_2.value := 1
 
    RETURN NIL
+   /*
+   */
+
+PROCEDURE CloseForm()
+
+   IF _Iswindowdefined("Form_2")
+      domethod("Form_2","release")
+   ENDIF
+
+   RETURN
    /*
    */
 
@@ -1603,9 +1613,9 @@ FUNCTION ChangeBackGround(cWindow,aColor)
    IF IsWindowHandle( hWnd )
       Brush := CreateSolidBrush( aColor[1], aColor[2], aColor[3] )
       oldBrush := SetWindowBrush( hWnd, Brush )
-      DELETEObject( oldBrush )
+      DeleteObject( oldBrush )
    ENDIF
-   ERASEwindow(cWindow)
+   erasewindow(cWindow)
 
    RETURN NIL
    /*
@@ -1775,7 +1785,7 @@ PROCEDURE PrintList(cBase, aNomb, aLong, lEdit)
    DEFAULT lEdit to .f.
 
    IF !used()
-      USE &cDBF NEW SHARED
+      USE &cDBF VIA "DBFCDX" NEW SHARED
    ENDIF
 
    IF lEdit
@@ -2032,7 +2042,7 @@ PROCEDURE BuildFile()
       DELETE FILE &(cFileBat)
    ENDIF
 
-   Writefile(cFilebat,"call c:\Minigui\batch\compile.bat " + m->cAlias )
+   Writefile(cFilebat,"call c:\Minigui\batch\compile.bat " + m->cAlias+' /lg winreport /l calldll /l hbhpdf /l libhpdf /l png /l hbzlib /l hbzebra /l BosTaurus' )
 
    cFileRc := cPos + m->cAlias + '.Rc'
 
@@ -2940,7 +2950,7 @@ PROCEDURE BuildFile()
       aadd(aSrc, "    Endif")
       aadd(aSrc, "    Win_" + cShortAlias + ".Image_1.Picture := Foto" + cShortAlias + "")
       aadd(aSrc, "Return")
-      ENDIF)
+      Endif)
       aadd(aSrc, '/*')
       aadd(aSrc, "*/")
       aadd(aSrc, "*--------------------------------------------------------*")
@@ -3072,7 +3082,7 @@ PROCEDURE BuildFile()
       dbCommitAll()
       dbCloseAll()
 
-      EXECUTE FILE(cfilebat) Minimize
+      execute file(cfilebat) Minimize
 
       MessageBoxTimeout ('Working in progress !!', 'Please wait ...', MB_OK, 1500 )
 
@@ -3443,43 +3453,6 @@ FUNCTION HMG_CompareHandle (Handle1, Handle2, nSubIndex1, nSubIndex2)
    ENDIF
 
    RETURN .F.
-   /*
-   */
-
-PROCEDURE Writefile(filename,arrayname)
-
-   LOCAL f_handle
-
-   //filename := cFilePath( GetModuleFileName( GetInstance() ) )+filename
-   * open file and position pointer at the end of file
-   IF VALTYPE(filename) == "C"
-      f_handle := FOPEN(filename,2)
-      *- if not joy opening file, create one
-      IF Ferror() <> 0
-         f_handle := Fcreate(filename,0)
-      ENDIF
-      FSEEK(f_handle,0,2)
-   ELSE
-      f_handle := filename
-      FSEEK(f_handle,0,2)
-   ENDIF
-
-   IF VALTYPE(arrayname) == "A"
-      * if its an array, do a loop to write it out
-      * msginfo(str(len(arrayname)),"FKF")
-      aeval( Arrayname,{|x|FWRITE(f_handle,x+CRLF )} )
-   ELSE
-      * must be a character string - just write it
-      FWRITE(f_handle,arrayname+CRLF )
-      //msgbox(Arrayname,"Array")
-   ENDIF
-
-   * close the file
-   IF VALTYPE(filename)=="C"
-      Fclose(f_handle)
-   ENDIF
-
-   RETURN
    /*
    */
 

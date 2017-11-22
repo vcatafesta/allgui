@@ -116,10 +116,10 @@ HB_FUNC( LOADICONBYNAME )
    if( hb_parclen( 1 ) > 0 )
    {
       const char * pszResOrFile = hb_parc( 1 );
-      int cxDesired = hb_parni( 2 );
-      int cyDesired = hb_parni( 3 );
-      HINSTANCE hInstance = HB_PARNL( 4 ) ? ( HINSTANCE ) HB_PARNL( 4 ) : g_hInstance;
- 
+      int          cxDesired    = hb_parni( 2 );
+      int          cyDesired    = hb_parni( 3 );
+      HINSTANCE    hInstance    = HB_PARNL( 4 ) ? ( HINSTANCE ) HB_PARNL( 4 ) : g_hInstance;
+
       hIcon = ( HICON ) LoadImage( hInstance, pszResOrFile, IMAGE_ICON, cxDesired, cyDesired, LR_DEFAULTCOLOR );
 
       if( hIcon == NULL )
@@ -131,8 +131,8 @@ HB_FUNC( LOADICONBYNAME )
 
 HB_FUNC( DRAWICONEX )
 {
-   HWND   hwnd  = ( HWND ) HB_PARNL( 1 );
-   
+   HWND hwnd = ( HWND ) HB_PARNL( 1 );
+
    if( IsWindow( hwnd ) )
    {
       HICON  hIcon = ( HICON ) HB_PARNL( 4 );
@@ -142,7 +142,7 @@ HB_FUNC( DRAWICONEX )
       hb_retl( DrawIconEx( hdc, hb_parni( 2 ), hb_parni( 3 ), hIcon, hb_parni( 5 ), hb_parni( 6 ), 0, hbrFlickerFreeDraw, DI_NORMAL ) );
 
       DeleteObject( hbrFlickerFreeDraw );
-   
+
       if( hb_parldef( 8, HB_TRUE ) )
          DestroyIcon( hIcon );
 

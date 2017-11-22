@@ -47,7 +47,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -64,7 +64,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -81,7 +81,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -98,7 +98,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
@@ -115,7 +115,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE SPLITBOX
          DEFINE GRID grid_movban
@@ -147,14 +147,14 @@ FUNCTION movimento_bancario()
          fontcolor _cinza_001
          transparent .T.
       END LABEL
-      DEFINE COMBOBOXex cbo_001
+      define comboboxex cbo_001
       row   500
       col   140
       width 300
       height 200
       items a_001
       value 1
-   END COMBOBOXex
+   end comboboxex
 
    DEFINE LABEL rodape_001
       parent form_movban
@@ -221,7 +221,7 @@ END WINDOW
 form_movban.center
 form_movban.activate
 
-RETURN(nil)
+return(nil)
 
 STATIC FUNCTION dados(parametro)
 
@@ -253,7 +253,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          movimento_bancario->(ordsetfocus('data'))
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ENDIF
 
@@ -387,7 +387,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -400,7 +400,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
    END WINDOW
 
@@ -410,7 +410,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir()
 
@@ -425,7 +425,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       movimento_bancario->(ordsetfocus('data'))
 
-      RETURN(nil)
+      return(nil)
    ELSE
       IF msgyesno('Histórico : '+alltrim(movimento_bancario->historico),'Excluir')
          IF lock_reg()
@@ -438,7 +438,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar(parametro)
 
@@ -447,13 +447,13 @@ STATIC FUNCTION gravar(parametro)
    IF empty(form_dados.tbox_001.value)
       msginfo('Preencha a data','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF empty(form_dados.tbox_002.value)
       msginfo('Preencha o histórico','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF parametro == 1
@@ -497,7 +497,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar()
 
@@ -524,7 +524,7 @@ STATIC FUNCTION atualizar()
       movimento_bancario->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_banco_2(cform,ctextbtn)
 
@@ -558,7 +558,7 @@ STATIC FUNCTION procura_banco_2(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION getcode_banco_2(value)
 
@@ -614,7 +614,7 @@ STATIC FUNCTION getcode_banco_2(value)
          backcolor _ciano_001
          nolines .T.
          lock .T.
-         READonly {.T.,.T.}
+         readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=bancos->codigo,thiswindow.release)
       end browse
@@ -628,7 +628,7 @@ STATIC FUNCTION getcode_banco_2(value)
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(creg)
+   return(creg)
 
 STATIC FUNCTION find_banco_2()
 
@@ -638,10 +638,10 @@ STATIC FUNCTION find_banco_2()
 
    IF pesquisa == ''
 
-      RETURN(nil)
+      return(nil)
    ELSEIF bancos->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := bancos->(recno())
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 

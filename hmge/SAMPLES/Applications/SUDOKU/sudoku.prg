@@ -95,7 +95,7 @@ FUNCTION Main
             {"TEXTBOX", "CHARACTER", "9"} }
          fontname "Arial"
          fontsize 30*gkoefh
-         DYNAMICbackcolor { bColor, bColor, bColor, ;
+         dynamicbackcolor { bColor, bColor, bColor, ;
             bColor, bColor, bColor, ;
             bColor, bColor, bColor }
          columnwhen { { || entergrid() }, { || entergrid() }, ;

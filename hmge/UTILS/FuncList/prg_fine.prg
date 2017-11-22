@@ -103,7 +103,7 @@ PROCEDURE PRG_Fine( cFileInput, cFileOutput, nCaseFormat, aLangStrings )
 
       // Close result file
 
-      CLOSEFile( nHandle )
+      CloseFile( nHandle )
 
       oFile : Close()
 

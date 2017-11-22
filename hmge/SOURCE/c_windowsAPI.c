@@ -45,7 +45,7 @@
 
    ---------------------------------------------------------------------------*/
 
-#define _WIN32_IE     0x0501
+#define _WIN32_IE      0x0501
 
 #include <mgdefs.h>
 #if ( defined ( __MINGW32__ ) || defined ( __XCC__ ) ) && ( _WIN32_WINNT < 0x0500 )
@@ -71,7 +71,7 @@
 extern void       hmg_ErrorExit( LPCTSTR lpMessage, DWORD dwError, BOOL bExit );
 extern HBITMAP    HMG_LoadImage( const char * FileName );
 // extern variables
-extern HINSTANCE  g_hInstance;
+extern HINSTANCE g_hInstance;
 // local variables
 HRGN              BitmapToRegion( HBITMAP hBmp, COLORREF cTransparentColor, COLORREF cTolerance );
 // global variables

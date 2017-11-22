@@ -122,7 +122,7 @@ HB_FUNC( INITTOOLBAR )
 HB_FUNC( INITTOOLBUTTON )
 {
    HWND        hwndTB = ( HWND ) HB_PARNL( 1 );
-   HWND        himage;
+   HWND        himage = NULL;
    TBADDBITMAP tbab;
    TBBUTTON    tbb[ NUM_TOOLBAR_BUTTONS ];
    int         index;
@@ -132,7 +132,8 @@ HB_FUNC( INITTOOLBUTTON )
 
    memset( tbb, 0, sizeof tbb );
 
-   himage = ( HWND ) HMG_LoadPicture( hb_parc( 8 ), -1, -1, hwndTB, 1, 1, -1, 0, HB_FALSE, 255 );
+   if( hb_parclen( 8 ) > 0 )
+      himage = ( HWND ) HMG_LoadPicture( hb_parc( 8 ), -1, -1, hwndTB, 1, 1, -1, 0, HB_FALSE, 255 );
 
    // Add the bitmap containing button images to the toolbar.
 

@@ -351,7 +351,7 @@ PROCEDURE SaveRecPhone ()
    dbUnlock()
    NewRec := .F.
 
-   SORT_data( 'N' )
+   sort_data( 'N' )
 
    MD_Form_1.MD_Grid_1.Refresh
    MD_Form_1.MD_Grid_2.Refresh

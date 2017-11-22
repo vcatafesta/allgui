@@ -482,7 +482,7 @@ FUNCTION InitDialogDatePicker( ParentFormName, ControlHandle, k )
 
    _SetValue ( ,  , _HMG_aControlValue [k] , k )
    // JP 62
-   IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate[3]   // Modal
+   IF Len( _HMG_aDialogTemplate ) != 0 .AND. _HMG_aDialogTemplate [3]  // Modal
       _HMG_aControlDeleted [k] := .T.
    ENDIF
 
@@ -490,20 +490,26 @@ FUNCTION InitDialogDatePicker( ParentFormName, ControlHandle, k )
 
 FUNCTION _SetGetDatePickerDateFormat( ControlName, ParentForm, cFormat )
 
-   LOCAL ix, T
+   LOCAL ix
 
-   ix := GetControlIndex ( ControlName, ParentForm )
-   IF ix > 0
-      T := _HMG_aControlType [ix]
-      IF T == "DATEPICK" .OR. T == "TIMEPICK"
+   IF ( ix := GetControlIndex ( ControlName, ParentForm ) ) > 0
+
+      IF "PICK" $ _HMG_aControlType [ix]
+
          IF ISCHARACTER( cFormat )
-            IF SetDatePickerDateFormat( _HMG_aControlHandles[ix], cFormat )
+
+            IF SetDatePickerDateFormat( _HMG_aControlHandles [ix], cFormat )
                _HMG_aControlSpacing [ix] := cFormat
             ENDIF
+
          ELSE
+
             cFormat := _HMG_aControlSpacing [ix]
+
          ENDIF
+
       ENDIF
+
    ENDIF
 
    RETURN cFormat
@@ -512,12 +518,9 @@ FUNCTION _SetDatePickerRange( ControlHandle, dRangeMin, dRangeMax, Index )
 
    LOCAL lOK
 
-   IF !ISDATE( dRangeMin )
-      dRangeMin := CToD( '' )
-   ENDIF
-   IF !ISDATE( dRangeMax )
-      dRangeMax := CToD( '' )
-   ENDIF
+   hb_default( @dRangeMin, CToD( '' ) )
+   hb_default( @dRangeMax, CToD( '' ) )
+
    IF ( lOK := SetDatePickRange( ControlHandle, dRangeMin, dRangeMax ) )
       _HMG_aControlRangeMin [Index] := dRangeMin
       _HMG_aControlRangeMax [Index] := dRangeMax

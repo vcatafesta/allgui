@@ -123,7 +123,7 @@ STATIC FUNCTION Form_Load(nInput)
    IF Valtype(nInput) == "N"
       System.ClipBoard := nInput
       nMemo := nInput
-      READMemo_Click()
+      ReadMemo_Click()
       nMemo := 0
    ELSE
       Calc.ReadHide.SetFocus()
@@ -353,7 +353,7 @@ STATIC FUNCTION EvalKeys()
       CASE c_Keys == "W" .or. c_Keys == "w"
          CancelMemo_Click()
       CASE c_Keys == "S" .or. c_Keys == "s"
-         READMemo_Click()
+         ReadMemo_Click()
       CASE c_Keys == "M" .or. c_Keys == "m"
          SMemo_Click()
       CASE c_Keys == "A" .or. c_Keys == "a"

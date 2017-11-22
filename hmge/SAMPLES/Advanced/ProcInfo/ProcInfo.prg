@@ -7,6 +7,8 @@ ANNOUNCE RDDSYS
 
 #include <hmg.ch>
 
+*- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
+
 PROCEDURE Main()
 
    LOCAL fColor  := { |val| iif( val[1] == '<!>', RED, BLACK ) }
@@ -58,8 +60,11 @@ PROCEDURE FillGrid( nMin )
    frmProcInfo.grdProcInfo.DisableUpdate()
 
    IF frmProcInfo.grdProcInfo.ItemCount > 0
+
       nCurItem := GetProperty( 'frmProcInfo', 'grdProcInfo', 'Value' )
+
       frmProcInfo.grdProcInfo.DeleteAllItems()
+
    ENDIF
 
    FOR i := 1 TO Len( aProcess ) STEP 2
@@ -80,6 +85,7 @@ PROCEDURE FillGrid( nMin )
    NEXT
 
    frmProcInfo.grdProcInfo.EnableUpdate()
+
    frmProcInfo.grdProcInfo.SetFocus()
 
    AdjustGrid( nMin, iif( nCurItem < frmProcInfo.grdProcInfo.ItemCount, nCurItem, frmProcInfo.grdProcInfo.ItemCount ) )
@@ -177,10 +183,8 @@ FUNCTION GetWH_ListView( hBrw, nRows )
 
 #pragma BEGINDUMP
 
-#include <windows.h>
+#include <mgdefs.h>
 #include <commctrl.h>
-
-#include "hbapi.h"
 #include "hbapiitm.h"
 
 // Routine that gets the module's filename in both Win9x and NT
@@ -269,12 +273,6 @@ HB_FUNC ( ENUMWINDOWS )
    pArray = NULL;
 }
 
-#ifdef __XHARBOUR__
-#define HB_STORNI( n, x, y ) hb_storni( n, x, y )
-#else
-#define HB_STORNI( n, x, y ) hb_storvni( n, x, y )
-#endif
-
 HB_FUNC( LISTVIEWAPPROXIMATEVIEWRECT )
 {
    int iCount = hb_parni( 2 ) - 1;
@@ -285,78 +283,6 @@ HB_FUNC( LISTVIEWAPPROXIMATEVIEWRECT )
    hb_reta( 2 );
    HB_STORNI( LOWORD( Rc ), -1, 1 );
    HB_STORNI( HIWORD( Rc ), -1, 2 );
-}
-
-typedef BOOL (WINAPI * PFNISAPPHUNG)(
-   IN HWND hWnd,
-   OUT PBOOL pbHung
-   );
-
-BOOL IsAppHung(
-     IN HWND hWnd,
-     OUT PBOOL pbHung
-     )
-{
-   OSVERSIONINFO osvi;
-   HINSTANCE hUser;
-
-   if (!IsWindow(hWnd))
-
-       return SetLastError(ERROR_INVALID_PARAMETER), FALSE;
-
-   osvi.dwOSVersionInfoSize = sizeof(osvi);
-
-   // detect OS version
-   GetVersionEx(&osvi);
-
-   // get handle of USER32.DLL
-   hUser = GetModuleHandle(TEXT("user32.dll"));
-
-   if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-   {
-      BOOL (WINAPI * _IsHungAppWindow)(HWND);
-
-      // found the function IsHungAppWindow
-      *(FARPROC *)&_IsHungAppWindow =
-         GetProcAddress(hUser, "IsHungAppWindow");
-      if (_IsHungAppWindow == NULL)
-
-         return SetLastError(ERROR_PROC_NOT_FOUND), FALSE;
-
-      // call the function IsHungAppWindow
-      *pbHung = _IsHungAppWindow(hWnd);
-   }
-   else
-   {
-      DWORD dwThreadId = GetWindowThreadProcessId(hWnd, NULL);
-
-      BOOL (WINAPI * _IsHungThread)(DWORD);
-
-      // found the function IsHungThread
-      *(FARPROC *)&_IsHungThread =
-         GetProcAddress(hUser, "IsHungThread");
-      if (_IsHungThread == NULL)
-
-         return SetLastError(ERROR_PROC_NOT_FOUND), FALSE;
-
-      // call the function IsHungThread
-      *pbHung = _IsHungThread(dwThreadId);
-   }
-
-   return TRUE;
-}
-
-HB_FUNC( ISAPPHUNG )
-{
-   HB_BOOL bRetVal = HB_FALSE;
-   BOOL bIsHung = FALSE;
-
-   if( IsAppHung( ( HWND ) hb_parnl( 1 ), &bIsHung ) );
-   {
-      if( bIsHung )
-         bRetVal = HB_TRUE;
-   }
-   hb_retl( bRetVal);
 }
 
 #pragma ENDDUMP

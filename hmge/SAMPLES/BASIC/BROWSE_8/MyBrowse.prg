@@ -16,7 +16,7 @@ STATIC cExpress := ''
 
 FUNCTION Main()
 
-   LOCAL cBaseFolder, aTypes, aNewFiles
+   LOCAL cBaseFolder, aTypes, aNewFiles, cAlias
    LOCAL nCamp, aEst, aNomb, aJust, aLong, aFtype, i
 
    // Set default language to English
@@ -38,8 +38,9 @@ FUNCTION Main()
 
       USE ( aNewFiles[ 1 ] ) Shared New
 
-      nCamp := FCount()
-      aEst  := dbStruct()
+      nCamp  := FCount()
+      aEst   := dbStruct()
+      cAlias := Alias()
 
       aNomb := { 'iif(deleted(),0,1)' } ; aJust := { 0 } ; aLong := { 0 } ; aFtype := {}
 
@@ -50,7 +51,7 @@ FUNCTION Main()
          AAdd( aLong, Max( 100, Min( 160, aEst[ i, 3 ] * 14 ) ) )
       NEXT
 
-      CreaBrowse( Alias(), aNomb, aLong, aJust, aFtype )
+      CreaBrowse( cAlias, aNomb, aLong, aJust, aFtype )
 
    ENDIF
 
@@ -68,8 +69,10 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
    LOCAL nHeight        := nAltoPantalla  * 0.85
    LOCAL aHdr           := AClone( aNomb )
    LOCAL aCabImg        := AClone( VerHeadIcon( aFtype ) )
+   LOCAL aSort          := AClone( aNomb )
 
    aHdr[ 1 ] := Nil
+   aSort[ 1 ] := .F.
 
    SET DEFAULT ICON TO "MAIN"
 
@@ -77,7 +80,8 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
          WIDTH nWidth HEIGHT nHeight ;
          TITLE "(c)2009 MigSoft - View DBF files" ;
          MAIN ;
-         ON SIZE Adjust() ON MAXIMIZE Adjust()
+         ON SIZE Adjust() ;
+         ON MAXIMIZE Adjust()
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 90, 32 FONT "Arial" SIZE 9 FLAT RIGHTTEXT
          BUTTON Cerrar    CAPTION _HMG_aABMLangButton[ 1 ]  PICTURE "MINIGUI_EDIT_CLOSE"  ACTION oWndBase.RELEASE               AUTOSIZE
@@ -110,7 +114,7 @@ FUNCTION CreaBrowse( cBase, aNomb, aLong, aJust, aFtype )
          INPLACEEDIT .T.
          ALLOWDELETE .T.
          ALLOWAPPEND .T.
-         ONHEADCLICK NIL
+         COLUMNSORT aSort
       END BROWSE
 
    END WINDOW
@@ -153,7 +157,7 @@ FUNCTION VerHeadIcon( aType )
       END
    NEXT
 
-   RETURN( aHeadIcon )
+   Return( aHeadIcon )
 
    // ---------------------------------------------------------------------------- //
 

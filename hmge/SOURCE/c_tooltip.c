@@ -59,10 +59,10 @@
 #include <commctrl.h>
 
 #ifndef TTS_CLOSE
-# define TTS_CLOSE    0x80
+# define TTS_CLOSE  0x80
 #endif
 #ifndef TTM_POPUP
-# define TTM_POPUP    (WM_USER + 34)
+# define TTM_POPUP  ( WM_USER + 34 )
 #endif
 
 #ifdef MAKELONG

@@ -277,7 +277,7 @@ METHOD EditField() CLASS TBrowseSQL
 
       // Set initial cursor shape
       // SetCursor( iif( ReadInsert(), SC_INSERT, SC_NORMAL ) )
-      READModal( aGetList )
+      ReadModal( aGetList )
       // SetCursor( SC_NONE )
 
       /* NOTE: To do in a better way */

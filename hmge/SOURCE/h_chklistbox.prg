@@ -318,18 +318,22 @@ FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
    LOCAL RetVal As Logical
    LOCAL i, t, uSel
 
-   i := GetControlIndex ( ControlName , ParentForm )
-   IF i > 0
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
+
       T := _HMG_aControlType [i]
       IF "CHKLIST" $ T
+
          IF item > 0 .AND. item <= ListBoxGetItemCount ( _HMG_aControlHandles [i] )
+
             IF ISLOGICAL ( lState )
                IF T == "MULTICHKLIST"
-                  USEl := ListBoxGetMultiSel ( _HMG_aControlHandles [i] )
+                  uSel := ListBoxGetMultiSel ( _HMG_aControlHandles [i] )
                ELSE
-                  USEl := ListBoxGetCursel ( _HMG_aControlHandles [i] )
+                  uSel := ListBoxGetCursel ( _HMG_aControlHandles [i] )
                ENDIF
+
                ChkList_SetCheckBox ( _HMG_aControlHandles [i], Item, iif( lState, 2, 1 ) )
+
                IF T == "MULTICHKLIST"
                   ListBoxSetMultiSel ( _HMG_aControlHandles [i], uSel )
                ELSE
@@ -338,8 +342,11 @@ FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
             ELSE
                RetVal := ChkList_GetCheckBox ( _HMG_aControlHandles [i], Item )
             ENDIF
+
          ENDIF
+
       ENDIF
+
    ENDIF
 
    RETURN RetVal

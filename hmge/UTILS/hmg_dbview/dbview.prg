@@ -546,11 +546,11 @@ STATIC FUNCTION DlgWait( cTitle )
    ENDIF
 
    IF ! Empty( cTitle )
-      WAITWin.Title := cTitle
+      WaitWin.Title := cTitle
       SHOW WINDOW WaitWin
       DO EVENTS
    ELSE
-      WAITWin.Hide
+      WaitWin.Hide
    ENDIF
 
    RETURN NIL

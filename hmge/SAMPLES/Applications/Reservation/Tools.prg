@@ -35,7 +35,7 @@ FUNCTION Srec_lock (tries, interactive, YNmessage)
       ENDIF
       tries := tries-1
       IF tries = 0 .and. interactive
-         COUNTer ++
+         counter ++
          IF MSGRetryCancel(YNmessage,"Tentativo di apertura n° "+zaps(counter)+" "+alias())
             tries := intries
          ENDIF

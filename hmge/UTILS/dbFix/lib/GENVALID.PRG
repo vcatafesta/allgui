@@ -24,7 +24,7 @@ FUNCTION AllNum(cVar)
       ENDIF
    NEXT
 
-   RETURN(lOk)
+   Return(lOk)
 
    #ifndef DOS_ONLY
 
@@ -50,7 +50,7 @@ FUNCTION AllValid(oDlg)
    CursorArrow()
    SysRefresh()
 
-   RETURN(lOk)
+   Return(lOk)
 
 FUNCTION FldValid(oFld)
 
@@ -81,7 +81,7 @@ FUNCTION FldValid(oFld)
    CursorArrow()
    SysRefresh()
 
-   RETURN(lOk)
+   Return(lOk)
 
    #endif
 
@@ -217,10 +217,10 @@ FUNCTION GenValid(uVar, Edits, Misc1, Misc2, lMsgs, lEmpty)
             MsgAlert("Entry may not be blank")
          ENDIF
 
-         RETURN(.F.)
+         Return(.F.)
       ELSE
 
-         RETURN(.T.)   // Allowed to be empty, so we're done.
+         Return(.T.)   // Allowed to be empty, so we're done.
       ENDIF
    ENDIF
 
@@ -232,7 +232,7 @@ FUNCTION GenValid(uVar, Edits, Misc1, Misc2, lMsgs, lEmpty)
             MsgAlert("Entry may not contain leading spaces")
          ENDIF
 
-         RETURN(.F.)
+         Return(.F.)
       ENDIF
    ENDIF
 
@@ -478,7 +478,7 @@ FUNCTION GenValid(uVar, Edits, Misc1, Misc2, lMsgs, lEmpty)
 
    NEXT
 
-   RETURN(lOk)
+   Return(lOk)
 
 STATIC FUNCTION FindBad(uVar, cChars, lNotAllowed, lMsgs)
 
@@ -541,7 +541,7 @@ STATIC FUNCTION FindBad(uVar, cChars, lNotAllowed, lMsgs)
       ENDIF
    ENDIF
 
-   RETURN(lBad)
+   Return(lBad)
 
 FUNCTION GoodFile(cFile)
 
@@ -564,5 +564,5 @@ FUNCTION GoodFile(cFile)
       ENDIF
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 

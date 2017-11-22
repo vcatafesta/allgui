@@ -698,7 +698,7 @@ FUNCTION OwnTabPaint ( lParam )
    ENDIF
    hBrush := CreateSolidBrush( aBkColor [1], aBkColor [2], aBkColor [3] )
    FillRect( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-   DELETEObject( hBrush )
+   DeleteObject( hBrush )
 
    bkColor := RGB( aBkColor [1], aBkColor [2], aBkColor [3] )
    SetBkColor( hDC, bkColor )
@@ -733,7 +733,7 @@ FUNCTION OwnTabPaint ( lParam )
          ENDIF
       ENDIF
 
-      DELETEObject( hImage )
+      DeleteObject( hImage )
    ENDIF
 
    IF lSelected

@@ -43,7 +43,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -60,7 +60,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -77,7 +77,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_imprimir
          picture path_imagens+'imprimir.bmp'
          col 311
@@ -94,7 +94,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 413
@@ -111,7 +111,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_acessos
          picture path_imagens+'acessos.bmp'
          col 515
@@ -128,7 +128,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 617
@@ -145,7 +145,7 @@ FUNCTION operadores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE SPLITBOX
          DEFINE GRID grid_operadores
@@ -212,7 +212,7 @@ FUNCTION operadores()
    form_operadores.center
    form_operadores.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION dados(parametro)
 
@@ -238,7 +238,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          operadores->(ordsetfocus('nome'))
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ENDIF
 
@@ -314,7 +314,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -327,7 +327,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
    END WINDOW
 
@@ -337,7 +337,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir()
 
@@ -352,7 +352,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       operadores->(ordsetfocus('nome'))
 
-      RETURN(nil)
+      return(nil)
    ELSE
       IF msgyesno('Nome : '+alltrim(operadores->nome),'Excluir')
          IF lock_reg()
@@ -365,7 +365,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION relacao()
 
@@ -409,7 +409,7 @@ STATIC FUNCTION relacao()
       END PRINTPAGE
    END PRINTDOC
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -423,14 +423,14 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,030 PRINT 'CÓDIGO' FONT 'courier new' SIZE 010 BOLD
    @ 035,050 PRINT 'NOME' FONT 'courier new' SIZE 010 BOLD
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar(parametro)
 
@@ -447,7 +447,7 @@ STATIC FUNCTION gravar(parametro)
    IF retorna
       msgalert('Preencha todos os campos','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF parametro == 1
@@ -487,7 +487,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION pesquisar()
 
@@ -518,7 +518,7 @@ STATIC FUNCTION pesquisar()
       form_operadores.grid_operadores.enableupdate
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar()
 
@@ -533,7 +533,7 @@ STATIC FUNCTION atualizar()
       operadores->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION acesso()
 
@@ -567,7 +567,7 @@ STATIC FUNCTION acesso()
    IF empty(x_id)
       msgalert('Escolha uma informação primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    dbselectarea('acesso')
@@ -1140,7 +1140,7 @@ STATIC FUNCTION acesso()
          tooltip 'Confirmar as informações selecionadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_acesso.width-100
@@ -1153,7 +1153,7 @@ STATIC FUNCTION acesso()
          tooltip 'Sair desta tela sem selecionar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
       on key escape action thiswindow.release
 
@@ -1162,7 +1162,7 @@ STATIC FUNCTION acesso()
    form_acesso.center
    form_acesso.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar_acesso(parametro,tipo)
 
@@ -1266,5 +1266,5 @@ STATIC FUNCTION gravar_acesso(parametro,tipo)
       form_acesso.release
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 

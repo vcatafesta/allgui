@@ -460,18 +460,19 @@ Check List Box
 
 #xcommand DEFINE ANIMATEBOX <name>;
    =>;
-   _HMG_ActiveControlName      := <"name">   ;;
-   _HMG_ActiveControlOf      := Nil      ;;
-   _HMG_ActiveControlId      := Nil      ;;
+   _HMG_ActiveControlName   := <"name">   ;;
+   _HMG_ActiveControlOf      := Nil       ;;
+   _HMG_ActiveControlId      := Nil       ;;
    _HMG_ActiveControlCol      := Nil      ;;
    _HMG_ActiveControlRow      := Nil      ;;
-   _HMG_ActiveControlWidth      := Nil      ;;
-   _HMG_ActiveControlHeight      := Nil      ;;
-   _HMG_ActiveControlAutoPlay      := .f.      ;;
-   _HMG_ActiveControlCenter      := .f.      ;;
-   _HMG_ActiveControlTransparent   := .f.      ;;
-   _HMG_ActiveControlBorder        := .t.      ;;
-   _HMG_ActiveControlFile      := Nil      ;;
+   _HMG_ActiveControlWidth      := Nil    ;;
+   _HMG_ActiveControlHeight      := Nil   ;;
+   _HMG_ActiveControlAutoPlay      := .f. ;;
+   _HMG_ActiveControlCenter      := .f.   ;;
+   _HMG_ActiveControlTransparent   := .f. ;;
+   _HMG_ActiveControlBackColor     := Nil ;;
+   _HMG_ActiveControlBorder        := .t. ;;
+   _HMG_ActiveControlFile      := Nil     ;;
    _HMG_ActiveControlHelpId      := Nil
 
 #xcommand AUTOPLAY <autoplay>;
@@ -501,6 +502,7 @@ Check List Box
       _HMG_ActiveControlFile,;
       _HMG_ActiveControlHelpId,;
       _HMG_ActiveControlBorder,;
+      _HMG_ActiveControlBackColor,;
       _HMG_ActiveControlId )
 
 #xcommand DEFINE PLAYER <name> ;
@@ -3133,6 +3135,7 @@ BROWSE
    _HMG_ActiveControlHandCursor    := Nil ;;
    _HMG_ActiveControlBorder        := Nil ;;
    _HMG_ActiveControlTransparent   := .f. ;;
+   _HMG_ActiveControlSort          := Nil ;;
    _HMG_ActiveControlNoTabStop     := .f.
 
 #xcommand PAINTDOUBLEBUFFER <buffer> ;
@@ -3189,7 +3192,8 @@ _DefineBrowse ( _HMG_ActiveControlName ,    ;
       _HMG_ActiveControlNoTabStop , ;
       _HMG_ActiveControlHandCursor , ;
       _HMG_ActiveControlBorder , ;
-      _HMG_ActiveControlTransparent )
+      _HMG_ActiveControlTransparent , ;
+      _HMG_ActiveControlSort )
 
 /*----------------------------------------------------------------------------
 Hyperlink

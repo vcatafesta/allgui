@@ -63,7 +63,7 @@ FUNCTION Main
 
    SET InteractiveClose Query Main
 
-   READ_Font()
+   Read_Font()
    InstallPath := cFilePath( HB_ArgV(0) )
 
    IF FILE(InstallPath + "\" + cHelp)
@@ -715,7 +715,7 @@ FUNCTION Cut_Click()
 
 FUNCTION Clear_Click()
 
-   CLEARRTF(hEd)
+   ClearRTF(hEd)
 
    RETURN NIL
 

@@ -148,8 +148,8 @@ STATIC PROCEDURE REPORT2()
 
    total1 := 0
    total2 := 0
-   COUNTry->( dbEval( { || total1 += Area, total2 += Population } ) )
-   COUNTry->( dbCloseArea() )
+   Country->( dbEval( { || total1 += Area, total2 += Population } ) )
+   Country->( dbCloseArea() )
 
    // output of summary
    oreport:Summary := "Total:"

@@ -357,6 +357,6 @@ FUNCTION timeMsg( tBegin, tEnd )
       CRLF + ;
       replicate( "=", 81 )
 
-   RETURN( sRet )
+   return( sRet )
    #include "sBufCLS.prg"
 

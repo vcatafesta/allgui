@@ -75,6 +75,18 @@ Espero que você seja útil.
 
 History: (Only English)
 
+04/11/2017 New: a click on FieldName obtain a column focus
+           New: possibility of column deletion
+           New: exportation on WinReport format (not yet finish! but work for basic functions))
+           For Windows Report Interpreter (hbprinter driver only)
+           New: add command SET GROUPBOLD    // Default .T.
+           New: add command SET HGROUPCOLOR  // Default BLUE
+           New: add command SET GTGROUPCOLOR // Default BLUE
+           New: add support for the main languages
+
+01/11/2017 Move the function Writefile from Quickb.prg to treport.prg,
+           because is More fast than Strfile
+
 23/10/2017 Added User Report Editor with autosize for Window and main grid.
            Now is possible to save and import of report definition.
            Added the option to change the order of columns to print.

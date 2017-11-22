@@ -66,14 +66,14 @@ FUNCTION relatorio_produto_001()
          width 150;
          height 030;
          font 'verdana' size 014
-      DEFINE COMBOBOXex cbo_001
+      define comboboxex cbo_001
       row   110
       col   010
       width 310
       height 200
       items a_001
       value 1
-   END COMBOBOXex
+   end comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -99,7 +99,7 @@ FUNCTION relatorio_produto_001()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   END BUTTONex
+   end buttonex
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_pizzas_001.width-100
@@ -112,7 +112,7 @@ FUNCTION relatorio_produto_001()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   END BUTTONex
+   end buttonex
 
    on key escape action thiswindow.release
 
@@ -121,7 +121,7 @@ END WINDOW
 form_pizzas_001.center
 form_pizzas_001.activate
 
-RETURN(nil)
+return(nil)
 
 STATIC FUNCTION relatorio()
 
@@ -249,7 +249,7 @@ STATIC FUNCTION relatorio()
       END PRINTPAGE
    END PRINTDOC
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -274,12 +274,12 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 041,020 PRINT 'PRODUTO' FONT 'courier new' SIZE 010 BOLD
    @ 041,100 PRINT 'QUANTIDADE' FONT 'courier new' SIZE 010 BOLD
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 

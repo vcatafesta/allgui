@@ -44,7 +44,7 @@ END
 //
 
 1 VERSIONINFO
-FILEVERSION 1,0,1,0
+FILEVERSION 1,1,0,0
 PRODUCTVERSION 1,0,0,0
 FILEOS 0x4
 FILETYPE 0x1
@@ -54,9 +54,9 @@ BLOCK "StringFileInfo"
 	BLOCK "040904b0"
 	{
 		VALUE "FileDescription", "Simple Timer\000"
-		VALUE "FileVersion", "1.0.1.0"
+		VALUE "FileVersion", "1.1.0.0"
 		VALUE "InternalName", "Timer"
-		VALUE "LegalCopyright", "Freeware 2005\000"
+		VALUE "LegalCopyright", "Freeware 2005-2008\000"
 		VALUE "LegalTrademarks", "Harbour"
 		VALUE "OriginalFilename", "Timer.exe"
 		VALUE "CompanyName", "\000"
@@ -68,6 +68,6 @@ BLOCK "StringFileInfo"
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+	VALUE "Translation", 0x0409, 0x04B0
 }
 }

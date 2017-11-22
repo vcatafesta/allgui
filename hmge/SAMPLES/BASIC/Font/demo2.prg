@@ -109,7 +109,7 @@ PROCEDURE _SetFontRotate ( ControlName, ParentForm, Value )
    LOCAL i, h, n, s, ab, ai, au, as , aa , j
 
    i := GetControlIndex ( ControlName, ParentForm )
-   DELETEObject ( _HMG_aControlFontHandle [i] )
+   DeleteObject ( _HMG_aControlFontHandle [i] )
 
    h := _HMG_aControlhandles [i]
    n := _HMG_aControlFontName [i]

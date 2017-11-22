@@ -56,7 +56,7 @@ INIT PROCEDURE ClipInit()
       MsgExclamation( "The " + hb_ArgV( 0 ) + " file" + CRLF + ;
          "expects a newer version of Windows." + CRLF + ;
          "Upgrade your Windows version.", "Error Starting Program", , .F., .T. )
-      EXITProcess()
+      ExitProcess()
    ENDIF
 
    Init()
@@ -65,7 +65,7 @@ INIT PROCEDURE ClipInit()
 
    EXIT PROCEDURE ClipExit()
    GdiplusShutdown()
-   EXITProcess()
+   ExitProcess()
 
    RETURN
 
@@ -102,5 +102,5 @@ STATIC FUNCTION _HMG_GenError( cMsg )
 
 FUNCTION MiniGuiVersion
 
-   RETURN( "Harbour MiniGUI Extended Edition 17.10 (" + iif( IsExe64(), "64", "32" ) + "-bit)" )
+   RETURN( "Harbour MiniGUI Extended Edition 17.11 (" + iif( IsExe64(), "64", "32" ) + "-bit)" )
 

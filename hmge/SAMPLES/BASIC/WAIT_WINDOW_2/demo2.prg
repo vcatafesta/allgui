@@ -57,7 +57,7 @@ FUNCTION StartSample()
    Form_1.Btn_Start.Enabled := .F. // lock a button
 
    // Create the window waiting with the flow
-   WAITThreadCreate( 'Wait a little while being processed ...' )
+   WaitThreadCreate( 'Wait a little while being processed ...' )
 
    // Main loop calculations (for example, OLE for Excel)
    FOR nI := 1 TO 100
@@ -69,7 +69,7 @@ FUNCTION StartSample()
 
    NEXT
 
-   WAITThreadClose()   // close the "expectations" window
+   WaitThreadClose()   // close the "expectations" window
 
    cMsg := "The calculation is carried out - 100" + CRLF + CRLF
    cMsg += "Elapsed processing time - " + SECTOTIME( SECONDS() - nTime )

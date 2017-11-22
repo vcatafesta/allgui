@@ -169,7 +169,7 @@ FUNCTION Open_File()
    cFile := GetFile( {{'Rich text File','*.rtf'},{'Text File','*.txt'}} , 'Get File' )
 
    IF !empty(cFile)
-      READ_file(cFile)
+      Read_file(cFile)
    ENDIF
 
    RETURN NIL
@@ -221,7 +221,7 @@ FUNCTION ChangeTest()
 
    rec := Form_1.Browse_1.Value
    dbGoTo(rec)
-   READField()
+   ReadField()
 
    RETURN NIL
 

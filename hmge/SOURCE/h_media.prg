@@ -152,7 +152,7 @@ FUNCTION PlayWave( wave, r, s, ns, l, nd )
 
    RETURN C_PlayWave( wave, r, s, ns, l, nd )
 
-FUNCTION _DefineAnimateBox( ControlName, ParentFormName, x, y, w, h, autoplay, center, transparent, file, HelpId, border, nId )
+FUNCTION _DefineAnimateBox( ControlName, ParentFormName, x, y, w, h, autoplay, center, transparent, file, HelpId, border, backcolor, nId )
 
    LOCAL ParentFormHandle , blInit , ControlHandle , mVar , k , tooltip := '' , Style
    LOCAL lDialogInMemory
@@ -237,7 +237,7 @@ FUNCTION _DefineAnimateBox( ControlName, ParentFormName, x, y, w, h, autoplay, c
    _HMG_aControlGotFocusProcedure  [k] :=  ""
    _HMG_aControlChangeProcedure  [k] :=  ""
    _HMG_aControlDeleted  [k] :=  .F.
-   _HMG_aControlBkColor  [k] :=  Nil
+   _HMG_aControlBkColor  [k] :=  backcolor
    _HMG_aControlFontColor  [k] :=  Nil
    _HMG_aControlDblClick  [k] :=  ""
    _HMG_aControlHeadClick  [k] :=  {}

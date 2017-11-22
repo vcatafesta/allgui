@@ -123,7 +123,7 @@ FUNCTION ClearUndo_Click()
       _RemoveMenuItem( cxUndo_Id , MainForm)
    NEXT
    aUndo:={}
-   CLEARUndoBuffer(hEd)
+   ClearUndoBuffer(hEd)
    Btn_Stat(1)
 
    RETURN NIL

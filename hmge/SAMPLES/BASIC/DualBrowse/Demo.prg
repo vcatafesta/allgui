@@ -458,7 +458,7 @@ FUNCTION PutItOn()
       MsgExclamation( "This item has already been selected.", " Duplicate Selection !" )
    ENDIF
 
-   CLEARSearch( NIL )                                   // resets cSearchKey to ""
+   ClearSearch( NIL )                                   // resets cSearchKey to ""
 
    SELECT CATALOG
    SelectItems.Brw_Catalog.Value := nThisRecNo
@@ -477,7 +477,7 @@ STATIC FUNCTION ShowByCode
    SelectItems.Lbl_AlfaSearch.Hide
    SelectItems.Lbl_CodeSearch.Show
    SelectItems.SearchText.Col := 140
-   CLEARSearch( NIL )                                   // resets cSearchKey to ""
+   ClearSearch( NIL )                                   // resets cSearchKey to ""
 
    SelectItems.Brw_Catalog.HeaderImage( 1 ) :=  0
    SelectItems.Brw_Catalog.HeaderImage( 2 ) :=  1
@@ -505,7 +505,7 @@ STATIC FUNCTION ShowByName
    SelectItems.Lbl_CodeSearch.Hide
    SelectItems.Lbl_AlfaSearch.Show
    SelectItems.SearchText.Col := 125
-   CLEARSearch( NIL )                                   // resets cSearchKey to ""
+   ClearSearch( NIL )                                   // resets cSearchKey to ""
 
    SelectItems.Brw_Catalog.HeaderImage( 2 ) :=  0
    SelectItems.Brw_Catalog.HeaderImage( 1 ) :=  1
@@ -577,7 +577,7 @@ STATIC FUNCTION StartOver
    SelectItems.Brw_Wanted.Value := RECNO()
    SelectItems.Brw_Wanted.Refresh
 
-   CLEARSearch( NIL )                                   // resets cSearchKey to ""
+   ClearSearch( NIL )                                   // resets cSearchKey to ""
 
    SELECT CATALOG
    GO TOP

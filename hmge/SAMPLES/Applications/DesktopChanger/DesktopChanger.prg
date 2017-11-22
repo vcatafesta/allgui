@@ -978,7 +978,7 @@ FUNCTION GetWallpapers()
       aEval( aArrBmp, {|uFile| AAdd( aArray, uFile[1] )} )
    ENDIF
 
-   RETURN(aArray)
+   Return(aArray)
 
 PROCEDURE TransparentIcons()
 

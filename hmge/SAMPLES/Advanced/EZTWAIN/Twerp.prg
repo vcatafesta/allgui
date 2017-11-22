@@ -316,7 +316,7 @@ FUNCTION DiscardImage()
 
    // delete/free global palette, and dib, as necessary.
    IF hpal # NIL
-      DELETEObject( hpal )
+      DeleteObject( hpal )
       hpal = NIL
    ENDIF
    IF hdib # NIL

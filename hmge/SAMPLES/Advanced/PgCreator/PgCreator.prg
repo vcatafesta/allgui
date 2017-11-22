@@ -943,10 +943,10 @@ FUNCTION SaveToFile(ParentForm,ControlName,cFile,met)
       CASE cExt == 'xml' .or. met == 1
          oXmlDoc := CreatePropXml(ParentForm,ControlName)
          oXmlDoc:Save( cFile )
-         READXml(cFile)
+         ReadXml(cFile)
       CASE cExt == 'txt' .or. met == 2
          lSave := CreatePropFile(ParentForm,ControlName,cFile)
-         READTxt(ParentForm,ControlName,cFile)
+         ReadTxt(ParentForm,ControlName,cFile)
       CASE cExt == 'ini' .or. met == 3
          lSave := CreateIniFile(ParentForm,ControlName,cFile)
          IF lSave

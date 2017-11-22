@@ -421,7 +421,7 @@ PROCEDURE SysWait( nWait )
       IN USER32.DLL ALIAS ShowSysWindow
 
    DECLARE DLL_TYPE_LONG ;
-      EXITWindowsEx ( DLL_TYPE_LONG uFlags, DLL_TYPE_LONG dwReserved ) ;
+      ExitWindowsEx ( DLL_TYPE_LONG uFlags, DLL_TYPE_LONG dwReserved ) ;
       IN USER32.DLL ALIAS SysShutDown
 
 #pragma BEGINDUMP

@@ -21,7 +21,7 @@ FUNCTION FileDate(cFile)
       dFile := aDir_[1, F_DATE]
    ENDIF
 
-   RETURN(dFile)
+   Return(dFile)
 
 FUNCTION FSize(xFileSpec)
 
@@ -55,7 +55,7 @@ FUNCTION FSize(xFileSpec)
       aeval(directory(aFiles_[x]), {|a| nSize += a[F_SIZE] })
    NEXT
 
-   RETURN(nSize)
+   Return(nSize)
 
 FUNCTION FStamp(cFile)
 
@@ -77,7 +77,7 @@ FUNCTION FStamp(cFile)
          substr(aDir_[1, F_TIME], 7, 2)
    ENDIF
 
-   RETURN(cStamp)
+   Return(cStamp)
 
 FUNCTION MultiDel(xDelMask)
 
@@ -121,5 +121,5 @@ FUNCTION MultiDel(xDelMask)
       ENDIF
    NEXT
 
-   RETURN(NIL)
+   Return(NIL)
 

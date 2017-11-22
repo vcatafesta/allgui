@@ -138,7 +138,7 @@ STATIC FUNCTION ZoomImage()
    Lineto( hDC, nLeft + nWidth + 1, nTop + nHeight / 2 + 1 )
 
    SelectObject( hDC, hOldPen )
-   DELETEObject( hPen )
+   DeleteObject( hPen )
 
    ReleaseDC( hWnd, hDC )
 

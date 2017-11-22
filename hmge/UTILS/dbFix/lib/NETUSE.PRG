@@ -81,7 +81,7 @@ FUNCTION NetUse(cFile, lExclusive, cIndex, lAuto)
    DO WHILE select(cTemp) > 0
       IF !MsgRetryCancel('The alias "' + cTemp + '" is already in use.', cFATitle)
 
-         RETURN(lSuccess)
+         Return(lSuccess)
       ENDIF
       SysRefresh()
    ENDDO
@@ -139,7 +139,7 @@ FUNCTION NetUse(cFile, lExclusive, cIndex, lAuto)
       sx_AutoOpen(lAuto)
    ENDIF
 
-   RETURN(lSuccess)
+   Return(lSuccess)
 
 STATIC FUNCTION Try2Open(oUseErr, cFile, cDriver, cAlias, lExclusive, lReadonly, lEnd)
 
@@ -170,7 +170,7 @@ STATIC FUNCTION Try2Open(oUseErr, cFile, cDriver, cAlias, lExclusive, lReadonly,
          ENDIF
       ENDIF
 
-      WAITASec()
+      WaitASec()
 
       #ifdef DOS_ONLY
       lEnd := (inkey() == K_ESC)
@@ -182,7 +182,7 @@ STATIC FUNCTION Try2Open(oUseErr, cFile, cDriver, cAlias, lExclusive, lReadonly,
       lSuccess := .F.
    ENDIF
 
-   RETURN(lSuccess)
+   Return(lSuccess)
 
 STATIC FUNCTION NU_Error(oUseErr, bPrevErr, lRetry)
 
@@ -243,7 +243,7 @@ FUNCTION AddRec(nTryOut)
          cFATitle)
    ENDIF
 
-   RETURN(lAdded)
+   Return(lAdded)
 
 STATIC FUNCTION Try2Add(nTryOut, lEnd)
 
@@ -256,7 +256,7 @@ STATIC FUNCTION Try2Add(nTryOut, lEnd)
 
    DO WHILE !lEnd .and. !lAdded
 
-      WAITASec()
+      WaitASec()
 
       DBAppend()
 
@@ -277,7 +277,7 @@ STATIC FUNCTION Try2Add(nTryOut, lEnd)
 
    ENDDO
 
-   RETURN(lAdded)
+   Return(lAdded)
 
    //------------------------------------------------------------------ FileLock
 
@@ -299,7 +299,7 @@ FUNCTION FileLock(nTryOut)
          cFATitle)
    ENDIF
 
-   RETURN(lLocked)
+   Return(lLocked)
 
 STATIC FUNCTION Try2Flock(nTryOut, lEnd)
 
@@ -312,7 +312,7 @@ STATIC FUNCTION Try2Flock(nTryOut, lEnd)
 
    DO WHILE !lEnd .and. !lLocked
 
-      WAITASec()
+      WaitASec()
 
       DBSkip(0) // Refresh the buffer in case someone else was in it!
 
@@ -330,7 +330,7 @@ STATIC FUNCTION Try2Flock(nTryOut, lEnd)
 
    ENDDO
 
-   RETURN(lLocked)
+   Return(lLocked)
 
    //------------------------------------------------------------------- RecLock
 
@@ -352,7 +352,7 @@ FUNCTION RecLock(nTryOut)
          cFATitle)
    ENDIF
 
-   RETURN(lLocked)
+   Return(lLocked)
 
 STATIC FUNCTION Try2Rlock(nTryOut, lEnd)
 
@@ -365,7 +365,7 @@ STATIC FUNCTION Try2Rlock(nTryOut, lEnd)
 
    DO WHILE !lEnd .and. !lLocked
 
-      WAITASec()
+      WaitASec()
 
       DBSkip(0) // Refresh the buffer in case someone else was in it!
 
@@ -383,7 +383,7 @@ STATIC FUNCTION Try2Rlock(nTryOut, lEnd)
 
    ENDDO
 
-   RETURN(lLocked)
+   Return(lLocked)
 
    //--------------------------------------------------------- Support Functions
 
@@ -411,7 +411,7 @@ FUNCTION SetTryOut(nNew)
       nTryOut := nNew
    ENDIF
 
-   RETURN(nRet)
+   Return(nRet)
 
 STATIC FUNCTION WaitASec()
 
@@ -431,7 +431,7 @@ STATIC FUNCTION WaitASec()
       ENDIF
    ENDDO
 
-   RETURN(NIL)
+   Return(NIL)
 
    //---------------------------------------------------------------------- Misc
 
@@ -478,7 +478,7 @@ FUNCTION NewAlias(cBase)
       cAlias := cWork + Nstr(++x)
    ENDDO
 
-   RETURN(cAlias)
+   Return(cAlias)
 
 FUNCTION SafeClose(cAlias)
 
@@ -495,5 +495,5 @@ FUNCTION SafeClose(cAlias)
       ENDIF
    ENDIF
 
-   RETURN(lWasOpen)
+   Return(lWasOpen)
 

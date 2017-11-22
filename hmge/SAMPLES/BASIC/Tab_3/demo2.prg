@@ -93,7 +93,7 @@ FUNCTION addnewcontrol2(ctrl)
       width 180
       caption 'Click me'
       action MsgBox('Button action','Result')
-   END BUTTONex
+   end buttonex
 
    tabsample.tab1.addcontrol(ctrl,2,80,10)
 

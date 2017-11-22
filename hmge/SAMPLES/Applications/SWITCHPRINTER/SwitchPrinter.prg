@@ -246,7 +246,7 @@ FUNCTION aAllPrinters()
       Aadd( aPrinters, { name, Token(aPrn[i], ",", 2), name == cDefPrn } )
    NEXT
 
-   RETURN( aPrinters )
+   Return( aPrinters )
 
 FUNCTION GetDefPrinter()
 
@@ -393,7 +393,7 @@ STATIC FUNCTION GETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Get(cSubKey, uValue)
    oReg:Close()
 
-   RETURN( cValue )
+   Return( cValue )
 
 STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
 
@@ -405,7 +405,7 @@ STATIC FUNCTION SETREGVAR(nKey, cRegKey, cSubKey, uValue)
    cValue := oReg:Set(cSubKey, uValue)
    oReg:Close()
 
-   RETURN( cValue )
+   Return( cValue )
 
 STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
 
@@ -416,7 +416,7 @@ STATIC FUNCTION DELREGVAR(nKey, cRegKey, cSubKey)
    nValue := oReg:Delete(cSubKey)
    oReg:Close()
 
-   RETURN( nValue )
+   Return( nValue )
 
 #pragma BEGINDUMP
 

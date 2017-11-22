@@ -134,7 +134,7 @@ FUNCTION Main(DbArc,r,g,b)
       torta()
    ENDIF
 
-   RETURN(nil)
+   Return(nil)
 
 PROCEDURE barre()
 

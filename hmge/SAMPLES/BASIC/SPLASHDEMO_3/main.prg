@@ -63,7 +63,7 @@ FUNCTION OnlyOneInstance( cAppTitle )
 
    IF hWnd # 0
       iif( IsIconic( hWnd ), _Restore( hWnd ), SetForeGroundWindow( hWnd ) )
-      EXITProcess( 0 )
+      ExitProcess( 0 )
    ENDIF
 
    RETURN NIL

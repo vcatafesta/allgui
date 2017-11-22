@@ -309,7 +309,7 @@ FUNCTION InitDialogEdit( ParentName, ControlHandle, k )
    ParentName := Nil
 
    maxlength := _HMG_aControlMiscData1 [k,2]
-   READonly  := _HMG_aControlMiscData1 [k,3]
+   readonly  := _HMG_aControlMiscData1 [k,3]
 
    IF ValType ( readonly ) == 'L'
       SendMessage( ControlHandle , EM_SETREADONLY , iif( readonly, 1, 0 ) , 0 )

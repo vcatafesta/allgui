@@ -1,6 +1,6 @@
 /*
 * MINIGUI - Harbour Win32 GUI library Demo
-* DATA PROVIDED BY NETMARKETSHARE.COM FOR SEPTEMBER 2017
+* DATA PROVIDED BY NETMARKETSHARE.COM FOR OCTOBER 2017
 */
 
 #include "hmg.ch"
@@ -11,21 +11,21 @@ STATIC aSeries, aSerieNames, aColors
 FUNCTION Main
 
    aSeries := { ;
-      47.21, ;
-      29.09, ;
-      5.89, ;
-      5.69, ;
-      3.84, ;
-      3.04, ;
-      1.24, ;
-      4.01  ;
+      46.63, ;
+      29.26, ;
+      6.47, ;
+      5.97, ;
+      3.34, ;
+      2.98, ;
+      1.40, ;
+      3.95  ;
       }
 
    aSerieNames := { ;
       "Windows 7", ;
       "Windows 10", ;
-      "Windows 8.1", ;
       "Windows XP", ;
+      "Windows 8.1", ;
       "Mac OS X 10.12", ;
       "Linux", ;
       "Windows 8", ;

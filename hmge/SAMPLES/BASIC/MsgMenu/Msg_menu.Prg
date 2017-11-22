@@ -342,7 +342,7 @@ FUNCTION MsgMenu( cMensaje , aCaptions , aPictures , cBitmap , cTitulo , nFocusB
    ACTIVATE WINDOW &Form_MenuOp
 
    IF GetObjectType( nFontHandle ) == OBJ_FONT
-      DELETEObject( nFontHandle )
+      DeleteObject( nFontHandle )
    ENDIF
 
    nRetVal := ASCAN( aNombreBtns , @cClickedBut )

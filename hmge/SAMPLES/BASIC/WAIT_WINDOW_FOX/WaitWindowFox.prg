@@ -51,7 +51,7 @@ FUNCTION ShowWait_Window( cMessage )
 FUNCTION HideWait_Window()
 
    IF IsWindowDefined ( Wait_window )
-      WAIT_window.Release
+      Wait_window.Release
    ENDIF
 
    RETURN NIL

@@ -39,7 +39,7 @@ FUNCTION Main()
                MENUITEM '&Restart' ACTION ( oGif:cFilename := 'ani-search.gif', ;
                   oGif:nDelay := 12, oGif:nWidth := GetGIFSize( oGif:cFilename )[1], ;
                   oGif:nHeight := GetGIFSize( oGif:cFilename )[2], oGif:Update(), ;
-                  ERASEWindow( "Form_Main" ), FormReSize( oGif ), oGif:Restart() )
+                  EraseWindow( "Form_Main" ), FormReSize( oGif ), oGif:Restart() )
                SEPARATOR
                MENUITEM "E&xit" ACTION ThisWindow.Release()
 

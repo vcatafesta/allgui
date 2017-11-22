@@ -387,7 +387,7 @@ PROCEDURE SetTimeExit()
          nAction += EWX_FORCE
       ENDIF
 
-      EXITWindows( nAction )
+      ExitWindows( nAction )
 
    ELSE
 
@@ -550,7 +550,7 @@ PROCEDURE ExitWindows( nFlag )
       EnablePermissions()
    ENDIF
 
-   EXITWindowsEx(nFlag, 0)
+   ExitWindowsEx(nFlag, 0)
 
    RETURN
 

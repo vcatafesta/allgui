@@ -183,7 +183,7 @@ FUNCTION Show_Status()
 FUNCTION Restart_Server()
 
    Stop_Server()
-   DELETE_Table()
+   Delete_Table()
    Start_Server()
 
    RETURN NIL

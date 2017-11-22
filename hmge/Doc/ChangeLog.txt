@@ -1,3 +1,87 @@
+2017/11/21: HMG Extended Edition version 17.11.
+  * Enhanced: The Browse control supports the optional 'ColumnSort {}' clause
+           similar to a Grid. This clause specifies that column's header allows
+           to sort a data via a mouse click.
+           Syntax:
+             @ <row>,<col> BROWSE <name> [ OF <parent> ] ;
+             [ WIDTH <nWidth> ] [ HEIGHT <nHeight> ] ;
+             [ HEADERS <aHeaders> ] [ WIDTHS <aWidths> ] ;
+             [ FIELDS <aFields> ] [ VALUE <value> ] [ COLUMNSORT <aSort> ]
+           where the array aSort may have the following values for each column:
+             .F. - no sorting;
+             .T. - allow sorting.
+           Note that it will be created an auxiliary compound index in the memory
+           for an each field of a table which will replace the any other index of
+           this table. Requested by Pete D. <pete_westg/at/yahoo.gr>.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo in folder \samples\Basic\BROWSE_SORT)
+  * Enhanced: The AnimateBox control supports now the optional BACKCOLOR clause.
+           Above clause should be used along with the TRANSPARENT clause.
+           Requested by Verchenko Andrey <verchenkoag@gmail.com>.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo.prg in folder \samples\Basic\ANIMATEDEMO)
+  * Enhanced: The Timer control supports now the optional ONCE clause.
+           If above clause is defined, when the timer procedure will be executed
+           one time only.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo in folder \samples\Basic\Timer)
+  * Updated: Cleaning of a redundant code at the IMAGE control processing.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+  * Updated: Revised usage of the TEMP files at the RICHEDIT control processing.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo in folder \samples\Basic\Richedit)
+  * Updated: Added helpful C-function IsAppHung( <hWnd> ) for hung detection of
+           the applications (based upon the undocumented WinAPI function).
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo in folder \samples\Advanced\ProcInfo)
+  * Updated: Added processing of the 3rd parameter cResType to the C-function
+           RCDataToFile() for xHarbour compiler.
+           Syntax:
+             RCDataToFile( <cResName>|<nResID>, <cFileName> [, <cResType> ] )
+           (see demo2.prg in folder \samples\Advanced\RCDataToFile)
+  * Updated: WinReport library:
+           - added new commands to support a font attibute in GROUP section;
+           - updated WinReport CHM file.
+           Contributed by Pierpaolo Martinello <pier.martinello[at]alice.it>
+           (see demo in folder \samples\Advanced\REPORT_INTERPRETER)
+  * Updated: Harbour Compiler 3.2.0dev (SVN 2017-11-15 23:34).
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (look at ReadMe.txt in folder \harbour)
+  * New: 'Show AVI files' samples.
+           Contributed by Verchenko Andrey <verchenkoag@gmail.com>
+           (see in folder \samples\Basic\ANIMATEDEMO_2)
+  * New: 'Sort Columns With Header Click in a Browse' sample.
+           Based upon a contribution of HMG user KDJ.
+           Adapted for Minigui Extended by Grigory Filatov <gfilatov@inbox.ru>
+           (see in folder \samples\Basic\BROWSE_SORT_2)
+  * New: 'View and save the images from a website' sample.
+           Based upon a contribution of HMG user KDJ.
+           Adapted for Minigui Extended by Grigory Filatov <gfilatov@inbox.ru>
+           (see in folder \samples\Advanced\ImageFromWeb)
+  * Updated: 'Quick Browse Generator' utility:
+           - added possibility of column deletion in a Grid context menu;
+           - added an ability to save a report in the WinReport format;
+           - added support for the main languages.
+           Contributed by Pierpaolo Martinello <pier.martinello[at]alice.it>
+           (see in folder \Utils\QBGen)
+  * Updated: 'My Dbf Browse' sample: added using of COLUMNSORT clause.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see in folder \samples\Basic\BROWSE_8)
+  * Updated: 'Image To DBF' sample: added using of Timer ONCE clause.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see in folder \samples\basic\Image2Dbf)
+  * Updated: 'Media Player control' sample:
+           - New: added the useful function aSize := GetAviFileSize( <cFile> ).
+           Based upon a contribution of Verchenko Andrey <verchenkoag@gmail.com>
+           (see in folder \samples\Basic\PLAYER_1)
+  * Updated: 'Print Pie Graph' sample: updated the data for October 2017.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see demo.prg in folder \samples\Basic\GraphPrint)
+  * Updated: 'Replacement for Clipper ALERT() function' sample:
+           - the dialog size and controls placement are similar to Windows 7 look.
+           Contributed by Grigory Filatov <gfilatov@inbox.ru>
+           (see in folder \samples\Basic\WALERT_2)
+
 2017/10/30: HMG Extended Edition version 17.10.
   * Fixed: An application did a five superfluous access to a disk at a creating
            of any window (introduced in the build 17.03).

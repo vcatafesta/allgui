@@ -110,7 +110,7 @@ PROCEDURE PrintChart(sTemp)
       MsgStop("Print error!", "Error")
    ENDIF
 
-   DELETEChart(ID_CHART_2)
+   DeleteChart(ID_CHART_2)
 
    RETURN
 
@@ -119,7 +119,7 @@ PROCEDURE endwindow(lClose)
    DEFAULT lClose To .T.
 
    IF lDraw
-      DELETEChart(ID_CHART)
+      DeleteChart(ID_CHART)
    ENDIF
 
    IF lClose

@@ -271,7 +271,7 @@ STATIC FUNCTION ButtonOk()
          BREAK
       ENDIF
 
-      BEGINOfYear := CTOD("01/01/" + ALLTRIM(STR(nYear)))
+      BeginOfYear := CTOD("01/01/" + ALLTRIM(STR(nYear)))
       EndOfYear   := CTOD("12/31/" + ALLTRIM(STR(nYear)))
 
       BaseDate := BeginOfYear
@@ -599,7 +599,7 @@ STATIC FUNCTION ButtonOk()
       *---> write out the regular Holidays
       nRow := 3
       nColumn := 17
-      LOOPEnd := LEN( aHolidays_ )
+      LoopEnd := LEN( aHolidays_ )
       oSheet:Cells(nRow, nColumn):ColumnWidth := 49
       oSheet:Cells(nRow, nColumn):HorizontalAlignment := xlLeft
 
@@ -615,7 +615,7 @@ STATIC FUNCTION ButtonOk()
 
       IF IsLiturgyFeast
          ++nRow
-         LOOPEnd := LEN( acFeastDays_ )
+         LoopEnd := LEN( acFeastDays_ )
          oSheet:Cells(nRow, nColumn):Value := "Liturgical Feast Days:"
          oSheet:Cells(nRow, nColumn):Font:ColorIndex := 11
          oSheet:Cells(nRow, nColumn):Font:Bold := .T.

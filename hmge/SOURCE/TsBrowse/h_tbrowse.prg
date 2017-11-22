@@ -108,7 +108,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
       UPDATE      := .f., ;
       lNogrid     := .F.,;
       lock        := .F.,;
-      APPENDable  := .F.,;
+      appendable  := .F.,;
       lEnum       := .F.,;
       lAutoSearch := .F.,;
       lAutoFilter := .F.,;
@@ -140,7 +140,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
 
    IF valtype(uWhen) == 'B'                                         /* BK    18.05.2015 */
       IF valtype(readonly) != 'A'
-         READonly := ! Eval( uWhen )
+         readonly := ! Eval( uWhen )
       ENDIF
       uWhen := Nil                                                  // its needed else will be crash
    ENDIF
@@ -243,7 +243,7 @@ FUNCTION _DefineTBrowse ( ControlName, ParentFormName, nCol, nRow, nWidth, nHeig
          change , bDblClick, bRClick, fontname, fontsize, ;
          hCursor, aTmpColor , aBmp, cMsg, update, uAlias, uWhen, value, cell,;
          nStyle, bLClick, aFlds, aHeadClick, nLineStyle, lRePaint,;
-         DELETE, aJust, lock, appendable, lEnum,;
+         Delete, aJust, lock, appendable, lEnum,;
          lAutoSearch, uUserSearch, lAutoFilter, uUserFilter, aPicture, ;
          lTransparent, uSelector, lEditable, lAutoCol, aColSel, tooltip )
 
@@ -1244,7 +1244,7 @@ METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSize
       ELSE
          hFont := InitFont( ::cFont, ::nFontSize )  // SergKis addition
          ::nHeightCell := ::nHeightHead := GetTextHeight( 0, "B", hFont ) + 1
-         DELETEObject( hFont )
+         DeleteObject( hFont )
       ENDIF
       ::nHeightFoot := 0
       ::nHeightSpecHd := If( ::lEditableHd, ::nHeightHead, 0 )
@@ -2317,11 +2317,11 @@ METHOD Destroy() CLASS TSBrowse
    DEFAULT ::lDestroy := .F.
 
    IF ::uBmpSel != Nil .and. ::lDestroy
-      DELETEObject ( ::uBmpSel )
+      DeleteObject ( ::uBmpSel )
    ENDIF
 
    IF ::hBrush != Nil   // Alen Uzelac 13.09.2012
-      DELETEObject ( ::hBrush )
+      DeleteObject ( ::hBrush )
    ENDIF
 
    IF ::oCursor != Nil  // GF 29.02.2016
@@ -2329,17 +2329,17 @@ METHOD Destroy() CLASS TSBrowse
    ENDIF
 
    IF ::hBmpCursor != Nil
-      DELETEObject ( ::hBmpCursor )
+      DeleteObject ( ::hBmpCursor )
    ENDIF
 
    IF ::aSortBmp != Nil
-      DELETEObject ( ::aSortBmp[ 1 ] )
-      DELETEObject ( ::aSortBmp[ 2 ] )
+      DeleteObject ( ::aSortBmp[ 1 ] )
+      DeleteObject ( ::aSortBmp[ 2 ] )
    ENDIF
 
    IF ::aCheck != Nil
-      DELETEObject ( ::aCheck[ 1 ] )
-      DELETEObject ( ::aCheck[ 2 ] )
+      DeleteObject ( ::aCheck[ 1 ] )
+      DeleteObject ( ::aCheck[ 2 ] )
    ENDIF
 
    IF Len( ::aColumns ) > 0
@@ -2616,7 +2616,7 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
          nVAlign := 1
 
          IF LoWord( oColumn:nHAlign ) == DT_VERT
-            DELETEObject( hFont )
+            DeleteObject( hFont )
          ENDIF
 
       ENDIF
@@ -3154,8 +3154,8 @@ METHOD DrawPressed( nCell, lPressed ) CLASS TSBrowse
    LineTo( hDC, nRight - 1, nBottom - 1 )
    LineTo( hDC, nRight - 1, nTop - 1 )
    SelectObject( hDC, hOldPen )
-   DELETEObject( hGrayPen )
-   DELETEObject( hWhitePen )
+   DeleteObject( hGrayPen )
+   DeleteObject( hWhitePen )
    ReleaseDC( ::hWnd, hDC )
 
    IF lPressed
@@ -12088,7 +12088,7 @@ METHOD SetSelectMode( lOnOff, bSelected, uBmpSel, nColSel, nAlign ) CLASS TSBrow
    ELSEIF ::uBmpSel != Nil
 
       IF ::lDestroy
-         DELETEObject ( ::uBmpSel )
+         DeleteObject ( ::uBmpSel )
       ENDIF
 
       ::lDestroy := .F.

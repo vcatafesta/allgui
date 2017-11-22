@@ -933,7 +933,7 @@ FUNCTION _GraphPrint( cForm, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
 
 STATIC FUNCTION _bmpprint( cForm, x, y, nLibrary )
 
-   LOCAL cTempFile := GetTempFolder() + '\_hmg_printwindow_' + StrZero( Seconds() * 100 , 8 ) + '.bmp'
+   LOCAL cTempFile := TempFile( GetTempFolder(), 'BMP' )
    LOCAL aSize, nOrientation, lSuccess
    LOCAL W, H, HO, VO, bw, bh, r, tW := 0, tH
 
@@ -957,7 +957,7 @@ STATIC FUNCTION _bmpprint( cForm, x, y, nLibrary )
 
       IF HBPRNERROR != 0
          DoMethod ( cForm, 'Release' )
-         _cleanprint()
+         FErase( cTempFile )
 
          RETURN .F.
       ENDIF
@@ -1002,7 +1002,7 @@ SELECT PRINTER DEFAULT TO lSuccess ORIENTATION nOrientation PREVIEW
 
 IF .NOT. lSuccess
    DoMethod ( cForm, 'Release' )
-   _cleanprint()
+   FErase( cTempFile )
 
    RETURN .F.
 ENDIF
@@ -1032,30 +1032,13 @@ END PRINTDOC
 ENDIF
 
 DO EVENTS
+
 DoMethod ( cForm, 'Release' )
-_cleanprint()
+FErase( cTempFile )
 
 RETURN .T.
 
-STATIC FUNCTION _cleanprint()
-
-   LOCAL cTempMask := GetTempFolder() + '\_hmg_printwindow_*.bmp'
-
-   RETURN FileDelete( cTempMask )
-
-   #ifdef HB_DYNLIB
-
-STATIC FUNCTION FileDelete( cMask )
-
-   LOCAL aDir := Directory( cMask )
-
-   AEval( aDir, { |n| FErase( cFilePath( cMask ) + '\' + n [1] ) } )
-
-   RETURN .T.
-
-   #endif
-
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
 
 FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeight )
 
@@ -1136,7 +1119,7 @@ FUNCTION PrintWindow ( cWindowName, lPreview, ldialog, nRow, nCol, nWidth, nHeig
 
    ENDIF
 
-   TempName := GetTempFolder() + '\_hmg_printwindow_' + hb_ntos( Int( Seconds() * 100 ) ) + '.bmp'
+   TempName := TempFile( GetTempFolder(), 'BMP' )
 
    SaveWindowByHandle ( GetFormHandle ( cWindowName ), TempName, ntop, nleft, nbottom, nright )
 

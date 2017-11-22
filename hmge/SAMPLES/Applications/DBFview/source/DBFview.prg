@@ -1062,7 +1062,7 @@ FUNCTION OpenDataBaseFile( cDataBaseFileName, cAlias, lExclusive, lReadOnly, cDr
 
    ErrorBlock( _bLastHandler )
 
-   RETURN( _lGood )
+   Return( _lGood )
 
 STATIC PROCEDURE ExportData()
 
@@ -2580,7 +2580,7 @@ STATIC PROCEDURE CascadeWnd()
    IF !Empty( Len(aForms) )
       Aeval(aForms, {|e,i| IF(!IsWindowVisible( GetFormHandle( e ) ), DoMethod( e, 'Show' ), )})
       DO EVENTS
-      SWITCHToThisWindow( GetFormHandle( Atail(aForms) ) )
+      SwitchToThisWindow( GetFormHandle( Atail(aForms) ) )
    ENDIF
 
    RETURN
@@ -3002,7 +3002,7 @@ STATIC PROCEDURE TileWnd()
 
    DO EVENTS
    IF !Empty( nWndOpened )
-      SWITCHToThisWindow( GetFormHandle( Atail(aForms) ) )
+      SwitchToThisWindow( GetFormHandle( Atail(aForms) ) )
    ENDIF
 
    RETURN
@@ -3019,7 +3019,7 @@ STATIC PROCEDURE SetThisWindow( nActiveWnd )
       IF IsIconic( hWnd )
          _Restore( hWnd )
       ENDIF
-      SWITCHToThisWindow( hWnd, .T. )
+      SwitchToThisWindow( hWnd, .T. )
    ENDIF
 
    RETURN

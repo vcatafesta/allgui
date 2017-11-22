@@ -22,7 +22,7 @@ este vale 2
 #define MARGEN 50
 #define MARGEN_ICON 70
 #define VMARGEN_BOTON 4
-#define HMARGEN_BOTON 20
+#define HMARGEN_BOTON 22
 #define SEP_BOTON 10
 
 // -----------------------------------------------------------------//
@@ -50,7 +50,7 @@ FUNCTION _Alert( cMsg, aOpciones, cTitle, nTipo )
    cIcoFile := aIcon[ nTipo ]
 
    IF ! _IsControlDefined( "DlgFont", "Main" )
-      DEFINE FONT DlgFont FONTNAME "Ms Sans Serif" SIZE 10
+      DEFINE FONT DlgFont FONTNAME "MS Shell Dlg" SIZE 9
    ENDIF
 
    cMsg    := cValToChar( cMsg )
@@ -110,7 +110,7 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
 
    nLenaOp := iif( ValType( aOpciones ) == "A", Len( aOpciones ), 1 )
 
-   nChrHeight := GetTextMetric( hDC )[ 1 ] + VMARGEN_BOTON
+   nChrHeight := GetTextMetric( hDC )[ 1 ] + VMARGEN_BOTON / 2
 
    // calculo el m ximo ancho de linea
 
@@ -142,27 +142,37 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
    nWidthCli := Max( MARGEN_ICON + nMaxLin + MARGEN,;
       MARGEN + nLenBotones + MARGEN - HMARGEN_BOTON )
 
-   nWidthDlg := nWidthCli + iif( _HMG_IsXP, 2, 1 ) * GetBorderWidth()
+   nWidthDlg := nWidthCli + iif( _HMG_IsXPorLater, 2, 1 ) * GetBorderWidth()
 
    nHeightCli := ( ( nLineas + iif( nLineas == 1, 4, 3 ) ) * nChrHeight ) + VMARGEN_BOTON + nHeightBtn
 
-   nHeightDlg := nHeightCli + GetTitleHeight()
+   nHeightDlg := nHeightCli + GetTitleHeight() + SEP_BOTON + GetBorderHeight()
 
    oDlg.Width := nWidthDlg
    oDlg.Height := nHeightDlg
    oDlg.Center()
 
-   FOR n := 1 TO nLineas
+   IF nLineas > 1
 
-      cLblName := "Say_" + StrZero( n, 2 )
+      FOR n := 1 TO nLineas
 
-      @ nChrHeight * ( n + iif( nLineas == 1, .5, 0 ) ), MARGEN_ICON ;
-         LABEL &cLblName VALUE AllTrim( MemoLine( cMsg,, n ) ) OF oDlg ;
-         FONT "DlgFont" WIDTH nWidthCli - MARGEN_ICON HEIGHT nChrHeight CENTERALIGN
+         cLblName := "Say_" + StrZero( n, 2 )
 
-   NEXT n
+         @ nChrHeight * ( n + iif( nLineas == 1, .5, 0 ) ) + GetBorderHeight(), MARGEN_ICON ;
+            LABEL &cLblName VALUE AllTrim( MemoLine( cMsg,, n ) ) OF oDlg ;
+            FONT "DlgFont" WIDTH nWidthCli - MARGEN_ICON HEIGHT nChrHeight CENTERALIGN
 
-   DRAW ICON IN WINDOW oDlg AT nChrHeight, MARGEN / 2 PICTURE cIcoFile WIDTH 32 HEIGHT 32
+      NEXT n
+
+   ELSE
+
+      @ nChrHeight * 1.5 + GetBorderHeight(), MARGEN_ICON ;
+         LABEL Say_01 VALUE AllTrim( cMsg ) OF oDlg ;
+         FONT "DlgFont" WIDTH nWidthCli - MARGEN_ICON HEIGHT nChrHeight
+
+   ENDIF
+
+   DRAW ICON IN WINDOW oDlg AT nChrHeight + GetBorderHeight(), MARGEN / 2 PICTURE cIcoFile WIDTH 32 HEIGHT 32
 
    FOR n := 1 TO nLenaOp
 
@@ -181,8 +191,8 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
    nOpc := 1
    FOR n := nLenaOp TO 1 STEP -1
 
-      oDlg.&( aBut[ n ] ).Row := nHeightCli - nChrHeight - nHeightBtn
-      oDlg.&( aBut[ n ] ).Col := nWidthCli - ( nMaxBoton + SEP_BOTON ) * nOpc++
+      oDlg.&( aBut[ n ] ).Row := nHeightCli + SEP_BOTON + GetBorderHeight() - nChrHeight - nHeightBtn
+      oDlg.&( aBut[ n ] ).Col := nWidthCli + GetBorderWidth() - ( nMaxBoton + SEP_BOTON ) * nOpc++
 
    NEXT n
 

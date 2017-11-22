@@ -130,8 +130,8 @@ PROCEDURE OnDraw( param )   // modified
    FillRect( dc, 0, 0, dx, aSize[BM_HEIGHT]+10, brush ) // t³o dla menu
    FillRect( dc, 0, aSize[BM_HEIGHT]+10, dx, dy, wndBrush )  // t³o okienka
 
-   DELETEObject( wndBrush )
-   DELETEObject( brush )
+   DeleteObject( wndBrush )
+   DeleteObject( brush )
 
    FOR i := 1 TO Len( aPictures )
       cTekst:='Button_'+alltrim(str(i))

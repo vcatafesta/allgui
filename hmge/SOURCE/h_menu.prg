@@ -93,7 +93,7 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
 
          IF _HMG_xMenuPopupLevel > 1
 
-            APPENDMenuPopup ( _HMG_xMenuPopuphandle[_HMG_xMenuPopupLevel - 1 ], ;
+            AppendMenuPopup ( _HMG_xMenuPopuphandle[_HMG_xMenuPopupLevel - 1 ], ;
                _HMG_xMenuPopuphandle[ _HMG_xMenuPopupLevel ], ;
                _HMG_xMenuPopupCaption[ _HMG_xMenuPopupLevel ], 2, Font )
 
@@ -136,7 +136,7 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
 
          IF _HMG_xContextPopupLevel > 1
 
-            APPENDMenuPopup ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel - 1 ], ;
+            AppendMenuPopup ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel - 1 ], ;
                _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ], ;
                _HMG_xContextPopupCaption[ _HMG_xContextPopupLevel ], k, Font )
 
@@ -232,7 +232,7 @@ PROCEDURE _EndMenuPopup()
 
       IF _HMG_xMenuPopupLevel == 0
 
-         APPENDMenuPopup( _HMG_xMainMenuHandle, _HMG_xMenuPopupHandle[ 1 ], ;
+         AppendMenuPopup( _HMG_xMainMenuHandle, _HMG_xMenuPopupHandle[ 1 ], ;
             _HMG_xMenuPopupCaption[ 1 ], 1, _HMG_xPopupMenuFont )
 
       ENDIF
@@ -255,7 +255,7 @@ PROCEDURE _EndMenuPopup()
             k := 5
          ENDSWITCH
 
-         APPENDMenuPopup( _HMG_xContextMenuHandle, _HMG_xContextPopupHandle[ 1 ], ;
+         AppendMenuPopup( _HMG_xContextMenuHandle, _HMG_xContextPopupHandle[ 1 ], ;
             _HMG_xContextPopupCaption[ 1 ], k, _HMG_xContextPopupMenuFont )
 
       ENDIF
@@ -290,7 +290,7 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
 
       IF !( caption == '-' )
          ControlHandle := _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ]
-         APPENDMenuString( ControlHandle , id , caption , nBreakCode )
+         AppendMenuString( ControlHandle , id , caption , nBreakCode )
       ENDIF
 
       IF ValType ( image ) != 'U'
@@ -385,10 +385,10 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       IF !( caption == '-' )
          IF _HMG_xContextPopupLevel > 0
             ContextMenuHandle := _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ]
-            APPENDMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 7 ) )
+            AppendMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 7 ) )
          ELSE
             ContextMenuHandle := _HMG_xContextMenuHandle
-            APPENDMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 8 ) )
+            AppendMenuString( ContextMenuHandle, id, caption, iif( lBreakMenu, nBreakCode, 8 ) )
          ENDIF
          ControlHandle := ContextMenuHandle
       ENDIF
@@ -486,17 +486,17 @@ PROCEDURE _DefineSeparator ()
 
    IF _HMG_xMenuType == 'MAIN'
 
-      APPENDMenuSeparator ( _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ] )
+      AppendMenuSeparator ( _HMG_xMenuPopuphandle [_HMG_xMenuPopupLevel ] )
 
    ELSE
 
       IF _HMG_xContextPopupLevel > 0
 
-         APPENDMenuSeparator ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ] )
+         AppendMenuSeparator ( _HMG_xContextPopupHandle[ _HMG_xContextPopupLevel ] )
 
       ELSE
 
-         APPENDMenuSeparator ( _HMG_xContextMenuHandle )
+         AppendMenuSeparator ( _HMG_xContextMenuHandle )
 
       ENDIF
 
@@ -900,7 +900,7 @@ FUNCTION _ModifyMenuItem ( ItemName , FormName , Caption , action , name , Image
    ModifyMenuItem ( a [1] , a [2] , Id , Caption )
 
    IF ValType ( image ) != 'U'
-      DELETEObject ( _HMG_aControlBrushHandle [x] )
+      DeleteObject ( _HMG_aControlBrushHandle [x] )
       _HMG_aControlBrushHandle [x] := MenuItem_SetBitMaps ( a [1] , Id , image , '' )
    ENDIF
 

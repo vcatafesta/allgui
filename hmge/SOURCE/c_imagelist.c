@@ -53,7 +53,7 @@
 #include <commctrl.h>
 
 #if defined( __BORLANDC__ )
-  WINCOMMCTRLAPI void WINAPI ImageList_EndDrag( void );
+WINCOMMCTRLAPI void WINAPI ImageList_EndDrag( void );
 #endif
 
 extern HBITMAP HMG_LoadImage( const char * FileName );

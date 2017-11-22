@@ -53,7 +53,7 @@
 #include "hbapiitm.h"
 
 #if defined( __BORLANDC__ )
-  WINGDIAPI BOOL WINAPI GdiFlush( void );
+WINGDIAPI BOOL WINAPI GdiFlush( void );
 #endif
 
 extern HB_EXPORT BOOL Array2ColorRef( PHB_ITEM aCRef, COLORREF * cr );

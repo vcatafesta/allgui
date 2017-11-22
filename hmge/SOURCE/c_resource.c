@@ -59,13 +59,17 @@ extern HINSTANCE g_hInstance;
 HB_FUNC( RCDATATOFILE )
 {
    HMODULE hModule = g_hInstance;
+   LPTSTR  lpType  = ( hb_parclen( 3 ) > 0 ? ( LPTSTR ) hb_parc( 3 ) : MAKEINTRESOURCE( RT_RCDATA ) );
    HRSRC   hResInfo;
    HGLOBAL hResData;
    LPVOID  lpData;
    DWORD   dwSize, dwRet;
    HANDLE  hFile;
 
-   hResInfo = FindResource( hModule, MAKEINTRESOURCE( hb_parnl( 1 ) ), RT_RCDATA );
+   if( hb_parclen( 1 ) > 0 )
+      hResInfo = FindResourceA( hModule, hb_parc( 1 ), lpType );
+   else
+      hResInfo = FindResource( hModule, MAKEINTRESOURCE( hb_parnl( 1 ) ), lpType );
 
    if( NULL == hResInfo )
    {
@@ -118,7 +122,7 @@ HB_FUNC( RCDATATOFILE )
 #else
 
 #if defined( __WATCOMC__ )
-  extern HB_EXPORT HB_SIZE hb_fileWrite( PHB_FILE pFile, const void * buffer, HB_SIZE nSize, HB_MAXINT nTimeout );
+extern HB_EXPORT HB_SIZE hb_fileWrite( PHB_FILE pFile, const void * buffer, HB_SIZE nSize, HB_MAXINT nTimeout );
 #endif
 
 HB_FUNC( RCDATATOFILE )

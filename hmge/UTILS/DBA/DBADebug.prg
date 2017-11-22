@@ -397,7 +397,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
 
                            MEMOWRIT( cFName1, cComand )
 
-                           WAITRunPipe( cFName1 + " > " + cFName2, 0, "dummy" )
+                           WaitRunPipe( cFName1 + " > " + cFName2, 0, "dummy" )
 
                            IF FILE( "dummy" )
                               ERASE "dummy"

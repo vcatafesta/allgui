@@ -151,7 +151,7 @@ FUNCTION DrawMeter(day)
    DEFAULT DAY TO DATE()
    SET( 11 , !ofatt:listdelete )
 
-   ERASEWindow("Principale")
+   EraseWindow("Principale")
 
    FOR n0 = 0 to 23
       drawline("Principale",rpos+11,30+(n0*20),rpos-1,30+(n0*20))
@@ -545,7 +545,7 @@ METHOD IFDATA() CLASS TApplication
    a_Res   := InputWindow ( a_imsg , aLbl , aIniVal , aFmt )
 
    IF a_Res [1] == Nil
-      DELETEfile(oFatt:DataPath+"Maint_"+uTmp+".txt")
+      deletefile(oFatt:DataPath+"Maint_"+uTmp+".txt")
 
       RETURN NIL
    ENDIF
@@ -575,7 +575,7 @@ METHOD IFDATA() CLASS TApplication
          msgstop({"File in use elsewhere!","File in uso altrove!"}[alng],"PresaNew" )
       ENDIF
    ENDIF
-   DELETEfile(oFatt:DataPath+"Maint_"+uTmp+".txt")
+   deletefile(oFatt:DataPath+"Maint_"+uTmp+".txt")
    msginfo({"Import complete!","Importazione completata!"}[alng],"")
 
    RETURN NIL

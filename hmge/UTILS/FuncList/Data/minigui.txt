@@ -30,6 +30,8 @@ c_bitmap.c
 h_browse.prg                  	                    	
    _DefineBrowse              	Function            	
    InitDialogBrowse           	Function            	
+   HMG_OrdCreate              	Static  Procedure   	
+   HMG_SetOrder               	Procedure           	
    _BrowseUpdate              	Procedure           	
    _GetBrowseFieldValue       	Function            	
    _GetBrowseFnValue          	Function            	
@@ -173,6 +175,7 @@ h_combo.prg
 c_combo.c                     	                    	
    INITCOMBOBOX               	HB_FUNC             	
    INITCOMBOBOXEX             	HB_FUNC             	
+   COMBOSETITEMHEIGHT         	HB_FUNC             	
    COMBOSHOWDROPDOWN          	HB_FUNC             	
    COMBOEDITSETSEL            	HB_FUNC             	
    COMBOGETEDITSEL            	HB_FUNC             	
@@ -213,7 +216,6 @@ h_controlmisc.prg
    _GetControlHeight          	Function            	
    _SetControlCaption         	Function            	
    _SetPicture                	Function            	
-   _GetPicture                	Function            	
    _EnableToolbarButton       	Static  Function    	
    _DisableToolbarButton      	Static  Function    	
    _GetComboItemValue         	Function            	
@@ -280,6 +282,8 @@ h_controlmisc.prg
    _DefineLetterOrDigitHotKey 	Function            	
    _IsWindowVisibleFromHandle 	Function            	
    _SetGetMinMaxInfo          	Static  Function    	
+   _SetGetImageHBitmap        	Static  Function    	
+   _GetPicture                	Function            	
    _GetCaption                	Function            	
    _GetFocusedControlType     	Function            	
    _IsFieldExists             	Function            	
@@ -408,7 +412,6 @@ c_draw.c
    BEGINPAINT                 	HB_FUNC             	
    ENDPAINT                   	HB_FUNC             	
    DRAWFOCUSRECT              	HB_FUNC             	
-   C_DRAWFOCUSRECT, DRAWFOCUSR	HB_FUNC             	
    DRAWSTATE                  	HB_FUNC             	
    GETUPDATERECT              	HB_FUNC             	
    GDIFLUSH                   	HB_FUNC             	
@@ -420,7 +423,6 @@ c_draw.c
    UPDATEWINDOW               	HB_FUNC             	
    VALIDATERECT               	HB_FUNC             	
    WINDOWFROMDC               	HB_FUNC             	
-   GETWINDOWFROMDC, WINDOWFROM	HB_FUNC             	
 h_edit.prg                    	                    	
    ABM                        	Function            	
    ABMRefresh                 	Static  Function    	
@@ -547,7 +549,6 @@ h_frame.prg
    _DefineFrame               	Static  Function    	
    _BeginFrame                	Function            	
 c_frame.c                     	                    	
-   INITGROUPBOX, INITFRAME    	HB_FUNC             	
    INITFRAME                  	HB_FUNC             	
 h_getbox.prg                  	                    	
    _DefineGetBox              	Function            	
@@ -607,8 +608,7 @@ h_graph.prg
    _PiePrint                  	Function            	
    _GraphPrint                	Function            	
    _bmpprint                  	Static  Function    	
-   _cleanprint                	Static  Function    	
-   FileDelete                 	Static  Function    	
+   PrintWindow                	Function            	
 c_graph.c                     	                    	
    TEXTDRAW                   	HB_FUNC             	
    LINEDRAW                   	HB_FUNC             	
@@ -699,6 +699,9 @@ c_grid.c
    LISTVIEW_GETCHECKSTATE     	HB_FUNC             	
    LISTVIEW_SETCHECKSTATE     	HB_FUNC             	
    LISTVIEW_GETCOLUMNCOUNT    	HB_FUNC             	
+   LISTVIEW_CHANGEEXTENDEDSTYL	HB_FUNC             	
+   LISTVIEW_GETEXTENDEDSTYLE  	HB_FUNC             	
+   LISTVIEW_SETSORTHEADER     	HB_FUNC             	
 hbgdiplus.c                   	                    	
    GDIPLUSSTARTUP             	HB_FUNC             	
    GDIPLUSSHUTDOWN            	HB_FUNC             	
@@ -862,6 +865,7 @@ h_menu.prg
    _DefineSeparator           	Procedure           	
    _EndMenu                   	Procedure           	
    _GetMenuIds                	Static  Function    	
+   _DefaultMenuItem           	Function            	
    _DisableMenuItem           	Function            	
    _EnableMenuItem            	Function            	
    _CheckMenuItem             	Function            	
@@ -894,6 +898,7 @@ c_menu.c
    _CLOSEMENU                 	HB_FUNC             	
    TRACKPOPUPMENU             	HB_FUNC             	
    SETMENU                    	HB_FUNC             	
+   SETMENUDEFAULTITEM         	HB_FUNC             	
    XCHECKMENUITEM             	HB_FUNC             	
    XUNCHECKMENUITEM           	HB_FUNC             	
    XENABLEMENUITEM            	HB_FUNC             	
@@ -1430,7 +1435,6 @@ h_windows.prg
    MsgDebug                   	Function            	
    WaitWindow                 	Procedure           	
    EfeitoLabel                	Static  Procedure   	
-   PrintWindow                	Function            	
 c_windows.c                   	                    	
    GETGLOBALLISTENER          	HB_FUNC             	
    SETGLOBALLISTENER          	HB_FUNC             	

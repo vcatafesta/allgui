@@ -77,7 +77,7 @@ FUNCTION mostra_entregas()
    form_entrega.maximize
    form_entrega.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION escolher_motoboy()
 
@@ -146,7 +146,7 @@ STATIC FUNCTION escolher_motoboy()
    form_escolhe.center
    form_escolhe.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION grava_motoboy(p_codigo,p_nome)
 
@@ -161,10 +161,10 @@ STATIC FUNCTION grava_motoboy(p_codigo,p_nome)
    ELSE
       msginfo('Não foi possível selecionar a informação, tecle ENTER','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mudar_situacao()
 
@@ -226,7 +226,7 @@ STATIC FUNCTION mudar_situacao()
    form_situacao.center
    form_situacao.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_situacao()
 
@@ -239,7 +239,7 @@ STATIC FUNCTION mostra_situacao()
       add item {a_situacao[i]} to grid_situacao of form_situacao
    NEXT
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION grava_situacao()
 
@@ -255,10 +255,10 @@ STATIC FUNCTION grava_situacao()
    ELSE
       msginfo('Não foi possível selecionar a informação, tecle ENTER','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar_pedidos()
 
@@ -289,5 +289,5 @@ STATIC FUNCTION atualizar_pedidos()
    entrega->(dbgotop())
    form_entrega.grid_entrega.refresh
 
-   RETURN(nil)
+   return(nil)
 

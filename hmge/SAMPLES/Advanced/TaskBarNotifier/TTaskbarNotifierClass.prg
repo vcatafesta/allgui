@@ -269,7 +269,7 @@ PROCEDURE TNDestroy() CLASS TTaskbarNotifier //EXPORTED
 
    // Destroy objects
    IF ::BackgroundBitmap <> NIL
-      DELETEObject( ::BackgroundBitmap )
+      DeleteObject( ::BackgroundBitmap )
    ENDIF
    /*
    IF ::CloseBitmap <> NIL

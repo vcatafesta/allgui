@@ -27,7 +27,7 @@ PROCEDURE Main
          CaptureImage() ;  // capture initialization
       ) ;
          ON RELEASE ( ;
-         CLOSEWebCam() ;
+         CloseWebCam() ;
          )
 
       @ 20,60 WEBCAM WebCam_1 ;
@@ -162,11 +162,11 @@ STATIC FUNCTION LoadFromClpbrd( hWnd, w, h )
 
       hBmp := GetClipboardData( CF_BITMAP, w, h )
 
-      CLOSEClipboard()
+      CloseClipboard()
 
    ENDIF
 
-   RETURN( hBmp )
+   Return( hBmp )
 
 #pragma BEGINDUMP
 

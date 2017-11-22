@@ -121,7 +121,7 @@ PROCEDURE PrntFile()
       IF aShPrgsOp[ 1 ]
          frmPPTFile.prbarPrint.Visible := .T.
       ELSE
-         WAITWindow( "Printing ...", .T.)
+         WaitWindow( "Printing ...", .T.)
       ENDIF aShPrgsOp[ 1 ]
 
       nPPageCou := PPTFComf( cPTFilName,;  // Source file name
@@ -143,7 +143,7 @@ PROCEDURE PrntFile()
       IF aShPrgsOp[ 1 ]
          frmPPTFile.prbarPrint.Visible := .F.
       ELSE
-         WAITWindow()
+         WaitWindow()
       ENDIF aShPrgsOp[ 1 ]
    ELSE
       UpdaSBar( '','',0,0 )

@@ -349,7 +349,7 @@ STATIC PROCEDURE _GetBoxSetNextFocus( lPrevious )
 
    LOCAL NextControlHandle, i
 
-   NEXTControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
+   NextControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , lPrevious )
    setfocus ( NextControlHandle )
    i := AScan ( _HMG_aControlHandles , NextControlHandle )
    IF i > 0
@@ -423,7 +423,7 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    lCleanZero := _HMG_aControlInputMask [i,3]
 
    oGet       := _HMG_aControlHeadClick [i]
-   READonly   := _HMG_aControlMiscData1 [i,2]
+   readonly   := _HMG_aControlMiscData1 [i,2]
 
    _HMG_ThisFormName := _HMG_aFormNames [ ParentHandle ]
    _HMG_ThisControlName := _HMG_aControlNames [i]

@@ -59,7 +59,7 @@ FUNCTION NtxCreate( cField, cNtxName )
    INKEYGUI(1000)
    SET INDEX TO
 
-   CLOSEProgressBar()
+   CloseProgressBar()
 
    RETURN NIL
 
@@ -94,7 +94,7 @@ FUNCTION SkipTest()
    // final waiting
    INKEYGUI(1000)
 
-   CLOSEProgressBar()
+   CloseProgressBar()
 
    RETURN NIL
 

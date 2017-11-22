@@ -346,7 +346,7 @@ PROCEDURE Boton (n)
          Angle := Rotate_Angle
       ENDIF
 
-      WAITWindow ("WAIT: processing the image ...", .T.)
+      WaitWindow ("WAIT: processing the image ...", .T.)
 
       IF modo > 0
          New_hBitmap := BMP_TRANSFORM (Actual_hBitmap, modo, Angle, RGB (0,0,0))
@@ -371,7 +371,7 @@ PROCEDURE Boton (n)
          BMP_GRAY  (View_Full_hBitmap, 0, 0, w, h, Gray_Level)
          COPY_ACTUAL_TO_VIEW ()
       ENDIF
-      WAITWindow ()
+      WaitWindow ()
 
    CASE n = 2
       Reflect_Horizontal := .F.

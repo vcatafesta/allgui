@@ -15,13 +15,13 @@ FUNCTION Main(cDbf, o1, o2, o3, o4, o5)
    IF empty(cDbf)
       Usage()
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
 
    IF !file(cDbf)
       Usage("Repair file not found: " + cDbf)
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
 
    // Default options:
@@ -60,7 +60,7 @@ FUNCTION Main(cDbf, o1, o2, o3, o4, o5)
       IF j <> 2
          Usage("Unrecognized argument: " + cTemp)
 
-         RETURN(NIL)
+         Return(NIL)
       ENDIF
       cOpt := left(cTemp, 1)
       cValue := substr(cTemp, 3)
@@ -94,13 +94,13 @@ FUNCTION Main(cDbf, o1, o2, o3, o4, o5)
             OTHERWISE
                Usage("Unrecognized option: " + c)
 
-               RETURN(NIL)
+               Return(NIL)
             ENDCASE
          NEXT
       OTHERWISE
          Usage("Unrecognized argument: " + cTemp)
 
-         RETURN(NIL)
+         Return(NIL)
       ENDCASE
    NEXT // aArgs_
 
@@ -108,19 +108,19 @@ FUNCTION Main(cDbf, o1, o2, o3, o4, o5)
    IF !file(cDbf)
       Usage("Repair file not found: " + cDbf)
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
 
    IF !empty(cDonor) .and. !file(cDonor)
       Usage("Donor file not found: " + cDonor)
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
 
    IF at("/" + cRDD + "/", "/DBFIV/DBFMDX/DBF/DBFNDX/DBFNTX/SIXCDX/DBFCDX/") = 0
       Usage("Unrecognised RDD: " + cRDD)
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
 
    IF lTotal
@@ -132,7 +132,7 @@ FUNCTION Main(cDbf, o1, o2, o3, o4, o5)
    DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
       lPreload, lDeleted, lPartial, lTotal, lCharJunk, lMemoJunk)
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION Usage(cError)
 
@@ -163,5 +163,5 @@ STATIC FUNCTION Usage(cError)
    ?
    //"12345678901234567890123456789012345678901234567890123456789012345678901234567890"
 
-   RETURN(NIL)
+   Return(NIL)
 

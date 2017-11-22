@@ -249,7 +249,7 @@ FUNCTION GetTxtWidth( cText, nFontSize, cFontName )  // get the width of the tex
    hFont  := InitFont(cFontName, nFontSize)
    nWidth := GetTextWidth(0, cText, hFont)
 
-   DELETEObject (hFont)
+   DeleteObject (hFont)
 
    RETURN nWidth
 

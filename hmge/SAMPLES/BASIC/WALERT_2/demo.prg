@@ -16,9 +16,9 @@ PROCEDURE MAIN
 
    _alert( _alert( "Test Question;Second Line", {"&Yes","&No","Con&tinue","&Cancel"}, "Please, Select" ), 3, "Information", ICON_INFORMATION )
 
-   _alert( "Test Alert", , "Stop!", ICON_STOP )
+   _alert( "MessageBox Stop", , "Stop!", ICON_STOP )
 
-   _alert( "Test Alert", , "Alert" )
+   _alert( "MessageBox Alert", , "Alert" )
 
    RETURN
 

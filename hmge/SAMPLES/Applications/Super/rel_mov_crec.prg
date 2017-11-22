@@ -67,7 +67,7 @@ FUNCTION relatorio_crec_001()
          tooltip 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_mov_crec.width-100
@@ -80,7 +80,7 @@ FUNCTION relatorio_crec_001()
          tooltip 'Sair desta tela'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
       on key escape action thiswindow.release
 
@@ -89,7 +89,7 @@ FUNCTION relatorio_crec_001()
    form_mov_crec.center
    form_mov_crec.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION relatorio()
 
@@ -176,7 +176,7 @@ STATIC FUNCTION relatorio()
    ordscope(1,0)
    contas_receber->(dbgotop())
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -197,12 +197,12 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 040,040 PRINT 'OBSERVAÇÃO' FONT 'courier new' SIZE 010 BOLD
    @ 040,120 PRINT 'NÚMERO' FONT 'courier new' SIZE 010 BOLD
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 

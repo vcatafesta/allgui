@@ -287,7 +287,7 @@ PROCEDURE Main( Silent, cLog, Compress)
 
    Form_1.Title := PROGRAM + IF(Form_1.Check_1.Value == .T., extratitle, "")
 
-   DISPLAYstatus()
+   Displaystatus()
 
    CENTER WINDOW Form_1
 
@@ -666,7 +666,7 @@ STATIC PROCEDURE SetFcompress()
    ENDIF
 
    ChangeInfo()
-   DISPLAYStatus()
+   DisplayStatus()
    MCONTEXT()
 
    RETURN

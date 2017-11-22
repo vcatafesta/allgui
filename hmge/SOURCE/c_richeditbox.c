@@ -62,7 +62,7 @@
 #if defined( MSFTEDIT_CLASS )
 # undef MSFTEDIT_CLASS
 #endif
-#define MSFTEDIT_CLASS    "RICHEDIT50W"
+#define MSFTEDIT_CLASS     "RICHEDIT50W"
 
 static BOOL IsWinxpSp1Min( void );
 

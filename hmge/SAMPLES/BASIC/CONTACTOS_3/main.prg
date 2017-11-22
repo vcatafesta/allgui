@@ -43,13 +43,13 @@ PROCEDURE ConectaMDB()
       CnAdo:=CreateObject("ADODB.Connection")
       IF Ole2TxtError() != "S_OK"
          MsgStop("ADO is not available.","Error")
-         EXITProcess(0)
+         ExitProcess(0)
       ENDIF
       CnAdo:Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Agenda.mdb")
       oCursor:=CreateObject("ADODB.Recordset")
    CATCH e
       MsgStop("Operation: "+e:operation+"-"+"Description: "+e:Description+chr(10)+vMat(e:Args),"Error")
-      EXITProcess(0)
+      ExitProcess(0)
    End
 
    RETURN

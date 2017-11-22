@@ -188,11 +188,11 @@ FUNCTION ShowWaitWindow( cMess )
       ACTIVATE WINDOW WaitWin NOWAIT
    ENDIF
    IF ! Empty(cMess)
-      WAITWin.WaitLabel.Value := cMess + CRLF + "Please wait!"
+      WaitWin.WaitLabel.Value := cMess + CRLF + "Please wait!"
       SHOW WINDOW WaitWin
       DO EVENTS
    ELSE
-      WAITWin.Hide
+      WaitWin.Hide
    ENDIF
 
    RETURN NIL

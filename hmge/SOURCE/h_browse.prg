@@ -57,12 +57,13 @@ MEMVAR aresult, l, aWhen, aWhenVarNames
 
 #endif
 
-FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWidths, aFields, value, fontname, fontsize, ;
-      tooltip , change , dblclick , aHeadClick , gotfocus , lostfocus , WorkArea , Delete , nogrid , ;
-      aImage , aJust , HelpId , bold , italic , underline , strikeout , break , backcolor , fontcolor , ;
-      lock , inplace , novscroll , appendable , readonly , valid , validmessages , edit , ;
-      DYNAMICforecolor , dynamicbackcolor , aWhenFields , nId , aImageHeader , NoTabStop , inputitems , displayitems , doublebuffer )
-   LOCAL i , ParentFormHandle , blInit , mVar , DeltaWidth , k , Style
+FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWidths, aFields, value, ;
+      fontname, fontsize, tooltip , change , dblclick , aHeadClick , gotfocus , lostfocus , WorkArea , ;
+      DELETE , nogrid , aImage , aJust , HelpId , bold , italic , underline , strikeout , break , ;
+      backcolor , fontcolor , lock , inplace , novscroll , appendable , readonly , valid , validmessages , ;
+      edit , dynamicforecolor , dynamicbackcolor , aWhenFields , nId , aImageHeader , NoTabStop , ;
+      inputitems , displayitems , doublebuffer , columnsort )
+   LOCAL i , ParentFormHandle , blInit , mVar , DeltaWidth , k , Style , lsort
    LOCAL ControlHandle , FontHandle , lDialogInMemory
 
    IF ( FontHandle := GetFontHandle( FontName ) ) != 0
@@ -117,6 +118,7 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
 
    hb_default( @notabstop, .F. )
    hb_default( @doublebuffer, .F. )
+   lsort := ( ISARRAY( columnsort ) )
 
    mVar := '_' + ParentFormName + '_' + ControlName
    k := _GetControlFree()
@@ -175,6 +177,7 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
             y := GetWindowRow ( Controlhandle )
 
             AddSplitBoxItem ( Controlhandle, _HMG_aFormReBarHandle [i] , w , break , , , , _HMG_ActiveSplitBoxInverted )
+
          ENDIF
 
       ELSE
@@ -194,6 +197,11 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
 
       IF ValType ( fontcolor ) != 'U'
          ListView_SetTextColor ( ControlHandle , fontcolor[1] , fontcolor[2] , fontcolor[3]  )
+      ENDIF
+
+      IF lsort
+         aHeadClick := Array( Len( aHeaders ) )
+         AEval( aHeadClick, { | x, i | aHeadClick[ i ] := { | n | HMG_SetOrder( n ) }, HB_SYMBOL_UNUSED( x ) } )
       ENDIF
 
       IF FontHandle != 0
@@ -251,7 +259,8 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
    _HMG_aControlBrushHandle  [k] :=  0
    _HMG_aControlEnabled   [k] :=  .T.
    _HMG_aControlMiscData1 [k] := { 0 , ;
-      APPENDable , readonly , valid , validmessages , edit , nogrid , novscroll , dynamicforecolor , dynamicbackcolor , aWhenFields , Delete , inputitems , displayitems , 0 , aJust , NIL , NIL , doublebuffer }
+      appendable , readonly , valid , validmessages , edit , nogrid , novscroll , dynamicforecolor , dynamicbackcolor , ;
+      aWhenFields , Delete , inputitems , displayitems , 0 , aJust , NIL , NIL , doublebuffer , iif( lsort, Array( Len( aHeaders ) ), 0 ) }
    _HMG_aControlMiscData2 [k] := ''
 
    IF _HMG_lOOPEnabled
@@ -259,6 +268,17 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
    ENDIF
 
    IF .NOT. lDialogInMemory
+      IF lsort
+         AFill( _HMG_aControlMiscData1 [k][20], .T. )
+         IF Len( columnsort ) > 0
+            FOR i := 1 TO Min( Len( columnsort ), Len( _HMG_aControlMiscData1 [k][20] ) )
+               IF ValType( columnsort [i] ) == 'L'
+                  _HMG_aControlMiscData1 [k][20][i] := columnsort [i]
+               ENDIF
+            NEXT i
+         ENDIF
+         HMG_OrdCreate( k )
+      ENDIF
       InitDialogBrowse( ParentFormName, ControlHandle, k )
    ENDIF
 
@@ -335,6 +355,115 @@ FUNCTION InitDialogBrowse( ParentName, ControlHandle, i )
    ENDIF
 
    RETURN NIL
+
+STATIC PROCEDURE HMG_OrdCreate( i )
+
+   LOCAL _Alias
+   LOCAL _BrowseArea
+   LOCAL nColumn
+   LOCAL cIndexName
+   LOCAL aFields
+   LOCAL cField
+   LOCAL cOrdKey
+
+   _Alias := Alias()
+   _BrowseArea := _HMG_aControlSpacing [i]
+
+   IF Select( _BrowseArea ) == 0
+
+      RETURN
+   ENDIF
+
+   SELECT &_BrowseArea
+
+   cIndexName := Alias() + IndexExt()
+   aFields := _HMG_aControlRangeMin [i]
+
+   ordListClear()
+   ordCondSet( , , .T. /*All*/, , , , RecNo(), , , , , , , , , , , .T. /*Memory*/ )
+
+   FOR nColumn := 1 TO Len( aFields )
+
+      IF _HMG_aControlMiscData1 [i][20][nColumn] == .F. .OR. FieldPos( aFields [nColumn] ) == 0
+         ordCreate( cIndexName, 'Bag' + StrZero( Random( 999999 ), 6 ), 'Field->' + FieldName( 1 ) )
+      ELSE
+         cField := FieldName( FieldPos( aFields [nColumn] ) )
+         cOrdKey := Alias() + '->' + cField
+         #ifndef __XHARBOUR__
+         ordCreate( cIndexName, cField, cOrdKey, hb_macroBlock( cOrdKey ), .F. /*lUnique*/ )
+         #else
+         ordCreate( cIndexName, cField, cOrdKey, &( '{|| ' + cOrdKey + '}' ), .F. /*lUnique*/ )
+         #endif
+      ENDIF
+
+   NEXT
+
+   ordSetFocus( 0 )
+   GO TOP
+
+   IF Select( _Alias ) != 0
+      SELECT &_Alias
+   ELSE
+      SELECT 0
+   ENDIF
+
+   RETURN
+
+PROCEDURE HMG_SetOrder( nColumn, lDescend )
+
+   LOCAL cFormName := ThisWindow.Name
+   LOCAL cControlName := This.Name
+   LOCAL _Alias
+   LOCAL _BrowseArea
+   LOCAL _BrowseHandle
+   LOCAL nOrder
+   LOCAL nRecord
+   LOCAL lIsThemed
+   LOCAL i := GetControlIndex( cControlName, cFormName )
+
+   IF _HMG_aControlMiscData1 [i][20][nColumn] == .T.
+
+      _Alias := Alias()
+      _BrowseArea := _HMG_aControlSpacing [i]
+
+      IF Select( _BrowseArea ) == 0
+
+         RETURN
+      ENDIF
+
+      SELECT &_BrowseArea
+
+      nOrder := ordNumber( ordSetFocus() )
+      nRecord := RecNo()
+
+      _BrowseHandle := _HMG_aControlHandles [i]
+      lIsThemed := IsAppXPThemed()
+
+      ListView_SetSortHeader( _BrowseHandle, nOrder, 0, lIsThemed )
+
+      IF ValType( lDescend ) != 'L'
+         lDescend := iif( nOrder == nColumn, ! ordDescend( nOrder ), .F. )
+      ENDIF
+
+      nOrder := nColumn
+
+      ListView_SetSortHeader( _BrowseHandle, nColumn, iif( lDescend, -1, 1 ), lIsThemed )
+
+      ordSetFocus( nOrder )
+      ordDescend( nOrder, NIL, lDescend )
+
+      GO nRecord
+      IF Select( _Alias ) != 0
+         SELECT &_Alias
+      ELSE
+         SELECT 0
+      ENDIF
+
+      _BrowseRefresh( '', '', i )
+
+   ENDIF
+
+   RETURN
 
    #ifndef __XHARBOUR__
    /* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */

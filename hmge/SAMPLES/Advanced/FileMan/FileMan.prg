@@ -1086,10 +1086,10 @@ FUNCTION DeleteFile()
             IF Len( aDir ) > 0
                IF MsgOkCancel( padc("The directory " + cDelete + " is not empty!", 60) + CRLF + ;
                      "Do you want to delete it with all its files and subdirectories?", PROGRAM )
-                  ZAPDirectory( cDelete + Chr(0) )
+                  ZapDirectory( cDelete + Chr(0) )
                ENDIF
             ELSE
-               ZAPDirectory( cDelete + Chr(0) )
+               ZapDirectory( cDelete + Chr(0) )
             ENDIF
          ENDIF
          ReReadFolder()
@@ -1245,7 +1245,7 @@ FUNCTION Verify()
                   ELSEIF cExt = 'WAV' .or. cExt = 'MP3'
                      PlayMusic()
                   ELSEIF cExt = 'TXT' .or. cExt = 'INI' .or. cExt = 'DIZ' .or. cExt = 'PRG' .or. cExt = 'CH' .or. empty(cExt)
-                     TEXTEdit()
+                     TextEdit()
                   ELSE
                      MsgAlert( 'Error executing program!' )
                   ENDIF
@@ -1317,7 +1317,7 @@ FUNCTION TextCreate()
       IF ! File( cFile )
          FClose( FCreate( cFile ) )
       ENDIF
-      TEXTEdit( cFile, Substr(cFile, Rat(".", cFile) + 1) )
+      TextEdit( cFile, Substr(cFile, Rat(".", cFile) + 1) )
       IF ( Directory(cFile)[1][2] = 0 )
          Ferase(cFile)
       ELSE

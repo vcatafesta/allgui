@@ -50,7 +50,7 @@ FUNCTION MAIN
 
       @ 200,350 BUTTON Button_2 CAPTION 'Fill EditBox' ACTION EDITBOX_INFO()
 
-      NEXTRoutine()
+      NextRoutine()
 
       Form1.TITLE := "Break Point 2"
 

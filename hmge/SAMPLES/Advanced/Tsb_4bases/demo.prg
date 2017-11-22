@@ -359,7 +359,7 @@ FUNCTION MyCreateDbfCdx()
       aFindPath := { cPathBCC, cPathGUI, cPathIncl, cPathSmpl }
 
       SET WINDOW MAIN OFF
-      WAITWindow( "Processing...", .T. )
+      WaitWindow( "Processing...", .T. )
       FOR nI := 1 TO 4
          a2Str := {}
          FOR nJ := 1 TO LEN(aStr)
@@ -412,7 +412,7 @@ FUNCTION MyCreateDbfCdx()
          cAlias := 'BASE_' + HB_NtoS(nI)
          AADD( aBase, { cFile, cAlias } )
       NEXT
-      WAITWindow()
+      WaitWindow()
       SET WINDOW MAIN ON
    ELSE
       FOR nI := 1 TO 4

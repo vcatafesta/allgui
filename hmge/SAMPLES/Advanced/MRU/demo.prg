@@ -81,7 +81,7 @@ FUNCTION Get_File_Click()
    LOCAL c_File := GetFile({{'Text File','*.txt'},{'All Files','*.*'}},'Get File')
 
    IF !empty(c_File)
-      READ_file(c_File)
+      Read_file(c_File)
    ENDIF
 
    RETURN NIL

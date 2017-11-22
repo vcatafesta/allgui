@@ -69,7 +69,7 @@ FUNCTION GetData()
 
    IF Len ( PacketNames ) > 0
 
-      PACKet := MemoRead ( _HMG_CommPath + PacketNames [1] )
+      Packet := MemoRead ( _HMG_CommPath + PacketNames [1] )
 
       Rows := Val ( SubStr ( MemoLine ( Packet , , 1 ) , 11 , 99 ) )
       Cols := Val ( SubStr ( MemoLine ( Packet , , 2 ) , 11 , 99 ) )

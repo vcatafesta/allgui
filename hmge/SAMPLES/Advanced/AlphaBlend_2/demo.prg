@@ -28,8 +28,8 @@ PROCEDURE main()
          ON PAINT App_OnPaint( This.Handle ) ;
          ON RELEASE ;
          ( ;
-         DELETEObject( hPng1 ), DeleteObject( hPng2 ), ;
-         DELETEObject( hPng3 ), DeleteObject( hPng4 ) ;
+         DeleteObject( hPng1 ), DeleteObject( hPng2 ), ;
+         DeleteObject( hPng3 ), DeleteObject( hPng4 ) ;
          ) ;
 
       ON KEY ESCAPE ACTION ThisWindow.Release
@@ -82,7 +82,7 @@ FUNCTION App_OnPaint( hWnd )
    SelectObject( hdc_mem, hPng4 )
    AlphaBlend( hdc, 200, 100+10, 200, 100, hdc_mem, 0, 0, 200, 100, 255, 1 )
 
-   DELETEDC( hdc_mem )
+   DeleteDC( hdc_mem )
    EndPaint( hWnd, pps )
 
    RETURN 0

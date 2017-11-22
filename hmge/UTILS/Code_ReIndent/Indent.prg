@@ -48,7 +48,7 @@ PROCEDURE MAIN()
          MAIN NOMAXIMIZE NOSIZE ;
          ON INIT GetPrgVars() ;                           // store user preferences to memvars
       ON PAINT ( FillBlue( _HMG_MainHandle ), ;        // color the screen: MiniGUI contributed file
-      TEXTPaint() )
+      TextPaint() )
 
       DEFINE MAIN MENU
          POPUP '&Indent Code'

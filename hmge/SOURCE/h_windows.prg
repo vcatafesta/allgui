@@ -2238,7 +2238,7 @@ FUNCTION ReleaseAllWindows ()
          #endif
          __Quit()
       ELSE
-         EXITProcess()
+         ExitProcess()
       ENDIF
 
       RETURN NIL

@@ -193,7 +193,7 @@ STATIC PROCEDURE SwitchTab
       ListFiles()
       wMain.grdFiles.SetFocus       // ¬кладка файлов
 
-      ELSEIF( nValue == 2 )
+      ElseIf( nValue == 2 )
 
       ListRecords()
       wMain.grdRecords.SetFocus     // ¬кладка записей

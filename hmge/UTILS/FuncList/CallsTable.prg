@@ -40,7 +40,7 @@ PROCEDURE CallsTable
       @ 5, 5 EditBox edtConsole              ;
          Height ( wConsole.Height - 80 ) ;  /* was 40 */
       Width ( wConsole.Width - 20 )   ;
-         READOnly
+         ReadOnly
 
       // GAL added (with what .PRG we're working now?)
       @ wConsole.edtConsole.Row + wConsole.edtConsole.Height + 5, 5 ;

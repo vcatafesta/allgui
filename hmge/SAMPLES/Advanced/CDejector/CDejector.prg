@@ -112,7 +112,7 @@ PROCEDURE MCIrun( lNotifyClick )
       ENDIF
    ELSE
       IF Len(aCD) > 1
-         CLOSEThisCD( aCD[nItem] )
+         CloseThisCD( aCD[nItem] )
       ELSE
          mciSendString(Upper('SET CDAUDIO DOOR CLOSED WAIT'), @cBuffer, AppHandle)
       ENDIF

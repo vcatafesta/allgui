@@ -305,7 +305,7 @@ FUNCTION ShowError ( oError )
       FErase( "ERROR.NTX" )
    ENDIF
 
-   EXITProcess( 0 )
+   ExitProcess( 0 )
 
    RETURN NIL
 

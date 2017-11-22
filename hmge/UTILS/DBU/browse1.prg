@@ -149,7 +149,7 @@ FUNCTION DBUbrowse1()
             col 360
             width _DBUwindowwidth - 400
             value _DBUcondition
-            READonly .T.
+            readonly .T.
             fontbold .T.
             backcolor _DBUgreenish
             // fontcolor {255,0,0}

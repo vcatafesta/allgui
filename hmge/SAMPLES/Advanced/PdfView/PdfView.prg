@@ -484,23 +484,23 @@ FUNCTION FileMenu(nRow, nCol)
    nHMenu := CreatePopupMenu()
 
    IF ! ("D" $ PdfView.Files.Cell(PdfView.Files.VALUE, F_ATTR))
-      APPENDMenuString(nHMenu, 1, LangStr("OpenCurTab") + e"\tEnter")
-      APPENDMenuString(nHMenu, 2, LangStr("OpenNewTab") + e"\tShift+Enter")
-      APPENDMenuSeparator(nHMenu)
-      APPENDMenuString(nHMenu, 3, LangStr("OpenPage") + e"...\tCtrlt+Enter")
-      APPENDMenuString(nHMenu, 4, LangStr("OpenPageTab") + e"...\tCtrlt+Shift+Enter")
-      APPENDMenuSeparator(nHMenu)
+      AppendMenuString(nHMenu, 1, LangStr("OpenCurTab") + e"\tEnter")
+      AppendMenuString(nHMenu, 2, LangStr("OpenNewTab") + e"\tShift+Enter")
+      AppendMenuSeparator(nHMenu)
+      AppendMenuString(nHMenu, 3, LangStr("OpenPage") + e"...\tCtrlt+Enter")
+      AppendMenuString(nHMenu, 4, LangStr("OpenPageTab") + e"...\tCtrlt+Shift+Enter")
+      AppendMenuSeparator(nHMenu)
    ELSEIF ! (PdfView.Files.Cell(PdfView.Files.VALUE, F_NAME) == "<..>")
-      APPENDMenuString(nHMenu, 5, LangStr("GoToSubDir") + e"\t-> (Enter)")
-      APPENDMenuSeparator(nHMenu)
+      AppendMenuString(nHMenu, 5, LangStr("GoToSubDir") + e"\t-> (Enter)")
+      AppendMenuSeparator(nHMenu)
    ENDIF
 
    IF ! ("K" $ PdfView.Files.Cell(PdfView.Files.VALUE, F_ATTR))
-      APPENDMenuString(nHMenu, 6, LangStr("GoToParentDir") + e"\t<-")
-      APPENDMenuSeparator(nHMenu)
+      AppendMenuString(nHMenu, 6, LangStr("GoToParentDir") + e"\t<-")
+      AppendMenuSeparator(nHMenu)
    ENDIF
 
-   APPENDMenuString(nHMenu, 7, LangStr("RefreshList") + e"\tF5")
+   AppendMenuString(nHMenu, 7, LangStr("RefreshList") + e"\tF5")
 
    slMenuActive := .T.
    SetOnKey(.F.)
@@ -548,7 +548,7 @@ FUNCTION TabMenu(lMouse)
       nHMenu := CreatePopupMenu()
 
       FOR n := 1 TO Len(saTab)
-         APPENDMenuString(nHMenu, n, Sumatra_FileName(PanelName(saTab[n])) + If(n < 9, e"\tAlt+" + HB_NtoS(n), If(n == Len(saTab), e"\tAlt+9", "")))
+         AppendMenuString(nHMenu, n, Sumatra_FileName(PanelName(saTab[n])) + If(n < 9, e"\tAlt+" + HB_NtoS(n), If(n == Len(saTab), e"\tAlt+9", "")))
       NEXT
 
       xCheckMenuItem(nHMenu, PdfView.Tabs.VALUE)
@@ -1799,11 +1799,11 @@ FUNCTION RecentOpenMenu()
 
    GetWindowRect(Recent.Open.HANDLE, aRect)
 
-   APPENDMenuString(nHMenu, 1, LangStr("OpenCurTab") + e"\tEnter")
-   APPENDMenuString(nHMenu, 2, LangStr("OpenNewTab") + e"\tShift+Enter")
-   APPENDMenuSeparator(nHMenu)
-   APPENDMenuString(nHMenu, 3, LangStr("OpenPage") + e"...\tCtrlt+Enter")
-   APPENDMenuString(nHMenu, 4, LangStr("OpenPageTab") + e"...\tCtrlt+Shift+Enter")
+   AppendMenuString(nHMenu, 1, LangStr("OpenCurTab") + e"\tEnter")
+   AppendMenuString(nHMenu, 2, LangStr("OpenNewTab") + e"\tShift+Enter")
+   AppendMenuSeparator(nHMenu)
+   AppendMenuString(nHMenu, 3, LangStr("OpenPage") + e"...\tCtrlt+Enter")
+   AppendMenuString(nHMenu, 4, LangStr("OpenPageTab") + e"...\tCtrlt+Shift+Enter")
 
    nCmd := TrackPopupMenu2(nHMenu, 0x0188 /*TPM_NONOTIFY|TPM_RETURNCMD|TPM_RIGHTALIGN*/, aRect[4], aRect[3], Recent.HANDLE)
 
@@ -1834,9 +1834,9 @@ FUNCTION RecentRemoveMenu()
 
    GetWindowRect(Recent.Remove.HANDLE, aRect)
 
-   APPENDMenuString(nHMenu, 1, LangStr("Selected") + e"\tShift+Del")
-   APPENDMenuString(nHMenu, 2, LangStr("NonExistent"))
-   APPENDMenuString(nHMenu, 3, LangStr("All"))
+   AppendMenuString(nHMenu, 1, LangStr("Selected") + e"\tShift+Del")
+   AppendMenuString(nHMenu, 2, LangStr("NonExistent"))
+   AppendMenuString(nHMenu, 3, LangStr("All"))
 
    nCmd := TrackPopupMenu2(nHMenu, 0x0188 /*TPM_NONOTIFY|TPM_RETURNCMD|TPM_RIGHTALIGN*/, aRect[4], aRect[3], Recent.HANDLE)
 

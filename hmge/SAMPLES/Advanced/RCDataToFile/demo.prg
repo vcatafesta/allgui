@@ -4,6 +4,10 @@
 
 ANNOUNCE RDDSYS
 
+#ifdef __XHARBOUR__
+#include "hbcompat.ch"
+#endif
+
 #define IDR_HELLO 1001
 
 PROCEDURE main()

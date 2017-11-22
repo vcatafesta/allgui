@@ -163,7 +163,7 @@ FUNCTION GetArrayScrSavers()
       aEval( aArr2, { |uFile| AAdd( aArray, GetSystemFolder()+"\"+uFile[1] ) } )
    ENDIF
 
-   RETURN( aArray )
+   Return( aArray )
 
 FUNCTION GetIni( cSection, cEntry, cDefault )
 

@@ -74,7 +74,7 @@ FUNCTION drawtextout( window, row, col, string, fontcolor, backcolor, fontname, 
 
       torow := row + iif( transparent .OR. !Empty( angle ), 0, fontsize + 4 )
       tocol := col + ( Len( string ) - 1 ) * fontsize
-      TEXTdraw( formhandle, row, col, string, torow, tocol, fontcolor, backcolor, fontname, fontsize, bold, italic, underline, strikeout, transparent, angle )
+      textdraw( formhandle, row, col, string, torow, tocol, fontcolor, backcolor, fontname, fontsize, bold, italic, underline, strikeout, transparent, angle )
       IF ! once
          AAdd ( _HMG_aFormGraphTasks [i], {|| textdraw( formhandle,row,col,string,torow,tocol,fontcolor,backcolor,fontname,fontsize,bold,italic,underline,strikeout,transparent,angle ) } )
       ENDIF

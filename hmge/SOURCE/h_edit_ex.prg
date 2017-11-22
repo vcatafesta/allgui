@@ -989,7 +989,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
 
          cMacroTemp := _aControl[ i, ABM_CON_NAME ]
          @ _aControl[ i, ABM_CON_ROW ], _aControl[ i, ABM_CON_COL ]    ;
-            TEXTbox &cMacroTemp                             ;
+            textbox &cMacroTemp                             ;
             of wndABM2EditNuevoSplit                        ;
             value ""                                        ;
             height _aControl[ i, ABM_CON_HEIGHT ]           ;
@@ -1014,7 +1014,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
          IF _aEstructura[ i, DBS_DEC ] == 0
             cMacroTemp := _aControl[ i, ABM_CON_NAME ]
             @ _aControl[ i, ABM_CON_ROW ], _aControl[ i, ABM_CON_COL ]    ;
-               TEXTbox &cMacroTemp                             ;
+               textbox &cMacroTemp                             ;
                of wndABM2EditNuevoSplit                        ;
                value ""                                        ;
                height _aControl[ i, ABM_CON_HEIGHT ]           ;
@@ -1031,7 +1031,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             cMascara += Replicate( "9", _aEstructura[ i, DBS_DEC ] )
             cMacroTemp := _aControl[ i, ABM_CON_NAME ]
             @ _aControl[ i, ABM_CON_ROW ], _aControl[ i, ABM_CON_COL ]    ;
-               TEXTbox &cMacroTemp                             ;
+               textbox &cMacroTemp                             ;
                of wndABM2EditNuevoSplit                        ;
                value ""                                        ;
                height _aControl[ i, ABM_CON_HEIGHT ]           ;

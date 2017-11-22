@@ -845,7 +845,7 @@ STATIC PROCEDURE ShowFile( cChain )
          EXECUTE FILE ( TEMP_FOLDER + cChain ) Wait
       ENDIF
 
-      ERASE( TEMP_FOLDER + cChain )
+      Erase( TEMP_FOLDER + cChain )
 
    ENDIF
 

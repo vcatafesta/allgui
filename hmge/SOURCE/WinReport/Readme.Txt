@@ -27,6 +27,11 @@ USE AT YOUR OWN RISK.
 
 Whats News:
 ~~~~~~~~~~~
+November 2017
+    Added new commands to support font attibute in group section.
+    New: SET GROUPBOLD    // Default .T.
+    New: SET HGROUPCOLOR  // Default BLUE
+    New: SET GTGROUPCOLOR // Default BLUE
 
 May 2015
     Added more support to compatibility between hbprinter, miniprint and pdfprint

@@ -139,10 +139,10 @@ PROCEDURE PrintEti(modulo,ncopie)
    mx_pg:=ROUND(((end_pr/ABody)+.5),0)
 
    IF "MINILABEL" $ upper(modulo)
-      USEprint := m->P_Label
+      useprint := m->P_Label
       str1 := "PORT"+if(m->Prev_label,"/PREV","")
    ELSE
-      USEprint := m->P_Report
+      useprint := m->P_Report
       Str1 := if (pos_setup > 0,upper(left(MainSetup[Pos_Setup,2],4)),"PORT")+ if(m->Prev_report,"/PREV","")
    ENDIF
 
@@ -155,7 +155,7 @@ PROCEDURE PrintEti(modulo,ncopie)
    Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "BODYLEN" })
    abody := max(1,if (pos_setup > 0,val(MainSetup[Pos_Setup,2]),1))
    Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "PRINTERNAME" })
-   USEprint := if (pos_setup > 0,MainSetup[Pos_Setup,2],useprint)
+   useprint := if (pos_setup > 0,MainSetup[Pos_Setup,2],useprint)
    Pos_Setup := ascan(Mainsetup,{|x| upper(x[1]) == "REPORTNAME" })
    ReportName := if (pos_setup > 0,MainSetup[Pos_Setup,2],ReportName)
 
@@ -475,7 +475,7 @@ FUNCTION stripskel(filespec)
    outspec := ""
    lenspec := len(filespec)
    FOR i = lenspec  to 1 step -1
-      NEXTletr = subst(filespec,i,1)
+      nextletr = subst(filespec,i,1)
       IF nextletr $ "/\:"
          outspec := left(filespec,i)
          EXIT
@@ -729,7 +729,7 @@ FUNCTION fgetline(handle)
 
    LOCAL return_line,chunk,bigchunk,oldoffset,at_chr13
 
-   RETURN_line = ''
+   return_line = ''
    bigchunk = ''
    oldoffset = FSEEK(handle,0,1)
    DO WHILE .T.
@@ -744,7 +744,7 @@ FUNCTION fgetline(handle)
 
          IF !EMPTY(bigchunk)
 
-            RETURN_line = bigchunk
+            return_line = bigchunk
          ENDIF
          EXIT
       ELSEIF len(bigchunk) > 1024
@@ -764,7 +764,7 @@ FUNCTION fgetline(handle)
 
          *- read in from here to next CR (-1)
 
-         RETURN_line = Freadstr(handle,at_chr13-1)
+         return_line = Freadstr(handle,at_chr13-1)
 
          *- move the pointer 1 byte
          FSEEK(handle,1,1)

@@ -43,7 +43,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -60,7 +60,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -77,7 +77,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_imprimir
          picture path_imagens+'imprimir.bmp'
          col 311
@@ -94,7 +94,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 413
@@ -111,7 +111,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_fornecedores
          picture path_imagens+'fornecedores.bmp'
          col 515
@@ -128,7 +128,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 617
@@ -145,7 +145,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE SPLITBOX
          DEFINE GRID grid_materia_prima
@@ -212,7 +212,7 @@ FUNCTION materia_prima()
    form_materia_prima.center
    form_materia_prima.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION dados(parametro)
 
@@ -242,7 +242,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          materia_prima->(ordsetfocus('nome'))
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ENDIF
 
@@ -359,7 +359,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -372,7 +372,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
    END WINDOW
 
@@ -382,7 +382,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir()
 
@@ -397,7 +397,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       materia_prima->(ordsetfocus('nome'))
 
-      RETURN(nil)
+      return(nil)
    ELSE
       IF msgyesno('Nome : '+alltrim(materia_prima->nome),'Excluir')
          IF lock_reg()
@@ -410,7 +410,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION relacao()
 
@@ -457,7 +457,7 @@ STATIC FUNCTION relacao()
       END PRINTPAGE
    END PRINTDOC
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -474,14 +474,14 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,150 PRINT 'PREÇO R$' FONT 'courier new' SIZE 010 BOLD
    @ 035,180 PRINT 'QTD.' FONT 'courier new' SIZE 010 BOLD
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar(parametro)
 
@@ -501,7 +501,7 @@ STATIC FUNCTION gravar(parametro)
    IF retorna
       msgalert('Preencha todos os campos','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF parametro == 1
@@ -524,7 +524,7 @@ STATIC FUNCTION gravar(parametro)
          IF reccount() > _limite_registros
             msgstop('Limite de registros esgotado','Atenção')
 
-            RETURN(nil)
+            return(nil)
          ENDIF
       ENDIF
       materia_prima->(dbappend())
@@ -552,7 +552,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION pesquisar()
 
@@ -583,7 +583,7 @@ STATIC FUNCTION pesquisar()
       form_materia_prima.grid_materia_prima.enableupdate
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar()
 
@@ -598,7 +598,7 @@ STATIC FUNCTION atualizar()
       materia_prima->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_unidade(cform,ctextbtn)
 
@@ -632,7 +632,7 @@ STATIC FUNCTION procura_unidade(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION getcode_unidade(value)
 
@@ -688,7 +688,7 @@ STATIC FUNCTION getcode_unidade(value)
          backcolor _ciano_001
          nolines .T.
          lock .T.
-         READonly {.T.,.T.}
+         readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=unidade_medida->codigo,thiswindow.release)
       end browse
@@ -702,7 +702,7 @@ STATIC FUNCTION getcode_unidade(value)
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(creg)
+   return(creg)
 
 STATIC FUNCTION find_unidade()
 
@@ -712,12 +712,12 @@ STATIC FUNCTION find_unidade()
 
    IF pesquisa == ''
 
-      RETURN(nil)
+      return(nil)
    ELSEIF unidade_medida->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := unidade_medida->(recno())
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION fornecedores_mprima()
 
@@ -727,7 +727,7 @@ STATIC FUNCTION fornecedores_mprima()
    IF empty(x_nome_mprima)
       msgexclamation('Escolha uma matéria prima','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    DEFINE WINDOW form_fornecedor_mprima;
@@ -756,7 +756,7 @@ STATIC FUNCTION fornecedores_mprima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE GRID grid_fornecedor_mprima
          parent form_fornecedor_mprima
@@ -783,7 +783,7 @@ STATIC FUNCTION fornecedores_mprima()
    form_fornecedor_mprima.center
    form_fornecedor_mprima.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION filtra_fornecedor(parametro)
 
@@ -803,5 +803,5 @@ STATIC FUNCTION filtra_fornecedor(parametro)
       ENDIF
    end
 
-   RETURN(nil)
+   return(nil)
 

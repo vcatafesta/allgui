@@ -423,7 +423,7 @@ FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
          ret := TRUE
       ENDIF
    CASE nMsg == WM_DESTROY
-      ERASEDialog( hwndDlg )
+      EraseDialog( hwndDlg )
       ret := TRUE
    CASE nMsg == WM_CLOSE
       i := AScan ( _HMG_aFormhandles, hwndDlg )
@@ -432,7 +432,7 @@ FUNCTION DialogProc( hwndDlg, nMsg, wParam, lParam )
             Eval( _HMG_aFormReleaseProcedure [i] )
          ENDIF
       ENDIF
-      ERASEDialog( hwndDlg )
+      EraseDialog( hwndDlg )
       ret := TRUE
    CASE nMsg == WM_COMMAND
       i := AScan ( _HMG_aFormhandles, hwndDlg )  // find DialogProcedure
@@ -619,7 +619,7 @@ FUNCTION _ReleaseDialog( hwndDlg )
       IF _HMG_ActiveDlgProcModal
          EndDialog( hwndDlg, 0 )
       ELSE
-         ERASEDialog( hwndDlg )
+         EraseDialog( hwndDlg )
       ENDIF
    ENDIF
 

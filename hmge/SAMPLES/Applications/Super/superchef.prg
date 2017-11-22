@@ -267,7 +267,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX venda_mesas
          parent form_main
          picture path_imagens+'mesas.bmp'
@@ -286,7 +286,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX venda_balcao
          parent form_main
          picture path_imagens+'balcao.bmp'
@@ -305,7 +305,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX clientes
          parent form_main
          picture path_imagens+'clientes.bmp'
@@ -324,7 +324,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX produtos
          parent form_main
          picture path_imagens+'produtos.bmp'
@@ -343,7 +343,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX sair_programa
          parent form_main
          picture path_imagens+'sair_programa.bmp'
@@ -362,7 +362,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       * frame
       DEFINE FRAME frame_main
@@ -644,7 +644,7 @@ FUNCTION main()
    form_main.maximize
    form_main.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cria_dbf_cdx()
 
@@ -1748,7 +1748,7 @@ STATIC FUNCTION cria_dbf_cdx()
    _tamanho_006 := tamanhos->nome
    _pedaco_006  := tamanhos->pedacos
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION open_dbf_cdx()
 
@@ -1873,7 +1873,7 @@ STATIC FUNCTION open_dbf_cdx()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION tamanhos_pizza()
 
@@ -1942,7 +1942,7 @@ STATIC FUNCTION tamanhos_pizza()
    form_tamanhos.center
    form_tamanhos.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION altera_tamanho()
 
@@ -2005,7 +2005,7 @@ STATIC FUNCTION altera_tamanho()
    form_altera_tamanho.center
    form_altera_tamanho.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION grava_tamanho()
 
@@ -2022,7 +2022,7 @@ STATIC FUNCTION grava_tamanho()
    form_altera_tamanho.release
    form_tamanhos.browse_tamanhos.refresh
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION define_nomes()
 
@@ -2046,7 +2046,7 @@ STATIC FUNCTION define_nomes()
    _tamanho_006 := tamanhos->nome
    _pedaco_006  := tamanhos->pedacos
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION login()
 
@@ -2191,7 +2191,7 @@ STATIC FUNCTION login()
    form_login.center
    form_login.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION confirma_entrada()
 
@@ -2201,7 +2201,7 @@ STATIC FUNCTION confirma_entrada()
       msgalert('Senha não pode ser em branco','Atenção')
       form_login.tbox_senha.setfocus
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    dbselectarea('operadores')
@@ -2312,19 +2312,19 @@ STATIC FUNCTION confirma_entrada()
       msgexclamation('Senha não confere','Atenção')
       form_login.tbox_senha.setfocus
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION libera(parametro)
 
    IF !parametro
 
-      RETURN(.F.)
+      return(.F.)
    ENDIF
 
-   RETURN(.T.)
+   return(.T.)
 
 STATIC FUNCTION configurar_venda()
 
@@ -2391,7 +2391,7 @@ STATIC FUNCTION configurar_venda()
          fontcolor _azul_002
          transparent .T.
       END LABEL
-      DEFINE COMBOBOXex cbo_tipo
+      define comboboxex cbo_tipo
       row 120
       col 010
       width 380
@@ -2401,7 +2401,7 @@ STATIC FUNCTION configurar_venda()
       fontname 'courier new'
       fontsize 12
       fontcolor BLACK
-   END COMBOBOXex
+   end comboboxex
 
    @ 005,290 button btn_sair;
       parent form_configurar;
@@ -2423,7 +2423,7 @@ END WINDOW
 form_configurar.center
 form_configurar.activate
 
-RETURN(nil)
+return(nil)
 
 STATIC FUNCTION gravar_config()
 
@@ -2438,7 +2438,7 @@ STATIC FUNCTION gravar_config()
 
    form_configurar.release
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION bordas_pizza()
 
@@ -2507,7 +2507,7 @@ STATIC FUNCTION bordas_pizza()
    form_bordas.center
    form_bordas.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION altera_borda()
 
@@ -2570,7 +2570,7 @@ STATIC FUNCTION altera_borda()
    form_altera_borda.center
    form_altera_borda.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION grava_borda()
 
@@ -2587,5 +2587,5 @@ STATIC FUNCTION grava_borda()
    form_altera_borda.release
    form_bordas.browse_bordas.refresh
 
-   RETURN(nil)
+   return(nil)
 

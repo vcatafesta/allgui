@@ -16,7 +16,7 @@ STATIC FUNCTION AddText(cExpr, aUndo_, cText)
    Form_Query.Edit_1.Value := cExpr
    DO EVENTS
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION GetType(cField, aFlds_, cChar)
 
@@ -36,7 +36,7 @@ STATIC FUNCTION GetType(cField, aFlds_, cChar)
       ENDIF
    ENDIF
 
-   RETURN(cType)
+   Return(cType)
 
 STATIC FUNCTION CheckComp(cType, cComp)
 
@@ -60,7 +60,7 @@ STATIC FUNCTION CheckComp(cType, cComp)
       MsgAlert("Invalid comparison for selected data type.")
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 
 STATIC FUNCTION AddExpr(cExpr, aUndo_, cField, cComp, uVal)
 
@@ -91,7 +91,7 @@ STATIC FUNCTION AddExpr(cExpr, aUndo_, cField, cComp, uVal)
 
    AddText(@cExpr, aUndo_, cTemp)
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION Undo(cExpr, aUndo_)
 
@@ -106,7 +106,7 @@ STATIC FUNCTION Undo(cExpr, aUndo_)
 
    asize(aUndo_, l - 1)
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION RunQuery(cExpr)
 
@@ -126,7 +126,7 @@ STATIC FUNCTION RunQuery(cExpr)
    IF !lOk
       (cAlias)->( DbGoTo(nCurRec) )
 
-      RETURN(lOk)
+      Return(lOk)
    ENDIF
 
    (cAlias)->( DbGoTop() )
@@ -148,7 +148,7 @@ STATIC FUNCTION RunQuery(cExpr)
       (cAlias)->( DbGoTop() )
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 
 STATIC FUNCTION SaveQuery(cExpr, aQuery_)
 
@@ -165,13 +165,13 @@ STATIC FUNCTION SaveQuery(cExpr, aQuery_)
    cDesc := InputBox( aLangStrings[134]+":" , aLangStrings[135] , cDesc )
    IF len(cDesc) == 0  // Rather than empty() because they may hit 'Ok' on
 
-      RETURN(NIL)       // just spaces and that is acceptable.
+      Return(NIL)       // just spaces and that is acceptable.
    ENDIF
 
    cQFile := PutFile( aMask, aLangStrings[136], cPath, .t. )
    IF empty(cQFile)
 
-      RETURN(NIL)
+      Return(NIL)
    ENDIF
    cQFile := cPath + "\" + cFileNoExt( cQFile ) + ".dbq"
    IF !file(cQFile)
@@ -187,7 +187,7 @@ STATIC FUNCTION SaveQuery(cExpr, aQuery_)
       IF QFile->( NotDBQ(cQFile) )
          QFile->( DBCloseArea() )
 
-         RETURN(NIL)
+         Return(NIL)
       ENDIF
 
       QFile->( DBGoTop() )
@@ -201,7 +201,7 @@ STATIC FUNCTION SaveQuery(cExpr, aQuery_)
                ELSEIF x == 2
                   QFile->( DBCloseArea() )
 
-                  RETURN(NIL)
+                  Return(NIL)
                ENDIF
                EXIT
             ENDIF
@@ -222,7 +222,7 @@ STATIC FUNCTION SaveQuery(cExpr, aQuery_)
 
    ENDIF
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION LoadQuery(cExpr, aQuery_)
 
@@ -235,7 +235,7 @@ STATIC FUNCTION LoadQuery(cExpr, aQuery_)
 
    IF empty(cQFile)
 
-      RETURN(lLoaded)
+      Return(lLoaded)
    ENDIF
 
    IF OpenDataBaseFile( cQFile, "QFile", .T., .F., RddSetDefault() )
@@ -243,7 +243,7 @@ STATIC FUNCTION LoadQuery(cExpr, aQuery_)
       IF QFile->( NotDBQ(cQFile) )
          QFile->( DBCloseArea() )
 
-         RETURN(lLoaded)
+         Return(lLoaded)
       ELSEIF QFile->( eof() )
          MsgInfo(cQFile + " " + aLangStrings[142] + "!")
       ELSE
@@ -327,7 +327,7 @@ STATIC FUNCTION LoadQuery(cExpr, aQuery_)
 
    ENDIF
 
-   RETURN(lLoaded)
+   Return(lLoaded)
 
 STATIC FUNCTION NotDBQ(cQFile)
 
@@ -340,7 +340,7 @@ STATIC FUNCTION NotDBQ(cQFile)
       MsgAlert(cQFile + " " + aLangStrings[148] + ".")
    ENDIF
 
-   RETURN(lNot)
+   Return(lNot)
 
 STATIC FUNCTION LoadIt(aQuery_)
 
@@ -361,7 +361,7 @@ STATIC FUNCTION LoadIt(aQuery_)
       aQuery_[Q_EXPR] := alltrim(QFile->EXPR) + " "
    ENDIF
 
-   RETURN(lLoaded)
+   Return(lLoaded)
 
 FUNCTION DelRec()
 
@@ -385,7 +385,7 @@ FUNCTION DelRec()
       lDel := .T.
    ENDIF
 
-   RETURN(lDel)
+   Return(lDel)
 
 STATIC FUNCTION QueryError(e)
 
@@ -416,5 +416,5 @@ STATIC FUNCTION InsDel(cOrig, nStart, nDelete, cInsert)
    LOCAL cLeft := left(cOrig, nStart - 1)
    LOCAL cRight := substr(cOrig, nStart + nDelete)
 
-   RETURN(cLeft + cInsert + cRight)
+   Return(cLeft + cInsert + cRight)
 

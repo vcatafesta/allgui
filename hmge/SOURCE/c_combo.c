@@ -226,10 +226,10 @@ HB_FUNC( INITCOMBOBOXEX )
 HB_FUNC( COMBOSETITEMHEIGHT )
 {
    HWND hWnd = ( HWND ) HB_PARNL( 1 );
-   int iDesiredHeight = hb_parni( 2 );
+   int  iDesiredHeight = hb_parni( 2 );
 
    SendMessage( hWnd, CB_SETITEMHEIGHT, ( WPARAM ) -1, ( LPARAM ) iDesiredHeight );
-} 
+}
 
 HB_FUNC( COMBOSHOWDROPDOWN )
 {

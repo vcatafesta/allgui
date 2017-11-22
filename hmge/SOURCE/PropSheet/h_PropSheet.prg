@@ -967,11 +967,11 @@ FUNCTION _ReleasePropertySheet( hwndPropSheet, hWndDlg )
 
    FOR n := 1 TO Len( _HMG_aFormParentHandle )
       IF _HMG_aFormParentHandle[ n ] == hwndPropSheet
-         ERASEDialog( _HMG_aFormHandles[ n ] )
+         EraseDialog( _HMG_aFormHandles[ n ] )
       ENDIF
    NEXT
    IF _HMG_ActivePropSheetModeless
-      ERASEPropSheet( hwndPropSheet )
+      ErasePropSheet( hwndPropSheet )
       DestroyWindow( hwndPropSheet )
    ELSE
       EndDialog( hwndDlg, 0 )

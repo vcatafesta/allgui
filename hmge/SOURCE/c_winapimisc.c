@@ -60,16 +60,16 @@
 #include "inkey.ch"
 
 #ifdef __XCC__
-  char * itoa( int __value, char * __string, int __radix );
+char * itoa( int __value, char * __string, int __radix );
 #endif
 
 #if defined( _MSC_VER ) && ! defined( __POCC__ )
-# define itoa(__value, __string, __radix) _itoa(__value, __string, __radix)
+# define itoa( __value, __string, __radix )  _itoa( __value, __string, __radix )
 #endif
 
 #if defined( __XHARBOUR__ )
 # define HB_LONGLONG  LONGLONG
-  extern HB_EXPORT void   hb_evalBlock0( PHB_ITEM pCodeBlock );
+extern HB_EXPORT void   hb_evalBlock0( PHB_ITEM pCodeBlock );
 #endif
 extern HB_EXPORT BOOL Array2Rect( PHB_ITEM aRect, RECT * rc );
 extern HB_EXPORT PHB_ITEM Rect2Array( RECT * rc );
@@ -1083,6 +1083,72 @@ HB_FUNC( FILLRECT )
    }
    else
       hb_retni( 0 );
+}
+
+BOOL IsAppHung( IN HWND hWnd, OUT PBOOL pbHung )
+{
+   OSVERSIONINFO osvi;
+   HINSTANCE     hUser;
+
+   typedef BOOL ( WINAPI * PFNISAPPHUNG )( IN HWND hWnd, OUT PBOOL pbHung );
+
+   if( ! IsWindow( hWnd ) )
+      return SetLastError( ERROR_INVALID_PARAMETER ), FALSE;
+
+   osvi.dwOSVersionInfoSize = sizeof( osvi );
+
+   // detect OS version
+   GetVersionEx( &osvi );
+
+   // get handle of USER32.DLL
+   hUser = GetModuleHandle( TEXT( "user32.dll" ) );
+
+   if( osvi.dwPlatformId == VER_PLATFORM_WIN32_NT )
+   {
+      BOOL ( WINAPI * _IsHungAppWindow )( HWND );
+
+      // found the function IsHungAppWindow
+      *( FARPROC * )&_IsHungAppWindow =
+         GetProcAddress( hUser, "IsHungAppWindow" );
+      if( _IsHungAppWindow == NULL )
+         return SetLastError( ERROR_PROC_NOT_FOUND ), FALSE;
+
+      // call the function IsHungAppWindow
+      *pbHung = _IsHungAppWindow( hWnd );
+   }
+   else
+   {
+      DWORD dwThreadId = GetWindowThreadProcessId( hWnd, NULL );
+
+      BOOL ( WINAPI * _IsHungThread )( DWORD );
+
+      // found the function IsHungThread
+      *( FARPROC * )&_IsHungThread =
+         GetProcAddress( hUser, "IsHungThread" );
+      if( _IsHungThread == NULL )
+         return SetLastError( ERROR_PROC_NOT_FOUND ), FALSE;
+
+      // call the function IsHungThread
+      *pbHung = _IsHungThread( dwThreadId );
+   }
+
+   return TRUE;
+}
+
+HB_FUNC( ISAPPHUNG )
+{
+   BOOL bIsHung;
+
+   if( IsAppHung( ( HWND ) HB_PARNL( 1 ), &bIsHung ) )
+      hb_retl( bIsHung );
+   else
+   {
+      if( GetLastError() != ERROR_INVALID_PARAMETER )
+      {
+         MessageBox( NULL, "Process not found", "Warning", MB_OK | MB_ICONWARNING );
+      }
+      hb_retl( HB_FALSE );
+   }
 }
 
 #ifndef PROCESS_QUERY_LIMITED_INFORMATION

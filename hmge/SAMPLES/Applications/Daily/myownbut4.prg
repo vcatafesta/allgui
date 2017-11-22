@@ -212,7 +212,7 @@ FUNCTION OwnButtonPaint( pdis )
 
       IF !Empty( aButMisc[ 2 ] )     //Picture box
 
-         DELETEObject ( _hmg_aControlBrushhandle[ i ] )
+         DeleteObject ( _hmg_aControlBrushhandle[ i ] )
          nnnn := _SetBtnPicture (  hDC, _HMG_aControlPicture[ i ] )
          _hmg_aControlBrushHandle[ i ] := nnnn
 
@@ -243,7 +243,7 @@ FUNCTION OwnButtonPaint( pdis )
       _HMG_aControlFontColor[ i ] := aOBClr[ iObClr, 8 ]
 
       IF !Empty( aButMisc[ 2 ] )
-         DELETEObject ( _hmg_aControlBrushhandle[ i ] )
+         DeleteObject ( _hmg_aControlBrushhandle[ i ] )
          nnnn := _SetBtnPicture (  hDC, aButMisc[ 2 ] )
          _hmg_aControlBrushHandle[ i ] := nnnn
       ENDIF

@@ -10,7 +10,7 @@ PROCEDURE InOtherPrg()
 
    EXIT PROCEDURE _OtherProcedure
 
-   WAITWindow('OTHER EXIT PROCEDURE')
+   WaitWindow('OTHER EXIT PROCEDURE')
 
    RETURN
 

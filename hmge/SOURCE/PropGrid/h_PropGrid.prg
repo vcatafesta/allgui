@@ -207,10 +207,10 @@ FUNCTION _DefinePropGrid ( ControlName, ParentFormName, row, col, width, height,
       ENDIF
    ENDIF
    IF !lOkBtn
-      USErOkProc := ""
+      UserOkProc := ""
    ENDIF
    IF !lCancelBtn
-      USErCancelProc := ""
+      UserCancelProc := ""
    ENDIF
    IF ValType( UserHelpProc ) == "B"
       lHelpBtn := .T.

@@ -430,7 +430,7 @@ PROCEDURE SaveFolders()
    ENDDO
    dbgoto(nRec)
    Main.Grid_1.Refresh
-   UNLOCK_Controls()
+   UnLock_Controls()
 
    RETURN
 
@@ -934,7 +934,7 @@ PROCEDURE Zippy()
    cTarget := Trim(Field->Target)+'\'
    cFile := cTarget+cName+cNum+'.ZIP'
    eval(abFunctions[nType],cFile,cOrigin)
-   PACK_Zips(cName,nLimit)
+   Pack_Zips(cName,nLimit)
    Fill_List_2()
 
    RETURN

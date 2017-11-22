@@ -29,7 +29,7 @@ FUNCTION open_dbf(nome,apelido,modo)
       ret := .F.
    ENDIF
 
-   RETURN(ret)
+   return(ret)
    *________________________________________________________________________________________
 
 FUNCTION Lock_Dbf()
@@ -43,7 +43,7 @@ FUNCTION Lock_Dbf()
       ret := .F.
    ENDIF
 
-   RETURN(ret)
+   return(ret)
    *________________________________________________________________________________________________
 
 FUNCTION Lock_Reg()
@@ -57,7 +57,7 @@ FUNCTION Lock_Reg()
       ret := .F.
    ENDIF
 
-   RETURN(ret)
+   return(ret)
    *________________________________________________________________________________________________
 
 FUNCTION add_reg()
@@ -73,7 +73,7 @@ FUNCTION add_reg()
       ret := .F.
    ENDIF
 
-   RETURN(ret)
+   return(ret)
    *________________________________________________________________________________________________
 
 FUNCTION Chk_Mes(parametro,tipo)
@@ -89,7 +89,7 @@ FUNCTION Chk_Mes(parametro,tipo)
          'Dezembro '} [Parametro]
    ENDIF
 
-   RETURN(retorno)
+   return(retorno)
    *________________________________________________________________________________________________
 
 FUNCTION dia_da_semana(p_data,p_tipo)
@@ -102,15 +102,15 @@ FUNCTION dia_da_semana(p_data,p_tipo)
          'Sábado'}
       cData := cSem_ext[dow(p_data)]
 
-      RETURN(cData)
+      return(cData)
    ELSEIF p_tipo == 2
       cSem_abv := {'Dom','Seg','Ter','Qua','Qui','Sex','Sáb'}
       cData    := cSem_abv[dow(p_data)]
 
-      RETURN(cData)
+      return(cData)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
    *________________________________________________________________________________________________
 
 FUNCTION check_window()
@@ -129,7 +129,7 @@ FUNCTION check_window()
       ret := .T.
    ENDIF
 
-   RETURN(ret)
+   return(ret)
    *________________________________________________________________________________________________
 
 FUNCTION valor_coluna(xObj,xForm,nCol)
@@ -146,7 +146,7 @@ FUNCTION acha_unidade(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('unidade_medida')
@@ -162,7 +162,7 @@ FUNCTION acha_unidade(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_banco(parametro)
 
@@ -171,7 +171,7 @@ FUNCTION acha_banco(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('bancos')
@@ -187,7 +187,7 @@ FUNCTION acha_banco(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_tamanho(parametro)
 
@@ -196,7 +196,7 @@ FUNCTION acha_tamanho(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('tamanho_pizza')
@@ -212,7 +212,7 @@ FUNCTION acha_tamanho(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_mprima(parametro)
 
@@ -221,7 +221,7 @@ FUNCTION acha_mprima(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('materia_prima')
@@ -238,7 +238,7 @@ FUNCTION acha_mprima(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_vmprima(parametro)
 
@@ -247,7 +247,7 @@ FUNCTION acha_vmprima(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('materia_prima')
@@ -263,7 +263,7 @@ FUNCTION acha_vmprima(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_fornecedor(parametro)
 
@@ -272,7 +272,7 @@ FUNCTION acha_fornecedor(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('fornecedores')
@@ -288,7 +288,7 @@ FUNCTION acha_fornecedor(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_fornecedor_2(parametro)
 
@@ -297,7 +297,7 @@ FUNCTION acha_fornecedor_2(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('fornecedores')
@@ -313,7 +313,7 @@ FUNCTION acha_fornecedor_2(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_produto(parametro)
 
@@ -322,7 +322,7 @@ FUNCTION acha_produto(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('produtos')
@@ -338,7 +338,7 @@ FUNCTION acha_produto(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_forma_pagamento(parametro)
 
@@ -347,7 +347,7 @@ FUNCTION acha_forma_pagamento(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('formas_pagamento')
@@ -363,7 +363,7 @@ FUNCTION acha_forma_pagamento(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_forma_recebimento(parametro)
 
@@ -372,7 +372,7 @@ FUNCTION acha_forma_recebimento(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('formas_recebimento')
@@ -388,7 +388,7 @@ FUNCTION acha_forma_recebimento(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_cliente(parametro)
 
@@ -397,7 +397,7 @@ FUNCTION acha_cliente(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('clientes')
@@ -413,7 +413,7 @@ FUNCTION acha_cliente(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_motoboy(parametro)
 
@@ -422,7 +422,7 @@ FUNCTION acha_motoboy(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('motoboys')
@@ -438,7 +438,7 @@ FUNCTION acha_motoboy(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION acha_atendente(parametro)
 
@@ -447,7 +447,7 @@ FUNCTION acha_atendente(parametro)
 
    IF empty(parametro)
 
-      RETURN('---')
+      return('---')
    ENDIF
 
    dbselectarea('atendentes')
@@ -463,7 +463,7 @@ FUNCTION acha_atendente(parametro)
 
    dbselectarea(area_aberta)
 
-   RETURN(retorno)
+   return(retorno)
 
 FUNCTION DbfVazio( cParametro )
 
@@ -472,8 +472,8 @@ FUNCTION DbfVazio( cParametro )
    IF Eof()
       msgexclamation('A tabela '+alltrim(upper(cParametro))+' está vazia','Atenção')
 
-      RETURN( .t. )
+      Return( .t. )
    ENDIF
 
-   RETURN( .f. )
+   Return( .f. )
 

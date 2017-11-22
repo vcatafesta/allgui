@@ -94,7 +94,7 @@ PROCEDURE StopDrag()
       CursorSizeWE()
       Form_1.Title:= "You can drag ..."
    ELSE
-      DISPLAYCoords()
+      DisplayCoords()
    ENDIF
    nMouseX:=0
 

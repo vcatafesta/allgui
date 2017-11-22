@@ -449,7 +449,7 @@ FUNCTION _CreatePopUpChevron ( hWnd, wParam, lParam )
             ELSE
                cMenu := 'Button ' + hb_ntos( n )
             ENDIF
-            APPENDMenuString ( hMenu , aBtnInfo[2] , cMenu )
+            AppendMenuString ( hMenu , aBtnInfo[2] , cMenu )
             image := _HMG_aControlPicture  [k]
             IF Len( image ) != 0
                MenuItem_SetBitMaps ( hMenu , aBtnInfo[2] , image , image )

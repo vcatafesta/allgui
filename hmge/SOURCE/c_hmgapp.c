@@ -141,7 +141,7 @@ static DWORD DllGetVersion( LPCTSTR lpszDllName )
 
          dvi.info1.cbSize = sizeof( dvi );
 
-         hr = ( *pDllGetVersion )( &dvi );
+         hr = ( * pDllGetVersion )(&dvi );
          if( S_OK == hr )
             dwVersion = PACKVERSION( dvi.info1.dwMajorVersion, dvi.info1.dwMinorVersion );
       }

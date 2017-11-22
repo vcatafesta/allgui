@@ -286,7 +286,7 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
 
                ************ Verifico salto de hoja **********
                IF nLinesLeft < 2
-                  EJECTPage()
+                  EjectPage()
                   IF aReportData[ RP_PLAIN ]
                      nLinesLeft := 1000
                   ELSE
@@ -316,7 +316,7 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
             ******* Genero el Total general ******
             **** Si me quedan menos de 2 lineas, salto de hoja  ****
             IF nLinesLeft < 2
-               EJECTPage()
+               EjectPage()
                IF aReportData[ RP_PLAIN ]
                   nLinesLeft := 1000
                ELSE
@@ -355,7 +355,7 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
 
             ******* Si pidió un eject al final del reporte, lo largo *********
             IF aReportData[ RP_AEJECT ]
-               EJECTPage()
+               EjectPage()
             ENDIF
 
          RECOVER USING xBreakVal
@@ -457,7 +457,7 @@ STATIC PROCEDURE EjecutoReporte
 
    IF ( LEN( aRecordHeader ) > 0 ) .AND. lEjectGrp
       IF LEN( aRecordHeader ) > nLinesLeft
-         EJECTPage()
+         EjectPage()
 
          IF ( aReportData[ RP_PLAIN ] )
             nLinesLeft := 1000
@@ -471,7 +471,7 @@ STATIC PROCEDURE EjecutoReporte
 
       aRecordHeader := {}
 
-      EJECTPage()
+      EjectPage()
 
       IF ( aReportData[ RP_PLAIN ] )
          nLinesLeft := 1000
@@ -498,7 +498,7 @@ STATIC PROCEDURE EjecutoReporte
    IF LEN( aRecordHeader ) > 0
       **** Si entra, lo imprimo ******
       IF LEN( aRecordHeader ) > nLinesLeft
-         EJECTPage()
+         EjectPage()
          IF aReportData[ RP_PLAIN ]
             nLinesLeft := 1000
          ELSE
@@ -514,7 +514,7 @@ STATIC PROCEDURE EjecutoReporte
 
       ******* Controlo el salto de hoja ***********
       IF nLinesLeft == 0
-         EJECTPage()
+         EjectPage()
          IF aReportData[ RP_PLAIN ]
             nLinesLeft := 1000
          ELSE
@@ -592,7 +592,7 @@ STATIC PROCEDURE EjecutoReporte
                nLine++
                nLinesLeft--
                IF nLinesLeft == 0
-                  EJECTPage()
+                  EjectPage()
                   IF aReportData[ RP_PLAIN ]
                      nLinesLeft := 1000
                   ELSE
@@ -601,7 +601,7 @@ STATIC PROCEDURE EjecutoReporte
                ENDIF
             ENDDO
          ELSE
-            EJECTPage()
+            EjectPage()
             IF aReportData[ RP_PLAIN ]
                nLinesLeft := 1000
             ELSE
@@ -625,7 +625,7 @@ STATIC PROCEDURE EjecutoReporte
 
       ***** Verifico salto de hoja ******
       IF nLinesLeft == 0
-         EJECTPage()
+         EjectPage()
          IF aReportData[ RP_PLAIN ]
             nLinesLeft := 1000
          ELSE

@@ -1,11 +1,11 @@
 /*******************************************************************************
 Filename        : tReport.prg
-URL             : \\ServerName\Minigui\UTILS\QBGen\tReport.prg
+URL             : \\ServerName\MiniGUI\UTILS\QBGen\tReport.prg
 
 Created         : 26 October 2017 (13:15:11)
 Created by      : Pierpaolo Martinello
 
-Last Updated    : 27 October 2017 (16:29:39)
+Last Updated    : 04 November 2017 (18:08:17)
 Updated by      : Pierpaolo
 
 Comments        : RetEditArr                  Line 209
@@ -13,6 +13,7 @@ Comments        : RetEditArr                  Line 209
 #include <hmg.ch>
 #include "i_winuser.ch"
 #include "dbstruct.ch"
+//#include "Winprint.ch"
 
 #define GDER      GRID_JTFY_RIGHT
 #define GIZQ      GRID_JTFY_LEFT
@@ -21,18 +22,29 @@ Comments        : RetEditArr                  Line 209
 #define HDN_ITEMCHANGINGA       (HDN_FIRST-0)
 #define HDN_ITEMCHANGEDA        (HDN_FIRST-1)
 
+// ** CONSTANTS (nControl) ***
+#define _GRID_COLUMNCAPTION_    -1   // _HMG_aControlPageMap   [i]
+#define _GRID_ONHEADCLICK_      -2   // _HMG_aControlHeadClick [i]
+#define _GRID_COLUMNWIDTH_       2   // _HMG_aControlMiscData1 [i,2]
+#define _GRID_COLUMNJUSTIFY_     3   // _HMG_aControlMiscData1 [i,3]
+#define _GRID_DYNAMICFORECOLOR_ 11   // _HMG_aControlMiscData1 [i,11]
+#define _GRID_DYNAMICBACKCOLOR_ 12   // _HMG_aControlMiscData1 [i,12]
+#define _GRID_COLUMNCONTROLS_   13   // _HMG_aControlMiscData1 [i,13]
+#define _GRID_COLUMNVALID_      14   // _HMG_aControlMiscData1 [i,14]
+#define _GRID_COLUMNWHEN_       15   // _HMG_aControlMiscData1 [i,15]
+
 #define NTrim( n ) LTRIM( STR( n,20, IF( n == INT( n ), 0, set(_SET_DECIMALS) ) ))
 #translate ZAPS(<X>) => ALLTRIM(STR(<X>))
 #define msgtest( c ) MSGSTOP( "Procedura: "+Procname()+CRLF+c, hb_ntos(procline()))
-#define COMMA if (!Ton,' ;','')
+#define COMMA IF (!Ton,' ;','')
 
-PROCEDURE URE(aHdr1,alen1)
+PROCEDURE URE( aHdr1,alen1 )
 
    LOCAL ahdr :={'       Fields ->'} , aLen := {105}, ni
    LOCAL  aH1 := {"Header 1"} ,        aH2  := {"Header 2"}, aRows :={}
    LOCAL aW   := {"Width"} ,           aTot := {"Totals"} , aFo    := {"nFormats"}
    LOCAL sBL1 := {{||.F.}} ,           IBL  := { {} },      bValid := {{||cKFld()} }
-   LOCAL aValM:= {""} , Mlen := 0 ,    Bk4  ,mF := len( aHdr1 )
+   LOCAL aValM:= {""} , Mlen := 0 , Bk4 ,mF := len( aHdr1 ) , OnHc
    LOCAL nMax,  cTf ,  apaper:= aclone(apapeles) , aEdit3 ,   aGrp3:={"None","EVERY PAGE"}
 
    LOCAL aEdit:={;           // types for 'DYNAMIC'
@@ -44,22 +56,26 @@ PROCEDURE URE(aHdr1,alen1)
 
    LOCAL bBlock :={ |r,c| RetEditArr(aEdit, r, c) }
    LOCAL bBlock3:={ |r,c| RetEditArr2(aEdit3, r, c) }
+   LOCAL bBlock4:={ |r| SetFocusColumn( r ) }
 
    LOCAL aRows3 := {;
       { 'Image '         ,"" ,0 ,0,0,0 },;
-      { 'Multiple'       ,.F.,"","Image","Every","Page" },;
-      { 'Lpp'            ,50 ,"","Default 50","","" },;
-      { 'Cpl'            ,80 ,"","Default 80","","" },;
-      { 'Left Margin'    ,3  ,"","Default  0 ","",""},;
-      { 'Top Margin'     ,3  ,"","Default  1 ","","" },;
-      { 'Papersize'      ,9  ,"","Default     ","Letter","" },;
-      { 'Dosmode'        ,.F.,"","Default No","","" },;
-      { 'Preview'        ,.T.,"","Default Yes","","" } ,;
-      { 'Select Printer' ,.F. ,"","Default No","",""},;
-      { 'Grouped By'     ,1  ,"","Default     ","None","" },;
+      { 'Multiple'       ,.F.,"Image","Every","Page","Default No" },;
+      { 'Lpp'            ,50 ,"Default 50","","","" },;
+      { 'Cpl'            ,80 ,"Valid        ","80 - 96","120 - 140","160"},;
+      { 'Left Margin'    ,3  ,"Default  0 ","","",""},;
+      { 'Top Margin'     ,3  ,"Default  1 ","","","" },;
+      { 'Papersize'      ,9  ,"Default     ","Letter","","" },;
+      { 'Dosmode'        ,.F.,"Default No","","","" },;
+      { 'Preview'        ,.T.,"Default Yes","","","" } ,;
+      { 'Select Printer' ,.F.,"Default No","","",""},;
+      { 'Grouped By'     ,1  ,"Default     ","NONE","","" },;
       { 'Group Header'   ,"" ,"","","","" },;
-      { 'Orientation'    ,1  ,"","Default     ","Portrait","" },;
-      { 'NoDateTimeStamp',.F.,"","Default No","","" } }
+      { 'Orientation'    ,1  ,"Default     ","Portrait","","" },;
+      { 'NoDateTimeStamp',.F.,"Default No","","","" } }
+
+   REQUEST DBFCDX
+   RDDSETDEFAULT("DBFCDX")
 
    aeval (apaper,{|x,y| apaper[y]:=substr(x,9,len(x) )} ) // remove "DMPAPER_"
    aeval(aLen1, {|e,i| aLen1[i] := e/8})
@@ -68,9 +84,11 @@ PROCEDURE URE(aHdr1,alen1)
       hb_adel(aHdr1,1,.T.)
       mf --
    ENDIF
+   OnHc :={ bBlock4 }
 
    FOR ni = 1 to mf
       ctf  := tFld(aHdr1[ni])  // return a type of field
+      aadd (OnHc, bblock4 )
       aadd (aHdr,aHdr1[ni])
       aadd (aGrp3,aHdr1[ni])
       aadd (sbl1,{||.T.} )
@@ -80,7 +98,7 @@ PROCEDURE URE(aHdr1,alen1)
       aadd ( aH1,"" )
       aadd ( aH2,aHdr1[ni] )
       aadd ( aW, aLen1[ni] )
-      aadd ( aTot ,if ( "N" $ ctf,.t.,.F.) )
+      aadd ( aTot ,IF ( "N" $ ctf,.t.,.F.) )
       aadd ( aFo,tFld(aHdr1[ni],.T.) )
       // Grid Width
       nMax := GetTextWidth( 0, aHdr[ni] )
@@ -158,6 +176,7 @@ PROCEDURE URE(aHdr1,alen1)
          HEADERS ahdr ;
          WIDTHS aLen ;
          ITEMS aRows ;
+         ON HEADCLICK OnHc ;
          EDIT ;
          INPLACE ibl ;
          COLUMNVALID bValid ;
@@ -165,6 +184,10 @@ PROCEDURE URE(aHdr1,alen1)
          VALIDMESSAGES aValm ;
          CELLNAVIGATION ;
          VALUE {1, 2} ;
+
+      DEFINE CONTEXT MENU CONTROL Grid_2 of Form_2
+         MENUITEM "Delete a focused column. " ACTION DELETE_Col()
+      END MENU
 
       @ 166,0 GRID Grid_3 ;
          WIDTH 565 ;
@@ -196,9 +219,9 @@ PROCEDURE URE(aHdr1,alen1)
          FONTSIZE 8
       END LABEL
 
-      @ 240, ThisWindow.width-100 Button B1 PARENT Form_2 CAPTION "Import" ACTION Treport("IMPORT")   WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
-      @ 275, ThisWindow.width-100 Button B2 PARENT Form_2 CAPTION "Test"   ACTION Treport( )       WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
-      @ 310, ThisWindow.width-100 Button B3 PARENT Form_2 CAPTION "Save"   ACTION Treport("SAVE")  WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
+      @ 240, ThisWindow.width-100 Button B1 PARENT Form_2 CAPTION "&Import" ACTION Treport("IMPORT")   WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
+      @ 275, ThisWindow.width-100 Button B2 PARENT Form_2 CAPTION "&Test"   ACTION Treport( )       WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
+      @ 310, ThisWindow.width-100 Button B3 PARENT Form_2 CAPTION "&Save"   ACTION Treport("SAVE")  WIDTH 80 FONT 'Arial' SIZE 9  TOOLTIP ""
 
       Form_2.grid_2.ColumnsAutoFitH
 
@@ -213,8 +236,15 @@ PROCEDURE URE(aHdr1,alen1)
    Form_2.CENTER ;Form_2.ACTIVATE
 
    RETURN
+   // Function used by codeblock bBlock4
 
-   // Function used by codeblock from 'DYNAMIC' type return normal array used in INPLACE EDIT
+PROCEDURE SetFocusColumn ( r )  // FOR GRID_2
+
+   Form_2.Grid_2.VAlue := { 1, r }
+
+   RETURN
+
+   // Function used by codeblock bBlock from 'DYNAMIC' type return normal array used in INPLACE EDIT
 
 FUNCTION RetEditArr( aEdit, r, c )  // FOR GRID_2
 
@@ -229,6 +259,7 @@ FUNCTION RetEditArr( aEdit, r, c )  // FOR GRID_2
    RETURN aRet
    /*
    */
+   // Function used by codeblock bBlock3
 
 FUNCTION RetEditArr2( aEdit3, r, c )  // FOR GRID_3
 
@@ -292,7 +323,7 @@ FUNCTION ckfld2( )       // avoid use  of unused cells
       {'JPG Files', '*.jpg'},;
          {'BMP Files', '*.bmp'},;
          {'GIF Files', '*.gif'} },;
-         'Open Image' )
+         'Open Image',.F.,.T. )
       IF ! EMPTY( cImgFilName ) .OR. FILE( cImgFilName )
          Form_2.Grid_3.cell(1,2):= cImgFilName
          aRet := .F.
@@ -361,7 +392,7 @@ FUNCTION tFld(cFld, LFmt)   // return a correct transform format template
 
    DEFAULT Lfmt to .f.
 
-   nLimit := int (nLimit+nLimit/2 )
+   nLimit := 1+ int (nLimit+nLimit/2 )
    IF lFmt
       DO CASE
       CASE cFldt = "N"
@@ -396,7 +427,7 @@ PROCEDURE Treport(act)   // Test the Report
 
    LOCAL h,cols, aHeaders1, aHeaders2 ,a := {} ,awidths ,ato,cSaveFile, cstr:='',ni
    LOCAL aFormats , aGrpby := {,"EVERY PAGE"}, cGraphic:= NIL , Title, aSrc := {}
-   LOCAL Cstr2 := '', cFileimp, Ton, spt := space(3)
+   LOCAL Cstr2 := '', cFileimp, Ton, spt := space(3), nWrpt, Inde_On, aVo
 
    DEFAULT act to "EXEC"
 
@@ -418,6 +449,7 @@ PROCEDURE Treport(act)   // Test the Report
       aadd ( aGrpby, Form_2.Grid_2.Header( ni ) )
    NEXT
 
+   Inde_On := aGrpby[Form_2.Grid_3.Cell( 11, 2 )]
    Title :=  Form_2.Title1.value
 
    IF !empty(Form_2.Grid_3.Cell( 1, 2 ) )
@@ -428,11 +460,37 @@ PROCEDURE Treport(act)   // Test the Report
       Title := Form_2.Title1.value+"|"+Form_2.title2.value
    ENDIF
 
+   FOR EACH ni in aHeaders1
+      IF Form_2.Grid_2.ColumnWidth(ni:__enumIndex()) = 0
+         hb_adel(a,ni:__enumIndex()-1,.T.)
+         hb_adel(aHeaders1,ni:__enumIndex()-1,.T.)
+         hb_adel(aHeaders2,ni:__enumIndex()-1,.T.)
+         hb_adel(awidths,ni:__enumIndex()-1,.T.)
+         hb_adel(aTo,ni:__enumIndex()-1,.T.)
+         hb_adel(aformats,ni:__enumIndex()-1,.T.)
+      ENDIF
+   NEXT
+
    ( alias() )->( dbgotop() )
 
    DO CASE
    CASE act ="EXEC"
-      easyreport ( ;
+      check_db_Index ( Inde_On , Form_2.Grid_3.Cell( 11, 2 ) )
+      nWrpt  := hb_DirScan(cFilePath( GetExeFileName() ), "*.Wrpt" )
+      IF len(nWrpt) > 0
+         IF msgyesno( "Do you want use a Winreport Interpreter Template ?" ;
+               ,"Question",.T. )
+            MessageBoxTimeout ('   Do you have saved your latest change ?', 'Remember', MB_OK, 1000 )
+            cFileimp := Getfile( { {'Windows Report Interpreter','*.Wrpt'}} ;
+               ,'Open Report Template', GetcurrentFolder() ,.f., .t. )
+            IF !EMPTY( cFileimp )
+               Winrepint( cFileimp )
+            ENDIF
+
+            RETURN
+         ENDIF
+      ENDIF
+      EasyReport (      ;
          Title     ,;                                                 // Title
       aheaders1 ,;                                                 // Header 1
       aheaders2 ,;                                                 // Header 2
@@ -441,7 +499,7 @@ PROCEDURE Treport(act)   // Test the Report
       ato       ,;                                                 // Totals
       Form_2.Grid_3.Cell( 3, 2 ) ,;                                // LPP
       Form_2.Grid_3.Cell( 8, 2 ) ,;                                // Dos Mode
-      .T., ; // Form_2.Grid_3.Cell( 9, 2 ) ,;                      // Preview
+      .T., ; // Form_2.Grid_3.Cell( 9, 2 ) ,;                      // Preview ALWAIS ACTIVE FOR TESTING
       cGraphic  ,;                                                 // Image
       Form_2.Grid_3.Cell( 1, 3 ) , Form_2.Grid_3.Cell( 1, 4 ) ,;   // At Row, At Col
       Form_2.Grid_3.Cell( 1, 5 ) , Form_2.Grid_3.Cell( 1, 6 ) ,;   // To Row, To Ccol
@@ -459,9 +517,9 @@ PROCEDURE Treport(act)   // Test the Report
       Form_2.Grid_3.Cell( 14, 2 ) )                                // NoDateTimeStamp
 
    CASE act = "IMPORT"
-      cFileimp := Getfile( { {'All report','*.rpt'},;    // acFilter
-      {'RPT Files', '*.rpt'} },;
-         'Open Image' )
+      cFileimp := Getfile( { {'All report','*.rpt'},;
+         {'RPT Files', '*.rpt'} },;
+         'Open Report Template' ,GetcurrentFolder() ,.f., .t.)
 
       IF !EMPTY( cFileimp ) .OR. FILE( cFileimp )
          rReport( cFileimp , a )
@@ -472,15 +530,30 @@ PROCEDURE Treport(act)   // Test the Report
 
    CASE act ="SAVE"
 
-      Ton := Msgyesno(padc("Save as template ?",55)+CRLF+'(Otherwise will be created as standard code.)')
+      aVo := InputWindow ( 'Enter choice for ', {'Output format :'},{1}, {{"Form Template","Standard Prg","W-R-Int. (as RowCol)"}} )
+      IF aVo [1] = Nil
+
+         RETURN
+      ENDIF
+
+      Ton := (aVo[1] = 1)
+
       IF Ton
          spt := space(7)
       ENDIF
 
-      cSaveFile := cFilePath(GetExeFileName())+ "\" + SubStr(Alias(),1,4) + '.Rpt'
-      cSaveFile := PutFile( { {"Report files (*.Rpt)", "*.rpt"}, {"All files (*.*)", "*.*"} }, , , ,cSaveFile , 1 )
+      cSaveFile := cFilePath(GetExeFileName())+ "\" + SubStr(Alias(),1,4) + IF(aVo[1] >= 3 ,'.Wrpt','.Rpt')
 
-      IF EMPTY( cSaveFile )
+      IF aVo[1] < 3
+         cSaveFile := PutFile( { {"Report files (*.Rpt)", "*.Rpt"} ;
+            ,{"Win Report Interpreter  (*.wrpt)","*.Wrpt"} ;
+            ,{"All files (*.*)", "*.*"} }, , , ,cSaveFile , 1 )
+      ELSE
+         cSaveFile := PutFile( { {"Win Report Interpreter  (*.wrpt)","*.Wrpt"}  ;
+            ,{"Report files (*.Rpt)", "*.Rpt"} ;
+            ,{"All files (*.*)", "*.*"} }, , , ,cSaveFile , 1 )
+      ENDIF
+      IF Empty( cSaveFile )
 
          RETURN
       ENDIF
@@ -488,6 +561,13 @@ PROCEDURE Treport(act)   // Test the Report
       IF File(cSaveFile)
          DELETE FILE &(cSaveFile)
       ENDIF
+
+      IF aVo[1] >= 3       // WinReport Interpreter
+         WrExport(cSavefile,aheaders1,aheaders2, aFormats ,a,aWidths,ato, Inde_On )
+
+         RETURN
+      ENDIF
+
       IF Ton
          aadd(aSrc,'DEFINE REPORT TEMPLATE ')
       ELSE
@@ -556,8 +636,8 @@ PROCEDURE Treport(act)   // Test the Report
          aadd(aSrc,'')
       ENDIF
 
-      aeval(aSrc,{|x| STRFILE( x+CRLF, cSaveFile, .T.) } )
-      // WriteFile(cSaveFile,aSrc)
+      WriteFile(cSaveFile,aSrc)
+
       MessageBoxTimeout ('File was created...', '', MB_OK, 1000 )
 
    ENDCASE
@@ -679,29 +759,29 @@ PROCEDURE rReport( cFile,nF )   // Import the File Report
          Form_2.Grid_3.Cell( 7, 2 ):= ascan(apapeles,uval)
 
       CASE "PREVIEW" $ cObj
-         Form_2.Grid_3.Cell( 9, 2 ):= if (upper(uVal)="PREVIEW",.T.,ascan(aTrue,uVal) > 0)
+         Form_2.Grid_3.Cell( 9, 2 ):= IF (upper(uVal)="PREVIEW",.T.,ascan(aTrue,uVal) > 0)
 
       CASE "SELECT" $ cObj
-         Form_2.Grid_3.Cell( 10, 2 ):= if (upper(uVal)="SELECT",.T.,ascan(aTrue,uVal) > 0)
+         Form_2.Grid_3.Cell( 10, 2 ):= IF (upper(uVal)="SELECT",.T.,ascan(aTrue,uVal) > 0)
 
       CASE "IMAGE" $ cObj
          cTmp:= &(SUBSTR(cObj,at("{",cObj) ))
          aeval(cTmp, {|x,y|Form_2.Grid_3.Cell(1,y+1):= x })
 
       CASE "MULTIPLE" $ cObj
-         Form_2.Grid_3.Cell( 2, 2 ):= if (upper(uVal)="MULTIPLE",.T.,ascan(aTrue,uVal) > 0)
+         Form_2.Grid_3.Cell( 2, 2 ):= IF (upper(uVal)="MULTIPLE",.T.,ascan(aTrue,uVal) > 0)
 
       CASE "DOSMODE" $ cObj
-         Form_2.Grid_3.Cell( 8, 2 ):= if (upper(uVal)="DOSMODE",.T.,ascan(aTrue,uVal) > 0)
+         Form_2.Grid_3.Cell( 8, 2 ):= IF (upper(uVal)="DOSMODE",.T.,ascan(aTrue,uVal) > 0)
 
       CASE "LANDSCAPE" $ cObj
-         Form_2.Grid_3.Cell( 13, 2 ):= if (upper(uVal)="LANDSCAPE",1,IF(ascan(aTrue,UPPER(uVal))>0,1,2) )
+         Form_2.Grid_3.Cell( 13, 2 ):= IF (upper(uVal)="LANDSCAPE",2,IF(ascan(aTrue,UPPER(uVal))>0,1,2) )
 
       CASE "PORTRAIT" $ cObj
-         Form_2.Grid_3.Cell( 13, 2 ):= if (upper(uVal)="PORTRAIT",1,IF(ascan(aTrue,UPPER(uVal))>0,1,2) )
+         Form_2.Grid_3.Cell( 13, 2 ):= IF (upper(uVal)="PORTRAIT",1,IF(ascan(aTrue,UPPER(uVal))>0,1,2) )
 
       CASE "NODATETIMESTAMP" $ cObj
-         Form_2.Grid_3.Cell( 14, 2 ):= if (upper(uVal)="NODATETIMESTAMP",.T.,ascan(aTrue,uVal) > 0)
+         Form_2.Grid_3.Cell( 14, 2 ):= IF (upper(uVal)="NODATETIMESTAMP",.T.,ascan(aTrue,uVal) > 0)
 
       CASE "GROUPED" $ cObj
          cTmp := upper(REMLEFT(REMRIGHT(SUBSTR(cObj,at("BY",cObj)+3),"'"),"'"))
@@ -720,52 +800,52 @@ PROCEDURE rReport( cFile,nF )   // Import the File Report
 
 PROCEDURE MOVE_Col (action)
 
-   LOCAL aux, nCol_Disp, cCnt
-   LOCAL Grid_col ,aCv := Array(5),cv , aVt := Array(5),aHo, aHd
+   LOCAL aux,nCol_Disp, cCnt, aCv := Array(5),cv , aVt := Array(5),aHo, aHd
+   LOCAL NoCln := 1
 
-   IF Form_2.Grid_2.Itemcount = 0
-
-      RETURN
-   ENDIF
-
-   aux      := Form_2.Grid_2.Value
-   Grid_col := aux[2]
-   cCnt     := GRID_ColumnCount ("Grid_2","Form_2")
-
-   IF Grid_col < 2 .OR. Grid_col > cCnt
+   aux := get_col()
+   IF aux [1] > 0
+      nCol_Disp := aux [1]
+      cCnt := aux[2]
+   ELSE
 
       RETURN
    ENDIF
-
-   nCol_Disp := GRID_GetColumnDisplayPos ("Grid_2", "Form_2", Grid_Col)
 
    IF action = 1
-      nCol_Disp --  // Move column: LEFT
+      nCol_Disp := nCol_Disp - noCln  // Move column: LEFT
    ELSE             // = 2
-      nCol_Disp ++  // Move column: RIGTH
+      nCol_Disp := nCol_Disp + Nocln  // Move column: RIGTH
    ENDIF
 
+   IF Form_2.Grid_2.ColumnWidth(nCol_Disp) = 0    // Emulate Column deletion
+      NoCln := 2
+      IF action = 1
+         nCol_Disp --  // Move column: LEFT
+      ELSE             // = 2
+         nCol_Disp ++  // Move column: RIGTH
+      ENDIF
+   ENDIF
+   */
    IF nCol_Disp >= 2 .AND. nCol_Disp <= cCnt
       // Move Header
-      aho := Form_2.Grid_2.HEADER(nCol_disp)
-      aHd := Form_2.Grid_2.HEADER( nCol_disp+ if(action=1,1,-1))
+      aho := Form_2.Grid_2.HEADER(nCol_disp)                                   // Colum destination
+      aHd := Form_2.Grid_2.HEADER( nCol_disp+ IF(action=1,NoCln,-NoCln))       // Column to move
+
       Form_2.Grid_2.HEADER(nCol_disp):= aHd
-      Form_2.Grid_2.HEADER( nCol_disp+ if(action=1,1,-1)):= aHo
+      Form_2.Grid_2.HEADER( nCol_disp+ IF(action=1,NoCln,-NoCln)):= aHo
 
       // Move Columns
       FOR EACH cv in aCv
          aCv[cv:__enumIndex()]:=Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp )
-         aVt[cv:__enumIndex()]:=Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp+ if(action=1,1,-1) )
+         aVt[cv:__enumIndex()]:=Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp+ IF(action=1,NoCln,-NoCln))
          Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp ):= aVt[cv:__enumIndex()]
-         Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp+ if(action=1,1,-1) ) := aCv[cv:__enumIndex()]
+         Form_2.Grid_2.Cell( cv:__enumIndex(), nCol_disp+ IF(action=1,NoCln,-NoCln) ) := aCv[cv:__enumIndex()]
       NEXT
+      */
       Form_2.Grid_2.setfocus
+      Form_2.Grid_2.VAlue := {1,nCol_Disp }
 
-      IF action = 1
-         _pushkey( VK_LEFT )
-      ELSE
-         _pushKey( VK_RIGHT )
-      ENDIF
    ENDIF
 
    Form_2.Grid_2.Refresh
@@ -797,7 +877,410 @@ FUNCTION GRID_ColumnCount ( cControlName, cParentForm )
    ENDIF
 
    RETURN LISTVIEW_GETCOLUMNCOUNT ( GetControlHandle ( cControlName, cParentForm ) )
+   /*
+   */
 
+PROCEDURE DELETE_Col ()
+
+   LOCAL Tval := get_col()
+
+   // nCol := tVal[1]
+   // TotalColumns := tVal[2]
+   IF tVal[1] > 0
+      IF MsgYesNo("Are you sure ?","Deleting Column "+Form_2.Grid_2.HEADER( tVal[1] ) )
+         // It is not a real deletion but it only hides the affected column
+         // Following zero-width columns will be discarded by the processing
+         Form_2.Grid_2.ColumnWidth(tVal[1]):= 0
+         // Reposition the focus on grid
+         IF tVal[1] < tVAl[2]
+            _pushKey( VK_RIGHT )
+         ELSE
+            _pushKey( VK_LEFT )
+         ENDIF
+      ENDIF
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+FUNCTION Get_Col ()
+
+   LOCAL aux, nCol_Disp, cCnt, Grid_col
+
+   IF Form_2.Grid_2.Itemcount = 0
+
+      RETURN {0,0}
+   ENDIF
+
+   aux      := Form_2.Grid_2.Value
+
+   Grid_col := aux[2]
+   cCnt     := GRID_ColumnCount ("Grid_2","Form_2")
+
+   IF Grid_col < 2 .OR. Grid_col > cCnt
+      msgstop("Please select a valid column!")
+
+      RETURN {0,0}
+   ENDIF
+
+   nCol_Disp := GRID_GetColumnDisplayPos ("Grid_2", "Form_2", Grid_Col)
+
+   RETURN {nCol_disp,cCnt}
+   /*
+   */
+
+FUNCTION WrExport (cSavefile,aheaders1,aheaders2,aFormats,a,awidths, atot ,inde_on)
+
+   LOCAL asrc := {}, cTmp , _dummy, cNF, nCol := 80, tFld, nCip := 0
+   LOCAL ntotalchar ,aFsize := {80,96,120,140,160}, anFsize := {12,10,8,7,6}
+   LOCAL nlmargin := Form_2.Grid_3.Cell( 5, 2 ) , ntoprow := Form_2.Grid_3.Cell( 6, 2 )
+   LOCAL Mxrow, Hbprn, StrTot := '{', uTot := ascan(aTot,.T. ) > 0
+   LOCAL eTot   := {},ISEVERYPAGE := (Form_2.Grid_3.Cell( 11, 2 )=2 )
+   LOCAL WFsize ,isGroup := (Form_2.Grid_3.Cell( 11, 2 )> 2 ), eSH, sSplash
+   LOCAL cLang := hb_userlang()
+
+   DEFAULT inde_on to "NONE"
+
+   DO CASE
+
+   CASE "it" $ cLang
+      sSplash := 'Attendere......... Creazione stampe!' //ITALIAN
+
+   CASE "fr" $ cLang
+      sSplash := "S’il vous plaît patienter...... Création d’impressions !" //FRENCH
+
+   CASE "es" $ cLang
+      sSplash := '... Por favor espere ...    Trabajo en proceso' //SPANISH
+
+   CASE "pt" $ cLang
+      sSplash := '... Aguarde ......... Criando impressões!'   //PORTUGUESE
+
+   CASE "de" $ cLang
+      sSplash := '... Warten Sie bitte...    Arbeiten Sie im Gange' //GERMAN
+
+   CASE "el" $ cLang
+      sSplash := "?e??µ??ete ......... ??µ??????a e?t?p?se??!" // GREEK
+
+   CASE "ru" $ cLang
+      sSplash := 'Ïîäîæäèòå ......... Èäåò îáðàáîòêà!' // RUSSIAN
+
+   CASE "uk" $ cLang
+      sSplash := "Çà÷åêàéòå ......... Âèêîíóþ îáðîáêó!"// UKRAINIAN
+
+   CASE "pl" $ cLang
+      sSplash := "Poczekaj ......... Tworzenie wydruków!" // POLISH
+
+   CASE "sl" $ cLang
+      sSplash := "Pocakaj ......... Ustvarjanje tiskalnikov!" // SLOVENIAN
+
+   CASE "sr" $ cLang
+      sSplash := 'Simama ......... Kuunda Prints!'//C SERBIAN
+
+   CASE "bg" $ cLang
+      sSplash := "????????? ......... ????????? ?? ??????????!" // BULGARIAN
+
+   CASE "hu" $ cLang
+      sSplash := "Várj ... Nyomtatás létrehozása!" // HUNGARIAN
+
+   CASE "cs" $ cLang
+      sSplash := "Cekaj ... ... Stvaranje ispisa!" // CZECH
+
+   CASE "sk" $ cLang
+      sSplash :=  "Pockajte ......... Vytváranie výtlackov!" //SLOVAK
+
+   CASE "nl" $ cLang
+      sSplash := 'Wacht ......... Prints maken!' // DUTCH
+
+   CASE "fi" $ cLang
+      sSplash := "Odota ......... Tulosten luominen!" // FINNISH
+
+   CASE "sv" $ cLang
+      sSplash := "Vänta ......... Skapa bilder!" // SWEDISH
+
+   OTHERWISE
+      sSplash :=  '... Please wait ...    Work in Progress'
+
+   ENDCASE
+
+   aadd(aSrc,'!HBPRINT')
+   aadd(aSrc,'# REPORT.MOD This Line Will be ignored!' )
+   aadd(aSrc,'# case ncpl= 80    nfsize:=12 ' )
+   aadd(aSrc,'# case ncpl= 96    nfsize:=10 ' )
+   aadd(aSrc,'# case ncpl= 120   nfsize:=8  ' )
+   aadd(aSrc,'# case ncpl= 140   nfsize:=7  ' )
+   aadd(aSrc,'# case ncpl= 160   nfsize:=6  ' )
+   aadd(aSrc,'')
+
+   cTmp := ' ['
+   aeval(aheaders1,{|x,y| cTmp += repl('-',awidths[y])+' ',_dummy := x } )
+
+   ntotalchar := len(cTmp)                                     // Retrieve MaxLenght
+   aeval(aFsize,{|x| IF( x <= ntotalchar, nCol := x , ) } )    // SET automatic CPL
+
+   // Calculate MaxRow
+   Hbprn := Hbprinter():New
+   IF Form_2.Grid_3.Cell( 10, 2 )
+      hbprn:selectprinter("" ,Form_2.Grid_3.Cell(  9, 2 )) // Select printer
+   ELSE
+      hbprn:selectprinter( ,Form_2.Grid_3.Cell(  9, 2 ))   // Printer default
+   ENDIF
+   IF Hbprn:Error != 0
+      MessageBoxTimeout ("An error occurred in the printer's management", 'Export failed', MB_OK, 1000 )
+
+      RETURN NIL
+   ENDIF
+   hbprn:setdevmode( 0x00000002 ,Form_2.Grid_3.Cell( 7, 2 ) ) // Set Papaersize
+   hbprn:definefont("_xT_","Courier New",AnFsize[ascan(aFsize,ncol)],,,.F.,.F.,.F.,.F.) //Need a font
+   Hbprn:Setpage( Form_2.Grid_3.Cell( 13, 2 ),Form_2.Grid_3.Cell( 7, 2 ),"_xT_"  )  // Set Orientation
+   Mxrow := Hbprn:maxrow
+   Hbprn:End()
+
+   WFsize := NTrim(anFsize[ascan(aFsize,nCol)])
+
+   // Declare
+   aadd(aSrc,'[DECLARE]'+NTrim( nCol )+ IF(Form_2.Grid_3.Cell( 10, 2 ),'/SELE','') )
+   aadd(aSrc,'SET PAPERSIZE '+apapeles[Form_2.Grid_3.Cell( 7, 2 )] )
+   aadd(aSrc,'SET UNITS ROWCOL')
+   // only  for unit mm or pdf ?
+   //  aadd(aSrc,'SET PRINT MARGINS TOP '+ NTrim( ntoprow) +' LEFT '+NTrim( nlmargin ) )
+   aadd(aSrc,'SET ORIENTATION '+IF(Form_2.Grid_3.Cell( 13, 2 ) > 1,'LANDSCAPE','PORTRAIT') )
+   aadd(aSrc,'SET PREVIEW '+IF (Form_2.Grid_3.Cell(  9, 2 ),'ON','OFF') )
+   aadd(aSrc,'SET CHARSET ANSI_CHARSET')
+   aadd(aSrc,'SET SPLASH TO '+sSplash)
+   aadd(aSrc,'DEFINE FONT Fb  NAME [COURIER NEW] SIZE '+WFsize+' BOLD' )
+   aadd(aSrc,'DEFINE FONT Ft  NAME [COURIER NEW] SIZE '+NTrim(anFsize[ascan(aFsize,nCol)]+2 )+' BOLD' )
+   aadd(aSrc,'Var _ML '+NTrim(nlmargin)+' N' )
+
+   IF uTot           // Need a separate counter
+      IF isgroup
+         aeval(aTot,{|x,y| IF(x ,StrTot += a[y]+',', )} )
+      ELSE
+         aeval(aTot,{|x| IF(x ,StrTot += '0,', )} )
+      ENDIF
+      StrTot := remRight (StrTot,',')+'}'
+      IF !isgroup
+         aadd(aSrc,'Var aC '+StrTot +' A')
+      ENDIF
+   ENDIF
+   aadd(aSrc,'')
+
+   IF isgroup
+      tFld := DBFIELDINFO(DBS_TYPE, FieldPos( Inde_On ))
+
+      SWITCH tFld
+
+      CASE "C"  // Char
+         eSH := 'Ltrim('+inde_on+')'
+         EXIT
+
+      CASE "N"  // Number
+         eSH := 'TRANSFORM ('+Inde_On+',"'+ aformats[ascan(a,inde_on)] +'" )'
+         EXIT
+
+      CASE "M"  // Memo
+         Msgstop("You can not group on MEMO Fields !", "Error" )
+
+         RETURN NIL
+
+      CASE "D"  // Date
+         eSh := 'TRANSFORM ('+Inde_On+',"@D")'
+         EXIT
+
+      CASE "L"  // Logical
+         eSH := 'TRANSFORM ('+Inde_On+',"L")'
+         EXIT
+
+      ENDSWITCH
+
+      aadd(aSrc,'// (GroupField, Head string, Column string, count total for, where the gtotal, total string, total column, paper_feed_every_group')
+      aadd(aSrc,'// total for = Fieldname or array with multiple fieldname')
+      aadd(aSrc,'// Example: Example: GROUP first {||rtrim(first)+space(1)+"***"} AUTO {CODE,INCOMING} AUTO [** Subtotal **] 6 .T.')
+      aadd(aSrc,'')
+
+      IF uTot  // need a counter
+         aadd(aSrc,'SET TOTALSTRING space(_ML)+[*** Total ***]')
+         aadd(aSrc,'SET INLINESBT .F.')
+         aadd(aSrc,'SET INLINETOT .F.')
+         aadd(aSrc,'SET SUBTOTALS .T.')
+         aadd(aSrc,'SET GROUPBOLD .T.')
+         aadd(aSrc,'// SET SHOWGHEAD .T.')
+         aadd(aSrc,'// SET GTGROUPCOLOR BLACK')
+         aadd(aSrc,'// SET HGROUPCOLOR RED')
+         aadd(aSrc,'')
+         aadd(aSrc,'GROUP '+ Inde_On +' {||([**  ** ]+'+ eSH +')} (_ML) '+StrTot+' AUTO  space(_ML)+[** Subtotal **] AUTO .F. ')
+      ELSE    // No Count
+         aadd(aSrc,'SET TOTALSTRING space(_ML)')
+         aadd(aSrc,'SET INLINESBT .F.')
+         aadd(aSrc,'SET INLINETOT .F.')
+         aadd(aSrc,'SET SUBTOTALS .F.')
+         aadd(aSrc,'SET GROUPBOLD .T.')
+         aadd(aSrc,'// SET SHOWGHEAD .T.')
+         aadd(aSrc,'// SET GTGROUPCOLOR BLACK')
+         aadd(aSrc,'// SET HGROUPCOLOR RED')
+         aadd(aSrc,'')
+         aadd(aSrc,'GROUP '+ Inde_On +' {||([**  ** ]+'+ eSH +')} (_ML) {} AUTO [] AUTO .F. ')
+      ENDIF
+
+      aadd(aSrc,'')
+
+   ENDIF
+   // The Head definitions
+   aadd(aSrc,'[HEAD]'+NTrim(9+ntoprow) )
+   aadd(aSrc,'( nline +='+ NTrim(ntoprow)+' )' )
+   aadd(aSrc,'nline,   (_ML)     SAY ['+_HMG_MESSAGE [9]+'] Font [COURIER NEW] SIZE '+WFsize)
+   aadd(aSrc,'nline,   '+NTrim(ntotalchar/2)+'        SAY ['+ Form_2.Title1.value +'] Font Ft ALIGN CENTER')
+   aadd(aSrc,'nline+1, '+NTrim(ntotalchar/2)+'        SAY ['+ Form_2.Title2.value +'] Font Ft ALIGN CENTER')
+   IF Form_2.Grid_3.Cell( 14, 2 ) = .F.   // Print Date and Time
+      aadd(aSrc,'nline,   ('+NTrim(len(cTmp)-10-nlmargin) +'+_ML) SAY date() Font [COURIER NEW] SIZE '+WFsize )
+      aadd(aSrc,'nline+1, ('+NTrim(len(cTmp)-10-nlmargin) +'+_ML) SAY time() Font [COURIER NEW] SIZE '+WFsize )
+   ENDIF
+   aadd(aSrc,'nline,   (5+_ML)   SAY hb_ntos( npag ) Font [COURIER NEW] SIZE '+WFsize )
+
+   aadd(aSrc,'nline+3, (_ML) SAY '+cTmp+'] Font [COURIER NEW] SIZE '+WFsize )
+   cTmp := ' ['
+   aeval(aheaders1,{|x,y| cTmp += x+repl(' ',awidths[y]-len(x))+' '} )
+   aadd(aSrc,'nline+4, (_ML) SAY '+cTmp+'] Font fb ')
+   cTmp := ' ['
+   aeval(aheaders2,{|x,y| cTmp += x+repl(' ',awidths[y]-len(x))+' '} )
+   aadd(aSrc,'nline+5, (_ML) SAY '+cTmp+'] Font fb ')
+   cTmp := ' ['
+   aeval(aheaders1,{|x,y| cTmp += repl('-',awidths[y])+' ',_dummy := x } )
+   aadd(aSrc,'nline+6, (_ML) SAY '+cTmp+'] Font [COURIER NEW] SIZE '+WFsize )
+
+   IF !empty( Form_2.Grid_3.Cell( 1, 2 ) )
+      IF !Form_2.Grid_3.Cell( 2, 2 )
+         aadd(aSrc, 'IF ( npag = 1 )')
+      ENDIF
+      aadd(aSrc, '   @ '+NTrim(Form_2.Grid_3.Cell( 1, 3 ))+','+NTrim(Form_2.Grid_3.Cell( 1, 4 )+2) ;
+         +' PICTURE '+ Form_2.Grid_3.Cell( 1, 2 )+' SIZE ' ;
+         +NTrim(Form_2.Grid_3.Cell( 1, 5 )-Form_2.Grid_3.Cell( 1, 3 )-4 )+',';
+         +NTrim(Form_2.Grid_3.Cell( 1, 6 )-Form_2.Grid_3.Cell( 1, 4 )-3 ) )
+      IF !Form_2.Grid_3.Cell( 2, 2 )
+         aadd(aSrc, 'EndIF')
+      ENDIF
+
+   ENDIF
+   aadd(aSrc,'')
+
+   // The Body Definitions
+   // Add Adaptative Body Height     normal -12  with every and (!utot ,-2 ,-3 )
+   aadd(aSrc,'[BODY]'+NTrim(max(Form_2.Grid_3.Cell( 3, 2 ),mxrow) -IF(ISEVERYPAGE,if(utot,15,14),12) ) )
+
+   IF Utot .and. !isgroup
+      FOR EACH cNf in aTot
+         IF cNF
+            nCip ++
+            aadd(aSrc,'(aC['+NTrim(nCip)+'] += Field->'+A[cNf:__enumIndex()]+')')
+         ENDIF
+      NEXT
+   ENDIF
+   nCol := nLmargin
+   FOR EACH cNf in a
+      tFld := DBFIELDINFO(DBS_TYPE, FieldPos( cNf ))
+      SWITCH tFld
+
+      CASE "C"  // Char
+         aadd(aSrc,'nline, '+NTrim( nCol )+' SAY (substr(field->'+cNf+',1,'+NTrim(int(awidths[cNf:__enumIndex()] ) )+') ) Font [COURIER NEW] SIZE '+WFsize )
+         EXIT
+
+      CASE "N"  // Number
+         aadd(aSrc,'nline, '+NTrim( nCol )+' SAY TRANS(Field->'+cNf+',"'+aformats[cNf:__enumIndex()]+'") Font [COURIER NEW] SIZE '+WFsize )
+         IF aTot[cNf:__enumIndex()]
+            aadd (eTot,'   @ eline+1, '+NTrim( nCol )+' SAY IF(.T.,TRANS(ac[|],"'+aformats[cNf:__enumIndex()]+'"),[]) Font Fb ')
+         ENDIF
+         EXIT
+
+      CASE "M"  // Memo
+         aadd(aSrc,'nline, '+NTrim( nCol )+' MEMOSAY Field->'+cNf+' LEN '+NTrim(int(awidths[cNf:__enumIndex()] ) )+' Font [COURIER NEW] SIZE '+WFsize )
+         EXIT
+
+      CASE "D"  // Date
+      CASE "L"  // Logical
+         aadd(aSrc,'nline, '+NTrim( nCol )+' SAY field->'+cNf+' Font [COURIER NEW] SIZE '+WFsize )
+         EXIT
+
+      ENDSWITCH
+      nCol += int(awidths[cNf:__enumIndex()] )+1
+   NEXT
+   aadd(aSrc,'')
+
+   // The Feet definitions
+   aadd(aSrc,'[FEET]2')
+   IF uTot .and. !isGroup
+      aadd(aSrc,'   @ Eline,(_ML) SAY IF(Last_pag, [*** Total ***],[])  Font FB')
+      FOR EACH cNf in ETot
+         CnF := STRTRAN(cNf,"|",NTrim(cNf:__enumIndex()) )
+         IF ! ISEVERYPAGE
+            CnF := STRTRAN(cNf,".T.","Last_Pag" )
+         ENDIF
+         aadd(aSrc,cNf)
+      NEXT
+   ENDIF
+   aadd(aSrc,'[END]')
+
+   writefile(cSavefile,aSrc)  // WriteFile is more fast than  StrFile
+
+   MessageBoxTimeout ('File was created...', '', MB_OK, 1000 )
+
+   RETURN NIL
+   /*
+   */
+
+PROCEDURE Writefile(filename,arrayname)
+
+   LOCAL f_handle
+
+   * open file and position pointer at the end of file
+   IF VALTYPE(filename) == "C"
+      f_handle := FOPEN(filename,2)
+      *- IF not joy opening file, create one
+      IF Ferror() <> 0
+         f_handle := Fcreate(filename,0)
+      ENDIF
+      FSEEK(f_handle,0,2)
+   ELSE
+      f_handle := filename
+      FSEEK(f_handle,0,2)
+   ENDIF
+
+   IF VALTYPE(arrayname) == "A"
+      * IF its an array, do a loop to write it out
+      * msginfo(str(len(arrayname)),"FKF")
+      aeval( Arrayname,{|x|FWRITE(f_handle,x+CRLF )} )
+   ELSE
+      * must be a character string - just write it
+      FWRITE(f_handle,arrayname+CRLF )
+      //msgbox(Arrayname,"Array")
+   ENDIF
+
+   * close the file
+   IF VALTYPE(filename)=="C"
+      Fclose(f_handle)
+   ENDIF
+
+   RETURN
+   /*
+   */
+
+PROCEDURE Check_db_Index ( Arg1,Lvl )
+
+   IF lvl > 2
+      IF ! File ( cFilePath( GetExeFileName() )+'\'+Alias()+'.Cdx' )
+         MsgExclamation("The function require an "+Alias()+".Cdx","File Missing: Aborting.")
+
+         RETURN
+      ENDIF
+      ORDLISTADD(ALIAS())
+      (alias())->(ORDSETFOCUS('I'+ arg1))
+      (alias())->(dbgotop())
+
+      RETURN
+   ENDIF
+
+   RETURN
+   /*
+   */
 #pragma BEGINDUMP
 
 #include <mgdefs.h>
@@ -819,6 +1302,5 @@ HB_FUNC ( LISTVIEW_GETCOLUMNORDERARRAY )
         HB_STORNI( (int)(*(p+i))+1, -1, i+1);
    GlobalFree (p);
 }
-
 #pragma ENDDUMP
 

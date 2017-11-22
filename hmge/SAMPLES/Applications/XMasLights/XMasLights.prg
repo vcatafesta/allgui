@@ -76,7 +76,7 @@ PROCEDURE Main()
          NOTIFYTOOLTIP PROGRAM ;
          ON NOTIFYCLICK HideShow()
 
-      DEFINE TIMER Timer_0 INTERVAL 250 ACTION SetRegions()
+      DEFINE TIMER Timer_0 INTERVAL 250 ACTION SetRegions() ONCE
 
    END WINDOW
 
@@ -107,8 +107,6 @@ STATIC PROCEDURE SetRegions()
       NEXT
 
       r_menu()
-
-      Form_0.Timer_0.Release
 
    ENDIF
 
@@ -285,7 +283,7 @@ HB_FUNC( INITIMAGE )
    HWND hwnd;
    int Style;
 
-   hwnd = (HWND) hb_parnl(1);
+   hwnd = (HWND) HB_PARNL(1);
 
    Style = WS_CHILD | SS_BITMAP | SS_NOTIFY ;
 
@@ -298,7 +296,7 @@ HB_FUNC( INITIMAGE )
       hb_parni(3), hb_parni(4), 0, 0,
       hwnd, (HMENU) hb_parni(2), GetModuleHandle(NULL), NULL ) ;
 
-   hb_retnl( (LONG) h );
+   HB_RETNL( (LONG_PTR) h );
 }
 
 HB_FUNC( C_SETPICTURE )
@@ -307,9 +305,9 @@ HB_FUNC( C_SETPICTURE )
 
    hBitmap = (HBITMAP) LoadImage( GetModuleHandle(NULL), hb_parc(2), IMAGE_BITMAP, hb_parni(3), hb_parni(4), LR_CREATEDIBSECTION );
 
-   SendMessage( (HWND) hb_parnl(1), (UINT) STM_SETIMAGE, (WPARAM) IMAGE_BITMAP, (LPARAM) hBitmap );
+   SendMessage( (HWND) HB_PARNL(1), (UINT) STM_SETIMAGE, (WPARAM) IMAGE_BITMAP, (LPARAM) hBitmap );
 
-   hb_retnl( (LONG) hBitmap );
+   HB_RETNL( (LONG_PTR) hBitmap );
 }
 
 #pragma ENDDUMP

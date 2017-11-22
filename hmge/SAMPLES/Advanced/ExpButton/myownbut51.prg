@@ -210,14 +210,14 @@ FUNCTION OwnButtonPaint( pdis )
          IF ! Empty( _HMG_aControlBkColor[ i ] )
             hBrush := CreateSolidBrush( _HMG_aControlBkColor[ i, 1 ], _HMG_aControlBkColor[ i, 2 ], _HMG_aControlBkColor[ i, 3 ] )
             FILLRECT( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-            DELETEObject( hBrush )
+            DeleteObject( hBrush )
          ENDIF
       ENDIF
 
       _HMG_aControlFontColor[i ] := aButStyles[ iButStyle, 7 ]
 
       IF !Empty( aButMisc[ 2 ] )     // Picture
-         DELETEObject ( _hmg_aControlBrushhandle[i ] )
+         DeleteObject ( _hmg_aControlBrushhandle[i ] )
          nnnn := _SetBtnPicture (  hDC, _HMG_aControlPicture[ i ] )
          _hmg_aControlBrushHandle[i ] := nnnn
       ENDIF
@@ -247,14 +247,14 @@ FUNCTION OwnButtonPaint( pdis )
          IF ! Empty( _HMG_aControlBkColor[ i ] )
             hBrush := CreateSolidBrush( _HMG_aControlBkColor[ i, 1 ], _HMG_aControlBkColor[ i, 2 ], _HMG_aControlBkColor[ i, 3 ]   )
             FILLRECT( hDC, aBtnRc[ 1 ], aBtnRc[ 2 ], aBtnRc[ 3 ], aBtnRc[ 4 ], hBrush )
-            DELETEObject( hBrush )
+            DeleteObject( hBrush )
          ENDIF
       ENDIF
 
       _HMG_aControlFontColor[i ] := aButStyles[ iButStyle, 8 ]
 
       IF !Empty( aButMisc[ 2 ] )
-         DELETEObject ( _hmg_aControlBrushhandle[i ] )
+         DeleteObject ( _hmg_aControlBrushhandle[i ] )
          nnnn := _SetBtnPicture (  hDC, aButMisc[ 2 ] )
          _hmg_aControlBrushHandle[i ] := nnnn
       ENDIF

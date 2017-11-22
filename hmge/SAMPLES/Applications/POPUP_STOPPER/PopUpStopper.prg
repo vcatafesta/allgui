@@ -145,7 +145,7 @@ PROCEDURE PopUpStop( lBeep )
                   IF lBeep
                      PLAY WAVE 'STOP' FROM RESOURCE
                   ENDIF
-                  CLOSEApp(nItem)
+                  CloseApp(nItem)
                ELSEIF EMPTY(hMainWnd)
                   hMainWnd := aApps[nItem][2]
                   lFound := .T.
@@ -159,5 +159,5 @@ PROCEDURE PopUpStop( lBeep )
 
 FUNCTION GetIEversion()
 
-   RETURN( GetRegistryValue( HKEY_LOCAL_MACHINE, "Software\Microsoft\Internet Explorer", "Version" ) )
+   Return( GetRegistryValue( HKEY_LOCAL_MACHINE, "Software\Microsoft\Internet Explorer", "Version" ) )
 

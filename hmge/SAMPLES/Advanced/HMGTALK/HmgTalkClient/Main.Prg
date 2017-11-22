@@ -120,7 +120,7 @@ FUNCTION Read_MSG()
 
          IF Len(a_Msgs) > 0
 
-            READ_Nicks()
+            Read_Nicks()
 
             FOR a := 1 to Len(a_Msgs)
                Main.Grid_1.AddItem( a_Msgs[a] )

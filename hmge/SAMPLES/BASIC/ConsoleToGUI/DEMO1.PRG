@@ -38,7 +38,7 @@ FUNCTION Main()
          alltrim(cStreet2)+iif(!empty(cStreet2),";","")+alltrim(cCity)+" "+cState+"  "+cZipcode)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
    /****************************************************************************/
 
@@ -51,7 +51,7 @@ STATIC FUNCTION CheckEmpty(cVar, cMsg)
       lRetVal:=.f.
    ENDIF
 
-   RETURN(lRetVal)
+   return(lRetVal)
 
    /****************************************************************************/
    #define STATES_ARRAY { "AK = Alaska","AL = Alabama","AR = Arkansas","AZ = Arizona",;

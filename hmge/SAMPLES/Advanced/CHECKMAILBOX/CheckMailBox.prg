@@ -45,7 +45,7 @@ PROCEDURE main
          WriteIni( "Information", "Date", DTOC( Date() ), cIniFile )
          WriteIni( "Information", "Time", Time(), cIniFile )
       ELSE
-         DEFAULTs(.t.)
+         Defaults(.t.)
       ENDIF
 
       cAudioFile := GetIni( "Options", "Sound", cAudioFile, cIniFile )
@@ -166,7 +166,7 @@ FUNCTION LoadAccounts()
 
    NEXT
 
-   RETURN(aArray)
+   Return(aArray)
 
 FUNCTION ActToggle()
 
@@ -407,7 +407,7 @@ FUNCTION SaveConfig(aAcc, aSrv, aUsr, aPwd, aChk, cAudio, nInt, lShow)
       FERASE(cIniFile)
    ENDIF
 
-   DEFAULTs(.f.)
+   Defaults(.f.)
 
    FOR nItem := 1 To Len(aAcc)
 

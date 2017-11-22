@@ -133,7 +133,7 @@ FUNCTION topleftdown(form)
    ANIMATE WINDOW &form INTERVAL 300 MODE AW_VER_POSITIVE + AW_HOR_POSITIVE + AW_SLIDE
    SetFocus(hwnd)
 
-   RETURN(NIL)
+   return(NIL)
 
    /*
    */
@@ -146,7 +146,7 @@ FUNCTION toprightdown(form)
    ANIMATE WINDOW &form INTERVAL 500 MODE AW_VER_POSITIVE + AW_HOR_NEGATIVE + AW_SLIDE
    SetFocus(hwnd)
 
-   RETURN(NIL)
+   return(NIL)
 
    /*
    */
@@ -159,7 +159,7 @@ FUNCTION fromcenter(form)
    ANIMATE WINDOW &form INTERVAL 500 MODE AW_CENTER
    SetFocus(hwnd)
 
-   RETURN(NIL)
+   return(NIL)
 
    /*
    */
@@ -173,7 +173,7 @@ FUNCTION fade(hwnd)
    ShowWindow(hwnd)
    SetFocus(hwnd)
 
-   RETURN(NIL)
+   return(NIL)
 
    /*
    */
@@ -190,7 +190,7 @@ FUNCTION close_wnd(hwnd, lClose)
       Form_Main.Release()
    ENDIF
 
-   RETURN(NIL)
+   return(NIL)
 
    /*
    */

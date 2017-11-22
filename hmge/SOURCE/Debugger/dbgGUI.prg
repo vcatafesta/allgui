@@ -575,7 +575,7 @@ PROCEDURE ViewVars()
       cVarName  := HMG_Debugger():VarGetName( aVar )
       cValType  := HMG_Debugger():VarGetValType( aVar )
       xVarValue := HMG_Debugger():VarGetValue( aVar )
-      DISPLAYVars ( cVarName, xVarValue, aColor )
+      DisplayVars ( cVarName, xVarValue, aColor )
    ENDIF
 
    RETURN
@@ -698,11 +698,11 @@ PROCEDURE OnKeyPress_DisplayVars( nVKey, cFormName, cGridName, xVarValue, aObjRa
       IF nRow > 0 .AND. .NOT. Empty( cVarName )
          DO CASE
          CASE ValType( xVarValue ) == "A"
-            DISPLAYVars( cVarName, xVarValue[ nRow ], aColor )
+            DisplayVars( cVarName, xVarValue[ nRow ], aColor )
          CASE ValType( xVarValue ) == "H"
-            DISPLAYVars( cVarName, hb_HValueAt( xVarValue, nRow ), aColor )
+            DisplayVars( cVarName, hb_HValueAt( xVarValue, nRow ), aColor )
          CASE ValType( xVarValue ) == "O"
-            DISPLAYVars( cVarName, aObjRawValue[ nRow ], aColor )
+            DisplayVars( cVarName, aObjRawValue[ nRow ], aColor )
          ENDCASE
       ENDIF
    ELSEIF nVKey == VK_ESCAPE

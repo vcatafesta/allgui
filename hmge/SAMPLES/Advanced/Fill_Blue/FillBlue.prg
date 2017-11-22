@@ -86,7 +86,7 @@ FUNCTION FillBlue( hWnd )
       aRect[4] += 5
 
       brush := CreateSolidBrush( 0, 0, blue-- ) ; FillRect( hdc, aRect, brush )
-      DELETEObject( brush )
+      DeleteObject( brush )
 
       aRect[2] += 5
    NEXT

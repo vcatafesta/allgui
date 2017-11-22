@@ -9,10 +9,10 @@
 #if ! ( defined( __XHARBOUR__ ) )
 
 #undef _WIN32_WINNT
-#define _WIN32_WINNT     0x0600
+#define _WIN32_WINNT       0x0600
 
 #undef NTDDI_VERSION
-#define NTDDI_VERSION    0x06000000
+#define NTDDI_VERSION      0x06000000
 
 #define UNICODE
 

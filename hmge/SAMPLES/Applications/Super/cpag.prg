@@ -37,7 +37,7 @@ FUNCTION cpag()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -54,7 +54,7 @@ FUNCTION cpag()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -71,7 +71,7 @@ FUNCTION cpag()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -88,7 +88,7 @@ FUNCTION cpag()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
@@ -105,7 +105,7 @@ FUNCTION cpag()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE GRID grid_cpag
          parent form_cpag
@@ -185,7 +185,7 @@ FUNCTION cpag()
    form_cpag.center
    form_cpag.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION dados_cpag(parametro)
 
@@ -219,7 +219,7 @@ STATIC FUNCTION dados_cpag(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          contas_pagar->(ordsetfocus('data'))
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ENDIF
 
@@ -384,7 +384,7 @@ STATIC FUNCTION dados_cpag(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -397,7 +397,7 @@ STATIC FUNCTION dados_cpag(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
    END WINDOW
 
@@ -407,7 +407,7 @@ STATIC FUNCTION dados_cpag(parametro)
    form_dados.center
    form_dados.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir_cpag()
 
@@ -422,7 +422,7 @@ STATIC FUNCTION excluir_cpag()
       msgexclamation('Selecione uma informação','Atenção')
       contas_pagar->(ordsetfocus('data'))
 
-      RETURN(nil)
+      return(nil)
    ELSE
       IF msgyesno('Histórico : '+alltrim(contas_pagar->numero),'Excluir')
          IF lock_reg()
@@ -435,7 +435,7 @@ STATIC FUNCTION excluir_cpag()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar_cpag(parametro)
 
@@ -459,7 +459,7 @@ STATIC FUNCTION gravar_cpag(parametro)
          IF reccount() > _limite_registros
             msgstop('Limite de registros esgotado','Atenção')
 
-            RETURN(nil)
+            return(nil)
          ENDIF
       ENDIF
       contas_pagar->(dbappend())
@@ -491,7 +491,7 @@ STATIC FUNCTION gravar_cpag(parametro)
       atualizar_cpag()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar_cpag()
 
@@ -509,7 +509,7 @@ STATIC FUNCTION atualizar_cpag()
       contas_pagar->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_fornecedor(cform,ctextbtn)
 
@@ -543,7 +543,7 @@ STATIC FUNCTION procura_fornecedor(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION getcode_fornecedores(value)
 
@@ -599,7 +599,7 @@ STATIC FUNCTION getcode_fornecedores(value)
          backcolor _ciano_001
          nolines .T.
          lock .T.
-         READonly {.T.,.T.}
+         readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=fornecedores->codigo,thiswindow.release)
       end browse
@@ -613,7 +613,7 @@ STATIC FUNCTION getcode_fornecedores(value)
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(creg)
+   return(creg)
 
 STATIC FUNCTION find_fornecedores()
 
@@ -623,12 +623,12 @@ STATIC FUNCTION find_fornecedores()
 
    IF pesquisa == ''
 
-      RETURN(nil)
+      return(nil)
    ELSEIF fornecedores->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := fornecedores->(recno())
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_forma_pagamento(cform,ctextbtn)
 
@@ -662,7 +662,7 @@ STATIC FUNCTION procura_forma_pagamento(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION getcode_formas_pagamento(value)
 
@@ -718,7 +718,7 @@ STATIC FUNCTION getcode_formas_pagamento(value)
          backcolor _ciano_001
          nolines .T.
          lock .T.
-         READonly {.T.,.T.}
+         readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=formas_pagamento->codigo,thiswindow.release)
       end browse
@@ -732,7 +732,7 @@ STATIC FUNCTION getcode_formas_pagamento(value)
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(creg)
+   return(creg)
 
 STATIC FUNCTION find_formas_pagamento()
 
@@ -742,10 +742,10 @@ STATIC FUNCTION find_formas_pagamento()
 
    IF pesquisa == ''
 
-      RETURN(nil)
+      return(nil)
    ELSEIF formas_pagamento->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := formas_pagamento->(recno())
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 

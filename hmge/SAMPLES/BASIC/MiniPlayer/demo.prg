@@ -108,7 +108,7 @@ PROCEDURE ResumeButton_Click()
 
 PROCEDURE stopButton_Click()
 
-   CLOSEPlayer()
+   ClosePlayer()
    RefreshStop(FALSE)
    Form_1.Button_1.SetFocus()
 
@@ -150,7 +150,7 @@ STATIC PROCEDURE OpenMediaFile()
 
    LOCAL playCommand
 
-   CLOSEPlayer()
+   ClosePlayer()
    playCommand := "Open " + fileName + " type mpegvideo alias " + mediaName
    mciSendString(playCommand, NIL, 0, notifyHandle)
    playCommand := "Set " + mediaName + " time format milliseconds"

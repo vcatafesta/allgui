@@ -1062,7 +1062,7 @@ STATIC PROCEDURE SetCacheSize( nCache, lEnabled )
    IF EMPTY(nCache)
 
       IF MsgYesNo( "Reboot your computer for the changes to the cache settings to take place?", PROGRAM )
-         EXITWindows( EWX_REBOOT )
+         ExitWindows( EWX_REBOOT )
       ENDIF
 
    ENDIF

@@ -18,7 +18,7 @@ FUNCTION FWriteLn(h, cText)
 
    fwrite(h, cText + CRLF)
 
-   RETURN(NIL)
+   Return(NIL)
 
 FUNCTION InsDel(cOrig, nStart, nDelete, cInsert)
 
@@ -27,7 +27,7 @@ FUNCTION InsDel(cOrig, nStart, nDelete, cInsert)
    reason stuff() seemed to be causing GPFs when used with FiveWin.
    */
 
-   RETURN(left(cOrig, nStart - 1) + cInsert + substr(cOrig, nStart + nDelete))
+   Return(left(cOrig, nStart - 1) + cInsert + substr(cOrig, nStart + nDelete))
 
 FUNCTION Nstr(n, nLen, nDec)
 
@@ -43,7 +43,7 @@ FUNCTION Nstr(n, nLen, nDec)
       c := str(n, nLen, nDec)
    ENDIF
 
-   RETURN(ltrim(c))
+   Return(ltrim(c))
 
 FUNCTION ReplaceStr(cString, cOld, cNew)
 
@@ -65,7 +65,7 @@ FUNCTION ReplaceStr(cString, cOld, cNew)
 
    IF len(cWork) == 0 .or. o == 0 // Can't replace null strings!
 
-      RETURN(cWork)
+      Return(cWork)
    ENDIF
 
    DO WHILE (x := at(cOld, substr(cWork, i))) > 0
@@ -76,7 +76,7 @@ FUNCTION ReplaceStr(cString, cOld, cNew)
       i := x + n
    ENDDO
 
-   RETURN(cWork)
+   Return(cWork)
 
 FUNCTION IReplaceStr(cString, cOld, cNew)
 
@@ -92,7 +92,7 @@ FUNCTION IReplaceStr(cString, cOld, cNew)
 
    IF len(cWork) == 0 .or. o == 0 // Can't replace null strings!
 
-      RETURN(cWork)
+      Return(cWork)
    ENDIF
 
    cUpOld := upper(cOld)
@@ -107,7 +107,7 @@ FUNCTION IReplaceStr(cString, cOld, cNew)
       cUpWork := upper(cWork)
    ENDDO
 
-   RETURN(cWork)
+   Return(cWork)
 
 FUNCTION SetCentury(lToggle)
 
@@ -118,7 +118,7 @@ FUNCTION SetCentury(lToggle)
 
    */
 
-   RETURN(__SetCentury(lToggle))
+   Return(__SetCentury(lToggle))
 
 FUNCTION StoD(cDTOS)
 
@@ -132,7 +132,7 @@ FUNCTION StoD(cDTOS)
 
    set(_SET_DATEFORMAT, cDF)
 
-   RETURN(dNew)
+   Return(dNew)
 
 FUNCTION XCommit(lExclusive)
 
@@ -156,7 +156,7 @@ FUNCTION XCommit(lExclusive)
 
    DBSkip(0)
 
-   RETURN(NIL)
+   Return(NIL)
 
    // Stubs for common FiveWin function calls:
 
@@ -164,47 +164,47 @@ FUNCTION XCommit(lExclusive)
 
 FUNCTION CursorArrow()
 
-   RETURN(NIL)
+   Return(NIL)
 
 FUNCTION CursorWait()
 
-   RETURN(NIL)
+   Return(NIL)
 
 FUNCTION cValToChar(u)
 
-   RETURN(XtoC(u))
+   Return(XtoC(u))
 
 FUNCTION MessageBeep(nBeep)
 
-   RETURN(tone(100, 3))
+   Return(tone(100, 3))
 
 FUNCTION MsgAlert(cText, cCaption)
 
-   RETURN(alert(cText))
+   Return(alert(cText))
 
 FUNCTION MsgInfo(cText, cCaption)
 
-   RETURN(alert(cText))
+   Return(alert(cText))
 
 FUNCTION MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
 
-   RETURN(eval(bAction))
+   Return(eval(bAction))
 
 FUNCTION MsgRetryCancel(cText, cCaption)
 
-   RETURN(alert(cText, { "Retry", "Cancel" }) == 1)
+   Return(alert(cText, { "Retry", "Cancel" }) == 1)
 
 FUNCTION MsgStop(cText, cCaption)
 
-   RETURN(alert(cText))
+   Return(alert(cText))
 
 FUNCTION MsgYesNo(cText, cCaption)
 
-   RETURN(alert(cText, { "Yes", "No" }) == 1)
+   Return(alert(cText, { "Yes", "No" }) == 1)
 
 FUNCTION SysRefresh()
 
-   RETURN(NIL)
+   Return(NIL)
 
    #endif
 

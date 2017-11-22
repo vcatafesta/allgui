@@ -37,7 +37,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -54,7 +54,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -71,7 +71,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -88,7 +88,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
@@ -105,7 +105,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      END BUTTONex
+      end buttonex
 
       DEFINE SPLITBOX
          DEFINE GRID grid_caixa
@@ -190,7 +190,7 @@ FUNCTION caixa()
    form_caixa.center
    form_caixa.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION dados(parametro)
 
@@ -220,7 +220,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          caixa->(ordsetfocus('data'))
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ENDIF
 
@@ -328,7 +328,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -341,7 +341,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
    END WINDOW
 
@@ -351,7 +351,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir()
 
@@ -366,7 +366,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       caixa->(ordsetfocus('data'))
 
-      RETURN(nil)
+      return(nil)
    ELSE
       IF msgyesno('Histórico : '+alltrim(caixa->historico),'Excluir')
          IF lock_reg()
@@ -379,7 +379,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar(parametro)
 
@@ -388,13 +388,13 @@ STATIC FUNCTION gravar(parametro)
    IF empty(form_dados.tbox_001.value)
       msginfo('Preencha a data','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF empty(form_dados.tbox_002.value)
       msginfo('Preencha o histórico','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF parametro == 1
@@ -436,7 +436,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION atualizar()
 
@@ -459,5 +459,5 @@ STATIC FUNCTION atualizar()
       caixa->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 

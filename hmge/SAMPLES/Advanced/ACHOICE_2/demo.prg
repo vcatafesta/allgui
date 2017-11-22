@@ -148,7 +148,7 @@ STATIC FUNCTION GetTxtWidth( cText, nFontSize, cFontName ) // get the width of t
    hFont := InitFont( cFontName, nFontSize + 2 )
    nWidth := GetTextWidth( 0, cText, hFont )
 
-   DELETEObject( hFont )
+   DeleteObject( hFont )
 
    RETURN nWidth
 

@@ -213,7 +213,7 @@ FUNCTION OpenDataBase(cFileName,lCreate)
    ENDIF
    IF !empty(cFileName)
 
-      CLEARMRUList( )
+      ClearMRUList( )
 
       pDb := sqlite3_open( cFileName, lCreateIfNotExist )
 
@@ -249,7 +249,7 @@ FUNCTION OpenDataBase(cFileName,lCreate)
 
 FUNCTION CloseDataBase()
 
-   CLEARMRUList( )
+   ClearMRUList( )
    FrameDbu.SqlDbuClose.Enabled   := FALSE
    FrameDbu.SqlOpenTable.Enabled  := FALSE
    FrameDbu.SqlDbuBrowse.Enabled  := FALSE
@@ -401,7 +401,7 @@ FUNCTION CreateNewTable( oGrid, cTable )
    IF !sqlite3_exec( pDb, cQuery ) == SQLITE_OK
       MsgStop( "Can't create " + cTable, "Error" )
    ELSE
-      CLEARMRUList( )
+      ClearMRUList( )
       aTable := SQLITE_TABLES(pDb)
       FOR i:=1 to Len(aTable)
          AddMRUItem( aTable[i] , "SeleTable()" )

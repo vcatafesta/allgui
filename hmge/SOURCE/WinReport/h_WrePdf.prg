@@ -664,6 +664,15 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
          CASE ascan(arryPar,[TOTALSTRING])=2
             m->TTS := eval( chblk,arrypar,[TOTALSTRING] )
 
+         CASE ascan(arryPar,[GROUPBOLD])=2
+            Owr:aStat['GroupBold'] := (eval(blse,arrypar[3]))
+
+         CASE ascan(arryPar,[HGROUPCOLOR])=2
+            oWr:aStat['HGroupColor'] := oWr:UsaColor(eval(chblk,arrypar,[HGROUPCOLOR]))
+
+         CASE ascan(arryPar,[GTGROUPCOLOR])=2
+            oWr:aStat['GTGroupColor'] := oWr:UsaColor(eval(chblk,arrypar,[GTGROUPCOLOR]))
+
          CASE ascan(arryPar,[MONEY])=2
             _money:=eval(blse,arrypar[3])
 

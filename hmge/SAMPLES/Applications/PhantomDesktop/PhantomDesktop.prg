@@ -114,7 +114,7 @@ PROCEDURE DoPhantom()
       C_FillRect( hdc, aRect, hbrush )
 
       SelectObject( hdc, hold )
-      DELETEObject( hbrush )
+      DeleteObject( hbrush )
 
       DrawPicture( hdc, IF(EMPTY( nCustom ), cWallpaper, cPicture), IF(EMPTY( nCustom ), nStyle, nDisplay) )
 

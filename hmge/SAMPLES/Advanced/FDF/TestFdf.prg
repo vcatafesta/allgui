@@ -1058,11 +1058,11 @@ STATIC FUNCTION MACROCOMPILE(cStr, lMesg,cmdline,section)
          errorblock (bOld)
          IF control
             MsgMiniGuiError("Program FdF Manager"+CRLF+"Section "+section+CRLF+"I have found error on line "+;
-               ZAPs(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
+               zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
             Break
          ELSE
             MsgStop("I have found error on line "+;
-               ZAPs(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","Program FdF Manager Error")
+               zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","Program FdF Manager Error")
          ENDIF
       ENDIF
       xResult := cStr

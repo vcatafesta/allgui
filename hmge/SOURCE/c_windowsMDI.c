@@ -316,15 +316,15 @@ HB_FUNC( INITMDICHILDWINDOW )
 
    // Create the MDI child window
 
-   mcs.szClass = "MdiChildWndClass";      // window class name
-   mcs.szTitle = rgch;                    // window title
-   mcs.hOwner  = g_hInstance; // owner
-   mcs.x       = hb_parni( 3 );           // x position
-   mcs.y       = hb_parni( 4 );           // y position
-   mcs.cx      = hb_parni( 5 );           // width
-   mcs.cy      = hb_parni( 6 );           // height
-   mcs.style   = Style;                   // window style
-   mcs.lParam  = 0;                       // lparam
+   mcs.szClass = "MdiChildWndClass"; // window class name
+   mcs.szTitle = rgch;               // window title
+   mcs.hOwner  = g_hInstance;        // owner
+   mcs.x       = hb_parni( 3 );      // x position
+   mcs.y       = hb_parni( 4 );      // y position
+   mcs.cx      = hb_parni( 5 );      // width
+   mcs.cy      = hb_parni( 6 );      // height
+   mcs.style   = Style;              // window style
+   mcs.lParam  = 0;                  // lparam
    hwndChild   = ( HWND ) SendMessage( ( HWND ) HB_PARNL( 1 ), WM_MDICREATE, 0, ( LPARAM ) ( LPMDICREATESTRUCT ) &mcs );
 
    if( hwndChild != NULL )

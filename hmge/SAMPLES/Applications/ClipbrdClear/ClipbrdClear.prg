@@ -107,7 +107,7 @@ PROCEDURE ClipClear()
          MsgAlert( "The clipboard is not available now!" )
       ENDIF
 
-      CLOSEClipboard()
+      CloseClipboard()
 
    ENDIF
 
@@ -152,7 +152,7 @@ PROCEDURE ClipbrdView()
 
                cText := GetClipboardData( CF_TEXT )
 
-               CLOSEClipboard()
+               CloseClipboard()
 
             ENDIF
 
@@ -179,7 +179,7 @@ PROCEDURE ClipbrdView()
 
                hBitmap := GetClipboardData( CF_BITMAP )
 
-               CLOSEClipboard()
+               CloseClipboard()
 
                Form_2.Image_1.HBitmap := hBitmap
 

@@ -101,7 +101,7 @@ FUNCTION _ClearTics ( ControlName, ParentForm   )
    i := GetControlIndex ( ControlName, ParentForm )
    h := _HMG_aControlhandles [i]
 
-   CLEARTics ( h  )
+   ClearTics ( h  )
 
    RETURN NIL
 

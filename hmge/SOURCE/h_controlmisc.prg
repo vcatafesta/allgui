@@ -308,7 +308,7 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
       Value := IFEMPTY( Value, {}, Value )
 
       IF Len( Value ) == 0
-         CLEARIpAddress( c )
+         ClearIpAddress( c )
       ELSE
          SetIPAddress( c , Value [1] , Value [2] , Value [3] , Value [4] )
       ENDIF
@@ -822,7 +822,7 @@ FUNCTION _DeleteItem ( ControlName , ParentForm , Value )
       ENDIF
 
       AfterCount := TreeView_GetCount ( c )
-      DELETEdCount := BeforeCount - AfterCount
+      DeletedCount := BeforeCount - AfterCount
 
       IF _HMG_aControlInputmask [ix] == .F.
          IF DeletedCount == 1
@@ -2458,7 +2458,7 @@ FUNCTION _SetPicture ( ControlName , ParentForm , FileName )
          h := _HMG_aControlHeight [i]
       ENDIF
 
-      DELETEObject ( _hmg_aControlBrushHandle [i] )
+      DeleteObject ( _hmg_aControlBrushHandle [i] )
       _HMG_aControlPicture [i] := FileName
 
       _HMG_aControlBrushHandle [i] := C_SetPicture ( c , FileName , w , h , _HMG_aControlValue [i] , _HMG_aControlInputMask [i] , ;
@@ -2480,12 +2480,12 @@ FUNCTION _SetPicture ( ControlName , ParentForm , FileName )
 
    CASE t == 'BTNTEXT' .OR. t == 'BTNNUMTEXT'
 
-      DELETEObject ( _HMG_aControlSpacing [i][4] )
+      DeleteObject ( _HMG_aControlSpacing [i][4] )
       _HMG_aControlPicture [i] := FileName
       cImage := iif( ISARRAY ( Filename ), Filename [1], Filename )
       _HMG_aControlSpacing [i][4] := _SetBtnPicture ( _HMG_aControlSpacing [i][2] , cImage )
       IF ISARRAY ( Filename )
-         DELETEObject ( _HMG_aControlSpacing [i][5] )
+         DeleteObject ( _HMG_aControlSpacing [i][5] )
          _HMG_aControlSpacing [i][5] := _SetBtnPicture ( _HMG_aControlSpacing [i][3] , Filename [2] )
       ENDIF
 
@@ -2499,7 +2499,7 @@ FUNCTION _SetPicture ( ControlName , ParentForm , FileName )
          ReDrawWindow ( _HMG_aControlContainerHandle [i] )
          _HMG_aControlPicture [i] := FileName
          IF !Empty( _HMG_aControlHandles [i] )
-            DELETEObject ( h )
+            DeleteObject ( h )
          ENDIF
       ENDIF
 
@@ -2511,7 +2511,7 @@ FUNCTION _SetPicture ( ControlName , ParentForm , FileName )
             IF t <> "OBUTTON" .AND. IsAppXPThemed()
                ImageList_Destroy ( _HMG_aControlBrushHandle [i] )
             ENDIF
-            DELETEObject ( _HMG_aControlBrushHandle [i] )
+            DeleteObject ( _HMG_aControlBrushHandle [i] )
          ENDIF
 
          _HMG_aControlPicture [i] := FileName
@@ -2547,9 +2547,7 @@ STATIC FUNCTION _EnableToolbarButton ( ButtonName , FormName )
 
    LOCAL i , cCaption , c , bAction
 
-   i := GetControlIndex ( ButtonName, FormName )
-
-   IF i > 0
+   IF ( i := GetControlIndex ( ButtonName, FormName ) ) > 0
 
       EnableToolButton ( _HMG_aControlContainerHandle [i] , GetControlId ( ButtonName , FormName ) )
 
@@ -2561,10 +2559,12 @@ STATIC FUNCTION _EnableToolbarButton ( ButtonName , FormName )
          cCaption := Upper ( cCaption )
 
          IF ( i := At ( '&' , cCaption ) ) > 0
+
             c := Asc ( SubStr ( cCaption , i + 1 , 1 ) )
             IF c >= 48 .AND. c <= 90
                _DefineHotKey ( FormName , MOD_ALT , c , bAction )
             ENDIF
+
          ENDIF
 
       ENDIF
@@ -2577,9 +2577,7 @@ STATIC FUNCTION _DisableToolbarButton ( ButtonName , FormName )
 
    LOCAL i , cCaption , c
 
-   i := GetControlIndex ( ButtonName , FormName )
-
-   IF i > 0
+   IF ( i := GetControlIndex ( ButtonName , FormName ) ) > 0
 
       DisableToolButton ( _HMG_aControlContainerHandle [i] , GetControlId ( ButtonName , FormName ) )
 
@@ -2590,10 +2588,12 @@ STATIC FUNCTION _DisableToolbarButton ( ButtonName , FormName )
          cCaption := Upper ( cCaption )
 
          IF ( i := At ( '&' , cCaption ) ) > 0
+
             c := Asc ( SubStr ( cCaption , i + 1 , 1 ) )
             IF c >= 48 .AND. c <= 90
                _ReleaseHotKey ( FormName , MOD_ALT , c )
             ENDIF
+
          ENDIF
 
       ENDIF
@@ -2696,9 +2696,8 @@ FUNCTION _SetToolTip ( ControlName , ParentForm , Value , Page )
    LOCAL cValue As String
    LOCAL i , t , c , h
 
-   i := GetControlIndex ( ControlName , ParentForm )
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
 
-   IF i > 0
       Assign cValue := Value
       c := GetControlHandle ( ControlName , ParentForm )
       t := GetControlType ( ControlName , ParentForm )
@@ -2731,6 +2730,7 @@ FUNCTION _SetToolTip ( ControlName , ParentForm , Value , Page )
             ENDIF
          ENDIF
       ENDIF
+
    ENDIF
 
    RETURN NIL
@@ -2738,14 +2738,16 @@ FUNCTION _SetToolTip ( ControlName , ParentForm , Value , Page )
 FUNCTION _GetMultiToolTip ( ControlName , ParentForm , Item )  // GF 10/12/2010
 
    LOCAL nItem As Numeric
-   LOCAL i := GetControlIndex ( ControlName , ParentForm )
+   LOCAL i
 
-   IF i > 0
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
+
       Assign nItem := Item
       IF nItem <= _GetItemCount ( ControlName , ParentForm )
 
          RETURN ( _HMG_aControlToolTip [i] [nItem] )
       ENDIF
+
    ENDIF
 
    RETURN ''
@@ -2835,9 +2837,7 @@ FUNCTION _SetMultiCaption ( ControlName , ParentForm , Column , Value  )
    LOCAL nColumn As Numeric
    LOCAL i , h , t
 
-   i := GetControlIndex ( ControlName , ParentForm )
-
-   IF i > 0  // JD 11/30/2006
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0  // JD 11/30/2006
 
       h := _HMG_aControlhandles [i]
       t := GetControlType ( ControlName , ParentForm )
@@ -2885,9 +2885,7 @@ FUNCTION _SetMultiImage ( ControlName, ParentForm, Column, Value, lRightAlign )
 
    LOCAL i , h , t
 
-   i := GetControlIndex ( ControlName, ParentForm )
-
-   IF i > 0
+   IF ( i := GetControlIndex ( ControlName, ParentForm ) ) > 0
 
       h := _HMG_aControlhandles [i]
 
@@ -3269,8 +3267,8 @@ FUNCTION _EraseControl ( i, p )
 
    LOCAL mVar, t, hWnd, x
 
-   DELETEObject ( _HMG_aControlFontHandle [i] )
-   DELETEObject ( _HMG_aControlBrushHandle [i] )
+   DeleteObject ( _HMG_aControlFontHandle [i] )
+   DeleteObject ( _HMG_aControlBrushHandle [i] )
 
    IF _HMG_lOOPEnabled
       Eval ( _HMG_bOnControlDestroy, i )
@@ -3966,6 +3964,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
             SetProperty ( Arg1 , Arg3 , Arg4 , Arg5 , Arg6 )
 
          ELSE
+
             IF _IsControlDefined ( Arg4 , Arg1 )
 
                IF _IsControlSplitBoxed ( Arg4 , Arg1 )
@@ -3979,6 +3978,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
             ELSE
                MsgMiniGuiError( 'Control Does Not Belong To Container.' )
             ENDIF
+
          ENDIF
 
       ELSE
@@ -5232,9 +5232,9 @@ FUNCTION GetControlTabPage ( cControlName , cTabName , cParentWindowName )
 STATIC FUNCTION _IsControlSplitBoxed ( cControlName , cWindowName )
 
    LOCAL lSplitBoxed As Logical
-   LOCAL i := GetControlIndex ( cControlName, cWindowName )
+   LOCAL i
 
-   IF i > 0
+   IF ( i := GetControlIndex ( cControlName, cWindowName ) ) > 0
 
       IF ValType ( _HMG_aControlRow [i] ) == 'U' .AND. ValType ( _HMG_aControlCol [i] ) == 'U' .OR. ;
             "GRID" $ _HMG_aControlType [i] .AND. Empty ( _HMG_aControlRow [i] ) .AND. Empty ( _HMG_aControlCol [i] )
@@ -5439,7 +5439,7 @@ FUNCTION _SetWindowBackColor( FormHandle, aColor )
 
    LOCAL hBrush, i := AScan( _HMG_aFormHandles, FormHandle )
 
-   DELETEObject( _HMG_aFormBrushHandle [i] )
+   DeleteObject( _HMG_aFormBrushHandle [i] )
 
    hBrush := PaintBkGnd( FormHandle, aColor )
 
@@ -5596,7 +5596,7 @@ STATIC FUNCTION _SetBackColor ( ControlName, ParentForm , Value )
 
    CASE t == 'TAB'
       _HMG_aControlBkColor [i] := Value
-      DELETEObject ( _HMG_aControlBrushHandle [i] )
+      DeleteObject ( _HMG_aControlBrushHandle [i] )
       _HMG_aControlBrushHandle [i] := CreateSolidBrush ( Value [1], Value [2], Value [3] )
       SetWindowBrush ( c, _HMG_aControlBrushHandle [i] )
       RedrawWindow ( c )
@@ -6045,9 +6045,7 @@ FUNCTION _IsComboExtend ( ControlName, ParentForm )
 
    LOCAL i
 
-   i := GetControlIndex ( ControlName, ParentForm )
-
-   IF i > 0
+   IF ( i := GetControlIndex ( ControlName, ParentForm ) ) > 0
 
       IF GetControlType ( ControlName, ParentForm ) == "COMBO" .AND. ;
             _HMG_aControlMiscData1 [i] [1] == 1
@@ -6091,30 +6089,31 @@ FUNCTION _IsWindowVisibleFromHandle ( Handle )
 
 STATIC FUNCTION _SetGetMinMaxInfo ( cWindowName , nIndex , nValue )
 
-   LOCAL i := GetFormIndex ( cWindowName )
-   LOCAL RetVal
+   LOCAL i, RetVal
 
-   IF i > 0
+   IF ( i := GetFormIndex ( cWindowName ) ) > 0
+
       IF PCount() == 2
          RetVal := _HMG_aFormMinMaxInfo [i] [nIndex]
       ELSE
          _HMG_aFormMinMaxInfo [i] [nIndex] := nValue
       ENDIF
+
    ENDIF
 
    RETURN RetVal
 
 STATIC FUNCTION _SetGetImageHBitmap ( ControlName , ParentForm , hBitmap )
 
-   LOCAL i := GetControlIndex ( ControlName , ParentForm )
-   LOCAL hWnd, RetVal
+   LOCAL i, hWnd, RetVal
 
-   IF i > 0
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
+
       IF PCount() == 2
          RetVal := _HMG_aControlBrushHandle [i]
       ELSE
          IF _HMG_aControlBrushHandle [i] <> 0
-            DELETEObject ( _HMG_aControlBrushHandle [i] )
+            DeleteObject ( _HMG_aControlBrushHandle [i] )
          ENDIF
          _HMG_aControlBrushHandle [i] := hBitmap
          hWnd := GetControlHandle ( ControlName, ParentForm )
@@ -6126,6 +6125,7 @@ STATIC FUNCTION _SetGetImageHBitmap ( ControlName , ParentForm , hBitmap )
             _HMG_aControlHeight [i] := GetWindowHeight ( hWnd )
          ENDIF
       ENDIF
+
    ENDIF
 
    RETURN RetVal

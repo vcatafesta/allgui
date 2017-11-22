@@ -345,7 +345,7 @@ STATIC FUNCTION GetPixels()
       nPixel := 1
    ENDCASE
 
-   CLEARForm_3()
+   ClearForm_3()
 
    RETURN nPixel
 
@@ -355,7 +355,7 @@ PROCEDURE SetBackgroundColor( nColor )
       nColor := nBkClr
    ENDIF
 
-   CLEARForm_3()
+   ClearForm_3()
 
    Form_3.BackColor := aColor[nColor]
 
@@ -365,7 +365,7 @@ PROCEDURE SetBackgroundColor( nColor )
 
 PROCEDURE SetDisplayColor( aColor )
 
-   CLEARForm_3()
+   ClearForm_3()
 
    Form_3.BackColor := aColor
 
@@ -391,7 +391,7 @@ PROCEDURE DrawTest1()
    LOCAL nWidth := nScrWidth / 16, i
    LOCAL nHeight := nScrHeight / 12, nSquare := (nScrWidth - nScrHeight) / 2
 
-   CLEARForm_3()
+   ClearForm_3()
    Form_3.BackColor := BLACK
 
    DRAW ELLIPSE IN WINDOW Form_3 ;
@@ -480,7 +480,7 @@ PROCEDURE DrawColourBars()
    LOCAL aBars := { YELLOW, BLUE, GREEN, FUCHSIA, RED, AQUA }, i
    LOCAL nWidth := nScrWidth / Len(aBars)
 
-   CLEARForm_3()
+   ClearForm_3()
 
    FOR i := 1 to Len(aBars)
 
@@ -497,7 +497,7 @@ PROCEDURE DrawGreyScale()
    LOCAL aGrey := { WHITE, {204, 204, 204}, {153, 153, 153}, {102, 102, 102}, {51, 51, 51}, BLACK }, i
    LOCAL nWidth := nScrWidth / Len(aGrey)
 
-   CLEARForm_3()
+   ClearForm_3()
 
    FOR i := 1 to Len(aGrey)
 
@@ -515,7 +515,7 @@ PROCEDURE DrawAdjustBrightness()
    LOCAL nWidth := nScrWidth / 14
    LOCAL nHeight := nScrHeight / 14
 
-   CLEARForm_3()
+   ClearForm_3()
 
    FOR i := 1 to Len(aGrey)
 
@@ -542,7 +542,7 @@ PROCEDURE DrawHighVoltage()
 
    IF !_IsControlDefined("Timer_1", "Form_3")
 
-      CLEARForm_3()
+      ClearForm_3()
 
       nScreen := 1
       FOR i := 1 to Len(aClr)
@@ -586,7 +586,7 @@ PROCEDURE DrawReadAbility()
 
    IF !_IsControlDefined("Edit_1", "Form_3")
 
-      CLEARForm_3()
+      ClearForm_3()
       Form_3.BackColor := GRAY
 
       @ 60,60 EDITBOX Edit_1 ;
@@ -799,7 +799,7 @@ FUNCTION drawtextout(window,row,col,string,fontcolor,backcolor,fontname,fontsize
       torow := row + if(transparent, 0, fontsize + 4)
       tocol := col + (len(string) - 2) * fontsize + if(len(string) > 5, (-1), 2)
 
-      TEXTdraw( formhandle,row,col,string,torow,tocol,fontcolor,backcolor,fontname,fontsize,bold,italic,underline,strikeout,transparent )
+      textdraw( formhandle,row,col,string,torow,tocol,fontcolor,backcolor,fontname,fontsize,bold,italic,underline,strikeout,transparent )
       aadd ( _HMG_aFormGraphTasks[i], { || textdraw( formhandle,row,col,string,torow,tocol,fontcolor,backcolor,fontname,fontsize,bold,italic,underline,strikeout,transparent) } )
    ENDIF
 

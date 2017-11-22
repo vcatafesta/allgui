@@ -117,7 +117,7 @@ PROCEDURE ReleaseActiveX ( cWindow, cControl )
 
    IF _IsControlDefined ( cControl, cWindow ) .AND. GetControlType ( cControl, cWindow ) == 'ACTIVEX'
 
-      EXITActivex( GetControlHandle ( cControl, cWindow ), _HMG_aControlHelpId[ GetControlIndex ( cControl, cWindow ) ] )
+      ExitActivex( GetControlHandle ( cControl, cWindow ), _HMG_aControlHelpId[ GetControlIndex ( cControl, cWindow ) ] )
 
       _HMG_UserComponentProcess := .T.
 

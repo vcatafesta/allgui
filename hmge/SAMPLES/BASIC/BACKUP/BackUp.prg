@@ -323,7 +323,7 @@ FUNCTION randomBetween(iFrom, iTo)
    iFrom := MIN(iFrom, iTo)
    iTo := MAX(iFrom, iTo)
 
-   RETURN(INT(iFrom + HB_RANDOM()*(iTo-iFrom+1)))
+   return(INT(iFrom + HB_RANDOM()*(iTo-iFrom+1)))
 
 PROCEDURE tstMaskList(aIn)
 
@@ -535,7 +535,7 @@ STATIC FUNCTION hbTimeStamp()
    cRet := aJoin(sSplit(cRet, '.'),'')
    cRet := aJoin(sSplit(cRet, ':'),'')
 
-   RETURN(cRet)
+   return(cRet)
 
 STATIC FUNCTION aJoin(aIn, sDelim)
 
@@ -554,7 +554,7 @@ STATIC FUNCTION aJoin(aIn, sDelim)
       sRet += aIn[iLen]
    ENDCASE
 
-   RETURN(sRet)
+   return(sRet)
 
 FUNCTION sSplit(sIn, sDelim)
 
@@ -575,7 +575,7 @@ FUNCTION sSplit(sIn, sDelim)
       aRet := hb_aTokens(sIn, sDelim)
    END IF
 
-   RETURN(aRet)
+   return(aRet)
    #ifdef DEBUG
 
 STATIC FUNCTION xToString( xValue )
@@ -655,7 +655,7 @@ FUNCTION getFileDate(sFileName)
       cRet := aJoin(sSplit(cRet, ':'),'')
    ENDIF
 
-   RETURN(cRet)
+   return(cRet)
 
 #pragma BEGINDUMP
 

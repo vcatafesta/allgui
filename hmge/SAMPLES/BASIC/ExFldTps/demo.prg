@@ -409,9 +409,9 @@ PROCEDURE SG_Date()                           // Date : Compare set / get
       Internal3  WITH Initial,;
       Internal4  WITH Initial,;
       Internal8  WITH Initial,;
-      READBack3  WITH hb_ValToStr( Internal3 ),;
-      READBack4  WITH hb_ValToStr( Internal4 ),;
-      READBack8  WITH hb_ValToStr( Internal8 )
+      ReadBack3  WITH hb_ValToStr( Internal3 ),;
+      ReadBack4  WITH hb_ValToStr( Internal4 ),;
+      ReadBack8  WITH hb_ValToStr( Internal8 )
    dbGoTop()
 
    Browse()

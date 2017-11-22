@@ -76,7 +76,7 @@ FUNCTION DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
    IF !file(cDbf)
       ? cDbf + " not found."
 
-      RETURN(.F.)
+      Return(.F.)
    ENDIF
 
    cBakDbf := RevExt(cDBF)
@@ -84,7 +84,7 @@ FUNCTION DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
    IF file(cBakDbf)
       IF !GetYesNo("The backup file " + cBakDbf + " exists.  Overwrite?", .F.)
 
-         RETURN(.F.)
+         Return(.F.)
       ENDIF
    ENDIF
 
@@ -93,7 +93,7 @@ FUNCTION DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
    IF FSize(cDbf) < 66
       ? cDbf + " is too small to be a DBF file (minimum size is 66 bytes)."
 
-      RETURN(.F.)
+      Return(.F.)
    ENDIF
 
    BEGIN sequence
@@ -925,7 +925,7 @@ FUNCTION DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
       fclose(hLog)
    ENDIF
 
-   RETURN(lLog)
+   Return(lLog)
 
 STATIC FUNCTION AllJunk(cMemo, cJunkChar)
 
@@ -944,13 +944,13 @@ STATIC FUNCTION AllJunk(cMemo, cJunkChar)
       ENDIF
    NEXT
 
-   RETURN(lAllJunk)
+   Return(lAllJunk)
 
 STATIC FUNCTION CopyFile(cSource, cTarget)
 
    COPY file (cSource) to (cTarget)
 
-   RETURN(file(cTarget))
+   Return(file(cTarget))
 
 STATIC FUNCTION DBT_Type(cMemo, cDefault)
 
@@ -959,13 +959,13 @@ STATIC FUNCTION DBT_Type(cMemo, cDefault)
 
    IF !file(cMemo) // No memo?  Worry about it later...
 
-      RETURN(cRDD)
+      Return(cRDD)
    ENDIF
 
    FindIndex(cMemo, @cTemp) // Got a good index to go by?  Use it.
    IF !empty(cTemp)
 
-      RETURN(cTemp)
+      Return(cTemp)
    ENDIF
 
    h := fopen(cMemo, FO_READ + FO_SHARED)
@@ -973,7 +973,7 @@ STATIC FUNCTION DBT_Type(cMemo, cDefault)
    IF h == F_ERROR
       FileErrMsg(cMemo)
 
-      RETURN(cRDD)
+      Return(cRDD)
    ENDIF
 
    // Try to find something in the header to clue us in:
@@ -1002,7 +1002,7 @@ STATIC FUNCTION DBT_Type(cMemo, cDefault)
       cRDD := "DBFNTX"
    ENDCASE
 
-   RETURN(cRDD)
+   Return(cRDD)
 
 STATIC FUNCTION FieldValid(cName, lMsgs)
 
@@ -1011,7 +1011,7 @@ STATIC FUNCTION FieldValid(cName, lMsgs)
    Returns a logical indicating if cName is a valid field name
    */
 
-   RETURN(GenValid(cName, "NE,<@,MCO@#_",,, lMsgs))
+   Return(GenValid(cName, "NE,<@,MCO@#_",,, lMsgs))
 
 STATIC FUNCTION FileErrMsg(cFile, cVerb)
 
@@ -1027,7 +1027,7 @@ STATIC FUNCTION FileErrMsg(cFile, cVerb)
 
    ? cMsg
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION FindIndex(cDbf, cRDD)
 
@@ -1044,7 +1044,7 @@ STATIC FUNCTION FindIndex(cDbf, cRDD)
       ENDIF
    NEXT
 
-   RETURN(cIndex)
+   Return(cIndex)
 
 STATIC FUNCTION HasJunk(cText, lMemo, cJunkChar)
 
@@ -1083,7 +1083,7 @@ STATIC FUNCTION HasJunk(cText, lMemo, cJunkChar)
    ENDIF
    #endif
 
-   RETURN(lJunk)
+   Return(lJunk)
 
 STATIC FUNCTION LogText(cMsg, lShow)
 
@@ -1097,7 +1097,7 @@ STATIC FUNCTION LogText(cMsg, lShow)
       ? cMsg
    ENDIF
 
-   RETURN(NIL)
+   Return(NIL)
 
 STATIC FUNCTION MemoDupe(cPointer, cMsg, cFieldName, nRecno)
 
@@ -1117,7 +1117,7 @@ STATIC FUNCTION MemoDupe(cPointer, cMsg, cFieldName, nRecno)
       MemoDups->( XCommit(.T.) )
    ENDIF
 
-   RETURN(lDupe)
+   Return(lDupe)
 
 STATIC FUNCTION MemoInit(hMemo, cRDD)
 
@@ -1172,7 +1172,7 @@ STATIC FUNCTION MemoInit(hMemo, cRDD)
       LogText(CRLF + "Memo block size: " + Nstr(nBlockSize))
    ENDIF
 
-   RETURN(nBlockSize)
+   Return(nBlockSize)
 
 STATIC FUNCTION MemoPreload(hMemo, lEnd)
 
@@ -1289,7 +1289,7 @@ STATIC FUNCTION MemoPreload(hMemo, lEnd)
 
    MemoData->( DBCommit() )
 
-   RETURN(!lEnd)
+   Return(!lEnd)
 
 STATIC FUNCTION MemoRead(hMemo, cPointer, cMsg, lDamage)
 
@@ -1310,7 +1310,7 @@ STATIC FUNCTION MemoRead(hMemo, cPointer, cMsg, lDamage)
          alltrim(cPointer))
       lDamage := .T.
 
-      RETURN(cData)
+      Return(cData)
    ENDIF
 
    // Read the data:
@@ -1390,7 +1390,7 @@ STATIC FUNCTION MemoRead(hMemo, cPointer, cMsg, lDamage)
 
    ENDIF // nMemoType
 
-   RETURN(cData)
+   Return(cData)
 
 STATIC FUNCTION MemoSeek(cPointer, cMsg, lDamage)
 
@@ -1414,7 +1414,7 @@ STATIC FUNCTION MemoSeek(cPointer, cMsg, lDamage)
       LogText(cMsg + "incorrect memo pointer (" + cPointer + ")")
    ENDIF
 
-   RETURN(cData)
+   Return(cData)
 
 STATIC FUNCTION GetYesNo(cMsg, lEsc)
 
@@ -1426,17 +1426,17 @@ STATIC FUNCTION GetYesNo(cMsg, lEsc)
       i := inkey(0)
       IF i == K_ESC
 
-         RETURN(lEsc)
+         Return(lEsc)
       ELSEIF i == asc("Y") .or. i == asc("y")
          ?? "Y"
 
-         RETURN(.T.)
+         Return(.T.)
       ELSEIF i == asc("N") .or. i == asc("n")
          ?? "N"
 
-         RETURN(.F.)
+         Return(.F.)
       ENDIF
    ENDDO
 
-   RETURN(NIL)
+   Return(NIL)
 

@@ -111,8 +111,8 @@ PROCEDURE print()
 
    SET page orientation DMORIENT_PORTRAIT papersize DMPAPER_A4 font "f0"
 
-   DEFINE IMAGElist "ILIST1" picture "flags"
-   DEFINE IMAGElist "ILIST2" picture "mytoolbar" iconcount 11
+   define imagelist "ILIST1" picture "flags"
+   define imagelist "ILIST2" picture "mytoolbar" iconcount 11
 
    define font "f0" name "courier new" size 12 bold
    define font "f1" name "times new roman" size 30 width 30 bold italic underline strikeout

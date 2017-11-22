@@ -44,7 +44,7 @@ FUNCTION WaitingProcess()
    FOR nI := 1 TO nForEnd
 
       IF (nI % 5) == 0
-         WAITWinTimer(aBegin,HB_NtoS(nI) + "/" + HB_NtoS(nForEnd))  // Show the window waiting
+         WaitWinTimer(aBegin,HB_NtoS(nI) + "/" + HB_NtoS(nForEnd))  // Show the window waiting
       ENDIF
 
       // final waiting
@@ -52,7 +52,7 @@ FUNCTION WaitingProcess()
 
    NEXT
 
-   WAITWinClose( aBegin[1] )  // kill the window waiting
+   WaitWinClose( aBegin[1] )  // kill the window waiting
 
    MsgInfo( "Elapsed processing time - " + SECTOTIME( SECONDS() - nTime ) )
 

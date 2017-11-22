@@ -356,13 +356,13 @@ METHOD Create( cClsName )  CLASS TControl
 
    IF ::nBottom != CW_USEDEFAULT
 
-      ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
-         ::nRight - ::nLeft + 1,::nBottom - ::nTop + 1, ;
+      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop,;
+         ::nRight - ::nLeft + 1, ::nBottom - ::nTop + 1, ;
          ::hWndParent, 0, GetInstance() , ::nId )
 
    ELSE
 
-      ::hWnd := _CreateWindowEx( xStyle,cClsName, ::cCaption,::nStyle, ::nLeft,::nTop,;
+      ::hWnd := _CreateWindowEx( xStyle, cClsName, ::cCaption, ::nStyle, ::nLeft, ::nTop,;
          ::nRight , ::nBottom , ;
          ::hWndParent, 0, GetInstance() , ::nId )
    ENDIF
@@ -730,7 +730,7 @@ METHOD SetColor( nClrFore, nClrBack, hBrush ) CLASS TControl
    ::nClrPane = nClrBack
 
    IF ::hBrush != nil
-      DELETEObject( ::hBrush )  // Alen Uzelac 13.09.2012
+      DeleteObject( ::hBrush )  // Alen Uzelac 13.09.2012
    ENDIF
 
    IF hBrush != nil

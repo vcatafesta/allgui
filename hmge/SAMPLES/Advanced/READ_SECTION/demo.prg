@@ -3,9 +3,9 @@
 FUNCTION Main
 
    LOAD WINDOW readsection
-   READsection.title := "Reading of Exe file internal sections - Test Program <arcangelo.molinaro@fastwebnet.it>"
-   READsection.Center
-   READsection.Activate
+   readsection.title := "Reading of Exe file internal sections - Test Program <arcangelo.molinaro@fastwebnet.it>"
+   readsection.Center
+   readsection.Activate
 
    RETURN NIL
 
@@ -22,14 +22,14 @@ FUNCTION leggi_Sezioni
    ENDIF
    aReturn:=HBR_DCSECT(cFilename)
 
-   READsection.Title:="Sections for "+cFilename+ " file."
-   READsection.Lbl_1.value:="Section Name"+CRLF+CRLF
-   READsection.Lbl_2.value:="Virtual Address "+CRLF+CRLF
-   READsection.Lbl_3.value:="Virtual Size "+CRLF+CRLF
-   READsection.Lbl_4.value:="Raw Address "+CRLF+CRLF
-   READsection.Lbl_5.value:="Raw Size "+CRLF+CRLF
-   READsection.Lbl_6.value:="Characteristics"+CRLF+CRLF
-   READsection.Lbl_7.value:="Note"+CRLF+CRLF
+   readsection.Title:="Sections for "+cFilename+ " file."
+   readsection.Lbl_1.value:="Section Name"+CRLF+CRLF
+   readsection.Lbl_2.value:="Virtual Address "+CRLF+CRLF
+   readsection.Lbl_3.value:="Virtual Size "+CRLF+CRLF
+   readsection.Lbl_4.value:="Raw Address "+CRLF+CRLF
+   readsection.Lbl_5.value:="Raw Size "+CRLF+CRLF
+   readsection.Lbl_6.value:="Characteristics"+CRLF+CRLF
+   readsection.Lbl_7.value:="Note"+CRLF+CRLF
 
    nLen:=len(aReturn)
    IF nLen<>0
@@ -45,27 +45,27 @@ FUNCTION leggi_Sezioni
             nChar:=( +4294967295+(aReturn[i][6])+1)  // 4294967295 => 0xFFFFFF
             cCharacter:="0x"+IF(Empty( DecToHexa(nChar) ),"00",IF(LEN(DecToHexa(nChar))<2,"0"+DecToHexa(nChar),DecToHexa(nChar)))+CRLF
          ENDIF
-         READsection.Lbl_1.value:=readsection.Lbl_1.value+ cSectionName
-         READsection.Lbl_2.value:=readsection.Lbl_2.value+ cVirtualAddress
-         READsection.Lbl_3.value:=readsection.Lbl_3.value+ cVirtualSize
-         READsection.Lbl_4.value:=readsection.Lbl_4.value+ cPRawData
-         READsection.Lbl_5.value:=readsection.Lbl_5.value+ cSRawData
-         READsection.Lbl_6.value:=readsection.Lbl_6.value+ cCharacter
+         readsection.Lbl_1.value:=readsection.Lbl_1.value+ cSectionName
+         readsection.Lbl_2.value:=readsection.Lbl_2.value+ cVirtualAddress
+         readsection.Lbl_3.value:=readsection.Lbl_3.value+ cVirtualSize
+         readsection.Lbl_4.value:=readsection.Lbl_4.value+ cPRawData
+         readsection.Lbl_5.value:=readsection.Lbl_5.value+ cSRawData
+         readsection.Lbl_6.value:=readsection.Lbl_6.value+ cCharacter
          DO CASE
          CASE cCharacter=="0xC0000040"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Readable,Writeable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Readable,Writeable"+CRLF
          CASE cCharacter=="0x60000020"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains code,Executable,Readable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains code,Executable,Readable"+CRLF
          CASE cCharacter=="0x50000040"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Shareable,Readable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Shareable,Readable"+CRLF
          CASE cCharacter=="0x40000040"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Readable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Readable"+CRLF
          CASE cCharacter=="0xE0000040"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Executable,Shareable,Readable,Writable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains initialized data,Executable,Shareable,Readable,Writable"+CRLF
          CASE cCharacter=="0xE0000080"+CRLF
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains uninitialized data,Executable,Shareable,Readable,Writable"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+"Contains uninitialized data,Executable,Shareable,Readable,Writable"+CRLF
          OTHERWISE
-            READsection.Lbl_7.value:=readsection.Lbl_7.value+substr(cCharacter,1,len(cCharacter)-2)+"=> not coded YET"+CRLF
+            readsection.Lbl_7.value:=readsection.Lbl_7.value+substr(cCharacter,1,len(cCharacter)-2)+"=> not coded YET"+CRLF
          ENDCASE
       NEXT i
    ENDIF

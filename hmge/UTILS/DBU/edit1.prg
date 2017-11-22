@@ -200,7 +200,7 @@ FUNCTION DBUedit1
             backcolor _DBUyellowish
             fontbold .t.
             value _DBUcondition
-            READonly .t.
+            readonly .t.
          END TEXTBOX
       ENDIF
       DEFINE STATUSBAR

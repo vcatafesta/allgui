@@ -166,7 +166,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
          TmpStr := _HMG_aControlType [i]
 
-         IF TmpStr $ "GETBOX,LABEL,HYPERLINK,CHECKBOX,FRAME,SLIDER,NUMTEXT,MASKEDTEXT,CHARMASKTEXT,BTNTEXT,BTNNUMTEXT,EDIT,CHECKLABEL"
+         IF TmpStr $ "GETBOX,LABEL,HYPERLINK,CHECKBOX,FRAME,SLIDER,NUMTEXT,MASKEDTEXT,CHARMASKTEXT,BTNTEXT,BTNNUMTEXT,EDIT,ANIMATEBOX,CHECKLABEL"
 
             IF TmpStr $ "GETBOX,NUMTEXT,MASKEDTEXT,CHARMASKTEXT,BTNTEXT,BTNNUMTEXT,EDIT"
 
@@ -189,17 +189,17 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      IF ValType( _HMG_aControlBkColor [ i, 2 ] ) == "A" .AND. Len( _HMG_aControlBkColor [ i, 2 ] ) == 3
 
                         SetBkColor( wParam , _HMG_aControlBkColor [ i, 2, 1 ] , _HMG_aControlBkColor [ i, 2, 2 ] , _HMG_aControlBkColor [ i, 2, 3 ] )
-                        DELETEObject ( _HMG_aControlBrushHandle [ i ] )
+                        DeleteObject ( _HMG_aControlBrushHandle [ i ] )
                         _HMG_aControlBrushHandle [ i ] := CreateSolidBrush( _HMG_aControlBkColor [ i, 2, 1 ] , _HMG_aControlBkColor [ i, 2, 2 ] , _HMG_aControlBkColor [ i, 2, 3 ] )
 
                         RETURN ( _HMG_aControlBrushHandle [i] )
 
                      ELSE
 
-                        IF ValType( _HMG_aControlBkColor [ i, 2] ) == "N" .AND. Len( _HMG_aControlBkColor [ i ] ) == 3
+                        IF ValType( _HMG_aControlBkColor [ i, 2 ] ) == "N" .AND. Len( _HMG_aControlBkColor [ i ] ) == 3
 
                            SetBkColor( wParam , _HMG_aControlBkColor [ i, 1 ] , _HMG_aControlBkColor [ i, 2 ] , _HMG_aControlBkColor [ i, 3 ] )
-                           DELETEObject ( _HMG_aControlBrushHandle [ i ] )
+                           DeleteObject ( _HMG_aControlBrushHandle [ i ] )
                            _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [ i, 1 ] , _HMG_aControlBkColor [ i, 2 ] , _HMG_aControlBkColor [ i, 3 ] )
 
                            RETURN _HMG_aControlBrushHandle [i]
@@ -212,7 +212,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                      a := nRGB2Arr ( GetSysColor ( COLOR_3DFACE ) )
                      SetBkColor( wParam , a [1] , a [2] , a [3] )
-                     DELETEObject ( _HMG_aControlBrushHandle [i] )
+                     DeleteObject ( _HMG_aControlBrushHandle [i] )
                      _HMG_aControlBrushHandle [i] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                      RETURN _HMG_aControlBrushHandle [i]
@@ -236,7 +236,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                   ELSE
                      IF _HMG_aControlDblClick [i] == .F. .AND. !lOpaque
                         r := GetControlIndex( _HMG_aControlFontHandle [i], _HMG_aControlMiscData1 [i] )
-                        DELETEObject ( _HMG_aControlBrushHandle [r] )
+                        DeleteObject ( _HMG_aControlBrushHandle [r] )
                         z := GetControlHandle( _HMG_aControlFontHandle [i], _HMG_aControlMiscData1 [i] )
                         _HMG_aControlBrushHandle [r] := GetTabBrush( z )
 
@@ -250,7 +250,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                   IF _HMG_aControlDblClick [i] == .F.
                      r := GetControlIndex( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
-                     DELETEObject ( _HMG_aControlBrushHandle [r] )
+                     DeleteObject ( _HMG_aControlBrushHandle [r] )
                      z := GetControlHandle( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
                      _HMG_aControlBrushHandle [r] := GetTabBrush( z )
 
@@ -266,7 +266,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                   IF ( a := _GetBackColor ( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] ) ) != Nil
                      IF ISLOGICAL ( _HMG_aControlInputMask [i] ) .AND. _HMG_aControlInputMask [i] == .F.
                         SetBkColor( wParam , a [1] , a [2] , a [3] )
-                        DELETEObject ( _HMG_aControlBrushHandle [i] )
+                        DeleteObject ( _HMG_aControlBrushHandle [i] )
                         _HMG_aControlBrushHandle [i] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                         RETURN _HMG_aControlBrushHandle [i]
@@ -274,7 +274,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                   ELSE
                      IF _HMG_aControlDblClick [i] == .F. .AND. !lOpaque
                         r := GetControlIndex( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
-                        DELETEObject ( _HMG_aControlBrushHandle [r] )
+                        DeleteObject ( _HMG_aControlBrushHandle [r] )
                         z := GetControlHandle( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
                         _HMG_aControlBrushHandle [r] := GetTabBrush( z )
 
@@ -302,7 +302,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      IF _HMG_aControlDblClick [i] == .T.
                         a := nRGB2Arr ( GetSysColor ( COLOR_BTNFACE ) )
                      ELSEIF ( r := GetControlIndex( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] ) ) > 0
-                        DELETEObject ( _HMG_aControlBrushHandle [r] )
+                        DeleteObject ( _HMG_aControlBrushHandle [r] )
                         z := GetControlHandle( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
                         _HMG_aControlBrushHandle [r] := GetTabBrush( z )
 
@@ -313,7 +313,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                   ENDIF
                   IF ISARRAY( a )
                      SetBkColor( wParam , a [1] , a [2] , a [3] )
-                     DELETEObject ( _HMG_aControlBrushHandle [i] )
+                     DeleteObject ( _HMG_aControlBrushHandle [i] )
                      _HMG_aControlBrushHandle [i] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                      RETURN _HMG_aControlBrushHandle [i]
@@ -324,7 +324,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                IF _HMG_aControlBkColor [i] != Nil
 
                   SetBkColor( wParam , _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
-                  DELETEObject ( _HMG_aControlBrushHandle [i] )
+                  DeleteObject ( _HMG_aControlBrushHandle [i] )
                   _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
 
                   RETURN _HMG_aControlBrushHandle [i]
@@ -333,7 +333,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                   a := nRGB2Arr ( GetSysColor ( COLOR_3DFACE ) )
                   SetBkColor( wParam , a [1] , a [2] , a [3] )
-                  DELETEObject ( _HMG_aControlBrushHandle [i] )
+                  DeleteObject ( _HMG_aControlBrushHandle [i] )
                   _HMG_aControlBrushHandle [i] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                   RETURN _HMG_aControlBrushHandle [i]
@@ -379,7 +379,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                               IF _HMG_aControlDblClick [i] == .F. .AND. !lOpaque .AND. _HMG_aControlBkColor [i] == Nil
 
                                  r := GetControlIndex( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
-                                 DELETEObject ( _HMG_aControlBrushHandle [r] )
+                                 DeleteObject ( _HMG_aControlBrushHandle [r] )
                                  z := GetControlHandle( _HMG_aControlRangeMin [i], _HMG_aControlRangeMax [i] )
                                  _HMG_aControlBrushHandle [r] := GetTabBrush( z )
 
@@ -411,7 +411,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                            SetBkColor( wParam , _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
                            IF x == 1
-                              DELETEObject ( _HMG_aControlBrushHandle [i] )
+                              DeleteObject ( _HMG_aControlBrushHandle [i] )
                               _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
                            ENDIF
 
@@ -420,7 +420,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                         ELSE
 
                            IF x == 1
-                              DELETEObject ( _HMG_aControlBrushHandle [i] )
+                              DeleteObject ( _HMG_aControlBrushHandle [i] )
                               _HMG_aControlBrushHandle [i] := CreateSolidBrush( GetRed ( GetSysColor ( COLOR_3DFACE ) ) , GetGreen ( GetSysColor ( COLOR_3DFACE ) ) , GetBlue ( GetSysColor ( COLOR_3DFACE ) ) )
                            ENDIF
                            SetBkColor( wParam , GetRed ( GetSysColor ( COLOR_3DFACE ) ) , GetGreen ( GetSysColor ( COLOR_3DFACE ) ) , GetBlue ( GetSysColor ( COLOR_3DFACE ) ) )
@@ -471,7 +471,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                   a := nRGB2Arr ( GetSysColor ( COLOR_WINDOW ) )
                   SetBkColor( wParam , a [1] , a [2] , a [3] )
-                  DELETEObject ( _HMG_aControlBrushHandle [i] )
+                  DeleteObject ( _HMG_aControlBrushHandle [i] )
                   _HMG_aControlBrushHandle [i] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                   RETURN _HMG_aControlBrushHandle [i]
@@ -485,7 +485,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                IF ValType( _HMG_aControlBkColor [i,1] ) == "N"
 
                   SetBkColor( wParam, _HMG_aControlBkColor [i] [1], _HMG_aControlBkColor [i] [2], _HMG_aControlBkColor [i] [3] )
-                  DELETEObject ( _HMG_aControlBrushHandle [i] )
+                  DeleteObject ( _HMG_aControlBrushHandle [i] )
                   _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i] [1], _HMG_aControlBkColor [i] [2], _HMG_aControlBkColor [i] [3] )
 
                   RETURN ( _HMG_aControlBrushHandle [i] )
@@ -497,7 +497,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      IF Len( _HMG_aControlBkColor[i] ) == 3 .AND. GetFocus() == _HMG_aControlHandles [i]
 
                         SetBkColor( wParam, _HMG_aControlBkColor [i, 3, 1], _HMG_aControlBkColor [i, 3, 2], _HMG_aControlBkColor [i, 3, 3] )
-                        DELETEObject ( _HMG_aControlBrushHandle [i] )
+                        DeleteObject ( _HMG_aControlBrushHandle [i] )
                         _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i, 3, 1], _HMG_aControlBkColor [i, 3, 2], _HMG_aControlBkColor [i, 3, 3] )
 
                         RETURN ( _HMG_aControlBrushHandle [i] )
@@ -505,7 +505,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      ELSE
 
                         SetBkColor( wParam, _HMG_aControlBkColor [i, 1, 1], _HMG_aControlBkColor [i, 1, 2], _HMG_aControlBkColor [i, 1, 3] )
-                        DELETEObject ( _HMG_aControlBrushHandle [i] )
+                        DeleteObject ( _HMG_aControlBrushHandle [i] )
                         _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i, 1, 1], _HMG_aControlBkColor [i, 1, 2], _HMG_aControlBkColor [i, 1, 3] )
 
                         RETURN _HMG_aControlBrushHandle [i]
@@ -537,7 +537,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                         IF _HMG_aControlBkColor [i] == Nil
                            a := nRGB2Arr ( GetSysColor ( COLOR_WINDOW ) )
                            SetBkColor( wParam , a [1] , a [2] , a [3] )
-                           DELETEObject ( _HMG_aControlBrushHandle [i] )
+                           DeleteObject ( _HMG_aControlBrushHandle [i] )
                            _HMG_aControlBrushHandle [ i ] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                            RETURN _HMG_aControlBrushHandle [i]
@@ -548,7 +548,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      IF _HMG_aControlBkColor [i] != Nil
 
                         SetBkColor( wParam , _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
-                        DELETEObject ( _HMG_aControlBrushHandle [i] )
+                        DeleteObject ( _HMG_aControlBrushHandle [i] )
                         _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
 
                         RETURN _HMG_aControlBrushHandle [i]
@@ -573,7 +573,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
                         a := nRGB2Arr ( GetSysColor ( COLOR_WINDOW ) )
                         SetBkColor( wParam , a [1] , a [2] , a [3] )
-                        DELETEObject ( _HMG_aControlBrushHandle [i] )
+                        DeleteObject ( _HMG_aControlBrushHandle [i] )
                         _HMG_aControlBrushHandle [ i ] := CreateSolidBrush( a [1] , a [2] , a [3] )
 
                         RETURN _HMG_aControlBrushHandle [i]
@@ -588,7 +588,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                         SetBkColor( lParam , _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
                      ENDIF
                      SetBkColor( wParam , _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
-                     DELETEObject ( _HMG_aControlBrushHandle [i] )
+                     DeleteObject ( _HMG_aControlBrushHandle [i] )
                      _HMG_aControlBrushHandle [i] := CreateSolidBrush( _HMG_aControlBkColor [i] [1] , _HMG_aControlBkColor [i] [2] , _HMG_aControlBkColor [i] [3] )
 
                      RETURN _HMG_aControlBrushHandle [i]
@@ -1095,7 +1095,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      RecordCount := RecCount()
                   ENDIF
 
-                  SKIPCount := Int ( HIWORD( wParam ) * RecordCount / GetScrollRangeMax ( _HMG_aControlIds [ i ] , 2 ) )
+                  SkipCount := Int ( HIWORD( wParam ) * RecordCount / GetScrollRangeMax ( _HMG_aControlIds [ i ] , 2 ) )
 
                   IF SkipCount > ( RecordCount / 2 )
                      GO BOTTOM
@@ -1193,7 +1193,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
       #endif
    CASE WM_NEXTDLGCTL
 
-      NEXTControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , ( Wparam != 0 ) )
+      NextControlHandle := GetNextDlgTabITem ( GetActiveWindow() , GetFocus() , ( Wparam != 0 ) )
 
       setfocus( NextControlHandle )
 
@@ -1509,6 +1509,9 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
       i := AScan ( _HMG_aControlIds , wParam )
 
       IF i > 0
+         IF _HMG_aControlPicture [i] == .T. // Once
+            _DisableControl ( _HMG_aControlNames [i], GetParentFormName( i ) )
+         ENDIF
          _DoControlEventProcedure ( _HMG_aControlProcedures [i] , i )
       ENDIF
       EXIT
@@ -3480,7 +3483,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             // Delete Brush
 
-            DELETEObject ( _HMG_aFormBrushHandle [i] )
+            DeleteObject ( _HMG_aFormBrushHandle [i] )
 
             // Delete ToolTip
 
@@ -3648,7 +3651,7 @@ PROCEDURE _SetNextFocus( lSkip )
 
    hWnd := iif( lMdiChildActive , GetActiveMdiHandle() , GetActiveWindow() )
 
-   NEXTControlHandle := GetNextDlgTabITem ( hWnd , GetFocus() , hb_defaultValue( lSkip, .F. ) )
+   NextControlHandle := GetNextDlgTabITem ( hWnd , GetFocus() , hb_defaultValue( lSkip, .F. ) )
 
    lShift := CheckBit ( GetKeyState( VK_SHIFT ), 32768 )  // Is Shift key pressed ?
 
@@ -3790,7 +3793,7 @@ STATIC PROCEDURE _OnDrawStatusItem ( hWnd, lParam )
             IF _HMG_aControlBkColor [i] != NIL
                hBrush := CreateSolidBrush( _HMG_aControlBkColor [i] [1], _HMG_aControlBkColor [i] [2], _HMG_aControlBkColor [i] [3] )
                FillRect( hDC, aRect [1], aRect [2], aRect [3], aRect [4], hBrush )
-               DELETEObject( hBrush )
+               DeleteObject( hBrush )
             ENDIF
 
             IF _HMG_aControlFontColor [i] != NIL

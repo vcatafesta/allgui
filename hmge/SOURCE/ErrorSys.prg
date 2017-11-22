@@ -130,7 +130,7 @@ STATIC FUNCTION DefError( oError )
 
    ShowError( cText, oError )
 
-   EXITProcess()
+   ExitProcess()
 
    RETURN .F.
 

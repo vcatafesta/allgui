@@ -6,7 +6,7 @@ proc main
 
    LOCAL x_arq := 'config.dbf'
 
-   REQUEST DBFCDX, DBFFPT
+   REQUEST DBFCDX
    RDDSETDEFAULT( "DBFCDX" )
 
    SET MULTIPLE OFF WARNING
@@ -50,7 +50,7 @@ proc main
       @ 60,1 button btn_dele caption 'Apagar'   action f_apagar()
       @ 90,1 button btn_sair caption 'Sair'     action thiswindow.release
 
-      @ 1,120 image img_cas picture ''
+      @ 1,120 image img_cas picture '' Width 300 Height 120 stretch
 
       @ 128,1 BROWSE Browse_1 ;
          WIDTH 690 ;
@@ -73,11 +73,11 @@ proc main
 
       Define timer timer_1 ;
          interval 250 ;
-         action ( setforegroundwindow( getformhandle('form_1') ), form_1.timer_1.release )
+         action ( setforegroundwindow( getformhandle('form_1') ),;
+         form_1.browse_1.setfocus ) once
 
    END WINDOW
 
-   form_1.browse_1.setfocus
    form_1.Center
    form_1.Activate
 
@@ -119,7 +119,7 @@ proc main
       END WINDOW
 
       form_1.browse_1.value := 1
-      form_1.browse_1.setfocus
+      browse_1_change()
 
       form_2.activate
 
@@ -160,6 +160,8 @@ proc main
                form_2.img_cas.hide
                form_2.img_cas.show
                form_2.title := ''
+            ELSE
+               browse_1_change()
             end
 
             retu nil
@@ -249,50 +251,51 @@ FUNCTION UnMaskBinData( x )              && Não lembro quem fez
 
    *.................................................................*
 
-   func f_importar
-      LOCAL varios := .t.   && selecionar varios arquivos
-      LOCAL arq_cas := {}, i, n_for, File_cas, m_rat
+FUNCTION f_importar
 
-      p_GetFile := iif( empty( p_GetFile ) , GetMyDocumentsFolder() , p_GetFile )
+   LOCAL varios := .t.   && selecionar varios arquivos
+   LOCAL arq_cas, i, n_for, File_cas, m_rat
 
-      arq_cas := GetFile ( { ;
-         {'Image Files' , '*.JPG;*.BMP;*.GIF;*.ICO'} ,;
-         {'JPG Files' , '*.JPG'} ,;
-         {'BMP Files' , '*.BMP'}  } ,;
-         'Open File(s)' , p_GetFile , varios , .t. )
+   p_GetFile := iif( empty( p_GetFile ) , GetMyDocumentsFolder() , p_GetFile )
 
-      IF len( arq_cas ) = 0
+   arq_cas := GetFile ( { ;
+      {'Image Files' , '*.JPG;*.BMP;*.GIF;*.ICO'} ,;
+      {'JPG Files' , '*.JPG'} ,;
+      {'BMP Files' , '*.BMP'}  } ,;
+      'Open File(s)' , p_GetFile , varios , .t. )
 
-         RETURN NIL
+   IF len( arq_cas ) = 0
+
+      RETURN NIL
+   ENDIF
+
+   FOR n_for := 1 to len( arq_cas )
+      i = n_for + 1
+
+      IF n_for = len(arq_cas)  && esta consistencia foi feita pq o ultimo arquivo
+         i = 1       && é sempre o primeiro
       ENDIF
 
-      FOR n_for := 1 to len( arq_cas )
-         i = n_for + 1
+      File_cas := strtran( arq_cas[ i ] , '\\' , '\' )
 
-         IF n_for = len(arq_cas)  && esta consistencia foi feita pq o ultimo arquivo
-            i = 1       && é sempre o primeiro
-         ENDIF
+      APPEND BLANK
 
-         File_cas := strtran( arq_cas[ i ] , '\\' , '\' )
+      m_rat := rat( '\' , File_cas )
+      IF m_rat # 0
+         repl NOME   with substr( File_cas , m_rat + 1 )
+      ELSE
+         repl NOME   with File_cas
+      end
 
-         APPEND BLANK
+      repl IMAGEM with MaskBinData( MemoRead( File_cas ) )
 
-         m_rat := rat( '\' , File_cas )
-         IF m_rat # 0
-            repl NOME   with substr( File_cas , m_rat + 1 )
-         ELSE
-            repl NOME   with File_cas
-         end
+   NEXT
 
-         repl IMAGEM with MaskBinData( MemoRead( File_cas ) )
+   m_rat = rat('\',arq_cas[1])
+   p_GetFile := left( arq_cas[1] , m_rat-1 )
 
-      NEXT
+   form_1.browse_1.value := recno()
+   form_1.browse_1.refresh
 
-      m_rat = rat('\',arq_cas[1])
-      p_GetFile := left( arq_cas[1] , m_rat-1 )
-
-      form_1.browse_1.value := recno()
-      form_1.browse_1.refresh
-
-      retu nil
+   RETURN NIL
 

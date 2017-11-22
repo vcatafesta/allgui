@@ -94,7 +94,7 @@ FUNCTION fechamento_dia()
          tooltip 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_fechamento.width-100
@@ -107,7 +107,7 @@ FUNCTION fechamento_dia()
          tooltip 'Sair desta tela'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
       on key escape action thiswindow.release
 
@@ -116,7 +116,7 @@ FUNCTION fechamento_dia()
    form_fechamento.center
    form_fechamento.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION relatorio()
 
@@ -779,7 +779,7 @@ STATIC FUNCTION relatorio()
       END PRINTPAGE
    END PRINTDOC
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -792,12 +792,12 @@ STATIC FUNCTION cabecalho(p_pagina)
 
    @ 030,000 PRINT LINE TO 030,205 PENWIDTH 0.5 COLOR _preto_001
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 

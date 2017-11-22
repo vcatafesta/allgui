@@ -16,7 +16,6 @@
 #define IDCANCEL            2
 
 STATIC lBlock := .F.
-STATIC IsTimerLeave := .F.
 STATIC SoundFileName := ""
 STATIC Description := ""
 
@@ -47,6 +46,8 @@ PROCEDURE Main()
 
    END WINDOW
 
+   Form_1.NotifyTooltip := PROGRAM + ' is OFF'
+
    ACTIVATE WINDOW Form_1
 
    RETURN
@@ -67,7 +68,10 @@ PROCEDURE Settings()
       ACTION OnOK()
 
    REDEFINE BUTTON Btn_2 ID IDCANCEL ;
-      ACTION _ReleaseWindow ( 'Form_2' )
+      ACTION ( ;
+      Form_1.NotifyTooltip := PROGRAM + ' is ' + ;
+      iif( IsControlDefined( Timer_1, Form_1 ) .and. Form_1.Timer_1.Enabled, 'ON', 'OFF' ), ;
+      _ReleaseWindow ( 'Form_2' ) )
 
    REDEFINE BUTTON Btn_3 ID IDC_QUIT ;
       ACTION _ReleaseWindow ( 'Form_1' )
@@ -95,13 +99,14 @@ PROCEDURE OnOK()
 
    LOCAL time := Form_2.TextBox_1.Value
 
-   IF IsTimerLeave
+   IF IsControlDefined( Timer_1, Form_1 )
       Form_1.Timer_1.Value := time * 60000
+      Form_1.Timer_1.Enabled := .T.
    ELSE
-      DEFINE TIMER Timer_1 OF Form_1 INTERVAL time * 60000 ACTION TimerAction()
-      IsTimerLeave = .T.
+      DEFINE TIMER Timer_1 OF Form_1 INTERVAL time * 60000 ACTION TimerAction() ONCE
    ENDIF
 
+   Form_1.NotifyTooltip := PROGRAM + ' is ON'
    Description := Form_2.TextBox_2.Value
 
    _ReleaseWindow ( 'Form_2' )
@@ -132,11 +137,6 @@ PROCEDURE OnTest()
 
 PROCEDURE TimerAction()
 
-   IF IsTimerLeave
-      Form_1.Timer_1.Release
-      IsTimerLeave = .F.
-   ENDIF
-
    IF Empty( SoundFileName )
       PlayAsterisk()
    ELSE
@@ -144,6 +144,7 @@ PROCEDURE TimerAction()
    ENDIF
 
    MsgAlert( Description, "Timer" )
+   Form_1.NotifyTooltip := PROGRAM + ' is OFF'
 
    RETURN
 

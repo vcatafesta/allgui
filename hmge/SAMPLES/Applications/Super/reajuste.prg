@@ -56,14 +56,14 @@ FUNCTION reajuste()
          bold;
          fontcolor _preto_001;
          transparent
-      DEFINE COMBOBOXex cbo_001
+      define comboboxex cbo_001
       row   030
       col   005
       width 200
       height 200
       items a_001
       value 1
-   END COMBOBOXex
+   end comboboxex
 
    * fase 2
    @ 070,005 label lbl_002;
@@ -74,7 +74,7 @@ FUNCTION reajuste()
       bold;
       fontcolor _preto_001;
       transparent
-   DEFINE COMBOBOXex cbo_002
+   define comboboxex cbo_002
    row   090
    col   005
    width 200
@@ -82,7 +82,7 @@ FUNCTION reajuste()
    items a_002
    value 1
    listwidth 300
-END COMBOBOXex
+end comboboxex
 
 * fase 3
 @ 130,005 label lbl_003;
@@ -93,7 +93,7 @@ END COMBOBOXex
    bold;
    fontcolor _preto_001;
    transparent
-DEFINE COMBOBOXex cbo_003
+define comboboxex cbo_003
 row   150
 col   005
 width 200
@@ -101,7 +101,7 @@ height 400
 items a_003
 value 1
 listwidth 300
-END COMBOBOXex
+end comboboxex
 
 * fase 4
 @ 200,005 label lbl_004;
@@ -235,7 +235,7 @@ END WINDOW
 form_reajuste.center
 form_reajuste.activate
 
-RETURN(nil)
+return(nil)
 
 STATIC FUNCTION filtrar_informacoes()
 
@@ -250,7 +250,7 @@ STATIC FUNCTION filtrar_informacoes()
    IF empty(x_valor) .and. empty(x_percentual)
       msgalert('Você precisa digitar ou valor ou percentual para simular o reajuste','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF x_categoria <> 1
@@ -394,7 +394,7 @@ STATIC FUNCTION filtrar_informacoes()
       tmp_reajuste->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar_reajuste()
 
@@ -448,13 +448,13 @@ STATIC FUNCTION gravar_reajuste()
 
    form_reajuste.release
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION zera_acesso()
 
    _conta_acesso := 0
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION zera_temporario()
 
@@ -462,5 +462,5 @@ STATIC FUNCTION zera_temporario()
    ZAP
    PACK
 
-   RETURN(nil)
+   return(nil)
 

@@ -496,7 +496,7 @@ FUNCTION nMonth(param)
       RETVAL := 12
    ENDIF
 
-   RETURN(RETVAL)
+   return(RETVAL)
 
 PROCEDURE Head_click( nCol )
 
@@ -793,7 +793,7 @@ FUNCTION Encrip(pepe)
       pala+=chr(conv)
    NEXT
 
-   RETURN(pala)
+   return(pala)
 
 FUNCTION Desencri(pepe)
 
@@ -806,5 +806,5 @@ FUNCTION Desencri(pepe)
       pala+=chr(conv)
    NEXT
 
-   RETURN(pala)
+   return(pala)
 

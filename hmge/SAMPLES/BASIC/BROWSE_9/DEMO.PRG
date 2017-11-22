@@ -20,7 +20,7 @@ PROCEDURE MAIN
    Open_dbf()
    Open_ntx()
 
-   USE_employe()
+   Use_employe()
 
    FOR nFldCnt := 1 TO EMPLOYE->( FCount() )
       AAdd( aFields, EMPLOYE->( FieldName( nFldCnt ) ) )

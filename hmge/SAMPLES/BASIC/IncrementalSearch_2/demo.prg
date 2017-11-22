@@ -126,7 +126,7 @@ PROCEDURE SearchChange()
          ENDIF
          Form_1.Text_1.Value    := cArrowsFind
          Form_1.Text_1.CaretPos := nLen
-         TEXTBoxEditSetSel( 'form_1', 'text_1', Len( cArrowsFind ), nLen )
+         TextBoxEditSetSel( 'form_1', 'text_1', Len( cArrowsFind ), nLen )
       ENDIF
    ENDIF
 
@@ -155,7 +155,7 @@ FUNCTION textboxbackspace
    IF lTextBoxGotFocus
       nLen--
       cText := GetProperty( 'Form_1', 'Text_1', 'Value' )
-      TEXTBoxEditSetSel( 'Form_1', 'Text_1', len( cText ), nLen )
+      TextBoxEditSetSel( 'Form_1', 'Text_1', len( cText ), nLen )
       cTxt := upper( left( cText, nLen ) )
       Form_1.Grid_1.DeleteAllItems()
       FOR nX := 1 To Len( aRows )

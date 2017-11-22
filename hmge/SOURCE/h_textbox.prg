@@ -276,7 +276,7 @@ FUNCTION InitDialogTextBox( ParentName, ControlHandle, k )
    Field       := _HMG_aControlPageMap  [k]
 
    nMaxLength  := _HMG_aControlRangeMax  [k]
-   READonly    := _HMG_aControlMiscData1 [k,2]
+   readonly    := _HMG_aControlMiscData1 [k,2]
    cValue      := _HMG_aControlValue  [k]
    lNumeric    := ( _HMG_aControlType [k] == "NUMTEXT" )
 

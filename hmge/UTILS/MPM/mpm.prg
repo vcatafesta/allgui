@@ -763,8 +763,8 @@ PROCEDURE New
    Mpm.LibList.DeleteAllItems
    aSouFiles := {}
    RefreshSource()
-   SWITCHDebug( .N. )
-   SWITCHRebuild( .N. )
+   SwitchDebug( .N. )
+   SwitchRebuild( .N. )
    StatusLabel()
    cProjSpec := ProjSpec()
    GetBaseFolder()
@@ -916,8 +916,8 @@ PROCEDURE Open( cProjOpen )
       ENDCASE
 
       RefreshSource()
-      SWITCHDebug( .N. )
-      SWITCHRebuild( .N. )
+      SwitchDebug( .N. )
+      SwitchRebuild( .N. )
       StatusLabel()
 
    END SEQUENCE

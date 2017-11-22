@@ -622,7 +622,9 @@ PROCEDURE gridCol(arg1)
    DEFAULT string to ""
    string := atrepl( "{",string,'')
    string := atrepl( "}",string,'')
-   aka := HB_ATOKENS( string, "," )
+   IF !empty(string)
+      aka := HB_ATOKENS( string, "," )
+   ENDIF
 
    RETURN aka
    /*
@@ -921,6 +923,9 @@ CREATE CLASS WREPORT
       'Control'    => .F. , ;
       'InlineSbt'  => .T. , ;
       'InlineTot'  => .T. , ;
+      'GroupBold'  => .T. , ;
+      'HGroupColor' => {0,0, 255} , ;
+      'GTGroupColor' => {0,0, 255} , ;
       'aImages'    => {}  , ;
       'Memofont'   => {}  , ;
       'PdfFont'    => {{"",""}} , ;
@@ -1721,8 +1726,8 @@ METHOD Transpace(arg1,arg2,arg3) CLASS WREPORT // The core of parser
 
       RETURN ''
    ENDIF
-   IF "SET SPLASH TO" $ arg1
-      ::aStat [ 'lblsplash' ] := substr(arg1,at("TO",arg1)+2)
+   IF "SET SPLASH TO" $ upper(arg1)
+      ::aStat [ 'lblsplash' ] := substr(arg1,at("TO",upper(arg1))+2)
       // msgbox("|"+::aStat [ 'lblsplash' ]+"|" ,"Arges")
 
       RETURN ''
@@ -1822,7 +1827,7 @@ METHOD MACROCOMPILE(cStr, lMesg,cmdline,section) CLASS WREPORT
          errorblock (bOld)
          IF ::aStat [ 'Control' ]
             MsgMiniGuiError("Program Report Interpreter"+CRLF+"Section "+section+CRLF+"I have found error on line "+;
-               ZAPs(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
+               zaps(cmdline)+CRLF+"Error is in: "+alltrim(cStr)+CRLF+"Please revise it!","MiniGUI Error")
             Break
          ELSE
             DO CASE
@@ -2350,6 +2355,15 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
 
          CASE ascan(arryPar,[INLINESBT])=2
             ::aStat['InlineSbt'] := (eval(blse,arrypar[3]))
+
+         CASE ascan(arryPar,[GROUPBOLD])=2
+            ::aStat['GroupBold'] := (eval(blse,arrypar[3]))
+
+         CASE ascan(arryPar,[HGROUPCOLOR])=2
+            ::aStat['HGroupColor'] := ::UsaColor(eval(chblk,arrypar,[HGROUPCOLOR]))
+
+         CASE ascan(arryPar,[GTGROUPCOLOR])=2
+            ::aStat['GTGroupColor'] := ::UsaColor(eval(chblk,arrypar,[GTGROUPCOLOR]))
 
          CASE ascan(arryPar,[INLINETOT])=2
             ::aStat['InlineTot'] := (eval(blse,arrypar[3]))
@@ -3083,6 +3097,13 @@ METHOD GROUP(GField, s_head, s_col, gftotal, wheregt, s_total, t_col, p_f_e_g) C
       Ghstring :=if (UNITS > 0 .and. units < 4 ,"(NLINE*LSTEP)","NLINE")+CHR(07)+zaps(M->S_COL)+CHR(07)
       Ghstring +="SAY"+CHR(07)+"(["+s_head+']+'+ghf+')'+CHR(07)+"FONT"+CHR(07)+"FNT01"
    ENDIF
+   IF LEFT(GHstring,1) == chr(07)
+      GHstring := Substr(GHstring,2)
+   ENDIF
+   IF ::aStat['GroupBold']= .T.
+      GhString += CHR(07)+"BOLD"
+   ENDIF
+   // MSGBOX(ghSTRING,"2988")
 
    // Gestisce l'automatismo del posizionamento dei subtotali
    && make autoset for Counter(s) position
@@ -3116,7 +3137,7 @@ METHOD GROUP(GField, s_head, s_col, gftotal, wheregt, s_total, t_col, p_f_e_g) C
             Endif
             // msgbox(Rl+CRLF+Rm+CRLF+Rr,zaps(nk)+"-GFFFSTRING")
             */
-            aadd(GFstring,Rl+Rm+Rr)
+            aadd(GFstring,Rl+Rm+Rr+if(::aStat['GroupBold']= .T.,CHR(07)+"BOLD","") )
             tgftotal[nk]:=''
             cnt ++
          ENDIF
@@ -3137,6 +3158,10 @@ METHOD GROUP(GField, s_head, s_col, gftotal, wheregt, s_total, t_col, p_f_e_g) C
       ELSE
          GTstring[1]:=left(GTstring[1],at(chr(07),GTstring[1]))+wheregt+chr(07)+substr(Gtstring[1],at("SAY",Gtstring[1]))
       ENDIF
+   ENDIF
+   IF ::aStat['GroupBold']= .T.
+      Aeval(GTstring,{|x,y|x:=nil, GTstring[y] += CHR(07)+"BOLD" })
+      // msgmulty(GTstring)
    ENDIF
 
    RETURN ritorno
@@ -3524,14 +3549,20 @@ METHOD TheBody() CLASS WREPORT
          ::aStat [ 'GHline' ] := if (sbt =.F.,sbt ,::aStat [ 'GHline' ] )
 
          IF nxtp .and. ::aStat [ 'GHline' ] .and. ::aStat ['r_paint'] .and. sgh // La seconda pagina
+            GET textcolor to subcolor
+            SET textcolor ::aStat['HGroupColor']
             ::traduci(Ghstring)
+            SET textcolor subcolor
             // @nline,0 say "**"+if(m->insgh =.T.,[.T.],[.F.])  FONT "F1" to print
             nxtp := .F. ; nline ++
          ENDIF
 
          IF ::GrHead() //.and. ::aStat [ 'GHline' ]    // La testata
             IF ::aStat ['r_paint'] .and. (shd .or. sbt) .and. sgh .and. !insgh
+               GET textcolor to subcolor
+               SET textcolor ::aStat['HGroupColor']
                ::traduci(Ghstring)
+               SET textcolor subcolor
                // @nline,0 say "@@"+if(m->insgh =.T.,[.T.],[.F.])  FONT "F1" to print
                nxtp := .F. ; nline ++
             ENDIF
@@ -3577,13 +3608,12 @@ METHOD TheBody() CLASS WREPORT
                IF ::GFeet()
                   IF gfline .and. sbt
                      //Rivedere
+                     GET textcolor to subcolor
+                     SET textcolor ::aStat['GTGroupColor']
                      ::traduci(strtran(sstring,chr(05),"["+s_total+"]"))
                      IF ::aStat['InlineSbt']= .F.
                         nline ++
                      ENDIF
-                     GET textcolor to subcolor
-                     SET textcolor BLUE
-                     // @nline,t_col say GFSTRING[1] to print    // ONLY FOR DEBUG!!!
                      Aeval(GFstring,{|x|::traduci(x)})
                      SET textcolor subcolor
                      nline ++

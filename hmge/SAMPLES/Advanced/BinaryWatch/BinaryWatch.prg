@@ -160,7 +160,7 @@ STATIC PROCEDURE OnTimer()
 
    IF cCurSec != cSecond
       Do Events
-      DISPLAYWatch()
+      DisplayWatch()
    ENDIF
 
    cCurSec := cSecond
@@ -175,9 +175,9 @@ STATIC PROCEDURE DisplayWatch()
 
    aClockClr := aColor
    FOR i := 1 to 6
-      DISPLAYHour(i)
-      DISPLAYMinute(i)
-      DISPLAYSecond(i)
+      DisplayHour(i)
+      DisplayMinute(i)
+      DisplaySecond(i)
    NEXT
    aClockClr := aBkColor
 
@@ -194,71 +194,71 @@ STATIC PROCEDURE DisplayWatch()
 
    // Convert decimal to binary
    IF (nHour >= 16)
-      DISPLAYHour(5)
+      DisplayHour(5)
       nHour -= 16
    ENDIF
    IF (nHour >= 8)
-      DISPLAYHour(4)
+      DisplayHour(4)
       nHour -= 8
    ENDIF
    IF (nHour >= 4)
-      DISPLAYHour(3)
+      DisplayHour(3)
       nHour -= 4
    ENDIF
    IF (nHour >= 2)
-      DISPLAYHour(2)
+      DisplayHour(2)
       nHour -= 2
    ENDIF
    IF (nHour >= 1)
-      DISPLAYHour(1)
+      DisplayHour(1)
       nHour -= 1
    ENDIF
    IF (nMinute >= 32)
-      DISPLAYMinute(6)
+      DisplayMinute(6)
       nMinute -= 32
    ENDIF
    IF (nMinute >= 16)
-      DISPLAYMinute(5)
+      DisplayMinute(5)
       nMinute -= 16
    ENDIF
    IF (nMinute >= 8)
-      DISPLAYMinute(4)
+      DisplayMinute(4)
       nMinute -= 8
    ENDIF
    IF (nMinute >= 4)
-      DISPLAYMinute(3)
+      DisplayMinute(3)
       nMinute -= 4
    ENDIF
    IF (nMinute >= 2)
-      DISPLAYMinute(2)
+      DisplayMinute(2)
       nMinute -= 2
    ENDIF
    IF (nMinute >= 1)
-      DISPLAYMinute(1)
+      DisplayMinute(1)
       nMinute -= 1
    ENDIF
    IF (nSecond >= 32)
-      DISPLAYSecond(6)
+      DisplaySecond(6)
       nSecond -= 32
    ENDIF
    IF (nSecond >= 16)
-      DISPLAYSecond(5)
+      DisplaySecond(5)
       nSecond -= 16
    ENDIF
    IF (nSecond >= 8)
-      DISPLAYSecond(4)
+      DisplaySecond(4)
       nSecond -= 8
    ENDIF
    IF (nSecond >= 4)
-      DISPLAYSecond(3)
+      DisplaySecond(3)
       nSecond -= 4
    ENDIF
    IF (nSecond >= 2)
-      DISPLAYSecond(2)
+      DisplaySecond(2)
       nSecond -= 2
    ENDIF
    IF (nSecond >= 1)
-      DISPLAYSecond(1)
+      DisplaySecond(1)
       nSecond -= 1
    ENDIF
 

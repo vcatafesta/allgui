@@ -101,12 +101,12 @@ FUNCTION StartIt()
          RETURN NIL
       ENDIF
 
-      EXTERNALApp.OPEN   HIDE
+      ExternalApp.OPEN   HIDE
 
       Inkey (1)   // Wait until the application is loaded
 
-      EXTERNALApp.TITLE := "Windows Calculator"
-      EXTERNALApp.SHOW
+      ExternalApp.TITLE := "Windows Calculator"
+      ExternalApp.SHOW
 
    ENDIF
 
@@ -115,7 +115,7 @@ FUNCTION StartIt()
 FUNCTION CloseIt()
 
    IF ExternalApp.IsOpen == .T.
-      EXTERNALApp.RELEASE
+      ExternalApp.RELEASE
    ENDIF
 
    RETURN NIL
@@ -172,9 +172,9 @@ PROCEDURE OnOff_ExternalApp
    StartIt()
 
    IF ExternalApp.IsVisible == .F.
-      EXTERNALApp.SHOW
+      ExternalApp.SHOW
    ELSE
-      EXTERNALApp.HIDE
+      ExternalApp.HIDE
    ENDIF
 
    RETURN

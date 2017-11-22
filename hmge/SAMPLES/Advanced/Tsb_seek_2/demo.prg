@@ -331,7 +331,7 @@ FUNCTION TBrw_Create( ControlName, ParentForm, nRow, nCol, nWidth, nHeight, uAli
       gotfocus,      ;
       lostfocus,     ;
       uAlias,        ;
-      DELETE,        ;
+      Delete,        ;
       lNogrid,       ;
       aImages,       ;
       aJust,         ;
@@ -346,8 +346,8 @@ FUNCTION TBrw_Create( ControlName, ParentForm, nRow, nCol, nWidth, nHeight, uAli
       lock,          ;
       lCell,         ;
       nStyle,        ;
-      APPENDable,    ;
-      READonly,      ;
+      appendable,    ;
+      readonly,      ;
       valid,         ;
       validmessages, ;
       aColors,       ;
@@ -363,7 +363,7 @@ FUNCTION TBrw_Create( ControlName, ParentForm, nRow, nCol, nWidth, nHeight, uAli
       uUserFilter,   ;
       aPicture,      ;
       lTransparent,  ;
-      USElector,     ;
+      uSelector,     ;
       lEditable,     ;
       lAutoCol,      ;
       aColSel )

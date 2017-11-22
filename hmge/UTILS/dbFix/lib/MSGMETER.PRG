@@ -42,7 +42,7 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
    restscreen(t, l, b, r, cScreen)
    nCursor := setcursor(nCursor)
 
-   RETURN(uRetVal)
+   Return(uRetVal)
 
    #else
 
@@ -89,7 +89,7 @@ FUNCTION MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
    activate dialog oDlg centered ;
       valid lEnd
 
-   RETURN(uRetVal)
+   Return(uRetVal)
 
 FUNCTION DblMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
 
@@ -125,7 +125,7 @@ FUNCTION DblMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
    activate dialog oDlg centered ;
       valid lEnd
 
-   RETURN(uRetVal)
+   Return(uRetVal)
 
 FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
 
@@ -164,7 +164,7 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
    oFont:End()
    SysRefresh()
 
-   RETURN(uRetVal)
+   Return(uRetVal)
 
    #endif // not DOS_ONLY
 

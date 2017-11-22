@@ -107,7 +107,7 @@ PROCEDURE Main
          Bold
 
       @ ( wStock.lblSearch.Row - 4 ), ( wStock.lblSearch.Col + wStock.lblSearch.Width + 10 ) ;
-         TEXTBox txbSearch                    ;
+         TextBox txbSearch                    ;
          Width 400                            ;
          Height 20                            ;
          UpperCase                            ;
@@ -1194,7 +1194,7 @@ STATIC PROCEDURE SetTitle
          FontColor BLUE
 
       @ ( wSetTitle.lblName.Row + wSetTitle.lblName.Height + 10 ), wSetTitle.lblName.Col ;
-         TEXTBox txbName                 ;
+         TextBox txbName                 ;
          Height 20                       ;
          Value aOptions[ OPTIONS_TITLE ]
 
@@ -1301,7 +1301,7 @@ STATIC PROCEDURE Options
          Fontcolor BLUE
 
       @ ( wOptions.frmEditor.Row + 25 ), ( wOptions.frmEditor.Col + 10 ) ;
-         TEXTbox txbEditor                                                ;
+         Textbox txbEditor                                                ;
          Value aOptions[ OPTIONS_EDITOR ]                                 ;
          Height 20                                                        ;
          Width ( wOptions.frmEditor.Width - 45 )
@@ -1332,12 +1332,12 @@ STATIC PROCEDURE Options
 
       @ ( wOptions.rdgParameters.Row + 30 )                              , ;
          ( wOptions.rdgParameters.Col + wOptions.rdgParameters.Width + 5 )  ;
-         TEXTbox txbWithNumber                                              ;
+         Textbox txbWithNumber                                              ;
          Height 20                                                          ;
          Width 120
 
       @ ( wOptions.txbWithNumber.Row + 30 ), wOptions.txbWithNumber.Col ;
-         TEXTbox txbWithName                                             ;
+         Textbox txbWithName                                             ;
          Height 20                                                       ;
          Width 120
 

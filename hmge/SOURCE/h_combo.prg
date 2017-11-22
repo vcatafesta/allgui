@@ -312,7 +312,7 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
    cField        := _HMG_aControlPageMap [k]
    Value         := _HMG_aControlValue [k]
    rows          := _HMG_aControlMiscData1 [k,4]
-   DISPLAYChange := _HMG_aControlMiscData1 [k,2]
+   DisplayChange := _HMG_aControlMiscData1 [k,2]
    ItemSource    := _HMG_aControlMiscData1 [k,3]
    ListWidth     := _HMG_aControlMiscData1 [k,5]
    cuetext       := _HMG_aControlMiscData1 [k,6]
@@ -418,7 +418,7 @@ FUNCTION _DefineComboEx ( ;
    strikeout , ;        // 23
    itemsource , ;       // 24
    valuesource , ;      // 25
-   DISPLAYchange , ;    // 26
+   displaychange , ;    // 26
    ondisplaychangeprocedure , ; // 27
    break , ;            // 28
    GripperText, ;       // 29

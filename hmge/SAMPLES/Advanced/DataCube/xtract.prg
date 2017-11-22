@@ -418,7 +418,7 @@ FUNCTION updateoptions
       width 430
       showheaders .f.
       widths aWidths
-      DYNAMICbackcolor aBackColors
+      dynamicbackcolor aBackColors
    END GRID
 
    xtract.options.additem(aItem)
@@ -1001,7 +1001,7 @@ FUNCTION createreport(lAutoCalc)
          justify aJustify
          showheaders .f.
          items aReportGrid
-         DYNAMICbackcolor aBackColors
+         dynamicbackcolor aBackColors
          //      cellnavigation .t.
       END GRID
    ELSE

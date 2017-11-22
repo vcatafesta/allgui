@@ -748,8 +748,8 @@ HB_FUNC( LISTVIEW_CHANGEEXTENDEDSTYLE )  // Dr. Claudio Soto
    DWORD OldStyle, NewStyle, Style;
 
    OldStyle = ListView_GetExtendedListViewStyle( hWnd );
-   NewStyle = ( OldStyle | Add) & ( ~Remove );
-   Style = ListView_SetExtendedListViewStyle( hWnd, NewStyle );
+   NewStyle = ( OldStyle | Add ) & ( ~Remove );
+   Style    = ListView_SetExtendedListViewStyle( hWnd, NewStyle );
 
    hb_retnl( ( LONG ) Style );
 }
@@ -761,8 +761,80 @@ HB_FUNC( LISTVIEW_GETEXTENDEDSTYLE )  // Dr. Claudio Soto
    DWORD ExStyle  = ( DWORD ) hb_parnl( 2 );
    DWORD OldStyle = ListView_GetExtendedListViewStyle( hWnd );
 
-   if ( HB_ISNUM( 2 ) )
+   if( HB_ISNUM( 2 ) )
       hb_retl( ( BOOL ) ( ( OldStyle & ExStyle ) == ExStyle ) );
    else
       hb_retnl( ( LONG ) OldStyle );
+}
+
+#if ( ( defined( __BORLANDC__ ) && __BORLANDC__ < 1410 ) )
+#define HDF_SORTDOWN  0x0200
+#define HDF_SORTUP    0x0400
+#endif
+
+//       ListView_SetSortHeader ( nHWndLV, nColumn [, nType
+//                                /*0==none, positive==UP arrow or negative==DOWN arrow*/] ) -> nType (previous setting)
+HB_FUNC( LISTVIEW_SETSORTHEADER )
+{
+   HWND   hWndHD = ( HWND ) SendMessage( ( HWND ) HB_PARNL( 1 ), LVM_GETHEADER, 0, 0 );
+   INT    nItem  = hb_parni( 2 ) - 1;
+   INT    nType;
+   HDITEM hdItem;
+
+   if( hb_parl( 4 ) )
+   {
+      hdItem.mask = HDI_FORMAT;
+
+      SendMessage( hWndHD, HDM_GETITEM, nItem, ( LPARAM ) &hdItem );
+
+      if( hdItem.fmt & HDF_SORTUP )
+         hb_retni( 1 );
+      else if( hdItem.fmt & HDF_SORTDOWN )
+         hb_retni( -1 );
+      else
+         hb_retni( 0 );
+
+      if( ( hb_pcount() > 2 ) && HB_ISNUM( 3 ) )
+      {
+         nType = hb_parni( 3 );
+
+         if( nType == 0 )
+            hdItem.fmt &= ~( HDF_SORTDOWN | HDF_SORTUP );
+         else if( nType > 0 )
+            hdItem.fmt = ( hdItem.fmt & ~HDF_SORTDOWN ) | HDF_SORTUP;
+         else
+            hdItem.fmt = ( hdItem.fmt & ~HDF_SORTUP ) | HDF_SORTDOWN;
+
+         SendMessage( hWndHD, HDM_SETITEM, nItem, ( LPARAM ) &hdItem );
+      }
+   }
+   else
+   {
+      hdItem.mask = HDI_BITMAP | HDI_FORMAT;
+
+      SendMessage( hWndHD, HDM_GETITEM, nItem, ( LPARAM ) &hdItem );
+
+      nType = hb_parni( 3 );
+
+      if( nType == 0 )
+      {
+         hdItem.mask = HDI_FORMAT;
+         hdItem.fmt &= ~( HDF_BITMAP | HDF_BITMAP_ON_RIGHT );
+      }
+      else
+      {
+         if( nType > 0 )
+            hdItem.hbm = ( HBITMAP ) LoadImage( g_hInstance, TEXT( "MINIGUI_GRID_ASC" ), IMAGE_BITMAP, 0, 0, LR_LOADTRANSPARENT | LR_DEFAULTCOLOR | LR_LOADMAP3DCOLORS );
+         else
+            hdItem.hbm = ( HBITMAP ) LoadImage( g_hInstance, TEXT( "MINIGUI_GRID_DSC" ), IMAGE_BITMAP, 0, 0, LR_LOADTRANSPARENT | LR_DEFAULTCOLOR | LR_LOADMAP3DCOLORS );
+
+         hdItem.fmt |= HDF_BITMAP;
+         if( hdItem.fmt & HDF_RIGHT )
+            hdItem.fmt &= ~HDF_BITMAP_ON_RIGHT;
+         else
+            hdItem.fmt |= HDF_BITMAP_ON_RIGHT;
+      }
+
+      SendMessage( hWndHD, HDM_SETITEM, nItem, ( LPARAM ) &hdItem );
+   }
 }

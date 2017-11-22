@@ -248,13 +248,13 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
             IF _HMG_aControlBkColor[i] != NIL
 
                SetBkColor( wParam, _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], _HMG_aControlBkColor[i][3] )
-               DELETEObject ( _HMG_aControlBrushHandle[i] )
+               DeleteObject ( _HMG_aControlBrushHandle[i] )
                _HMG_aControlBrushHandle[i] := CreateSolidBrush( _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], _HMG_aControlBkColor[i][3] )
 
                RETURN ( _HMG_aControlBrushHandle[i] )
 
             ELSE
-               DELETEObject ( _HMG_aControlBrushHandle[i] )
+               DeleteObject ( _HMG_aControlBrushHandle[i] )
                _HMG_aControlBrushHandle[i] := CreateSolidBrush( GetRed ( GetSysColor ( COLOR_3DFACE)), GetGreen ( GetSysColor ( COLOR_3DFACE)), ;
                   GetBlue ( GetSysColor ( COLOR_3DFACE)))
                SetBkColor( wParam, GetRed ( GetSysColor ( COLOR_3DFACE)), GetGreen ( GetSysColor ( COLOR_3DFACE)), ;
@@ -286,7 +286,7 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
                         IF _HMG_aControlBkColor[i] != NIL
                            SetBkColor( wParam, _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], _HMG_aControlBkColor[i][3] )
                            IF x == 1
-                              DELETEObject ( _HMG_aControlBrushHandle[i] )
+                              DeleteObject ( _HMG_aControlBrushHandle[i] )
                               _HMG_aControlBrushHandle[i] := CreateSolidBrush( _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], ;
                                  _HMG_aControlBkColor[i][3] )
                            ENDIF
@@ -294,7 +294,7 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
                            RETURN ( _HMG_aControlBrushHandle[i] )
                         ELSE
                            IF x == 1
-                              DELETEObject ( _HMG_aControlBrushHandle[i] )
+                              DeleteObject ( _HMG_aControlBrushHandle[i] )
                               _HMG_aControlBrushHandle[i] := CreateSolidBrush( GetRed ( GetSysColor ( COLOR_3DFACE)), ;
                                  GetGreen ( GetSysColor ( COLOR_3DFACE)), GetBlue ( GetSysColor ( COLOR_3DFACE)))
                            ENDIF
@@ -326,13 +326,13 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
             IF _HMG_aControlBkColor[i] != NIL
                SetBkColor( wParam, _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], _HMG_aControlBkColor[i][3] )
-               DELETEObject ( _HMG_aControlBrushHandle[i] )
+               DeleteObject ( _HMG_aControlBrushHandle[i] )
                _HMG_aControlBrushHandle[i] := CreateSolidBrush( _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], ;
                   _HMG_aControlBkColor[i][3] )
 
                RETURN ( _HMG_aControlBrushHandle[i] )
             ELSE
-               DELETEObject ( _HMG_aControlBrushHandle[i] )
+               DeleteObject ( _HMG_aControlBrushHandle[i] )
                _HMG_aControlBrushHandle[i] := CreateSolidBrush( GetRed ( GetSysColor ( COLOR_WINDOW)), GetGreen ( GetSysColor ( COLOR_WINDOW)), ;
                   GetBlue ( GetSysColor ( COLOR_WINDOW)))
                SetBkColor( wParam, GetRed ( GetSysColor ( COLOR_WINDOW)), GetGreen ( GetSysColor ( COLOR_WINDOW)), ;
@@ -357,13 +357,13 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
                      IF _HMG_aControlBkColor[i] != NIL
                         SetBkColor( wParam, _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], _HMG_aControlBkColor[i][3] )
-                        DELETEObject ( _HMG_aControlBrushHandle[i] )
+                        DeleteObject ( _HMG_aControlBrushHandle[i] )
                         _HMG_aControlBrushHandle[i] := CreateSolidBrush( _HMG_aControlBkColor[i][1], _HMG_aControlBkColor[i][2], ;
                            _HMG_aControlBkColor[i][3] )
 
                         RETURN ( _HMG_aControlBrushHandle[i] )
                      ELSE
-                        DELETEObject ( _HMG_aControlBrushHandle[i] )
+                        DeleteObject ( _HMG_aControlBrushHandle[i] )
                         _HMG_aControlBrushHandle[i] := CreateSolidBrush( GetRed ( GetSysColor ( COLOR_WINDOW)), ;
                            GetGreen ( GetSysColor ( COLOR_WINDOW)), GetBlue ( GetSysColor ( COLOR_WINDOW)))
                         SetBkColor( wParam, GetRed ( GetSysColor ( COLOR_WINDOW)), GetGreen ( GetSysColor ( COLOR_WINDOW)), ;
@@ -2373,7 +2373,7 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
          NEXT x
 
          * Delete Brush
-         DELETEObject ( _HMG_aFormBrushHandle[i] )
+         DeleteObject ( _HMG_aFormBrushHandle[i] )
 
          * Update Form Index Variable
          mVar := '_' + _HMG_aFormNames[i]

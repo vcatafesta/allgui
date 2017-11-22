@@ -101,7 +101,7 @@ FUNCTION Lst2_fill
 
    open_prt()
    aReturn:=ENUM_FORMS(_prtHandle)
-   CLOSEprinter()
+   closeprinter()
    IF empty(aReturn)
       MSGSTOP("No Forms found !","Error")
    ELSE
@@ -134,7 +134,7 @@ FUNCTION Lst2_refr(aReturn)
 STATIC FUNCTION closeprinter
 
    IF _lOpenPrt:=.t.
-      CLOSE_printer(_prtHandle)
+      close_printer(_prtHandle)
       _prtHandle:=0
       _lOpenPrt:=.f.
    ENDIF
@@ -159,7 +159,7 @@ FUNCTION GetDataForm
    ENDIF
    open_prt()
    aReturn:=ENUM_FORMS(_prtHandle)
-   CLOSEprinter()
+   closeprinter()
    cFormName:=alltrim(This.Item(nIndex))
    aName:=aReturn[1]
    aWidth:=aReturn[2]
@@ -216,14 +216,14 @@ FUNCTION NewUsrFrm()
       cFormName:=alltrim(maschera1.GetBox_1.Value)
       nWidth:=maschera1.GetBox_2.Value
       nHeigth:=maschera1.GetBox_3.Value
-      ELSEIF(maschera1.Button_1.caption=="Save User Form")
+      elseif(maschera1.Button_1.caption=="Save User Form")
       IF MSGYESNO("Add New Form ?","Confirm")
          cFormName:=alltrim(maschera1.GetBox_1.Value)
          nWidth:=maschera1.GetBox_2.Value
          nHeigth:=maschera1.GetBox_3.Value
          open_prt()
          cReturn:=New_Form(_prtHandle,cFormName,nWidth,nHeigth)
-         CLOSEprinter()
+         closeprinter()
          maschera1.Button_1.caption:="New User Form"
          IF valtype(cReturn)="A"
             IF !empty(cReturn[1])
@@ -260,7 +260,7 @@ FUNCTION ModifyForm
    IF MSGYESNO("Save Change ?","Confirm")
       open_prt()
       cReturn:=Set_Form(_prtHandle,cFormName,nWidth,nHeigth)
-      CLOSEprinter()
+      closeprinter()
       IF valtype(cReturn)="A"
          IF !empty(cReturn[1])
             IF cReturn[1]=1902
@@ -285,7 +285,7 @@ STATIC FUNCTION open_prt
 
    cPrinterName:=maschera1.Text_1.Value
    IF _lOpenPrt=.t.
-      CLOSEprinter()
+      closeprinter()
    ENDIF
    IF _lOpenPrt=.f.
       _prtHandle:=Open_Printer(cPrinterName)
@@ -302,7 +302,7 @@ FUNCTION DelUserForm
       cFormName:=alltrim(maschera1.GetBox_1.Value)
       open_prt()
       cReturn:=delete_form(_prtHandle,cFormName)
-      CLOSEprinter()
+      closeprinter()
       IF valtype(cReturn)="A"
          IF !empty(cReturn[1])
             IF cReturn[1]=1902

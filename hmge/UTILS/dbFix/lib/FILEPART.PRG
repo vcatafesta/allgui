@@ -19,7 +19,7 @@ FUNCTION AddSlash(cPath)
       ENDIF
    ENDIF
 
-   RETURN(cPath)
+   Return(cPath)
 
    #ifndef DOS_ONLY
 
@@ -36,7 +36,7 @@ FUNCTION CurPath(lSlash)
 
    DEFAULT lSlash := .F.
 
-   RETURN(iif(lSlash, AddSlash(cPath), StripSlash(cPath)))
+   Return(iif(lSlash, AddSlash(cPath), StripSlash(cPath)))
 
 FUNCTION ExeName()
 
@@ -46,7 +46,7 @@ FUNCTION ExeName()
    Translates directly to GetModuleFileName(GetInstance()).
    */
 
-   RETURN(GetModuleFileName(GetInstance()))
+   Return(GetModuleFileName(GetInstance()))
 
 FUNCTION ExePath(lSlash)
 
@@ -60,7 +60,7 @@ FUNCTION ExePath(lSlash)
 
    DEFAULT lSlash := .F.
 
-   RETURN( left(cExe, rat("\", cExe) - iif(lSlash, 0, 1)) )
+   Return( left(cExe, rat("\", cExe) - iif(lSlash, 0, 1)) )
 
    #endif
 
@@ -181,7 +181,7 @@ FUNCTION FileParts(cFileSpec, nPart)
 
    ENDCASE
 
-   RETURN(cText)
+   Return(cText)
 
 FUNCTION GetTempDir(lSlash)
 
@@ -219,7 +219,7 @@ FUNCTION GetTempDir(lSlash)
       ENDIF
    NEXT
 
-   RETURN(cDir)
+   Return(cDir)
 
 FUNCTION IndexOf(cFile)
 
@@ -232,7 +232,7 @@ FUNCTION IndexOf(cFile)
    Translates directly to: NewExt(cFile, ordBagExt())
    */
 
-   RETURN(NewExt(cFile, ordBagExt()))
+   Return(NewExt(cFile, ordBagExt()))
 
 FUNCTION MemoOf(cFile)
 
@@ -246,7 +246,7 @@ FUNCTION MemoOf(cFile)
 
    */
 
-   RETURN(NewExt(cFile, sx_MemoExt()))
+   Return(NewExt(cFile, sx_MemoExt()))
 
 FUNCTION NewExt(cFile, cExt)
 
@@ -262,7 +262,7 @@ FUNCTION NewExt(cFile, cExt)
       cExt := "." + cExt
    ENDIF
 
-   RETURN(FileParts(cFile, FP_STRIPEXT) + cExt)
+   Return(FileParts(cFile, FP_STRIPEXT) + cExt)
 
 FUNCTION RevExt(cFile)
 
@@ -281,7 +281,7 @@ FUNCTION RevExt(cFile)
       cRev += substr(cExt, x, 1)
    NEXT
 
-   RETURN(cRev)
+   Return(cRev)
 
 FUNCTION StripExt(cFile)
 
@@ -289,7 +289,7 @@ FUNCTION StripExt(cFile)
    Just a quick way to write FileParts(cFile, FP_STRIPEXT)
    */
 
-   RETURN(FileParts(cFile, FP_STRIPEXT))
+   Return(FileParts(cFile, FP_STRIPEXT))
 
 FUNCTION StripSlash(cPath)
 
@@ -302,7 +302,7 @@ FUNCTION StripSlash(cPath)
       cPath := left(cPath, len(cPath) - 1)
    ENDIF
 
-   RETURN(cPath)
+   Return(cPath)
 
 FUNCTION Temp_Name(cExt, cPath)
 
@@ -351,5 +351,5 @@ FUNCTION Temp_Name(cExt, cPath)
 
    ENDDO
 
-   RETURN(cTemp)
+   Return(cTemp)
 

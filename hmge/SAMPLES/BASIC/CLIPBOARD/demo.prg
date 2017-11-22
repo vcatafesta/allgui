@@ -173,7 +173,7 @@ STATIC PROCEDURE Bracketed
 
    wDemo.edtText.SetFocus
 
-   CLEARClipboard( Application.Handle )
+   ClearClipboard( Application.Handle )
    Cut_Text( nHandle )
 
    cText := AllTrim( System.Clipboard )

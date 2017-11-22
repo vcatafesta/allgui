@@ -433,7 +433,7 @@ STATIC PROCEDURE SwitchTab
       wMain.pdDelete.Enabled :=.F.
       wMain.grdFiles.SetFocus
 
-      ELSEIF( nValue == 2 )           // ¬кладка записей
+      ElseIf( nValue == 2 )           // ¬кладка записей
       ListRecords()
       wMain.pdDelete.Enabled :=.T.
       wMain.grdRecords.SetFocus
@@ -696,7 +696,7 @@ STATIC PROCEDURE ShowMe( lForce )
 
    IF ( nValue == 1 )
       nPos := wMain.grdFiles.Value
-      ELSEIF( nValue == 2 )
+      ElseIf( nValue == 2 )
       nPos := wMain.grdRecords.Value
    ENDIF
 

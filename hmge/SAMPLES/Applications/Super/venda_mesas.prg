@@ -308,7 +308,7 @@ FUNCTION venda_mesas()
    form_vda_mesas.maximize
    form_vda_mesas.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_produto()
 
@@ -328,23 +328,23 @@ STATIC FUNCTION procura_produto()
          IF msgyesno('Este código não é válido. Deseja procurar na lista ?','Atenção')
             mostra_listagem_produto()
 
-            RETURN(nil)
+            return(nil)
          ELSE
             form_vda_mesas.tbox_produto.setfocus
 
-            RETURN(nil)
+            return(nil)
          ENDIF
       ELSE
          setproperty('form_vda_mesas','label_nome_produto','value',produtos->nome_longo)
          setproperty('form_vda_mesas','tbox_preco','value',produtos->vlr_venda)
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ELSE
       mostra_listagem_produto()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_listagem_produto()
 
@@ -385,7 +385,7 @@ STATIC FUNCTION mostra_listagem_produto()
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION separa_produto()
 
@@ -402,7 +402,7 @@ STATIC FUNCTION separa_produto()
       produtos->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_informacao_produto()
 
@@ -424,7 +424,7 @@ STATIC FUNCTION mostra_informacao_produto()
 
    form_pesquisa.release
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION procura_pizza()
 
@@ -444,22 +444,22 @@ STATIC FUNCTION procura_pizza()
          IF msgyesno('Este código não é de uma Pizza. Deseja procurar na lista ?','Atenção')
             mostra_listagem_pizza()
 
-            RETURN(nil)
+            return(nil)
          ELSE
             form_vda_mesas.tbox_pizza.setfocus
 
-            RETURN(nil)
+            return(nil)
          ENDIF
       ELSE
          setproperty('form_vda_mesas','label_nome_pizza','value',produtos->nome_longo)
 
-         RETURN(nil)
+         return(nil)
       ENDIF
    ELSE
       mostra_listagem_pizza()
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_listagem_pizza()
 
@@ -500,7 +500,7 @@ STATIC FUNCTION mostra_listagem_pizza()
    form_pesquisa.center
    form_pesquisa.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION separa_pizza()
 
@@ -517,7 +517,7 @@ STATIC FUNCTION separa_pizza()
       produtos->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_informacao()
 
@@ -529,7 +529,7 @@ STATIC FUNCTION mostra_informacao()
 
    form_pesquisa.release
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar_adicionar()
 
@@ -553,7 +553,7 @@ STATIC FUNCTION gravar_adicionar()
    form_vda_mesas.tbox_pizza.value := ''
    form_vda_mesas.tbox_pizza.setfocus
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar_produto()
 
@@ -580,14 +580,14 @@ STATIC FUNCTION gravar_produto()
    form_vda_mesas.tbox_produto.value := ''
    form_vda_mesas.tbox_produto.setfocus
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir_pizza()
 
    IF empty(temp_pizzas->nome)
       msgalert('Escolha o que deseja excluir primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF msgyesno('Excluir : '+alltrim(temp_pizzas->nome),'Excluir')
@@ -609,14 +609,14 @@ STATIC FUNCTION excluir_pizza()
    form_vda_mesas.grid_pizzas.setfocus
    form_vda_mesas.grid_pizzas.value := recno()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION excluir_produto()
 
    IF empty(temp_produtos->nome)
       msgalert('Escolha o que deseja excluir primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF msgyesno('Excluir : '+alltrim(temp_produtos->nome),'Excluir')
@@ -638,14 +638,14 @@ STATIC FUNCTION excluir_produto()
    form_vda_mesas.grid_produtos.setfocus
    form_vda_mesas.grid_produtos.value := recno()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION fecha_pizza()
 
    IF _escape
       msgexclamation('Você deve estar montando uma pizza para usar a tecla F5 - leia o texto na tela para orientar-se melhor','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    dbselectarea('temp_pizzas')
@@ -653,7 +653,7 @@ STATIC FUNCTION fecha_pizza()
    IF eof()
       msgexclamation('Nenhuma pizza foi selecionada ainda','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    DEFINE WINDOW form_finaliza_pizza;
@@ -733,7 +733,7 @@ STATIC FUNCTION fecha_pizza()
    form_finaliza_pizza.center
    form_finaliza_pizza.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION monta_informacao_pizza()
 
@@ -754,7 +754,7 @@ STATIC FUNCTION monta_informacao_pizza()
       temp_pizzas->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION pega_tamanho_valor_pizza()
 
@@ -766,10 +766,10 @@ STATIC FUNCTION pega_tamanho_valor_pizza()
 
    IF x_coluna == 1
 
-      RETURN(nil)
+      return(nil)
    ELSEIF x_coluna == 2
 
-      RETURN(nil)
+      return(nil)
    ELSEIF x_coluna == 3
       x_nome_tamanho := alltrim(_tamanho_001)+' '+alltrim(str(_pedaco_001))+'ped'
    ELSEIF x_coluna == 4
@@ -803,7 +803,7 @@ STATIC FUNCTION pega_tamanho_valor_pizza()
    form_vda_mesas.grid_pizzas.setfocus
    form_vda_mesas.tbox_observacoes.setfocus
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION verifica_zero()
 
@@ -812,10 +812,10 @@ STATIC FUNCTION verifica_zero()
    IF empty(x_qtd)
       form_vda_mesas.tbox_quantidade.setfocus
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION fecha_pedido()
 
@@ -839,17 +839,17 @@ STATIC FUNCTION fecha_pedido()
    IF !_escape
       msgalert('Para fechar a mesa, esteja na tela ao lado e tecle F4','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
    IF empty(x_nome_mesa)
       msgalert('Escolha uma mesa primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
    IF empty(x_hora)
       msgalert('Esta mesa não está aberta, tecle F2 para abrir a mesa primeiro e F3 para digitar o consumo','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    * associar id para filtrar as tabelas de pizza e produtos
@@ -1152,7 +1152,7 @@ STATIC FUNCTION fecha_pedido()
    form_fecha_pedido.center
    form_fecha_pedido.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION calcula_final()
 
@@ -1182,7 +1182,7 @@ STATIC FUNCTION calcula_final()
    setproperty('form_fecha_pedido','label_011_valor','value',trans(x_recebido,'@E 999,999.99'))
    setproperty('form_fecha_pedido','label_012_valor','value',trans(x_troco,'@E 999,999.99'))
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION fechamento_geral(parametro)
 
@@ -1442,7 +1442,7 @@ STATIC FUNCTION fechamento_geral(parametro)
 
    limpar_mesa()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION mostra_mesas()
 
@@ -1457,7 +1457,7 @@ STATIC FUNCTION mostra_mesas()
       mesas->(dbskip())
    end
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION abrir_mesa()
 
@@ -1476,13 +1476,13 @@ STATIC FUNCTION abrir_mesa()
    IF empty(x_nome_mesa)
       msgalert('Escolha uma mesa primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF .not. empty(x_id)
       msgalert('Mesa já está aberta','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    x_mesa := val(valor_coluna('grid_mesas','form_vda_mesas',2))
@@ -1504,7 +1504,7 @@ STATIC FUNCTION abrir_mesa()
 
    mostra_mesas()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION limpar_mesa()
 
@@ -1516,7 +1516,7 @@ STATIC FUNCTION limpar_mesa()
    IF empty(x_nome_mesa)
       msgalert('Escolha uma mesa primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    x_mesa := val(valor_coluna('grid_mesas','form_vda_mesas',2))
@@ -1538,13 +1538,13 @@ STATIC FUNCTION limpar_mesa()
 
    mostra_mesas()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION lancar_consumo()
 
    habilita_consumo()
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION desabilita_consumo()
 
@@ -1562,7 +1562,7 @@ STATIC FUNCTION desabilita_consumo()
    form_vda_mesas.label_nome_pizza.enabled := .F.
    form_vda_mesas.label_nome_produto.enabled := .F.
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION habilita_consumo()
 
@@ -1573,13 +1573,13 @@ STATIC FUNCTION habilita_consumo()
    IF empty(x_nome_mesa)
       msgalert('Escolha uma mesa primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    IF empty(x_hora)
       msgalert('Esta mesa não está aberta, tecle F2 para abrir a mesa primeiro','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    _id_consumo := alltrim(x_id)
@@ -1626,7 +1626,7 @@ STATIC FUNCTION habilita_consumo()
 
    _escape := .F.
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION fecha_janela()
 
@@ -1638,5 +1638,5 @@ STATIC FUNCTION fecha_janela()
       _escape := .T.
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 

@@ -534,7 +534,7 @@ FUNCTION _SetFontCharset ( ControlName, ParentForm , Value  )
    LOCAL i , h , n , s , ab , ai , au , as , x
 
    i := GetControlIndex ( ControlName, ParentForm )
-   DELETEObject ( _HMG_aControlFontHandle [i] )
+   DeleteObject ( _HMG_aControlFontHandle [i] )
    h := _HMG_aControlHandles [i]
    n := _HMG_aControlFontName [i]
    s := _HMG_aControlFontSize [i]

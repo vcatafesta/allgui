@@ -35,7 +35,7 @@ FUNCTION backup()
          fontname 'verdana'
          fontsize 9
          fontcolor _preto_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_destino
          picture path_imagens+'img_destino.bmp'
          col 280
@@ -47,7 +47,7 @@ FUNCTION backup()
          fontname 'verdana'
          fontsize 9
          fontcolor _preto_001
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_sair
          picture path_imagens+'img_sair.bmp'
          col 250
@@ -56,7 +56,7 @@ FUNCTION backup()
          height 040
          caption 'Sair'
          action form_backup.release
-      END BUTTONex
+      end buttonex
 
       define progressbar progressbar_1
          row 070
@@ -106,14 +106,14 @@ FUNCTION backup()
    form_backup.center
    form_backup.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION escolhe_pasta()
 
    destino_backup := GetFolder('Escolha a pasta')
    SetProperty('form_backup','label_destino','value',alltrim(destino_backup))
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION createzip()
 
@@ -123,7 +123,7 @@ STATIC FUNCTION createzip()
    IF empty(destino_backup)
       msgstop('Você precisa definir para onde o backup será feito','Atenção')
 
-      RETURN(nil)
+      return(nil)
    ENDIF
 
    FillFiles( aFiles, aDir, cPath )
@@ -144,7 +144,7 @@ STATIC FUNCTION createzip()
       form_backup.label_zip.value := 'Backup realizado com sucesso'
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION ProgressUpdate( nPos , cFile , lShowFileName )
 
@@ -157,7 +157,7 @@ STATIC FUNCTION ProgressUpdate( nPos , cFile , lShowFileName )
       INKEY(.1)
    ENDIF
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION FillFiles( aFiles, cDir, cPath )
 
@@ -172,5 +172,5 @@ STATIC FUNCTION FillFiles( aFiles, cDir, cPath )
       ENDIF
    NEXT
 
-   RETURN(aFiles)
+   return(aFiles)
 

@@ -161,7 +161,7 @@ FUNCTION SaveMdi(cFile)
             Memowrit( cFile , cVar )
          ELSE
 
-            RETURN(.f.)
+            Return(.f.)
          ENDIF
       ELSE
          Memowrit( cFile , cVar )
@@ -170,7 +170,7 @@ FUNCTION SaveMdi(cFile)
       Form_1.Btn_Save.Enabled  := .f.
    ENDIF
 
-   RETURN(.t.)
+   Return(.t.)
 
 FUNCTION CreateMDIClient(Buffer,title)
 

@@ -572,9 +572,9 @@ FUNCTION  NewEdit(cFile,typ)
 
    cxFile := ALLTRIM(substr(cFile,Rat('\',cFile)+1))
    IF len(aFileEdit) == 0
-      COUNTPage := 0
+      CountPage := 0
    ENDIF
-   COUNTPage ++
+   CountPage ++
    ActivePage  := CountPage
    nRatio      := 1
    aadd(aFileEdit, {0,'',cxFile,typ,cFile})
@@ -792,7 +792,7 @@ FUNCTION Close_File()
 
    IF CountPage > 1
       _DeleteTabPage ( 'Tab_1', MainForm , ActivePage )
-      COUNTPage --
+      CountPage --
       aDel(aFileEdit,ActivePage)
       aSize(aFileEdit,CountPage)
       ActivePage --
@@ -809,7 +809,7 @@ FUNCTION Close_File()
       Form_1.Tab_1.Caption(ActivePage):='No File'
       Form_1.Title := cTitle
       ActivePage:= 1
-      COUNTPage := 1
+      CountPage := 1
       ActiveEdit :=''
       ActiveSlider:= ''
       ActiveChkBtn:= ''
@@ -980,7 +980,7 @@ FUNCTION Cut_Click()
 
 FUNCTION Clear_Click()
 
-   CLEARRTF(hEd)
+   ClearRTF(hEd)
 
    RETURN NIL
 

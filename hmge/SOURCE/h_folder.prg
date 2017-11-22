@@ -937,10 +937,10 @@ FUNCTION _ReleaseFolder( hwndFolder )
    IF hwndFolder != 0
       FOR n := 1 TO Len( _HMG_aFormParentHandle )
          IF _HMG_aFormParentHandle [n] == hwndFolder
-            ERASEFolder( _HMG_aFormHandles [n], .F. )
+            EraseFolder( _HMG_aFormHandles [n], .F. )
          ENDIF
       NEXT
-      ERASEFolder( hwndFolder, _HMG_aFolderInfo[nFldID, FLD_MOD] )
+      EraseFolder( hwndFolder, _HMG_aFolderInfo[nFldID, FLD_MOD] )
    ENDIF
 
    RETURN NIL

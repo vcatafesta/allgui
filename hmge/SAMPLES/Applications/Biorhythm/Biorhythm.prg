@@ -145,7 +145,7 @@ PROCEDURE Main()
 
    LOAD WINDOW Biorhythm AS oBiorhythm
 
-   BEGIN()
+   Begin()
    ShowCycles()
 
    CENTER WINDOW oBiorhythm

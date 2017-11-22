@@ -473,7 +473,7 @@ PROCEDURE Main( cFile )
          @ 120, 15 EditBox edtComment ;
             Value ''           ;
             NoHScroll          ;
-            READOnly
+            ReadOnly
 
          // Transformation rule of field contexts at the changing of value type
 
@@ -512,7 +512,7 @@ PROCEDURE Main( cFile )
          @ 30, 5 EditBox edtGeneral ;
             Value ''           ;
             NoHScroll          ;
-            READOnly
+            ReadOnly
 
          // Buttons Apply/Discard changes
 
@@ -539,7 +539,7 @@ PROCEDURE Main( cFile )
          @ 30, 5 Grid grdCollector                                              ;
             Headers { 'Name', 'Type', 'Len', 'Dec', 'Comment' }            ;
             Widths  { 80    , 45    , 40   , 40   , 102    }               ;
-            DYNAMICBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
+            DynamicBackColor { { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
             { | xVal, nItem | DynamicColors( nItem ) }, ;
@@ -586,7 +586,7 @@ PROCEDURE Main( cFile )
    @ 240, 5 EditBox edtMessages ;
       Value ''            ;
       Height 90           ;
-      READOnly            ;
+      ReadOnly            ;
       Backcolor WHITE
 
    On key Alt+X of wModest Action { || Done(), ReleaseAllWindows() }

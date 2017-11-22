@@ -24,7 +24,7 @@ FUNCTION Crop(nMin, nValue, nMax)
       nRet := min(nMax, nRet)
    ENDIF
 
-   RETURN(nRet)
+   Return(nRet)
 
 FUNCTION CtoN(c, lBigEndian)
 
@@ -56,7 +56,7 @@ FUNCTION CtoN(c, lBigEndian)
       nMod *= 256
    NEXT
 
-   RETURN(n)
+   Return(n)
 
 FUNCTION Factorial(n)
 
@@ -71,7 +71,7 @@ FUNCTION Factorial(n)
       f *= x
    NEXT
 
-   RETURN(f)
+   Return(f)
 
 FUNCTION HtoN(cHex)
 
@@ -87,7 +87,7 @@ FUNCTION HtoN(cHex)
 
    n += max(at(substr(cHex, 2, 1), cDigits) - 1, 0)
 
-   RETURN(n)
+   Return(n)
 
 FUNCTION NtoC(nValue, nLen, lBigEndian)
 
@@ -122,7 +122,7 @@ FUNCTION NtoC(nValue, nLen, lBigEndian)
       nMod /= 256
    NEXT
 
-   RETURN(cRet)
+   Return(cRet)
 
 FUNCTION NtoH(n)
 
@@ -135,7 +135,7 @@ FUNCTION NtoH(n)
    LOCAL cHex := substr(cDigits, int((n % 256) / 16) + 1, 1) + ;
       substr(cDigits, (n % 16) + 1, 1)
 
-   RETURN(cHex)
+   Return(cHex)
 
 FUNCTION XFix(x, nDec)
 
@@ -154,7 +154,7 @@ FUNCTION XFix(x, nDec)
 
    cNum := left(cNum, len(cNum) - iif(nDec > 0, 1, 2))
 
-   RETURN(val(cNum))
+   Return(val(cNum))
 
 FUNCTION XRound(x, nDec)
 
@@ -173,5 +173,5 @@ FUNCTION XRound(x, nDec)
 
    // Give x the proper number of decimal places upon returning:
 
-   RETURN(XFix(x, nDec))
+   Return(XFix(x, nDec))
 

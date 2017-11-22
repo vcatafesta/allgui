@@ -161,8 +161,8 @@ FUNCTION LoadGrid(aRows,lmultiselect,lcelled,leditable)
          {||msgyesno('Is this valid ?','Confirm')};
          }
       OnDblClick MsgInfo("Double Click event!")
-      DYNAMICBackColor {bColor,bColor,bColor,bColor,bColor,bColor,bColor}
-      DYNAMICForeColor {fColor,fColor,fColor,fColor,fColor,fColor,fColor}
+      DynamicBackColor {bColor,bColor,bColor,bColor,bColor,bColor,bColor}
+      DynamicForeColor {fColor,fColor,fColor,fColor,fColor,fColor,fColor}
       HeaderImages {'help.bmp','help.bmp'}
       OnHeadClick {{||MsgInfo("Header1 Clicked!")},{||MsgInfo("Header2 Clicked!")},{||MsgInfo("Header3 Clicked!")},{||MsgInfo("Header4 Clicked!")},{||MsgInfo("Header5 Clicked!")},{||MsgInfo("Header6 Clicked!")},{||MsgInfo("Header7 Clicked!")}}
       ShowHeaders showheader

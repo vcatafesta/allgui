@@ -260,7 +260,7 @@ FUNCTION SendPacket(cURL,cRequest,nPort)
             WriteFile(nFile,cTemp)
          ENDIF
          oSocket:Close()
-         CLOSEFile(nFile)
+         CloseFile(nFile)
          cResponse := "Success"
       ENDIF
    ENDIF

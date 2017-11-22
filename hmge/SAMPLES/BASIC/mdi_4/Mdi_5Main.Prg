@@ -9,7 +9,7 @@ FUNCTION Main()
    frmMain.Center
    frmMain.Activate
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -53,7 +53,7 @@ FUNCTION CrearMenuPpal()
 
    End Menu
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -88,7 +88,7 @@ FUNCTION CrearChild( nChild )
       DoMethod( cChild, 'Center' )
    END IF
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -102,7 +102,7 @@ FUNCTION MostrarVentanasCargadas()
    NEXT I
    MsgInfo( cNombres )
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -116,7 +116,7 @@ FUNCTION WinChildMaximize()
       SendMessage( _HMG_MainClientMDIHandle, WM_MDIMAXIMIZE, ChildHandle, 0 )
    END IF
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -128,7 +128,7 @@ FUNCTION WinChildTile(lVert)
       TILE MDICHILDS HORIZONTAL
    END IF
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -136,7 +136,7 @@ FUNCTION WinChildCascade()
 
    CASCADE MDICHILDS
 
-   RETURN( Nil )
+   Return( Nil )
 
    /***/
 
@@ -156,5 +156,5 @@ FUNCTION SwitchToNextWin()
       DoMethod( "Child_" + hb_ntos(nForm), "SetFocus" )
    END IF
 
-   RETURN( Nil )
+   Return( Nil )
 

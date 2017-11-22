@@ -99,7 +99,7 @@ STATIC FUNCTION DrawCurves()
          PolyBezier( hDC, cPoints, 4 )
          SelectObject( hDC, hOldPen )
 
-         DELETEObject( hPen )
+         DeleteObject( hPen )
       NEXT
 
       EndPaint( hWnd, pPS )

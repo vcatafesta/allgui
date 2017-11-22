@@ -698,7 +698,7 @@ FUNCTION OwnButtonPaint( pdis )
 
       hTheme := OpenThemeData( hWnd, ToUnicode( "BUTTON" ) )
       DrawThemeBackground( hTheme, hDC, BP_PUSHBUTTON, nStyle, aBtnRc, aBtnClipRc )
-      CLOSEThemeData( hTheme )
+      CloseThemeData( hTheme )
 
    ELSE
 
@@ -746,7 +746,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 2, yp2 - 2, aGradient [ 1 ][ 2 ], aGradient [ 1 ][ 1 ] )
                   FillRect( hDC, xp1 + 2, xp2 + 2, yp1 - 2, yp2 - 2, hBrush )
-                  DELETEObject( hBrush )
+                  DeleteObject( hBrush )
                ENDIF
             ELSEIF ! ( _HMG_aControlRangeMax [ i ] == 1 )
                IF Len( aGradient [ 1 ] ) == 3
@@ -754,7 +754,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 1, yp2 - 1, aGradient [ 1 ][ 1 ], aGradient [ 1 ][ 2 ] )
                   FillRect( hDC, xp1 + 1, xp2 + 1, yp1 - 1, yp2 - 1, hBrush )
-                  DELETEObject( hBrush )
+                  DeleteObject( hBrush )
                ENDIF
             ELSE
                IF Len( aGradient [ 1 ] ) == 3
@@ -763,7 +763,7 @@ FUNCTION OwnButtonPaint( pdis )
                ELSE
                   hBrush := CreateButtonBrush( hDC, yp1 - 1, yp2 - 1, aGradient [ 1 ][ 2 ], aGradient [ 1 ][ 1 ] )
                   FillRect( hDC, xp1 + 1, xp2 + 1, yp1 - 1, yp2 - 1, hBrush )
-                  DELETEObject( hBrush )
+                  DeleteObject( hBrush )
                ENDIF
             ENDIF
 
@@ -785,7 +785,7 @@ FUNCTION OwnButtonPaint( pdis )
             ELSE
                FillRect( hDC, xp1 + 2, xp2 + 2, yp1 - 3, yp2 - 3, hBrush )
             ENDIF
-            DELETEObject( hBrush )
+            DeleteObject( hBrush )
 
          ENDIF
 
@@ -1038,7 +1038,7 @@ FUNCTION _DestroyBtnPictureMask( hWnd, ControlIndex )
    LOCAL MaskHwnd := _GetBtnPictureHandle( hWnd )
 
    IF ! Empty( MaskHwnd ) .AND. MaskHwnd <> _HMG_aControlBrushHandle [ ControlIndex ]
-      DELETEObject( MaskHwnd )
+      DeleteObject( MaskHwnd )
    ENDIF
 
    RETURN NIL
@@ -1048,7 +1048,7 @@ FUNCTION _DestroyBtnPicture( hWnd, ControlIndex )
    LOCAL BtnPicHwnd := _GetBtnPictureHandle( hWnd )
 
    IF ! Empty( BtnPicHwnd ) .AND. BtnPicHwnd == _HMG_aControlBrushHandle [ ControlIndex ]
-      DELETEObject( BtnPicHwnd )
+      DeleteObject( BtnPicHwnd )
    ENDIF
 
    RETURN NIL

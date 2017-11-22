@@ -278,7 +278,7 @@ FUNCTION empresa()
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_empresa.width-100
@@ -291,7 +291,7 @@ FUNCTION empresa()
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      END BUTTONex
+      end buttonex
 
       on key escape action thiswindow.release
 
@@ -300,7 +300,7 @@ FUNCTION empresa()
    form_empresa.center
    form_empresa.activate
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION gravar()
 
@@ -324,5 +324,5 @@ STATIC FUNCTION gravar()
 
    form_empresa.release
 
-   RETURN(nil)
+   return(nil)
 

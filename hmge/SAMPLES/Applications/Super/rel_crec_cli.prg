@@ -60,14 +60,14 @@ FUNCTION relatorio_crec_002()
          width 150;
          height 030;
          font 'verdana' size 014
-      DEFINE COMBOBOXex cbo_001
+      define comboboxex cbo_001
       row   110
       col   010
       width 310
       height 200
       items a_001
       value 1
-   END COMBOBOXex
+   end comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -93,7 +93,7 @@ FUNCTION relatorio_crec_002()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   END BUTTONex
+   end buttonex
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_mov_crec_cli.width-100
@@ -106,7 +106,7 @@ FUNCTION relatorio_crec_002()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   END BUTTONex
+   end buttonex
 
    on key escape action thiswindow.release
 
@@ -115,7 +115,7 @@ END WINDOW
 form_mov_crec_cli.center
 form_mov_crec_cli.activate
 
-RETURN(nil)
+return(nil)
 
 STATIC FUNCTION relatorio()
 
@@ -206,7 +206,7 @@ STATIC FUNCTION relatorio()
    ordscope(1,0)
    contas_receber->(dbgotop())
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -232,12 +232,12 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 046,040 PRINT 'OBSERVAÇÃO' FONT 'courier new' SIZE 010 BOLD
    @ 046,120 PRINT 'NÚMERO' FONT 'courier new' SIZE 010 BOLD
 
-   RETURN(nil)
+   return(nil)
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   RETURN(nil)
+   return(nil)
 

@@ -433,7 +433,7 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
    aGifInfo := Array( 3 )
    aFrames := {}
    aImgInfo := {}
-   DEFAULT PATH TO GetTempFolder()
+   DEFAULT path TO GetTempFolder()
 
    IF ! File( GIF )
       Alert( "File " + GIF + " is not found!" )
@@ -465,8 +465,7 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
 
    i := j + 2
 
-   /* Split GIF Files at separate pictures
-   and load them into ImageList */
+   /* Split GIF Files at separate pictures and load them into ImageList */
 
    DO WHILE .T.
       nImgCount++
@@ -515,7 +514,7 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       ELSE
          i := j
       ENDIF
-   END DO
+   ENDDO
 
    IF i < Len( cStream )
       cFile := path + "\" + cFileNoExt( GIF ) + "_frame_" + StrZero( nImgCount, 4 ) + ".gif"
@@ -561,19 +560,16 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
 
 FUNCTION ReadFromStream( cFile, cStream )
 
-   LOCAL nFileHandle := FOpen( cFile )
    LOCAL nFileSize
+   LOCAL nFileHandle := FOpen( cFile )
 
-   IF FError() <> 0
-
-      RETURN FALSE
+   IF FError() == 0
+      nFileSize := FSeek( nFileHandle, 0, FS_END )
+      cStream   := Space( nFileSize )
+      FSeek( nFileHandle, 0, FS_SET )
+      FRead( nFileHandle, @cStream, nFileSize )
+      FClose( nFileHandle )
    ENDIF
-
-   nFileSize := FSeek( nFileHandle, 0, FS_END )
-   cStream   := Space( nFileSize )
-   FSeek( nFileHandle, 0, FS_SET )
-   FRead( nFileHandle, @cStream, nFileSize )
-   FClose( nFileHandle )
 
    RETURN ( FError() == 0 .AND. .NOT. Empty( cStream ) )
 
@@ -582,7 +578,5 @@ FUNCTION ReadFromStream( cFile, cStream )
 
 FUNCTION GetFrameDelay( cImageInfo, nDelay )
 
-   DEFAULT nDelay TO 10
-
-   RETURN ( Bin2W( SubStr( cImageInfo, 4, 2 ) ) * nDelay )
+   RETURN ( Bin2W( SubStr( cImageInfo, 4, 2 ) ) * hb_defaultValue( nDelay, 10 ) )
 

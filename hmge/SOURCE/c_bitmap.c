@@ -962,7 +962,7 @@ HB_FUNC( HB_GETIMAGESIZE )
 
    Arguments
      <xBitmap> is the NAME of the bitmap file or resource
-     or 
+     or
      <xBitmap> is the handle to OBJ_BITMAP
 
    Returns
@@ -992,7 +992,7 @@ HB_FUNC( GETBITMAPSIZE )
    BOOL     bDelete = TRUE;
 
    if( hb_parclen( 1 ) > 0 )
-   { 
+   {
       const char * pszName = hb_parc( 1 );
 
       hBitmap = ( HBITMAP ) LoadImage( g_hInstance, pszName, IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION );
@@ -1028,7 +1028,7 @@ HB_FUNC( GETBITMAPSIZE )
 HB_FUNC( GETICONSIZE )
 {
    PHB_ITEM pResult = hb_itemArrayNew( 3 );
-   HICON    hIcon = ( HICON ) HB_PARNL( 1 );
+   HICON    hIcon   = ( HICON ) HB_PARNL( 1 );
 
    _arraySet( pResult, 0, 0, 4 );
 

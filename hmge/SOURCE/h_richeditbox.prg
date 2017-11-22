@@ -227,20 +227,22 @@ FUNCTION _DefineRichEditBox ( ControlName, ParentForm, x, y, w, h, value, ;
 
 PROCEDURE _DataBaseRichEditBoxSave ( ControlName, ParentForm, typ )
 
-   LOCAL Field, i, cTempFolder := GetTempFolder()
-   LOCAL cTempFile := iif( Empty( cTempFolder ), '', cTempFolder + '\' ) + '_richtmp.txt'
+   LOCAL Field, i
+   LOCAL cTempFile := TempFile( GetTempFolder(), 'txt' )
 
-   i := GetControlIndex ( ControlName, ParentForm )
+   IF !Empty( cTempFile )
+      i := GetControlIndex ( ControlName, ParentForm )
 
-   Field := _HMG_aControlPageMap [i]
+      Field := _HMG_aControlPageMap [i]
 
-   _DataRichEditBoxSave ( ControlName, ParentForm, cTempFile, typ )
+      _DataRichEditBoxSave ( ControlName, ParentForm, cTempFile, typ )
 
-   IF _IsFieldExists ( Field )
-      REPLACE &Field WITH MemoRead( cTempFile )
+      IF _IsFieldExists ( Field )
+         REPLACE &Field WITH MemoRead( cTempFile )
+      ENDIF
+
+      FErase( cTempFile )
    ENDIF
-
-   FErase( cTempFile )
 
    RETURN
 
@@ -249,14 +251,15 @@ PROCEDURE _DataBaseRichEditBoxSave ( ControlName, ParentForm, typ )
 
 FUNCTION _DataRichEditBoxSetValue ( ControlName, ParentForm, cRichValue, typ )
 
-   LOCAL cTempFolder := GetTempFolder()
-   LOCAL cTempFile := iif( Empty( cTempFolder ), '', cTempFolder + '\' ) + '_richtmp.txt'
+   LOCAL cTempFile := TempFile( GetTempFolder(), 'txt' )
 
-   hb_MemoWrit( cTempFile, cRichValue )
+   IF !Empty( cTempFile )
+      hb_MemoWrit( cTempFile, cRichValue )
 
-   _DataRichEditBoxOpen ( ControlName, ParentForm, cTempFile, typ )
+      _DataRichEditBoxOpen ( ControlName, ParentForm, cTempFile, typ )
 
-   FErase( cTempFile )
+      FErase( cTempFile )
+   ENDIF
 
    RETURN cRichValue
 
@@ -265,44 +268,46 @@ FUNCTION _DataRichEditBoxSetValue ( ControlName, ParentForm, cRichValue, typ )
 
 FUNCTION _DataRichEditBoxGetValue ( ControlName, ParentForm, typ )
 
-   LOCAL cRichValue, cTempFolder := GetTempFolder()
-   LOCAL cTempFile := iif( Empty( cTempFolder ), '', cTempFolder + '\' ) + '_richtmp.txt'
+   LOCAL cRichValue
+   LOCAL cTempFile := TempFile( GetTempFolder(), 'txt' )
 
-   _DataRichEditBoxSave ( ControlName, ParentForm, cTempFile, typ )
+   IF !Empty( cTempFile )
+      _DataRichEditBoxSave ( ControlName, ParentForm, cTempFile, typ )
 
-   cRichValue := MemoRead( cTempFile )
+      cRichValue := MemoRead( cTempFile )
 
-   FErase( cTempFile )
+      FErase( cTempFile )
+   ENDIF
 
    RETURN cRichValue
 
 PROCEDURE _DataRichEditBoxOpen ( ControlName, ParentForm, cFile, typ )
 
-   LOCAL i , h
+   LOCAL i
 
-   h := GetControlHandle( ControlName , ParentForm )
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
 
-   i := GetControlIndex ( ControlName , ParentForm )
+      _HMG_aControlCaption [i] := cFile
 
-   _HMG_aControlCaption [i] := cFile
+      StreamIn( GetControlHandle( ControlName , ParentForm ), cFile , hb_defaultValue( typ, 2 ) )
 
-   StreamIn( h, cFile , hb_defaultValue( typ, 2 ) )
+   ENDIF
 
    RETURN
 
 PROCEDURE _DataRichEditBoxSave ( ControlName, ParentForm, cFile, typ )
 
-   LOCAL i , h
+   LOCAL i
 
-   h := GetControlHandle( ControlName , ParentForm )
+   IF ( i := GetControlIndex ( ControlName , ParentForm ) ) > 0
 
-   i := GetControlIndex ( ControlName , ParentForm )
+      IF ValType( cFile ) == "U"
+         cFile := _HMG_aControlCaption [i]
+      ENDIF
 
-   IF ValType( cFile ) == "U"
-      cFile := _HMG_aControlCaption [i]
+      StreamOut( GetControlHandle( ControlName , ParentForm ), cFile, hb_defaultValue( typ, 2 ) )
+
    ENDIF
-
-   StreamOut( h, cFile, hb_defaultValue( typ, 2 ) )
 
    RETURN
 

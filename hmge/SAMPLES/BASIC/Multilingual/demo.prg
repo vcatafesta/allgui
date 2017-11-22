@@ -101,7 +101,7 @@ FUNCTION GetLangName(iLangNumber)
       ENDIF
    ENDIF
 
-   RETURN( LangName )
+   Return( LangName )
 
 FUNCTION InitLangInterface(iLangNumber)
 

@@ -30,8 +30,8 @@ PROCEDURE main()
          NOSIZE ;
          ON RELEASE ;
          ( ;
-         DELETEObject( hPng1 ), DeleteObject( hPng2 ), ;
-         DELETEObject( hPng3 ), DeleteObject( hPng4 ) ;
+         DeleteObject( hPng1 ), DeleteObject( hPng2 ), ;
+         DeleteObject( hPng3 ), DeleteObject( hPng4 ) ;
          ) ;
 
       ON KEY ESCAPE ACTION ThisWindow.Release

@@ -542,11 +542,11 @@ FUNCTION PegaPos(wpos)
                fpos := Form1.Grid1.value
             END IF
 
-            TEXTo := Chr(34) + form1.TxtCaptionP.value + Chr(34)
+            Texto := Chr(34) + form1.TxtCaptionP.value + Chr(34)
             nome := alltrim(form1.TxtNome.value)
 
             IF !Empt(nome)
-               TEXTo := Texto + " NAME " + nome
+               Texto := Texto + " NAME " + nome
             ENDIF
 
             IF fpos < 1

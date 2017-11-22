@@ -61,7 +61,7 @@ MEMVAR MyPdf, cpos
 
 FUNCTION Main( cFileToSave )
 
-   DEFAULT( cFileToSave ) to 'TestHaru.pdf'
+   default( cFileToSave ) to 'TestHaru.pdf'
    PUBLIC MyPdf:= cFileToSave
 
    SET AUTOADJUST ON
@@ -1002,7 +1002,7 @@ STATIC FUNCTION show_stripe_pattern( page, x, y)
 
    LOCAL iy := 0
 
-   DO WHILE(iy < 50)
+   do while(iy < 50)
    HPDF_Page_SetRGBStroke(page, 0.0, 0.0, 0.5)
    HPDF_Page_SetLineWidth(page, 1)
    HPDF_Page_MoveTo(page, x, y + iy)

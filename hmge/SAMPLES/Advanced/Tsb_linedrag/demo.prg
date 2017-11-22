@@ -90,7 +90,7 @@ FUNCTION CreateBrowse()
 END TBROWSE
 
 // Restoring settings from INI
-READSettings( oBrw )
+ReadSettings( oBrw )
 
 oBrw:nWheelLines  := 1
 oBrw:nClrLine     := COLOR_GRID

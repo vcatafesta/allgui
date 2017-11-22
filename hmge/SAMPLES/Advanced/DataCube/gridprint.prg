@@ -603,7 +603,7 @@ FUNCTION printcoltally
    FOR count1 := 1 to Len(columnarr)
       IF columnarr[count1,1] == 1
          col := col + columnarr[count1,3] + 2 // 2 mm for column separation
-         COUNT2 := count2 + 1
+         count2 := count2 + 1
       ENDIF
    NEXT count1
    IF col < maxcol2 .and. printgrid.spread.value
@@ -792,9 +792,9 @@ FUNCTION printstart
                IF printLen(AllTrim(data1),size1,fontname) <= size
                   AAdd(printdata,alltrim(data1))
                ELSE // header size bigger than column! to be truncated.
-                  COUNT2 := len(data1)
+                  count2 := len(data1)
                   DO WHILE printlen(substr(data1,1,count2),size1,fontname) > size
-                     COUNT2 := count2 - 1
+                     count2 := count2 - 1
                   ENDDO
                   AAdd(printdata,substr(data1,1,count2))
                ENDIF
@@ -818,20 +818,20 @@ FUNCTION printstart
                      aadd(nextline,0)
                   ELSE  // truncate or wordwrap!
                      IF printgrid.wordwrap.value == 2 // truncate
-                        COUNT3 := len(data1)
+                        count3 := len(data1)
                         DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                           COUNT3 := count3 - 1
+                           count3 := count3 - 1
                         ENDDO
                         AAdd(printdata,substr(data1,1,count3))
                         aadd(nextline,0)
                      ELSE // wordwrap
-                        COUNT3 := len(data1)
+                        count3 := len(data1)
                         DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                           COUNT3 := count3 - 1
+                           count3 := count3 - 1
                         ENDDO
                         data1 := substr(data1,1,count3)
                         IF rat(" ",data1) > 0
-                           COUNT3 := rat(" ",data1)
+                           count3 := rat(" ",data1)
                         ENDIF
                         AAdd(printdata,substr(data1,1,count3))
                         aadd(nextline,count3)
@@ -857,22 +857,22 @@ FUNCTION printstart
                         data1 := substr(data1,nextline[count2]+1,len(data1))
                         IF printLen(AllTrim(data1),size1,fontname) <= size
                            aadd(printdata,alltrim(data1))
-                           NEXTline[count2] := 0
+                           nextline[count2] := 0
                         ELSE // there are further lines!
-                           COUNT3 := len(data1)
+                           count3 := len(data1)
                            DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                              COUNT3 := count3 - 1
+                              count3 := count3 - 1
                            ENDDO
                            data1 := substr(data1,1,count3)
                            IF rat(" ",data1) > 0
-                              COUNT3 := rat(" ",data1)
+                              count3 := rat(" ",data1)
                            ENDIF
                            AAdd(printdata,substr(data1,1,count3))
-                           NEXTline[count2] := nextline[count2]+count3
+                           nextline[count2] := nextline[count2]+count3
                         ENDIF
                      ELSE
                         AAdd(printdata,"")
-                        NEXTline[count2] := 0
+                        nextline[count2] := 0
                      ENDIF
                   ENDIF
                NEXT count2
@@ -943,9 +943,9 @@ FUNCTION printstart
                      IF printLen(AllTrim(data1),size1,fontname) <= size
                         AAdd(printdata,alltrim(data1))
                      ELSE // header size bigger than column! truncated as of now.
-                        COUNT3 := len(data1)
+                        count3 := len(data1)
                         DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                           COUNT3 := count3 - 1
+                           count3 := count3 - 1
                         ENDDO
                         AAdd(printdata,substr(data1,1,count3))
                      ENDIF
@@ -1225,9 +1225,9 @@ FUNCTION printgridpreview
          IF printLen(AllTrim(data1),size1,fontname) <= size
             AAdd(printdata,alltrim(data1))
          ELSE // header size bigger than column! to be truncated.
-            COUNT2 := len(data1)
+            count2 := len(data1)
             DO WHILE printlen(substr(data1,1,count2),size1,fontname) > size
-               COUNT2 := count2 - 1
+               count2 := count2 - 1
             ENDDO
             AAdd(printdata,substr(data1,1,count2))
          ENDIF
@@ -1251,20 +1251,20 @@ FUNCTION printgridpreview
                aadd(nextline,0)
             ELSE
                IF printgrid.wordwrap.value == 2
-                  COUNT3 := len(data1)
+                  count3 := len(data1)
                   DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                     COUNT3 := count3 - 1
+                     count3 := count3 - 1
                   ENDDO
                   AAdd(printdata,substr(data1,1,count3))
                   aadd(nextline,0)
                ELSE
-                  COUNT3 := len(data1)
+                  count3 := len(data1)
                   DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                     COUNT3 := count3 - 1
+                     count3 := count3 - 1
                   ENDDO
                   data1 := substr(data1,1,count3)
                   IF rat(" ",data1) > 0
-                     COUNT3 := rat(" ",data1)
+                     count3 := rat(" ",data1)
                   ENDIF
                   AAdd(printdata,substr(data1,1,count3))
                   aadd(nextline,count3)
@@ -1290,22 +1290,22 @@ FUNCTION printgridpreview
                   data1 := substr(data1,nextline[count2]+1,len(data1))
                   IF printLen(AllTrim(data1),size1,fontname) <= size
                      aadd(printdata,alltrim(data1))
-                     NEXTline[count2] := 0
+                     nextline[count2] := 0
                   ELSE // there are further lines!
-                     COUNT3 := len(data1)
+                     count3 := len(data1)
                      DO WHILE printlen(substr(data1,1,count3),size1,fontname) > size
-                        COUNT3 := count3 - 1
+                        count3 := count3 - 1
                      ENDDO
                      data1 := substr(data1,1,count3)
                      IF rat(" ",data1) > 0
-                        COUNT3 := rat(" ",data1)
+                        count3 := rat(" ",data1)
                      ENDIF
                      AAdd(printdata,substr(data1,1,count3))
-                     NEXTline[count2] := nextline[count2]+count3
+                     nextline[count2] := nextline[count2]+count3
                   ENDIF
                ELSE
                   AAdd(printdata,"")
-                  NEXTline[count2] := 0
+                  nextline[count2] := 0
                ENDIF
             ENDIF
          NEXT count2
@@ -1345,7 +1345,7 @@ FUNCTION printgridpreview
             DRAW LINE in window printgrid at curx,cury+maxcol1 - pl to curx,cury+maxcol1
             curx := curx + lh
          ENDIF
-         COUNT1 := totrows
+         count1 := totrows
       ELSE
          IF printgrid.rowlines.value
             DRAW LINE in window printgrid at curx,cury to curx,cury+maxcol1-(1*resize)

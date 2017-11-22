@@ -3,7 +3,11 @@
 */
 
 ANNOUNCE RDDSYS
+
+#ifndef __XHARBOUR__
+#require "hbmemio"
 REQUEST HB_MEMIO
+#endif
 
 PROCEDURE main()
 
@@ -12,12 +16,17 @@ PROCEDURE main()
    LOCAL nResult, aXY, x, y, cMsg
 
    DELETE file cDiskFile
-   // nResult := RCDataToFile( "IMAGE1", cDiskFile, "PNG" )
+   #ifndef __XHARBOUR__
    nResult := RCDataToFile( "IMAGE1", cMemFile, "PNG" )
+   #else
+   nResult := RCDataToFile( "IMAGE1", cDiskFile, "PNG" )
+   #endif
 
    IF nResult > 0
+      #ifndef __XHARBOUR__
       /* Now we can do something, f.e save to disk file */
       hb_vfCopyFile( cMemFile, cDiskFile )
+      #endif
 
       IF hb_FileExists( cDiskFile )
          aXY  := hb_GetImageSize( cDiskFile )
@@ -31,7 +40,9 @@ PROCEDURE main()
       MsgInfo( "Code: " + hb_NtoS( nResult ), "Error" )
    ENDIF
 
+   #ifndef __XHARBOUR__
    hb_vfErase( cMemFile )
+   #endif
 
    RETURN
 

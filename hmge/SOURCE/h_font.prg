@@ -146,7 +146,7 @@ PROCEDURE _EraseFontDef( i )
 
    LOCAL mVar
 
-   DELETEObject( _HMG_aControlFontHandle [i] )
+   DeleteObject( _HMG_aControlFontHandle [i] )
 
    IF _HMG_lOOPEnabled
       Eval ( _HMG_bOnControlDestroy, i )
@@ -266,7 +266,7 @@ FUNCTION _SetFontAttr( ControlName, ParentForm, Value, nType )
 
    i := GetControlIndex ( ControlName, ParentForm )
 
-   DELETEObject ( _HMG_aControlFontHandle[ i ] )
+   DeleteObject ( _HMG_aControlFontHandle[ i ] )
 
    IF nType == FONT_ATTR_NAME
       _HMG_aControlFontName[ i ] := Value
@@ -379,9 +379,9 @@ FUNCTION GetFontList( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, lSortCa
    LOCAL SortCodeBlock
 
    IF hb_defaultValue ( lSortCaseSensitive , .F. ) == .T.
-      SORTCodeBlock := { |x, y| x[1] < y[1] }
+      SortCodeBlock := { |x, y| x[1] < y[1] }
    ELSE
-      SORTCodeBlock := { |x, y| Upper ( x[1] ) < Upper ( y[1] ) }
+      SortCodeBlock := { |x, y| Upper ( x[1] ) < Upper ( y[1] ) }
    ENDIF
 
    RETURN EnumFontsEx ( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, SortCodeBlock, @aFontName )

@@ -48,7 +48,7 @@
 
    ---------------------------------------------------------------------------*/
 
-#define _WIN32_IE        0x0501
+#define _WIN32_IE  0x0501
 
 #include <mgdefs.h>
 
@@ -370,9 +370,9 @@ HB_FUNC( CREATEFOLDERPAGE )
    FLDPAGEINFO * pfpi = ( FLDPAGEINFO * ) LocalAlloc( LPTR, sizeof( FLDPAGEINFO ) );
 
    PHB_ITEM sArray;
-   char * strTitle;
-   int    idRC, PageStyle;
-   char * caption;
+   char *   strTitle;
+   int      idRC, PageStyle;
+   char *   caption;
 
    sArray = hb_param( 1, HB_IT_ARRAY );
 
@@ -405,18 +405,18 @@ HB_FUNC( CREATEFOLDERPAGE )
 HB_FUNC( CREATEDLGFOLDER )
 {
    HFLDPAGEINFO * hfpi;
-   FLDHDRINFO *  pFhi      = ( FLDHDRINFO * ) LocalAlloc( LPTR, sizeof( FLDHDRINFO ) );
-   DWORD         dwDlgBase = GetDialogBaseUnits();
-   int           baseunitX = LOWORD( dwDlgBase ), baseunitY = HIWORD( dwDlgBase );
+   FLDHDRINFO *   pFhi      = ( FLDHDRINFO * ) LocalAlloc( LPTR, sizeof( FLDHDRINFO ) );
+   DWORD          dwDlgBase = GetDialogBaseUnits();
+   int baseunitX = LOWORD( dwDlgBase ), baseunitY = HIWORD( dwDlgBase );
    LPDLGTEMPLATE pdlgtemplate;
-   HWND hwnd;
-   HWND hWndDlg;
+   HWND          hwnd;
+   HWND          hWndDlg;
 
    PHB_ITEM sArray;
    PHB_ITEM pArray;
    PHB_ITEM cArray;
 
-   BOOL modal;
+   BOOL    modal;
    LRESULT lResult;
    long    lTemplateSize;
    int     s, nPages, Style, nIdFld;
@@ -982,8 +982,8 @@ VOID WINAPI FLD_DialogAlign( HWND hWndDlg )
    -----------------------------------------------------------------*/
 static BOOL FLD_PageInfo( DLGTEMPLATE * pTemplate, FLDHDRINFO * pFhi, int index, BOOL resize )
 {
-   const WORD * p;
-   int width, height;
+   const WORD *  p;
+   int           width, height;
    FLDPAGEINFO * fpi;
 
    if( ! pTemplate )

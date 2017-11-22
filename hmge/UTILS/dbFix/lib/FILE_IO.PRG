@@ -52,7 +52,7 @@ FUNCTION cFError(n)
       cText := "Error #" + Nstr(n)
    ENDCASE
 
-   RETURN(cText)
+   Return(cText)
 
 FUNCTION FCopy(cSource, cTarget, lMsgs)
 
@@ -74,7 +74,7 @@ FUNCTION FCopy(cSource, cTarget, lMsgs)
 
    IF !file(cSource)
 
-      RETURN(.F.)
+      Return(.F.)
    ENDIF
 
    DO WHILE lOk
@@ -139,7 +139,7 @@ FUNCTION FCopy(cSource, cTarget, lMsgs)
       ENDIF
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 
 FUNCTION FileCopy(cSource, cTarget)
 
@@ -177,7 +177,7 @@ FUNCTION FileCopy(cSource, cTarget)
       ferase(cTarget)
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 
 FUNCTION RenFile(cOld, cNew)
 
@@ -214,7 +214,7 @@ FUNCTION RenFile(cOld, cNew)
       ENDDO
    ENDIF
 
-   RETURN(lOk)
+   Return(lOk)
 
 FUNCTION WriteLog(xMsg, cFile, lOverwrite)
 
@@ -238,7 +238,7 @@ FUNCTION WriteLog(xMsg, cFile, lOverwrite)
          iif(lOpen, " opening ", " creating ") + cFile, ;
          procname(1) + "(" + Nstr(procline(1)) + ")")
 
-      RETURN(.F.)
+      Return(.F.)
    ENDIF
 
    // Seek to the end of the file (append):
@@ -256,5 +256,5 @@ FUNCTION WriteLog(xMsg, cFile, lOverwrite)
 
    fclose(hLog)
 
-   RETURN(.T.)
+   Return(.T.)
 
