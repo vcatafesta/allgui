@@ -181,4 +181,3 @@ HB_FUNC ( GETHEADERITEMCX )
 }
 
 #pragma ENDDUMP
-

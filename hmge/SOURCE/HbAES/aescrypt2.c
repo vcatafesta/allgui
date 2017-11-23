@@ -132,7 +132,6 @@ HB_FUNC( CRYPTFILEAES )
         }
     }
 
-
 #if defined(_WIN32_WCE)
     filesize = fseek( fin, 0L, SEEK_END );
 #else
@@ -325,10 +324,10 @@ HB_FUNC( CRYPTFILEAES )
             }
 
             memcpy( tmp, buffer, 16 );
- 
+
             sha2_hmac_update( &sha_ctx, buffer, 16 );
             aes_crypt_ecb( &aes_ctx, AES_DECRYPT, buffer, buffer );
-   
+
             for( i = 0; i < 16; i++ )
                 buffer[i] = (unsigned char)( buffer[i] ^ IV[i] );
 
@@ -360,7 +359,7 @@ HB_FUNC( CRYPTFILEAES )
     }
 
     ret = 0;
-    
+
 exit:
     if( fin )
         fclose( fin );

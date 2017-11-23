@@ -103,4 +103,3 @@ FUNCTION _SetWindowBKBrush( cWindow, lNoDelete, cBrushStyle, nHatch, aColor, xIm
    ENDIF
 
    RETURN hBrush
-

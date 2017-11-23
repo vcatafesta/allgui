@@ -43,4 +43,3 @@ PROCEDURE Test
    USE
 
    RETURN
-

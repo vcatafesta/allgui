@@ -219,4 +219,3 @@ PROCEDURE dodata()
    ENDIF
 
    RETURN
-

@@ -90,4 +90,3 @@ FUNCTION ChangeInfo()
    ENDIF
 
    RETURN NIL
-

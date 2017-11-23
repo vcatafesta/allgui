@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> i_MsgBox.ch  
+ HMG Header File --> i_MsgBox.ch
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -53,7 +53,6 @@
 #define MB_TOPMOST 0x40000
 #define MB_CANCELTRYCONTINUE 6
 
-
 // MessageBox Return Value
 
 #define IDOK 1
@@ -70,11 +69,8 @@
 
 #define IDTIMEDOUT 32000   // HMG_MessageBoxTimeout()
 
-
 #xtranslate DEBUGINFO [TITLE <xTitle>] [TYPE <nTypeIconButton>] [TIMEOUT <nMilliseconds>] [PARAMETERS] <xData1,...>  => ;
             MsgDebugTitle(<xTitle>); MsgDebugType(<nTypeIconButton>); MsgDebugTimeOut(<nMilliseconds>); MsgDebug (<xData1>)
 
 #xtranslate DEBUGINFO STOREIN <cVar> [TITLE <xTitle>] [TYPE <nTypeIconButton>] [TIMEOUT <nMilliseconds>] [PARAMETERS] <xData1,...>  => ;
             MsgDebugTitle(<xTitle>); MsgDebugType(<nTypeIconButton>); MsgDebugTimeOut(<nMilliseconds>); <cVar> := MsgDebug (<xData1>)
-
-

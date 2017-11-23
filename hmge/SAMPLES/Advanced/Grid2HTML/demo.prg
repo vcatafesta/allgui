@@ -138,4 +138,3 @@ FUNCTION grid2html2
    ENDIF
 
    RETURN NIL
-

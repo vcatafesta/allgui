@@ -270,4 +270,3 @@ FUNCTION CreateBottomLine()
       PENCOLOR WHITE
 
    RETURN NIL
-

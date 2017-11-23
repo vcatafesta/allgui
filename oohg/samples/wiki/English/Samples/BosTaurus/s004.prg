@@ -222,4 +222,3 @@ PROCEDURE Proc_ON_PAINT( nMode, Flag_Erase, hBitmap )
    /*
    * EOF
    */
-

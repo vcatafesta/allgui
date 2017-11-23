@@ -207,4 +207,3 @@ PROCEDURE ChangeModalItems
       IN USER32.DLL ALIAS MessageBoxEx
 
    DECLARE DLL_TYPE_LONG MessageBeep( DLL_TYPE_LONG uType ) IN USER32.DLL
-

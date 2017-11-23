@@ -1372,4 +1372,3 @@ HB_FUNC( FI_SAVE )
 }
 
 #pragma ENDDUMP
-

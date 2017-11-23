@@ -53,8 +53,6 @@ HB_FUNC( HWG_MCISENDSTRING )
    hb_strfree( hCommand );
 }
 
-
-
 /* Functions bellow for play video's and wav's*/
 
 HB_FUNC( HWG_MCISENDCOMMAND )
@@ -66,7 +64,6 @@ HB_FUNC( HWG_MCISENDCOMMAND )
 }
 
 //----------------------------------------------------------------------------//
-
 
 HB_FUNC( HWG_MCIGETERRORSTRING )
 {
@@ -136,5 +133,3 @@ HB_FUNC( HWG_NMCIWINDOW )
                MCI_ANIM_WINDOW_HWND | MCI_ANIM_WINDOW_DISABLE_STRETCH,
                ( LONG ) ( LPMCI_ANIM_WINDOW_PARMS ) & mciWindowParms ) );
 }
-
-

@@ -166,4 +166,3 @@ PROCEDURE ShellTrayBalloonTipClose( hWnd )
 FUNCTION ShellTrayBalloonTipShow( hWnd, nIconIndex, cTitle, cMessage )
 
    RETURN WIN_ShellNotifyIcon( hWnd, , , , , , cMessage, 20000, cTitle, nIconIndex )
-

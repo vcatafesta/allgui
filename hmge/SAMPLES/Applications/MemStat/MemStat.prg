@@ -354,4 +354,3 @@ HB_FUNC (LOADTRAYICON)
 }
 
 #pragma ENDDUMP
-

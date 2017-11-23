@@ -165,7 +165,7 @@ CLASS mymenu
 
    DATA handle
 
-METHOD new(c) inline ::handle :=c,self
+   METHOD new(c) inline ::handle :=c,self
 
 ENDCLASS
 

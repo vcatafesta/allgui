@@ -305,4 +305,3 @@ FUNCTION Impresion()
    DBSetOrder(1)
 
    RETURN NIL
-

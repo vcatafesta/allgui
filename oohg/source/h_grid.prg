@@ -153,180 +153,93 @@ CLASS TGrid FROM TControl
    DATA uIniTime                  INIT 0
    DATA Valid                     INIT Nil
    DATA ValidMessages             INIT Nil
-
-METHOD AddBitMap
-
-METHOD AddColumn
-
-METHOD AddItem
-
-METHOD AdjustResize
-
-METHOD Append                  SETGET
-
-METHOD AppendItem
-
-METHOD BackColor               SETGET
-
-METHOD Cell
-
-METHOD CellCaption             BLOCK { | Self, nRow, nCol, uValue | CellRawValue( ::hWnd, nRow, nCol, 1, uValue ) }
-
-METHOD CellImage               BLOCK { | Self, nRow, nCol, uValue | CellRawValue( ::hWnd, nRow, nCol, 2, uValue ) }
-
-METHOD CheckItem               SETGET
-
-METHOD ColumnAutoFit
-
-METHOD ColumnAutoFitH
-
-METHOD ColumnBetterAutoFit
-
-METHOD ColumnCount
-
-METHOD ColumnHide
-
-METHOD ColumnOrder             SETGET
-
-METHOD ColumnsAutoFit
-
-METHOD ColumnsAutoFitH
-
-METHOD ColumnsBetterAutoFit
-
-METHOD ColumnShow
-
-METHOD ColumnWidth
-
-METHOD CompareItems
-
-METHOD CountPerPage            BLOCK { | Self | ListViewGetCountPerPage( ::hWnd ) }
-
-METHOD Define
-
-METHOD Define2
-
-METHOD Define4
-
-METHOD DeleteAllItems          BLOCK { | Self | ListViewReset( ::hWnd ), ::GridForeColor := Nil, ::GridBackColor := Nil, ::DoChange() }
-
-METHOD DeleteColumn
-
-METHOD DeleteItem
-
-METHOD Down
-
-METHOD EditAllCells
-
-METHOD EditCell
-
-METHOD EditCell2
-
-METHOD EditGrid
-
-METHOD EditItem
-
-METHOD EditItem2
-
-METHOD Events
-
-METHOD Events_Enter
-
-METHOD Events_Notify
-
-METHOD FirstColInOrder
-
-METHOD FirstSelectedItem       BLOCK { | Self | ListView_GetFirstItem( ::hWnd ) }
-
-METHOD FirstVisibleColumn
-
-METHOD FirstVisibleItem
-
-METHOD FixControls             SETGET
-
-METHOD FontColor               SETGET
-
-METHOD GoBottom
-
-METHOD GoTop
-
-METHOD Header
-
-METHOD HeaderHeight
-
-METHOD HeaderImage
-
-METHOD HeaderImageAlign
-
-METHOD HeaderSetFont
-
-METHOD InsertBlank
-
-METHOD InsertItem
-
-METHOD IsColumnReadOnly
-
-METHOD IsColumnWhen
-
-METHOD Item
-
-METHOD ItemCount               BLOCK { | Self | ListViewGetItemCount( ::hWnd ) }
-
-METHOD ItemHeight
-
-METHOD Justify
-
-METHOD LastColInOrder
-
-METHOD Left
-
-METHOD LoadHeaderImages
-
-METHOD NextColInOrder
-
-METHOD OnEnter                 SETGET
-
-METHOD PageDown
-
-METHOD PageUp
-
-METHOD PriorColInOrder
-
-METHOD Release
-
-METHOD Right
-
-METHOD ScrollToCol
-
-METHOD ScrollToLeft
-
-METHOD ScrollToNext
-
-METHOD ScrollToPrior
-
-METHOD ScrollToRight
-
-METHOD SetColumn
-
-METHOD SetControlValue         BLOCK { |Self, nRow, nCol| Empty( nCol ), ::Value := nRow }
-
-METHOD SetItemColor
-
-METHOD SetRangeColor
-
-METHOD SetSelectedColors
-
-METHOD SortColumn
-
-METHOD SortItems
-
-METHOD ToExcel
-
-METHOD ToOpenOffice
-
-METHOD Up
-
-METHOD Value                   SETGET
+   METHOD AddBitMap
+   METHOD AddColumn
+   METHOD AddItem
+   METHOD AdjustResize
+   METHOD Append                  SETGET
+   METHOD AppendItem
+   METHOD BackColor               SETGET
+   METHOD Cell
+   METHOD CellCaption             BLOCK { | Self, nRow, nCol, uValue | CellRawValue( ::hWnd, nRow, nCol, 1, uValue ) }
+   METHOD CellImage               BLOCK { | Self, nRow, nCol, uValue | CellRawValue( ::hWnd, nRow, nCol, 2, uValue ) }
+   METHOD CheckItem               SETGET
+   METHOD ColumnAutoFit
+   METHOD ColumnAutoFitH
+   METHOD ColumnBetterAutoFit
+   METHOD ColumnCount
+   METHOD ColumnHide
+   METHOD ColumnOrder             SETGET
+   METHOD ColumnsAutoFit
+   METHOD ColumnsAutoFitH
+   METHOD ColumnsBetterAutoFit
+   METHOD ColumnShow
+   METHOD ColumnWidth
+   METHOD CompareItems
+   METHOD CountPerPage            BLOCK { | Self | ListViewGetCountPerPage( ::hWnd ) }
+   METHOD Define
+   METHOD Define2
+   METHOD Define4
+   METHOD DeleteAllItems          BLOCK { | Self | ListViewReset( ::hWnd ), ::GridForeColor := Nil, ::GridBackColor := Nil, ::DoChange() }
+   METHOD DeleteColumn
+   METHOD DeleteItem
+   METHOD Down
+   METHOD EditAllCells
+   METHOD EditCell
+   METHOD EditCell2
+   METHOD EditGrid
+   METHOD EditItem
+   METHOD EditItem2
+   METHOD Events
+   METHOD Events_Enter
+   METHOD Events_Notify
+   METHOD FirstColInOrder
+   METHOD FirstSelectedItem       BLOCK { | Self | ListView_GetFirstItem( ::hWnd ) }
+   METHOD FirstVisibleColumn
+   METHOD FirstVisibleItem
+   METHOD FixControls             SETGET
+   METHOD FontColor               SETGET
+   METHOD GoBottom
+   METHOD GoTop
+   METHOD Header
+   METHOD HeaderHeight
+   METHOD HeaderImage
+   METHOD HeaderImageAlign
+   METHOD HeaderSetFont
+   METHOD InsertBlank
+   METHOD InsertItem
+   METHOD IsColumnReadOnly
+   METHOD IsColumnWhen
+   METHOD Item
+   METHOD ItemCount               BLOCK { | Self | ListViewGetItemCount( ::hWnd ) }
+   METHOD ItemHeight
+   METHOD Justify
+   METHOD LastColInOrder
+   METHOD Left
+   METHOD LoadHeaderImages
+   METHOD NextColInOrder
+   METHOD OnEnter                 SETGET
+   METHOD PageDown
+   METHOD PageUp
+   METHOD PriorColInOrder
+   METHOD Release
+   METHOD Right
+   METHOD ScrollToCol
+   METHOD ScrollToLeft
+   METHOD ScrollToNext
+   METHOD ScrollToPrior
+   METHOD ScrollToRight
+   METHOD SetColumn
+   METHOD SetControlValue         BLOCK { |Self, nRow, nCol| Empty( nCol ), ::Value := nRow }
+   METHOD SetItemColor
+   METHOD SetRangeColor
+   METHOD SetSelectedColors
+   METHOD SortColumn
+   METHOD SortItems
+   METHOD ToExcel
+   METHOD ToOpenOffice
+   METHOD Up
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -3905,15 +3818,15 @@ CLASS TGridMulti FROM TGrid
    DATA lDeleteAll                INIT .F.
    DATA Type                      INIT "MULTIGRID" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD SetControlValue         BLOCK { |Self, nRow, nCol| Empty( nCol ), ::Value := { nRow } }
+   METHOD SetControlValue         BLOCK { |Self, nRow, nCol| Empty( nCol ), ::Value := { nRow } }
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -4084,51 +3997,51 @@ CLASS TGridByCell FROM TGrid
 
    DATA Type                      INIT "GRIDBYCELL" READONLY
 
-METHOD AddColumn
+   METHOD AddColumn
 
-METHOD Define
+   METHOD Define
 
-METHOD DeleteAllItems
+   METHOD DeleteAllItems
 
-METHOD DeleteColumn
+   METHOD DeleteColumn
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD Down
+   METHOD Down
 
-METHOD EditCell
+   METHOD EditCell
 
-METHOD EditCell2
+   METHOD EditCell2
 
-METHOD EditGrid
+   METHOD EditGrid
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD GoBottom
+   METHOD GoBottom
 
-METHOD GoTop
+   METHOD GoTop
 
-METHOD InsertBlank
+   METHOD InsertBlank
 
-METHOD Left
+   METHOD Left
 
-METHOD PageDown
+   METHOD PageDown
 
-METHOD PageUp
+   METHOD PageUp
 
-METHOD Right
+   METHOD Right
 
-METHOD SetControlValue         BLOCK { |Self, nRow, nCol| If( HB_IsNil( nCol ), nCol := 1, ), ::Value := { nRow, nCol } }
+   METHOD SetControlValue         BLOCK { |Self, nRow, nCol| If( HB_IsNil( nCol ), nCol := 1, ), ::Value := { nRow, nCol } }
 
-METHOD SetSelectedColors
+   METHOD SetSelectedColors
 
-METHOD Up
+   METHOD Up
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -5628,27 +5541,27 @@ CLASS TGridControl
    DATA nOnFocusPos               INIT Nil
    DATA lNoModal                  INIT .F.
 
-METHOD New                     BLOCK { | Self | Self }
+   METHOD New                     BLOCK { | Self | Self }
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD Valid
+   METHOD Valid
 
-METHOD Str2Val( uValue )       BLOCK { | Self, uValue | Empty( Self ), uValue }
+   METHOD Str2Val( uValue )       BLOCK { | Self, uValue | Empty( Self ), uValue }
 
-METHOD GridValue( uValue )     BLOCK { | Self, uValue | Empty( Self ), If( ValType( uValue ) $ "CM", Trim( uValue ), uValue ) }
+   METHOD GridValue( uValue )     BLOCK { | Self, uValue | Empty( Self ), If( ValType( uValue ) $ "CM", Trim( uValue ), uValue ) }
 
-METHOD SetFocus                BLOCK { | Self | ::oControl:SetFocus() }
+   METHOD SetFocus                BLOCK { | Self | ::oControl:SetFocus() }
 
-METHOD SetValue( uValue )      BLOCK { | Self, uValue | ::oControl:Value := uValue }
+   METHOD SetValue( uValue )      BLOCK { | Self, uValue | ::oControl:Value := uValue }
 
-METHOD ControlValue            SETGET
+   METHOD ControlValue            SETGET
 
-METHOD Enabled                 SETGET
+   METHOD Enabled                 SETGET
 
-METHOD OnLostFocus             SETGET
+   METHOD OnLostFocus             SETGET
 
-METHOD Visible                 SETGET
+   METHOD Visible                 SETGET
 
 ENDCLASS
 
@@ -5794,15 +5707,15 @@ CLASS TGridControlTextBox FROM TGridControl
    DATA lForceModal               INIT .F.
    DATA Type                      INIT "TGRIDCONTROLTEXTBOX" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue
+   METHOD GridValue
 
 ENDCLASS
 
@@ -6067,9 +5980,9 @@ CLASS TGridControlTextBoxAction FROM TGridControlTextBox
    DATA bAction2                  INIT Nil
    DATA Type                      INIT "TGRIDCONTROLTEXTBOXACTION" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateControl
+   METHOD CreateControl
 
 ENDCLASS
 
@@ -6208,13 +6121,13 @@ CLASS TGridControlMemo FROM TGridControl
    DATA lNoHScroll                INIT .F.
    DATA Type                      INIT "TGRIDCONTROLMEMO" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD GridValue
+   METHOD GridValue
 
 ENDCLASS
 
@@ -6358,15 +6271,15 @@ CLASS TGridControlDatePicker FROM TGridControl
    DATA lShowNone
    DATA Type                      INIT "TGRIDCONTROLDATEPICKER" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val( uValue )   BLOCK { |Self, uValue| Empty( Self ), CtoD( uValue ) }
+   METHOD Str2Val( uValue )   BLOCK { |Self, uValue| Empty( Self ), CtoD( uValue ) }
 
-METHOD GridValue( uValue ) BLOCK { |Self, uValue| Empty( Self ), DtoC( uValue ) }
+   METHOD GridValue( uValue ) BLOCK { |Self, uValue| Empty( Self ), DtoC( uValue ) }
 
 ENDCLASS
 
@@ -6437,17 +6350,17 @@ CLASS TGridControlComboBox FROM TGridControl
    DATA cRetValType               INIT "N"   // Needed because cWorkArea can be not opened yet when ::New is first executed
    DATA Type                      INIT "TGRIDCONTROLCOMBOBOX" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue
+   METHOD GridValue
 
-METHOD Refresh
+   METHOD Refresh
 
 ENDCLASS
 
@@ -6580,17 +6493,17 @@ CLASS TGridControlComboBoxText FROM TGridControl
    DATA lWinSize                  INIT .F.
    DATA Type                      INIT "TGRIDCONTROLCOMBOBOXTEXT" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue( uValue )     BLOCK { |Self, uValue| ::Str2Val( uValue ) }
+   METHOD GridValue( uValue )     BLOCK { |Self, uValue| ::Str2Val( uValue ) }
 
-METHOD ControlValue            SETGET
+   METHOD ControlValue            SETGET
 
 ENDCLASS
 
@@ -6674,15 +6587,15 @@ CLASS TGridControlSpinner FROM TGridControl
    DATA nRangeMax                 INIT 100
    DATA Type                      INIT "TGRIDCONTROLSPINNER" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val( uValue )       BLOCK { |Self, uValue| Empty( Self ), Val( AllTrim( uValue ) ) }
+   METHOD Str2Val( uValue )       BLOCK { |Self, uValue| Empty( Self ), Val( AllTrim( uValue ) ) }
 
-METHOD GridValue( uValue)      BLOCK { |Self, uValue| Empty( Self ), LTrim( Str( uValue ) ) }
+   METHOD GridValue( uValue)      BLOCK { |Self, uValue| Empty( Self ), LTrim( Str( uValue ) ) }
 
 ENDCLASS
 
@@ -6734,15 +6647,15 @@ CLASS TGridControlCheckBox FROM TGridControl
    DATA cFalse                    INIT ".F."
    DATA Type                      INIT "TGRIDCONTROLCHECKBOX" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val( uValue )       BLOCK { |Self, uValue| ( uValue == ::cTrue .OR. Upper( uValue ) == ".T." ) }
+   METHOD Str2Val( uValue )       BLOCK { |Self, uValue| ( uValue == ::cTrue .OR. Upper( uValue ) == ".T." ) }
 
-METHOD GridValue( uValue )     BLOCK { |Self, uValue| If( uValue, ::cTrue, ::cFalse ) }
+   METHOD GridValue( uValue )     BLOCK { |Self, uValue| If( uValue, ::cTrue, ::cFalse ) }
 
 ENDCLASS
 
@@ -6793,15 +6706,15 @@ CLASS TGridControlImageList FROM TGridControl
 
    DATA Type                      INIT "TGRIDCONTROLIMAGELIST" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val( uValue )       BLOCK { |Self, uValue| Empty( Self ), If( ValType( uValue ) == "C", Val( uValue ), uValue ) }
+   METHOD Str2Val( uValue )       BLOCK { |Self, uValue| Empty( Self ), If( ValType( uValue ) == "C", Val( uValue ), uValue ) }
 
-METHOD ControlValue            SETGET
+   METHOD ControlValue            SETGET
 
 ENDCLASS
 
@@ -6864,17 +6777,17 @@ CLASS TGridControlImageData FROM TGridControl
    DATA Type                      INIT "TGRIDCONTROLIMAGEDATA" READONLY
    DATA oData
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD ControlValue            SETGET
+   METHOD ControlValue            SETGET
 
-METHOD OnLostFocus             SETGET
+   METHOD OnLostFocus             SETGET
 
-METHOD Enabled                 SETGET
+   METHOD Enabled                 SETGET
 
 ENDCLASS
 
@@ -6970,17 +6883,17 @@ CLASS TGridControlLComboBox FROM TGridControl
    DATA cFalse                    INIT ".F."
    DATA Type                      INIT "TGRIDCONTROLLCOMBOBOX" READONLY
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val( uValue )       BLOCK { |Self, uValue| ( uValue == ::cTrue .OR. Upper( uValue ) == ".T." ) }
+   METHOD Str2Val( uValue )       BLOCK { |Self, uValue| ( uValue == ::cTrue .OR. Upper( uValue ) == ".T." ) }
 
-METHOD GridValue( uValue )     BLOCK { |Self, uValue| If( uValue, ::cTrue, ::cFalse ) }
+   METHOD GridValue( uValue )     BLOCK { |Self, uValue| If( uValue, ::cTrue, ::cFalse ) }
 
-METHOD ControlValue            SETGET
+   METHOD ControlValue            SETGET
 
 ENDCLASS
 
@@ -8781,4 +8694,3 @@ FUNCTION SetGridFixedControls( lValue )
    ENDIF
 
    RETURN _OOHG_GridFixedControls
-

@@ -11,4 +11,3 @@ FUNCTION DecToHexa(nNumber)
 ENDDO
 
 RETURN(cNewString)
-

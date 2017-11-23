@@ -130,32 +130,32 @@ CLASS Barcode
    //  16 = Matrix 2 of 5
    //  17 = Matrix 2 of 5 check digit
 
-METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
+   METHOD New( hDC, cText, nTop, nLeft, nWidth, nHeight, nBCodeType, ;
       nColText, nColPane, lHorz, lTransparent,  nPinWidth ) CONSTRUCTOR
 
-METHOD ShowBarcode()
+   METHOD ShowBarcode()
 
-METHOD CreateBarcode( cCode )
+   METHOD CreateBarcode( cCode )
 
-METHOD InitCode39( lCheck )
+   METHOD InitCode39( lCheck )
 
-METHOD InitCode128( cMode )
+   METHOD InitCode128( cMode )
 
-METHOD InitEAN13()
+   METHOD InitEAN13()
 
-METHOD InitUPC( nLen )
+   METHOD InitUPC( nLen )
 
-METHOD InitE13BL( nLen )
+   METHOD InitE13BL( nLen )
 
-METHOD InitCodabar()
+   METHOD InitCodabar()
 
-METHOD InitSub5()
+   METHOD InitSub5()
 
-METHOD InitIndustrial25( lCheck )
+   METHOD InitIndustrial25( lCheck )
 
-METHOD InitInterleave25( lMode )
+   METHOD InitInterleave25( lMode )
 
-METHOD InitMatrix25( lCheck )
+   METHOD InitMatrix25( lCheck )
 
 ENDCLASS
 
@@ -911,4 +911,3 @@ HB_FUNC_STATIC( RICH_CREATESOLIDBRUSH )
 }
 
 #pragma ENDDUMP
-

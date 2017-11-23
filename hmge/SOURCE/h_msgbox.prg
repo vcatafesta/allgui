@@ -168,4 +168,3 @@ STATIC FUNCTION _MsgBox( cMessage , cTitle , nStyle , nIcon , lSysModal , lTopMo
    ENDIF
 
    RETURN MessageBoxIndirect( NIL, cMessage, cTitle, nStyle, nIcon )
-

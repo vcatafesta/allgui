@@ -40,4 +40,3 @@ PROCEDURE Main
    RETURN
 
    #include "MyButton.prg"
-

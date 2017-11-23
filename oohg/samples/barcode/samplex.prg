@@ -40,4 +40,3 @@ FUNCTION test(CSALIDA)
    oprint:enddoc()
 
    RETURN NIL
-

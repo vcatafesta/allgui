@@ -40,7 +40,6 @@ static far BYTE StopAnd[] = {
 
 static far HCURSOR hStop = 0;
 
-
 HB_FUNC( NOR )
 {
    int p = hb_pcount();
@@ -133,9 +132,9 @@ HB_FUNC( SETWINDOWLONG )
 {
    #ifndef _WIN64
       hb_retnl( SetWindowLong( ( HWND ) hb_parnl( 1 ), hb_parni( 2 ), hb_parnl( 3 ) ) );
-   #else      
+   #else
       HB_RETNL( SetWindowLongPtr( ( HWND ) HB_PARNL( 1 ), hb_parnl( 2 ), hb_parnl( 3 ) ) );
-   #endif   
+   #endif
 }
 
 HB_FUNC( GETTEXTCOLOR )

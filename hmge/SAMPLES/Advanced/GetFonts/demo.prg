@@ -89,4 +89,3 @@ FUNCTION GetFonts()
 
    DECLARE DLL_TYPE_VOID SwitchToThisWindow( DLL_TYPE_LONG hWnd, DLL_TYPE_BOOL lRestore ) ;
       IN USER32.DLL
-

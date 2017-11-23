@@ -44,4 +44,3 @@ FUNCTION Main
    ACTIVATE WINDOW Main_form
 
    RETURN
-

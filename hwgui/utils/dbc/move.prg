@@ -230,4 +230,3 @@ FUNCTION FBof( oBrw )
 FUNCTION FEof( oBrw )
 
    RETURN ( oBrw:nCurrent > oBrw:nRecords )
-

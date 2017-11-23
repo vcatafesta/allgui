@@ -249,4 +249,3 @@ STATIC FUNCTION  bil(x)
    RETURN    iif( x<>"0", bil_asli[val(x)]+" ","")
 
    // eof SayRupiah
-

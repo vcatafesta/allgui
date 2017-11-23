@@ -162,4 +162,3 @@ STATIC FUNCTION MyToString( cTag, cRDDName, cCmd, nWA, xPar1, xPar2, xPar3 )
 FUNCTION hb_LogRddInherit()
 
    RETURN "DBFCDX"
-

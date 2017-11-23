@@ -108,4 +108,3 @@ STATIC PROCEDURE ShowResult( obj )
       ENDWITH
 
       RETURN
-

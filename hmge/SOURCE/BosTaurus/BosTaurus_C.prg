@@ -3371,4 +3371,3 @@ HB_FUNC( BT_TEXTOUT_SIZE )
 }
 
 #pragma ENDDUMP
-

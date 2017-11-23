@@ -250,4 +250,3 @@ FUNCTION MyExit( lClose )
    ENDIF
 
    RETURN lExit
-

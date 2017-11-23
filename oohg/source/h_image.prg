@@ -68,33 +68,33 @@ CLASS TImage FROM TControl
    DATA lNoTransparent  INIT .F.
    DATA aExcludeArea    INIT {}
 
-METHOD Define
+   METHOD Define
 
-METHOD Picture       SETGET
+   METHOD Picture       SETGET
 
-METHOD HBitMap       SETGET
+   METHOD HBitMap       SETGET
 
-METHOD Buffer        SETGET
+   METHOD Buffer        SETGET
 
-METHOD OnClick       SETGET
+   METHOD OnClick       SETGET
 
-METHOD ToolTip       SETGET
+   METHOD ToolTip       SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD RePaint
+   METHOD RePaint
 
-METHOD Release
+   METHOD Release
 
-METHOD OriginalSize
+   METHOD OriginalSize
 
-METHOD CurrentSize
+   METHOD CurrentSize
 
-METHOD Blend
+   METHOD Blend
 
-METHOD Copy
+   METHOD Copy
 
    EMPTY( _OOHG_AllVars )
 
@@ -450,4 +450,3 @@ HB_FUNC( TIMAGE_SETTOOLTIP )   // ( oSelf, lShow )
 }
 
 #pragma ENDDUMP
-

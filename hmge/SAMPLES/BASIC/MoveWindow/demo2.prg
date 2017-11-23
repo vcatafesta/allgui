@@ -86,4 +86,3 @@ FUNCTION ChgChild()
    Form_2.Col := xPos + nWidth
 
    RETURN NIL
-

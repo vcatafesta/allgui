@@ -293,4 +293,3 @@ PROCEDURE Pict2Prn()                      // ( previously loaded ) Picture -> Pr
    ENDIF lSelPrntr
 
    RETURN // Pict2Prn()
-

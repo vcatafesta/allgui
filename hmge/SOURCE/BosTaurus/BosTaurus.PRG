@@ -46,4 +46,3 @@ BOS TAURUS library code into it.
 
 #include "BosTaurus_HB.prg"
 #include "BosTaurus_C.prg"
-

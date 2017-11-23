@@ -35,4 +35,3 @@ FUNCTION main()
    automsginfoext("Este es una prueba de varias lineas"+chr(13)+"esta es otra linea"+chr(13)+"le agregue temporizador opcional"+chr(13)+chr(13)+"estara disponible proxima version", "aporte de Lucho Miranda",4)
 
    RETURN NIL
-

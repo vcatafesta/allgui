@@ -43,4 +43,3 @@ PROCEDURE SetBackColor()
    ThisWindow.BackColor := aColors[nColor]
 
    RETURN
-

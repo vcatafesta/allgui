@@ -82,4 +82,3 @@ PROCEDURE TClick3
    MsgInfo ( "Dialog Cancelled: " + hb_ValToStr( lDialogCancelled ) , "Result" )
 
    RETURN
-

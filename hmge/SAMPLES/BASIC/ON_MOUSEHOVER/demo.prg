@@ -79,4 +79,3 @@ FUNCTION LeaveLabel( cForm, cCtrl )
    lOver := .F.
 
    RETURN NIL
-

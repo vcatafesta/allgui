@@ -164,7 +164,6 @@ typedef struct DYNAPARM
 
 #pragma pack()
 
-
 #define CTYPE_VOID                0
 #define CTYPE_CHAR                1
 

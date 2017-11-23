@@ -23,4 +23,3 @@ FUNCTION Main
    ACTIVATE WINDOW test,form_2
 
    RETURN NIL
-

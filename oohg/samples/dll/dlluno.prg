@@ -14,4 +14,3 @@ FUNCTION PRUEBA(cMensaje)
    NEXT
 
    RETURN .t.
-

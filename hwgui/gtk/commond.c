@@ -143,7 +143,7 @@ HB_FUNC( HWG_SELECTFILE )
    g_signal_connect_swapped( GTK_OBJECT (GTK_FILE_SELECTION (file_selector)->cancel_button),
                              "clicked",
                              G_CALLBACK (cancel_filedlg),
-                             (gpointer) file_selector); 
+                             (gpointer) file_selector);
 
    if( cMask )
       gtk_file_selection_complete( (GtkFileSelection*)file_selector, cMask );
@@ -156,7 +156,7 @@ void store_color( gpointer colorseldlg )
 {
    GtkColorSelection *colorsel;
    GdkColor color;
-   // char ss[50];   
+   // char ss[50];
 
    colorsel = GTK_COLOR_SELECTION( GTK_COLOR_SELECTION_DIALOG (colorseldlg)->colorsel );
    gtk_color_selection_get_current_color (colorsel, &color);
@@ -220,4 +220,3 @@ HB_FUNC( HWG_CHOOSECOLOR )
    gtk_widget_show( colorseldlg );
    gtk_main();
 }
-

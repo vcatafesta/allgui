@@ -11,4 +11,3 @@ FUNCTION Main
    ACTIVATE WINDOW Test
 
    RETURN
-

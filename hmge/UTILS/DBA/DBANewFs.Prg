@@ -178,4 +178,3 @@ PROC NewTableBD()                         // Build by defining a New Table and U
             RETU lRVal // StExTValid()
 
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

@@ -2201,4 +2201,3 @@ STATIC FUNCTION hb_zebra_draw_hpdf( hZebra, page, ... )
    HPDF_Page_Fill( page )
 
    RETURN 0
-

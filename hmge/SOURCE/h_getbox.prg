@@ -1671,4 +1671,3 @@ STATIC FUNCTION _GetDefinedStatusBarItemValue( ParentHandle, ItemID )
    NEXT
 
    RETURN ( _HMG_aControlCaption [i] )
-

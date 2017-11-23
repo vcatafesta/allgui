@@ -177,4 +177,3 @@ HB_FUNC( PAINTDEGRADE )
 }
 
 #pragma ENDDUMP
-

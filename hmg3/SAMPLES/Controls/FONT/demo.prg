@@ -95,4 +95,3 @@ FUNCTION GetValues
    MsgInfo(m)
 
    RETURN NIL
-

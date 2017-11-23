@@ -135,7 +135,6 @@ HB_FUNC( INITTOOLTIP )
       DWORD dwStyle = WS_POPUP | TTS_ALWAYSTIP;
       INITCOMMONCONTROLSEX icex = { sizeof( INITCOMMONCONTROLSEX ), ICC_BAR_CLASSES };
 
-
       if( hb_pcount() > 1 )
       {
          if( HB_ISLOG( 2 ) && hb_parl( 2 ) )
@@ -301,7 +300,6 @@ HB_FUNC( INITTOOLTIPEX )
       hb_errRT_BASE_SubstR( EG_ARG, 0, "MiniGUI Err.", HB_ERR_FUNCNAME, 1, hb_paramError( 1 ) );
    }
 }
-
 
 /*
    ToolTip messages - TTM_messages

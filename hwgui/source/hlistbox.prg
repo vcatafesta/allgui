@@ -22,37 +22,37 @@ CLASS VAR winclass   INIT "LISTBOX"
    DATA  bkeydown, bDblclick
    DATA  bValid
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       aItems,oFont,bInit,bSize,bPaint,bChange,cTooltip,tColor,bcolor,bGFocus,bLFocus, bKeydown, bDblclick,bOther )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
+   METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
       bChange, cTooltip, bKeydown, bOther  )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD Requery()
+   METHOD Requery()
 
-METHOD Setitem( nPos )
+   METHOD Setitem( nPos )
 
-METHOD AddItems( p )
+   METHOD AddItems( p )
 
-METHOD DeleteItem( nPos )
+   METHOD DeleteItem( nPos )
 
-METHOD Valid( oCtrl )
+   METHOD Valid( oCtrl )
 
-METHOD When( oCtrl )
+   METHOD When( oCtrl )
 
-METHOD onChange( oCtrl )
+   METHOD onChange( oCtrl )
 
-METHOD onDblClick()
+   METHOD onDblClick()
 
-METHOD Clear()
+   METHOD Clear()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -379,4 +379,3 @@ METHOD Valid( oCtrl ) CLASS HListBox
    */
 
    RETURN .T.
-

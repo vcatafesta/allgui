@@ -182,4 +182,3 @@ FUNCTION Get_Fold_Dlg(NameWorkKat)
    ENDIF
 
    RETURN NIL
-

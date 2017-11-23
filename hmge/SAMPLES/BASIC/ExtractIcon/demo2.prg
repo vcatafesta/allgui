@@ -88,4 +88,3 @@ FUNCTION SaveThisIcon( cSrcName, nI )
    RETURN NIL
 
    #include <saveicon.c>
-

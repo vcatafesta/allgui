@@ -139,4 +139,3 @@ FUNCTION CreateData()
    ENDIF
 
    RETURN NIL
-

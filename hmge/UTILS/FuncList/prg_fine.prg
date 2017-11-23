@@ -547,4 +547,3 @@ STATIC FUNCTION FineSyntax( aTokens, nCaseFormat )
    RETURN cString
 
    ****** End of FineSyntax ******
-

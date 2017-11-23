@@ -43,4 +43,3 @@ FUNCTION Test()
    hwg_Msginfo("Test")
 
    RETURN NIL
-

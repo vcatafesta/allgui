@@ -269,4 +269,3 @@ PROCEDURE borrarec()
    END
 
    RETURN NIL
-

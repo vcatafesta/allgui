@@ -462,4 +462,3 @@ PROCEDURE fAbout()
    ACTIVATE WINDOW Form_About
 
    RETURN
-

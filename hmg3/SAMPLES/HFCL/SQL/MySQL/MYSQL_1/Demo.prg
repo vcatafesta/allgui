@@ -735,4 +735,3 @@ FUNCTION Sobre_o_Sistema()
       PadC("xharbour = www.xharbour.org",60),"Exemplo xHarbour + HMG + MYSql")
 
    RETURN NIL
-

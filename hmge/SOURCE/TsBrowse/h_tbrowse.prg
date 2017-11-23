@@ -685,329 +685,325 @@ CLASS TSBrowse FROM TControl
    DATA   uLastTag                                   // last TagOrder before losing focus
    VAR    nLapsus       AS NUMERIC INIT 0 PROTECTED
 
-METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSizes, cParentWnd,;
+   METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSizes, cParentWnd,;
       bChange, bLDblClick, bRClick, cFont, nFontSize, hCursor, aColors, aImages, cMsg,;
       lUpdate, uAlias, bWhen, nValue, lCellBrw, nStyle, bLClick, aLine,;
       aActions, nLineStyle, lRePaint, lDelete, aJust, lLock, lAppend, lEnum,;
       lAutoSearch, uUserSearch, lAutoFilter, uUserFilter, aPicture,;
       lTransparent, uSelector, lEditable, lAutoCol, aColSel, cTooltip ) CONSTRUCTOR
 
-METHOD AddColumn( oColumn )
+   METHOD AddColumn( oColumn )
 
-METHOD SetColumn( oColumn, nCol )
+   METHOD SetColumn( oColumn, nCol )
 
-METHOD AddSuperHead( nFromCol, nToCol, uHead, nHeight, aColors, l3dLook, ;
+   METHOD AddSuperHead( nFromCol, nToCol, uHead, nHeight, aColors, l3dLook, ;
       uFont, uBitMap, lAdjust, lTransp, ;
       lNoLines, nHAlign, nVAlign )
 
-METHOD BeginPaint() INLINE If( ::lRepaint, ::Super:BeginPaint(), 0 )
+   METHOD BeginPaint() INLINE If( ::lRepaint, ::Super:BeginPaint(), 0 )
 
-METHOD BugUp() INLINE ::UpStable()
+   METHOD BugUp() INLINE ::UpStable()
 
-METHOD BiClr( uClrOdd, uClrPair )
+   METHOD BiClr( uClrOdd, uClrPair )
 
-METHOD Bof() INLINE If( ::bBoF != Nil, Eval( ::bBof ), .F. )
+   METHOD Bof() INLINE If( ::bBoF != Nil, Eval( ::bBof ), .F. )
 
-METHOD ChangeFont( hFont, nColumn, nLevel )
+   METHOD ChangeFont( hFont, nColumn, nLevel )
 
-METHOD DbSkipper( nToSkip )
+   METHOD DbSkipper( nToSkip )
 
-METHOD Default()
+   METHOD Default()
 
-METHOD Del( nItem )
+   METHOD Del( nItem )
 
-METHOD DeleteRow( lAll )
+   METHOD DeleteRow( lAll )
 
-METHOD DelColumn( nPos )
+   METHOD DelColumn( nPos )
 
-METHOD Destroy()
+   METHOD Destroy()
 
-METHOD Display()
+   METHOD Display()
 
-METHOD DrawFooters() INLINE ::DrawHeaders( .T. )
+   METHOD DrawFooters() INLINE ::DrawHeaders( .T. )
 
    //   MESSAGE DrawIcon METHOD _DrawIcon( nIcon, lFocused )
 
-METHOD DrawIcons()
+   METHOD DrawIcons()
 
-METHOD DrawLine( xRow )
+   METHOD DrawLine( xRow )
 
-METHOD DrawPressed( nCell, lPressed )
+   METHOD DrawPressed( nCell, lPressed )
 
-METHOD DrawSelect( xRow )
+   METHOD DrawSelect( xRow )
 
-METHOD DrawSuper()
+   METHOD DrawSuper()
 
-METHOD DrawHeaders( lFooters )
+   METHOD DrawHeaders( lFooters )
 
-METHOD Edit( uVar, nCell, nKey, nKeyFlags, cPicture, bValid, nClrFore, nClrBack )
+   METHOD Edit( uVar, nCell, nKey, nKeyFlags, cPicture, bValid, nClrFore, nClrBack )
 
-METHOD EditExit( nCol, nKey, uVar, bValid, lLostFocus )
+   METHOD EditExit( nCol, nKey, uVar, bValid, lLostFocus )
 
-METHOD EndPaint()   INLINE If( ::lRePaint, ::Super:EndPaint(), ( ::lRePaint := .T., 0 ) )
+   METHOD EndPaint()   INLINE If( ::lRePaint, ::Super:EndPaint(), ( ::lRePaint := .T., 0 ) )
 
-METHOD Eof() INLINE If( ::bEoF != Nil, Eval( ::bEof ), .F. )
+   METHOD Eof() INLINE If( ::bEoF != Nil, Eval( ::bEof ), .F. )
 
-METHOD Excel2( cFile, lActivate, hProgress, cTitle, lSave, bPrintRow )
+   METHOD Excel2( cFile, lActivate, hProgress, cTitle, lSave, bPrintRow )
 
-METHOD ExcelOle( cXlsFile, lActivate, hProgress, cTitle, hFont, lSave, bExtern, aColSel, bPrintRow )
+   METHOD ExcelOle( cXlsFile, lActivate, hProgress, cTitle, hFont, lSave, bExtern, aColSel, bPrintRow )
 
-METHOD Exchange( nCol1, nCol2 )  INLINE ::SwitchCols( nCol1, nCol2 ), ::SetFocus()
+   METHOD Exchange( nCol1, nCol2 )  INLINE ::SwitchCols( nCol1, nCol2 ), ::SetFocus()
 
-METHOD ExpLocate( cExp, nCol )
+   METHOD ExpLocate( cExp, nCol )
 
-METHOD ExpSeek( cExp, lSoft )
+   METHOD ExpSeek( cExp, lSoft )
 
-METHOD FreezeCol( lNext )
+   METHOD FreezeCol( lNext )
 
-METHOD GetAllColsWidth()
+   METHOD GetAllColsWidth()
 
-METHOD GetColSizes() INLINE If( ValType( ::aColSizes ) == "A", ::aColSizes, Eval( ::aColSizes ) )
+   METHOD GetColSizes() INLINE If( ValType( ::aColSizes ) == "A", ::aColSizes, Eval( ::aColSizes ) )
 
-METHOD GetColumn( nCol )
+   METHOD GetColumn( nCol )
 
-METHOD GetDlgCode( nLastKey )
+   METHOD GetDlgCode( nLastKey )
 
-METHOD GetRealPos( nRelPos )
+   METHOD GetRealPos( nRelPos )
 
-METHOD GetTxtRow( nRowPix ) INLINE RowFromPix( ::hWnd, nRowPix, ::nHeightCell, ;
+   METHOD GetTxtRow( nRowPix ) INLINE RowFromPix( ::hWnd, nRowPix, ::nHeightCell, ;
       If( ::lDrawHeaders, ::nHeightHead, 0 ), ;
       If( ::lFooting .and. ::lDrawFooters, ::nHeightFoot, 0 ), ;
       If( ::lDrawHeaders, ::nHeightSuper, 0 ),;
       If( ::lDrawSpecHd, ::nHeightSpecHd, 0 ) )
 
-METHOD GoBottom()
+   METHOD GoBottom()
 
-METHOD GoDown()
+   METHOD GoDown()
 
-METHOD GoEnd()
+   METHOD GoEnd()
 
-METHOD GoHome()
+   METHOD GoHome()
 
-METHOD GoLeft()
+   METHOD GoLeft()
 
-METHOD GoNext()
+   METHOD GoNext()
 
-METHOD GoPos( nNewRow, nNewCol )
+   METHOD GoPos( nNewRow, nNewCol )
 
-METHOD GoRight()
+   METHOD GoRight()
 
-METHOD GotFocus( hCtlLost )
+   METHOD GotFocus( hCtlLost )
 
-METHOD GoTop()
+   METHOD GoTop()
 
-METHOD GoToRec( nRec )
+   METHOD GoToRec( nRec )
 
-METHOD GoUp()
+   METHOD GoUp()
 
-METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
 
-METHOD HiliteCell( nCol, nColPix )
+   METHOD HiliteCell( nCol, nColPix )
 
-METHOD HScroll( nWParam, nLParam )
+   METHOD HScroll( nWParam, nLParam )
 
-METHOD HThumbDrag( nPos )
+   METHOD HThumbDrag( nPos )
 
-METHOD InsColumn( nPos, oColumn )
+   METHOD InsColumn( nPos, oColumn )
 
-METHOD Insert( cItem, nAt )
+   METHOD Insert( cItem, nAt )
 
-METHOD AddItem( cItem )
+   METHOD AddItem( cItem )
 
-METHOD IsColVisible( nCol )
+   METHOD IsColVisible( nCol )
 
-METHOD IsColVis2( nCol )
+   METHOD IsColVis2( nCol )
 
-METHOD IsEditable( nCol ) INLINE ::lCellBrw .and. ::aColumns[ nCol ]:lEdit .and. ;
+   METHOD IsEditable( nCol ) INLINE ::lCellBrw .and. ::aColumns[ nCol ]:lEdit .and. ;
       ( ::aColumns[ nCol ]:bWhen == Nil .or. Eval( ::aColumns[ nCol ]:bWhen, Self ) )
 
-METHOD KeyChar( nKey, nFlags )
+   METHOD KeyChar( nKey, nFlags )
 
-METHOD KeyDown( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
 
-METHOD KeyUp( nKey, nFlags )
+   METHOD KeyUp( nKey, nFlags )
 
-METHOD LButtonDown( nRowPix, nColPix, nKeyFlags )
+   METHOD LButtonDown( nRowPix, nColPix, nKeyFlags )
 
-METHOD LButtonUp( nRowPix, nColPix, nFlags )
+   METHOD LButtonUp( nRowPix, nColPix, nFlags )
 
-METHOD lCloseArea() INLINE If( ::lIsDbf .and. ! Empty( ::cAlias ), ( ( ::cAlias )->( DbCloseArea() ), ;
+   METHOD lCloseArea() INLINE If( ::lIsDbf .and. ! Empty( ::cAlias ), ( ( ::cAlias )->( DbCloseArea() ), ;
       ::cAlias := "", .T. ), .F. )
 
-METHOD LDblClick( nRowPix, nColPix, nKeyFlags )
+   METHOD LDblClick( nRowPix, nColPix, nKeyFlags )
 
-METHOD lEditCol( uVar, nCol, cPicture, bValid, nClrFore, nClrBack )
+   METHOD lEditCol( uVar, nCol, cPicture, bValid, nClrFore, nClrBack )
 
-METHOD lIgnoreKey( nKey, nFlags )
+   METHOD lIgnoreKey( nKey, nFlags )
 
-METHOD LoadFields( lEditable )
+   METHOD LoadFields( lEditable )
 
-METHOD LoadRecordSet()
+   METHOD LoadRecordSet()
 
-METHOD LoadRelated( cAlias, lEditable, aNames, aHeaders )
+   METHOD LoadRelated( cAlias, lEditable, aNames, aHeaders )
 
-METHOD Look3D( lOnOff, nColumn, nLevel, lPhantom )
+   METHOD Look3D( lOnOff, nColumn, nLevel, lPhantom )
 
-METHOD LostFocus( hCtlFocus )
+   METHOD LostFocus( hCtlFocus )
 
-METHOD lRSeek( uData, nFld, lSoft )
+   METHOD lRSeek( uData, nFld, lSoft )
 
-METHOD MButtonDown( nRow, nCol, nKeyFlags )
+   METHOD MButtonDown( nRow, nCol, nKeyFlags )
 
-METHOD MouseMove( nRowPix, nColPix, nKeyFlags )
+   METHOD MouseMove( nRowPix, nColPix, nKeyFlags )
 
-METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
+   METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
 
-METHOD MoveColumn( nColPos, nNewPos )
+   METHOD MoveColumn( nColPos, nNewPos )
 
-METHOD nAtCol( nColPixel, lActual )
+   METHOD nAtCol( nColPixel, lActual )
 
-METHOD nAtColActual( nColPixel )  //SergKis & Igor Nazarov
+   METHOD nAtColActual( nColPixel )  //SergKis & Igor Nazarov
 
-METHOD nAtIcon( nRow, nCol )
+   METHOD nAtIcon( nRow, nCol )
 
-METHOD nColCount() INLINE Len( ::aColumns )
+   METHOD nColCount() INLINE Len( ::aColumns )
 
-METHOD nColumn( cName ) INLINE _nColumn( Self, cName )
+   METHOD nColumn( cName ) INLINE _nColumn( Self, cName )
 
-METHOD nField( cName )
+   METHOD nField( cName )
 
-METHOD nLogicPos()
+   METHOD nLogicPos()
 
-METHOD nRowCount() INLINE CountRows( ::hWnd, ::nHeightCell, If( ::lDrawHeaders, ::nHeightHead, 0 ), ;
+   METHOD nRowCount() INLINE CountRows( ::hWnd, ::nHeightCell, If( ::lDrawHeaders, ::nHeightHead, 0 ), ;
       If( ::lFooting .and. ::lDrawFooters, ::nHeightFoot, 0 ), ;
       If( ::lDrawHeaders, ::nHeightSuper, 0 ),;
       If( ::lDrawSpecHd, ::nHeightSpecHd, 0 ) )
 
-METHOD PageUp( nLines )
+   METHOD PageUp( nLines )
 
-METHOD PageDown( nLines )
+   METHOD PageDown( nLines )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD PanHome()
+   METHOD PanHome()
 
-METHOD PanEnd()
+   METHOD PanEnd()
 
-METHOD PanLeft()
+   METHOD PanLeft()
 
-METHOD PanRight()
+   METHOD PanRight()
 
-METHOD PostEdit( uTemp, nCol, bValid )
+   METHOD PostEdit( uTemp, nCol, bValid )
 
-METHOD RButtonDown( nRowPix, nColPix, nFlags )
+   METHOD RButtonDown( nRowPix, nColPix, nFlags )
 
-METHOD Refresh( lPaint, lRecount )
+   METHOD Refresh( lPaint, lRecount )
 
-METHOD RelPos( nLogicPos )
+   METHOD RelPos( nLogicPos )
 
-METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal )
+   METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal )
 
-METHOD Reset( lBottom )
+   METHOD Reset( lBottom )
 
-METHOD ResetSeek()
+   METHOD ResetSeek()
 
-METHOD ResetVScroll( lInit )
+   METHOD ResetVScroll( lInit )
 
-METHOD ReSize( nSizeType, nWidth, nHeight )
+   METHOD ReSize( nSizeType, nWidth, nHeight )
 
-METHOD TSBrwScroll( nDir ) INLINE TSBrwScroll( ::hWnd, nDir, ::hFont, ;
+   METHOD TSBrwScroll( nDir ) INLINE TSBrwScroll( ::hWnd, nDir, ::hFont, ;
       ::nHeightCell, If( ::lDrawHeaders, ::nHeightHead, 0 ), ;
       If( ValType( ::lDrawFooters ) == "L" .and. ;
       ::lDrawFooters , ::nHeightFoot, 0 ), ::nHeightSuper, ::nHeightSpecHd )
 
-METHOD Seek( nKey )
+   METHOD Seek( nKey )
 
-METHOD Selection()
+   METHOD Selection()
 
-METHOD Set3DText( lOnOff, lRaised, nColumn, nLevel, nClrLight, nClrShadow )
+   METHOD Set3DText( lOnOff, lRaised, nColumn, nLevel, nClrLight, nClrShadow )
 
-METHOD SetAlign( nColumn, nLevel, nAlign )
+   METHOD SetAlign( nColumn, nLevel, nAlign )
 
-METHOD SetAppendMode( lMode )
+   METHOD SetAppendMode( lMode )
 
-METHOD SetArray( aArray, lAutoCols, aHead, aSizes )
+   METHOD SetArray( aArray, lAutoCols, aHead, aSizes )
 
-METHOD SetArrayTo( aArray, uFontHF, aHead, aSizes, uFooter, aPicture, aAlign, aName )
+   METHOD SetArrayTo( aArray, uFontHF, aHead, aSizes, uFooter, aPicture, aAlign, aName )
 
-METHOD SetBtnGet( nColumn, cResName, bAction, nBmpWidth )
+   METHOD SetBtnGet( nColumn, cResName, bAction, nBmpWidth )
 
-METHOD SetColMsg( cMsg, cEditMsg, nCol )
+   METHOD SetColMsg( cMsg, cEditMsg, nCol )
 
-METHOD SetColor( xColor1, xColor2, nColumn )
+   METHOD SetColor( xColor1, xColor2, nColumn )
 
-METHOD SetColSize( nCol, nWidth )
+   METHOD SetColSize( nCol, nWidth )
 
-METHOD SetColumns( aData, aHeaders, aColSizes )
+   METHOD SetColumns( aData, aHeaders, aColSizes )
 
-METHOD SetDeleteMode( lOnOff, lConfirm, bDelete, bPostDel )
+   METHOD SetDeleteMode( lOnOff, lConfirm, bDelete, bPostDel )
 
-METHOD SetHeaders( nHeight, aCols, aTitles, aAlign , al3DLook, aFonts, aActions )
+   METHOD SetHeaders( nHeight, aCols, aTitles, aAlign , al3DLook, aFonts, aActions )
 
-METHOD SetData( nColumn, bData, aList )
+   METHOD SetData( nColumn, bData, aList )
 
-METHOD SetFilter( cField, uVal1, uVal2 )
+   METHOD SetFilter( cField, uVal1, uVal2 )
 
-METHOD SetFont( hFont )
+   METHOD SetFont( hFont )
 
-METHOD SetIndexCols( nCol1, nCol2, nCol3, nCol4, nCol5 )
+   METHOD SetIndexCols( nCol1, nCol2, nCol3, nCol4, nCol5 )
 
-METHOD SetItems( aItems ) INLINE ::SetArray( aItems, .T. )
+   METHOD SetItems( aItems ) INLINE ::SetArray( aItems, .T. )
 
-METHOD SetDBF( cAlias )
+   METHOD SetDBF( cAlias )
 
-METHOD SetNoHoles ( nDelta, lSet )  //BK
+   METHOD SetNoHoles ( nDelta, lSet )  //BK
 
-METHOD SetOrder( nColumn, cPrefix, lDescend )
+   METHOD SetOrder( nColumn, cPrefix, lDescend )
 
-METHOD SetRecordSet( oRSet )
+   METHOD SetRecordSet( oRSet )
 
-METHOD SetSelectMode( lOnOff, bSelected, uBmpSel, nColSel, nAlign )
+   METHOD SetSelectMode( lOnOff, bSelected, uBmpSel, nColSel, nAlign )
 
-METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax )
+   METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax )
 
    #ifdef __DEBUG__
-
-METHOD ShowSizes()
-
+   METHOD ShowSizes()
    #endif
 
-METHOD Skip( n )
+   METHOD Skip( n )
 
-METHOD SortArray( nCol, lDescend )
+   METHOD SortArray( nCol, lDescend )
 
-METHOD SwitchCols( nCol1, nCol2 )
+   METHOD SwitchCols( nCol1, nCol2 )
 
-METHOD SyncChild( aoChildBrw, abAction )
+   METHOD SyncChild( aoChildBrw, abAction )
 
-METHOD UpAStable()
+   METHOD UpAStable()
 
-METHOD UpRStable( nRecNo )
+   METHOD UpRStable( nRecNo )
 
-METHOD UpStable()
+   METHOD UpStable()
 
-METHOD Proper( cString )
+   METHOD Proper( cString )
 
-METHOD VertLine( nColPixPos, nColInit, nGapp )
+   METHOD VertLine( nColPixPos, nColInit, nGapp )
 
-METHOD VScroll( nMsg, nPos )
+   METHOD VScroll( nMsg, nPos )
 
-METHOD Enabled( lEnab )   //JP 1.55
+   METHOD Enabled( lEnab )   //JP 1.55
 
-METHOD HideColumns( nColumn, lHide )  //JP 1.58
+   METHOD HideColumns( nColumn, lHide )  //JP 1.58
 
-METHOD AutoSpec( nCol )
+   METHOD AutoSpec( nCol )
 
-METHOD RefreshARow( xRow )  //JP 1.88
+   METHOD RefreshARow( xRow )  //JP 1.88
 
-METHOD UserPopup( bUserPopupItem, aColumn )  //JP 1.92
+   METHOD UserPopup( bUserPopupItem, aColumn )  //JP 1.92
 
-METHOD GetCellInfo( nRowPos, nCell, lColSpecHd )  //BK
+   METHOD GetCellInfo( nRowPos, nCell, lColSpecHd )  //BK
 
    #ifdef __EXT_USERKEYS__
-
-METHOD UserKeys( nKey, bKey, lCtrl, lShift )
-
+   METHOD UserKeys( nKey, bKey, lCtrl, lShift )
    #endif
 
 ENDCLASS
@@ -13818,7 +13814,7 @@ CLASS TSBcell
    VAR nWidth     AS NUMERIC  INIT 0
    VAR nHeight    AS NUMERIC  INIT 0
 
-METHOD New()   INLINE ( Self )
+   METHOD New()   INLINE ( Self )
 
 ENDCLASS
 
@@ -14320,4 +14316,3 @@ FUNCTION hb_HGetDef( hHash, xKey, xDef )
    RETURN iif( nPos > 0, HGetValueAt( hHash, nPos ), xDef )
 
    #endif
-

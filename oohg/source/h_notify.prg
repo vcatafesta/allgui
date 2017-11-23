@@ -60,21 +60,21 @@ CLASS TNotifyIcon FROM TControl
    DATA lCreated           INIT .F.
    DATA nTrayId            INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD Release
+   METHOD Release
 
-METHOD Picture          SETGET
+   METHOD Picture          SETGET
 
-METHOD Buffer           SETGET
+   METHOD Buffer           SETGET
 
-METHOD HIcon            SETGET
+   METHOD HIcon            SETGET
 
-METHOD HBitMap          SETGET
+   METHOD HBitMap          SETGET
 
-METHOD ToolTip          SETGET
+   METHOD ToolTip          SETGET
 
-METHOD Events_TaskBar
+   METHOD Events_TaskBar
 
    //   METHOD Enabled
    //   METHOD Visible
@@ -352,4 +352,3 @@ HB_FUNC( REMOVENOTIFYICON )
 }
 
 #pragma ENDDUMP
-

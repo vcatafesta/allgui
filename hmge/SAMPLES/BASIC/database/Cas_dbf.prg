@@ -362,4 +362,3 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
                               form_1.browse_1.refresh
 
                               retu nil
-

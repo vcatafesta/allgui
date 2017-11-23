@@ -146,7 +146,6 @@ PROCEDURE AF_Apply(;
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
    PROC AFKeySet( aitems )
-
       LOCAL cFrmName := thiswindow.name
 
       ON KEY UP   OF &cFrmName  ACTION AutoFill( aitems, 1 )
@@ -166,4 +165,3 @@ PROCEDURE AFKeyRls()
    RETURN
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

@@ -18,4 +18,3 @@ PROCEDURE demo_button_1_action
    Demo.Activex_1.Object:Navigate("http://hmgextended.com")
 
    RETURN
-

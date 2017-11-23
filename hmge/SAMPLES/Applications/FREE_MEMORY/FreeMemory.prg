@@ -1489,4 +1489,3 @@ HB_FUNC( GETSTARTTIME )
 }
 
 #pragma ENDDUMP
-

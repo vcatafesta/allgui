@@ -74,4 +74,3 @@ FUNCTION pesq(rd_dir,rd_text)
       ENDDO
    NEXT g
    retu .t.
-

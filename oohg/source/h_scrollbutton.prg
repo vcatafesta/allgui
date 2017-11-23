@@ -58,7 +58,7 @@ CLASS TScrollButton FROM TControl
 
    DATA ladjust  INIT .F.
 
-METHOD Define
+   METHOD Define
 
    EMPTY( _OOHG_AllVars )
 
@@ -114,4 +114,3 @@ HB_FUNC( INITVSCROLLBARBUTTON )
 }
 
 #pragma ENDDUMP
-

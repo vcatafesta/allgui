@@ -353,4 +353,3 @@ FUNCTION DelRecord()
    ENDIF
 
    RETURN NIL
-

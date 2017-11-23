@@ -14,18 +14,18 @@ CLASS HPanel INHERIT HControl
 
    DATA winclass   INIT "PANEL"
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
       bInit,bSize,bPaint,lDocked )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD Move( x1,y1,width,height )
+   METHOD Move( x1,y1,width,height )
 
 ENDCLASS
 
@@ -101,4 +101,3 @@ METHOD Move( x1,y1,width,height )  CLASS HPanel
    ::Super:Move( x1,y1,width,height,.T. )
 
    RETURN NIL
-

@@ -28,26 +28,26 @@ CLASS HToolBar INHERIT HControl
    DATA aItem init {}
    DATA Line
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit, ;
       bSize,bPaint,ctooltip,tcolor,bcolor,lTransp ,aItem)
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD INIT()
+   METHOD INIT()
 
-METHOD REFRESH()
+   METHOD REFRESH()
 
-METHOD AddButton(a,s,d,f,g,h)
+   METHOD AddButton(a,s,d,f,g,h)
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD EnableAllButtons()
+   METHOD EnableAllButtons()
 
-METHOD DisableAllButtons()
+   METHOD DisableAllButtons()
 
-METHOD EnableButtons(n)
+   METHOD EnableButtons(n)
 
-METHOD DisableButtons(n)
+   METHOD DisableButtons(n)
 
 ENDCLASS
 
@@ -205,4 +205,3 @@ METHOD DisableButtons(n) class htoolbar
    hwg_Enablewindow( ::aItem[n, 11 ], .T. )
 
    RETURN Self
-

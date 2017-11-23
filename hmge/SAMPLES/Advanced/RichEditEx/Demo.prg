@@ -820,9 +820,7 @@ FUNCTION SetBtnFont(aFont)
    RETURN NIL
 
    /*
-
    Function SetWordWrap_Click()
-
    Local lViewMode
 
    lViewMode := if(Form_1.Btn_Wrap.Value,1,0)
@@ -1551,4 +1549,3 @@ HB_FUNC ( MENUITEM_SETBITMAPS )
 #pragma ENDDUMP
 
    #include "l_richeditbox.prg"
-

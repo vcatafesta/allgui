@@ -393,4 +393,3 @@ FUNCTION ChangeControlFontSize ( ControlName, ParentForm , nSize )
    RedrawLabel (i)
 
    RETURN hFont
-

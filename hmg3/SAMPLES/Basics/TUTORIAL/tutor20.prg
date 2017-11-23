@@ -47,4 +47,3 @@ PROCEDURE OpenTables()
    //    Win_1.Grid_1.RecNo := RecNo()
 
    RETURN NIL
-

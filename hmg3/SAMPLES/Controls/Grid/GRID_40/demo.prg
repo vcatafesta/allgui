@@ -228,4 +228,3 @@ PROCEDURE Control_ONGOTFOCUS
    RETURN
 
    #endif
-

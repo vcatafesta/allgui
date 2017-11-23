@@ -106,4 +106,3 @@ FUNCTION DefMenuItem(nCol,oBrw)
    ENDIF
 
    RETURN NIL
-

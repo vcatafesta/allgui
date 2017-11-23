@@ -231,4 +231,3 @@ STATIC FUNCTION IsWinXPHome()
    LOCAL aVer := WinVersion()
 
    RETURN "Home" $ aVer[4]
-

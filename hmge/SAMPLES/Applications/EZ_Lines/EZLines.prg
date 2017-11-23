@@ -1346,4 +1346,3 @@ HB_FUNC( RANDOMIZE )
 }
 
 #pragma ENDDUMP
-

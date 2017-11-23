@@ -51,4 +51,3 @@ PROCEDURE Control_ONGOTFOCUS
    ENABLE WINDOW EVENT OF Form_1                   //   -->   StopWindowEventProcedure ("Form_1", .F.)
 
    RETURN
-

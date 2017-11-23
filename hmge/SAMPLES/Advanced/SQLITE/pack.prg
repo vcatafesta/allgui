@@ -55,4 +55,3 @@ PROCEDURE main()
    ENDIF
 
    RETURN
-

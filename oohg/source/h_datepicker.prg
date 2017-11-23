@@ -59,13 +59,13 @@ CLASS TDatePick FROM TControl
    DATA nWidth    INIT 120
    DATA nHeight   INIT 24
 
-METHOD Define
+   METHOD Define
 
-METHOD Value            SETGET
+   METHOD Value            SETGET
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD SetRange
+   METHOD SetRange
 
    EMPTY( _OOHG_AllVars )
 
@@ -143,11 +143,11 @@ CLASS TTimePick FROM TControl
    DATA nWidth    INIT 120
    DATA nHeight   INIT 24
 
-METHOD Define
+   METHOD Define
 
-METHOD Value            SETGET
+   METHOD Value            SETGET
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
 ENDCLASS
 
@@ -442,4 +442,3 @@ HB_FUNC( GETDATEPICKSECOND )
 }
 
 #pragma ENDDUMP
-

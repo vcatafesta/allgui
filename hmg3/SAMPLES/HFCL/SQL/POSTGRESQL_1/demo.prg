@@ -116,4 +116,3 @@ FUNCTION CreateTable ( cServer , cDataBase , cUser , cPassWord )
    oServer:Destroy()
 
    RETURN NIL
-

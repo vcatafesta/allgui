@@ -172,4 +172,3 @@ STATIC FUNCTION StrB64Decode( cString )
    NEXT
 
    RETURN cResult
-

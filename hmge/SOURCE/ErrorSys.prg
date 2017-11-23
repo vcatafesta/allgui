@@ -658,4 +658,3 @@ PROCEDURE _SetErrorLogFile( cFile )
    _HMG_ErrorLogFile := IFEMPTY( cFile, GetStartUpFolder() + "\ErrorLog.htm", cFile )
 
    RETURN
-

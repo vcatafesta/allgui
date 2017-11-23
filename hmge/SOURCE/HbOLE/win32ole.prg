@@ -105,7 +105,7 @@ CLASS VTWrapper
    DATA vt
    DATA Value
 
-METHOD New( vt, xVal ) CONSTRUCTOR
+   METHOD New( vt, xVal ) CONSTRUCTOR
 
 ENDCLASS
 
@@ -120,9 +120,8 @@ METHOD New( vt, xVal ) CLASS VTWrapper
 
 CLASS VTArrayWrapper FROM VTWrapper
 
-METHOD AsArray( nIndex, xValue ) OPERATOR "[]"
-
-METHOD __enumStart( enum, lDescend )
+   METHOD AsArray( nIndex, xValue ) OPERATOR "[]"
+   METHOD __enumStart( enum, lDescend )
 
 ENDCLASS
 
@@ -145,65 +144,48 @@ CLASS TOleAuto
    DATA cClassName
    DATA pOleEnumerator
 
-METHOD New( uObj, cClass, cLicense ) CONSTRUCTOR
+   METHOD New( uObj, cClass, cLicense ) CONSTRUCTOR
+   METHOD GetActiveObject( cClass ) CONSTRUCTOR
 
-METHOD GetActiveObject( cClass ) CONSTRUCTOR
-
-METHOD Invoke()
-
+   METHOD Invoke()
    MESSAGE CallMethod  METHOD Invoke()
 
-METHOD Set()
-
+   METHOD Set()
    MESSAGE SetProperty METHOD Set()
 
-METHOD Get()
-
+   METHOD Get()
    MESSAGE GetProperty METHOD Get()
 
-METHOD OleValue()
+   METHOD OleValue()
+   METHOD _OleValue( xSetValue )
 
-METHOD _OleValue( xSetValue )
+   METHOD OleNewEnumerator()
 
-METHOD OleNewEnumerator()
+   METHOD OleCollection( xIndex, xValue ) OPERATOR "[]"
 
-METHOD OleCollection( xIndex, xValue ) OPERATOR "[]"
+   METHOD OleValuePlus( xArg )            OPERATOR "+"
+   METHOD OleValueMinus( xArg )           OPERATOR "-"
+   METHOD OleValueMultiply( xArg )        OPERATOR "*"
+   METHOD OleValueDivide( xArg )          OPERATOR "/"
+   METHOD OleValueModulus( xArg )         OPERATOR "%"
+   METHOD OleValueInc()                   OPERATOR "++"
+   METHOD OleValueDec()                   OPERATOR "--"
+   METHOD OleValuePower( xArg )           OPERATOR "^"
 
-METHOD OleValuePlus( xArg )            OPERATOR "+"
+   METHOD OleValueEqual( xArg )           OPERATOR "="
+   METHOD OleValueExactEqual( xArg )      OPERATOR "=="
+   METHOD OleValueNotEqual( xArg )        OPERATOR "!="
 
-METHOD OleValueMinus( xArg )           OPERATOR "-"
-
-METHOD OleValueMultiply( xArg )        OPERATOR "*"
-
-METHOD OleValueDivide( xArg )          OPERATOR "/"
-
-METHOD OleValueModulus( xArg )         OPERATOR "%"
-
-METHOD OleValueInc()                   OPERATOR "++"
-
-METHOD OleValueDec()                   OPERATOR "--"
-
-METHOD OleValuePower( xArg )           OPERATOR "^"
-
-METHOD OleValueEqual( xArg )           OPERATOR "="
-
-METHOD OleValueExactEqual( xArg )      OPERATOR "=="
-
-METHOD OleValueNotEqual( xArg )        OPERATOR "!="
-
-METHOD __enumStart( enum, lDescend )
-
-METHOD __enumSkip( enum, lDescend )
-
-METHOD __enumStop()
+   METHOD __enumStart( enum, lDescend )
+   METHOD __enumSkip( enum, lDescend )
+   METHOD __enumStop()
 
    ERROR HANDLER OnError()
 
    DESTRUCTOR Release()
 
    // Needed to refernce, or hb_dynsymFindName() will fail
-
-METHOD ForceSymbols() INLINE ::cClassName()
+   METHOD ForceSymbols() INLINE ::cClassName()
 
 ENDCLASS
 
@@ -664,4 +646,3 @@ PROCEDURE OleShowException()
    RETURN
 
    #endif
-

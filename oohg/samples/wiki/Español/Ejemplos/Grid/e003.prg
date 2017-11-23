@@ -94,4 +94,3 @@ FUNCTION CheckIdleTime
    /*
    * EOF
    */
-

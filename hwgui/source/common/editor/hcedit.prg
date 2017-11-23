@@ -192,87 +192,87 @@ CLASS VAR winclass  INIT "TEDIT"
    #endif
    DATA   lScan INIT .F. PROTECTED
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
       bInit, bSize, bPaint, tcolor, bcolor, bGfocus, bLfocus, lNoVScroll, lNoBorder )
 
-METHOD Open( cFileName, cPageIn, cPageOut )
+   METHOD Open( cFileName, cPageIn, cPageOut )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetHili( xGroup, oFont, tColor, bColor )
+   METHOD SetHili( xGroup, oFont, tColor, bColor )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Paint( lReal )
+   METHOD Paint( lReal )
 
-METHOD PaintLine( hDC, yPos, nLine, lUse_aWrap )
+   METHOD PaintLine( hDC, yPos, nLine, lUse_aWrap )
 
-METHOD MarkLine( nLine, lReal, nSubLine )
+   METHOD MarkLine( nLine, lReal, nSubLine )
 
-METHOD End()
+   METHOD End()
 
-METHOD Convert( cPageIn, cPageOut )
+   METHOD Convert( cPageIn, cPageOut )
 
-METHOD SetText( xText, cPageIn, cPageOut )
+   METHOD SetText( xText, cPageIn, cPageOut )
 
-METHOD SAVE( cFileName )
+   METHOD SAVE( cFileName )
 
-METHOD AddFont( oFont, name, width, height , weight, ;
+   METHOD AddFont( oFont, name, width, height , weight, ;
       CharSet, Italic, Underline, StrikeOut )
 
-METHOD SetFont( oFont )
+   METHOD SetFont( oFont )
 
-METHOD SetCaretPos( nType, p1, p2 )
+   METHOD SetCaretPos( nType, p1, p2 )
 
-METHOD onKeyDown( nKeyCode, lParam, nCtrl )
+   METHOD onKeyDown( nKeyCode, lParam, nCtrl )
 
-METHOD PutChar( nKeyCode )
+   METHOD PutChar( nKeyCode )
 
-METHOD LineDown()
+   METHOD LineDown()
 
-METHOD LineUp()
+   METHOD LineUp()
 
-METHOD PageDown()
+   METHOD PageDown()
 
-METHOD PageUp()
+   METHOD PageUp()
 
-METHOD Top()
+   METHOD Top()
 
-METHOD Bottom()
+   METHOD Bottom()
 
-METHOD GOTO( nLine )
+   METHOD GOTO( nLine )
 
-METHOD onVScroll( wParam )
+   METHOD onVScroll( wParam )
 
-METHOD PCopy( Psource, Pdest )
+   METHOD PCopy( Psource, Pdest )
 
-METHOD PCmp( P1, P2 )
+   METHOD PCmp( P1, P2 )
 
-METHOD GetText( P1, P2 )
+   METHOD GetText( P1, P2 )
 
-METHOD InsText( aPoint, cText, lOver )
+   METHOD InsText( aPoint, cText, lOver )
 
-METHOD DelText( P1, P2 )
+   METHOD DelText( P1, P2 )
 
-METHOD AddLine( nLine )
+   METHOD AddLine( nLine )
 
-METHOD DelLine( nLine )
+   METHOD DelLine( nLine )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD SetWrap( lWrap, lInit )
+   METHOD SetWrap( lWrap, lInit )
 
-METHOD Highlighter( oHili )
+   METHOD Highlighter( oHili )
 
-METHOD Scan()
+   METHOD Scan()
 
-METHOD Undo( nLine1, nPos1, nLine2, nPos2, nOper, cText )
+   METHOD Undo( nLine1, nPos1, nLine2, nPos2, nOper, cText )
 
-METHOD Print( nDocFormat, nDocOrient, nMarginL, nMarginR, nMarginT, nMarginB )
+   METHOD Print( nDocFormat, nDocOrient, nMarginL, nMarginR, nMarginT, nMarginB )
 
-METHOD PrintLine( oPrinter, yPos, nL )
+   METHOD PrintLine( oPrinter, yPos, nL )
 
 ENDCLASS
 
@@ -2537,4 +2537,3 @@ FUNCTION hced_NextPos( oEdit, cLine, nPos )
    #endif
 
    RETURN nPos + 1
-

@@ -521,4 +521,3 @@ FUNCTION PrintError( logfile )
    ENDIF
 
    RETURN NIL
-

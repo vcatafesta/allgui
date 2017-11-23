@@ -416,4 +416,3 @@ FUNCTION ShowBtnDropMenu(cWin,cBut,HBtnDropMenu)
       aPos[2] + GetProperty(cWin,cBut,'Height'), GetFormHandle( cWin ) )
 
    RETURN NIL
-

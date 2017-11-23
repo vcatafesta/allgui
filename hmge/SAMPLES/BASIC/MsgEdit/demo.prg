@@ -968,4 +968,3 @@ FUNCTION MsgToolTip(nSender, cText, cTitle, aColor)
    RELEASE FONT _Font_ToolTip
 
    RETURN NIL
-

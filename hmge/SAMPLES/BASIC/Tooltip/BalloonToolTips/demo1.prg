@@ -66,4 +66,3 @@ PROCEDURE AddToolTipIcon()
    ENDIF
 
    RETURN
-

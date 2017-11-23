@@ -98,4 +98,3 @@ FUNCTION addnewcontrol2(ctrl)
    tabsample.tab1.addcontrol(ctrl,2,80,10)
 
    RETURN NIL
-

@@ -339,4 +339,3 @@ FUNCTION cFilePath( cPathMask )
    LOCAL n := RAt( "\", cPathMask )
 
    RETURN iif( n > 0, Left( cPathMask, n -1 ), Left( cPathMask, 2 ) )
-

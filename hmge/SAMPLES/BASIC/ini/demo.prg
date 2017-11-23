@@ -31,4 +31,3 @@ FUNCTION GetIniValue( cIni )
    END INI
 
    RETURN { cName, nVers }
-

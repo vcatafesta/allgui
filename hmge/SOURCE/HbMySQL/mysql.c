@@ -122,7 +122,6 @@ static MYSQL * hb_MYSQL_par( int iParam )
    return ph ? ( MYSQL * ) *ph : NULL;
 }
 
-
 static HB_GARBAGE_FUNC( MYSQL_RES_release )
 {
    void ** ph = ( void ** ) Cargo;
@@ -164,7 +163,6 @@ static MYSQL_RES * hb_MYSQL_RES_par( int iParam )
 
    return ph ? ( MYSQL_RES * ) *ph : NULL;
 }
-
 
 /* API wrappers */
 

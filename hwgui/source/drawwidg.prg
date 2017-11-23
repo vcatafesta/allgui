@@ -21,13 +21,13 @@ CLASS VAR aFonts   INIT { }
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
-METHOD Add( fontName, nWidth, nHeight , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle )
+   METHOD Add( fontName, nWidth, nHeight , fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle )
 
-METHOD SELECT( oFont, nCharSet )
+   METHOD SELECT( oFont, nCharSet )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
-METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
+   METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
 
 ENDCLASS
 
@@ -149,11 +149,11 @@ CLASS VAR aPens   INIT { }
    DATA style, width, color
    DATA nCounter   INIT 1
 
-METHOD Add( nStyle, nWidth, nColor )
+   METHOD Add( nStyle, nWidth, nColor )
 
-METHOD Get( nStyle, nWidth, nColor )
+   METHOD Get( nStyle, nWidth, nColor )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
 ENDCLASS
 
@@ -267,9 +267,9 @@ CLASS VAR aBrushes   INIT { }
    DATA nHatch   INIT 99
    DATA nCounter INIT 1
 
-METHOD Add( nColor, nHatch )
+   METHOD Add( nColor, nHatch )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
 ENDCLASS
 
@@ -354,17 +354,17 @@ CLASS VAR lSelFile   INIT .T.
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight )
+   METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight )
 
-METHOD AddStandard( nId )
+   METHOD AddStandard( nId )
 
-METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight )
+   METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight )
 
-METHOD AddWindow( oWnd, lFull )
+   METHOD AddWindow( oWnd, lFull )
 
-METHOD Draw( hDC, x1, y1, width, height )  INLINE hwg_Drawbitmap( hDC, ::handle, SRCCOPY, x1, y1, width, height )
+   METHOD Draw( hDC, x1, y1, width, height )  INLINE hwg_Drawbitmap( hDC, ::handle, SRCCOPY, x1, y1, width, height )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
 ENDCLASS
 
@@ -557,13 +557,13 @@ CLASS VAR lSelFile   INIT .T.
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM )
+   METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM )
 
-METHOD AddFile( name, nWidth, nHeight )
+   METHOD AddFile( name, nWidth, nHeight )
 
-METHOD Draw( hDC, x, y )   INLINE hwg_Drawicon( hDC, ::handle, x, y )
+   METHOD Draw( hDC, x, y )   INLINE hwg_Drawicon( hDC, ::handle, x, y )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
 ENDCLASS
 
@@ -714,4 +714,3 @@ METHOD RELEASE() CLASS HIcon
    NEXT
 
    RETURN
-

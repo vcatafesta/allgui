@@ -4,14 +4,14 @@
 #include "hbapi.h"
 
 //
-//	ICONS (.ICO type 1) are structured like this:
+//   ICONS (.ICO type 1) are structured like this:
 //
-//	ICONHEADER					(just 1)
-//	ICONDIR						[1...n]  (an array, 1 for each image)
-//	[BITMAPINFOHEADER+COLOR_BITS+MASK_BITS]		[1...n]	 (1 after the other, for each image)
+//   ICONHEADER               (just 1)
+//   ICONDIR                  [1...n]  (an array, 1 for each image)
+//   [BITMAPINFOHEADER+COLOR_BITS+MASK_BITS]      [1...n]    (1 after the other, for each image)
 //
-//	CURSORS (.ICO type 2) are identical in structure, but use
-//	two monochrome bitmaps (real XOR and AND masks, this time).
+//   CURSORS (.ICO type 2) are identical in structure, but use
+//   two monochrome bitmaps (real XOR and AND masks, this time).
 //
 typedef struct
 {
@@ -22,7 +22,7 @@ typedef struct
 } ICONHEADER;
 
 //
-//	An array of ICONDIRs immediately follow the ICONHEADER
+//   An array of ICONDIRs immediately follow the ICONHEADER
 //
 typedef struct
 {
@@ -38,9 +38,9 @@ typedef struct
 } ICONDIR;
 
 //
-//	After the ICONDIRs follow the ICONIMAGE structures -
-//	consisting of a BITMAPINFOHEADER, (optional) RGBQUAD array, then
-//	the color and mask bitmap bits (all packed together).
+//   After the ICONDIRs follow the ICONIMAGE structures -
+//   consisting of a BITMAPINFOHEADER, (optional) RGBQUAD array, then
+//   the color and mask bitmap bits (all packed together).
 //
 typedef struct
 {
@@ -49,7 +49,7 @@ typedef struct
 } ICONIMAGE;
 
 //
-//	Write the ICO header to disk
+//   Write the ICO header to disk
 //
 static UINT WriteIconHeader( HANDLE hFile, int nImages )
 {
@@ -69,7 +69,7 @@ static UINT WriteIconHeader( HANDLE hFile, int nImages )
 }
 
 //
-//	Return the number of BYTES the bitmap will take ON DISK
+//   Return the number of BYTES the bitmap will take ON DISK
 //
 static UINT NumBitmapBytes( BITMAP * pBitmap )
 {
@@ -84,7 +84,7 @@ static UINT NumBitmapBytes( BITMAP * pBitmap )
 }
 
 //
-//	Return number of bytes written
+//   Return number of bytes written
 //
 static UINT WriteIconImageHeader( HANDLE hFile, BITMAP * pbmpColor, BITMAP * pbmpMask )
 {
@@ -119,7 +119,7 @@ static UINT WriteIconImageHeader( HANDLE hFile, BITMAP * pbmpColor, BITMAP * pbm
 }
 
 //
-//	Wrapper around GetIconInfo and GetObject(BITMAP)
+//   Wrapper around GetIconInfo and GetObject(BITMAP)
 //
 static BOOL GetIconBitmapInfo( HICON hIcon, ICONINFO * pIconInfo, BITMAP * pbmpColor, BITMAP * pbmpMask )
 {
@@ -136,7 +136,7 @@ static BOOL GetIconBitmapInfo( HICON hIcon, ICONINFO * pIconInfo, BITMAP * pbmpC
 }
 
 //
-//	Write one icon directory entry - specify the index of the image
+//   Write one icon directory entry - specify the index of the image
 //
 static UINT WriteIconDirectoryEntry( HANDLE hFile, HICON hIcon, UINT nImageOffset )
 {
@@ -224,7 +224,7 @@ static UINT WriteIconData( HANDLE hFile, HBITMAP hBitmap )
 }
 
 //
-//	Create a .ICO file, using the specified array of HICON images
+//   Create a .ICO file, using the specified array of HICON images
 //
 BOOL SaveIconToFile( TCHAR * szIconFile, HICON hIcon[], int nNumIcons )
 {
@@ -242,19 +242,19 @@ BOOL SaveIconToFile( TCHAR * szIconFile, HICON hIcon[], int nNumIcons )
       return FALSE;
 
    //
-   //	Write the iconheader first of all
+   //   Write the iconheader first of all
    //
    WriteIconHeader( hFile, nNumIcons );
 
    //
-   //	Leave space for the IconDir entries
+   //   Leave space for the IconDir entries
    //
    SetFilePointer( hFile, sizeof( ICONDIR ) * nNumIcons, 0, FILE_CURRENT );
 
    pImageOffset = ( int * ) malloc( nNumIcons * sizeof( int ) );
 
    //
-   //	Now write the actual icon images
+   //   Now write the actual icon images
    //
    for( i = 0; i < nNumIcons; i++ )
    {
@@ -278,7 +278,7 @@ BOOL SaveIconToFile( TCHAR * szIconFile, HICON hIcon[], int nNumIcons )
    }
 
    //
-   //	Lastly, skip back and write the icon directories.
+   //   Lastly, skip back and write the icon directories.
    //
    SetFilePointer( hFile, sizeof( ICONHEADER ), 0, FILE_BEGIN );
 
@@ -296,7 +296,7 @@ BOOL SaveIconToFile( TCHAR * szIconFile, HICON hIcon[], int nNumIcons )
 }
 
 //
-//	Save the icon resources to disk
+//   Save the icon resources to disk
 //
 HB_FUNC( SAVEICON )
 {

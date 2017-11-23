@@ -204,4 +204,3 @@ STATIC FUNCTION RowCharToPix( nValor )
 STATIC FUNCTION ColCharToPix( nValor )
 
    RETURN nValor*8
-

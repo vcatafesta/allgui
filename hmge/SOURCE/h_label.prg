@@ -282,4 +282,3 @@ FUNCTION OLABELEVENTS( hWnd, nMsg, wParam, lParam )
    ENDIF
 
    RETURN 0
-

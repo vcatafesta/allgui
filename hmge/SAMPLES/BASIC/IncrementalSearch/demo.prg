@@ -370,4 +370,3 @@ FUNCTION Form1Event2( i, nVirtKey, cKey )
    RETURN 0
 
    #include "MyEvents.prg"
-

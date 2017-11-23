@@ -93,19 +93,19 @@ CLASS HColumn INHERIT HObject
    DATA aHints INIT {}
    DATA Hint INIT .F.
 
-METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bColor, bClick )
+   METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bColor, bClick )
 
-METHOD Visible( lVisible ) SETGET
+   METHOD Visible( lVisible ) SETGET
 
-METHOD Hide()
+   METHOD Hide()
 
-METHOD Show()
+   METHOD Show()
 
-METHOD SortMark( nSortMark ) SETGET
+   METHOD SortMark( nSortMark ) SETGET
 
-METHOD Value( xValue ) SETGET
+   METHOD Value( xValue ) SETGET
 
-METHOD Editable( lEditable ) SETGET
+   METHOD Editable( lEditable ) SETGET
 
 ENDCLASS
 
@@ -319,127 +319,127 @@ CLASS HBrowse INHERIT HControl
    // 2 nopersit highlighting //for current row and current cell
    // 3 nopersist when grid is not the current active control.
 
-METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
+   METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
       bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
       lNoBorder, lAppend, lAutoedit, bUpdate, bKeyDown, bPosChg, lMultiSelect, ;
       lDescend, bWhile, bFirst, bLast, bFor, bOther, tcolor, bcolor, brclick, bChgRowCol, ctooltip )
 
-METHOD InitBrw( nType, lInit )
+   METHOD InitBrw( nType, lInit )
 
-METHOD Rebuild()
+   METHOD Rebuild()
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Redefine( lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus )
+   METHOD Redefine( lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bGfocus, bLfocus )
 
-METHOD FindBrowse( nId )
+   METHOD FindBrowse( nId )
 
-METHOD AddColumn( oColumn )
+   METHOD AddColumn( oColumn )
 
-METHOD InsColumn( oColumn, nPos )
+   METHOD InsColumn( oColumn, nPos )
 
-METHOD DelColumn( nPos )
+   METHOD DelColumn( nPos )
 
-METHOD Paint( lLostFocus )
+   METHOD Paint( lLostFocus )
 
-METHOD LineOut( nRow, nCol, hDC, lSelected, lClear )
+   METHOD LineOut( nRow, nCol, hDC, lSelected, lClear )
 
-METHOD SELECT()
+   METHOD SELECT()
 
-METHOD HeaderOut( hDC )
+   METHOD HeaderOut( hDC )
 
-METHOD SeparatorOut( hDC, nRowsFill )
+   METHOD SeparatorOut( hDC, nRowsFill )
 
-METHOD FooterOut( hDC )
+   METHOD FooterOut( hDC )
 
-METHOD SetColumn( nCol )
+   METHOD SetColumn( nCol )
 
-METHOD DoHScroll( wParam )
+   METHOD DoHScroll( wParam )
 
-METHOD DoVScroll( wParam )
+   METHOD DoVScroll( wParam )
 
-METHOD LineDown( lMouse )
+   METHOD LineDown( lMouse )
 
-METHOD LineUp()
+   METHOD LineUp()
 
-METHOD PageUp()
+   METHOD PageUp()
 
-METHOD PageDown()
+   METHOD PageDown()
 
-METHOD Bottom( lPaint )
+   METHOD Bottom( lPaint )
 
-METHOD Top()
+   METHOD Top()
 
-METHOD Home()  INLINE ::DoHScroll( SB_LEFT )
+   METHOD Home()  INLINE ::DoHScroll( SB_LEFT )
 
-METHOD ButtonDown( lParam, lReturnRowCol )
+   METHOD ButtonDown( lParam, lReturnRowCol )
 
-METHOD ButtonUp( lParam )
+   METHOD ButtonUp( lParam )
 
-METHOD ButtonDbl( lParam )
+   METHOD ButtonDbl( lParam )
 
-METHOD MouseMove( wParam, lParam )
+   METHOD MouseMove( wParam, lParam )
 
-METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
+   METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
 
-METHOD Edit( wParam, lParam )
+   METHOD Edit( wParam, lParam )
 
-METHOD APPEND() INLINE ( ::Bottom( .F. ), ::LineDown() )
+   METHOD APPEND() INLINE ( ::Bottom( .F. ), ::LineDown() )
 
-METHOD onClick( )
+   METHOD onClick( )
 
-METHOD RefreshLine()
+   METHOD RefreshLine()
 
-METHOD Refresh( lFull, lLineUp )
+   METHOD Refresh( lFull, lLineUp )
 
-METHOD ShowSizes()
+   METHOD ShowSizes()
 
-METHOD END()
+   METHOD END()
 
-METHOD SetMargin( nTop, nRight, nBottom, nLeft )
+   METHOD SetMargin( nTop, nRight, nBottom, nLeft )
 
-METHOD SetRowHeight( nPixels )
+   METHOD SetRowHeight( nPixels )
 
-METHOD FldStr( oBrw, numf )
+   METHOD FldStr( oBrw, numf )
 
-METHOD LinkMaster( cLinkMaster ) SETGET
+   METHOD LinkMaster( cLinkMaster ) SETGET
 
-METHOD Filter( lFilter ) SETGET
+   METHOD Filter( lFilter ) SETGET
 
-METHOD WhenColumn( value, oGet )
+   METHOD WhenColumn( value, oGet )
 
-METHOD ValidColumn( value, oGet, oBtn )
+   METHOD ValidColumn( value, oGet, oBtn )
 
-METHOD onClickColumn( value, oGet, oBtn )
+   METHOD onClickColumn( value, oGet, oBtn )
 
-METHOD EditEvent( oCtrl, msg, wParam, lParam )
+   METHOD EditEvent( oCtrl, msg, wParam, lParam )
 
-METHOD ButtonRDown( lParam )
+   METHOD ButtonRDown( lParam )
 
-METHOD ShowMark( lShowMark ) SETGET
+   METHOD ShowMark( lShowMark ) SETGET
 
-METHOD DeleteMark( lDeleteMark ) SETGET
+   METHOD DeleteMark( lDeleteMark ) SETGET
 
    // METHOD BrwScrollVPos()
    // new
 
-METHOD ShowColToolTips( lParam )
+   METHOD ShowColToolTips( lParam )
 
-METHOD SetRefresh( nSeconds ) SETGET
+   METHOD SetRefresh( nSeconds ) SETGET
 
-METHOD When()
+   METHOD When()
 
-METHOD Valid()
+   METHOD Valid()
 
-METHOD ChangeRowCol( nRowColChange )
+   METHOD ChangeRowCol( nRowColChange )
 
-METHOD EditLogical( wParam, lParam )   HIDDEN
+   METHOD EditLogical( wParam, lParam )   HIDDEN
 
-METHOD AutoFit()
+   METHOD AutoFit()
 
 ENDCLASS
 
@@ -4003,4 +4003,3 @@ STATIC FUNCTION LenVal( xVal, cType, cPict )
    END
 
    RETURN nLen
-

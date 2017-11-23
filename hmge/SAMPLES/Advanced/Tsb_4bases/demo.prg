@@ -459,4 +459,3 @@ STATIC FUNCTION DirectoryRecurse( cPath, cFileMask, aResult )
 STATIC FUNCTION MyRGB( aDim )
 
    RETURN RGB( aDim[1], aDim[2], aDim[3] )
-

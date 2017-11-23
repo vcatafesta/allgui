@@ -914,4 +914,3 @@ STATIC FUNCTION HSL2RGB( nH, nS, nL )
       ENDIF
 
       RETURN
-

@@ -531,4 +531,3 @@ PROCEDURE TreeItemChangeImage ( ControlName , ParentForm , nItem , aImage )
    ENDIF
 
    RETURN
-

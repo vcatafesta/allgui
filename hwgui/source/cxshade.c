@@ -311,8 +311,6 @@ void cxdib_SetPixelIndex( PCXDIB pdib, long x, long y, BYTE i )
    iDst[( pdib->m_bi.biHeight - y - 1 ) * pdib->m_LineWidth + x] = i;
 }
 
-
-
 /*  --------------------------------------------------------------  */
 
 PCXSHADE cxshade_New( RECT * prect, BOOL lFlat )
@@ -773,4 +771,3 @@ HB_FUNC( HWG_SHADE_DRAW )
    cxshade_Draw( ( PCXSHADE ) HB_PARHANDLE( 1 ), ( HDC ) HB_PARHANDLE( 2 ),
          (short) hb_parni( 3 ) );
 }
-

@@ -116,4 +116,3 @@ FUNCTION SincroTb(obrw,Invert)
    oBrw:lNoGrayBar := .T.
 
    RETURN NIL
-

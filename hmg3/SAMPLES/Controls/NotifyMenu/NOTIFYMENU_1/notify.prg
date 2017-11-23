@@ -10,4 +10,3 @@ FUNCTION Main
    ACTIVATE WINDOW Notify
 
    RETURN
-

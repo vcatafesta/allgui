@@ -69,4 +69,3 @@ STATIC FUNCTION __cb_timer( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

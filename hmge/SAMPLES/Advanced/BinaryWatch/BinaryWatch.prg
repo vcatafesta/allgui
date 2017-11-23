@@ -581,4 +581,3 @@ STATIC FUNCTION MsgAbout()
       SubStr(MiniGuiVersion(), 1, 38) + CRLF + CRLF + ;
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About..." )
-

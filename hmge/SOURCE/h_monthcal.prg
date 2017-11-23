@@ -291,4 +291,3 @@ FUNCTION OMONTHCALEVENTS( hWnd, nMsg, wParam, lParam )    // GF 2016.04.02
    ENDSWITCH
 
    RETURN 0
-

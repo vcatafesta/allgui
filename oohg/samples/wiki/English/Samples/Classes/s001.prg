@@ -69,7 +69,7 @@ FUNCTION Main
 
 CLASS MyGrid FROM TGrid
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
 ENDCLASS
 
@@ -107,4 +107,3 @@ METHOD Events_Notify( wParam, lParam ) CLASS MyGrid
    /*
    * EOF
    */
-

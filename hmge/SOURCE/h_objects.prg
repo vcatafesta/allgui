@@ -37,9 +37,9 @@ CLASS TWndData
    VAR oEvent         AS OBJECT
    VAR oOnEventBlock  AS OBJECT
 
-METHOD New() INLINE ( Self )                                CONSTRUCTOR
+   METHOD New() INLINE ( Self )                                CONSTRUCTOR
 
-METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )  INLINE ( ;
+   METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )  INLINE ( ;
       ::nIndex := nIndex, ::cName := cName, ::nHandle := nHandle,       ;
       ::nParent:= nParent, ::cType := cType, ::cVar := cVar,            ;
       ::oCargo := oKeyData(), ::oOnEventBlock := oKeyData( Self, .T. ), ;
@@ -77,24 +77,21 @@ METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )  INLINE ( ;
    ACCESS WM_nMsgW                        INLINE WM_WND_LAUNCH
    ACCESS WM_nMsgC                        INLINE WM_CTL_LAUNCH
 
-METHOD SetProp( xKey, xVal )           INLINE ::oProp:Set( xKey, xVal )
+   METHOD SetProp( xKey, xVal )           INLINE ::oProp:Set( xKey, xVal )
+   METHOD GetProp( xKey       )           INLINE ::oProp:Get( xKey       )
+   METHOD DelProp( xKey       )           INLINE ::oProp:Del( xKey       )
 
-METHOD GetProp( xKey       )           INLINE ::oProp:Get( xKey       )
-
-METHOD DelProp( xKey       )           INLINE ::oProp:Del( xKey       )
-
-METHOD UserKeys( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
+   METHOD UserKeys( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
       ::oUserKeys:Set( Key, Block ), ;
       ::oUserKeys:Do ( Key, Block, p2, p3 ) )
 
-METHOD Event   ( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
+   METHOD Event   ( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
       ::oEvent:Set( Key, Block ), ;
       ::oEvent:Do ( Key, Block, p2, p3 ) )
 
-METHOD PostMsg( nKey, nHandle )        INLINE PostMessage( ::nHandle, ::WM_nMsgW, nKey, ;
+   METHOD PostMsg( nKey, nHandle )        INLINE PostMessage( ::nHandle, ::WM_nMsgW, nKey, ;
       hb_defaultValue( nHandle, 0 ) )
-
-METHOD SendMsg( nKey, nHandle )        INLINE SendMessage( ::nHandle, ::WM_nMsgW, nKey, ;
+   METHOD SendMsg( nKey, nHandle )        INLINE SendMessage( ::nHandle, ::WM_nMsgW, nKey, ;
       hb_defaultValue( nHandle, 0 ) )
 
    _METHOD DoEvent(  Key, nHandle )
@@ -102,11 +99,10 @@ METHOD SendMsg( nKey, nHandle )        INLINE SendMessage( ::nHandle, ::WM_nMsgW
    _METHOD GetObj4Type( cType, lEque )
    _METHOD GetObj4Name( cName )
 
-METHOD GetObj( xName )                 INLINE iif( HB_ISCHAR( xName ), ::oName:Get( xName ), ;
+   METHOD GetObj( xName )                 INLINE iif( HB_ISCHAR( xName ), ::oName:Get( xName ), ;
       ::oHand:Get( xName ) )
    // Destructor
-
-METHOD Destroy()                       INLINE (                                              ;
+   METHOD Destroy()                       INLINE (                                              ;
       ::oCargo        := iif( HB_ISOBJECT( ::oCargo        ), ::oCargo:Destroy()       , Nil ), ;
       ::oEvent        := iif( HB_ISOBJECT( ::oEvent        ), ::oEvent:Destroy()       , Nil ), ;
       ::oOnEventBlock := iif( HB_ISOBJECT( ::oOnEventBlock ), ::oOnEventBlock:Destroy(), Nil ), ;
@@ -189,10 +185,9 @@ CLASS TCnlData   INHERIT TWndData
    VAR oWin           AS OBJECT
 
    EXPORTED:
+   METHOD New( oWnd )      INLINE ( ::Super:New(), ::oWin := oWnd, Self )   CONSTRUCTOR
 
-METHOD New( oWnd )      INLINE ( ::Super:New(), ::oWin := oWnd, Self )   CONSTRUCTOR
-
-METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
+   METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
       ::Super:Def( nIndex, cName, nHandle, nParent, cType, cVar ), ;
       ::Set(), hmg_SetWindowObject( ::nHandle, Self ), ;
       Self )
@@ -206,55 +201,42 @@ METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
    ACCESS IsWindow         INLINE .F.
    ACCESS IsControl        INLINE .T.
 
-METHOD PostMsg( nKey )  INLINE PostMessage( ::oWin:nHandle, ::WM_nMsgC, nKey, ::nHandle )
+   METHOD PostMsg( nKey )  INLINE PostMessage( ::oWin:nHandle, ::WM_nMsgC, nKey, ::nHandle )
+   METHOD SendMsg( nKey )  INLINE SendMessage( ::oWin:nHandle, ::WM_nMsgC, nKey, ::nHandle )
 
-METHOD SendMsg( nKey )  INLINE SendMessage( ::oWin:nHandle, ::WM_nMsgC, nKey, ::nHandle )
-
-METHOD Set()            INLINE ( iif( HB_ISOBJECT( ::oWin:oName ), ::oWin:oName:Set( ::cName  , Self ), ), ;
+   METHOD Set()            INLINE ( iif( HB_ISOBJECT( ::oWin:oName ), ::oWin:oName:Set( ::cName  , Self ), ), ;
       iif( HB_ISOBJECT( ::oWin:oHand ), ::oWin:oHand:Set( ::nHandle, Self ), ) )
-
-METHOD Del()            INLINE ( iif( HB_ISOBJECT( ::oWin:oName ), ::oWin:oName:Del( ::cName   ), ), ;
+   METHOD Del()            INLINE ( iif( HB_ISOBJECT( ::oWin:oName ), ::oWin:oName:Del( ::cName   ), ), ;
       iif( HB_ISOBJECT( ::oWin:oHand ), ::oWin:oHand:Del( ::nHandle ), ) )
 
-METHOD Get( xName )     INLINE iif( HB_ISCHAR( xName ), ::oWin:oName:Get( xName ), ;
+   METHOD Get( xName )     INLINE iif( HB_ISCHAR( xName ), ::oWin:oName:Get( xName ), ;
       ::oWin:oHand:Get( xName ) )
 
-METHOD GetListType()               INLINE ::oWin:GetListType()
-
-METHOD GetObj4Type( cType, lEque ) INLINE ::oWin:GetObj4Type( cType, lEque )
-
-METHOD GetObj4Name( cName )        INLINE ::oWin:GetObj4Name( cName )
-
-METHOD SetProp( xKey, xVal )       INLINE ::oWin:oProp:Set( xKey, xVal )
-
-METHOD GetProp( xKey       )       INLINE ::oWin:oProp:Get( xKey       )
-
-METHOD DelProp( xKey       )       INLINE ::oWin:oProp:Del( xKey       )
+   METHOD GetListType()               INLINE ::oWin:GetListType()
+   METHOD GetObj4Type( cType, lEque ) INLINE ::oWin:GetObj4Type( cType, lEque )
+   METHOD GetObj4Name( cName )        INLINE ::oWin:GetObj4Name( cName )
+   METHOD SetProp( xKey, xVal )       INLINE ::oWin:oProp:Set( xKey, xVal )
+   METHOD GetProp( xKey       )       INLINE ::oWin:oProp:Get( xKey       )
+   METHOD DelProp( xKey       )       INLINE ::oWin:oProp:Del( xKey       )
 
    ACCESS Value                       INLINE   _GetValue( , ,       ::nIndex )
    ASSIGN Value( xVal )               INLINE ( _SetValue( , , xVal, ::nIndex ), ;
       _GetValue( , ,       ::nIndex ) )
 
-METHOD SetFocus()                  INLINE _SetFocus      ( ::cName, ::oWin:cName )
+   METHOD SetFocus()                  INLINE _SetFocus      ( ::cName, ::oWin:cName )
+   METHOD Refresh()                   INLINE _Refresh       ( ::nIndex )
+   METHOD SetSize( y, x, w, h )       INLINE _SetControlSizePos( ::cName, ::oWin:cName, y, x, w, h )
 
-METHOD Refresh()                   INLINE _Refresh       ( ::nIndex )
+   METHOD Disable( nPos )             INLINE _DisableControl( ::cName, ::oWin:cName, nPos )
+   METHOD Enable ( nPos )             INLINE _EnableControl ( ::cName, ::oWin:cName, nPos )
+   METHOD Enabled( nPos )             INLINE _IsControlEnabled ( ::cName, ::oWin:cName, nPos )
 
-METHOD SetSize( y, x, w, h )       INLINE _SetControlSizePos( ::cName, ::oWin:cName, y, x, w, h )
-
-METHOD Disable( nPos )             INLINE _DisableControl( ::cName, ::oWin:cName, nPos )
-
-METHOD Enable ( nPos )             INLINE _EnableControl ( ::cName, ::oWin:cName, nPos )
-
-METHOD Enabled( nPos )             INLINE _IsControlEnabled ( ::cName, ::oWin:cName, nPos )
-
-METHOD Show()                      INLINE _ShowControl   ( ::cName, ::oWin:cName )
-
-METHOD Hide()                      INLINE _HideControl   ( ::cName, ::oWin:cName )
+   METHOD Show()                      INLINE _ShowControl   ( ::cName, ::oWin:cName )
+   METHOD Hide()                      INLINE _HideControl   ( ::cName, ::oWin:cName )
 
    _METHOD DoEvent ( Key, nHandle )
    // Destructor
-
-METHOD Destroy()                   INLINE ( ::Del(),                                         ;
+   METHOD Destroy()                   INLINE ( ::Del(),                                         ;
       ::oCargo        := iif( HB_ISOBJECT( ::oCargo        ), ::oCargo:Destroy()       , Nil ), ;
       ::oEvent        := iif( HB_ISOBJECT( ::oEvent        ), ::oEvent:Destroy()       , Nil ), ;
       ::oOnEventBlock := iif( HB_ISOBJECT( ::oOnEventBlock ), ::oOnEventBlock:Destroy(), Nil ), ;
@@ -290,10 +272,9 @@ CLASS TGetData   INHERIT TCnlData
    VAR oGetBox        AS OBJECT
 
    EXPORTED:
+   METHOD New( oWnd, oGet ) INLINE ( ::Super:New( oWnd ), ::oGetBox := oGet, Self )  CONSTRUCTOR
 
-METHOD New( oWnd, oGet ) INLINE ( ::Super:New( oWnd ), ::oGetBox := oGet, Self )  CONSTRUCTOR
-
-METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
+   METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
       ::Super:Def( nIndex, cName, nHandle, nParent, cType, cVar ), ;
       ::Set(), hmg_SetWindowObject( ::nHandle, Self ),             ;
       Self )
@@ -304,33 +285,31 @@ METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
    ACCESS VarGet            INLINE   _GetValue( , ,       ::nIndex )
    ASSIGN VarPut( xVal )    INLINE ( _SetValue( , , xVal, ::nIndex ), ;
       _GetValue( , ,       ::nIndex ) )
-
-METHOD Destroy()         INLINE ::oGetBox := ::Super:Destroy()
+   METHOD Destroy()         INLINE ::oGetBox := ::Super:Destroy()
 
 ENDCLASS
 
 CLASS TStbData   INHERIT TCnlData
 
    EXPORTED:
-
-METHOD New( oWnd ) INLINE ( ::Super:New( oWnd ), ::oWin:oStatusBar := iif( Empty( ::oWin:oStatusBar ), ;
+   METHOD New( oWnd ) INLINE ( ::Super:New( oWnd ), ::oWin:oStatusBar := iif( Empty( ::oWin:oStatusBar ), ;
       Self, ::oWin:oStatusBar ), Self )      CONSTRUCTOR
 
-METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE (  ;
+   METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE (  ;
       ::Super:Def( nIndex, cName, nHandle, nParent, cType, cVar ), ;
       ::Set(), hmg_SetWindowObject( ::nHandle, Self ),             ;
       Self )
 
-METHOD Say   ( cText, nItem )  INLINE _SetItem( ::cName, ::oWin:cName, hb_defaultValue( nItem, 1 ), ;
+   METHOD Say   ( cText, nItem )  INLINE _SetItem( ::cName, ::oWin:cName, hb_defaultValue( nItem, 1 ), ;
       hb_defaultValue( cText, '' ) )
 
-METHOD Icon  ( cIcon, nItem )  INLINE SetStatusItemIcon( ::nHandle, hb_defaultValue( nItem, 1 ), cIcon )
+   METHOD Icon  ( cIcon, nItem )  INLINE SetStatusItemIcon( ::nHandle, hb_defaultValue( nItem, 1 ), cIcon )
 
-METHOD Width ( nItem, nWidth ) INLINE iif( HB_ISNUMERIC( nWidth ) .AND. nWidth > 0,              ;
+   METHOD Width ( nItem, nWidth ) INLINE iif( HB_ISNUMERIC( nWidth ) .AND. nWidth > 0,              ;
       _SetStatusWidth ( ::oWin:cName, hb_defaultValue( nItem, 1 ), nWidth ), ;
       _GetStatusItemWidth( ::oWin:nHandle, hb_defaultValue( nItem, 1 ) ) )
 
-METHOD Action( nItem, bBlock ) INLINE _SetStatusItemAction( hb_defaultValue( nItem, 1 ), bBlock, ;
+   METHOD Action( nItem, bBlock ) INLINE _SetStatusItemAction( hb_defaultValue( nItem, 1 ), bBlock, ;
       ::oWin:nHandle )
 
 ENDCLASS
@@ -341,10 +320,9 @@ CLASS TTsbData   INHERIT TCnlData
    VAR oTBrowse       AS OBJECT
 
    EXPORTED:
+   METHOD New( oWnd, oTsb ) INLINE ( ::Super:New( oWnd ), ::oTBrowse := oTsb, Self ) CONSTRUCTOR
 
-METHOD New( oWnd, oTsb ) INLINE ( ::Super:New( oWnd ), ::oTBrowse := oTsb, Self ) CONSTRUCTOR
-
-METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
+   METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
       ::Super:Def( nIndex, cName, nHandle, nParent, cType, cVar ), ;
       ::Set(), hmg_SetWindowObject( ::nHandle, Self ),           ;
       Self )
@@ -352,9 +330,8 @@ METHOD Def( nIndex, cName, nHandle, nParent, cType, cVar )   INLINE ( ;
    ACCESS Caption           INLINE ::oWin:cName + "." + ::cName
    ACCESS Tsb               INLINE ::oTBrowse
 
-METHOD OnEvent( nMsg, wParam, lParam ) INLINE ::Tsb:HandleEvent( nMsg, wParam, lParam )
-
-METHOD Destroy()                       INLINE ::oTBrowse := ::Super:Destroy()
+   METHOD OnEvent( nMsg, wParam, lParam ) INLINE ::Tsb:HandleEvent( nMsg, wParam, lParam )
+   METHOD Destroy()                       INLINE ::oTBrowse := ::Super:Destroy()
 
 ENDCLASS
 
@@ -366,16 +343,12 @@ CLASS TWmEData
    VAR lMsg                           INIT .F.
 
    EXPORTED:
-
-METHOD New( o )                    INLINE ( ::oObj := o, Self )            CONSTRUCTOR
+   METHOD New( o )                    INLINE ( ::oObj := o, Self )            CONSTRUCTOR
 
    ACCESS IsEvent                     INLINE ::lMsg
-
-METHOD Set( nMsg, Block )          INLINE ( hb_HSet   ( ::aMsg, nMsg, Block ), ::lMsg := Len( ::aMsg ) > 0 )
-
-METHOD Get( nMsg, Def )            INLINE   hb_HGetDef( ::aMsg, nMsg, Def   )
-
-METHOD Del( nMsg )                 INLINE ( hb_HDel   ( ::aMsg, nMsg        ), ::lMsg := Len( ::aMsg ) > 0 )
+   METHOD Set( nMsg, Block )          INLINE ( hb_HSet   ( ::aMsg, nMsg, Block ), ::lMsg := Len( ::aMsg ) > 0 )
+   METHOD Get( nMsg, Def )            INLINE   hb_HGetDef( ::aMsg, nMsg, Def   )
+   METHOD Del( nMsg )                 INLINE ( hb_HDel   ( ::aMsg, nMsg        ), ::lMsg := Len( ::aMsg ) > 0 )
 
    _METHOD Do( nMsg, wParam, lParam )
    _METHOD Destroy()
@@ -423,25 +396,22 @@ CLASS TKeyData
    EXPORTED:
    VAR Cargo
 
-METHOD New()                  INLINE ( Self )              CONSTRUCTOR
+   METHOD New()                  INLINE ( Self )              CONSTRUCTOR
 
-METHOD Def( o )               INLINE ( ::Obj := o, Self )
+   METHOD Def( o )               INLINE ( ::Obj := o, Self )
 
-METHOD Set( Key, Block )      INLINE ( hb_HSet   ( ::aKey, Key, Block ), ::lKey := .T. )
+   METHOD Set( Key, Block )      INLINE ( hb_HSet   ( ::aKey, Key, Block ), ::lKey := .T. )
+   METHOD Get( Key, Def )        INLINE   hb_HGetDef( ::aKey, Key, Def   )
+   METHOD Del( Key )             INLINE ( iif( ::Len > 0, hb_HDel ( ::aKey, Key ), ), ::lKey := Len( ::aKey ) > 0 )
 
-METHOD Get( Key, Def )        INLINE   hb_HGetDef( ::aKey, Key, Def   )
-
-METHOD Del( Key )             INLINE ( iif( ::Len > 0, hb_HDel ( ::aKey, Key ), ), ::lKey := Len( ::aKey ) > 0 )
-
-METHOD Do ( Key, p1, p2, p3 ) BLOCK  {| Self, Key, p1, p2, p3, b| b := ::Get( Key ), ;
+   METHOD Do ( Key, p1, p2, p3 ) BLOCK  {| Self, Key, p1, p2, p3, b| b := ::Get( Key ), ;
       iif( HB_ISBLOCK( b ), Eval( b, ::oObj, Key, p1, p2, p3 ), Nil ) }
 
    ACCESS Obj                    INLINE ::oObj
    ASSIGN Obj( o )               INLINE ::oObj := iif( HB_ISOBJECT( o ), o, Self )
    ACCESS Len                    INLINE Len( ::aKey )
    ACCESS IsEvent                INLINE ::lKey
-
-METHOD ISBLOCK( Key )         INLINE HB_ISBLOCK( ::Get( Key ) )
+   METHOD ISBLOCK( Key )         INLINE HB_ISBLOCK( ::Get( Key ) )
 
    _METHOD Eval( Block )
    _METHOD Sum( Key, xSum )
@@ -523,27 +493,23 @@ CLASS TThrData
    EXPORTED:
    VAR Cargo
 
-METHOD New()                  INLINE ( Self )              CONSTRUCTOR
+   METHOD New()                  INLINE ( Self )              CONSTRUCTOR
 
-METHOD Def( o, lVmMt )        INLINE ( ::Obj := o, ::MT := lVmMt, Self )
+   METHOD Def( o, lVmMt )        INLINE ( ::Obj := o, ::MT := lVmMt, Self )
 
-METHOD Set( Key, Block )      INLINE iif( ::lMT, ::SGD( 1, Key, Block ), hb_HSet   ( ::aKey, Key, Block ) )
-
-METHOD Get( Key, Def )        INLINE iif( ::lMT, ::SGD( 2, Key, Def   ), hb_HGetDef( ::aKey, Key, Def   ) )
-
-METHOD Del( Key )             INLINE iif( ::lMT, ::SGD( 3, Key        ), ;
+   METHOD Set( Key, Block )      INLINE iif( ::lMT, ::SGD( 1, Key, Block ), hb_HSet   ( ::aKey, Key, Block ) )
+   METHOD Get( Key, Def )        INLINE iif( ::lMT, ::SGD( 2, Key, Def   ), hb_HGetDef( ::aKey, Key, Def   ) )
+   METHOD Del( Key )             INLINE iif( ::lMT, ::SGD( 3, Key        ), ;
       iif( hb_HHasKey( ::aKey, Key ), hb_HDel   ( ::aKey, Key ), Nil ) )
 
-METHOD Do ( Key, p1, p2, p3 ) BLOCK  {| Self, Key, p1, p2, p3, b| b := ::Get( Key ), ;
+   METHOD Do ( Key, p1, p2, p3 ) BLOCK  {| Self, Key, p1, p2, p3, b| b := ::Get( Key ), ;
       iif( HB_ISBLOCK( b ), Eval( b, ::oObj, Key, p1, p2, p3 ), Nil ) }
    ACCESS MT                     INLINE ::lMT
    ASSIGN MT( lVmMt )            INLINE ::lMT  := iif( HB_ISLOGICAL( lVmMt ), lVmMt, .F. )
    ACCESS Obj                    INLINE ::oObj
    ASSIGN Obj( o )               INLINE ::oObj := iif( HB_ISOBJECT( o ), o, Self )
    ACCESS Len                    INLINE Len( ::aKey )
-
-METHOD ISBLOCK( Key )         INLINE HB_ISBLOCK( ::Get( Key ) )
-
+   METHOD ISBLOCK( Key )         INLINE HB_ISBLOCK( ::Get( Key ) )
    _METHOD Eval( Block )
    _METHOD Sum( Key, xSum )
    _METHOD Destroy()
@@ -719,4 +685,3 @@ STATIC FUNCTION hb_HGetDef( hHash, xKey, xDef )
    #endif
 
    #endif
-

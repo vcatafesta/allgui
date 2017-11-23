@@ -6,7 +6,7 @@
 #include "inc\image.inc"
 //////////////////////////////////////////////////////////////////////////////
 /* hbgdiplus.c
-HB_FUNC( GDIPDISPOSEIMAGE ) 
+HB_FUNC( GDIPDISPOSEIMAGE )
 {
    if( NULL == fn_GdipDisposeImage )
       ASSIGN_FUNCPTR( g_GpModule, GdipDisposeImage );

@@ -158,4 +158,3 @@ PROCEDURE RemoveFileFmg()
    ENDIF
 
    RETURN
-

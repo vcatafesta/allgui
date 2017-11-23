@@ -619,4 +619,3 @@ HB_FUNC( CHARXOR )
    }
 }
 #pragma ENDDUMP
-

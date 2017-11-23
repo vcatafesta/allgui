@@ -100,45 +100,26 @@ CREATE CLASS FdF
    DATA AcroPrinter      INIT ''
    DATA AcroPrPort       INIT ''  // Not used Yet
 
-METHOD NewFdF()  CONSTRUCTOR
-
-METHOD SaveData()
-
-METHOD ClearDefs()
-
-METHOD LoadData()
-
-METHOD FdFHEAD()
-
-METHOD AddFLD()
-
-METHOD FdFFeet()
-
-METHOD ListIniField()
-
-METHOD SaveIniField()
-
-METHOD ACompare()
-
-METHOD SPLIT( elstr, separator )
-
-METHOD SetIni()
-
-METHOD SetForm()
-
-METHOD GetForm()
-
-METHOD SetFLD(arg1)
-
-METHOD Crea_file(Filename)
-
-METHOD WriteFdF(Filename,arrayname,action)
-
-METHOD Writefile(Filename,arrayname)
-
-METHOD CloseAcrobat()
-
-METHOD END()
+   METHOD NewFdF()  CONSTRUCTOR
+   METHOD SaveData()
+   METHOD ClearDefs()
+   METHOD LoadData()
+   METHOD FdFHEAD()
+   METHOD AddFLD()
+   METHOD FdFFeet()
+   METHOD ListIniField()
+   METHOD SaveIniField()
+   METHOD ACompare()
+   METHOD SPLIT( elstr, separator )
+   METHOD SetIni()
+   METHOD SetForm()
+   METHOD GetForm()
+   METHOD SetFLD(arg1)
+   METHOD Crea_file(Filename)
+   METHOD WriteFdF(Filename,arrayname,action)
+   METHOD Writefile(Filename,arrayname)
+   METHOD CloseAcrobat()
+   METHOD END()
 
 ENDCLASS
 
@@ -614,9 +595,7 @@ STATIC FUNCTION MyGetFileName(rsFileName)
    RETURN _FileName
    /*
    */
-
    STATIC Proc SeleTemplate()
-
       LOCAL O_Spool,cpos
 
       IF empty(trim(TPDF.TextBox_2.Value))
@@ -638,9 +617,7 @@ STATIC FUNCTION MyGetFileName(rsFileName)
       RETURN
       /*
       */
-
       STATIC Proc SeleData()
-
          LOCAL OpenDb,dbName,cpos
 
          IF empty(trim(TPDF.TextBox_2.Value))
@@ -664,9 +641,7 @@ STATIC FUNCTION MyGetFileName(rsFileName)
          RETURN
          /*
          */
-
          STATIC Proc AcroPath()
-
             LOCAL OpenPh,Location := GetInstallAcrobat()
 
             Location := Substr(Location,2,at(".exe",Location)+2)
@@ -679,11 +654,8 @@ STATIC FUNCTION MyGetFileName(rsFileName)
             RETURN
             /*
             */
-
             STATIC Proc SeleSpool()
-
                LOCAL O_Spool
-
                O_Spool := BrowseForFolder(NIL,BIF_EDITBOX + BIF_VALIDATE + BIF_NEWDIALOGSTYLE ;
                   ,"Please select a location to store data files", TPDF.Textbox_3.Value)
                O_Spool += "\"
@@ -1224,4 +1196,3 @@ HB_FUNC ( FINDWINDOW )
 }
 
 #pragma ENDDUMP
-

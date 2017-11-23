@@ -323,4 +323,3 @@ PROCEDURE HMG_GarbageCall( lAll )
    ENDIF
 
    RETURN
-

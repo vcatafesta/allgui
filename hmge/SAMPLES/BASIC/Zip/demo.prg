@@ -152,4 +152,3 @@ FUNCTION FillFiles( aFiles, cDir, cPath )
    NEXT
 
    RETURN aFiles
-

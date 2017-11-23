@@ -296,7 +296,6 @@
 #define HAVE_RINT 1
 #endif
 
-
 /* Define to 1 if you have the global variable
    'rl_completion_append_character'. */
 /* #undef HAVE_RL_COMPLETION_APPEND_CHARACTER */
@@ -574,7 +573,7 @@
 /* Define to the name of a signed 64-bit integer type. */
 #if ( defined( __BORLANDC__ ) && __BORLANDC__ < 1410 ) // 1410 or ?
 #define PG_INT64_TYPE __int64
-#else 
+#else
 #define PG_INT64_TYPE long long int
 #endif
 

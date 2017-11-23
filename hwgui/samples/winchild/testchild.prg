@@ -52,4 +52,3 @@ FUNCTION CreateChild(lClip)
    oChild:Activate(.t.)
 
    RETURN (NIL)
-

@@ -116,4 +116,3 @@ PROCEDURE _SplashDelay( name, nTime )
    DoMethod( name, 'Release' )
 
    RETURN
-

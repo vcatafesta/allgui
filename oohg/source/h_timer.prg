@@ -56,13 +56,13 @@ CLASS TTimer FROM TControl
    DATA Type      INIT "TIMER" READONLY
    DATA Interval  INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD Value        SETGET
+   METHOD Value        SETGET
 
-METHOD Enabled      SETGET
+   METHOD Enabled      SETGET
 
-METHOD Release
+   METHOD Release
 
    EMPTY( _OOHG_AllVars )
 
@@ -158,4 +158,3 @@ HB_FUNC( KILLTIMER )
    KillTimer( HWNDparam( 1 ), ( UINT ) hb_parni( 2 ) );
 }
 #pragma ENDDUMP
-

@@ -91,91 +91,91 @@ CLASS TTree FROM TControl
    DATA OnMouseDrop          INIT Nil
    DATA OnDrop              INIT nil               // executed after drop is finished
 
-METHOD Define
+   METHOD Define
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD DeleteAllItems
+   METHOD DeleteAllItems
 
-METHOD Item
+   METHOD Item
 
-METHOD ItemCount          BLOCK { | Self | TreeView_GetCount( ::hWnd ) }
+   METHOD ItemCount          BLOCK { | Self | TreeView_GetCount( ::hWnd ) }
 
-METHOD Collapse
+   METHOD Collapse
 
-METHOD Expand
+   METHOD Expand
 
-METHOD EndTree
+   METHOD EndTree
 
-METHOD Value              SETGET
+   METHOD Value              SETGET
 
-METHOD OnEnter            SETGET
+   METHOD OnEnter            SETGET
 
-METHOD Indent             SETGET
+   METHOD Indent             SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD EditLabel
+   METHOD EditLabel
 
-METHOD ItemReadonly
+   METHOD ItemReadonly
 
-METHOD SelColor           SETGET
+   METHOD SelColor           SETGET
 
-METHOD CheckItem
+   METHOD CheckItem
 
-METHOD GetParent
+   METHOD GetParent
 
-METHOD GetChildren
+   METHOD GetChildren
 
-METHOD LookForKey
+   METHOD LookForKey
 
-METHOD Release
+   METHOD Release
 
-METHOD BoldItem
+   METHOD BoldItem
 
-METHOD ItemEnabled
+   METHOD ItemEnabled
 
-METHOD CopyItem
+   METHOD CopyItem
 
-METHOD MoveItem
+   METHOD MoveItem
 
-METHOD ItemImages
+   METHOD ItemImages
 
-METHOD ItemDraggable
+   METHOD ItemDraggable
 
-METHOD IsItemCollapsed
+   METHOD IsItemCollapsed
 
-METHOD HandleToItem
+   METHOD HandleToItem
 
-METHOD ItemToHandle
+   METHOD ItemToHandle
 
-METHOD ItemVisible
+   METHOD ItemVisible
 
-METHOD IsItemExpanded
+   METHOD IsItemExpanded
 
-METHOD IsItemVisible
+   METHOD IsItemVisible
 
-METHOD FirstVisible
+   METHOD FirstVisible
 
-METHOD PrevVisible
+   METHOD PrevVisible
 
-METHOD NextVisible
+   METHOD NextVisible
 
-METHOD LastVisible
+   METHOD LastVisible
 
-METHOD VisibleCount
+   METHOD VisibleCount
 
-METHOD ItemHeight         SETGET
+   METHOD ItemHeight         SETGET
 
-METHOD SelectionID        SETGET
+   METHOD SelectionID        SETGET
 
-METHOD IsItemValid
+   METHOD IsItemValid
 
-METHOD BackColor          SETGET
+   METHOD BackColor          SETGET
 
 ENDCLASS
 
@@ -3428,4 +3428,3 @@ HB_FUNC_STATIC( TTREE_BACKCOLOR )
 }
 
 #pragma ENDDUMP
-

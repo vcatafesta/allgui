@@ -264,4 +264,3 @@ FUNCTION DBUexitmodidbf
    ENDIF
 
    RETURN NIL
-

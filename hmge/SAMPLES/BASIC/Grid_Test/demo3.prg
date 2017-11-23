@@ -54,4 +54,3 @@ FUNCTION AddGridEditComboItem ( cGridName, cWindowName, nColIndex, cNewItem )
    _HMG_aControlMiscData1 [i] [13] := aEditControls
 
    RETURN NIL
-

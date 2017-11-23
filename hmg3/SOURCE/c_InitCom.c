@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_Init.c  
+ HMG Source File --> c_Init.c
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -15,22 +15,18 @@
 
  ----------------------------------------------------------------------------*/
 
-
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
-
 
 #include <windows.h>
 #include <commctrl.h>
 #include <tchar.h>
 #include "hbapi.h"
 
-
 HB_FUNC ( HMG_ISUNICODE )
 {
    hb_retl ((BOOL) _HMG_SupportUnicode_ );
 }
-
 
 HB_FUNC ( HMG_CHARSETNAME )
 {
@@ -40,12 +36,10 @@ HB_FUNC ( HMG_CHARSETNAME )
       HMG_retc ( _TEXT ("ANSI") );
 }
 
-
 HB_FUNC ( HMG_IS64BITS )
 {
    hb_retl ((BOOL) _HMG_Win64_ );
 }
-
 
 BOOL HMG_InitCommonControl (DWORD dwICC)
 {
@@ -54,7 +48,6 @@ BOOL HMG_InitCommonControl (DWORD dwICC)
    icex.dwICC  = dwICC;
    return InitCommonControlsEx (&icex);
 }
-
 
 #define ICC_CLASSES_NUMBER   16
 
@@ -86,19 +79,16 @@ HB_FUNC (HMG_INITALLCOMMONCONTROLS)   // Loaded, registers and initializes all c
    hb_retni (i);
 }
 
-
 HB_FUNC ( OLEINITIALIZE )
-{  // Applications that use the following functionality must call OleInitialize before calling 
+{  // Applications that use the following functionality must call OleInitialize before calling
    // any other function in the COM library: Clipboard, Drag and Drop, Object linking and embedding (OLE), In-place activation
    OleInitialize (NULL);
 }
-
 
 HB_FUNC ( OLEUNINITIALIZE )
 {
    OleUninitialize ();
 }
-
 
 HMODULE _HMG_hInstance = NULL;
 
@@ -107,7 +97,6 @@ HB_FUNC ( HMG_GETINSTANCE )
    _HMG_hInstance = GetModuleHandle (NULL);
    HMG_retnl ((LONG_PTR) _HMG_hInstance);
 }
-
 
 WCHAR * hmg_MBtoWC ( CHAR * srcA )
 {
@@ -121,7 +110,6 @@ WCHAR * hmg_MBtoWC ( CHAR * srcA )
    return dstW;
 }
 
-
 CHAR * hmg_WCtoMB ( WCHAR * srcW )
 {
    int length;
@@ -134,13 +122,11 @@ CHAR * hmg_WCtoMB ( WCHAR * srcW )
    return dstA;
 }
 
-
-
 // e.g.   HMG_Trace( __FILE__, __LINE__, __FUNCTION__, _TEXT("%s %p"), cText, hWnd );
 
 #include <stdio.h>
 void HMG_Trace( const char * file, int line, const char * function, TCHAR * fmt, ... )
-{ 
+{
    if( file )
    {
       while( *file == '.' || *file == '/' || *file == '\\' )
@@ -159,7 +145,7 @@ void HMG_Trace( const char * file, int line, const char * function, TCHAR * fmt,
    }
    else
       fp = _tfopen( _TEXT("hmg_trace.txt"), _TEXT("a") );
-   
+
    if( fp )
    {
       va_list ap;
@@ -175,4 +161,3 @@ void HMG_Trace( const char * file, int line, const char * function, TCHAR * fmt,
    if( fp )
       fclose( fp );
 }
-

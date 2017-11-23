@@ -465,4 +465,3 @@ PROCEDURE About()
    MsgInfo( cMessage, "About EDIT EXTENDED command demo" )
 
    RETURN NIL
-

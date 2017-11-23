@@ -801,4 +801,3 @@ PROCEDURE Ir_Cumple(IRFEC2)
    #include "l_color.prg"
    #include "l_dia.prg"
    #include "l_festa.prg"
-

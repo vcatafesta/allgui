@@ -74,14 +74,12 @@ typedef enum _HPDF_EncodingType {
     HPDF_ENCODING_EOF
 } HPDF_EncodingType;
 
-
 typedef struct _HPDF_ParseText_Rec {
     const HPDF_BYTE  *text;
     HPDF_UINT        index;
     HPDF_UINT        len;
     HPDF_ByteType    byte_type;
 } HPDF_ParseText_Rec;
-
 
 typedef struct _HPDF_Encoder_Rec *HPDF_Encoder;
 
@@ -93,19 +91,15 @@ typedef HPDF_UNICODE
 (*HPDF_Encoder_ToUnicode_Func)  (HPDF_Encoder   encoder,
                                  HPDF_UINT16    code);
 
-
 typedef HPDF_STATUS
 (*HPDF_Encoder_Write_Func)  (HPDF_Encoder  encoder,
                              HPDF_Stream   out);
 
-
 typedef HPDF_STATUS
 (*HPDF_Encoder_Init_Func)  (HPDF_Encoder  encoder);
 
-
 typedef void
 (*HPDF_Encoder_Free_Func)  (HPDF_Encoder  encoder);
-
 
 typedef struct  _HPDF_Encoder_Rec {
     HPDF_UINT32                     sig_bytes;
@@ -125,7 +119,6 @@ typedef struct  _HPDF_Encoder_Rec {
     */
     void                            *attr;
 }  HPDF_Encoder_Rec;
-
 
 typedef enum _HPDF_BaseEncodings {
     HPDF_BASE_ENCODING_STANDARD,
@@ -148,18 +141,14 @@ HPDF_ByteType
 HPDF_Encoder_ByteType  (HPDF_Encoder        encoder,
                         HPDF_ParseText_Rec  *state);
 
-
-
 HPDF_UNICODE
 HPDF_Encoder_ToUnicode  (HPDF_Encoder     encoder,
                          HPDF_UINT16      code);
-
 
 void
 HPDF_Encoder_Free  (HPDF_Encoder  encoder);
 
 /*-- HPDF_BasicEncoder ----------------------------------*/
-
 
 typedef struct _HPDF_BasicEncoderAttr_Rec  *HPDF_BasicEncoderAttr;
 
@@ -172,20 +161,16 @@ typedef struct  _HPDF_BasicEncoderAttr_Rec {
       HPDF_BYTE           differences[256];
 } HPDF_BasicEncoderAttr_Rec;
 
-
 HPDF_Encoder
 HPDF_BasicEncoder_New  (HPDF_MMgr        mmgr,
                         const char  *encoding_name);
 
-
 void
 HPDF_BasicEncoder_Free  (HPDF_Encoder  encoder);
-
 
 HPDF_STATUS
 HPDF_BasicEncoder_Write  (HPDF_Encoder  encoder,
                           HPDF_Stream   out);
-
 
 HPDF_UNICODE
 HPDF_BasicEncoder_ToUnicode (HPDF_Encoder   encoder,
@@ -202,7 +187,6 @@ typedef struct _HPDF_CidRange_Rec {
     HPDF_UINT16  to;
     HPDF_UINT16  cid;
 } HPDF_CidRange_Rec;
-
 
 typedef struct _HPDF_UnicodeMap_Rec {
     HPDF_UINT16  code;
@@ -228,25 +212,20 @@ typedef struct  _HPDF_CMapEncoderAttr_Rec {
       HPDF_UINT                        xuid[3];
 } HPDF_CMapEncoderAttr_Rec;
 
-
 HPDF_Encoder
 HPDF_CMapEncoder_New  (HPDF_MMgr                mmgr,
                        char               *name,
                        HPDF_Encoder_Init_Func   init_fn);
 
-
 HPDF_STATUS
 HPDF_CMapEncoder_InitAttr  (HPDF_Encoder  encoder);
-
 
 void
 HPDF_CMapEncoder_Free  (HPDF_Encoder   encoder);
 
-
 HPDF_STATUS
 HPDF_CMapEncoder_Write  (HPDF_Encoder   encoder,
                          HPDF_Stream    out);
-
 
 HPDF_UNICODE
 HPDF_CMapEncoder_ToUnicode  (HPDF_Encoder   encoder,
@@ -266,26 +245,21 @@ HPDF_ByteType
 HPDF_CMapEncoder_ByteType  (HPDF_Encoder         encoder,
                             HPDF_ParseText_Rec  *state);
 
-
 HPDF_STATUS
 HPDF_CMapEncoder_AddCMap  (HPDF_Encoder              encoder,
                            const HPDF_CidRange_Rec  *range);
-
 
 HPDF_STATUS
 HPDF_CMapEncoder_AddNotDefRange  (HPDF_Encoder        encoder,
                                   HPDF_CidRange_Rec   range);
 
-
 HPDF_STATUS
 HPDF_CMapEncoder_AddCodeSpaceRange  (HPDF_Encoder        encoder,
                                      HPDF_CidRange_Rec   range);
 
-
 void
 HPDF_CMapEncoder_SetUnicodeArray  (HPDF_Encoder                 encoder,
                                    const HPDF_UnicodeMap_Rec  *array1);
-
 
 HPDF_STATUS
 HPDF_CMapEncoder_AddJWWLineHead  (HPDF_Encoder        encoder,
@@ -300,7 +274,6 @@ HPDF_Encoder_CheckJWWLineHead  (HPDF_Encoder        encoder,
 const char*
 HPDF_UnicodeToGryphName  (HPDF_UNICODE  unicode);
 
-
 HPDF_UNICODE
 HPDF_GryphNameToUnicode  (const char  *gryph_name);
 
@@ -309,4 +282,3 @@ HPDF_GryphNameToUnicode  (const char  *gryph_name);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_ENCODER_H */
-

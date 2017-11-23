@@ -123,4 +123,3 @@ PROCEDURE ShowPopup_3()
       DELAYS SHOWING Main.Text_1.Value STAYING Main.Text_4.Value HIDING Main.Text_5.Value
 
    RETURN
-

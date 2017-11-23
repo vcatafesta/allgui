@@ -85,11 +85,11 @@ FUNCTION SaveIPAddress( aIPAddress )
 
 CLASS MyIpAddress FROM TGridControl // CLASS TGridControlIpAddress
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), LTrim(Str(uValue[1]))+"."+LTrim(Str(uValue[2]))+"."+LTrim(Str(uValue[3]))+"."+LTrim(Str(uValue[4])) }
+   METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), LTrim(Str(uValue[1]))+"."+LTrim(Str(uValue[2]))+"."+LTrim(Str(uValue[3]))+"."+LTrim(Str(uValue[4])) }
 
 ENDCLASS
 
@@ -127,17 +127,17 @@ CLASS MyRadioGroup FROM TGridControl // CLASS TGridControlRadioGroup
    DATA aItems   INIT {}
    DATA nSpacing INIT 20
 
-METHOD nDefHeight         BLOCK { |Self| ( Len( ::aItems ) * ::nSpacing ) }
+   METHOD nDefHeight         BLOCK { |Self| ( Len( ::aItems ) * ::nSpacing ) }
 
-METHOD New
+   METHOD New
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue(uValue) BLOCK { |Self,uValue| if( ( uValue >= 1 .AND. uValue <= Len( ::aItems ) ), ::aItems[ uValue ], "" ) }
+   METHOD GridValue(uValue) BLOCK { |Self,uValue| if( ( uValue >= 1 .AND. uValue <= Len( ::aItems ) ), ::aItems[ uValue ], "" ) }
 
 ENDCLASS
 
@@ -175,19 +175,19 @@ CLASS MyFullName FROM TGridControl
    DATA oControl2     INIT nil
    DATA nDefHeight    INIT 54
 
-METHOD CreateWindow
+   METHOD CreateWindow
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD Str2Val
+   METHOD Str2Val
 
-METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), AllTrim( uValue[ 2 ] ) + ", " + AllTrim( uValue[ 1 ] ) }
+   METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), AllTrim( uValue[ 2 ] ) + ", " + AllTrim( uValue[ 1 ] ) }
 
-METHOD ControlValue      BLOCK { |Self| { ::oControl:Value, ::oControl2:Value } }
+   METHOD ControlValue      BLOCK { |Self| { ::oControl:Value, ::oControl2:Value } }
 
-METHOD Enabled           SETGET
+   METHOD Enabled           SETGET
 
-METHOD OnLostFocus       SETGET
+   METHOD OnLostFocus       SETGET
 
 ENDCLASS
 
@@ -256,4 +256,3 @@ METHOD OnLostFocus( uValue ) CLASS MyFullName
    ENDIF
 
    RETURN ::oControl:OnLostFocus
-

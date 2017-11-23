@@ -709,4 +709,3 @@ FUNCTION GetObjectByClientMDI( hWnd )
    RETURN oWnd
 
    #endif
-

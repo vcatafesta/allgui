@@ -217,4 +217,3 @@ PROCEDURE Adjust()
    oWActiveX:Adjust()
 
    RETURN
-

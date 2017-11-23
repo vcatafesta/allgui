@@ -1240,94 +1240,50 @@ CREATE CLASS WREPORT
       ,{"HB_ZEBRA_FLAG_QR_LEVEL_Q"          , 0x0300};
       ,{"HB_ZEBRA_FLAG_QR_LEVEL_H"          , 0x0400}}
 
-METHOD New ()  CONSTRUCTOR
-
-METHOD ISMONO(arg1)
-
-METHOD SPLASH ()
-
-METHOD CHOICEDRV()
-
-METHOD DoPr ()
-
-METHOD DoPdf ()
-
-METHOD DoMiniPr ()
-
-METHOD fGetline (handle)
-
-METHOD Transpace ()
-
-METHOD MACROCOMPILE ()
-
-METHOD TRADUCI ()
-
-METHOD LEGGIPAR ()
-
-METHOD WHAT_ELE ()
-
-METHOD MEMOSAY ()
-
-METHOD PUTARRAY(row,col,arr,awidths,rowheight,vertalign,noframes,abrushes,apens,afonts,afontscolor,abitmaps,userfun)
-
-METHOD HATCH ()
-
-METHOD GROUP ()
-
-METHOD GrHead ()
-
-METHOD GFeet ()
-
-METHOD UsaFont ()
-
-METHOD Hgconvert ()
-
-METHOD TheHead ()
-
-METHOD TheBody ()
-
-METHOD TheFeet ()
-
-METHOD UsaColor ()
-
-METHOD SETMYRGB ()
-
-METHOD QUANTIREC ()
-
-METHOD COUNTSECT (EXEC)
-
-METHOD CheckUnits()
-
-METHOD UseFLags(arg1)
-
-METHOD Colstep(nfsize,width)
-
-METHOD PgenSet()
-
-METHOD JUSTIFICALINEA ()
-
-METHOD CheckAlign(arrypar)
-
-METHOD GestImage ( image )
-
-METHOD MixMsay()
-
-METHOD DrawBarcode( nRow,nCol,nHeight, nLineWidth, cType, cCode, nFlags )
-
-METHOD Vruler ( pos )
-
-METHOD Hruler ( pos )
-
-METHOD DXCOLORS(par)
-
+   METHOD New ()  CONSTRUCTOR
+   METHOD ISMONO(arg1)
+   METHOD SPLASH ()
+   METHOD CHOICEDRV()
+   METHOD DoPr ()
+   METHOD DoPdf ()
+   METHOD DoMiniPr ()
+   METHOD fGetline (handle)
+   METHOD Transpace ()
+   METHOD MACROCOMPILE ()
+   METHOD TRADUCI ()
+   METHOD LEGGIPAR ()
+   METHOD WHAT_ELE ()
+   METHOD MEMOSAY ()
+   METHOD PUTARRAY(row,col,arr,awidths,rowheight,vertalign,noframes,abrushes,apens,afonts,afontscolor,abitmaps,userfun)
+   METHOD HATCH ()
+   METHOD GROUP ()
+   METHOD GrHead ()
+   METHOD GFeet ()
+   METHOD UsaFont ()
+   METHOD Hgconvert ()
+   METHOD TheHead ()
+   METHOD TheBody ()
+   METHOD TheFeet ()
+   METHOD UsaColor ()
+   METHOD SETMYRGB ()
+   METHOD QUANTIREC ()
+   METHOD COUNTSECT (EXEC)
+   METHOD CheckUnits()
+   METHOD UseFLags(arg1)
+   METHOD Colstep(nfsize,width)
+   METHOD PgenSet()
+   METHOD JUSTIFICALINEA ()
+   METHOD CheckAlign(arrypar)
+   METHOD GestImage ( image )
+   METHOD MixMsay()
+   METHOD DrawBarcode( nRow,nCol,nHeight, nLineWidth, cType, cCode, nFlags )
+   METHOD Vruler ( pos )
+   METHOD Hruler ( pos )
+   METHOD DXCOLORS(par)
    /*
-
    METHOD SaveData()
-
    */
-
-METHOD END()
-
+   METHOD END()
    */
 
 ENDCLASS
@@ -1532,7 +1488,6 @@ METHOD pGenSet() CLASS WREPORT
 METHOD CheckAlign( arrypar, cmdline , section ) CLASS WREPORT //returns the correct alignment
 
    LOCAL vr:= "", _arg3, aAlign := {"CENTER","RIGHT","JUSTIFY"}
-
    empty(cmdline);empty(section)
 
    IF ASCAN(arryPar,[ALIGN]) > 0
@@ -3203,7 +3158,6 @@ METHOD GFeet() CLASS WREPORT
 METHOD UsaFont(arrypar, cmdline , section) CLASS WREPORT
 
    LOCAL al := { hbprn:gettextalign(), hbprn:gettexcolor() }
-
    empty(cmdline);empty(section)
 
    hbprn:modifyfont("Fx",;
@@ -3447,7 +3401,6 @@ METHOD Hgconvert(ltxt) CLASS WREPORT
 METHOD TheHead() CLASS WREPORT
 
    LOCAL grd, nkol
-
    IF nPgr == mx_pg; last_pag:=.t. ;Endif
    DO CASE
    CASE oWr:PrnDrv = "MINI"
@@ -3997,4 +3950,3 @@ METHOD HRuler( hPos ) CLASS WREPORT
    ENDCASE
 
    RETURN NIL
-

@@ -32,25 +32,25 @@ CLASS HToolButton INHERIT HObject
    DATA oParent
    //DATA oFont   // not implemented
 
-METHOD New(oParent,cName,nBitIp,nId,bState,bStyle,cText,bClick,ctip, aMenu )
+   METHOD New(oParent,cName,nBitIp,nId,bState,bStyle,cText,bClick,ctip, aMenu )
 
-METHOD Enable() INLINE ::oParent:EnableButton( ::id, .T. )
+   METHOD Enable() INLINE ::oParent:EnableButton( ::id, .T. )
 
-METHOD Disable() INLINE ::oParent:EnableButton( ::id, .F. )
+   METHOD Disable() INLINE ::oParent:EnableButton( ::id, .F. )
 
-METHOD Show() INLINE hwg_Sendmessage( ::oParent:handle, TB_HIDEBUTTON, INT( ::id ), hwg_Makelong( 0, 0 ) )
+   METHOD Show() INLINE hwg_Sendmessage( ::oParent:handle, TB_HIDEBUTTON, INT( ::id ), hwg_Makelong( 0, 0 ) )
 
-METHOD Hide() INLINE hwg_Sendmessage( ::oParent:handle, TB_HIDEBUTTON, INT( ::id ), hwg_Makelong( 1, 0 ) )
+   METHOD Hide() INLINE hwg_Sendmessage( ::oParent:handle, TB_HIDEBUTTON, INT( ::id ), hwg_Makelong( 1, 0 ) )
 
-METHOD Enabled( lEnabled ) SETGET
+   METHOD Enabled( lEnabled ) SETGET
 
-METHOD Checked( lCheck ) SETGET
+   METHOD Checked( lCheck ) SETGET
 
-METHOD Pressed( lPressed ) SETGET
+   METHOD Pressed( lPressed ) SETGET
 
-METHOD onClick()
+   METHOD onClick()
 
-METHOD Caption( cText ) SETGET
+   METHOD Caption( cText ) SETGET
 
 ENDCLASS
 
@@ -155,33 +155,33 @@ CLASS HToolBar INHERIT HControl
    DATA nwSize, nHSize
    DATA nDrop
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,btnWidth,oFont,bInit, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,btnWidth,oFont,bInit, ;
       bSize,bPaint,ctooltip,tcolor,bcolor,lTransp, lVertical ,aItem, nWSize,nHSize, nIndent, nIDB )
 
-METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD INIT()
+   METHOD INIT()
 
-METHOD CreateTool()
+   METHOD CreateTool()
 
-METHOD AddButton( nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex )
+   METHOD AddButton( nBitIp, nId, bState, bStyle, cText, bClick, c, aMenu, cName, nIndex )
 
-METHOD Notify( lParam )
+   METHOD Notify( lParam )
 
-METHOD EnableButton( idButton, lEnable ) INLINE hwg_Sendmessage( ::handle, TB_ENABLEBUTTON, INT( idButton ), hwg_Makelong( IIF( lEnable, 1, 0 ), 0) )
+   METHOD EnableButton( idButton, lEnable ) INLINE hwg_Sendmessage( ::handle, TB_ENABLEBUTTON, INT( idButton ), hwg_Makelong( IIF( lEnable, 1, 0 ), 0) )
 
-METHOD ShowButton( idButton ) INLINE hwg_Sendmessage( ::handle, TB_HIDEBUTTON, INT( idButton ), hwg_Makelong( 0, 0 ) )
+   METHOD ShowButton( idButton ) INLINE hwg_Sendmessage( ::handle, TB_HIDEBUTTON, INT( idButton ), hwg_Makelong( 0, 0 ) )
 
-METHOD HideButton( idButton ) INLINE hwg_Sendmessage( ::handle, TB_HIDEBUTTON, INT( idButton ), hwg_Makelong( 1, 0 ) )
+   METHOD HideButton( idButton ) INLINE hwg_Sendmessage( ::handle, TB_HIDEBUTTON, INT( idButton ), hwg_Makelong( 1, 0 ) )
 
-METHOD REFRESH() VIRTUAL
+   METHOD REFRESH() VIRTUAL
 
-METHOD RESIZE( xIncrSize, lWidth, lHeight  )
+   METHOD RESIZE( xIncrSize, lWidth, lHeight  )
 
-METHOD onAnchor( x, y, w, h )
+   METHOD onAnchor( x, y, w, h )
 
 ENDCLASS
 
@@ -571,9 +571,9 @@ CLASS HToolBarEX INHERIT HToolBar
 
    //method onevent()
 
-METHOD init()
+   METHOD init()
 
-METHOD ExecuteTool( nid )
+   METHOD ExecuteTool( nid )
 
    DESTRUCTOR MyDestructor
 
@@ -603,4 +603,3 @@ PROCEDURE MyDestructor CLASS htoolbarex
    hwg_Unsethook()
 
    RETURN
-

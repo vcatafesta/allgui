@@ -391,4 +391,3 @@ PROCEDURE ZoomLabel(nmm)
    MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont
 
    RETURN
-

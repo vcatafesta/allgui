@@ -94,4 +94,3 @@ FUNCTION OpenTable()
    USE ptvexist Index ptvexist Alias Existencias New
 
    RETURN NIL
-

@@ -662,4 +662,3 @@ PROCEDURE SignChng()                           // Convert and test signed to int
    RETURN // SignChng()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

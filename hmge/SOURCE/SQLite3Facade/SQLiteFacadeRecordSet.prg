@@ -55,27 +55,18 @@ CREATE CLASS SQLiteFacadeResultSet
    VAR db         // SQLiteFacade() object
    VAR nextCalled TYPE LOGICAL
 
-METHOD resolveColumnIndex // returns NUMERIC
+   METHOD resolveColumnIndex // returns NUMERIC
 
    EXPORT:
-
-METHOD init CONSTRUCTOR
-
-METHOD next          // returns LOGICAL
-
-METHOD getString     // returns CHARACTER
-
-METHOD getInteger    // returns NUMERIC
-
-METHOD getFloat      // returns NUMERIC
-
-METHOD getDate       // returns DATE
-
-METHOD getBoolean    // returns LOGICAL
-
-METHOD getBlob
-
-METHOD close         // returns SELF
+   METHOD init CONSTRUCTOR
+   METHOD next          // returns LOGICAL
+   METHOD getString     // returns CHARACTER
+   METHOD getInteger    // returns NUMERIC
+   METHOD getFloat      // returns NUMERIC
+   METHOD getDate       // returns DATE
+   METHOD getBoolean    // returns LOGICAL
+   METHOD getBlob
+   METHOD close         // returns SELF
 
 END CLASS
 
@@ -356,4 +347,3 @@ METHOD close()
    ::statement:close()
 
    RETURN ( self )
-

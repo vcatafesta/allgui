@@ -49,4 +49,3 @@ PROCEDURE NonStop()
    ENDIF
 
    RETURN
-

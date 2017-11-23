@@ -84,24 +84,24 @@ CLASS VAR szAppName  SHARED INIT "HwGUI_App"
 
    DATA aOffset
 
-METHOD New( Icon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
+   METHOD New( Icon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
       bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,cAppName,oBmp,cHelp,nHelpId )
 
-METHOD AddItem( oWnd )
+   METHOD AddItem( oWnd )
 
-METHOD DelItem( oWnd )
+   METHOD DelItem( oWnd )
 
-METHOD FindWindow( hWnd )
+   METHOD FindWindow( hWnd )
 
-METHOD GetMain()
+   METHOD GetMain()
 
-METHOD Restore()  INLINE hwg_WindowRestore( ::handle )
+   METHOD Restore()  INLINE hwg_WindowRestore( ::handle )
 
-METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
+   METHOD Maximize() INLINE hwg_WindowMaximize( ::handle )
 
-METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
+   METHOD Minimize() INLINE hwg_WindowMinimize( ::handle )
 
-METHOD Close()   INLINE hwg_DestroyWindow( ::handle )
+   METHOD Close()   INLINE hwg_DestroyWindow( ::handle )
 
 ENDCLASS
 
@@ -194,13 +194,13 @@ CLASS VAR aMessages INIT { ;
    DATA lTray       INIT .F.
    DATA lActivated  INIT .F.
 
-METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
+   METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
       oFont,bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;
       cAppName,oBmp,cHelp,nHelpId )
 
-METHOD Activate( lShow )
+   METHOD Activate( lShow )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -307,4 +307,3 @@ FUNCTION Hwg_CenterWindow( oWnd )
    hwg_Movewindow( oWnd:handle, oWnd:nLeft, oWnd:nTop )
 
    RETURN NIL
-

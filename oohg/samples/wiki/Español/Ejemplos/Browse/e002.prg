@@ -170,4 +170,3 @@ FUNCTION OnPaint (Ventana)
    /*
    * EOF
    */
-

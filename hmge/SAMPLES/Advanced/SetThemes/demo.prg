@@ -770,4 +770,3 @@ HB_FUNC ( _COLORMENU )
 }
 
 #pragma ENDDUMP
-

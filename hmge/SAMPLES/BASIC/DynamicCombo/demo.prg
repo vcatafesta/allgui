@@ -138,4 +138,3 @@ PROCEDURE SaveArray(;                     // Save a 1d Char array to a file
    RETURN // SaveArray()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

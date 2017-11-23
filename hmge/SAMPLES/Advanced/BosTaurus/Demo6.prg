@@ -99,4 +99,3 @@ PROCEDURE Proc_Get_Clipboard_Timer
    ENDIF
 
    RETURN
-

@@ -1565,4 +1565,3 @@ FUNCTION ABMListadoImprimir( lOrientacion, nPrimero, nUltimo )
    (_cArea)->( dbGoTo( nRegistro ) )
 
    RETURN ( nil )
-

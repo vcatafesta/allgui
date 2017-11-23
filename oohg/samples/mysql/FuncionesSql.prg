@@ -10,57 +10,57 @@ CLASS ooSql
 
    *Methods always used by XBrowse
 
-METHOD Skipper
+   METHOD Skipper
 
-METHOD GoTop              INLINE ::oQuery:GoTop()
+   METHOD GoTop              INLINE ::oQuery:GoTop()
 
-METHOD GoBottom           INLINE ::oQuery:GoBottom()
+   METHOD GoBottom           INLINE ::oQuery:GoBottom()
 
    *Methods used by XBrowse if you'll have a scrollbar
 
-METHOD RecNo              INLINE ::oQuery:RecNo()
+   METHOD RecNo              INLINE ::oQuery:RecNo()
 
-METHOD RecCount           INLINE ::oQuery:LastRec()
+   METHOD RecCount           INLINE ::oQuery:LastRec()
 
-METHOD GoTo( n )          BLOCK { | Self, n | ::oQuery:Goto( n ) }
+   METHOD GoTo( n )          BLOCK { | Self, n | ::oQuery:Goto( n ) }
 
-METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
+   METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
 
-METHOD OrdKeyCount        INLINE ::oQuery:LastRec()     //::oQuery:RecCount()
+   METHOD OrdKeyCount        INLINE ::oQuery:LastRec()     //::oQuery:RecCount()
 
-METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
+   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
 
    *Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
 
-METHOD Eof                INLINE ::oQuery:Eof()
+   METHOD Eof                INLINE ::oQuery:Eof()
 
    *Used by "own" class (not used by XBrowse itself)
    DATA oQuery
 
-METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+   METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
 
-METHOD Refresh            INLINE ::oQuery:Refresh()
+   METHOD Refresh            INLINE ::oQuery:Refresh()
 
-METHOD FieldGet( nPos )   BLOCK { | Self, nPos | ::oQuery:FieldGet( nPos ) }
+   METHOD FieldGet( nPos )   BLOCK { | Self, nPos | ::oQuery:FieldGet( nPos ) }
 
-METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::oQuery:FieldPut( p, u ) }
+   METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::oQuery:FieldPut( p, u ) }
 
-METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+   METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
 
-METHOD Skip( n )          BLOCK { | Self, n | ::oQuery:Skip( n ) }
+   METHOD Skip( n )          BLOCK { | Self, n | ::oQuery:Skip( n ) }
 
-METHOD Bof                INLINE ::oQuery:Bof()
+   METHOD Bof                INLINE ::oQuery:Bof()
 
-METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
+   METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
 
-METHOD FieldName( n )     BLOCK { | Self, n | ::oQuery:FieldName( n ) }
+   METHOD FieldName( n )     BLOCK { | Self, n | ::oQuery:FieldName( n ) }
 
-METHOD FieldPos( c )      BLOCK { | Self, c | ::oQuery:FieldPos( c ) }
+   METHOD FieldPos( c )      BLOCK { | Self, c | ::oQuery:FieldPos( c ) }
 
-METHOD GetRow( n )        BLOCK { | Self, n | ::oQuery:GetRow( n ) }
+   METHOD GetRow( n )        BLOCK { | Self, n | ::oQuery:GetRow( n ) }
 
-METHOD FieldBlock
+   METHOD FieldBlock
 
    ERROR HANDLER FieldAssign
 
@@ -256,4 +256,3 @@ HB_FUNC( SETTRANSPARENT )
 }
 
 #pragma ENDDUMP
-

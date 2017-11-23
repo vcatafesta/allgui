@@ -102,4 +102,3 @@ PROCEDURE SetHeaderImages()
    NEXT
 
    RETURN
-

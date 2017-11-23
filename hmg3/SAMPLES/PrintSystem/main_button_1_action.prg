@@ -13,4 +13,3 @@ FUNCTION main_button_1_action
    USE
 
    RETURN NIL
-

@@ -86,4 +86,3 @@ PROCEDURE Start
    Form_1.Button_2.Enabled := .T.
 
    RETURN
-

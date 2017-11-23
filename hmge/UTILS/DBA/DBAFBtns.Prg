@@ -115,7 +115,6 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC FB_SelePage( nPageNo )               // Select Data Page
-
       nCurDatNo := n1PagDtNo + nPageNo - 1
       nCurPagNo := nCurDatNo - n1PagDtNo + 1
       FB_ScalTabs()
@@ -316,4 +315,3 @@ PROC FB_InitBtns()                       // Initialize all FB Buttons
                            RETU // FB_ScalTabs()
 
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

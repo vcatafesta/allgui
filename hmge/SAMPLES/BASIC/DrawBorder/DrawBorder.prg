@@ -76,4 +76,3 @@ PROCEDURE DrawBorder(;                             // Draw a border around any c
    RETURN // DrawBorder()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

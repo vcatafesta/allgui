@@ -28,4 +28,3 @@ FUNCTION Main
    sample.activate
 
    RETURN
-

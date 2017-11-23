@@ -280,4 +280,3 @@ PROCEDURE About()
       "Please report bugs to HMG discusion group at groups.yahoo.com" )
 
    RETURN ( nil )
-

@@ -65,4 +65,3 @@ FUNCTION LoadData
    GO TOP
 
    RETURN aArr
-

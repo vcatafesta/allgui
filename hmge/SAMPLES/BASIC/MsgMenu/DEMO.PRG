@@ -367,4 +367,3 @@ FUNCTION About()
    RETURN NIL
 
    #include "Msg_menu.Prg"
-

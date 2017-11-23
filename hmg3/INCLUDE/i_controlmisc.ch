@@ -12,44 +12,44 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2003, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2003, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
@@ -74,52 +74,52 @@
 #xcommand QUIT  => RELEASE WINDOW ALL
 
 #xcommand SETFOCUS <n> OF <w>;
-	=>;
-	DoMethod ( <"w"> , <"n"> , 'SetFocus' )
+   =>;
+   DoMethod ( <"w"> , <"n"> , 'SetFocus' )
 
 #xcommand ADD ITEM <i> TO <n> OF <p> ;
-	=>;
-	DoMethod ( <"p"> , <"n"> , 'AddItem' , <i> )
+   =>;
+   DoMethod ( <"p"> , <"n"> , 'AddItem' , <i> )
 
 #xcommand ADD COLUMN [ INDEX <index> ] [ CAPTION <caption> ] [ WIDTH <width> ] [ JUSTIFY <justify> ] TO <control> OF <parent> ;
-	=>;
-	DoMethod ( <"parent"> , <"control"> , 'AddColumn' , <index> , <caption> , <width> , <justify> )
+   =>;
+   DoMethod ( <"parent"> , <"control"> , 'AddColumn' , <index> , <caption> , <width> , <justify> )
 
 #xcommand DELETE COLUMN [ INDEX ] <index> FROM <control> OF <parent> ;
-	=>;
-	DoMethod ( <"parent"> , <"control"> , 'DeleteColumn' , <index> )
+   =>;
+   DoMethod ( <"parent"> , <"control"> , 'DeleteColumn' , <index> )
 
 #xcommand DELETE ITEM <i> FROM <n> OF <p>;
-	=>;
-	DoMethod ( <"p"> , <"n"> , 'DeleteItem' , <i> )
+   =>;
+   DoMethod ( <"p"> , <"n"> , 'DeleteItem' , <i> )
 
 #xcommand DELETE ITEM ALL FROM <n> OF <p>;
-	=>;
-	DoMethod ( <"p"> , <"n"> , 'DeleteAllItems' )
+   =>;
+   DoMethod ( <"p"> , <"n"> , 'DeleteAllItems' )
 
 #xcommand ENABLE CONTROL <control> OF <form>;
-	=>;
-	SetProperty ( <"form"> , <"control"> , 'Enabled' , .T. )
+   =>;
+   SetProperty ( <"form"> , <"control"> , 'Enabled' , .T. )
 
 #xcommand SHOW CONTROL <control> OF <form>;
-	=>;
-	DoMethod ( <"form"> , <"control"> , 'Show' )
+   =>;
+   DoMethod ( <"form"> , <"control"> , 'Show' )
 
 #xcommand HIDE CONTROL <control> OF <form>;
-	=>;
-	DoMethod ( <"form"> , <"control"> , 'Hide' )
+   =>;
+   DoMethod ( <"form"> , <"control"> , 'Hide' )
 
 #xcommand DISABLE CONTROL <control> OF <form>;
-	=>;
-	SetProperty ( <"form"> , <"control"> , 'Enabled' , .F. )
+   =>;
+   SetProperty ( <"form"> , <"control"> , 'Enabled' , .F. )
 
 #xcommand RELEASE CONTROL <control> OF <form>;
-	=>;
-	DoMethod ( <"form"> , <"control"> , 'Release' ) 
+   =>;
+   DoMethod ( <"form"> , <"control"> , 'Release' )
 
 #xcommand SET FONT TO <fontname> , <fontsize>;
-	=>;
-	_HMG_SYSDATA \[ 342 \] := <fontname> ; _HMG_SYSDATA \[ 343 \] := <fontsize>
+   =>;
+   _HMG_SYSDATA \[ 342 \] := <fontname> ; _HMG_SYSDATA \[ 343 \] := <fontsize>
 
 #xtranslate MODIFY [ PROPERTY ] [ CONTROL ] <Arg2> OF <Arg1> <Arg3> <Arg4> ;
 => ;
@@ -149,10 +149,8 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <"Arg3"> , .F. )
 => ;
 SetProperty ( <"Arg1"> , <"Arg2"> , <"Arg3"> , \{<Arg4>\} )
 
-
 #xcommand SET MULTIPLE ON  [<warning: WARNING>] => SetMultiple (.T., <.warning.>)
 #xcommand SET MULTIPLE OFF [<warning: WARNING>] => SetMultiple (.F., <.warning.>)
-
 
 #xtranslate SET CONTEXTMENUS OFF =>  _HMG_SYSDATA \[ 338 \] := .F.
 #xtranslate SET CONTEXTMENUS ON  =>  _HMG_SYSDATA \[ 338 \] := .T.
@@ -163,16 +161,14 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <"Arg3"> , \{<Arg4>\} )
 #xtranslate SET CONTEXT MENU OFF =>  _HMG_SYSDATA \[ 338 \] := .F.
 #xtranslate SET CONTEXT MENU ON  =>  _HMG_SYSDATA \[ 338 \] := .T.
 
-
 #xcommand EXIT PROCEDURE <name> ;
 => ;
 INIT PROCEDURE <name> ;;
-	MsgStop ('EXIT PROCEDURE Statement is not Supported in HMG. Use Main Window ON RELEASE Event Procedure Instead. Program Terminated','HMG Error') ;;
-	ExitProcess()
+   MsgStop ('EXIT PROCEDURE Statement is not Supported in HMG. Use Main Window ON RELEASE Event Procedure Instead. Program Terminated','HMG Error') ;;
+   ExitProcess()
 
 #xtranslate SET SCROLLSTEP TO <step> =>  _HMG_SYSDATA \[ 345 \] := <step>
 #xtranslate SET SCROLLPAGE TO <step> =>  _HMG_SYSDATA \[ 501 \] := <step>
-
 
 #xtranslate SET AUTOSCROLL ON =>  _HMG_SYSDATA \[ 346 \] := .T.
 #xtranslate SET AUTOSCROLL OFF =>  _HMG_SYSDATA \[ 346 \] := .F.
@@ -184,15 +180,12 @@ INIT PROCEDURE <name> ;;
 #xtranslate System.DesktopHeight => GetDesktopHeight()
 #xtranslate System.DefaultPrinter => GetDefaultPrinter()
 
-
 #xtranslate System.DesktopFolder => GetDesktopFolder()
 #xtranslate System.MyDocumentsFolder => GetMyDocumentsFolder()
 #xtranslate System.ProgramFilesFolder => GetProgramFilesFolder()
 #xtranslate System.SystemFolder => GetSystemFolder()
 #xtranslate System.TempFolder => GetTempFolder()
 #xtranslate System.WindowsFolder => GetWindowsFolder()
-
-
 
 // by Dr. Claudio Soto ( May 2013 )
 
@@ -205,13 +198,11 @@ INIT PROCEDURE <name> ;;
 #xtranslate SET CONTROL CONTEXT MENU OFF =>  _HMG_SetControlContextMenu := .F.
 #xtranslate SET CONTROL CONTEXT MENU ON  =>  _HMG_SetControlContextMenu := .T.
 
-
 // by Dr. Claudio Soto ( January 2014 )
 
 // GetFontList ( [ hDC ] , [ cFontFamilyName ] , [ nCharSet ] , [ nPitch ] , [ nFontType ] , [ lSortCaseSensitive ] , [ @aFontName ] )
 //
 //             --> return array { { cFontName, nCharSet, nPitchAndFamily, nFontType } , ... }
-
 
 // nCharSet
 #define DEFAULT_CHARSET       1
@@ -235,19 +226,15 @@ INIT PROCEDURE <name> ;;
 #define VIETNAMESE_CHARSET    163
 #define MAC_CHARSET           77
 
-
 // nPitch
 #define FONT_DEFAULT_PITCH      0
 #define FONT_FIXED_PITCH        1
 #define FONT_VARIABLE_PITCH     2
 
-
 // nFontType
 #define FONT_VECTOR_TYPE     1
 #define FONT_RASTER_TYPE     2
 #define FONT_TRUE_TYPE       3
-
-
 
 //*************************************************************************
 // HMG_LoadResourceRawFile ( cFileName, cTypeResource | nTypeResourceID )
@@ -277,8 +264,6 @@ INIT PROCEDURE <name> ;;
 #define RT_HTML         (23)
 #define RT_MANIFEST     (24)
 
-
-
 // by Dr. Claudio Soto (June 2014)
 
 #xtranslate SET CONTROL <ControlName> OF <FormName> ONKEYEVENT   <ProcName> => _HMG_SetControlData (<"ControlName">, <"FormName">, 41, 1, <{ProcName}>)
@@ -300,8 +285,8 @@ INIT PROCEDURE <name> ;;
 #define WM_XBUTTONDOWN 523
 #define WM_XBUTTONUP 524
 #define WM_XBUTTONDBLCLK 525
-#define WM_MOUSEHOVER	0x2A1
-#define WM_MOUSELEAVE	0x2A3
+#define WM_MOUSEHOVER   0x2A1
+#define WM_MOUSELEAVE   0x2A3
 
 #define WM_NCHITTEST 132
 #define WM_NCLBUTTONDBLCLK 163
@@ -327,11 +312,9 @@ INIT PROCEDURE <name> ;;
 #define WM_TOUCHDOWN 577
 #define WM_TOUCHUP 578
 
-
 #define NM_FIRST        0
 #define NM_CUSTOMDRAW (NM_FIRST-12)
 #define WM_NOTIFY       78
-
 
 #define WM_PAINT            15
 #define WM_NCPAINT          133
@@ -343,7 +326,6 @@ INIT PROCEDURE <name> ;;
 #define WM_ICONERASEBKGND   39
 #define WM_SYNCPAINT        136
 
-
 #define GCL_HBRBACKGROUND (-10)
 
 #define WM_SETFONT 48
@@ -353,37 +335,32 @@ INIT PROCEDURE <name> ;;
 #define MAKELPARAM(a,b) MAKELONG(a,b)
 #define MAKEWPARAM(a,b) MAKELONG(a,b)
 
-
 #xtranslate SET CONTROL <ControlName> OF <FormName> CLIENTEDGE => HMG_ChangeWindowStyle (GetControlHandle (<"ControlName">, <"FormName">), WS_EX_CLIENTEDGE, NIL, .T.)
 #xtranslate SET CONTROL <ControlName> OF <FormName> STATICEDGE => HMG_ChangeWindowStyle (GetControlHandle (<"ControlName">, <"FormName">), WS_EX_STATICEDGE, NIL, .T.)
 #xtranslate SET CONTROL <ControlName> OF <FormName> WINDOWEDGE => HMG_ChangeWindowStyle (GetControlHandle (<"ControlName">, <"FormName">), WS_EX_WINDOWEDGE, NIL, .T.)
 #xtranslate SET CONTROL <ControlName> OF <FormName> NOTEDGE    => HMG_ChangeWindowStyle (GetControlHandle (<"ControlName">, <"FormName">), NIL, HB_bitOR (WS_EX_CLIENTEDGE, WS_EX_STATICEDGE, WS_EX_WINDOWEDGE), .T.)
 
-
 //   Change Notification Functions
 
 #define WAIT_OBJECT_0   0
 
-#define FILE_NOTIFY_CHANGE_FILE_NAME	0x00000001
-#define FILE_NOTIFY_CHANGE_DIR_NAME	0x00000002
-#define FILE_NOTIFY_CHANGE_NAME		0x00000003
-#define FILE_NOTIFY_CHANGE_ATTRIBUTES	0x00000004
-#define FILE_NOTIFY_CHANGE_SIZE		0x00000008
-#define FILE_NOTIFY_CHANGE_LAST_WRITE	0x00000010
-#define FILE_NOTIFY_CHANGE_LAST_ACCESS	0x00000020
-#define FILE_NOTIFY_CHANGE_CREATION	0x00000040
-#define FILE_NOTIFY_CHANGE_EA		0x00000080
-#define FILE_NOTIFY_CHANGE_SECURITY	0x00000100
-#define FILE_NOTIFY_CHANGE_STREAM_NAME	0x00000200
-#define FILE_NOTIFY_CHANGE_STREAM_SIZE	0x00000400
-#define FILE_NOTIFY_CHANGE_STREAM_WRITE	0x00000800
-#define FILE_NOTIFY_VALID_MASK		0x00000fff
-
-
+#define FILE_NOTIFY_CHANGE_FILE_NAME   0x00000001
+#define FILE_NOTIFY_CHANGE_DIR_NAME   0x00000002
+#define FILE_NOTIFY_CHANGE_NAME      0x00000003
+#define FILE_NOTIFY_CHANGE_ATTRIBUTES   0x00000004
+#define FILE_NOTIFY_CHANGE_SIZE      0x00000008
+#define FILE_NOTIFY_CHANGE_LAST_WRITE   0x00000010
+#define FILE_NOTIFY_CHANGE_LAST_ACCESS   0x00000020
+#define FILE_NOTIFY_CHANGE_CREATION   0x00000040
+#define FILE_NOTIFY_CHANGE_EA      0x00000080
+#define FILE_NOTIFY_CHANGE_SECURITY   0x00000100
+#define FILE_NOTIFY_CHANGE_STREAM_NAME   0x00000200
+#define FILE_NOTIFY_CHANGE_STREAM_SIZE   0x00000400
+#define FILE_NOTIFY_CHANGE_STREAM_WRITE   0x00000800
+#define FILE_NOTIFY_VALID_MASK      0x00000fff
 
 // ToolTip Style
 #define TTS_BALLOON 0x40
-
 
 // GetBinaryType ( cApplicationName ) --> nBinaryType
 #define SCS_32BIT_BINARY   0 // A 32-bit Windows-based application
@@ -393,4 +370,3 @@ INIT PROCEDURE <name> ;;
 #define SCS_PIF_BINARY     3 // A PIF file that executes an MS-DOS – based application
 #define SCS_POSIX_BINARY   4 // A POSIX – based application
 #define SCS_WOW_BINARY     2 // A 16-bit Windows-based application
-

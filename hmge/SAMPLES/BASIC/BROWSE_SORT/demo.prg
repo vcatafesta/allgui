@@ -155,4 +155,3 @@ PROCEDURE filltable ( nCount )
    dbGoTop()
 
    RETURN
-

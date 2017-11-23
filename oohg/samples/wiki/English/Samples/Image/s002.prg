@@ -81,4 +81,3 @@ PROCEDURE Clean( cOutput )
    /*
    * EOF
    */
-

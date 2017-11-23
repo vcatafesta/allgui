@@ -154,4 +154,3 @@ PROCEDURE RemoveFileRc()
    ENDIF
 
    RETURN
-

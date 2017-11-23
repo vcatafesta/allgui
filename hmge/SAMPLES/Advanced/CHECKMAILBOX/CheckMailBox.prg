@@ -491,4 +491,3 @@ FUNCTION cGetPassWord( nMaxLen, cTitle, cBmp )
    ACTIVATE WINDOW Form_Pass
 
    RETURN cPassword
-

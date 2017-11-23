@@ -31,29 +31,20 @@ CREATE CLASS TFileRead
    VAR nReadSize               // How much to add to the readahead buffer on
    // each read from the file
 
-METHOD New( cFile, nSize )  // Create a new class instance
-
-METHOD Open( nMode )        // Open the file for reading
-
-METHOD Close()              // Close the file when done
-
-METHOD ReadLine()           // Read a line from the file
-
-METHOD Name()               // Retunrs the file name
-
-METHOD IsOpen()             // Returns .T. if file is open
-
-METHOD MoreToRead()         // Returns .T. if more to be read
-
-METHOD Error()              // Returns .T. if error occurred
-
-METHOD ErrorNo()            // Returns current error code
-
-METHOD ErrorMsg( cText )    // Returns formatted error message
+   METHOD New( cFile, nSize )  // Create a new class instance
+   METHOD Open( nMode )        // Open the file for reading
+   METHOD Close()              // Close the file when done
+   METHOD ReadLine()           // Read a line from the file
+   METHOD Name()               // Retunrs the file name
+   METHOD IsOpen()             // Returns .T. if file is open
+   METHOD MoreToRead()         // Returns .T. if more to be read
+   METHOD Error()              // Returns .T. if error occurred
+   METHOD ErrorNo()            // Returns current error code
+   METHOD ErrorMsg( cText )    // Returns formatted error message
 
    PROTECTED:
 
-METHOD EOL_pos()
+   METHOD EOL_pos()
 
 END CLASS
 
@@ -262,4 +253,3 @@ METHOD ErrorMsg( cText ) CLASS TFileRead
    ENDIF
 
    RETURN cMessage
-

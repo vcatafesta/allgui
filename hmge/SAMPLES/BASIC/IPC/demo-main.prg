@@ -175,4 +175,3 @@ HB_FUNC( GETMESSAGEDATA )
 }
 
 #pragma ENDDUMP
-

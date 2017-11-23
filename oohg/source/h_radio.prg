@@ -68,47 +68,47 @@ CLASS TRadioGroup FROM TLabel
    DATA oBkGrnd                INIT Nil
    DATA LeftAlign              INIT .F.
 
-METHOD RowMargin            BLOCK { |Self| - ::Row }
+   METHOD RowMargin            BLOCK { |Self| - ::Row }
 
-METHOD ColMargin            BLOCK { |Self| - ::Col }
+   METHOD ColMargin            BLOCK { |Self| - ::Col }
 
-METHOD ReadOnly             SETGET
+   METHOD ReadOnly             SETGET
 
-METHOD Define
+   METHOD Define
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Value                SETGET
+   METHOD Value                SETGET
 
-METHOD Enabled              SETGET
+   METHOD Enabled              SETGET
 
-METHOD SetFocus
+   METHOD SetFocus
 
-METHOD Visible              SETGET
+   METHOD Visible              SETGET
 
-METHOD GroupHeight
+   METHOD GroupHeight
 
-METHOD GroupWidth
+   METHOD GroupWidth
 
-METHOD ItemCount            BLOCK { |Self| LEN( ::aOptions ) }
+   METHOD ItemCount            BLOCK { |Self| LEN( ::aOptions ) }
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD Caption
+   METHOD Caption
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
-METHOD ItemEnabled
+   METHOD ItemEnabled
 
-METHOD ItemReadOnly
+   METHOD ItemReadOnly
 
-METHOD Spacing              SETGET
+   METHOD Spacing              SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -504,17 +504,17 @@ CLASS TRadioItem FROM TLabel
    DATA oBkGrnd       INIT Nil
    DATA LeftAlign     INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Value             SETGET
+   METHOD Value             SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_Color
+   METHOD Events_Color
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
 ENDCLASS
 
@@ -1005,4 +1005,3 @@ HB_FUNC( TRADIOITEM_NOTIFY_CUSTOMDRAW)
 }
 
 #pragma ENDDUMP
-

@@ -103,4 +103,3 @@ STATIC FUNCTION EnableTab( nPage )
    Form_1.Tab_1.Value := nPage
 
    RETURN NIL
-

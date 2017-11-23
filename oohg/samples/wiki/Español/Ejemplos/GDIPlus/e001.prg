@@ -204,4 +204,3 @@ FUNCTION GuardarComo( hBitMap, cFile, nWidth, nHeight, cMimeType, nQuality )
    /*
    * EOF
    */
-

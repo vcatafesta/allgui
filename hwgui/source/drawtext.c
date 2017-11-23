@@ -18,7 +18,6 @@
 HB_FUNC_EXTERN( WIN_OEMTOANSI );
 HB_FUNC_EXTERN( WIN_ANSITOOEM );
 
-
 HB_FUNC( HWG_DEFINEPAINTSTRU )
 {
    PAINTSTRUCT *pps = ( PAINTSTRUCT * ) hb_xgrab( sizeof( PAINTSTRUCT ) );
@@ -82,7 +81,6 @@ HB_FUNC( HWG_DRAWTEXT )
    {
       Array2RectH( hb_param( 3, HB_IT_ARRAY ), &rc );
    }
-
 
    heigh = DrawText( ( HDC ) HB_PARHANDLE( 1 ), // handle of device context
                      lpText,    // address of string
@@ -418,7 +416,6 @@ HB_FUNC( HWG_CREATERECTRGN )
    HB_RETHANDLE( reg );
 }
 
-
 HB_FUNC( HWG_CREATERECTRGNINDIRECT )
 {
    HRGN reg;
@@ -433,7 +430,6 @@ HB_FUNC( HWG_CREATERECTRGNINDIRECT )
    HB_RETHANDLE( reg );
 }
 
-
 HB_FUNC( HWG_EXTSELECTCLIPRGN )
 {
    hb_retni( ExtSelectClipRgn( ( HDC ) HB_PARHANDLE( 1 ),
@@ -445,7 +441,6 @@ HB_FUNC( HWG_SELECTCLIPRGN )
    hb_retni( SelectClipRgn( ( HDC ) HB_PARHANDLE( 1 ),
                ( HRGN ) HB_PARHANDLE( 2 ) ) );
 }
-
 
 HB_FUNC( HWG_CREATEFONTINDIRECT )
 {
@@ -461,4 +456,3 @@ HB_FUNC( HWG_CREATEFONTINDIRECT )
    f = CreateFontIndirect( &lf );
    HB_RETHANDLE( f );
 }
-

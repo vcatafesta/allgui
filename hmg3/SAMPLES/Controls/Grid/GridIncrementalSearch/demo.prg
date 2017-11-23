@@ -119,4 +119,3 @@ FUNCTION Proc_GridSearchString   // New version (April 2014)
    // Form_1.Grid_1.SetFocus
 
    RETURN 1   // prevents the processing of the current message
-

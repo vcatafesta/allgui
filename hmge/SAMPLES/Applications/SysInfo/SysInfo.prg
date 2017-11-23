@@ -232,7 +232,6 @@ PROCEDURE Main()
    RETURN
 
    STATIC proc OnTextChange()
-
       LOCAL cItem := This.Name
       LOCAL nItem := Val( SubStr( cItem, At("_", cItem) + 1 ) )
       LOCAL cText := 'Text_' + NTRIM( nItem )
@@ -242,7 +241,6 @@ PROCEDURE Main()
       RETURN
 
       STATIC proc RepToPrinter()
-
          LOCAL cTitle := PROGRAM + VERSION, n, i, nRow := 24
 
          INIT PRINTSYS
@@ -318,7 +316,6 @@ PROCEDURE Main()
    RETURN
 
    STATIC proc RepToDisk()
-
       LOCAL cTxt := PROGRAM + VERSION + CRLF, n
       LOCAL cFileName := Putfile( { {"Text Files", "*.txt"}, {"All Files", "*.*"} }, "Save to File", ".\", .t. )
 
@@ -347,7 +344,6 @@ PROCEDURE Main()
       RETURN
 
       STATIC proc InitDraw()
-
          DRAW RECTANGLE IN WINDOW Form_1 AT 0,63 ;
             TO 41,447 ;
             PENCOLOR BLACK ;
@@ -356,7 +352,6 @@ PROCEDURE Main()
          RETURN
 
          STATIC proc PaintMessage()
-
             Form_1.Label_1.Value := PROGRAM + VERSION
             Form_1.Label_2.Value := "gfilatov@inbox.ru"
             Form_1.Label_3.Value := "Copyright "+ Chr(169) + COPYRIGHT + ". All rights reserved"
@@ -1176,4 +1171,3 @@ HB_FUNC( ISADMIN )
 }
 
 #pragma ENDDUMP
-

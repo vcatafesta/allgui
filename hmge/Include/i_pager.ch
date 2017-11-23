@@ -58,7 +58,6 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
    => ;
    _BeginPager ( <"name">, <"parent">, <nWidth>, <nHeight>, <nScroll>, <cCaption>, <tooltip>, <.vertical.>, <.autoscroll.>, <backcolor> )
 
-
 #xcommand  END PAGERBOX ;
    => ;
    _EndPager()

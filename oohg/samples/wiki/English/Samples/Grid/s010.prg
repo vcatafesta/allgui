@@ -80,4 +80,3 @@ FUNCTION SetHeightForWholeRows( NumberOfWholeRows )
    /*
    * EOF
    */
-

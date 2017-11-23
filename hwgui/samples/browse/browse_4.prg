@@ -66,4 +66,3 @@ STATIC FUNCTION sair()
    hwg_EndDialog()
 
    RETURN .t.
-

@@ -68,27 +68,27 @@ CLASS TToolTip FROM TControl
    DATA nWindowWidth              INIT -1
    DATA Type                      INIT "TOOLTIP" READONLY
 
-METHOD AutoPopTime             SETGET
+   METHOD AutoPopTime             SETGET
 
-METHOD Define
+   METHOD Define
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD Icon                    SETGET
+   METHOD Icon                    SETGET
 
-METHOD InitialTime             SETGET
+   METHOD InitialTime             SETGET
 
-METHOD Item
+   METHOD Item
 
-METHOD MultiLine               SETGET
+   METHOD MultiLine               SETGET
 
-METHOD ResetDelays
+   METHOD ResetDelays
 
-METHOD ReshowTime              SETGET
+   METHOD ReshowTime              SETGET
 
-METHOD Title                   SETGET
+   METHOD Title                   SETGET
 
-METHOD WindowWidth             SETGET
+   METHOD WindowWidth             SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -632,4 +632,3 @@ HB_FUNC( TTOOLTIP_SETICONANDTITLE )   // ( hWnd, nIcon, cTitle )
 
 }
 #pragma ENDDUMP
-

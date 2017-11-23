@@ -55,7 +55,6 @@
 // --> Network messages
 #define _NET_USE_FAIL_MSG  "Net Open Fail !!!"
 
-
 // --> ::dbMove() constants
 #define _DB_TOP             -999999999999
 #define _DB_BOTTOM          -888888888888
@@ -95,7 +94,6 @@
            NetDbUse( <(cDBF)>, <(cAlias)>, <nSecs>, <cRDD>, ;
                    <.new.>, NET_OPEN_MODE, <.ro.> )
 
-
 // --> new table object
 #xCommand DEFINE TABLE <oTable>         ;
                  [FILE <cFileDBF>]      ;
@@ -116,7 +114,6 @@
                                           <(cPathDBF)>, ;
                                           <.lnew.>,     ;
                                           <.lrdonly.> )
-
 
 // --> new order object
 #xCommand DEFINE ORDER [<oOrder>]   ;
@@ -144,7 +141,6 @@
                                                  )
 
 
-
 #xCommand ADD FIELD <cFld> DATA [<xpression,...>] TO <oObj> ;
           => ;
           <oObj>:ClassAdd( <"cFld">,, {| Self | [<xpression>] },,)
@@ -153,13 +149,11 @@
           => ;
           <oObj>:ClassAdd( <"cFld">,, {| Self | [<xpression>] },,)
 
-
 // --> ::undo() buffer constants
 
 #define _WRITE_BUFFER        1
 #define _DELETE_BUFFER       2
 #define _RECALL_BUFFER       3
-
 
 #xCommand BEGIN TRANSACTION IN <oTable> => <oTable>:SetMonitor( .F. )
 

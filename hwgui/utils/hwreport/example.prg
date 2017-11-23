@@ -108,4 +108,3 @@ FUNCTION MyReport
    RecalcForm( aPaintRep,735 )
 
    RETURN SetPaintRep( aPaintRep )
-

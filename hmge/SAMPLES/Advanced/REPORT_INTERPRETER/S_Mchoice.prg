@@ -494,4 +494,3 @@ STATIC FUNCTION All_None(oTag)
    RETURN NIL
    /*
    */
-

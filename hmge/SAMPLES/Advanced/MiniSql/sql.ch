@@ -45,5 +45,3 @@ Public SqlTrace := .T.
 #command SET SQLTRACE OFF ;
 => ;
 Public SqlTrace := .F.
-
-

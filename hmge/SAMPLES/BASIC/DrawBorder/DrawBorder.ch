@@ -1,9 +1,9 @@
 #xcommand DRAW BORDER;
              WINDOW <cWindowName>  ;
-             CONTROL <cControlName>  ;  
+             CONTROL <cControlName>  ;
              [PENWIDTH <nPnWidth>];
              [UPCOLOR <aUpColor>] ;
              [DOWNCOLOR <aDnColor>] ;
              [SPACE <nSpace>] ;
           =>;
-          DrawBorder( <cWindowName>, <cControlName>, <nPnWidth>, [<aUpColor>], [<aDnColor>], <nSpace>  ) 
+          DrawBorder( <cWindowName>, <cControlName>, <nPnWidth>, [<aUpColor>], [<aDnColor>], <nSpace>  )

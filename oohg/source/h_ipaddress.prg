@@ -58,11 +58,11 @@ CLASS TIpAddress FROM TLabel
    DATA nWidth        INIT 120
    DATA nHeight       INIT 24
 
-METHOD Define
+   METHOD Define
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
-METHOD String      SETGET
+   METHOD String      SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -257,4 +257,3 @@ HB_FUNC( CLEARIPADDRESS )
 }
 
 #pragma ENDDUMP
-

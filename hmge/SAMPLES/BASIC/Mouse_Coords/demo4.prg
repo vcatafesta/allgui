@@ -92,4 +92,3 @@ PROCEDURE hide_tem()
    ENDIF
 
    RETURN
-

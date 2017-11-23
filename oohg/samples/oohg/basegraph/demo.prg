@@ -177,4 +177,3 @@ PROCEDURE DrawPointsGraph(paSer,paYval,paCol)
       SHOWLEGENDS
 
    RETURN
-

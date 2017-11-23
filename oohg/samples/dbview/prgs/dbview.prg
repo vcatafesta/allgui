@@ -3078,4 +3078,3 @@ FUNCTION WhatCvsVer()
    oFile:Close()
 
    RETURN( aCvs )
-

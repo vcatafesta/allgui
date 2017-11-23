@@ -34,22 +34,14 @@
 CREATE CLASS SQLiteFacadeResultSetMockup INHERIT SQLiteFacadeResultSet
 
    EXPORT:
-
-METHOD init CONSTRUCTOR
-
+   METHOD init CONSTRUCTOR
    // ---- overrides most of exported methods of SQLiteFacadeResultSet ----
-
-METHOD next          // returns LOGICAL
-
-METHOD getString     // returns CHARACTER
-
-METHOD getInteger    // returns NUMERIC
-
-METHOD getFloat      // returns NUMERIC
-
-METHOD getDate       // returns DATE
-
-METHOD getBoolean    // returns LOGICAL
+   METHOD next          // returns LOGICAL
+   METHOD getString     // returns CHARACTER
+   METHOD getInteger    // returns NUMERIC
+   METHOD getFloat      // returns NUMERIC
+   METHOD getDate       // returns DATE
+   METHOD getBoolean    // returns LOGICAL
 
 END CLASS
 
@@ -143,4 +135,3 @@ METHOD getBoolean( ncColumn )
    Throw( oError )
 
    RETURN ( .F. )
-

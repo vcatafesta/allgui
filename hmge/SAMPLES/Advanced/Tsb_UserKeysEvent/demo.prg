@@ -543,7 +543,6 @@ FUNCTION TR0( c )
    RETURN PADL(AllTrim(c), Len(c))
 
    STATIC FUNC Create_Dbf( cFile )
-
       LOCAL i, aStru
 
       aStru := { ;
@@ -584,7 +583,6 @@ FUNCTION TR0( c )
       RETURN NIL
 
       STATIC FUNC RandStr( nLen )
-
          LOCAL cSet  := "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
          LOCAL cPass := ""
          LOCAL i
@@ -600,7 +598,6 @@ FUNCTION TR0( c )
          RETURN cPass
 
          STATIC FUNC TBrw_Msg( oBrw, nKey, cKey, cDop )
-
             LOCAL cTx := oBrw:cControlName + CRLF
 
             DEFAULT cDop := ''
@@ -639,7 +636,6 @@ FUNCTION TR0( c )
                      RETURN NIL
 
                      STATIC FUNC Rec_Prn1( oBrw, nKey, cKey )
-
                         LOCAL cTx := ''
 
                         IF val(cKey) == VK_F5                // default
@@ -669,7 +665,6 @@ FUNCTION TR0( c )
                               RETURN NIL
 
                               STATIC FUNC Rec_Prn4( oBrw, nKey, cKey )
-
                                  LOCAL cTx := oBrw:cControlName + CRLF
 
                                  cTx += iif( ValType(nKey) == 'N', hb_ntos(nKey), nKey ) + CRLF + cKey
@@ -721,7 +716,6 @@ FUNCTION TR0( c )
                                                 RETURN NIL
 
                                                 STATIC FUNC Rec_Ordn( oBrw, nKey, cKey )
-
                                                    LOCAL cOrd := ( oBrw:cAlias )->( OrdSetFocus() )
 
                                                    TBrw_Msg( oBrw, nKey, cKey )
@@ -740,7 +734,6 @@ FUNCTION TR0( c )
                                                       RETURN NIL
 
                                                       STATIC FUNC Rec_Expo( oBrw, nKey, cKey )
-
                                                          LOCAL cTx := ''
 
                                                          IF val(cKey) == VK_F8                // default
@@ -754,7 +747,6 @@ FUNCTION TR0( c )
                                                          RETURN NIL
 
                                                          STATIC FUNC Set_Mode( oBrw, nKey, cKey )
-
                                                             LOCAL cTx := ''
 
                                                             IF val(cKey) == VK_F9                // default
@@ -779,7 +771,6 @@ FUNCTION TR0( c )
                                                             RETURN NIL
 
                                                             STATIC FUNC Msg_Keys( oBrw, nKey, cKey, Par1, Par2, Par3 )
-
                                                                LOCAL cTx := ''
 
                                                                IF Par1 != Nil
@@ -801,7 +792,6 @@ FUNCTION TR0( c )
                                                                RETURN NIL
 
                                                                STATIC FUNC ClickProcedure()
-
                                                                   LOCAL nRow := _HMG_MouseRow
                                                                   LOCAL nCol := _HMG_MouseCol
                                                                   LOCAL cWnd := _HMG_ThisFormName
@@ -822,7 +812,6 @@ FUNCTION TR0( c )
                                                                   RETURN NIL
 
                                                                   STATIC FUNC This_Msg( cT, xC )
-
                                                                      LOCAL cTx := ""
 
                                                                      IF valtype(cT) == 'A'
@@ -889,4 +878,3 @@ PROCEDURE Modal_CLick
    Form_2.Activate
 
    RETURN
-

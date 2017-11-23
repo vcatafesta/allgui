@@ -35,24 +35,22 @@
                 <{lostfocus}>, <{gotfocus}>, <{enter}>, ;
                 <.RightAlign.>, <helpid>, <.bold.>, <.italic.>, <.underline.>, <backcolor> , <fontcolor> , <.notabstop.>, <aitems>,<.anywhere.>,<dropheight>, <.additive.>, <nrowoffset>, <ncoloffset>)
 
-	#xcommand ANYWHERESEARCH	<sort>	;
-	=>;
-	_HMG_SYSDATA \[ 464 \]		:= <sort>
-	#xcommand DROPHEIGHT	<dropheight>	;
-	=>;
-	_HMG_SYSDATA \[ 249 \]		:= <dropheight>
-	#xcommand ADDITIVE	<additive>	;
-	=>;
-	_HMG_SYSDATA \[ 439 \]		:= <additive>
-	#xcommand ROWOFFSET	<rowoffset>	;
-	=>;
-	_HMG_SYSDATA \[ 449 \]		:= <rowoffset>
-	#xcommand COLOFFSET	<coloffset>	;
-	=>;
-	_HMG_SYSDATA \[ 450 \]		:= <coloffset>
-                
-                
-                               
+   #xcommand ANYWHERESEARCH   <sort>   ;
+   =>;
+   _HMG_SYSDATA \[ 464 \]      := <sort>
+   #xcommand DROPHEIGHT   <dropheight>   ;
+   =>;
+   _HMG_SYSDATA \[ 249 \]      := <dropheight>
+   #xcommand ADDITIVE   <additive>   ;
+   =>;
+   _HMG_SYSDATA \[ 439 \]      := <additive>
+   #xcommand ROWOFFSET   <rowoffset>   ;
+   =>;
+   _HMG_SYSDATA \[ 449 \]      := <rowoffset>
+   #xcommand COLOFFSET   <coloffset>   ;
+   =>;
+   _HMG_SYSDATA \[ 450 \]      := <coloffset>
+
     #xcommand DEFINE COMBOSEARCHBOX <name>;
        =>;
        _HMG_SYSDATA \[ 416 \]   := <"name">   ;; //name
@@ -86,7 +84,7 @@
        _HMG_SYSDATA \[ 439 \]      := .f.  ;;  // additive
        _HMG_SYSDATA \[ 449 \]      := 0    ;;// rowoffset
        _HMG_SYSDATA \[ 450 \]      := 0    // coloffset
-         
+
     #xcommand END COMBOSEARCHBOX;
        =>;
           _DefineComboSearchBox(;
@@ -121,7 +119,4 @@
              _HMG_SYSDATA \[ 439 \] ,; //  additive
              _HMG_SYSDATA \[ 449 \] ,; //  rowoffset
              _HMG_SYSDATA \[ 450 \] ; //  coloffset
-             ) 
-       
-                   
-               
+             )

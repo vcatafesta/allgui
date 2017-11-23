@@ -224,4 +224,3 @@ STATIC FUNCTION ASeek( uSeek, oBrw )
    ENDIF
 
    RETURN lFound
-

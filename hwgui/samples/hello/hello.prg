@@ -104,4 +104,3 @@ FUNCTION PS1( oWnd )
    hwg_PropertySheet( hwg_Getactivewindow(), { oDlg1, oDlg2 }, "Sheet Example",210,10,300,300 )
 
    RETURN
-

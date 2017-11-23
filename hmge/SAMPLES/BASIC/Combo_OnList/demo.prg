@@ -136,4 +136,3 @@ STATIC PROCEDURE _KeysOn(abKeyBlocks)
    _DefineHotKey("Demo", 0, 13, abKeyBlocks[2])
 
    RETURN
-

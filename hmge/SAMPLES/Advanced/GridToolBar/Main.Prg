@@ -66,4 +66,3 @@ FUNCTION LoadData
    FERASE('CODE.NTX')
 
    RETURN aArr
-

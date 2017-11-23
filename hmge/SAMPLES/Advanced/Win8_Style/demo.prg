@@ -298,4 +298,3 @@ FUNCTION MyExit()          // Exit programm
    ENDIF
 
    RETURN lExit
-

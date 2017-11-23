@@ -23,22 +23,22 @@ CLASS VAR winclass INIT "STATIC"
    DATA lMoved INIT .F.
    DATA bEndDrag
 
-METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
       bSize,bPaint,color,bcolor,aLeft,aRight )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Paint( lpdis )
+   METHOD Paint( lpdis )
 
-METHOD Move( x1,y1,width,height )
+   METHOD Move( x1,y1,width,height )
 
-METHOD Drag( lParam )
+   METHOD Drag( lParam )
 
-METHOD DragAll()
+   METHOD DragAll()
 
 ENDCLASS
 
@@ -169,4 +169,3 @@ METHOD DragAll() CLASS HSplitter
    ::lMoved := .F.
 
    RETURN NIL
-

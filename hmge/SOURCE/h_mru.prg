@@ -246,4 +246,3 @@ FUNCTION ClearMRUList()
       NEXT
 
       RETURN NIL
-

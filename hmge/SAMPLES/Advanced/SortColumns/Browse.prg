@@ -213,4 +213,3 @@ FUNCTION GetColumnsWidth( ControlName , ParentForm, aColumns )
    RETURN aWidths
 
    #include <sortcolumns.c>
-

@@ -362,4 +362,3 @@ FUNCTION cFilePath( cPathMask )
 FUNCTION cFileDisc( cPathMask )
 
    RETURN If( At( ":", cPathMask ) == 2, Upper( Left( cPathMask, 2 ) ), "" )
-

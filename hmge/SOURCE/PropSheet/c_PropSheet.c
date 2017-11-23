@@ -51,7 +51,6 @@
 #define _WIN32_IE 0x0500
 #define _WIN32_WINNT 0x0400
 
-
 #include <shlobj.h>
 #include <windows.h>
 #include <windowsx.h>
@@ -61,7 +60,6 @@
 #include "hbvm.h"
 #include "hbstack.h"
 #include "hbapiitm.h"
-
 
 extern PWORD   CreateDlgTemplate( long lTemplateSize,  PHB_ITEM dArray,PHB_ITEM cArray );
 extern long    GetSizeDlgTemp( PHB_ITEM dArray, PHB_ITEM cArray );

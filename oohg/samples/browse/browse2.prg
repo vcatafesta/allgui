@@ -212,4 +212,3 @@ PROCEDURE CreateTable
    /*
    * EOF
    */
-

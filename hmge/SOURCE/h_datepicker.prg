@@ -527,4 +527,3 @@ FUNCTION _SetDatePickerRange( ControlHandle, dRangeMin, dRangeMax, Index )
    ENDIF
 
    RETURN lOK
-

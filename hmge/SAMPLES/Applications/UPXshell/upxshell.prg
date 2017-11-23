@@ -530,4 +530,3 @@ HB_FUNC( C_SETPICTURE )
 }
 
 #pragma ENDDUMP
-

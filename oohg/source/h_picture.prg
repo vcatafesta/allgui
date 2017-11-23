@@ -69,45 +69,45 @@ CLASS TPicture FROM TControl
    DATA lNoTransparent     INIT .F.
    DATA aExcludeArea       INIT {}
 
-METHOD Define
+   METHOD Define
 
-METHOD RePaint
+   METHOD RePaint
 
-METHOD Release
+   METHOD Release
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Picture          SETGET
+   METHOD Picture          SETGET
 
-METHOD Buffer           SETGET
+   METHOD Buffer           SETGET
 
-METHOD HBitMap          SETGET
+   METHOD HBitMap          SETGET
 
-METHOD Zoom             SETGET
+   METHOD Zoom             SETGET
 
-METHOD Rotate           SETGET
+   METHOD Rotate           SETGET
 
-METHOD OnClick          SETGET
+   METHOD OnClick          SETGET
 
-METHOD HorizontalScroll SETGET
+   METHOD HorizontalScroll SETGET
 
-METHOD VerticalScroll   SETGET
+   METHOD VerticalScroll   SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD nDegree          SETGET
+   METHOD nDegree          SETGET
 
-METHOD Redraw
+   METHOD Redraw
 
-METHOD ToolTip          SETGET
+   METHOD ToolTip          SETGET
 
-METHOD OriginalSize
+   METHOD OriginalSize
 
-METHOD CurrentSize
+   METHOD CurrentSize
 
-METHOD Blend
+   METHOD Blend
 
-METHOD Copy
+   METHOD Copy
 
    EMPTY( _OOHG_AllVars )
 
@@ -1048,4 +1048,3 @@ HB_FUNC( SCROLLS )   // ( hWnd, nWidth, nHeight )
 }
 
 #pragma ENDDUMP
-

@@ -34,29 +34,29 @@ CLASS TMyToolBarEditor
    DATA oEditor                INIT NIL
    DATA oSplitBox              INIT NIL
 
-METHOD AddToolBar
+   METHOD AddToolBar
 
-METHOD Count                BLOCK { |Self| Len( ::aToolBars ) }
+   METHOD Count                BLOCK { |Self| Len( ::aToolBars ) }
 
-METHOD CreateToolBars
+   METHOD CreateToolBars
 
-METHOD DelToolBar
+   METHOD DelToolBar
 
-METHOD Edit
+   METHOD Edit
 
-METHOD EditToolBar
+   METHOD EditToolBar
 
-METHOD FmgOutput
+   METHOD FmgOutput
 
-METHOD LoadToolBars
+   METHOD LoadToolBars
 
-METHOD MoveToolBarDown
+   METHOD MoveToolBarDown
 
-METHOD MoveToolBarUp
+   METHOD MoveToolBarUp
 
-METHOD New                  CONSTRUCTOR
+   METHOD New                  CONSTRUCTOR
 
-METHOD Release
+   METHOD Release
 
 ENDCLASS
 
@@ -268,69 +268,69 @@ CLASS TMyToolBar
    DATA oEditor                INIT NIL
    DATA oTBCtrl                INIT NIL
 
-METHOD AddBtn
+   METHOD AddBtn
 
-METHOD CreateCtrl
+   METHOD CreateCtrl
 
-METHOD DeleteBtn
+   METHOD DeleteBtn
 
-METHOD Discard
+   METHOD Discard
 
-METHOD Edit
+   METHOD Edit
 
-METHOD EditDropDownButton
+   METHOD EditDropDownButton
 
-METHOD FmgOutput
+   METHOD FmgOutput
 
-METHOD InsertBtn
+   METHOD InsertBtn
 
-METHOD MoveDown
+   METHOD MoveDown
 
-METHOD MoveUp
+   METHOD MoveUp
 
-METHOD New                  CONSTRUCTOR
+   METHOD New                  CONSTRUCTOR
 
-METHOD OnEditInit
+   METHOD OnEditInit
 
-METHOD OnGridChange
+   METHOD OnGridChange
 
-METHOD PreProcessDefine
+   METHOD PreProcessDefine
 
-METHOD ReadFromFMG
+   METHOD ReadFromFMG
 
-METHOD ReadToolBarLogicalData
+   METHOD ReadToolBarLogicalData
 
-METHOD ReadToolBarStringData
+   METHOD ReadToolBarStringData
 
-METHOD Release
+   METHOD Release
 
-METHOD Save
+   METHOD Save
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD WriteAction
+   METHOD WriteAction
 
-METHOD WriteAutosize
+   METHOD WriteAutosize
 
-METHOD WriteCaption
+   METHOD WriteCaption
 
-METHOD WriteCheck
+   METHOD WriteCheck
 
-METHOD WriteGroup
+   METHOD WriteGroup
 
-METHOD WriteName
+   METHOD WriteName
 
-METHOD WriteObj
+   METHOD WriteObj
 
-METHOD WritePicture
+   METHOD WritePicture
 
-METHOD WriteSeparator
+   METHOD WriteSeparator
 
-METHOD WriteSubclass
+   METHOD WriteSubclass
 
-METHOD WriteToolTip
+   METHOD WriteToolTip
 
-METHOD WriteWhole
+   METHOD WriteWhole
 
 ENDCLASS
 
@@ -1081,19 +1081,19 @@ CLASS TMyTBBtn
    DATA Name                   INIT ''
    DATA oEditor                INIT NIL
 
-METHOD CreateCtrl
+   METHOD CreateCtrl
 
-METHOD FmgOutput
+   METHOD FmgOutput
 
-METHOD New                  CONSTRUCTOR
+   METHOD New                  CONSTRUCTOR
 
-METHOD PreProcessDefine
+   METHOD PreProcessDefine
 
-METHOD ReadFromFMG
+   METHOD ReadFromFMG
 
-METHOD ReadTBBtnLogicalData
+   METHOD ReadTBBtnLogicalData
 
-METHOD ReadTBBtnStringData
+   METHOD ReadTBBtnStringData
 
 ENDCLASS
 
@@ -1271,4 +1271,3 @@ METHOD CreateCtrl() CLASS TMyTBBtn
    /*
    * EOF
    */
-

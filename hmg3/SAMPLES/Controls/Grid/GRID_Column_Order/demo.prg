@@ -97,4 +97,3 @@ PROCEDURE GetOrder()
    NEXT
 
    RETURN
-

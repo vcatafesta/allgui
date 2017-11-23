@@ -302,4 +302,3 @@ FUNCTION BrowseChange()
    Form_1.ImagePhoto.Picture := IF( File( alltrim(Teste->Photo) ), alltrim(Teste->Photo), "0.bmp" )
 
    RETURN NIL
-

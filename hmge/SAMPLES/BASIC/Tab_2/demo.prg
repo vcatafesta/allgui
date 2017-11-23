@@ -159,4 +159,3 @@ PROCEDURE SizeTest()
    Principal.Container_Tab.Height := Principal.Height - 60
 
    RETURN
-

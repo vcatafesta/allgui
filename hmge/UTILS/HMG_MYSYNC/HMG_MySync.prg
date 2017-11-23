@@ -1329,4 +1329,3 @@ FUNCTION WaitWindow ( cMessage , lNoWait )
    ENDIF
 
    RETURN NIL
-

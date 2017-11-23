@@ -115,4 +115,3 @@ PROCEDURE GetFont_Click
    ENDIF
 
    RETURN
-

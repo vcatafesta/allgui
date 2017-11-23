@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #command DEFINE TIMER <name> ;
       [ OBJ <obj> ] ;
       [ <dummy1: OF, PARENT> <parent> ] ;
@@ -66,6 +65,6 @@
       [ ACTION <action> ] ;
       [ SUBCLASS <subclass> ] ;
       [ <disabled: DISABLED> ] ;
-	=> ;
+   => ;
       [ <obj> := ] _OOHG_SelectSubClass( TTimer(), [ <subclass>() ] ): ;
             Define( <(name)>, <(parent)>, <interval>, <{action}>, <.disabled.> )

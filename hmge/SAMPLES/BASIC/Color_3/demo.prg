@@ -86,4 +86,3 @@ STATIC FUNCTION cas_func(...)
    ENDIF
 
    RETURN NIL
-

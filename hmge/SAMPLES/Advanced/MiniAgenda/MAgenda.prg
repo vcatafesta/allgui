@@ -560,4 +560,3 @@ PROCEDURE ShowAbout( cAbFName )
    oObject:Navigate( cAbFName )
 
    RETURN // ShowAbout()
-

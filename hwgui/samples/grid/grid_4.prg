@@ -80,4 +80,3 @@ FUNCTION FileOpen()
    APPEND FROM (fname) SDF
 
    RETURN Test()
-

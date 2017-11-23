@@ -82,4 +82,3 @@ FUNCTION CambiarArea( oImage1 )
    /*
    * EOF
    */
-

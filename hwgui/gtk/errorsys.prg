@@ -145,4 +145,3 @@ STATIC FUNCTION ErrorPreview( cMess )
    oDlg:Activate()
 
    RETURN NIL
-

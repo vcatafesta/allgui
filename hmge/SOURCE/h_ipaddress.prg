@@ -162,4 +162,3 @@ FUNCTION _DefineIPAddress ( ControlName, ParentForm, x, y, w, h, aValue, ;
    ENDIF
 
    RETURN NIL
-

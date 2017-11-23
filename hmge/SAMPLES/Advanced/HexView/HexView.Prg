@@ -75,7 +75,6 @@ PROC Main()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC ClosFile()
-
       CLOS DATA
       ERAS (cTempFNam)
       frmHVMain.mitClos.Enabled := .F.
@@ -94,7 +93,6 @@ PROC Main()
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC SayAbout()
-
             MsgInfo( PADC("Harbour MiniGUI Hex Viewer v.3.1", 50)  + CRLF2 + ;
                PADC("FREEWARE", 50)                          + CRLF2 + ;
                PADC('Thanks to "Le Roy" Roberto Lopez ( HMG Builder )', 50) + CRLF2 + ;
@@ -314,7 +312,6 @@ PROC Main()
                                  *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                  PROC FindString()
-
                                     LOAD WINDOW HexV_FS AS FS
                                     FS.CENTER
                                     FS.Activate
@@ -380,10 +377,8 @@ PROC Main()
                                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                        PROC FS_Init()
-
                                           FS.btnFNext.Enabled := .F.
                                           ON KEY ESCAPE OF FS ACTION FS.Release
                                           RETU // FS_Init()
 
                                           *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

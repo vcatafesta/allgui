@@ -247,4 +247,3 @@ FUNCTION VerifyYesNoCancel( cWindowTitle, cMainMessage, cContent )
    ENDIF
 
    RETURN -1
-

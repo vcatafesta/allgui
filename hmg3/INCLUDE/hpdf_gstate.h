@@ -24,7 +24,6 @@
 extern "C" {
 #endif
 
-
 /*----------------------------------------------------------------------------*/
 /*------ graphic state stack -------------------------------------------------*/
 
@@ -70,7 +69,6 @@ HPDF_GState
 HPDF_GState_New  (HPDF_MMgr    mmgr,
                   HPDF_GState  current);
 
-
 HPDF_GState
 HPDF_GState_Free  (HPDF_MMgr    mmgr,
                    HPDF_GState  gstate);
@@ -80,4 +78,3 @@ HPDF_GState_Free  (HPDF_MMgr    mmgr,
 #endif /* __cplusplus */
 
 #endif /* _HPDF_GSTATE_H */
-

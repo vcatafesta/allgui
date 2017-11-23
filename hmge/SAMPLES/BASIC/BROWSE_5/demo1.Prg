@@ -92,4 +92,3 @@ PROCEDURE CloseTables()
    Ferase('Date.Ntx')
 
    RETURN
-

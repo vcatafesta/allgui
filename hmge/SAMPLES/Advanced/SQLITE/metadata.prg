@@ -85,4 +85,3 @@ PROCEDURE test( db )
    ENDIF
 
    RETURN
-

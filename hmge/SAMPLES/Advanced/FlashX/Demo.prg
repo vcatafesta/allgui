@@ -111,4 +111,3 @@ STATIC FUNCTION GetPlayerVersion()
    ENDIF
 
    RETURN cKey
-

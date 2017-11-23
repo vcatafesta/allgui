@@ -232,4 +232,3 @@ FUNCTION HMG_IsUTF8 ( cString )   // code from Harbour Project, now is implement
    NEXT
 
    RETURN !( nOctets > 0 .OR. lASCII )
-

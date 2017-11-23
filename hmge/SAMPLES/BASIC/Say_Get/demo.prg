@@ -103,4 +103,3 @@ STATIC FUNCTION CreateTextboxWithLabel( textboxname, nR, nC, cCaption, nW )
    END TEXTBOX
 
    RETURN NIL
-

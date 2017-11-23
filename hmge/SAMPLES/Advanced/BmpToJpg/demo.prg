@@ -164,4 +164,3 @@ FUNCTION SaveToJPG( nQuality, nProgressive )
 
    DECLARE DLL_TYPE_LONG DIWriteJpg(DLL_TYPE_LPCSTR DestPath, DLL_TYPE_LONG quality, DLL_TYPE_LONG progressive) ;
       IN DIJPG.DLL ALIAS BMPTOJPG
-

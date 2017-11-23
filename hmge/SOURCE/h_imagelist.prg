@@ -213,4 +213,3 @@ FUNCTION _BeginDragImage ( ControlName, ParentControl, imageindex, ix, iy )
    IL_BeginDrag( h, c, ImageIndex, ix, iy )
 
    RETURN NIL
-

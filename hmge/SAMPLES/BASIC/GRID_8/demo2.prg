@@ -137,4 +137,3 @@ PROCEDURE ExportToXLS( cDbf )
    ( cAlias )->( DbCloseArea() )
 
    RETURN
-

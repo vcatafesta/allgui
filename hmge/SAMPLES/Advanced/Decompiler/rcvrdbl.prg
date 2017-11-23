@@ -106,4 +106,3 @@ STATIC FUNCTION DC_BinToDec(cString)
    NEXT nX
 
    RETURN(int(nNumber))
-

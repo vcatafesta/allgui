@@ -354,7 +354,6 @@ FI_STRUCT (Plugin) {
 #define XBM_DEFAULT         0
 #define XPM_DEFAULT         0
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -543,7 +542,6 @@ DLL_API BOOL DLL_CALLCONV FreeImage_SetChannel(FIBITMAP *dib, FIBITMAP *dib8, FR
 // copy / paste routines
 DLL_API FIBITMAP *DLL_CALLCONV FreeImage_Copy(FIBITMAP *dib, int left, int top, int right, int bottom);
 DLL_API BOOL DLL_CALLCONV FreeImage_Paste(FIBITMAP *dst, FIBITMAP *src, int left, int top, int alpha);
-
 
 #ifdef __cplusplus
 }

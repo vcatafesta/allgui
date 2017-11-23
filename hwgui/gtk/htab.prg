@@ -27,27 +27,27 @@ CLASS VAR winclass   INIT "SysTabControl32"
    DATA  oTemp
    DATA  bAction
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,;
       bClick, bGetFocus, bLostFocus )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetTab( n )
+   METHOD SetTab( n )
 
-METHOD StartPage( cname )
+   METHOD StartPage( cname )
 
-METHOD EndPage()
+   METHOD EndPage()
 
-METHOD ChangePage( nPage )
+   METHOD ChangePage( nPage )
 
-METHOD HidePage( nPage )
+   METHOD HidePage( nPage )
 
-METHOD ShowPage( nPage )
+   METHOD ShowPage( nPage )
 
-METHOD GetActivePage( nFirst,nEnd )
+   METHOD GetActivePage( nFirst,nEnd )
 
    HIDDEN:
    DATA  nActive  INIT 0         // Active Page
@@ -206,4 +206,3 @@ METHOD GetActivePage( nFirst,nEnd ) CLASS HTab
    ENDIF
 
    RETURN ::nActive
-

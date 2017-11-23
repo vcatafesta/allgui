@@ -16,14 +16,14 @@ CLASS TVideo FROM hControl
    DATA   oMci
    DATA   cAviFile
 
-METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, ;
+   METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, ;
       bWhen, bValid, lNoBorder , nid ) CONSTRUCTOR
 
-METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CONSTRUCTOR
+   METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CONSTRUCTOR
 
-METHOD Initiate( )
+   METHOD Initiate( )
 
-METHOD Play( nFrom, nTo ) INLINE  ::oMci:Play( nFrom, nTo, ::oparent:handle )
+   METHOD Play( nFrom, nTo ) INLINE  ::oMci:Play( nFrom, nTo, ::oparent:handle )
 
 ENDCLASS
 
@@ -73,4 +73,3 @@ METHOD Initiate( ) CLASS TVideo
    ::oMci:SetWindow( Self )
 
    RETURN NIL
-

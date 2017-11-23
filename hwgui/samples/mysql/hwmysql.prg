@@ -558,4 +558,3 @@ FUNCTION MsgSay( cText )
    ENDIF
 
    RETURN
-

@@ -7,4 +7,3 @@ FUNCTION Main
    Main.Activate
 
    RETURN
-

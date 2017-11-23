@@ -113,4 +113,3 @@ FUNCTION BClose()
 FUNCTION BPosition()
 
    RETURN nTotBytes
-

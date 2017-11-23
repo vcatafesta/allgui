@@ -105,4 +105,3 @@ FUNCTION otroabm()
    edit extended workarea tests
 
    RETURN NIL
-

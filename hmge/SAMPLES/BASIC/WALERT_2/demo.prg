@@ -21,4 +21,3 @@ PROCEDURE MAIN
    _alert( "MessageBox Alert", , "Alert" )
 
    RETURN
-

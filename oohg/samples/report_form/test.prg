@@ -108,4 +108,3 @@ FUNCTION PrintCondensed1()
    do report form test4
 
    RETURN NIL
-

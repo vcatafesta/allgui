@@ -300,4 +300,3 @@ FUNCTION FindFunc(fn,fs,filename)
    ENDDO
 
    RETURN ok
-

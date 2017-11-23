@@ -659,4 +659,3 @@ STATIC FUNCTION IsHoliday(ThisDate)
    LOCAL lRetVal := ASCAN( aHolidays_, { | x | DTOS( x ) == DTOS( ThisDate ) } )
 
    RETURN (lRetVal = 0 )
-

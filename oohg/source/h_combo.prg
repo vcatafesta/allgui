@@ -85,71 +85,71 @@ CLASS TCombo FROM TLabel
    DATA onRefresh             INIT NIL
    DATA lFocused              INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD nHeight             SETGET
+   METHOD nHeight             SETGET
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD ForceHide           BLOCK { |Self| SendMessage( ::hWnd, CB_SHOWDROPDOWN, 0, 0 ), ::Super:ForceHide() }
+   METHOD ForceHide           BLOCK { |Self| SendMessage( ::hWnd, CB_SHOWDROPDOWN, 0, 0 ), ::Super:ForceHide() }
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD DisplayValue        SETGET    /// Caption Alias
+   METHOD DisplayValue        SETGET    /// Caption Alias
 
-METHOD PreRelease
+   METHOD PreRelease
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_DrawItem
+   METHOD Events_DrawItem
 
-METHOD Events_MeasureItem
+   METHOD Events_MeasureItem
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD DeleteItem(nPos)    BLOCK { |Self,nPos| ComboboxDeleteString( ::hWnd, nPos ) }
+   METHOD DeleteItem(nPos)    BLOCK { |Self,nPos| ComboboxDeleteString( ::hWnd, nPos ) }
 
-METHOD DeleteAllItems      BLOCK { |Self| ComboboxReset( ::hWnd ), ::xOldValue := NIL }
+   METHOD DeleteAllItems      BLOCK { |Self| ComboboxReset( ::hWnd ), ::xOldValue := NIL }
 
-METHOD Item                BLOCK { |Self, nItem, uValue| ComboItem( Self, nItem, uValue ) }
+   METHOD Item                BLOCK { |Self, nItem, uValue| ComboItem( Self, nItem, uValue ) }
 
-METHOD ItemBySource
+   METHOD ItemBySource
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD ItemCount           BLOCK { |Self| ComboboxGetItemCount( ::hWnd ) }
+   METHOD ItemCount           BLOCK { |Self| ComboboxGetItemCount( ::hWnd ) }
 
-METHOD ShowDropDown
+   METHOD ShowDropDown
 
-METHOD SelectFirstItem     BLOCK { |Self| ComboSetCursel( ::hWnd, 1 ) }
+   METHOD SelectFirstItem     BLOCK { |Self| ComboSetCursel( ::hWnd, 1 ) }
 
-METHOD GetDropDownWidth
+   METHOD GetDropDownWidth
 
-METHOD SetDropDownWidth
+   METHOD SetDropDownWidth
 
-METHOD AutosizeDropDown
+   METHOD AutosizeDropDown
 
-METHOD Autosize            SETGET
+   METHOD Autosize            SETGET
 
-METHOD GetEditSel
+   METHOD GetEditSel
 
-METHOD SetEditSel
+   METHOD SetEditSel
 
-METHOD CaretPos            SETGET
+   METHOD CaretPos            SETGET
 
-METHOD ItemHeight
+   METHOD ItemHeight
 
-METHOD VisibleItems
+   METHOD VisibleItems
 
-METHOD Field               SETGET
+   METHOD Field               SETGET
 
-METHOD ValueSource         SETGET
+   METHOD ValueSource         SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -1467,9 +1467,9 @@ HB_FUNC_STATIC( TCOMBO_ITEMHEIGHT )   // METHOD ItemHeight()
 
 CLASS TListCombo FROM TControl STATIC
 
-METHOD Define
+   METHOD Define
 
-METHOD Events_VScroll
+   METHOD Events_VScroll
 
    EMPTY( _OOHG_AllVars )
 
@@ -1660,9 +1660,9 @@ CLASS TEditCombo FROM TControl STATIC
 
    DATA LastKey INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD Events
+   METHOD Events
 
    EMPTY( _OOHG_AllVars )
 
@@ -1700,4 +1700,3 @@ HB_FUNC( INITEDITCOMBO )
 }
 
 #pragma ENDDUMP
-

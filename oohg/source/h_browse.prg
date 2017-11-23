@@ -73,69 +73,69 @@ CLASS TOBrowse FROM TXBrowse
    * When Nil the browse behaves according to SET BROWESYNC value.
    */
 
-METHOD BrowseOnChange
+   METHOD BrowseOnChange
 
-METHOD CurrentRow              SETGET
+   METHOD CurrentRow              SETGET
 
-METHOD DbGoTo
+   METHOD DbGoTo
 
-METHOD DbSkip
+   METHOD DbSkip
 
-METHOD Define
+   METHOD Define
 
-METHOD Define3
+   METHOD Define3
 
-METHOD Delete
+   METHOD Delete
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD Down
+   METHOD Down
 
-METHOD EditAllCells
+   METHOD EditAllCells
 
-METHOD EditCell
+   METHOD EditCell
 
-METHOD EditGrid
+   METHOD EditGrid
 
-METHOD EditItem_B
+   METHOD EditItem_B
 
-METHOD End
+   METHOD End
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD FastUpdate
+   METHOD FastUpdate
 
-METHOD Home
+   METHOD Home
 
-METHOD MoveTo                  BLOCK { || Nil }
+   METHOD MoveTo                  BLOCK { || Nil }
 
-METHOD PageDown
+   METHOD PageDown
 
-METHOD PageUp
+   METHOD PageUp
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD ScrollUpdate
+   METHOD ScrollUpdate
 
-METHOD SetControlValue         BLOCK { || Nil }
+   METHOD SetControlValue         BLOCK { || Nil }
 
-METHOD SetScrollPos
+   METHOD SetScrollPos
 
-METHOD SetValue
+   METHOD SetValue
 
-METHOD TopBottom
+   METHOD TopBottom
 
-METHOD Up
+   METHOD Up
 
-METHOD UpDate
+   METHOD UpDate
 
-METHOD UpdateColors
+   METHOD UpdateColors
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
    MESSAGE GoBottom               METHOD End
    MESSAGE GoTop                  METHOD Home
@@ -2260,59 +2260,59 @@ CLASS TOBrowseByCell FROM TOBrowse
 
    DATA Type                      INIT "BROWSEBYCELL" READONLY
 
-METHOD AddColumn
+   METHOD AddColumn
 
-METHOD BrowseOnChange
+   METHOD BrowseOnChange
 
-METHOD CurrentCol              SETGET
+   METHOD CurrentCol              SETGET
 
-METHOD Define3
+   METHOD Define3
 
-METHOD Delete
+   METHOD Delete
 
-METHOD DeleteAllItems
+   METHOD DeleteAllItems
 
-METHOD DeleteColumn
+   METHOD DeleteColumn
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD Down
+   METHOD Down
 
-METHOD EditAllCells
+   METHOD EditAllCells
 
-METHOD EditCell
+   METHOD EditCell
 
-METHOD EditCell2
+   METHOD EditCell2
 
-METHOD EditGrid
+   METHOD EditGrid
 
-METHOD EditItem_B
+   METHOD EditItem_B
 
-METHOD End
+   METHOD End
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD Home
+   METHOD Home
 
-METHOD Left
+   METHOD Left
 
-METHOD PageDown
+   METHOD PageDown
 
-METHOD PageUp
+   METHOD PageUp
 
-METHOD Right
+   METHOD Right
 
-METHOD SetScrollPos
+   METHOD SetScrollPos
 
-METHOD SetSelectedColors
+   METHOD SetSelectedColors
 
-METHOD SetValue
+   METHOD SetValue
 
-METHOD Up
+   METHOD Up
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
    MESSAGE GoBottom               METHOD End
    MESSAGE GoTop                  METHOD Home
@@ -4006,4 +4006,3 @@ METHOD Right( lAppend ) CLASS TOBrowseByCell
    ENDIF
 
    RETURN lDone
-

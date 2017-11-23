@@ -69,11 +69,9 @@ _hmg_hpdf_startdoc()
 => ;
 _hmg_hpdf_startpage()
 
-
 #xcommand END HPDFPAGE ;
 => ;
 _hmg_hpdf_endpage()
-
 
 #xcommand END HPDFDOC ;
 => ;
@@ -168,7 +166,6 @@ _hmg_hpdf_abortdoc()
    => ;
    _HMG_HPDF_CURVE ( <Row> , <Col> , <nFromRow>, <nFromCol>, <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> )
 
-
 #xcommand SET HPDFDOC PASSWORD OWNER <cOwnerPass> [ USER <cUserPass> ] => _HMG_HPDF_SetPassword( <cOwnerPass>, <cUserPass> )
 
 #xcommand SET HPDFDOC COMPRESS <mode:NONE,TEXT,IMAGE,METADATA,ALL>     => _HMG_HPDF_SetCompression( <"mode"> )
@@ -225,7 +222,6 @@ _hmg_hpdf_abortdoc()
 ///////////////////////////////////////////////////////////////////////////////
 // PDF CONFIGURATION CONSTANTS
 ///////////////////////////////////////////////////////////////////////////////
-
 
 * Orientation
 
@@ -362,5 +358,3 @@ _hmg_hpdf_abortdoc()
 #define HPDF_PAPER_PENV_10_ROTATED     118 /* PRC Envelope #10 Rotated 458 x 324 mm */
 
 #define HPDF_PAPER_USER                256
-
-

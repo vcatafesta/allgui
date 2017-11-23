@@ -80,4 +80,3 @@ FUNCTION DoTest2( aArr )
    ASSIGN aArr := "Wrong" // Wrong assignment
 
    RETURN lOK
-

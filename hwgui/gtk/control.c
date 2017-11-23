@@ -11,7 +11,7 @@
  *
  * Copyright 2008 Luiz Rafael Culik Guimaraes <luiz at xharbour.com.br >
  * www - http://sites.uol.com.br/culikr/
- 
+
 */
 
 #include "guilib.h"
@@ -195,7 +195,6 @@ HB_FUNC( HWG_CREATEEDIT )
       hCtrl = gtk_entry_new(  );
    if( ulStyle & ES_PASSWORD )
       gtk_entry_set_visibility( ( GtkEntry * ) hCtrl, FALSE );
-
 
    GtkFixed *box = getFixedBox( ( GObject * ) HB_PARHANDLE( 1 ) );
    if( box )
@@ -635,7 +634,6 @@ HB_FUNC( HWG_CREATEOWNBTN )
 
 }
 
-
 HB_FUNC( HWG_ADDTOOLTIP )
 {
    if( !pTooltip )
@@ -810,8 +808,8 @@ HB_FUNC( HWG_CREATETOOLBAR )
 
 //   GtkFixed * box = getFixedBox( (GObject*) HB_PARHANDLE(1) );
 //   GtkWidget *tmp_image;
-//   GtkWidget *toolbutton1;   
-//   GtkWidget *toolbutton2;   
+//   GtkWidget *toolbutton1;
+//   GtkWidget *toolbutton2;
 //   gint tmp_toolbar_icon_size;
    GObject *handle = ( GObject * ) HB_PARHANDLE( 1 );
    GtkFixed *box = getFixedBox( handle );
@@ -863,7 +861,6 @@ HB_FUNC( HWG_CREATETOOLBARBUTTON )
 #endif
 }
 
-
 HB_FUNC( HWG_TOOLBAR_SETACTION )
 {
    GtkWidget *hCtrl = ( GtkWidget * ) HB_PARHANDLE( 1 );
@@ -893,16 +890,15 @@ static void tabchange_clicked( GtkNotebook * item,
 //  gpointer dwNewLong = g_object_get_data( (GObject*) item, "obj" );
 //  PHB_ITEM pObject = (PHB_ITEM) dwNewLong ;
 //  PHB_ITEM Disk=hb_itemPutNL( NULL, pagenum);
-//  hb_vmEvalBlockV( ( PHB_ITEM ) pData ,2,pObject,Disk);           
+//  hb_vmEvalBlockV( ( PHB_ITEM ) pData ,2,pObject,Disk);
 //  hb_vmEvalBlockV( ChangeDiskBlock, 1, Disk  );
 //  hb_itemRelease( Disk );
 //}
 
-
 HB_FUNC( HWG_TAB_SETACTION )
 {
    GtkWidget *hCtrl = ( GtkWidget * ) HB_PARHANDLE( 1 );
-//  gpointer dwNewLong = g_object_get_data( (GObject*) HB_PARHANDLE(1), "obj" );  
+//  gpointer dwNewLong = g_object_get_data( (GObject*) HB_PARHANDLE(1), "obj" );
    PHB_ITEM pItem = hb_itemParam( 2 );
    g_signal_connect( hCtrl, "switch-page",
          G_CALLBACK( tabchange_clicked ), ( void * ) pItem );
@@ -939,7 +935,6 @@ HB_FUNC( HWG_SETMONTHCALENDARDATE )
       gtk_calendar_select_month( GTK_CALENDAR( hCtrl ), lMonth, lYear );
       gtk_calendar_select_day( GTK_CALENDAR( hCtrl ), lDay );
 
-
    }
 }
 
@@ -961,7 +956,6 @@ HB_FUNC( HWG_GETMONTHCALENDARDATE )
    szDate[8] = 0;
    hb_retds( szDate );
 }
-
 
 HB_FUNC( HWG_CREATEIMAGE )
 {

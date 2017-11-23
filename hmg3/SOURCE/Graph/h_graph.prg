@@ -1116,4 +1116,3 @@ FUNCTION printgraph ( cWindowName , lPreview , lDialog )
    PrintWindow ( cWindowName , lPreview , lDialog , aLocation [1] , aLocation [2] , aLocation [3] , aLocation [4] )
 
    RETURN NIL
-

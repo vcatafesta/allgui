@@ -53,43 +53,43 @@ CLASS HStaticLink FROM HSTATICEX
 
 CLASS VAR winclass INIT "STATIC"
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor, hbitmap, bClick )
 
-METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor )
 
-METHOD INIT()
+   METHOD INIT()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD GoToLinkUrl( csLink )
+   METHOD GoToLinkUrl( csLink )
 
-METHOD GetLinkText()
+   METHOD GetLinkText()
 
-METHOD SetLinkUrl( csUrl )
+   METHOD SetLinkUrl( csUrl )
 
-METHOD GetLinkUrl()
+   METHOD GetLinkUrl()
 
-METHOD SetVisitedColor( sVisitedColor )
+   METHOD SetVisitedColor( sVisitedColor )
 
-METHOD SetHoverColor( cHoverColor )
+   METHOD SetHoverColor( cHoverColor )
 
-METHOD SetFireChild( lFlag )  INLINE ::m_bFireChild := lFlag
+   METHOD SetFireChild( lFlag )  INLINE ::m_bFireChild := lFlag
 
-METHOD OnClicked()
+   METHOD OnClicked()
 
-METHOD OnSetCursor( pWnd, nHitTest, message )
+   METHOD OnSetCursor( pWnd, nHitTest, message )
 
-METHOD SetLinkText( csLinkText )
+   METHOD SetLinkText( csLinkText )
 
-METHOD SetLinkColor( sLinkColor )
+   METHOD SetLinkColor( sLinkColor )
 
-METHOD PAint( lpDis )
+   METHOD PAint( lpDis )
 
-METHOD OnMouseMove( nFlags, lParam )
+   METHOD OnMouseMove( nFlags, lParam )
 
-METHOD Resize( x, y )
+   METHOD Resize( x, y )
 
 ENDCLASS
 
@@ -502,4 +502,3 @@ METHOD Resize( x, y ) CLASS HStaticLink
    ENDIF
 
    RETURN NIL
-

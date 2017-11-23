@@ -180,4 +180,3 @@ PROCEDURE MoveActiveWindow( hWnd )
    RC_CURSOR( "MINIGUI_FINGER" )
 
    RETURN
-

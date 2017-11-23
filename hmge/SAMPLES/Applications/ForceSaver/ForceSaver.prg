@@ -106,4 +106,3 @@ PROCEDURE ServiceProcess( mode )
    DECLARE DLL_TYPE_LONG GetCurrentProcessId() ;
       IN KERNEL32.DLL ;
       ALIAS GCP
-

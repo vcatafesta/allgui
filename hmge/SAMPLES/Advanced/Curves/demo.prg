@@ -128,4 +128,3 @@ STATIC FUNCTION DrawCurves()
       IN GDI32.DLL
 
    #endif
-

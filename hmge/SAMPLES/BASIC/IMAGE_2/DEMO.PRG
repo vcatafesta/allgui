@@ -125,4 +125,3 @@ PROCEDURE Define_Image (nSize)
    ENDIF
 
    RETURN
-

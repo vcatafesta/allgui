@@ -61,7 +61,6 @@ TCommPort::~TCommPort()
       CloseCommPort();
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 /////  TCommPort::OpenCommPort()
 /////
@@ -106,7 +105,6 @@ void TCommPort::OpenCommPort(void)
     // port is already open, or if the com port does not exist.
     if(m_hCom == INVALID_HANDLE_VALUE)
         throw ECommError(ECommError::OPEN_ERROR);
-
 
     // Now get the DCB properties of the port we just opened
     if(!GetCommState(m_hCom,&m_dcb))
@@ -518,7 +516,6 @@ void TCommPort::PutByte(BYTE value)
         throw ECommError(ECommError::WRITE_ERROR);
 }
 
-
 BYTE TCommPort::GetByte()
 {
     VerifyOpen();
@@ -530,7 +527,6 @@ BYTE TCommPort::GetByte()
 
     return value;
 }
-
 
 unsigned int TCommPort::BytesAvailable(void)
 {
@@ -555,7 +551,6 @@ unsigned int TCommPort::BytesOAvailable(void)
     return comstat.cbOutQue;
 }
 
-
 void TCommPort::SetCommPort(const std::string & port)
 {
     VerifyClosed();   // can't change comm port once comm is open
@@ -579,5 +574,3 @@ void TCommPort::GetCommProperties(COMMPROP &properties)
 
     properties = prop;
 }
-
-

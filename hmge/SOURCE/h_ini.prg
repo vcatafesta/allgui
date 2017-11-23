@@ -316,4 +316,3 @@ FUNCTION _GetSection( cSection, cIniFile )
    ENDIF
 
    RETURN aKeyValueList
-

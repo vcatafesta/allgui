@@ -273,4 +273,3 @@ HB_FUNC( HMG_ISWINDOWOBJECT )
 #pragma ENDDUMP
 
                      #endif
-

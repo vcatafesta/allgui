@@ -117,4 +117,3 @@ FUNCTION _GetArrayOfAllControlsForForm ( cFormName )
    NEXT i
 
    RETURN ASort( aRetVal )
-

@@ -200,4 +200,3 @@ FUNCTION export2dbf
    ENDIF
 
    RETURN NIL
-

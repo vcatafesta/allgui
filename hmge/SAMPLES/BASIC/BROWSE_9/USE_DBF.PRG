@@ -7,4 +7,3 @@ PROCEDURE USE_EMPLOYE
    USE employe INDEX employe, employec NEW
 
    RETURN
-

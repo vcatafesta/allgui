@@ -344,4 +344,3 @@ HB_FUNC ( CLOSETHISCD )
 }
 
 #pragma ENDDUMP
-

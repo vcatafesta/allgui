@@ -4409,4 +4409,3 @@ HB_FUNC( _HMG_PRINTER_GETMAXROW )       // hdcPrint, FontName, FontSize, nWidth,
 }
 
 #pragma ENDDUMP
-

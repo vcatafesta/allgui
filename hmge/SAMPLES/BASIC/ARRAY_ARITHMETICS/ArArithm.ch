@@ -4,4 +4,3 @@
           =>                                                            ;
           IF <v1> == NIL ; <v1> := <x1> ; END                           ;
           [; IF <vn> == NIL ; <vn> := <xn> ; END ]
-

@@ -228,4 +228,3 @@ STATIC FUNCTION Filtrar()
    Win_2.BR_1.SetFocus
 
    RETURN NIL
-

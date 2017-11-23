@@ -92,4 +92,3 @@ PROCEDURE GETITEM()
    aEval( a, {|x, i| msginfo ( hb_ValToStr( x ), 'Column ' + hb_ntos ( i ) )} )
 
    RETURN
-

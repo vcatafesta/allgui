@@ -78,7 +78,7 @@ CLASS HColumn INHERIT HObject
    //      {textColor, backColor, textColorSel, backColorSel} , ;
    //      {textColor, backColor, textColorSel, backColorSel} ) }
 
-METHOD New( cHeading,block,type,length,dec,lEditable,nJusHead,nJusLin,cPict,bValid,bWhen,aItem,bColorBlock,bHeadClick )
+   METHOD New( cHeading,block,type,length,dec,lEditable,nJusHead,nJusLin,cPict,bValid,bWhen,aItem,bColorBlock,bHeadClick )
 
 ENDCLASS
 
@@ -156,75 +156,75 @@ CLASS HBrowse INHERIT HControl
    DATA lBtnDbl   INIT .F.
    DATA nCursor   INIT 0
 
-METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
+   METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
       bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,lNoBorder,;
       lAppend,lAutoedit,bUpdate,bKeyDown,bPosChg,lMultiSelect )
 
-METHOD InitBrw( nType )
+   METHOD InitBrw( nType )
 
-METHOD Rebuild()
+   METHOD Rebuild()
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD AddColumn( oColumn )
+   METHOD AddColumn( oColumn )
 
-METHOD InsColumn( oColumn,nPos )
+   METHOD InsColumn( oColumn,nPos )
 
-METHOD DelColumn( nPos )
+   METHOD DelColumn( nPos )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD LineOut()
+   METHOD LineOut()
 
-METHOD HeaderOut( hDC )
+   METHOD HeaderOut( hDC )
 
-METHOD FooterOut( hDC )
+   METHOD FooterOut( hDC )
 
-METHOD SetColumn( nCol )
+   METHOD SetColumn( nCol )
 
-METHOD DoHScroll( wParam )
+   METHOD DoHScroll( wParam )
 
-METHOD DoVScroll( wParam )
+   METHOD DoVScroll( wParam )
 
-METHOD LineDown(lMouse)
+   METHOD LineDown(lMouse)
 
-METHOD LineUp()
+   METHOD LineUp()
 
-METHOD PageUp()
+   METHOD PageUp()
 
-METHOD PageDown()
+   METHOD PageDown()
 
-METHOD Home()  INLINE ::DoHScroll( SB_LEFT )
+   METHOD Home()  INLINE ::DoHScroll( SB_LEFT )
 
-METHOD Bottom(lPaint)
+   METHOD Bottom(lPaint)
 
-METHOD Top()
+   METHOD Top()
 
-METHOD ButtonDown( lParam )
+   METHOD ButtonDown( lParam )
 
-METHOD ButtonUp( lParam )
+   METHOD ButtonUp( lParam )
 
-METHOD ButtonDbl( lParam )
+   METHOD ButtonDbl( lParam )
 
-METHOD MouseMove( wParam, lParam )
+   METHOD MouseMove( wParam, lParam )
 
-METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
+   METHOD MouseWheel( nKeys, nDelta, nXPos, nYPos )
 
-METHOD Edit( wParam,lParam )
+   METHOD Edit( wParam,lParam )
 
-METHOD Append() INLINE (::Bottom(.F.),::LineDown())
+   METHOD Append() INLINE (::Bottom(.F.),::LineDown())
 
-METHOD RefreshLine()
+   METHOD RefreshLine()
 
-METHOD Refresh( lFull )
+   METHOD Refresh( lFull )
 
-METHOD ShowSizes()
+   METHOD ShowSizes()
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -1874,4 +1874,3 @@ STATIC FUNCTION HdrToken(cStr, nMaxLen, nCount)
    ENDDO
 
    RETURN NIL
-

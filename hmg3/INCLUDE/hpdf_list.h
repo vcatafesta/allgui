@@ -36,46 +36,37 @@ typedef struct _HPDF_List_Rec {
       void            **obj;
 } HPDF_List_Rec;
 
-
 HPDF_List
 HPDF_List_New  (HPDF_MMgr  mmgr,
                 HPDF_UINT  items_per_block);
 
-
 void
 HPDF_List_Free  (HPDF_List  list);
-
 
 HPDF_STATUS
 HPDF_List_Add  (HPDF_List  list,
                 void       *item);
-
 
 HPDF_STATUS
 HPDF_List_Insert  (HPDF_List  list,
                    void       *target,
                    void       *item);
 
-
 HPDF_STATUS
 HPDF_List_Remove  (HPDF_List  list,
                    void       *item);
-
 
 void*
 HPDF_List_RemoveByIndex  (HPDF_List  list,
                           HPDF_UINT  index);
 
-
 void*
 HPDF_List_ItemAt  (HPDF_List  list,
                    HPDF_UINT  index);
 
-
 HPDF_INT32
 HPDF_List_Find  (HPDF_List  list,
                  void       *item);
-
 
 void
 HPDF_List_Clear  (HPDF_List  list);
@@ -85,4 +76,3 @@ HPDF_List_Clear  (HPDF_List  list);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_LIST_H */
-

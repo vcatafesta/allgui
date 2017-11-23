@@ -52,4 +52,3 @@ FUNCTION CreateSpreadsheet( cName )
    /* Save the workbook and free any allocated memory. DON'T TRY DO IT TWICE! */
 
    RETURN workbook_close( workbook )
-

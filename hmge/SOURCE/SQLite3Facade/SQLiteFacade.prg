@@ -64,50 +64,29 @@ CREATE CLASS SQLiteFacade
    VAR db // POINTER
 
    EXPORT:
-
-METHOD init CONSTRUCTOR
-
-METHOD open          // returns LOGICAL
-
-METHOD openReadOnly  // returns LOGICAL
-
-METHOD prepare       // returns SQLiteFacadeStatement() object
-
-METHOD pack          // returns LOGICAL
-
-METHOD close         // returns LOGICAL
-
+   METHOD init CONSTRUCTOR
+   METHOD open          // returns LOGICAL
+   METHOD openReadOnly  // returns LOGICAL
+   METHOD prepare       // returns SQLiteFacadeStatement() object
+   METHOD pack          // returns LOGICAL
+   METHOD close         // returns LOGICAL
    // ---- information methods ----
-
-METHOD getFilename   // returns CHARACTER
-
-METHOD getMode       // returns NUMERIC
-
-METHOD getPointer    // returns POINTER
-
-METHOD isMemory      // returns LOGICAL
+   METHOD getFilename   // returns CHARACTER
+   METHOD getMode       // returns NUMERIC
+   METHOD getPointer    // returns POINTER
+   METHOD isMemory      // returns LOGICAL
 
    // Add methods June 4, 2013
-
-METHOD CreateTable( cTableName, aStruct, cPrimaryKey )
-
-METHOD GetTables( cTableName )
-
-METHOD ExistsTable( cTableName )
-
-METHOD CreateIndex( cIndex, cTableName, acFieldName, lUnique )
-
-METHOD DeleteTable( cTableName )
-
-METHOD DeleteIndex( cIndex, cTableName )
-
-METHOD Execute( cSql )
-
-METHOD BeginTransaction()
-
-METHOD CommitTransaction()
-
-METHOD RollBackTransaction()
+   METHOD CreateTable( cTableName, aStruct, cPrimaryKey )
+   METHOD GetTables( cTableName )
+   METHOD ExistsTable( cTableName )
+   METHOD CreateIndex( cIndex, cTableName, acFieldName, lUnique )
+   METHOD DeleteTable( cTableName )
+   METHOD DeleteIndex( cIndex, cTableName )
+   METHOD Execute( cSql )
+   METHOD BeginTransaction()
+   METHOD CommitTransaction()
+   METHOD RollBackTransaction()
 
 END CLASS
 
@@ -434,4 +413,3 @@ METHOD CreateTable( cTableName, aStruct, cPrimaryKey )
    nResult := sqlite3_exec( ::db, cSql )
 
    RETURN ( nResult == SQLITE_OK )
-

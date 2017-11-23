@@ -81,4 +81,3 @@ FUNCTION Col1Change()
    aCol1Rows[r] := v
 
    RETURN .T.
-

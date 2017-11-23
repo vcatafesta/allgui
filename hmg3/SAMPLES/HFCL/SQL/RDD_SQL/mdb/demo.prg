@@ -44,4 +44,3 @@ PROC main()
    Win_1.Activate
 
    RETURN
-

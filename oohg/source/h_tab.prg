@@ -63,49 +63,49 @@ CLASS TTabDirect FROM TTabRaw
    DATA lInternals            INIT .F.
    DATA nFirstValue           INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD EndTab
+   METHOD EndTab
 
-METHOD EndPage             BLOCK { || _OOHG_DeleteFrame( "TABPAGE" ) }
+   METHOD EndPage             BLOCK { || _OOHG_DeleteFrame( "TABPAGE" ) }
 
-METHOD ItemCount           BLOCK { |Self| LEN( ::aPages ) }
+   METHOD ItemCount           BLOCK { |Self| LEN( ::aPages ) }
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD Release
+   METHOD Release
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD Enabled             SETGET
+   METHOD Enabled             SETGET
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD ForceHide
+   METHOD ForceHide
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
-METHOD AddPage
+   METHOD AddPage
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD DeletePage
+   METHOD DeletePage
 
-METHOD RealPosition
+   METHOD RealPosition
 
-METHOD HidePage
+   METHOD HidePage
 
-METHOD ShowPage
+   METHOD ShowPage
 
-METHOD Caption
+   METHOD Caption
 
-METHOD Picture
+   METHOD Picture
 
 ENDCLASS
 
@@ -570,7 +570,7 @@ CLASS TTabCombo FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
 ENDCLASS
 
@@ -612,7 +612,7 @@ CLASS TTabRadio FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
 ENDCLASS
 
@@ -656,9 +656,9 @@ CLASS TTabMulti FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD AddPage
+   METHOD AddPage
 
 ENDCLASS
 
@@ -716,73 +716,73 @@ CLASS TMultiPage FROM TControlGroup
    DATA oPageClass                INIT TTabPage()
    DATA nFirstValue               INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD CreatePages
+   METHOD CreatePages
 
-METHOD ItemCount               BLOCK { |Self| LEN( ::aPages ) }
+   METHOD ItemCount               BLOCK { |Self| LEN( ::aPages ) }
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD Release
+   METHOD Release
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
-METHOD Enabled                 SETGET
+   METHOD Enabled                 SETGET
 
-METHOD Visible                 SETGET
+   METHOD Visible                 SETGET
 
-METHOD ForceHide
+   METHOD ForceHide
 
-METHOD SetFocus                BLOCK { |Self| ::oContainerBase:SetFocus() }
+   METHOD SetFocus                BLOCK { |Self| ::oContainerBase:SetFocus() }
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
-METHOD AddPage
+   METHOD AddPage
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD DeletePage
+   METHOD DeletePage
 
-METHOD RealPosition
+   METHOD RealPosition
 
-METHOD HidePage
+   METHOD HidePage
 
-METHOD ShowPage
+   METHOD ShowPage
 
-METHOD Caption
+   METHOD Caption
 
-METHOD Picture
+   METHOD Picture
 
-METHOD EndPage                 BLOCK { |Self| _OOHG_DeleteFrame( ::oPageClass:Type ) }
+   METHOD EndPage                 BLOCK { |Self| _OOHG_DeleteFrame( ::oPageClass:Type ) }
 
-METHOD EndTab
+   METHOD EndTab
 
    // Control-specific methods
 
-METHOD ContainerValue          SETGET
+   METHOD ContainerValue          SETGET
 
-METHOD ContainerCaption(x,y)   BLOCK { |Self,x,y| ::oContainerBase:Caption(x,y) }
+   METHOD ContainerCaption(x,y)   BLOCK { |Self,x,y| ::oContainerBase:Caption(x,y) }
 
-METHOD ContainerItemCount      BLOCK { |Self| ::oContainerBase:ItemCount() }
+   METHOD ContainerItemCount      BLOCK { |Self| ::oContainerBase:ItemCount() }
 
-METHOD InsertItem(x,y,z)       BLOCK { |Self,x,y,z| ::oContainerBase:InsertItem(x,y,z) }
+   METHOD InsertItem(x,y,z)       BLOCK { |Self,x,y,z| ::oContainerBase:InsertItem(x,y,z) }
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD hWnd                    BLOCK { |Self| IF( ::oContainerBase == nil, 0, ::oContainerBase:hWnd ) }
+   METHOD hWnd                    BLOCK { |Self| IF( ::oContainerBase == nil, 0, ::oContainerBase:hWnd ) }
 
-METHOD bBeforeChange           SETGET
+   METHOD bBeforeChange           SETGET
 
-METHOD OnClick                 SETGET
+   METHOD OnClick                 SETGET
 
-METHOD OnRClick                SETGET
+   METHOD OnRClick                SETGET
 
 ENDCLASS
 
@@ -1258,25 +1258,25 @@ CLASS TTabRaw FROM TControl
    DATA SetImageListCommand       INIT TCM_SETIMAGELIST
    DATA bBeforeChange             INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
-METHOD ItemCount               BLOCK { |Self| TabCtrl_GetItemCount( ::hWnd ) }
+   METHOD ItemCount               BLOCK { |Self| TabCtrl_GetItemCount( ::hWnd ) }
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD Caption
+   METHOD Caption
 
-METHOD Picture
+   METHOD Picture
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD TabsAreaHeight
+   METHOD TabsAreaHeight
 
 ENDCLASS
 
@@ -1447,15 +1447,15 @@ CLASS TTabPage FROM TControlGroup
    DATA nImage    INIT -1
    DATA Caption   INIT ""
 
-METHOD EndPage             BLOCK { |Self| _OOHG_DeleteFrame( ::Type ) }
+   METHOD EndPage             BLOCK { |Self| _OOHG_DeleteFrame( ::Type ) }
 
-METHOD ContainerVisible
+   METHOD ContainerVisible
 
-METHOD SetFocus            BLOCK { |Self| ::Container:SetFocus() , ::Container:Value := ::Position , Self }
+   METHOD SetFocus            BLOCK { |Self| ::Container:SetFocus() , ::Container:Value := ::Position , Self }
 
-METHOD Events_Size
+   METHOD Events_Size
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
 ENDCLASS
 
@@ -1512,15 +1512,15 @@ CLASS TTabPageInternal FROM TFormInternal
    DATA lHidden    INIT .F.
    DATA Caption    INIT ""
 
-METHOD Define
+   METHOD Define
 
-METHOD EndPage             BLOCK { |Self| _OOHG_DeleteFrame( ::Type ) }
+   METHOD EndPage             BLOCK { |Self| _OOHG_DeleteFrame( ::Type ) }
 
-METHOD Events_Size
+   METHOD Events_Size
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
-METHOD SetFocus            BLOCK { |Self| ::Container:SetFocus() , ::Container:Value := ::Position , ::Super:SetFocus() , Self }
+   METHOD SetFocus            BLOCK { |Self| ::Container:SetFocus() , ::Container:Value := ::Position , ::Super:SetFocus() , Self }
 
 ENDCLASS
 
@@ -1743,4 +1743,3 @@ HB_FUNC( TABCTRL_GETROWCOUNT )
 }
 
 #pragma ENDDUMP
-

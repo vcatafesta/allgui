@@ -74,4 +74,3 @@ PROCEDURE CambiarStatusBar
    /*
    * EOF
    */
-

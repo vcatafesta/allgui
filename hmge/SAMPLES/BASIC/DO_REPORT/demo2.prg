@@ -57,4 +57,3 @@ PROCEDURE ButtonClick()
       nodatetimestamp
 
    RETURN
-

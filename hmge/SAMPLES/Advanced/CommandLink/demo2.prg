@@ -99,4 +99,3 @@ PROCEDURE ReleaseCLbuttonRes
    Form_1.clb_4.Release
 
    RETURN
-

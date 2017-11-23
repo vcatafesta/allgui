@@ -102,4 +102,3 @@ FUNCTION Proc_Paint_on_the_Bitmap
    BT_DeleteDC (BTstruct)
 
    RETURN hBitmap
-

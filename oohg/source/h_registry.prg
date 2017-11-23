@@ -59,19 +59,19 @@ CLASS TReg32
    DATA nError
    DATA lError
 
-METHOD New( nKey, cRegKey, lShowError )
+   METHOD New( nKey, cRegKey, lShowError )
 
-METHOD Create( nKey, cRegKey, lShowError )
+   METHOD Create( nKey, cRegKey, lShowError )
 
-METHOD Get( cSubKey, uVar )
+   METHOD Get( cSubKey, uVar )
 
-METHOD Set( cSubKey, uVar, nType )
+   METHOD Set( cSubKey, uVar, nType )
 
-METHOD Delete( cSubKey )
+   METHOD Delete( cSubKey )
 
-METHOD KeyDelete( cSubKey )
+   METHOD KeyDelete( cSubKey )
 
-METHOD Close() BLOCK {| Self | If( ::lError, , ( ::nError := RegCloseKey( ::nHandle ) ) ) }
+   METHOD Close() BLOCK {| Self | If( ::lError, , ( ::nError := RegCloseKey( ::nHandle ) ) ) }
 
    EMPTY( _OOHG_AllVars )
 
@@ -434,4 +434,3 @@ FUNCTION DeleteRegistryKey( nKey, cRegKey, cSubKey )
    oReg:Close()
 
    RETURN lSuccess
-

@@ -167,4 +167,3 @@ FUNCTION xToC ( x )
    ENDIF
 
    RETURN c
-

@@ -52,4 +52,3 @@ STATIC PROCEDURE fncSuma( )
    RETURN
 
    #include "fncMyError.prg"
-

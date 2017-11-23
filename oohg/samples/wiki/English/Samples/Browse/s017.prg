@@ -77,4 +77,3 @@ FUNCTION CloseTables()
    /*
    * EOF
    */
-

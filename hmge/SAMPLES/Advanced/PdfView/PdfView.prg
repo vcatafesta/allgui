@@ -2895,4 +2895,3 @@ FUNCTION LangStr(cStr, lRemoveAmpersand)
    ENDIF
 
    RETURN hb_Translate( cText, "UTF8", "CP1251" )
-

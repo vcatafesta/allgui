@@ -214,4 +214,3 @@ HB_FUNC( CAP_EDITCOPY )
 #pragma ENDDUMP
 
    #endif
-

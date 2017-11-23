@@ -159,4 +159,3 @@ PROCEDURE RemoveFilePrg()
    ENDIF
 
    RETURN
-

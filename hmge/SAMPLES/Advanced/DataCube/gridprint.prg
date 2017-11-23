@@ -63,7 +63,6 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
    LOCAL maxcol1 := 0
    LOCAL i := 0
    PRIVATE msgarr := {"Nothing to print",;    //1
-
    "No printers have been installed!",;  //2
    "Print Wizard",;  //3
    "Report Writer",; //4
@@ -1406,4 +1405,3 @@ FUNCTION printpreviewline(row,col,aitems,ajustify,sizesarr,fontname,size1,resize
    NEXT count1
 
    RETURN NIL
-

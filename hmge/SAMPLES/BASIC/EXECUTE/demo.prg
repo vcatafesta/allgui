@@ -56,4 +56,3 @@ FUNCTION DoWhile
    DO EVENTS
 
    RETURN lContinue
-

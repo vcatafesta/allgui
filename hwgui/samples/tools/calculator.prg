@@ -77,4 +77,3 @@ STATIC FUNCTION oValue_onKeyDown( This, nKeyPress, nShiftAltCtrl )
    ENDIF
 
    RETURN .T.
-

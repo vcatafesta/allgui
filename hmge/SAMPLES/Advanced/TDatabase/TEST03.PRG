@@ -27,4 +27,3 @@ FUNCTION main
    oDB:close()
 
    RETURN NIL
-

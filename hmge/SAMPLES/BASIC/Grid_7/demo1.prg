@@ -113,4 +113,3 @@ FUNCTION SetSelectionValue( newValue )
    Form_1.Grid_1.Cell( a[1], a[2] ) := newValue
 
    RETURN NIL
-

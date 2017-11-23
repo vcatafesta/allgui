@@ -188,4 +188,3 @@ PROCEDURE Ajust()
    oChart:Height := iif( oWnd:Height - 35 < 50, 50, oWnd:Height - 35 )
 
    RETURN(Nil)
-

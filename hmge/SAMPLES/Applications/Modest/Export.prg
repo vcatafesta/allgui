@@ -155,4 +155,3 @@ STATIC PROCEDURE SayText( nIdent, cText, nLenRow )
    RETURN
 
    ****** End of SayText ******
-

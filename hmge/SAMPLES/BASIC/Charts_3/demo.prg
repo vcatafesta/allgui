@@ -309,4 +309,3 @@ PROCEDURE OpenTable
    DrawChart_1( aser1 )
 
    RETURN
-

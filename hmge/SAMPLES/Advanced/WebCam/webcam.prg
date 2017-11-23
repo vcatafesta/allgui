@@ -262,4 +262,3 @@ HB_FUNC( CAPFILESAVEDIB )
 }
 
 #pragma ENDDUMP
-

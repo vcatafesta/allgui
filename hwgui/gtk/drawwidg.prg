@@ -30,13 +30,13 @@ CLASS VAR aFonts   INIT {}
    DATA charset, italic, Underline, StrikeOut
    DATA nCounter   INIT 1
 
-METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle, lLinux )
+   METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, fdwUnderline, fdwStrikeOut, nHandle, lLinux )
 
-METHOD Select( oFont )
+   METHOD Select( oFont )
 
-METHOD Release()
+   METHOD Release()
 
-METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
+   METHOD SetFontStyle( lBold, nCharSet, lItalic, lUnder, lStrike, nHeight )
 
 ENDCLASS
 
@@ -162,11 +162,11 @@ CLASS VAR aPens   INIT {}
    DATA style, width, color
    DATA nCounter   INIT 1
 
-METHOD Add( nStyle,nWidth,nColor )
+   METHOD Add( nStyle,nWidth,nColor )
 
-METHOD Get( nStyle,nWidth,nColor )
+   METHOD Get( nStyle,nWidth,nColor )
 
-METHOD Release()
+   METHOD Release()
 
 ENDCLASS
 
@@ -280,9 +280,9 @@ CLASS VAR aBrushes   INIT {}
    DATA nHatch   INIT 99
    DATA nCounter INIT 1
 
-METHOD Add( nColor )
+   METHOD Add( nColor )
 
-METHOD Release()
+   METHOD Release()
 
 ENDCLASS
 
@@ -353,15 +353,15 @@ CLASS VAR aBitmaps   INIT {}
    DATA nWidth, nHeight
    DATA nCounter   INIT 1
 
-METHOD AddResource( name )
+   METHOD AddResource( name )
 
-METHOD AddFile( name,HDC )
+   METHOD AddFile( name,HDC )
 
-METHOD Transparent( trColor )
+   METHOD Transparent( trColor )
 
-METHOD AddWindow( oWnd,lFull )
+   METHOD AddWindow( oWnd,lFull )
 
-METHOD Release()
+   METHOD Release()
 
 ENDCLASS
 
@@ -498,11 +498,11 @@ CLASS VAR aIcons   INIT {}
    DATA nCounter   INIT 1
    DATA nWidth, nHeight
 
-METHOD AddResource( name )
+   METHOD AddResource( name )
 
-METHOD AddFile( name,HDC )
+   METHOD AddFile( name,HDC )
 
-METHOD Release()
+   METHOD Release()
 
 ENDCLASS
 
@@ -621,4 +621,3 @@ METHOD Release() CLASS HIcon
    NEXT
 
    RETURN
-

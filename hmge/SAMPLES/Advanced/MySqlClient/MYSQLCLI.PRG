@@ -1131,4 +1131,3 @@ FUNCTION l2c( _bool )
 FUNCTION ntrim( nValue )
 
    RETURN alltrim(str(nValue))
-

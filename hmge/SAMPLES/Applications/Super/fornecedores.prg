@@ -876,4 +876,3 @@ STATIC FUNCTION find_grupo_fornecedores()
    ENDIF
 
    return(nil)
-

@@ -80,4 +80,3 @@ FUNCTION ChangeStatus( oGrid, oButt )
    /*
    * EOF
    */
-

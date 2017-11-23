@@ -11,4 +11,3 @@ FUNCTION Main()
    alert('Hello')
 
    RETURN NIL
-

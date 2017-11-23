@@ -80,4 +80,3 @@ FUNCTION CambiarEstado( oGrid, oBotn )
    /*
    * EOF
    */
-

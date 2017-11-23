@@ -440,9 +440,7 @@ STATIC PROCEDURE GetArc( cPath, cFile )
    */
 
    /*
-
    Static Function ZipIndex( cArcFile )
-
    Local aFiles := {}                      , ;
    hUnzip := HB_UnZipOpen( cArcFile ), ;
    nError                            , ;
@@ -934,4 +932,3 @@ HB_FUNC_STATIC( SETENVIRONMENTVARIABLE )
 }
 
 #pragma ENDDUMP
-

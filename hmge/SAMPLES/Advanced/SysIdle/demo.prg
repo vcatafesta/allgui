@@ -70,4 +70,3 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
    ENDIF
 
    RETURN Events( hWnd, nMsg, wParam, lParam )
-

@@ -441,4 +441,3 @@ STATIC FUNCTION SQLiteFacadeErrorHandler( oError )
    QUIT
 
    RETURN ( NIL )
-

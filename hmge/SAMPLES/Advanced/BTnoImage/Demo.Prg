@@ -74,4 +74,3 @@ FUNCTION SetNewImage( cControl, cFileName )
    BT_HMGSetImage ( cForm, cControl, hBitmap, .F. )
 
    RETURN NIL
-

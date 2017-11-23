@@ -1,20 +1,20 @@
 /*
- * $Id: mytbsel.fmg,v 1.2 2017/08/25 19:03:22 fyurisich Exp $
- */
+* $Id: mytbsel.fmg,v 1.2 2017/08/25 19:03:22 fyurisich Exp $
+*/
 
 * ooHG IDE Plus form generated code
 * (c) 2003-2017 Ciro Vargas Clemow <cvc@oohg.org>
 
 DEFINE WINDOW TEMPLATE ;
-   AT 100, 100 ;
-   WIDTH 370 ;
-   HEIGHT 350 ;
-   TITLE 'ooHG IDE+ Toolbar selector' ;
-   MODAL ;
-   FONT 'Arial' ;
-   SIZE 10 ;
-   CLIENTAREA ;
-   ON INIT ( aEval( ::aToolBars, { |oTb| oLst:AddItem( oTb:Name ) } ), oLst:Value := Min( 1, ::Count ), oEdit:Enabled := oDel:Enabled := ( ::Count > 0 ) )
+      AT 100, 100 ;
+      WIDTH 370 ;
+      HEIGHT 350 ;
+      TITLE 'ooHG IDE+ Toolbar selector' ;
+      MODAL ;
+      FONT 'Arial' ;
+      SIZE 10 ;
+      CLIENTAREA ;
+      ON INIT ( aEval( ::aToolBars, { |oTb| oLst:AddItem( oTb:Name ) } ), oLst:Value := Min( 1, ::Count ), oEdit:Enabled := oDel:Enabled := ( ::Count > 0 ) )
 
    @ 15, 30 LABEL label_1 ;
       WIDTH 120 ;
@@ -72,4 +72,3 @@ DEFINE WINDOW TEMPLATE ;
       ACTION ThisWindow.Release()
 
 END WINDOW
-

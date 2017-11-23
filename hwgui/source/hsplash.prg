@@ -14,11 +14,11 @@ CLASS HSplash
    DATA oTimer
    DATA oDlg
 
-METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CONSTRUCTOR
+   METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CONSTRUCTOR
 
-METHOD CountSeconds( oTime, oDlg )
+   METHOD CountSeconds( oTime, oDlg )
 
-METHOD Release() INLINE ::oDlg:Close()
+   METHOD Release() INLINE ::oDlg:Close()
 
 ENDCLASS
 
@@ -60,4 +60,3 @@ METHOD CountSeconds( oTime, oDlg )
    SET TIMER ::oTimer OF oDlg VALUE oTime  ACTION { || hwg_EndDialog( hwg_GetModalHandle() ) }
 
    RETURN NIL
-

@@ -49,4 +49,3 @@ FUNCTION Test()
    ACTIVATE DIALOG oForm
 
    RETURN NIL
-

@@ -8,7 +8,6 @@
 #define DLG_SECOND                     1002
 #define DLG_THIRD                      1003
 
-
 #define IDC_STC1 101
 #define IDC_STC  102
 #define IDC_STC3 104

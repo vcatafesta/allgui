@@ -134,4 +134,3 @@ FUNCTION WrView()
    SELECT( obl )
 
    RETURN NIL
-

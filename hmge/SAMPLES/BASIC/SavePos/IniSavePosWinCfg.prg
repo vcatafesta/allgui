@@ -114,4 +114,3 @@ STATIC FUNCTION GetIni( cSection, cEntry, cDefault, cFile )
 STATIC FUNCTION WriteIni( cSection, cEntry, cValue, cFile )
 
    RETURN( WritePrivateProfileString( cSection, cEntry, cValue, cFile ) )
-

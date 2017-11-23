@@ -56,24 +56,24 @@ CLASS VAR aModalDialogs  SHARED INIT {}
    DATA lModal
    DATA lActivated INIT .F.
 
-METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
+   METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
       bPaint,bGfocus,bLfocus,bOther,lClipper,oBmp,oIcon,lExitOnEnter,nHelpId,xResourceID, lExitOnEsc )
 
-METHOD Activate( lNoModal )
+   METHOD Activate( lNoModal )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD AddItem( oWnd,lModal )
+   METHOD AddItem( oWnd,lModal )
 
-METHOD DelItem( oWnd,lModal )
+   METHOD DelItem( oWnd,lModal )
 
-METHOD FindDialog( hWnd )
+   METHOD FindDialog( hWnd )
 
-METHOD GetActive()
+   METHOD GetActive()
 
-METHOD Center()   INLINE Hwg_CenterWindow( Self )
+   METHOD Center()   INLINE Hwg_CenterWindow( Self )
 
-METHOD Close()    INLINE hwg_EndDialog( ::handle )
+   METHOD Close()    INLINE hwg_EndDialog( ::handle )
 
 ENDCLASS
 
@@ -368,4 +368,3 @@ FUNCTION hwg_SetDlgKey( oDlg, nctrl, nkey, block )
    ENDIF
 
    RETURN .T.
-

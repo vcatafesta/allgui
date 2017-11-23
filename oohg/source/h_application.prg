@@ -60,37 +60,37 @@ CLASS TApplication
    DATA Args         INIT GetCommandLineArgs() READONLY
    DATA ExeName      INIT GetProgramFileName() READONLY
 
-METHOD BackColor  SETGET
+   METHOD BackColor  SETGET
 
-METHOD Col        SETGET
+   METHOD Col        SETGET
 
-METHOD Cursor     SETGET
+   METHOD Cursor     SETGET
 
-METHOD Drive      BLOCK { |Self| Left( ::ExeName, 1 ) }
+   METHOD Drive      BLOCK { |Self| Left( ::ExeName, 1 ) }
 
-METHOD FormObject BLOCK { || _OOHG_Main }
+   METHOD FormObject BLOCK { || _OOHG_Main }
 
-METHOD Handle     BLOCK { || If( HB_IsObject( _OOHG_Main ), _OOHG_Main:hWnd, Nil ) }
+   METHOD Handle     BLOCK { || If( HB_IsObject( _OOHG_Main ), _OOHG_Main:hWnd, Nil ) }
 
-METHOD Height     SETGET
+   METHOD Height     SETGET
 
-METHOD HelpButton SETGET
+   METHOD HelpButton SETGET
 
-METHOD Icon       SETGET
+   METHOD Icon       SETGET
 
-METHOD MainName   BLOCK { || If( HB_IsObject( _OOHG_Main ), _OOHG_Main:Name, Nil ) }
+   METHOD MainName   BLOCK { || If( HB_IsObject( _OOHG_Main ), _OOHG_Main:Name, Nil ) }
 
-METHOD Name       BLOCK { |Self| Substr( ::ExeName, RAt( '\', ::ExeName ) + 1 ) }
+   METHOD Name       BLOCK { |Self| Substr( ::ExeName, RAt( '\', ::ExeName ) + 1 ) }
 
-METHOD Path       BLOCK { |Self| Left( ::ExeName, RAt( '\', ::ExeName ) - 1 ) }
+   METHOD Path       BLOCK { |Self| Left( ::ExeName, RAt( '\', ::ExeName ) - 1 ) }
 
-METHOD Row        SETGET
+   METHOD Row        SETGET
 
-METHOD Title      SETGET
+   METHOD Title      SETGET
 
-METHOD TopMost    SETGET
+   METHOD TopMost    SETGET
 
-METHOD Width      SETGET
+   METHOD Width      SETGET
 
 ENDCLASS
 
@@ -161,4 +161,3 @@ STATIC FUNCTION GetCommandLineArgs
    NEXT i
 
    RETURN aArgs
-

@@ -181,4 +181,3 @@ STATIC FUNCTION VerItem( nItem )
    /*
    * EOF
    */
-

@@ -550,4 +550,3 @@ STATIC FUNCTION WriteScript( han,cScript,lPrg )
    ENDIF
 
    RETURN NIL
-

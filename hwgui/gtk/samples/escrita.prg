@@ -80,4 +80,3 @@ FUNCTION Main()
    hwg_Msginfo( mnome )
 
    RETURN NIL
-

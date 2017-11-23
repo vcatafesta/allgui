@@ -174,4 +174,3 @@ FUNCTION XRound(x, nDec)
    // Give x the proper number of decimal places upon returning:
 
    Return(XFix(x, nDec))
-

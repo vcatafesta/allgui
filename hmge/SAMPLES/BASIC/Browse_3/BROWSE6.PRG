@@ -93,4 +93,3 @@ PROCEDURE PaintDoubleBuffer( lSwitch )
    ENDIF
 
    RETURN
-

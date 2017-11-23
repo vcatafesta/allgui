@@ -416,7 +416,7 @@ CLASS HDesigner
    DATA lShowGrid    INIT .F.
    DATA lSnapToGrid  INIT .F.
 
-METHOD New   INLINE Self
+   METHOD New   INLINE Self
 
 ENDCLASS
 
@@ -881,4 +881,3 @@ FUNCTION HWLASTKEY
    RETURN 0
 
    // :END LFB
-

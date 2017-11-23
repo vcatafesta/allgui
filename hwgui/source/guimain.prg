@@ -841,4 +841,3 @@ FUNCTION HWG_ScrollHV( oForm, msg,wParam,lParam )
    ENDIF
 
    RETURN NIL
-

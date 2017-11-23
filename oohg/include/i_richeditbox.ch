@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 /*---------------------------------------------------------------------------
 STANDARD VERSION
 ---------------------------------------------------------------------------*/
@@ -70,7 +69,7 @@ STANDARD VERSION
       [ FIELD <field> ] ;
       [ FILE <file> ] ;
       [ <plain : PLAINTEXT> ] ;
-		[ FILETYPE <type> ] ;
+      [ FILETYPE <type> ] ;
       [ VALUE <value> ] ;
       [ < readonly: READONLY > ] ;
       [ FONT <f> ] ;
@@ -123,7 +122,7 @@ SPLITBOX VERSION
       [ FIELD <field> ] ;
       [ FILE <file> ] ;
       [ <plain : PLAINTEXT> ] ;
-		[ FILETYPE <type> ] ;
+      [ FILETYPE <type> ] ;
       [ VALUE <value> ] ;
       [ < readonly: READONLY > ] ;
       [ FONT <f> ] ;

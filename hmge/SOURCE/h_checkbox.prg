@@ -576,4 +576,3 @@ FUNCTION _DefineImageCheckButton ( ControlName, ParentFormName, x, y, BitMap, ;
    ENDIF
 
    RETURN NIL
-

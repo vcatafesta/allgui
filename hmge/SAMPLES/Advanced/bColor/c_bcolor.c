@@ -62,11 +62,11 @@ static DWORD rgb_ZG[6]={ 0x00CCEDE1, 0x00CCEDE1, 0x00C0EDDC, 0x00A3DBC6, 0x0085A
 
 #define MAX_COLOR_RGB2 39
 
-static char  *rgb_NAME[]={ 
+static char  *rgb_NAME[]={
 /*  1 */   "YL Соломенный",
 /*  2 */   "Y  Желтый",
 /*  3 */   "H  Коричневый",
-/*  4 */   "HR Коричнево красноватый", 
+/*  4 */   "HR Коричнево красноватый",
 /*  5 */   "RH Красно коричневатый",
 /*  6 */   "R  Красный",
 /*  7 */   "RD Темно красный",
@@ -99,7 +99,7 @@ static char  *rgb_NAME[]={
 /* 34 */   "OL Грязная зелень",
 /* 35 */   "O  Оливки",
 /* 36 */   "W  Черно белый",
-/* 37 */   "Z  Зарплата",    
+/* 37 */   "Z  Зарплата",
 /* 38 */   "ZB Зарплата Голубая",
 /* 39 */   "ZG Зарплата Зеленая" };
 
@@ -114,7 +114,7 @@ HB_FUNC( BCOLOR2 )
   char cc[3];
 
   dwColor = DEF_COLOR2;
-  
+
   if( HB_ISNUM(1) ){
       n = hb_parni(1);
 
@@ -131,7 +131,7 @@ HB_FUNC( BCOLOR2 )
       n = 3;
       j = 0;
 
-      cc[0] = ' '; 
+      cc[0] = ' ';
       cc[1] = ' ';
       cc[2] = 0;
 
@@ -152,7 +152,7 @@ HB_FUNC( BCOLOR2 )
       {
          case 'Y' :
                      switch( cc[1] ){
-                            case 'L' : dwColor = rgb_YL[n]; break; 
+                            case 'L' : dwColor = rgb_YL[n]; break;
                             case ' ' : dwColor = rgb_Y [n]; break;
                      }
                      break;
@@ -175,74 +175,74 @@ HB_FUNC( BCOLOR2 )
 
          case 'M' :
                      switch( cc[1] ){
-                            case 'R' : dwColor = rgb_MR[n]; break; 
-                            case 'L' : dwColor = rgb_ML[n]; break; 
-                            case 'V' : dwColor = rgb_MV[n]; break; 
-                            case ' ' : dwColor = rgb_M [n]; break; 
+                            case 'R' : dwColor = rgb_MR[n]; break;
+                            case 'L' : dwColor = rgb_ML[n]; break;
+                            case 'V' : dwColor = rgb_MV[n]; break;
+                            case ' ' : dwColor = rgb_M [n]; break;
                      }
                      break;
 
          case 'V' :
                      switch( cc[1] ){
-                            case 'M' : dwColor = rgb_VM[n]; break; 
-                            case 'D' : dwColor = rgb_VD[n]; break; 
-                            case 'B' : dwColor = rgb_VB[n]; break; 
-                            case ' ' : dwColor = rgb_V [n]; break; 
+                            case 'M' : dwColor = rgb_VM[n]; break;
+                            case 'D' : dwColor = rgb_VD[n]; break;
+                            case 'B' : dwColor = rgb_VB[n]; break;
+                            case ' ' : dwColor = rgb_V [n]; break;
                      }
                      break;
 
          case 'B' :
                      switch( cc[1] ){
-                            case 'D' : dwColor = rgb_BD[n]; break; 
-                            case 'C' : dwColor = rgb_BC[n]; break; 
-                            case ' ' : dwColor = rgb_B [n]; break; 
+                            case 'D' : dwColor = rgb_BD[n]; break;
+                            case 'C' : dwColor = rgb_BC[n]; break;
+                            case ' ' : dwColor = rgb_B [n]; break;
                      }
                      break;
 
          case 'C' :
                      switch( cc[1] ){
-                            case 'D' : dwColor = rgb_CD[n]; break; 
-                            case 'L' : dwColor = rgb_CL[n]; break; 
-                            case 'G' : dwColor = rgb_CG[n]; break; 
-                            case ' ' : dwColor = rgb_C [n]; break; 
+                            case 'D' : dwColor = rgb_CD[n]; break;
+                            case 'L' : dwColor = rgb_CL[n]; break;
+                            case 'G' : dwColor = rgb_CG[n]; break;
+                            case ' ' : dwColor = rgb_C [n]; break;
                      }
                      break;
 
          case 'A' :
-                     
+
                      switch( cc[1] ){
-                            case 'C' : dwColor = rgb_AC[n]; break; 
-                            case ' ' : dwColor = rgb_A [n]; break; 
+                            case 'C' : dwColor = rgb_AC[n]; break;
+                            case ' ' : dwColor = rgb_A [n]; break;
                      }
                      break;
 
          case 'G' :
                      switch( cc[1] ){
-                            case 'A' : dwColor = rgb_GA[n]; break; 
-                            case 'L' : dwColor = rgb_GL[n]; break; 
-                            case 'F' : dwColor = rgb_GF[n]; break; 
-                            case 'G' : dwColor = rgb_GG[n]; break; 
-                            case 'N' : dwColor = rgb_GN[n]; break; 
-                            case 'D' : dwColor = rgb_GD[n]; break; 
-                            case 'O' : dwColor = rgb_GO[n]; break; 
-                            case ' ' : dwColor = rgb_G [n]; break; 
+                            case 'A' : dwColor = rgb_GA[n]; break;
+                            case 'L' : dwColor = rgb_GL[n]; break;
+                            case 'F' : dwColor = rgb_GF[n]; break;
+                            case 'G' : dwColor = rgb_GG[n]; break;
+                            case 'N' : dwColor = rgb_GN[n]; break;
+                            case 'D' : dwColor = rgb_GD[n]; break;
+                            case 'O' : dwColor = rgb_GO[n]; break;
+                            case ' ' : dwColor = rgb_G [n]; break;
                      }
                      break;
 
          case 'O' :
                      switch( cc[1] ){
-                            case 'L' : dwColor = rgb_OL[n]; break; 
-                            case ' ' : dwColor = rgb_O [n]; break; 
+                            case 'L' : dwColor = rgb_OL[n]; break;
+                            case ' ' : dwColor = rgb_O [n]; break;
                      }
                      break;
 
-         case 'W' :  dwColor = rgb_W[n];   break;  
+         case 'W' :  dwColor = rgb_W[n];   break;
 
-         case 'Z' :  
+         case 'Z' :
                      switch( cc[1] ){
-                            case 'G' : dwColor = rgb_ZG[n]; break; 
-                            case 'B' : dwColor = rgb_ZB[n]; break; 
-                            case ' ' : dwColor = rgb_Z [n]; break; 
+                            case 'G' : dwColor = rgb_ZG[n]; break;
+                            case 'B' : dwColor = rgb_ZB[n]; break;
+                            case ' ' : dwColor = rgb_Z [n]; break;
                      }
                      break;
       }
@@ -253,10 +253,10 @@ HB_FUNC( BCOLOR2 )
   hb_reta( 3 );
   HB_STORNI(  _RGB[0], -1, 1 );
   HB_STORNI(  _RGB[1], -1, 2 );
-  HB_STORNI(  _RGB[2], -1, 3 ); 
+  HB_STORNI(  _RGB[2], -1, 3 );
 }
 
-static DWORD _RGB_N[5]={ 0x00B2AEAE,0x00A4A0A0,0x00808080,0x00595959,0x00000000 }; 
+static DWORD _RGB_N[5]={ 0x00B2AEAE,0x00A4A0A0,0x00808080,0x00595959,0x00000000 };
 static DWORD _RGB_B[5]={ 0x00F9D4E2,0x00F0CAA6,0x00FF0000,0x00B30000,0x00800000 };
 static DWORD _RGB_G[5]={ 0x00E5DCE5,0x00C0DCC0,0x0000FF00,0x0000B300,0x00008000 };
 static DWORD _RGB_C[5]={ 0x00FFFFE5,0x00FFFFAA,0x00FFFF00,0x00B3B300,0x00808000 };
@@ -318,7 +318,7 @@ HB_FUNC( BCOLOR )
 
             case 'Z' :
             case 'z' :  dwColor = _RGB_Z[i]; break;
-      }   
+      }
   }
 
   _RGB = (BYTE *) &dwColor;
@@ -326,7 +326,7 @@ HB_FUNC( BCOLOR )
   hb_reta( 3 );
   HB_STORNI( _RGB[0], -1, 1 );
   HB_STORNI( _RGB[1], -1, 2 );
-  HB_STORNI( _RGB[2], -1, 3 ); 
+  HB_STORNI( _RGB[2], -1, 3 );
 }
 
 #pragma ENDDUMP

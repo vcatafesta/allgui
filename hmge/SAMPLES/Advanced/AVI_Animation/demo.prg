@@ -96,4 +96,3 @@ PROCEDURE Animate_Progress
    ENDIF
 
    RETURN
-

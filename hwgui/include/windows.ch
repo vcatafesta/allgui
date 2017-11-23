@@ -62,7 +62,7 @@
 #define WM_MENUCHAR                     288    //= $0120
 
 #define WM_ENTERIDLE                    289
-#define WM_CHANGEUISTATE                295   //0x127 
+#define WM_CHANGEUISTATE                295   //0x127
 #define WM_UPDATEUISTATE                296   //0x128
 #define WM_QUERYUISTATE                 297   //0x0129
 
@@ -80,13 +80,13 @@
 #define WM_LBUTTONDBLCLK                515    // 0x0203
 #define WM_RBUTTONDOWN                  516    // 0x0204
 #define WM_RBUTTONUP                    517    // 0x0205
-#define WM_MBUTTONUP	                   520    // 0x0208
+#define WM_MBUTTONUP                      520    // 0x0208
 #define WM_MOUSEWHEEL                   522    // 0x020A
 #define WM_PARENTNOTIFY                 528    // 0x0210
 #define WM_NEXTMENU                     531    // 0x0213
 #define WM_SIZING                       532    // 0x0214
 #define WM_CAPTURECHANGED               533     // 0x0215
-#define	WM_MOVING                       534     //  0x0216,
+#define   WM_MOVING                       534     //  0x0216,
 #define WM_MDICREATE                    544     // 0x0220
 #define WM_MDIDESTROY                   545     // 0x0221
 #define WM_MDIACTIVATE                  546     // 0x0222
@@ -107,7 +107,7 @@
 #define WM_CLEAR                        771     // 0x0303
 
 #DEFINE WM_PRINT                        791
-#DEFINE	WM_PRINTCLIENT                  792
+#DEFINE   WM_PRINTCLIENT                  792
 
 #define WM_USER                        1024    // 0x0400
 
@@ -118,14 +118,13 @@
 #define SC_CLOSE                      61536   // 0xF060
 #define SC_RESTORE                    61728   // 0xF120
 #define SC_RESTORE2                   61730   // 0xF122 Sent when form maximizes because of doubcle click on caption
-#define SC_KEYMENU                    61696	  // HF100
+#define SC_KEYMENU                    61696     // HF100
 #define SC_NEXTWINDOW                 61504   // &HF040
 #define SC_PREVWINDOW                 61520   // &HF050
 #define SC_HOTKEY                     61776   // &HF150
 #define SC_MOUSEMENU                  61584   //  HF090
 #define SC_SEPARATOR                  61455  // 0xF00F
 #define SC_MENU                       61589   // &HF095
-
 
 #define GWL_ID                        - 12
 #define GWL_STYLE                     - 16
@@ -146,11 +145,9 @@
 #DEFINE PRF_OWNED               32
 
 /* CONSTANTS TO TRACKMOUSEEVENT */
-#DEFINE  TME_CANCEL            0x80000000 
+#DEFINE  TME_CANCEL            0x80000000
 #DEFINE  TME_HOVER             1
-#DEFINE  TME_LEAVE             2 
-
-
+#DEFINE  TME_LEAVE             2
 
 /*
  * Dialog Box Command IDs
@@ -230,7 +227,6 @@
 #define CB_FINDSTRINGEXACT          344
 #define CB_SETDROPPEDWIDTH          0x0160
 #define CB_SETCUEBANNER             5891 // 0x1703
-
 
 /* Brush Styles */
 #define BS_SOLID            0
@@ -373,7 +369,7 @@
 */
 
 #define DTS_SHOWNONE        2          // 0x0002
-#define DTS_TIMEFORMAT      9 
+#define DTS_TIMEFORMAT      9
 
 /*
  * Window Styles
@@ -555,7 +551,7 @@
 #define TCM_SETIMAGELIST        4867     // (TCM_FIRST + 3)
 #define TCM_GETITEMCOUNT        4868     // (TCM_FIRST + 4)
 #define TCM_GETITEMRECT         ( TCM_FIRST + 10 )
-#define TCM_GETCURSEL           4875		 // TCM_FIRST + 11)
+#define TCM_GETCURSEL           4875       // TCM_FIRST + 11)
 #define TCM_SETCURSEL           4876     // (TCM_FIRST + 12)
 #define TCM_HITTEST             ( TCM_FIRST + 13 )
 #define TCM_SETITEMSIZE         ( TCM_FIRST + 41 )
@@ -625,7 +621,6 @@
 #define MB_TOPMOST            262144   // 0x00040000L
 #define MB_RIGHT              524288   // 0x00080000L
 #define MB_RTLREADING         1048576  // 0x00100000L
-
 
 #define HKEY_CLASSES_ROOT     2147483648       // 0x80000000
 #define HKEY_CURRENT_USER     2147483649       // 0x80000001
@@ -743,7 +738,6 @@
 #define EM_SETCHARFORMAT        1092     // (WM_USER + 68)
 #define EM_SETEVENTMASK         1093     // (WM_USER + 69)
 
-
 #define ENM_CHANGE             1        // 0x00000001
 #define ENM_SELCHANGE          524288   // 0x00080000
 #define ENM_PROTECTED          0x00200000
@@ -796,7 +790,6 @@
 #define BDR_RAISED      (BDR_RAISEDOUTER + BDR_RAISEDINNER)
 #define BDR_SUNKEN      (BDR_SUNKENOUTER + BDR_SUNKENINNER)
 
-
 #define EDGE_RAISED     (BDR_RAISEDOUTER + BDR_RAISEDINNER)
 #define EDGE_SUNKEN     (BDR_SUNKENOUTER + BDR_SUNKENINNER)
 #define EDGE_ETCHED     (BDR_SUNKENOUTER + BDR_RAISEDINNER)
@@ -823,13 +816,11 @@
 #define BF_DIAGONAL_ENDBOTTOMLEFT   (BF_DIAGONAL + BF_BOTTOM + BF_LEFT)
 #define BF_DIAGONAL_ENDBOTTOMRIGHT  (BF_DIAGONAL + BF_BOTTOM + BF_RIGHT)
 
-
 #define BF_MIDDLE        2048           // 0x0800  /* Fill in the middle */
 #define BF_SOFT          4096           // 0x1000  /* For softer buttons */
 #define BF_ADJUST        8192           // 0x2000  /* Calculate the space left over */
 #define BF_FLAT         16384           // 0x4000  /* For flat rather than 3D borders */
 #define BF_MONO         32768           // 0x8000  /* For monochrome borders */
-
 
 #define FSHIFT    4   // 0x04
 #define FCONTROL  8   // 0x08
@@ -979,7 +970,6 @@
 #define LBS_NOSEL             0x4000
 #define LBS_STANDARD          (LBS_NOTIFY+LBS_SORT+WS_VSCROLL+WS_BORDER)
 
-
 /*
  * Listbox messages
  */
@@ -1022,7 +1012,6 @@
 #define LB_GETLOCALE            0x01A6
 #define LB_SETCOUNT             0x01A7
 
-
 #define DS_3DLOOK               4       // 0x4L
 // #define BS_NOTIFY               16384   // 0x00004000L
 
@@ -1047,7 +1036,6 @@
 #define CW_USEDEFAULT           2147483648          // 0x80000000
 #define CCM_FIRST               0x2000      // Common control shared messages
 #define CCM_LAST                (CCM_FIRST + 0x200)
-
 
 #define CCM_SETBKCOLOR          (CCM_FIRST + 1) // lParam is bkColor
 #define PBM_SETBARCOLOR         (WM_USER+9)             // lParam = bar color
@@ -1091,7 +1079,6 @@
 #define R2_MERGEPEN         15  /* DPo      */
 #define R2_WHITE            16  /*  1       */
 #define R2_LAST             16
-
 
 // States for tool Buttons
 #define TBSTATE_CHECKED         0x01
@@ -1260,9 +1247,6 @@
 #define SM_STARTER 88
 #define SM_SERVERR2 89
 
-
-
-
 //--------------
 // Font Weights
 //--------------
@@ -1296,7 +1280,6 @@
 #define PGF_SCROLLDOWN      2
 #define PGF_SCROLLLEFT      4
 #define PGF_SCROLLRIGHT     8
-
 
 #define CCS_TOP                 0x00000001
 #define CCS_NOMOVEY             0x00000002
@@ -1383,7 +1366,6 @@
 #define RBBS_USECHEVRON     0x00000200  // display drop-down button for this band if it's sized smaller than ideal width
 #define RBBS_HIDETITLE      0x00000400  // keep band title hidden
 
-
 #define ODS_SELECTED        0x0001
 #define ODS_GRAYED          0x0002
 #define ODS_DISABLED        0x0004
@@ -1433,14 +1415,12 @@
 
 #define TMT_CONTENTMARGINS 3602
 
-
 #define DFC_CAPTION             1
 #define DFC_MENU                2
 #define DFC_SCROLL              3
 #define DFC_BUTTON              4
 
 #define DFC_POPUPMENU           5
-
 
 #define DFCS_CAPTIONCLOSE        0x0000
 #define DFCS_CAPTIONMIN          0x0001
@@ -1471,10 +1451,8 @@
 #define DFCS_PUSHED              0x0200
 #define DFCS_CHECKED             0x0400
 
-
 #define DFCS_TRANSPARENT         0x0800
 #define DFCS_HOT                 0x1000
-
 
 #define DFCS_ADJUSTRECT          0x2000
 #define DFCS_FLAT                0x4000
@@ -1486,7 +1464,7 @@
 #define ST_ALIGN_HORIZ_RIGHT 2           // Icon/bitmap on the right, text on the left
 #define ST_ALIGN_OVERLAP     3           // Icon/bitmap on the same space as text
 
-#define WM_THEMECHANGED     0x031A 
+#define WM_THEMECHANGED     0x031A
 
 #define TPM_LEFTALIGN       0x0000
 #define TPM_CENTERALIGN     0x0004
@@ -1502,7 +1480,6 @@
 #define BUTTON_BTNPRESSED      0x40
 #define BUTTON_UNKNOWN2        0x20
 #define BUTTON_UNKNOWN3        0x10
-
 
 #define ODA_DRAWENTIRE  0x0001
 #define ODA_SELECT      0x0002
@@ -1532,7 +1509,6 @@
 
 #define _SRCCOPY                0x00CC0020 /* dest = source                   */
 #define _SRCPAINT               0x00EE0086 /* dest = source OR dest           */
-
 
 #define DLGC_WANTARROWS      0x0001      /* Control wants arrow keys         */
 #define DLGC_WANTTAB         0x0002      /* Control wants tab keys           */

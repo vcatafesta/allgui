@@ -220,4 +220,3 @@ FUNCTION httpgeturl( Connection, cPage, uRet )
    /*
    * EOF
    */
-

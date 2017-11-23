@@ -527,7 +527,6 @@ FUNCTION _EndSheetPage()
 FUNCTION _EndPropSheet()
 
    LOCAL Formhandle, k
-
    Formhandle := CreatePropertySheet( _HMG_ActivePropSheetHandle, aHwndSheetPages, ;
       _HMG_aPropSheetTemplate, _HMG_ActivePropSheetModeless )
 
@@ -1051,4 +1050,3 @@ STATIC FUNCTION ErasePropSheet( hWnd )
    ENDIF
 
    RETURN NIL
-

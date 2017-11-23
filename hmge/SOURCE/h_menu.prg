@@ -915,4 +915,3 @@ FUNCTION _RemoveMenuItem ( ItemName , FormName  )
    LOCAL a := _GetMenuIds ( ItemName , FormName )
 
    RETURN RemoveMenuItem ( a [1] , a [2] )
-

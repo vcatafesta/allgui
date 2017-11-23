@@ -289,4 +289,3 @@ FUNCTION DeskJet(oTest)
    ENDIF
 
 ENDIF
-

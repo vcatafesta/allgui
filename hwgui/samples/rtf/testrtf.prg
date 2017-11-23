@@ -307,4 +307,3 @@ END FOOTER oRTF
 
 RETURN oRTF
 **********************  END OF SetupRTF()  ***********************
-

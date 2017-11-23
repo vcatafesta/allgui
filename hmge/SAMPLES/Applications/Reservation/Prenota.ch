@@ -18,4 +18,3 @@
 #define MsgStop( c ) MsgStop( c, "Stop!" )
 #define MGSYS  .F.
 #define COLOR_GRAYTEXT          17
-

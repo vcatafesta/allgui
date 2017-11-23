@@ -667,7 +667,6 @@ STATIC FUNCTION IndentIt( cPrgFile )
    LOCAL aWindList[ 1 ]                                                        // List of Window's name
    LOCAL aRetuList[ 1 ]                                                        // Array of RETURN lines from FUNCTIONs/PROCEDUREs/STATIC FUNCTIONs
    LOCAL bFuncHead := { | cText | LEFT( UPPER( cText ), 9 ) == "FUNCTION " ;   // Is this the first line of a PROCEDURE or FUNCTION?
-
    .OR. LEFT( UPPER( cText) , 16 ) == "STATIC FUNCTION " ;
       .OR. LEFT( UPPER( cText) , 5 ) == "PROC " ;
       .OR. LEFT( UPPER( cText ), 10 ) == "PROCEDURE " }
@@ -1267,4 +1266,3 @@ HB_FUNC( FILLBLUE )
 
 #pragma ENDDUMP
    * EOF
-

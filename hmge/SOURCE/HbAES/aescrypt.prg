@@ -73,4 +73,3 @@ FUNCTION DecryptFileAES( cFileIn, cFileOut, cPassword )
    ENDIF
 
    RETURN .t.
-

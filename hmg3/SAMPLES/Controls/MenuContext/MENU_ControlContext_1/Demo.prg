@@ -562,4 +562,3 @@ PROCEDURE ON_OFF_CTRL_ContexMenu()
    MsgInfo ("CONTROL CONTEXT MENU: "+IF(ON, "Enable","Disable"))
 
    RETURN
-

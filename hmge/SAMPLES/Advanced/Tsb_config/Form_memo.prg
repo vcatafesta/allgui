@@ -104,4 +104,3 @@ FUNCTION ResizeFormMemo()
    Form_Memo.Edit_Memo.Height := GetClientHeight(hWnd)
 
    RETURN NIL
-

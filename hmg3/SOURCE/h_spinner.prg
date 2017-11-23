@@ -183,4 +183,3 @@ FUNCTION _DefineSpinner ( ControlName, ParentForm, x, y, w, value ,fontname, ;
    ENDIF
 
    RETURN NIL
-

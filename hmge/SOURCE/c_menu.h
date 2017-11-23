@@ -1,6 +1,6 @@
 /**
  * This file is part of the MiniGUI.
- * 
+ *
  */
 #ifndef _HMG_MENUS_
 #define _HMG_MENUS_

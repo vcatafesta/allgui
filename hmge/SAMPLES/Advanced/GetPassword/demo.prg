@@ -295,4 +295,3 @@ HB_FUNC( GETDOMAINNAME )
 }
 
 #pragma ENDDUMP
-

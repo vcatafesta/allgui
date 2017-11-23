@@ -15,4 +15,3 @@ FUNCTION generate_error()
    x := num * 10
 
    RETURN NIL
-

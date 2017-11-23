@@ -237,4 +237,3 @@ FUNCTION InitDialogProgressBar( ParentName, ControlHandle, k )
    ENDIF
 
    RETURN NIL
-

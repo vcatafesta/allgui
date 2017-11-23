@@ -106,7 +106,6 @@ HB_FUNC( HWG_CREATEACTIVEX )
 
 }
 
-
 HB_FUNC( HWG_ATLAXGETDISP )
 {
    IUnknown *pUnk;
@@ -711,4 +710,3 @@ HB_FUNC( HWG_RELEASEDISPATCH )
    pObj = ( IDispatch * ) HB_PARHANDLE( 1 );
    pObj->lpVtbl->Release( pObj );
 }
-

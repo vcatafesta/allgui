@@ -174,4 +174,3 @@ FUNCTION Capturar()
    /*
    * EOF
    */
-

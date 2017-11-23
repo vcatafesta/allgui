@@ -12,27 +12,27 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,56 +46,49 @@
    Copyright 1999-2008, http://www.harbour-project.org/
 
    "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
    "HWGUI"
    Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 
-
-
 #ifndef CINTERFACE
    #define CINTERFACE
 #endif
-
 
 //#define _WIN32_IE      0x0500
 //#define HB_OS_WIN_32_USED
 //#define _WIN32_WINNT   0x0400
 //#define WINVER  0x0410
 
-
 #include <windows.h>
 #include <commctrl.h>
 #include <tchar.h>
 #include "hbapi.h"
 
-HBITMAP bt_bmp_create_24bpp (int Width, int Height); 
+HBITMAP bt_bmp_create_24bpp (int Width, int Height);
 HBITMAP bt_LoadOLEPicture (WCHAR * FileName, WCHAR * TypePictureResource);
 HBITMAP bt_LoadGDIPlusPicture (WCHAR *FileName, WCHAR *TypePictureResource);
 BOOL bt_bmp_SaveFile (HBITMAP hBitmap, WCHAR* FileName, INT nTypePicture);
 
-
 HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND hWnd, int ScaleStretch, int Transparent, long BackgroundColor, int AdjustImage, long TransparentColor );
-
 
 HB_FUNC (INITIMAGE)
 {
-  // 1) hParentForm, 
+  // 1) hParentForm,
   // 2) x
-  // 3) y 
-  // 4) invisible 
+  // 3) y
+  // 4) invisible
   // 5) action and tooltip
 
         HWND  h;
@@ -108,16 +101,15 @@ HB_FUNC (INITIMAGE)
 
         if ( ! hb_parl (4) )
              Style = Style | WS_VISIBLE ;
-        
+
         if ( hb_parl (5) )
              Style = Style | SS_NOTIFY ;
-        
-        h = CreateWindowEx ( 0L , WC_STATIC /*_TEXT("Static")*/ , 
+
+        h = CreateWindowEx ( 0L , WC_STATIC /*_TEXT("Static")*/ ,
                             _TEXT(""), Style, hb_parni(2), hb_parni(3), 0, 0, hwnd, NULL, GetModuleHandle(NULL) , NULL ) ;
 
         HMG_retnl ((LONG_PTR) h);
 }
-
 
 HB_FUNC (C_SETPICTURE)
 {
@@ -138,7 +130,7 @@ HB_FUNC (C_SETPICTURE)
     long BackgroundColor  = hb_parnl(7);
     int  AdjustImage      = hb_parni(8);
     long TransparentColor = hb_parnl(9);
-    
+
     hBitmap = HMG_LoadPicture ((TCHAR*)HMG_parc(2), hb_parni(3), hb_parni(4), (HWND) HMG_parnl(1), ScaleStretch, Transparent, BackgroundColor, AdjustImage, TransparentColor);
 
     if (hBitmap!=NULL)
@@ -147,11 +139,7 @@ HB_FUNC (C_SETPICTURE)
     HMG_retnl ((LONG_PTR) hBitmap);
 }
 
-
-
 // by Dr. Claudio Soto ( May 2013 )
-
-
 
 //*******************************************************************************************************
 //* HMG_LoadImage (TCHAR *FileName) ---> Return hBitmap (Load: BMP, GIF, JPG, TIF, WMF, CUR, PNG)
@@ -186,13 +174,13 @@ HBITMAP HMG_LoadImage (TCHAR *FileName)
   // If fail: find CUR Image in resourses
      if (hBitmap == NULL)
          hBitmap = bt_LoadOLEPicture (HMG_ToUnicode(FileName), HMG_ToUnicode(_TEXT("CUR")));
-         
-  // If fail: find TIF Image in resourses       
-     if (hBitmap == NULL)    
+
+  // If fail: find TIF Image in resourses
+     if (hBitmap == NULL)
          hBitmap = bt_LoadOLEPicture (HMG_ToUnicode(FileName), HMG_ToUnicode(_TEXT("TIF")));
 
   // If fail: find PNG Image in resourses
-     if (hBitmap == NULL)    
+     if (hBitmap == NULL)
          hBitmap = bt_LoadGDIPlusPicture (HMG_ToUnicode(FileName), HMG_ToUnicode(_TEXT("PNG")));
 
   // If fail: find JPG, GIF, WMF, EMF and TIF Image in disk
@@ -200,7 +188,7 @@ HBITMAP HMG_LoadImage (TCHAR *FileName)
          hBitmap = bt_LoadOLEPicture (HMG_ToUnicode(FileName), NULL);
 
   // If fail: find PNG Image in disk
-     if (hBitmap == NULL)    
+     if (hBitmap == NULL)
          hBitmap = bt_LoadGDIPlusPicture (HMG_ToUnicode(FileName), NULL);
 
 /*
@@ -208,14 +196,12 @@ HBITMAP HMG_LoadImage (TCHAR *FileName)
 
      HBITMAP hBitmapCompatible = NULL;
      if (hBitmap != NULL)
-         hBitmapCompatible = CopyImage (hBitmap, IMAGE_BITMAP, 0, 0, LR_COPYDELETEORG);   
+         hBitmapCompatible = CopyImage (hBitmap, IMAGE_BITMAP, 0, 0, LR_COPYDELETEORG);
      return hBitmapCompatible;
 */
 
    return hBitmap;
 }
-
-
 
 //********************************************************************************************************************************
 //* HMG_LoadPicture (FileName, New_Width, New_Height, ...) ---> Return hBitmap (Load: BMP, GIF, JPG, TIF, WMF, CUR, PNG)
@@ -230,7 +216,7 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
    POINT Point;
    COLORREF color_transp;
    HBRUSH hBrush;
- 
+
    hBitmap = HMG_LoadImage (FileName);
    if (hBitmap == NULL)
        return NULL;
@@ -238,13 +224,12 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
    GetObject (hBitmap, sizeof(BITMAP), &bm);
    Image_Width  = bm.bmWidth;
    Image_Height = bm.bmHeight;
-   
-   if (New_Width < 0)   // load image with original Width 
+
+   if (New_Width < 0)   // load image with original Width
        New_Width  = Image_Width;
 
    if (New_Height < 0) // load image with original Height
        New_Height = Image_Height;
-
 
    if (New_Width == 0 || New_Height == 0)
        GetClientRect (hWnd, &rect);   // ???, may be better --->  return NULL;
@@ -259,7 +244,6 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
    hDC    = GetDC (hWnd);
    memDC2 = CreateCompatibleDC (hDC);
    memDC1 = CreateCompatibleDC (hDC);
-
 
    if (ScaleStretch == 0)
    {  if ((int)Image_Width * rect.bottom / Image_Height <= rect.right)
@@ -278,10 +262,9 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
       }
    }
 
-
    hBitmap_New = CreateCompatibleBitmap (hDC, New_Width, New_Height);
    // hBitmap_New = bt_bmp_create_24bpp (New_Width, New_Height);
-   
+
    SelectObject (memDC1, hBitmap);
    SelectObject (memDC2, hBitmap_New);
 
@@ -292,11 +275,10 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
        FillRect(memDC2, &rect2, hBrush);
        DeleteObject(hBrush);
    }
-   
-   GetBrushOrgEx (memDC2, &Point);
-   SetStretchBltMode (memDC2, HALFTONE); 
-   SetBrushOrgEx (memDC2, Point.x, Point.y, NULL);
 
+   GetBrushOrgEx (memDC2, &Point);
+   SetStretchBltMode (memDC2, HALFTONE);
+   SetBrushOrgEx (memDC2, Point.x, Point.y, NULL);
 
    if (Transparent == 1)
    {  if (TransparentColor == -1)
@@ -311,18 +293,15 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
    DeleteDC  (memDC1);
    DeleteDC  (memDC2);
    ReleaseDC (hWnd, hDC);
-      
+
    DeleteObject (hBitmap);
 
    return hBitmap_New;
 }
 
-
-
 //**************************************************************************
 // by Dr. Claudio Soto (June 2014)
 //**************************************************************************
-
 
 HIMAGELIST HMG_ImageListLoadFirst (TCHAR *FileName, int cGrow, int Transparent, int *nWidth, int *nHeight)
 {
@@ -355,9 +334,8 @@ HIMAGELIST HMG_ImageListLoadFirst (TCHAR *FileName, int cGrow, int Transparent, 
 
    DeleteFile (TempPathFileName);
 
-   return hImageList; 
+   return hImageList;
 }
-
 
 void HMG_ImageListAdd (HIMAGELIST hImageList, TCHAR *FileName, int Transparent)
 {
@@ -376,4 +354,3 @@ void HMG_ImageListAdd (HIMAGELIST hImageList, TCHAR *FileName, int Transparent)
 
    DeleteObject (hBitmap);
 }
-

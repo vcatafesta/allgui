@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #command @ <row>, <col> LABEL <name> ;
       [ OBJ <obj> ] ;
       [ <dummy1: OF, PARENT> <parent> ] ;
@@ -91,7 +90,7 @@
       [ INPUTMASK <picture> ] ;
       [ SUBCLASS <subclass> ] ;
       [ <disabled: DISABLED> ] ;
-	   [ <lcenteralign: VCENTERALIGN> ] ;
+      [ <lcenteralign: VCENTERALIGN> ] ;
    => ;
       [ <obj> := ] _OOHG_SelectSubClass( TLabel(), [ <subclass>() ] ):Define( ;
             <(name)>, <(parent)>, <col>, <row>, <value>, <width>, <height>, ;

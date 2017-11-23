@@ -270,4 +270,3 @@ PROCEDURE SysWait( nWait )
    }
 
 #pragma ENDDUMP
-

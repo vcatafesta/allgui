@@ -81,4 +81,3 @@ FUNCTION CountChildWindows
    NEXT
 
    RETURN nCnt
-

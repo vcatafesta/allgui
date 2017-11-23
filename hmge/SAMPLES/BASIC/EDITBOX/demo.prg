@@ -69,4 +69,3 @@ PROCEDURE ShowRowCol
    ENDIF
 
    RETURN
-

@@ -108,4 +108,3 @@ FUNCTION CreateTable
    ENDIF
 
    RETURN ret
-

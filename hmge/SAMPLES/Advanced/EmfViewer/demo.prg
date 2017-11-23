@@ -207,4 +207,3 @@ FUNCTION Print_EMF()
    ENDIF
 
    RETURN NIL
-

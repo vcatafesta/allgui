@@ -56,25 +56,25 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
    DATA bGfocus
    DATA bLfocus
 
-METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
+   METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
       bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;
       nItemCount, lNoLines, color, bkcolor, lNoHeader, aBit )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
+   METHOD AddColumn( cHeader, nWidth, nJusHead, nBit ) INLINE AAdd( ::aColumns, { cHeader, nWidth, nJusHead, nBit } )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD RefreshLine()                          INLINE hwg_Listview_update( ::handle, hwg_Listview_getfirstitem( ::handle ) )
+   METHOD RefreshLine()                          INLINE hwg_Listview_update( ::handle, hwg_Listview_getfirstitem( ::handle ) )
 
-METHOD SetItemCount( nItem )                    INLINE hwg_Listview_setitemcount( ::handle, nItem )
+   METHOD SetItemCount( nItem )                    INLINE hwg_Listview_setitemcount( ::handle, nItem )
 
-METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
+   METHOD Row()                                  INLINE hwg_Listview_getfirstitem( ::handle )
 
-METHOD Notify( lParam )
+   METHOD Notify( lParam )
 
 ENDCLASS
 
@@ -236,4 +236,3 @@ FUNCTION hwg_ListViewNotify( oCtrl, lParam )
    ENDIF
 
    RETURN 0
-

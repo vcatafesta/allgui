@@ -54,7 +54,7 @@ HB_FUNC( HWG_MSGINFO )
 HB_FUNC( HWG_MSGSTOP )
 {
    const char* cTitle = ( hb_pcount() == 1 )? "":hb_parc( 2 );
-   MessageBox( hb_parc(1), cTitle, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE );        
+   MessageBox( hb_parc(1), cTitle, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE );
 }
 
 HB_FUNC( HWG_MSGOKCANCEL )
@@ -74,5 +74,3 @@ HB_FUNC( HWG_MSGEXCLAMATION )
    const char* cTitle = ( hb_pcount() == 1 )? "":hb_parc( 2 );
    MessageBox( hb_parc(1), cTitle, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE );
 }
-
-

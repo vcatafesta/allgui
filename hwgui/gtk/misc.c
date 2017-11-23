@@ -64,7 +64,6 @@ HB_FUNC( HWG_HIWORD )
    hb_retni( (int) ( ( hb_parnl( 1 ) >> 16 ) & 0xFFFF ) );
 }
 
-
 HB_FUNC( HWG_BITOR )
 {
    hb_retnl( hb_parnl(1) | hb_parnl(2) );
@@ -144,12 +143,10 @@ HB_FUNC( HWG_GETDESKTOPWIDTH )
     hb_retni(gdk_screen_width());
 }
 
-
 HB_FUNC( HWG_GETDESKTOPHEIGHT )
 {
     hb_retni(gdk_screen_height());
 }
-
 
 HB_FUNC( HWG_HIDEWINDOW )
 {
@@ -181,5 +178,3 @@ HB_FUNC( HWG_TREENOTIFY )
 HB_FUNC( HWG_LISTVIEWNOTIFY )
 {
 }
-
-

@@ -51,4 +51,3 @@ PROCEDURE Main
    ACTIVATE WINDOW wDemo
 
    RETURN
-

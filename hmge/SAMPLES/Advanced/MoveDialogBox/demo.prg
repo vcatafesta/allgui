@@ -125,4 +125,3 @@ HB_FUNC ( GETPARENT )
 }
 
 #pragma ENDDUMP
-

@@ -264,4 +264,3 @@ HB_FUNC( INITMYSYSLINK )
 }
 
 #pragma ENDDUMP
-

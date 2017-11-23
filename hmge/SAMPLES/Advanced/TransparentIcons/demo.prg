@@ -199,4 +199,3 @@ FUNCTION ChangeThemes(nValue,cValue)
 STATIC FUNCTION RGB2DIM(nColor)
 
    RETURN { GetRed(nColor) , GetGreen(nColor) , GetBlue(nColor) }
-

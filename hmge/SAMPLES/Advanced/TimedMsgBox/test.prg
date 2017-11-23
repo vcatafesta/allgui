@@ -301,4 +301,3 @@ HB_FUNC( C_T_MSGEXCLAMATION )
 }
 
 #pragma ENDDUMP
-

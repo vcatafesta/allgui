@@ -632,4 +632,3 @@ PROCEDURE InitPGMessages
    #endif
 
    RETURN
-

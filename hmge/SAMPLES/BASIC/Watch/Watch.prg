@@ -101,4 +101,3 @@ PROCEDURE DrawNums( cTime, lFirst )
    DRAW IMAGELIST ImageList_1 OF Form_1 AT r, c + 4 * 32 IMAGEINDEX n4
 
    RETURN
-

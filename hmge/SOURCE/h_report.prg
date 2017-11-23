@@ -899,4 +899,3 @@ STATIC PROCEDURE imp_pagina( nlin, lmode, grpby, chdrgrp )
 ENDIF
 
 RETURN
-

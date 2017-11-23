@@ -437,4 +437,3 @@ PROCEDURE DYNAMIC_Row (action)
    Win1.Grid1.Refresh
 
    RETURN
-

@@ -459,4 +459,3 @@ HB_FUNC( GETMINWIDTH )
 }
 
 #pragma ENDDUMP
-

@@ -69,4 +69,3 @@ PROCEDURE Modal_Click
    ACTIVATE WINDOW Form_2
 
    RETURN
-

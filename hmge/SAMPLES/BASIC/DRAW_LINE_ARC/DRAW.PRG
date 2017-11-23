@@ -88,4 +88,3 @@ FUNCTION showstatus(cMsg,nSec)
    InkeyGUI(nSec*1000)          // delay in seconds
 
    RETURN NIL
-

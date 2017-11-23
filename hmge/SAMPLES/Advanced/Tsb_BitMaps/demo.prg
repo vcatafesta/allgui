@@ -174,4 +174,3 @@ FUNCTION RandStr( nLen )
    ENDIF
 
    RETURN cPass
-

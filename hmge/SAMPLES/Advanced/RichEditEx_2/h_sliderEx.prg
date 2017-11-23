@@ -273,4 +273,3 @@ HB_FUNC ( GETTICPOS  )
 }
 
 #pragma ENDDUMP
-

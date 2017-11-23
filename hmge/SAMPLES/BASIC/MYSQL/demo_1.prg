@@ -578,4 +578,3 @@ FUNCTION My_SQL_Table_Insert( cTable )
    MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable )
 
    RETURN NIL
-

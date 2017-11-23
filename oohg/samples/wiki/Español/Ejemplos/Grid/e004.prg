@@ -127,4 +127,3 @@ FUNCTION ItemsChecked( oGrid )
    /*
    * EOF
    */
-

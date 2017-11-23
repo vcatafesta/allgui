@@ -482,4 +482,3 @@ STATIC FUNCTION MsgAbout()
       Left(MiniGuiVersion(), 38) + CRLF + CRLF + ;
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About " + PROGRAM, IDI_MAIN, .f. )
-

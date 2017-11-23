@@ -214,4 +214,3 @@ FUNCTION HMG_GetImageInfo ( xFile, nWidth, nHeight, aBackColor, nRowColor, nColC
    BT_BitmapRelease (hBitmap)
 
    RETURN .T.
-

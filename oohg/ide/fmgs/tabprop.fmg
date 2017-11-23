@@ -1,18 +1,18 @@
 /*
- * $Id: tabprop.fmg,v 1.12 2017/08/25 19:03:22 fyurisich Exp $
- */
+* $Id: tabprop.fmg,v 1.12 2017/08/25 19:03:22 fyurisich Exp $
+*/
 
 * ooHG IDE Plus form generated code
 * (c) 2003-2017 Ciro Vargas Clemow <cvc@oohg.org>
 
 DEFINE WINDOW TEMPLATE ;
-   AT 132, 235 ;
-   OBJ oTabProp ;
-   WIDTH 428 ;
-   HEIGHT 570 ;
-   TITLE 'Tab properties' ;
-   MODAL ;
-   BACKCOLOR ::myIde:aSystemColor
+      AT 132, 235 ;
+      OBJ oTabProp ;
+      WIDTH 428 ;
+      HEIGHT 570 ;
+      TITLE 'Tab properties' ;
+      MODAL ;
+      BACKCOLOR ::myIde:aSystemColor
 
    @ 20, 20 BUTTON Button_1 ;
       WIDTH 100 ;
@@ -76,7 +76,7 @@ DEFINE WINDOW TEMPLATE ;
       FONT 'Arial' ;
       SIZE 9 ;
       BACKCOLOR ::myIde:aSystemColor ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 100, 80 TEXTBOX Edit_3 ;
       WIDTH 320 ;
@@ -227,7 +227,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 400 ;
       HEIGHT 240 ;
       CAPTION 'Pages' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 323, 20 LABEL Label_101 ;
       WIDTH 60 ;
@@ -236,7 +236,7 @@ DEFINE WINDOW TEMPLATE ;
       FONT 'Arial' ;
       SIZE 9 ;
       BACKCOLOR ::myIde:aSystemColor ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 320, 80 EDITBOX Text_101 ;
       WIDTH 320 ;
@@ -245,7 +245,7 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 9 ;
       MAXLENGTH 500 ;
       ON CHANGE IIF( ChgTabpageCaption( oTab, oTabProp ), ::aCaption[i] := oTabProp:Text_101:Value, NIL ) ;
-      NOVSCROLL 
+      NOVSCROLL
 
    @ 363, 20 LABEL Label_1 ;
       WIDTH 60 ;
@@ -262,7 +262,7 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 9 ;
       MAXLENGTH 500 ;
       ON CHANGE IIF( ChgTabpageImage( oTab, oTabProp ), ::aImage[i] := oTabProp:Edit_2:Value, NIL ) ;
-      NOVSCROLL 
+      NOVSCROLL
 
    @ 403, 20 LABEL Label_7 ;
       WIDTH 60 ;
@@ -279,7 +279,7 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 9 ;
       MAXLENGTH 500 ;
       ON CHANGE IIF( ChgTabpageName( oTabProp ), ::aPageNames[i] := oTabProp:Edit_4:Value, NIL ) ;
-      NOVSCROLL 
+      NOVSCROLL
 
    @ 443, 20 LABEL Label_8 ;
       WIDTH 60 ;
@@ -296,7 +296,7 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 9 ;
       MAXLENGTH 500 ;
       ON CHANGE IIF( ChgTabpageObject( oTabProp ), ::aPageObjs[i] := oTabProp:Edit_5:Value, NIL ) ;
-      NOVSCROLL 
+      NOVSCROLL
 
    @ 483, 20 LABEL Label_9 ;
       WIDTH 60 ;
@@ -313,7 +313,6 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 9 ;
       MAXLENGTH 500 ;
       ON CHANGE IIF( ChgTabpageSubclass( oTabProp ), ::aPageSubClasses[i] := oTabProp:Edit_6:Value, NIL ) ;
-      NOVSCROLL 
+      NOVSCROLL
 
-END WINDOW 
-
+END WINDOW

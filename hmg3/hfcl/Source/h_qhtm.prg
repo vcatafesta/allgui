@@ -280,4 +280,3 @@ FUNCTION QHTM_Zoom ( ControlName, ParentForm, nLevel )
    QHTM_SetZoomLevel(GetControlHandle( ControlName, ParentForm ), nLevel)
 
    RETURN NIL
-

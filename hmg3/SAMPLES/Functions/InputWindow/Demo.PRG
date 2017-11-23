@@ -365,4 +365,3 @@ FUNCTION My_MsgDebug(aLbls,aCtrls)
    ACTIVATE WINDOW _MsgDebug
 
    RETURN NIL
-

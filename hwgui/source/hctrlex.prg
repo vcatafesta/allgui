@@ -38,28 +38,28 @@ CLASS VAR winclass   INIT "STATIC"
    DATA bClick, bDblClick
    DATA hBrushDefault  HIDDEN
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
       bColor, lTransp, bClick, bDblClick, bOther )
 
-METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther )
 
-METHOD SetText( value ) INLINE ::SetValue( value )
+   METHOD SetText( value ) INLINE ::SetValue( value )
 
-METHOD SetValue( cValue )
+   METHOD SetValue( cValue )
 
-METHOD Auto_Size( cValue )  HIDDEN
+   METHOD Auto_Size( cValue )  HIDDEN
 
-METHOD Init()
+   METHOD Init()
 
-METHOD PAINT( lpDis )
+   METHOD PAINT( lpDis )
 
-METHOD onClick()
+   METHOD onClick()
 
-METHOD onDblClick()
+   METHOD onDblClick()
 
-METHOD OnEvent( msg, wParam, lParam )
+   METHOD OnEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -286,24 +286,24 @@ CLASS VAR winclass   INIT "BUTTON"
    DATA cNote  HIDDEN
    DATA lFlat INIT .F.
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
       tcolor, bColor, bGFocus )
 
-METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
+   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       cTooltip, tcolor, bColor, cCaption, bGFocus )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onClick()
+   METHOD onClick()
 
-METHOD onGetFocus()
+   METHOD onGetFocus()
 
-METHOD onLostFocus()
+   METHOD onLostFocus()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD NoteCaption( cNote )  SETGET
+   METHOD NoteCaption( cNote )  SETGET
 
 ENDCLASS
 
@@ -503,36 +503,36 @@ CLASS HButtonEX INHERIT HButtonX
    DATA m_bmpBk, m_pbmpOldBk
    DATA bMouseOverButton INIT .F.
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
       tcolor, bColor, hBitmap, iStyle, hicon, Transp, bGFocus, nPictureMargin, lnoThemes, bOther )
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
-METHOD SetBitmap( hBitMap )
+   METHOD SetBitmap( hBitMap )
 
-METHOD SetIcon( hIcon )
+   METHOD SetIcon( hIcon )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onevent( msg, wParam, lParam )
+   METHOD onevent( msg, wParam, lParam )
 
-METHOD CancelHover()
+   METHOD CancelHover()
 
-METHOD END()
+   METHOD END()
 
-METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
+   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin )
 
-METHOD PaintBk( hdc )
+   METHOD PaintBk( hdc )
 
-METHOD Setcolor( tcolor, bcolor ) INLINE ::SetDefaultColor( tcolor, bcolor ) //, ::SetDefaultColor( .T. )
+   METHOD Setcolor( tcolor, bcolor ) INLINE ::SetDefaultColor( tcolor, bcolor ) //, ::SetDefaultColor( .T. )
 
-METHOD SetDefaultColor( tColor, bColor, lPaint )
+   METHOD SetDefaultColor( tColor, bColor, lPaint )
 
-METHOD SetColorEx( nIndex, nColor, lPaint )
+   METHOD SetColorEx( nIndex, nColor, lPaint )
 
-METHOD SetText( c ) INLINE ::title := c,  ;
+   METHOD SetText( c ) INLINE ::title := c,  ;
       hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE ), ;
       iif( ::oParent != NIL .AND. hwg_Iswindowvisible( ::Handle ) , ;
       hwg_Invalidaterect( ::oParent:Handle, 1 , ::nLeft, ::nTop, ::nLeft + ::nWidth, ::nTop + ::nHeight  ), ), ;
@@ -1215,12 +1215,12 @@ CLASS HGroupEx INHERIT HGroup
    DATA oBrush
    DATA lTransparent HIDDEN
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
 ENDCLASS
 
@@ -1350,4 +1350,3 @@ METHOD PAINT( lpdis ) CLASS HGroupEx
    hwg_Selectobject( dc, ppnOldPen )
 
    RETURN NIL
-

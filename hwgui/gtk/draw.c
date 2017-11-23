@@ -69,11 +69,11 @@ HB_FUNC( HWG_INVALIDATERECT )
    {
       x1 = y1 = 0;
       x2 = widget->allocation.width;
-      y2 = widget->allocation.height;      
+      y2 = widget->allocation.height;
    }
    gtk_widget_queue_draw_area( widget, x1, y1,
         x2 - x1 + 1, y2 - y1 + 1 );
-   
+
 }
 
 HB_FUNC( HWG_RECTANGLE )
@@ -81,7 +81,7 @@ HB_FUNC( HWG_RECTANGLE )
    PHWGUI_HDC hDC = (PHWGUI_HDC) HB_PARHANDLE(1);
    int x1 = hb_parni( 2 ), y1 = hb_parni( 3 );
 
-   cairo_rectangle( hDC->cr, (gdouble)x1, (gdouble)y1, 
+   cairo_rectangle( hDC->cr, (gdouble)x1, (gdouble)y1,
         (gdouble)(hb_parni(4)-x1+1), (gdouble)(hb_parni(5)-y1+1) );
    cairo_stroke( hDC->cr );
 }
@@ -116,7 +116,7 @@ HB_FUNC( HWG_FILLRECT )
    PHWGUI_BRUSH brush = (PHWGUI_BRUSH) HB_PARHANDLE(6);
 
    hwg_setcolor( hDC->cr, brush->color );
-   cairo_rectangle( hDC->cr, (gdouble)x1, (gdouble)y1, 
+   cairo_rectangle( hDC->cr, (gdouble)x1, (gdouble)y1,
          (gdouble)(hb_parni(4)-x1+1), (gdouble)(hb_parni(5)-y1+1) );
    cairo_fill( hDC->cr );
 }
@@ -145,20 +145,20 @@ HB_FUNC( HWG_DRAWBUTTON )
    if( iType == 0 )
    {
       hwg_setcolor( hDC->cr, hwg_gdk_color( style->bg ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_fill( hDC->cr );
    }
    else
    {
       hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->mid : style->light ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_fill( hDC->cr );
 
       left ++; top ++;
       hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->light : ( (iType & 4)? style->dark : style->mid ) ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_fill( hDC->cr );
 
@@ -167,20 +167,20 @@ HB_FUNC( HWG_DRAWBUTTON )
       if( iType & 4 )
       {
          hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->mid : style->light ) );
-         cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+         cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
               (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
          cairo_fill( hDC->cr );
 
          left ++; top ++;
          hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->light : style->mid ) );
-         cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+         cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
               (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
          cairo_fill( hDC->cr );
 
          right --; bottom --;
       }
       hwg_setcolor( hDC->cr, hwg_gdk_color( style->bg ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_fill( hDC->cr );
    }
@@ -200,13 +200,13 @@ unsigned int iType = hb_parni( 6 );
 GtkStyle * style = hDC->widget->style;
 
    hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->mid : style->light ) );
-   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
         (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
    cairo_stroke( hDC->cr );
 
    left ++; top ++;
    hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->light : ( (iType & 4)? style->dark : style->mid ) ) );
-   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
         (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
    cairo_stroke( hDC->cr );
 
@@ -215,20 +215,20 @@ GtkStyle * style = hDC->widget->style;
    if( iType & 4 )
    {
       hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->mid : style->light ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_stroke( hDC->cr );
 
       left ++; top ++;
       hwg_setcolor( hDC->cr, hwg_gdk_color( (iType & 2)? style->light : style->mid ) );
-      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+      cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
            (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
       cairo_stroke( hDC->cr );
 
       right --; bottom --;
    }
    hwg_setcolor( hDC->cr, hwg_gdk_color( style->bg ) );
-   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top, 
+   cairo_rectangle( hDC->cr, (gdouble)left, (gdouble)top,
         (gdouble)(right-left+1), (gdouble)(bottom-top+1) );
    cairo_stroke( hDC->cr );
 }
@@ -264,7 +264,7 @@ HB_FUNC( HWG_DRAWBITMAP )
    gint width = hb_parni(6);
    gint height = hb_parni(7);
    GdkPixbuf * pixbuf = gdk_pixbuf_scale_simple( obj->handle, width, height, GDK_INTERP_HYPER );
-   
+
    gdk_cairo_set_source_pixbuf( hDC->cr, pixbuf, x, y );
    cairo_paint( hDC->cr );
    gdk_pixbuf_unref( pixbuf );
@@ -298,14 +298,14 @@ HB_FUNC( HWG_GETBITMAPSIZE )
 
    _itemReturn( aMetr );
    _itemRelease( aMetr );
-   
+
 }
 
 HB_FUNC( HWG_OPENBITMAP )
 {
    PHWGUI_PIXBUF hpix;
    GdkPixbuf * handle = gdk_pixbuf_new_from_file( hb_parc(1), NULL );
-   
+
    if( handle )
    {
       hpix = (PHWGUI_PIXBUF) hb_xgrab( sizeof(HWGUI_PIXBUF) );
@@ -319,7 +319,7 @@ HB_FUNC( HWG_OPENIMAGE )
 {
    PHWGUI_PIXBUF hpix;
    GdkPixbuf * handle = gdk_pixbuf_new_from_file( hb_parc(1), NULL );
-   
+
    if( handle )
    {
       hpix = (PHWGUI_PIXBUF) hb_xgrab( sizeof(HWGUI_PIXBUF) );
@@ -354,7 +354,7 @@ HB_FUNC( HWG_ALPHA2PIXBUF )
       gdk_pixbuf_unref( obj->handle );
       obj->handle = handle;
    }
-   
+
 }
 
 HB_FUNC( HWG_DRAWICON )
@@ -386,7 +386,7 @@ HB_FUNC( HWG_CREATESOLIDBRUSH )
 
    hbrush->type = HWGUI_OBJECT_BRUSH;
    hbrush->color = hb_parnl(1);
-   
+
    HB_RETHANDLE( hbrush );
 }
 
@@ -444,7 +444,7 @@ HB_FUNC( HWG_DELETEOBJECT )
 HB_FUNC( HWG_DEFINEPAINTSTRU )
 {
    PHWGUI_PPS pps = (PHWGUI_PPS) hb_xgrab( sizeof(HWGUI_PPS) );
-   
+
    pps->hDC = NULL;
    HB_RETHANDLE( pps );
 }
@@ -453,8 +453,8 @@ HB_FUNC( HWG_BEGINPAINT )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
    PHWGUI_PPS pps = (PHWGUI_PPS) HB_PARHANDLE(2);
-   PHWGUI_HDC hDC = (PHWGUI_HDC) hb_xgrab( sizeof(HWGUI_HDC) );   
-   
+   PHWGUI_HDC hDC = (PHWGUI_HDC) hb_xgrab( sizeof(HWGUI_HDC) );
+
    memset( hDC, 0, sizeof(HWGUI_HDC) );
    hDC->widget = widget;
 
@@ -463,7 +463,7 @@ HB_FUNC( HWG_BEGINPAINT )
 
    hDC->layout = pango_cairo_create_layout( hDC->cr );
    hDC->fcolor = hDC->bcolor = -1;
-   
+
    pps->hDC = hDC;
 
    HB_RETHANDLE( hDC );
@@ -524,7 +524,7 @@ HB_FUNC( HWG_GETCLIENTAREA )
 {
    PHWGUI_PPS pps = ( PHWGUI_PPS ) HB_PARHANDLE( 1 );
    GtkWidget * widget = pps->hDC->widget;
-   PHB_ITEM aMetr = hb_itemArrayNew( 4 );    
+   PHB_ITEM aMetr = hb_itemArrayNew( 4 );
 
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 1 ), 0 );
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 2 ), 0 );
@@ -536,7 +536,7 @@ HB_FUNC( HWG_GETCLIENTAREA )
 HB_FUNC( HWG_GETCLIENTRECT )
 {
    GtkWidget * widget = (GtkWidget*) HB_PARHANDLE(1);
-   PHB_ITEM aMetr = hb_itemArrayNew( 4 );    
+   PHB_ITEM aMetr = hb_itemArrayNew( 4 );
 
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 1 ), 0 );
    hb_itemPutNL( hb_arrayGetItemPtr( aMetr, 2 ), 0 );
@@ -548,4 +548,3 @@ HB_FUNC( HWG_GETCLIENTRECT )
 HB_FUNC( HWG_GETWINDOWRECT )
 {
 }
-

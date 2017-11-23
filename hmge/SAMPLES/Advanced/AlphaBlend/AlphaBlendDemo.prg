@@ -150,4 +150,3 @@ FUNCTION LoopBlend( hWnd1, w1, h1, hWnd2, w2, h2 )
    ReleaseDC( hWnd2, hdc2 )
 
    RETURN NIL
-

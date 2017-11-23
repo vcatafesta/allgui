@@ -42,4 +42,3 @@ PROCEDURE QueryTest()
    This.QueryData := 'ர' + Str ( This.QueryRowIndex ) + ',' + Str ( This.QueryColIndex )
 
    RETURN
-

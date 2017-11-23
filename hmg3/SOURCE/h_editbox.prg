@@ -259,4 +259,3 @@ PROCEDURE _DataEditBoxSave ( ControlName , ParentForm)
    REPLACE &Field WITH _GetValue ( Controlname , ParentForm )
 
    RETURN
-

@@ -48,4 +48,3 @@ FUNCTION drawshapes
    draw polybezier in window x points {{400,400},{350,350},{300,500},{350,575},{400,640},{500,550},{400,350}} pencolor {random(255),random(255),random(255)} penwidth 2
 
    RETURN NIL
-

@@ -54,30 +54,29 @@
 #endif
 
 /*
-#define DOCHOSTUIFLAG_DIALOG         0x00000001, 
-#define DOCHOSTUIFLAG_DISABLE_HELP_MENU      0x00000002, 
-#define DOCHOSTUIFLAG_NO3DBORDER      0x00000004, 
-#define DOCHOSTUIFLAG_SCROLL_NO         0x00000008, 
-#define DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE   0x00000010, 
-#define DOCHOSTUIFLAG_OPENNEWWIN      0x00000020, 
-#define DOCHOSTUIFLAG_DISABLE_OFFSCREEN      0x00000040, 
-#define DOCHOSTUIFLAG_FLAT_SCROLLBAR      0x00000080, 
-#define DOCHOSTUIFLAG_DIV_BLOCKDEFAULT      0x00000100, 
-#define DOCHOSTUIFLAG_ACTIVATE_CLIENTHIT_ONLY   0x00000200, 
-#define DOCHOSTUIFLAG_OVERRIDEBEHAVIORFACTORY   0x00000400, 
-#define DOCHOSTUIFLAG_CODEPAGELINKEDFONTS   0x00000800, 
-#define DOCHOSTUIFLAG_URL_ENCODING_DISABLE_UTF8   x00001000, 
-#define DOCHOSTUIFLAG_URL_ENCODING_ENABLE_UTF8   0x00002000, 
-#define DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE   0x00004000, 
-#define DOCHOSTUIFLAG_ENABLE_INPLACE_NAVIGATION   0x00010000, 
-#define DOCHOSTUIFLAG_IME_ENABLE_RECONVERSION   0x00020000, 
-#define DOCHOSTUIFLAG_THEME         0x00040000, 
-#define DOCHOSTUIFLAG_NOTHEME         0x00080000, 
-#define DOCHOSTUIFLAG_NOPICS         0x00100000, 
-#define DOCHOSTUIFLAG_NO3DOUTERBORDER      0x00200000, 
-#define DOCHOSTUIFLAG_DELEGATESIDOFDISPATCH   0x00400000 
+#define DOCHOSTUIFLAG_DIALOG         0x00000001,
+#define DOCHOSTUIFLAG_DISABLE_HELP_MENU      0x00000002,
+#define DOCHOSTUIFLAG_NO3DBORDER      0x00000004,
+#define DOCHOSTUIFLAG_SCROLL_NO         0x00000008,
+#define DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE   0x00000010,
+#define DOCHOSTUIFLAG_OPENNEWWIN      0x00000020,
+#define DOCHOSTUIFLAG_DISABLE_OFFSCREEN      0x00000040,
+#define DOCHOSTUIFLAG_FLAT_SCROLLBAR      0x00000080,
+#define DOCHOSTUIFLAG_DIV_BLOCKDEFAULT      0x00000100,
+#define DOCHOSTUIFLAG_ACTIVATE_CLIENTHIT_ONLY   0x00000200,
+#define DOCHOSTUIFLAG_OVERRIDEBEHAVIORFACTORY   0x00000400,
+#define DOCHOSTUIFLAG_CODEPAGELINKEDFONTS   0x00000800,
+#define DOCHOSTUIFLAG_URL_ENCODING_DISABLE_UTF8   x00001000,
+#define DOCHOSTUIFLAG_URL_ENCODING_ENABLE_UTF8   0x00002000,
+#define DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE   0x00004000,
+#define DOCHOSTUIFLAG_ENABLE_INPLACE_NAVIGATION   0x00010000,
+#define DOCHOSTUIFLAG_IME_ENABLE_RECONVERSION   0x00020000,
+#define DOCHOSTUIFLAG_THEME         0x00040000,
+#define DOCHOSTUIFLAG_NOTHEME         0x00080000,
+#define DOCHOSTUIFLAG_NOPICS         0x00100000,
+#define DOCHOSTUIFLAG_NO3DOUTERBORDER      0x00200000,
+#define DOCHOSTUIFLAG_DELEGATESIDOFDISPATCH   0x00400000
 */
-
 
 #if defined(VISUAL_C)
 #pragma data_seg("Shared")
@@ -107,7 +106,6 @@ static unsigned char _IID_IHTMLWindow3[] =
 #pragma data_seg()
 #endif
 
-
 // Our IOleInPlaceFrame functions that the browser may call
 HRESULT STDMETHODCALLTYPE Frame_QueryInterface( IOleInPlaceFrame *, REFIID,
       LPVOID * );
@@ -134,11 +132,11 @@ HRESULT STDMETHODCALLTYPE Frame_EnableModeless( IOleInPlaceFrame *, BOOL );
 HRESULT STDMETHODCALLTYPE Frame_TranslateAccelerator( IOleInPlaceFrame *,
       LPMSG, WORD );
 
-// Our IOleInPlaceFrame VTable. This is the array of pointers to the above 
+// Our IOleInPlaceFrame VTable. This is the array of pointers to the above
 // functions in our C program that the browser may call in order to interact
-// with our frame window that contains the browser object. We must define a 
-// particular set of functions that comprise the IOleInPlaceFrame set of 
-// functions (see above), and then stuff pointers to those functions in their 
+// with our frame window that contains the browser object. We must define a
+// particular set of functions that comprise the IOleInPlaceFrame set of
+// functions (see above), and then stuff pointers to those functions in their
 // respective 'slots' in this table. We want the browser to use this VTable
 // with our IOleInPlaceFrame structure.
 static IOleInPlaceFrameVtbl MyIOleInPlaceFrameTable = {
@@ -159,13 +157,13 @@ static IOleInPlaceFrameVtbl MyIOleInPlaceFrameTable = {
    Frame_TranslateAccelerator
 };
 
-// We need to return an IOleInPlaceFrame struct to the browser object. And one 
-// of our IOleInPlaceFrame functions (Frame_GetWindow) is going to need to 
-// access our window handle. So let's create our own struct that starts off 
+// We need to return an IOleInPlaceFrame struct to the browser object. And one
+// of our IOleInPlaceFrame functions (Frame_GetWindow) is going to need to
+// access our window handle. So let's create our own struct that starts off
 // with an IOleInPlaceFrame struct (and that's important -- the IOleInPlaceFrame
 // struct *must* be first), and then has an extra data member where we can store
 // our own window's HWND.
-// And because we may want to create multiple windows, each hosting its own 
+// And because we may want to create multiple windows, each hosting its own
 // browser object (to display its own web page), then we need to create a
 // IOleInPlaceFrame struct for each window. So, we're not going to declare our
 // IOleInPlaceFrame struct globally. We'll allocate it later using GlobalAlloc,
@@ -190,7 +188,6 @@ typedef struct
    ///////////////////////////////////////////////////
    HWND window;
 } _IOleInPlaceFrameEx;
-
 
 // Our IOleClientSite functions that the browser may call
 HRESULT STDMETHODCALLTYPE Site_QueryInterface( IOleClientSite *, REFIID,
@@ -223,7 +220,6 @@ static IOleClientSiteVtbl MyIOleClientSiteTable = {
    Site_OnShowWindow,
    Site_RequestNewObjectLayout
 };
-
 
 // Our IDocHostUIHandler functions that the browser may call
 HRESULT STDMETHODCALLTYPE UI_QueryInterface( IDocHostUIHandler *, REFIID,
@@ -286,7 +282,6 @@ static IDocHostUIHandlerVtbl MyIDocHostUIHandlerTable = {
 };
 
 // We'll allocate our IDocHostUIHandler object dynamically with GlobalAlloc() for reasons outlined later.
-
 
 // Our IOleInPlaceSite functions that the browser may call
 HRESULT STDMETHODCALLTYPE InPlace_QueryInterface( IOleInPlaceSite *, REFIID,
@@ -387,9 +382,7 @@ typedef struct
    ///////////////////////////////////////////////////
 } _IOleClientSiteEx;
 
-
 unsigned char COM_init;
-
 
 // We need an IDispatch function in order to receive some "feedback"
 // from IE's browser engine as to particular actions (events) that happen.
@@ -434,9 +427,8 @@ IDispatchVtbl MyIDispatchVtbl = {
 static const BSTR OnBeforeOnLoad = L"onbeforeunload";
 static const WCHAR BeforeUnload[] = L"beforeunload";
 
-
 // This is a simple C example. There are lots more things you can control about
-// the browser object, but we don't do it in this example. _Many_ of the 
+// the browser object, but we don't do it in this example. _Many_ of the
 // functions we provide below for the browser to call, will never actually be
 // called by the browser in our example. Why? Because we don't do certain
 // things with the browser that would require it to call those functions (even
@@ -507,7 +499,7 @@ HRESULT STDMETHODCALLTYPE UI_QueryInterface( IDocHostUIHandler * This,
    // Rather than duplicate much of the code in IOleClientSite's QueryInterface,
    // let's just get a pointer to our _IOleClientSiteEx object, substitute it
    // as the 'This' arg, and call our IOleClientSite's QueryInterface. Note
-   // that since our _IDocHostUIHandlerEx is embedded right inside our 
+   // that since our _IDocHostUIHandlerEx is embedded right inside our
    // _IOleClientSiteEx, and comes immediately after the _IOleInPlaceSiteEx, we
    // can employ the following trickery to get the pointer to our _IOleClientSiteEx.
    return ( Site_QueryInterface( ( IOleClientSite * ) ( ( char * ) This -
@@ -557,7 +549,7 @@ HRESULT STDMETHODCALLTYPE UI_GetHostInfo( IDocHostUIHandler * This,
    pInfo->cbSize = sizeof( DOCHOSTUIINFO );
 
    // Set some flags. We don't want any 3D border. You can do other things like
-   // hide the scroll bar (DOCHOSTUIFLAG_SCROLL_NO), disable picture display 
+   // hide the scroll bar (DOCHOSTUIFLAG_SCROLL_NO), disable picture display
    // (DOCHOSTUIFLAG_NOPICS), disable any script running when the page is loaded
    // (DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE), open a site in a new browser
    // window when the user clicks on some link (DOCHOSTUIFLAG_OPENNEWWIN), and
@@ -871,7 +863,6 @@ HRESULT STDMETHODCALLTYPE UI_FilterDataObject( IDocHostUIHandler * This,
    return ( S_FALSE );
 }
 
-
 ////////////////////// My IOleClientSite functions  //////////////////
 // We give the browser object a pointer to our IOleClientSite object when we
 // call OleCreate() or DoVerb().
@@ -919,7 +910,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface( IOleClientSite * This,
    // is an embedded IOleClientSite, so the browser doesn't mind. We want the
    // browser to continue passing our _IOleClientSiteEx pointer wherever it
    // would normally pass a IOleClientSite pointer.
-   // 
+   //
    // The IUnknown interface uses the same VTable as the first object in our
    // _IOleClientSiteEx struct (which happens to be an IOleClientSite). So
    // if the browser is asking us to match IID_IUnknown, then we'll also
@@ -930,7 +921,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface( IOleClientSite * This,
       *ppvObject = &( ( _IOleClientSiteEx * ) This )->client;
 
    // If the browser is asking us to match IID_IOleInPlaceSite, then it wants
-   // us to return a pointer to our IOleInPlaceSite struct. Then the browser 
+   // us to return a pointer to our IOleInPlaceSite struct. Then the browser
    // will use the VTable in that struct to call our IOleInPlaceSite functions.
    // It will also pass this same pointer to all of our IOleInPlaceSite
    // functions (except for Site_QueryInterface, Site_AddRef, and Site_Release.
@@ -939,7 +930,7 @@ HRESULT STDMETHODCALLTYPE Site_QueryInterface( IOleClientSite * This,
    // Actually, we're going to lie to the browser. We're going to return our own
    // _IOleInPlaceSiteEx struct, and tell the browser that it's a IOleInPlaceSite
    // struct. It's ok. The first thing in our _IOleInPlaceSiteEx is an embedded
-   // IOleInPlaceSite, so the browser doesn't mind. We want the browser to 
+   // IOleInPlaceSite, so the browser doesn't mind. We want the browser to
    // continue passing our _IOleInPlaceSiteEx pointer wherever it would
    // normally pass a IOleInPlaceSite pointer.
    else if( !memcmp( riid, &IID_IOleInPlaceSite, sizeof( GUID ) ) )
@@ -1033,7 +1024,6 @@ HRESULT STDMETHODCALLTYPE Site_RequestNewObjectLayout( IOleClientSite * This )
    ( void ) This;
    NOTIMPLEMENTED;
 }
-
 
 /////////////////////// My IOleInPlaceSite functions  /////////////////////
 // The browser object asks us for the pointer to our IOleInPlaceSite object
@@ -1220,8 +1210,6 @@ HRESULT STDMETHODCALLTYPE InPlace_OnPosRectChange( IOleInPlaceSite * This,
    return ( S_OK );
 }
 
-
-
 //////////////////// My IOleInPlaceFrame functions  //////////////////
 
 HRESULT STDMETHODCALLTYPE Frame_QueryInterface( IOleInPlaceFrame * This,
@@ -1352,8 +1340,6 @@ HRESULT STDMETHODCALLTYPE Frame_TranslateAccelerator( IOleInPlaceFrame * This,
    ( void ) wID;
    NOTIMPLEMENTED;
 }
-
-
 
 ///////////////////// My IDispatch functions  //////////////////////
 // The browser uses our IDispatch to give feedback when certain actions occur
@@ -1571,7 +1557,6 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke( IDispatch * This,
    return ( S_OK );
 }
 
-
 /************************ CreateWebEvtHandler() *********************
  * Creates an event handler, to be used to "attach to" some events that
  * happpen with an element on the web page.
@@ -1600,7 +1585,7 @@ HRESULT STDMETHODCALLTYPE Dispatch_Invoke( IDispatch * This,
  *
  * attachObj -   If not zero, then "userdata" is considered to be a BSTR of
  *      some event type to attach to, and "attachObj" is the
- *            
+ *
  *
  * RETURNS: Pointer to the IDispatch if success, or 0 if an error.
  *
@@ -1708,7 +1693,6 @@ IDispatch *WINAPI CreateWebEvtHandler( HWND hwnd, IHTMLDocument2 * htmlDoc2,
    return ( 0 );
 }
 
-
 /********************** FreeWebEvtHandler() *********************
  * Called to detach our _IDispatchEx from the "onbeforeunload" event
  * (ie, it was attached in CreateWebEvtHandler(). Also frees the
@@ -1730,12 +1714,11 @@ void WINAPI FreeWebEvtHandler( IDispatch * lpDispatch )
    webDetach( ( _IDispatchEx * ) lpDispatch );
 }
 
-
 /************************** GetWebSrcElement() **********************
  * Retrieves the IHTMLElement of some event object. The returned
  * IHTMLElement's QueryInterface() function can be called to
  * obtain other objects such as IHTMLInputElement, etc.
- * 
+ *
  * Returns: Pointer to the IHTMLElement object, or 0 if an error.
  */
 
@@ -1746,7 +1729,6 @@ IHTMLElement *WINAPI GetWebSrcElement( IHTMLEventObj * htmlEvent )
    htmlEvent->lpVtbl->get_srcElement( htmlEvent, &htmlElement );
    return ( htmlElement );
 }
-
 
 /************************** SetWebReturnValue() **********************
  * Sets the return value (to some IE Object function) to either
@@ -1767,7 +1749,6 @@ HRESULT WINAPI SetWebReturnValue( IHTMLEventObj * htmlEvent, BOOL returnVal )
 
    return ( htmlEvent->lpVtbl->put_returnValue( htmlEvent, varResult ) );
 }
-
 
 /************************** GetWebPtrs() **********************
  * Fetches pointers to the IWebBrowser2 and/or the IHTMLDocument2
@@ -1861,7 +1842,6 @@ HRESULT WINAPI GetWebPtrs( HWND hwnd, IWebBrowser2 ** webBrowser2Result,
    return ( S_OK );
 }
 
-
 /************************** TStr2BStr() *************************
  * Creates a BSTR from the passed nul-terminated string (ANSI or
  * UNICODE).
@@ -1900,7 +1880,6 @@ BSTR WINAPI TStr2BStr( HWND hwnd, const char *string )
    return ( bstr );
 }
 
-
 /************************** BStr2TStr() *************************
  * Creates a nul-terminated string (ANSI or UNICODE) from the
  * passed BSTR.
@@ -1933,7 +1912,6 @@ void *WINAPI BStr2TStr( HWND hwnd, BSTR strIn )
 
    return ( strOut );
 }
-
 
 /*************************** GetWebElement() **************************
  * Retrieves a pointer to the IHTMLElement object for the specified
@@ -2028,8 +2006,6 @@ IHTMLElement *WINAPI GetWebElement( HWND hwnd, IHTMLDocument2 * htmlDoc2,
    return ( htmlElem );
 }
 
-
-
 /************************** doEvents() ***********************
  * Pumps available messages in the thread's message queue.
  *
@@ -2048,7 +2024,6 @@ static void doEvents( HWND hwnd )
       DispatchMessage( &msg );
    }
 }
-
 
 /************************** WaitOnReadyState() **********************
  * Waits for a page (that is currently loading into the browser (for
@@ -2142,7 +2117,6 @@ HRESULT WINAPI WaitOnReadyState( HWND hwnd, READYSTATE rs, DWORD timeout,
    goto out;
 }
 
-
 /*************************** UnEmbedBrowserObject() ************************
  * Called to detach the browser object from our host window, and free its
  * resources, right before we destroy our window.
@@ -2180,7 +2154,6 @@ void WINAPI UnEmbedBrowserObject( HWND hwnd )
       SetEmbedded( hwnd, 0 );
    }
 }
-
 
 /******************************* DisplayHTMLStr() ****************************
  * Takes a string containing some HTML BODY, and displays it in the specified
@@ -2308,7 +2281,6 @@ long WINAPI DisplayHTMLStr( HWND hwnd, const char *string )
    return ( -1 );
 }
 
-
 /***************************** DisplayHTMLPage() **************************
  * Displays a URL, or HTML file on disk.
  *
@@ -2382,7 +2354,6 @@ long WINAPI DisplayHTMLPage( HWND hwnd, const char *webPageName )
 
    return ( -5 );
 }
-
 
 /******************************* DoPageAction() **************************
  * Implements the functionality of a "Back". "Forward", "Home", "Search",
@@ -2464,7 +2435,6 @@ void WINAPI DoPageAction( HWND hwnd, DWORD action )
    }
 }
 
-
 /******************************* ResizeBrowser() ****************************
  * Resizes the browser object for the specified window to the specified
  * width and height.
@@ -2499,7 +2469,6 @@ void WINAPI ResizeBrowser( HWND hwnd, DWORD width, DWORD height )
       webBrowser2->lpVtbl->Release( webBrowser2 );
    }
 }
-
 
 /***************************** EmbedBrowserObject() **************************
  * Puts the browser object inside our host window, and save a pointer to this
@@ -2696,8 +2665,6 @@ long WINAPI EmbedBrowserObject( HWND hwnd )
    // Can't get the web browser's IWebBrowser2!
    return ( -2 );
 }
-
-
 
 /* DllMain()
  * Automatically called by Win32 when the DLL is loaded or unloaded.

@@ -226,7 +226,6 @@ FUNCTION _SetHotKeyByName ( cParentForm, cKey, bAction )
 FUNCTION _DetermineKey ( cKey )
 
    LOCAL aKey, nAlt, nCtrl, nShift, nWin, nPos, cKey2, cText
-
    STATIC aKeyTables := { "LBUTTON", "RBUTTON", "CANCEL", "MBUTTON", "XBUTTON1", "XBUTTON2", ".7", "BACK", "TAB", ".10", ;
       ".11", "CLEAR", "RETURN", ".14", ".15", "SHIFT", "CONTROL", "MENU", "PAUSE", "CAPITAL", ;
       "KANA", ".22", "JUNJA", "FINAL", "HANJA", ".26", "ESCAPE", "CONVERT", "NONCONVERT", "ACCEPT", ;
@@ -274,4 +273,3 @@ FUNCTION _DetermineKey ( cKey )
    ENDDO
 
    RETURN aKey
-

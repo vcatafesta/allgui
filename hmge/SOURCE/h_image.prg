@@ -265,4 +265,3 @@ FUNCTION HasAlpha( FileName )
    DeleteObject( hBitmap )
 
    RETURN lRet
-

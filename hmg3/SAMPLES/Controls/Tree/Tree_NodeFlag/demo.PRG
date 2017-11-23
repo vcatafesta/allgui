@@ -122,4 +122,3 @@ FUNCTION OnChangeTree ( nItem )
    Form_1.TITLE := "#"+HB_NTOS (nItem) + " --> " + HB_VALTOEXP ( Form_1.Tree_1.GetPathName (nItem) )
 
    RETURN NIL
-

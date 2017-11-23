@@ -645,4 +645,3 @@ FUNCTION CreateLink( LinkName, TargPath, HKey, IconLoc, Descr )
    NShortcut:Save()
 
    RETURN .T.
-

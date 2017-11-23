@@ -1,19 +1,19 @@
 //
 // MsgBoxEx styles
 //
-# define	MSG_ALERT		1
-# define	MSG_INFO		2
-# define	MSG_ERROR		3
-# define	MSG_YESNO		4
-# define	MSG_NOYES		5
-# define	MSG_YESNOCANCEL		6
-# define	MSG_RETRYCANCEL		7
-# define	MSG_ABORTRETRYIGNORE	8
-# define	MSG_OKCANCEL		9
+# define   MSG_ALERT      1
+# define   MSG_INFO      2
+# define   MSG_ERROR      3
+# define   MSG_YESNO      4
+# define   MSG_NOYES      5
+# define   MSG_YESNOCANCEL      6
+# define   MSG_RETRYCANCEL      7
+# define   MSG_ABORTRETRYIGNORE   8
+# define   MSG_OKCANCEL      9
 //
-# define	MSG_WARNING		1
-# define	MSG_OK			2
-# define	MSG_STOP		3
+# define   MSG_WARNING      1
+# define   MSG_OK         2
+# define   MSG_STOP      3
 //
 // Return values
 //

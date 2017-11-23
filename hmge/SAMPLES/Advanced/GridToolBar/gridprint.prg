@@ -1973,9 +1973,7 @@ FUNCTION columnselected
    RETURN .t.
 
    /*
-
    function columnsumchanged
-
    local lineno := printgrid.columns.value
 
    if .not. iscontroldefined(browseprintcancel,printgrid)
@@ -1989,7 +1987,6 @@ FUNCTION columnselected
    return .t.
 
    function columntypeverify
-
    LOCAL lineno := printgrid.columns.value
 
    IF lineno > 0
@@ -3398,4 +3395,3 @@ FUNCTION _initprintgridmessages
    ENDCASE
 
    RETURN msgarr
-

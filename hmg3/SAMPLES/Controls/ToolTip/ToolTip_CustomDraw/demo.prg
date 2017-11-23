@@ -51,4 +51,3 @@ PROCEDURE SetOnOff
    MsgInfo ({"ToolTip Custom Draw is: ", ToolTipCustomDrawIsActive ()})
 
    RETURN
-

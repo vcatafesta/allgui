@@ -327,4 +327,3 @@ FUNCTION GetSeasonPict( dDate )  // Select a picture for season of year
    ENDCASE
 
    RETURN imagen
-

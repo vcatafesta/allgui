@@ -294,4 +294,3 @@ FUNCTION cambiatitulo(ctitle)
    ENDIF
 
    RETURN NIL
-

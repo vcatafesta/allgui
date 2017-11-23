@@ -277,4 +277,3 @@ HB_FUNC( INITSPLITBUTTON )
 #pragma ENDDUMP
 
    #endif
-

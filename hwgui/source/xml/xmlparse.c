@@ -580,4 +580,3 @@ HB_FUNC( HBXML_GETDOC )
 
    hb_retni( nParseError );
 }
-

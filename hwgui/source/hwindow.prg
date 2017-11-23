@@ -108,40 +108,40 @@ CLASS VAR Screen SHARED
    // you can change the object that receives focus adding
    // ON INIT {|| nInitFocus:=object:[handle] }  to the dialog definition
 
-METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+   METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
       cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, lChild, lClipper,;
       lNoClosable, bSetForm, nBmpStretch )
 
-METHOD AddItem( oWnd )
+   METHOD AddItem( oWnd )
 
-METHOD DelItem( oWnd )
+   METHOD DelItem( oWnd )
 
-METHOD FindWindow( hWndTitle )
+   METHOD FindWindow( hWndTitle )
 
-METHOD GetMain()
+   METHOD GetMain()
 
-METHOD GetMdiMain() INLINE IIF( ::GetMain() != Nil, ::aWindows[ 1 ] , Nil )
+   METHOD GetMdiMain() INLINE IIF( ::GetMain() != Nil, ::aWindows[ 1 ] , Nil )
 
-METHOD Center()   INLINE Hwg_CenterWindow( ::handle, ::Type )
+   METHOD Center()   INLINE Hwg_CenterWindow( ::handle, ::Type )
 
-METHOD Restore()  INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_RESTORE, 0 )
+   METHOD Restore()  INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_RESTORE, 0 )
 
-METHOD Maximize() INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0 )
+   METHOD Maximize() INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0 )
 
-METHOD Minimize() INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0 )
+   METHOD Minimize() INLINE hwg_Sendmessage( ::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0 )
 
-METHOD Close()   INLINE hwg_Sendmessage( ::handle, WM_SYSCOMMAND, SC_CLOSE, 0 )
+   METHOD Close()   INLINE hwg_Sendmessage( ::handle, WM_SYSCOMMAND, SC_CLOSE, 0 )
 
-METHOD Release()  INLINE ::Close( ), ::super:Release(), Self := Nil
+   METHOD Release()  INLINE ::Close( ), ::super:Release(), Self := Nil
 
-METHOD isMaximized() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWMAXIMIZED
+   METHOD isMaximized() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWMAXIMIZED
 
-METHOD isMinimized() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWMINIMIZED
+   METHOD isMinimized() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWMINIMIZED
 
-METHOD isNormal() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWNORMAL
+   METHOD isNormal() INLINE hwg_Getwindowplacement( ::handle ) == SW_SHOWNORMAL
 
-METHOD Paint()
+   METHOD Paint()
 
 ENDCLASS
 
@@ -281,17 +281,17 @@ CLASS VAR aMessages INIT { ;
    DATA  oNotifyIcon, bNotify, oNotifyMenu
    DATA  lTray INIT .F.
 
-METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
+   METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
       oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
       cAppName, oBmp, cHelp, nHelpId, bCloseQuery, bRefresh, bMdiMenu, nBmpStretch )
 
-METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate )
+   METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu, cTooltip, cMens1, cMens2, nIconIndex )
+   METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu, cTooltip, cMens1, cMens2, nIconIndex )
 
-METHOD GetMdiActive()  INLINE ::FindWindow( IIF( ::GetMain() != Nil, hwg_Sendmessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) , Nil ) )
+   METHOD GetMdiActive()  INLINE ::FindWindow( IIF( ::GetMain() != Nil, hwg_Sendmessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) , Nil ) )
 
 ENDCLASS
 
@@ -562,11 +562,11 @@ CLASS VAR aMessages INIT { ;
    DATA aChilds     INIT {}
    DATA hActive
 
-METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate, lModal)
+   METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate, lModal)
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD SetParent( oParent ) INLINE ::oWndParent := oParent
+   METHOD SetParent( oParent ) INLINE ::oWndParent := oParent
 
 ENDCLASS
 
@@ -715,13 +715,13 @@ CLASS HChildWindow INHERIT HWindow
 
    DATA oNotifyMenu
 
-METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
+   METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
       cAppName, oBmp, cHelp, nHelpId, bRefresh )
 
-METHOD Activate( lShow, lMaximized, lMinimized,lCentered, bActivate, lModal)
+   METHOD Activate( lShow, lMaximized, lMinimized,lCentered, bActivate, lModal)
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -1359,4 +1359,3 @@ STATIC FUNCTION FindInitFocus( aControls )
    ENDDO
 
    RETURN 0
-

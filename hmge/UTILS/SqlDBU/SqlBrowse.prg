@@ -673,7 +673,6 @@ FUNCTION QueryNewTbl(oGrid,cTable)
 FUNCTION BrowseTable(cTable, mod)
 
    LOCAL cSelect, bSetup , oBrw, aResult, aStruct
-
    cSelect := "SELECT * FROM "+cTable +" LIMIT 10 OFFSET 0 ;"
    aResult := SQLITE_QUERY( pDb, RTRIM( cSelect ) )
    IF EMPTY(LEN(aResult))
@@ -852,4 +851,3 @@ FUNCTION SqlDelete(cTable,lAll )
    ENDIF
 
    RETURN TRUE
-

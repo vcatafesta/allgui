@@ -302,4 +302,3 @@ FUNCTION FT_BYT2HEX(cByte,plusH)
    ENDIF
 
    RETURN xHexString
-

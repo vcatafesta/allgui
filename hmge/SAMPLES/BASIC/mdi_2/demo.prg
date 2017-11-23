@@ -353,4 +353,3 @@ PROCEDURE WinChildRestoreAll()
    RESTORE MDICHILDS ALL
 
    RETURN
-

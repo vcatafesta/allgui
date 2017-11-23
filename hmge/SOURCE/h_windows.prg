@@ -2613,4 +2613,3 @@ STATIC PROCEDURE EfeitoLabel ( cTxt )
    RETURN
 
    #endif
-

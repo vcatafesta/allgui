@@ -545,4 +545,3 @@ HB_FUNC ( SET_FORM )
 }
 
 #pragma ENDDUMP
-

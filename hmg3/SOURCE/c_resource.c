@@ -12,63 +12,57 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
-
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 
-
-
-
 // #define HB_OS_WIN_32_USED
-
 
 #include <windows.h>
 #include <shellapi.h>
@@ -92,8 +86,7 @@ HB_FUNC (LOADICON) // handle of dll/NULL , resource name/id
     HMG_retnl ((LONG_PTR) hIco);
 }
 
-
-HB_FUNC( EXTRACTICON )    
+HB_FUNC( EXTRACTICON )
 {
    HICON hIco = ExtractIcon ( GetInstance(),
                               HMG_parc (1),       // EXE, DLL or ICO Name
@@ -102,20 +95,17 @@ HB_FUNC( EXTRACTICON )
    HMG_retnl ((LONG_PTR) hIco );
 }
 
-
 HB_FUNC(LOADRESOURCE)
 {
-   HGLOBAL hGlobal = LoadResource( (HINSTANCE) HMG_parnl (1), (HRSRC) HMG_parnl (2) ); 
+   HGLOBAL hGlobal = LoadResource( (HINSTANCE) HMG_parnl (1), (HRSRC) HMG_parnl (2) );
    HMG_retnl ((LONG_PTR) hGlobal );
 }
-
 
 HB_FUNC( FINDRESOURCE ) // ( hResources, cResourceName, nResType )
 {
    HRSRC hRes = FindResource ( (HINSTANCE) HMG_parnl (1), HMG_parc (2), MAKEINTRESOURCE ( hb_parnl (3)) );
    HMG_retnl ((LONG_PTR) hRes );
 }
-
 
 //---------------------------------------------------------------------------//
 
@@ -125,4 +115,3 @@ HB_FUNC(RESOURCEFREE)//   hResource
 // For 32-64 bits Windows applications, it is not necessary to free the resources loaded using LoadResource.
    FreeResource( (HGLOBAL) HMG_parnl (1) );
 }
-

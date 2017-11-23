@@ -219,31 +219,31 @@ CLASS HBDebugger
    VAR lCBTrace          INIT .T.   // stores if codeblock tracing is allowed
    VAR lRunAtStartup     INIT .T.
 
-METHOD New()
+   METHOD New()
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD CodeblockTrace()
+   METHOD CodeblockTrace()
 
-METHOD GetExprValue( xExpr, lValid )
+   METHOD GetExprValue( xExpr, lValid )
 
-METHOD GetSourceFiles()
+   METHOD GetSourceFiles()
 
-METHOD Go()
+   METHOD Go()
 
-METHOD HandleEvent()
+   METHOD HandleEvent()
 
-METHOD LoadCallStack()
+   METHOD LoadCallStack()
 
-METHOD Quit()
+   METHOD Quit()
 
-METHOD ShowCodeLine( nProc )
+   METHOD ShowCodeLine( nProc )
 
-METHOD VarGetInfo( aVar )
+   METHOD VarGetInfo( aVar )
 
-METHOD VarGetValue( aVar )
+   METHOD VarGetValue( aVar )
 
-METHOD VarSetValue( aVar, uValue )
+   METHOD VarSetValue( aVar, uValue )
 
 ENDCLASS
 
@@ -986,4 +986,3 @@ FUNCTION ALTD( nAction )
 
    RETURN NIL
    #endif
-

@@ -81,4 +81,3 @@ IF oModDlg:lResult
 ENDIF
 
 RETURN NIL
-

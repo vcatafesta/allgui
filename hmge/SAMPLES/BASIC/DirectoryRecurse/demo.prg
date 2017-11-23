@@ -79,4 +79,3 @@ STATIC FUNCTION llenarBR_Fic()
    Ventana1.BR_Fic.Refresh
 
    RETURN NIL
-

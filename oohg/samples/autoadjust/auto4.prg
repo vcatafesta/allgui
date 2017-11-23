@@ -300,4 +300,3 @@ FUNCTION Main()
    ACTIVATE WINDOW catalog
 
    RETURN NIL
-

@@ -148,4 +148,3 @@ FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable 
    RETURN  nPageCount // PPTFComf()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

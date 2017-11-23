@@ -9,7 +9,7 @@
          memvar _nome_usuario_
          memvar _tipo_cobranca
          memvar _zero
-         
+
          memvar _tamanho_001
          memvar _tamanho_002
          memvar _tamanho_003
@@ -22,7 +22,7 @@
          memvar _pedaco_004
          memvar _pedaco_005
          memvar _pedaco_006
-         
+
          memvar path_dbf
          memvar path_imagens
 
@@ -58,12 +58,12 @@
          * cores para get
          memvar _fundo_get
          memvar _letra_get_1
-         
+
          * variáveis de apoio
          memvar _nome_unidade
          memvar a_onde
          memvar a_situacao
-         
+
          * variáveis para liberar o acesso
          memvar _a_001, _a_002, _a_003, _a_004, _a_005
          memvar _a_006, _a_007, _a_008, _a_009, _a_010
@@ -82,4 +82,3 @@
          field c_bancos, c_catprod, c_clientes, c_fpaga, c_frecebe, c_fornec, c_gfornec, c_impostos, c_mprima, c_mesas, c_motent, c_operador, c_scatprod
          field fornecedor, produto, nom_prod, pre_reaj, qtd, mat_prima, valor, tipo, sequencia, preco, seq
          field tam_001, tam_002, tam_003, tam_004, tam_005, tam_006
- 

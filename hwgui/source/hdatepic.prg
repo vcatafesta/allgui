@@ -32,33 +32,33 @@ CLASS VAR winclass   INIT "SYSDATETIMEPICK32"
    DATA bChange
    DATA lShowTime      INIT .T.
 
-METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD OnEvent( msg, wParam, lParam )
+   METHOD OnEvent( msg, wParam, lParam )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD GetValue()
+   METHOD GetValue()
 
-METHOD SetValue( xValue )
+   METHOD SetValue( xValue )
 
-METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
+   METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
       bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime )
 
-METHOD onChange( nMess )
+   METHOD onChange( nMess )
 
-METHOD When( )
+   METHOD When( )
 
-METHOD Valid( )
+   METHOD Valid( )
 
-METHOD Value ( Value ) SETGET
+   METHOD Value ( Value ) SETGET
 
-METHOD Checkvalue ( lValue ) SETGET
+   METHOD Checkvalue ( lValue ) SETGET
 
 ENDCLASS
 
@@ -322,4 +322,3 @@ METHOD Valid( ) CLASS HDatePicker
    ENDIF
 
    RETURN res
-

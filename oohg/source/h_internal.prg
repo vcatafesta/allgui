@@ -67,25 +67,25 @@ CLASS TInternal FROM TControl
    DATA OnHScrollBox   INIT nil
    DATA OnVScrollBox   INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Events_VScroll
+   METHOD Events_VScroll
 
-METHOD Events_HScroll
+   METHOD Events_HScroll
 
-METHOD VirtualWidth        SETGET
+   METHOD VirtualWidth        SETGET
 
-METHOD VirtualHeight       SETGET
+   METHOD VirtualHeight       SETGET
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD ScrollControls
+   METHOD ScrollControls
 
-METHOD Events
+   METHOD Events
 
-METHOD BackColor           SETGET
+   METHOD BackColor           SETGET
 
-METHOD BackColorCode       SETGET
+   METHOD BackColorCode       SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -419,4 +419,3 @@ HB_FUNC_STATIC( TINTERNAL_BACKCOLORCODE )
 }
 
 #pragma ENDDUMP
-

@@ -50,4 +50,3 @@ PROCEDURE SplashDelay()
    Form_Splash.Release
 
    RETURN
-

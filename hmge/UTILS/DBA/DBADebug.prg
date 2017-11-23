@@ -157,7 +157,6 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
          Dikkat : cAra1Rehbr : PUBL
 
          */
-
          PROC USavKatr( cKatar, cTitle)
 
             LOCA cFileNam := "",;
@@ -358,7 +357,6 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                      History : 8.2006 : First releas
 
                      */
-
                      PROC WhereIsIt()
 
                         LOCA nLevel   := 0,;
@@ -494,7 +492,6 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                                  7.2006 : First Release
 
                                  */
-
                                  PROC MsgMulty( xMesaj, cTitle )
 
                                     LOCA cMessage := ""
@@ -722,4 +719,3 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                                                       RETU // DBStatus()
 
                                                       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

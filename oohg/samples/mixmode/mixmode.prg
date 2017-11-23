@@ -34,4 +34,3 @@ FUNCTION Console()
    alert('Hello')
 
    RETURN NIL
-

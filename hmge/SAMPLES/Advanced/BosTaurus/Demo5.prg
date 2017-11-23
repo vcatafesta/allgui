@@ -162,4 +162,3 @@ PROCEDURE Grayness_effect_end
    BT_ClientAreaInvalidateAll ("Win1")
 
    RETURN
-

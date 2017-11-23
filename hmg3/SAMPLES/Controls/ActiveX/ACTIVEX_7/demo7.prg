@@ -45,4 +45,3 @@ PROCEDURE Test()
    Win1.Test.Object:src := cLocation := GetCurrentFolder() + '\' + 'readme.pdf'
 
    RETURN
-

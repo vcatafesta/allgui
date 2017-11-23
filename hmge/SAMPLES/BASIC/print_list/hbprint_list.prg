@@ -437,4 +437,3 @@ FUNCTION Acercade()
 
    RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+CRLF+"<josemisu@yahoo.com.ar>"+CRLF+CRLF+ ;
       hb_compiler()+CRLF+Version()+CRLF+MiniGuiVersion()+CRLF+"HBPrint library version "+ltrim(str(nVers)),W_Imp1.Title)
-

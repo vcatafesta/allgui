@@ -140,4 +140,3 @@ FUNCTION GetFirstActiveWindow()
    ENDIF
 
    RETURN nActiveWnd
-

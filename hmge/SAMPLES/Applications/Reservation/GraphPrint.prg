@@ -129,4 +129,3 @@ STATIC FUNCTION GetGraphTitleName( Parent )
    ENDDO
 
    RETURN cName
-

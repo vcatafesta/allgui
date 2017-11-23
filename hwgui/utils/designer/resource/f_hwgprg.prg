@@ -1433,4 +1433,3 @@ FUNCTION Ctrl2Prg
    FClose( han )
 
    #endscript
-

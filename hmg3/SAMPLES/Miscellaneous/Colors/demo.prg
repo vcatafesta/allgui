@@ -658,4 +658,3 @@ STATIC FUNCTION InitColorsArray()
    */
 
    RETURN aClrData
-

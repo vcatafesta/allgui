@@ -333,4 +333,3 @@ FUNCTION Porcentaje( oAgent, bAction, cMsg, cTitle )
    ACTIVATE WINDOW progress
 
    RETURN NIL
-

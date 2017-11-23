@@ -22,18 +22,18 @@ CLASS VAR winclass   INIT "STATIC"
    DATA  oImage
    DATA bClick, bDblClick
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
       bSize, ctooltip, bClick, bDblClick )
 
-METHOD Redefine( oWndParent, nId, bInit, bSize, ctooltip )
+   METHOD Redefine( oWndParent, nId, bInit, bSize, ctooltip )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD END()  INLINE ( ::Super:END(), IIf( ::oImage <> NIL, ::oImage:Release(), ::oImage := NIL ), ::oImage := NIL )
+   METHOD END()  INLINE ( ::Super:END(), IIf( ::oImage <> NIL, ::oImage:Release(), ::oImage := NIL ), ::oImage := NIL )
 
-METHOD onClick()
+   METHOD onClick()
 
-METHOD onDblClick()
+   METHOD onDblClick()
 
 ENDCLASS
 
@@ -98,20 +98,20 @@ CLASS HSayBmp INHERIT HSayImage
    DATA nZoom
    DATA nStretch
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       bSize, ctooltip, bClick, bDblClick, lTransp, nStretch, nStyle )
 
-METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp )
+   METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Paint( lpdis )
+   METHOD Paint( lpdis )
 
-METHOD ReplaceBitmap( Image, lRes )
+   METHOD ReplaceBitmap( Image, lRes )
 
    //METHOD REFRESH() INLINE ::HIDE(), hwg_Sendmessage( ::handle, WM_PAINT, 0, 0 ), ::SHOW()
 
-METHOD Refresh() INLINE hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW )
+   METHOD Refresh() INLINE hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW )
 
 ENDCLASS
 
@@ -225,14 +225,14 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
 
 CLASS HSayIcon INHERIT HSayImage
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       bSize, ctooltip, lOEM, bClick, bDblClick )
 
-METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip )
+   METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD REFRESH() INLINE hwg_Sendmessage( ::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle )
+   METHOD REFRESH() INLINE hwg_Sendmessage( ::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle )
 
 ENDCLASS
 
@@ -275,4 +275,3 @@ METHOD Init() CLASS HSayIcon
    ENDIF
 
    RETURN NIL
-

@@ -130,4 +130,3 @@ FUNCTION ReleaseAllWindowsExceptMain
    NEXT
 
    RETURN NIL
-

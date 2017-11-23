@@ -99,4 +99,3 @@ FUNCTION  GetDateRange ( cDatePick )
    ENDIF
 
    RETURN cRet
-

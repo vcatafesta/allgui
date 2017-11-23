@@ -17,12 +17,12 @@ CLASS VAR winclass   INIT "STATIC"
 
    DATA  oImage
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
       bSize,ctoolt )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD End()  INLINE ( ::Super:End(),iif(::oImage<>Nil,::oImage:Release(),::oImage:=Nil),::oImage := Nil )
+   METHOD End()  INLINE ( ::Super:End(),iif(::oImage<>Nil,::oImage:Release(),::oImage:=Nil),::oImage := Nil )
 
 ENDCLASS
 
@@ -55,16 +55,16 @@ CLASS HSayBmp INHERIT HSayImage
    DATA nOffsetH  INIT 0
    DATA nZoom
 
-METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
+   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       bSize,ctoolt )
 
-METHOD INIT
+   METHOD INIT
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD ReplaceBitmap( Image, lRes )
+   METHOD ReplaceBitmap( Image, lRes )
 
 ENDCLASS
 
@@ -144,7 +144,7 @@ METHOD ReplaceBitmap( Image, lRes ) CLASS HSayBmp
 
 CLASS HSayIcon INHERIT HSayImage
 
-METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
+   METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       bSize,ctoolt )
 
 ENDCLASS
@@ -162,4 +162,3 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    ::Activate()
 
    RETURN Self
-

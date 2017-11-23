@@ -78,7 +78,6 @@ static HB_ERRCODE sqlite3Open( SQLBASEAREAP pArea );
 static HB_ERRCODE sqlite3Close( SQLBASEAREAP pArea );
 static HB_ERRCODE sqlite3GoTo( SQLBASEAREAP pArea, HB_ULONG ulRecNo );
 
-
 static SDDNODE s_sqlt3dd =
 {
    NULL,
@@ -92,7 +91,6 @@ static SDDNODE s_sqlt3dd =
    ( SDDFUNC_GETVALUE ) NULL,
    ( SDDFUNC_GETVARLEN ) NULL
 };
-
 
 static void hb_sqlt3dd_init( void * cargo )
 {
@@ -139,7 +137,6 @@ HB_CALL_ON_STARTUP_END( _hb_sqlt3dd_init_ )
    #include "hbiniseg.h"
 #endif
 
-
 /*=====================================================================================*/
 static HB_USHORT hb_errRT_SQLT3DD( HB_ERRCODE errGenCode, HB_ERRCODE errSubCode, const char * szDescription, const char * szOperation, HB_ERRCODE errOsCode )
 {
@@ -152,7 +149,6 @@ static HB_USHORT hb_errRT_SQLT3DD( HB_ERRCODE errGenCode, HB_ERRCODE errSubCode,
 
    return uiAction;
 }
-
 
 static char * sqlite3GetError( sqlite3 * pDb, HB_ERRCODE * pErrCode )
 {
@@ -178,7 +174,6 @@ static char * sqlite3GetError( sqlite3 * pDb, HB_ERRCODE * pErrCode )
 
    return szRet;
 }
-
 
 static HB_USHORT sqlite3DeclType(sqlite3_stmt * st, HB_USHORT uiIndex )
 {
@@ -231,7 +226,6 @@ static HB_USHORT sqlite3DeclType(sqlite3_stmt * st, HB_USHORT uiIndex )
 #endif
 }
 
-
 /*============= SDD METHODS =============================================================*/
 
 static HB_ERRCODE sqlite3Connect( SQLDDCONNECTION * pConnection, PHB_ITEM pItem )
@@ -251,7 +245,6 @@ static HB_ERRCODE sqlite3Connect( SQLDDCONNECTION * pConnection, PHB_ITEM pItem 
 
    return db ? HB_SUCCESS : HB_FAILURE;
 }
-
 
 static HB_ERRCODE sqlite3Disconnect( SQLDDCONNECTION * pConnection )
 {
@@ -416,7 +409,6 @@ static HB_ERRCODE sqlite3Open( SQLBASEAREAP pArea )
    return HB_SUCCESS;
 }
 
-
 static HB_ERRCODE sqlite3Close( SQLBASEAREAP pArea )
 {
    SDDDATA * pSDDData = ( SDDDATA * ) pArea->pSDDData;
@@ -431,7 +423,6 @@ static HB_ERRCODE sqlite3Close( SQLBASEAREAP pArea )
    }
    return HB_SUCCESS;
 }
-
 
 static HB_ERRCODE sqlite3GoTo( SQLBASEAREAP pArea, HB_ULONG ulRecNo )
 {

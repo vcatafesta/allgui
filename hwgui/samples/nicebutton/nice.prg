@@ -12,4 +12,3 @@ func main
    ACTIVATE WINDOW o
 
    RETURN NIL
-

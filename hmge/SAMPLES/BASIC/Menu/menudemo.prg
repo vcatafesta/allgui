@@ -123,4 +123,3 @@ STATIC PROCEDURE ToggleAutorun
    ENDIF
 
    RETURN
-

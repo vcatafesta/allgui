@@ -344,4 +344,3 @@ FUNCTION Acercade()
 
    RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+CRLF+"<josemisu@yahoo.com.ar>"+CRLF+CRLF+ ;
       hb_compiler()+CRLF+Version()+CRLF+MiniGuiVersion(),"SUIZO miniprint_list v1.0")
-

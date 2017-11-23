@@ -77,7 +77,6 @@ HB_FUNC( HWG_OPENDEFAULTPRINTER )
    HB_RETHANDLE( hDC );
 }
 
-
 HB_FUNC( HWG_GETDEFAULTPRINTER )
 {
    DWORD dwNeeded, dwReturned;
@@ -138,7 +137,6 @@ HB_FUNC( HWG_GETPRINTERS )
    PRINTER_INFO_5 *pinfo5 = NULL;
 
    PHB_ITEM aMetr, temp;
-
 
    if( GetVersion(  ) & 0x80000000 )    // Windows 98
    {
@@ -279,12 +277,12 @@ HB_FUNC( HWG_ENDPAGE )
 }
 
 /*
- * HORZRES	Width, in pixels, of the screen.
- * VERTRES	Height, in raster lines, of the screen.
- * HORZSIZE	Width, in millimeters, of the physical screen.
- * VERTSIZE	Height, in millimeters, of the physical screen.
- * LOGPIXELSX	Number of pixels per logical inch along the screen width.
- * LOGPIXELSY	Number of pixels per logical inch along the screen height.
+ * HORZRES   Width, in pixels, of the screen.
+ * VERTRES   Height, in raster lines, of the screen.
+ * HORZSIZE   Width, in millimeters, of the physical screen.
+ * VERTSIZE   Height, in millimeters, of the physical screen.
+ * LOGPIXELSX   Number of pixels per logical inch along the screen width.
+ * LOGPIXELSY   Number of pixels per logical inch along the screen height.
  *
  */
 HB_FUNC( HWG_GETDEVICEAREA )
@@ -350,11 +348,11 @@ HB_FUNC( HWG_CREATEENHMETAFILE )
    RECT rc;
    // char cres[80];
 
-   /* Determine the picture frame dimensions. 
-    * iWidthMM is the display width in millimeters. 
-    * iHeightMM is the display height in millimeters. 
-    * iWidthPels is the display width in pixels. 
-    * iHeightPels is the display height in pixels 
+   /* Determine the picture frame dimensions.
+    * iWidthMM is the display width in millimeters.
+    * iHeightMM is the display height in millimeters.
+    * iWidthPels is the display width in pixels.
+    * iHeightPels is the display height in pixels
     */
 
    iWidthMM = GetDeviceCaps( hDCref, HORZSIZE );
@@ -362,22 +360,21 @@ HB_FUNC( HWG_CREATEENHMETAFILE )
    iWidthPels = GetDeviceCaps( hDCref, HORZRES );
    iHeightPels = GetDeviceCaps( hDCref, VERTRES );
 
-
-   /* 
-    * Retrieve the coordinates of the client 
-    * rectangle, in pixels. 
+   /*
+    * Retrieve the coordinates of the client
+    * rectangle, in pixels.
     */
 
    GetClientRect( hWnd, &rc );
    // sprintf( cres,"%d %d %d %d %d %d %d %d",iWidthMM, iHeightMM, iWidthPels, iHeightPels,rc.left,rc.top,rc.right,rc.bottom );
    // MessageBox( GetActiveWindow(), cres, "", MB_OK | MB_ICONINFORMATION );
 
-   /* 
-    * Convert client coordinates to .01-mm units. 
-    * Use iWidthMM, iWidthPels, iHeightMM, and 
-    * iHeightPels to determine the number of 
-    * .01-millimeter units per pixel in the x- 
-    *  and y-directions. 
+   /*
+    * Convert client coordinates to .01-mm units.
+    * Use iWidthMM, iWidthPels, iHeightMM, and
+    * iHeightPels to determine the number of
+    * .01-millimeter units per pixel in the x-
+    *  and y-directions.
     */
 
    rc.left = ( rc.left * iWidthMM * 100 ) / iWidthPels;
@@ -399,22 +396,22 @@ HB_FUNC( HWG_CREATEMETAFILE )
    int iWidthMM, iHeightMM;
    RECT rc;
 
-   /* Determine the picture frame dimensions. 
-    * iWidthMM is the display width in millimeters. 
-    * iHeightMM is the display height in millimeters. 
-    * iWidthPels is the display width in pixels. 
-    * iHeightPels is the display height in pixels 
+   /* Determine the picture frame dimensions.
+    * iWidthMM is the display width in millimeters.
+    * iHeightMM is the display height in millimeters.
+    * iWidthPels is the display width in pixels.
+    * iHeightPels is the display height in pixels
     */
 
    iWidthMM = GetDeviceCaps( hDCref, HORZSIZE );
    iHeightMM = GetDeviceCaps( hDCref, VERTSIZE );
 
-   /* 
-    * Convert client coordinates to .01-mm units. 
-    * Use iWidthMM, iWidthPels, iHeightMM, and 
-    * iHeightPels to determine the number of 
-    * .01-millimeter units per pixel in the x- 
-    *  and y-directions. 
+   /*
+    * Convert client coordinates to .01-mm units.
+    * Use iWidthMM, iWidthPels, iHeightMM, and
+    * iHeightPels to determine the number of
+    * .01-millimeter units per pixel in the x-
+    *  and y-directions.
     */
 
    rc.left = 0;
@@ -641,4 +638,3 @@ HB_FUNC( HWG_SETDOCUMENTPROPERTIES )
   }
   hb_retl( Result ) ;
 }
-

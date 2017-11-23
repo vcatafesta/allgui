@@ -52,22 +52,22 @@ CLASS VAR winclass   INIT "EDIT"
    DATA lMaxLength   INIT Nil
    DATA nLastKey     INIT 0
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,cPicture,lNoBorder, lMaxLength )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetGet(value) INLINE Eval( ::bSetGet,value,self )
+   METHOD SetGet(value) INLINE Eval( ::bSetGet,value,self )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD SetText(c)
+   METHOD SetText(c)
 
-METHOD GetText() INLINE hwg_Edit_GetText( ::handle )
+   METHOD GetText() INLINE hwg_Edit_GetText( ::handle )
 
 ENDCLASS
 
@@ -942,4 +942,3 @@ FUNCTION hwg_ParentGetDialog( o )
    ENDDO
 
    RETURN o
-

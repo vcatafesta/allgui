@@ -150,25 +150,25 @@ CREATE CLASS TREPORT FROM TPRINTBASE
 
    VAR aline     INIT {}
 
-METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
+   METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject)
 
-METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
+   METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
 
-METHOD extreport1(cfilerep,cheader)
+   METHOD extreport1(cfilerep,cheader)
 
-METHOD leadato(cName,cPropmet,cDefault)
+   METHOD leadato(cName,cPropmet,cDefault)
 
-METHOD leaimage(cName,cPropmet,cDefault)
+   METHOD leaimage(cName,cPropmet,cDefault)
 
-METHOD leadatoh(cName,cPropmet,cDefault,npar)
+   METHOD leadatoh(cName,cPropmet,cDefault,npar)
 
-METHOD leadatologic(cName,cPropmet,cDefault)
+   METHOD leadatologic(cName,cPropmet,cDefault)
 
-METHOD clean(cfvalue)
+   METHOD clean(cfvalue)
 
-METHOD learowi(cname,npar)
+   METHOD learowi(cname,npar)
 
-METHOD leacoli(cname,npar)
+   METHOD leacoli(cname,npar)
 
    EMPTY( _OOHG_AllVars )
 
@@ -2080,4 +2080,3 @@ STATIC FUNCTION ListAsArray( cList, cDelimiter )
    ENDIF
 
    RETURN aList
-

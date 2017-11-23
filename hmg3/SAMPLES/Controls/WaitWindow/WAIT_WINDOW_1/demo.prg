@@ -36,4 +36,3 @@ PROCEDURE test2()
    WAIT CLEAR
 
    RETURN
-

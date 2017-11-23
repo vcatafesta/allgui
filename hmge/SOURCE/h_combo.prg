@@ -737,4 +737,3 @@ FUNCTION _SetGetDropDownWidth ( ControlName, ParentForm, nWidth )
    ENDIF
 
    RETURN nWidth
-

@@ -183,4 +183,3 @@ FUNCTION WathLibLink(MiniGuiFolder,HBCHOICE)
    ENDIF
 
    RETURN( Out )
-

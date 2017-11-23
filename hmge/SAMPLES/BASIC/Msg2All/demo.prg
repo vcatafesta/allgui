@@ -314,4 +314,3 @@ HB_FUNC( GETLOCALIP )
 }
 
 #pragma ENDDUMP
-

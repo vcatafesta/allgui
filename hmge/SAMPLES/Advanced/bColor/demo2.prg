@@ -104,4 +104,3 @@ FUNCTION Main
    RETURN NIL
 
    #include "c_bcolor.c"
-

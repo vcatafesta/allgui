@@ -42,4 +42,3 @@ STATIC FUNCTION _GetRandomImageOrColor()
    LOCAL nImgIndex := hb_RandomInt( Len( aImgNames ) )
 
    RETURN If( HB_ISCHAR( aImgNames[ nImgIndex ] ), GetStartUpFolder() + "\IMG\" + aImgNames[ nImgIndex ], aImgNames[ nImgIndex ] )
-

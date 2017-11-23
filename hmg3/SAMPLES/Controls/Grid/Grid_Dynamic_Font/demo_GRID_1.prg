@@ -63,4 +63,3 @@ FUNCTION HeaderForeColor
    ENDIF
 
    RETURN aColor
-

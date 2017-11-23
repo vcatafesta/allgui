@@ -164,4 +164,3 @@ PROCEDURE RemoveLibFile()
    ENDIF
 
    RETURN
-

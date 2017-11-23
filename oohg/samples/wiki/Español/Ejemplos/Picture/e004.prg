@@ -104,4 +104,3 @@ FUNCTION SetExcludeArea( oPict1 )
    /*
    * EOF
    */
-

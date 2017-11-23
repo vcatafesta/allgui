@@ -56,41 +56,41 @@ CLASS TTextArray FROM TControl
 
    DATA Type       INIT "TEXTARRAY" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD Events
+   METHOD Events
 
-METHOD RowCount       SETGET
+   METHOD RowCount       SETGET
 
-METHOD ColCount       SETGET
+   METHOD ColCount       SETGET
 
-METHOD TextRow        SETGET
+   METHOD TextRow        SETGET
 
-METHOD TextCol        SETGET
+   METHOD TextCol        SETGET
 
-METHOD CursorType     SETGET
+   METHOD CursorType     SETGET
 
-METHOD AssumeFixed    SETGET
+   METHOD AssumeFixed    SETGET
 
-METHOD Scroll
+   METHOD Scroll
 
-METHOD Clear
+   METHOD Clear
 
-METHOD Write
+   METHOD Write
 
-METHOD WriteRaw
+   METHOD WriteRaw
 
-METHOD WriteLn(t,c,r,f,b)   BLOCK { |Self,t,c,r,f,b| ::Write(t,c,r,f,b) , ::Write( CHR( 13 ) + CHR( 10 ) ) }
+   METHOD WriteLn(t,c,r,f,b)   BLOCK { |Self,t,c,r,f,b| ::Write(t,c,r,f,b) , ::Write( CHR( 13 ) + CHR( 10 ) ) }
 
-METHOD QQOut(t)             BLOCK { |Self,t| ::Write( t ) }
+   METHOD QQOut(t)             BLOCK { |Self,t| ::Write( t ) }
 
-METHOD QOut(t)              BLOCK { |Self,t| ::Write( CHR( 13 ) + CHR( 10 ) ) , ::Write( t ) }
+   METHOD QOut(t)              BLOCK { |Self,t| ::Write( CHR( 13 ) + CHR( 10 ) ) , ::Write( t ) }
 
-METHOD DevPos
+   METHOD DevPos
 
-METHOD Cls                  BLOCK { |Self| ::Clear() , ::DevPos( 0, 0 ) }
+   METHOD Cls                  BLOCK { |Self| ::Clear() , ::DevPos( 0, 0 ) }
 
    EMPTY( _OOHG_AllVars )
 
@@ -1364,4 +1364,3 @@ HB_FUNC( INITTEXTARRAY )
 }
 
 #pragma ENDDUMP
-

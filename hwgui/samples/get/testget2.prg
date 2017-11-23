@@ -130,4 +130,3 @@ FUNCTION TestBallon
    ACTIVATE DIALOG oWnd
 
    RETURN NIL
-

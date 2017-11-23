@@ -55,4 +55,3 @@ FUNCTION HideWait_Window()
    ENDIF
 
    RETURN NIL
-

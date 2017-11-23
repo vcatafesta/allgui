@@ -269,4 +269,3 @@ PROCEDURE t2()
    ENDIF
 
    RETURN
-

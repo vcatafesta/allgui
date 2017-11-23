@@ -115,4 +115,3 @@ PROCEDURE Resize
    /*
    * EOF
    */
-

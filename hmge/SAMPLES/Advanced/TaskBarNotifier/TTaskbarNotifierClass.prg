@@ -103,79 +103,51 @@ CLASS TTaskbarNotifier
    DATA lKeepVisibleOnMouseOver INIT FALSE
    DATA lReShowOnMouseOver      INIT FALSE
 
-METHOD DrawBackground( dc )
-
-METHOD DrawCloseButton( dc )
-
-METHOD DrawContent( dc )
-
-METHOD DrawTitle( dc )
-
-METHOD OnTimerEvent()
-
-METHOD SetBounds( n1, n2, n3, n4 ) INLINE SetWindowPos( ::WndHandle, -1, n1, n2, n3, n4, 20 /* SWP_NOZORDER + SWP_NOACTIVATE*/ )
-
-METHOD SetGetColor( e, aValue )
-
-METHOD SetGetFont( e, oValue )
-
-METHOD SetGetRect( e, n1, n2, n3, n4 )
-
-METHOD SetGetText( e, sValue )
+   METHOD DrawBackground( dc )
+   METHOD DrawCloseButton( dc )
+   METHOD DrawContent( dc )
+   METHOD DrawTitle( dc )
+   METHOD OnTimerEvent()
+   METHOD SetBounds( n1, n2, n3, n4 ) INLINE SetWindowPos( ::WndHandle, -1, n1, n2, n3, n4, 20 /* SWP_NOZORDER + SWP_NOACTIVATE*/ )
+   METHOD SetGetColor( e, aValue )
+   METHOD SetGetFont( e, oValue )
+   METHOD SetGetRect( e, n1, n2, n3, n4 )
+   METHOD SetGetText( e, sValue )
 
    EXPORTED:
-
-METHOD Init( sBitmapFile ) CONSTRUCTOR
-
+   METHOD Init( sBitmapFile ) CONSTRUCTOR
    DESTRUCTOR TNDestroy
 
-METHOD Show( strTitle, strContent, nTimeToShow, nTimeToStay, nTimeToHide )
+   METHOD Show( strTitle, strContent, nTimeToShow, nTimeToStay, nTimeToHide )
+   METHOD Hide()
 
-METHOD Hide()
+   METHOD TitleText( s )                INLINE ::SetGetText( @::sTitleText, s )
+   METHOD TitleRect( n1, n2, n3, n4 )   INLINE ::SetGetRect( @::aTitleRectangle, n1, n2, n3, n4 )
+   METHOD TitleNormalColor( a )         INLINE ::SetGetColor( @::nTitleNormalColor, a )
+   METHOD TitleHoverColor( a )          INLINE ::SetGetColor( @::nTitleHoverColor, a )
+   METHOD TitleNormalFont( o )          INLINE ::SetGetFont( @::oTitleNormalFont, o )
+   METHOD TitleHoverFont( o )           INLINE ::SetGetFont( @::oTitleHoverFont, o )
+   METHOD TitleOnClickEvent( l, blk )
 
-METHOD TitleText( s )                INLINE ::SetGetText( @::sTitleText, s )
+   METHOD ContentText( s )              INLINE ::SetGetText( @::sContentText, s )
+   METHOD ContentRect( n1, n2, n3, n4 ) INLINE ::SetGetRect ( @::aContentRectangle, n1, n2, n3, n4 )
+   METHOD ContentNormalColor( a )       INLINE ::SetGetColor( @::nContentNormalColor, a )
+   METHOD ContentHoverColor( a )        INLINE ::SetGetColor( @::nContentHoverColor, a )
+   METHOD ContentNormalFont( o )        INLINE ::SetGetFont( @::oContentNormalFont, o )
+   METHOD ContentHoverFont( o )         INLINE ::SetGetFont( @::oContentHoverFont, o )
+   METHOD ContentOnClickEvent( l, blk )
 
-METHOD TitleRect( n1, n2, n3, n4 )   INLINE ::SetGetRect( @::aTitleRectangle, n1, n2, n3, n4 )
+   METHOD CloseButtonClickable( l )
 
-METHOD TitleNormalColor( a )         INLINE ::SetGetColor( @::nTitleNormalColor, a )
+   METHOD OnMouseEnter( n1, n2 )
+   METHOD OnMouseMove( n1, n2 )
+   METHOD OnMouseLeave( n1, n2 )
+   METHOD OnMouseDblClick( n1, n2 )
 
-METHOD TitleHoverColor( a )          INLINE ::SetGetColor( @::nTitleHoverColor, a )
+   METHOD OnPaint( )
 
-METHOD TitleNormalFont( o )          INLINE ::SetGetFont( @::oTitleNormalFont, o )
-
-METHOD TitleHoverFont( o )           INLINE ::SetGetFont( @::oTitleHoverFont, o )
-
-METHOD TitleOnClickEvent( l, blk )
-
-METHOD ContentText( s )              INLINE ::SetGetText( @::sContentText, s )
-
-METHOD ContentRect( n1, n2, n3, n4 ) INLINE ::SetGetRect ( @::aContentRectangle, n1, n2, n3, n4 )
-
-METHOD ContentNormalColor( a )       INLINE ::SetGetColor( @::nContentNormalColor, a )
-
-METHOD ContentHoverColor( a )        INLINE ::SetGetColor( @::nContentHoverColor, a )
-
-METHOD ContentNormalFont( o )        INLINE ::SetGetFont( @::oContentNormalFont, o )
-
-METHOD ContentHoverFont( o )         INLINE ::SetGetFont( @::oContentHoverFont, o )
-
-METHOD ContentOnClickEvent( l, blk )
-
-METHOD CloseButtonClickable( l )
-
-METHOD OnMouseEnter( n1, n2 )
-
-METHOD OnMouseMove( n1, n2 )
-
-METHOD OnMouseLeave( n1, n2 )
-
-METHOD OnMouseDblClick( n1, n2 )
-
-METHOD OnPaint( )
-
-METHOD KeepVisibleOnMouseOver( l )
-
-METHOD ReShowOnMouseOver( l )
+   METHOD KeepVisibleOnMouseOver( l )
+   METHOD ReShowOnMouseOver( l )
 
    //   UNDECLARED METHOD ClassName()  INLINE ( "TTaskbarNotifier" )
    UNDECLARED METHOD GetById( n )
@@ -920,4 +892,3 @@ HB_FUNC( _DRAWTEXT )
 }
 
 #pragma ENDDUMP
-

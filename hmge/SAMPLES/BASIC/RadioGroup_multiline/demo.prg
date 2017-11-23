@@ -146,4 +146,3 @@ FUNCTION RadioGroup_Format(cControl, cForm, nGap, lFixedHeight)  // for vertical
    ENDIF
 
    RETURN nTotalH
-

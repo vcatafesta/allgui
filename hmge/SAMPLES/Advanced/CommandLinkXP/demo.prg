@@ -121,4 +121,3 @@ FUNCTION DoAction( nMode )
    END SWITCH
 
    RETURN NIL
-

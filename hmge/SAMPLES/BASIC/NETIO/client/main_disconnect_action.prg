@@ -23,4 +23,3 @@ FUNCTION main_disconnect_action
    SETPROPERTY('Main', 'Title', cMainTitle + ' - Disconnected!')
 
    RETURN NIL
-

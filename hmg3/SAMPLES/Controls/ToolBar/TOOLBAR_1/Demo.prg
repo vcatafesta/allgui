@@ -109,4 +109,3 @@ PROCEDURE Modal_CLick
    Form_2.Activate
 
    RETURN NIL
-

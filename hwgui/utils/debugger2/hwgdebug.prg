@@ -1270,4 +1270,3 @@ STATIC FUNCTION ExitDbg()
    handl1 := -1
 
    RETURN .T.
-

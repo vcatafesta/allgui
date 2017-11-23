@@ -24,21 +24,21 @@ CLASS VAR winclass   INIT "SysMonthCal32"
    DATA bChange
    DATA bSelect
 
-METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
       lWeekNumbers, bSelect )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetValue( dValue )
+   METHOD SetValue( dValue )
 
-METHOD GetValue()
+   METHOD GetValue()
 
-METHOD onChange( )
+   METHOD onChange( )
 
-METHOD onSelect( )
+   METHOD onSelect( )
 
 ENDCLASS
 
@@ -206,4 +206,3 @@ HB_FUNC ( HWG_GETMONTHCALENDARDATE ) // adaptation of function GetDatePicker of 
 }
 
 #pragma ENDDUMP
-

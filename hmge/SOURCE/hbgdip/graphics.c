@@ -120,9 +120,9 @@ HB_FUNC( GDIPDRAWIMAGERECTRECT )
    REAL srcheight = HB_REAL( 10 );
 
    if( NULL != graphics && NULL != image )
-      hb_retni( fn_GdipDrawImageRectRect( graphics, image, 
-         dstx, dsty, dstwidth, dstheight, 
-         srcx, srcy, srcwidth, srcheight, 
+      hb_retni( fn_GdipDrawImageRectRect( graphics, image,
+         dstx, dsty, dstwidth, dstheight,
+         srcx, srcy, srcwidth, srcheight,
          ( GpUnit ) hb_parns(11), (GDIPCONST GpImageAttributes *) hb_parptr(12) ,
          NULL, NULL ) );
    else

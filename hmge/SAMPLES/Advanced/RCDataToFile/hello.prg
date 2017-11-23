@@ -9,4 +9,3 @@ PROCEDURE main()
    ErrorLevel( 7 )
 
    RETURN
-

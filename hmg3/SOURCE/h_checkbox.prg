@@ -445,4 +445,3 @@ PROCEDURE _DataCheckBoxSave ( ControlName , ParentForm)
    REPLACE &Field WITH _GetValue ( Controlname , ParentForm )
 
    RETURN
-

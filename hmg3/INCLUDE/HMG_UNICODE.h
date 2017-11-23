@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> HMG_UNICODE.h  
+ HMG Header File --> HMG_UNICODE.h
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -15,7 +15,6 @@
 
  ----------------------------------------------------------------------------*/
 
-
 /*****************************************************************************************
 *   WINDOWS MACRO DEFINITION
 ******************************************************************************************/
@@ -24,17 +23,13 @@
    #define  WINVER        0x0501   // Win XP
 #endif
 
-
 #ifndef _WIN32_WINNT
-   #define _WIN32_WINNT   WINVER  // ( XP = 0x0501 , Vista = 0x0600 ) 
+   #define _WIN32_WINNT   WINVER  // ( XP = 0x0501 , Vista = 0x0600 )
 #endif
-
 
 #ifndef _WIN32_IE
    #define _WIN32_IE      0x0600   // Internet Explorer 6.0 (Win XP)
 #endif
-
-
 
 /*****************************************************************************************
 *   HMG INTERNAL MACRO DEFINITION
@@ -44,8 +39,6 @@
 #define HMG_WCtoMB(c)   ((c != NULL) ? hb_wctomb(c) : NULL)  // WideCharToMultiByte( WCHAR ) --> return CHAR
 
 #define HMG_INTNIL  (INT)(0xEFFFFFFF)
-
-
 
 /*****************************************************************************************
 *   ANSI/UNICODE MACRO DEFINITION
@@ -77,7 +70,7 @@
    #define HMG_WCHAR_TO_CHAR(c)      hb_osStrU16Decode(c)                       // return CHAR
       #define HMG_retc(c)            hb_retc    (HMG_WCHAR_TO_CHAR(c))
       #define HMG_storc(c,i)         hb_storc   (HMG_WCHAR_TO_CHAR(c),i)
-      #define HMG_storvc(c,l,n)      hb_storvc  (HMG_WCHAR_TO_CHAR(c),l,n) 
+      #define HMG_storvc(c,l,n)      hb_storvc  (HMG_WCHAR_TO_CHAR(c),l,n)
       #define HMG_retclen(c,l)       hb_retclen (HMG_WCHAR_TO_CHAR(c),l)
       #define HMG_retc_buffer(c)     hb_retc_buffer (HMG_WCHAR_TO_CHAR(c))
 
@@ -97,11 +90,11 @@
 #else
 
    #include <tchar.h>
-   #include <wchar.h>  
+   #include <wchar.h>
 // #include "hbapi.h"
-    
+
    #define HMG_CHAR_TO_WCHAR(c)     (c)
-      #define HMG_parc(n)            hb_parc (n)     
+      #define HMG_parc(n)            hb_parc (n)
       #define HMG_parvc(n,i)         hb_parvc (n,i)
       #define HMG_arrayGetCPtr(a,n)  hb_arrayGetCPtr (a,n)
 
@@ -125,8 +118,6 @@
    #define HMG_ToAnsi(c)    (c)
    #define HMG_IsAnsi_UnicodeToAnsi(c) HMG_WCtoMB(c)
 #endif
-
-
 
 /*****************************************************************************************
 *   32-64 BITS MACRO DEFINITION
@@ -153,7 +144,6 @@
    #define HMG_arraySetNL    hb_arraySetNLL
    #define HMG_arrayGetNL    hb_arrayGetNLL
 
-
 #else
 
    // INT_PTR   --> int
@@ -174,13 +164,10 @@
 
 #endif
 
-
 // WPARAM   --> UINT_PTR
 // LPARAM   --> LONG_PTR
 // HANDLE   --> LONG_PTR
 // LRESULT  --> LONG_PTR
-
-
 
 /*****************************************************************************************
 *   MACRO DEFINITION FOR CALL DLL FUNCTION
@@ -212,7 +199,7 @@ _DLL_FUNC_RET _DLL_FUNC_TYPE _FUNC_NAME _DLL_FUNC_PARAM \
       return pfunc _DLL_FUNC_CALLPARAM;\
 }
 
-/* 
+/*
 Example:
 
 HMG_DEFINE_DLL_FUNC ( win_Shell_GetImageLists,                            // user function name
@@ -225,15 +212,14 @@ HMG_DEFINE_DLL_FUNC ( win_Shell_GetImageLists,                            // use
                       FALSE                                               // return value if fail call function of dll
                     )
 
-
 HB_FUNC ( BT_GETSYSTEMICONIMAGELIST )
 {
    BOOL lLargeIcon = (BOOL) hb_parl (1);
    HIMAGELIST himlLarge = NULL;
    HIMAGELIST himlSmall = NULL;
-   
+
    win_Shell_GetImageLists (&himlLarge, &himlSmall);
-   
+
    if ( lLargeIcon )
       HMG_retnl ((LONG_PTR) himlLarge);
    else
@@ -242,6 +228,4 @@ HB_FUNC ( BT_GETSYSTEMICONIMAGELIST )
 
 */
 
-
 void HMG_Trace( const char * file, int line, const char * function, TCHAR * fmt, ... );
-

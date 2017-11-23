@@ -21,4 +21,3 @@ FUNCTION SetCursorOnControls(xCursor)
    SetWindowCursor (This.Handle, xCursor)    // All Controls associated with the class
 
    RETURN NIL
-

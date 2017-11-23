@@ -68,7 +68,7 @@ HB_FUNC( HWG_DRAWTEXT )
    {
       pango_layout_set_width( hDC->layout, iWidth*PANGO_SCALE );
       // pango_layout_set_wrap( hDC->layout, PANGO_WRAP_CHAR );
-      pango_layout_set_alignment( hDC->layout, 
+      pango_layout_set_alignment( hDC->layout,
           (hb_parni(7) & DT_CENTER)? PANGO_ALIGN_CENTER : PANGO_ALIGN_RIGHT );
    }
 
@@ -103,7 +103,7 @@ HB_FUNC( HWG_GETTEXTMETRIC )
                pango_font_metrics_get_descent( metrics ) ) / PANGO_SCALE;
       width = pango_font_metrics_get_approximate_char_width(metrics) / PANGO_SCALE;
       pango_font_metrics_unref( metrics );
-      
+
       temp = _itemPutNL( NULL, height );
       _itemArrayPut( aMetr, 1, temp );
       _itemRelease( temp );
@@ -117,9 +117,9 @@ HB_FUNC( HWG_GETTEXTMETRIC )
       _itemRelease( temp );
 
       _itemReturn( aMetr );
-      _itemRelease( aMetr );  
+      _itemRelease( aMetr );
    }
-   
+
 }
 
 HB_FUNC( HWG_GETTEXTSIZE )
@@ -174,7 +174,6 @@ HB_FUNC( HWG_GETBKCOLOR )
    hb_retnl( hDC->bcolor );
 }
 
-
 HB_FUNC( HWG_EXTTEXTOUT )
 {
 }
@@ -194,7 +193,7 @@ HB_FUNC( HWG_WINDOWFROMDC )
 {
 }
 
-/* CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet], 
+/* CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwCharSet],
                [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut]  )
 */
 HB_FUNC( HWG_CREATEFONT )
@@ -215,7 +214,7 @@ HB_FUNC( HWG_CREATEFONT )
    h->hFont = hFont;
 
    HB_RETHANDLE( h );
-   
+
 }
 
 /*
@@ -224,7 +223,7 @@ HB_FUNC( HWG_CREATEFONT )
 HB_FUNC( HWG_SETCTRLFONT )
 {
    GtkWidget * hCtrl = (GtkWidget*) HB_PARHANDLE(1);
-   GtkWidget * hLabel = (GtkWidget*) g_object_get_data( (GObject*) hCtrl,"label" );   
+   GtkWidget * hLabel = (GtkWidget*) g_object_get_data( (GObject*) hCtrl,"label" );
    GtkStyle * style;
 
    if( GTK_IS_BUTTON( hCtrl ) )
@@ -233,7 +232,7 @@ HB_FUNC( HWG_SETCTRLFONT )
       hCtrl = gtk_bin_get_child( GTK_BIN( hCtrl ) );
    else if( hLabel )
       hCtrl = (GtkWidget*) hLabel;
-      
+
    style = gtk_style_copy( gtk_widget_get_style( hCtrl ) );
 
    style->font_desc = ( (PHWGUI_FONT) HB_PARHANDLE(2) )->hFont;

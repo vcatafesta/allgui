@@ -153,8 +153,6 @@ HB_FUNC( HWG_BOX )
           );
 }
 
-
-
 HB_FUNC( HWG_DRAWLINE )
 {
    MoveToEx( ( HDC ) HB_PARHANDLE( 1 ), hb_parni( 2 ), hb_parni( 3 ), NULL );
@@ -239,7 +237,7 @@ HB_FUNC( HWG_REDRAWWINDOW )
       rc.top   = y - 1;
       rc.right = x + w + 1;
       rc.bottom = y + h + 1 ;
-   }   
+   }
    RedrawWindow(
     ( HWND ) HB_PARHANDLE( 1 ),  // handle of window
     ( hb_pcount() > 3 )? &rc:NULL,  // address of structure with update rectangle
@@ -402,7 +400,7 @@ HB_FUNC( HWG_DRAWBITMAP )
    if( nWidthDest && ( nWidthDest != bitmap.bmWidth ||
                nHeightDest != bitmap.bmHeight ) )
    {
-      SetStretchBltMode(  hDC, COLORONCOLOR );    
+      SetStretchBltMode(  hDC, COLORONCOLOR );
       StretchBlt( hDC, hb_parni( 4 ), hb_parni( 5 ), nWidthDest, nHeightDest,
             hDCmem, 0, 0, bitmap.bmWidth, bitmap.bmHeight, dwraster );
    }
@@ -454,7 +452,7 @@ HB_FUNC( HWG_DRAWTRANSPARENTBITMAP )
       /*
       BitBlt( dcTrans, 0, 0, bitmap.bmWidth, bitmap.bmHeight, dcImage, 0, 0,
             SRCCOPY );
-      SetStretchBltMode(  hDC, COLORONCOLOR );    
+      SetStretchBltMode(  hDC, COLORONCOLOR );
       StretchBlt( hDC, 0, 0, nWidthDest, nHeightDest, dcImage, 0, 0,
             bitmap.bmWidth, bitmap.bmHeight, SRCINVERT );
       StretchBlt( hDC, 0, 0, nWidthDest, nHeightDest, dcTrans, 0, 0,
@@ -523,7 +521,6 @@ HB_FUNC( HWG_SPREADBITMAP )
    DeleteDC( hDCmem );
 }
 
-
 /*  CenterBitmap( hDC, hWnd, hBitmap, style, brush )
 */
 
@@ -551,7 +548,6 @@ HB_FUNC( HWG_CENTERBITMAP )
    DeleteDC( hDCmem );
 }
 
-
 HB_FUNC( HWG_GETBITMAPSIZE )
 {
    BITMAP bitmap;
@@ -578,7 +574,6 @@ HB_FUNC( HWG_GETBITMAPSIZE )
    hb_itemArrayPut( aMetr, 4, temp );
    hb_itemRelease( temp );
 
-
    hb_itemReturn( aMetr );
    hb_itemRelease( aMetr );
 }
@@ -603,7 +598,6 @@ HB_FUNC( HWG_GETICONSIZE )
    temp = hb_itemPutNL( NULL, nret );
    hb_itemArrayPut( aMetr, 3, temp );
    hb_itemRelease( temp );
-
 
    hb_itemReturn( aMetr );
    hb_itemRelease( aMetr );
@@ -1198,6 +1192,5 @@ HB_FUNC( HWG_PTRRECT2ARRAY )
 {
    RECT *rect =   (RECT *) HB_PARHANDLE( 1 ) ;
    hb_itemRelease(hb_itemReturn(Rect2ArrayH(&rect)));
-} 
+}
 */
-

@@ -69,7 +69,6 @@ typedef struct DYNAPARM
 
 #pragma pack()
 
-
 //------------------------------------------------------------------
 
 RESULT DynaCall( int Flags, DWORD lpFunction,

@@ -47,4 +47,3 @@ FUNCTION Main ()
    ACTIVATE WINDOW oWnd
 
    RETURN NIL
-

@@ -225,4 +225,3 @@ PROCEDURE _DatePickerFormatDate ( ControlHandle , cFormatDate )
    DATETIME_SETFORMAT (ControlHandle, cFormatDate)
 
    RETURN
-

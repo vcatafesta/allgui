@@ -424,4 +424,3 @@ PROCEDURE RepositionToolBar (nIndex)
    ENDIF
 
    RETURN
-

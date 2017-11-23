@@ -28,4 +28,3 @@ FUNCTION Main
    Main.Activate
 
    RETURN NIL
-

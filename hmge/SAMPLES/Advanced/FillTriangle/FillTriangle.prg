@@ -161,4 +161,3 @@ HB_FUNC( GETPIXELCOLOR )
 }
 
 #pragma ENDDUMP
-

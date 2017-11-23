@@ -309,4 +309,3 @@ FUNCTION FREADline( nH as Numeric, cB AS STRING, nMaxLine as Numeric)
    RETURN lReturn
 
    *+ EOF: FT_FUNCS.PRG
-

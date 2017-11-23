@@ -161,4 +161,3 @@ PROCEDURE DoFolder( cNewDir )
    ENDIF
 
    RETURN
-

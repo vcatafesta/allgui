@@ -132,4 +132,3 @@ HB_FUNC( DRAWCOLORFRAME )
 }
 
 #pragma ENDDUMP
-

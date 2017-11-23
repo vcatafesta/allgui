@@ -41,4 +41,3 @@ FUNCTION ProgressUpdate(nPos , cFile )
    Form_1.Label_1.Value := cFile
 
    RETURN NIL
-

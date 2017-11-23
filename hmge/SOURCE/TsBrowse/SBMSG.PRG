@@ -1037,4 +1037,3 @@ FUNCTION LoadMsg()
    AEval( aProper, { |e| AAdd( aMsg, e ) } )
 
    RETURN aMsg
-

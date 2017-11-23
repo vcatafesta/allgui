@@ -110,4 +110,3 @@ HB_FUNC( SHOWCONSOLE )
 }
 
 #pragma ENDDUMP
-

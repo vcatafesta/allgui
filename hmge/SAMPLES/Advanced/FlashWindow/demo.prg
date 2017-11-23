@@ -77,4 +77,3 @@ HB_FUNC ( FINDWINDOW )
 }
 
 #pragma ENDDUMP
-

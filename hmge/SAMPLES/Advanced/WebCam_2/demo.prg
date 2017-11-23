@@ -687,4 +687,3 @@ BOOL SaveHBitmapToFile( void * HBitmap, const char * FileName, unsigned int Widt
 }
 
 #pragma ENDUMP
-

@@ -25,23 +25,23 @@ CLASS hrebar INHERIT HControl
    DATA m_nWidth, m_nHeight
    DATA aBands INIT  {}
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
 
-METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lVert )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD INIT()
+   METHOD INIT()
 
-METHOD ADDBARColor( pBar, clrFore, clrBack, pszText, dwStyle ) INLINE hwg_Addbarcolors( ::handle, pBar, clrFore, clrBack, pszText, dwStyle )
+   METHOD ADDBARColor( pBar, clrFore, clrBack, pszText, dwStyle ) INLINE hwg_Addbarcolors( ::handle, pBar, clrFore, clrBack, pszText, dwStyle )
 
-METHOD Addbarbitmap( pBar, pszText, pbmp, dwStyle ) INLINE hwg_Addbarbitmap( ::handle, pBar, pszText, pbmp, dwStyle )
+   METHOD Addbarbitmap( pBar, pszText, pbmp, dwStyle ) INLINE hwg_Addbarbitmap( ::handle, pBar, pszText, pbmp, dwStyle )
 
-METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+   METHOD RebarBandNew( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) INLINE ::CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
 
-METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
+   METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
 
 ENDCLASS
 
@@ -122,4 +122,3 @@ METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle ) CLASS hreba
    ::aBands := {}
 
    RETURN NIL
-

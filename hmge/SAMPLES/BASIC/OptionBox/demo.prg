@@ -101,4 +101,3 @@ FUNCTION OPTIONBOX_CANCEL
    ThisWindow.Release
 
    RETURN 0
-

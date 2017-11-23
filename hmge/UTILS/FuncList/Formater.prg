@@ -317,4 +317,3 @@ STATIC FUNCTION IsPRG( cFile, aLangStrings )
    RETURN lIsPRG
 
    ****** End of lIsPRG ******
-

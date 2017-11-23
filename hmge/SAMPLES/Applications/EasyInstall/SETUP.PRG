@@ -804,4 +804,3 @@ HB_FUNC( EXITWINDOWSEX )
 #pragma ENDDUMP
 
    * EOF
-

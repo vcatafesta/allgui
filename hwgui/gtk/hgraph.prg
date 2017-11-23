@@ -25,18 +25,18 @@ CLASS VAR winclass   INIT "STATIC"
    DATA oPen, oPenCoor
    DATA xmax, ymax, xmin, ymin PROTECTED
 
-METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
+   METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
       bSize,ctoolt,tcolor,bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD CalcMinMax()
+   METHOD CalcMinMax()
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD Rebuild( aValues )
+   METHOD Rebuild( aValues )
 
 ENDCLASS
 
@@ -199,4 +199,3 @@ METHOD Rebuild( aValues, nType ) CLASS HGraph
    hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_INTERNALPAINT + RDW_UPDATENOW )
 
    RETURN NIL
-

@@ -593,4 +593,3 @@ FUNCTION _DeleteTabPage ( ControlName , ParentForm , Position )
    ENDIF
 
    RETURN NIL
-

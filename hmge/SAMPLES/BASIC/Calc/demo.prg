@@ -19,4 +19,3 @@ FUNCTION RunCalc()
    Main.Text_2.Value := System.ClipBoard
 
    RETURN NIL
-

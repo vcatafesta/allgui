@@ -748,4 +748,3 @@ STATIC FUNCTION find_formas_recebimento()
    ENDIF
 
    return(nil)
-

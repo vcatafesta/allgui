@@ -25,19 +25,19 @@ CLASS VAR nLastErr SHARED
    DATA aAttr   INIT {}
    DATA cargo
 
-METHOD New( cTitle, type, aAttr )
+   METHOD New( cTitle, type, aAttr )
 
-METHOD Add( xItem )
+   METHOD Add( xItem )
 
-METHOD GetAttribute( cName )
+   METHOD GetAttribute( cName )
 
-METHOD SetAttribute( cName,cValue )
+   METHOD SetAttribute( cName,cValue )
 
-METHOD DelAttribute( cName )
+   METHOD DelAttribute( cName )
 
-METHOD Save( handle,level )
+   METHOD Save( handle,level )
 
-METHOD Find( cTitle,nStart )
+   METHOD Find( cTitle,nStart )
 
 ENDCLASS
 
@@ -210,15 +210,15 @@ METHOD Find( cTitle,nStart,block ) CLASS HXMLNode
 
 CLASS HXMLDoc INHERIT HXMLNode
 
-METHOD New( encoding )
+   METHOD New( encoding )
 
-METHOD Read( fname )
+   METHOD Read( fname )
 
-METHOD ReadString( buffer )  INLINE ::Read( ,buffer )
+   METHOD ReadString( buffer )  INLINE ::Read( ,buffer )
 
-METHOD Save( fname,lNoHeader )
+   METHOD Save( fname,lNoHeader )
 
-METHOD Save2String()  INLINE ::Save()
+   METHOD Save2String()  INLINE ::Save()
 
 ENDCLASS
 
@@ -283,4 +283,3 @@ METHOD Save( fname,lNoHeader ) CLASS HXMLDoc
    ENDIF
 
    RETURN .T.
-

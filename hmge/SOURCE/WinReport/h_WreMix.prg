@@ -808,4 +808,3 @@ HB_FUNC( H_FONT )
    hb_retnl( FontHeight );
 }
 #pragma ENDDUMP
-

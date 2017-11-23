@@ -253,4 +253,3 @@ PROCEDURE UNCOMPRESSFILES ( cFileName, bBlock, cPassword )
    hb_UnZipClose( hUnzip )
 
    RETURN
-

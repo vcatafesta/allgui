@@ -81,7 +81,6 @@ FUNCTION Main
    *.......................................................*
 
    proc cas_limpa
-
       LOCAL n_for, n_pos, a_result
       LOCAL m_itemcount := form_1.grid_1.itemcount
 
@@ -121,7 +120,6 @@ FUNCTION Main
       *.......................................................*
 
       proc cas_click
-
          LOCAL x := ;
             'CellRowIndex  = ' + alltrim( str( This.CellRowIndex ) ) +chr(13)+;
             'CellColIndex  = ' + alltrim( str( This.CellColIndex ) ) +chr(13)+;
@@ -140,7 +138,6 @@ FUNCTION Main
 
          func cas_change
             LOCAL spc := space(3)
-
             form_1.statusbar.item(1) := ;
                'Selected: ' + alltrim( str( len(this.value) ) ) +'/'+;
                alltrim( str( form_1.grid_1.ItemCount ) )
@@ -152,7 +149,6 @@ FUNCTION Main
             *.......................................................*
 
             proc cas_del
-
                LOCAL m_go, a_grid, a_grid_value
                LOCAL m_itemcount := form_1.grid_1.itemcount
 
@@ -187,7 +183,6 @@ FUNCTION Main
                *.......................................................*
 
                proc cas_result
-
                   LOCAL n_for, n_pos, x, a_result
                   LOCAL m_itemcount := form_1.grid_1.itemcount
 
@@ -215,4 +210,3 @@ FUNCTION Main
                   msginfo( x , 'Selected item(s): ' + alltrim( str( len( a_result ) ) ) )
 
                   RETURN
-

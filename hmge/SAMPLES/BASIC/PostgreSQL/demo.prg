@@ -130,4 +130,3 @@ FUNCTION d2pg(dDate)
 FUNCTION ntrim(nVal, nDec)
 
    RETURN iif(nVal==0, "0", alltrim(str(nVal, 20, iif(nDec==nil, 0, nDec))))
-

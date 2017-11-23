@@ -808,4 +808,3 @@ HB_FUNC ( C_SETPICTURE )
 #endif
 
 #pragma ENDDUMP
-

@@ -313,7 +313,6 @@ FUNCTION BT_DrawRectangle (hDC, Row, Col, Width, Height, aColorRGBLine, nWidthLi
 
    LOCAL aPointX := Array (5)
    LOCAL aPointY := Array (5)
-
    aPointX[1]:= Col;          aPointY[1]:= Row
    aPointX[2]:= Col+Width;    aPointY[2]:= Row
    aPointX[3]:= Col+Width;    aPointY[3]:= Row+Height
@@ -849,4 +848,3 @@ FUNCTION BT_HMGSetImage (cFormName, cControlName, hBitmap, lReleasePreviousBitma
    ENDIF
 
    RETURN NIL
-

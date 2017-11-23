@@ -130,4 +130,3 @@ FUNCTION WaitWinClose( cFormName )
    DO MESSAGE LOOP
 
    RETURN NIL
-

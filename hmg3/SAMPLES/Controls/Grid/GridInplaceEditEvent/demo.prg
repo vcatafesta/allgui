@@ -86,4 +86,3 @@ FUNCTION ProcOnClickEvent()
    Form_1.Label_5.VALUE := "Last On Click Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" )
 
    RETURN NIL
-

@@ -191,4 +191,3 @@ FUNCTION CreateTable
    USE
 
    RETURN NIL
-

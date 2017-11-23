@@ -158,4 +158,3 @@ FUNCTION showvalues
    ENDIF
 
    RETURN NIL
-

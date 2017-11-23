@@ -52,4 +52,3 @@ PROCEDURE QueryTest()
    ENDIF
 
    RETURN
-

@@ -147,4 +147,3 @@ PROCEDURE ajustar()
    form1.grid1.height:= ( form1.height- form1.grid1.row ) - 60
 
    RETURN
-

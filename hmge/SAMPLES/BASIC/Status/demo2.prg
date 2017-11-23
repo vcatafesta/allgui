@@ -43,4 +43,3 @@ PROCEDURE ResizeItem( nItem )
    Form_1.StatusBar.Width( nItem ) := IF(Form_1.StatusBar.Width( nItem ) > 100, 100, 200)
 
    RETURN
-

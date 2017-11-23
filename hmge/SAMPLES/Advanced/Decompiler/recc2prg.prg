@@ -591,7 +591,6 @@ STATIC FUNCTION dcp_f4(aCode,nIndex,aStack)
 STATIC FUNCTION dcp_f101(aCode,nIndex,aStack)
 
    LOCAL aReturn:={},nNumero:=0
-
    nNumero:=RECOVER_DOUBLE(aCode[nIndex+1],+;
       aCode[nIndex+2],+;
       aCode[nIndex+3],+;
@@ -907,7 +906,6 @@ STATIC FUNCTION dcp_f92(aCode,nIndex,aStack)
 STATIC FUNCTION dcp_f97(aCode,nIndex,aStack)
 
    LOCAL aReturn:={},nNumero:=0
-
    nNumero:=HB_MAKELONG (aCode[nIndex+1],+;
       aCode[nIndex+2],+;
       aCode[nIndex+3],+;
@@ -1057,4 +1055,3 @@ HB_FUNC (HB_MAKESHORT)
 }
 
 #pragma ENDDUMP
-

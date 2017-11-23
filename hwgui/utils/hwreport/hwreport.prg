@@ -758,4 +758,3 @@ STATIC FUNCTION WriteItemInfo( aItem )
       +", cy: "+Ltrim(Str(aItem[ITEM_HEIGHT])) )
 
    RETURN NIL
-

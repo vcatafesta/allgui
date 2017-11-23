@@ -18,24 +18,18 @@ CLASS TDatePicker FROM TControl
    CLASSDATA lRegistered AS LOGICAL
    DATA Atx, lAppend
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
       nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg,;
       lUpdate, bWhen, lCenter, lRight, bChanged,;
       lNoBorder, nHelpId, shownone )
 
-METHOD Default()
-
-METHOD HandleEvent( nMsg, nWParam, nLParam )
-
-METHOD KeyChar( nKey, nFlags )
-
-METHOD KeyDown( nKey, nFlags )
-
-METHOD LostFocus()
-
-METHOD lValid()
-
-METHOD VarGet()
+   METHOD Default()
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD KeyChar( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
+   METHOD LostFocus()
+   METHOD lValid()
+   METHOD VarGet()
 
 ENDCLASS
 
@@ -226,4 +220,3 @@ METHOD LostFocus() CLASS TDatePicker
    ENDIF
 
    RETURN 0
-

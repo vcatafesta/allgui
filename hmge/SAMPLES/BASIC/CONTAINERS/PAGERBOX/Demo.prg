@@ -178,4 +178,3 @@ FUNCTION SetPagerBoxPos()
    ENDIF
 
    RETURN NIL
-

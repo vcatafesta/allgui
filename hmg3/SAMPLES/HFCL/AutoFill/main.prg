@@ -50,4 +50,3 @@ PROC Main()
    frmAFTest.Activate
 
    RETU // Main()
-

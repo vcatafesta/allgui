@@ -294,4 +294,3 @@ FUNCTION SendData ( cDest , Data )
    ENDIF
 
    RETURN NIL
-

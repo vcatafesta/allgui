@@ -137,4 +137,3 @@ FUNCTION refresh_it()
    Form_1.Grid_1.Value := a
 
    RETURN NIL
-

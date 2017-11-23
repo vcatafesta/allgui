@@ -179,4 +179,3 @@ PROCEDURE DrawPointsGraph(paSer,paYval,paCol)
       DATAMASK "$99,999"
 
    RETURN
-

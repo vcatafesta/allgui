@@ -846,7 +846,6 @@ _EndTBrowse ();;
 #define DLGC_WANTALLKEYS                   4
 #define DLGC_WANTCHARS                   128
 
-
 // ListBox Styles
 
 #define LBS_NOTIFY               1

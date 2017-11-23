@@ -79,4 +79,3 @@ PROCEDURE WriteRegistryTest()
    ENDIF
 
    RETURN
-

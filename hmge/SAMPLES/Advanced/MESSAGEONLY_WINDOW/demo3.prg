@@ -139,4 +139,3 @@ FUNCTION MyWndEvents( hWnd, message, ... )
    ENDIF
 
    RETURN result
-

@@ -143,7 +143,6 @@ static FREEIMAGE_SETPIXELINDEX pSetPixelIndex = NULL;
 static FREEIMAGE_SETPIXELCOLOR pSetPixelColor = NULL;
 static void SET_FREEIMAGE_MARKER( BITMAPINFOHEADER * bmih, FIBITMAP * dib );
 
-
 fi_handle g_load_address;
 
 BOOL s_freeImgInit( void )
@@ -391,7 +390,6 @@ static HANDLE CreateDIB( DWORD dwWidth, DWORD dwHeight, WORD wBitCount )
    DWORD dwLen;                 // size of memory block
    HANDLE hDIB;
    DWORD dwBytesPerLine;        // Number of bytes per scanline
-
 
    // Make sure bits per pixel is valid
    if( wBitCount <= 1 )
@@ -977,8 +975,6 @@ HB_FUNC( HWG_FI_SETDOTSPERMETERY )
    hb_ret(  );
 }
 
-
-
 HB_FUNC( HWG_FI_ALLOCATE )
 {
    pAllocate =
@@ -989,8 +985,6 @@ HB_FUNC( HWG_FI_ALLOCATE )
    hb_retnl( ( ULONG ) pAllocate( hb_parnl( 1 ), hb_parnl( 2 ), hb_parnl( 3 ),
                0, 0, 0 ) );
 }
-
-
 
 HB_FUNC( HWG_FI_PASTE )
 {
@@ -1117,4 +1111,3 @@ HB_FUNC( HWG_FI_SETPIXELINDEX )
 typedef BOOL ( WINAPI *FREEIMAGE_GETPIXELCOLOR )(FIBITMAP *dib, unsigned x, unsigned y, RGBQUAD *value);
 typedef BOOL ( WINAPI *FREEIMAGE_SETPIXELCOLOR )(FIBITMAP *dib, unsigned x, unsigned y, RGBQUAD *value);
 */
-

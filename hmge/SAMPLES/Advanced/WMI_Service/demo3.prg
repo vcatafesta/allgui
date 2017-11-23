@@ -86,4 +86,3 @@ FUNCTION WMIShell(cFullPath)
    ENDIF
 
    RETURN NIL
-

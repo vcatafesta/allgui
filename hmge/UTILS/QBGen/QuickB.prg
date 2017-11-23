@@ -46,7 +46,6 @@ FUNCTION MAIN()
    PUBLIC aColorWinB, aColorWinF, aItems , aInputMask , aCaseConvert
    PUBLIC aControlList, aProperties , aControlsOrder
    PRIVATE aFilesDBF := {}
-
    M->aItems :={} ; m->aInputMask :={} ; m->aCaseConvert :={}; m->aControlList :={}
    m->aProperties := {}; m->aControlsOrder := {}
    m->aColorWinB := {0,255,255} ; m->aColorWinF := {0,0,0}
@@ -3833,4 +3832,3 @@ HB_FUNC ( SETWINDOWBRUSH )
 }
 
 #pragma ENDDUMP
-

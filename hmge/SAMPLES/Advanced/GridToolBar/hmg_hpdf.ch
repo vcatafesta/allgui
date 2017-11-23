@@ -4,206 +4,199 @@
  Copyright 2002-2010 Roberto Lopez <mail.box.hmg@gmail.com>
  http://sites.google.com/site/hmgweb/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2003, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2003, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
 #xcommand OPEN ;
-		[ OPERATION <operation> ] ;
-		[ FILE <file> ] ;
-		[ PARAMETERS <parameters> ] ;
-		[ DEFAULT <default> ] ;
+      [ OPERATION <operation> ] ;
+      [ FILE <file> ] ;
+      [ PARAMETERS <parameters> ] ;
+      [ DEFAULT <default> ] ;
 => ;
 _Execute ( GetActiveWindow() , <operation> , <file> , <parameters> , <default> , 5 )
 
-   
+
 #xcommand PRINT FILE <file> ;
 => ;
 SHELLEXECUTE( 0, "print" , <file> )
-
 
 #xcommand PRINT FILE <file> TO <printer>;
 => ;
 ShellExecute(0, "Printto", CHR( 34 ) + <file> + CHR( 34 ), CHR( 34 ) + <printer> + CHR( 34 ), 0, 0)
 
-
 #xcommand SELECT PRINTER <cPDFFile> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <Preview 		: PREVIEW> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <Preview       : PREVIEW> ] ;
 => ;
-	_HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 )	) ;;
-	_hmg_printer_preview := <.Preview.> ;;
-	_hmg_printer_name := <cPDFFile>  
-
+   _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>   , <nOrientation>   , 1 ) , if ( <.lPaperSize.>   , <nPaperSize>      , 1 ) , if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 )   ) ;;
+   _hmg_printer_preview := <.Preview.> ;;
+   _hmg_printer_name := <cPDFFile>
 
 #xcommand SELECT PRINTER <cPDFFile> TO <lSuccess> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <Preview 		: PREVIEW> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <Preview       : PREVIEW> ] ;
 => ;
-	<lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 )	) ;;
-	_hmg_printer_preview := <.Preview.> ;;
-	_hmg_printer_name := <cPDFFile>  
-
+   <lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>   , <nOrientation>   , 1 ) , if ( <.lPaperSize.>   , <nPaperSize>      , 1 ) , if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 )   ) ;;
+   _hmg_printer_preview := <.Preview.> ;;
+   _hmg_printer_name := <cPDFFile>
 
 #xcommand START PRINTDOC ;
 => ;
-_hmg_hpdf_startdoc() 
+_hmg_hpdf_startdoc()
 
 #xcommand START PRINTPAGE ;
 => ;
 _hmg_hpdf_startpage()
 
-
 #xcommand END PRINTPAGE ;
 => ;
 _hmg_hpdf_endpage()
 
-
 #xcommand END PRINTDOC ;
 => ;
 _hmg_hpdf_enddoc();;
-if ( _hmg_printer_preview , _Execute ( GetActiveWindow() ,  , _hmg_printer_name ,  ,  , 5 ) , NIL ) 
+if ( _hmg_printer_preview , _Execute ( GetActiveWindow() ,  , _hmg_printer_name ,  ,  , 5 ) , NIL )
 
 #xcommand ABORT PRINTDOC ;
 => ;
 _hmg_hpdf_abortdoc()
 
 #xcommand @ <Row> , <Col> PRINT [ DATA ] <cText> ;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT> ] ;
-	=> ;
-	_HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT> ] ;
+   => ;
+   _HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> )
 
 #xcommand @ <Row> , <Col> PRINT [ DATA ] <cText> ;
-	TO <ToRow> , <ToCol> ;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT,JUSTIFY> ] ;
-	=> ;
-	_HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
+   TO <ToRow> , <ToCol> ;
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT,JUSTIFY> ] ;
+   => ;
+   _HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> )
 
 #xcommand @ <nRow> , <nCol> PRINT IMAGE <cImage> ;
-	WIDTH <nWidth> ;
-	HEIGHT <nheight> ;
-	[ <stretch : STRETCH> ] ;
-	=> ;
-	_HMG_HPDF_IMAGE ( <cImage> , <nRow> , <nCol> , <nheight> , <nWidth> , <.stretch.> ) 
+   WIDTH <nWidth> ;
+   HEIGHT <nheight> ;
+   [ <stretch : STRETCH> ] ;
+   => ;
+   _HMG_HPDF_IMAGE ( <cImage> , <nRow> , <nCol> , <nheight> , <nWidth> , <.stretch.> )
 
 #xcommand @ <Row> , <Col> PRINT LINE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	=> ;
-	_HMG_HPDF_LINE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> ) 
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   => ;
+   _HMG_HPDF_LINE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> )
 
 #xcommand @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ];
-	=> ;
-	_HMG_HPDF_RECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>) 
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lfilled: FILLED> ];
+   => ;
+   _HMG_HPDF_RECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>)
 
 #xcommand @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ]; 
-	ROUNDED ;
-	[ CURVE <nCurve> ];
-	=> ;
-	_HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> ) 
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lfilled: FILLED> ];
+   ROUNDED ;
+   [ CURVE <nCurve> ];
+   => ;
+   _HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> )
 
-  
+
 #xcommand @ <Row> , <Col> PRINT CIRCLE RADIUS <nRadius> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lFilled: FILLED> ]; 
-	=> ;
-	_HMG_HPDF_CIRCLE ( <Row> , <Col> , <nRadius> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> , <.lFilled.>) 
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lFilled: FILLED> ];
+   => ;
+   _HMG_HPDF_CIRCLE ( <Row> , <Col> , <nRadius> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> , <.lFilled.>)
 
 #xcommand @ <Row> , <Col> PRINT ELLIPSE HORIZONTAL RADIUS <nHRadius> ;
-	VERTICAL RADIUS <nVRadius> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lFilled: FILLED> ]; 
-	=> ;
-	_HMG_HPDF_ELLIPSE ( <Row> , <Col> , <nHRadius> , <nVRadius>, <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> , <.lFilled.>) 
+   VERTICAL RADIUS <nVRadius> ;
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lFilled: FILLED> ];
+   => ;
+   _HMG_HPDF_ELLIPSE ( <Row> , <Col> , <nHRadius> , <nVRadius>, <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> , <.lFilled.>)
 
-   
+
 #xcommand @ <Row> , <Col> PRINT ARC RADIUS <nRadius> ;
-	ANGLE FROM <nFromAngle> ;
-	TO <nToAngle> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	=> ;
-	_HMG_HPDF_Arc ( <Row> , <Col> , <nRadius> , <nFromAngle>, <nToAngle>, <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> ) 
+   ANGLE FROM <nFromAngle> ;
+   TO <nToAngle> ;
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   => ;
+   _HMG_HPDF_Arc ( <Row> , <Col> , <nRadius> , <nFromAngle>, <nToAngle>, <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> )
 
 #xcommand @ <Row> , <Col> PRINT CURVE FROM <nFromRow>, <nFromCol> TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	=> ;
-	_HMG_HPDF_CURVE ( <Row> , <Col> , <nFromRow>, <nFromCol>, <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> ) 
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   => ;
+   _HMG_HPDF_CURVE ( <Row> , <Col> , <nFromRow>, <nFromCol>, <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> )
 
-   
+
 #xcommand SET PRINTDOC PASSWORD OWNER <cOwnerPass> [ USER <cUserPass> ] => _HMG_HPDF_SetPassword( <cOwnerPass>, <cUserPass> )
 
 #xcommand SET PRINTDOC COMPRESS <mode:NONE,TEXT,IMAGE,METADATA,ALL>     => _HMG_HPDF_SetCompression( <"mode"> )
 
 #xcommand SET PRINTDOC PERMISSION TO <mode:READ,PRINT,EDIT,COPY,EDIT_ALL>     => _HMG_HPDF_SetPermission( <"mode"> )
-   
+
 #xcommand SET PRINTDOC PAGEMODE TO <mode:NONE,OUTLINE,THUMBS,FULL_SCREEN,EOF>     => _HMG_HPDF_SetPageMode( <"mode"> )
 
 #xcommand SET PRINTDOC ENCODING TO <cEncoding> => _HMG_HPDF_SetEncoding( <cEncoding> )
@@ -216,28 +209,28 @@ _hmg_hpdf_abortdoc()
    ICON <cIcon:COMMENT,KEY,NOTE,HELP,NEW_PARAGRAPH,PARAGRAPH,INSERT>;
    => ;
    _HMG_HPDF_SetTextAnnot( <Row>, <Col>, <cToolTip>, <"cIcon"> )
-   
+
 #xcommand INSERT PRINTPAGE BEFORE PAGE <nPage> => _HMG_HPDF_InsertPage( <nPage> )
 
 #xcommand SELECT PRINTPAGE <nPage> => _HMG_HPDF_GoToPage( <nPage> )
 
 #xcommand @ <Row> , <Col> PAGELINK <cLink> TO <nPage> ;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT,JUSTIFY> ] ;
-	[ <lborder: BORDER> ];
-	[ <lwidth: WIDTH> <nwidth> ];
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT,JUSTIFY> ] ;
+   [ <lborder: BORDER> ];
+   [ <lwidth: WIDTH> <nwidth> ];
  => _HMG_HPDF_SetPageLink( <Row>, <Col>, <cLink>, <nPage>, <cFontName>, <nFontSize>, <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <"align">, <.lcolor.>, <.lfont.>, <.lsize.>, <.lborder.>, <.lwidth.>, <nwidth> )
 
 #xcommand @ <Row> , <Col> URLLINK <cTitle>;
    TO <cLink>;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT,JUSTIFY> ] ;
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT,JUSTIFY> ] ;
   => _HMG_HPDF_SetURLLink( <Row>, <Col>, <cTitle>, <cLink>, <cFontName>, <nFontSize>, <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <"align">, <.lcolor.>, <.lfont.>, <.lsize.>  )
-  
+
 #xcommand SET PRINTINFO <attrib:AUTHOR,CREATOR,TITLE,SUBJECT,KEYWORDS,DATECREATED,DATEMODIFIED> TO <xValue> [ TIME <cTime> ] => _HMG_HPDF_SetInfo( <"attrib">, <xValue>, <cTime> )
 
 #xcommand GET PRINTINFO <attrib:AUTHOR,CREATOR,TITLE,SUBJECT,KEYWORDS,DATECREATED,DATEMODIFIED> TO <cValue> => <cValue> := _HMG_HPDF_GetInfo( <"attrib"> )
@@ -245,7 +238,7 @@ _hmg_hpdf_abortdoc()
 #xcommand SET PRINTDOC PAGENUMBERING [ FROM <nPage> ] [ STYLE <cStyle:DECIMAL,ROMAN,LETTERS> ] [ <cCase:UPPER,LOWER> ] [ PREFIX <cPrefix> ] => _HMG_HPDF_SetPageLabel( <nPage>, <"cStyle">, <"cCase">, <cPrefix> )
 
 #xcommand SET PRINTPAGE LINESPACING TO <nSpacing> => _HMG_HPDF_SetLineSpacing( <nSpacing> )
-   
+
 ///////////////////////////////////////////////////////////////////////////////
 // PDF CONFIGURATION CONSTANTS
 ///////////////////////////////////////////////////////////////////////////////
@@ -256,7 +249,6 @@ _hmg_hpdf_abortdoc()
 
 #define PRINTER_ORIENT_PORTRAIT   1
 #define PRINTER_ORIENT_LANDSCAPE  2
-
 
 * Paper Size
 

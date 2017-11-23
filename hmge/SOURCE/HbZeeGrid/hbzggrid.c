@@ -39,8 +39,8 @@ extern BOOL Array2Rect( PHB_ITEM aPoint, RECT * rect );
 extern HINSTANCE g_hInstance;
 /* ////////////////////////////////////////////////////// */
 HB_FUNC( ZG_SETCELLDATE )
-{ 
-   _GET_HWND( hwnd, 1 ); 
+{
+   _GET_HWND( hwnd, 1 );
 
    if( HB_ISDATETIME( 3 ) )
    {
@@ -51,13 +51,13 @@ HB_FUNC( ZG_SETCELLDATE )
 
       hb_retni( SendMessage( hwnd, ZGM_SETCELLCDATE, ( WPARAM ) hb_parni( 2 ), ( LPARAM ) szFormatted ) );
    }
-} 
+}
 
 HB_FUNC( ZG_LOADICON2 )
 {
-   _GET_HWND( hwnd, 1 ); 
+   _GET_HWND( hwnd, 1 );
    HICON hicon = NULL;
- 
+
    if( HB_ISNUM( 3 ) )
    {
       int ident = hb_parni( 3 );
@@ -71,12 +71,12 @@ HB_FUNC( ZG_LOADICON2 )
 
    if( NULL != hicon )
       SendMessage( hwnd, ZGM_LOADICON, ( WPARAM ) hb_parni( 2 ), ( LPARAM ) hicon );
-} 
+}
 /* ////////////////////////////////////////////////////// */
 HB_FUNC( ZG_LOADDLL )
 {
    HMODULE hGridMod = LoadLibrary( "zeegrid.dll" );
-   
+
    if( ! hGridMod )
       MessageBox( NULL, "Unable to load ZeeGrid.DLL", "Error", MB_OK );
 
@@ -85,12 +85,12 @@ HB_FUNC( ZG_LOADDLL )
 
 HB_FUNC( ZG_INITGRID )
 {
-   _GET_HWND( hwndP, 1 ); 
+   _GET_HWND( hwndP, 1 );
    HB_BOOL bResult = HB_FALSE;
- 
+
    if( IsWindow( hwndP ) )
    {
-      HWND hGrid;      
+      HWND hGrid;
       PHB_ITEM block = hb_param( 9, HB_IT_BLOCK );
       RECT rect;
 

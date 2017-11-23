@@ -59,7 +59,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #xtranslate App . <p: ArgC, Args, BackColor, Col, Cursor, Drive, ExeName, ;
       FormName, FormObject, Handle, Height, HelpButton, Icon, MainName, Name, ;
       Path, Row, Title, Topmost, Width> ;

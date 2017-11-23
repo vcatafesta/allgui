@@ -373,4 +373,3 @@ static void ShowNotifyInfo(HWND hWnd, BOOL bAdd, HICON hIcon, LPSTR szText, LPST
 }
 
 #pragma ENDDUMP
-

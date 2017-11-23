@@ -23,29 +23,29 @@ CLASS HHtml // INHERIT HControl
    DATA nWidth   INIT 640
    DATA nHeight  INIT 480
 
-METHOD New( oParent )
+   METHOD New( oParent )
 
-METHOD DisplayPage( cUrl )   INLINE hwgax_DisplayHtmlPage( ::oParent:handle,cUrl )
+   METHOD DisplayPage( cUrl )   INLINE hwgax_DisplayHtmlPage( ::oParent:handle,cUrl )
 
-METHOD DisplayText( cText )  INLINE hwgax_DisplayHtmlStr( ::oParent:handle,cText )
+   METHOD DisplayText( cText )  INLINE hwgax_DisplayHtmlStr( ::oParent:handle,cText )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Resize( width, height )
+   METHOD Resize( width, height )
 
-METHOD GoBack()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOBACK )
+   METHOD GoBack()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOBACK )
 
-METHOD GoForward()  INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOFORWARD )
+   METHOD GoForward()  INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOFORWARD )
 
-METHOD GoHome()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOHOME )
+   METHOD GoHome()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_GOHOME )
 
-METHOD Search()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_SEARCH )
+   METHOD Search()     INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_SEARCH )
 
-METHOD Refresh()    INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_REFRESH )
+   METHOD Refresh()    INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_REFRESH )
 
-METHOD Stop()       INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_STOP )
+   METHOD Stop()       INLINE hwgax_DoPageAction( ::oParent:handle, WEBPAGE_STOP )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -91,4 +91,3 @@ METHOD End() CLASS HHtml
    hwgax_OleUninitialize()
 
    RETURN
-

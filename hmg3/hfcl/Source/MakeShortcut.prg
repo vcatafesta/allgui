@@ -77,4 +77,3 @@ FUNCTION MakeInternetShortCut(;                  // Make a Internet shortcut (.u
    WshShell := Nil
 
    RETURN lSuccess // MakeInternetShortCut()
-

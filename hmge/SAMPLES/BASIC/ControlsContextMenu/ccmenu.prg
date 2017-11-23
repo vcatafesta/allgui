@@ -36,4 +36,3 @@ FUNCTION CheckCMenu
    ENDIF
 
    RETURN NIL
-

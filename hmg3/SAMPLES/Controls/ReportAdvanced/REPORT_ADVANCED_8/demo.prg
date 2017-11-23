@@ -49,4 +49,3 @@ FUNCTION Main
    Win_1.Activate
 
    RETURN
-

@@ -30,13 +30,13 @@ CLASS VAR aTimers   INIT { }
    ACCESS Interval       INLINE ::value
    ASSIGN Interval( x )  INLINE ::value := x, hwg_Settimer( ::oParent:handle, ::id, ::value )
 
-METHOD New( oParent, nId, value, bAction )
+   METHOD New( oParent, nId, value, bAction )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onAction()
+   METHOD onAction()
 
-METHOD END()
+   METHOD END()
 
 ENDCLASS
 
@@ -117,4 +117,3 @@ FUNCTION hwg_TimerProc( hWnd, idTimer, Time )
    NEXT
 
    RETURN
-

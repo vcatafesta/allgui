@@ -53,7 +53,6 @@
 #define FLD_ID   _HMG_ActiveFldProcId
 #define FLD_NOT  _HMG_ActiveFldProcNotify
 
-
 #command DEFINE FOLDER <name> ;
         [ <dummy1: OF, PARENT> <parent> ] ;
          AT <row>,<col> ;
@@ -78,7 +77,6 @@
     =>;
     _BeginFolder( <"name">, <"parent">, .f.,<col>, <row>, <w>, <h>, <caption>, <f>, <s>, <{folderproc}>, <{cancelproc}>, <{initproc}>, <{helpproc}>,<.modal.>,<.apply.>,<.bold.>, <.italic.>, .f., .f.,<.buttons.> , <.flat.> , <.hottrack.> , <.vertical.> , <.bottom.>, <.multiline.> )
 
-
 #command DEFINE FOLDER <name> ;
         [ <dummy1: OF, PARENT> <parent> ] ;
          <res: RESOURCE >  ;
@@ -101,11 +99,9 @@
     =>;
     _BeginFolder( <"name">, <"parent">, <.res.> , 0, 0, 0, 0, <caption>, <f>, <s>, <{folderproc}>, <{cancelproc}>, <{initproc}>, <{helpproc}>,<.modal.>,<.apply.>,<.bold.>, <.italic.>, .f., .f. ,<.buttons.> , <.flat.> , <.hottrack.> , <.vertical.> , <.bottom.>, <.multiline.> )
 
-
 #command END FOLDER ;
     =>;
     _EndFolder()
-
 
 #xcommand FOLDERPAGE <Name> RESOURCE <id> ;
       [ TITLE <cTitle> ];
@@ -113,17 +109,14 @@
 =>;
 _DefineFolderPage (  <"Name">, <id>, <cTitle>, <cImageName>  )
 
-
 #xcommand DEFINE FOLDERPAGE <Name> [ RESOURCE <id> ] ;
       [ TITLE <cTitle> ];
       [ IMAGE <cImageName> ];
 =>;
 _BeginFolderPage (  <"Name">, <id>, <cTitle>, <cImageName>   )
 
-
 #xcommand END FOLDERPAGE ;
 =>;
 _EndFolderPage()
-
 
 ///////////////////////////////////////////////////////////////////////////////

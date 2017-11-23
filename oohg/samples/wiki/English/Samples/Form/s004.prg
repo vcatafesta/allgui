@@ -70,4 +70,3 @@ FUNCTION AdjustToMain
    /*
    * EOF
    */
-

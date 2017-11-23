@@ -1989,4 +1989,3 @@ FUNCTION _HMG_HPDF_SetOrientation( nMode )
    ENDIF
 
    RETURN NIL
-

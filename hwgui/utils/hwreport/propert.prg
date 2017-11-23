@@ -320,4 +320,3 @@ STATIC FUNCTION EndFOpt( aItem )
    hwg_EndDialog( hDlg )
 
    RETURN .T.
-

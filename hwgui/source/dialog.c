@@ -28,8 +28,8 @@ static LRESULT CALLBACK s_DlgProc( HWND, UINT, WPARAM, LPARAM );
 static LRESULT CALLBACK s_PSPProc( HWND, UINT, WPARAM, LPARAM );
 static LRESULT CALLBACK s_PSPProcRelease( HWND, UINT, LPPROPSHEETPAGE );
 
-#define	WND_DLG_RESOURCE       10
-#define	WND_DLG_NORESOURCE     11
+#define   WND_DLG_RESOURCE       10
+#define   WND_DLG_NORESOURCE     11
 
 HWND *aDialogs = NULL;
 static int s_nDialogs = 0;
@@ -185,7 +185,6 @@ HB_FUNC( HWG_COMBOINSERTSTRING )
                 ( LPARAM ) HB_PARSTR( 3, &hText, NULL ) );
    hb_strfree( hText );
 }
-
 
 HB_FUNC( HWG_COMBOSETSTRING )
 {
@@ -424,7 +423,7 @@ HB_FUNC( HWG__CREATEPROPERTYSHEETPAGE )
 }
 
 /*
- * _PropertySheet( hWndParent, aPageHandles, nPageHandles, cTitle, 
+ * _PropertySheet( hWndParent, aPageHandles, nPageHandles, cTitle,
  *                [ lModeless ], [ lNoApply ], [ lWizard ] ) --> hPropertySheet
  */
 HB_FUNC( HWG__PROPERTYSHEET )
@@ -555,7 +554,7 @@ static LRESULT CALLBACK s_ModalDlgProc( HWND hDlg, UINT uMsg, WPARAM wParam,
       HB_PUSHITEM( lParam );
       hb_vmSend( 3 );
       //#ifdef HWG_USE_POINTER_ITEM
-      //if ( uMsg ==  WM_CTLCOLORSTATIC  || uMsg == WM_CTLCOLOREDIT || uMsg == WM_CTLCOLORBTN || uMsg == WM_CTLCOLORLISTBOX || uMsg == WM_CTLCOLORDLG) 
+      //if ( uMsg ==  WM_CTLCOLORSTATIC  || uMsg == WM_CTLCOLOREDIT || uMsg == WM_CTLCOLORBTN || uMsg == WM_CTLCOLORLISTBOX || uMsg == WM_CTLCOLORDLG)
       //{
       //   res = hb_parptr( -1 ) ;
       //   return (INT_PTR) res ;
@@ -630,14 +629,14 @@ static LRESULT CALLBACK s_DlgProc( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
       HB_PUSHITEM( lParam );
       hb_vmSend( 3 );
       //#ifdef HWG_USE_POINTER_ITEM
-      //if ( uMsg ==  WM_CTLCOLORSTATIC  || uMsg == WM_CTLCOLOREDIT || uMsg == WM_CTLCOLORBTN || uMsg == WM_CTLCOLORLISTBOX || uMsg == WM_CTLCOLORDLG) 
+      //if ( uMsg ==  WM_CTLCOLORSTATIC  || uMsg == WM_CTLCOLOREDIT || uMsg == WM_CTLCOLORBTN || uMsg == WM_CTLCOLORLISTBOX || uMsg == WM_CTLCOLORDLG)
       //{
       //   res = hb_parptr( -1 ) ;
       //   return (INT_PTR) res ;
       //}
       //else
       //#endif
-      
+
       res = hb_parnl( -1 );
       if( res == -1 )
          return FALSE;
@@ -750,4 +749,3 @@ HB_FUNC( HWG_GETNOTIFYIDFROM )
 {
    hb_retnl( ( LONG ) ( ( ( NMHDR * ) HB_PARHANDLE( 1 ) )->idFrom ) );
 }
-

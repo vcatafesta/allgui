@@ -247,4 +247,3 @@ HB_FUNC( UNLOADANIMATELIB )
 #pragma ENDDUMP
 
    #endif
-

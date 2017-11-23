@@ -68,4 +68,3 @@ FUNCTION mira()
    msgbox(str(acolor[3]))
 
    RETURN NIL
-

@@ -170,4 +170,3 @@ FUNCTION EdicionAbortada( oBrw1 )
    /*
    * EOF
    */
-

@@ -990,4 +990,3 @@ PROCEDURE Child_CLick
    DoMethod ( 'ChildTest','Activate' )
 
    RETURN
-

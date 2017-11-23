@@ -156,4 +156,3 @@ PROCEDURE CreateTable
    USE
 
    RETURN
-

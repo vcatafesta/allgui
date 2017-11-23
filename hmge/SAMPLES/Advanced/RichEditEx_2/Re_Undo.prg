@@ -199,4 +199,3 @@ HB_FUNC ( GETDEVCAPS ) // GetDevCaps ( hwnd )
 }
 
 #pragma ENDDUMP
-

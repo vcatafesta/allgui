@@ -76,4 +76,3 @@ FUNCTION OnClick( o )
 FUNCTION OnDispInfo( o, x, y )
 
    RETURN 'Row: ' + ltrim(str(x)) + ' Col: ' + ltrim(str(y))
-

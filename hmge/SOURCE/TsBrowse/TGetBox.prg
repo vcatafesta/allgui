@@ -10,22 +10,16 @@ CLASS TGetBox FROM TControl
 
    DATA Atx, lAppend, oGet
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
       nClrFore, nClrBack, hFont, cControl, cWnd, cMsg,;
       lUpdate, bWhen, lCenter, lRight, bChanged,;
       lNoBorder, nHelpId, lSpinner, bUp, bDown, bMin, bMax )
-
-METHOD HandleEvent( nMsg, nWParam, nLParam )
-
-METHOD KeyChar( nKey, nFlags )
-
-METHOD KeyDown( nKey, nFlags )
-
-METHOD LostFocus( hCtlFocus )
-
-METHOD lValid()
-
-METHOD VarGet()
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD KeyChar( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
+   METHOD LostFocus( hCtlFocus )
+   METHOD lValid()
+   METHOD VarGet()
 
 ENDCLASS
 
@@ -207,4 +201,3 @@ METHOD LostFocus( hCtlFocus ) CLASS TGetBox
 METHOD VarGet() CLASS TGetBox
 
    RETURN _GetValue( ::cControlName, ::oWnd:cParentWnd )
-

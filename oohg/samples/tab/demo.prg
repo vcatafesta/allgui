@@ -107,4 +107,3 @@ FUNCTION Main
                form_1.tab_1.caption( form_1.tab_1.value )
 
             RETURN NIL
-

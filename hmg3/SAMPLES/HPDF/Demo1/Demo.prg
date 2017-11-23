@@ -45,4 +45,3 @@ FUNCTION Main()
    EXECUTE FILE 'sample.pdf'
 
    RETURN NIL
-

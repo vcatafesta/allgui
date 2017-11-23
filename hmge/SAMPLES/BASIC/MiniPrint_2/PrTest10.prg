@@ -279,4 +279,3 @@ STATIC PROCEDURE PrintPageFooter()
    RETURN // PrintPageFooter()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

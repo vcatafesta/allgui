@@ -62,19 +62,15 @@
 
 CLASS TDecode
 
-METHOD New()
+   METHOD New()
 
-METHOD Decode( cString )
+   METHOD Decode( cString )
+   METHOD Encode( cString )
 
-METHOD Encode( cString )
-
-METHOD Encode64( cData, nLen )
-
-METHOD Decode64( cData )
-
-METHOD MD5( cData )
-
-METHOD HMAC_MD5( cLogin, cPwd, cChallenge )
+   METHOD Encode64( cData, nLen )
+   METHOD Decode64( cData )
+   METHOD MD5( cData )
+   METHOD HMAC_MD5( cLogin, cPwd, cChallenge )
 
    CLASSDATA cCharPos      HIDDEN
 
@@ -185,4 +181,3 @@ METHOD MD5( cData ) CLASS TDecode
 METHOD HMAC_MD5( cLogin, cPwd, cChallenge ) CLASS TDecode
 
    RETURN ::Encode64( SocketHMAC_MD5( cLogin, cPwd, ::Decode64(cChallenge) ) )
-

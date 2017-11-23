@@ -73,46 +73,34 @@
 CLASS TSMTP
 
    EXPORTED:
+   METHOD New()
 
-METHOD New()
+   METHOD Connect( cAddress, nPort, cHelo )
+   METHOD Login( cUser, cPwd )
+   METHOD LoginMD5( cUser, cPwd )
+   METHOD Close()
 
-METHOD Connect( cAddress, nPort, cHelo )
+   METHOD ClearData()
+   METHOD SetFrom( cUser, cEmail )
+   METHOD SetReplyTo( cReplyTo )
+   METHOD SetSubject( cSubject )
+   METHOD SetPriority( nPriority )
 
-METHOD Login( cUser, cPwd )
+   METHOD AddTo( cUser, cEmail )
+   METHOD AddCc( cUser, cEmail )
+   METHOD AddBcc( cUser, cEmail )
 
-METHOD LoginMD5( cUser, cPwd )
+   METHOD SetData( cMail, bHTML )
 
-METHOD Close()
+   METHOD AddAttach( cAttach )
 
-METHOD ClearData()
+   METHOD Send( bIgnoreTOError, bRequestReturnReceipt )
+   METHOD GetLastError()
 
-METHOD SetFrom( cUser, cEmail )
-
-METHOD SetReplyTo( cReplyTo )
-
-METHOD SetSubject( cSubject )
-
-METHOD SetPriority( nPriority )
-
-METHOD AddTo( cUser, cEmail )
-
-METHOD AddCc( cUser, cEmail )
-
-METHOD AddBcc( cUser, cEmail )
-
-METHOD SetData( cMail, bHTML )
-
-METHOD AddAttach( cAttach )
-
-METHOD Send( bIgnoreTOError, bRequestReturnReceipt )
-
-METHOD GetLastError()
-
-METHOD SetSendTimeout( nMilliSec )
+   METHOD SetSendTimeout( nMilliSec )
 
    HIDDEN:
-
-METHOD GetLines()
+   METHOD GetLines()
 
    CLASSDATA oSocket   HIDDEN
    CLASSDATA cFrom     HIDDEN
@@ -641,4 +629,3 @@ HB_FUNC_STATIC( MEMOREAD )
 }
 
 #pragma ENDDUMP
-

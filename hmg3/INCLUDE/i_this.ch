@@ -12,27 +12,27 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,20 +46,18 @@
    Copyright 1999-2003, http://www.harbour-project.org/
 
    "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
    "HWGUI"
    Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
 // WINDOWS (THIS)
 
    #xtranslate This . <p:Title,NotifyIcon,NotifyTooltip,FocusedControl> => GetProperty ( _HMG_SYSDATA \[ 316 \] , <"p"> )
    #xtranslate This . <p:Title,Cursor,NotifyTooltip> := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , <"p"> , <arg> )
    #xtranslate This . <p:Activate,Center,Release,Maximize,Minimize,Restore> [ () ] => DoMethod ( _HMG_SYSDATA \[ 316 \] , <"p"> )
-
 
 // WINDOWS (THISWINDOW)
 
@@ -72,7 +70,6 @@
    #xtranslate ThisWindow . <p:NoClose,NoCaption,NoMaximize,NoMinimize,NoSize,NoSysMenu,HScroll,VScroll,Enabled> := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , <"p"> , <arg> )
    #xtranslate ThisWindow . <p:AlphaBlendTransparent,BackColorTransparent> := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , <"p"> , <arg> )
 
-
 // CONTROLS
 
 // RichEditBox ( by Dr. Claudio Soto, January 2014 )
@@ -81,10 +78,10 @@
 // GridEx ( by Dr. Claudio Soto, April 2013 )
 #xtranslate This . <p:ColumnCOUNT> => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> )
 
-#xtranslate This . <p:ColumnHEADER, ColumnWIDTH, ColumnJUSTIFY, ColumnCONTROL, ColumnDYNAMICBACKCOLOR, ColumnDYNAMICFORECOLOR,; 
+#xtranslate This . <p:ColumnHEADER, ColumnWIDTH, ColumnJUSTIFY, ColumnCONTROL, ColumnDYNAMICBACKCOLOR, ColumnDYNAMICFORECOLOR,;
                       ColumnVALID, ColumnWHEN, ColumnONHEADCLICK, ColumnDISPLAYPOSITION> (<n>) => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n>)
 
-#xtranslate This . <p:ColumnHEADER, ColumnWIDTH, ColumnJUSTIFY, ColumnCONTROL, ColumnDYNAMICBACKCOLOR, ColumnDYNAMICFORECOLOR,; 
+#xtranslate This . <p:ColumnHEADER, ColumnWIDTH, ColumnJUSTIFY, ColumnCONTROL, ColumnDYNAMICBACKCOLOR, ColumnDYNAMICFORECOLOR,;
                       ColumnVALID, ColumnWHEN, ColumnONHEADCLICK, ColumnDISPLAYPOSITION> (<n>) := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n> , <arg> )
 
 #xtranslate This . <p:CellEx> (<n1>, <n2>) => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n1>, <n2>)
@@ -98,17 +95,16 @@
 
 #xtranslate This . <p:CellRowFocused, CellColFocused, CellRowClicked, CellColClicked> => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> )
 
-
 * Property without arguments
 
    #xtranslate This . <p:Format,BackColor,FontColor,ForeColor,Value,Address,Picture,Tooltip,FontName,FontSize,FontBold,FontItalic,FontUnderline,FontStrikeout,Caption,Displayvalue,Visible,Enabled,Checked,ItemCount,RangeMin,RangeMax,Length,Position,CaretPos> => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> )
-   #xtranslate This . <p:Format,BackColor,FontColor,ForeColor,Value,ReadOnly,Address,Picture,Tooltip,FontName,FontSize,FontBold,FontItalic,FontUnderline,FontStrikeout,Caption,DisplayValue,Enabled,Checked,RangeMin,RangeMax,Repeat,Speed,Volume,Zoom,Position,CaretPos>	:= <arg>	=> SetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <arg> )
+   #xtranslate This . <p:Format,BackColor,FontColor,ForeColor,Value,ReadOnly,Address,Picture,Tooltip,FontName,FontSize,FontBold,FontItalic,FontUnderline,FontStrikeout,Caption,DisplayValue,Enabled,Checked,RangeMin,RangeMax,Repeat,Speed,Volume,Zoom,Position,CaretPos>   := <arg>   => SetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <arg> )
    #xtranslate This . <p:HANDLE,INDEX,TYPE> => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> )
 
 * Property with 1 argument
 
    #xtranslate This . <p:Item,Caption,Header> (<n>) => GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n> )
-   #xtranslate This . <p:Item,Caption,Header> (<n>) := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n> , <arg> )	
+   #xtranslate This . <p:Item,Caption,Header> (<n>) := <arg> => SetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <n> , <arg> )
 
 * Property with 2 arguments
 
@@ -135,7 +131,6 @@
 
    #xtranslate This . <p:AddControl,AddColumn> ( <arg1> , <arg2> , <arg3>  , <arg4> ) => DoMethod ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> , <arg1> , <arg2> , <arg3> , <arg4> )
 
-
 // COMMON ( REQUIRES TYPE CHECK )
 
    #xtranslate This . <p:Name,Row,Col,Width,Height> => if ( _HMG_SYSDATA \[ 231 \] == 'C' , GetProperty ( _HMG_SYSDATA \[ 316 \] , _HMG_SYSDATA \[ 317 \] , <"p"> ) , GetProperty ( _HMG_SYSDATA \[ 316 \] , <"p"> ) )
@@ -154,12 +149,11 @@
    #xtranslate This.CellWidth          => _HMG_SYSDATA \[ 199 \]
    #xtranslate This.CellHeight         => _HMG_SYSDATA \[ 200 \]
    #xtranslate This.CellValue          => _HMG_SYSDATA \[ 318 \]
-   #xtranslate This.CellValue := <arg> => _HMG_SetGridCellEditValue ( <arg> ) 
+   #xtranslate This.CellValue := <arg> => _HMG_SetGridCellEditValue ( <arg> )
 
-   #xtranslate This.EditBuffer         => _HMG_SYSDATA \[ 278 \] 
+   #xtranslate This.EditBuffer         => _HMG_SYSDATA \[ 278 \]
    #xtranslate This.MarkBuffer         => _HMG_SYSDATA \[ 279 \]
-   #xtranslate This.AppendBuffer       => _HMG_SYSDATA \[ 280 \] 
-
+   #xtranslate This.AppendBuffer       => _HMG_SYSDATA \[ 280 \]
 
 // by Dr. Claudio Soto, April 2016
    #xtranslate This.InplaceEditControlHandle  => GridInplaceEdit_ControlHandle()

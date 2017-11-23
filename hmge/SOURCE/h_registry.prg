@@ -70,19 +70,13 @@ CREATE CLASS TReg32
    VAR nError
    VAR lError
 
-METHOD New( nKey, cRegKey, lShowError )
-
-METHOD Create( nKey, cRegKey, lShowError )
-
-METHOD Get( cRegVar, uVar )
-
-METHOD Set( cRegVar, uVar )
-
-METHOD Delete( cRegVar )
-
-METHOD KeyDelete( cSubKey )
-
-METHOD Close() BLOCK {|Self| iif( ::lError, , RegCloseKey( ::nHandle ) ) }
+   METHOD New( nKey, cRegKey, lShowError )
+   METHOD Create( nKey, cRegKey, lShowError )
+   METHOD Get( cRegVar, uVar )
+   METHOD Set( cRegVar, uVar )
+   METHOD Delete( cRegVar )
+   METHOD KeyDelete( cSubKey )
+   METHOD Close() BLOCK {|Self| iif( ::lError, , RegCloseKey( ::nHandle ) ) }
 
 ENDCLASS
 
@@ -349,4 +343,3 @@ HB_FUNC( ISWOW64 )
 }
 
 #pragma ENDDUMP
-

@@ -42,4 +42,3 @@ FUNCTION Teste
    ENDIF
 
    RETURN NIL
-

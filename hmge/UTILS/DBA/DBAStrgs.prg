@@ -636,7 +636,6 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                   Usage Example :
 
                                                                   PROC TestExpr( cExprs )
-
                                                                   LOCA cResult := ExprChek( cExprs )
                                                                   MsgBox( IF( EMPTY( cResult ), "passed.",;
                                                                   "Syntax error in expression :" + CRLF2 + cResult ) )
@@ -774,4 +773,3 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                            RETU lRVal // ExpTChek()
 
                                                                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

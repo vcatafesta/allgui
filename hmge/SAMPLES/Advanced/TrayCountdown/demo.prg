@@ -445,4 +445,3 @@ HB_FUNC( CREATEICON )   // ( hWnd, nTiempo, nNumeros )
 }
 
 #pragma ENDDUMP
-

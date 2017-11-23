@@ -153,151 +153,151 @@ CLASS TForm FROM TWindow
    DATA lTopmost       INIT .F.
    DATA aNotifyIcons   INIT {}
 
-METHOD Title               SETGET
+   METHOD Title               SETGET
 
-METHOD Height              SETGET
+   METHOD Height              SETGET
 
-METHOD Width               SETGET
+   METHOD Width               SETGET
 
-METHOD Col                 SETGET
+   METHOD Col                 SETGET
 
-METHOD Row                 SETGET
+   METHOD Row                 SETGET
 
-METHOD Cursor              SETGET
+   METHOD Cursor              SETGET
 
-METHOD BackColor           SETGET
+   METHOD BackColor           SETGET
 
-METHOD TopMost             SETGET
+   METHOD TopMost             SETGET
 
-METHOD VirtualWidth        SETGET
+   METHOD VirtualWidth        SETGET
 
-METHOD VirtualHeight       SETGET
+   METHOD VirtualHeight       SETGET
 
-METHOD BackImage           SETGET
+   METHOD BackImage           SETGET
 
-METHOD AutoAdjust
+   METHOD AutoAdjust
 
-METHOD AdjustWindowSize
+   METHOD AdjustWindowSize
 
-METHOD ClientsPos
+   METHOD ClientsPos
 
-METHOD Closable            SETGET
+   METHOD Closable            SETGET
 
-METHOD FocusedControl
+   METHOD FocusedControl
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Define
+   METHOD Define
 
-METHOD Define2
+   METHOD Define2
 
-METHOD EndWindow
+   METHOD EndWindow
 
-METHOD Register
+   METHOD Register
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD Show
+   METHOD Show
 
-METHOD Hide
+   METHOD Hide
 
-METHOD Flash
+   METHOD Flash
 
-METHOD Activate
+   METHOD Activate
 
-METHOD Release
+   METHOD Release
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD Center()      BLOCK { | Self | C_Center( ::hWnd ) }
+   METHOD Center()      BLOCK { | Self | C_Center( ::hWnd ) }
 
-METHOD Restore()     BLOCK { | Self | Restore( ::hWnd ) }
+   METHOD Restore()     BLOCK { | Self | Restore( ::hWnd ) }
 
-METHOD Minimize()    BLOCK { | Self | Minimize( ::hWnd ) }
+   METHOD Minimize()    BLOCK { | Self | Minimize( ::hWnd ) }
 
-METHOD Maximize()    BLOCK { | Self | Maximize( ::hWnd ) }
+   METHOD Maximize()    BLOCK { | Self | Maximize( ::hWnd ) }
 
-METHOD DefWindowProc(nMsg,wParam,lParam)       BLOCK { |Self,nMsg,wParam,lParam| IF( ValidHandler( ::hWndClient ), ;
+   METHOD DefWindowProc(nMsg,wParam,lParam)       BLOCK { |Self,nMsg,wParam,lParam| IF( ValidHandler( ::hWndClient ), ;
       DefFrameProc( ::hWnd, ::hWndClient, nMsg, wParam, lParam ) , ;
       DefWindowProc( ::hWnd, nMsg, wParam, lParam ) ) }
 
-METHOD ToolTipWidth( nWidth )          BLOCK { |Self, nWidth | ::oToolTip:WindowWidth( nWidth ) }
+   METHOD ToolTipWidth( nWidth )          BLOCK { |Self, nWidth | ::oToolTip:WindowWidth( nWidth ) }
 
-METHOD ToolTipMultiLine( lMultiLine )  BLOCK { |Self,lMultiLine| ::oToolTip:MultiLine( lMultiLine ) }
+   METHOD ToolTipMultiLine( lMultiLine )  BLOCK { |Self,lMultiLine| ::oToolTip:MultiLine( lMultiLine ) }
 
-METHOD ToolTipAutoPopTime( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:AutoPopTime( nMilliSec ) }
+   METHOD ToolTipAutoPopTime( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:AutoPopTime( nMilliSec ) }
 
-METHOD ToolTipInitialTime( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:InitialTime( nMilliSec ) }
+   METHOD ToolTipInitialTime( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:InitialTime( nMilliSec ) }
 
-METHOD ToolTipResetDelays( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:ResetDelays( nMilliSec ) }
+   METHOD ToolTipResetDelays( nMilliSec ) BLOCK { |Self,nMilliSec| ::oToolTip:ResetDelays( nMilliSec ) }
 
-METHOD ToolTipReshowTime( nMilliSec )  BLOCK { |Self,nMilliSec| ::oToolTip:ReshowTime( nMilliSec ) }
+   METHOD ToolTipReshowTime( nMilliSec )  BLOCK { |Self,nMilliSec| ::oToolTip:ReshowTime( nMilliSec ) }
 
-METHOD ToolTipIcon( nIcon )            BLOCK { |Self,nIcon| ::oToolTip:Icon( nIcon ) }
+   METHOD ToolTipIcon( nIcon )            BLOCK { |Self,nIcon| ::oToolTip:Icon( nIcon ) }
 
-METHOD ToolTipTitle( cTitle )          BLOCK { |Self,cTitle| ::oToolTip:Title( cTitle ) }
+   METHOD ToolTipTitle( cTitle )          BLOCK { |Self,cTitle| ::oToolTip:Title( cTitle ) }
 
-METHOD getWindowState()
+   METHOD getWindowState()
 
-METHOD SetActivationFocus
+   METHOD SetActivationFocus
 
-METHOD ProcessInitProcedure
+   METHOD ProcessInitProcedure
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD OnHideFocusManagement
+   METHOD OnHideFocusManagement
 
-METHOD CheckInteractiveClose()
+   METHOD CheckInteractiveClose()
 
-METHOD DoEvent
+   METHOD DoEvent
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Destroy
+   METHOD Events_Destroy
 
-METHOD Events_NCDestroy
+   METHOD Events_NCDestroy
 
-METHOD Events_VScroll
+   METHOD Events_VScroll
 
-METHOD Events_HScroll
+   METHOD Events_HScroll
 
-METHOD HelpButton          SETGET
+   METHOD HelpButton          SETGET
 
-METHOD HelpTopic(lParam)   BLOCK { | Self, lParam | HelpTopic( GetControlObjectByHandle( GetHelpData( lParam ) ):HelpId , 2 ), Self, nil }
+   METHOD HelpTopic(lParam)   BLOCK { | Self, lParam | HelpTopic( GetControlObjectByHandle( GetHelpData( lParam ) ):HelpId , 2 ), Self, nil }
 
-METHOD ScrollControls
+   METHOD ScrollControls
 
-METHOD MessageLoop
+   METHOD MessageLoop
 
-METHOD HasStatusBar        BLOCK { | Self | aScan( ::aControls, { |c| c:Type == "MESSAGEBAR" } ) > 0 }
+   METHOD HasStatusBar        BLOCK { | Self | aScan( ::aControls, { |c| c:Type == "MESSAGEBAR" } ) > 0 }
 
-METHOD Inspector           BLOCK { | Self | Inspector( Self ) }
+   METHOD Inspector           BLOCK { | Self | Inspector( Self ) }
 
-METHOD NotifyIconObject
+   METHOD NotifyIconObject
 
-METHOD NotifyIcon            SETGET
+   METHOD NotifyIcon            SETGET
 
-METHOD NotifyToolTip         SETGET
+   METHOD NotifyToolTip         SETGET
 
-METHOD NotifyIconLeftClick   SETGET
+   METHOD NotifyIconLeftClick   SETGET
 
-METHOD NotifyIconDblClick    SETGET
+   METHOD NotifyIconDblClick    SETGET
 
-METHOD NotifyIconRightClick  SETGET
+   METHOD NotifyIconRightClick  SETGET
 
-METHOD NotifyIconRDblClick   SETGET
+   METHOD NotifyIconRDblClick   SETGET
 
-METHOD NotifyIconMidClick    SETGET
+   METHOD NotifyIconMidClick    SETGET
 
-METHOD NotifyIconMDblClick   SETGET
+   METHOD NotifyIconMDblClick   SETGET
 
-METHOD NotifyMenu            SETGET
+   METHOD NotifyMenu            SETGET
 
-METHOD cNotifyIconName       SETGET
+   METHOD cNotifyIconName       SETGET
 
-METHOD cNotifyIconToolTip    SETGET
+   METHOD cNotifyIconToolTip    SETGET
 
-METHOD AddNotifyIcon
+   METHOD AddNotifyIcon
 
 ENDCLASS
 
@@ -1922,13 +1922,13 @@ CLASS TFormMain FROM TForm
    DATA Type           INIT "A" READONLY
    DATA lFirstActivate INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Activate
+   METHOD Activate
 
-METHOD Release
+   METHOD Release
 
-METHOD CheckInteractiveClose
+   METHOD CheckInteractiveClose
 
 ENDCLASS
 
@@ -2001,15 +2001,15 @@ CLASS TFormModal FROM TForm
    DATA LockedForms    INIT {}
    DATA oPrevWindow    INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Visible      SETGET
+   METHOD Visible      SETGET
 
-METHOD Activate
+   METHOD Activate
 
-METHOD Release
+   METHOD Release
 
-METHOD OnHideFocusManagement
+   METHOD OnHideFocusManagement
 
 ENDCLASS
 
@@ -2130,19 +2130,19 @@ CLASS TFormInternal FROM TForm
    DATA lAdjust        INIT .F.
    DATA Focused        INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Define2
+   METHOD Define2
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Row       SETGET
+   METHOD Row       SETGET
 
-METHOD Col       SETGET
+   METHOD Col       SETGET
 
-METHOD ContainerRow        BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerRow ) + ::Container:RowMargin, ::Parent:RowMargin ) + ::Row }
+   METHOD ContainerRow        BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerRow ) + ::Container:RowMargin, ::Parent:RowMargin ) + ::Row }
 
-METHOD ContainerCol        BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerCol ) + ::Container:ColMargin, ::Parent:ColMargin ) + ::Col }
+   METHOD ContainerCol        BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerCol ) + ::Container:ColMargin, ::Parent:ColMargin ) + ::Col }
 
 ENDCLASS
 
@@ -2252,7 +2252,7 @@ CLASS TFormSplit FROM TFormInternal
 
    DATA Type           INIT "X" READONLY
 
-METHOD Define
+   METHOD Define
 
 ENDCLASS
 
@@ -2301,23 +2301,23 @@ CLASS TFormMDIClient FROM TFormInternal
    DATA nWidth         INIT 0
    DATA nHeight        INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD DefWindowProc(nMsg,wParam,lParam) BLOCK { |Self,nMsg,wParam,lParam| DefMDIChildProc( ::hWnd, nMsg, wParam, lParam ) }
+   METHOD DefWindowProc(nMsg,wParam,lParam) BLOCK { |Self,nMsg,wParam,lParam| DefMDIChildProc( ::hWnd, nMsg, wParam, lParam ) }
 
-METHOD Events_Size
+   METHOD Events_Size
 
-METHOD Release                           BLOCK { |Self| _OOHG_RemoveMdi( ::hWnd ) , ::Super:Release() }
+   METHOD Release                           BLOCK { |Self| _OOHG_RemoveMdi( ::hWnd ) , ::Super:Release() }
 
-METHOD Cascade
+   METHOD Cascade
 
-METHOD TileHorizontal                    BLOCK { |Self| SendMessage( ::hWnd, WM_MDITILE, 1, 0 ) }
+   METHOD TileHorizontal                    BLOCK { |Self| SendMessage( ::hWnd, WM_MDITILE, 1, 0 ) }
 
-METHOD TileVertical                      BLOCK { |Self| SendMessage( ::hWnd, WM_MDITILE, 0, 0 ) }
+   METHOD TileVertical                      BLOCK { |Self| SendMessage( ::hWnd, WM_MDITILE, 0, 0 ) }
 
-METHOD IconArrange                       BLOCK { |Self| SendMessage( ::hWnd, WM_MDIICONARRANGE, 0, 0 ) }
+   METHOD IconArrange                       BLOCK { |Self| SendMessage( ::hWnd, WM_MDIICONARRANGE, 0, 0 ) }
 
-METHOD ActiveChild
+   METHOD ActiveChild
 
 ENDCLASS
 
@@ -2424,11 +2424,11 @@ CLASS TFormMDIChild FROM TFormInternal
 
    DATA Type           INIT "L" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD DefWindowProc(nMsg,wParam,lParam) BLOCK { |Self,nMsg,wParam,lParam| DefMDIChildProc( ::hWnd, nMsg, wParam, lParam ) }
+   METHOD DefWindowProc(nMsg,wParam,lParam) BLOCK { |Self,nMsg,wParam,lParam| DefMDIChildProc( ::hWnd, nMsg, wParam, lParam ) }
 
-METHOD IsActive                          BLOCK { |Self| ::Parent:ActiveChild:hWnd == ::hWnd }
+   METHOD IsActive                          BLOCK { |Self| ::Parent:ActiveChild:hWnd == ::hWnd }
 
 ENDCLASS
 
@@ -3510,4 +3510,3 @@ STATIC FUNCTION selecciona(ooBj,name,Values)
    msginfo(name+' '+Values[1]+' '+valor(Values[2]))
 
    RETURN NIL
-

@@ -441,4 +441,3 @@ FUNCTION RichEditBox_SaveFile( hWndControl, cFile, lSelection, nType )
    RichEditBox_StreamOut( hWndControl, cFile, lSelection, nType )
 
    RETURN NIL
-

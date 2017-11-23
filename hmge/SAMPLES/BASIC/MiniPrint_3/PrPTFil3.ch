@@ -1,6 +1,6 @@
-#define HL_NTOC( n )	IF( n = 0, '', hb_ntos( n ) )
-#define HL_FSize( cFN )	IF( !EMPTY( cFN ) .AND. FILE( cFN ), hb_FSize( cFN ), 0 )
-#define n2E16_1		100
+#define HL_NTOC( n )   IF( n = 0, '', hb_ntos( n ) )
+#define HL_FSize( cFN )   IF( !EMPTY( cFN ) .AND. FILE( cFN ), hb_FSize( cFN ), 0 )
+#define n2E16_1      100
 
     MEMVAR  aPrinterList,;
             cDefaPrinter,;
@@ -9,16 +9,16 @@
     MEMVAR  aPapers,;
             nPaprLstNo
     MEMVAR  cPTFilName,;
-            nPaprTypeNo,;    
-            lWordWrap,;    
+            nPaprTypeNo,;
+            lWordWrap,;
             cFontName,;
             nFontSize,;
             nVMargin,;
             nHMargin,;
             nChrsPerLin,;
             nLineHeigth,;
-            bUpdaSBar,; 
+            bUpdaSBar,;
             bUpdaPBar
-    
+
     MEMVAR  aSBarVals,;
             aShPrgsOp

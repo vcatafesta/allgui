@@ -65,4 +65,3 @@ PROCEDURE ShowThreadsIDs()
    MainWin.Frame_3.Caption := "Progressbar (Thread pointer: " + hb_ntos( win_P2N( pProgThread ) ) +")"
 
    RETURN
-

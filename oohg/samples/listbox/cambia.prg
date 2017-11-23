@@ -62,4 +62,3 @@ PROCEDURE ChangeImg
    /*
    * EOF
    */
-

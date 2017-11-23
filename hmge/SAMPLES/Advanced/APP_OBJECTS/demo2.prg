@@ -93,4 +93,3 @@ PROCEDURE SetStatusbarProperties
    END WITH
 
    RETURN
-

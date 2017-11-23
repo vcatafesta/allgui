@@ -152,4 +152,3 @@ PROCEDURE Proc_ON_PAINT
    BT_DeleteDC (BTstruct)
 
    RETURN
-

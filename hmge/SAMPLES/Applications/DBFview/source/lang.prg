@@ -214,4 +214,3 @@ STATIC FUNCTION GetSetting (cSec, cEnt)
    GET cVal SECTION cSec ENTRY cEnt DEFAULT ""
 
    RETURN cVal
-

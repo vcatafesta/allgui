@@ -48,4 +48,3 @@ PROCEDURE Test()
    Win1.Test.XObject:src := GetStartUpFolder() + "\test.pdf"
 
    RETURN
-

@@ -340,7 +340,7 @@
 #xtranslate Listviewsortinfofree([<n,...>])   => hwg_Listviewsortinfofree(<n>)
 #xtranslate Listviewsort([<n,...>])           => hwg_Listviewsort(<n>)
 
-// listbox.c 
+// listbox.c
 #xtranslate Listboxaddstring([<n,...>])       => hwg_Listboxaddstring(<n>)
 #xtranslate Listboxsetstring([<n,...>])       => hwg_Listboxsetstring(<n>)
 #xtranslate Createlistbox([<n,...>])          => hwg_Createlistbox(<n>)

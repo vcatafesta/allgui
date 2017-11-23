@@ -79,4 +79,3 @@ FUNCTION RetEditArr( aEdit, r, c )
    ENDIF
 
    RETURN aRet
-

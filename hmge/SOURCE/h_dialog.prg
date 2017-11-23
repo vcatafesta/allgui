@@ -624,4 +624,3 @@ FUNCTION _ReleaseDialog( hwndDlg )
    ENDIF
 
    RETURN NIL
-

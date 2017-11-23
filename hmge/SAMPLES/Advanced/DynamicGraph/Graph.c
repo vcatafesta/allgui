@@ -8,399 +8,399 @@
 \***************************************************************************/
 
 /************************************************************************
-	Draw initial Graph 
+   Draw initial Graph
 ************************************************************************/
 void DrawGraph(HDC hdc, RECT Rect)
 {
-	// Variable declaration
-	POINT penpoint;           
+   // Variable declaration
+   POINT penpoint;
 
-	HBRUSH hOldBrush, hNewBrush;
-	HPEN   hOldPen, hNewPen;
-	
-	LOGBRUSH lbrush;     
-	LOGPEN   lpen;          
+   HBRUSH hOldBrush, hNewBrush;
+   HPEN   hOldPen, hNewPen;
 
-	int XInt, YInt;
-	int iLoop, Index;
-	static int IncYAxis = 0;
+   LOGBRUSH lbrush;
+   LOGPEN   lpen;
 
-	penpoint.x     = (long)NULL;
-	penpoint.y     = (long)NULL;
+   int XInt, YInt;
+   int iLoop, Index;
+   static int IncYAxis = 0;
 
-	// Set Pen Color
-	lpen.lopnColor = RGB( 000, 000, 000 );
-	lpen.lopnStyle = PS_SOLID;
-	lpen.lopnWidth = penpoint;
+   penpoint.x     = (long)NULL;
+   penpoint.y     = (long)NULL;
 
-	// Set Brush Style
-	lbrush.lbStyle = BS_SOLID;
-	lbrush.lbColor = RGB( 000, 000, 000 );
-	lbrush.lbHatch = 0;
+   // Set Pen Color
+   lpen.lopnColor = RGB( 000, 000, 000 );
+   lpen.lopnStyle = PS_SOLID;
+   lpen.lopnWidth = penpoint;
 
-	// Select New Pen DC
-	hNewPen        = CreatePenIndirect(&lpen);    
-	hOldPen        = SelectPen( hdc, hNewPen);
+   // Set Brush Style
+   lbrush.lbStyle = BS_SOLID;
+   lbrush.lbColor = RGB( 000, 000, 000 );
+   lbrush.lbHatch = 0;
 
-	// Select New Brush DC
-	hNewBrush      = CreateBrushIndirect(&lbrush);
-	hOldBrush      = SelectBrush( hdc, hNewBrush);
+   // Select New Pen DC
+   hNewPen        = CreatePenIndirect(&lpen);
+   hOldPen        = SelectPen( hdc, hNewPen);
 
-	// Calculate the diff value for x and y axis
-	XInt = (Rect.right - Rect.left)/GRAPH_GAP;
-	YInt = (Rect.bottom - Rect.top)/GRAPH_GAP;
+   // Select New Brush DC
+   hNewBrush      = CreateBrushIndirect(&lbrush);
+   hOldBrush      = SelectBrush( hdc, hNewBrush);
 
-	// Draw the Box
-	Rectangle(hdc, Rect.left, Rect.top , Rect.right - GRAPH_HEADER_LOC, Rect.bottom);
+   // Calculate the diff value for x and y axis
+   XInt = (Rect.right - Rect.left)/GRAPH_GAP;
+   YInt = (Rect.bottom - Rect.top)/GRAPH_GAP;
 
-	//Change the brush color
-	lbrush.lbStyle = BS_SOLID;
-	lbrush.lbColor = RGB(000, 80, 40);
-	lbrush.lbHatch = 0;
+   // Draw the Box
+   Rectangle(hdc, Rect.left, Rect.top , Rect.right - GRAPH_HEADER_LOC, Rect.bottom);
 
-	// Select New Brush DC
-	hNewBrush = CreateBrushIndirect(&lbrush);
-	SelectBrush( hdc, hNewBrush);
+   //Change the brush color
+   lbrush.lbStyle = BS_SOLID;
+   lbrush.lbColor = RGB(000, 80, 40);
+   lbrush.lbHatch = 0;
 
-	// Draw the Box
-	Rectangle(hdc, Rect.right - GRAPH_HEADER_LOC, Rect.top , Rect.right, Rect.bottom);
+   // Select New Brush DC
+   hNewBrush = CreateBrushIndirect(&lbrush);
+   SelectBrush( hdc, hNewBrush);
 
-	//Change pen color to DRAK GREEN
-	lpen.lopnColor = RGB( 000, 125, 000 );
-	hNewPen        = CreatePenIndirect(&lpen);    
-	SelectPen( hdc, hNewPen);
+   // Draw the Box
+   Rectangle(hdc, Rect.right - GRAPH_HEADER_LOC, Rect.top , Rect.right, Rect.bottom);
 
-	// Move the Background of the graph
-	IncYAxis += VER_LINE_GAP;
-	if(IncYAxis > VER_MAX_MOV)
-		IncYAxis  = 0;
-	//Draw Y Axis . Vertical Line
-	for (iLoop = Rect.left + IncYAxis; (iLoop+ IncYAxis) <= (Rect.right - GRAPH_HEADER_LOC); iLoop += XInt)
-	{
+   //Change pen color to DRAK GREEN
+   lpen.lopnColor = RGB( 000, 125, 000 );
+   hNewPen        = CreatePenIndirect(&lpen);
+   SelectPen( hdc, hNewPen);
 
-		MoveToEx(hdc, iLoop + IncYAxis, Rect.top, NULL); 
-		LineTo(hdc, iLoop + IncYAxis, Rect.top + (YInt * GRAPH_GAP));
-	}
+   // Move the Background of the graph
+   IncYAxis += VER_LINE_GAP;
+   if(IncYAxis > VER_MAX_MOV)
+      IncYAxis  = 0;
+   //Draw Y Axis . Vertical Line
+   for (iLoop = Rect.left + IncYAxis; (iLoop+ IncYAxis) <= (Rect.right - GRAPH_HEADER_LOC); iLoop += XInt)
+   {
 
-	//Draw X Axis . Horizontal Line
-	Index = GRAPH_GAP;
-	for (iLoop = Rect.top; iLoop <= Rect.bottom ; iLoop += YInt)
-	{
-		MoveToEx(hdc, Rect.left, iLoop, NULL); 
-		LineTo(hdc, Rect.right - GRAPH_HEADER_LOC, iLoop);
-		Index --;
-	}
-	if(Index == 0)
-	{
-		MoveToEx(hdc, Rect.left, Rect.bottom, NULL); 
-		LineTo(hdc, Rect.right - GRAPH_HEADER_LOC, Rect.bottom);
-	}
+      MoveToEx(hdc, iLoop + IncYAxis, Rect.top, NULL);
+      LineTo(hdc, iLoop + IncYAxis, Rect.top + (YInt * GRAPH_GAP));
+   }
 
-	SelectObject(hdc, hOldPen);
-	DeleteObject(hNewPen);
-	SelectObject(hdc, hOldBrush);
-	DeleteObject(hNewBrush);
+   //Draw X Axis . Horizontal Line
+   Index = GRAPH_GAP;
+   for (iLoop = Rect.top; iLoop <= Rect.bottom ; iLoop += YInt)
+   {
+      MoveToEx(hdc, Rect.left, iLoop, NULL);
+      LineTo(hdc, Rect.right - GRAPH_HEADER_LOC, iLoop);
+      Index --;
+   }
+   if(Index == 0)
+   {
+      MoveToEx(hdc, Rect.left, Rect.bottom, NULL);
+      LineTo(hdc, Rect.right - GRAPH_HEADER_LOC, Rect.bottom);
+   }
+
+   SelectObject(hdc, hOldPen);
+   DeleteObject(hNewPen);
+   SelectObject(hdc, hOldBrush);
+   DeleteObject(hNewBrush);
 }
 
 /************************************************************************
-	Plot Graph points
+   Plot Graph points
 ************************************************************************/
 void UpdateGraph(HDC hdc, RECT Rect, unsigned long RxValue, unsigned long TxValue, int GraphNo)
 {
-	HFONT  hNewFont;
-	HPEN   hNewPen;
-	
-	LOGPEN   lpen;          
-	LOGFONT  lfont;          
+   HFONT  hNewFont;
+   HPEN   hNewPen;
 
-	POINT penpoint;           
+   LOGPEN   lpen;
+   LOGFONT  lfont;
 
-	char Buf[20];
-	int XAxisValues;
-	int ModVal;
-	int iLoop, Index, Check_Index;
-	float XPlotDiff, YPlotDiff;
-	int XInt, YInt;
+   POINT penpoint;
 
-	XInt = (Rect.right - Rect.left)/GRAPH_GAP;
-	YInt = (Rect.bottom - Rect.top)/GRAPH_GAP;
+   char Buf[20];
+   int XAxisValues;
+   int ModVal;
+   int iLoop, Index, Check_Index;
+   float XPlotDiff, YPlotDiff;
+   int XInt, YInt;
 
-	// Update the Max Bytes that has send / Received through the socket
-	if(RxValue > MaxRx)
-		MaxRx = RxValue;
-	if(TxValue > MaxTx)
-		MaxTx = TxValue;
+   XInt = (Rect.right - Rect.left)/GRAPH_GAP;
+   YInt = (Rect.bottom - Rect.top)/GRAPH_GAP;
 
-	if(MaxTx <= 0 && MaxRx <= 0)
-		MaxTx = 100;
-	// Assign the x axis difference values. Get six intervals values for x axis
-	if(MaxTx > MaxRx)
-		XAxisValues = MaxTx / GRAPH_GAP;
-	else
-		XAxisValues = MaxRx / GRAPH_GAP;
-	
-	// Round off the xaxis values for draw graph
-	ModVal = (int) XAxisValues % 10;
-	ModVal = 10 - ModVal;
-	if(ModVal != 10)
-		XAxisValues += ModVal;
+   // Update the Max Bytes that has send / Received through the socket
+   if(RxValue > MaxRx)
+      MaxRx = RxValue;
+   if(TxValue > MaxTx)
+      MaxTx = TxValue;
 
-	// Set the font to display the x - axis values
-	lfont.lfHeight		= -9;
-	lfont.lfWeight		= FW_THIN;
-	lfont.lfWidth		= 0;
-	lfont.lfEscapement	= 0;
-	lfont.lfOrientation	= 0;
-	lfont.lfUnderline	= FALSE;
-	lfont.lfStrikeOut	= FALSE;
-	lfont.lfItalic		= FALSE;
-	lfont.lfCharSet		= DEFAULT_CHARSET;
-	lfont.lfOutPrecision	= OUT_TT_PRECIS;
-	lfont.lfPitchAndFamily	= VARIABLE_PITCH | FF_DONTCARE;
-	lfont.lfQuality		= PROOF_QUALITY;
-	lfont.lfClipPrecision	= CLIP_DEFAULT_PRECIS;
-	strcpy(lfont.lfFaceName, "Times New Roman");
-	hNewFont = CreateFontIndirect(&lfont);
-	SelectFont(hdc, hNewFont);
+   if(MaxTx <= 0 && MaxRx <= 0)
+      MaxTx = 100;
+   // Assign the x axis difference values. Get six intervals values for x axis
+   if(MaxTx > MaxRx)
+      XAxisValues = MaxTx / GRAPH_GAP;
+   else
+      XAxisValues = MaxRx / GRAPH_GAP;
 
-	SetTextColor(hdc, RGB( 255, 255, 255));
-	SetTextAlign(hdc, TA_LEFT | TA_BASELINE);
+   // Round off the xaxis values for draw graph
+   ModVal = (int) XAxisValues % 10;
+   ModVal = 10 - ModVal;
+   if(ModVal != 10)
+      XAxisValues += ModVal;
 
-	// Display the x axis values
-	Index = GRAPH_GAP;
-	SetBkColor(hdc, RGB(000, 80, 40));
-	for (iLoop = Rect.top; iLoop < Rect.bottom ; iLoop += YInt)
-	{
-		memset(Buf, 0x00, sizeof(Buf));
-		sprintf(Buf, "%d", XAxisValues * Index);
-		if(Index == 0)
-			TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, iLoop, Buf, strlen(Buf));
-		else
-			TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, iLoop + 8, Buf, strlen(Buf));
-		Index --;
-	}
-	if(Index == 0)
-		TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, Rect.bottom, "0", strlen("0"));
+   // Set the font to display the x - axis values
+   lfont.lfHeight      = -9;
+   lfont.lfWeight      = FW_THIN;
+   lfont.lfWidth      = 0;
+   lfont.lfEscapement   = 0;
+   lfont.lfOrientation   = 0;
+   lfont.lfUnderline   = FALSE;
+   lfont.lfStrikeOut   = FALSE;
+   lfont.lfItalic      = FALSE;
+   lfont.lfCharSet      = DEFAULT_CHARSET;
+   lfont.lfOutPrecision   = OUT_TT_PRECIS;
+   lfont.lfPitchAndFamily   = VARIABLE_PITCH | FF_DONTCARE;
+   lfont.lfQuality      = PROOF_QUALITY;
+   lfont.lfClipPrecision   = CLIP_DEFAULT_PRECIS;
+   strcpy(lfont.lfFaceName, "Times New Roman");
+   hNewFont = CreateFontIndirect(&lfont);
+   SelectFont(hdc, hNewFont);
 
-	// Format the bytes structure
-	for(iLoop = NO_OF_POINTS; iLoop > 1; iLoop--)
-	{
-		GraphInfo[GraphNo][iLoop-1].RxBytes	=	GraphInfo[GraphNo][iLoop-2].RxBytes;
-		GraphInfo[GraphNo][iLoop-1].TxBytes	=	GraphInfo[GraphNo][iLoop-2].TxBytes;
-	}
-	// Move the current value into the structure
-	GraphInfo[GraphNo][0].RxBytes	=	RxValue;
-	GraphInfo[GraphNo][0].TxBytes	=	TxValue;
+   SetTextColor(hdc, RGB( 255, 255, 255));
+   SetTextAlign(hdc, TA_LEFT | TA_BASELINE);
 
-	// Get Plot Pos Difference
-	XPlotDiff = (float) XInt * GRAPH_GAP;
-	XPlotDiff /= NO_OF_POINTS;
-	XPlotDiff++;
+   // Display the x axis values
+   Index = GRAPH_GAP;
+   SetBkColor(hdc, RGB(000, 80, 40));
+   for (iLoop = Rect.top; iLoop < Rect.bottom ; iLoop += YInt)
+   {
+      memset(Buf, 0x00, sizeof(Buf));
+      sprintf(Buf, "%d", XAxisValues * Index);
+      if(Index == 0)
+         TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, iLoop, Buf, strlen(Buf));
+      else
+         TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, iLoop + 8, Buf, strlen(Buf));
+      Index --;
+   }
+   if(Index == 0)
+      TextOut(hdc, Rect.right - GRAPH_HEADER_LOC+1, Rect.bottom, "0", strlen("0"));
 
-	YPlotDiff = (float) Rect.bottom - (Rect.top);
-	YPlotDiff /=  (XAxisValues*GRAPH_GAP);
+   // Format the bytes structure
+   for(iLoop = NO_OF_POINTS; iLoop > 1; iLoop--)
+   {
+      GraphInfo[GraphNo][iLoop-1].RxBytes   =   GraphInfo[GraphNo][iLoop-2].RxBytes;
+      GraphInfo[GraphNo][iLoop-1].TxBytes   =   GraphInfo[GraphNo][iLoop-2].TxBytes;
+   }
+   // Move the current value into the structure
+   GraphInfo[GraphNo][0].RxBytes   =   RxValue;
+   GraphInfo[GraphNo][0].TxBytes   =   TxValue;
 
-	// Change pen color to DRAK GREEN
-	penpoint.x           = (long)NULL;
-	penpoint.y           = (long)NULL;
+   // Get Plot Pos Difference
+   XPlotDiff = (float) XInt * GRAPH_GAP;
+   XPlotDiff /= NO_OF_POINTS;
+   XPlotDiff++;
 
-	lpen.lopnColor = RGB( 000, 255, 000);
-	lpen.lopnStyle = PS_SOLID;
-	lpen.lopnWidth = penpoint;
-	
-	hNewPen   = CreatePenIndirect(&lpen);    
-	SelectPen( hdc, hNewPen);
+   YPlotDiff = (float) Rect.bottom - (Rect.top);
+   YPlotDiff /=  (XAxisValues*GRAPH_GAP);
 
-	TotalRxBytes = TotalTxBytes = 0;
+   // Change pen color to DRAK GREEN
+   penpoint.x           = (long)NULL;
+   penpoint.y           = (long)NULL;
 
-	// Plot Rx Bytes information on the graph
-	Check_Index = 0;
-	for (iLoop = 0; iLoop < NO_OF_POINTS; iLoop ++)
-	{
-		if((Rect.left+Check_Index+XPlotDiff) > (Rect.right - GRAPH_HEADER_LOC))
-			break;
-		
-		if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.top, NULL); 
-		}
-		else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) > Rect.bottom )
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.bottom, NULL); 
-		}
-		else
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)), NULL); 
-		}
-		
-		if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].RxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
-		{
-			LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), Rect.top); 
-		}
-		else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) > Rect.bottom )
-		{
-			LineTo(hdc, (int)(Rect.left+Check_Index), Rect.bottom); 
-		}
-		else
-		{
-			LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].RxBytes * YPlotDiff))); 
-		}
-		Check_Index += (int) XPlotDiff;
-		TotalRxBytes += GraphInfo[GraphNo][iLoop].RxBytes;
-	}
+   lpen.lopnColor = RGB( 000, 255, 000);
+   lpen.lopnStyle = PS_SOLID;
+   lpen.lopnWidth = penpoint;
 
-	// Change pen color to DRAK GREEN
-	lpen.lopnColor = RGB( 255, 000, 000 );
-	lpen.lopnStyle = PS_SOLID;
-	lpen.lopnWidth = penpoint;
-	hNewPen   = CreatePenIndirect(&lpen);    
-	SelectPen( hdc, hNewPen);
- 
-	// Plot Tx Bytes information on the graph
-	Check_Index = 0;
-	for (iLoop = 0; iLoop < NO_OF_POINTS; iLoop ++)
-	{
-		if((Rect.left+Check_Index+XPlotDiff) > (Rect.right - GRAPH_HEADER_LOC))
-			break;
-		if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.top, NULL); 
-		}
-		else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) > Rect.bottom )
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.bottom, NULL); 
-		}
-		else
-		{
-			MoveToEx(hdc, (int)(Rect.left+Check_Index), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)), NULL); 
-		}
+   hNewPen   = CreatePenIndirect(&lpen);
+   SelectPen( hdc, hNewPen);
 
-		if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].TxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
-		{
-			LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), Rect.top); 
-		}
-		else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) > Rect.bottom )
-		{
-			LineTo(hdc, (int)(Rect.left+Check_Index), Rect.bottom); 
-		}
-		else
-		{
-			LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].TxBytes * YPlotDiff))); 
-		}
-		Check_Index += (int) XPlotDiff;
+   TotalRxBytes = TotalTxBytes = 0;
 
-		TotalTxBytes += GraphInfo[GraphNo][iLoop].TxBytes;
-	}
+   // Plot Rx Bytes information on the graph
+   Check_Index = 0;
+   for (iLoop = 0; iLoop < NO_OF_POINTS; iLoop ++)
+   {
+      if((Rect.left+Check_Index+XPlotDiff) > (Rect.right - GRAPH_HEADER_LOC))
+         break;
+
+      if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.top, NULL);
+      }
+      else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) > Rect.bottom )
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.bottom, NULL);
+      }
+      else
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)), NULL);
+      }
+
+      if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].RxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
+      {
+         LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), Rect.top);
+      }
+      else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].RxBytes * YPlotDiff)) > Rect.bottom )
+      {
+         LineTo(hdc, (int)(Rect.left+Check_Index), Rect.bottom);
+      }
+      else
+      {
+         LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].RxBytes * YPlotDiff)));
+      }
+      Check_Index += (int) XPlotDiff;
+      TotalRxBytes += GraphInfo[GraphNo][iLoop].RxBytes;
+   }
+
+   // Change pen color to DRAK GREEN
+   lpen.lopnColor = RGB( 255, 000, 000 );
+   lpen.lopnStyle = PS_SOLID;
+   lpen.lopnWidth = penpoint;
+   hNewPen   = CreatePenIndirect(&lpen);
+   SelectPen( hdc, hNewPen);
+
+   // Plot Tx Bytes information on the graph
+   Check_Index = 0;
+   for (iLoop = 0; iLoop < NO_OF_POINTS; iLoop ++)
+   {
+      if((Rect.left+Check_Index+XPlotDiff) > (Rect.right - GRAPH_HEADER_LOC))
+         break;
+      if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.top, NULL);
+      }
+      else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) > Rect.bottom )
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), Rect.bottom, NULL);
+      }
+      else
+      {
+         MoveToEx(hdc, (int)(Rect.left+Check_Index), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)), NULL);
+      }
+
+      if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].TxBytes * YPlotDiff)) < (GRAPH_HEADER_LOC + Rect.top ) )
+      {
+         LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), Rect.top);
+      }
+      else if(((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop].TxBytes * YPlotDiff)) > Rect.bottom )
+      {
+         LineTo(hdc, (int)(Rect.left+Check_Index), Rect.bottom);
+      }
+      else
+      {
+         LineTo(hdc, (int)((Rect.left+Check_Index+XPlotDiff)), (int) ((Rect.top + (YInt * GRAPH_GAP)) - (GraphInfo[GraphNo][iLoop+1].TxBytes * YPlotDiff)));
+      }
+      Check_Index += (int) XPlotDiff;
+
+      TotalTxBytes += GraphInfo[GraphNo][iLoop].TxBytes;
+   }
 
 }
 
 /******************************************************************
-	Process Bar
+   Process Bar
 ******************************************************************/
 void DrawBar(HDC hdc, RECT Rect, int Process_Value)
 {
-	POINT penpoint;           
+   POINT penpoint;
 
-	HBRUSH hOldBrush, hNewBrush;
-	HFONT  hOldFont, hNewFont;
-	HPEN   hOldPen, hNewPen;
-	
-	LOGBRUSH lbrush;     
-	LOGPEN   lpen;          
-	LOGFONT  lfont;          
+   HBRUSH hOldBrush, hNewBrush;
+   HFONT  hOldFont, hNewFont;
+   HPEN   hOldPen, hNewPen;
 
-	int XInt, YInt;
-	int iLoop, EndPos = 0;
-	float IncYAxis;
-	char Buf[BUF_LEN];
+   LOGBRUSH lbrush;
+   LOGPEN   lpen;
+   LOGFONT  lfont;
 
-	// Set Brush Style
-	lbrush.lbStyle     = BS_SOLID;
-	lbrush.lbColor     = RGB( 000, 000, 000 );
-	lbrush.lbHatch     = 0;
+   int XInt, YInt;
+   int iLoop, EndPos = 0;
+   float IncYAxis;
+   char Buf[BUF_LEN];
 
-	// Select New Brush DC
-	hNewBrush	= CreateBrushIndirect(&lbrush);
-	hOldBrush	= SelectBrush( hdc, hNewBrush);
+   // Set Brush Style
+   lbrush.lbStyle     = BS_SOLID;
+   lbrush.lbColor     = RGB( 000, 000, 000 );
+   lbrush.lbHatch     = 0;
 
-	// Calculate the diff value for x and y axis
-	XInt = (Rect.right  - Rect.left)/ NO_OF_BAR_PARTS;
-	YInt = (Rect.bottom - Rect.top + GRAPH_GAP) / NO_OF_BAR_PARTS;
+   // Select New Brush DC
+   hNewBrush   = CreateBrushIndirect(&lbrush);
+   hOldBrush   = SelectBrush( hdc, hNewBrush);
 
-	// Draw the Box
-	Rectangle(hdc, Rect.left, Rect.top, Rect.right, Rect.bottom);
+   // Calculate the diff value for x and y axis
+   XInt = (Rect.right  - Rect.left)/ NO_OF_BAR_PARTS;
+   YInt = (Rect.bottom - Rect.top + GRAPH_GAP) / NO_OF_BAR_PARTS;
 
-	// Select the dark green pen for draw the line
-	penpoint.x	= (long)0;
-	penpoint.y	= (long)0;
+   // Draw the Box
+   Rectangle(hdc, Rect.left, Rect.top, Rect.right, Rect.bottom);
 
-	lpen.lopnColor  = RGB( 000, DARK_GREEN, 000 );
-	lpen.lopnStyle  = PS_SOLID;
-	lpen.lopnWidth  = penpoint;
-	hNewPen		= CreatePenIndirect(&lpen);    
-	hOldPen		= SelectPen( hdc, hNewPen);
+   // Select the dark green pen for draw the line
+   penpoint.x   = (long)0;
+   penpoint.y   = (long)0;
 
-	// Draw the initial horizontal line 
-	for(iLoop = (Rect.top + GRAPH_GAP); iLoop <= (Rect.bottom - YInt); iLoop += LINE_GAP_LEN)
-	{
-		MoveToEx(hdc, (Rect.left + XInt), iLoop, NULL);
-		LineTo(hdc, (Rect.right - XInt), iLoop);
-		EndPos = iLoop;
-	}
+   lpen.lopnColor  = RGB( 000, DARK_GREEN, 000 );
+   lpen.lopnStyle  = PS_SOLID;
+   lpen.lopnWidth  = penpoint;
+   hNewPen      = CreatePenIndirect(&lpen);
+   hOldPen      = SelectPen( hdc, hNewPen);
 
-	//Get the length of plot area in y axis
-	IncYAxis = (float) (Rect.bottom - YInt) - (Rect.top + GRAPH_GAP);
-	// Calculate the percentage value for the value
-	IncYAxis = (IncYAxis * Process_Value / 100);
-	// Get the exact y axis value to display the graph
-	IncYAxis = (Rect.bottom - YInt) - IncYAxis;
+   // Draw the initial horizontal line
+   for(iLoop = (Rect.top + GRAPH_GAP); iLoop <= (Rect.bottom - YInt); iLoop += LINE_GAP_LEN)
+   {
+      MoveToEx(hdc, (Rect.left + XInt), iLoop, NULL);
+      LineTo(hdc, (Rect.right - XInt), iLoop);
+      EndPos = iLoop;
+   }
 
-	// Change the pen style and color for draw the graph
-	penpoint.x	= (long)0;
-	penpoint.y	= (long)0;
-	lpen.lopnColor  = RGB( 000, LIGHT_GREEN, 000 );
-	lpen.lopnStyle  = PS_SOLID;
-	lpen.lopnWidth  = penpoint;
-	hNewPen		= CreatePenIndirect(&lpen);    
-	SelectPen( hdc, hNewPen);
+   //Get the length of plot area in y axis
+   IncYAxis = (float) (Rect.bottom - YInt) - (Rect.top + GRAPH_GAP);
+   // Calculate the percentage value for the value
+   IncYAxis = (IncYAxis * Process_Value / 100);
+   // Get the exact y axis value to display the graph
+   IncYAxis = (Rect.bottom - YInt) - IncYAxis;
 
-	// Fill the percentage area
-	for(iLoop = EndPos; iLoop >= IncYAxis; iLoop -= LINE_GAP_LEN)
-	{
-		MoveToEx(hdc, (Rect.left + XInt), iLoop, NULL);
-		LineTo(hdc, (Rect.right - XInt), iLoop);
-	}
+   // Change the pen style and color for draw the graph
+   penpoint.x   = (long)0;
+   penpoint.y   = (long)0;
+   lpen.lopnColor  = RGB( 000, LIGHT_GREEN, 000 );
+   lpen.lopnStyle  = PS_SOLID;
+   lpen.lopnWidth  = penpoint;
+   hNewPen      = CreatePenIndirect(&lpen);
+   SelectPen( hdc, hNewPen);
 
-	// Set Font Parameters
-	lfont.lfHeight		= -20;
-	lfont.lfWeight		= FW_THIN;
-	lfont.lfWidth		= 14;
-	lfont.lfEscapement	= 0;
-	lfont.lfOrientation	= 0;
-	strcpy(lfont.lfFaceName, "Courier");
-	lfont.lfUnderline	= FALSE;
-	lfont.lfStrikeOut	= FALSE;
-	lfont.lfItalic		= FALSE;
-	lfont.lfCharSet		= DEFAULT_CHARSET;
-	lfont.lfOutPrecision	= OUT_TT_PRECIS;
-	lfont.lfPitchAndFamily  = VARIABLE_PITCH | FF_DONTCARE;
-	lfont.lfQuality         = PROOF_QUALITY;
-	lfont.lfClipPrecision   = CLIP_DEFAULT_PRECIS;
+   // Fill the percentage area
+   for(iLoop = EndPos; iLoop >= IncYAxis; iLoop -= LINE_GAP_LEN)
+   {
+      MoveToEx(hdc, (Rect.left + XInt), iLoop, NULL);
+      LineTo(hdc, (Rect.right - XInt), iLoop);
+   }
 
-	// Select New font DC
-	hNewFont = CreateFontIndirect(&lfont);
-	hOldFont = SelectFont(hdc, hNewFont);
+   // Set Font Parameters
+   lfont.lfHeight      = -20;
+   lfont.lfWeight      = FW_THIN;
+   lfont.lfWidth      = 14;
+   lfont.lfEscapement   = 0;
+   lfont.lfOrientation   = 0;
+   strcpy(lfont.lfFaceName, "Courier");
+   lfont.lfUnderline   = FALSE;
+   lfont.lfStrikeOut   = FALSE;
+   lfont.lfItalic      = FALSE;
+   lfont.lfCharSet      = DEFAULT_CHARSET;
+   lfont.lfOutPrecision   = OUT_TT_PRECIS;
+   lfont.lfPitchAndFamily  = VARIABLE_PITCH | FF_DONTCARE;
+   lfont.lfQuality         = PROOF_QUALITY;
+   lfont.lfClipPrecision   = CLIP_DEFAULT_PRECIS;
 
-	// Set the text color and display the percentage as a text
-	SetBkColor(hdc, RGB(000, 000, 000));
-	SetTextColor(hdc, RGB(000, LIGHT_GREEN, 000));
-	sprintf(Buf, "%d %%",Process_Value);
-	TextOut(hdc, Rect.left + (int) ((Rect.right  - Rect.left) / CENTER_VAL), (Rect.bottom - YInt) + (YInt/3), Buf, strlen(Buf));
+   // Select New font DC
+   hNewFont = CreateFontIndirect(&lfont);
+   hOldFont = SelectFont(hdc, hNewFont);
 
-	SelectObject(hdc, hOldPen);
-	DeleteObject(hNewPen);
-	SelectObject(hdc, hOldBrush);
-	DeleteObject(hNewBrush);
-	SelectObject(hdc, hOldFont);
-	DeleteObject(hNewFont);
+   // Set the text color and display the percentage as a text
+   SetBkColor(hdc, RGB(000, 000, 000));
+   SetTextColor(hdc, RGB(000, LIGHT_GREEN, 000));
+   sprintf(Buf, "%d %%",Process_Value);
+   TextOut(hdc, Rect.left + (int) ((Rect.right  - Rect.left) / CENTER_VAL), (Rect.bottom - YInt) + (YInt/3), Buf, strlen(Buf));
+
+   SelectObject(hdc, hOldPen);
+   DeleteObject(hNewPen);
+   SelectObject(hdc, hOldBrush);
+   DeleteObject(hNewBrush);
+   SelectObject(hdc, hOldFont);
+   DeleteObject(hNewFont);
 }

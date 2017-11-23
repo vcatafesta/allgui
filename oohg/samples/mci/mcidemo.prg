@@ -138,4 +138,3 @@ FUNCTION main()
    ACTIVATE WINDOW Media_Test
 
    RETURN
-

@@ -244,4 +244,3 @@ HB_FUNC( REMOVETRANSPARENCY )
    /*
    EOF
    */
-

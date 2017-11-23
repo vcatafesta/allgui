@@ -241,9 +241,7 @@ FUNCTION MemoOf(cFile)
    Returns the name of a database's memo file.  The function does not check
    if the database has a memo or not, just what it would be called.  It uses
    the Comix function cmxMemoExt() to get the extension.  Obviously, this
-
    function only works with the Comix RDD.
-
    */
 
    Return(NewExt(cFile, sx_MemoExt()))
@@ -252,7 +250,6 @@ FUNCTION NewExt(cFile, cExt)
 
    /*
    Strips the current extension off a file and replaces it with cExt.  The
-
    function will add the period if not provided.
 
    Translates directly to FileParts(cFile, FP_STRIPEXT) + cExt
@@ -352,4 +349,3 @@ FUNCTION Temp_Name(cExt, cPath)
    ENDDO
 
    Return(cTemp)
-

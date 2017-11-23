@@ -2711,4 +2711,3 @@ STATIC FUNCTION ABM2Listado( aImpresoras )
    wndABM2Listado.Release
 
    RETURN NIL
-

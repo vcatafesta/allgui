@@ -76,6 +76,4 @@
  */
 #define HPDF_ALIGN_SIZ              sizeof int;
 
-
 #endif /* _HPDF_CONF_H */
-

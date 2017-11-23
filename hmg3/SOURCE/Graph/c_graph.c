@@ -1,21 +1,19 @@
 
 /*
-File:		c_graph.c
-Author:		Grigory Filatov
-Description:	Graph Library for HMG
-Status:		Public Domain
-Notes:		Support function for DRAW commands
+File:      c_graph.c
+Author:      Grigory Filatov
+Description:   Graph Library for HMG
+Status:      Public Domain
+Notes:      Support function for DRAW commands
 
 Based on works of:
 
-		Alfredo Arteaga 14/10/2001 original idea
-		Alfredo Arteaga TGRAPH 2, 12/03/2002
+      Alfredo Arteaga 14/10/2001 original idea
+      Alfredo Arteaga TGRAPH 2, 12/03/2002
 */
-
 
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
-
 
 #include <windows.h>
 #include <commctrl.h>
@@ -54,14 +52,14 @@ HB_FUNC ( RECTDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(9))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(8,1),(int) hb_parvni(8,2),(int) hb_parvni(8,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(8,1),(int) hb_parvni(8,2),(int) hb_parvni(8,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    Rectangle((HDC) hdc1,(int) hb_parni(3),(int) hb_parni(2),(int) hb_parni(5),(int) hb_parni(4));
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj2);
@@ -83,14 +81,14 @@ HB_FUNC ( ROUNDRECTDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(11))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(10,1),(int) hb_parvni(10,2),(int) hb_parvni(10,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(10,1),(int) hb_parvni(10,2),(int) hb_parvni(10,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    RoundRect((HDC) hdc1,(int) hb_parni(3),(int) hb_parni(2),(int) hb_parni(5),(int) hb_parni(4),(int) hb_parni(6),(int) hb_parni(7));
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj2);
@@ -112,14 +110,14 @@ HB_FUNC ( ELLIPSEDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(9))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(8,1),(int) hb_parvni(8,2),(int) hb_parvni(8,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(8,1),(int) hb_parvni(8,2),(int) hb_parvni(8,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    Ellipse((HDC) hdc1,(int) hb_parni(3),(int) hb_parni(2),(int) hb_parni(5),(int) hb_parni(4));
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj2);
@@ -157,14 +155,14 @@ HB_FUNC ( PIEDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(13))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(12,1),(int) hb_parvni(12,2),(int) hb_parvni(12,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(12,1),(int) hb_parvni(12,2),(int) hb_parvni(12,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    Pie((HDC) hdc1,(int) hb_parni(3),(int) hb_parni(2),(int) hb_parni(5),(int) hb_parni(4),(int) hb_parni(7),(int) hb_parni(6),(int) hb_parni(9),(int) hb_parni(8));
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj2);
@@ -172,7 +170,7 @@ HB_FUNC ( PIEDRAW )
    DeleteObject( hbrush );
    ReleaseDC( hWnd1, hdc1 );
 }
-   
+
 HB_FUNC( POLYGONDRAW )
 {
    HWND hWnd1;
@@ -189,14 +187,14 @@ HB_FUNC( POLYGONDRAW )
    hgdiobj1 = SelectObject((HDC) hdc1, hpen);
    if (hb_parl(7))
    {
-      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(6,1),(int) hb_parvni(6,2),(int) hb_parvni(6,3)));    
+      hbrush = CreateSolidBrush((COLORREF) RGB((int) hb_parvni(6,1),(int) hb_parvni(6,2),(int) hb_parvni(6,3)));
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }   
+   }
    else
    {
-      hbrush = GetSysColorBrush((int) COLOR_WINDOW);    
+      hbrush = GetSysColorBrush((int) COLOR_WINDOW);
       hgdiobj2 = SelectObject((HDC) hdc1, hbrush);
-   }      
+   }
    for(i = 0; i <= number-1; i++)
    {
    apoints[i].x=hb_parvni(2,i+1);
@@ -209,7 +207,7 @@ HB_FUNC( POLYGONDRAW )
    DeleteObject( hbrush );
    ReleaseDC( hWnd1, hdc1 );
 }
-   
+
 HB_FUNC( POLYBEZIERDRAW )
 {
    HWND hWnd1;
@@ -232,7 +230,7 @@ HB_FUNC( POLYBEZIERDRAW )
    SelectObject((HDC) hdc1,(HGDIOBJ) hgdiobj1);
    DeleteObject( hpen );
    ReleaseDC( hWnd1, hdc1 );
-}   
+}
 
 void WndDrawBox( HDC hDC, RECT * rct, HPEN hPUpLeft, HPEN hPBotRit )
 {
@@ -275,7 +273,6 @@ HB_FUNC( WNDBOXIN )
    WindowBoxIn( (HDC) HMG_parnl (1), &rct );
 }
 
-
 HB_FUNC ( GETDC )
 {
    HDC hDC = GetDC ( (HWND) HMG_parnl (1) );
@@ -286,4 +283,3 @@ HB_FUNC ( RELEASEDC )
 {
    hb_retl( ReleaseDC( (HWND) HMG_parnl (1), (HDC) HMG_parnl (2) ) ) ;
 }
-

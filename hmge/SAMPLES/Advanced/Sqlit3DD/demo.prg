@@ -139,4 +139,3 @@ FUNCTION sqlupdate(nColumn)
    ENDIF
 
    RETURN .T.
-

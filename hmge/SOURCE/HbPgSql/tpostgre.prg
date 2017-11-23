@@ -55,45 +55,30 @@ CREATE CLASS TPQServer
    VAR lTrace    INIT .F.
    VAR pTrace
 
-METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom )
+   METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom )
+   METHOD Destroy()
+   METHOD Close()              INLINE ::Destroy()
 
-METHOD Destroy()
+   METHOD StartTransaction()
+   METHOD TransactionStatus()  INLINE PQtransactionStatus( ::pDb )
+   METHOD Commit()
+   METHOD Rollback()
 
-METHOD Close()              INLINE ::Destroy()
+   METHOD Query( cQuery )
+   METHOD Execute( cQuery )    INLINE ::Query( cQuery )
+   METHOD SetSchema( cSchema )
 
-METHOD StartTransaction()
+   METHOD NetErr()             INLINE ::lError
+   METHOD ErrorMsg()           INLINE ::cError
 
-METHOD TransactionStatus()  INLINE PQtransactionStatus( ::pDb )
-
-METHOD Commit()
-
-METHOD Rollback()
-
-METHOD Query( cQuery )
-
-METHOD Execute( cQuery )    INLINE ::Query( cQuery )
-
-METHOD SetSchema( cSchema )
-
-METHOD NetErr()             INLINE ::lError
-
-METHOD ErrorMsg()           INLINE ::cError
-
-METHOD TableExists( cTable )
-
-METHOD ListTables()
-
-METHOD TableStruct( cTable )
-
-METHOD CreateTable( cTable, aStruct )
-
-METHOD DeleteTable( cTable  )
-
-METHOD TraceOn( cFile )
-
-METHOD TraceOff()
-
-METHOD SetVerbosity( num )  INLINE PQsetErrorVerbosity( ::pDb, iif( num >= 0 .AND. num <= 2, num, 1 )  )
+   METHOD TableExists( cTable )
+   METHOD ListTables()
+   METHOD TableStruct( cTable )
+   METHOD CreateTable( cTable, aStruct )
+   METHOD DeleteTable( cTable  )
+   METHOD TraceOn( cFile )
+   METHOD TraceOff()
+   METHOD SetVerbosity( num )  INLINE PQsetErrorVerbosity( ::pDb, iif( num >= 0 .AND. num <= 2, num, 1 )  )
 
 ENDCLASS
 
@@ -467,65 +452,43 @@ CREATE CLASS TPQQuery
    VAR Schema
    VAR rows     INIT 0
 
-METHOD New( pDB, cQuery, lAllCols, cSchema, res )
+   METHOD New( pDB, cQuery, lAllCols, cSchema, res )
+   METHOD Destroy()
+   METHOD Close()            INLINE ::Destroy()
 
-METHOD Destroy()
+   METHOD Refresh( lQuery, lMeta )
+   METHOD Fetch()            INLINE ::Skip()
+   METHOD Read()
+   METHOD Skip( nRecno )
 
-METHOD Close()            INLINE ::Destroy()
+   METHOD Bof()              INLINE ::lBof
+   METHOD Eof()              INLINE ::lEof
+   METHOD RecNo()            INLINE ::nRecno
+   METHOD LastRec()          INLINE ::nLastrec
+   METHOD Goto( nRecno )
 
-METHOD Refresh( lQuery, lMeta )
+   METHOD NetErr()           INLINE ::lError
+   METHOD ErrorMsg()         INLINE ::cError
 
-METHOD Fetch()            INLINE ::Skip()
+   METHOD FCount()           INLINE ::nFields
+   METHOD FieldName( nField )
+   METHOD FieldPos( cField )
+   METHOD FieldLen( nField )
+   METHOD FieldDec( nField )
+   METHOD FieldType( nField )
+   METHOD Update( oRow )
+   METHOD Delete( oRow )
+   METHOD Append( oRow )
+   METHOD SetKey()
 
-METHOD Read()
+   METHOD Changed( nField )  INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
+   METHOD Blank()            INLINE ::GetBlankRow()
 
-METHOD Skip( nRecno )
+   METHOD Struct()
 
-METHOD Bof()              INLINE ::lBof
-
-METHOD Eof()              INLINE ::lEof
-
-METHOD RecNo()            INLINE ::nRecno
-
-METHOD LastRec()          INLINE ::nLastrec
-
-METHOD Goto( nRecno )
-
-METHOD NetErr()           INLINE ::lError
-
-METHOD ErrorMsg()         INLINE ::cError
-
-METHOD FCount()           INLINE ::nFields
-
-METHOD FieldName( nField )
-
-METHOD FieldPos( cField )
-
-METHOD FieldLen( nField )
-
-METHOD FieldDec( nField )
-
-METHOD FieldType( nField )
-
-METHOD Update( oRow )
-
-METHOD Delete( oRow )
-
-METHOD Append( oRow )
-
-METHOD SetKey()
-
-METHOD Changed( nField )  INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
-
-METHOD Blank()            INLINE ::GetBlankRow()
-
-METHOD Struct()
-
-METHOD FieldGet( nField, nRow )
-
-METHOD GetRow( nRow )
-
-METHOD GetBlankRow()
+   METHOD FieldGet( nField, nRow )
+   METHOD GetRow( nRow )
+   METHOD GetBlankRow()
 
 ENDCLASS
 
@@ -1202,27 +1165,18 @@ CREATE CLASS TPQRow
    VAR aOld
    VAR aStruct
 
-METHOD New( row, old, struct )
+   METHOD New( row, old, struct )
 
-METHOD FCount()              INLINE Len( ::aRow )
-
-METHOD FieldGet( nField )
-
-METHOD FieldPut( nField, Value )
-
-METHOD FieldName( nField )
-
-METHOD FieldPos( cField )
-
-METHOD FieldLen( nField )
-
-METHOD FieldDec( nField )
-
-METHOD FieldType( nField )
-
-METHOD Changed( nField )     INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
-
-METHOD FieldGetOld( nField ) INLINE ::aOld[ nField ]
+   METHOD FCount()              INLINE Len( ::aRow )
+   METHOD FieldGet( nField )
+   METHOD FieldPut( nField, Value )
+   METHOD FieldName( nField )
+   METHOD FieldPos( cField )
+   METHOD FieldLen( nField )
+   METHOD FieldDec( nField )
+   METHOD FieldType( nField )
+   METHOD Changed( nField )     INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
+   METHOD FieldGetOld( nField ) INLINE ::aOld[ nField ]
 
 ENDCLASS
 
@@ -1349,4 +1303,3 @@ STATIC FUNCTION ValueToString( xField )
    ENDSWITCH
 
    RETURN NIL
-

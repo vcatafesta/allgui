@@ -883,4 +883,3 @@ PROCEDURE _GridEx_GroupCheckBoxAllItems ( cControlName, cParentName, nGroupID, l
    ENDIF
 
    RETURN
-

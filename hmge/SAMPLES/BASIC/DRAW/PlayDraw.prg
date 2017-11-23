@@ -324,4 +324,3 @@ PROCEDURE GoDraw()                       // Drawing lines by predefined styles
    RETURN // GoDraw()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

@@ -106,4 +106,3 @@ FUNCTION ShowWings
    ACTIVATE WINDOW ShowWings
 
    RETURN NIL
-

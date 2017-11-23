@@ -1041,4 +1041,3 @@ FUNCTION About()
    #ifdef __XHARBOUR__
    #include <..\propgrid\fileread.prg>
    #endif
-

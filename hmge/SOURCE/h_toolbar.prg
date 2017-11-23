@@ -490,4 +490,3 @@ STATIC PROCEDURE _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , n
    ENDIF
 
    RETURN
-

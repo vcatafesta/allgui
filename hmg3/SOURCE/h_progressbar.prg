@@ -163,4 +163,3 @@ FUNCTION _DefineProgressBar ( ControlName, ParentForm, x, y, w, h, lo, hi, ;
    ENDIF
 
    RETURN NIL
-

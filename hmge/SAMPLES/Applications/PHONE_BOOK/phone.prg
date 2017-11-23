@@ -367,4 +367,3 @@ PROCEDURE NewRecPhone()
    MD_Form_1.mAdresa.Value := 'ADDRESS'
 
    RETURN
-

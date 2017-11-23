@@ -278,4 +278,3 @@ HB_FUNC( DELINISECTION )
                                        hb_parc( 2 ) ) );   // INI File
 }
 #pragma ENDDUMP
-

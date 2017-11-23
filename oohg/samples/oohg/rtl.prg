@@ -66,4 +66,3 @@ FUNCTION Main()
    oWnd:Activate()
 
    RETURN
-

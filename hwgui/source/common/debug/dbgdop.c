@@ -8,7 +8,6 @@ HB_FUNC( HB_RELEASECPU )
 }
 #endif
 
-
 #if defined( HB_OS_UNIX )
 #include <glib.h>
 HB_FUNC( __DBGPROCESSRUN )

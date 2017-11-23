@@ -39,4 +39,3 @@ PROCEDURE ChangeValues()
    Main.Browse.Refresh()
 
    RETURN
-

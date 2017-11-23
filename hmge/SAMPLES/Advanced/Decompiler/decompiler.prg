@@ -762,4 +762,3 @@ DWORD RvaToOffset( IMAGE_NT_HEADERS *NtHeaders, DWORD Rva)
 
    #include "rcvrdbl.prg"
    #include "recc2prg.prg"
-

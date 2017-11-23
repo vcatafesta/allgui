@@ -131,4 +131,3 @@ FUNCTION RunDll32()
       { "Open unknown file"                                           , "rundll32.exe shell32.dll,OpenAs_RunDLL %1"                      }  }
 
    RETURN(aArray)
-

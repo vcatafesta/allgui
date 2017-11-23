@@ -199,27 +199,23 @@ CLASS TGif
    DATA  lLopping
    DATA  nDelay
 
-METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName )
+   METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName )
 
-METHOD PlayGif( cControlName, cParentName )
+   METHOD PlayGif( cControlName, cParentName )
 
-METHOD Play() INLINE GifPlay( ::hGif, ::cParentName )
+   METHOD Play() INLINE GifPlay( ::hGif, ::cParentName )
+   METHOD Stop() INLINE GifStop( ::hGif, ::cParentName )
 
-METHOD Stop() INLINE GifStop( ::hGif, ::cParentName )
+   METHOD UpdateGif( cControlName, cParentName )
+   METHOD Update() INLINE ::UpdateGif( ::hGif, ::cParentName )
 
-METHOD UpdateGif( cControlName, cParentName )
+   METHOD RestartGif( cControlName, cParentName )
+   METHOD Restart() INLINE ::RestartGif( ::hGif, ::cParentName )
 
-METHOD Update() INLINE ::UpdateGif( ::hGif, ::cParentName )
+   METHOD IsRunning() INLINE GifIsRunning( ::hGif, ::cParentName )
 
-METHOD RestartGif( cControlName, cParentName )
-
-METHOD Restart() INLINE ::RestartGif( ::hGif, ::cParentName )
-
-METHOD IsRunning() INLINE GifIsRunning( ::hGif, ::cParentName )
-
-METHOD DestroyGif( cControlName, cParentName )
-
-METHOD End() INLINE ::DestroyGif( ::hGif, ::cParentName )
+   METHOD DestroyGif( cControlName, cParentName )
+   METHOD End() INLINE ::DestroyGif( ::hGif, ::cParentName )
 
 ENDCLASS
 
@@ -579,4 +575,3 @@ FUNCTION ReadFromStream( cFile, cStream )
 FUNCTION GetFrameDelay( cImageInfo, nDelay )
 
    RETURN ( Bin2W( SubStr( cImageInfo, 4, 2 ) ) * hb_defaultValue( nDelay, 10 ) )
-

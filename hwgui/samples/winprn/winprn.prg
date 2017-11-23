@@ -73,4 +73,3 @@ FUNCTION Main
    oWinPrn:End()
 
    RETURN NIL
-

@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #xcommand EXECUTE FILE <executable> WAIT ;
    => ;
       WaitRun ( <executable>, 5 )
@@ -76,40 +75,40 @@
       WaitRun( <executable>, 0 )
 
 #xcommand EXECUTE ;
-		[ OPERATION <operation> ] ;
-		[ FILE <file> ] ;
-		[ PARAMETERS <parameters> ] ;
-		[ DEFAULT <default> ] ;
+      [ OPERATION <operation> ] ;
+      [ FILE <file> ] ;
+      [ PARAMETERS <parameters> ] ;
+      [ DEFAULT <default> ] ;
    => ;
       _Execute( GetActiveWindow(), <operation>, <file>, <parameters>, ;
             <default>, 5 )
 
 #xcommand EXECUTE ;
-		[ OPERATION <operation> ] ;
-		[ FILE <file> ] ;
-		[ PARAMETERS <parameters> ] ;
-		[ DEFAULT <default> ] ;
-		MAXIMIZE ;
+      [ OPERATION <operation> ] ;
+      [ FILE <file> ] ;
+      [ PARAMETERS <parameters> ] ;
+      [ DEFAULT <default> ] ;
+      MAXIMIZE ;
    => ;
       _Execute( GetActiveWindow(), <operation>, <file>, <parameters>, ;
             <default>, 3 )
 
 #xcommand EXECUTE ;
-		[ OPERATION <operation> ] ;
-		[ FILE <file> ] ;
-		[ PARAMETERS <parameters> ] ;
-		[ DEFAULT <default> ] ;
-		MINIMIZE ;
+      [ OPERATION <operation> ] ;
+      [ FILE <file> ] ;
+      [ PARAMETERS <parameters> ] ;
+      [ DEFAULT <default> ] ;
+      MINIMIZE ;
    => ;
       _Execute( GetActiveWindow(), <operation>, <file>, <parameters>, ;
             <default>, 6 )
 
 #xcommand EXECUTE ;
-		[ OPERATION <operation> ] ;
-		[ FILE <file> ] ;
-		[ PARAMETERS <parameters> ] ;
-		[ DEFAULT <default> ] ;
-		HIDE ;
+      [ OPERATION <operation> ] ;
+      [ FILE <file> ] ;
+      [ PARAMETERS <parameters> ] ;
+      [ DEFAULT <default> ] ;
+      HIDE ;
    => ;
       _Execute( GetActiveWindow(), <operation>, <file>, <parameters>, ;
             <default>, 0 )

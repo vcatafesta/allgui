@@ -19,20 +19,20 @@ CLASS TMci
    DATA   oWnd
    DATA   cBuffer
 
-METHOD New( cDevice, cFileName )  CONSTRUCTOR
+   METHOD New( cDevice, cFileName )  CONSTRUCTOR
 
-METHOD lOpen()
+   METHOD lOpen()
 
-METHOD Play( nFrom, nTo, hWnd ) INLINE ;
+   METHOD Play( nFrom, nTo, hWnd ) INLINE ;
       ::nError := hwg_Nmciplay( ::nId, nFrom, nTo, hWnd )
 
-METHOD cGetError()
+   METHOD cGetError()
 
-METHOD SetWindow( oWnd ) INLINE ;
+   METHOD SetWindow( oWnd ) INLINE ;
       ::oWnd := oWnd, ;
       ::nError := hwg_Nmciwindow( ::nId, oWnd:handle )
 
-METHOD SendStr( cMciStr )
+   METHOD SendStr( cMciStr )
 
 ENDCLASS
 
@@ -73,4 +73,3 @@ METHOD cGetError() CLASS Tmci
    hwg_Mcigeterrorstring( ::nError, @cError )
 
    RETURN    cError
-

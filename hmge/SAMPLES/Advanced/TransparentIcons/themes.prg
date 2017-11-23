@@ -727,4 +727,3 @@ HB_FUNC( SETSBBKCOLOR )
 }
 
 #pragma ENDDUMP
-

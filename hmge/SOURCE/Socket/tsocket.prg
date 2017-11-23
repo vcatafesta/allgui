@@ -76,38 +76,28 @@ INIT PROCEDURE StartSocket
 
 CLASS TSocket
 
-METHOD New()
+   METHOD New()
 
-METHOD Connect( cAddress, nPort )
+   METHOD Connect( cAddress, nPort )
+   METHOD Close()
 
-METHOD Close()
+   METHOD SendString( cString )
+   METHOD ReceiveString()
+   METHOD ReceiveLine()
+   METHOD ReceiveChar( nBufLen )
 
-METHOD SendString( cString )
+   METHOD GetLocalName()    INLINE SocketLocalName()
+   METHOD GetLocalAddress() INLINE SocketLocalAddress()
 
-METHOD ReceiveString()
+   METHOD Bind( cAddress, nPort )
+   METHOD Listen( nClient )
 
-METHOD ReceiveLine()
-
-METHOD ReceiveChar( nBufLen )
-
-METHOD GetLocalName()    INLINE SocketLocalName()
-
-METHOD GetLocalAddress() INLINE SocketLocalAddress()
-
-METHOD Bind( cAddress, nPort )
-
-METHOD Listen( nClient )
-
-METHOD SetReceiveTimeout( nTime )
-
-METHOD SetSendTimeout( nTime )
+   METHOD SetReceiveTimeout( nTime )
+   METHOD SetSendTimeout( nTime )
 
    // Debug method
-
-METHOD SetDebug( bDebug )
-
-METHOD PrintDebugMessage( cMsg )
-
+   METHOD SetDebug( bDebug )
+   METHOD PrintDebugMessage( cMsg )
    // Debug method
 
    CLASSDATA m_hSocket       HIDDEN AS STRING INIT space(4)
@@ -300,4 +290,3 @@ METHOD PrintDebugMessage( cMsg ) CLASS TSocket
    ENDIF
 
    RETURN NIL
-

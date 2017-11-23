@@ -258,12 +258,12 @@ HB_FUNC( HWG_GETCURSORPOS )
 HB_FUNC( HWG_SETCURSORPOS )
 {
    int x,y ;
-   
+
    x = hb_parni( 1 ) ;
    y = hb_parni( 2 ) ;
 
    SetCursorPos( x, y );
-}   
+}
 
 HB_FUNC( HWG_GETCURRENTDIR )
 {
@@ -394,7 +394,6 @@ HB_FUNC( HWG_SHELLABOUT )
    hb_strfree( hStr1 );
    hb_strfree( hStr2 );
 }
-
 
 HB_FUNC( HWG_GETDESKTOPWIDTH )
 {
@@ -539,7 +538,6 @@ HB_FUNC( HWG_SETSCROLLRANGE )
                hb_parni( 3 ), hb_parni( 4 ), hb_parl( 5 ) ) );
 }
 
-
 HB_FUNC( HWG_GETSCROLLPOS )
 {
    hb_retni( GetScrollPos( ( HWND ) HB_PARHANDLE( 1 ),  // handle of window with scroll bar
@@ -567,7 +565,6 @@ HB_FUNC( HWG_SCROLLWINDOW )
    ScrollWindow( ( HWND ) HB_PARHANDLE( 1 ), hb_parni( 2 ), hb_parni( 3 ),
          NULL, NULL );
 }
-
 
 HB_FUNC( HWG_ISCAPSLOCKACTIVE )
 {
@@ -640,7 +637,6 @@ HB_FUNC( HWG_GETCOMPUTERNAME )
    hb_stornl( nSize, 1 );
 }
 
-
 // GETUSERNAME( [@nLengthChar] ) -> cUserName
 HB_FUNC( HWG_GETUSERNAME )
 {
@@ -650,7 +646,6 @@ HB_FUNC( HWG_GETUSERNAME )
    HB_RETSTR( cText );
    hb_stornl( nSize, 1 );
 }
-
 
 HB_FUNC( HWG_ISDOWNPRESSESED )
 {
@@ -772,12 +767,12 @@ HB_FUNC( HWG_LASTKEY )
 
    GetKeyboardState( kbBuffer );
 
-   for( i = 0; i < 256; i ++ )  
+   for( i = 0; i < 256; i ++ )
       if( kbBuffer[ i ] & 0x80 )
       {
          hb_retni( i ) ;
          return ;
-      }   
+      }
     hb_retni( 0 ) ;
 }
 
@@ -790,4 +785,3 @@ HB_FUNC( HWG_ISWIN7 )
    GetVersionEx(&ovi);
    hb_retl (ovi.dwMajorVersion >= 6 && ovi.dwMinorVersion==1) ;
 }
-

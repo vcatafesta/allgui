@@ -644,4 +644,3 @@ STATIC FUNCTION find_banco_2()
    ENDIF
 
    return(nil)
-

@@ -249,4 +249,3 @@ HB_FUNC( INITMYBUTTON )
 }
 
 #pragma ENDDUMP
-

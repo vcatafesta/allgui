@@ -63,27 +63,27 @@ CLASS TSpinner FROM TControl
    DATA nIncrement  INIT 1
    DATA lBoundText  INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD Enabled             SETGET
+   METHOD Enabled             SETGET
 
-METHOD ForceHide           BLOCK { |Self| HideWindow( ::AuxHandle ) , ::Super:ForceHide() }
+   METHOD ForceHide           BLOCK { |Self| HideWindow( ::AuxHandle ) , ::Super:ForceHide() }
 
-METHOD Release
+   METHOD Release
 
-METHOD RangeMin            SETGET
+   METHOD RangeMin            SETGET
 
-METHOD RangeMax            SETGET
+   METHOD RangeMax            SETGET
 
-METHOD Increment           SETGET
+   METHOD Increment           SETGET
 
-METHOD Events_Command
+   METHOD Events_Command
 
    EMPTY( _OOHG_AllVars )
 
@@ -323,4 +323,3 @@ HB_FUNC( SETSPINNERINCREMENT )
 }
 
 #pragma ENDDUMP
-

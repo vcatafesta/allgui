@@ -516,4 +516,3 @@ STATIC PROCEDURE SaveToTemplate( cSection, aStrings )
    RETURN
 
    ****** End of SaveToTemplate ******
-

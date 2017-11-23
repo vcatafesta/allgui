@@ -241,4 +241,3 @@ FUNCTION _GetColumnControl( ControlName , ParentForm , i )
    ENDIF
 
    RETURN ''
-

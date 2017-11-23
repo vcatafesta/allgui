@@ -26,35 +26,35 @@ CLASS VAR cPath SHARED
    DATA lEnabled INIT .T.
    DATA nOrder
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lflat,              ;
       cText, color, font, xt, yt, widtht, heightt,        ;
       bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
       cTooltip, lEnabled )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD MouseMove( wParam, lParam )
+   METHOD MouseMove( wParam, lParam )
 
-METHOD MDown()
+   METHOD MDown()
 
-METHOD MUp()
+   METHOD MUp()
 
-METHOD Press()   INLINE ( ::lPress := .T. , ::MDown() )
+   METHOD Press()   INLINE ( ::lPress := .T. , ::MDown() )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
-METHOD End()
+   METHOD End()
 
-METHOD Enable()
+   METHOD Enable()
 
-METHOD Disable()
+   METHOD Disable()
 
 ENDCLASS
 
@@ -298,4 +298,3 @@ METHOD Disable() CLASS HOwnButton
    hwg_Enablewindow( ::handle, .F. )
 
    RETURN NIL
-

@@ -28,45 +28,26 @@ CREATE CLASS TPRINT
    DATA impreview          INIT .F. PROTECTED
    DATA cversion            INIT "V1.2" PROTECTED
 
-METHOD init()
-
-METHOD begindoc()
-
-METHOD enddoc()
-
-METHOD printdos()
-
-METHOD beginpage()
-
-METHOD condendos()
-
-METHOD NORMALDOS()
-
-METHOD endpage()
-
-METHOD release()
-
-METHOD printdata()
-
-METHOD printimage
-
-METHOD printline
-
-METHOD printrectangle
-
-METHOD selprinter()
-
-METHOD getdefprinter()
-
-METHOD setcolor()
-
-METHOD setpreviewsize()
-
-METHOD setunits()   ////// mm o rowcol
-
-METHOD printroundrectangle()
-
-METHOD version()  INLINE ::cversion
+   METHOD init()
+   METHOD begindoc()
+   METHOD enddoc()
+   METHOD printdos()
+   METHOD beginpage()
+   METHOD condendos()
+   METHOD NORMALDOS()
+   METHOD endpage()
+   METHOD release()
+   METHOD printdata()
+   METHOD printimage
+   METHOD printline
+   METHOD printrectangle
+   METHOD selprinter()
+   METHOD getdefprinter()
+   METHOD setcolor()
+   METHOD setpreviewsize()
+   METHOD setunits()   ////// mm o rowcol
+   METHOD printroundrectangle()
+   METHOD version()  INLINE ::cversion
 
 ENDCLASS
 
@@ -625,4 +606,3 @@ STATIC FUNCTION zoom(cOp)
    ENDIF
 
    RETURN NIL
-

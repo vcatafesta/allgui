@@ -163,4 +163,3 @@ FUNCTION walert( cMessage, aItems, cTitle )
    ACTIVATE WINDOW walert
 
    RETURN( nValue )
-

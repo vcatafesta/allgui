@@ -491,4 +491,3 @@ STATIC FUNCTION atualizar()
    end
 
    return(nil)
-

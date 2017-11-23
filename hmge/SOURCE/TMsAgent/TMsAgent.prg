@@ -89,67 +89,44 @@ CLASS TMsAgent
 
    DATA lWait
 
-METHOD New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize  )
+   METHOD New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize  )
+   METHOD End()
 
-METHOD End()
+   METHOD Show()
+   METHOD Hide()
+   METHOD Say( cTxt )
+   METHOD SayThink( cTxt )
 
-METHOD Show()
+   METHOD Move( nX, nY )
+   METHOD Animate( cAnimate )
+   METHOD Stop()
+   METHOD GetAttention()
+   METHOD LookDown()
+   METHOD LookLeft()
+   METHOD LookRight()
+   METHOD LookUp()
 
-METHOD Hide()
+   METHOD GetName()
+   METHOD GetVersion()
+   METHOD GetIntro()
+   METHOD GetExtraData()
+   METHOD UsedByOtherApps()
 
-METHOD Say( cTxt )
+   METHOD GetX()
+   METHOD GetY()
+   METHOD GetWidth()
+   METHOD GetHeight()
+   METHOD GetMoveCause()
+   METHOD GetVisibilityCause()
+   METHOD IsVisible()
 
-METHOD SayThink( cTxt )
+   METHOD lBusy()   //  - Gracias Daniel Andrade !!
+   METHOD WaitEnd() //  /
 
-METHOD Move( nX, nY )
+   METHOD SetBalloon( cFontName, nFontSize, lNeedClick )
+   METHOD SetDefaultBalloon()
 
-METHOD Animate( cAnimate )
-
-METHOD Stop()
-
-METHOD GetAttention()
-
-METHOD LookDown()
-
-METHOD LookLeft()
-
-METHOD LookRight()
-
-METHOD LookUp()
-
-METHOD GetName()
-
-METHOD GetVersion()
-
-METHOD GetIntro()
-
-METHOD GetExtraData()
-
-METHOD UsedByOtherApps()
-
-METHOD GetX()
-
-METHOD GetY()
-
-METHOD GetWidth()
-
-METHOD GetHeight()
-
-METHOD GetMoveCause()
-
-METHOD GetVisibilityCause()
-
-METHOD IsVisible()
-
-METHOD lBusy()   //  - Gracias Daniel Andrade !!
-
-METHOD WaitEnd() //  /
-
-METHOD SetBalloon( cFontName, nFontSize, lNeedClick )
-
-METHOD SetDefaultBalloon()
-
-METHOD IsStaticLooping( cAnimate ) // Uso interno de la clase / Internal use
+   METHOD IsStaticLooping( cAnimate ) // Uso interno de la clase / Internal use
 
 ENDCLASS
 
@@ -921,4 +898,3 @@ FUNCTION GetAgentsAvailables( cDir )
    AEval( Directory( cDir + "\*.acs" ), {|aFile| AAdd( aAgents, cDir + "\" + aFile[ F_NAME ] ) } )
 
    RETURN aAgents
-

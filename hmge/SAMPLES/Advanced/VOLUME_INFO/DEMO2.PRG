@@ -94,4 +94,3 @@ FUNCTION SZ2Str( cStr )
    #ifdef __XHARBOUR__
    #include <hex.prg>
    #endif
-

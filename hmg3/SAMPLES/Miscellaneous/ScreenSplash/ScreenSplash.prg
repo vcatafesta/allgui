@@ -67,4 +67,3 @@ PROCEDURE CreateScreenSplash (cFileName, nDelaySeconds, nAnimateSeconds)
    ACTIVATE WINDOW FormSplash
 
    RETURN
-

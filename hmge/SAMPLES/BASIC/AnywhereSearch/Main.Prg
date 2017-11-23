@@ -142,4 +142,3 @@ FUNCTION testquery
    This.QueryData := 'Row' + alltrim( Str ( This.QueryRowIndex ) ) + ', ' + 'Col' + alltrim( Str ( This.QueryColIndex ) )
 
    RETURN NIL
-

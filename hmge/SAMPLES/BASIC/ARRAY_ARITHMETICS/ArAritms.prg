@@ -322,4 +322,3 @@ FUNCTION EmptyValue( xVal )     // Borrowed from EmptyValue() of ArrayRDD.prg of
    RETURN xRet
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

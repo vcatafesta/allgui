@@ -1849,4 +1849,3 @@ PROCEDURE SplashDelay(met)
 
    #include "h_sliderEx.prg"
    #include "Re_Undo.prg"
-

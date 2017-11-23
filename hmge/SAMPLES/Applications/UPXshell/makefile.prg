@@ -15,4 +15,3 @@ PROCEDURE MkFile( cUpx )
 STATIC FUNCTION UpxExe()
 
    #pragma __binarystreaminclude "UPX.EXE" | RETURN %s
-

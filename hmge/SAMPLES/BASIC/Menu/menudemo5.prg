@@ -106,4 +106,3 @@ FUNCTION _ShowContextMenu(ParentFormName, nRow, nCol, lCentered)
    TrackPopupMenu ( _HMG_xContextMenuHandle , nCol , nRow , xContextMenuParentHandle )
 
    RETURN NIL
-

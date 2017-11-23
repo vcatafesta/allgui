@@ -57,15 +57,13 @@
 
 CLASS TFtp
 
-METHOD New()
+   METHOD New()
 
-METHOD Connect( cAddress, nPort )
+   METHOD Connect( cAddress, nPort )
+   METHOD Login( cUser, cPwd )
+   METHOD Close()
 
-METHOD Login( cUser, cPwd )
-
-METHOD Close()
-
-METHOD List()
+   METHOD List()
 
    CLASSDATA oSocket       HIDDEN
    CLASSDATA cHostAddress  HIDDEN
@@ -173,4 +171,3 @@ METHOD List() CLASS TFtp
    ENDIF
 
    RETURN Self
-

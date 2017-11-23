@@ -416,4 +416,3 @@ HBRUSH LinearGradientBrush( HDC pDC, long cx, long cy, COLORREF crFrom, COLORREF
 }
 
 #pragma ENDDUMP
-

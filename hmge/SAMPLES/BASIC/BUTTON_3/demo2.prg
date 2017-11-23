@@ -47,4 +47,3 @@ FUNCTION Toggle(n)
    ENDIF
 
    RETURN NIL
-

@@ -348,4 +348,3 @@ PROCEDURE GETITEM(Grid1)
    aEval( a, {|x,i| msginfo ( xChar ( x ), ltrim( str ( i ) ), , .f. ) } )
 
    RETURN
-

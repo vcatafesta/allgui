@@ -490,4 +490,3 @@ FUNCTION _SetStatusProgressRange ( FormName, nMin, nMax )
    ENDIF
 
    RETURN NIL
-

@@ -164,4 +164,3 @@ PROCEDURE OpenPicture()
    ENDIF
 
    RETURN
-

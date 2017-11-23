@@ -28,8 +28,8 @@ static LRESULT CALLBACK s_DlgProc( HWND, UINT, WPARAM, LPARAM );
 static LRESULT CALLBACK s_PSPProc( HWND, UINT, WPARAM, LPARAM );
 static LRESULT CALLBACK s_PSPProcRelease( HWND, UINT, LPPROPSHEETPAGE );
 
-#define	WND_DLG_RESOURCE       10
-#define	WND_DLG_NORESOURCE     11
+#define   WND_DLG_RESOURCE       10
+#define   WND_DLG_NORESOURCE     11
 
 HWND *aDialogs = NULL;
 static int s_nDialogs = 0;
@@ -186,7 +186,6 @@ HB_FUNC( HWG_COMBOINSERTSTRING )
          ( WPARAM ) hb_parni( 2 ), ( LPARAM ) HB_PARSTR( 3, &hText, NULL ) );
    hb_strfree( hText );
 }
-
 
 HB_FUNC( HWG_COMBOSETSTRING )
 {
@@ -434,7 +433,7 @@ HB_FUNC( HWG__CREATEPROPERTYSHEETPAGE )
 }
 
 /*
- * _PropertySheet( hWndParent, aPageHandles, nPageHandles, cTitle, 
+ * _PropertySheet( hWndParent, aPageHandles, nPageHandles, cTitle,
  *                [ lModeless ], [ lNoApply ], [ lWizard ] ) --> hPropertySheet
  */
 HB_FUNC( HWG__PROPERTYSHEET )
@@ -760,4 +759,3 @@ HB_FUNC( HWG_GETNOTIFYIDFROM )
 {
    hb_retnl( ( LONG ) ( ( ( NMHDR * ) HB_PARHANDLE( 1 ) )->idFrom ) );
 }
-

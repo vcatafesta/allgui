@@ -532,4 +532,3 @@ PROCEDURE f_tss_change()
    tss_zx_poz := &mob:nat
 
    RETURN
-

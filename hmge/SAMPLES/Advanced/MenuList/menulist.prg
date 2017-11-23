@@ -152,4 +152,3 @@ PROCEDURE DrawBorder
       PENCOLOR WHITE
 
    RETURN
-

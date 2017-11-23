@@ -36,20 +36,20 @@ CLASS VAR winclass   INIT "COMBOBOX"
    DATA  lEdit    INIT .F.
    DATA  hEdit
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       aItems,oFont,bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init( aCombo, nCurrent )
+   METHOD Init( aCombo, nCurrent )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD Setitem( nPos )
+   METHOD Setitem( nPos )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -246,4 +246,3 @@ STATIC FUNCTION __When( oCtrl )
    ENDIF
 
    RETURN .T.
-

@@ -680,4 +680,3 @@ FUNCTION sintaxe(comando)
    ENDIF
 
    retu ret
-

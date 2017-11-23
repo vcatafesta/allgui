@@ -223,4 +223,3 @@ STATIC FUNCTION savelist()
    NEXT
 
    RETURN NIL
-

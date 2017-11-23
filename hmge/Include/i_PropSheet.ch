@@ -126,7 +126,6 @@ _BeginPropSheet ( <"name"> , <"parent"> , <row> , <col> , <width> , <height> ,;
                <.strikeout.>, .f., .f., 0, 0, .f. )
 
 
-
 #xcommand SHEETPAGE <Name> RESOURCE <id> ;
       [ TITLE <cTitle> ];
       [ HEADER <chdtitle> ];
@@ -150,6 +149,5 @@ _EndSheetPage()
 #xcommand END PROPSHEET ;
 =>;
 _EndPropSheet()
-
 
 ///////////////////////////////////////////////////////////////////////////////

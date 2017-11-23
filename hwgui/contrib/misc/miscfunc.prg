@@ -45,4 +45,3 @@ FUNCTION REMOVEPROPERTY( oObjectName, cPropertyName )
    ENDIF
 
    RETURN .F.
-

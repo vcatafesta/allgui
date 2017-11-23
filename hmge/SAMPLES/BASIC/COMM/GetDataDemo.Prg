@@ -70,4 +70,3 @@ PROCEDURE GetTest()
    Until r # Nil
 
    RETURN
-

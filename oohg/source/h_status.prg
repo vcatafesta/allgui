@@ -69,51 +69,51 @@ CLASS TMessageBar FROM TControl
    DATA cLedOff     INIT "zzz_led_off"
    DATA aAligns     INIT {}
 
-METHOD Define
+   METHOD Define
 
-METHOD EndStatus                      BLOCK { || _EndMessageBar() }
+   METHOD EndStatus                      BLOCK { || _EndMessageBar() }
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD Item
+   METHOD Item
 
-METHOD Caption(nItem, cCaption, cAlign) BLOCK { |Self, nItem, cCaption, cAlign| ::Item( nItem, cCaption, cAlign ) }
+   METHOD Caption(nItem, cCaption, cAlign) BLOCK { |Self, nItem, cCaption, cAlign| ::Item( nItem, cCaption, cAlign ) }
 
-METHOD ItemWidth
+   METHOD ItemWidth
 
-METHOD ItemCount                      BLOCK { |Self| GetItemCount( ::hWnd ) }
+   METHOD ItemCount                      BLOCK { |Self| GetItemCount( ::hWnd ) }
 
-METHOD ItemToolTip
+   METHOD ItemToolTip
 
-METHOD ItemIcon
+   METHOD ItemIcon
 
-METHOD ItemClick
+   METHOD ItemClick
 
-METHOD ItemRClick
+   METHOD ItemRClick
 
-METHOD ItemDblClick
+   METHOD ItemDblClick
 
-METHOD ItemRDblClick
+   METHOD ItemRDblClick
 
-METHOD ClientHeightUsed               BLOCK { |Self| GetWindowHeight( ::hWnd ) * IF( ::lTop, 1, -1 ) }
+   METHOD ClientHeightUsed               BLOCK { |Self| GetWindowHeight( ::hWnd ) * IF( ::lTop, 1, -1 ) }
 
-METHOD MinHeight                      SETGET
+   METHOD MinHeight                      SETGET
 
-METHOD BackColor                      SETGET
+   METHOD BackColor                      SETGET
 
-METHOD ItemAlign
+   METHOD ItemAlign
 
-METHOD SetClock
+   METHOD SetClock
 
-METHOD SetKeybrd
+   METHOD SetKeybrd
 
-METHOD SetDate
+   METHOD SetDate
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD Events_Size
+   METHOD Events_Size
 
-METHOD RefreshData
+   METHOD RefreshData
 
    EMPTY( _OOHG_AllVars )
 
@@ -861,4 +861,3 @@ HB_FUNC_STATIC( TMESSAGEBAR_BACKCOLOR )
    // Return value was set in _OOHG_DetermineColorReturn()
 }
 #pragma ENDDUMP
-

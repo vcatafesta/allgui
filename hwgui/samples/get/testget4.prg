@@ -72,4 +72,3 @@ FUNCTION TestForm()
    oFont:Release()
 
    RETURN NIL
-

@@ -6,6 +6,6 @@
 /* Define to the name of a signed 64-bit integer type. */
 #if ( defined( __BORLANDC__ ) && __BORLANDC__ < 1410 ) // 1410 or ?
 #define PG_INT64_TYPE __int64
-#else 
+#else
 #define PG_INT64_TYPE long long int
 #endif

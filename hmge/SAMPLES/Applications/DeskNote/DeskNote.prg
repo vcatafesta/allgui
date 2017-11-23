@@ -663,4 +663,3 @@ STATIC FUNCTION drawrect( window,row,col,row1,col1,penrgb,penwidth,fillrgb )
    ENDIF
 
    RETURN NIL
-

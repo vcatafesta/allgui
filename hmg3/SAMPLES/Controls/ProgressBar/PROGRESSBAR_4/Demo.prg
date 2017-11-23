@@ -105,4 +105,3 @@ PROCEDURE SetMarquee
    ENDIF
 
    RETURN
-

@@ -60,4 +60,3 @@ STATIC PROCEDURE ShowDialogResult( obj )
          ENDIF
 
          RETURN
-

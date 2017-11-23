@@ -42,4 +42,3 @@ FUNCTION Main
    ACTIVATE WINDOW Form_Main
 
    RETURN NIL
-

@@ -246,4 +246,3 @@ HB_FUNC( GETOTHERMETRICS )
    /*
    * EOF
    */
-

@@ -59,7 +59,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #ifndef HB_OS_WIN_32_USED
    #define HB_OS_WIN_32_USED
 #endif
@@ -98,11 +97,6 @@
 #define IS_WIN30_DIB(lpbi)  ((*(LPDWORD)(lpbi)) == sizeof(BITMAPINFOHEADER))
 #define RECTWIDTH(lpRect)     ((lpRect)->right - (lpRect)->left)
 #define RECTHEIGHT(lpRect)    ((lpRect)->bottom - (lpRect)->top)
-
-
-
-
-
 
 #include <shlobj.h>
 #include <windows.h>
@@ -559,7 +553,7 @@ HB_FUNC( SETWINDOWBACKCOLOR )
 
 HB_FUNC (GETDESKTOPWIDTH)
 {
-	hb_retni ( GetSystemMetrics(SM_CXSCREEN) ) ;
+   hb_retni ( GetSystemMetrics(SM_CXSCREEN) ) ;
 }
 
 HB_FUNC (GETDESKTOPHEIGHT)
@@ -639,29 +633,28 @@ HB_FUNC (GETWINDOWHEIGHT)
 
 HB_FUNC (GETTITLEHEIGHT)
 {
-	hb_retni ( GetSystemMetrics( SM_CYCAPTION ) ) ;
+   hb_retni ( GetSystemMetrics( SM_CYCAPTION ) ) ;
 }
 
 HB_FUNC (GETEDGEHEIGHT)
 {
-	hb_retni ( GetSystemMetrics(  SM_CYEDGE ) ) ;
+   hb_retni ( GetSystemMetrics(  SM_CYEDGE ) ) ;
 }
 
 HB_FUNC (GETBORDERHEIGHT)
 {
-	hb_retni ( GetSystemMetrics(  SM_CYSIZEFRAME ) ) ;
+   hb_retni ( GetSystemMetrics(  SM_CYSIZEFRAME ) ) ;
 }
 
 HB_FUNC (GETBORDERWIDTH)
 {
-	hb_retni ( GetSystemMetrics( SM_CXSIZEFRAME ) ) ;
+   hb_retni ( GetSystemMetrics( SM_CXSIZEFRAME ) ) ;
 }
 
 HB_FUNC ( ISWINDOWVISIBLE )
 {
    hb_retl( IsWindowVisible( HWNDparam( 1 ) ) ) ;
 }
-
 
 HB_FUNC ( ISWINDOWMAXIMIZED )
 {
@@ -816,23 +809,23 @@ HB_FUNC( GETGRIDNEWSTATE )
 HB_FUNC( GETGRIDDISPINFOINDEX )
 {
 
-	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)hb_parnl(1);
+   LV_DISPINFO* pDispInfo = (LV_DISPINFO*)hb_parnl(1);
 
-	int iItem = pDispInfo->item.iItem;
+   int iItem = pDispInfo->item.iItem;
 
-	int iSubItem = pDispInfo->item.iSubItem;
+   int iSubItem = pDispInfo->item.iSubItem;
 
-	hb_reta( 2 );
-	HB_STORNI( iItem + 1 , -1, 1 );
-	HB_STORNI( iSubItem + 1 , -1, 2 );
+   hb_reta( 2 );
+   HB_STORNI( iItem + 1 , -1, 1 );
+   HB_STORNI( iSubItem + 1 , -1, 2 );
 
 }
 
 HB_FUNC( SETGRIDQUERYDATA )
 {
-	PHB_ITEM pValue = hb_itemNew( NULL );
-	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)hb_parnl(1);
-	hb_itemCopy( pValue, hb_param( 2, HB_IT_STRING ));
+   PHB_ITEM pValue = hb_itemNew( NULL );
+   LV_DISPINFO* pDispInfo = (LV_DISPINFO*)hb_parnl(1);
+   hb_itemCopy( pValue, hb_param( 2, HB_IT_STRING ));
    pDispInfo->item.pszText = (LPTSTR) hb_itemGetCPtr( pValue );
 
 }
@@ -1093,7 +1086,6 @@ WORD DIBNumColors(LPSTR lpDIB)
     // allows for (i.e. lpbi->biClrUsed can be set to some value).
     // If this is the case, return the appropriate value.
 
-
     if (IS_WIN30_DIB(lpDIB))
     {
         DWORD dwClrUsed;
@@ -1305,7 +1297,6 @@ WORD SaveDIB(HDIB hDib, LPSTR lpFileName)
     fh = CreateFile(lpFileName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
             FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN, NULL);
 
-
     // Get a pointer to the DIB memory, the first of which contains
     // a BITMAPINFO structure
 
@@ -1323,16 +1314,13 @@ WORD SaveDIB(HDIB hDib, LPSTR lpFileName)
         return 1;
     }
 
-
     bmfHdr.bfType = ((WORD) ('M' << 8) | 'B'); // is always "BM"
 
     dwDIBSize = *(LPDWORD)lpBI + PaletteSize((LPSTR)lpBI);
 
-
     dwBmBitsSize = ((((lpBI->biWidth)*((DWORD)lpBI->biBitCount))+ 31) / 32 * 4) *  lpBI->biHeight;
     dwDIBSize += dwBmBitsSize;
     lpBI->biSizeImage = dwBmBitsSize;
-
 
     bmfHdr.bfSize = dwDIBSize + sizeof(BITMAPFILEHEADER);
     bmfHdr.bfReserved1 = 0;

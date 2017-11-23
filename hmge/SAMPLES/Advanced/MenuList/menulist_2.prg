@@ -131,4 +131,3 @@ PROCEDURE RestoreImage
    lChangeImage := .F.
 
    RETURN
-

@@ -24,32 +24,32 @@ CLASS VAR oGroupCurrent
    DATA lEnabled  INIT .T.
    DATA bClick
 
-METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle )
+   METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle )
 
-METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
+   METHOD Newrg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize,tcolor, bColor, bClick, bGFocus, lTransp )
 
-METHOD EndGroup( nSelected )
+   METHOD EndGroup( nSelected )
 
-METHOD SetValue( nValue )
+   METHOD SetValue( nValue )
 
-METHOD GetValue()  INLINE ::nValue
+   METHOD GetValue()  INLINE ::nValue
 
-METHOD Value ( nValue ) SETGET
+   METHOD Value ( nValue ) SETGET
 
-METHOD Refresh()
+   METHOD Refresh()
 
    //METHOD IsEnabled() INLINE ::lEnabled
 
-METHOD Enable()
+   METHOD Enable()
 
-METHOD Disable()
+   METHOD Disable()
 
    //METHOD Enabled( lEnabled ) SETGET
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Activate() VIRTUAL
+   METHOD Activate() VIRTUAL
 
 ENDCLASS
 
@@ -218,28 +218,28 @@ CLASS VAR winclass   INIT "BUTTON"
    DATA  oGroup
    DATA lWhen  INIT .F.
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp )
+   METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp )
 
-METHOD GetValue() INLINE ( hwg_Sendmessage( ::handle, BM_GETCHECK, 0, 0 ) == 1 )
+   METHOD GetValue() INLINE ( hwg_Sendmessage( ::handle, BM_GETCHECK, 0, 0 ) == 1 )
 
    // METHOD Notify( lParam )
 
-METHOD onevent( msg, wParam, lParam )
+   METHOD onevent( msg, wParam, lParam )
 
-METHOD onGotFocus()
+   METHOD onGotFocus()
 
-METHOD onClick()
+   METHOD onClick()
 
-METHOD Valid( nKey )
+   METHOD Valid( nKey )
 
-METHOD When()
+   METHOD When()
 
 ENDCLASS
 
@@ -531,4 +531,3 @@ METHOD Valid( nKey ) CLASS HRadioButton
    ::oParent:lSuspendMsgsHandling := .F.
 
    RETURN .T.
-

@@ -280,4 +280,3 @@ PROCEDURE ShowProperties()
    ENDIF
 
    RETURN
-

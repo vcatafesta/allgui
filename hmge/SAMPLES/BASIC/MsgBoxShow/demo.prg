@@ -104,4 +104,3 @@ FUNCTION ChangeImage()
    end
 
    RETURN NIL
-

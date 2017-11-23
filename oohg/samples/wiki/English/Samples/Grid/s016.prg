@@ -75,4 +75,3 @@ FUNCTION AddNewItem( oGrid )
    /*
    * EOF
    */
-

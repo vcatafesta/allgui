@@ -331,4 +331,3 @@ PROCEDURE CorrectionFirstLast( oBrw )
 STATIC FUNCTION cClrString( nR, nG, nB )
 
    RETURN( "RGB( " + str( nR, 3, 0 ) + ", " + str( nG, 3, 0 ) + ", " + str( nB, 3, 0 ) + " )" )
-

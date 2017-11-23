@@ -95,4 +95,3 @@ STATIC FUNCTION __cb_main( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

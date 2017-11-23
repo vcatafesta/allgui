@@ -55,9 +55,9 @@ CLASS MyClass1
    DATA cText INIT "Default Text"
    DATA nNumber INIT 0
 
-METHOD _Now() INLINE Date()
+   METHOD _Now() INLINE Date()
 
-METHOD _Tomorrow() INLINE ::_Now() + 1
+   METHOD _Tomorrow() INLINE ::_Now() + 1
 
    PROTECTED:
    DATA Prot1
@@ -69,9 +69,9 @@ CLASS MyClass2 FROM MyClass1
    DATA aValues INIT {0,1,2,3,4}
    DATA cTime INIT time()
 
-METHOD cText SETGET
+   METHOD cText SETGET
 
-METHOD nNumber
+   METHOD nNumber
 
 ENDCLASS
 
@@ -109,4 +109,3 @@ STATIC FUNCTION __objGetMsgType( obj, msgType, msgScope, filtSuper )
    /*
    * EOF
    */
-

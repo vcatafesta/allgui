@@ -106,4 +106,3 @@ PROCEDURE Main( cDBF )
    ENDIF
 
    RETURN
-

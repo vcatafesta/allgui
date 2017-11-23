@@ -87,7 +87,6 @@ _DefinePropGrid ( <"name"> , <"parent"> , <row> , <col> , <width> , <height> , <
               <.iteminfo.> , <nInfoHeight>, <{changevalue}>, \{<aheadname>\}, <.singleexpand.> ,;
               <.okbtn.>, <.apply.>, <{userokproc}>, <.cancelbtn.>, <{usercancelproc}>, <{helpproc}>)
 
-
 #xcommand @ <row>,<col> PROPGRID  <name>      ;
    [ <dummy1: OF, PARENT> <parent> ] ;
    [ WIDTH <width> ] ;
@@ -127,7 +126,6 @@ _DefinePropGrid ( <"name"> , <"parent"> , <row> , <col> , <width> , <height> , <
               <backcolor>, <fontcolor>, <indent>, <itemheight>, <datawidth> , <imglist>, <.readonly.>,;
               <.iteminfo.> , <nInfoHeight>, <{changevalue}>, \{<aheadname>\}, <.singleexpand.> ,;
               <.okbtn.>, <.apply.>, <{userokproc}>, <.cancelbtn.>, <{usercancelproc}>, <{helpproc}>)
-
 
 #xcommand DEFINE PROPGRID  <name>       ;
    [ <dummy1: OF, PARENT> <parent> ] ;
@@ -169,7 +167,6 @@ _DefinePropGrid ( <"name"> , <"parent"> , <row> , <col> , <width> , <height> , <
               <.iteminfo.> , <nInfoHeight>, <{changevalue}>, \{<aheadname>\}, <.singleexpand.>,;
               <.okbtn.>, <.apply.>, <{userokproc}>, <.cancelbtn.>, <{usercancelproc}>, <{helpproc}>)
 
-
 #xcommand CATEGORY <cName>  [ ID <id> ];
 =>;
 _DefinePropertyItem ( 'category', <cName>, "", "", .t.,.f., <id> )
@@ -181,7 +178,6 @@ _DefinePropertyItem ( 'category', <cName>, "", "", .t.,.f., <id> )
 #xcommand END CATEGORY ;
 =>;
 _EndCategory()
-
 
 #xcommand PROPERTYITEM <cName>  ;
             [ <dummy1: OF, PARENT> <category> ] ;
@@ -209,7 +205,6 @@ _DefinePropertyItem ( <ctype>, <cName>, <cValue>, <caData>, <.disabled.>, <.disa
 => ;
 _DefinePropertyItem ( <ctype>, <cName>, <cValue>, <caData>, !(ValType(<lEnabled>)=="L".and.<lEnabled>), <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM STRING <cName> ;
             VALUE <cValue> ;
             [ ITEMDATA <caData> ];
@@ -220,7 +215,6 @@ _DefinePropertyItem ( <ctype>, <cName>, <cValue>, <caData>, !(ValType(<lEnabled>
 => ;
 _DefinePropertyItem ( 'string', <cName>, <cValue>, <caData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM INTEGER <cName>;
             VALUE <cValue>;
             [ <disabled : DISABLED> ];
@@ -230,7 +224,6 @@ _DefinePropertyItem ( 'string', <cName>, <cValue>, <caData>, <.disabled.>, .f., 
 => ;
 _DefinePropertyItem ( 'integer', <cName>, <cValue>, "", <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM NUMERIC <cName>;
             VALUE <cValue>;
             [ <disabled : DISABLED> ];
@@ -239,7 +232,6 @@ _DefinePropertyItem ( 'integer', <cName>, <cValue>, "", <.disabled.>, .f., <id>,
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'integer', <cName>, <cValue>, "", <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM DOUBLE <cName>  ;
             VALUE <cValue>  ;
@@ -251,7 +243,6 @@ _DefinePropertyItem ( 'integer', <cName>, <cValue>, "", <.disabled.>, .f., <id>,
 => ;
 _DefinePropertyItem ( 'double', <cName>, <cValue>, <cInputMask>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM SYSCOLOR <cName> ;
             VALUE <nValue> ;
             [ ITEMDATA <aSysColorData> ];
@@ -261,7 +252,6 @@ _DefinePropertyItem ( 'double', <cName>, <cValue>, <cInputMask>, <.disabled.>, .
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'syscolor', <cName>, <nValue>, <aSysColorData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"nValue"> )
-
 
 #xcommand PROPERTYITEM COLOR <cName>  ;
             VALUE <cValue> ;
@@ -274,7 +264,6 @@ _DefinePropertyItem ( 'syscolor', <cName>, <nValue>, <aSysColorData>, <.disabled
 => ;
 _DefinePropertyItem ( 'color', <cName>, <cValue>, <aColorData>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM LOGIC <cName> ;
             VALUE <cValue> ;
             [ ITEMDATA <aData> ];
@@ -285,7 +274,6 @@ _DefinePropertyItem ( 'color', <cName>, <cValue>, <aColorData>, <.disabled.>, <.
 => ;
 _DefinePropertyItem ( 'logic', <cName>, <cValue>, <aData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM DATE <cName> ;
             [ VALUE <cValue> ] ;
             [ ITEMDATA <aData> ];
@@ -295,7 +283,6 @@ _DefinePropertyItem ( 'logic', <cName>, <cValue>, <aData>, <.disabled.>, .f., <i
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'date', <cName>, <cValue>, <aData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM FONT <cName> ;
             [ VALUE <cValue> ]  ;
@@ -308,7 +295,6 @@ _DefinePropertyItem ( 'date', <cName>, <cValue>, <aData>, <.disabled.>, .f., <id
 => ;
 _DefinePropertyItem ( 'font', <cName>, <cValue>, <aFontData>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM ENUM <cName> ;
             VALUE <nValue> ;
             [ ITEMDATA <acData> ];
@@ -318,7 +304,6 @@ _DefinePropertyItem ( 'font', <cName>, <cValue>, <aFontData>, <.disabled.>, <.di
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'enum', <cName>, <nValue>, <acData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"nValue"> )
-
 
 #xcommand PROPERTYITEM LIST <cName> ;
             VALUE <nValue> ;
@@ -330,7 +315,6 @@ _DefinePropertyItem ( 'enum', <cName>, <nValue>, <acData>, <.disabled.>, .f., <i
 => ;
 _DefinePropertyItem ( 'list', <cName>, <nValue>, <acData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"nValue"> )
 
-
 #xcommand PROPERTYITEM FLAG <cName>  ;
             [ VALUE <cValue> ] ;
             [ ITEMDATA <acData> ];
@@ -341,7 +325,6 @@ _DefinePropertyItem ( 'list', <cName>, <nValue>, <acData>, <.disabled.>, .f., <i
 => ;
 _DefinePropertyItem ( 'flag', <cName>, <cValue>, <acData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM SYSINFO <cName> ;
             [ VALUE <cValue> ] ;
             [ ITEMDATA <cInfoType> ] ;
@@ -351,7 +334,6 @@ _DefinePropertyItem ( 'flag', <cName>, <cValue>, <acData>, <.disabled.>, .f., <i
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'sysinfo', <cName>, <cValue>, <cInfoType>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM IMAGE <cName>   ;
             [ VALUE <cValue> ] ;
@@ -364,7 +346,6 @@ _DefinePropertyItem ( 'sysinfo', <cName>, <cValue>, <cInfoType>, <.disabled.>, .
 => ;
 _DefinePropertyItem ( 'image', <cName>, <cValue>, <acDataFilter>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM CHECK <cName> ;
             [ VALUE <cValue> ] ;
             [ ITEMDATA <acData> ] ;
@@ -374,7 +355,6 @@ _DefinePropertyItem ( 'image', <cName>, <cValue>, <acDataFilter>, <.disabled.>, 
             [ VARNAME <cVarName>  ] ;
 => ;
 _DefinePropertyItem ( 'check', <cName>, <cValue>, <acData>, <.disabled.>, .f., <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM SIZE <cName>  ;
             [ VALUE <acValue> ] ;
@@ -387,7 +367,6 @@ _DefinePropertyItem ( 'check', <cName>, <cValue>, <acData>, <.disabled.>, .f., <
 => ;
 _DefinePropertyItem ( 'size', <cName>, <acValue>, <acData>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"acValue"> )
 
-
 #xcommand PROPERTYITEM ARRAY <cName> ;
             [ VALUE <cValue> ] ;
             [ <disabled : DISABLED> ];
@@ -397,7 +376,6 @@ _DefinePropertyItem ( 'size', <cName>, <acValue>, <acData>, <.disabled.>, <.disa
             [ <disableedit : DISABLEEDIT> ];
 => ;
 _DefinePropertyItem ( 'array', <cName>, <cValue>, "", <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM FILE <cName>   ;
             [ VALUE <cValue> ] ;
@@ -410,7 +388,6 @@ _DefinePropertyItem ( 'array', <cName>, <cValue>, "", <.disabled.>, <.disableedi
 => ;
 _DefinePropertyItem ( 'file', <cName>, <cValue>, <acDataFilter>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand PROPERTYITEM FOLDER <cName>   ;
             [ VALUE <cValue> ] ;
             [ ITEMDATA <acDataFolder> ] ;
@@ -421,7 +398,6 @@ _DefinePropertyItem ( 'file', <cName>, <cValue>, <acDataFilter>, <.disabled.>, <
             [ <disableedit : DISABLEEDIT> ];
 => ;
 _DefinePropertyItem ( 'folder', <cName>, <cValue>, <acDataFolder>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
-
 
 #xcommand PROPERTYITEM USERFUN <cName> ;
             [ VALUE <cValue> ] ;
@@ -445,11 +421,9 @@ _DefinePropertyItem ( 'userfun', <cName>, <cValue>, <cbDataFun>, <.disabled.>, <
 => ;
 _DefinePropertyItem ( 'password', <cName>, <cValue>, <cKeyPass>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand END PROPGRID ;
 => ;
 _EndPropGrid()
-
 
 #xcommand ADD PROPERTYITEM <name>  ;
             <dummy1: OF, PARENT> <parent> ;
@@ -466,7 +440,6 @@ _EndPropGrid()
 => ;
 _AddPropertyItem ( <"name"> , <"parent">, <cCategory>, <ctype>, <cNameItem>, <cValue>, <caData>, <.disabled.>, <.disableedit.>, <id>, <cInfo>, <cVarName>, <"cValue"> )
 
-
 #xcommand ADD CATEGORY <name>  ;
             <dummy1: OF, PARENT> <parent> ;
             [TO CATEGORY <cParentCategory>] ;
@@ -476,14 +449,12 @@ _AddPropertyItem ( <"name"> , <"parent">, <cCategory>, <ctype>, <cNameItem>, <cV
 => ;
 _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>, <id>, <cInfo> )
 
-
 #xcommand GET PROPERTYITEM <name>;
             [ <dummy1: OF, PARENT> <parent> ] ;
             [ ID <id> ] ;
             [ SUBITEM <nSubItem> ] ;
             TO <value> ;
            => <value>:=GetPropGridValue (<"parent">, <"name">, <id>, .f., <nSubItem>  )
-
 
 #xcommand GET INFO PROPERTYITEM <name>;
             [ <dummy1: OF, PARENT> <parent> ] ;
@@ -503,7 +474,6 @@ _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>
             [ ID <id> ] ;
             => SetPropGridValue ( <"parent">, <"name">, <id>, <value>, <data> )
 
-
 #xcommand TOGGLE CATEGORY <name>  ;
             [ <dummy1: OF, PARENT> <parent> ] ;
             CATEGORY <cNameCategory> ;
@@ -519,7 +489,6 @@ _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>
             CATEGORY <cNameCategory> ;
             => ExpandCategPG ( <"parent">, <"name">, <cNameCategory>, 2 )
 
-
 #xcommand ENABLE PROPERTYITEM <name>  ;
             [ <dummy1: OF, PARENT> <parent> ] ;
             [ ID <id> ] ;
@@ -529,7 +498,6 @@ _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>
             [ <dummy1: OF, PARENT> <parent> ] ;
             [ ID <id> ] ;
             => EnablePropGridItem ( <"parent">, <"name">, <id>, .f. )
-
 
 #xcommand REDRAW PROPERTYITEM <name>  ;
             [ <dummy1: OF, PARENT> <parent> ] ;
@@ -541,10 +509,8 @@ _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>
             FROMFILE <cFile> [<xml: XML>];
             => PgLoadFile(<"parent">, <"name">, <cFile>, .xml.)
 
-
 #xcommand SAVE MEMVALUE PROPERTY <name> OF <parent> ;
             => SaveMemVarible(<"parent">, <"name">)
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -588,6 +554,5 @@ _AddPropertyCategory  (<"name"> , <"parent">, <cParentCategory>, <cNameCategory>
 #define PGB_APPLY    8
 #define PGB_CANCEL   9
 #define PGB_HELP     10
-
 
 ///////////////////////////////////////////////////////////////////////////////

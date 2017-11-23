@@ -172,4 +172,3 @@ HB_FUNC( GETPIXEL )
 }
 
 #pragma ENDDUMP
-

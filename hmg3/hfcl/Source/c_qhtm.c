@@ -13,7 +13,6 @@
    #define _WIN32_WINNT 0x0400
 #endif
 
-
 #include <windows.h>
 
 #ifdef __EXPORT__
@@ -42,7 +41,7 @@ static HINSTANCE  hQhtmDll = NULL;
 
 /*
    QHTM_Init( [cLibName] )
-   
+
    Initialization of library
 */
 HB_FUNC( QHTM_INIT )
@@ -77,7 +76,7 @@ HB_FUNC( QHTM_INIT )
 
 /*
    QHTM_End()
-   
+
    Unload of library
 */
 HB_FUNC( QHTM_END )
@@ -91,7 +90,7 @@ HB_FUNC( QHTM_END )
 
 /*
    CreateQHTM( hParentWindow, nID, nStyle, x1, y1, nWidth, nHeight )
-   
+
    Create QHTM comtrol
 */
 HB_FUNC( CREATEQHTM )
@@ -123,7 +122,7 @@ HB_FUNC( CREATEQHTM )
 
 /*
    QHTM_GetNotify()
-   
+
    Receive QHTM notification
 */
 HB_FUNC( QHTM_GETNOTIFY )
@@ -207,7 +206,7 @@ void CALLBACK FormCallback( HWND hWndQHTM, LPQHTMFORMSubmit pFormSubmit, LPARAM 
 
 /*
    QHTM_MessageBox( ( cMessage [,cTitle ] [,nFlags ] ) )
-   
+
    Messages window
 */
 HB_FUNC( QHTM_MESSAGEBOX )
@@ -230,8 +229,8 @@ HB_FUNC( QHTM_MESSAGEBOX )
 }
 
 /*
-   QHTM_LoadFile( handle, cFileName ) 
-   
+   QHTM_LoadFile( handle, cFileName )
+
    Load web-page from file
 */
 HB_FUNC( QHTM_LOADFILE )
@@ -243,8 +242,8 @@ HB_FUNC( QHTM_LOADFILE )
 }
 
 /*
-   QHTM_LoadRes( handle, cResourceName ) 
-   
+   QHTM_LoadRes( handle, cResourceName )
+
    Load web-page from resource
 */
 HB_FUNC( QHTM_LOADRES )
@@ -256,8 +255,8 @@ HB_FUNC( QHTM_LOADRES )
 }
 
 /*
-  QHTM_AddHtml( handle, cText ) 
-   
+  QHTM_AddHtml( handle, cText )
+
   Adding web-page text to display text
 */
 HB_FUNC( QHTM_ADDHTML )
@@ -269,8 +268,8 @@ HB_FUNC( QHTM_ADDHTML )
 }
 
 /*
-  QHTM_AddHtml2( handle, cText, bScrollToEnd ) 
-   
+  QHTM_AddHtml2( handle, cText, bScrollToEnd )
+
   Adding web-page text to display text (autoscroll/no scroll)
 */
 HB_FUNC( QHTM_ADDHTML2 )
@@ -282,8 +281,8 @@ HB_FUNC( QHTM_ADDHTML2 )
 }
 
 /*
-   QHTM_GetTitle( handle ) 
-   
+   QHTM_GetTitle( handle )
+
    Receive web-page title (<TITLE></TITLE>)
 */
 HB_FUNC( QHTM_GETTITLE )
@@ -301,8 +300,8 @@ HB_FUNC( QHTM_GETTITLE )
 }
 
 /*
-   QHTM_GetSize( handle ) 
-   
+   QHTM_GetSize( handle )
+
    Receive size of loaded web-page
 */
 HB_FUNC( QHTM_GETSIZE )
@@ -336,7 +335,7 @@ HB_FUNC( QHTM_GETSIZE )
 
 /*
    QHTM_FormCallback()
-   
+
    Service procedure of QHTM control (for processing of web-form)
 */
 HB_FUNC( QHTM_FORMCALLBACK )
@@ -353,7 +352,7 @@ HB_FUNC( QHTM_FORMCALLBACK )
 
 /*
    QHTM_EnableCooltips()
-   
+
    Enable web-support in Tooltip
 */
 HB_FUNC( QHTM_ENABLECOOLTIPS )
@@ -378,7 +377,7 @@ HB_FUNC( QHTM_ENABLECOOLTIPS )
 
 /*
    QHTM_SetHTMLButton( handle )
-   
+
    Enable web-support in button
 */
 HB_FUNC( QHTM_SETHTMLBUTTON )
@@ -402,8 +401,8 @@ HB_FUNC( QHTM_SETHTMLBUTTON )
 }
 
 /*
-   QHTM_PrintCreateContext() --> hContext 
-   
+   QHTM_PrintCreateContext() --> hContext
+
    Create print context
 */
 HB_FUNC( QHTM_PRINTCREATECONTEXT )
@@ -420,8 +419,8 @@ HB_FUNC( QHTM_PRINTCREATECONTEXT )
 }
 
 /*
-   QHTM_PrintSetText( hContext, cHtmlText ) 
-   
+   QHTM_PrintSetText( hContext, cHtmlText )
+
    Print of text
 */
 HB_FUNC( QHTM_PRINTSETTEXT )
@@ -438,8 +437,8 @@ HB_FUNC( QHTM_PRINTSETTEXT )
 }
 
 /*
-   QHTM_PrintSetTextFile( hContext,cFileName ) 
-   
+   QHTM_PrintSetTextFile( hContext,cFileName )
+
    Print of text file
 */
 HB_FUNC( QHTM_PRINTSETTEXTFILE )
@@ -457,7 +456,7 @@ HB_FUNC( QHTM_PRINTSETTEXTFILE )
 
 /*
    QHTM_PrintSetTextResource( hContext,cResourceName )
-   
+
    Print of resource
 */
 HB_FUNC( QHTM_PRINTSETTEXTRESOURCE )
@@ -475,7 +474,7 @@ HB_FUNC( QHTM_PRINTSETTEXTRESOURCE )
 
 /*
    QHTM_PrintLayOut( hDC, hContext ) --> nNumberOfPages
-   
+
    Receive print page count
 */
 HB_FUNC( QHTM_PRINTLAYOUT )
@@ -503,7 +502,7 @@ HB_FUNC( QHTM_PRINTLAYOUT )
 
 /*
    QHTM_PrintPage( hDC,hContext,nPage )
-   
+
    Print page
 */
 HB_FUNC( QHTM_PRINTPAGE )
@@ -529,7 +528,7 @@ HB_FUNC( QHTM_PRINTPAGE )
 
 /*
    QHTM_PrintDestroyContext( hContext )
-   
+
    Clear print context
 */
 HB_FUNC( QHTM_PRINTDESTROYCONTEXT )
@@ -540,4 +539,3 @@ HB_FUNC( QHTM_PRINTDESTROYCONTEXT )
       pFunc( (QHTMCONTEXT) hb_parnl(1) );
    }
 }
-

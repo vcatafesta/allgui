@@ -47,7 +47,6 @@ HB_FUNC( HWG__ADDMENUITEM )
    int nPos;
    MENUITEMINFO mii;
 
-
    if( !HB_ISNIL( 6 ) && ( hb_parni( 6 ) & FLAG_DISABLED ) )
    {
       uFlags |= MFS_DISABLED;
@@ -484,7 +483,6 @@ HB_FUNC( HWG_GETMENUCHECKMARKDIMENSIONS )
    hb_retnl( ( LONG ) GetMenuCheckMarkDimensions() );
 }
 
-
 HB_FUNC( HWG_GETMENUBITMAPWIDTH )
 {
    hb_retni( GetSystemMetrics( SM_CXMENUSIZE ) );
@@ -518,7 +516,6 @@ HB_FUNC( HWG_STRETCHBLT )
                hb_parni( 9 ), hb_parni( 10 ), ( DWORD ) hb_parnl( 11 ) ) );
 }
 
-
 HB_FUNC( HWG__INSERTBITMAPMENU )
 {
    MENUITEMINFO mii;
@@ -549,10 +546,9 @@ HB_FUNC( HWG_MODIFYMENU )
    hb_strfree( hStr );
 }
 
-
 HB_FUNC( HWG_ENABLEMENUSYSTEMITEM )
 {
-   HMENU hMenu; 
+   HMENU hMenu;
    UINT  uEnable = ( hb_pcount() < 3 || !HB_ISLOG( 3 ) || hb_parl( 3 ) )? MF_ENABLED:MF_GRAYED;
    UINT  uFlag = ( hb_pcount() < 4 || !HB_ISLOG( 4 ) || hb_parl( 4 ) )? MF_BYCOMMAND:MF_BYPOSITION;
 
@@ -571,14 +567,13 @@ HB_FUNC( HWG_ENABLEMENUSYSTEMITEM )
    }
 }
 
-
 HB_FUNC( HWG_SETMENUINFO )
 {
- 
-   HMENU hMenu; 
+
+   HMENU hMenu;
    MENUINFO mi;
    HBRUSH hbrush;
-   
+
    if( HB_ISOBJECT( 1 ) )
    {
       PHB_ITEM pObject = hb_param( 1, HB_IT_OBJECT );
@@ -594,11 +589,10 @@ HB_FUNC( HWG_SETMENUINFO )
       hMenu = ( HMENU ) HB_PARHANDLE( 1 );
    if( hMenu )
    {
-      hbrush = hb_pcount() > 1 && ! HB_ISNIL( 2 ) ? CreateSolidBrush( ( COLORREF ) hb_parnl( 2 ) ) : NULL ; 
+      hbrush = hb_pcount() > 1 && ! HB_ISNIL( 2 ) ? CreateSolidBrush( ( COLORREF ) hb_parnl( 2 ) ) : NULL ;
       mi.cbSize          = sizeof( mi );
       mi.fMask           = MIM_APPLYTOSUBMENUS | MIM_BACKGROUND ;
       mi.hbrBack         = hbrush;
       SetMenuInfo( hMenu, &mi );
-   } 
+   }
 }
-

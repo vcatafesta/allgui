@@ -182,4 +182,3 @@ FUNCTION GetChkLabelRadioValue()
    END CASE
 
    RETURN nValue
-

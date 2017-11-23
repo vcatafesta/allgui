@@ -1022,9 +1022,7 @@ HB_FUNC( INITPROPGRID )
          NULL
       );
 
-
    SetProp( (HWND) hFramePG, "oldframepgproc", (HWND) GetWindowLong((HWND) hFramePG, GWL_WNDPROC) );
-
 
    if( hb_arrayLen(hArray) > 0 )
    {
@@ -1069,7 +1067,6 @@ HB_FUNC( INITPROPGRID )
          GetModuleHandle(NULL),
          NULL
       );
-
 
 
    hFrame = CreateWindowEx
@@ -1135,7 +1132,6 @@ HB_FUNC( INITPROPGRID )
             NULL
             );
 
-
       } else  hBtnOk = 0;
 
    if( hb_parl(14) )
@@ -1189,7 +1185,6 @@ HB_FUNC( INITPROPGRID )
             NULL
             );
       } else hBtnHelp = 0;
-
 
    InitPropGrd
    (

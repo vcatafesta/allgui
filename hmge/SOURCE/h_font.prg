@@ -385,4 +385,3 @@ FUNCTION GetFontList( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, lSortCa
    ENDIF
 
    RETURN EnumFontsEx ( hDC, cFontFamilyName, nCharSet, nPitch, nFontType, SortCodeBlock, @aFontName )
-

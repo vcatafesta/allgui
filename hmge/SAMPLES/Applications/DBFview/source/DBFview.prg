@@ -3033,4 +3033,3 @@ FUNCTION MsgAbout()
       padc("Copying is allowed!", 40), "About " + PROGRAM )
 
    #include "dbquery.prg"
-

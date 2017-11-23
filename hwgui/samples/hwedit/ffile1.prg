@@ -64,40 +64,40 @@ CLASS HBMake_FileBase FROM FileMan
    DATA lAtBottom   // This is a value to show if at bottom of file
    DATA lAtTop      // This is a value to show if at top of file
 
-METHOD new( cname )                  // This is the constructor for the file
+   METHOD new( cname )                  // This is the constructor for the file
 
-METHOD FOPEN()   // This opens the specified file
+   METHOD FOPEN()   // This opens the specified file
 
-METHOD closefile()                   // This closes the specified file
+   METHOD closefile()                   // This closes the specified file
 
-METHOD fskip( n )                    // Moves the byte pointer within the file
+   METHOD fskip( n )                    // Moves the byte pointer within the file
 
-METHOD FWRITE( c )                   // Write passed data to file w/ len() == nSkipLenght
+   METHOD FWRITE( c )                   // Write passed data to file w/ len() == nSkipLenght
 
-METHOD retrieve()                    // Returns the contents of the file at current pos
+   METHOD retrieve()                    // Returns the contents of the file at current pos
 
-METHOD fgoTop()  // Move the byte pointer to the top of the file
+   METHOD fgoTop()  // Move the byte pointer to the top of the file
 
-METHOD fgoBottom()                   // Move the byte pointer to the bottom of the file
+   METHOD fgoBottom()                   // Move the byte pointer to the bottom of the file
 
-METHOD fgoto()   // Moves the byte pointer to a specific location
+   METHOD fgoto()   // Moves the byte pointer to a specific location
 
-METHOD create()
+   METHOD create()
 
    message fappend METHOD fappendByte( cByte )
    message BuffGet METHOD BufferGet( lDirection )
 
-METHOD SKIP( nRecord )               // Moves the byte pointer within the file
+   METHOD SKIP( nRecord )               // Moves the byte pointer within the file
 
-METHOD WRITE( cChar )                // Write passed data to file w/ len() == nSkipLenght
+   METHOD WRITE( cChar )                // Write passed data to file w/ len() == nSkipLenght
 
-METHOD goTop()   // Move the byte pointer to the top of the file
+   METHOD goTop()   // Move the byte pointer to the top of the file
 
-METHOD goBottom()                    // Move the byte pointer to the bottom of the file
+   METHOD goBottom()                    // Move the byte pointer to the bottom of the file
 
-METHOD GOTO( nValue )                // Moves the byte pointer to a specific location
+   METHOD GOTO( nValue )                // Moves the byte pointer to a specific location
 
-METHOD OPEN()
+   METHOD OPEN()
 
    message append METHOD appendLine( cline )
 
@@ -695,4 +695,3 @@ METHOD BufferGet( lForward ) CLASS HBMake_FileBase
    RETURN ( nLocation )
 
    *+ EOF: FFILE1.PRG
-

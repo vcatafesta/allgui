@@ -61,4 +61,3 @@ FUNCTION _Execute( hWnd , cOperation , cFile , cParameters , cDirectory , nState
    RETURN ShellExecute( hb_defaultValue( hWnd, GetActiveWindow() ) , ;
       cOperation /* possible values are 'edit', 'explore', 'find', 'open', 'print' */ , ;
       hb_defaultValue( cFile, "" ) , cParameters , cDirectory , hb_defaultValue( nState, SW_SHOWNORMAL ) )
-

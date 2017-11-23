@@ -180,4 +180,3 @@ PROCEDURE Win1_GetPropertyInfo()
    MsgInfo( cMsg  )
 
    RETURN
-

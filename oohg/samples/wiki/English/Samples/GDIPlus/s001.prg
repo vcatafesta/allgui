@@ -204,4 +204,3 @@ FUNCTION SaveToFile( hBitMap, cFile, nWidth, nHeight, cMimeType, nQuality )
    /*
    * EOF
    */
-

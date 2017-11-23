@@ -87,4 +87,3 @@ PROCEDURE GETITEM()
    aEval( a, {|x, i| msginfo ( x, ltrim( str ( i ) ) )} )
 
    RETURN
-

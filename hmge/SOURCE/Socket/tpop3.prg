@@ -60,21 +60,16 @@
 
 CLASS TPOP3
 
-METHOD New()
+   METHOD New()
 
-METHOD Connect( cAddress, nPort )
+   METHOD Connect( cAddress, nPort )
+   METHOD Close()
 
-METHOD Close()
-
-METHOD Login( cUser, cPwd )
-
-METHOD List( lFullInfo )
-
-METHOD GetMessageHeader( cMessageID )
-
-METHOD GetMessageText( cMessageID )
-
-METHOD DeleteMessage( cMessageID )
+   METHOD Login( cUser, cPwd )
+   METHOD List( lFullInfo )
+   METHOD GetMessageHeader( cMessageID )
+   METHOD GetMessageText( cMessageID )
+   METHOD DeleteMessage( cMessageID )
 
    CLASSDATA oSocket HIDDEN
 
@@ -262,4 +257,3 @@ METHOD DeleteMessage( cMessageID ) CLASS TPOP3
    ENDIF
 
    RETURN bRet
-

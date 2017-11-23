@@ -6,5 +6,3 @@
 #include "inkey.ch"
 
 #define DBFIX_VERSION   "4.0"
-
-

@@ -72,4 +72,3 @@ STATIC FUNCTION __cb_progress( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

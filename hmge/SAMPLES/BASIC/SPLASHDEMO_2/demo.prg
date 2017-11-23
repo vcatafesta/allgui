@@ -120,4 +120,3 @@ STATIC FUNCTION GetImageSize( cImagePath )
    ENDIF
 
    RETURN aRetArr
-

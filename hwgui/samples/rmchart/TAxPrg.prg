@@ -22,29 +22,29 @@ CLASS TActiveX
    DATA nOldWinHeight
    DATA bHide INIT .F.
 
-METHOD New( cWindowName, cProgId , nRow , nCol , nWidth , nHeight )
+   METHOD New( cWindowName, cProgId , nRow , nCol , nWidth , nHeight )
 
-METHOD Load()
+   METHOD Load()
 
-METHOD ReSize( nRow , nCol , nWidth , nHeight )
+   METHOD ReSize( nRow , nCol , nWidth , nHeight )
 
-METHOD Hide()
+   METHOD Hide()
 
-METHOD Show()
+   METHOD Show()
 
-METHOD Release()
+   METHOD Release()
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD Adjust()
+   METHOD Adjust()
 
-METHOD GetRow()
+   METHOD GetRow()
 
-METHOD GetCol()
+   METHOD GetCol()
 
-METHOD GetWidth()
+   METHOD GetWidth()
 
-METHOD GetHeight()
+   METHOD GetHeight()
 
 ENDCLASS
 
@@ -212,4 +212,3 @@ HB_FUNC_STATIC( CREATEWINDOWEX ) // hWnd, cProgId -> hActiveXWnd
 }
 
 #pragma ENDDUMP
-

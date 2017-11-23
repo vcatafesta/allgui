@@ -837,4 +837,3 @@ HB_FUNC( ENABLEPERMISSIONS )
    #ifdef __XHARBOUR__
    #include <fileread.prg>
    #endif
-

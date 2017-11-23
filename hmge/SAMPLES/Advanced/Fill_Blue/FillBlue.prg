@@ -94,4 +94,3 @@ FUNCTION FillBlue( hWnd )
    ReleaseDC( hWnd, hDC );
 
    RETURN 1
-

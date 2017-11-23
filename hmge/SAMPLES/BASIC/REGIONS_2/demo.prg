@@ -149,4 +149,3 @@ STATIC FUNCTION CheckExit( aRowCol )
    ENDIF
 
    RETURN lExit
-

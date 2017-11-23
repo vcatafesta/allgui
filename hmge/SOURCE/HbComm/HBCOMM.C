@@ -17,7 +17,6 @@ code is welcome to do so.
 
 */
 
-
 #include "hbapi.h"
 #include "hbcomm.h"
 
@@ -99,7 +98,6 @@ HB_FUNC( OUTBUFCLR )  // purge output buffer
     else
 
        hb_retl( FALSE ) ;
-
 
 }
 
@@ -253,4 +251,3 @@ HB_FUNC( CHKIDX )         // For debugging - not normally used
     hb_retnl( nIdx );
 
 }
-

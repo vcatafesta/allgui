@@ -175,4 +175,3 @@ FUNCTION GetFont( cInitFontName, nInitFontSize, lBold, lItalic, anInitColor, lUn
    ENDIF
 
    RETURN RetArray
-

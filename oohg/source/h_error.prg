@@ -187,25 +187,25 @@ CLASS OOHG_TErrorHtml
    DATA PostHeader    INIT '</p>'
    DATA PreHeader     INIT '<HR>' + CHR( 13 ) + CHR( 10 ) + '<p class="updated">'
 
-METHOD CopyLog
+   METHOD CopyLog
 
-METHOD CreateLog
+   METHOD CreateLog
 
-METHOD DeleteLog
+   METHOD DeleteLog
 
-METHOD ErrorHeader
+   METHOD ErrorHeader
 
-METHOD ErrorMessage
+   METHOD ErrorMessage
 
-METHOD FileHeader
+   METHOD FileHeader
 
-METHOD New
+   METHOD New
 
-METHOD PutMsg
+   METHOD PutMsg
 
-METHOD Write
+   METHOD Write
 
-METHOD Write2
+   METHOD Write2
 
    EMPTY( _OOHG_AllVars )
 
@@ -664,7 +664,7 @@ CLASS OOHG_TErrorTxt FROM OOHG_TErrorHtml
    DATA FileName      INIT "ErrorLog.txt"
    DATA FileHeader    INIT ""
 
-METHOD Write2
+   METHOD Write2
 
 ENDCLASS
 
@@ -679,4 +679,3 @@ FUNCTION ooHGVersion()
 FUNCTION MiniGuiVersion()
 
    RETURN ooHGVersion()
-

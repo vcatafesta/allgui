@@ -218,4 +218,3 @@ FUNCTION Acercade()
 
    RETURN MSGINFO("Creado por Jose Miguel -Valencia (España)"+HB_OsNewLine()+"<josemisu@yahoo.com.ar>"+HB_OsNewLine()+HB_OsNewLine()+ ;
       hb_compiler()+HB_OsNewLine()+Version()+HB_OsNewLine()+MiniGuiVersion(),W_Imp1.Title)
-

@@ -97,4 +97,3 @@ PROC MsgMulty( xMesaj, cTitle )
       ENDIF
 
       RETU cRVal // Any2Strg()
-

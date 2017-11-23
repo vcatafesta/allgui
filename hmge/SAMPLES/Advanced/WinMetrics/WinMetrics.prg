@@ -231,4 +231,3 @@ STATIC FUNCTION About(cWhat)
    RETURN NIL
 
    #include "WMFunc.prg"
-

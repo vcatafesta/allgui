@@ -114,4 +114,3 @@ PROCEDURE UNCOMPRESSFILES ( cFileName , bBlock )
    HB_UNZIPCLOSE( hUnzip )
 
    RETURN
-

@@ -1077,4 +1077,3 @@ HB_FUNC( POLYBEZIERDRAWBITMAP )
    /*
    * EOF
    */
-

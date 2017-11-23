@@ -163,9 +163,7 @@ PROCEDURE MakeBackup
 
    RETURN
    /*-------------------
-
    function SaveBackupConfiguration
-
    BEGIN INI FILE cAppFolder+"\archiwizacja.ini"
    SET SECTION "GLOBALNE" ENTRY "FolderArchiwum" TO alltrim(backup.T_BackupFolder.Value)
    SET SECTION "GLOBALNE" ENTRY "Wybor" TO BackUp.R_ArchiveNameCreatingMethod.Value
@@ -201,4 +199,3 @@ PROCEDURE COMPRESSFILES ( cFileName , aDir , bBlock , lOvr , lStorePath , cPassw
    HB_ZIPCLOSE( hZip )
 
    RETURN
-

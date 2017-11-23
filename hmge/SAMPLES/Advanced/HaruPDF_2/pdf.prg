@@ -22,40 +22,23 @@ CREATE CLASS PDFClass
    VAR    nPageNumber       INIT 0
    VAR    cHeader           INIT {}
    VAR    cCodePage         INIT "CP1252"
-
-METHOD AddPage()
-
-METHOD RowToPDFRow( nRow )
-
-METHOD ColToPDFCol( nCol )
-
-METHOD MaxRow()
-
-METHOD MaxCol()
-
-METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anRGB )
-
-METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize )
-
-METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB )
-
-METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight )
-
-METHOD Cancel()
-
-METHOD PrnToPdf( cInputFile )
-
-METHOD SetType( nType )
-
-METHOD PageHeader()
-
-METHOD MaxRowTest( nRows )
-
-METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject )
-
-METHOD Begin()
-
-METHOD End()
+   METHOD AddPage()
+   METHOD RowToPDFRow( nRow )
+   METHOD ColToPDFCol( nCol )
+   METHOD MaxRow()
+   METHOD MaxCol()
+   METHOD DrawText( nRow, nCol, xValue, cPicture, nFontSize, cFontName, nAngle, anRGB )
+   METHOD DrawLine( nRowi, nColi, nRowf, nColf, nPenSize )
+   METHOD DrawRectangle( nTop, nLeft, nWidth, nHeight, nPenSize, nFillType, anRGB )
+   METHOD DrawImage( cJPEGFile, nRow, nCol, nWidth, nHeight )
+   METHOD Cancel()
+   METHOD PrnToPdf( cInputFile )
+   METHOD SetType( nType )
+   METHOD PageHeader()
+   METHOD MaxRowTest( nRows )
+   METHOD SetInfo( cAuthor, cCreator, cTitle, cSubject )
+   METHOD Begin()
+   METHOD End()
 
 ENDCLASS
 
@@ -335,4 +318,3 @@ METHOD MaxRowTest( nRows ) CLASS PDFClass
 FUNCTION MyTempFile( cExtensao )
 
    RETURN "temp." + cExtensao
-

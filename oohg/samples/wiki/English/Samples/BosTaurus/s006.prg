@@ -126,4 +126,3 @@ PROCEDURE Proc_Get_Clipboard_Timer
    /*
    * EOF
    */
-

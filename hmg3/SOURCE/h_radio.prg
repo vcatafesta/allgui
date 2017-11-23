@@ -329,4 +329,3 @@ FUNCTION _GetRadioGroupReadOnly ( ControlName , ParentForm )
    RetVal := _HMG_SYSDATA [ 5 ] [I]
 
    RETURN RetVal
-

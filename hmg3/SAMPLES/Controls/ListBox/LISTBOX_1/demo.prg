@@ -43,4 +43,3 @@ PROCEDURE DeleteTest
    Win1.List1.DeleteItem(8)
 
    RETURN
-

@@ -77,4 +77,3 @@ FUNCTION hb_sqlite3_errstr_short( nError )
    ENDSWITCH
 
    RETURN "HB_SQLITE_UNKNOWN_" + hb_ntos( nError )
-

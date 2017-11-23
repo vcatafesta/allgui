@@ -227,4 +227,3 @@ FUNCTION _lValidScrSaver()
 FUNCTION IsWinXP()
 
    RETURN "XP"$OS()
-

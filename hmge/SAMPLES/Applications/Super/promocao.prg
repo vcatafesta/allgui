@@ -500,4 +500,3 @@ STATIC FUNCTION zera_temporario_2()
    PACK
 
    return(nil)
-

@@ -2627,4 +2627,3 @@ FUNCTION ooHG_Messages_TR
       "Dosya kaydýnda hata: " }
 
    RETURN { acMisc, acBrowseButton, acBrowseError, acBrowseMessages, acABMUser, acABMLabel, acABMButton, acABMError, acButton, acLabel, acUser, acPrint }
-

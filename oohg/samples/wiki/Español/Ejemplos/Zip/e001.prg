@@ -119,4 +119,3 @@ FUNCTION ActualizarProgreso( nPos, cArchivo )
    /*
    * EOF
    */
-

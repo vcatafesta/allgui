@@ -145,4 +145,3 @@ FUNCTION SQLiteFacadeErrorName( nErrorCode )
    ENDIF
 
    RETURN ( "Code " + ALLTRIM( STR( nErrorCode ) ) )
-

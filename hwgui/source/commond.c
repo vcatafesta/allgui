@@ -227,7 +227,6 @@ HB_FUNC( HWG_SAVEFILE )
    else
       lpFileBuff = HB_STRUNSHARE( &hFileName, lpFileName, nSize );
 
-
    lpStr1 = HB_PARSTRDEF( 2, &hStr1, &nLen1 );
    lpStr2 = HB_PARSTRDEF( 3, &hStr2, &nLen2 );
 
@@ -269,23 +268,23 @@ HB_FUNC( HWG_PRINTSETUP )
    memset( ( void * ) &pd, 0, sizeof( PRINTDLG ) );
 
    pd.lStructSize = sizeof( PRINTDLG );
-   // pd.hDevNames = (HANDLE) NULL; 
+   // pd.hDevNames = (HANDLE) NULL;
    pd.Flags = PD_RETURNDC;
    pd.hwndOwner = GetActiveWindow(  );
-   // pd.hDC = (HDC) NULL; 
+   // pd.hDC = (HDC) NULL;
    pd.nFromPage = 1;
    pd.nToPage = 1;
-   // pd.nMinPage = 0; 
-   // pd.nMaxPage = 0; 
+   // pd.nMinPage = 0;
+   // pd.nMaxPage = 0;
    pd.nCopies = 1;
-   // pd.hInstance = (HANDLE) NULL; 
-   // pd.lCustData = 0L; 
+   // pd.hInstance = (HANDLE) NULL;
+   // pd.lCustData = 0L;
    // pd.lpfnPrintHook = (LPPRINTHOOKPROC) NULL;
-   // pd.lpfnSetupHook = (LPSETUPHOOKPROC) NULL; 
-   // pd.lpPrintTemplateName = NULL; 
-   // pd.lpSetupTemplateName = NULL; 
-   // pd.hPrintTemplate = (HANDLE) NULL; 
-   // pd.hSetupTemplate = (HANDLE) NULL; 
+   // pd.lpfnSetupHook = (LPSETUPHOOKPROC) NULL;
+   // pd.lpPrintTemplateName = NULL;
+   // pd.lpSetupTemplateName = NULL;
+   // pd.hPrintTemplate = (HANDLE) NULL;
+   // pd.hSetupTemplate = (HANDLE) NULL;
 
    if( PrintDlg( &pd ) )
    {
@@ -329,7 +328,6 @@ HB_FUNC( HWG_CHOOSECOLOR )
    else
       hb_ret(  );
 }
-
 
 static unsigned long Get_SerialNumber( LPCTSTR RootPathName )
 {
@@ -538,4 +536,3 @@ HB_FUNC( HWG_GETOPENFILENAME )
    hb_strfree( hInitDir );
    hb_strfree( hDefExt );
 }
-

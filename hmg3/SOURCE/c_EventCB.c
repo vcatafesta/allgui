@@ -1,8 +1,8 @@
 
 /*----------------------------------------------------------------------------
- HMG Source File --> c_EventCB.c  
+ HMG Source File --> c_EventCB.c
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -27,7 +27,6 @@
 #include "hbapiitm.h"
 #include "hbapi.h"
 
-
 //-------------------------------------------------------------------------------------//
 void HMG_GetWindowMessage (HWND, UINT, WPARAM, LPARAM, int, int);
 BOOL HMG_EventReturn (LRESULT *ReturnValue);
@@ -43,7 +42,6 @@ BOOL ProcessHMGWindowsMessage = TRUE;
 BOOL IsCreateEventProcess     = TRUE;
 //-------------------------------------------------------------------------------------//
 
-
 HB_FUNC ( SETCREATEEVENTPROCESS )
 {
    hb_retl ((BOOL) IsCreateEventProcess );
@@ -51,14 +49,12 @@ HB_FUNC ( SETCREATEEVENTPROCESS )
        IsCreateEventProcess = (BOOL) hb_parl (1);
 }
 
-
 HB_FUNC ( SETEVENTPROCESSHMGWINDOWSMESSAGE )
 {
    hb_retl ((BOOL) ProcessHMGWindowsMessage );
    if ( HB_ISLOG (1) )
        ProcessHMGWindowsMessage = (BOOL) hb_parl (1);
 }
-
 
 #define _HMG_CREATE_EVENT_   1
 
@@ -69,7 +65,7 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 
 #if _HMG_CREATE_EVENT_
    // by Dr. Claudio Soto, December 2014
-   if ( ProcessHMGWindowsMessage == TRUE && IsCreateEventProcess == TRUE ) 
+   if ( ProcessHMGWindowsMessage == TRUE && IsCreateEventProcess == TRUE )
    {   LRESULT RetValue;
        IsHMGWindowsMessage = TRUE;
        IsHookWindowsMessage = FALSE;
@@ -128,7 +124,6 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
    }
 }
 
-
 // Claudio Soto (June 2013)
 //-------------------------------------------------------------------------------------//
 HB_FUNC (SETNEWBEHAVIORWNDPROC)
@@ -137,7 +132,6 @@ HB_FUNC (SETNEWBEHAVIORWNDPROC)
    New_Behavior_WndProc = hb_parl(1);
 }
 
-
 // Claudio Soto (June 2013)
 //-------------------------------------------------------------------------------------//
 HB_FUNC (GETNEWBEHAVIORWNDPROC)
@@ -145,8 +139,6 @@ HB_FUNC (GETNEWBEHAVIORWNDPROC)
 {
    hb_retl (New_Behavior_WndProc);
 }
-
-
 
 //*****************************************************************************************************************//
 //*   HMG GET GLOBAL MESSAGES                                                                                     *//
@@ -158,7 +150,6 @@ WPARAM _HMG_wParam    = 0;
 LPARAM _HMG_lParam    = 0;
 int    _HMG_nHookID   = (WH_MIN - 1);
 int    _HMG_nHookCode = -1;
-
 
 void HMG_GetWindowMessage (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam, int nHookID, int nHookCode)
 {
@@ -207,7 +198,6 @@ void HMG_GetWindowMessage (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam, i
    }
 }
 
-
 //       HMG_GetWindowMessageInfo (@hWnd, @nMsg, @wParam, @lParam, @nMsgTime, @idHook, @nCode)
 HB_FUNC (HMG_GETWINDOWMESSAGEINFO)
 {
@@ -227,11 +217,9 @@ HB_FUNC (HMG_GETWINDOWMESSAGEINFO)
    hb_reta (4);
    HMG_storvnl ((LONG_PTR) _HMG_hWnd,   -1, 1);
    hb_storvnl  ((LONG)     _HMG_nMsg,   -1, 2);
-   HMG_storvnl ((LONG_PTR) _HMG_wParam, -1, 3); 
-   HMG_storvnl ((LONG_PTR) _HMG_lParam, -1, 4); 
+   HMG_storvnl ((LONG_PTR) _HMG_wParam, -1, 3);
+   HMG_storvnl ((LONG_PTR) _HMG_lParam, -1, 4);
 }
-
-
 
 //*****************************************************************************************************************//
 //*   HMG READ KEYBOARD                                                                                           *//
@@ -260,7 +248,6 @@ HWND     _HMG_TCHAR_hWnd_Ex      = NULL;
 UINT     _HMG_TCHAR_nMsg_Ex      = 0;
 WPARAM   _HMG_TCHAR_wParam_Ex    = 0;
 LPARAM   _HMG_TCHAR_lParam_Ex    = 0;
-
 
 BOOL HMG_ReadKey (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -300,7 +287,7 @@ BOOL HMG_ReadKey (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
        _HMG_TCHAR_nMsg        = nMsg;
        _HMG_TCHAR_wParam      = wParam;
        _HMG_TCHAR_lParam      = lParam;
-       
+
        _HMG_TCHAR_Char_Ex [0] = (TCHAR) wParam;
        _HMG_TCHAR_hWnd_Ex     = hWnd;
        _HMG_TCHAR_nMsg_Ex     = nMsg;
@@ -311,7 +298,6 @@ BOOL HMG_ReadKey (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
    else
        return FALSE;
 }
-
 
 //        HMG_GetLastVirtualKeyDown ( [ @hWnd ], [@nMsg], [@wParam], [@lParam] ) --> nVK_Code
 HB_FUNC ( HMG_GETLASTVIRTUALKEYDOWN )
@@ -328,7 +314,6 @@ HB_FUNC ( HMG_GETLASTVIRTUALKEYDOWN )
    HMG_retnl ((LONG_PTR) _HMG_KEYDOWN_Code);
 }
 
-
 //        HMG_GetLastVirtualKeyUp ( [ @hWnd ], [@nMsg], [@wParam], [@lParam] ) --> nVK_Code
 HB_FUNC ( HMG_GETLASTVIRTUALKEYUP )
 {
@@ -344,7 +329,6 @@ HB_FUNC ( HMG_GETLASTVIRTUALKEYUP )
    HMG_retnl ((LONG_PTR) _HMG_KEYUP_Code);
 }
 
-
 //        HMG_GetLastCharacter ( [ @hWnd ], [@nMsg], [@wParam], [@lParam] ) --> cCharacter
 HB_FUNC ( HMG_GETLASTCHARACTER )
 {
@@ -359,7 +343,6 @@ HB_FUNC ( HMG_GETLASTCHARACTER )
 
    HMG_retc (_HMG_TCHAR_Char);
 }
-
 
 //        HMG_GetLastCharacterEx ( [ @hWnd ], [@nMsg], [@wParam], [@lParam] ) --> cCharacter
 HB_FUNC ( HMG_GETLASTCHARACTEREX )
@@ -382,7 +365,6 @@ HB_FUNC ( HMG_GETLASTCHARACTEREX )
    _HMG_TCHAR_lParam_Ex   = 0;
 }
 
-
 //        HMG_GetLastVirtualKeyName ( [ lParam ] ) --> cVK_Name
 HB_FUNC ( HMG_GETLASTVIRTUALKEYNAME )
 {
@@ -396,7 +378,6 @@ HB_FUNC ( HMG_GETLASTVIRTUALKEYNAME )
    HMG_retc (cBuffer);
 }
 
-
 //        HMG_CleanLastVirtualKeyDown( [lCleanAll] )
 HB_FUNC ( HMG_CLEANLASTVIRTUALKEYDOWN )
 {  BOOL lCleanAll = (BOOL) hb_parl (1);
@@ -408,7 +389,6 @@ HB_FUNC ( HMG_CLEANLASTVIRTUALKEYDOWN )
        _HMG_KEYDOWN_lParam   = 0;
    }
 }
-
 
 //        HMG_CleanLastVirtualKeyUp( [lCleanAll] )
 HB_FUNC ( HMG_CLEANLASTVIRTUALKEYUP )
@@ -422,7 +402,6 @@ HB_FUNC ( HMG_CLEANLASTVIRTUALKEYUP )
    }
 }
 
-
 //        HMG_CleanLastCharacter( [lCleanAll] )
 HB_FUNC ( HMG_CLEANLASTCHARACTER )
 {  BOOL lCleanAll = (BOOL) hb_parl (1);
@@ -435,7 +414,6 @@ HB_FUNC ( HMG_CLEANLASTCHARACTER )
    }
 }
 
-
 //        HMG_VirtualKeyIsPressed (VK_Code)
 HB_FUNC ( HMG_VIRTUALKEYISPRESSED )
 {
@@ -443,9 +421,8 @@ HB_FUNC ( HMG_VIRTUALKEYISPRESSED )
    if (GetKeyState(VK_Code) < 0)
      hb_retl (TRUE);
    else
-     hb_retl (FALSE); 
+     hb_retl (FALSE);
 }
-
 
 //        GetKeyState (VK_Code)   --> return nKeyState
 HB_FUNC ( GETKEYSTATE )
@@ -453,7 +430,6 @@ HB_FUNC ( GETKEYSTATE )
    INT VK_Code = hb_parni(1);
    hb_retni ((INT) GetKeyState (VK_Code));
 }
-
 
 //        HMG_SendCharacter ( [ hWnd ], cText)
 HB_FUNC ( HMG_SENDCHARACTER )
@@ -470,7 +446,6 @@ HB_FUNC ( HMG_SENDCHARACTER )
    }
 }
 
-
 //        HMG_SendCharacterEx ( [ hWnd ], cText)
 HB_FUNC ( HMG_SENDCHARACTEREX )
 {  INT i;
@@ -486,15 +461,12 @@ HB_FUNC ( HMG_SENDCHARACTEREX )
    }
 }
 
-
 //        HMG_KeyboardClearBuffer()
 HB_FUNC ( HMG_KEYBOARDCLEARBUFFER )
 {
    MSG Msg;
    while( PeekMessage( &Msg, NULL, WM_KEYFIRST, WM_KEYLAST, PM_REMOVE ) );
 }
-
-
 
 //*****************************************************************************************************************//
 //*   HMG READ MOUSE                                                                                              *//
@@ -519,7 +491,6 @@ BOOL HMG_ReadMouse (HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
       return FALSE;
 }
 
-
 //        HMG_GetLastMouseMessage ( [ @hWnd ], [@nMsg], [@wParam], [@lParam] ) --> nMsg
 HB_FUNC ( HMG_GETLASTMOUSEMESSAGE )
 {
@@ -535,7 +506,6 @@ HB_FUNC ( HMG_GETLASTMOUSEMESSAGE )
    hb_retnl ((LONG) _HMG_MOUSE_nMsg);
 }
 
-
 //        HMG_CleanLastMouseMessage ()
 HB_FUNC ( HMG_CLEANLASTMOUSEMESSAGE )
 {
@@ -544,7 +514,6 @@ HB_FUNC ( HMG_CLEANLASTMOUSEMESSAGE )
    _HMG_MOUSE_wParam   = 0;
    _HMG_MOUSE_lParam   = 0;
 }
-
 
 //        HMG_GetCursorPos ( [ hWnd ], @nRow, @nCol ) --> return { nRow, nCol }
 HB_FUNC ( HMG_GETCURSORPOS )
@@ -567,7 +536,6 @@ HB_FUNC ( HMG_GETCURSORPOS )
    hb_storvnl ((LONG) Point.x, -1, 2);
 }
 
-
 //        HMG_SetCursorPos ( [ hWnd ], nRow, nCol )
 HB_FUNC ( HMG_SETCURSORPOS )
 {
@@ -584,15 +552,12 @@ HB_FUNC ( HMG_SETCURSORPOS )
    SetCursorPos ((int)Point.x, (int)Point.y);
 }
 
-
 //        HMG_MouseClearBuffer()
 HB_FUNC ( HMG_MOUSECLEARBUFFER )
 {
    MSG Msg;
    while( PeekMessage( &Msg, NULL, WM_MOUSEFIRST, WM_MOUSELAST, PM_REMOVE ) );
 }
-
-
 
 //*****************************************************************************************************************//
 //*   HMG  HOOKS                                                                                                  *//
@@ -601,13 +566,12 @@ HB_FUNC ( HMG_MOUSECLEARBUFFER )
 HHOOK hHook_CallWndProc = NULL;
 HHOOK hHook_MessageProc = NULL;
 
-
 //   HMG_EventReturn (&ReturnValue) --> Return TRUE if function return a Number, FALSE if return NIL or other value
 BOOL HMG_EventReturn (LRESULT *ReturnValue)
 {
    if (IsCreateEventProcess == FALSE)
        return FALSE;
- 
+
    if (hb_parinfo ( -1 ) & HB_IT_NUMERIC)
    {  *ReturnValue = (LRESULT) HMG_parnl ( -1 );
       return TRUE;
@@ -617,7 +581,6 @@ BOOL HMG_EventReturn (LRESULT *ReturnValue)
       return FALSE;
    }
 }
-
 
 // The system calls this function before calling the window procedure to process a message sent to the thread.
 LRESULT CALLBACK CallWndProc (int nCode, WPARAM wParam, LPARAM lParam)
@@ -634,8 +597,7 @@ LRESULT CALLBACK CallWndProc (int nCode, WPARAM wParam, LPARAM lParam)
    return CallNextHookEx(hHook_CallWndProc, nCode, wParam, lParam);
 }
 
-
-// The system calls after an input event occurs in a dialog box, message box, menu, or scroll bar, 
+// The system calls after an input event occurs in a dialog box, message box, menu, or scroll bar,
 // but before the message generated by the input event is processed
 LRESULT CALLBACK MessageProc (int nCode, WPARAM wParam, LPARAM lParam)
 {  LRESULT ReturnValue;
@@ -651,15 +613,13 @@ LRESULT CALLBACK MessageProc (int nCode, WPARAM wParam, LPARAM lParam)
    return CallNextHookEx (hHook_MessageProc, nCode, wParam, lParam);
 }
 
-
-
 HB_FUNC (HMG_HOOK_INSTALL)
 {
 #if _HMG_CREATE_EVENT_
    if (hHook_CallWndProc == NULL && hHook_MessageProc == NULL)
    {   hHook_CallWndProc = SetWindowsHookEx (WH_CALLWNDPROC, CallWndProc, (HINSTANCE) NULL, GetCurrentThreadId());
        hHook_MessageProc = SetWindowsHookEx (WH_MSGFILTER,   MessageProc, (HINSTANCE) NULL, GetCurrentThreadId());
-       
+
        if (hHook_CallWndProc && hHook_MessageProc)
            hb_retl(TRUE);
        else
@@ -670,7 +630,6 @@ HB_FUNC (HMG_HOOK_INSTALL)
 #endif
 }
 
-
 HB_FUNC (HMG_HOOK_UNINSTALL)
 {
    if (hHook_CallWndProc != NULL)
@@ -680,14 +639,11 @@ HB_FUNC (HMG_HOOK_UNINSTALL)
        UnhookWindowsHookEx (hHook_MessageProc);
 }
 
-
-
 /**************************************************************/
 /*   EventCodeBlock,   by Dr. Claudio Soto,   February 2015   */
 /**************************************************************/
 
 PHB_ITEM  pArrayEventCodeBlock  = NULL;
-
 
 HWND      EventCodeBlock_hWnd   = NULL;
 UINT      EventCodeBlock_uMsg   = 0;
@@ -695,14 +651,12 @@ WPARAM    EventCodeBlock_wParam = 0;
 LPARAM    EventCodeBlock_lParam = 0;
 DWORD_PTR EventCodeBlock_nIndex = 0;
 
-
 typedef struct
 {
    HWND hWnd;
    PHB_ITEM  pCodeBlock;
    PHB_ITEM  pArrayMSG;
 } EventCBData;
-
 
 //        GetEventCodeBlockInfo () --> array { hWnd, uMsg, wParam, lParam, nIndex }
 HB_FUNC ( GETEVENTCODEBLOCKINFO )
@@ -714,7 +668,6 @@ HB_FUNC ( GETEVENTCODEBLOCKINFO )
    HMG_storvnl ((LONG_PTR) EventCodeBlock_lParam,  -1, 4);
    HMG_storvnl ((LONG_PTR) EventCodeBlock_nIndex,  -1, 5);
 }
-
 
 // Process CodeBlocks of SubClassWindow Event
 LRESULT CALLBACK SubClassProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
@@ -767,7 +720,6 @@ LRESULT CALLBACK SubClassProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
    return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
-
 //        SetSubClassEvent ( hWnd, CodeBlock [, nMsg | aMsg ] ) --> nIndex
 HB_FUNC ( SETSUBCLASSEVENT )
 {
@@ -783,7 +735,7 @@ HB_FUNC ( SETSUBCLASSEVENT )
          pArrayEventCodeBlock = hb_itemArrayNew (0);
 
       EventCBData * pEventCBData = (EventCBData *) hb_xgrab (sizeof (EventCBData));
- 
+
       PHB_ITEM pArrayMSG  = NULL;
 
       if (HB_ISNUM (3))
@@ -795,7 +747,7 @@ HB_FUNC ( SETSUBCLASSEVENT )
         // hb_arrayAddForward (pArrayMSG, hb_itemPutNI (NULL, hb_parni(3)));   // with this way occur leak memory
       }
       else if (HB_ISARRAY (3) && (hb_parinfa (3,0) > 0))
-         pArrayMSG = hb_itemClone (hb_param (3, HB_IT_ARRAY)); 
+         pArrayMSG = hb_itemClone (hb_param (3, HB_IT_ARRAY));
 
       pEventCBData->hWnd       = hWnd;
       pEventCBData->pCodeBlock = pCodeBlock;
@@ -813,7 +765,6 @@ HB_FUNC ( SETSUBCLASSEVENT )
    else
       HMG_retnl ((LONG_PTR) 0);
 }
-
 
 //        RemoveSubClassEvent ( nIndex ) --> lBoolean
 HB_FUNC ( REMOVESUBCLASSEVENT )
@@ -841,5 +792,3 @@ HB_FUNC ( REMOVESUBCLASSEVENT )
    }
    hb_retl (lRet);
 }
-
-

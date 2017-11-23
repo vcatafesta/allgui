@@ -246,4 +246,3 @@ PROCEDURE Release_CONTEXT_Menu ()
    Form_1.Menu_d2.CHECKED := .T.
 
    RETURN
-

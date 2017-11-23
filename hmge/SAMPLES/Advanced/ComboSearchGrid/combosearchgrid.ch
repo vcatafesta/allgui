@@ -36,18 +36,18 @@
                 <.RightAlign.>, <helpid>, <.bold.>, <.italic.>, <.underline.>, <backcolor> , ;
                 <fontcolor> , <.notabstop.>, <aitems>,<.anywhere.>,<dropheight>,<headers>, <aJust>, <widths>, !<.noshowheaders.> )
 
-	#xcommand ANYWHERESEARCH	<sort>	;
-	=>;
-	_HMG_ActiveControlSort		:= <sort>
+   #xcommand ANYWHERESEARCH   <sort>   ;
+   =>;
+   _HMG_ActiveControlSort      := <sort>
 
-	#xcommand DROPPEDHEIGHT	<dropheight>	;
-	=>;
-	_HMG_ActiveControlIncrement	:= <dropheight>
+   #xcommand DROPPEDHEIGHT   <dropheight>   ;
+   =>;
+   _HMG_ActiveControlIncrement   := <dropheight>
 
     #xcommand DEFINE COMBOSEARCHGRID <name>;
        =>;
-       _HMG_ActiveControlName		:= <"name">;;
-       _HMG_ActiveControlOf   		:= Nil     ;;
+       _HMG_ActiveControlName      := <"name">;;
+       _HMG_ActiveControlOf         := Nil     ;;
        _HMG_ActiveControlRow           := Nil      ;;
        _HMG_ActiveControlCol           := Nil      ;;
        _HMG_ActiveControlHeight        := Nil      ;;
@@ -71,14 +71,14 @@
        _HMG_ActiveControlRightAlign    := .f.      ;;
        _HMG_ActiveControlNoTabStop     := .t.      ;;
        _HMG_ActiveControlHelpId        := Nil      ;;
-       _HMG_ActiveControlItems		:= Nil     ;;
-       _HMG_ActiveControlSort		:= .f.     ;; // anywhere search
-       _HMG_ActiveControlIncrement	:= 0       ;; // dropped height
-       _HMG_ActiveControlHeaders	:= Nil     ;;
-       _HMG_ActiveControlWidths		:= Nil     ;;
-       _HMG_ActiveControlJustify	:= Nil     ;;
-       _HMG_ActiveControlSpacing	:= .t.
-         
+       _HMG_ActiveControlItems      := Nil     ;;
+       _HMG_ActiveControlSort      := .f.     ;; // anywhere search
+       _HMG_ActiveControlIncrement   := 0       ;; // dropped height
+       _HMG_ActiveControlHeaders   := Nil     ;;
+       _HMG_ActiveControlWidths      := Nil     ;;
+       _HMG_ActiveControlJustify   := Nil     ;;
+       _HMG_ActiveControlSpacing   := .t.
+
     #xcommand END COMBOSEARCHGRID;
        =>;
           _DefineComboSearchGrid(;
@@ -113,4 +113,4 @@
              _HMG_ActiveControlHeaders ,;
              _HMG_ActiveControlJustify ,;
              _HMG_ActiveControlWidths ,;
-             _HMG_ActiveControlSpacing ) 
+             _HMG_ActiveControlSpacing )

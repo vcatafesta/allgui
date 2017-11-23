@@ -15,25 +15,17 @@ CLASS TSMulti FROM TControl
    CLASSDATA lRegistered AS LOGICAL
    DATA  Atx, lAppend , lChanged
    DATA  nPos
-
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
       nClrFore, nClrBack, cControl, cWnd )
 
-METHOD Default( )
-
-METHOD HandleEvent( nMsg, nWParam, nLParam )
-
-METHOD GetDlgCode( nLastKey, nFlags )
-
-METHOD KeyChar( nKey, nFlags )
-
-METHOD KeyDown( nKey, nFlags )
-
-METHOD LostFocus( hCtlFocus )
-
-METHOD lValid()
-
-METHOD Command( nWParam, nLParam )
+   METHOD Default( )
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD GetDlgCode( nLastKey, nFlags )
+   METHOD KeyChar( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
+   METHOD LostFocus( hCtlFocus )
+   METHOD lValid()
+   METHOD Command( nWParam, nLParam )
 
 ENDCLASS
 
@@ -256,4 +248,3 @@ METHOD Command( nWParam, nLParam ) CLASS TSMulti
    ENDCASE
 
    RETURN NIL
-

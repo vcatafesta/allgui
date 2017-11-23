@@ -151,4 +151,3 @@ STATIC FUNCTION GetTxtWidth( cText, nFontSize, cFontName ) // get the width of t
    DeleteObject( hFont )
 
    RETURN nWidth
-

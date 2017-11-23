@@ -36,9 +36,9 @@ CLASS VAR aKeyWords
    DATA quote
    DATA number
 
-METHOD New( name )  INLINE ( ::name:=name, Self )
+   METHOD New( name )  INLINE ( ::name:=name, Self )
 
-METHOD Add( name )  INLINE ( ::name:=name,Aadd(::aThemes,Self),Self )
+   METHOD Add( name )  INLINE ( ::name:=name,Aadd(::aThemes,Self),Self )
 
 ENDCLASS
 
@@ -594,4 +594,3 @@ HB_FUNC( NEXTWORD )
 }
 
 #pragma ENDDUMP
-

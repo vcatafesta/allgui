@@ -95,4 +95,3 @@ STATIC FUNCTION AddNewItem( cForm, cControl, xValue, lList )
    ENDIF
 
    RETURN NIL
-

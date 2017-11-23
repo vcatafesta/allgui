@@ -28,24 +28,24 @@ CLASS HControl INHERIT HCustomWindow
    DATA Anchor   INIT 0
    DATA name
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
       bSize, bPaint, ctoolt, tcolor, bcolor )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Setcolor( tcolor, bcolor, lRepaint )
+   METHOD Setcolor( tcolor, bcolor, lRepaint )
 
-METHOD NewId()
+   METHOD NewId()
 
-METHOD Disable() INLINE hwg_Enablewindow( ::handle, .F. )
+   METHOD Disable() INLINE hwg_Enablewindow( ::handle, .F. )
 
-METHOD Enable() INLINE hwg_Enablewindow( ::handle, .T. )
+   METHOD Enable() INLINE hwg_Enablewindow( ::handle, .T. )
 
-METHOD IsEnabled()   INLINE hwg_Iswindowenabled( ::Handle )
+   METHOD IsEnabled()   INLINE hwg_Iswindowenabled( ::Handle )
 
-METHOD Setfocus() INLINE hwg_Enablewindow( ::handle, .T. )
+   METHOD Setfocus() INLINE hwg_Enablewindow( ::handle, .T. )
 
-METHOD Move( x1, y1, width, height )
+   METHOD Move( x1, y1, width, height )
 
    /*
 
@@ -55,9 +55,9 @@ METHOD Move( x1, y1, width, height )
 
    */
 
-METHOD onAnchor( x, y, w, h )
+   METHOD onAnchor( x, y, w, h )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -298,13 +298,13 @@ CLASS VAR winclass   INIT "msctls_statusbar32"
 
    DATA aParts
 
-METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint )
+   METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetText( t ) INLINE  hwg_WriteStatus( ::handle, , t )
+   METHOD SetText( t ) INLINE  hwg_WriteStatus( ::handle, , t )
 
 ENDCLASS
 
@@ -346,14 +346,14 @@ CLASS HStatic INHERIT HControl
 
 CLASS VAR winclass   INIT "STATIC"
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctoolt, tcolor, bcolor, lTransp )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetValue( value ) INLINE hwg_static_SetText( ::handle, value )
+   METHOD SetValue( value ) INLINE hwg_static_SetText( ::handle, value )
 
 ENDCLASS
 
@@ -398,12 +398,12 @@ CLASS VAR winclass   INIT "BUTTON"
 
    DATA  bClick
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -456,11 +456,11 @@ CLASS HButtonEX INHERIT HButton
    DATA hBitmap
    DATA hIcon
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
       bColor, lTransp, hBitmap, hIcon )
 
-METHOD Activate
+   METHOD Activate
 
 END CLASS
 
@@ -502,10 +502,10 @@ CLASS HGroup INHERIT HControl
 
 CLASS VAR winclass   INIT "BUTTON"
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
 ENDCLASS
 
@@ -539,9 +539,9 @@ CLASS VAR winclass   INIT "STATIC"
 
    DATA lVert
 
-METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize )
+   METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize )
 
-METHOD Activate()
+   METHOD Activate()
 
 ENDCLASS
 
@@ -572,4 +572,3 @@ METHOD Activate CLASS HLine
    ENDIF
 
    RETURN NIL
-

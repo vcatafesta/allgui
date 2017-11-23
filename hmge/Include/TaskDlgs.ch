@@ -1,6 +1,6 @@
 /*
  * MINIGUI - Harbour Win32 GUI library source code
- * 
+ *
  * Copyright 2016 P.Chornyj <myorg63@mail.ru>
  */
 
@@ -49,35 +49,35 @@
 #define TDC_CALLBACK                    22
 #define TDC_WIDTH                       24
 
-/* TDCBF_ Task Dialog Common Button Flags */ 
-#define TDCBF_OK_BUTTON                 1  // 0x1 
-#define TDCBF_YES_BUTTON                2  // 0x2 
-#define TDCBF_NO_BUTTON                 4  // 0x4 
-#define TDCBF_CANCEL_BUTTON             8  // 0x8 
-#define TDCBF_RETRY_BUTTON              16 // 0x10 
-#define TDCBF_CLOSE_BUTTON              32 // 0x20 
-  
-/* button-click return values */ 
-#define IDOK                            1 
-#define IDCANCEL                        2 
-#define IDABORT                         3 
-#define IDRETRY                         4 
-#define IDIGNORE                        5 
-#define IDYES                           6 
-#define IDNO                            7 
-#define IDCLOSE                         8 
-  
-/* TD_ Task Dialog predefined icons */ 
-#define TD_NO_ICON                      0     // No icon appears in the task dialog. This is the default. 
-#define TD_WARNING_ICON                 65535 // An exclamation-point icon, along with warning sound. 
-#define TD_ERROR_ICON                   65534 // A stop-sign icon, along with error sound. 
-#define TD_INFORMATION_ICON             65533 // An icon consisting of a lowercase letter `i` in a circle, along with info sound. 
-#define TD_SHIELD_ICON                  65532 // A shield icon. NOTE: All shield icons have no sound! 
-#define TD_SHIELD_BLUE_ICON             65531 // A shield icon on a blue background. 
-#define TD_SHIELD_WARNING_ICON          65530 // An icon consisting of an exclamation-point in a shield. appears in yellow/orange background. 
-#define TD_SHIELD_ERROR_ICON            65529 // An icon consisting of a stop-sign in a shield. appears in red background. 
-#define TD_SHIELD_SUCCESS_ICON          65528 // An icon consisting of a tick-sign in a shield. appears in green background. 
-#define TD_SHIELD_BROWN_ICON            65527 // A shield icon on a brown background. 
+/* TDCBF_ Task Dialog Common Button Flags */
+#define TDCBF_OK_BUTTON                 1  // 0x1
+#define TDCBF_YES_BUTTON                2  // 0x2
+#define TDCBF_NO_BUTTON                 4  // 0x4
+#define TDCBF_CANCEL_BUTTON             8  // 0x8
+#define TDCBF_RETRY_BUTTON              16 // 0x10
+#define TDCBF_CLOSE_BUTTON              32 // 0x20
+
+/* button-click return values */
+#define IDOK                            1
+#define IDCANCEL                        2
+#define IDABORT                         3
+#define IDRETRY                         4
+#define IDIGNORE                        5
+#define IDYES                           6
+#define IDNO                            7
+#define IDCLOSE                         8
+
+/* TD_ Task Dialog predefined icons */
+#define TD_NO_ICON                      0     // No icon appears in the task dialog. This is the default.
+#define TD_WARNING_ICON                 65535 // An exclamation-point icon, along with warning sound.
+#define TD_ERROR_ICON                   65534 // A stop-sign icon, along with error sound.
+#define TD_INFORMATION_ICON             65533 // An icon consisting of a lowercase letter `i` in a circle, along with info sound.
+#define TD_SHIELD_ICON                  65532 // A shield icon. NOTE: All shield icons have no sound!
+#define TD_SHIELD_BLUE_ICON             65531 // A shield icon on a blue background.
+#define TD_SHIELD_WARNING_ICON          65530 // An icon consisting of an exclamation-point in a shield. appears in yellow/orange background.
+#define TD_SHIELD_ERROR_ICON            65529 // An icon consisting of a stop-sign in a shield. appears in red background.
+#define TD_SHIELD_SUCCESS_ICON          65528 // An icon consisting of a tick-sign in a shield. appears in green background.
+#define TD_SHIELD_BROWN_ICON            65527 // A shield icon on a brown background.
 #define TD_QUESTION                     99    // An icon consisting of a a question-mark in a circle, no sound!
 
 /* TDN_ Task Dialog Notification */

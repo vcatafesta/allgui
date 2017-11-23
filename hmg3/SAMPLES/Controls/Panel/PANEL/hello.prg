@@ -13,4 +13,3 @@ FUNCTION Main
    ACTIVATE WINDOW Hello
 
    RETURN
-

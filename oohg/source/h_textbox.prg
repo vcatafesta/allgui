@@ -78,73 +78,73 @@ CLASS TText FROM TLabel
    DATA oButton1                  INIT Nil
    DATA oButton2                  INIT Nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Define2
+   METHOD Define2
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD Refresh                      BLOCK { |Self| ::RefreshData() }
+   METHOD Refresh                      BLOCK { |Self| ::RefreshData() }
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Enabled                      SETGET
+   METHOD Enabled                      SETGET
 
-METHOD Visible                      SETGET
+   METHOD Visible                      SETGET
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD AdjustResize( nDivh, nDivw ) BLOCK { |Self,nDivh,nDivw| ::Super:AdjustResize( nDivh, nDivw, .T. ) }
+   METHOD AdjustResize( nDivh, nDivw ) BLOCK { |Self,nDivh,nDivw| ::Super:AdjustResize( nDivh, nDivw, .T. ) }
 
-METHOD Value                        SETGET
+   METHOD Value                        SETGET
 
-METHOD SetFocus
+   METHOD SetFocus
 
-METHOD CaretPos                     SETGET
+   METHOD CaretPos                     SETGET
 
-METHOD ReadOnly                     SETGET
+   METHOD ReadOnly                     SETGET
 
-METHOD MaxLength                    SETGET
+   METHOD MaxLength                    SETGET
 
-METHOD DoAutoSkip
+   METHOD DoAutoSkip
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events
+   METHOD Events
 
-METHOD ControlArea                  SETGET
+   METHOD ControlArea                  SETGET
 
-METHOD ScrollCaret                  BLOCK { |Self| SendMessage( ::hWnd, EM_SCROLLCARET, 0, 0 ) }
+   METHOD ScrollCaret                  BLOCK { |Self| SendMessage( ::hWnd, EM_SCROLLCARET, 0, 0 ) }
 
-METHOD GetSelection
+   METHOD GetSelection
 
-METHOD SetSelection
+   METHOD SetSelection
 
-METHOD GetSelText
+   METHOD GetSelText
 
-METHOD InsertStatus                 SETGET
+   METHOD InsertStatus                 SETGET
 
-METHOD GetLine
+   METHOD GetLine
 
-METHOD GetLineIndex( nLine )        BLOCK { |Self,nLine| SendMessage( ::hWnd, EM_LINEINDEX, nLine, 0 ) }
+   METHOD GetLineIndex( nLine )        BLOCK { |Self,nLine| SendMessage( ::hWnd, EM_LINEINDEX, nLine, 0 ) }
 
-METHOD GetFirstVisibleLine          BLOCK { |Self| SendMessage( ::hWnd, EM_GETFIRSTVISIBLELINE, 0, 0 ) }
+   METHOD GetFirstVisibleLine          BLOCK { |Self| SendMessage( ::hWnd, EM_GETFIRSTVISIBLELINE, 0, 0 ) }
 
-METHOD GetLineCount                 BLOCK { |Self| SendMessage( ::hWnd, EM_GETLINECOUNT, 0, 0 ) }
+   METHOD GetLineCount                 BLOCK { |Self| SendMessage( ::hWnd, EM_GETLINECOUNT, 0, 0 ) }
 
-METHOD GetLineFromChar( nChar )
+   METHOD GetLineFromChar( nChar )
 
-METHOD GetCurrentLine               BLOCK { |Self| ::GetLineFromChar( -1 ) }
+   METHOD GetCurrentLine               BLOCK { |Self| ::GetLineFromChar( -1 ) }
 
-METHOD GetLineLength( nLine )       BLOCK { |Self,nLine| SendMessage( ::hWnd, EM_LINELENGTH, ::GetLineIndex( nLine ), 0 ) }
+   METHOD GetLineLength( nLine )       BLOCK { |Self,nLine| SendMessage( ::hWnd, EM_LINELENGTH, ::GetLineIndex( nLine ), 0 ) }
 
-METHOD GetLastVisibleLine
+   METHOD GetLastVisibleLine
 
-METHOD GetCharFromPos
+   METHOD GetCharFromPos
 
-METHOD GetRect
+   METHOD GetRect
 
    Empty( _OOHG_AllVars )
 
@@ -834,17 +834,17 @@ CLASS TTextPicture FROM TText
    DATA lNumericScroll INIT .F.
    DATA nYear          INIT Nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
-METHOD Picture     SETGET
+   METHOD Picture     SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD KeyPressed
+   METHOD KeyPressed
 
-METHOD Events_Command
+   METHOD Events_Command
 
 ENDCLASS
 
@@ -1570,11 +1570,11 @@ CLASS TTextNum FROM TText
 
    DATA Type          INIT "NUMTEXT" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
-METHOD Events_Command
+   METHOD Events_Command
 
 ENDCLASS
 
@@ -1715,4 +1715,3 @@ FUNCTION DefineTextBox( cControlName, cParentForm, x, y, Width, Height, ;
    ASSIGN ::InsertStatus VALUE lInsert TYPE "L"
 
    RETURN Self
-

@@ -22,22 +22,15 @@ CLASS TComboBox FROM TControl
    DATA   aItems AS ARRAY                     // Combo array
    DATA   bCloseUp                            // Block to be evaluated on Close Combo
 
-METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
+   METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
       nClrFore, nClrBack, hFont, cMsg, cControl, cWnd )
-
-METHOD Default()
-
-METHOD GetDlgCode( nLastKey, nFlags )
-
-METHOD HandleEvent( nMsg, nWParam, nLParam )
-
-METHOD KeyDown( nKey, nFlags )
-
-METHOD KeyChar( nKey, nFlags )
-
-METHOD LButtonDown( nRow, nCol )
-
-METHOD LostFocus()
+   METHOD Default()
+   METHOD GetDlgCode( nLastKey, nFlags )
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD KeyDown( nKey, nFlags )
+   METHOD KeyChar( nKey, nFlags )
+   METHOD LButtonDown( nRow, nCol )
+   METHOD LostFocus()
 
 ENDCLASS
 
@@ -271,4 +264,3 @@ METHOD LButtonDown( nRow, nCol ) CLASS TComboBox
    ::PostMsg( CB_SHOWDROPDOWN, nShow, 0 )
 
    RETURN 0
-

@@ -51,72 +51,72 @@ CLASS VAR winclass   INIT "EDIT"
    DATA cSelText   INIT "" HIDDEN
    DATA nSelLength INIT 0 HIDDEN
 
-METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, ;
       lNoBorder, nMaxLength, lPassword, bKeyDown, bChange, bOther )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
+   METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
       bGfocus, bLfocus, ctooltip, tcolor, bcolor, cPicture, nMaxLength, lMultiLine, bKeyDown, bChange )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetGet( value ) INLINE Eval( ::bSetGet, value, Self )
+   METHOD SetGet( value ) INLINE Eval( ::bSetGet, value, Self )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD SetText( c )
+   METHOD SetText( c )
 
-METHOD ParsePict( cPicture, vari )
+   METHOD ParsePict( cPicture, vari )
 
-METHOD VarPut( value ) INLINE ::SetGet( value )
+   METHOD VarPut( value ) INLINE ::SetGet( value )
 
-METHOD VarGet() INLINE ::SetGet()
+   METHOD VarGet() INLINE ::SetGet()
 
-METHOD IsEditable( nPos, lDel ) PROTECTED
+   METHOD IsEditable( nPos, lDel ) PROTECTED
 
-METHOD KeyRight( nPos ) PROTECTED
+   METHOD KeyRight( nPos ) PROTECTED
 
-METHOD KeyLeft( nPos ) PROTECTED
+   METHOD KeyLeft( nPos ) PROTECTED
 
-METHOD DeleteChar( lBack ) PROTECTED
+   METHOD DeleteChar( lBack ) PROTECTED
 
-METHOD INPUT( cChar, nPos ) PROTECTED
+   METHOD INPUT( cChar, nPos ) PROTECTED
 
-METHOD GetApplyKey( cKey ) PROTECTED
+   METHOD GetApplyKey( cKey ) PROTECTED
 
-METHOD Valid() //PROTECTED BECAUSE IS CALL IN HDIALOG
+   METHOD Valid() //PROTECTED BECAUSE IS CALL IN HDIALOG
 
-METHOD When() //PROTECTED
+   METHOD When() //PROTECTED
 
-METHOD onChange( lForce ) //PROTECTED
+   METHOD onChange( lForce ) //PROTECTED
 
-METHOD IsBadDate( cBuffer ) PROTECTED
+   METHOD IsBadDate( cBuffer ) PROTECTED
 
-METHOD Untransform( cBuffer ) PROTECTED
+   METHOD Untransform( cBuffer ) PROTECTED
 
-METHOD FirstEditable() PROTECTED
+   METHOD FirstEditable() PROTECTED
 
-METHOD FirstNotEditable( nPos ) PROTECTED
+   METHOD FirstNotEditable( nPos ) PROTECTED
 
-METHOD LastEditable() PROTECTED
+   METHOD LastEditable() PROTECTED
 
-METHOD SetGetUpdated() PROTECTED
+   METHOD SetGetUpdated() PROTECTED
 
-METHOD ReadOnly( lreadOnly ) SETGET
+   METHOD ReadOnly( lreadOnly ) SETGET
 
-METHOD SelLength( Length ) SETGET
+   METHOD SelLength( Length ) SETGET
 
-METHOD SelStart( Start ) SETGET
+   METHOD SelStart( Start ) SETGET
 
-METHOD SelText( cText ) SETGET
+   METHOD SelText( cText ) SETGET
 
-METHOD Value ( Value ) SETGET
+   METHOD Value ( Value ) SETGET
 
-METHOD SetCueBanner ( cText, lshowFoco )
+   METHOD SetCueBanner ( cText, lshowFoco )
 
 ENDCLASS
 
@@ -1801,4 +1801,3 @@ FUNCTION hwg_SetDisableBackColor( lDef, bcolor )
    ENDIF
 
    RETURN .T.
-

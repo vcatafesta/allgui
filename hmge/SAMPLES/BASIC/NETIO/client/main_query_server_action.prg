@@ -17,4 +17,3 @@ FUNCTION main_query_server_action
    ENDIF
 
    RETURN NIL
-

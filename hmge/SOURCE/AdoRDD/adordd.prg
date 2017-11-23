@@ -1024,4 +1024,3 @@ FUNCTION HB_AdoRddGetRecordSet( nWA )
    aWAData := USRRDD_AREADATA( nWA )
 
    RETURN iif( aWAData != nil, aWAData[ WA_RECORDSET ], nil )
-

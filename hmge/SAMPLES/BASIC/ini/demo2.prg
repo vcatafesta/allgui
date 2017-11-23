@@ -168,4 +168,3 @@ FUNCTION Change_section(nSectionPos,cIniFile)
    ENDIF
 
    RETURN NIL
-

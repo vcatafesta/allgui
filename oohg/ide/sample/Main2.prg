@@ -42,4 +42,3 @@ FUNCTION cierra()
 
    #include 'prgspi.prg'
    #include 'p2.prg'
-

@@ -1303,4 +1303,3 @@ HB_FUNC ( LISTVIEW_GETCOLUMNORDERARRAY )
    GlobalFree (p);
 }
 #pragma ENDDUMP
-

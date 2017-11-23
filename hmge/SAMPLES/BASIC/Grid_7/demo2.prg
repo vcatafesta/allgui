@@ -118,4 +118,3 @@ FUNCTION GetSelectionValue
    MsgInfo( 'Row: ' + Str (  a [1] ) + ' Col: ' + Str (  a [2] ) )
 
    RETURN NIL
-

@@ -145,4 +145,3 @@ STATIC FUNCTION GetBookmarkHeight()
    LOCAL idx := Form_1.Tab_1.Index
 
    RETURN _HMG_aControlMiscData1 [idx] [1]
-

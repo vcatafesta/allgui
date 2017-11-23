@@ -324,4 +324,3 @@ FUNCTION HMG_TimeToTime (cTime, cNewTimeFormat)
    LOCAL cNewTime := HMG_ValueToTime (aValue, cNewTimeFormat)
 
    RETURN cNewTime
-

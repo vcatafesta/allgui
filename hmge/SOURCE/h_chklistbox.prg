@@ -350,4 +350,3 @@ FUNCTION _SetGetChkListItemState ( ControlName, ParentForm, Item, lState )
    ENDIF
 
    RETURN RetVal
-

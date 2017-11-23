@@ -98,4 +98,3 @@ STATIC FUNCTION GetFirstDayOfWeek( cControlName, cFormName )
 STATIC FUNCTION StrWeekday ( nDay )
 
    RETURN "First Day Of Week: " + IF(nDay=6, "Sunday", "Monday")
-

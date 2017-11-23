@@ -34,4 +34,3 @@ FUNCTION Form_Win_1()
    ACTIVATE WINDOW Win_1
 
    RETURN NIL
-

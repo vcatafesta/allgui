@@ -34,7 +34,7 @@
  * Changing this does not require an initdb, but it does require a full
  * backend recompile (including any user-defined C functions).
  */
-#define FUNC_MAX_ARGS		100
+#define FUNC_MAX_ARGS      100
 
 /*
  * Maximum number of columns in an index.  There is little point in making
@@ -43,18 +43,18 @@
  *
  * Changing this requires an initdb.
  */
-#define INDEX_MAX_KEYS		32
+#define INDEX_MAX_KEYS      32
 
 /*
  * Set the upper and lower bounds of sequence values.
  */
-#define SEQ_MAXVALUE	PG_INT64_MAX
-#define SEQ_MINVALUE	(-SEQ_MAXVALUE)
+#define SEQ_MAXVALUE   PG_INT64_MAX
+#define SEQ_MINVALUE   (-SEQ_MAXVALUE)
 
 /*
  * Number of spare LWLocks to allocate for user-defined add-on code.
  */
-#define NUM_USER_DEFINED_LWLOCKS	4
+#define NUM_USER_DEFINED_LWLOCKS   4
 
 /*
  * When we don't have native spinlocks, we use semaphores to simulate them.
@@ -62,7 +62,7 @@
  * may improve performance, but supplying a real spinlock implementation is
  * probably far better.
  */
-#define NUM_SPINLOCK_SEMAPHORES		128
+#define NUM_SPINLOCK_SEMAPHORES      128
 
 /*
  * When we have neither spinlocks nor atomic operations support we're
@@ -70,7 +70,7 @@
  * be safe against atomic operations while holding a spinlock separate
  * semaphores have to be used.
  */
-#define NUM_ATOMICS_SEMAPHORES		64
+#define NUM_ATOMICS_SEMAPHORES      64
 
 /*
  * Define this if you want to allow the lo_import and lo_export SQL
@@ -92,7 +92,7 @@
  * on the same platform!  So we just punt and use a reasonably
  * generous setting here.
  */
-#define MAXPGPATH		1024
+#define MAXPGPATH      1024
 
 /*
  * PG_SOMAXCONN: maximum accept-queue length limit passed to
@@ -103,13 +103,13 @@
  * rather than silently reducing the value to what it can handle
  * (which is what most if not all Unixen do).
  */
-#define PG_SOMAXCONN	10000
+#define PG_SOMAXCONN   10000
 
 /*
  * You can try changing this if you have a machine with bytes of
  * another size, but no guarantee...
  */
-#define BITS_PER_BYTE		8
+#define BITS_PER_BYTE      8
 
 /*
  * Preferred alignment for disk I/O buffers.  On some CPUs, copies between
@@ -117,7 +117,7 @@
  * is aligned on a larger-than-MAXALIGN boundary.  Ideally this should be
  * a platform-dependent value, but for now we just hard-wire it.
  */
-#define ALIGNOF_BUFFER	32
+#define ALIGNOF_BUFFER   32
 
 /*
  * Disable UNIX sockets for certain operating systems.
@@ -196,7 +196,7 @@
  * which should be safe in nearly all cases.  You might want to override
  * this if you are building 32-bit code for a known-recent PPC machine.
  */
-#ifdef HAVE_PPC_LWARX_MUTEX_HINT	/* must have assembler support in any case */
+#ifdef HAVE_PPC_LWARX_MUTEX_HINT   /* must have assembler support in any case */
 #if defined(__ppc64__) || defined(__powerpc64__)
 #define USE_PPC_LWARX_MUTEX_HINT
 #endif
@@ -222,7 +222,7 @@
  * wasted memory. The default is 128, which should be large enough for all
  * supported platforms.
  */
-#define PG_CACHE_LINE_SIZE		128
+#define PG_CACHE_LINE_SIZE      128
 
 /*
  *------------------------------------------------------------------------

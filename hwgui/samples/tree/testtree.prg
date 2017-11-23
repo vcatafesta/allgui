@@ -82,4 +82,3 @@ STATIC FUNCTION NodeOut( n, oSay )
    ENDIF
 
    RETURN NIL
-

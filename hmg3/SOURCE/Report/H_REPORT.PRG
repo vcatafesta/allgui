@@ -190,25 +190,25 @@ CREATE CLASS _HMG_REPORT
 
    VAR aline     INIT {}
 
-METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader)
+   METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader)
 
-METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
+   METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
 
-METHOD extreport1(cfilerep)
+   METHOD extreport1(cfilerep)
 
-METHOD leadato(cName,cPropmet,cDefault)
+   METHOD leadato(cName,cPropmet,cDefault)
 
-METHOD leaimage(cName,cPropmet,cDefault)
+   METHOD leaimage(cName,cPropmet,cDefault)
 
-METHOD leadatoh(cName,cPropmet,cDefault,npar)
+   METHOD leadatoh(cName,cPropmet,cDefault,npar)
 
-METHOD leadatologic(cName,cPropmet,cDefault)
+   METHOD leadatologic(cName,cPropmet,cDefault)
 
-METHOD clean(cfvalue)
+   METHOD clean(cfvalue)
 
-METHOD learowi(cname,npar)
+   METHOD learowi(cname,npar)
 
-METHOD leacoli(cname,npar)
+   METHOD leacoli(cname,npar)
 
 ENDCLASS
 
@@ -858,4 +858,3 @@ METHOD leacoli(cname,npar) CLASS _HMG_REPORT
    NEXT i
 
    RETURN ncol
-

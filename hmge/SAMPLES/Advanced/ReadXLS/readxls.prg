@@ -293,4 +293,3 @@ STATIC FUNCTION GetLenColumn( nnLen )
    ENDIF
 
    RETURN( nnValor )
-

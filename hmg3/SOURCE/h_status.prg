@@ -318,4 +318,3 @@ FUNCTION _SetStatusKeybrd ( FormName ,Width , ToolTip , action , nIntervalUpdate
                } )
 
             RETURN NIL
-

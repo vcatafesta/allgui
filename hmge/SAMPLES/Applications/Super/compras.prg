@@ -1208,4 +1208,3 @@ STATIC FUNCTION gravar_compras()
    form_compras.release
 
    return(nil)
-

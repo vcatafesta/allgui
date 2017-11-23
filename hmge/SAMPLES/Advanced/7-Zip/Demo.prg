@@ -981,4 +981,3 @@ STATIC PROCEDURE ExtractArcExternal
    RETURN
 
    ***** End of ExtractArcExternal ******
-

@@ -162,4 +162,3 @@ PROCEDURE Build2Lib( ProjectName )  // Library MinGW
    Procesando(2)
 
    RETURN
-

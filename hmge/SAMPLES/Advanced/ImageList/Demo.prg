@@ -376,4 +376,3 @@ FUNCTION RePaintImage()
    DRAW IMAGELIST imagelst_1 OF Form_1 AT yDog, xDog IMAGEINDEX Image_Index
 
    RETURN NIL
-

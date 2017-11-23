@@ -308,4 +308,3 @@ FUNCTION CloseGets
    Gt_e_Mail:Disable()
 
    RETURN NIL
-

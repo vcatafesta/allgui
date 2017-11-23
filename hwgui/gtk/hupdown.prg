@@ -26,12 +26,12 @@ CLASS VAR winclass   INIT "EDIT"
    DATA nUpDownWidth INIT 12
    DATA lChanged    INIT .F.
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
+   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,nUpDWidth,nLower,nUpper )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Refresh()
+   METHOD Refresh()
 
 ENDCLASS
 
@@ -123,4 +123,3 @@ STATIC FUNCTION __Valid( oCtrl )
    ENDIF
 
    RETURN .T.
-

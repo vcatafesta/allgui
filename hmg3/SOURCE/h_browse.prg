@@ -2396,4 +2396,3 @@ FUNCTION _BrowseCharMaskDisplay ( cText , cMask )
    RETURN Out
 
    #endif
-

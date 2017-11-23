@@ -970,4 +970,3 @@ STATIC FUNCTION DialogFun2(lOk, nNewVal,oBrw)
    ENDIF
 
    RETURN ret
-

@@ -22,4 +22,3 @@ FUNCTION SetMyBrowser( oBrw )
    oBrw:nClrFocuBack := COLOR_GRID
 
    RETURN .T.
-

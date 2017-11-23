@@ -179,4 +179,3 @@ STATIC FUNCTION mPostEdit( uVal, oBrw, lApp )
    ENDIF
 
    RETURN lRet
-

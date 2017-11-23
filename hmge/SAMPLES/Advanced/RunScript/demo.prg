@@ -65,4 +65,3 @@ PROCEDURE RunScript
    hb_hrbUnload( hHandle_Hrb )
 
    RETURN
-

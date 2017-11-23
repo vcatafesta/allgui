@@ -507,4 +507,3 @@ STATIC FUNCTION GetSectionText(cSection, cKey, cFileName)
    ENDDO
 
    RETURN(cResult)
-

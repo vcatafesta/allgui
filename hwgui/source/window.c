@@ -59,12 +59,11 @@ static void s_ClearKeyboard( void )
 {
    MSG msg;
 
-   // For keyboard 
+   // For keyboard
    while( PeekMessage( &msg, ( HWND ) NULL, WM_KEYFIRST, WM_KEYLAST, PM_REMOVE ) ) ;
    // For Mouse
    while( PeekMessage( &msg, ( HWND ) NULL, WM_MOUSEFIRST, WM_MOUSELAST, PM_REMOVE ) ) ;
 }
-
 
 /* Consume all queued events, useful to update all the controls... I split in 2 parts because I feel
  * that s_doEvents should be called internally by some other functions...
@@ -144,15 +143,15 @@ HB_FUNC( HWG_CENTERWINDOW )
    int w, h, x, y;
 
    GetWindowRect( ( HWND ) HB_PARHANDLE( 1 ), &rect );
-   
-   if ( hb_parni( 2 ) ==  WND_MDICHILD ) 
-   { 
+
+   if ( hb_parni( 2 ) ==  WND_MDICHILD )
+   {
       GetWindowRect( ( HWND ) aWindows[1], &rectcli );
       x = rectcli.right - rectcli.left;
       y = rectcli.bottom - rectcli.top;
       w = rect.right - rect.left;
       h = rect.bottom - rect.top;
-   }   
+   }
    else
    {
       w = rect.right - rect.left;
@@ -163,7 +162,6 @@ HB_FUNC( HWG_CENTERWINDOW )
    SetWindowPos( ( HWND ) HB_PARHANDLE( 1 ), HWND_TOP, ( x - w ) / 2,
          ( y - h ) / 2, 0, 0, SWP_NOSIZE + SWP_NOACTIVATE + SWP_FRAMECHANGED + SWP_NOSENDCHANGING );
 }
-
 
 void ProcessMessage( MSG msg, HACCEL hAcceler, BOOL lMdi )
 {
@@ -1353,7 +1351,6 @@ LRESULT CALLBACK KbdHook( int code, WPARAM wp, LPARAM lp )
    return CallNextHookEx( s_OrigDockHookProc, code, wp, lp );
 }
 
-
 HB_FUNC( HWG_SETTOOLHANDLE )
 {
    HWND h = ( HWND ) HB_PARHANDLE( 1 );
@@ -1367,7 +1364,6 @@ HB_FUNC( HWG_SETHOOK )
          SetWindowsHookEx( WH_KEYBOARD, KbdHook, GetModuleHandle( 0 ), 0 );
 }
 
-
 HB_FUNC( HWG_UNSETHOOK )
 {
    if( s_OrigDockHookProc )
@@ -1376,7 +1372,6 @@ HB_FUNC( HWG_UNSETHOOK )
       s_OrigDockHookProc = 0;
    }
 }
-
 
 HB_FUNC( HWG_GETTOOLBARID )
 {
@@ -1421,10 +1416,10 @@ HB_FUNC( HWG_GETWINDOWPLACEMENT )
 {
    HWND hWnd = ( HWND ) HB_PARHANDLE( 1 );
    WINDOWPLACEMENT wp ;
-   
+
    wp.length = sizeof( WINDOWPLACEMENT );
 
-   if ( GetWindowPlacement( hWnd, &wp ) ) 
+   if ( GetWindowPlacement( hWnd, &wp ) )
       hb_retnl( wp.showCmd );
    else
       hb_retnl( -1 )  ;
@@ -1435,7 +1430,7 @@ HB_FUNC( HWG_FLASHWINDOW )
    HWND hWnd = ( HWND ) HB_PARHANDLE( 1 );
    int itrue = hb_parni( 2 );
    FlashWindow(  hWnd, itrue ) ;
-} 
+}
 
 HB_FUNC( HWG_ANSITOUNICODE )
 {
@@ -1445,7 +1440,7 @@ HB_FUNC( HWG_ANSITOUNICODE )
 #else
     hwg_wstrget( hb_param( 1, HB_IT_ANY ), &hText, NULL );
 #endif
-   HB_RETSTRLEN( hText, 1024 );   
+   HB_RETSTRLEN( hText, 1024 );
    hb_strfree( hText );
 }
 
@@ -1482,5 +1477,3 @@ HB_FUNC( HWG_PAINTWINDOW )
    EndPaint( ( HWND ) HB_PARHANDLE( 1 ), pps );
    hb_xfree( pps );
 }
-
-

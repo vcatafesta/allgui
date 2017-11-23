@@ -1064,4 +1064,3 @@ STATIC FUNCTION dbv_DelRec()
    ENDIF
 
    RETURN NIL
-

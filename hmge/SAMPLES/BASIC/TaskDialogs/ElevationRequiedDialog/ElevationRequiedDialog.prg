@@ -64,4 +64,3 @@ STATIC FUNCTION __cb_elevation( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

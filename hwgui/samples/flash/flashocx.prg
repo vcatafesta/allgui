@@ -37,7 +37,7 @@ CLASS ShockwaveFlash FROM HActiveX
 
 CLASS VAR winclass INIT "ShockwaveFlash"
 
-METHOD New()
+   METHOD New()
 
 ENDCLASS
 
@@ -55,4 +55,3 @@ FUNCTION FlashPlayer(oWindow, cFlashFile, col, row, nHeight, nWidth)
    oFlash:LoadMovie(0,cFlashFile)
 
    RETURN oFlash
-

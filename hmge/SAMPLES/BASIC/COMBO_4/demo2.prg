@@ -77,4 +77,3 @@ FUNCTION SetComboState( nState )
    Form_1.Combo_1.Enabled := Form_1.CheckBox_1.Value
 
    RETURN NIL
-

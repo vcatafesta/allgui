@@ -202,4 +202,3 @@ FUNCTION TBrw_NoHoles( oBrw, nDelta, lSet )
    ENDIF
 
    RETURN nHeight
-

@@ -152,4 +152,3 @@ PROCEDURE DeleteRow( aArr )
    ENDIF
 
    RETURN
-

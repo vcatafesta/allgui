@@ -2,7 +2,6 @@
  * $Id: hwgtk.h 2054 2013-05-29 06:07:21Z alkresin $
  */
 
-
 typedef struct HWGUI_HDC_STRU
 {
   GtkWidget * widget;

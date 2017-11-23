@@ -120,4 +120,3 @@ HB_FUNC( DELETEDC )
 }
 
 #pragma ENDDUMP
-

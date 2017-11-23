@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #translate IsControlDefined( <ControlName>, <FormName> ) ;
    => ;
       _IsControlDefined( <(ControlName)>, <(FormName)> )
@@ -87,11 +86,11 @@
 
 #xtranslate GetDefaultFontName() ;
    => ;
-	   GetSystemFont() \[1\]
+      GetSystemFont() \[1\]
 
 #xtranslate GetDefaultFontSize() ;
    => ;
-	   GetSystemFont() \[2\]
+      GetSystemFont() \[2\]
 
 #xtranslate LB_String2Array( <cData> [, <Sep> ] ) ;
    => ;
@@ -99,11 +98,11 @@
 
 #xtranslate ISWINXPORLATER() ;
    => ;
-	   OSISWINXPORLATER()
+      OSISWINXPORLATER()
 
 #xtranslate ISVISTAORLATER() ;
    => ;
-	   OSISWINVISTAORLATER()
+      OSISWINVISTAORLATER()
 
 #xtranslate MsgAlert( <c>, <t> ) ;
    => ;

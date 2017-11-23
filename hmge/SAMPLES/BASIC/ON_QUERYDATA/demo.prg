@@ -74,4 +74,3 @@ STATIC FUNCTION SortThisColumn( aArray, cEle )
    Form_1.Grid_1.Refresh
 
    RETURN ( lAscend := !lAscend )
-

@@ -61,4 +61,3 @@ PROCEDURE DeleteButton
    /*
    * EOF
    */
-

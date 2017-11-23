@@ -51,7 +51,7 @@ HB_FUNC( HWG__ADDMENUITEM )
    if( HB_ISCHAR( 2 ) )
    {
       const char * ptr;
-      lpNewItem	= hb_parc(2);
+      lpNewItem   = hb_parc(2);
       ptr = lpNewItem;
       if( *ptr == '%' )
          lStock = TRUE;
@@ -202,11 +202,11 @@ HB_FUNC( HWG__ADDACCELERATOR )
 {
 
    int iControl = hb_parni( 3 );
-   GdkModifierType nType = (iControl==FSHIFT)? GDK_SHIFT_MASK : 
+   GdkModifierType nType = (iControl==FSHIFT)? GDK_SHIFT_MASK :
          ( (iControl==FCONTROL)? GDK_CONTROL_MASK : ( (iControl==FALT)? GDK_MOD1_MASK : 0 ) );
 
-   gtk_widget_add_accelerator( (GtkWidget *) HB_PARHANDLE(2), "activate", 
-         (GtkAccelGroup *)HB_PARHANDLE(1), 
+   gtk_widget_add_accelerator( (GtkWidget *) HB_PARHANDLE(2), "activate",
+         (GtkAccelGroup *)HB_PARHANDLE(1),
          (guint)hb_parni(4), nType, 0 );
 }
 

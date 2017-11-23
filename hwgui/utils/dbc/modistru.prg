@@ -213,4 +213,3 @@ STATIC FUNCTION UpdStru( oBrowse, oGet1, oGet2, oGet3, oGet4, nOperation )
    oBrowse:Refresh()
 
    RETURN NIL
-

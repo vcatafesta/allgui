@@ -5,7 +5,7 @@
 /* Image Attributes functions */
 #include "inc\imageattr.inc"
 //////////////////////////////////////////////////////////////////////////////
-HB_FUNC( GDIPCREATEIMAGEATTRIBUTES ) 
+HB_FUNC( GDIPCREATEIMAGEATTRIBUTES )
 {
    GpImageAttributes * imageattr = NULL;
 
@@ -20,7 +20,7 @@ HB_FUNC( GDIPCREATEIMAGEATTRIBUTES )
    hb_storptr( imageattr, 2 );
 }
 
-HB_FUNC( GDIPDISPOSEIMAGEATTRIBUTES ) 
+HB_FUNC( GDIPDISPOSEIMAGEATTRIBUTES )
 {
    if( NULL == fn_GdipDisposeImageAttributes )
       ASSIGN_FUNCPTR( g_GpModule, GdipDisposeImageAttributes );

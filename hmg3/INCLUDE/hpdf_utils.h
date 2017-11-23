@@ -28,68 +28,56 @@ extern "C" {
 HPDF_INT
 HPDF_AToI  (const char*  s);
 
-
 HPDF_DOUBLE
 HPDF_AToF  (const char*  s);
-
 
 char*
 HPDF_IToA  (char*  s,
             HPDF_INT32  val,
             char*  eptr);
 
-
 char*
 HPDF_IToA2  (char    *s,
              HPDF_UINT32  val,
              HPDF_UINT    len);
-
 
 char*
 HPDF_FToA  (char  *s,
             HPDF_REAL  val,
             char  *eptr);
 
-
 HPDF_BYTE*
 HPDF_MemCpy  (HPDF_BYTE*        out,
               const HPDF_BYTE*  in,
               HPDF_UINT         n);
-
 
 HPDF_BYTE*
 HPDF_StrCpy  (char*        out,
               const char*  in,
               char*        eptr);
 
-
 HPDF_INT
 HPDF_MemCmp  (const HPDF_BYTE*  s1,
               const HPDF_BYTE*  s2,
               HPDF_UINT         n);
 
-
 HPDF_INT
 HPDF_StrCmp  (const char*  s1,
               const char*  s2);
-
 
 const char*
 HPDF_StrStr  (const char  *s1,
               const char  *s2,
               HPDF_UINT        maxlen);
 
-
 void*
 HPDF_MemSet  (void*      s,
               HPDF_BYTE  c,
               HPDF_UINT  n);
 
-
 HPDF_UINT
 HPDF_StrLen  (const char*  s,
               HPDF_INT          maxlen);
-
 
 HPDF_Box
 HPDF_ToBox  (HPDF_INT16  left,
@@ -97,11 +85,9 @@ HPDF_ToBox  (HPDF_INT16  left,
              HPDF_INT16  right,
              HPDF_INT16  top);
 
-
 HPDF_Point
 HPDF_ToPoint  (HPDF_INT16  x,
                HPDF_INT16  y);
-
 
 HPDF_Rect
 HPDF_ToRect  (HPDF_REAL  left,
@@ -109,10 +95,8 @@ HPDF_ToRect  (HPDF_REAL  left,
               HPDF_REAL  right,
               HPDF_REAL  top);
 
-
 void
 HPDF_UInt16Swap  (HPDF_UINT16  *value);
-
 
 #ifdef __cplusplus
 }
@@ -162,4 +146,3 @@ HPDF_UInt16Swap  (HPDF_UINT16  *value);
 #endif
 
 #endif /* _HPDF_UTILS_H */
-

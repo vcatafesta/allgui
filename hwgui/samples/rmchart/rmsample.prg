@@ -20,9 +20,9 @@ CLASS RmChart FROM HActiveX
 
 CLASS VAR winclass INIT "RmChart"
 
-METHOD Clicked        // Intercept the Click event
+   METHOD Clicked        // Intercept the Click event
 
-METHOD New()
+   METHOD New()
 
 ENDCLASS
 
@@ -116,4 +116,3 @@ FUNCTION Main
    ACTIVATE WINDOW oMainWnd
 
    RETURN
-

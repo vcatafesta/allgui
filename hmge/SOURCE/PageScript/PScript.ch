@@ -298,26 +298,21 @@ Possible error codes
                                                            ;
       => (<nRed> + (<nGreen> * 256) + (<nBlue> * 65536))
 
-
 #xcommand ABORT                                            ;
                                                            ;
       => PSAbort()
-
 
 #xcommand ENDDOC                                           ;
                                                            ;
       => PSEndDoc()
 
-
 #xcommand ENDRAWDOC                                        ;
                                                            ;
       => PSEndRawDoc()
 
-
 #xcommand NEWPAGE                                          ;
                                                            ;
       => PSNewPage()
-
 
 #xcommand BEGINDOC       [<with: WITH, USING> <printer>]   ;
                          [TITLE <title>]                   ;
@@ -326,12 +321,10 @@ Possible error codes
                                                            ;
       => PSBeginDoc(<printer>, <title>, <orientation>, <copies>)
 
-
 #xcommand BEGINRAWDOC    [<with: WITH, USING> <printer>]   ;
                          [TITLE <title>]                   ;
                                                            ;
       => PSBeginRawDoc(<printer>, <title>)
-
 
 #xcommand @ <x1>, <y1>   [TO <x2>, <y2>]                   ;
                          BITMAP <bitmap>                   ;
@@ -349,7 +342,6 @@ Possible error codes
       => PSBitmap(<x1>, <y1>, <x2>, <y2>,                  ;
                   <bitmap>, <color>, <.kr.>)
 
-
 #xcommand @ <x1> ,<y1>   ELLIPSE [TO] <x2>, <y2>           ;
                          [THICKNESS <thick>]               ;
                          [COLOR <border>[,<fill>]]         ;
@@ -357,7 +349,6 @@ Possible error codes
                                                            ;
       => PSEllipse(<x1>, <y1>, <x2>, <y2>,                 ;
                    <thick>, <border>, <fill>, <pattern>)
-
 
 #xcommand @ <x1>, <y1>   FRAME [TO] <x2>, <y2>             ;
                          [THICKNESS <thick>]               ;
@@ -367,13 +358,11 @@ Possible error codes
       => PSFrame(<x1>, <y1>, <x2>, <y2>,                   ;
                  <thick>, <border>, <fill>, <pattern>)
 
-
 #xcommand @ <x1>, <y1>   LINE [TO] <x2>, <y2>              ;
                          [THICKNESS <thick>]               ;
                          [COLOR <color>]                   ;
                                                            ;
       => PSLine(<x1>, <y1>, <x2>, <y2>, <thick>, <color>)
-
 
 
 #xcommand @ <x1>, <y1> TO <x2>, <y2>                       ;
@@ -389,7 +378,6 @@ Possible error codes
                    <font>, <psize>, <style>, <textcol>,    ;
                    <fillcol>, <thick>)
 
-
 #xcommand @ <x1>, <y1>, <x2>, <y2>                         ;
                          TEXTBOX <Text>                    ;
                          [JUSTIFY <just>]                  ;
@@ -403,7 +391,6 @@ Possible error codes
                    <font>, <psize>, <style>, <textcol>,    ;
                    <fillcol>, <thick>)
 
-
 #xcommand @ <row>, <col> TEXTOUT <txtxpr>                  ;
                          [PICTURE <pic>]                   ;
                          [JUSTIFY <just>]                  ;
@@ -415,4 +402,3 @@ Possible error codes
                                                            ;
       => PSTextOut(<row>, <col>, <txtxpr>, <pic>, <just>,  ;
                    <font>, <psize>, <style>, <color>, <fill>, <angle>)
-

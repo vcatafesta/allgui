@@ -13,15 +13,14 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA */
 
-
 #ifndef _typelib_h
 #define _typelib_h
 
 #include "my_alloc.h"
 
-typedef struct st_typelib {	/* Different types saved here */
-  unsigned int count;		/* How many types */
-  const char *name;		/* Name of typelib */
+typedef struct st_typelib {   /* Different types saved here */
+  unsigned int count;      /* How many types */
+  const char *name;      /* Name of typelib */
   const char **type_names;
   unsigned int *type_lengths;
 } TYPELIB;

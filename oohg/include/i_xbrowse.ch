@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #define XBROWSE_JTFY_LEFT        0
 #define XBROWSE_JTFY_RIGHT       1
 #define XBROWSE_JTFY_CENTER      2
@@ -164,7 +163,7 @@
       [ <dummy19: ONEDITCELLEND, ON EDITCELLEND> <editend> ] ;
       [ <efv: EDITFIRSTVISIBLE> ] ;
       [ <dummy20: ONBEFOREEDITCELL, ON BEFOREEDITCELL> <beforedit> ] ;
-	=> ;
+   => ;
       [ <obj> := ] _OOHG_SelectSubClass( IIF( <.bycell.>, TXBrowseByCell(), ;
             TXBrowse() ), [ <subclass>() ] ):Define( <(name)>, <(parent)>, ;
             <col>, <row>, <w>, <h>, <headers>, <widths>, <Fields>, ;

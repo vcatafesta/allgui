@@ -12,94 +12,93 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2003, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2003, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
 * Select Printer <cPrinter> [ TO <lSelect> ]
 
 #xcommand SELECT PRINTER <cPrinter> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <lCopies		: COPIES>		<nCopies> ] ;
-	[ <lDefaultSource	: DEFAULTSOURCE>	<nDefaultSource> ] ;
-	[ <lQuality		: QUALITY>		<nQuality> ] ;
-	[ <lColor		: COLOR>		<nColor> ] ;
-	[ <lDuplex		: DUPLEX>		<nDuplex> ] ;
-	[ <lCollate		: COLLATE>		<nCollate> ] ;
-	[ <Preview 		: PREVIEW> ] ;
-   [ <NoSaveButton 		: NOSAVEBUTTON> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <lCopies      : COPIES>      <nCopies> ] ;
+   [ <lDefaultSource   : DEFAULTSOURCE>   <nDefaultSource> ] ;
+   [ <lQuality      : QUALITY>      <nQuality> ] ;
+   [ <lColor      : COLOR>      <nColor> ] ;
+   [ <lDuplex      : DUPLEX>      <nDuplex> ] ;
+   [ <lCollate      : COLLATE>      <nCollate> ] ;
+   [ <Preview       : PREVIEW> ] ;
+   [ <NoSaveButton       : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
-	_HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
-		<cPrinter> , ;
-		if ( <.lOrientation.>	, <nOrientation>	, -999 ) , ;
-		if ( <.lPaperSize.>	, <nPaperSize>		, -999 ) , ;
-		if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , ;
-		if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ) , ;
-		if ( <.lCopies.>	, <nCopies>		, -999 ) , ;
-		if ( <.lDefaultSource.>	, <nDefaultSource>	, -999 ) , ;
-		if ( <.lQuality.>	, <nQuality>		, -999 ) , ;
-		if ( <.lColor.>		, <nColor>		, -999 ) , ;
-		if ( <.lDuplex.>	, <nDuplex>		, -999 ) , ;
-		if ( <.lCollate.>	, <nCollate>		, -999 ) ;
-	) ;;
-	_HMG_SYSDATA \[ 513 \] := .f. ;;
-	_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
-	_HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
-	_HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
-	_HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
+   _HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
+      <cPrinter> , ;
+      if ( <.lOrientation.>   , <nOrientation>   , -999 ) , ;
+      if ( <.lPaperSize.>   , <nPaperSize>      , -999 ) , ;
+      if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , ;
+      if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ) , ;
+      if ( <.lCopies.>   , <nCopies>      , -999 ) , ;
+      if ( <.lDefaultSource.>   , <nDefaultSource>   , -999 ) , ;
+      if ( <.lQuality.>   , <nQuality>      , -999 ) , ;
+      if ( <.lColor.>      , <nColor>      , -999 ) , ;
+      if ( <.lDuplex.>   , <nDuplex>      , -999 ) , ;
+      if ( <.lCollate.>   , <nCollate>      , -999 ) ;
+   ) ;;
+   _HMG_SYSDATA \[ 513 \] := .f. ;;
+   _HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
+   _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
+   _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
+   _HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 505 \] := <.NoSaveButton.> ;;
    _HMG_SYSDATA \[ 506 \] := HMG_IsNotDefParam ( <DialogFileName> , NIL );;
    _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
    _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
-	_hmg_printer_InitUserMessages() ;;
-	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
-	_HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
-	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
-
+   _hmg_printer_InitUserMessages() ;;
+   _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
+   _HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
+   _HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
+   _HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 #xtranslate _HMG_PrinterMetaFileDC => _HMG_SYSDATA \[ 502 \]
 
@@ -113,178 +112,174 @@
 #xtranslate OpenPrinterGetPageWidth()      => _HMG_PRINTER_GETPAGEWIDTH  ( OpenPrinterGetDC() )   // in millimeters
 #xtranslate OpenPrinterGetPageHeight()     => _HMG_PRINTER_GETPAGEHEIGHT ( OpenPrinterGetDC() )   // in millimeters
 
-
 #xcommand SELECT PRINTER <cPrinter> TO <lSuccess> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <lCopies		: COPIES>		<nCopies> ] ;
-	[ <lDefaultSource	: DEFAULTSOURCE>	<nDefaultSource> ] ;
-	[ <lQuality		: QUALITY>		<nQuality> ] ;
-	[ <lColor		: COLOR>		<nColor> ] ;
-	[ <lDuplex		: DUPLEX>		<nDuplex> ] ;
-	[ <lCollate		: COLLATE>		<nCollate> ] ;
-	[ <Preview 		: PREVIEW> ] ;
-   [ <NoSaveButton 		: NOSAVEBUTTON> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <lCopies      : COPIES>      <nCopies> ] ;
+   [ <lDefaultSource   : DEFAULTSOURCE>   <nDefaultSource> ] ;
+   [ <lQuality      : QUALITY>      <nQuality> ] ;
+   [ <lColor      : COLOR>      <nColor> ] ;
+   [ <lDuplex      : DUPLEX>      <nDuplex> ] ;
+   [ <lCollate      : COLLATE>      <nCollate> ] ;
+   [ <Preview       : PREVIEW> ] ;
+   [ <NoSaveButton       : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
-	_HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
-		<cPrinter> , ;
-		if ( <.lOrientation.>	, <nOrientation>	, -999 ) , ;
-		if ( <.lPaperSize.>	, <nPaperSize>		, -999 ) , ;
-		if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , ;
-		if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ) , ;
-		if ( <.lCopies.>	, <nCopies>		, -999 ) , ;
-		if ( <.lDefaultSource.>	, <nDefaultSource>	, -999 ) , ;
-		if ( <.lQuality.>	, <nQuality>		, -999 ) , ;
-		if ( <.lColor.>		, <nColor>		, -999 ) , ;
-		if ( <.lDuplex.>	, <nDuplex>		, -999 ) , ;
-		if ( <.lCollate.>	, <nCollate>		, -999 ) ;
-	) ;;
-	_HMG_SYSDATA \[ 513 \] := .f. ;;
-	_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
-	_HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
-	_HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
-	<lSuccess> := if ( _HMG_SYSDATA \[ 374 \] <> 0 , .T. , .F. ) ;;
-	_HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
+   _HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
+      <cPrinter> , ;
+      if ( <.lOrientation.>   , <nOrientation>   , -999 ) , ;
+      if ( <.lPaperSize.>   , <nPaperSize>      , -999 ) , ;
+      if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , ;
+      if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ) , ;
+      if ( <.lCopies.>   , <nCopies>      , -999 ) , ;
+      if ( <.lDefaultSource.>   , <nDefaultSource>   , -999 ) , ;
+      if ( <.lQuality.>   , <nQuality>      , -999 ) , ;
+      if ( <.lColor.>      , <nColor>      , -999 ) , ;
+      if ( <.lDuplex.>   , <nDuplex>      , -999 ) , ;
+      if ( <.lCollate.>   , <nCollate>      , -999 ) ;
+   ) ;;
+   _HMG_SYSDATA \[ 513 \] := .f. ;;
+   _HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
+   _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
+   _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
+   <lSuccess> := if ( _HMG_SYSDATA \[ 374 \] <> 0 , .T. , .F. ) ;;
+   _HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 505 \] := <.NoSaveButton.> ;;
    _HMG_SYSDATA \[ 506 \] := HMG_IsNotDefParam ( <DialogFileName> , NIL );;
    _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
    _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
-	_hmg_printer_InitUserMessages() ;;
-	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
-	_HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
-	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
-
+   _hmg_printer_InitUserMessages() ;;
+   _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
+   _HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
+   _HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
+   _HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 #xcommand SELECT PRINTER DEFAULT ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <lCopies		: COPIES>		<nCopies> ] ;
-	[ <lDefaultSource	: DEFAULTSOURCE>	<nDefaultSource> ] ;
-	[ <lQuality		: QUALITY>		<nQuality> ] ;
-	[ <lColor		: COLOR>		<nColor> ] ;
-	[ <lDuplex		: DUPLEX>		<nDuplex> ] ;
-	[ <lCollate		: COLLATE>		<nCollate> ] ;
-	[ <Preview 		: PREVIEW> ] ;
-   [ <NoSaveButton 		: NOSAVEBUTTON> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <lCopies      : COPIES>      <nCopies> ] ;
+   [ <lDefaultSource   : DEFAULTSOURCE>   <nDefaultSource> ] ;
+   [ <lQuality      : QUALITY>      <nQuality> ] ;
+   [ <lColor      : COLOR>      <nColor> ] ;
+   [ <lDuplex      : DUPLEX>      <nDuplex> ] ;
+   [ <lCollate      : COLLATE>      <nCollate> ] ;
+   [ <Preview       : PREVIEW> ] ;
+   [ <NoSaveButton       : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
-	_HMG_SYSDATA \[ 375 \] := GetDefaultPrinter() ;;
-	_HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
-		_HMG_SYSDATA \[ 375 \] , ;
-		if ( <.lOrientation.>	, <nOrientation>	, -999 ) , ;
-		if ( <.lPaperSize.>	, <nPaperSize>		, -999 ) , ;
-		if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , ;
-		if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ) , ;
-		if ( <.lCopies.>	, <nCopies>		, -999 ) , ;
-		if ( <.lDefaultSource.>	, <nDefaultSource>	, -999 ) , ;
-		if ( <.lQuality.>	, <nQuality>		, -999 ) , ;
-		if ( <.lColor.>		, <nColor>		, -999 ) , ;
-		if ( <.lDuplex.>	, <nDuplex>		, -999 ) , ;
-		if ( <.lCollate.>	, <nCollate>		, -999 ) ;
-	) ;;
-	_HMG_SYSDATA \[ 513 \] := .f. ;;
-	_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
-	_HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
-	_HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
-	_HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
+   _HMG_SYSDATA \[ 375 \] := GetDefaultPrinter() ;;
+   _HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
+      _HMG_SYSDATA \[ 375 \] , ;
+      if ( <.lOrientation.>   , <nOrientation>   , -999 ) , ;
+      if ( <.lPaperSize.>   , <nPaperSize>      , -999 ) , ;
+      if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , ;
+      if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ) , ;
+      if ( <.lCopies.>   , <nCopies>      , -999 ) , ;
+      if ( <.lDefaultSource.>   , <nDefaultSource>   , -999 ) , ;
+      if ( <.lQuality.>   , <nQuality>      , -999 ) , ;
+      if ( <.lColor.>      , <nColor>      , -999 ) , ;
+      if ( <.lDuplex.>   , <nDuplex>      , -999 ) , ;
+      if ( <.lCollate.>   , <nCollate>      , -999 ) ;
+   ) ;;
+   _HMG_SYSDATA \[ 513 \] := .f. ;;
+   _HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
+   _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
+   _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
+   _HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 505 \] := <.NoSaveButton.> ;;
    _HMG_SYSDATA \[ 506 \] := HMG_IsNotDefParam ( <DialogFileName> , NIL );;
    _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
    _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
-	_hmg_printer_InitUserMessages() ;;
-	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
-	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
-
+   _hmg_printer_InitUserMessages() ;;
+   _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
+   _HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
+   _HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 #xcommand SELECT PRINTER DEFAULT TO <lSuccess> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
-	[ <lCopies		: COPIES>		<nCopies> ] ;
-	[ <lDefaultSource	: DEFAULTSOURCE>	<nDefaultSource> ] ;
-	[ <lQuality		: QUALITY>		<nQuality> ] ;
-	[ <lColor		: COLOR>		<nColor> ] ;
-	[ <lDuplex		: DUPLEX>		<nDuplex> ] ;
-	[ <lCollate		: COLLATE>		<nCollate> ] ;
-	[ <Preview 		: PREVIEW> ] ;
-   [ <NoSaveButton 		: NOSAVEBUTTON> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
+   [ <lCopies      : COPIES>      <nCopies> ] ;
+   [ <lDefaultSource   : DEFAULTSOURCE>   <nDefaultSource> ] ;
+   [ <lQuality      : QUALITY>      <nQuality> ] ;
+   [ <lColor      : COLOR>      <nColor> ] ;
+   [ <lDuplex      : DUPLEX>      <nDuplex> ] ;
+   [ <lCollate      : COLLATE>      <nCollate> ] ;
+   [ <Preview       : PREVIEW> ] ;
+   [ <NoSaveButton       : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
-	_HMG_SYSDATA \[ 375 \] := GetDefaultPrinter() ;;
-	_HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
-		_HMG_SYSDATA \[ 375 \] , ;
-		if ( <.lOrientation.>	, <nOrientation>	, -999 ) , ;
-		if ( <.lPaperSize.>	, <nPaperSize>		, -999 ) , ;
-		if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , ;
-		if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ) , ;
-		if ( <.lCopies.>	, <nCopies>		, -999 ) , ;
-		if ( <.lDefaultSource.>	, <nDefaultSource>	, -999 ) , ;
-		if ( <.lQuality.>	, <nQuality>		, -999 ) , ;
-		if ( <.lColor.>		, <nColor>		, -999 ) , ;
-		if ( <.lDuplex.>	, <nDuplex>		, -999 ) , ;
-		if ( <.lCollate.>	, <nCollate>		, -999 ) ;
-	) ;;
-	_HMG_SYSDATA \[ 513 \] := .f. ;;
-	_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
-	_HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
-	_HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
-	<lSuccess> := if ( _HMG_SYSDATA \[ 374 \] <> 0 , .T. , .F. ) ;;
-	_HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
+   _HMG_SYSDATA \[ 375 \] := GetDefaultPrinter() ;;
+   _HMG_SYSDATA \[ 373 \] := _HMG_PRINTER_SetPrinterProperties ( ;
+      _HMG_SYSDATA \[ 375 \] , ;
+      if ( <.lOrientation.>   , <nOrientation>   , -999 ) , ;
+      if ( <.lPaperSize.>   , <nPaperSize>      , -999 ) , ;
+      if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , ;
+      if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ) , ;
+      if ( <.lCopies.>   , <nCopies>      , -999 ) , ;
+      if ( <.lDefaultSource.>   , <nDefaultSource>   , -999 ) , ;
+      if ( <.lQuality.>   , <nQuality>      , -999 ) , ;
+      if ( <.lColor.>      , <nColor>      , -999 ) , ;
+      if ( <.lDuplex.>   , <nDuplex>      , -999 ) , ;
+      if ( <.lCollate.>   , <nCollate>      , -999 ) ;
+   ) ;;
+   _HMG_SYSDATA \[ 513 \] := .f. ;;
+   _HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\] ;;
+   _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
+   _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
+   <lSuccess> := if ( _HMG_SYSDATA \[ 374 \] <> 0 , .T. , .F. ) ;;
+   _HMG_SYSDATA \[ 378 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 505 \] := <.NoSaveButton.> ;;
    _HMG_SYSDATA \[ 506 \] := HMG_IsNotDefParam ( <DialogFileName> , NIL );;
    _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
    _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
    _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
-	_hmg_printer_InitUserMessages() ;;
-	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
-	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
-
+   _hmg_printer_InitUserMessages() ;;
+   _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
+   _HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
+   _HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 #xcommand SELECT PRINTER DIALOG ;
-	[ <Preview  : PREVIEW> ] ;
+   [ <Preview  : PREVIEW> ] ;
    [ <NoSaveButton   : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
 _HMG_SYSDATA \[ 513 \] := .f. ;;
-_HMG_SYSDATA \[ 373 \]	= _HMG_PRINTER_PrintDialog()	;;
-_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\]		;;
-_HMG_SYSDATA \[ 375 \] := _HMG_SYSDATA \[ 373 \] \[2\]	;;
+_HMG_SYSDATA \[ 373 \]   = _HMG_PRINTER_PrintDialog()   ;;
+_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\]      ;;
+_HMG_SYSDATA \[ 375 \] := _HMG_SYSDATA \[ 373 \] \[2\]   ;;
 _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
 _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
-_HMG_SYSDATA \[ 378 \] := <.Preview.>				;;
+_HMG_SYSDATA \[ 378 \] := <.Preview.>            ;;
 _HMG_SYSDATA \[ 505 \] := <.NoSaveButton.> ;;
 _HMG_SYSDATA \[ 506 \] := HMG_IsNotDefParam ( <DialogFileName> , NIL );;
 _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
-_hmg_printer_InitUserMessages()					;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
+_hmg_printer_InitUserMessages()               ;;
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
 
 #xcommand SELECT PRINTER DIALOG TO <lSuccess> ;
-	[ <Preview  : PREVIEW> ] ;
+   [ <Preview  : PREVIEW> ] ;
    [ <NoSaveButton   : NOSAVEBUTTON> ] ;
    [ DIALOGFILENAME <DialogFileName> ] ;
    [ SAVEAS <FullFileName> ] ;
 => ;
 _HMG_SYSDATA \[ 513 \] := .f. ;;
-_HMG_SYSDATA \[ 373 \]	= _HMG_PRINTER_PrintDialog()	;;
-_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\]		;;
-_HMG_SYSDATA \[ 375 \] := _HMG_SYSDATA \[ 373 \] \[2\]	;;
+_HMG_SYSDATA \[ 373 \]   = _HMG_PRINTER_PrintDialog()   ;;
+_HMG_SYSDATA \[ 374 \] := _HMG_SYSDATA \[ 373 \] \[1\]      ;;
+_HMG_SYSDATA \[ 375 \] := _HMG_SYSDATA \[ 373 \] \[2\]   ;;
 _HMG_SYSDATA \[ 376 \] := _HMG_SYSDATA \[ 373 \] \[3\] ;;
 _HMG_SYSDATA \[ 377 \] := _HMG_SYSDATA \[ 373 \] \[4\] ;;
 <lSuccess> := if ( _HMG_SYSDATA \[ 374 \] <> 0 , .T. , .F. ) ;;
@@ -295,37 +290,32 @@ _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
 _hmg_printer_InitUserMessages() ;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
-
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
 
 #xcommand SELECT PRINTER PDF <cPDFFile> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
    [ <lLog            : LOG> ] ;
 => ;
    _HMG_SYSDATA \[ 513 \] := .t. ;;
-	_HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> ) 
+   _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>   , <nOrientation>   , 1 ) , if ( <.lPaperSize.>   , <nPaperSize>      , 1 ) , if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ), <.lLog.> )
 
 #xcommand SELECT PRINTER PDF <cPDFFile> TO <lSuccess> ;
-	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
-	[ <lPaperSize		: PAPERSIZE>		<nPaperSize> ] ;
-	[ <lPaperLength 	: PAPERLENGTH>		<nPaperLength> ] ;
-	[ <lPaperWidth		: PAPERWIDTH>		<nPaperWidth> ] ;
+   [ <lOrientation    : ORIENTATION>      <nOrientation> ] ;
+   [ <lPaperSize      : PAPERSIZE>      <nPaperSize> ] ;
+   [ <lPaperLength    : PAPERLENGTH>      <nPaperLength> ] ;
+   [ <lPaperWidth      : PAPERWIDTH>      <nPaperWidth> ] ;
    [ <lLog            : LOG> ] ;
 => ;
    _HMG_SYSDATA \[ 513 \] := .t. ;;
-	<lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> ) 
-
-
-
+   <lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>   , <nOrientation>   , 1 ) , if ( <.lPaperSize.>   , <nPaperSize>      , 1 ) , if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ), <.lLog.> )
 
 #xcommand START PRINTDOC [ NAME <name> ] ;
 => ;
 iif( _HMG_SYSDATA \[ 513 \], _hmg_hpdf_startdoc(), ( _hmg_printer_setjobname( <name> ) , if ( _HMG_SYSDATA \[ 378 \] , ( _HMG_SYSDATA \[ 380 \] := 0 , _HMG_SYSDATA \[ 372 \] := _HMG_SYSDATA \[ 374 \] ) ,  OpenPrinterGetJobID() := _HMG_PRINTER_StartDoc ( _HMG_SYSDATA \[ 374 \] , _HMG_SYSDATA \[ 358 \] ) ) )) ;;
 _HMG_SYSDATA \[ 516 \] := ""
-
 
 #xcommand START PRINTDOC [ NAME <name> ] STOREJOBDATA <aJobData>;
 => ;
@@ -333,14 +323,11 @@ iif( _HMG_SYSDATA \[ 513 \], _hmg_hpdf_startdoc(), ( _hmg_printer_setjobname( <n
 _HMG_SYSDATA \[ 516 \] := <"aJobData">;;
 <aJobData> := OpenPrinterGetJobData()
 
-
-
 #xcommand START PRINTPAGE ;
-=> iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_startpage(),IF ( _HMG_SYSDATA \[ 378 \],;  
+=> iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_startpage(),IF ( _HMG_SYSDATA \[ 378 \],;
       ( _HMG_SYSDATA \[ 374 \] := _HMG_PRINTER_STARTPAGE_PREVIEW ( _HMG_SYSDATA \[ 372 \] , GetTempFolder() + _HMG_SYSDATA \[ 379 \] + "_hmg_print_preview_" +  alltrim(strzero(++_HMG_SYSDATA \[ 380 \],4)) + ".Emf" ) ,;
-        _HMG_PrinterMetaFileDC := _HMG_SYSDATA \[ 374 \] ),; 
+        _HMG_PrinterMetaFileDC := _HMG_SYSDATA \[ 374 \] ),;
       ( _HMG_PrinterMetaFileDC := 0, _HMG_PRINTER_StartPage ( _HMG_SYSDATA \[ 374 \] ) ) )  )
-
 
 #xcommand END PRINTPAGE ;
 => ;
@@ -354,71 +341,67 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_enddoc(), if ( _HMG_SYSDATA \[ 378 \] , _H
 => ;
 iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_SYSDATA \[ 374 \] ))
 
-
-
 #xtranslate @ <Row> , <Col> PRINT [ DATA ] <cText> ;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT> ] ;
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT> ] ;
    [ ANGLE <nAngleInDegrees> ] ;
-	=> ;
-   iif( _HMG_SYSDATA \[ 513 \],; 
-        _HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),; 
+   => ;
+   iif( _HMG_SYSDATA \[ 513 \],;
+        _HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),;
         _HMG_PRINTER_H_PRINT ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> , <nAngleInDegrees> ) )
 
 #xtranslate @ <Row> , <Col> PRINT [ DATA ] <cText> ;
-	TO <ToRow> , <ToCol> ;
-	[ <lfont : FONT> <cFontName> ] ;
-	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <align:CENTER,RIGHT> ] ;
-	=> ;
+   TO <ToRow> , <ToCol> ;
+   [ <lfont : FONT> <cFontName> ] ;
+   [ <lsize : SIZE> <nFontSize> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <align:CENTER,RIGHT> ] ;
+   => ;
    iif( _HMG_SYSDATA \[ 513 \],;
-        _HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),; 
+        _HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),;
         _HMG_PRINTER_H_MULTILINE_PRINT ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) )
 
 #xtranslate @ <nRow> , <nCol> PRINT IMAGE <cImage> ;
-	WIDTH <nWidth> ;
-	HEIGHT <nheight> ;
-	[ <stretch : STRETCH> ] ;
+   WIDTH <nWidth> ;
+   HEIGHT <nheight> ;
+   [ <stretch : STRETCH> ] ;
    [ <transparent: TRANSPARENT> ] ;
    [ TRANSPARENTCOLOR <aTransparentColor> ];
    [ TYPE <cType:JPG,PNG> ] ;
-	=> ;
+   => ;
    iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_IMAGE ( <cImage> , <nRow> , <nCol> , <nheight> , <nWidth> , <.stretch.>, <"cType"> ), _HMG_PRINTER_H_IMAGE ( _HMG_SYSDATA \[ 374 \] , <cImage> , <nRow> , <nCol> , <nheight> , <nWidth> , <.stretch.> , <.transparent.> , <aTransparentColor> ) )
 
 #xtranslate @ <Row> , <Col> PRINT LINE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	=> ;
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   => ;
    iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_LINE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> ), _HMG_PRINTER_H_LINE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> ) )
 
 #xtranslate @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ]; 
-	=> ;
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lfilled: FILLED> ];
+   => ;
    iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_RECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>), _HMG_PRINTER_H_RECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>) )
 
 #xtranslate @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
-	[ <lwidth : PENWIDTH> <Width> ] ;
-	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ]; 
-	ROUNDED ;
+   [ <lwidth : PENWIDTH> <Width> ] ;
+   [ <lcolor : COLOR> <aColor> ] ;
+   [ <lfilled: FILLED> ];
+   ROUNDED ;
    [ CURVE <nCurve> ];
-	=> ;
-	iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> ), _HMG_PRINTER_H_ROUNDRECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.> ) )
-   
-   
+   => ;
+   iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> ), _HMG_PRINTER_H_ROUNDRECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.> ) )
 
 ///////////////////////////////////////////////////////////////////////////////
 // PRINTER CONFIGURATION CONSTANTS
@@ -426,8 +409,8 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 
 * Collate
 
-#define PRINTER_COLLATE_TRUE	1
-#define PRINTER_COLLATE_FALSE	0
+#define PRINTER_COLLATE_TRUE   1
+#define PRINTER_COLLATE_FALSE   0
 
 * Source
 
@@ -447,14 +430,14 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 #define PRINTER_BIN_CASSETTE      14
 #define PRINTER_BIN_FORMSOURCE    15
 #define PRINTER_BIN_LAST          DMBIN_FORMSOURCE
-#define PRINTER_BIN_USER          256    
+#define PRINTER_BIN_USER          256
 
 * Orientation
 
 #define PRINTER_ORIENT_PORTRAIT   1
 #define PRINTER_ORIENT_LANDSCAPE  2
 
-* Color 
+* Color
 
 #define PRINTER_COLOR_MONOCHROME  1
 #define PRINTER_COLOR_COLOR       2
@@ -596,8 +579,6 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 
 #define PRINTER_PAPER_USER                256
 
-
-
 #define JOB_STATUS_PAUSED              0x00000001
 #define JOB_STATUS_ERROR               0x00000002
 #define JOB_STATUS_DELETING            0x00000004
@@ -611,7 +592,6 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 #define JOB_STATUS_USER_INTERVENTION   0x00000400
 #define JOB_STATUS_RESTART             0x00000800
 #define JOB_STATUS_COMPLETE            0x00001000
-
 
 #define PRINTER_STATUS_OK                    0
 #define PRINTER_STATUS_PAUSED                0x00000001

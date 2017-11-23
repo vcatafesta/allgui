@@ -832,4 +832,3 @@ PROCEDURE RECLASIFICAR()
    Win_1.grid_1.Refresh
 
    RETURN
-

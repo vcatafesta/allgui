@@ -1103,4 +1103,3 @@ FUNCTION GETNumFromTextSP(Text,i)
    s := Transform ( Val(s) , _HMG_SYSDATA [  9 ] [i] )
 
    RETURN Val(s)
-

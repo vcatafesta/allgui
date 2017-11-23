@@ -34,7 +34,6 @@ typedef struct  _HPDF_MPool_Node_Rec {
     HPDF_MPool_Node  next_node;
 } HPDF_MPool_Node_Rec;
 
-
 typedef struct  _HPDF_MMgr_Rec  *HPDF_MMgr;
 
 typedef struct  _HPDF_MMgr_Rec {
@@ -50,7 +49,6 @@ typedef struct  _HPDF_MMgr_Rec {
 #endif
 } HPDF_MMgr_Rec;
 
-
 /*  HPDF_mpool_new
  *
  *  create new HPDF_mpool object. when memory allocation goes wrong,
@@ -63,15 +61,12 @@ HPDF_MMgr_New  (HPDF_Error       error,
                 HPDF_Alloc_Func  alloc_fn,
                 HPDF_Free_Func   free_fn);
 
-
 void
 HPDF_MMgr_Free  (HPDF_MMgr  mmgr);
-
 
 void*
 HPDF_GetMem  (HPDF_MMgr  mmgr,
               HPDF_UINT  size);
-
 
 void
 HPDF_FreeMem  (HPDF_MMgr  mmgr,
@@ -82,4 +77,3 @@ HPDF_FreeMem  (HPDF_MMgr  mmgr,
 #endif /* __cplusplus */
 
 #endif /* _HPDF_MMGR_H */
-

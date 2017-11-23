@@ -99,4 +99,3 @@ STATIC PROCEDURE QuickExit
    QUIT
 
    RETURN
-

@@ -67,4 +67,3 @@ FUNCTION sendmail(email,nombre,cServer)
 
    #define NO_SAMPLE
    #include "TSmtpClient.prg"
-

@@ -943,4 +943,3 @@ FUNCTION GetSplitBoxHEIGHT (cParentForm)
    GetWindowRect (hWnd, aPos)
 
    RETURN (aPos[4] - aPos[2])
-

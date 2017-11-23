@@ -137,4 +137,3 @@ STATIC FUNCTION callback( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

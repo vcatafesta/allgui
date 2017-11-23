@@ -716,4 +716,3 @@ HB_FUNC( HWG_RELEASEDISPATCH )
 #endif
    pObj->lpVtbl->Release( pObj );
 }
-

@@ -71,4 +71,3 @@ HB_FUNC( INSERT_ALT_KEY )
    /*
    * EOF
    */
-

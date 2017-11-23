@@ -76,4 +76,3 @@ FUNCTION _grid2pdf( cGrid, cWindow )
    _gridpdf( cGrid, cWindow, cFileName, , , , , .f. )
 
    RETURN NIL
-

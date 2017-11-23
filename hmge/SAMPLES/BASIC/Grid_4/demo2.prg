@@ -138,4 +138,3 @@ PROCEDURE Test_Choice( nVal )
    MsgInfo( cText )
 
    RETURN
-

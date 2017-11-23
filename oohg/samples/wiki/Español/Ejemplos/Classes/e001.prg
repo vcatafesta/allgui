@@ -71,7 +71,7 @@ FUNCTION Main
 
 CLASS MiGrid FROM TGrid
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
 ENDCLASS
 
@@ -109,4 +109,3 @@ METHOD Events_Notify( wParam, lParam ) CLASS MiGrid
    /*
    * EOF
    */
-

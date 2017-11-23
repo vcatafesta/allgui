@@ -85,4 +85,3 @@ FUNCTION IpLostFocus()
    hwg_Msginfo("LostFocus")
 
    RETURN (NIL)
-

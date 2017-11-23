@@ -94,4 +94,3 @@ FUNCTION __GETA( bGetArray, cVarName, cPicture, bValid, bWhen, aIndex )
    oGet:PostBlock := bValid
 
    RETURN oGet
-

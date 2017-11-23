@@ -17,20 +17,20 @@ CLASS VAR winclass   INIT "BUTTON"
    DATA bSetGet
    DATA value
 
-METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
+   METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor,bGFocus )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Refresh()
+   METHOD Refresh()
 
-METHOD SetValue( lValue )  INLINE hwg_CheckButton( ::handle,lValue )
+   METHOD SetValue( lValue )  INLINE hwg_CheckButton( ::handle,lValue )
 
-METHOD GetValue()  INLINE ::value := hwg_IsButtonChecked( ::handle )
+   METHOD GetValue()  INLINE ::value := hwg_IsButtonChecked( ::handle )
 
 ENDCLASS
 
@@ -137,4 +137,3 @@ STATIC FUNCTION __When( oCtrl )
    ENDIF
 
    RETURN .T.
-

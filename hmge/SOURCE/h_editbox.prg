@@ -323,4 +323,3 @@ FUNCTION InitDialogEdit( ParentName, ControlHandle, k )
    ENDIF
 
    RETURN NIL
-

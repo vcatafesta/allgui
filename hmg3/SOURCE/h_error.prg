@@ -169,4 +169,3 @@ FUNCTION HMG_GetCompileVersion64 ( HMG_cPath )
    ENDIF
 
    RETURN cVersion
-

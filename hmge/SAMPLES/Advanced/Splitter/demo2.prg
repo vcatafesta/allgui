@@ -85,4 +85,3 @@ FUNCTION App_OnEvents$_
    end
 
    RETURN nRes
-

@@ -46,4 +46,3 @@ PROCEDURE CloseTable()
    CLOSE CLIENTES
 
    RETURN
-

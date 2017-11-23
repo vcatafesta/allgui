@@ -357,4 +357,3 @@ PROCEDURE Proc_EFFECT (nEffect, nIndex)
    PRIVATE BT_Kernel3x3Filter_42 := {  2,  0, -2,  2,  1, -2,  2,  0, -2,      1,    0 } //  WEST
 
    */
-

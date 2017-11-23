@@ -118,4 +118,3 @@ FUNCTION Proc_Create_Logo
    BT_DeleteDC (BTstruct)
 
    RETURN hBitmap
-

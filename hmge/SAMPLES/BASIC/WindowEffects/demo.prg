@@ -143,4 +143,3 @@ PROCEDURE WindowEfect( cWin, nEvento, nEfecto )
    NEXT
 
    RETURN
-

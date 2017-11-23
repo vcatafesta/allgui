@@ -872,4 +872,3 @@ HB_FUNC( GETSENTMSG )
 }
 
 #pragma ENDDUMP
-

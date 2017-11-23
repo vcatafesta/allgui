@@ -42,4 +42,3 @@ PROCEDURE Main ()
    ACTIVATE WINDOW oWnd
 
    RETURN
-

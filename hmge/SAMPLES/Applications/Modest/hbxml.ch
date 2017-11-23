@@ -52,7 +52,6 @@
  *
  */
 
-
 #ifndef HB_XML_CH
 #define HB_XML_CH
 

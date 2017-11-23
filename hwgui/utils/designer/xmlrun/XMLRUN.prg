@@ -578,4 +578,3 @@ FUNCTION infstr2d(s) && informix string to date
    mm:=str( (at(subst(s,4,3),"JanFebMarAprMeiJunJulAgtSepOktNopDes")+2)/3,2)
 
    RETURN ctod(dd+mm+yy)
-

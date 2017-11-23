@@ -40,37 +40,37 @@ CLASS VAR winclass INIT "RichEdit20A"
 
    DATA bChange
 
-METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip,;
       tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD onGotFocus()
+   METHOD onGotFocus()
 
-METHOD onLostFocus()
+   METHOD onLostFocus()
 
-METHOD When()
+   METHOD When()
 
-METHOD Valid()
+   METHOD Valid()
 
-METHOD UpdatePos( )
+   METHOD UpdatePos( )
 
-METHOD onChange( )
+   METHOD onChange( )
 
-METHOD ReadOnly( lreadOnly ) SETGET
+   METHOD ReadOnly( lreadOnly ) SETGET
 
-METHOD SetColor( tColor, bColor, lRedraw )
+   METHOD SetColor( tColor, bColor, lRedraw )
 
-METHOD Savefile( cFile )
+   METHOD Savefile( cFile )
 
-METHOD OpenFile( cFile )
+   METHOD OpenFile( cFile )
 
-METHOD Print()
+   METHOD Print()
 
 ENDCLASS
 
@@ -355,4 +355,3 @@ METHOD Print( )  CLASS HRichEdit
 
    Return -1
    */
-

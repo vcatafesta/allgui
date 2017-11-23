@@ -80,7 +80,6 @@
       <helpid>, <.invisible.>, <.notabstop.>, <.sort.> , <.bold.>, <.italic.>, <.underline.>, <.strikeout.> ,;
       <backcolor> , <fontcolor> , <.multiselect.> , <.dragitems.>, <.multicolumn.>, <.multitabs.>, <aWidth>, <nId> )
 
-
 #command REDEFINE LISTBOX <name> ;
         ID <nId>;
       [ <dummy1: OF, PARENT, DIALOG> <parent> ] ;
@@ -113,7 +112,6 @@
       <fontname>, <fontsize>, <tooltip>, <{change}>, <{dblclick}>, <{gotfocus}>, <{lostfocus}>, .f., ;
       <helpid>, <.invisible.>, <.notabstop.>, <.sort.> , <.bold.>, <.italic.>, <.underline.>, <.strikeout.> ,;
       <backcolor> , <fontcolor> , <.multiselect.> , <.dragitems.>, <.multicolumn.>, <.multitabs.>, <aWidth>, <nId> )
-
 
 // SPLITBOX VERSION
 
@@ -153,7 +151,6 @@
       <.invisible.>, <.notabstop.>, <.sort.> ,<.bold.>, ;
       <.italic.>, <.underline.>, <.strikeout.> , <backcolor> , ;
       <fontcolor> , <.multiselect.> , <.dragitems.>, <.multicolumn.>, <.multitabs.>, <aWidth>, 0 )
-
 
 // CHECKED LISTBOX
 
@@ -221,7 +218,6 @@
       <helpid>, <.invisible.>, <.notabstop.>, <.sort.> , <.bold.>, <.italic.>, <.underline.>, <.strikeout.> ,;
       <backcolor> , <fontcolor> , <.multiselect.> , <aCheck>, <nItemHeight>, <nId> )
 
-
 // SPLITBOX VERSION
 
 #xcommand CHECKLISTBOX <name> ;
@@ -258,7 +254,6 @@
       <.invisible.>, <.notabstop.>, <.sort.> ,<.bold.>, ;
       <.italic.>, <.underline.>, <.strikeout.> , <backcolor> , ;
       <fontcolor> , <.multiselect.> , <aCheck>, <nItemHeight>, 0 )
-
 
 /*
  * Listbox messages

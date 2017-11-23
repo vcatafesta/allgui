@@ -100,7 +100,6 @@ FUNCTION TestAdo(met)
       RETURN NIL
 
       /*
-
       static function ConnectToAccess()
 
       local lConnect := .f.
@@ -122,4 +121,3 @@ FUNCTION TestAdo(met)
 
       Return lConnect
       */
-

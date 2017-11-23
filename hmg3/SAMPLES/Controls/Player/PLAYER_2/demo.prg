@@ -70,4 +70,3 @@ PROCEDURE Busca_Music()
    Form_1.Player_1.Open ( GetFile( { { 'Mp3 Files' , '*.mp3'} } , '' , '' , .f. , .f. ) )
 
    RETURN NIL
-

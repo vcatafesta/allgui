@@ -109,4 +109,3 @@ STATIC FUNCTION _GetFormHandle ( xParentForm, cParentFormName )
    ENDIF
 
    RETURN xParentForm
-

@@ -17,7 +17,7 @@
 
 #define lFBDebug .F.
 
-#ifndef TRUE     
+#ifndef TRUE
 # define TRUE  .T.
 # define FALSE .F.
 # define YES   .T.
@@ -30,13 +30,13 @@
 
 #define NTrim( n )   LTrim( TRAN( n,"999,999,999,999,999,999,999" ) )
 #define Crocked(x1)  ( ">" + AnyToStr( x1 ) + "<" )
-#define IsInRang( xVal, xMin, xMax ) ( xVal >= xMin .AND. xVal <= xMax ) 
+#define IsInRang( xVal, xMin, xMax ) ( xVal >= xMin .AND. xVal <= xMax )
 #define ISNArr( x )  ( ISARRY(x) .AND. LEN(x) == 2  .AND. ISCHAR( x[1] ) )
 #define IsData( n1)  ( n1 >= 32 .AND. n1 <= 256)   // determine a key is data
 #define Lecced( x1 ) ( ">" + AnyToStr( x1 ) + "<" )
 
 *
-*  Bunun için bak (ÝNCELE) : SetCurrentFolder() 
+*  Bunun için bak (ÝNCELE) : SetCurrentFolder()
 *
 #define CurrDisk() ( LEFT( GetCurrentFolder(), 1 ) ) // Attention ! No ":", only letter.
 
@@ -44,7 +44,7 @@
 #define nMaxTablCo  25   // Maximum openable Table count
 #define nMaxPageCo  10   // Azami sayfa sayýsý ( == tarif edilmiþ düðme sayýsý )
 #define nMinBtWdt   88   // Asgari düðme geniþliði ( vasati 11 karakter için )
-#define nNavBtWdt   21   // Yön düðmeleri geniþliði 
+#define nNavBtWdt   21   // Yön düðmeleri geniþliði
 
 * #define nOpTableCo LEN( aOpTables ) // Açýk "table" sayýsý
 
@@ -52,14 +52,13 @@
 *   nMinMWWid : Ana pencerenin asgari eni; 3 asgari düðmelik.
 *
 #define nMinMWWid ( nMinBtWdt + 2 ) * 3 + nPrvBtLen + nNxtBtLen + 1 // Ana pencerenin asgari eni
-#define nMinMWHig ( nMainWHig / 3 ) // Ana pencerenin asgari yüksekliði 
+#define nMinMWHig ( nMainWHig / 3 ) // Ana pencerenin asgari yüksekliði
 
 #define Name2Num( cName )  ( VAL( RIGHT( cName, 3 ) ) )
 #define Num2Name( c1, n1 ) ( c1 + STRZERO( n1, 3 ) )
 
 #define Strg2Hex( cStrng ) ;                  // Convert a string to hex
         ( SEVAL( cStrng, '', ,{ | c1, i1, cTrg | cTrg += NTOC( ASC( c1 ), 16, 2, "0" ) } ) )
-
 
    MEMV cInTFName
 

@@ -46,4 +46,3 @@ FUNCTION Main
    main.activate
 
    RETURN NIL
-

@@ -402,7 +402,6 @@ PROCEDURE Acercade()
 PROCEDURE configuracion()
 
    LOCAL cCfg   := '.\edt.ini'
-
    cLastOpen := "" ; cLastSave := ""
    nTop :=0 ; nLeft := 0 ; nWidth := 94 ; nHeight := 40
    cFontName   := 'Arial'
@@ -546,4 +545,3 @@ FUNCTION _SetFontCharset ( ControlName, ParentForm , Value  )
    _HMG_aControlFontHandle [i] := _SetFont ( h , n , s , ab , ai , au , as , 0, Value )
 
    RETURN NIL
-

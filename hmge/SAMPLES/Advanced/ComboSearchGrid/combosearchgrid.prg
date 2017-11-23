@@ -395,7 +395,6 @@ FUNCTION _HMG_CSG_QueryItem
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
       STATIC PROC _CSGItemSelected( cParentName, cTxBName, lTab )
-
          LOCAL lOk := .f.
          LOCAL nListValue
          LOCAL cListItem
@@ -464,7 +463,6 @@ FUNCTION _HMG_CSG_QueryItem
                *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                STATIC PROC _CSGDoEscKey(cParentName, cCSBoxName)
-
                   LOCAL lOk := .f.
                   LOCAL cQStr
 
@@ -629,4 +627,3 @@ STATIC FUNCTION _HMG_CSG_C2SQL( Value )
    ENDCASE
 
    RETURN cValue
-

@@ -450,4 +450,3 @@ FUNCTION MsgD( cV1, cV2, cV3, cV4, cV5, cV6, cV7, cV8, cV9, cV10 )
    hwg_Msginfo(LEFT(cVar, LEN(cVar) - 1))
 
    RETURN NIL
-

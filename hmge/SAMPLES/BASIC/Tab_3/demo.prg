@@ -134,4 +134,3 @@ STATIC FUNCTION EnableTab( nPage )
    ENDIF
 
    RETURN NIL
-

@@ -28,23 +28,15 @@ CLASS Config
    VAR aimp
    VAR data
 
-METHOD init
-
-METHOD write
-
-METHOD findHeader
-
-METHOD findDefault
-
-METHOD loadSection
-
-METHOD convertToInclude
-
-METHOD loadVars
-
-METHOD insertVars
-
-METHOD envVars
+   METHOD init
+   METHOD write
+   METHOD findHeader
+   METHOD findDefault
+   METHOD loadSection
+   METHOD convertToInclude
+   METHOD loadVars
+   METHOD insertVars
+   METHOD envVars
 
 ENDCLASS
 
@@ -317,4 +309,3 @@ FUNCTION cFileNoExt( cPathMask )
    hb_FNameSplit( cPathMask, , @cName )
 
    RETURN cName
-

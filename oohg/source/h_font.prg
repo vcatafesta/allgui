@@ -95,4 +95,3 @@ FUNCTION _SetFontUnderline ( ControlName, ParentForm , Value  )
 FUNCTION _SetFontStrikeOut ( ControlName, ParentForm , Value  )
 
    RETURN GetControlObject( ControlName, ParentForm ):SetFont( , , , , , Value )
-

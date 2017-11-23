@@ -231,4 +231,3 @@ STATIC PROCEDURE EXCEL3()
    MsgInfo("Quedo grabado como: PRU.XLS"+chr(13)+"En: "+GetCurrentFolder())
 
    RETURN
-

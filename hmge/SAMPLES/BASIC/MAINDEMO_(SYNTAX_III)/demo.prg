@@ -1040,4 +1040,3 @@ PROCEDURE Child_CLick
    ACTIVATE WINDOW ChildTest
 
    RETURN
-

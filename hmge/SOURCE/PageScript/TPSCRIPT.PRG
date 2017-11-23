@@ -93,7 +93,7 @@ CLASS TPageScript
    VAR    lClipper                     // Indicates if calls to TextOut and TextBox should be compatible with PageScript for Clipper
    VAR    aDocInfo                     // Print job info array
 
-METHOD Buffer2String                // Internal function. Returns a string from a buffer
+   METHOD Buffer2String                // Internal function. Returns a string from a buffer
 
    EXPORTED:
 
@@ -101,255 +101,143 @@ METHOD Buffer2String                // Internal function. Returns a string from 
    VAR    nError                       // Error condition. 0 = OK
    VAR    nUnit                        // Current UNIT of measurment
 
-METHOD Init                         // Class initialization
+   METHOD Init                         // Class initialization
 
-METHOD Abort                        // Abort the current document
-
-METHOD BarCode                      // Print a barcode in either 3 of 9 or 128B
-
-METHOD QRCode             // Print QRCode
-
-METHOD begindoc                     // Starts a new WINDOWS print job
-
-METHOD BeginDocEx                   // Starts a new WINDOWS print job, no parameters
-
-METHOD BeginEmuDoc                  // Starts a new EMULATION print job
-
-METHOD BeginRawDoc                  // Starts a new RAW print job
-
-METHOD Bitmap                       // Draw a bitmap on the document. .BMP, .JPG and .GIF files are supported.
-
-METHOD Ellipse                      // Draw an ellipse
-
-METHOD EllipseEx                    // Draw an ellipse
-
-METHOD EndDoc                       // Ends a WINDOWS print job
-
-METHOD EndEmuDoc                    // Ends an EMULATION print job
-
-METHOD EndRawDoc                    // Ends a RAW print job
-
-METHOD FindPrinter                  // Search for a printer name and returns its position within the array
-
-METHOD Frame                        // Draw a frame
-
-METHOD FrameEx                      // Draw a frame
+   METHOD Abort                        // Abort the current document
+   METHOD BarCode                      // Print a barcode in either 3 of 9 or 128B
+   METHOD QRCode             // Print QRCode
+   METHOD begindoc                     // Starts a new WINDOWS print job
+   METHOD BeginDocEx                   // Starts a new WINDOWS print job, no parameters
+   METHOD BeginEmuDoc                  // Starts a new EMULATION print job
+   METHOD BeginRawDoc                  // Starts a new RAW print job
+   METHOD Bitmap                       // Draw a bitmap on the document. .BMP, .JPG and .GIF files are supported.
+   METHOD Ellipse                      // Draw an ellipse
+   METHOD EllipseEx                    // Draw an ellipse
+   METHOD EndDoc                       // Ends a WINDOWS print job
+   METHOD EndEmuDoc                    // Ends an EMULATION print job
+   METHOD EndRawDoc                    // Ends a RAW print job
+   METHOD FindPrinter                  // Search for a printer name and returns its position within the array
+   METHOD Frame                        // Draw a frame
+   METHOD FrameEx                      // Draw a frame
 
    // Gets
+   METHOD GetAsciiToAnsi               // Retreive the current conversion value
+   METHOD GetBorderColor               // Gets the current border color
+   METHOD GetBorderThickness           // Gets the border thickness
+   METHOD GetCoorSystem                // Gets the actual coordinate system
+   METHOD GetCopies                    // Gets the number of copies
+   METHOD GetCPI                       // Gets the current CPI
+   METHOD GetDecimalSep                // Gets the current Ascii to Ansi flag
+   METHOD GetDefaultPrinter            // Gets the current printer number
+   METHOD GetDuplex                    // Gets the current Duplex mode
+   METHOD GetFillColor                 // Gets the current fill color
+   METHOD GetFillPattern               // Gets the current fill pattern
+   METHOD GetFonts                     // Returns an array with all available font names
+   METHOD GetFontAngle                 // Gets the current font angle
+   METHOD GetFontCount                 // Gets the count of available fonts
+   METHOD GetFontName                  // Gets the current font name
+   METHOD GetFontNames                 // Returns the name of a font from its index position
+   METHOD GetFontJustify               // Gets the current text justification
+   METHOD GetFontStyle                 // Gets the current font style
+   METHOD GetFontSize                  // Gets the current font size
+   METHOD GetFontFColor                // Gets the current font foreground color (text color)
+   METHOD GetFontBColor                // Gets the current font background color (bounding box color)
+   METHOD GetJustify                   // Gets the current text justification
+   METHOD GetLPI                       // Gets the current LPI
+   METHOD GetMaxHeight                 // Gets the maximum height of the page in the selected unit
+   METHOD GetMaxWidth                  // Gets the maximum width of the page in the selected unit
+   METHOD GetOrientation               // Gets the current document's orientation
+   METHOD GetPageSize                  // Gets the printer paper size
+   METHOD GetPaperBin                  // Gets the current printer paper bin
 
-METHOD GetAsciiToAnsi               // Retreive the current conversion value
+   METHOD GetPaperBinCount             // Gets the paper bin's count
+   METHOD GetPaperBinNames             // Gets the name of any of the available paper bin
+   METHOD GetPaperBinNumbers           // Gets the number of any of the available paper bin
 
-METHOD GetBorderColor               // Gets the current border color
+   METHOD GetPaperCount                // Gets the count of paper formats available for the selected printer
+   METHOD GetPaperNames                // Gets the name of any of the paper formats, based on its index position
+   METHOD GetPaperNumbers              // Gets the number of any of the paper formats, based on its index position
 
-METHOD GetBorderThickness           // Gets the border thickness
+   METHOD GetPrinter                   // Returns the number of the currently selected printer
+   METHOD GetPrinters                  // Returns the list of available printers for this computer
+   METHOD GetPrinterCaps               // Retreive capabilities of the selected printer
+   METHOD GetPrinterCapsEx             // Retreive one of the capabilities of the selected printer
+   METHOD GetPrinterCount              // Retreive the number of available printers
+   METHOD GetPrinterHandle             // Returns handle of the selected printer for direct Win API calls
+   METHOD GetPrinterNames              // Returns the name of the selected printer
+   METHOD GetTextHeight                // Returns the text height in the selected unit
+   METHOD GetTextWidth                 // Returns the text width in the selected unit
+   METHOD GetTitle                     // Gets the document's title
+   METHOD GetUnit                      // Gets the current unit
+   METHOD GetUseDIB                    // Returns the DIB flag
+   METHOD GetVersion                   // Returns the .DLL version number
+   METHOD GetXerox                     // Returns the Xerox flag
 
-METHOD GetCoorSystem                // Gets the actual coordinate system
+   METHOD IsPreviewVisible             // Returns .t. is print preview window is visible, otherwise, returns .f.
 
-METHOD GetCopies                    // Gets the number of copies
-
-METHOD GetCPI                       // Gets the current CPI
-
-METHOD GetDecimalSep                // Gets the current Ascii to Ansi flag
-
-METHOD GetDefaultPrinter            // Gets the current printer number
-
-METHOD GetDuplex                    // Gets the current Duplex mode
-
-METHOD GetFillColor                 // Gets the current fill color
-
-METHOD GetFillPattern               // Gets the current fill pattern
-
-METHOD GetFonts                     // Returns an array with all available font names
-
-METHOD GetFontAngle                 // Gets the current font angle
-
-METHOD GetFontCount                 // Gets the count of available fonts
-
-METHOD GetFontName                  // Gets the current font name
-
-METHOD GetFontNames                 // Returns the name of a font from its index position
-
-METHOD GetFontJustify               // Gets the current text justification
-
-METHOD GetFontStyle                 // Gets the current font style
-
-METHOD GetFontSize                  // Gets the current font size
-
-METHOD GetFontFColor                // Gets the current font foreground color (text color)
-
-METHOD GetFontBColor                // Gets the current font background color (bounding box color)
-
-METHOD GetJustify                   // Gets the current text justification
-
-METHOD GetLPI                       // Gets the current LPI
-
-METHOD GetMaxHeight                 // Gets the maximum height of the page in the selected unit
-
-METHOD GetMaxWidth                  // Gets the maximum width of the page in the selected unit
-
-METHOD GetOrientation               // Gets the current document's orientation
-
-METHOD GetPageSize                  // Gets the printer paper size
-
-METHOD GetPaperBin                  // Gets the current printer paper bin
-
-METHOD GetPaperBinCount             // Gets the paper bin's count
-
-METHOD GetPaperBinNames             // Gets the name of any of the available paper bin
-
-METHOD GetPaperBinNumbers           // Gets the number of any of the available paper bin
-
-METHOD GetPaperCount                // Gets the count of paper formats available for the selected printer
-
-METHOD GetPaperNames                // Gets the name of any of the paper formats, based on its index position
-
-METHOD GetPaperNumbers              // Gets the number of any of the paper formats, based on its index position
-
-METHOD GetPrinter                   // Returns the number of the currently selected printer
-
-METHOD GetPrinters                  // Returns the list of available printers for this computer
-
-METHOD GetPrinterCaps               // Retreive capabilities of the selected printer
-
-METHOD GetPrinterCapsEx             // Retreive one of the capabilities of the selected printer
-
-METHOD GetPrinterCount              // Retreive the number of available printers
-
-METHOD GetPrinterHandle             // Returns handle of the selected printer for direct Win API calls
-
-METHOD GetPrinterNames              // Returns the name of the selected printer
-
-METHOD GetTextHeight                // Returns the text height in the selected unit
-
-METHOD GetTextWidth                 // Returns the text width in the selected unit
-
-METHOD GetTitle                     // Gets the document's title
-
-METHOD GetUnit                      // Gets the current unit
-
-METHOD GetUseDIB                    // Returns the DIB flag
-
-METHOD GetVersion                   // Returns the .DLL version number
-
-METHOD GetXerox                     // Returns the Xerox flag
-
-METHOD IsPreviewVisible             // Returns .t. is print preview window is visible, otherwise, returns .f.
-
-METHOD Line                         // Draw a line
-
-METHOD LineEx                       // Draw a line
-
-METHOD NewPage                      // Signals the end of page, page eject
-
-METHOD PrintDialog                  // Shows the printer dialog and returns if user clicked OK or Cancel
-
-METHOD PrintEmuFile                 // Prints an EMULATION file
-
-METHOD PrintRawFile                 // Prints a RAW file
+   METHOD Line                         // Draw a line
+   METHOD LineEx                       // Draw a line
+   METHOD NewPage                      // Signals the end of page, page eject
+   METHOD PrintDialog                  // Shows the printer dialog and returns if user clicked OK or Cancel
+   METHOD PrintEmuFile                 // Prints an EMULATION file
+   METHOD PrintRawFile                 // Prints a RAW file
 
    // Sets
+   METHOD SetAsciiToAnsi               // Set the conversion from Ascii to Ansi for text strings.
+   METHOD SetBorder                    // Set the attributes used to draw lines and borders
+   METHOD SetBorderColor               // Set the border color
+   METHOD SetBorderThickness           // Set the border thickness
+   METHOD SetClipperComp               // Set Clipper compatible calls for TextOut() and TextBox()
+   METHOD SetCoorSystem                // Set the coordinate system (xbase like: Top/Left or Windows like: Left/Top)
+   METHOD SetCPI                       // Set the number of CPI (APS_TEXT only)
+   METHOD SetCopies                    // Set the number of copies
+   METHOD SetDecimalSep                // Set the decimal separator character
+   METHOD SetDevice                    // Set the device to use (see PSCRIPT.CH for device contstant definitions)
+   METHOD SetDirectPrint               // Set the direct print flag (used for very special cases)
+   METHOD SetDuplex                    // Set the Duplex mode
+   METHOD SetFileName                  // Set the file name for a PDF file document
+   METHOD SetFill                      // Set the color and/or pattern used to fill text and shapes, like boxes and ellipes
+   METHOD SetFillColor                 // Set the color used to fill text and shapes, like boxes and ellipes
+   METHOD SetFillPattern               // Set the Pattern used to fill text and shapes, like boxes and ellipes
+   METHOD SetFontAttributes            // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontAngle                 // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontBColor                // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontFColor                // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontName                  // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontSize                  // Set the font attributes used by each call to PSTextOut()
+   METHOD SetFontStyle                 // Set the font attributes used by each call to PSTextOut()
+   METHOD SetJustify                   // Set justification for TextOut
+   METHOD SetLPI                       // Set the number of LPI
+   METHOD SetOrientation               // Set the paper orientation
+   METHOD SetPageSize                  // Set the page size to a user defined ou predifined size
+   METHOD SetPaperBin                  // Set the paper bin
 
-METHOD SetAsciiToAnsi               // Set the conversion from Ascii to Ansi for text strings.
+   METHOD SetPDFCharSet                // Set the PDF text charset // not implemented yet
+   METHOD SetPDFOwnerPassword          // Set the encryption password for PDF documents
+   METHOD SetPDFEncoding               // Set the PDF encoding to be used
+   METHOD SetPDFVersion                // Set the PDF versionnumber to be used
+   METHOD SetPDFEmbeddedFonts          // Set the PDF embedding type
+   METHOD ShowPDF                      // Show PDF after creation in default PDF reader
 
-METHOD SetBorder                    // Set the attributes used to draw lines and borders
+   METHOD SetPWState                   // Set the print preview window state
+   METHOD SetPWPosition                // Set the print preview window position
+   METHOD SetPWSize                    // Set the print preview window size
+   METHOD SetPWBounds                  // Set the print preview window bounds (position and size at the same time)
+   METHOD SetPWZoomLevel               // Set the print preview window zoom level
+   METHOD SetPWColors                  // Set the print preview window colors
 
-METHOD SetBorderColor               // Set the border color
+   METHOD SetPrinter                   // Set the er number
+   METHOD SetRowCol                    // Set the number of rows and columns when printing using the APS_CLIP unit system
+   METHOD SetTitle                     // Set the title of the document
+   METHOD SetUnit                      // Set the unit used to calculate dimensions and placement
+   METHOD SetUseDIB                    // Set the use of compatible bitmaps printing using DIB
+   METHOD SetXerox                     // Set Xerox compatible mode for Xerox WorkCenter and other faulty printers
 
-METHOD SetBorderThickness           // Set the border thickness
-
-METHOD SetClipperComp               // Set Clipper compatible calls for TextOut() and TextBox()
-
-METHOD SetCoorSystem                // Set the coordinate system (xbase like: Top/Left or Windows like: Left/Top)
-
-METHOD SetCPI                       // Set the number of CPI (APS_TEXT only)
-
-METHOD SetCopies                    // Set the number of copies
-
-METHOD SetDecimalSep                // Set the decimal separator character
-
-METHOD SetDevice                    // Set the device to use (see PSCRIPT.CH for device contstant definitions)
-
-METHOD SetDirectPrint               // Set the direct print flag (used for very special cases)
-
-METHOD SetDuplex                    // Set the Duplex mode
-
-METHOD SetFileName                  // Set the file name for a PDF file document
-
-METHOD SetFill                      // Set the color and/or pattern used to fill text and shapes, like boxes and ellipes
-
-METHOD SetFillColor                 // Set the color used to fill text and shapes, like boxes and ellipes
-
-METHOD SetFillPattern               // Set the Pattern used to fill text and shapes, like boxes and ellipes
-
-METHOD SetFontAttributes            // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontAngle                 // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontBColor                // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontFColor                // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontName                  // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontSize                  // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetFontStyle                 // Set the font attributes used by each call to PSTextOut()
-
-METHOD SetJustify                   // Set justification for TextOut
-
-METHOD SetLPI                       // Set the number of LPI
-
-METHOD SetOrientation               // Set the paper orientation
-
-METHOD SetPageSize                  // Set the page size to a user defined ou predifined size
-
-METHOD SetPaperBin                  // Set the paper bin
-
-METHOD SetPDFCharSet                // Set the PDF text charset // not implemented yet
-
-METHOD SetPDFOwnerPassword          // Set the encryption password for PDF documents
-
-METHOD SetPDFEncoding               // Set the PDF encoding to be used
-
-METHOD SetPDFVersion                // Set the PDF versionnumber to be used
-
-METHOD SetPDFEmbeddedFonts          // Set the PDF embedding type
-
-METHOD ShowPDF                      // Show PDF after creation in default PDF reader
-
-METHOD SetPWState                   // Set the print preview window state
-
-METHOD SetPWPosition                // Set the print preview window position
-
-METHOD SetPWSize                    // Set the print preview window size
-
-METHOD SetPWBounds                  // Set the print preview window bounds (position and size at the same time)
-
-METHOD SetPWZoomLevel               // Set the print preview window zoom level
-
-METHOD SetPWColors                  // Set the print preview window colors
-
-METHOD SetPrinter                   // Set the er number
-
-METHOD SetRowCol                    // Set the number of rows and columns when printing using the APS_CLIP unit system
-
-METHOD SetTitle                     // Set the title of the document
-
-METHOD SetUnit                      // Set the unit used to calculate dimensions and placement
-
-METHOD SetUseDIB                    // Set the use of compatible bitmaps printing using DIB
-
-METHOD SetXerox                     // Set Xerox compatible mode for Xerox WorkCenter and other faulty printers
-
-METHOD TextBox                      // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-
-METHOD TextBoxEx                    // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
-
-METHOD TextOut                      // Prints a string at position X,Y using parameters
-
-METHOD TextOutEx                    // Prints a string at position X,Y using parameters
-
-METHOD WaterMark                    // Sets/Returns the current WaterMark
+   METHOD TextBox                      // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   METHOD TextBoxEx                    // Prints a string in a box at position X1,Y1, X2,Y2 using parameters
+   METHOD TextOut                      // Prints a string at position X,Y using parameters
+   METHOD TextOutEx                    // Prints a string at position X,Y using parameters
+   METHOD WaterMark                    // Sets/Returns the current WaterMark
 
 ENDCLASS
 
@@ -387,9 +275,7 @@ METHOD TPageScript:Init()
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Abort() -> Self
-
    Description : Abort the current document
    -----------------------------------------------------------------------------*/
 
@@ -401,9 +287,7 @@ METHOD TPageScript:Abort()
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #QRCode(<n>, <n>, <c>, [<n>]) -> NIL
-
    Description : Print a QRcode
    Parameter nVersion : can be any value between 1 and 40 ( Symbolsize 21*21 modules to 177 * 177 )
    increasing in steps of 4 modules per side.
@@ -422,9 +306,7 @@ METHOD TPageScript:QRCode(nTop,nLeft,cCode,nVersion,nSize,nModuleWidth)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #BarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>]) -> NIL
-
    Description : Print a barcode with choice of Code 39 and Code 128
    -----------------------------------------------------------------------------*/
 
@@ -446,9 +328,7 @@ METHOD TPageScript:BarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nTyp
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #BeginDoc(<n>, <c>, <n>, <n>, <n>, <n>, <n>) -> lError
-
    Description : Start a new print job using the passed parameters
    -----------------------------------------------------------------------------*/
 
@@ -475,9 +355,7 @@ METHOD TPageScript:BeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, 
    RETURN ::nError
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #BeginDocEx() -> lError
-
    Description : Start a new print job using the defaults values
    -----------------------------------------------------------------------------*/
 
@@ -493,9 +371,7 @@ METHOD TPageScript:BeginDocEx()
    RETURN ::nError
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #BeginEmuDoc(<n>, <c>) -> lError
-
    Description : Start a new EMULATION print job using the passed parameters
    -----------------------------------------------------------------------------*/
 
@@ -520,9 +396,7 @@ METHOD TPageScript:BeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
    RETURN ::nError
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #BeginRawDoc(<n>, <c>) -> lError
-
    Description : Start a new RAW print job using the passed parameters
    -----------------------------------------------------------------------------*/
 
@@ -540,9 +414,7 @@ METHOD TPageScript:BeginRawDoc(nPrinter, cTitle)
    RETURN ::nError
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> Self
-
    Description : Draw a bitmap on the document.
    -----------------------------------------------------------------------------*/
 
@@ -560,9 +432,7 @@ METHOD TPageScript:Bitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lK
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Ellipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> Self
-
    Description : Draw an ellipse
    -----------------------------------------------------------------------------*/
 
@@ -579,9 +449,7 @@ METHOD TPageScript:Ellipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, n
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #EllipseEx(<n>, <n>, <n>, <n>) -> Self
-
    Description : Draw an ellipse
    -----------------------------------------------------------------------------*/
 
@@ -592,9 +460,7 @@ METHOD TPageScript:EllipseEx(nTop, nLeft, nBottom, nRight)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #EndDoc() -> Self
-
    Description : Signal the end of the document (stop spooling)
    -----------------------------------------------------------------------------*/
 
@@ -611,9 +477,7 @@ METHOD TPageScript:EndDoc()
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #EndRawDoc() -> Self
-
    Description : Ends a RAW print job
    -----------------------------------------------------------------------------*/
 
@@ -632,9 +496,7 @@ METHOD TPageScript:EndEmuDoc()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #EndRawDoc() -> Self
-
    Description : Ends a RAW print job
    -----------------------------------------------------------------------------*/
 
@@ -653,9 +515,7 @@ METHOD TPageScript:EndRawDoc()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #FindPrinter(<c>) -> nPrinter
-
    Description : Finds a printer by name and returns its position in the array
    -----------------------------------------------------------------------------*/
 
@@ -672,9 +532,7 @@ METHOD TPageScript:FindPrinter(cPrinter)
    RETURN nPos
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Frame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> Self
-
    Description : Draw a frame
    -----------------------------------------------------------------------------*/
 
@@ -692,9 +550,7 @@ METHOD TPageScript:Frame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFi
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #FrameEx(<n>, <n>, <n>, <n>) -> Self
-
    Description : Draw a frame
    -----------------------------------------------------------------------------*/
 
@@ -707,9 +563,7 @@ METHOD TPageScript:FrameEx(nTop, nLeft, nBottom, nRight, nRadius)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetAsciiToAnsi() -> lValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -720,9 +574,7 @@ METHOD TPageScript:GetAsciiToAnsi()
    RETURN (nValue == 1)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetBorderColor() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -733,9 +585,7 @@ METHOD TPageScript:GetBorderColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetBorderThickness() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -746,9 +596,7 @@ METHOD TPageScript:GetBorderThickness()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetCoorSystem() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -759,9 +607,7 @@ METHOD TPageScript:GetCoorSystem()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetCopies() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -772,9 +618,7 @@ METHOD TPageScript:GetCopies()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetCPI() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -785,9 +629,7 @@ METHOD TPageScript:GetCPI()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetDecimalSep() -> cValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -798,9 +640,7 @@ METHOD TPageScript:GetDecimalSep()
    RETURN Chr(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetDefaultPrinter() -> nDefaultPrinter
-
    Description : Returns the default Windows printer
    -----------------------------------------------------------------------------*/
 
@@ -811,9 +651,7 @@ METHOD TPageScript:GetDefaultPrinter()
    RETURN nDefaultPrinter + 1
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetDuplex() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -824,9 +662,7 @@ METHOD TPageScript:GetDuplex()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFillColor() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -837,9 +673,7 @@ METHOD TPageScript:GetFillColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFillPattern() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -850,9 +684,7 @@ METHOD TPageScript:GetFillPattern()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFonts() -> aFontList
-
    Description : Retreive the printer fonts for the currently selected printer
    -----------------------------------------------------------------------------*/
 
@@ -876,9 +708,7 @@ METHOD TPageScript:GetFonts()
    RETURN aFonts
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontAngle() -> nValue
-
    Description : Returns the current font/text angle
    -----------------------------------------------------------------------------*/
 
@@ -889,9 +719,7 @@ METHOD TPageScript:GetFontAngle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontCount() -> nValue
-
    Description : Returns the current font count
    -----------------------------------------------------------------------------*/
 
@@ -902,9 +730,7 @@ METHOD TPageScript:GetFontCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontJustify() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -915,9 +741,7 @@ METHOD TPageScript:GetFontJustify()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontName() -> cValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -930,9 +754,7 @@ METHOD TPageScript:GetFontName()
    RETURN ::Buffer2String(cFont)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontNames() -> aFontList
-
    Description : Retreive the name of the font from its index position
    -----------------------------------------------------------------------------*/
 
@@ -951,9 +773,7 @@ METHOD TPageScript:GetFontNames(nFontIndex)
    RETURN ::Buffer2String(cFontName)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontStyle() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -964,9 +784,7 @@ METHOD TPageScript:GetFontStyle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontSize() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -977,9 +795,7 @@ METHOD TPageScript:GetFontSize()
    RETURN PSItoF(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontBColor() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -990,9 +806,7 @@ METHOD TPageScript:GetFontBColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetFontFColor() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1003,9 +817,7 @@ METHOD TPageScript:GetFontFColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetJustify() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1016,9 +828,7 @@ METHOD TPageScript:GetJustify()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetLPI() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1029,9 +839,7 @@ METHOD TPageScript:GetLPI()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetMaxHeight() -> nValue
-
    Description : Returns the max height in current unit
    -----------------------------------------------------------------------------*/
 
@@ -1042,9 +850,7 @@ METHOD TPageScript:GetMaxHeight()
    RETURN PSItoF(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetMaxWidth() -> nValue
-
    Description : Returns the max width in current unit
    -----------------------------------------------------------------------------*/
 
@@ -1055,9 +861,7 @@ METHOD TPageScript:GetMaxWidth()
    RETURN PSItoF(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetOrientation() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1068,9 +872,7 @@ METHOD TPageScript:GetOrientation()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPageSize() -> nValue
-
    Description : Retreive the printer paper size
    -----------------------------------------------------------------------------*/
 
@@ -1081,9 +883,7 @@ METHOD TPageScript:GetPageSize()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperBin() -> nValue
-
    Description : Retreive the currently selected printer paper bin
    Note .....: Returns -1 if called while printing
    -----------------------------------------------------------------------------*/
@@ -1095,9 +895,7 @@ METHOD TPageScript:GetPaperBin()
    RETURN nBin
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperBinCount() -> nValue
-
    Description : Retreive the number of paper bins installed
    -----------------------------------------------------------------------------*/
 
@@ -1108,9 +906,7 @@ METHOD TPageScript:GetPaperBinCount()
    RETURN nCount
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperBinNames() -> cValue
-
    Description : Retrieve the name of any of the available paper bin
    -----------------------------------------------------------------------------*/
 
@@ -1129,9 +925,7 @@ METHOD TPageScript:GetPaperBinNames(nIndex)
    RETURN ::Buffer2String(cName)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperBinNumbers() -> nValue
-
    Description : Retrieve the number of any of the available paper bin
    -----------------------------------------------------------------------------*/
 
@@ -1149,9 +943,7 @@ METHOD TPageScript:GetPaperBinNumbers(nIndex)
    RETURN nNumber
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperCount() -> nValue
-
    Description : Retreive the number of paper installed
    -----------------------------------------------------------------------------*/
 
@@ -1162,9 +954,7 @@ METHOD TPageScript:GetPaperCount()
    RETURN nCount
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperNames() -> nValue
-
    Description : Retreive the name of a paper type based on its index position
    -----------------------------------------------------------------------------*/
 
@@ -1183,9 +973,7 @@ METHOD TPageScript:GetPaperNames(nIndex)
    RETURN ::Buffer2String(cName)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPaperNumbers() -> nValue
-
    Description : Retreive the number of the paper type pointed by nIndex
    -----------------------------------------------------------------------------*/
 
@@ -1203,9 +991,7 @@ METHOD TPageScript:GetPaperNumbers(nIndex)
    RETURN nNumber
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinter() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1216,9 +1002,7 @@ METHOD TPageScript:GetPrinter()
    RETURN nValue + 1
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinterCount() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1229,9 +1013,7 @@ METHOD TPageScript:GetPrinterCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinters() -> aClone(saPrinters)
-
    Description : Returns the list of available printers for this computer
    -----------------------------------------------------------------------------*/
 
@@ -1253,9 +1035,7 @@ METHOD TPageScript:GetPrinters()
    RETURN aClone(aPrinters)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinterCaps() -> aCaps
-
    Description : Retreive the printer capabilities of the selected printer
    -----------------------------------------------------------------------------*/
 
@@ -1300,9 +1080,7 @@ METHOD TPageScript:GetPrinterCaps()
       nBitDepth}
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinterCapsEx(<n>) -> nCap
-
    Description : Retreive one of the printer capabilities of the selected printer
    -----------------------------------------------------------------------------*/
 
@@ -1313,9 +1091,7 @@ METHOD TPageScript:GetPrinterCapsEx(nCap)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinterHandle() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1326,9 +1102,7 @@ METHOD TPageScript:GetPrinterHandle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetPrinterNames(<n>) -> cValue
-
    Description : Returns the name of the selected printer
    -----------------------------------------------------------------------------*/
 
@@ -1341,9 +1115,7 @@ METHOD TPageScript:GetPrinterNames(nPrinter)
    RETURN ::Buffer2String(cPrinter)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetTitle() -> cValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1356,9 +1128,7 @@ METHOD TPageScript:GetTitle()
    RETURN ::Buffer2String(cTitle)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Get
-
    Description :
    -----------------------------------------------------------------------------*/
 
@@ -1369,9 +1139,7 @@ METHOD TPageScript:GetTextHeight(cText)
    RETURN PSItoF(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Get
-
    Description :
    -----------------------------------------------------------------------------*/
 
@@ -1382,9 +1150,7 @@ METHOD TPageScript:GetTextWidth(cText)
    RETURN PSItoF(nValue)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetUnit() -> nValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1395,9 +1161,7 @@ METHOD TPageScript:GetUnit()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetUseDIB() -> lValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1408,9 +1172,7 @@ METHOD TPageScript:GetUseDIB()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Version() -> cVersionNumber
-
    Description : Returns the DLL version number
    -----------------------------------------------------------------------------*/
 
@@ -1423,9 +1185,7 @@ METHOD TPageScript:GetVersion()
    RETURN ::Buffer2String(cVersion)
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #GetXerox() -> lValue
-
    Description : Returns the current setting
    -----------------------------------------------------------------------------*/
 
@@ -1436,9 +1196,7 @@ METHOD TPageScript:GetXerox()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #IsPreviewVisible() -> lValue
-
    Description : Returns .t. is print preview window is visible, otherwise, returns .f.
    -----------------------------------------------------------------------------*/
 
@@ -1449,9 +1207,7 @@ METHOD TPageScript:IsPreviewVisible()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #Line(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
-
    Description : Draw a line
    -----------------------------------------------------------------------------*/
 
@@ -1465,9 +1221,7 @@ METHOD TPageScript:Line(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #LineEx(<n>, <n>, <n>, <n>) -> NIL
-
    Description : Draw a line
    -----------------------------------------------------------------------------*/
 
@@ -1478,9 +1232,7 @@ METHOD TPageScript:LineEx(nTop, nLeft, nBottom, nRight)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #NewPage() -> NIL
-
    Description : Signal the end of page, page eject
    -----------------------------------------------------------------------------*/
 
@@ -1501,9 +1253,7 @@ METHOD TPageScript:NewPage()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #PrintDialog() -> lPrint
-
    Description : Shows the printer dialog and returns if the user clicked OK
    -----------------------------------------------------------------------------*/
 
@@ -1522,9 +1272,7 @@ METHOD TPageScript:PrintDialog()
    RETURN (nValue == 1)  // 1 == Print, 0 == Error or don't print
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-
    Description : Print the file pointed by cFile and optionnaly deletes it.
    Author .....: Stephan St-Denis
    Date .......: September 2002
@@ -1730,9 +1478,7 @@ METHOD TPageScript:PrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientati
    RETURN lSuccess
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
-
    Description : Print the file pointed by cFile and optionnaly deletes it.
    No processing on file. The file is sent "as is" to the printer.
    Author .....: Stephan St-Denis
@@ -1782,9 +1528,7 @@ METHOD TPageScript:PrintRawFile(cFileName, lDelete, nPrinter, cTitle)
    RETURN lSuccess
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetAsciiToAnsi(<l>) -> Self
-
    Description : Set the conversion from Ascii to Ansi for text strings.
    -----------------------------------------------------------------------------*/
 
@@ -1797,9 +1541,7 @@ METHOD TPageScript:SetAsciiToAnsi(lValue)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetBorder([<n>, <n>]) -> Self
-
    Description : Sets the attributes used to draw lines and borders
    -----------------------------------------------------------------------------*/
 
@@ -1816,9 +1558,7 @@ METHOD TPageScript:SetBorder(nThickness, nBorderColor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetBorderColor(<n>) -> Self
-
    Description : Sets the border color
    -----------------------------------------------------------------------------*/
 
@@ -1831,9 +1571,7 @@ METHOD TPageScript:SetBorderColor(nBorderColor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetBorderThickness(<n>) -> Self
-
    Description : Sets the border thickness used to draw lines and borders
    -----------------------------------------------------------------------------*/
 
@@ -1846,9 +1584,7 @@ METHOD TPageScript:SetBorderThickness(nThickness)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetClipperComp(<l>) -> Self
-
    Description : Set Clipper compatible calls for TextOut() and TextBox()
    -----------------------------------------------------------------------------*/
 
@@ -1861,9 +1597,7 @@ METHOD TPageScript:SetClipperComp(lClipper)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetCoorSystem(<n>) -> Self
-
    Description : Sets the coordinate system
    -----------------------------------------------------------------------------*/
 
@@ -1876,9 +1610,7 @@ METHOD TPageScript:SetCoorSystem(nCoor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetCopies([<n>]) -> Self
-
    Description : Sets the number of copies
    -----------------------------------------------------------------------------*/
 
@@ -1891,9 +1623,7 @@ METHOD TPageScript:SetCopies(nCopies)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetCPI(<n>) -> Self
-
    Description : Sets the number of characters per inch (Text mode only)
    -----------------------------------------------------------------------------*/
 
@@ -1906,9 +1636,7 @@ METHOD TPageScript:SetCPI(nCPI)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetDevice(<n>) -> Self
-
    Description : Sets the device to use for the next print job
    Choices ....: DEV_PRINTER - The output will be sent to a printer
    DEV_PREVIEW - The output will be sent to the print preview dialog
@@ -1925,9 +1653,7 @@ METHOD TPageScript:SetDevice(nDevice)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetDirectPrint(<c>) -> Self
-
    Description : Set the direct print flag (used for very special cases)
    -----------------------------------------------------------------------------*/
 
@@ -1940,9 +1666,7 @@ METHOD TPageScript:SetDirectPrint(lDirect)
    RETURN self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetDecimalSep(<c>) -> Self
-
    Description : Sets the decimal separator character
    -----------------------------------------------------------------------------*/
 
@@ -1955,9 +1679,7 @@ METHOD TPageScript:SetDecimalSep(cSep)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetDuplex([<n>]) -> Self
-
    Description : Sets the duplex mode
    -----------------------------------------------------------------------------*/
 
@@ -1970,9 +1692,7 @@ METHOD TPageScript:SetDuplex(nDuplex)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFileName(<c>) -> Self
-
    Description : Sets the file name of a PDF file
    -----------------------------------------------------------------------------*/
 
@@ -1985,9 +1705,7 @@ METHOD TPageScript:SetFileName(cFileName)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFill(<n>, [<n>]) -> Self
-
    Description : Sets the color used to fill shapes, like boxes and ellipes
    -----------------------------------------------------------------------------*/
 
@@ -2004,9 +1722,7 @@ METHOD TPageScript:SetFill(nFillColor, nFillPattern)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFillColor(<n>) -> Self
-
    Description : Sets the color used to fill shapes, like boxes and ellipes
    -----------------------------------------------------------------------------*/
 
@@ -2019,9 +1735,7 @@ METHOD TPageScript:SetFillColor(nFillColor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFillPattern(<n>) -> Self
-
    Description : Sets the pattern used to fill shapes, like boxes and ellipes
    -----------------------------------------------------------------------------*/
 
@@ -2034,9 +1748,7 @@ METHOD TPageScript:SetFillPattern(nFillPattern)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont([<n>, <n>, <n>, <n>, <n>]) -> Self
-
    Description : Sets the font attributes used by each call to PSTextOut() and others
    -----------------------------------------------------------------------------*/
 
@@ -2069,9 +1781,7 @@ METHOD TPageScript:SetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, n
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2084,9 +1794,7 @@ METHOD TPageScript:SetFontAngle(nAngle)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2099,9 +1807,7 @@ METHOD TPageScript:SetFontBColor(nTBColor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2114,9 +1820,7 @@ METHOD TPageScript:SetFontFColor(nTFColor)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2129,9 +1833,7 @@ METHOD TPageScript:SetFontName(cFont)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2144,9 +1846,7 @@ METHOD TPageScript:SetFontSize(nSize)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetFont() -> Self
-
    Description : Sets the font
    -----------------------------------------------------------------------------*/
 
@@ -2159,9 +1859,7 @@ METHOD TPageScript:SetFontStyle(nStyle)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetJustify(<n>) -> Self
-
    Description : Sets justification for TextOut
    -----------------------------------------------------------------------------*/
 
@@ -2174,9 +1872,7 @@ METHOD TPageScript:SetJustify(nJustify)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetLPI(<n>) -> Self
-
    Description : Sets the number of lines per inch (Text mode only)
    -----------------------------------------------------------------------------*/
 
@@ -2189,9 +1885,7 @@ METHOD TPageScript:SetLPI(nLPI)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetOrientation(<n>) -> Self
-
    Description : Sets the paper orientation
    -----------------------------------------------------------------------------*/
 
@@ -2204,9 +1898,7 @@ METHOD TPageScript:SetOrientation(nOrientation)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPaperBin(<n>) -> Self
-
    Description : Sets the paper bin
    -----------------------------------------------------------------------------*/
 
@@ -2219,9 +1911,7 @@ METHOD TPageScript:SetPaperBin(nPaperBin)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPDFCharSet(<n>) -> Self
-
    Description : Set the PDF charset to be use
    -----------------------------------------------------------------------------*/
 
@@ -2234,9 +1924,7 @@ METHOD TPageScript:SetPDFCharSet(nCharSet)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPDFOwnerPassword(<c>) -> Self
-
    Description : Set the encryption password for PDF documents
    -----------------------------------------------------------------------------*/
 
@@ -2249,9 +1937,7 @@ METHOD TPageScript:SetPDFOwnerPassword(cPassword)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPDFEncoding(<n>) -> Self
-
    Description : Set the internal encoding for PDF documents, default = 0;
    : 0 -> WinAnsiEncoding  ( Regular encoding for Latin-text Type 1
    and TrueType fonts on Windows OS.)
@@ -2271,9 +1957,7 @@ METHOD TPageScript:SetPDFEncoding(nEncoding)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPDFVersion(<n>) -> Self
-
    Description : Sets the PDF version to be used for creation of PDF
    : 0 - PDFVersion 1.4
    : 1 - PDFVersion 1.5
@@ -2290,9 +1974,7 @@ METHOD TPagescript:SetPDFVersion(nVersion)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #ShowPDF(<l>) -> Self
-
    Description : Show PDF in default reader after creation
    -----------------------------------------------------------------------------*/
 
@@ -2305,9 +1987,7 @@ METHOD TPageScript:ShowPDF(lShow)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPDFEmbeddedPDFFonts(<n>) -> Self
-
    Description : Set usage of embedded fonts
    : 0 -> None
    : 1 -> Full
@@ -2323,9 +2003,7 @@ METHOD TPageScript:SetPDFEmbeddedFonts(nEmbedded)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPageSize(<n>) -> Self
-
    Description : Sets the page size to a predifined paper size
    -----------------------------------------------------------------------------*/
 
@@ -2338,9 +2016,7 @@ METHOD TPageScript:SetPageSize(nPageSize)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPrinter(<n>) -> Self
-
    Description : Sets the printer number to which we want to print
    -----------------------------------------------------------------------------*/
 
@@ -2353,9 +2029,7 @@ METHOD TPageScript:SetPrinter(nPrinter)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWState(<n>) -> Self
-
    Description : Set the print preview window state
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -2369,9 +2043,7 @@ METHOD TPageScript:SetPWState(nState)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWPosition(<n>, <n>) -> Self
-
    Description : Set the print preview window position
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -2385,9 +2057,7 @@ METHOD TPageScript:SetPWPosition(nLeft, nTop)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWSize(<n>, <n>) -> Self
-
    Description : Set the print preview window size (-1, -1 = Auto size)
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -2401,9 +2071,7 @@ METHOD TPageScript:SetPWSize(nWidth, nHeight)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWBounds(<n>, <n>, <n>, <n>) -> Self
-
    Description : Set the print preview window bounds (position and size at the same time)
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -2417,9 +2085,7 @@ METHOD TPageScript:SetPWBounds(nLeft, nTop, nWidth, nHeight)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
-
    Description : Set the print preview window colors
    Version ....: 3.0.0.0
    -----------------------------------------------------------------------------*/
@@ -2433,9 +2099,7 @@ METHOD TPageScript:SetPWColors(nBackground, nPaper, nShadow, nToolbar)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWZoomLevel(<n>) -> Self
-
    Description : Set the print preview window zoom level
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -2449,9 +2113,7 @@ METHOD TPageScript:SetPWZoomLevel(nZoomLevel)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetRowCol(<n>, <n>) -> Self
-
    Description : Sets the number of rows and columns in the way PageScript for Clipper does
    -----------------------------------------------------------------------------*/
 
@@ -2464,9 +2126,7 @@ METHOD TPageScript:SetRowCol(nRow, nCol)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetTitle(<c>) -> Self
-
    Description : Sets the title of the document
    -----------------------------------------------------------------------------*/
 
@@ -2479,9 +2139,7 @@ METHOD TPageScript:SetTitle(cTitle)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetUnit(<n>) -> Self
-
    Description : Sets the unit used to calculate dimensions and placement
    -----------------------------------------------------------------------------*/
 
@@ -2495,9 +2153,7 @@ METHOD TPageScript:SetUnit(nUnit)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetUseDIB(<l>) -> Self
-
    Description : Sets the use of DIB (Device Independant Bitmap) when printing bitmaps
    -----------------------------------------------------------------------------*/
 
@@ -2510,9 +2166,7 @@ METHOD TPageScript:SetUseDIB(lUseDIB)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetXerox(<l>) -> Self
-
    Description : Sets the use of Xerox compatible printing mode (Slower, but
    compatible with all Xerox printers)
    -----------------------------------------------------------------------------*/
@@ -2526,9 +2180,7 @@ METHOD TPageScript:SetXerox(lXerox)
    RETURN Self
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
-
    <n>, <n>]) -> NIL
    Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
    -----------------------------------------------------------------------------*/
@@ -2560,9 +2212,7 @@ METHOD TPageScript:TextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont,
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
-
    Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
    -----------------------------------------------------------------------------*/
 
@@ -2575,9 +2225,7 @@ METHOD TPageScript:TextBoxEx(nTop, nLeft, nBottom, nRight, cText)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #TextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
-
    Description : Prints a string at position X,Y using parameters
 
    PSTEXTOUT(YY1, XX2 + XXO, ' {continued)', pic, just, font, PTS3, APS_PLAIN)
@@ -2638,9 +2286,7 @@ METHOD TPageScript:TextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #TextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
-
    Description : Prints a string at position X,Y using parameters
    -----------------------------------------------------------------------------*/
 
@@ -2678,9 +2324,7 @@ METHOD TPageScript:TextOutEx(nTop, nLeft, xValue, cPicture)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #WaterMark([<b>]) -> Previous WaterMark
-
    Description : Sets/Returns the current WaterMark
    Note .......: This method is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
@@ -2705,9 +2349,7 @@ METHOD TPageScript:WaterMark(bWaterMark, nWaterMark)
 
    -----------------------------------------------------------------------------*/
    /*-----------------------------------------------------------------------------
-
    Method .....: #Buffer2String()
-
    Description : Internal function. Returns a string from a buffer
    -----------------------------------------------------------------------------*/
 
@@ -2720,9 +2362,7 @@ METHOD TPageScript:Buffer2String(cBuffer)
    RETURN Left(cString, Len(cString) - 1)
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSFtoI(AValue) -> Value
-
    Description : Converts a Double to an Integer for PSInt compatibility
    -----------------------------------------------------------------------------*/
 
@@ -2731,9 +2371,7 @@ FUNCTION PSFtoI(AValue)
    RETURN Int(AValue * 10000)
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSItoF(AValue) -> Value
-
    Description : Converts a PSInt to a Double for PSInt compatibility
    -----------------------------------------------------------------------------*/
 
@@ -2748,9 +2386,7 @@ FUNCTION PSItoF(AValue)
    -----------------------------------------------------------------------------*/
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSInit() -> nErrorCode
-
    Description : Initialization of the printer driver
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2767,9 +2403,7 @@ FUNCTION PSInit()
    RETURN oPScript:nError
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSAbort() -> NIL
-
    Description : Abort the current document
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2784,9 +2418,7 @@ FUNCTION PSAbort()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSAsciiToAnsi([<l>]) -> lOldValue
-
    Description : Set/Get the conversion from Ascii to Ansi for text strings.
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2812,9 +2444,7 @@ FUNCTION PSBarCodeEx(nTop, nLeft, cCode, nHeight, nThick, nType, lValidate)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSQRCode(<n>, <n>, <c>, [<n>,<n>]) -> NIL
-
    Description : Print a QRCode
    Author .....: R.Visscher
    Date .......: June 2017
@@ -2829,9 +2459,7 @@ FUNCTION PSQRCode(nTop,nLeft,cCode,nVersion,nSize,nModuleWidth)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBarCode(<n>, <n>, <c>, [<n>, <n>, <l>, <n>, <l>]) -> NIL
-
    Description : Print a barcode with choice of Code 39 and Code 128
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2846,9 +2474,7 @@ FUNCTION PSBarCode(nTop, nLeft, cCode, nHeight, nThick, lPrintText, nType, lVert
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBeginDoc(<n>, <c>, <n>, <n>) -> nError
-
    Description : Starts a new print job with parameters
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2865,9 +2491,7 @@ FUNCTION PSBeginDoc(nPrinter, cTitle, nOrientation, nCopies, nPageSize, nDuplex,
    RETURN nError
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBeginDocEx() -> nError
-
    Description : Starts a new print job with defaults parameters
    Author .....: Stephan St-Denis
    Date .......: July 2006
@@ -2884,9 +2508,7 @@ FUNCTION PSBeginDocEx()
    RETURN nError
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBeginEmuDoc(<n>, <c>, <n>, <n>, <n>, <c>) -> lError
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2903,9 +2525,7 @@ FUNCTION PSBeginEmuDoc(nPrinter, cTitle, nOrientation, nCopies, cFont)
    RETURN nError
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBeginRawDoc(<n>, <c>, <n>, <n>) -> nError
-
    Description : Starts the printer driver with some parameters
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2922,9 +2542,7 @@ FUNCTION PSBeginRawDoc(nPrinter, cTitle)
    RETURN nError
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSBitmap(<n>, <n>, <n>, <n>, <x>, [<n>]) -> NIL
-
    Description : Draw a bitmap on the document.
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2939,9 +2557,7 @@ FUNCTION PSBitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lKeepRatio
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSEllipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> NIL
-
    Description : Draw an ellipse
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2956,9 +2572,7 @@ FUNCTION PSEllipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColo
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSEllipseEx(<n>, <n>, <n>, <n>) -> NIL
-
    Description : Draw an ellipse
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2973,9 +2587,7 @@ FUNCTION PSEllipseEx(nTop, nLeft, nBottom, nRight)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSEndDoc() -> NIL
-
    Description : Signal the end of the document
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -2990,9 +2602,7 @@ FUNCTION PSEndDoc()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSEndEmuDoc() -> NIL
-
    Description : Signal the end of the document
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3007,9 +2617,7 @@ FUNCTION PSEndEmuDoc()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSEndRawDoc() -> NIL
-
    Description : Signal the end of the document
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3024,9 +2632,7 @@ FUNCTION PSEndRawDoc()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSFindPrinter(<c>) -> nPos
-
    Description : Search for a printer name and returns its position within the array
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3043,9 +2649,7 @@ FUNCTION PSFindPrinter(cPrinter)
    RETURN nPos
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSFrame(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>, <n>]) -> NIL
-
    Description : Draw a frame
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3060,9 +2664,7 @@ FUNCTION PSFrame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFillColor,
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSFrameEx(<n>, <n>, <n>, <n>) -> NIL
-
    Description : Draw a frame
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3077,9 +2679,7 @@ FUNCTION PSFrameEx(nTop, nLeft, nBottom, nRight, nRadius)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetAsciiToAnsi() -> lValue
-
    Description : Retreive the translation setting
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3096,9 +2696,7 @@ FUNCTION PSGetAsciiToAnsi()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetBorderColor() -> nValue
-
    Description : Returns the current border color
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3115,9 +2713,7 @@ FUNCTION PSGetBorderColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetBorderThickness() -> nValue
-
    Description : Returns the current border thickness
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3134,9 +2730,7 @@ FUNCTION PSGetBorderThickness()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetCaps() -> aCaps
-
    Description : Retreive the printer capabilities of the selected printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3148,9 +2742,7 @@ FUNCTION PSGetCaps()
    RETURN PSGetPrinterCaps()
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetCoorSystem() -> nValue
-
    Description : Returns the current coordinate system
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -3167,9 +2759,7 @@ FUNCTION PSGetCoorSystem()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetCopies() -> nValue
-
    Description : Returns the number of copies set for the current print job
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3186,9 +2776,7 @@ FUNCTION PSGetCopies()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetCPI() -> nValue
-
    Description : Returns the number of character per inch in use (text mode only)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3205,9 +2793,7 @@ FUNCTION PSGetCPI()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetDecimalSep() -> cValue
-
    Description : Returns the decimal separator in use
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3224,9 +2810,7 @@ FUNCTION PSGetDecimalSep()
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetDefPrinter() -> nValue
-
    Description : Returns the default Windows printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3238,9 +2822,7 @@ FUNCTION PSGetDefPrinter()
    RETURN PSGetDefaultPrinter()
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetDefaultPrinter() -> nValue
-
    Description : Returns the default Windows printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3257,9 +2839,7 @@ FUNCTION PSGetDefaultPrinter()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetDuplex() -> nValue
-
    Description : Returns the current Duplex mode
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3276,9 +2856,7 @@ FUNCTION PSGetDuplex()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFillColor() -> nValue
-
    Description : Returns the current fill color
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3295,9 +2873,7 @@ FUNCTION PSGetFillColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFillPattern() -> nValue
-
    Description : Returns the current fill pattern
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3314,9 +2890,7 @@ FUNCTION PSGetFillPattern()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontAngle() -> nValue
-
    Description : Returns the current font angle
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -3333,9 +2907,7 @@ FUNCTION PSGetFontAngle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontCount() -> nValue
-
    Description : Returns the current font count
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -3352,9 +2924,7 @@ FUNCTION PSGetFontCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFonts() -> aFonts
-
    Description : Retreive the printer fonts for the selected printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3371,9 +2941,7 @@ FUNCTION PSGetFonts()
    RETURN aClone(aFonts)
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontName() -> cValue
-
    Description : Returns the current font name
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3390,9 +2958,7 @@ FUNCTION PSGetFontName()
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontNames(<n>) -> cValue
-
    Description : Returns the font name from its index position
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -3409,9 +2975,7 @@ FUNCTION PSGetFontNames(nFontIndex)
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontStyle() -> nValue
-
    Description : Returns the current font style
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3428,9 +2992,7 @@ FUNCTION PSGetFontStyle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontSize() -> nValue
-
    Description : Returns the current font size
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3447,9 +3009,7 @@ FUNCTION PSGetFontSize()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontBColor() -> nValue
-
    Description : Returns the current Font background color
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3466,9 +3026,7 @@ FUNCTION PSGetFontBColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontFColor() -> nValue
-
    Description : Returns the current font Foreground color
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3485,9 +3043,7 @@ FUNCTION PSGetFontFColor()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetJustify() -> nValue
-
    Description : Returns the current text justification
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3504,9 +3060,7 @@ FUNCTION PSGetJustify()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetFontJustify() -> nValue
-
    Description : Returns the current text justification
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3523,9 +3077,7 @@ FUNCTION PSGetFontJustify()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetLPI() -> nValue
-
    Description : Returns the current number of lines per inch (text mode only)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3542,9 +3094,7 @@ FUNCTION PSGetLPI()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetMaxHeight() -> nValue
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: May 2005
@@ -3561,9 +3111,7 @@ FUNCTION PSGetMaxHeight()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetMaxWidth() -> nValue
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: May 2005
@@ -3580,9 +3128,7 @@ FUNCTION PSGetMaxWidth()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetOrientation() -> nValue
-
    Description : Returns the current page orientation (Portrait or Landscape)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3599,9 +3145,7 @@ FUNCTION PSGetOrientation()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPageSize() -> nValue
-
    Description : Retreive the printer paper size
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3618,9 +3162,7 @@ FUNCTION PSGetPageSize()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperBin() -> nValue
-
    Description : Returns the current paper bin
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3637,9 +3179,7 @@ FUNCTION PSGetPaperBin()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperBins() -> aBinArray
-
    Description : Returns a two dimensions array with bins/trays numbers/names
    Author .....: Stephan St-Denis
    Date .......: May 2006
@@ -3662,9 +3202,7 @@ FUNCTION PSGetPaperBins()
    RETURN aClone(aBins)
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperBinCount() -> nValue
-
    Description : Retreive the number of paper bins installed
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3681,9 +3219,7 @@ FUNCTION PSGetPaperBinCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperBinNames() -> cValue
-
    Description : Retrieve the name of any of the available paper bin
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3700,9 +3236,7 @@ FUNCTION PSGetPaperBinNames(nIndex)
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperBinNumbers() -> nValue
-
    Description : Retrieve the number of any of the available paper bin
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3719,9 +3253,7 @@ FUNCTION PSGetPaperBinNumbers(nIndex)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperCount() -> nValue
-
    Description : Retreive the number of paper installed
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3738,9 +3270,7 @@ FUNCTION PSGetPaperCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperNames(<nIndex>) -> cValue
-
    Description : Retreive the name of a paper type based on its index position
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3757,9 +3287,7 @@ FUNCTION PSGetPaperNames(nIndex)
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPaperNumbers() -> nValue
-
    Description : Retreive the number of the paper type pointed by nIndex
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -3776,9 +3304,7 @@ FUNCTION PSGetPaperNumbers(nIndex)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinter() -> nValue
-
    Description : Returns the currently selected printer
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3795,9 +3321,7 @@ FUNCTION PSGetPrinter()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterCount() -> nValue
-
    Description : Returns the number of installed printer drivers
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3814,9 +3338,7 @@ FUNCTION PSGetPrinterCount()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterNames(nIndex) -> cValue
-
    Description : Returns the name of the printer pointed by nIndex
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3833,9 +3355,7 @@ FUNCTION PSGetPrinterNames(nIndex)
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinters() -> aClone(saPrinters)
-
    Description : Returns the list of available printers for this computer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3852,9 +3372,7 @@ FUNCTION PSGetPrinters()
    RETURN aPrinters
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterCaps() -> aCaps
-
    Description : Retreive the printer capabilities of the selected printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3871,9 +3389,7 @@ FUNCTION PSGetPrinterCaps()
    RETURN aCaps
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterCapsEx(nCap)
-
    Description : Retreive the printer capabilities of the selected printer
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -3890,9 +3406,7 @@ FUNCTION PSGetPrinterCapsEx(nCap)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterHandle() -> nValue
-
    Description : Returns the printer handle (for direct API calls)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3909,9 +3423,7 @@ FUNCTION PSGetPrinterHandle()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetPrinterName() -> cValue
-
    Description : Returns the name of the printer number passed in parameter
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3928,9 +3440,7 @@ FUNCTION PSGetPrinterName(nPrinter)
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetTextHeight() -> nValue
-
    Description : Returns the height of the text in the current unit
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3947,9 +3457,7 @@ FUNCTION PSGetTextHeight(cText)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetTextWidth() -> nValue
-
    Description : Returns the width of the text in the current unit
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3966,9 +3474,7 @@ FUNCTION PSGetTextWidth(cText)
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetTitle() -> cValue
-
    Description : Returns the title of the print job
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -3985,9 +3491,7 @@ FUNCTION PSGetTitle()
    RETURN cValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetUnit() -> nValue
-
    Description : Returns the unit in use
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4004,9 +3508,7 @@ FUNCTION PSGetUnit()
    RETURN nValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetUseDIB() -> lValue
-
    Description : Returns the current setting for DIB (Device Independant Bitmap)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4023,9 +3525,7 @@ FUNCTION PSGetUseDIB()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetVersion() -> cValue
-
    Description : Returns the current PageScript version number as a character string
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -4036,9 +3536,7 @@ FUNCTION PSGetVersion()
    RETURN oPScript:GetVersion()
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSGetXerox() -> lValue
-
    Description : Returns the current setting for Xerox compatibility
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4055,9 +3553,7 @@ FUNCTION PSGetXerox()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSIsPreviewVisible() -> lValue
-
    Description : Returns .t. if Print Preview Window is shown
    Author .....: Stephan St-Denis
    Date .......: May 2012
@@ -4074,9 +3570,7 @@ FUNCTION PSIsPreviewVisible()
    RETURN lValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSLine(<n>, <n>, <n>, <n>, [<n>, <n>]) -> NIL
-
    Description : Draw a line
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4091,9 +3585,7 @@ FUNCTION PSLine(nTop, nLeft, nBottom, nRight, nThick, nBorderColor)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSLineEx(<n>, <n>, <n>, <n>) -> NIL
-
    Description : Draw a line
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4108,9 +3600,7 @@ FUNCTION PSLineEx(nTop, nLeft, nBottom, nRight)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSNewPage() -> NIL
-
    Description : Signal the end of page, page eject
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4125,9 +3615,7 @@ FUNCTION PSNewPage()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrintDialog() -> lPrint
-
    Description : Shows the printer dialog and returns if may print or not
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4144,9 +3632,7 @@ FUNCTION PSPrintDialog()
    RETURN lPrint
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrintFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-
    Description : Prints the file pointed by cFile and optionnaly deletes it.
    EMULATION mode service.
    Author .....: Stephan St-Denis
@@ -4165,9 +3651,7 @@ FUNCTION PSPrintFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCopies
    RETURN lSuccess
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrintEmuFile(<c>, [<l>, <n>, <c>, <n>, <n>, <c>]) -> lSuccess
-
    Description : Prints the file pointed by cFile and optionnaly deletes it.
    EMULATION mode service.
    Author .....: Stephan St-Denis
@@ -4185,9 +3669,7 @@ FUNCTION PSPrintEmuFile(cFileName, lDelete, nPrinter, cTitle, nOrientation, nCop
    RETURN lSuccess
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrintRawFile(<c>, [<l>, <n>, <c>]) -> lSuccess
-
    Description : Prints the file pointed by cFile and optionnaly deletes it.
    No processing on file. The file is sent "as is" to the printer.
    Author .....: Stephan St-Denis
@@ -4205,9 +3687,7 @@ FUNCTION PSPrintRawFile(cFileName, lDelete, nPrinter, cTitle)
    RETURN lSuccess
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetAsciiToAnsi([<l>]) -> NIL
-
    Description : Set the conversion from Ascii to Ansi for text strings.
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4224,9 +3704,7 @@ FUNCTION PSSetAsciiToAnsi(lValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetBin(<n>) -> NIL
-
    Description : Sets the paper bin
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4241,9 +3719,7 @@ FUNCTION PSSetBin(nPaperBin)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetBorder([<n>, <n>]) -> NIL
-
    Description : Sets the attributes used to draw lines and borders
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4260,9 +3736,7 @@ FUNCTION PSSetBorder(nThickness, nBorderColor)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetBorderColor(<n>) -> NIL
-
    Description : Sets the border color used to draw lines and borders
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4279,9 +3753,7 @@ FUNCTION PSSetBorderColor(nBorderColor)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetBorderThickness(<n>) -> NIL
-
    Description : Sets the border thickness used to draw lines and borders
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4298,9 +3770,7 @@ FUNCTION PSSetBorderThickness(nThickness)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Method .....: #PSSetClipperComp(<l>) -> NIL
-
    Description : Set Clipper compatible calls for TextOut() and TextBox()
    -----------------------------------------------------------------------------*/
 
@@ -4311,9 +3781,7 @@ FUNCTION PSSetClipperComp(lClipper)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetCoorSystem(<n>) -> NIL
-
    Description : Sets the Coordinate system
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4330,9 +3798,7 @@ FUNCTION PSSetCoorSystem(nCoor)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetCopies([<n>]) -> NIL
-
    Description : Sets the number of copies
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4349,9 +3815,7 @@ FUNCTION PSSetCopies(nCopies)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetCPI([<n>]) -> NIL
-
    Description : Sets the number of characters per inch (Text mode only)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4368,9 +3832,7 @@ FUNCTION PSSetCPI(nCPI)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetDecimalSep([<c>]) -> cOldSeparator
-
    Description : Sets the decimal separator character
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4387,9 +3849,7 @@ FUNCTION PSSetDecimalSep(cSep)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetDevice([<n>]) -> NIL
-
    Description : Sets the device for the next print job
    Author .....: Stephan St-Denis
    Date .......: January 2007
@@ -4404,9 +3864,7 @@ FUNCTION PSSetDevice(nDevice)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetDirectPrint(<l>) -> NIL
-
    Description : Sets the direct print mode (use for very special cases)
    Author .....: Stephan St-Denis
    Date .......: March 2010
@@ -4421,9 +3879,7 @@ FUNCTION PSSetDirectPrint(lDirect)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetDuplex([<n>]) -> NIL
-
    Description : Sets the Duplex mode
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4440,9 +3896,7 @@ FUNCTION PSSetDuplex(nDuplex)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFileName([<c>]) -> NIL
-
    Description : Sets the file name of a PDF file document
    Author .....: Stephan St-Denis
    Date .......: January 2007
@@ -4457,9 +3911,7 @@ FUNCTION PSSetFileName(cFileName)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFill(<n>, [<n>]) -> NIL
-
    Description : Sets the color used to fill shapes, like boxes and ellipes
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4476,9 +3928,7 @@ FUNCTION PSSetFill(nFillColor, nFillPattern)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFillColor(<n>) -> NIL
-
    Description : Sets the color used to fill shapes, like boxes and ellipes
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4495,9 +3945,7 @@ FUNCTION PSSetFillColor(nFillColor)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFillPattern(<n>) -> NIL
-
    Description : Sets the pattern used to fill shapes, like boxes and ellipes
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4514,9 +3962,7 @@ FUNCTION PSSetFillPattern(nFillPattern)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFont([<n>, <n>, <n>, <n>, <n>]) -> NIL
-
    Description : Sets the font attributes used by each call to PSTextOut()
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4529,9 +3975,7 @@ FUNCTION PSSetFont(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontAttributes([<n>, <n>, <n>, <n>, <n>]) -> NIL
-
    Description : Sets the font attributes used by each call to PSTextOut()
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4549,9 +3993,7 @@ FUNCTION PSSetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, nAngle)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontAngle(<n>) -> NIL
-
    Description : Sets the font angle
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4568,9 +4010,7 @@ FUNCTION PSSetFontAngle(nValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontBColor(<n>) -> NIL
-
    Description : Sets the text background color
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4587,9 +4027,7 @@ FUNCTION PSSetFontBColor(nValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontFColor(<n>) -> NIL
-
    Description : Sets the text foreground color
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4606,9 +4044,7 @@ FUNCTION PSSetFontFColor(nValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontName(<c>) -> NIL
-
    Description : Sets the text foreground color
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4625,9 +4061,7 @@ FUNCTION PSSetFontName(cValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontSize(<n>) -> NIL
-
    Description : Sets the text size in points
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4644,9 +4078,7 @@ FUNCTION PSSetFontSize(nValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetFontStyle(<n>) -> NIL
-
    Description : Sets the font style
    Author .....: Stephan St-Denis
    Date .......: March 2006
@@ -4663,9 +4095,7 @@ FUNCTION PSSetFontStyle(nValue)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetJustify(<n>) -> NIL
-
    Description : Sets justification for TextOut
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4682,9 +4112,7 @@ FUNCTION PSSetJustify(nJustify)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetLPI([<n>]) -> NIL
-
    Description : Sets The number of Lines per inch (Text mode only)
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4701,9 +4129,7 @@ FUNCTION PSSetLPI(nLPI)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetOrientation([<n>]) -> NIL
-
    Description : Sets the paper orientation
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4720,9 +4146,7 @@ FUNCTION PSSetOrientation(nOrientation)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPaperBin(<n>) -> NIL
-
    Description : Sets the paper bin
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4739,9 +4163,7 @@ FUNCTION PSSetPaperBin(nPaperBin)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPageSize(<n>) -> NIL
-
    Description : Sets the page size to a predifined size
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -4758,9 +4180,7 @@ FUNCTION PSSetPageSize(nPageSize)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPDFCharSet(<N>) -> NIL
-
    Description : Set the character set to be use when printing text in PDF docs
    Author .....: Stephan St-Denis
    Date .......: October 2011
@@ -4775,9 +4195,7 @@ FUNCTION PSSetPDFCharSet(nCharSet)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPDFOwnerPassword(<C>) -> NIL
-
    Description : Set the encryption password for PDF documents
    Author .....: Stephan St-Denis
    Date .......: April 2011
@@ -4792,9 +4210,7 @@ FUNCTION PSSetPDFOwnerPassword(cPassword)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPDFEncoding(<N>) -> NIL
-
    Description : Set the internal encoding for PDF documents
    Author .....: R.Visscher
    Date .......: July 2017
@@ -4809,9 +4225,7 @@ FUNCTION PSSetPDFEncoding(nEncoding)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPDFVersion(<N>) -> NIL
-
    Description : Set the version number for PDF documents
    Author .....: R.Visscher
    Date .......: July 2017
@@ -4826,9 +4240,7 @@ FUNCTION PSSetPDFVersion(nVersion)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSShowPDF(<L>) -> NIL
-
    Description : Show PDF after creation in default PDF reader
    Author .....: R.Visscher
    Date .......: July 2017
@@ -4843,9 +4255,7 @@ FUNCTION PSShowPDF(lShow)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPDFEmbeddedFonts(<N>) -> NIL
-
    Description : Set the embedding for PDF documents ( none/sub/full )
    Author .....: R.Visscher
    Date .......: July 2017
@@ -4860,9 +4270,7 @@ FUNCTION PSSetPDFEmbeddedFonts(nEmbedded)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPrinter([<n>]) -> NIL
-
    Description : Sets the printer
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -4879,9 +4287,7 @@ FUNCTION PSSetPrinter(nPrinter)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSSetPWState(<n>) -> NIL
-
    Description : Set the print preview window state
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -4895,9 +4301,7 @@ FUNCTION PSSetPWState(nState)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetPWPosition(<n>, <n>) -> NIL
-
    Description : Set the print preview window position
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -4911,9 +4315,7 @@ FUNCTION PSSetPWPosition(nLeft, nTop)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSSetPWSize(<n>, <n>) -> NIL
-
    Description : Set the print preview window size (-1, -1 = Auto size)
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -4927,9 +4329,7 @@ FUNCTION PSSetPWSize(nWidth, nHeight)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSSetPWBounds(<n>, <n>, <n>, <n>) -> NIL
-
    Description : Set the print preview window bounds (position and size at the same time)
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -4943,9 +4343,7 @@ FUNCTION PSSetPWBounds(nLeft, nTop, nWidth, nHeight)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSSetPWZoomLevel(<n>) -> NIL
-
    Description : Set the print preview window zoom level
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
@@ -4959,16 +4357,12 @@ FUNCTION PSSetPWZoomLevel(nZoomLevel)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: #PSSetPWColors(<n>, <n>, <n>, <n>)) -> NIL
-
    Description : Set the print preview window zoom level
    Version ....: 2.1.0.0
    -----------------------------------------------------------------------------*/
    /*-----------------------------------------------------------------------------
-
    Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
-
    Description : Set the print preview window colors
    Version ....: 3.0.0.0
    -----------------------------------------------------------------------------*/
@@ -4982,9 +4376,7 @@ FUNCTION PSSetPWColors(nBackground, nPaper, nShadow, nToolbar)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetRowCol([<n>, <n>]) -> {60, 80}
-
    Description : Sets the number of virtual Rows and Columns in APS_TEXT unit.
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -5040,9 +4432,7 @@ FUNCTION PSSetRowCol(nRow, nCol)
    RETURN {60, 80}
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetTitle([<c>]) -> cOldValue
-
    Description : Sets the document title
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -5059,9 +4449,7 @@ FUNCTION PSSetTitle(cTitle)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetUnit(<n>) -> nOldValue
-
    Description : Sets the unit used to calculate dimensions and placement
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5078,9 +4466,7 @@ FUNCTION PSSetUnit(nUnit)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetUseDIB(<l>) -> lOldValue
-
    Description : Sets the use of DIB for printing Bitmaps
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5097,9 +4483,7 @@ FUNCTION PSSetUseDIB(lUseDIB)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetXerox(<l>) -> lOldValue
-
    Description : Sets Xerox compatible mode for Xerox WorkCenter and other
    faulty printers
    Author .....: Stephan St-Denis
@@ -5117,9 +4501,7 @@ FUNCTION PSSetXerox(lXerox)
    RETURN OldValue
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,
-
    <n>, <n>]) -> NIL
    Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
    Author .....: Stephan St-Denis
@@ -5137,9 +4519,7 @@ FUNCTION PSTextBox(nTop, nLeft, nBottom, nRight, cText, nJustify, cFont, nSize, 
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSTextBoxEx(<n>, <n>, <n>, <n>, <x>) -> NIL
-
    Description : Prints a string in a box at position X1,Y1, X2,Y2 using parameters
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5154,9 +4534,7 @@ FUNCTION PSTextBoxEx(nTop, nLeft, nBottom, nRight, cText)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSTextOut(<n>, <n>, <x>, [<c>, <n>, <n>, <n>, <n>, <n>, <n>, <n>]) -> NIL
-
    Description : Prints a string at position X,Y using parameters
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5173,9 +4551,7 @@ FUNCTION PSTextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, nStyle
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSTextOutEx(<n>, <n>, <x>, [<c>]) -> NIL
-
    Description : Prints a string at position X,Y using parameters
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5190,9 +4566,7 @@ FUNCTION PSTextOutEx(nTop, nLeft, xValue, cPicture)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSVersion() -> cVersionNumber
-
    Description : Returns the version number
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5203,9 +4577,7 @@ FUNCTION PSVersion()
    RETURN oPScript:GetVersion()
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSWaterMark([<b>]) -> Previous WaterMark
-
    Description : Sets/Returns the current WaterMark
    Author .....: Stephan St-Denis
    Date .......: March 2005
@@ -5236,9 +4608,7 @@ FUNCTION PSWaterMark(bWaterMark, lWaterMark)
    -----------------------------------------------------------------------------*/
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSPrnChanged()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
@@ -5247,9 +4617,7 @@ FUNCTION PSPrnChanged()
    RETURN .f.
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSRefreshPrinters()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
@@ -5258,9 +4626,7 @@ FUNCTION PSRefreshPrinters()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSendMail()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
@@ -5269,9 +4635,7 @@ FUNCTION PSSendMail()
    RETURN {.f., ""}
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSetTimeSlice()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
@@ -5280,9 +4644,7 @@ FUNCTION PSSetTimeSlice()
    RETURN {|| NIL}
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSSShowIcon()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
@@ -5291,13 +4653,10 @@ FUNCTION PSShowIcon()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: PSShutDown()
-
    Note .......: This funtion is not implemented in PSCRIPT.DLL
    -----------------------------------------------------------------------------*/
 
 FUNCTION PSShutDown()
 
    RETURN NIL
-

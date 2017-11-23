@@ -56,47 +56,47 @@ CLASS TPlayer FROM TControl
 
    DATA Type      INIT "PLAYER" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD Release
+   METHOD Release
 
-METHOD Play()             BLOCK { |Self| mcifunc( ::hWnd,  1 ) }
+   METHOD Play()             BLOCK { |Self| mcifunc( ::hWnd,  1 ) }
 
-METHOD Stop()             BLOCK { |Self| mcifunc( ::hWnd,  2 ) }
+   METHOD Stop()             BLOCK { |Self| mcifunc( ::hWnd,  2 ) }
 
-METHOD Pause()            BLOCK { |Self| mcifunc( ::hWnd,  3 ) }
+   METHOD Pause()            BLOCK { |Self| mcifunc( ::hWnd,  3 ) }
 
-METHOD Close()            BLOCK { |Self| mcifunc( ::hWnd,  4 ) }
+   METHOD Close()            BLOCK { |Self| mcifunc( ::hWnd,  4 ) }
 
-METHOD Eject()            BLOCK { |Self| mcifunc( ::hWnd,  6 ) }
+   METHOD Eject()            BLOCK { |Self| mcifunc( ::hWnd,  6 ) }
 
-METHOD PositionEnd()      BLOCK { |Self| mcifunc( ::hWnd,  7 ) }
+   METHOD PositionEnd()      BLOCK { |Self| mcifunc( ::hWnd,  7 ) }
 
-METHOD PositionHome()     BLOCK { |Self| mcifunc( ::hWnd,  8 ) }
+   METHOD PositionHome()     BLOCK { |Self| mcifunc( ::hWnd,  8 ) }
 
-METHOD Open(File)         BLOCK { |Self,File| mcifunc( ::hWnd,  9, File ) }
+   METHOD Open(File)         BLOCK { |Self,File| mcifunc( ::hWnd,  9, File ) }
 
-METHOD OpenDialog()       BLOCK { |Self| mcifunc( ::hWnd, 10 ) }
+   METHOD OpenDialog()       BLOCK { |Self| mcifunc( ::hWnd, 10 ) }
 
-METHOD PlayReverse()      BLOCK { |Self| mcifunc( ::hWnd, 11 ) }
+   METHOD PlayReverse()      BLOCK { |Self| mcifunc( ::hWnd, 11 ) }
 
-METHOD Resume()           BLOCK { |Self| mcifunc( ::hWnd, 12 ) }
+   METHOD Resume()           BLOCK { |Self| mcifunc( ::hWnd, 12 ) }
 
-METHOD Repeat(Status)     BLOCK { |Self,Status| mcifunc( ::hWnd, 13, Status ) }
+   METHOD Repeat(Status)     BLOCK { |Self,Status| mcifunc( ::hWnd, 13, Status ) }
 
-METHOD RepeatOn()         BLOCK { |Self| mcifunc( ::hWnd, 13, .t. ) }
+   METHOD RepeatOn()         BLOCK { |Self| mcifunc( ::hWnd, 13, .t. ) }
 
-METHOD RepeatOff()        BLOCK { |Self| mcifunc( ::hWnd, 13, .f. ) }
+   METHOD RepeatOff()        BLOCK { |Self| mcifunc( ::hWnd, 13, .f. ) }
 
-METHOD Speed(Speed)       BLOCK { |Self,Speed| mcifunc( ::hWnd, 14, Speed ) }
+   METHOD Speed(Speed)       BLOCK { |Self,Speed| mcifunc( ::hWnd, 14, Speed ) }
 
-METHOD Zoom(Zoom)         BLOCK { |Self,Zoom| mcifunc( ::hWnd, 16, Zoom ) }
+   METHOD Zoom(Zoom)         BLOCK { |Self,Zoom| mcifunc( ::hWnd, 16, Zoom ) }
 
-METHOD Length()           BLOCK { |Self| mcifunc( ::hWnd, 17 ) }
+   METHOD Length()           BLOCK { |Self| mcifunc( ::hWnd, 17 ) }
 
-METHOD Volume             SETGET
+   METHOD Volume             SETGET
 
-METHOD Position           SETGET
+   METHOD Position           SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -182,19 +182,19 @@ CLASS TAnimateBox FROM TControl
 
    DATA Type      INIT "ANIMATEBOX" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD Release            BLOCK { |Self| destroyanimate( ::hWnd ) , ::Super:Release() }
+   METHOD Release            BLOCK { |Self| destroyanimate( ::hWnd ) , ::Super:Release() }
 
-METHOD Open(File)         BLOCK { |Self,File| openanimate( ::hWnd, File ) }
+   METHOD Open(File)         BLOCK { |Self,File| openanimate( ::hWnd, File ) }
 
-METHOD Play               BLOCK { |Self| playanimate( ::hWnd ) }
+   METHOD Play               BLOCK { |Self| playanimate( ::hWnd ) }
 
-METHOD Stop               BLOCK { |Self| stopanimate( ::hWnd ) }
+   METHOD Stop               BLOCK { |Self| stopanimate( ::hWnd ) }
 
-METHOD Close              BLOCK { |Self| closeanimate( ::hWnd ) }
+   METHOD Close              BLOCK { |Self| closeanimate( ::hWnd ) }
 
-METHOD Seek(Frame)        BLOCK { |Self,Frame| seekanimate( ::hWnd, Frame ) }
+   METHOD Seek(Frame)        BLOCK { |Self,Frame| seekanimate( ::hWnd, Frame ) }
 
 ENDCLASS
 
@@ -365,4 +365,3 @@ HB_FUNC( MCIFUNC )
 }
 
 #pragma ENDDUMP
-

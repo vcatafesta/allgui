@@ -572,4 +572,3 @@ HB_FUNC( QHTM_FORMCALLBACK )
 #pragma ENDDUMP
 
    #include "h_qhtm.prg"
-

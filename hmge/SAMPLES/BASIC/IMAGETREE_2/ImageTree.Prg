@@ -120,4 +120,3 @@ FUNCTION ChangeAllItemImages()
    NEXT
 
    RETURN NIL
-

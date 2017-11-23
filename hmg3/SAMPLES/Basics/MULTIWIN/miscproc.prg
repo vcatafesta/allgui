@@ -21,4 +21,3 @@ PROCEDURE Opentest
    ENDIF
 
    RETURN
-

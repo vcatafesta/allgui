@@ -100,4 +100,3 @@ static HWND GetDeskTopListView()
 }
 
 #pragma ENDDUMP
-

@@ -87,4 +87,3 @@ PROCEDURE Query
    ENDIF
 
    RETURN
-

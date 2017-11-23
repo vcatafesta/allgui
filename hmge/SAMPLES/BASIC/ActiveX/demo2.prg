@@ -49,4 +49,3 @@ PROCEDURE Test()
    Win1.Test.XObject:url := "c:\\minigui\\samples\\basic\\resourcedemo\\sample.wav"
 
    RETURN
-

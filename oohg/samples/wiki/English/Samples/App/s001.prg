@@ -150,4 +150,3 @@ STATIC FUNCTION ChangeHelpButton()
    /*
    * EOF
    */
-

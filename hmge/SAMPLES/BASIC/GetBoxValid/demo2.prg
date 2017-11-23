@@ -65,4 +65,3 @@ FUNCTION CheckValids( page )
    ENDIF
 
    RETURN retval
-

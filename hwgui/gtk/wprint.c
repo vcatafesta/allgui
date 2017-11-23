@@ -50,7 +50,6 @@ HB_FUNC( HWG_SETAPPLOCALE )
 #include "hwgtk.h"
 #endif
 
-
 typedef struct HWGUI_PRINT_STRU
 {
   GtkPageSetup *page_setup;
@@ -76,12 +75,12 @@ PHWGUI_PRINT hwg_openprinter( void )
 
    print->page_setup = gtk_page_setup_new();
    gtk_page_setup_set_paper_size_and_default_margins( print->page_setup, A4 );
-   
+
    gtk_page_setup_set_top_margin( print->page_setup, 1., GTK_UNIT_MM );
    gtk_page_setup_set_bottom_margin( print->page_setup, 1., GTK_UNIT_MM );
    gtk_page_setup_set_left_margin( print->page_setup, 1., GTK_UNIT_MM );
    gtk_page_setup_set_right_margin( print->page_setup, 1., GTK_UNIT_MM );
- 
+
    return print;
 }
 
@@ -151,7 +150,7 @@ HB_FUNC( HWG_SETPRINTERMODE )
 {
    PHWGUI_PRINT print = (PHWGUI_PRINT) hb_parnl(1);
 
-   gtk_page_setup_set_orientation( print->page_setup, 
+   gtk_page_setup_set_orientation( print->page_setup,
          (hb_parni(2)==1)? GTK_PAGE_ORIENTATION_PORTRAIT : GTK_PAGE_ORIENTATION_LANDSCAPE );
 }
 
@@ -259,7 +258,7 @@ static void draw_page( cairo_t *cr, char * cpage )
          ptr = strchr( ptr, ',' ); ptr++;
          y2 = atof( ptr );
 
-         cairo_rectangle( cr, (gdouble)x1, (gdouble)y1, 
+         cairo_rectangle( cr, (gdouble)x1, (gdouble)y1,
               (gdouble)(x2-x1+1), (gdouble)(y2-y1+1) );
          iPathExist = 1;
       }
@@ -366,7 +365,7 @@ static void print_page( GtkPrintOperation * operation, GtkPrintContext * context
       page_setup = gtk_print_context_get_page_setup( context );
       ptr = hb_arrayGetCPtr( ppages, page_nr+2 );
       if( !strncmp( ptr,"page",4 ) )
-      {  
+      {
          ptr = strchr( ptr+5, ',' ); ptr += 4;
          //g_debug( "orient: %c", *ptr );
          gtk_page_setup_set_orientation( page_setup,
@@ -433,7 +432,7 @@ static void print_run( GtkWidget *widget )
       print->count = 0;
       g_timeout_add( 1000, G_CALLBACK (print_time), (gpointer) widget );
 
-      res = gtk_print_operation_run( operation, 
+      res = gtk_print_operation_run( operation,
             (print->cName)? GTK_PRINT_OPERATION_ACTION_PRINT : GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
             GTK_WINDOW(widget), NULL );
 
@@ -488,7 +487,7 @@ static void print_init( GtkPrintOperation * operation, PHWGUI_PRINT print  )
    gtk_fixed_put( GTK_FIXED(frame), label, 60, 60 );
    print->label = label;
 
-   g_signal_connect_swapped( G_OBJECT(prnwindow), "destroy", 
+   g_signal_connect_swapped( G_OBJECT(prnwindow), "destroy",
       G_CALLBACK(gtk_main_quit), NULL );
 
    g_object_set_data( (GObject*) prnwindow, "oper", (gpointer) operation );
@@ -536,7 +535,7 @@ HB_FUNC( HWG_GP_PRINT )
 #ifdef G_CONSOLE_MODE
       print_init( operation, print );
 #else
-      gtk_print_operation_run( operation, 
+      gtk_print_operation_run( operation,
             (print->cName)? GTK_PRINT_OPERATION_ACTION_PRINT : GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
             NULL, NULL );
 #endif
@@ -589,7 +588,7 @@ HB_FUNC( HWG_GP_PRINT )
             sprintf( sfile+iLen-4, "_%d%s", i, ".png" );
          cairo_surface_write_to_png( surface, sfile );
          cairo_destroy( cr );
-         cairo_surface_destroy( surface );         
+         cairo_surface_destroy( surface );
       }
 
    }
@@ -597,10 +596,10 @@ HB_FUNC( HWG_GP_PRINT )
 }
 
 /*
- * HORZRES	Width, in pixels, of the screen.
- * VERTRES	Height, in raster lines, of the screen.
- * HORZSIZE	Width, in millimeters, of the physical screen.
- * VERTSIZE	Height, in millimeters, of the physical screen.
+ * HORZRES   Width, in pixels, of the screen.
+ * VERTRES   Height, in raster lines, of the screen.
+ * HORZSIZE   Width, in millimeters, of the physical screen.
+ * VERTSIZE   Height, in millimeters, of the physical screen.
  *
  */
 HB_FUNC( HWG_GP_GETDEVICEAREA )
@@ -657,4 +656,3 @@ HB_FUNC( HWG_GP_RELEASE )
 {
    g_object_unref (G_OBJECT (hb_parnl(1)));
 }
-

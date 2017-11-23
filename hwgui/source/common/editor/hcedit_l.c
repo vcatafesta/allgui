@@ -187,7 +187,7 @@ TEDFONT * ted_setfont( TEDIT * pted, PHWGUI_FONT hwg_font, int iNum, HB_BOOL bPr
 {
    TEDFONT * pFont;
 
-   pFont = ( (bPrn)? pted->pFontsPrn : pted->pFontsScr ) + 
+   pFont = ( (bPrn)? pted->pFontsPrn : pted->pFontsScr ) +
          ( (iNum>=0)? iNum : pted->iFontsCurr );
 
    pFont->iWidth = 0;
@@ -201,7 +201,7 @@ TEDFONT * ted_setfont( TEDIT * pted, PHWGUI_FONT hwg_font, int iNum, HB_BOOL bPr
 }
 
 /*
- * ted_CalcItemWidth() returns the text width in pixels, 
+ * ted_CalcItemWidth() returns the text width in pixels,
  * writes to the 4 parameter (iRealLen) the width in chars
  */
 
@@ -382,8 +382,8 @@ int ted_TextOut( TEDIT * pted, int xpos, int ypos, int iHeight,
    if( hDC->bcolor != -1 )
    {
       hwg_setcolor( hDC->cr, hDC->bcolor );
-      cairo_rectangle( hDC->cr, (gdouble)xpos, (gdouble)ypos, //-pted->iInterline/2, 
-            (iLen==1 && *szText==' ')? (gdouble)font->iSpace : (gdouble)iWidth, 
+      cairo_rectangle( hDC->cr, (gdouble)xpos, (gdouble)ypos, //-pted->iInterline/2,
+            (iLen==1 && *szText==' ')? (gdouble)font->iSpace : (gdouble)iWidth,
             (gdouble)PANGO_DESCENT(rc)+pted->iInterline );
       cairo_fill( hDC->cr );
    }
@@ -413,7 +413,7 @@ int ted_LineOut( TEDIT * pted, int x1, int ypos, char *szText, int iPrinted, int
    if( iPrinted )
       for( i = 0, lasti = 0; i <= iPrinted; i++ )
       {
-         // if the colour or font changes, then need to output 
+         // if the colour or font changes, then need to output
          if( i == iPrinted ||
                ( pattr + i )->fg != ( pattr + lasti )->fg ||
                ( pattr + i )->bg != ( pattr + lasti )->bg ||
@@ -614,7 +614,7 @@ HB_FUNC( HCED_SETFONT )
    int iFont = hb_parni(3);
 
    if( iFont > 0 ) iFont --;
-   ted_setfont( ( TEDIT * ) HB_PARHANDLE( 1 ), ( PHWGUI_FONT ) HB_PARHANDLE( 2 ), 
+   ted_setfont( ( TEDIT * ) HB_PARHANDLE( 1 ), ( PHWGUI_FONT ) HB_PARHANDLE( 2 ),
          iFont, (HB_ISNIL(4))? 0 : hb_parl(4) );
 }
 
@@ -684,7 +684,7 @@ HB_FUNC( HCED_SETVSCROLL )
    si.nPage = hb_parni(3);
    si.nMin  = 0;
    si.nMax  = hb_parni(3) * ( (iPages)? iPages-1:iPages );
-        
+
    SetScrollInfo( pted->handle, SB_VERT, &si, TRUE );
    */
 }
@@ -840,7 +840,7 @@ HB_FUNC( HCED_EXACTCARETPOS )
             ptr = szText + hced_utf8bytes( szText, lasti );
             iRealLen = iReqLen;
 
-            x1 += ted_CalcItemWidth( layout, ptr, 
+            x1 += ted_CalcItemWidth( layout, ptr,
                   pted->pFontsScr + (pattr + lasti)->iFont, &iRealLen,
                   xpos - x1, 0, lasti );
 
@@ -881,7 +881,7 @@ HB_FUNC( HCED_EXACTCARETPOS )
       pted->iyCaretPos = y1 + pted->yBorder;
       // wrlog( NULL, "x = %u y = %u\r\n", x1, y1 );
    }
-   
+
    //wrlog( NULL, "End iPrinted = %u \r\n", iPrinted );
    hb_retni( iPrinted );
 
@@ -904,11 +904,11 @@ HB_FUNC( HCED_INVALIDATERECT )
    {
       x1 = y1 = 0;
       x2 = widget->allocation.width;
-      y2 = widget->allocation.height;      
+      y2 = widget->allocation.height;
    }
    gtk_widget_queue_draw_area( widget, x1, y1,
         x2 - x1 + 1, y2 - y1 + 1 );
-   
+
 }
 
 HB_FUNC( HCED_SETFOCUS )
@@ -916,7 +916,6 @@ HB_FUNC( HCED_SETFOCUS )
    TEDIT *pted = ( TEDIT * ) HB_PARHANDLE( 1 );
    gtk_widget_grab_focus( (GtkWidget*) pted->area );
 }
-
 
 /*
  * hced_LineOut( ::hEdit, @x1, @yPos, @x2, cLine, Len(cLine), nAlign, lPaint )
@@ -968,7 +967,7 @@ HB_FUNC( HCED_LINEOUT )
    while( i < TEDATTRF_MAX )
    {
       iFont = *( pted->pattrf + i );
-      font = ( (pted->hDCPrn)? pted->pFontsPrn : pted->pFontsScr ) + 
+      font = ( (pted->hDCPrn)? pted->pFontsPrn : pted->pFontsScr ) +
             (iFont? iFont-1 : 0) ;
       iHeight = ( iHeight > font->iHeight )? iHeight : font->iHeight;
       if( ! *( pted->pattrf+i ) )
@@ -981,7 +980,7 @@ HB_FUNC( HCED_LINEOUT )
    for( i = 0, lasti = 0; i <= iPrinted; i++ )
       if( i == iPrinted || ( pattr + i )->iFont != ( pattr + lasti )->iFont )
       {
-         font = ( (pted->hDCPrn)? pted->pFontsPrn : pted->pFontsScr ) + 
+         font = ( (pted->hDCPrn)? pted->pFontsPrn : pted->pFontsScr ) +
                ( pattr + lasti )->iFont;
          iHeight = ( iHeight > font->iHeight )? iHeight : font->iHeight;
          lasti = i;

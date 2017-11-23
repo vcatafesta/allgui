@@ -358,4 +358,3 @@ FUNCTION _HMG_VirtualKeyboardGetHandle
    //   ENDIF
 
    RETURN hWnd
-

@@ -197,4 +197,3 @@ FUNCTION CToA( cArray )
    END
 
    RETURN aArray
-

@@ -27,4 +27,3 @@ FUNCTION Main
    Form_1.Activate
 
    RETURN
-

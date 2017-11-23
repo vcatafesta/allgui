@@ -1602,4 +1602,3 @@ FUNCTION NoArray( aOldArray )
    ENDIF
 
    RETURN ( aNewArray )
-

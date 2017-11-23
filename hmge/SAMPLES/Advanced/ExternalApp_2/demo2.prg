@@ -281,4 +281,3 @@ HB_FUNC ( ISMAXIMIZED )
 }
 
 #pragma ENDDUMP
-

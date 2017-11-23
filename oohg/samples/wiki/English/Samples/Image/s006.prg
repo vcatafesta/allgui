@@ -81,4 +81,3 @@ FUNCTION SwapArea( oImage1 )
    /*
    * EOF
    */
-

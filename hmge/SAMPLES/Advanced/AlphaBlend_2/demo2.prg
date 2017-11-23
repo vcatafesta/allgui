@@ -128,4 +128,3 @@ HB_FUNC( APP_ONPAINT )
 }
 
 #pragma ENDDUMP
-

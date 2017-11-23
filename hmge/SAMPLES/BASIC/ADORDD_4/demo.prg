@@ -470,4 +470,3 @@ STATIC FUNCTION CheckODBC()
    CLOSE REGISTRY oReg
 
    RETURN !Empty( cKey )
-

@@ -157,4 +157,3 @@ FUNCTION SwitchToNextWin()
    END IF
 
    Return( Nil )
-

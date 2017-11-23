@@ -358,4 +358,3 @@ FUNCTION BT_aFILTER_EMBOSS( index, value, weight, add, bias )
    /*
    * EOF
    */
-

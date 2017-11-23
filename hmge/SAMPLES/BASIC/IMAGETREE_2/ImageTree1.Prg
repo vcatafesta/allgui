@@ -108,4 +108,3 @@ FUNCTION AddItemTest()
    Form_1.Tree_1.AddItem( 'New Item 1.6' , 1 )
 
    RETURN NIL
-

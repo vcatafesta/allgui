@@ -4046,4 +4046,3 @@ PROCEDURE _AutoAdjust ( hWnd, aInitSize )
       ENDIF
 
       RETURN
-

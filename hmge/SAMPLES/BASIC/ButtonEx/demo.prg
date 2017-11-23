@@ -336,4 +336,3 @@ FUNCTION test_butt()
    NEXT i
 
    RETURN NIL
-

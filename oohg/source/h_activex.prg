@@ -66,9 +66,9 @@ CLASS TActiveX FROM TControl
    DATA hSink     INIT nil
    DATA hAtl      INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD Release
+   METHOD Release
 
    DELEGATE Set TO oOle
    DELEGATE Get TO oOle
@@ -77,7 +77,7 @@ METHOD Release
    DATA aAxEv        INIT {}              // oSkAr 20070829
    DATA aAxExec      INIT {}              // oSkAr 20070829
 
-METHOD EventMap( nMsg, xExec, oSelf )  // oSkAr 20070829
+   METHOD EventMap( nMsg, xExec, oSelf )  // oSkAr 20070829
 
    EMPTY( _OOHG_AllVars )
 
@@ -200,4 +200,3 @@ METHOD __Error( ... )
 
    #endif
    #endif
-

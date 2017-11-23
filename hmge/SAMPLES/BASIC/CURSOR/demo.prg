@@ -235,4 +235,3 @@ PROCEDURE PutMouse( obj, form, rect )
    SETCURSORPOS( ocol, orow )
 
    RETURN
-

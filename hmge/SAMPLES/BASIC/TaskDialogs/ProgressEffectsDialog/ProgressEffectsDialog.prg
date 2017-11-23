@@ -128,4 +128,3 @@ STATIC PROCEDURE UpdateInstruction( hWnd )
    _SetMainInstruction( hWnd, cMsg )
 
    RETURN
-

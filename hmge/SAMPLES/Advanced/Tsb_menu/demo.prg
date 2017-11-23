@@ -531,4 +531,3 @@ PROCEDURE stanyd()
 PROCEDURE fkatk()
 
    msginfo( ProcFile() + CRLF + ProcName(), ntrim( ProcLine() ) )
-

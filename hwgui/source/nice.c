@@ -2,7 +2,7 @@
  * $Id: nice.c 2012 2013-03-07 09:03:56Z alkresin $
  *
  * HWGUI - Harbour Win32 GUI library source code:
- * 
+ *
  *
  * Copyright 2003 Luiz Rafael Culik Guimaraes <culikr@brtrubo.com>
  * www - http://sites.uol.com.br/culikr/
@@ -109,7 +109,6 @@ void Gradient( HDC hdc, int x, int y, int w, int h, int color1, int color2, int 
    g2 = color2 / 256  % 256 ;
    b2 = color2 / 256 / 256  % 256 ;
 
-
    // ******************************************************
    Vert[0].x = 0;
    Vert[0].y = 0;
@@ -155,14 +154,12 @@ LRESULT CALLBACK NiceButtProc( HWND hWnd, UINT message, WPARAM wParam,
       return ( DefWindowProc( hWnd, message, wParam, lParam ) );
 }
 
-
 HB_FUNC( HWG_CREATEROUNDRECTRGN )
 {
    HRGN Res = CreateRoundRectRgn( hb_parni( 1 ), hb_parni( 2 ), hb_parni( 3 ),
          hb_parni( 4 ), hb_parni( 5 ), hb_parni( 6 ) );
    HB_RETHANDLE( Res );
 }
-
 
 HB_FUNC( HWG_SETWINDOWRGN )
 {
@@ -201,7 +198,6 @@ HB_FUNC( HWG_REGNICE )
    }
 }
 
-
 HB_FUNC( HWG_CREATENICEBTN )
 {
    HWND hWndPanel;
@@ -229,7 +225,6 @@ HB_FUNC( HWG_ISMOUSEOVER )
    GetCursorPos( &Pt );
    hb_retl( PtInRect( &Rect, Pt ) );
 }
-
 
 HB_FUNC( HWG_RGB )
 {
@@ -264,7 +259,6 @@ HB_FUNC( HWG_MAKELONG )
                ( WORD ) hb_parnl( 2 ) ) );
 }
 
-
 HB_FUNC( HWG_GETWINDOWLONG )
 {
    hb_retnl( GetWindowLong( ( HWND ) HB_PARHANDLE( 1 ), hb_parni( 2 ) ) );
@@ -274,4 +268,3 @@ HB_FUNC( HWG_SETBKMODE )
 {
    hb_retni( SetBkMode( ( HDC ) HB_PARHANDLE( 1 ), hb_parni( 2 ) ) );
 }
-

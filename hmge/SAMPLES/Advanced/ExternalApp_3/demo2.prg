@@ -164,4 +164,3 @@ static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam )
 }
 
 #pragma ENDDUMP
-

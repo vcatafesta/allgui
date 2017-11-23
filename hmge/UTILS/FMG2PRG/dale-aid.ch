@@ -7,5 +7,5 @@
    MEMVAR cTargetFile
    MEMVAR cSourceFile
    MEMVAR oFileHandle
-   
+
    MEMVAR sCtrlObjects

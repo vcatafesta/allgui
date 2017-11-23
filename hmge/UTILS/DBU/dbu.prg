@@ -1529,4 +1529,3 @@ FUNCTION MG_USE(cDbfName, cAlias, lUseExclusive, nTries, lAsk, cdPage)
    ENDDO
 
    RETURN lReturn
-

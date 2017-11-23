@@ -225,4 +225,3 @@ FUNCTION InitDialogSlider( ParentName, ControlHandle, k )
    ENDIF
 
    RETURN NIL
-

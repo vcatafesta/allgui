@@ -24,7 +24,6 @@
 extern "C" {
 #endif
 
-
 HPDF_NameDict
 HPDF_NameDict_New  (HPDF_MMgr  mmgr,
                     HPDF_Xref  xref);
@@ -41,7 +40,6 @@ HPDF_NameDict_SetNameTree  (HPDF_NameDict     namedict,
 HPDF_BOOL
 HPDF_NameDict_Validate  (HPDF_NameDict  namedict);
 
-
 /*------- NameTree -------*/
 
 HPDF_NameTree
@@ -56,7 +54,6 @@ HPDF_NameTree_Add  (HPDF_NameTree  tree,
 HPDF_BOOL
 HPDF_NameTree_Validate  (HPDF_NameTree  tree);
 
-
 /*------- EmbeddedFile -------*/
 
 HPDF_EmbeddedFile
@@ -67,10 +64,8 @@ HPDF_EmbeddedFile_New  (HPDF_MMgr  mmgr,
 HPDF_BOOL
 HPDF_EmbeddedFile_Validate  (HPDF_EmbeddedFile  emfile);
 
-
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
 #endif /* _HPDF_NAMEDICT_H */
-

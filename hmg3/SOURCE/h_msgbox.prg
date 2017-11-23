@@ -228,4 +228,3 @@ FUNCTION MessageBoxTimeout ( Message , Title , nTypeIconButton , nMilliseconds )
    nRetValue := HMG_MessageBoxTimeout ( HMG_ValToStr(Message), HB_VALTOSTR(Title), nTypeIconButton, nMilliseconds )
 
    RETURN nRetValue
-

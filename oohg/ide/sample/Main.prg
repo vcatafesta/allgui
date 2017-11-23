@@ -54,4 +54,3 @@ FUNCTION cierra()
    CLOSE data
 
    RETURN NIL
-

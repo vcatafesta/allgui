@@ -129,4 +129,3 @@ FUNCTION AdjustGridColumns()
    NEXT i
 
    RETURN NIL
-

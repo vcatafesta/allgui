@@ -207,4 +207,3 @@ STATIC FUNCTION FillDlg( cMsg, aOpciones, nLineas, cIcoFile )
    ENDIF
 
    RETURN NIL
-

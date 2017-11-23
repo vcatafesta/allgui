@@ -113,7 +113,7 @@ static HB_ULONG ArrayMemoSize( PHB_ITEM pArray )
             break;
 
          case HB_IT_INTEGER:
-         	  break;
+              break;
          case HB_IT_LONG:
             dVal = hb_arrayGetND( pArray, ul );
             if( HB_DBL_LIM_INT32( dVal ) )
@@ -187,7 +187,7 @@ static char *WriteArray( char *ptr, PHB_ITEM pArray )
             break;
 
          case HB_IT_INTEGER:
-         	  break;
+              break;
          case HB_IT_LONG:
             dVal = hb_arrayGetND( pArray, ul );
             if( HB_DBL_LIM_INT32( dVal ) )

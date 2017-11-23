@@ -81,4 +81,3 @@ PROCEDURE GETITEM()
       str ( x ) ) ), ltrim( str ( i ) ) )} )
 
    RETURN
-

@@ -99,4 +99,3 @@ FUNCTION GetFileFromInet( cServer, cFile, cOutName )
    ENDIF
 
    RETURN NIL
-

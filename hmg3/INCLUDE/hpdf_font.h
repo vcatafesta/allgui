@@ -24,7 +24,6 @@
 extern "C" {
 #endif
 
-
 /*----------------------------------------------------------------------------*/
 /*----- Writing Mode ---------------------------------------------------------*/
 
@@ -39,15 +38,12 @@ typedef enum _HPDF_FontType {
     HPDF_FONT_MMTYPE1
 } HPDF_FontType;
 
-
 typedef HPDF_Dict HPDF_Font;
-
 
 typedef HPDF_TextWidth
 (*HPDF_Font_TextWidths_Func)  (HPDF_Font        font,
                              const HPDF_BYTE  *text,
                              HPDF_UINT        len);
-
 
 typedef HPDF_UINT
 (*HPDF_Font_MeasureText_Func)  (HPDF_Font        font,
@@ -59,7 +55,6 @@ typedef HPDF_UINT
                               HPDF_REAL        wordspace,
                               HPDF_BOOL        wordwrap,
                               HPDF_REAL        *real_width);
-
 
 typedef struct _HPDF_FontAttr_Rec  *HPDF_FontAttr;
 
@@ -84,7 +79,6 @@ typedef struct _HPDF_FontAttr_Rec {
     HPDF_Dict                   cmap_stream;
 } HPDF_FontAttr_Rec;
 
-
 HPDF_Font
 HPDF_Type1Font_New  (HPDF_MMgr        mmgr,
                      HPDF_FontDef     fontdef,
@@ -103,7 +97,6 @@ HPDF_Type0Font_New  (HPDF_MMgr        mmgr,
                      HPDF_Encoder     encoder,
                      HPDF_Xref        xref);
 
-
 HPDF_BOOL
 HPDF_Font_Validate  (HPDF_Font font);
 
@@ -112,4 +105,3 @@ HPDF_Font_Validate  (HPDF_Font font);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_FONT_H */
-

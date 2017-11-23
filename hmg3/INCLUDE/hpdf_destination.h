@@ -32,7 +32,6 @@ HPDF_Destination_New  (HPDF_MMgr   mmgr,
                        HPDF_Page   target,
                        HPDF_Xref   xref);
 
-
 HPDF_BOOL
 HPDF_Destination_Validate (HPDF_Destination  dst);
 
@@ -41,4 +40,3 @@ HPDF_Destination_Validate (HPDF_Destination  dst);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_DESTINATION_H */
-

@@ -287,4 +287,3 @@ PROCEDURE ApplyStylesEx()
    ENDIF
 
    RETURN
-

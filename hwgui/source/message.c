@@ -96,4 +96,3 @@ HB_FUNC( HWG_MSGTEMP )
                             MB_OKCANCEL | MB_ICONQUESTION ) );
    }
 }
-

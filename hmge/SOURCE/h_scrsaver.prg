@@ -221,4 +221,3 @@ FUNCTION _lValidScrSaver()
    ENDIF
 
    RETURN lRet
-

@@ -67,11 +67,11 @@ CLASS HilightBase
    DATA   lCase      INIT .F.      // A flag - are the keywords case sensitive
    DATA   aLineStru, nItems, nLine
 
-METHOD New()   INLINE  Self
+   METHOD New()   INLINE  Self
 
-METHOD End()
+   METHOD End()
 
-METHOD Do()    INLINE  (::nItems := 0,Nil)
+   METHOD Do()    INLINE  (::nItems := 0,Nil)
 
 ENDCLASS
 
@@ -91,15 +91,15 @@ CLASS Hilight INHERIT HilightBase
    DATA   lMultiComm
    DATA   aDop, nDopChecked
 
-METHOD New( cFile, cSection )
+   METHOD New( cFile, cSection )
 
-METHOD Set( oEdit )
+   METHOD Set( oEdit )
 
-METHOD Do( nLine, lCheck )
+   METHOD Do( nLine, lCheck )
 
-METHOD UpdSource( nLine )  INLINE  ( ::nDopChecked := nLine-1 )
+   METHOD UpdSource( nLine )  INLINE  ( ::nDopChecked := nLine-1 )
 
-METHOD AddItem( nPos1, nPos2, nType )
+   METHOD AddItem( nPos1, nPos2, nType )
 
 ENDCLASS
 
@@ -316,4 +316,3 @@ STATIC FUNCTION IsLetter( c )
 
    RETURN Len(c) > 1 .OR. ( c >= "A" .AND. c <= "Z" ) .OR. ( c >= "a" .AND. c <= "z" ) .OR. ;
       c == "_" .OR. Asc(c) >= 128
-

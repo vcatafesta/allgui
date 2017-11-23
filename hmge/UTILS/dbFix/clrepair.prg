@@ -1439,4 +1439,3 @@ STATIC FUNCTION GetYesNo(cMsg, lEsc)
    ENDDO
 
    Return(NIL)
-

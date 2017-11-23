@@ -175,4 +175,3 @@ FUNCTION TextBoxChange1()
    ENDIF
 
    RETURN NIL
-

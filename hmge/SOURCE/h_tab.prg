@@ -773,4 +773,3 @@ FUNCTION OwnTabPaint ( lParam )
    SetTextColor( hDC, oldTextColor )
 
    RETURN( 0 )
-

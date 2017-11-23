@@ -197,4 +197,3 @@ FUNCTION DBTESTCREATE(ufile)
    aDbf := {}
 
    RETURN NIL
-

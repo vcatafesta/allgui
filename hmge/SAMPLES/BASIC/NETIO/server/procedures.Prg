@@ -97,4 +97,3 @@ FUNCTION Query_004(nRecNo,aValues)
    USE
 
    RETURN NIL
-

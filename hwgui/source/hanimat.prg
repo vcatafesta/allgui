@@ -17,26 +17,26 @@ CLASS VAR winclass   INIT "SysAnimate32"
    DATA cFileName
    DATA xResID
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cFilename, lAutoPlay, lCenter, lTransparent, xResID )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Open( cFileName )
+   METHOD Open( cFileName )
 
-METHOD Play( nFrom, nTo, nRep )
+   METHOD Play( nFrom, nTo, nRep )
 
-METHOD Seek( nFrame )
+   METHOD Seek( nFrame )
 
-METHOD Stop()
+   METHOD Stop()
 
-METHOD Close()
+   METHOD Close()
 
-METHOD Destroy()
+   METHOD Destroy()
 
-METHOD End() INLINE ::Destroy()
+   METHOD End() INLINE ::Destroy()
 
 ENDCLASS
 
@@ -122,4 +122,3 @@ METHOD Destroy() CLASS HAnimation
    hwg_Animate_Destroy( ::handle )
 
    RETURN NIL
-

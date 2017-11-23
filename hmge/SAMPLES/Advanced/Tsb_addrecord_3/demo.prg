@@ -558,4 +558,3 @@ HB_FUNC( SHOWGETVALID )
 }
 
 #pragma ENDDUMP
-

@@ -561,4 +561,3 @@ PROCEDURE Imprimir()
    Tipos->(DbGoTo(RecTipos))
 
    RETURN
-

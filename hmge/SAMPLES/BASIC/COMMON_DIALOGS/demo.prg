@@ -203,4 +203,3 @@ FUNCTION InputBox_Test()
    Win1.Edit1.Value := Win1.Edit1.Value + CRLF + "Return " + hb_ValToStr( x )
 
    RETURN NIL
-

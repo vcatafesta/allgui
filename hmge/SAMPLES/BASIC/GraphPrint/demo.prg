@@ -169,4 +169,3 @@ FUNCTION IsContextMenuDefined ( lNewValue )
    ENDIF
 
    RETURN lOldValue
-

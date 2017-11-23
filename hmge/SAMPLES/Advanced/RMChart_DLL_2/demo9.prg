@@ -121,4 +121,3 @@ FUNCTION Graphic9( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
    oRMChart:SetWatermark( "RMChart", COLOR_AUTUMN_ORANGE, 25, 1, RMC_USERFONTSIZE )
 
    RETURN NIL
-

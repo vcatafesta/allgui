@@ -66,4 +66,3 @@ PROCEDURE main()
    Form_Main.Activate()
 
    RETURN
-

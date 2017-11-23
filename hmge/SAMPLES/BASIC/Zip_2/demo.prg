@@ -250,4 +250,3 @@ PROCEDURE UnRegActiveX()
    ENDIF
 
    RETURN
-

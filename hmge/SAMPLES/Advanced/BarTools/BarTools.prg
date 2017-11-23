@@ -205,9 +205,7 @@ FUNCTION WriteIni( cSection, cEntry, cValue, cFileIni )
    RETURN NIL
    /*
    */
-
    Proc ESCAPE_ON(ARG1)
-
       LOCAL WinName:=if(arg1==NIL,procname(1),arg1)
 
       IF upper(WinName)<>'OFF'
@@ -240,7 +238,6 @@ FUNCTION Setbarcode()
    */
 
    Proc CommConnect(set)
-
       DEFAULT set to .f.
       BarRSet(set)
       IF Init_Com(m->f_com,m->scanset)
@@ -254,7 +251,6 @@ FUNCTION Setbarcode()
       RETURN
 
       Proc CommDisConnect(set)
-
          DEFAULT set to .f.
          FinCom()
          IF set
@@ -263,9 +259,7 @@ FUNCTION Setbarcode()
 
          RETURN
          /*
-
          Proc CommDataSend
-
          Local nRetBytes
 
          nRetBytes=WRITECOM32(SetBarcode.text_101.Value)
@@ -283,7 +277,6 @@ FUNCTION CommDataRx(clear)
    RETURN substr(nRetBytes,1,At( chr(13), nRetBytes ) - 1)
    /*
    */
-
    proc BarSset()
 
       m->f_com:="COM"+zaps(Setbarcode.radiogroup_1.value)
@@ -301,7 +294,6 @@ FUNCTION CommDataRx(clear)
       RETURN
 
       proc BarRset(set)
-
          LOCAL pos,string:=m->scanset
 
          DEFAULT set to .t.
@@ -467,4 +459,3 @@ HB_FUNC (WRITECOM32)
 }
 
 #pragma ENDDUMP
-

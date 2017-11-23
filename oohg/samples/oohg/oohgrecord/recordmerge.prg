@@ -87,21 +87,21 @@ CLASS TRecordMerge
    DATA aKeys
    DATA bIndexKey          INIT nil
 
-METHOD New
+   METHOD New
 
-METHOD SkipArea
+   METHOD SkipArea
 
-METHOD GetIndexKey
+   METHOD GetIndexKey
 
-METHOD ReadAllKeys
+   METHOD ReadAllKeys
 
    // Methods always used by XBrowse
 
-METHOD Skipper
+   METHOD Skipper
 
-METHOD GoTop
+   METHOD GoTop
 
-METHOD GoBottom
+   METHOD GoBottom
 
    // Methods used by XBrowse if you'll have a scrollbar
    *   METHOD RecNo              BLOCK { | Self | ::nRecNo }
@@ -117,9 +117,9 @@ METHOD GoBottom
 
    // Implemented
 
-METHOD Skip( n )          BLOCK { | Self, n | ::Skipper( n ) }
+   METHOD Skip( n )          BLOCK { | Self, n | ::Skipper( n ) }
 
-METHOD Seek
+   METHOD Seek
 
    ERROR HANDLER FieldAssign
 
@@ -431,4 +431,3 @@ METHOD FieldAssign( xValue ) CLASS TRecordMerge
    ENDIF
 
    RETURN NIL
-

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_UNICODE_STRING.c  
+ HMG Source File --> c_UNICODE_STRING.c
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -15,20 +15,17 @@
 
  ----------------------------------------------------------------------------*/
 
-
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
-
 
 #include <windows.h>
 #include <tchar.h>
 #include "hbapi.h"
 
-
 #ifdef COMPILE_HMG_UNICODE
 
    HB_FUNC (HMG_LOWER)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -42,15 +39,14 @@
       if (Buffer != NULL)
       {   lstrcpy (Buffer, Text);
           CharLower (Buffer);
-          HMG_retc_buffer (Buffer);       
+          HMG_retc_buffer (Buffer);
       }
       else
           HMG_retc (NULL);
    }
 
-
    HB_FUNC (HMG_UPPER)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -70,13 +66,11 @@
          HMG_retc (NULL);
    }
 
-
    HB_FUNC (HMG_ISALPHA)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharAlpha (*Text));
    }
-
 
    HB_FUNC (HMG_ISDIGIT)
    {
@@ -84,20 +78,17 @@
       hb_retl ((BOOL) ( IsCharAlphaNumeric(*Text) && !IsCharAlpha(*Text) ));
    }
 
-
    HB_FUNC (HMG_ISLOWER)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharLower (*Text));
    }
 
-
    HB_FUNC (HMG_ISUPPER)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharUpper (*Text));
    }
-
 
    HB_FUNC (HMG_ISALPHANUMERIC)
    {
@@ -107,8 +98,6 @@
 
 #endif
 
-
-
 //       HMG_StrCmp ( Text1 , Text2 , [ lCaseSensitive ] ) --> CmpValue
 HB_FUNC (HMG_STRCMP)
 {
@@ -116,13 +105,11 @@ HB_FUNC (HMG_STRCMP)
    TCHAR *Text2 = (TCHAR *) HMG_parc (2);
    BOOL  lCaseSensitive = (BOOL) hb_parl (3);
    int CmpValue;
-   
+
    if ( lCaseSensitive == FALSE )
       CmpValue = lstrcmpi (Text1, Text2);
    else
       CmpValue = lstrcmp  (Text1, Text2);
-   
+
    hb_retni ((int) CmpValue);
 }
-
-

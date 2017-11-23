@@ -91,4 +91,3 @@ FUNCTION FormReSize( oGif )
 FUNCTION GetGIFSize( cGIFfile )
 
    RETURN hb_GetImageSize( cGIFfile )
-

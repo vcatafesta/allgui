@@ -165,4 +165,3 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
    ENDIF ! EMPTY( cBMFileName )
 
    RETURN // BTEx_OpenImgFile()
-

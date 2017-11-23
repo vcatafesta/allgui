@@ -4,96 +4,95 @@
  Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
  http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the Harbour Minigui library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  Harbour-Minigui library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2017, http://harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2017, http://harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+   "HWGUI"
+     Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
-#xcommand DO REPORT  ;   
-		TITLE <ctitle> ;
-		HEADERS <aheaders1> , <aheaders2> ;
-		FIELDS <a>  		;
-		WIDTHS <awidths>  	;
-		[ TOTALS <ato> ]	;
-		[ NFORMATS <aformats> ] ;
-		WORKAREA <calias> 	;
-		[ LPP   <nlpp> ]	;
-		[ CPL   <ncpl> ]	;
-		[ LMARGIN <nllmargin> ]	;
-		[ TMARGIN <ntoprow> ]	;
-		[ PAPERSIZE <npapersize> ]	;
-		[ <ldos: DOSMODE> ]		;
+#xcommand DO REPORT  ;
+      TITLE <ctitle> ;
+      HEADERS <aheaders1> , <aheaders2> ;
+      FIELDS <a>        ;
+      WIDTHS <awidths>     ;
+      [ TOTALS <ato> ]   ;
+      [ NFORMATS <aformats> ] ;
+      WORKAREA <calias>    ;
+      [ LPP   <nlpp> ]   ;
+      [ CPL   <ncpl> ]   ;
+      [ LMARGIN <nllmargin> ]   ;
+      [ TMARGIN <ntoprow> ]   ;
+      [ PAPERSIZE <npapersize> ]   ;
+      [ <ldos: DOSMODE> ]      ;
                 [ <lpreview: PREVIEW> ]         ;
                 [ <lselect: SELECT> ]           ;
                 [ IMAGE <cgraphic> AT <nfi> , <nci> TO <nff> , <ncf> ] ;
-		[ <lmul: MULTIPLE>    ]		;
-		[ GROUPED BY <cgrpby> ]         ;
-		[ HEADRGRP   <chdrgrp> ]	;
-		[ <llandscape: LANDSCAPE> ]	;
-		[ <lnodatetimestamp: NODATETIMESTAMP> ] ;
-	=>;
-	easyreport ( ;
-                <ctitle> ,		;
-		<aheaders1> , 		;
-		<aheaders2> ,		;
-		<a> ,			;
-		<awidths> , 		;
-		<ato> , 		;
-		<nlpp> , 		;
-		<.ldos.>,               ;
+      [ <lmul: MULTIPLE>    ]      ;
+      [ GROUPED BY <cgrpby> ]         ;
+      [ HEADRGRP   <chdrgrp> ]   ;
+      [ <llandscape: LANDSCAPE> ]   ;
+      [ <lnodatetimestamp: NODATETIMESTAMP> ] ;
+   =>;
+   easyreport ( ;
+                <ctitle> ,      ;
+      <aheaders1> ,       ;
+      <aheaders2> ,      ;
+      <a> ,         ;
+      <awidths> ,       ;
+      <ato> ,       ;
+      <nlpp> ,       ;
+      <.ldos.>,               ;
                 <.lpreview.>,           ;
                 <cgraphic>,             ;
-                <nfi> , <nci> ,		;
-		<nff> , <ncf> ,		;
-                <.lmul.> ,		;
-                <cgrpby> ,		;
-                <chdrgrp> ,		;
-                <.llandscape.> ,	;
-                <ncpl> ,		;
-                <.lselect.> ,		;
-                <"calias"> ,		;
-                <nllmargin> ,		;
-                <aformats> ,		;
-                <npapersize> ,		;
-                <ntoprow> ,		;
+                <nfi> , <nci> ,      ;
+      <nff> , <ncf> ,      ;
+                <.lmul.> ,      ;
+                <cgrpby> ,      ;
+                <chdrgrp> ,      ;
+                <.llandscape.> ,   ;
+                <ncpl> ,      ;
+                <.lselect.> ,      ;
+                <"calias"> ,      ;
+                <nllmargin> ,      ;
+                <aformats> ,      ;
+                <npapersize> ,      ;
+                <ntoprow> ,      ;
                 <.lnodatetimestamp.> )
-
 
 #xcommand DO REPORT FORM <cfilerep> => extreport(<"cfilerep">)
 
@@ -227,44 +226,44 @@
 #endif
 
 #define apapeles { ;
-"DMPAPER_LETTER", ; 
+"DMPAPER_LETTER", ;
 "DMPAPER_LETTERSMALL", ;
-"DMPAPER_TABLOID",      ;      
-"DMPAPER_LEDGER",        ;     
-"DMPAPER_LEGAL",          ;    
-"DMPAPER_STATEMENT",       ;   
-"DMPAPER_EXECUTIVE",        ;  
-"DMPAPER_A3",                ; 
-"DMPAPER_A4",              ;   
-"DMPAPER_A4SMALL",;            
-"DMPAPER_A5",      ;           
-"DMPAPER_B4",       ;          
-"DMPAPER_B5",        ;         
-"DMPAPER_FOLIO",      ;        
-"DMPAPER_QUARTO",      ;       
-"DMPAPER_10X14",        ;      
-"DMPAPER_11X17",  ;            
-"DMPAPER_NOTE",    ;           
-"DMPAPER_ENV_9",    ;          
-"DMPAPER_ENV_10",    ;         
-"DMPAPER_ENV_11",     ;        
-"DMPAPER_ENV_12",      ;       
-"DMPAPER_ENV_14",       ;      
-"DMPAPER_CSHEET",   ;          
-"DMPAPER_DSHEET",   ;          
-"DMPAPER_ESHEET",   ;          
-"DMPAPER_ENV_DL",   ;          
-"DMPAPER_ENV_C5",   ;          
-"DMPAPER_ENV_C3",   ;          
-"DMPAPER_ENV_C4",    ;         
-"DMPAPER_ENV_C6",     ;        
-"DMPAPER_ENV_C65",     ;       
-"DMPAPER_ENV_B4",       ;      
-"DMPAPER_ENV_B5",        ;     
-"DMPAPER_ENV_B6",         ;    
-"DMPAPER_ENV_ITALY",       ;   
-"DMPAPER_ENV_MONARCH",      ;  
-"DMPAPER_ENV_PERSONAL",      ; 
+"DMPAPER_TABLOID",      ;
+"DMPAPER_LEDGER",        ;
+"DMPAPER_LEGAL",          ;
+"DMPAPER_STATEMENT",       ;
+"DMPAPER_EXECUTIVE",        ;
+"DMPAPER_A3",                ;
+"DMPAPER_A4",              ;
+"DMPAPER_A4SMALL",;
+"DMPAPER_A5",      ;
+"DMPAPER_B4",       ;
+"DMPAPER_B5",        ;
+"DMPAPER_FOLIO",      ;
+"DMPAPER_QUARTO",      ;
+"DMPAPER_10X14",        ;
+"DMPAPER_11X17",  ;
+"DMPAPER_NOTE",    ;
+"DMPAPER_ENV_9",    ;
+"DMPAPER_ENV_10",    ;
+"DMPAPER_ENV_11",     ;
+"DMPAPER_ENV_12",      ;
+"DMPAPER_ENV_14",       ;
+"DMPAPER_CSHEET",   ;
+"DMPAPER_DSHEET",   ;
+"DMPAPER_ESHEET",   ;
+"DMPAPER_ENV_DL",   ;
+"DMPAPER_ENV_C5",   ;
+"DMPAPER_ENV_C3",   ;
+"DMPAPER_ENV_C4",    ;
+"DMPAPER_ENV_C6",     ;
+"DMPAPER_ENV_C65",     ;
+"DMPAPER_ENV_B4",       ;
+"DMPAPER_ENV_B5",        ;
+"DMPAPER_ENV_B6",         ;
+"DMPAPER_ENV_ITALY",       ;
+"DMPAPER_ENV_MONARCH",      ;
+"DMPAPER_ENV_PERSONAL",      ;
 "DMPAPER_FANFOLD_US",         ;
 "DMPAPER_FANFOLD_STD_GERMAN", ;
 "DMPAPER_FANFOLD_LGL_GERMAN", ;
@@ -317,31 +316,31 @@
 "DMPAPER_B6_JIS",             ;
 "DMPAPER_B6_JIS_ROTATED",     ;
 "DMPAPER_12X11",              ;
-"DMPAPER_JENV_YOU4", ;          
-"DMPAPER_JENV_YOU4_ROTATED", ;  
-"DMPAPER_P16K", ;               
-"DMPAPER_P32K", ;               
-"DMPAPER_P32KBIG", ;            
-"DMPAPER_PENV_1", ;             
-"DMPAPER_PENV_2", ;             
-"DMPAPER_PENV_3", ;             
-"DMPAPER_PENV_4", ;             
-"DMPAPER_PENV_5", ;             
-"DMPAPER_PENV_6", ;             
-"DMPAPER_PENV_7", ;             
-"DMPAPER_PENV_8", ;             
-"DMPAPER_PENV_9", ;             
-"DMPAPER_PENV_10", ;            
-"DMPAPER_P16K_ROTATED", ;       
-"DMPAPER_P32K_ROTATED", ;       
-"DMPAPER_P32KBIG_ROTATED", ;    
-"DMPAPER_PENV_1_ROTATED", ;     
-"DMPAPER_PENV_2_ROTATED", ;     
-"DMPAPER_PENV_3_ROTATED", ;     
-"DMPAPER_PENV_4_ROTATED", ;     
-"DMPAPER_PENV_5_ROTATED", ;     
-"DMPAPER_PENV_6_ROTATED", ;     
-"DMPAPER_PENV_7_ROTATED", ;     
-"DMPAPER_PENV_8_ROTATED", ;     
-"DMPAPER_PENV_9_ROTATED", ;     
-"DMPAPER_PENV_10_ROTATED" }     
+"DMPAPER_JENV_YOU4", ;
+"DMPAPER_JENV_YOU4_ROTATED", ;
+"DMPAPER_P16K", ;
+"DMPAPER_P32K", ;
+"DMPAPER_P32KBIG", ;
+"DMPAPER_PENV_1", ;
+"DMPAPER_PENV_2", ;
+"DMPAPER_PENV_3", ;
+"DMPAPER_PENV_4", ;
+"DMPAPER_PENV_5", ;
+"DMPAPER_PENV_6", ;
+"DMPAPER_PENV_7", ;
+"DMPAPER_PENV_8", ;
+"DMPAPER_PENV_9", ;
+"DMPAPER_PENV_10", ;
+"DMPAPER_P16K_ROTATED", ;
+"DMPAPER_P32K_ROTATED", ;
+"DMPAPER_P32KBIG_ROTATED", ;
+"DMPAPER_PENV_1_ROTATED", ;
+"DMPAPER_PENV_2_ROTATED", ;
+"DMPAPER_PENV_3_ROTATED", ;
+"DMPAPER_PENV_4_ROTATED", ;
+"DMPAPER_PENV_5_ROTATED", ;
+"DMPAPER_PENV_6_ROTATED", ;
+"DMPAPER_PENV_7_ROTATED", ;
+"DMPAPER_PENV_8_ROTATED", ;
+"DMPAPER_PENV_9_ROTATED", ;
+"DMPAPER_PENV_10_ROTATED" }

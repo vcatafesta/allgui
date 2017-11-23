@@ -136,161 +136,161 @@ CLASS HBPrinter
    DATA    lGlobalChanges INIT .T.
    DATA    lAbsoluteCoords INIT .F.
 
-METHOD New()
+   METHOD New()
 
-METHOD SelectPrinter( cPrinter ,lPrev)
+   METHOD SelectPrinter( cPrinter ,lPrev)
 
-METHOD SetDevMode(what,newvalue)
+   METHOD SetDevMode(what,newvalue)
 
-METHOD Startdoc(ldocname)
+   METHOD Startdoc(ldocname)
 
-METHOD SetPage(orient,size,fontname)
+   METHOD SetPage(orient,size,fontname)
 
-METHOD Startpage()
+   METHOD Startpage()
 
-METHOD Endpage()
+   METHOD Endpage()
 
-METHOD Enddoc()
+   METHOD Enddoc()
 
-METHOD SetTextColor(clr)
+   METHOD SetTextColor(clr)
 
-METHOD GetTextColor()     INLINE ::TextColor
+   METHOD GetTextColor()     INLINE ::TextColor
 
-METHOD SetBkColor(clr)
+   METHOD SetBkColor(clr)
 
-METHOD GetBkColor()       INLINE ::BkColor
+   METHOD GetBkColor()       INLINE ::BkColor
 
-METHOD SetBkMode(nmode)
+   METHOD SetBkMode(nmode)
 
-METHOD GetBkMode()        INLINE ::BkMode
+   METHOD GetBkMode()        INLINE ::BkMode
 
-METHOD DefineImageList(defname,cpicture,nicons)
+   METHOD DefineImageList(defname,cpicture,nicons)
 
-METHOD DrawImageList(defname,nicon,row,col,torow,tocol,lstyle,color)
+   METHOD DrawImageList(defname,nicon,row,col,torow,tocol,lstyle,color)
 
-METHOD DefineBrush(defname,lstyle,lcolor,lhatch)
+   METHOD DefineBrush(defname,lstyle,lcolor,lhatch)
 
-METHOD ModifyBrush(defname,lstyle,lcolor,lhatch)
+   METHOD ModifyBrush(defname,lstyle,lcolor,lhatch)
 
-METHOD SelectBrush(defname)
+   METHOD SelectBrush(defname)
 
-METHOD DefinePen(defname,lstyle,lwidth,lcolor)
+   METHOD DefinePen(defname,lstyle,lwidth,lcolor)
 
-METHOD ModifyPen(defname,lstyle,lwidth,lcolor)
+   METHOD ModifyPen(defname,lstyle,lwidth,lcolor)
 
-METHOD SelectPen(defname)
+   METHOD SelectPen(defname)
 
-METHOD DefineFont(defname,lfontname,lfontsize,lfontwidth,langle,lweight,litalic,lunderline,lstrikeout)
+   METHOD DefineFont(defname,lfontname,lfontsize,lfontwidth,langle,lweight,litalic,lunderline,lstrikeout)
 
-METHOD ModifyFont(defname,lfontname,lfontsize,lfontwidth,langle,lweight,lnweight,litalic,lnitalic,lunderline,lnunderline,lstrikeout,lnstrikeout)
+   METHOD ModifyFont(defname,lfontname,lfontsize,lfontwidth,langle,lweight,lnweight,litalic,lnitalic,lunderline,lnunderline,lstrikeout,lnstrikeout)
 
-METHOD SelectFont(defname)
+   METHOD SelectFont(defname)
 
-METHOD GetObjByName(defname,what,retpos)
+   METHOD GetObjByName(defname,what,retpos)
 
-METHOD DrawText(row,col,torow,tocol,txt,style,defname,lNoWordBreak)
+   METHOD DrawText(row,col,torow,tocol,txt,style,defname,lNoWordBreak)
 
-METHOD TextOut(row,col,txt,defname)
+   METHOD TextOut(row,col,txt,defname)
 
-METHOD Say(row,col,txt,defname,lcolor,lalign)
+   METHOD Say(row,col,txt,defname,lcolor,lalign)
 
-METHOD SetCharset(charset) INLINE rr_setcharset(charset,,SELF) // Dummy SELF
+   METHOD SetCharset(charset) INLINE rr_setcharset(charset,,SELF) // Dummy SELF
 
-METHOD Rectangle(row,col,torow,tocol,defpen,defbrush)
+   METHOD Rectangle(row,col,torow,tocol,defpen,defbrush)
 
-METHOD RoundRect(row,col,torow,tocol,widthellipse,heightellipse,defpen,defbrush)
+   METHOD RoundRect(row,col,torow,tocol,widthellipse,heightellipse,defpen,defbrush)
 
-METHOD FillRect(row,col,torow,tocol,defbrush)
+   METHOD FillRect(row,col,torow,tocol,defbrush)
 
-METHOD FrameRect(row,col,torow,tocol,defbrush)
+   METHOD FrameRect(row,col,torow,tocol,defbrush)
 
-METHOD InvertRect(row,col,torow,tocol)
+   METHOD InvertRect(row,col,torow,tocol)
 
-METHOD Ellipse(row,col,torow,tocol,defpen,defbrush)
+   METHOD Ellipse(row,col,torow,tocol,defpen,defbrush)
 
-METHOD Arc(row,col,torow,tocol,rowsarc,colsarc,rowearc,colearc,defpen)
+   METHOD Arc(row,col,torow,tocol,rowsarc,colsarc,rowearc,colearc,defpen)
 
-METHOD ArcTo(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen)
+   METHOD ArcTo(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen)
 
-METHOD Chord(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen,defbrush)
+   METHOD Chord(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen,defbrush)
 
-METHOD Pie(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen,defbrush)
+   METHOD Pie(row,col,torow,tocol,rowrad1,colrad1,rowrad2,colrad2,defpen,defbrush)
 
-METHOD Polygon(apoints,defpen,defbrush,style)
+   METHOD Polygon(apoints,defpen,defbrush,style)
 
-METHOD PolyBezier(apoints,defpen)
+   METHOD PolyBezier(apoints,defpen)
 
-METHOD PolyBezierTo(apoints,defpen)
+   METHOD PolyBezierTo(apoints,defpen)
 
-METHOD SetUnits(newvalue,r,c,lAbsolute)
+   METHOD SetUnits(newvalue,r,c,lAbsolute)
 
-METHOD Convert(arr,lsize)
+   METHOD Convert(arr,lsize)
 
-METHOD DefineRectRgn(defname,row,col,torow,tocol)
+   METHOD DefineRectRgn(defname,row,col,torow,tocol)
 
-METHOD DefinePolygonRgn(defname,apoints,style)
+   METHOD DefinePolygonRgn(defname,apoints,style)
 
-METHOD DefineEllipticRgn(defname,row,col,torow,tocol)
+   METHOD DefineEllipticRgn(defname,row,col,torow,tocol)
 
-METHOD DefineRoundRectRgn(defname,row,col,torow,tocol,widthellipse,heightellipse)
+   METHOD DefineRoundRectRgn(defname,row,col,torow,tocol,widthellipse,heightellipse)
 
-METHOD CombineRgn(defname,reg1,reg2,style)
+   METHOD CombineRgn(defname,reg1,reg2,style)
 
-METHOD SelectClipRgn(defname)
+   METHOD SelectClipRgn(defname)
 
-METHOD DeleteClipRgn()
+   METHOD DeleteClipRgn()
 
-METHOD SetPolyFillMode(style)
+   METHOD SetPolyFillMode(style)
 
-METHOD GetPolyFillMode()   INLINE ::PolyFillMode
+   METHOD GetPolyFillMode()   INLINE ::PolyFillMode
 
-METHOD SetViewPortOrg(row,col)
+   METHOD SetViewPortOrg(row,col)
 
-METHOD GetViewPortOrg()
+   METHOD GetViewPortOrg()
 
-METHOD DxColors(par)
+   METHOD DxColors(par)
 
-METHOD SetRGB(red,green,blue)
+   METHOD SetRGB(red,green,blue)
 
-METHOD SetTextCharExtra(col)
+   METHOD SetTextCharExtra(col)
 
-METHOD GetTextCharExtra()
+   METHOD GetTextCharExtra()
 
-METHOD SetTextJustification(col)
+   METHOD SetTextJustification(col)
 
-METHOD GetTextJustification()
+   METHOD GetTextJustification()
 
-METHOD SetTextAlign(style)
+   METHOD SetTextAlign(style)
 
-METHOD GetTextAlign()
+   METHOD GetTextAlign()
 
-METHOD Picture(row,col,torow,tocol,cpicture,extrow,extcol,lImageSize)
+   METHOD Picture(row,col,torow,tocol,cpicture,extrow,extcol,lImageSize)
 
-METHOD Line(row,col,torow,tocol,defpen)
+   METHOD Line(row,col,torow,tocol,defpen)
 
-METHOD LineTo(row,col,defpen)
+   METHOD LineTo(row,col,defpen)
 
-METHOD SaveMetaFiles(number)
+   METHOD SaveMetaFiles(number)
 
-METHOD GetTextExtent(ctext,apoint,deffont)
+   METHOD GetTextExtent(ctext,apoint,deffont)
 
-METHOD End()
+   METHOD End()
 
-METHOD ReportData(l_x1,l_x2,l_x3,l_x4,l_x5,l_x6)
+   METHOD ReportData(l_x1,l_x2,l_x3,l_x4,l_x5,l_x6)
 
    #ifndef NO_GUI
 
-METHOD Preview()
+   METHOD Preview()
 
-METHOD PrevPrint(n1)
+   METHOD PrevPrint(n1)
 
-METHOD PrevShow()
+   METHOD PrevShow()
 
-METHOD PrevThumb(nclick)
+   METHOD PrevThumb(nclick)
 
    // new method
 
-METHOD PrintOption()
+   METHOD PrintOption()
 
    #endif
 
@@ -4083,4 +4083,3 @@ HB_FUNC( RR_GETTEMPFOLDER )
 }
 
 #pragma ENDDUMP
-

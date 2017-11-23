@@ -53,23 +53,18 @@ CREATE CLASS hdbcSQLTConnection
 
    EXPORTED:
 
-METHOD new( cDBFile, lCreateIfNotExist )
+   METHOD new( cDBFile, lCreateIfNotExist )
+   METHOD close()
 
-METHOD close()
-
-METHOD startTransaction()
-
+   METHOD startTransaction()
    /* method   transactionStatus */
+   METHOD commit()
+   METHOD rollback()
 
-METHOD commit()
+   METHOD getMetadata()
 
-METHOD rollback()
-
-METHOD getMetadata()
-
-METHOD createStatement()
-
-METHOD prepareStatement( cSql )
+   METHOD createStatement()
+   METHOD prepareStatement( cSql )
 
 ENDCLASS
 
@@ -137,13 +132,10 @@ CREATE CLASS hdbcSQLTStatement
 
    VAR pRes
 
-METHOD new( pDB, cSql )
-
-METHOD executeQuery( cSql )
-
-METHOD executeUpdate( cSql )
-
-METHOD close()
+   METHOD new( pDB, cSql )
+   METHOD executeQuery( cSql )
+   METHOD executeUpdate( cSql )
+   METHOD close()
 
 ENDCLASS
 
@@ -206,21 +198,15 @@ CREATE CLASS hdbcSQLTPreparedStatement
 
    EXPORTED:
 
-METHOD new( pDB, cSql )
+   METHOD new( pDB, cSql )
+   METHOD executeQuery()
+   METHOD executeUpdate()
+   METHOD close()
 
-METHOD executeQuery()
-
-METHOD executeUpdate()
-
-METHOD close()
-
-METHOD setString( nParam, xValue )
-
-METHOD SetNumber( n, x ) INLINE ::setString( n, Str( x ) )
-
-METHOD SetDate( n, x ) INLINE ::setString( n, DToS( x ) )
-
-METHOD SetBoolean( n, x ) INLINE ::setString( n, iif( x, "t", "f" ) )
+   METHOD setString( nParam, xValue )
+   METHOD SetNumber( n, x ) INLINE ::setString( n, Str( x ) )
+   METHOD SetDate( n, x ) INLINE ::setString( n, DToS( x ) )
+   METHOD SetBoolean( n, x ) INLINE ::setString( n, iif( x, "t", "f" ) )
 
 ENDCLASS
 
@@ -305,71 +291,47 @@ CREATE CLASS hdbcSQLTResultSet
 
    VAR nRows INIT 0
 
-METHOD new( pDB, pStmt )
+   METHOD new( pDB, pStmt )
+   METHOD close()
 
-METHOD close()
+   METHOD beforeFirst()
+   METHOD first() INLINE ::absolute( 1 )
+   METHOD previous() INLINE ::relative( - 1 )
+   METHOD next() INLINE ( sqlite3_step( ::pRes ) == SQLITE_ROW ) // ::relative( 1 )
+   METHOD last() INLINE ::absolute( ::nRows )
+   METHOD afterLast()
 
-METHOD beforeFirst()
+   METHOD relative( nMove )
+   METHOD absolute( nMove )
 
-METHOD first() INLINE ::absolute( 1 )
+   METHOD isBeforeFirst() INLINE ::lBeforeFirst
+   METHOD isFirst() INLINE ( ::nRow == 1 )
+   METHOD isLast() INLINE ( ::nRow == ::nRows )
+   METHOD isAfterLast() INLINE ::lAfterLast
+   METHOD getRow() INLINE ::nRow
+   METHOD findColumn( cField )
 
-METHOD previous() INLINE ::relative( - 1 )
+   METHOD getString( nField )
+   METHOD getNumber( nField ) INLINE Val( ::getString( nField ) )
+   METHOD getDate( nField ) INLINE hb_SToD( StrTran( ::getString( nField ), "-" ) )
+   METHOD getBoolean( nField ) INLINE ( ::getString( nField ) == "t" )
 
-METHOD next() INLINE ( sqlite3_step( ::pRes ) == SQLITE_ROW ) // ::relative( 1 )
+   METHOD getMetaData()
 
-METHOD last() INLINE ::absolute( ::nRows )
+   METHOD setTableName( cTable ) INLINE ::cTableName := cTable
+   METHOD setPrimaryKeys( aKeys ) INLINE ::aPrimaryKeys := aKeys
 
-METHOD afterLast()
+   METHOD moveToInsertRow()
+   METHOD moveToCurrentRow()
+   METHOD insertRow()
+   METHOD updateRow()
+   METHOD deleteRow()
 
-METHOD relative( nMove )
-
-METHOD absolute( nMove )
-
-METHOD isBeforeFirst() INLINE ::lBeforeFirst
-
-METHOD isFirst() INLINE ( ::nRow == 1 )
-
-METHOD isLast() INLINE ( ::nRow == ::nRows )
-
-METHOD isAfterLast() INLINE ::lAfterLast
-
-METHOD getRow() INLINE ::nRow
-
-METHOD findColumn( cField )
-
-METHOD getString( nField )
-
-METHOD getNumber( nField ) INLINE Val( ::getString( nField ) )
-
-METHOD getDate( nField ) INLINE hb_SToD( StrTran( ::getString( nField ), "-" ) )
-
-METHOD getBoolean( nField ) INLINE ( ::getString( nField ) == "t" )
-
-METHOD getMetaData()
-
-METHOD setTableName( cTable ) INLINE ::cTableName := cTable
-
-METHOD setPrimaryKeys( aKeys ) INLINE ::aPrimaryKeys := aKeys
-
-METHOD moveToInsertRow()
-
-METHOD moveToCurrentRow()
-
-METHOD insertRow()
-
-METHOD updateRow()
-
-METHOD deleteRow()
-
-METHOD updateBuffer( nField, xValue, cType )
-
-METHOD updateString( nField, cValue ) INLINE ::updateBuffer( nField, cValue, "C" )
-
-METHOD updateNumber( nField, nValue ) INLINE ::updateBuffer( nField, hb_ntos( nValue ), "N" )
-
-METHOD updateDate( nField, dValue ) INLINE ::updateBuffer( nField, DToS( dValue ), "D" )
-
-METHOD updateBoolean( nField, lValue ) INLINE ::updateBuffer( nField, iif( lValue, "t", "f" ), "L" )
+   METHOD updateBuffer( nField, xValue, cType )
+   METHOD updateString( nField, cValue ) INLINE ::updateBuffer( nField, cValue, "C" )
+   METHOD updateNumber( nField, nValue ) INLINE ::updateBuffer( nField, hb_ntos( nValue ), "N" )
+   METHOD updateDate( nField, dValue ) INLINE ::updateBuffer( nField, DToS( dValue ), "D" )
+   METHOD updateBoolean( nField, lValue ) INLINE ::updateBuffer( nField, iif( lValue, "t", "f" ), "L" )
 
 ENDCLASS
 
@@ -540,13 +502,10 @@ CREATE CLASS hdbcSQLTResultSetMetaData
 
    EXPORTED:
 
-METHOD new( pRes )
-
-METHOD getColumnCount()
-
-METHOD getColumnName( nColumn )
-
-METHOD getColumnDisplaySize( nColumn )
+   METHOD new( pRes )
+   METHOD getColumnCount()
+   METHOD getColumnName( nColumn )
+   METHOD getColumnDisplaySize( nColumn )
 
 ENDCLASS
 
@@ -578,11 +537,9 @@ CREATE CLASS hdbcSQLTDatabaseMetaData
 
    EXPORTED:
 
-METHOD new( pDB )
-
-METHOD getTables()
-
-METHOD getPrimaryKeys()
+   METHOD new( pDB )
+   METHOD getTables()
+   METHOD getPrimaryKeys()
 
 ENDCLASS
 
@@ -618,4 +575,3 @@ STATIC PROCEDURE raiseError( cErrMsg )
    Eval( ErrorBlock(), oErr )
 
    RETURN
-

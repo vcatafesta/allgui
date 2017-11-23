@@ -73,4 +73,3 @@ PROCEDURE SetColorTransparency( aColor )
    SET WINDOW Form_1 TRANSPARENT TO COLOR aColor
 
    RETURN
-

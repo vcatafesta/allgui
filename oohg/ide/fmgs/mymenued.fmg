@@ -1,24 +1,24 @@
 /*
- * $Id: mymenued.fmg,v 1.11 2017/08/25 19:03:22 fyurisich Exp $
- */
+* $Id: mymenued.fmg,v 1.11 2017/08/25 19:03:22 fyurisich Exp $
+*/
 
 * ooHG IDE Plus form generated code
 * (c) 2003-2017 Ciro Vargas Clemow <cvc@oohg.org>
 
 DEFINE WINDOW TEMPLATE ;
-   AT 108, 99 ;
-   WIDTH 778 ;
-   HEIGHT 440 ;
-   MODAL ;
-   BACKCOLOR ::oEditor:myIde:aSystemColor ;
-   FONT 'arial' ;
-   SIZE 10
+      AT 108, 99 ;
+      WIDTH 778 ;
+      HEIGHT 440 ;
+      MODAL ;
+      BACKCOLOR ::oEditor:myIde:aSystemColor ;
+      FONT 'arial' ;
+      SIZE 10
 
    @ 10, 10 FRAME frame_2 ;
       WIDTH 530 ;
       HEIGHT 290 ;
       CAPTION 'Items' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 30, 15 BROWSE browse_101 ;
       WIDTH 520 ;
@@ -31,7 +31,7 @@ DEFINE WINDOW TEMPLATE ;
       SIZE 10 ;
       ON CHANGE ::ParseItem() ;
       ON GOTFOCUS ::ParseItem() ;
-      LOCK 
+      LOCK
 
    @ 265, 15 BUTTON button_101 ;
       WIDTH 100 ;
@@ -67,13 +67,13 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 400 ;
       HEIGHT 90 ;
       CAPTION 'Menu Properties' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 342, 20 LABEL label_1 ;
       WIDTH 120 ;
       HEIGHT 18 ;
       VALUE 'Name' ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 362, 20 TEXTBOX text_1 ;
       WIDTH 120 ;
@@ -86,7 +86,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Obj' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 362, 150 TEXTBOX text_2 ;
       WIDTH 120 ;
@@ -99,7 +99,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Subclass' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 362, 280 TEXTBOX text_3 ;
       WIDTH 120 ;
@@ -123,7 +123,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 210 ;
       HEIGHT 390 ;
       CAPTION 'Selected Item' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 40, 560 LABEL label_101 ;
       WIDTH 59 ;
@@ -239,7 +239,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Level:' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 360, 560 BUTTON btn_LvlDwn ;
       WIDTH 90 ;
@@ -257,5 +257,4 @@ DEFINE WINDOW TEMPLATE ;
       FONT 'Arial' ;
       SIZE 10
 
-END WINDOW 
-
+END WINDOW

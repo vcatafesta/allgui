@@ -425,4 +425,3 @@ FUNCTION _DefineMixedButton ( ControlName, ParentForm, x, y, Caption, ;
    _HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
    RETURN NIL
-

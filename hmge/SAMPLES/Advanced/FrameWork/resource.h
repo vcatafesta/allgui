@@ -1,10 +1,8 @@
 //This file contains the resource ID definitions.
 
-
 //The resource ID for MENU, ICON, Toolbar Bitmap, Accelerator,
 //  and Window Caption
 #define ID_MAIN                         101
-
 
 //Resource IDs for Menu items and Toolbar items
 #define ID_FILE_NEW                     201
@@ -23,8 +21,6 @@
 #define ID_VIEW_STATUSBAR               221
 #define ID_HELP_ABOUT                   230
 
-
 //Resource IDs for the dialog
 #define IDD_DIALOG1                     301
 #define IDC_STATIC                      302
-

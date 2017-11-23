@@ -9,4 +9,3 @@ FUNCTION Main
    ACTIVATE WINDOW Main
 
    RETURN
-

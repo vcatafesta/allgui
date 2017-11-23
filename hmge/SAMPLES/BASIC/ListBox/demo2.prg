@@ -35,7 +35,6 @@ FUNCTION main()
    *.....................................................*
 
    proc cas_action
-
       LOCAL x1 := alltrim(str(len( form_1.listbox_1.value )))
       LOCAL x2 := alltrim(str( form_1.listbox_1.ItemCount ))
 
@@ -46,7 +45,6 @@ FUNCTION main()
       *.....................................................*
 
       proc cas_add
-
          LOCAL m_array := form_1.ListBox_1.value
          LOCAL nn := form_1.ListBox_1.ItemCount + 1
 
@@ -58,7 +56,6 @@ FUNCTION main()
          *.....................................................*
 
          proc cas_del
-
             LOCAL m_array := form_1.ListBox_1.value
 
             repeat
@@ -78,7 +75,6 @@ FUNCTION main()
             *.....................................................*
 
             proc cas_delete_all
-
                form_1.ListBox_1.DeleteAllItems
                Form_1.StatusBar.Item(1) := "Select 0 / 0"
 
@@ -87,7 +83,6 @@ FUNCTION main()
                *.....................................................*
 
                proc cas_modify
-
                   LOCAL nn, n_for
                   LOCAL m_array := form_1.ListBox_1.value
 
@@ -101,7 +96,6 @@ FUNCTION main()
                   *.....................................................*
 
                   proc cas_select_all
-
                      LOCAL x2, n_for
                      LOCAL m_add := {}
 
@@ -117,7 +111,6 @@ FUNCTION main()
                      *.....................................................*
 
                      proc cas_result
-
                         LOCAL nn, n_for
                         LOCAL m_array := form_1.ListBox_1.value
                         LOCAL xx_var := ''
@@ -130,4 +123,3 @@ FUNCTION main()
                         msginfo( xx_var , 'Items: ' + alltrim( str(form_1.listbox_1.ItemCount) ) )
 
                         RETURN
-

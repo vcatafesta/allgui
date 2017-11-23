@@ -42,4 +42,3 @@ PROCEDURE ThisTest()
    ThisWindow.Height := 100
 
    RETURN
-

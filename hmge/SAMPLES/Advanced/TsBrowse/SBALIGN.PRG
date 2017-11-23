@@ -94,4 +94,3 @@ ENDIF
 AEval( ahBmp,{ | x | DeleteObject( x ) } )
 
 RETURN NIL
-

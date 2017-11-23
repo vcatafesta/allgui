@@ -234,4 +234,3 @@ FUNCTION main_button_3_action
    MsgInfo('Clock and ProgressBar keep updating even the main thread is stopped at this MsgInfo!!!')
 
    RETURN NIL
-

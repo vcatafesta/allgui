@@ -259,4 +259,3 @@ FUNCTION BASE_TEK()
    MsgInfo( cText, "Open the database" )
 
    RETURN NIL
-

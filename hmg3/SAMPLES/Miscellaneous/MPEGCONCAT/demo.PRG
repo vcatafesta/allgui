@@ -265,4 +265,3 @@ FUNCTION ChangeNomeArquivo()
    Frm_Principal.Tb_Nome_Arquivo.SetFocus
 
    RETURN lRet
-

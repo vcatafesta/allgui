@@ -61,34 +61,34 @@ CLASS XBrowse_Array
 
    // Methods always used by XBrowse
 
-METHOD Skipper
+   METHOD Skipper
 
-METHOD GoTop              BLOCK { | Self | ::GoTo( 1 ) }
+   METHOD GoTop              BLOCK { | Self | ::GoTo( 1 ) }
 
-METHOD GoBottom           BLOCK { | Self | ::GoTo( ::RecCount ) }
+   METHOD GoBottom           BLOCK { | Self | ::GoTo( ::RecCount ) }
 
    // Methods used by XBrowse if you'll have a scrollbar
 
-METHOD RecNo              BLOCK { | Self | ::nRecNo }
+   METHOD RecNo              BLOCK { | Self | ::nRecNo }
 
-METHOD RecCount           BLOCK { | Self | LEN( ::aArray ) }
+   METHOD RecCount           BLOCK { | Self | LEN( ::aArray ) }
 
-METHOD GoTo
+   METHOD GoTo
 
-METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
+   METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
 
-METHOD OrdKeyCount        BLOCK { | Self | LEN( ::aArray ) }
+   METHOD OrdKeyCount        BLOCK { | Self | LEN( ::aArray ) }
 
-METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::GoTo( n ) }
+   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::GoTo( n ) }
 
    // Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
 
-METHOD Eof                BLOCK { | Self | ( ::RecNo > ::RecCount ) }
+   METHOD Eof                BLOCK { | Self | ( ::RecNo > ::RecCount ) }
 
    // Method used by XBrowse if you'll allow appends
 
-METHOD Append             BLOCK { | Self | aAdd( ::aArray, {"", "", ""} ), ::GoTo( len( ::aArray ) ) }
+   METHOD Append             BLOCK { | Self | aAdd( ::aArray, {"", "", ""} ), ::GoTo( len( ::aArray ) ) }
 
    // Method used by XBrowse if you'll allow deletes
    *   METHOD Delete     BLOCK { | Self |                         ( ::cAlias__ )->( DbDelete() ) }
@@ -106,21 +106,21 @@ METHOD Append             BLOCK { | Self | aAdd( ::aArray, {"", "", ""} ), ::GoT
    DATA nRecNo               INIT 1
    DATA lBof                 INIT .F.
 
-METHOD New( aArray )      BLOCK { | Self, aArray | ::aArray := aArray , Self }
+   METHOD New( aArray )      BLOCK { | Self, aArray | ::aArray := aArray , Self }
 
-METHOD FieldGet( nPos )   BLOCK { | Self, nPos | ::aArray[ ::nRecNo ][ nPos ] }
+   METHOD FieldGet( nPos )   BLOCK { | Self, nPos | ::aArray[ ::nRecNo ][ nPos ] }
 
-METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::aArray[ ::nRecNo ][ p ] := u }
+   METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::aArray[ ::nRecNo ][ p ] := u }
 
    // Implemented but not used for this sample (not used by XBrowse itself)
 
-METHOD Use( aArray )      BLOCK { | Self, aArray | ::aArray := aArray , Self }
+   METHOD Use( aArray )      BLOCK { | Self, aArray | ::aArray := aArray , Self }
 
-METHOD Skip
+   METHOD Skip
 
-METHOD Bof                BLOCK { | Self | ::lBof }
+   METHOD Bof                BLOCK { | Self | ::lBof }
 
-METHOD FieldBlock
+   METHOD FieldBlock
 
 ENDCLASS
 
@@ -180,4 +180,3 @@ METHOD Skip( nRecno ) CLASS XBrowse_Array
    *   METHOD SetIndex   BLOCK { | Self, cFile, lAdditive |       IF( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
 
    *   ERROR HANDLER FieldAssign
-

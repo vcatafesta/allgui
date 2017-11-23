@@ -830,4 +830,3 @@ FUNCTION Print_Syntax( cSyntax )
    @ 130,  10 HPDFPRINT cSyntax TO 180, 200 FONT "Courier-Bold" size 15 JUSTIFY
 
    RETURN NIL
-

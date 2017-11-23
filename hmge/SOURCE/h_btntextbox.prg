@@ -379,4 +379,3 @@ FUNCTION TBBtnEvents( hwndEdit, HwndBtn )
    ENDIF
 
    RETURN 0
-

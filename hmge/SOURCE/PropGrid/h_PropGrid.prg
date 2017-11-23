@@ -1099,7 +1099,6 @@ FUNCTION PgLoadImag( cFile, k, hItem )
 FUNCTION PgIdentData( cData, typePG, cValue, sep )
 
    LOCAL aData := {}, cToken, n := 1, pos, cLogic
-
    DEFAULT sep := ';', typePG := PG_DEFAULT
    DO CASE
    CASE typePG == PG_DEFAULT
@@ -1786,7 +1785,6 @@ FUNCTION aFont2Str( aFont )
 FUNCTION aVal2Str( aData, sep )
 
    LOCAL n, cData := ""
-
    DEFAULT sep := ';'
    IF ValType( aData ) == 'A'
       FOR n := 1 TO Len( aData )
@@ -2880,4 +2878,3 @@ STATIC FUNCTION CharMaskTekstOK( cString, cMask )
    ENDIF
 
    RETURN lPassed
-

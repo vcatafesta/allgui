@@ -63,4 +63,3 @@ FUNCTION RunTest()
    Stopper.Button_3.Enabled:=.t.
 
    RETURN NIL
-

@@ -119,4 +119,3 @@ PROCEDURE SetTab_1( lBottomStyle )
    END TAB
 
    RETURN
-

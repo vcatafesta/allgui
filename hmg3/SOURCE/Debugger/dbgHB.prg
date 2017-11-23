@@ -169,109 +169,58 @@ CLASS HMGDebugger
    VAR lActive           INIT .F.
    VAR lDeactivate       INIT .F.
 
-METHOD New()
-
-METHOD Activate()
-
-METHOD LoadCallStack()
-
-METHOD HandleEvent()
-
-METHOD Go()
-
-METHOD Step()
-
-METHOD Animate()
-
-METHOD Pause()
-
-METHOD Trace()
-
-METHOD SetCBTrace( lCBTrace )
-
-METHOD SetNextRoutine()
-
-METHOD GetSourceFiles()
-
-METHOD GetNextValidStopLine( nProcLevel )
-
-METHOD GetNextValidStopLineEx( cFileName, nLine )
-
-METHOD IsValidStopLine( cFileName, nLine )
-
-METHOD SetToCursor( cFileName, nLine )
-
-METHOD Quit()
-
-METHOD Exit()
-
-METHOD BreakPointCount()
-
-METHOD IsBreakPoint( cFileName, nLine )
-
-METHOD BreakPointToggle( cFileName, nLine )
-
-METHOD BreakPointDelete( nPos )
-
-METHOD BreakPointDeleteAll()
-
-METHOD BreakPointAddFunc( cFuncName )
-
-METHOD GetExprValue( xExpr, lValid )
-
-METHOD WatchCount()
-
-METHOD WatchDeleteAll()
-
-METHOD WatchDelete( nWatch )
-
-METHOD WatchGetInfo( nWatch )
-
-METHOD WatchSetExpr( nWatch, cExpr )
-
-METHOD WatchPointAdd( cExpr )
-
-METHOD TracepointAdd( cExpr )
-
-METHOD SetPathForFiles( cPath )
-
-METHOD LoadSourceFile( cFileName )
-
-METHOD GetCodeLineInfo( nProc )
-
-METHOD DoCommand( cCommand )
-
-METHOD RestoreSettings( cFileName )
-
-METHOD SaveSettings( cFileName )
-
-METHOD VarGetInfo( aVar )
-
-METHOD VarGetName( aVar )
-
-METHOD VarGetValType( aVar )
-
-METHOD VarGetValue( aVar )
-
-METHOD VarSetValue( aVar, uValue )
-
-METHOD GetAreas()
-
-METHOD GetRec( cAlias )
-
-METHOD GetArrayInfo( cArrName, aArrValue )
-
-METHOD GetHashInfo( cHashName, aHashValue )
-
-METHOD GetObjectInfo( cObjName, oObject, aObjRawValue )
-
-METHOD GetBreakPoints()
-
-METHOD GetWatch()
-
-METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals )   // updates monitored variables
-
-METHOD GetProcStack()
+   METHOD New()
+   METHOD Activate()
+   METHOD LoadCallStack()
+   METHOD HandleEvent()
+   METHOD Go()
+   METHOD Step()
+   METHOD Animate()
+   METHOD Pause()
+   METHOD Trace()
+   METHOD SetCBTrace( lCBTrace )
+   METHOD SetNextRoutine()
+   METHOD GetSourceFiles()
+   METHOD GetNextValidStopLine( nProcLevel )
+   METHOD GetNextValidStopLineEx( cFileName, nLine )
+   METHOD IsValidStopLine( cFileName, nLine )
+   METHOD SetToCursor( cFileName, nLine )
+   METHOD Quit()
+   METHOD Exit()
+   METHOD BreakPointCount()
+   METHOD IsBreakPoint( cFileName, nLine )
+   METHOD BreakPointToggle( cFileName, nLine )
+   METHOD BreakPointDelete( nPos )
+   METHOD BreakPointDeleteAll()
+   METHOD BreakPointAddFunc( cFuncName )
+   METHOD GetExprValue( xExpr, lValid )
+   METHOD WatchCount()
+   METHOD WatchDeleteAll()
+   METHOD WatchDelete( nWatch )
+   METHOD WatchGetInfo( nWatch )
+   METHOD WatchSetExpr( nWatch, cExpr )
+   METHOD WatchPointAdd( cExpr )
+   METHOD TracepointAdd( cExpr )
+   METHOD SetPathForFiles( cPath )
+   METHOD LoadSourceFile( cFileName )
+   METHOD GetCodeLineInfo( nProc )
+   METHOD DoCommand( cCommand )
+   METHOD RestoreSettings( cFileName )
+   METHOD SaveSettings( cFileName )
+   METHOD VarGetInfo( aVar )
+   METHOD VarGetName( aVar )
+   METHOD VarGetValType( aVar )
+   METHOD VarGetValue( aVar )
+   METHOD VarSetValue( aVar, uValue )
+   METHOD GetAreas()
+   METHOD GetRec( cAlias )
+   METHOD GetArrayInfo( cArrName, aArrValue )
+   METHOD GetHashInfo( cHashName, aHashValue )
+   METHOD GetObjectInfo( cObjName, oObject, aObjRawValue )
+   METHOD GetBreakPoints()
+   METHOD GetWatch()
+   METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals )   // updates monitored variables
+   METHOD GetProcStack()
 
    // Code Blocks that call the GUI functions
    VAR bGUICreateFormDebugger  INIT {|| ProcInitGUIDebugger( .T. ) }
@@ -282,17 +231,17 @@ METHOD GetProcStack()
    VAR bGUIMessageBox          INIT {|| NIL }   // this code block is initialized in ProcInitGUIDebugger()
    VAR lGUIShowMessageBox      INIT .T.
 
-METHOD GUICreateFormDebugger()    INLINE   EVAL( ::bGUICreateFormDebugger )
+   METHOD GUICreateFormDebugger()    INLINE   EVAL( ::bGUICreateFormDebugger )
 
-METHOD GUIReleaseFormDebugger()   INLINE   EVAL( ::bGUIReleaseFormDebugger )
+   METHOD GUIReleaseFormDebugger()   INLINE   EVAL( ::bGUIReleaseFormDebugger )
 
-METHOD GUIUpdateInfo()            INLINE   EVAL( ::bGUIUpdateInfo )
+   METHOD GUIUpdateInfo()            INLINE   EVAL( ::bGUIUpdateInfo )
 
-METHOD GUIDoEvents()              INLINE   EVAL( ::bGUIDoEvents )
+   METHOD GUIDoEvents()              INLINE   EVAL( ::bGUIDoEvents )
 
-METHOD GUIReleaseAllWindows()     INLINE   EVAL( ::bGUIReleaseAllWindows )
+   METHOD GUIReleaseAllWindows()     INLINE   EVAL( ::bGUIReleaseAllWindows )
 
-METHOD GUIMessageBox( ... )       INLINE   Iif( ::lGUIShowMessageBox, EVAL( ::bGUIMessageBox, ... ), NIL )
+   METHOD GUIMessageBox( ... )       INLINE   Iif( ::lGUIShowMessageBox, EVAL( ::bGUIMessageBox, ... ), NIL )
 
 ENDCLASS
 
@@ -1562,4 +1511,3 @@ HB_FUNC ( __DBGRESETRUNFLAGS )
 }
 
 #pragma ENDDUMP
-

@@ -101,4 +101,3 @@ FUNCTION GetItemImage()
    MsgInfo( iif( Empty( aTreeImages[ i ] ), '0.bmp', iif( aTreeImages[ i ] > 1, '2.bmp', '1.bmp' ) ) )
 
    RETURN NIL
-

@@ -372,4 +372,3 @@ PROCEDURE Impresion()
    CLOSE Tipos
 
    RETURN
-

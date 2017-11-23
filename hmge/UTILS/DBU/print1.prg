@@ -675,4 +675,3 @@ FUNCTION DBUprintline(row,col,aitems,ajustify,currentfont)
    SET text align oldstyle
 
    RETURN NIL
-

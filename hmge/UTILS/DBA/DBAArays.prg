@@ -168,4 +168,3 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
                      RETU xRVal // ArMinVal()
 
                      *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

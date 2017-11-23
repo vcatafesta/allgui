@@ -161,7 +161,6 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
    RETURN _nSelected
 
    STATIC PROC _aChoiceTextChanged( lAnyWhere )
-
       LOCAL cCurValue := _HMG_aChoice._edit.value
       LOCAL nItemNo
       LOCAL lFound := .f.
@@ -276,4 +275,3 @@ FUNCTION textboxeditsetsel(cParent,cControl,nStart,nEnd)
    SendMessage( _HMG_aControlhandles [i], EM_SETSEL, nStart, nEnd )
 
    RETURN NIL
-

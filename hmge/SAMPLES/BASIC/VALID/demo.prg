@@ -80,4 +80,3 @@ FUNCTION _DoValid ( Expression , Message )
       ENDIF
 
       RETURN NIL
-

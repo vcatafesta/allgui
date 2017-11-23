@@ -130,4 +130,3 @@ STATIC FUNCTION CreateDatos()
    AEval( aName, {| x, n| aName[ n ] := "MyName_" + hb_ntos( n ) } )
 
    RETURN { aDatos, aHead, aSize, aFoot, aPict, aAlign, aName }
-

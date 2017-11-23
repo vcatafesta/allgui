@@ -192,4 +192,3 @@ PROCEDURE Grayness_effect_end
    /*
    * EOF
    */
-

@@ -85,4 +85,3 @@ PROCEDURE GETITEM()
    msginfo ( if ( a [5] == .t. , '.t.' , '.f.' )   , '5' )
 
    RETURN
-

@@ -140,7 +140,6 @@
 #define FIF_GIF     25
 #define FIF_HDR     26
 
-
 /** Image type used in FreeImage.
 */
 //FREE_IMAGE_TYPE
@@ -158,7 +157,6 @@
 #define FIT_RGBF    11  // 96-bit RGB float image : 3 x 32-bit IEEE floating point
 #define FIT_RGBAF   12  // 128-bit RGBA float image : 4 x 32-bit IEEE floating point
 
-
 /** Image color type used in FreeImage.
 */
 //FREE_IMAGE_COLOR_TYPE
@@ -169,14 +167,12 @@
 #define FIC_RGBALPHA    4   // RGB color model with alpha channel
 #define FIC_CMYK        5   // CMYK color model
 
-
 /** Color quantization algorithms.
 Constants used in FreeImage_ColorQuantize.
 */
 //FREE_IMAGE_QUANTIZE
 #define FIQ_WUQUANT     0   // Xiaolin Wu color quantization algorithm
 #define FIQ_NNQUANT     1   // NeuQuant neural-net quantization algorithm by Anthony Dekker
-
 
 /** Dithering algorithms.
 Constants used in FreeImage_Dither.
@@ -188,7 +184,6 @@ Constants used in FreeImage_Dither.
 #define FID_CLUSTER6x6   3  // Ordered clustered dot dithering (order 3 - 6x6 matrix)
 #define FID_CLUSTER8x8   4  // Ordered clustered dot dithering (order 4 - 8x8 matrix)
 #define FID_CLUSTER16x16 5  // Ordered clustered dot dithering (order 8 - 16x16 matrix)
-
 
 /** Lossless JPEG transformations
 Constants used in FreeImage_JPEGTransform
@@ -203,14 +198,12 @@ Constants used in FreeImage_JPEGTransform
 #define FIJPEG_OP_ROTATE_180  6  // 180-degree rotation
 #define FIJPEG_OP_ROTATE_270  7  // 270-degree clockwise (or 90 ccw)
 
-
 /** Tone mapping operators.
 Constants used in FreeImage_ToneMapping.
 */
 //FREE_IMAGE_TMO
 #define FITMO_DRAGO03         0  // Adaptive logarithmic mapping (F. Drago, 2003)
 #define FITMO_REINHARD05      1  // Dynamic range reduction inspired by photoreceptor physiology (E. Reinhard, 2005)
-
 
 /** Upsampling / downsampling filters.
 Constants used in FreeImage_Rescale.
@@ -222,7 +215,6 @@ Constants used in FreeImage_Rescale.
 #define FILTER_BSPLINE     3  // 4th order (cubic) b-spline
 #define FILTER_CATMULLROM  4  // Catmull-Rom spline, Overhauser spline
 #define FILTER_LANCZOS3    5  // Lanczos3 filter
-
 
 /** Color channels.
 Constants used in color manipulation routines.
@@ -262,7 +254,6 @@ Constants used in color manipulation routines.
 #define FIDT_DOUBLE    12   // 64-bit IEEE floating point
 #define FIDT_IFD       13   // 32-bit unsigned integer (offset)
 #define FIDT_PALETTE   14   // 32-bit RGBQUAD
-
 
 /**
   Metadata models supported by FreeImage

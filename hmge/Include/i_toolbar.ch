@@ -67,7 +67,6 @@
    => ;
    _BeginToolBar ( <"name">, <"parent">, , , <w>, <h>, <caption>, , <f>, <s>, <tooltip>, <.flat.>, <.bottom.>, <.righttext.>, <.break.>, <.bold.>, <.italic.>, <.underline.>, <.strikeout.>, <.border.>, <.wrap.>, <.custom.> )
 
-
 #xcommand  DEFINE TOOLBAREX  <name> ;
       [ OF <parent> ]  [ PARENT <parent> ] ;
       [ CAPTION <caption> ];
@@ -95,11 +94,9 @@
    => ;
    _BeginToolBarEx ( <"name">, <"parent">, , , <w>, <h>, <caption>, , <f>, <s>, <tooltip>, <.flat.>, <.bottom.>, <.righttext.>, <.break.>, <.bold.>, <.italic.>, <.underline.>, <.strikeout.>, <.border.>, <.mixedbuttons.>, <r>, <tbsize>, <imagelst>, <hotimagelst>, <.wrap.>, <.custom.> )
 
-
 #xcommand  END TOOLBAR ;
    => ;
    _EndToolBar ()
-
 
 #xcommand BUTTON <name> ;
       [ CAPTION <caption> ] ;
@@ -116,7 +113,6 @@
    =>;
    _DefineToolButton ( <"name">, _HMG_ActiveToolBarName, , , <caption> , <{action}> , , , <bitmap> , <tooltip> , , , .f. , <.separator.> , <.autosize.> , <.check.> , <.group.> , <.dropdown.> , <.wholedropdown.> , <.adjust.>, -1 )
 
-
 #xcommand BUTTON <name> ;
       [ CAPTION <caption> ] ;
       PICTUREINDEX <bitmapinx> ;
@@ -132,14 +128,12 @@
    =>;
    _DefineToolButton ( <"name">, _HMG_ActiveToolBarName, , , <caption> , <{action}> , , , '' , <tooltip> , , , .f. , <.separator.> , <.autosize.> , <.check.> , <.group.> , <.dropdown.> , <.wholedropdown.> , <.adjust.> , <bitmapinx> )
 
-
 #define TB_ENABLEBUTTON   (WM_USER + 1)
 #define RB_GETBANDCOUNT   (WM_USER + 12)
 #define RB_GETBARHEIGHT   (WM_USER + 27)
 #define RB_SHOWBAND       (WM_USER + 35)
 #define TB_BUTTONCOUNT    (WM_USER + 24)
 #define TB_CUSTOMIZE      (WM_USER + 27)
-
 
 #xtranslate GetBandCount ( <hWnd> ) ;
 => ;

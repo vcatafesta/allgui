@@ -61,9 +61,8 @@
 
 #xcommand ACTIVATE WINDOW <oWnd> [<lNoShow: NOSHOW>]     ;
            => ;
-      <oWnd>:Activate( !<.lNoShow.>) 
-                                                        
-  
+      <oWnd>:Activate( !<.lNoShow.>)
+
 #xcommand ACTIVATE DIALOG <oDlg>                        ;
             [ <lNoModal: NOMODAL> ]                     ;
           => ;
@@ -79,7 +78,6 @@
           => ;
    <oWnd>:aEvents := \{ \{ <id1>,<id2>, <b1> \} [ , \{ <idn1>,<idn2>, <bn> \} ] \}
 
-
 // Commands for control handling
 
 #xcommand ADD STATUS [ TO <oWnd> ] ;
@@ -92,7 +90,6 @@
             [ PARTS <aparts,...> ] ;
           => ;
     HStatus():New( <oWnd>,<nId>,<nStyle>,<oFont>,\{<aparts>\},<bInit>,<bSize>,<bDraw> )
-
 
 #xcommand @ <x>,<y> SAY [ <oSay> CAPTION ] <caption> ;
             [ OF <oWnd> ]              ;
@@ -125,7 +122,6 @@
           => ;
     [<oSay> := ] HStatic():Redefine( <oWnd>,<nId>,<cCaption>, ;
         <oFont>,<bInit>,<bSize>,<bDraw>,<ctoolt>,<color>,<bcolor>,<.lTransp.> )
-
 
 #xcommand @ <x>,<y> BITMAP [ <oBmp> SHOW ] <bitmap> ;
             [<res: FROM RESOURCE>]     ;
@@ -194,7 +190,6 @@
     [<oImage> := ] HSayFImage():Redefine( <oWnd>,<nId>,<image>, ;
         <bInit>,<bSize>,<ctoolt> )
 
-
 #xcommand @ <x>,<y> LINE [ <oLine> ]   ;
             [ LENGTH <length> ]        ;
             [ OF <oWnd> ]              ;
@@ -223,7 +218,6 @@
     [<oEdit> := ] HEdit():New( <oWnd>,<nId>,<caption>,,<nStyle>,<x>,<y>,<width>, ;
                     <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
                     <bLfocus>,<ctoolt>,<color>,<bcolor>,,<.lnoborder.> )
-
 
 #xcommand REDEFINE EDITBOX [ <oEdit> ] ;
             [ OF <oWnd> ]              ;
@@ -259,7 +253,6 @@
     [<oEdit> := ] HRichEdit():New( <oWnd>,<nId>,<vari>,<nStyle>,<x>,<y>,<width>, ;
                     <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>, ;
                     <bLfocus>,<ctoolt>,<color>,<bcolor> )
-
 
 #xcommand @ <x>,<y> BUTTON [ <oBut> CAPTION ] <caption> ;
             [ OF <oWnd> ]              ;
@@ -359,7 +352,6 @@
           => ;
     <oTab>:EndPage()
 
-
 #xcommand @ <x>,<y> CHECKBOX [ <oCheck> CAPTION ] <caption> ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
@@ -393,7 +385,6 @@
           => ;
     [<oCheck> := ] HCheckButton():Redefine( <oWnd>,<nId>,<lInit>,,<oFont>, ;
           <bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor> )
-
 
 #xcommand RADIOGROUP  ;
           => HRadioGroup():New()
@@ -436,7 +427,6 @@
     [<oRadio> := ] HRadioButton():Redefine( <oWnd>,<nId>,<oFont>,<bInit>,<bSize>, ;
           <bDraw>,<bClick>,<ctoolt>,<color>,<bcolor> )
 
-
 #xcommand @ <x>,<y> COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
@@ -467,7 +457,6 @@
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<nInit>,,<aItems>,<oFont>,<bInit>, ;
              <bSize>,<bDraw>,<bChange>,<ctoolt> )
 
-
 #xcommand @ <x>,<y> UPDOWN [ <oUpd> INIT ] <nInit> ;
             RANGE <nLower>,<nUpper>    ;
             [ OF <oWnd> ]              ;
@@ -488,7 +477,6 @@
     [<oUpd> := ] HUpDown():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<x>,<y>,<width>, ;
                     <height>,<oFont>,<bInit>,<bSize>,<bDraw>,<bGfocus>,         ;
                     <bLfocus>,<ctoolt>,<color>,<bcolor>,<nUpDWidth>,<nLower>,<nUpper> )
-
 
 #xcommand @ <x>,<y> PANEL [ <oPanel> ] ;
             [ OF <oWnd> ]              ;
@@ -571,7 +559,6 @@
     <oBrw>:AddColumn( HColumn():New( <cHeader>,<block>,<cType>,<nLen>,<nDec>,<.lEdit.>,;
                       <nJusHead>, <nJusLine>, <cPict>, <{bValid}>, <{bWhen}>, <aItem>, <oBmp> ) )
 
-
 #xcommand @ <x>,<y> OWNERBUTTON [ <oOwnBtn> ]  ;
             [ OF <oWnd> ]             ;
             [ ID <nId> ]              ;
@@ -596,7 +583,6 @@
           <bClick>,<.flat.>, ;
               <cText>,<color>,<font>,<xt>, <yt>,<widtht>,<heightt>, ;
               <bmp>,<.res.>,<xb>,<yb>,<widthb>,<heightb>,<.ltr.>, <ctoolt> )
-
 
 #xcommand REDEFINE OWNERBUTTON [ <oOwnBtn> ]  ;
             [ OF <oWnd> ]                     ;
@@ -639,7 +625,6 @@
         <width>,<height>,<oFont>,<bInit>,<bGfocus>,<bLfocus>,<ctoolt>, ;
         <color>,<bcolor> )
 
-
 #xcommand @ <x>,<y> SPLITTER [ <oSplit> ] ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
@@ -651,7 +636,6 @@
             [ DIVIDE <aLeft> FROM <aRight> ] ;
           => ;
     [<oSplit> :=] HSplitter():New( <oWnd>,<nId>,<x>,<y>,<width>,<height>,<bSize>,<bDraw>,<color>,<bcolor>,<aLeft>,<aRight> )
-
 
 #xcommand PREPARE FONT <oFont>       ;
              NAME <cName>            ;
@@ -706,7 +690,6 @@
     [<oEdit> := ] HEdit():Redefine( <oWnd>,<nId>,<vari>, ;
                    {|v|Iif(v==Nil,<vari>,<vari>:=v)},    ;
                    <oFont>,,,,<bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor> )
-
 
 #xcommand @ <x>,<y> GET CHECKBOX [ <oCheck> VAR ] <vari>  ;
             CAPTION  <caption>         ;
@@ -786,7 +769,6 @@
                     <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>, ;
                     <nUpDWidth>,<nLower>,<nUpper> )
 
-
 #xcommand @ <x>,<y> GET DATEPICKER [ <oPick> VAR ] <vari> ;
             [ OF <oWnd> ]              ;
             [ ID <nId> ]               ;
@@ -803,7 +785,6 @@
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},      ;
                     <nStyle>,<x>,<y>,<width>,<height>,      ;
                     <oFont>,,<bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor> )
-
 
 #xcommand SAY <value> TO <oDlg> ID <id> ;
           => ;
@@ -836,7 +817,6 @@
           => ;
     <oTimer> := HTimer():New( <oWnd>, <id>, <value>, <bAction> )
 
-
 #xcommand SET KEY <nctrl>,<nkey> [ OF <oDlg> ] [ TO <func> ] ;
           => ;
     SetDlgKey( <oDlg>, <nctrl>, <nkey>, <{func}> )
@@ -862,7 +842,7 @@
 
 #xcommand SET RESOURCES TO => LOADRESOURCE( NIL )
 
-// Addded by jamaj 
+// Addded by jamaj
 #xcommand DEFAULT <uVar1> := <uVal1> ;
                [, <uVarN> := <uValN> ] => ;
                   <uVar1> := IIf( <uVar1> == nil, <uVal1>, <uVar1> ) ;;
@@ -885,7 +865,6 @@
 #define ISARRAY(c)    ( Valtype(c) == "A" )
 #define ISNUMBER(c)    ( Valtype(c) == "N" )
 #define ISLOGICAL(c)    ( Valtype(c) == "L" )
-
 
 /* Commands for PrintDos Class*/
 
@@ -924,11 +903,9 @@ Added by Marcos Antonio Gambeta
     [<oMonthCalendar> :=] HMonthCalendar():New( <oWnd>,<nId>,<dInit>,<nStyle>,;
         <x>,<y>,<nWidth>,<nHeight>,<oFont>,<bInit>,<bChange>,<cTooltip>,;
         <.notoday.>,<.notodaycircle.>,<.weeknumbers.>)
- 
 
-/*By Vitor Maclung */ 
+/*By Vitor Maclung */
 // Commands for Listbox handling
-
 
 #xcommand @ <x>,<y> LISTBOX [ <oListbox> ITEMS ] <aItems> ;
             [ OF <oWnd> ]              ;

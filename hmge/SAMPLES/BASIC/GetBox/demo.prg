@@ -408,4 +408,3 @@ FUNCTION _Trans(xval)
    ENDIF
 
    RETURN RetVal
-

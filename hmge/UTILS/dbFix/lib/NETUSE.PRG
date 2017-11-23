@@ -496,4 +496,3 @@ FUNCTION SafeClose(cAlias)
    ENDIF
 
    Return(lWasOpen)
-

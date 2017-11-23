@@ -134,4 +134,3 @@ PROCEDURE Grid_OnInit( h )
    zgm_EnableColMove( h, .F. )
 
    RETURN
-

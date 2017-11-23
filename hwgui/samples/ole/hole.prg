@@ -55,4 +55,3 @@ STATIC FUNCTION SpeakIt( oEdit )
    oChar:Hide()
 
    RETURN NIL
-

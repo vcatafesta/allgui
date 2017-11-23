@@ -158,4 +158,3 @@ FUNCTION _EndPager()
    _EndSplitBox ()
 
    RETURN NIL
-

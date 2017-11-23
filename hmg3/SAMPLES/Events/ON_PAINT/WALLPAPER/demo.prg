@@ -241,4 +241,3 @@ HB_FUNC (BMP_PAINT)
 }
 
 #pragma enddump
-

@@ -2722,4 +2722,3 @@ STATIC FUNCTION File2Array(cFile,nLen,hFile)
 
    RETURN aRay
    // end of 3rd function written by Peter Kulek
-

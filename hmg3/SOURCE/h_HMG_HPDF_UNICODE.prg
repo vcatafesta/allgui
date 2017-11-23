@@ -280,4 +280,3 @@ HB_FUNC ( _HMG_HPDF_SAVEBITMAPBITS )
 }
 
 #pragma enddump
-

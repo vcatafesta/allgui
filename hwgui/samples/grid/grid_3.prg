@@ -195,4 +195,3 @@ FUNCTION MyVal( xValue, type )
    ENDIF
 
    RETURN result
-

@@ -141,4 +141,3 @@ FUNCTION HMGZebra_GetHeight (hZebra, nLineWidth, nLineHeight, iFlags)
    hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=x+w-x1, nBarHeight:=y+h-y1 }, x1, y1, nLineWidth, nLineHeight, iFlags )
 
    RETURN nBarHeight
-

@@ -46,4 +46,3 @@ FUNCTION OpenConfig
    hwg_PropertySheet( hwg_Getactivewindow(),{ aDlg1, aDlg2 }, "Sheet Example" )
 
    RETURN NIL
-

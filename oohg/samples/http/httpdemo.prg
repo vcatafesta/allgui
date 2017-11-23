@@ -105,4 +105,3 @@ PROCEDURE TestHttpRef( nOption )
    /*
    * EOF
    */
-

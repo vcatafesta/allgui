@@ -131,15 +131,15 @@ CLASS TStreamSSL FROM TStreamSocket
    DATA pSsl    INIT nil
    DATA pBio    INIT nil
 
-METHOD New
+   METHOD New
 
-METHOD IsConnected
+   METHOD IsConnected
 
-METHOD RealFill
+   METHOD RealFill
 
-METHOD Disconnect
+   METHOD Disconnect
 
-METHOD Write
+   METHOD Write
 
 ENDCLASS
 
@@ -257,4 +257,3 @@ HB_FUNC( STREAMSSL_WRITE )   // ( pSsl, cBuffer )
 }
 
 #pragma ENDDUMP
-

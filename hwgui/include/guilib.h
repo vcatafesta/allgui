@@ -18,7 +18,7 @@
    #define HB_PUTHANDLE( i, h )     hb_itemPutPtr( i, ( void * ) ( h ) )
    #define HB_GETHANDLE( i )        hb_itemGetPtr( i )
    #define HB_GETPTRHANDLE( i ,n )  hb_arrayGetPtr( i , n )
-   #define HB_PUSHITEM( i )         hb_vmPushPointer( ( void * )i ) 
+   #define HB_PUSHITEM( i )         hb_vmPushPointer( ( void * )i )
 #else
    #define HB_RETHANDLE( h )        hb_retnl( ( LONG ) ( h ) )
    #define HB_PARHANDLE( n )        ( ( LONG ) hb_parnl( n ) )
@@ -26,7 +26,7 @@
    #define HB_PUTHANDLE( i, h )     hb_itemPutNL( i, ( LONG ) ( h ) )
    #define HB_GETHANDLE( i )        ( ( LONG ) hb_itemGetNL( i ) )
    #define HB_GETPTRHANDLE( i ,n )  hb_arrayGetNL( i , n )
-   #define HB_PUSHITEM( i )         hb_vmPushLong( ( LONG )i ) 
+   #define HB_PUSHITEM( i )         hb_vmPushLong( ( LONG )i )
 #endif
 
 #ifndef HB_SIZEOFARRAY

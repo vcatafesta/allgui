@@ -855,4 +855,3 @@ FUNCTION _TreeCustomDrawFont ( i, lParam )
    ENDIF
 
    RETURN DefaultFontHandle   // <=== return default handle
-

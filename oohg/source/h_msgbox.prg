@@ -394,4 +394,3 @@ FUNCTION _MsgBox( Message, Title, Style, Icon, SysModal, TopMost )
    ENDIF
 
    RETURN MessageBoxIndirect( Nil, cMessage, Title, Style, Icon )
-

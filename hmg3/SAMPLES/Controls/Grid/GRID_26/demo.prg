@@ -78,4 +78,3 @@ FUNCTION Main
    ACTIVATE WINDOW Form_1
 
    RETURN
-

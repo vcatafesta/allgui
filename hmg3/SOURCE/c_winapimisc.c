@@ -12,65 +12,59 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
-
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 
-
-
-
 //#define _WIN32_IE      0x0500
 //#define HB_OS_WIN_32_USED
 //#define _WIN32_WINNT   0x0400
-
 
 #include <shlobj.h>
 #include <windows.h>
@@ -85,11 +79,9 @@
 #include "hbapiitm.h"
 #include "hbapi.h"
 
-
 #include "hbapifs.h"
 
-
-/*WaitRun function 
+/*WaitRun function
 Author Luiz Rafael Culik Guimaraes: culikr@uol.com.br
 Parameters WaitRunPipe(cCommand,nShowWindow,cFile)
 */
@@ -102,15 +94,15 @@ HB_FUNC( WAITRUNPIPE )
       // PROCESS_INFORMATION ProcessInfo = {0};
       PROCESS_INFORMATION ProcessInfo = {NULL, NULL, 0, 0};
       // DWORD dwExitCode;
-      HANDLE ReadPipeHandle; 
+      HANDLE ReadPipeHandle;
       HANDLE WritePipeHandle;       // not used here
       TCHAR Data[1024];
-      TCHAR *szFile=(TCHAR*) HMG_parc(3);    
-      SECURITY_ATTRIBUTES sa; 
-      ZeroMemory(&sa,sizeof(SECURITY_ATTRIBUTES)); 
-      sa.nLength=sizeof(SECURITY_ATTRIBUTES); 
-      sa.bInheritHandle=1; 
-      sa.lpSecurityDescriptor=NULL; 
+      TCHAR *szFile=(TCHAR*) HMG_parc(3);
+      SECURITY_ATTRIBUTES sa;
+      ZeroMemory(&sa,sizeof(SECURITY_ATTRIBUTES));
+      sa.nLength=sizeof(SECURITY_ATTRIBUTES);
+      sa.bInheritHandle=1;
+      sa.lpSecurityDescriptor=NULL;
 
       HB_FHANDLE nHandle;
 
@@ -123,114 +115,106 @@ HB_FUNC( WAITRUNPIPE )
        }
       if(!CreatePipe(&ReadPipeHandle,&WritePipeHandle,&sa,0))
         hb_retnl(-1);
-    
+
       ProcessInfo.hProcess=INVALID_HANDLE_VALUE;
       ProcessInfo.hThread=INVALID_HANDLE_VALUE;
       StartupInfo.dwFlags = STARTF_USESHOWWINDOW |STARTF_USESTDHANDLES;
       StartupInfo.wShowWindow = hb_parni( 2 );
-      StartupInfo.hStdOutput=WritePipeHandle; 
-      StartupInfo.hStdError=WritePipeHandle; 
+      StartupInfo.hStdOutput=WritePipeHandle;
+      StartupInfo.hStdError=WritePipeHandle;
 
       if( ! CreateProcess( 0, (TCHAR*)HMG_parc( 1 ), 0, 0, FALSE,
                            CREATE_NEW_CONSOLE | NORMAL_PRIORITY_CLASS,
                            0, 0, &StartupInfo, &ProcessInfo ) )
                 hb_retnl( -1 );
 
+      for (;;)
+      {
+        DWORD BytesRead;
+        DWORD TotalBytes;
+        DWORD BytesLeft;
 
-      for (;;) 
-      { 
-        DWORD BytesRead; 
-        DWORD TotalBytes; 
-        DWORD BytesLeft; 
-
-        //Check for the presence of data in the pipe 
-        if(!PeekNamedPipe(ReadPipeHandle,Data,sizeof(Data),&BytesRead, 
-            &TotalBytes,&BytesLeft))hb_retnl(-1); 
-        //If there is bytes, read them 
-        if(BytesRead) 
-        { 
-          if(!ReadFile(ReadPipeHandle,Data,sizeof(Data)-1,&BytesRead,NULL)) 
-            hb_retnl(-1); 
+        //Check for the presence of data in the pipe
+        if(!PeekNamedPipe(ReadPipeHandle,Data,sizeof(Data),&BytesRead,
+            &TotalBytes,&BytesLeft))hb_retnl(-1);
+        //If there is bytes, read them
+        if(BytesRead)
+        {
+          if(!ReadFile(ReadPipeHandle,Data,sizeof(Data)-1,&BytesRead,NULL))
+            hb_retnl(-1);
           Data[BytesRead]=_TEXT('\0');
           hb_fsWriteLarge(nHandle,(BYTE*)Data,BytesRead);
 
-        } 
-        else 
-        { 
-          //Is the console app terminated? 
-          if(WaitForSingleObject(ProcessInfo.hProcess,0)==WAIT_OBJECT_0)break; 
+        }
+        else
+        {
+          //Is the console app terminated?
+          if(WaitForSingleObject(ProcessInfo.hProcess,0)==WAIT_OBJECT_0)break;
 
-        } 
-      } 
-      CloseHandle(ProcessInfo.hThread); 
-      CloseHandle(ProcessInfo.hProcess); 
-      CloseHandle(ReadPipeHandle); 
+        }
+      }
+      CloseHandle(ProcessInfo.hThread);
+      CloseHandle(ProcessInfo.hProcess);
+      CloseHandle(ReadPipeHandle);
       CloseHandle(WritePipeHandle);
       hb_fsClose(nHandle);
-    } 
-
+    }
 
 HB_FUNC( ISVISTA )
 {
 
-	OSVERSIONINFO osvi;
+   OSVERSIONINFO osvi;
 
-	ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+   ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
+   osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 
-	GetVersionEx(&osvi);
+   GetVersionEx(&osvi);
 
-	if (osvi.dwMajorVersion == 6)
-	{
-		hb_retl(TRUE);
-	}
-	else
-	{	
-		hb_retl(FALSE);
-	}
+   if (osvi.dwMajorVersion == 6)
+   {
+      hb_retl(TRUE);
+   }
+   else
+   {
+      hb_retl(FALSE);
+   }
 
 }
 
-
-
 HB_FUNC( GETRED )
 {
-	hb_retnl( GetRValue( hb_parnl( 1 ) ) );
+   hb_retnl( GetRValue( hb_parnl( 1 ) ) );
 }
 
 HB_FUNC( GETGREEN )
 {
-	hb_retnl( GetGValue( hb_parnl( 1 ) ) );
+   hb_retnl( GetGValue( hb_parnl( 1 ) ) );
 }
 
 HB_FUNC( GETBLUE )
 {
-	hb_retnl( GetBValue( hb_parnl( 1 ) ) );
+   hb_retnl( GetBValue( hb_parnl( 1 ) ) );
 }
-
 
 HB_FUNC( HIWORD )
 {
-	hb_retnl( HIWORD( hb_parnl( 1 ) ) );
+   hb_retnl( HIWORD( hb_parnl( 1 ) ) );
 }
 
 HB_FUNC( LOWORD )
 {
-	hb_retnl( LOWORD( hb_parnl( 1 ) ) );
+   hb_retnl( LOWORD( hb_parnl( 1 ) ) );
 }
 
-
-
 HB_FUNC( C_GETSPECIALFOLDER ) // Contributed By Ryszard Ryüko
-{ 
+{
    TCHAR *lpBuffer = (TCHAR*) hb_xgrab( (MAX_PATH+1) * sizeof(TCHAR));
-   LPITEMIDLIST pidlBrowse;    // PIDL selected by user 
+   LPITEMIDLIST pidlBrowse;    // PIDL selected by user
    SHGetSpecialFolderLocation(GetActiveWindow(), hb_parni(1) , &pidlBrowse) ;
    SHGetPathFromIDList(pidlBrowse,lpBuffer);
    HMG_retc(lpBuffer);
    hb_xfree( lpBuffer);
-} 
-
+}
 
 HB_FUNC( MEMORYSTATUS )
 {
@@ -251,12 +235,10 @@ HB_FUNC( MEMORYSTATUS )
    }
 }
 
-
 HB_FUNC( SHELLABOUT )
 {
    ShellAbout( 0, HMG_parc( 1 ), HMG_parc( 2 ), (HICON) HMG_parnl (3) );
 }
-
 
 /*
 HB_FUNC( PAINTBKGND )
@@ -279,7 +261,7 @@ HB_FUNC( PAINTBKGND )
       DeleteObject(brush);
     }
     else
-    { brush = (HBRUSH)( COLOR_BTNFACE + 1 ); 
+    { brush = (HBRUSH)( COLOR_BTNFACE + 1 );
       FillRect(hdc, &recClie, brush);
     }
 
@@ -287,14 +269,12 @@ HB_FUNC( PAINTBKGND )
 }
 */
 
-
 HB_FUNC( GETWINDOWSDIR )
 {
    TCHAR szBuffer[ MAX_PATH + 1 ] = {0} ;
    GetWindowsDirectory( szBuffer,MAX_PATH);
    HMG_retc(szBuffer);
 }
-
 
 HB_FUNC( GETSYSTEMDIR )
 {
@@ -310,14 +290,12 @@ HB_FUNC( GETTEMPDIR )
    HMG_retc(szBuffer);
 }
 
-
 HB_FUNC( GETSYSTEMWOW64DIRECTORY )
 {
    TCHAR szBuffer[ MAX_PATH + 1 ] = {0} ;
    GetSystemWow64Directory( szBuffer, MAX_PATH );
    HMG_retc( szBuffer );
 }
-
 
 HB_FUNC ( POSTMESSAGE )
 {
@@ -348,11 +326,10 @@ HB_FUNC( SETBKMODE )
    hb_retni( SetBkMode( (HDC) HMG_parnl (1), hb_parni( 2 ) ) ) ;
 }
 
-
 HB_FUNC( SHELLEXECUTE )
-{ 
-// Because ShellExecute can delegate execution to Shell extensions (data sources, context menu handlers, verb implementations) 
-// that are activated using Component Object Model (COM), COM should be initialized before ShellExecute is called. 
+{
+// Because ShellExecute can delegate execution to Shell extensions (data sources, context menu handlers, verb implementations)
+// that are activated using Component Object Model (COM), COM should be initialized before ShellExecute is called.
    CoInitializeEx (NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
    HINSTANCE hInstance = ShellExecute( (HWND) HMG_parnl (1), HB_ISNIL(2) ? NULL : (LPCTSTR) HMG_parc(2),(LPCTSTR) HMG_parc(3),HB_ISNIL(4) ? NULL : (LPCTSTR) HMG_parc(4),HB_ISNIL(5) ? NULL : (LPCTSTR) HMG_parc(5),hb_parni(6) );
    HMG_retnl ((LONG_PTR) hInstance );
@@ -361,46 +338,45 @@ HB_FUNC( SHELLEXECUTE )
 HB_FUNC( WAITRUN )
 {
 
-	DWORD dwExitCode; 
-					
-	STARTUPINFO stInfo;
-	PROCESS_INFORMATION prInfo;
-	BOOL bResult;
+   DWORD dwExitCode;
 
-	ZeroMemory( &stInfo, sizeof(stInfo) );
+   STARTUPINFO stInfo;
+   PROCESS_INFORMATION prInfo;
+   BOOL bResult;
 
-	stInfo.cb = sizeof(stInfo);
+   ZeroMemory( &stInfo, sizeof(stInfo) );
 
-	stInfo.dwFlags=STARTF_USESHOWWINDOW;
+   stInfo.cb = sizeof(stInfo);
 
-	stInfo.wShowWindow=hb_parni(2);
+   stInfo.dwFlags=STARTF_USESHOWWINDOW;
 
-	bResult = CreateProcess(
-      NULL, 
-		(TCHAR*)HMG_parc(1) , 
-		NULL, 
-		NULL, 
-		TRUE,
-		CREATE_NEW_CONSOLE | NORMAL_PRIORITY_CLASS,
-		NULL,
-		NULL,
-		&stInfo, 
-		&prInfo);
-  
-	if (!bResult) 
-	{
-		hb_retl(-1);
+   stInfo.wShowWindow=hb_parni(2);
+
+   bResult = CreateProcess(
+      NULL,
+      (TCHAR*)HMG_parc(1) ,
+      NULL,
+      NULL,
+      TRUE,
+      CREATE_NEW_CONSOLE | NORMAL_PRIORITY_CLASS,
+      NULL,
+      NULL,
+      &stInfo,
+      &prInfo);
+
+   if (!bResult)
+   {
+      hb_retl(-1);
       return;   // ADD september 2015
-	}
+   }
 
-	WaitForSingleObject(prInfo.hProcess,INFINITE);
+   WaitForSingleObject(prInfo.hProcess,INFINITE);
 
-	GetExitCodeProcess( prInfo.hProcess, &dwExitCode );
+   GetExitCodeProcess( prInfo.hProcess, &dwExitCode );
 
-	hb_retnl( dwExitCode );
-   
+   hb_retnl( dwExitCode );
+
 }
-
 
 // Taken from MiniGUI Ex.
 HB_FUNC( ISEXERUNNING ) // ( cExeNameCaseSensitive ) --> lResult
@@ -413,8 +389,6 @@ HB_FUNC( ISEXERUNNING ) // ( cExeNameCaseSensitive ) --> lResult
       ReleaseMutex( hMutex );
 }
 
-
-
 HB_FUNC( CREATEMUTEX )
 {
    SECURITY_ATTRIBUTES *sa = NULL;
@@ -425,7 +399,6 @@ HB_FUNC( CREATEMUTEX )
    HANDLE h = CreateMutex (( HB_ISNIL(1) ? NULL : sa ), hb_parl(2), HMG_parc(3));
    HMG_retnl ((LONG_PTR) h );
 }
-
 
 HB_FUNC ( GETLASTERROR )
 {
@@ -443,12 +416,12 @@ HB_FUNC( SETSCROLLPOS )
 
 HB_FUNC ( CREATEFOLDER )
 {
-	CreateDirectory( HMG_parc(1) , NULL ) ;
+   CreateDirectory( HMG_parc(1) , NULL ) ;
 }
 
 HB_FUNC ( SETCURRENTFOLDER )
 {
-	SetCurrentDirectory( HMG_parc(1) ) ;
+   SetCurrentDirectory( HMG_parc(1) ) ;
 }
 
 HB_FUNC( REMOVEFOLDER )
@@ -466,7 +439,7 @@ HB_FUNC( GETCURRENTFOLDER )
 HB_FUNC( CREATESOLIDBRUSH )
 {
    HBRUSH hBrush = CreateSolidBrush( (COLORREF) RGB(hb_parni(1), hb_parni(2), hb_parni(3) ));
-	HMG_retnl ((LONG_PTR) hBrush );
+   HMG_retnl ((LONG_PTR) hBrush );
 }
 
 HB_FUNC( SETTEXTCOLOR )
@@ -485,8 +458,6 @@ HB_FUNC ( GETSYSCOLOR )
 {
   hb_retnl( GetSysColor( hb_parni(1) ) ) ;
 }
-
-
 
 /**************************************************************************************/
 /*                                                                                    */
@@ -511,7 +482,6 @@ HB_FUNC( WINVERSION )
 
    TCHAR            *szVersionEx = NULL;
 
-
    ZeroMemory(&osvi,sizeof(OSVERSIONINFOEX));
    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 
@@ -523,13 +493,12 @@ HB_FUNC( WINVERSION )
          szVersion = _TEXT("Unknown Operating System");
    }
 
- 
    if (szVersion == NULL)
    {
       switch (osvi.dwPlatformId)
       {
          case VER_PLATFORM_WIN32_NT:
-          
+
             if (osvi.dwMajorVersion == 6 && osvi.dwMinorVersion >= 2)
                szVersion = _TEXT ("Windows 8 ");
 
@@ -624,10 +593,10 @@ HB_FUNC( WINVERSION )
                      szVersionEx = _TEXT("Server ") ;
                   if (lstrcmpi(_TEXT("SERVERNT"),szProductType) == 0)
                      szVersionEx = _TEXT("Advanced Server ") ;
-                
+
                   szVersion = lstrcat(szVersion, _itot (osvi.dwMajorVersion, buffer, 10));
                   szVersion = lstrcat(szVersion,_TEXT("."));
-                  szVersion = lstrcat(szVersion, _itot (osvi.dwMinorVersion, buffer, 10));                
+                  szVersion = lstrcat(szVersion, _itot (osvi.dwMinorVersion, buffer, 10));
 
                }
             }
@@ -641,20 +610,20 @@ HB_FUNC( WINVERSION )
                                       0,KEY_QUERY_VALUE,&hKey);
                if (lRetVal == ERROR_SUCCESS)
                {
-                  szServicePack = _TEXT("Service Pack 6a");                 
-                  szBuild = _itot(osvi.dwBuildNumber & 0xFFFF, buffer, 10);                  
+                  szServicePack = _TEXT("Service Pack 6a");
+                  szBuild = _itot(osvi.dwBuildNumber & 0xFFFF, buffer, 10);
                }
                else
                {
-                  szServicePack = osvi.szCSDVersion;                  
+                  szServicePack = osvi.szCSDVersion;
                   szBuild = _itot(osvi.dwBuildNumber & 0xFFFF, buffer,10);
                }
                RegCloseKey(hKey);
             }
             else
             {
-               szServicePack = osvi.szCSDVersion;               
-               szBuild = _itot (osvi.dwBuildNumber & 0xFFFF, buffer,10);               
+               szServicePack = osvi.szCSDVersion;
+               szBuild = _itot (osvi.dwBuildNumber & 0xFFFF, buffer,10);
             }
             break;
 
@@ -678,7 +647,7 @@ HB_FUNC( WINVERSION )
                      szVersion = _TEXT("Windows 95");
                      szServicePack = _TEXT("OSR1");
                   }
-               }               
+               }
                szBuild = _itot (osvi.dwBuildNumber & 0x0000FFFF, buffer, 10);
             }
             if ((osvi.dwMajorVersion == 4) && (osvi.dwMinorVersion == 10))
@@ -693,13 +662,13 @@ HB_FUNC( WINVERSION )
                   szVersion = _TEXT("Windows 98");
                   szServicePack = _TEXT("First Edition");
                }
-               
-               szBuild = _itot (osvi.dwBuildNumber & 0x0000FFFF, buffer,10);               
+
+               szBuild = _itot (osvi.dwBuildNumber & 0x0000FFFF, buffer,10);
             }
-            
+
             if ((osvi.dwMajorVersion == 4) && (osvi.dwMinorVersion == 90))
             {
-               szVersion = _TEXT("Windows ME");            
+               szVersion = _TEXT("Windows ME");
                szBuild = _itot (osvi.dwBuildNumber & 0x0000FFFF, buffer, 10);
             }
             break;
@@ -712,7 +681,6 @@ HB_FUNC( WINVERSION )
    HMG_storvc( szServicePack, -1, 2 );
    HMG_storvc( szBuild, -1, 3 );
    HMG_storvc( szVersionEx, -1, 4 );
-
 
 }
 
@@ -749,7 +717,6 @@ HB_FUNC( WINMINORVERSIONNUMBER )
 
 }
 
-
 HB_FUNC( SETCLIPBOARD )
 {
    HGLOBAL hGlobalAlloc;
@@ -760,32 +727,31 @@ HB_FUNC( SETCLIPBOARD )
    if ( !OpenClipboard ( GetActiveWindow() ) )
       return;
 
-   EmptyClipboard(); 
+   EmptyClipboard();
 
    hGlobalAlloc = GlobalAlloc( GHND, (nLen+1) * sizeof(TCHAR) );
-   if (hGlobalAlloc == NULL) 
-   { 
-       CloseClipboard(); 
+   if (hGlobalAlloc == NULL)
+   {
+       CloseClipboard();
        return;
-   } 
+   }
 
-   // Lock the handle and copy the text to the buffer. 
- 
+   // Lock the handle and copy the text to the buffer.
+
    lpstr = (TCHAR*) GlobalLock( hGlobalAlloc );
-   memcpy( lpstr, cStr, nLen * sizeof(TCHAR)); 
-   lpstr[nLen] = (TCHAR) 0;    // null character 
-   GlobalUnlock(hGlobalAlloc); 
- 
-   // Place the handle on the clipboard. 
+   memcpy( lpstr, cStr, nLen * sizeof(TCHAR));
+   lpstr[nLen] = (TCHAR) 0;    // null character
+   GlobalUnlock(hGlobalAlloc);
+
+   // Place the handle on the clipboard.
 #ifdef UNICODE
    SetClipboardData (CF_UNICODETEXT, hGlobalAlloc );
 #else
    SetClipboardData (CF_TEXT, hGlobalAlloc );
 #endif
 
-   CloseClipboard();  
+   CloseClipboard();
 }
-
 
 HB_FUNC( GETCLIPBOARD )
 {
@@ -799,10 +765,10 @@ HB_FUNC( GETCLIPBOARD )
 
 #ifdef UNICODE
     hMem = GetClipboardData (CF_UNICODETEXT);
-#else    
+#else
     hMem = GetClipboardData( CF_TEXT );
 #endif
-    
+
    if ( hMem )
    {
        TCHAR *Text = (TCHAR *) GlobalLock (hMem);
@@ -812,9 +778,8 @@ HB_FUNC( GETCLIPBOARD )
    else
       HMG_retc ( _TEXT("") );
 
-   CloseClipboard(); 
+   CloseClipboard();
 }
-
 
 // by Claudio Soto, January 2014
 
@@ -823,9 +788,9 @@ HB_FUNC ( EMPTYCLIPBOARD )
    HWND hWnd = HB_ISNIL (1) ? GetDesktopWindow() : (HWND) HMG_parnl (1);
 
    if ( IsWindow ( hWnd ) )
-   {   if ( OpenClipboard ( hWnd ) ) 
+   {   if ( OpenClipboard ( hWnd ) )
        {   EmptyClipboard ();
-           CloseClipboard(); 
+           CloseClipboard();
            hb_retl ( TRUE );
        }
        else
@@ -835,13 +800,9 @@ HB_FUNC ( EMPTYCLIPBOARD )
       hb_retl ( FALSE );
 }
 
-
-
 //************************************************************************************************
 //  by Dr. Claudio Soto (May 2014)
 //************************************************************************************************
-
-
 
 //        SetWindowLongPtr (hWnd, nIndex, dwNewLong) --> return dwRetLong
 HB_FUNC ( SETWINDOWLONGPTR )
@@ -853,7 +814,6 @@ HB_FUNC ( SETWINDOWLONGPTR )
    HMG_retnl((LONG_PTR) dwRetLong);
 }
 
-
 //        GetWindowLongPtr (hWnd, nIndex) --> return dwRetLong
 HB_FUNC ( GETWINDOWLONGPTR )
 {
@@ -862,7 +822,6 @@ HB_FUNC ( GETWINDOWLONGPTR )
    LONG_PTR dwRetLong = GetWindowLongPtr (hWnd, nIndex);
    HMG_retnl((LONG_PTR) dwRetLong);
 }
-
 
 //        SetClassLongPtr (hWnd, nIndex, dwNewLong) --> return dwRetLong
 HB_FUNC ( SETCLASSLONGPTR )
@@ -874,7 +833,6 @@ HB_FUNC ( SETCLASSLONGPTR )
    HMG_retnl((LONG_PTR) dwRetLong);
 }
 
-
 //        GetClassLongPtr (hWnd, nIndex) --> return dwRetLong
 HB_FUNC ( GETCLASSLONGPTR )
 {
@@ -883,7 +841,6 @@ HB_FUNC ( GETCLASSLONGPTR )
    ULONG_PTR dwRetLong = GetClassLongPtr (hWnd, nIndex);
    HMG_retnl((LONG_PTR) dwRetLong);
 }
-
 
 //        RegCloseKey ( hKey ) --> return lBoolean
 HB_FUNC ( REGCLOSEKEY )
@@ -895,7 +852,6 @@ HB_FUNC ( REGCLOSEKEY )
    else
        hb_retl ((BOOL) FALSE);
 }
-
 
 //        RegOpenKeyEx ( hKey, cSubKey, [ RegSAM ], @hResult ) --> return lBoolean
 HB_FUNC ( REGOPENKEYEX )
@@ -909,10 +865,9 @@ HB_FUNC ( REGOPENKEYEX )
        hb_retl ((BOOL) TRUE);
    else
        hb_retl ((BOOL) FALSE);
- 
+
    HMG_stornl ((LONG_PTR) hResult, 4);
 }
-
 
 //        RegEnumKeyEx ( hKey, nIndex, @cBuffer, @cClass ) --> return lBoolean
 HB_FUNC ( REGENUMKEYEX )
@@ -934,16 +889,12 @@ HB_FUNC ( REGENUMKEYEX )
    HMG_storc (cClass,  4);
 }
 
-
-
 /*
 NOTE about 32/64 bit processes:
    - with apps of 32-bit is possible only get information about of 32-bit processes
    - with apps of 32-bit is not possible get information about of 64-bit processes
    - with apps of 64-bit is possible get information about of 32 and 64-bit processes
 */
-
-
 
 /*
 HMG_DEFINE_DLL_FUNC ( win_IsWow64Process,                            // user function name
@@ -956,7 +907,6 @@ HMG_DEFINE_DLL_FUNC ( win_IsWow64Process,                            // user fun
                       FALSE                                               // return value if fail call function of dll
                     )
 */
-
 
 //        IsWow64Process ( [ nProcessID ] ) --> return lBoolean
 HB_FUNC ( ISWOW64PROCESS )
@@ -993,7 +943,6 @@ HB_FUNC ( ISWOW64PROCESS )
    hb_retl ((BOOL) IsWow64 );
 }
 
-
 HB_FUNC ( GETMODULEHANDLE )
 {
    TCHAR *ModuleName = (TCHAR *) HMG_parc (1);
@@ -1001,13 +950,11 @@ HB_FUNC ( GETMODULEHANDLE )
    HMG_retnl ((LONG_PTR) hModule );
 }
 
-
 //        GetCurrentProcessId() --> return nProcessID
 HB_FUNC ( GETCURRENTPROCESSID )
 {
    hb_retni ((INT) GetCurrentProcessId());
 }
-
 
 //        EnumProcessesID () ---> return array { nProcessID1, nProcessID2, ... }
 HB_FUNC ( ENUMPROCESSESID )
@@ -1015,7 +962,7 @@ HB_FUNC ( ENUMPROCESSESID )
    typedef BOOL (WINAPI *Func_EnumProcesses) (DWORD*, DWORD, DWORD*);
    static Func_EnumProcesses pEnumProcesses = NULL;
 
-   if (pEnumProcesses == NULL) 
+   if (pEnumProcesses == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        pEnumProcesses = (Func_EnumProcesses) GetProcAddress(hLib, "EnumProcesses");
    }
@@ -1044,7 +991,6 @@ HB_FUNC ( ENUMPROCESSESID )
    hb_itemReturnRelease (pArray);
 }
 
-
 //        GetWindowThreadProcessId (hWnd, @nThread, @nProcessID)
 HB_FUNC ( GETWINDOWTHREADPROCESSID )
 {
@@ -1054,28 +1000,26 @@ HB_FUNC ( GETWINDOWTHREADPROCESSID )
    nThread = GetWindowThreadProcessId (hWnd, &nProcessID);
 
    if ( HB_ISBYREF(2) )
-        hb_storni (nThread, 2); 
+        hb_storni (nThread, 2);
    if ( HB_ISBYREF(3) )
-        hb_storni (nProcessID, 3); 
+        hb_storni (nProcessID, 3);
 }
-
 
 //        GetProcessName ( [ nProcessID ] ) --> return cProcessName
 HB_FUNC ( GETPROCESSNAME )
 {
    typedef BOOL (WINAPI *Func_EnumProcessModules) (HANDLE, HMODULE*, DWORD, LPDWORD);
    static Func_EnumProcessModules pEnumProcessModules = NULL;
-   if (pEnumProcessModules == NULL) 
+   if (pEnumProcessModules == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        pEnumProcessModules = (Func_EnumProcessModules) GetProcAddress(hLib, "EnumProcessModules");
    }
    if (pEnumProcessModules == NULL)
        return;   // return NIL
 
-
    typedef DWORD (WINAPI *Func_GetModuleBaseName) (HANDLE, HMODULE, LPTSTR, DWORD);
    static Func_GetModuleBaseName pGetModuleBaseName = NULL;
-   if (pGetModuleBaseName == NULL) 
+   if (pGetModuleBaseName == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        #ifdef UNICODE
           pGetModuleBaseName = (Func_GetModuleBaseName) GetProcAddress(hLib, "GetModuleBaseNameW");
@@ -1085,7 +1029,6 @@ HB_FUNC ( GETPROCESSNAME )
    }
    if (pGetModuleBaseName == NULL)
        return;   // return NIL
-
 
    DWORD ProcessID = HB_ISNUM (1) ? (DWORD) hb_parnl(1) : GetCurrentProcessId();
    TCHAR cProcessName [ MAX_PATH ] = _TEXT ("");
@@ -1103,23 +1046,21 @@ HB_FUNC ( GETPROCESSNAME )
    return;   // return NIL
 }
 
-
 //        GetProcessFullName ( [ nProcessID ] ) --> return cProcessFullName
 HB_FUNC ( GETPROCESSFULLNAME )
 {
    typedef BOOL (WINAPI *Func_EnumProcessModules) (HANDLE, HMODULE*, DWORD, LPDWORD);
    static Func_EnumProcessModules pEnumProcessModules = NULL;
-   if (pEnumProcessModules == NULL) 
+   if (pEnumProcessModules == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        pEnumProcessModules = (Func_EnumProcessModules) GetProcAddress(hLib, "EnumProcessModules");
    }
    if (pEnumProcessModules == NULL)
        return;   // return NIL
 
-
    typedef DWORD (WINAPI *Func_GetModuleFileNameEx) (HANDLE, HMODULE, LPTSTR, DWORD);
    static Func_GetModuleFileNameEx pGetModuleFileNameEx = NULL;
-   if (pGetModuleFileNameEx == NULL) 
+   if (pGetModuleFileNameEx == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        #ifdef UNICODE
           pGetModuleFileNameEx = (Func_GetModuleFileNameEx) GetProcAddress(hLib, "GetModuleFileNameExW");
@@ -1129,7 +1070,6 @@ HB_FUNC ( GETPROCESSFULLNAME )
    }
    if (pGetModuleFileNameEx == NULL)
        return;   // return NIL
-
 
    DWORD ProcessID = HB_ISNUM (1) ? (DWORD) hb_parnl(1) : GetCurrentProcessId();
    TCHAR cProcessFullName [ MAX_PATH ] = _TEXT ("");
@@ -1147,13 +1087,12 @@ HB_FUNC ( GETPROCESSFULLNAME )
    return;   // return NIL
 }
 
-
 //        GetProcessImageFileName ( [ nProcessID ] ) --> return cProcessImageFileName
 HB_FUNC ( GETPROCESSIMAGEFILENAME )
 {
    typedef DWORD (WINAPI *Func_GetProcessImageFileName) (HANDLE, LPTSTR, DWORD);
    static Func_GetProcessImageFileName pGetProcessImageFileName = NULL;
-   if (pGetProcessImageFileName == NULL) 
+   if (pGetProcessImageFileName == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        #ifdef UNICODE
           pGetProcessImageFileName = (Func_GetProcessImageFileName) GetProcAddress(hLib, "GetProcessImageFileNameW");
@@ -1176,7 +1115,6 @@ HB_FUNC ( GETPROCESSIMAGEFILENAME )
    return;   // return NIL
 }
 
-
 //        TerminateProcess ( [ nProcessID ] , [ nExitCode ] )
 HB_FUNC ( TERMINATEPROCESS )
 {
@@ -1188,7 +1126,6 @@ HB_FUNC ( TERMINATEPROCESS )
            CloseHandle (hProcess);
    }
 }
-
 
 extern PHB_ITEM pArray;   // global variable defined into c_controlmisc.c (line 2888)
 
@@ -1204,7 +1141,6 @@ BOOL CALLBACK EnumWindowsProc (HWND hWnd, LPARAM lParam)
    return TRUE;
 }
 
-
 HB_FUNC ( ENUMWINDOWS )
 {
    pArray = hb_itemArrayNew ( 0 );
@@ -1213,16 +1149,14 @@ HB_FUNC ( ENUMWINDOWS )
    pArray = NULL;
 }
 
-
 HB_FUNC ( ENUMCHILDWINDOWS )
 {
-   HWND hWnd = (HWND) HMG_parnl (1); 
+   HWND hWnd = (HWND) HMG_parnl (1);
    pArray = hb_itemArrayNew ( 0 );
    EnumChildWindows (hWnd, (WNDENUMPROC) EnumWindowsProc, (LPARAM) 0);
    hb_itemReturnRelease ( pArray );
    pArray = NULL;
 }
-
 
 //        GetProcessMemoryInfo ( [ ProcessID ] )  --> return array with 9 numbers
 HB_FUNC ( GETPROCESSMEMORYINFO )
@@ -1230,12 +1164,12 @@ HB_FUNC ( GETPROCESSMEMORYINFO )
    typedef BOOL (WINAPI *Func_GetProcessMemoryInfo) (HANDLE,PPROCESS_MEMORY_COUNTERS,DWORD);
    static Func_GetProcessMemoryInfo pGetProcessMemoryInfo = NULL;
 
-   if (pGetProcessMemoryInfo == NULL) 
+   if (pGetProcessMemoryInfo == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Kernel32.dll"));
        pGetProcessMemoryInfo = (Func_GetProcessMemoryInfo) GetProcAddress(hLib, "K32GetProcessMemoryInfo");
    }
-   
-   if (pGetProcessMemoryInfo == NULL) 
+
+   if (pGetProcessMemoryInfo == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        pGetProcessMemoryInfo = (Func_GetProcessMemoryInfo) GetProcAddress(hLib, "GetProcessMemoryInfo");
    }
@@ -1269,22 +1203,21 @@ HB_FUNC ( GETPROCESSMEMORYINFO )
    CloseHandle( hProcess );
 }
 
-
-//        EmptyWorkingSet( [ ProcessID ] ) ---> lBoolean 
+//        EmptyWorkingSet( [ ProcessID ] ) ---> lBoolean
 HB_FUNC ( EMPTYWORKINGSET )
 {
-   // It removes as many pages as possible from the process working set (clean the working set memory). 
+   // It removes as many pages as possible from the process working set (clean the working set memory).
    // This operation is useful primarily for testing and tuning.
 
    typedef BOOL (WINAPI *Func_EmptyWorkingSet) (HANDLE);
    static Func_EmptyWorkingSet pEmptyWorkingSet = NULL;
 
-   if (pEmptyWorkingSet == NULL) 
+   if (pEmptyWorkingSet == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Kernel32.dll"));
        pEmptyWorkingSet = (Func_EmptyWorkingSet) GetProcAddress(hLib, "K32EmptyWorkingSet");
    }
-   
-   if (pEmptyWorkingSet == NULL) 
+
+   if (pEmptyWorkingSet == NULL)
    {   HMODULE hLib = LoadLibrary (_TEXT("Psapi.dll"));
        pEmptyWorkingSet = (Func_EmptyWorkingSet) GetProcAddress(hLib, "EmptyWorkingSet");
    }
@@ -1305,7 +1238,6 @@ HB_FUNC ( EMPTYWORKINGSET )
    CloseHandle( hProcess );
 }
 
-
 //        GlobalMemoryStatusEx () --> return array with 7 numbers
 HB_FUNC ( GLOBALMEMORYSTATUSEX )
 {
@@ -1321,7 +1253,6 @@ HB_FUNC ( GLOBALMEMORYSTATUSEX )
    hb_storvnll ( statex.ullTotalVirtual  , -1, 6 );   // size of the user-mode portion of the virtual address space of the calling process, in bytes
    hb_storvnll ( statex.ullAvailVirtual  , -1, 7 );   // amount of unreserved and uncommitted memory currently in the user-mode portion of the virtual address space of the calling process, in bytes
 }
-
 
 /************************************************************************************************/
 
@@ -1339,7 +1270,7 @@ GDI Objects: https://msdn.microsoft.com/en-us/library/ms724291(v=vs.85).aspx
    Palette
    Pen and extended pen
    Region
-   
+
 User Objects: https://msdn.microsoft.com/en-us/library/ms725486(v=vs.85).aspx
    Accelerator table
    Caret
@@ -1380,7 +1311,6 @@ Kernel Objects: https://msdn.microsoft.com/en-us/library/windows/desktop/ms72448
    Window station
 */
 
-
 //       HMG_GetObjectCount( [ nProcessId ] ) --> returns an array of 3 items with information about
 //                                                the number of system objects used for a process { nGDIObjects, nUserObjects, nKernelObjects }
 HB_FUNC( HMG_GETOBJECTCOUNT )
@@ -1401,12 +1331,9 @@ HB_FUNC( HMG_GETOBJECTCOUNT )
    }
 }
 
-
-
 //********************************
 // by Dr. Claudio Soto, June 2015
 //********************************
-
 
 HMG_DEFINE_DLL_FUNC ( win_MapAndLoad,   // user function name
                       "Imagehlp.dll",   // dll name
@@ -1448,7 +1375,6 @@ HMG_DEFINE_DLL_FUNC ( win_ImageRvaToVa,   // user function name
                       NULL                                      // return value if fail call function of dll
                     )
 
-
 //        HMG_GetDLLFunctions( cDllName ) --> return array { cFuncName1, cFuncName2, ... }
 HB_FUNC ( HMG_GETDLLFUNCTIONS )
 {
@@ -1477,19 +1403,16 @@ HB_FUNC ( HMG_GETDLLFUNCTIONS )
     }
 }
 
-
 /*
 HB_FUNC ( ISAPPTHEMED )
 {
    hb_retl ((BOOL) IsAppThemed ());
 }
 
-
 HB_FUNC ( ISTHEMEACTIVE )
 {
    hb_retl ((BOOL) IsThemeActive ());
 }
-
 
 HB_FUNC ( OPENTHEMEDATA )
 {
@@ -1503,14 +1426,12 @@ HB_FUNC ( OPENTHEMEDATA )
    HMG_retnl ((LONG_PTR) hTheme);
 }
 
-
 HB_FUNC ( CLOSETHEMEDATA )
 {
    HTHEME hTheme = (HTHEME) HMG_parnl (1);
    HRESULT hRet  = CloseThemeData (hTheme);
    HMG_retnl ((LONG_PTR) hRet);
 }
-
 
 HB_FUNC ( DRAWTHEMEBACKGROUND )
 {
@@ -1525,13 +1446,12 @@ HB_FUNC ( DRAWTHEMEBACKGROUND )
 }
 */
 
-
-/* 
+/*
 HRESULT WINAPI win_SetWindowTheme (HWND hWnd, LPCWSTR SubAppName, LPCWSTR SubIdList)
 {
    typedef HRESULT (WINAPI *PSetWindowTheme) (HWND, LPCWSTR, LPCWSTR);
    static PSetWindowTheme pSetWindowTheme = NULL;
-   if (pSetWindowTheme == NULL) 
+   if (pSetWindowTheme == NULL)
    {
       HMODULE hLib = LoadLibrary (_TEXT("uxtheme.dll"));
       pSetWindowTheme = (PSetWindowTheme) GetProcAddress (hLib, "SetWindowTheme");
@@ -1543,7 +1463,6 @@ HRESULT WINAPI win_SetWindowTheme (HWND hWnd, LPCWSTR SubAppName, LPCWSTR SubIdL
 }
 */
 
-
 HMG_DEFINE_DLL_FUNC ( win_SetWindowTheme,                                   // user function name
                       "uxtheme.dll",                                        // dll name
                       HRESULT,                                              // function return type
@@ -1553,7 +1472,6 @@ HMG_DEFINE_DLL_FUNC ( win_SetWindowTheme,                                   // u
                       (hWnd, SubAppName, SubIdList),                        // function parameters (only names)
                       -1                                                    // return value if fail call function of dll
                     )
-
 
 //        SetWindowTheme (hWnd, cSubAppName, cSubIdList)
 HB_FUNC ( SETWINDOWTHEME )
@@ -1569,5 +1487,4 @@ HB_FUNC ( SETWINDOWTHEME )
    #endif
    hRet = win_SetWindowTheme (hWnd, SubAppName, SubIdList);
    HMG_retnl ((LONG_PTR) hRet);
-} 
-
+}

@@ -265,4 +265,3 @@ PROCEDURE MoveActiveWindow(hWnd)
    PostMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
 
    RETURN
-

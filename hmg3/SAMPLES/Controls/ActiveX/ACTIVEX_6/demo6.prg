@@ -55,4 +55,3 @@ PROCEDURE Test()
    Win1.Test.Object:Movie := "http://www.youtube.com/v/58CZcCvwND4&hl=en&fs=1"
 
    RETURN
-

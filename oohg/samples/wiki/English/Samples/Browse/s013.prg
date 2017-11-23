@@ -175,4 +175,3 @@ FUNCTION AddColumn(oBrw1)
    /*
    * EOF
    */
-

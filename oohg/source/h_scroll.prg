@@ -77,33 +77,33 @@ CLASS TScrollBar FROM TControl
 
    DATA ladjust  INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD RangeMin            SETGET
+   METHOD RangeMin            SETGET
 
-METHOD RangeMax            SETGET
+   METHOD RangeMax            SETGET
 
-METHOD SetRange
+   METHOD SetRange
 
-METHOD Page                SETGET
+   METHOD Page                SETGET
 
-METHOD LineUp
+   METHOD LineUp
 
-METHOD LineDown
+   METHOD LineDown
 
-METHOD PageUp
+   METHOD PageUp
 
-METHOD PageDown
+   METHOD PageDown
 
-METHOD Top
+   METHOD Top
 
-METHOD Bottom
+   METHOD Bottom
 
-METHOD Thumb
+   METHOD Thumb
 
-METHOD Track
+   METHOD Track
 
    MESSAGE LineLeft  METHOD LineUp
    MESSAGE LineRight METHOD LineDown
@@ -112,19 +112,19 @@ METHOD Track
    MESSAGE Left      METHOD Top
    MESSAGE Right     METHOD Bottom
 
-METHOD OnLineLeft          SETGET
+   METHOD OnLineLeft          SETGET
 
-METHOD OnLineRight         SETGET
+   METHOD OnLineRight         SETGET
 
-METHOD OnPageLeft          SETGET
+   METHOD OnPageLeft          SETGET
 
-METHOD OnPageRight         SETGET
+   METHOD OnPageRight         SETGET
 
-METHOD OnLeft              SETGET
+   METHOD OnLeft              SETGET
 
-METHOD OnRight             SETGET
+   METHOD OnRight             SETGET
 
-METHOD Events_VScroll
+   METHOD Events_VScroll
 
    MESSAGE Events_HScroll METHOD Events_VScroll
 
@@ -643,4 +643,3 @@ HB_FUNC( SETSCROLLINFO ) // ( hWnd, nMax, nPos, nPage, nMin )
 }
 
 #pragma ENDDUMP
-

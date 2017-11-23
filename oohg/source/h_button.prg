@@ -70,29 +70,29 @@ CLASS TButton FROM TControl
    DATA lNoDIBSection   INIT .T.
    DATA lNoHotLight     INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD DefineImage
+   METHOD DefineImage
 
-METHOD SetFocus
+   METHOD SetFocus
 
-METHOD Picture       SETGET
+   METHOD Picture       SETGET
 
-METHOD HBitMap       SETGET
+   METHOD HBitMap       SETGET
 
-METHOD Buffer        SETGET
+   METHOD Buffer        SETGET
 
-METHOD Value         SETGET
+   METHOD Value         SETGET
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD RePaint
+   METHOD RePaint
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Release
+   METHOD Release
 
-METHOD ImageMargin   SETGET
+   METHOD ImageMargin   SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -649,13 +649,13 @@ CLASS TButtonCheck FROM TButton
    DATA nWidth    INIT 100
    DATA nHeight   INIT 28
 
-METHOD Define
+   METHOD Define
 
-METHOD DefineImage
+   METHOD DefineImage
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
-METHOD Events_Command
+   METHOD Events_Command
 
 ENDCLASS
 
@@ -803,4 +803,3 @@ METHOD Events_Command( wParam ) CLASS TButtonCheck
    ENDIF
 
    RETURN ::Super:Events_Command( wParam )
-

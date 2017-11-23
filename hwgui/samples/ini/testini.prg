@@ -42,4 +42,3 @@ FUNCTION ReadIni()
    hwg_Msginfo( Hwg_GetIni( 'Print',  'Spoll'     ,, cIniFile ) )
 
    RETURN NIL
-

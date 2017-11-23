@@ -1,5 +1,5 @@
   #xcommand DECLARE <return> [<static:STATIC>] <FuncName>( [ <type1> <uParam1> ] ;
-							[, <typeN> <uParamN> ] ) ;
+                     [, <typeN> <uParamN> ] ) ;
              [FLAGS <flags>] IN <*DllName*> ;
        => ;
           [<static>] function <FuncName>( [<uParam1>] [,<uParamN>] ) ;;
@@ -11,7 +11,7 @@
              return uResult
 
   #xcommand DECLARE <return> [<static:STATIC>] <FuncName>( [ <type1> <uParam1> ] ;
-							[, <typeN> <uParamN> ] ) ;
+                     [, <typeN> <uParamN> ] ) ;
              ALIAS <alias> [FLAGS <flags>] IN <*DllName*> ;
        => ;
           [<static>] function <alias>( [<uParam1>] [,<uParamN>] ) ;;

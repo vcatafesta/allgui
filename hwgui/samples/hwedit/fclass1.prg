@@ -58,29 +58,29 @@ CLASS FileMan
    DATA nHan
    DATA nLastDosMessage                 // Holds the DOS error level of last operation
 
-METHOD addItem( nDos, cFile, cPath ) // Adds an item to the array of handles
+   METHOD addItem( nDos, cFile, cPath ) // Adds an item to the array of handles
 
-METHOD delItem( xitem )              // Deletes an item from the array of handles
+   METHOD delItem( xitem )              // Deletes an item from the array of handles
 
-METHOD new()     // The constructor for this class
+   METHOD new()     // The constructor for this class
 
-METHOD closeAll()                    // Closes all of those files
+   METHOD closeAll()                    // Closes all of those files
 
-METHOD rewindAll()                   // Positions the file pointer for each file
+   METHOD rewindAll()                   // Positions the file pointer for each file
 
-METHOD writeAll()                    // Performs hard-write of all
+   METHOD writeAll()                    // Performs hard-write of all
 
-METHOD getFileName( cfile )          // Obtains the name of the file based on ID
+   METHOD getFileName( cfile )          // Obtains the name of the file based on ID
 
-METHOD getFileId( nid )              // Obtains the ID based on file name
+   METHOD getFileId( nid )              // Obtains the ID based on file name
 
-METHOD getFilePath( xItem )          // Obtains file path based on either ID or name
+   METHOD getFilePath( xItem )          // Obtains file path based on either ID or name
 
-METHOD noDosError()                  // Returns a logical true/false
+   METHOD noDosError()                  // Returns a logical true/false
 
-METHOD openfile( cFile, nMethod )    // Opens the specified file and sets error
+   METHOD openfile( cFile, nMethod )    // Opens the specified file and sets error
 
-METHOD Buffget( ld ) virtual
+   METHOD Buffget( ld ) virtual
 
 ENDCLASS
 
@@ -385,4 +385,3 @@ METHOD openfile( cFile, nMethod ) CLASS FileMan
    // End of File: FClass1.prg
 
    *+ EOF: FCLASS1.PRG
-

@@ -1,15 +1,15 @@
 /*+@@file@@----------------------------------------------------------------*//*!
  \file      fGdiPlusFlat.h
- \par Description 
-            An header to allow use of GDI+ flat API's under plain 'C' 
+ \par Description
+            An header to allow use of GDI+ flat API's under plain 'C'
             language.
- \par  Status: 
-            
- \par Project: 
+ \par  Status:
+
+ \par Project:
             Flat GDI+ API's for C
  \date      Created  on Thu May 26 18:59:16 2016
  \date      Modified on Thu May 26 18:59:16 2016
- \author 
+ \author
 \*//*-@@file@@----------------------------------------------------------------*/
 #ifndef _GDIPLUS_H
 #define _GDIPLUS_H
@@ -32,7 +32,6 @@ typedef unsigned long PROPID;
 
 typedef signed   short   INT16;
 typedef unsigned short  UINT16;
-
 
 #ifndef GDIPVER
 //! Define the Current GDIPlus Version
@@ -187,7 +186,7 @@ typedef enum
     HatchStyleLargeCheckerBoard,            // 50
     HatchStyleOutlinedDiamond,              // 51
     HatchStyleSolidDiamond,                 // 52
-    HatchStyleTotal,   
+    HatchStyleTotal,
     HatchStyleLargeGrid = HatchStyleCross,  // 4
     HatchStyleMin       = HatchStyleHorizontal,
     HatchStyleMax       = HatchStyleTotal - 1,
@@ -259,7 +258,6 @@ typedef enum
 
     PathPointTypeBezier3    = 3,         //<! cubic Bezier
 } PathPointType;
-
 
 typedef enum
 {
@@ -365,7 +363,7 @@ typedef enum
 #if (GDIPVER >= 0x0110)
     SmoothingModeAntiAlias8x4 = SmoothingModeAntiAlias,
     SmoothingModeAntiAlias8x8
-#endif //(GDIPVER >= 0x0110) 
+#endif //(GDIPVER >= 0x0110)
 } SmoothingMode;
 
 typedef enum
@@ -1078,7 +1076,7 @@ typedef struct
 {
     UINT32 GdiplusVersion;             //<! Must be 1  (or 2 for the Ex version)
     DebugEventProc DebugEventCallback; //<! Ignored on free builds
-    BOOL SuppressBackgroundThread;     //<! FALSE unless you're prepared to call 
+    BOOL SuppressBackgroundThread;     //<! FALSE unless you're prepared to call
                                        //<! the hook/unhook functions properly
     BOOL SuppressExternalCodecs;       //<! FALSE unless you want GDI+ only to use
                                        //<! its internal image codecs.
@@ -1136,7 +1134,7 @@ typedef struct
 Status WINAPI GdiplusStartup(ULONG_PTR *token, const GdiplusStartupInput *input, GdiplusStartupOutput *output);
 
 /*!
- * \brief GDI+ termination. Must be called before GDI+ is unloaded. 
+ * \brief GDI+ termination. Must be called before GDI+ is unloaded.
  *        Must not be called from DllMain - can cause deadlock.
  *        GDI+ API's may not be called after GdiplusShutdown. Pay careful attention
  *        to GDI+ object destructors.
@@ -1170,7 +1168,7 @@ typedef INT PixelFormat;
 #define    PixelFormatAlpha        0x00040000 //<! Has an alpha component
 #define    PixelFormatPAlpha       0x00080000 //<! Pre-multiplied alpha
 #define    PixelFormatExtended     0x00100000 //<! Extended color 16 bits/channel
-#define    PixelFormatCanonical    0x00200000 
+#define    PixelFormatCanonical    0x00200000
 
 #define    PixelFormatUndefined       0
 #define    PixelFormatDontCare        0
@@ -1230,13 +1228,13 @@ typedef enum
 {
     // Arbitrary custom palette provided by caller.
     PaletteTypeCustom           = 0,
-    
+
     // Optimal palette generated using a median-cut algorithm.
     PaletteTypeOptimal        = 1,
-    
+
     // Black and white palette.
     PaletteTypeFixedBW          = 2,
-    
+
     // Symmetric halftone palettes.
     // Each of these halftone palettes will be a superset of the system palette.
     // E.g. Halftone8 will have it's 8-color on-off primaries and the 16 system
@@ -1248,7 +1246,7 @@ typedef enum
     PaletteTypeFixedHalftone216 = 7, //<! 6 intensity levels of each color
 
     // Assymetric halftone palettes.
-    // These are somewhat less useful than the symmetric ones, but are 
+    // These are somewhat less useful than the symmetric ones, but are
     // included for completeness. These do not include all of the system
     // colors.
     PaletteTypeFixedHalftone252 = 8, //<! 6-red, 7-green, 6-blue intensities
@@ -1258,11 +1256,11 @@ typedef enum
 typedef enum
 {
     DitherTypeNone          = 0,
-    // Solid color - picks the nearest matching color with no attempt to 
+    // Solid color - picks the nearest matching color with no attempt to
     // halftone or dither. May be used on an arbitrary palette.
     DitherTypeSolid         = 1,
     // Ordered dithers and spiral dithers must be used with a fixed palette.
-    // NOTE: DitherOrdered4x4 is unique in that it may apply to 16bpp 
+    // NOTE: DitherOrdered4x4 is unique in that it may apply to 16bpp
     // conversions also.
     DitherTypeOrdered4x4    = 2,
     DitherTypeOrdered8x8    = 3,
@@ -1527,7 +1525,7 @@ typedef struct
 
 /*!
  * Placeable WMFs
- * Placeable Metafiles were created as a non-standard way of specifying how 
+ * Placeable Metafiles were created as a non-standard way of specifying how
  * a metafile is mapped and scaled on an output device.
  * Placeable metafiles are quite wide-spread, but not directly supported by
  * the Windows API. To playback a placeable metafile using the Windows API,
@@ -1797,7 +1795,7 @@ typedef enum
     ImageFlagsColorSpaceGRAY      = 0x0040,
     ImageFlagsColorSpaceYCBCR     = 0x0080,
     ImageFlagsColorSpaceYCCK      = 0x0100,
- 
+
     // Low-word: image size info
 
     ImageFlagsHasRealDPI          = 0x1000,
@@ -1856,7 +1854,7 @@ typedef enum
 
 typedef struct
 {
-    UINT  Size;           //<! size of the structure 
+    UINT  Size;           //<! size of the structure
     UINT  Position;       //<! flags describing how the data is to be used.
     VOID *Desc;           //<! description on how the data is to be saved.
                           //<! it is different for every codec type.
@@ -2141,7 +2139,7 @@ typedef enum
     HistogramFormatB,
     HistogramFormatG,
     HistogramFormatR,
-    HistogramFormatA    
+    HistogramFormatA
 } HistogramFormat;
 #endif //(GDIPVER >= 0x0110)
 
@@ -2250,7 +2248,7 @@ typedef struct
 typedef struct
 {
     //<! look up tables for each color channel.
-    
+
     ColorChannelLUT lutB;
     ColorChannelLUT lutG;
     ColorChannelLUT lutR;
@@ -2292,7 +2290,6 @@ Status __stdcall GdipDeleteEffect(CGpEffect *effect);
 Status __stdcall GdipGetEffectParameterSize(CGpEffect *effect, UINT *size);
 Status __stdcall GdipSetEffectParameters(CGpEffect *effect, const VOID *params, const UINT size);
 Status __stdcall GdipGetEffectParameters(CGpEffect *effect, UINT *size, VOID *params);
-
 
 #endif //(GDIPVER >= 0x0110)
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !GdiPlusEffects.h
@@ -2417,7 +2414,7 @@ GpStatus WINGDIPAPI GdipAddPathLineI(GpPath *path, INT x1, INT y1, INT x2, INT y
 GpStatus WINGDIPAPI GdipAddPathLine2I(GpPath *path, GDIPCONST GpPoint *points, INT count);
 GpStatus WINGDIPAPI GdipAddPathArcI(GpPath *path, INT x, INT y, INT width, INT height, REAL startAngle, REAL sweepAngle);
 GpStatus WINGDIPAPI GdipAddPathBezierI(GpPath *path, INT x1, INT y1, INT x2, INT y2, INT x3, INT y3, INT x4, INT y4);
-GpStatus WINGDIPAPI GdipAddPathBeziersI(GpPath *path, GDIPCONST GpPoint *points, INT count); 
+GpStatus WINGDIPAPI GdipAddPathBeziersI(GpPath *path, GDIPCONST GpPoint *points, INT count);
 GpStatus WINGDIPAPI GdipAddPathCurveI(GpPath *path, GDIPCONST GpPoint *points, INT count);
 GpStatus WINGDIPAPI GdipAddPathCurve2I(GpPath *path, GDIPCONST GpPoint *points, INT count, REAL tension);
 GpStatus WINGDIPAPI GdipAddPathCurve3I(GpPath *path, GDIPCONST GpPoint *points, INT count, INT offset, INT numberOfSegments, REAL tension);
@@ -2890,78 +2887,78 @@ GpStatus WINGDIPAPI GdipEnumerateMetafileDestRect(GpGraphics *graphics, GDIPCONS
 GpStatus WINGDIPAPI GdipEnumerateMetafileDestRectI(GpGraphics *graphics, GDIPCONST GpMetafile *metafile, GDIPCONST Rect *destRect, EnumerateMetafileProc callback, VOID *callbackData, GDIPCONST GpImageAttributes *imageAttributes);
 GpStatus WINGDIPAPI GdipEnumerateMetafileDestPoints(GpGraphics *graphics, GDIPCONST GpMetafile *metafile, GDIPCONST PointF *destPoints, INT count, EnumerateMetafileProc callback, VOID *callbackData, GDIPCONST GpImageAttributes *imageAttributes);
 GpStatus WINGDIPAPI GdipEnumerateMetafileDestPointsI(GpGraphics *graphics, GDIPCONST GpMetafile *metafile, GDIPCONST Point *destPoints, INT count, EnumerateMetafileProc callback, VOID *callbackData, GDIPCONST GpImageAttributes *imageAttributes);
-GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPoint (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST PointF *destPoint ,GDIPCONST RectF *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute); 
-GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPointI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Point *destPoint ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute); 
-GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestRect (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST RectF *destRect ,GDIPCONST RectF *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute); 
-GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestRectI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Rect *destRect ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute); 
+GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPoint (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST PointF *destPoint ,GDIPCONST RectF *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
+GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPointI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Point *destPoint ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
+GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestRect (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST RectF *destRect ,GDIPCONST RectF *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
+GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestRectI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Rect *destRect ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
 GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPoints (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST PointF *destPoints ,INT count ,GDIPCONST RectF *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
-GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPointsI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Point *destPoints ,INT count ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute); 
+GpStatus WINGDIPAPI GdipEnumerateMetafileSrcRectDestPointsI (GpGraphics *graphics ,GDIPCONST GpMetafile *metafile ,GDIPCONST Point *destPoints ,INT count ,GDIPCONST Rect *srcRect ,Unit srcUnit ,EnumerateMetafileProc callback ,VOID *callbackData ,GDIPCONST GpImageAttributes *imageAttribute);
 GpStatus WINGDIPAPI GdipPlayMetafileRecord (GDIPCONST GpMetafile *metafile ,EmfPlusRecordType recordType ,UINT flags ,UINT dataSize ,GDIPCONST BYTE *dat);
-GpStatus WINGDIPAPI GdipSetClipGraphics(GpGraphics *graphics, GpGraphics *srcgraphics ,CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipSetClipRect(GpGraphics *graphics, REAL x, REAL y ,REAL width, REAL height, CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipSetClipRectI(GpGraphics *graphics, INT x, INT y ,INT width, INT height, CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipSetClipPath(GpGraphics *graphics, GpPath *path, CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipSetClipRegion(GpGraphics *graphics, GpRegion *region ,CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipSetClipHrgn(GpGraphics *graphics, HRGN hRgn, CombineMode combineMode); 
-GpStatus WINGDIPAPI GdipResetClip(GpGraphics *graphics); 
-GpStatus WINGDIPAPI GdipTranslateClip(GpGraphics *graphics, REAL dx, REAL dy); 
-GpStatus WINGDIPAPI GdipTranslateClipI(GpGraphics *graphics, INT dx, INT dy); 
-GpStatus WINGDIPAPI GdipGetClip(GpGraphics *graphics, GpRegion *region); 
-GpStatus WINGDIPAPI GdipGetClipBounds(GpGraphics *graphics, GpRectF *rect); 
-GpStatus WINGDIPAPI GdipGetClipBoundsI(GpGraphics *graphics, GpRect *rect); 
-GpStatus WINGDIPAPI GdipIsClipEmpty(GpGraphics *graphics, BOOL *result); 
-GpStatus WINGDIPAPI GdipGetVisibleClipBounds(GpGraphics *graphics, GpRectF *rect); 
-GpStatus WINGDIPAPI GdipGetVisibleClipBoundsI(GpGraphics *graphics, GpRect *rect); 
-GpStatus WINGDIPAPI GdipIsVisibleClipEmpty(GpGraphics *graphics, BOOL *result); 
-GpStatus WINGDIPAPI GdipIsVisiblePoint(GpGraphics *graphics, REAL x, REAL y ,BOOL *result); 
-GpStatus WINGDIPAPI GdipIsVisiblePointI(GpGraphics *graphics, INT x, INT y ,BOOL *result); 
-GpStatus WINGDIPAPI GdipIsVisibleRect(GpGraphics *graphics, REAL x, REAL y ,REAL width, REAL height, BOOL *result); 
-GpStatus WINGDIPAPI GdipIsVisibleRectI(GpGraphics *graphics, INT x, INT y ,INT width, INT height, BOOL *result); 
-GpStatus WINGDIPAPI GdipSaveGraphics(GpGraphics *graphics, GraphicsState *state); 
-GpStatus WINGDIPAPI GdipRestoreGraphics(GpGraphics *graphics, GraphicsState state); 
-GpStatus WINGDIPAPI GdipBeginContainer(GpGraphics *graphics, GDIPCONST GpRectF *dstrect ,GDIPCONST GpRectF *srcrect, GpUnit unit, GraphicsContainer *state); 
-GpStatus WINGDIPAPI GdipBeginContainerI(GpGraphics *graphics, GDIPCONST GpRect *dstrect ,GDIPCONST GpRect *srcrect, GpUnit unit, GraphicsContainer *state); 
-GpStatus WINGDIPAPI GdipBeginContainer2(GpGraphics *graphics, GraphicsContainer *state); 
-GpStatus WINGDIPAPI GdipEndContainer(GpGraphics *graphics, GraphicsContainer state); 
-GpStatus WINGDIPAPI GdipGetMetafileHeaderFromWmf (HMETAFILE hWmf ,GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader ,MetafileHeader *header); 
-GpStatus WINGDIPAPI GdipGetMetafileHeaderFromEmf (HENHMETAFILE hEmf ,MetafileHeader *header); 
-GpStatus WINGDIPAPI GdipGetMetafileHeaderFromFile (GDIPCONST WCHAR *filename ,MetafileHeader *header); 
-GpStatus WINGDIPAPI GdipGetMetafileHeaderFromStream (IStream *stream ,MetafileHeader *header); 
-GpStatus WINGDIPAPI GdipGetMetafileHeaderFromMetafile (GpMetafile *metafile ,MetafileHeader *header); 
-GpStatus WINGDIPAPI GdipGetHemfFromMetafile (GpMetafile *metafile ,HENHMETAFILE *hEmf); 
-GpStatus WINGDIPAPI GdipCreateStreamOnFile(GDIPCONST WCHAR *filename, UINT access, IStream **stream); 
-GpStatus WINGDIPAPI GdipCreateMetafileFromWmf(HMETAFILE hWmf, BOOL deleteWmf ,GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader, GpMetafile **metafile); 
-GpStatus WINGDIPAPI GdipCreateMetafileFromEmf(HENHMETAFILE hEmf, BOOL deleteEmf ,GpMetafile **metafile); 
-GpStatus WINGDIPAPI GdipCreateMetafileFromFile(GDIPCONST WCHAR *file, GpMetafile **metafile); 
+GpStatus WINGDIPAPI GdipSetClipGraphics(GpGraphics *graphics, GpGraphics *srcgraphics ,CombineMode combineMode);
+GpStatus WINGDIPAPI GdipSetClipRect(GpGraphics *graphics, REAL x, REAL y ,REAL width, REAL height, CombineMode combineMode);
+GpStatus WINGDIPAPI GdipSetClipRectI(GpGraphics *graphics, INT x, INT y ,INT width, INT height, CombineMode combineMode);
+GpStatus WINGDIPAPI GdipSetClipPath(GpGraphics *graphics, GpPath *path, CombineMode combineMode);
+GpStatus WINGDIPAPI GdipSetClipRegion(GpGraphics *graphics, GpRegion *region ,CombineMode combineMode);
+GpStatus WINGDIPAPI GdipSetClipHrgn(GpGraphics *graphics, HRGN hRgn, CombineMode combineMode);
+GpStatus WINGDIPAPI GdipResetClip(GpGraphics *graphics);
+GpStatus WINGDIPAPI GdipTranslateClip(GpGraphics *graphics, REAL dx, REAL dy);
+GpStatus WINGDIPAPI GdipTranslateClipI(GpGraphics *graphics, INT dx, INT dy);
+GpStatus WINGDIPAPI GdipGetClip(GpGraphics *graphics, GpRegion *region);
+GpStatus WINGDIPAPI GdipGetClipBounds(GpGraphics *graphics, GpRectF *rect);
+GpStatus WINGDIPAPI GdipGetClipBoundsI(GpGraphics *graphics, GpRect *rect);
+GpStatus WINGDIPAPI GdipIsClipEmpty(GpGraphics *graphics, BOOL *result);
+GpStatus WINGDIPAPI GdipGetVisibleClipBounds(GpGraphics *graphics, GpRectF *rect);
+GpStatus WINGDIPAPI GdipGetVisibleClipBoundsI(GpGraphics *graphics, GpRect *rect);
+GpStatus WINGDIPAPI GdipIsVisibleClipEmpty(GpGraphics *graphics, BOOL *result);
+GpStatus WINGDIPAPI GdipIsVisiblePoint(GpGraphics *graphics, REAL x, REAL y ,BOOL *result);
+GpStatus WINGDIPAPI GdipIsVisiblePointI(GpGraphics *graphics, INT x, INT y ,BOOL *result);
+GpStatus WINGDIPAPI GdipIsVisibleRect(GpGraphics *graphics, REAL x, REAL y ,REAL width, REAL height, BOOL *result);
+GpStatus WINGDIPAPI GdipIsVisibleRectI(GpGraphics *graphics, INT x, INT y ,INT width, INT height, BOOL *result);
+GpStatus WINGDIPAPI GdipSaveGraphics(GpGraphics *graphics, GraphicsState *state);
+GpStatus WINGDIPAPI GdipRestoreGraphics(GpGraphics *graphics, GraphicsState state);
+GpStatus WINGDIPAPI GdipBeginContainer(GpGraphics *graphics, GDIPCONST GpRectF *dstrect ,GDIPCONST GpRectF *srcrect, GpUnit unit, GraphicsContainer *state);
+GpStatus WINGDIPAPI GdipBeginContainerI(GpGraphics *graphics, GDIPCONST GpRect *dstrect ,GDIPCONST GpRect *srcrect, GpUnit unit, GraphicsContainer *state);
+GpStatus WINGDIPAPI GdipBeginContainer2(GpGraphics *graphics, GraphicsContainer *state);
+GpStatus WINGDIPAPI GdipEndContainer(GpGraphics *graphics, GraphicsContainer state);
+GpStatus WINGDIPAPI GdipGetMetafileHeaderFromWmf (HMETAFILE hWmf ,GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader ,MetafileHeader *header);
+GpStatus WINGDIPAPI GdipGetMetafileHeaderFromEmf (HENHMETAFILE hEmf ,MetafileHeader *header);
+GpStatus WINGDIPAPI GdipGetMetafileHeaderFromFile (GDIPCONST WCHAR *filename ,MetafileHeader *header);
+GpStatus WINGDIPAPI GdipGetMetafileHeaderFromStream (IStream *stream ,MetafileHeader *header);
+GpStatus WINGDIPAPI GdipGetMetafileHeaderFromMetafile (GpMetafile *metafile ,MetafileHeader *header);
+GpStatus WINGDIPAPI GdipGetHemfFromMetafile (GpMetafile *metafile ,HENHMETAFILE *hEmf);
+GpStatus WINGDIPAPI GdipCreateStreamOnFile(GDIPCONST WCHAR *filename, UINT access, IStream **stream);
+GpStatus WINGDIPAPI GdipCreateMetafileFromWmf(HMETAFILE hWmf, BOOL deleteWmf ,GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader, GpMetafile **metafile);
+GpStatus WINGDIPAPI GdipCreateMetafileFromEmf(HENHMETAFILE hEmf, BOOL deleteEmf ,GpMetafile **metafile);
+GpStatus WINGDIPAPI GdipCreateMetafileFromFile(GDIPCONST WCHAR *file, GpMetafile **metafile);
 GpStatus WINGDIPAPI GdipCreateMetafileFromWmfFile(GDIPCONST WCHAR *file, GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader, GpMetafile **metafile);
-GpStatus WINGDIPAPI GdipCreateMetafileFromStream(IStream *stream, GpMetafile **metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafile (HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafileI (HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafileFileName (GDIPCONST WCHAR *fileName ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafileFileNameI (GDIPCONST WCHAR *fileName ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafileStream (IStream *stream ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipRecordMetafileStreamI (IStream *stream ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile); 
-GpStatus WINGDIPAPI GdipSetMetafileDownLevelRasterizationLimit (GpMetafile *metafile ,UINT metafileRasterizationLimitDpi); 
-GpStatus WINGDIPAPI GdipGetMetafileDownLevelRasterizationLimit (GDIPCONST GpMetafile *metafile ,UINT *metafileRasterizationLimitDpi); 
-GpStatus WINGDIPAPI GdipGetImageDecodersSize(UINT *numDecoders, UINT *size); 
-GpStatus WINGDIPAPI GdipGetImageDecoders(UINT numDecoders ,UINT size, ImageCodecInfo *decoders); 
-GpStatus WINGDIPAPI GdipGetImageEncodersSize(UINT *numEncoders, UINT *size); 
-GpStatus WINGDIPAPI GdipGetImageEncoders(UINT numEncoders ,UINT size, ImageCodecInfo *encoders); 
+GpStatus WINGDIPAPI GdipCreateMetafileFromStream(IStream *stream, GpMetafile **metafile);
+GpStatus WINGDIPAPI GdipRecordMetafile (HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipRecordMetafileI (HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipRecordMetafileFileName (GDIPCONST WCHAR *fileName ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipRecordMetafileFileNameI (GDIPCONST WCHAR *fileName ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipRecordMetafileStream (IStream *stream ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRectF *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipRecordMetafileStreamI (IStream *stream ,HDC referenceHdc ,EmfType type ,GDIPCONST GpRect *frameRect ,MetafileFrameUnit frameUnit ,GDIPCONST WCHAR *description ,GpMetafile * *metafile);
+GpStatus WINGDIPAPI GdipSetMetafileDownLevelRasterizationLimit (GpMetafile *metafile ,UINT metafileRasterizationLimitDpi);
+GpStatus WINGDIPAPI GdipGetMetafileDownLevelRasterizationLimit (GDIPCONST GpMetafile *metafile ,UINT *metafileRasterizationLimitDpi);
+GpStatus WINGDIPAPI GdipGetImageDecodersSize(UINT *numDecoders, UINT *size);
+GpStatus WINGDIPAPI GdipGetImageDecoders(UINT numDecoders ,UINT size, ImageCodecInfo *decoders);
+GpStatus WINGDIPAPI GdipGetImageEncodersSize(UINT *numEncoders, UINT *size);
+GpStatus WINGDIPAPI GdipGetImageEncoders(UINT numEncoders ,UINT size, ImageCodecInfo *encoders);
 GpStatus WINGDIPAPI GdipComment(GpGraphics *graphics, UINT sizeData, GDIPCONST BYTE *data);
 // FontFamily APIs
-GpStatus WINGDIPAPI GdipCreateFontFamilyFromName(GDIPCONST WCHAR *name ,GpFontCollection *fontCollection ,GpFontFamily **fontFamily); 
-GpStatus WINGDIPAPI GdipDeleteFontFamily(GpFontFamily *fontFamily); 
-GpStatus WINGDIPAPI GdipCloneFontFamily(GpFontFamily *fontFamily, GpFontFamily **clonedFontFamily); 
-GpStatus WINGDIPAPI GdipGetGenericFontFamilySansSerif(GpFontFamily **nativeFamily); 
-GpStatus WINGDIPAPI GdipGetGenericFontFamilySerif(GpFontFamily **nativeFamily); 
-GpStatus WINGDIPAPI GdipGetGenericFontFamilyMonospace(GpFontFamily **nativeFamily); 
-GpStatus WINGDIPAPI GdipGetFamilyName(GDIPCONST GpFontFamily *family, LPWSTR name, LANGID language); 
-GpStatus WINGDIPAPI GdipIsStyleAvailable(GDIPCONST GpFontFamily *family, INT style, BOOL *IsStyleAvailable); 
-GpStatus WINGDIPAPI GdipFontCollectionEnumerable (GpFontCollection*fontCollection ,GpGraphics*graphics ,INT *numFound); 
-GpStatus WINGDIPAPI GdipFontCollectionEnumerate (GpFontCollection*fontCollection ,INT numSought ,GpFontFamily*gpfamilies[] ,INT*numFound ,GpGraphics*graphics); 
-GpStatus WINGDIPAPI GdipGetEmHeight(GDIPCONST GpFontFamily *family, INT style, UINT16 *EmHeight); 
-GpStatus WINGDIPAPI GdipGetCellAscent(GDIPCONST GpFontFamily *family, INT style ,UINT16 *CellAscent); 
-GpStatus WINGDIPAPI GdipGetCellDescent(GDIPCONST GpFontFamily *family, INT style, UINT16 *CellDescent); 
+GpStatus WINGDIPAPI GdipCreateFontFamilyFromName(GDIPCONST WCHAR *name ,GpFontCollection *fontCollection ,GpFontFamily **fontFamily);
+GpStatus WINGDIPAPI GdipDeleteFontFamily(GpFontFamily *fontFamily);
+GpStatus WINGDIPAPI GdipCloneFontFamily(GpFontFamily *fontFamily, GpFontFamily **clonedFontFamily);
+GpStatus WINGDIPAPI GdipGetGenericFontFamilySansSerif(GpFontFamily **nativeFamily);
+GpStatus WINGDIPAPI GdipGetGenericFontFamilySerif(GpFontFamily **nativeFamily);
+GpStatus WINGDIPAPI GdipGetGenericFontFamilyMonospace(GpFontFamily **nativeFamily);
+GpStatus WINGDIPAPI GdipGetFamilyName(GDIPCONST GpFontFamily *family, LPWSTR name, LANGID language);
+GpStatus WINGDIPAPI GdipIsStyleAvailable(GDIPCONST GpFontFamily *family, INT style, BOOL *IsStyleAvailable);
+GpStatus WINGDIPAPI GdipFontCollectionEnumerable (GpFontCollection*fontCollection ,GpGraphics*graphics ,INT *numFound);
+GpStatus WINGDIPAPI GdipFontCollectionEnumerate (GpFontCollection*fontCollection ,INT numSought ,GpFontFamily*gpfamilies[] ,INT*numFound ,GpGraphics*graphics);
+GpStatus WINGDIPAPI GdipGetEmHeight(GDIPCONST GpFontFamily *family, INT style, UINT16 *EmHeight);
+GpStatus WINGDIPAPI GdipGetCellAscent(GDIPCONST GpFontFamily *family, INT style ,UINT16 *CellAscent);
+GpStatus WINGDIPAPI GdipGetCellDescent(GDIPCONST GpFontFamily *family, INT style, UINT16 *CellDescent);
 GpStatus WINGDIPAPI GdipGetLineSpacing(GDIPCONST GpFontFamily *family, INT style, UINT16 *LineSpacing);
 // Font APIs
 GpStatus WINGDIPAPI GdipCreateFontFromDC( HDC hdc, GpFont **font );
@@ -2986,33 +2983,33 @@ GpStatus WINGDIPAPI GdipGetFontCollectionFamilyList( GpFontCollection*fontCollec
 GpStatus WINGDIPAPI GdipPrivateAddFontFile( GpFontCollection*fontCollection, GDIPCONST WCHAR*filename );
 GpStatus WINGDIPAPI GdipPrivateAddMemoryFont( GpFontCollection*fontCollection, GDIPCONST void*memory, INT length );
 // Text APIs
-GpStatus WINGDIPAPI GdipDrawString (GpGraphics *graphics ,GDIPCONST WCHAR *string ,INT length ,GDIPCONST GpFont *font ,GDIPCONST RectF *layoutRect ,GDIPCONST GpStringFormat *stringFormat ,GDIPCONST GpBrush *brush); 
-GpStatus WINGDIPAPI GdipMeasureString (GpGraphics *graphics ,GDIPCONST WCHAR *string ,INT length ,GDIPCONST GpFont *font ,GDIPCONST RectF *layoutRect ,GDIPCONST GpStringFormat *stringFormat ,RectF *boundingBox ,INT *codepointsFitted ,INT *linesFilled); 
+GpStatus WINGDIPAPI GdipDrawString (GpGraphics *graphics ,GDIPCONST WCHAR *string ,INT length ,GDIPCONST GpFont *font ,GDIPCONST RectF *layoutRect ,GDIPCONST GpStringFormat *stringFormat ,GDIPCONST GpBrush *brush);
+GpStatus WINGDIPAPI GdipMeasureString (GpGraphics *graphics ,GDIPCONST WCHAR *string ,INT length ,GDIPCONST GpFont *font ,GDIPCONST RectF *layoutRect ,GDIPCONST GpStringFormat *stringFormat ,RectF *boundingBox ,INT *codepointsFitted ,INT *linesFilled);
 GpStatus WINGDIPAPI GdipMeasureCharacterRanges (GpGraphics *graphics ,GDIPCONST WCHAR *string ,INT length ,GDIPCONST GpFont *font ,GDIPCONST RectF *layoutRect ,GDIPCONST GpStringFormat *stringFormat ,INT regionCount ,GpRegion **regions);
-GpStatus WINGDIPAPI GdipDrawDriverString (GpGraphics *graphics ,GDIPCONST UINT16 *text ,INT length ,GDIPCONST GpFont *font ,GDIPCONST GpBrush *brush ,GDIPCONST PointF *positions ,INT flags ,GDIPCONST GpMatrix *matrix); 
+GpStatus WINGDIPAPI GdipDrawDriverString (GpGraphics *graphics ,GDIPCONST UINT16 *text ,INT length ,GDIPCONST GpFont *font ,GDIPCONST GpBrush *brush ,GDIPCONST PointF *positions ,INT flags ,GDIPCONST GpMatrix *matrix);
 GpStatus WINGDIPAPI GdipMeasureDriverString (GpGraphics *graphics ,GDIPCONST UINT16 *text ,INT length ,GDIPCONST GpFont *font ,GDIPCONST PointF *positions ,INT flags ,GDIPCONST GpMatrix *matrix ,RectF *boundingBox);
 // String format APIs
-GpStatus WINGDIPAPI GdipCreateStringFormat (INT formatAttributes ,LANGID language ,GpStringFormat **format); 
-GpStatus WINGDIPAPI GdipStringFormatGetGenericDefault(GpStringFormat **format); 
-GpStatus WINGDIPAPI GdipStringFormatGetGenericTypographic(GpStringFormat **format); 
-GpStatus WINGDIPAPI GdipDeleteStringFormat(GpStringFormat *format); 
-GpStatus WINGDIPAPI GdipCloneStringFormat(GDIPCONST GpStringFormat *format, GpStringFormat **newFormat); 
-GpStatus WINGDIPAPI GdipSetStringFormatFlags(GpStringFormat *format, INT flags); 
-GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, INT *flags); 
-GpStatus WINGDIPAPI GdipSetStringFormatAlign(GpStringFormat *format, StringAlignment align); 
-GpStatus WINGDIPAPI GdipGetStringFormatAlign(GDIPCONST GpStringFormat *format, StringAlignment *align); 
-GpStatus WINGDIPAPI GdipSetStringFormatLineAlign(GpStringFormat *format ,StringAlignment align); 
-GpStatus WINGDIPAPI GdipGetStringFormatLineAlign(GDIPCONST GpStringFormat *format ,StringAlignment *align); 
-GpStatus WINGDIPAPI GdipSetStringFormatTrimming (GpStringFormat *format ,StringTrimming trimming); 
-GpStatus WINGDIPAPI GdipGetStringFormatTrimming (GDIPCONST GpStringFormat *format ,StringTrimming *trimming); 
-GpStatus WINGDIPAPI GdipSetStringFormatHotkeyPrefix(GpStringFormat *format, INT hotkeyPrefix); 
-GpStatus WINGDIPAPI GdipGetStringFormatHotkeyPrefix(GDIPCONST GpStringFormat *format, INT *hotkeyPrefix); 
-GpStatus WINGDIPAPI GdipSetStringFormatTabStops(GpStringFormat *format, REAL firstTabOffset, INT count, GDIPCONST REAL *tabStops); 
-GpStatus WINGDIPAPI GdipGetStringFormatTabStops(GDIPCONST GpStringFormat *format, INT count, REAL *firstTabOffset, REAL *tabStops); 
-GpStatus WINGDIPAPI GdipGetStringFormatTabStopCount(GDIPCONST GpStringFormat *format, INT * count); 
-GpStatus WINGDIPAPI GdipSetStringFormatDigitSubstitution(GpStringFormat *format, LANGID language ,StringDigitSubstitute substitute); 
-GpStatus WINGDIPAPI GdipGetStringFormatDigitSubstitution(GDIPCONST GpStringFormat *format, LANGID *language ,StringDigitSubstitute *substitute); 
-GpStatus WINGDIPAPI GdipGetStringFormatMeasurableCharacterRangeCount (GDIPCONST GpStringFormat *format ,INT *count); 
+GpStatus WINGDIPAPI GdipCreateStringFormat (INT formatAttributes ,LANGID language ,GpStringFormat **format);
+GpStatus WINGDIPAPI GdipStringFormatGetGenericDefault(GpStringFormat **format);
+GpStatus WINGDIPAPI GdipStringFormatGetGenericTypographic(GpStringFormat **format);
+GpStatus WINGDIPAPI GdipDeleteStringFormat(GpStringFormat *format);
+GpStatus WINGDIPAPI GdipCloneStringFormat(GDIPCONST GpStringFormat *format, GpStringFormat **newFormat);
+GpStatus WINGDIPAPI GdipSetStringFormatFlags(GpStringFormat *format, INT flags);
+GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, INT *flags);
+GpStatus WINGDIPAPI GdipSetStringFormatAlign(GpStringFormat *format, StringAlignment align);
+GpStatus WINGDIPAPI GdipGetStringFormatAlign(GDIPCONST GpStringFormat *format, StringAlignment *align);
+GpStatus WINGDIPAPI GdipSetStringFormatLineAlign(GpStringFormat *format ,StringAlignment align);
+GpStatus WINGDIPAPI GdipGetStringFormatLineAlign(GDIPCONST GpStringFormat *format ,StringAlignment *align);
+GpStatus WINGDIPAPI GdipSetStringFormatTrimming (GpStringFormat *format ,StringTrimming trimming);
+GpStatus WINGDIPAPI GdipGetStringFormatTrimming (GDIPCONST GpStringFormat *format ,StringTrimming *trimming);
+GpStatus WINGDIPAPI GdipSetStringFormatHotkeyPrefix(GpStringFormat *format, INT hotkeyPrefix);
+GpStatus WINGDIPAPI GdipGetStringFormatHotkeyPrefix(GDIPCONST GpStringFormat *format, INT *hotkeyPrefix);
+GpStatus WINGDIPAPI GdipSetStringFormatTabStops(GpStringFormat *format, REAL firstTabOffset, INT count, GDIPCONST REAL *tabStops);
+GpStatus WINGDIPAPI GdipGetStringFormatTabStops(GDIPCONST GpStringFormat *format, INT count, REAL *firstTabOffset, REAL *tabStops);
+GpStatus WINGDIPAPI GdipGetStringFormatTabStopCount(GDIPCONST GpStringFormat *format, INT * count);
+GpStatus WINGDIPAPI GdipSetStringFormatDigitSubstitution(GpStringFormat *format, LANGID language ,StringDigitSubstitute substitute);
+GpStatus WINGDIPAPI GdipGetStringFormatDigitSubstitution(GDIPCONST GpStringFormat *format, LANGID *language ,StringDigitSubstitute *substitute);
+GpStatus WINGDIPAPI GdipGetStringFormatMeasurableCharacterRangeCount (GDIPCONST GpStringFormat *format ,INT *count);
 GpStatus WINGDIPAPI GdipSetStringFormatMeasurableCharacterRanges (GpStringFormat *format ,INT rangeCount ,GDIPCONST CharacterRange *ranges);
 // Cached Bitmap APIs
 GpStatus WINGDIPAPI GdipCreateCachedBitmap(GpBitmap *bitmap,GpGraphics *graphics,GpCachedBitmap **cachedBitmap);

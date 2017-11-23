@@ -131,115 +131,72 @@ CLASS Get
    VISIBLE:
 
    /* NOTE: This method is a Harbour extension */
+   METHOD New( nRow, nCol, bVarBlock, cVarName, cPicture, cColorSpec )
 
-METHOD New( nRow, nCol, bVarBlock, cVarName, cPicture, cColorSpec )
-
-METHOD Assign()
-
+   METHOD Assign()
    #ifdef HB_COMPAT_XPP
    MESSAGE _Assign METHOD Assign()
    #endif
-
-METHOD Type()
-
+   METHOD Type()
    #ifdef HB_COMPAT_C53
-
-METHOD HitTest( nMRow, nMCol )
-
+   METHOD HitTest( nMRow, nMCol )
    #endif
-
-METHOD Block( bBlock ) SETGET
-
-METHOD ColorSpec( cColorSpec ) SETGET
-
-METHOD Picture( cPicture ) SETGET
-
+   METHOD Block( bBlock ) SETGET
+   METHOD ColorSpec( cColorSpec ) SETGET
+   METHOD Picture( cPicture ) SETGET
    /* NOTE: lForced is an undocumented Harbour parameter. Should not be used by app code. */
-
-METHOD Display( lForced )
-
-METHOD ColorDisp( cColorSpec )
-
-METHOD KillFocus()
-
-METHOD Reset()
-
-METHOD SetFocus()
-
-METHOD Undo()
-
-METHOD UnTransform( cBuffer )
-
-METHOD UpdateBuffer()
-
+   METHOD Display( lForced )
+   METHOD ColorDisp( cColorSpec )
+   METHOD KillFocus()
+   METHOD Reset()
+   METHOD SetFocus()
+   METHOD Undo()
+   METHOD UnTransform( cBuffer )
+   METHOD UpdateBuffer()
    #ifdef HB_C52_UNDOC
-
-METHOD Reform()
-
+   METHOD Reform()
    #endif
 
-METHOD VarGet()
-
+   METHOD VarGet()
    /* NOTE: lReFormat is an undocumented Harbour parameter. Should not be used by app code. */
+   METHOD VarPut( xValue, lReFormat )
 
-METHOD VarPut( xValue, lReFormat )
-
-METHOD End()
-
+   METHOD End()
    #ifdef HB_COMPAT_XPP
    MESSAGE _End METHOD End()
    #endif
-
-METHOD Home()
-
+   METHOD Home()
    MESSAGE Left( lDisplay ) METHOD _Left( lDisplay )
    MESSAGE Right( lDisplay ) METHOD _Right( lDisplay )
-
-METHOD ToDecPos()
-
-METHOD WordLeft()
-
-METHOD WordRight()
+   METHOD ToDecPos()
+   METHOD WordLeft()
+   METHOD WordRight()
 
    /* NOTE: lDisplay is an undocumented Harbour parameter. Should not be used by app code. */
-
-METHOD BackSpace( lDisplay )
-
+   METHOD BackSpace( lDisplay )
    MESSAGE Delete( lDisplay ) METHOD _Delete( lDisplay )
+   METHOD DelEnd()
+   METHOD DelLeft()
+   METHOD DelRight()
+   METHOD DelWordLeft()
+   METHOD DelWordRight()
 
-METHOD DelEnd()
+   METHOD Insert( cChar )
+   METHOD OverStrike( cChar )
 
-METHOD DelLeft()
+   METHOD SetKeyEvent( nKey, bKey, lCtrl, lShift, lAlt )
+   METHOD DoKeyEvent ( nKey )
 
-METHOD DelRight()
-
-METHOD DelWordLeft()
-
-METHOD DelWordRight()
-
-METHOD Insert( cChar )
-
-METHOD OverStrike( cChar )
-
-METHOD SetKeyEvent( nKey, bKey, lCtrl, lShift, lAlt )
-
-METHOD DoKeyEvent ( nKey )
-
-METHOD Refresh()
+   METHOD Refresh()
 
    PROTECTED:
 
-METHOD DeleteAll()
-
-METHOD IsEditable( nPos )
-
-METHOD Input( cChar )
-
-METHOD PutMask( xValue, lEdit )
-
-METHOD FirstEditable()
-
-METHOD LastEditable()
+   METHOD DeleteAll()
+   METHOD IsEditable( nPos )
+   METHOD Input( cChar )
+   METHOD PutMask( xValue, lEdit )
+   METHOD FirstEditable()
+   METHOD LastEditable()
 
 ENDCLASS
 
@@ -1864,4 +1821,3 @@ STATIC FUNCTION IsBadDate( cBuffer, cPicFunc )
    NEXT
 
    RETURN .F.
-

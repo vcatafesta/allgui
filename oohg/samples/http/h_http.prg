@@ -171,4 +171,3 @@ FUNCTION httpgeturl( Connection, cPage, uRet )
    ENDIF
 
    RETURN cRet
-

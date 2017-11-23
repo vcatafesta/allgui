@@ -63,4 +63,3 @@ FUNCTION LoadItems()
    aRows [20]   := {'Reyes','Monica','432-5836'}
 
    RETURN aRows
-

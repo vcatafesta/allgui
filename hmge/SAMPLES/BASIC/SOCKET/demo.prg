@@ -47,4 +47,3 @@ PROCEDURE TestHttp()
    MsgInfo (Response)
 
    RETURN
-

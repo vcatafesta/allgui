@@ -303,4 +303,3 @@ FUNCTION DropTable(cTable, db)
    ENDIF
 
    RETURN lRet
-

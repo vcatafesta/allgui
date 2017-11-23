@@ -738,4 +738,3 @@ FUNCTION Listdata( db, Title )
    Win_2.Topmost := .t.
 
    RETURN NIL
-

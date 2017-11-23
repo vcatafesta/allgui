@@ -163,4 +163,3 @@ FUNCTION C2SQL(Value)
    ENDCASE
 
    RETURN cValue
-

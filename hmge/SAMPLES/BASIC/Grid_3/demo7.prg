@@ -64,4 +64,3 @@ FUNCTION LoadItems()
    aRows [20]   := {123.12,date(),2,20, .f. }
 
    RETURN aRows
-

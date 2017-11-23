@@ -46,25 +46,25 @@ CLASS VAR aModalDialogs  SHARED INIT { }
    // you can change the object that receives focus adding
    // ON INIT {|| nInitFocus:=object:[handle] }  to the dialog definition
 
-METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
+   METHOD New( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
       bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, ;
       xResourceID, lExitOnEsc, bcolor, bRefresh, lNoClosable )
 
-METHOD Activate( lNoModal, bOnActivate, nShow )
+   METHOD Activate( lNoModal, bOnActivate, nShow )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD AddItem()      INLINE AAdd( iif( ::lModal, ::aModalDialogs, ::aDialogs ), Self )
+   METHOD AddItem()      INLINE AAdd( iif( ::lModal, ::aModalDialogs, ::aDialogs ), Self )
 
-METHOD DelItem()
+   METHOD DelItem()
 
-METHOD FindDialog( hWndTitle, lAll )
+   METHOD FindDialog( hWndTitle, lAll )
 
-METHOD GetActive()
+   METHOD GetActive()
 
-METHOD CLOSE()    INLINE hwg_EndDialog( ::handle )
+   METHOD CLOSE()    INLINE hwg_EndDialog( ::handle )
 
-METHOD RELEASE()  INLINE ::Close( ), Self := Nil
+   METHOD RELEASE()  INLINE ::Close( ), Self := Nil
 
 ENDCLASS
 
@@ -829,4 +829,3 @@ STATIC FUNCTION onSysCommand( oDlg, wParam, lParam )
    Hwg_ExitProc()
 
    RETURN
-

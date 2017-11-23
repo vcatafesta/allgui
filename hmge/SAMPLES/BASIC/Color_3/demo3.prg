@@ -62,4 +62,3 @@ STATIC FUNCTION OnGetMove(...)
    ENDIF
 
    RETURN NIL
-

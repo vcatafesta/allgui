@@ -62,4 +62,3 @@ PROCEDURE SendTest
    SendData ( 'John_Station' , aMultiData )
 
    RETURN
-

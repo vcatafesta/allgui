@@ -326,4 +326,3 @@ FUNCTION HPDFReglaV( nColMM )
    NEXT
 
    RETURN( Nil )
-

@@ -258,4 +258,3 @@ FUNCTION WinChildRestoreAll()
 FUNCTION MyGetMDIHandle()
 
    RETURN thiswindow.name
-

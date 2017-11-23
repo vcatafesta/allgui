@@ -154,4 +154,3 @@ PROCEDURE Item_view
    /*
    * EOF
    */
-

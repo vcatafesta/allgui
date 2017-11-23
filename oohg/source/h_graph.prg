@@ -1224,4 +1224,3 @@ FUNCTION DrawPieGraph( window, fromrow, fromcol, torow, tocol, series, aname, co
    ENDIF
 
    RETURN NIL
-

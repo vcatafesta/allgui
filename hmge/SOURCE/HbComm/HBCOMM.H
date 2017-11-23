@@ -26,4 +26,3 @@ extern int  FindIndex( int nH );
 #endif
 
 #define MAXOPENPORTS     20   // Maximum number of simultaneously open serial ports
-

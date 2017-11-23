@@ -149,4 +149,3 @@ FUNCTION win_regSetEx( nHKEY, cKeyName, cEntryName, xValue, nValueType, nRegSam 
    ENDIF
 
    RETURN lRetVal
-

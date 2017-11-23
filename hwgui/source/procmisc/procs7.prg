@@ -156,4 +156,3 @@ FUNCTION NextItem( stroka, lFirst, cSep )
    ENDIF
 
    RETURN ""
-

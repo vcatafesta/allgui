@@ -86,4 +86,3 @@ HB_FUNC( HWG_FINDRESOURCE )
    else
       HB_RETHANDLE( 0 );
 }
-

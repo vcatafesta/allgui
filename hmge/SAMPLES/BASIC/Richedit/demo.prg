@@ -340,4 +340,3 @@ FUNCTION mnuEditSelAll_Click()  // Ctrl+A
    SendMessage( hEdit , EM_SETSEL , 0 , -1 )
 
    RETURN NIL
-

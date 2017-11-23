@@ -294,9 +294,7 @@ PROCEDURE CreateTable
 
    RETURN
    /*
-
    Procedure CreateBase
-
    LOCAL aDbf[6][4]
 
    aDbf[1][ DBS_NAME ] := "Name"
@@ -331,4 +329,3 @@ PROCEDURE CreateTable
 
    Return
    */
-

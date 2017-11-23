@@ -153,10 +153,10 @@ CLASS TAppData
    VAR cPath                         INIT ''
    VAR oCargo            AS OBJECT
 
-METHOD New( nApp ) INLINE ( ::nApp := iif( HB_ISNUMERIC( nApp ), nApp, ::nApp ), ;
+   METHOD New( nApp ) INLINE ( ::nApp := iif( HB_ISNUMERIC( nApp ), nApp, ::nApp ), ;
       Self )          CONSTRUCTOR
 
-METHOD Def( cPath, cName )  INLINE ( ::Name := cName, ::Path := cPath,  ;
+   METHOD Def( cPath, cName )  INLINE ( ::Name := cName, ::Path := cPath,  ;
       ::oEvent := oKeyData( Self ), ::oCargo := oKeyData(), Self )
 
    ASSIGN Handle( hWnd )        INLINE ( ::hWnd := hWnd, ::lErr := Empty( hWnd ) )
@@ -196,17 +196,16 @@ METHOD Def( cPath, cName )  INLINE ( ::Name := cName, ::Path := cPath,  ;
    ACCESS DesktopWidth          INLINE GetDesktopWidth ()
    ACCESS DesktopHeight         INLINE GetDesktopHeight() - GetTaskBarHeight()
 
-METHOD Create()              INLINE _App_Wnd_Events_( Self )
+   METHOD Create()              INLINE _App_Wnd_Events_( Self )
 
-METHOD Event   ( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
+   METHOD Event   ( Key, Block, p2, p3 )  INLINE iif( HB_ISBLOCK( Block ), ;
       ::oEvent:Set( Key, Block ), ;
       ::oEvent:Do ( Key, Block, p2, p3 ) )
 
-METHOD PostMsg( nKey, nPar )  INLINE PostMessage( ::hWnd, ::WmApp, nKey, hb_defaultValue( nPar, 0 ) )
+   METHOD PostMsg( nKey, nPar )  INLINE PostMessage( ::hWnd, ::WmApp, nKey, hb_defaultValue( nPar, 0 ) )
+   METHOD SendMsg( nKey, nPar )  INLINE SendMessage( ::hWnd, ::WmApp, nKey, hb_defaultValue( nPar, 0 ) )
 
-METHOD SendMsg( nKey, nPar )  INLINE SendMessage( ::hWnd, ::WmApp, nKey, hb_defaultValue( nPar, 0 ) )
-
-METHOD Destroy()  INLINE ( ::Cargo := Nil,                              ;
+   METHOD Destroy()  INLINE ( ::Cargo := Nil,                              ;
       ::oCargo := iif( HB_ISOBJECT( ::oCargo ), ::oCargo:Destroy(), Nil ), ;
       ::oEvent := iif( HB_ISOBJECT( ::oEvent ), ::oEvent:Destroy(), Nil ) )
    #ifndef __XHARBOUR__
@@ -255,4 +254,3 @@ FUNCTION _App_Wnd_Events_( hWnd, nMsg, wParam, lParam )
    ENDIF
 
    RETURN r
-

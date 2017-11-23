@@ -82,4 +82,3 @@ PROCEDURE CloseTables()
    DELETE File Cidades1.ntx
 
    RETURN
-

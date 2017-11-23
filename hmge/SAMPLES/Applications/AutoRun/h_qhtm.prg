@@ -152,4 +152,3 @@ FUNCTION QHTM_GetLink( lParam )
    QHTM_SetReturnValue( lParam, .F. )
 
    RETURN cLink
-

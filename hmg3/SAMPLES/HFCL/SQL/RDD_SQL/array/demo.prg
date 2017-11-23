@@ -50,4 +50,3 @@ PROC main()
    RETURN
 
    PROC RDDSYS();  RETURN
-

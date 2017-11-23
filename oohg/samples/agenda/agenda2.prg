@@ -661,4 +661,3 @@ FUNCTION AgendaOpen()
    ENDIF
 
    RETURN NIL
-

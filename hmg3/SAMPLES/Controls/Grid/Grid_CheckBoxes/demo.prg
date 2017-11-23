@@ -80,4 +80,3 @@ PROCEDURE GetListCheckBox
    ENDIF
 
    RETURN
-

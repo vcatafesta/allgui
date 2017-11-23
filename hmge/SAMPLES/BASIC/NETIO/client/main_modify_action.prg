@@ -56,4 +56,3 @@ FUNCTION main_modify_action
    ENDIF
 
    RETURN NIL
-

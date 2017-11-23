@@ -35,63 +35,63 @@ CLASS TMyMenuEditor
    DATA nType     INIT 0
    DATA oEditor   INIT NIL
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD CloseWorkArea
+   METHOD CloseWorkArea
 
-METHOD CreateMenuCtrl
+   METHOD CreateMenuCtrl
 
-METHOD CreateMenuFromFile
+   METHOD CreateMenuFromFile
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD Discard
+   METHOD Discard
 
-METHOD Edit
+   METHOD Edit
 
-METHOD Exit
+   METHOD Exit
 
-METHOD FmgOutput
+   METHOD FmgOutput
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD MoveDown
+   METHOD MoveDown
 
-METHOD MoveUp
+   METHOD MoveUp
 
-METHOD OpenWorkArea
+   METHOD OpenWorkArea
 
-METHOD ParseData
+   METHOD ParseData
 
-METHOD ParseItem
+   METHOD ParseItem
 
-METHOD Save
+   METHOD Save
 
-METHOD WriteAction
+   METHOD WriteAction
 
-METHOD WriteBreakMenu
+   METHOD WriteBreakMenu
 
-METHOD WriteCaption
+   METHOD WriteCaption
 
-METHOD WriteChecked
+   METHOD WriteChecked
 
-METHOD WriteDisabled
+   METHOD WriteDisabled
 
-METHOD WriteHilited
+   METHOD WriteHilited
 
-METHOD WriteImage
+   METHOD WriteImage
 
-METHOD WriteLevel
+   METHOD WriteLevel
 
-METHOD WriteName
+   METHOD WriteName
 
-METHOD WriteObj
+   METHOD WriteObj
 
-METHOD WriteRight
+   METHOD WriteRight
 
-METHOD WriteStretch
+   METHOD WriteStretch
 
-METHOD WriteSubclass
+   METHOD WriteSubclass
 
 ENDCLASS
 
@@ -1335,4 +1335,3 @@ METHOD WriteStretch() CLASS TMyMenuEditor
    /*
    * EOF
    */
-

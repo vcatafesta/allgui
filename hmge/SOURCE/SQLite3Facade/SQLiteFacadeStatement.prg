@@ -98,37 +98,24 @@ CREATE CLASS SQLiteFacadeStatement
    */
    VAR lastExecuteResult TYPE NUMERIC
 
-METHOD preBind    // returns ARRAY
+   METHOD preBind    // returns ARRAY
 
    EXPORT:
+   METHOD init CONSTRUCTOR
+   METHOD setString        // returns SELF
+   METHOD setInteger       // returns SELF
+   METHOD setFloat         // returns SELF
+   METHOD setDate          // returns SELF
+   METHOD setBoolean       // returns SELF
+   METHOD setBlob          // returns SELF
 
-METHOD init CONSTRUCTOR
-
-METHOD setString        // returns SELF
-
-METHOD setInteger       // returns SELF
-
-METHOD setFloat         // returns SELF
-
-METHOD setDate          // returns SELF
-
-METHOD setBoolean       // returns SELF
-
-METHOD setBlob          // returns SELF
-
-METHOD executeQuery     // returns SQLiteFacadeResultSet()
-
-METHOD executeUpdate    // returns NUMERIC
-
-METHOD reuse            // returns SELF
-
-METHOD clear            // returns SELF
-
-METHOD close            // returns SELF
-
+   METHOD executeQuery     // returns SQLiteFacadeResultSet()
+   METHOD executeUpdate    // returns NUMERIC
+   METHOD reuse            // returns SELF
+   METHOD clear            // returns SELF
+   METHOD close            // returns SELF
    // ---- information methods ----
-
-METHOD getPointer       // returns POINTER
+   METHOD getPointer       // returns POINTER
 
 END CLASS
 
@@ -290,7 +277,6 @@ METHOD setString( ncParam, cValue )
 
    LOCAL oError
    LOCAL awBind := ::preBind( ncParam, cValue, { |_p| HB_IsString(_p) } )
-
    ::lastBindError := sqlite3_bind_text( ::statement,   ;
       awBind[ BIND_PARAM_INDEX ], ;
       awBind[ BIND_PARAM_VALUE ] )
@@ -318,7 +304,6 @@ METHOD setInteger( ncParam, iValue )
 
    LOCAL oError
    LOCAL awBind := ::preBind( ncParam, iValue, { |_p| HB_IsNumeric(_p) } )
-
    ::lastBindError := sqlite3_bind_int( ::statement,    ;
       awBind[ BIND_PARAM_INDEX ], ;
       awBind[ BIND_PARAM_VALUE ] )
@@ -346,7 +331,6 @@ METHOD setFloat( ncParam, nValue )
 
    LOCAL oError
    LOCAL awBind := ::preBind( ncParam, nValue, { |_p| HB_IsNumeric(_p) } )
-
    ::lastBindError := sqlite3_bind_double( ::statement, ;
       awBind[ BIND_PARAM_INDEX ], ;
       awBind[ BIND_PARAM_VALUE ] )
@@ -614,4 +598,3 @@ METHOD close()
 METHOD getPointer()
 
    RETURN ( ::statement )
-

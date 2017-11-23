@@ -76,4 +76,3 @@ STATIC FUNCTION GetImageInfo( cPicFile, nPicWidth, nPicHeight )
    nPicHeight := aSize[2]
 
    RETURN ( nPicWidth > 0 )
-

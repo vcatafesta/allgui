@@ -77,4 +77,3 @@ STATIC PROCEDURE Form_Resize()
    This.lblWorkAreaHeight.Value := hb_ntos( This.ClientHeight - This.StatusBar.Height )
 
    RETURN
-

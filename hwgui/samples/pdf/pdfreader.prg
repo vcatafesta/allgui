@@ -36,7 +36,7 @@ CLASS PdfReader  FROM HActiveX
 
 CLASS VAR winclass INIT "Pdfreader"
 
-METHOD New()
+   METHOD New()
 
 ENDCLASS
 
@@ -54,4 +54,3 @@ FUNCTION ViewPdf(oWindow, cPdfFile, col, row, nHeight, nWidth)
    oPdf:LoadFile(cPdfFile)
 
    RETURN oPdf
-

@@ -101,4 +101,3 @@ PROCEDURE DeleteShortcuts(aLinks)
    WshShell := Nil
 
    RETURN
-

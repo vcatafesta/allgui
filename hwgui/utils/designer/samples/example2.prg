@@ -18,4 +18,3 @@ FUNCTION Main
    RETURN NIL
 
    #include "example.frm"
-

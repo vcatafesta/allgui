@@ -167,4 +167,3 @@ FUNCTION Graphic12( hWnd, oRMChart12, nIdChart, MAX_SIZE_ONE, MAX_SIZE_TWO )
    oRMChart12:SetSeriesData(nIdChart, 1, 1, aData2, 10, 0)
 
    RETURN NIL
-

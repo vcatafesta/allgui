@@ -614,4 +614,3 @@ HB_FUNC ( DRAWPICTURE )
 }
 
 #pragma ENDDUMP
-

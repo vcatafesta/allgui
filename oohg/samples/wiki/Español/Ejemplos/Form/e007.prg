@@ -50,4 +50,3 @@ FUNCTION RGB_VALUE( aColor )
    /*
    * EOF
    */
-

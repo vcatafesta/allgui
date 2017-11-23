@@ -250,4 +250,3 @@ FUNCTION SaveOptions()
    CLOSE ALL
 
    RETURN NIL
-

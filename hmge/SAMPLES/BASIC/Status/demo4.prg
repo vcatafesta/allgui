@@ -63,4 +63,3 @@ PROCEDURE ChangeItem( nItem )
    SET STATUSITEM nItem OF Form_1 ALIGN CENTER
 
    RETURN
-

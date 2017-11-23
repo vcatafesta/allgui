@@ -239,4 +239,3 @@ FUNCTION PrnTest
    oPrinter:End()
 
    RETURN NIL
-

@@ -132,4 +132,3 @@ FUNCTION AlternarMarquee( oProg, oBut )
    /*
    * EOF
    */
-

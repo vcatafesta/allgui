@@ -352,4 +352,3 @@ FUNCTION fword(zstreet,ico)
    ENDIF
 
    RETURN 'ZZ'
-

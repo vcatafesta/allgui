@@ -172,7 +172,6 @@ STATIC FUNCTION ColCharToPix( nValor )
 
    RETURN nValor * 8
    /*
-
    Static Function RowPixToChar( nValor )
 
    Return Round(nValor/14,0)
@@ -185,4 +184,3 @@ STATIC FUNCTION ColCharToPix( nValor )
 STATIC FUNCTION LenChartopix( cText )
 
    RETURN ColChartopix( Len( cText ) + 1 )
-

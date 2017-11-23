@@ -181,4 +181,3 @@ LRESULT CALLBACK TTaskbarNotifierWndProc( HWND hWnd, UINT message, WPARAM wParam
 }
 
 #pragma ENDDUMP
-

@@ -103,4 +103,3 @@ STATIC PROCEDURE fPrint(lPreview)
    ENDIF
 
    RETURN
-

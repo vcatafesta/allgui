@@ -97,7 +97,6 @@
    => ;
    httpconnect( iif( <.obj.>, @<con>, <(con)>), <server>, <port> )
 
-
 #xcommand CLOSE CONNECTION <con> ;
    => ;
    <con>:Close()

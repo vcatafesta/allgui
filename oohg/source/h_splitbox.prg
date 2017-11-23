@@ -61,33 +61,33 @@ CLASS TSplitBox FROM TControl
    DATA nMinWidth              INIT nil
    DATA nMinHeight             INIT nil
 
-METHOD Define
+   METHOD Define
 
-METHOD SizePos              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+   METHOD SizePos              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
 
-METHOD Refresh              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+   METHOD Refresh              BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
 
-METHOD Events_Size          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
+   METHOD Events_Size          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) }
 
-METHOD RefreshData          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) , ::Super:RefreshData() }
+   METHOD RefreshData          BLOCK { |Self| SizeRebar( ::hWnd ) , RedrawWindow( ::hWnd ) , ::Super:RefreshData() }
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD SetSplitBox
+   METHOD SetSplitBox
 
-METHOD ClientHeightUsed     BLOCK { |Self| GetWindowHeight( ::hWnd )  }
+   METHOD ClientHeightUsed     BLOCK { |Self| GetWindowHeight( ::hWnd )  }
 
-METHOD BandGripperOFF
+   METHOD BandGripperOFF
 
-METHOD BandGripperON
+   METHOD BandGripperON
 
-METHOD BandHasGripper
+   METHOD BandHasGripper
 
-METHOD HideBand
+   METHOD HideBand
 
-METHOD ShowBand
+   METHOD ShowBand
 
-METHOD IsBandVisible
+   METHOD IsBandVisible
 
    EMPTY( _OOHG_AllVars )
 
@@ -510,4 +510,3 @@ HB_FUNC( SIZEREBAR )
 }
 
 #pragma ENDDUMP
-

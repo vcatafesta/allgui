@@ -8,7 +8,6 @@
 #define TNS_VISIBLE      2
 #define TNS_DISAPPEARING 3
 
-
 #xcommand INIT NOTIFIER <oPopup> <of: SKIN, FILE, BITMAP> <cBitmap> ;
             => ;
             <oPopup>:=TTaskbarNotifier():New(<"cBitmap">)

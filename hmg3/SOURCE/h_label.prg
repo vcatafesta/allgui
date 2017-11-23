@@ -202,4 +202,3 @@ FUNCTION _DefineLabel ( ControlName, ParentForm, x, y, Caption, w, h, ;
    ENDIF
 
    RETURN NIL
-

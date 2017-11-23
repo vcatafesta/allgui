@@ -99,4 +99,3 @@ FUNCTION SelectRecord( aRecs, nRecord )
 FUNCTION ChkSelectStatus()
 
    RETURN( AScan( aRecs, RecNo() ) <> 0 )
-

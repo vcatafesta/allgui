@@ -17,8 +17,8 @@ typedef long int int64;
 #ifndef HAVE_INT64
 typedef long long int int64;
 #endif
-#else							/* not HAVE_LONG_INT_64 and not
-								 * HAVE_LONG_LONG_INT_64 */
+#else                     /* not HAVE_LONG_INT_64 and not
+                         * HAVE_LONG_LONG_INT_64 */
 
 /* Won't actually work, but fall back to long int so that code compiles */
 #ifndef HAVE_INT64
@@ -27,7 +27,7 @@ typedef long int int64;
 
 #define INT64_IS_BUSTED
 #endif   /* not HAVE_LONG_INT_64 and not
-								 * HAVE_LONG_LONG_INT_64 */
+                         * HAVE_LONG_LONG_INT_64 */
 #endif   /* C_H */
 
 #if defined(USE_INTEGER_DATETIMES) && !defined(INT64_IS_BUSTED)
@@ -37,15 +37,15 @@ typedef long int int64;
 typedef struct
 {
 #ifdef HAVE_INT64_TIMESTAMP
-	int64		time;			/* all time units other than months and years */
+   int64      time;         /* all time units other than months and years */
 #else
-	double		time;			/* all time units other than months and years */
+   double      time;         /* all time units other than months and years */
 #endif
-	long		month;			/* months and years, after time for alignment */
-}	interval;
+   long      month;         /* months and years, after time for alignment */
+}   interval;
 
 #ifdef __cplusplus
-extern		"C"
+extern      "C"
 {
 #endif
 
@@ -53,7 +53,7 @@ extern interval *PGTYPESinterval_new(void);
 extern void PGTYPESinterval_free(interval *);
 extern interval *PGTYPESinterval_from_asc(char *, char **);
 extern char *PGTYPESinterval_to_asc(interval *);
-extern int	PGTYPESinterval_copy(interval *, interval *);
+extern int   PGTYPESinterval_copy(interval *, interval *);
 
 #ifdef __cplusplus
 }

@@ -48,4 +48,3 @@ PROCEDURE AnimarProgressBar
    /*
    * EOF
    */
-

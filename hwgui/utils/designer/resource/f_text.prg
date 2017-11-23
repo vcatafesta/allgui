@@ -140,4 +140,3 @@ FUNCTION STR2FONT
    Fwrite( han, _Chr(10 ) )
    Fclose( han )
    #ENDSCRIPT
-

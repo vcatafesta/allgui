@@ -39,4 +39,3 @@ FUNCTION Main
    RETURN
 
    #include "oohg.ch"
-

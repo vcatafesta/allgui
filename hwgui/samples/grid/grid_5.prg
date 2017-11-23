@@ -391,4 +391,3 @@ STATIC FUNCTION mydelete()
    oGrid:SetItemCount(Lastrec())
 
    RETURN NIL
-

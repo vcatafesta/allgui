@@ -21,29 +21,29 @@ CLASS TStreamBase
    DATA nPosition    INIT 0      // Bytes already read
    DATA Cargo        INIT nil    // Dummy...
 
-METHOD Read          // Read buffer
+   METHOD Read          // Read buffer
 
-METHOD Remove        // Remove some bytes from buffer
+   METHOD Remove        // Remove some bytes from buffer
 
-METHOD Fill          // Fill buffer
+   METHOD Fill          // Fill buffer
 
-METHOD Len           // Length of buffer
+   METHOD Len           // Length of buffer
 
-METHOD Left          // Beginning of buffer
+   METHOD Left          // Beginning of buffer
 
-METHOD Right         // End of buffer
+   METHOD Right         // End of buffer
 
-METHOD SubStr        // Internal part of buffer
+   METHOD SubStr        // Internal part of buffer
 
-METHOD Clear         // Clear buffer
+   METHOD Clear         // Clear buffer
 
-METHOD Skip          // Skip bytes
+   METHOD Skip          // Skip bytes
 
-METHOD ReSize        // Resize buffer
+   METHOD ReSize        // Resize buffer
 
-METHOD Close         // Close buffer
+   METHOD Close         // Close buffer
 
-METHOD IsActive      // Check if stream is still active
+   METHOD IsActive      // Check if stream is still active
 
    DESTRUCTOR Destroy
 
@@ -53,38 +53,38 @@ METHOD IsActive      // Check if stream is still active
    DATA   lWordWrap     INIT .F.   // *******
    DATA   nLine         INIT 0     // Line count
 
-METHOD IsLine        // Is any line on buffer
+   METHOD IsLine        // Is any line on buffer
 
-METHOD GetLine       // Reads a text line from buffer
+   METHOD GetLine       // Reads a text line from buffer
 
-METHOD CutLineAt     // Where next line begins
+   METHOD CutLineAt     // Where next line begins
 
    // Write functionality
 
-METHOD WriteBuffer
+   METHOD WriteBuffer
 
    DATA   cDataToWrite  INIT ""
    DATA   lCloseAtEnd   INIT .F.
 
-METHOD CloseAtEnd
+   METHOD CloseAtEnd
 
    // ****** These methods can change each subclass
 
-METHOD CanWrite      SETGET
+   METHOD CanWrite      SETGET
 
-METHOD CanWaitForBuffer INLINE .F.
+   METHOD CanWaitForBuffer INLINE .F.
 
    // Changed each subclass
 
-METHOD New           // New stream
+   METHOD New           // New stream
 
-METHOD IsConnected   // Check if stream is connected
+   METHOD IsConnected   // Check if stream is connected
 
-METHOD RealFill      // Real filler
+   METHOD RealFill      // Real filler
 
-METHOD Disconnect    // Disconnect
+   METHOD Disconnect    // Disconnect
 
-METHOD Write         INLINE 0
+   METHOD Write         INLINE 0
 
 ENDCLASS
 
@@ -590,17 +590,17 @@ CLASS TStreamFile FROM TStreamBase
 
    DATA nHdl INIT 0
 
-METHOD New
+   METHOD New
 
-METHOD IsConnected
+   METHOD IsConnected
 
-METHOD RealFill
+   METHOD RealFill
 
-METHOD Disconnect
+   METHOD Disconnect
 
-METHOD Write
+   METHOD Write
 
-METHOD Skip
+   METHOD Skip
 
 ENDCLASS
 
@@ -722,4 +722,3 @@ HB_FUNC( STREAMFILE_READ )   // ( pBuffer, nHdl, nStart, nCount )
 }
 
 #pragma ENDDUMP
-

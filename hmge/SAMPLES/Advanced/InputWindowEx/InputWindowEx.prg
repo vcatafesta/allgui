@@ -216,4 +216,3 @@ STATIC FUNCTION xInputWindowCancel()
    RELEASE WINDOW _InputWindow
 
    RETURN NIL
-

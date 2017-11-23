@@ -1236,4 +1236,3 @@ FUNCTION OEDITEVENTS( hWnd, nMsg, wParam, lParam )
    ENDSWITCH
 
    RETURN 0
-

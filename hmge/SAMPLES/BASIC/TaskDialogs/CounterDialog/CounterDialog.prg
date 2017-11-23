@@ -71,4 +71,3 @@ STATIC FUNCTION __cb_counter( hWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

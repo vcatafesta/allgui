@@ -106,4 +106,3 @@ STATIC FUNCTION FilSysMet()
    NEXT
 
    RETURN aRet
-

@@ -85,4 +85,3 @@ FUNCTION Main ()
    ACTIVATE WINDOW Form1
 
    RETURN NIL
-

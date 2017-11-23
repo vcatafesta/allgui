@@ -54,4 +54,3 @@ PROCEDURE TestNavigate()
    ENDIF
 
    RETURN
-

@@ -197,4 +197,3 @@ FUNCTION MyInitForm()
    ENDIF
 
    RETURN NIL
-

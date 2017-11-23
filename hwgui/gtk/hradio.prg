@@ -19,13 +19,13 @@ CLASS VAR oGroupCurrent
    DATA value  INIT 1
    DATA bSetGet
 
-METHOD New( vari,bSetGet )
+   METHOD New( vari,bSetGet )
 
-METHOD EndGroup( nSelected )
+   METHOD EndGroup( nSelected )
 
-METHOD SetValue( nValue )
+   METHOD SetValue( nValue )
 
-METHOD Refresh()   INLINE Iif( ::bSetGet!=Nil,::SetValue(Eval(::bSetGet)),.T. )
+   METHOD Refresh()   INLINE Iif( ::bSetGet!=Nil,::SetValue(Eval(::bSetGet)),.T. )
 
 ENDCLASS
 
@@ -75,12 +75,12 @@ CLASS VAR winclass   INIT "BUTTON"
 
    DATA  oGroup
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
 ENDCLASS
 
@@ -161,4 +161,3 @@ STATIC FUNCTION __Valid( oCtrl )
    ENDIF
 
    RETURN .T.
-

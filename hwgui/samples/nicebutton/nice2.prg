@@ -11,4 +11,3 @@ func main
    activate dialog o
 
    RETURN NIL
-

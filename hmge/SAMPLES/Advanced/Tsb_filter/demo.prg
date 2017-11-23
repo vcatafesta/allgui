@@ -224,4 +224,3 @@ FUNCTION WMIService()
    ENDIF
 
    RETURN oWmi
-

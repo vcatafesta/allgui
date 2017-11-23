@@ -275,4 +275,3 @@ FUNCTION RtAmb(Arg1)
    ENDIF
 
    RETURN NIL
-

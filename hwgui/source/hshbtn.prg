@@ -20,16 +20,16 @@ CLASS HShadeButton INHERIT HOwnButton
 
    DATA hShade
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lflat,              ;
       cText, color, font, xt, yt,                       ;
       bmp, lResour, xb, yb, widthb, heightb, lTr, trColor, ;
       cTooltip, lEnabled, shadeID, palette,         ;
       granularity, highlight, coloring, shcolor )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD END()
+   METHOD END()
 
 ENDCLASS
 
@@ -85,4 +85,3 @@ METHOD END() CLASS HShadeButton
    hwg_Shade_release( ::hShade )
 
    RETURN NIL
-

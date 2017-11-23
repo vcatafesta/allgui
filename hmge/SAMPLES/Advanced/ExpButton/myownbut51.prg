@@ -492,4 +492,3 @@ STATIC FUNCTION CountIt( cText )
    ENDIF
 
    RETURN nCount
-

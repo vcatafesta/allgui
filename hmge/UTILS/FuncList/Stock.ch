@@ -28,7 +28,6 @@
 
 #define COMMENT_CHAR              ';'            // Commentary in key words files
 
-
 // Array with work params
 
 #define OPTIONS_ONSTART           1              // Startup action
@@ -41,7 +40,7 @@
 #define OPTIONS_EDITOR_PARMS      8              // String with complementary params
                                                  // for external editor
 #define OPTIONS_LANGFILE          9              // Language filename
-                                                 
+
 #define OPTIONS_ALEN              9              // Dimensionality of params array
 
 // Multilingual interface: requests for strings and appropriate them

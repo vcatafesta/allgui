@@ -498,4 +498,3 @@ HB_FUNC ( GETDESKTOPAREA )
 }
 
 #pragma ENDDUMP
-

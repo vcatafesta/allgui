@@ -213,4 +213,3 @@ PROCEDURE ShowTxt( cText )
    ACTIVATE WINDOW Form_2
 
    RETURN
-

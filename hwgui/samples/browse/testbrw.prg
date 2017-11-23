@@ -59,4 +59,3 @@ STATIC FUNCTION BrwKey( oBrw, key )
    ENDIF
 
    RETURN .T.
-

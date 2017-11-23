@@ -11,7 +11,7 @@ CREATE CLASS _Cells
    EXPORTED:
    VAR hGrid READONLY
 
-METHOD Init( hGrid )
+   METHOD Init( hGrid )
 
    OPERATOR "[]" ARG nIndex INLINE _Cell():New( ::hGrid, nIndex )
 
@@ -29,16 +29,11 @@ CREATE CLASS _Cell
    VAR hGrid      READONLY
    VAR nIndex
 
-METHOD Init( hGrid, nIndex )
-
-METHOD SetBColor( nClrIndex )
-
-METHOD SetFColor( nClrIndex )
-
-METHOD GetBColor()
-
-METHOD GetFColor()
-
+   METHOD Init( hGrid, nIndex )
+   METHOD SetBColor( nClrIndex )
+   METHOD SetFColor( nClrIndex )
+   METHOD GetBColor()
+   METHOD GetFColor()
    // and more
 
 ENDCLASS
@@ -75,4 +70,3 @@ METHOD _Cell:GetBColor()
 METHOD _Cell:GetFColor()
 
    RETURN zgm_getCellFColor( ::hGrid, ::nIndex )
-

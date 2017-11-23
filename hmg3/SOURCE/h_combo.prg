@@ -434,4 +434,3 @@ PROCEDURE _DataComboRefresh (i)
    (WorkArea)->(DBGoTo(BackRec))
 
    RETURN
-

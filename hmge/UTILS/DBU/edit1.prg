@@ -339,4 +339,3 @@ FUNCTION DBUeditrefreshdbf
    _DBUedit.statusbar.item(5) := iif(_DBUindexed,"Indexed","")
 
    RETURN NIL
-

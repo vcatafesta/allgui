@@ -55,4 +55,3 @@ PROCEDURE CloseTables()
    Ferase("Cidades1.ntx")
 
    RETURN
-

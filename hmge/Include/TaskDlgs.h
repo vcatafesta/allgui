@@ -1,17 +1,17 @@
 /*
  * MINIGUI - Harbour Win32 GUI library source code
- * 
+ *
  * Copyright 2016 P.Chornyj <myorg63@mail.ru>
  */
 
 #define TDC_CONFIG                  24
 
-#define TDC_HWND                    2  
+#define TDC_HWND                    2
 #define TDC_HINSTANCE               3
 #define TDC_TASKDIALOG_FLAGS        4
 #define TDC_COMMON_BUTTON_FLAGS     5
 #define TDC_WINDOWTITLE             6
-#define TDC_MAINICON                7  
+#define TDC_MAINICON                7
 #define TDC_MAININSTRUCTION         8
 #define TDC_CONTENT                 9
 #define TDC_BUTTON                  10
@@ -24,7 +24,7 @@
 #define TDC_EXPANDEDINFORMATION     17
 #define TDC_EXPANDEDCONTROLTEXT     18
 #define TDC_COLLAPSEDCONTROLTEXT    19
-#define TDC_FOOTERICON              20 
+#define TDC_FOOTERICON              20
 #define TDC_FOOTER                  21
 #define TDC_CALLBACK                22
 #define TDC_WIDTH                   24
@@ -126,7 +126,6 @@ typedef enum _TASKDIALOG_ICON_ELEMENTS
 #define TD_SHIELD_ICON       MAKEINTRESOURCEW( -4 )
 
 #endif // (NTDDI_VERSION >= NTDDI_VISTA)
-
 
 #if ( NTDDI_VERSION >= NTDDI_VISTA )
 enum _TASKDIALOG_COMMON_BUTTON_FLAGS

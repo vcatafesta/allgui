@@ -127,4 +127,3 @@ FUNCTION RandStr( nLen )
    NEXT
 
    RETURN cPass
-

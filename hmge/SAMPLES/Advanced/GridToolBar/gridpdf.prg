@@ -3715,4 +3715,3 @@ FUNCTION pdfinit_messages
    ENDCASE
 
    RETURN NIL
-

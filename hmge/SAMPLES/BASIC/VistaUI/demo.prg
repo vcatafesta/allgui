@@ -80,4 +80,3 @@ FUNCTION MainDoExit()
 FUNCTION IsVistaCompatible()
 
    RETURN IsWinNT() .AND. IsVistaOrLater()
-

@@ -111,4 +111,3 @@ STATIC PROCEDURE SetBKBrush( nBrushStyle )
    ERASE WINDOW Form_Main
 
    RETURN
-

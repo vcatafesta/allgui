@@ -123,4 +123,3 @@ FUNCTION EnableMainMenu( cFormName )
    NEXT i
 
    RETURN NIL
-

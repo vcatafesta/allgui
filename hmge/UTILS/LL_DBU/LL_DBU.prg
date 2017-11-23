@@ -750,4 +750,3 @@ FUNCTION HL_DBInfoLL( cTable, lMessage )
    aInfo[3][2][2] := fieldlist
 
    RETURN aInfo
-

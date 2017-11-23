@@ -72,28 +72,28 @@ CLASS ooTextFile
    // Methods always used by XBrowse
    *   METHOD Skipper
 
-METHOD GoTop
+   METHOD GoTop
 
    *   METHOD GoBottom
 
    // Methods used by XBrowse if you'll have a scrollbar
 
-METHOD RecNo              BLOCK { | Self | ::nRecNo }
+   METHOD RecNo              BLOCK { | Self | ::nRecNo }
 
-METHOD RecCount           BLOCK { | Self | ::nRecNo - IF( ::Eof, 1, 0 ) }
+   METHOD RecCount           BLOCK { | Self | ::nRecNo - IF( ::Eof, 1, 0 ) }
 
    *   METHOD GoTo
 
-METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
+   METHOD OrdKeyNo           BLOCK { | Self | ::nRecNo }
 
-METHOD OrdKeyCount        BLOCK { | Self | ::nRecNo - IF( ::Eof, 1, 0 ) }
+   METHOD OrdKeyCount        BLOCK { | Self | ::nRecNo - IF( ::Eof, 1, 0 ) }
 
    *   METHOD OrdKeyGoTo
 
    // Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
 
-METHOD Eof                BLOCK { | Self | ::lEof }
+   METHOD Eof                BLOCK { | Self | ::lEof }
 
    // Used by "own" (ooTextFile) class (not used by XBrowse itself)
    DATA nRecNo               INIT 1
@@ -105,36 +105,36 @@ METHOD Eof                BLOCK { | Self | ::lEof }
    DATA aFields              INIT {}
    DATA nTopOffset           INIT 0
 
-METHOD New
+   METHOD New
 
-METHOD ReadHeader
+   METHOD ReadHeader
 
-METHOD ReadRecord
+   METHOD ReadRecord
 
-METHOD ReadData
+   METHOD ReadData
 
-METHOD Text2Data
+   METHOD Text2Data
 
    // Implemented but not used for this sample (not used by XBrowse itself)
    MESSAGE Use               METHOD New
 
-METHOD Skip
+   METHOD Skip
 
-METHOD Bof                INLINE .F.
+   METHOD Bof                INLINE .F.
 
-METHOD Close
+   METHOD Close
 
-METHOD FieldGet( nPos )   BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aFields ) >= nPos, ::aFields[ nPos ], "" ) }
+   METHOD FieldGet( nPos )   BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aFields ) >= nPos, ::aFields[ nPos ], "" ) }
 
    *   METHOD FieldPut
 
-METHOD FieldPos
+   METHOD FieldPos
 
-METHOD FieldBlock
+   METHOD FieldBlock
 
-METHOD Field( nPos )      BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aStructure ) >= nPos, ::aStructure[ nPos ][ 1 ], "" ) }
+   METHOD Field( nPos )      BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aStructure ) >= nPos, ::aStructure[ nPos ][ 1 ], "" ) }
 
-METHOD FieldName( nPos )  BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aStructure ) >= nPos, ::aStructure[ nPos ][ 1 ], "" ) }
+   METHOD FieldName( nPos )  BLOCK { | Self, nPos | IF( HB_IsNumeric( nPos ) .AND. nPos >= 1 .AND. LEN( ::aStructure ) >= nPos, ::aStructure[ nPos ][ 1 ], "" ) }
 
    ERROR HANDLER FieldAssign
 
@@ -495,4 +495,3 @@ METHOD FieldAssign( xValue ) CLASS ooTextFile
    ENDIF
 
    RETURN uRet
-

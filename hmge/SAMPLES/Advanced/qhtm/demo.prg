@@ -88,4 +88,3 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
    ENDCASE
 
    RETURN (0)
-

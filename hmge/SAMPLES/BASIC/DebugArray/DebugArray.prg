@@ -116,4 +116,3 @@ FUNCTION ValueToText( uValue )
    RETURN "[" + cType + "]>>>" + cText + "<<<"
 
    *+ EOF: DebugArray.PRG
-

@@ -251,4 +251,3 @@ PROCEDURE ScanDir( cPath )
    END
 
    RETURN
-

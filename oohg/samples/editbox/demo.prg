@@ -64,4 +64,3 @@ PROCEDURE ShowRowCol
    Form_1.StatusBar.Item(1) := 'Row: ' + alltrim(Str(e+1)) + ' Col: ' + alltrim(Str(q))
 
    RETURN
-

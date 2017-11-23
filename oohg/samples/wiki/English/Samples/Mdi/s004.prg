@@ -210,4 +210,3 @@ PROCEDURE MyMessage( oWin )
    /*
    * EOF
    */
-

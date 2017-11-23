@@ -165,4 +165,3 @@ FUNCTION _DefineSlider ( ControlName, ParentForm, x, y, w, h ,LO, HI, value, ;
    _HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
    RETURN NIL
-

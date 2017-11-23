@@ -68,4 +68,3 @@ STATIC FUNCTION AjustarTamanho ()
    Form1.Month1.Height := Form1.Height - GetTitleHeight() - GetBorderHeight()*2
 
    RETURN NIL
-

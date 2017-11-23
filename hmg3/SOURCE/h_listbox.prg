@@ -222,4 +222,3 @@ FUNCTION _DefineListbox ( ControlName, ParentForm, x, y, w, h, rows, value, ;
    ENDIF
 
    RETURN NIL
-

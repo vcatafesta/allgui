@@ -4,44 +4,44 @@
  Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
  http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the Harbour Minigui library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  Harbour-Minigui library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2017, http://harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2017, http://harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+   "HWGUI"
+     Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -117,7 +117,6 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[3]
 => ;
 _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 
-
 #xtranslate CellNavigationColor (_SELECTEDCELL_FORECOLOR, <aColor>) => ( _HMG_GridSelectedCellForeColor := <aColor> )
 #xtranslate CellNavigationColor (_SELECTEDCELL_BACKCOLOR, <aColor>) => ( _HMG_GridSelectedCellBackColor := <aColor> )
 #xtranslate CellNavigationColor (_SELECTEDROW_FORECOLOR, <aColor>)  => ( _HMG_GridSelectedRowForeColor := <aColor> )
@@ -125,13 +124,11 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #xtranslate CellNavigationColor (_SELECTEDCELL_DISPLAYCOLOR, <l>) => //
 #xtranslate CellNavigationColor (_SELECTEDROW_DISPLAYCOLOR, <l>) => //
 
-
 #xcommand  SET TOOLTIPBACKCOLOR <aColor> =>;
    SendMessage( GetFormToolTipHandle(Application.FormName), TTM_SETTIPBKCOLOR, RGB(<aColor>\[1\], <aColor>\[2\], <aColor>\[3\]), 0 )
 
 #xcommand  SET TOOLTIPFORECOLOR <aColor> =>;
    SendMessage( GetFormToolTipHandle(Application.FormName), TTM_SETTIPTEXTCOLOR, RGB(<aColor>\[1\], <aColor>\[2\], <aColor>\[3\]), 0 )
-
 
 #define LWA_COLORKEY 0x01
 #define LWA_ALPHA    0x02
@@ -145,7 +142,6 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #xtranslate SET WINDOW <FormName> TRANSPARENT TO COLOR <aColor> =>;
    SetLayeredWindowAttributes( GetFormHandle( <"FormName"> ), RGB(<aColor>\[1\], <aColor>\[2\], <aColor>\[3\]), 0, LWA_COLORKEY )
 
-
 #define FLASHW_CAPTION 1
 #define FLASHW_TRAY    2
 #define FLASHW_ALL    (FLASHW_CAPTION + FLASHW_TRAY)
@@ -158,7 +154,6 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 
 #xtranslate FLASH WINDOW <FormName> [ ALL ] COUNT <nTimes> INTERVAL <nMilliseconds> =>;
    FlashWindowEx( GetFormHandle( <"FormName"> ), FLASHW_ALL, <nTimes>, <nMilliseconds> )
-
 
 // ANIMATE WINDOW MODE <nFlags>
 #define AW_HOR_POSITIVE 0x00000001
@@ -187,13 +182,11 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #xcommand ACTIVATE WINDOW DEBUGGER <name, ...> =>;
    _ActivateWindow ( \{<"name">\}, .T., .T. )
 
-
 #xcommand WAIT WINDOW <message> => WaitWindow( <message>, .F. )
 
 #xcommand WAIT WINDOW <message> NOWAIT => WaitWindow( <message>, .T. )
 
 #xcommand WAIT CLEAR => WaitWindow ()
-
 
 #xtranslate IsMainMenuDefined( <FormName> ) => ( Empty( GetMenu( GetFormHandle( <FormName> ) ) ) == .F. )
 
@@ -211,7 +204,6 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #xcommand DEFINE CONTROL CONTEXTMENU  <cControlName> [ OF <cParentName> ]     => _DefineControlContextMenu ( <"cControlName"> , <"cParentName"> )
 #xcommand DEFINE CONTROL CONTEXTMENU  <cControlName> [ PARENT <cParentName> ] => _DefineControlContextMenu ( <"cControlName"> , <"cParentName"> )
 
-
 #translate DISABLE [ WINDOW ]  EVENT OF <form> => StopWindowEventProcedure (<"form">, .T.)
 #translate ENABLE  [ WINDOW ]  EVENT OF <form> => StopWindowEventProcedure (<"form">, .F.)
 
@@ -224,7 +216,6 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #xtranslate EventCount () => Len (_HMG_aCustomEventProcedure)
 #xtranslate EventRemoveAll () => iif ( EventCount() > 0, _HMG_aCustomEventProcedure := {}, NIL )
 #xtranslate EventRemove ([<x>]) => iif ( EventCount() > 0, hb_ADel (_HMG_aCustomEventProcedure, EventCount(), .T.), NIL )
-
 
 #xtranslate GetFormNameByIndex ( <nFormIndex> ) => _HMG_aFormNames \[<nFormIndex>]
 #xtranslate GetFormHandleByIndex ( <nFormIndex> ) => _HMG_aFormHandles \[<nFormIndex>]
@@ -248,14 +239,13 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
 #translate _TIMELONG12H  => "hh:mm:ss tt"
 #translate _TIMESHORT12H => "hh:mm tt"
 
-
 #xcommand  DEFINE TOOLBAR  <name> ;
       [ OF <parent> ] ;
       BUTTONSIZE <buttonwidth> , <buttonheight> ;
       IMAGESIZE <imagewidth> , <imageheight> ;
       [ BUTTONWIDTH <buttonwidth> ] [ BUTTONHEIGHT <buttonheight> ] ;
       [ IMAGEWIDTH <imagewidth> ] [ IMAGEHEIGHT <imageheight> ] ;
-      [ <strictwidth : STRICTWIDTH> ] ;		
+      [ <strictwidth : STRICTWIDTH> ] ;
       [ FONT <f> ] ;
       [ SIZE <s> ] ;
       [ <bold : BOLD> ] ;
@@ -326,30 +316,30 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
       [ MULTILINE <multiline> ] ;
       [ TRANSPARENT <Trans> ] ;
    =>;
-   _BeginTab( <"name"> , <"parent"> , <row> , <col> , <w> , <h> , <value> , <f> , <s> , <tooltip> , <{change}> , <.buttons.> , <.flat.> , <.hottrack.> , <.vertical.>, .f., !<.tabstop.> ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.> , <.multiline.> , {,,}, ) 
+   _BeginTab( <"name"> , <"parent"> , <row> , <col> , <w> , <h> , <value> , <f> , <s> , <tooltip> , <{change}> , <.buttons.> , <.flat.> , <.hottrack.> , <.vertical.>, .f., !<.tabstop.> ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.> , <.multiline.> , {,,}, )
 
 #xcommand @ <row>,<col> BUTTON <name> ;
-	[ <dummy1: OF, PARENT> <parent> ] ;
-	CAPTION <caption> ;
-	PICTURE <bitmap> ;
-	[ <alignment:LEFT> ] ;
-	[ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
-	[ WIDTH <w> ] ;
-	[ HEIGHT <h> ] ;
-	[ FONT <font> ] ;
-	[ SIZE <size> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ TOOLTIP <tooltip> ] ;
-	[ <flat: FLAT> ] ;
-	[ ON GOTFOCUS <gotfocus> ] ;
-	[ ON LOSTFOCUS <lostfocus> ] ;
-	[ <notabstop: NOTABSTOP> ] ;
-	[ HELPID <helpid> ] 		;
-	[ <invisible: INVISIBLE> ] ;
-	[ <multiline: MULTILINE> ] ;
+   [ <dummy1: OF, PARENT> <parent> ] ;
+   CAPTION <caption> ;
+   PICTURE <bitmap> ;
+   [ <alignment:LEFT> ] ;
+   [ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
+   [ WIDTH <w> ] ;
+   [ HEIGHT <h> ] ;
+   [ FONT <font> ] ;
+   [ SIZE <size> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ TOOLTIP <tooltip> ] ;
+   [ <flat: FLAT> ] ;
+   [ ON GOTFOCUS <gotfocus> ] ;
+   [ ON LOSTFOCUS <lostfocus> ] ;
+   [ <notabstop: NOTABSTOP> ] ;
+   [ HELPID <helpid> ]       ;
+   [ <invisible: INVISIBLE> ] ;
+   [ <multiline: MULTILINE> ] ;
    =>;
    _DefineOwnerButton ( <"name">, <"parent">, <col>, <row>, <caption>, <{action}>, ;
                         <w>, <h>, <bitmap>, <tooltip>, <{gotfocus}>, <{lostfocus}>, ;
@@ -358,27 +348,27 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
                         .f., .f., .f., NIL, NIL, .f., .f., .f. )
 
 #xcommand @ <row>,<col> BUTTON <name> ;
-	[ <dummy1: OF, PARENT> <parent> ] ;
-	CAPTION <caption> ;
-	PICTURE <bitmap> ;
-	[ <alignment:RIGHT> ] ;
-	[ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
-	[ WIDTH <w> ] ;
-	[ HEIGHT <h> ] ;
-	[ FONT <font> ] ;
-	[ SIZE <size> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ TOOLTIP <tooltip> ] ;
-	[ <flat: FLAT> ] ;
-	[ ON GOTFOCUS <gotfocus> ] ;
-	[ ON LOSTFOCUS <lostfocus> ] ;
-	[ <notabstop: NOTABSTOP> ] ;
-	[ HELPID <helpid> ] 		;
-	[ <invisible: INVISIBLE> ] ;
-	[ <multiline: MULTILINE> ] ;
+   [ <dummy1: OF, PARENT> <parent> ] ;
+   CAPTION <caption> ;
+   PICTURE <bitmap> ;
+   [ <alignment:RIGHT> ] ;
+   [ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
+   [ WIDTH <w> ] ;
+   [ HEIGHT <h> ] ;
+   [ FONT <font> ] ;
+   [ SIZE <size> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ TOOLTIP <tooltip> ] ;
+   [ <flat: FLAT> ] ;
+   [ ON GOTFOCUS <gotfocus> ] ;
+   [ ON LOSTFOCUS <lostfocus> ] ;
+   [ <notabstop: NOTABSTOP> ] ;
+   [ HELPID <helpid> ]       ;
+   [ <invisible: INVISIBLE> ] ;
+   [ <multiline: MULTILINE> ] ;
    =>;
    _DefineOwnerButton ( <"name">, <"parent">, <col>, <row>, <caption>, <{action}>, ;
                         <w>, <h>, <bitmap>, <tooltip>, <{gotfocus}>, <{lostfocus}>, ;
@@ -387,27 +377,27 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
                         .f., <.alignment.>, .f., NIL, NIL, .f., .f., .f. )
 
 #xcommand @ <row>,<col> BUTTON <name> ;
-	[ <dummy1: OF, PARENT> <parent> ] ;
-	CAPTION <caption> ;
-	PICTURE <bitmap> ;
-	[ <alignment:BOTTOM> ] ;
-	[ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
-	[ WIDTH <w> ] ;
-	[ HEIGHT <h> ] ;
-	[ FONT <font> ] ;
-	[ SIZE <size> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ TOOLTIP <tooltip> ] ;
-	[ <flat: FLAT> ] ;
-	[ ON GOTFOCUS <gotfocus> ] ;
-	[ ON LOSTFOCUS <lostfocus> ] ;
-	[ <notabstop: NOTABSTOP> ] ;
-	[ HELPID <helpid> ] 		;
-	[ <invisible: INVISIBLE> ] ;
-	[ <multiline: MULTILINE> ] ;
+   [ <dummy1: OF, PARENT> <parent> ] ;
+   CAPTION <caption> ;
+   PICTURE <bitmap> ;
+   [ <alignment:BOTTOM> ] ;
+   [ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
+   [ WIDTH <w> ] ;
+   [ HEIGHT <h> ] ;
+   [ FONT <font> ] ;
+   [ SIZE <size> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ TOOLTIP <tooltip> ] ;
+   [ <flat: FLAT> ] ;
+   [ ON GOTFOCUS <gotfocus> ] ;
+   [ ON LOSTFOCUS <lostfocus> ] ;
+   [ <notabstop: NOTABSTOP> ] ;
+   [ HELPID <helpid> ]       ;
+   [ <invisible: INVISIBLE> ] ;
+   [ <multiline: MULTILINE> ] ;
    =>;
    _DefineOwnerButton ( <"name">, <"parent">, <col>, <row>, <caption>, <{action}>, ;
                         <w>, <h>, <bitmap>, <tooltip>, <{gotfocus}>, <{lostfocus}>, ;
@@ -416,27 +406,27 @@ _GetClientRect ( GetFormHandle ( <FormName> ) ) \[4]
                         <.alignment.>, .f., <.alignment.>, NIL, NIL, .f., .f., .f. )
 
 #xcommand @ <row>,<col> BUTTON <name> ;
-	[ <dummy1: OF, PARENT> <parent> ] ;
-	CAPTION <caption> ;
-	PICTURE <bitmap> ;
-	[ <alignment:TOP> ] ;
-	[ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
-	[ WIDTH <w> ] ;
-	[ HEIGHT <h> ] ;
-	[ FONT <font> ] ;
-	[ SIZE <size> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
-	[ TOOLTIP <tooltip> ] ;
-	[ <flat: FLAT> ] ;
-	[ ON GOTFOCUS <gotfocus> ] ;
-	[ ON LOSTFOCUS <lostfocus> ] ;
-	[ <notabstop: NOTABSTOP> ] ;
-	[ HELPID <helpid> ] 		;
-	[ <invisible: INVISIBLE> ] ;
-	[ <multiline: MULTILINE> ] ;
+   [ <dummy1: OF, PARENT> <parent> ] ;
+   CAPTION <caption> ;
+   PICTURE <bitmap> ;
+   [ <alignment:TOP> ] ;
+   [ <dummy2: ACTION,ON CLICK,ONCLICK> <action> ];
+   [ WIDTH <w> ] ;
+   [ HEIGHT <h> ] ;
+   [ FONT <font> ] ;
+   [ SIZE <size> ] ;
+   [ <bold : BOLD> ] ;
+   [ <italic : ITALIC> ] ;
+   [ <underline : UNDERLINE> ] ;
+   [ <strikeout : STRIKEOUT> ] ;
+   [ TOOLTIP <tooltip> ] ;
+   [ <flat: FLAT> ] ;
+   [ ON GOTFOCUS <gotfocus> ] ;
+   [ ON LOSTFOCUS <lostfocus> ] ;
+   [ <notabstop: NOTABSTOP> ] ;
+   [ HELPID <helpid> ]       ;
+   [ <invisible: INVISIBLE> ] ;
+   [ <multiline: MULTILINE> ] ;
    =>;
    _DefineOwnerButton ( <"name">, <"parent">, <col>, <row>, <caption>, <{action}>, ;
                         <w>, <h>, <bitmap>, <tooltip>, <{gotfocus}>, <{lostfocus}>, ;

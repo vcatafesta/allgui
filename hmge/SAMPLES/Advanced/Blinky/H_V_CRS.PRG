@@ -48,4 +48,3 @@ DECLARE DLL_TYPE_LONG GetCaretBlinkTime() IN User32.Dll
 */
 DECLARE DLL_TYPE_LONG SetCaretBlinkTime(DLL_TYPE_LONG wMSeconds) ;
    IN User32.dll
-

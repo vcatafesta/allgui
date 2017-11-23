@@ -62,21 +62,21 @@ CLASS TProgressMeter FROM TLabel
    DATA nWidth      INIT 100
    DATA nHeight     INIT 18
 
-METHOD Define
+   METHOD Define
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD ReCalc
+   METHOD ReCalc
 
-METHOD RangeMin            SETGET
+   METHOD RangeMin            SETGET
 
-METHOD RangeMax            SETGET
+   METHOD RangeMax            SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD SetPercent          SETGET
+   METHOD SetPercent          SETGET
 
-METHOD Align               SETGET
+   METHOD Align               SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -422,4 +422,3 @@ HB_FUNC_STATIC( TPROGRESSMETER_ALIGN )
 }
 
 #pragma ENDDUMP
-

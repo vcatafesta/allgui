@@ -194,4 +194,3 @@ HB_FUNC ( I2HEX )
 }
 
 #pragma ENDDUMP
-

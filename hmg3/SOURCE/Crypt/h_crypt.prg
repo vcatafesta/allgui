@@ -686,4 +686,3 @@ FUNCTION DB_CODE(cData, cKey, aFields, cPass, cFor, cWhile)
    go nRecno
 
    RETURN NIL
-

@@ -172,4 +172,3 @@ FUNCTION Capture()
    /*
    * EOF
    */
-

@@ -955,4 +955,3 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                                       RETU cSrcTNam  // GFUSrcTNam()
 
                                                       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

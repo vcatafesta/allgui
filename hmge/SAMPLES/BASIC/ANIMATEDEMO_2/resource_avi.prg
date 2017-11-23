@@ -62,4 +62,3 @@ FUNCTION GetAviResSize( cResName )
    ENDIF
 
    RETURN { aAviSize[1], aAviSize[2] }
-

@@ -49,136 +49,71 @@ CREATE CLASS tPdf
    #endif
 
    #ifdef __HARBOUR__
-
-METHOD Init( cFile, nLen, lOptimize ) CONSTRUCTOR
-
+   METHOD Init( cFile, nLen, lOptimize ) CONSTRUCTOR
    #else
-
-METHOD Init
-
+   METHOD Init
    #endif
-
-METHOD AtSay
-
-METHOD Normal
-
-METHOD Bold
-
-METHOD Italic
-
-METHOD UnderLine
-
-METHOD BoldItalic
-
-METHOD BookAdd
-
-METHOD BookClose
-
-METHOD BookOpen
-
-METHOD Box
-
-METHOD Box1
-
-METHOD Center
-
-METHOD Close
-
-METHOD Image
-
-METHOD Length
-
-METHOD NewLine
-
-METHOD NewPage
-
-METHOD PageSize
-
-METHOD PageOrient
-
-METHOD PageNumber
-
-METHOD Reverse
-
-METHOD RJust
-
-METHOD SetFont
-
-METHOD SetLPI
-
-METHOD StringB
-
-METHOD TextCount
-
-METHOD Text
-
-METHOD OpenHeader
-
-METHOD EditOnHeader
-
-METHOD EditOffHeader
-
-METHOD CloseHeader
-
-METHOD DeleteHeader
-
-METHOD EnableHeader
-
-METHOD DisableHeader
-
-METHOD SaveHeader
-
-METHOD Header
-
-METHOD DrawHeader
-
-METHOD Margins
-
-METHOD CreateHeader
-
-METHOD ImageInfo
-
-METHOD TIFFInfo
-
-METHOD JPEGInfo
-
-METHOD FilePrint
-
-METHOD BookCount
-
-METHOD BookFirst
-
-METHOD BookLast
-
-METHOD BookNext
-
-METHOD BookParent
-
-METHOD BookPrev
-
-METHOD CheckLine
-
-METHOD ClosePage
-
-METHOD GetFontInfo
-
-METHOD M2R
-
-METHOD M2X
-
-METHOD M2Y
-
-METHOD R2D
-
-METHOD R2M
-
-METHOD X2M
-
-METHOD TextPrint
-
-METHOD TextNextPara
-
-METHOD Execute
+   METHOD AtSay
+   METHOD Normal
+   METHOD Bold
+   METHOD Italic
+   METHOD UnderLine
+   METHOD BoldItalic
+   METHOD BookAdd
+   METHOD BookClose
+   METHOD BookOpen
+   METHOD Box
+   METHOD Box1
+   METHOD Center
+   METHOD Close
+   METHOD Image
+   METHOD Length
+   METHOD NewLine
+   METHOD NewPage
+   METHOD PageSize
+   METHOD PageOrient
+   METHOD PageNumber
+   METHOD Reverse
+   METHOD RJust
+   METHOD SetFont
+   METHOD SetLPI
+   METHOD StringB
+   METHOD TextCount
+   METHOD Text
+   METHOD OpenHeader
+   METHOD EditOnHeader
+   METHOD EditOffHeader
+   METHOD CloseHeader
+   METHOD DeleteHeader
+   METHOD EnableHeader
+   METHOD DisableHeader
+   METHOD SaveHeader
+   METHOD Header
+   METHOD DrawHeader
+   METHOD Margins
+   METHOD CreateHeader
+   METHOD ImageInfo
+   METHOD TIFFInfo
+   METHOD JPEGInfo
+   METHOD FilePrint
+   METHOD BookCount
+   METHOD BookFirst
+   METHOD BookLast
+   METHOD BookNext
+   METHOD BookParent
+   METHOD BookPrev
+   METHOD CheckLine
+   METHOD ClosePage
+   METHOD GetFontInfo
+   METHOD M2R
+   METHOD M2X
+   METHOD M2Y
+   METHOD R2D
+   METHOD R2M
+   METHOD X2M
+   METHOD TextPrint
+   METHOD TextNextPara
+   METHOD Execute
 
 ENDCLASS
 
@@ -3015,4 +2950,3 @@ STATIC FUNCTION RunExternal( cCmd, cVerb, cFile )
    RETURN lRet
 
    //-------------------------\\
-

@@ -290,4 +290,3 @@ FUNCTION DBUbrowse2edit
    DBUedit1()
 
    RETURN NIL
-

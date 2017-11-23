@@ -123,4 +123,3 @@ FUNCTION Graphic8( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
    oRMChart:AddBarSeries( nIdChart, 1, aData, 5, RMC_BARSINGLE, RMC_BAR_FLAT_GRADIENT2, .F., COLOR_CORN_FLOWER_BLUE, .F., 1, RMC_VLABEL_NONE, 1, RMC_HATCHBRUSH_OFF )
 
    RETURN NIL
-

@@ -61,4 +61,3 @@ FUNCTION CheckValids()
    ENDCASE
 
    RETURN retval
-

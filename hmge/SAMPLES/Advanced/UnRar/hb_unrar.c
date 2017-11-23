@@ -3,7 +3,7 @@
  * UnRar library low level (client api) interface code
  *
  * Copyright 2007 P.Chornyj <myorg63@mail.ru>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -95,7 +95,7 @@ HB_FUNC( HB_RARGETDLLVERSION )
 }
 
 /*
-   Archive comments operations	
+   Archive comments operations
 */
 
 HB_FUNC( HB_RARSETCMTBUFSIZE )
@@ -172,7 +172,7 @@ HB_FUNC( HB_RARGETCOMMENT )
 }
 
 /*
-   Get archive info 	
+   Get archive info
 */
 
 HB_FUNC( HB_RARGETARCHIVEINFO )
@@ -208,7 +208,7 @@ HB_FUNC( HB_RARGETARCHIVEINFO )
 }
 
 /*
-   Get Number Of Files in Archive 	
+   Get Number Of Files in Archive
 */
 
 HB_FUNC( HB_RARGETFILESCOUNT )

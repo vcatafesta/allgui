@@ -12,62 +12,59 @@
       2012-2016 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://www.harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.belgorod.su>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://www.harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2008, http://www.harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2008, http://www.harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
+   "HWGUI"
+     Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
 
-
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
 #include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 
-
 //#define _WIN32_IE      0x0500
 //#define HB_OS_WIN_32_USED
 //#define _WIN32_WINNT   0x0400
-
 
 #include <shlobj.h>
 #include <windows.h>
@@ -79,51 +76,49 @@
 //#include "hbapiitm.h"
 //#include "winreg.h"
 
-
 HIMAGELIST HMG_ImageListLoadFirst (TCHAR *FileName, int cGrow, int Transparent, int *nWidth, int *nHeight);
 void HMG_ImageListAdd (HIMAGELIST hImageList, TCHAR *FileName, int Transparent);
 
-
 HB_FUNC( INITCOMBOBOX )
 {
-	HWND hwnd;
-	HWND hbutton;
-	int Style;
+   HWND hwnd;
+   HWND hbutton;
+   int Style;
 
-	hwnd = (HWND) HMG_parnl (1);
+   hwnd = (HWND) HMG_parnl (1);
 
-	Style = WS_CHILD | WS_VSCROLL ;
+   Style = WS_CHILD | WS_VSCROLL ;
 
-	if ( ! hb_parl(9) )
-	{
-		Style = Style | WS_VISIBLE ;
-	}
+   if ( ! hb_parl(9) )
+   {
+      Style = Style | WS_VISIBLE ;
+   }
 
-	if ( ! hb_parl(10) )
-	{
-		Style = Style | WS_TABSTOP ;
-	}
+   if ( ! hb_parl(10) )
+   {
+      Style = Style | WS_TABSTOP ;
+   }
 
-	if ( hb_parl(11) )
-	{
-		Style = Style | CBS_SORT ;
-	}
+   if ( hb_parl(11) )
+   {
+      Style = Style | CBS_SORT ;
+   }
 
-	if ( !hb_parl(12) )
-	{
-		Style = Style | CBS_DROPDOWNLIST ;
-	}
-	else
-	{
-		Style = Style | CBS_DROPDOWN ;
-	}
+   if ( !hb_parl(12) )
+   {
+      Style = Style | CBS_DROPDOWNLIST ;
+   }
+   else
+   {
+      Style = Style | CBS_DROPDOWN ;
+   }
 
-	if ( hb_parl(13) )
-	{
-		Style = Style | CBS_NOINTEGRALHEIGHT ;
-	}
+   if ( hb_parl(13) )
+   {
+      Style = Style | CBS_NOINTEGRALHEIGHT ;
+   }
 
-	hbutton = CreateWindowEx( 0L , WC_COMBOBOX /*_TEXT("ComboBox")*/ ,
+   hbutton = CreateWindowEx( 0L , WC_COMBOBOX /*_TEXT("ComboBox")*/ ,
                            _TEXT("") ,
                            Style ,
                            hb_parni(3) ,
@@ -135,9 +130,9 @@ HB_FUNC( INITCOMBOBOX )
                            GetModuleHandle(NULL) ,
                            NULL ) ;
 
-	SendMessage( (HWND) hbutton ,(UINT) CB_SETDROPPEDWIDTH, (WPARAM) hb_parni(14), 0);
+   SendMessage( (HWND) hbutton ,(UINT) CB_SETDROPPEDWIDTH, (WPARAM) hb_parni(14), 0);
 
-	HMG_retnl ((LONG_PTR) hbutton);
+   HMG_retnl ((LONG_PTR) hbutton);
 }
 
 HB_FUNC ( COMBOADDSTRING )
@@ -184,7 +179,6 @@ HB_FUNC ( COMBOBOXGETITEMCOUNT )
    HMG_retnl ((LONG_PTR) SendMessage( (HWND) HMG_parnl (1), CB_GETCOUNT , 0, 0 ) ) ;
 }
 
-
 HB_FUNC( INITIMAGECOMBO )
 {
    // Parameter Description
@@ -227,14 +221,13 @@ HB_FUNC( INITIMAGECOMBO )
    if ( hb_parl(10) )
       Style = Style | CBS_NOINTEGRALHEIGHT ;
 
-
-   hCombo = CreateWindowEx (0, WC_COMBOBOXEX /*_TEXT("ComboBoxEx32")*/, 
+   hCombo = CreateWindowEx (0, WC_COMBOBOXEX /*_TEXT("ComboBoxEx32")*/,
                            NULL,
                            Style,
-                           hb_parni(3), 
-                           hb_parni(2), 
-                           hb_parni(4), 
-                           hb_parni(5), 
+                           hb_parni(3),
+                           hb_parni(2),
+                           hb_parni(4),
+                           hb_parni(5),
                            (HWND) HMG_parnl (1),
                            NULL,
                            GetModuleHandle(NULL),
@@ -258,16 +251,15 @@ HB_FUNC( INITIMAGECOMBO )
          else
             HMG_ImageListAdd (hImageList, FileName, Transparent);
       }
-      
+
       if ( hImageList != NULL )
          SendMessage (hCombo, CBEM_SETIMAGELIST, 0, (LPARAM) hImageList);
    }
 
    hb_reta (2) ;
    HMG_storvnl ((LONG_PTR) hCombo,     -1, 1);
-   HMG_storvnl ((LONG_PTR) hImageList, -1, 2); 
+   HMG_storvnl ((LONG_PTR) hImageList, -1, 2);
 }
-
 
 HB_FUNC( IMAGECOMBOADDITEM )
 {
@@ -282,7 +274,6 @@ HB_FUNC( IMAGECOMBOADDITEM )
 
    SendMessage ((HWND) HMG_parnl (1), CBEM_INSERTITEM, 0, (LPARAM) &cbei);
 }
-
 
 HB_FUNC( IMAGECOMBOGETITEM )
 {
@@ -299,13 +290,10 @@ HB_FUNC( IMAGECOMBOGETITEM )
 
    hb_reta (2);
    hb_storvni (cbei.iImage,  -1, 1);
-   HMG_storvc (cbei.pszText, -1, 2); 
+   HMG_storvc (cbei.pszText, -1, 2);
 }
-
 
 HB_FUNC( GETDROPPEDSTATE )
 {
    hb_retni (SendMessage ((HWND) HMG_parnl(1), CB_GETDROPPEDSTATE, 0, 0));
 }
-
-

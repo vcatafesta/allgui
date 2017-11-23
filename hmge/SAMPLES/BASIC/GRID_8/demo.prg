@@ -105,4 +105,3 @@ FUNCTION WhenTest
 FUNCTION AutoConvert( xValue )
 
    RETURN HB_ValToStr( xValue )
-

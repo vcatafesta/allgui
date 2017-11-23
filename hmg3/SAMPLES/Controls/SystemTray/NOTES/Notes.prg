@@ -542,4 +542,3 @@ PROCEDURE SysWait(nWait)
    ENDDO
 
    RETURN
-

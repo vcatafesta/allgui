@@ -106,4 +106,3 @@ PROCEDURE Proc_Image( cControlName, cText, aColor )
    /*
    * EOF
    */
-

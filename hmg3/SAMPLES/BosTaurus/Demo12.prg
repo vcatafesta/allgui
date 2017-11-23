@@ -86,4 +86,3 @@ PROCEDURE CHARACTER_VERTICAL (nRow, nCol, nInc, cText)
    NEXT
 
    RETURN
-

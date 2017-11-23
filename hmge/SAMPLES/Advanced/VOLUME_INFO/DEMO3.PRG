@@ -63,4 +63,3 @@ FUNCTION GetVolumeInfo(cDrive)
    ENDIF
 
    RETURN aInfo
-

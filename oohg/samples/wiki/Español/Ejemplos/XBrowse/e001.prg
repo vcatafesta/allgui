@@ -218,4 +218,3 @@ FUNCTION AntesDeAutoAjuste( nCol )
    /*
    * EOF
    */
-

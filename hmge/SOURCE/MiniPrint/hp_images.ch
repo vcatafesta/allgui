@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------
- MINIPRINT - HARBOUR MINIGUI PRINT LIBRARY 
+ MINIPRINT - HARBOUR MINIGUI PRINT LIBRARY
 
  Copyright 2004-2007 Roberto Lopez <harbourminigui@gmail.com>
  http://harbourminigui.googlepages.com/

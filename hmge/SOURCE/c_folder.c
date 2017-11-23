@@ -84,7 +84,6 @@ struct _FPI;
 typedef struct _FPI FAR * HFLDPAGEINFO;
 struct tag_FldPageInfo;
 
-
 typedef struct tag_FldPageInfo
 {
    HWND hwndPage;
@@ -175,7 +174,6 @@ static void       FLD_CleanUp( HWND hWndDlg );
 static void       FLD_Help( HWND hwndDlg );
 static void       FLD_AddBitmap( HWND hWndFolder );
 static BOOL       FLD_isAppThemed( void );
-
 
 static BOOL FLD_isAppThemed( void )
 {

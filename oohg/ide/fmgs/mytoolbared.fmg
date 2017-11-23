@@ -1,28 +1,28 @@
 /*
- * $Id: mytoolbared.fmg,v 1.12 2017/08/25 19:03:22 fyurisich Exp $
- */
+* $Id: mytoolbared.fmg,v 1.12 2017/08/25 19:03:22 fyurisich Exp $
+*/
 
 * ooHG IDE Plus form generated code
 * (c) 2003-2017 Ciro Vargas Clemow <cvc@oohg.org>
 
 DEFINE WINDOW TEMPLATE ;
-   OBJ ::FormEdit ;
-   AT 108, 99 ;
-   WIDTH 788 ;
-   HEIGHT 519 ;
-   TITLE 'ooHG IDE+ Toolbar editor' ;
-   MODAL ;
-   ON RELEASE ::FormEdit := NIL ;
-   BACKCOLOR ::oEditor:myIde:aSystemColor ;
-   FONT 'Arial' ;
-   SIZE 10 ;
-   ON INIT ::OnEditInit()
+      OBJ ::FormEdit ;
+      AT 108, 99 ;
+      WIDTH 788 ;
+      HEIGHT 519 ;
+      TITLE 'ooHG IDE+ Toolbar editor' ;
+      MODAL ;
+      ON RELEASE ::FormEdit := NIL ;
+      BACKCOLOR ::oEditor:myIde:aSystemColor ;
+      FONT 'Arial' ;
+      SIZE 10 ;
+      ON INIT ::OnEditInit()
 
    @ 10, 10 FRAME frm_Btns ;
       WIDTH 530 ;
       HEIGHT 260 ;
       CAPTION 'Buttons' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 30, 15 GRID grd_Buttons ;
       WIDTH 520 ;
@@ -68,7 +68,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 530 ;
       HEIGHT 195 ;
       CAPTION 'Toolbar Properties' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 300, 20 CHECKBOX chk_Flat ;
       WIDTH 80 ;
@@ -130,7 +130,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 140 ;
       HEIGHT 80 ;
       CAPTION 'Button' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 320, 400 LABEL lbl_Height ;
       WIDTH 60 ;
@@ -160,7 +160,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 120 ;
       HEIGHT 18 ;
       VALUE 'Toolbar Name' ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 390, 20 TEXTBOX txt_Name ;
       WIDTH 120 ;
@@ -172,7 +172,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 120 ;
       HEIGHT 18 ;
       VALUE 'Tooltip' ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 390, 150 TEXTBOX txt_ToolTip ;
       WIDTH 120 ;
@@ -185,7 +185,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Obj' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 390, 280 TEXTBOX txt_Ojb ;
       WIDTH 120 ;
@@ -212,7 +212,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Caption' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 440, 20 TEXTBOX txt_Caption ;
       WIDTH 120 ;
@@ -225,7 +225,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Action' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 440, 150 TEXTBOX txt_Action ;
       WIDTH 120 ;
@@ -238,7 +238,7 @@ DEFINE WINDOW TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'Subclass' ;
       TRANSPARENT ;
-      CENTERALIGN 
+      CENTERALIGN
 
    @ 440, 280 TEXTBOX txt_Subclass ;
       WIDTH 120 ;
@@ -256,7 +256,7 @@ DEFINE WINDOW TEMPLATE ;
       WIDTH 210 ;
       HEIGHT 420 ;
       CAPTION 'Selected Item' ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 40, 560 LABEL lbl_ItName ;
       WIDTH 45 ;
@@ -388,5 +388,4 @@ DEFINE WINDOW TEMPLATE ;
       CAPTION 'Discard' ;
       ACTION ::Discard()
 
-END WINDOW 
-
+END WINDOW

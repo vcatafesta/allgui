@@ -2588,4 +2588,3 @@ STATIC FUNCTION grava_borda()
    form_bordas.browse_bordas.refresh
 
    return(nil)
-

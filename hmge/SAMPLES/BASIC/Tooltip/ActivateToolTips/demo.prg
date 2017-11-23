@@ -137,4 +137,3 @@ STATIC PROCEDURE ToolTipOff()
    NEXT
 
    RETURN
-

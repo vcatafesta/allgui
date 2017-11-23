@@ -48,4 +48,3 @@ FUNCTION Main()
    oWinMain:Activate()
 
    RETURN(NIL)
-

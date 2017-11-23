@@ -58,4 +58,3 @@ PROCEDURE Test2( cTitle )
    Win_1.Title := cTitle
 
    RETURN
-

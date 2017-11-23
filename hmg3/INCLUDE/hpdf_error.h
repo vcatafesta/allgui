@@ -160,7 +160,6 @@ typedef struct  _HPDF_Error_Rec {
     void                    *user_data;
 } HPDF_Error_Rec;
 
-
 /*  HPDF_Error_init
  *
  *  if error_fn is NULL, the default-handlers are set as error-handler.
@@ -171,24 +170,19 @@ void
 HPDF_Error_Init  (HPDF_Error    error,
                   void         *user_data);
 
-
 void
 HPDF_Error_Reset  (HPDF_Error  error);
-
 
 HPDF_STATUS
 HPDF_Error_GetCode  (HPDF_Error  error);
 
-
 HPDF_STATUS
 HPDF_Error_GetDetailCode  (HPDF_Error  error);
-
 
 HPDF_STATUS
 HPDF_SetError  (HPDF_Error   error,
                 HPDF_STATUS  error_no,
                 HPDF_STATUS  detail_no);
-
 
 HPDF_STATUS
 HPDF_RaiseError  (HPDF_Error   error,
@@ -200,4 +194,3 @@ HPDF_RaiseError  (HPDF_Error   error,
 #endif /* __cplusplus */
 
 #endif /* _HPDF_ERROR_H */
-

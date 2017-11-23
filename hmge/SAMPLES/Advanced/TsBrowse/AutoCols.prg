@@ -52,4 +52,3 @@ FUNCTION TestLbx()
    ACTIVATE WINDOW Form_15
 
    RETURN NIL
-

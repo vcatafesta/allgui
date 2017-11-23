@@ -74,7 +74,6 @@ typedef struct
    HBITMAP himagemask2;
 } INSCHK, * PINSCHK;
 
-
 HBITMAP CreateBitmapMask( HBITMAP hbmColour, COLORREF crTransparent )
 {
    HDC     hdcMem, hdcMem2;
@@ -140,7 +139,6 @@ BOOL InsertCheck( HWND hWnd, HBITMAP himage, HBITMAP himage2, int BtnWidth, BOOL
       pbtn->himagemask2 = CreateBitmapMask( himage2, RGB( 0, 0, 0 ) );
    else
       pbtn->himagemask2 = NULL;
-
 
    // associate our button state structure with the window
 
@@ -303,7 +301,6 @@ HB_FUNC( SETCHKLABEL )
    ShowWindow( hWnd, SW_HIDE );
    InvalidateRect( hWnd, &rect, TRUE );
 
-
    GetCheck( pbtn, &rect );
    DrawCheck( hWnd, pbtn, &rect );
    ShowWindow( hWnd, SW_SHOW );
@@ -317,7 +314,6 @@ HB_FUNC( GETCHKLABEL )
 
    hb_retl( ( BOOL ) pbtn->lCheck  );
 }
-
 
 LRESULT APIENTRY ChkLabelFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
 {

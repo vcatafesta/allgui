@@ -200,7 +200,6 @@ PROC T_GotoReco()                         // Table T_GotoReco
                   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                   PROC TC_Seek( cSeekExp, lSoft )           // Table Command : Seek
-
                      IF "(" $ cSeekExp
                         DBSEEK( &cSeekExp, lSoft )
                      ELSE
@@ -211,4 +210,3 @@ PROC T_GotoReco()                         // Table T_GotoReco
                      RETU // TC_Seek()
 
                      *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

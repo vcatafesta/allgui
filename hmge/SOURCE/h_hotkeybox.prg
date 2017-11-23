@@ -167,4 +167,3 @@ FUNCTION _GetHotKeyName( cControlName, cFormName )
    LOCAL cKeyName := C_GETHOTKEYNAME( GetControlHandle( cControlName, cFormName ) )
 
    RETURN SubStr( cKeyName, 1, At( Chr( 0 ), cKeyName ) - 1 )
-

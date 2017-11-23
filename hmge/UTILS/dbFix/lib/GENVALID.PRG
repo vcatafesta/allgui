@@ -565,4 +565,3 @@ FUNCTION GoodFile(cFile)
    ENDIF
 
    Return(lOk)
-

@@ -89,4 +89,3 @@ FUNCTION OpenSecond( oCtrl )
    /*
    * EOF
    */
-

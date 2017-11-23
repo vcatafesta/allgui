@@ -1233,4 +1233,3 @@ STATIC FUNCTION EdRec( oBrw, n, nFile )
    SET( _SET_EXIT, lReadExit )
 
    RETURN .T.
-

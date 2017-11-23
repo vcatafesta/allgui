@@ -153,4 +153,3 @@ STATIC PROCEDURE ShowVirtKey( aAccel )
    MsgInfo( "KEYSTROKE:" + cMsg + CRLF + "IDM_:" + hb_NtoS( aAccel[3]), "Simulating a keystroke" )
 
    RETURN
-

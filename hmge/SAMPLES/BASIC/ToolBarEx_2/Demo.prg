@@ -144,4 +144,3 @@ FUNCTION CustomToolbar( cToolbar )
    CustomizeToolbar( _HMG_aControlHandles[ GetControlIndex( cToolbar, 'Form_1' ) ] )
 
    RETURN NIL
-

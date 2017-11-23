@@ -414,4 +414,3 @@ FUNCTION SubStrng2( ;             // Sub String defined two position
    cRVal := SubStr( cString,  nBegPos, nEndPos - nBegPos + 1 )
 
    RETURN cRVal // SubStrng2()
-

@@ -46,4 +46,3 @@ HB_FUNC ( GETDECIMALSEPARATOR )
    /*
    * EOF
    */
-

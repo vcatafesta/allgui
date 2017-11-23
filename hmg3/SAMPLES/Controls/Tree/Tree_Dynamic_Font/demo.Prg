@@ -182,4 +182,3 @@ PROCEDURE SET_DYNAMIC (option)
    Form_1.Tree_1.SetFocus
 
    RETURN
-

@@ -92,121 +92,121 @@ CLASS TXBrowse FROM TGrid
    DATA VScroll                   INIT Nil
    DATA VScrollCopy               INIT Nil
 
-METHOD AddColumn
+   METHOD AddColumn
 
-METHOD AddItem                 BLOCK { || Nil }
+   METHOD AddItem                 BLOCK { || Nil }
 
-METHOD AdjustRightScroll
+   METHOD AdjustRightScroll
 
-METHOD AppendItem
+   METHOD AppendItem
 
-METHOD ColumnAutoFit
+   METHOD ColumnAutoFit
 
-METHOD ColumnAutoFitH
+   METHOD ColumnAutoFitH
 
-METHOD ColumnBlock
+   METHOD ColumnBlock
 
-METHOD ColumnsAutoFit
+   METHOD ColumnsAutoFit
 
-METHOD ColumnsAutoFitH
+   METHOD ColumnsAutoFitH
 
-METHOD ColumnWidth
+   METHOD ColumnWidth
 
-METHOD CurrentRow              SETGET
+   METHOD CurrentRow              SETGET
 
-METHOD DbSkip
+   METHOD DbSkip
 
-METHOD Define
+   METHOD Define
 
-METHOD Define3
+   METHOD Define3
 
-METHOD Define4
+   METHOD Define4
 
-METHOD Delete
+   METHOD Delete
 
-METHOD DeleteAllItems          BLOCK { | Self | ::nRowPos := 0, ::Super:DeleteAllItems() }
+   METHOD DeleteAllItems          BLOCK { | Self | ::nRowPos := 0, ::Super:DeleteAllItems() }
 
-METHOD DeleteColumn
+   METHOD DeleteColumn
 
-METHOD DoChange                BLOCK { | Self | ::DoEvent( ::OnChange, "CHANGE" ) }
+   METHOD DoChange                BLOCK { | Self | ::DoEvent( ::OnChange, "CHANGE" ) }
 
-METHOD Down
+   METHOD Down
 
-METHOD EditAllCells
+   METHOD EditAllCells
 
-METHOD EditCell
+   METHOD EditCell
 
-METHOD EditGrid
+   METHOD EditGrid
 
-METHOD EditItem
+   METHOD EditItem
 
-METHOD EditItem_B
+   METHOD EditItem_B
 
-METHOD Enabled                 SETGET
+   METHOD Enabled                 SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD FixBlocks               SETGET
+   METHOD FixBlocks               SETGET
 
-METHOD FixControls             SETGET
+   METHOD FixControls             SETGET
 
-METHOD GetCellType
+   METHOD GetCellType
 
-METHOD GoBottom
+   METHOD GoBottom
 
-METHOD GoTop
+   METHOD GoTop
 
-METHOD HelpId                  SETGET
+   METHOD HelpId                  SETGET
 
-METHOD InsertItem              BLOCK { || Nil }
+   METHOD InsertItem              BLOCK { || Nil }
 
-METHOD Left                    BLOCK { || Nil }
+   METHOD Left                    BLOCK { || Nil }
 
-METHOD MoveTo
+   METHOD MoveTo
 
-METHOD PageDown
+   METHOD PageDown
 
-METHOD PageUp
+   METHOD PageUp
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD RefreshRow
+   METHOD RefreshRow
 
-METHOD Right                   BLOCK { || Nil }
+   METHOD Right                   BLOCK { || Nil }
 
-METHOD SetColumn
+   METHOD SetColumn
 
-METHOD SetControlValue         SETGET
+   METHOD SetControlValue         SETGET
 
-METHOD SetScrollPos
+   METHOD SetScrollPos
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD SortColumn              BLOCK { || Nil }
+   METHOD SortColumn              BLOCK { || Nil }
 
-METHOD SortItems               BLOCK { || Nil }
+   METHOD SortItems               BLOCK { || Nil }
 
-METHOD ToExcel
+   METHOD ToExcel
 
-METHOD ToolTip                 SETGET
+   METHOD ToolTip                 SETGET
 
-METHOD ToOpenOffice
+   METHOD ToOpenOffice
 
-METHOD TopBottom
+   METHOD TopBottom
 
-METHOD Up
+   METHOD Up
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
-METHOD Visible                 SETGET
+   METHOD Visible                 SETGET
 
-METHOD VScrollVisible          SETGET
+   METHOD VScrollVisible          SETGET
 
-METHOD WorkArea                SETGET
+   METHOD WorkArea                SETGET
 
    /*
    Available methods from TGrid:
@@ -2722,75 +2722,75 @@ CLASS ooHGRecord
 
    DATA cAlias__
 
-METHOD New
+   METHOD New
 
-METHOD Use
+   METHOD Use
 
-METHOD Skipper
+   METHOD Skipper
 
-METHOD OrdScope
+   METHOD OrdScope
 
-METHOD Filter
+   METHOD Filter
 
-METHOD IsTableEmpty
+   METHOD IsTableEmpty
 
-METHOD Field       BLOCK { | Self, nPos |                   ( ::cAlias__ )->( Field( nPos ) ) }
+   METHOD Field       BLOCK { | Self, nPos |                   ( ::cAlias__ )->( Field( nPos ) ) }
 
-METHOD FieldBlock  BLOCK { | Self, cField |                 ( ::cAlias__ )->( FieldBlock( cField ) ) }
+   METHOD FieldBlock  BLOCK { | Self, cField |                 ( ::cAlias__ )->( FieldBlock( cField ) ) }
 
-METHOD FieldGet    BLOCK { | Self, nPos |                   ( ::cAlias__ )->( FieldGet( nPos ) ) }
+   METHOD FieldGet    BLOCK { | Self, nPos |                   ( ::cAlias__ )->( FieldGet( nPos ) ) }
 
-METHOD FieldName   BLOCK { | Self, nPos |                   ( ::cAlias__ )->( FieldName( nPos ) ) }
+   METHOD FieldName   BLOCK { | Self, nPos |                   ( ::cAlias__ )->( FieldName( nPos ) ) }
 
-METHOD FieldPos    BLOCK { | Self, cField |                 ( ::cAlias__ )->( FieldPos( cField ) ) }
+   METHOD FieldPos    BLOCK { | Self, cField |                 ( ::cAlias__ )->( FieldPos( cField ) ) }
 
-METHOD FieldPut    BLOCK { | Self, nPos, uValue |           ( ::cAlias__ )->( FieldPut( nPos, uValue ) ) }
+   METHOD FieldPut    BLOCK { | Self, nPos, uValue |           ( ::cAlias__ )->( FieldPut( nPos, uValue ) ) }
 
-METHOD Locate      BLOCK { | Self, bFor, bWhile, nNext, nRec, lRest | ( ::cAlias__ )->( __dbLocate( bFor, bWhile, nNext, nRec, lRest ) ) }
+   METHOD Locate      BLOCK { | Self, bFor, bWhile, nNext, nRec, lRest | ( ::cAlias__ )->( __dbLocate( bFor, bWhile, nNext, nRec, lRest ) ) }
 
-METHOD Seek        BLOCK { | Self, uKey, lSoftSeek, lLast | ( ::cAlias__ )->( DbSeek( uKey, lSoftSeek, lLast ) ) }
+   METHOD Seek        BLOCK { | Self, uKey, lSoftSeek, lLast | ( ::cAlias__ )->( DbSeek( uKey, lSoftSeek, lLast ) ) }
 
-METHOD Skip        BLOCK { | Self, nCount |                 ( ::cAlias__ )->( DbSkip( nCount ) ) }
+   METHOD Skip        BLOCK { | Self, nCount |                 ( ::cAlias__ )->( DbSkip( nCount ) ) }
 
-METHOD GoTo        BLOCK { | Self, nRecord |                ( ::cAlias__ )->( DbGoTo( nRecord ) ) }
+   METHOD GoTo        BLOCK { | Self, nRecord |                ( ::cAlias__ )->( DbGoTo( nRecord ) ) }
 
-METHOD GoTop       BLOCK { | Self |                         ( ::cAlias__ )->( DbGoTop() ) }
+   METHOD GoTop       BLOCK { | Self |                         ( ::cAlias__ )->( DbGoTop() ) }
 
-METHOD GoBottom    BLOCK { | Self |                         ( ::cAlias__ )->( DbGoBottom() ) }
+   METHOD GoBottom    BLOCK { | Self |                         ( ::cAlias__ )->( DbGoBottom() ) }
 
-METHOD Commit      BLOCK { | Self |                         ( ::cAlias__ )->( DbCommit() ) }
+   METHOD Commit      BLOCK { | Self |                         ( ::cAlias__ )->( DbCommit() ) }
 
-METHOD Unlock      BLOCK { | Self |                         ( ::cAlias__ )->( DbUnlock() ) }
+   METHOD Unlock      BLOCK { | Self |                         ( ::cAlias__ )->( DbUnlock() ) }
 
-METHOD Delete      BLOCK { | Self |                         ( ::cAlias__ )->( DbDelete() ) }
+   METHOD Delete      BLOCK { | Self |                         ( ::cAlias__ )->( DbDelete() ) }
 
-METHOD Close       BLOCK { | Self |                         ( ::cAlias__ )->( DbCloseArea() ) }
+   METHOD Close       BLOCK { | Self |                         ( ::cAlias__ )->( DbCloseArea() ) }
 
-METHOD BOF         BLOCK { | Self |                         ( ::cAlias__ )->( BOF() ) }
+   METHOD BOF         BLOCK { | Self |                         ( ::cAlias__ )->( BOF() ) }
 
-METHOD EOF         BLOCK { | Self |                         ( ::cAlias__ )->( EOF() ) }
+   METHOD EOF         BLOCK { | Self |                         ( ::cAlias__ )->( EOF() ) }
 
-METHOD RecNo       BLOCK { | Self |                         ( ::cAlias__ )->( RecNo() ) }
+   METHOD RecNo       BLOCK { | Self |                         ( ::cAlias__ )->( RecNo() ) }
 
-METHOD RecCount    BLOCK { | Self |                         ( ::cAlias__ )->( RecCount() ) }
+   METHOD RecCount    BLOCK { | Self |                         ( ::cAlias__ )->( RecCount() ) }
 
-METHOD Found       BLOCK { | Self |                         ( ::cAlias__ )->( Found() ) }
+   METHOD Found       BLOCK { | Self |                         ( ::cAlias__ )->( Found() ) }
 
-METHOD SetOrder    BLOCK { | Self, uOrder |                 ( ::cAlias__ )->( ORDSETFOCUS( uOrder ) ) }
+   METHOD SetOrder    BLOCK { | Self, uOrder |                 ( ::cAlias__ )->( ORDSETFOCUS( uOrder ) ) }
 
-METHOD SetIndex    BLOCK { | Self, cFile, lAdditive |       If( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
+   METHOD SetIndex    BLOCK { | Self, cFile, lAdditive |       If( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
 
-METHOD Append      BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
+   METHOD Append      BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
 
-METHOD Lock        BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
+   METHOD Lock        BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
 
-METHOD DbStruct    BLOCK { | Self |                         ( ::cAlias__ )->( DbStruct() ) }
+   METHOD DbStruct    BLOCK { | Self |                         ( ::cAlias__ )->( DbStruct() ) }
 
-METHOD OrdKeyNo    BLOCK { | Self |                         If( ( ::cAlias__ )->( OrdKeyCount() ) > 0, ( ::cAlias__ )->( OrdKeyNo() ), ( ::cAlias__ )->( RecNo() ) ) }
+   METHOD OrdKeyNo    BLOCK { | Self |                         If( ( ::cAlias__ )->( OrdKeyCount() ) > 0, ( ::cAlias__ )->( OrdKeyNo() ), ( ::cAlias__ )->( RecNo() ) ) }
 
-METHOD OrdKeyCount BLOCK { | Self |                         If( ( ::cAlias__ )->( OrdKeyCount() ) > 0, ( ::cAlias__ )->( OrdKeyCount() ), ( ::cAlias__ )->( RecCount() ) ) }
+   METHOD OrdKeyCount BLOCK { | Self |                         If( ( ::cAlias__ )->( OrdKeyCount() ) > 0, ( ::cAlias__ )->( OrdKeyCount() ), ( ::cAlias__ )->( RecCount() ) ) }
 
-METHOD OrdKeyGoTo  BLOCK { | Self, nRecord |                ( ::cAlias__ )->( OrdKeyGoTo( nRecord ) ) }
+   METHOD OrdKeyGoTo  BLOCK { | Self, nRecord |                ( ::cAlias__ )->( OrdKeyGoTo( nRecord ) ) }
 
    ERROR HANDLER FieldAssign
 
@@ -2928,11 +2928,11 @@ CLASS TVirtualField
    DATA xArea                     INIT Nil
    DATA xDefault                  INIT Nil
 
-METHOD New
+   METHOD New
 
-METHOD RecordId
+   METHOD RecordId
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -2987,49 +2987,49 @@ CLASS TXBrowseByCell FROM TXBrowse
 
    DATA Type                      INIT "XBROWSEBYCELL" READONLY
 
-METHOD AddColumn
+   METHOD AddColumn
 
-METHOD CurrentCol              SETGET
+   METHOD CurrentCol              SETGET
 
-METHOD Define2
+   METHOD Define2
 
-METHOD Define3
+   METHOD Define3
 
-METHOD DeleteAllItems          BLOCK { | Self | ::nColPos := 0, ::Super:DeleteAllItems() }
+   METHOD DeleteAllItems          BLOCK { | Self | ::nColPos := 0, ::Super:DeleteAllItems() }
 
-METHOD DeleteColumn
+   METHOD DeleteColumn
 
-METHOD Down
+   METHOD Down
 
-METHOD EditAllCells
+   METHOD EditAllCells
 
-METHOD EditCell
+   METHOD EditCell
 
-METHOD EditGrid
+   METHOD EditGrid
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD GoBottom
+   METHOD GoBottom
 
-METHOD GoTop
+   METHOD GoTop
 
-METHOD Left
+   METHOD Left
 
-METHOD MoveTo
+   METHOD MoveTo
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD Right
+   METHOD Right
 
-METHOD SetControlValue         SETGET
+   METHOD SetControlValue         SETGET
 
-METHOD SetSelectedColors
+   METHOD SetSelectedColors
 
-METHOD Up
+   METHOD Up
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
    /*
    Available methods from TXBrowse:
@@ -4597,4 +4597,3 @@ FUNCTION SetXBrowseFixedControls( lValue )
    ENDIF
 
    RETURN _OOHG_XBrowseFixedControls
-

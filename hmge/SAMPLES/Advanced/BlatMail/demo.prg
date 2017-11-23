@@ -355,4 +355,3 @@ PROCEDURE EnviaEmail_(_smtp, _id, _de, _para_, _assunto_, _emai_, _anexo_, _usua
    ENDIF
 
    RETURN
-

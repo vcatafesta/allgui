@@ -140,4 +140,3 @@ FUNCTION GetCFilesOk( aFiles , aSelected )
    ENDIF
 
    RETURN aNew
-

@@ -1880,4 +1880,3 @@ HB_FUNC (GDI_SET_PIXEL)
 }
 
 #pragma ENDDUMP
-

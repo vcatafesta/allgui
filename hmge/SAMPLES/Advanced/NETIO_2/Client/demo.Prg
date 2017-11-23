@@ -25,4 +25,3 @@ FUNCTION _Connect()
    ENDIF
 
    RETURN NIL
-

@@ -170,16 +170,12 @@ FUNCTION ValidaNome(cNome)
    ENDIF
 
    RETURN lret
-
    Proc formActivate()
-
       QTS := 100
       Inicia()
 
       RETURN
-
       Proc Inicia()
-
          MyMenu := Str(0)
          MenuPai := Str(0)
          BtApagarTudo_Click(.f.)
@@ -196,7 +192,6 @@ FUNCTION ValidaNome(cNome)
          RETURN
 
          Proc LimpaInFo()
-
             form1.TxtCaptionP.value := space(50)
             form1.TxtCaptionE.value := space(50)
             form1.TxtCaptionI.value := space(50)
@@ -210,9 +205,7 @@ FUNCTION ValidaNome(cNome)
             form1.Chk_Disabled.Value := .f.
 
             RETURN
-
             Proc PegaInFo(I)
-
                form1.TxtCaptionP.value  := iif (!Empt(aListItens[I][ 5]),aListItens[I][ 5],"") // "CAPTION_P"
                form1.TxtCaptionE.value := iif (!Empt(aListItens[I][ 6]),aListItens[I][ 6],"") // "CAPTION_E"
                form1.TxtCaptionI.value := iif (!Empt(aListItens[I][ 7]),aListItens[I][ 7],"") // "CAPTION_I"
@@ -228,9 +221,7 @@ FUNCTION ValidaNome(cNome)
                ITMAT := I
 
                RETURN
-
                Proc E_D_Frame3(lvalor)
-
                   form1.TxtCaptionP.Enabled := lvalor
                   form1.TxtCaptionE.Enabled := lvalor
                   form1.TxtCaptionI.Enabled := lvalor
@@ -246,9 +237,7 @@ FUNCTION ValidaNome(cNome)
                   form1.BtCancel.enabled     := lvalor
 
                   RETURN
-
                   Proc E_D_Frame1(lvalor)
-
                      form1.BtModifica.Enabled := lvalor
                      form1.BtLoad.Enabled      := lvalor
                      form1.BtSalvar.Enabled    := lvalor
@@ -274,17 +263,13 @@ FUNCTION PegaTabulacao(wpos)
    END IF
 
    RETURN wdif
-
    Proc E_D_Frame2(valor)
-
       Form1.Btpopup.Enabled     := valor
       Form1.BtMenuitem.Enabled  := valor
       Form1.BtSeparator.Enabled := valor
 
       RETURN
-
       Proc Bt_Inc_Click(nIndex)
-
          LOCAL Nm:=""
          LOCAL tx:=""
          LOCAL wp:=0
@@ -367,9 +352,7 @@ FUNCTION PegaMenuPai()
    NEXT
 
    RETURN wret
-
    Proc ChecaList()
-
       LOCAL it
       LOCAL wp := form1.Grid1.value
       LOCAL txt := form1.Grid1.cell(wp,1)
@@ -429,9 +412,7 @@ FUNCTION PegaPos(wpos)
    wret := val(form1.Grid1.cell(wpos,2))
 
    RETURN wret
-
    Proc ModificaMENUITEM()
-
       LOCAL tipo
       LOCAL TXT
 
@@ -468,9 +449,7 @@ FUNCTION PegaPos(wpos)
       form1.Grid1.value :=fpos
 
       RETURN
-
       proc InsereMenuItem(txtsep)
-
          LOCAL tipo
          LOCAL TXT
 
@@ -527,9 +506,7 @@ FUNCTION PegaPos(wpos)
          form1.Grid1.value:=fpos
 
          RETURN
-
          Proc InserePopUp()
-
             LOCAL cTipo   := ""
             LOCAL Texto, nome, tx
 
@@ -579,9 +556,7 @@ FUNCTION PegaPos(wpos)
             form1.Grid1.value:=fpos
 
             RETURN
-
             Proc Bt_Cancel_Click()
-
                E_D_Frame3(.F.)
                E_D_Frame2(.T.)
                E_D_Frame1(.T.)
@@ -590,9 +565,7 @@ FUNCTION PegaPos(wpos)
                ChecaList()
 
                RETURN
-
                Proc AtualList()
-
                   LOCAL f
 
                   Form1.Grid1.deleteAllItems()
@@ -616,9 +589,7 @@ FUNCTION PegaPos(wpos)
                   NEXT
 
                   RETURN
-
                   Proc BtOk_Click()
-
                      LOCAL tx :=""
 
                      SelecionaTipo()
@@ -629,7 +600,6 @@ FUNCTION PegaPos(wpos)
                      ChecaList()
 
                      RETURN
-
                      PROC SelecionaTipo()
 
                         DO CASE
@@ -699,9 +669,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
    TXT := TXT + ctxtAction + ctxtName + ctxtImage + ctxtChecked + ctxtDisabled + ctxtMsg
 
    RETURN Txt
-
    Proc BtApagarTudo_Click(lpergunta)
-
       LOCAL lescolha :=.f.
 
       IF lpergunta
@@ -721,17 +689,13 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
       FORM1.Grid1.SETFOCUS()
 
       RETURN
-
       Proc ApagaTudo()
-
          Form1.Grid1.deleteAllItems()
          Asize(aListItens,0)
          AADD(aListItens,{"-","","","","","","","","","","","","",.F.,.F.})
 
          RETURN
-
          Proc BtLoad_Click()
-
             LOCAL cFile, c1, c_dbf
             LOCAL txt
 
@@ -809,9 +773,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
             ENDIF
 
             RETURN
-
             Proc BtSalvar_Click()
-
                LOCAL cFile, x, c1, f
                LOCAL AaRQ    :={}
                LOCAL C_DBF:="" ,C_NTAB:=""
@@ -888,9 +850,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                ENDIF
 
                RETURN
-
                Proc BtRemover_Click()
-
                   LOCAL fpos:=form1.Grid1.value
                   LOCAL ID  :=aListItens[fpos][2]
                   LOCAL Tipo:=aListItens[fpos][4]
@@ -912,9 +872,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                   FORM1.Grid1.SETFOCUS()
 
                   RETURN
-
                   Proc ApagaUmItem(fPos)
-
                      LOCAL f
 
                      FOR f:=fpos+1 to len(aListItens)
@@ -929,7 +887,6 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                      RETURN
 
                      Proc Bt_Testar_Click()
-
                         LOCAL nIdioma :=QualIdioma()
 
                         IF nIdioma =0
@@ -956,9 +913,7 @@ FUNCTION LinhaMenu(TxtCaptionP,TxtCaptionE,TxtCaptionI,TxtAction,TxtNome,TxtImag
                         ACTIVATE WINDOW WinModal
 
                         RETURN
-
                         Proc MontaMenu(nIdioma)
-
                            LOCAL f
                            LOCAL cm_tipo
                            LOCAL cm_caption
@@ -1116,4 +1071,3 @@ FUNCTION AcercaDe()
    MsgInfo(cAcercaDe)
 
    RETURN NIL
-

@@ -11,7 +11,7 @@ CLASS ooMySql
 
    // Methods always used by XBrowse
 
-METHOD Skipper
+   METHOD Skipper
 
    DELEGATE GoTop            TO oQuery
    DELEGATE GoBottom         TO oQuery
@@ -19,15 +19,15 @@ METHOD Skipper
    // Methods used by XBrowse if you'll have a scrollbar
    DELEGATE RecNo            TO oQuery
 
-METHOD RecCount           INLINE ::oQuery:LastRec()
+   METHOD RecCount           INLINE ::oQuery:LastRec()
 
    DELEGATE GoTo             TO oQuery
 
-METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
+   METHOD OrdKeyNo           INLINE ::oQuery:RecNo()
 
-METHOD OrdKeyCount        INLINE ::oQuery:LastRec()
+   METHOD OrdKeyCount        INLINE ::oQuery:LastRec()
 
-METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
+   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
 
    // Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
@@ -40,24 +40,24 @@ METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oQuery:Goto( n ) }
    // Used by "own" class (not used by XBrowse itself)
    DATA oQuery
 
-METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+   METHOD New( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
 
    DELEGATE DbStruct         TO oQuery
    DELEGATE FieldGet         TO oQuery
    DELEGATE FieldPut         TO oQuery
 
-METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
+   METHOD Use( oQuery )      BLOCK { | Self, oQuery | ::oQuery := oQuery , Self }
 
    DELEGATE Skip             TO oQuery
    DELEGATE Bof              TO oQuery
 
-METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
+   METHOD Field( n )         BLOCK { | Self, n | ::oQuery:FieldName( n ) }
 
    DELEGATE FieldName        TO oQuery
    DELEGATE FieldPos         TO oQuery
    DELEGATE LastRec          TO oQuery
 
-METHOD FieldBlock
+   METHOD FieldBlock
 
    ERROR HANDLER FieldAssign
 
@@ -136,4 +136,3 @@ METHOD FieldAssign( xValue ) CLASS ooMySql
    *   METHOD SetIndex   BLOCK { | Self, cFile, lAdditive |       IF( EMPTY( lAdditive ), ( ::cAlias__ )->( ordListClear() ), ) , ( ::cAlias__ )->( ordListAdd( cFile ) ) }
    *   METHOD Append     BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
    *   METHOD Lock       BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
-

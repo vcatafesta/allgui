@@ -61,23 +61,23 @@ CLASS VAR oDlgSelected
    DATA nYOffset      INIT 0
    DATA nXOffset      INIT 0
 
-METHOD New() CONSTRUCTOR
+   METHOD New() CONSTRUCTOR
 
-METHOD Open() CONSTRUCTOR
+   METHOD Open() CONSTRUCTOR
 
-METHOD OpenR() CONSTRUCTOR
+   METHOD OpenR() CONSTRUCTOR
 
-METHOD Save( lAs )
+   METHOD Save( lAs )
 
-METHOD CreateDialog( aProp )
+   METHOD CreateDialog( aProp )
 
-METHOD GetProp( cName )
+   METHOD GetProp( cName )
 
-METHOD SetProp( xName,xValue )
+   METHOD SetProp( xName,xValue )
 
-METHOD SetPaper( cType,nOrientation )
+   METHOD SetPaper( cType,nOrientation )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -1697,4 +1697,3 @@ FUNCTION DoPreview()
 FUNCTION _CHR( n )
 
    RETURN CHR( n )
-

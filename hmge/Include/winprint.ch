@@ -88,7 +88,6 @@
 #xcommand @ <row>,<col>,<row2>,<col2> DRAW IMAGELIST <cimglist> ICON <nicon> MASK [BACKGROUND <color>];
           => hbprn:drawimagelist(<cimglist>,<nicon>,<row>,<col>,<row2>,<col2>,ILD_MASK,<color>)
 
-
 #xcommand DEFINE BRUSH <cbrush> [STYLE <style>] [COLOR <clr>] [HATCH <hatch>] ;
                             => hbprn:definebrush(<cbrush>,<style>,<clr>,<hatch>)
 #xcommand CHANGE  BRUSH <cbrush> [STYLE <style>] [COLOR <clr>] [HATCH <hatch>] ;
@@ -109,7 +108,6 @@
                            [<underline:UNDERLINE>] [<strikeout:STRIKEOUT>];
                             => hbprn:definefont(<cfont>,<cface>,<size>,<width>,<angle>,<.bold.>,<.italic.>,<.underline.>,<.strikeout.>)
 
-
 #xcommand CHANGE FONT <cfont> [NAME <cface>] [SIZE <size>] [WIDTH <width>] [ANGLE <angle>] ;
                     [<bold:BOLD>] [<nbold:NOBOLD>] ;
                     [<italic:ITALIC>] [<nitalic:NOITALIC>] ;
@@ -118,7 +116,6 @@
                     => hbprn:modifyfont(<cfont>,<cface>,<size>,<width>,<angle>,;
                        <.bold.>,<.nbold.>,<.italic.>,<.nitalic.>,;
                        <.underline.>,<.nunderline.>,<.strikeout.>,<.nstrikeout.>)
-
 
 #xcommand SELECT FONT <cfont> => hbprn:selectfont(<cfont>)
 #xcommand SET CHARSET <charset> => hbprn:setcharset(<charset>)
@@ -312,7 +309,6 @@
 #define DMBIN_LAST          DMBIN_FORMSOURCE
 #define DMBIN_USER          256     /* device specific bins start here */
 
-
 /* orientation */
 #define DMORIENT_PORTRAIT   1
 #define DMORIENT_LANDSCAPE  2
@@ -326,7 +322,6 @@
 #define DMRES_LOW           (-2)
 #define DMRES_MEDIUM        (-3)
 #define DMRES_HIGH          (-4)
-
 
 /* IMAGELIST DRAWING STYLES */
 #define ILD_NORMAL              0x0000

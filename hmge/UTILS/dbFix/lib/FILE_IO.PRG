@@ -257,4 +257,3 @@ FUNCTION WriteLog(xMsg, cFile, lOverwrite)
    fclose(hLog)
 
    Return(.T.)
-

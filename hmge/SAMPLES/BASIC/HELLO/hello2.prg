@@ -41,4 +41,3 @@ FUNCTION Main
    ACTIVATE WINDOW Win_3, Win_2, Win_1
 
    RETURN NIL
-

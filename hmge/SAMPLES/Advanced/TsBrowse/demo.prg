@@ -317,4 +317,3 @@ PROCEDURE CloseTables()
    #include "Sbrowse.prg"
    #include "OneToMore.prg"
    #include "AutoCols.prg"
-

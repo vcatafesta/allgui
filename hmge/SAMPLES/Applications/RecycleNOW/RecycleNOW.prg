@@ -60,4 +60,3 @@ HB_FUNC ( EMPTYRECYCLEBIN )
 }
 
 #pragma ENDDUMP
-

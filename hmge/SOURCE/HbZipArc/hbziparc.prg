@@ -1002,4 +1002,3 @@ FUNCTION hb_ZipDeleteFiles( cFileName, acFiles )
    NEXT
 
    RETURN lRetVal
-

@@ -167,4 +167,3 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
    Return(uRetVal)
 
    #endif // not DOS_ONLY
-

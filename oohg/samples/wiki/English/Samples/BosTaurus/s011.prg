@@ -143,4 +143,3 @@ FUNCTION Proc_Create_Logo
    /*
    * EOF
    */
-

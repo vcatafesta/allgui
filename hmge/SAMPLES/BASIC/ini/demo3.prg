@@ -182,4 +182,3 @@ STATIC FUNCTION IsINISection(cIniFile, cName)
 STATIC FUNCTION IsVarINISection(cIniFile, cSecName, cName)
 
    RETURN ( aScan( _GetSection(cSecName, cIniFile), {|x| UPPER(x[1]) == UPPER(cName)} ) > 0 )
-

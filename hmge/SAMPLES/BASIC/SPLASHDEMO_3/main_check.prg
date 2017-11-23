@@ -72,4 +72,3 @@ FUNCTION MyCopyFiles(xVal)
    INKEY(xVal)
 
    RETURN .T.
-

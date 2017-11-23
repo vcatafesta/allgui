@@ -121,4 +121,3 @@ STATIC PROCEDURE Circle( window, nCol, nRow, nWidth , col, linecol )
    drawellipse(window, nCol, nRow, nCol + nWidth , nRow + nWidth, linecol,, col)
 
    RETURN
-

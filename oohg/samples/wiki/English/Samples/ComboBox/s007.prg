@@ -73,4 +73,3 @@ STATIC FUNCTION ForceUpperCase( oCombo, oText )
    /*
    * EOF
    */
-

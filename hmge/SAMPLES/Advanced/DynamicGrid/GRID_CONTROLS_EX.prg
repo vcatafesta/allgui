@@ -455,4 +455,3 @@ HB_FUNC (BMP_LOAD_FILE)
 }
 
 #pragma enddump
-

@@ -52,11 +52,9 @@
 extern "C" {
 #endif
 
-
 /* Version number: (major<<16) + (minor<<8) + subminor */
 #define LIBINTL_VERSION 0x001304
 extern int libintl_version;
-
 
 /* We redirect the functions to those prefixed with "libintl_".  This is
    necessary, because some systems define gettext/textdomain/... in the C
@@ -175,7 +173,6 @@ extern char *dcgettext (const char *__domainname, const char *__msgid,
        _INTL_MAY_RETURN_STRING_ARG (2);
 #endif
 
-
 /* Similar to 'gettext' but select the plural form corresponding to the
    number N.  */
 #ifdef _INTL_REDIRECT_INLINE
@@ -244,7 +241,6 @@ extern char *dcngettext (const char *__domainname,
 #endif
 
 
-
 /* Set the current default message catalog to DOMAINNAME.
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
@@ -298,7 +294,6 @@ extern char *bind_textdomain_codeset (const char *__domainname,
                                       const char *__codeset)
        _INTL_ASM (libintl_bind_textdomain_codeset);
 #endif
-
 
 
 /* Support for format strings with positions in *printf(), following the
@@ -423,7 +418,6 @@ extern int vswprintf (wchar_t *, size_t, const wchar_t *, va_list);
 
 #endif
 
-
 /* Support for the locale chosen by the user.  */
 #if (defined __APPLE__ && defined __MACH__) || defined _WIN32 || defined __WIN32__ || defined __CYGWIN__
 
@@ -443,7 +437,6 @@ extern locale_t newlocale (int, const char *, locale_t);
 
 #endif
 
-
 /* Support for relocatable packages.  */
 
 /* Sets the original and the current installation prefix of the package.
@@ -455,7 +448,6 @@ extern locale_t newlocale (int, const char *, locale_t);
 extern void
        libintl_set_relocation_prefix (const char *orig_prefix,
                                       const char *curr_prefix);
-
 
 #ifdef __cplusplus
 }

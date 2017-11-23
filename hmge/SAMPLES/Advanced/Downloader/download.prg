@@ -309,4 +309,3 @@ FUNCTION CloseFile(nFileHandler)
    ENDIF
 
    RETURN lClosed
-

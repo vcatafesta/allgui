@@ -284,4 +284,3 @@ PROCEDURE About()
       "Please report bugs to MiniGUI discusion group at groups.yahoo.com" )
 
    RETURN
-

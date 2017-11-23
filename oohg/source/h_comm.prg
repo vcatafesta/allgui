@@ -336,4 +336,3 @@ FUNCTION SetCommPath( cph )
    EMPTY( _OOHG_AllVars )
 
    RETURN _OOHG_CommPath
-

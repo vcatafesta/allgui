@@ -135,4 +135,3 @@ FUNCTION Ismappeddrive(cDriveLetter)
    NEXT
 
    RETURN lAlreadyConnected
-

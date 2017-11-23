@@ -83,4 +83,3 @@ FUNCTION Form_Main_OnPaint( hWnd, hIcon, w, h )
    // SetBackColor( hWnd, { GetRed( nColor ), GetGreen( nColor ), GetBlue( nColor ) } )
 
    RETURN NIL
-

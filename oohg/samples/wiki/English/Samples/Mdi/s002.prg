@@ -200,4 +200,3 @@ PROCEDURE ChangeLabelValue( oMain )
    /*
    * EOF
    */
-

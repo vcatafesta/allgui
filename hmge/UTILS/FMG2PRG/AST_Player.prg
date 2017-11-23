@@ -115,4 +115,3 @@ FUNCTION AST_Player(cReadString,cTerminator)
    sCtrlObjects += LDCS_iLevel(1) + "// " + "~LDCS_Form." + aProperties_[1] + ".Value" + CRLF
 
    RETURN cRetVal
-

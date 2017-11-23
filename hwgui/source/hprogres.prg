@@ -24,27 +24,27 @@ CLASS VAR winclass   INIT "msctls_progress32"
    DATA  nPercent INIT 0
    DATA  lPercent INIT .F.
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical )
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical )
 
-METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent )
+   METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
+   METHOD Increment() INLINE hwg_Updateprogressbar( ::handle )
 
-METHOD STEP( cTitle )
+   METHOD STEP( cTitle )
 
-METHOD SET( cTitle, nPos )
+   METHOD SET( cTitle, nPos )
 
-METHOD SetLabel( cCaption )
+   METHOD SetLabel( cCaption )
 
-METHOD SetAnimation( nAnimation ) SETGET
+   METHOD SetAnimation( nAnimation ) SETGET
 
-METHOD Close()
+   METHOD Close()
 
-METHOD End() INLINE hwg_Destroywindow( ::handle )
+   METHOD End() INLINE hwg_Destroywindow( ::handle )
 
 ENDCLASS
 
@@ -187,4 +187,3 @@ METHOD Close()
    ENDIF
 
    RETURN NIL
-

@@ -9,7 +9,6 @@ STATIC aSer
 FUNCTION Main
 
    LOCAL lChanged := .t.
-
    aSer:={ {14280, 20420, 12870, 25347, 7640},;
       { 8350, 10315, 15870, 5347, 12340},;
       {12345, -8945, 10560, 15600, 17610} }
@@ -202,4 +201,3 @@ PROCEDURE PrintGraph(op)
    ENDIF
 
    RETURN
-

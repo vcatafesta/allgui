@@ -1259,4 +1259,3 @@ HB_FUNC( SETSCROLLPOSRTF )                         // SetScrollPosRtf(HWND hwnd,
 }
 
 #pragma ENDDUMP
-

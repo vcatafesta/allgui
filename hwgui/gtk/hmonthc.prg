@@ -22,17 +22,17 @@ CLASS VAR winclass   INIT "SysMonthCal32"
    DATA value
    DATA bChange
 
-METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;
       lWeekNumbers )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetValue( dValue )
+   METHOD SetValue( dValue )
 
-METHOD GetValue()
+   METHOD GetValue()
 
 ENDCLASS
 
@@ -89,4 +89,3 @@ METHOD GetValue() CLASS HMonthCalendar
    //   ::value :=
 
    RETURN (::value)
-

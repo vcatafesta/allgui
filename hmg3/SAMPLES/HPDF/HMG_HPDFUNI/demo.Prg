@@ -36,4 +36,3 @@ FUNCTION pdf_create()
    EXECUTE FILE 'HMG_HPDF_UNI.pdf'
 
    RETURN NIL
-

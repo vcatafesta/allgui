@@ -127,4 +127,3 @@ PROCEDURE PONER_COLOR()
    */
 
    RETURN
-

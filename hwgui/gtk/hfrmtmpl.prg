@@ -100,9 +100,9 @@ CLASS HCtrlTmpl
    DATA aControls INIT {}
    DATA aProp, aMethods
 
-METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls,Self ), Self )
+   METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls,Self ), Self )
 
-METHOD F( nId )
+   METHOD F( nId )
 
 ENDCLASS
 
@@ -142,19 +142,19 @@ CLASS VAR maxId    INIT 0
    DATA lDebug        INIT .F.
    DATA cargo
 
-METHOD READ( fname, cId )
+   METHOD READ( fname, cId )
 
-METHOD Show( nMode, params )
+   METHOD Show( nMode, params )
 
-METHOD ShowMain( params )   INLINE ::Show( 1, params )
+   METHOD ShowMain( params )   INLINE ::Show( 1, params )
 
-METHOD ShowModal( params )  INLINE ::Show( 2, params )
+   METHOD ShowModal( params )  INLINE ::Show( 2, params )
 
-METHOD CLOSE()
+   METHOD CLOSE()
 
-METHOD F( id, n )
+   METHOD F( id, n )
 
-METHOD Find( cId )
+   METHOD Find( cId )
 
 ENDCLASS
 
@@ -945,7 +945,7 @@ CLASS HRepItem
    DATA y2
    DATA lMark INIT .F.
 
-METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls,Self ), Self )
+   METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls,Self ), Self )
 
 ENDCLASS
 
@@ -972,19 +972,19 @@ CLASS VAR aFontTable
    DATA lNextPage, lFinish
    DATA oPrinter
 
-METHOD READ( fname, cId )
+   METHOD READ( fname, cId )
 
-METHOD PRINT( printer, lPreview, p1, p2, p3 )
+   METHOD PRINT( printer, lPreview, p1, p2, p3 )
 
-METHOD PrintItem( oItem )
+   METHOD PrintItem( oItem )
 
-METHOD ReleaseObj( aControls )
+   METHOD ReleaseObj( aControls )
 
-METHOD Find( cId )
+   METHOD Find( cId )
 
-METHOD CLOSE()
+   METHOD CLOSE()
 
-METHOD SetMetaFile( cMetafile )    INLINE ::cMetafile := cMetafile
+   METHOD SetMetaFile( cMetafile )    INLINE ::cMetafile := cMetafile
 
 ENDCLASS
 
@@ -1477,4 +1477,3 @@ STATIC FUNCTION hrep_FontFromXML( oPrinter, oXmlNode, height )
    under  := iif( under != Nil, Val( under ), 0 )
 
    RETURN oPrinter:AddFont( name, height, ( weight > 400 ), ( ita > 0 ), ( under > 0 ), charset )
-

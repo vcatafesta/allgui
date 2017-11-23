@@ -70,169 +70,88 @@ CLASS HBPrinter
    DATA    Ports INIT {}
    PROTECT Version INIT 2.42
 
-METHOD New()
-
-METHOD SelectPrinter( cPrinter, lPrev )
-
-METHOD SetDevMode( what, newvalue )
-
-METHOD SetUserMode( what, value, value2 )
-
-METHOD Startdoc( ldocname )
-
-METHOD SetPage( orient, size, fontname )
-
-METHOD Startpage()
-
-METHOD Endpage()
-
-METHOD Enddoc()
-
-METHOD SetTextColor( clr )
-
-METHOD GetTextColor()      INLINE ::TextColor
-
-METHOD SetBkColor( clr )
-
-METHOD GetBkColor()        INLINE ::BkColor
-
-METHOD SetBkMode( nmode )
-
-METHOD GetBkMode()         INLINE ::BkMode
-
-METHOD DefineImageList( defname, cpicture, nicons )
-
-METHOD DrawImageList( defname, nicon, row, col, torow, tocol, lstyle, color )
-
-METHOD DefineBrush( defname, lstyle, lcolor, lhatch )
-
-METHOD ModifyBrush( defname, lstyle, lcolor, lhatch )
-
-METHOD SelectBrush( defname )
-
-METHOD DefinePen( defname, lstyle, lwidth, lcolor )
-
-METHOD ModifyPen( defname, lstyle, lwidth, lcolor )
-
-METHOD SelectPen( defname )
-
-METHOD DefineFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, litalic, lunderline, lstrikeout )
-
-METHOD ModifyFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, lnweight, litalic, lnitalic, lunderline, lnunderline, lstrikeout, lnstrikeout )
-
-METHOD SelectFont( defname )
-
-METHOD GetObjByName( defname, what, retpos )
-
-METHOD DrawText( row, col, torow, tocol, txt, style, defname )
-
-METHOD TextOut( row, col, txt, defname )
-
-METHOD Say( row, col, txt, defname, lcolor, lalign )
-
-METHOD SetCharset( charset ) INLINE rr_setcharset( charset )
-
-METHOD Rectangle( row, col, torow, tocol, defpen, defbrush )
-
-METHOD RoundRect( row, col, torow, tocol, widthellipse, heightellipse, defpen, defbrush )
-
-METHOD FillRect( row, col, torow, tocol, defbrush )
-
-METHOD FrameRect( row, col, torow, tocol, defbrush )
-
-METHOD InvertRect( row, col, torow, tocol )
-
-METHOD Ellipse( row, col, torow, tocol, defpen, defbrush )
-
-METHOD Arc( row, col, torow, tocol, rowsarc, colsarc, rowearc, colearc, defpen )
-
-METHOD ArcTo( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen )
-
-METHOD Chord( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush )
-
-METHOD Pie( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush )
-
-METHOD Polygon( apoints, defpen, defbrush, style )
-
-METHOD PolyBezier( apoints, defpen )
-
-METHOD PolyBezierTo( apoints, defpen )
-
-METHOD SetUnits( newvalue, r, c )
-
-METHOD Convert( arr, lsize )
-
-METHOD DefineRectRgn( defname, row, col, torow, tocol )
-
-METHOD DefinePolygonRgn( defname, apoints, style )
-
-METHOD DefineEllipticRgn( defname, row, col, torow, tocol )
-
-METHOD DefineRoundRectRgn( defname, row, col, torow, tocol, widthellipse, heightellipse )
-
-METHOD CombineRgn( defname, reg1, reg2, style )
-
-METHOD SelectClipRgn( defname )
-
-METHOD DeleteClipRgn()
-
-METHOD SetPolyFillMode( style )
-
-METHOD GetPolyFillMode()   INLINE ::PolyFillMode
-
-METHOD SetViewPortOrg( row, col )
-
-METHOD GetViewPortOrg()
-
-METHOD DxColors( par )
-
-METHOD SetRGB( red, green, blue )
-
-METHOD SetTextCharExtra( col )
-
-METHOD GetTextCharExtra()
-
-METHOD SetTextJustification( col )
-
-METHOD GetTextJustification()
-
-METHOD SetTextAlign( style )
-
-METHOD GetTextAlign()
-
-METHOD Picture( row, col, torow, tocol, cpicture, extrow, extcol )
-
-METHOD Line( row, col, torow, tocol, defpen )
-
-METHOD LineTo( row, col, defpen )
-
-METHOD SaveMetaFiles( number, filename )
-
-METHOD GetTextExtent( ctext, apoint, deffont )
-
-METHOD GetTextExtent_mm( ctext, apoint, deffont )
-
-METHOD End()
-
+   METHOD New()
+   METHOD SelectPrinter( cPrinter, lPrev )
+   METHOD SetDevMode( what, newvalue )
+   METHOD SetUserMode( what, value, value2 )
+   METHOD Startdoc( ldocname )
+   METHOD SetPage( orient, size, fontname )
+   METHOD Startpage()
+   METHOD Endpage()
+   METHOD Enddoc()
+   METHOD SetTextColor( clr )
+   METHOD GetTextColor()      INLINE ::TextColor
+   METHOD SetBkColor( clr )
+   METHOD GetBkColor()        INLINE ::BkColor
+   METHOD SetBkMode( nmode )
+   METHOD GetBkMode()         INLINE ::BkMode
+   METHOD DefineImageList( defname, cpicture, nicons )
+   METHOD DrawImageList( defname, nicon, row, col, torow, tocol, lstyle, color )
+   METHOD DefineBrush( defname, lstyle, lcolor, lhatch )
+   METHOD ModifyBrush( defname, lstyle, lcolor, lhatch )
+   METHOD SelectBrush( defname )
+   METHOD DefinePen( defname, lstyle, lwidth, lcolor )
+   METHOD ModifyPen( defname, lstyle, lwidth, lcolor )
+   METHOD SelectPen( defname )
+   METHOD DefineFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, litalic, lunderline, lstrikeout )
+   METHOD ModifyFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, lnweight, litalic, lnitalic, lunderline, lnunderline, lstrikeout, lnstrikeout )
+   METHOD SelectFont( defname )
+   METHOD GetObjByName( defname, what, retpos )
+   METHOD DrawText( row, col, torow, tocol, txt, style, defname )
+   METHOD TextOut( row, col, txt, defname )
+   METHOD Say( row, col, txt, defname, lcolor, lalign )
+   METHOD SetCharset( charset ) INLINE rr_setcharset( charset )
+   METHOD Rectangle( row, col, torow, tocol, defpen, defbrush )
+   METHOD RoundRect( row, col, torow, tocol, widthellipse, heightellipse, defpen, defbrush )
+   METHOD FillRect( row, col, torow, tocol, defbrush )
+   METHOD FrameRect( row, col, torow, tocol, defbrush )
+   METHOD InvertRect( row, col, torow, tocol )
+   METHOD Ellipse( row, col, torow, tocol, defpen, defbrush )
+   METHOD Arc( row, col, torow, tocol, rowsarc, colsarc, rowearc, colearc, defpen )
+   METHOD ArcTo( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen )
+   METHOD Chord( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush )
+   METHOD Pie( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush )
+   METHOD Polygon( apoints, defpen, defbrush, style )
+   METHOD PolyBezier( apoints, defpen )
+   METHOD PolyBezierTo( apoints, defpen )
+   METHOD SetUnits( newvalue, r, c )
+   METHOD Convert( arr, lsize )
+   METHOD DefineRectRgn( defname, row, col, torow, tocol )
+   METHOD DefinePolygonRgn( defname, apoints, style )
+   METHOD DefineEllipticRgn( defname, row, col, torow, tocol )
+   METHOD DefineRoundRectRgn( defname, row, col, torow, tocol, widthellipse, heightellipse )
+   METHOD CombineRgn( defname, reg1, reg2, style )
+   METHOD SelectClipRgn( defname )
+   METHOD DeleteClipRgn()
+   METHOD SetPolyFillMode( style )
+   METHOD GetPolyFillMode()   INLINE ::PolyFillMode
+   METHOD SetViewPortOrg( row, col )
+   METHOD GetViewPortOrg()
+   METHOD DxColors( par )
+   METHOD SetRGB( red, green, blue )
+   METHOD SetTextCharExtra( col )
+   METHOD GetTextCharExtra()
+   METHOD SetTextJustification( col )
+   METHOD GetTextJustification()
+   METHOD SetTextAlign( style )
+   METHOD GetTextAlign()
+   METHOD Picture( row, col, torow, tocol, cpicture, extrow, extcol )
+   METHOD Line( row, col, torow, tocol, defpen )
+   METHOD LineTo( row, col, defpen )
+   METHOD SaveMetaFiles( number, filename )
+   METHOD GetTextExtent( ctext, apoint, deffont )
+   METHOD GetTextExtent_mm( ctext, apoint, deffont )
+   METHOD End()
    #ifdef _DEBUG_
-
-METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 )
-
+   METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 )
    #endif
-
-METHOD Preview()
-
-METHOD PrevPrint( n1 )
-
-METHOD PrevShow()
-
-METHOD PrevThumb( nclick )
-
-METHOD PrevClose( lEsc )
-
-METHOD PrintOption()
-
-METHOD GetVersion() INLINE ::Version
+   METHOD Preview()
+   METHOD PrevPrint( n1 )
+   METHOD PrevShow()
+   METHOD PrevThumb( nclick )
+   METHOD PrevClose( lEsc )
+   METHOD PrintOption()
+   METHOD GetVersion() INLINE ::Version
 
 ENDCLASS
 
@@ -4273,4 +4192,3 @@ HB_FUNC( RR_LALABYE )
 }
 
 #pragma ENDDUMP
-

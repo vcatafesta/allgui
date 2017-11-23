@@ -1,1 +1,1 @@
-#define HMGRPATH C:\hmg.3.4.0\RESOURCES 
+#define HMGRPATH C:\hmg.3.4.0\RESOURCES

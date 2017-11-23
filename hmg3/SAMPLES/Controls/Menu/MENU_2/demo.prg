@@ -44,4 +44,3 @@ PROCEDURE MenuProc()
    ENDIF
 
    RETURN
-

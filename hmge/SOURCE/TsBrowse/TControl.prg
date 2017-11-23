@@ -88,90 +88,90 @@ CLASS TControl
       "nClrPane", "nAlign", "nTop", "nLeft",;
       "nWidth", "nHeight", "Cargo" }
 
-METHOD AddControl( hControl ) INLINE ;
+   METHOD AddControl( hControl ) INLINE ;
       If( ::aControls == nil, ::aControls := {},),;
       AAdd( ::aControls, hControl ), ::lValidating := .f.
 
-METHOD AddVars(hControl)
+   METHOD AddVars(hControl)
 
-METHOD Change() VIRTUAL
+   METHOD Change() VIRTUAL
 
-METHOD Click() INLINE ::oWnd:AEvalWhen()
+   METHOD Click() INLINE ::oWnd:AEvalWhen()
 
-METHOD Init( hDlg )
+   METHOD Init( hDlg )
 
-METHOD Colors( hDC )
+   METHOD Colors( hDC )
 
-METHOD CoorsUpdate()                //TWindow
+   METHOD CoorsUpdate()                //TWindow
 
-METHOD Create( cClsName )           //TWindow
+   METHOD Create( cClsName )           //TWindow
 
-METHOD Default()
+   METHOD Default()
 
-METHOD DelVars(hControl)
+   METHOD DelVars(hControl)
 
-METHOD Display()              VIRTUAL
+   METHOD Display()              VIRTUAL
 
-METHOD DrawItem( nPStruct )   VIRTUAL
+   METHOD DrawItem( nPStruct )   VIRTUAL
 
-METHOD End()
+   METHOD End()
 
-METHOD EraseBkGnd( hDC )
+   METHOD EraseBkGnd( hDC )
 
-METHOD FillMeasure()          VIRTUAL
+   METHOD FillMeasure()          VIRTUAL
 
-METHOD ForWhen()
+   METHOD ForWhen()
 
-METHOD GetDlgCode( nLastKey )
+   METHOD GetDlgCode( nLastKey )
 
-METHOD GetCliRect()                 //TWindow
+   METHOD GetCliRect()                 //TWindow
 
-METHOD GetRect()
+   METHOD GetRect()
 
-METHOD GetNewId() INLINE ++nId
+   METHOD GetNewId() INLINE ++nId
 
-METHOD GotFocus( hCtlLost )
+   METHOD GotFocus( hCtlLost )
 
-METHOD GoNextCtrl( hCtrl )
+   METHOD GoNextCtrl( hCtrl )
 
-METHOD GoPrevCtrl( hCtrl )
+   METHOD GoPrevCtrl( hCtrl )
 
-METHOD LostFocus(hWndGetFocus)
+   METHOD LostFocus(hWndGetFocus)
 
-METHOD nWidth() INLINE GetWindowWidth( ::hWnd )
+   METHOD nWidth() INLINE GetWindowWidth( ::hWnd )
 
-METHOD nHeight() INLINE GetWindowHeight( ::hWnd )
+   METHOD nHeight() INLINE GetWindowHeight( ::hWnd )
 
-METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
 
-METHOD KeyChar( nKey, nFlags )
+   METHOD KeyChar( nKey, nFlags )
 
-METHOD KeyDown( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
 
-METHOD KeyUp( nKey, nFlags ) VIRTUAL
+   METHOD KeyUp( nKey, nFlags ) VIRTUAL
 
-METHOD KillFocus( hCtlFocus )
+   METHOD KillFocus( hCtlFocus )
 
-METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B",;
+   METHOD VarPut( uVal ) INLINE  If( ValType( ::bSetGet ) == "B",;
       Eval( ::bSetGet, uVal ), )
 
-METHOD VarGet() INLINE If( ValType( ::bSetGet ) == "B", Eval( ::bSetGet ), )
+   METHOD VarGet() INLINE If( ValType( ::bSetGet ) == "B", Eval( ::bSetGet ), )
 
-METHOD LButtonDown( nRow, nCol, nKeyFlags )
+   METHOD LButtonDown( nRow, nCol, nKeyFlags )
 
-METHOD LButtonUp( nRow, nCol, nKeyFlags )
+   METHOD LButtonUp( nRow, nCol, nKeyFlags )
 
-METHOD MouseMove( nRow, nCol, nKeyFlags )
+   METHOD MouseMove( nRow, nCol, nKeyFlags )
 
-METHOD Paint() VIRTUAL
+   METHOD Paint() VIRTUAL
 
-METHOD SuperKeyDown( nKey, nFlags )
+   METHOD SuperKeyDown( nKey, nFlags )
 
    //   METHOD nWidth( nNewWidth ) INLINE GetWindowWidth( ::hWnd, nNewWidth )
 
    MESSAGE BeginPaint METHOD _BeginPaint()
 
-METHOD EndPaint() INLINE ::nPaintCount--,;
+   METHOD EndPaint() INLINE ::nPaintCount--,;
       EndPaint( ::hWnd, ::cPS ), ::cPS := nil, ::hDC := nil
 
 METHOD Register( nClsStyle )            //TWindow
@@ -976,4 +976,3 @@ METHOD Notify( nWParam, nLParam ) CLASS TControl
    ENDIF
 
    RETURN NIL
-

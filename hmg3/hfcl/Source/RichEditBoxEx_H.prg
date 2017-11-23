@@ -540,4 +540,3 @@ FUNCTION HMG_UTF16ByteSwap( cInFile, cOutFile )
    FCLOSE( hOutFile )
 
    RETURN lSuccess
-

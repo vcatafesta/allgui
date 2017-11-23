@@ -313,4 +313,3 @@ FUNCTION scrBreakPoint()
    nDebugMode := 0
 
    RETURN .T.
-

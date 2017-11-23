@@ -81,4 +81,3 @@ STATIC FUNCTION GetToolBarHeight()
    LOCAL h := win_1.ToolBar_1.Handle
 
    RETURN (LoWord( GetSizeToolBar( h ) ) + iif(IsThemed(), 1, 2) * GetBorderHeight())
-

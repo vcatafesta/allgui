@@ -62,4 +62,3 @@ PROCEDURE AddRecord( obrw )
    obrw:SetFocus()
 
    RETURN
-

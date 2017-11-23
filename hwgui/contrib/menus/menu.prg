@@ -20,11 +20,11 @@ CLASS HMenu INHERIT HObject
    DATA handle
    DATA aMenu
 
-METHOD New()  INLINE Self
+   METHOD New()  INLINE Self
 
-METHOD End()  INLINE Hwg_DestroyMenu(::handle)
+   METHOD End()  INLINE Hwg_DestroyMenu(::handle)
 
-METHOD Show( oWnd,xPos,yPos,lWnd )
+   METHOD Show( oWnd,xPos,yPos,lWnd )
 
 ENDCLASS
 
@@ -301,4 +301,3 @@ FUNCTION Hwg_DefineMenuItem( cItem, nId, bItem, lDisabled, accFlag, accKey, cMes
    ENDIF
 
    RETURN .T.
-

@@ -50,4 +50,3 @@ FUNCTION Main
    win_1.activate
 
    RETURN NIL
-

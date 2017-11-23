@@ -8,4 +8,3 @@ void hmac_md5( unsigned char* text, int text_len, unsigned char* key, int key_le
 /* pointer to authentication key */
 /* length of authentication key */
 /* caller digest to be filled in */
-

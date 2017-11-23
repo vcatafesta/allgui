@@ -2,7 +2,6 @@
 FUNCTION DiaFiesta(DFesta)
 
    LOCAL DFesta2, FPascua:=DomingoPascua(YEAR(DFesta))
-
    IF DAY(DFesta)=1  .AND. MONTH(DFesta)=1  .OR. ;
          DAY(DFesta)=6  .AND. MONTH(DFesta)=1  .OR. ;
          DAY(DFesta)=19 .AND. MONTH(DFesta)=3  .OR. ;
@@ -57,4 +56,3 @@ FUNCTION DomingoPascua(a)
    LOCAL FPASCUA:=CTOD("31-03-"+STR(a,4))+25-g-e
 
    RETURN(FPASCUA)
-

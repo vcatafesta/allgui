@@ -58,7 +58,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #command @ <row>, <col> PICTURE <name> ;
       [ OBJ <obj> ] ;
       [ <dummy1: OF, PARENT> <parent> ] ;
@@ -66,7 +65,7 @@
       [ WIDTH <w> ] ;
       [ HEIGHT <h> ] ;
       [ <stretch: STRETCH> ] ;
-      [ HELPID <helpid> ] 		;
+      [ HELPID <helpid> ]       ;
       [ <invisible: INVISIBLE> ] ;
       [ <rtl: RTL> ] ;
       [ SUBCLASS <subclass> ] ;

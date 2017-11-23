@@ -20,4 +20,3 @@ FUNCTION p2()
    ACTIVATE WINDOW qwerty
 
    RETURN NIL
-

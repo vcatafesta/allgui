@@ -75,4 +75,3 @@ FUNCTION MsgAbout()
       PadC( "eMail: gfilatov@inbox.ru", 40 ) + CRLF + CRLF + ;
       PadC( "This program is Freeware!", 40 ) + CRLF + ;
       PadC( "Copying is allowed!", 42 ), 'About' )
-

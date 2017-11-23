@@ -26,4 +26,3 @@ FUNCTION main_connect_action
    ENDIF
 
    RETURN NIL
-

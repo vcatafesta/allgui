@@ -41,4 +41,3 @@ FUNCTION _InvertRect( hDC, aRec )  //Temporary
    InvertRect( hDC, bRec )
 
    RETURN NIL
-

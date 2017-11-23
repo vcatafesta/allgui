@@ -31,19 +31,14 @@ CLASS TTimer
    ACCESS Interval
    ASSIGN Interval( n ) INLINE ::Interval( n )
 
-METHOD Init( nHandle, nInterval, bBlock, lStart ) CONSTRUCTOR
-
+   METHOD Init( nHandle, nInterval, bBlock, lStart ) CONSTRUCTOR
    DESTRUCTOR Destroy
 
-METHOD Enabled()     INLINE ::lEnabled
-
-METHOD ExecTimerProc( hWnd, Msg, TimerId, Time )
-
-METHOD OnTimer( b )
-
-METHOD Start()
-
-METHOD Stop()
+   METHOD Enabled()     INLINE ::lEnabled
+   METHOD ExecTimerProc( hWnd, Msg, TimerId, Time )
+   METHOD OnTimer( b )
+   METHOD Start()
+   METHOD Stop()
 
    //   UNDECLARED METHOD ClassName()  INLINE ( "TTimer" )
    UNDECLARED METHOD GetById( nId )
@@ -266,4 +261,3 @@ VOID CALLBACK TTimerProc( HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 }
 
 #pragma ENDDUMP
-

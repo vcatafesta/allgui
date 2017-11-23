@@ -75,4 +75,3 @@ FUNCTION UpdateCombo2( Control, Parent )
    DoMethod( Parent, Control, 'SetArray', aNewValues )
 
    RETURN NIL
-

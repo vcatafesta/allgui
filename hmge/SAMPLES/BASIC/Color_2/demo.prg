@@ -107,7 +107,6 @@ FUNCTION main_cas()
    *______________________________________________________________________________________*
 
    proc f_cor( m_cor )
-
       LOCAL m_form, c1, c2, c3
 
       m_form := thiswindow.name
@@ -142,7 +141,6 @@ FUNCTION main_cas()
       *______________________________________________________________________________________*
 
       proc f_cor2( m_cor )
-
          LOCAL m_form, c1, c2, c3
 
          m_form := thiswindow.name
@@ -176,7 +174,6 @@ FUNCTION main_cas()
          *______________________________________________________________________________________*
 
          proc f_GetColor
-
             LOCAL m_form, cor_atual, m_cor
 
             m_form := thiswindow.name
@@ -200,4 +197,3 @@ FUNCTION main_cas()
             RETURN
 
             *______________________________________________________________________________________*
-

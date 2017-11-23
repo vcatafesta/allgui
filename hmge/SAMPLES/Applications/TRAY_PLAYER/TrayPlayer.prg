@@ -528,4 +528,3 @@ HB_FUNC ( C_MCICLOSE )
 }
 
 #pragma ENDDUMP
-

@@ -61,4 +61,3 @@ PROCEDURE CloseTables()
    USE
 
    RETURN
-

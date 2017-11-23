@@ -188,4 +188,3 @@ STATIC FUNCTION FindSunday( dDate )
    ENDIF
 
    RETURN Sunday
-

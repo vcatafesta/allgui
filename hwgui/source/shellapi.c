@@ -62,7 +62,7 @@ HB_FUNC( HWG_SELECTFOLDER )
    BROWSEINFO bi;
    TCHAR lpBuffer[ MAX_PATH ];
    LPCTSTR lpResult = NULL;
-   LPITEMIDLIST pidlBrowse;     // PIDL selected by user 
+   LPITEMIDLIST pidlBrowse;     // PIDL selected by user
    void * hTitle;
    void * hFolderName;
    LPCTSTR lpFolderName;
@@ -77,7 +77,7 @@ HB_FUNC( HWG_SELECTFOLDER )
    bi.lParam = lpFolderName ? ( LPARAM ) lpFolderName : 0 ;
    bi.iImage = 0;
 
-   // Browse for a folder and return its PIDL. 
+   // Browse for a folder and return its PIDL.
    pidlBrowse = SHBrowseForFolder( &bi );
    if( pidlBrowse != NULL )
    {
@@ -99,7 +99,7 @@ HB_FUNC( HWG_SHELLNOTIFYICON )
    NOTIFYICONDATA tnid;
 
    memset( ( void * ) &tnid, 0, sizeof( NOTIFYICONDATA ) );
-   
+
    tnid.cbSize = sizeof( NOTIFYICONDATA );
    tnid.hWnd = ( HWND ) HB_PARHANDLE( 2 );
    tnid.uID = ID_NOTIFYICON;
@@ -109,26 +109,26 @@ HB_FUNC( HWG_SHELLNOTIFYICON )
    tnid.dwInfoFlags = (DWORD) hb_parnl(7);
    tnid.hIcon = ( HICON ) HB_PARHANDLE( 3 );
    tnid.uVersion = NOTIFYICON_VERSION_4;
-   
+
    tnid.szInfo[0] = 0;
-   
+
    //tnid.uTimeout = 2000;
-   
+
    HB_ITEMCOPYSTR( hb_param( 4, HB_IT_ANY ), tnid.szTip, HB_SIZEOFARRAY( tnid.szTip ) );
 
    //lstrcpy( tnid.szTip, TEXT((LPSTR) hb_parc(4)) );
    lstrcpy( tnid.szInfo, TEXT((LPSTR) hb_parc(5)) );
    lstrcpy( tnid.szInfoTitle, TEXT((LPSTR) hb_parc(6)) );
- 
+
    Shell_NotifyIcon( NIM_MODIFY, &tnid );
-   
-   //Shell_NotifyIcon( NIM_SETVERSION, &tnid );  
-   
+
+   //Shell_NotifyIcon( NIM_SETVERSION, &tnid );
+
    if( ( BOOL ) hb_parl( 1 ) )
       Shell_NotifyIcon( NIM_ADD, &tnid );
    else
       Shell_NotifyIcon( NIM_DELETE, &tnid );
-          
+
 }
 
 /*
@@ -144,7 +144,7 @@ HB_FUNC( HWG_SHELLMODIFYICON )
    tnid.cbSize = sizeof( NOTIFYICONDATA );
    tnid.hWnd = ( HWND ) HB_PARHANDLE( 1 );
    tnid.uID = ID_NOTIFYICON;
-   
+
    if( HB_ISNUM( 2 ) || HB_ISPOINTER( 2 ) )
    {
       tnid.uFlags |= NIF_ICON;
@@ -158,14 +158,14 @@ HB_FUNC( HWG_SHELLMODIFYICON )
    }
 
    tnid.dwInfoFlags = (DWORD) hb_parnl(6);
-   
+
    if( HB_ITEMCOPYSTR( hb_param( 4, HB_IT_ANY ),
                        tnid.szInfo, HB_SIZEOFARRAY( tnid.szInfo ) ) > 0 )
-   {	
+   {
       lstrcpy( tnid.szInfo, TEXT((LPSTR) hb_parc(4)) );
       lstrcpy( tnid.szInfoTitle, TEXT((LPSTR) hb_parc(5)) );
    }
-   
+
    Shell_NotifyIcon( NIM_MODIFY, &tnid );
 }
 
@@ -200,4 +200,3 @@ HB_FUNC( HWG_SHELLEXECUTE )
    hb_strfree( hDirectory );
 #endif
 }
-

@@ -344,4 +344,3 @@ FUNCTION NtxProgress()
    Form_idx.ProgressBar_1.Value := nComplete
 
    RETURN .t.
-

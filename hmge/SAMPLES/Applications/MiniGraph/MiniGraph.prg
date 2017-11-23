@@ -1123,4 +1123,3 @@ STATIC FUNCTION DetMaxVal( nNum )
    ENDDO
 
    RETURN ( nVal )
-

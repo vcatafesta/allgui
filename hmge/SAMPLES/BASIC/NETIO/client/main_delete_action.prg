@@ -34,4 +34,3 @@ FUNCTION main_delete_action
    ENDIF
 
    RETURN NIL
-

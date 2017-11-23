@@ -262,4 +262,3 @@ FUNCTION MyButtonsBottom( aVar )  // buttons at the bottom of the window
       WIDTH 80 HEIGHT 38
 
    RETURN NIL
-

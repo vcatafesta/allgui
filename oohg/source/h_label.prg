@@ -62,21 +62,21 @@ CLASS TLabel FROM TControl
    DATA nHeight   INIT 24
    DATA Picture   INIT nil
 
-METHOD SetText( cText )     BLOCK { | Self, cText | ::Caption := cText }
+   METHOD SetText( cText )     BLOCK { | Self, cText | ::Caption := cText }
 
-METHOD GetText()            BLOCK { | Self | ::Caption }
+   METHOD GetText()            BLOCK { | Self | ::Caption }
 
-METHOD Define
+   METHOD Define
 
-METHOD Value      SETGET
+   METHOD Value      SETGET
 
-METHOD Caption    SETGET
+   METHOD Caption    SETGET
 
-METHOD AutoSize   SETGET
+   METHOD AutoSize   SETGET
 
-METHOD Align      SETGET
+   METHOD Align      SETGET
 
-METHOD SetFont
+   METHOD SetFont
 
    EMPTY( _OOHG_AllVars )
 
@@ -225,4 +225,3 @@ HB_FUNC( INITLABEL )
    HWNDret( hbutton );
 }
 #pragma ENDDUMP
-

@@ -179,4 +179,3 @@ FUNCTION TextBoxEditSetSel( cParent, cControl, nStart, nEnd )
    SendMessage( GetControlHandle( cControl, cParent ), EM_SETSEL, nStart, nEnd )
 
    RETURN NIL
-

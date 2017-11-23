@@ -116,4 +116,3 @@ FUNCTION ProgressUpdate( nPos, cFile )
    /*
    * EOF
    */
-

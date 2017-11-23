@@ -292,4 +292,3 @@ STATIC FUNCTION ToString( xValue )
    ENDCASE
 
    RETURN cValue
-

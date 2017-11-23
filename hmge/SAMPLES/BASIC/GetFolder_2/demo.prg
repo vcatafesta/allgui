@@ -155,4 +155,3 @@ FUNCTION Browse_Click()
 STATIC FUNCTION IsWinXP()
 
    RETURN _HMG_IsXP
-

@@ -1,11 +1,7 @@
 
 #ifndef DESIGNER_CH
 
-
-
   #define DESIGNER_CH
-
-
 
   #define BDOWN_OCTRL   1
 
@@ -15,8 +11,4 @@
 
   #define BDOWN_NBORDER 4
 
-
-
 #endif
-
-

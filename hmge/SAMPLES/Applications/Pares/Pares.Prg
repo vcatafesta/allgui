@@ -150,4 +150,3 @@ PROCEDURE AcercaDe()
    MsgBox("(c) 2014, Roberto Sanchez"+NuevaLinea+"eMail: jrsancheze@gmail.com", "Derechos...")
 
    RETURN
-

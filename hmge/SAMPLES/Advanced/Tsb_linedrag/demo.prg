@@ -187,4 +187,3 @@ STATIC FUNCTION ReadSettings( oBrw )
    oBrw:GetColumn( "F4" ):cHeading := hIni[ "F4" ][ "Heading" ]
 
    RETURN NIL
-

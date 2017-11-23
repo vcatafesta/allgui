@@ -66,69 +66,69 @@ CLASS XBrowse_ODBC
 
    // Methods always used by XBrowse
 
-METHOD Skipper
+   METHOD Skipper
 
-METHOD GoTop              BLOCK { | Self | ::oODBC:First() }
+   METHOD GoTop              BLOCK { | Self | ::oODBC:First() }
 
-METHOD GoBottom           BLOCK { | Self | ::oODBC:Last() }
+   METHOD GoBottom           BLOCK { | Self | ::oODBC:Last() }
 
    // Methods used by XBrowse if you'll have a scrollbar
 
-METHOD RecNo              BLOCK { | Self | ::oODBC:RecNo }
+   METHOD RecNo              BLOCK { | Self | ::oODBC:RecNo }
 
-METHOD RecCount           BLOCK { | Self | ::oODBC:RecCount }
+   METHOD RecCount           BLOCK { | Self | ::oODBC:RecCount }
 
-METHOD GoTo( n )          BLOCK { | Self, n | ::oODBC:GoTo( n ) }
+   METHOD GoTo( n )          BLOCK { | Self, n | ::oODBC:GoTo( n ) }
 
-METHOD OrdKeyNo           BLOCK { | Self | ::oODBC:RecNo }
+   METHOD OrdKeyNo           BLOCK { | Self | ::oODBC:RecNo }
 
-METHOD OrdKeyCount        BLOCK { | Self | ::oODBC:RecCount }
+   METHOD OrdKeyCount        BLOCK { | Self | ::oODBC:RecCount }
 
-METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oODBC:GoTo( n ) }
+   METHOD OrdKeyGoTo( n )    BLOCK { | Self, n | ::oODBC:GoTo( n ) }
 
    // Methods used by XBrowse if you'll allow edition
    DATA cAlias__             INIT nil
 
-METHOD Eof                BLOCK { | Self | ::oODBC:Eof }
+   METHOD Eof                BLOCK { | Self | ::oODBC:Eof }
 
    // Used by "own" (XBrowse_ODBC) class (not used by XBrowse itself)
    DATA oODBC
 
-METHOD New( oODBC )       BLOCK { | Self, oODBC | ::oODBC := oODBC , Self }
+   METHOD New( oODBC )       BLOCK { | Self, oODBC | ::oODBC := oODBC , Self }
 
-METHOD FieldGet( p )      BLOCK { | Self, p | ::oODBC:Fields[ p ]:Value }
+   METHOD FieldGet( p )      BLOCK { | Self, p | ::oODBC:Fields[ p ]:Value }
 
-METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::oODBC:Fields[ p ]:Value := u }
+   METHOD FieldPut( p, u )   BLOCK { | Self, p, u | ::oODBC:Fields[ p ]:Value := u }
 
-METHOD Field( p )         BLOCK { | Self, p | ::oODBC:Fields[ p ]:FieldName }
+   METHOD Field( p )         BLOCK { | Self, p | ::oODBC:Fields[ p ]:FieldName }
 
-METHOD FieldName( p )     BLOCK { | Self, p | ::oODBC:Fields[ p ]:FieldName }
+   METHOD FieldName( p )     BLOCK { | Self, p | ::oODBC:Fields[ p ]:FieldName }
 
-METHOD FieldPos
+   METHOD FieldPos
 
    // Implemented but not used for this sample (not used by XBrowse itself)
 
-METHOD Use( oODBC )       BLOCK { | Self, oODBC | ::oODBC := oODBC , Self }
+   METHOD Use( oODBC )       BLOCK { | Self, oODBC | ::oODBC := oODBC , Self }
 
-METHOD Skip
+   METHOD Skip
 
-METHOD Bof                BLOCK { | Self | ::oODBC:Bof }
+   METHOD Bof                BLOCK { | Self | ::oODBC:Bof }
 
-METHOD FieldBlock
+   METHOD FieldBlock
 
-METHOD Commit             BLOCK { | Self | ::oODBC:Commit() }
+   METHOD Commit             BLOCK { | Self | ::oODBC:Commit() }
 
    // Interface to ODBC object
 
-METHOD Connect(cString)   BLOCK { | Self, cString | ::oODBC := TODBC() , ::oODBC:New( cString ) , Self }
+   METHOD Connect(cString)   BLOCK { | Self, cString | ::oODBC := TODBC() , ::oODBC:New( cString ) , Self }
 
-METHOD Query
+   METHOD Query
 
-METHOD Close              BLOCK { | Self | ::oODBC:Close() }
+   METHOD Close              BLOCK { | Self | ::oODBC:Close() }
 
-METHOD SQLErrorMessage    BLOCK { | Self | ::oODBC:SQLErrorMessage() }
+   METHOD SQLErrorMessage    BLOCK { | Self | ::oODBC:SQLErrorMessage() }
 
-METHOD Destroy            BLOCK { | Self | ::oODBC:Destroy() }
+   METHOD Destroy            BLOCK { | Self | ::oODBC:Destroy() }
 
    ERROR HANDLER FieldAssign
 
@@ -249,4 +249,3 @@ METHOD FieldAssign( xValue ) CLASS XBrowse_ODBC
    *   METHOD Append     BLOCK { | Self |                         ( ::cAlias__ )->( DbAppend() ) }
    *   METHOD Lock       BLOCK { | Self |                         ( ::cAlias__ )->( RLock() ) }
    *   METHOD DbStruct   BLOCK { | Self |                         ( ::cAlias__ )->( DbStruct() ) }
-

@@ -149,4 +149,3 @@ PROCEDURE Ajust()
    oActiveX:height := WinDemo:height - 72
 
    RETURN
-

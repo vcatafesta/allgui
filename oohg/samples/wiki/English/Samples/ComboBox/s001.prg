@@ -104,4 +104,3 @@ FUNCTION CreateDatabase()
    /*
    * EOF
    */
-

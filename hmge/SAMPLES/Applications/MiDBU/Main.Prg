@@ -84,4 +84,3 @@ STATIC FUNCTION OnSize()
    Win_1.cWeb.ROW     := (Win_1.HEIGHT)-103
 
    RETURN NIL
-

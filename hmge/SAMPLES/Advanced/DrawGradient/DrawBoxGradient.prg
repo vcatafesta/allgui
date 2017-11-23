@@ -60,4 +60,3 @@ PROCEDURE Main ()
    ACTIVATE WINDOW x
 
    RETURN
-

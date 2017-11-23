@@ -351,4 +351,3 @@ STATIC PROCEDURE Logging
    RETURN
 
    ****** End of Logging ******
-

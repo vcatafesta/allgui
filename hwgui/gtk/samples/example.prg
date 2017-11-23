@@ -18,4 +18,3 @@ FUNCTION Main
    oForm:ShowMain()
 
    RETURN NIL
-

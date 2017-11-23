@@ -13,7 +13,7 @@
 #include <prsht.h>
 #endif
 #include <commctrl.h>
-#define _RICHEDIT_VER	0x0200
+#define _RICHEDIT_VER   0x0200
 #include <richedit.h>
 #if defined(__DMC__)
 #define GetWindowLongPtr GetWindowLong
@@ -60,18 +60,17 @@ HB_FUNC( HWG_CREATERICHEDIT )
 
     //SendMessage( hCtrl, ( UINT ) EM_EXLIMITTEXT, ( WPARAM ) hb_parni( 9 ), ( LPARAM ) 0 );
     SendMessage( hCtrl, ( UINT ) EM_SETEVENTMASK, ( WPARAM ) 0, ( LPARAM ) ENM_SELCHANGE | ENM_DRAGDROPDONE | ENM_CHANGE | ENM_SCROLL );
-      
+
    lpText = HB_PARSTR( 8, &hText, NULL );
    if( lpText )
       SendMessage( hCtrl, WM_SETTEXT, 0, ( LPARAM ) lpText );
    hb_strfree( hText );
-   
 
    HB_RETHANDLE( hCtrl );
 }
 
 /*
- * re_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic, 
+ * re_SetCharFormat( hCtrl, n1, n2, nColor, cName, nHeight, lBold, lItalic,
            lUnderline, nCharset, lSuperScript/lSubscript(.T./.F.), lProtected )
  */
 HB_FUNC( HWG_RE_SETCHARFORMAT )
@@ -286,7 +285,6 @@ HB_FUNC( HWG_RE_SETDEFAULT )
    cf.dwMask |= ( CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE );
    SendMessage( hCtrl, EM_SETCHARFORMAT, SCF_ALL, ( LPARAM ) & cf );
 
-
 }
 
 /*
@@ -377,11 +375,10 @@ HB_FUNC( HWG_RE_FINDTEXT )
 HB_FUNC( HWG_RE_SETZOOM )
 {
    HWND hwnd = ( HWND ) HB_PARHANDLE( 1 );
-   int nNum = hb_parni(2); 
-   int nDen = hb_parni(3); 
+   int nNum = hb_parni(2);
+   int nDen = hb_parni(3);
    hb_retnl( (BOOL) SendMessage(hwnd, EM_SETZOOM, nNum, nDen) );
 }
-
 
 HB_FUNC( HWG_RE_ZOOMOFF )
 {
@@ -392,8 +389,8 @@ HB_FUNC( HWG_RE_ZOOMOFF )
 HB_FUNC( HWG_RE_GETZOOM )
 {
    HWND hwnd = ( HWND ) HB_PARHANDLE( 1 );
-   int nNum = hb_parni(2); 
-   int nDen = hb_parni(3); 
+   int nNum = hb_parni(2);
+   int nDen = hb_parni(3);
    hb_retnl( (BOOL) SendMessage(hwnd, EM_GETZOOM, (WPARAM)&nNum, (LPARAM)&nDen) );
    hb_storni( nNum, 2 );
    hb_storni( nDen, 3 );
@@ -401,7 +398,7 @@ HB_FUNC( HWG_RE_GETZOOM )
 
 HB_FUNC( HWG_PRINTRTF )
 {
-    HWND hwnd = ( HWND ) HB_PARHANDLE( 1 );     
+    HWND hwnd = ( HWND ) HB_PARHANDLE( 1 );
     HDC hdc = ( HDC ) HB_PARHANDLE( 2 );
     FORMATRANGE fr;
     BOOL fSuccess = TRUE;
@@ -423,12 +420,12 @@ HB_FUNC( HWG_PRINTRTF )
 
     SendMessage(hwnd, EM_SETSEL, 0, (LPARAM) -1 );
     SendMessage(hwnd, EM_EXGETSEL, 0, (LPARAM)&fr.chrg);
-    while (fr.chrg.cpMin < fr.chrg.cpMax && fSuccess) 
+    while (fr.chrg.cpMin < fr.chrg.cpMax && fSuccess)
     {
         fSuccess = StartPage(hdc) > 0;
         if (!fSuccess) break;
         cpMin = SendMessage(hwnd, EM_FORMATRANGE, TRUE, (LPARAM)&fr);
-        if (cpMin <= fr.chrg.cpMin) 
+        if (cpMin <= fr.chrg.cpMin)
         {
             fSuccess = FALSE;
             break;
@@ -482,11 +479,11 @@ static DWORD CALLBACK RichStreamOutCallback( DWORD dwCookie, LPBYTE pbBuff, LONG
    HANDLE pFile = ( HANDLE ) dwCookie;
    DWORD dwW;
    HB_SYMBOL_UNUSED( pcb );
-   
+
    if ( pFile == INVALID_HANDLE_VALUE )
       return 0;
-      
-   WriteFile( pFile, pbBuff, cb, &dwW,NULL );   
+
+   WriteFile( pFile, pbBuff, cb, &dwW,NULL );
    return 0;
 }
 
@@ -502,24 +499,24 @@ HB_FUNC( HWG_SAVERICHEDIT )
    HWND hWnd = ( HWND ) HB_PARHANDLE( 1 );
    HANDLE hFile ;
    EDITSTREAM es;
-   void * hFileName; 
+   void * hFileName;
    LPCTSTR lpFileName;
    HB_SIZE nSize ;
-   
+
    lpFileName = HB_PARSTR( 2, &hFileName, &nSize );
    hFile = CreateFile( lpFileName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL ) ;
    if ( hFile == INVALID_HANDLE_VALUE )
    {
       hb_retni( 0 );
       return;
-   }   
+   }
    es.dwCookie = ( DWORD ) hFile;
-   es.pfnCallback = RichStreamOutCallback; 
+   es.pfnCallback = RichStreamOutCallback;
 
    SendMessage( hWnd, EM_STREAMOUT, ( WPARAM ) SF_RTF, ( LPARAM )&es) ;
    CloseHandle( hFile );
    HB_RETHANDLE( hFile );
-  
+
 }
 
 HB_FUNC( HWG_LOADRICHEDIT )
@@ -528,10 +525,10 @@ HB_FUNC( HWG_LOADRICHEDIT )
    HWND hWnd = ( HWND ) HB_PARHANDLE( 1 );
    HANDLE hFile ;
    EDITSTREAM es;
-   void * hFileName; 
+   void * hFileName;
    LPCTSTR lpFileName;
    HB_SIZE nSize ;
-   
+
    lpFileName = HB_PARSTR( 2, &hFileName, &nSize );
    hFile = CreateFile( lpFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
    if ( hFile == INVALID_HANDLE_VALUE )
@@ -540,9 +537,8 @@ HB_FUNC( HWG_LOADRICHEDIT )
       return;
    }
    es.dwCookie = ( DWORD ) hFile;
-   es.pfnCallback = EditStreamCallback; 
+   es.pfnCallback = EditStreamCallback;
    SendMessage( hWnd, EM_STREAMIN, ( WPARAM ) SF_RTF, ( LPARAM )&es) ;
    CloseHandle( hFile );
-   HB_RETHANDLE( hFile );  
+   HB_RETHANDLE( hFile );
 }
-

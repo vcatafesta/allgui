@@ -331,4 +331,3 @@ FUNCTION inmet(rfi)
    NEXT
 
    RETURN ccolor
-

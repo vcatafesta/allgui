@@ -153,4 +153,3 @@ PROCEDURE Background_Erase
    BT_ClientAreaInvalidateAll ("Win1", .T.)
 
    RETURN
-

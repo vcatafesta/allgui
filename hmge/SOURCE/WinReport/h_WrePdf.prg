@@ -1396,4 +1396,3 @@ FUNCTION _WR_IMAGE_PDF ( cImage, nRow, nCol, nImageheight, nImageWidth, lStretch
    HPDF_Page_DrawImage( _HMG_HPDFDATA[ 1 ][ 7 ], oImage, nxPos, nyPos - _HMG_HPDF_MM2Pixel( nImageHeight ), _HMG_HPDF_MM2Pixel( nImageWidth ), _HMG_HPDF_MM2Pixel( nImageHeight ) )
 
    RETURN NIL
-

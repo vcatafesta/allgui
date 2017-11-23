@@ -364,4 +364,3 @@ STATIC FUNCTION cHex2Bin( cHex )
    NEXT
 
    RETURN iif( Len( cHex ) > 4, L2Bin( Int( nDec ) ), iif( Len( cHex ) > 2, I2Bin( Int( nDec ) ), Chr( Int( nDec ) ) ) )
-

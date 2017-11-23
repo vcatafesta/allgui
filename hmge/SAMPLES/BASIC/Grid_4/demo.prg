@@ -116,4 +116,3 @@ PROCEDURE GETITEM()
    aEval( a, {|x,i| msginfo ( if(valtype(x)=="C", x, str(x)), ltrim( str ( i ) ) )} )
 
    RETURN
-

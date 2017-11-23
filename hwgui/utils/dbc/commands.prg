@@ -531,4 +531,3 @@ FUNCTION C_REL
    oDlg:Activate()
 
    RETURN NIL
-

@@ -59,43 +59,43 @@ CLASS TMonthCal FROM TControl
    DATA OnViewChange              INIT Nil
    DATA aBoldDays                 INIT {}
 
-METHOD Define
+   METHOD Define
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD FontColor               SETGET
+   METHOD FontColor               SETGET
 
-METHOD BackColor               SETGET
+   METHOD BackColor               SETGET
 
-METHOD TitleFontColor          SETGET
+   METHOD TitleFontColor          SETGET
 
-METHOD TitleBackColor          SETGET
+   METHOD TitleBackColor          SETGET
 
-METHOD TrailingFontColor       SETGET
+   METHOD TrailingFontColor       SETGET
 
-METHOD BackgroundColor         SETGET
+   METHOD BackgroundColor         SETGET
 
-METHOD SetRange
+   METHOD SetRange
 
-METHOD Define2
+   METHOD Define2
 
-METHOD CurrentView             SETGET
+   METHOD CurrentView             SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Width                   SETGET
+   METHOD Width                   SETGET
 
-METHOD Height                  SETGET
+   METHOD Height                  SETGET
 
-METHOD AddBoldDay
+   METHOD AddBoldDay
 
-METHOD DelBoldDay
+   METHOD DelBoldDay
 
-METHOD IsBoldDay               BLOCK { |Self, dDay| aScan( ::aBoldDays, dDay ) > 0 }
+   METHOD IsBoldDay               BLOCK { |Self, dDay| aScan( ::aBoldDays, dDay ) > 0 }
 
    EMPTY( _OOHG_AllVars )
 
@@ -300,13 +300,13 @@ CLASS TMonthCalMulti FROM TMonthCal
 
    DATA Type                      INIT "MONTHCALMULTI" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD MaxSelCount             SETGET
+   METHOD MaxSelCount             SETGET
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -947,4 +947,3 @@ HB_FUNC( GETDAYSTATEDATA )
 }
 
 #pragma ENDDUMP
-

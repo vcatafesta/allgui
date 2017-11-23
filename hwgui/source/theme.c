@@ -1377,11 +1377,9 @@ LRESULT OnButtonDraw( LPARAM  lParam)
 
             BOOL bHasTitle ;
 
-
       RECT itemRect = lpDIS->rcItem;
             if(hTheme)
                Themed = TRUE;
-
 
       SetBkMode(dc, TRANSPARENT);
 
@@ -1885,7 +1883,7 @@ HB_FUNC( HWG_PREPAREIMAGERECT )
    hb_storvni( rpTitle.right  , 5 , 3);
    hb_storvni( rpTitle.bottom , 5 , 4);
 
-   hb_itemRelease( hb_itemReturn( Rect2ArrayH( &rImage ) ) ); 
+   hb_itemRelease( hb_itemReturn( Rect2ArrayH( &rImage ) ) );
 
 }
 
@@ -1959,7 +1957,6 @@ HB_FUNC( HWG_BUTTONEXONSETSTYLE )
                ( wParam & ~BS_TYPEMASK ) | BS_OWNERDRAW, lParam ) );
 }                               // End of OnSetStyle
 
-
 HB_FUNC( HWG_GETTHESTYLE )
 {
    LONG nBS = hb_parnl( 1 );
@@ -1992,7 +1989,6 @@ HB_FUNC( HWG_ISTHEMEACTIVE )
    hb_retl( hb_IsThemeActive(  ) );
 }
 
-
 HB_FUNC( HWG_GETTHEMESYSCOLOR )
 {
    HWND hTheme = ( HWND ) HB_PARHANDLE( 1 );
@@ -2001,9 +1997,8 @@ HB_FUNC( HWG_GETTHEMESYSCOLOR )
    HB_RETHANDLE( hb_GetThemeSysColor( hTheme, iColor ) );
 }
 
-
 /* NANDO  18/09/2011 */
-                                                            
+
 HB_FUNC( HWG_SETWINDOWTHEME)
 {
    HWND hwnd = (HWND) HB_PARHANDLE( 1 ) ;
@@ -2022,9 +2017,9 @@ HB_FUNC( HWG_SETWINDOWTHEME)
       //Windows XP detected
       if ( ienable == 0 )
          hb_SetWindowTheme( hwnd, L" ", L" " ) ; // pszSubAppName,L pszSubIdList) ;
-      else 
+      else
          hb_SetWindowTheme( hwnd, NULL, NULL) ;
-      }   
+      }
 }
 
 HB_FUNC( HWG_GETWINDOWTHEME )
@@ -2045,4 +2040,3 @@ HB_FUNC( HWG_GETWINDOWTHEME )
    else
       HB_RETHANDLE ( 0 );
 }
-

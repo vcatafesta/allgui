@@ -818,9 +818,7 @@ FUNCTION OnChangeRadio()
    RETURN NIL
 
    /*
-
    Function ModalPropSheetFun( hWndDlg, nMsg , Id, Notify )
-
    LOCAL ret := FALSE, DLLType, hControl, i
 
    if Id != Nil
@@ -866,4 +864,3 @@ FUNCTION OnChangeRadio()
 
    Return ret
    */
-

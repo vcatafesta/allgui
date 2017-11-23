@@ -20,4 +20,3 @@ FUNCTION main()
    HB_SYMBOL_UNUSED(hLib)
 
    RETURN NIL
-

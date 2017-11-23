@@ -96,4 +96,3 @@ PROCEDURE Test()
    Win1.Test.XObject:Showfile( "c:\minigui\samples\advanced\bmpviewer\bmps\HateComp.bmp", 1 )
 
    RETURN
-

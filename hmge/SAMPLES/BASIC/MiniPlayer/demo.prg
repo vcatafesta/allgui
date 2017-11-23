@@ -322,4 +322,3 @@ PROCEDURE custom_progress_bar( cWindowName, nRow, nCol, nWidth, nHeight, aColor,
    DRAW RECTANGLE IN WINDOW &cWindowName AT nStartRow, nStartCol TO nFinishRow, nFinishCol PENCOLOR BLACK FILLCOLOR aColor
 
    RETURN
-

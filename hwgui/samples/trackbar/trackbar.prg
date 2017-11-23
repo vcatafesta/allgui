@@ -99,4 +99,3 @@ FUNCTION UpdateSayDlg2 ()
    oSayDlg2:SetValue( str( oTB2:GetValue() ) )
 
    RETURN NIL
-

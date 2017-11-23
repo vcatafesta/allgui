@@ -208,4 +208,3 @@ FUNCTION CreoTabla
    ENDIF
 
    RETURN .t.
-

@@ -19,4 +19,3 @@ FUNCTION Main
    oTrayMenu:End()
 
    RETURN NIL
-

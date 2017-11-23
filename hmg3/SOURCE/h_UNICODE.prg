@@ -42,4 +42,3 @@ FUNCTION MsgDebugUnicode
    HMG_MsgInfoUnicode (cMsg, "DEBUG Unicode INFO")
 
    RETURN cMsg
-

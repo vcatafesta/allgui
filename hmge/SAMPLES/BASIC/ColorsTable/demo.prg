@@ -629,4 +629,3 @@ STATIC FUNCTION InitColorsArray()
       {"LightGreen", "144 238 144"} }
 
    RETURN aClrData
-

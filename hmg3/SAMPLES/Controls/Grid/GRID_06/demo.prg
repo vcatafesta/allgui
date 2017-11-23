@@ -56,4 +56,3 @@ PROCEDURE DblCLickTest()
    MsgInfo ( Str ( This.CellHeight )   , 'CellHeight' )
 
    RETURN
-

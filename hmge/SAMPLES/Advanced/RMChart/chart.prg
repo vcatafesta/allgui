@@ -113,4 +113,3 @@ STATIC PROCEDURE Ajust()
    oActiveX:Adjust()
 
    RETURN
-

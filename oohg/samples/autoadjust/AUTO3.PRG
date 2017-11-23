@@ -108,4 +108,3 @@ FUNCTION AltoDP()
    principal.datepicker_1.height := 24
 
    RETURN NIL
-

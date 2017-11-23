@@ -45,11 +45,9 @@ FUNCTION main()
    *.....................................................*
 
    proc cas_change
-
       LOCAL x1 := alltrim(str( form_1.listbox_1.value ))
       LOCAL x2 := alltrim(str( form_1.listbox_1.ItemCount ))
       LOCAL x3 := form_1.listbox_1.Item( val(x1) )
-
       Form_1.StatusBar.Item(1) := ;
          "form_1.listbox_1.value = "     + x1 +space(15)+;
          "form_1.listbox_1.ItemCount = " + x2 +space(15)+;
@@ -60,7 +58,6 @@ FUNCTION main()
       *.....................................................*
 
       proc cas_add
-
          LOCAL nn := form_1.ListBox_1.ItemCount + 1
          LOCAL xx := alltrim(str( nn ))
 
@@ -73,7 +70,6 @@ FUNCTION main()
          *.....................................................*
 
          proc cas_del
-
             LOCAL n1
             LOCAL nn := form_1.ListBox_1.value
 
@@ -91,7 +87,6 @@ FUNCTION main()
             *.....................................................*
 
             proc cas_delete_all
-
                form_1.ListBox_1.DeleteAllItems
                //form_1.ListBox_1.value := 0
                cas_change()
@@ -101,7 +96,6 @@ FUNCTION main()
                *.....................................................*
 
                proc cas_modify
-
                   LOCAL nn := form_1.ListBox_1.value
 
                   form_1.ListBox_1.item( nn ) := 'Nº ' + alltrim( str(nn) )
@@ -110,4 +104,3 @@ FUNCTION main()
                   cas_change()
 
                   RETURN
-

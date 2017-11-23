@@ -68,4 +68,3 @@ PROCEDURE Main()
 FUNCTION ComboSearch( aArray, cValue )
 
    RETURN Ascan( aArray, {|e| SubStr(e, 2) = cValue} )
-

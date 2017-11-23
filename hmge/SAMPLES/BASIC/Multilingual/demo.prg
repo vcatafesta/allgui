@@ -201,4 +201,3 @@ FUNCTION InterfaceLanguage_Click() // Select language from list
    #ifdef __XHARBOUR__
    #include <fileread.prg>
    #endif
-

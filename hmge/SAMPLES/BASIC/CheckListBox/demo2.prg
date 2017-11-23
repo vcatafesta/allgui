@@ -78,7 +78,6 @@ proc clb_add
    *.....................................................*
 
    proc clb_del
-
       LOCAL n1
       LOCAL nn := form_1.ListBox_1.value
 
@@ -95,7 +94,6 @@ proc clb_add
       *.....................................................*
 
       proc clb_delete_all
-
          form_1.ListBox_1.DeleteAllItems
          form_1.ListBox_1.value := 1
 
@@ -104,7 +102,6 @@ proc clb_add
          *.....................................................*
 
          proc clb_modify
-
             LOCAL nn := form_1.ListBox_1.value
 
             IF nn > 0
@@ -142,7 +139,6 @@ FUNCTION clb_getCheck(nn)
    *.....................................................*
 
    proc OnPressSpacebar()
-
       IF GetProperty('form_1',"FOCUSEDCONTROL") == "ListBox_1"
          clb_Check()
       ELSE
@@ -154,7 +150,6 @@ FUNCTION clb_getCheck(nn)
       *.....................................................*
 
       proc cmlb_add
-
          LOCAL nn := form_1.ListBox_2.ItemCount + 1
 
          form_1.ListBox_2.AddItem( 'ITEM_' + alltrim(str( nn )) )
@@ -165,7 +160,6 @@ FUNCTION clb_getCheck(nn)
          *.....................................................*
 
          proc cmlb_del
-
             LOCAL n1, i
             LOCAL nn := form_1.ListBox_2.value
 
@@ -186,7 +180,6 @@ FUNCTION clb_getCheck(nn)
             *.....................................................*
 
             proc cmlb_delete_all
-
                form_1.ListBox_2.DeleteAllItems
                form_1.ListBox_2.value := 1
 
@@ -195,7 +188,6 @@ FUNCTION clb_getCheck(nn)
                *.....................................................*
 
                proc cmlb_modify
-
                   LOCAL i, nn := form_1.ListBox_2.value
 
                   FOR i := 1 to len(nn)
@@ -235,4 +227,3 @@ FUNCTION cmlb_getCheck(nn)
    lCheck := GetProperty('form_1','ListBox_2',"CHECKBOXITEM",nn)
 
    RETURN lCheck
-

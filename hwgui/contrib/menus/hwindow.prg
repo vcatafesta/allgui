@@ -50,24 +50,24 @@ CLASS VAR oDefaultParent SHARED
    DATA bOther
    DATA cargo
 
-METHOD AddControl( oCtrl ) INLINE Aadd( ::aControls,oCtrl )
+   METHOD AddControl( oCtrl ) INLINE Aadd( ::aControls,oCtrl )
 
-METHOD DelControl( oCtrl )
+   METHOD DelControl( oCtrl )
 
-METHOD AddEvent( nEvent,nId,bAction,lNotify ) ;
+   METHOD AddEvent( nEvent,nId,bAction,lNotify ) ;
       INLINE Aadd( Iif( lNotify==Nil.OR.!lNotify,::aEvents,::aNotify ),{nEvent,nId,bAction} )
 
-METHOD FindControl( nId,nHandle )
+   METHOD FindControl( nId,nHandle )
 
-METHOD Hide() INLINE (::lHide:=.T.,HideWindow(::handle))
+   METHOD Hide() INLINE (::lHide:=.T.,HideWindow(::handle))
 
-METHOD Show() INLINE (::lHide:=.F.,ShowWindow(::handle))
+   METHOD Show() INLINE (::lHide:=.F.,ShowWindow(::handle))
 
-METHOD Restore()  INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
+   METHOD Restore()  INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_RESTORE, 0)
 
-METHOD Maximize() INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0)
+   METHOD Maximize() INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_MAXIMIZE, 0)
 
-METHOD Minimize() INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
+   METHOD Minimize() INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
 
 ENDCLASS
 
@@ -105,24 +105,24 @@ CLASS VAR szAppName  SHARED INIT "HwGUI_App"
    DATA aOffset
    DATA lMaximize INIT .F.
 
-METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
+   METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,cAppName,oBmp, lMaximize )
 
-METHOD Activate( lShow )
+   METHOD Activate( lShow )
 
-METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu )
+   METHOD InitTray( oNotifyIcon, bNotify, oNotifyMenu )
 
-METHOD AddItem( oWnd )
+   METHOD AddItem( oWnd )
 
-METHOD DelItem( oWnd )
+   METHOD DelItem( oWnd )
 
-METHOD FindWindow( hWnd )
+   METHOD FindWindow( hWnd )
 
-METHOD GetMain()
+   METHOD GetMain()
 
-METHOD GetMdiActive()
+   METHOD GetMdiActive()
 
-METHOD Close()   INLINE EndWindow()
+   METHOD Close()   INLINE EndWindow()
 
 ENDCLASS
 
@@ -1189,4 +1189,3 @@ FUNCTION DefMDIWndProc( hWnd, msg, wParam, lParam )
 FUNCTION GetChildWindowsNumber
 
    RETURN Len( HWindow():aWindows ) - 2
-

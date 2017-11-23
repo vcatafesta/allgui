@@ -88,14 +88,10 @@ RETURN NIL
 
 CLASS TCustomer from TData
 
-METHOD new
-
-METHOD browse
-
-METHOD add
-
-METHOD edit
-
+   METHOD new
+   METHOD browse
+   METHOD add
+   METHOD edit
    message delete method _delete
    Hidden:
    DATA lAdd as logical
@@ -295,4 +291,3 @@ PROCEDURE SetEditFocus(value)
    ENDIF
 
    RETURN
-

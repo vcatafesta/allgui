@@ -728,9 +728,7 @@ STATIC FUNCTION Page_Text( pdf, grid )
 
       RETURN NIL
       /*------------------------------------------------------------------------*
-
       Static Function PrintText( page )
-
       Local buf, pos := HPDF_Page_GetCurrentTextPos( page )
 
       static no := 0
@@ -1857,7 +1855,6 @@ STATIC FUNCTION Page_Link_Annotation( pdf )
 
    RETURN NIL
    /*------------------------------------------------------------------------*
-
    Static Function Print_page  (page, font,page_num)
 
    HPDF_Page_SetWidth (page, 200)
@@ -2201,4 +2198,3 @@ STATIC FUNCTION hb_zebra_draw_hpdf( hZebra, page, ... )
    HPDF_Page_Fill( page )
 
    RETURN 0
-

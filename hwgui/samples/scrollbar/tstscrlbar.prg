@@ -107,4 +107,3 @@ STATIC FUNCTION stdScroll( oDlg, msg, wParam, lParam, nIncr )
    ENDIF
 
    RETURN - 1
-

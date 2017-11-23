@@ -2911,4 +2911,3 @@ HB_FUNC ( _CONTROLPOS_C_MOVECONTROL_ )
 #endif
 
 #pragma ENDDUMP
-

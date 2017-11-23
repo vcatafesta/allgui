@@ -73,4 +73,3 @@ PROCEDURE Proc_ON_PAINT( hBitmap )
    /*
    * EOF
    */
-

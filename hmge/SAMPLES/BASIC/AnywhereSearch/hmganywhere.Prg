@@ -201,4 +201,3 @@ FUNCTION TreeItemGetAllValue ( ControlName , ParentForm )
    ENDIF
 
    RETURN IF (EMPTY(aAllValues), NIL, aAllValues)
-

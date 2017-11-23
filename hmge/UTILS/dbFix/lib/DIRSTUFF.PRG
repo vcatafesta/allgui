@@ -122,4 +122,3 @@ FUNCTION MultiDel(xDelMask)
    NEXT
 
    Return(NIL)
-

@@ -10,4 +10,3 @@ PROCEDURE Main
    ACTIVATE WINDOW Notify
 
    RETURN
-

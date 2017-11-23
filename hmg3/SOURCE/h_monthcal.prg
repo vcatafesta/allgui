@@ -185,4 +185,3 @@ FUNCTION SetMonthCalendarColor (cControlName, cParentName, nIndexColor, aRGBcolo
    LOCAL RGBcolorRef := DATETIME_SETMONTHCALCOLOR (GetControlHandle (cControlName, cParentName), nIndexColor, RGB (aRGBcolor[1], aRGBcolor[2], aRGBcolor[3]))
 
    RETURN { GETRED (RGBcolorRef), GETGREEN (RGBcolorRef), GETBLUE (RGBcolorRef) }
-

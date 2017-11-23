@@ -221,4 +221,3 @@ HB_FUNC( PASTE_TEXT )
 }
 
 #pragma ENDDUMP
-

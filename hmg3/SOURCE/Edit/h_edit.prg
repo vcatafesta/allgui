@@ -1582,4 +1582,3 @@ FUNCTION NoArray (OldArray)
    NEXT i
 
    RETURN NewArray
-

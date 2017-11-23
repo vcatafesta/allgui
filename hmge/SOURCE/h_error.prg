@@ -103,4 +103,3 @@ STATIC FUNCTION _HMG_GenError( cMsg )
 FUNCTION MiniGuiVersion
 
    RETURN( "Harbour MiniGUI Extended Edition 17.11 (" + iif( IsExe64(), "64", "32" ) + "-bit)" )
-

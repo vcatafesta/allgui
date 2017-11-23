@@ -104,4 +104,3 @@ FUNCTION DataInput()
    /*
    * EOF
    */
-

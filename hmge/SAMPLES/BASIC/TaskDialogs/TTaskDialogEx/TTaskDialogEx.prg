@@ -10,12 +10,9 @@ CREATE CLASS TTaskDialogEx FUNCTION TaskDialogEx FROM TaskDialog
 
    EXPORTED:
 
-METHOD OnButtonClicked( hWnd, nNotification, nWParam, nLParam )
-
-METHOD OnCreated( hWnd, nNotification, nWParam, nLParam )
-
-METHOD OnDestroyed( hWnd, nNotification, nWParam, nLParam )
-
+   METHOD OnButtonClicked( hWnd, nNotification, nWParam, nLParam )
+   METHOD OnCreated( hWnd, nNotification, nWParam, nLParam )
+   METHOD OnDestroyed( hWnd, nNotification, nWParam, nLParam )
    // and etc..
 
 ENDCLASS
@@ -88,4 +85,3 @@ PROCEDURE main()
       ENDWITH
 
       RETURN
-

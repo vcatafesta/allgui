@@ -91,4 +91,3 @@ FUNCTION xPadC( cText, nPixels, cChar )
    ENDIF
 
    RETURN cRet
-

@@ -21,30 +21,30 @@ CLASS HPanel INHERIT HControl, HScrollArea
    DATA lBorder INIT .F.
    DATA nRePaint  INIT  - 1
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bcolor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor )
+   METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD BackColor( bcolor ) INLINE ::SetColor(, bcolor, .T. )
+   METHOD BackColor( bcolor ) INLINE ::SetColor(, bcolor, .T. )
 
-METHOD Hide()
+   METHOD Hide()
 
-METHOD Show()
+   METHOD Show()
 
-METHOD Release()
+   METHOD Release()
 
-METHOD Resize()
+   METHOD Resize()
 
-METHOD ResizeOffSet( nMode )
+   METHOD ResizeOffSet( nMode )
 
 ENDCLASS
 
@@ -437,4 +437,3 @@ METHOD ResizeOffSet( nMode ) CLASS HPanel
    ENDIF
 
    RETURN lRes
-

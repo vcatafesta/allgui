@@ -59,7 +59,6 @@
  * If you do not wish that, delete this exception notice.
  */
 
-
 #define _WIN32_IE      0x0500
 #define HB_OS_WIN_32_USED
 #define _WIN32_WINNT   0x0400
@@ -84,34 +83,34 @@ static LRESULT APIENTRY SubClassFunc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 
 HB_FUNC( INITPROGRESSBAR )
 {
-	HWND hwnd;
-	HWND hbutton;
+   HWND hwnd;
+   HWND hbutton;
    int StyleEx;
-	int Style = WS_CHILD  | hb_parni( 2 );
+   int Style = WS_CHILD  | hb_parni( 2 );
 
-	INITCOMMONCONTROLSEX  i;
-	i.dwSize = sizeof(INITCOMMONCONTROLSEX);
-	i.dwICC = ICC_DATE_CLASSES;
-	InitCommonControlsEx(&i);
+   INITCOMMONCONTROLSEX  i;
+   i.dwSize = sizeof(INITCOMMONCONTROLSEX);
+   i.dwICC = ICC_DATE_CLASSES;
+   InitCommonControlsEx(&i);
 
    hwnd = HWNDparam( 1 );
 
    StyleEx = WS_EX_CLIENTEDGE | _OOHG_RTL_Status( hb_parl( 13 ) );
 
-	if ( hb_parl (9) )
-	{
-		Style = Style | PBS_VERTICAL ;
-	}
+   if ( hb_parl (9) )
+   {
+      Style = Style | PBS_VERTICAL ;
+   }
 
-	if ( hb_parl (10) )
-	{
-		Style = Style | PBS_SMOOTH ;
-	}
+   if ( hb_parl (10) )
+   {
+      Style = Style | PBS_SMOOTH ;
+   }
 
-	if ( ! hb_parl (11) )
-	{
-		Style = Style | WS_VISIBLE ;
-	}
+   if ( ! hb_parl (11) )
+   {
+      Style = Style | WS_VISIBLE ;
+   }
 
     hbutton = CreateWindowEx( StyleEx,
                              "msctls_progress32" ,
@@ -125,8 +124,8 @@ HB_FUNC( INITPROGRESSBAR )
                              GetModuleHandle(NULL) ,
                              NULL ) ;
 
-	SendMessage(hbutton,PBM_SETRANGE,0,MAKELONG(hb_parni(7),hb_parni(8)));
-	SendMessage(hbutton,PBM_SETPOS,(WPARAM) hb_parni(12),0);
+   SendMessage(hbutton,PBM_SETRANGE,0,MAKELONG(hb_parni(7),hb_parni(8)));
+   SendMessage(hbutton,PBM_SETPOS,(WPARAM) hb_parni(12),0);
 
    lpfnOldWndProc = ( WNDPROC ) SetWindowLong( ( HWND ) hbutton, GWL_WNDPROC, ( LONG ) SubClassFunc );
 

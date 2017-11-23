@@ -393,4 +393,3 @@ FUNCTION LDCS_ILevel(nLevel)
    RETURN cRetVal
 
    //----------------------------- END OF PUBLIC FUNCTION DECLARATION ---------------------------------
-

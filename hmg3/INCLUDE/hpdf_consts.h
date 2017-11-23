@@ -15,7 +15,6 @@
  *
  */
 
-
 #ifndef _HPDF_CONSTS_H
 #define _HPDF_CONSTS_H
 
@@ -81,7 +80,6 @@
  */
 #define  HPDF_COMP_MASK            0xFF
 
-
 /*----------------------------------------------------------------------------*/
 /*----- permission flags (only Revision 2 is supported)-----------------------*/
 
@@ -90,7 +88,6 @@
 #define HPDF_ENABLE_EDIT_ALL     8
 #define HPDF_ENABLE_COPY         16
 #define HPDF_ENABLE_EDIT         32
-
 
 /*----------------------------------------------------------------------------*/
 /*------ viewer preferences definitions --------------------------------------*/
@@ -101,7 +98,6 @@
 #define HPDF_FIT_WINDOW      8
 #define HPDF_CENTER_WINDOW   16
 #define HPDF_PRINT_SCALING_NONE   32
-
 
 /*---------------------------------------------------------------------------*/
 /*------ limitation of object implementation (PDF1.4) -----------------------*/
@@ -531,7 +527,6 @@
 #define HPDF_LANG_ZH    "zh"     /* Chinese */
 #define HPDF_LANG_ZU    "zu"     /* Zulu */
 
-
 /*----------------------------------------------------------------------------*/
 /*----- Graphis mode ---------------------------------------------------------*/
 
@@ -542,7 +537,6 @@
 #define   HPDF_GMODE_SHADING                0x0010
 #define   HPDF_GMODE_INLINE_IMAGE           0x0020
 #define   HPDF_GMODE_EXTERNAL_OBJECT        0x0040
-
 
 /*----------------------------------------------------------------------------*/
 

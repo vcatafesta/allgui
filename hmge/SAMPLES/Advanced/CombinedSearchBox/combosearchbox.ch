@@ -41,7 +41,7 @@
                             <.upper.>, <.lower.>, <.numeric.>, ;
                 <{lostfocus}>, <{gotfocus}>, <{enter}>, ;
                 <.RightAlign.>, <helpid>, <.bold.>, <.italic.>, <.underline.>, <backcolor> , <fontcolor> , <.notabstop.>, <aitems> )
-                
+
 #xcommand DEFINE COMBOSEARCHBOX <name> ;
     =>;
        _HMG_ActiveControlName          := <"name"> ;;
@@ -71,7 +71,7 @@
        _HMG_ActiveControlNoTabStop     := .t.      ;;
        _HMG_ActiveControlItems         := Nil
 
-          
+
 #xcommand END COMBOSEARCHBOX ;
     =>;
           _DefineComboSearchBox( ;

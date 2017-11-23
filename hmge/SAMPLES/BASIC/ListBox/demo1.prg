@@ -23,7 +23,6 @@ FUNCTION main()
    *.....................................................*
 
    proc cas_add
-
       LOCAL nn := form_1.ListBox_1.ItemCount + 1
 
       form_1.ListBox_1.AddItem( 'ITEM_' + alltrim(str( nn )) )
@@ -34,7 +33,6 @@ FUNCTION main()
       *.....................................................*
 
       proc cas_del
-
          LOCAL n1
          LOCAL nn := form_1.ListBox_1.value
 
@@ -51,7 +49,6 @@ FUNCTION main()
          *.....................................................*
 
          proc cas_delete_all
-
             form_1.ListBox_1.DeleteAllItems
             form_1.ListBox_1.value := 1
 
@@ -60,11 +57,9 @@ FUNCTION main()
             *.....................................................*
 
             proc cas_modify
-
                LOCAL nn := form_1.ListBox_1.value
 
                form_1.ListBox_1.item( nn ) := 'Nº ' + alltrim( str(nn) )
                form_1.ListBox_1.Setfocus
 
                RETURN
-

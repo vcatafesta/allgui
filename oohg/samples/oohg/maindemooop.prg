@@ -455,4 +455,3 @@ PROCEDURE MoveCursor( oCtrl )
    RETURN
 
    #include "printtest.prg"
-

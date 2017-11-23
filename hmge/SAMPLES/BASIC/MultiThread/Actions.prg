@@ -123,4 +123,3 @@ FUNCTION main_button_4_action( pClockThread, pProgThread )
       cClock, nClockID , cProg, nProgID ) )
 
    RETURN NIL
-

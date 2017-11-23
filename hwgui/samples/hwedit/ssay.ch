@@ -22,7 +22,7 @@
              [ <lBox:    BOX > ] ;
              [ <lRaised: RAISED > ] ;
              [ <lTransparent: TRANSPARENT > ] ;
-             [ ON MOUSEOVER <uMOver> ] ; 
+             [ ON MOUSEOVER <uMOver> ] ;
        => ;
           [ <oSSay> := ] TSSay():ReDefine( <nId>, <{cText}>, <oWnd>, <cPict>, ;
              [\{|Self|<uAction>\}], <.lCenter.>, <.lRight.>, <.lBottom.>, ;
@@ -49,7 +49,7 @@
              [ <lBox: BOX > ] ;
              [ <lRaised: RAISED > ] ;
              [ <lTransparent: TRANSPARENT > ] ;
-             [ ON MOUSEOVER <uMOver> ] ; 
+             [ ON MOUSEOVER <uMOver> ] ;
       => ;
           [ <oSSay> := ] TSSay():New( <nRow>, <nCol>, <{cText}>,;
              [<oWnd>], [<cPict>], <oFont>, <oCursor>, ;

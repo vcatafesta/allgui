@@ -103,4 +103,3 @@ FUNCTION SetNewHotKey()
    _DefineHotKey( "Form_Main", nModif, nKey, {|| MsgInfo( StrTran( cKeyName, " ", "" ) + " is pressed" ) } )
 
    RETURN NIL
-

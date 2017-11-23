@@ -315,4 +315,3 @@ PROCEDURE QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
    SendMessage( GetControlHandle( ControlName, ParentForm ), WM_SETREDRAW, iif( lEnable, 1, 0 ), 0 )
 
    RETURN
-

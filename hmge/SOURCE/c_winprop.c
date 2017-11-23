@@ -221,7 +221,6 @@ HB_FUNC( REMOVEPROP )
       HB_RETNL( ( LONG_PTR ) hMem );      // ( ( ULONG_PTR ) hMem )
 }
 
-
 static BOOL CALLBACK PropsEnumProc( HWND hWnd, LPCTSTR pszPropName, HANDLE handle, ULONG_PTR lParam );
 
 /* Usage: aProps := EnumProps( nHandle ) */

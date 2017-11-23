@@ -698,4 +698,3 @@ FUNCTION WndOpen( ysize, xsize )
 
    RETURN NIL
    #endif
-

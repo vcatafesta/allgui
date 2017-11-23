@@ -91,4 +91,3 @@ FUNCTION CreateHelpLabel()
    END LABEL
 
    RETURN .T.
-

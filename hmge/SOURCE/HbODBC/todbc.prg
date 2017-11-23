@@ -66,7 +66,7 @@ CREATE CLASS TODBCField
    VAR AllowNull    INIT .F.
    VAR Value        INIT NIL
 
-METHOD New()
+   METHOD New()
 
 ENDCLASS
 
@@ -98,65 +98,42 @@ CREATE CLASS TODBC
 
    VAR lAutoCommit AS LOGICAL INIT .T.   // Autocommit is usually on at startup
 
-METHOD New( cODBCStr, cUserName, cPassword, lCache )
+   METHOD New( cODBCStr, cUserName, cPassword, lCache )
+   METHOD Destroy()
 
-METHOD Destroy()
+   METHOD SetSQL( cSQL )
+   METHOD Open()
+   METHOD ExecSQL()
+   METHOD Close()
 
-METHOD SetSQL( cSQL )
+   METHOD LoadData( nPos )
+   METHOD ClearData() INLINE AEval( ::Fields, {| oField | oField:Value := NIL } )
+   METHOD FieldByName( cField )
 
-METHOD Open()
+   METHOD Fetch( nFetchType, nOffSet )
 
-METHOD ExecSQL()
+   METHOD Next()
+   METHOD Prior()
+   METHOD First()
+   METHOD Last()
+   METHOD MoveBy( nSteps )
+   METHOD GoTo( nRecNo )
+   METHOD Skip()
+   METHOD Eof()
+   METHOD Bof()
+   METHOD RecNo()
+   METHOD RecCount()
+   METHOD LastRec()
 
-METHOD Close()
+   METHOD SQLErrorMessage()
 
-METHOD LoadData( nPos )
-
-METHOD ClearData() INLINE AEval( ::Fields, {| oField | oField:Value := NIL } )
-
-METHOD FieldByName( cField )
-
-METHOD Fetch( nFetchType, nOffSet )
-
-METHOD Next()
-
-METHOD Prior()
-
-METHOD First()
-
-METHOD Last()
-
-METHOD MoveBy( nSteps )
-
-METHOD GoTo( nRecNo )
-
-METHOD Skip()
-
-METHOD Eof()
-
-METHOD Bof()
-
-METHOD RecNo()
-
-METHOD RecCount()
-
-METHOD LastRec()
-
-METHOD SQLErrorMessage()
-
-METHOD SetCnnOptions( nType, uBuffer )
-
-METHOD GetCnnOptions( nType )
-
-METHOD Commit()
-
-METHOD RollBack()
-
-METHOD SetStmtOptions( nType, uBuffer )
-
-METHOD GetStmtOptions( nType )
-
-METHOD SetAutoCommit( lEnable )
+   METHOD SetCnnOptions( nType, uBuffer )
+   METHOD GetCnnOptions( nType )
+   METHOD Commit()
+   METHOD RollBack()
+   METHOD SetStmtOptions( nType, uBuffer )
+   METHOD GetStmtOptions( nType )
+   METHOD SetAutoCommit( lEnable )
 
 ENDCLASS
 
@@ -672,4 +649,3 @@ METHOD LoadData( nPos ) CLASS TODBC
    NEXT
 
    RETURN NIL
-

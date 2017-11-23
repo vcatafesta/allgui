@@ -44,13 +44,13 @@ STATIC oTab , oMenuisnp
 
 CLASS PBrowse INHERIT HBrowse
 
-METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
+   METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
       bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,     ;
       lNoBorder,lAppend,lAutoedit,bUpdate,bKeyDown )
 
-METHOD Edit()
+   METHOD Edit()
 
-METHOD HeaderOut( hDC )
+   METHOD HeaderOut( hDC )
 
 ENDCLASS
 
@@ -811,4 +811,3 @@ STATIC FUNCTION resettodefault(oBrw1)
    RETURN NIL
 
    // :END LFB
-

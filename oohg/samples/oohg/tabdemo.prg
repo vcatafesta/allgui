@@ -77,7 +77,7 @@ CLASS TTabList FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
 ENDCLASS
 
@@ -119,21 +119,21 @@ CLASS TTabCheck FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD ContainerValue             SETGET
+   METHOD ContainerValue             SETGET
 
-METHOD ContainerCaption
+   METHOD ContainerCaption
 
-METHOD ContainerItemCount         BLOCK { || ( ASCAN( ::aCaptions, NIL ) + 2 ) % 3 }
+   METHOD ContainerItemCount         BLOCK { || ( ASCAN( ::aCaptions, NIL ) + 2 ) % 3 }
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
    DATA   aCaptions                  INIT { NIL, NIL }
 
-METHOD VerifyCaption
+   METHOD VerifyCaption
 
 ENDCLASS
 
@@ -224,15 +224,15 @@ CLASS TTabSpinner FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD ContainerCaption           BLOCK { || "" }
+   METHOD ContainerCaption           BLOCK { || "" }
 
-METHOD ContainerItemCount         BLOCK { |Self| ::oContainerBase:RangeMax }
+   METHOD ContainerItemCount         BLOCK { |Self| ::oContainerBase:RangeMax }
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
 ENDCLASS
 
@@ -294,15 +294,15 @@ CLASS TTabSlider FROM TMultiPage
    DATA Type                INIT "TAB" READONLY
    DATA lInternals          INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD ContainerCaption           BLOCK { || "" }
+   METHOD ContainerCaption           BLOCK { || "" }
 
-METHOD ContainerItemCount         BLOCK { |Self| ::oContainerBase:RangeMax }
+   METHOD ContainerItemCount         BLOCK { |Self| ::oContainerBase:RangeMax }
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
 ENDCLASS
 
@@ -358,4 +358,3 @@ METHOD DeleteItem( nPosition ) CLASS TTabSlider
    ENDIF
 
    RETURN NIL
-

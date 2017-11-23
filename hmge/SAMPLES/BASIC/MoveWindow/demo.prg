@@ -47,4 +47,3 @@ PROCEDURE MoveActiveWindow( hWnd )
    FileCursor( "Grabbed32-32.cur" )
 
    RETURN
-

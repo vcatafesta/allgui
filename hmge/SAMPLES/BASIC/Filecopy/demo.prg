@@ -130,4 +130,3 @@ FUNCTION MyGetFileName( rsFileName )
    NEXT
 
    RETURN SubStr( rsFileName, i + 1 )
-

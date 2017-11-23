@@ -305,4 +305,3 @@ STATIC PROCEDURE ShowRes
    RETURN
 
    ****** End of ShowRes ******
-

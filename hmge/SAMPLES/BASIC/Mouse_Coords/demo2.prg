@@ -91,4 +91,3 @@ PROCEDURE pokaz(obraz)
    ENDIF
 
    RETURN
-

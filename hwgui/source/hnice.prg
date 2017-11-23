@@ -29,37 +29,37 @@ CLASS HNiceButton INHERIT HControl
    DATA lFlat
    DATA nOrder
 
-METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
       bInit, bClick, ;
       cText, cTooltip, r, g, b )
 
-METHOD Redefine( oWndParent, nId, nStyleEx, ;
+   METHOD Redefine( oWndParent, nId, nStyleEx, ;
       bInit, bClick, ;
       cText, cTooltip, r, g, b )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD INIT()
+   METHOD INIT()
 
-METHOD Create( )
+   METHOD Create( )
 
-METHOD Size( )
+   METHOD Size( )
 
-METHOD Moving( )
+   METHOD Moving( )
 
-METHOD Paint()
+   METHOD Paint()
 
-METHOD MouseMove( wParam, lParam )
+   METHOD MouseMove( wParam, lParam )
 
-METHOD MDown()
+   METHOD MDown()
 
-METHOD MUp()
+   METHOD MUp()
 
-METHOD Press() INLINE( ::lPress := .T., ::MDown() )
+   METHOD Press() INLINE( ::lPress := .T., ::MDown() )
 
-METHOD RELEASE()
+   METHOD RELEASE()
 
-METHOD END ()
+   METHOD END ()
 
 ENDCLASS
 
@@ -327,4 +327,3 @@ FUNCTION hwg_SetNiceBtnSelected( oBtn )
    ENDIF
 
    RETURN otmp
-

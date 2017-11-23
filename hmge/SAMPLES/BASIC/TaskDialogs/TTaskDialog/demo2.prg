@@ -52,4 +52,3 @@ STATIC FUNCTION CreateCustomDialog()
       ENDWITH
 
       RETURN oDialog
-

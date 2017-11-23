@@ -148,4 +148,3 @@ FUNCTION Graphic1( hWnd, oRMChart, nIdChart, nExportOnly, nW, nH )
    NEXT
 
    RETURN NIL
-

@@ -2649,4 +2649,3 @@ STATIC FUNCTION NoQuote ( cStr )
    RETURN CharRem ( Chr( 34 ) + Chr( 39 ), cStr )
 
    #endif
-

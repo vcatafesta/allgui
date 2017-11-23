@@ -55,7 +55,6 @@ extern "C" {
 #define HPDF_PERMISSION_PAD      0xFFFFFFC0
 #define HPDF_ARC4_BUF_SIZE       256
 
-
 typedef struct HPDF_MD5Context
 {
     HPDF_UINT32 buf[4];
@@ -63,13 +62,11 @@ typedef struct HPDF_MD5Context
     HPDF_BYTE in[64];
 } HPDF_MD5_CTX;
 
-
 typedef struct _HPDF_ARC4_Ctx_Rec {
     HPDF_BYTE    idx1;
     HPDF_BYTE    idx2;
     HPDF_BYTE    state[HPDF_ARC4_BUF_SIZE];
 } HPDF_ARC4_Ctx_Rec;
-
 
 typedef struct _HPDF_Encrypt_Rec  *HPDF_Encrypt;
 
@@ -98,16 +95,13 @@ typedef struct _HPDF_Encrypt_Rec {
     HPDF_ARC4_Ctx_Rec  arc4ctx;
 } HPDF_Encrypt_Rec;
 
-
 void
 HPDF_MD5Init  (struct HPDF_MD5Context  *ctx);
-
 
 void
 HPDF_MD5Update  (struct HPDF_MD5Context *ctx,
                  const HPDF_BYTE        *buf,
                  HPDF_UINT32            len);
-
 
 void
 HPDF_MD5Final  (HPDF_BYTE              digest[16],
@@ -117,32 +111,25 @@ void
 HPDF_PadOrTrancatePasswd  (const char  *pwd,
                            HPDF_BYTE        *new_pwd);
 
-
 void
 HPDF_Encrypt_Init  (HPDF_Encrypt  attr);
-
 
 void
 HPDF_Encrypt_CreateUserKey  (HPDF_Encrypt  attr);
 
-
 void
 HPDF_Encrypt_CreateOwnerKey  (HPDF_Encrypt  attr);
 
-
 void
 HPDF_Encrypt_CreateEncryptionKey  (HPDF_Encrypt  attr);
-
 
 void
 HPDF_Encrypt_InitKey  (HPDF_Encrypt  attr,
                        HPDF_UINT32       object_id,
                        HPDF_UINT16       gen_no);
 
-
 void
 HPDF_Encrypt_Reset  (HPDF_Encrypt  attr);
-
 
 void
 HPDF_Encrypt_CryptBuf  (HPDF_Encrypt  attr,
@@ -155,5 +142,3 @@ HPDF_Encrypt_CryptBuf  (HPDF_Encrypt  attr,
 #endif /* __cplusplus */
 
 #endif /* _HPDF_ENCRYPT_H */
-
-

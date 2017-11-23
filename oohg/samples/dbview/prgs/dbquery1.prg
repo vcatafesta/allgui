@@ -464,4 +464,3 @@ FUNCTION OpenDataBaseFile( cDataBaseFileName, cAlias, lExclusive, lReadOnly, cDr
    ErrorBlock( _bLastHandler )
 
    RETURN( _lGood )
-

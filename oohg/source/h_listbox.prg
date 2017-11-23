@@ -69,43 +69,43 @@ CLASS TList FROM TControl
    DATA DragItem                  INIT 0
    DATA DragTo                    INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD Define2
+   METHOD Define2
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
-METHOD OnEnter                 SETGET
+   METHOD OnEnter                 SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_Drag
+   METHOD Events_Drag
 
-METHOD Events_DrawItem
+   METHOD Events_DrawItem
 
-METHOD Events_MeasureItem
+   METHOD Events_MeasureItem
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD DeleteItem( nItem )     BLOCK { |Self, nItem| ListBoxDeleteString( Self, nItem ) }
+   METHOD DeleteItem( nItem )     BLOCK { |Self, nItem| ListBoxDeleteString( Self, nItem ) }
 
-METHOD DeleteAllItems          BLOCK { |Self| ListBoxReset( ::hWnd ) }
+   METHOD DeleteAllItems          BLOCK { |Self| ListBoxReset( ::hWnd ) }
 
-METHOD Item
+   METHOD Item
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD ItemCount               BLOCK { |Self| ListBoxGetItemCount( ::hWnd ) }
+   METHOD ItemCount               BLOCK { |Self| ListBoxGetItemCount( ::hWnd ) }
 
-METHOD ItemHeight              BLOCK { |Self| ListBoxGetItemHeight( ::hWnd ) }
+   METHOD ItemHeight              BLOCK { |Self| ListBoxGetItemHeight( ::hWnd ) }
 
-METHOD ColumnWidth             SETGET
+   METHOD ColumnWidth             SETGET
 
-METHOD TopIndex                SETGET
+   METHOD TopIndex                SETGET
 
-METHOD EnsureVisible
+   METHOD EnsureVisible
 
 ENDCLASS
 
@@ -409,9 +409,9 @@ CLASS TListMulti FROM TList
 
    DATA Type                      INIT "MULTILIST" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD Value                   SETGET
+   METHOD Value                   SETGET
 
 ENDCLASS
 
@@ -962,4 +962,3 @@ HB_FUNC( LISTBOXSETCOLUMNWIDTH )
 }
 
 #pragma ENDDUMP
-

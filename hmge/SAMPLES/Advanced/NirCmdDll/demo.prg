@@ -228,4 +228,3 @@ PROCEDURE FlashWin_Click()
 FUNCTION DoNirCmd( cCommand )
 
    RETURN HMG_CallDLL( "NIRCMD.DLL", HB_DYN_CTYPE_BOOL, "DoNirCmd", cCommand )
-

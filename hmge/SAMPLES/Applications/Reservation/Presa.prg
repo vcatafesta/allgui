@@ -489,9 +489,8 @@ CREATE CLASS TAPPLICATION
    DATA ListDelete       init .F.
    DATA Dbf_driver       INIT "DBFCDX"
 
-METHOD New()  CONSTRUCTOR
-
-METHOD IFDATA()
+   METHOD New()  CONSTRUCTOR
+   METHOD IFDATA()
 
 ENDCLASS
 
@@ -601,7 +600,6 @@ PROCEDURE esc_quit(arg1)
 PROCEDURE Autore()
 
    LOCAL fsize := Directory( oFatt:ExePath+"Presa.exe" )[1,2]
-
    ShellAbout( OS(), PROGRAM +[ HMG 1.0]+[ ]+Chr(169) + COPYRIGHT+ LICENZA ;
       +" "+ transform(fsize,"@be 99,999,999" ) )
 
@@ -830,4 +828,3 @@ HB_FUNC( SAVEWINDOWBYHANDLE )
 }
 
 #pragma ENDDUMP
-

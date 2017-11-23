@@ -311,4 +311,3 @@ PROCEDURE DisplayJobInfo()
    flag := .F.
 
    RETURN
-

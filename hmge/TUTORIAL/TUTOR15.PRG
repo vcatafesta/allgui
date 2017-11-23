@@ -33,4 +33,3 @@ PROCEDURE DoTest()
    NEXT i
 
    RETURN
-

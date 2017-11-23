@@ -117,4 +117,3 @@ PROCEDURE ResizeChildEdit(ChildName)
    ENDIF
 
    RETURN
-

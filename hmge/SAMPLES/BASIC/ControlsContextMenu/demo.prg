@@ -12,4 +12,3 @@ PROCEDURE Main
    ACTIVATE WINDOW demo
 
    RETURN
-

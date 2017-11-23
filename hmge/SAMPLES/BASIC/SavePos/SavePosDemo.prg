@@ -96,4 +96,3 @@ FUNCTION SetRegPosWindow( FormName, cProgName )
    ENDIF
 
    RETURN NIL
-

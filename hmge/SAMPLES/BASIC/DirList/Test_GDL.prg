@@ -44,7 +44,6 @@
       7.2006 : First Release
 
       */
-
       PROC MsgMulty( xMesaj, cTitle, lEnum )
 
          LOCA cMessage := ""
@@ -100,4 +99,3 @@
             RETU cRVal // Any2Strg()
 
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

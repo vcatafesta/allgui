@@ -154,4 +154,3 @@ PROCEDURE Grid_OnInit( h )
    zgm_SetColWidth( h, 2, 100 )
 
    RETURN
-

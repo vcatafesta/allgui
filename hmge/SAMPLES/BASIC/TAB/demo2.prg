@@ -223,4 +223,3 @@ PROCEDURE MoveTabDown( nTab )
    Form_1.Tab_2.Value := IF(nTab > 4, 4, nTab)
 
    RETURN
-

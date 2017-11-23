@@ -88,7 +88,6 @@
 
 #xtranslate DOSFILENAME(<c>) => substr( <c>, rat("\",<c>)+1 )
 
-
 #xcommand IF <var> IS <type>          => if valtype(<var>) = <type>
 #xcommand IF <var> IS NOT <type>      => if valtype(<var>) != <type>
 #xcommand IF <ele> IS IN <array>      => if !(len( <array> ) \< <ele> )

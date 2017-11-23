@@ -87,4 +87,3 @@ FUNCTION GetAviFileSize( cFile )
    ENDIF
 
    RETURN { nWidth, nHeight }
-

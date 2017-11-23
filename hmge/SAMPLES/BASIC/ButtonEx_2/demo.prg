@@ -420,4 +420,3 @@ STATIC FUNCTION _SetGradColor( ControlName, ParentForm, Value )
   }
 
 #pragma ENDDUMP
-

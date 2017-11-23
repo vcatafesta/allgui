@@ -59,19 +59,19 @@ CLASS TSlider FROM TControl
    DATA nRangeMin   INIT 0
    DATA nRangeMax   INIT 10
 
-METHOD Define
+   METHOD Define
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD RangeMin            SETGET
+   METHOD RangeMin            SETGET
 
-METHOD RangeMax            SETGET
+   METHOD RangeMax            SETGET
 
-METHOD BackColor           SETGET
+   METHOD BackColor           SETGET
 
-METHOD Events_Hscroll
+   METHOD Events_Hscroll
 
-METHOD Events_Vscroll
+   METHOD Events_Vscroll
 
    EMPTY( _OOHG_AllVars )
 
@@ -250,4 +250,3 @@ HB_FUNC( SETSLIDERRANGE )
 }
 
 #pragma ENDDUMP
-

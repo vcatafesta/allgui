@@ -283,4 +283,3 @@ HB_FUNC( BT_DRAWEMF )
 }
 
 #pragma ENDDUMP
-

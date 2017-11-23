@@ -50,7 +50,6 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
    RETURN
 
    Proc Line(nRow,nCol,nWidth,nHeight,cControl,Color)   // Line(225, 50, 175, 001 ,"05",  WHITE )            or          Line(225, 225, 001, 175 ,"06",  RED )
-
       LOCAL clavel01 :=   ALLTRIM("Label_") + ALLTRIM(cControl)
 
       DEFINE LABEL &clavel01
@@ -80,7 +79,6 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
       RETURN
 
       Proc Rectangle(nRow,nCol,nWidth,nHeight,cControl,Color,nType,nWidthG,nWidthD)   // Rectangle(50,300,175,50,"12",BLUE,1,5,1)
-
          LOCAL clavel01 := ALLTRIM("Label_") + ALLTRIM(cControl)
          LOCAL clavel02 := ALLTRIM("Label_") + ALLTRIM(cControl)+ "a"
          LOCAL clavel03 := ALLTRIM("Label_") + ALLTRIM(cControl)+ "b"
@@ -244,7 +242,6 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
          RETURN
 
          Proc MyFrame(nRow,nCol,nWidth,nHeight,cControl,cTexto,Color,ColorBackground)   // MyFrame(300,300,175,50,"16","Mi Frame",BLUE,VERDE)
-
             LOCAL clavel01 := ALLTRIM("Label_") + ALLTRIM(cControl)
             LOCAL clavel02 := ALLTRIM("Label_") + ALLTRIM(cControl)+ "a"
             LOCAL clavel03 := ALLTRIM("Label_") + ALLTRIM(cControl)+ "b"
@@ -394,7 +391,6 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
             RETURN
 
             Proc BoxShadow(CurSRow, CurSCol, LastSWidth, LastSHeight , NOSm , ColorBox, ColorShadow , nType ) // BoxShadow( 20, 600, 175, 058 ,"24", BLUE,      , 1 )   // BoxShadow(230, 800, 175, 058 ,"31", BLUE,BLACK , 4 )
-
                LOCAL Sclavel01 :=   ALLTRIM("Label_") + ALLTRIM(NoSm)
                LOCAL Sclavel02 :=   ALLTRIM("Label_") + ALLTRIM(NoSm)+ "a"
                LOCAL lBorder
@@ -440,7 +436,6 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
                RETURN
 
                Proc LetterShadow(nRow, nCol,cControl , cValue ,SizeL ,Color )    // LetterShadow(400, 300,"17" , "La Casa de la Abuela" ,10 ,BLUE )
-
                   LOCAL Lclavel01 :=   ALLTRIM("Label_") + ALLTRIM(cControl)
                   LOCAL Lclavel02 :=   ALLTRIM("Label_") + ALLTRIM(cControl)+"a"
                   LOCAL nSep     := 0
@@ -543,4 +538,3 @@ Proc BoxShadowL(CurRowN, CurColN, Nomb, cTexto, nSize, Color1, Color2) //BoxShad
                   ENDIF
 
                   RETURN
-

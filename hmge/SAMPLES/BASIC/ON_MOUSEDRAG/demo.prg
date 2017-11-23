@@ -212,4 +212,3 @@ PROCEDURE DisplayCoords()
       " Pos x: "+ PADL(aCoords[2]-Form_1.Col-GetBorderWidth(), 4)
 
    RETURN
-

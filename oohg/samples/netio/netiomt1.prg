@@ -28,4 +28,3 @@ proc main()
    ? "NETIO_DISCONNECT():", netio_disconnect( NETSERVER, NETPORT )
 
    RETURN
-

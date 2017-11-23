@@ -55,4 +55,3 @@ PROCEDURE main()
    Win_1.Activate
 
    RETURN
-

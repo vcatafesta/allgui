@@ -81,4 +81,3 @@ FUNCTION Test3()
    Win_Wait.Hide
 
    RETURN NIL
-

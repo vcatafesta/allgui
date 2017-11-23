@@ -97,4 +97,3 @@ PROCEDURE UpdateItems()
    Select(nArea)
 
    RETURN
-

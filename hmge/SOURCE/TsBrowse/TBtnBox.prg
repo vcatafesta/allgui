@@ -18,29 +18,19 @@ CLASS TBtnBox FROM TControl
    DATA Atx, lAppend, bAction, nCell, lChanged
    DATA hWndChild
 
-METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
+   METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
       nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;
       cResName, bAction, lSpinner, bUp, bDown, bMin, bMax, nBmpWidth, nCell )
-
-METHOD Default()
-
-METHOD HandleEvent( nMsg, nWParam, nLParam )
-
-METHOD GetDlgCode( nLastKey, nFlags )
-
-METHOD KeyChar( nKey, nFlags )
-
-METHOD KeyDown( nKey, nFlags )
-
-METHOD LostFocus( hCtlFocus )
-
-METHOD lValid()
-
-METHOD LButtonDown( nRow, nCol )
-
-METHOD GetVal()
-
-METHOD Command( nWParam, nLParam )
+   METHOD Default()
+   METHOD HandleEvent( nMsg, nWParam, nLParam )
+   METHOD GetDlgCode( nLastKey, nFlags )
+   METHOD KeyChar( nKey, nFlags )
+   METHOD KeyDown( nKey, nFlags )
+   METHOD LostFocus( hCtlFocus )
+   METHOD lValid()
+   METHOD LButtonDown( nRow, nCol )
+   METHOD GetVal()
+   METHOD Command( nWParam, nLParam )
 
 ENDCLASS
 
@@ -336,4 +326,3 @@ METHOD Command( nWParam, nLParam ) CLASS TBtnBox
    ENDCASE
 
    RETURN NIL
-

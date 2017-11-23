@@ -310,4 +310,3 @@ PROCEDURE _DataRichEditBoxSave ( ControlName, ParentForm, cFile, typ )
    ENDIF
 
    RETURN
-

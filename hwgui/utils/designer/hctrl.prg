@@ -40,19 +40,19 @@ CLASS VAR winclass INIT "STATIC"
    DATA lEmbed        INIT .F.
    DATA LocalOnClickParam init ""
 
-METHOD New( oWndParent, xClass, aProp )
+   METHOD New( oWndParent, xClass, aProp )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Paint( lpdis )
+   METHOD Paint( lpdis )
 
-METHOD GetProp( cName,i )
+   METHOD GetProp( cName,i )
 
-METHOD GetPropIndex( cName,i )
+   METHOD GetPropIndex( cName,i )
 
-METHOD SetProp( xName,xValue )
+   METHOD SetProp( xName,xValue )
 
-METHOD SetCoor( xName,nValue )
+   METHOD SetCoor( xName,nValue )
 
 ENDCLASS
 
@@ -1195,4 +1195,3 @@ FUNCTION hb_At( s1, s2, n )
 
    RETURN At( s1, s2, n )
    #endif
-

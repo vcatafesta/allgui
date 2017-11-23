@@ -109,4 +109,3 @@ STATIC FUNCTION Control( cString )
 STATIC FUNCTION Control2( cString )
 
    RETURN ShellExecute( Application.Handle, nil,'rundll32.exe', cString, nil, SW_SHOW )
-

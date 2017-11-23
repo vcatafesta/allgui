@@ -65,7 +65,6 @@
 #define    PixelFormat64bppPARGB                   ( 14 + ( 0x4000 ) + PixelFormatAlpha + PixelFormatPAlpha + PixelFormatExtended )
 #define    PixelFormatMax                          15
 
-
 #define AlphaShift                                 24
 #define RedShift                                   16
 #define GreenShift                                 8

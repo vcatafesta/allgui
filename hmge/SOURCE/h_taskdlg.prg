@@ -15,19 +15,14 @@ CREATE CLASS TSimpleTaskDialog FUNCTION SimpleTaskDialog
    VAR    nButtonResult                READONLY   INIT NIL
    VAR    nResult                      READONLY   INIT E_FAIL
 
-METHOD New( cTitle, cInstruction, cContent, nCommonButtons, nMainIcon )
+   METHOD New( cTitle, cInstruction, cContent, nCommonButtons, nMainIcon )
+   METHOD Execute()
 
-METHOD Execute()
-
-METHOD Title( cTitle )              SETGET
-
-METHOD Instruction( cInstruction )  SETGET
-
-METHOD Content( cContent )          SETGET
-
-METHOD CommonButtons( nCBs )        SETGET
-
-METHOD MainIcon( nIcon )            SETGET
+   METHOD Title( cTitle )              SETGET
+   METHOD Instruction( cInstruction )  SETGET
+   METHOD Content( cContent )          SETGET
+   METHOD CommonButtons( nCBs )        SETGET
+   METHOD MainIcon( nIcon )            SETGET
 
    PROTECTED:
    VAR    cTitle                       INIT       NIL
@@ -136,106 +131,57 @@ CREATE CLASS TTaskDialog FUNCTION TaskDialog
    VAR    nResult             READONLY   INIT E_FAIL
    VAR    lVerifyResult       READONLY   INIT .F.
 
-METHOD New( cTitle, cInstruction, cContent, cFooter, nCommonButtons, nMainIcon )
-
-METHOD Execute() INLINE ::ShowDialog()
-
-METHOD ShowDialog()
-
+   METHOD New( cTitle, cInstruction, cContent, cFooter, nCommonButtons, nMainIcon )
+   METHOD Execute() INLINE ::ShowDialog()
+   METHOD ShowDialog()
    //METHOD CloseDialog()
-
-METHOD DialogHandle()
-
-METHOD Showing( lState )
-
-METHOD OnCreated( hWnd, nNotify, nWParam, nLParam )
-
-METHOD OnDestroyed( hWnd, nNotify, nWParam, nLParam )
-
-METHOD Listener( hWnd, nNotify, nWParam, nLParam )
-
-METHOD CommonButtons( nCBs )              SETGET
-
-METHOD WindowTitle( cTitle )              SETGET
-
-METHOD Title( cTitle )                    SETGET
-
-METHOD MainIcon( nIcon )                  SETGET
-
-METHOD MainInstruction( cInstruction )    SETGET
-
-METHOD Instruction( cInstruction )        SETGET
-
-METHOD Content( cContent )                SETGET
-
-METHOD CustomButtons( aCustButton )       SETGET
-
-METHOD DefaultButton( nDefaultButton )    SETGET
-
-METHOD CustomRadioButtons( aCustButton )  SETGET
-
-METHOD DefaultRadioButton( nDefaultButton ) SETGET
-
-METHOD VerificationText( cText )          SETGET
-
-METHOD ExpandedInfo( cText )              SETGET
-
-METHOD ExpandedControlText( cText )       SETGET
-
-METHOD ExpandedCtrlText( cText )          SETGET
-
-METHOD CollapsedControlText( cText )      SETGET
-
-METHOD CollapsedCtrlText( cText )         SETGET
-
-METHOD FooterIcon( nIcon )                SETGET
-
-METHOD Footer( cFooter )                  SETGET
-
-METHOD Width( nWidth )                    SETGET
-
-METHOD Parent( cFormName )                SETGET
-
-METHOD ParentHandle( nHandle )            SETGET
-
-METHOD CallBackBlock( bCode )             SETGET
-
-METHOD Flags( nFlags )                    SETGET
-
-METHOD AllowDialogCancellation( lNewVal ) SETGET
-
-METHOD CanBeMinimized( lNewVal )          SETGET
-
-METHOD EnableHyperlinks( lNewVal )        SETGET
-
-METHOD ExpandedByDefault( lNewVal )       SETGET
-
-METHOD ExpandFooterArea( lNewVal )        SETGET
-
-METHOD NoDefaultRadioButton( lNewVal )    SETGET
-
-METHOD PositionRelativeToWindow( lNewVal ) SETGET
-
-METHOD RightToLeftLayout( lNewVal )       SETGET
-
-METHOD VerificationEnabled( lNewVal )     SETGET
-
-METHOD timeoutMS( nMS )                   SETGET
-
-METHOD TimedOut( lOut )                   SETGET
-
+   METHOD DialogHandle()
+   METHOD Showing( lState )
+   METHOD OnCreated( hWnd, nNotify, nWParam, nLParam )
+   METHOD OnDestroyed( hWnd, nNotify, nWParam, nLParam )
+   METHOD Listener( hWnd, nNotify, nWParam, nLParam )
+   METHOD CommonButtons( nCBs )              SETGET
+   METHOD WindowTitle( cTitle )              SETGET
+   METHOD Title( cTitle )                    SETGET
+   METHOD MainIcon( nIcon )                  SETGET
+   METHOD MainInstruction( cInstruction )    SETGET
+   METHOD Instruction( cInstruction )        SETGET
+   METHOD Content( cContent )                SETGET
+   METHOD CustomButtons( aCustButton )       SETGET
+   METHOD DefaultButton( nDefaultButton )    SETGET
+   METHOD CustomRadioButtons( aCustButton )  SETGET
+   METHOD DefaultRadioButton( nDefaultButton ) SETGET
+   METHOD VerificationText( cText )          SETGET
+   METHOD ExpandedInfo( cText )              SETGET
+   METHOD ExpandedControlText( cText )       SETGET
+   METHOD ExpandedCtrlText( cText )          SETGET
+   METHOD CollapsedControlText( cText )      SETGET
+   METHOD CollapsedCtrlText( cText )         SETGET
+   METHOD FooterIcon( nIcon )                SETGET
+   METHOD Footer( cFooter )                  SETGET
+   METHOD Width( nWidth )                    SETGET
+   METHOD Parent( cFormName )                SETGET
+   METHOD ParentHandle( nHandle )            SETGET
+   METHOD CallBackBlock( bCode )             SETGET
+   METHOD Flags( nFlags )                    SETGET
+   METHOD AllowDialogCancellation( lNewVal ) SETGET
+   METHOD CanBeMinimized( lNewVal )          SETGET
+   METHOD EnableHyperlinks( lNewVal )        SETGET
+   METHOD ExpandedByDefault( lNewVal )       SETGET
+   METHOD ExpandFooterArea( lNewVal )        SETGET
+   METHOD NoDefaultRadioButton( lNewVal )    SETGET
+   METHOD PositionRelativeToWindow( lNewVal ) SETGET
+   METHOD RightToLeftLayout( lNewVal )       SETGET
+   METHOD VerificationEnabled( lNewVal )     SETGET
+   METHOD timeoutMS( nMS )                   SETGET
+   METHOD TimedOut( lOut )                   SETGET
    // NOTE: Next method returns valid (non NIL) result if a the dialog has been shown
    // The ID of the clicked button
-
-METHOD SelectedButton()      INLINE ::nButtonResult
-
+   METHOD SelectedButton()      INLINE ::nButtonResult
    // The ID of the selected radio button
-
-METHOD SelectedRadioButton() INLINE ::nRadioButtonResult
-
+   METHOD SelectedRadioButton() INLINE ::nRadioButtonResult
    // The state of the verification checkbox (read only)
-
-METHOD VerificationChecked() INLINE ::lVerifyResult    /*TODO*/
+   METHOD VerificationChecked() INLINE ::lVerifyResult    /*TODO*/
 
    PROTECTED:
    VAR aConfig                  INIT Array( TDC_CONFIG )
@@ -1011,4 +957,3 @@ METHOD TimedOut( lOut ) CLASS TTaskDialog
    ENDIF
 
    RETURN ::lTimeOut
-

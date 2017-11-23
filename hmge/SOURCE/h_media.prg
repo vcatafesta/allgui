@@ -291,4 +291,3 @@ FUNCTION InitDialogAnimateBox( ParentName, ControlHandle, k )
    ENDIF
 
    RETURN NIL
-

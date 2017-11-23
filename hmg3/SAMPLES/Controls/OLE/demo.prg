@@ -114,4 +114,3 @@ STATIC PROCEDURE OUTLOOK()
    oList:Display(.F.)
 
    RETURN
-

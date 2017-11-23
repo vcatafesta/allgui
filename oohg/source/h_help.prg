@@ -154,4 +154,3 @@ HB_FUNC( WINHLP )
    HB_FUNCNAME( WINHELP )();
 }
 #pragma ENDDUMP
-

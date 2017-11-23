@@ -33,4 +33,3 @@ FUNCTION Main
    ACTIVATE WINDOW oMainWindow
 
    RETURN NIL
-

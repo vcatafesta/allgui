@@ -305,4 +305,3 @@ HB_FUNC ( CREATEPEN )
 }
 
 #pragma ENDDUMP
-

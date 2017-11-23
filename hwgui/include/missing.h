@@ -391,7 +391,6 @@ typedef struct tagREBARBANDINFO
 #endif
 }   REBARBANDINFO, FAR *LPREBARBANDINFO;
 
-
 typedef struct {
    NMHDR   hdr;
    DWORD   dwFlag;

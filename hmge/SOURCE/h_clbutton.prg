@@ -503,4 +503,3 @@ HB_FUNC( CLBUTTON_SETIMAGE )
 #pragma ENDDUMP
 
    #endif
-

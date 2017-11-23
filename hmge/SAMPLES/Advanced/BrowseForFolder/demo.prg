@@ -147,4 +147,3 @@ HB_FUNC( HB_BROWSEFORFOLDER )  // Syntax: hb_BrowseForFolder([<hWnd>],[<cTitle>]
 }
 
 #pragma ENDDUMP
-

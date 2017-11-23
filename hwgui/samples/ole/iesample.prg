@@ -66,4 +66,3 @@ STATIC FUNCTION FindInGoogle( cQuery,oIE,oEdit )
    ENDIF
 
    RETURN NIL
-

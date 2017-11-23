@@ -338,4 +338,3 @@ PROCEDURE _SetRadioGroupReadOnly ( ControlName , ParentForm , aReadOnly )
    ENDIF
 
    RETURN
-

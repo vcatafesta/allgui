@@ -160,4 +160,3 @@ PROCEDURE PopUpStop( lBeep )
 FUNCTION GetIEversion()
 
    Return( GetRegistryValue( HKEY_LOCAL_MACHINE, "Software\Microsoft\Internet Explorer", "Version" ) )
-

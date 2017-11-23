@@ -169,4 +169,3 @@ HB_FUNC( GRAYBMP )
 }
 
 #pragma ENDDUMP
-

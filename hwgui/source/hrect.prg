@@ -20,7 +20,7 @@ CLASS HRect INHERIT HControl
    DATA oLine3
    DATA oLine4
 
-METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle )
+   METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle )
 
 ENDCLASS
 
@@ -64,11 +64,11 @@ CLASS VAR winclass   INIT "STATIC"
    DATA lVert
    DATA oPen
 
-METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor )
+   METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
 ENDCLASS
 
@@ -120,7 +120,7 @@ METHOD Paint( lpdis ) CLASS HRect_Line
 
 CLASS HShape INHERIT HControl
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
       nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle )  //, bClick, bDblClick)
 
 ENDCLASS
@@ -138,7 +138,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, 
 
 CLASS HLContainer INHERIT HControl
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit )  //, bClick, bDblClick)
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit )  //, bClick, bDblClick)
 
 ENDCLASS
 
@@ -160,16 +160,16 @@ CLASS VAR winclass   INIT "STATIC"
    DATA brushFill
    DATA bClick, bDblClick
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
       lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
-METHOD SetColor( tcolor, bcolor, lRedraw )
+   METHOD SetColor( tcolor, bcolor, lRedraw )
 
-METHOD Curvature( nCurvature )
+   METHOD Curvature( nCurvature )
 
    //METHOD Refresh() INLINE hwg_Sendmessage( ::handle, WM_PAINT, 0, 0 ), hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
 
@@ -304,20 +304,20 @@ CLASS VAR winclass   INIT "STATIC"
    DATA xVisible  INIT .T. HIDDEN
    DATA lTABSTOP INIT .F. HIDDEN
 
-METHOD New( oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
+   METHOD New( oWndParent, nId, nstyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
       lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther)  //, bClick, bDblClick)
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Create( ) INLINE ::lCreate := .T.
+   METHOD Create( ) INLINE ::lCreate := .T.
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
-METHOD Visible( lVisibled ) SETGET
+   METHOD Visible( lVisibled ) SETGET
 
 ENDCLASS
 
@@ -479,4 +479,3 @@ METHOD Paint( lpdis ) CLASS HContainer
    RETURN 1
 
    // END NEW CLASSE
-

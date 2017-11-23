@@ -1,19 +1,19 @@
 /*
- * $Id: fontclrs.fmg,v 1.11 2017/08/25 19:03:22 fyurisich Exp $
- */
+* $Id: fontclrs.fmg,v 1.11 2017/08/25 19:03:22 fyurisich Exp $
+*/
 
 * ooHG IDE Plus form generated code
 * (c) 2003-2017 Ciro Vargas Clemow <cvc@oohg.org>
 
 DEFINE WINDOW TEMPLATE ;
-   AT 132, 235 ;
-   WIDTH 298 ;
-   HEIGHT 264 ;
-   TITLE 'Font/Colors' ;
-   MODAL ;
-   BACKCOLOR ::myIde:aSystemColor
+      AT 132, 235 ;
+      WIDTH 298 ;
+      HEIGHT 264 ;
+      TITLE 'Font/Colors' ;
+      MODAL ;
+      BACKCOLOR ::myIde:aSystemColor
 
-   DEFINE STATUSBAR 
+   DEFINE STATUSBAR
 
       STATUSITEM ' '
 
@@ -21,14 +21,14 @@ DEFINE WINDOW TEMPLATE ;
          WIDTH 90 ;
          ACTION ThisWindow.Release()
 
-   END STATUSBAR 
+   END STATUSBAR
 
    @ 10, 20 LABEL Label_1 ;
       WIDTH 260 ;
       HEIGHT 20 ;
       FONT 'Arial' ;
       SIZE 9 ;
-      TRANSPARENT 
+      TRANSPARENT
 
    @ 40, 20 BUTTON button_101 ;
       WIDTH 110 ;
@@ -68,7 +68,7 @@ DEFINE WINDOW TEMPLATE ;
       VALUE 'FontColor will be used in FORECOLOR clause.' ;
       FONT 'Arial' ;
       SIZE 9 ;
-      INVISIBLE 
+      INVISIBLE
 
    @ 120, 20 BUTTON button_103 ;
       WIDTH 110 ;
@@ -77,7 +77,7 @@ DEFINE WINDOW TEMPLATE ;
       ACTION ::GOtherColors( si, 1 ) ;
       FONT 'Arial' ;
       SIZE 9 ;
-      INVISIBLE 
+      INVISIBLE
 
    @ 120, 160 BUTTON btn_TtlBckClr ;
       WIDTH 110 ;
@@ -86,7 +86,7 @@ DEFINE WINDOW TEMPLATE ;
       ACTION ::GOtherColors( si, 2 ) ;
       FONT 'Arial' ;
       SIZE 9 ;
-      INVISIBLE 
+      INVISIBLE
 
    @ 160, 20 BUTTON btn_TrlFntClr ;
       WIDTH 110 ;
@@ -95,7 +95,7 @@ DEFINE WINDOW TEMPLATE ;
       ACTION ::GOtherColors( si, 3 ) ;
       FONT 'Arial' ;
       SIZE 9 ;
-      INVISIBLE 
+      INVISIBLE
 
    @ 160, 160 BUTTON button_106 ;
       WIDTH 110 ;
@@ -104,6 +104,6 @@ DEFINE WINDOW TEMPLATE ;
       ACTION ::GOtherColors( si, 4 ) ;
       FONT 'Arial' ;
       SIZE 9 ;
-      INVISIBLE 
+      INVISIBLE
 
-END WINDOW 
+END WINDOW

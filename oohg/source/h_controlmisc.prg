@@ -1184,93 +1184,93 @@ CLASS TControl FROM TWindow
    DATA OldColor
    DATA OldBackColor
 
-METHOD Row                SETGET
+   METHOD Row                SETGET
 
-METHOD Col                SETGET
+   METHOD Col                SETGET
 
-METHOD Width              SETGET
+   METHOD Width              SETGET
 
-METHOD Height             SETGET
+   METHOD Height             SETGET
 
-METHOD ToolTip            SETGET
+   METHOD ToolTip            SETGET
 
-METHOD SetForm
+   METHOD SetForm
 
-METHOD InitStyle
+   METHOD InitStyle
 
-METHOD Register
+   METHOD Register
 
-METHOD TabIndex           SETGET
+   METHOD TabIndex           SETGET
 
-METHOD Refresh            BLOCK { |self| ::ReDraw() }
+   METHOD Refresh            BLOCK { |self| ::ReDraw() }
 
-METHOD Release
+   METHOD Release
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD FocusEffect
+   METHOD FocusEffect
 
-METHOD ContainerRow       BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerRow ) + ::Container:RowMargin, ::Parent:RowMargin ) + ::Row }
+   METHOD ContainerRow       BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerRow ) + ::Container:RowMargin, ::Parent:RowMargin ) + ::Row }
 
-METHOD ContainerCol       BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerCol ) + ::Container:ColMargin, ::Parent:ColMargin ) + ::Col }
+   METHOD ContainerCol       BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerCol ) + ::Container:ColMargin, ::Parent:ColMargin ) + ::Col }
 
-METHOD ContainerhWnd      BLOCK { |Self| IF( ::Container == NIL, ::Parent:hWnd, if( ValidHandler( ::Container:ContainerhWndValue ), ::Container:ContainerhWndValue, ::Container:ContainerhWnd ) ) }
+   METHOD ContainerhWnd      BLOCK { |Self| IF( ::Container == NIL, ::Parent:hWnd, if( ValidHandler( ::Container:ContainerhWndValue ), ::Container:ContainerhWndValue, ::Container:ContainerhWnd ) ) }
 
-METHOD FontName           SETGET
+   METHOD FontName           SETGET
 
-METHOD FontSize           SETGET
+   METHOD FontSize           SETGET
 
-METHOD FontBold           SETGET
+   METHOD FontBold           SETGET
 
-METHOD FontItalic         SETGET
+   METHOD FontItalic         SETGET
 
-METHOD FontUnderline      SETGET
+   METHOD FontUnderline      SETGET
 
-METHOD FontStrikeout      SETGET
+   METHOD FontStrikeout      SETGET
 
-METHOD FontAngle          SETGET
+   METHOD FontAngle          SETGET
 
-METHOD FontWidth          SETGET
+   METHOD FontWidth          SETGET
 
-METHOD SizePos
+   METHOD SizePos
 
-METHOD Move
+   METHOD Move
 
-METHOD ForceHide
+   METHOD ForceHide
 
-METHOD SetFocus           BLOCK { |Self| _OOHG_lSettingFocus := .T., GetFormObjectByHandle( ::ContainerhWnd ):LastFocusedControl := ::hWnd, ::Super:SetFocus() }
+   METHOD SetFocus           BLOCK { |Self| _OOHG_lSettingFocus := .T., GetFormObjectByHandle( ::ContainerhWnd ):LastFocusedControl := ::hWnd, ::Super:SetFocus() }
 
-METHOD SetVarBlock
+   METHOD SetVarBlock
 
-METHOD AddBitMap
+   METHOD AddBitMap
 
-METHOD ClearBitMaps
+   METHOD ClearBitMaps
 
-METHOD DoEvent
+   METHOD DoEvent
 
-METHOD DoEventMouseCoords
+   METHOD DoEventMouseCoords
 
-METHOD DoLostFocus
+   METHOD DoLostFocus
 
-METHOD DoChange
+   METHOD DoChange
 
-METHOD oToolTip           SETGET
+   METHOD oToolTip           SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Color
+   METHOD Events_Color
 
-METHOD Events_Enter
+   METHOD Events_Enter
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD Events_DrawItem    BLOCK { || nil }
+   METHOD Events_DrawItem    BLOCK { || nil }
 
-METHOD Events_MeasureItem BLOCK { || nil }
+   METHOD Events_MeasureItem BLOCK { || nil }
 
-METHOD Cursor             SETGET
+   METHOD Cursor             SETGET
 
 ENDCLASS
 
@@ -2687,13 +2687,13 @@ CLASS TControlGroup FROM TControl
    DATA Type      INIT "CONTROLGROUP" READONLY
    DATA lHidden   INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Enabled             SETGET
+   METHOD Enabled             SETGET
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD AddControl
+   METHOD AddControl
 
 ENDCLASS
 
@@ -2737,4 +2737,3 @@ METHOD AddControl( oCtrl, Row, Col ) CLASS TControlGroup
    oCtrl:Visible := oCtrl:Visible
 
    RETURN NIL
-

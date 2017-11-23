@@ -1188,4 +1188,3 @@ STATIC FUNCTION _GradientFill( hDC, nTop, nLeft, nBottom, nRight, aGradInfo, lVe
    ENDIF
 
    RETURN NIL
-

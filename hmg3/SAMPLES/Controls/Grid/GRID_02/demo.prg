@@ -45,4 +45,3 @@ PROCEDURE QueryTest()
    This.QueryData := Str ( This.QueryRowIndex ) + ',' + Str ( This.QueryColIndex )
 
    RETURN
-

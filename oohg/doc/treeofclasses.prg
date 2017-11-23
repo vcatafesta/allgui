@@ -364,4 +364,3 @@ HB_FUNC( GETSCREENDPI )
    /*
    * EOF
    */
-

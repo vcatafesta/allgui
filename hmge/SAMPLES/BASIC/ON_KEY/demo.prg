@@ -102,9 +102,7 @@ PROCEDURE StoreTest()
    RETURN
 
    /*
-
    Function SaveOnKey() - MiniGUI DEMO
-
    (C)2006 Mel Smith <syntel@shaw.ca>
    */
 
@@ -137,9 +135,7 @@ FUNCTION SAVEONKEY(cForm)
    RETURN abSaveKeys
 
    /*
-
    Function ClearOnKey() - MiniGUI DEMO
-
    (C)2006 Mel Smith <syntel@shaw.ca>
    */
 
@@ -163,9 +159,7 @@ FUNCTION CLEARONKEY(cForm)
    RETURN NIL
 
    /*
-
    Function RestOnKey() - MiniGUI DEMO
-
    (C)2006 Mel Smith <syntel@shaw.ca>
    */
 
@@ -194,4 +188,3 @@ FUNCTION RESTONKEY(cForm,abSaveKeys)
    _DefineHotKey(cForm, 0, VK_ESCAPE, abSaveKeys[nEscIndex])
 
    RETURN .T.
-

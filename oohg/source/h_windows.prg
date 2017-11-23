@@ -228,193 +228,193 @@ CLASS TWindow
    DATA nPaintCount                                                   // contador para GetDc y ReleaseDc
    DATA hDC                                                           // puntero al contexto del canvas.
 
-METHOD SethWnd
+   METHOD SethWnd
 
-METHOD Release
+   METHOD Release
 
-METHOD PreRelease
+   METHOD PreRelease
 
-METHOD StartInfo
+   METHOD StartInfo
 
-METHOD SetFocus
+   METHOD SetFocus
 
-METHOD ImageList           SETGET
+   METHOD ImageList           SETGET
 
-METHOD BrushHandle         SETGET
+   METHOD BrushHandle         SETGET
 
-METHOD FontHandle          SETGET
+   METHOD FontHandle          SETGET
 
-METHOD FontColor           SETGET
+   METHOD FontColor           SETGET
 
-METHOD FontColorCode       SETGET
+   METHOD FontColorCode       SETGET
 
-METHOD BackColor           SETGET
+   METHOD BackColor           SETGET
 
-METHOD BackColorCode       SETGET
+   METHOD BackColorCode       SETGET
 
-METHOD FontColorSelected   SETGET
+   METHOD FontColorSelected   SETGET
 
-METHOD BackColorSelected   SETGET
+   METHOD BackColorSelected   SETGET
 
-METHOD BackBitMap          SETGET
+   METHOD BackBitMap          SETGET
 
-METHOD Caption             SETGET
+   METHOD Caption             SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD IsVisualStyled
+   METHOD IsVisualStyled
 
-METHOD DisableVisualStyle
+   METHOD DisableVisualStyle
 
-METHOD Object              BLOCK { |Self| Self }
+   METHOD Object              BLOCK { |Self| Self }
 
-METHOD Enabled             SETGET
+   METHOD Enabled             SETGET
 
-METHOD Enable              BLOCK { |Self| ::Enabled := .T. }
+   METHOD Enable              BLOCK { |Self| ::Enabled := .T. }
 
-METHOD Disable             BLOCK { |Self| ::Enabled := .F. }
+   METHOD Disable             BLOCK { |Self| ::Enabled := .F. }
 
-METHOD Click               BLOCK { |Self| ::DoEvent( ::OnClick, "CLICK" ) }
+   METHOD Click               BLOCK { |Self| ::DoEvent( ::OnClick, "CLICK" ) }
 
-METHOD Value               BLOCK { || nil }
+   METHOD Value               BLOCK { || nil }
 
-METHOD TabStop             SETGET
+   METHOD TabStop             SETGET
 
-METHOD Style               SETGET
+   METHOD Style               SETGET
 
-METHOD RTL                 SETGET
+   METHOD RTL                 SETGET
 
-METHOD AcceptFiles         SETGET
+   METHOD AcceptFiles         SETGET
 
-METHOD Action              SETGET
+   METHOD Action              SETGET
 
-METHOD SaveData
+   METHOD SaveData
 
-METHOD RefreshData
+   METHOD RefreshData
 
-METHOD Print
+   METHOD Print
 
-METHOD SaveAs
+   METHOD SaveAs
 
-METHOD GetBitMap(l)        BLOCK { |Self,l| _GetBitMap( ::hWnd, l ) }
+   METHOD GetBitMap(l)        BLOCK { |Self,l| _GetBitMap( ::hWnd, l ) }
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD SearchParent
+   METHOD SearchParent
 
-METHOD ParentDefaults
+   METHOD ParentDefaults
 
-METHOD Events_Size         BLOCK { || nil }
+   METHOD Events_Size         BLOCK { || nil }
 
-METHOD Events_VScroll      BLOCK { || nil }
+   METHOD Events_VScroll      BLOCK { || nil }
 
-METHOD Events_HScroll      BLOCK { || nil }
+   METHOD Events_HScroll      BLOCK { || nil }
 
-METHOD Events_Enter        BLOCK { || nil }
+   METHOD Events_Enter        BLOCK { || nil }
 
-METHOD Events_Color        BLOCK { || nil }
+   METHOD Events_Color        BLOCK { || nil }
 
    ERROR HANDLER Error
 
-METHOD Control
+   METHOD Control
 
-METHOD HotKey                // OperatingSystem-controlled hotkeys
+   METHOD HotKey                // OperatingSystem-controlled hotkeys
 
-METHOD SetKey                // Application-controlled hotkeys
+   METHOD SetKey                // Application-controlled hotkeys
 
-METHOD AcceleratorKey        // Accelerator hotkeys
+   METHOD AcceleratorKey        // Accelerator hotkeys
 
-METHOD LookForKey
+   METHOD LookForKey
 
-METHOD Property              // Pseudo-properties
+   METHOD Property              // Pseudo-properties
 
-METHOD ReleaseAttached
+   METHOD ReleaseAttached
 
-METHOD Visible             SETGET
+   METHOD Visible             SETGET
 
-METHOD Show                BLOCK { |Self| ::Visible := .T. }
+   METHOD Show                BLOCK { |Self| ::Visible := .T. }
 
-METHOD Hide                BLOCK { |Self| ::Visible := .F. }
+   METHOD Hide                BLOCK { |Self| ::Visible := .F. }
 
-METHOD ForceHide           BLOCK { |Self| HideWindow( ::hWnd ) , ::CheckClientsPos() }
+   METHOD ForceHide           BLOCK { |Self| HideWindow( ::hWnd ) , ::CheckClientsPos() }
 
-METHOD ReDraw              BLOCK { |Self| RedrawWindow( ::hWnd ) }
+   METHOD ReDraw              BLOCK { |Self| RedrawWindow( ::hWnd ) }
 
-METHOD DefWindowProc(nMsg,wParam,lParam)       BLOCK { |Self,nMsg,wParam,lParam| DefWindowProc( ::hWnd, nMsg, wParam, lParam ) }
+   METHOD DefWindowProc(nMsg,wParam,lParam)       BLOCK { |Self,nMsg,wParam,lParam| DefWindowProc( ::hWnd, nMsg, wParam, lParam ) }
 
-METHOD GetTextWidth
+   METHOD GetTextWidth
 
-METHOD GetTextHeight
+   METHOD GetTextHeight
 
-METHOD GetMaxCharsInWidth
+   METHOD GetMaxCharsInWidth
 
-METHOD ClientWidth         SETGET
+   METHOD ClientWidth         SETGET
 
-METHOD ClientHeight        SETGET
+   METHOD ClientHeight        SETGET
 
-METHOD AdjustResize
+   METHOD AdjustResize
 
-METHOD SetRedraw
+   METHOD SetRedraw
 
-METHOD Anchor              SETGET
+   METHOD Anchor              SETGET
 
-METHOD AdjustAnchor
+   METHOD AdjustAnchor
 
-METHOD DynamicValues       BLOCK { |Self| IF( ::hDynamicValues == NIL, ::hDynamicValues := TDynamicValues():New( Self ) , ::hDynamicValues ) }
+   METHOD DynamicValues       BLOCK { |Self| IF( ::hDynamicValues == NIL, ::hDynamicValues := TDynamicValues():New( Self ) , ::hDynamicValues ) }
 
-METHOD CheckClientsPos
+   METHOD CheckClientsPos
 
-METHOD ClientsPos
+   METHOD ClientsPos
 
-METHOD ClientsPos2
+   METHOD ClientsPos2
 
-METHOD Adjust              SETGET
+   METHOD Adjust              SETGET
 
-METHOD GetDC()             INLINE If( ::hDC == nil, ::hDC := GetDC( ::hWnd ), ), ;
+   METHOD GetDC()             INLINE If( ::hDC == nil, ::hDC := GetDC( ::hWnd ), ), ;
       If( ::nPaintCount == nil, ::nPaintCount := 1, ::nPaintCount ++ ), ::hDC
 
-METHOD ReleaseDC()         INLINE If( -- ::nPaintCount == 0, ;
+   METHOD ReleaseDC()         INLINE If( -- ::nPaintCount == 0, ;
       If( ReleaseDC( ::hWnd, ::hDC ), ::hDC := nil, ), )
 
-METHOD DebugMessageName
+   METHOD DebugMessageName
 
-METHOD DebugMessageQuery
+   METHOD DebugMessageQuery
 
-METHOD DebugMessageNameCommand
+   METHOD DebugMessageNameCommand
 
-METHOD DebugMessageNameNotify
+   METHOD DebugMessageNameNotify
 
-METHOD DebugMessageQueryNotify
+   METHOD DebugMessageQueryNotify
 
-METHOD ContainerVisible    BLOCK { |Self| ::lVisible .AND. IF( ::Container != NIL, ::Container:ContainerVisible, .T. ) }
+   METHOD ContainerVisible    BLOCK { |Self| ::lVisible .AND. IF( ::Container != NIL, ::Container:ContainerVisible, .T. ) }
 
-METHOD ContainerEnabled    BLOCK { |Self| ::lEnabled .AND. IF( ::Container != NIL, ::Container:ContainerEnabled, .T. ) }
+   METHOD ContainerEnabled    BLOCK { |Self| ::lEnabled .AND. IF( ::Container != NIL, ::Container:ContainerEnabled, .T. ) }
 
-METHOD ContainerReleasing  BLOCK { |Self| ::lReleasing .OR. IF( ::Container != NIL, ::Container:ContainerReleasing, IF( ::Parent != NIL, ::Parent:ContainerReleasing, .F. ) ) }
+   METHOD ContainerReleasing  BLOCK { |Self| ::lReleasing .OR. IF( ::Container != NIL, ::Container:ContainerReleasing, IF( ::Parent != NIL, ::Parent:ContainerReleasing, .F. ) ) }
 
    // Specific HACKS :(
 
-METHOD SetSplitBox         BLOCK { || .F. }
+   METHOD SetSplitBox         BLOCK { || .F. }
 
-METHOD SetSplitBoxInfo     BLOCK { |Self,a,b,c,d| if( ::Container != nil, ::Container:SetSplitBox( a,b,c,d ), .F. ) }
+   METHOD SetSplitBoxInfo     BLOCK { |Self,a,b,c,d| if( ::Container != nil, ::Container:SetSplitBox( a,b,c,d ), .F. ) }
 
    // Graphics Methods
 
-METHOD Line
+   METHOD Line
 
-METHOD Fill
+   METHOD Fill
 
-METHOD Box
+   METHOD Box
 
-METHOD RoundBox
+   METHOD RoundBox
 
-METHOD Ellipse
+   METHOD Ellipse
 
-METHOD Arc
+   METHOD Arc
 
-METHOD Pie
+   METHOD Pie
 
    /*
 
@@ -2993,7 +2993,7 @@ CLASS TDynamicValues
 
    DATA   oWnd
 
-METHOD New
+   METHOD New
 
    ERROR HANDLER Error
 
@@ -3802,4 +3802,3 @@ HB_FUNC ( C_PIE )
 }
 
 #pragma ENDDUMP
-

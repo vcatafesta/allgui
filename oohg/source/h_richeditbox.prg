@@ -62,35 +62,35 @@ CLASS TEditRich FROM TEdit
    DATA lSelChanging              INIT .F.
    DATA lDefault                  INIT .T.
 
-METHOD Define
+   METHOD Define
 
-METHOD FontColor               SETGET
+   METHOD FontColor               SETGET
 
-METHOD BackColor               SETGET
+   METHOD BackColor               SETGET
 
-METHOD RichValue               SETGET
+   METHOD RichValue               SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD SetSelectionTextColor
+   METHOD SetSelectionTextColor
 
-METHOD SetSelectionBackColor
+   METHOD SetSelectionBackColor
 
-METHOD HideSelection
+   METHOD HideSelection
 
-METHOD GetSelText
+   METHOD GetSelText
 
-METHOD MaxLength               SETGET
+   METHOD MaxLength               SETGET
 
-METHOD LoadFile
+   METHOD LoadFile
 
-METHOD SaveFile
+   METHOD SaveFile
 
-METHOD GetLastVisibleLine
+   METHOD GetLastVisibleLine
 
-METHOD GetCharFromPos
+   METHOD GetCharFromPos
 
    EMPTY( _OOHG_AllVars )
 
@@ -794,4 +794,3 @@ METHOD GetLastVisibleLine CLASS TEditRich
    nChar := ::GetCharFromPos( aRect[3] - 2, aRect[2] + 1 )
 
    RETURN ::GetLineFromChar( nChar )
-

@@ -30,19 +30,19 @@ CLASS VAR Hwnd SHARED
    DATA lCompacta     INIT .F.
    DATA Style, nFontSize
 
-METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
+   METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
 
-METHOD DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) PROTECTED
+   METHOD DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) PROTECTED
 
-METHOD INIT( oCurrGet )
+   METHOD INIT( oCurrGet )
 
-METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )
+   METHOD Show( oGet, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor  )
 
-METHOD Calculando( cNumero )
+   METHOD Calculando( cNumero )
 
-METHOD GetRefresh( )
+   METHOD GetRefresh( )
 
-METHOD End() INLINE  ::GetRefresh(), IIf( ::lCompacta, hwg_Postmessage( ::oFormCalc:Handle, WM_CLOSE, 0, 0 ),  )
+   METHOD End() INLINE  ::GetRefresh(), IIf( ::lCompacta, hwg_Postmessage( ::oFormCalc:Handle, WM_CLOSE, 0, 0 ),  )
 
 ENDCLASS
 
@@ -371,4 +371,3 @@ METHOD GetRefresh( ) CLASS HCalculator
    RETURN .T.
 
    /* end */
-

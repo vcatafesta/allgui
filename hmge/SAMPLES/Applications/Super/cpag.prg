@@ -748,4 +748,3 @@ STATIC FUNCTION find_formas_pagamento()
    ENDIF
 
    return(nil)
-

@@ -24,20 +24,20 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    DATA bGetFocus
    DATA lnoValid   INIT .F.
 
-METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bGetFocus, bKillFocus )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetValue( aValue )
+   METHOD SetValue( aValue )
 
-METHOD GetValue(  )
+   METHOD GetValue(  )
 
-METHOD Clear(  )
+   METHOD Clear(  )
 
-METHOD END()
+   METHOD END()
 
    HIDDEN:
    DATA  aValue           // Valor atual
@@ -156,4 +156,3 @@ STATIC FUNCTION __KillFocus( oCtrl )
    ENDIF
 
    RETURN xRet
-

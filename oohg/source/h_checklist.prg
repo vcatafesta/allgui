@@ -61,39 +61,39 @@ CLASS TCheckList FROM TGrid
    DATA AllowEdit              INIT .F. READONLY
    DATA LastChangedItem        INIT 0
 
-METHOD Define
+   METHOD Define
 
-METHOD Value                SETGET
+   METHOD Value                SETGET
 
-METHOD Events
+   METHOD Events
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
-METHOD Width                SETGET
+   METHOD Width                SETGET
 
-METHOD CheckItem            SETGET
+   METHOD CheckItem            SETGET
 
-METHOD DeleteAllItems
+   METHOD DeleteAllItems
 
-METHOD AddItem
+   METHOD AddItem
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD Sort
+   METHOD Sort
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD ItemVisible
+   METHOD ItemVisible
 
-METHOD Item
+   METHOD Item
 
-METHOD SetRangeColor
+   METHOD SetRangeColor
 
-METHOD ItemCaption          SETGET
+   METHOD ItemCaption          SETGET
 
-METHOD ItemImage            SETGET
+   METHOD ItemImage            SETGET
 
-METHOD DoChange
+   METHOD DoChange
 
    /*
    This methods of TGrid class are also available:
@@ -126,79 +126,79 @@ METHOD DoChange
 
    // This methods of TGrid class are not needed:
 
-METHOD Left                 BLOCK { || Nil }
+   METHOD Left                 BLOCK { || Nil }
 
-METHOD Right                BLOCK { || Nil }
+   METHOD Right                BLOCK { || Nil }
 
-METHOD Up                   BLOCK { || Nil }
+   METHOD Up                   BLOCK { || Nil }
 
-METHOD Down                 BLOCK { || Nil }
+   METHOD Down                 BLOCK { || Nil }
 
-METHOD PageDown             BLOCK { || Nil }
+   METHOD PageDown             BLOCK { || Nil }
 
-METHOD PageUp               BLOCK { || Nil }
+   METHOD PageUp               BLOCK { || Nil }
 
-METHOD GoTop                BLOCK { || Nil }
+   METHOD GoTop                BLOCK { || Nil }
 
-METHOD GoBottom             BLOCK { || Nil }
+   METHOD GoBottom             BLOCK { || Nil }
 
-METHOD AddColumn            BLOCK { || Nil }
+   METHOD AddColumn            BLOCK { || Nil }
 
-METHOD DeleteColumn         BLOCK { || Nil }
+   METHOD DeleteColumn         BLOCK { || Nil }
 
-METHOD Cell                 BLOCK { || Nil }
+   METHOD Cell                 BLOCK { || Nil }
 
-METHOD EditCell             BLOCK { || Nil }
+   METHOD EditCell             BLOCK { || Nil }
 
-METHOD EditCell2            BLOCK { || Nil }
+   METHOD EditCell2            BLOCK { || Nil }
 
-METHOD EditAllCells         BLOCK { || Nil }
+   METHOD EditAllCells         BLOCK { || Nil }
 
-METHOD EditItem             BLOCK { || Nil }
+   METHOD EditItem             BLOCK { || Nil }
 
-METHOD EditItem2            BLOCK { || Nil }
+   METHOD EditItem2            BLOCK { || Nil }
 
-METHOD EditGrid             BLOCK { || Nil }
+   METHOD EditGrid             BLOCK { || Nil }
 
-METHOD IsColumnReadOnly     BLOCK { || Nil }
+   METHOD IsColumnReadOnly     BLOCK { || Nil }
 
-METHOD IsColumnWhen         BLOCK { || Nil }
+   METHOD IsColumnWhen         BLOCK { || Nil }
 
-METHOD ToExcel              BLOCK { || Nil }
+   METHOD ToExcel              BLOCK { || Nil }
 
-METHOD ToOpenOffice         BLOCK { || Nil }
+   METHOD ToOpenOffice         BLOCK { || Nil }
 
-METHOD AppendItem           BLOCK { || Nil }
+   METHOD AppendItem           BLOCK { || Nil }
 
-METHOD ColumnCount          BLOCK { || Nil }
+   METHOD ColumnCount          BLOCK { || Nil }
 
-METHOD ColumnAutoFit        BLOCK { || Nil }
+   METHOD ColumnAutoFit        BLOCK { || Nil }
 
-METHOD ColumnAutoFitH       BLOCK { || Nil }
+   METHOD ColumnAutoFitH       BLOCK { || Nil }
 
-METHOD ColumnsAutoFit       BLOCK { || Nil }
+   METHOD ColumnsAutoFit       BLOCK { || Nil }
 
-METHOD ColumnsAutoFitH      BLOCK { || Nil }
+   METHOD ColumnsAutoFitH      BLOCK { || Nil }
 
-METHOD ColumnBetterAutoFit  BLOCK { || Nil }
+   METHOD ColumnBetterAutoFit  BLOCK { || Nil }
 
-METHOD ColumnsBetterAutoFit BLOCK { || Nil }
+   METHOD ColumnsBetterAutoFit BLOCK { || Nil }
 
-METHOD ColumnHide           BLOCK { || Nil }
+   METHOD ColumnHide           BLOCK { || Nil }
 
-METHOD ColumnShow           BLOCK { || Nil }
+   METHOD ColumnShow           BLOCK { || Nil }
 
-METHOD ColumnWidth          BLOCK { || Nil }
+   METHOD ColumnWidth          BLOCK { || Nil }
 
-METHOD SortColumn           BLOCK { || Nil }
+   METHOD SortColumn           BLOCK { || Nil }
 
-METHOD Header               BLOCK { || Nil }
+   METHOD Header               BLOCK { || Nil }
 
-METHOD HeaderImage          BLOCK { || Nil }
+   METHOD HeaderImage          BLOCK { || Nil }
 
-METHOD HeaderImageAlign     BLOCK { || Nil }
+   METHOD HeaderImageAlign     BLOCK { || Nil }
 
-METHOD LoadHeaderImages     BLOCK { || Nil }
+   METHOD LoadHeaderImages     BLOCK { || Nil }
 
    EMPTY( _OOHG_AllVars )
 
@@ -692,4 +692,3 @@ FUNCTION ArraysAreEqual( array1, array2 )
    /*
    * EOF
    */
-

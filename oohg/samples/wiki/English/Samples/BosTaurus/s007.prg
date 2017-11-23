@@ -127,4 +127,3 @@ PROCEDURE Proc_ON_PAINT
    /*
    * EOF
    */
-

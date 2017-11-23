@@ -200,4 +200,3 @@ FUNCTION LoadToCalendar( dDate )
    ENDIF
 
    RETURN NIL
-

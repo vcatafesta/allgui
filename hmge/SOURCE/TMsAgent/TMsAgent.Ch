@@ -16,9 +16,7 @@
 // |                                       |
 // +---------------------------------------+
 
-
 #define TMSAGENT "TMsAgent v1.3"
-
 
 #xcommand DEFINE AGENT    <oAgent>                   ;
              [ FILE AGENT <cFileAgent>             ] ;

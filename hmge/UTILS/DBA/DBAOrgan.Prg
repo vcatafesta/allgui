@@ -467,7 +467,6 @@ PROC T_SetIndex()
                         [, <idField2> [/[A | D][C]]...]
                         [<scope>] [WHILE <lCondition>] [FOR <lCondition>]
                         */
-
                         PROC T_Sort()                             // Table SORT
 
                            LOCA aComPars  := {},;
@@ -619,7 +618,6 @@ PROC T_SetIndex()
                            */
 
                            PROC T_Total()                            // Table TOTAL
-
                               LOCA aComPars  := {},;
                                  cCbFTitl  := 'TOTAL current table',;
                                  aComOpts  := {},;
@@ -1505,4 +1503,3 @@ PROC T_SetIndex()
                                        RETU // T_CopSpcApply()
 
                                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

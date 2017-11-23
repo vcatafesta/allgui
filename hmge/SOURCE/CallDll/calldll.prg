@@ -119,4 +119,3 @@ HB_FUNC ( HMG_ISFUNCDLL )
 }
 
 #pragma ENDDUMP
-

@@ -215,9 +215,7 @@ PROCEDURE OnInit()
    RETURN
 
    /*-----------------------------------------------------------------------------
-
    Procedure ..: PSTestPage()
-
    Description : PageScript 32 test page
    -----------------------------------------------------------------------------*/
 
@@ -401,9 +399,7 @@ FUNCTION PSTestPage()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: RotatedText()
-
    Description : Rotated text sample
    Author .....: Stephan St-Denis
    Date .......: September 2000
@@ -432,9 +428,7 @@ STATIC FUNCTION RotatedText()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePageSize()
-
    Description : Return current printer page size
    Author .....: Stephan St-Denis
    Date .......: April 2001
@@ -443,7 +437,6 @@ STATIC FUNCTION RotatedText()
 STATIC FUNCTION AbeePageSize()
 
    LOCAL  nPaper
-
    STATIC aPaper := { ;
       "LETTER", ;
       "LETTERSMALL", ;
@@ -524,9 +517,7 @@ STATIC FUNCTION AbeePageSize()
    RETURN aPaper[nPaper]
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePatterns()
-
    Description : Patterns test
    Author .....: Stephan St-Denis
    Date .......: April 2005
@@ -552,9 +543,7 @@ STATIC FUNCTION AbeePatterns()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeInvoice()
-
    Description : Invoice example
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -665,9 +654,7 @@ STATIC FUNCTION AbeeInvoice()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: InvoiceHeader()
-
    Description : Print the invoice header section
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -700,9 +687,7 @@ STATIC FUNCTION InvoiceHeader()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: InvoiceDetail()
-
    Description : Print the invoice detail section
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -733,9 +718,7 @@ STATIC FUNCTION InvoiceDetail()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: InvoiceTotal()
-
    Description : Print the invoice total section
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -760,9 +743,7 @@ STATIC FUNCTION InvoiceTotal()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePuroLater()
-
    Description : A bill of Lading example with a bit of humour.
    Author .....: Stephan St-Denis
    Date .......: April 2000
@@ -860,9 +841,7 @@ STATIC FUNCTION AbeePuroLater()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeCustList()
-
    Description : Customer list example
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -921,9 +900,7 @@ STATIC FUNCTION AbeeCustList()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: CustHeader(<n>) -> nRow
-
    Description : Prints the customer list header
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -943,9 +920,7 @@ STATIC FUNCTION CustHeader(nPage)
    RETURN 7
 
    /*-----------------------------------------------------------------------------
-
    Function ...: WaterMark() -> NIL
-
    Description : Prints the watermark in the background of each page
    Author .....: Stephan St-Denis
    Date .......: April 2000
@@ -964,9 +939,7 @@ FUNCTION WaterMark()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeGraphic()
-
    Description : Using Abee PageScript capabilities to print good looking graphics
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -1008,9 +981,7 @@ STATIC FUNCTION AbeeGraphic()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeText()
-
    Description : Simulating a plain text report
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -1129,9 +1100,7 @@ STATIC FUNCTION AbeeText()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePixels()
-
    Description : Printing using pixels coordinates
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -1157,9 +1126,7 @@ STATIC FUNCTION AbeePixels()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeTextBox()
-
    Description : Prints a long character string in a box region
    Author .....: Stephan St-Denis
    Date .......: March 2000
@@ -1204,9 +1171,7 @@ STATIC FUNCTION AbeeTextBox()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeBarCode()
-
    Description : Show barcode capabilities
    Author .....: Stephan St-Denis
    Date .......: February 2000
@@ -1239,9 +1204,7 @@ STATIC FUNCTION AbeeBarCode()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePrinters()
-
    Description : Station's available printers list
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -1269,9 +1232,7 @@ STATIC FUNCTION AbeePrinters()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePaperBins()
-
    Description : Station's available printers paper bin list
    Author .....: Stephan St-Denis
    Date .......: May 2006
@@ -1306,9 +1267,7 @@ STATIC FUNCTION AbeePaperBins()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeFonts()
-
    Description : List of available fonts for a specific printer
    Author .....: Stephan St-Denis
    Date .......: March 2000
@@ -1341,9 +1300,7 @@ STATIC FUNCTION AbeeFonts()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePointSize()
-
    Description : Print the same string using different point size
    Author .....: Stephan St-Denis
    Date .......: March 2000
@@ -1368,9 +1325,7 @@ STATIC FUNCTION AbeePointSize()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeePrnCaps
-
    Description : List of supported printer caps as returned by PSGetCaps()
    Author .....: Stephan St-Denis
    Date .......: September 2000
@@ -1409,9 +1364,7 @@ STATIC FUNCTION AbeePrnCaps()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: CalcTop(<n>) -> nTopCoor
-
    Description : Calculates the top coor. of a bar
    Author .....: Stephan St-Denis
    Date .......: August 1999
@@ -1422,9 +1375,7 @@ STATIC FUNCTION CalcTop(nAmnt)
    RETURN 160 - (nAmnt / 1000)
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeConvert()
-
    Description : Print a string with and without Ascii to Ansi convertion
    Author .....: Stephan St-Denis
    Date .......: March 2001
@@ -1458,9 +1409,7 @@ STATIC FUNCTION AbeeConvert()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeConvert()
-
    Description : Print a string with and without Ascii to Ansi convertion
    Author .....: Stephan St-Denis
    Date .......: March 2001
@@ -1489,9 +1438,7 @@ STATIC FUNCTION AbeeDuplex()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeLegal()
-
    Description : Print on a LEGAL paper size format
    Author .....: Stephan St-Denis
    Date .......: May 2001
@@ -1531,9 +1478,7 @@ STATIC FUNCTION AbeeLegal()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeRawData()
-
    Description : Prints RAW data
    Author .....: Stephan St-Denis
    Date .......: May 2001
@@ -1613,9 +1558,7 @@ STATIC FUNCTION AbeeRAWData()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeEmuData()
-
    Description : Prints using the EMULATION mode
    Author .....: Stephan St-Denis
    Date .......: May 2001
@@ -1668,9 +1611,7 @@ STATIC FUNCTION AbeeEMUData()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeAutoTextCoor()
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: April 2006
@@ -1685,9 +1626,7 @@ STATIC FUNCTION AbeeAutoTextCoor()
    PSSetFont(APS_COURIER, APS_PLAIN, 12)
 
    /*
-
    Function PSTextOut(nTop, nLeft, xValue, cPicture, nJustify, cFont, nSize, nStyle, nTFColor, nTBColor, nAngle)
-
    */
 
    PSTextOut( , , "This is a test "  , , , APS_VERDANA,  9)
@@ -1701,9 +1640,7 @@ STATIC FUNCTION AbeeAutoTextCoor()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeEncryptedPDF()
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: April 2007
@@ -1730,9 +1667,7 @@ STATIC FUNCTION AbeeEncryptedPDF()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function ...: AbeeChangePWColor()
-
    Description :
    Author .....: Stephan St-Denis
    Date .......: April 2007
@@ -1750,9 +1685,7 @@ STATIC FUNCTION AbeeChangePWColor()
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function .: #PC(<n>, <c>)
-
    Fonction .: Get/Set the printer codes
    Author ...: Stephan St-Denis
    Date .....: October 2002
@@ -1769,9 +1702,7 @@ FUNCTION PC(nCode, cCode)
    RETURN aPC[nCode]
 
    /*-----------------------------------------------------------------------------
-
    Function .: #SetPrinter()
-
    Fonction .: Sets the printer codes
    Author ...: Stephan St-Denis
    Date .....: October 2002
@@ -1806,9 +1737,7 @@ FUNCTION SetPrinterCodes(nRecNo)
    RETURN NIL
 
    /*-----------------------------------------------------------------------------
-
    Function .: #CtoEsc(<c>) -> cEscapedCode
-
    Fonction .: Convert a string in the form of \nnn + \nnn ... to real escape codes
    Author ...: Stephan St-Denis
    Date .....: October 2002
@@ -1898,4 +1827,3 @@ FUNCTION Achoice(t, l, b, r, aItems, cTitle, nValue)
    ACTIVATE WINDOW Win_2
 
    RETURN nValue
-

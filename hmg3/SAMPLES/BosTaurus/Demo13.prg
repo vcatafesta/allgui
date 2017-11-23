@@ -71,4 +71,3 @@ PROCEDURE Proc_Image (cControlName, cText, aColor)
    BT_ClientAreaInvalidateAll ("Win1")
 
    RETURN
-

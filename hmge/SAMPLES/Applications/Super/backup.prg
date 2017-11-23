@@ -173,4 +173,3 @@ STATIC FUNCTION FillFiles( aFiles, cDir, cPath )
    NEXT
 
    return(aFiles)
-

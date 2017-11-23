@@ -110,4 +110,3 @@ FUNCTION DecryptAES
    ENDIF
 
    RETURN NIL
-

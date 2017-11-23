@@ -99,7 +99,6 @@ typedef unsigned long SQLULEN;
    #define O_HB_CHAR  char
 #endif
 
-
 typedef struct
 {
    SQLHENV hEnv;
@@ -118,7 +117,6 @@ static HB_ERRCODE odbcOpen( SQLBASEAREAP pArea );
 static HB_ERRCODE odbcClose( SQLBASEAREAP pArea );
 static HB_ERRCODE odbcGoTo( SQLBASEAREAP pArea, HB_ULONG ulRecNo );
 
-
 static SDDNODE s_odbcdd =
 {
    NULL,
@@ -132,7 +130,6 @@ static SDDNODE s_odbcdd =
    ( SDDFUNC_GETVALUE ) NULL,
    ( SDDFUNC_GETVARLEN ) NULL
 };
-
 
 static void hb_odbcdd_init( void * cargo )
 {
@@ -165,7 +162,6 @@ HB_CALL_ON_STARTUP_END( _hb_odbcdd_init_ )
    #include "hbiniseg.h"
 #endif
 
-
 /*=====================================================================================*/
 static HB_USHORT hb_errRT_ODBCDD( HB_ERRCODE errGenCode, HB_ERRCODE errSubCode, const char * szDescription, const char * szOperation, HB_ERRCODE errOsCode )
 {
@@ -177,7 +173,6 @@ static HB_USHORT hb_errRT_ODBCDD( HB_ERRCODE errGenCode, HB_ERRCODE errSubCode, 
    hb_itemRelease( pError );
    return uiAction;
 }
-
 
 static char * odbcGetError( SQLHENV hEnv, SQLHDBC hConn, SQLHSTMT hStmt, HB_ERRCODE * pErrCode )
 {
@@ -203,7 +198,6 @@ static char * odbcGetError( SQLHENV hEnv, SQLHDBC hConn, SQLHSTMT hStmt, HB_ERRC
       *pErrCode = ( HB_ERRCODE ) iNativeErr;
    return szRet;
 }
-
 
 /*============= SDD METHODS =============================================================*/
 
@@ -285,7 +279,6 @@ static HB_ERRCODE odbcConnect( SQLDDCONNECTION * pConnection, PHB_ITEM pItem )
    return HB_FAILURE;
 }
 
-
 static HB_ERRCODE odbcDisconnect( SQLDDCONNECTION * pConnection )
 {
    SDDCONN * pSDDConn = ( SDDCONN * ) pConnection->pSDDConn;
@@ -301,7 +294,6 @@ static HB_ERRCODE odbcDisconnect( SQLDDCONNECTION * pConnection )
    hb_xfree( pSDDConn );
    return HB_SUCCESS;
 }
-
 
 static HB_ERRCODE odbcExecute( SQLDDCONNECTION * pConnection, PHB_ITEM pItem )
 {
@@ -355,7 +347,6 @@ static HB_ERRCODE odbcExecute( SQLDDCONNECTION * pConnection, PHB_ITEM pItem )
 #endif
    return HB_FAILURE;
 }
-
 
 static HB_ERRCODE odbcOpen( SQLBASEAREAP pArea )
 {
@@ -652,7 +643,6 @@ static HB_ERRCODE odbcOpen( SQLBASEAREAP pArea )
    return HB_SUCCESS;
 }
 
-
 static HB_ERRCODE odbcClose( SQLBASEAREAP pArea )
 {
    SDDDATA * pSDDData = ( SDDDATA * ) pArea->pSDDData;
@@ -671,7 +661,6 @@ static HB_ERRCODE odbcClose( SQLBASEAREAP pArea )
    }
    return HB_SUCCESS;
 }
-
 
 static HB_ERRCODE odbcGoTo( SQLBASEAREAP pArea, HB_ULONG ulRecNo )
 {

@@ -62,23 +62,18 @@ CREATE CLASS TMySQLRow
 
    VAR cMyCollation                             // collation of the SQL Server strings & memos  to be translated
 
-METHOD New( aRow, aFStruct, cTableName, cCollation )     // Create a new Row object
+   METHOD New( aRow, aFStruct, cTableName, cCollation )     // Create a new Row object
 
-METHOD FieldGet( cnField )                   // Same as clipper ones, but FieldGet() and FieldPut() accept a string as
+   METHOD FieldGet( cnField )                   // Same as clipper ones, but FieldGet() and FieldPut() accept a string as
+   METHOD FieldPut( cnField, Value )            // field identifier, not only a number
+   METHOD FieldName( nNum )
+   METHOD FieldPos( cFieldName )
 
-METHOD FieldPut( cnField, Value )            // field identifier, not only a number
+   METHOD FieldLen( nNum )                      // Length of field N
+   METHOD FieldDec( nNum, lFormat )             // How many decimals in field N
+   METHOD FieldType( nNum )                     // Clipper type of field N
 
-METHOD FieldName( nNum )
-
-METHOD FieldPos( cFieldName )
-
-METHOD FieldLen( nNum )                      // Length of field N
-
-METHOD FieldDec( nNum, lFormat )             // How many decimals in field N
-
-METHOD FieldType( nNum )                     // Clipper type of field N
-
-METHOD MakePrimaryKeyWhere()                 // returns a WHERE x=y statement which uses primary key (if available)
+   METHOD MakePrimaryKeyWhere()                 // returns a WHERE x=y statement which uses primary key (if available)
 
 ENDCLASS
 
@@ -321,49 +316,35 @@ CREATE CLASS TMySQLQuery
 
    VAR cMyCollation                     // collation of the SQL Query strings & memos to be translated
 
-METHOD New( nSocket, cQuery, cCollation )        // New query object
+   METHOD New( nSocket, cQuery, cCollation )        // New query object
+   METHOD Destroy()
+   METHOD End() INLINE ::Destroy()
+   METHOD Refresh()                     // ReExecutes the query (cQuery) so that changes to table are visible
 
-METHOD Destroy()
+   METHOD GetRow( nRow )                // return Row n of answer
 
-METHOD End() INLINE ::Destroy()
+   METHOD Skip( nRows )                 // Same as clipper ones
 
-METHOD Refresh()                     // ReExecutes the query (cQuery) so that changes to table are visible
+   METHOD Bof() INLINE ::lBof
+   METHOD Eof() INLINE ::lEof
+   METHOD RecNo() INLINE ::nCurRow
+   METHOD LastRec() INLINE ::nNumRows
+   METHOD GoTop() INLINE ::GetRow( 1 )
+   METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
+   METHOD GoTO( nRow ) INLINE ::GetRow( nRow )
 
-METHOD GetRow( nRow )                // return Row n of answer
+   METHOD FCount()
 
-METHOD Skip( nRows )                 // Same as clipper ones
+   METHOD NetErr() INLINE ::lError      // Returns .T. if something went wrong
+   METHOD Error()                       // Returns textual description of last error and clears ::lError
 
-METHOD Bof() INLINE ::lBof
+   METHOD FieldName( nNum )
+   METHOD FieldPos( cFieldName )
+   METHOD FieldGet( cnField )
 
-METHOD Eof() INLINE ::lEof
-
-METHOD RecNo() INLINE ::nCurRow
-
-METHOD LastRec() INLINE ::nNumRows
-
-METHOD GoTop() INLINE ::GetRow( 1 )
-
-METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
-
-METHOD GoTO( nRow ) INLINE ::GetRow( nRow )
-
-METHOD FCount()
-
-METHOD NetErr() INLINE ::lError      // Returns .T. if something went wrong
-
-METHOD Error()                       // Returns textual description of last error and clears ::lError
-
-METHOD FieldName( nNum )
-
-METHOD FieldPos( cFieldName )
-
-METHOD FieldGet( cnField )
-
-METHOD FieldLen( nNum )              // Length of field N
-
-METHOD FieldDec( nNum, lFormat )     // How many decimals in field N
-
-METHOD FieldType( nNum )             // Clipper type of field N
+   METHOD FieldLen( nNum )              // Length of field N
+   METHOD FieldDec( nNum, lFormat )     // How many decimals in field N
+   METHOD FieldType( nNum )             // Clipper type of field N
 
 ENDCLASS
 
@@ -785,37 +766,26 @@ CREATE CLASS TMySQLTable FROM TMySQLQuery
    VAR cTable                                       // name of table
    VAR aOldValue                                    //  keeps a copy of old value
 
-METHOD New( nSocket, cQuery, cTableName, cCollation )
+   METHOD New( nSocket, cQuery, cTableName, cCollation )
+   METHOD GetRow( nRow )
+   METHOD Skip( nRow )
+   METHOD GoTop() INLINE ::GetRow( 1 )
+   METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
+   METHOD GoTo( nRow ) INLINE ::GetRow( nRow )
 
-METHOD GetRow( nRow )
+   METHOD Update( oRow, lOldRecord, lRefresh )      // Gets an oRow and updates changed fields
 
-METHOD Skip( nRow )
+   METHOD Save() INLINE ::Update()
 
-METHOD GoTop() INLINE ::GetRow( 1 )
+   METHOD Delete( oRow, lOldRecord, lRefresh )      // Deletes passed row from table
+   METHOD Append( oRow, lRefresh )                  // Inserts passed row into table
+   METHOD GetBlankRow( lSetValues )                 // Returns an empty row with all available fields empty
+   METHOD SetBlankRow() INLINE ::GetBlankRow( .T. ) // Compatibility
 
-METHOD GoBottom() INLINE ::GetRow( ::nNumRows )
-
-METHOD GoTo( nRow ) INLINE ::GetRow( nRow )
-
-METHOD Update( oRow, lOldRecord, lRefresh )      // Gets an oRow and updates changed fields
-
-METHOD Save() INLINE ::Update()
-
-METHOD Delete( oRow, lOldRecord, lRefresh )      // Deletes passed row from table
-
-METHOD Append( oRow, lRefresh )                  // Inserts passed row into table
-
-METHOD GetBlankRow( lSetValues )                 // Returns an empty row with all available fields empty
-
-METHOD SetBlankRow() INLINE ::GetBlankRow( .T. ) // Compatibility
-
-METHOD Blank() INLINE ::GetBlankRow()
-
-METHOD FieldPut( cnField, Value )                // field identifier, not only a number
-
-METHOD Refresh()
-
-METHOD MakePrimaryKeyWhere()                     // returns a WHERE x=y statement which uses primary key (if available)
+   METHOD Blank() INLINE ::GetBlankRow()
+   METHOD FieldPut( cnField, Value )                // field identifier, not only a number
+   METHOD Refresh()
+   METHOD MakePrimaryKeyWhere()                     // returns a WHERE x=y statement which uses primary key (if available)
 
 ENDCLASS
 
@@ -1343,41 +1313,30 @@ CREATE CLASS TMySQLServer
    VAR cCreateQuery
    VAR cMyCollation                                        // collation of the SQL Server strings & memos  to be translated
 
-METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation )  // Opens connection to a server, returns a server object
+   METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation )  // Opens connection to a server, returns a server object
+   METHOD Destroy()                                        // Closes connection to server
 
-METHOD Destroy()                                        // Closes connection to server
+   METHOD SelectDB( cDBName )                              // Which data base I will use for subsequent queries
 
-METHOD SelectDB( cDBName )                              // Which data base I will use for subsequent queries
+   METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) // Create new table using the same syntax of dbCreate()
+   METHOD DeleteTable( cTable )                            // delete table
+   METHOD TableStruct( cTable )                            // returns a structure array compatible with clipper's dbStruct() ones
+   METHOD CreateIndex( cName, cTable, aFNames, lUnique )   // Create an index (unique) on field name(s) passed as an array of strings aFNames
+   METHOD DeleteIndex( cName, cTable )                     // Delete index cName from cTable
 
-METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) // Create new table using the same syntax of dbCreate()
+   METHOD ListDBs()                                        // returns an array with list of data bases available
+   METHOD ListTables()                                     // returns an array with list of available tables in current database
 
-METHOD DeleteTable( cTable )                            // delete table
+   METHOD Query( cQuery )                                  // Gets a textual query and returns a TMySQLQuery or TMySQLTable object
 
-METHOD TableStruct( cTable )                            // returns a structure array compatible with clipper's dbStruct() ones
+   METHOD NetErr() INLINE ::lError                         // Returns .T. if something went wrong
+   METHOD Error()                                          // Returns textual description of last error
+   METHOD CreateDatabase( cDataBase )                      // Create an New Mysql Database
+   METHOD DeleteDatabase( cDataBase )                      // Delete database
 
-METHOD CreateIndex( cName, cTable, aFNames, lUnique )   // Create an index (unique) on field name(s) passed as an array of strings aFNames
-
-METHOD DeleteIndex( cName, cTable )                     // Delete index cName from cTable
-
-METHOD ListDBs()                                        // returns an array with list of data bases available
-
-METHOD ListTables()                                     // returns an array with list of available tables in current database
-
-METHOD Query( cQuery )                                  // Gets a textual query and returns a TMySQLQuery or TMySQLTable object
-
-METHOD NetErr() INLINE ::lError                         // Returns .T. if something went wrong
-
-METHOD Error()                                          // Returns textual description of last error
-
-METHOD CreateDatabase( cDataBase )                      // Create an New Mysql Database
-
-METHOD DeleteDatabase( cDataBase )                      // Delete database
-
-METHOD sql_Commit()                                     // Commits transaction [mitja]
-
-METHOD sql_Rollback()                                   // Rollbacks transaction [mitja]
-
-METHOD sql_Version()                                    // server version as numeric [mitja]
+   METHOD sql_Commit()                                     // Commits transaction [mitja]
+   METHOD sql_Rollback()                                   // Rollbacks transaction [mitja]
+   METHOD sql_Version()                                    // server version as numeric [mitja]
 
 ENDCLASS
 
@@ -1805,4 +1764,3 @@ STATIC FUNCTION ClipValue2SQL( Value )
 STATIC FUNCTION qText( cText )
 
    RETURN  chr(96) + cText + chr(96)
-

@@ -29,4 +29,3 @@ PROCEDURE Play_Click
    PLAY WAVE "sample.wav"
 
    RETURN
-

@@ -132,4 +132,3 @@ STATIC FUNCTION sumatoria()
    form_1.nsuma.value:=suma
 
    RETURN NIL
-

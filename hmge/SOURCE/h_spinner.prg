@@ -219,4 +219,3 @@ FUNCTION OSPINEVENTS( hWnd, nMsg, wParam, lParam )    // 2006.08.13 JD
    ENDSWITCH
 
    RETURN 0
-

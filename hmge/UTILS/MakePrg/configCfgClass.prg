@@ -26,11 +26,9 @@ CLASS ConfigCls
    VAR imp
    VAR data
 
-METHOD init
-
-METHOD findHeader
-
-METHOD loadSection
+   METHOD init
+   METHOD findHeader
+   METHOD loadSection
 
 ENDCLASS
 
@@ -81,4 +79,3 @@ METHOD ConfigCls:loadSection(cSection)
    ENDIF
 
    RETURN cDef
-

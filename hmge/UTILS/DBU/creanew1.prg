@@ -538,4 +538,3 @@ FUNCTION DBUsavestructure
    ENDIF
 
    RETURN NIL
-

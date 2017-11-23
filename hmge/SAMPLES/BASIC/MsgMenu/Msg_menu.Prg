@@ -400,4 +400,3 @@ HB_FUNC (ICONANIMATE)
 }
 
 #pragma ENDDUMP
-

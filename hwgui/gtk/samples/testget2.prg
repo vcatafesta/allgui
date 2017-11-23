@@ -114,4 +114,3 @@ STATIC FUNCTION TimerFunc()
    oSayT:SetValue( Time() )
 
    RETURN NIL
-

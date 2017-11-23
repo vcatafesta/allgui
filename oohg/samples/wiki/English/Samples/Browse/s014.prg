@@ -169,4 +169,3 @@ FUNCTION EditAborted( oBrw1 )
    /*
    * EOF
    */
-

@@ -404,4 +404,3 @@ PROCEDURE flResizeTb()
    Form_fl.SetFocus
 
    RETURN
-

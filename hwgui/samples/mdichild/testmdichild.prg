@@ -217,4 +217,3 @@ STATIC FUNCTION oBrowse1_onInit( This )
    This:HighlightStyle := 0
 
    RETURN .T.
-

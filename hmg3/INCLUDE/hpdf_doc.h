@@ -15,7 +15,6 @@
  *
  */
 
-
 #ifndef _HPDF_DOC_H
 #define _HPDF_DOC_H
 
@@ -77,49 +76,38 @@ typedef struct _HPDF_Doc_Rec {
 
 typedef struct _HPDF_Doc_Rec  *HPDF_Doc;
 
-
 HPDF_Encoder
 HPDF_Doc_FindEncoder (HPDF_Doc         pdf,
                       const char  *encoding_name);
 
-
 HPDF_FontDef
 HPDF_Doc_FindFontDef (HPDF_Doc         pdf,
                       const char  *font_name);
-
 
 HPDF_Font
 HPDF_Doc_FindFont  (HPDF_Doc         pdf,
                     const char  *font_name,
                     const char  *encoding_name);
 
-
 HPDF_BOOL
 HPDF_Doc_Validate  (HPDF_Doc  pdf);
-
 
 /*----- page handling -------------------------------------------------------*/
 
 HPDF_Pages
 HPDF_Doc_GetCurrentPages  (HPDF_Doc  pdf);
 
-
 HPDF_Pages
 HPDF_Doc_AddPagesTo  (HPDF_Doc     pdf,
                       HPDF_Pages   parent);
-
 
 HPDF_STATUS
 HPDF_Doc_SetCurrentPages  (HPDF_Doc    pdf,
                            HPDF_Pages  pages);
 
-
 HPDF_STATUS
 HPDF_Doc_SetCurrentPage  (HPDF_Doc   pdf,
                           HPDF_Page  page);
-
-
-
 
 /*----- font handling -------------------------------------------------------*/
 
@@ -127,11 +115,9 @@ HPDF_FontDef
 HPDF_GetFontDef (HPDF_Doc         pdf,
                  const char  *font_name);
 
-
 HPDF_STATUS
 HPDF_Doc_RegisterFontDef  (HPDF_Doc       pdf,
                            HPDF_FontDef   fontdef);
-
 
 /*----- encoding handling ---------------------------------------------------*/
 
@@ -139,17 +125,13 @@ HPDF_STATUS
 HPDF_Doc_RegisterEncoder  (HPDF_Doc       pdf,
                            HPDF_Encoder   encoder);
 
-
-
 /*----- encryptio------------------------------------------------------------*/
 
 HPDF_STATUS
 HPDF_Doc_SetEncryptOn (HPDF_Doc  pdf);
 
-
 HPDF_STATUS
 HPDF_Doc_SetEncryptOff (HPDF_Doc  pdf);
-
 
 HPDF_STATUS
 HPDF_Doc_PrepareEncryption (HPDF_Doc  pdf);
@@ -159,4 +141,3 @@ HPDF_Doc_PrepareEncryption (HPDF_Doc  pdf);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_DOC_H */
-

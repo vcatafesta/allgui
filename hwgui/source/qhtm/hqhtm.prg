@@ -19,16 +19,16 @@ CLASS HQhtm INHERIT HControl
    DATA resname INIT ""
    DATA bLink, bSubmit
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
       bInit,bSize,bLink,bSubmit,fname,resname )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Redefine( oWndParent,nId,caption,bInit,bSize,bLink,bSubmit,fname,resname )
+   METHOD Redefine( oWndParent,nId,caption,bInit,bSize,bLink,bSubmit,fname,resname )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD Notify( lParam )
+   METHOD Notify( lParam )
 
 ENDCLASS
 
@@ -151,12 +151,12 @@ CLASS VAR winclass   INIT "BUTTON"
 
    DATA  cHtml
 
-METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
+   METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bClick,ctooltip )
 
-METHOD Redefine( oWnd,nId,cCaption,oFont,bInit,bSize,bClick,ctooltip )
+   METHOD Redefine( oWnd,nId,cCaption,oFont,bInit,bSize,bClick,ctooltip )
 
-METHOD Init()
+   METHOD Init()
 
 ENDCLASS
 
@@ -193,4 +193,3 @@ METHOD Init() CLASS HQhtmButton
    QHTM_End()
 
    RETURN
-

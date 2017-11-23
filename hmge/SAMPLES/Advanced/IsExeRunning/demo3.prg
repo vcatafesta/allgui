@@ -36,4 +36,3 @@ FUNCTION OnlyOneInstance( cAppTitle )
    ENDIF
 
    RETURN NIL
-

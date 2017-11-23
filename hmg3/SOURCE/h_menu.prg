@@ -915,4 +915,3 @@ FUNCTION _TestControlHandle_ContextMenu  ( Handle , ControlHandle )
    ENDIF
 
    RETURN .F.
-

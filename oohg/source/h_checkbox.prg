@@ -65,15 +65,15 @@ CLASS TCheckBox FROM TLabel
    DATA LeftAlign  INIT .F.
    DATA lLibDraw   INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_Color
+   METHOD Events_Color
 
-METHOD Events_Notify
+   METHOD Events_Notify
 
    EMPTY( _OOHG_AllVars )
 
@@ -468,4 +468,3 @@ HB_FUNC( TCHECKBOX_NOTIFY_CUSTOMDRAW )
 }
 
 #pragma ENDDUMP
-

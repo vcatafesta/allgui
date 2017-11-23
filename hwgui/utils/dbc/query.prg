@@ -129,4 +129,3 @@ FUNCTION Query( lEdit )
    ENDIF
 
    RETURN NIL
-

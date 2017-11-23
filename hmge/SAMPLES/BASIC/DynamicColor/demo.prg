@@ -101,4 +101,3 @@ PROCEDURE CloseTables()
    CLOSE Test
 
    RETURN
-

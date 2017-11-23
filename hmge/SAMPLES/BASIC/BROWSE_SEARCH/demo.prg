@@ -145,4 +145,3 @@ STATIC FUNCTION IncrementalSearch( cKey, nKey )
    DoMethod( cWindowName, cBrowseName, 'Setfocus' )
 
    RETURN 1
-

@@ -32,9 +32,9 @@ CLASS VAR winclass   INIT "ACTIVEX"
    DATA hAtl      INIT nil
    DATA hObj      INIT nil
 
-METHOD Release
+   METHOD Release
 
-METHOD New
+   METHOD New
 
    DELEGATE Set TO oOle
    DELEGATE Get TO oOle
@@ -43,7 +43,7 @@ METHOD New
    DATA aAxEv        INIT {}              // oSkAr 20070829
    DATA aAxExec      INIT {}              // oSkAr 20070829
 
-METHOD EventMap( nMsg, xExec, oSelf )  // oSkAr 20070829
+   METHOD EventMap( nMsg, xExec, oSelf )  // oSkAr 20070829
 
 ENDCLASS
 
@@ -122,4 +122,3 @@ METHOD EventMap( nMsg, xExec, oSelf ) CLASS HActiveX
    ::aAxExec[ nAt ] := { xExec, oSelf }
 
    RETURN NIL
-

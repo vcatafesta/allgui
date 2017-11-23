@@ -113,9 +113,7 @@ FUNCTION SetCentury(lToggle)
 
    /*
    Logical Set/Get function for the SET CENTURY setting.  It simply calls the
-
    function that SET CENTURY preprocesses to: __SetCentury(lToggle).
-
    */
 
    Return(__SetCentury(lToggle))
@@ -207,4 +205,3 @@ FUNCTION SysRefresh()
    Return(NIL)
 
    #endif
-

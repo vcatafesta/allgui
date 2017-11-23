@@ -521,4 +521,3 @@ HB_FUNC( HWG_LISTVIEWSORT )
    p->pListControl = ( HWND ) HB_PARHANDLE( 1 );
    ListView_SortItemsEx( ( HWND ) HB_PARHANDLE( 1 ), CompareFunc, p );
 }
-

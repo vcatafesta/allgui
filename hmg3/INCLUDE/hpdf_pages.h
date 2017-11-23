@@ -33,20 +33,16 @@ HPDF_Pages_New  (HPDF_MMgr   mmgr,
                  HPDF_Pages  parent,
                  HPDF_Xref   xref);
 
-
 HPDF_BOOL
 HPDF_Pages_Validate  (HPDF_Pages  pages);
-
 
 HPDF_STATUS
 HPDF_Pages_AddKids  (HPDF_Pages  parent,
                       HPDF_Dict   kid);
 
-
 HPDF_STATUS
 HPDF_Page_InsertBefore  (HPDF_Page   page,
                          HPDF_Page   target);
-
 
 typedef struct _HPDF_PageAttr_Rec  *HPDF_PageAttr;
 
@@ -65,9 +61,8 @@ typedef struct _HPDF_PageAttr_Rec {
     HPDF_Stream        stream;
     HPDF_Xref          xref;
     HPDF_UINT          compression_mode;
-	HPDF_PDFVer       *ver; 
+   HPDF_PDFVer       *ver;
 } HPDF_PageAttr_Rec;
-
 
 /*----------------------------------------------------------------------------*/
 /*----- HPDF_Page ------------------------------------------------------------*/
@@ -75,36 +70,29 @@ typedef struct _HPDF_PageAttr_Rec {
 HPDF_BOOL
 HPDF_Page_Validate  (HPDF_Page  page);
 
-
 HPDF_Page
 HPDF_Page_New  (HPDF_MMgr   mmgr,
                 HPDF_Xref   xref);
-
 
 void*
 HPDF_Page_GetInheritableItem  (HPDF_Page      page,
                                const char    *key,
                                HPDF_UINT16    obj_class);
 
-
 const char*
 HPDF_Page_GetXObjectName  (HPDF_Page     page,
                            HPDF_XObject  xobj);
-
 
 const char*
 HPDF_Page_GetLocalFontName  (HPDF_Page  page,
                              HPDF_Font  font);
 
-
 const char*
 HPDF_Page_GetExtGStateName  (HPDF_Page       page,
                              HPDF_ExtGState  gstate);
 
-
 HPDF_Box
 HPDF_Page_GetMediaBox  (HPDF_Page    page);
-
 
 HPDF_STATUS
 HPDF_Page_SetBoxValue (HPDF_Page     page,
@@ -112,20 +100,16 @@ HPDF_Page_SetBoxValue (HPDF_Page     page,
                        HPDF_UINT     index,
                        HPDF_REAL     value);
 
-
 void
 HPDF_Page_SetFilter  (HPDF_Page    page,
                       HPDF_UINT    filter);
 
-
 HPDF_STATUS
 HPDF_Page_CheckState  (HPDF_Page  page,
                        HPDF_UINT  mode);
-
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
 #endif /* _HPDF_PAGES_H */
-

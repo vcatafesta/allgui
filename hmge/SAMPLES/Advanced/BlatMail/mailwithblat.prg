@@ -142,15 +142,11 @@ METHOD BlatUnload()     : If you have dynamically loaded BLAT then this will unl
 
 CLASS BlatMail
 
-METHOD New()               // create class - Load BLAT if needed
-
-METHOD SetCommandLine()    // initialize command line common switches
-
-METHOD SetProfile()        // set the default profile
-
-METHOD MailSend()          // Actually send the mail
-
-METHOD BlatUnload()
+   METHOD New()               // create class - Load BLAT if needed
+   METHOD SetCommandLine()    // initialize command line common switches
+   METHOD SetProfile()        // set the default profile
+   METHOD MailSend()          // Actually send the mail
+   METHOD BlatUnload()
 
    * Addresses and passwords
 
@@ -752,4 +748,3 @@ HB_FUNC_STATIC( BLATSEND )
 #pragma ENDDUMP
 
    #endif
-

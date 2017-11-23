@@ -14,4 +14,3 @@ PROCEDURE main( nPort, cIfAddr, cRootDir, xRPC, ... )
    ENDIF
 
    RETURN
-

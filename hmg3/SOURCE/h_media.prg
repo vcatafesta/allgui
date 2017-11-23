@@ -522,4 +522,3 @@ FUNCTION _DestroyAnimateBox ( ControlName , ParentForm )
    destroyanimate ( h )
 
    RETURN NIL
-

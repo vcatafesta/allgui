@@ -13,9 +13,9 @@ CLASS TCursor
    DATA   hCursor
    DATA   lPredef AS LOGICAL
 
-METHOD New( cResName, cPredef ) CONSTRUCTOR
+   METHOD New( cResName, cPredef ) CONSTRUCTOR
 
-METHOD End() INLINE If( ::hCursor != 0,;
+   METHOD End() INLINE If( ::hCursor != 0,;
       If( ! ::lPredef, DestroyCursor( ::hCursor ),),),;
       ::hCursor := 0
 
@@ -58,4 +58,3 @@ METHOD New( cResName, cPredef ) CLASS TCursor
    ENDIF
 
    RETURN Self
-

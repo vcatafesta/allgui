@@ -180,4 +180,3 @@ PROCEDURE ScanDir( cPath )
    END SEQUENCE
 
    RETURN
-

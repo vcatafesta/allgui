@@ -57,9 +57,9 @@ CLASS THyperLink FROM TLabel
    DATA Type        INIT "HYPERLINK" READONLY
    DATA URL         INIT ""
 
-METHOD Define
+   METHOD Define
 
-METHOD Address   SETGET
+   METHOD Address   SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -113,4 +113,3 @@ METHOD Address( cUrl ) CLASS THyperLink
    ENDIF
 
    RETURN ::URL
-

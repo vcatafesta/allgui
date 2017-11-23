@@ -270,4 +270,3 @@ HB_FUNC( GETTICKCOUNT )
 }
 
 #pragma ENDDUMP
-

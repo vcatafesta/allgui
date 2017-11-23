@@ -326,4 +326,3 @@ FUNCTION EnableAllButtons()
    NEXT i
 
    RETURN NIL
-

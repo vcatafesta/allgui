@@ -107,4 +107,3 @@ STATIC FUNCTION oCombo3_onInteractiveChange( value,This )
    ENDIF
 
    RETURN NIL
-

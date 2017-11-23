@@ -134,4 +134,3 @@ PROCEDURE PrintHTML( cHtmlFile, cHtmlText )
    QHTM_PrintDestroyContext( hContext )
 
    RETURN NIL
-

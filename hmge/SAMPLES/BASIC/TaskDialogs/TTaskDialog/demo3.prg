@@ -17,13 +17,11 @@ CREATE CLASS TTimedTaskDialog FUNCTION TimedTaskDialog FROM TaskDialog
    EXPORTED:
    VAR lUserActivity INIT .F. READONLY
 
-METHOD UpdateButton( cCaption )
+   METHOD UpdateButton( cCaption )
 
-METHOD Listener( hWnd, nNotification, nWParam, nLParam )
-
-METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam )
-
-METHOD OnTimer( hWnd, nNotification, nWParam, nLParam )
+   METHOD Listener( hWnd, nNotification, nWParam, nLParam )
+   METHOD OnHyperLinkClicked( hWnd, nNotification, nWParam, nLParam )
+   METHOD OnTimer( hWnd, nNotification, nWParam, nLParam )
 
    PROTECTED:
    VAR hButton       INIT 0
@@ -187,4 +185,3 @@ static BOOL CALLBACK EnumChildProc( HWND hWnd, LPARAM lParam )
 }
 
 #pragma ENDDUMP
-

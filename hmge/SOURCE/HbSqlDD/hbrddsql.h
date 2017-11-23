@@ -44,7 +44,6 @@
  *
  */
 
-
 #ifndef HB_RDDSQL_H_
 #define HB_RDDSQL_H_
 
@@ -67,7 +66,6 @@
 
 #define SQLDD_FLAG_DELETED   1
 #define SQLDD_FLAG_CACHED    2
-
 
 typedef struct _SQLBASEAREA
 {
@@ -103,7 +101,6 @@ typedef struct _SQLBASEAREA
    void * pSDDData;                          /* SDD specific data */
 } SQLBASEAREA, * SQLBASEAREAP;
 
-
 typedef struct _SQLDDCONNECTION
 {
    struct _SDDNODE * pSDD;
@@ -111,7 +108,6 @@ typedef struct _SQLDDCONNECTION
 
    void * pSDDConn;                          /* SDD specific data */
 } SQLDDCONNECTION;
-
 
 /*
    ====================================================================
@@ -122,9 +118,7 @@ typedef struct _SQLDDCONNECTION
 #define MIX_MAXKEYLEN      1024
 #define MIX_MAXTAGNAMELEN  16
 
-
 #define MIX_NODE_ORDER     2        /* >=2 */
-
 
 typedef struct _MIXKEY
 {
@@ -132,7 +126,6 @@ typedef struct _MIXKEY
    HB_BYTE  notnul;
    HB_BYTE  val[ 1 ];
 } MIXKEY, * PMIXKEY;
-
 
 typedef struct _MIXNODE
 {
@@ -142,14 +135,12 @@ typedef struct _MIXNODE
    struct _MIXNODE * Child[ MIX_NODE_ORDER + 1 ];
 } MIXNODE, * PMIXNODE;
 
-
 typedef struct _MIXNODELEAF
 {
    unsigned int      Leaf;
    unsigned int      KeyCount;
    struct _MIXNODE * Parent;
 } MIXNODELEAF, * PMIXNODELEAF;
-
 
 typedef struct _MIXTAG
 {
@@ -181,7 +172,6 @@ typedef struct _MIXTAG
    PHB_CODEPAGE pCodepage;          /* National sorttable for character key tags, NULL otherwise */
 } MIXTAG, * PMIXTAG;
 
-
 typedef struct _SQLMIXAREA
 {
    SQLBASEAREA sqlarea;
@@ -194,7 +184,6 @@ typedef struct _SQLMIXAREA
    PMIXTAG      pTag;
    PHB_CODEPAGE pCodepage;
 } SQLMIXAREA, * SQLMIXAREAP;
-
 
 /*
    ====================================================================
@@ -211,7 +200,6 @@ typedef HB_ERRCODE ( *SDDFUNC_GOTO )( SQLBASEAREAP pArea, HB_ULONG ulRecNo );
 typedef HB_ERRCODE ( *SDDFUNC_GETVALUE )( SQLBASEAREAP pArea, HB_USHORT uiIndex, PHB_ITEM pItem );
 typedef HB_ERRCODE ( *SDDFUNC_GETVARLEN )( SQLBASEAREAP pArea, HB_USHORT uiIndex, HB_ULONG * pLength );
 
-
 typedef struct _SDDNODE
 {
    struct _SDDNODE * pNext;
@@ -226,7 +214,6 @@ typedef struct _SDDNODE
    SDDFUNC_GETVALUE   GetValue;
    SDDFUNC_GETVARLEN  GetVarLen;
 } SDDNODE, * PSDDNODE;
-
 
 /* Error subcodes */
 #define ESQLDD_NOTCONNECTED  1901

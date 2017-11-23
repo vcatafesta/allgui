@@ -97,4 +97,3 @@ PROCEDURE sethorizontal(control,form)
       on change {||MsgInfo("OOP Radiogroup 2 Value Changed!")}
 
    RETURN
-

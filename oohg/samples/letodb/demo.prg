@@ -41,4 +41,3 @@ FUNCTION Main
    edit workarea letoex
 
    RETURN NIL
-

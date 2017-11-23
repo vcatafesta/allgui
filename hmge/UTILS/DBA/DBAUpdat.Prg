@@ -410,7 +410,6 @@ PROC T_Pack()                             // Table Pack
             #command INSERT [<before: BEFORE>] => dbInsert( <.before.> )
 
             PROC T_InseReco()
-
                IF MsgYesNo( "A blank record will be inserted before the current record." + CRLF2 + "Are You sure ?", "Insert Record")
                   INSERT BEFORE
                   RefrMenu()
@@ -549,4 +548,3 @@ FUNCTION dbInsert( lBefore )
    SET( _SET_DELETED, lSavDel )
 
    RETURN NIL
-

@@ -35,4 +35,3 @@ HPDF_PageLabel_New  (HPDF_Doc             pdf,
 #endif /* __cplusplus */
 
 #endif
-

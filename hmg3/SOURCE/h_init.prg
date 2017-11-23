@@ -6545,4 +6545,3 @@ PROCEDURE InitMessages (cSetLang)
    ENDIF // HMG_IsCurrentCodePageUnicode()
 
    RETURN
-

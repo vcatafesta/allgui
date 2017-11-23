@@ -21,9 +21,9 @@ CLASS VAR aTimers   INIT {}
    DATA oParent
    DATA bAction
 
-METHOD New( oParent, id, value, bAction )
+   METHOD New( oParent, id, value, bAction )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -78,4 +78,3 @@ FUNCTION hwg_TimerProc( idTimer )
    NEXT
 
    RETURN
-

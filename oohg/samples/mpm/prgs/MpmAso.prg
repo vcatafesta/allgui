@@ -108,4 +108,3 @@ PROCEDURE ChangeAssociation(cExt, lSet)
    ENDCASE
 
    RETURN
-

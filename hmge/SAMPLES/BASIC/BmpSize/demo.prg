@@ -53,4 +53,3 @@ STATIC PROCEDURE Image_1_OnClick( cName )
    MsgInfo( cMsg, 'Bitmap Info' )
 
    RETURN
-

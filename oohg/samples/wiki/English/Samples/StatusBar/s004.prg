@@ -74,4 +74,3 @@ PROCEDURE ResizeStatusbar
    /*
    * EOF
    */
-

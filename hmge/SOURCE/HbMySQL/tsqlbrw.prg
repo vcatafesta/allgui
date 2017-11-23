@@ -75,7 +75,7 @@ CREATE CLASS TBColumnSQL FROM TBColumn
    // gets called. I need this since inside TBColumn Block I cannot
    // reference Column or Browser instance variables
 
-METHOD   New( cHeading, bBlock, oBrw )   // Saves inside column a copy of container browser
+   METHOD   New( cHeading, bBlock, oBrw )   // Saves inside column a copy of container browser
 
 ENDCLASS
 
@@ -129,19 +129,17 @@ CREATE CLASS TBrowseSQL FROM TBrowse
    VAR      oCurRow                       // Active row inside table / sql query
    VAR      oQuery                        // Query / table object which we are browsing
 
-METHOD   New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable )
+   METHOD   New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable )
 
-METHOD   EditField()                   // Editing of hilighted field, after editing does an update of
-
+   METHOD   EditField()                   // Editing of hilighted field, after editing does an update of
    // corresponding row inside table
 
-METHOD   BrowseTable( lCanEdit, aExitKeys ) // Handles standard moving inside table and if lCanEdit == .T.
-
+   METHOD   BrowseTable( lCanEdit, aExitKeys ) // Handles standard moving inside table and if lCanEdit == .T.
    // allows editing of field. It is the stock ApplyKey() moved inside a table
    // if lCanEdit K_DEL deletes current row
    // When a key is pressed which is present inside aExitKeys it leaves editing loop
 
-METHOD   KeyboardHook( nKey )               // Where do all unknown keys go?
+   METHOD   KeyboardHook( nKey )               // Where do all unknown keys go?
 
 ENDCLASS
 
@@ -409,4 +407,3 @@ METHOD KeyboardHook( nKey ) CLASS TBrowseSQL
    HB_SYMBOL_UNUSED( nKey )
 
    RETURN Self
-

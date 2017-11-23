@@ -198,4 +198,3 @@ PROCEDURE CloseTables
    ERASE TEST.NTX
 
    RETURN
-

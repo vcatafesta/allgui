@@ -72,7 +72,7 @@ LRESULT APIENTRY TrackSubclassProc( HWND hwnd, UINT uMsg, WPARAM wParam,
 LRESULT APIENTRY TabSubclassProc( HWND hwnd, UINT uMsg, WPARAM wParam,
       LPARAM lParam );
 LRESULT APIENTRY TreeViewSubclassProc( HWND hwnd, UINT uMsg, WPARAM wParam,
-      LPARAM lParam );         
+      LPARAM lParam );
 static void CALLBACK s_timerProc( HWND, UINT, UINT, DWORD );
 
 static HWND hWndTT = 0;
@@ -170,8 +170,8 @@ HB_FUNC( HWG_SETRANGEPROGRESSBAR )
 {
 
    SendMessage( ( HWND ) HB_PARHANDLE( 1 ), PBM_SETRANGE, 0, MAKELPARAM( 0, hb_parni( 2 ) ) );
-   SendMessage( ( HWND ) HB_PARHANDLE( 1 ), PBM_SETSTEP, 1 , 0 ); 
-}   
+   SendMessage( ( HWND ) HB_PARHANDLE( 1 ), PBM_SETSTEP, 1 , 0 );
+}
 
 /*
    CreatePanel( hParentWindow, nPanelControlID, nStyle, x1, y1, nWidth, nHeight )
@@ -240,8 +240,6 @@ HB_FUNC( HWG_CREATESTATIC )
          hb_strfree( hStr );
       }
     */
-
-
 
    HB_RETHANDLE( hWndCtrl );
 
@@ -322,7 +320,6 @@ HB_FUNC( HWG_CREATECOMBO )
    HB_RETHANDLE( hCombo );
 
 }
-
 
 /*
    CreateBrowse( hParentWIndow, nControlID, nStyle, x, y, nWidth, nHeight,
@@ -535,7 +532,7 @@ HB_FUNC( HWG_CREATEUPDOWNCONTROL32 )
                               ( HMENU ) hb_parni( 2 ),       // control ID
                               GetModuleHandle( NULL ), NULL );
 
-    SendMessage( hControl, UDM_SETRANGE, 0, MAKELPARAM( hb_parni( 8 ), hb_parni( 9 ) ) );    // Sets the controls direction 
+    SendMessage( hControl, UDM_SETRANGE, 0, MAKELPARAM( hb_parni( 8 ), hb_parni( 9 ) ) );    // Sets the controls direction
                                                                            // and range.
 
     HB_RETHANDLE( hControl );
@@ -560,7 +557,6 @@ HB_FUNC( HWG_SETRANGEUPDOWN )
 {
    SendMessage( ( HWND ) HB_PARHANDLE( 1 ), UDM_SETRANGE32, hb_parnl( 2 ), hb_parnl( 3 ) );
 }
-
 
 HB_FUNC( HWG_GETNOTIFYDELTAPOS )
 {
@@ -672,7 +668,6 @@ HB_FUNC( HWG_GETDATEPICKER )
      hb_retni( iret );
 }
 
-
 HB_FUNC( HWG_GETTIMEPICKER )
 {
    SYSTEMTIME st;
@@ -763,7 +758,6 @@ HB_FUNC( HWG_DELETETAB )
 {
    TabCtrl_DeleteItem( ( HWND ) HB_PARHANDLE( 1 ), hb_parni( 2 ) );
 }
-
 
 HB_FUNC( HWG_GETCURRENTTAB )
 {
@@ -1419,7 +1413,6 @@ LRESULT APIENTRY StaticSubclassProc( HWND hWnd, UINT message, WPARAM wParam,
                   lParam ) );
 }
 
-
 HB_FUNC( HWG_INITEDITPROC )
 {
    wpOrigEditProc = ( WNDPROC ) SetWindowLongPtr( ( HWND ) HB_PARHANDLE( 1 ),
@@ -1532,7 +1525,6 @@ HB_FUNC( HWG_INITCOMBOPROC )
          GWLP_WNDPROC, ( LONG_PTR ) ComboSubclassProc );
 }
 
-
 LRESULT APIENTRY ListSubclassProc( HWND hWnd, UINT message, WPARAM wParam,
       LPARAM lParam )
 {
@@ -1568,7 +1560,6 @@ HB_FUNC( HWG_INITLISTPROC )
    wpOrigListProc = ( WNDPROC ) SetWindowLongPtr( ( HWND ) HB_PARHANDLE( 1 ),
          GWLP_WNDPROC, ( LONG_PTR ) ListSubclassProc );
 }
-
 
 HB_FUNC( HWG_INITUPDOWNPROC )
 {
@@ -1780,7 +1771,7 @@ HB_FUNC( HWG_TOOLBARADDBUTTONS )
    ULONG ulID;
    DWORD style = GetWindowLong( hWndCtrl, GWL_STYLE );
 
-   //SendMessage(hWndCtrl, CCM_SETVERSION, (WPARAM) 4, 0);   
+   //SendMessage(hWndCtrl, CCM_SETVERSION, (WPARAM) 4, 0);
 
    SetWindowLongPtr( hWndCtrl, GWL_STYLE,
          style | TBSTYLE_TOOLTIPS | TBSTYLE_FLAT );
@@ -1813,7 +1804,6 @@ HB_FUNC( HWG_TOOLBARADDBUTTONS )
    hb_xfree( tb );
 }
 
-
 HB_FUNC( HWG_TOOLBAR_SETBUTTONINFO )
 {
    TBBUTTONINFO tb;
@@ -1825,7 +1815,7 @@ HB_FUNC( HWG_TOOLBAR_SETBUTTONINFO )
    tb.dwMask = TBIF_TEXT;
    tb.pszText = ( LPTSTR ) HB_PARSTR( 3, &hStr, NULL );
    //tb.cchText = 1000  ;
-   
+
    SendMessage( hWndCtrl, TB_SETBUTTONINFO, iIDB, ( LPARAM ) & tb );
 }
 
@@ -1906,14 +1896,12 @@ HB_FUNC( HWG_TOOLBAR_GETINFOTIPID )
    hb_retnl( idButton );
 }
 
-
 HB_FUNC( HWG_TOOLBAR_IDCLICK )
 {
    LPNMMOUSE pDispInfo = ( LPNMMOUSE ) HB_PARHANDLE( 1 );
    DWORD idButton = pDispInfo->dwItemSpec;
    hb_retnl( idButton );
 }
-
 
 HB_FUNC( HWG_TOOLBAR_SUBMENU )
 {
@@ -1984,7 +1972,6 @@ HB_FUNC( HWG_TOOLBAR_SUBMENUEXGETID )
    hb_retnl( ( LONG ) lpnmTB->iItem );
 }
 
-
 HB_FUNC( HWG_CREATEPAGER )
 {
    HWND hWndPanel;
@@ -2001,9 +1988,6 @@ HB_FUNC( HWG_CREATEPAGER )
    HB_RETHANDLE( hWndPanel );
 
 }
-
-
-
 
 HB_FUNC( HWG_CREATEREBAR )
 {
@@ -2022,11 +2006,9 @@ HB_FUNC( HWG_CREATEREBAR )
          GetModuleHandle( NULL ),
          NULL );
 
-
    HB_RETHANDLE( hWndCtrl );
 
 }
-
 
 HB_FUNC( HWG_REBARSETIMAGELIST )
 {
@@ -2042,7 +2024,6 @@ HB_FUNC( HWG_REBARSETIMAGELIST )
          HB_ISPOINTER( 2 ) ) ? ( HIMAGELIST ) p : ( HIMAGELIST ) NULL;
    SendMessage( hWnd, RB_SETBARINFO, 0, ( LPARAM ) & rbi );
 }
-
 
 static BOOL _AddBar( HWND pParent, HWND pBar, REBARBANDINFO * pRBBI )
 {
@@ -2177,7 +2158,6 @@ HB_FUNC( HWG_GETLOCALEINFO )
    HB_RETSTR( szBuffer );
 }
 
-
 HB_FUNC( HWG_COMBOBOXGETLBTEXT )
 {
    HWND hWnd = ( HWND ) HB_PARHANDLE( 1 );
@@ -2199,7 +2179,6 @@ HB_FUNC( HWG_DEFWINDOWPROC )
    hb_retnl( DefWindowProc( hWnd, message, wParam, lParam ) );
 }
 
-
 HB_FUNC( HWG_CALLWINDOWPROC )
 {
    WNDPROC wpProc = ( WNDPROC ) hb_parnl( 1 );
@@ -2210,7 +2189,6 @@ HB_FUNC( HWG_CALLWINDOWPROC )
 
    hb_retnl( CallWindowProc( wpProc, hWnd, message, wParam, lParam ) );
 }
-
 
 HB_FUNC( HWG_BUTTONGETDLGCODE )
 {
@@ -2227,11 +2205,9 @@ HB_FUNC( HWG_BUTTONGETDLGCODE )
          return;
       }
 
-
    }
    hb_retnl( DLGC_WANTALLKEYS );        // we want all keys except TAB key
 }
-
 
 HB_FUNC( HWG_GETDLGMESSAGE )
 {
@@ -2259,7 +2235,6 @@ HB_FUNC( HWG_HANDLETOPTR )
    hb_retnl( ( LONG ) h );
 }
 
-
 HB_FUNC( HWG_TABITEMPOS )
 {
    RECT pRect;
@@ -2279,4 +2254,3 @@ HB_FUNC( HWG_GETTABNAME )
                     ( LPTCITEM ) &tie );
    HB_RETSTR( tie.pszText );
 }
-

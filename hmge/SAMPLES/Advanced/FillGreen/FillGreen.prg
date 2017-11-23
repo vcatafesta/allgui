@@ -52,4 +52,3 @@ FUNCTION FillGreen( hWnd, clrFrom, clrTo )
    EndPaint( hWnd, pps )
 
    RETURN NIL
-

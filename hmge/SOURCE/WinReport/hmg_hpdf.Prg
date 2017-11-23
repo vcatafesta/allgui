@@ -493,9 +493,7 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFon
 
    RETURN NIL
    /*
-
    function _HMG_HPDF_IMAGE2 ( cImage, nRow, nCol, nImageheight, nImageWidth, lStretch )
-
    local nWidth := _HMG_HPDFDATA[ 1 ][ 4 ]
    local nHeight := _HMG_HPDFDATA[ 1 ][ 5 ]
    local nxPos := _HMG_HPDF_MM2Pixel( nCol )
@@ -1911,4 +1909,3 @@ FUNCTION _HMG_HPDF_SetDash( nMode )
    HPDF_Page_SetDash ( _HMG_HPDFDATA[ 1 ][ 7 ], @aPtn, nNum, nFase )
 
    RETURN NIL
-

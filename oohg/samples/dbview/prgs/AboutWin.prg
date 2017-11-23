@@ -139,4 +139,3 @@ PROCEDURE About()
    ACTIVATE WINDOW mAbout
 
    RETURN
-

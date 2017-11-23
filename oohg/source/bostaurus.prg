@@ -4495,4 +4495,3 @@ HB_FUNC( BT_DIRECTORYINFO )    // ( [ nCSIDL | cPath] , [nTypeList] , @nIndexRoo
 }
 
 #pragma ENDDUMP
-

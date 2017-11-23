@@ -181,4 +181,3 @@ HB_FUNC ( ROTATIONTEXT )
 }
 
 #pragma ENDDUMP
-

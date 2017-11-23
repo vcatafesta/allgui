@@ -55,4 +55,3 @@ PROCEDURE Main()
    Form_1.Activate
 
    RETURN
-

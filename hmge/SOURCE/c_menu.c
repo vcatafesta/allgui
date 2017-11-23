@@ -156,7 +156,6 @@ HB_FUNC( ARRAY2ACCELERATORTABLE )
    HB_RETNL( ( LONG_PTR ) hAccel );
 }
 
-
 // int WINAPI CopyAcceleratorTable( HACCEL hAccelSrc, LPACCEL lpAccelDst, int cAccelEntries )
 HB_FUNC( COPYACCELERATORTABLE )
 {
@@ -675,7 +674,6 @@ HB_FUNC( GETMENUITEMCOUNT )
 {
    hb_retni( GetMenuItemCount( ( HMENU ) HB_PARNL( 1 ) ) );
 }
-
 
 /*
  * Owner draw function

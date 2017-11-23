@@ -191,7 +191,6 @@ static const HB_GC_FUNCS s_gcSqlite3Funcs =
    hb_sqlite3_mark
 };
 
-
 static PHB_ITEM hb_sqlite3_itemPut( PHB_ITEM pItem, void * pMemAddr, int iType )
 {
    PHB_SQLITE3_HOLDER pStructHolder;
@@ -2281,7 +2280,6 @@ HB_FUNC( SQLITE3_COMPILEOPTION_GET )
    hb_retc_null();
 #endif
 }
-
 
 /**
    Create Or Redefine SQL Functions

@@ -8,7 +8,7 @@
 typedef long date;
 
 #ifdef __cplusplus
-extern		"C"
+extern      "C"
 {
 #endif
 
@@ -19,10 +19,10 @@ extern char *PGTYPESdate_to_asc(date);
 extern date PGTYPESdate_from_timestamp(timestamp);
 extern void PGTYPESdate_julmdy(date, int *);
 extern void PGTYPESdate_mdyjul(int *, date *);
-extern int	PGTYPESdate_dayofweek(date);
+extern int   PGTYPESdate_dayofweek(date);
 extern void PGTYPESdate_today(date *);
-extern int	PGTYPESdate_defmt_asc(date *, char *, char *);
-extern int	PGTYPESdate_fmt_asc(date, char *, char *);
+extern int   PGTYPESdate_defmt_asc(date *, char *, char *);
+extern int   PGTYPESdate_fmt_asc(date, char *, char *);
 
 #ifdef __cplusplus
 }

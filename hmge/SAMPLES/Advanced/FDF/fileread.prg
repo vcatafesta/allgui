@@ -270,4 +270,3 @@ STATIC FUNCTION f_error_msg( cText )
    ENDIF
 
    RETURN cMessage
-

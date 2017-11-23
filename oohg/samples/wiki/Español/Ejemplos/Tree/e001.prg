@@ -305,4 +305,3 @@ FUNCTION ColorToCode( aColor )
    /*
    * EOF
    */
-

@@ -216,4 +216,3 @@ STATIC FUNCTION RelativePath( cCurPath, cTargetPath )
    RETURN cRelPath
 
    ****** End of RelativePath ******
-

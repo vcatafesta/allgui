@@ -210,4 +210,3 @@ FUNCTION BeforeAutoFit( nCol )
    /*
    * EOF
    */
-

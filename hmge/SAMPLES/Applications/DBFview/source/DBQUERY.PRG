@@ -417,4 +417,3 @@ STATIC FUNCTION InsDel(cOrig, nStart, nDelete, cInsert)
    LOCAL cRight := substr(cOrig, nStart + nDelete)
 
    Return(cLeft + cInsert + cRight)
-

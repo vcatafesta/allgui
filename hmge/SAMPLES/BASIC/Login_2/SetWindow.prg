@@ -187,4 +187,3 @@ FUNCTION GetImageInfo( cPicFile, nPicWidth, nPicHeight )
    RETURN (nPicWidth > 0) // GetImageInfo()
 
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

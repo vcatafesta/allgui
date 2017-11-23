@@ -83,16 +83,12 @@ CLASS cLbl
    VAR cLbl     INIT '_Out_'
    VAR cSpace   INIT ' '
 
-METHOD New( BColor, cFont, nSize )
-
-METHOD Out( nRow, nCol )
-
-METHOD Def( cTxt, cChr )
-
-METHOD Add( cSub, FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct ) INLINE ;
+   METHOD New( BColor, cFont, nSize )
+   METHOD Out( nRow, nCol )
+   METHOD Def( cTxt, cChr )
+   METHOD Add( cSub, FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct ) INLINE ;
       ( hb_HSet( ::aSub, Lower( cSub ), { FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct } ) )
-
-METHOD Block()
+   METHOD Block()
 
 ENDCLASS
 
@@ -220,4 +216,3 @@ STATIC FUNCTION Create_txt( cFile )
    hb_MemoWrit( cFile, t )
 
    RETURN NIL
-

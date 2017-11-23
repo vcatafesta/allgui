@@ -122,4 +122,3 @@ FUNCTION _SetColumnOrderArray( ControlName, ParentForm, aSort )
    RETURN NIL
 
    #include <sortcolumns.c>
-

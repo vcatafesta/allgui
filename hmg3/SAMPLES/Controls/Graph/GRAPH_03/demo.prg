@@ -134,4 +134,3 @@ PROCEDURE DrawPointsGraph ( aSer )
       NOBORDER
 
    RETURN
-

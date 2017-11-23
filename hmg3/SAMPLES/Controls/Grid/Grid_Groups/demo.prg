@@ -131,4 +131,3 @@ PROCEDURE GetListConfirmed
    MsgInfo (cList, "Confirmed List")
 
    RETURN
-

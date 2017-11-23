@@ -165,4 +165,3 @@ HB_FUNC( LOADMAINICON )
 }
 
 #pragma ENDDUMP
-

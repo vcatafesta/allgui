@@ -48,31 +48,19 @@ CREATE CLASS TOLEAUTO FROM WIN_OLEAUTO
    /* TODO: Implement compatibility to the required extent */
    VAR cClassName
 
-METHOD New( xOle, cClass )
-
-METHOD hObj( xOle )
-
-METHOD OleValuePlus( xArg )            OPERATOR "+"
-
-METHOD OleValueMinus( xArg )           OPERATOR "-"
-
-METHOD OleValueMultiply( xArg )        OPERATOR "*"
-
-METHOD OleValueDivide( xArg )          OPERATOR "/"
-
-METHOD OleValueModulus( xArg )         OPERATOR "%"
-
-METHOD OleValuePower( xArg )           OPERATOR "^"
-
-METHOD OleValueInc()                   OPERATOR "++"
-
-METHOD OleValueDec()                   OPERATOR "--"
-
-METHOD OleValueEqual( xArg )           OPERATOR "="
-
-METHOD OleValueExactEqual( xArg )      OPERATOR "=="
-
-METHOD OleValueNotEqual( xArg )        OPERATOR "!="
+   METHOD New( xOle, cClass )
+   METHOD hObj( xOle )
+   METHOD OleValuePlus( xArg )            OPERATOR "+"
+   METHOD OleValueMinus( xArg )           OPERATOR "-"
+   METHOD OleValueMultiply( xArg )        OPERATOR "*"
+   METHOD OleValueDivide( xArg )          OPERATOR "/"
+   METHOD OleValueModulus( xArg )         OPERATOR "%"
+   METHOD OleValuePower( xArg )           OPERATOR "^"
+   METHOD OleValueInc()                   OPERATOR "++"
+   METHOD OleValueDec()                   OPERATOR "--"
+   METHOD OleValueEqual( xArg )           OPERATOR "="
+   METHOD OleValueExactEqual( xArg )      OPERATOR "=="
+   METHOD OleValueNotEqual( xArg )        OPERATOR "!="
 
 ENDCLASS
 
@@ -312,4 +300,3 @@ METHOD OleValueNotEqual( xArg ) CLASS TOLEAUTO
    END SEQUENCE
 
    RETURN xRet
-

@@ -38,4 +38,3 @@ FUNCTION ServerStop( pSockSrv )
    netio_serverstop( pSockSrv , .t. )
 
    RETURN NIL
-

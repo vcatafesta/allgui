@@ -463,4 +463,3 @@ STATIC FUNCTION zera_temporario()
    PACK
 
    return(nil)
-

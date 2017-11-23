@@ -112,4 +112,3 @@ PROCEDURE Proc_Mirror
    flag := .F.
 
    RETURN
-

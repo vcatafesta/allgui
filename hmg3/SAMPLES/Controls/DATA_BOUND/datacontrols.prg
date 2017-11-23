@@ -131,4 +131,3 @@ PROCEDURE CloseTables
    USE
 
    RETURN
-

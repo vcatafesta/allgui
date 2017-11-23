@@ -587,4 +587,3 @@ FUNCTION My_SQL_Logout()
    ENDIF
 
    RETURN NIL
-

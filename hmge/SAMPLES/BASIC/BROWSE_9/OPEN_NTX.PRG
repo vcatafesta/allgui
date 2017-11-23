@@ -17,4 +17,3 @@ PROCEDURE open_ntx
    ENDIF
 
    RETURN
-

@@ -59,24 +59,24 @@ CLASS VAR oDefaultParent SHARED
    DATA cargo
    DATA HelpId   INIT 0
 
-METHOD AddControl( oCtrl ) INLINE Aadd( ::aControls,oCtrl )
+   METHOD AddControl( oCtrl ) INLINE Aadd( ::aControls,oCtrl )
 
-METHOD DelControl( oCtrl )
+   METHOD DelControl( oCtrl )
 
-METHOD AddEvent( nEvent,nId,bAction,lNotify ) ;
+   METHOD AddEvent( nEvent,nId,bAction,lNotify ) ;
       INLINE Aadd( Iif( lNotify==Nil.OR.!lNotify,::aEvents,::aNotify ),{nEvent,nId,bAction} )
 
-METHOD FindControl( nId,nHandle )
+   METHOD FindControl( nId,nHandle )
 
-METHOD Hide() INLINE (::lHide:=.T.,hwg_Hidewindow(::handle))
+   METHOD Hide() INLINE (::lHide:=.T.,hwg_Hidewindow(::handle))
 
-METHOD Show() INLINE (::lHide:=.F.,hwg_Showwindow(::handle))
+   METHOD Show() INLINE (::lHide:=.F.,hwg_Showwindow(::handle))
 
-METHOD Move( x1,y1,width,height )
+   METHOD Move( x1,y1,width,height )
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD End()
+   METHOD End()
 
 ENDCLASS
 
@@ -308,4 +308,3 @@ INIT PROCEDURE HWGINIT
    hwg_ErrSys()
 
    RETURN
-

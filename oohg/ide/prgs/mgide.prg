@@ -111,107 +111,107 @@ CLASS THMI
    DATA swvan              INIT .F.
    DATA van                INIT 0
 
-METHOD About
+   METHOD About
 
-METHOD AjustaFrame
+   METHOD AjustaFrame
 
-METHOD Analizar
+   METHOD Analizar
 
-METHOD BldMinGW
+   METHOD BldMinGW
 
-METHOD BldPellC
+   METHOD BldPellC
 
-METHOD BuildBcc
+   METHOD BuildBcc
 
-METHOD CleanR
+   METHOD CleanR
 
-METHOD DatabaseView
+   METHOD DatabaseView
 
-METHOD DataMan
+   METHOD DataMan
 
-METHOD DeleteItem
+   METHOD DeleteItem
 
-METHOD EditorExit
+   METHOD EditorExit
 
-METHOD Exit
+   METHOD Exit
 
-METHOD GoLine
+   METHOD GoLine
 
-METHOD InitializeProject
+   METHOD InitializeProject
 
-METHOD LeaDatoLogicR
+   METHOD LeaDatoLogicR
 
-METHOD LeaDatoR
+   METHOD LeaDatoR
 
-METHOD LookChanges
+   METHOD LookChanges
 
-METHOD ModifyItem
+   METHOD ModifyItem
 
-METHOD myInputWindow
+   METHOD myInputWindow
 
-METHOD NewCH
+   METHOD NewCH
 
-METHOD NewForm
+   METHOD NewForm
 
-METHOD NewIde
+   METHOD NewIde
 
-METHOD NewPrg
+   METHOD NewPrg
 
-METHOD NewProject
+   METHOD NewProject
 
-METHOD NewRC
+   METHOD NewRC
 
-METHOD NewRpt
+   METHOD NewRpt
 
-METHOD NextSearch
+   METHOD NextSearch
 
-METHOD OkPrefer
+   METHOD OkPrefer
 
-METHOD OpenFile
+   METHOD OpenFile
 
-METHOD OpenProject
+   METHOD OpenProject
 
-METHOD PosXY
+   METHOD PosXY
 
-METHOD Preferences
+   METHOD Preferences
 
-METHOD PrintIt
+   METHOD PrintIt
 
-METHOD ReadINI
+   METHOD ReadINI
 
-METHOD Reforma
+   METHOD Reforma
 
-METHOD Report_Edit
+   METHOD Report_Edit
 
-METHOD RunP
+   METHOD RunP
 
-METHOD SaveAndExit
+   METHOD SaveAndExit
 
-METHOD SaveFile
+   METHOD SaveFile
 
-METHOD SaveINI
+   METHOD SaveINI
 
-METHOD SaveProject
+   METHOD SaveProject
 
-METHOD SearchItem
+   METHOD SearchItem
 
-METHOD SearchText
+   METHOD SearchText
 
-METHOD SearchType
+   METHOD SearchType
 
-METHOD SplashDelay
+   METHOD SplashDelay
 
-METHOD TxtSearch
+   METHOD TxtSearch
 
-METHOD ViewErrors
+   METHOD ViewErrors
 
-METHOD ViewSource
+   METHOD ViewSource
 
-METHOD xBldMinGW
+   METHOD xBldMinGW
 
-METHOD xBldPellC
+   METHOD xBldPellC
 
-METHOD xBuildBCC
+   METHOD xBuildBCC
 
 ENDCLASS
 
@@ -5022,7 +5022,7 @@ HB_FUNC ( ZAPDIRECTORY )
 
 CLASS myTProgressBar FROM TProgressBar
 
-METHOD Events
+   METHOD Events
 
 ENDCLASS
 
@@ -5036,7 +5036,7 @@ METHOD Events( hWnd, nMsg, wParam, lParam ) CLASS myTProgressBar
 
 CLASS myTRadioGroup FROM TRadioGroup
 
-METHOD DoChange
+   METHOD DoChange
 
 ENDCLASS
 
@@ -5049,4 +5049,3 @@ METHOD DoChange() CLASS myTRadioGroup
    /*
    * EOF
    */
-

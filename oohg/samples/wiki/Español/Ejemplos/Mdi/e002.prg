@@ -202,4 +202,3 @@ PROCEDURE CambiarValorLabel( oMain )
    /*
    * EOF
    */
-

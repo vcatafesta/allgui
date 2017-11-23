@@ -84,4 +84,3 @@ FUNCTION Slider_Change
    Form_1.Progress_4.Value := nValue
 
    RETURN NIL
-

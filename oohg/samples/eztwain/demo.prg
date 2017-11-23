@@ -45,4 +45,3 @@ FUNCTION Acquire
    /*
    * EOF
    */
-

@@ -195,4 +195,3 @@ FUNCTION HMG_PressKey( ... )
    NEXT
 
    RETURN aVK
-

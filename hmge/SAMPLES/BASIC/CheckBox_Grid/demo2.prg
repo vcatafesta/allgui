@@ -155,4 +155,3 @@ STATIC FUNCTION _ListViewItemChecked( i )
    LOCAL h := _HMG_aControlHandles [i]
 
    RETURN ( ListView_HitTest ( h , GetCursorRow() - GetWindowRow ( h ) , GetCursorCol() - GetWindowCol ( h ), 1 ) )
-

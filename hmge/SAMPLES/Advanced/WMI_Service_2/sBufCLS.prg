@@ -9,11 +9,9 @@ CREATE CLASS stringBuffer
 
    DATA aStringBuffer
 
-METHOD New()
-
-METHOD setStr(strIn)
-
-METHOD getStr(sSeparator)
+   METHOD New()
+   METHOD setStr(strIn)
+   METHOD getStr(sSeparator)
 
 ENDCLASS
 
@@ -53,4 +51,3 @@ STATIC FUNCTION aJoin( aIn, sDelim )
    ENDCASE
 
    RETURN( sRet )
-

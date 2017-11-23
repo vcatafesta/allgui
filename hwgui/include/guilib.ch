@@ -115,7 +115,7 @@
              [ ON EXIT <bExit> ]            ;
              [ HELP <cHelp> ]               ;
              [ HELPID <nHelpId> ]           ;
-             [ <lChild: CHILD>]             ;             
+             [ <lChild: CHILD>]             ;
              [<lClipper: CLIPPER>]          ;
              [ <lnoClosable: NOCLOSABLE> ]  ;
           => ;
@@ -123,9 +123,9 @@
                    <ico>,<clr>,<nStyle>,<x>,<y>,<width>,<height>,<cTitle>, ;
                    <cMenu>,<oFont>,<bInit>,<bExit>,<bSize>,<bPaint>,<bGfocus>, ;
                    <bLfocus>,<bOther>,<appname>,<oBmp>,<cHelp>,<nHelpId>,,<bRefresh>,;
-									 <.lChild.>,<.lClipper.>,<.lnoClosable.>,[{|v|Iif(v==Nil,<vari>,<vari>:=v)}],<nStretch> ) ;;
-        [ <oWnd>:SetParent( <oParent> ) ]            
-      
+                            <.lChild.>,<.lClipper.>,<.lnoClosable.>,[{|v|Iif(v==Nil,<vari>,<vari>:=v)}],<nStretch> ) ;;
+        [ <oWnd>:SetParent( <oParent> ) ]
+
 #xcommand INIT WINDOW <oWnd> CHILD          ;
              APPNAME <appname>              ;
              [ TITLE <cTitle> ]             ;
@@ -243,7 +243,7 @@
 
 #xcommand ADD STATUS [<oStat>] [ TO <oWnd> ] ;
              [ ID <nId> ]           ;
-             [ HEIGHT <nHeight> ]   ;             
+             [ HEIGHT <nHeight> ]   ;
              [ ON INIT <bInit> ]    ;
              [ ON SIZE <bSize> ]    ;
              [ ON PAINT <bDraw> ]   ;
@@ -340,7 +340,7 @@
              [ ON CLICK <bClick> ]      ;
              [ ON DBLCLICK <bDblClick> ];
              [ TOOLTIP <ctoolt> ]       ;
-             [ STYLE <nStyle> ]         ;             
+             [ STYLE <nStyle> ]         ;
           => ;
           [<oBmp> := ] HSayBmp():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
              <height>,<bitmap>,<.res.>,<bInit>,<bSize>,<ctoolt>,<bClick>,<bDblClick>, <.lTransp.>,<nStretch>, <nStyle> );;
@@ -372,7 +372,7 @@
           => ;
           [<oIco> := ] HSayIcon():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
              <height>,<icon>,<.res.>,<bInit>,<bSize>,<ctoolt>,<.oem.>,<bClick>,<bDblClick> );;
-          [ <oIco>:name := <(oIco)> ] 					                     
+          [ <oIco>:name := <(oIco)> ]
 
 #xcommand REDEFINE ICON [ <oIco> SHOW ] <icon> ;
              [<res: FROM RESOURCE>]     ;
@@ -396,7 +396,7 @@
           => ;
           [<oImage> := ] HSayFImage():New( <oWnd>,<nId>,<x>,<y>,<width>, ;
              <height>,<image>,<bInit>,<bSize>,<ctoolt>,<ctype> );;
-          [ <oImage>:name := <(oImage)> ] 					                     
+          [ <oImage>:name := <(oImage)> ]
 
 #xcommand REDEFINE IMAGE [ <oImage> SHOW ] <image> ;
              [ OF <oWnd> ]              ;
@@ -421,7 +421,7 @@
              [ ON SIZE <bSize> ]       ;
           => ;
           [<oLine> := ] HLine():New( <oWnd>,<nId>,<.lVert.>,<x>,<y>,<length>,<bSize>, <bInit>,;
-					              <color>, <nHeight>, <cSlant>,<nBorder>  );;
+                             <color>, <nHeight>, <cSlant>,<nBorder>  );;
           [ <oLine>:name := <(oLine)> ]
 
 #xcommand @ <x>,<y> EDITBOX [ <oEdit> CAPTION ] <caption> ;
@@ -472,7 +472,7 @@
              [ SIZE <width>, <height> ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
-             [<lallowtabs: ALLOWTABS>]  ; 
+             [<lallowtabs: ALLOWTABS>]  ;
              [ ON INIT <bInit> ]        ;
              [ ON SIZE <bSize> ]        ;
              [ ON PAINT <bDraw> ]       ;
@@ -541,7 +541,7 @@
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
              [ BITMAP <hbit> ]          ;
-             [ BSTYLE <nBStyle> ]       ;                     
+             [ BSTYLE <nBStyle> ]       ;
              [ PICTUREMARGIN <nMargin> ];
              [ ICON <hIco> ]          ;
              [ <lTransp: BACKTRANSPARENT> ] ;
@@ -553,7 +553,6 @@
              <height>,<caption>,<oFont>,<bInit>,<bSize>,<bDraw>,<bClick>,<ctoolt>,<color>,<bcolor>,<hbit>, ;
              <nBStyle>,<hIco>, <.lTransp.>,<bGfocus>,<nMargin>,<.lnoTheme.>, <bOther> );;
           [ <oBut>:name := <(oBut)> ]
-
 
 #xcommand REDEFINE BUTTON [ <lExt: EXTENDED,EXT> ] [ <oBut> ]   ;
              [ OF <oWnd> ]              ;
@@ -703,7 +702,7 @@
 #xcommand BEGIN PAGE <cname> OF <oTab> ;
             [ <enable: DISABLED> ]     ;
             [ COLOR <tcolor>]          ;
-            [ BACKCOLOR <bcolor>]      ; 
+            [ BACKCOLOR <bcolor>]      ;
             [ TOOLTIP <ctoolt> ]       ;
           =>;
           <oTab>:StartPage( <cname>, ,! <.enable.> ,<tcolor>,<bcolor>, <ctoolt> )
@@ -761,7 +760,7 @@
              [ ON CLICK <bClick> ]      ;
              [ ON GETFOCUS <bWhen> ]           ;
           => [<ogr> := ] HRadioGroup():New( <vari>, {|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
-					     <bInit>,<bClick>,<bWhen>, <nStyle> )
+                    <bInit>,<bClick>,<bWhen>, <nStyle> )
 
           //nando
 #xcommand @ <x>,<y> GET RADIOGROUP [ <ogr> VAR ] <vari>  ;
@@ -783,7 +782,6 @@
                   <bInit>,<bSize>,<color>,<bcolor>,<bClick>,<bWhen>,<.lTransp.>);;
           [ <ogr>:name := <(ogr)> ]
 
-
 #xcommand END RADIOGROUP [ SELECTED <nSel> ] ;
           => ;
           HRadioGroup():EndGroup( <nSel> )
@@ -792,7 +790,7 @@
           => ;
           <oGr>:EndGroup( <nSel> );;
           [ <oGr>:name := <(oGr)> ]
-                    
+
 #xcommand @ <x>,<y> RADIOBUTTON [ <oRadio> CAPTION ] <caption> ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
@@ -838,7 +836,7 @@
              [ INIT <nInit> ]           ;
              [ SIZE <width>, <height> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
-             [ ITEMHEIGHT <nhItem>    ] ; 
+             [ ITEMHEIGHT <nhItem>    ] ;
              [ COLUMNWIDTH <ncWidth>  ] ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ COLOR <color> ]          ;
@@ -859,7 +857,7 @@
           [<oCombo> := ] HComboBox():New( <oWnd>,<nId>,<nInit>,,<nStyle>,<x>,<y>,<width>, ;
              <height>,<aItems>,<oFont>,<bInit>,<bSize>,<bDraw>,<bChange>,<ctoolt>,;
              <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>, <bLfocus>,<bIChange>,;
-						 <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
+                   <nDisplay>,<nhItem>,<ncWidth>,<nMaxLength>);;
           [ <oCombo>:name := <(oCombo)> ]
 
 #xcommand REDEFINE COMBOBOX [ <oCombo> ITEMS ] <aItems> ;
@@ -887,7 +885,7 @@
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
              [ WIDTH <nUpDWidth> ]      ;
-             [ INCREMENT <nIncr> ]      ;        
+             [ INCREMENT <nIncr> ]      ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
              [ ON INIT <bInit> ]        ;
@@ -1091,12 +1089,12 @@
              ] ;
              [ TOOLTIP <ctoolt> ]    ;
              [ <lCheck: CHECK> ]     ;
-             [ <lThemed: THEMED> ]     ;             
+             [ <lThemed: THEMED> ]     ;
           => ;
           [<oOwnBtn> :=] HOWNBUTTON():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, ;
              <height>,<bInit>,<bSize>,<bDraw>,<bClick>,<.flat.>,<cText>,<color>, ;
              <font>,<xt>,<yt>,<widtht>,<heightt>,<bmp>,<.res.>,<xb>,<yb>,<widthb>, ;
-             <heightb>,<.ltr.>,<trcolor>,<ctoolt>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );; 
+             <heightb>,<.ltr.>,<trcolor>,<ctoolt>,!<.enable.>,<.lCheck.>,<bcolor>, <bGfocus>, <bLfocus>,<.lThemed.> );;
           [ <oOwnBtn>:name := <(oOwnBtn)> ]
 
 #xcommand REDEFINE OWNERBUTTON [ <oOwnBtn> ]  ;
@@ -1187,7 +1185,7 @@
              [ ON CHANGE <bChange> ]    ;
              [ FONT <oFont> ]           ;
              [ TOOLTIP <ctoolt> ]       ;
-             [<lShowTime: SHOWTIME>]    ;             
+             [<lShowTime: SHOWTIME>]    ;
           => ;
           [<oPick> :=] HDatePicker():redefine( <oWnd>,<nId>,<dInit>,{|v|Iif(v==Nil,<vari>,<vari>:=v)}, ;
              <oFont>,<bSize>,<bInit>,<bGfocus>,<bLfocus>,<bChange>,<ctoolt>, ;
@@ -1293,7 +1291,7 @@
              [ VALID <bLfocus> ]        ;
              [ <lEnter: ENTER> ]        ;
              [ ON INIT <bInit> ]        ;
-             [ ON SIZE <bSize> ]        ;             
+             [ ON SIZE <bSize> ]        ;
           => ;
           [<oCheck> := ] HCheckButton():New( <oWnd>,<nId>,<vari>,              ;
              {|v|Iif(v==Nil,<vari>,<vari>:=v)},                   ;
@@ -1322,7 +1320,7 @@
             [ ID <nId> ]               ;
             [ SIZE <width>, <height> ] ;
             [ DISPLAYCOUNT <nDisplay>] ;
-            [ ITEMHEIGHT <nhItem>    ] ; 
+            [ ITEMHEIGHT <nhItem>    ] ;
             [ COLUMNWIDTH <ncWidth>  ] ;
             [ MAXLENGTH <nMaxLength> ] ;
             [ COLOR <color> ]          ;
@@ -1343,9 +1341,8 @@
                     <nStyle>,<x>,<y>,<width>,<height>,      ;
                     <aItems>,<oFont>,<bInit>,,,<bChange>,<ctoolt>, ;
                     <.edit.>,<.text.>,<bGfocus>,<color>,<bcolor>,;
-										<bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;
-    [ <oCombo>:name := <(oCombo)> ]                                                                      
-
+                              <bLfocus>,<bIChange>,<nDisplay>,<nhItem>,<ncWidth>,<nMaxLength> );;
+    [ <oCombo>:name := <(oCombo)> ]
 
 #xcommand REDEFINE GET COMBOBOX [ <oCombo> VAR ] <vari> ;
             ITEMS  <aItems>            ;
@@ -1360,7 +1357,7 @@
             [ VALID <bLfocus> ]        ;
             [ ON INTERACTIVECHANGE <bIChange> ]    ;
             [ <edit: EDIT> ]           ;
-            [ <text: TEXT> ]           ;            
+            [ <text: TEXT> ]           ;
           => ;
     [<oCombo> := ] HComboBox():Redefine( <oWnd>,<nId>,<vari>, ;
                     {|v|Iif(v==Nil,<vari>,<vari>:=v)},        ;
@@ -1385,7 +1382,7 @@
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
-             [ INCREMENT <nIncr> ]      ;        
+             [ INCREMENT <nIncr> ]      ;
              [ WIDTH <nUpDWidth> ]      ;
              [ MAXLENGTH <nMaxLength> ] ;
              [ COLOR <color> ]          ;
@@ -1406,9 +1403,8 @@
              <nStyle>,<x>,<y>,<width>,<height>,<oFont>,<bInit>,,,;
              <bGfocus>,<bLfocus>,<ctoolt>,<color>,<bcolor>, ;
              <nUpDWidth>,<nLower>,<nUpper>,<nIncr>,<cPicture>,<.lnoborder.>,;
-             <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,);;            
+             <nMaxLength>,<bKeyDown>,<bChange>,<bOther>,,);;
           [ <oUpd>:name := <(oUpd)> ]
-
 
 #xcommand @ <x>,<y> GET DATEPICKER [ <oPick> VAR ] <vari> ;
              [ OF <oWnd> ]              ;
@@ -1801,7 +1797,7 @@ Added by Marcos Antonio Gambeta
             [ SIZE <width>, <height> ]  ;
             [ BUTTONWIDTH <btnwidth> ]  ;
             [ INDENT <nIndent>       ]  ;
-		         	[ BITMAPSIZE <bmpwidth> [, <bmpheight> ] ]  ;
+                  [ BITMAPSIZE <bmpwidth> [, <bmpheight> ] ]  ;
             [ FONT <oFont> ]            ;
             [ ON INIT <bInit> ]         ;
             [ ON SIZE <bSize> ]         ;
@@ -1813,7 +1809,7 @@ Added by Marcos Antonio Gambeta
           => ;
     [<oTool> := ]  Htoolbar():New( <oWnd>,<nId>,<nStyle>,<x>,<y>,<width>, <height>,<btnwidth>,<oFont>,;
               <bInit>,<bSize>,,,,,<.lTransp.>,<.lVertical.>,<aItems>,<bmpwidth>,<bmpheight>,<nIndent>,<nIDB>) ;;
-    [ <oTool>:name := <(oTool)> ] 
+    [ <oTool>:name := <(oTool)> ]
 
 #xcommand REDEFINE TOOLBAR  <oSay>     ;
              [ OF <oWnd> ]              ;
@@ -2021,14 +2017,13 @@ Added by Marcos Antonio Gambeta
              <bChange>,<ctoolt>,<color>,<bcolor>,<bGFocus>,<bLFocus>,<bKeyDown>,<bDblClick>,<bOther>);;
           [ <oListbox>:name := <(oListbox)> ]
 
-          
 #xcommand @ <x>,<y> GET COMBOBOXEX [ <oCombo> VAR ] <vari> ;
              ITEMS  <aItems>            ;
              [ OF <oWnd> ]              ;
              [ ID <nId> ]               ;
              [ SIZE <width>, <height> ] ;
              [ DISPLAYCOUNT <nDisplay>] ;
-             [ ITEMHEIGHT <nhItem>    ] ; 
+             [ ITEMHEIGHT <nhItem>    ] ;
              [ COLUMNWIDTH <ncWidth>  ] ;
              [ COLOR <color> ]          ;
              [ BACKCOLOR <bcolor> ]     ;
@@ -2048,7 +2043,7 @@ Added by Marcos Antonio Gambeta
              <nStyle>,<x>,<y>,<width>,<height>,      ;
              <aItems>,<oFont>,,,,<bChange>,<ctoolt>, ;
              <.edit.>,<.text.>,<bWhen>,<color>,<bcolor>, ;
-						 <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>, <aImages> );;
+                   <bValid>,<acheck>,<nDisplay>,<nhItem>,<ncWidth>, <aImages> );;
           [ <oCombo>:name := <(oCombo)> ]
 
 //Contribution Luis Fernando Basso
@@ -2080,7 +2075,7 @@ Added by Marcos Antonio Gambeta
              [ <lnoBorder: NOBORDER> ]   ;
              [ ON LOAD <bLoad> ]        ;
              [ ON INIT <bInit> ]        ;
-             [ ON SIZE <bSize> ]        ;           
+             [ ON SIZE <bSize> ]        ;
              [ <lTabStop: TABSTOP> ]   ;
              [ ON REFRESH <bRefresh> ]      ;
              [ ON OTHER MESSAGES <bOther> ] ;
@@ -2090,5 +2085,4 @@ Added by Marcos Antonio Gambeta
           [<oCnt> := ] __IIF(<.class.>, <classname>,HContainer)():New(<oWnd>, <nId>,IIF(<.lTabStop.>,WS_TABSTOP,),;
                <x>, <y>, <width>, <height>, <ncStyle>, <bSize>, <.lnoBorder.>,<bInit>,<nbackStyle>,<tcolor>,<bcolor>,;
                <bLoad>,<bRefresh>,<bOther>);;
-          [ <oCnt>:name := <(oCnt)> ] 
-
+          [ <oCnt>:name := <(oCnt)> ]

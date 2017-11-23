@@ -77,4 +77,3 @@ FUNCTION GrabarIniPar
    Parametros.Release
 
    RETURN NIL
-

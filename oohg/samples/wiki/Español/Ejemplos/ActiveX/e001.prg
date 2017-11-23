@@ -127,4 +127,3 @@ FUNCTION ShowLocationByAddress( oActiveX, cAddress, cCity, cCountry )
    /*
    * EOF
    */
-

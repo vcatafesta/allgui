@@ -49,7 +49,6 @@ PROCEDURE Main
    RETURN
 
    proc test()
-
       LOCAL aLabels:={}, aValues:={}, aFormats:={}
 
       AAdd(aLabels,'1. Label with default settings')
@@ -145,7 +144,6 @@ PROCEDURE Main
       RETURN
 
       proc test2()
-
          // InputWindow standard test
          LOCAL aLabels:={}, aValues:={}, aFormats:={}
 
@@ -175,7 +173,6 @@ PROCEDURE Main
          RETURN
 
          STATIC proc xTestCode()
-
             LOCAL i,imax
 
             // set some properties
@@ -203,7 +200,6 @@ PROCEDURE Main
             RETURN
 
             STATIC proc xIfEmpty()
-
                IF empty(This.Value)
                   SetProperty('_InputWindow',This.Name,'BackColor',RED)
                   PlayBeep()
@@ -215,7 +211,6 @@ PROCEDURE Main
                RETURN
 
                proc SetMethodCode( cForm, cControl, cMethod, bCode )
-
                   LOCAL k
 
                   k:=GetControlIndex( cControl, cForm )
@@ -272,4 +267,3 @@ PROCEDURE Main
                   RETURN
 
                   #include "InputWindowEx.prg"
-

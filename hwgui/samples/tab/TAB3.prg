@@ -84,4 +84,3 @@ STATIC FUNCTION oRadiobutton2_onClick
    oL:settext("only 2,3")
 
    RETURN NIL
-

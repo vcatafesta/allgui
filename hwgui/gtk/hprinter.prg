@@ -38,41 +38,41 @@ CLASS VAR cdp       SHARED
    DATA lmm  INIT .F.
    DATA cMetafile
 
-METHOD New( cPrinter, lmm )
+   METHOD New( cPrinter, lmm )
 
-METHOD SetMode( nOrientation )
+   METHOD SetMode( nOrientation )
 
-METHOD Recalc( x1, y1, x2, y2 )
+   METHOD Recalc( x1, y1, x2, y2 )
 
-METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline )
+   METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline )
 
-METHOD SetFont( oFont )
+   METHOD SetFont( oFont )
 
-METHOD AddPen( nWidth, style, color )
+   METHOD AddPen( nWidth, style, color )
 
-METHOD SetPen( nWidth, style, color )
+   METHOD SetPen( nWidth, style, color )
 
-METHOD StartDoc()
+   METHOD StartDoc()
 
-METHOD EndDoc()
+   METHOD EndDoc()
 
-METHOD StartPage()
+   METHOD StartPage()
 
-METHOD EndPage()
+   METHOD EndPage()
 
-METHOD End()
+   METHOD End()
 
-METHOD Box( x1, y1, x2, y2, oPen )
+   METHOD Box( x1, y1, x2, y2, oPen )
 
-METHOD Line( x1, y1, x2, y2, oPen )
+   METHOD Line( x1, y1, x2, y2, oPen )
 
-METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont )
+   METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont )
 
-METHOD Bitmap( x1, y1, x2, y2, nOpt, cImageName )
+   METHOD Bitmap( x1, y1, x2, y2, nOpt, cImageName )
 
-METHOD Preview()  INLINE Nil
+   METHOD Preview()  INLINE Nil
 
-METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC, cString, oFont:name, oFont:height )
+   METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC, cString, oFont:name, oFont:height )
 
 ENDCLASS
 
@@ -328,11 +328,11 @@ CLASS VAR aFonts   INIT {}
    DATA italic, Underline
    DATA nCounter   INIT 1
 
-METHOD Add( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline )
+   METHOD Add( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline )
 
-METHOD Equal( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline )
+   METHOD Equal( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline )
 
-METHOD RELEASE( lAll )
+   METHOD RELEASE( lAll )
 
 ENDCLASS
 
@@ -406,9 +406,9 @@ CLASS VAR aPens   INIT {}
    DATA style, width, color
    DATA nCounter   INIT 1
 
-METHOD Add( nWidth, style, color )
+   METHOD Add( nWidth, style, color )
 
-METHOD Release()
+   METHOD Release()
 
 ENDCLASS
 
@@ -451,4 +451,3 @@ METHOD Release() CLASS HGP_Pen
    ENDIF
 
    RETURN NIL
-

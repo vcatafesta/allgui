@@ -217,4 +217,3 @@ PROCEDURE filltable ( nCount )
    GO TOP
 
    RETURN
-

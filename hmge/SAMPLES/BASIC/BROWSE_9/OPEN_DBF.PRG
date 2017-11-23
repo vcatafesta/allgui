@@ -22,4 +22,3 @@ PROCEDURE open_dbf
    ENDIF
 
    RETURN
-

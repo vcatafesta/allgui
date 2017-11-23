@@ -69,14 +69,12 @@
 #define STRIKE_OFF    STRIKE_ON + STYLE_OFF
 #define HIDDEN_OFF    HIDDEN_ON + STYLE_OFF
 
-
 // DEFAULTS:
 
 // Font:        Courier New
 // Font Size:   12 Point
 // Units:       Inches (i.e., same as "TWIPFACTOR INCH_TO_TWIP")
 // Page Setup:  Standard RTF file format defaults
-
 
 #xcommand DEFINE RTF [<oRTF>] ;
       [ <filename: FILE, FILENAME> <cFileName> ] ;
@@ -92,7 +90,6 @@
                [\{<aFontFam>\}],[\{<aFontChar>\}],<nFontSize>,<nFontColor>, <nScale>, <aHigh> )
 
 #xcommand CLOSE RTF <oRTF> => <oRTF>:End()
-
 
 // If used, DEFINE PAGESETUP should come immediately after DEFINE RTF
 // NOTE: Page numbering is not supported yet in base class
@@ -112,14 +109,12 @@
              <nWidth>, <nHeight>, <nTabWidth>, <.landscape.>, <.lNoWidow.>, ;
              <"vertalign"> , <cPgnumPos>, <.lPgnumTop.> )
 
-
 // Use these to enclose data to be included in headers & footers
 #xcommand BEGIN HEADER <oRTF> => <oRTF>:BeginHeader()
 #xcommand END HEADER <oRTF> => <oRTF>:EndHeader()
 
 #xcommand BEGIN FOOTER <oRTF> => <oRTF>:BeginFooter()
 #xcommand END FOOTER <oRTF> => <oRTF>:EndFooter()
-
 
 // Use this to write formatted text within a paragraph
 #xcommand WRITE TEXT <oRTF> ;
@@ -174,7 +169,6 @@
             <nFontColor>, [\{<cTypeBorder>\}],;
             <"cBordStyle">, <nBordCol>, <nShdPct>,<"cShadPat">,;
             <nStyle>,.F. )
-
 
 // Use this to begin a new table
 #xcommand DEFINE TABLE <oRTF> ;
@@ -254,14 +248,12 @@
 #xcommand CLOSE TABLE oRTF => oRTF:EndRow() ; oRTF:TextCode("pard")
 #xcommand END TABLE oRTF => oRTF:EndTable() ; oRTF:TextCode("pard")
 
-
 // Use this to begin/end a row of the table
 // NOTE: After the first row, the class will automatically
 // start new rows as necessary, based on # of columns
 
 #xcommand BEGIN ROW oRTF => oRTF:BeginRow()
 #xcommand END ROW oRTF => oRTF:EndRow()
-
 
 // Use this to write the next cell in a table
 #xcommand WRITE CELL <oRTF> ;
@@ -281,7 +273,6 @@
             <"cHorzAlign">, <nSpace>, <lSpExact>, <"cCellBorder">, ;
             <nCellPct>, <nFontColor>, <.lDefault.> )
 
-
 #xcommand WRITE NEWCELL <oRTF> ;
       [ TEXT <cText> ] ;
       [ FONTNUMBER <nFontNumber> ] ;
@@ -296,14 +287,12 @@
             <"cHorzAlign">, <nSpace>, <lSpExact>, ;
              <nFontColor>, <.lDefault.> )
 
-
 #xcommand DEFINE CELL FORMAT <oRTF> ;
       [ CELLBORDERS <cCellBorder: SINGLE, DOUBLETHICK, SHADOW, DOUBLE, ;
          DOTTED, DASHED, HAIRLINE > ] ;
       [ CELLSHADE <aCellPct> ] ;
    => ;
       <oRTF>:CellFormat(<"cCellBorder">,<aCellPct> )
-
 
 // Use this to begin a new section -- for example, to change the page
 // orientation, or the paper size, or the number of columns.
@@ -321,14 +310,12 @@
             <nLeft>, <nRight>, <nTop>, <nBottom>, ;
             <nWidth>, <nHeight>, <"vertalign">, <.lDefault.> )
 
-
 #xcommand BEGIN BOOKMARK <oRTF> ;
       [ TEXT <cText> ] ;
    => ;
       <oRTF>:BegBookMark( <cText> )
 
 #xcommand END BOOKMARK <oRTF> => <oRTF>:EndBookMark()
-
 
 // Use this to write the next cell in a table
 #xcommand LINEA <oRTF> ;

@@ -73,4 +73,3 @@ PROCEDURE GetIP()
    /*
    * EOF
    */
-

@@ -2144,4 +2144,3 @@ FUNCTION _DefineEmfFile ( ControlName, ParentFormName, x, y, FileName, w, h, ;
    _HMG_aControlMiscData2 [k] := ''
 
    RETURN NIL
-

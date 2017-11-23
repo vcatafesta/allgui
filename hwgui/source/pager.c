@@ -189,4 +189,3 @@ HB_FUNC( HWG_PAGERONPAGERSCROLL )
 
    hb_retnl( 0 );
 }
-

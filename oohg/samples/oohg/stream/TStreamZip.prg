@@ -38,13 +38,13 @@ CLASS TStreamUnZip FROM TStreamBase
    DATA oStream    INIT nil    // Data source
    DATA p_zStream  INIT nil    // Stream-info pointer
 
-METHOD New           // New stream
+   METHOD New           // New stream
 
-METHOD IsConnected   // Check if stream is connected
+   METHOD IsConnected   // Check if stream is connected
 
-METHOD RealFill      // Real filler
+   METHOD RealFill      // Real filler
 
-METHOD Disconnect    // Disconnect
+   METHOD Disconnect    // Disconnect
 
    // METHOD Write         INLINE 0   // No WRITE method.
 
@@ -460,4 +460,3 @@ FUNCTION Zip_GetCentralHeader( oStream )
    ENDIF
 
    RETURN hHeader
-

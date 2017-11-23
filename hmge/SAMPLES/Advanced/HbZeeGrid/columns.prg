@@ -130,4 +130,3 @@ PROCEDURE Grid_OnInit( h )
    zgm_HighlightCursorRow( h, .T. )
 
    RETURN
-

@@ -789,4 +789,3 @@ STATIC FUNCTION SaveXML
    RETURN lSuccess
 
    ****** End of SaveXML ******
-

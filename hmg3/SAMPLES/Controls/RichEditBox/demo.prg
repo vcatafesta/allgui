@@ -632,4 +632,3 @@ PROCEDURE CreateTextRTF
    Form_3.RichEditBox_3.UnSelectAll ()
 
    RETURN
-

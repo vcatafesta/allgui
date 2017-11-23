@@ -272,4 +272,3 @@ STATIC FUNCTION tigades( mvc, n)    // created: 28 mei 1993
 STATIC FUNCTION  bil(x)
 
    RETURN    iif( x<>"0", bil_asli[val(x)]+" ","")
-

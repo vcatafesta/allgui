@@ -1614,4 +1614,3 @@ PROCEDURE HMG_DebuggerWaitMessage(); RETURN
 
 PROCEDURE HMG_DebuggerWaitMessage_SetProgressbar(); RETURN
    #endif
-

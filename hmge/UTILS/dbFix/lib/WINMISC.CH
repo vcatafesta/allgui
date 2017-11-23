@@ -91,4 +91,3 @@
 #define IDC_SIZENS        MakeIntResource(32645)
 
 #endif    // WINMISC_CH
-

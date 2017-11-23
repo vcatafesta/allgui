@@ -130,4 +130,3 @@ PROCEDURE CloseTables()
    USE
 
    RETURN NIL
-

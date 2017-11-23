@@ -35,4 +35,3 @@ FUNCTION main_new_action
    ENDIF
 
    RETURN NIL
-

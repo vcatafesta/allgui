@@ -112,4 +112,3 @@ HB_FUNC( MAXIMIZE )
 }
 
 #pragma ENDDUMP
-

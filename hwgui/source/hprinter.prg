@@ -44,51 +44,51 @@ CLASS HPrinter INHERIT HObject
    DATA LeftMargin
    DATA RightMargin
 
-METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn )
+   METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn )
 
-METHOD SetMode( nOrientation )
+   METHOD SetMode( nOrientation )
 
-METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline, nCharSet )
+   METHOD AddFont( fontName, nHeight , lBold, lItalic, lUnderline, nCharSet )
 
-METHOD SetFont( oFont )  INLINE hwg_Selectobject( ::hDC, oFont:handle )
+   METHOD SetFont( oFont )  INLINE hwg_Selectobject( ::hDC, oFont:handle )
 
-METHOD Settextcolor( nColor )  INLINE hwg_Settextcolor( ::hDC, nColor )
+   METHOD Settextcolor( nColor )  INLINE hwg_Settextcolor( ::hDC, nColor )
 
-METHOD SetTBkColor( nColor )   INLINE hwg_Setbkcolor( ::hDC, nColor )
+   METHOD SetTBkColor( nColor )   INLINE hwg_Setbkcolor( ::hDC, nColor )
 
-METHOD Setbkmode( lmode )   INLINE hwg_Setbkmode( ::hDC, IIF( lmode, 1, 0 ) )
+   METHOD Setbkmode( lmode )   INLINE hwg_Setbkmode( ::hDC, IIF( lmode, 1, 0 ) )
 
-METHOD StartDoc( lPreview, cMetaName )
+   METHOD StartDoc( lPreview, cMetaName )
 
-METHOD EndDoc()
+   METHOD EndDoc()
 
-METHOD StartPage()
+   METHOD StartPage()
 
-METHOD EndPage()
+   METHOD EndPage()
 
-METHOD ReleaseMeta()
+   METHOD ReleaseMeta()
 
-METHOD PlayMeta( oWnd )
+   METHOD PlayMeta( oWnd )
 
-METHOD PrintMeta( nPage )
+   METHOD PrintMeta( nPage )
 
-METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser  )
+   METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser  )
 
-METHOD END()
+   METHOD END()
 
-METHOD Box( x1, y1, x2, y2, oPen, oBrush )
+   METHOD Box( x1, y1, x2, y2, oPen, oBrush )
 
-METHOD Line( x1, y1, x2, y2, oPen )
+   METHOD Line( x1, y1, x2, y2, oPen )
 
-METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor )
+   METHOD Say( cString, x1, y1, x2, y2, nOpt, oFont, nTextColor, nBkColor )
 
-METHOD Bitmap( x1, y1, x2, y2, nOpt, hBitmap )
+   METHOD Bitmap( x1, y1, x2, y2, nOpt, hBitmap )
 
-METHOD GetTextWidth( cString, oFont )
+   METHOD GetTextWidth( cString, oFont )
 
-METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) HIDDEN
+   METHOD ResizePreviewDlg( oCanvas, nZoom, msg, wParam, lParam ) HIDDEN
 
-METHOD ChangePage( oSayPage, n, nPage ) HIDDEN
+   METHOD ChangePage( oSayPage, n, nPage ) HIDDEN
 
 ENDCLASS
 
@@ -825,4 +825,3 @@ METHOD PrintMeta( nPage ) CLASS HPrinter
    ENDIF
 
    RETURN NIL
-

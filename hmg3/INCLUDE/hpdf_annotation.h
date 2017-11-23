@@ -27,13 +27,11 @@ extern "C" {
 /*----------------------------------------------------------------------------*/
 /*------ HPDF_Annotation -----------------------------------------------------*/
 
-
 HPDF_Annotation
 HPDF_Annotation_New  (HPDF_MMgr       mmgr,
                       HPDF_Xref       xref,
                       HPDF_AnnotType  type,
                       HPDF_Rect       rect);
-
 
 HPDF_Annotation
 HPDF_LinkAnnot_New  (HPDF_MMgr           mmgr,
@@ -41,13 +39,11 @@ HPDF_LinkAnnot_New  (HPDF_MMgr           mmgr,
                      HPDF_Rect         rect,
                      HPDF_Destination  dst);
 
-
 HPDF_Annotation
 HPDF_URILinkAnnot_New  (HPDF_MMgr          mmgr,
                         HPDF_Xref          xref,
                         HPDF_Rect          rect,
                         const char   *uri);
-
 
 HPDF_Annotation
 HPDF_3DAnnot_New  (HPDF_MMgr        mmgr,
@@ -57,25 +53,25 @@ HPDF_3DAnnot_New  (HPDF_MMgr        mmgr,
 
 HPDF_Annotation
 HPDF_MarkupAnnot_New    (HPDF_MMgr        mmgr,
-						 HPDF_Xref        xref,
-						 HPDF_Rect        rect,
-						 const char      *text,
-						 HPDF_Encoder     encoder,
-					 	 HPDF_AnnotType  subtype);
+                   HPDF_Xref        xref,
+                   HPDF_Rect        rect,
+                   const char      *text,
+                   HPDF_Encoder     encoder,
+                    HPDF_AnnotType  subtype);
 
 HPDF_Annotation
 HPDF_PopupAnnot_New (HPDF_MMgr         mmgr,
                      HPDF_Xref         xref,
                      HPDF_Rect         rect,
-					 HPDF_Annotation   parent);
+                HPDF_Annotation   parent);
 
 HPDF_Annotation
 HPDF_StampAnnot_New (HPDF_MMgr         mmgr,
                      HPDF_Xref         xref,
                      HPDF_Rect         rect,
-					 HPDF_StampAnnotName name,
-					 const char*	   text,
-					 HPDF_Encoder	   encoder);
+                HPDF_StampAnnotName name,
+                const char*      text,
+                HPDF_Encoder      encoder);
 
 HPDF_BOOL
 HPDF_Annotation_Validate (HPDF_Annotation  annot);
@@ -85,4 +81,3 @@ HPDF_Annotation_Validate (HPDF_Annotation  annot);
 #endif /* __cplusplus */
 
 #endif /* _HPDF_ANNOTATION_H */
-

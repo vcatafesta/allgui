@@ -78,4 +78,3 @@ FUNCTION PrintRpt
    oPrinter:End()
 
    RETURN NIL
-

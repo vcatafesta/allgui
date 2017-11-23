@@ -31,7 +31,6 @@
                         {MEMO_TYPE_FMP , '.fmp'},;
                         {MEMO_TYPE_FPT , '.fpt'}}
 
-
 #define DBF_TYPE {{0x03,{DBF_FS,DBF_D3,DBF_D4,DBF_D5,DBF_FB,DBF_FP,DBF_CL},MEMO_TYPE_NONE},;
                   {0x04,{DBF_D4,DBF_D5,DBF_FS},MEMO_TYPE_NONE},;
                   {0x05,{DBF_D5,DBF_FP,DBF_FS},MEMO_TYPE_NONE},;

@@ -303,4 +303,3 @@ FUNCTION DrawWindowBoxRaised( window, row, col, rowr, colr )
    AAdd( _HMG_aFormGraphTasks [i] , {|| WndBoxRaised( ( hDC := GetDC( FormHandle ) ), row, col, rowr, colr ), ReleaseDC( FormHandle, hDC ) } )
 
    RETURN NIL
-

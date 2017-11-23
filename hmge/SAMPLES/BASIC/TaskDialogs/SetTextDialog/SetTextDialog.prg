@@ -80,4 +80,3 @@ STATIC FUNCTION __cb_update( pWnd, nNotification, wParam, lParam )
    END SWITCH
 
    RETURN lResult
-

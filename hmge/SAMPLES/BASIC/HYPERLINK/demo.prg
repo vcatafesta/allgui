@@ -145,4 +145,3 @@ FUNCTION AddSlash(cInFolder)
    DECLARE DLL_TYPE_LONG ;
       FindWindow ( DLL_TYPE_LPSTR lpClassName, DLL_TYPE_LPSTR lpWindowName ) ;
       IN USER32.DLL
-

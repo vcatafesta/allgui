@@ -333,4 +333,3 @@ FUNCTION LB_Array2String( aData, Sep )
    NEXT
 
    RETURN cData
-

@@ -131,4 +131,3 @@ FUNCTION GetTitles( hOwnWnd )
    ENDDO
 
    RETURN ( aTasks )
-

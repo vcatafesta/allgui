@@ -50,4 +50,3 @@ PROCEDURE act_03()
    MsgInfo ('Action 03')
 
    RETURN
-

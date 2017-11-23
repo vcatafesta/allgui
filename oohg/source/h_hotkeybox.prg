@@ -59,9 +59,9 @@ CLASS THotKeyBox FROM TLabel
    DATA nHeight         INIT 40
    DATA lForceAlt       INIT .T.
 
-METHOD Define
+   METHOD Define
 
-METHOD Value       SETGET
+   METHOD Value       SETGET
 
    EMPTY( _OOHG_AllVars )
 
@@ -189,4 +189,3 @@ HB_FUNC( HOTKEYBOXVALUE )
 }
 
 #pragma ENDDUMP
-

@@ -6251,4 +6251,3 @@ STATIC FUNCTION GetUserControlType ( ControlName, ParentForm )
    ENDIF
 
    RETURN cRetName
-

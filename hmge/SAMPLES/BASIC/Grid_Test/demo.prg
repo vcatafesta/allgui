@@ -425,4 +425,3 @@ FUNCTION DeleteColumn(control, form, nColumn)
    ENDIF
 
    RETURN NIL
-

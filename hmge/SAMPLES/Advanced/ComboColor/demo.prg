@@ -329,4 +329,3 @@ HB_FUNC( IL_ADDMASKEDINDIRECT )   //IL_AddMaskedIndirect( hwnd , himage , color 
 }
 
 #pragma ENDDUMP
-

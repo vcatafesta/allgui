@@ -225,4 +225,3 @@ HB_FUNC ( DESTROYICON )
 }
 
 #pragma ENDDUMP
-

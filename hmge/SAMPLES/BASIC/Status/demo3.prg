@@ -47,4 +47,3 @@ PROCEDURE OnClick
    ENDIF
 
    RETURN
-

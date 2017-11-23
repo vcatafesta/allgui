@@ -345,4 +345,3 @@ void HB_EXPORT hb_winTone( UINT uFrequency, double dwDuration, BOOL bSmoothing, 
 }
 
 #pragma ENDDUMP
-

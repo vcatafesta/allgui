@@ -60,21 +60,21 @@ CLASS TMenu FROM TControl
    DATA lMain                     INIT .F.
    DATA Type                      INIT "MENU" READONLY
 
-METHOD Activate
+   METHOD Activate
 
-METHOD Define
+   METHOD Define
 
-METHOD DisableVisualStyle
+   METHOD DisableVisualStyle
 
-METHOD EndMenu
+   METHOD EndMenu
 
-METHOD Refresh
+   METHOD Refresh
 
-METHOD Release                 BLOCK { |Self| DestroyMenu( ::hWnd ), ::Super:Release() }
+   METHOD Release                 BLOCK { |Self| DestroyMenu( ::hWnd ), ::Super:Release() }
 
-METHOD Separator               BLOCK { |Self| TMenuItem():DefineSeparator( , Self ) }
+   METHOD Separator               BLOCK { |Self| TMenuItem():DefineSeparator( , Self ) }
 
-METHOD SetMenuBarColor
+   METHOD SetMenuBarColor
 
    EMPTY( _OOHG_AllVars )
 
@@ -136,11 +136,11 @@ CLASS TMenuMain FROM TMenu
 
    DATA lMain     INIT .T.
 
-METHOD Define
+   METHOD Define
 
-METHOD Activate    BLOCK { || nil }
+   METHOD Activate    BLOCK { || nil }
 
-METHOD Release     BLOCK { |Self| ::Parent:oMenu := nil, ::Super:Release() }
+   METHOD Release     BLOCK { |Self| ::Parent:oMenu := nil, ::Super:Release() }
 
 ENDCLASS
 
@@ -161,9 +161,9 @@ METHOD Define( Parent, Name ) CLASS TMenuMain
 
 CLASS TMenuContext FROM TMenu
 
-METHOD Define
+   METHOD Define
 
-METHOD Release     BLOCK { |Self| ::Parent:ContextMenu := nil, ::Super:Release() }
+   METHOD Release     BLOCK { |Self| ::Parent:ContextMenu := nil, ::Super:Release() }
 
 ENDCLASS
 
@@ -179,9 +179,9 @@ METHOD Define( Parent, Name ) CLASS TMenuContext
 
 CLASS TMenuNotify FROM TMenu
 
-METHOD Define
+   METHOD Define
 
-METHOD Release     BLOCK { |Self| ::Parent:NotifyMenu := nil, ::Super:Release() }
+   METHOD Release     BLOCK { |Self| ::Parent:NotifyMenu := nil, ::Super:Release() }
 
 ENDCLASS
 
@@ -197,9 +197,9 @@ METHOD Define( Parent, Name ) CLASS TMenuNotify
 
 CLASS TMenuDropDown FROM TMenu
 
-METHOD Define
+   METHOD Define
 
-METHOD Release
+   METHOD Release
 
 ENDCLASS
 
@@ -247,41 +247,41 @@ CLASS TMenuItem FROM TControl
    DATA lIsPopUp  INIT .F.
    DATA lAdjust   INIT .F.
 
-METHOD DefinePopUp
+   METHOD DefinePopUp
 
-METHOD DefineItem
+   METHOD DefineItem
 
-METHOD DefineSeparator
+   METHOD DefineSeparator
 
-METHOD InsertPopUp
+   METHOD InsertPopUp
 
-METHOD InsertItem
+   METHOD InsertItem
 
-METHOD InsertSeparator
+   METHOD InsertSeparator
 
-METHOD SetItemsColor
+   METHOD SetItemsColor
 
-METHOD Enabled              SETGET
+   METHOD Enabled              SETGET
 
-METHOD Checked              SETGET
+   METHOD Checked              SETGET
 
-METHOD Hilited              SETGET
+   METHOD Hilited              SETGET
 
-METHOD Caption              SETGET
+   METHOD Caption              SETGET
 
-METHOD Release
+   METHOD Release
 
-METHOD EndPopUp
+   METHOD EndPopUp
 
-METHOD Separator            BLOCK { |Self| TMenuItem():DefineSeparator( , Self ) }
+   METHOD Separator            BLOCK { |Self| TMenuItem():DefineSeparator( , Self ) }
 
-METHOD Picture              SETGET
+   METHOD Picture              SETGET
 
-METHOD Stretch              SETGET
+   METHOD Stretch              SETGET
 
-METHOD DoEvent
+   METHOD DoEvent
 
-METHOD DefaultItem( nItem ) BLOCK { |Self,nItem| SetMenuDefaultItem( ::Container:hWnd, nItem ) }
+   METHOD DefaultItem( nItem ) BLOCK { |Self,nItem| SetMenuDefaultItem( ::Container:hWnd, nItem ) }
 
 ENDCLASS
 
@@ -872,4 +872,3 @@ HB_FUNC( TMENUITEMSETITEMSCOLOR )
 }
 
 #pragma ENDDUMP
-

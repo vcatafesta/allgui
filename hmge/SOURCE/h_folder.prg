@@ -956,4 +956,3 @@ STATIC FUNCTION RetValue( lRet, def )
    ENDIF
 
    RETURN lRet
-

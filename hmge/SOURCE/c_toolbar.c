@@ -254,7 +254,6 @@ HB_FUNC( INITTOOLBAREX )
    if( hb_parl( 17 ) )
       Style = Style | CCS_ADJUSTABLE;
 
-
    hwndTB = CreateWindowEx( ExStyle, TOOLBARCLASSNAME, ( LPSTR ) NULL, Style, 0, 0, 0, 0, hwnd, ( HMENU ) HB_PARNL( 3 ), g_hInstance, NULL );
 
    if( hb_parni( 6 ) && hb_parni( 7 ) )

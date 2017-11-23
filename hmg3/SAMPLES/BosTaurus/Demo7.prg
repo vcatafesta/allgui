@@ -95,4 +95,3 @@ PROCEDURE Proc_ON_PAINT
    #define GRAY    { 128,  128,  128 }
    #define BLUE    {   0,    0,  255 }
    */
-

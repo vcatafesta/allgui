@@ -98,4 +98,3 @@ FUNCTION ConnectGrid()
    oQuery:refresh()
 
    RETURN NIL
-

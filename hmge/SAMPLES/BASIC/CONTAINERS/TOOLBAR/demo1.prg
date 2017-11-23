@@ -134,4 +134,3 @@ FUNCTION TB_ReplacePictureClick
    ENDCASE
 
    RETURN NIL
-

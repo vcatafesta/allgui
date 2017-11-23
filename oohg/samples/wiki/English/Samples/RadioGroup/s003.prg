@@ -151,4 +151,3 @@ FUNCTION ShowWidths()
    /*
    * EOF
    */
-

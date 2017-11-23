@@ -98,4 +98,3 @@ FUNCTION OnKey
    Form_1.Label_2.VALUE := ""
 
    RETURN NIL
-

@@ -32,4 +32,3 @@ FUNCTION MsgAboutDim(nVal)
    DEFAULT nVal := 1
 
    RETURN aDim[nVal]
-

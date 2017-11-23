@@ -156,4 +156,3 @@ FUNCTION OpenDB()
    ENDIF
 
    RETURN NIL
-

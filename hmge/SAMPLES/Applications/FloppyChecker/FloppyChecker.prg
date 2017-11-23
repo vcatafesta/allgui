@@ -292,4 +292,3 @@ PROCEDURE SaveConfig()
 
    DECLARE DLL_TYPE_LONG SetErrorMode( DLL_TYPE_LONG nMode ) ;
       IN KERNEL32.DLL
-

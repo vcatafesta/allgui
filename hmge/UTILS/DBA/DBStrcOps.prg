@@ -560,4 +560,3 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
                                     RETU aRVal // DBStAply()
 
                                     *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
-

@@ -130,7 +130,6 @@ HB_FUNC( HWG_REGQUERYVALUEEX )
    hb_strfree( hValue );
 }
 
-
 HB_FUNC( HWG_REGENUMKEYEX )
 {
    FILETIME ft;
@@ -152,7 +151,6 @@ HB_FUNC( HWG_REGENUMKEYEX )
    }
    hb_retnl( nErr );
 }
-
 
 HB_FUNC( HWG_REGSETVALUEEX )
 {
@@ -226,7 +224,6 @@ HB_FUNC( HWG_REGCREATEKEYEX )
    hb_strfree( hValue );
    hb_strfree( hClass );
 }
-
 
 HB_FUNC( HWG_REGDELETEKEY )
 {

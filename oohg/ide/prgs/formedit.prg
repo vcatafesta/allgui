@@ -435,241 +435,241 @@ CLASS TFormEditor
    DATA ControlType          INIT { "FORM",  "BUTTON",  "CHECKBOX",  "LIST",  "COMBO",  "CHECKBTN",  "GRID",  "FRAME",  "TAB",  "IMAGE",  "ANIMATE",  "DATEPICKER",  "TEXT",  "EDIT",  "LABEL",  "PLAYER",  "PROGRESSBAR",  "RADIOGROUP",  "SLIDER",  "SPINNER",  "PICCHECKBUTT",  "PICBUTT",  "TIMER",  "BROWSE",  "TREE",  "IPADDRESS",  "MONTHCALENDAR", "HYPERLINK",  "RICHEDIT",     "TIMEPICKER",  "XBROWSE",  "ACTIVEX",  "CHECKLIST",  "HOTKEYBOX",  "PICTURE",  "PROGRESSMETER",  "SCROLLBAR",  "TEXTARRAY",  "ANIGIF" }
    DATA ControlCount         INIT { 0,       0,         0,           0,       0,        0,           0,       0,        0,      0,        0,          0,             0,       0,       0,        0,         0,              0,             0,         0,          0,               0,          0,        0,         0,       0,            0,               0,            0,              0,             0,          0,          0,            0,            0,          0,                0,            0,            0 }
 
-METHOD AddControl
+   METHOD AddControl
 
-METHOD AddCtrlToTabPage
+   METHOD AddCtrlToTabPage
 
-METHOD AddTabPage
+   METHOD AddTabPage
 
-METHOD AdjustInspectorCntrls
+   METHOD AdjustInspectorCntrls
 
-METHOD CheckForFrame
+   METHOD CheckForFrame
 
-METHOD CheckStringData
+   METHOD CheckStringData
 
-METHOD Clean
+   METHOD Clean
 
-METHOD ControlClick
+   METHOD ControlClick
 
-METHOD CopyControl
+   METHOD CopyControl
 
-METHOD CreateControl
+   METHOD CreateControl
 
-METHOD CreateStatusBar
+   METHOD CreateStatusBar
 
-METHOD CtrlIsOfType
+   METHOD CtrlIsOfType
 
-METHOD CtrlFontColors
+   METHOD CtrlFontColors
 
-METHOD Debug
+   METHOD Debug
 
-METHOD DelArray
+   METHOD DelArray
 
-METHOD DeleteControl
+   METHOD DeleteControl
 
-METHOD DeleteTabPage
+   METHOD DeleteTabPage
 
-METHOD DrawOutline
+   METHOD DrawOutline
 
-METHOD DrawPoints
+   METHOD DrawPoints
 
-METHOD EditForm           CONSTRUCTOR
+   METHOD EditForm           CONSTRUCTOR
 
-METHOD EditProperties
+   METHOD EditProperties
 
-METHOD EventsClick
+   METHOD EventsClick
 
-METHOD Exit
+   METHOD Exit
 
-METHOD FillListOfCtrls
+   METHOD FillListOfCtrls
 
-METHOD FillListOfGroups
+   METHOD FillListOfGroups
 
-METHOD FrmEvents
+   METHOD FrmEvents
 
-METHOD FrmFontColors
+   METHOD FrmFontColors
 
-METHOD FrmProperties
+   METHOD FrmProperties
 
-METHOD GlobalVertGapChg
+   METHOD GlobalVertGapChg
 
-METHOD GOtherColors
+   METHOD GOtherColors
 
-METHOD IniArray
+   METHOD IniArray
 
-METHOD IsUnique
+   METHOD IsUnique
 
-METHOD KeyboardMoveSize
+   METHOD KeyboardMoveSize
 
-METHOD KeyHandler
+   METHOD KeyHandler
 
-METHOD LoadControls
+   METHOD LoadControls
 
-METHOD MakeControls
+   METHOD MakeControls
 
-METHOD ManualMoveSize
+   METHOD ManualMoveSize
 
-METHOD MinimizeForms
+   METHOD MinimizeForms
 
-METHOD MouseMoveSize
+   METHOD MouseMoveSize
 
-METHOD MouseTrack
+   METHOD MouseTrack
 
-METHOD MoveControl
+   METHOD MoveControl
 
-METHOD New
+   METHOD New
 
-METHOD Open
+   METHOD Open
 
-METHOD OrderControls
+   METHOD OrderControls
 
-METHOD OrderDown
+   METHOD OrderDown
 
-METHOD OrderUp
+   METHOD OrderUp
 
-METHOD pActiveX
+   METHOD pActiveX
 
-METHOD pAniGIF
+   METHOD pAniGIF
 
-METHOD pAnimateBox
+   METHOD pAnimateBox
 
-METHOD pBrowse
+   METHOD pBrowse
 
-METHOD pButton
+   METHOD pButton
 
-METHOD pCheckBox
+   METHOD pCheckBox
 
-METHOD pCheckBtn
+   METHOD pCheckBtn
 
-METHOD pCheckList
+   METHOD pCheckList
 
-METHOD pComboBox
+   METHOD pComboBox
 
-METHOD pDatePicker
+   METHOD pDatePicker
 
-METHOD pEditBox
+   METHOD pEditBox
 
-METHOD pForm
+   METHOD pForm
 
-METHOD pFrame
+   METHOD pFrame
 
-METHOD pGrid
+   METHOD pGrid
 
-METHOD pHotKeyBox
+   METHOD pHotKeyBox
 
-METHOD pHypLink
+   METHOD pHypLink
 
-METHOD pImage
+   METHOD pImage
 
-METHOD pIPAddress
+   METHOD pIPAddress
 
-METHOD pLabel
+   METHOD pLabel
 
-METHOD pListBox
+   METHOD pListBox
 
-METHOD pMonthCal
+   METHOD pMonthCal
 
-METHOD pPicButt
+   METHOD pPicButt
 
-METHOD pPicCheckButt
+   METHOD pPicCheckButt
 
-METHOD pPicture
+   METHOD pPicture
 
-METHOD pPlayer
+   METHOD pPlayer
 
-METHOD PreProcessDefineWindow
+   METHOD PreProcessDefineWindow
 
-METHOD pProgressBar
+   METHOD pProgressBar
 
-METHOD pProgressMeter
+   METHOD pProgressMeter
 
-METHOD pRadioGroup
+   METHOD pRadioGroup
 
-METHOD pRichedit
+   METHOD pRichedit
 
-METHOD PrintBrief
+   METHOD PrintBrief
 
-METHOD ProcessControl
+   METHOD ProcessControl
 
-METHOD PropertiesClick
+   METHOD PropertiesClick
 
-METHOD pScrollBar
+   METHOD pScrollBar
 
-METHOD pSlider
+   METHOD pSlider
 
-METHOD pSpinner
+   METHOD pSpinner
 
-METHOD pTab
+   METHOD pTab
 
-METHOD pTextArray
+   METHOD pTextArray
 
-METHOD pTextBox
+   METHOD pTextBox
 
-METHOD pTimePicker
+   METHOD pTimePicker
 
-METHOD pTimer
+   METHOD pTimer
 
-METHOD pTree
+   METHOD pTree
 
-METHOD pXBrowse
+   METHOD pXBrowse
 
-METHOD ReadCtrlCol
+   METHOD ReadCtrlCol
 
-METHOD ReadCtrlName
+   METHOD ReadCtrlName
 
-METHOD ReadCtrlRow
+   METHOD ReadCtrlRow
 
-METHOD ReadCtrlType
+   METHOD ReadCtrlType
 
-METHOD ReadFormLogicalData
+   METHOD ReadFormLogicalData
 
-METHOD ReadFormPosition
+   METHOD ReadFormPosition
 
-METHOD ReadFormStringData
+   METHOD ReadFormStringData
 
-METHOD ReadLogicalData
+   METHOD ReadLogicalData
 
-METHOD ReadOopData
+   METHOD ReadOopData
 
-METHOD ReadStringData
+   METHOD ReadStringData
 
-METHOD RecreateControl
+   METHOD RecreateControl
 
-METHOD RefreshControlInspector
+   METHOD RefreshControlInspector
 
-METHOD ReorderTabs
+   METHOD ReorderTabs
 
-METHOD RestoreForms
+   METHOD RestoreForms
 
-METHOD Save
+   METHOD Save
 
-METHOD SelectControl
+   METHOD SelectControl
 
-METHOD SetBackColor
+   METHOD SetBackColor
 
-METHOD SetDefaultBackColor
+   METHOD SetDefaultBackColor
 
-METHOD SetDefaultFontType
+   METHOD SetDefaultFontType
 
-METHOD SetFontType
+   METHOD SetFontType
 
-METHOD ShowFormData
+   METHOD ShowFormData
 
-METHOD SizeControl
+   METHOD SizeControl
 
-METHOD Snap
+   METHOD Snap
 
-METHOD StatPropEvents
+   METHOD StatPropEvents
 
-METHOD SwapArray
+   METHOD SwapArray
 
-METHOD TabProperties
+   METHOD TabProperties
 
-METHOD ValCellPos
+   METHOD ValCellPos
 
-METHOD ValGlobalPos
+   METHOD ValGlobalPos
 
-METHOD VerifyBar
+   METHOD VerifyBar
 
 ENDCLASS
 
@@ -18520,4 +18520,3 @@ HB_FUNC( INTERACTIVEMOVEHANDLE )
    /*
    * EOF
    */
-

@@ -981,4 +981,3 @@ FUNCTION BackupDb()
 
    #include 'SqlEdit.Prg'
    #include 'SqlBrowse.Prg'
-

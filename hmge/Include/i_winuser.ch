@@ -4,44 +4,44 @@
  Copyright 2002-2010 Roberto Lopez <harbourminigui@gmail.com>
  http://harbourminigui.googlepages.com/
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of Harbour Minigui.
 
- The exception is that, if you link the Harbour Minigui library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the Harbour Minigui library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  Harbour-Minigui library code into it.
 
  Parts of this project are based upon:
 
-	"Harbour GUI framework for Win32"
- 	Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
- 	Copyright 2001 Antonio Linares <alinares@fivetech.com>
-	www - http://harbour-project.org
+   "Harbour GUI framework for Win32"
+    Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+    Copyright 2001 Antonio Linares <alinares@fivetech.com>
+   www - http://harbour-project.org
 
-	"Harbour Project"
-	Copyright 1999-2017, http://harbour-project.org/
+   "Harbour Project"
+   Copyright 1999-2017, http://harbour-project.org/
 
-	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   "WHAT32"
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
-	"HWGUI"
-  	Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
+   "HWGUI"
+     Copyright 2001-2015 Alexander S.Kresin <alex@belacy.ru>
 
 ---------------------------------------------------------------------------*/
 
@@ -53,58 +53,58 @@
 #endif /* WINVER */
 
 // WM_* definitions
-#define WM_CREATE	   1
+#define WM_CREATE      1
 #define WM_DESTROY         2
 #define WM_MOVE            3
-#define WM_SIZE		   5
-#define WM_ACTIVATE	   6
-#define WM_SETFOCUS	   7
-#define WM_KILLFOCUS	   8
+#define WM_SIZE         5
+#define WM_ACTIVATE      6
+#define WM_SETFOCUS      7
+#define WM_KILLFOCUS      8
 #define WM_GETTEXT        13
-#define WM_PAINT	  15
+#define WM_PAINT     15
 #define WM_CLOSE          16
 #define WM_QUERYENDSESSION   17 // 0x0011
-#define WM_QUIT		  18
+#define WM_QUIT        18
 #define WM_ERASEBKGND     20
-#define WM_SHOWWINDOW	  24
-#define WM_ACTIVATEAPP	  28
+#define WM_SHOWWINDOW     24
+#define WM_ACTIVATEAPP     28
 #define WM_MOUSEACTIVATE  33
 #define WM_GETMINMAXINFO  36 // 0x024
-#define WM_NEXTDLGCTL	  40
+#define WM_NEXTDLGCTL     40
 #define WM_DRAWITEM       43
 #define WM_MEASUREITEM    44
-#define WM_VKEYTOITEM	  46
+#define WM_VKEYTOITEM     46
 
 #define WM_WINDOWPOSCHANGING  70
 #define WM_WINDOWPOSCHANGED   71
 
-#define WM_NOTIFY	  78
+#define WM_NOTIFY     78
 #define WM_HELP           83
-#define WM_CONTEXTMENU	 123
+#define WM_CONTEXTMENU    123
 #define WM_NCPAINT       133
 #define WM_NCACTIVATE    134
-#define WM_GETDLGCODE	 135
+#define WM_GETDLGCODE    135
 #define WM_NCLBUTTONUP   162
 #define WM_NCLBUTTONDOWN 161
-#define WM_KEYDOWN	 256
+#define WM_KEYDOWN    256
 #define WM_KEYUP         257
 #define WM_CHAR          258
-#define WM_SYSKEYDOWN	 260
-#define WM_INITDIALOG	 272
+#define WM_SYSKEYDOWN    260
+#define WM_INITDIALOG    272
 #define WM_COMMAND       273 // 0x0111
-//#define WM_SYSCOMMAND	 274
-#define WM_TIMER	 275
-#define WM_HSCROLL	 276
+//#define WM_SYSCOMMAND    274
+#define WM_TIMER    275
+#define WM_HSCROLL    276
 #define WM_VSCROLL       277 // 0x0115
 #define WM_MENUSELECT           287
 #define WM_MENUCHAR             0x0120
 #define WM_INITMENUPOPUP        279 // 0x0117
 #define WM_UNINITMENUPOPUP      293 // 0x0125
 #define WM_CTLCOLORMSGBOX       306
-#define WM_CTLCOLOREDIT	        307
-#define WM_CTLCOLORLISTBOX	308
-#define WM_CTLCOLORBTN	        309
-#define WM_CTLCOLORDLG	        310
+#define WM_CTLCOLOREDIT           307
+#define WM_CTLCOLORLISTBOX   308
+#define WM_CTLCOLORBTN           309
+#define WM_CTLCOLORDLG           310
 #define WM_CTLCOLORSCROLLBAR    311
 #define WM_CTLCOLORSTATIC       312
 #define WM_MOUSEMOVE     512 // 0x0200
@@ -118,10 +118,10 @@
 #define WM_MOUSEWHEEL    522 // 0x020a
 #define WM_MOUSEHOVER    673 // 0x02A1
 #define WM_MOUSELEAVE    675 // 0x02A3
-#define WM_SIZING	 532
-#define WM_MOVING	 534
+#define WM_SIZING    532
+#define WM_MOVING    534
 #define WM_ENTERSIZEMOVE 561
-#define WM_EXITSIZEMOVE	 562
+#define WM_EXITSIZEMOVE    562
 #define WM_DROPFILES     563 // 0x0233
 
 #define WM_CUT           768
@@ -133,7 +133,7 @@
 
 // User-defined WM_*
 #ifndef WM_USER
-#define WM_USER		1024 // 0x0400
+#define WM_USER      1024 // 0x0400
 #endif /* WM_USER */
 #define CBEM_SETIMAGELIST  (WM_USER + 2)
 
@@ -235,9 +235,9 @@
 #define WS_CLIPCHILDREN 0x02000000
 #define WS_CLIPSIBLINGS 0x04000000
 #define WS_DISABLED     0x08000000
-#define WS_VISIBLE	0x10000000
+#define WS_VISIBLE   0x10000000
 #define WS_MINIMIZE     0x20000000
-#define WS_CHILD	0x40000000
+#define WS_CHILD   0x40000000
 #define WS_POPUP        0x80000000
 //
 #define WS_MAXIMIZEBOX  0x00010000
@@ -451,7 +451,7 @@
 
 // Button styles
 #define BS_PUSHBUTTON           0
-#define BS_DEFPUSHBUTTON	1
+#define BS_DEFPUSHBUTTON   1
 #define BS_CHECKBOX             2
 #define BS_AUTOCHECKBOX         3
 #define BS_RADIOBUTTON          4
@@ -459,7 +459,7 @@
 #define BS_AUTO3STATE           6
 #define BS_GROUPBOX             7
 #define BS_USERBUTTON           8
-#define BS_AUTORADIOBUTTON	9
+#define BS_AUTORADIOBUTTON   9
 #define BS_OWNERDRAW           11
 #define BS_LEFTTEXT            32
 #define BS_TEXT                 0
@@ -477,30 +477,30 @@
 #define BS_FLAT             32768
 #define BS_RIGHTBUTTON      BS_LEFTTEXT
 
-#define LVN_BEGINDRAG	    (-109)
-#define GWL_STYLE	    (-16)
+#define LVN_BEGINDRAG       (-109)
+#define GWL_STYLE       (-16)
 #define GWL_EXSTYLE         (-20)
 
-#define CBN_EDITCHANGE	5
+#define CBN_EDITCHANGE   5
 #define CBN_DROPDOWN    7
 #define CBN_CLOSEUP     8
 
-#define SIZE_MAXHIDE	4
-#define SIZE_MAXIMIZED	2
-#define SIZEFULLSCREEN	2
-#define SIZE_MAXSHOW	3
-#define SIZE_MINIMIZED	1
-#define SIZEICONIC	1
-#define SIZE_RESTORED	0
-#define SIZENORMAL	0
+#define SIZE_MAXHIDE   4
+#define SIZE_MAXIMIZED   2
+#define SIZEFULLSCREEN   2
+#define SIZE_MAXSHOW   3
+#define SIZE_MINIMIZED   1
+#define SIZEICONIC   1
+#define SIZE_RESTORED   0
+#define SIZENORMAL   0
 
 #ifndef __HMG__
-#define TRANSPARENT	1
-#define OPAQUE		2
+#define TRANSPARENT   1
+#define OPAQUE      2
 #endif
 #define LVN_GETDISPINFO (-150)
-#define EN_MSGFILTER	1792
-#define DLGC_WANTCHARS	128
+#define EN_MSGFILTER   1792
+#define DLGC_WANTCHARS   128
 #define DLGC_WANTMESSAGE    4
 
 #define MCN_FIRST           -750
@@ -518,94 +518,94 @@
 #define SB_CTL              2
 #define SB_BOTH             3
 
-#define SB_LINEUP		0
-#define SB_LINEDOWN		1
-#define SB_LINELEFT		0
-#define SB_LINERIGHT		1
-#define SB_PAGEUP		2
-#define SB_PAGEDOWN		3
-#define SB_PAGELEFT		2
-#define SB_PAGERIGHT		3
-#define SB_THUMBPOSITION	4
-#define SB_THUMBTRACK		5
-#define SB_ENDSCROLL		8
-#define SB_LEFT			6
-#define SB_RIGHT		7
-#define SB_TOP			6
-#define SB_BOTTOM		7
+#define SB_LINEUP      0
+#define SB_LINEDOWN      1
+#define SB_LINELEFT      0
+#define SB_LINERIGHT      1
+#define SB_PAGEUP      2
+#define SB_PAGEDOWN      3
+#define SB_PAGELEFT      2
+#define SB_PAGERIGHT      3
+#define SB_THUMBPOSITION   4
+#define SB_THUMBTRACK      5
+#define SB_ENDSCROLL      8
+#define SB_LEFT         6
+#define SB_RIGHT      7
+#define SB_TOP         6
+#define SB_BOTTOM      7
 
-#define TVN_SELCHANGEDW	(-451)
+#define TVN_SELCHANGEDW   (-451)
 #define TVN_SELCHANGED TVN_SELCHANGEDA
-#define TVN_SELCHANGEDA	(-402)
+#define TVN_SELCHANGEDA   (-402)
 
 // define id for TaskBar
 #define ID_TASKBAR      0
 
-#define BN_CLICKED	0
-#define LBN_KILLFOCUS	5
-#define LBN_SETFOCUS	4
-#define CBN_KILLFOCUS	4
-#define CBN_SETFOCUS	3
-#define BN_KILLFOCUS	7
-#define BN_SETFOCUS	6
-#define LVN_KEYDOWN	(-155)
-#define LVN_COLUMNCLICK	(-108)
-#define LBN_DBLCLK	2
-#define TCN_SELCHANGE	(-551)
-#define TCN_SELCHANGING	(-552)
-#define DTN_FIRST	(-760)
+#define BN_CLICKED   0
+#define LBN_KILLFOCUS   5
+#define LBN_SETFOCUS   4
+#define CBN_KILLFOCUS   4
+#define CBN_SETFOCUS   3
+#define BN_KILLFOCUS   7
+#define BN_SETFOCUS   6
+#define LVN_KEYDOWN   (-155)
+#define LVN_COLUMNCLICK   (-108)
+#define LBN_DBLCLK   2
+#define TCN_SELCHANGE   (-551)
+#define TCN_SELCHANGING   (-552)
+#define DTN_FIRST   (-760)
 #define DTN_DATETIMECHANGE (DTN_FIRST+1)
 
-#define TB_LINEUP		0
-#define TB_LINEDOWN		1
+#define TB_LINEUP      0
+#define TB_LINEDOWN      1
 #define TB_PAGEUP               2
 #define TB_PAGEDOWN             3
-#define TB_THUMBPOSITION	4
-#define TB_THUMBTRACK		5
+#define TB_THUMBPOSITION   4
+#define TB_THUMBTRACK      5
 #define TB_TOP                  6
 #define TB_BOTTOM               7
-#define TB_ENDTRACK		8
-#define TB_AUTOSIZE		1057
+#define TB_ENDTRACK      8
+#define TB_AUTOSIZE      1057
 
 // StatusBar Control
 #define SB_SETPARTS             (WM_USER+4)
 #define SB_GETPARTS             (WM_USER+6)
 
-#define CBN_SELCHANGE		1
+#define CBN_SELCHANGE      1
 #define CBN_SELENDCANCEL        10
-#define LVN_ITEMCHANGED		(-101)
-#define LBN_SELCHANGE		1
+#define LVN_ITEMCHANGED      (-101)
+#define LBN_SELCHANGE      1
 
-#define EN_SETFOCUS		256
-#define EN_KILLFOCUS		512
-#define EN_CHANGE       	768
-#define EN_UPDATE       	1024
-#define EN_SELCHANGE    	1794
-#define EN_DRAGDROPDONE 	1804
-#define EN_VSCROLL      	1538
+#define EN_SETFOCUS      256
+#define EN_KILLFOCUS      512
+#define EN_CHANGE          768
+#define EN_UPDATE          1024
+#define EN_SELCHANGE       1794
+#define EN_DRAGDROPDONE    1804
+#define EN_VSCROLL         1538
 
 /*
  * Edit Control Messages
  */
-#define EM_SETMODIFY		185
-#define EM_GETLINE		196
-#define EM_SETSEL		177
-#define EM_GETSEL		176
-#define EM_LIMITTEXT		197
-#define EM_UNDO			199
-#define EM_SETREADONLY		207
-#define EM_GETLIMITTEXT		213
-#define EM_SETBKGNDCOLOR	1091
+#define EM_SETMODIFY      185
+#define EM_GETLINE      196
+#define EM_SETSEL      177
+#define EM_GETSEL      176
+#define EM_LIMITTEXT      197
+#define EM_UNDO         199
+#define EM_SETREADONLY      207
+#define EM_GETLIMITTEXT      213
+#define EM_SETBKGNDCOLOR   1091
 #define EM_SCROLLCARET          0x00B7
 
-#define MK_LBUTTON		1
+#define MK_LBUTTON      1
 
 //#define PBM_SETRANGE          (WM_USER+1)
 #define PBM_SETPOS              (WM_USER+2)
 #define PBM_GETRANGE            (WM_USER+7)
 #define PBM_GETPOS              (WM_USER+8)
 
-#define TTN_NEEDTEXT		(-520)
+#define TTN_NEEDTEXT      (-520)
 
 // System metrics
 #define SM_CXFULLSCREEN         16
@@ -673,8 +673,8 @@
 #define TBS_REVERSED        512
 
 // Toolbutton notifications
-#define	TBN_FIRST		(-700)
-#define TBN_GETBUTTONINFO	(TBN_FIRST-0)
+#define   TBN_FIRST      (-700)
+#define TBN_GETBUTTONINFO   (TBN_FIRST-0)
 #define TBN_BEGINDRAG           (TBN_FIRST-1)
 #define TBN_ENDDRAG             (TBN_FIRST-2)
 #define TBN_BEGINADJUST         (TBN_FIRST-3)
@@ -684,16 +684,16 @@
 #define TBN_QUERYDELETE         (TBN_FIRST-7)
 #define TBN_TOOLBARCHANGE       (TBN_FIRST-8)
 #define TBN_CUSTHELP            (TBN_FIRST-9)
-#define TBN_DROPDOWN		(TBN_FIRST-10)
+#define TBN_DROPDOWN      (TBN_FIRST-10)
 #define TBN_DELETINGBUTTON      (TBN_FIRST-15)
 
-#define TBN_GETINFOTIPA		(TBN_FIRST-18)
-#define TBN_GETINFOTIPW		(TBN_FIRST-19)
-#define TBN_GETINFOTIP		TBN_GETINFOTIPA
+#define TBN_GETINFOTIPA      (TBN_FIRST-18)
+#define TBN_GETINFOTIPW      (TBN_FIRST-19)
+#define TBN_GETINFOTIP      TBN_GETINFOTIPA
 
-#define TBN_INITCUSTOMIZE	(TBN_FIRST-23)
+#define TBN_INITCUSTOMIZE   (TBN_FIRST-23)
 
-#define TBNRF_HIDEHELP		0x00000001
+#define TBNRF_HIDEHELP      0x00000001
 
 // Static Control Mesages
 #define STM_SETICON         0x0170

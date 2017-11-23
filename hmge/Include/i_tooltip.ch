@@ -104,11 +104,11 @@
 #translate IsToolTipActive        => SetToolTipActivate ()
 
 #xcommand ADD TOOLTIPICON <icon> WITH <dummy:MESSAGE,TITLE> <message> <dummy2:TO,OF> <form> ;
-   => ; 
+   => ;
    SendMessageString( GetFormToolTipHandle (<"form">), TTM_SETTITLE, <icon>, <message> )
 
 #xcommand ADD TOOLTIPICON <icon:ERROR,ERROR_LARGE,INFO,INFO_LARGE,WARNING,WARNING_LARGE> WITH <dummy:MESSAGE,TITLE> <message> <dummy2:TO,OF> <form> ;
-   => ; 
+   => ;
    SendMessageString( GetFormToolTipHandle (<"form">), TTM_SETTITLE, TTI_<icon>, <message> )
 
 #xcommand CLEAR TOOLTIPICON OF <form> ;

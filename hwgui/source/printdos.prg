@@ -44,40 +44,40 @@ CLASS PrintDos
    DATA nEndPage init 0
    DATA nCopy init 1
 
-METHOD New( oPorta ) CONSTRUCTOR
+   METHOD New( oPorta ) CONSTRUCTOR
 
-METHOD Say( oPRow, oPCol, oTexto, oPicture )
+   METHOD Say( oPRow, oPCol, oTexto, oPicture )
 
-METHOD SetCols( nPRow, nPCol )
+   METHOD SetCols( nPRow, nPCol )
 
-METHOD gWrite( oText )
+   METHOD gWrite( oText )
 
-METHOD NewLine()
+   METHOD NewLine()
 
-METHOD Eject()
+   METHOD Eject()
 
-METHOD Compress()
+   METHOD Compress()
 
-METHOD Double()
+   METHOD Double()
 
-METHOD DesCompress()
+   METHOD DesCompress()
 
-METHOD Bold()       //Added by  por Fernando Athayde
+   METHOD Bold()       //Added by  por Fernando Athayde
 
-METHOD UnBold()     //Added by  por Fernando Athayde
+   METHOD UnBold()     //Added by  por Fernando Athayde
 
-METHOD Comando( oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
+   METHOD Comando( oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
       oComm8, oComm9, oComm10 )
 
-METHOD SetPrc( x, y )
+   METHOD SetPrc( x, y )
 
-METHOD PrinterFile( fName )
+   METHOD PrinterFile( fName )
 
-METHOD TxttoGraphic( fName, osize, oPreview )
+   METHOD TxttoGraphic( fName, osize, oPreview )
 
-METHOD Preview( fname, cTitle )
+   METHOD Preview( fname, cTitle )
 
-METHOD END()
+   METHOD END()
 
 ENDCLASS
 
@@ -666,4 +666,3 @@ HB_FUNC( AFILLTEXT )
 }
 
 #PRAGMA ENDDUMP
-

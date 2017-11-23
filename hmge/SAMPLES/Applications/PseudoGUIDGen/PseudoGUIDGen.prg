@@ -85,4 +85,3 @@ FUNCTION MsgAbout()
       "Author: Christian T. Kurowski <xharbour@wp.pl>" + CRLF + CRLF + ;
       PadC("This program is Freeware!", 46) + CRLF + ;
       PadC("Copying is allowed!", 50), 'About' )
-

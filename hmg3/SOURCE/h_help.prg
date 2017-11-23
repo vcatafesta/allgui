@@ -105,4 +105,3 @@ PROCEDURE _hmg_DisplayHelpTopic ( nTopic , nMet)
    ENDIF
 
    RETURN
-

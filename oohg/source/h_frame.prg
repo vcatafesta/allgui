@@ -58,11 +58,11 @@ CLASS TFrame FROM TControl
    DATA nHeight   INIT 140
    DATA TabHandle INIT 0
 
-METHOD Caption SETGET
+   METHOD Caption SETGET
 
-METHOD Define
+   METHOD Define
 
-METHOD Events_Color
+   METHOD Events_Color
 
    EMPTY( _OOHG_AllVars )
 
@@ -197,4 +197,3 @@ HB_FUNC( INITFRAME )
 }
 
 #pragma ENDDUMP
-

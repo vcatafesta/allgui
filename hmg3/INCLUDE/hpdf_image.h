@@ -53,7 +53,6 @@ HPDF_Image_LoadRawImage  (HPDF_MMgr          mmgr,
                           HPDF_UINT          height,
                           HPDF_ColorSpace    color_space);
 
-
 HPDF_Image
 HPDF_Image_LoadRawImageFromMem  (HPDF_MMgr          mmgr,
                                  const HPDF_BYTE   *buf,
@@ -63,10 +62,8 @@ HPDF_Image_LoadRawImageFromMem  (HPDF_MMgr          mmgr,
                                  HPDF_ColorSpace    color_space,
                                  HPDF_UINT          bits_per_component);
 
-
 HPDF_BOOL
 HPDF_Image_Validate (HPDF_Image  image);
-
 
 HPDF_STATUS
 HPDF_Image_SetMask (HPDF_Image   image,
@@ -85,4 +82,3 @@ HPDF_Image_SetRenderingIntent  (HPDF_Image   image,
 #endif /* __cplusplus */
 
 #endif /* _HPDF_XOBJECTS_H */
-

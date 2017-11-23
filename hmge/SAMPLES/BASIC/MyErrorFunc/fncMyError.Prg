@@ -66,4 +66,3 @@ STATIC FUNCTION MyErrorMessage( oError )
    ENDCASE
 
    RETURN cMessage
-

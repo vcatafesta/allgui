@@ -57,4 +57,3 @@ FUNCTION MyWndEvents( hWnd, message, wParam, lParam )
    ENDIF
 
    RETURN result
-

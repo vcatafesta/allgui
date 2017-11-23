@@ -85,4 +85,3 @@ PROCEDURE SomeError()
    ASSIGN Var2 := Var1 + 1  // Assignment error
 
    RETURN
-

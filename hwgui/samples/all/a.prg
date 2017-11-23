@@ -584,4 +584,3 @@ FUNCTION RRectangle()
    oDlg:Activate()
 
    RETURN NIL
-

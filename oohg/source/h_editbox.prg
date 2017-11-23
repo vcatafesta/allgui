@@ -62,13 +62,13 @@ CLASS TEdit FROM TText
    DATA nWidth           INIT 120
    DATA nHeight          INIT 240
 
-METHOD Define
+   METHOD Define
 
-METHOD LookForKey
+   METHOD LookForKey
 
-METHOD Events_Command
+   METHOD Events_Command
 
-METHOD Events_Enter   BLOCK { || Nil }
+   METHOD Events_Enter   BLOCK { || Nil }
 
    EMPTY( _OOHG_AllVars )
 
@@ -129,4 +129,3 @@ METHOD Events_Command( wParam ) CLASS TEdit
    ENDIF
 
    RETURN ::Super:Events_Command( wParam )
-

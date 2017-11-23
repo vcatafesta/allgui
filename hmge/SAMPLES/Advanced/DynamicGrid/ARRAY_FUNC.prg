@@ -129,4 +129,3 @@ FUNCTION ARRAY_GRID ( cControlName, cParentForm, nAction, aGridData )
    ENDCASE
 
    RETURN aGridData
-

@@ -431,4 +431,3 @@ FUNCTION HB_RarCallBackFunc( p1, p2, p3, p4 )
    ENDIF
 
    RETURN result
-

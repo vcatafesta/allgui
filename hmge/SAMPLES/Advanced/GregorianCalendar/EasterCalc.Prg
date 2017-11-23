@@ -336,4 +336,3 @@ PROCEDURE MultiMessage(xMessage, cTitle)
    ENDIF
 
    RETURN
-

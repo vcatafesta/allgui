@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_TimePicker.c  
+ HMG Source File --> c_TimePicker.c
 
- Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2016 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -16,12 +16,12 @@
 ----------------------------------------------------------------------------*/
 
 //**********************************************
-// I force this file compile in ANSI, because:  
+// I force this file compile in ANSI, because:
 //**********************************************
 
 // Date/Time Picker format present different behavior with Unicode and ANSI
 // DateTime_SetFormat(hWnd, cTextFormat) NOT WORK IN UNICODE (is a Windows bug ???)
-// Macro DateTime_SetFormat() returns TRUE (success) with ANSI and FALSE (failed) with Unicode, with same parameters. GetLastError() is always 0. 
+// Macro DateTime_SetFormat() returns TRUE (success) with ANSI and FALSE (failed) with Unicode, with same parameters. GetLastError() is always 0.
 // SendMessage (DTM_SETFORMAT) fails too.
 
 /*
@@ -39,22 +39,18 @@
 #endif
 */
 
-
 // #include "SET_COMPILE_HMG_UNICODE.ch"   // force this file compile in ANSI
 #include "HMG_UNICODE.h"
-
 
 //#define _WIN32_IE      0x0500
 //#define HB_OS_WIN_32_USED
 //#define _WIN32_WINNT   0x0400
-
 
 #include <shlobj.h>
 #include <windows.h>
 #include <commctrl.h>
 #include "hbapi.h"
 #include "tchar.h"
-
 
 HB_FUNC ( INITTIMEPICK )
 {
@@ -68,7 +64,7 @@ HB_FUNC ( INITTIMEPICK )
    InitCommonControlsEx(&icex);
 
    hWnd = (HWND) HMG_parnl (1);
- 
+
    if (hb_parl (6) == TRUE)
        Style = Style | DTS_SHOWNONE;
 
@@ -78,13 +74,12 @@ HB_FUNC ( INITTIMEPICK )
    if (hb_parl (8) == FALSE)
       Style = Style | WS_TABSTOP ;
 
-   hWndControl = CreateWindowEx ( WS_EX_CLIENTEDGE , DATETIMEPICK_CLASS /*_TEXT("SysDateTimePick32")*/ , 
-                                 TEXT(""), Style | WS_CHILD | DTS_TIMEFORMAT | DTS_UPDOWN, 
+   hWndControl = CreateWindowEx ( WS_EX_CLIENTEDGE , DATETIMEPICK_CLASS /*_TEXT("SysDateTimePick32")*/ ,
+                                 TEXT(""), Style | WS_CHILD | DTS_TIMEFORMAT | DTS_UPDOWN,
                                  hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hWnd, NULL, GetModuleHandle(NULL), NULL);
-                                                                  
+
    HMG_retnl ((LONG_PTR) hWndControl);
 }
-
 
 HB_FUNC ( SETTIMEPICK )
 {
@@ -104,7 +99,6 @@ HB_FUNC ( SETTIMEPICK )
    hb_retl (DateTime_SetSystemtime (hWnd, GDT_VALID, (LPARAM) &SystemTime));
 }
 
-
 HB_FUNC ( GETTIMEPICK )
 {
    SYSTEMTIME SystemTime;
@@ -122,13 +116,11 @@ HB_FUNC ( GETTIMEPICK )
    }
 }
 
-
 HB_FUNC ( SETTIMEPICKNONE )
 {
    HWND hWnd = (HWND) HMG_parnl (1);
    hb_retl (DateTime_SetSystemtime (hWnd, GDT_NONE, NULL));
 }
-
 
 HB_FUNC ( DATETIME_SETFORMAT )
 {
@@ -136,4 +128,3 @@ HB_FUNC ( DATETIME_SETFORMAT )
    hb_retl (DateTime_SetFormat(hWnd, (LPCTSTR) HMG_parc (2)));
    // hb_retl (DateTime_SetFormat(hWnd, _TEXT("hh:mm:ss tt")));   // NOT WORK WITH UNICODE !!!
 }
-

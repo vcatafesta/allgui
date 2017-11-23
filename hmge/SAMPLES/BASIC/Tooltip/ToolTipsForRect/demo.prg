@@ -128,4 +128,3 @@ STATIC PROCEDURE _ReleaseToolTip()
    AEval( m_aTip, {|e| ReleaseControl( e )} )
 
    RETURN
-

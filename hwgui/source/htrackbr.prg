@@ -28,21 +28,21 @@ CLASS VAR winclass INIT "msctls_trackbar32"
    DATA nHigh
    DATA hCursor
 
-METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;
       lVertical, TickStyle, TickMarks )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD onEvent( msg, wParam, lParam )
+   METHOD onEvent( msg, wParam, lParam )
 
-METHOD Init()
+   METHOD Init()
 
-METHOD SetValue( nValue )
+   METHOD SetValue( nValue )
 
-METHOD GetValue()
+   METHOD GetValue()
 
-METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
+   METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
 
 ENDCLASS
 
@@ -189,4 +189,3 @@ HB_FUNC ( HWG_TRACKBARSETRANGE )
 }
 
 #pragma ENDDUMP
-

@@ -62,27 +62,24 @@
 
 CLASS THttp
 
-METHOD New()
+   METHOD New()
 
-METHOD Connect( cAddress, nPort )
+   METHOD Connect( cAddress, nPort )
+   METHOD Close()
 
-METHOD Close()
+   METHOD SetProxy( cProxy, nPort, cUser, cPwd )
 
-METHOD SetProxy( cProxy, nPort, cUser, cPwd )
+   METHOD SetUser( cUser, cPwd )
 
-METHOD SetUser( cUser, cPwd )
+   METHOD Get( cPage, aPair )
+   METHOD Post( cPage, aPair )
 
-METHOD Get( cPage, aPair )
+   METHOD SetUserAgent( cAgent )
+   METHOD GetUserAgent()
 
-METHOD Post( cPage, aPair )
+   METHOD SetReceiveTimeout( nMilliSec )
 
-METHOD SetUserAgent( cAgent )
-
-METHOD GetUserAgent()
-
-METHOD SetReceiveTimeout( nMilliSec )
-
-METHOD Value2String( aPair )
+   METHOD Value2String( aPair )
 
    CLASSDATA oSocket       HIDDEN
    CLASSDATA cProxyAddress HIDDEN
@@ -397,4 +394,3 @@ METHOD SetReceiveTimeout( nMilliSec ) CLASS THttp
    ::oSocket:SetReceiveTimeout( nMilliSec )
 
    RETURN NIL
-

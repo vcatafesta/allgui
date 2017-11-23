@@ -15,4 +15,3 @@
 #define HBXML_TYPE_COMMENT        2
 #define HBXML_TYPE_CDATA          3
 #define HBXML_TYPE_PI             4
-

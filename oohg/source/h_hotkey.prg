@@ -206,11 +206,11 @@ CLASS THotKey FROM TControl
    DATA nMod      INIT 0
    DATA OnClick
 
-METHOD Define
+   METHOD Define
 
-METHOD Enabled      SETGET
+   METHOD Enabled      SETGET
 
-METHOD Release
+   METHOD Release
 
    EMPTY( _OOHG_AllVars )
 
@@ -271,4 +271,3 @@ METHOD Release() CLASS THotKey
    ::Enabled := .F.
 
    RETURN ::Super:Release()
-

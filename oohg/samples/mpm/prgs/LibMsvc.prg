@@ -157,4 +157,3 @@ PROCEDURE BuildLib5( ProjectName )  // Library Visual C
    Procesando(2)
 
    RETURN
-

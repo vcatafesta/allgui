@@ -130,4 +130,3 @@ FUNCTION ToggleMarquee( oProg, oBut )
    /*
    * EOF
    */
-

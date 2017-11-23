@@ -96,4 +96,3 @@ PROC Main()
    RETU // Main()
 
    #include "combosearchbox.prg"
-

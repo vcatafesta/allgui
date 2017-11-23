@@ -315,4 +315,3 @@ FUNCTION HMG_DbfToExcel( cFieldList, aHeader, bFor, bWhile, nNext, nRec, lRest )
    oExcel:Visible := .T.
 
    RETURN .T.
-

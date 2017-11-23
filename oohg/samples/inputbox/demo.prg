@@ -53,4 +53,3 @@ PROCEDURE TClick2
    MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 , 'Timeout Value' ) )
 
    RETURN
-

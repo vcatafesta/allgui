@@ -53,4 +53,3 @@ PROCEDURE Main()
 STATIC FUNCTION Save()
 
    RETURN PutFile( { {'text files','*.txt'} }, 'Save File As', hb_CWD(), ,"test.txt" , , .T. )
-

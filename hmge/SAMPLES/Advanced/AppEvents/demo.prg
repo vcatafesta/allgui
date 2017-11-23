@@ -118,4 +118,3 @@ STATIC PROCEDURE GetInfo( hwnd, lOnce )
    MsgInfo( cMsgs, iif( lOnce, "Once", "On" ) )
 
    RETURN
-

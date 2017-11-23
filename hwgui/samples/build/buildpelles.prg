@@ -650,4 +650,3 @@ FUNCTION BuildPoMake()
    fClose(oName)
 
    RETURN NIL
-

@@ -220,4 +220,3 @@ PROCEDURE ReadFromClient( oSocket, aClients, oWnd )
 
    #include "stream\TStream.prg"
    #include "stream\TStreamSocket.prg"
-

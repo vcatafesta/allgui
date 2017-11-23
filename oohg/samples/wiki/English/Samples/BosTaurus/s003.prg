@@ -149,4 +149,3 @@ PROCEDURE Proc_ON_PAINT( hBitmap1, hBitmap2 )
    /*
    * EOF
    */
-

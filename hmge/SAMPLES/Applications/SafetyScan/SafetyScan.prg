@@ -1277,4 +1277,3 @@ HB_FUNC( ADAYS )
 #endif
 
 #pragma ENDDUMP
-

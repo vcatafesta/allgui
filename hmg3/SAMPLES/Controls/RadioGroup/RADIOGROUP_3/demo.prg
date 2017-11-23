@@ -80,4 +80,3 @@ FUNCTION LogicalArrayToString ( lArray )
    NEXT I
 
    RETURN RetVal + ' }'
-

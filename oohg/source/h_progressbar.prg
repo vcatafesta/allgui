@@ -61,31 +61,31 @@ CLASS TProgressBar FROM TControl
    DATA nVelocity   INIT 30
    DATA lRunning    INIT .F.
 
-METHOD Define
+   METHOD Define
 
-METHOD Value               SETGET
+   METHOD Value               SETGET
 
-METHOD RangeMin            SETGET
+   METHOD RangeMin            SETGET
 
-METHOD RangeMax            SETGET
+   METHOD RangeMax            SETGET
 
-METHOD FontColor           SETGET
+   METHOD FontColor           SETGET
 
-METHOD BackColor           SETGET
+   METHOD BackColor           SETGET
 
-METHOD SetStyleMarquee
+   METHOD SetStyleMarquee
 
-METHOD SetStyleNormal
+   METHOD SetStyleNormal
 
-METHOD IsStyleMarquee
+   METHOD IsStyleMarquee
 
-METHOD IsStyleNormal
+   METHOD IsStyleNormal
 
-METHOD StartMarquee
+   METHOD StartMarquee
 
-METHOD StopMarquee
+   METHOD StopMarquee
 
-METHOD IsMarqueeRunning
+   METHOD IsMarqueeRunning
 
    EMPTY( _OOHG_AllVars )
 
@@ -252,4 +252,3 @@ METHOD BackColor( uValue ) CLASS TProgressBar
    ENDIF
 
    RETURN ::Super:BackColor
-

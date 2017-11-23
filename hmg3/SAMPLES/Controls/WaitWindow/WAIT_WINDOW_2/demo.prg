@@ -29,4 +29,3 @@ PROCEDURE test1()
    WAIT WINDOW "Press a key..."
 
    RETURN
-

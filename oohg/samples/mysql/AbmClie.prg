@@ -304,4 +304,3 @@ STATIC FUNCTION Verificaciones
    ENDIF
 
    RETURN .t.
-

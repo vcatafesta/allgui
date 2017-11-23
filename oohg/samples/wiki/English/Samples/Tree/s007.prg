@@ -128,4 +128,3 @@ FUNCTION AuxWin_OnDrop( oOrigin, oTarget )
    /*
    * EOF
    */
-

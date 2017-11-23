@@ -230,4 +230,3 @@ FUNCTION ReplaceIndex(oPos)
    oBrowse:Refresh()
 
    RETURN NIL
-

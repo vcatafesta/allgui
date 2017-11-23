@@ -88,4 +88,3 @@ STATIC FUNCTION EnableFrame()
    NEXT
 
    RETURN NIL
-

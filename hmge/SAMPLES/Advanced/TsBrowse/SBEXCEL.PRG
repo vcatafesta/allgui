@@ -237,4 +237,3 @@ FUNCTION fExcel( oBrw, cFile, cTitle )
 STATIC FUNCTION fSaveFile(cFile)
 
    RETURN  PutFile ( {{"Excel Book (*.xls)" ,"*.xls"}} ,"Select the file" ,  , .T. , cFile )
-

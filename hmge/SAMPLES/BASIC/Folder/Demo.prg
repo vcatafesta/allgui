@@ -607,4 +607,3 @@ FUNCTION GetFolderWindowName( hWnd )
    LOCAL i := Ascan ( _HMG_aFormHandles, hWnd )
 
    RETURN IF( i > 0, _HMG_aFormNames[i], "" )
-

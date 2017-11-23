@@ -11158,4 +11158,3 @@ FUNCTION HMG_GetHBSymbols()   // return array -->   { { cSymName1, cSymType1 } ,
    NEXT
 
    RETURN aSym
-

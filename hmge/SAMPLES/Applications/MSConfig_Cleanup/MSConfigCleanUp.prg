@@ -568,4 +568,3 @@ HB_FUNC ( REGENUMVALUE )
 }
 
 #pragma ENDDUMP
-

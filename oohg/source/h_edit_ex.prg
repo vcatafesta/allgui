@@ -2823,4 +2823,3 @@ STATIC FUNCTION ABM2Listado( aImpresoras )
    wndabm2edit.tbbListado.enabled:=.t.
 
    RETURN NIL
-

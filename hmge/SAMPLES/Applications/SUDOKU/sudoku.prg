@@ -530,4 +530,3 @@ FUNCTION NextGame()
    RefreshSudokuGrid()
 
    RETURN NIL
-

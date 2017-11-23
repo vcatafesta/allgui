@@ -453,4 +453,3 @@ FUNCTION Zebra_GetHeight( hZebra, nAnchoLinea, nAltoLinea, iFlags )
    /*
    * EOF
    */
-

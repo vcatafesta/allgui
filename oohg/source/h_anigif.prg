@@ -71,29 +71,29 @@ CLASS TAniGIF FROM TImage
    DATA oTimer                    INIT Nil
    DATA Type                      INIT "ANIGIF" READONLY
 
-METHOD Define
+   METHOD Define
 
-METHOD FrameCount              BLOCK { |Self| Len( ::aPictures ) }
+   METHOD FrameCount              BLOCK { |Self| Len( ::aPictures ) }
 
-METHOD FrameDelay
+   METHOD FrameDelay
 
-METHOD FrameHeight             BLOCK { |Self| ::aInfo[ 3 ] }
+   METHOD FrameHeight             BLOCK { |Self| ::aInfo[ 3 ] }
 
-METHOD FrameWidth              BLOCK { |Self| ::aInfo[ 2 ] }
+   METHOD FrameWidth              BLOCK { |Self| ::aInfo[ 2 ] }
 
-METHOD IsPlaying               BLOCK { |Self| ::oTimer:Enabled }
+   METHOD IsPlaying               BLOCK { |Self| ::oTimer:Enabled }
 
-METHOD Load
+   METHOD Load
 
-METHOD Play                    BLOCK { |Self| ::oTimer:Enabled := ( ::FrameCount > 1 ) }
+   METHOD Play                    BLOCK { |Self| ::oTimer:Enabled := ( ::FrameCount > 1 ) }
 
-METHOD Release
+   METHOD Release
 
-METHOD ShowNextFrame
+   METHOD ShowNextFrame
 
-METHOD Stop                    BLOCK { |Self| ::oTimer:Enabled := .F. }
+   METHOD Stop                    BLOCK { |Self| ::oTimer:Enabled := .F. }
 
-METHOD Version                 BLOCK { |Self| ::aInfo[ 1 ] }
+   METHOD Version                 BLOCK { |Self| ::aInfo[ 1 ] }
 
    HB_SYMBOL_UNUSED( _OOHG_AllVars )
 
@@ -311,4 +311,3 @@ HB_FUNC( SAVERESOURCETOFILE )
 }
 
 #pragma ENDDUMP
-

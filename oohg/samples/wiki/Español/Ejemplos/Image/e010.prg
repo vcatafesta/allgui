@@ -77,4 +77,3 @@ PROCEDURE PrintImage( cTLibrary )
    /*
    * EOF
    */
-

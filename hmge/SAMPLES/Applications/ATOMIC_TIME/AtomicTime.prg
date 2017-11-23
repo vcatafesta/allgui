@@ -574,33 +574,25 @@ INIT PROCEDURE StartSocket
 
 CLASS TSocket
 
-METHOD New()
+   METHOD New()
 
-METHOD Connect( cAddress, nPort )
+   METHOD Connect( cAddress, nPort )
+   METHOD Close()
 
-METHOD Close()
+   METHOD SendString( cString )
+   METHOD ReceiveString()
+   METHOD ReceiveLine()
+   METHOD ReceiveChar()
 
-METHOD SendString( cString )
+   METHOD GetLocalName()    INLINE SocketLocalName()
+   METHOD GetLocalAddress() INLINE SocketLocalAddress()
 
-METHOD ReceiveString()
+   METHOD Bind( cAddress, nPort )
+   METHOD Listen( nClient )
 
-METHOD ReceiveLine()
-
-METHOD ReceiveChar()
-
-METHOD GetLocalName()    INLINE SocketLocalName()
-
-METHOD GetLocalAddress() INLINE SocketLocalAddress()
-
-METHOD Bind( cAddress, nPort )
-
-METHOD Listen( nClient )
-
-METHOD SetReceiveTimeout( nTime )
-
-METHOD SetSendTimeout( nTime )
-
-METHOD SetCallBack( cFuncName )
+   METHOD SetReceiveTimeout( nTime )
+   METHOD SetSendTimeout( nTime )
+   METHOD SetCallBack( cFuncName )
 
    VAR m_hSocket       HIDDEN
    VAR nSendTimeout    HIDDEN INIT -1
@@ -1275,4 +1267,3 @@ HB_FUNC ( GETHOSTBYNAME )
 }
 
 #pragma ENDDUMP
-

@@ -44,27 +44,27 @@ CLASS VAR cPrinterName SHARED  INIT Nil
    DATA   nLeft     INIT 5
    DATA   nRight    INIT 5
 
-METHOD New( cPrinter, cpFrom, cpTo )
+   METHOD New( cPrinter, cpFrom, cpTo )
 
-METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
+   METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder  )
 
-METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder )
+   METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder )
 
-METHOD StartDoc( lPreview, cMetaName )
+   METHOD StartDoc( lPreview, cMetaName )
 
-METHOD NextPage()
+   METHOD NextPage()
 
-METHOD PrintLine( cLine, lNewLine )
+   METHOD PrintLine( cLine, lNewLine )
 
-METHOD PrintText( cText )
+   METHOD PrintText( cText )
 
-METHOD PutCode( cText )
+   METHOD PutCode( cText )
 
-METHOD EndDoc()
+   METHOD EndDoc()
 
-METHOD End()
+   METHOD End()
 
-METHOD SetMetaFile( cMetafile )    INLINE ::oPrinter:cMetafile := cMetafile
+   METHOD SetMetaFile( cMetafile )    INLINE ::oPrinter:cMetafile := cMetafile
 
    HIDDEN:
    DATA lDocStart   INIT .F.
@@ -340,4 +340,3 @@ METHOD End() CLASS HWinPrn
    ::oPrinter:End()
 
    RETURN NIL
-

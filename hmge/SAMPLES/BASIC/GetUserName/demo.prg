@@ -36,4 +36,3 @@ STATIC FUNCTION _GetNames()
    Form1.TextBox2.Value := GetComputerName()
 
    RETURN NIL
-

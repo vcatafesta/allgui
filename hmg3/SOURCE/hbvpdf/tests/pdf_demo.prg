@@ -180,4 +180,3 @@ STATIC FUNCTION cton( cString, nBase ) // this function called only used in pdf_
    NEXT
 
    RETURN n
-

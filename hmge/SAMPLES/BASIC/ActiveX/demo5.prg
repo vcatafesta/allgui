@@ -62,4 +62,3 @@ PROCEDURE Test2()
    Win1.Calendar.XObject:Value := Date() + 7
 
    RETURN
-

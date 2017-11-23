@@ -848,4 +848,3 @@ FUNCTION BT_HMGSetImage (cFormName, cControlName, hBitmap, lReleasePreviousBitma
    ENDIF
 
    RETURN NIL
-

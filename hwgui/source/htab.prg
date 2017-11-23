@@ -29,21 +29,21 @@ CLASS HPage INHERIT HObject
    DATA aItemPos       INIT { }
    DATA Tooltip
 
-METHOD New( cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip )
+   METHOD New( cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip )
 
-METHOD Enable() INLINE ::Enabled( .T. )
+   METHOD Enable() INLINE ::Enabled( .T. )
 
-METHOD Disable() INLINE ::Enabled( .F. )
+   METHOD Disable() INLINE ::Enabled( .F. )
 
-METHOD GetTabText() INLINE hwg_Gettabname( ::oParent:Handle, ::PageOrder - 1 )
+   METHOD GetTabText() INLINE hwg_Gettabname( ::oParent:Handle, ::PageOrder - 1 )
 
-METHOD SetTabText( cText )
+   METHOD SetTabText( cText )
 
-METHOD Refresh() INLINE ::oParent:ShowPage( ::PageOrder )
+   METHOD Refresh() INLINE ::oParent:ShowPage( ::PageOrder )
 
-METHOD Enabled( lEnabled ) SETGET
+   METHOD Enabled( lEnabled ) SETGET
 
-METHOD Setcolor( tcolor, bcolor )
+   METHOD Setcolor( tcolor, bcolor )
 
 ENDCLASS
 
@@ -137,54 +137,54 @@ CLASS VAR winclass   INIT "SysTabControl32"
    DATA TabHeightSize
    DATA internalPaint INIT 0 HIDDEN
 
-METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
+   METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, ;
       bClick, bGetFocus, bLostFocus, bRClick )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Init()
+   METHOD Init()
 
-METHOD AddPage( oPage, cCaption )
+   METHOD AddPage( oPage, cCaption )
 
-METHOD SetTab( n )
+   METHOD SetTab( n )
 
-METHOD StartPage( cname, oDlg, lEnabled, tcolor, bcolor, cTooltip )
+   METHOD StartPage( cname, oDlg, lEnabled, tcolor, bcolor, cTooltip )
 
-METHOD EndPage()
+   METHOD EndPage()
 
-METHOD ChangePage( nPage )
+   METHOD ChangePage( nPage )
 
-METHOD DeletePage( nPage )
+   METHOD DeletePage( nPage )
 
-METHOD HidePage( nPage )
+   METHOD HidePage( nPage )
 
-METHOD ShowPage( nPage )
+   METHOD ShowPage( nPage )
 
-METHOD GetActivePage( nFirst, nEnd )
+   METHOD GetActivePage( nFirst, nEnd )
 
-METHOD Notify( lParam )
+   METHOD Notify( lParam )
 
-METHOD OnEvent( msg, wParam, lParam )
+   METHOD OnEvent( msg, wParam, lParam )
 
-METHOD Refresh( lAll )
+   METHOD Refresh( lAll )
 
-METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
+   METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )
 
-METHOD ShowDisablePage( nPageEnable, nEvent )
+   METHOD ShowDisablePage( nPageEnable, nEvent )
 
-METHOD DisablePage( nPage ) INLINE ::Pages[ nPage ]:disable()
+   METHOD DisablePage( nPage ) INLINE ::Pages[ nPage ]:disable()
 
-METHOD EnablePage( nPage ) INLINE ::Pages[ nPage ]:enable()
+   METHOD EnablePage( nPage ) INLINE ::Pages[ nPage ]:enable()
 
-METHOD SetPaintSizePos( nFlag  )
+   METHOD SetPaintSizePos( nFlag  )
 
-METHOD RedrawControls()
+   METHOD RedrawControls()
 
-METHOD ShowToolTips( lParam )
+   METHOD ShowToolTips( lParam )
 
-METHOD onChange( )
+   METHOD onChange( )
 
    HIDDEN:
    DATA  nActive    INIT 0         // Active Page
@@ -950,15 +950,15 @@ CLASS VAR winclass   INIT "STATIC"
 
    DATA hDC
 
-METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, tColor, bColor )
+   METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, tColor, bColor )
 
-METHOD Activate()
+   METHOD Activate()
 
-METHOD Paint( lpDis )
+   METHOD Paint( lpDis )
 
-METHOD showTextTabs( oPage, aItemPos )
+   METHOD showTextTabs( oPage, aItemPos )
 
-METHOD Refresh() VIRTUAL
+   METHOD Refresh() VIRTUAL
 
 ENDCLASS
 
@@ -1100,4 +1100,3 @@ METHOD showTextTabs( oPage, aItemPos ) CLASS HPaintTab
    ENDIF
 
    RETURN NIL
-

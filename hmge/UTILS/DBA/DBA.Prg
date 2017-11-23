@@ -233,7 +233,6 @@ PROC Main( cOpFName )
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                               PROC DBA_HowTo()
-
                                  LOCA cHowTo := "What is it, how is it."
                                  MsgInfo( cHowTo )
                                  RETU // DBA_HowTo()
@@ -342,4 +341,3 @@ PROC Main( cOpFName )
                                           RETU cRVal // ExeFD2Vrs()
 
                                           *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
-

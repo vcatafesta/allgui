@@ -95,4 +95,3 @@ PROCEDURE CloseTables()
    USE
 
    RETURN
-

@@ -126,4 +126,3 @@ FUNCTION _DefineTimer ( ControlName , ParentForm , Interval , ProcedureName , On
    ENDIF
 
    RETURN lSuccess
-

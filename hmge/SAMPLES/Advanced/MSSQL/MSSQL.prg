@@ -169,4 +169,3 @@ FUNCTION SQL_Disconnect( nConnection )
 FUNCTION SQL_CreateTable( cTable )
 
    RETURN RDDINFO( RDDI_EXECUTE, "CREATE TABLE [dbo].["+cTable+"] ( [DATE] date NULL,  [TIME] varchar(8) NULL,  [TEXT] varchar(30) NULL,  [TYPE] varchar(30) NULL)","SQLMIX")
-

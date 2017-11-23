@@ -203,141 +203,141 @@ CLASS TPRINTBASE
    DATA nvFij                     INIT ( 12 / 1.65 )         READONLY
    DATA nwPen                     INIT 0.1                   READONLY    // pen width in MM, do not exceed 1
 
-METHOD BeginDoc
+   METHOD BeginDoc
 
-METHOD BeginDocX               BLOCK { || NIL }
+   METHOD BeginDocX               BLOCK { || NIL }
 
-METHOD BeginPage
+   METHOD BeginPage
 
-METHOD BeginPageX              BLOCK { || NIL }
+   METHOD BeginPageX              BLOCK { || NIL }
 
-METHOD Codabar
+   METHOD Codabar
 
-METHOD Code128
+   METHOD Code128
 
-METHOD Code3_9
+   METHOD Code3_9
 
-METHOD CondenDos               BLOCK { || NIL }
+   METHOD CondenDos               BLOCK { || NIL }
 
-METHOD CondenDosX              BLOCK { || NIL }
+   METHOD CondenDosX              BLOCK { || NIL }
 
-METHOD Ean13
+   METHOD Ean13
 
-METHOD Ean8
+   METHOD Ean8
 
-METHOD EndDoc
+   METHOD EndDoc
 
-METHOD EndDocX                 BLOCK { || NIL }
+   METHOD EndDocX                 BLOCK { || NIL }
 
-METHOD EndPage
+   METHOD EndPage
 
-METHOD EndPageX                BLOCK { || NIL }
+   METHOD EndPageX                BLOCK { || NIL }
 
-METHOD GetDefPrinter
+   METHOD GetDefPrinter
 
-METHOD GetDefPrinterX          BLOCK { || NIL }
+   METHOD GetDefPrinterX          BLOCK { || NIL }
 
-METHOD Go_Code
+   METHOD Go_Code
 
-METHOD Ind25
+   METHOD Ind25
 
-METHOD Init
+   METHOD Init
 
-METHOD InitX                   BLOCK { || NIL }
+   METHOD InitX                   BLOCK { || NIL }
 
-METHOD Int25
+   METHOD Int25
 
-METHOD Mat25
+   METHOD Mat25
 
-METHOD MaxCol                  INLINE ::nMaxCol
+   METHOD MaxCol                  INLINE ::nMaxCol
 
-METHOD MaxRow                  INLINE ::nMaxRow
+   METHOD MaxRow                  INLINE ::nMaxRow
 
-METHOD NormalDos               BLOCK { || NIL }
+   METHOD NormalDos               BLOCK { || NIL }
 
-METHOD NormalDosX              BLOCK { || NIL }
+   METHOD NormalDosX              BLOCK { || NIL }
 
-METHOD PrintBarcode
+   METHOD PrintBarcode
 
-METHOD PrintBarcodeX           BLOCK { || NIL }
+   METHOD PrintBarcodeX           BLOCK { || NIL }
 
-METHOD PrintData
+   METHOD PrintData
 
-METHOD PrintDataX              BLOCK { || NIL }
+   METHOD PrintDataX              BLOCK { || NIL }
 
-METHOD PrintDos
+   METHOD PrintDos
 
-METHOD PrintImage
+   METHOD PrintImage
 
-METHOD PrintImageX             BLOCK { || NIL }
+   METHOD PrintImageX             BLOCK { || NIL }
 
-METHOD PrintLine
+   METHOD PrintLine
 
-METHOD PrintLineX              BLOCK { || NIL }
+   METHOD PrintLineX              BLOCK { || NIL }
 
-METHOD PrintMode
+   METHOD PrintMode
 
-METHOD PrintModeX              BLOCK { || NIL }
+   METHOD PrintModeX              BLOCK { || NIL }
 
-METHOD PrintRaw
+   METHOD PrintRaw
 
-METHOD PrintRectangle
+   METHOD PrintRectangle
 
-METHOD PrintRectangleX         BLOCK { || NIL }
+   METHOD PrintRectangleX         BLOCK { || NIL }
 
-METHOD PrintRoundRectangle
+   METHOD PrintRoundRectangle
 
-METHOD PrintRoundRectangleX    BLOCK { || NIL }
+   METHOD PrintRoundRectangleX    BLOCK { || NIL }
 
-METHOD Release
+   METHOD Release
 
-METHOD ReleaseX                BLOCK { || NIL }
+   METHOD ReleaseX                BLOCK { || NIL }
 
-METHOD SelPrinter
+   METHOD SelPrinter
 
-METHOD SelPrinterX             BLOCK { || NIL }
+   METHOD SelPrinterX             BLOCK { || NIL }
 
-METHOD SetBarColor
+   METHOD SetBarColor
 
-METHOD SetColor
+   METHOD SetColor
 
-METHOD SetColorX               BLOCK { || NIL }
+   METHOD SetColorX               BLOCK { || NIL }
 
-METHOD SetCpl
+   METHOD SetCpl
 
-METHOD SetDosPort
+   METHOD SetDosPort
 
-METHOD SetFont
+   METHOD SetFont
 
-METHOD SetFontType
+   METHOD SetFontType
 
-METHOD SetFontX                BLOCK { || NIL }
+   METHOD SetFontX                BLOCK { || NIL }
 
-METHOD SetIndentation
+   METHOD SetIndentation
 
-METHOD SetLMargin
+   METHOD SetLMargin
 
-METHOD SetPreviewSize
+   METHOD SetPreviewSize
 
-METHOD SetPreviewSizeX         BLOCK { || NIL }
+   METHOD SetPreviewSizeX         BLOCK { || NIL }
 
-METHOD SetProp
+   METHOD SetProp
 
-METHOD SetRawPrinter
+   METHOD SetRawPrinter
 
-METHOD SetSeparateSheets
+   METHOD SetSeparateSheets
 
-METHOD SetShowErrors
+   METHOD SetShowErrors
 
-METHOD SetTMargin
+   METHOD SetTMargin
 
-METHOD SetUnits
+   METHOD SetUnits
 
-METHOD Sup5
+   METHOD Sup5
 
-METHOD Upca
+   METHOD Upca
 
-METHOD Version                INLINE ::cVersion
+   METHOD Version                INLINE ::cVersion
 
 ENDCLASS
 
@@ -1151,39 +1151,39 @@ METHOD SetRawPrinter( cPrinter ) CLASS TPRINTBASE
 
 CLASS TMINIPRINT FROM TPRINTBASE
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD GetDefPrinterX
+   METHOD GetDefPrinterX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD MaxCol
+   METHOD MaxCol
 
-METHOD MaxRow
+   METHOD MaxRow
 
-METHOD PrintBarcodeX
+   METHOD PrintBarcodeX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImageX
+   METHOD PrintImageX
 
-METHOD PrintLineX
+   METHOD PrintLineX
 
-METHOD PrintRectangleX
+   METHOD PrintRectangleX
 
-METHOD PrintRoundRectangleX
+   METHOD PrintRoundRectangleX
 
-METHOD ReleaseX
+   METHOD ReleaseX
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
-METHOD SetPreviewSizeX
+   METHOD SetPreviewSizeX
 
 ENDCLASS
 
@@ -1856,41 +1856,41 @@ CLASS THBPRINTER FROM TPRINTBASE
 
    DATA oHBPrn                    INIT NIL                   READONLY
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD GetDefPrinterX
+   METHOD GetDefPrinterX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD MaxCol
+   METHOD MaxCol
 
-METHOD MaxRow
+   METHOD MaxRow
 
-METHOD PrintBarcodeX
+   METHOD PrintBarcodeX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImageX
+   METHOD PrintImageX
 
-METHOD PrintLineX
+   METHOD PrintLineX
 
-METHOD PrintRectangleX
+   METHOD PrintRectangleX
 
-METHOD PrintRoundRectangleX
+   METHOD PrintRoundRectangleX
 
-METHOD ReleaseX
+   METHOD ReleaseX
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
-METHOD SetColorX
+   METHOD SetColorX
 
-METHOD SetPreviewSizeX
+   METHOD SetPreviewSizeX
 
 ENDCLASS
 
@@ -2257,35 +2257,35 @@ CLASS TDOSPRINT FROM TPRINTBASE
    DATA cString                   INIT ""                    READONLY
    DATA nOccur                    INIT 0                     READONLY
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD CondenDosX
+   METHOD CondenDosX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD NextSearch
+   METHOD NextSearch
 
-METHOD NormalDosX
+   METHOD NormalDosX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImage              BLOCK { || NIL }
+   METHOD PrintImage              BLOCK { || NIL }
 
-METHOD PrintLineX
+   METHOD PrintLineX
 
-METHOD PrintModeX
+   METHOD PrintModeX
 
-METHOD SearchString
+   METHOD SearchString
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add METHOD PrintRectangleX using two horizontal lines and pairs of |
@@ -2569,13 +2569,13 @@ STATIC FUNCTION AtPlus( cSearch, cAll, nStart )
 
 CLASS TRAWPRINT FROM TDOSPRINT
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD PrintModeX
+   METHOD PrintModeX
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
 ENDCLASS
 
@@ -2658,29 +2658,29 @@ CLASS TEXCELPRINT FROM TPRINTBASE
    DATA oBook                     INIT NIL                   READONLY
    DATA oHoja                     INIT NIL                   READONLY
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD MaxCol                  INLINE IIF( HB_IsObject( ::oHoja ), ::oHoja:Columns:Count, 0 )
+   METHOD MaxCol                  INLINE IIF( HB_IsObject( ::oHoja ), ::oHoja:Columns:Count, 0 )
 
-METHOD MaxRow                  INLINE IIF( HB_IsObject( ::oHoja ), ::oHoja:Rows:Count, 0 )
+   METHOD MaxRow                  INLINE IIF( HB_IsObject( ::oHoja ), ::oHoja:Rows:Count, 0 )
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImageX
+   METHOD PrintImageX
 
-METHOD ReleaseX
+   METHOD ReleaseX
 
-METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "EXCEL" }
+   METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "EXCEL" }
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add METHOD PrintLineX using cell borders.
@@ -2933,25 +2933,25 @@ CLASS TSPREADSHEETPRINT FROM TPRINTBASE
    DATA nLpp                      INIT 60                    READONLY    // lines per page
    DATA nXls                      INIT 0                     READONLY
 
-METHOD AddPage
+   METHOD AddPage
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImage              BLOCK { || NIL }
+   METHOD PrintImage              BLOCK { || NIL }
 
-METHOD ReleaseX
+   METHOD ReleaseX
 
-METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "BIFF" }
+   METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "BIFF" }
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add SelPrinterX to open a dialog to select file.
@@ -3115,11 +3115,11 @@ FUNCTION THtmlPrint
 
 CLASS THTMLPRINTFROMEXCEL FROM TEXCELPRINT
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD InitX
+   METHOD InitX
 
 ENDCLASS
 
@@ -3180,11 +3180,11 @@ METHOD InitX() CLASS THTMLPRINTFROMEXCEL
 
 CLASS THTMLPRINTFROMCALC FROM TCALCPRINT
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD InitX
+   METHOD InitX
 
 ENDCLASS
 
@@ -3260,27 +3260,27 @@ CLASS TRTFPRINT FROM TPRINTBASE
    DATA nMarginRig                INIT 10                    READONLY    // in mm
    DATA nMarginInf                INIT 15                    READONLY    // in mm
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImage              BLOCK { || NIL }
+   METHOD PrintImage              BLOCK { || NIL }
 
-METHOD PrintLineX
+   METHOD PrintLineX
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
-METHOD SetCpl
+   METHOD SetCpl
 
-METHOD SetPageMargins
+   METHOD SetPageMargins
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add BeginPageX
@@ -3779,21 +3779,21 @@ CLASS TCSVPRINT FROM TPRINTBASE
 
    DATA aPrintCsv                 INIT {}                    READONLY
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImage              BLOCK { || NIL }
+   METHOD PrintImage              BLOCK { || NIL }
 
-METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "CSV" }
+   METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "CSV" }
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add SelPrinterX to open a dialog to select file.
@@ -3897,29 +3897,29 @@ CLASS TPDFPRINT FROM TPRINTBASE
    DATA cPageSize                 INIT ""                    READONLY // page size
    DATA oPDF                      INIT NIL                   READONLY // reference to the TPDF object
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD PrintBarcodeX
+   METHOD PrintBarcodeX
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImageX
+   METHOD PrintImageX
 
-METHOD PrintLineX
+   METHOD PrintLineX
 
-METHOD PrintRectangleX
+   METHOD PrintRectangleX
 
-METHOD PrintRoundRectangleX
+   METHOD PrintRoundRectangleX
 
-METHOD SelPrinterX
+   METHOD SelPrinterX
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
 ENDCLASS
 
@@ -4186,29 +4186,29 @@ CLASS TCALCPRINT FROM TPRINTBASE
    DATA nHorzResol                INIT PixelsPerInchX()      READONLY
    DATA nVertResol                INIT PixelsPerInchY()      READONLY
 
-METHOD BeginDocX
+   METHOD BeginDocX
 
-METHOD BeginPageX
+   METHOD BeginPageX
 
-METHOD EndDocX
+   METHOD EndDocX
 
-METHOD EndPageX
+   METHOD EndPageX
 
-METHOD InitX
+   METHOD InitX
 
-METHOD MaxCol                  INLINE IIF( HB_IsObject( ::oSheet ), ::oSheet:Columns:Count, 0 )
+   METHOD MaxCol                  INLINE IIF( HB_IsObject( ::oSheet ), ::oSheet:Columns:Count, 0 )
 
-METHOD MaxRow                  INLINE IIF( HB_IsObject( ::oSheet ), ::oSheet:Rows:Count, 0 )
+   METHOD MaxRow                  INLINE IIF( HB_IsObject( ::oSheet ), ::oSheet:Rows:Count, 0 )
 
-METHOD PrintDataX
+   METHOD PrintDataX
 
-METHOD PrintImageX
+   METHOD PrintImageX
 
-METHOD ReleaseX
+   METHOD ReleaseX
 
-METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "CALC" }
+   METHOD SelPrinterX             BLOCK { |Self| Self:cPrinter := "CALC" }
 
-METHOD SetPreviewSize          BLOCK { || NIL }
+   METHOD SetPreviewSize          BLOCK { || NIL }
 
    /*
    TODO: Add METHOD PrintLineX using cell borders.
@@ -5386,4 +5386,3 @@ HB_FUNC( PIXELSPERINCHY )
 }
 
 #PRAGMA ENDDUMP
-

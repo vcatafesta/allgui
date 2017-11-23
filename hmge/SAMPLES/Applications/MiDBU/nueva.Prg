@@ -267,4 +267,3 @@ STATIC FUNCTION Guardar()
    ENDIF
 
    RETURN NIL
-

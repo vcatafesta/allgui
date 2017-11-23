@@ -131,22 +131,19 @@ CLASS TSColumn
    DATA hFontFoot                                // footer font
    DATA hFontSpcHd                               // special header font
 
-METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
+   METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
       lBitMap, lEdit, bValid, lNoLite, cOrder, cFooting, ;
       bPrevEdit, bPostEdit, nEditMove, lFixLite, a3DLook, ;
       bWhen, oBrw, cData, cWhen, cValid, cPrevEdit, cPostEdit, cMsg, cToolTip, lTotal, ;
       lSpinner, bUp, bDown, bMin, bMax, cError, cSpcHeading, ;
       cDefData, cName ) CONSTRUCTOR
 
-METHOD End() VIRTUAL                          // Visual FiveWin 2.0
+   METHOD End() VIRTUAL                          // Visual FiveWin 2.0
 
-METHOD Load( cInfo )
-
-METHOD Save()                                 // Visual FiveWin 2.0
-
-METHOD SaveColor()                            //  JP 1.55
-
-METHOD RestColor()                            //  JP 1.55
+   METHOD Load( cInfo )
+   METHOD Save()                                 // Visual FiveWin 2.0
+   METHOD SaveColor()                            //  JP 1.55
+   METHOD RestColor()                            //  JP 1.55
 
 ENDCLASS
 
@@ -865,4 +862,3 @@ FUNCTION ComboWBlock( oBrw, uField, nCol, aList )
    ENDIF
 
    RETURN bBlock
-

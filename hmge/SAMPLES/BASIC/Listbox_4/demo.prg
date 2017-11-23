@@ -152,4 +152,3 @@ PROCEDURE Item_view
    msginfo( cStr )
 
    RETURN
-

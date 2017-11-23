@@ -42,4 +42,3 @@ FUNCTION CheckLineMax( nLenght )
    /*
    * EOF
    */
-

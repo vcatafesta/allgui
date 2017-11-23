@@ -207,4 +207,3 @@ FUNCTION _Execute( nActiveWindowhandle, cOperation, cFile, cParaMeters, cDefault
    ENDIF
 
    RETURN ShellExecute( nActiveWindowhandle, cOperation, cFile, cParaMeters, cDefault, nState )
-

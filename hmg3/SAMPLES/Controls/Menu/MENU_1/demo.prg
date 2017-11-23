@@ -79,4 +79,3 @@ FUNCTION main()
    ACTIVATE WINDOW Form_1
 
    RETURN
-

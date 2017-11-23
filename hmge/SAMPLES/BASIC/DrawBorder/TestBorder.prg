@@ -56,4 +56,3 @@ PROCEDURE DrawWideBorder( ;
    NEXT nWidness
 
    RETURN  // DrawWideBorder()
-

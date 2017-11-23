@@ -123,4 +123,3 @@ STATIC FUNCTION lIsDir( cDir )
    ENDIF
 
    RETURN lExist
-
