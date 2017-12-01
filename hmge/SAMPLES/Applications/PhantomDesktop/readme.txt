@@ -9,7 +9,7 @@ an empty desktop. This empty desktop can be the standard wallpaper
 image, or a custom bitmap and can also be optionally configured to
 dissolve to a simple black background.
 
-INSTALLATION: 
+INSTALLATION:
 ~~~~~~~~~~~~~
 Run the file "PhantomDesktop.exe". The PhantomDesktop.scr will be
 copied into your Windows System folder, and then it will be set up.
@@ -21,15 +21,15 @@ http://www.gregorybraun.com.
 
 DISTRIBUTION:
 ~~~~~~~~~~~~~
-This screen saver is FREE, and may be freely copied and distributed, 
-as long as it is not modified in any way, and no fee is charged for 
-its distribution (small shipping and handling fee is acceptable). 
+This screen saver is FREE, and may be freely copied and distributed,
+as long as it is not modified in any way, and no fee is charged for
+its distribution (small shipping and handling fee is acceptable).
 
 If you have any further questions or comments please feel free
-to contact me at the address listed below.  
-    
+to contact me at the address listed below.
+
 CONTACT INFORMATION:
 ~~~~~~~~~~~~~~~~~~~~
-    
+
 Author:   Grigory Filatov
 EMail:    gfilatov@inbox.ru

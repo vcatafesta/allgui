@@ -5,7 +5,7 @@ MSConfig is a powerful tool that allows you to enable/disable
 the programs that start when Windows boots up.
 MSConfig would be a perfect startup manager, if it allowed
 you not only to disable items, but to delete them forever.
-Unfortunately it does not do that.  
+Unfortunately it does not do that.
 
 This is where MSConfig Cleanup comes in!
 It scans the startup configurations and allows you to remove

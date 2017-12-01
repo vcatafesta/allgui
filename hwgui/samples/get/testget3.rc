@@ -14,7 +14,7 @@ produced by Borland Resource Workshop
 
 3 BITMAP "../image/exit.bmp"
 
-MENU_1 MENU 
+MENU_1 MENU
 {
  POPUP ""
  {

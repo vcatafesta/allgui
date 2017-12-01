@@ -1,6 +1,6 @@
 //
 // Software for create autorun CD with XviD (MPEG4) films
-// 
+//
 // This is the configuration file
 //
 
@@ -19,19 +19,19 @@
 // Selection view
 // Button_Exit_Text - caption of the button Exit
 // Button_Exit_Hint - hint of the button Exit
-// Button_Play1_Text - caption of the first play button (run film from command 
+// Button_Play1_Text - caption of the first play button (run film from command
 // line)
 // Button_Play1_Hint - hint for the first play button
 // Button_Play1_Visible - make it visible (1-yes, 0-no)
-// Button_Play2_Text - caption of the second play button (run film to use 
+// Button_Play2_Text - caption of the second play button (run film to use
 // by standard windows mediaplayer)
 // Button_Play2_Hint - hint for the second play button
 // Button_Play2_Visible - make it visible (1-yes, 0-no)
-// Button_Driver_Text - caption of the Setup button (run driver file, which 
+// Button_Driver_Text - caption of the Setup button (run driver file, which
 // set up in PathXviD)
 // Button_Driver_Hint - hint for the Setup play button
 // Button_Driver_Visible - make it visible (1-yes, 0-no)
-// Form_Width - width main form 
+// Form_Width - width main form
 // Form_Height - height main form
 // Border_Color - border color
 // Background_Color - background color

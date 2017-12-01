@@ -96,12 +96,12 @@
 2011-11-15: version 1.1.0.2
      *Fixed : typo in the function makemenu() (introduced in version 1.1). Contribution of Pete <pete_westg@yahoo.gr>
 2011-10-25: version 1.1.0.1
-     *Fixed : Problem at compiling of console application. Reported by Franz <franz@valgraveglia.net> 
+     *Fixed : Problem at compiling of console application. Reported by Franz <franz@valgraveglia.net>
 2011-09-24: version 1.1.0
     *Changed : Reformatted code to follow the Hungarian Guideline:
                - Uppercase most COMMAND;
                - Upper/Lower all functions and Procedure.
-    *Changed : ALL Public variables are now declared in Main() and each have a MEMVAR statement created in IDE.CH 
+    *Changed : ALL Public variables are now declared in Main() and each have a MEMVAR statement created in IDE.CH
     *Changed : ALL source code file MUST ADD #include "ide.ch" so that all warning are taken care of.
     *Changed : ALL variable MUST be TYPED by adding a AS "TYPE" to the variable for example : LOCAL nPos AS NUMERIC := 10
                Please follow strict code GUIDELINE for Hungarian Naming Convention
@@ -150,7 +150,7 @@
      *Added : PANEL control. Requested by lichitorres <lichitorres@yahoo.com.ar> and by Franz <franz@valgraveglia.net>
      *Fixed : in controlorder position of control Radiogroup.
      *Changed : in controlorder to not show control Label to make more easy change order of controls.
-     *Fixed : in mainmenu save of CAPTION in menu popup with property NAME and save of last END POPUP 
+     *Fixed : in mainmenu save of CAPTION in menu popup with property NAME and save of last END POPUP
      *Changed : control Tsbrowse in loadfmg and in hmgside with complete fields.
      *Fixed : Problem in buildlog Dblclick when modal window is called above topmost window. Contribution by Grigory Filatov <gfilatov@inbox.ru>
 2011-01-08: version 1.0.5.2
@@ -174,7 +174,7 @@
         - changed project browser form
 2010-08-01: version 1.0.2
      *New :  To facilitate code writing with IDE-Copy / Notepad-Paste
-             In the "Object Inspector" window let us use a context menu 
+             In the "Object Inspector" window let us use a context menu
              with "Copy full name to clipboard" onto the items from "Properties" & "Events".
              With this we can quickly PASTE in the Notepad some text like:
              <FormName>.<ControlName>.<PropertyName>
@@ -186,7 +186,7 @@
 2010-06-03: version 1.0.1
      *Fixed : bug when insert item in menu with none selected item in grid. Reported by Escobar <escobar@megasistema.com.br>
      *Added : Ide will restore last positon of Main Window at opening. Requested by Sudip <sudipb001@gmail.com>
-     *Changed : moved positon of button TEXTBOX to be near of button LABEL. Requested by Bapu <learning_b@yahoo.com> 
+     *Changed : moved positon of button TEXTBOX to be near of button LABEL. Requested by Bapu <learning_b@yahoo.com>
      *Fixed : load of property ICON of fmg with window type MAIN.
      *New : INI file with settings for each project. Requested by Sudip <sudipb001@gmail.com> and by Pete <pete_westg@yahoo.gr>.
      *Added : created header file ide.ch contained of some meaningful defines referring to adata[..] elements,
@@ -206,7 +206,7 @@
      *New: Preferences.prg  Contribution of Pete <pete_westg@yahoo.gr>
         - Added wMultithread section for Ide.ini holding the Multithread Radiogroup (RadioGroup_MT) value
      *Changed : HMGSIDE.prg:  Contribution of Pete <pete_westg@yahoo.gr>
-        - Modified PROCEDURE test_build1() to do HBMK2 compilation 
+        - Modified PROCEDURE test_build1() to do HBMK2 compilation
           (multithread flag is evaluated. must be done the same for mpm compilation)
         - Some modification to control window (resize in accordance desktop/ maximize etc.)
      *Changed : Minor other changes and partial source code reformating using xMate Editor. Contribution of Pete <pete_westg@yahoo.gr>
@@ -226,7 +226,7 @@
      *New : Option in menu Project->Build (With HBMK2) for BCC.
      *Fixed : in definecolor.fmg missing default value 1 in controls radiogroup. reported by Marcelo Brigatti <sistemasies@gmail.com>
      *Fixed : when load uci control inside tab not connect control with tab
-     *Fixed : when click in uci control saved from form not show control in object inspector.  
+     *Fixed : when click in uci control saved from form not show control in object inspector.
      *Fixed : when select empty combo item of uci control and click in form. Reported by Sudip <sudipb001@gmail.com>
 2009-10-31: VERSION 0.9.5
      *Added: in buildprocess to show fmg changed in modified files/dependences. Requested by Luciano <suporte@lmi-informatica.com.br>
@@ -255,7 +255,7 @@
      *Fixed : hmgside.prg to show correct values in building.fmg.
      *Fixed : function viewformcode of fmg duplicating '\' when using <ProjectFolder>\.
      *Fixed : in preferences.prg initial value of property saveoptions.
-     *Fixed : in h_events.prg size height of control combobox and comboboxex.  
+     *Fixed : in h_events.prg size height of control combobox and comboboxex.
      *Changed : in loadfmg.prg - load method of control Label to show properties AUTOSIZE,RIGHTALIGN,CENTERALIGN,BORDER,TRANSPARENT. Contribution by Grigory Filatov <gfilatov@inbox.ru>
 2009-07-25: version 0.9.0
      *New : Option in menu Help->Update to download a last version of HMGS-IDE from http://www.hmgextended.com/files/HMGS-IDE/ide.zip. Based on code contributed by Marek <mol68@tlen.pl>
@@ -301,7 +301,7 @@
      *Fixed : bug in change colors button caused by typo in the Procedure defcolo0(). bug was reported by jlayresz <jlayresz@yahoo.com>. Contribution by Grigory Filatov <gfilatov@inbox.ru>
 2009-05-27: version 0.8.6
      *Fixed : bug in save values of mainmenu. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
-     *Fixed : Crash when open mainmenu, save and open again. Bug was reported by jlayresz <jlayresz@yahoo.com> 
+     *Fixed : Crash when open mainmenu, save and open again. Bug was reported by jlayresz <jlayresz@yahoo.com>
      *New : Added in grid of mainmenu TYPE and LEVEL.
      *New : Button in mainmenu to change TYPE of menu to POPUP or ITEM.
 2009-05-25: version 0.8.5
@@ -312,7 +312,7 @@
      *Added : property DRAGITEMS to control LISTBOX.
      *Added : property DISABLEEDIT to control BTNTEXTBOX.
      *Added : in loadfmg.prg to show fontcolor in control textbox.
-     *Changed : in mpmpc3.prg : added option -mwindows in compile with mingw to not show DOS windows when using GUI aplication. Contribution by Grigory Filatov <gfilatov@inbox.ru>  
+     *Changed : in mpmpc3.prg : added option -mwindows in compile with mingw to not show DOS windows when using GUI aplication. Contribution by Grigory Filatov <gfilatov@inbox.ru>
 2009-05-19: version 0.8.4.1
      *Fixed : bug in show Timer control when load form. Bug was reported by Adilson Urso <a.urso@uol.com.br>
      *Fixed : bugs at loading/on click of UCI controls. Contribution by Grigory Filatov <gfilatov@inbox.ru>
@@ -322,7 +322,7 @@
      *Fixed : bug in loadfmg.prg at loading of control Tab. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
      *Fixed : bug in inspector.prg in function xgridpropnumok() - incorrect seek for control index when change value from form not control. Bug was reported by Luciano <suporte@lmi-informatica.com.br>
      *Fixed : bug when change name of control COMBOBOX when adding new control. Bug was reported by Luciano <suporte@lmi-informatica.com.br>
-     *Added : mpmc3.prg to build exe using mingw with harbour and xharbour. Use libminigui.a with harbour and libxminigui.a with xharbour. 
+     *Added : mpmc3.prg to build exe using mingw with harbour and xharbour. Use libminigui.a with harbour and libxminigui.a with xharbour.
 2009-03-19: version 0.8.3
      *Fixed : bug when change name of control COMBOBOX. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
      *Fixed : bug when change ROW or COL of controls inside control TAB not considering ROW,COl of control TAB. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
@@ -336,8 +336,8 @@
      *Fixed : in fillgrid.prg when put new combobox not refresh object inspector
      *Fixed : bug when change pagecount from object inspector.
      *Fixed : saveform.prg of PROPERTY PAGE, IMAGES of control TAB.
-     *Fixed : bug when change name of control COMBOBOX,COMBOBOXEX and RADIOGROUP. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br> 
-     *Added : in preferences , field to put additional include paths. Requested by Chee Chong Hwa <chonghwa.chee@gmail.com> 
+     *Fixed : bug when change name of control COMBOBOX,COMBOBOXEX and RADIOGROUP. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
+     *Added : in preferences , field to put additional include paths. Requested by Chee Chong Hwa <chonghwa.chee@gmail.com>
      *Fixed : in saveform.prg bug in checking if control is used in tab. Bug was reported by Tales <tales.minigui@yahoo.com.br>
      *Fixed : in inspector.prg when change property of TEXTBOX NUMERIC to CHARACTER not store to VALUE '""'. Bug was reported by Luciano <suporte@lmi-informatica.com.br>
      *Added : in preferences option to compress using UPX (install UPX.exe in IDE folder).
@@ -359,15 +359,15 @@
     *Added: in loadfmg.prg backcolor of controls Grid,Tree,Browse,ProgressBar,BtnTextBox.
 2008-12-23: version 0.7.9
     *Added: property BACKCOLOR to control TAB
-    *Fixed: correct save of menu in mainmenu.prg. Bug was reported by Luciano <suporte@lmi-informatica.com.br> 
+    *Fixed: correct save of menu in mainmenu.prg. Bug was reported by Luciano <suporte@lmi-informatica.com.br>
 2008-12-15: version 0.7.8
-    *Fixed: when delete module is saving modules with invalid path. 
+    *Fixed: when delete module is saving modules with invalid path.
     *Fixed: check if value of FIELD is valid before save FIELD value of control EDITBOX. Bug was reported by Arcangelo <arcangelo.molinaro@fastwebnet.it>
     *Fixed: changing statusbar CAPTION to DATE,CLOCK,KEYBOARD do not show correct WIDTH,ACTION,TOOPTIP.
     *Fixed: correct loading of statusbar with AMPM clause.
     *Fixed: correct saving of TOOLTIP of STATUSBAR.
 2008-12-01: version 0.7.7
-    *Changed: before run and compile prg if form was changed ask to save at first. Requested by Eduardo <engine.groups@gmail.com> 
+    *Changed: before run and compile prg if form was changed ask to save at first. Requested by Eduardo <engine.groups@gmail.com>
     *Fixed: changing row,col of control inside virtual form  is saving incorrect row,col
     *Fixed: moving control in form if is using  virtual form is saving incorrect row,col.
     *Changed: FORM properties TITLE,ICON,CURSOR,NOTIFYICON,NOTIFYTOOLTIP can be saved/load as var or txt.
@@ -377,7 +377,7 @@
     *Fixed: saving of properties CURSOR, TITLE and ICON of form.
 2008-11-18: version 0.7.6
     *Fixed: bug in function ctypeofcontrol assigned incorrect value TSBROWSE when correct is TBROWSE causing "Bound error: array access". Bug was reported by Sudip Bhattacharyya <sudipb@yahoo.com>
-    *Changed: in saveform.prg to always save property Value of control RADIOGROUP because default value= 1 is not defined in h_radio.prg. Requested by Francek Prijatelj <francek.prijatelj@siol.net> 
+    *Changed: in saveform.prg to always save property Value of control RADIOGROUP because default value= 1 is not defined in h_radio.prg. Requested by Francek Prijatelj <francek.prijatelj@siol.net>
     *Fixed: in saveform.prg - save properties ICON and PICTURE of control BUTTONEX when value is NIL. Requested by João Abramo <jd_virtual@yahoo.com.br>
     *Fixed: in function storecontrolval - value of row,col if _HMG_aControlContainerRow[i] = -1 saving incorrect value in saveform.prg. Bug was reported by Rogério L. Momenté <momente_34@yahoo.com.br>
     *Fixed: in delete.prg when delete control inside frame. Bug was reported by Rogério L. Momenté <momente_34@yahoo.com.br>
@@ -387,23 +387,23 @@
 2008-11-02: version 0.7.5
     *Fixed: bug in loadfmg.prg in property MAIN of form. bug was reported by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
     *Added: recent projects to menu. requested by Fernando C.Salvador <fernando@olimporh.com.br>
-    *Added: save last open paths. when open a file dialog the last path is opened for prg,fmg etc. 
+    *Added: save last open paths. when open a file dialog the last path is opened for prg,fmg etc.
     *Fixed: at adding combobox and frame, objectinspector show value from control of form controls. bug was reported by Rogério L.Momente <momente_34@yahoo.com.br>
     *Changed: properties TITLE, and ICON of FORM can be saved\loaded as txt or var.
     *Changed: _controlPos_.prg to _controlPos3_.prg. Based upon \samples\Advanced\ControlPos_3 contribution of (c) Adam Lubszczyk <aib95pko@klienci.pkobp.pl>.
 2008-10-28: version 0.7.4
-    *Splitted : report functions are placed to report.prg. 
+    *Splitted : report functions are placed to report.prg.
     *Added: properties INPLACEEDIT,BREAK of control GRID. Requested by Nelson Stuardo <nelsonantonio@yahoo.com>
     *Fixed: saveform.prg of property PICTURE of control GETBOX. Bug was reported by Marcos.<daroca@terra.com.br>
     *New: added option to save/load value of controls as txt or var, and  num or var, and save/load fontname,fontsize as var. Requested by Manfred <64mbit@googlemail.com> and Renaldo <renaldosatoshi@terra.com.br>
     *Fixed: in functions addmodule,setmoduleasmain not saving correct path of prgs. Bug was reported by Fernando C.Salvador <fernando.salvador@itelefonica.com.br>
     *Fixed: bugs in functions reportOK,addreport,deletereport of report.prg . Contribuition of Oscar M. <oscarm@montigala1.jazztel.es>
-2008-10-24: version 0.7.3.1    
+2008-10-24: version 0.7.3.1
     *Fixed: saveform.prg of property VIRTUAL HEIGHT and VIRTUAL WIDTH of DEFINE WINDOW.
     *Fixed: saveform.prg of property IMAGE of control TAB.
     *Fixed: saveform.prg of property VIRTUAL and EVENT ONQUERYDATA of control GRID. Bug was reported by João F.B. Abramo <jd_virtual@yahoo.com.br>
     *Fixed: saveform.prg of STATUSBAR and TOOLBAR. Bug was reported by João F.B. Abramo <jd_virtual@yahoo.com.br>
-            Contributions by Grigory Filatov <gfilatov@inbox.ru>      
+            Contributions by Grigory Filatov <gfilatov@inbox.ru>
 2008-10-21: version 0.7.3
     *Added: Support for UCI Controls.
     *Fixed : Bug in addreport. Reported by  Oscar M. <oscarm@montigala1.jazztel.es>
@@ -431,7 +431,7 @@
 2008-09-03: version 0.7.0.1
    *Fixed: Bug at moving of radiogroup in a new form. Reported by Ryszard <softmar/at/softmar.poznan.pl>
    *Fixed: Bug with empty statusitem in statusbar builder. Reported by Jozef Rudnicki <j_rudnicki@wp.pl>
-2008-08-29: version 0.7.0   
+2008-08-29: version 0.7.0
    *Added : verify notes to load and save initial notes in fmg files (look at browsedadvanced.fmg and Form_Fld.fmg).
    *Added : HmgsIde.Rc to HmgsIde.hpj to work function findimagename.
    *Added : control Activex in Extended tab.
@@ -443,9 +443,9 @@
    *Added : to projectbrowser function to edit rc files by Renaldo <renaldosatoshi@terra.com.br>
    *Fixed : in loadfmg initial value of control ipaddress, and load of control BUTTONEX by Renaldo <renaldosatoshi@terra.com.br>
    *Fixed : in saveform of saving radio inside tab, saving property fontname of control hotkeybox,and properties picture/icon of control BUTTONEX by Renaldo <renaldosatoshi@terra.com.br>
-   *Fixed : bug in loadfmg.prg of property MAIN of form added space to not search MAINICON, extract "" from property ICON,added real width of control datepicter ,added load of radiogroup with var array 
+   *Fixed : bug in loadfmg.prg of property MAIN of form added space to not search MAINICON, extract "" from property ICON,added real width of control datepicter ,added load of radiogroup with var array
             fixed load of property fontcolor of control btntextbox elimined extra " .
-   *Added : in fillgrid.prg event onchange of control btntextbox. 
+   *Added : in fillgrid.prg event onchange of control btntextbox.
    *Added : in savefmg.prg clause SET EXACT ON to prevent on search  on objects with similar names like BUTTON_INC and BUTTON_INCxxx ascan returning same address in arrayand eliminate object named BUTTON_INC.
             fixed save of property ICON and MAIN MDI of form.,fixed row of control tab in form with menu with add of function GetMenuBarHeight(),fixed save on property fontitalic of control button was "CRL" correct "CRLF".
    *Added : initial values to control Grid to prevent error in compilation if is not defined WIDTHS and HEADERS .Requested by Renaldo <renaldosatoshi@terra.com.br>
@@ -457,7 +457,7 @@
    *Added : in menu 'view' : options Project Browser,Object Inspector,Design Form.
    *Added : in preferences : layout Normal/Reduced with additional form designed by Renaldo <renaldosatoshi@terra.com.br>
 2008-08-18: version 0.6.8
-   *Fixed : bug in saveform.prg 
+   *Fixed : bug in saveform.prg
             Getbox -> Picture should be at starting "" or NIL (in every case not blank) otherwise error E0020 occurs.
             Getbox -> Value should be declared at starting - 0 or "" or NIL (in every  case not blank) otherwise program ends.Bug was reported by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Changed :in Preferences to select <console> <gui> or both to make aplications in console mode, gui mode or mixed mode.requested by  Escobar <escobar@megasistema.com.br>
@@ -543,17 +543,17 @@
    *Added : Button in toolbar for access to viewformcode. Contribution by Escobar <escobar@megasistema.com.br>
    *Added : 'Disable Warnings' switch in Preferences. Requested by Escobar <escobar@megasistema.com.br>
    *Changed : In viewformcode you can edit and save fmg. Contribution by Escobar <escobar@megasistema.com.br>
-   *Added : properties BLINK/BORDER/CLIENTEDGE/HSCROLL/VSCROLL of control LABEL. 
+   *Added : properties BLINK/BORDER/CLIENTEDGE/HSCROLL/VSCROLL of control LABEL.
    *Added : property HEADERIMAGE of GRID/BROWSE.
    *Added : property NOTABSTOP of BROWSE.
 2008-02-21: version 0.5.7
    *Fixed : program freeze when loading a big Fmg file. Restored window with progressbar when loading fmg.
    *Fixed : crash when changing of pagecount in Tab.
    *Changed : order of properties of control Tab.
-   *Fixed : wrong saving of properties INPUTMASK and FORMAT of control Textbox. Bug was reported by Franz <franz@valgraveglia.net>   
+   *Fixed : wrong saving of properties INPUTMASK and FORMAT of control Textbox. Bug was reported by Franz <franz@valgraveglia.net>
    *Changed : Corrections on readflds.prg by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
 2008-01-13: version 0.5.6
-   *Changed : property name WORKAREA to DATABASENAME and ALIAS to WORKAREA in control BROWSE. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
+   *Changed : property name WORKAREA to DATABASENAME and ALIAS to WORKAREA in control BROWSE. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Changed : Corrections on readflds.prg by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Added : save options for reduced code/all code in Preferences form
    *Added : verification of value ADDRESS of control HYPERLINK.
@@ -572,9 +572,9 @@
    *Fixed : initial values of control Slider in hmgside of props VERTICAL,HORIZONTAL,BOTH,NOME,TOP,BOTTOM,LEFT,RIGHT,ONSCROLL.
    *Fixed : bug in function loadformprops - incorrect positon of array after new properties added.
    *Added : property ONSCROLL to control SLIDER.
-   *Added : property ALIAS to COMBOBOX,BROWSE in loadfmg.prg. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
-   *Added : initial property ALIAS to BROWSE in hmgside.prg . Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
-   *Added : new functions loadalias,savealias,loadstruct,savestruct to hmgside.prg. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
+   *Added : property ALIAS to COMBOBOX,BROWSE in loadfmg.prg. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
+   *Added : initial property ALIAS to BROWSE in hmgside.prg . Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
+   *Added : new functions loadalias,savealias,loadstruct,savestruct to hmgside.prg. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Changed : Corrections on readflds.prg by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> (some bugs not corrected yet)
    *New : Added compiler options : Console mode /compile with harbour or xharbour/ in preferences. Requested by Sasha <smajsoft@nadlanu.com>
           (used default location of minigui library compiled with xharbour at folder \minigui\xlib)
@@ -593,7 +593,7 @@
    *Added : properties MinWidth,MaxWidth,MinHeight,MaxHeight to DEFINE WINDOW command.
    *Fixed : move in context menu of control ComboboxEx.
    *Fixed : in delete.prg when delete combobox control with no focus program hang up. Bug was reported by Mahmoud Fayed <msfclipper@yahoo.com>
-   *New : Corrections on readflds.prg by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
+   *New : Corrections on readflds.prg by Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
 2007-09-15: version 0.5.2
    *Fixed : when you move the control TBROWSE of position save the form and load again and the control its missed. Bug was reported by Hugo Hidalgo <hugohidalgoc@gmail.com>
    *Fixed : in object inspector when changing PageCount not saving correct values for pagecount,pageimages,pagecaptions of control TAB. Bug was reported by Hugo Hidalgo <hugohidalgoc@gmail.com>
@@ -601,7 +601,7 @@
    *Fixed : Mistake in the function AddSizeForm() with assigning properties. Contribution of Grigory Filatov <gfilatov@inbox.ru>
    *Fixed : Mistake in move.prg with saving Row and Col for controls without TAB. Contribution of Grigory Filatov <gfilatov@inbox.ru>
    *Added : in Tsbrowse you can put an array in workarea to work with array. Requested by Hugo Hidalgo <hugohidalgoc@gmail.com>
-   *Added : In readflds.prg synchronization with databasepath. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
+   *Added : In readflds.prg synchronization with databasepath. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Changed : when load from fmg control buttonex the caption is updated. Requested by Hugo Hidalgo <hugohidalgoc@gmail.com>
    *Finished : Tsbrowse loadfmg and saveform now work with correct syntax. Contribution of Grigory Filatov <gfilatov@inbox.ru>
 2007-09-09: version 0.5.1
@@ -637,7 +637,7 @@
    *Fixed : captions of menuitems are changed to upper when loading, reported by Alex Rissi <alex_rissi@yahoo.com.br>
    *Fixed : in readfld.prg  When RESET button is pressed 'Headers' and 'Widths' Have to be 'NIL'. Advanced Browse Setting Values HAVE TO BE ALL NIL when RESET button was pressed. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
 2007-05-18: version 0.4.3
-   *New changes in Browse Advanced Setting for control Browse. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it> 
+   *New changes in Browse Advanced Setting for control Browse. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Changed : when put image in Button or CheckButton the image is showed on the fly.
    *Added : in loadform the images of Button and CheckButton are showed.
    *Restored the connection by QAC. Contribution of Pierpaolo Martinello <pier@bmm.it>
@@ -656,23 +656,23 @@
    *Combobox items are changed on the fly and are added to combobox when loading form too. Suggested by romulocsouza <romulocsouza@yahoo.com.br>
    *Add MDICHILD and MAINMDI to the WINDOWSSTYLE in the form editor. Requested by Manfred <ecadata@gmail.com>
    *Added in control browse when clicking in objectinspector of Workarea,fields,widths,heights are automatic picked with a enter form. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
-   *Added option to load in control browse default advanced properties Valid,ValidMessages,Image,ReadOnlyFields,Justify,When,OnHeadClick. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>     
+   *Added option to load in control browse default advanced properties Valid,ValidMessages,Image,ReadOnlyFields,Justify,When,OnHeadClick. Contribution of Arcangelo Molinaro <arcangelo.molinaro@fastwebnet.it>
    *Correction in procedures new() and open() in hmgside.prg. If press CANCEL button to preserve your old project. Contribution made by smajsoft <smajsoft@nadlanu.com>
    *Initiated mainmenubuilder. Bug reports and suggestions are welcome.
 2007-03-18: version 0.4.0
    *Fixed in makestatus.prg if click in statusbar item is showed his function in msgbox and is not execute the function.
    *Added window with progressbar when loading fmg. Requested by Pierpaolo Martinello <pier@bmm.it>
    *Correction on properties nohotlight,notransparent,noxpstyle,uppertext,lefttext,adjust of control buttonex. Bug was reported by Pierpaolo Martinello <pier@bmm.it>
-   *Added property password to control textbox. Bug was reported by Pierpaolo Martinello <pier@bmm.it> 
+   *Added property password to control textbox. Bug was reported by Pierpaolo Martinello <pier@bmm.it>
    *Added properties grippertext,backcolor,fontcolor,imagelist to control comboboxex.
    *Finished Controlorder (menu Function).
-   *Correction on function ProcessContainers, bug was corrected when control is tab. 
+   *Correction on function ProcessContainers, bug was corrected when control is tab.
    *Correction on procedure addsizeform. Value of objectinspector.xgrid_1 is get from a new function in change of a default value.
    *Moved procedure controlorder to corder.prg.
    *Correction in loadfmg.prg of window type splitchild and child.
    *Added in saveform.prg properties NotifyTooltip,NotifyIcon and event On NotifyClick to window MDI,STANDARD,CHILD.
    *Correction in toolbar.prg, in function toolbarpropfont to prevent if cancel is clicked.
-2007-02-25: version 0.3.9 
+2007-02-25: version 0.3.9
    *Finished Statusbar builder
    *Statusbar changes is showed in form_1 (it is not ready)
    *Included Build (Incremental) and Build (Non Incremental) in Project menu options.
@@ -695,14 +695,14 @@
    *Correction of property STANDARD in XGRIDPROPWIN.FMG
    *Fixed in saveform.prg: event ON RESTORE is not save if form is MODAL.
    *Correction in loadfmg.prg: moved array aItens to before loop.
-   *Correction in function loadformprops() for properties MAXBUTTON and MINBUTTON.  
+   *Correction in function loadformprops() for properties MAXBUTTON and MINBUTTON.
    *Contributions of Pierpaolo Martinello <pier@bmm.it>
    *Correction in loadfmg.prg: order of event ON RESTORE in the array aItens
    *Correction for prop ORIENTATION (HORIZONTAL/VERTICAL) of ProgressBar control
    *Added lChanges variable in some places
    *Question YesNoCancel at form_1 closing
    *Tab's font properties saving
-   *Erase first empty element in function contextNext() 
+   *Erase first empty element in function contextNext()
    *Contributions of Grigory Filatov <gfilatov@inbox.ru>
    *Correction of properties BOLD/ITALIC/UNDERLINE/STRIKEOUT of control TREE in function saveform()
    *Moved definition of designed Form_1 to separated file form_1.fmg
@@ -714,14 +714,14 @@
    *Added extended controls HOTKEYBOX and BTNTEXTBOX
    *Added properties BOLD/ITALIC/UNDERLINE/STRIKEOUT to control TAB in function saveform()
    *Correction on property BOTTOM of control TAB in function saveform()
-   *Added event OnDblClick to function xgrideventedit 
+   *Added event OnDblClick to function xgrideventedit
    *Corrected syntax INVISIBLE/NOTABSTOP of some controls to altsyntax VISIBLE/TABSTOP.
 2006-11-06: version 0.3.4
    *Add additional libs to mpmc
-   *Correct modules in preferences 
-   *New method of loadfmg controls from 1 to 24 
-   *Correction on richedit event onselect NIL 
-   *Correction on load\save properties of control tree 
+   *Correct modules in preferences
+   *New method of loadfmg controls from 1 to 24
+   *Correction on richedit event onselect NIL
+   *Correction on load\save properties of control tree
    *Added event ONDBLCLICK in function xgridventedit
    *Correction in function preenchegrid of hmgside.prg for property DynamicBackcolor of browse
    *Fixed properties TITLEBACKCOLOR,TITLEFONTCOLOR,BACKGROUNDCOLOR,TRAILINFONTCOLOR at function xgridpropedit
@@ -738,7 +738,7 @@
     *Correction for BOTTOM property of TAB control in procedure LoadFmg()
     *Simplified function SnapChange()
     *Contributions of Grigory Filatov <gfilatov@inbox.ru>
-2006-09-11: version 0.3.2 
+2006-09-11: version 0.3.2
      *New: Context menu in Reporteditor.This has involved the review of the functions Addmodule, Addform, AddReport, AddResource
      *Added the creation of a report temporary for the preview Disabled the ReportPreview function, why now integrated in
       ReportOk(), therefore the preview it does not interfere with the eventual one report
@@ -747,10 +747,10 @@
      *Hour selecting label the Field you obtain the composition in automatic rifle of the textbox from Fields to Workarea.
      *Extended the automatic composition (Fields): Hour they come completes the textbox automatically give to you Headers to Workarea
      *New menu functions ADD Report and Refresh Report .
-     *New internal function zeroareport()  
+     *New internal function zeroareport()
      *Added the Nofixed option (for compatibility with HMG)  to report editor
-     *Changed the Array of departure for the report  
-     *Added one miscellanea of controls on the textbox (to times but they can fail!) 
+     *Changed the Array of departure for the report
+     *Added one miscellanea of controls on the textbox (to times but they can fail!)
      *Corrections: SetmoduleAsMain() / / mistaken Management
      *Corrections: Movecontrol() / / arranges the errors to you introduced from the feature " Snap " in Off way
      *Fixed function snapmoved.
@@ -775,20 +775,20 @@
      *Changed : preenchegrid store position of selected property, if change control shows same property of new control if control is same type.
      *Fixed move\size of control frame.
      *Added properties FONTCOLOR\BACKCOLOR to loadform.prg off control TREE
-     *Added properties LINECOLOR\INDENT\ITEMHEIGHT\FONTBOLD\FONTITALIC\FONTUNDERLINE\FONTSTRIKEOUT\BREAK\ITEMIDS to control TREE. 
+     *Added properties LINECOLOR\INDENT\ITEMHEIGHT\FONTBOLD\FONTITALIC\FONTUNDERLINE\FONTSTRIKEOUT\BREAK\ITEMIDS to control TREE.
      *Changed properties FORECOLOR\TITLEFORECOLOR to FONTCOLOR\TITLEFONTCOLOR of control DATEPICKER on loadform.prg .
      *Fixed : property WRAP of control RICHEDITBOX eliminated because was replaced by property NOHSCROLL.
      *Added property FONTCOLOR to controL RICHEDITBOX.
      *Fixed all modules add/delete/new  bug when no project is active.
-     *Fixed bug program closing adding new form when a form is already active.    
+     *Fixed bug program closing adding new form when a form is already active.
 2006-08-15: version 0.3.1
-    *Added REPORT EDITOR (for files .RPT) 
+    *Added REPORT EDITOR (for files .RPT)
     *Fixed bug when add new form and got a message 'No active project'
 2006-08-08: version 0.3.0
     *Solution for crash when tab is moved and snap options is off
-    *Solution for incorrect frame size action. 
+    *Solution for incorrect frame size action.
 2006-08-07: version 0.2.9
-    *Fixed the lacked opening the form using the double click on the Project Browser 
+    *Fixed the lacked opening the form using the double click on the Project Browser
     *Properties of Label control are visualized when load form
 2006-08-06: version 0.2.8
     *Finished function Snap To Grid
@@ -796,7 +796,7 @@
     *TAB - add property BUTTONS
     *RICHEDIT - add property VSCROLL
     *Fixed COMBOBOX save and load
-    *Begined function Snap To Grid 
+    *Begined function Snap To Grid
 2006-07-30: version 0.2.6
     *Fixed bugs for Slider control in Property Editor and procedures LoadFmg() and SaveForm()
     *Contributions of Grigory Filatov <gfilatov@inbox.ru>
@@ -834,12 +834,12 @@
     *Changed form's header in procedure SaveForm()
     *Removed STANDART clause at form's saving in procedure SaveForm()
     *Contribuitions of Grigory Filatov <gfilatov@inbox.ru>
-    *Fixed bug when change backcolor of form 
-    *Reorganized todo.txt 
+    *Fixed bug when change backcolor of form
+    *Reorganized todo.txt
 2006-07-04: version 0.2.0
     *Splited sources in three files hmgside.prg loadfmg.prg and saveform.prg
     *Code Optimizations in function xgridpropedit
-    *Fixed Bug when save a form with tabs  
+    *Fixed Bug when save a form with tabs
     *Property fontsize is visualized in Form
     *Property alignment for Label is visualized in Form
     *Property Fontcolor and Backcolor is visualized in Form
@@ -849,12 +849,12 @@
     *Code optimizations in function loadfmg
     *Code optimizations in function preenchegrid
     *Changed indent of saved fmg
-    *Added Grippertext for Form of the SplitChild type  
+    *Added Grippertext for Form of the SplitChild type
     *Improved the compatibility with the sintax of the Ide of Roberto in section " Define WINDOW "
     *Code optimizations in function savemodules
-    *Code optimizations in function saveform 
+    *Code optimizations in function saveform
     *Label, all propertys are executed when Loaded
-    *Alt+F4 do not close  Form_1 and query for exit  
+    *Alt+F4 do not close  Form_1 and query for exit
     *Compatibilized code with The HMG 1.2 Extended Build 18b at themed WinXP
     *New developer in CVS - Sourceforge -  Pierpaolo Martinello <pier@bmm.it>
 2006-05-25: version 0.1.1
@@ -872,7 +872,7 @@
     HMGS-IDE Miscellaneus Bugs Solved.
    *Fixed BUG : when save form with control tab with no images.
    *Fixed BUG : When deleting controls ,internal values are not actualized.
-   *NEW : when add new controls name of controls deleted are reused. 
+   *NEW : when add new controls name of controls deleted are reused.
    *Atualized todo.txt
 2006-04-01: version 0.0.9
    *NEW control GETBOX
@@ -896,7 +896,7 @@
     to control TAB.
 2006-02-09: version 0.0.7
   *Integration with MPM (1.02 *build *00)CarozoDeQuilmes  <carozodequilmes@gmail.com> .
-   Download: http://cdq.sytes.net  Now, from * MPM* , you can  modify Forms with *HMGS-IDE (Version 0.0.7 or higger). 
+   Download: http://cdq.sytes.net  Now, from * MPM* , you can  modify Forms with *HMGS-IDE (Version 0.0.7 or higger).
 2005-11-30: version 0.0.6
   *Added prop BUTTONS,FLAT,HOTRACK,VERTICAL to control TAB .
   *Added prop ALIGNMENT (LEFT/RIGHT/CENTER)  to control Label.
@@ -909,18 +909,18 @@
   *NEW : IMAGE of controls MONTHCALENDAR/IMAGE/PLAYER.
 2005-11-14: version 0.0.5
   *Fixed Compile.bat  not cleaning after compilation.
-  *Added DYNAMICFORECOLOR clause and DYNAMICBACKCOLOR clause to control BROWSE. 
+  *Added DYNAMICFORECOLOR clause and DYNAMICBACKCOLOR clause to control BROWSE.
   *Added COLUMNVALID clause and COLUMNWHEN clause to control Grid.
   *Complete LOAD/SAVE/ALTER controls Textbox,Editbox,Richeditbox
   *Complete prop. value to control CHECKBOX,itemcount to control GRID,value to control HYPERLINK,
-   value to control MONTHCALENDAR,value to control IPADDRESS,value to control BROWSE,RADIOGROUP,PROGRESSBAR. 
+   value to control MONTHCALENDAR,value to control IPADDRESS,value to control BROWSE,RADIOGROUP,PROGRESSBAR.
   *Added prop COLUMNCONTROLS to control GRID.
 2005-11-13: versiOn 0.0.4
   *Fixed new form do not apears in newform procedure by
    Pierpaolo Martinello <pier@bmm.it>
   *New Menu options :newresource,addresource  to manage resource files.
   *Fixed Compilation bat to use correct resource files.Reported by Janik Jaroslav <jaroslav.janik@siemens.com>.
-  *Added DYNAMICFORECOLOR clause and DYNAMICBACKCOLOR clause to control GRID. 
+  *Added DYNAMICFORECOLOR clause and DYNAMICBACKCOLOR clause to control GRID.
   *Fixed CAPTION of control FRAME when load fmg.
 2005-11-04: version 0.0.3
   * Finished Preferences:
@@ -930,9 +930,9 @@
   * To compile with Xharbour you must verify if you have additional libs compiled with Xharbour
     minigui.lib,hbprinter.lib,socket.lib,miniprint.lib
     To make odbc32.lib,ace32.lib,libmysql.lib you must use implib
-	implib odbc32.lib  odbc32.dll
-	implib ace32.lib    ace32.dll
-	implib libmysql.lib libmysql.dll
+   implib odbc32.lib  odbc32.dll
+   implib ace32.lib    ace32.dll
+   implib libmysql.lib libmysql.dll
 2005-10-24: version 0.0.2
   * Added WIDTH and HEIGHT to control GRID and control BROWSE in loadfmg procedure
   * Fixed deleteitem procedure

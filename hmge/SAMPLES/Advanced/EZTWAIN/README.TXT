@@ -103,10 +103,10 @@ VFP\EZTWAIN.PRG                 declarations for Visual FoxPro
 The EZTWAIN interface was designed to have easy-to-remember names; to
 require very few parameters to functions; and to not require the use of
 any data structures.  For the high-level functions, passing 0 for all
-parameters is a good way to start.  
+parameters is a good way to start.
 
 If you are programming in C, examine EZTWAIN.H and TWERP.C to see
-how the EZTWAIN functions are declared and called.  You may have to 
+how the EZTWAIN functions are declared and called.  You may have to
 configure your system to find the EZTWAIN.H file during compilation,
 the EZTW32.LIB file during linking, and the EZTWAIN.DLL or EZTW32.DLL,
 during execution.
@@ -175,7 +175,7 @@ http://www.dosadi.com/forums
 If you can't find any helpful information in the existing posts, start
 a new thread in the EZTwain Classic forum, or send an e-mail to:
 
-				support@dosadi.com
+            support@dosadi.com
 
 
 July 10th, 2008

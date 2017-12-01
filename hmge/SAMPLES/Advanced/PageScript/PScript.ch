@@ -364,7 +364,6 @@ Possible error codes
                                                            ;
       => PSLine(<x1>, <y1>, <x2>, <y2>, <thick>, <color>)
 
-
 #xcommand @ <x1>, <y1> TO <x2>, <y2>                       ;
                          TEXTBOX <Text>                    ;
                          [JUSTIFY <just>]                  ;

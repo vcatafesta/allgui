@@ -83,7 +83,7 @@ November 2011
    Objects language test.
    Improved the debug: on error case the signalings are sent forth
    once alone and reassumed at the end of the press and/or preview
-   The demo of 2page/recno (file ReportD.mod) can switch from 
+   The demo of 2page/recno (file ReportD.mod) can switch from
    MiniPrint and HbPrinter only change the first char.
 
 October 2011

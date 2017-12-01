@@ -2,7 +2,7 @@ $   $ - symbol of comments in begin of string
 $   format of string
 $   country#capital#phone code
 
-Albania#Tirana#355 
+Albania#Tirana#355
 Andorra#Andorra#376
 Argentina#Buenos Aires#54
 Australia#Canberra#61

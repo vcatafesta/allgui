@@ -71,7 +71,6 @@
        _HMG_ActiveControlNoTabStop     := .t.      ;;
        _HMG_ActiveControlItems         := Nil
 
-
 #xcommand END COMBOSEARCHBOX ;
     =>;
           _DefineComboSearchBox( ;

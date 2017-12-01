@@ -2,7 +2,7 @@
 H M I  plus  (whatsnew)
 
 
-R.16 
+R.16
 
 - First released version     2003/01/08
 
@@ -12,7 +12,7 @@ R.18                         2003/01/09
 - All forms events work now.
 - new Backcolor propertie in form design.
 - new Backcolor and Fontcolor properties for label.
-- Change name to HMIde Plus. 
+- Change name to HMIde Plus.
 
 R.20
 
@@ -47,7 +47,7 @@ R.24                      2003/06/08
 - New look !!!!! thanks to Ed. :)
 - notabstop propertie added
 - change database viewer to database manager (DBU) (thank's to SRG)
-- Add search and next buttons to edit window on internal program editor. 
+- Add search and next buttons to edit window on internal program editor.
 - sort propertie added
 - stretch propertie added to image control
 - compiled with minigui 63b
@@ -63,7 +63,7 @@ R.26                      2003/06/14
 
 - New look improvements
 - Add more menu items in main window
-- Add field clause to TEXTBOX, EDITBOX, CHECKBOX and DATEPICKER 
+- Add field clause to TEXTBOX, EDITBOX, CHECKBOX and DATEPICKER
 - Add line information in text search.
 - Multiple source code optimization.
 - Source code are now dividen in more prgs to more easy edit
@@ -104,7 +104,7 @@ R.30                     2003/07/11
   (include color, bold, underline, strikeout)
 - Now when you select (new project) The IDE ask you if save the last project.
 - New comments description lines in new prg or ch  (author, item, project,date)
-- Now full interactive fonts and color support for form. 
+- Now full interactive fonts and color support for form.
   (only at runtime or if you save and read the form again, because
   minigui only support font,size and backcolor at "create window time".
 - Now if you don't select the Fontname and size in controls, HMI+ assign the
@@ -143,13 +143,13 @@ R.36     2004/01/07
 - new amazing speed loading forms
 - added default backcolor for forms,labels ,checkbox,radiogroup in preferences.
 - Now properties and events window are smaller and has a better look
- 
+
 
 R.60     2004/10/07
 - Now complete TAB control support
 - Super amazing speed in program editor (no more delays in big files)
   search, next search,  go line, routines optimized.
-- Debug support 
+- Debug support
 - Fast forms load optimization
 - fixed mixed little bugs and a big one. :)
 - New look in control order
@@ -157,7 +157,7 @@ R.60     2004/10/07
 - All controls support enabled and visible properties
 - look improvements in load forms, load file  and compile process
 - look improvements in project window
-- more mature 
+- more mature
 - much more stable
 
 
@@ -181,7 +181,7 @@ R.90  2005/03/18
 - fixed misc bugs
 - add helpbutton, focused,break clause to form
 - more easy modify all items ( with simple dblclick )
-- break in combo 
+- break in combo
 - toolbar added in form editor
 - now design form are "dotted".
 - added virtual width and virtual height to form properties
@@ -190,11 +190,11 @@ R.90  2005/03/18
 
 
 R.95  2005/04/17
-- now toolbar builder shows real buttons in their original size when save it. 
+- now toolbar builder shows real buttons in their original size when save it.
 - code reformater in program editor (prg)
 - add displaychange to combo
 - Now F1 help in editing forms and project.
-- Now select all controls with mouse (included frames) 
+- Now select all controls with mouse (included frames)
 - Frames mode on/off have been removed from project
 - more screen space to design forms
 - new look
@@ -215,7 +215,7 @@ R1.00  2005/05/19
 R1.04  2005/06/01
 - Fixed bad sintax with AUTOSIZE clausule in Labels.
 
-R1.06  2005/06/25 
+R1.06  2005/06/25
 - Fixed  problem in menu editor with deep levels.
 - Fixed  problem deleting toolbars.
 
@@ -308,7 +308,7 @@ R1.42 2005/10/05
 - Status bar are now more WYSIWYG
 - Increase speed load in forms.
 - Minor "look" fixes.
-- SET NAVIGATION EXTENDED added 
+- SET NAVIGATION EXTENDED added
 - Compiled with new Harbour CVS and last ooHG.
 
 R1.44 2005/10/14
@@ -334,7 +334,7 @@ R1.50 2005/11/09
 - Now RTL parameter for arabig users.
   If run MGIDE [enter] run normal
   If run MGIDE rtl  [Enter] Run in RTL mode (Right to left)
- 
+
 R1.52 2005/11/19
 - Added columncontrols to grid
 - minor optimizations
@@ -345,7 +345,7 @@ R1.54 2005/11/20
 R1.56 2005/11/30
 - Fixed hmi+ problem in tab name
 - Try to fix problems in window color.
- 
+
 R1.58 2005/12/19
 - fixed problem in toolbars.
 
@@ -360,7 +360,7 @@ R1.72 2006/03/17
 - fixed wrong cols grater than 999 (thanks Pier for reporting)
 
 R2.00 2006/07/13
-- Final version 
+- Final version
 - fixed problem changing order numeric propertie
 - HMI supports HMG , Minigui extended and OOHG to actual controls
   (don't support tsbrowse and getbox)

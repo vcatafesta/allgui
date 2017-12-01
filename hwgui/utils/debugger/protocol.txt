@@ -28,7 +28,7 @@
   watches ) are sent if were requested.
 
   The "exit" command informs debugged program that debugging is stopped and
-  it shouldn't call the debugger anymore, the "quit" command force the 
+  it shouldn't call the debugger anymore, the "quit" command force the
   debugged program to terminate. Both commands don't need an answer:
 
   <id>,cmd,exit,<id>,!

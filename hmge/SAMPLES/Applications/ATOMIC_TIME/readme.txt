@@ -35,7 +35,7 @@ Installation
 Unzip all the files into one directory. That's all!
 No dll's or other complicated files to be installed!
 After this you can run AtomicTime by double clicking on the AtomicTime.exe
-file. 
+file.
 
 
 Usage
@@ -59,7 +59,7 @@ the program from exiting by de-selecting this same checkbox.
 
 Disclaimer
 ----------
-This product is supplied AS IS. 
+This product is supplied AS IS.
 That means I support this product on my free will only. No upgrades, patches
 or other stuff is provided on a regular basis.
 I also bear no responsibilities for any damage to the software installed on
@@ -72,7 +72,7 @@ your opinion about the program.
 Distribution
 ------------
 You may NOT distribute this software by any type of media or network device or
-tool including the Internet. You may have only one copy of the installation 
+tool including the Internet. You may have only one copy of the installation
 package of this software.
 You are not allowed to use this software for any commercial purposes. Personal
 use, unlimited and unrestricted, is allowed.

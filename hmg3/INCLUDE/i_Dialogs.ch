@@ -38,6 +38,7 @@
            [ TITLE <cTitle> ] ;
 => ReplaceTextDlg ( <{action}>, <cFind>, <cReplace>, <.NoMatchCase.>, <.NoWholeWord.>, <CheckMatchCase>, <CheckWholeWord> , <cTitle> )
 
+
 #xtranslate FindReplaceDlg.Show           => FINDREPLACEDLGSHOW (.T.)
 #xtranslate FindReplaceDlg.Hide           => FINDREPLACEDLGSHOW (.F.)
 #xtranslate FindReplaceDlg.Release        => FINDREPLACEDLGRELEASE (.T.)
@@ -58,6 +59,7 @@
 #xtranslate FindReplaceDlg.WIDTH  := <arg> => IF ( FindReplaceDlg.IsOpen, _SetWindowSizePos ( FINDREPLACEDLGGETHANDLE (),      ,      , <arg>,       ), NIL)
 #xtranslate FindReplaceDlg.HEIGHT := <arg> => IF ( FindReplaceDlg.IsOpen, _SetWindowSizePos ( FINDREPLACEDLGGETHANDLE (),      ,      ,      , <arg> ), NIL)
 
+
 #xtranslate _HMG_FindReplaceOptions => _HMG_SYSDATA \[ 503 \]
 
 #xtranslate FindReplaceDlg.RetValue      => _HMG_FindReplaceOptions \[ 1 \]
@@ -74,6 +76,7 @@
 #define FRDLG_REPLACE     2
 #define FRDLG_REPLACEALL  3
 
+
 #xtranslate SET DIALOGBOX [ POSITION ] ROW <nRow> COL <nCol> => ;
             _HMG_DialogBoxProperty ( <nRow>, <nCol>, .F., 0, .T.)
 
@@ -88,6 +91,7 @@
 
 #xtranslate SET DIALOGBOX [ POSITION ] DISABLE => ;
             _HMG_DialogBoxProperty ( NIL, NIL, NIL, NIL, .F.)
+
 
 #define WM_SYSCOMMAND   274
 #define SC_CLOSE     0xF060

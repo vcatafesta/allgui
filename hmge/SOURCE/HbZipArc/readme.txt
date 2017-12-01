@@ -1,4 +1,4 @@
-2014-08-25 14:05 UTC+0200 Viktor Szakats (vszakats users.noreply.github.com) 
+2014-08-25 14:05 UTC+0200 Viktor Szakats (vszakats users.noreply.github.com)
   * contrib/hbziparc/ziparc.prg
     ! hb_ZipFile() fixed to strip drive letter from stored filenames
     * deleted an unnecessary HB_SYMBOL_UNUSED()
@@ -20,12 +20,12 @@
 
 2008-09-03 15:47 UTC+0200 Viktor Szakats (harbour.01 syenar hu)
      + Added .prg level implementation of old hbziparch interface.
-       It's based on Toninho's functions sent to the list, but 
-       synced with old interface and extended with new features, 
-       fixes and all the remaining interface functions, and old 
+       It's based on Toninho's functions sent to the list, but
+       synced with old interface and extended with new features,
+       fixes and all the remaining interface functions, and old
        doc.
-       There are some non-implemented stuff, and a couple of 
+       There are some non-implemented stuff, and a couple of
        NOTEs and TOFIXes, if someone wants, these can be addressed.
        (some not, as hbmzip doesn't support multi-volume archives.)
-     ; NOTE: This implementation is based on hbmzip.lib, so you 
+     ; NOTE: This implementation is based on hbmzip.lib, so you
              MUST link it, to make it work.

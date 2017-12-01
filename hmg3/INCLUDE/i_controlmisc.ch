@@ -187,6 +187,7 @@ INIT PROCEDURE <name> ;;
 #xtranslate System.TempFolder => GetTempFolder()
 #xtranslate System.WindowsFolder => GetWindowsFolder()
 
+
 // by Dr. Claudio Soto ( May 2013 )
 
 #xtranslate SET CONTROL CONTEXTMENUS OFF =>  _HMG_SetControlContextMenu := .F.
@@ -236,6 +237,7 @@ INIT PROCEDURE <name> ;;
 #define FONT_RASTER_TYPE     2
 #define FONT_TRUE_TYPE       3
 
+
 //*************************************************************************
 // HMG_LoadResourceRawFile ( cFileName, cTypeResource | nTypeResourceID )
 //*************************************************************************
@@ -263,6 +265,7 @@ INIT PROCEDURE <name> ;;
 #define RT_ANIICON      (22)
 #define RT_HTML         (23)
 #define RT_MANIFEST     (24)
+
 
 // by Dr. Claudio Soto (June 2014)
 
@@ -358,6 +361,7 @@ INIT PROCEDURE <name> ;;
 #define FILE_NOTIFY_CHANGE_STREAM_SIZE   0x00000400
 #define FILE_NOTIFY_CHANGE_STREAM_WRITE   0x00000800
 #define FILE_NOTIFY_VALID_MASK      0x00000fff
+
 
 // ToolTip Style
 #define TTS_BALLOON 0x40

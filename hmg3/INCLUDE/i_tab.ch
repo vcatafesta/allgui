@@ -106,6 +106,7 @@
    =>;
    _BeginTab( <"name"> , <"parent"> , <row> , <col> , <w> , <h> , <value> , <f> , <s> , <tooltip> , <{change}> , <.buttons.> , <.flat.> , <.hottrack.> , <.vertical.>, !<.tabstop.> ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.> , <.multiline.> , !<.Trans.>)
 
+
 #xcommand PAGE <caption> [ IMAGE <image> ] ;
    =>;
    _BeginTabPage ( <caption> , <image> )

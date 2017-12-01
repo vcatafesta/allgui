@@ -11,23 +11,23 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "FileDescription", "MSDOS.SYS SetUp Utility\000"
-		VALUE "FileVersion", "1.1.0.0"
-		VALUE "InternalName", "MsdosSysSetUp"
-		VALUE "LegalCopyright", "Freeware 2003-06"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "MsdosSysSetUp.exe"
-		VALUE "CompanyName", ""
-		VALUE "ProductName", "MiniGUI Utility"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "FileDescription", "MSDOS.SYS SetUp Utility\000"
+      VALUE "FileVersion", "1.1.0.0"
+      VALUE "InternalName", "MsdosSysSetUp"
+      VALUE "LegalCopyright", "Freeware 2003-06"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "MsdosSysSetUp.exe"
+      VALUE "CompanyName", ""
+      VALUE "ProductName", "MiniGUI Utility"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

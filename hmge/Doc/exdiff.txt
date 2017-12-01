@@ -4,7 +4,7 @@ Harbour MiniGUI Extended Syntax Extensions
 Harbour MiniGUI Extended is a fork up from Official HMG created March 2005.
 It aims to follow a more aggressive development path, and be more responsive to user's input.
 
-As it stands at this point, HMG EE offers Syntax extensions over Official HMG, including: 
+As it stands at this point, HMG EE offers Syntax extensions over Official HMG, including:
 --------------------------------------------------------------------------------
 
 BUTTONEX control - so-called OwnerDraw Buttons implementation with support for XP Style.
@@ -110,31 +110,31 @@ Example:
 GETBOX control - Windows implementation of Harbour`s GET Class
 
 Syntax:
-@ <nRow> ,<nCol> GETBOX <ControlName> 
+@ <nRow> ,<nCol> GETBOX <ControlName>
 [ ID <nId> ]
 [ OF | PARENT | DIALOG <ParentWindowName> ]
-[ HEIGHT <nHeight> ] 
-[ WIDTH <nWidth> ] 
+[ HEIGHT <nHeight> ]
+[ WIDTH <nWidth> ]
 [ FIELD <FieldName> ]
-[ VALUE <nValue> ] 
-[ PICTURE <cPicture> ] //**  format function and template string       
-[ VALID <valid> | RANGE <min>,<max>] // VALID - postvalidation function or codeblock which must return logical value    
-				     // RANGE - allowed range of values          
+[ VALUE <nValue> ]
+[ PICTURE <cPicture> ] //**  format function and template string
+[ VALID <valid> | RANGE <min>,<max>] // VALID - postvalidation function or codeblock which must return logical value
+                 // RANGE - allowed range of values
 [ VALIDMESSAGE <cValidMessage> ]
 [ MESSAGE <cMessage> ] // text to display on STATUSBAR Item(1) when getbox have focus
-[ WHEN <when>   ] // prevalidation function or codeblock (if return .f. GetBox is readonly              
-[ READONLY ] 
+[ WHEN <when>   ] // prevalidation function or codeblock (if return .f. GetBox is readonly
+[ READONLY ]
 [ FONT <cFontName> SIZE <nFontSize> ]
 [ BOLD ] [ ITALIC ] [ UNDERLINE ] [ STRIKEOUT ]
-[ PASSWORD ] 
+[ PASSWORD ]
 [ TOOLTIP <cToolTipText> ]
 [ BACKCOLOR <aBackColor> ] // * or <aBackColor,aReadOnlyBackColor,aAciveBackColor>
 [ FONTCOLOR <aFontColor> ]  // * or <aFontColor,aReadOnlyFontColor,aActiveFontColor>
 [ ON CHANGE <uChange> ]    ;
 [ ON GOTFOCUS <OnGotFocusProcedur> | <bBlock> ]
-[ ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ] 
+[ ON LOSTFOCUS <OnLostFocusProcedure> | <bBlock> ]
 [ RIGHTALIGN ]
-[ INVISIBLE ] 
+[ INVISIBLE ]
 [ NOTABSTOP ]
 [ HELPID <nHelpId> ]
 
@@ -182,13 +182,13 @@ Syntax:
      ,            Displays a comma
 
 
-* FontColor and BackColor property can be defined as RGB array or array of RGBArrays 
-  for Enable ,ReadOnly and Focused (active) stage. 
-  
+* FontColor and BackColor property can be defined as RGB array or array of RGBArrays
+  for Enable ,ReadOnly and Focused (active) stage.
+
 * ReadOnly stage preserve defined FontColor and BackColor
 
 * VALID and RANGE clauses are checked when control lost focus
-   User can not leave control if defined validation function (or codeblock) return false 
+   User can not leave control if defined validation function (or codeblock) return false
    or entered value is out of defined range. (These clauses can not be used together!)
 
 * WHEN clause is checked when control become focus . If defined here function or codeblock
@@ -270,13 +270,13 @@ Syntax:
 
 Example:
    DEFINE CLBUTTON clbtn_1
-	ROW    20
-	COL    20
-	WIDTH  210
-	HEIGHT 80
-	CAPTION 'Command Link'
-	NOTETEXT "his is a test note."
-	ACTION _dummy()
+   ROW    20
+   COL    20
+   WIDTH  210
+   HEIGHT 80
+   CAPTION 'Command Link'
+   NOTETEXT "his is a test note."
+   ACTION _dummy()
    END CLBUTTON
 
 There are the following properties and method for this control:
@@ -304,16 +304,16 @@ Syntax:
 
 Example:
    DEFINE SPLITBUTTON spbtn_1
-	ROW    100
-	COL    10
-	CAPTION 'Split Button'
-	ACTION _dummy()
-	TOOLTIP 'Split Button'
+   ROW    100
+   COL    10
+   CAPTION 'Split Button'
+   ACTION _dummy()
+   TOOLTIP 'Split Button'
    END SPLITBUTTON
 
    DEFINE DROPDOWN MENU BUTTON spbtn_1
-	MENUITEM "Menu 1" ACTION MsgInfo( "Button Drop Down Menu 1" )
-	MENUITEM "Menu 2" ACTION MsgInfo( "Button Drop Down Menu 2" )
+   MENUITEM "Menu 1" ACTION MsgInfo( "Button Drop Down Menu 1" )
+   MENUITEM "Menu 2" ACTION MsgInfo( "Button Drop Down Menu 2" )
    END MENU
 
 Note: This control works properly at Windows Vista or later only.
@@ -345,22 +345,22 @@ DEFINE FOLDER command. A Folder allows the user to define multiple pages for the
 
 - Folder from Resources:
            DEFINE FOLDER  <FolderName>
-                [ OF| PARENT> < ParentWindowName > ] 
-                RESOURCE <res>  
+                [ OF| PARENT> < ParentWindowName > ]
+                RESOURCE <res>
                 [ CAPTION <cCaption> ]
 - Folder created from memory:
-           DEFINE FOLDER  < FolderName >       
-                [ OF| PARENT> < ParentWindowName > ] 
+           DEFINE FOLDER  < FolderName >
+                [ OF| PARENT> < ParentWindowName > ]
                 AT <nRow>,<nCol>
-                [ WIDTH < nWidth > ] 
-                [ HEIGHT <nHeight> ] 
+                [ WIDTH < nWidth > ]
+                [ HEIGHT <nHeight> ]
                 [ CAPTION <cCaption> ]
 - Folder Page (Dialog box) from resources:
-             FOLDERPAGE <FolderName>  RESOURCE <id> 
+             FOLDERPAGE <FolderName>  RESOURCE <id>
                 [ TITLE <cTitle> ]
                 [ IMAGE <cImageName> ]
 - Folder Page (Dialog box) with Controls created in Memory:
-             DEFINE FOLDERPAGE < FolderName >  [ RESOURCE <id> ] 
+             DEFINE FOLDERPAGE < FolderName >  [ RESOURCE <id> ]
                 [ TITLE <cTitle> ]
                 [IMAGE <cImageName> ]
 
@@ -453,7 +453,7 @@ SET [STATUSBAR] PROGRESSITEM OF <form> RANGE TO <low>, <high> command.
 New methods and properties for standard controls:
 
 WINDOW - properties 'TitleBar', 'Closable', 'SysMenu', 'Sizable', 'MaxButton', 'MinButton', 'Backcolor',
-         'Topmost', 'MinWidth', 'MaxWidth', 'MinHeight', 'MaxHeight', 'HelpButton', 'Cargo' and events 
+         'Topmost', 'MinWidth', 'MaxWidth', 'MinHeight', 'MaxHeight', 'HelpButton', 'Cargo' and events
          ON RESTORE, ON MOVE, ON DROPFILES, 'On NotifyIconDblClick' and 'On NotifyBalloonClick' ;
          method SaveAs( cBmpFile ) for windows and controls.
 
@@ -484,7 +484,7 @@ DATEPICKER - properties 'FormatString', 'RangeMin', 'RangeMax' and clauses DATEF
 GRID, BROWSE, COMBOBOX, TREE - methods EnableUpdate and DisableUpdate.
 
 GRID, BROWSE - property 'ColumnWidth(n)' and methods:
-  - ColumnAutoFit(n)  - set width of column <n>  to fit the column contents 
+  - ColumnAutoFit(n)  - set width of column <n>  to fit the column contents
   - ColumnAutoFitH(n) - set width of column <n> to fit the columnheader text & column contents
   - ColumnsAutoFit()  - set widths of all columns to fit each column contents
   - ColumnsAutoFitH() - set widths of all columns to fit each columnheader text & column contents
@@ -573,11 +573,11 @@ CLOSE MDICHILDS ALL
 Look at folders Samples\Basic\mdi, Samples\Basic\mdi_2, Samples\Basic\mdi_3 and Samples\Basic\mdi_4 for samples.
 
 --------------------------------------------------------------------------------
- 
+
 Windows Clipboard support:
 
 CopyToClipboard(cText) - store cText in the Windows clipboard
-RetrieveTextFromClipboard() --> cText - retrieve text from the Windows clipboard 
+RetrieveTextFromClipboard() --> cText - retrieve text from the Windows clipboard
 [Note: Official HMG includes System.Clipboard object providing the similar functionality.]
 It was replaced by using the semi-oop 'Clipboard' object in Minigui.
 
@@ -586,7 +586,7 @@ CopyRtfToClipboard(cRtfText) - store cRTFText in the Windows clipboard
 ClearClipboard() - clear the Windows clipboard
 
 --------------------------------------------------------------------------------
- 
+
 Optimizations
 
 The internal PUBLIC variables will be released at the window's and control's destruction.
@@ -709,7 +709,7 @@ The Errorlog file shows a time from start of the application at the program cras
 The Errorlog file shows the system and environmental parameters at the program crash.
 
 --------------------------------------------------------------------------------
- 
+
 Fixed
 
 'On Change' event of the controls was executed at the activation of form.
@@ -741,7 +741,7 @@ The HMG_QHTM library is based upon a freeware Qhtm.Dll from http://www.gipsysoft
 Look at folder Samples\Advanced\qhtm_2 for sample.
 
 --------------------------------------------------------------------------------
- 
+
 HBprinter library support
 
 The full description is beyond the scope of this document - please refer to doc\MiniGUI.chm for help and samples\Advanced\HBPrint\demo.prg for sample.
@@ -753,13 +753,13 @@ TSBrowse library support
 The full description is beyond the scope of this document - please refer to doc\TSBrowse.chm for help and samples\Advanced\TsBrowse\demo.prg for sample.
 
 --------------------------------------------------------------------------------
- 
+
 PropGrid library support
 
 The full description is beyond the scope of this document - please refer to doc\MiniGUI.chm for help and samples\Advanced\PropGrid\demo.prg for sample.
 
 --------------------------------------------------------------------------------
- 
+
 PropSheet library support
 
 The full description is beyond the scope of this document - please refer to doc\MiniGUI.chm for help and samples\Advanced\PropSheet\demo.prg for sample.

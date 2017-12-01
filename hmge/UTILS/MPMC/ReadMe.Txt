@@ -1,4 +1,4 @@
-MiniGUI Project Manager - Console Version (MPMC) is a tool intented to speed up 
+MiniGUI Project Manager - Console Version (MPMC) is a tool intented to speed up
 the application building process. It uses MAKE tool bundled with BCC compiler.
 
 This way, only modified files are recompiled speeding building process a lot.
@@ -16,8 +16,8 @@ the first time you run MPM GUI version and automatically updated by it.
 
 You can create it manually if you want. This is an example:
 
-	BCCFOLDER=C:\BORLAND\BCC55
-	MINIGUIFOLDER=C:\MINIGUI
-	HARBOURFOLDER=C:\MINIGUI\HARBOUR
+   BCCFOLDER=C:\BORLAND\BCC55
+   MINIGUIFOLDER=C:\MINIGUI
+   HARBOURFOLDER=C:\MINIGUI\HARBOUR
 
 Enjoy!

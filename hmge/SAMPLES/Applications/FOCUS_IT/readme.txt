@@ -29,7 +29,7 @@ I can be contacted at:  gfilatov@inbox.ru
 Copying
 -------
 This program is copyright by Grigory Filatov, but may be used and
-distributed freely -- I encourage it.  
+distributed freely -- I encourage it.
 
 This program is provided WITHOUT ANY WARRANTY, expressed or implied,
 including but not limited to fitness for a particular purpose.

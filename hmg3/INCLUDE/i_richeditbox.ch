@@ -116,7 +116,9 @@
       =>;
    _DefineRichEditBox ( <"name">, <"parent">, , , <w>, <h>, <value> ,<f>,<s> , <tooltip>  , <maxlenght>  , <{gotfocus}>  , <{change}>  , <{lostfocus}>  , <.readonly.> , <.break.>  , <helpid>, <.invisible.>, <.notabstop.> ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.> , <"field">  , <backcolor>  , <.noHscroll.> , <.noVscroll.> , <{selectchange}> , <{onlink}> , <{OnVScroll}>  )
 
+
 // By Dr. Claudio Soto, January 2014
+
 
 ************
 *   Font   *
@@ -128,6 +130,7 @@
 #define RTF_SUBSCRIPT     1
 #define RTF_SUPERSCRIPT   2
 #define RTF_NORMALSCRIPT  3
+
 
 *****************
 *   Paragraph   *

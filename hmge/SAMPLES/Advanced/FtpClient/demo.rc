@@ -3,5 +3,5 @@
 //
 //   Resource name   Resource Type   Resource FileName
 //
-	FOLDER		BITMAP 		folder.bmp
-	FILE		BITMAP		file.bmp
+   FOLDER      BITMAP       folder.bmp
+   FILE      BITMAP      file.bmp

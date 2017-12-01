@@ -1,245 +1,245 @@
 *******************************************************************************
-* MySql Harbour Contribution Library 
+* MySql Harbour Contribution Library
 *******************************************************************************
 
 -------------------------------------------------------------------------------
 CLASS TMySQLRow: Every single row of an answer
 -------------------------------------------------------------------------------
 
-	DATA  aRow		
+   DATA  aRow
 
-		A single row of answer
+      A single row of answer
 
-	DATA  aDirty		
+   DATA  aDirty
 
-		Array of booleans set to .T. if corresponding field of aRow has
-		been changed
+      Array of booleans set to .T. if corresponding field of aRow has
+      been changed
 
-	DATA  aOldValue		
+   DATA  aOldValue
 
-		If aDirty[n] is .T. aOldValue[n] keeps a copy of changed value 
-		if aRow[n] is part of a primary	key
+      If aDirty[n] is .T. aOldValue[n] keeps a copy of changed value
+      if aRow[n] is part of a primary   key
 
-	DATA  aOriValue		
+   DATA  aOriValue
 
-		Original values ( same as TMySQLtable:aOldValue )
+      Original values ( same as TMySQLtable:aOldValue )
 
-	DATA  aFieldStruct	
+   DATA  aFieldStruct
 
-		Type of each field
+      Type of each field
 
-	DATA  cTable		
+   DATA  cTable
 
-		Name of table containing this row, empty if TMySQLQuery returned
-		this row
+      Name of table containing this row, empty if TMySQLQuery returned
+      this row
 
-	METHOD	New(aRow, aFStruct, cTableName)
+   METHOD   New(aRow, aFStruct, cTableName)
 
-		Create a new Row object
+      Create a new Row object
 
-	METHOD   FieldGet(cnField)
+   METHOD   FieldGet(cnField)
 
-		Same as clipper ones, but FieldGet() and FieldPut() accept a 
-		string as
+      Same as clipper ones, but FieldGet() and FieldPut() accept a
+      string as
 
-	METHOD   FieldPut(cnField, Value)
+   METHOD   FieldPut(cnField, Value)
 
-		Field identifier, not only a number
+      Field identifier, not only a number
 
-	METHOD   FieldName(nNum)
+   METHOD   FieldName(nNum)
 
-	METHOD   FieldPos(cFieldName)
+   METHOD   FieldPos(cFieldName)
 
-	METHOD   FieldLen(nNum)
+   METHOD   FieldLen(nNum)
 
-		Length of field N
+      Length of field N
 
-	METHOD   FieldDec(nNum)
+   METHOD   FieldDec(nNum)
 
-		How many decimals in field N
+      How many decimals in field N
 
-	METHOD   FieldType(nNum)
+   METHOD   FieldType(nNum)
 
-		Clipper type of field N
+      Clipper type of field N
 
-	METHOD   MakePrimaryKeyWhere()
+   METHOD   MakePrimaryKeyWhere()
 
-		Returns a WHERE x=y statement which uses primary key (if 
-		available)
+      Returns a WHERE x=y statement which uses primary key (if
+      available)
 
 -------------------------------------------------------------------------------
 CLASS TMySQLQuery: Every single query submitted to MySQL server
 -------------------------------------------------------------------------------
 
-	DATA  nSocket
+   DATA  nSocket
 
-		Connection handle to MySQL server
+      Connection handle to MySQL server
 
-	DATA  nResultHandle
+   DATA  nResultHandle
 
-		Result handle received from MySQL
+      Result handle received from MySQL
 
-	DATA  cQuery
+   DATA  cQuery
 
-		Copy of query that generated this object
+      Copy of query that generated this object
 
-	DATA  nNumRows
+   DATA  nNumRows
 
-		Number of rows available on answer NOTE MySQL is 0 based
+      Number of rows available on answer NOTE MySQL is 0 based
 
-	DATA  nCurRow
+   DATA  nCurRow
 
-		I'm currently over row number
+      I'm currently over row number
 
-	DATA  lBof
-	
-	DATA  lEof
+   DATA  lBof
 
-	DATA  lFieldAsData
+   DATA  lEof
 
-		Use fields as object DATA. For compatibility
-		Names of fields can match name of TMySQLQuery/Table DATAs,
-		and it is dangerous. ::lFieldAsData:=.F. can fix it
+   DATA  lFieldAsData
 
-	DATA  aRow
+      Use fields as object DATA. For compatibility
+      Names of fields can match name of TMySQLQuery/Table DATAs,
+      and it is dangerous. ::lFieldAsData:=.F. can fix it
 
-		Values of fields of current row
+   DATA  aRow
 
-	DATA  nNumFields
+      Values of fields of current row
 
-		How many fields per row
+   DATA  nNumFields
 
-	DATA  aFieldStruct
+      How many fields per row
 
-		Type of each field, a copy is here a copy inside each row
+   DATA  aFieldStruct
 
-	DATA  lError
+      Type of each field, a copy is here a copy inside each row
 
-		.T. if last operation failed
+   DATA  lError
 
-	METHOD   New(nSocket, cQuery)
+      .T. if last operation failed
 
-		New query object
+   METHOD   New(nSocket, cQuery)
 
-	METHOD   Destroy()
+      New query object
 
-	METHOD   End()
+   METHOD   Destroy()
 
-	METHOD   Refresh()
+   METHOD   End()
 
-		ReExecutes the query (cQuery) so that changes to table are 
-		visible
+   METHOD   Refresh()
 
-	METHOD   GetRow(nRow)
+      ReExecutes the query (cQuery) so that changes to table are
+      visible
 
-		Return Row n of answer
+   METHOD   GetRow(nRow)
 
-	METHOD   Skip(nRows)
-		
-		Same as clipper ones
+      Return Row n of answer
 
-	METHOD   Bof()
+   METHOD   Skip(nRows)
 
-	METHOD   Eof()
+      Same as clipper ones
 
-	METHOD   RecNo()
+   METHOD   Bof()
 
-	METHOD   LastRec()
+   METHOD   Eof()
 
-	METHOD   GoTop()
+   METHOD   RecNo()
 
-	METHOD   GoBottom()
+   METHOD   LastRec()
 
-	METHOD   GoTO(nRow)
+   METHOD   GoTop()
 
-	METHOD   FCount()
+   METHOD   GoBottom()
 
-	METHOD   NetErr()
+   METHOD   GoTO(nRow)
 
-		Returns .T. if something went wrong
+   METHOD   FCount()
 
-	METHOD   Error()
+   METHOD   NetErr()
 
-		Returns textual description of last error and clears ::lError
+      Returns .T. if something went wrong
 
-	METHOD   FieldName(nNum)
+   METHOD   Error()
 
-	METHOD   FieldPos(cFieldName)
-	
-	METHOD   FieldGet(cnField)
+      Returns textual description of last error and clears ::lError
 
-	METHOD   FieldLen(nNum)
+   METHOD   FieldName(nNum)
 
-		Length of field N
+   METHOD   FieldPos(cFieldName)
 
-	METHOD   FieldDec(nNum)
+   METHOD   FieldGet(cnField)
 
-		How many decimals in field N
+   METHOD   FieldLen(nNum)
 
-	METHOD   FieldType(nNum)
-		
-		Clipper type of field N
+      Length of field N
+
+   METHOD   FieldDec(nNum)
+
+      How many decimals in field N
+
+   METHOD   FieldType(nNum)
+
+      Clipper type of field N
 
 -------------------------------------------------------------------------------
-CLASS TMySQLTable: A query without joins; Insert() e Delete() rows are allowed. 
+CLASS TMySQLTable: A query without joins; Insert() e Delete() rows are allowed.
 -------------------------------------------------------------------------------
 NOTE: it's always a SELECT result, so it will contain a full table only if
 SELECT * FROM ... was issued
 
-	DATA  cTable
-	
-		Name of table
+   DATA  cTable
 
-	DATA  aOldValue
+      Name of table
 
-		Keeps a copy of old value
+   DATA  aOldValue
 
-	METHOD   New(nSocket, cQuery, cTableName)
+      Keeps a copy of old value
 
-	METHOD   GetRow(nRow)
+   METHOD   New(nSocket, cQuery, cTableName)
 
-	METHOD   Skip(nRow)
+   METHOD   GetRow(nRow)
 
-	METHOD   GoTop()
-	
-	METHOD   GoBottom() 
+   METHOD   Skip(nRow)
 
-	METHOD   GoTo(nRow)
-	
-	METHOD   Update(oRow, lOldRecord, lRefresh)
+   METHOD   GoTop()
 
-		Gets an oRow and updates changed fields
+   METHOD   GoBottom()
 
-	METHOD   Save()
+   METHOD   GoTo(nRow)
 
-	METHOD   Delete(oRow, lOldRecord, lRefresh)
+   METHOD   Update(oRow, lOldRecord, lRefresh)
 
-		Deletes passed row from table
+      Gets an oRow and updates changed fields
 
-	METHOD   Append(oRow, lRefresh)
+   METHOD   Save()
 
-		Inserts passed row into table
-	
-	METHOD   GetBlankRow( lSetValues )
-		
-		Returns an empty row with all available fields empty
+   METHOD   Delete(oRow, lOldRecord, lRefresh)
 
-	METHOD   SetBlankRow() 
+      Deletes passed row from table
 
-		Compatibility
+   METHOD   Append(oRow, lRefresh)
 
-	METHOD   Blank()
+      Inserts passed row into table
 
-	METHOD   FieldPut(cnField, Value)
+   METHOD   GetBlankRow( lSetValues )
 
-		Field identifier, not only a number
+      Returns an empty row with all available fields empty
 
-	METHOD   Refresh()
+   METHOD   SetBlankRow()
 
-	METHOD   MakePrimaryKeyWhere()
+      Compatibility
 
-		Returns a WHERE x=y statement which uses primary key (if 
-		available)
+   METHOD   Blank()
+
+   METHOD   FieldPut(cnField, Value)
+
+      Field identifier, not only a number
+
+   METHOD   Refresh()
+
+   METHOD   MakePrimaryKeyWhere()
+
+      Returns a WHERE x=y statement which uses primary key (if
+      available)
 
 -------------------------------------------------------------------------------
 CLASS TMySQLServer: Every available MySQL server
@@ -247,97 +247,97 @@ CLASS TMySQLServer: Every available MySQL server
 
    DATA  nSocket
 
-	Connection handle to server (currently pointer to a MYSQL structure)
+   Connection handle to server (currently pointer to a MYSQL structure)
 
    DATA  cServer
 
-	Server name
+   Server name
 
    DATA  cDBName
 
-	Selected DB
+   Selected DB
 
-	DATA  cUser
+   DATA  cUser
 
-		User accessing db
+      User accessing db
 
-	DATA  cPassword
-		His/her password
+   DATA  cPassword
+      His/her password
 
-	DATA  lError
+   DATA  lError
 
-		.T. if occurred an error
+      .T. if occurred an error
 
-	DATA  cCreateQuery
+   DATA  cCreateQuery
 
-	METHOD   New(cServer, cUser, cPassword)
+   METHOD   New(cServer, cUser, cPassword)
 
-		Opens connection to a server, returns a server object
+      Opens connection to a server, returns a server object
 
-	METHOD   Destroy()
+   METHOD   Destroy()
 
-		Closes connection to server
+      Closes connection to server
 
-	METHOD   SelectDB(cDBName)
+   METHOD   SelectDB(cDBName)
 
-		Which data base I will use for subsequent queries
+      Which data base I will use for subsequent queries
 
-	METHOD   CreateTable(cTable, aStruct,cPrimaryKey,cUniqueKey,cAuto)
+   METHOD   CreateTable(cTable, aStruct,cPrimaryKey,cUniqueKey,cAuto)
 
-		Create new table using the same syntax of dbCreate()
+      Create new table using the same syntax of dbCreate()
 
-	METHOD   DeleteTable(cTable)
+   METHOD   DeleteTable(cTable)
 
-		Delete table
+      Delete table
 
-	METHOD   TableStruct(cTable)
+   METHOD   TableStruct(cTable)
 
-		Returns a structure array compatible with clipper's dbStruct() 
-		ones
+      Returns a structure array compatible with clipper's dbStruct()
+      ones
 
-	METHOD   CreateIndex(cName, cTable, aFNames, lUnique)
-		Create an index (unique) on field name(s) passed as an array of
-		strings aFNames
+   METHOD   CreateIndex(cName, cTable, aFNames, lUnique)
+      Create an index (unique) on field name(s) passed as an array of
+      strings aFNames
 
-	METHOD   DeleteIndex(cName, cTable)
+   METHOD   DeleteIndex(cName, cTable)
 
-		Delete index cName from cTable
+      Delete index cName from cTable
 
-	METHOD   ListDBs()
+   METHOD   ListDBs()
 
-		Returns an array with list of data bases available
+      Returns an array with list of data bases available
 
-	METHOD   ListTables()
+   METHOD   ListTables()
 
-		Returns an array with list of available tables in current 
-		database
+      Returns an array with list of available tables in current
+      database
 
-	METHOD   Query(cQuery)
+   METHOD   Query(cQuery)
 
-		Gets a textual query and returns a TMySQLQuery or TMySQLTable 
-		object
+      Gets a textual query and returns a TMySQLQuery or TMySQLTable
+      object
 
-	METHOD   NetErr() INLINE ::lError
+   METHOD   NetErr() INLINE ::lError
 
-		Returns .T. if something went wrong
+      Returns .T. if something went wrong
 
-	METHOD   Error()
+   METHOD   Error()
 
-		Returns textual description of last error
+      Returns textual description of last error
 
-	METHOD   CreateDatabase( cDataBase )
-		
-		Create an New Mysql Database
+   METHOD   CreateDatabase( cDataBase )
 
-	METHOD   sql_Commit()
+      Create an New Mysql Database
 
-		Commits transaction
+   METHOD   sql_Commit()
 
-	METHOD   sql_Rollback()
+      Commits transaction
 
-		Rollbacks transaction
+   METHOD   sql_Rollback()
 
-	METHOD   sql_Version()
+      Rollbacks transaction
 
-	Server version as numeric
+   METHOD   sql_Version()
+
+   Server version as numeric
 

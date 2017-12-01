@@ -1,4 +1,4 @@
-#include "demo.ch" 
+#include "demo.ch"
 
 MainMenu MENU
 {

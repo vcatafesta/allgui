@@ -1,6 +1,6 @@
     SOFTWARE LICENSE AGREEMENT
 
-    Program "Dayly-SL". 
+    Program "Dayly-SL".
     Copyright (C) 2007-2012 Sergey Logoshny.
 
 Program Dayly-SL 2.0 is distributed as FREEWARE. This means:

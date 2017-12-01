@@ -145,7 +145,6 @@ extern "C" {
    } QHTM_DEFAULTS, FAR *LPQHTM_DEFAULTS;
 
 
-
    //
    //   Sent whenever a link is clicked.
    //   Set resReturnValue to FALSE to prevent QHTM from starting the user agent associated with the link.
@@ -360,7 +359,6 @@ extern "C" {
    #define QHTM_SOURCE_TEXT         QHTM_RENDER_FLAG_TEXT
    #define QHTM_SOURCE_RESOURCE   QHTM_RENDER_FLAG_RESOURCE
    #define QHTM_SOURCE_FILENAME   QHTM_RENDER_FLAG_FILENAME
-
 
    //   Measure the height of some HTML given a width (registered only)
    BOOL WINAPI QHTM_GetHTMLHeight( HDC hdc, LPCTSTR pcsz, HINSTANCE hInst, UINT uFlags, UINT uWidth, UINT *lpuHeight );

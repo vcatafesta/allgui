@@ -312,6 +312,8 @@ _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
    _HMG_SYSDATA \[ 513 \] := .t. ;;
    <lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>   , <nOrientation>   , 1 ) , if ( <.lPaperSize.>   , <nPaperSize>      , 1 ) , if ( <.lPaperLength.>   , <nPaperLength>   , -999 ) , if ( <.lPaperWidth.>   , <nPaperWidth>      , -999 ), <.lLog.> )
 
+
+
 #xcommand START PRINTDOC [ NAME <name> ] ;
 => ;
 iif( _HMG_SYSDATA \[ 513 \], _hmg_hpdf_startdoc(), ( _hmg_printer_setjobname( <name> ) , if ( _HMG_SYSDATA \[ 378 \] , ( _HMG_SYSDATA \[ 380 \] := 0 , _HMG_SYSDATA \[ 372 \] := _HMG_SYSDATA \[ 374 \] ) ,  OpenPrinterGetJobID() := _HMG_PRINTER_StartDoc ( _HMG_SYSDATA \[ 374 \] , _HMG_SYSDATA \[ 358 \] ) ) )) ;;
@@ -322,6 +324,7 @@ _HMG_SYSDATA \[ 516 \] := ""
 iif( _HMG_SYSDATA \[ 513 \], _hmg_hpdf_startdoc(), ( _hmg_printer_setjobname( <name> ) , if ( _HMG_SYSDATA \[ 378 \] , ( _HMG_SYSDATA \[ 380 \] := 0 , _HMG_SYSDATA \[ 372 \] := _HMG_SYSDATA \[ 374 \] ) ,  OpenPrinterGetJobID() := _HMG_PRINTER_StartDoc ( _HMG_SYSDATA \[ 374 \] , _HMG_SYSDATA \[ 358 \] ) ) ));;
 _HMG_SYSDATA \[ 516 \] := <"aJobData">;;
 <aJobData> := OpenPrinterGetJobData()
+
 
 #xcommand START PRINTPAGE ;
 => iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_startpage(),IF ( _HMG_SYSDATA \[ 378 \],;
@@ -340,6 +343,7 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_enddoc(), if ( _HMG_SYSDATA \[ 378 \] , _H
 #xcommand ABORT PRINTDOC ;
 => ;
 iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_SYSDATA \[ 374 \] ))
+
 
 #xtranslate @ <Row> , <Col> PRINT [ DATA ] <cText> ;
    [ <lfont : FONT> <cFontName> ] ;
@@ -402,6 +406,8 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
    [ CURVE <nCurve> ];
    => ;
    iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> ), _HMG_PRINTER_H_ROUNDRECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.> ) )
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // PRINTER CONFIGURATION CONSTANTS
@@ -578,6 +584,7 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 #define PRINTER_PAPER_PENV_10_ROTATED     118 /* PRC Envelope #10 Rotated 458 x 324 mm */
 
 #define PRINTER_PAPER_USER                256
+
 
 #define JOB_STATUS_PAUSED              0x00000001
 #define JOB_STATUS_ERROR               0x00000002

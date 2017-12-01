@@ -212,7 +212,7 @@
          <code3><![CDATA[ MoveCtrl( oCtrl ) ]]></code3>
       </property>
       <property name="Right">
-         <code2><![CDATA[ 
+         <code2><![CDATA[
              if Val(value) != 0
                oCtrl:nWidth := Round(Val(value)*oCtrl:oParent:oParent:oParent:oParent:nKoeff,0)-oCtrl:nLeft+1
                oCtrl:SetCoor( "Width",oCtrl:nWidth )
@@ -236,7 +236,7 @@
          <code2><![CDATA[ oCtrl:SetColor(,Val(value)) ]]></code2>
       </property>
       <property name="Font" dlg="Font">
-         <code2><![CDATA[ 
+         <code2><![CDATA[
            Private hDC := hwg_Getdc( hwg_Getactivewindow() ), aMetr, aTMetr, o
            oCtrl:oFont := value
            hwg_Selectobject( hDC,value:handle )

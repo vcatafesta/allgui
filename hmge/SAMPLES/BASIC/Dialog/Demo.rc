@@ -1,42 +1,42 @@
 
-#define IDD_ABOUT	100
-#define DLG_0300	300
-#define DLG_0400	400
-#define	DIALOG_1WS	700
+#define IDD_ABOUT   100
+#define DLG_0300   300
+#define DLG_0400   400
+#define   DIALOG_1WS   700
 
 
 
 
-#define	DLG_OK	         1
-#define	DLG_CAL	       302
-#define	DLG_COMBO	   303
-#define	DLG_PROG	   305
-#define	DLG_CANCEL	   307
-#define	DLG_CHECK	   308
-#define	DLG_RAD1	   309
-#define	IDM_EDITUNDO   310
-#define	DLG_RA2		   311
-#define	DLG_EDIT	   312
-#define	DLG_1000	   1000
-#define	DLG_2100	   2100
+#define   DLG_OK            1
+#define   DLG_CAL          302
+#define   DLG_COMBO      303
+#define   DLG_PROG      305
+#define   DLG_CANCEL      307
+#define   DLG_CHECK      308
+#define   DLG_RAD1      309
+#define   IDM_EDITUNDO   310
+#define   DLG_RA2         311
+#define   DLG_EDIT      312
+#define   DLG_1000      1000
+#define   DLG_2100      2100
 
 #define IDOK                1
 #define IDCANCEL            2
 #define IDABORT             3
 #define IDRETRY             4
 #define IDIGNORE            5
-#define IDHELP			6
+#define IDHELP         6
 
 // Using a resource file like this, you can include bitmaps, icons and sounds
 // inside EXE.
 //
-//	Resource name	Resource Type   Resource FileName
+//   Resource name   Resource Type   Resource FileName
 //
-  	REDIT    	ICON		REdit.ICO
-	HMG		ICON		HMG.ICO
-	DIALOG		ICON		Dialog.ICO
-	BMP_0		BITMAP		ABOUT2.BMP
-	DEMO    	BITMAP		DEMO.BMP
+     REDIT       ICON      REdit.ICO
+   HMG      ICON      HMG.ICO
+   DIALOG      ICON      Dialog.ICO
+   BMP_0      BITMAP      ABOUT2.BMP
+   DEMO       BITMAP      DEMO.BMP
 
 
 DLG_1000 MENU
@@ -82,7 +82,7 @@ END
 
 
 DLG_0400 DIALOG 0, 0, 490, 340
-STYLE DS_SETFONT |WS_POPUP |WS_CAPTION |WS_VISIBLE |WS_SYSMENU |WS_THICKFRAME |WS_MAXIMIZEBOX |WS_MINIMIZEBOX 
+STYLE DS_SETFONT |WS_POPUP |WS_CAPTION |WS_VISIBLE |WS_SYSMENU |WS_THICKFRAME |WS_MAXIMIZEBOX |WS_MINIMIZEBOX
 FONT 8, "Tahoma"
 MENU DLG_1000
 LANGUAGE LANG_NEUTRAL, 0
@@ -95,7 +95,7 @@ BEGIN
   AUTORADIOBUTTON "RadioButton0",104, 25, 120, 70, 20
   AUTORADIOBUTTON "RadioButton1",105, 25, 135, 70, 20
   CONTROL "",107,"LISTBOX",LBS_NOTIFY |WS_CHILD |WS_BORDER |WS_VISIBLE ,20,188,100,70
-  EDITTEXT  123, 20,250,100,14 ES_AUTOHSCROLL  
+  EDITTEXT  123, 20,250,100,14 ES_AUTOHSCROLL
   CONTROL "",110,"STATIC",SS_BITMAP |WS_CHILD |WS_VISIBLE ,20,270,50,50
 
   CONTROL "",116,"SysTabControl32",0x30 | WS_CLIPSIBLINGS | WS_CHILD |WS_VISIBLE ,140,15,180,80

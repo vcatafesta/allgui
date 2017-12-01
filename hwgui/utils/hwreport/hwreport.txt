@@ -6,7 +6,7 @@
 
         1. Introduction
 
-	HWReport allows you create report forms for following using in
+   HWReport allows you create report forms for following using in
     applications, built with Harbour + HWGui.
         It provides intuitively clear way to design the desirable output form.
 
@@ -48,7 +48,7 @@
 
         bldHWRep.bat   -     bat file to build HWReport
 
-        repexec.prg    -     source file, which must be linked to any 
+        repexec.prg    -     source file, which must be linked to any
                                application, which uses HwReport
         example.prg    -     source file of example application
         bldexam.bat    -     bat file to build example application
@@ -68,7 +68,7 @@
 
         - Open:  Opens existing report. You need to choose the format ( *.rpt -
                  report file or *.prg - program source ), file and write the
-                 report name ( for *.rpt file ) or function name ( for *.prg 
+                 report name ( for *.rpt file ) or function name ( for *.prg
                  file ).
 
         - Close: Closes current report form.
@@ -84,7 +84,7 @@
                  for this printing works right.
 
         3.2. Items
-  
+
           This submenu becomes accessible after you create new or open existing
     report. You choose the item you want - and when you move mouse over the
     form, its cursor changes to cross and you can place the item where you
@@ -92,12 +92,12 @@
     move it, resize, delete or set its attributes by double clicking on it.
           With the same manner you can place the marker. Currently supported
     types of markers are:
-          - Page Header: it may be needed, if you have multipage report, this 
+          - Page Header: it may be needed, if you have multipage report, this
     header will be printed in the beginning of every page, with the exception
     of a first page, where it is printed where it is placed in the form. The
     'End of Page Header' marker does't exist, because 'Start Line' marker serves
     as the end of Page Header.
-   
+
           - Start Line: it is needed, when you have list of lines and it is
     unknown at design time, how much lines. A bit complex explanation :), but
     I hope, that you understand, what I mean.
@@ -106,7 +106,7 @@
           - End Line: indicates the end of a line ( 'Start Line' was a beginning ).
     It MUST PRESENT, if you have 'Start Line' marker.
 
-          - Page Footer: it may be needed, if you have multipage report, this 
+          - Page Footer: it may be needed, if you have multipage report, this
     footer will be printed in the end of every page.
 
           - End of Page Footer: indicates the end of Page Footer.
@@ -123,12 +123,12 @@
 
         3.3. Options
 
-        - Form Options: Here you can define variables for following using in 
-                 scripts and assign them initial values. The syntax is the 
+        - Form Options: Here you can define variables for following using in
+                 scripts and assign them initial values. The syntax is the
                  same, as in Clipper's Local or Private statement with the
                  only difference, that you don't need to write 'Local' or
                  'Private' keyword.
-                       
+
         - Preview: Switch on/off preview mode.
 
         - Mouse limit: I understand that it isn't good name for this menu item,
@@ -140,7 +140,7 @@
         4. Item's properties
 
         Double clicking on any item, you call dialog box, where you can set/get
-        item's attributes. 
+        item's attributes.
 
         For graphic objects this is line type and width.
 
@@ -169,9 +169,9 @@
         If the report is in *.rpt file, you need open it with the OpenReport()
    function and then print with PrintReport():
 
-         IF OpenReport( fileName, reportName ) 
+         IF OpenReport( fileName, reportName )
             PrintReport( printerName )
-         ENDIF        
+         ENDIF
 
    If you omit the printerName parameter, you will get standard dialog box for
    choosing printer. If you pass empty string ( PrintReport( "" ) ), program

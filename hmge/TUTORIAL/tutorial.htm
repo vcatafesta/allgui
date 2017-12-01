@@ -19,7 +19,7 @@ Harbour MiniGUI Tutorial<br>
 </b></u></font><b><u><font face="Arial" size="2"><br>
 Your First MiniGUI Program</font></u></b><span style="font-family: Fixedsys"><br>
 <br>
-</span><font face="Arial" size="2">I'll not be original, so this program will 
+</span><font face="Arial" size="2">I'll not be original, so this program will
 display a 'Hello World'<br>
 message :)<br>
 </font><span style="font-family: Fixedsys"><br>
@@ -44,7 +44,7 @@ Return</font></p>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">DEFINE WINDOW command: Will create the main window 
+<font face="Arial" size="2">DEFINE WINDOW command: Will create the main window
 for the program.</font></p>
 
   </li>
@@ -63,28 +63,28 @@ for the program.</font></p>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">WIDTH 400: Means that the window will have 400 
+<font face="Arial" size="2">WIDTH 400: Means that the window will have 400
 pixels width.</font></p>
 
   </li>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">HEIGHT 200: Means that the window will have 200 
+<font face="Arial" size="2">HEIGHT 200: Means that the window will have 200
 pixels height.</font></p>
 
   </li>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">TITLE 'Hello World!': Indicates the text in the 
+<font face="Arial" size="2">TITLE 'Hello World!': Indicates the text in the
 window title bar.</font></p>
 
   </li>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">MAIN: Indicates that we are defining the main 
+<font face="Arial" size="2">MAIN: Indicates that we are defining the main
 application window<br>
 (a main window is required for all minigui applications)</font></p>
 
@@ -92,7 +92,7 @@ application window<br>
   <li>
 
 <p align="left" class="section1">
-<font face="Arial" size="2">ACTIVATE WINDOW Form_1: Will show the window and 
+<font face="Arial" size="2">ACTIVATE WINDOW Form_1: Will show the window and
 start the event<br>
 loop.&nbsp;</font></p>
 
@@ -103,7 +103,7 @@ loop.&nbsp;</font></p>
 <u><b><font face="Arial" size="2"><br>
 Adding The Main Menu</font></b></u></p>
 
-<p align="left" class="section1"><font face="Arial" size="2">We add a main menu 
+<p align="left" class="section1"><font face="Arial" size="2">We add a main menu
 to the program now:</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -115,7 +115,7 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 02 - Property Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Window Title' ACTION&nbsp; Win_1.Title := 'New Title'<br>
@@ -127,33 +127,33 @@ MAIN MENU<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">As you can see it 
+<p align="left" class="section1"><font face="Arial" size="2">As you can see it
 is pretty easy and intuitive.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">All the main menu 
+<p align="left" class="section1"><font face="Arial" size="2">All the main menu
 stuff will be between DEFINE MAIN MENU / END MENU statements.<br>
 Each individual menu popup will be between POPUP / END POPUP statements.<br>
 Each individual menu item will be coded via the ITEM statement.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">You can use as 
+<p align="left" class="section1"><font face="Arial" size="2">You can use as
 popups as you need and you can nest it without any limit.</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">The MsgInfo() 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">The MsgInfo()
 Function</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">This is a very 
-useful function. It will show a little message window (with the system 
+<p align="left" class="section1"><font face="Arial" size="2">This is a very
+useful function. It will show a little message window (with the system
 information icon) and a message (character type) passed as parameter.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">You can optionally 
+<p align="left" class="section1"><font face="Arial" size="2">You can optionally
 add a title (passed as the second parameter)</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Adding a 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Adding a
 Label</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The label control 
+<p align="left" class="section1"><font face="Arial" size="2">The label control
 allows you to show text and it is very easy to use too.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 100,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 100,10
 LABEL Label_1 VALUE 'This is a Label!'</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">@ 100,10 means that 
-the text will be showed at row 100 , column 10 (remember that the measurement 
+<p align="left" class="section1"><font face="Arial" size="2">@ 100,10 means that
+the text will be showed at row 100 , column 10 (remember that the measurement
 unit is the pixel)</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Label_1 is the name 
+<p align="left" class="section1"><font face="Arial" size="2">Label_1 is the name
 of the control (we will identificate by this name)</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">VALUE clause 
+<p align="left" class="section1"><font face="Arial" size="2">VALUE clause
 indicates the initial value of the control when created.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -165,26 +165,26 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 03 - Label Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 100,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 100,10
 LABEL Label_1 VALUE 'This is a Label!'</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting data 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting data
 from the user (The TextBox Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The TextBox control 
+<p align="left" class="section1"><font face="Arial" size="2">The TextBox control
 is the main way to obtain data from the user.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 40 , 120 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 40 , 120
 TEXTBOX Text_1</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">If you want to get 
+<p align="left" class="section1"><font face="Arial" size="2">If you want to get
 numeric data, just add NUMERIC clause:</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 80 , 120 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 80 , 120
 TEXTBOX Text_2 NUMERIC</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">If you want to 
+<p align="left" class="section1"><font face="Arial" size="2">If you want to
 indicate an editing mask, you can use the INPUTMASK clause.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 120 , 120 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; @ 120 , 120
 TEXTBOX Text_2 NUMERIC INPUTMASK '9999.99'</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -196,28 +196,28 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 300 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 04 TextBox Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change TextBox Content' ACTION&nbsp; Win_1.Text_1.Value := 'New 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change TextBox Content' ACTION&nbsp; Win_1.Text_1.Value := 'New
 TextBox Value'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve TextBox Content' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve TextBox Content' ACTION&nbsp; MsgInfo (
 Win_1.Text_1.Value)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Numeric TextBox Content' ACTION&nbsp; Win_1.Text_2.Value := 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Numeric TextBox Content' ACTION&nbsp; Win_1.Text_2.Value :=
 100<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Numeric TextBox Content' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Numeric TextBox Content' ACTION&nbsp; MsgInfo (
 Str(Win_1.Text_2.Value))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Numeric (InputMask) TextBox Content' ACTION&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Numeric (InputMask) TextBox Content' ACTION&nbsp;
 Win_1.Text_3.Value := 1234.12<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Numeric (InputMask) TextBox Content' ACTION&nbsp; MsgInfo 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Numeric (InputMask) TextBox Content' ACTION&nbsp; MsgInfo
 ( Str(Win_1.Text_3.Value))<br>
 <br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 40 , 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 40 ,
 120 TEXTBOX Text_1<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 80 , 120 TEXTBOX Text_2 NUMERIC<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 120 , 120 TEXTBOX Text_3 NUMERIC INPUTMASK '9999.99'</font></p>
@@ -226,14 +226,14 @@ Win_1.Text_3.Value := 1234.12<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting
 Logical</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">Sometimes, you need 
-to get logical data. from the user. The easiest way to do that, is using a 
+<p align="left" class="section1"><font face="Arial" size="2">Sometimes, you need
+to get logical data. from the user. The easiest way to do that, is using a
 checkbox control.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">@ 180, 120 
+<p align="left" class="section1"><font face="Terminal" size="1">@ 180, 120
 CHECKBOX Check_1</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">We add it to the 
+<p align="left" class="section1"><font face="Arial" size="2">We add it to the
 program, along with new menu options to set or retrieve its value</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -245,30 +245,30 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 300 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 05 - CheckBox Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change CheckBox Value' ACTION&nbsp; Win_1.Check_1.Value := .T.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve CheckBox Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve CheckBox Value' ACTION&nbsp; MsgInfo (
 if(Win_1.Check_1.Value,'.T.','.F.'))<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 100, 120 CHECKBOX Check_1 CAPTION 'Check Me!'</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Making a 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Making a
 Choice</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">Sometimes, you need 
-to get a choice from users, between a small group of options that are known at 
+<p align="left" class="section1"><font face="Arial" size="2">Sometimes, you need
+to get a choice from users, between a small group of options that are known at
 design time.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">The best way to go 
+<p align="left" class="section1"><font face="Arial" size="2">The best way to go
 is such cases is the RadioGroup control.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">@ 80, 120 
+<p align="left" class="section1"><font face="Terminal" size="1">@ 80, 120
 RADIOGROUP Radio_1 OPTIONS {'Option 1','Option 2','Option 3'}</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -280,16 +280,16 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 06 - RadioGroup Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change RadioGroup Value' ACTION&nbsp; Win_1.Radio_1.Value := 2<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve RadioGroup Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve RadioGroup Value' ACTION&nbsp; MsgInfo (
 Str(Win_1.Radio_1.Value))<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 80, 120 RADIOGROUP Radio_1 OPTIONS {'Option 1','Option 2','Option 3'}</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
@@ -297,13 +297,13 @@ Str(Win_1.Radio_1.Value))<br>
 <br>
 Return</font></p>
 <p align="left" class="section1"><u><b><font face="Arial" size="2">More Choices</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">There is various 
+<p align="left" class="section1"><font face="Arial" size="2">There is various
 alternatives to get an user's choice besides RadioGroup.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">One of them is the 
+<p align="left" class="section1"><font face="Arial" size="2">One of them is the
 ListBox Control</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">@ 10, 10 LISTBOX 
+<p align="left" class="section1"><font face="Terminal" size="1">@ 10, 10 LISTBOX
 List_1 ITEMS {'Option 1','Option 2','Option 3'}</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Using a Listbox, 
+<p align="left" class="section1"><font face="Arial" size="2">Using a Listbox,
 you can add, change or remove items at runtime.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -315,35 +315,35 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 07 - ListBox Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change ListBox Value' ACTION&nbsp; Win_1.List_1.Value := 2<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve ListBox Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve ListBox Value' ACTION&nbsp; MsgInfo (
 Str(Win_1.List_1.Value))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Add List Item' ACTION Win_1.List_1.AddItem ('New List Item')<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Remove List Item' ACTION Win_1.List_1.DeleteItem (2)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change List Item' ACTION Win_1.List_1.Item (1) := 'New Item 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change List Item' ACTION Win_1.List_1.Item (1) := 'New Item
 Text'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get List Item Count' ACTION MsgInfo 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get List Item Count' ACTION MsgInfo
 (Str(Win_1.List_1.ItemCount))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 10, 10 LISTBOX List_1 ITEMS {'Option 1','Option 2','Option 3'}</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">More Choices 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">More Choices
 II</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">Another alternative 
+<p align="left" class="section1"><font face="Arial" size="2">Another alternative
 to get an user's choice is the COMBOBOX.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">@ 10, 10 
+<p align="left" class="section1"><font face="Terminal" size="1">@ 10, 10
 COMBOBOX Combo_1 ITEMS {'Option 1','Option 2','Option 3'}</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Using a Combobox, 
+<p align="left" class="section1"><font face="Arial" size="2">Using a Combobox,
 is similar to ListBox.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -355,34 +355,34 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 08 - ComboBox Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change ComboBox Value' ACTION&nbsp; Win_1.Combo_1.Value := 2<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve ComboBox Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve ComboBox Value' ACTION&nbsp; MsgInfo (
 Str(Win_1.Combo_1.Value))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Add Combo Item' ACTION Win_1.Combo_1.AddItem ('New List 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Add Combo Item' ACTION Win_1.Combo_1.AddItem ('New List
 Item')<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Remove Combo Item' ACTION Win_1.Combo_1.DeleteItem (2)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Combo Item' ACTION Win_1.Combo_1.Item (1) := 'New Item 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Combo Item' ACTION Win_1.Combo_1.Item (1) := 'New Item
 Text'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get Combo Item Count' ACTION MsgInfo 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get Combo Item Count' ACTION MsgInfo
 (Str(Win_1.Combo_1.ItemCount))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 10, 10 COMBOBOX Combo_1 ITEMS {'Option 1','Option 2','Option 3'}</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Pushing 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Pushing
 Actions (Standard Buttons)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">Another way for let 
+<p align="left" class="section1"><font face="Arial" size="2">Another way for let
 the users to take an action (besides menus) are buttons.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">@ 10,10 BUTTON 
+<p align="left" class="section1"><font face="Terminal" size="1">@ 10,10 BUTTON
 Button_1 CAPTION 'Click Here!' ACTION MsgInfo('Button Clicked!')&nbsp;</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -394,7 +394,7 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 09 - Button Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 BUTTON Button_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CAPTION 'Click Here!' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ACTION MsgInfo('Button Clicked!')&nbsp;</font></p>
@@ -403,9 +403,9 @@ BUTTON Button_1 ;<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Being More 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Being More
 Graphical (Picture Buttons)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">Instead a text 
+<p align="left" class="section1"><font face="Arial" size="2">Instead a text
 caption you can use a picture.</font></p>
 <p align="left" class="section1"><font size="1" face="Terminal">@ 10,10 BUTTON PictureButton_1 ;<br>
 &nbsp;&nbsp;&nbsp; PICTURE 'button.bmp' ;<br>
@@ -423,7 +423,7 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 10 - Picture Button Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 10,10 BUTTON PictureButton_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PICTURE 'button.bmp' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ACTION MsgInfo('Picture Button Clicked!!') ;<br>
@@ -435,16 +435,16 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">The optional 
-tooltip clause, causes that a small window with an explanatory text be displayed 
-when the mouse pointer stays over the control for a few seconds. You can use 
+<p align="left" class="section1"><font face="Arial" size="2">The optional
+tooltip clause, causes that a small window with an explanatory text be displayed
+when the mouse pointer stays over the control for a few seconds. You can use
 this clause with most MiniGUI controls.</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Button + 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Button +
 CheckBox = CheckButton</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The CheckButton 
-control, acts like a checkbox, but looks like a button. Like buttons, It comes 
+<p align="left" class="section1"><font face="Arial" size="2">The CheckButton
+control, acts like a checkbox, but looks like a button. Like buttons, It comes
 in two flavors: Text and Graphical.</font></p>
-<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp; 
+<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp;
 @ 10,10 CHECKBUTTON CheckButton_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CAPTION 'CheckButton' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VALUE .F.&nbsp;<br>
@@ -465,21 +465,21 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 11 - CheckButton Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Text CheckButton Value' ACTION&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Text CheckButton Value' ACTION&nbsp;
 Win_1.CheckButton_1.Value := .T.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Text CheckButton Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Text CheckButton Value' ACTION&nbsp; MsgInfo (
 if(Win_1.CheckButton_1.Value,'.T.','.F.'))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Picture CheckButton Value' ACTION&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Picture CheckButton Value' ACTION&nbsp;
 Win_1.CheckButton_2.Value := .T.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Picture CheckButton Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Picture CheckButton Value' ACTION&nbsp; MsgInfo (
 if(Win_1.CheckButton_2.Value,'.T.','.F.')) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 10,10 CHECKBUTTON CheckButton_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CAPTION 'CheckButton' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VALUE .F.&nbsp;<br>
@@ -496,11 +496,11 @@ if(Win_1.CheckButton_2.Value,'.T.','.F.')) <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting Dates 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting Dates
 (The DatePicker Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The easiest way to 
+<p align="left" class="section1"><font face="Arial" size="2">The easiest way to
 get dates from user is the datepicker control.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;
 @ 10,10 DATEPICKER Date_1</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -512,26 +512,26 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 12 - DatePicker Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change DatePicker Value' ACTION&nbsp; Win_1.date_1.Value := Date()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve DatePicker Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve DatePicker Value' ACTION&nbsp; MsgInfo (
 dtoc(Win_1.Date_1.Value))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 DATEPICKER Date_1</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
 <br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting Large 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting Large
 Text (The EditBox Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The EditBox control 
+<p align="left" class="section1"><font face="Arial" size="2">The EditBox control
 allows to handle large (multiline) text data.</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 EDITBOX Edit_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTH 300 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 150&nbsp;</font></p>
@@ -545,16 +545,16 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 300 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 13 EditBox Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change EditBox Content' ACTION&nbsp; Win_1.Edit_1.Value := 'New 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change EditBox Content' ACTION&nbsp; Win_1.Edit_1.Value := 'New
 EditBox Value'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve EditBox Content' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve EditBox Content' ACTION&nbsp; MsgInfo (
 Win_1.Edit_1.Value)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU </font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 EDITBOX Edit_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTH 300 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 150&nbsp;</font></p>
@@ -563,9 +563,9 @@ EDITBOX Edit_1 ;<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Displaying 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Displaying
 Images (The Image Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The image control 
+<p align="left" class="section1"><font face="Arial" size="2">The image control
 allows to show image files in your program.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">
 &nbsp;&nbsp;&nbsp; @ 10,10 IMAGE Image_1 ;<br>
@@ -582,15 +582,15 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 14 Image Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Image Content' ACTION&nbsp; Win_1.Image_1.Picture := 'Open.Bmp'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Image Content' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Image Content' ACTION&nbsp; MsgInfo (
 Win_1.Image_1.Picture)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU </font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @
 10,10 IMAGE Image_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PICTURE 'Demo.Bmp' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTH 90 ;<br>
@@ -600,9 +600,9 @@ Win_1.Image_1.Picture)<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Showing 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Showing
 Progress</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">The progressbar 
+<p align="left" class="section1"><font face="Arial" size="2">The progressbar
 control allows to show the completion status of an operation.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">
 &nbsp;&nbsp;&nbsp; @ 10,10 PROGRESSBAR Progress_1 ;<br>
@@ -617,13 +617,13 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 15 Progressbar Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'ProgressBar Test' ACTION&nbsp; DoTest()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU </font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 PROGRESSBAR Progress_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RANGE 0 , 65535</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp; END WINDOW<br>
@@ -639,10 +639,10 @@ Local i<br>
 &nbsp;&nbsp;&nbsp; Next i<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Spinning 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Spinning
 Around</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">An alternate way to 
-get numeric data is the spinner control. It consist of a textbox with two arrows 
+<p align="left" class="section1"><font face="Arial" size="2">An alternate way to
+get numeric data is the spinner control. It consist of a textbox with two arrows
 that allows to change control's value using the mouse.</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">
 &nbsp;&nbsp;&nbsp; @ 10,10 SPINNER Spinner_1 ;<br>
@@ -660,15 +660,15 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 16 Spinner Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Spinner Value' ACTION&nbsp; Win_1.Spinner_1.Value := 8<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Spinner Value' ACTION&nbsp; MsgInfo ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Retrieve Spinner Value' ACTION&nbsp; MsgInfo (
 Str(Win_1.Spinner_1.Value)) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU </font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10
 SPINNER Spinner_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RANGE 0,10 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VALUE 5 ;<br>
@@ -679,9 +679,9 @@ SPINNER Spinner_1 ;<br>
 &nbsp;&nbsp;&nbsp; ACTIVATE WINDOW Win_1<br>
 <br>
 Return</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Getting
 Organized (TAB Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">A TAB control lets 
+<p align="left" class="section1"><font face="Arial" size="2">A TAB control lets
 organize controls and save form space, grouping the controls in folders. </font>
 </p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
@@ -694,7 +694,7 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 250 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 17 Tab Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN </font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP &quot;First Popup&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Change Tab Value' ACTION&nbsp; Win_1.Tab_1.Value := 2<br>
@@ -702,7 +702,7 @@ MAIN MENU<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU </font></p>
-<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 TAB Tab_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AT 10,10 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTH 350 ;<br>
@@ -725,8 +725,8 @@ TAB Tab_1 ;<br>
 Return<br>
 </font><font face="Arial" size="2"><br>
 <u><b>More Organization (TOOLBAR Control)</b></u></font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Toolbars are used 
-to group command buttons in a bar located (usually) at window top (under main 
+<p align="left" class="section1"><font face="Arial" size="2">Toolbars are used
+to group command buttons in a bar located (usually) at window top (under main
 menu bar).</font></p>
 <p align="left" class="section1"><font size="1" face="Terminal">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -741,9 +741,9 @@ Function Main<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE MAIN MENU <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP '&amp;File'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM '&amp;Disable ToolBar Button' ACTION Win_1.Button_1.Enabled := 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM '&amp;Disable ToolBar Button' ACTION Win_1.Button_1.Enabled :=
 .F.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM '&amp;Enable ToolBar Button' ACTION Win_1.Button_1.Enabled := 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM '&amp;Enable ToolBar Button' ACTION Win_1.Button_1.Enabled :=
 .T.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM '&amp;Exit' ACTION Win_1.Release<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
@@ -777,10 +777,10 @@ Function Main<br>
 <br>
 Return Nil<br>
 </font><font face="Arial" size="2">&nbsp;</font></p>
-<p align="left" class="section1"><u><b><font face="Arial" size="2">Showing 
+<p align="left" class="section1"><u><b><font face="Arial" size="2">Showing
 Status (Statusbar Control)</font></b></u></p>
-<p align="left" class="section1"><font face="Arial" size="2">This control 
-creates a bar at window's bottom, used to show information (usually status 
+<p align="left" class="section1"><font face="Arial" size="2">This control
+creates a bar at window's bottom, used to show information (usually status
 information)<br>
 <br>
 </font><font size="1" face="Terminal">#include &quot;minigui.ch&quot;<br>
@@ -793,16 +793,16 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 200 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TITLE 'Tutor 19 Tab Test' ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAIN&nbsp;</font></p>
-<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font face="Terminal" size="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 MAIN MENU <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP '&amp;StatusBar Test'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Status Item 1' ACTION Form_1.StatusBar.Item(1) := &quot;New 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Status Item 1' ACTION Form_1.StatusBar.Item(1) := &quot;New
 value 1&quot;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Status Item 2' ACTION Form_1.StatusBar.Item(2) := &quot;New 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Status Item 2' ACTION Form_1.StatusBar.Item(2) := &quot;New
 value 2&quot;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END POPUP<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MENU</font></p>
-<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE 
+<p align="left" class="section1"><font size="1" face="Terminal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE
 STATUSBAR <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUSITEM &quot;Item 1&quot; ACTION MsgInfo('Click! 1') <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUSITEM &quot;Item 2&quot; WIDTH 100 ACTION MsgInfo('Click! 2')<br>
@@ -818,12 +818,12 @@ STATUSBAR <br>
 Return<br>
 </font><font face="Arial" size="2"><br>
 <u><b>Data-Controls I: BROWSE</b></u></font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Data controls are 
+<p align="left" class="section1"><font face="Arial" size="2">Data controls are
 designed to handle data in .dbf files directly. <br>
 <br>
 Browse control allows to show / edit database records in tabular format.<br>
 'Value' property is use to set / get the selected record number (recno()).<br>
-By default, Browse control does not change the record pointer in its work area 
+By default, Browse control does not change the record pointer in its work area
 (*). </font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -839,9 +839,9 @@ Function Main<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DEFINE MAIN MENU <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POPUP 'File'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Browse Value' ACTION Win_1.Browse_1.Value := Val ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Set Browse Value' ACTION Win_1.Browse_1.Value := Val (
 InputBox ('Set Browse Value','') )<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get Browse Value' ACTION MsgInfo ( Str ( 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Get Browse Value' ACTION MsgInfo ( Str (
 Win_1.Browse_1.Value ) )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEPARATOR<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ITEM 'Exit' ACTION Win_1.Release<br>
@@ -854,11 +854,11 @@ Win_1.Browse_1.Value ) )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @ 10,10 BROWSE Browse_1 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTH 610 ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEIGHT 390 ; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date',
 'Married' , 'Biography' } ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WORKAREA Test ;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FIELDS { 'Test-&gt;Code' , 'Test-&gt;First' , 'Test-&gt;Last' , 'Test-&gt;Birth' 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FIELDS { 'Test-&gt;Code' , 'Test-&gt;First' , 'Test-&gt;Last' , 'Test-&gt;Birth'
 , 'Test-&gt;Married' , 'Test-&gt;Bio' } ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DELETE ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LOCK ;<br>
@@ -880,15 +880,15 @@ Return Nil<br>
 Procedure CloseTables()<br>
 &nbsp;&nbsp;&nbsp; Use<br>
 Return Nil</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">(*) To change this 
-behavior (the default) you must change 'browsesync' setting using 'Set 
+<p align="left" class="section1"><font face="Arial" size="2">(*) To change this
+behavior (the default) you must change 'browsesync' setting using 'Set
 BrowseSync On' command.</font></p>
-<p align="left" class="section1"><font face="Arial" size="2"><u><b>Data-Controls 
+<p align="left" class="section1"><font face="Arial" size="2"><u><b>Data-Controls
 II: TEXTBOX, DATEPICKER, CHECKBOX, EDITBOX</b></u><br>
 <br>
-The 'data-version' of these controls required the use of the following 
+The 'data-version' of these controls required the use of the following
 properties / methods to bound them to a database field:</font></p>
-<p align="left" class="section1"><font face="Arial" size="2">&nbsp;&nbsp;&nbsp; Field Property: 
+<p align="left" class="section1"><font face="Arial" size="2">&nbsp;&nbsp;&nbsp; Field Property:
 Stablishes the field that control is bounded to.<br>
 &nbsp;&nbsp;&nbsp; Refresh Method: Updates control content based on current field content.<br>
 &nbsp;&nbsp;&nbsp; Save method: Updates database file according control content.</font></p>
@@ -919,7 +919,7 @@ Function Main<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BUTTON NEXT ;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CAPTION '&amp;Next';<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PICTURE 'siguiente.bmp' ;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ACTION ( DbSkip(1) , if ( eof() , DbGoBottom() , Nil ) , 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ACTION ( DbSkip(1) , if ( eof() , DbGoBottom() , Nil ) ,
 Refresh() )<br>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BUTTON BOTTOM ;<br>
@@ -1010,8 +1010,8 @@ Procedure CloseTables<br>
 Return<br>
 </font><font face="Arial" size="2"><br>
 <u><b>More Organization II (SPLITBOX Control)</b></u></font></p>
-<p align="left" class="section1"><font face="Arial" size="2">Controls defined as 
-part of this container can be arranged by users, using a gripperbar located at 
+<p align="left" class="section1"><font face="Arial" size="2">Controls defined as
+part of this container can be arranged by users, using a gripperbar located at
 control's left side. You must omit '@ &lt;row&gt;,&lt;col&gt;' in control definition.&nbsp;</font></p>
 <p align="left" class="section1"><font face="Terminal" size="1">#include &quot;minigui.ch&quot;<br>
 <br>
@@ -1053,7 +1053,7 @@ Return Nil<br>
 </font>--<font face="Arial" color="#000000" size="2"><strong style="font-weight: 400"><br>
 Roberto Lopez &lt;roblez@ciudad.com.ar&gt;</strong></font></p>
 </blockquote>
-  
+
 </body>
 
 </html>

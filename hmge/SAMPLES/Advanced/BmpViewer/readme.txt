@@ -30,6 +30,6 @@ Made by Harbour and MiniGUI.
 Enjoy ! :-)
 
 -------------------------------------------------------------------------------
-BmpViewer software is provided "as-is". 
-No warranty of any kind is expressed or implied. 
+BmpViewer software is provided "as-is".
+No warranty of any kind is expressed or implied.
 -------------------------------------------------------------------------------

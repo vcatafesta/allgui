@@ -40,6 +40,6 @@ Made by Harbour and MiniGUI with the freeware FreeImage.dll.
 Enjoy ! :-)
 
 -------------------------------------------------------------------------------
-FreeView software is provided "as-is". 
-No warranty of any kind is expressed or implied. 
+FreeView software is provided "as-is".
+No warranty of any kind is expressed or implied.
 -------------------------------------------------------------------------------

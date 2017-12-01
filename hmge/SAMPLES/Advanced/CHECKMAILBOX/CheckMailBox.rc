@@ -16,24 +16,24 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "CompanyName", ""
-		VALUE "FileDescription", "Mail Checking Utility\000"
-		VALUE "FileVersion", "1.4.0.0"
-		VALUE "InternalName", "CheckMail"
-		VALUE "LegalCopyright", "Copyright © 2002-2007 Grigory Filatov\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "CheckMailBox.exe"
-		VALUE "ProductName", "MiniGUI Utility\000"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Freeware, but see add notes for conditions\000"
-		VALUE "Aditional Notes", "Not for distribution without the authors permission"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "CompanyName", ""
+      VALUE "FileDescription", "Mail Checking Utility\000"
+      VALUE "FileVersion", "1.4.0.0"
+      VALUE "InternalName", "CheckMail"
+      VALUE "LegalCopyright", "Copyright © 2002-2007 Grigory Filatov\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "CheckMailBox.exe"
+      VALUE "ProductName", "MiniGUI Utility\000"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Freeware, but see add notes for conditions\000"
+      VALUE "Aditional Notes", "Not for distribution without the authors permission"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

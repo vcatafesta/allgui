@@ -21,7 +21,7 @@ HWGUI 2.16 ( 14.09.2006 )
        msrec --> aArray
     so you need to make search and replace in your programs to rename them.
 
-[*] Many bug fixes and enhancements in both GTK and Win32 versions - 
+[*] Many bug fixes and enhancements in both GTK and Win32 versions -
     see Changelog for details.
 
 HWGUI 2.15 ( 07.06.2006 )
@@ -84,7 +84,7 @@ HWGUI 2.14 ( 14.12.2004 )
 HWGUI 2.13 ( 22.07.2004 )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[+] New controls - classes and appropriate commands has been added - 
+[+] New controls - classes and appropriate commands has been added -
     see Changelog for details.
 
 [+] Support for Pelles C and Open Watcom C compilers has been added.
@@ -112,7 +112,7 @@ HWGUI 2.11 ( 15.10.2003 )
 
 [+] New functions has been added:
 
-       Tree_HitTest( hTree [, x, y ] ) - returns the tree item, placed in 
+       Tree_HitTest( hTree [, x, y ] ) - returns the tree item, placed in
                                          x,y coordinates ( or cursor position )
        ScreenToClient( x,y ) - converts the point coordinates from absolute
                                to window client area relative
@@ -180,7 +180,7 @@ HWGUI 2.09 ( 08.09.2003 )
 
 [*]  Some other changes:
         HRadioGroup: new method is added - SetValue( nValue ),
-        the command 'GET RADIOGROUP' is changed to 
+        the command 'GET RADIOGROUP' is changed to
         'GET RADIOGROUP [ <ogr> VAR ] <vari>' ;
         HTree: new variable added - bExpand, this codeblock should return .F.
         to prevent expanding or collapsing    ;
@@ -204,14 +204,14 @@ HWGUI 2.08 ( 08.07.2003 )
 [+] Added possibility to draw window background with a bitmap.
 
 [+] New functions are added:
-     DrawIcon( hDC,x,y,hIcon ), DrawTransparentBitmap( hDC,hBitmap,x,y), 
+     DrawIcon( hDC,x,y,hIcon ), DrawTransparentBitmap( hDC,hBitmap,x,y),
      Array2String( array ), String2Array( cString ),
      SetWindowObject( hWnd,oWnd ), GetWindowObject( hWnd ),
      SetCapture( hWnd ), ReleaseCapture(),
      RegSetBinary( handle, cKeyName, cKeyValue ),
      PlaySound( cFilename, lSync, lLoop ),
      re_SetCharFormat(), re_SetDefault(),
-     re_CharFromPos( hEdit,xPos,yPos ), re_GetTextRange( hEdit, n1, n2 ) 
+     re_CharFromPos( hEdit,xPos,yPos ), re_GetTextRange( hEdit, n1, n2 )
      DrawEdge( hDC,x1,y1,x2,y2,nFlag,nBorder ),
      ShellExecute( cFile, cOperation, cParams, cDir, nFlag )
 
@@ -257,7 +257,7 @@ HWGUI 2.07 ( 21.05.2003 )
 
 [+] HIcon class is added.
 
-[!] Now in ICON clause of INIT WINDOW command you should use previously 
+[!] Now in ICON clause of INIT WINDOW command you should use previously
     created oIcon object, not the icon handle.
 
 [-] Some bug fixes.
@@ -275,7 +275,7 @@ HWGUI 2.06 ( 15.11.2002 )
 
 [+] New variables and methods are added to the HBrowse class:
 
-     bPosChanged, this user defined codeblock is evaluated after each 
+     bPosChanged, this user defined codeblock is evaluated after each
           selection change in browse ;
      lAutoEdit, compatible with TSBrowse class for Fivewin ;
      lAppable - allows to add rows to the browse ;
@@ -334,7 +334,7 @@ HWGUI 2.04 ( 05.08.2002 )
      @ <x>,<y> LINE [ <oLine> ] ...
 
 [+] Added few functions, which allows to check, if another copy of this program
-    is running and to activate that copy, if so. See sample of using in 
+    is running and to activate that copy, if so. See sample of using in
     samples/designer/designer.prg
 
 [*] Some modifications in HBrowse, contributed by WHT.
@@ -383,7 +383,7 @@ HWGUI 2.02 ( 23.07.2002 )
 
 [+] HBrowse: added possibility to display bitmaps in columns.
     You can now define a codeblock for keys handling:
-         
+
         oBrw:bKeyDown := {|oBrw,key|MyFunction(oBrw,key)}
 
     Look at the sample a.prg, function OpenAbout().
@@ -405,7 +405,7 @@ HWGUI 2.01 ( 05.07.2002 )
 [+] Starting implementation of Get system.
     New commands added:
 
-    @ <x>,<y> GET ... 
+    @ <x>,<y> GET ...
     REDEFINE GET  ...
     @ <x>,<y> GET CHECKBOX ...
     REDEFINE GET CHECKBOX ...
@@ -466,10 +466,10 @@ HWGUI 2.0 beta 2 ( 14.06.2002 )
 
 HWGUI 2.0 beta ( 04.06.2002 )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[!] HwGUI is now OOP based. See classes hierarchy and description in 
+[!] HwGUI is now OOP based. See classes hierarchy and description in
     documentation ( doc/hwgdoc.htm ).
 
-[!] New commands are added, some are removed, see documentation 
+[!] New commands are added, some are removed, see documentation
     ( doc/hwgdoc.htm ) for details.
     Most new commands are designed for creating controls without using
     resources ( *.rc file ).

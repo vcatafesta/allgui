@@ -4,7 +4,7 @@ Sample code for native PostgreSQL connect (libpq)
 Contributed by Viktor Szakats
 Arranged for MiniGUI by Mitja Podgornik
 
-Sample code must be compiled with /PG and /C switch. 
+Sample code must be compiled with /PG and /C switch.
 For GUI apps only switch /PG is needed and app must have access to all dll's in this map
 Dll's are from PostgreSQL version 8.4
 

@@ -140,7 +140,6 @@
                                                 <(cOrderFile)>;
                                                  )
 
-
 #xCommand ADD FIELD <cFld> DATA [<xpression,...>] TO <oObj> ;
           => ;
           <oObj>:ClassAdd( <"cFld">,, {| Self | [<xpression>] },,)

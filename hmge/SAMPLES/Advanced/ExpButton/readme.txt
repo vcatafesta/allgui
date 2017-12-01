@@ -1,5 +1,5 @@
-	Description of array aButStyles
-	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Description of array aButStyles
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
        1 - Style number (used in property "CARGO" for particular button)
 
@@ -24,9 +24,9 @@
 
       10 - Color of border in normal condition
       11 - Color of border at mouse hover
- 
-	Notes
-	~~~~~
+
+   Notes
+   ~~~~~
 
 1. Value of property "CARGO" (character type) - "Style number, file (resource) of picture at mouse hover"
 2. If value of property "CARGO" is not defined - style of button is the 1-st line of array aButStyles

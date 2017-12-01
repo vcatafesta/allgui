@@ -712,7 +712,7 @@
            Syntax:
              DRAW ICON IN WINDOW <windowname> AT <row>,<col> ;
                PICTURE | IMAGE | HICON <icon> ;
-               [ WIDTH <w> ] [ HEIGHT <h> ] [ COLOR <nRGB> ] ; 
+               [ WIDTH <w> ] [ HEIGHT <h> ] [ COLOR <nRGB> ] ;
                [ TRANSPARENT ]
            Based upon a contribution of Petr Chornyj <myorg63@mail.ru>
            (see demo in folder \samples\Basic\Icons)
@@ -1598,7 +1598,7 @@
            - added missing casting for C++ mode into the MiniGUI core, CallDll,
              HbPrinter and MiniPrint libraries.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - fixed a tooltip handle assigning error at Windows Server 2008.
              Problem was reported by Dusko Radojcin.
            - fixed a wrong workaround (introduced in the build 16.07).
@@ -1940,7 +1940,7 @@
   * Updated: Rearranged processing of an enum index in the cycles 'For Each-Next'
            for xHarbour compatibility.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - added a new method nAtColActual() for correct detection of a column
              number at the mouse moving in TBrowse. It was needed for a proper
              handling of the cell's tooltips.
@@ -2014,7 +2014,7 @@
   * Updated: Replacing the cycles 'For-Next' with 'For Each-Next' for improvement
            of the speed of the Tab pages updating.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - added a new class TCursor for proper processing of TBROWSE cursor
              which was defined by user for a whole control.
            Syntax: TCursor():New( cResCursorName [, cPredefinedCursorName ] )
@@ -2024,7 +2024,7 @@
            - fixed the initial font's handling for proper calculation of cell's height.
              (see demo in folder \samples\Advanced\Tsb_array)
            - fixed the problem with wheel mouse scroll in the MDI child windows.
-             (see sample Tsb_MDI.prg in folder \samples\Advanced\TSBrowse) 
+             (see sample Tsb_MDI.prg in folder \samples\Advanced\TSBrowse)
            - added handling of the column's order in the ARRAY mode with
              using of the TSColumn variable oCol:lIndexCol.
              (see demo at Menu TSBrowse->'Grid form' in folder
@@ -2090,7 +2090,7 @@
            Problem was reported by Pete Dionysopoulos <pete_westg@yahoo.gr>.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see in folder \Source\CallDll).
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - added handling of the variable :lNoDescend from TSColumn class;
            - fixed header aligning at the switching of the column order.
            Contributed by SergKis.
@@ -2146,7 +2146,7 @@
   * Updated: HbSQLite3 library:
            - update for using a recent SQLITE3 version 3.10.0.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: Correction of the editable status in the method KeyDown.
              Problem was reported by Dusko Radojcin.
            Based upon a contribution of Janusz Pora <januszpora@onet.eu>.
@@ -2164,7 +2164,7 @@
            - Command Link Button control was defined as user component below:
              @ <row>,<col> CLBUTTON <name> OF <parent> ;
                 CAPTION <caption> NOTETEXT <notes> ;
-		ACTION <action> [ <default: DEFAULT> ]
+      ACTION <action> [ <default: DEFAULT> ]
            - added pseudo-OOP method SetShield for showing of the Admin
              privilege requiring.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
@@ -2239,7 +2239,7 @@
   * Updated: HbSQLite3 library:
            - update for using SQLITE3 version 3.10.0dev (from 3.9.2).
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: Correction of the painting on the field type of check
              or Image for the selected row.
            Based upon a contribution of Janusz Pora <januszpora@onet.eu>.
@@ -2282,7 +2282,7 @@
            Based upon a contribution of Claudio Soto <srvet@adinet.com.uy>.
            Adapted for Minigui Extended by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\DBG_TEST)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - fixed a program crash at the simultaneous using of the column's
              'Valid' clause and the function SetBtnGet().
              Problem was reported by Gilbert Vaillancourt.
@@ -2359,7 +2359,7 @@
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
   * Updated: C-code cleaning for correct compiling with Pelles C 8.0 and xHarbour.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - added handling of the Browse vars hFontEdit, hFontHead, hFontFoot
              and hFontSpcHd in TSColumn class.
            Contributed by SergKis.
@@ -2425,7 +2425,7 @@
   * Updated: Further replacing of 'DEFAULT TO' command in the MiniGUI core
            with the functions hb_default() and __defaultNIL().
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - added handling of the var lEmptyValToChar in TSColumn class;
            - method LoadFields respects now the column's Headers, Widths and
              Pictures which are defined by user at TBROWSE definition;
@@ -2491,7 +2491,7 @@
   * Updated: Dll library source code (see in folder \Source\Dll):
            - correction of using of WIN32_LEAN_AND_MEAN constant at compiling.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - the C-function GetSysMetrics() is defined as pseudo-function;
            - the function LoadImage() supports JPG, GIF, TIF and PNG images.
              Transparent property will be added to these images automatically.
@@ -2551,7 +2551,7 @@
   * Updated: The header file i_winuser.ch used to resolve WinAPI constants.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see i_winuser.ch in folder \include)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - New: added handling of the var cName in TSColumn class;
            - New: added handling of a new Column var lOnGotFocusSelect;
            - Updated: minor correction in the function cValToChar().
@@ -2633,11 +2633,11 @@
   * Changed: ActiveX User Component was moved from the samples to MiniGUI core.
            A new property called 'Object' was added to manipulate the control.
            Syntax:
-                @ <nRow>,<nCol> ACTIVEX <ControlName> 
-                   [ OF | PARENT <ParentWindowName> ] 
+                @ <nRow>,<nCol> ACTIVEX <ControlName>
+                   [ OF | PARENT <ParentWindowName> ]
                    WIDTH <nWidth>
-                   HEIGHT <nWidth> 
-                   PROGID <cProgId> 
+                   HEIGHT <nWidth>
+                   PROGID <cProgId>
            Or
                 DEFINE ACTIVEX <ControlName>
                    <PropertyName>  <PropertyValue>
@@ -2658,9 +2658,9 @@
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\MenuEx)
   * Updated: Further replacing of 'DEFAULT TO' command in MiniGUI core with
-           the functions hb_default()/__defaultNIL() and hb_defaultValue(). 
+           the functions hb_default()/__defaultNIL() and hb_defaultValue().
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - correction of calculation of total column width in the Method ReSize;
            - minor correction in the Method GoUp;
            - conspicuous reducing of cursor blinking in the Method GoDown;
@@ -2711,7 +2711,7 @@
            They are the wrappers for the corresponding [x]Harbour functions.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Basic\GetUserName)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - the C-functions SysRefresh() and nMakeLong() are defined
              as pseudo-functions.
              They are the wrappers for the corresponding MiniGUI functions.
@@ -2769,7 +2769,7 @@
            - New: Aligning for vertical text;
            - New: Additional function _HMG_HPDF_SetOrientation (nMode).
            Contributed by Janusz Pora <januszpora@onet.eu>.
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: EDITABLE clause at a simple TBROWSE definition is respected now.
            - Updated: Added implementation of READONLY and VALID clauses similar to
              a standard BROWSE control.
@@ -2833,9 +2833,9 @@
   * Updated: Changed DEFAULT TO command in MiniGUI core to the functions
            hb_default()/__defaultNIL() and hb_defaultValue() for Harbour
            requiring compatibility. It will set the value to the default one
-           even when the variable has any other type, not only NIL. 
+           even when the variable has any other type, not only NIL.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - updated for xHarbour compatibility after a recent change.
            Based upon a contribution of Ivanil Marcelino.
   * Updated: HbSQLite3 library:
@@ -2898,7 +2898,7 @@
   * Updated: Revised the colored status item's handling:
            - Changed: using of the public _HMG_SYSDATA array was removed.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - New: Added TIMESTAMP type support (first attempt).
              Contributed by Janusz Pora <januszpora@onet.eu>
            - Changed: Minor correction in a handling of the GetBox 'Picture'
@@ -3016,7 +3016,7 @@
            (see demo1.prg in folder \samples\Basic\CONTAINERS\TOOLBAR)
   * Modified: A default font size was changed to 9pt for WinVista or upper.
            It is Microsoft default value of Dialog font size for above systems.
-           - New: Added C-function GetSystemFont() for accurately detect of 
+           - New: Added C-function GetSystemFont() for accurately detect of
              the system default font name and font size.
              Added also the separate pseudo-functions GetDefaultFontName() and
              GetDefaultFontSize() for convenient access to these parameters.
@@ -3306,20 +3306,20 @@
   * Updated: Added WAIT WINDOW command for compatibility with Official HMG.
            This command shows a window with a custom message and pauses
            program execution until an any key is pressed.
-           When optional NOWAIT clause is specified program execution 
+           When optional NOWAIT clause is specified program execution
            continue after message is displayed. To hide the message window
            WAIT CLEAR command must be used.
            Warning: This command must be used only after MAIN window was activated.
            Syntax:
-             WAIT WINDOW <cMessage> [ NOWAIT ] | CLEAR 
+             WAIT WINDOW <cMessage> [ NOWAIT ] | CLEAR
            Syntax at Function calling:
              WaitWindow ( [ cMessage , lNoWait ] )
-             To hide the message window (WAIT CLEAR) you must omit both parameters. 
+             To hide the message window (WAIT CLEAR) you must omit both parameters.
            Sample 1:
              WAIT WINDOW "Press any key to continue"
            Sample 2:
-             WAIT WINDOW "Processing" NOWAIT			
-             <...>		
+             WAIT WINDOW "Processing" NOWAIT
+             <...>
              WAIT CLEAR
            Based upon a contribution of Pete Dionysopoulos <pete_westg@yahoo.gr>.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
@@ -3414,7 +3414,7 @@
   * New: 'Progress bar using for showing of DBF's processing' sample.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see in folder \samples\Basic\PROGRESSBAR_3)
-  * New: 'Save/Restore window position through the ini file' sample. 
+  * New: 'Save/Restore window position through the ini file' sample.
            Based upon a contribution of Janusz Pora <januszpora@onet.eu>.
            Contributed by Verchenko Andrey <verchenkoag@gmail.com>
            (see in folder \samples\Basic\SavePos)
@@ -3707,7 +3707,7 @@
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\SQLITE_2)
   * Updated: Harbour Compiler 3.2.0dev (r2014-04-03 14:26):
-           * Fixed: very serious bug which could cause a memory corruption when 
+           * Fixed: very serious bug which could cause a memory corruption when
              thread unlocked HVM stack;
            * Updated: PostGreSQL library source code (see in folder \Source\HbPgSql);
            * New: added module for writing Harbour FILE IO redirectors at PRG level.
@@ -3749,7 +3749,7 @@
            hb_default(), hb_defaultValue() and __defaultNIL().
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see i_pseudofunc.ch in folder \include)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: Correction using of block bAction in the class TBtnBox.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
   * Updated: HbSQLite3 library:
@@ -3846,7 +3846,7 @@
            - update for using SQLITE3 version 3.8.3dev (from 3.8.2).
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Changed: Minor correction in handling of internal combobox at editing.
              Contributed by Igor Nazarov.
   * Updated: Harbour Compiler 3.2.0dev (r2014-01-21 20:41):
@@ -3966,7 +3966,7 @@
            - update for using SQLITE3 version 3.8.2dev (from 3.8.1).
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: AutoSearch option for a table was not performed bChange block.
            Contributed by Janusz Pora <januszpora@onet.eu>
   * Updated: Harbour Compiler 3.2.0dev (r2013-11-05 08:21):
@@ -3996,7 +3996,7 @@
            nRet := MessageBoxTimeout( Text, Caption, nButtonFlag, nMilliSeconds )
            The function returns an integer value of either a MB_TIMEDOUT value
            (indicating the timeout period was reached and the Message Box auto
-           closed), or a value representing the button the user clicked. 
+           closed), or a value representing the button the user clicked.
            Notice that the return value is always 1, when a message box with
            only an OK button (MB_OK flag) is used.
            Based upon a contribution of Claudio Soto <srvet@adinet.com.uy>.
@@ -4122,7 +4122,7 @@
            (see month.prg in folder \samples\Basic\Monthcal)
   * Changed: The internal C-functions SetMonthCalMonthBkColor(), SetMonthCalFontColor(),
            SetMonthCalTitleBkColor(), SetMonthCalTitleFontColor(), SetMonthCalBkColor(),
-           SetMonthCalTrlFontColor(), SetMonthCalFirstDayOfWeek(), 
+           SetMonthCalTrlFontColor(), SetMonthCalFirstDayOfWeek(),
            GetMonthCalFirstDayOfWeek() are defined as pseudo-functions now.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demos in folder \samples\Basic\Monthcal)
@@ -4159,7 +4159,7 @@
            - update for using SQLITE3 version 3.8.0.2 (from 3.8.0dev).
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see demo in folder \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Modified: improving displays an empty array at the initiation.
            Contributed by Janusz Pora <januszpora@onet.eu>
   * Updated: Harbour Compiler 3.2.0dev (r2013-09-10 02:09).
@@ -4293,7 +4293,7 @@
 2013/06/20: HMG Extended Edition 2.2.3b Published.
   * Updated: Header file i_hmgcompat.ch for compatibility with Official HMG.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 9.0 in HMG:
            - Fixed: Detection of AutoFilter column number in the Special Header.
              Problem was reported by Ryszard Rylko <rrylko@cirow.pl>.
            Contributed by Janusz Pora <januszpora@onet.eu>
@@ -4352,14 +4352,14 @@
              we can avoid re-entry while processing the events of a control or window
              allowing the use of other controls/functions that generate messages of
              re-called of events:
-		DISABLE [ CONTROL ] EVENT ControlName OF FormName
-		ENABLE  [ CONTROL ] EVENT ControlName OF FormName
-		StopControlEventProcedure ( cControlName, cFormName, lStop )
-		DISABLE [ WINDOW ] EVENT OF FormName
-		ENABLE  [ WINDOW ] EVENT OF FormName
-		StopWindowEventProcedure ( cFormName, lStop )
-		GetLastActiveFormIndex ()    --> Return nFormIndex
-		GetLastActiveControlIndex () --> Return nControlIndex
+      DISABLE [ CONTROL ] EVENT ControlName OF FormName
+      ENABLE  [ CONTROL ] EVENT ControlName OF FormName
+      StopControlEventProcedure ( cControlName, cFormName, lStop )
+      DISABLE [ WINDOW ] EVENT OF FormName
+      ENABLE  [ WINDOW ] EVENT OF FormName
+      StopWindowEventProcedure ( cFormName, lStop )
+      GetLastActiveFormIndex ()    --> Return nFormIndex
+      GetLastActiveControlIndex () --> Return nControlIndex
              (see demo in folder \samples\Basic\StopEvents)
            - New: MsgDebug() function accepts as a parameters any data type, elements
              or objects. Returns a string with the message displayed on the screen.
@@ -4605,7 +4605,7 @@
            Contributed by Kevin Carmody <i@kevincarmody.com>
   * Updated: MPM utility was improved:
            - added F7 and F8 hotkeys to toggle Debug and Rebuild modes;
-           - added a space on the Options tab for additional parameters to the 
+           - added a space on the Options tab for additional parameters to the
              C compiler;
            - improved the save test, the test of whether you need to save the
              current project;
@@ -4666,7 +4666,7 @@
 
            #include "minigui.ch"
            Function Main
-             DEFINE WINDOW Win_1 TITLE 'Hello World!' WINDOWTYPE MAIN  
+             DEFINE WINDOW Win_1 TITLE 'Hello World!' WINDOWTYPE MAIN
              END WINDOW
              DEFINE WINDOW Win_2 TITLE 'Child Window' WINDOWTYPE CHILD
              END WINDOW
@@ -5020,10 +5020,10 @@
   * Updated: PropGrid library v.2.0 (see source in folder \source\PropGrid):
            - New: Function GetChangendItem(cForm,CPgName)
              Syntax:
-             GET CHANGED PROPERTYITEM <name> [ OF | PARENT> <parent> ] TO <aIdItem> 
+             GET CHANGED PROPERTYITEM <name> [ OF | PARENT> <parent> ] TO <aIdItem>
            - New: Function SaveMemVarible(cForm,CPgName)
              Syntax:
-             SAVE MEMVALUE PROPERTY <name> [ OF | PARENT> <parent> ] 
+             SAVE MEMVALUE PROPERTY <name> [ OF | PARENT> <parent> ]
            - New: PropertyGrid Language translation support.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see demo3.prg in folder \samples\Advanced\PropGrid)
@@ -5287,7 +5287,7 @@
   * Updated: Harbour Compiler 3.1.0dev (SVN 2012-03-11 21:53).
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (look at ReadMe.txt in folder \harbour)
-  * New: 'Save/Restore window position in the reqistry' sample. 
+  * New: 'Save/Restore window position in the reqistry' sample.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see in folder \samples\Basic\SavePos)
   * New: 'TsBrowse last row sticking workaround' sample.
@@ -5546,7 +5546,7 @@
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
            (see in folder \samples\Applications\FREE_MEMORY)
   * Updated: 'Stock' (Builder of the Function List) sample:
-           - export of shared (or uncalled only) procedures/functions to HTML; 
+           - export of shared (or uncalled only) procedures/functions to HTML;
            - more careful analysis of strings (skip comments: "//", "*", "/* */").
            Contributed by Alexey Gustow <gustow33[at]mail.ru>
            (see in folder \Utils\FuncList)
@@ -5602,7 +5602,7 @@
            (look at ReadMe.txt in folder \harbour)
   * Updated: HMGS-IDE v.1.1.0.1 Project Manager and Two-Way Visual Form Designer:
            - Fixed : Problem at compiling of console application.
-             Reported by Franz <franz@valgraveglia.net> 
+             Reported by Franz <franz@valgraveglia.net>
   * New: 'HMG Achoice' sample.
            Based upon a contribution of Dhanny del Pilar <dhaine_adp@hotmail.com>
            (see in folder \samples\Advanced\ACHOICE_2)
@@ -5737,7 +5737,7 @@
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
   * Updated: Socket library source code by Matteo Baccan <baccan@infomedia.it>:
            - Added: parameter with length of custom string buffer (default is 1)
-             in method ReceiveChar( nBufLen ) (tsocket.prg)	
+             in method ReceiveChar( nBufLen ) (tsocket.prg)
            Based upon a contribution of Artyom Verchenko <artyomskynet@gmail.com>
            - Updated: Revised class code for compatibility with Harbour switch -w3.
            Contributed by Grigory Filatov <gfilatov@inbox.ru>
@@ -6098,7 +6098,7 @@
 
 2011/02/16: Build 93 (HMG 1.9 Extended Edition) Published.
   * Changed: Clipboard retrieve text function was renamed due to misspelled to
-           RetrieveTextFromClipboard()-->cText - retrieve text from Windows clipboard 
+           RetrieveTextFromClipboard()-->cText - retrieve text from Windows clipboard
            Reported by Kevin Carmody <i@kevincarmody.com>.
   * Updated: Clipboard functions:
            - New: Added function ClearClipboard();
@@ -6678,35 +6678,35 @@
 2010/07/07: Build 85 (HMG 1.8 Extended Edition) Published.
   * New: Added PANEL Window type.
            Panel windows can be embedded in other windows.
-           You can define a PANEL window inside a DEFINE WINDOW / END WINDOW 
+           You can define a PANEL window inside a DEFINE WINDOW / END WINDOW
            structure or outside specifying Parent's name (exactly as a control).
            Panel windows are automatically activated through its parent, so
            explicit activation is not required.
            Example:
-		DEFINE WINDOW Win_1 ;
-			ROW 0 ;
-			COL 0 ;
-			WIDTH 400 ;
-			HEIGHT 400 ;
-			TITLE 'Panel Window Demo' ;
-			WINDOWTYPE MAIN  
+      DEFINE WINDOW Win_1 ;
+         ROW 0 ;
+         COL 0 ;
+         WIDTH 400 ;
+         HEIGHT 400 ;
+         TITLE 'Panel Window Demo' ;
+         WINDOWTYPE MAIN
 
-			DEFINE WINDOW Win_2 ;
-				ROW 30 ;
-				COL 30 ;
-				WIDTH 300 ;
-				HEIGHT 200 ;
-				VIRTUAL WIDTH 400 ;
-				VIRTUAL HEIGHT 400 ;
-				WINDOWTYPE PANEL
+         DEFINE WINDOW Win_2 ;
+            ROW 30 ;
+            COL 30 ;
+            WIDTH 300 ;
+            HEIGHT 200 ;
+            VIRTUAL WIDTH 400 ;
+            VIRTUAL HEIGHT 400 ;
+            WINDOWTYPE PANEL
 
-				<...>
-	
-			END WINDOW
+            <...>
 
-		END WINDOW
+         END WINDOW
 
-		ACTIVATE WINDOW Win_1
+      END WINDOW
+
+      ACTIVATE WINDOW Win_1
 
            Based upon a code borrowed from an Official HMG.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -6853,7 +6853,7 @@
              Problem was reported by Ivanil Marcelino <ivanil@linkbr.com.br>.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see demo.prg in folder \samples\Advanced\PropGrid)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - New: Added an optional STYLE clause to TBROWSE command
              Requested by Rossine <qiinfo@ig.com.br>.
            - Fixed: small correction on editing HeaderSpec (it eliminates flickering
@@ -6891,11 +6891,11 @@
            - Fixed: Problem in the GetPrintableArea family functions
              (introduced in the build 82). Reported by Sudip.
   * Updated: Synchronized Extended HMG with Official HMG 3.0.20-29b:
-           - Modified: Added error checking to 'ColumnWhen' and 'ColumnValid' 
-             Browse/Grid events. From this release, when an attempt to edit a 
-             Browse/Grid cell inside these event procedures is done, a runtime 
-             error is generated. The reason for this is to avoid attempts to edit 
-             two or more cells simultaneously in different control instances.  
+           - Modified: Added error checking to 'ColumnWhen' and 'ColumnValid'
+             Browse/Grid events. From this release, when an attempt to edit a
+             Browse/Grid cell inside these event procedures is done, a runtime
+             error is generated. The reason for this is to avoid attempts to edit
+             two or more cells simultaneously in different control instances.
              Reported by Luis Vazquez.
            - Fixed: 'ThisWindow' object reference incorrect on Grid valid procedure.
              Reported by Marek.
@@ -6927,7 +6927,7 @@
   * Updated: The RichEditBox control for compatibility with Harbour 2.0 change.
            Contributed by Kevin Carmody <i@kevincarmody.com>
   * Updated: Synchronized Extended HMG with Official HMG 3.0.26:
-           - Fixed: Problem with number of copies in print preview window. 
+           - Fixed: Problem with number of copies in print preview window.
              Reported by swapan.
            - Fixed: Problem with QUIT command (it's similar to RELEASE WINDOW ALL
              command now). Reported by Czarny_Pijar.
@@ -6944,7 +6944,7 @@
            - Changed: Using of _HMG_MINIPRINT array for MiniPrint library.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demo in folder \samples\Advanced\REPORT_INTERPRETER)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Added: Croatian language translation
            Contributed by Alen Uzelac <alen.uzelac@gmail.com>
   * Updated: HbSQLite3 library source code (see in folder \Source\HbSQLite3):
@@ -7003,7 +7003,7 @@
            - SET TOOLTIP VISIBLETIME TO <v> OF <form>
            where <v> is the visible time of tooltip in milliseconds (max value ~30000).
            Contributed by Hodaszi Tamas <hodaszitamas@gmail.com>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Added: Czech language translation
            - Added: Slovak language translation
            - Added: Hungarian language translation
@@ -7060,7 +7060,7 @@
   * Updated: MiniPrint library (see source in folder \Source\MiniPrint):
            - New: Resources files set. Based upon a contribution by Brazil HMG user.
            - Added: Windows 7 support.
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Enhanced: Added the possibility of defining SpecHeader at the bottom
              of the normal TSBrowse headlines.
            Syntax:
@@ -7111,7 +7111,7 @@
   * Updated: 'Data-Bound Controls' sample.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see in folder \samples\Basic\DATA_BOUND)
-  * Updated: 'Property Grid Creator' sample. 
+  * Updated: 'Property Grid Creator' sample.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see in folder \samples\Advanced\PgCreator)
   * Updated: 'Windows Version' sample:
@@ -7273,16 +7273,16 @@
   * Enhanced: The Image Button control with ICON clause supports an optional
            EXTRACT <IconIndex> clause.
            Syntax:
-		@ 10,10 BUTTON Button_1            ;
-			ICON cFileWithIconResource ;
-			EXTRACT nIconIndex         ;
-			ACTION bAction
+      @ 10,10 BUTTON Button_1            ;
+         ICON cFileWithIconResource ;
+         EXTRACT nIconIndex         ;
+         ACTION bAction
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demo in folder \samples\Basic\ExtractIcon)
   * Updated: Synchronized an Extended HMG with an Official HMG 3.0.0:
-           - Fixed: Problems with numeric group expression in the report generator. 
+           - Fixed: Problems with numeric group expression in the report generator.
              Reported by Fernando Chirico.
-           - Fixed: Problem when group header is omitted in the report generator. 
+           - Fixed: Problem when group header is omitted in the report generator.
              Reported by Sudip.
            (see demos in folder \samples\Advanced\REPORT_GENERATOR)
   * Updated: Harbour Compiler 2.0.0beta3 (SVN 2009-11-24 13:20):
@@ -7345,23 +7345,23 @@
              process ends with an error condition.
              Syntax of <config.hbc>:
 
-		incpaths = incpath1 incpath2 ... incpathn
+      incpaths = incpath1 incpath2 ... incpathn
 
-		libpaths = libpath1 libpath2 ... libpathn
+      libpaths = libpath1 libpath2 ... libpathn
 
-		libs = lib1 lib2 ... libn
+      libs = lib1 lib2 ... libn
 
            - library names must not include a '.lib' extension.
            (see demo in folders \samples\Advanced\HaruPDF and \samples\Applications\PROCESS_KILLER)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
-           - Enhanced: Added the possibility of defining SuperHeader directly in the definition TBrowse. 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
+           - Enhanced: Added the possibility of defining SuperHeader directly in the definition TBrowse.
              SuperHeader name in this case is separated from the Header name by symbol '~' (tilde).
            - Enhanced: Assigns colors for SuperHeader by Method SetColor() individually for each column.
              Added the new constants for SetColor:
              - CLR_SUPF   16  // superheader text
              - CLR_SUPB   17  // superheader back
            - Enhanced: Change font in SuperHeader by Method ChangeFont() individually for each column.
-             New Syntax for ChangeFont: 
+             New Syntax for ChangeFont:
                oBrw:ChangeFont( nFontHandle, nSuperHeader, 4 )   //  4 = Constant for SuperHeader
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see demo at Menu TSBrowse->'Grid form' in folder \samples\Advanced\TSBrowse)
@@ -7405,24 +7405,24 @@
   * New: 'Application' object. It will allow to read (and write when possible)
            various application main window properties.
            Syntax:
-			Application.ExeName
-			Application.Handle
-			Application.FormName
+         Application.ExeName
+         Application.Handle
+         Application.FormName
 
-			Application.Col [ := <nNumber> ]
-			Application.Row [ := <nNumber> ]
-			Application.Width [ := <nNumber> ]
-			Application.Height [ := <nNumber> ]
-			Application.Title [ := <cString> ]
-			Application.Cursor := <cString>
-			Application.BackColor := <aArray>
-			Application.Topmost := <lLogical>
+         Application.Col [ := <nNumber> ]
+         Application.Row [ := <nNumber> ]
+         Application.Width [ := <nNumber> ]
+         Application.Height [ := <nNumber> ]
+         Application.Title [ := <cString> ]
+         Application.Cursor := <cString>
+         Application.BackColor := <aArray>
+         Application.Topmost := <lLogical>
            (see demo in folder \samples\Basic\MULTI_PRG)
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * New: Added a pseudo-function ChangeFileExt( <cFile>, <cExt> ). It will return
            the full filename with changed extension.
            Usage:
-			cFileIni := ChangeFileExt( Application.ExeName, '.ini' )
+         cFileIni := ChangeFileExt( Application.ExeName, '.ini' )
            Based upon an idea borrowed from Delphi.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Fixed: The declaration for all minigui defined functions/procedures.
@@ -7442,30 +7442,30 @@
              The first implementation allows to access (read and write) the system
              clipboard and various system settings (read only).
              Syntax:
-			System.Clipboard [ := <cString> ]
+         System.Clipboard [ := <cString> ]
 
-			System.DesktopWidth
-			System.DesktopHeight
-			System.DefaultPrinter
-			System.DesktopFolder
-			System.MyDocumentsFolder
-			System.ProgramFilesFolder
-			System.SystemFolder
-			System.TempFolder
-			System.WindowsFolder
+         System.DesktopWidth
+         System.DesktopHeight
+         System.DefaultPrinter
+         System.DesktopFolder
+         System.MyDocumentsFolder
+         System.ProgramFilesFolder
+         System.SystemFolder
+         System.TempFolder
+         System.WindowsFolder
            (see demo in folder \samples\Basic\CLIPBOARD).
   * Updated: Synchronized an Extended HMG with an Official HMG 3.0.0:
            - New: 'Build.bat' is based upon HBMK2 utility (it works at WinXP and later).
              Syntax:
-			Build [/d] [/i] [/r] <PrgFile> | <filelist.hbp> [config.hbc]
-			where
-				[/d] : Debug Mode
-				[/i] : Incremental Build
-				[/r] : Rebuild All Mode
+         Build [/d] [/i] [/r] <PrgFile> | <filelist.hbp> [config.hbc]
+         where
+            [/d] : Debug Mode
+            [/i] : Incremental Build
+            [/r] : Rebuild All Mode
 
-			<filelist.hbp> : A text file with a source filelist
-			<config.hbc>   : A text file with configuration parameters as additional
-					libs, include paths and lib paths
+         <filelist.hbp> : A text file with a source filelist
+         <config.hbc>   : A text file with configuration parameters as additional
+               libs, include paths and lib paths
            (see demos in folders \samples\Basic\MULTI_PRG and \samples\Basic\MAINDEMO (SYNTAX I))
   * Updated: WinReport library (see source in folder \Source\WinReport).
            Contributed by Pierpaolo Martinello <pier.martinello[at]alice.it>
@@ -7494,10 +7494,10 @@
   * Updated: 'Report Generator' sample by Roberto Lopez <harbourminigui@gmail.com>:
            - added array support.
              Syntax:
-		BEGIN DATA
-			ITERATOR	<xExpression>
-			STOPPER		<xExpression>
-		END DATA
+      BEGIN DATA
+         ITERATOR   <xExpression>
+         STOPPER      <xExpression>
+      END DATA
              The section is optional. If its omitted, 'Iterator' will be set as 'dbskip()'
              and 'Stopper' as 'Eof()'. Borrowed from an Official HMG 2.9.5.
            Adapted for Minigui Extended by Grigory Filatov <gfilatov@freemail.ru>
@@ -7524,7 +7524,7 @@
              Contributed by Grigory Filatov <gfilatov@freemail.ru>
            - Updated: Polish language translation.
              Contributed by Krzysztof Stankiewicz <ks@nsm.pl>.
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: service of key Esc in the Append mode;
            - Fixed: improved Scrollbar working;
            - Fixed: assigned but unused variables.
@@ -7664,7 +7664,7 @@
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Updated: Synchronized an Extended HMG with an Official HMG 2.9.3:
            - Fixed. Browse refresh bug. Reported by Vanguarda.
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Wrong column type detection at array editing.
            - Fixed: Correction at the saving XLS file in the method Excel2.
            Bugs were reported by Adilson Urso <a.urso@uol.com.br>.
@@ -7801,7 +7801,7 @@
   * Enhanced: The function WindowsVersion() detects now a Windows 7 (seven).
            Borrowed from Harbour 2.0 distribution.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Usage of function ComboWBlock( oBrowse, "Code", nColumn, { aItems, aCode } ).
              Bug was reported by Carlos <arcjv@yahoo.com.ar>.
            Contributed by Janusz Pora <januszpora@onet.eu>
@@ -7971,21 +7971,21 @@
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Updated: Synchronized an Extended HMG with an Official HMG 2.8.9-2.9.1:
            - Fixed: Programmatic change not execute OnChange procedure for the following controls:
-		- ComboBox
-		- Slider
-		- ListBox
-		- Edit
-		- DatePicker
-		- TimePicker
-		- RadioGroup
-		- MonthCalendar
+      - ComboBox
+      - Slider
+      - ListBox
+      - Edit
+      - DatePicker
+      - TimePicker
+      - RadioGroup
+      - MonthCalendar
              These changes are guarded by SET PROGRAMMATICCHANGE ON | OFF command
              for backward compatibility with old code.
-           - Fixed: 'Value' property. From this version, programmatic changes to 
+           - Fixed: 'Value' property. From this version, programmatic changes to
              this property only occurs when new value is different from previous one.
            - Fixed: Focus problem with editable Grid in CHILD windows. Reported by Sudip.
            - Changed: Celled Grid Control behaviour. Up and Down arrows allows to
-             exit cell edit mode accepting the value. Exiting cell edit mode with 
+             exit cell edit mode accepting the value. Exiting cell edit mode with
              [Enter] will move selected cell cursor to right.
   * Updated: HbSQLite3 library source code (see in folder \Source\HbSQLite3):
            - updated for using SQLITE3 version 3.6.14
@@ -8072,8 +8072,8 @@
            Based upon a code borrowed from an Official HMG 2.8.2-2.8.3.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demo in folder \samples\Basic\Grid_7)
-  * Enhanced: 'DynamicBackColor' and 'DynamicForeColor' Browse and Grid properties 
-           accepts the color arrays now also, being, this way, consistent with MiniGUI 
+  * Enhanced: 'DynamicBackColor' and 'DynamicForeColor' Browse and Grid properties
+           accepts the color arrays now also, being, this way, consistent with MiniGUI
            general color handling (for compatibility with Official HMG).
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demo2.prg in folder \samples\Basic\Grid)
@@ -8082,9 +8082,9 @@
            (see demo in folder \samples\Basic\InputBox)
   * Updated: Synchronized an Extended HMG with an Official HMG 2.7.0-2.7.2:
            - Fixed: DRAW GRAPH (pie type) problem with low values (about 0%).
-           - Changed: DRAW GRAPH (pie type) accepts bigger than 7 digits values 
+           - Changed: DRAW GRAPH (pie type) accepts bigger than 7 digits values
              now (Thanks to Esgici).
-           - Enhanced: Grid Control: 'This.CellValue' is writable now, so, you can 
+           - Enhanced: Grid Control: 'This.CellValue' is writable now, so, you can
              change the value of the cell being currently edited from inside 'Valid'
              cell procedure (see demo5.prg in folder \samples\Basic\Grid_3).
            - New: DRAGITEMS property for LISTBOX control.
@@ -8093,7 +8093,7 @@
            - New: 'System object' sample (see in folder \samples\Basic\CLIPBOARD).
            - New: 'WAIT WINDOW' sample (see demos in folder \samples\Basic\WAIT_WINDOW).
            - Fixed: Mysql samples. Report and fix by Sudip (see demos in folder \samples\Basic\MYSQL).
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - New: ADORDD support.
            Contributed by Janusz Pora <januszpora@onet.eu>
   * Updated: Harbour Compiler 1.1.0dev (SVN 2009-04-14 10:52):
@@ -8236,22 +8236,22 @@
            Syntax:
            + Folder from Resources:
              DEFINE FOLDER  <FolderName>
-                [ OF| PARENT> < ParentWindowName > ] 
-                RESOURCE <res>  
+                [ OF| PARENT> < ParentWindowName > ]
+                RESOURCE <res>
                 [ CAPTION <cCaption> ]
            + Folder created from memory:
-             DEFINE FOLDER  < FolderName >       
-                [ OF| PARENT> < ParentWindowName > ] 
+             DEFINE FOLDER  < FolderName >
+                [ OF| PARENT> < ParentWindowName > ]
                 AT <nRow>,<nCol>
-                [ WIDTH < nWidth > ] 
-                [ HEIGHT <nHeight> ] 
+                [ WIDTH < nWidth > ]
+                [ HEIGHT <nHeight> ]
                 [ CAPTION <cCaption> ]
            + Folder Page (Dialog box) from resources:
-             FOLDERPAGE <FolderName>  RESOURCE <id> 
+             FOLDERPAGE <FolderName>  RESOURCE <id>
                 [ TITLE <cTitle> ]
                 [ IMAGE <cImageName> ]
            + Folder Page (Dialog box) with Controls created in Memory:
-             DEFINE FOLDERPAGE < FolderName >  [ RESOURCE <id> ] 
+             DEFINE FOLDERPAGE < FolderName >  [ RESOURCE <id> ]
                 [ TITLE <cTitle> ]
                 [IMAGE <cImageName> ]
 
@@ -8334,7 +8334,7 @@
              Contributed by Mitja Podgornik <yamamoto@rocketmail.com>.
            - Fixed: assigned but unused variable.
              Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: update of the rows changes in the method PageUp();
            - Fixed: OnChange event was missed on top/bottom in the methods PageUp()/PageDown().
            Reported by Krzysztof Stankiewicz <ks@nsm.pl>.
@@ -8495,7 +8495,7 @@
            - updated for using SQLITE3 version 3.6.5
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demos in folders \samples\Advanced\SQLITE and \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: highlight of cell at the column's changes in the method GoPos().
            Reported by Marcelo Giovane da Silva <drmarcelogiovane@yahoo.com.br>
   * Updated: Harbour Compiler 1.1.0dev (SVN 2008-11-12 23:28):
@@ -8538,7 +8538,7 @@
            - updated for using SQLITE3 version 3.6.4
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demos in folders \samples\Advanced\SQLITE and \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: hidden columns handling in the methods GoHome(), GoLeft() and GoRight().
            Based upon a contribution by Marcelo Giovane da Silva <drmarcelogiovane@yahoo.com.br>
   * Updated: Harbour Compiler 1.1.0dev (SVN 2008-10-29 19:06):
@@ -8667,34 +8667,34 @@
   * Updated: Synchronized an Extended HMG with an Official HMG 2.6.5-2.6.6:
            - Added: 'ReadOnly' semi-oop syntax for RadioGroup control.
              (see demos in folder \samples\Basic\RadioGroup)
-           - Fixed: Semi-oop syntax for containers. Tab, ToolBar and SplitBox 
+           - Fixed: Semi-oop syntax for containers. Tab, ToolBar and SplitBox
              child controls can be (optionally) referred as follows:
              - ToolBar Buttons:
 
-		Window.ToolBar.Button
-	
+      Window.ToolBar.Button
+
              - Tab child controls:
 
-		Window.Tab(nPage).Control
+      Window.Tab(nPage).Control
 
              - SplitBox child controls ('SplitBox' name is automatically assigned):
 
-		Window.SplitBox.Control
-	
+      Window.SplitBox.Control
+
              When a ToolBar is in a SplitBox, the syntax is as follows:
 
-		Window.SplitBox.ToolBar.Button
+      Window.SplitBox.ToolBar.Button
 
              (see demos in folder \samples\Basic\CONTAINERS)
   * Updated: PropSheet library source code (see in folder \Source\PropSheet):
            - New: Maintenance of controls defined in Property Sheet Page through Events
-             in classic method without defining the DIALOGPROC function. 
+             in classic method without defining the DIALOGPROC function.
            - Changed: Actions defined at ON CANCEL and ON APPLY events be executed only for such page
              on which were executed changes.
            This library is dedicated to my daughter which in this week takes marriage.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see demo in folder \samples\Advanced\PropSheet)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: when TBrowse control is disabled, the doubleclick action still works.
              Reported by Adilson Urso <a.urso@uol.com.br>.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -8837,7 +8837,7 @@
            Requested by Luis Vasquez <luisvasquezcl@yahoo.com>.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demos in folder \samples\basic\grid_1)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: the keychar mistakes in methods ::Del() and ::DeleteRow() when the tsbrowse is emptiness.
              Based upon a contribution by Antonio Carlos da Silva <antoniocarlosconsultor@yahoo.com.br>
            - Fixed: keep the position of record in the tsbrowse for open database with any pointer of record.
@@ -8878,7 +8878,7 @@
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
 
 2008/07/30: Build 54 (HMG 1.5 Extended Edition) Published.
-  * Fixed: Problems with negative decimal numbers and wrong positioning of the cursor at the 
+  * Fixed: Problems with negative decimal numbers and wrong positioning of the cursor at the
            pressing of the key End in the GetBox control.
            Contributed by Pierpaolo Martinello <pier.martinello[at]alice.it>
            (see demo in folder \samples\Basic\GetBox)
@@ -8931,8 +8931,8 @@
   * New: The Harbour GPF logging at the C-code mistake:
            - Set( _SET_HBOUTLOGINFO [, <cValue>] ) -> <cOldValue>
            Default value: MiniGUIVersion() string
-           This user defined text will be included in the each error.log 
-           messages. This way it's possible to include custom information 
+           This user defined text will be included in the each error.log
+           messages. This way it's possible to include custom information
            in these entries to help identify and locate them.
   * Updated: Harbour Compiler 1.0.0rc2 (SVN 2008-07-07 06:57):
            * Updated: HbODBC library source code (see in folder \Source\HbODBC);
@@ -8977,14 +8977,14 @@
            (see i_pseudofunc.ch in folder Include\)
   * Updated: PropGrid library source code:
            - New: Clause SINGLEEXPAND to expanded item when it becomes selected and
-                  to closed when it becomes unselected. 
+                  to closed when it becomes unselected.
            - New: Property item type 'userfun' to get value with any user function.
            - New: Property item type 'list', like item 'enum' but with edit field and
                   adding a new value to combo list.
            - New: Command TOGGLE, EXPAND and COLLAPSE CATEGORY
-           - New: Command ENABLE and DISABLE PROPERTYITEM 
-           - New: Command REDRAW PROPERTYITEM 
-           - New: Clause SUBITEM in command GET PROPERTYITEM for get value by Item type FONT   
+           - New: Command ENABLE and DISABLE PROPERTYITEM
+           - New: Command REDRAW PROPERTYITEM
+           - New: Clause SUBITEM in command GET PROPERTYITEM for get value by Item type FONT
            - Fixed: source code in range tested input data.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see Changelog.txt in folder \Source\PropGrid and
@@ -9074,7 +9074,7 @@
              this character was missing after the decode of the received mail.
            Problem was reported by Jaroslav Janik <jaroslav.janik@siemens.com>
            (see tsmtp.prg in folder \Source\Socket)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Problem with variable lDrawFooters in the method LButtonDown.
              Based upon a contribution by Ivanil Marcelino <ivanilm@terra.com.br>.
            - Fixed: Problem with incremental seek of the value in the Numeric column.
@@ -9115,7 +9115,7 @@
            Contributed by Pierpaolo Martinello <Pier.martinello[at]alice.it>
            (see demo in folder \samples\Advanced\REPORT_INTERPRETER and
            help at WinReport.chm in folder \Doc)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Problems with closing of database at exit in the append mode.
              Reported by Russian user.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -9152,10 +9152,10 @@
            - New: command line option /ML:  Build library in MiniGui library folder.
            - New: option for setting environmental variable:
              If MG_LBLD set to MINIGUI, then build library in MiniGui library folder.
-           - New: Added a check for HbODBC.lib, ODBC32.lib, HbOLE.lib, HbXML.lib, and 
+           - New: Added a check for HbODBC.lib, ODBC32.lib, HbOLE.lib, HbXML.lib, and
              MySQL.lib:  Do not build these libraries in xHarbour mode.
            Contributed by Kevin Carmody <i@kevincarmody.com>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Problem in the method GoTop (introduced in the build 50).
              Reported by Tomasz Witkowski <wtmsz@poczta.onet.pl>
            - Fixed: Problem with UP key in the method UpStable.
@@ -9201,12 +9201,12 @@
            - updated for using SQLITE3 version 3.5.7
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demos in folders \samples\Advanced\SQLITE and \samples\Advanced\SQLITE_2)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            Fixed: Problem with initialize the Array browse (set columns properties) with empty data aArray.
            Contributed by Janusz Pora <januszpora@onet.eu>
            New: 'one to more' and 'more to one' samples.
            Contributed by Pierpaolo Martinello <Pier.martinello[at]alice.it>
-           (see demo at folder \samples\Advanced\TSBrowse) 
+           (see demo at folder \samples\Advanced\TSBrowse)
   * New: 'Input Window Extended' sample.
            Contributed by Jozef Rudnicki <j_rudnicki@wp.pl>
            (see demo in folder \samples\Advanced\InputWindowEx)
@@ -9275,7 +9275,7 @@
            - New: Slovak language translation
            - New: Hungarian language translation
            Contributed by Gyula Bartal <bartal@tauris-danubius.sk>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Changed: Language resources respects the constant _MULTILINGUAL_.
            Contributed by Vladimir Chumachenko <ChVolodymyr@yandex.ru>
   * Updated: Harbour Compiler Devel build (SVN 2008-02-22 03:42):
@@ -9350,10 +9350,10 @@
                       SAMPLES\CompileAllapplications.bat
                       SAMPLES\CompileAllBasic.bat
            - Added:
-             SOURCE\MakeAllLibs.bat: Makes all librariess in folders under SOURCE.  
+             SOURCE\MakeAllLibs.bat: Makes all librariess in folders under SOURCE.
                 These include Harbour libs and MiniGui libraries.
-             SOURCE\MakeAllHarbourLibs.bat: Makes all Harbour libraries in folders 
-                under SOURCE. This does not include all Harbour libraries - just 
+             SOURCE\MakeAllHarbourLibs.bat: Makes all Harbour libraries in folders
+                under SOURCE. This does not include all Harbour libraries - just
                 the libraries that have source code under SOURCE.
              SOURCE\MakeAllMiniGuiLibs.bat: Makes all MiniGui libraries.
            - Modified:
@@ -9369,7 +9369,7 @@
              SOURCE\shell32\MakeLib.bat
              SOURCE\Socket\MakeLib.bat
              SOURCE\TMsAgent\MakeLib.bat
-           - Modified the following files. These now use the xHarbour library folder 
+           - Modified the following files. These now use the xHarbour library folder
              for generated xHarbour libraries, and use dll.lib in xHarbour mode.
              BATCH\Compile.Bat
              UTILS\MPM\mpm.prg
@@ -9377,90 +9377,90 @@
   * Updated: Synchronized an Extended HMG with an Official HMG 2.0.010:
            - New: HMG User Components Support.
 
-		I've created a standard interface to allow HMG users to create
-		its own components (ie: new controls) without need to modify 
-		HMG library itself.
+      I've created a standard interface to allow HMG users to create
+      its own components (ie: new controls) without need to modify
+      HMG library itself.
 
-		HMG User Components Reference:
-	
-		- InstallEventHandler ( <cEventHandlerFunctionName> )
+      HMG User Components Reference:
 
-		Every time that an event is triggered by the system the specified
-		function will be called.
+      - InstallEventHandler ( <cEventHandlerFunctionName> )
 
-		This function will receive the following parameters:
+      Every time that an event is triggered by the system the specified
+      function will be called.
 
-				hWnd, nMsg, wParam, lParam
-		
-		If your function process the message, it must return a not NIL
-		value. If not, it must return NIL.
+      This function will receive the following parameters:
 
-		- InstallMethodHandler( <cMethodName>, <cMethodHandlerProcName> )
+            hWnd, nMsg, wParam, lParam
 
-		Every time that specified method is called, your procedure will
-		be executed.
+      If your function process the message, it must return a not NIL
+      value. If not, it must return NIL.
 
-		If your procedure process the method, you must set the user
-		process flag _HMG_UserComponentProcess to .T. If not, you must 
-		set it to .F.
+      - InstallMethodHandler( <cMethodName>, <cMethodHandlerProcName> )
 
-		- InstallPropertyHandler( <cPropName>, <cSetFucName>, <cGetFuncName> )
+      Every time that specified method is called, your procedure will
+      be executed.
 
-		When the specified property is set, <cSetFucName> is called 
-		with all the original parameters		
+      If your procedure process the method, you must set the user
+      process flag _HMG_UserComponentProcess to .T. If not, you must
+      set it to .F.
 
-		When the specified property is value retrieved <cGetFucName> is 
-		called with all the original parameters.
+      - InstallPropertyHandler( <cPropName>, <cSetFucName>, <cGetFuncName> )
 
-		In both cases if your functions process the property, you must 
-		set the user process flag _HMG_UserComponentProcess to .T. 
-		If not, you must set it to .F.
+      When the specified property is set, <cSetFucName> is called
+      with all the original parameters
 
-		- Other Considerations:
+      When the specified property is value retrieved <cGetFucName> is
+      called with all the original parameters.
 
-		If you've created components that requires #command directives
-		(ie. a control) you must add these definitions to i_UsrInit.ch
-		file located at HMG's INCLUDE folder.
+      In both cases if your functions process the property, you must
+      set the user process flag _HMG_UserComponentProcess to .T.
+      If not, you must set it to .F.
 
-		The definitions must include start and end markers that will be
-		used to allow the creation of automated installation and 
-		maintenance procedures for components. 
+      - Other Considerations:
 
-		The format for start marker is:
+      If you've created components that requires #command directives
+      (ie. a control) you must add these definitions to i_UsrInit.ch
+      file located at HMG's INCLUDE folder.
 
-		#define BASEDEF_<YourComponentTypeName>
+      The definitions must include start and end markers that will be
+      used to allow the creation of automated installation and
+      maintenance procedures for components.
 
-		The format for end marker is:
+      The format for start marker is:
 
-		#undef BASEDEF_<YourComponentTypeName>
+      #define BASEDEF_<YourComponentTypeName>
 
-		If you've created methods or properties with new names (not
-		currently specified in i_windows.ch, DECLARE WINDOW command
-		definition) you must add translation directives for them in
-		'i_UsrSOOP.ch' file, located at HMG's INCLUDE folder.
+      The format for end marker is:
 
-		The definitions must include start and end markers too and the 
-		translation directives must follow special rules.
+      #undef BASEDEF_<YourComponentTypeName>
 
-		The format for start marker is:
+      If you've created methods or properties with new names (not
+      currently specified in i_windows.ch, DECLARE WINDOW command
+      definition) you must add translation directives for them in
+      'i_UsrSOOP.ch' file, located at HMG's INCLUDE folder.
 
-		#define SOOP_<YourComponentTypeName> ;;
+      The definitions must include start and end markers too and the
+      translation directives must follow special rules.
 
-		The format for translation directives for methods is:
+      The format for start marker is:
 
-		#xtranslate <Window> . \<Control\> . MethodName  => Domethod ( <"Window">, \<"Control"\> , "MethodName" ) ;;
+      #define SOOP_<YourComponentTypeName> ;;
 
-		The format for translation directives for properties is:
+      The format for translation directives for methods is:
 
-		#xtranslate <Window> . \<Control\> . PropName  => GetProperty ( <"Window">, \<"Control"\> , "PropName" )  ;;
-		#xtranslate <Window> . \<Control\> . PropName  := \<v\> => SetProperty ( <"Window">, \<"Control"\> , "PropName" , \<v\> )  ;;
+      #xtranslate <Window> . \<Control\> . MethodName  => Domethod ( <"Window">, \<"Control"\> , "MethodName" ) ;;
 
-		The format for end marker is:
+      The format for translation directives for properties is:
 
-		#undef SOOP_<YourComponentTypeName> ;;
+      #xtranslate <Window> . \<Control\> . PropName  => GetProperty ( <"Window">, \<"Control"\> , "PropName" )  ;;
+      #xtranslate <Window> . \<Control\> . PropName  := \<v\> => SetProperty ( <"Window">, \<"Control"\> , "PropName" , \<v\> )  ;;
+
+      The format for end marker is:
+
+      #undef SOOP_<YourComponentTypeName> ;;
 
            (see demo in folder \samples\Basic\USER_COMPONENTS)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Some definitions in TsBrowse.ch which are conflicted with WinPrint.ch.
            - Changed: Loading and showing the array improvement.
            - New: Clause TBtnBox for button in field of edition, the calling out the service of block bAction.
@@ -9626,7 +9626,7 @@
   * Enhanced: The EXECUTE FILE <File> WAIT command supports now an optional clauses:
            - WHILE <while> : Code block which can be used to terminate executable before
              it exits (must return a logical value).
-           - INTERVAL <msec> : Time interval (in milliseconds) to wait between 
+           - INTERVAL <msec> : Time interval (in milliseconds) to wait between
              successive evaluations of <while>.  Defaults to 2000 (2 sec).
            Contributed by Kevin Carmody <i@kevincarmody.com>
   * Enhanced: Socket library source code by Matteo Baccan <baccan@infomedia.it>:
@@ -9638,7 +9638,7 @@
   * Changed: The errors in the ErrorLog.htm will be shown in the reverted order
            (similar to Doc\ChangeLog.txt).
            Based upon a contribution by Walter Formigoni <walter.formigoni@uol.com.br>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Problem with processing bPrevEdit block at direct column input.
            - Fixed: Problem with initial value at edition a cell via a ComboBox control.
            - Changed: the internal edit controls have always an unique names.
@@ -9806,7 +9806,7 @@
   * Changed: The 'Code ReIndent', 'Function List' and 'Project Analizer' projects are moved
            to folder MiniGUI\Utils\.
            The finished programs are moved to folder \samples\Applications.
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Resizing and moving of columns are blocked at defined column's header
              left click codeblok bHLClicked.
            - Enhanced: method LDblClick respects the user's codeblok bLDblClick
@@ -9910,10 +9910,10 @@
            Warning: You should recompile the HBPrinter library for compatibility
            with these changes.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            New: lPickerMode data for enable/disable DatePicker Mode in inplace editing.
            Based upon a contribution by Mel Smith <syntel@shaw.ca>
-           (see demo at Menu File->Browse - Database2 in folder \samples\Advanced\TSBrowse) 
+           (see demo at Menu File->Browse - Database2 in folder \samples\Advanced\TSBrowse)
   * Updated: Harbour Compiler Devel build (SVN 2007-09-24 02:05):
            * Updated: HbOLE library source code (see in folder \Source\HbOLE).
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -10033,7 +10033,7 @@
   * Updated: PropGrid library source code:
            - New: PG control supports an optional ON CHANGEVALUE event now.
            - Changed: use of new function PG_RedrawItem() instead of RedrawWindow()
-             reduces flicker the Control Property Grid after change of data. 
+             reduces flicker the Control Property Grid after change of data.
            - Fixed: source code in range close edit field.
            Contributed by Janusz Pora <januszpora@onet.eu>
            (see Changelog.txt in folder \Source\PropGrid and
@@ -10043,10 +10043,10 @@
            * Updated: MySQL library source code (see in folder \Source\MySQL).
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (look at 'Harbour Changelog.txt' in folder \harbour)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            Fixed: methods Default() and SetArray() are adapted for syntax of Control GRID.
            Contributed by Janusz Pora <januszpora@onet.eu>
-           (see demo at Menu TSBrowse->Grid form in folder \samples\Advanced\TSBrowse) 
+           (see demo at Menu TSBrowse->Grid form in folder \samples\Advanced\TSBrowse)
   * New: 'MsgBox Show' sample. Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see in folder \samples\Basic\MsgBoxShow)
   * New: 'Clippy' sample. Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -10105,8 +10105,8 @@
            - Fixed: Browse and Grid INPLACE edit problems in standard windows.
            - Fixed: Browse initialization problems in Vista.
   * Updated: PropGrid library source code:
-           - Changed: algorithm of look for item in Property Grid. 	
-           - Fixed: Procedure for save data of Property Grid to File. 
+           - Changed: algorithm of look for item in Property Grid.
+           - Fixed: Procedure for save data of Property Grid to File.
            - New: Type CHECK - optional description, one from list of Data,
              list with two equivalent value to FALSE and TRUE.
            - New: Read and save from file type INI.
@@ -10169,7 +10169,7 @@
            demo in folder \samples\Advanced\PropGrid)
   * Updated: Harbour Compiler Devel build (SVN 2007-06-23 15:45).
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
-           (look at 'Harbour Changelog.txt' in folder \harbour and 
+           (look at 'Harbour Changelog.txt' in folder \harbour and
            'Whatsnew.txt' in folder \harbour\doc)
   * Updated: HMGS-IDE v.0.4.5. Project Manager and Two-Way Visual Form Designer.
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
@@ -10289,7 +10289,7 @@
   * Updated: HMGS-IDE v.0.4.3. Project Manager and Two-Way Visual Form Designer.
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
            (look at changelog.txt in folder \Ide)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            * Fixed: variable lNoMoveCols action is available now.
            Contributed by Thomas Hansens <thomas.hansens@netz-in-berlin.de>
   * New: 'Printer Test' sample. Based upon a contribution by Jose Miguel <josemisu@yahoo.com.ar>
@@ -10346,7 +10346,7 @@
   * Updated: HMGS-IDE v.0.4.2. Project Manager and Two-Way Visual Form Designer.
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
            (look at changelog.txt in folder \Ide)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG: 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            * Fixed: program crash at the search in the logical column of array.
              Reported by Vianei Moreira de Lemos <cpd@colegioabc.com.br>.
            * Changed: method ExcelOle() is xHarbour compatible now and HbOle library
@@ -10400,7 +10400,7 @@
            - New: Method GetTextExtent_mm() and appropriate command GET TEXT EXTENT IN MM.
              Based on code contributed by Ryszard Rylko <rrylko@cirow.pl>
            - Changed: language translation for 'Save' dropdown menu option.
-             Requested by Rene Koot <rene@plantenkennis.com> 
+             Requested by Rene Koot <rene@plantenkennis.com>
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Changed: The main batch file supports a new syntax parameters.
            Compile.bat without parameters displays a syntax summary.
@@ -10412,11 +10412,11 @@
   * Updated: HMGS-IDE v.0.4.1. Project Manager and Two-Way Visual Form Designer.
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
            (look at changelog.txt in folder \Ide)
-  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.59: 
-           * Fixed: Clause VALUE initiates in browse position (row) now correctly. 
-             Reported by Ryszard <softmar@softmar.poznan.pl> 
-           * Fixed: The Focus stays in active browse after exit from edition of cell. 
-             Reported by Ryszard <softmar@softmar.poznan.pl> 
+  * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.59:
+           * Fixed: Clause VALUE initiates in browse position (row) now correctly.
+             Reported by Ryszard <softmar@softmar.poznan.pl>
+           * Fixed: The Focus stays in active browse after exit from edition of cell.
+             Reported by Ryszard <softmar@softmar.poznan.pl>
            Contributed by Janusz Pora <januszpora@onet.eu>
   * New: 'Get Directory Recurse' sample for (x)Harbour.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -10460,11 +10460,11 @@
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
            (look at changelog.txt in folder \Ide)
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.58:
-           * New: HideColumns method - hide or show column(s) 
+           * New: HideColumns method - hide or show column(s)
              Contributed by Janusz Pora <januszpora@onet.eu>
-             (see in Chapter Methods this help and in demo - 
+             (see in Chapter Methods this help and in demo -
              Menu TSBrowse->Report / Excel connectivity in
-             folder \samples\Advanced\TSBrowse) 
+             folder \samples\Advanced\TSBrowse)
            * Fixed: typo in GoPos method of the class TSBrowse.
              Suggested by Mel Smith <syntel@shaw.ca>
   * New: 'BaseGraph' sample. Contributed by MigSoft <fugaz_cl@yahoo.es>
@@ -10531,8 +10531,8 @@
            - xCompile.Bat
            - MakeLibOpt.bat
            - Make_b32_opt.bat
-           The instances of MakeLib.bat and Make_b32.bat have been updated to use the 
-           same environment variables and some of the same switches that Compile.bat 
+           The instances of MakeLib.bat and Make_b32.bat have been updated to use the
+           same environment variables and some of the same switches that Compile.bat
            uses. Two BC files, used by the two Make_b32.bat files, have been updated also.
            Based upon a contribution by Kevin Carmody <i@kevincarmody.com>
   * Updated: Harbour Compiler Devel build (CVS 2007-03-14 14:45).
@@ -10557,13 +10557,13 @@
 2007/02/28: Build 32 (HMG 1.3 Extended) Published.
   * Fixed: The problems in MDI Window reported by Manfred Bergler <ecadata@gmail.com>:
            - ToolTip in ChildMDI works correctly.
-           - BackGround in MDIClient and ChildMDI be displayed correctly if was defined 
+           - BackGround in MDIClient and ChildMDI be displayed correctly if was defined
              in clause BACKCOLOR, window ChildMDI inherits this property.
              The background is standard without this definition.
-           - Hot Keys works in MDIClient and ChildMDI correctly. 
+           - Hot Keys works in MDIClient and ChildMDI correctly.
            - Pseudo-function ThisWindow.Name works for ChildMDI also.
            Contributed by Janusz Pora <januszpora@onet.eu>
-           (see demo.prg in folder \samples\Basic\MDI_3) 
+           (see demo.prg in folder \samples\Basic\MDI_3)
   * Fixed: The problem with display flag of Statusbar item at the function SetItemBar()
            introduced in the build 30.
   * Fixed: The problem with display ReadOnly Spinner at the Enabled method.
@@ -10577,9 +10577,9 @@
            - compile without linking;
            - link in additional object files and libraries;
            - create console executables.
-           Compile.bat without parameters displays a syntax summary.  All xHarbour 
-           functionality that was in xCompile.bat has been incorporated into Compile.bat 
-           via the /X switch. xCompile.bat is now unnecessary.  
+           Compile.bat without parameters displays a syntax summary.  All xHarbour
+           functionality that was in xCompile.bat has been incorporated into Compile.bat
+           via the /X switch. xCompile.bat is now unnecessary.
            Contributed by Kevin Carmody <i@kevincarmody.com>
            (see Compile.bat in folder \Batch)
   * Updated: Synchronized an Extended HMG with an Official HMG 2.0.024:
@@ -10817,7 +10817,7 @@
            Contributed by Walter Formigoni <walter.formigoni@uol.com.br>
            (look at changelog.txt in folder \Ide and samples in folder \Ide\Samples)
   * New: MySql library source code (see in folder \Source\MySql).
-           Based upon a contribution by Mitja Podgornik	<yamamoto@rocketmail.com>.
+           Based upon a contribution by Mitja Podgornik   <yamamoto@rocketmail.com>.
            (see demos in folder \samples\Basic\MYSQL)
   * New: MiniSql library source code.
            Based upon a contribution by Roberto Lopez <roblez@ciudad.com.ar>
@@ -11000,10 +11000,10 @@
              Problem was reported by Russian user (see sample 3, columns Name and State
              at demo in folder \samples\Advanced\TSBrowse).
              Contributed by Grigory Filatov <gfilatov@freemail.ru>
-           - New: Enabled method - protects (blocks) displays browse area 
-             if parameter set to false (see in chapter Methods of TSBrowse help 
-             and in demo - Menu TSBrowse->Report / Excel connectivity  
-             in folder \samples\Advanced\TSBrowse) 
+           - New: Enabled method - protects (blocks) displays browse area
+             if parameter set to false (see in chapter Methods of TSBrowse help
+             and in demo - Menu TSBrowse->Report / Excel connectivity
+             in folder \samples\Advanced\TSBrowse)
            - Fixed: Add reset variable ::Len in method SetFilter()
              to fixed a problem with browsing filtered data.
              Reported by Franz-Josef <fjh_muc@hotmail.com>
@@ -11213,7 +11213,7 @@
            (look at Harbour Changelog.txt in folder \harbour)
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Fixed: Problem with incorrect display array browse (refresh)
-             by continuous edition with lAutoEdit instance variable. 
+             by continuous edition with lAutoEdit instance variable.
            - Fixed: Insertion of first character to editorial field
              during activation of edition by character key
            Contributed by Janusz Pora <januszpora@onet.eu>
@@ -11226,7 +11226,7 @@
            (see demos in folder \samples\Basic\Tab)
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG:
            - Changed: Activating method MouseWheel() with class data nWheelLines
-             (see sbexcel.prg at folder \samples\Advanced\TSBrowse) 
+             (see sbexcel.prg at folder \samples\Advanced\TSBrowse)
            - Fixed: CodePage conversion in method Excel2().
              Reported by Tomasz Witkowski <wtmsz@poczta.onet.pl>
            - Fixed: Problem with incorrect display initial Position with clause VALUE # 0
@@ -11256,9 +11256,9 @@
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.48:
            - Fixed: Problem with editing of Memo field
              (see sample from Menu File->Browse Database2 -Field "Bio"
-             in Demo at folder \samples\Advanced\TSBrowse) 
+             in Demo at folder \samples\Advanced\TSBrowse)
            - Fixed: Problem with ComboBox definition in TsBrowse demo
-             (see sbexcel.prg at folder \samples\Advanced\TSBrowse) 
+             (see sbexcel.prg at folder \samples\Advanced\TSBrowse)
            - Changed: Filter handling at methods Excel2() and ExcelOle()
              Reported by Tomasz Witkowski <wtmsz@poczta.onet.pl>
            Contributed by Janusz Pora <januszpora@onet.eu>
@@ -11294,7 +11294,7 @@
            - New: The setting of range of method SetFilter() be considered by methods:
              Report(), Excel2() as well as ExcelOle()
              (see the Chapter Methods in TSBrowse.chm and at demo
-             Menu TSBrowse->Report / Excel connectivity in folder \samples\Advanced\TSBrowse) 
+             Menu TSBrowse->Report / Excel connectivity in folder \samples\Advanced\TSBrowse)
            Contributed by Janusz Pora <januszpora@onet.eu>
   * Updated: HMGS-IDE v.0.2.4. Project Manager and Two-Way Visual Form Designer.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -11368,7 +11368,7 @@
              TControl.prg, h_tbrowse.prg in TsBrowse.
              Reported by Grigory Filatov <gfilatov@freemail.ru> from Russian user.
            - New: New sample Tsb_MDI for Windows MDI
-            (see sample Tsb_MDI.prg in folder \samples\Advanced\TSBrowse) 
+            (see sample Tsb_MDI.prg in folder \samples\Advanced\TSBrowse)
            Contributed by Janusz Pora <januszpora@onet.eu>
   * New: TextBox Focus change sample. Based upon a contribution by CAS <cas.soft@gmail.com>
            (see in folder \samples\Basic\Color_3)
@@ -11388,7 +11388,7 @@
   * Updated: Synchronized an Extended HMG with an Official HMG 2.0.020:
            - Fixed: TAB Control. Since XP-Style API (ComCtl32.dll version 6) does
              not supports vertical TAB control, 'Vertical' property / Clause
-             (TCS_VERTICAL style) will be ignored when XP-Style is active and 
+             (TCS_VERTICAL style) will be ignored when XP-Style is active and
              'Buttons' style is not set.
            - Fixed: TAB Control. Background painting problems with some
              'tab-child' controls, when 'Buttons' style is selected and XP-Style is active.
@@ -11403,7 +11403,7 @@
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.44:
            - New: Method Report is created on basis of command DO REPORT
              (see sample from Menu TSBrowse->Report / Excel connectivity
-             in Demo at folder \samples\Advanced\TSBrowse) 
+             in Demo at folder \samples\Advanced\TSBrowse)
            - Fixed: Double definition of function GetClientRect() in TSBrowse and MDI.
              Reported by "gruncic" <gruncic@ptt.yu>
            - Fixed: Problem with some national characters by edition in Field Memo
@@ -11431,10 +11431,10 @@
            - New: Adaptation of new class TSMulti to edition and save changes (by Ctrl-Enter)
              in field of type "Memo"
              (see sample from Menu File->Browse Database2 -Field "Bio"
-             in Demo at folder \samples\Advanced\TSBrowse) 
+             in Demo at folder \samples\Advanced\TSBrowse)
            - Fixed: Problem with incorrect display of browse (refresh) by continuous edition
              with lAutoEdit instance variable
-             (see samples 6 in demo at folder \samples\Advanced\TSBrowse) 
+             (see samples 6 in demo at folder \samples\Advanced\TSBrowse)
            - Fixed: Problem with incorrect display of browse (refresh) during moving window
              from different application.
            - Fixed: The problem with F1 key in file TControl.prg.
@@ -11481,9 +11481,9 @@
   * Updated: Synchronized an Experimental HMG with an Official HMG 2.0.018:
            - Changed: SET CODEPAGE command, supports new languages in this version:
 
-		SET CODEPAGE TO ENGLISH	| SPANISH | BULGARIAN | GERMAN | GREEK
-				| HUNGARIAN | POLISH | PORTUGUESE | RUSSIAN
-				| SERBIAN | SLOVENIAN
+      SET CODEPAGE TO ENGLISH   | SPANISH | BULGARIAN | GERMAN | GREEK
+            | HUNGARIAN | POLISH | PORTUGUESE | RUSSIAN
+            | SERBIAN | SLOVENIAN
 
            - Optimized: C-code internal variables cleaning.
   * Updated: Link Executor sample. Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -11534,7 +11534,7 @@
            - New: TSBrowse ExcelOle() method converts browses into Excel sheets.
            It requires TOleAuto class in library hbole.lib for Harbour compiler.
            Contributed by Janusz Pora <januszpora@onet.eu>
-           (see demo - menu "Browse to Excel" - in folder \samples\Advanced\TSBrowse) 
+           (see demo - menu "Browse to Excel" - in folder \samples\Advanced\TSBrowse)
   * Updated: Harbour Compiler Alpha binary 0.46 (CVS 2006-05-30 18:15).
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
            (look at Harbour Changelog.txt in folder \harbour)
@@ -11675,7 +11675,7 @@
            Requested by Joe Fanucchi <drjoe@meditrax.com>
            - the toolbar's button 'Save' at preview have a WHOLEDROPDOWN menu now
            - the width of label 'Go To Page:' is equal 100 and this label is RIGHTALIGN
-           Requested by Rene Koot <rene@plantenkennis.com> 
+           Requested by Rene Koot <rene@plantenkennis.com>
   * Updated: Harbour Compiler Alpha binary (CVS 2006-04-18 14:10).
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
            (look at Harbour Changelog.txt in folder \harbour)
@@ -11691,7 +11691,7 @@
 2006/04/14:  Build 16e (HMG 1.2 Experimental) Published.
   * Fixed: Problem with font name definition in TsBrowse sample.
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
-           (see demo at folder \samples\Advanced\TSBrowse) 
+           (see demo at folder \samples\Advanced\TSBrowse)
   * Changed: HBPrinter library v.2.02:
            - new icon's pack (see in folder \RESOURCES)
            Contributed by Krutov Oleg <krutoff@mail.ru>
@@ -11826,7 +11826,7 @@
 
 2006/03/17:  Build 16a (HMG 1.2 Experimental) Published.
   * Fixed: Datepicker control - On Enter event problem at alternative syntax.
-           Problem was reported by Denobie <denobie@yahoo.com.br> 
+           Problem was reported by Denobie <denobie@yahoo.com.br>
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Fixed: RicheditEx sample. Problem was reported by Alfredo Brizzi <alfbrizz@yahoo.it>
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
@@ -11835,7 +11835,7 @@
            definition of TSBrowse is in style classic Browse in HMG (fields be defined
            in form of list). Reported by Ryszard Liska <softmar@softmar.poznan.pl>
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
-           (see sample 5 (first field is editable) in demo at folder \samples\Advanced\TSBrowse) 
+           (see sample 5 (first field is editable) in demo at folder \samples\Advanced\TSBrowse)
   * Enhanced: SET HELPFILE TO <hlpfile> command supports the help files in CHM format now.
            Based upon a contribution by Carlos Britos <bcd12a@yahoo.com.ar>
            (see demos in folder \samples\Basic\Help and in folder \samples\Basic\ContextCHM)
@@ -11846,11 +11846,11 @@
 2006/03/14:  Build 16 (HMG 1.2 Experimental) Published.
   *****************************************************************************
   Remarks: Due to latest, wide changes in Harbour and xHarbour, all application
-           and third-party libraries must be fully recompiled. 
-           
-           All own harbour external batch scripts must updated 
+           and third-party libraries must be fully recompiled.
+
+           All own harbour external batch scripts must updated
            (remove gtwin.lib and adde gtnull.lib instead - just before rtl.lib)
-           
+
            The minimal xHarbour version is (last official issue) 0.99.60 now
            (or CVS from 2006-01-30 03:50).
   *****************************************************************************
@@ -11859,11 +11859,11 @@
              (source available at \sources\GTnull)
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
 
-           Thanks to: Przemyslaw Czerpak <druzus/at/priv.onet.pl> and 
+           Thanks to: Przemyslaw Czerpak <druzus/at/priv.onet.pl> and
                       Ryszard Glab <rglab//imid.med.pl> for great help!
 
   * Updated: for compatibility with a new Harbour (CVS 2006-03-13 23:15) and xHarbour 0.99.60 issues:
-           - \batch\compile.bat 
+           - \batch\compile.bat
              - removed gtwin.lib
              + added gtnull.lib
            - C core HMG functions
@@ -11929,7 +11929,7 @@
   * Updated: GETBOX control - minimal changes for TsBrowse compatibility.
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.32:
-	   + New: TsBrowse library source code (see in folder \Source\TsBrowse).
+      + New: TsBrowse library source code (see in folder \Source\TsBrowse).
            (see \samples\Advanced\TsBrowse\demo.prg and \doc\TsBrowse.chm)
            + Updated: Synchronized source code TSBrowse with a HMG 15b.
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
@@ -11948,7 +11948,7 @@
   * Updated: MiniPrint library (binary and sources):
            + Fixed: Print problems in Win9x.
            + Fixed: Print preview problems with some unusual paper sizes.
-           + Changed: GetPrinter() window show printers sorted and the default 
+           + Changed: GetPrinter() window show printers sorted and the default
                       printer is selected at startup (Thanks to Ciro Vargas Clemov).
                       Window is wider to accomodate longer printer names.
            + New: Optional RIGHT and CENTER clauses for @...PRINT command.
@@ -11964,7 +11964,7 @@
   * Optimized: HMG internal variables handling. All the public variables
            used by HMG has been replaced by an unique public array that holds all
            HMG internal data. This array is called _HMG_SYSDATA.
-           From this change, memory usage for a typical HMG application is 
+           From this change, memory usage for a typical HMG application is
            reduced by about 100k and EXE size about 50k.
            This changes are parsed by preprocessor (see i_var.ch in folder Include\).
            Based upon an idea borrowed from an Official HMG 2.0.010.
@@ -11972,12 +11972,12 @@
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.31:
            + Fixed: Problem with incorrect display browse (refresh) after sequence of keys
                     KeyDown in last row of browse and PageDown.
-                    Reported by Ryszard Liska <softmar@softmar.poznan.pl> 
+                    Reported by Ryszard Liska <softmar@softmar.poznan.pl>
            + Fixed: Problem with incorrect display browse after operation Append record
                     but without save. This problem appeared by deleted records in database
                     (see sample Super Columns in Demo).
-                    Reported by Grigory Filatov <gfilatov@freemail.ru> 
-           + Fixed: Keys Ctrl PageUp and Ctrl PageDown were activated. 
+                    Reported by Grigory Filatov <gfilatov@freemail.ru>
+           + Fixed: Keys Ctrl PageUp and Ctrl PageDown were activated.
            + Fixed: Problem with incorrect positioning caret in GetBox by LeftMouse Click
                     and selected by draw Mouse too.
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
@@ -11995,8 +11995,8 @@
   * Updated: Adaptation FiveWin Class TSBrowse 7.0 in HMG v.1.3:
              + Fixed: Problem with incorrect display the small Grid on initialize
              + New: Continuous edition with lAutoEdit instance variable
-             (see sample 6 in demo at folder \samples\Advanced\TSBrowse) 
-             + Change: Employment of control GetBox instead of TGet 
+             (see sample 6 in demo at folder \samples\Advanced\TSBrowse)
+             + Change: Employment of control GetBox instead of TGet
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
   * Updated: Grid sample with column's actions. Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see demo6.prg in folder \samples\Basic\Grid)
@@ -12031,9 +12031,9 @@
            Reported by Andrey Nemashkalov <chanson2000@mail.ru>
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Updated: Synchronized an Experimental HMG with an Official HMG 2.0.009:
-           + Fixed: BROWSE bug. The problem arises when DynamicBackColor property 
+           + Fixed: BROWSE bug. The problem arises when DynamicBackColor property
              is not Nil and a column is resized.
-	   + Fixed: TEXTBOX / EDITBOX controls. Non consistent behavior about 
+      + Fixed: TEXTBOX / EDITBOX controls. Non consistent behavior about
              control's content selection when focus is received.
 
 2006/01/24:  Build 14b (HMG 1.1 Experimental) Published.
@@ -12051,12 +12051,12 @@
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
   * Enhanced: Create a Dialog Box from resources and without using resources too.
               + Changed: Declarations for clauses DIALOGPROC and ON INIT as standard HMG Syntax
-              + New: Internal functions	_ReleaseDialog(hwndDlg), DisableDialogItem (hDlg, Id),
+              + New: Internal functions   _ReleaseDialog(hwndDlg), DisableDialogItem (hDlg, Id),
                      EnableDialogItem (hDlg, Id)
               + New: Predefined constans
                      #define DLG_HWND _HMG_ActiveDlgProcHandle
-                     #define DLG_MSG  _HMG_ActiveDlgProcMsg 
-                     #define DLG_ID   _HMG_ActiveDlgProcId 
+                     #define DLG_MSG  _HMG_ActiveDlgProcMsg
+                     #define DLG_ID   _HMG_ActiveDlgProcId
                      #define DLG_NOT  _HMG_ActiveDlgProcNotify
            (see demo in folder \samples\Basic\Dialog_2)
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
@@ -12333,26 +12333,26 @@
 
            Sample:
 
-		cExepath := GetStartUpFolder()
+      cExepath := GetStartUpFolder()
 
-		IF LEFT(cExepath,2) != "\\"
+      IF LEFT(cExepath,2) != "\\"
 
-			nResult := RegOpenKeyExA(HKEY_LOCAL_MACHINE,;
-				"SOFTWARE\SOMEAPP\SOMEKEY",,KEY_ALL_ACCESS,@nHandle)
+         nResult := RegOpenKeyExA(HKEY_LOCAL_MACHINE,;
+            "SOFTWARE\SOMEAPP\SOMEKEY",,KEY_ALL_ACCESS,@nHandle)
 
-		ELSE
+      ELSE
 
-			nResult := RegConnectRegistry(SUBSTR(cExepath,1,;
-				AT("\",SUBSTR(cExepath,3)) + 1),HKEY_LOCAL_MACHINE,@nHandle)
+         nResult := RegConnectRegistry(SUBSTR(cExepath,1,;
+            AT("\",SUBSTR(cExepath,3)) + 1),HKEY_LOCAL_MACHINE,@nHandle)
 
-			IF nResult > -1
+         IF nResult > -1
 
-				nResult := RegOpenKeyExA(nHandle,;
-					"SOFTWARE\SOMEAPP\SOMEKEY",,KEY_ALL_ACCESS,@nHandle)
+            nResult := RegOpenKeyExA(nHandle,;
+               "SOFTWARE\SOMEAPP\SOMEKEY",,KEY_ALL_ACCESS,@nHandle)
 
-			END
+         END
 
-		END
+      END
 
   * Updated: Synchronized an Experimental HMG with an Official HMG 2.0 Alpha build 005.
            + New: 'ColumnValid' property for GRID control
@@ -12361,10 +12361,10 @@
            This.CellValue variable are available at codeblock evaluation.
            (see demo6.prg, demo7.prg, demo8.prg, demo9.prg in folder \samples\basic\grid_1)
            Updated: MiniPrint library (binary and header files):
-	   + New: MiniPrint library source code. (see in folder \Source\MiniPrint)
-	   + New: GetPrintableAreaWidth() Function. Returns the current printable 
+      + New: MiniPrint library source code. (see in folder \Source\MiniPrint)
+      + New: GetPrintableAreaWidth() Function. Returns the current printable
                   area width in milimeters.
-           + New: GetPrintableAreaHeight() Function. Returns the current printable 
+           + New: GetPrintableAreaHeight() Function. Returns the current printable
                   area height in milimeters.
            + New: GetPrintableAreaHorizontalOffset() Function. Returns the current
                   printable area horizontal offset (distance from paper edge to begining
@@ -12428,17 +12428,17 @@
 2005/10/04:  Build 10d (HMG 1.1 Experimental) Published.
   * New: Harbour Compiler Alpha (CVS 2005-09-28 13:05) have included in this distribution.
               Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
-  * Enhanced: DATEPICKER control support new clause DATEFORMAT which 
-              describe user-defined format of date display. 
+  * Enhanced: DATEPICKER control support new clause DATEFORMAT which
+              describe user-defined format of date display.
               New property FormatString for this control also added.
               Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
               (see sample /samples/basic/datetime/demo.prg)
   * Enhanced: TEXTBOX and EDITBOX controls support insert/overwrite mode now
               (regarding to <Ins> key global status)
               Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
-  * New: TIMEPICKER control which work similar to DATEPICKER (with UPDOWN clause) control 
+  * New: TIMEPICKER control which work similar to DATEPICKER (with UPDOWN clause) control
          but return time in format [HH:mm:ss] (like output from Harbour TIME() function)
-         Contributed by Jacek Kubica <kubica@wssk.wroc.pl> 
+         Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
          (see sample /samples/basic/datetime/demo.prg)
   * New: Command CLEAN MEMORY for Win 2k/XP only. Place this command at Init event of Main Window
          for deallocating memory at program start.
@@ -12468,64 +12468,64 @@
   * Updated: Synchronized an Experimental HMG with an Official HMG 2.0 Alpha build 004.
              + New: 'LEGENDSWIDTH' clause (optional) for DRAW GRAPH command (BARS, LINES, POINTS types).
              + New: 'NOBORDER' clause (optional) for DRAW GRAPH command (BARS, LINES, POINTS types).
-             + Fixed: DRAW GRAPH command with POINTS types, when data series values are all '0', 
+             + Fixed: DRAW GRAPH command with POINTS types, when data series values are all '0',
                       program crash ('divide by zero' error).
              + New: Cell ( nRow , nCol ) property for GRID control (read/write).
              + New: Edit routines for GRID control supports now 'in-cell' editing.
              + New: EDIT INPLACE Property for GRID. You can specify control type and behavior for cell edit.
 
-		EDIT INPLACE { aControlDef1 , aControlDef2 , ... , aControlDefN }
+      EDIT INPLACE { aControlDef1 , aControlDef2 , ... , aControlDefN }
 
-		Control Definition Array:
-		-------------------------		
-			
-		TEXTBOX
-		
-		{ cControlType , cDataType , cInputMask , cFormat }
+      Control Definition Array:
+      -------------------------
 
-		cControlType	= 'TEXTBOX' (Required)
-		cDataType	= 'CHARACTER' , 'NUMERIC' , 'DATE'  (Required)
-		cInputMask	= cInputMask (Optional)
-		cFormat		= cFormat (Optional)
+      TEXTBOX
 
-		DATEPICKER
+      { cControlType , cDataType , cInputMask , cFormat }
 
-		{ cControlType , cControlStyle }
+      cControlType   = 'TEXTBOX' (Required)
+      cDataType   = 'CHARACTER' , 'NUMERIC' , 'DATE'  (Required)
+      cInputMask   = cInputMask (Optional)
+      cFormat      = cFormat (Optional)
 
-		cControlType	= 'DATEPICKER' (Required)
-		cControlStyle	= 'DROPDOWN' , 'UPDOWN' (Required)
+      DATEPICKER
 
-		COMBOBOX
+      { cControlType , cControlStyle }
 
-		{ cControlType , acItems }
+      cControlType   = 'DATEPICKER' (Required)
+      cControlStyle   = 'DROPDOWN' , 'UPDOWN' (Required)
 
-		cControlType	'COMBOBOX' (Required)
-		acItems		(Required)
+      COMBOBOX
 
-		SPINNER
+      { cControlType , acItems }
 
-		{ cControlType , nRangeMin , nRangeMax }
+      cControlType   'COMBOBOX' (Required)
+      acItems      (Required)
 
-		cControlType	'SPINNER' (Required)
-		nRangeMin	(Required)
-		nRangeMax	(Required)
+      SPINNER
 
-		CHECKBOX
+      { cControlType , nRangeMin , nRangeMax }
 
-		{ cControlType , cCheckedLabel , cUnCheckedLabel }
+      cControlType   'SPINNER' (Required)
+      nRangeMin   (Required)
+      nRangeMax   (Required)
 
-		cControlType	'CHECKBOX' (Required)
-		cCheckedLabel	(Required)
-		cUnCheckedLabel	(Required)
+      CHECKBOX
 
-		Data type for each column will depend control specified. 
+      { cControlType , cCheckedLabel , cUnCheckedLabel }
 
-			NUMERIC TEXTBOX		: NUMERIC
-			DATE TEXTBOX		: DATE		
-			CHARACTER TEXTBOX	: CHARACTER
-			SPINNER			: NUMERIC
-			COMBOBOX		: NUMERIC
-			CHECKBOX		: LOGICAL
+      cControlType   'CHECKBOX' (Required)
+      cCheckedLabel   (Required)
+      cUnCheckedLabel   (Required)
+
+      Data type for each column will depend control specified.
+
+         NUMERIC TEXTBOX      : NUMERIC
+         DATE TEXTBOX      : DATE
+         CHARACTER TEXTBOX   : CHARACTER
+         SPINNER         : NUMERIC
+         COMBOBOX      : NUMERIC
+         CHECKBOX      : LOGICAL
 
                 (See demos in folder \samples\Basic\Grid)
 
@@ -12578,7 +12578,7 @@
          Contributed by Daniel Piperno <dpiperno@montevideo.com.uy>
          (see in folder \samples\Advanced\MiniFRM)
   * New: MiniGUI help file. Contributed by Janusz Pora <soft_design@poczta.onet.pl> (see in folder \Doc)
-             
+
 2005/08/23:  Build 9d (HMG 1.1 Experimental) Published.
   * New: Dynamic Fore and Back colors clauses for GRID control with support of IMAGE clause.
          Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -12621,7 +12621,7 @@
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Fixed: Problem with standard Browse's speed because of dynamic coloring.
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Fixed: Define toolbar control outside window form definition. 
+  * Fixed: Define toolbar control outside window form definition.
            Reported by Paola Bruccoleri <pbruccoleri@adinet.com.uy>
            Contributed by Janusz Pora <soft_design@poczta.onet.pl>
   * Updated: Easy Install sample. Contributed by Joe Fanucchi <drjoe@meditrax.com>
@@ -12632,7 +12632,7 @@
   * New: Binary Watch sample. Contributed by Grigory Filatov <gfilatov@freemail.ru>
            (see in folder \samples\Advanced\BinaryWatch)
   * New: Http Get sample. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
-           (see in folder \samples\Basic\HttpGet)         
+           (see in folder \samples\Basic\HttpGet)
 
 2005/07/14:  Build 9a (HMG 1.0 Experimental) Published.
   * Fixed: MDI Child error with initialisation of _HMG_aFormVirtualHeight and _HMG_aFormVirtualWidth arrays.
@@ -12641,35 +12641,35 @@
   * New: BUTTONEX control - so-called OwnerDrawButtons implementation with support for XP Style.
           (Request Id: 1178826) The button can use images(icons or bitmaps) and text together now.
           + You can set also:
-            - image/text aspect - as horizontal (default) or vertical 
+            - image/text aspect - as horizontal (default) or vertical
               (UPPERTEXT or LEFTEXT clause can be used additionally)
             - color & style for button`s caption
             - background color
           + The buttons are hot-tracked now, even on standard Windows without styles
           + Mask for disabled buttons with bitmaps is created "on the fly" by button procedure
           + The command SET NAVIGATION EXTENDED supported
-          The ButtonEx control can be safely used as replacement for standard buttons 
+          The ButtonEx control can be safely used as replacement for standard buttons
               by only change of controlname from BUTTON to BUTTONEX.
           Contributed by Jacek Kubica <kubica@wssk.wroc.pl> with great help & additional code contribution
-          of Andy Wos <andywos@unwired.com.au>. Thanks Andy!     
+          of Andy Wos <andywos@unwired.com.au>. Thanks Andy!
           (see /samples/basic/buttonex/ for demos & usage and /doc/ButtonEx.txt for syntax)
 
   * New: The code for XP Style handling. Contributed by Andy Wos <andywos@unwired.com.au>
          The headers data for XP theme added by Jacek Kubica <kubica@wssk.wroc.pl>
          ( see /source/c_winxp.c )
 
-         The following functions are wrapped in this file: 
-          + INITUXTHEME() 
-          + ENDUXTHEME() 
-          + ISTHEMEACTIVE() 
-          + ISAPPTHEMED() 
-          + OPENTHEMEDATA() 
-          + CLOSETHEMEDATA() 
-          + DRAWTHEMEBACKGROUND() 
+         The following functions are wrapped in this file:
+          + INITUXTHEME()
+          + ENDUXTHEME()
+          + ISTHEMEACTIVE()
+          + ISAPPTHEMED()
+          + OPENTHEMEDATA()
+          + CLOSETHEMEDATA()
+          + DRAWTHEMEBACKGROUND()
           + DRAWTHEMEPARENTBACKGROUND()
-          + SETWINDOWTHEME() 
-          + ENABLETHEMEDIALOGTEXTURE()  
-      
+          + SETWINDOWTHEME()
+          + ENABLETHEMEDIALOGTEXTURE()
+
   * Enhanced: Standard IMAGE BUTTON control with bitmap use mask, created on the fly, for disabled button state now.
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * New: Function GetStartUpFolder() return an application's startup folder.
@@ -12749,16 +12749,16 @@
            It must have placed into frame with OPAQUE clause.
            The windows with user's defined background is not supported (default window backcolor only).
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Enhanced: Button control support also icons (*.ico) from files or resource now. 
+  * Enhanced: Button control support also icons (*.ico) from files or resource now.
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
            + new clause ICON added to image button definition
-           + .Icon property added 
+           + .Icon property added
            + PICTURE clause support eiter one <bitmap> or bitmaps array {<bitmap>,<mask>} as parameter now
            (see \samples\basic\button_2\buttons.prg and \doc\imagebutton.txt)
   * Enhanced: COMBOBOX and COMBOBOXEX controls support clause LISTWIDTH now. It define a width of dropdown list.
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
            + new clause LISTWIDTH added to Combobox/ComboboxEx definition
-           + .ListWidth property added 
+           + .ListWidth property added
            (see updated demo in \Samples\Basic\ComboEx and updated description in \doc\ExtendCombo_References.txt)
   * New: DEFINE WINDOW command supports now an optional parameter MDI.
            Based upon a contribution by Janusz Pora <soft_design@poczta.onet.pl>
@@ -12859,19 +12859,19 @@
      + SET LOGERROR ON/OFF Enable or disable logging errors to errorlog file (default ON)
      + IsErrorLogActive() - return logical value regarding to LOGERROR status
      + SET ERRORLOG TO <cFile> - set new errorlog file (default {APPDIR>}\ErrorLog.htm)
-     + SET ERRORLOG TO         - reset errorlog file to default value  
+     + SET ERRORLOG TO         - reset errorlog file to default value
      ! Default errorlog dir is always set to *.exe dir, and not modified by other HMG functions.
      Thanks to René Koot <rene@plantenkennis.com> for report! ( see /samples/basic/errorlog/demo.prg )
 
   * New: useful additions in GRID & BROWSE controls. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
-     + ColumnWidth(n) property added 
+     + ColumnWidth(n) property added
      + New methods for GRID & BROWSE controls added:
-        ColumnAutoFit(n)  - set width of column <n>  to fit the column contents 
+        ColumnAutoFit(n)  - set width of column <n>  to fit the column contents
         ColumnAutoFitH(n) - set width of column <n> to fit the columnheader text & column contents
         ColumnsAutoFit()  - set widths of all columns to fit each column contents
         ColumnsAutoFitH() - set widths of all columns to fit each columnheader text & column contents
        ( see /samples/basic/grid/demo.prg and /samples/basic/browse_1/browse10.prg )
-  
+
   * New Samples: Demos for usage a new or enhanced features at folder Samples\Basic.
 
 2005/04/04:  Build 5 (HMG 1.0 Experimental) Published.
@@ -12879,16 +12879,16 @@
            Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Fixed: Grid problem with first element of array for picture manage. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Enhanced: IMAGE control supports now GIF and JPG images from resources.
-           You can specify gif or jpg image resources using GIF or JPG as resource type in application resource file (.rc). 
+           You can specify gif or jpg image resources using GIF or JPG as resource type in application resource file (.rc).
            Based upon a contribution by Ryszard Rylko <rrylko@cirow.pl>
-  * Enhanced: PutFile() function supports filename without extension (which is automatic added if no present). 
+  * Enhanced: PutFile() function supports filename without extension (which is automatic added if no present).
            Based upon a contribution by Janusz Pora <soft_design@poczta.onet.pl>
   * Enhanced: INI routines - two functions added _GetSectionNames() and _GetSection(). See INI demo2.
            Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Changed: Small correction in GETWINDOWTEXT function. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * New: MRU sample. Contributed by Janusz Pora <soft_design@poczta.onet.pl>. (C:\MINIGUI\SAMPLES\ADVANCED\MRU)
   * New Samples: Demos for usage a new or enhanced features at folder Samples\Basic.
- 
+
 2005/03/23: Build 107c Unofficial (HMG 1.0) Published.
   * Fixed: Compiling problem for h_browse.prg on xHarbour. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Fixed: Compiling problem for DrawBox sample on xHarbour. Contributed by Grigory Filatov <gfilatov@freemail.ru>
@@ -12901,13 +12901,13 @@
   * Fixed: Problem with incorrect RETURN and UP/DOWN keys behaviour of Browse inplace editing on XP machines. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Fixed: Problem with painting draw functions at startup of form. Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Enhanced: Graph command supports now non-documented SHOWDATAVALUES and DATAMASK clauses. Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Enhanced: Button and ImageButton controls supports an optional DEFAULT clause now. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>  
+  * Enhanced: Button and ImageButton controls supports an optional DEFAULT clause now. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * New: Draw Text command with transparent support (see i_graph.ch for syntax). Based upon a contribution by Rathinagiri <rathnafw@eth.net>
   * Changed: The sample FiilBlue have used Draw Text command instead of Label control for properly painting.
 
 2005/03/17: Build 107a Unofficial (HMG 1.0) Published.
   * Fixed: Problem with incorrect RETURN and left mouse key behaviour on XP machines. Contributed by Grigory Filatov <gfilatov@freemail.ru>
-  * Fixed: bugreport [ 1159564 ] DATEPICKER VALUE. Contributed by Grigory Filatov <gfilatov@freemail.ru> 
+  * Fixed: bugreport [ 1159564 ] DATEPICKER VALUE. Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * Enhanced: Richedit control supports an optional NOVSCROL, NOHSCROLL clauses now. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
   * Enhanced: Richedit control supports now drag/drop/paste events. Contributed by Janusz Pora <soft_design@poczta.onet.pl>
   * Enhanced: Toolbar buttons supports now Tooltip property for every button. Contributed by Janusz Pora <soft_design@poczta.onet.pl>
@@ -12929,7 +12929,7 @@
   * New: Print of graph command. Thanks to Badik and Ciro for idea. Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * New: Clipboard Copy and Retrive Text functions. Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
          CopyToClipboard(cText) store cText in Windows clipboard
-         RetriveTextFromClipboard()->cText  - retrieve text from Windows clipboard 
+         RetriveTextFromClipboard()->cText  - retrieve text from Windows clipboard
   * New: Draw Panel and Draw Box commands. Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * New: Include file with support of extended keys i_keybd_ext.ch. Contributed by Grigory Filatov <gfilatov@freemail.ru>
   * New Samples: Demos for usage a new features at folder Samples\Basic.

@@ -6,8 +6,8 @@ HB_ZipOpen( cFileName, [ iMode = HB_ZIP_CREATE ],
 HB_ZipClose( hZip, [ cGlobalComment ] ) --> nError
 HB_ZipFileCreate( hZip, cZipName, dDate, cTime,
                   nInternalAttr, nExternalAttr,
-                  [ nMethod = HB_ZLIB_METHOD_DEFLATE ], 
-                  [ nLevel = HB_ZLIB_COMPRESSION_DEFAULT ], 
+                  [ nMethod = HB_ZLIB_METHOD_DEFLATE ],
+                  [ nLevel = HB_ZLIB_COMPRESSION_DEFAULT ],
                   [ cPassword, ulFileCRC32 ], [ cComment ] ) --> nError
 HB_ZipFileWrite( hZip, cData [, nLen ] ) --> nError
 HB_ZipFileClose( hZip ) --> nError

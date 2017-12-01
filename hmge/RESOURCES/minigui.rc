@@ -2,9 +2,9 @@
 
 1 24 "Windows7.Manifest"
 
-MINIGUI_FINGER		CURSOR		finger.cur
-MINIGUI_DRAGUP		CURSOR		dragup.cur
-MINIGUI_DRAGDOWN	CURSOR		dragdown.cur
+MINIGUI_FINGER      CURSOR      finger.cur
+MINIGUI_DRAGUP      CURSOR      dragup.cur
+MINIGUI_DRAGDOWN   CURSOR      dragdown.cur
 
 // EDIT COMMAND IMAGE BUTTONS
 
@@ -24,13 +24,13 @@ MINIGUI_EDIT_UNDO       BITMAP          edit_undo.bmp
 
 // GRID SORT IMAGES
 
-MINIGUI_GRID_ASC	BITMAP          grid_up.bmp
-MINIGUI_GRID_DSC	BITMAP          grid_down.bmp
+MINIGUI_GRID_ASC   BITMAP          grid_up.bmp
+MINIGUI_GRID_DSC   BITMAP          grid_down.bmp
 
 
-ZZZ_A_WINDOW		ICON		WINDOW.ICO
-ZZZ_LED_ON		ICON		LED_ON.ICO
-ZZZ_LED_OFF		ICON		LED_OFF.ICO
+ZZZ_A_WINDOW      ICON      WINDOW.ICO
+ZZZ_LED_ON      ICON      LED_ON.ICO
+ZZZ_LED_OFF      ICON      LED_OFF.ICO
 
 #include "mgver.h"
 

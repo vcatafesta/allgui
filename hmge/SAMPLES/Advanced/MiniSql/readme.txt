@@ -16,67 +16,67 @@ my applications. The result is MiniSql.
 MiniSql is a very simple MySql access layer. It relies in mysql.lib (Harbour
 contribution library) bundled with MiniGUI.
 
-MiniSql is experimental code, so It could be buggy / unstable and is not 
+MiniSql is experimental code, so It could be buggy / unstable and is not
 finished yet.
 
 MiniSql is available for download at http://harbourminigui.googlepages.com/
 
 Available Sql commands:
 
-	SELECT
-	UPDATE
-	INSERT
-	DELETE
-	LOCK TABLES
-	UNLOCK TABLES
+   SELECT
+   UPDATE
+   INSERT
+   DELETE
+   LOCK TABLES
+   UNLOCK TABLES
 
 Commands are converted to strings prior to send them to the server, so, you
 must put in a non-local variable and substitute using macro operator.
 
-When SELECT command is issued, a CHARACTER array called "SqlResult" is filled 
+When SELECT command is issued, a CHARACTER array called "SqlResult" is filled
 with query results. ALL COLUMNS WILL BE AVAILABLE AS CHARACTER.
 
-When DELETE, INSERT or UPDATE commands are issued, a variable called 
+When DELETE, INSERT or UPDATE commands are issued, a variable called
 "SqlAffectedRows" is filled with a numeric value indicating the number of rows
 affected by those commands.
 
 Samples:
 
-	* Connect
+   * Connect
 
-      	nHandle := SqlConnect( cServer , cUser , cPass )
+         nHandle := SqlConnect( cServer , cUser , cPass )
 
-	if Empty(nHandle)
-		MsgStop("Error","")
-		Return 
-	EndIf
+   if Empty(nHandle)
+      MsgStop("Error","")
+      Return
+   EndIf
 
-	* Select DataBAse
+   * Select DataBAse
 
-	if SqlSelectD( nHandle , cDataBAse ) != 0
-		MsgStop("Error","")
-		Return .F.
-	Endif
+   if SqlSelectD( nHandle , cDataBAse ) != 0
+      MsgStop("Error","")
+      Return .F.
+   Endif
 
-	cVar1 = "Robert"
-	cVar2 = "Paul"
+   cVar1 = "Robert"
+   cVar2 = "Paul"
 
-	LOCK TABLES TEST WRITE 
+   LOCK TABLES TEST WRITE
 
-		SELECT * FROM TEST WHERE NAME = "&cVar1" 
+      SELECT * FROM TEST WHERE NAME = "&cVar1"
 
-		If Len (SqlResult) == 0
-			MsgStop ("No Results!","")
-			UNLOCK TABLES
-			Return
-		EndIf
+      If Len (SqlResult) == 0
+         MsgStop ("No Results!","")
+         UNLOCK TABLES
+         Return
+      EndIf
 
-		INSERT INTO TEST SET NAME = "&cVar2" 
+      INSERT INTO TEST SET NAME = "&cVar2"
 
-	UNLOCK TABLES
+   UNLOCK TABLES
 
 
 Enjoy!
 
--- 
+--
  Roberto  Lopez <roblez@ciudad.com.ar>

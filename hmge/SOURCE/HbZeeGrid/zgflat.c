@@ -1555,7 +1555,6 @@ HB_FUNC( ZGM_SORTCOLUMNDESC )
    SendMessage( hwnd, ZGM_SORTCOLUMNDESC, ( WPARAM ) hb_parni( 2 ), ( LPARAM ) hb_parni( 3 ) );
 }
 
-
 HB_FUNC( ZGM_SORTSECONDARY )
 {
    _GET_HWND( hwnd, 1 );

@@ -31,11 +31,11 @@ installation.
 If you're have any questions about this program contact to
 Grigory Filatov at gfilatov@inbox.ru.
 
-DISTRIBUTION: 
+DISTRIBUTION:
 ~~~~~~~~~~~~~
-This program is FREE, and may be freely copied and distributed, 
-as long as it is not modified in any way, and no fee is charged for 
-its distribution (small shipping and handling fee is acceptable). 
+This program is FREE, and may be freely copied and distributed,
+as long as it is not modified in any way, and no fee is charged for
+its distribution (small shipping and handling fee is acceptable).
 
 LIABILITY DISCLAIMER -- READ BEFORE INSTALLING JustToTray!
 

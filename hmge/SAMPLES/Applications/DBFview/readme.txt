@@ -14,7 +14,7 @@ Requires: Typical Windows Installation.
 
 Installing: Just unzip the files to a directory on your hard disk.
 
-Use: Run "dbfview.exe" or use command line: "dbfview [basename]" 
+Use: Run "dbfview.exe" or use command line: "dbfview [basename]"
 
 Made by Harbour and MiniGUI.
 
@@ -23,6 +23,6 @@ Please report for all problems or suggestions to the author.
 Enjoy ! :-)
 
 -------------------------------------------------------------------------------
-DBFview software is provided "as-is". 
-No warranty of any kind is expressed or implied. 
+DBFview software is provided "as-is".
+No warranty of any kind is expressed or implied.
 -------------------------------------------------------------------------------

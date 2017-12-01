@@ -28,10 +28,10 @@
 parameters P,i,n,A,lPost
 
   lPost:=iif(lPost==NIL,.t.,lPost)
-  if (lPost) 
-	 A:= P * (i/100) / (1 - (1+i/100)^(-n))
-  else       
-	 A:= P * (i/100) / (1 - (1+i/100)^(-n)) / (1+i/100)
+  if (lPost)
+    A:= P * (i/100) / (1 - (1+i/100)^(-n))
+  else
+    A:= P * (i/100) / (1 - (1+i/100)^(-n)) / (1+i/100)
   endif
 
  Return A
@@ -749,7 +749,7 @@ if lIndonesia
  oLabel6:SetText("%TH")
  oLabel5:SetText("%Bln")
  oLabel11:SetText("Harus diisi")
- 
+
  oBtnA:title:="Angsuran"
  oBtn1:title:="Baru"
  oBtn2:title:="Buka"

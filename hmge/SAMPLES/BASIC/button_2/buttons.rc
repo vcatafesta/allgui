@@ -1,4 +1,4 @@
-// Using a resource file like this, you can include bitmaps and icons 
+// Using a resource file like this, you can include bitmaps and icons
 // inside EXE .
 //
 //   Resource name   Resource Type    Resource FileName
@@ -15,4 +15,4 @@
         cleard        bitmap    cleard.bmp
         bold          bitmap    bold.bmp
         boldd         bitmap    boldd.bmp
-        
+

@@ -133,10 +133,12 @@
    #define BT_FILLROUNDRECT  3  // RoundWidth , RoundHeight
    #define BT_FILLFLOOD      4
 
+
 // BT_DRAW_HDC_BITMAP(), BT_BMP_PASTE ()
    // Action
    #define BT_BITMAP_OPAQUE        0
    #define BT_BITMAP_TRANSPARENT   1
+
 
 // BT_DRAW_HDC_BITMAP(), BT_DRAW_HDC_BITMAPALPHABLEND ()
    // Mode_Stretch
@@ -144,14 +146,17 @@
    #define BT_STRETCH 1
    #define BT_COPY    3
 
+
 // BT_DRAW_HDC_BITMAPALPHABLEND ()
    // Alpha = 0 to 255
    #define BT_ALPHABLEND_TRANSPARENT   0
    #define BT_ALPHABLEND_OPAQUE      255
 
+
 // BT_DRAW_HDC_GRADIENTFILL()
    #define BT_GRADIENTFILL_HORIZONTAL 0
    #define BT_GRADIENTFILL_VERTICAL   1
+
 
 // BT_DRAW_HDC_TEXTOUT (), BT_DRAW_HDC_DRAWTEXT
    // Type
@@ -192,11 +197,13 @@
    #define BT_FILEFORMAT_TIF   3
    #define BT_FILEFORMAT_PNG   4
 
+
 // BT_BMP_CAPTURESCR()
    // Mode
    #define BT_BITMAP_CAPTURE_DESKTOP    0
    #define BT_BITMAP_CAPTURE_WINDOW     1
    #define BT_BITMAP_CAPTURE_CLIENTAREA 2
+
 
 // BT_BMP_GETINFO ()
    // Info
@@ -204,6 +211,7 @@
    #define BT_BITMAP_INFO_HEIGHT        1
    #define BT_BITMAP_INFO_BITSPIXEL     2
    #define BT_BITMAP_INFO_GETCOLORPIXEL 3
+
 
 // BT_BMP_PROCESS ()
    // Action                                       Value
@@ -228,6 +236,7 @@
    #define BT_BITMAP_REFLECT_HORIZONTAL 1
    #define BT_BITMAP_REFLECT_VERTICAL   2
    #define BT_BITMAP_ROTATE             4   // Angle = 0 To 360º   &&  Color_Fill_Bk = color to fill the empty spaces the background
+
 
 // BT_DRAW_HDC_PIXEL ()
    // Action

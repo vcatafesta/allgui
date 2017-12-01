@@ -12,7 +12,7 @@ Features:
 
 Distribution:
 ~~~~~~~~~~~~
-  Distribute it freely, provided that any part of the 
+  Distribute it freely, provided that any part of the
 program or files included is not modified.
 
   FreeMemory is provided as is, without warranty of any kind.

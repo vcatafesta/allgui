@@ -47,14 +47,14 @@ COMMOND.C:
   hwg_Selectfont
      Calls standard Windows dialog for font selecting, returns font handle
   hwg_Selectfile
-     Calls standard Windows dialog for file opening, returns file path and name   
+     Calls standard Windows dialog for file opening, returns file path and name
   hwg_Savefile
      Calls standard Windows dialog for file saving, returns file path and name
   hwg_Printsetup
   hwg_PrintSetupEx()
      Return the printer name, useful to use with set printer to
-  hwg_GetSerialNumber       
-  hwg_HDGetSerial     
+  hwg_GetSerialNumber
+  hwg_HDGetSerial
   hwg_Getprivateprofilestring
   hwg_Writeprivateprofilestring
 
@@ -122,7 +122,7 @@ DRAWTEXT.C:
  Exttextout
  Writestatuswindow
  Windowfromdc
- CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwChaeSet], 
+ CreateFont( fontName, nWidth, hHeight [,fnWeight] [,fdwChaeSet],
                [,fdwItalic] [,fdwUnderline] [,fdwStrikeOut]  ) --> hFont
         Creates font with given attributes,
         returns font handle
@@ -140,42 +140,42 @@ MESSAGE.C:
   MsgRetryCancel( cMessage, [, cTitle ] )
 
 MISC.C
-  Hwg_setdlgresult 
-  Setcapture 
-  Releasecapture 
-  Copystringtoclipboard 
-  Getstockobject 
-  Loword 
-  Hiword 
-  Hwg_bitor 
-  Hwg_bitand 
-  Hwg_bitandinverse 
-  Setbit 
-  Checkbit 
-  Hwg_sin 
-  Hwg_cos 
-  Clienttoscreen 
-  Screentoclient 
-  Hwg_getcursorpos 
-  Getcurrentdir 
-  Winexec 
-  Getkeyboardstate 
-  Getwindowsdir 
-  Getsystemdir 
+  Hwg_setdlgresult
+  Setcapture
+  Releasecapture
+  Copystringtoclipboard
+  Getstockobject
+  Loword
+  Hiword
+  Hwg_bitor
+  Hwg_bitand
+  Hwg_bitandinverse
+  Setbit
+  Checkbit
+  Hwg_sin
+  Hwg_cos
+  Clienttoscreen
+  Screentoclient
+  Hwg_getcursorpos
+  Getcurrentdir
+  Winexec
+  Getkeyboardstate
+  Getwindowsdir
+  Getsystemdir
   hwg_CreateDirectory
   hwg_RemoveDirectory
   hwg_SetCurrentDirectory
-  Gettempdir 
-  Shellabout 
+  Gettempdir
+  Shellabout
   Getdesktopwidth
   Getdesktopheight
   Gethelpdata
   WinHelp
   Getnextdlgtabitem( window handle, start point handle, bool, start from current control )
   Sleep(miliseconds)
-  IsCapsLockActive 
-  IsNumLockActive  
-  IsScrollLockActive 
+  IsCapsLockActive
+  IsNumLockActive
+  IsScrollLockActive
   hwg_DeleteFile
   hwg_GetFileAttributes
   hwg_SetFileAttributes
@@ -189,11 +189,11 @@ WBROWSE.C:
 
 WINDOW.C:
  Createstatuswindow( hwndParent, nStatusID, nParts, pArray )
-       CreateStatusWindow - creates a status window and divides it into  
-       the specified number of parts, returns the handle to the status window. 
-       hwndParent - parent window for the status window 
-       nStatusID - child window identifier 
-       nParts - number of parts into which to divide the status window 
+       CreateStatusWindow - creates a status window and divides it into
+       the specified number of parts, returns the handle to the status window.
+       hwndParent - parent window for the status window
+       nStatusID - child window identifier
+       nParts - number of parts into which to divide the status window
        pArray - Array with Lengths of parts, if first item == 0, status window
                 will be divided into equal parts.
 

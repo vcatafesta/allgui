@@ -1,7 +1,7 @@
-/* Here is where all the magic happens.  
-   Just enter as many additional pages that you want to search, 
+/* Here is where all the magic happens.
+   Just enter as many additional pages that you want to search,
    then fill in the additional listings for each page.
-   
+
    "Page Name","Path","Page Title","Many,Key,Words","Descriptive comments"
 */
 
@@ -119,7 +119,7 @@ c++; item[c]=new Array("format.htm","","format","","Specifies the edit format st
 c++; item[c]=new Array("grippertext.htm","","grippertext","","Specifies the text of the Gripper for a SplitChild GUI object","Properties");
 c++; item[c]=new Array("group.htm","","group","","Specifies whether toolbar buttons should be work as radio buttons","Properties");
 c++; item[c]=new Array("handcursor.htm","","handcursor","","Specifies whether a hand cursor will be used in an Hyperlink control","Properties");
-c++; item[c]=new Array("header.htm","","header","","Sets/gets the header for a Grid or Browse control specific column","Properties"); 
+c++; item[c]=new Array("header.htm","","header","","Sets/gets the header for a Grid or Browse control specific column","Properties");
 c++; item[c]=new Array("headers.htm","","headers","","Set the headers for a Grid or Browse control","Properties");
 c++; item[c]=new Array("headerimages.htm","","headerimages","","Specifies images for Grid and Browse headers","Properties");
 c++; item[c]=new Array("height.htm","","height","","Set / Gets heigth of a gui object","Properties");

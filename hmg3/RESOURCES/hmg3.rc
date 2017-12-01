@@ -47,28 +47,28 @@ GRID_MCAN       BITMAP  grid_mcan.bmp
 // HMG Debugger resources
 //------------------------------------------------
 
-_about        	PNG   _dbg_about.png
+_about           PNG   _dbg_about.png
 
-_animate      	PNG   _dbg_animate.png
-_step         	PNG   _dbg_step.png
-_trace        	PNG   _dbg_trace.png
-_go           	PNG   _dbg_go.png
-_tocursor     	PNG   _dbg_tocursor.png
-_next         	PNG   _dbg_next.png
-_pause        	PNG   _dbg_pause.png
+_animate         PNG   _dbg_animate.png
+_step            PNG   _dbg_step.png
+_trace           PNG   _dbg_trace.png
+_go              PNG   _dbg_go.png
+_tocursor        PNG   _dbg_tocursor.png
+_next            PNG   _dbg_next.png
+_pause           PNG   _dbg_pause.png
 
-_breakpoint   	PNG   _dbg_breakpoint.png
-_watchpoint   	PNG   _dbg_watchpoint.png
-_tracepoint   	PNG   _dbg_tracepoint.png
-_configuration	PNG   _dbg_configuration.png
-_quit         	PNG   _dbg_quit.png
+_breakpoint      PNG   _dbg_breakpoint.png
+_watchpoint      PNG   _dbg_watchpoint.png
+_tracepoint      PNG   _dbg_tracepoint.png
+_configuration   PNG   _dbg_configuration.png
+_quit            PNG   _dbg_quit.png
 
-_pointer      	PNG   _dbg_pointer.png
-_refresh      	PNG   _dbg_refresh.png
+_pointer         PNG   _dbg_pointer.png
+_refresh         PNG   _dbg_refresh.png
 
-_open      	PNG   _dbg_open.png
-_save      	PNG   _dbg_save.png
+_open         PNG   _dbg_open.png
+_save         PNG   _dbg_save.png
 
 _dbgIcon        ICON  _dbg_icon.ico
 
-_dbgbutton    	PNG   _dbg_button.png
+_dbgbutton       PNG   _dbg_button.png

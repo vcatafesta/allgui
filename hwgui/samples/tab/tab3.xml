@@ -27,10 +27,10 @@
 
  if cUser=="1" .and. n==2
     lOpen:=.f.
- endif 
+ endif
 
  if cUser=="2" .and. n==1
-    lOpen:=.f.    
+    lOpen:=.f.
  endif
 
  if lOpen

@@ -1,5 +1,5 @@
 
-2006/03/05: 
+2006/03/05:
 * updated - userfun.prg - for compatibility with Harbour Compiler Alpha binary (CVS 2006-03-02 18:00)
   Contributed by Jacek Kubica <kubica@wssk.wroc.pl>
 

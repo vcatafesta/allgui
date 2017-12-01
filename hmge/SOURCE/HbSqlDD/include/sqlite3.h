@@ -7249,7 +7249,6 @@ SQLITE_API int sqlite3_vtab_on_conflict(sqlite3 *);
 /* #define SQLITE_ABORT 4  // Also an error code */
 #define SQLITE_REPLACE  5
 
-
 /*
 ** Undo the hack that converts floating point types to integer for
 ** builds on processors without floating point support.

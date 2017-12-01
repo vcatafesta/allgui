@@ -8,22 +8,22 @@ It can be called by two ways, viz., method and command.
 Syntax for both the ways are,
 
 
-Method:  
+Method:
 
 <WindowName>.<ControlName>.Print( aHeaders )
 
 
 Command:
 
-PRINT GRID <GridName>  
-OF <ParentName>  
-[ FONT <cFontName> ]  
-[ SIZE <nFontSize> ]  
-[ ORIENTATION <cOrientation> ]  
-[ HEADERS <aHeaders> ]  
-[ SHOWWINDOW ]  
-[ MERGEHEADERS <aMergeHeaders> ]  
-[ COLUMNSUM <aColumnSum> ]  
+PRINT GRID <GridName>
+OF <ParentName>
+[ FONT <cFontName> ]
+[ SIZE <nFontSize> ]
+[ ORIENTATION <cOrientation> ]
+[ HEADERS <aHeaders> ]
+[ SHOWWINDOW ]
+[ MERGEHEADERS <aMergeHeaders> ]
+[ COLUMNSUM <aColumnSum> ]
 
 Parameters for this command:
 
@@ -54,14 +54,14 @@ ColumnSum: Page-wise summation of some columns of the grid control can be achiev
 Sample:
 
 PRINT GRID grid_1;
-	OF form_1;
-	FONT "Arial";
-	SIZE 12;
-	ORIENTATION "P";
-	HEADERS {"Header1","Header2","Header3"};
-	SHOWWINDOW;
-	MERGEHEADERS {{1,3,"Merged Header1"},{5,6,"Merged Header2"}};
-	COLUMNSUM {{.f.,''},{.f.,''},{.t.,"99,999.99"},{.t.,"$ 999,999,999"},{.f.,''},{.f.,''}}
+   OF form_1;
+   FONT "Arial";
+   SIZE 12;
+   ORIENTATION "P";
+   HEADERS {"Header1","Header2","Header3"};
+   SHOWWINDOW;
+   MERGEHEADERS {{1,3,"Merged Header1"},{5,6,"Merged Header2"}};
+   COLUMNSUM {{.f.,''},{.f.,''},{.t.,"99,999.99"},{.t.,"$ 999,999,999"},{.f.,''},{.f.,''}}
 
 
 GridPrint Window:
@@ -70,7 +70,7 @@ This window has many features to configure the report which are all self explana
 
 - Selection of columns to report (You can remove a particular column of the grid in reporting)
 - The print size of the columns can be altered.
-- Headers and Footers can be added/modified. 
+- Headers and Footers can be added/modified.
 - Page numbers are printed on each page. It can be printed either on top or bottom of the page. Or, if it is not needed that can be removed too.
 - Font size of the report can be changed.
 - Column wise, row wise grid lines can be printed/removed.
@@ -79,7 +79,7 @@ This window has many features to configure the report which are all self explana
 - Orientation of the report can be selected
 - Printer can be selected from a list
 - Standard page sizes or custom page size can be selected, so are the margins.
-- A blue print preview of the first page is shown before getting printed.  
+- A blue print preview of the first page is shown before getting printed.
 
 
 S.Rathinagiri <srgiri@dataone.in>

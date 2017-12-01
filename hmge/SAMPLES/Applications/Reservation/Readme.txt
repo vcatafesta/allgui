@@ -57,11 +57,11 @@ This setting and other commands are available as
 options to use presa /? for the help.
 
 History:
-November 2014 
-        Revised Print Graphics routine , reduced code and 
+November 2014
+        Revised Print Graphics routine , reduced code and
         correct bug in the calculation of the values.
 
-June 2013 
-	First Release
+June 2013
+   First Release
 
 Last Updated 26 October 2014 (12:00:00)

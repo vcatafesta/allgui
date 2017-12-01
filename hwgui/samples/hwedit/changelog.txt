@@ -3,7 +3,7 @@ Limite de 18 janelas simultaniamente
 10/10/2003
  [] inicio do desenvolvimento do editor
 15/11/2003
- [+]criado rotina (combobox) para visualizcao das funcoes e opcao de selecionar funcao 
+ [+]criado rotina (combobox) para visualizcao das funcoes e opcao de selecionar funcao
     criado rotina de linha
 
 09/12/2003

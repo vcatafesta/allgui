@@ -18,7 +18,7 @@ this file to figure out which hints to blurt to the screen.
 If Clippy encounters a question mark (?) within the line of text, it will
 display a hint box with YES NO options.
 
-Command Line 
+Command Line
 ~~~~~~~~~~~~
 
 There are several command line option to Clippy.
@@ -42,6 +42,6 @@ If you like this program, please EMail me and let me know.
 
 Contact Information
 ~~~~~~~~~~~~~~~~~~~
-    
+
 Author:   Grigory Filatov
 EMail:    gfilatov@inbox.ru

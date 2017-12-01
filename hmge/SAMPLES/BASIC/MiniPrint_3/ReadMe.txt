@@ -11,7 +11,7 @@ Main goal of this program is denote power of HMG.
 Viva HMG and viva its Builder, maintainers, (true) supporters and followers !
 
 Regards
-     
+
 esgici
 
 Copyright 2013 Bicahi Esgici <esgici@gmail.com>

@@ -2,7 +2,7 @@
 ---------------------
 2011/08/19
    + added - parameter with length of custom string buffer (default is 1)
-     in method ReceiveChar( nBufLen ) (tsocket.prg)	
+     in method ReceiveChar( nBufLen ) (tsocket.prg)
      Based upon a contribution of Artyom Verchenko <artyomskynet@gmail.com>
 
 2009/11/09
@@ -20,14 +20,14 @@
 Changes by Grigory Filatov <gfilatov@freemail.ru>
 for Harbour MiniGUI Extended distribution
 
-2007/11/23 
+2007/11/23
    + added - request a return receipt for your email
-     in method Send( IgnoreError, RequestReturnReceipt) (tsmtp.prg)	
+     in method Send( IgnoreError, RequestReturnReceipt) (tsmtp.prg)
 
-2007/05/04 
+2007/05/04
    ! minor corrections for "Date:" string in mail header
-   ! correction in GETTIMEZONEBIAS() function for creating a proper time bias 
-		       in mail header (tsmtp.prg)
+   ! correction in GETTIMEZONEBIAS() function for creating a proper time bias
+             in mail header (tsmtp.prg)
 
 Changes by Jacek Kubica <kubica@wssk.wroc.pl>
 for Harbour MiniGUI Experimental distribution
@@ -35,10 +35,10 @@ for Harbour MiniGUI Experimental distribution
 2006/04/18
    ! minor corrections in tsmtp.prg (GetLines() method) for proper working
      with new Harbour issue
- 
-2006/01/26 
-   + GETTIMEZONEDIFF() function added for creating proper date string 
-		       in mail header (tsmtp.prg)	
+
+2006/01/26
+   + GETTIMEZONEDIFF() function added for creating proper date string
+             in mail header (tsmtp.prg)
 2005/10/07
    - fixed - problem with attachments names (tsmtp.prg)
 

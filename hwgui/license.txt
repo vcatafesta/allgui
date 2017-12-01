@@ -15,7 +15,7 @@
 
     As a special exception, you have permission for
     additional uses of the text contained in its release of HWGUI.
-  
+
     The exception is that, if you link the HWGUI library with other
     files to produce an executable, this does not by itself cause the
     resulting executable to be covered by the GNU General Public License.

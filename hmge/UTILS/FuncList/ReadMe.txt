@@ -28,11 +28,11 @@ for example:
 
 .........
 h_btntextbox.prg
-	_DefineBtnTextBox
-	InitDialogBtnTextBox
+   _DefineBtnTextBox
+   InitDialogBtnTextBox
 c_btntextbox.c
-	INITBTNTEXTBOX
-	REDEFBTNTEXTBOX
+   INITBTNTEXTBOX
+   REDEFBTNTEXTBOX
 h_button.prg
 .........
 
@@ -65,10 +65,10 @@ The rules of filling of the keywords files is:
 
 Example.
 
-Commands.lst		The result 
+Commands.lst      The result
 
-ElseIf			elseif, Elseif, ELSEIF (depending on the installation of a change in the register)
-*ElseIf			ElseIf (register it does not change)
+ElseIf         elseif, Elseif, ELSEIF (depending on the installation of a change in the register)
+*ElseIf         ElseIf (register it does not change)
 
 TABLE OF CALLS FUNCTIONS
 
@@ -83,28 +83,28 @@ Lingual files can be edited with the aid of the INI File Editor from MiniGUI's d
 it is necessary to change expansion only.
 
 "Action at startup"
-	Selector makes it possible to select the variant of the starting of the program:
-		with the load of the last preserved list or without.
+   Selector makes it possible to select the variant of the starting of the program:
+      with the load of the last preserved list or without.
 
 "Search in the list"
-	the installation of search mode: is accurate correspondence or to the entry of fragment.
+   the installation of search mode: is accurate correspondence or to the entry of fragment.
 
 "External editor"
-	in the line is indicated external editor for changing the programm's modules.
-	For example, C:\Tools\PsPad\PsPad.exe. The mode of the loading is assigned additionally:
+   in the line is indicated external editor for changing the programm's modules.
+   For example, C:\Tools\PsPad\PsPad.exe. The mode of the loading is assigned additionally:
 
-	- "To open file without the conditions"
-		Program file simply is opened in the predetermined program of the editing
+   - "To open file without the conditions"
+      Program file simply is opened in the predetermined program of the editing
 
-	- "To determine and to transmit the number of line %N"
-		In editor, besides the name of file, is transferred the number of the line,
-		which contains the current procedure.
-		The parameter, corresponding to the parameter of the call of editor,
-		it is indicated in the field opposite the switch.
-		Editor must support a similar variant of starting.
-		For the large is file this the slowest method.
+   - "To determine and to transmit the number of line %N"
+      In editor, besides the name of file, is transferred the number of the line,
+      which contains the current procedure.
+      The parameter, corresponding to the parameter of the call of editor,
+      it is indicated in the field opposite the switch.
+      Editor must support a similar variant of starting.
+      For the large is file this the slowest method.
 
-	Expression %N is used by a program for the substitution of necessary value.
+   Expression %N is used by a program for the substitution of necessary value.
 
 Example.
 
@@ -116,7 +116,7 @@ For editor SciTe. Format of the calling: SciTE <filename> -goto:<nnn>. We assign
 and against the position of the selector: -goto:%N
 
 - "To transmit the name of procedure %P"
-	Editor additionally obtains line for the search for necessary procedure.
+   Editor additionally obtains line for the search for necessary procedure.
 
 Expression %P is used by a program for the substitution of necessary value.
 

@@ -259,11 +259,11 @@ hwg_RefreshAllGets(oDlg)
     <method name="onClick">
       <![CDATA[DT_CENTER:=1
    oPrinter:=HPrinter():New(, .T.)
-   oFont:=oPrinter:AddFont( "Times New Roman",10 ) 
+   oFont:=oPrinter:AddFont( "Times New Roman",10 )
    oPrinter:StartDoc( .T. )
    oPrinter:StartPage()
    oPrinter:SetFont( oFont )
-  
+
    oBC:=Barcode():New( oPrinter:hDC , alltrim(cData) , nxLeft, nxTop, nxWidth, nxHeight, nBCodeType,nColText, nColPane, lHorz,lTransparent, nPinxWidth)
    oBc:showBarcode()
 
@@ -280,7 +280,7 @@ hwg_RefreshAllGets(oDlg)
     </style>
     <method name="onClick">
       <![CDATA[//hwg_Invalidaterect(oDlg:handle,0)
-//hwg_Postmessage(oDlg:handle,15,0,0, 
+//hwg_Postmessage(oDlg:handle,15,0,0,
 hwg_Redrawwindow( oDlg:handle, 4 + 1 + 2 + 256 )]]>
     </method>
   </part>

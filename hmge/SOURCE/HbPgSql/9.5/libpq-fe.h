@@ -517,7 +517,6 @@ extern size_t PQescapeString(char *to, const char *from, size_t length);
 extern unsigned char *PQescapeBytea(const unsigned char *from, size_t from_length,
            size_t *to_length);
 
-
 /* === in fe-print.c === */
 
 extern void PQprint(FILE *fout,            /* output stream */

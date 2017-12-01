@@ -27,4 +27,4 @@ I hope this code will help someone.
 Thank you for using CPUSpeed!
 
 Grigory Filatov
-email:    gfilatov@inbox.ru 
+email:    gfilatov@inbox.ru

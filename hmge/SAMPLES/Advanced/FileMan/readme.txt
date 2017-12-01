@@ -18,6 +18,6 @@ Made by Harbour and MiniGUI.
 Enjoy ! :-)
 
 -------------------------------------------------------------------------------
-FileMan software is provided "as-is". 
-No warranty of any kind is expressed or implied. 
+FileMan software is provided "as-is".
+No warranty of any kind is expressed or implied.
 -------------------------------------------------------------------------------

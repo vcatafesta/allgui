@@ -125,7 +125,6 @@ _BeginPropSheet ( <"name"> , <"parent"> , <row> , <col> , <width> , <height> ,;
                <{applyproc}>, <{cancelproc}>, <{validproc}>, <.bold.>, <.italic.>, <.underline.>,;
                <.strikeout.>, .f., .f., 0, 0, .f. )
 
-
 #xcommand SHEETPAGE <Name> RESOURCE <id> ;
       [ TITLE <cTitle> ];
       [ HEADER <chdtitle> ];

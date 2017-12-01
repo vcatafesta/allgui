@@ -159,6 +159,7 @@ _hmg_hpdf_abortdoc()
    => ;
    _HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> )
 
+
 #xcommand @ <Row> , <Col> HPDFPRINT CIRCLE RADIUS <nRadius> ;
    [ <lwidth : PENWIDTH> <Width> ] ;
    [ <lcolor : COLOR> <aColor> ] ;
@@ -174,6 +175,7 @@ _hmg_hpdf_abortdoc()
    => ;
    _HMG_HPDF_ELLIPSE ( <Row> , <Col> , <nHRadius> , <nVRadius>, <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> , <.lFilled.>)
 
+
 #xcommand @ <Row> , <Col> HPDFPRINT ARC RADIUS <nRadius> ;
    ANGLE FROM <nFromAngle> ;
    TO <nToAngle> ;
@@ -187,6 +189,7 @@ _hmg_hpdf_abortdoc()
    [ <lcolor : COLOR> <aColor> ] ;
    => ;
    _HMG_HPDF_CURVE ( <Row> , <Col> , <nFromRow>, <nFromCol>, <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\]  , <.lwidth.> , <.lcolor.> )
+
 
 #xcommand SET HPDFDOC PASSWORD OWNER <cOwnerPass> [ USER <cUserPass> ] => _HMG_HPDF_SetPassword( <cOwnerPass>, <cUserPass> )
 

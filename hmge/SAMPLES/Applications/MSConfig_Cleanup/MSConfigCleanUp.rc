@@ -18,23 +18,23 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "FileDescription", "MSConfig Cleanup\000"
-		VALUE "FileVersion", "1.1.0.0"
-		VALUE "InternalName", "MSConfigCleanUp\000"
-		VALUE "LegalCopyright", "Freeware 2006-2014\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "MSConfigCleanUp.exe"
-		VALUE "CompanyName", ""
-		VALUE "ProductName", "MiniGUI Utility"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "FileDescription", "MSConfig Cleanup\000"
+      VALUE "FileVersion", "1.1.0.0"
+      VALUE "InternalName", "MSConfigCleanUp\000"
+      VALUE "LegalCopyright", "Freeware 2006-2014\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "MSConfigCleanUp.exe"
+      VALUE "CompanyName", ""
+      VALUE "ProductName", "MiniGUI Utility"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

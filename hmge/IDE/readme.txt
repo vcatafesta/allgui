@@ -28,15 +28,15 @@ use of this software.
 Remarks:
 --------
 
-	- Harbour MiniGUI IDE is experimental code, so It could be 
-	buggy / unstable and is not finished yet.
+   - Harbour MiniGUI IDE is experimental code, so It could be
+   buggy / unstable and is not finished yet.
 
-	- It reads / writes '.fmg' files (HMG form definition files) in
-	'alternate syntax' (DEFINE...END) format.
+   - It reads / writes '.fmg' files (HMG form definition files) in
+   'alternate syntax' (DEFINE...END) format.
 
-	- To change a control position / size, you must select (click) it.
-	Then you must click the right mouse button and select the action
-	from the context menu. 
+   - To change a control position / size, you must select (click) it.
+   Then you must click the right mouse button and select the action
+   from the context menu.
 
-	- To edit a property or event, you must double click it (object 
-	inspector window).
+   - To edit a property or event, you must double click it (object
+   inspector window).

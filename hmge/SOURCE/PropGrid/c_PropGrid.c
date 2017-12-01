@@ -1068,7 +1068,6 @@ HB_FUNC( INITPROPGRID )
          NULL
       );
 
-
    hFrame = CreateWindowEx
       (
          WS_EX_TRANSPARENT,

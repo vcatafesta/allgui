@@ -1,7 +1,7 @@
 <html>
-<head> 
-<title></title> 
-<style> 
+<head>
+<title></title>
+<style>
 body
 {
     font: 9pt Arial,sans-serif;
@@ -18,9 +18,9 @@ body
     margin-left: 16px;
 }
 
-a:link, a:visited, a:active 
+a:link, a:visited, a:active
 {
-    text-decoration: none ; color: #000000; font: 9pt Arial,sans-serif; 
+    text-decoration: none ; color: #000000; font: 9pt Arial,sans-serif;
 }
 
 a.normal
@@ -49,7 +49,7 @@ function showBranch(branch)
     else
         objBranch.display="block";
 }
- 
+
 function swapFolder(img)
 {
     objImg = document.getElementById(img);
@@ -77,40 +77,40 @@ function OnActiveLink(newActiveLink)
     }
 }
 
-function search(frm) 
-{ 
-  txt = frm.srchval.value.split(" "); 
+function search(frm)
+{
+  txt = frm.srchval.value.split(" ");
   fnd = new Array(); total=0;
   htm = "init.htm"
-  for (i = 0; i < item.length; i++) 
-  { 
-    fnd[i] = 0; order = new Array(0, 4, 2, 3); 
-    for (j = 0; j < order.length; j++) 
-      for (k = 0; k < txt.length; k++) 
-		if (item[i][order[j]].toLowerCase().indexOf(txt[k].toLowerCase()) > -1 && txt[k] != "")
-          fnd[i] += (j+1); 
-  }
-  for (i = 0; i < fnd.length; i++) 
+  for (i = 0; i < item.length; i++)
   {
-    n = 0; w = -1; 
-    for (j = 0;j < fnd.length; j++) 
-      if (fnd[j] > n) { n = fnd[j]; w = j; }; 
-    if (w > -1) total += show(w,n); 
-    fnd[w] = 0; 
-  } 
+    fnd[i] = 0; order = new Array(0, 4, 2, 3);
+    for (j = 0; j < order.length; j++)
+      for (k = 0; k < txt.length; k++)
+      if (item[i][order[j]].toLowerCase().indexOf(txt[k].toLowerCase()) > -1 && txt[k] != "")
+          fnd[i] += (j+1);
+  }
+  for (i = 0; i < fnd.length; i++)
+  {
+    n = 0; w = -1;
+    for (j = 0;j < fnd.length; j++)
+      if (fnd[j] > n) { n = fnd[j]; w = j; };
+    if (w > -1) total += show(w,n);
+    fnd[w] = 0;
+  }
   page += "</table><br><center>Total found: "+total+"<br><p></p>";
   document.write(page);
   document.close();
 }
 
-function show(which,num) 
-{ 
+function show(which,num)
+{
   link = item[which][1] + item[which][0];
   tree = item[which][5]+"."
   line = '<tr><td><a href="'+link+'" style="text-decoration:none;" TARGET=DETAILS><small>'+tree+'</small><u><b>'+item[which][2]+"</b></u></a>: ";
-  line += item[which][4] + "</td></tr>"; 
-  page += line; 
-  return 1; 
+  line += item[which][4] + "</td></tr>";
+  page += line;
+  return 1;
 }
 
 function BackBtnOn()
@@ -127,7 +127,7 @@ function ItHasChanged(obj,hh)
   var filename = htmItem.substring(htmItem.lastIndexOf('/')+1).toLowerCase();
 
   if ( WhatsNew(filename) > -1 )
-  {  
+  {
     obj.setAttribute('src', "../assets/img/doc_changed.gif");
   }
 
@@ -139,8 +139,8 @@ function WhatsNew(cfile)
   return n;
 }
 
-</script> 
-</head> 
+</script>
+</head>
 
 <body>
 <center>
@@ -150,45 +150,45 @@ function WhatsNew(cfile)
 </form>
 </center>
 
-<div id="menu" class="trigger" onClick="showBranch('branch1');swapFolder('folder1')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder1"> 
+<div id="menu" class="trigger" onClick="showBranch('branch1');swapFolder('folder1')">
+    <img src="../assets/img/closed.gif" border="0" id="folder1">
     Basics
-</div> 
-<span class="branch" id="branch1"> 
+</div>
+<span class="branch" id="branch1">
 <!--      <a href="Building_HMG_applications.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style>  </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" onload="ItHasChanged(this,'Building HMG Applications')" BORDER=0> Building HMG Applications</a> <br>  -->
     <a href="Building_HMG_applications.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style>  </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Building HMG Applications</a> <br>
     <a href="tutorial.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Tutorial (English)</a> <br>
     <a href="tutorial_es.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Tutorial (Español)</a> <br>
     <a href="faq.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> FAQ</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch22');swapFolder('folder22')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder22"> 
+<div class="trigger" onClick="showBranch('branch22');swapFolder('folder22')">
+    <img src="../assets/img/closed.gif" border="0" id="folder22">
     HMG IDE
-</div> 
-<span class="branch" id="branch22"> 
+</div>
+<span class="branch" id="branch22">
     <a href="idebasics.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Basics</a> <br>
     <a href="idequickstart.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Quick Start</a> <br>
     <a href="idesample.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Sample</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch2');swapFolder('folder2')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder2"> 
+<div class="trigger" onClick="showBranch('branch2');swapFolder('folder2')">
+    <img src="../assets/img/closed.gif" border="0" id="folder2">
     Windows
-</div> 
-<span class="branch" id="branch2"> 
+</div>
+<span class="branch" id="branch2">
     <a href="activatewindowall.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Activate Window All</a> <br>
     <a href="declarewindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS  <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Declare Window</a> <br>
     <a href="definewindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Define Window</a> <br>
     <a href="loadwindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Load Window</a> <br>
-	<a href="thiswindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> ThisWindow Object</a> <br>
-</span> 
+   <a href="thiswindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> ThisWindow Object</a> <br>
+</span>
 
-<div class="trigger" onClick="showBranch('branch3');swapFolder('folder3')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder3"> 
+<div class="trigger" onClick="showBranch('branch3');swapFolder('folder3')">
+    <img src="../assets/img/closed.gif" border="0" id="folder3">
     Controls
-</div> 
-<span class="branch" id="branch3"> 
+</div>
+<span class="branch" id="branch3">
     <a href="activex.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Activex</a> <br>
     <a href="animatebox.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> AnimateBox</a> <br>
     <a href="browse.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Browse</a> <br>
@@ -221,18 +221,18 @@ function WhatsNew(cfile)
     <a href="statusbar.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> StatusBar</a> <br>
     <a href="tab.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Tab</a> <br>
     <a href="textbox.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> TextBox</a> <br>
-	<a href="this.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> This Object</a> <br>
+   <a href="this.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style>  <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> This Object</a> <br>
     <a href="timer.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Timer</a> <br>
     <a href="TimePicker.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> TimePicker</a> <br>
     <a href="tree.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Tree</a> <br>
     <a href="toolbar.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> ToolBar</a> <br>
-</span>                                                                      
+</span>
 
-<div class="trigger" onClick="showBranch('branch4');swapFolder('folder4')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder4"> 
+<div class="trigger" onClick="showBranch('branch4');swapFolder('folder4')">
+    <img src="../assets/img/closed.gif" border="0" id="folder4">
     Properties
-</div> 
-<span class="branch" id="branch4"> 
+</div>
+<span class="branch" id="branch4">
     <a href="address.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> address</a> <br>
     <a href="alignment.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> alignment</a> <br>
     <a href="allowappend.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> allowappend</a> <br>
@@ -385,13 +385,13 @@ function WhatsNew(cfile)
     <a href="windowtype.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> windowtype</a> <br>
     <a href="workarea.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> workarea</a> <br>
     <a href="wrap.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> wrap</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch5');swapFolder('folder5')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder5"> 
+<div class="trigger" onClick="showBranch('branch5');swapFolder('folder5')">
+    <img src="../assets/img/closed.gif" border="0" id="folder5">
     Events
-</div> 
-<span class="branch" id="branch5"> 
+</div>
+<span class="branch" id="branch5">
     <a href="action.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> action</a> <br>
     <a href="onchange.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> onchange</a> <br>
     <a href="onclick.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> onclick</a> <br>
@@ -423,13 +423,13 @@ function WhatsNew(cfile)
     <a href="onscrollup.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> onscrollup</a> <br>
     <a href="onsize.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> onsize</a> <br>
     <a href="onvscrollbox.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> onvscrollbox</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch6');swapFolder('folder6')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder6"> 
+<div class="trigger" onClick="showBranch('branch6');swapFolder('folder6')">
+    <img src="../assets/img/closed.gif" border="0" id="folder6">
     Methods
-</div> 
-<span class="branch" id="branch6"> 
+</div>
+<span class="branch" id="branch6">
     <a href="activate.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> activate</a> <br>
     <a href="append.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> append</a> <br>
     <a href="addcolumn.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> addcolumn</a> <br>
@@ -463,13 +463,13 @@ function WhatsNew(cfile)
     <a href="setfocus.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> setfocus</a> <br>
     <a href="show.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> show</a> <br>
     <a href="stop.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> stop</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch7');swapFolder('folder7')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder7"> 
+<div class="trigger" onClick="showBranch('branch7');swapFolder('folder7')">
+    <img src="../assets/img/closed.gif" border="0" id="folder7">
     Functions
-</div> 
-<span class="branch" id="branch7"> 
+</div>
+<span class="branch" id="branch7">
     <a href="compressfiles.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> CompressFiles</a> <br>
     <a href="createfolder.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> CreateFolder</a> <br>
     <a href="DisableProcessWindowsGhosting.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> DisableProcessWindowsGhosting</a> <br>
@@ -495,15 +495,15 @@ function WhatsNew(cfile)
     <a href="gettempfolder.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GetTempFolder</a> <br>
     <a href="GetUserName.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GetUserName</a> <br>
     <a href="getwindowsfolder.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GetWindowsFolder</a> <br>
-	<a href="HMG_CallDLL.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_CallDLL</a> <br>
-	<a href="HMG_GetDLLFunctions.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetDLLFunctions</a> <br>
-	<a href="HMG_GetHBSymbols.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetHBSymbols</a> <br>
-	<a href="HMG_GetCompileVersion32.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetCompileVersion32</a> <br>
-	<a href="HMG_GetCompileVersion64.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetCompileVersion64</a> <br>
-	<a href="HMG_GetImageInfo.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetImageInfo</a> <br>
+   <a href="HMG_CallDLL.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_CallDLL</a> <br>
+   <a href="HMG_GetDLLFunctions.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetDLLFunctions</a> <br>
+   <a href="HMG_GetHBSymbols.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetHBSymbols</a> <br>
+   <a href="HMG_GetCompileVersion32.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetCompileVersion32</a> <br>
+   <a href="HMG_GetCompileVersion64.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetCompileVersion64</a> <br>
+   <a href="HMG_GetImageInfo.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetImageInfo</a> <br>
     <a href="HMG_GetLanguage.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_GetLanguage</a> <br>
     <a href="HMG_LoadResourceRawFile.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_LoadResourceRawFile</a> <br>
-	<a href="HMGversion.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMGVersion</a> <br>
+   <a href="HMGversion.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMGVersion</a> <br>
     <a href="inputbox.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> InputBox</a> <br>
     <a href="inputwindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> InputWindow</a> <br>
     <a href="iscontroldefined.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> IsControlDefined</a> <br>
@@ -545,14 +545,14 @@ function WhatsNew(cfile)
     <a href="VirtualKeyboard.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> VirtualKeyboard</a> <br>
     <a href="waitwindow.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> WaitWindow</a> <br>
     <a href="windowsversion.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> WindowsVersion</a> <br>
-</span> 
+</span>
 
 
-<div class="trigger" onClick="showBranch('branch9');swapFolder('folder9')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder9"> 
+<div class="trigger" onClick="showBranch('branch9');swapFolder('folder9')">
+    <img src="../assets/img/closed.gif" border="0" id="folder9">
     Misc. Commands
-</div> 
-<span class="branch" id="branch9"> 
+</div>
+<span class="branch" id="branch9">
     <a href="compress.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Compress</a> <br>
     <a href="decode.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Decode</a> <br>
     <a href="displayhelp.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Display Help</a> <br>
@@ -589,13 +589,13 @@ function WhatsNew(cfile)
     <a href="systemobject.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> System Object</a> <br>
     <a href="uncompress.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Uncompress</a> <br>
     <a href="waitwindowcommand.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Wait Window</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch8');swapFolder('folder8')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder8"> 
+<div class="trigger" onClick="showBranch('branch8');swapFolder('folder8')">
+    <img src="../assets/img/closed.gif" border="0" id="folder8">
     Print System
-</div> 
-<span class="branch" id="branch8"> 
+</div>
+<span class="branch" id="branch8">
     <a href="selectprinter.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> SELECT PRINTER</a> <br>
     <a href="startprintdoc.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> START PRINTDOC</a> <br>
     <a href="startprintpage.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> START PRINTPAGE</a> <br>
@@ -614,57 +614,57 @@ function WhatsNew(cfile)
     <a href="aprinters.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> aPrinters()</a> <br>
     <a href="getdefaultprinter.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GetDefaultPrinter()</a> <br>
     <a href="HMG_PrinterGetStatus.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_PrinterGetStatus()</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch11');swapFolder('folder11')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder11"> 
+<div class="trigger" onClick="showBranch('branch11');swapFolder('folder11')">
+    <img src="../assets/img/closed.gif" border="0" id="folder11">
     Report Writer
-</div> 
-<span class="branch" id="branch11"> 
+</div>
+<span class="branch" id="branch11">
     <a href="reportwriter.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Reference</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch15');swapFolder('folder15')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder15"> 
+<div class="trigger" onClick="showBranch('branch15');swapFolder('folder15')">
+   <img src="../assets/img/closed.gif" border="0" id="folder15">
    HMG HPDF
-</div> 
-<span class="branch" id="branch15"> 
-	<a href="../HMG HPDF/HMG_HPDF Introduction.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Introduction</a> <br>
-	<a href="../HMG HPDF/HMG_HPDF_Document_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Document Handling</a> <br>
-	<a href="../HMG HPDF/HMG_HPDFINFO.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HPDFINFO</a> <br>
-	<a href="../HMG HPDF/HMG_HPDFMiscellaneous.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Miscellaneous</a> <br>
-	<a href="../HMG HPDF/HMG_HPDFOutline.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Outline</a> <br>
-	<a href="../HMG HPDF/HMG_HPDFPage_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Page Handling</a> <br>
-	<a href="../HMG HPDF/HMG_HPDFContent_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Content Handling</a> <br>
-</span> 
+</div>
+<span class="branch" id="branch15">
+   <a href="../HMG HPDF/HMG_HPDF Introduction.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Introduction</a> <br>
+   <a href="../HMG HPDF/HMG_HPDF_Document_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Document Handling</a> <br>
+   <a href="../HMG HPDF/HMG_HPDFINFO.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HPDFINFO</a> <br>
+   <a href="../HMG HPDF/HMG_HPDFMiscellaneous.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Miscellaneous</a> <br>
+   <a href="../HMG HPDF/HMG_HPDFOutline.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Outline</a> <br>
+   <a href="../HMG HPDF/HMG_HPDFPage_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Page Handling</a> <br>
+   <a href="../HMG HPDF/HMG_HPDFContent_Handling.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Content Handling</a> <br>
+</span>
 
-<div class="trigger" onClick="showBranch('branch18');swapFolder('folder18')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder18"> 
+<div class="trigger" onClick="showBranch('branch18');swapFolder('folder18')">
+   <img src="../assets/img/closed.gif" border="0" id="folder18">
    Bos Taurus
-</div> 
-<span class="branch" id="branch18"> 
-    <a href="../BosTaurus/BosTaurus-FunctionsReferenceGuide.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Reference Guide</a> <br> 
-</span> 
+</div>
+<span class="branch" id="branch18">
+    <a href="../BosTaurus/BosTaurus-FunctionsReferenceGuide.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Reference Guide</a> <br>
+</span>
 
-<div class="trigger" onClick="showBranch('branch10');swapFolder('folder10')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder10"> 
+<div class="trigger" onClick="showBranch('branch10');swapFolder('folder10')">
+    <img src="../assets/img/closed.gif" border="0" id="folder10">
     Advanced
-</div> 
-<span class="branch" id="branch10"> 
+</div>
+<span class="branch" id="branch10">
     <a href="Disable_Event.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Disable/Enable Events</a> <br>
     <a href="Create_Event.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Create Event</a> <br>
     <a href="Read_Keyboard_Mouse.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Read Keyboard and Mouse</a> <br>
     <a href="Memory_Processes_Threads.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Memory, Processes and Threads</a> <br>
     <a href="HMG_CheckType.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Check Type</a> <br>
     <a href="user-components.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> User Components</a> <br>
-</span> 
+</span>
 
 
-<div class="trigger" onClick="showBranch('branch12');swapFolder('folder12')"> 
-    <img src="../assets/img/closed.gif" border="0" id="folder12"> 
+<div class="trigger" onClick="showBranch('branch12');swapFolder('folder12')">
+    <img src="../assets/img/closed.gif" border="0" id="folder12">
     External Guides and Tutorials
-</div> 
-<span class="branch" id="branch12"> 
+</div>
+<span class="branch" id="branch12">
    <a href="http://www.hmgforum.com/hmgdoc/hmgdoc.htm" target="_blank" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMGDoc online</a> <br>
    <a href="http://harbour.github.io/doc/index.html" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Harbour Reference</a> <br>
    <a href="http://www.kresin.ru/en/hrbfaq_3.html" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Harbour for Beginners</a> <br>
@@ -673,56 +673,56 @@ function WhatsNew(cfile)
    <a href="http://www.hmgforum.com/wiki" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG Wiki</a> <br>
    <a target="DETAILS" href="OurChannel.htm" onclick="OnActiveLink(this);" <style></style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG in YouTube</a><br>
    <a href="http://vivaclipper.wordpress.com/category/hmg/" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG - Viva Clipper</a> <br>
-</span> 
+</span>
 
 
-<div class="trigger" onClick="showBranch('branch13');swapFolder('folder13')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder13"> 
+<div class="trigger" onClick="showBranch('branch13');swapFolder('folder13')">
+   <img src="../assets/img/closed.gif" border="0" id="folder13">
    HFCL
-</div> 
-<span class="branch" id="branch13"> 
+</div>
+<span class="branch" id="branch13">
    <a href="HFCL_Intro.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Introduction</a> <br>
-   <a href="HFCL_AutoFill.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> AutoFill</a> <br> 
-   <a href="HFCL_COMBOSEARCHBOX.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> ComboSearchBox</a> <br> 
-   <a href="HFCL_gridprint.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GridPrint</a> <br> 
+   <a href="HFCL_AutoFill.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> AutoFill</a> <br>
+   <a href="HFCL_COMBOSEARCHBOX.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> ComboSearchBox</a> <br>
+   <a href="HFCL_gridprint.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GridPrint</a> <br>
    <a href="HFCL_MakeShortcut.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> MakeShortcut</a> <br>
    <a href="HFCL_QHTM.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> QHTM</a> <br>
    <a href="HMGSQL.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG SQL</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch14');swapFolder('folder14')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder14"> 
+<div class="trigger" onClick="showBranch('branch14');swapFolder('folder14')">
+   <img src="../assets/img/closed.gif" border="0" id="folder14">
    HMG UNICODE
-</div> 
-<span class="branch" id="branch14"> 
-    <a href="Update_HMG_Unicode.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG-UNICODE Documentation</a> <br> 
+</div>
+<span class="branch" id="branch14">
+    <a href="Update_HMG_Unicode.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG-UNICODE Documentation</a> <br>
     <a href="HB_Unicode_Strings.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Ansi/Unicode Strings Functions</a> <br>
     <a href="HB_Ansi_Strings.htm" onclick="OnActiveLink(this);"    TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> Ansi Only Strings Functions</a> <br>
-</span> 
+</span>
 
-<div class="trigger" onClick="showBranch('branch19');swapFolder('folder19')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder19"> 
+<div class="trigger" onClick="showBranch('branch19');swapFolder('folder19')">
+   <img src="../assets/img/closed.gif" border="0" id="folder19">
    HMG 64-bits
-</div> 
-<span class="branch" id="branch19"> 
-    <a href="HMG-64bits.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG 64-bits Documentation</a> <br> 
-</span> 
+</div>
+<span class="branch" id="branch19">
+    <a href="HMG-64bits.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG 64-bits Documentation</a> <br>
+</span>
 
-<div class="trigger" onClick="showBranch('branch20');swapFolder('folder20')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder20"> 
+<div class="trigger" onClick="showBranch('branch20');swapFolder('folder20')">
+   <img src="../assets/img/closed.gif" border="0" id="folder20">
    HMG DEBUGGER
-</div> 
-<span class="branch" id="branch20"> 
-    <a href="../Debugger/HMG_Debugger.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GUI Documentation</a> <br> 
-</span> 
+</div>
+<span class="branch" id="branch20">
+    <a href="../Debugger/HMG_Debugger.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> GUI Documentation</a> <br>
+</span>
 
-<div class="trigger" onClick="showBranch('branch21');swapFolder('folder21')"> 
-   <img src="../assets/img/closed.gif" border="0" id="folder21"> 
+<div class="trigger" onClick="showBranch('branch21');swapFolder('folder21')">
+   <img src="../assets/img/closed.gif" border="0" id="folder21">
    CLASSES
-</div> 
-<span class="branch" id="branch21"> 
-    <a href="HMG_TString.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_TString </a> <br> 
-</span> 
+</div>
+<span class="branch" id="branch21">
+    <a href="HMG_TString.htm" onclick="OnActiveLink(this);" TARGET=DETAILS <style> </style> <img src="../assets/img/doc.gif" onload="ItHasChanged(this)" BORDER=0> HMG_TString </a> <br>
+</span>
 
 </body>
 </htm>

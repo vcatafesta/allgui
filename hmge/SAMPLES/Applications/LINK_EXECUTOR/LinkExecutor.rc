@@ -11,23 +11,23 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "FileDescription", "Link Executor\000"
-		VALUE "FileVersion", "1.1.0.0"
-		VALUE "InternalName", "LinkExecutor\000"
-		VALUE "LegalCopyright", "Freeware 2003-2006\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "LinkExecutor.exe"
-		VALUE "CompanyName", ""
-		VALUE "ProductName", "MiniGUI Utility"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "FileDescription", "Link Executor\000"
+      VALUE "FileVersion", "1.1.0.0"
+      VALUE "InternalName", "LinkExecutor\000"
+      VALUE "LegalCopyright", "Freeware 2003-2006\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "LinkExecutor.exe"
+      VALUE "CompanyName", ""
+      VALUE "ProductName", "MiniGUI Utility"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

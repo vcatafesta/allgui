@@ -25,12 +25,12 @@
 
       hbmk2 hwgui.hbp procmisc.hbp hbxml.hbp hbactivex.hbp hwg_contrib.hbp hwgdebug.hbp
 
-   You may omit hbactivex.hbp, hwg_contrib.hbp and hwgdebug.hbp, if you 
+   You may omit hbactivex.hbp, hwg_contrib.hbp and hwgdebug.hbp, if you
    don't need these libraries.
 
        To build samples you need to run appropriate .bat files, fixing environment
    variables there.
-       For Dbc you should have rddads.lib and ace32.lib ( by default - in 
+       For Dbc you should have rddads.lib and ace32.lib ( by default - in
    harbour/lib/ directory.
        Bld.bat should be executed with prg file name as a parameter:
 
@@ -38,9 +38,9 @@
 
    2) Linux
 
-   	Sources for the Linux GTK version are located in the gtk/ directory. 
-   There is a shell file build.sh, which is intended for building HwGUI Linux 
-   libraries. The environment variable HB_ROOT is set there, based on the 
+      Sources for the Linux GTK version are located in the gtk/ directory.
+   There is a shell file build.sh, which is intended for building HwGUI Linux
+   libraries. The environment variable HB_ROOT is set there, based on the
    assumption, that HwGUI directory is within the Harbour directory. If no,
    you need to write the correct path to your Harbour directory, for example:
 

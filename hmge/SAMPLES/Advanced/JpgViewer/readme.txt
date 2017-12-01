@@ -31,6 +31,6 @@ Made by Harbour and MiniGUI without using of the external DLL files.
 Enjoy ! :-)
 
 -------------------------------------------------------------------------------
-JpgViewer software is provided "as-is". 
-No warranty of any kind is expressed or implied. 
+JpgViewer software is provided "as-is".
+No warranty of any kind is expressed or implied.
 -------------------------------------------------------------------------------

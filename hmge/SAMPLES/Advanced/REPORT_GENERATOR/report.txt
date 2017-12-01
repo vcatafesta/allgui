@@ -5,87 +5,87 @@ REPORT DEFINITION
 
 DEFINE REPORT <Name> | TEMPLATE
 
-	BEGIN DATA
+   BEGIN DATA
 
-		ITERATOR <xExpression>
+      ITERATOR <xExpression>
 
-		STOPPER <xExpression>
+      STOPPER <xExpression>
 
-	END DATA
+   END DATA
 
-	BEGIN LAYOUT
+   BEGIN LAYOUT
 
-		PAPERSIZE	<nValue>
+      PAPERSIZE   <nValue>
 
-		ORIENTATION	<nValue>
+      ORIENTATION   <nValue>
 
-		[ PAPERWIDTH	<nValue> ]
+      [ PAPERWIDTH   <nValue> ]
 
-		[ PAPERLENGTH	<nValue> ]
+      [ PAPERLENGTH   <nValue> ]
 
-	END LAYOUT
+   END LAYOUT
 
-	BEGIN HEADER
+   BEGIN HEADER
 
-		BANDHEIGHT	<nValue>
+      BANDHEIGHT   <nValue>
 
-		 < Report Object Definitions >
+       < Report Object Definitions >
 
-	END HEADER
+   END HEADER
 
-	BEGIN DETAIL 
+   BEGIN DETAIL
 
-		BANDHEIGHT	<nValue>
+      BANDHEIGHT   <nValue>
 
-		 < Report Object Definitions >
+       < Report Object Definitions >
 
-	END DETAIL
+   END DETAIL
 
-	BEGIN FOOTER
+   BEGIN FOOTER
 
-		BANDHEIGHT	<nValue>
+      BANDHEIGHT   <nValue>
 
-		 < Report Object Definitions >
+       < Report Object Definitions >
 
-	END FOOTER
+   END FOOTER
 
-	BEGIN SUMMARY
+   BEGIN SUMMARY
 
-		BANDHEIGHT	<nValue>
+      BANDHEIGHT   <nValue>
 
-		 < Report Object Definitions >
+       < Report Object Definitions >
 
-	END SUMMARY
+   END SUMMARY
 
-	BEGIN GROUP
+   BEGIN GROUP
 
-		GROUPEXPRESSION	<Value>
+      GROUPEXPRESSION   <Value>
 
-		BEGIN GROUPHEADER
+      BEGIN GROUPHEADER
 
-			BANDHEIGHT	<nValue>
+         BANDHEIGHT   <nValue>
 
-			 < Report Object Definitions >
+          < Report Object Definitions >
 
-		END GROUPHEADER
+      END GROUPHEADER
 
-		BEGIN GROUPFOOTER
+      BEGIN GROUPFOOTER
 
-			BANDHEIGHT	<nValue>
+         BANDHEIGHT   <nValue>
 
-			 < Report Object Definitions >
+          < Report Object Definitions >
 
-		END GROUPFOOTER
+      END GROUPFOOTER
 
-	END GROUP
+   END GROUP
 
 END REPORT
 
 
-- 'TEMPLATE' should be used instead report name on external reports (defined on 
+- 'TEMPLATE' should be used instead report name on external reports (defined on
   a text file with '.rmg' extension.
 
-- PAPERWIDTH and PAPERLENGTH properties are required in layout section only 
+- PAPERWIDTH and PAPERLENGTH properties are required in layout section only
   when PRINTER_PAPER_USER is defined.
 
 
@@ -99,109 +99,109 @@ unit is millimeters.
 TEXT
 ----
 
-	BEGIN TEXT
-		VALUE		<xValue>
-		ROW		<nValue>	
-		COL		<nValue>	
-		WIDTH		<nValue>	
-		HEIGHT		<nValue>	
-		FONTNAME	<cValue>
-		FONTSIZE	<nValue>	
-		FONTBOLD	<lValue>
-		FONTITALIC	<lValue>
-		FONTUNDERLINE	<lValue>
-		FONTSTRIKEOUT	<lValue>
-		FONTCOLOR	<anValue>
-		ALIGNMENT	Left | Center | Right
-	END TEXT
+   BEGIN TEXT
+      VALUE      <xValue>
+      ROW      <nValue>
+      COL      <nValue>
+      WIDTH      <nValue>
+      HEIGHT      <nValue>
+      FONTNAME   <cValue>
+      FONTSIZE   <nValue>
+      FONTBOLD   <lValue>
+      FONTITALIC   <lValue>
+      FONTUNDERLINE   <lValue>
+      FONTSTRIKEOUT   <lValue>
+      FONTCOLOR   <anValue>
+      ALIGNMENT   Left | Center | Right
+   END TEXT
 
 
 PICTURE
 -------
 
-	BEGIN PICTURE
-		VALUE		<cValue>
-		ROW		<nValue>	
-		COL		<nValue>	
-		WIDTH		<nValue>	
-		HEIGHT		<nValue>	
-		STRETCH		<lValue>
-	END PICTURE
+   BEGIN PICTURE
+      VALUE      <cValue>
+      ROW      <nValue>
+      COL      <nValue>
+      WIDTH      <nValue>
+      HEIGHT      <nValue>
+      STRETCH      <lValue>
+   END PICTURE
 
 
 LINE
 ----
 
-	BEGIN LINE
-		FROMROW		<nValue>	
-		FROMCOL		<nValue>	
-		TOROW		<nValue>	
-		TOCOL		<nValue>	
-		PENWIDTH	<nValue>	
-		PENCOLOR	<anValue>	
-	END LINE
+   BEGIN LINE
+      FROMROW      <nValue>
+      FROMCOL      <nValue>
+      TOROW      <nValue>
+      TOCOL      <nValue>
+      PENWIDTH   <nValue>
+      PENCOLOR   <anValue>
+   END LINE
 
 
-RECTANGLE 
+RECTANGLE
 ---------
 
-	BEGIN RECTANGLE
-		FROMROW		<nValue>	
-		FROMCOL		<nValue>	
-		TOROW		<nValue>	
-		TOCOL		<nValue>	
-		PENWIDTH	<nValue>	
-		PENCOLOR	<anValue>	
-	END RECTANGLE
+   BEGIN RECTANGLE
+      FROMROW      <nValue>
+      FROMCOL      <nValue>
+      TOROW      <nValue>
+      TOCOL      <nValue>
+      PENWIDTH   <nValue>
+      PENCOLOR   <anValue>
+   END RECTANGLE
 
 
 REPORT EXECUTION
 ----------------
 
-	ExecuteReport ( <cReportName> , <lPrintPreview> , <lSelectPrinter> , <cOutputFile> )
-	
-	Or
+   ExecuteReport ( <cReportName> , <lPrintPreview> , <lSelectPrinter> , <cOutputFile> )
 
-	EXECUTE REPORT <ReportName> [ PREVIEW ] [ PRINTERSELECT ] [ FILE <cFile> ]
+   Or
+
+   EXECUTE REPORT <ReportName> [ PREVIEW ] [ PRINTERSELECT ] [ FILE <cFile> ]
 
 
 PDF Output:
 -----------
 
-- If <cOutputFile> with 'pdf' extension is specified, a PDF file with report 
-  content will be generated. (<lPrintPreview> and <lSelectPrinter> parameters 
-  will be ignored). 
+- If <cOutputFile> with 'pdf' extension is specified, a PDF file with report
+  content will be generated. (<lPrintPreview> and <lSelectPrinter> parameters
+  will be ignored).
 
 - The following limitations applies when report is redirected to a PDF file:
 
 
-	- Only .jpg image files are allowed. 
+   - Only .jpg image files are allowed.
 
-	- When 'Underline' property is .t., color property is ignored 
-	(assumed black) for expressions. 
+   - When 'Underline' property is .t., color property is ignored
+   (assumed black) for expressions.
 
-	- The following fonts are supported (all other are assumed as 'Times'):
+   - The following fonts are supported (all other are assumed as 'Times'):
 
-		- Times
-		- Helvetica
-		- Courier
+      - Times
+      - Helvetica
+      - Courier
 
-	- The following paper sizes are supported:
+   - The following paper sizes are supported:
 
-		- PRINTER_PAPER_LETTER
-		- PRINTER_PAPER_LEGAL
-		- PRINTER_PAPER_A4
-		- PRINTER_PAPER_TABLOID
-		- PRINTER_PAPER_EXECUTIVE
-		- PRINTER_PAPER_A3
-		- PRINTER_PAPER_ENV_10
-		- PRINTER_PAPER_B4
-		- PRINTER_PAPER_B5
-		- PRINTER_PAPER_P32K
-		- PRINTER_PAPER_ENV_C5
-		- PRINTER_PAPER_ENV_DL
-		- PRINTER_PAPER_ENV_B5
-		- PRINTER_PAPER_ENV_MONARCH
+      - PRINTER_PAPER_LETTER
+      - PRINTER_PAPER_LEGAL
+      - PRINTER_PAPER_A4
+      - PRINTER_PAPER_TABLOID
+      - PRINTER_PAPER_EXECUTIVE
+      - PRINTER_PAPER_A3
+      - PRINTER_PAPER_ENV_10
+      - PRINTER_PAPER_B4
+      - PRINTER_PAPER_B5
+      - PRINTER_PAPER_P32K
+      - PRINTER_PAPER_ENV_C5
+      - PRINTER_PAPER_ENV_DL
+      - PRINTER_PAPER_ENV_B5
+      - PRINTER_PAPER_ENV_MONARCH
 
 
 - Sample: Demo6.prg
@@ -210,9 +210,9 @@ PDF Output:
 HTML Output:
 ------------
 
-- If <cOutputFile> with 'html' extension is specified, an HTML file with 
-  report content will be generated. (<lPrintPreview> and <lSelectPrinter> 
-  parameters  will be ignored). 
+- If <cOutputFile> with 'html' extension is specified, an HTML file with
+  report content will be generated. (<lPrintPreview> and <lSelectPrinter>
+  parameters  will be ignored).
 
 - Sample: Demo7.prg
 
@@ -220,14 +220,14 @@ HTML Output:
 REPORT VARIABLES
 ----------------
 
-	_PAGENO
+   _PAGENO
 
 
 EXTERNAL REPORT
 ---------------
-	
+
 This is a report defined in a separate text file with '.rmg' extension.
 'TEMPLATE' should be used instead report name.
 
 
-	LOAD REPORT <ReportFileName>
+   LOAD REPORT <ReportFileName>

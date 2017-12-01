@@ -239,7 +239,6 @@ extern char *dcngettext (const char *__domainname,
        _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
 #endif
 
-
 /* Set the current default message catalog to DOMAINNAME.
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
@@ -293,7 +292,6 @@ extern char *bind_textdomain_codeset (const char *__domainname,
                   const char *__codeset)
        _INTL_ASM (libintl_bind_textdomain_codeset);
 #endif
-
 
 /* Support for format strings with positions in *printf(), following the
    POSIX/XSI specification.

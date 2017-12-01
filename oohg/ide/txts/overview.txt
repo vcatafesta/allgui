@@ -10,7 +10,7 @@ Manage Forms, Prgs, CH, RC and Rpt modules.
 
 With this IDE your work will be more fast and productive.
 
-Cool improvements in the future. 
+Cool improvements in the future.
 
 Very thanks to Roberto Lopez for your help.
 and now to Vicente Guerra for ooHG.

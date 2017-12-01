@@ -205,72 +205,72 @@ The variables and methods shown also include ones inherited from TDatabase.
 
 Exported Variables of Class TData
 `````````````````````````````````
-aBuffer				field buffer array.
-bBOF				codeblock to execute at BOF, defaults to nil
-bEOF				codeblock to execute at EOF, defaults to nil
-lOemAnsi			use OEM to ANSI and ANSI to OEM conversion, defaults to false
+aBuffer            field buffer array.
+bBOF            codeblock to execute at BOF, defaults to nil
+bEOF            codeblock to execute at EOF, defaults to nil
+lOemAnsi         use OEM to ANSI and ANSI to OEM conversion, defaults to false
 
-lTenChars			defaults to true
-nTimeout			seconds to retry locking, defaults to 5
+lTenChars         defaults to true
+nTimeout         seconds to retry locking, defaults to 5
 
 Exported Methods of Class TData
 ```````````````````````````````
-activate()			Do not use (inherited from TDatabase)
-addIndex( cFile, cTag )		Load an index ( see also closeIndex() )
-append()			append a blank record
-blank()				loads buffer with blank data
-bof()				is begining-of-file
-clearFilter()			clear the filter
-clearRelation()			clear the relation
+activate()         Do not use (inherited from TDatabase)
+addIndex( cFile, cTag )      Load an index ( see also closeIndex() )
+append()         append a blank record
+blank()            loads buffer with blank data
+bof()            is begining-of-file
+clearFilter()         clear the filter
+clearRelation()         clear the relation
 
-close()				close the file ( see also end() )
-closeIndex()			close all indexes for this file
-commit()			commit to disk
+close()            close the file ( see also end() )
+closeIndex()         close all indexes for this file
+commit()         commit to disk
 create( cFile, aStruct, cDriver )
-createIndex()			create an index
+createIndex()         create an index
 dbCreate( aStructure )
 dbEval( bBlock, bFor, bWhile, nNext, nRecord, lRest )
-deActivate()			Do not use (inherited by TDatabase)
-delete()			delete current record
-deleteIndex( cTag, cFile )	delete an index
-deleted()			is current record deleted?
+deActivate()         Do not use (inherited by TDatabase)
+delete()         delete current record
+deleteIndex( cTag, cFile )   delete an index
+deleted()         is current record deleted?
 
-end()				same as close()
-eof()				is end-of-file
-fcount()			number of fields in file
-fieldGet( nField)		get data in field nField
-fieldName(nField)		fieldname
-fieldPos( cFieldName)		postion of fieldname
-fieldPut( nField, uValue )	replace data in field nField
-found()				was last seek() successful?
-getFilter()			get the current filter expression
-goBottom()			go to last record
-goTop()				go to first record
+end()            same as close()
+eof()            is end-of-file
+fcount()         number of fields in file
+fieldGet( nField)      get data in field nField
+fieldName(nField)      fieldname
+fieldPos( cFieldName)      postion of fieldname
+fieldPut( nField, uValue )   replace data in field nField
+found()            was last seek() successful?
+getFilter()         get the current filter expression
+goBottom()         go to last record
+goTop()            go to first record
 
-goTo( nRecNo )			go to record number
+goTo( nRecNo )         go to record number
 indexBagName( nInd )
 indexKey( ncTag, cFile )
 indexName( nTag, cFile)
 indexOrder( cTag, cFile )
-lastRec()			number of records in current database ( same as recCount() )
-lock()				file lock
-new()				initialize a database
-pack()				remove deleted records from file
-recCount()			number of records in file ( same as lastRec() )
-recLock()			record lock
-recNo()				returns record number of current record
+lastRec()         number of records in current database ( same as recCount() )
+lock()            file lock
+new()            initialize a database
+pack()            remove deleted records from file
+recCount()         number of records in file ( same as lastRec() )
+recLock()         record lock
+recNo()            returns record number of current record
 
-recall()			undelete current record
-reindex()			reindex all open indexes this area
-save()				save data in buffer
-seek( uExp, lSoft )		seek data using current index order, returns lSuccess (no need to use found())
-setBuffer(lOn)			turn field buffering on or off
-setFilter()			set a filter expression
-setOrder( cnTag, cFile )	set controlling index
-setRelation( ncArea, cExp )	set a relation between files
+recall()         undelete current record
+reindex()         reindex all open indexes this area
+save()            save data in buffer
+seek( uExp, lSoft )      seek data using current index order, returns lSuccess (no need to use found())
+setBuffer(lOn)         turn field buffering on or off
+setFilter()         set a filter expression
+setOrder( cnTag, cFile )   set controlling index
+setRelation( ncArea, cExp )   set a relation between files
 
-skip( [nRecs] )			skip nRecs
-unLock()			unlock current record or release file lock
-use()				open file
-used()				is file open
-zap()				delete all records in current file
+skip( [nRecs] )         skip nRecs
+unLock()         unlock current record or release file lock
+use()            open file
+used()            is file open
+zap()            delete all records in current file

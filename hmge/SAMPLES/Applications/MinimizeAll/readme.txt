@@ -20,7 +20,7 @@ contacted at: gfilatov@inbox.ru
 Copying
 -------
 This program is copyright 2010 by Grigory Filatov, but may be used and
-distributed freely -- I encourage it.  
+distributed freely -- I encourage it.
 
 This program is provided without any warranty, expressed or implied,
 including but not limited to fitness for a particular purpose.

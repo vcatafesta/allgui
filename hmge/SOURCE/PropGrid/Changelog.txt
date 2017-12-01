@@ -2,22 +2,22 @@ Changelog:
 
 Fixed : New code eliminating external PropertyGrid tables for data. PropertyGrid data be kept in internal structure (ItemData)
 
-New: Property Size 
+New: Property Size
 
-Enchanced: Full service Property Font 
+Enchanced: Full service Property Font
 
-Fixed: The writes of introduced data to internal structure after pressing the key Enter (for Property of type string or numeric) or after lost focus field of choice 
+Fixed: The writes of introduced data to internal structure after pressing the key Enter (for Property of type string or numeric) or after lost focus field of choice
 
 New: Key ESC restores previous data before writes to internal structure
 
 15.05.2007
 
-  - added ID (hand or automatic) to every item PG 
-  - added looking for Value PG according with ID 
+  - added ID (hand or automatic) to every item PG
+  - added looking for Value PG according with ID
 
 19.05.2007
 
-  - Changed: Add clause ITEMEXPAND (clase ITEMIDS did not be use), by this clause Prperty Grid is expanded. 
+  - Changed: Add clause ITEMEXPAND (clase ITEMIDS did not be use), by this clause Prperty Grid is expanded.
   - Changed: Foregrund color for Category (it in future should allow on change this colour  )
   - New:     Maintenance for item type ARRAY (not finish yet)
 
@@ -27,7 +27,7 @@ New: Key ESC restores previous data before writes to internal structure
   - Changed: PG has the own service of key ESC , it restores the previous value of PropertyItem. In Demo ON KEY ESCAPE ACTION blocks this service.
 
 27.05.2007
-  - New:     Clause READONLY - Content Property Grid is displayed only. 
+  - New:     Clause READONLY - Content Property Grid is displayed only.
   - Changed: Key ENTER saves Value and move cursor an item down
   - Enhanced: Navigation keys works for all items correctly.
 
@@ -36,33 +36,33 @@ New: Key ESC restores previous data before writes to internal structure
   - Fixed:   Add to function PG_SETDATAITEM new parameter
 
 05.06.2007
-  - New: GET ITEMVALUE PROPERTY <name> OF <parent> [ ID <id> ] TO <value> 
-  - New: SET ITEMVALUE <value> [ITEMDATA <data>] PROPERTY <name> OF <parent> [ ID <id> ] 
+  - New: GET ITEMVALUE PROPERTY <name> OF <parent> [ ID <id> ] TO <value>
+  - New: SET ITEMVALUE <value> [ITEMDATA <data>] PROPERTY <name> OF <parent> [ ID <id> ]
 
 14.06.2007
   - New: Maintenance for item Property Grid, new commands:
          ADD PROPERTYITEM <name> OF|PARENT <parent> [CATEGORY <cCategory>];
              ITEMTYPE <ctype> NAMEITEM <cNameItem> VALUE <cValue> ;
-            [ ITEMDATA <caData> ] [DISABLED] [ ID <id> ] 
+            [ ITEMDATA <caData> ] [DISABLED] [ ID <id> ]
 
-         GET PROPERTYITEM <name> [ OF|PARENT <parent> ][ ID <id> ]TO <value> 
+         GET PROPERTYITEM <name> [ OF|PARENT <parent> ][ ID <id> ]TO <value>
 
-         GET INFO PROPERTYITEM <name> [ OF|PARENT <parent> ][ ID <id> ] TO <ainfo> 
+         GET INFO PROPERTYITEM <name> [ OF|PARENT <parent> ][ ID <id> ] TO <ainfo>
 
          SET PROPERTYITEM <name> [ OF|PARENT <parent> ] VALUE <value> ;
-             [ITEMDATA <data>] [ID <id> ] 
+             [ITEMDATA <data>] [ID <id> ]
 
 19.06.2007
   - New: Property Item type FILE
-  - Fixed: Only editable items recived focus. 
+  - Fixed: Only editable items recived focus.
 
 24.06.2007
   -New: Clause ITEMINFO and ITEMHEIGHT for display item description
   -New: Function _ShowInfoItem  (ParentForm, ControlName ) to show or hiden Item Info
 
 28.06.2007
-  - Changed: algorithm of look for item in Property Grid. 	
-  - Fixed: Procedure for save data of Property Grid to File. 
+  - Changed: algorithm of look for item in Property Grid.
+  - Fixed: Procedure for save data of Property Grid to File.
   - New:  In Item of type CHECK - optional description, one from list of Data, list with two equivalent value to FALSE and TRUE.
   - New: Read and save from file type INI.
 
@@ -72,7 +72,7 @@ New: Key ESC restores previous data before writes to internal structure
 
 30.07.2007
   - New: PG control supports an optional ON CHANGEVALUE event now.
-  - Changed: use of new function PG_RedrawItem instead of RedrawWindow reduces flicker the Control Property Grid after change of data. 
+  - Changed: use of new function PG_RedrawItem instead of RedrawWindow reduces flicker the Control Property Grid after change of data.
   - Fixed: source code in range close edit field.
 
 13.12.2007
@@ -82,8 +82,8 @@ New: Key ESC restores previous data before writes to internal structure
 
 18.02.2008
   - New: Header for Colums (optional) with resize column width and action doubleclick:
-	- Column 1: Collapse/ Expand Property grid
-	- Column 2: Hide/Show Info window
+   - Column 1: Collapse/ Expand Property grid
+   - Column 2: Hide/Show Info window
   - New: Property folder with action GetFolder.
 
 14.05.2008
@@ -92,12 +92,12 @@ New: Key ESC restores previous data before writes to internal structure
   - Fixed: Command  GET PROPERTYITEM return now correct value for item type: COLOR, ARRAY, CHECK and SIZE
 
 10.06.2008
-  - New: Clause SINGLEEXPAND to expanded item when it becomes selected and to closed when it becomes unselected. 
+  - New: Clause SINGLEEXPAND to expanded item when it becomes selected and to closed when it becomes unselected.
   - New: Property item type 'userfun' to execute get value with any user function.
   - New: Property item type 'list', like item 'enum' but with edit field and adding a new value to combo list.
   - New: Command TOGGLE, EXPAND and COLLAPSE CATEGORY to toggle, expand or collapse the category.
   - New Command ENABLE and DISABLE PROPERTYITEM .
-  - New: Clause SUBITEM in Command  GET PROPERTYITEM for get value by Item type FONT   
+  - New: Clause SUBITEM in Command  GET PROPERTYITEM for get value by Item type FONT
   - Fixed: source code in range tested imput data.
 
 21.04.2009
@@ -111,20 +111,20 @@ New: Key ESC restores previous data before writes to internal structure
 
 15.02.2010
   - Fixed: Dialog units for Dialog of item type 'array'
-  - Changed: Some Buttons in Array Dialog language translation support.	
+  - Changed: Some Buttons in Array Dialog language translation support.
 
 17.04.2010
   - Fixed: Improving the display value for the Item in edit mode after changing the value with SET PROPERTYITEM
 
 23.11.2011
   - New: Added optional buttons OK, APPLY, CANCEL and HELP:
-	Syntax:
-	[ OKBTN [USEROKPROC userokproc] [ APPLYBTN ]];
-	[ CANCELBTN [ USERCANCELPROC usercancelproc ] ] ;
-	[ HELPBTN helpproc ] ;
+   Syntax:
+   [ OKBTN [USEROKPROC userokproc] [ APPLYBTN ]];
+   [ CANCELBTN [ USERCANCELPROC usercancelproc ] ] ;
+   [ HELPBTN helpproc ] ;
 
       - The OK button allows to close the PropertyGrid with the possibility to write the changed data
-        by using the built-in function Save or optionally with user function described in clause USEROKPROC. 
+        by using the built-in function Save or optionally with user function described in clause USEROKPROC.
       - The CANCEL button allows to restore data (if not saved) using the built-in Restore or optionally
         with user function described in clause USERCANCELPROC.
       - The APPLY button saves the changes (like the OK button), but does not end the session PropertyGrid
@@ -142,21 +142,21 @@ New: Key ESC restores previous data before writes to internal structure
 
 22.06.2012:
   - New: Function GetChangendItem(cForm,CPgName)
-	Syntax:
+   Syntax:
          GET CHANGED PROPERTYITEM <name> ;
             [ OF | PARENT> <parent> ] ;
-            TO <aIdItem> 
+            TO <aIdItem>
 
   - New: Function SaveMemVarible(cForm,CPgName)
-	Syntax:
+   Syntax:
          SAVE MEMVALUE PROPERTY <name> ;
-            [ OF | PARENT> <parent> ] 
-            
+            [ OF | PARENT> <parent> ]
+
   - New: PropertyGrid Language translation support.
 
 30.06.2014:
    - Changed: Optional clause ITEMDATA for item type STRING to execute InputMask in form Control TextBox.
-	Syntax:
+   Syntax:
         PROPERTYITEM STRING <cName> ;
             VALUE <cValue> ;
             [ ITEMDATA <caData> ];
@@ -167,8 +167,8 @@ New: Key ESC restores previous data before writes to internal structure
 
 2016/10/18:
   - New: Added an optional WHEN clause to PROPERTYITEM command.
-	Syntax:
-	PROPERTYITEM <cName>  ;
+   Syntax:
+   PROPERTYITEM <cName>  ;
             [ <dummy1: OF, PARENT> <category> ] ;
             ITEMTYPE <ctype> ;
             VALUE <cValue> ;
@@ -180,4 +180,4 @@ New: Key ESC restores previous data before writes to internal structure
             [ <disableedit : DISABLEEDIT> ];
 
 2017.06.20:
-	- New: Changed item value is only refreshes it if it is visible or if you want it to be visible.
+   - New: Changed item value is only refreshes it if it is visible or if you want it to be visible.

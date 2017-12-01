@@ -6,7 +6,7 @@ Very thanks to Mirity Andor for his Keyboard move at design time.
 email: ytir@freemail.hu  in prior versions
 
 This contributions are recoded totally, but I apreciate their help
-in other times. 
+in other times.
 
 ThanKs to Pier Paolo Martinelli for his interest in this project.
 

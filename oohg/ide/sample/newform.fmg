@@ -173,7 +173,7 @@ DEFINE WINDOW  TEMPLATE ;
       HEIGHT 24 ;
       VALUE 'ooHG IDE+ Home' ;
       ADDRESS 'http://sistemascvc.tripod.com' ;
-      FONT 'Arial' ;
+   FONT 'Arial' ;
       SIZE  9 ;
       TOOLTIP 'hola' ;
       HANDCURSOR  ;

@@ -3,5 +3,5 @@
 //
 // Resource name  Resource Type   Resource FileName
 //
-	WALL		BITMAP		wall.bmp
-	WALL2		BITMAP		wall2.bmp
+   WALL      BITMAP      wall.bmp
+   WALL2      BITMAP      wall2.bmp

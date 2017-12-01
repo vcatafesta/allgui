@@ -1,5 +1,5 @@
 @...COMBOSEARCHBOX / DEFINE COMBOSEARCHBOX : Define a Combined Search Box Control.
- 
+
 
       @ <nRow> , <nCol> COMBOSEARCHBOX <ControlName>
 
@@ -38,7 +38,7 @@
             [ HELPID <nHelpId> ]
 
             [ ITEMS <aItems> ]
- 
+
 
       DEFINE COMBOSEARCHBOX <Controlname>
 
@@ -46,35 +46,35 @@
 
             <EventName> <EventProcedure> | <bBlock>
 
-      END COMBOSEARCHBOX 
- 
+      END COMBOSEARCHBOX
+
 
 - Properties:
 
-	Row
-	Col
-	Height
-	Width
-	Value
-	Items
-	FontName
-	FontSize
-	FontItalic
-	FontUnderline
-	FontStrikeout
-	ToolTip
-	BackColor
-	FontColor
-	CaretPos
-	Name (R)
-	TabStop (D)
-	Parent (D)
-	Numeric (D)
-	MaxLength  (D)
-	UpperCase  (D)
-	LowerCase (D)
-	RightAlign (D)
-	HelpId (D)
+   Row
+   Col
+   Height
+   Width
+   Value
+   Items
+   FontName
+   FontSize
+   FontItalic
+   FontUnderline
+   FontStrikeout
+   ToolTip
+   BackColor
+   FontColor
+   CaretPos
+   Name (R)
+   TabStop (D)
+   Parent (D)
+   Numeric (D)
+   MaxLength  (D)
+   UpperCase  (D)
+   LowerCase (D)
+   RightAlign (D)
+   HelpId (D)
 
       D: Available at control definition only
       R: Read-Only

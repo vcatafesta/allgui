@@ -1,5 +1,5 @@
 
-Harbour MiniPrint Library License 
+Harbour MiniPrint Library License
 ---------------------------------
 
 Copyright (C) 2004-2016 Roberto Lopez. All rights reserved.
@@ -9,10 +9,10 @@ In no event shall the author be held liable for any damages arising from the
 use of this software.
 
 Permission is granted to anyone to use this software for any purpose,
-including commercial applications and to redistribute it, provided that 
+including commercial applications and to redistribute it, provided that
 the following conditions are met:
 
-- Redistributions must retain all occurrences of the copyright notices and 
+- Redistributions must retain all occurrences of the copyright notices and
   web site addresses that are currently in place.
 
 - The origin of this software must not be misrepresented.

@@ -13,7 +13,7 @@
 
  Program window have a four areas.
 
- SELECT - contain: 
+ SELECT - contain:
   - Revealed list of the selection of the user functions.
   - Collection of the buttons for enter of the standard functions
   - Collection of the buttons for enter of the constants
@@ -23,14 +23,14 @@
     This file can be edited (with notepad). It is possible to bring in the separate
     fragments of function, using the rules of the writing accepted in the program.
 
- FUNCTIONS - contain: 
+ FUNCTIONS - contain:
   - Fields for enter of the expressions Y1 and Y2
     With the activation of field it is separated by the white color.
     Fields have the standard menu of editing (right button of mouse)
     The register of introduction does not have a value.
 
  ARGUMENT - contain:
-  - the field for enter of the range of a change in the argument ( X ) 
+  - the field for enter of the range of a change in the argument ( X )
   - the field for enter of the step of a change in the argument ( X )
     Range and step of argument is mutually connected with the maximum number of points.
 
@@ -40,7 +40,7 @@
 
  Usage:
     Collect the expression of function from the keyboard or with the aid of
-    the buttons of the selection. 
+    the buttons of the selection.
     Select the interval of the values of the argument.
     Select the step of changes in the argument.
     Press the button  < To build the graph >.
@@ -50,25 +50,25 @@
     For retaining of graph and table use the buttons of the retention.
     Graph remains in the format BMP
     Table remains in the format RTF (Word) or XLS (Excel)
-    File name graph_+(1...n) at folder ..\GRAPH  
+    File name graph_+(1...n) at folder ..\GRAPH
     Program makes it possible to use its own set of user functions.
     Functions are located in the text file userfun.txt.
     Functions are written with the aid of the text editor (for example, notepad),
-    each into one line. 
+    each into one line.
 
- Used functions 
-   Sin(x)		-  sine of angle x    
-   Cos(x)		-  cosine of angle x  
-   Tg(x)		-  tangent of angle x 
-   ArcS(x)		-  arcsine x    
-   ArcC(x)		-  arccosine x 
-   ArcT(x)		-  arctangent x 
-   DR(x)		-  translation from degree to radian
-   RD(x)		-  translation from radian to degree
-   Lg(x)		-  decimal logarithm
-   Ln(x)		-  natural logarithm
-   ABS(x)		-  absolute value
-   Sqr(x)               -  square root 
+ Used functions
+   Sin(x)      -  sine of angle x
+   Cos(x)      -  cosine of angle x
+   Tg(x)      -  tangent of angle x
+   ArcS(x)      -  arcsine x
+   ArcC(x)      -  arccosine x
+   ArcT(x)      -  arctangent x
+   DR(x)      -  translation from degree to radian
+   RD(x)      -  translation from radian to degree
+   Lg(x)      -  decimal logarithm
+   Ln(x)      -  natural logarithm
+   ABS(x)      -  absolute value
+   Sqr(x)               -  square root
 
  Example of system of equations
    Expressions are written with the application of arithmetic operations and brackets.

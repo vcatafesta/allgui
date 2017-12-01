@@ -71,6 +71,7 @@
                         <lo>, <hi>, <tooltip>, <.vertical.>, <.smooth.>, ;
                         <helpid>, <.invisible.>, <v>, [ <backcolor> ], [ <barcolor> ])
 
+
 // by Dr. Claudio Soto (June 2013)
 
 // Use this command when you do not know the amount of progress toward completion but wish to indicate that progress is being made.

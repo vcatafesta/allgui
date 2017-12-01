@@ -1,6 +1,6 @@
 Setting F12 as a global hotkey in Windows
 Tue, 2011.12.13 - 17:19 — muzso
- 
+
 I used to set the F12 key in Ubuntu as the global hotkey to play/pause the current song in my music player
 (since my keyboard does not have media keys). Very useful since it's a key that is easy to find and press
 (eg. pressing a key that is surrounded by other keys requires a lot more attention/concentration from you).

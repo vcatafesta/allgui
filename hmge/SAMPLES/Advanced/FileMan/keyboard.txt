@@ -4,7 +4,7 @@ Author: Grigory Filatov
 E-Mail: gfilatov@inbox.ru
 -------------------------------------------------------------------------------
 
-Key	    Action
+Key       Action
 ~~~         ~~~~~~
 
 F1          Help (not implement)
@@ -38,14 +38,14 @@ Command line: keys
 
 Here the layout for some keys:
 
-ENTER       The command line is executed, if it 
+ENTER       The command line is executed, if it
             contains at least one character (otherwise,
             the program under the cursor in the source
             window is started). If it is an internal
             DOS command, DOS will be executed with this
             command. Otherwise, a program with the given
             name is executed.
-CTRL-ENTER  The file under the cursor in the source 
+CTRL-ENTER  The file under the cursor in the source
             directory is appended to the command line.
 CTRL-CURSORDOWN
 or ALT+F8   A list with the latest command lines (history-

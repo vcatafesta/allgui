@@ -1,11 +1,11 @@
 Brief Description
 -----------------
 
-Toggle Breakpoint: 
+Toggle Breakpoint:
 - Sets or removes a Breakpoint at the code line the current cursor position.
 - When found a Breakpoint stop the execution of the program.
 
-Tracepoint: 
+Tracepoint:
 - stop the execution of the program when a variable or expresion changes value
 - e.g. sets Tracepoint, TP var == 3, TP Eof(), etc.
 

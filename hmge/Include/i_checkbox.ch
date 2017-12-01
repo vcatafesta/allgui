@@ -149,7 +149,6 @@
     =>;
    _DefineCheckButton ( <"name">, <"parent">, 0, 0, <caption>, <value> ,<f> ,<n> , <tooltip> , <{change}> , 0 , 0 , <{lostfocus}>, <{gotfocus}>  , <helpid>, <.invisible.>, <.notabstop.> ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.> , <nId>)
 
-
 #command @ <row>,<col> CHECKBUTTON <name> ;
         [ID <nId>] ;
         [ <dummy1: OF, PARENT, DIALOG> <parent> ] ;

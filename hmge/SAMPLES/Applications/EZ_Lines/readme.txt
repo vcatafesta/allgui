@@ -27,6 +27,6 @@ If you like this program, please e-mail me and let me know.
 
 Contact Information
 ~~~~~~~~~~~~~~~~~~~
-    
+
 Author:   Grigory Filatov
 EMail:    gfilatov@inbox.ru

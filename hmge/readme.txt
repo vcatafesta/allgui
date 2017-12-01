@@ -6,17 +6,17 @@ Copyright (c) 2005-2017 MiniGUI Team. All rights reserved.
 
 Harbour MiniGUI comprises these main components:
 
-	- Harbour MiniGUI Extended Library
-	- Harbour MiniGUI IDE
-	- Harbour Compiler
-	- Borland C++ Compiler and command-line tools at
-	https://downloads.embarcadero.com/free/c_builder
+   - Harbour MiniGUI Extended Library
+   - Harbour MiniGUI IDE
+   - Harbour Compiler
+   - Borland C++ Compiler and command-line tools at
+   https://downloads.embarcadero.com/free/c_builder
 
-	or go directly to the download form at
+   or go directly to the download form at
         http://forms.embarcadero.com/BCC32CompilerDownload?cid=701G0000000tKTx
 
-	Take a look for the useful information also at
-	http://rudeserver.com/how-to/install-borland/
+   Take a look for the useful information also at
+   http://rudeserver.com/how-to/install-borland/
 
 Note that you can use also the optional MinGW, Visual C or Pelles C compilers.
 
@@ -28,17 +28,17 @@ compiler built by MinGW-W64 project at http://sourceforge.net/projects/mingw-w64
 
 The parts of this project are based upon:
 
-   "Harbour MiniGUI" 
+   "Harbour MiniGUI"
    Copyright 2002-2017 Roberto Lopez <mail.box.hmg@gmail.com>
    http://sites.google.com/site/hmgweb/
    Copyright 2012-2017 Claudio Soto <srvet@adinet.com.uy>
    http://srvet.blogspot.com
 
-   "Harbour GUI framework for Win32" 
-   Copyright 2001 Alexander S.Kresin <alex@belacy.ru> 
-   Copyright 2001 Antonio Linares <alinares@fivetech.com> 
+   "Harbour GUI framework for Win32"
+   Copyright 2001 Alexander S.Kresin <alex@belacy.ru>
+   Copyright 2001 Antonio Linares <alinares@fivetech.com>
 
-   "Harbour Project" 
+   "Harbour Project"
    Copyright 1999-2017 Contributors, http://harbour-project.org/
 
    "WHAT32"

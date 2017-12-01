@@ -17,18 +17,18 @@ Existing note can be edited from its context menu.
 Features:
 =========
 - Tray icon for easy operation
-- Selectable colors, fonts for each note from its edit window 
+- Selectable colors, fonts for each note from its edit window
 - You can set individual notes "always on top" from context menu of note.
 
 Requirements:
 =============
-Windows 98, ME, Windows NT 4.0, Windows 2000, Windows XP 
+Windows 98, ME, Windows NT 4.0, Windows 2000, Windows XP
 
 Distribution:
 =============
-This program is FREE, and may be freely copied and distributed, 
-as long as it is not modified in any way, and no fee is charged for 
-its distribution (small shipping and handling fee is acceptable). 
+This program is FREE, and may be freely copied and distributed,
+as long as it is not modified in any way, and no fee is charged for
+its distribution (small shipping and handling fee is acceptable).
 
 Contact information:
 ====================

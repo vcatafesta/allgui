@@ -39,23 +39,23 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "FileDescription", "Quick Browser Generator\000"
-		VALUE "FileVersion", "1.0.0.0"
-		VALUE "InternalName", "Quickb"
-		VALUE "LegalCopyright", "Pierpaolo Martinello\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "Quickb.Exe\000"
-		VALUE "CompanyName", "\000"
-		VALUE "ProductName", "MiniGUI Utility"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Created by Pierpaolo Martinello && Grigory Filatov \000"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "FileDescription", "Quick Browser Generator\000"
+      VALUE "FileVersion", "1.0.0.0"
+      VALUE "InternalName", "Quickb"
+      VALUE "LegalCopyright", "Pierpaolo Martinello\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "Quickb.Exe\000"
+      VALUE "CompanyName", "\000"
+      VALUE "ProductName", "MiniGUI Utility"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Created by Pierpaolo Martinello && Grigory Filatov \000"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

@@ -20,7 +20,7 @@ These steps allow applications to call the message loop without affecting the op
 of the debugger.
 
 4) creates WH_CALLWNDPROC and WH_MSGFILTER hooks, eg.
- 
+
  hHook_CallWndProc = SetWindowsHookEx (WH_CALLWNDPROC, CallWndProc, (HINSTANCE) NULL, GetCurrentThreadId());
  hHook_MessageProc = SetWindowsHookEx (WH_MSGFILTER,   MessageProc, (HINSTANCE) NULL, GetCurrentThreadId());
 

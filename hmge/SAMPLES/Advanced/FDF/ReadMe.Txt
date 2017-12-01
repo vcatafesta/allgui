@@ -1,19 +1,19 @@
-This program was born from the necessity to bring the data of a 
+This program was born from the necessity to bring the data of a
 database on a Pdf.
 
-In the search of a more exact way to compile in automatic way a 
+In the search of a more exact way to compile in automatic way a
 form pdf, has discovered the file FDF.
 In fact exporting the data of a pdf containing compilable fields
 from the user, a file is gotten Fdf.
 Through the specifications of this format it is possible to create a
-file Fdf that if performed (double click) it reopens the file that 
+file Fdf that if performed (double click) it reopens the file that
 has it produced and it affixes you the data on the fields.
-The specifications to which report me are valid from 1996 and him 
+The specifications to which report me are valid from 1996 and him
 they apply to Adobe (also the Reader) and in the last version,
 also with Foxit Reader (2.3).
 
-My program doesn't do anything else other than to create a file.ini 
-that contains the specifications for the creation of the file Fdf, some 
+My program doesn't do anything else other than to create a file.ini
+that contains the specifications for the creation of the file Fdf, some
 function of manipulation of the data and a class for the writing of the
 file FDF.
 

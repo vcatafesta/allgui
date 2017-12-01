@@ -5,13 +5,13 @@
   -----------
 
   Hot File program helps you to open the most frequently used file by
-  clicking on a system tray icon. 
+  clicking on a system tray icon.
 
   To access help and program options, please use the popup menu.
   Click the right mouse button on the program system tray icon to open it.
-  The program opens empty text file for notes as default. 
+  The program opens empty text file for notes as default.
   To replace this file use the Options point of the system tray icon popup menu.
-  
+
 
   Platform
   --------
@@ -38,6 +38,6 @@
 
   Contact Information
   -------------------
-    
+
   Author:   Grigory Filatov
   EMail:    gfilatov@inbox.ru

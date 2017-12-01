@@ -138,6 +138,8 @@ _EndStatusBar (   _HMG_SYSDATA \[ 212 \]      , ;
        => ;
         _SetStatusKeybrd( _HMG_SYSDATA \[ 223 \] , <nSize> , <cToolTip> , <{uAction}> , <nIntervalUpdate> )
 
+
+
 #xcommand DEFINE STATUSBAR ;
    [ PARENT> <parent> ] ;
    [ FONTNAME <fontname> ]          ;
