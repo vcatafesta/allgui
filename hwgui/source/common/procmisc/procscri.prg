@@ -74,11 +74,11 @@ FUNCTION OpenScript( fname, scrkod )
             Aadd( aFormCode, SUBSTR( stroka, 2, i-2 ) )
             Aadd( aFormName, SUBSTR( stroka, i+1 ) )
          ELSEIF rejim == -1 .AND. LEFT( stroka, 9 ) == "#ENDBLOCK"
-            #ifdef __WINDOWS__
+#ifdef __WINDOWS__
             i := hwg_WChoice( aFormName )
-            #else
+#else
             i := FCHOICE( aFormName )
-            #endif
+#endif
             IF i == 0
                FCLOSE( han )
 
@@ -90,11 +90,11 @@ FUNCTION OpenScript( fname, scrkod )
       ENDDO
       FCLOSE( han )
    ELSE
-      #ifdef __WINDOWS__
+#ifdef __WINDOWS__
       hwg_Msgstop( fname + " can't be opened " )
-      #else
+#else
       ALERT( fname + " can't be opened " )
-      #endif
+#endif
 
       RETURN NIL
    ENDIF
@@ -149,13 +149,13 @@ FUNCTION RdScript( scrSource, strbuf, poz, lppNoInit, cTitle )
          ppScript( ,.F. )
       ENDIF
    ELSE
-      #ifdef __WINDOWS__
+#ifdef __WINDOWS__
       hwg_Msgstop( "Can't open " + scrSource )
-      #else
+#else
       WndOut( "Can't open " + scrSource )
       WAIT ""
       WndOut()
-      #endif
+#endif
       nLastError := - 1
 
       RETURN NIL
@@ -216,16 +216,16 @@ STATIC FUNCTION COMPILESCR( han, strbuf, poz, rezArray, scrSource )
                   ENDIF
                ENDIF
                LOOP
-               #ifdef __HARBOUR__
+#ifdef __HARBOUR__
             ELSE
                ppScript( stroka )
                LOOP
-               #endif
+#endif
             ENDIF
-            #ifdef __HARBOUR__
+#ifdef __HARBOUR__
          ELSE
             stroka := ppScript( stroka )
-            #endif
+#endif
          ENDIF
 
          poz1 := AT( " ", stroka )
@@ -344,7 +344,7 @@ STATIC FUNCTION MacroError( nm, e, stroka )
 
    LOCAL n, cTitle
 
-   #ifdef __WINDOWS__
+#ifdef __WINDOWS__
    IF nm == 1
       stroka := hwg_ErrMsg( e ) + Chr(10)+Chr(13) + "in" + Chr(10)+Chr(13) + ;
          AllTrim(stroka)
@@ -365,7 +365,7 @@ STATIC FUNCTION MacroError( nm, e, stroka )
       hwg_EndWindow()
       QUIT
    ENDIF
-   #else
+#else
    IF nm == 1
       ALERT( "Error in;" + AllTrim(stroka) )
    ELSEIF nm == 2
@@ -378,7 +378,7 @@ STATIC FUNCTION MacroError( nm, e, stroka )
       ENDDO
       Alert( "Script execution error:;"+stroka )
    ENDIF
-   #endif
+#endif
    BREAK
 
    RETURN .T.
@@ -519,7 +519,7 @@ FUNCTION DoScript( aScript, aParams )
    BEGIN SEQUENCE
       IF lDebug .AND. lDebugger
          DO WHILE iscr > 0 .AND. iscr <= arlen
-            #ifdef __WINDOWS__
+#ifdef __WINDOWS__
             IF lDebugger
                lDebugRun := .F.
                hwg_scrDebug( aScript, iscr )
@@ -527,16 +527,16 @@ FUNCTION DoScript( aScript, aParams )
                   hwg_ProcessMessage()
                ENDDO
             ENDIF
-            #endif
+#endif
             Eval( aScript[ 2, iscr ] )
             iscr ++
          ENDDO
-         #ifdef __WINDOWS__
+#ifdef __WINDOWS__
          hwg_scrDebug( aScript, 0 )
          IF lSetDebugger
             SetDebugger( .F. )
          ENDIF
-         #endif
+#endif
       ELSE
          DO WHILE iscr > 0 .AND. iscr <= arlen
             Eval( aScript[ 2, iscr ] )
@@ -546,11 +546,11 @@ FUNCTION DoScript( aScript, aParams )
    RECOVER
       WndOut()
       Errorblock( bOldError )
-      #ifdef __WINDOWS__
+#ifdef __WINDOWS__
       IF lDebug .AND. lDebugger
          hwg_scrDebug( aScript, 0 )
       ENDIF
-      #endif
+#endif
 
       RETURN .F.
    END SEQUENCE
@@ -623,13 +623,13 @@ FUNCTION RunScript( fname, scrname, args )
 
    RETURN Iif( scr==Nil, Nil, DoScript( scr, args ) )
 
-   #ifdef __WINDOWS__
+#ifdef __WINDOWS__
 
 STATIC FUNCTION WndOut()
 
    RETURN NIL
 
-   #else
+#else
 
 FUNCTION WndOut( sout, noscroll, prnew )
 
@@ -697,4 +697,4 @@ FUNCTION WndOpen( ysize, xsize )
    WndOut( "",, .T. )
 
    RETURN NIL
-   #endif
+#endif

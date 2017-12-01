@@ -394,39 +394,39 @@ FUNCTION InitDialogComboBox( ParentName, ControlHandle, k )
 
 FUNCTION _DefineComboEx ( ;
       ControlName, ; // 1
-   ParentForm, ;  // 2
-   x, ;           // 3
-   y, ;           // 4
-   w, ;           // 5
-   rows, ;        // 6
-   value, ;       // 7
-   fontname, ;    // 8
-   fontsize, ;    // 9
-   tooltip, ;         // 10
-   changeprocedure, ; // 11
-   h, ;               // 12
-   gotfocus, ;        // 13
-   lostfocus, ;       // 14
-   uEnter, ;          // 15
-   HelpId, ;          // 16
-   invisible, ;       // 17
-   notabstop, ;       // 18
-   SORT , ;           // 19   // not used with extend COMBO
-   bold, ;            // 20
-   italic, ;          // 21
-   underline, ;         // 22
-   strikeout , ;        // 23
-   itemsource , ;       // 24
-   valuesource , ;      // 25
-   displaychange , ;    // 26
-   ondisplaychangeprocedure , ; // 27
-   break , ;            // 28
-   GripperText, ;       // 29
-   aImage , ;           // 30
-   ListWidth, ;         // 31
-   OnListDisplayProcedure, ; // 32
-   OnListCloseProcedure, ;   // 33
-   backcolor, fontcolor, ImageList, nItemHeight )
+      ParentForm, ;  // 2
+      x, ;           // 3
+      y, ;           // 4
+      w, ;           // 5
+      rows, ;        // 6
+      value, ;       // 7
+      fontname, ;    // 8
+      fontsize, ;    // 9
+      tooltip, ;         // 10
+      changeprocedure, ; // 11
+      h, ;               // 12
+      gotfocus, ;        // 13
+      lostfocus, ;       // 14
+      uEnter, ;          // 15
+      HelpId, ;          // 16
+      invisible, ;       // 17
+      notabstop, ;       // 18
+      SORT , ;           // 19   // not used with extend COMBO
+      bold, ;            // 20
+      italic, ;          // 21
+      underline, ;         // 22
+      strikeout , ;        // 23
+      itemsource , ;       // 24
+      valuesource , ;      // 25
+      displaychange , ;    // 26
+      ondisplaychangeprocedure , ; // 27
+      break , ;            // 28
+      GripperText, ;       // 29
+      aImage , ;           // 30
+      ListWidth, ;         // 31
+      OnListDisplayProcedure, ; // 32
+      OnListCloseProcedure, ;   // 33
+      backcolor, fontcolor, ImageList, nItemHeight )
    LOCAL i , cParentForm , mVar , ControlHandle , FontHandle , rcount := 0
    LOCAL BackRec , cset := 0 , WorkArea , cField , ContainerHandle := 0 , k
    LOCAL im , aImages := {}

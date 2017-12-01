@@ -2618,720 +2618,720 @@ FUNCTION pdfinit_messages
          "Metin türü d?s,?nda Sütun Boyutu deg(is,tirilemez!",;
          "Yanas,t?rma sabitleri düzgün verilmedi.",;
          "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang ==  "CS" .OR. cLang == "CSWIN"
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "HR852"
       // CROATIAN
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "EU"
       // BASQUE
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "EN"
       // ENGLISH
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "FR"
       // FRENCH
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "DEWIN" .OR. cLang == "DE"
       // GERMAN
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "IT"
       // ITALIAN
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "PLWIN"  .OR. cLang == "PL852"  .OR. cLang == "PLISO"  .OR. cLang == ""  .OR. cLang == "PLMAZ"
       // POLISH
       curpagesize := 5
       msgarr := {"Brak danych do druku!",;    //1
-      "Brak zainstalowanych drukarek w systemie!",;  //2
-      "Kreator wydruku",;  //3
-      "Kreator zapisu",; //4
-      "Kolumny",; //5
-      "Nazwa kolumny",; //6
-      "Szerokos'c' (mm)",; //7
-      "Kliknij dwa razy na kolumnie, aby ja; zaznaczyc'/odznaczyc' do wydruku",; //8
-      "Zmien' rozmiar kolumny tekstowej",; //9
-      "Ca?kowitta szerokos'c':",; //10
-      "z",;  //11
-      "Nag?ówek 1",;  //12
-      "Nag?ówek 2",; //13
-      "Nag?ówek 3",; //14
-      "Stopka 1",; //15
-      "W?asnos'ci raportu",; //16
-      "Rozmiar czcionki",; //17
-      "D?ugie teksty",; //18
-      "Zawijanie s?ów",; //19
-      "Obcie;cie",; //20
-      "Numeracja stron",; //21
-      "Wy?a;czona",; //22
-      "Góra",; //23
-      "Dó?",; //24
-      "Linie siatki",; //25
-      "Kolumna",; //26
-      "Wiersz",; //27
-      "Centruj strone;",; //28
-      "Pionowy",; //29
-      "Strona/Drukarka",; //30
-      "Orientacja",; //31
-      "Pozioma",; //32
-      "Pionowa",; //33
-      "Drukarka: ",; //34
-      "Rozmiar strony",; //35
-      "Szerokos'c' strony",; //36
-      "Wysokos'c' strony",; //37
-      "Marginesy (mm)",; //38
-      "Górny",; //39
-      "Prawy",; //40
-      "Lewy",; //41
-      "Dolny",; //42
-      "Drukuj",; //43
-      "Anuluj",; //44
-      "Witaj w Kreatorze Wydruku",; //45
-      "Wybra?es' wie;cej kolumn, niz. moz.na zmies'cic' na stronie!",; //46
-      "Musisz wybrac' drukarke;!",; //47
-      "Nie moz.na wybrac' drukarki! Sprawdz' jej doste;pnos'c'.",; //48
-      "Numer strony:",; //49
-      "Rozmiar:",; //50
-      "Wykonano",; //51
-      "Nie moz.na zmieniac' rozmiau nietekstowych kolumn!",; //52
-      "Justyfikacja okres'lona nieprawid?owo.",; //53
-      "Puste przestrzenie",; //54
-      "Rozszerz",; //55
-      "Zastosuj",; //56
-      "Do?a;cz",;//57
-      "Suma",;//58
-      "Tak",;//59
-      "Nie",;//60
-      "Do?a;cz nag?ówek",; //61
-      "Od",; //62
-      "Do",; //63
-      "Nag?ówek",; //64
-      "Pojawi? sie; b?a;d w definicji do?a;czanego nag?ówka w linii  nr ",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "Brak zainstalowanych drukarek w systemie!",;  //2
+         "Kreator wydruku",;  //3
+         "Kreator zapisu",; //4
+         "Kolumny",; //5
+         "Nazwa kolumny",; //6
+         "Szerokos'c' (mm)",; //7
+         "Kliknij dwa razy na kolumnie, aby ja; zaznaczyc'/odznaczyc' do wydruku",; //8
+         "Zmien' rozmiar kolumny tekstowej",; //9
+         "Ca?kowitta szerokos'c':",; //10
+         "z",;  //11
+         "Nag?ówek 1",;  //12
+         "Nag?ówek 2",; //13
+         "Nag?ówek 3",; //14
+         "Stopka 1",; //15
+         "W?asnos'ci raportu",; //16
+         "Rozmiar czcionki",; //17
+         "D?ugie teksty",; //18
+         "Zawijanie s?ów",; //19
+         "Obcie;cie",; //20
+         "Numeracja stron",; //21
+         "Wy?a;czona",; //22
+         "Góra",; //23
+         "Dó?",; //24
+         "Linie siatki",; //25
+         "Kolumna",; //26
+         "Wiersz",; //27
+         "Centruj strone;",; //28
+         "Pionowy",; //29
+         "Strona/Drukarka",; //30
+         "Orientacja",; //31
+         "Pozioma",; //32
+         "Pionowa",; //33
+         "Drukarka: ",; //34
+         "Rozmiar strony",; //35
+         "Szerokos'c' strony",; //36
+         "Wysokos'c' strony",; //37
+         "Marginesy (mm)",; //38
+         "Górny",; //39
+         "Prawy",; //40
+         "Lewy",; //41
+         "Dolny",; //42
+         "Drukuj",; //43
+         "Anuluj",; //44
+         "Witaj w Kreatorze Wydruku",; //45
+         "Wybra?es' wie;cej kolumn, niz. moz.na zmies'cic' na stronie!",; //46
+         "Musisz wybrac' drukarke;!",; //47
+         "Nie moz.na wybrac' drukarki! Sprawdz' jej doste;pnos'c'.",; //48
+         "Numer strony:",; //49
+         "Rozmiar:",; //50
+         "Wykonano",; //51
+         "Nie moz.na zmieniac' rozmiau nietekstowych kolumn!",; //52
+         "Justyfikacja okres'lona nieprawid?owo.",; //53
+         "Puste przestrzenie",; //54
+         "Rozszerz",; //55
+         "Zastosuj",; //56
+         "Do?a;cz",;//57
+         "Suma",;//58
+         "Tak",;//59
+         "Nie",;//60
+         "Do?a;cz nag?ówek",; //61
+         "Od",; //62
+         "Do",; //63
+         "Nag?ówek",; //64
+         "Pojawi? sie; b?a;d w definicji do?a;czanego nag?ówka w linii  nr ",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "pt.PT850"
       // PORTUGUESE
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "RUWIN"  .OR. cLang == "RU866" .OR. cLang == "RUKOI8"
       // RUSSIAN
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "ES"  .OR. cLang == "ESWIN"
       // SPANISH
 
@@ -3389,300 +3389,300 @@ FUNCTION pdfinit_messages
          "EL tamaño de las columnas que no sean del tipo texto no pueden modificarse!",;
          "Constantes de justificación no dadas apropiadamente.",;
          "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "FI"
       // FINNISH
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "NL"
       // DUTCH
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    CASE cLang == "SLWIN" .OR. cLang == "SLISO" .OR. cLang == "SL852" .OR. cLang == "" .OR. cLang == "SL437"
       // SLOVENIAN
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    OTHERWISE
       // DEFAULT (ENGLISH)
       msgarr := {"Nothing to print",;    //1
-      "No printers have been installed!",;  //2
-      "Print Wizard",;  //3
-      "Report Writer",; //4
-      "Columns",; //5
-      "Name of the Column",; //6
-      "Width (mm)",; //7
-      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-      "Edit Text Column Size",; //9
-      "Total Width :",; //10
-      "out of",;  //11
-      "Header 1",;  //12
-      "Header 2",; //13
-      "Header 3",; //14
-      "Footer 1",; //15
-      "Report Properties",; //16
-      "Font Size",; //17
-      "Lengthy Line",; //18
-      "Word Wrap",; //19
-      "Truncate",; //20
-      "Pagination",; //21
-      "Off",; //22
-      "Top",; //23
-      "Bottom",; //24
-      "Grid Lines",; //25
-      "Column",; //26
-      "Row",; //27
-      "Page Center",; //28
-      "Vertical",; //29
-      "Page/Printer",; //30
-      "Orientation",; //31
-      "Landscape",; //32
-      "Portrait",; //33
-      "Printer: ",; //34
-      "Page Size",; //35
-      "Page Width",; //36
-      "Page Height",; //37
-      "Margins (mm)",; //38
-      "Top",; //39
-      "Right",; //40
-      "Left",; //41
-      "Bottom",; //42
-      "Print",; //43
-      "Cancel",; //44
-      "Welcome to Print Wizard",; //45
-      "You had selected more columns than to fit in a page!",; //46
-      "You have to select a printer!",; //47
-      "Printer could not be selected! Check Availability of Printer.",; //48
-      "Page No. :",; //49
-      "Size :",; //50
-      "Done",; //51
-      "Size of Columns other than text type can not be modified!",; //52
-      "Justification constants not given properly.",; //53
-      "Whitespace",; //54
-      "Spread",; //55
-      "Apply",; //56
-      "Include",;//57
-      "Sum",;//58
-      "Yes",;//59
-      "No",;//60
-      "Merge Header",; //61
-      "From",; //62
-      "To",; //63
-      "Header",; //64
-      "There is an error in Merge Head definition in line no.",; //65
-      "Reset Form",; //66
-      "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
-      }
+         "No printers have been installed!",;  //2
+         "Print Wizard",;  //3
+         "Report Writer",; //4
+         "Columns",; //5
+         "Name of the Column",; //6
+         "Width (mm)",; //7
+         "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+         "Edit Text Column Size",; //9
+         "Total Width :",; //10
+         "out of",;  //11
+         "Header 1",;  //12
+         "Header 2",; //13
+         "Header 3",; //14
+         "Footer 1",; //15
+         "Report Properties",; //16
+         "Font Size",; //17
+         "Lengthy Line",; //18
+         "Word Wrap",; //19
+         "Truncate",; //20
+         "Pagination",; //21
+         "Off",; //22
+         "Top",; //23
+         "Bottom",; //24
+         "Grid Lines",; //25
+         "Column",; //26
+         "Row",; //27
+         "Page Center",; //28
+         "Vertical",; //29
+         "Page/Printer",; //30
+         "Orientation",; //31
+         "Landscape",; //32
+         "Portrait",; //33
+         "Printer: ",; //34
+         "Page Size",; //35
+         "Page Width",; //36
+         "Page Height",; //37
+         "Margins (mm)",; //38
+         "Top",; //39
+         "Right",; //40
+         "Left",; //41
+         "Bottom",; //42
+         "Print",; //43
+         "Cancel",; //44
+         "Welcome to Print Wizard",; //45
+         "You had selected more columns than to fit in a page!",; //46
+         "You have to select a printer!",; //47
+         "Printer could not be selected! Check Availability of Printer.",; //48
+         "Page No. :",; //49
+         "Size :",; //50
+         "Done",; //51
+         "Size of Columns other than text type can not be modified!",; //52
+         "Justification constants not given properly.",; //53
+         "Whitespace",; //54
+         "Spread",; //55
+         "Apply",; //56
+         "Include",;//57
+         "Sum",;//58
+         "Yes",;//59
+         "No",;//60
+         "Merge Header",; //61
+         "From",; //62
+         "To",; //63
+         "Header",; //64
+         "There is an error in Merge Head definition in line no.",; //65
+         "Reset Form",; //66
+         "All the previous report configuration for this report will be lost! Are you sure to reset the form?",; // 67
+         }
    ENDCASE
 
    RETURN NIL

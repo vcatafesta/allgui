@@ -273,8 +273,8 @@ PROC Main()
 
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
-            #define FR_PRIVATE   0x10
-            #define FR_NOT_ENUM  0x20
+#define FR_PRIVATE   0x10
+#define FR_NOT_ENUM  0x20
 
 STATIC FUNCTION AddFont()
 

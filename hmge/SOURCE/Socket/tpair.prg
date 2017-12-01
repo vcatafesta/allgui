@@ -57,9 +57,9 @@ CLASS TPair
 
    CLASSDATA cKey, cValue
 
-ENDCLASS
+   ENDCLASS
 
-// New
+   // New
 
 METHOD New( cKey, cValue ) CLASS TPair
 

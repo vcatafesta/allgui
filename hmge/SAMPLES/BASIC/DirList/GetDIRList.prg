@@ -65,19 +65,19 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
       aLocaPaths
 
    MEMV npIncludes,;         // 1: Files, 2: DIRs, 3: DIRs and Files
-   lpChangeDir          // Allow Change DIR
+      lpChangeDir          // Allow Change DIR
 
    FUNC GetDIRList( ;
          acFilter,;          // File skeleton ( with wildcard characters )
-      cTitle,;            // GetDIRList() form title
-      cBegFolder,;        // Beginning path
-      nIncludes,;         // 1: Files, 2: DIRs, 3: DIRs and Files
-      lMultiSelect,;      // Allow Multiple selection
-      lChangeDir )        // Allow Change DIR
+         cTitle,;            // GetDIRList() form title
+         cBegFolder,;        // Beginning path
+         nIncludes,;         // 1: Files, 2: DIRs, 3: DIRs and Files
+         lMultiSelect,;      // Allow Multiple selection
+         lChangeDir )        // Allow Change DIR
 
       LOCA aTypes := { "Only File(s)", "Only Folder(s)", "File(s) and Folder(s)" },;
          aGDLGFC    := ARRAY( 4 ),;    // GDL GRID Dynamic Fore Colors
-      aImages    := { '01.bmp', '02.bmp' }
+         aImages    := { '01.bmp', '02.bmp' }
 
       SET PROGRAMMATICCHANGE OFF
 
@@ -108,7 +108,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
       * PRIVATization !
       PRIV npIncludes    := nIncludes,;         // 1: Files, 2: DIRs, 3: DIRs and Files
-      lpChangeDir   := lChangeDir          // Allow Change DIR
+         lpChangeDir   := lChangeDir          // Allow Change DIR
 
       AFILL( aGDLGFC, { || IF( aList2[ This.CellRowIndex, 5 ], RGB(0, 0, 255), RGB(0, 0, 0) ) } )  // This is a DIR
 
@@ -243,11 +243,11 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                lIsDIR   := "D" $ cFAttrib
 
                AADD( aList2, { cFileNam,;                     // 1° File ( Only) Name
-               cFileExt,;                     // 2° File Extention
-               nFileSiz,;                     // 3° Size / <DIR>
-               cFileDat + " " + cFileTim,;    // 4° Date + Time
-               lIsDIR ,;                      // 5° Is this entry a DIR ?
-               ++nSeqNum } )                  // 6° Sequence No ( for 'natural' order )
+                  cFileExt,;                     // 2° File Extention
+                  nFileSiz,;                     // 3° Size / <DIR>
+                  cFileDat + " " + cFileTim,;    // 4° Date + Time
+                  lIsDIR ,;                      // 5° Is this entry a DIR ?
+                  ++nSeqNum } )                  // 6° Sequence No ( for 'natural' order )
 
                IF lIsDIR
                   ++nFoldCo
@@ -261,9 +261,9 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
          frmGDL.grdDIRList.DisableUpdate()
          AEVAL( aList2, { | a1 |  frmGDL.grdDIRList.AddItem( { a1[ 1 ],;       // 1° File ( Only) Name
-         a1[ 2 ],;          // 2° File Extention
-         IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
-         IF( EMPTY( a1[ 4 ] ),;
+            a1[ 2 ],;          // 2° File Extention
+            IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
+            IF( EMPTY( a1[ 4 ] ),;
             ' ',DTOC( STOD( LEFT( a1[ 4 ], ;
             8 ) ) ) + SUBS( a1[ 4 ], 9 ) ) } ) } )   // 4° Date + Time
          frmGDL.grdDIRList.EnableUpdate()
@@ -301,7 +301,7 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                   nColumnNo )
 
                LOCA nOrder  := aColOrder[ nColumnNo ],; // 0: Natural, 1: Ascend, 2: Descend
-               aImages := ARRAY(4),;
+                  aImages := ARRAY(4),;
                   lAscend
 
                nOrder := IF( nOrder < 2, nOrder + 1, 0 )
@@ -336,9 +336,9 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                frmGDL.grdDIRList.DisableUpdate()
                AEVAL( aList2, { | a1 |  frmGDL.grdDIRList.AddItem( { a1[ 1 ],;         // 1° File ( Only) Name
-               a1[ 2 ],;         // 2° File Extention
-               IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
-               IF( EMPTY( a1[ 4 ] ),;
+                  a1[ 2 ],;         // 2° File Extention
+                  IF( a1[ 5 ], '<DIR>', PADL( NTrim( a1[ 3 ]), 14 )),;  // 3° Size / <DIR>
+                  IF( EMPTY( a1[ 4 ] ),;
                   ' ',DTOC( STOD( LEFT( a1[ 4 ], ;
                   8 ) ) ) + SUBS( a1[ 4 ], 9 ) ) } ) } )   // 4° Date + Time
                frmGDL.grdDIRList.EnableUpdate()
@@ -519,10 +519,10 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
                                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                        FUNC GDL_FFList( ;                        // Filtered File List
-                                          cPath ,;       // Path
-                                          cFilter ,;     // Filter(s)
-                                          nIncludes ,;   // 1: Only Files, 2: Only DIRs, 3: DIRs and Files
-                                          lChangeDir )   // Does user will have ability for changing folder ?
+                                             cPath ,;       // Path
+                                             cFilter ,;     // Filter(s)
+                                             nIncludes ,;   // 1: Only Files, 2: Only DIRs, 3: DIRs and Files
+                                             lChangeDir )   // Does user will have ability for changing folder ?
 
                                           LOCA aRVal   := {},;
                                              aFilter := {},;
@@ -730,9 +730,9 @@ Copyright 2006 Bicahi Esgici <esgici@gmail.com>
 
                                                          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-                                                         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
-                                                         #define _ISDRIVESPEC( cDir ) ( ! Empty( hb_osDriveSeparator() ) .AND. Right( cDir, Len( hb_osDriveSeparator() ) ) == hb_osDriveSeparator() )
+#define _ISDRIVESPEC( cDir ) ( ! Empty( hb_osDriveSeparator() ) .AND. Right( cDir, Len( hb_osDriveSeparator() ) ) == hb_osDriveSeparator() )
 
 FUNCTION hb_DirSepAdd( cDir )
 
@@ -750,4 +750,4 @@ FUNCTION hb_DirSepAdd( cDir )
 
    RETURN cDir
 
-   #endif
+#endif

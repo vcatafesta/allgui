@@ -102,15 +102,15 @@ STATIC PROCEDURE GetInfo( hwnd, lOnce )
    LOCAL cMsgs
 
    IF ! Empty( aInfo )
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       cMsgs := hb_strFormat ;
          ( ;
          e"Holder:\t\t%d\nCount of events:\t%d\nUsed events:\t%d\nStatus:\t\t%s", ;
          aInfo[1], aInfo[2], aInfo[3], Iif( aInfo[4], "active", "not active" ) ;
          )
-      #else
+#else
       cMsgs := "" // FIXME
-      #endif
+#endif
    ELSE
       cMsgs := "Not Installed."
    ENDIF

@@ -285,13 +285,13 @@ FUNCTION MAIN
                      ACTION ( Form_1.RichEditBox_1.ParaNumbering := IF ( Form_1.Button_Bulleted.VALUE, RTF_BULLET, RTF_NOBULLETNUMBER ) , OnSelectProc() );
                      CHECK
 
-                  #define MIN_PARAINDENT   0 // in mm
+#define MIN_PARAINDENT   0 // in mm
                   BUTTON Button_Offset2 ;
                      TOOLTIP 'Offset Out' ;
                      PICTURE 'Offset2' ;
                      ACTION (Form_1.RichEditBox_1.ParaIndent := Form_1.RichEditBox_1.ParaIndent - 15, Form_1.RichEditBox_1.ParaIndent := IF (Form_1.RichEditBox_1.ParaIndent < MIN_PARAINDENT, MIN_PARAINDENT, Form_1.RichEditBox_1.ParaIndent))
 
-                  #define MAX_PARAINDENT   150 // in mm
+#define MAX_PARAINDENT   150 // in mm
                   BUTTON Button_Offset1 ;
                      TOOLTIP 'Offset in' ;
                      PICTURE 'Offset1' ;
@@ -444,7 +444,7 @@ PROCEDURE MoveDialog ( nPos )
 
    LOCAL CharRowCol := Form_1.RichEditBox_1.GetPosChar (nPos)
 
-   #define OFFSET_DLG 30
+#define OFFSET_DLG 30
 
    IF CharRowCol [1] <> -1 .AND. CharRowCol [2] <> -1
 

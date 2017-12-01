@@ -117,11 +117,11 @@ PROCEDURE _DefineSplitButton ( cName, nRow, nCol, cCaption, bAction, cParent, ;
 
    RETURN
 
-   #define WM_COMMAND   0x0111
-   #define BN_CLICKED   0
-   #define WM_NOTIFY    0x004E
-   #define BCN_FIRST    -1250
-   #define BCN_DROPDOWN (BCN_FIRST + 0x0002)
+#define WM_COMMAND   0x0111
+#define BN_CLICKED   0
+#define WM_NOTIFY    0x004E
+#define BCN_FIRST    -1250
+#define BCN_DROPDOWN (BCN_FIRST + 0x0002)
 
 FUNCTION SPButtonEventHandler ( hWnd, nMsg, wParam, lParam )
 
@@ -154,9 +154,9 @@ FUNCTION SPButtonEventHandler ( hWnd, nMsg, wParam, lParam )
 
    RETURN xRetVal
 
-   #define BM_SETSTYLE        244
-   #define BS_SPLITBUTTON     0x0000000C
-   #define BS_DEFSPLITBUTTON  0x0000000D
+#define BM_SETSTYLE        244
+#define BS_SPLITBUTTON     0x0000000C
+#define BS_DEFSPLITBUTTON  0x0000000D
 
 PROCEDURE SPButtonSetFocus ( cWindow, cControl )
 
@@ -276,4 +276,4 @@ HB_FUNC( INITSPLITBUTTON )
 
 #pragma ENDDUMP
 
-   #endif
+#endif

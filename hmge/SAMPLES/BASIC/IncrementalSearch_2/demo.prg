@@ -170,7 +170,7 @@ FUNCTION textboxbackspace
 
    RETURN NIL
 
-   #define EM_SETSEL      177
+#define EM_SETSEL      177
    /*********************************************************/
 
 FUNCTION TextBoxEditSetSel( cParent, cControl, nStart, nEnd )

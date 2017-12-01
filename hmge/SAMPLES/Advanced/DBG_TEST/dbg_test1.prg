@@ -32,7 +32,7 @@ FUNCTION MAIN
 
       ON KEY ALT+D ACTION HMG_ShowEventMonitor()
 
-      #xtranslate EDITBOX_INFO() => Form1.EditBox_1.Value := ;
+#xtranslate EDITBOX_INFO() => Form1.EditBox_1.Value := ;
          "--- Vars  ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetVars()) +;
          "--- Stack ---"   + hb_osNewLine() + VarInfo (HMG_Debugger():GetProcStack()) +;
          str (HMG_Debugger():nProcLevel) + hb_osNewLine() +;

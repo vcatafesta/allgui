@@ -17,9 +17,9 @@
 
 PROCEDURE Main
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    EMPTY( _OOHG_ALLVARS )
-   #endif
+#endif
 
    DEFINE WINDOW Form_1 ;
          AT 0,0 ;
@@ -115,11 +115,11 @@ PROCEDURE PruebaHttpRef( nOpcion )
       => ;
       httpconnect( iif( <.obj.>, @<con>, <(con)>), <server>, <port> )
 
-   #xcommand CLOSE CONNECTION <con> ;
+#xcommand CLOSE CONNECTION <con> ;
       => ;
       <con>:Close()
 
-   #xcommand GET URL <url> TO <response> CONNECTION <con> [ <data: NOHEADERS, HEADERS> ];
+#xcommand GET URL <url> TO <response> CONNECTION <con> [ <data: NOHEADERS, HEADERS> ];
       => ;
       <response> := httpgeturl( <con>, <url>, iif( upper( #<data> ) == "HEADERS", .F., iif( upper( #<data> ) == "NOHEADERS", NIL, .T. ) ) )
 
@@ -195,11 +195,11 @@ FUNCTION httpgeturl( Connection, cPage, uRet )
          cHeader += hb_OsNewLine()
 
          FOR i := 1 to Len( Connection:hHeaders )
-            #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
             cHeader += hGetKeyAt( Connection:hHeaders, i ) + ": " + hGetValueAt( Connection:hHeaders, i ) + hb_OsNewLine()
-            #else
+#else
             cHeader += hb_HKeyAt( Connection:hHeaders, i ) + ": " + hb_HValueAt( Connection:hHeaders, i ) + hb_OsNewLine()
-            #endif
+#endif
          NEXT
          cHeader += hb_OsNewLine()
 

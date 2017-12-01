@@ -147,9 +147,9 @@ PROCEDURE CreateTable
 
    RETURN
 
-   #define WM_NOTIFY 78
-   #define NM_CLICK (-2)
-   #define NM_RCLICK (-5)
+#define WM_NOTIFY 78
+#define NM_CLICK (-2)
+#define NM_RCLICK (-5)
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 

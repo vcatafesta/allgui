@@ -16,10 +16,10 @@ PROC T_SetIndex()
       nNtxFNum := 0
 
    LOCA aNtxFils := GetFile ( {{ "Index Files", "*.ntx" }} ,;   // File Select Filter
-   "Set Index" ,;                // Get File Window Title
-   cTablDir,;                    // File Find Beginning folder
-   .T. ,;                        // Multiple Select
-   .F. )                         // Change Folder right
+      "Set Index" ,;                // Get File Window Title
+      cTablDir,;                    // File Find Beginning folder
+      .T. ,;                        // Multiple Select
+      .F. )                         // Change Folder right
 
    IF !EMPTY( aNtxFils )
 
@@ -178,16 +178,16 @@ PROC T_SetIndex()
                      cMessage
 
                   aComPars  := { { cDfXFName, "Index", "*.ntx", .T. },;  // Target ( INDEX )FILE
-                  FIELDNAME( 1 ),;                      // Default Index Key
-                  '',;                                  // FOR Expression
-                  { .F., .F. }}                         // UNIQUE, DESCENDING
+                     FIELDNAME( 1 ),;                      // Default Index Key
+                     '',;                                  // FOR Expression
+                     { .F., .F. }}                         // UNIQUE, DESCENDING
 
                   aComOpts  := GFUComOpts( aComPars,;  // Values of options
-                  cCbFTitl,;  // Command's name
-                  { {'OFN',"Index" },;      // Output file expression
-                  {'EXP',"Key" },;        // Expression
-                  'FOR',;                // FOR Expression
-                  'UND'} )               // UNIQUE, DESCENDING
+                     cCbFTitl,;  // Command's name
+                     { {'OFN',"Index" },;      // Output file expression
+                     {'EXP',"Key" },;        // Expression
+                     'FOR',;                // FOR Expression
+                     'UND'} )               // UNIQUE, DESCENDING
 
                   IF !EMPTY( aComOpts )
 
@@ -308,18 +308,18 @@ PROC T_SetIndex()
                      ELSE   // Recs, Selective
                         AEVAL( DBSTRUCT(), { | a1, i1 | cExpLst += a1[ 1 ] + IF( i1 < FCOUNT(), ", ", '') } )
                         aComPars  := { cExpLst,;             // FIELDS list
-                        {  1, ''  },;         // FOR/WHILE, Express
-                        {  2,  0  },;         // Scope ( ALL/REST/NEXT n/RECORD n )
-                        {  1, ''  },;         // Target FILE Type : 1: Table
-                        { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
+                           {  1, ''  },;         // FOR/WHILE, Express
+                           {  2,  0  },;         // Scope ( ALL/REST/NEXT n/RECORD n )
+                           {  1, ''  },;         // Target FILE Type : 1: Table
+                           { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
 
                         aComOpts  := GFUComOpts( aComPars,;  // Values of options
-                        cCbFTitl,;  // Command's name
-                        { 'FLS',;                  // Fields List
-                        'CND',;                  // FOR Expression
-                        'SCP',;                  // Scope
-                        'TFT',;                  // Target FILE Type
-                        { 'OFN',"Target " } } )  // Output file expression
+                           cCbFTitl,;  // Command's name
+                           { 'FLS',;                  // Fields List
+                           'CND',;                  // FOR Expression
+                           'SCP',;                  // Scope
+                           'TFT',;                  // Target FILE Type
+                           { 'OFN',"Target " } } )  // Output file expression
 
                      ENDIF nOption # 2  // Recs, Selective
 
@@ -372,10 +372,10 @@ PROC T_SetIndex()
 
                         LOCA cExpLst  := aOptions[ 1 ],;
                            aCondits := aOptions[ 2 ],;  // 1: Condition No :  1: None, 2: FOR, 3: WHILE; 2:Condition String ( IF nCondit > 1 )
-                        aScopes  := aOptions[ 3 ],;  // 1: Scope No : 1: No (ALL), 1: ALL, 2: REST, 3: NEXT, 4: RECORD (NO); Scope Count ( or No ) ( IF nScope > 2 );
+                           aScopes  := aOptions[ 3 ],;  // 1: Scope No : 1: No (ALL), 1: ALL, 2: REST, 3: NEXT, 4: RECORD (NO); Scope Count ( or No ) ( IF nScope > 2 );
                            nTFType  := aOptions[ 4, 1 ],;  // Target File Type : 1: Table, 2: SDF, 3: DELI, 4: DELI WITH
-                        cDlmWith := aOptions[ 4, 2 ],;  // Delimiter ( IF cDlmWith > 3 )
-                        cNewTNam := aOptions[ 5 ],;
+                           cDlmWith := aOptions[ 4, 2 ],;  // Delimiter ( IF cDlmWith > 3 )
+                           cNewTNam := aOptions[ 5 ],;
                            cTmpFNam := ''
 
                         LOCA lTextOut := ( nTFType > 1 ),;
@@ -392,9 +392,9 @@ PROC T_SetIndex()
                         LOCA cContinue := aCondExps[ 1 ],;
                            cApply    := aCondExps[ 2 ],;
                            cCAlias   := ALIAS(),;            // Current Alias
-                        nFInd     := 0,;  // Field indice
-                        cFldNam       ,;  // Field Name
-                        nFldNum   := 0    // Field Number
+                           nFInd     := 0,;  // Field indice
+                           cFldNam       ,;  // Field Name
+                           nFldNum   := 0    // Field Number
 
                         PRIV nPasdRecs :=  0
 
@@ -517,16 +517,16 @@ PROC T_SetIndex()
                            ELSE
 
                               aComPars  := { { SPAC( 256 ), "Table", "*.dbf", .F. },; // Target FILE
-                              cKExpLst,;                                // FIELDS list
-                              {  1, ''  },;                            // FOR/WHILE, Express
-                              {  2,  0  } }                            // Scope ( ALL/REST/NEXT n/RECORD n )
+                                 cKExpLst,;                                // FIELDS list
+                                 {  1, ''  },;                            // FOR/WHILE, Express
+                                 {  2,  0  } }                            // Scope ( ALL/REST/NEXT n/RECORD n )
 
                               aComOpts  := GFUComOpts( aComPars,;  // Values of options
-                              cCbFTitl,;  // Command's name
-                              { { 'OFN',"Target " },;  // Output file expression
-                              'KLS',;                // Key List
-                              'CND',;                // FOR Expression
-                              'SCP'  } )             // Scope
+                                 cCbFTitl,;  // Command's name
+                                 { { 'OFN',"Target " },;  // Output file expression
+                                 'KLS',;                // Key List
+                                 'CND',;                // FOR Expression
+                                 'SCP'  } )             // Scope
 
                            ENDIF EMPTY( cExpLst )
 
@@ -581,10 +581,10 @@ PROC T_SetIndex()
                                  cTmpFNam := TempFile( GetTempFolder () )
 
                                  aCopOptns := { cFldList,;  // (Full) Field List
-                                 aCondits,;  // Conditions ( FOR/WHILE )
-                                 aScopes,;   // Scope
-                                 { 1, },;    // File Type ( 1: Table )
-                                 cTmpFNam }  // Target File Name
+                                    aCondits,;  // Conditions ( FOR/WHILE )
+                                    aScopes,;   // Scope
+                                    { 1, },;    // File Type ( 1: Table )
+                                    cTmpFNam }  // Target File Name
 
                                  IF CopyToBe( aCopOptns )
                                     * Phase #2 : Index temp on cKeyExprs
@@ -638,8 +638,8 @@ PROC T_SetIndex()
                                  n1FldNum  := 0,;
                                  aStruct   := DBSTRUCT(),;
                                  aFldLst1  := {},;   // User supplied
-                              aFldLst2  := {},;   // Checked all Numeric
-                              aTotals   := {},;
+                                 aFldLst2  := {},;   // Checked all Numeric
+                                 aTotals   := {},;
                                  cResult   := '',;
                                  nCount    :=  0,;
                                  lContinue := .T.,;
@@ -658,18 +658,18 @@ PROC T_SetIndex()
                               ELSE
 
                                  aComPars  := { SPAC( 256 ),;                            // expKey
-                                 { SPAC( 256 ), "Table", "*.dbf", .F. },; // Target FILE
-                                 cNExpLst,;                               // FIELDS list
-                                 {  1, ''  },;                            // FOR/WHILE, Express
-                                 {  2,  0  } }                            // Scope ( ALL/REST/NEXT n/RECORD n )
+                                    { SPAC( 256 ), "Table", "*.dbf", .F. },; // Target FILE
+                                    cNExpLst,;                               // FIELDS list
+                                    {  1, ''  },;                            // FOR/WHILE, Express
+                                    {  2,  0  } }                            // Scope ( ALL/REST/NEXT n/RECORD n )
 
                                  aComOpts  := GFUComOpts( aComPars,;  // Values of options
-                                 cCbFTitl,;  // Command's name
-                                 { { 'EXP', 'Key' },;     // expKey
-                                 { 'OFN',"Target " },;  // Output file expression
-                                 'FLS',;                // Key List
-                                 'CND',;                // FOR Expression
-                                 'SCP'  } )             // Scope
+                                    cCbFTitl,;  // Command's name
+                                    { { 'EXP', 'Key' },;     // expKey
+                                    { 'OFN',"Target " },;  // Output file expression
+                                    'FLS',;                // Key List
+                                    'CND',;                // FOR Expression
+                                    'SCP'  } )             // Scope
 
                               ENDIF EMPTY( cExpLst )
 

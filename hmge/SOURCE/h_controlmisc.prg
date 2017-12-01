@@ -88,10 +88,10 @@ FUNCTION _GetValue ( ControlName, ParentForm, Index )
    ENDIF
 
    DO CASE
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       retval := _BrowseGetValue ( '' , '' , ix )
-      #endif
+#endif
    CASE T == "PROGRESSBAR"
       retval := SendMessage ( c, PBM_GETPOS, 0, 0 )
 
@@ -300,10 +300,10 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value, index )
    ENDIF
 
    DO CASE
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       _BrowseSetValue ( '' , '' , Value , ix )
-      #endif
+#endif
    CASE T == "IPADDRESS"
       Value := IFEMPTY( Value, {}, Value )
 
@@ -597,10 +597,10 @@ FUNCTION _AddItem ( ControlName , ParentForm , Value , Parent , aImage , Id )
    LOCAL ChildHandle , BackHandle , ParentHandle
    LOCAL TreeItemHandle , ImgDef , iUnSel , iSel
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    LOCAL oGet
 
-   #endif
+#endif
 
    ix := GetControlIndex ( ControlName , ParentForm )
    T := _HMG_aControltype [ix]
@@ -768,13 +768,13 @@ FUNCTION _AddItem ( ControlName , ParentForm , Value , Parent , aImage , Id )
             _UpdateGridColors ( ix )
          ENDIF
       ENDIF
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    CASE T == "TBROWSE"
       oGet := GetObjectByHandle( c )
       IF ISOBJECT( oGet )
          oGet:AddItem( value )
       ENDIF
-      #endif
+#endif
    ENDCASE
 
    RETURN NIL
@@ -784,10 +784,10 @@ FUNCTION _DeleteItem ( ControlName , ParentForm , Value )
    LOCAL t , c , BeforeCount , AfterCount , DeletedCount , i , ix , aPos
    LOCAL TreeItemHandle
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    LOCAL oGet
 
-   #endif
+#endif
 
    ix := GetControlIndex ( ControlName , ParentForm )
 
@@ -878,13 +878,13 @@ FUNCTION _DeleteItem ( ControlName , ParentForm , Value )
 
          _UpdateGridColors ( ix )
       ENDIF
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    CASE T == "TBROWSE"
       oGet := GetObjectByHandle( c )
       IF ISOBJECT( oGet )
          oGet:DeleteRow()
       ENDIF
-      #endif
+#endif
    ENDCASE
 
    RETURN NIL
@@ -893,10 +893,10 @@ FUNCTION _DeleteAllItems ( ControlName , ParentForm )
 
    LOCAL t , c , i
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    LOCAL oGet
 
-   #endif
+#endif
 
    i := GetControlIndex ( ControlName , ParentForm )
 
@@ -925,13 +925,13 @@ FUNCTION _DeleteAllItems ( ControlName , ParentForm )
             _HMG_aControlMiscData1 [i] [ 17 ] := 0
          ENDIF
       ENDIF
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    CASE t == "TBROWSE"
       oGet := GetObjectByHandle( c )
       IF ISOBJECT( oGet ) .AND. oGet:lIsArr
          oGet:DeleteRow( .T. )
       ENDIF
-      #endif
+#endif
    ENDCASE
 
    RETURN NIL
@@ -1164,14 +1164,14 @@ FUNCTION _DisableControl ( ControlName , ParentForm , nPosition )
          DisableWindow( c )
       ENDIF
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       DisableWindow ( c )
       IF _HMG_aControlIds [y] != 0
          DisableWindow ( _HMG_aControlIds [y] )
       ENDIF
       _EnableScrollBars ( c, SB_HORZ, ESB_DISABLE_BOTH )
-      #endif
+#endif
    CASE T == "GRID"
       DisableWindow ( c )
       _EnableScrollBars ( c, SB_BOTH, ESB_DISABLE_BOTH )
@@ -1289,14 +1289,14 @@ FUNCTION _EnableControl ( ControlName , ParentForm , nPosition )
          EnableWindow( c )
       ENDIF
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       EnableWindow ( c )
       IF _HMG_aControlIds [y] != 0
          EnableWindow ( _HMG_aControlIds [y] )
       ENDIF
       _EnableScrollBars ( c, SB_BOTH, ESB_ENABLE_BOTH )
-      #endif
+#endif
    CASE T == "GRID"
       EnableWindow ( c )
       _EnableScrollBars ( c, SB_BOTH, ESB_ENABLE_BOTH )
@@ -1418,7 +1418,7 @@ FUNCTION _ShowControl ( ControlName , ParentForm )
                      ENDIF
 
                   ENDIF
-                  #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
                ELSEIF t == 'BROWSE'
 
                   IF ValType ( _HMG_aControlPageMap [i] [r] [w] ) == 'A'
@@ -1446,7 +1446,7 @@ FUNCTION _ShowControl ( ControlName , ParentForm )
                      ENDIF
 
                   ENDIF
-                  #endif
+#endif
                ELSE
 
                   IF ValType ( _HMG_aControlPageMap [i] [r] [w] ) == 'N'
@@ -1484,7 +1484,7 @@ FUNCTION _ShowControl ( ControlName , ParentForm )
    CASE T == "SPINNER"
       AEval ( c, { |y| CShowControl ( y ) } )
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       CShowControl ( c )
 
@@ -1494,7 +1494,7 @@ FUNCTION _ShowControl ( ControlName , ParentForm )
       IF _HMG_aControlMiscData1 [y] [1] != 0
          CShowControl ( _HMG_aControlMiscData1 [y] [1] )
       ENDIF
-      #endif
+#endif
    CASE T == "TAB"
       CShowControl ( c )
 
@@ -1512,10 +1512,10 @@ FUNCTION _ShowControl ( ControlName , ParentForm )
    CASE T == "RADIOGROUP"
       AEval( c, {|y| ShowWindow ( y ) } )
 
-      #ifdef _PROPGRID_
+#ifdef _PROPGRID_
    CASE T == "PROPGRID"
       AEval( c, {|y| ShowWindow ( y ) } )
-      #endif
+#endif
    CASE T == "GETBOX"
       FOR z := 1 TO 3
          CShowControl ( _HMG_aControlRangeMin [y][z] )
@@ -1550,7 +1550,7 @@ FUNCTION _HideControl ( ControlName , ParentForm )
    CASE T == "SPINNER"
       AEval ( c, { |y| HideWindow ( y ) } )
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
       HideWindow ( c )
 
@@ -1560,7 +1560,7 @@ FUNCTION _HideControl ( ControlName , ParentForm )
       IF _HMG_aControlMiscData1 [y] [1] != 0
          HideWindow ( _HMG_aControlMiscData1 [y] [1] )
       ENDIF
-      #endif
+#endif
    CASE T == "TAB"
       HideWindow ( c )
 
@@ -1579,10 +1579,10 @@ FUNCTION _HideControl ( ControlName , ParentForm )
    CASE T == "RADIOGROUP"
       AEval( c, {|y| HideWindow ( y ) } )
 
-      #ifdef _PROPGRID_
+#ifdef _PROPGRID_
    CASE T == "PROPGRID"
       AEval( c, {|y| HideWindow ( y ) } )
-      #endif
+#endif
    CASE T == "COMBO"
       SendMessage ( c , 335 , 0 , 0 )  // close DropDown list
       HideWindow ( c )
@@ -1934,10 +1934,10 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
    LOCAL t, i, c, x , NewCol , NewRow , r , w , z , p , xx , sx , sy
 
-   #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    LOCAL b , hws
 
-   #endif
+#endif
    LOCAL DelTaRow, DelTaCol, DelTaWidth, SpinW
    LOCAL tCol, tRow, tWidth, tHeight
 
@@ -1991,7 +1991,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
                IF p > 0 .AND. _HMG_aControlType [p] == 'BROWSE'
 
-                  #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
                   tCol    := _HMG_aControlCol    [p]
                   tRow    := _HMG_aControlRow    [p]
                   tWidth  := _HMG_aControlWidth  [p]
@@ -2036,7 +2036,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
                   _HMG_aControlContainerRow [p] := Row
                   _HMG_aControlContainerCol [p] := Col
-                  #endif
+#endif
                ELSEIF p > 0 .AND. ( _HMG_aControlType [p] == "BTNNUMTEXT" .OR. _HMG_aControlType [p] == "BTNTEXT" .OR. ( _HMG_aControlType [p] == "GETBOX" .AND. _HMG_aControlMiscData1 [p] [4] != Nil ) )
 
                   tCol    := _HMG_aControlCol    [p]
@@ -2153,7 +2153,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
       ENDIF
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == "BROWSE"
 
       IF _HMG_aControlContainerRow [x] == -1
@@ -2231,7 +2231,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
       ENDIF
 
       ReDrawWindow ( c )
-      #endif
+#endif
    CASE T == "RADIOGROUP"
 
       IF _HMG_aControlContainerRow [x] == -1
@@ -3120,7 +3120,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
 
       ReleaseControl ( _HMG_aControlHandles [i] )
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE t == "BROWSE"
       ReleaseControl ( _HMG_aControlHandles [i] )
 
@@ -3130,7 +3130,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
          ReleaseControl ( _HMG_aControlMiscData1 [i] [1] )
 
       ENDIF
-      #endif
+#endif
 
    CASE t == "TAB"
       FOR r := 1 TO Len ( _HMG_aControlPageMap [i] )
@@ -3210,7 +3210,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
                      ENDIF
 
                   ENDIF
-                  #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
                ELSEIF t == 'BROWSE'
 
                   IF ValType ( _HMG_aControlPageMap [y] [r] [w] ) == 'A'
@@ -3234,7 +3234,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
                      ENDIF
 
                   ENDIF
-                  #endif
+#endif
                ELSE
 
                   IF ValType ( _HMG_aControlPageMap [y] [r] [w] ) == 'N'
@@ -3301,12 +3301,12 @@ FUNCTION _EraseControl ( i, p )
       IF !Empty( _HMG_aControlInputMask [i] )
          IMAGELIST_DESTROY ( _HMG_aControlInputMask [i] )
       ENDIF
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE t == 'BROWSE'
       IF !Empty( _HMG_aControlMiscData1 [i] [15] )
          IMAGELIST_DESTROY ( _HMG_aControlMiscData1 [i] [15] )
       ENDIF
-      #endif
+#endif
    CASE 'GRID' $ t
       IF !Empty( _HMG_aControlRangeMin [i] )
          IMAGELIST_DESTROY ( _HMG_aControlRangeMin [i] )
@@ -3326,11 +3326,11 @@ FUNCTION _EraseControl ( i, p )
    mVar := '_' + _HMG_aFormNames [p] + '_' + _HMG_aControlNames [i]
 
    IF __mvExist ( mVar )
-      #ifndef _PUBLIC_RELEASE_
+#ifndef _PUBLIC_RELEASE_
       __mvPut ( mVar , 0 )
-      #else
+#else
       __mvXRelease( mVar )
-      #endif
+#endif
    ENDIF
 
    _HMG_aControlDeleted            [i] := .T.
@@ -3373,11 +3373,11 @@ FUNCTION _EraseControl ( i, p )
    _HMG_aControlEnabled            [i] := .F.
    _HMG_aControlMiscData1          [i] := 0
    _HMG_aControlMiscData2          [i] := ''
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF __mvExist ( '_HMG_SYSDATA[443][i]' )
       _HMG_StopControlEventProcedure [i] := .F.
    ENDIF
-   #endif
+#endif
 
    RETURN NIL
 
@@ -3446,10 +3446,10 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
    LOCAL i
 
-   #ifdef _USERINIT_
+#ifdef _USERINIT_
    LOCAL cMacro
 
-   #endif
+#endif
 
    SWITCH PCount()
    CASE 3 // PCount() == 3 (WINDOW)
@@ -3460,7 +3460,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       Arg2 := Upper ( Arg2 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomPropertyProcedure )
 
          IF Arg2 == _HMG_aCustomPropertyProcedure [i] [1]
@@ -3473,7 +3473,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
          ENDIF
 
       NEXT i
-      #endif
+#endif
       DO CASE
 
       CASE Arg2 == "TITLE"
@@ -3489,19 +3489,19 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
          _SetWindowSizePos ( Arg1 , , , Arg3 , )
 
       CASE Arg2 == "COL"
-         #ifdef _PANEL_
+#ifdef _PANEL_
          IF GetWindowType ( Arg1 ) == 'P'
             Arg3 += GetBorderWidth()
          ENDIF
-         #endif
+#endif
          _SetWindowSizePos ( Arg1 , , Arg3 , , )
 
       CASE Arg2 == "ROW"
-         #ifdef _PANEL_
+#ifdef _PANEL_
          IF GetWindowType ( Arg1 ) == 'P'
             Arg3 += GetTitleHeight() + GetBorderHeight()
          ENDIF
-         #endif
+#endif
          _SetWindowSizePos ( Arg1 , Arg3 , , , )
 
       CASE Arg2 == "NOTIFYICON"
@@ -3581,7 +3581,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomPropertyProcedure )
 
          IF Arg3 == _HMG_aCustomPropertyProcedure [i] [1]
@@ -3594,7 +3594,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF .NOT. _IsControlDefined ( Arg2 , Arg1 )
          MsgMiniGuiError ( "Control: " + Arg2 + " Of " + Arg1 + " Not defined." )
       ENDIF
@@ -3636,7 +3636,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
          _ControlCargo ( Arg2 , Arg1 , Arg4 )
 
-         #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
       CASE Arg3 == "ALLOWEDIT"
 
          _SetBrowseAllowEdit ( Arg2 , Arg1 , Arg4 )
@@ -3648,7 +3648,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
       CASE Arg3 == "ALLOWDELETE"
 
          _SetBrowseAllowDelete ( Arg2 , Arg1 , Arg4 )
-         #endif
+#endif
       CASE Arg3 $ "PICTURE,PICTUREINDEX,ICON"
 
          _SetPicture ( Arg2 , Arg1 , Arg4 )
@@ -3808,7 +3808,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
          SetTabStop( GetControlHandle( Arg2 , Arg1 ) , Arg4 )
 
-         #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
       CASE Arg3 == "INPUTITEMS"
 
          _SetBrowseInputItems ( Arg2 , Arg1 , Arg4 )
@@ -3816,7 +3816,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
       CASE Arg3 == "DISPLAYITEMS"
 
          _SetBrowseDisplayItems ( Arg2 , Arg1 , Arg4 )
-         #endif
+#endif
       CASE Arg3 == "READONLY" .OR. Arg3 == "DISABLEEDIT"
 
          IF GetControlType ( Arg2 , Arg1 ) == "RADIOGROUP"
@@ -3868,7 +3868,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomPropertyProcedure )
 
          IF Arg3 == _HMG_aCustomPropertyProcedure [i] [1]
@@ -3881,7 +3881,7 @@ PROCEDURE SetProperty( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF Upper( Arg2 ) == "SPLITBOX"
 
          IF _IsControlSplitBoxed ( Arg3 , Arg1 )
@@ -4063,10 +4063,10 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
    LOCAL RetVal, ix
 
-   #ifdef _USERINIT_
+#ifdef _USERINIT_
    LOCAL i, cMacro
 
-   #endif
+#endif
 
    SWITCH PCount()
    CASE 2 // PCount() == 2 (WINDOW)
@@ -4077,7 +4077,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
       Arg2 := Upper ( Arg2 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomPropertyProcedure )
 
          IF Arg2 == _HMG_aCustomPropertyProcedure [i] [1]
@@ -4090,7 +4090,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
          ENDIF
 
       NEXT i
-      #endif
+#endif
       DO CASE
 
       CASE Arg2 == "TITLE"
@@ -4128,19 +4128,19 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
       CASE Arg2 == "COL"
 
          RetVal := GetWindowCol ( GetFormHandle ( Arg1 ) )
-         #ifdef _PANEL_
+#ifdef _PANEL_
          IF GetWindowType ( Arg1 ) == 'P'
             RetVal -= GetBorderWidth()
          ENDIF
-         #endif
+#endif
       CASE Arg2 == "ROW"
 
          RetVal := GetWindowRow ( GetFormHandle ( Arg1 ) )
-         #ifdef _PANEL_
+#ifdef _PANEL_
          IF GetWindowType ( Arg1 ) == 'P'
             RetVal -= GetTitleHeight() + GetBorderHeight()
          ENDIF
-         #endif
+#endif
       CASE Arg2 == "TITLEBAR"
 
          RetVal := IsWindowHasStyle ( GetFormHandle( Arg1 ) , WS_CAPTION )
@@ -4189,11 +4189,11 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
          RetVal := _WindowCargo ( Arg1 )
 
-         #ifdef _OBJECT_
+#ifdef _OBJECT_
       CASE Arg2 == "OBJECT"
 
          RetVal := _WindowObj ( Arg1 )
-         #endif
+#endif
       CASE Arg2 == "MINWIDTH" // Grigory Filatov HMG 1.4 Ext Build 43
 
          RetVal := _SetGetMinMaxInfo ( Arg1 , 5 )
@@ -4217,7 +4217,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomPropertyProcedure )
 
          IF Arg3 == _HMG_aCustomPropertyProcedure [i] [1]
@@ -4230,7 +4230,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF ( Upper( Arg2 ) == "VSCROLLBAR" .OR. Upper( Arg2 ) == "HSCROLLBAR" )
 
          IF .NOT. _IsWindowDefined ( Arg1 )
@@ -4278,11 +4278,11 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
          RetVal := _ControlCargo ( Arg2 , Arg1 )
 
-         #ifdef _OBJECT_
+#ifdef _OBJECT_
       CASE Arg3 == "OBJECT"
 
          RetVal := _ControlObj ( Arg2 , Arg1 )
-         #endif
+#endif
       CASE Arg3 == "NAME"
 
          RetVal := GetControlName ( Arg2 , Arg1 )
@@ -4299,7 +4299,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
          RetVal := GetUserControlType ( Arg2 , Arg1 )
 
-         #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
       CASE Arg3 == "ALLOWEDIT"
 
          RetVal := _GetBrowseAllowEdit ( Arg2 , Arg1 )
@@ -4319,7 +4319,7 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
       CASE Arg3 == "DISPLAYITEMS"
 
          RetVal := _GetBrowseDisplayItems ( Arg2 , Arg1 )
-         #endif
+#endif
       CASE Arg3 $ "PICTURE,ICON"
 
          RetVal := _GetPicture ( Arg2 , Arg1 )
@@ -4679,10 +4679,10 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
    LOCAL i
 
-   #ifdef _USERINIT_
+#ifdef _USERINIT_
    LOCAL cMacro
 
-   #endif
+#endif
 
    IF PCount() == 2 // Window
 
@@ -4694,7 +4694,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg2 := Upper ( Arg2 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg2 == _HMG_aCustomMethodProcedure [i] [1]
@@ -4707,7 +4707,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
 
       DO CASE
 
@@ -4765,7 +4765,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg3 == _HMG_aCustomMethodProcedure [i] [1]
@@ -4778,7 +4778,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF .NOT. _IsControlDefined ( Arg2 , Arg1 )
          MsgMiniGuiError ( "Control: " + Arg2 + " Of " + Arg1 + " Not defined." )
       ENDIF
@@ -4871,7 +4871,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg3 == _HMG_aCustomMethodProcedure [i] [1]
@@ -4884,7 +4884,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF Upper( Arg2 ) == 'SPLITBOX'
 
          IF _IsControlSplitBoxed ( Arg3 , Arg1 )
@@ -4959,7 +4959,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg3 == _HMG_aCustomMethodProcedure [i] [1]
@@ -4972,7 +4972,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF Upper( Arg2 ) == 'SPLITBOX'
 
          IF _IsControlSplitBoxed ( Arg3 , Arg1 )
@@ -5021,7 +5021,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg3 == _HMG_aCustomMethodProcedure [i] [1]
@@ -5034,7 +5034,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF Upper( Arg2 ) == 'SPLITBOX'
 
          IF _IsControlSplitBoxed ( Arg3 , Arg1 )
@@ -5073,7 +5073,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
 
       Arg3 := Upper ( Arg3 )
 
-      #ifdef _USERINIT_
+#ifdef _USERINIT_
       FOR i := 1 TO Len ( _HMG_aCustomMethodProcedure )
 
          IF Arg3 == _HMG_aCustomMethodProcedure [i] [1]
@@ -5086,7 +5086,7 @@ FUNCTION DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
          ENDIF
 
       NEXT i
-      #endif
+#endif
       IF Upper( Arg2 ) == 'SPLITBOX'
 
          IF _IsControlSplitBoxed ( Arg3 , Arg1 )
@@ -5249,10 +5249,10 @@ STATIC FUNCTION _SetArrayToControl ( ControlName, ParentForm, aValue )  // GF 03
 
    LOCAL t , i , BackValue
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    LOCAL oGet
 
-   #endif
+#endif
    IF ! ISARRAY ( aValue )
 
       RETURN NIL
@@ -5290,13 +5290,13 @@ STATIC FUNCTION _SetArrayToControl ( ControlName, ParentForm, aValue )  // GF 03
          _SetValue ( , , BackValue , i )
       ENDIF
 
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    CASE T == "TBROWSE"
       oGet := GetObjectByHandle( _HMG_aControlHandles [i] )
       IF ISOBJECT( oGet )
          oGet:SetItems( aValue )
       ENDIF
-      #endif
+#endif
    ENDCASE
 
    RETURN NIL
@@ -5344,10 +5344,10 @@ PROCEDURE _Refresh( i )
    CASE T == 'GETBOX'
       _DataGetBoxRefresh ( i )
 
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    CASE T == 'BROWSE'
       _BrowseRefresh ( '', '', i )
-      #endif
+#endif
    CASE 'GRID' $ T
       IF _HMG_aControlMiscData1 [i] [5] == .T.
          ListView_SetItemCount ( _HMG_aControlHandles [i] , ListViewGetItemCount ( _HMG_aControlHandles [i] ) )
@@ -5387,8 +5387,8 @@ PROCEDURE _SaveData ( ControlName, ParentForm )
 
    RETURN
 
-   #define HWND_TOPMOST    (-1)
-   #define HWND_NOTOPMOST  (-2)
+#define HWND_TOPMOST    (-1)
+#define HWND_NOTOPMOST  (-2)
 
 PROCEDURE _ChangeWindowTopmostStyle( FormHandle, Value )
 
@@ -5740,11 +5740,11 @@ FUNCTION _GetControlFree()
 
    LOCAL k := AScan ( _HMG_aControlDeleted , .T. )
 
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF k == 0 .OR. ( __mvExist ( '_HMG_SYSDATA[443][k]' ) .AND. _HMG_StopControlEventProcedure [k] == .T. )
-      #else
+#else
       IF k == 0
-         #endif
+#endif
          k := Len( _HMG_aControlNames ) + 1
 
          AAdd ( _HMG_aControlType         , Nil )
@@ -5787,9 +5787,9 @@ FUNCTION _GetControlFree()
          AAdd ( _HMG_aControlEnabled      , Nil )
          AAdd ( _HMG_aControlMiscData1    , Nil )
          AAdd ( _HMG_aControlMiscData2    , Nil )
-         #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
          AAdd ( _HMG_StopControlEventProcedure, .F. )
-         #endif
+#endif
       ENDIF
 
       RETURN k
@@ -5839,10 +5839,10 @@ FUNCTION _ExtDisableControl ( ControlName, ParentForm )
    LOCAL hWnd := GetControlHandle ( ControlName, ParentForm )
    LOCAL icp, icpe
 
-   #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    LOCAL idx
 
-   #endif
+#endif
    IF IsWindowEnabled ( hWnd )
 
       icp  := HiWord ( SendMessage ( hWnd , EM_GETSEL , 0 , 0 ) )
@@ -5852,14 +5852,14 @@ FUNCTION _ExtDisableControl ( ControlName, ParentForm )
          SendMessage ( hWnd , EM_SETSEL , icpe , icpe )
       ENDIF
       HideCaret ( hWnd )
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
       IF GetControlType ( ControlName, ParentForm ) == "BROWSE"
          idx := GetControlIndex ( ControlName, ParentForm )
          IF _HMG_aControlIds [idx] != 0
             ChangeStyle ( _HMG_aControlIds [idx] , WS_DISABLED , , .F. )
          ENDIF
       ENDIF
-      #endif
+#endif
    ENDIF
 
    RETURN NIL
@@ -5868,21 +5868,21 @@ FUNCTION _ExtEnableControl ( ControlName, ParentForm )
 
    LOCAL hWnd := GetControlHandle ( ControlName, ParentForm )
 
-   #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
    LOCAL idx
 
-   #endif
+#endif
    IF ! IsWindowEnabled ( hWnd )
       ChangeStyle ( hWnd, , WS_DISABLED, .F. )
       ShowCaret ( hWnd )
-      #ifdef _DBFBROWSE_
+#ifdef _DBFBROWSE_
       IF GetControlType ( ControlName, ParentForm ) == "BROWSE"
          idx := GetControlIndex ( ControlName, ParentForm )
          IF _HMG_aControlIds [idx] != 0
             ChangeStyle ( _HMG_aControlIds [idx], , WS_DISABLED, .F. )
          ENDIF
       ENDIF
-      #endif
+#endif
    ENDIF
 
    RETURN NIL
@@ -6067,7 +6067,7 @@ FUNCTION _DefineLetterOrDigitHotKey ( Caption, i, FormName, bAction )
 
    RETURN NIL
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
 
 FUNCTION _IsWindowVisibleFromHandle ( Handle )
 
@@ -6085,7 +6085,7 @@ FUNCTION _IsWindowVisibleFromHandle ( Handle )
 
    RETURN lVisible
 
-   #endif
+#endif
 
 STATIC FUNCTION _SetGetMinMaxInfo ( cWindowName , nIndex , nValue )
 

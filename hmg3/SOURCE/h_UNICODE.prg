@@ -34,7 +34,7 @@ FUNCTION MsgDebugUnicode
 
    LOCAL i, cMsg
 
-   #define CRLF CHR(13)+CHR(10)
+#define CRLF CHR(13)+CHR(10)
    cMsg := "Called from: " + PROCNAME(1) + "(" + LTRIM(STR(PROCLINE(1))) + ") --> " + PROCFILE (1) + CRLF + CRLF
    FOR i = 1 TO PCOUNT()
       cMsg := cMsg + HB_VALTOEXP (PVALUE (i)) + IIF (i < PCOUNT(), ", ", "")

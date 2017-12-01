@@ -506,6 +506,6 @@ FUNCTION AddItemPG(PGname,cForm,lCat)
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif

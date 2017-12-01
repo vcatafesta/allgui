@@ -56,7 +56,7 @@ FUNCTION Main()
 
    RETURN NIL
 
-   #define WM_CLOSE     0x0010
+#define WM_CLOSE     0x0010
 
 FUNCTION CloseIt()
 
@@ -68,11 +68,11 @@ FUNCTION CloseIt()
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
-   #define ENUMINDEX hb_EnumIndex()
-   #else
-   #define ENUMINDEX c:__EnumIndex
-   #endif
+#ifdef __XHARBOUR__
+#define ENUMINDEX hb_EnumIndex()
+#else
+#define ENUMINDEX c:__EnumIndex
+#endif
 
 FUNCTION ReadGetIt()
 

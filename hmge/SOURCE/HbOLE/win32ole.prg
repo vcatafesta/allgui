@@ -44,23 +44,23 @@ FUNCTION CreateObject()
 FUNCTION GetActiveObject()
 
    RETURN NIL
-   #else
+#else
 
-   #define HB_CLS_NOTOBJECT
+#define HB_CLS_NOTOBJECT
 
-   #include "common.ch"
-   #include "hbclass.ch"
-   #include "error.ch"
+#include "common.ch"
+#include "hbclass.ch"
+#include "error.ch"
 
-   #translate Alert( <x> ) => MessageBox( 0, <x>, "OLE Error", 0 )
+#translate Alert( <x> ) => MessageBox( 0, <x>, "OLE Error", 0 )
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
-   #define EG_OLEEXCEPTION 1001
+#define EG_OLEEXCEPTION 1001
 
-   #xcommand TRY              => BEGIN SEQUENCE WITH s_bBreak
-   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-   #xcommand FINALLY          => ALWAYS
+#xcommand TRY              => BEGIN SEQUENCE WITH s_bBreak
+#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+#xcommand FINALLY          => ALWAYS
 
    STATIC s_bBreak := { |oErr| break( oErr ) }
 
@@ -75,7 +75,7 @@ STATIC PROCEDURE THROW( oError )
 
    RETURN
 
-   #endif
+#endif
 
 FUNCTION CreateObject( cString, cLicense )
 
@@ -107,7 +107,7 @@ CLASS VTWrapper
 
    METHOD New( vt, xVal ) CONSTRUCTOR
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( vt, xVal ) CLASS VTWrapper
 
@@ -123,7 +123,7 @@ CLASS VTArrayWrapper FROM VTWrapper
    METHOD AsArray( nIndex, xValue ) OPERATOR "[]"
    METHOD __enumStart( enum, lDescend )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AsArray( nIndex, xValue ) CLASS VTArrayWrapper
 
@@ -187,7 +187,7 @@ CLASS TOleAuto
    // Needed to refernce, or hb_dynsymFindName() will fail
    METHOD ForceSymbols() INLINE ::cClassName()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( uObj, cClass, cLicense ) CLASS TOleAuto
 
@@ -645,4 +645,4 @@ PROCEDURE OleShowException()
 
    RETURN
 
-   #endif
+#endif

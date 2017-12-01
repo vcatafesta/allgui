@@ -77,7 +77,7 @@ CLASS TCheckBox FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, Caption, Value, fontname, ;
       fontsize, tooltip, changeprocedure, w, h, lostfocus, gotfocus, ;

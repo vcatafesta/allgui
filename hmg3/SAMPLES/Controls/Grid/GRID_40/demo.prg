@@ -181,7 +181,7 @@ PROCEDURE TEST_VELOCITY
 
    RETURN
 
-   #else
+#else
 
 FUNCTION Main
 
@@ -227,4 +227,4 @@ PROCEDURE Control_ONGOTFOCUS
 
    RETURN
 
-   #endif
+#endif

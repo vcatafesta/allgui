@@ -46,7 +46,7 @@ CLASS VAR winclass   INIT "msctls_progress32"
 
    METHOD End() INLINE hwg_Destroywindow( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit, bSize, bPaint, ctooltip, nAnimation, lVertical ) CLASS HProgressBar
 

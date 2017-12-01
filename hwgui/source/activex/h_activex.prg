@@ -45,7 +45,7 @@ CLASS VAR winclass   INIT "ACTIVEX"
 
    METHOD EventMap( nMsg, xExec, oSelf )  // oSkAr 20070829
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize ) CLASS HActiveX
 
@@ -69,7 +69,7 @@ METHOD New( oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize ) CLASS HActiveX
 
    ::hObj := hwg_Atlaxgetdisp( ::handle )
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    bErrorBlock := ErrorBlock( { |x| break( x ) } )
    TRY
       ::oOle := ToleAuto():New( ::hObj )
@@ -77,7 +77,7 @@ METHOD New( oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize ) CLASS HActiveX
       hwg_Msginfo( oError:Description )
    END
    ErrorBlock( bErrorBlock )
-   #else
+#else
    //hwg_writelog( Valtype(::hObj) + Iif(__oleIsDisp( ::hObj ), " T"," F") )
    ::oOle := win_oleAuto()
    IF __oleIsDisp( ::hObj )
@@ -88,7 +88,7 @@ METHOD New( oWnd, cProgId, nTop, nLeft, nWidth, nHeight, bSize ) CLASS HActiveX
 
       RETURN NIL
    ENDIF
-   #endif
+#endif
 
    hwg_Setupconnectionpoint( ::hObj, @hSink, ::aAxEv , ::aAxExec )
    ::hSink := hSink

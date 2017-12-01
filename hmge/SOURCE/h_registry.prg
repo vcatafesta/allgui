@@ -78,7 +78,7 @@ CREATE CLASS TReg32
    METHOD KeyDelete( cSubKey )
    METHOD Close() BLOCK {|Self| iif( ::lError, , RegCloseKey( ::nHandle ) ) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nKey, cRegKey, lShowError ) CLASS TReg32
 

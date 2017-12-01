@@ -146,7 +146,7 @@ PROCEDURE PROC_Terminate_Process
    RETURN // PROC_Terminate_Process()
 
    *- ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._. - ._.
-   #define GW_OWNER   4
+#define GW_OWNER   4
 
 FUNCTION GetAppHandleByFileName( cFileName )
 
@@ -157,7 +157,7 @@ FUNCTION GetAppHandleByFileName( cFileName )
       GetFullFileNameByHandle( hWin, @cFullFileName )
 
       IF GetWindow( hWin, GW_OWNER ) == 0 .AND. ;  // If it is an owner window
-         Upper( cFileName ) $ Upper( cFullFileName )
+            Upper( cFileName ) $ Upper( cFullFileName )
 
          hWnd := hWin
          EXIT

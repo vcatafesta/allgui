@@ -69,7 +69,7 @@ FUNCTION Main()
 
    RETURN NIL
 
-   #define EM_SETPASSWORDCHAR      0x00CC
+#define EM_SETPASSWORDCHAR      0x00CC
 
 FUNCTION ShowPassword()
 

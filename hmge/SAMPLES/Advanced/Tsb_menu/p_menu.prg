@@ -67,7 +67,7 @@ PROCEDURE TsMenu
       zzob := 'f_ts_lr(' + iv + ',.t.)' // parameters  of the procedure, called by the label
 
       @ y, tatx[ o ] LABEL &v OF &ts_okno WIDTH ( ( Len( StrTran( TABL[ o, 1 ], '&', '' ) ) * 10 ) ) HEIGHT 20 VALUE TABL[ o, 1 ] ; // labels horizontal menu
-      FONT "MS Sans Serif" SIZE 10 BOLD BACKCOLOR GRAY FONTCOLOR WHITE CENTERALIGN ACTION &zzob
+         FONT "MS Sans Serif" SIZE 10 BOLD BACKCOLOR GRAY FONTCOLOR WHITE CENTERALIGN ACTION &zzob
 
       SetProperty( ts_okno, v, 'backcolor', SYS_COLOR ) // horizontal menu, background color
       SetProperty( ts_okno, V, 'Fontcolor', BLACK )     // horizontal menu, fonts

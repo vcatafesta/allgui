@@ -228,9 +228,9 @@ PROCEDURE RunCommand( cRunCmd )
 
    RETURN
 
-   #define WM_COPYDATA           74
-   #define CDM_RUNCMD         52888 // 0xCE98
-   #define WM_DROPFILES         563 // 0x0233
+#define WM_COPYDATA           74
+#define CDM_RUNCMD         52888 // 0xCE98
+#define WM_DROPFILES         563 // 0x0233
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 

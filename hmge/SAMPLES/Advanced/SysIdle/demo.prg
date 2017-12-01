@@ -61,7 +61,7 @@ FUNCTION Aviso()
 
    RETURN NIL
 
-   #define WM_TIMER        275
+#define WM_TIMER        275
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 

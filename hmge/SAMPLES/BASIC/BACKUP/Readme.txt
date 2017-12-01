@@ -3,8 +3,8 @@ Copyright (c) 2003 Grigory Filatov. All rights reserved.
 
 Adapted (2012-06-07) by Tsakalidis G. Evangelos <tsakal@otenet.gr>
 Main adaptations :
-	recursive backUp of a folder
-	keeping specific number of backUps for a specific number of days and deleting unnecessary backUps
+   recursive backUp of a folder
+   keeping specific number of backUps for a specific number of days and deleting unnecessary backUps
 
 DESCRIPTION:
 ~~~~~~~~~~~~
@@ -14,11 +14,11 @@ ZIP file. (See further for more settings)
 
 Have fun with Backup Utility!
 
-DISTRIBUTION: 
+DISTRIBUTION:
 ~~~~~~~~~~~~~
-This program is FREE, and may be freely copied and distributed, 
-as long as it is not modified in any way, and no fee is charged for 
-its distribution (small shipping and handling fee is acceptable). 
+This program is FREE, and may be freely copied and distributed,
+as long as it is not modified in any way, and no fee is charged for
+its distribution (small shipping and handling fee is acceptable).
 
 Explanation of Backup.ini
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,7 +42,7 @@ Confirm Start=No
 
 ; Compression ratio, a higher number is more compression (From 0-9)
 Compression Ratio=9
-; 
+;
 TargetFolder=%H\myBACKUP
 TargetPrefix=BackUp_
 TargetExtension=.zip
@@ -142,7 +142,7 @@ IsActive=No
 ; %C=Current drive       ( ex. F: )
 ; %W=Windows dir         ( ex. C:\WINDOWS )
 ; %S=Windows system dir  ( ex. C:\WINDOWS\SYSTEM )
-; %U=UserDirectory       ( ex. C:\Documents and Settings\Administrator ) 
+; %U=UserDirectory       ( ex. C:\Documents and Settings\Administrator )
 ; %U\Local Settings\Application Data\Microsoft\Outlook
 ; %U\Desktop
 ; %U\My Documents
@@ -157,7 +157,7 @@ IsActive=No
 ; IsActive   DEFAULT "Yes"
 ; %W\Fonts
 
-; All the text used in Backup can be changed through the 
+; All the text used in Backup can be changed through the
 ; LANGUAGE section.
 [LANGUAGE]
 1=Cancel this backup?

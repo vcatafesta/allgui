@@ -339,7 +339,7 @@ CLASS TPRINTBASE
 
    METHOD Version                INLINE ::cVersion
 
-ENDCLASS
+   ENDCLASS
 
 METHOD SetIndentation( lIndentAll ) CLASS TPRINTBASE
 
@@ -1185,7 +1185,7 @@ CLASS TMINIPRINT FROM TPRINTBASE
 
    METHOD SetPreviewSizeX
 
-ENDCLASS
+   ENDCLASS
 
 METHOD MaxCol() CLASS TMINIPRINT
 
@@ -1892,7 +1892,7 @@ CLASS THBPRINTER FROM TPRINTBASE
 
    METHOD SetPreviewSizeX
 
-ENDCLASS
+   ENDCLASS
 
 METHOD MaxCol() CLASS THBPRINTER
 
@@ -2291,7 +2291,7 @@ CLASS TDOSPRINT FROM TPRINTBASE
    TODO: Add METHOD PrintRectangleX using two horizontal lines and pairs of |
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD PrintModeX( cFile ) CLASS TDOSPRINT
 
@@ -2577,7 +2577,7 @@ CLASS TRAWPRINT FROM TDOSPRINT
 
    METHOD SelPrinterX
 
-ENDCLASS
+   ENDCLASS
 
 METHOD BeginDocX() CLASS TRAWPRINT
 
@@ -2689,18 +2689,18 @@ CLASS TEXCELPRINT FROM TPRINTBASE
    TODO: Add SelPrinterX to open a dialog to select file.
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD InitX() CLASS TEXCELPRINT
 
    ::cPrintLibrary := "EXCELPRINT"
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( ::oExcel := win_oleCreateObject( "Excel.Application" ) ) = NIL
-      #else
+#else
       ::oExcel := TOleAuto():New( "Excel.Application" )
       IF Ole2TxtError() != 'S_OK'
-         #endif
+#endif
          IF ::lShowErrors
             MsgStop( _OOHG_Messages( 12, 34 ), _OOHG_Messages( 12, 12 ) )
          ENDIF
@@ -2912,19 +2912,19 @@ METHOD EndPageX() CLASS TEXCELPRINT
    RETURN Self
 
    // Label Header
-   #define TXT_ELEMS  12
-   #define TXT_OPCO1   1
-   #define TXT_OPCO2   2
-   #define TXT_LEN1    3
-   #define TXT_LEN2    4
-   #define TXT_ROW1    5
-   #define TXT_ROW2    6
-   #define TXT_COL1    7
-   #define TXT_COL2    8
-   #define TXT_RGBAT1  9
-   #define TXT_RGBAT2 10
-   #define TXT_RGBAT3 11
-   #define TXT_LEN    12
+#define TXT_ELEMS  12
+#define TXT_OPCO1   1
+#define TXT_OPCO2   2
+#define TXT_LEN1    3
+#define TXT_LEN2    4
+#define TXT_ROW1    5
+#define TXT_ROW2    6
+#define TXT_COL1    7
+#define TXT_COL2    8
+#define TXT_RGBAT1  9
+#define TXT_RGBAT2 10
+#define TXT_RGBAT3 11
+#define TXT_LEN    12
 
 CLASS TSPREADSHEETPRINT FROM TPRINTBASE
 
@@ -2957,7 +2957,7 @@ CLASS TSPREADSHEETPRINT FROM TPRINTBASE
    TODO: Add SelPrinterX to open a dialog to select file.
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD InitX() CLASS TSPREADSHEETPRINT
 
@@ -3121,7 +3121,7 @@ CLASS THTMLPRINTFROMEXCEL FROM TEXCELPRINT
 
    METHOD InitX
 
-ENDCLASS
+   ENDCLASS
 
 METHOD BeginDocX() CLASS THTMLPRINTFROMEXCEL
 
@@ -3186,7 +3186,7 @@ CLASS THTMLPRINTFROMCALC FROM TCALCPRINT
 
    METHOD InitX
 
-ENDCLASS
+   ENDCLASS
 
 METHOD BeginDocX() CLASS THTMLPRINTFROMCALC
 
@@ -3247,8 +3247,8 @@ METHOD InitX() CLASS THTMLPRINTFROMCALC
 
    RETURN Self
 
-   #define RTF_FONT_TABLE  2
-   #define RTF_COLOR_TABLE 3
+#define RTF_FONT_TABLE  2
+#define RTF_COLOR_TABLE 3
 
 CLASS TRTFPRINT FROM TPRINTBASE
 
@@ -3289,7 +3289,7 @@ CLASS TRTFPRINT FROM TPRINTBASE
    the font table is already initialized).
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD InitX() CLASS TRTFPRINT
 
@@ -3799,7 +3799,7 @@ CLASS TCSVPRINT FROM TPRINTBASE
    TODO: Add SelPrinterX to open a dialog to select file.
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD BeginDocX() CLASS TCSVPRINT
 
@@ -3921,7 +3921,7 @@ CLASS TPDFPRINT FROM TPRINTBASE
 
    METHOD SetPreviewSize          BLOCK { || NIL }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD InitX() CLASS TPDFPRINT
 
@@ -4217,7 +4217,7 @@ CLASS TCALCPRINT FROM TPRINTBASE
    TODO: Add support for "printing" in multiple cells.
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD InitX() CLASS TCALCPRINT
 
@@ -4226,12 +4226,12 @@ METHOD InitX() CLASS TCALCPRINT
    ::cPrintLibrary := "CALCPRINT"
 
    BEGIN SEQUENCE
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       IF ( ::oServiceManager := win_oleCreateObject( "com.sun.star.ServiceManager" ) ) == NIL
-         #else
+#else
          ::oServiceManager := TOleAuto():New( "com.sun.star.ServiceManager" )
          IF Ole2TxtError() != 'S_OK'
-            #endif
+#endif
             BREAK
          ENDIF
          IF ( ::oDesktop := ::oServiceManager:CreateInstance( "com.sun.star.frame.Desktop" ) ) == NIL
@@ -4552,7 +4552,7 @@ FUNCTION OO_ConvertToURL( cFile )
 
    // Barcode related defines and functions
 
-   #define CODABAR_CODES { "101010001110", ;
+#define CODABAR_CODES { "101010001110", ;
       "101011100010", ;
       "101000101110", ;
       "111000101010", ;
@@ -4576,7 +4576,7 @@ FUNCTION OO_ConvertToURL( cFile )
       "10100010001110", ;
       "10100011100010" }
 
-   #define CODABAR_CHARS '0123456789-$:/.+ABCDTN*E'
+#define CODABAR_CHARS '0123456789-$:/.+ABCDTN*E'
 
    // Important: this function does not set the start and end codes
 
@@ -4601,7 +4601,7 @@ FUNCTION _Codabar( cCode, lShowErrors )
 
    RETURN cBarcode
 
-   #define CODE128_CODES {"212222", ;
+#define CODE128_CODES {"212222", ;
       "222122", ;
       "222221", ;
       "121223", ;
@@ -4810,7 +4810,7 @@ FUNCTION _Code128( cCode, cMode, lShowErrors )
 
    RETURN cBarcode
 
-   #define CODE3_9_CODES { '1110100010101110', ;
+#define CODE3_9_CODES { '1110100010101110', ;
       '1011100010101110', ;
       '1110111000101010', ;
       '1010001110101110', ;
@@ -4825,18 +4825,18 @@ FUNCTION _Code128( cCode, cMode, lShowErrors )
       '1110111010001010', ;
       '1010111000101110', ;
       '1110101110001010', ; //E
-   '1011101110001010', ;
+      '1011101110001010', ;
       '1010100011101110', ;
       '1110101000111010', ;
       '1011101000111010', ;
       '1010111000111010', ;
       '1110101010001110', ; //K
-   '1011101010001110', ;
+      '1011101010001110', ;
       '1110111010100010', ;
       '1010111010001110', ;
       '1110101110100010', ;
       '1011101110100010', ; //P
-   '1010101110001110', ;
+      '1010101110001110', ;
       '1110101011100010', ;
       '1011101011100010', ;
       '1010111011100010', ;
@@ -4846,16 +4846,16 @@ FUNCTION _Code128( cCode, cMode, lShowErrors )
       '1000101110101110', ;
       '1110001011101010', ;
       '1000111011101010', ; //Z
-   '1000101011101110', ;
+      '1000101011101110', ;
       '1110001010111010', ;
       '1000111010111010', ; // ' '
-   '1000101110111010', ;
+      '1000101110111010', ;
       '1000100010100010', ;
       '1000100010100010', ;
       '1000101000100010', ;
       '1010001000100010'}
 
-   #define CODE3_9_CHARS '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-. *$/+%'
+#define CODE3_9_CHARS '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-. *$/+%'
 
 FUNCTION _Code3_9( cCode, lCheck, lShowErrors )
 
@@ -4891,10 +4891,10 @@ FUNCTION _Code3_9( cCode, lCheck, lShowErrors )
 
    RETURN cBarcode
 
-   #define EAN_RIGHT "1110010110011011011001000010101110010011101010000100010010010001110100"
-   #define EAN_LEFT1 "0001101001100100100110111101010001101100010101111011101101101110001011"
-   #define EAN_LEFT2 "0100111011001100110110100001001110101110010000101001000100010010010111"
-   #define EAN_FIRST "ooooooooeoeeooeeoeooeeeooeooeeoeeooeoeeeoooeoeoeoeoeeooeeoeo"
+#define EAN_RIGHT "1110010110011011011001000010101110010011101010000100010010010001110100"
+#define EAN_LEFT1 "0001101001100100100110111101010001101100010101111011101101101110001011"
+#define EAN_LEFT2 "0100111011001100110110100001001110101110010000101001000100010010010111"
+#define EAN_FIRST "ooooooooeoeeooeeoeooeeeooeooeeoeeooeoeeeoooeoeoeoeoeeooeeoeo"
 
 FUNCTION _Ean13( cCode, lShowErrors )
 
@@ -5051,7 +5051,7 @@ FUNCTION Upc_Check( cCode, nLen )
 
    RETURN Str( nControl, 1, 0 )
 
-   #define EAN_PARITY [eeoooeoeooeooeoeoooeoeeooooeeooooeeoeoeooeooeooeoe]
+#define EAN_PARITY [eeoooeoeooeooeoeoooeoeeooooeeooooeeoeoeooeooeooeoe]
 
    // EAN 5 digit supplement
 
@@ -5089,7 +5089,7 @@ FUNCTION _Sup5( cCode, lShowErrors )
 
    RETURN cBarcode
 
-   #define CODE25_CODES { "00110", ;
+#define CODE25_CODES { "00110", ;
       "10001", ;
       "01001", ;
       "11000", ;

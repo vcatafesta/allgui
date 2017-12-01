@@ -68,7 +68,7 @@ CREATE CLASS TODBCField
 
    METHOD New()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS TODBCField
 
@@ -135,7 +135,7 @@ CREATE CLASS TODBC
    METHOD GetStmtOptions( nType )
    METHOD SetAutoCommit( lEnable )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD SQLErrorMessage() CLASS TODBC
 

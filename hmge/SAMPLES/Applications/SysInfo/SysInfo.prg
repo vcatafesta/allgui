@@ -903,11 +903,11 @@ STATIC FUNCTION cBios_( nFunction, nBytes )
 
    RETURN cBiosInfo
 
-   #define BIOS_TYPE       1040481
-   #define BIOS_OEM_SIGNON 1040577
-   #define BIOS_SIGNON     1043569
-   #define BIOS_ID         1043592
-   #define BIOS_DATE       1048565
+#define BIOS_TYPE       1040481
+#define BIOS_OEM_SIGNON 1040577
+#define BIOS_SIGNON     1043569
+#define BIOS_ID         1043592
+#define BIOS_DATE       1048565
 
 FUNCTION cBiosSignOn()
 

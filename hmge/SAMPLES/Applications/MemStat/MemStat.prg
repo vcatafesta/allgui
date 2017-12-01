@@ -232,7 +232,7 @@ PROCEDURE OnInit
 
    RETURN
 
-   #define WM_PAINT   15
+#define WM_PAINT   15
 
 STATIC PROCEDURE RefreshPaint()
 
@@ -301,8 +301,8 @@ STATIC PROCEDURE RefreshStat()
 
    RETURN
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow( hWnd )
 

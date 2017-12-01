@@ -227,7 +227,7 @@ PROCEDURE Main( cTableNam )
    */
 
 PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
-   cTableNam )
+      cTableNam )
 
    LOCAL aTGHas   := {},;
       nFVSnFT              // file's validity status and file type
@@ -237,10 +237,10 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
       IF HB_ISNIL( cTableNam )
 
          cTableNam := GetFile ( { { 'Tables', '*.dbf' }, { 'All Files', '*.*' } },;  // acFilter
-         'Select Table',;   // cTitle
-         ,;                 // cDefaultPath
-         .F.,;              // lMultiSelect
-         .F. )              // lNoChangeDir
+            'Select Table',;   // cTitle
+            ,;                 // cDefaultPath
+            .F.,;              // lMultiSelect
+            .F. )              // lNoChangeDir
       ENDIF
 
       IF !EMPTY( cTableNam ) .AND. FILE( cTableNam )
@@ -432,7 +432,7 @@ FUNCTION MsgAbout()
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-   #define HEXTABLE "0123456789ABCDEF"
+#define HEXTABLE "0123456789ABCDEF"
 
 FUNCTION HEX2DEC( cHexNum )
 
@@ -604,8 +604,8 @@ FUNCTION GetTableNum( ctype )
 
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-   #define FIELD_ENTRY_SIZE 32
-   #define FIELD_NAME_SIZE  11
+#define FIELD_ENTRY_SIZE 32
+#define FIELD_NAME_SIZE  11
 
 FUNCTION HL_DBInfoLL( cTable, lMessage )
 

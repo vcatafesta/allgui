@@ -202,16 +202,16 @@ FUNCTION mchoice(aOptions,nTop,nLeft,nBottom,nRight,cTitle,lAlpha,nStart,nRow,aS
          ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1;
             TITLE "" ;
             SIZE 435 ;                // this column is editable
-         COLORS CLR_BLACK, bColor; // background color from a Code Block
-         ALIGN DT_LEFT ;           // cells, title, footer
-         FOOTER {||if (dsel > 0,"Selezionati: "+ltrim(str(dsel))+" ",'') }
+            COLORS CLR_BLACK, bColor; // background color from a Code Block
+            ALIGN DT_LEFT ;           // cells, title, footer
+            FOOTER {||if (dsel > 0,"Selezionati: "+ltrim(str(dsel))+" ",'') }
 
          IF Multi
             ADD COLUMN TO TBROWSE oLbx DATA "" ;
                TITLE "" ;
                SIZE 15  ;                // this column is editable
-            COLORS CLR_BLACK, bColor; // background color from a Code Block
-            ALIGN DT_CENTER           // cells, title, footer
+               COLORS CLR_BLACK, bColor; // background color from a Code Block
+               ALIGN DT_CENTER           // cells, title, footer
 
             oLbx:SetSelectMode( multi , { | oBrw, nI, lSel | ;
                ( Tone( If( lSel, 500, 100 ) );

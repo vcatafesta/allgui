@@ -65,7 +65,7 @@ PROCEDURE test( db )
    IF sqlite3_exec( db, "SELECT * FROM t1" ) == SQLITE_OK
       ? "TABLE t1"
 
-      #ifdef SQLITE_ENABLE_COLUMN_METADATA
+#ifdef SQLITE_ENABLE_COLUMN_METADATA
       ? "Column name :                id"
       ? "Declared data type:         ", sqlite3_table_column_metadata( db, , "t1", "id" )[1]
       ? "Collation sequence name:    ", sqlite3_table_column_metadata( db, , "t1", "id" )[2]
@@ -79,7 +79,7 @@ PROCEDURE test( db )
       ? "NOT NULL constraint exists: ", sqlite3_table_column_metadata( db, , "t1", "name" )[3]
       ? "Column is part of PK:       ", sqlite3_table_column_metadata( db, , "t1", "name" )[4]
       ? "Column is auto-increment:   ", sqlite3_table_column_metadata( db, , "t1", "name" )[5]
-      #endif
+#endif
 
       sqlite3_sleep( 3000 )
    ENDIF

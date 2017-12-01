@@ -1046,7 +1046,7 @@ PROCEDURE ZipWithCab(cCab,cFolder)
          Main.Progress_2.Value    := i
          oCab:AddFile(;
             aFiles[i]    ,;  // filename
-         substr(aFiles[i],AT('\',aFiles[i])+1)) // folders+filename
+            substr(aFiles[i],AT('\',aFiles[i])+1)) // folders+filename
       NEXT
       oCab:CloseCab()
       Main.Progress_2.Value    := 0

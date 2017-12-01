@@ -91,7 +91,7 @@ CLASS TSplitBox FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ParentForm, bottom, inverted, lRtl, noattached ) CLASS TSplitBox
 

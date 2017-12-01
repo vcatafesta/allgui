@@ -99,7 +99,7 @@ FUNCTION Proc_GridSearchString   // New version (April 2014)
 
    i := 0
    FOR k = 1 TO Form_1.Grid_1.ItemCOUNT
-      #define COL_SEARCH   1
+#define COL_SEARCH   1
       IF HMG_UPPER(HB_ULEFT(Form_1.Grid_1.CellEx(k,COL_SEARCH), HMG_LEN(cLocalSearchString))) == HMG_UPPER(cLocalSearchString)
          i := k
          nRow := k   // remember last found string

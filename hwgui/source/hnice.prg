@@ -61,7 +61,7 @@ CLASS HNiceButton INHERIT HControl
 
    METHOD END ()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
       bInit, bClick, ;

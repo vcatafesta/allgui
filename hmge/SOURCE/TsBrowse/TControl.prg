@@ -201,7 +201,7 @@ METHOD lWhen() INLINE  If( ::bWhen != nil, Eval( ::bWhen ), .t. )
 METHOD SetColor( nClrFore, nClrBack, hBrush )
 
 METHOD EndCtrl() BLOCK ;   // It has to be Block
-   { | Self, lEnd | If( lEnd := ::lValid(), ::PostMsg( WM_CLOSE ),), lEnd }
+      { | Self, lEnd | If( lEnd := ::lValid(), ::PostMsg( WM_CLOSE ),), lEnd }
 
 METHOD Hide() INLINE ShowWindow( ::hWnd, SW_HIDE )
 
@@ -227,7 +227,7 @@ METHOD GetText() INLINE GetWindowText( ::hWnd )   //TWindow
 
 METHOD VScroll( nWParam, nLParam )                //TWindow
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Init( hDlg ) CLASS TControl
 

@@ -52,7 +52,7 @@ CLASS HToolButton INHERIT HObject
 
    METHOD Caption( cText ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New(oParent,cName,nBitIp,nId,bState,bStyle,cText,bClick,ctip,aMenu) CLASS  HToolButton
 
@@ -183,7 +183,7 @@ CLASS HToolBar INHERIT HControl
 
    METHOD onAnchor( x, y, w, h )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, btnWidth, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, lVertical ,aItem, nWSize,nHSize, nIndent, nIDB ) CLASS hToolBar

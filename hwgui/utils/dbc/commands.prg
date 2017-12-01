@@ -204,13 +204,13 @@ FUNCTION C_APPEND()
    LOCAL oDlg, oMsg, cFile := "", cFields := "", cFor := "", cDelim := ""
    LOCAL r1 := 1, bFor, af, cPath := cServerPath
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    LOCAL lRemote := (nServerType == 6)
 
-   #else
+#else
    LOCAL lRemote := (nServerType == REMOTE_SERVER)
 
-   #endif
+#endif
    LOCAL oBrw := GetBrwActive()
    LOCAL oBtnFile, bBtnDis := {||Iif(lRemote,oBtnFile:Disable(),oBtnFile:Enable()),.T.}
    LOCAL bFileBtn := {||
@@ -232,12 +232,12 @@ FUNCTION C_APPEND()
       SIZE 400, 320   ;
       FONT oMainFont ON INIT bBtnDis
 
-   #if defined( RDD_ADS ) .OR. defined( RDD_LETO )
+#if defined( RDD_ADS ) .OR. defined( RDD_LETO )
    @ 10,10 SAY "Server " SIZE 60,22 STYLE SS_RIGHT
    @ 70,10 GET CHECKBOX lRemote CAPTION "Remote:" SIZE 80, 20 ON CLICK bBtnDis
    @ 150,10 GET cPath SIZE 240,24
    Atail( oDlg:aControls ):Anchor := ANCHOR_TOPABS+ANCHOR_LEFTABS+ANCHOR_RIGHTABS
-   #endif
+#endif
 
    @ 10,34 SAY "File name: " SIZE 80,22 STYLE SS_RIGHT
    @ 90,34 GET cFile SIZE 220,24 PICTURE "@S128" STYLE ES_AUTOHSCROLL
@@ -287,12 +287,12 @@ IF oDlg:lResult
    oMsg := DlgWait( "Append" )
    cFile := Iif( lRemote, Trim( cServerPath ), "" ) + Trim( cFile )
    IF r1 == 1
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       AdsSetServerType( nServerType := Iif( lRemote, 6, ADS_LOCAL_SERVER ) )
       __dbApp( cFile, af, bfor,,,, .F. )
-      #else
+#else
       __dbApp( cFile, af, bfor,,,, .F., Iif( lRemote,"LETO","DBFCDX" ),, cDataCPage )
-      #endif
+#endif
    ELSEIF r1 == 2
       __dbSdf( .F., cFile, af, bfor,,,, .F. )
    ELSE
@@ -309,13 +309,13 @@ FUNCTION C_COPY()
    LOCAL oDlg, oMsg, cFile := "", cFields := "", cFor := "", cDelim := ""
    LOCAL r1 := 1, r2 := 1, bFor, af, nNext := 0, cPath := cServerPath
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    LOCAL lRemote := (nServerType == 6)
 
-   #else
+#else
    LOCAL lRemote := (nServerType == REMOTE_SERVER)
 
-   #endif
+#endif
    LOCAL oBtnFile, bBtnDis := {||Iif(lRemote,oBtnFile:Disable(),oBtnFile:Enable()),.T.}
    LOCAL bFileBtn := {||
 
@@ -330,12 +330,12 @@ FUNCTION C_COPY()
       SIZE 400, 320   ;
       FONT oMainFont ON INIT bBtnDis
 
-   #if defined( RDD_ADS ) .OR. defined( RDD_LETO )
+#if defined( RDD_ADS ) .OR. defined( RDD_LETO )
    @ 10,10 SAY "Server " SIZE 60,22 STYLE SS_RIGHT
    @ 70,10 GET CHECKBOX lRemote CAPTION "Remote:" SIZE 80, 20 ON CLICK bBtnDis
    @ 150,10 GET cPath SIZE 240,24
    Atail( oDlg:aControls ):Anchor := ANCHOR_TOPABS+ANCHOR_LEFTABS+ANCHOR_RIGHTABS
-   #endif
+#endif
 
    @ 10,34 SAY "File name: " SIZE 80,22 STYLE SS_RIGHT
    @ 90,34 GET cFile SIZE 220,24 PICTURE "@S128" STYLE ES_AUTOHSCROLL
@@ -393,26 +393,26 @@ IF oDlg:lResult
    oMsg := DlgWait( "Append" )
    cFile := Iif( lRemote, Trim( cServerPath ), "" ) + Trim( cFile )
    IF r1 == 1 .AND. r2 == 1
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       AdsSetServerType( nServerType := Iif( lRemote, 6, ADS_LOCAL_SERVER ) )
       __dbApp( cFile, af, bfor,,,, .F. )
-      #else
+#else
       __dbCopy( cFile, af, bFor,,,, .F., Iif( lRemote,"LETO","DBFCDX" ),, cDataCPage )
-      #endif
+#endif
    ELSEIF r1 == 1 .AND. r2 == 2
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       AdsSetServerType( nServerType := Iif( lRemote, 6, ADS_LOCAL_SERVER ) )
       __dbCopy( cFile, af, bFor,, nNext,, .F. )
-      #else
+#else
       __dbCopy( cFile, af, bFor,, nNext,, .F., Iif( lRemote,"LETO","DBFCDX" ),, cDataCPage )
-      #endif
+#endif
    ELSEIF r1 == 1 .AND. r2 == 3
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       AdsSetServerType( nServerType := Iif( lRemote, 6, ADS_LOCAL_SERVER ) )
       __dbCopy( cFile, af, bFor,,,, .T. )
-      #else
+#else
       __dbCopy( cFile, af, bFor,,,, .T., Iif( lRemote,"LETO","DBFCDX" ),, cDataCPage )
-      #endif
+#endif
    ELSEIF r1 == 2 .AND. r2 == 1
       __dbSdf( .T., cFile, af, bFor,,,, .F. )
    ELSEIF r1 == 2 .AND. r2 == 2

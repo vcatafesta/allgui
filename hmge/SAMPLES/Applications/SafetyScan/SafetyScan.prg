@@ -82,12 +82,12 @@ PROCEDURE Main( lStartUp )
 
       Form_1.Auto_Run.Checked := lWinRun
 
-      #ifdef SCHEDULE
+#ifdef SCHEDULE
       DEFINE TIMER Timer_1 INTERVAL 60000 ACTION AutoScan()
 
       cStartTime := SubStr( Time(), 1, 6 ) + "00"
       dNextScanDate := CTOD("")
-      #endif
+#endif
 
    END WINDOW
 
@@ -116,7 +116,7 @@ STATIC PROCEDURE MainForm()
             SET SECTION "Options" ENTRY "Path" TO cPathCleaned
             SET SECTION "Scan" ENTRY "Masks" TO aMask
             SET SECTION "Scan" ENTRY "Temp" TO lTemp
-            #ifdef SCHEDULE
+#ifdef SCHEDULE
             SET SECTION "Schedule" ENTRY "AutoScan" TO lAutoScan
             SET SECTION "Schedule" ENTRY "AutoClean" TO lAutoClean
             SET SECTION "Schedule" ENTRY "OnlyScan" TO lOnlyScan
@@ -133,7 +133,7 @@ STATIC PROCEDURE MainForm()
             SET SECTION "Schedule" ENTRY "EveryMonths" TO nMonths
             SET SECTION "Schedule" ENTRY "EveryMonthsDay" TO nDayMonths
             SetNextScan()
-            #endif
+#endif
          END INI
       ELSE
          BEGIN INI FILE Lower(cFileName) + '.ini'
@@ -142,7 +142,7 @@ STATIC PROCEDURE MainForm()
             GET cPathCleaned SECTION "Options" ENTRY "Path"
             GET aMask SECTION "Scan" ENTRY "Masks"
             GET lTemp SECTION "Scan" ENTRY "Temp"
-            #ifdef SCHEDULE
+#ifdef SCHEDULE
             GET lAutoScan SECTION "Schedule" ENTRY "AutoScan"
             GET lAutoClean SECTION "Schedule" ENTRY "AutoClean"
             GET lOnlyScan SECTION "Schedule" ENTRY "OnlyScan"
@@ -160,7 +160,7 @@ STATIC PROCEDURE MainForm()
             GET nDayMonths SECTION "Schedule" ENTRY "EveryMonthsDay"
             GET dNextScanDate SECTION "Schedule" ENTRY "NextScanDate"
             GET cNextScanTime SECTION "Schedule" ENTRY "NextScanTime"
-            #endif
+#endif
          END INI
 
          IF Len(aDrives) >= Len(aTmpDrv)
@@ -366,7 +366,7 @@ STATIC PROCEDURE MainForm()
 
             Form_2.Checkbox_1.Value := lTemp
 
-            #ifdef SCHEDULE
+#ifdef SCHEDULE
 
             PAGE '&Schedule'
 
@@ -547,7 +547,7 @@ STATIC PROCEDURE MainForm()
                   HEIGHT 16
 
             END PAGE
-            #endif
+#endif
 
             PAGE 'A&bout'
 
@@ -625,13 +625,13 @@ STATIC PROCEDURE MainForm()
                   WIDTH 32 HEIGHT 32 ;
                   ACTION MsgAbout()
 
-               #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
                @ 190, 15 IMAGE Image_2 PICTURE "HARBOUR" WIDTH 320 HEIGHT 120 ;
                   ACTION ShellExecute(0, "open", "http://harbour-project.org/")
-               #else
+#else
                @ 190, 15 IMAGE Image_2 PICTURE "XHARBOUR" WIDTH 320 HEIGHT 120 ;
                   ACTION ShellExecute(0, "open", "http://www.xharbour.org/")
-               #endif
+#endif
             END PAGE
 
          END TAB
@@ -745,7 +745,7 @@ STATIC PROCEDURE ToggleRefresh( nPage )
 
    RETURN
 
-   #ifdef SCHEDULE
+#ifdef SCHEDULE
 
 STATIC PROCEDURE AutoScan()
 
@@ -814,7 +814,7 @@ STATIC PROCEDURE SetNextScan()
    SaveParameter("Schedule", "NextScanTime", cNextScanTime)
 
    RETURN
-   #endif
+#endif
 
 STATIC PROCEDURE ScanNow()
 
@@ -824,14 +824,14 @@ STATIC PROCEDURE ScanNow()
 
    aCleanFiles := {}
 
-   #ifdef SCHEDULE
+#ifdef SCHEDULE
    IF IsWindowDefined( Form_2 )
-      #endif
+#endif
       Form_2.Grid_1.DeleteAllItems
       DO EVENTS
-      #ifdef SCHEDULE
+#ifdef SCHEDULE
    ENDIF
-   #endif
+#endif
 
    FOR i := 1 to Len( aDrv_clone )
 
@@ -839,24 +839,24 @@ STATIC PROCEDURE ScanNow()
 
          cDrive := aDrv_clone[ i ] [ 2 ]
 
-         #ifdef SCHEDULE
+#ifdef SCHEDULE
          IF !lSchedule .OR. !lOnlyScan .OR. ( lOnlyScan .AND. ;
                int( DISKSPACE(ASC(cDrive) - 64) / 1024 / 1024 ) < nMinSpace )
-            #endif
+#endif
             FOR j := 1 to Len( aMsk_clone )
 
                IF !EMPTY( aMsk_clone[ j ] [ 1 ] )
 
                   cFindMask := aMsk_clone[ j ] [ 2 ]
-                  #ifdef SCHEDULE
+#ifdef SCHEDULE
                   IF IsWindowDefined( Form_2 )
-                     #endif
+#endif
                      Form_2.StatusBar.Item( 1 ) := "Scanning: " + cFindMask
                      INKEY(.4)
                      DO EVENTS
-                     #ifdef SCHEDULE
+#ifdef SCHEDULE
                   ENDIF
-                  #endif
+#endif
                   Aeval( FindFiles( cFindMask, cDrive, NIL ), { |e| Aadd(aFind, {0, e[1], e[2], e[3], e[4]} ) } )
                   Aeval( aFind, { |e| x2 := e[2], x3 := e[3], ;
                      if( Empty(Ascan(aCleanFiles, {|x| x[2] == x2 .and. x[3] == x3})), ;
@@ -864,9 +864,9 @@ STATIC PROCEDURE ScanNow()
 
                ENDIF
             NEXT
-            #ifdef SCHEDULE
+#ifdef SCHEDULE
          ENDIF
-         #endif
+#endif
       ENDIF
 
    NEXT
@@ -879,7 +879,7 @@ STATIC PROCEDURE ScanNow()
    ENDIF
 
    cStatusMsg := "Total Files: " + ltrim(str(round(nTotal / 1024, 0)))+"k"
-   #ifdef SCHEDULE
+#ifdef SCHEDULE
    IF lSchedule .AND. lAutoClean
       Aeval( aCleanFiles, {|e| FileDelete(e[2], e[3])} )
       cStatusMsg := "Space Cleaned: " + ltrim(str(round(nTotal / 1024, 0)))+"k"
@@ -889,14 +889,14 @@ STATIC PROCEDURE ScanNow()
       ENDIF
    ENDIF
    IF IsWindowDefined( Form_2 )
-      #endif
+#endif
       Form_2.StatusBar.Item(1) := cStatusMsg
       Form_2.Tab_1.Value := 1
       Form_2.Grid_1.Value := {1}
       Form_2.Grid_1.Setfocus
-      #ifdef SCHEDULE
+#ifdef SCHEDULE
    ENDIF
-   #endif
+#endif
 
    RETURN
 
@@ -915,26 +915,26 @@ STATIC FUNCTION FindFiles(cFileMask, cPath, aResult)
       aResult := {}
    ENDIF
 
-   #ifdef SCHEDULE
+#ifdef SCHEDULE
    IF IsWindowDefined( Form_2 )
-      #endif
+#endif
       Form_2.StatusBar.Item(1) := cPath + "\"
-      #ifdef SCHEDULE
+#ifdef SCHEDULE
    ENDIF
-   #endif
+#endif
 
    IF Len( aFindMask ) > 0
 
       Aeval( aFindMask, { |e| Aadd( aResult, {e[1], cPath + "\", ltrim(str(round(e[2] / 1024, 0)))+"k", e[2]} ), nTotal += e[2] } )
 
-      #ifdef SCHEDULE
+#ifdef SCHEDULE
       IF IsWindowDefined( Form_2 )
-         #endif
+#endif
          Aeval( aFindMask, { |e| n := e[1], if( Empty(Ascan(aCleanFiles, {|t| t[2] == n .and. t[3] == cPath + "\"})), ;
             Form_2.Grid_1.AddItem( {0, e[1], cPath + "\", ltrim(str(round(e[2] / 1024, 0)))+"k"} ), nTotal -= e[2] ) } )
-         #ifdef SCHEDULE
+#ifdef SCHEDULE
       ENDIF
-      #endif
+#endif
 
    ENDIF
 

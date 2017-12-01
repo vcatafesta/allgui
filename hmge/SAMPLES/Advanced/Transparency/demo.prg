@@ -79,8 +79,8 @@ FUNCTION Slider_Change
 
    RETURN NIL
 
-   #define GWL_EXSTYLE   (-20)
-   #define WS_EX_LAYERED   524288
+#define GWL_EXSTYLE   (-20)
+#define WS_EX_LAYERED   524288
 
 PROCEDURE RemoveTransparency( hWnd )
 

@@ -987,11 +987,11 @@ STATIC FUNCTION ErasePropSheet( hWnd )
 
       mVar := '_' + _HMG_aFormNames[ i ]
       IF Type ( mVar ) != 'U'
-         #ifdef _ZEROPUBLIC_
+#ifdef _ZEROPUBLIC_
          __mvPut ( mVar, 0 )
-         #else
+#else
          __mvXRelease( mVar )
-         #endif
+#endif
       ENDIF
 
       _HMG_aFormDeleted[ i ]   := .T.

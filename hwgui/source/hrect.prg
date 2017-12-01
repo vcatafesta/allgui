@@ -22,7 +22,7 @@ CLASS HRect INHERIT HControl
 
    METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle ) CLASS HRect
 
@@ -70,7 +70,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Paint( lpDis )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor ) CLASS HRect_Line
 
@@ -123,7 +123,7 @@ CLASS HShape INHERIT HControl
    METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
       nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle )  //, bClick, bDblClick)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nBorder, nCurvature, ;
       nbStyle, nfStyle, tcolor, bcolor, bSize, bInit, nBackStyle ) CLASS HShape
@@ -140,7 +140,7 @@ CLASS HLContainer INHERIT HControl
 
    METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit )  //, bClick, bDblClick)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, nStyle, bSize, lnoBorder, bInit ) CLASS HLContainer
 
@@ -173,7 +173,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    //METHOD Refresh() INLINE hwg_Sendmessage( ::handle, WM_PAINT, 0, 0 ), hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor, ncStyle, ;
       lnoBorder, nBorder, nCurvature, nbStyle, nfStyle, bInit, nBackStyle )  CLASS HDrawShape
@@ -319,7 +319,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Visible( lVisibled ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSize,;
       lnoBorder, bInit, nBackStyle, tcolor, bcolor, bLoad, bRefresh, bOther) CLASS HContainer  //, bClick, bDblClick)

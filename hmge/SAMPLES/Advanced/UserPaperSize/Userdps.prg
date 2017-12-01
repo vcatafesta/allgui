@@ -141,9 +141,9 @@ STATIC FUNCTION closeprinter
 
    RETURN NIL
 
-   #define FORM_USER       0
-   #define FORM_BUILTIN    1
-   #define FORM_PRINTER    2
+#define FORM_USER       0
+#define FORM_BUILTIN    1
+#define FORM_PRINTER    2
 
 FUNCTION GetDataForm
 

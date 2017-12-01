@@ -3,7 +3,7 @@
 
 FUNC ExprValid(;
       xExpress,;    // Expression itself; strg or array or ';' delimited strg list
-   cExcpType )   // Excepted type
+      cExcpType )   // Excepted type
 
    LOCA cRVal    := '',;
       lValid   := .F.,;
@@ -43,9 +43,9 @@ FUNC ExprValid(;
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    FUNC GFUComOpts( ;            // Get From User Command Options
-      aValues,;
+         aValues,;
          cComName,;   // (Caller) Command Name
-      aOptCodes )  // Options Codes
+         aOptCodes )  // Options Codes
 
       LOCA aRVal     := {},;
          aControls := {},;
@@ -71,20 +71,20 @@ FUNC ExprValid(;
          c1Value
 
       LOCA aCPStru   := { { "OFN", ' File Name'  } ,;   //  1. Output File Name
-      { "EXP", ' Expression' } ,;   //  2. Expression
-      { "FLD", 'FIELD'       } ,;   //  3. ( Single ) Field
-      { "ELS", 'Expressions' } ,;   //  4. Expressions List
-      { "FLS", 'Fields'      } ,;   //  5. Field list
-      { "WTH", 'WITH'        } ,;   //  6. WITH
-      { "FOR", 'FOR'         } ,;   //  7. FOR
-      { "DRH", { 'Deleted Mark', 'Record No', 'Heading' } },;   //  8. DeleteMark, RecordNos, Heading
-      { "UND", { 'UNIQUE', 'DESCENDING' } },;                   //  9. Unique, Descending
-      { "CND", 'Condition', { '','FOR','WHILE' } } ,;          //  10. Condition ( FOR/WHILE )
-      { "SCP", 'Scope',     { '','ALL', 'REST', 'NEXT', 'RECORD' } },;   // 11. Scope ( ALL, REST, NEXT n, RECORD n )
-      { "TFT", 'Target File Type', { 'Table', 'SDF', 'DELIMITED', 'DELIMITED WITH BLANK', 'DELIMITED WITH' }   },;     // 12. I/O Type ( DBF, SDF, DLMTD, DLMTD WITH ) , 'SPECIAL' iþi: burasý karýþýk geldi, menüye alýndý 8507
-      { "SFN", ' File Name'  } ,;   //  13. Source File Name
-      { "SFT", 'Source File Type', { 'Table', 'SDF', 'DELIMITED', 'DELIMITED WITH BLANK', 'DELIMITED WITH' }   },;     // 14. I/O Type ( DBF, SDF, DLMTD, DLMTD WITH )
-      { "KLS", 'Key(s)'      } }   //  15. Key list
+         { "EXP", ' Expression' } ,;   //  2. Expression
+         { "FLD", 'FIELD'       } ,;   //  3. ( Single ) Field
+         { "ELS", 'Expressions' } ,;   //  4. Expressions List
+         { "FLS", 'Fields'      } ,;   //  5. Field list
+         { "WTH", 'WITH'        } ,;   //  6. WITH
+         { "FOR", 'FOR'         } ,;   //  7. FOR
+         { "DRH", { 'Deleted Mark', 'Record No', 'Heading' } },;   //  8. DeleteMark, RecordNos, Heading
+         { "UND", { 'UNIQUE', 'DESCENDING' } },;                   //  9. Unique, Descending
+         { "CND", 'Condition', { '','FOR','WHILE' } } ,;          //  10. Condition ( FOR/WHILE )
+         { "SCP", 'Scope',     { '','ALL', 'REST', 'NEXT', 'RECORD' } },;   // 11. Scope ( ALL, REST, NEXT n, RECORD n )
+         { "TFT", 'Target File Type', { 'Table', 'SDF', 'DELIMITED', 'DELIMITED WITH BLANK', 'DELIMITED WITH' }   },;     // 12. I/O Type ( DBF, SDF, DLMTD, DLMTD WITH ) , 'SPECIAL' iþi: burasý karýþýk geldi, menüye alýndý 8507
+         { "SFN", ' File Name'  } ,;   //  13. Source File Name
+         { "SFT", 'Source File Type', { 'Table', 'SDF', 'DELIMITED', 'DELIMITED WITH BLANK', 'DELIMITED WITH' }   },;     // 14. I/O Type ( DBF, SDF, DLMTD, DLMTD WITH )
+         { "KLS", 'Key(s)'      } }   //  15. Key list
 
       DEFINE WINDOW frmComOpts AT 0, 0 WIDTH 448 HEIGHT 481 TITLE cCFTitl MODAL
 
@@ -487,7 +487,7 @@ FUNC ExprValid(;
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
       PROC CoOpAply( ;                          // Command Options, Apply
-         aValues,;
+            aValues,;
             aControls )
 
          LOCA nLineNo  :=  0,;
@@ -528,7 +528,7 @@ FUNC ExprValid(;
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          FUNC CoOpChk1Exp( ;                       // Command Options, Check 1 Expression
-            aControls,;
+               aControls,;
                cCtrNam )
 
             LOCA cCtrTyp   := LEFT( cCtrNam, 3 ),;
@@ -538,8 +538,8 @@ FUNC ExprValid(;
                lRVal     := .T.,;
                cErrorMes := '',;
                cAsCtrNam := '',;    // Associated Control Name
-            nAsCtrVal := 0,;     // Associated Control Value  ( Always Numeric )
-            x1Value
+               nAsCtrVal := 0,;     // Associated Control Value  ( Always Numeric )
+               x1Value
 
             IF ! ( cCOpTyp $ "DRHFLDELSSFTTFTUNDWTH" ) .AND. LOWE( cCtrTyp) == 'txb'
 
@@ -616,7 +616,7 @@ FUNC ExprValid(;
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
             PROC CoOpRVal(;                           // Make Return Value for GFUComOpts()
-               aValues,;
+                  aValues,;
                   aControls )
 
                LOCA nLineNo := 0,;
@@ -654,7 +654,7 @@ FUNC ExprValid(;
                      x1Value
 
                   LOCA aSFTDpCs := { "cmb_CND03" ,;    // SFT Dependent controls ( paliative ! )
-                  "txb_CND03" ,;
+                     "txb_CND03" ,;
                      "cmb_SCP04" ,;
                      "txb_SCP04" },;
                      c1CtrNam := '',;
@@ -780,9 +780,9 @@ FUNC ExprValid(;
                   *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                   PROC CoOp1Item( ;            // Make 1 Item ( Control ) for GFUComOpts()
-                     cCntrType,;  // Control type
-                     cCntrName,;  // Control name
-                     nRow     ,;
+                        cCntrType,;  // Control type
+                        cCntrName,;  // Control name
+                        nRow     ,;
                         nCol     ,;
                         nWidth   ,;
                         nHeigth  ,;
@@ -864,7 +864,7 @@ FUNC ExprValid(;
                      *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                      FUNC GFUFldLst(;               // Get From User Field List ( as String )
-                        cDelimiter )
+                           cDelimiter )
 
                         LOCA cRVal   := '',;
                            aFldLst := FldNArry()
@@ -882,8 +882,8 @@ FUNC ExprValid(;
                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                         FUNC Cond2Exps(;              // Conditions ( & scopes ) to Expressions
-                           aScopes,;    // Scopes
-                           aCondits )   // Conditions
+                              aScopes,;    // Scopes
+                              aCondits )   // Conditions
 
                            LOCA aRVal     := {},;
                               cForClaus := '',;
@@ -952,7 +952,7 @@ FUNC ExprValid(;
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                               FUNC FNamValid( ;                          // Validity Check for Output or Input File Name
-                                 cOFName,;
+                                    cOFName,;
                                     aControls,;
                                     cCtrNam,;
                                     lOutput )
@@ -1015,8 +1015,8 @@ FUNC ExprValid(;
                                  *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                  FUNC GFUKFList( ;          // Key Field List ( for SORT )
-                                    cCFList,;  // Current Field List
-                                    cFFList )  // Full Field List
+                                       cCFList,;  // Current Field List
+                                       cFFList )  // Full Field List
 
                                     LOCA cRVal     := '',;
                                        aFFldList := Lst2Arr( cFFList, ',' ),;
@@ -1089,7 +1089,7 @@ FUNC ExprValid(;
                                     *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                     FUNC KFL2Arr( ;                           // Key field list to array
-                                       cKFList,;
+                                          cKFList,;
                                           aFFldList )
 
                                        LOCA aRVal    := {},;
@@ -1099,7 +1099,7 @@ FUNC ExprValid(;
                                           c1Switch := '',;
                                           c2Switch := '',;
                                           l1Order  := .T.,;  // .T. : Ascending, .F. : Descending
-                                       l1Case   := .T.    // .T. : Ignore, .F. : Apply
+                                          l1Case   := .T.    // .T. : Ignore, .F. : Apply
 
                                        cKFList := UPPER( cKFList )
 
@@ -1124,12 +1124,12 @@ FUNC ExprValid(;
                                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                        FUNC AplyKLst( ;                          // Make Return Value for GFUKFList()
-                                          aFFldList )
+                                             aFFldList )
 
                                           LOCA nCBItCo := frmKFList.grdKFList.ItemCount,;  // Grid\ComboBox\Item Count
-                                          nCBIInd := 0,;                              // Grid\ComboBox\Item indice
-                                          cKFList := '',;                             // Key fields list
-                                          nFldNum :=  0,;
+                                             nCBIInd := 0,;                              // Grid\ComboBox\Item indice
+                                             cKFList := '',;                             // Key fields list
+                                             nFldNum :=  0,;
                                              cFldNam := '',;
                                              lOrdAsc := .F.,;
                                              lCasSen := .F.,;

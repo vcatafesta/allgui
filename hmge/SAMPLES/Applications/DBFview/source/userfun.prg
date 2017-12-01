@@ -118,43 +118,43 @@ FUNCTION _BrowseDelete ( ControlName , ParentForm , z )
 
    RETURN NIL
 
-   #define WM_COPYDATA           74
-   #define CDM_OPENDBF         2000
+#define WM_COPYDATA           74
+#define CDM_OPENDBF         2000
 
-   #define WM_MENUSELECT   287
-   #define WM_NOTIFY   78
+#define WM_MENUSELECT   287
+#define WM_NOTIFY   78
 
-   #define MCN_FIRST           -750
-   #define MCN_LAST            -759
-   #define MCN_SELCHANGE       (MCN_FIRST + 1)
-   #define MCN_SELECT          (MCN_FIRST + 4)
+#define MCN_FIRST           -750
+#define MCN_LAST            -759
+#define MCN_SELCHANGE       (MCN_FIRST + 1)
+#define MCN_SELECT          (MCN_FIRST + 4)
 
-   #define NM_CLICK   (-2)
-   #define NM_DBLCLK   (-3)
-   #define NM_SETFOCUS      -7
-   #define NM_KILLFOCUS   (-8)
+#define NM_CLICK   (-2)
+#define NM_DBLCLK   (-3)
+#define NM_SETFOCUS      -7
+#define NM_KILLFOCUS   (-8)
 
-   #define LVN_ITEMCHANGED   (-101)
-   #define LVN_COLUMNCLICK   (-108)
-   #define LVN_BEGINDRAG   (-109)
+#define LVN_ITEMCHANGED   (-101)
+#define LVN_COLUMNCLICK   (-108)
+#define LVN_BEGINDRAG   (-109)
 
-   #define LVN_GETDISPINFO        (-150)
-   #define LVN_KEYDOWN   (-155)
+#define LVN_GETDISPINFO        (-150)
+#define LVN_KEYDOWN   (-155)
 
-   #define DTN_FIRST   (-760)
-   #define DTN_DATETIMECHANGE (DTN_FIRST+1)
+#define DTN_FIRST   (-760)
+#define DTN_DATETIMECHANGE (DTN_FIRST+1)
 
-   #define   TBN_FIRST   (-700)
-   #define TBN_DROPDOWN   (TBN_FIRST-10)
-   #define TTN_FIRST               (-520)       // tooltips
-   #ifdef UNICODE
-   #define TTN_NEEDTEXT           (TTN_FIRST - 10)
-   #else
-   #define TTN_NEEDTEXT            (TTN_FIRST - 0)
-   #endif
-   #define EN_SELCHANGE      1794
+#define   TBN_FIRST   (-700)
+#define TBN_DROPDOWN   (TBN_FIRST-10)
+#define TTN_FIRST               (-520)       // tooltips
+#ifdef UNICODE
+#define TTN_NEEDTEXT           (TTN_FIRST - 10)
+#else
+#define TTN_NEEDTEXT            (TTN_FIRST - 0)
+#endif
+#define EN_SELCHANGE      1794
 
-   #define MsgYesNo( c, t ) MsgYesNo( c, t, , , .f. )
+#define MsgYesNo( c, t ) MsgYesNo( c, t, , , .f. )
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 

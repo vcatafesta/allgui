@@ -313,6 +313,7 @@ FUNCTION BT_DrawRectangle (hDC, Row, Col, Width, Height, aColorRGBLine, nWidthLi
 
    LOCAL aPointX := Array (5)
    LOCAL aPointY := Array (5)
+
    aPointX[1]:= Col;          aPointY[1]:= Row
    aPointX[2]:= Col+Width;    aPointY[2]:= Row
    aPointX[3]:= Col+Width;    aPointY[3]:= Row+Height
@@ -787,17 +788,17 @@ FUNCTION BT_HMGGetImage (cFormName, cControlName)
 
    LOCAL k, hBitmap := 0
 
-   #ifndef __HMG__
+#ifndef __HMG__
    MEMVAR _HMG_SYSDATA
 
-   #endif
+#endif
    k := GetControlIndex (cControlName, cFormName)
    IF k > 0 .AND. GetControlType (cControlName, cFormName) == "IMAGE"
-      #ifdef __HMG__    // HMG Extended
+#ifdef __HMG__    // HMG Extended
       hBitmap := _HMG_aControlContainerHandle [k]
-      #else             // HMG Official
+#else             // HMG Official
       hBitmap := _HMG_SYSDATA [37, k]
-      #endif
+#endif
    ENDIF
 
    RETURN hBitmap
@@ -812,10 +813,10 @@ FUNCTION BT_HMGSetImage (cFormName, cControlName, hBitmap, lReleasePreviousBitma
 
    LOCAL hWnd, k
 
-   #ifndef __HMG__
+#ifndef __HMG__
    MEMVAR _HMG_SYSDATA
 
-   #endif
+#endif
    IF ValType (lReleasePreviousBitmap) <> "L"
       lReleasePreviousBitmap := .T.
    ENDIF
@@ -823,28 +824,28 @@ FUNCTION BT_HMGSetImage (cFormName, cControlName, hBitmap, lReleasePreviousBitma
    k := GetControlIndex (cControlName, cFormName)
    IF k > 0 .AND. GetControlType (cControlName, cFormName) == "IMAGE"
 
-      #ifdef __HMG__    // HMG Extended
+#ifdef __HMG__    // HMG Extended
       IF _HMG_aControlContainerHandle [k] <> 0 .AND. lReleasePreviousBitmap == .T.
          BT_BitmapRelease (_HMG_aControlContainerHandle [k])
       ENDIF
       _HMG_aControlContainerHandle [k] := hBitmap
       _HMG_aControlWidth  [k] := BT_BitmapWidth  (hBitmap)
       _HMG_aControlHeight [k] := BT_BitmapHeight (hBitmap)
-      #else             // HMG Official
+#else             // HMG Official
       IF _HMG_SYSDATA [37, k] <> 0 .AND. lReleasePreviousBitmap == .T.
          BT_BitmapRelease (_HMG_SYSDATA [37, k])
       ENDIF
       _HMG_SYSDATA [37, k] := hBitmap
       _HMG_SYSDATA [20, k] := BT_BitmapWidth  (hBitmap)
       _HMG_SYSDATA [21, k] := BT_BitmapHeight (hBitmap)
-      #endif
+#endif
 
       hWnd := GetControlHandle (cControlName, cFormName)
-      #define _STM_SETIMAGE_ 0x0172
-      #define _IMAGE_BITMAP_ 0
+#define _STM_SETIMAGE_ 0x0172
+#define _IMAGE_BITMAP_ 0
       SendMessage (hWnd, _STM_SETIMAGE_, _IMAGE_BITMAP_, hBitmap)
-      #undef _IMAGE_BITMAP_
-      #undef _STM_SETIMAGE_
+#undef _IMAGE_BITMAP_
+#undef _STM_SETIMAGE_
    ENDIF
 
    RETURN NIL

@@ -203,9 +203,9 @@ STATIC PROCEDURE SaveCfg()
 
    RETURN
 
-   #define GW_HWNDFIRST 0
-   #define GW_HWNDNEXT  2
-   #define GW_OWNER     4
+#define GW_HWNDFIRST 0
+#define GW_HWNDNEXT  2
+#define GW_OWNER     4
 
 FUNCTION lCheckTasks( hOwnWnd )
 

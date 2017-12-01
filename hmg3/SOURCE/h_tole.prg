@@ -62,7 +62,7 @@ CREATE CLASS TOLEAUTO FROM WIN_OLEAUTO
    METHOD OleValueExactEqual( xArg )      OPERATOR "=="
    METHOD OleValueNotEqual( xArg )        OPERATOR "!="
 
-ENDCLASS
+   ENDCLASS
 
 METHOD hObj( xOle ) CLASS TOLEAUTO
 

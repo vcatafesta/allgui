@@ -261,8 +261,8 @@ STATIC FUNCTION m_about()
       version() + CRLF + ;
       substr(MiniGuiVersion(), 1, 38), "About", IDI_MAIN, .f.)
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 STATIC PROCEDURE MoveActiveWindow(hWnd)
 
@@ -571,4 +571,4 @@ HB_FUNC( QHTM_FORMCALLBACK )
 
 #pragma ENDDUMP
 
-   #include "h_qhtm.prg"
+#include "h_qhtm.prg"

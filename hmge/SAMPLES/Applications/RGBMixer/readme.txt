@@ -19,7 +19,7 @@ by pressing Enter or the "Copy to Clipboard" Main menu item.
 
 You can choose between 3 Color Modes in the "Options" Menu.
 For easier tuning a stepping of 5 is the default, but you can choose stepping 1
-and stepping 51 (Netscape 216 color palette). 
+and stepping 51 (Netscape 216 color palette).
 
 The color last tuned is saved into a "RGBMixer.ini" file inside the
 current directory.

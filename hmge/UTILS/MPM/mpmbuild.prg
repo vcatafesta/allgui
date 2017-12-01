@@ -67,4 +67,3 @@ FUNCTION AddQuote(cInPath)
    ENDIF
 
    RETURN cOutPath
-

@@ -71,7 +71,7 @@ CLASS VAR cPrinterName SHARED  INIT Nil
    DATA lPageStart  INIT .F.
    DATA lFirstLine
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
 
@@ -102,13 +102,13 @@ METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWin
 
 METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 
-   #ifdef __LINUX__
+#ifdef __LINUX__
    LOCAL cFont := "monospace"
 
-   #else
+#else
    LOCAL cFont := "Lucida Console"
 
-   #endif
+#endif
    LOCAL aKoef := { 1, 1.22, 1.71, 2 }
    LOCAL nMode := 0, oFont, nWidth, nPWidth
 
@@ -291,18 +291,18 @@ METHOD PutCode( cLine ) CLASS HWinPrn
 
    STATIC aCodes := {   ;
       { Chr( 27 ) + '@', .F. , .F. , 6, .F. , .F. , .F. },  ;     /* Reset */
-   { Chr( 27 ) + 'M', .T. , , , , , },  ;     /* Elite */
-   { Chr( 15 ), , .T. , , , , },      ;     /* Cond */
-   { Chr( 18 ), , .F. , , , , },      ;     /* Cancel Cond */
-   { Chr( 27 ) + '0', , , 8, , , },    ;     /* 8 lines per inch */
-   { Chr( 27 ) + '2', , , 6, , , },    ;     /* 6 lines per inch ( standard ) */
-   { Chr( 27 ) + '-1', , , , , , .T. }, ;     /* underline */
-   { Chr( 27 ) + '-0', , , , , , .F. }, ;     /* cancel underline */
-   { Chr( 27 ) + '4', , , , , .T. , },  ;     /* italic */
-   { Chr( 27 ) + '5', , , , , .F. , },  ;     /* cancel italic */
-   { Chr( 27 ) + 'G', , , , .T. , , },   ;     /* bold */
-   { Chr( 27 ) + 'H', , , , .F. , , }   ;     /* cancel bold */
-   }
+      { Chr( 27 ) + 'M', .T. , , , , , },  ;     /* Elite */
+      { Chr( 15 ), , .T. , , , , },      ;     /* Cond */
+      { Chr( 18 ), , .F. , , , , },      ;     /* Cancel Cond */
+      { Chr( 27 ) + '0', , , 8, , , },    ;     /* 8 lines per inch */
+      { Chr( 27 ) + '2', , , 6, , , },    ;     /* 6 lines per inch ( standard ) */
+      { Chr( 27 ) + '-1', , , , , , .T. }, ;     /* underline */
+      { Chr( 27 ) + '-0', , , , , , .F. }, ;     /* cancel underline */
+      { Chr( 27 ) + '4', , , , , .T. , },  ;     /* italic */
+      { Chr( 27 ) + '5', , , , , .F. , },  ;     /* cancel italic */
+      { Chr( 27 ) + 'G', , , , .T. , , },   ;     /* bold */
+      { Chr( 27 ) + 'H', , , , .F. , , }   ;     /* cancel bold */
+      }
    LOCAL i, sLen := Len( aCodes ), c := Left( cLine, 1 )
 
    IF !Empty( c ) .AND. Asc( cLine ) < 32

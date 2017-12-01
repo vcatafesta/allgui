@@ -617,7 +617,7 @@ STATIC FUNCTION pdfClosePage()                                                /*
       LTRIM(STR(t_aReport[ REPORTOBJ ] - 1)) + " 0 obj" + CRLF + ;
       "<<"+CRLF+;
       "/ColorSpace << /DeviceRGB /DeviceGray >>" + CRLF + ; //version 0.01
-   "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
+      "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
 
    IF HMG_LEN( t_aReport[ PAGEFONTS ] ) > 0
       cTemp += CRLF + ;
@@ -1840,13 +1840,13 @@ FUNCTION pdfCreateHeader( _file, _size, _orient, _lpi, _width )
    LOCAL ;
       t_aReportStyle := {                                                  ;
       { 1,     2,   3,   4,    5,     6    }, ; //"Default"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  64.0  }, ; //"P6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0,  85.35 }, ; //"P8"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  48.9  }, ; //"L6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0,  65.2  }, ; //"L8"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  82.0  }, ; //"P6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0, 109.35 }  ; //"P8"
-   }
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  64.0  }, ; //"P6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0,  85.35 }, ; //"P8"
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  48.9  }, ; //"L6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0,  65.2  }, ; //"L8"
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  82.0  }, ; //"P6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0, 109.35 }  ; //"P8"
+      }
    LOCAL nStyle := 1, nAdd := 0.00
 
    DEFAULT _size to t_aReport[ PAGESIZE ]

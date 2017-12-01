@@ -164,14 +164,17 @@ FUNCTION MsgAbout()
       padc("Copying is allowed!", 30), "About..." )
 
 FUNCTION RadToDeg(x); RETURN 180.0*x/PI()
+
    /*
    */
 
 FUNCTION DegToRad(x); RETURN x*PI()/180.0
+
    /*
    */
 
 FUNCTION Signo(nValue); RETURN if(nValue<0, -1.0, 1.0)
+
    /*
    */
 

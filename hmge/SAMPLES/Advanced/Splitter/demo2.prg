@@ -58,7 +58,7 @@ FUNCTION main()
    RETURN NIL
 
    // FUNCTION App_OnEvents( hwnd, msg, wParam, lParam )
-   #translate $_ => ( hwnd, msg, wParam, lParam )
+#translate $_ => ( hwnd, msg, wParam, lParam )
 
 FUNCTION App_OnEvents$_
 

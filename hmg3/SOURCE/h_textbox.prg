@@ -277,11 +277,11 @@ FUNCTION _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width
 
       c := HB_USUBSTR ( InputMask , i , 1 )
 
-      #ifdef COMPILE_HMG_UNICODE
+#ifdef COMPILE_HMG_UNICODE
       IF c != '9' .and.  c != '$' .and. c != '*' .and. c !='.' .and. c != ','  .and. c != ' ' .and. c != '€' .and. c != 'â‚¬'
-         #else
+#else
          IF c != '9' .and.  c != '$' .and. c != '*' .and. c !='.' .and. c != ','  .and. c != ' ' .and. c != '€'
-            #endif
+#endif
             MsgHMGError("@...TEXTBOX: Wrong InputMask Definition" )
          ENDIF
 

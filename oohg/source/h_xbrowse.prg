@@ -266,7 +266,7 @@ CLASS TXBrowse FROM TGrid
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aHeaders, aWidths, ;
       aFields, WorkArea, uValue, AllowDelete, lock, novscroll, ;
@@ -978,20 +978,20 @@ METHOD ToExcel( cTitle, nColFrom, nColTo ) CLASS TXBrowse
       nColTo := Len( ::aHeaders )
    ENDIF
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( oExcel := win_oleCreateObject( "Excel.Application" ) ) == Nil
       MsgStop( "Error: MS Excel not available. [" + win_oleErrorText()+ "]" )
 
       RETURN Self
    ENDIF
-   #else
+#else
    oExcel := TOleAuto():New( "Excel.Application" )
    IF Ole2TxtError() != "S_OK"
       MsgStop( "Excel not found", "Error" )
 
       RETURN Self
    ENDIF
-   #endif
+#endif
 
    oExcel:WorkBooks:Add()
    oSheet := oExcel:ActiveSheet()
@@ -1066,20 +1066,20 @@ METHOD ToOpenOffice( cTitle, nColFrom, nColTo ) CLASS TXBrowse
    ENDIF
 
    // open service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( oSerMan := win_oleCreateObject( "com.sun.star.ServiceManager" ) ) == Nil
       MsgStop( "Error: OpenOffice not available. [" + win_oleErrorText()+ "]" )
 
       RETURN Self
    ENDIF
-   #else
+#else
    oSerMan := TOleAuto():New( "com.sun.star.ServiceManager" )
    IF Ole2TxtError() != "S_OK"
       MsgStop( "OpenOffice not found", "Error" )
 
       RETURN Self
    ENDIF
-   #endif
+#endif
 
    // open desktop service
    IF ( oDesk := oSerMan:CreateInstance( "com.sun.star.frame.Desktop" ) ) == Nil
@@ -1662,13 +1662,13 @@ METHOD SetScrollPos( nPos, VScroll ) CLASS TXBrowse
          aPosition := { ::oWorkArea:OrdKeyNo(), ::oWorkArea:OrdKeyCount() }
       ENDIF
       nPos := nPos * aPosition[ 2 ] / VScroll:RangeMax
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       IF ! ::lDescending
          ::oWorkArea:OrdKeyGoTo( nPos )
       ELSE
          ::oWorkArea:OrdKeyGoTo( aPosition[ 2 ] + 1 - nPos )
       ENDIF
-      #else
+#else
       IF nPos < ( aPosition[ 2 ] / 2 )
          ::TopBottom( GO_TOP )
          ::DbSkip( MAX( nPos - 1, 0 ) )
@@ -1676,7 +1676,7 @@ METHOD SetScrollPos( nPos, VScroll ) CLASS TXBrowse
          ::TopBottom( GO_BOTTOM )
          ::DbSkip( - MAX( aPosition[ 2 ] - nPos - 1, 0 ) )
       ENDIF
-      #endif
+#endif
       ::Refresh( , .T. )
       ::DoChange()
    ENDIF
@@ -2794,7 +2794,7 @@ CLASS ooHGRecord
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD IsTableEmpty CLASS ooHGRecord
 
@@ -2934,7 +2934,7 @@ CLASS TVirtualField
 
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( xSource, xDefault ) CLASS TVirtualField
 
@@ -3125,7 +3125,7 @@ CLASS TXBrowseByCell FROM TXBrowse
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define3( aValue ) CLASS TXBrowseByCell
 

@@ -89,36 +89,36 @@ FUNCTION DebuggerMessageBox( ... )
 
    RETURN nRet
 
-   #define SB_HORZ   0
-   #define SB_VERT   1
+#define SB_HORZ   0
+#define SB_VERT   1
 
-   #define TAB_CODE     1
-   #define TAB_STACK    2
-   #define TAB_WATCH    3
-   #define TAB_CALC     4
-   #define TAB_VARS     5
-   #define TAB_AREAS    6
-   #define TAB_CONFIG   7
-   #define TAB_ABOUT    8
+#define TAB_CODE     1
+#define TAB_STACK    2
+#define TAB_WATCH    3
+#define TAB_CALC     4
+#define TAB_VARS     5
+#define TAB_AREAS    6
+#define TAB_CONFIG   7
+#define TAB_ABOUT    8
 
-   #define BTN_NONE   0
-   #define BTN_BP     1
-   #define BTN_TP     2
-   #define BTN_WP     3
-   #define BTN_EDIT   4
+#define BTN_NONE   0
+#define BTN_BP     1
+#define BTN_TP     2
+#define BTN_WP     3
+#define BTN_EDIT   4
 
-   #define ID_animate         1
-   #define ID_step            2
-   #define ID_trace           3
-   #define ID_go              4
-   #define ID_tocursor        5
-   #define ID_next            6
-   #define ID_pause           7
-   #define ID_breakpoint      8
-   #define ID_tracepoint      9
-   #define ID_watchpoint      10
-   #define ID_configuration   11
-   #define ID_quit            12
+#define ID_animate         1
+#define ID_step            2
+#define ID_trace           3
+#define ID_go              4
+#define ID_tocursor        5
+#define ID_next            6
+#define ID_pause           7
+#define ID_breakpoint      8
+#define ID_tracepoint      9
+#define ID_watchpoint      10
+#define ID_configuration   11
+#define ID_quit            12
 
 PROCEDURE ProcInitGUIDebugger( lCreate )
 
@@ -140,13 +140,13 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
       lOldMainFirst := HMG_ActivateMainWindowFirst( .F. )
 
-      #define _HMG_DEBUGGER_MSG_   "Wait while the debugger is loaded ..." + hb_Eol()
+#define _HMG_DEBUGGER_MSG_   "Wait while the debugger is loaded ..." + hb_Eol()
       HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + "( DEFINE WINDOW )" )
 
       SET FONT TO "Calibri", 11
 
-      #define MIN_WIDTH  650
-      #define MIN_HEIGHT 550
+#define MIN_WIDTH  650
+#define MIN_HEIGHT 550
 
       DEFINE WINDOW _HMG_FormDebugger;
             AT 0,0;
@@ -354,7 +354,7 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
                _HMG_FormDebugger.Grid_Calc.PaintDoubleBuffer := .T.
 
-               #define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
+#define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
 
                @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial"  SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
                   TOOLTIP TOOLTIP_CALC
@@ -599,7 +599,7 @@ PROCEDURE ViewVars()
 
 PROCEDURE DisplayVars ( cVarName, xVarValue, aColor )
 
-   #define _GRIDNAME_ "GridVars2"
+#define _GRIDNAME_ "GridVars2"
    LOCAL cFormName := "_HMG_dbgVar_" + cVarName
    LOCAL cGridName := _GRIDNAME_
    LOCAL cTitle, nRow, aInfo
@@ -1482,10 +1482,10 @@ FUNCTION HMG_ShowEventMonitor()
 
    // TOP/BOTTOM MONITOR
 
-   #define HWND_NOTOPMOST   -2
-   #define HWND_TOPMOST     -1
-   #define HWND_TOP          0
-   #define HWND_BOTTOM       1
+#define HWND_NOTOPMOST   -2
+#define HWND_TOPMOST     -1
+#define HWND_TOP          0
+#define HWND_BOTTOM       1
 
    IF HMG_GetLastVirtualKeyUp() == VK_F9 .AND. HMG_VirtualKeyIsPressed( VK_ALT ) == .T.   // Set Top-Bottom Monitor
       HMG_CleanLastVirtualKeyUp()   // avoid re-entry
@@ -1517,7 +1517,7 @@ FUNCTION HMG_ShowEventMonitor()
 
    RETURN NIL
 
-   #if 1
+#if 1
 
 PROCEDURE HMG_DebuggerWaitMessage( cMsg, cTitle )
 
@@ -1538,8 +1538,8 @@ PROCEDURE HMG_DebuggerWaitMessage( cMsg, cTitle )
             TOPMOST;
             CHILD
 
-         #define _CY    nHEIGHT()
-         #define _CX    nWIDTH()*2
+#define _CY    nHEIGHT()
+#define _CX    nWIDTH()*2
          @ _CY, _CX LABEL Label_1;
             VALUE  cMsg;
             WIDTH  _HMG_FormDebuggerMessage.ClientAreaWidth - _CX*2;
@@ -1608,9 +1608,10 @@ PROCEDURE HMG_DebuggerWaitMessage_SetProgressbar( nValue, nRangeMin, nRangeMax, 
 
    RETURN
 
-   #else
+#else
 
 PROCEDURE HMG_DebuggerWaitMessage(); RETURN
 
 PROCEDURE HMG_DebuggerWaitMessage_SetProgressbar(); RETURN
-   #endif
+
+#endif

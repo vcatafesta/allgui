@@ -101,14 +101,14 @@ CLASS HBMake_FileBase FROM FileMan
 
    message append METHOD appendLine( cline )
 
-ENDCLASS
+   ENDCLASS
 
-/* Method:  Init/New
-Params:  N/A
+   /* Method:  Init/New
+   Params:  N/A
 
-Returns: Self
-Purpose: Constructor
-*/
+   Returns: Self
+   Purpose: Constructor
+   */
 
 METHOD new( cName ) CLASS HBMake_FileBase
 

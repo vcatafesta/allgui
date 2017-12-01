@@ -208,10 +208,10 @@ STATIC FUNCTION ItemChar( aLine, aType )
 
    RETURN aRet
 
-   #ifndef __XHARBOUR__
-   #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
-   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-   #endif
+#ifndef __XHARBOUR__
+#xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
+#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+#endif
 
 STATIC FUNCTION FAR_XLS2DBF()
 

@@ -1,9 +1,9 @@
 #include <hmg.ch>
 
 PROCEDURE DrawBorder(;                             // Draw a border around any control
-   cPWinName,;      // Name of parent window
-   cControlName,;   // Name of control to be bordered
-   nPenWidth,;
+      cPWinName,;      // Name of parent window
+      cControlName,;   // Name of control to be bordered
+      nPenWidth,;
       aUpColor,;
       aDnColor,;
       nSpace )
@@ -58,10 +58,10 @@ PROCEDURE DrawBorder(;                             // Draw a border around any c
    nBordrHig := nControlHig + nSpace
 
    aCoords := { { nControlRow + nBordrHig, nBordrCol             },;  // Down left corner
-   { nBordrRow,               nBordrCol             },;  // Up left corner
-   { nBordrRow,               nControlCol + nBordrWid },;  // Up right corner
-   { nControlRow + nBordrHig, nControlCol + nBordrWid },;  // Down right corner
-   { nControlRow + nBordrHig, nBordrCol             } }  // Down left corner
+      { nBordrRow,               nBordrCol             },;  // Up left corner
+      { nBordrRow,               nControlCol + nBordrWid },;  // Up right corner
+      { nControlRow + nBordrHig, nControlCol + nBordrWid },;  // Down right corner
+      { nControlRow + nBordrHig, nBordrCol             } }  // Down left corner
 
    FOR nLineNo := 1 TO 4
 

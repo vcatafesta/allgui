@@ -37,13 +37,13 @@ STATIC PROCEDURE Win1_OnInit( hWnd )
       SetMenu( hWnd, hMenu )
    ENDIF
 
-   #if 0  // normal behavior
+#if 0  // normal behavior
    IF ! Empty( hAccel )
       SetAcceleratorTable( hWnd, hAccel )
    ENDIF
-   #else  // test behavior
+#else  // test behavior
    TestSomeFuncs( hAccel, hWnd )
-   #endif
+#endif
 
    RETURN
 
@@ -117,11 +117,11 @@ STATIC PROCEDURE TestSomeFuncs( hAccel, hWnd )
 
    RETURN
 
-   #define FALT        0x10
-   #define FCONTROL    0x08
-   #define FNOINVERT   0x02
-   #define FSHIFT      0x04
-   #define FVIRTKEY    1
+#define FALT        0x10
+#define FCONTROL    0x08
+#define FNOINVERT   0x02
+#define FSHIFT      0x04
+#define FVIRTKEY    1
 
 STATIC PROCEDURE ShowVirtKey( aAccel )
 

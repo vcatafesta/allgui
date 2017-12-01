@@ -17,23 +17,23 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "040904b0"
-	{
-		VALUE "FileDescription", "Simple MCI Player\000"
-		VALUE "FileVersion", "1.5.2.0"
-		VALUE "InternalName", "TrayPlayer\000"
-		VALUE "LegalCopyright", "Freeware 2003-2011\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "TrayPlayer.exe\000"
-		VALUE "CompanyName", "MiniGUI Team\000"
-		VALUE "ProductName", "MiniGUI Utility\000"
-		VALUE "ProductVersion", "1.5.0.0"
-		VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
-	}
+   BLOCK "040904b0"
+   {
+      VALUE "FileDescription", "Simple MCI Player\000"
+      VALUE "FileVersion", "1.5.2.0"
+      VALUE "InternalName", "TrayPlayer\000"
+      VALUE "LegalCopyright", "Freeware 2003-2011\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "TrayPlayer.exe\000"
+      VALUE "CompanyName", "MiniGUI Team\000"
+      VALUE "ProductName", "MiniGUI Utility\000"
+      VALUE "ProductVersion", "1.5.0.0"
+      VALUE "Comments", "Created by Grigory Filatov <gfilatov@inbox.ru>\000"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

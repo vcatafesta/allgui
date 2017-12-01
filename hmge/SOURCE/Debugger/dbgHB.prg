@@ -246,7 +246,7 @@ CLASS HMGDebugger
    METHOD GUIReleaseAllWindows()     INLINE   Eval( ::bGUIReleaseAllWindows )
    METHOD GUIMessageBox( ... )       INLINE   iif( ::lGUIShowMessageBox, Eval( ::bGUIMessageBox, ... ), NIL )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HMGDebugger
 
@@ -1034,7 +1034,7 @@ METHOD GetAreas() CLASS HMGDebugger
    LOCAL arr1[ 512 ], n, i, nAreas := 0, nAlias
    LOCAL aAreas := {}
 
-   #define WA_ITEMS  12
+#define WA_ITEMS  12
 
    FOR n := 1 TO 512
       IF ( ( n )->( Used() ) )
@@ -1135,7 +1135,7 @@ METHOD GetObjectInfo( cObjName, oObject, aObjRawValue ) CLASS HMGDebugger
    LOCAL xValue, cValType, cValue
    LOCAL arr := {}
 
-   #define _OBJ_SEP_   ":"
+#define _OBJ_SEP_   ":"
    aObjRawValue := {}
    IF ValType( oObject ) != "O"
       ::GUIMessageBox( "GetObjectInfo: Invalid data type ( ValType: " + ValType( oObject ) + " )" )   // GUI: message box info
@@ -1212,7 +1212,7 @@ STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
 
    RETURN xResult
 
-   #if 0
+#if 0
 
 STATIC FUNCTION __dbgObjSetValue( oObject, cVar, xValue )
 
@@ -1231,7 +1231,7 @@ STATIC FUNCTION __dbgObjSetValue( oObject, cVar, xValue )
    END SEQUENCE
 
    RETURN xValue
-   #endif
+#endif
 
 STATIC FUNCTION __dbgPathToArray( cList )
 
@@ -1382,7 +1382,7 @@ METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics
          FOR n := 1 TO Len( aVars )
             cName := aVars[ n ][ VAR_NAME ]
             m := AScan( aBVars, ; // Is there another var with this name ?
-            {| aVar | aVar[ VAR_NAME ] == cName .AND. Left( aVar[ VAR_TYPE ], 1 ) == "S" } )
+               {| aVar | aVar[ VAR_NAME ] == cName .AND. Left( aVar[ VAR_TYPE ], 1 ) == "S" } )
             IF m > 0
                aBVars[ m ] := aVars[ n ]
             ELSE

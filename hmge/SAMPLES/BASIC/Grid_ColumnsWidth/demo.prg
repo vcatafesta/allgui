@@ -62,8 +62,8 @@ FUNCTION UpdateStatus()
 
    RETURN NIL
 
-   #define HDN_ITEMCHANGINGA       (HDN_FIRST-0)
-   #define HDN_ITEMCHANGEDA        (HDN_FIRST-1)
+#define HDN_ITEMCHANGINGA       (HDN_FIRST-0)
+#define HDN_ITEMCHANGEDA        (HDN_FIRST-1)
 
 FUNCTION EventHandler(nHWnd, nMsg, nWParam, nLParam)
 

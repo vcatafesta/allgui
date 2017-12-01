@@ -145,13 +145,13 @@ FUNCTION _Getvalue ( ControlName, ParentForm , Index )
 
    DO CASE
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE T == "BROWSE"
 
       retval := _BrowseGetValue ( '' , '' , ix )
 
-      #endif
+#endif
 
    CASE T == "PROGRESSBAR"
 
@@ -339,11 +339,11 @@ FUNCTION _Getvalue ( ControlName, ParentForm , Index )
       retval := ListViewGetMultiSel (c)
 
    CASE T == "TOOLBUTTON"
-      #ifdef _NEW_MethodToolButtonChecked_
+#ifdef _NEW_MethodToolButtonChecked_
       retval := IsToolButtonChecked( _HMG_SYSDATA [ 26 ] [ ix ] ,  NIL , _HMG_SYSDATA [ 5 ] [ix] ) // ADD
-      #else
+#else
       retval := IsToolButtonChecked( _HMG_SYSDATA [ 26 ] [ ix ]  , _HMG_SYSDATA [  8 ] [ix] - 1)
-      #endif
+#endif
 
    ENDCASE
 
@@ -428,13 +428,13 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value , index )
 
    DO CASE
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE T == "BROWSE"
 
       _BrowseSetValue ( '' , '' , value , ix )
 
-      #endif
+#endif
 
    CASE T == "IPADDRESS"
 
@@ -689,11 +689,11 @@ FUNCTION _SetValue ( ControlName, ParentForm, Value , index )
       ENDIF
 
    CASE T == "TOOLBUTTON"
-      #ifdef _NEW_MethodToolButtonChecked_
+#ifdef _NEW_MethodToolButtonChecked_
       CheckToolButton( _HMG_SYSDATA [ 26 ] [ ix ]  , NIL , value , _HMG_SYSDATA [ 5 ] [ix] ) // ADD
-      #else
+#else
       CheckToolButton( _HMG_SYSDATA [ 26 ] [ ix ]  , _HMG_SYSDATA [  8 ] [ix] - 1 , value )
-      #endif
+#endif
 
    ENDCASE
 
@@ -1282,7 +1282,7 @@ FUNCTION _DisableControl ( ControlName , ParentForm )
 
    DO CASE
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE T == "BROWSE"
       DisableWindow ( c )
@@ -1290,7 +1290,7 @@ FUNCTION _DisableControl ( ControlName , ParentForm )
          DisableWindow ( _HMG_SYSDATA [  5 ][y] )
       ENDIF
 
-      #endif
+#endif
 
    CASE T == "TOOLBUTTON"
       _DisableToolBarButton ( ControlName , ParentForm )
@@ -1421,7 +1421,7 @@ FUNCTION _EnableControl ( ControlName,ParentForm )
 
    DO CASE
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE T == "BROWSE"
       EnableWindow ( c )
@@ -1429,7 +1429,7 @@ FUNCTION _EnableControl ( ControlName,ParentForm )
          EnableWindow ( _HMG_SYSDATA [  5 ][y] )
       ENDIF
 
-      #endif
+#endif
 
    CASE T == "TOOLBUTTON"
       _EnableToolBarButton ( ControlName , ParentForm )
@@ -1594,7 +1594,7 @@ FUNCTION _ShowControl ( ControlName,ParentForm )
 
                   ENDIF
 
-                  #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
                ELSEIF t == 'BROWSE'
 
@@ -1624,7 +1624,7 @@ FUNCTION _ShowControl ( ControlName,ParentForm )
 
                   ENDIF
 
-                  #endif
+#endif
 
                ELSE
 
@@ -1663,7 +1663,7 @@ FUNCTION _ShowControl ( ControlName,ParentForm )
       CShowControl ( c [2] )
       _HMG_SYSDATA [ 34 ] [y] := .t.
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    ELSEIF T == "BROWSE"
       CShowControl ( c )
@@ -1675,7 +1675,7 @@ FUNCTION _ShowControl ( ControlName,ParentForm )
       ENDIF
       _HMG_SYSDATA [ 34 ] [y] := .t.
 
-      #endif
+#endif
 
    ELSEIF T == "TAB"
 
@@ -1724,7 +1724,7 @@ FUNCTION _HideControl ( ControlName,ParentForm )
       HideWindow ( c [2] )
       _HMG_SYSDATA [ 34 ] [y] := .f.
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    ELSEIF T == "BROWSE"
       HideWindow ( c )
@@ -1736,7 +1736,7 @@ FUNCTION _HideControl ( ControlName,ParentForm )
       ENDIF
       _HMG_SYSDATA [ 34 ] [y] := .f.
 
-      #endif
+#endif
 
    ELSEIF T == "TAB"
 
@@ -2182,7 +2182,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
                IF p > 0 .and. _HMG_SYSDATA [1] [p] == 'BROWSE'
 
-                  #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
                   tCol    := _HMG_SYSDATA [ 19 ]  [p]
                   tRow    := _HMG_SYSDATA [ 18 ]  [p]
@@ -2228,7 +2228,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
                   _HMG_SYSDATA [ 23 ] [ p ] :=  Row
                   _HMG_SYSDATA [ 24 ] [ p ] :=  Col
 
-                  #endif
+#endif
 
                ELSE
 
@@ -2307,7 +2307,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
       ENDIF
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE T == "BROWSE"
 
@@ -2387,7 +2387,7 @@ FUNCTION _SetControlSizePos ( ControlName, ParentForm, row, col, width, height )
 
       ReDrawWindow ( c )
 
-      #endif
+#endif
 
    CASE T == "RADIOGROUP"
 
@@ -4118,7 +4118,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
 
       ReleaseControl ( _HMG_SYSDATA [3] [i] )
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    CASE t == "BROWSE"
 
@@ -4131,7 +4131,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
 
       ENDIF
 
-      #endif
+#endif
 
    CASE t == "RADIOGROUP"
 
@@ -4211,7 +4211,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
 
                   ENDIF
 
-                  #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
                ELSEIF t == 'BROWSE'
 
@@ -4237,7 +4237,7 @@ FUNCTION _ReleaseControl ( ControlName, ParentForm )
 
                   ENDIF
 
-                  #endif
+#endif
 
                ELSE
 
@@ -4289,13 +4289,13 @@ FUNCTION _EraseControl (i, nParentIndex)
       ENDIF
    ENDIF
 
-   #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
    IF _HMG_SYSDATA [1] [i] == 'BROWSE'
       IF ValType ( _HMG_SYSDATA [39] [i] [10] ) == 'N'
          IMAGELIST_DESTROY ( _HMG_SYSDATA [ 39 ] [i] [10] )
       ENDIF
    ENDIF
-   #endif
+#endif
 
    IF _HMG_SYSDATA [1] [i] == 'COMBO'
       IF ValType ( _HMG_SYSDATA [15] [i] ) == 'N'
@@ -4570,12 +4570,12 @@ FUNCTION _Refresh(i)
    ELSEIF _HMG_SYSDATA [1] [i] == 'CHECKBOX'
       _DataCheckBoxRefresh (i)
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    ELSEIF _HMG_SYSDATA [1] [i] == 'BROWSE'
       _BrowseRefresh ('','',i)
 
-      #endif
+#endif
 
    ELSEIF _HMG_SYSDATA [1] [i] == 'GRID'
 
@@ -4936,13 +4936,13 @@ FUNCTION GetStartUpFolder()
 
    // HARBOUR LEVEL PRINT ROUTINES
 
-   #define SB_HORZ     0        // ok
-   #define SB_VERT     1        // ok
-   #define WM_VSCROLL  0x0115    // ok
+#define SB_HORZ     0        // ok
+#define SB_VERT     1        // ok
+#define WM_VSCROLL  0x0115    // ok
    // #define WM_CLOSE     16   // ok (MinGW)
    // #define WM_VSCROLL   277  // ok (MinGW)
 
-   #if 1
+#if 1
 
 FUNCTION _HMG_PRINTER_SHOWPREVIEW()
 
@@ -5240,7 +5240,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          EnableWindow(GetformHandle("_HMG_PRINTER_SHOWTHUMBNAILS")),;
          HideWindow(GetFormHandle("_HMG_PRINTER_GO_TO_PAGE")),;
          _HMG_PRINTER_PREVIEWRefresh(),;   // ADD April 2014
-      DoMethod("SPLITCHILD_1","SetFocus") )
+         DoMethod("SPLITCHILD_1","SetFocus") )
 
       DEFINE LABEL Label_1
          Row 13
@@ -5277,7 +5277,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
             EnableWindow ( GetformHandle ( "SPLITCHILD_1" ) ),;
             EnableWindow ( GetformHandle ( "_HMG_PRINTER_SHOWTHUMBNAILS" ) ),;
             _HMG_PRINTER_PREVIEWRefresh(),;   // ADD April 2014
-         DoMethod("_HMG_PRINTER_SHOWPREVIEW","SetFocus") )
+            DoMethod("_HMG_PRINTER_SHOWPREVIEW","SetFocus") )
       END BUTTON
 
       DEFINE BUTTON Cancel
@@ -5418,7 +5418,7 @@ FUNCTION _HMG_PRINTER_SpltChldMouseClick()   // by Pablo César and Claudio Soto,
 
    LOCAL Flag := _HMG_PRINTER_SpltChldMouseCursor()
 
-   #define WM_SETCURSOR 32
+#define WM_SETCURSOR 32
    IF EventMSG() == WM_SETCURSOR
       IF EventWPARAM() == GetControlHandle ("TOOLBAR_1","_HMG_PRINTER_SHOWPREVIEW")
          DoMethod("_HMG_PRINTER_SHOWPREVIEW","SetFocus")   // SetFocus for display ToolTip of the ToolBar define into SPLITBOX
@@ -6023,7 +6023,7 @@ FUNCTION _HMG_PRINTER_ScrollDown()
 
    RETURN NIL
 
-   #endif
+#endif
 
 FUNCTION GetPrinter()
 
@@ -6062,9 +6062,9 @@ FUNCTION GetPrinter()
 
    RETURN RetVal
 
-   #define TA_CENTER   6   // ok
-   #define TA_LEFT     0   // ok
-   #define TA_RIGHT    2   // ok
+#define TA_CENTER   6   // ok
+#define TA_LEFT     0   // ok
+#define TA_RIGHT    2   // ok
 
 FUNCTION _HMG_PRINTER_H_PRINT ( nHdc , nRow , nCol , cFontName , nFontSize , nColor1 , nColor2 , nColor3 , cText , lbold , litalic , lunderline , lstrikeout , lcolor , lfont , lsize , cAlign, nAngle )
 
@@ -7731,7 +7731,7 @@ FUNCTION _HMG_SetHeaderImages ( cControlName, cParentForm , nColumn , cImage  )
 
       _HMG_SYSDATA [ 26 ] [i] := nHeaderImageListHandle
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    ELSEIF cControlType == 'BROWSE'
 
@@ -7767,7 +7767,7 @@ FUNCTION _HMG_SetHeaderImages ( cControlName, cParentForm , nColumn , cImage  )
 
       _HMG_SYSDATA [ 39 ] [i] [10] := nHeaderImageListHandle
 
-      #endif
+#endif
 
    ENDIF
 
@@ -7797,7 +7797,7 @@ FUNCTION _HMG_GetHeaderImages ( cControlName, cParentForm , nColumn )
 
       cRetVal := aHeaderImages [ nColumn ]
 
-      #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
    ELSEIF cControlType == 'BROWSE'
 
@@ -7807,7 +7807,7 @@ FUNCTION _HMG_GetHeaderImages ( cControlName, cParentForm , nColumn )
 
       cRetVal := aHeaderImages [ nColumn ]
 
-      #endif
+#endif
 
    ENDIF
 
@@ -8003,11 +8003,11 @@ FUNCTION SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       ELSEIF Arg3 == 'ALLOWEDIT'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          _SetBrowseAllowEdit ( Arg2 , Arg1 , Arg4 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'RECNO'
 
@@ -8015,19 +8015,19 @@ FUNCTION SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       ELSEIF Arg3 == 'ALLOWAPPEND'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          _SetBrowseAllowAppend ( Arg2 , Arg1 , Arg4 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'ALLOWDELETE'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          _SetBrowseAllowDelete ( Arg2 , Arg1 , Arg4 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'PICTURE'
 
@@ -8173,7 +8173,7 @@ FUNCTION SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
          _SetAddress ( Arg2 , Arg1 , Arg4 )
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
       ELSEIF Arg3 == 'INPUTITEMS'
 
@@ -8183,7 +8183,7 @@ FUNCTION SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
          _SetBrowseDisplayItems ( Arg2 , Arg1 , Arg4 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'READONLY'
 
@@ -8603,43 +8603,43 @@ FUNCTION GetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 
       ELSEIF Arg3 == 'ALLOWEDIT'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          RetVal := _GetBrowseAllowEdit ( Arg2 , Arg1 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'INPUTITEMS'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          RetVal := _GetBrowseInputItems ( Arg2 , Arg1 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'DISPLAYITEMS'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          RetVal := _GetBrowseDisplayItems ( Arg2 , Arg1 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'ALLOWAPPEND'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          RetVal := _GetBrowseAllowAppend ( Arg2 , Arg1 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'ALLOWDELETE'
 
-         #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
          RetVal := _GetBrowseAllowDelete ( Arg2 , Arg1 )
 
-         #endif
+#endif
 
       ELSEIF Arg3 == 'PICTURE'
 
@@ -10899,9 +10899,9 @@ PROCEDURE SetToolTipCustomDrawControl (cControlName, cFormName, aBackColor, aFor
 
    RETURN
 
-   #define TTN_FIRST (0 - 520)
-   #define TTN_SHOW (TTN_FIRST - 1)
-   #define DEFAULT_GUI_FONT 17
+#define TTN_FIRST (0 - 520)
+#define TTN_SHOW (TTN_FIRST - 1)
+#define DEFAULT_GUI_FONT 17
 
 FUNCTION ToolTipCustomDrawEvent ( lParam )
 

@@ -135,7 +135,7 @@ FUNCTION HMG_PADR (xValue, nLen, cFillChar)
    HB_FUNC (HMG_ISALPHANUMERIC)
    */
 
-   #else
+#else
 
 FUNCTION HMG_LEN(x); RETURN LEN (x)
 
@@ -159,7 +159,7 @@ FUNCTION HMG_ISUPPER(c); RETURN ISUPPER(c)
 
 FUNCTION HMG_ISALPHANUMERIC(c); RETURN (ISALPHA(c) .OR. ISDIGIT(c))
 
-   #endif
+#endif
 
    // #define UTF8_BOM  ( HB_BCHAR (0xEF) + HB_BCHAR (0xBB) + HB_BCHAR (0xBF) )
 

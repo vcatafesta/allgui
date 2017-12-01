@@ -31,11 +31,11 @@ CLASS TDatePicker FROM TControl
    METHOD lValid()
    METHOD VarGet()
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TDatePicker:New() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TDatePicker:New() Version 7.0
+   * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
       nClrFore, nClrBack, hFont, cControl, oCursor, cWnd, cMsg,;

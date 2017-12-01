@@ -117,7 +117,7 @@ FUNCTION MoveWinMain()
    RETURN NIL
 
    // Close window cAppTitle
-   #define WM_CLOSE           0x0010
+#define WM_CLOSE           0x0010
 
 FUNCTION CloseIt()
 

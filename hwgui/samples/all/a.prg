@@ -248,13 +248,13 @@ FUNCTION OpenAbout
 
    @ 20,140 SAY "Hwgui Page"        ;
       LINK "http://kresin.belgorod.su/hwgui.html" ;
-      SIZE 130, 22 STYLE SS_CENTER  ;
+   SIZE 130, 22 STYLE SS_CENTER  ;
       COLOR hwg_VColor("0000FF") ;
       VISITCOLOR hwg_Rgb(241,249,91)
 
    @ 20,160 SAY "Hwgui international Forum"        ;
       LINK "http://br.groups.yahoo.com/group/hwguibr" ;
-      SIZE 200, 22 STYLE SS_CENTER  ;
+   SIZE 200, 22 STYLE SS_CENTER  ;
       COLOR hwg_VColor("0000FF") ;
       VISITCOLOR hwg_Rgb(241,249,91)
 

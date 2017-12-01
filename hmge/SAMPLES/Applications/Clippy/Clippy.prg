@@ -271,8 +271,8 @@ STATIC FUNCTION GetRandomMessage(cFileName)
 
    RETURN cMsg
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 STATIC PROCEDURE MoveActiveWindow(hWnd)
 
@@ -317,6 +317,6 @@ PROCEDURE ServiceProcess( mode )
       IN KERNEL32.DLL ;
       ALIAS GCP
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif

@@ -29,31 +29,31 @@ FUNCTION RdView( fname )
          IF ( scom := Upper( hb_TokenPtr( aLines[nLine], @nPos, " " ) ) ) == "DRIVER"
             sword := hb_TokenPtr( aLines[nLine], @nPos, " " )
             IF hb_TokenPtr( aLines[nLine], @nPos, " " ) == "REMOTE"
-               #if defined( RDD_ADS )
+#if defined( RDD_ADS )
                AdsSetServerType( 6 )
-               #elif !defined( RDD_LETO )
+#elif !defined( RDD_LETO )
                res := .F.
                EXIT
-               #endif
+#endif
             ELSE
                nServerType := LOCAL_SERVER
-               #if defined( RDD_ADS )
+#if defined( RDD_ADS )
                AdsSetServerType( ADS_LOCAL_SERVER )
-               #elif defined( RDD_LETO )
+#elif defined( RDD_LETO )
                res := .F.
                EXIT
-               #endif
+#endif
             ENDIF
             IF ( n := Ascan( aDrivers, sword ) ) == 0
                res := .F.
                EXIT
             ENDIF
             numdriv := n
-            #if defined( RDD_ADS )
+#if defined( RDD_ADS )
             AdsSetFileType( Iif( n == 1,2,Iif( n == 2,1,3 ) ) )
-            #elif !defined( RDD_LETO )
+#elif !defined( RDD_LETO )
             rddSetDefault( aDrivers[n] )
-            #endif
+#endif
          ELSEIF scom == "FILE"
             lShared := ( hb_TokenPtr( aLines[nLine], @nPos, " " ) == "SHARED" )
             Set( _SET_EXCLUSIVE, !lShared )

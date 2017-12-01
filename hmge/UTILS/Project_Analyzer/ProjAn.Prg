@@ -73,9 +73,9 @@ STATIC FUNCTION GetPrjFile()
    wMain.Grid_1.DeleteAllItems
 
    RETURN NIL
-   #ifndef __XHARBOUR__
-   #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
-   #endif
+#ifndef __XHARBOUR__
+#xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
+#endif
 
 FUNCTION Start()
 

@@ -24,12 +24,12 @@ FUNCTION Main
    PRIVATE aScreen, nKoef, lScrollV := .F., lScrollH := .F., nStepV := 0, nStepH := 0
    PRIVATE nVert, nHorz
 
-   #ifdef __FREEIMAGE__
+#ifdef __FREEIMAGE__
    IF !hwg_Fi_init()
 
       RETURN NIL
    ENDIF
-   #endif
+#endif
 
    PREPARE FONT oFont NAME "Times New Roman" WIDTH 0 HEIGHT -17
 
@@ -76,11 +76,11 @@ FUNCTION Main
    @ 106,3 SAY oSayScale CAPTION "" OF oToolBar SIZE 60,22 STYLE WS_BORDER ;
       FONT oFont BACKCOLOR 12507070
 
-   #ifdef __FREEIMAGE__
+#ifdef __FREEIMAGE__
    @ 0,oToolBar:nHeight IMAGE oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
-   #else
+#else
    @ 0,oToolBar:nHeight BITMAP oSayMain SHOW Nil SIZE oMainWindow:nWidth, oMainWindow:nHeight
-   #endif
+#endif
 
    aScreen := GetWorkareaRect()
    // writelog( str(aScreen[1])+str(aScreen[2])+str(aScreen[3])+str(aScreen[4]) )
@@ -182,11 +182,11 @@ STATIC FUNCTION FileOpen( oWnd )
    LOCAL fname
    LOCAL aCoors
 
-   #ifdef __FREEIMAGE__
+#ifdef __FREEIMAGE__
    fname := hwg_SelectFile( "Graphic files( *.jpg;*.png;*.psd;*.tif )", "*.jpg;*.png;*.psd;*.tif", mypath )
-   #else
+#else
    fname := hwg_SelectFile( "Graphic files( *.jpg;*.gif;*.bmp )", "*.jpg;*.gif;*.bmp", mypath )
-   #endif
+#endif
    IF !Empty( fname )
       nKoef := 1
       nStepV := nStepH := 0
@@ -201,13 +201,13 @@ STATIC FUNCTION FileOpen( oWnd )
       oImage:Release()
       ENDIF
       */
-      #ifdef __FREEIMAGE__
+#ifdef __FREEIMAGE__
       // oImage := HFreeImage():AddFile( fname )
       oSayMain:ReplaceImage( fname )
-      #else
+#else
       // oImage := HBitmap():AddFile( fname )
       oSayMain:ReplaceBitmap( fname )
-      #endif
+#endif
       oImage := oSayMain:oImage
       oSayMain:nOffsetH := oSayMain:nOffsetV := 0
 

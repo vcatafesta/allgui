@@ -39,7 +39,7 @@ CLASS VAR winclass INIT "ShockwaveFlash"
 
    METHOD New()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New(p1,p2,p3,p4,p5,p6) CLASS ShockwaveFlash
 

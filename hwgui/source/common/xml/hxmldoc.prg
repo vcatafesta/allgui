@@ -41,7 +41,7 @@ CLASS VAR nLastErr SHARED
 
    METHOD Find( cTitle,nStart )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cTitle, type, aAttr, cValue ) CLASS HXMLNode
 
@@ -236,7 +236,7 @@ CLASS HXMLDoc INHERIT HXMLNode
 
    METHOD Save2String()  INLINE ::Save()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( encoding ) CLASS HXMLDoc
 

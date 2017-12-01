@@ -635,10 +635,10 @@ FUNCTION ChangeFAttr()
 
    RETURN NIL
 
-   #define FILE_ATTRIBUTE_READONLY  1   // 0x00000001
-   #define FILE_ATTRIBUTE_HIDDEN    2   // 0x00000002
-   #define FILE_ATTRIBUTE_SYSTEM    4   // 0x00000004
-   #define FILE_ATTRIBUTE_ARCHIVE  32   // 0x00000020
+#define FILE_ATTRIBUTE_READONLY  1   // 0x00000001
+#define FILE_ATTRIBUTE_HIDDEN    2   // 0x00000002
+#define FILE_ATTRIBUTE_SYSTEM    4   // 0x00000004
+#define FILE_ATTRIBUTE_ARCHIVE  32   // 0x00000020
 
 STATIC FUNCTION SetAttr( cFileName, lArchive, lReadOnly, lHidden, lSystem, lChangeDT, cDate, cTime )
 

@@ -62,7 +62,7 @@ CLASS MyClass1
    PROTECTED:
    DATA Prot1
 
-ENDCLASS
+   ENDCLASS
 
 CLASS MyClass2 FROM MyClass1
 
@@ -73,7 +73,7 @@ CLASS MyClass2 FROM MyClass1
 
    METHOD nNumber
 
-ENDCLASS
+   ENDCLASS
 
 METHOD FUNCTION cText( cNewText ) CLASS MyClass2
 

@@ -36,7 +36,7 @@ PROCEDURE Main
 
    RETURN
 
-   #define STATUS_MESSAGE "HMG Power Ready!"
+#define STATUS_MESSAGE "HMG Power Ready!"
 
 PROCEDURE OnClick
 

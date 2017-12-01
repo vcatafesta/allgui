@@ -67,8 +67,8 @@ FUNCTION Main
 
       */
 
-      #define GROUP1_ID   100
-      #define GROUP2_ID   200
+#define GROUP1_ID   100
+#define GROUP2_ID   200
 
       Form_1.Grid_1.GroupEnabled := .T.
 

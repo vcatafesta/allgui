@@ -67,8 +67,8 @@ PROCEDURE Chart( hWnd )
 
    RETURN
 
-   #define RMC_PORTRAIT  1
-   #define RMC_LANDSCAPE 2
+#define RMC_PORTRAIT  1
+#define RMC_LANDSCAPE 2
 
 PROCEDURE PrintChart( hWnd )
 

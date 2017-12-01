@@ -40,5 +40,5 @@ FUNCTION cierra()
 
    RETURN NIL
 
-   #include 'prgspi.prg'
-   #include 'p2.prg'
+#include 'prgspi.prg'
+#include 'p2.prg'

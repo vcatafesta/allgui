@@ -64,7 +64,7 @@ FUNCTION FCopy(cSource, cTarget, lMsgs)
    If the source file does not exist, the function will return false but will
    not show an error message.
    */
-   #define FC_CHUNK  8192
+#define FC_CHUNK  8192
 
    LOCAL lOk := .T., cMsg := "", nErr := 0
    LOCAL hSource := F_ERROR, hTarget := F_ERROR

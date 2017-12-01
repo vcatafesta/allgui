@@ -158,8 +158,8 @@ FUNCTION Achoice( t, l, b, r, aInput, cTitle, dummy, nValue )
 
    RETURN nValue
 
-   #define FIELD_ENTRY_SIZE 32
-   #define FIELD_NAME_SIZE  11
+#define FIELD_ENTRY_SIZE 32
+#define FIELD_NAME_SIZE  11
 
 FUNCTION GetHeaderInfo(database)
 
@@ -276,7 +276,7 @@ FUNCTION GetHeaderInfo(database)
 
    RETURN aRet
 
-   #define HEXTABLE "0123456789ABCDEF"
+#define HEXTABLE "0123456789ABCDEF"
 
 FUNCTION HEX2DEC( cHexNum )
 

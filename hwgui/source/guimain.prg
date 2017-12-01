@@ -795,11 +795,11 @@ FUNCTION HWG_ScrollHV( oForm, msg,wParam,lParam )
       CASE SB_THUMBTRACK
          nPos := hwg_Hiword( wParam )
          nInc := nPos - oForm:nVscrollPos ; EXIT
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          DEFAULT
-         #else
+#else
       OTHERWISE
-         #endif
+#endif
          nInc := 0
       END
       nInc := Max( - oForm:nVscrollPos, Min( nInc, oForm:nVscrollMax - oForm:nVscrollPos))
@@ -826,11 +826,11 @@ FUNCTION HWG_ScrollHV( oForm, msg,wParam,lParam )
       CASE SB_THUMBTRACK
          nPos := hwg_Hiword( wParam )
          nInc := nPos - oForm:nHscrollPos; EXIT
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          DEFAULT
-         #else
+#else
       OTHERWISE
-         #endif
+#endif
          nInc := 0
       END
       nInc := max( - oForm:nHscrollPos, min( nInc, oForm:nHscrollMax - oForm:nHscrollPos ) )

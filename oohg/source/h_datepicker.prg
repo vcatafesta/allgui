@@ -69,7 +69,7 @@ CLASS TDatePick FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
       fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;
@@ -149,7 +149,7 @@ CLASS TTimePick FROM TControl
 
    METHOD Events_Notify
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
       fontsize, tooltip, change, lostfocus, gotfocus, shownone, ;

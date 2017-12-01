@@ -7,14 +7,14 @@
 
 FUNCTION _WindowCargo( FormName, xValue )
 
-   #ifdef _OBJECT_
+#ifdef _OBJECT_
    LOCAL o := iif( HB_ISOBJECT( FormName ), FormName, _WindowObj( FormName ) )
    LOCAL i := iif( HB_ISOBJECT( o       ), o:Index, GetFormIndex( FormName ) )
 
-   #else
+#else
    LOCAL i := GetFormIndex( FormName )
 
-   #endif
+#endif
    IF i > 0
       IF PCount() > 1;        _HMG_aFormMiscData2[ i ] := xValue
       ELSE           ; RETURN _HMG_aFormMiscData2[ i ]
@@ -25,14 +25,14 @@ FUNCTION _WindowCargo( FormName, xValue )
 
 FUNCTION _ControlCargo( ControlName, FormName, xValue )
 
-   #ifdef _OBJECT_
+#ifdef _OBJECT_
    LOCAL o := iif( HB_ISOBJECT( ControlName ), ControlName, _ControlObj( ControlName, FormName ) )
    LOCAL i := iif( HB_ISOBJECT( o ), o:Index, GetControlIndex( ControlName, FormName ) )
 
-   #else
+#else
    LOCAL i := GetControlIndex( ControlName, FormName )
 
-   #endif
+#endif
    IF i > 0
       IF PCount() > 2;        _HMG_aControlMiscData2[ i ] := xValue
       ELSE           ; RETURN _HMG_aControlMiscData2[ i ]
@@ -41,7 +41,7 @@ FUNCTION _ControlCargo( ControlName, FormName, xValue )
 
    RETURN NIL
 
-   #ifdef _OBJECT_
+#ifdef _OBJECT_
 
 FUNCTION _WindowObj( FormName )
 
@@ -272,4 +272,4 @@ HB_FUNC( HMG_ISWINDOWOBJECT )
 
 #pragma ENDDUMP
 
-                     #endif
+#endif

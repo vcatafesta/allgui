@@ -155,11 +155,11 @@ PROCEDURE _EraseFontDef( i )
    mVar := '_' + _FORMNAME_ + '_' + _HMG_aControlNames [i]
 
    IF __mvExist( mVar )
-      #ifndef _PUBLIC_RELEASE_
+#ifndef _PUBLIC_RELEASE_
       __mvPut( mVar, 0 )
-      #else
+#else
       __mvXRelease( mVar )
-      #endif
+#endif
    ENDIF
 
    _HMG_aControlDeleted [i] := .T.
@@ -317,53 +317,53 @@ FUNCTION GetFontParamByRef( FontHandle, FontName, FontSize, bold, italic, underl
 
    lExpr := ( i > 0 .AND. GetObjectType( _HMG_aControlHandles[ i ] ) == OBJ_FONT )
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    IF HB_IsByRef( @FontName )
-      #else
+#else
       IF hb_PIsByRef( 2 )
-         #endif
+#endif
          FontName := iif( lExpr, _HMG_aControlFontName[ i ], _HMG_DefaultFontName )
       ENDIF
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       IF HB_IsByRef( @FontSize )
-         #else
+#else
          IF hb_PIsByRef( 3 )
-            #endif
+#endif
             FontSize := iif( lExpr, _HMG_aControlFontSize[ i ], _HMG_DefaultFontSize )
          ENDIF
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          IF HB_IsByRef( @bold )
-            #else
+#else
             IF hb_PIsByRef( 4 )
-               #endif
+#endif
                bold := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_BOLD ], .F. )
             ENDIF
-            #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
             IF HB_IsByRef( @italic )
-               #else
+#else
                IF hb_PIsByRef( 5 )
-                  #endif
+#endif
                   italic := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_ITALIC ], .F. )
                ENDIF
-               #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
                IF HB_IsByRef( @underline )
-                  #else
+#else
                   IF hb_PIsByRef( 6 )
-                     #endif
+#endif
                      underline := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_UNDERLINE ], .F. )
                   ENDIF
-                  #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
                   IF HB_IsByRef( @strikeout )
-                     #else
+#else
                      IF hb_PIsByRef( 7 )
-                        #endif
+#endif
                         strikeout := iif( lExpr, _HMG_aControlFontAttributes[ i, FONT_ATTR_STRIKEOUT ], .F. )
                      ENDIF
-                     #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
                      IF HB_IsByRef( @angle )
-                        #else
+#else
                         IF hb_PIsByRef( 8 )
-                           #endif
+#endif
                            angle := iif( lExpr, ;
                               iif( Len( _HMG_aControlFontAttributes[ i ] ) > 4, _HMG_aControlFontAttributes[ i, FONT_ATTR_ANGLE ], 0 ), ;
                               0 )

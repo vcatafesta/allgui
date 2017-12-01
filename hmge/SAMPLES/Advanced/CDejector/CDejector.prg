@@ -154,7 +154,7 @@ PROCEDURE Rmenu()
 
    RETURN
 
-   #define DRIVE_CDROM       5
+#define DRIVE_CDROM       5
 
 FUNCTION aCDDrives()
 

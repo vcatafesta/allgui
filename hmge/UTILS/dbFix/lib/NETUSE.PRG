@@ -172,9 +172,9 @@ STATIC FUNCTION Try2Open(oUseErr, cFile, cDriver, cAlias, lExclusive, lReadonly,
 
       WaitASec()
 
-      #ifdef DOS_ONLY
+#ifdef DOS_ONLY
       lEnd := (inkey() == K_ESC)
-      #endif
+#endif
 
    ENDDO
 
@@ -271,9 +271,9 @@ STATIC FUNCTION Try2Add(nTryOut, lEnd)
          lAdded := .T.
       ENDIF
 
-      #ifdef DOS_ONLY
+#ifdef DOS_ONLY
       lEnd := (inkey() == K_ESC)
-      #endif
+#endif
 
    ENDDO
 
@@ -324,9 +324,9 @@ STATIC FUNCTION Try2Flock(nTryOut, lEnd)
          ENDIF
       ENDIF
 
-      #ifdef DOS_ONLY
+#ifdef DOS_ONLY
       lEnd := (inkey() == K_ESC)
-      #endif
+#endif
 
    ENDDO
 
@@ -377,9 +377,9 @@ STATIC FUNCTION Try2Rlock(nTryOut, lEnd)
          ENDIF
       ENDIF
 
-      #ifdef DOS_ONLY
+#ifdef DOS_ONLY
       lEnd := (inkey() == K_ESC)
-      #endif
+#endif
 
    ENDDO
 

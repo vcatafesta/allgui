@@ -19,14 +19,14 @@ PROCEDURE MAIN()
       cFontName,;
       nFontSize,;
       nVMargin,;     // Vertical margin
-   nHMargin,;     // Horizontal margin
-   nChrsPerLin,;
+      nHMargin,;     // Horizontal margin
+      nChrsPerLin,;
       nLineHeigth,;
       bUpdaSBar,;
       bUpdaPBar
 
    PRIVATE aSBarVals := ARRAY( 4 ),;    // Status Bar values
-   aShPrgsOp := ARRAY( 4 )      // Show Progress options
+      aShPrgsOp := ARRAY( 4 )      // Show Progress options
 
    InitPrOpts()                         // Initialize Printer options
 
@@ -79,10 +79,10 @@ PROCEDURE MAIN()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE SeleFile(;                    // Select Plain Text File
-   nCaller )
+      nCaller )
 
    LOCAL cSelFName := Getfile( { ;                                            // acFilter
-   { 'Text Files',      '*.txt' } ,;
+      { 'Text Files',      '*.txt' } ,;
       { 'Program Files',    '*.prg' } ,;
       { 'Format Files',     '*.fmg' } ,;
       { 'Header Files',     '*.ch'  } ,;
@@ -90,9 +90,9 @@ PROCEDURE SeleFile(;                    // Select Plain Text File
       { 'CPP Source Files', '*.cpp'  } ;
       },;
       'Select Plain Text File' ,;   // Title
-   GetStartUpFolder(),;          // cDefaultPath
-   .F.,;                         // lMultiSelect
-   .T. )                         // lNoChangeCurrDir
+      GetStartUpFolder(),;          // cDefaultPath
+      .F.,;                         // lMultiSelect
+      .T. )                         // lNoChangeCurrDir
 
    IF !EMPTY( cSelFName )
       cPTFilName := cSelFName
@@ -125,15 +125,15 @@ PROCEDURE PrntFile()
       ENDIF aShPrgsOp[ 1 ]
 
       nPPageCou := PPTFComf( cPTFilName,;  // Source file name
-      cDefaPrinter,;
+         cDefaPrinter,;
          lSelPrnDialog,;
          nPaprTypeNo,;
          lWordWrap,;
          cFontName,;
          nFontSize,;
          nVMargin,;        // Vertical margin
-      nHMargin,;        // Horizontal margin
-      nChrsPerLin,;
+         nHMargin,;        // Horizontal margin
+         nChrsPerLin,;
          nLineHeigth,;
          aShPrgsOp,;
          bUpdaSBar,;
@@ -310,7 +310,7 @@ PROCEDURE UpdaSBar( ... )                 // Update Status Bar
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE UpdaPBar( ;                 // Update Progress Bar
-   nValue )
+      nValue )
 
    frmPPTFile.prbarPrint.Value := nValue
 

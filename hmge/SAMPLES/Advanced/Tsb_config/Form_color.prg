@@ -269,4 +269,3 @@ FUNCTION RetSaveColor(oBrwClr)
    aColor[17] := oBrwClr:aSuperHead[nCol,4]  // Color of text in super header
 
    RETURN aColor
-

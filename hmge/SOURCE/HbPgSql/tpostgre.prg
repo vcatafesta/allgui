@@ -80,7 +80,7 @@ CREATE CLASS TPQServer
    METHOD TraceOff()
    METHOD SetVerbosity( num )  INLINE PQsetErrorVerbosity( ::pDb, iif( num >= 0 .AND. num <= 2, num, 1 )  )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom ) CLASS TPQserver
 
@@ -490,7 +490,7 @@ CREATE CLASS TPQQuery
    METHOD GetRow( nRow )
    METHOD GetBlankRow()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( pDB, cQuery, lAllCols, cSchema, res ) CLASS TPQquery
 
@@ -1178,7 +1178,7 @@ CREATE CLASS TPQRow
    METHOD Changed( nField )     INLINE !( ::aRow[ nField ] == ::aOld[ nField ] )
    METHOD FieldGetOld( nField ) INLINE ::aOld[ nField ]
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( row, old, struct ) CLASS TPQrow
 

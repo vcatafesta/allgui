@@ -80,7 +80,7 @@ CLASS HColumn INHERIT HObject
 
    METHOD New( cHeading,block,type,length,dec,lEditable,nJusHead,nJusLin,cPict,bValid,bWhen,aItem,bColorBlock,bHeadClick )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHeading, block, type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick ) CLASS HColumn
 
@@ -226,7 +226,7 @@ CLASS HBrowse INHERIT HControl
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
       bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,;

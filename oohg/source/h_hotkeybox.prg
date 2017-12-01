@@ -65,7 +65,7 @@ CLASS THotKeyBox FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, uValue, ;
       FontName, FontSize, ToolTip, ;

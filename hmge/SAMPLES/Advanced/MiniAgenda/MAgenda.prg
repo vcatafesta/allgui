@@ -57,8 +57,8 @@ PROCEDURE Main()
       aList     := {},;
       aColOrder := ARRAY( 4 ),;
       nCurFRN   := 0,;               // Current Physical Row Number
-   cDefInFN  := "MAgenda.ini",;   // Default .ini File Name
-   cBegFoldr := GetCurrentFolder(),;
+      cDefInFN  := "MAgenda.ini",;   // Default .ini File Name
+      cBegFoldr := GetCurrentFolder(),;
       cDataFNam := ''
 
    AFILL( aColOrder, 0 )
@@ -267,7 +267,7 @@ PROCEDURE MA_SetFRN()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE MA_RowOpers(;                        // Mini Agenda Row Operations
-   cROper )                // Operation
+      cROper )                // Operation
 
    LOCAL aGrdValue := frmMiniAgenda.grdMAgenda.Value
 
@@ -417,13 +417,13 @@ PROCEDURE MA_FileOpen()
    LOCAL cNDName             // New Data File Name
 
    IF !(EMPTY( cNDName := GetFile( { { "List Files", "*.lst" },;     // File Select Filters
-      { "Text Files", "*.txt" },;
+         { "Text Files", "*.txt" },;
          { "Data Files", "*.dta" },;
          { "All Files",   "*.*"  } } ,;
          "Open Agenda File" ,;             // Get_File Window Title
-      cBegFoldr ,;                      // Beginning folder
-      .F. ,;                            // Multiple Select
-      .T. ) ) )                         // Change Folder right
+         cBegFoldr ,;                      // Beginning folder
+         .F. ,;                            // Multiple Select
+         .T. ) ) )                         // Change Folder right
       cDataFNam := cNDName
       MA_LoadItems()
    ENDIF
@@ -441,12 +441,12 @@ PROCEDURE MA_SaveData()
 
    IF EMPTY( cDataFNam )
       cDataFNam := PutFile( { { "List Files", "*.lst" },;     // File Select Filters
-      { "Text Files", "*.txt" },;
+         { "Text Files", "*.txt" },;
          { "Data Files", "*.dta" },;
          { "All Files",   "*.*"  } } ,;
          "Save Agenda File :" ,;             // Get_File Window Title
-      cBegFoldr ,;                        // Beginning folder
-      .F. )                               // Change Folder right
+         cBegFoldr ,;                        // Beginning folder
+         .F. )                               // Change Folder right
    ENDIF EMPTY( cDataFNam )
 
    IF !EMPTY( cDataFNam )
@@ -470,7 +470,7 @@ PROCEDURE MA_SaveData()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE MA_FilOpers(;                        // Mini Agenda File Operations
-   cFOper )                // Operation
+      cFOper )                // Operation
 
    DO CASE
    CASE cFOper == 'N'        // File\New

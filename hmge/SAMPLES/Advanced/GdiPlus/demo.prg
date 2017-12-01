@@ -65,7 +65,7 @@ STATIC PROCEDURE s_CreateMenu()
                LOOP
             ELSE
 
-               #xtranslate _PICT_INFO => aPictInfo[BM_WIDTH], aPictInfo[BM_HEIGHT]
+#xtranslate _PICT_INFO => aPictInfo[BM_WIDTH], aPictInfo[BM_HEIGHT]
 
                IF "jpeg" $ aMimeType[i]
                   menuitem '&Save as '+ aMimeType[i] action;

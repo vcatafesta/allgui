@@ -328,7 +328,7 @@ FUNCTION DiscardImage()
    RETURN NIL
    // *********
 
-   #ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
+#ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
 
    // -----------------------------------------------------------------------------*
    DECLARE SaveToJpgEx( hWnd, cFileName, nWidth, nHeight ) IN JPG.DLL ALIAS SAVE2JPG
@@ -368,7 +368,7 @@ FUNCTION DiscardImage()
    DECLARE TWAIN_SetHideUI( fHide ) IN EZTW32.DLL
    // -----------------------------------------------------------------------------*
 
-   #else
+#else
 
    // -----------------------------------------------------------------------------*
    DECLARE DLL_TYPE_VOID SaveToJpgEx( DLL_TYPE_LONG hWnd, DLL_TYPE_LPCSTR cFileName, ;
@@ -414,7 +414,7 @@ FUNCTION DiscardImage()
    DECLARE DLL_TYPE_VOID TWAIN_SetHideUI( DLL_TYPE_INT fHide ) IN EZTW32.DLL
    // -----------------------------------------------------------------------------*
 
-   #endif
+#endif
 
 #pragma BEGINDUMP
 

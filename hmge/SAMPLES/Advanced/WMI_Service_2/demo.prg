@@ -358,4 +358,4 @@ FUNCTION timeMsg( tBegin, tEnd )
       replicate( "=", 81 )
 
    return( sRet )
-   #include "sBufCLS.prg"
+#include "sBufCLS.prg"

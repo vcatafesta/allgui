@@ -200,24 +200,24 @@ PROCEDURE Main
                Height 15
             @ 285, 140 Hyperlink hl7z                 ;
                Value 'http://www.7-zip.org'   ;
-               Address 'http://www.7-zip.org' ;
-               HandCursor
+            Address 'http://www.7-zip.org' ;
+            HandCursor
             @ 305, 15 LABEL lblDLL_JA                ;
                Value '7-Zip32.dll (Japanese)' ;
                Width 120                      ;
                Height 15
             @ 305, 140 Hyperlink hlDLL_JA                              ;
                Value 'http://www.csdinc.co.jp/archiver/lib/'   ;
-               Address 'http://www.csdinc.co.jp/archiver/lib/' ;
-               Width 270 HandCursor
+            Address 'http://www.csdinc.co.jp/archiver/lib/' ;
+            Width 270 HandCursor
             @ 325, 15 LABEL lblDLL_EN               ;
                Value '7-Zip32.dll (English)' ;
                Width 120                     ;
                Height 15
             @ 325, 140 Hyperlink hlDLL_EN                                         ;
                Value 'http://www.csdinc.co.jp/archiver/lib/main-e.html'   ;
-               Address 'http://www.csdinc.co.jp/archiver/lib/main-e.html' ;
-               Width 270 HandCursor
+            Address 'http://www.csdinc.co.jp/archiver/lib/main-e.html' ;
+            Width 270 HandCursor
 
          END PAGE
 
@@ -350,8 +350,8 @@ STATIC PROCEDURE ShowStatus( cFile, cCount, cType, cVersion )
 STATIC FUNCTION Version7zip
 
    LOCAL nVersion := SevenZipGetVersion(), ;    // 7-zip
-   nSubversion := SevenZipGetSubVersion(), ; // 7-zip32.dll
-   cVersion    := 'Version '
+      nSubversion := SevenZipGetSubVersion(), ; // 7-zip32.dll
+      cVersion    := 'Version '
 
    cVersion += ( Str( ( nVersion / 100 ), 5, 2 ) + '.' + StrZero( ( nSubversion / 100 ), 5, 2 ) )
 
@@ -770,7 +770,7 @@ STATIC PROCEDURE ViewArcExternal
       aFiles    := {}, ;
       cCommand, ;
       cTmpFile  := '_Arc_.lst', ;     // Или GetTempFolder() + '\_Arc_.lst'
-   oFile, ;
+      oFile, ;
       cString
 
    // Добавим типы архивов, с которыми может работать полная версия (не все,

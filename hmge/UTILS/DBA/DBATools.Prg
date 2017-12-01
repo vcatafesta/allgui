@@ -85,7 +85,7 @@ PROC F_CopyFile()
                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                         PROC FndStrAply(;                           // Apply rutin for FindStrg()
-                           cSrchStr ,;
+                              cSrchStr ,;
                               lIncLiNo ,;
                               lIngCase ,;
                               lOnlCoun )
@@ -207,26 +207,26 @@ PROC F_CopyFile()
                                        aLabels  := {},;
                                        aValues  := {},;
                                        aButtons := {{ ,;               // 1. Button Length : NIL for non-pict caption
-                                    "Apply Only",;    // 2. Button Caption
-                                    "",;              // 3. Button Tooltip
-                                    ,;              // 4. Check Acceptences
-                                    .T.,;             // 5. Save Before
-                                    ,;              // 6. No Action
-                                    .T. },;           // 7. Release After
-                                    { ,;               // 1. Button Length : NIL for non-pict caption
-                                    "Apply and Save",;  // 2. Button Caption
-                                    "",;              // 3. Button Tooltip
-                                    ,;              // 4. Check Acceptences
-                                    .T.,;             // 5. Save Before
-                                    ,;              // 6. No Action
-                                    .T. },;           // 7. Release After
-                                    { ,;               // 1. Button Length : NIL for non-pict caption
-                                    "Cancel",;        // 2. Button Caption
-                                    "",;              // 3. Button Tooltip
-                                    ,;              // 4. Check Acceptences
-                                    ,;              // 5. Save Before
-                                    ,;              // 6. No Action
-                                    .T. }}            // 7. Release After
+                                       "Apply Only",;    // 2. Button Caption
+                                       "",;              // 3. Button Tooltip
+                                       ,;              // 4. Check Acceptences
+                                       .T.,;             // 5. Save Before
+                                       ,;              // 6. No Action
+                                       .T. },;           // 7. Release After
+                                       { ,;               // 1. Button Length : NIL for non-pict caption
+                                       "Apply and Save",;  // 2. Button Caption
+                                       "",;              // 3. Button Tooltip
+                                       ,;              // 4. Check Acceptences
+                                       .T.,;             // 5. Save Before
+                                       ,;              // 6. No Action
+                                       .T. },;           // 7. Release After
+                                       { ,;               // 1. Button Length : NIL for non-pict caption
+                                       "Cancel",;        // 2. Button Caption
+                                       "",;              // 3. Button Tooltip
+                                       ,;              // 4. Check Acceptences
+                                       ,;              // 5. Save Before
+                                       ,;              // 6. No Action
+                                       .T. }}            // 7. Release After
 
                                     FOR nUPInd := 1 TO LEN( aUPPromts )
                                        AADD( aLabels, aUPPromts[ nUPInd ] )
@@ -235,15 +235,15 @@ PROC F_CopyFile()
                                     NEXT nUPInd
 
                                     nResultCF := ComboForm( cCbFTitl,;  // Combo Form's Title
-                                    aLabels ,;  // Prompts
-                                    aValues ,;  // Data Values
-                                    ,;  // Data Types
-                                    ,;  // Data Widths
-                                    ,;  // Data Decimals
-                                    ,;  // Read Onlies
-                                    ,;  // Data Validity ( Acceptences ) Infos
-                                    aButtons,;  // Buttons
-                                    )  // Actions : code blocks for Buttons
+                                       aLabels ,;  // Prompts
+                                       aValues ,;  // Data Values
+                                       ,;  // Data Types
+                                       ,;  // Data Widths
+                                       ,;  // Data Decimals
+                                       ,;  // Read Onlies
+                                       ,;  // Data Validity ( Acceptences ) Infos
+                                       aButtons,;  // Buttons
+                                       )  // Actions : code blocks for Buttons
 
                                     IF nResultCF > 0 .AND. nResultCF < 3
                                        FOR nVInd := 1 TO LEN( aValues )

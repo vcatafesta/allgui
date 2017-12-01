@@ -162,9 +162,9 @@ FUNCTION _EndToolBar()
    h := GetControlHandle ( _HMG_ActiveToolBarName , ParentForm )
 
    IF _HMG_BeginPagerActive
-      #ifdef _PAGER_
+#ifdef _PAGER_
       _AddChildToPager ( _HMG_ActiveToolBarName , ParentForm )
-      #endif
+#endif
    ELSE
       IF _HMG_ActiveSplitBox
          _AddToolBarToSplitBox ( _HMG_ActiveToolBarName , _HMG_ActiveToolBarBreak , _HMG_ActiveToolBarCaption , ParentForm )

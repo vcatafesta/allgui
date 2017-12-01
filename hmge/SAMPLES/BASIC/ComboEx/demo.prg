@@ -221,7 +221,7 @@ FUNCTION Main()
       @ 160,10 COMBOBOXEX ComboEx_4 ;
          WIDTH 530 ;
          ITEMS {"http://hmgextended.com","http://harbourminigui.blogspot.com","http://harbour-project.org","http://groups.yahoo.com/group/harbourminigui"} ;
-         VALUE 1 ;
+      VALUE 1 ;
          DISPLAYEDIT;
          ON ENTER RunMSIE(This.DisplayValue) ;
          FONT 'MS Sans serif' SIZE 10 ;

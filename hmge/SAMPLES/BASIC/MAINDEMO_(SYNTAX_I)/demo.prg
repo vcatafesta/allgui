@@ -897,7 +897,7 @@ FUNCTION GetComCtl32Ver
 
    RETURN hb_ntos( nMajor ) + "." + hb_ntos( nMinor )
 
-   #define CLR_DEFAULT   0xff000000
+#define CLR_DEFAULT   0xff000000
 
 PROCEDURE Standard_CLick
 

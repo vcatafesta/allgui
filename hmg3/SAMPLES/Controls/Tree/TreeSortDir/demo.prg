@@ -7,7 +7,7 @@
 
 PROCEDURE Main
 
-   #define _ID_INI_  0
+#define _ID_INI_  0
    PUBLIC nItemID := NIL
 
    SET FONT TO "Tahoma", 9

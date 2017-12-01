@@ -86,7 +86,7 @@ CLASS TStreamBase
 
    METHOD Write         INLINE 0
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cBuffer ) CLASS TStreamBase
 
@@ -602,7 +602,7 @@ CLASS TStreamFile FROM TStreamBase
 
    METHOD Skip
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cFile, nMode, nHdl ) CLASS TStreamFile
 

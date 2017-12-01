@@ -9,7 +9,7 @@
 PROCEDURE Main
 
    LOCAL aRows:={;                // data for grid
-   {"Text",   "Text", "Character Textbox"}     ,;
+      {"Text",   "Text", "Character Textbox"}     ,;
       {"Number",   3.1415, "Numeric mask 999.9999" },;
       {"Logical",   .F., "Yes/No"}                   ,;
       {"Date",   DATE(), "Date" }                 ,;
@@ -21,7 +21,7 @@ PROCEDURE Main
       {"Font CodePage",1, "Chars codepage"} }
 
    LOCAL aEdit:={;           // types for 'DYNAMIC'
-   { 'TEXTBOX','CHARACTER'}                  ,;
+      { 'TEXTBOX','CHARACTER'}                  ,;
       { 'TEXTBOX','NUMERIC','999.9999'}         ,;
       { 'CHECKBOX' , 'Yes' , 'No' }             ,;
       { 'DATEPICKER', 'DROPDOWN'  }             ,;

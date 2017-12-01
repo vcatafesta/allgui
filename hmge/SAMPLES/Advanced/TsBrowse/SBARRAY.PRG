@@ -62,23 +62,23 @@ FUNCTION SBArray()
          ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 1;
             TITLE "Col 1" ;
             SIZE 120 EDITABLE;          // this column is editable
-         COLORS CLR_BLACK, bColor;   // background color from a Code Block
-         3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
-         MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
-         VALID { | uVar | ! Empty( uVar ) }; // don't want empty rows
-         ALIGN DT_LEFT, DT_CENTER, DT_RIGHT; // cells, title, footer
-         FOOTER "Totals->"
+            COLORS CLR_BLACK, bColor;   // background color from a Code Block
+            3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
+            MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
+            VALID { | uVar | ! Empty( uVar ) }; // don't want empty rows
+            ALIGN DT_LEFT, DT_CENTER, DT_RIGHT; // cells, title, footer
+            FOOTER "Totals->"
 
          ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 2;
             TITLE "Col 2"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
-         SIZE 80 EDITABLE;           // this column is editable
-         COLORS CLR_BLACK, bColor;   // background color from a Code Block
-         3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
-         MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
-         FOOTER { || Transform( nTot2, "##,###" ) };  // must be a code block
-         PREEDIT { | uVar | nPreVal := uVar }; // updating footer value
-         POSTEDIT { | uVar | nTot2 += ( uVar - nPreval ), ;
+            SIZE 80 EDITABLE;           // this column is editable
+            COLORS CLR_BLACK, bColor;   // background color from a Code Block
+            3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
+            MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
+            FOOTER { || Transform( nTot2, "##,###" ) };  // must be a code block
+            PREEDIT { | uVar | nPreVal := uVar }; // updating footer value
+            POSTEDIT { | uVar | nTot2 += ( uVar - nPreval ), ;
             If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, ;
             If( oLbx:lChanged, ( ++nGood, --nBad ), Nil ), ;
             If( oLbx:lChanged, ( ++nBad, --nGood ), Nil ) ), ;
@@ -87,13 +87,13 @@ FUNCTION SBArray()
          ADD COLUMN TO TBROWSE oLbx DATA ARRAY ELEMENT 3;
             TITLE "Col 3"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
-         SIZE 80  EDITABLE;          // this column is editable
-         COLORS CLR_BLACK, bColor;   // background color from a Code Block
-         3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
-         MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
-         FOOTER { || Transform( nTot3, "##,###" ) };  // must be a code block
-         PREEDIT { | uVar | nPreVal := uVar }; // updating footer value
-         POSTEDIT { | uVar | nTot3 += ( uVar - nPreval ), ;
+            SIZE 80  EDITABLE;          // this column is editable
+            COLORS CLR_BLACK, bColor;   // background color from a Code Block
+            3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
+            MOVE DT_MOVE_NEXT;          // cursor goes to next editable column
+            FOOTER { || Transform( nTot3, "##,###" ) };  // must be a code block
+            PREEDIT { | uVar | nPreVal := uVar }; // updating footer value
+            POSTEDIT { | uVar | nTot3 += ( uVar - nPreval ), ;
             If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, ;
             If( oLbx:lChanged, ( ++nGood, --nBad ), Nil ), ;
             If( oLbx:lChanged, ( ++nBad, --nGood ), Nil ) ), ;
@@ -110,10 +110,10 @@ FUNCTION SBArray()
          ADD COLUMN TO TBROWSE oLbx DATA bData;
             TITLE "Col 4"  ;
             ALIGN DT_RIGHT, DT_CENTER;  // let's align cells to right and center title
-         SIZE 80;                    // this column is NOT editable
-         COLORS CLR_WHITE, bColor;   // background color from a Code Block
-         3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
-         FOOTER { || Transform( nTot2 + nTot3, "##,###" ) }
+            SIZE 80;                    // this column is NOT editable
+            COLORS CLR_WHITE, bColor;   // background color from a Code Block
+            3DLOOK TRUE, TRUE, TRUE;    // cells, titles, footers
+            FOOTER { || Transform( nTot2 + nTot3, "##,###" ) }
 
          // with next column let's try BitMaps on cells with dynamic alignment
          bData := { || If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, ;
@@ -122,16 +122,16 @@ FUNCTION SBArray()
          // new V.7.0 merging data and bitmaps at specific cell position
          // a value greater than 4 in HiWord, means specific pixel location from column left
          bAlign := { || nMakeLong( DT_LEFT, ; // LoWord = data alignment
-         If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, ;
+            If( Eval( oLbx:aColumns[ 4 ]:bData ) < 325, ;
             10, 50 ) ) }      // HiWord = bitmap alignment
 
          ADD COLUMN TO TBROWSE oLbx DATA bData ;
             BITMAP;                           // tells TSBrowse that data is a BitMap
-         TITLE "Result" + CRLF + "Good      Bad"; // Multi-Line heading
-         ALIGN bAlign, DT_CENTER, DT_CENTER; // cell, title, footer
-         SIZE 71;                            // this column is NOT editable
-         3DLOOK TRUE, TRUE, TRUE;            // cells, titles, footers
-         FOOTER { || Str( nGood, 4 ) + " Good" + CRLF + ;
+            TITLE "Result" + CRLF + "Good      Bad"; // Multi-Line heading
+            ALIGN bAlign, DT_CENTER, DT_CENTER; // cell, title, footer
+            SIZE 71;                            // this column is NOT editable
+            3DLOOK TRUE, TRUE, TRUE;            // cells, titles, footers
+            FOOTER { || Str( nGood, 4 ) + " Good" + CRLF + ;
             Str( nBad, 4 ) + " Bad" }  // Multi-Line footer
 
          // activating Auto Append Mode
@@ -234,13 +234,13 @@ FUNCTION TsGrid
       Grid1:SetColor( { 1, 3, 5, 6, 13, 15 ,17}, ;
          { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
          { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-      CLR_HGREEN, CLR_BLACK ,;
+         CLR_HGREEN, CLR_BLACK ,;
          CLR_HRED } )  // text superheader
       Grid1:SetColor( { 2, 4, 14,16 }, ;
          { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-      { CLR_WHITE, CLR_NBLUE }, ;  // degraded headers backgroud color
-      { CLR_HGREEN, CLR_BLACK }, ;  // degraded order column background color
-      { CLR_NBLUE, CLR_WHITE }  } ) // degraded superheaders backgroud color
+         { CLR_WHITE, CLR_NBLUE }, ;  // degraded headers backgroud color
+         { CLR_HGREEN, CLR_BLACK }, ;  // degraded order column background color
+         { CLR_NBLUE, CLR_WHITE }  } ) // degraded superheaders backgroud color
 
       Grid1:SetColor( {17}, {CLR_HGREEN}, 4 )
 

@@ -66,11 +66,11 @@ STATIC FUNCTION SortThisColumn( aArray, cEle )
 
    LOCAL cBlock := "{|x,y| x[" + cEle + "]" + iif( lAscend, "<", ">" ) + "y[" + cEle + "]}"
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    ASort( aArray, , , Eval( hb_macroBlock( cBlock ) ) )
-   #else
+#else
    ASort( aArray, , , &( cBlock ) )
-   #endif
+#endif
    Form_1.Grid_1.Refresh
 
    RETURN ( lAscend := !lAscend )

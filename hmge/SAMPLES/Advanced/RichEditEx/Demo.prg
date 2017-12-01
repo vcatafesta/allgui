@@ -1548,4 +1548,4 @@ HB_FUNC ( MENUITEM_SETBITMAPS )
 
 #pragma ENDDUMP
 
-   #include "l_richeditbox.prg"
+#include "l_richeditbox.prg"

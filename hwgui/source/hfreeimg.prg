@@ -34,13 +34,13 @@ CLASS VAR aImages   INIT { }
 
    METHOD Release()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddFile( name ) CLASS HFreeImage
 
    LOCAL i
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    FOR EACH i IN ::aImages
       IF i:name == name
          i:nCounter ++
@@ -48,7 +48,7 @@ METHOD AddFile( name ) CLASS HFreeImage
          RETURN i
       ENDIF
    NEXT
-   #else
+#else
    FOR i := 1 TO Len( ::aImages )
       IF ::aImages[ i ]:name == name
          ::aImages[ i ]:nCounter ++
@@ -56,7 +56,7 @@ METHOD AddFile( name ) CLASS HFreeImage
          RETURN ::aImages[ i ]
       ENDIF
    NEXT
-   #endif
+#endif
    IF Empty( ::handle := hwg_Fi_load( name ) )
 
       RETURN NIL
@@ -104,7 +104,7 @@ METHOD Release() CLASS HFreeImage
 
    ::nCounter --
    IF ::nCounter == 0
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH i IN ::aImages
          IF i:handle == ::handle
             hwg_Fi_unload( ::handle )
@@ -116,7 +116,7 @@ METHOD Release() CLASS HFreeImage
             EXIT
          ENDIF
       NEXT
-      #else
+#else
       FOR i := 1 TO nlen
          IF ::aImages[ i ]:handle == ::handle
             hwg_Fi_unload( ::handle )
@@ -128,7 +128,7 @@ METHOD Release() CLASS HFreeImage
             EXIT
          ENDIF
       NEXT
-      #endif
+#endif
    ENDIF
 
    RETURN NIL
@@ -150,7 +150,7 @@ CLASS HSayFImage INHERIT HSayImage
 
    METHOD Paint( lpdis )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
       bSize, ctooltip, cType ) CLASS HSayFImage

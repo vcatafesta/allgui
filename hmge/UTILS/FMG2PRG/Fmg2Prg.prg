@@ -335,7 +335,7 @@ STATIC FUNCTION LDCS_SourceComment()
       " *" + CRLF +;
       " * Syntax..........: Harbour MiniGUI Library by Roberto Lopez <harbourminigui@gmail.com>" + CRLF +;
       " *                   http://harbourminigui.googlepages.com" + CRLF +;
-      " *  " + CRLF +;
+   " *  " + CRLF +;
       " * Author..........: Danny A. del Pilar" + CRLF +;
       " * E-mail..........: dhaine_adp@yahoo.com" + CRLF +;
       " * Note............: Copyright © 2007 Danny A. del Pilar, All Rights Reserved." + CRLF +;

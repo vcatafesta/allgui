@@ -34,7 +34,7 @@ FUNCTION Main
          HEIGHT 60 ;
          STRETCH ;
          PICTURE "oohg.jpg" ;   // 95 x 95
-      ON CLICK AutoMsgBox("Pict2") ;
+         ON CLICK AutoMsgBox("Pict2") ;
          TOOLTIP "I'm oPict2, click me." ;
          TRANSPARENT  // This clause is needed, see note at the end.
 
@@ -75,9 +75,9 @@ FUNCTION SetExcludeArea( oPict1 )
    */
    oPict1:aExcludeArea := ;
       { { oLbl1:col - oPict1:col, ;                   // left
-   oLbl1:row - oPict1:row, ;                   // top
-   oLbl1:col - oPict1:col + oLbl1:Width, ;     // right
-   oLbl1:row - oPict1:row + oLbl1:Height } }   // bottom
+      oLbl1:row - oPict1:row, ;                   // top
+      oLbl1:col - oPict1:col + oLbl1:Width, ;     // right
+      oLbl1:row - oPict1:row + oLbl1:Height } }   // bottom
 
    RETURN NIL
 

@@ -33,7 +33,7 @@ CLASS VAR winclass   INIT "EDIT"
 
    METHOD Refresh()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont,bInit,bSize,bPaint,bGfocus,bLfocus,ctoolt,tcolor,bcolor,   ;

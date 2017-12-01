@@ -87,7 +87,7 @@ CLASS TSpinner FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, value, fontname, fontsize, ;
       rl, rh, tooltip, change, lostfocus, gotfocus, h, HelpId, ;

@@ -94,7 +94,7 @@ CLASS TTextArray FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, RowCount, ColCount, ;
       BORDER, CLIENTEDGE, FontColor, BackColor, ProcedureName, ;

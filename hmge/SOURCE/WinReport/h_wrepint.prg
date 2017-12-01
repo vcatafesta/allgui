@@ -761,7 +761,7 @@ PROCEDURE MsgMulty( xMesaj, cTitle ) // Created By Bicahi Esgici <esgici@gmail.c
 
       RETU cRVal
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       /*
       */
 
@@ -793,7 +793,7 @@ FUNCTION HexaToDec(cString)
 
    RETURN nNumber
 
-   #endif
+#endif
    /*
    */
 
@@ -893,10 +893,10 @@ CREATE CLASS WREPORT
    DATA Lmargin          INIT 0
    DATA argm             INIT {nil,nil, nil,nil}
    DATA aStat            INIT { 'Define'     => .F. , ;    // Define Section
-   'Head'       => .F. , ;    // Head Section
-   'Body'       => .F. , ;    // Body Section
-   'Feet'       => .F. , ;    // Feet section
-   'Filtro'     => .F. , ;
+      'Head'       => .F. , ;    // Head Section
+      'Body'       => .F. , ;    // Body Section
+      'Feet'       => .F. , ;    // Feet section
+      'Filtro'     => .F. , ;
       'r_paint'    => .T. , ;
       'TempHead'   =>  '' , ;
       'Ghead'      => .F. , ;
@@ -931,17 +931,17 @@ CREATE CLASS WREPORT
       'PdfFont'    => {{"",""}} , ;
       'cStep'      => 2.625 , ;
       'Units'      => "MM", ;    //
-   'Orient'     =>  1 , ;   // default PORTRAIT
-   'Duplex'     =>  1 , ;   // default NONE
-   'Source'     =>  1 , ;   // default BIN_UPPER
-   'Collate'    =>  0 , ;   // default FALSE
-   'Res'        => -3 , ;   // default MEDIUM
-   'PaperSize'  =>  9 , ;   // default A4
-   'PaperLength'=> 0  , ;   // default 0
-   'PaperWidth' => 0  , ;   // default 0
-   'ColorMode'  => 1  , ;   // default MONOCHROME
-   'Copies'     => 1  , ;   // default 1
-   'Fname'      => "" , ;
+      'Orient'     =>  1 , ;   // default PORTRAIT
+      'Duplex'     =>  1 , ;   // default NONE
+      'Source'     =>  1 , ;   // default BIN_UPPER
+      'Collate'    =>  0 , ;   // default FALSE
+      'Res'        => -3 , ;   // default MEDIUM
+      'PaperSize'  =>  9 , ;   // default A4
+      'PaperLength'=> 0  , ;   // default 0
+      'PaperWidth' => 0  , ;   // default 0
+      'ColorMode'  => 1  , ;   // default MONOCHROME
+      'Copies'     => 1  , ;   // default 1
+      'Fname'      => "" , ;
       'Fsize'      => 0  , ;
       'FBold'      => .F., ;
       'Fita'       => .F., ;
@@ -960,127 +960,127 @@ CREATE CLASS WREPORT
 
    DATA Ach              INIT  {;
       {"DMPAPER_FIRST",               1}; /*  */
-   ,{"DMPAPER_LETTER",              1}; /*   Letter 8 1/2 x 11 in               */
-   ,{"DMPAPER_LETTERSMALL",         2}; /*   Letter Small 8 1/2 x 11 in         */
-   ,{"DMPAPER_TABLOID",             3}; /*   Tabloid 11 x 17 in                 */
-   ,{"DMPAPER_LEDGER",              4}; /*   Ledger 17 x 11 in                  */
-   ,{"DMPAPER_LEGAL",               5}; /*   Legal 8 1/2 x 14 in                */
-   ,{"DMPAPER_STATEMENT",           6}; /*   Statement 5 1/2 x 8 1/2 in         */
-   ,{"DMPAPER_EXECUTIVE",           7}; /*   Executive 7 1/4 x 10 1/2 in        */
-   ,{"DMPAPER_A3",                  8}; /*   A3 297 x 420 mm                    */
-   ,{"DMPAPER_A4",                  9}; /*   A4 210 x 297 mm                    */
-   ,{"DMPAPER_A4SMALL",            10}; /*   A4 Small 210 x 297 mm              */
-   ,{"DMPAPER_A5",                 11}; /*   A5 148 x 210 mm                    */
-   ,{"DMPAPER_B4",                 12}; /*   B4 (JIS) 250 x 354                 */
-   ,{"DMPAPER_B5",                 13}; /*   B5 (JIS) 182 x 257 mm              */
-   ,{"DMPAPER_FOLIO",              14}; /*   Folio 8 1/2 x 13 in                */
-   ,{"DMPAPER_QUARTO",             15}; /*   Quarto 215 x 275 mm                */
-   ,{"DMPAPER_10X14",              16}; /*   10x14 in                           */
-   ,{"DMPAPER_11X17",              17}; /*   11x17 in                           */
-   ,{"DMPAPER_NOTE",               18}; /*   Note 8 1/2 x 11 in                 */
-   ,{"DMPAPER_ENV_9",              19}; /*   Envelope #9 3 7/8 x 8 7/8          */
-   ,{"DMPAPER_ENV_10",             20}; /*   Envelope #10 4 1/8 x 9 1/2         */
-   ,{"DMPAPER_ENV_11",             21}; /*   Envelope #11 4 1/2 x 10 3/8        */
-   ,{"DMPAPER_ENV_12",             22}; /*   Envelope #12 4 \276 x 11           */
-   ,{"DMPAPER_ENV_14",             23}; /*   Envelope #14 5 x 11 1/2            */
-   ,{"DMPAPER_CSHEET",             24}; /*   C size sheet                       */
-   ,{"DMPAPER_DSHEET",             25}; /*   D size sheet                       */
-   ,{"DMPAPER_ESHEET",             26}; /*   E size sheet                       */
-   ,{"DMPAPER_ENV_DL",             27}; /*   Envelope DL 110 x 220mm            */
-   ,{"DMPAPER_ENV_C5",             28}; /*   Envelope C5 162 x 229 mm           */
-   ,{"DMPAPER_ENV_C3",             29}; /*   Envelope C3  324 x 458 mm          */
-   ,{"DMPAPER_ENV_C4",             30}; /*   Envelope C4  229 x 324 mm          */
-   ,{"DMPAPER_ENV_C6",             31}; /*   Envelope C6  114 x 162 mm          */
-   ,{"DMPAPER_ENV_C65",            32}; /*   Envelope C65 114 x 229 mm          */
-   ,{"DMPAPER_ENV_B4",             33}; /*   Envelope B4  250 x 353 mm          */
-   ,{"DMPAPER_ENV_B5",             34}; /*   Envelope B5  176 x 250 mm          */
-   ,{"DMPAPER_ENV_B6",             35}; /*   Envelope B6  176 x 125 mm          */
-   ,{"DMPAPER_ENV_ITALY",          36}; /*   Envelope 110 x 230 mm              */
-   ,{"DMPAPER_ENV_MONARCH",        37}; /*   Envelope Monarch 3.875 x 7.5 in    */
-   ,{"DMPAPER_ENV_PERSONAL",       38}; /*   6 3/4 Envelope 3 5/8 x 6 1/2 in    */
-   ,{"DMPAPER_FANFOLD_US",         39}; /*   US Std Fanfold 14 7/8 x 11 in      */
-   ,{"DMPAPER_FANFOLD_STD_GERMAN", 40}; /*   German Std Fanfold 8 1/2 x 12 in   */
-   ,{"DMPAPER_FANFOLD_LGL_GERMAN", 41}; /*   German Legal Fanfold 8 1/2 x 13 in */
-   ,{"DMPAPER_ISO_B4",             42}; /*   B4 (ISO) 250 x 353 mm              */
-   ,{"DMPAPER_JAPANESE_POSTCARD",  43}; /*   Japanese Postcard 100 x 148 mm     */
-   ,{"DMPAPER_9X11",               44}; /*   9 x 11 in                          */
-   ,{"DMPAPER_10X11",              45}; /*   10 x 11 in                         */
-   ,{"DMPAPER_15X11",              46}; /*   15 x 11 in                         */
-   ,{"DMPAPER_ENV_INVITE",         47}; /*   Envelope Invite 220 x 220 mm       */
-   ,{"DMPAPER_RESERVED_48",        48}; /*   RESERVED--DO NOT USE               */
-   ,{"DMPAPER_RESERVED_49",        49}; /*   RESERVED--DO NOT USE               */
-   ,{"DMPAPER_LETTER_EXTRA",       50}; /*   Letter Extra 9 \275 x 12 in        */
-   ,{"DMPAPER_LEGAL_EXTRA",        51}; /*   Legal Extra 9 \275 x 15 in         */
-   ,{"DMPAPER_TABLOID_EXTRA",      52}; /*   Tabloid Extra 11.69 x 18 in        */
-   ,{"DMPAPER_A4_EXTRA",           53}; /*   A4 Extra 9.27 x 12.69 in           */
-   ,{"DMPAPER_LETTER_TRANSVERSE",  54}; /*   Letter Transverse 8 \275 x 11 in   */
-   ,{"DMPAPER_A4_TRANSVERSE",      55}; /*   A4 Transverse 210 x 297 mm         */
-   ,{"DMPAPER_LETTER_EXTRA_TRANSVERSE",56}; /* Letter Extra Transverse 9\275 x 12 in */
-   ,{"DMPAPER_A_PLUS",             57};   /* SuperA/SuperA/A4 227 x 356 mm      */
-   ,{"DMPAPER_B_PLUS",             58};   /* SuperB/SuperB/A3 305 x 487 mm      */
-   ,{"DMPAPER_LETTER_PLUS",        59};   /* Letter Plus 8.5 x 12.69 in         */
-   ,{"DMPAPER_A4_PLUS",            60};   /* A4 Plus 210 x 330 mm               */
-   ,{"DMPAPER_A5_TRANSVERSE",      61};   /* A5 Transverse 148 x 210 mm         */
-   ,{"DMPAPER_B5_TRANSVERSE",      62};   /* B5 (JIS) Transverse 182 x 257 mm   */
-   ,{"DMPAPER_A3_EXTRA",           63};   /* A3 Extra 322 x 445 mm              */
-   ,{"DMPAPER_A5_EXTRA",           64};   /* A5 Extra 174 x 235 mm              */
-   ,{"DMPAPER_B5_EXTRA",           65};   /* B5 (ISO) Extra 201 x 276 mm        */
-   ,{"DMPAPER_A2",                 66};   /* A2 420 x 594 mm                    */
-   ,{"DMPAPER_A3_TRANSVERSE",      67};   /* A3 Transverse 297 x 420 mm         */
-   ,{"DMPAPER_A3_EXTRA_TRANSVERSE",68};   /* A3 Extra Transverse 322 x 445 mm   */
-   ,{"DMPAPER_DBL_JAPANESE_POSTCARD",69};  /* Japanese Double Postcard 200 x 148 mm */
-   ,{"DMPAPER_A6",                  70 };  /*  A6 105 x 148 mm                 */
-   ,{"DMPAPER_JENV_KAKU2",          71 };  /*  Japanese Envelope Kaku #2       */
-   ,{"DMPAPER_JENV_KAKU3",          72 };  /*  Japanese Envelope Kaku #3       */
-   ,{"DMPAPER_JENV_CHOU3",          73 };  /*  Japanese Envelope Chou #3       */
-   ,{"DMPAPER_JENV_CHOU4",          74 };  /*  Japanese Envelope Chou #4       */
-   ,{"DMPAPER_LETTER_ROTATED",      75 };  /*  Letter Rotated 11 x 8 1/2 11 in */
-   ,{"DMPAPER_A3_ROTATED",          76 };  /*  A3 Rotated 420 x 297 mm         */
-   ,{"DMPAPER_A4_ROTATED",          77 };  /*  A4 Rotated 297 x 210 mm         */
-   ,{"DMPAPER_A5_ROTATED",          78 };  /*  A5 Rotated 210 x 148 mm         */
-   ,{"DMPAPER_B4_JIS_ROTATED",      79 };  /*  B4 (JIS) Rotated 364 x 257 mm   */
-   ,{"DMPAPER_B5_JIS_ROTATED",      80 };  /*  B5 (JIS) Rotated 257 x 182 mm   */
-   ,{"DMPAPER_JAPANESE_POSTCARD_ROTATED",81};    /*Japanese Postcard Rotated 148 x 100 mm */
-   ,{"DMPAPER_DBL_JAPANESE_POSTCARD_ROTATED",82};/*double Japanese Postcard Rotated 148 x 200 mm */
-   ,{"DMPAPER_A6_ROTATED",          83 }; /*  A6 Rotated 148 x 105 mm         */
-   ,{"DMPAPER_JENV_KAKU2_ROTATED",  84 }; /*  Japanese Envelope Kaku #2 Rotated */
-   ,{"DMPAPER_JENV_KAKU3_ROTATED",  85 }; /*  Japanese Envelope Kaku #3 Rotated */
-   ,{"DMPAPER_JENV_CHOU3_ROTATED",  86 }; /*  Japanese Envelope Chou #3 Rotated */
-   ,{"DMPAPER_JENV_CHOU4_ROTATED",  87 }; /*  Japanese Envelope Chou #4 Rotated */
-   ,{"DMPAPER_B6_JIS",              88 }; /*  B6 (JIS) 128 x 182 mm           */
-   ,{"DMPAPER_B6_JIS_ROTATED",      89 }; /*  B6 (JIS) Rotated 182 x 128 mm   */
-   ,{"DMPAPER_12X11",               90 }; /*  12 x 11 in                      */
-   ,{"DMPAPER_JENV_YOU4",           91 }; /*  Japanese Envelope You #4        */
-   ,{"DMPAPER_JENV_YOU4_ROTATED",   92 }; /*  Japanese Envelope You #4 Rotated*/
-   ,{"DMPAPER_P16K",                93 }; /*  PRC 16K 146 x 215 mm            */
-   ,{"DMPAPER_P32K",                94 }; /*  PRC 32K 97 x 151 mm             */
-   ,{"DMPAPER_P32KBIG",             95 }; /*  PRC 32K(Big) 97 x 151 mm        */
-   ,{"DMPAPER_PENV_1",              96 }; /*  PRC Envelope #1 102 x 165 mm    */
-   ,{"DMPAPER_PENV_2",              97 }; /*  PRC Envelope #2 102 x 176 mm    */
-   ,{"DMPAPER_PENV_3",              98 }; /*  PRC Envelope #3 125 x 176 mm    */
-   ,{"DMPAPER_PENV_4",              99 }; /*  PRC Envelope #4 110 x 208 mm    */
-   ,{"DMPAPER_PENV_5",              100}; /*  PRC Envelope #5 110 x 220 mm    */
-   ,{"DMPAPER_PENV_6",              101}; /*  PRC Envelope #6 120 x 230 mm    */
-   ,{"DMPAPER_PENV_7",              102}; /*  PRC Envelope #7 160 x 230 mm    */
-   ,{"DMPAPER_PENV_8",              103}; /*  PRC Envelope #8 120 x 309 mm    */
-   ,{"DMPAPER_PENV_9",              104}; /*  PRC Envelope #9 229 x 324 mm    */
-   ,{"DMPAPER_PENV_10",             105}; /*  PRC Envelope #10 324 x 458 mm   */
-   ,{"DMPAPER_P16K_ROTATED",        106}; /*  PRC 16K Rotated                 */
-   ,{"DMPAPER_P32K_ROTATED",        107}; /*  PRC 32K Rotated                 */
-   ,{"DMPAPER_P32KBIG_ROTATED",     108}; /*  PRC 32K(Big) Rotated            */
-   ,{"DMPAPER_PENV_1_ROTATED",      109}; /*  PRC Envelope #1 Rotated 165 x 102 mm */
-   ,{"DMPAPER_PENV_2_ROTATED",      110}; /*  PRC Envelope #2 Rotated 176 x 102 mm */
-   ,{"DMPAPER_PENV_3_ROTATED",      111}; /*  PRC Envelope #3 Rotated 176 x 125 mm */
-   ,{"DMPAPER_PENV_4_ROTATED",      112}; /*  PRC Envelope #4 Rotated 208 x 110 mm */
-   ,{"DMPAPER_PENV_5_ROTATED",      113}; /*  PRC Envelope #5 Rotated 220 x 110 mm */
-   ,{"DMPAPER_PENV_6_ROTATED",      114}; /*  PRC Envelope #6 Rotated 230 x 120 mm */
-   ,{"DMPAPER_PENV_7_ROTATED",      115}; /*  PRC Envelope #7 Rotated 230 x 160 mm */
-   ,{"DMPAPER_PENV_8_ROTATED",      116}; /*  PRC Envelope #8 Rotated 309 x 120 mm */
-   ,{"DMPAPER_PENV_9_ROTATED",      117}; /*  PRC Envelope #9 Rotated 324 x 229 mm */
-   ,{"DMPAPER_PENV_10_ROTATED",     118}; /*  PRC Envelope #10 Rotated 458 x 324 mm */
-   ,{"DMPAPER_USER",                256};
+      ,{"DMPAPER_LETTER",              1}; /*   Letter 8 1/2 x 11 in               */
+      ,{"DMPAPER_LETTERSMALL",         2}; /*   Letter Small 8 1/2 x 11 in         */
+      ,{"DMPAPER_TABLOID",             3}; /*   Tabloid 11 x 17 in                 */
+      ,{"DMPAPER_LEDGER",              4}; /*   Ledger 17 x 11 in                  */
+      ,{"DMPAPER_LEGAL",               5}; /*   Legal 8 1/2 x 14 in                */
+      ,{"DMPAPER_STATEMENT",           6}; /*   Statement 5 1/2 x 8 1/2 in         */
+      ,{"DMPAPER_EXECUTIVE",           7}; /*   Executive 7 1/4 x 10 1/2 in        */
+      ,{"DMPAPER_A3",                  8}; /*   A3 297 x 420 mm                    */
+      ,{"DMPAPER_A4",                  9}; /*   A4 210 x 297 mm                    */
+      ,{"DMPAPER_A4SMALL",            10}; /*   A4 Small 210 x 297 mm              */
+      ,{"DMPAPER_A5",                 11}; /*   A5 148 x 210 mm                    */
+      ,{"DMPAPER_B4",                 12}; /*   B4 (JIS) 250 x 354                 */
+      ,{"DMPAPER_B5",                 13}; /*   B5 (JIS) 182 x 257 mm              */
+      ,{"DMPAPER_FOLIO",              14}; /*   Folio 8 1/2 x 13 in                */
+      ,{"DMPAPER_QUARTO",             15}; /*   Quarto 215 x 275 mm                */
+      ,{"DMPAPER_10X14",              16}; /*   10x14 in                           */
+      ,{"DMPAPER_11X17",              17}; /*   11x17 in                           */
+      ,{"DMPAPER_NOTE",               18}; /*   Note 8 1/2 x 11 in                 */
+      ,{"DMPAPER_ENV_9",              19}; /*   Envelope #9 3 7/8 x 8 7/8          */
+      ,{"DMPAPER_ENV_10",             20}; /*   Envelope #10 4 1/8 x 9 1/2         */
+      ,{"DMPAPER_ENV_11",             21}; /*   Envelope #11 4 1/2 x 10 3/8        */
+      ,{"DMPAPER_ENV_12",             22}; /*   Envelope #12 4 \276 x 11           */
+      ,{"DMPAPER_ENV_14",             23}; /*   Envelope #14 5 x 11 1/2            */
+      ,{"DMPAPER_CSHEET",             24}; /*   C size sheet                       */
+      ,{"DMPAPER_DSHEET",             25}; /*   D size sheet                       */
+      ,{"DMPAPER_ESHEET",             26}; /*   E size sheet                       */
+      ,{"DMPAPER_ENV_DL",             27}; /*   Envelope DL 110 x 220mm            */
+      ,{"DMPAPER_ENV_C5",             28}; /*   Envelope C5 162 x 229 mm           */
+      ,{"DMPAPER_ENV_C3",             29}; /*   Envelope C3  324 x 458 mm          */
+      ,{"DMPAPER_ENV_C4",             30}; /*   Envelope C4  229 x 324 mm          */
+      ,{"DMPAPER_ENV_C6",             31}; /*   Envelope C6  114 x 162 mm          */
+      ,{"DMPAPER_ENV_C65",            32}; /*   Envelope C65 114 x 229 mm          */
+      ,{"DMPAPER_ENV_B4",             33}; /*   Envelope B4  250 x 353 mm          */
+      ,{"DMPAPER_ENV_B5",             34}; /*   Envelope B5  176 x 250 mm          */
+      ,{"DMPAPER_ENV_B6",             35}; /*   Envelope B6  176 x 125 mm          */
+      ,{"DMPAPER_ENV_ITALY",          36}; /*   Envelope 110 x 230 mm              */
+      ,{"DMPAPER_ENV_MONARCH",        37}; /*   Envelope Monarch 3.875 x 7.5 in    */
+      ,{"DMPAPER_ENV_PERSONAL",       38}; /*   6 3/4 Envelope 3 5/8 x 6 1/2 in    */
+      ,{"DMPAPER_FANFOLD_US",         39}; /*   US Std Fanfold 14 7/8 x 11 in      */
+      ,{"DMPAPER_FANFOLD_STD_GERMAN", 40}; /*   German Std Fanfold 8 1/2 x 12 in   */
+      ,{"DMPAPER_FANFOLD_LGL_GERMAN", 41}; /*   German Legal Fanfold 8 1/2 x 13 in */
+      ,{"DMPAPER_ISO_B4",             42}; /*   B4 (ISO) 250 x 353 mm              */
+      ,{"DMPAPER_JAPANESE_POSTCARD",  43}; /*   Japanese Postcard 100 x 148 mm     */
+      ,{"DMPAPER_9X11",               44}; /*   9 x 11 in                          */
+      ,{"DMPAPER_10X11",              45}; /*   10 x 11 in                         */
+      ,{"DMPAPER_15X11",              46}; /*   15 x 11 in                         */
+      ,{"DMPAPER_ENV_INVITE",         47}; /*   Envelope Invite 220 x 220 mm       */
+      ,{"DMPAPER_RESERVED_48",        48}; /*   RESERVED--DO NOT USE               */
+      ,{"DMPAPER_RESERVED_49",        49}; /*   RESERVED--DO NOT USE               */
+      ,{"DMPAPER_LETTER_EXTRA",       50}; /*   Letter Extra 9 \275 x 12 in        */
+      ,{"DMPAPER_LEGAL_EXTRA",        51}; /*   Legal Extra 9 \275 x 15 in         */
+      ,{"DMPAPER_TABLOID_EXTRA",      52}; /*   Tabloid Extra 11.69 x 18 in        */
+      ,{"DMPAPER_A4_EXTRA",           53}; /*   A4 Extra 9.27 x 12.69 in           */
+      ,{"DMPAPER_LETTER_TRANSVERSE",  54}; /*   Letter Transverse 8 \275 x 11 in   */
+      ,{"DMPAPER_A4_TRANSVERSE",      55}; /*   A4 Transverse 210 x 297 mm         */
+      ,{"DMPAPER_LETTER_EXTRA_TRANSVERSE",56}; /* Letter Extra Transverse 9\275 x 12 in */
+      ,{"DMPAPER_A_PLUS",             57};   /* SuperA/SuperA/A4 227 x 356 mm      */
+      ,{"DMPAPER_B_PLUS",             58};   /* SuperB/SuperB/A3 305 x 487 mm      */
+      ,{"DMPAPER_LETTER_PLUS",        59};   /* Letter Plus 8.5 x 12.69 in         */
+      ,{"DMPAPER_A4_PLUS",            60};   /* A4 Plus 210 x 330 mm               */
+      ,{"DMPAPER_A5_TRANSVERSE",      61};   /* A5 Transverse 148 x 210 mm         */
+      ,{"DMPAPER_B5_TRANSVERSE",      62};   /* B5 (JIS) Transverse 182 x 257 mm   */
+      ,{"DMPAPER_A3_EXTRA",           63};   /* A3 Extra 322 x 445 mm              */
+      ,{"DMPAPER_A5_EXTRA",           64};   /* A5 Extra 174 x 235 mm              */
+      ,{"DMPAPER_B5_EXTRA",           65};   /* B5 (ISO) Extra 201 x 276 mm        */
+      ,{"DMPAPER_A2",                 66};   /* A2 420 x 594 mm                    */
+      ,{"DMPAPER_A3_TRANSVERSE",      67};   /* A3 Transverse 297 x 420 mm         */
+      ,{"DMPAPER_A3_EXTRA_TRANSVERSE",68};   /* A3 Extra Transverse 322 x 445 mm   */
+      ,{"DMPAPER_DBL_JAPANESE_POSTCARD",69};  /* Japanese Double Postcard 200 x 148 mm */
+      ,{"DMPAPER_A6",                  70 };  /*  A6 105 x 148 mm                 */
+      ,{"DMPAPER_JENV_KAKU2",          71 };  /*  Japanese Envelope Kaku #2       */
+      ,{"DMPAPER_JENV_KAKU3",          72 };  /*  Japanese Envelope Kaku #3       */
+      ,{"DMPAPER_JENV_CHOU3",          73 };  /*  Japanese Envelope Chou #3       */
+      ,{"DMPAPER_JENV_CHOU4",          74 };  /*  Japanese Envelope Chou #4       */
+      ,{"DMPAPER_LETTER_ROTATED",      75 };  /*  Letter Rotated 11 x 8 1/2 11 in */
+      ,{"DMPAPER_A3_ROTATED",          76 };  /*  A3 Rotated 420 x 297 mm         */
+      ,{"DMPAPER_A4_ROTATED",          77 };  /*  A4 Rotated 297 x 210 mm         */
+      ,{"DMPAPER_A5_ROTATED",          78 };  /*  A5 Rotated 210 x 148 mm         */
+      ,{"DMPAPER_B4_JIS_ROTATED",      79 };  /*  B4 (JIS) Rotated 364 x 257 mm   */
+      ,{"DMPAPER_B5_JIS_ROTATED",      80 };  /*  B5 (JIS) Rotated 257 x 182 mm   */
+      ,{"DMPAPER_JAPANESE_POSTCARD_ROTATED",81};    /*Japanese Postcard Rotated 148 x 100 mm */
+      ,{"DMPAPER_DBL_JAPANESE_POSTCARD_ROTATED",82};/*double Japanese Postcard Rotated 148 x 200 mm */
+      ,{"DMPAPER_A6_ROTATED",          83 }; /*  A6 Rotated 148 x 105 mm         */
+      ,{"DMPAPER_JENV_KAKU2_ROTATED",  84 }; /*  Japanese Envelope Kaku #2 Rotated */
+      ,{"DMPAPER_JENV_KAKU3_ROTATED",  85 }; /*  Japanese Envelope Kaku #3 Rotated */
+      ,{"DMPAPER_JENV_CHOU3_ROTATED",  86 }; /*  Japanese Envelope Chou #3 Rotated */
+      ,{"DMPAPER_JENV_CHOU4_ROTATED",  87 }; /*  Japanese Envelope Chou #4 Rotated */
+      ,{"DMPAPER_B6_JIS",              88 }; /*  B6 (JIS) 128 x 182 mm           */
+      ,{"DMPAPER_B6_JIS_ROTATED",      89 }; /*  B6 (JIS) Rotated 182 x 128 mm   */
+      ,{"DMPAPER_12X11",               90 }; /*  12 x 11 in                      */
+      ,{"DMPAPER_JENV_YOU4",           91 }; /*  Japanese Envelope You #4        */
+      ,{"DMPAPER_JENV_YOU4_ROTATED",   92 }; /*  Japanese Envelope You #4 Rotated*/
+      ,{"DMPAPER_P16K",                93 }; /*  PRC 16K 146 x 215 mm            */
+      ,{"DMPAPER_P32K",                94 }; /*  PRC 32K 97 x 151 mm             */
+      ,{"DMPAPER_P32KBIG",             95 }; /*  PRC 32K(Big) 97 x 151 mm        */
+      ,{"DMPAPER_PENV_1",              96 }; /*  PRC Envelope #1 102 x 165 mm    */
+      ,{"DMPAPER_PENV_2",              97 }; /*  PRC Envelope #2 102 x 176 mm    */
+      ,{"DMPAPER_PENV_3",              98 }; /*  PRC Envelope #3 125 x 176 mm    */
+      ,{"DMPAPER_PENV_4",              99 }; /*  PRC Envelope #4 110 x 208 mm    */
+      ,{"DMPAPER_PENV_5",              100}; /*  PRC Envelope #5 110 x 220 mm    */
+      ,{"DMPAPER_PENV_6",              101}; /*  PRC Envelope #6 120 x 230 mm    */
+      ,{"DMPAPER_PENV_7",              102}; /*  PRC Envelope #7 160 x 230 mm    */
+      ,{"DMPAPER_PENV_8",              103}; /*  PRC Envelope #8 120 x 309 mm    */
+      ,{"DMPAPER_PENV_9",              104}; /*  PRC Envelope #9 229 x 324 mm    */
+      ,{"DMPAPER_PENV_10",             105}; /*  PRC Envelope #10 324 x 458 mm   */
+      ,{"DMPAPER_P16K_ROTATED",        106}; /*  PRC 16K Rotated                 */
+      ,{"DMPAPER_P32K_ROTATED",        107}; /*  PRC 32K Rotated                 */
+      ,{"DMPAPER_P32KBIG_ROTATED",     108}; /*  PRC 32K(Big) Rotated            */
+      ,{"DMPAPER_PENV_1_ROTATED",      109}; /*  PRC Envelope #1 Rotated 165 x 102 mm */
+      ,{"DMPAPER_PENV_2_ROTATED",      110}; /*  PRC Envelope #2 Rotated 176 x 102 mm */
+      ,{"DMPAPER_PENV_3_ROTATED",      111}; /*  PRC Envelope #3 Rotated 176 x 125 mm */
+      ,{"DMPAPER_PENV_4_ROTATED",      112}; /*  PRC Envelope #4 Rotated 208 x 110 mm */
+      ,{"DMPAPER_PENV_5_ROTATED",      113}; /*  PRC Envelope #5 Rotated 220 x 110 mm */
+      ,{"DMPAPER_PENV_6_ROTATED",      114}; /*  PRC Envelope #6 Rotated 230 x 120 mm */
+      ,{"DMPAPER_PENV_7_ROTATED",      115}; /*  PRC Envelope #7 Rotated 230 x 160 mm */
+      ,{"DMPAPER_PENV_8_ROTATED",      116}; /*  PRC Envelope #8 Rotated 309 x 120 mm */
+      ,{"DMPAPER_PENV_9_ROTATED",      117}; /*  PRC Envelope #9 Rotated 324 x 229 mm */
+      ,{"DMPAPER_PENV_10_ROTATED",     118}; /*  PRC Envelope #10 Rotated 458 x 324 mm */
+      ,{"DMPAPER_USER",                256};
       ,{"DMBIN_FIRST",          1};   /* bin selections */
-   ,{"DMBIN_UPPER",          1};
+      ,{"DMBIN_UPPER",          1};
       ,{"DMBIN_ONLYONE",        1};
       ,{"DMBIN_LOWER",          2};
       ,{"DMBIN_MIDDLE",         3};
@@ -1096,8 +1096,8 @@ CREATE CLASS WREPORT
       ,{"DMBIN_FORMSOURCE",    15};
       ,{"DMBIN_LAST",          15};
       ,{"DMBIN_USER",         256};     /* device specific bins start here */
-   ,{"ANSI_CHARSET",              0};  /*  _acharset :={; */
-   ,{"DEFAULT_CHARSET",           1};
+      ,{"ANSI_CHARSET",              0};  /*  _acharset :={; */
+      ,{"DEFAULT_CHARSET",           1};
       ,{"SYMBOL_CHARSET",            2};
       ,{"SHIFTJIS_CHARSET",        128};
       ,{"HANGEUL_CHARSET",         129};
@@ -1117,17 +1117,17 @@ CREATE CLASS WREPORT
       ,{"MAC_CHARSET",              77};
       ,{"BALTIC_CHARSET",          186};
       ,{"PS_SOLID",            0};       /* Pen Styles */
-   ,{"PS_DASH",             1};       /* -------  */
-   ,{"PS_DOT",              2};       /* .......  */
-   ,{"PS_DASHDOT",          3};       /* _._._._  */
-   ,{"PS_DASHDOTDOT",       4};       /* _.._.._  */
-   ,{"PS_NULL",             5};
+      ,{"PS_DASH",             1};       /* -------  */
+      ,{"PS_DOT",              2};       /* .......  */
+      ,{"PS_DASHDOT",          3};       /* _._._._  */
+      ,{"PS_DASHDOTDOT",       4};       /* _.._.._  */
+      ,{"PS_NULL",             5};
       ,{"PS_INSIDEFRAME",      6};
       ,{"PS_USERSTYLE",        7};
       ,{"PS_ALTERNATE",        8};
       ,{"PS_STYLE_MASK",       0x0000000F};
       ,{"BS_SOLID",            0};       /* Brush Styles */
-   ,{"BS_NULL",             1};
+      ,{"BS_NULL",             1};
       ,{"BS_HOLLOW",           1};
       ,{"BS_HATCHED",          2};
       ,{"BS_PATTERN",          3};
@@ -1138,13 +1138,13 @@ CREATE CLASS WREPORT
       ,{"BS_DIBPATTERN8X8",    8};
       ,{"BS_MONOPATTERN",      9};
       ,{"ALTERNATE",            1}; /* PolyFill() Modes */
-   ,{"WINDING",              2};
+      ,{"WINDING",              2};
       ,{"POLYFILL_LAST",        2};
       ,{"TRANSPARENT",         1}; /* Background Modes */
-   ,{"OPAQUE",              2};
+      ,{"OPAQUE",              2};
       ,{"BKMODE_LAST",         2};
       ,{"TA_NOUPDATECP",       0}; /* Text Alignment Options */
-   ,{"TA_UPDATECP",         1};
+      ,{"TA_UPDATECP",         1};
       ,{"TA_LEFT",             0};
       ,{"TA_RIGHT",            2};
       ,{"TA_CENTER",           6};
@@ -1157,7 +1157,7 @@ CREATE CLASS WREPORT
       ,{"TA_RTLREADING",       256};
       ,{"TA_MASK",       (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING)};
       ,{"RGN_AND",             1};  /* CombineRgn() Styles */
-   ,{"RGN_OR",              2};
+      ,{"RGN_OR",              2};
       ,{"RGN_XOR",             3};
       ,{"RGN_DIFF",            4};
       ,{"RGN_COPY",            5};
@@ -1171,11 +1171,11 @@ CREATE CLASS WREPORT
       ,{"MIN",           RGN_AND};
       ,{"MAX",          RGN_COPY};
       ,{"DMCOLOR_MONOCHROME", 1}; /* color enable/disable for color printers */
-   ,{"DMCOLOR_COLOR",      2};
+      ,{"DMCOLOR_COLOR",      2};
       ,{"MONO",               1};
       ,{"COLOR",              2};
       ,{"DMRES_DRAFT",    -1};  /* print qualities */
-   ,{"DMRES_LOW",      -2};
+      ,{"DMRES_LOW",      -2};
       ,{"DMRES_MEDIUM",   -3};
       ,{"DMRES_HIGH",     -4};
       ,{"DRAFT",          -1};
@@ -1183,11 +1183,11 @@ CREATE CLASS WREPORT
       ,{"MEDIUM",         -3};
       ,{"HIGH",           -4};
       ,{"ILD_NORMAL",     0x0000}; /* IMAGELIST DRAWING STYLES */
-   ,{"ILD_MASK",       0x0010};
+      ,{"ILD_MASK",       0x0010};
       ,{"ILD_BLEND25",    0x0002};
       ,{"ILD_BLEND50",    0x0004};
       ,{"DMDUP_SIMPLEX"   ,1};   /* duplex enable */
-   ,{"DMDUP_VERTICAL"  ,2};
+      ,{"DMDUP_VERTICAL"  ,2};
       ,{"DMDUP_HORIZONTAL",3};
       ,{"OFF"             ,1};
       ,{"SIMPLEX"         ,1};
@@ -1219,7 +1219,7 @@ CREATE CLASS WREPORT
       ,{"DT_PREFIXONLY"          , 0x00200000};
       ,{"HB_ZEBRA_FLAG_CHECKSUM" ,          1};
       ,{"HB_ZEBRA_FLAG_WIDE2"    ,       0x00};  // Dummy flag - default
-   ,{"HB_ZEBRA_FLAG_WIDE2_5"  ,       0x40};
+      ,{"HB_ZEBRA_FLAG_WIDE2_5"  ,       0x40};
       ,{"HB_ZEBRA_FLAG_WIDE3"    ,       0x80};
       ,{"HB_ZEBRA_FLAG_PDF417_TRUNCATED"    , 0x0100};
       ,{"HB_ZEBRA_FLAG_PDF417_LEVEL_MASK"   , 0xF000};
@@ -1286,10 +1286,10 @@ CREATE CLASS WREPORT
    METHOD END()
    */
 
-ENDCLASS
+   ENDCLASS
 
-/*
-*/
+   /*
+   */
 
 METHOD New() CLASS WREPORT
 
@@ -1488,6 +1488,7 @@ METHOD pGenSet() CLASS WREPORT
 METHOD CheckAlign( arrypar, cmdline , section ) CLASS WREPORT //returns the correct alignment
 
    LOCAL vr:= "", _arg3, aAlign := {"CENTER","RIGHT","JUSTIFY"}
+
    empty(cmdline);empty(section)
 
    IF ASCAN(arryPar,[ALIGN]) > 0
@@ -2609,16 +2610,16 @@ METHOD Leggipar(ArryPar,cmdline,section) CLASS WREPORT // The core of  interpret
          ::Putarray(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
             ,eval(epar,ArryPar[2]) ;
             ,::MACROCOMPILE(ArryPar[4],.t.,cmdline,section)    ;            //arr
-         ,if(ascan(arryPar,[LEN])>0,::macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
-         ,nil                                                           ;      //rowheight
-         ,nil                                                           ;      //vertalign
-         ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
-         ,nil                                                           ;      //abrushes
-         ,nil                                                           ;      //apens
-         ,if(ascan(arryPar,[FONT])>0,NIL,NIL)                           ;      //afonts
-         ,if(ascan(arryPar,[COLOR])> 0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
-         ,NIL                                                           ;      //abitmaps
-         ,nil )                                                                //userfun
+            ,if(ascan(arryPar,[LEN])>0,::macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
+            ,nil                                                           ;      //rowheight
+            ,nil                                                           ;      //vertalign
+            ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
+            ,nil                                                           ;      //abrushes
+            ,nil                                                           ;      //apens
+            ,if(ascan(arryPar,[FONT])>0,NIL,NIL)                           ;      //afonts
+            ,if(ascan(arryPar,[COLOR])> 0,::UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
+            ,NIL                                                           ;      //abitmaps
+            ,nil )                                                                //userfun
 
          hbprn:settextalign( al[1] )
          hbprn:settexcolor ( al[2] )
@@ -3158,6 +3159,7 @@ METHOD GFeet() CLASS WREPORT
 METHOD UsaFont(arrypar, cmdline , section) CLASS WREPORT
 
    LOCAL al := { hbprn:gettextalign(), hbprn:gettexcolor() }
+
    empty(cmdline);empty(section)
 
    hbprn:modifyfont("Fx",;
@@ -3401,6 +3403,7 @@ METHOD Hgconvert(ltxt) CLASS WREPORT
 METHOD TheHead() CLASS WREPORT
 
    LOCAL grd, nkol
+
    IF nPgr == mx_pg; last_pag:=.t. ;Endif
    DO CASE
    CASE oWr:PrnDrv = "MINI"

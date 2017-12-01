@@ -72,7 +72,7 @@ FUNCTION Main
          main ;
          title cTitle ;
          nomaximize ;    /* GAL */
-      nosize          /* GAL */
+         nosize          /* GAL */
 
       DEFINE GRID Square
          row 10

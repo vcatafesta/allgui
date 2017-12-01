@@ -65,18 +65,18 @@ STATIC aSpaceLabel      := {'1.0', '1.5', '2.0', '2.5', '3.0'}
 STATIC aSpaceValue      := { 1.0,   1.5,   2.0,   2.5,   3.0 }
 STATIC aNumFormatLabel  := { ;
    'No bullets or numbering' , ; // RTF_NOBULLETNUMBER
-'Bullets'                 , ; // RTF_BULLET
-'Arabic numerals'         , ; // RTF_ARABICNUMBER
-'Lowercase letters'       , ; // RTF_LOWERCASELETTER
-'Lowercase Roman numerals', ; // RTF_UPPERCASELETTER
-'Uppercase letters'       , ; // RTF_LOWERCASEROMANNUMBER
-'Uppercase Roman numerals'  } // RTF_UPPERCASEROMANNUMBER
+   'Bullets'                 , ; // RTF_BULLET
+   'Arabic numerals'         , ; // RTF_ARABICNUMBER
+   'Lowercase letters'       , ; // RTF_LOWERCASELETTER
+   'Lowercase Roman numerals', ; // RTF_UPPERCASELETTER
+   'Uppercase letters'       , ; // RTF_LOWERCASEROMANNUMBER
+   'Uppercase Roman numerals'  } // RTF_UPPERCASEROMANNUMBER
 STATIC aNumStyleLabel  := { ;
    'Right parenthesis', ; // RTF_PAREN
-'Two parentheses'  , ; // RTF_PARENS
-'Period'           , ; // RTF_PERIOD
-'No punctuation'   , ; // RTF_PLAIN
-'Hidden number'      } // RTF_NONUMBER
+   'Two parentheses'  , ; // RTF_PARENS
+   'Period'           , ; // RTF_PERIOD
+   'No punctuation'   , ; // RTF_PLAIN
+   'Hidden number'      } // RTF_NONUMBER
 
 STATIC cFileName        := ''
 STATIC cFileFolder      := ''
@@ -774,8 +774,8 @@ STATIC PROCEDURE DoLink
 
    DO CASE
    CASE HMG_LOWER(HB_USUBSTR(cLink,1,7)) == 'http://' .OR. ;
-         HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
-         HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.'
+      HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
+      HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.'
       SHELLEXECUTE(NIL, 'Open', cLink, NIL, NIL, SW_SHOWNORMAL)
    CASE '@' $ cLink .AND. '.' $ cLink .AND. .NOT.(' ' $ cLink)
       SHELLEXECUTE(NIL, 'Open', 'rundll32.exe', 'url.dll,FileProtocolHandler mailto:' + cLink, NIL, SW_SHOWNORMAL)

@@ -209,7 +209,7 @@ CLASS OOHG_TErrorHtml
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cLang ) CLASS OOHG_TErrorHtml
 
@@ -582,10 +582,10 @@ METHOD CopyLog( cTo ) CLASS OOHG_TErrorHtml
 
 METHOD ErrorMessage( cError, nPosition ) CLASS OOHG_TErrorHtml
 
-   #ifdef __ERROR_EVENTS__
+#ifdef __ERROR_EVENTS__
    LOCAL aEvents
 
-   #endif
+#endif
 
    // Header
    ::cBufferScreen += ooHGVersion() + CHR( 13 ) + CHR( 10 ) + cError + CHR( 13 ) + CHR( 10 )
@@ -608,11 +608,11 @@ METHOD ErrorMessage( cError, nPosition ) CLASS OOHG_TErrorHtml
    ENDDO
 
    // Event list
-   #ifdef __ERROR_EVENTS__
+#ifdef __ERROR_EVENTS__
    aEvents := _ListEventInfo()
    ::Write( ::aMessages[11] )
    AEVAL( aEvents, { | c | ::Write( c ) } )
-   #endif
+#endif
 
    dbcloseall()
    ::CreateLog()
@@ -666,7 +666,7 @@ CLASS OOHG_TErrorTxt FROM OOHG_TErrorHtml
 
    METHOD Write2
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Write2( cTxt ) CLASS OOHG_TErrorTxt
 

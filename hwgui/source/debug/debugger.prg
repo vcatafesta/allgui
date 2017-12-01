@@ -229,7 +229,7 @@ CLASS HBDebugger
 
    METHOD VarSetValue( aVar, uValue )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HBDebugger
 
@@ -586,7 +586,7 @@ STATIC FUNCTION SendWatch()
 
    RETURN arr
 
-   #define WA_ITEMS  12
+#define WA_ITEMS  12
 
 STATIC FUNCTION SendAreas()
 
@@ -662,9 +662,9 @@ FUNCTION __dbgValToStr( uVal )
    CASE cType $ "CM" ; RETURN '"' + uVal + '"'
    CASE cType == "L" ; RETURN Iif( uVal, ".T.", ".F." )
    CASE cType == "D" ; RETURN DToC( uVal )
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    CASE cType == "T" ; RETURN hb_TToC( uVal )
-      #endif
+#endif
    CASE cType == "N" ; RETURN Str( uVal )
    CASE cType == "O" ; RETURN "Class " + uVal:ClassName() + " object"
    CASE cType == "H" ; RETURN "Hash(" + hb_ntos( Len( uVal ) ) + ")"

@@ -26,19 +26,19 @@ FUNCTION _HMG_HPDF_INIT ( cPDFFile, nOrientation, nPaperSize, nPaperLength, nPap
    IF valtype( _HMG_SYSDATA[ 150 ] ) == 'U'
       _HMG_SYSDATA[ 150 ] := { ;
          Nil, ;                  //  1.PDF Object
-      cPDFFile,;              //  2.PDF File to Save
-      0,;                     //  3.PDF PaperSize
-      0,;                     //  4.PDF PaperWidth
-      0,;                     //  5.PDF PaperHeight
-      nOrientation,;          //  6.PDF Orientation
-      Nil, ;                  //  7.PDF Current Page
-      'Helvetica',;           //  8.PDF default font
-      12,;                    //  9.PDF default fontsize
-      "StandardEncoding",;    // 10.PDF default encoding
-      {},;                    // 11.PDF Outlines Array
-      {},;                    // 12.PDF Pages Array
-      0;                      // 13.PDF Current Page Number
-      }
+         cPDFFile,;              //  2.PDF File to Save
+         0,;                     //  3.PDF PaperSize
+         0,;                     //  4.PDF PaperWidth
+         0,;                     //  5.PDF PaperHeight
+         nOrientation,;          //  6.PDF Orientation
+         Nil, ;                  //  7.PDF Current Page
+         'Helvetica',;           //  8.PDF default font
+         12,;                    //  9.PDF default fontsize
+         "StandardEncoding",;    // 10.PDF default encoding
+         {},;                    // 11.PDF Outlines Array
+         {},;                    // 12.PDF Pages Array
+         0;                      // 13.PDF Current Page Number
+         }
       _HMG_SYSDATA[ 150 ][ 1 ] := HPDF_New()
       IF _HMG_SYSDATA[ 150 ][ 1 ] == Nil
          _HMG_HPDF_Error( 2 )

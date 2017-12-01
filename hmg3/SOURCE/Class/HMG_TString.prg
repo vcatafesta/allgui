@@ -26,7 +26,7 @@ CREATE CLASS HMG_TGeneral
    // AS <type> ( ARRAY, BLOCK, CHARACTER, DATE, HASH, LOGICAL, NIL, NUMERIC, SYMBOL, TIMESTAMP, POINTER, USUAL )
    VAR cargo   AS USUAL   INIT Nil   EXPORTED // User-definable variable
 
-ENDCLASS
+   ENDCLASS
 
 CREATE CLASS HMG_TString   INHERIT HMG_TGeneral
 
@@ -70,5 +70,4 @@ CREATE CLASS HMG_TString   INHERIT HMG_TGeneral
    METHOD IsAlphaNumeric( cString )             INLINE   HMG_ISALPHANUMERIC( cString )   // return (ISALPHA(c) .OR. ISDIGIT(c))
    METHOD StrCmp( cString1, cString2, lCaseSensitive )   INLINE   HMG_StrCmp( cString1, cString2, lCaseSensitive )   // return -1, 0 , +1
 
-ENDCLASS
-
+   ENDCLASS

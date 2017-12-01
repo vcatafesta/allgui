@@ -47,37 +47,37 @@ PROC T_Pack()                             // Table Pack
             { , " New ", "Another New Record",,,  { 2, 1, 105 }     },;
             { , "Exit",  "Cancel Appending",,,,                 .T. } },;
             aCdBloks := { { || DBSKIP() },;                                            // 1
-         { || DBGOBOTTOM() },;                                        // 2
-         { || DBAPPEND() },;                                          // 3
-         { || RefrBrow(), RefrStBar() },;                             // 4
-         { | x1, i1 | x1 := FIELDGET( i1 ),;                          // 5
-         _SetValue( Num2Name( "cfc_", i1 ), "frmCombFrm", x1 )},;
+            { || DBGOBOTTOM() },;                                        // 2
+            { || DBAPPEND() },;                                          // 3
+            { || RefrBrow(), RefrStBar() },;                             // 4
+            { | x1, i1 | x1 := FIELDGET( i1 ),;                          // 5
+            _SetValue( Num2Name( "cfc_", i1 ), "frmCombFrm", x1 )},;
             { | x1, i1 | x1 := _GetValue( Num2Name( "cfc_", i1 ), "frmCombFrm" ),;  // 6
-         FIELDPUT( i1, x1 ) } }
+            FIELDPUT( i1, x1 ) } }
 
          DBGOBOTTOM()
          DBSKIP()      // to Phantom record, for empty field values
 
          AEVAL( aStruct , { | a1, i1 | ;
             AADD( aLabels, a1[ 1 ] ),;         // Field Name
-         AADD( aValues, FIELDGET( i1 ) ),;  // Field Value
-         AADD( aDTypes, a1[ 2 ] ),;         // Field Type
-         AADD( aWidths, a1[ 3 ] ),;         // Field Width
-         AADD( aDecims, a1[ 4 ] ),;         // Field Decimal
-         AADD( aValids,  ) } )              // Field Validity Code Blocks
+            AADD( aValues, FIELDGET( i1 ) ),;  // Field Value
+            AADD( aDTypes, a1[ 2 ] ),;         // Field Type
+            AADD( aWidths, a1[ 3 ] ),;         // Field Width
+            AADD( aDecims, a1[ 4 ] ),;         // Field Decimal
+            AADD( aValids,  ) } )              // Field Validity Code Blocks
 
          DBGOTO( nCurRec )
 
          ComboForm( cWinTitl,; // Combo Form's Title
-         aLabels,;  // Field Name
-         aValues,;  // Field Value : Value
-         aDTypes,;  // Field Type
-         aWidths,;  // Field Width
-         aDecims,;  // Field Decimal
-         aROnlys,;  // Read Onlies
-         aValids,;  // Field Validity Code Blocks
-         aButtons,; // Buttons
-         aCdBloks ) // Actions : code blocks for Buttons
+            aLabels,;  // Field Name
+            aValues,;  // Field Value : Value
+            aDTypes,;  // Field Type
+            aWidths,;  // Field Width
+            aDecims,;  // Field Decimal
+            aROnlys,;  // Read Onlies
+            aValids,;  // Field Validity Code Blocks
+            aButtons,; // Buttons
+            aCdBloks ) // Actions : code blocks for Buttons
 
          RefrMenu()   // Ýþlem öncesi aktif kayýt sayýsý > 0 idiyse APPE, menüdeki iþlemleri etkiler.
 
@@ -86,8 +86,8 @@ PROC T_Pack()                             // Table Pack
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC T_DeleReca( ;                        // Table Delete / Recall Record(s)
-            nDeleReca,;   // 1: Delete,  2: Recall
-            nHowRecor )   // 1: Current, 2: Selective, 3: All
+               nDeleReca,;   // 1: Delete,  2: Recall
+               nHowRecor )   // 1: Current, 2: Selective, 3: All
 
             LOCA nCurRec   := RECN(),;
                cCPTitle  := " Records Criterias",;
@@ -123,12 +123,12 @@ PROC T_Pack()                             // Table Pack
             ELSE                     // Selective
 
                aComPars  := { {  1, '' },;          // FOR/WHILE, Express
-               {  4,  1 } }          // Scope ( ALL/REST/NEXT n/RECORD n ) Deflt : NEXT 1
+                  {  4,  1 } }          // Scope ( ALL/REST/NEXT n/RECORD n ) Deflt : NEXT 1
 
                aComOpts  := GFUComOpts( aComPars,;  // Values of options
-               IF( nDeleReca < 2, "Delete", "Recall" ),;   // Command's name
-               { 'CND',;    // Condition ( FOR/WHILE )
-               'SCP' } )  // SCOPE     ( ALL/REST/NEXT/RECORD)
+                  IF( nDeleReca < 2, "Delete", "Recall" ),;   // Command's name
+                  { 'CND',;    // Condition ( FOR/WHILE )
+                  'SCP' } )  // SCOPE     ( ALL/REST/NEXT/RECORD)
 
                IF !EMPTY( aComOpts )
 
@@ -223,16 +223,16 @@ PROC T_Pack()                             // Table Pack
          AEVAL( aStruct, { | a1, i1 | AADD( aFieldLst, FIELDNAME( i1 ) ), HB_SYMBOL_UNUSED( a1 ) } )
 
          aComPars  := {    1,;                // FIELDS COMBOBOX VALUE
-         '' ,;               // WITH expression
-         {  1, '' },;          // FOR/WHILE, Express
-         {  4,  1 } }          // Scope ( ALL/REST/NEXT n/RECORD n ) Deflt : NEXT 1
+            '' ,;               // WITH expression
+            {  1, '' },;          // FOR/WHILE, Express
+            {  4,  1 } }          // Scope ( ALL/REST/NEXT n/RECORD n ) Deflt : NEXT 1
 
          aComOpts  := GFUComOpts( aComPars,;    // Values of options
-         'REPLACE',;   // Command's name
-         { 'FLD',;
+            'REPLACE',;   // Command's name
+            { 'FLD',;
             'WTH',;
             'CND',;    // Cond (FOR/WHILE)
-         'SCP' } )  // Scope ( ALL/REST/NEXT n/RECORD n )
+            'SCP' } )  // Scope ( ALL/REST/NEXT n/RECORD n )
 
          IF !EMPTY( aComOpts )
 
@@ -313,16 +313,16 @@ PROC T_Pack()                             // Table Pack
                nScpRecNo :=  0
 
             aComPars  := { {  1, ''  },;         // Source FILE Type : 1: Table
-            { SPAC( 256 ), "Table", "*.dbf", .F. },;  // Source FILE Name
-            {  1, ''  },;         // FOR/WHILE, Express
-            {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
+               { SPAC( 256 ), "Table", "*.dbf", .F. },;  // Source FILE Name
+               {  1, ''  },;         // FOR/WHILE, Express
+               {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
 
             aComOpts  := GFUComOpts( aComPars,;  // Values of options
-            cCbFTitl,;  // Command's name
-            { 'SFT',;                  // Source FILE Type
-            { 'SFN',"Source " },;      // Source file Name
-            'CND',;                  // FOR Expression
-            'SCP' } )                // UNIQUE, DESCENDING
+               cCbFTitl,;  // Command's name
+               { 'SFT',;                  // Source FILE Type
+               { 'SFN',"Source " },;      // Source file Name
+               'CND',;                  // FOR Expression
+               'SCP' } )                // UNIQUE, DESCENDING
 
             IF ! EMPTY( aComOpts )
 
@@ -407,7 +407,7 @@ PROC T_Pack()                             // Table Pack
 
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
-            #command INSERT [<before: BEFORE>] => dbInsert( <.before.> )
+#command INSERT [<before: BEFORE>] => dbInsert( <.before.> )
 
             PROC T_InseReco()
                IF MsgYesNo( "A blank record will be inserted before the current record." + CRLF2 + "Are You sure ?", "Insert Record")
@@ -480,9 +480,9 @@ FUNCTION dbInsert( lBefore )
 
    */
 
-   #define DBS_NAME  1
-   #define FLD_BLK   1
-   #define FLD_VAL   2
+#define DBS_NAME  1
+#define FLD_BLK   1
+#define FLD_VAL   2
 
    LOCAL nRec     := recno() + 1
    LOCAL lSavDel  := SET( _SET_DELETED, .f. )

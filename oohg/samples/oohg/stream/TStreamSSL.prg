@@ -149,7 +149,7 @@ CLASS TStreamSSL FROM TStreamSocket
 
    METHOD Write
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHost, nPort, nSocket ) CLASS TStreamSSL
 

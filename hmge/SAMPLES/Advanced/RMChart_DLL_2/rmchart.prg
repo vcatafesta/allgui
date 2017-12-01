@@ -188,7 +188,7 @@ CREATE CLASS RmChart
    METHOD ToDouble( xValue )
    METHOD ToLong( xValue )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD RMChart:ToDouble( xValue )
 

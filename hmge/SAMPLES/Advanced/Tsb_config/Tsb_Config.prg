@@ -111,7 +111,7 @@ FUNCTION Main()
       DATA oBrw:nLogicPos ;
       SIZE 40 PIXELS ;
       ALIGN DT_CENTER,DT_CENTER,DT_CENTER ;   // cells, header, footer
-   COLORS CLR_BLACK, CLR_HGRAY
+      COLORS CLR_BLACK, CLR_HGRAY
 
    nWidthFirstColumn := 40     // Remember the width of the first column
    nJ := 1                     // Install meter columns = 1

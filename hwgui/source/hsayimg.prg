@@ -35,7 +35,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD onDblClick()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
       bSize, ctooltip, bClick, bDblClick ) CLASS HSayImage
@@ -113,7 +113,7 @@ CLASS HSayBmp INHERIT HSayImage
 
    METHOD Refresh() INLINE hwg_Redrawwindow( ::handle, RDW_ERASE + RDW_INVALIDATE + RDW_UPDATENOW )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       bSize, ctooltip, bClick, bDblClick, lTransp, nStretch, nStyle ) CLASS HSayBmp
@@ -234,7 +234,7 @@ CLASS HSayIcon INHERIT HSayImage
 
    METHOD REFRESH() INLINE hwg_Sendmessage( ::handle, STM_SETIMAGE, IMAGE_ICON, ::oImage:handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
       bSize, ctooltip, lOEM, bClick, bDblClick ) CLASS HSayIcon

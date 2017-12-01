@@ -167,4 +167,4 @@ PROCEDURE UpdateGrid( nHandle )
    RETURN
 
    * Adding MiniSql Code To The Program (It should be a library, I know :)
-   #include "minisql.prg"
+#include "minisql.prg"

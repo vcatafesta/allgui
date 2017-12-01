@@ -599,7 +599,7 @@ FUNCTION DaylyAbout()
       @ 195, 20    LABEL lblWWW HEIGHT 16 WIDTH 170 VALUE cWWW  ;
          FONT 'Lucida Console' SIZE 8 FONTCOLOR GRAY UNDERLINE CENTERALIGN TRANSPARENT ;
          ACTION ShellExecute( 0, "open", 'http://minisoft.tora.ru', , , 1 );
-         ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), This.FontColor := BLACK } ;
+      ON MOUSEHOVER {|| Rc_Cursor( "MINIGUI_FINGER" ), This.FontColor := BLACK } ;
          ON MOUSELEAVE ( This.FontColor := GRAY )
 
       @ 215, 40  BUTTONEX btnLY ACTION ThisWindow.Release() ;

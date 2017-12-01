@@ -274,7 +274,7 @@ FUNCTION GetNumberofTableItems( cBuffer )
 
    RETURN nItem
 
-   #define EOL hb_osnewline()
+#define EOL hb_osnewline()
 
    *+北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北北
    *+

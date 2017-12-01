@@ -81,7 +81,7 @@ CLASS TActiveX FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, nCol, nRow, nWidth, nHeight, cProgId, ;
       lNoTabStop, lDisabled, lInvisible ) CLASS TActiveX
@@ -106,19 +106,19 @@ METHOD Define( ControlName, ParentForm, nCol, nRow, nWidth, nHeight, cProgId, ;
    ::Register( nControlHandle, ControlName )
 
    bErrorBlock := ErrorBlock( { |x| break( x ) } )
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    TRY
       ::oOle := ToleAuto():New( ::hAtl )
    CATCH oError
       MsgInfo( oError:Description )
    END
-   #else
+#else
    BEGIN SEQUENCE
       ::oOle := ToleAuto():New( ::hAtl )
    RECOVER USING oError
       MsgInfo( oError:Description )
    END
-   #endif
+#endif
    ErrorBlock( bErrorBlock )
 
    SetupConnectionPoint( ::hAtl, @hSink, ::aAxEv, ::aAxExec )
@@ -183,8 +183,8 @@ METHOD EventMap( nMsg, xExec, oSelf )
 
    RETURN NIL
 
-   #ifndef __XHARBOUR__       //// si es harbour
-   #ifndef __BORLANDC__       //// y no es borlandc
+#ifndef __XHARBOUR__       //// si es harbour
+#ifndef __BORLANDC__       //// y no es borlandc
 
 METHOD __Error( ... )
 
@@ -198,5 +198,5 @@ METHOD __Error( ... )
 
    RETURN HB_ExecFromArray( ::oOle, cMessage, HB_aParams() )
 
-   #endif
-   #endif
+#endif
+#endif

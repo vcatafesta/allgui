@@ -27,11 +27,11 @@ CLASS TSMulti FROM TControl
    METHOD lValid()
    METHOD Command( nWParam, nLParam )
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TSMulti:New() Version 7.0 Jul/15/2004
-* ============================================================================
+   * ============================================================================
+   * METHOD TSMulti:New() Version 7.0 Jul/15/2004
+   * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
       nClrFore, nClrBack,  cControl, cWnd ) CLASS TSMulti

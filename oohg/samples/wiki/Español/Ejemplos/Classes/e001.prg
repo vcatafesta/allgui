@@ -73,7 +73,7 @@ CLASS MiGrid FROM TGrid
 
    METHOD Events_Notify
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Events_Notify( wParam, lParam ) CLASS MiGrid
 

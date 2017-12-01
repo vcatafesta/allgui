@@ -7,8 +7,8 @@ DECLARE WINDOW frmDBAMain
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROC ClosData(;              // Close Current Data
-   cDataType,;   // Data Type ( A : All, T: Table, U: UnKonwn ...
-   cClosType )   // Clos Type : A : All, M: Multiple, C : Current
+      cDataType,;   // Data Type ( A : All, T: Table, U: UnKonwn ...
+      cClosType )   // Clos Type : A : All, M: Multiple, C : Current
 
    LOCA cDatType := '',;
       cTabAlia := '',;
@@ -16,13 +16,13 @@ PROC ClosData(;              // Close Current Data
       aDatNums := {},;
       nDataNum :=  0,;
       nDInd    :=  0,;     // Data indice
-   cCDaType := '',;     // Type of Current Data
-   aSelData := {},;
+      cCDaType := '',;     // Type of Current Data
+      aSelData := {},;
       aSelectd := {},;
       a1Data   := {}
 
    DEFAULT cDataType TO "T",;   // Default Data Type is T : Table
-   cClosType TO "C"     // Default Data Type is C : Current
+      cClosType TO "C"     // Default Data Type is C : Current
 
    DO CASE
    CASE cClosType == "M"  // Multiple

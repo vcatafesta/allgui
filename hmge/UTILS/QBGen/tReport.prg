@@ -48,7 +48,7 @@ PROCEDURE URE( aHdr1,alen1 )
    LOCAL nMax,  cTf ,  apaper:= aclone(apapeles) , aEdit3 ,   aGrp3:={"None","EVERY PAGE"}
 
    LOCAL aEdit:={;           // types for 'DYNAMIC'
-   { 'TEXTBOX','CHARACTER'}                ,;
+      { 'TEXTBOX','CHARACTER'}                ,;
       { 'TEXTBOX','CHARACTER'}                ,;
       { 'TEXTBOX','NUMERIC','9,999.99'}          ,;
       { 'CHECKBOX' , 'Yes' , 'No' }           ,;
@@ -107,20 +107,20 @@ PROCEDURE URE( aHdr1,alen1 )
    NEXT
 
    aEdit3:={;           // types for 'DYNAMIC'  Grid 3
-   { 'TEXTBOX','CHARACTER'}                ,;      //    'Image ',"","","
-   { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Multiple',"",""
-   { 'TEXTBOX','NUMERIC'}                  ,;      //    'Lpp',"","","","
-   { 'TEXTBOX','NUMERIC'}                  ,;      //    'Cpl',"","","","
-   { 'TEXTBOX','NUMERIC'}                  ,;      //    'Lmargin',"","",
-   { 'TEXTBOX','NUMERIC'}                  ,;      //    'Tmargin',"","",
-   { 'COMBOBOX',apaper }                   ,;      //    'Papersize',"","
-   { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Dosmode',"","",
-   { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Preview',"","",
-   { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Select' ,"","",
-   { 'COMBOBOX',aGrp3 }                    ,;      //    'Grouped By',"",
-   { 'TEXTBOX','CHARACTER'}                ,;      //    'Headrgrp',"",""
-   { 'COMBOBOX', {"Portrait","Landscape"} },;      //    'Landscape',"","
-   { 'CHECKBOX' , 'Yes' , 'No' } }                 //    'Nodatetimestamp
+      { 'TEXTBOX','CHARACTER'}                ,;      //    'Image ',"","","
+      { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Multiple',"",""
+      { 'TEXTBOX','NUMERIC'}                  ,;      //    'Lpp',"","","","
+      { 'TEXTBOX','NUMERIC'}                  ,;      //    'Cpl',"","","","
+      { 'TEXTBOX','NUMERIC'}                  ,;      //    'Lmargin',"","",
+      { 'TEXTBOX','NUMERIC'}                  ,;      //    'Tmargin',"","",
+      { 'COMBOBOX',apaper }                   ,;      //    'Papersize',"","
+      { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Dosmode',"","",
+      { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Preview',"","",
+      { 'CHECKBOX' , 'Yes' , 'No' }           ,;      //    'Select' ,"","",
+      { 'COMBOBOX',aGrp3 }                    ,;      //    'Grouped By',"",
+      { 'TEXTBOX','CHARACTER'}                ,;      //    'Headrgrp',"",""
+      { 'COMBOBOX', {"Portrait","Landscape"} },;      //    'Landscape',"","
+      { 'CHECKBOX' , 'Yes' , 'No' } }                 //    'Nodatetimestamp
 
    bk4 := Getsyscolor( COLOR_APPWORKSPACE )
 
@@ -320,7 +320,7 @@ FUNCTION ckfld2( )       // avoid use  of unused cells
       aRet := .F.
    ELSEIF nRow = 1 .and. Ncol = 2
       cImgFilName := Getfile( { {'All images','*.jpg; *.bmp; *.gif'},;    // acFilter
-      {'JPG Files', '*.jpg'},;
+         {'JPG Files', '*.jpg'},;
          {'BMP Files', '*.bmp'},;
          {'GIF Files', '*.gif'} },;
          'Open Image',.F.,.T. )
@@ -492,29 +492,29 @@ PROCEDURE Treport(act)   // Test the Report
       ENDIF
       EasyReport (      ;
          Title     ,;                                                 // Title
-      aheaders1 ,;                                                 // Header 1
-      aheaders2 ,;                                                 // Header 2
-      a         ,;                                                 // Fields
-      awidths   ,;                                                 // Widths
-      ato       ,;                                                 // Totals
-      Form_2.Grid_3.Cell( 3, 2 ) ,;                                // LPP
-      Form_2.Grid_3.Cell( 8, 2 ) ,;                                // Dos Mode
-      .T., ; // Form_2.Grid_3.Cell( 9, 2 ) ,;                      // Preview ALWAIS ACTIVE FOR TESTING
-      cGraphic  ,;                                                 // Image
-      Form_2.Grid_3.Cell( 1, 3 ) , Form_2.Grid_3.Cell( 1, 4 ) ,;   // At Row, At Col
-      Form_2.Grid_3.Cell( 1, 5 ) , Form_2.Grid_3.Cell( 1, 6 ) ,;   // To Row, To Ccol
-      Form_2.Grid_3.Cell( 2, 2 ) ,;                                // Multiple Image
-      aGrpby[Form_2.Grid_3.Cell( 11, 2 )] ,;                       // Group By
-      Form_2.Grid_3.Cell( 12, 2 ) ,;                               // Header Group
-      Form_2.Grid_3.Cell( 13, 2 )>1 ,;                             // Orientation
-      Form_2.Grid_3.Cell(  4, 2 ) ,;                               // Cpl
-      Form_2.Grid_3.Cell( 10, 2 ) ,;                               // Select Printer
-      Alias()   ,;                                                 // Workarea
-      Form_2.Grid_3.Cell(  5, 2 ) ,;                               // Margin Left
-      aformats  ,;                                                 // Formats
-      Form_2.Grid_3.Cell( 7, 2 ) ,;                                // Papersize
-      Form_2.Grid_3.Cell(  6, 2 ) ,;                               // Margin Top
-      Form_2.Grid_3.Cell( 14, 2 ) )                                // NoDateTimeStamp
+         aheaders1 ,;                                                 // Header 1
+         aheaders2 ,;                                                 // Header 2
+         a         ,;                                                 // Fields
+         awidths   ,;                                                 // Widths
+         ato       ,;                                                 // Totals
+         Form_2.Grid_3.Cell( 3, 2 ) ,;                                // LPP
+         Form_2.Grid_3.Cell( 8, 2 ) ,;                                // Dos Mode
+         .T., ; // Form_2.Grid_3.Cell( 9, 2 ) ,;                      // Preview ALWAIS ACTIVE FOR TESTING
+         cGraphic  ,;                                                 // Image
+         Form_2.Grid_3.Cell( 1, 3 ) , Form_2.Grid_3.Cell( 1, 4 ) ,;   // At Row, At Col
+         Form_2.Grid_3.Cell( 1, 5 ) , Form_2.Grid_3.Cell( 1, 6 ) ,;   // To Row, To Ccol
+         Form_2.Grid_3.Cell( 2, 2 ) ,;                                // Multiple Image
+         aGrpby[Form_2.Grid_3.Cell( 11, 2 )] ,;                       // Group By
+         Form_2.Grid_3.Cell( 12, 2 ) ,;                               // Header Group
+         Form_2.Grid_3.Cell( 13, 2 )>1 ,;                             // Orientation
+         Form_2.Grid_3.Cell(  4, 2 ) ,;                               // Cpl
+         Form_2.Grid_3.Cell( 10, 2 ) ,;                               // Select Printer
+         Alias()   ,;                                                 // Workarea
+         Form_2.Grid_3.Cell(  5, 2 ) ,;                               // Margin Left
+         aformats  ,;                                                 // Formats
+         Form_2.Grid_3.Cell( 7, 2 ) ,;                                // Papersize
+         Form_2.Grid_3.Cell(  6, 2 ) ,;                               // Margin Top
+         Form_2.Grid_3.Cell( 14, 2 ) )                                // NoDateTimeStamp
 
    CASE act = "IMPORT"
       cFileimp := Getfile( { {'All report','*.rpt'},;

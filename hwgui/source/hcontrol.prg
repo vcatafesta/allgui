@@ -76,7 +76,7 @@ CLASS HControl INHERIT HCustomWindow
 
    METHOD END()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
       bInit, bSize, bPaint, cTooltip, tcolor, bColor ) CLASS HControl
@@ -456,7 +456,7 @@ CLASS VAR winclass INIT "msctls_statusbar32"
 
    METHOD onAnchor( x, y, w, h )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClick, bDblClick, nHeight ) CLASS HStatus
 
@@ -514,9 +514,9 @@ METHOD Notify( lParam ) CLASS HStatus
    LOCAL nCode := hwg_Getnotifycode( lParam )
    LOCAL nParts := hwg_Getnotifysbparts( lParam ) - 1
 
-   #define NM_DBLCLK    (NM_FIRST-3)
-   #define NM_RCLICK    (NM_FIRST-5)    // uses NMCLICK struct
-   #define NM_RDBLCLK   (NM_FIRST-6)
+#define NM_DBLCLK    (NM_FIRST-3)
+#define NM_RCLICK    (NM_FIRST-5)    // uses NMCLICK struct
+#define NM_RDBLCLK   (NM_FIRST-6)
 
    DO CASE
    CASE nCode == NM_CLICK
@@ -543,8 +543,8 @@ METHOD StatusHeight( nHeight  ) CLASS HStatus
             ::oParent:aOffset[ 4 ] -= ( aCoors[ 4 ] - aCoors[ 2 ] )
          ENDIF
          hwg_Sendmessage( ::handle, ;           // (HWND) handle to destination control
-         SB_SETMINHEIGHT, nHeight, 0 )      // (UINT) message ID  // = (WPARAM)(int) minHeight;
-            hwg_Sendmessage( ::handle, WM_SIZE, 0, 0 )
+            SB_SETMINHEIGHT, nHeight, 0 )      // (UINT) message ID  // = (WPARAM)(int) minHeight;
+         hwg_Sendmessage( ::handle, WM_SIZE, 0, 0 )
          aCoors := hwg_Getwindowrect( ::handle )
       ENDIF
       ::nStatusHeight := ( aCoors[ 4 ] - aCoors[ 2 ] ) - 1
@@ -636,7 +636,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Init()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
@@ -726,7 +726,7 @@ CLASS VAR winclass INIT "BUTTON"
 
    METHOD Init()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -797,7 +797,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD Activate()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor ) CLASS HGroup
@@ -839,7 +839,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Paint( lpDis )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, nHeight, cSlant, nBorder ) CLASS HLine
 

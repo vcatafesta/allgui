@@ -20,7 +20,7 @@ FUNCTION Main
          HEIGHT 630 ;
          TITLE 'SET BACKGROUND WINDOW' ;
          MAIN;  //ON INIT Repaint_Window (); // Invalida toda el area del cliente para que se envie un Msg WM_PAINT para obligar a que se ejecute ON PAINT al iniciarse la ventana
-      ON PAINT Paint_Background_Window ();
+         ON PAINT Paint_Background_Window ();
          ON RELEASE BMP_RELEASE_HANDLE (hBitmap);
          VIRTUAL WIDTH  1100;
          VIRTUAL HEIGHT 1100;

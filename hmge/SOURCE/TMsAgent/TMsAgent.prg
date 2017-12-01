@@ -128,29 +128,29 @@ CLASS TMsAgent
 
    METHOD IsStaticLooping( cAnimate ) // Uso interno de la clase / Internal use
 
-ENDCLASS
+   ENDCLASS
 
-/*
-=================================================================
-STAT FUNC New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize )
------------------------------------------------------------------
-cName: Nombre del caracter / Character's Name
-lMenu: Activar menu popup .T., o no activar .F.,
-ACtivate the menu popup .T., or dont activate .f.
-cFile: El archivo del agente que se desea usar, si no se especifica
-se usará el agente que esté por default.
-The Agent's file to be opened, if you dont specify will be
-used the default agent.
-lSound:Si es .T. habrán efectos de sonido, si es .F. no habrán
-lWait: Si es .T. el sistema espera hasta que el agente termine de hacer algo
-antes de continuar con el sistema. / IF .T. the Agent waits until ends
-to do something before to go on with the system.
-< Puedes obtener todos los agentes disponibles usando la funcion
-GetAgentsAvailables(), devolverá un arreglo >
-< you can get all the agents availables by using the
-GetAgentsAvailables() function. Returns an array >
------------------------------------------------------------------
-*/
+   /*
+   =================================================================
+   STAT FUNC New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize )
+   -----------------------------------------------------------------
+   cName: Nombre del caracter / Character's Name
+   lMenu: Activar menu popup .T., o no activar .F.,
+   ACtivate the menu popup .T., or dont activate .f.
+   cFile: El archivo del agente que se desea usar, si no se especifica
+   se usará el agente que esté por default.
+   The Agent's file to be opened, if you dont specify will be
+   used the default agent.
+   lSound:Si es .T. habrán efectos de sonido, si es .F. no habrán
+   lWait: Si es .T. el sistema espera hasta que el agente termine de hacer algo
+   antes de continuar con el sistema. / IF .T. the Agent waits until ends
+   to do something before to go on with the system.
+   < Puedes obtener todos los agentes disponibles usando la funcion
+   GetAgentsAvailables(), devolverá un arreglo >
+   < you can get all the agents availables by using the
+   GetAgentsAvailables() function. Returns an array >
+   -----------------------------------------------------------------
+   */
 
 METHOD New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize ) CLASS TMsAgent
 

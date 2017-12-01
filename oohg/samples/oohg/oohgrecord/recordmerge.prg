@@ -74,9 +74,9 @@ PROCEDURE MAIN
 
    RETURN
 
-   #endif   // NO_SAMPLE
+#endif   // NO_SAMPLE
 
-   #include "hbclass.ch"
+#include "hbclass.ch"
 
 CLASS TRecordMerge
 
@@ -123,7 +123,7 @@ CLASS TRecordMerge
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( aAreas ) CLASS TRecordMerge
 
@@ -345,9 +345,9 @@ METHOD GoBottom() CLASS TRecordMerge
 
    RETURN Self
 
-   #ifndef _SET_SOFTSEEK
-   #define _SET_SOFTSEEK 9
-   #endif
+#ifndef _SET_SOFTSEEK
+#define _SET_SOFTSEEK 9
+#endif
 
 METHOD Seek( xKey, lSoftSeek /* , lLast */ ) CLASS TRecordMerge
 

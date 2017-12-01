@@ -239,14 +239,14 @@ CLASS TPageScript
    METHOD TextOutEx                    // Prints a string at position X,Y using parameters
    METHOD WaterMark                    // Sets/Returns the current WaterMark
 
-ENDCLASS
+   ENDCLASS
 
-/*-----------------------------------------------------------------------------
+   /*-----------------------------------------------------------------------------
 
-Method .....: #Init()
+   Method .....: #Init()
 
-Description : Class constructor
------------------------------------------------------------------------------*/
+   Description : Class constructor
+   -----------------------------------------------------------------------------*/
 
 METHOD TPageScript:Init()
 

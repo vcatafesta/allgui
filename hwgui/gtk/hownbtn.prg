@@ -56,7 +56,7 @@ CLASS VAR cPath SHARED
 
    METHOD Disable()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
       bInit, bSize, bPaint, bClick, lflat,             ;

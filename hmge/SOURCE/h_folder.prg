@@ -233,9 +233,9 @@ FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , 
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -293,9 +293,9 @@ FUNCTION _DefineFolder ( FormName, ParentForm, lRes , x , y , w , h , caption , 
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1  , {} )
       AAdd ( _HMG_aFormMiscData2  , '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
    ENDIF
 
    _SetThisFormInfo( k )
@@ -489,9 +489,9 @@ FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -549,9 +549,9 @@ FUNCTION _DefineFolderDialog ( FormName, FormHandle, hWndParent  )
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1   , {} )
       AAdd ( _HMG_aFormMiscData2   , '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
    ENDIF
 
    _SetThisFormInfo( k )
@@ -814,11 +814,11 @@ FUNCTION PageFldProc( hWndDlg, nMsg, wParam, lParam )
          EXIT
       CASE FLN_KILLACTIVE
          EXIT
-         #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       OTHERWISE
-         #else
+#else
          DEFAULT
-         #endif
+#endif
          IF GetDialogITemHandle( hwndDlg, LOWORD( wParam ) ) != 0
             Events( hwndDlg, nMsg, wParam, lParam )
          ENDIF

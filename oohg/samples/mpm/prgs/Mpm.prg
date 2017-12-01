@@ -1394,7 +1394,7 @@ FUNCTION TxtSearch(cText)
 
    RETURN( lEnc )
 
-   #define CR chr(13)
+#define CR chr(13)
 
 FUNCTION NextSearch(cText)
 

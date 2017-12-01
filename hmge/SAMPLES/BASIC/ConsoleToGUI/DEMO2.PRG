@@ -103,7 +103,7 @@ FUNCTION Main()
    RETURN( NIL )
 
    /****************************************************************************/
-   #define MsgAlert( c ) MsgEXCLAMATION( c, "Attention" )
+#define MsgAlert( c ) MsgEXCLAMATION( c, "Attention" )
 
 STATIC FUNCTION ShowMsg()
 
@@ -128,7 +128,7 @@ STATIC FUNCTION CheckEmpty( cVar, cMsg )
    RETURN( lRetVal )
 
    /****************************************************************************/
-   #define STATES_ARRAY { "AK = Alaska","AL = Alabama","AR = Arkansas","AZ = Arizona",;
+#define STATES_ARRAY { "AK = Alaska","AL = Alabama","AR = Arkansas","AZ = Arizona",;
       "CA = California", "CO = Colorado", "CT = Connecticut", "DC = Dist. of Col.", ;
       "DE = Delaware", "FL = Florida", "GA = Georgia", "HI = Hawaii", "IA = Iowa", ;
       "ID = Idaho", "IL = Illinois", "IN = Indiana", "KS = Kansas", "KY = Kentucky", ;

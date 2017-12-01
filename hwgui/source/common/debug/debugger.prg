@@ -245,7 +245,7 @@ CLASS HBDebugger
 
    METHOD VarSetValue( aVar, uValue )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HBDebugger
 
@@ -727,7 +727,7 @@ STATIC FUNCTION SendWatch()
 
    RETURN arr
 
-   #define WA_ITEMS  12
+#define WA_ITEMS  12
 
 STATIC FUNCTION SendAreas()
 
@@ -793,7 +793,7 @@ STATIC FUNCTION SendRec( cAlias )
 
    RETURN arr
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 STATIC FUNCTION SendObject( cObjName )
 
@@ -826,7 +826,7 @@ STATIC FUNCTION SendObject( cObjName )
    ENDIF
 
    RETURN arr
-   #else
+#else
 
 STATIC FUNCTION SendObject( cObjName )
 
@@ -861,7 +861,7 @@ STATIC FUNCTION SendObject( cObjName )
    ENDIF
 
    RETURN arr
-   #endif
+#endif
 
 STATIC FUNCTION SendArray( cArrName, nFirst, nCount )
 
@@ -930,9 +930,9 @@ FUNCTION __dbgValToStr( uVal )
    CASE cType $ "CM" ; RETURN '"' + uVal + '"'
    CASE cType == "L" ; RETURN Iif( uVal, ".T.", ".F." )
    CASE cType == "D" ; RETURN DToC( uVal )
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    CASE cType == "T" ; RETURN hb_TToC( uVal )
-      #endif
+#endif
    CASE cType == "N" ; RETURN Str( uVal )
    CASE cType == "O" ; RETURN "Class " + uVal:ClassName() + " object"
    CASE cType == "H" ; RETURN "Hash(" + hb_ntos( Len( uVal ) ) + ")"
@@ -941,7 +941,7 @@ FUNCTION __dbgValToStr( uVal )
 
    RETURN "U"
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
 
@@ -964,11 +964,11 @@ STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
    END SEQUENCE
 
    RETURN xResult
-   #endif
+#endif
 
-   #ifdef __XHARBOUR__
-   #define ALTD_DISABLE   0
-   #define ALTD_ENABLE    1
+#ifdef __XHARBOUR__
+#define ALTD_DISABLE   0
+#define ALTD_ENABLE    1
 
 FUNCTION ALTD( nAction )
 
@@ -985,4 +985,4 @@ FUNCTION ALTD( nAction )
    ENDIF
 
    RETURN NIL
-   #endif
+#endif

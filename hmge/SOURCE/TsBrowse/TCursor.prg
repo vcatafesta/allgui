@@ -19,9 +19,9 @@ CLASS TCursor
       If( ! ::lPredef, DestroyCursor( ::hCursor ),),),;
       ::hCursor := 0
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
+   * ============================================================================
 
 METHOD New( cResName, cPredef ) CLASS TCursor
 

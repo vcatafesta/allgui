@@ -96,13 +96,13 @@ CLASS Get
    DATA Row
    DATA SubScript
    DATA TypeOut        INIT .F.
-   #ifdef HB_COMPAT_C53
+#ifdef HB_COMPAT_C53
    DATA Control
    DATA Message
    DATA Caption        INIT ""
    DATA CapRow         INIT 0
    DATA CapCol         INIT 0
-   #endif
+#endif
    DATA aKeyEvent      INIT {}
 
    PROTECTED:
@@ -134,13 +134,13 @@ CLASS Get
    METHOD New( nRow, nCol, bVarBlock, cVarName, cPicture, cColorSpec )
 
    METHOD Assign()
-   #ifdef HB_COMPAT_XPP
+#ifdef HB_COMPAT_XPP
    MESSAGE _Assign METHOD Assign()
-   #endif
+#endif
    METHOD Type()
-   #ifdef HB_COMPAT_C53
+#ifdef HB_COMPAT_C53
    METHOD HitTest( nMRow, nMCol )
-   #endif
+#endif
    METHOD Block( bBlock ) SETGET
    METHOD ColorSpec( cColorSpec ) SETGET
    METHOD Picture( cPicture ) SETGET
@@ -153,18 +153,18 @@ CLASS Get
    METHOD Undo()
    METHOD UnTransform( cBuffer )
    METHOD UpdateBuffer()
-   #ifdef HB_C52_UNDOC
+#ifdef HB_C52_UNDOC
    METHOD Reform()
-   #endif
+#endif
 
    METHOD VarGet()
    /* NOTE: lReFormat is an undocumented Harbour parameter. Should not be used by app code. */
    METHOD VarPut( xValue, lReFormat )
 
    METHOD End()
-   #ifdef HB_COMPAT_XPP
+#ifdef HB_COMPAT_XPP
    MESSAGE _End METHOD End()
-   #endif
+#endif
    METHOD Home()
    MESSAGE Left( lDisplay ) METHOD _Left( lDisplay )
    MESSAGE Right( lDisplay ) METHOD _Right( lDisplay )
@@ -198,9 +198,9 @@ CLASS Get
    METHOD FirstEditable()
    METHOD LastEditable()
 
-ENDCLASS
+   ENDCLASS
 
-/* ------------------------------------------------------------------------- */
+   /* ------------------------------------------------------------------------- */
 
 METHOD New( nRow, nCol, bVarBlock, cVarName, cPicture, cColorSpec ) CLASS Get
 
@@ -247,7 +247,7 @@ METHOD UpdateBuffer() CLASS Get
 
    /* ------------------------------------------------------------------------- */
 
-   #ifdef HB_C52_UNDOC
+#ifdef HB_C52_UNDOC
 
 METHOD Reform() CLASS Get
 
@@ -257,7 +257,7 @@ METHOD Reform() CLASS Get
 
    RETURN Self
 
-   #endif
+#endif
 
    /* ------------------------------------------------------------------------- */
 
@@ -633,11 +633,11 @@ METHOD UnTransform( cBuffer ) CLASS Get
          ENDIF
       ENDIF
 
-      #if ( __HARBOUR__ - 0 ) < 0x030200
+#if ( __HARBOUR__ - 0 ) < 0x030200
       xValue  := Val( cBuffer )
-      #else
+#else
       xValue  := hb_Val( cBuffer )
-      #endif
+#endif
 
    CASE ::cType == "L"
       cBuffer := Upper( cBuffer )
@@ -1730,7 +1730,7 @@ METHOD Block( bBlock ) CLASS Get
 
    /* ------------------------------------------------------------------------- */
 
-   #ifdef HB_COMPAT_C53
+#ifdef HB_COMPAT_C53
 
 METHOD HitTest( nMRow, nMCol ) CLASS Get
 
@@ -1747,7 +1747,7 @@ METHOD HitTest( nMRow, nMCol ) CLASS Get
 
    RETURN HTNOWHERE
 
-   #endif
+#endif
 
    /* ------------------------------------------------------------------------- */
 

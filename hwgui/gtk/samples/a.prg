@@ -47,10 +47,10 @@ FUNCTION Main
    MENUITEM "&MsgGet" ;
       ACTION hwg_Copystringtoclipboard(hwg_MsgGet("Dialog Sample","Input table name"))
    MENUITEM "&Dialog from prg" ACTION DialogFromPrg()
-   #ifdef TEST_PRINT
+#ifdef TEST_PRINT
    SEPARATOR
    MENUITEM "&Print Preview" ACTION PrnTest()
-   #endif
+#endif
    ENDMENU
 
    ENDMENU

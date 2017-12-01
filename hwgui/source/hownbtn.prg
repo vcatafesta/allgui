@@ -80,7 +80,7 @@ CLASS VAR cPath SHARED
    METHOD SetText( cCaption ) INLINE ::title := cCaption, ;
       hwg_Redrawwindow( ::oParent:Handle, RDW_ERASE + RDW_INVALIDATE , ::nLeft, ::nTop, ::nWidth, ::nHeight )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
       bInit, bSize, bPaint, bClick, lflat,             ;

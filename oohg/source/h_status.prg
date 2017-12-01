@@ -117,7 +117,7 @@ CLASS TMessageBar FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, y, x, w, h, caption, ProcedureName, ;
       fontname, nFontsize, tooltip, clock, date, kbd, nClrF, nClrB, ;

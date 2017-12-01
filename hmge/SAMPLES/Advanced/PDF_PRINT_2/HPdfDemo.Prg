@@ -144,7 +144,7 @@ PROCEDURE PrntToPdf()
    RETURN // PrntToPdf()
 
 PROCEDURE WriteCompany( ;                  // Print company Info to PDF
-   nRow,;
+      nRow,;
       nCol )
 
    @ nRow,       nCol  HPDFPRINT RECTANGLE ;

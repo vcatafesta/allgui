@@ -58,12 +58,12 @@ FUNCTION Main
 
    RETURN NIL
 
-   #define GW_HWNDFIRST   0
-   #define GW_HWNDLAST   1
-   #define GW_HWNDNEXT   2
-   #define GW_HWNDPREV   3
-   #define GW_OWNER   4
-   #define GW_CHILD   5
+#define GW_HWNDFIRST   0
+#define GW_HWNDLAST   1
+#define GW_HWNDNEXT   2
+#define GW_HWNDPREV   3
+#define GW_OWNER   4
+#define GW_CHILD   5
 
 FUNCTION CloseApps( hOwnWnd )
 
@@ -76,11 +76,11 @@ FUNCTION CloseApps( hOwnWnd )
    WHILE hWnd != 0  // Loop through all the windows
       cTitle := GetWindowText( hWnd )
       IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
-         IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-         hWnd != hOwnWnd .AND.;              // If it is not this app
-         !EMPTY( cTitle ) .AND.;             // If the window has a title
-         !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-         !( cTitle == "Program Manager" )    // If it is not the Program Manager
+            IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+            hWnd != hOwnWnd .AND.;              // If it is not this app
+            !EMPTY( cTitle ) .AND.;             // If the window has a title
+            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+            !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
          AADD( aWindows, hWnd )
       ENDIF
@@ -93,18 +93,18 @@ FUNCTION CloseApps( hOwnWnd )
       WHILE hWnd != 0  // Loop through all the windows
          cTitle := GetWindowText( hWnd )
          IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
-            !IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
-            hWnd != hOwnWnd .AND.;              // If it is not this app
-            !EMPTY( cTitle ) .AND.;             // If the window has a title
-            !( "MS_" $ cTitle ) .AND.;          // If it is not System apps
-            !( "DDE" $ cTitle ) .AND.;          // If it is not System apps
-            !( "SYSTEM" $ cTitle ) .AND.;       // If it is not System apps
-            !( "SENS" $ cTitle ) .AND.;         // If it is not System apps
-            !( "WIN95" $ cTitle ) .AND.;        // If it is not System apps
-            !( "Spooler" $ cTitle ) .AND.;      // If it is not System apps
-            !( "Thread" $ cTitle ) .AND.;       // If it is not System apps
-            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-            !( cTitle == "Program Manager" )    // If it is not the Program Manager
+               !IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
+               hWnd != hOwnWnd .AND.;              // If it is not this app
+               !EMPTY( cTitle ) .AND.;             // If the window has a title
+               !( "MS_" $ cTitle ) .AND.;          // If it is not System apps
+               !( "DDE" $ cTitle ) .AND.;          // If it is not System apps
+               !( "SYSTEM" $ cTitle ) .AND.;       // If it is not System apps
+               !( "SENS" $ cTitle ) .AND.;         // If it is not System apps
+               !( "WIN95" $ cTitle ) .AND.;        // If it is not System apps
+               !( "Spooler" $ cTitle ) .AND.;      // If it is not System apps
+               !( "Thread" $ cTitle ) .AND.;       // If it is not System apps
+               !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+               !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
             AADD( aWindows, hWnd )
          ENDIF
@@ -140,11 +140,11 @@ PROCEDURE SysWait( nWait )
 
    RETURN
 
-   #define EWX_LOGOFF   0
-   #define EWX_SHUTDOWN   1
-   #define EWX_REBOOT   2
-   #define EWX_FORCE   4
-   #define EWX_POWEROFF   8
+#define EWX_LOGOFF   0
+#define EWX_SHUTDOWN   1
+#define EWX_REBOOT   2
+#define EWX_FORCE   4
+#define EWX_POWEROFF   8
 
 PROCEDURE WinExit
 

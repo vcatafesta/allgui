@@ -52,7 +52,7 @@ CLASS VAR winclass   INIT "SysTabControl32"
    HIDDEN:
    DATA  nActive  INIT 0         // Active Page
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont,bInit,bSize,bPaint,aTabs,bChange,aImages,lResour,nBC,bClick, bGetFocus, bLostFocus  ) CLASS HTab

@@ -231,9 +231,9 @@ FUNCTION GRID_GetColumnWidthDisplay ( cControlName, cParentForm, nColIndex )
 
    // *****************************************************************************
    // CONSTANTS -->  GRID_SetBkImage (nAction)
-   #define _GRID_SETBKIMAGE_NONE_   0
-   #define _GRID_SETBKIMAGE_NORMAL_ 1
-   #define _GRID_SETBKIMAGE_FILL_   2
+#define _GRID_SETBKIMAGE_NONE_   0
+#define _GRID_SETBKIMAGE_NORMAL_ 1
+#define _GRID_SETBKIMAGE_FILL_   2
 
 PROCEDURE GRID_SetBkImage ( cControlName, cParentForm, nAction, cBMPFileName, yOffset, xOffset )
 

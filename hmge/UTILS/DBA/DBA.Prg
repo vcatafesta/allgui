@@ -32,11 +32,11 @@ PROC Main( cOpFName )
    SET CENT ON
    SET BROWSESYNC ON
 
-   #include "DBA.pbl"
+#include "DBA.pbl"
 
    SET Default Icon To "DBAICO"
 
-   #include "DBA_Main.pen"
+#include "DBA_Main.pen"
 
    DBA_Refr()
 
@@ -118,7 +118,7 @@ PROC Main( cOpFName )
                      aStatus  := { '', '', '' }
                   ELSE
                      aStatus  := { NTrim(nCurDatNo) + "°" + aOpnDatas[ nCurDatNo, 3 ] ,; // Full File Name
-                     PADC( NTrim( RECN() ) + '\' + NTrim( LASTREC() ) ,17) ,;
+                        PADC( NTrim( RECN() ) + '\' + NTrim( LASTREC() ) ,17) ,;
                         IF( CDIsTable() .AND. DELETED(),'*','') }
                   ENDIF
                   _SetItem ( "StatusBar", cMWinName, 1, aStatus[ 1 ]  )
@@ -165,7 +165,7 @@ PROC Main( cOpFName )
                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                         PROC Recents(;             // Set/Reset Recent ( Last Opened ) Datas ( Files )
-                           aCurrents )  // Currently open data's full file names
+                              aCurrents )  // Currently open data's full file names
 
                            LOCA cRecsFNm := cProgFold + "\" + PROCNAME() + ".lst",;
                               cRecsStr := '',;
@@ -195,12 +195,12 @@ PROC Main( cOpFName )
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                            PROC LastUsed(;               // Read/Set/ReSet Last used Folder
-                              cLastFile,;    // Full file name last used file
-                              cFoldType )    // 'D:' : data, 'C:' : Code ( eg . Find String )
+                                 cLastFile,;    // Full file name last used file
+                                 cFoldType )    // 'D:' : data, 'C:' : Code ( eg . Find String )
 
                               LOCA cLUDsFNm := cProgFold + "\" + PROCNAME() + ".dirs",; // Last Used Dirs Recorded File Name
-                              cLUFDNam := '',;     // Last Used File's Folder Name
-                              cLUFStrg := ''       // Last Used Files record string
+                                 cLUFDNam := '',;     // Last Used File's Folder Name
+                                 cLUFStrg := ''       // Last Used Files record string
 
                               *  cLastCDir, cLastDDir are PUBL
 
@@ -286,7 +286,7 @@ PROC Main( cOpFName )
                                           "\par   Without this two big men and their volunteer coworkers, \par"+;
                                           "\b       \b0 DBA ( and many others of course) couldn't be exist.\par"+;
                                           "\par\pard\sb100\sa100             \cf1\lang1033\f1 http://www.Harbour-Project.org\cf0\lang1055\f0\par"+;
-                                          "\pard\nowidctlpar\ri-1748\qj\cf1             http://harbourminigui.googlepages.com\cf0\par}"
+                                       "\pard\nowidctlpar\ri-1748\qj\cf1             http://harbourminigui.googlepages.com\cf0\par}"
 
                                        LOCA cCmd3Head := 'Close'
 

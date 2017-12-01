@@ -312,15 +312,15 @@ PROCEDURE MyFind()
    */
 
 FUNCTION Exp1Check( ;                // Syntax Checking on a single expression
-   c1Exprsn )
+      c1Exprsn )
 
    LOCAL cRVal := '', ;
       c1Char, ;
       c1Atom  := '', ;
       nPnter  := 0, ;
       cBPrnts := "([{'" + '"', ;  // Parenthesis Begin
-   cEPrnts := ")]}'" + '"', ;  // Parenthesis End
-   cOprtrs := "+-/*,@$&!<>=#", ;
+      cEPrnts := ")]}'" + '"', ;  // Parenthesis End
+      cOprtrs := "+-/*,@$&!<>=#", ;
       cVoidEs := '"(' + "'", ;
       c1stChr := '', ;
       aLogics := { "AND", "OR", "NOT"  }, ;
@@ -405,7 +405,7 @@ FUNCTION Exp1Check( ;                // Syntax Checking on a single expression
    // ---------------------------------------------------------------------------- //
 
 FUNCTION SubStrng2( ;             // Sub String defined two position
-   cString, ;
+      cString, ;
       nBegPos, ;
       nEndPos )
 

@@ -81,14 +81,14 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
 
    LOCAL i, x, ControlCount
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    LOCAL oGet
 
-   #endif
+#endif
 
    DO CASE
 
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    CASE nMsg == WM_KEYDOWN .OR. nMsg == WM_KEYUP
 
       IF Type( '_TSB_aControlhWnd' ) == 'A' .AND. Len( _TSB_aControlhWnd ) > 0
@@ -111,7 +111,7 @@ FUNCTION MdiEvents ( hWnd, nMsg, wParam, lParam )
             ENDIF
          ENDIF
       ENDIF
-      #endif
+#endif
    CASE nMsg == WM_MDIACTIVATE
 
       IF _HMG_MdiChildActive == .F.
@@ -417,9 +417,9 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       _HMG_aFormActivateId [k] := 0
       _HMG_aFormMiscData1  [k] := {}
       _HMG_aFormMiscData2  [k] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [k] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -477,9 +477,9 @@ FUNCTION _DefineChildMDIWindow ( FormName, x, y, w, h, nominimize, nomaximize, ;
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1  , {} )
       AAdd ( _HMG_aFormMiscData2  , '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
 
    ENDIF
 
@@ -696,7 +696,7 @@ FUNCTION _MdiWindowsActivate( childhwnd )
 
    RETURN NIL
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
 
 FUNCTION GetObjectByClientMDI( hWnd )
 
@@ -708,4 +708,4 @@ FUNCTION GetObjectByClientMDI( hWnd )
 
    RETURN oWnd
 
-   #endif
+#endif

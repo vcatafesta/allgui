@@ -346,9 +346,9 @@ PROCEDURE EnviaEmail_(_smtp, _id, _de, _para_, _assunto_, _emai_, _anexo_, _usua
 
    nRet := oMail:MailSend()      // Actually send the mail
 
-   #ifdef _use_CallDLL
+#ifdef _use_CallDLL
    oMail:BlatUnload(.T.)         // Calling this when not using CallDLL doesn't cause harm
-   #endif
+#endif
 
    IF nRet == 0
       MsgInfo( "E-Mail was sent successfully!", "BlatMail" )

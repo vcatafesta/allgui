@@ -159,7 +159,7 @@ STATIC PROCEDURE OnTimer()
 
    RETURN
 
-   #define WM_PAINT   15
+#define WM_PAINT   15
 
 STATIC PROCEDURE RefreshWin( hWnd )
 

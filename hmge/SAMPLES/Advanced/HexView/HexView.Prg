@@ -48,11 +48,11 @@ PROC Main()
       cTempFNam := '',;
       nFilSize  := 0,;
       aBrwHeds  := {},;    // Column Headers
-   aBrwLens  := {},;    // Column Lengths ( in pixel )
-   aBrwFlds  := {},;    // Field List
-   aBrwROCs  := {},;    // Read-Only Columns
-   aTabStru  := {},;    // Table Structure
-   lFSContnu := .F.     // Find String Continue
+      aBrwLens  := {},;    // Column Lengths ( in pixel )
+      aBrwFlds  := {},;    // Field List
+      aBrwROCs  := {},;    // Read-Only Columns
+      aTabStru  := {},;    // Table Structure
+      lFSContnu := .F.     // Find String Continue
 
    SET BROWSESYNC ON
    SET DATE GERM
@@ -86,7 +86,7 @@ PROC Main()
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
       FUNC AFileSiz(;                        // Size of any given file
-         cFFName )               // Full File Name
+            cFFName )               // Full File Name
 
          RETU DIRECTORY( cFFName ) [ 1 ] [ 2 ]  // AFileSiz()
 
@@ -102,8 +102,8 @@ PROC Main()
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
             FUNC TmpFName( ;                               // Make a temp file name in given folder
-               cFolder,;                     // and build it in 0 length
-               cExtns )
+                  cFolder,;                     // and build it in 0 length
+                  cExtns )
 
                LOCA aTFiles := {},;
                   cFSpec  := '',;
@@ -153,10 +153,10 @@ PROC Main()
                   PROC OpenFile()
 
                      LOCA cOpFName := GetFile ( {{ "All Files", "*.*" }} ,;   // File Select Filter
-                     "Open File" ,;             // Get File Window Title
-                     cBegFoldr ,;               // File Find Beginning folder
-                     .F. ,;                     // Multiple Select
-                     .T. )                      // Change Folder right
+                        "Open File" ,;             // Get File Window Title
+                        cBegFoldr ,;               // File Find Beginning folder
+                        .F. ,;                     // Multiple Select
+                        .T. )                      // Change Folder right
                      LOCA cFileStr := '',;
                         nFPntr   :=  0,;
                         c1Line   :=  '',;

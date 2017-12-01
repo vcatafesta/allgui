@@ -40,17 +40,17 @@ FUNCTION Main()
          AADD(aListItens,{"","","","","","","","","","",.F.,.F.})
          Ains(aListItens,1)
          aListItens[1]:={(Alias())->TIPO,;      // 1
-         (Alias())->CAPTIONP,;   // 2
-         (Alias())->CAPTIONE,;   // 3
-         (Alias())->CAPTIONI,;   // 4
-         (Alias())->NOME,;      // 5
-         (Alias())->ACTION,;      // 6
-         (Alias())->IMAGE,;      // 7
-         (Alias())->MESSAGEP,;   // 8
-         (Alias())->MESSAGEE,;   // 9
-         (Alias())->MESSAGEI,;   // 10
-         (Alias())->CHECKED,;    // 11
-         (Alias())->DISABLED}   // 12
+            (Alias())->CAPTIONP,;   // 2
+            (Alias())->CAPTIONE,;   // 3
+            (Alias())->CAPTIONI,;   // 4
+            (Alias())->NOME,;      // 5
+            (Alias())->ACTION,;      // 6
+            (Alias())->IMAGE,;      // 7
+            (Alias())->MESSAGEP,;   // 8
+            (Alias())->MESSAGEE,;   // 9
+            (Alias())->MESSAGEI,;   // 10
+            (Alias())->CHECKED,;    // 11
+            (Alias())->DISABLED}   // 12
          SKIP
       ENDDO
       USE

@@ -10,7 +10,7 @@ Print a plain text file (Comfortable way).
 */
 
 FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable way
-   cPLTFName,;
+      cPLTFName,;
       cDefaPrinter,;
       lSelPrnDialog,;
       nPaprTypeNo,;
@@ -18,8 +18,8 @@ FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable 
       cFontName,;
       nFontSize,;
       nVMargin,;      // Vertical margin
-   nHMargin,;      // Horizontal margin
-   nChrsPerLin,;
+      nHMargin,;      // Horizontal margin
+      nChrsPerLin,;
       nLineHeigth,;
       aShPrgsOp,;
       bUpdaSBar,;

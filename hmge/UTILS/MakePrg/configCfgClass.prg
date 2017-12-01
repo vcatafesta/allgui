@@ -30,7 +30,7 @@ CLASS ConfigCls
    METHOD findHeader
    METHOD loadSection
 
-ENDCLASS
+   ENDCLASS
 
 METHOD ConfigCls:init(cFile)
 

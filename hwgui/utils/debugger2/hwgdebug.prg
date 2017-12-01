@@ -548,10 +548,10 @@ STATIC FUNCTION SetMode( newMode )
    oSayState:SetColor( aStates[ newMode,2 ], aStates[ newMode,3 ], .T. )
    IF newMode == MODE_INPUT
       oBtnExp:Enable()
-      #if defined( __PLATFORM__UNIX )
-      #else
+#if defined( __PLATFORM__UNIX )
+#else
       hwg_SetForeGroundWindow( HWindow():GetMain():handle )
-      #endif
+#endif
    ELSE
       oBtnExp:Disable()
       IF newMode == MODE_WAIT_ANS .OR. newMode == MODE_WAIT_BR
@@ -1143,12 +1143,12 @@ STATIC FUNCTION About()
    @ 20,30 SAY "HwGUI Debugger" SIZE 300, 24 STYLE SS_CENTER ON SIZE ANCHOR_LEFTABS + ANCHOR_RIGHTABS
    @ 20,60 SAY "Version 1.02" SIZE 300, 24 STYLE SS_CENTER ON SIZE ANCHOR_LEFTABS + ANCHOR_RIGHTABS
 
-   #if !defined( __PLATFORM__UNIX )
+#if !defined( __PLATFORM__UNIX )
    @ 20,90 SAY "http://www.kresin.ru/debugger.html" ;
-      LINK "http://www.kresin.ru/debugger.html" ;
-      SIZE 300, 24 STYLE SS_CENTER  ;
+   LINK "http://www.kresin.ru/debugger.html" ;
+   SIZE 300, 24 STYLE SS_CENTER  ;
       COLOR hwg_VColor("0000FF") ON SIZE ANCHOR_LEFTABS + ANCHOR_RIGHTABS
-   #endif
+#endif
    @ 120, 130 BUTTON "Ok" ID IDOK SIZE 100, 28 ON SIZE ANCHOR_BOTTOMABS + ANCHOR_LEFTABS + ANCHOR_RIGHTABS
 
    ACTIVATE DIALOG oDlg

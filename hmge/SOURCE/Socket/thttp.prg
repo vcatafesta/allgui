@@ -90,7 +90,7 @@ CLASS THttp
    CLASSDATA nHostPort     HIDDEN
    CLASSDATA cUserAgent    HIDDEN
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS THttp
 

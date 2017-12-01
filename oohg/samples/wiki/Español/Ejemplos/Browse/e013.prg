@@ -161,7 +161,7 @@ FUNCTION AddColumn(oBrw1)
 
    // Vea los parametros en h_xbrowse.prg
    oBrw1:AddColumn( NIL, ;           // agregar en la última posición
-   "image", ;
+      "image", ;
       "Imagen", ;
       50, ;
       NIL, ;

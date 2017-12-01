@@ -1099,6 +1099,7 @@ FUNCTION PgLoadImag( cFile, k, hItem )
 FUNCTION PgIdentData( cData, typePG, cValue, sep )
 
    LOCAL aData := {}, cToken, n := 1, pos, cLogic
+
    DEFAULT sep := ';', typePG := PG_DEFAULT
    DO CASE
    CASE typePG == PG_DEFAULT
@@ -1647,10 +1648,10 @@ FUNCTION ItemRt2File( hand, aItemRt )
 
    RETURN ( FError() == 0 )
 
-   #define NM_SETFOCUS      -7
-   #define NM_KILLFOCUS    (-8)
-   #define LVN_ITEMCHANGED (-101)
-   #define NM_DBLCLK       (-3)
+#define NM_SETFOCUS      -7
+#define NM_KILLFOCUS    (-8)
+#define LVN_ITEMCHANGED (-101)
+#define NM_DBLCLK       (-3)
 
 FUNCTION OPROPGRIDEVENTS( hWnd, nMsg, wParam, lParam, hItem, hEdit )
 
@@ -1785,6 +1786,7 @@ FUNCTION aFont2Str( aFont )
 FUNCTION aVal2Str( aData, sep )
 
    LOCAL n, cData := ""
+
    DEFAULT sep := ';'
    IF ValType( aData ) == 'A'
       FOR n := 1 TO Len( aData )

@@ -556,11 +556,11 @@ FUNCTION pdfClose()
       hb_ntos( s_aReport[ DOCLEN ] ) + CRLF + ;
       "%%EOF" + CRLF
    FWrite( s_aReport[ HANDLE ], cTemp )
-   #if 0
+#if 0
    IF s_aReport[ OPTIMIZE ]
       pdfOptimize( ) coming !
    ENDIF
-   #endif
+#endif
    FClose( s_aReport[ HANDLE ] )
 
    s_aReport := nil
@@ -596,7 +596,7 @@ STATIC FUNCTION pdfClosePage()
       hb_ntos( s_aReport[ REPORTOBJ ] - 1 ) + " 0 obj" + CRLF + ;
       "<<" + CRLF + ;
       "/ColorSpace << /DeviceRGB /DeviceGray >>" + CRLF + ; // version 0.01
-   "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
+      "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
 
    IF Len( s_aReport[ PAGEFONTS ] ) > 0
       cTemp += CRLF + ;
@@ -1779,12 +1779,12 @@ FUNCTION pdfCreateHeader( _file, _size, _orient, _lpi, _width )
 
    LOCAL s_aReportStyle := { ;
       { 1    , 2  , 3  , 4  ,  5  ,   6    }, ; // "Default"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  64.0  }, ; // "P6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0,  85.35 }, ; // "P8"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  48.9  }, ; // "L6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0,  65.2  }, ; // "L8"
-   { 2.475, 4.0, 4.9, 6.4,  7.5,  82.0  }, ; // "P6"
-   { 3.3  , 5.4, 6.5, 8.6, 10.0, 109.35 } }  // "P8"
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  64.0  }, ; // "P6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0,  85.35 }, ; // "P8"
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  48.9  }, ; // "L6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0,  65.2  }, ; // "L8"
+      { 2.475, 4.0, 4.9, 6.4,  7.5,  82.0  }, ; // "P6"
+      { 3.3  , 5.4, 6.5, 8.6, 10.0, 109.35 } }  // "P8"
 
    LOCAL nStyle := 1, nAdd := 0.00
 
@@ -1971,11 +1971,11 @@ FUNCTION pdfTIFFInfo( cFile )
             */
             // ?? "ImageWidth"
             // cTag := "ImageWidth"
-            #if 0
+#if 0
             IF nFieldType != SHORT .AND. nFieldType != LONG
                Alert( "Wrong Type for ImageWidth" )
             ENDIF
-            #endif
+#endif
             IF nFieldType ==  SHORT
                nWidth := Bin2W( SubStr( cValues, 1, 2 ) )
             ELSEIF nFieldType ==  LONG
@@ -1991,11 +1991,11 @@ FUNCTION pdfTIFFInfo( cFile )
             */
             // ?? "ImageLength"
             // cTag := "ImageLength"
-            #if 0
+#if 0
             IF nFieldType != SHORT .AND. nFieldType != LONG
                Alert( "Wrong Type for ImageLength" )
             ENDIF
-            #endif
+#endif
             IF nFieldType ==  SHORT
                nHeight := Bin2W( SubStr( cValues, 1, 2 ) )
             ELSEIF nFieldType ==  LONG
@@ -2360,7 +2360,7 @@ FUNCTION pdfTIFFInfo( cFile )
             // ?? "Unknown"
             // cTag := "Unknown"
          ENDCASE
-         #if 0
+#if 0
          ?? PadR( cTag, 30 )
          ?? " type " + PadR( aType[ nFieldType ], 10 ) + " count " + hb_ntos( nCount ) + " <"
          DO CASE
@@ -2413,7 +2413,7 @@ FUNCTION pdfTIFFInfo( cFile )
 
          ENDCASE
          ?? " >"
-         #endif
+#endif
       NEXT
       FRead( nHandle, @cIFDNext, 4 )
    ENDDO
@@ -2647,11 +2647,11 @@ STATIC FUNCTION File2Array( cFile, nLen, hFile )
       ELSEIF cType == "N"
          aRay[ nDepth ] := Val( cData )
       ELSEIF cType == "D"
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          aRay[nDepth] := ctod( left( cData, 4 ) + "/" + substr( cData, 5, 2 ) + "/" + substr( cData, 7, 2 )) //stod(cData)
-         #else
+#else
          aRay[ nDepth ] := hb_SToD( cData )
-         #endif
+#endif
       ELSEIF cType == "L"
          aRay[ nDepth ] := ( cData == "T" )
       ELSEIF cType == "A"

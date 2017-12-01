@@ -32,11 +32,11 @@ CLASS TComboBox FROM TControl
    METHOD LButtonDown( nRow, nCol )
    METHOD LostFocus()
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TComboBox:New() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TComboBox:New() Version 7.0
+   * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
       nClrFore, nClrBack, hFont, cMsg, cControl, cWnd ) CLASS TComboBox

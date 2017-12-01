@@ -24,12 +24,12 @@ PROCEDURE PrintTest10()
 
    LOCAL lSuccess := .F.,;
       nVMargin := 20,;    // Vertical margin
-   nHMargin := 20,;      // Horizontal margin
-   nLine_Num :=  0
+      nHMargin := 20,;      // Horizontal margin
+      nLine_Num :=  0
 
    LOCAL nPageLength := 210 - nHMargin * 2,;
       nPageHeigth := 297 - nVMargin * 5,;  // Margins + Header lines
-   nChrsPerLin :=  80
+      nChrsPerLin :=  80
 
    LOCAL cItem2Prnt
 
@@ -41,12 +41,12 @@ PROCEDURE PrintTest10()
 
    PRIVATE nPageNumb   := 0,;
       nPTLineCo   := 0,;    // Total line count
-   nPTPageCo   := 0,;    // Total page count
-   nLinsPerPag := nPageHeigth / nLineHeigth,;
+      nPTPageCo   := 0,;    // Total page count
+      nLinsPerPag := nPageHeigth / nLineHeigth,;
       nLineNo1Pag := 0
 
    PRIVATE nPrintRow :=  0,;   // Row ( line ) number in printed page
-   nPrintCol :=  0     // Column  number in printed page
+      nPrintCol :=  0     // Column  number in printed page
 
    PRIVATE nDays_Tot  :=  0,;
       nSalaryTot :=  0

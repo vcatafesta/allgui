@@ -208,11 +208,11 @@ CLASS TAppData
    METHOD Destroy()  INLINE ( ::Cargo := Nil,                              ;
       ::oCargo := iif( HB_ISOBJECT( ::oCargo ), ::oCargo:Destroy(), Nil ), ;
       ::oEvent := iif( HB_ISOBJECT( ::oEvent ), ::oEvent:Destroy(), Nil ) )
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    DESTRUCTOR DestroyObject()
-   #endif
+#endif
 
-ENDCLASS
+   ENDCLASS
 
 #ifndef __XHARBOUR__
 
@@ -221,7 +221,7 @@ METHOD PROCEDURE DestroyObject()  CLASS TAppData
    ::Destroy()
 
    RETURN
-   #endif
+#endif
 
 FUNCTION oAppData( cPathBase, cName, nApp )
 

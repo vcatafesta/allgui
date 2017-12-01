@@ -58,12 +58,12 @@ STATIC PROCEDURE Start()
    RETURN
 
    // Notify Icon Infotip flags
-   #define NIIF_NONE       0x00000000
+#define NIIF_NONE       0x00000000
    // icon flags are mutualy exclusive
    // and take only the lowest 2 bits
-   #define NIIF_INFO       0x00000001
-   #define NIIF_WARNING    0x00000002
-   #define NIIF_ERROR      0x00000003
+#define NIIF_INFO       0x00000001
+#define NIIF_WARNING    0x00000002
+#define NIIF_ERROR      0x00000003
 
 STATIC PROCEDURE MsgBalloon( cMessage, cTitle, nIconIndex )
 

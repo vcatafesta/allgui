@@ -25,9 +25,9 @@ MEMV aDBStrAdjst ,;
    aWrkStruct
 
 FUNC DBStructOps(;                        // DataBase Structure Operations
-   aStruct,;
+      aStruct,;
       nOperati,;     // 1: Display, 2: Edit, 3: New
-   aDBFInfo,;
+      aDBFInfo,;
       cFrmTitle,;
       lMustChange )
 
@@ -36,10 +36,10 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
    LOCA aFldTypes   := { 'Character','Numeric','Logical','Date','Memo' }
 
    LOCA aColumns :=  { { "NUM", '99' },;            // Field Num
-   { "CHR", '!!!!!!!!!!' },;    // Field Name
-   { "CMB", aFldTypes },;    // Field Type
-   { "NUM",  '999' },;          // Field Width
-   { "NUM",  '99' } }           // Field Dec
+      { "CHR", '!!!!!!!!!!' },;    // Field Name
+      { "CMB", aFldTypes },;    // Field Type
+      { "NUM",  '999' },;          // Field Width
+      { "NUM",  '99' } }           // Field Dec
 
    LOCA cStruHelp := "Up/Down : Navigate"      + CRLF +;
       "Escape    : Exit" + IF( nOperati < 2,'', CRLF +;
@@ -78,8 +78,8 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
          "Record Count :" }
 
       aDBInfValus := { aDBFInfo[ 1 ],;               // .dbf name
-      DTOC(  aDBFInfo[ 2 ] ),;      // LUPDATE
-      NTrim( aDBFInfo[ 3 ] ) }      // RECC
+         DTOC(  aDBFInfo[ 2 ] ),;      // LUPDATE
+         NTrim( aDBFInfo[ 3 ] ) }      // RECC
 
       AADD( aDBInfValus, NTrim( aDBFInfo[ 4 ] ) )    // reclen
       AADD( aDBInfValus, NTrim( aDBFInfo[ 5 ] ) )    // fcou
@@ -95,10 +95,10 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
    AADD( aDBInfLabls, "Field Count :" )
 
    AEVAL( aStruct, { | a1, i1 | AADD( aWrkStruct, {      i1    ,;  // Field Numb
-   a1[ 1 ]  ,;  // Field Name
-   ASCAN( aColumns[ 3, 2] , a1[ 2 ]) ,;  // Field Type Number
-   a1[ 3 ]  ,;  // Field Width
-   a1[ 4 ]})})  // Field Width
+      a1[ 1 ]  ,;  // Field Name
+      ASCAN( aColumns[ 3, 2] , a1[ 2 ]) ,;  // Field Type Number
+      a1[ 3 ]  ,;  // Field Width
+      a1[ 4 ]})})  // Field Width
 
    IF nOperati > 1
       AADD( aWrkStruct, { LEN( aWrkStruct)+1,SPAC(10),0,0,0 } ) // New empty item ( row ) ready for append
@@ -277,7 +277,7 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
          PROC DBStNewField(;                       // DataBase Structure New Field
-            nCurColNo ) // Current Column Number
+               nCurColNo ) // Current Column Number
 
             LOCA nItemCount := frmDBStruct.grdStruct.ItemCount,;
                nColumNumb := 0,;
@@ -304,7 +304,7 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
             FUNC DBStCellVald(;                       // DataBase Structure Cell Validity
-               nGRow,;
+                  nGRow,;
                   nGCol ,;
                   xGVal )
 
@@ -381,8 +381,8 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
                *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                FUNC DBStVFNam( ;                         // DataBase Structure Valid Field Name
-                  cFldNam, ;     // Candidate Field Name
-                  nFldNum )      // Number of this Field
+                     cFldNam, ;     // Candidate Field Name
+                     nFldNum )      // Number of this Field
 
                   LOCA lRVal  := .T.,;
                      nCInd  :=  0,;
@@ -462,7 +462,7 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                            PROC DBStInsItem( ;                       // DataBase Structure Insert Field
-                              nRowNum )
+                                 nRowNum )
 
                               LOCA nRInd   := 0,;
                                  nItemCo := frmDBStruct.grdStruct.ItemCount
@@ -480,7 +480,7 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                               PROC DBStEdMov( ;                         // DataBase Structure Move Field up or down
-                                 nMove   )  // -1 : Up, 1 : Down
+                                    nMove   )  // -1 : Up, 1 : Down
 
                                  LOCA nRowNum := frmDBStruct.grdStruct.Value,;
                                     aSwap   := {}
@@ -509,7 +509,7 @@ FUNC DBStructOps(;                        // DataBase Structure Operations
                                  *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                                  FUNC DBStAply( ;                          // DataBase Structure Apply Changes
-                                    aOldStruct,;
+                                       aOldStruct,;
                                        lMustChange )
 
                                     LOCA cFldTypes := 'CNLDM',;

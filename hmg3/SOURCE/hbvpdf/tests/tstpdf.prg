@@ -152,9 +152,9 @@ FUNCTION Main()
 
    oPdf:Close()
 
-   #ifndef __XPP__
+#ifndef __XPP__
    oPdf:Execute( 'test.pdf' )
-   #endif
+#endif
 
    // oPdf:FilePrint()
 

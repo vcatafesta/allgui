@@ -49,10 +49,10 @@ Copyright 2001-2009 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 PROCEDURE InitPGMessages
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
    LOCAL cLang
 
-   #endif
+#endif
 
    // PropGrid MESSAGES (ENGLISH DEFAULT)
 
@@ -79,7 +79,7 @@ PROCEDURE InitPGMessages
 
    _HMG_PGEncodingXml := "UTF-8"
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
 
    // LANGUAGE IS NOT SUPPORTED BY hb_langSelect() FUNCTION
 
@@ -629,6 +629,6 @@ PROCEDURE InitPGMessages
 
    ENDCASE
 
-   #endif
+#endif
 
    RETURN

@@ -36,7 +36,7 @@ PROCEDURE Main
          JUSTIFY ;
          { GRID_JTFY_CENTER , GRID_JTFY_RIGHT , GRID_JTFY_LEFT } ;
          ; // Edition
-      APPEND ;
+         APPEND ;
          EDIT INPLACE ;
          REPLACEFIELD { { |x,o| o:FieldPut( 1, x ) } , ;
          { |x,o| o:FieldPut( 2, x ) } , ;
@@ -46,9 +46,9 @@ PROCEDURE Main
 
    RETURN
 
-   #endif    // #ifndef NO_SAMPLE
+#endif    // #ifndef NO_SAMPLE
 
-   #include "hbclass.ch"
+#include "hbclass.ch"
 
    /*
    *  This is a template for ooHGRecord's subclasses (database class used
@@ -122,7 +122,7 @@ CLASS XBrowse_Array
 
    METHOD FieldBlock
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Skipper( nSkip ) CLASS XBrowse_Array
 

@@ -88,7 +88,7 @@ FUNCTION paint_it( hWnd )
 
    RETURN NIL
 
-   #define WM_PAINT 15
+#define WM_PAINT 15
 
    /*
    */

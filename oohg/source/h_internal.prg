@@ -89,7 +89,7 @@ CLASS TInternal FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, OnClick, w, h, ;
       backcolor, tooltip, gotfocus, lostfocus, ;

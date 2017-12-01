@@ -24,7 +24,7 @@ PROCEDURE MAIN
 
    RETURN
 
-   #define MsgInfo( c )   MsgInfo( c, , , .f. )
+#define MsgInfo( c )   MsgInfo( c, , , .f. )
 
 PROCEDURE NonStop()
 

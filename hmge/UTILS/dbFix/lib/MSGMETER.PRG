@@ -44,9 +44,9 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
 
    Return(uRetVal)
 
-   #else
+#else
 
-   #include "fivewin.ch"
+#include "fivewin.ch"
 
 FUNCTION MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
 
@@ -68,7 +68,7 @@ FUNCTION MsgMeter(bAction, cMsg, cTitle, lNoCancel, oParent)
    LOCAL uRetVal    // Return value from evaluating bAction
 
    DEFAULT cMsg := "Please Wait...", ;  // Removed default of bAction (duh!)
-   cTitle := "Processing",   ;
+      cTitle := "Processing",   ;
       lNoCancel := .F.
 
    define dialog oDlg from 5, 5 to 11, 45 title cTitle ;
@@ -166,4 +166,4 @@ FUNCTION MsgWait(bAction, cMsg, cTitle, lNoCancel, oParent)
 
    Return(uRetVal)
 
-   #endif // not DOS_ONLY
+#endif // not DOS_ONLY

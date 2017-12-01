@@ -21,7 +21,7 @@ FUNCTION AddSlash(cPath)
 
    Return(cPath)
 
-   #ifndef DOS_ONLY
+#ifndef DOS_ONLY
 
 FUNCTION CurPath(lSlash)
 
@@ -62,7 +62,7 @@ FUNCTION ExePath(lSlash)
 
    Return( left(cExe, rat("\", cExe) - iif(lSlash, 0, 1)) )
 
-   #endif
+#endif
 
 FUNCTION FileParts(cFileSpec, nPart)
 
@@ -197,16 +197,16 @@ FUNCTION GetTempDir(lSlash)
    */
    LOCAL x, cDir := ""
 
-   #ifdef DOS_ONLY
+#ifdef DOS_ONLY
    LOCAL aTemp_ := { getenv("TEMP"), ;
       getenv("TMP") , ;
       "C:\TEMP"      }
-   #else
+#else
    LOCAL aTemp_ := { getenv("TEMP"), ;
       getenv("TMP") , ;
       "C:\TEMP"     , ;
       AddSlash(GetWinDir()) + "TEMP" }
-   #endif
+#endif
 
    DEFAULT lSlash := .F.
 

@@ -15,7 +15,7 @@ CREATE CLASS _Cells
 
    OPERATOR "[]" ARG nIndex INLINE _Cell():New( ::hGrid, nIndex )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD _Cells:Init( hGrid )
 
@@ -36,7 +36,7 @@ CREATE CLASS _Cell
    METHOD GetFColor()
    // and more
 
-ENDCLASS
+   ENDCLASS
 
 METHOD _Cell:Init( hGrid, nIndex )
 

@@ -135,7 +135,7 @@ PROCEDURE Main
 
    RETURN
 
-   #define MsgInfo( c ) MsgInfo( c, , , .f. )
+#define MsgInfo( c ) MsgInfo( c, , , .f. )
 
 PROCEDURE Click_1
 
@@ -184,13 +184,13 @@ PROCEDURE Click_4
 
    LOCAL nValor:=123.45, uValor:={0,1,1000}
 
-   #ifdef _INPUTMASK_
+#ifdef _INPUTMASK_
    LOCAL cPict1:="9,999.99", cPict2:="9,999"
 
-   #else
+#else
    LOCAL cPict1:="@E 9,999.99", cPict2:="@E 9,999"
 
-   #endif
+#endif
 
    IF MsgEdit("Teclee el importe deseado", , @nValor, "Gear.Bmp",,,cPict1)
       MsgInfo("El importe es "+ToString(nValor))
@@ -304,7 +304,7 @@ PROCEDURE Click_13
 
    RETURN
 
-   #define COLOR_INFOBK     24
+#define COLOR_INFOBK     24
 
 PROCEDURE Click_14
 
@@ -348,11 +348,11 @@ FUNCTION MsgEdit(cText, cTitle, uVar, cImage, lPassWord, lNoCancel, cPicture)
    DEFAULT cImage    To ""
    DEFAULT lPassWord To .F.
    DEFAULT lNoCancel To .F.
-   #ifdef _INPUTMASK_
+#ifdef _INPUTMASK_
    DEFAULT cPicture  To "999,999.99"
-   #else
+#else
    DEFAULT cPicture  To "@E 999,999.99"
-   #endif
+#endif
 
    IF Valtype(uVar)="A"
       Asize(uVar,3)
@@ -387,13 +387,13 @@ FUNCTION MsgEdit(cText, cTitle, uVar, cImage, lPassWord, lNoCancel, cPicture)
 
          CASE ValType(uVar)=="N"
             @ 10, 10 LABEL _Label VALUE cText WIDTH 295 TRANSPARENT
-            #ifdef _INPUTMASK_
+#ifdef _INPUTMASK_
             @ 40,105 TEXTBOX _TextBox VALUE uVar WIDTH 120 HEIGHT 25 NUMERIC INPUTMASK cPicture ;
                ON ENTER _EditForm._Ok.OnClick
-            #else
+#else
             @ 40,105 GETBOX _TextBox VALUE uVar WIDTH 120 HEIGHT 25 PICTURE cPicture
             ON KEY RETURN ACTION _EditForm._Ok.OnClick
-            #endif
+#endif
          CASE ValType(uVar)=="D"
             IF Len(cText) < 40
                cText := CRLF+cText

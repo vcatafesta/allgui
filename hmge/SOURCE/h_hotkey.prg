@@ -132,10 +132,10 @@ FUNCTION _DefineHotKey ( cParentForm , nMod , nKey , bAction )
 
    RETURN lSuccess
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    /* FOR EACH hb_enumIndex() */
-   #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-   #endif
+#xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
+#endif
 
 PROCEDURE _ReleaseHotKey ( cParentForm, nMod , nKey )
 
@@ -175,7 +175,7 @@ PROCEDURE _PushKey ( nKey )
 
    RETURN
 
-   #ifdef _HMG_COMPAT_  // HMG_PressKey( nVK1, nVK2, ... ) --> array { nVK1, nVK2, ... }
+#ifdef _HMG_COMPAT_  // HMG_PressKey( nVK1, nVK2, ... ) --> array { nVK1, nVK2, ... }
 
 FUNCTION HMG_PressKey( ... )  // by Dr. Claudio Soto, April 2016
 
@@ -196,7 +196,7 @@ FUNCTION HMG_PressKey( ... )  // by Dr. Claudio Soto, April 2016
 
    RETURN aVK
 
-   #endif
+#endif
 
 FUNCTION _SetHotKeyByName ( cParentForm, cKey, bAction )
 

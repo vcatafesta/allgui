@@ -73,7 +73,7 @@ CLASS HilightBase
 
    METHOD Do()    INLINE  (::nItems := 0,Nil)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD End() CLASS HilightBase
 
@@ -101,7 +101,7 @@ CLASS Hilight INHERIT HilightBase
 
    METHOD AddItem( nPos1, nPos2, nType )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cFile, cSection ) CLASS Hilight
 

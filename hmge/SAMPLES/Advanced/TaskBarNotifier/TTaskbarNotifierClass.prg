@@ -154,10 +154,10 @@ CLASS TTaskbarNotifier
    UNDECLARED METHOD GetByName( s )
    UNDECLARED METHOD ObjectName() INLINE ::Name
 
-ENDCLASS
+   ENDCLASS
 
-/*
-*/
+   /*
+   */
 
 METHOD Init( sBitmapFile /*, sCloseBitmapFile*/ ) CLASS TTaskbarNotifier //EXPORTED
 

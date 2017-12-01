@@ -64,10 +64,10 @@ CLASS ooSql
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
-* Metodo Skipper() Avanza o Retrocede un registro                              *
-*----------------------------------------------------------------- 20-02-2010 -*
+   * Metodo Skipper() Avanza o Retrocede un registro                              *
+   *----------------------------------------------------------------- 20-02-2010 -*
 
 METHOD Skipper( nSkip ) CLASS ooSql
 

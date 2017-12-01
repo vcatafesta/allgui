@@ -157,19 +157,19 @@ FUNCTION hwg_dbg_New()
    handl2 := FCreate( cFile + ".d2" )
    FClose( handl2 )
 
-   #if defined( __PLATFORM__UNIX )
+#if defined( __PLATFORM__UNIX )
    IF Empty( cExe )
       cExe := Iif( File(cDebugger), "./", "" ) + cDebugger
    ENDIF
    // lRun := __dbgProcessRun( cExe, "-c" + cFile )
    hProcess := hb_processOpen( cExe + ' -c' + cFile )
    lRun := ( hProcess != -1 .AND. hb_processValue( hProcess, .F. ) == -1 )
-   #else
+#else
    IF Empty( cExe )
       cExe := cDebugger
    ENDIF
    lRun := ( ( hProcess := hb_processOpen( cExe + ' -c"' + cFile + '"' ) ) > 0 )
-   #endif
+#endif
    IF !lRun
       hwg_dbg_Alert( cExe + " isn't available..." )
    ELSE
@@ -505,14 +505,14 @@ STATIC FUNCTION Hex2Str( stroka )
 
    RETURN
 
-   #ifdef __XHARBOUR__
-   #ifndef __PLATFORM__Windows
+#ifdef __XHARBOUR__
+#ifndef __PLATFORM__Windows
 
 FUNCTION EXENAMEX()
 
    RETURN HB_ARGV( 0 )
-   #endif
-   #ifdef __PLATFORM__Windows
+#endif
+#ifdef __PLATFORM__Windows
 #pragma BEGINDUMP
 
 #include "hbapi.h"
@@ -527,5 +527,5 @@ HB_FUNC(EXENAMEX)
 }
 
 #pragma enddump
-   #endif
-   #endif
+#endif
+#endif

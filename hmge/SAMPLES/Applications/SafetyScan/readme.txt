@@ -20,8 +20,8 @@ wasting valuable disk space.
 The only thing you will notice is less problems with your computer
 and more hard drive space!
 
-DISTRIBUTION: 
+DISTRIBUTION:
 ~~~~~~~~~~~~~
-This program is FREE, and may be freely copied and distributed, 
-as long as it is not modified in any way, and no fee is charged for 
-its distribution (small shipping and handling fee is acceptable). 
+This program is FREE, and may be freely copied and distributed,
+as long as it is not modified in any way, and no fee is charged for
+its distribution (small shipping and handling fee is acceptable).

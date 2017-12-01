@@ -65,7 +65,7 @@ FUNCTION TestRtf()
 
    BEGIN TEXTBOX oRtf;
          SIZE {9.0,0.30};     // Tamaño Caja de texto
-      TEXT "Cajas de Texto";
+         TEXT "Cajas de Texto";
          FONTNUMBER 2;
          FONTSIZE 12 ;
          APPEARANCE BOLD_ON+CAPS_ON;
@@ -95,8 +95,8 @@ FUNCTION TestRtf()
 
    LINEA oRtf;
       INICIO {0.1,1.0};         //Inicio
-   FIN {10.0,1.0};          // Final
-   TIPO "SOLIDA"      // Tipo de linea
+      FIN {10.0,1.0};          // Final
+      TIPO "SOLIDA"      // Tipo de linea
 
    NEW PARAGRAPH oRTF TEXT ""
    NEW PARAGRAPH oRTF TEXT ""
@@ -132,22 +132,22 @@ FUNCTION TestRtf()
    aMarca[7]:=25
    aMarca[9]:=25
    DEFINE NEWTABLE oRTF ;              // Specify the RTF object
-   ALIGN CENTER ;                // Center table horizontally on page
-   FONTNUMBER 2 ;                // Use font #2 for the body rows
-   FONTSIZE 10 ;                  // Use 9 Pt. font for the body rows
-   CELLAPPEAR BOLD_OFF ;         // Normal cells unbolded
-   CELLHALIGN LEFT ;             // Text in normal cells aligned left
-   COLUMNS 9 ;             // Table has n Columns
-   CELLWIDTHS anchos ;        // Array of column widths
-   ROWHEIGHT .2 ;               // Minimum row height is .25"
-   CELLBORDERS SINGLE ;          // Outline cells with thin border
-   COLSHADE aMarca;               // Sombras en columnas
-   HEADERROWS 2;                // dos lineas de titulos
-   HEADER {"Sala","Generador","","","","","ACTIVIDAD",;
+      ALIGN CENTER ;                // Center table horizontally on page
+      FONTNUMBER 2 ;                // Use font #2 for the body rows
+      FONTSIZE 10 ;                  // Use 9 Pt. font for the body rows
+      CELLAPPEAR BOLD_OFF ;         // Normal cells unbolded
+      CELLHALIGN LEFT ;             // Text in normal cells aligned left
+      COLUMNS 9 ;             // Table has n Columns
+      CELLWIDTHS anchos ;        // Array of column widths
+      ROWHEIGHT .2 ;               // Minimum row height is .25"
+      CELLBORDERS SINGLE ;          // Outline cells with thin border
+      COLSHADE aMarca;               // Sombras en columnas
+      HEADERROWS 2;                // dos lineas de titulos
+      HEADER {"Sala","Generador","","","","","ACTIVIDAD",;
       "NºEXPOSICIONES AÑO POR TUBO","CARGA DE TRABAJO mA. min/semana"},;
       {"","Marca","Modelo","Tension Pico (kVp)","Intensidad (mA)",;
       "Nº Tubos","","",""};       // Titulos. Cada linea es una matriz
-   HEADERSHADE 0;
+      HEADERSHADE 0;
       HEADERFONTSIZE 10;
       HEADERHALIGN CENTER
    // 2,3 y 5,6 de la primera linea de titulos
@@ -209,40 +209,40 @@ STATIC FUNCTION SetupRTF(cOutFile)
 
       DEFINE ESTILO oRtf;
          NAME "Prueba";          //Nombre del estilo
-      TYPE PARAGRAPH;         // Tipo del estilo
-      FONTNUMBER 3;           // Fuente
-      FONTCOLOR 6;            // Color
-      APPEARANCE BOLD_ON+ITALIC_ON;
+         TYPE PARAGRAPH;         // Tipo del estilo
+         FONTNUMBER 3;           // Fuente
+         FONTCOLOR 6;            // Color
+         APPEARANCE BOLD_ON+ITALIC_ON;
          ALIGN CENTER;           // Alineacion
-      SHADE 25;               // Sombreado
-      LUPDATE
+         SHADE 25;               // Sombreado
+         LUPDATE
 
    END ESTILOS oRTF
 
    // Informacion del documento.
 
    INFO oRTF TITLE "Prueba";          //Titulo
-   SUBJECT "Informe en RTF";               //Materia
-   AUTHOR "Jose Ignacio Jimenez Alarcon";  // Autor
-   MANAGER "Jose Ignacio Jimenez Alarcon" ;  //Director
-   COMPANY "Servicio Canario de Salud" ;     // Compañia
-   OPERATOR "Jose Ignacio Jimenez Alarcon"   // Operador
+      SUBJECT "Informe en RTF";               //Materia
+      AUTHOR "Jose Ignacio Jimenez Alarcon";  // Autor
+      MANAGER "Jose Ignacio Jimenez Alarcon" ;  //Director
+      COMPANY "Servicio Canario de Salud" ;     // Compañia
+      OPERATOR "Jose Ignacio Jimenez Alarcon"   // Operador
 
    // Formato del documento. Se puede cambiar luego con el setup. Tiene
    // que ir siempre detras del bloque de informacion si existe
    DOCUMENT FORMAT oRtf;
       TAB 0.5;           // Tabuladores
-   LINE 1;            // Linea Inicial
-   BACKUP;            // Backup al grabar
-   DEFLANG 1034;           // Lenguaje del documento
-   FOOTTYPE BOTH;          // Notas Pie de Pagina y Final Documento
-   FOOTNOTES SECTION;      // Al final de la seccion
-   ENDNOTES SECTION;
+      LINE 1;            // Linea Inicial
+      BACKUP;            // Backup al grabar
+      DEFLANG 1034;           // Lenguaje del documento
+      FOOTTYPE BOTH;          // Notas Pie de Pagina y Final Documento
+      FOOTNOTES SECTION;      // Al final de la seccion
+      ENDNOTES SECTION;
       FOOTNUMBER SIMBOL;      // Numeracion por simbolos
-   PAGESTART 1;            // Pagina Inicial
-   PROTECT NONE;           // Tipo de proteccion
-   FACING;                 // Diferencia entre paginas pares o impares
-   GUTTER 1.0              // Encuadernado 0.5
+      PAGESTART 1;            // Pagina Inicial
+      PROTECT NONE;           // Tipo de proteccion
+      FACING;                 // Diferencia entre paginas pares o impares
+      GUTTER 1.0              // Encuadernado 0.5
 
    // Trim trailing spaces from data, to save file space.
    oRTF:lTrimSpaces := .T.
@@ -257,14 +257,14 @@ STATIC FUNCTION SetupRTF(cOutFile)
    BEGIN HEADER oRTF
 
       DEFINE NEWTABLE oRTF ;              // Specify the RTF object
-      ALIGN LEFT ;                // Center table horizontally on page
-      FONTNUMBER 2 ;                // Use font #2 for the body rows
-      FONTSIZE 9 ;                  // Use 9 Pt. font for the body rows
-      CELLAPPEAR BOLD_OFF ;         // Normal cells unbolded
-      COLUMNS 3;            // Table has n Columns
-      CELLWIDTHS {0.98,5.71,0.71};        // Array of column widths
-      ROWHEIGHT .2  ;              // Minimum row height is .25"
-      CELLBORDERS NONE           // Outline cells with thin border
+         ALIGN LEFT ;                // Center table horizontally on page
+         FONTNUMBER 2 ;                // Use font #2 for the body rows
+         FONTSIZE 9 ;                  // Use 9 Pt. font for the body rows
+         CELLAPPEAR BOLD_OFF ;         // Normal cells unbolded
+         COLUMNS 3;            // Table has n Columns
+         CELLWIDTHS {0.98,5.71,0.71};        // Array of column widths
+         ROWHEIGHT .2  ;              // Minimum row height is .25"
+         CELLBORDERS NONE           // Outline cells with thin border
 
       WRITE NEWCELL oRTF TEXT "";
          FONTNUMBER 2;
@@ -275,7 +275,7 @@ STATIC FUNCTION SetupRTF(cOutFile)
          FONTNUMBER 2;
          FONTSIZE 14 ;
          FONTCOLOR 2;                            // Colores
-      APPEARANCE BOLD_ON+CAPS_ON+ITALIC_ON ;
+         APPEARANCE BOLD_ON+CAPS_ON+ITALIC_ON ;
          ALIGN CENTER
 
       WRITE NEWCELL oRtf TEXT ""

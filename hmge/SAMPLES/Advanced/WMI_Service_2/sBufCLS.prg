@@ -13,7 +13,7 @@ CREATE CLASS stringBuffer
    METHOD setStr(strIn)
    METHOD getStr(sSeparator)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS stringBuffer
 

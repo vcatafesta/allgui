@@ -27,10 +27,10 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
 
       LOCA aStruct :=  DBSTRUCT(),;
          aDBFInf := { aOpnDatas[ nCurDatNo, 4 ],;                   // 1. file name
-      LUPDATE(),;                                   // 2. Last Modification Date
-      LASTREC(),;                                   // 3. Record Count
-      RECSIZE(),;                                   // 4. Record Length
-      FCOUNT() }                                    // 5. Field Count
+         LUPDATE(),;                                   // 2. Last Modification Date
+         LASTREC(),;                                   // 3. Record Count
+         RECSIZE(),;                                   // 4. Record Length
+         FCOUNT() }                                    // 5. Field Count
 
       DBStructOps( aStruct, 1, aDBFInf )
 
@@ -107,30 +107,30 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
          LOCA nRVal := 0
 
          LOCA nFilHNo :=   0,;            // File DOS handle number.
-         nFerror :=   0,;            // File Error
-         lRetVal := .F.,;            // Return Value
-         nHdrLen :=  32              // Length of characters to read from file
+            nFerror :=   0,;            // File Error
+            lRetVal := .F.,;            // Return Value
+            nHdrLen :=  32              // Length of characters to read from file
 
          LOCA cHeader := SPAC(nHdrLen),; // File Header -- Control String
-         nReaded :=  0,;            // Length of characters readed from file
-         nCtrCod :=  0,;            // .dbf validity Control Code
-         nLUYear :=  0,;            // Last Update Year
-         nLUMont :=  0,;            //  "     "    Month
-         nLUDay  :=  0,;            //  "     "    Day
-         nRECCou :=  0,;            // Record Count
-         nHedLen :=  0,;            // Header Length (with Fileds)
-         nRecLen :=  0,;            // Record Length
-         nFldCou :=  0,;            // Field Count
-         nFilSzR :=  0,;            // Recorded File Size
-         nFilSzC :=  0              // Computed   "    "
+            nReaded :=  0,;            // Length of characters readed from file
+            nCtrCod :=  0,;            // .dbf validity Control Code
+            nLUYear :=  0,;            // Last Update Year
+            nLUMont :=  0,;            //  "     "    Month
+            nLUDay  :=  0,;            //  "     "    Day
+            nRECCou :=  0,;            // Record Count
+            nHedLen :=  0,;            // Header Length (with Fileds)
+            nRecLen :=  0,;            // Record Length
+            nFldCou :=  0,;            // Field Count
+            nFilSzR :=  0,;            // Recorded File Size
+            nFilSzC :=  0              // Computed   "    "
 
          LOCA lMemo   :=  .F.,;          // There is M type field ?
-         cStruct := '',;            // File Structure String
-         aStruct := {},;            // File Structure Array
-         nSStrLn := ''              // Structure String Length
+            cStruct := '',;            // File Structure String
+            aStruct := {},;            // File Structure Array
+            nSStrLn := ''              // Structure String Length
 
          LOCA cMemoFNm1 := '',;          // Added at 7121
-         cMemoFNm2 := ''
+            cMemoFNm2 := ''
 
          IF FILE(cDBF2Vald)            // File exists
             nFilHNo := FOPEN(cDBF2Vald)     // Open File for Read Only.
@@ -207,8 +207,8 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC DBStruC2A(;                          // dBase File Struct From String to Array
-            cStruct,;  // db file struct in string ( readed low level )
-            aStruct )  // db file struct array
+               cStruct,;  // db file struct in string ( readed low level )
+               aStruct )  // db file struct array
 
             LOCA nFldCou := LEN( cStruct ) / 32,;
                c1Field := '',;
@@ -243,10 +243,10 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
             */
 
             FUNC DispLeng( ;                          // Bir saha'nýn gösterim boyu
-               a1Field,;
+                  a1Field,;
                   x1Value,;
                   lMFValu,;   // Memo for value ( .F. : memo len is 10; .T. : memo len is 64
-               lDFValu )   // Date for value ( .F. : date len is 10; .T. : memo len is 20
+                  lDFValu )   // Date for value ( .F. : date len is 10; .T. : memo len is 20
                LOCA nRVal := 0
 
                DEFAULT lMFValu TO .F.,;
@@ -298,7 +298,7 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
                FUNC SameStru(;                           // Does two .dbf's structs idendical ?
-                  aStru1,;
+                     aStru1,;
                      aStru2 )
 
                   LOCA lRVal := .T.,;
@@ -326,7 +326,7 @@ FUNC IsAlInUse( cAlias )   // Is this alias is in use ?
                   *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                   FUNC DBStMMFld( ;                         // Is there any type mismatched field in two structs ?
-                     aStruct1,;
+                        aStruct1,;
                         aStruct2 )
                      LOCA cRVal  := '',;
                         nFInd  :=  0,;

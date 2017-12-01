@@ -87,9 +87,9 @@ PROCEDURE ProcDrawGraph()
 
       ELSE
 
-         #define COLOR1   { 128, 128, 255 }
-         #define COLOR2   { 255, 102,  10 }
-         #define COLOR3   {  55, 201,  48 }
+#define COLOR1   { 128, 128, 255 }
+#define COLOR2   { 255, 102,  10 }
+#define COLOR3   {  55, 201,  48 }
 
          aSerieValues := { { 14280,  20420,  12870,  25347,   7640 },;
             {  8350,  10315,  15870,   5347,  12340 },;
@@ -98,7 +98,7 @@ PROCEDURE ProcDrawGraph()
          aSerieYNames :=   { "Jan",  "Feb",  "Mar",  "Apr",  "May" }
 
          GRAPH BITMAP      Form_1.GraphType.VALUE ;  // constants: BARS = 1, LINES = 2, POINTS = 3 are defined in i_graph.ch
-         SIZE        nImageWidth, nImageHeight ;
+            SIZE        nImageWidth, nImageHeight ;
             SERIEVALUES aSerieValues ;
             SERIENAMES  { "Serie 1", "Serie 2", "Serie 3"} ;
             SERIECOLORS { COLOR1,    COLOR2,    COLOR3   } ;

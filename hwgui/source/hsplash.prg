@@ -20,7 +20,7 @@ CLASS HSplash
 
    METHOD Release() INLINE ::oDlg:Close()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CLASS HSplash
 

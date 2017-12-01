@@ -380,8 +380,8 @@ FUNCTION cFileNoExt( cPathMask )
 
    RETURN AllTrim( If( n > 0, Left( cName, n - 1 ), cName ) )
 
-   #define MM_MCINOTIFY    953     // 0x3B9
-   #define WM_MENUSELECT   287
+#define MM_MCINOTIFY    953     // 0x3B9
+#define WM_MENUSELECT   287
 
 FUNCTION MyEvents( hWnd, nMsg, wParam, lParam )
 

@@ -213,7 +213,7 @@ CLASS THMI
 
    METHOD xBuildBCC
 
-ENDCLASS
+   ENDCLASS
 
 METHOD NewIde( cParameter ) CLASS THMI
 
@@ -1096,7 +1096,7 @@ METHOD About() CLASS THMI
       @ 120,20 HYPERLINK LB_HOMEPAGE ;
          VALUE '(c) 2002-' + LTrim( Str( Year( Date() ) ) ) + ' ooHG IDE+ Home page' ;
          ADDRESS 'http://sistemascvc.tripod.com' ;
-         WIDTH 120 ;
+      WIDTH 120 ;
          HEIGHT 24 ;
          AUTOSIZE ;
          FONT "Times new Roman" ;
@@ -5024,7 +5024,7 @@ CLASS myTProgressBar FROM TProgressBar
 
    METHOD Events
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Events( hWnd, nMsg, wParam, lParam ) CLASS myTProgressBar
 
@@ -5038,7 +5038,7 @@ CLASS myTRadioGroup FROM TRadioGroup
 
    METHOD DoChange
 
-ENDCLASS
+   ENDCLASS
 
 METHOD DoChange() CLASS myTRadioGroup
 

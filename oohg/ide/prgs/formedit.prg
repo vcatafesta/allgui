@@ -671,7 +671,7 @@ CLASS TFormEditor
 
    METHOD VerifyBar
 
-ENDCLASS
+   ENDCLASS
 
 METHOD EditForm( myIde, cFullName, nEditorIndex, lWait ) CLASS TFormEditor
 
@@ -4478,7 +4478,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    _OOHG_MouseCol, _OOHG_MouseRow, ;
    cName, nWidth, nHeight, ;
    NIL, NIL, .F., .F., .T., ;           // without border, with clientedge to allow sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, ::aToolTip[i], NIL, .F., ;
    .F., .F., .F., .F., ;
    .F., ::aCenter[i], ::aRTL[i], .F., ;
@@ -4613,7 +4613,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    _OOHG_MouseCol, _OOHG_MouseRow, ;
    cName, nWidth, nHeight, ;
    NIL, NIL, .F., .F., .T., ;             // without border, with clientedge to allow sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, NIL, NIL, .F., ;
    .F., .F., .F., .F., ;
    .F., .F., ::aRTL[i], .F., ;
@@ -4780,7 +4780,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    _OOHG_MouseCol, _OOHG_MouseRow, ;
    cName, nWidth, nHeight, ;
    NIL, NIL, .F., .T., .F., ;          // with border, without clientedge to avoid sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, ::aToolTip[i], NIL, .F., ;
    .F., .F., .F., .F., ;
    .F., ::aCenter[i], ::aRTL[i], .F., ;
@@ -4870,7 +4870,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    IIF( Empty( ::aValue[i] ), cName, ::aValue[i] ), ;
    nWidth, nHeight, ;
    NIL, NIL, ::aBold[i], .F., .T., ;           // without border, with clientedge to allow sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, ::aToolTip[i], NIL, .F., ;
    ::aFontItalic[i], ::aFontUnderline[i], ;
    ::aFontStrikeout[i], .F., ;
@@ -5051,7 +5051,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    _OOHG_MouseCol, _OOHG_MouseRow, ;
    cName, nWidth, nHeight, ;
    NIL, NIL, .F., .F., .T., ;               // without border, with clientedge to allow sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, NIL, NIL, .F., ;
    .F., .F., .F., .F., ;
    .F., .F., .F., .F., ;
@@ -5113,7 +5113,7 @@ oCtrl := TLabel():Define( cName, ::oDesignForm:Name, ;
    _OOHG_MouseCol, _OOHG_MouseRow, ;
    cName, nWidth, nHeight, ;
    NIL, NIL, ::aBold[i], .F., .T., ;                         // without border, with clientedge to allow sizing
-.F., .F., .F., WHITE, ;
+   .F., .F., .F., WHITE, ;
    NIL, NIL, ::aToolTip[i], NIL, .F., ;
    ::aFontItalic[i], ::aFontUnderline[i], ::aFontStrikeout[i], .F., ;
    .F., .F., ::aRTL[i], .F., ;

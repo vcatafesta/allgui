@@ -74,18 +74,18 @@ CLASS TDecode
 
    CLASSDATA cCharPos      HIDDEN
 
-ENDCLASS
+   ENDCLASS
 
-/****m* TDecode/TDecode:new
-*  NAME
-*    new - class costructor
-*  SYNOPSIS
-*    TDecode():new()
-*  PURPOSE
-*    Create a new TDecode object
-*  EXAMPLE
-*    oSock := TDecode():new()
-*/
+   /****m* TDecode/TDecode:new
+   *  NAME
+   *    new - class costructor
+   *  SYNOPSIS
+   *    TDecode():new()
+   *  PURPOSE
+   *    Create a new TDecode object
+   *  EXAMPLE
+   *    oSock := TDecode():new()
+   */
 
 METHOD New() CLASS TDecode
 

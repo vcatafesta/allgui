@@ -82,16 +82,16 @@ STATIC PROCEDURE SnapShot()
 
    RETURN
 
-   #ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
+#ifdef __XHARBOUR__   // Declaration of DLLs using syntax in CallDll.Lib
 
    DECLARE SaveToJpgEx(hWnd, cFileName, nWidth, nHeight) IN JPG.DLL ALIAS SAVE2JPG
 
-   #else
+#else
 
    DECLARE DLL_TYPE_VOID SaveToJpgEx(DLL_TYPE_LONG hWnd, DLL_TYPE_LPCSTR cFileName, ;
       DLL_TYPE_INT nWidth, DLL_TYPE_INT nHeight) IN JPG.DLL ALIAS SAVE2JPG
 
-   #endif
+#endif
 
 STATIC PROCEDURE Form_2()
 

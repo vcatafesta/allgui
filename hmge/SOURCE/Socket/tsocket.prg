@@ -107,7 +107,7 @@ CLASS TSocket
    // Debugger active for all classes
    CLASSDATA bDebug    HIDDEN INIT .F.
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS TSocket
 

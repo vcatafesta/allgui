@@ -1092,9 +1092,9 @@ FUNCTION GetPrinter()
 
    RETURN (RetVal)
 
-   #define TA_CENTER   6
-   #define TA_LEFT      0
-   #define TA_RIGHT   2
+#define TA_CENTER   6
+#define TA_LEFT      0
+#define TA_RIGHT   2
 
 PROCEDURE _HMG_PRINTER_H_PRINT ( nHdc , nRow , nCol , cFontName , nFontSize , nColor1 , nColor2 , nColor3 , cText , lbold , litalic , lunderline , lstrikeout , lcolor , lfont , lsize , cAlign , lAngle , nAngle )
 
@@ -1250,10 +1250,10 @@ PROCEDURE _HMG_PRINTER_H_ROUNDRECTANGLE ( nHdc , nRow , nCol , nToRow , nToCol ,
 
 PROCEDURE _hmg_printer_InitUserMessages
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
    LOCAL cLang
 
-   #endif
+#endif
    PUBLIC _HMG_MINIPRINT[27]
 
    _hmg_printer_name := ""
@@ -1293,7 +1293,7 @@ PROCEDURE _hmg_printer_InitUserMessages
    _hmg_printer_usermessages [28] := 'Thumbnails'
    _hmg_printer_usermessages [29] := 'Generating Thumbnails... Please Wait...'
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
 
    cLang := Upper( Left( Set ( _SET_LANGUAGE ), 2 ) )
 
@@ -1867,7 +1867,7 @@ PROCEDURE _hmg_printer_InitUserMessages
 
    ENDCASE
 
-   #endif
+#endif
 
    RETURN
 

@@ -98,11 +98,11 @@ CLASS TSBScrlBar FROM TControl
       Eval( ::bTrack, nPos ), ;
       ::ThumbPos( nPos ) )
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TSBScrlBar:New() Version 5.0 27/Feb/2002
-* ============================================================================
+   * ============================================================================
+   * METHOD TSBScrlBar:New() Version 5.0 27/Feb/2002
+   * ============================================================================
 
 METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
       bUpAct, bDownAct, bPgUp, bPgDown, bPos, lPixel, nClrText,;

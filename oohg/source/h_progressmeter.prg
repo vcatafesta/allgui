@@ -80,7 +80,7 @@ CLASS TProgressMeter FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, lo, hi, value, tooltip, ;
       fontname, fontsize, bold, italic, underline, strikeout, ;

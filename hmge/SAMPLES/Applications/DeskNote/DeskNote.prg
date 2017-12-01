@@ -438,8 +438,8 @@ PROCEDURE OnPaintWindow( cForm, aColor, cText )
 
    RETURN
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow( hWnd )
 
@@ -567,8 +567,8 @@ PROCEDURE LoadNotes( nSaveRow, nSaveCol, lOnTop, aFont, aColor, cText )
 
       RETURN
 
-      #define WM_SYSCOMMAND   274
-      #define SC_CLOSE   61536
+#define WM_SYSCOMMAND   274
+#define SC_CLOSE   61536
 
 FUNCTION _ReleaseWindow (FormName)
 

@@ -51,7 +51,7 @@ CLASS VAR oGroupCurrent
 
    METHOD Activate() VIRTUAL
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
 
@@ -241,7 +241,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD When()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lTransp ) CLASS HRadioButton
@@ -253,7 +253,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
    ::Enabled := ! Hwg_BitAnd( nStyle, WS_DISABLED ) > 0
    ::style   := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), BS_RADIOBUTTON + ; // BS_AUTORADIOBUTTON+;
       BS_NOTIFY + ;  // WS_CHILD + WS_VISIBLE
-   IIf( ::oGroup != NIL .AND. Empty( ::oGroup:aButtons ), WS_GROUP , 0 ) )
+      IIf( ::oGroup != NIL .AND. Empty( ::oGroup:aButtons ), WS_GROUP , 0 ) )
    ::Super:New( oWndParent, nId, ::Style, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint,ctooltip, tcolor, bColor )
    ::backStyle :=  IIF( lTransp != NIL .AND. lTransp, TRANSPARENT, OPAQUE )

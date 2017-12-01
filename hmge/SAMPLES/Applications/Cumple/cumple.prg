@@ -797,7 +797,7 @@ PROCEDURE Ir_Cumple(IRFEC2)
    RETURN
    *------------------------------ Archivos --------------------------------------*
    ***libreria***
-   #include "l_abrir.prg"
-   #include "l_color.prg"
-   #include "l_dia.prg"
-   #include "l_festa.prg"
+#include "l_abrir.prg"
+#include "l_color.prg"
+#include "l_dia.prg"
+#include "l_festa.prg"

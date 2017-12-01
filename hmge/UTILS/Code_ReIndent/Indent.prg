@@ -47,8 +47,8 @@ PROCEDURE MAIN()
          ICON 'OHS.ICO' ;
          MAIN NOMAXIMIZE NOSIZE ;
          ON INIT GetPrgVars() ;                           // store user preferences to memvars
-      ON PAINT ( FillBlue( _HMG_MainHandle ), ;        // color the screen: MiniGUI contributed file
-      TextPaint() )
+         ON PAINT ( FillBlue( _HMG_MainHandle ), ;        // color the screen: MiniGUI contributed file
+         TextPaint() )
 
       DEFINE MAIN MENU
          POPUP '&Indent Code'
@@ -333,10 +333,10 @@ STATIC FUNCTION ConfigureIndent
          * Tooltip added v 1.7
          @240,25 CHECKBOX Check_Cmt ;
             CAPTION ' Align "//" and "**" comments' ;
-            WIDTH 250 HEIGHT 22 ;
+         WIDTH 250 HEIGHT 22 ;
             VALUE z_lcomment ;
             TOOLTIP "Programmer's comments which begin with // or ** will be aligned " ;
-            + "at (or as near as possible to) the specified column" ;
+         + "at (or as near as possible to) the specified column" ;
             ON CHANGE UpdtChkCmt()
 
          * Tooltip added v 1.7
@@ -385,7 +385,7 @@ STATIC FUNCTION ConfigureIndent
             NUMERIC ;
             MAXLENGTH 2 RIGHTALIGN ;
             TOOLTIP "Programmer's comments which begin with // or ** will be aligned " ;
-            + "at (or as near as possible to) the specified column" ;
+         + "at (or as near as possible to) the specified column" ;
             ON CHANGE z_ncomment := MCICfg_1.Text_3.Value
 
          @100,325 LABEL Label_4 ;
@@ -476,7 +476,7 @@ STATIC FUNCTION ContactMediTrax
             FONT 'Arial' SIZE 09  ;
             AUTOSIZE ;
             ADDRESS 'support@meditrax.com';            // e-mail address
-         TOOLTIP 'Click to open your email client';
+            TOOLTIP 'Click to open your email client';
             BACKCOLOR WHITE ;
             HANDCURSOR
 
@@ -487,7 +487,7 @@ STATIC FUNCTION ContactMediTrax
 
          @ 50,160 HYPERLINK LB_URL1 ;
             VALUE 'http://www.meditrax.com' ;
-            FONT 'Arial' SIZE 09 ;
+         FONT 'Arial' SIZE 09 ;
             AUTOSIZE ;
             ADDRESS "http://www.meditrax.com";         //Full url (with http://)
          TOOLTIP 'Click to open your browser' ;
@@ -667,7 +667,7 @@ STATIC FUNCTION IndentIt( cPrgFile )
    LOCAL aWindList[ 1 ]                                                        // List of Window's name
    LOCAL aRetuList[ 1 ]                                                        // Array of RETURN lines from FUNCTIONs/PROCEDUREs/STATIC FUNCTIONs
    LOCAL bFuncHead := { | cText | LEFT( UPPER( cText ), 9 ) == "FUNCTION " ;   // Is this the first line of a PROCEDURE or FUNCTION?
-   .OR. LEFT( UPPER( cText) , 16 ) == "STATIC FUNCTION " ;
+      .OR. LEFT( UPPER( cText) , 16 ) == "STATIC FUNCTION " ;
       .OR. LEFT( UPPER( cText) , 5 ) == "PROC " ;
       .OR. LEFT( UPPER( cText ), 10 ) == "PROCEDURE " }
    LOCAL cAction                                                               // ACTION clause of code line
@@ -917,7 +917,7 @@ STATIC FUNCTION IndentIt( cPrgFile )
          nLastReturn := MCITEXT->( RECNO())
 
       CASE z_lifcase .AND. ( LEFT( cTrialLine, 5 ) $ "CASE " .OR. LEFT( cTrialLine, 4 ) $ "ELSE/OTHE" ; // indent IF/ELSE/ENDIF/CASE statements?
-         .OR. LEFT( cTrialLine, 7 ) == "DO CASE" .OR. LEFT( cTrialLine, 3 ) == "IF " ) // indent IF/ELSE/ENDIF/CASE statements?
+            .OR. LEFT( cTrialLine, 7 ) == "DO CASE" .OR. LEFT( cTrialLine, 3 ) == "IF " ) // indent IF/ELSE/ENDIF/CASE statements?
          * v 1.7 change: don't indent "IF EMPTY( cText );cText := 'pierpaolo';ENDIF"
          IF ! OneLineIfEndif( cTrialLine )
             nIndentSpaces += z_nindent
@@ -939,11 +939,11 @@ STATIC FUNCTION IndentIt( cPrgFile )
             nMLFudge := 0                                                           // next line will already be indented; no need to add multiline indentation
          ENDIF
       CASE z_lmenuitem .AND. ( LEFT( cTrialLine, 11 ) == "DEFINE MENU" .OR. LEFT( cTrialLine, 9 ) == "DEFI MENU" ; // indent DEFINE MENU statements?
-         .OR. LEFT( cTrialLine, 16 ) == "DEFINE MAIN MENU" .OR. LEFT( cTrialLine, 14 ) == "DEFI MAIN MENU" ) // indent DEFINE MENU statements?
+            .OR. LEFT( cTrialLine, 16 ) == "DEFINE MAIN MENU" .OR. LEFT( cTrialLine, 14 ) == "DEFI MAIN MENU" ) // indent DEFINE MENU statements?
          nIndentSpaces += z_nindent
          nMLFudge := 0                                                           // next line will already be indented; no need to add multiline indentation
       CASE z_lpopup .AND. ( LEFT( cTrialLine, 11 ) == "DEFINE POPU" .OR. LEFT( cTrialLine, 9 ) == "DEFI POPU" ; // indent POPUP statements?
-         .OR. LEFT( cTrialLine, 6 ) == "POPUP "  )                               // indent POPUP statements?
+            .OR. LEFT( cTrialLine, 6 ) == "POPUP "  )                               // indent POPUP statements?
          nIndentSpaces += z_nindent
          nMLFudge := 0                                                           // next line will already be indented; no need to add multiline indentation
       CASE z_ldowhile .AND. LEFT( cTrialLine, 9 ) == "DO WHILE "                // indent DO WHILE / WHILE statements?

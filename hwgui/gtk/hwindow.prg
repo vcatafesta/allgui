@@ -103,7 +103,7 @@ CLASS VAR szAppName  SHARED INIT "HwGUI_App"
 
    METHOD Close()   INLINE hwg_DestroyWindow( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
       bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther,;
@@ -202,7 +202,7 @@ CLASS VAR aMessages INIT { ;
 
    METHOD onEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
       oFont,bInit,bExit,bSize,bPaint,bGfocus,bLfocus,bOther, ;

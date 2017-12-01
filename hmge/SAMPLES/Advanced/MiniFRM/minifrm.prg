@@ -189,7 +189,7 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
       lUseLetter  := (aReportData[ RP_LINES ] <= _RF_ROWSINLETTER)
 
       ********************** MINIPRINT *******************
-      #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
       IF lPrinter
          IF lUseLetter && Seleccionó Preview?
             SELECT PRINTER DEFAULT ORIENTATION   PRINTER_ORIENT_PORTRAIT  PAPERSIZE PRINTER_PAPER_LETTER
@@ -203,10 +203,10 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
             SELECT PRINTER DEFAULT ORIENTATION   PRINTER_ORIENT_PORTRAIT  PAPERSIZE PRINTER_PAPER_LEGAL PREVIEW
          ENDIF
       ENDIF
-      #endif
+#endif
 
       ********************** HBPRINTER *******************
-      #ifdef _RF_HBPRINTER
+#ifdef _RF_HBPRINTER
       INIT PRINTSYS
 
       IF lPrinter && Seleccionó Preview?
@@ -222,7 +222,7 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
       ENDIF
 
       SET UNITS MM
-      #endif
+#endif
 
       IF lSummary != NIL
          aReportData[ RP_SUMMARY ] := lSummary
@@ -239,14 +239,14 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
       nLinesLeft  := aReportData[ RP_LINES ]
 
       *********** Inicializo documento **************
-      #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
       START PRINTDOC
          START PRINTPAGE
-            #endif
-            #ifdef _RF_HBPRINTER
+#endif
+#ifdef _RF_HBPRINTER
             START DOC
             START PAGE
-            #endif
+#endif
 
             nPosRow := _RF_FIRSTROW
             nPosCol := _RF_FIRSTCOL
@@ -374,11 +374,11 @@ PROCEDURE __ReportForm( cFRMName, lPrinter, cAltFile, lNoConsole, bFor, ;
          nMaxLinesAvail := NIL
 
          ****** Cierro el reporte *******
-         #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
       END PRINTPAGE
    END PRINTDOC
-   #endif
-   #ifdef _RF_HBPRINTER
+#endif
+#ifdef _RF_HBPRINTER
 END PAGE
 END DOC
 RELEASE PRINTSYS
@@ -776,12 +776,12 @@ STATIC PROCEDURE PrintIt( cString, lBold )
 STATIC PROCEDURE EjectPage
 
    *  Finalizo una página y comienzo la siguiente.....
-   #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
 END PRINTPAGE
 START PRINTPAGE
-   #endif
+#endif
 
-   #ifdef _RF_HBPRINTER
+#ifdef _RF_HBPRINTER
 END PAGE
 START PAGE
 #endif
@@ -851,15 +851,15 @@ FUNCTION ImprimoUnaLinea(sLin, lBold)
 
    PRIVATE sAux , nFontSize
 
-   #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
    IF aReportData[RP_WIDTH] <= 80
       nFontSize := _RF_SIZENORMAL
    ELSE
       nFontSize := _RF_SIZECONDENSED
    ENDIF
-   #endif
+#endif
 
-   #ifdef _RF_HBPRINTER
+#ifdef _RF_HBPRINTER
    IF aReportData[RP_WIDTH] <= 80
       DEFINE FONT "normal"      name _RF_FONT size _RF_SIZENORMAL
       DEFINE FONT "negrita"      name _RF_FONT size _RF_SIZENORMAL  bold
@@ -867,25 +867,25 @@ FUNCTION ImprimoUnaLinea(sLin, lBold)
       DEFINE FONT "normal"      name _RF_FONT size _RF_SIZECONDENSED
       DEFINE FONT "negrita"      name _RF_FONT size _RF_SIZECONDENSED  bold
    ENDIF
-   #endif
+#endif
 
    sAux := HB_OEMTOANSI(sLin)
 
-   #ifdef _RF_MINIPRINT
+#ifdef _RF_MINIPRINT
    IF lBold
       @ nPosRow, nPosCol + RP_LMARGIN PRINT sAux  font _RF_FONT size nFontSize bold
    ELSE
       @ nPosRow, nPosCol + RP_LMARGIN PRINT sAux  font _RF_FONT size nFontSize
    ENDIF
-   #endif
+#endif
 
-   #ifdef _RF_HBPRINTER
+#ifdef _RF_HBPRINTER
    IF lBold
       @ nPosRow, nPosCol + RP_LMARGIN say sAux  font "normal"  to print
    ELSE
       @ nPosRow, nPosCol + RP_LMARGIN say sAux  font "negrita" to print
    ENDIF
-   #endif
+#endif
 
    nPosCol := nPosCol + Len(sAux)
 

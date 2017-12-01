@@ -107,7 +107,7 @@ CLASS TList FROM TControl
 
    METHOD EnsureVisible
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, rows, value, fontname, ;
       fontsize, tooltip, changeprocedure, dblclick, gotfocus, ;
@@ -413,7 +413,7 @@ CLASS TListMulti FROM TList
 
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, rows, value, fontname, ;
       fontsize, tooltip, changeprocedure, dblclick, gotfocus, ;

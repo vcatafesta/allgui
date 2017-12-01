@@ -47,17 +47,17 @@ PROCEDURE Main
 
    // Flags for InternetGetConnectedState and Ex
 
-   #define INTERNET_CONNECTION_MODEM       1
-   #define INTERNET_CONNECTION_LAN         2
-   #define INTERNET_CONNECTION_PROXY       4
-   #define INTERNET_CONNECTION_MODEM_BUSY  8 /* no longer used */
-   #define INTERNET_RAS_INSTALLED         16
-   #define INTERNET_CONNECTION_OFFLINE    32
-   #define INTERNET_CONNECTION_CONFIGURED 64
+#define INTERNET_CONNECTION_MODEM       1
+#define INTERNET_CONNECTION_LAN         2
+#define INTERNET_CONNECTION_PROXY       4
+#define INTERNET_CONNECTION_MODEM_BUSY  8 /* no longer used */
+#define INTERNET_RAS_INSTALLED         16
+#define INTERNET_CONNECTION_OFFLINE    32
+#define INTERNET_CONNECTION_CONFIGURED 64
 
    // Flag for InternetCheckConnection
 
-   #define FLAG_ICC_FORCE_CONNECTION       1
+#define FLAG_ICC_FORCE_CONNECTION       1
 
 FUNCTION IsConnected()
 

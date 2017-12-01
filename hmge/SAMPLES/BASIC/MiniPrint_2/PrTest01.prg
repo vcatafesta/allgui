@@ -25,7 +25,7 @@ PROCEDURE  PrintTest1()
    LOCAL lSuccess := .F.,;
       cTestString   := "This is a test",;
       nMostRightCol := 210,;  // Default page size is A4 : 210 x 297 mm
-   nMostBottmRow := 297
+      nMostBottmRow := 297
 
    SELECT PRINTER DEFAULT TO lSuccess PREVIEW
 

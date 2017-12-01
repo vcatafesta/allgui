@@ -62,7 +62,7 @@ FUNCTION MyProcess( oForm )
 
    ERASE (cExcel)
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel not available. [' + win_oleErrorText() + ']' )
 
@@ -118,7 +118,7 @@ BEGIN SEQUENCE
    bErrBlck2 := ErrorBlock( { | x | break( x ) } )
    BEGIN SEQUENCE
       // http://msdn.microsoft.com/en-us/library/office/bb241279(v=office.12).aspx
-      # define xlExcel7 39
+# define xlExcel7 39
 
       // if the file already exists and it's not open, it's overwritten without asking
       oSheet:SaveAs( cExcel, 39 )
@@ -169,7 +169,7 @@ FUNCTION ConvertToDbf( oForm, cExcel )
 
    cDbf := HB_DirBase() + "TEST.DBF"
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel not available. [' + win_oleErrorText() + ']' )
 

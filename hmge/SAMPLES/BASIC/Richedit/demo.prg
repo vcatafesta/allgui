@@ -244,17 +244,17 @@ FUNCTION SaveField()
    Select All - selects all text in the edit control.
    */
 
-   #define WM_PASTE      770
-   #define WM_CUT        768
-   #define WM_COPY       769
-   #define WM_CLEAR      771
+#define WM_PASTE      770
+#define WM_CUT        768
+#define WM_COPY       769
+#define WM_CLEAR      771
 
-   #define EM_GETSEL     176
-   #define EM_SETSEL     177
-   #define EM_CANUNDO    198
-   #define EM_UNDO       199
+#define EM_GETSEL     176
+#define EM_SETSEL     177
+#define EM_CANUNDO    198
+#define EM_UNDO       199
 
-   #define WM_GETTEXTLENGTH        0x000E
+#define WM_GETTEXTLENGTH        0x000E
 
 FUNCTION EnableEditMenuItems()
 

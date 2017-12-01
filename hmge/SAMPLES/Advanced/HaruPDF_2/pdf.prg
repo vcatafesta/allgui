@@ -40,7 +40,7 @@ CREATE CLASS PDFClass
    METHOD Begin()
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Begin() CLASS PDFClass
 

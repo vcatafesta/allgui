@@ -40,7 +40,7 @@ CLASS VAR winclass   INIT "SysMonthCal32"
 
    METHOD onSelect( )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bChange, cTooltip, lNoToday, lNoTodayCircle, ;

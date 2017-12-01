@@ -59,4 +59,3 @@ PROCEDURE FillDirList(lInit)
    ENDIF !EMPTY( cDIRName )
 
    RETURN // FillDirList()
-

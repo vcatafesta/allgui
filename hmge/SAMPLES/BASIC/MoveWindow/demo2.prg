@@ -55,8 +55,8 @@ FUNCTION CreaChild()
 
    RETURN NIL
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 FUNCTION MoveActiveWindow( hWnd )
 

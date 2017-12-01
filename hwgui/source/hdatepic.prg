@@ -60,7 +60,7 @@ CLASS VAR winclass   INIT "SYSDATETIMEPICK32"
 
    METHOD Checkvalue ( lValue ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime ) CLASS HDatePicker

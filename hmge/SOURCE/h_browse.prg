@@ -92,11 +92,11 @@ FUNCTION _DefineBrowse ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWid
       MsgMiniGuiError ( _HMG_BRWLangError[4] + ControlName + _HMG_BRWLangError[5] + ParentFormName + _HMG_BRWLangError[6], .F. )
    ENDIF
 
-   #ifndef HMG_LEGACY_ON
+#ifndef HMG_LEGACY_ON
    IF hb_defaultValue( edit, .F. )
       inplace := .T.
    ENDIF
-   #endif
+#endif
    hb_default( @value, 0 )
    hb_default( @aFields, {} )
    /* code borrowed from ooHG project */
@@ -389,11 +389,11 @@ STATIC PROCEDURE HMG_OrdCreate( i )
       ELSE
          cField := FieldName( FieldPos( aFields [nColumn] ) )
          cOrdKey := Alias() + '->' + cField
-         #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
          ordCreate( cIndexName, cField, cOrdKey, hb_macroBlock( cOrdKey ), .F. /*lUnique*/ )
-         #else
+#else
          ordCreate( cIndexName, cField, cOrdKey, &( '{|| ' + cOrdKey + '}' ), .F. /*lUnique*/ )
-         #endif
+#endif
       ENDIF
 
    NEXT
@@ -465,12 +465,12 @@ PROCEDURE HMG_SetOrder( nColumn, lDescend )
 
    RETURN
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    /* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */
-   #xcommand DEFAULT => OTHERWISE
+#xcommand DEFAULT => OTHERWISE
    /* FOR EACH hb_enumIndex() */
-   #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-   #endif
+#xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
+#endif
 
 PROCEDURE _BrowseUpdate( ControlName, ParentName, z )
 
@@ -1070,11 +1070,11 @@ PROCEDURE _BrowseRefresh ( ControlName , ParentForm , z )
 
    IF s == 1 .OR. s == 0
 
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       IF ( ! Empty( dbFilter() ) .AND. ! Eval( hb_macroBlock( dbFilter() ) ) )
-         #else
+#else
          IF ( ! Empty( dbFilter() ) .AND. ! &( dbFilter() ) )
-            #endif
+#endif
             SKIP
          ENDIF
 
@@ -1182,11 +1182,11 @@ PROCEDURE _BrowseSetValue ( ControlName , ParentForm , Value , z , mp )
 
    GO Value
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( ! Empty( dbFilter() ) .AND. ! Eval( hb_macroBlock( dbFilter() ) ) )
-      #else
+#else
       IF ( ! Empty( dbFilter() ) .AND. ! &( dbFilter() ) )
-         #endif
+#endif
          GO _RecNo
          IF Select( _Alias ) != 0
             SELECT &_Alias
@@ -1336,15 +1336,15 @@ FUNCTION  _BrowseDelete (  ControlName , ParentForm , z  )
 
 FUNCTION _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , inplace , InputItems )
 
-   #ifdef HMG_LEGACY_ON
+#ifdef HMG_LEGACY_ON
    LOCAL actpos := { 0, 0, 0, 0 } , h , GRow , GCol , GWidth , Col , i , ControlName , j , FormName , item
    LOCAL Title , aLabels , aInitValues := {} , aFormats := {} , aResults , z , tvar , BackRec , aStru
    LOCAL svar , q , BackArea , BrowseArea , TmpNames := {} , NewRec := 0 , MixedFields := .F.
    PRIVATE aWhen , aWhenVarNames
 
-   #else
+#else
    hb_default( @inplace, .T. )
-   #endif
+#endif
    IF LISTVIEW_GETFIRSTITEM ( GridHandle ) == 0
 
       IF ValType ( append ) != 'U'
@@ -1358,7 +1358,7 @@ FUNCTION _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock ,
 
    IF InPlace .OR. _HMG_MainClientMDIHandle != 0  // GF HMG 64
       _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , InputItems )
-      #ifdef HMG_LEGACY_ON
+#ifdef HMG_LEGACY_ON
    ELSE
 
       BackArea := Alias()
@@ -1577,13 +1577,13 @@ FUNCTION _BrowseEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock ,
             ENDIF
          ENDIF
       ENDIF
-      #endif
+#endif
 
    ENDIF
 
    RETURN NIL
 
-   #ifdef HMG_LEGACY_ON
+#ifdef HMG_LEGACY_ON
 
 FUNCTION _EditRecord ( Title , aLabels , aValues , aFormats , row , col , aValid , TmpNames , aValidMessages , aReadOnly , h )
 
@@ -1862,7 +1862,7 @@ STATIC FUNCTION _EditRecordCancel ()
    RELEASE WINDOW _EditRecord
 
    RETURN NIL
-   #endif
+#endif
 
 STATIC FUNCTION _BrowseInPlaceEdit ( GridHandle , aValid , aValidMessages , aReadOnly , lock , append , aInputItems )
 
@@ -2648,4 +2648,4 @@ STATIC FUNCTION NoQuote ( cStr )
 
    RETURN CharRem ( Chr( 34 ) + Chr( 39 ), cStr )
 
-   #endif
+#endif

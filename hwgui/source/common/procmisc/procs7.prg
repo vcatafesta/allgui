@@ -95,13 +95,13 @@ FUNCTION FIND_Z( stroka, symb )
 
    RETURN poz
 
-   #ifdef __WINDOWS__
+#ifdef __WINDOWS__
 
 FUNCTION Fchoice()
 
    RETURN 1
 
-   #endif
+#endif
 
 FUNCTION CutExten( fname )
 
@@ -135,11 +135,11 @@ FUNCTION AddPath( fname, cPath )
 
    IF Empty( FilePath( fname ) ) .AND. !Empty( cPath )
       IF !( Right( cPath,1 ) $ "\/" )
-         #ifdef __PLATFORM__UNIX
+#ifdef __PLATFORM__UNIX
          cPath += "/"
-         #else
+#else
          cPath += "\"
-         #endif
+#endif
       ENDIF
       fname := cPath + fname
    ENDIF

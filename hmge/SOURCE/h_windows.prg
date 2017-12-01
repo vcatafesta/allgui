@@ -71,7 +71,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
 
    IF ValType( FormName ) == "U"
       FormName := _HMG_TempWindowName
-      #ifdef _PANEL_
+#ifdef _PANEL_
       IF _HMG_LoadWindowRow <> -1
 
          y := _HMG_LoadWindowRow
@@ -84,14 +84,14 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
          _HMG_LoadWindowWidth  := -1
          _HMG_LoadWindowHeight := -1
       ENDIF
-      #endif
+#endif
    ENDIF
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF _HMG_FrameLevel > 0
       x := x + _HMG_ActiveFrameCol [ _HMG_FrameLevel ]
       y := y + _HMG_ActiveFrameRow [ _HMG_FrameLevel ]
    ENDIF
-   #endif
+#endif
    IF ValType( mdi ) == "U"
       Mdi := .F.
    ENDIF
@@ -114,15 +114,15 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
       ENDIF
    ELSE
       i := AScan ( _HMG_aFormType, 'A' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       IF _HMG_MainWindowFirst == .T.
-         #endif
+#endif
          IF i <= 0
             MsgMiniGuiError( "Main Window is not defined." )
          ENDIF
-         #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       ENDIF
-      #endif
+#endif
       IF _IsWindowDefined ( FormName )
          MsgMiniGuiError( "Window: " + FormName + " is already defined." )
       ENDIF
@@ -135,7 +135,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
          MsgMiniGuiError( "Only MdiChild windows can be defined inside MdiWindow." )
       ENDIF
    ENDIF
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF ValType( cPanelParent ) == 'C' .AND. panel == .F.
       MsgMiniGuiError( "Parent can be specified only for Panel windows." )
    ENDIF
@@ -143,9 +143,9 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
    IF !Empty( _HMG_ActiveFormName ) .AND. panel == .F. .AND. _HMG_ProgrammaticChange
       MsgMiniGuiError( "Only Panel windows can be defined inside a DEFINE WINDOW...END WINDOW structure." )
    ENDIF
-   #else
+#else
    HB_SYMBOL_UNUSED( cPanelParent )
-   #endif
+#endif
    IF ! ISNUMBER( w ) .AND. ! ISNUMBER( h )
       IF ! ISNUMBER( clientwidth ) .AND. ! ISNUMBER( clientheight )
          w := GetDesktopWidth()
@@ -165,7 +165,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
 
    ParentHandle := iif( child == .T., _HMG_MainHandle, 0 )
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF panel == .T.
       IF ValType( cPanelParent ) == 'C'
          IF GetWindowType ( cPanelParent ) == 'X'
@@ -186,7 +186,7 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
          MsgMiniGuiError( "Panel Windows Must Have a Parent." )
       ENDIF
    ENDIF
-   #endif
+#endif
    _HMG_ActiveFontName := hb_defaultValue( FontName, _HMG_DefaultFontName )
 
    _HMG_ActiveFontSize := hb_defaultValue( FontSize, _HMG_DefaultFontSize )
@@ -262,11 +262,11 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
       Formhandle := InitWindow( Caption, x, y, w, h, nominimize, nomaximize, nosize, nosysmenu, nocaption, topmost, ClassName, ParentHandle, vscroll, hscroll, helpbutton, palette, panel )
    ENDIF
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF _HMG_BeginTabActive .AND. Panel
       AAdd ( _HMG_ActiveTabCurrentPageMap, FormHandle )
    ENDIF
-   #endif
+#endif
 
    IF Empty( _HMG_InteractiveClose ) .AND. !Main .AND. !nosysmenu .AND. !nocaption
       xDisableCloseButton( FormHandle, .F. )
@@ -353,9 +353,9 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
       _HMG_aFormActivateId [ k ] := 0
       _HMG_aFormMiscData1  [ k ] := {}
       _HMG_aFormMiscData2  [ k ] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [ k ] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -413,9 +413,9 @@ FUNCTION _DefineWindow ( FormName, Caption, x, y, w, h, nominimize, nomaximize, 
       AAdd ( _HMG_aFormActivateId, 0 )
       AAdd ( _HMG_aFormMiscData1, {} )
       AAdd ( _HMG_aFormMiscData2, '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
 
    ENDIF
 
@@ -455,17 +455,17 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
    IF ValType( FormName ) == "U"
       FormName := _HMG_TempWindowName
    ENDIF
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF _HMG_MainWindowFirst == .T.
-      #endif
+#endif
       i := AScan ( _HMG_aFormType, 'A' )
 
       IF i <= 0
          MsgMiniGuiError( "Main Window is not defined." )
       ENDIF
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    ENDIF
-   #endif
+#endif
    IF _IsWindowDefined ( FormName )
       MsgMiniGuiError( "Window: " + FormName + " is already defined." )
    ENDIF
@@ -624,9 +624,9 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
       _HMG_aFormActivateId [ k ] := 0
       _HMG_aFormMiscData1  [ k ] := {}
       _HMG_aFormMiscData2  [ k ] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [ k ] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -684,9 +684,9 @@ FUNCTION _DefineModalWindow ( FormName, Caption, x, y, w, h, Parent, nosize, nos
       AAdd ( _HMG_aFormActivateId, 0 )
       AAdd ( _HMG_aFormMiscData1, {} )
       AAdd ( _HMG_aFormMiscData2, '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
 
    ENDIF
 
@@ -721,17 +721,17 @@ FUNCTION _DefineSplitChildWindow ( FormName, w, h, break, grippertext, nocaption
    IF ValType( FormName ) == "U"
       FormName := _HMG_TempWindowName
    ENDIF
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF _HMG_MainWindowFirst == .T.
-      #endif
+#endif
       i := AScan ( _HMG_aFormType, 'A' )
 
       IF i <= 0
          MsgMiniGuiError( "Main Window is not defined." )
       ENDIF
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    ENDIF
-   #endif
+#endif
    IF _IsWindowDefined ( FormName )
       MsgMiniGuiError( "Window: " + FormName + " is already defined." )
    ENDIF
@@ -867,9 +867,9 @@ FUNCTION _DefineSplitChildWindow ( FormName, w, h, break, grippertext, nocaption
       _HMG_aFormActivateId [ k ] := 0
       _HMG_aFormMiscData1  [ k ] := {}
       _HMG_aFormMiscData2  [ k ] := ''
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       _HMG_StopWindowEventProcedure [ k ] := .F.
-      #endif
+#endif
 
    ELSE
 
@@ -927,9 +927,9 @@ FUNCTION _DefineSplitChildWindow ( FormName, w, h, break, grippertext, nocaption
       AAdd ( _HMG_aFormActivateId, 0 )
       AAdd ( _HMG_aFormMiscData1, {} )
       AAdd ( _HMG_aFormMiscData2, '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
 
    ENDIF
 
@@ -955,9 +955,9 @@ FUNCTION _DefineSplitChildWindow ( FormName, w, h, break, grippertext, nocaption
 
 FUNCTION _SetThisFormInfo ( i )
 
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    _HMG_LastActiveFormIndex := i
-   #endif
+#endif
    _PushEventInfo()
 
    _HMG_ThisFormIndex   := i
@@ -974,10 +974,10 @@ FUNCTION _SetWindowSizePos ( FormName, row, col, width, height )
    LOCAL actpos := { 0, 0, 0, 0 }
    LOCAL hWnd := iif( ISNUMERIC( FormName ), FormName, GetFormHandle ( FormName ) )
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    LOCAL lspang := ( ISNUMBER( row ) .AND. ISNUMBER( col ) .AND. ISNUMBER( width ) .AND. ISNUMBER( height ) )
 
-   #endif
+#endif
    GetWindowRect( hWnd, /*@*/actpos )
 
    col := IFNIL( col, actpos [ 1 ], col )
@@ -985,7 +985,7 @@ FUNCTION _SetWindowSizePos ( FormName, row, col, width, height )
    width := IFNIL( width, actpos [ 3 ] - actpos [ 1 ], width )
    height := IFNIL( height, actpos [ 4 ] - actpos [ 2 ], height )
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF ISCHARACTER( FormName ) .AND. GetWindowType ( FormName ) == 'P'
       IF lspang
          col += GetBorderWidth()
@@ -995,7 +995,7 @@ FUNCTION _SetWindowSizePos ( FormName, row, col, width, height )
       col := actpos [ 1 ]
       row := actpos [ 2 ]
    ENDIF
-   #endif
+#endif
 
    MoveWindow ( hWnd, col, row, width, height, .T. )
 
@@ -1083,7 +1083,7 @@ FUNCTION _EndSplitChildWindow ()
 
    RETURN NIL
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
 
 FUNCTION _EndPanelWindow ()
 
@@ -1092,17 +1092,17 @@ FUNCTION _EndPanelWindow ()
 
    RETURN NIL
 
-   #endif
+#endif
 
 FUNCTION _EndWindow ()
 
    DO CASE
    CASE _HMG_SplitChildActive == .T.
       _EndSplitChildWindow ()
-      #ifdef _PANEL_
+#ifdef _PANEL_
    CASE _HMG_ParentWindowActive == .T.
       _EndPanelWindow ()
-      #endif
+#endif
    CASE _HMG_MdiChildActive == .T.  // JP MDI
       _EndMdiChildWindow ()
    OTHERWISE
@@ -1220,10 +1220,10 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
    LOCAL VisibleModalName := ''
    LOCAL TmpId
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    LOCAL x, FormCount := Len ( _HMG_aFormNames )
 
-   #endif
+#endif
 
    IF _HMG_ThisEventType == 'WINDOW_RELEASE'
       MsgMiniGuiError( "ACTIVATE WINDOW: activate windows within an ON RELEASE window procedure is not allowed." )
@@ -1251,9 +1251,9 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
    NEXT
 
    * Main Check
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF _HMG_MainWindowFirst == .T.
-      #endif
+#endif
       IF _HMG_MainActive == .F.
          IF MainFound == .F.
             MsgMiniGUIError( "ACTIVATE WINDOW: Main Window must be activated in the first ACTIVATE WINDOW command." )
@@ -1263,9 +1263,9 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
             MsgMiniGUIError( "ACTIVATE WINDOW: Main Window already active." )
          ENDIF
       ENDIF
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    ENDIF
-   #endif
+#endif
 
    hb_default( @lNoWait, .F. )
 
@@ -1292,14 +1292,14 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
             MsgMiniGUIError( "Window: " + FormName + " already active." )
          ENDIF
 
-         #ifdef _PANEL_
+#ifdef _PANEL_
          IF GetWindowType ( FormName ) == 'P'
             MsgMiniGUIError( "Panel Windows can't be explicity activated (They are activated via its parent)." )
          ENDIF
-         #endif
+#endif
          i := GetFormIndex ( FormName )
 
-         #ifdef _PANEL_
+#ifdef _PANEL_
          FOR x := 1 TO FormCount
 
             IF _HMG_aFormType [ x ] == 'P' .AND. _HMG_aFormParentHandle [ x ] == _HMG_aFormHandles [ i ]
@@ -1317,7 +1317,7 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
             ENDIF
 
          NEXT x
-         #endif
+#endif
          * Only One Visible Modal is Allowed
          IF _HMG_aFormType [ i ] == "M" .AND. _HMG_aFormNoShow [ i ] == .F.
             VisibleModalName := _HMG_aFormNames [ i ]
@@ -1363,14 +1363,14 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
          MsgMiniGUIError( "Window " + FormName + " already active." )
       ENDIF
 
-      #ifdef _PANEL_
+#ifdef _PANEL_
       IF GetWindowType ( FormName ) == 'P'
          MsgMiniGUIError( "Panel Windows can't be explicity activated (They are activated via its parent)." )
       ENDIF
-      #endif
+#endif
       i := GetFormIndex ( FormName )
 
-      #ifdef _PANEL_
+#ifdef _PANEL_
       FOR x := 1 TO FormCount
 
          IF _HMG_aFormType [ x ] == 'P' .AND. _HMG_aFormParentHandle [ x ] == _HMG_aFormHandles [ i ]
@@ -1388,7 +1388,7 @@ FUNCTION _ActivateWindow ( aForm, lNoWait, lDebugger )
          ENDIF
 
       NEXT x
-      #endif
+#endif
       // JP MDI Background
       IF _HMG_BeginWindowMDIActive
          IF _HMG_aFormBkColor [ i ] [ 1 ] != -1
@@ -1746,7 +1746,7 @@ FUNCTION _DoControlEventProcedure ( bBlock, i, cEventType, nParam )
 
    LOCAL lRetVal
 
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF _HMG_aControlType [ i ] != "HOTKEY"  // Claudio Soto, November 2016
       _HMG_LastActiveControlIndex := i
    ENDIF
@@ -1754,7 +1754,7 @@ FUNCTION _DoControlEventProcedure ( bBlock, i, cEventType, nParam )
 
       RETURN .F.
    ENDIF
-   #endif
+#endif
    IF ISBLOCK ( bBlock )
       _PushEventInfo()
       _HMG_ThisFormIndex := AScan ( _HMG_aFormHandles, _HMG_aControlParentHandles [ i ] )
@@ -1779,7 +1779,7 @@ FUNCTION _DoWindowEventProcedure ( bBlock, i, cEventType )
 
    LOCAL lRetVal := .F.
 
-   #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
    IF cEventType != "TASKBAR"  // Claudio Soto, November 2016
       _HMG_LastActiveFormIndex := i
    ENDIF
@@ -1787,7 +1787,7 @@ FUNCTION _DoWindowEventProcedure ( bBlock, i, cEventType )
 
       RETURN .F.
    ENDIF
-   #endif
+#endif
    IF ISBLOCK( bBlock )
       _PushEventInfo()
       _HMG_ThisFormIndex := i
@@ -2231,11 +2231,11 @@ FUNCTION ReleaseAllWindows ()
    UnloadRichEditLib()
 
    dbCloseAll()
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ErrorLevel() == 0 .AND. ! hb_mtvm()
-      #else
+#else
       IF ErrorLevel() == 0 .AND. ! Hb_MultiThread()
-         #endif
+#endif
          __Quit()
       ELSE
          ExitProcess()
@@ -2276,11 +2276,11 @@ FUNCTION _ReleaseWindow ( FormName )
 
    ENDIF
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    IF GetWindowType ( FormName ) == 'P'
       MsgMiniGuiError( "Release a PANEL window is not allowed (It wiil be released via its parent)." )
    ENDIF
-   #endif
+#endif
 
    i := GetFormIndex ( Formname )
    FormHandle := _HMG_aFormHandles [ i ]
@@ -2339,13 +2339,13 @@ FUNCTION _ShowWindow ( FormName, lProcessMessages )
          AEval ( _HMG_aFormSplitChildList [ i ], { | x | EnableWindow ( _HMG_aFormHandles[ x ] ) } )
       ENDIF
 
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       IF _HMG_MainWindowFirst == .T.
-         #endif
+#endif
          _HMG_IsModalActive := .T.
-         #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       ENDIF
-      #endif
+#endif
       _HMG_ActiveModalHandle := _HMG_aFormHandles [ i ]
 
       EnableWindow ( _HMG_aFormHandles [ i ] )
@@ -2455,7 +2455,7 @@ FUNCTION GetParentFormName ( nControlIndex )
 
    RETURN iif( i > 0, _HMG_aFormNames [ i ], "" )
 
-   #ifdef _HMG_COMPAT_  // Dr. Claudio Soto, April 2013
+#ifdef _HMG_COMPAT_  // Dr. Claudio Soto, April 2013
 
 FUNCTION StopWindowEventProcedure ( cFormName, lStop )
 
@@ -2489,9 +2489,9 @@ FUNCTION GetLastActiveControlIndex ()
 
    RETURN _HMG_LastActiveControlIndex
 
-   #ifdef __XHARBOUR__
-   #xtranslate hb_ValToExp( [<x,...>] ) => ValToPrgExp( <x> )
-   #endif
+#ifdef __XHARBOUR__
+#xtranslate hb_ValToExp( [<x,...>] ) => ValToPrgExp( <x> )
+#endif
 
 FUNCTION MsgDebug ( ... )
 
@@ -2612,4 +2612,4 @@ STATIC PROCEDURE EfeitoLabel ( cTxt )
 
    RETURN
 
-   #endif
+#endif

@@ -319,11 +319,11 @@ PROCEDURE SetMenuPriority( nValue )
       CASE 2
          Main.REALTIME.Checked := .T.
          EXIT
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          DEFAULT
-         #else
+#else
       OTHERWISE
-         #endif
+#endif
          Main.NORMAL.Checked := .T.
       END
 

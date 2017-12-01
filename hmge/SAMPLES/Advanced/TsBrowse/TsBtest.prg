@@ -105,11 +105,11 @@ FUNCTION TsBTest(nSample)
             :SetColor( { 1, 3, 5, 6, 13, 15 }, ;
                { CLR_BLACK, CLR_WHITE, CLR_BLACK, ;
                { CLR_WHITE, CLR_BLACK }, ; // degraded cursor background color
-            CLR_WHITE, CLR_BLACK } )  // text colors
+               CLR_WHITE, CLR_BLACK } )  // text colors
             :SetColor( { 2, 4, 14 }, ;
                { { CLR_WHITE, CLR_NBLUE }, ;  // degraded cells background color
-            { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
-            { CLR_HRED, CLR_BLACK } } )  // degraded order column background color
+               { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
+               { CLR_HRED, CLR_BLACK } } )  // degraded order column background color
 
             :nHeightCell += 6
             :nHeightHead += 4
@@ -251,10 +251,10 @@ FUNCTION TsBTest(nSample)
 
       // new degraded colors and brushed background
       Brw_3:SetColor( { 2, 4, 6, 12, 14 }, { aBrush[ 1 ], ;  // brushed cells
-      { CLR_WHITE, CLR_NBROWN }, ;  // degraded headers
-      { CLR_WHITE, CLR_NBROWN }, ;  // degraded cursor
-      { CLR_HRED, CLR_BLACK }, ;    // degraded selected cells
-      { CLR_HGREEN, CLR_BLACK } } ) // degraded active index header
+         { CLR_WHITE, CLR_NBROWN }, ;  // degraded headers
+         { CLR_WHITE, CLR_NBROWN }, ;  // degraded cursor
+         { CLR_HRED, CLR_BLACK }, ;    // degraded selected cells
+         { CLR_HGREEN, CLR_BLACK } } ) // degraded active index header
 
       Brw_3:nHeightCell += 6
       Brw_3:nHeightHead += 4
@@ -301,21 +301,21 @@ CASE nSample = 4
       SIZE 130 ;
       DATA FieldWBlock( "First", Select() ) ;
       VALID { | uVar | ! Empty( uVar ) } ;  // don't want empty names
-   ALIGN DT_LEFT, nMakeLong( DT_CENTER, DT_CENTER ) ; // V.7.0 alignment changes for bitmaps
-   COLORS CLR_BLACK, { CLR_PINK, CLR_BLACK } ; // degraded background color
-   3DLOOK FALSE, TRUE, TRUE ; // 3D look only for header and footer
-   EDITABLE MOVE DT_MOVE_RIGHT  TOOLTIP "First Name"
+      ALIGN DT_LEFT, nMakeLong( DT_CENTER, DT_CENTER ) ; // V.7.0 alignment changes for bitmaps
+      COLORS CLR_BLACK, { CLR_PINK, CLR_BLACK } ; // degraded background color
+      3DLOOK FALSE, TRUE, TRUE ; // 3D look only for header and footer
+      EDITABLE MOVE DT_MOVE_RIGHT  TOOLTIP "First Name"
 
    // new V.7.0 merging bitmaps and text in cells, headers and footers
    Brw_4:aColumns[ 1 ]:uBmpHead := aBmp[ 1 ]
 
    ADD COLUMN TO Brw_4;
       HEADER "Last" + CRLF + "Name" ;  // multi-line feature on headers
-   DATA FieldWblock( "Last", Select() ) ;
+      DATA FieldWblock( "Last", Select() ) ;
       VALID { | uVar | ! Empty( uVar ) } ;  // don't want empty names
-   COLORS CLR_BLACK, { CLR_PINK, CLR_BLACK } ; // degraded background color
-   3DLOOK FALSE, TRUE, TRUE ; // 3D look only for header and footer
-   ALIGN DT_LEFT, DT_LEFT, DT_RIGHT ;
+      COLORS CLR_BLACK, { CLR_PINK, CLR_BLACK } ; // degraded background color
+      3DLOOK FALSE, TRUE, TRUE ; // 3D look only for header and footer
+      ALIGN DT_LEFT, DT_LEFT, DT_RIGHT ;
       FOOTER "Average->" ;
       EDITABLE MOVE DT_MOVE_RIGHT TOOLTIP "Last Name"
 
@@ -331,8 +331,8 @@ CASE nSample = 4
       DATA FieldWblock( "Married", Select("Employee") ) ;
       COLORS CLR_BLACK,CLR_NBLUE ;
       3DLOOK TRUE CHECKBOX ;          // Editing with Check Box
-   ALIGN DT_CENTER, DT_VERT ;      // Cells centered, Header Vertical
-   EDITABLE MOVE DT_MOVE_RIGHT
+      ALIGN DT_CENTER, DT_VERT ;      // Cells centered, Header Vertical
+      EDITABLE MOVE DT_MOVE_RIGHT
 
    ADD COLUMN TO Brw_4 ;
       HEADER "Age" ;
@@ -342,8 +342,8 @@ CASE nSample = 4
       COLORS CLR_BLACK, CLR_PINK ;
       FOOTER { || Ltrim( Str( Round( nAgeTot / Max(Brw_4:nLen+1,1), 0 ) ) ) + CRLF + ;
       "Years" } ;  // multi-line feature on footers
-   ALIGN DT_CENTER, DT_VERT ;  // Cells centered, Header Vertical
-   VALID {|uVar| If( Empty( uVar ), ( Brw_4:PostMsg( WM_KEYDOWN, VK_RETURN ), ;
+      ALIGN DT_CENTER, DT_VERT ;  // Cells centered, Header Vertical
+      VALID {|uVar| If( Empty( uVar ), ( Brw_4:PostMsg( WM_KEYDOWN, VK_RETURN ), ;
       .F. ), .T. ) } ;
       EDITABLE MOVE DT_MOVE_RIGHT
 
@@ -358,7 +358,7 @@ CASE nSample = 4
       DATA FieldWBlock( "Salary", Select("Employee") ) ;
       COLORS {||If(Employee->Salary>100000,CLR_WHITE,CLR_BLACK)}, CLR_NBLUE ;
       ALIGN DT_RIGHT ;  // defaults right alignment at 3 levels
-   EDITABLE MOVE DT_MOVE_NEXT
+      EDITABLE MOVE DT_MOVE_NEXT
 
    // New V.7.0 fonts dinamically asigned through a code block
    bBlock := {||If(Employee->Salary>100000, aFont[ 5 ], aFont[ 1 ] ) }
@@ -366,7 +366,7 @@ CASE nSample = 4
 
    ADD COLUMN TO Brw_4 ;
       HEADER "Hire" + CRLF + "Date" ;   // multi-line feature on headers
-   SIZE 85 PIXELS ;
+      SIZE 85 PIXELS ;
       3DLOOK TRUE;
       DATA FieldWBlock( "Hiredate", Select("Employee") ) ;
       ALIGN DT_LEFT, DT_CENTER, DT_CENTER ;
@@ -378,11 +378,11 @@ CASE nSample = 4
       SIZE 270 PIXELS ;
       3DLOOK TRUE ;
       ALIGN DT_LEFT, nMakeLong( DT_CENTER, 3 ) ; // bitmap aligned to the left of centered text
-   DATA { || Brw_4:Proper( Employee->Street ) + CRLF + ;
+      DATA { || Brw_4:Proper( Employee->Street ) + CRLF + ;
       Trim( Employee->Zip ) + Space( 1 ) + ;
       Brw_4:Proper( Trim( Employee->City ) ) + ", " + ;
       Employee->State } ;  // multi-line feature on cells
-   COLORS CLR_BLACK,CLR_PINK
+      COLORS CLR_BLACK,CLR_PINK
 
    // new V.7.0 merging bitmaps and text in cells, headers and footers
    Brw_4:aColumns[ 7 ]:uBmpHead := aBmp[ 6 ]
@@ -484,9 +484,9 @@ Brw_6:Look3d( .T.,,, .F. )  // ( lOnOff, nColumn, nLevel, lPhantomGrid )
 
 Brw_6:SetColor( { 2, 3, 4, 5, 6, 15 }, ;
    { { || Brw_6:BiClr( aBrush[ 2 ], aBrush[ 1 ] ) }, ; // brushed cells using BiClr method
-CLR_BLACK, aBrush[ 6 ], ; // brushed headers
-CLR_WHITE, { CLR_WHITE, CLR_BLACK }, ; // degraded cursor
-CLR_GRAY } )  // grid lines color
+   CLR_BLACK, aBrush[ 6 ], ; // brushed headers
+   CLR_WHITE, { CLR_WHITE, CLR_BLACK }, ; // degraded cursor
+   CLR_GRAY } )  // grid lines color
 
 // activating continuous editing mode
 Brw_6:lAutoEdit := .T.    // don't work propertly //JP
@@ -544,8 +544,8 @@ ADD COLUMN TO Brw_7 ;
    SIZE 40 PIXELS ;
    FOOTER LTrim( Str( Brw_7:nLen ) ) ;
    3DLOOK TRUE,TRUE,FALSE ;  // cels, header, footer
-ALIGN DT_CENTER,DT_CENTER,DT_CENTER ;   // cells, header, footer
-COLORS CLR_BLACK, CLR_HGRAY
+   ALIGN DT_CENTER,DT_CENTER,DT_CENTER ;   // cells, header, footer
+   COLORS CLR_BLACK, CLR_HGRAY
 
 // building columns for every field making each editable (.T.)
 Brw_7:LoadFields( .T. )
@@ -558,8 +558,8 @@ Brw_7:aColumns[ 8 ]:nAlign := nMakeLong( DT_LEFT, DT_RIGHT )
 
 Brw_7:SetColor( { 9, 10 }, { CLR_WHITE, CLR_GRAY } )  // footers
 Brw_7:SetColor( { 5, 6, 4, 15 }, { CLR_BLACK, -2, ;   // new rectangled cursor
-aBrush[ 2 ], ; // brushed headers background
-CLR_BLACK } )  // grid lines
+   aBrush[ 2 ], ; // brushed headers background
+   CLR_BLACK } )  // grid lines
 
 Brw_7:SetColor( { CLR_EDITF, CLR_EDITB }, { CLR_BLACK, CLR_HGRAY } )  // Edicion
 
@@ -666,11 +666,11 @@ LoadFields( cBrw, cWnd, .F. , { "First","Last","State","City","Street" } )
 Brw_8:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
    { CLR_BLACK, CLR_WHITE, CLR_BLACK, ;
    { CLR_WHITE, CLR_BLACK }, ; // degraded cursor background color
-CLR_WHITE, CLR_BLACK } )  // text colors
+   CLR_WHITE, CLR_BLACK } )  // text colors
 Brw_8:SetColor( { 2, 4, 14 }, ;
    { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-{ CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
-{ CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
+   { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
+   { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
 
 Brw_8:nHeightCell += 6
 Brw_8:nHeightHead += 4

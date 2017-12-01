@@ -29,7 +29,7 @@ CREATE CLASS TTimedTaskDialog FUNCTION TimedTaskDialog FROM TaskDialog
    VAR cTimeCount    INIT ""
    VAR nTimeCount    INIT COUNT_TIMES
 
-ENDCLASS
+   ENDCLASS
 
 METHOD UpdateButton( cCaption ) CLASS TTimedTaskDialog
 
@@ -123,11 +123,11 @@ PROCEDURE main()
       :ShowDialog()
 
       cMsg := If( :TimedOut() .AND. ! :lUserActivity, "Time out!", "Selected button #" + hb_NtoS( :SelectedButton() ) )
-      ENDWITH
+   ENDWITH
 
-      MsgInfo( cMsg, "Info" )
+   MsgInfo( cMsg, "Info" )
 
-      RETURN
+   RETURN
 
 FUNCTION CreateTimedDialog()
 
@@ -147,9 +147,9 @@ FUNCTION CreateTimedDialog()
 
       :EnableHyperlinks  := .T.
 
-      ENDWITH
+   ENDWITH
 
-      RETURN oDialog
+   RETURN oDialog
 
 #pragma BEGINDUMP
 

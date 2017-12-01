@@ -1,10 +1,10 @@
 SwitchPrinter version 1.2
 =========================
 
-First of all, thank you for trying this program! 
+First of all, thank you for trying this program!
 Any your suggestions are welcome! Mail to: gfilatov@inbox.ru
 
-General Information 
+General Information
 ===================
 
 SwitchPrinter is a very small and very simple program.
@@ -36,7 +36,7 @@ Installation
 Unzip all the files into one directory. That's all!
 No dll's or other complicated files to be installed!
 After this you can start SwitchPrinter by double clicking
-on the SwitchPrinter.exe file. 
+on the SwitchPrinter.exe file.
 
 ________________________________
 (c) 2002-2004 by Grigory Filatov

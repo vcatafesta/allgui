@@ -3,10 +3,10 @@
 #ifndef __XHARBOUR__
 #xcommand TRY                => bError := errorBlock( {|oError| break( oError ) } ) ;;
    BEGIN SEQUENCE
-   #xcommand CATCH [<!oError!>] => errorBlock( bError ) ;;
+#xcommand CATCH [<!oError!>] => errorBlock( bError ) ;;
    RECOVER [USING <oError>] <-oError-> ;;
       errorBlock( bError )
-   #endif
+#endif
 
 CLASS TActiveX
 
@@ -46,7 +46,7 @@ CLASS TActiveX
 
    METHOD GetHeight()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cWindowName , cProgId , nRow , nCol , nWidth , nHeight ) CLASS TActiveX
 

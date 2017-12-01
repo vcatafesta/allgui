@@ -278,7 +278,7 @@ CLASS HBPrinter
 
    METHOD ReportData(l_x1,l_x2,l_x3,l_x4,l_x5,l_x6)
 
-   #ifndef NO_GUI
+#ifndef NO_GUI
 
    METHOD Preview()
 
@@ -292,14 +292,14 @@ CLASS HBPrinter
 
    METHOD PrintOption()
 
-   #endif
+#endif
 
    IF TIME() == "Z"
       EMPTY( _OOHG_AllVars )
       EMPTY( HBPRN )
    ENDIF
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HBPrinter
 
@@ -342,13 +342,13 @@ METHOD SelectPrinter( cPrinter ,lPrev ) CLASS HBPrinter
 
    ENDIF
    IF HB_IsLogical(lPrev)
-      #ifndef NO_GUI
+#ifndef NO_GUI
       IF lprev
          ::PreviewMode:=.t.
       ENDIF
-      #else
+#else
       ::PreviewMode:=.f.
-      #endif
+#endif
    ENDIF
    IF ::hDC==0
       ::error:=1
@@ -1653,7 +1653,7 @@ METHOD ReportData(l_x1,l_x2,l_x3,l_x4,l_x5,l_x6) CLASS HBPrinter
 
    RETURN self
 
-   #ifndef NO_GUI
+#ifndef NO_GUI
 
 METHOD PrevThumb(nclick) CLASS HBPrinter
 
@@ -2308,7 +2308,7 @@ METHOD PrintOption() CLASS HBPrinter
 
    RETURN OKPrint
 
-   #endif // NO_GUI
+#endif // NO_GUI
 
 #pragma BEGINDUMP
 

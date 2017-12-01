@@ -716,16 +716,16 @@ FUNCTION RMiniPar(ArryPar,cmdline,section)
       oWr:Putarray(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
          ,eval(epar,ArryPar[2]) ;
          ,oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section)    ;            //arr
-      ,if(ascan(arryPar,[LEN])>0,oWr:macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
-      ,nil                                                           ;      //rowheight
-      ,nil                                                           ;      //vertalign
-      ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
-      ,nil                                                           ;      //abrushes
-      ,nil                                                           ;      //apens
-      ,if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL)    ;      //afonts
-      ,if(ascan(arryPar,[COLOR])> 0,oWr:UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
-      ,NIL                                                           ;      //abitmaps
-      ,nil )                                                                //userfun
+         ,if(ascan(arryPar,[LEN])>0,oWr:macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
+         ,nil                                                           ;      //rowheight
+         ,nil                                                           ;      //vertalign
+         ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
+         ,nil                                                           ;      //abrushes
+         ,nil                                                           ;      //apens
+         ,if(ascan(arryPar,[FONT])>0,eval(chblk,arrypar,[FONT]),NIL)    ;      //afonts
+         ,if(ascan(arryPar,[COLOR])> 0,oWr:UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
+         ,NIL                                                           ;      //abitmaps
+         ,nil )                                                                //userfun
       */
    ENDCASE
 

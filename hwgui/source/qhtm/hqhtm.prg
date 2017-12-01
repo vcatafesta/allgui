@@ -30,7 +30,7 @@ CLASS HQhtm INHERIT HControl
 
    METHOD Notify( lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
       bInit,bSize,bLink,bSubmit,fname,resname ) CLASS HQhtm
@@ -158,7 +158,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD Init()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bClick,ctooltip ) CLASS HQhtmButton

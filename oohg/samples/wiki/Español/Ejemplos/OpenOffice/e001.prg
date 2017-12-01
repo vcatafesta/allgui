@@ -73,7 +73,7 @@ FUNCTION ToOpenOffice( oGrid )
    Form_1.StatusBar.Item( 1 ) := 'Creando TEST.ODS en la carpeta del ejecutable ...'
 
    // abrir el service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oSerM := win_oleCreateObject( 'com.sun.star.ServiceManager' ) ) == NIL
    MsgStop( 'Error: OpenOffice no está disponible. [' + win_oleErrorText()+ ']' )
 

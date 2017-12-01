@@ -199,7 +199,7 @@ FUNCTION SayDollar(nDollar)
 
    // Indonesian Say Money
 
-   #define  PECAHAN {"TRILIUN ","MILYAR ","JUTA ","RIBU ","RUPIAH"}
+#define  PECAHAN {"TRILIUN ","MILYAR ","JUTA ","RIBU ","RUPIAH"}
 
 FUNCTION SayRupiah(nAngka)
 
@@ -241,7 +241,7 @@ STATIC FUNCTION tigades( mvc, n)    // created: 28 mei 1993
 
       RETURN (say)
 
-      #define  bil_asli { "SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH",;
+#define  bil_asli { "SATU","DUA","TIGA","EMPAT","LIMA","ENAM","TUJUH",;
          "DELAPAN","SEMBILAN" }
 
 STATIC FUNCTION  bil(x)

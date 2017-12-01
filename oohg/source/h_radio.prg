@@ -112,7 +112,7 @@ CLASS TRadioGroup FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, aOptions, Value, fontname, ;
       fontsize, tooltip, change, width, spacing, HelpId, invisible, ;
@@ -516,7 +516,7 @@ CLASS TRadioItem FROM TLabel
 
    METHOD Events_Notify
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, width, height, ;
       caption, value, lFirst, ;

@@ -116,9 +116,9 @@ PROCEDURE Main()
       ON KEY ALT+1 ACTION LoadTop()
       ON KEY ALT+X ACTION Form_1.Release
 
-      #ifdef DEBUG
+#ifdef DEBUG
       ON KEY ALT+W ACTION LoadWin()
-      #endif
+#endif
 
    END WINDOW
 
@@ -305,7 +305,7 @@ STATIC FUNCTION LoadArray()
 
    RETURN aArr
 
-   #ifdef DEBUG
+#ifdef DEBUG
 
 STATIC PROCEDURE LoadWin()
 
@@ -333,7 +333,7 @@ STATIC PROCEDURE LoadWin()
    NEXT
 
    RETURN
-   #endif
+#endif
 
 PROCEDURE OpenTopTable()
 

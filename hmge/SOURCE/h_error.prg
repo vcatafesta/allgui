@@ -69,7 +69,7 @@ INIT PROCEDURE ClipInit()
 
    RETURN
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 PROCEDURE hb_GTSYS
 
@@ -77,7 +77,7 @@ PROCEDURE hb_GTSYS
 
    RETURN
 
-   #endif
+#endif
    *-Date Created: 01-01-2003
    *-Author: Antonio Novo <antonionovo@gmail.com>
    *-Modified by Grigory Filatov at 24-08-2014

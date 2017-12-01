@@ -61,7 +61,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD OnEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, cTooltip, tcolor, ;
@@ -305,7 +305,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD NoteCaption( cNote )  SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
@@ -713,11 +713,11 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HBUTTONEx
       ENDIF
    ENDIF
    IF msg == WM_KEYDOWN
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       IF hb_BitIsSet( hwg_Ptrtoulong( lParam ), 30 )  // the key was down before ?
-         #else
+#else
          IF hb_BitTest( lParam, 30 )   // the key was down before ?
-            #endif
+#endif
 
             RETURN 0
          ENDIF
@@ -1222,7 +1222,7 @@ CLASS HGroupEx INHERIT HGroup
 
    METHOD Paint( lpDis )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor, lTransp, oRGroup ) CLASS HGroupEx
@@ -1281,7 +1281,7 @@ METHOD PAINT( lpdis ) CLASS HGroupEx
    // distance from window top to group rect
    iUpDist := ( aSize[ 2 ] / 2 )
    dwStyle := ::Style //HWG_GETWINDOWSTYLE( ::handle ) //GetStyle();
-      rcText := { 0, rc[ 2 ] + iUpDist , 0, rc[ 2 ] + iUpDist  }
+   rcText := { 0, rc[ 2 ] + iUpDist , 0, rc[ 2 ] + iUpDist  }
    IF Empty( szText )
    ELSEIF hb_BitAnd( dwStyle, BS_CENTER ) == BS_RIGHT // right aligned
       rcText[ 3 ] := rc[ 3 ] + 2 - OFS_X

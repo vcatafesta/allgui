@@ -114,7 +114,7 @@ CLASS HTreeNode INHERIT HObject
 
    METHOD GetLevel( h )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bClick ) CLASS HTreeNode
 
@@ -330,7 +330,7 @@ CLASS VAR winclass   INIT "SysTreeView32"
 
    METHOD Bottom() INLINE IIF( !Empty( ::aItems ), ( ::Select( ::aItems[ LEN( ::aItems ) ] ), hwg_Sendmessage( ::Handle, WM_VSCROLL, hwg_Makewparam( 0, SB_BOTTOM ), Nil ) ),)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, bSize, color, bcolor, ;
       aImages, lResour, lEditLabels, bAction, nBC, bRClick, bDblClick, lcheckbox,  bCheck, lDragDrop, bDrag, bDrop, bOther ) CLASS HTree

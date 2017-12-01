@@ -124,7 +124,7 @@ PROCEDURE Main
             WIDTH x HEIGHT y   ;
             MAIN               ;
             ICON 'setup.ico'   ;                                           // JF: changed the icon to a CD, not a significant change
-         NOSIZE NOCAPTION   ;
+            NOSIZE NOCAPTION   ;
             ON PAINT ( FillBlue( _HMG_MainHandle ), TextPaint(cProgramName) )
 
          ON KEY ALT+X  ACTION IIF( MsgYesNo( cMsg, "Cancel ?" ), Form_1.Release, ;
@@ -141,7 +141,7 @@ PROCEDURE Main
                TITLE cProgramName + " Setup" ;
                MAIN               ;
                ICON 'setup.ico'   ;                                           // JF: changed the icon to a CD, not a significant change
-            NOSIZE NOMAXIMIZE  ;
+               NOSIZE NOMAXIMIZE  ;
                ON PAINT ( FillBlue( _HMG_MainHandle ), TextPaint(cProgramName) ) ;
                ON INTERACTIVECLOSE IIF( lExit, .T., IIF( MsgYesNo( cMsg, "Cancel ?" ), .T., ;
                ( BringWindowToTop( GetFormHandle( "Form_2" ) ), .F. ) ) )
@@ -157,11 +157,11 @@ PROCEDURE Main
             AT 0, 0     ;
             WIDTH 540   ;
             HEIGHT 280 - IF(IsXPThemeActive(), 0, 8) ;             // JF: added height to the window to make more room for buttons at the bottom
-         TITLE ""    ;
+            TITLE ""    ;
             NOSYSMENU NOSIZE    ;
             CHILD       ;
             ON INIT ( Form_2.Btn_Fwd2Step2.SetFocus ) ;     // JF: renamed the buttons, not a significant change
-         ON RELEASE PostMessage( _HMG_MainHandle, WM_CLOSE, 0, 0 ) ;
+            ON RELEASE PostMessage( _HMG_MainHandle, WM_CLOSE, 0, 0 ) ;
             ON INTERACTIVECLOSE IIF( lExit, .T., ( lExit := MsgNoYes( cMsg ), lExit ) ) ;
             FONT 'MS Sans Serif'          ;
             SIZE 8
@@ -182,19 +182,19 @@ PROCEDURE Main
 
          * JF: changed the placement of all buttons and enlarged them from HEIGHT 23 to HEIGHT 26
          @ Form_2.Height - 69, 290 BUTTON Btn_Fwd2Step2 ;                        // JF: this was Btn_1
-         CAPTION '&Next >' ;
+            CAPTION '&Next >' ;
             ACTION ( HideStep1(), ShowStep2( cProgramName )) ;
             WIDTH 78 ;
             HEIGHT 26
 
          @ Form_2.Height - 69, 390 BUTTON Btn_Cancel ;                           // JF: this was Btn_2
-         CAPTION '&Cancel' ;
+            CAPTION '&Cancel' ;
             ACTION ( Form_2.Release ) ;
             WIDTH 78 ;
             HEIGHT 26
 
          @ Form_2.Height - 69, 190 BUTTON Btn_Back2Intro ;                      // JF: this was Btn_3
-         CAPTION '< &Back' ;
+            CAPTION '< &Back' ;
             ACTION ( HideStep2(), ShowStep1( cProgramName )) ;
             WIDTH 78 ;
             HEIGHT 26
@@ -202,9 +202,9 @@ PROCEDURE Main
          @ Form_2.Height - 69, 290 BUTTON Btn_4 ;
             CAPTION IIF( lNoLinks, "&Install", '&Next >' ) ;
             ; // JF: if there are no links to be created, proceed to install
-         ACTION IIF( lNoLinks, ;
+            ACTION IIF( lNoLinks, ;
             ; // JF: changed Install() function as described below
-         Install( cPath, cDestinPath, aLink, lOnDesktop, lStartMenu, cSMenuFolder, ;
+            Install( cPath, cDestinPath, aLink, lOnDesktop, lStartMenu, cSMenuFolder, ;
             cProgramName, cIconName, @lNeedReboot ), ;
             ;
             ( HideStep2(), ShowStep3( cProgramName, lOnDeskTop, lStartMenu, lChange ))) ;
@@ -212,21 +212,21 @@ PROCEDURE Main
             HEIGHT 26
 
          @ Form_2.Height - 69, 190 BUTTON Btn_Back2Step2 ;                    // JF: this was Btn_5
-         CAPTION '< &Back' ;
+            CAPTION '< &Back' ;
             ACTION ( HideStep3(), ShowStep2( cProgramName )) ;
             WIDTH 78 ;
             HEIGHT 26
 
          * JF: Changed Install() function as described below
          @ Form_2.Height - 69, 290 BUTTON Btn_Install ;                       // JF: this was Btn_6
-         CAPTION "&Install" ;
+            CAPTION "&Install" ;
             ACTION { || Install( cPath, cDestinPath, aLink, lOnDesktop, lStartMenu, cSMenuFolder, ;
             cProgramName, cIconName, @lNeedReboot ) } ;
             WIDTH 78 ;
             HEIGHT 26
 
          @ Form_2.Height - 69, 290 BUTTON Btn_Finish ;                        // JF: this was Btn_7
-         CAPTION "&Finish" ;
+            CAPTION "&Finish" ;
             ACTION ( lExit := .T., IIF( lNeedReboot, ExitWindows( EWX_REBOOT ), Form_2.Release )) ;
             WIDTH 78 ;
             HEIGHT 26

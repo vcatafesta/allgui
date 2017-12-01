@@ -69,7 +69,7 @@ FUNCTION CloseIt()
 
    LOCAL aTitles := GetTitles( This.Handle )
 
-   #define WM_CLOSE          16
+#define WM_CLOSE          16
 
    IF ( n := aScan( aTitles, {|e| APP_TITLE_EN $ e[1] } ) ) > 0
 
@@ -118,11 +118,11 @@ FUNCTION GetTitles( hOwnWnd )
       cTitle := GetWindowText( hWnd )
 
       IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
-         IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
-         hWnd != hOwnWnd .AND.;             // If it is not this app
-         !EMPTY( cTitle ) .AND.;            // If the window has a title
-         !( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
-         !( cTitle == "Program Manager" )   // If it is not the Program Manager
+            IsWindowVisible( hWnd ) .AND.;     // If it is a visible window
+            hWnd != hOwnWnd .AND.;             // If it is not this app
+            !EMPTY( cTitle ) .AND.;            // If the window has a title
+            !( "DOS Session" $ cTitle ) .AND.; // If it is not DOS session
+            !( cTitle == "Program Manager" )   // If it is not the Program Manager
 
          aAdd( aTasks, { cTitle, hWnd } )
       ENDIF

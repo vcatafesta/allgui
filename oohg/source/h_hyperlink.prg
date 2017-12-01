@@ -63,7 +63,7 @@ CLASS THyperLink FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, Caption, url, w, h, fontname, ;
       fontsize, bold, BORDER, CLIENTEDGE, HSCROLL, VSCROLL, ;

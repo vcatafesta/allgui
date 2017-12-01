@@ -47,7 +47,7 @@ CLASS HHtml // INHERIT HControl
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oParent ) CLASS HHtml
 

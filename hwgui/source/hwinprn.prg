@@ -69,7 +69,7 @@ CLASS VAR cPrinterName SHARED  INIT Nil
    DATA lPageStart  INIT .F.
    DATA lFirstLine
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies ) CLASS HWinPrn
 
@@ -97,13 +97,13 @@ METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWin
 
 METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 
-   #ifdef __PLATFORM__Linux__
+#ifdef __PLATFORM__Linux__
    LOCAL cFont := "Monospace "
 
-   #else
+#else
    LOCAL cFont := "Lucida Console"
 
-   #endif
+#endif
    LOCAL aKoef := { 1, 1.22, 1.71, 2 }
    LOCAL nMode := 0, oFont, nWidth, nPWidth
 
@@ -118,11 +118,11 @@ METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
          IF nPWidth > 210 .OR. nPWidth < 190
             nPWidth := 200
          ENDIF
-         #ifdef __PLATFORM__Linux__
+#ifdef __PLATFORM__Linux__
          oFont := ::oPrinter:AddFont( cFont+"Regular", ::nStdHeight * ::oPrinter:nVRes )
-         #else
+#else
          oFont := ::oPrinter:AddFont( cFont, ::nStdHeight * ::oPrinter:nVRes )
-         #endif
+#endif
          ::oPrinter:SetFont( oFont )
          nWidth := ::oPrinter:GetTextWidth( Replicate( 'A',80 ) ) / ::oPrinter:nHRes
          IF nWidth > nPWidth+2 .OR. nWidth < nPWidth-15
@@ -137,14 +137,14 @@ METHOD SetMode( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
       ::nLineHeight := ( ::nStdHeight / aKoef[nMode+1] ) * ::oPrinter:nVRes
       ::nLined := ( 25.4 * ::oPrinter:nVRes ) / ::nLineInch - ::nLineHeight
 
-      #ifdef __PLATFORM__Linux__
+#ifdef __PLATFORM__Linux__
       IF ::lBold; cFont += "Bold"; ENDIF
       IF ::lItalic; cFont += "Italic"; ENDIF
       IF !::lBold .AND. !::lItalic; cFont += "Regular"; ENDIF
       oFont := ::oPrinter:AddFont( cFont, ::nLineHeight )
-      #else
+#else
       oFont := ::oPrinter:AddFont( "Lucida Console", ::nLineHeight, ::lBold, ::lItalic, ::lUnder, 204 )
-      #endif
+#endif
 
       IF ::oFont != Nil
          ::oFont:Release()
@@ -297,18 +297,18 @@ METHOD PutCode( cLine ) CLASS HWinPrn
 
    STATIC aCodes := {   ;
       { Chr(27)+'@',.f.,.f.,6,.f.,.f.,.f. },  ;     /* Reset */
-   { Chr(27)+'M',.t.,,,,, },  ;     /* Elite */
-   { Chr(15),,.t.,,,, },      ;     /* Cond */
-   { Chr(18),,.f.,,,, },      ;     /* Cancel Cond */
-   { Chr(27)+'0',,,8,,, },    ;     /* 8 lines per inch */
-   { Chr(27)+'2',,,6,,, },    ;     /* 6 lines per inch ( standard ) */
-   { Chr(27)+'-1',,,,,,.t. }, ;     /* underline */
-   { Chr(27)+'-0',,,,,,.f. }, ;     /* cancel underline */
-   { Chr(27)+'4',,,,,.t., },  ;     /* italic */
-   { Chr(27)+'5',,,,,.f., },  ;     /* cancel italic */
-   { Chr(27)+'G',,,,,.t., },  ;     /* bold */
-   { Chr(27)+'H',,,,.f.,, }   ;     /* cancel bold */
-   }
+      { Chr(27)+'M',.t.,,,,, },  ;     /* Elite */
+      { Chr(15),,.t.,,,, },      ;     /* Cond */
+      { Chr(18),,.f.,,,, },      ;     /* Cancel Cond */
+      { Chr(27)+'0',,,8,,, },    ;     /* 8 lines per inch */
+      { Chr(27)+'2',,,6,,, },    ;     /* 6 lines per inch ( standard ) */
+      { Chr(27)+'-1',,,,,,.t. }, ;     /* underline */
+      { Chr(27)+'-0',,,,,,.f. }, ;     /* cancel underline */
+      { Chr(27)+'4',,,,,.t., },  ;     /* italic */
+      { Chr(27)+'5',,,,,.f., },  ;     /* cancel italic */
+      { Chr(27)+'G',,,,,.t., },  ;     /* bold */
+      { Chr(27)+'H',,,,.f.,, }   ;     /* cancel bold */
+      }
    LOCAL i, sLen := Len( aCodes ), c := Left( cLine,1 )
 
    FOR i := 1 TO sLen

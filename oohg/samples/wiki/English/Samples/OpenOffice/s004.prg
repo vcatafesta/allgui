@@ -75,7 +75,7 @@ FUNCTION MyProcess( oForm, oGrid )
    oForm:StatusBar:Item( 1, 'Creating ' + cFile + ' ...' )
 
    // open service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oSerM := win_oleCreateObject( 'com.sun.star.ServiceManager' ) ) == NIL
    MsgStop( 'Error: OpenOffice not available. [' + win_oleErrorText()+ ']' )
 

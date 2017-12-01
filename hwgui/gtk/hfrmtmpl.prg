@@ -104,7 +104,7 @@ CLASS HCtrlTmpl
 
    METHOD F( nId )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD F( nId ) CLASS HCtrlTmpl
 
@@ -156,7 +156,7 @@ CLASS VAR maxId    INIT 0
 
    METHOD Find( cId )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD READ( fname, cId ) CLASS HFormTmpl
 
@@ -351,7 +351,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
 
    ELSEIF nMode == 1
 
-      #ifndef __LINUX__
+#ifndef __LINUX__
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
             AT nLeft, nTop SIZE nWidth, nHeight ;
@@ -365,15 +365,15 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
             FONT oFont ;
             BACKGROUND BITMAP oBmp
       ELSE
-         #endif
+#endif
          INIT WINDOW ::oDlg MAIN TITLE cTitle    ;
             AT nLeft, nTop SIZE nWidth, nHeight ;
             FONT oFont;
             BACKGROUND BITMAP oBmp;
             STYLE IF( nStyle > 0 , nStyle, NIL )
-         #ifndef __LINUX__
+#ifndef __LINUX__
       ENDIF
-      #endif
+#endif
    ENDIF
 
    oDlg := ::oDlg
@@ -615,13 +615,13 @@ STATIC FUNCTION ReadCtrl( oCtrlDesc, oContainer, oForm )
 
    RETURN NIL
 
-   #define TBS_AUTOTICKS                1
+#define TBS_AUTOTICKS                1
 
-   #define TBS_TOP                      4
+#define TBS_TOP                      4
 
-   #define TBS_BOTH                     8
+#define TBS_BOTH                     8
 
-   #define TBS_NOTICKS                 16
+#define TBS_NOTICKS                 16
 
 STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
@@ -758,13 +758,13 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
       NEXT
 
       IF oCtrlTmpl:cClass == "combobox"
-         #ifndef __LINUX__
+#ifndef __LINUX__
          IF ( i := Ascan( oCtrlTmpl:aProp,{ |a|Lower(a[1] ) == "nmaxlines" } ) ) > 0
             nHeight := nHeight * nMaxLines
          ELSE
             nHeight := nHeight * 4
          ENDIF
-         #endif
+#endif
       ELSEIF oCtrlTmpl:cClass == "line"
          nLength := iif( lVertical == Nil .OR. !lVertical, nWidth, nHeight )
       ELSEIF oCtrlTmpl:cClass == "browse"
@@ -878,7 +878,7 @@ FUNCTION hwg_hfrm_FontFromXML( oXmlNode )
       width, height, weight, charset,   ;
       ita, under )
 
-   #endif  // G_CONSOLE_MODE
+#endif  // G_CONSOLE_MODE
 
 FUNCTION hwg_hfrm_Str2Arr( stroka )
 
@@ -947,7 +947,7 @@ CLASS HRepItem
 
    METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls,Self ), Self )
 
-ENDCLASS
+   ENDCLASS
 
 CLASS HRepTmpl
 
@@ -986,7 +986,7 @@ CLASS VAR aFontTable
 
    METHOD SetMetaFile( cMetafile )    INLINE ::cMetafile := cMetafile
 
-ENDCLASS
+   ENDCLASS
 
 METHOD READ( fname, cId ) CLASS HRepTmpl
 
@@ -1006,19 +1006,19 @@ METHOD READ( fname, cId ) CLASS HRepTmpl
    ENDIF
 
    IF Empty( oDoc:aItems )
-      #ifdef G_CONSOLE_MODE
+#ifdef G_CONSOLE_MODE
       Alert( "Can't open " + fname )
-      #else
+#else
       hwg_Msgstop( "Can't open " + fname )
-      #endif
+#endif
 
       RETURN NIL
    ELSEIF oDoc:aItems[1]:title != "part" .OR. oDoc:aItems[1]:GetAttribute( "class" ) != "report"
-      #ifdef G_CONSOLE_MODE
+#ifdef G_CONSOLE_MODE
       Alert( "Report description isn't found" )
-      #else
+#else
       hwg_Msgstop( "Report description isn't found" )
-      #endif
+#endif
 
       RETURN NIL
    ENDIF
@@ -1109,11 +1109,11 @@ METHOD PRINT( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
          NEXT
       ENDIF
    NEXT
-   #ifdef __LINUX__
+#ifdef __LINUX__
    xTemp := hwg_gp_GetDeviceArea( oPrinter:hDC )
-   #else
+#else
    xTemp := GetDeviceArea( oPrinter:hDCPrn )
-   #endif
+#endif
    ::nKoefPix := ( ( xTemp[1]/xTemp[3] + xTemp[2]/xTemp[4] ) / 2 ) / 3.8
    oPrinter:SetMode( nOrientation )
    ::nKoefX := oPrinter:nWidth / ( nPWidth + 12 )
@@ -1282,11 +1282,11 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
          ELSE
             nPenWidth := Round( ::nKoefPix, 0 )
          ENDIF
-         #ifdef __LINUX__
+#ifdef __LINUX__
          oItem:oPen := HGP_Pen():Add( nPenWidth )
-         #else
+#else
          oItem:oPen := HPen():Add( nPenType, nPenWidth )
-         #endif
+#endif
          // hwg_WriteLog( str(nPenWidth) + " " + str(::nKoefY) )
       ENDIF
       IF oItem:cClass == "label"

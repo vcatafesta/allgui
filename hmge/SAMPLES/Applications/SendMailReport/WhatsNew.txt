@@ -27,7 +27,7 @@ Fixed the incorrect addition of files to be sent.
 Added shutdown capability
 
 2016-03-08 Release 1.6
-After more test I Fixed the incorrect management of files to be sent and 
+After more test I Fixed the incorrect management of files to be sent and
 temporary files to be clean up.
 
 For oher info see SendMailReport.Chm

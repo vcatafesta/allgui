@@ -93,13 +93,13 @@ PROCEDURE Chart(sTemp)
 
    RETURN
 
-   #define RMC_DEFAULT   O
-   #define RMC_PORTRAIT  1
-   #define RMC_LANDSCAPE 2
+#define RMC_DEFAULT   O
+#define RMC_PORTRAIT  1
+#define RMC_LANDSCAPE 2
 
-   #define RMC_EMF       1
-   #define RMC_EMFPLUS   2
-   #define RMC_BMP       3
+#define RMC_EMF       1
+#define RMC_EMFPLUS   2
+#define RMC_BMP       3
 
 PROCEDURE PrintChart(sTemp)
 

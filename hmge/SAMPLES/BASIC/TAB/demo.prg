@@ -75,7 +75,7 @@ PROCEDURE SizeTest()
 
    RETURN
 
-   #define COLOR_BTNFACE 15
+#define COLOR_BTNFACE 15
 
 PROCEDURE SetTab_1( lBottomStyle )
 

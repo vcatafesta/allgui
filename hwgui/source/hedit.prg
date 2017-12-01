@@ -118,7 +118,7 @@ CLASS VAR winclass   INIT "EDIT"
 
    METHOD SetCueBanner ( cText, lshowFoco )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, tcolor, bcolor, ;
@@ -533,7 +533,7 @@ METHOD onEvent( msg, wParam, lParam ) CLASS HEdit
 
    ELSEIF msg == WM_GETDLGCODE
       IF wParam = VK_ESCAPE   .AND. ;          // DIALOG MODAL
-         ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != Nil .AND. ! oParent:IsEnabled()
+            ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != Nil .AND. ! oParent:IsEnabled()
 
          RETURN DLGC_WANTMESSAGE
       ENDIF
@@ -1143,7 +1143,7 @@ METHOD SelText( cText ) CLASS HEdit
 
 METHOD SetCueBanner( cText, lShowFoco ) CLASS HEdit
 
-   #define EM_SETCUEBANNER 0x1501
+#define EM_SETCUEBANNER 0x1501
    LOCAL lRet := .F.
 
    IF ! ::lMultiLine

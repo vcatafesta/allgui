@@ -61,14 +61,14 @@ FUNCTION Main( ... )
 
    RETURN NIL
 
-   #define GW_HWNDFIRST   0
-   #define GW_HWNDLAST   1
-   #define GW_HWNDNEXT   2
-   #define GW_HWNDPREV   3
-   #define GW_OWNER   4
-   #define GW_CHILD   5
+#define GW_HWNDFIRST   0
+#define GW_HWNDLAST   1
+#define GW_HWNDNEXT   2
+#define GW_HWNDPREV   3
+#define GW_OWNER   4
+#define GW_CHILD   5
 
-   #define WM_CLOSE        0x0010
+#define WM_CLOSE        0x0010
 
 FUNCTION CloseApp( nItem )
 
@@ -102,11 +102,11 @@ FUNCTION aTasks()
       cTitle := GetWindowText( hWnd )
 
       IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
-         IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-         hWnd != _HMG_MainHandle .AND.;      // If it is not this app
-         !EMPTY( cTitle ) .AND.;             // If the window has a title
-         !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-         !( cTitle == "Program Manager" )    // If it is not the Program Manager
+            IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+            hWnd != _HMG_MainHandle .AND.;      // If it is not this app
+            !EMPTY( cTitle ) .AND.;             // If the window has a title
+            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+            !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
          AADD( aTasks, { cTitle, hWnd } )
       ENDIF

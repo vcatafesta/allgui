@@ -1038,6 +1038,6 @@ FUNCTION About()
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
-   #include <..\propgrid\fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <..\propgrid\fileread.prg>
+#endif

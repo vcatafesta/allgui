@@ -237,4 +237,4 @@ HB_FUNC( EXITACTIVEX )
 
 #pragma ENDDUMP
 
-   #endif
+#endif

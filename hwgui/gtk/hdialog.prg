@@ -75,7 +75,7 @@ CLASS VAR aModalDialogs  SHARED INIT {}
 
    METHOD Close()    INLINE hwg_EndDialog( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
       bPaint,bGfocus,bLfocus,bOther,lClipper,oBmp,oIcon,lExitOnEnter,nHelpId, xResourceID, lExitOnEsc ) CLASS HDialog

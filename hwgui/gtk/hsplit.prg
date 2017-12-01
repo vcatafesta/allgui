@@ -40,7 +40,7 @@ CLASS VAR winclass INIT "STATIC"
 
    METHOD DragAll()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight, ;
       bSize,bDraw,color,bcolor,aLeft,aRight ) CLASS HSplitter

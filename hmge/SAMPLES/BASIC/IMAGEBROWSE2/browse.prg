@@ -43,7 +43,7 @@ FUNCTION Main
             ITEM 'About'   ACTION MsgInfo ("MINIGUI - Browse Demo"+CRLF+;
                "Copyright 2002 Roberto Lopez <harbourminigui@gmail.com>"+CRLF+;
                "http://harbourminigui.googlepages.com/"+CRLF+CRLF+;
-               "Update 2002 Interativo Networks <xharbour@terra.com.br>"+CRLF+;
+            "Update 2002 Interativo Networks <xharbour@terra.com.br>"+CRLF+;
                "Daniel Crocciari"+CRLF+;
                "http://www.ihpz.net", "About" )
          END POPUP

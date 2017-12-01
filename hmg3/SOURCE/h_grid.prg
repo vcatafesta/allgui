@@ -82,11 +82,11 @@ FUNCTION GridInplaceEdit_ParentName()
 
    RETURN cFormName
 
-   #define WM_COMMAND  273
-   #define WM_SETFOCUS 7
+#define WM_COMMAND  273
+#define WM_SETFOCUS 7
 
-   #include 'hmg.ch'
-   #include 'common.ch'
+#include 'hmg.ch'
+#include 'common.ch'
 
 FUNCTION _DefineGrid (   ControlName   , ;
       ParentForm   , ;
@@ -266,8 +266,8 @@ FUNCTION _DefineGrid (   ControlName   , ;
    ENDIF
 
    // ADD April 2016
-   #define DEFAULT_COLUMNHEADER  "Column "
-   #define DEFAULT_COLUMNWIDTH   150
+#define DEFAULT_COLUMNHEADER  "Column "
+#define DEFAULT_COLUMNWIDTH   150
    IF lArrayRows == .T.
       IF ValType( aRows ) == "A" .AND. HMG_LEN( aRows ) > 0
          IF ValType( aHeaders ) == "U" .AND. ValType ( aWidths ) == "U"
@@ -730,10 +730,10 @@ PROCEDURE _AddGridColumn ( cControlName , cParentForm , nColIndex , cCaption , n
       nWidth_sum := nWidth_sum + LISTVIEW_GETCOLUMNWIDTH (GetControlHandle (cControlName, cParentForm), k-1)
    NEXT
    IF nWidth_sum > GetProperty (cParentForm, cControlName, "Width")
-      #define SB_HORZ   0
-      #define SB_VERT   1
-      #define SB_CTL    2
-      #define SB_BOTH   3
+#define SB_HORZ   0
+#define SB_VERT   1
+#define SB_CTL    2
+#define SB_BOTH   3
       k := GetScrollRangeMax ( GetControlHandle(cControlName,cParentForm), SB_HORZ )
       SETSCROLLRANGE ( GetControlHandle(cControlName,cParentForm), SB_HORZ, 0, k + LISTVIEW_GETCOLUMNWIDTH (GetControlHandle (cControlName, cParentForm), nColIndex-1), .T. )
       SHOWSCROLLBAR (GetControlHandle(cControlName,cParentForm), SB_HORZ, .T.)
@@ -1008,7 +1008,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
             ON KEY CONTROL+W ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
                ( _HMG_SYSDATA [ 256 ] := .F. ,;
                _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
-            NIL )
+               NIL )
 
             DEFINE BUTTON OK
                row   298
@@ -1017,7 +1017,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
                height   28
                action   IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
                   ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ),;  // ADD V parameter, by Pablo on February, 2015
-               NIL )
+                  NIL )
                picture   'GRID_MSAV'
                tooltip _hmg_sysdata [ 133 ] [ 12 ] + ' [Ctrl+W]'
             END BUTTON
@@ -1036,7 +1036,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
 
             ON KEY RETURN ACTION IIF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
                ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ) ,;  // ADD V parameter, by Pablo on February, 2015
-            NIL )
+               NIL )
 
             ON KEY TAB    ACTION ( _HMG_SYSDATA [ 285 ] := .T. , InsertReturn() )
 
@@ -1044,7 +1044,7 @@ FUNCTION _HMG_GRIDINPLACEEDIT(IDX)
 
          ON KEY F2 ACTION IF ( _ISWINDOWACTIVE ( '_HMG_GRID_InplaceEdit' ),;
             ( _HMG_SYSDATA [ 256 ] := .F. , _HMG_GRIDINPLACEEDITOK( IDX , CI , RI , AEC , ALABELS , CTYPE , CINPUTMASK , CFORMAT , CVA , aReturnValues, V ) ) ,;  // ADD V parameter, by Pablo on February, 2015
-         NIL )
+            NIL )
 
          IF AEC == 'TEXTBOX' //*****************************************
 

@@ -147,11 +147,11 @@ FUNCTION GetColumnForeColor( n )
    CASE 454
       aColor := YELLOW
       EXIT
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    OTHERWISE
-      #else
+#else
       DEFAULT
-      #endif
+#endif
       aColor := BLACK
    ENDSWITCH
 

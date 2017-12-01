@@ -59,9 +59,9 @@ Hikâye : ....
 
 FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
    LOCA cRVal := '',;          //
-   cPict := '',;          // Picture Kalýp Katarý
-   nPInd := 0,;           // Picture indisi
-   nSay9 := 0             // Picture'daki 9 sayýsý
+      cPict := '',;          // Picture Kalýp Katarý
+      nPInd := 0,;           // Picture indisi
+      nSay9 := 0             // Picture'daki 9 sayýsý
 
    nDec  := IF(nDec==NIL,0,nDec)     // nDec 0'sa verilmeyebilir
    ZSpr  := IF(ZSpr==NIL,.T.,ZSpr)  // nVal sýfýrsa boþluða çevir
@@ -101,7 +101,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
             cChr1 := '',;
             nCPos :=  0,;
             cTUpC := "ÇÐIÝÖÞÜâäàåîûôêëèïÄÅÉÆôòùø£áíóúñÑ",; // daha ne'dîm ???
-         cIngC := "CGIIOSUAAAAIUOEEEIAAEAOOUCLAIOUNN"
+            cIngC := "CGIIOSUAAAAIUOEEEIAAEAOOUCLAIOUNN"
          FOR nCInd := 1 TO LEN(cKatar)
             IF !ISALPHA((cChr1 := SUBS(cKatar,nCInd,1)))
                IF (nCPos := AT(cChr1,cTUpC)) > 0
@@ -115,7 +115,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          FUNC Lst2Arr( ;                           // Liste halindeki Katarý Array'a
-            cKatar, ;
+               cKatar, ;
                cDelimiter )
 
             LOCA aRVal  := {},;
@@ -175,7 +175,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
             */
 
             FUNC ExtrcSFS(;                    // Extract String From String
-               cUpStr,cDelmtr)     // Up-String, Delimiter
+                  cUpStr,cDelmtr)     // Up-String, Delimiter
 
                LOCA cRVal := ''
 
@@ -385,9 +385,9 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                               */
 
                               FUNC ExtrcSIS(;                           // Extract String IN String
-                                 cUpStr,;    // Up-String
-                                 cDelm1,;    // Delimiter - 1
-                                 cDelm2)     // Delimiter - 2
+                                    cUpStr,;    // Up-String
+                                    cDelm1,;    // Delimiter - 1
+                                    cDelm2)     // Delimiter - 2
 
                                  LOCA cRVal := '',;
                                     nPos1 :=  0,;
@@ -423,9 +423,9 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                     *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                     FUNC ExOFNFFP( ;              // Extract Only File Name from Full File Path
-                                       cFFName,;      // Full File Name
-                                       lExcExtn,;     // Exclude file extention ( Default : .F. )
-                                       lSqueez )      // Squeez to 11 ( Default : .F. )
+                                          cFFName,;      // Full File Name
+                                          lExcExtn,;     // Exclude file extention ( Default : .F. )
+                                          lSqueez )      // Squeez to 11 ( Default : .F. )
 
                                        LOCA cRVal := cFFName,;
                                           cName := '',;
@@ -458,7 +458,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                        *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                        FUNC ExOPFFFS( ;              // Extract Only Path Name from Full File Specification
-                                          cFFFSpec )     // Full File Specification
+                                             cFFFSpec )     // Full File Specification
 
                                           LOCA cRVal := cFFFSpec
 
@@ -535,9 +535,9 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                          *_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
                                                          FUNC SEVAL(;                              // String Evaluation
-                                                            cSource ,; // Source (String)
-                                                            xRVal ,;   // Return Value ( any type )
-                                                            nStep ,;
+                                                               cSource ,; // Source (String)
+                                                               xRVal ,;   // Return Value ( any type )
+                                                               nStep ,;
                                                                bBlock )   // Code Block tý evaluate
 
                                                             LOCA nSInd  := 0,;
@@ -555,7 +555,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                             *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                             FUNC SubStrng2( ;                         // Sub String defined two position
-                                                               cString,;
+                                                                  cString,;
                                                                   nBegPos,;
                                                                   nEndPos )
 
@@ -572,7 +572,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                6517 : Born while ExprChek.prg
                                                                */
                                                                FUNC ExpL2Arr( ;                           // Expression List to Array
-                                                                  cExpList )
+                                                                     cExpList )
 
                                                                   LOCA aRVal  := {},;
                                                                      c1Char := '',;
@@ -580,10 +580,10 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                      cDelmt := ',',;
                                                                      nPnter :=  0,;
                                                                      nOpBlk :=  0,;             // Open Block Count
-                                                                  cBlBeg := '',;             // Block beginning Char
-                                                                  cBlEnd := '',;             // Block ending Char
-                                                                  cOBMrks := "([{'" + '"',;  // Open block markers
-                                                                  cOEMrks := ")]}'" + '"'    // End of block markers
+                                                                     cBlBeg := '',;             // Block beginning Char
+                                                                     cBlEnd := '',;             // Block ending Char
+                                                                     cOBMrks := "([{'" + '"',;  // Open block markers
+                                                                     cOEMrks := ")]}'" + '"'    // End of block markers
 
                                                                   WHILE !EMPTY( cExpList )
                                                                      c1Char := SUBS( cExpList, ++nPnter, 1 )
@@ -669,7 +669,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                      6517 : Born while ExprChek.prg
                                                                      */
                                                                      FUNC Exp1Chek( ;                          // Syntax Checking on a single expression
-                                                                        c1Exprsn )
+                                                                           c1Exprsn )
 
                                                                         LOCA cRVal   := '',;
                                                                            c1Char  := '',;
@@ -677,8 +677,8 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                            cDelmt  := ',',;
                                                                            nPnter  :=  0,;
                                                                            cBPrnts := "([{'" + '"',;  // Parantesis Begin
-                                                                        cEPrnts := ")]}'" + '"',;  // Parantesis End
-                                                                        cOprtrs := "+-/*,@$&!<>=#",;
+                                                                           cEPrnts := ")]}'" + '"',;  // Parantesis End
+                                                                           cOprtrs := "+-/*,@$&!<>=#",;
                                                                            cVoidEs := '"(' + "'",;
                                                                            c1stChr := '',;
                                                                            aLogics := { "AND", "OR", "NOT"  },;
@@ -765,7 +765,7 @@ FUNC BBTUsing(nVal,nLen,nDec,ZSpr)        // Bir baþka türlü Using
                                                                         *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                                                                         FUNC ExpTChek(;                           // Expression Type Check
-                                                                           cExpression,;
+                                                                              cExpression,;
                                                                               cType )
 
                                                                            LOCA lRVal := ( VALTYPE( &cExpression ) == cType )

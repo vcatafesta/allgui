@@ -59,42 +59,42 @@ PROCEDURE test(nTest)
    CASE nTest = 1
       msginfo( 'return value '+ str( ;
          MsgMenu( "Send file to.."                                      ,; /* [cMessage    ] */
-      {'&Printer','&Fax','Fi&le','C&Drom','&E-mail','Fl&oppy'} ,; /*  aCaptions     */
-      ,; /*  aPictures     */
-      ".\res\print.gif"                                        ,; /* [cBitmap     ] */
-      "Default style"                                          ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      ,; /* [nSizeBmpBtn ] */
-      )                                                 ,; /* [nTimeToExit ] */
-      2,0))
+         {'&Printer','&Fax','Fi&le','C&Drom','&E-mail','Fl&oppy'} ,; /*  aCaptions     */
+         ,; /*  aPictures     */
+         ".\res\print.gif"                                        ,; /* [cBitmap     ] */
+         "Default style"                                          ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         ,; /* [nSizeBmpBtn ] */
+         )                                                 ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 2
       aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp','.\res\Exit.bmp'}
 
       msginfo( 'return value ' + str( ;
          MsgMenu(                                                       ,; /* [cMessage    ] */
-      {'&Printer','&Fax','Fi&le','C&Drom','&E-mail','&Exit' }  ,; /*  aCaptions     */
-      aPic                                                     ,; /*  aPictures     */
-      ,; /* [cBitmap     ] */
-      "Vertical"                                               ,; /* [cTitle      ] */
-      6                                                        ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      "45 can left AST bold"                                   ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      1                                                        ,; /* [nBtnsPorLine] */
-      {   0,240, 30 }                                          ,; /* [aBackColWin ] */
-      { 230,240,250 }                                          ,; /* [aBackColBtn ] */
-      { 255,  0, 50 }                                          ,; /* [aFontColBtn ] */
-      45                                                       ,; /* [nSizeBmpBtn ] */
-      )                                                   ,; /* [nTimeToExit ] */
-      2,0))
+         {'&Printer','&Fax','Fi&le','C&Drom','&E-mail','&Exit' }  ,; /*  aCaptions     */
+         aPic                                                     ,; /*  aPictures     */
+         ,; /* [cBitmap     ] */
+         "Vertical"                                               ,; /* [cTitle      ] */
+         6                                                        ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         "45 can left AST bold"                                   ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         1                                                        ,; /* [nBtnsPorLine] */
+         {   0,240, 30 }                                          ,; /* [aBackColWin ] */
+         { 230,240,250 }                                          ,; /* [aBackColBtn ] */
+         { 255,  0, 50 }                                          ,; /* [aFontColBtn ] */
+         45                                                       ,; /* [nSizeBmpBtn ] */
+         )                                                   ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 3
       aPic := {'.\res\Acept.bmp','.\res\Cancel.bmp'}
@@ -102,42 +102,42 @@ PROCEDURE test(nTest)
 
       msginfo( 'return value '+ str( ;
          MsgMenu( "Make a report ?"    ,; /* [cMessage    ] */
-      {'Accept','Cancel'}     ,; /*  aCaptions     */
-      aPic                    ,; /*  aPictures     */
-      ".\res\Folder.Gif"      ,; /* [cBitmap     ] */
-      "Yes No with bmps"      ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      aTool                   ,; /* [aToolTips   ] */
-      'left EXC'              ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      45                     ,; /* [nSizeBmpBtn ] */
-      )                  ,; /* [nTimeToExit ] */
-      2,0))
+         {'Accept','Cancel'}     ,; /*  aCaptions     */
+         aPic                    ,; /*  aPictures     */
+         ".\res\Folder.Gif"      ,; /* [cBitmap     ] */
+         "Yes No with bmps"      ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         aTool                   ,; /* [aToolTips   ] */
+         'left EXC'              ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         45                     ,; /* [nSizeBmpBtn ] */
+         )                  ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 4
       aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp'}
 
       msginfo( 'return value ' + str( ;
          MsgMenu( "Send file to.."                            ,; /* [cMessage    ] */
-      {'&Printer','&Fax','Fi&le','C&Drom','&E-mail'} ,; /*  aCaptions     */
-      aPic                                           ,; /*  aPictures     */
-      ".\res\ask.gif"                                ,; /* [cBitmap     ] */
-      "Send to:"                                     ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      "EXC"                                          ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      5                                              ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      { 230,240,250 }                                ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      ,; /* [nSizeBmpBtn ] */
-      )                                        ,; /* [nTimeToExit ] */
-      2,0))
+         {'&Printer','&Fax','Fi&le','C&Drom','&E-mail'} ,; /*  aCaptions     */
+         aPic                                           ,; /*  aPictures     */
+         ".\res\ask.gif"                                ,; /* [cBitmap     ] */
+         "Send to:"                                     ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         "EXC"                                          ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         5                                              ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         { 230,240,250 }                                ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         ,; /* [nSizeBmpBtn ] */
+         )                                        ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 5
       aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp','.\res\Exit.bmp'}
@@ -145,41 +145,41 @@ PROCEDURE test(nTest)
       msginfo( 'return value ' + str( ;
          MsgMenu( "Only pictures, no captions" +chr(13)+chr(10)+ "no Icon, no Esc key" +chr(13)+chr(10)+ ;
          "Message multiline, Size buttons=40"   ,; /* [cMessage    ] */
-      ,; /*  aCaptions     */
-      aPic                                      ,; /*  aPictures     */
-      ,; /* [cBitmap     ] */
-      "Send to:"                                ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      "40"                                      ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      6                                         ,; /* [nBtnsPorLine] */
-      { 250,240,230 }                           ,; /* [aBackColWin ] */
-      { 230,240,250 }                           ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      ,; /* [nSizeBmpBtn ] */
-      )                                   ,; /* [nTimeToExit ] */
-      2,0))
+         ,; /*  aCaptions     */
+         aPic                                      ,; /*  aPictures     */
+         ,; /* [cBitmap     ] */
+         "Send to:"                                ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         "40"                                      ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         6                                         ,; /* [nBtnsPorLine] */
+         { 250,240,230 }                           ,; /* [aBackColWin ] */
+         { 230,240,250 }                           ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         ,; /* [nSizeBmpBtn ] */
+         )                                   ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 6
 
       msginfo( 'return value '+ str( ;
          MsgMenu(                              ,; /* [cMessage    ] */
-      {'&Abort','&Retry','Can&cel' }  ,; /*  aCaptions     */
-      ,; /*  aPictures     */
-      ,; /* [cBitmap     ] */
-      "Error sound, flat, bold"       ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      '50 Err flat bold'              ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      {250 ,255, 0  }                 ,; /* [aBackColWin ] */
-      {250 ,  0, 0  }                 ,; /* [aBackColBtn ] */
-      { 0  ,  0, 100}                 ,; /* [aFontColBtn ] */
-      ,; /* [nSizeBmpBtn ] */
-      )                         ,; /* [nTimeToExit ] */
-      2,0))
+         {'&Abort','&Retry','Can&cel' }  ,; /*  aCaptions     */
+         ,; /*  aPictures     */
+         ,; /* [cBitmap     ] */
+         "Error sound, flat, bold"       ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         '50 Err flat bold'              ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         {250 ,255, 0  }                 ,; /* [aBackColWin ] */
+         {250 ,  0, 0  }                 ,; /* [aBackColBtn ] */
+         { 0  ,  0, 100}                 ,; /* [aFontColBtn ] */
+         ,; /* [nSizeBmpBtn ] */
+         )                         ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 7
       aPic := {'.\res\new.bmp','.\res\copy.bmp','.\res\paste.bmp','.\res\cut.bmp','.\res\close.bmp'}
@@ -187,63 +187,63 @@ PROCEDURE test(nTest)
 
       msginfo( 'return value '+ str( ;
          MsgMenu( "Text is at the rigth"                 ,; /* [cMessage    ] */
-      {'&New','&Copy','&Paste','C&ut','Clo&se'} ,; /*  aCaptions     */
-      aPic                                      ,; /*  aPictures     */
-      ".\res\Folder.Gif"                        ,; /* [cBitmap     ] */
-      "Edition"                                 ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      {'New','Copy','Paste','Cut','Close'}      ,; /* [aToolTips   ] */
-      'left cancel ask'                         ,; /* [cStyle      ] */
-      aDis                                      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      40                                       ,; /* [nSizeBmpBtn ] */
-      )                                   ,; /* [nTimeToExit ] */
-      2,0))
+         {'&New','&Copy','&Paste','C&ut','Clo&se'} ,; /*  aCaptions     */
+         aPic                                      ,; /*  aPictures     */
+         ".\res\Folder.Gif"                        ,; /* [cBitmap     ] */
+         "Edition"                                 ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         {'New','Copy','Paste','Cut','Close'}      ,; /* [aToolTips   ] */
+         'left cancel ask'                         ,; /* [cStyle      ] */
+         aDis                                      ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         40                                       ,; /* [nSizeBmpBtn ] */
+         )                                   ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 8
       aPic := {'.\res\new.bmp','.\res\copy.bmp','.\res\paste.bmp','.\res\cut.bmp','.\res\close.bmp'}
 
       msginfo( 'return value '+ str( ;
          MsgMenu( "Text is at the left"              ,; /* [cMessage    ] */
-      {'&New','&Copy','&Paste','C&ut','Clo&se'} ,; /*  aCaptions     */
-      aPic                                  ,; /*  aPictures     */
-      ".\res\Folder.Gif"                    ,; /* [cBitmap     ] */
-      "Edition"                             ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      {'New','Copy','Paste','Cut','Close'}  ,; /* [aToolTips   ] */
-      'lefttext'                            ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      40                                   ,; /* [nSizeBmpBtn ] */
-      )                              ,; /* [nTimeToExit ] */
-      2,0))
+         {'&New','&Copy','&Paste','C&ut','Clo&se'} ,; /*  aCaptions     */
+         aPic                                  ,; /*  aPictures     */
+         ".\res\Folder.Gif"                    ,; /* [cBitmap     ] */
+         "Edition"                             ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         {'New','Copy','Paste','Cut','Close'}  ,; /* [aToolTips   ] */
+         'lefttext'                            ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         40                                   ,; /* [nSizeBmpBtn ] */
+         )                              ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 9
       aPic := {'bold','italic','under','right','left','center'}
 
       msginfo( 'return value '+ str( ;
          MsgMenu( "Gif,Bmp in Rc"      ,; /* [cMessage    ] */
-      ,; /*  aCaptions     */
-      aPic                    ,; /*  aPictures     */
-      "Folder"                ,; /* [cBitmap     ] */
-      "Resources compiled"    ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      3                       ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      50                    ,; /* [nSizeBmpBtn ] */
-      )                 ,; /* [nTimeToExit ] */
-      2,0))
+         ,; /*  aCaptions     */
+         aPic                    ,; /*  aPictures     */
+         "Folder"                ,; /* [cBitmap     ] */
+         "Resources compiled"    ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         3                       ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         50                    ,; /* [nSizeBmpBtn ] */
+         )                 ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 10
       aDisa := { 2 , 4 , 8 , 15 , 24 ,37 , 66 , 77 }
@@ -259,21 +259,21 @@ PROCEDURE test(nTest)
 
       msginfo( 'return value ' + str( ;
          MsgMenu( "Select one .."          ,; /* [cMessage    ] */
-      aBtns                       ,; /*  aCaptions     */
-      aBmp                        ,; /*  aPictures     */
-      ".\res\alert.gif"           ,; /* [cBitmap     ] */
-      "Too much buttons to..."    ,; /* [cTitle      ] */
-      80                          ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      "LEF can ASK"               ,; /* [cStyle      ] */
-      aDisa                       ,; /* [aDisableBtns] */
-      6                           ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      { 240 ,240 ,240 }           ,; /* [aBackColBtn ] */
-      {255 ,100, 0  }             ,; /* [aFontColBtn ] */
-      40                          ,; /* [nSizeBmpBtn ] */
-      )                     ,; /* [nTimeToExit ] */
-      2,0))
+         aBtns                       ,; /*  aCaptions     */
+         aBmp                        ,; /*  aPictures     */
+         ".\res\alert.gif"           ,; /* [cBitmap     ] */
+         "Too much buttons to..."    ,; /* [cTitle      ] */
+         80                          ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         "LEF can ASK"               ,; /* [cStyle      ] */
+         aDisa                       ,; /* [aDisableBtns] */
+         6                           ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         { 240 ,240 ,240 }           ,; /* [aBackColBtn ] */
+         {255 ,100, 0  }             ,; /* [aFontColBtn ] */
+         40                          ,; /* [nSizeBmpBtn ] */
+         )                     ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 11
       aPic := {'.\res\print.bmp','.\res\fax.bmp','.\res\book.bmp','.\res\CDrom.bmp','.\res\mail.bmp' ,;
@@ -284,41 +284,41 @@ PROCEDURE test(nTest)
          "the timer return" +chr(13)+chr(10)+ ;
          "the value of" +chr(13)+chr(10)+ ;
          "focused button"        ,; /* [cMessage    ] */
-      ,; /*  aCaptions     */
-      aPic                       ,; /*  aPictures     */
-      ,; /* [cBitmap     ] */
-      "Timer return value 2"     ,; /* [cTitle      ] */
-      2                          ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      "50"                       ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      2                          ,; /* [nBtnsPorLine] */
-      { 250,240,230 }            ,; /* [aBackColWin ] */
-      { 240,230,220 }            ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      ,; /* [nSizeBmpBtn ] */
-      3     )                    ,; /* [nTimeToExit ] */
-      2,0))
+         ,; /*  aCaptions     */
+         aPic                       ,; /*  aPictures     */
+         ,; /* [cBitmap     ] */
+         "Timer return value 2"     ,; /* [cTitle      ] */
+         2                          ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         "50"                       ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         2                          ,; /* [nBtnsPorLine] */
+         { 250,240,230 }            ,; /* [aBackColWin ] */
+         { 240,230,220 }            ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         ,; /* [nSizeBmpBtn ] */
+         3     )                    ,; /* [nTimeToExit ] */
+         2,0))
 
    CASE nTest = 12
       aPic := {'.\res\Uruguay.bmp','.\res\Spain.bmp','.\res\France.bmp'}
       aCap := {'Uruguay','Spain','France'}
 
       nOpt:=MsgMenu( "My country is...",; /* [cMessage    ] */
-      aCap                 ,; /*  aCaptions     */
-      aPic                 ,; /*  aPictures     */
-      ".\res\Globe.Ani"    ,; /* [cBitmap     ] */
-      "Animate icon"       ,; /* [cTitle      ] */
-      ,; /* [nFocusBtn   ] */
-      ,; /* [aToolTips   ] */
-      ,; /* [cStyle      ] */
-      ,; /* [aDisableBtns] */
-      ,; /* [nBtnsPorLine] */
-      ,; /* [aBackColWin ] */
-      ,; /* [aBackColBtn ] */
-      ,; /* [aFontColBtn ] */
-      40                  ,; /* [nSizeBmpBtn ] */
-      )                  /* [nTimeToExit ] */
+         aCap                 ,; /*  aCaptions     */
+         aPic                 ,; /*  aPictures     */
+         ".\res\Globe.Ani"    ,; /* [cBitmap     ] */
+         "Animate icon"       ,; /* [cTitle      ] */
+         ,; /* [nFocusBtn   ] */
+         ,; /* [aToolTips   ] */
+         ,; /* [cStyle      ] */
+         ,; /* [aDisableBtns] */
+         ,; /* [nBtnsPorLine] */
+         ,; /* [aBackColWin ] */
+         ,; /* [aBackColBtn ] */
+         ,; /* [aFontColBtn ] */
+         40                  ,; /* [nSizeBmpBtn ] */
+         )                  /* [nTimeToExit ] */
 
       msginfo( aCap[nOpt] + " is" + IF( nOpt == 1 , "" , " not" ) + " my country" )
 
@@ -346,24 +346,24 @@ FUNCTION About()
    cAbout += replicate( '-' , 80)
 
    nOpcion := MsgMenu( cAbout           ,; /* [cMessage     ] */
-   {'Email','Ok'}       ,; /*  aCaptions      */
-   aPic                 ,; /*  aPictures      */
-   ,; /* [cBitmap      ] */
-   'About MsgMenu'      ,; /* [cTitle       ] */
-   2                    ,; /* [nFocusBtn    ] */
-   aTips                ,; /* [aToolTips    ] */
-   "can bol leftex exc" ,; /* [cStyle       ] */
-   ,; /* [aDisableBtns ] */
-   ,; /* [nBtnsPorLine ] */
-   { 250,240,230 }      ,; /* [aBackColWin  ] */
-   { 200,230,255 }      ,; /* [aBackColBtn  ] */
-   {  0 ,130, 0  }      ,; /* [aFontColBtn  ] */
-   50                   ,; /* [nSizeBmpBtn  ] */
-   )                    /* [nTimeToExit  ] */
+      {'Email','Ok'}       ,; /*  aCaptions      */
+      aPic                 ,; /*  aPictures      */
+      ,; /* [cBitmap      ] */
+      'About MsgMenu'      ,; /* [cTitle       ] */
+      2                    ,; /* [nFocusBtn    ] */
+      aTips                ,; /* [aToolTips    ] */
+      "can bol leftex exc" ,; /* [cStyle       ] */
+      ,; /* [aDisableBtns ] */
+      ,; /* [nBtnsPorLine ] */
+      { 250,240,230 }      ,; /* [aBackColWin  ] */
+      { 200,230,255 }      ,; /* [aBackColBtn  ] */
+      {  0 ,130, 0  }      ,; /* [aFontColBtn  ] */
+      50                   ,; /* [nSizeBmpBtn  ] */
+      )                    /* [nTimeToExit  ] */
    IF nOpcion == 1
       ShellExecute( 0 , "open", "rundll32.exe", "url.dll,FileProtocolHandler mailto:bcd12a@yahoo.com.ar? &subject=MsgMenu() &body=" , , 1 )
    ENDIF
 
    RETURN NIL
 
-   #include "Msg_menu.Prg"
+#include "Msg_menu.Prg"

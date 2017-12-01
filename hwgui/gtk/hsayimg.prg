@@ -24,7 +24,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD End()  INLINE ( ::Super:End(),iif(::oImage<>Nil,::oImage:Release(),::oImage:=Nil),::oImage := Nil )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
       bSize,ctoolt ) CLASS HSayImage
@@ -66,7 +66,7 @@ CLASS HSayBmp INHERIT HSayImage
 
    METHOD ReplaceBitmap( Image, lRes )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       bSize,ctoolt ) CLASS HSayBmp
@@ -147,7 +147,7 @@ CLASS HSayIcon INHERIT HSayImage
    METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       bSize,ctoolt )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       bSize,ctoolt ) CLASS HSayIcon

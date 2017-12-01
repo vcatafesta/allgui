@@ -32,14 +32,14 @@ PROCEDURE CallsTable
          At 132, 235                ;
          Width 380                  ;
          Height 390                 ;  /* was 350 */
-      Title aLangStrings[ 1, 2 ] ;
+         Title aLangStrings[ 1, 2 ] ;
          Icon 'STOCK'               ;
          Modal                      ;
          On init BuildList()
 
       @ 5, 5 EditBox edtConsole              ;
          Height ( wConsole.Height - 80 ) ;  /* was 40 */
-      Width ( wConsole.Width - 20 )   ;
+         Width ( wConsole.Width - 20 )   ;
          ReadOnly
 
       // GAL added (with what .PRG we're working now?)
@@ -65,7 +65,7 @@ PROCEDURE CallsTable
          At 132, 235                ;
          Width 500                  ;
          Height 380                 ;  /* was 350 */
-      Title aLangStrings[ 1, 2 ] ;
+         Title aLangStrings[ 1, 2 ] ;
          Icon 'STOCK'               ;
          Modal
 
@@ -265,7 +265,7 @@ STATIC FUNCTION FillList( aList )
 
             IF ( "//" $ cString )         // skip endind comments
                cString := iif( At( "//", cString ) > 1, ;
-                  Left( cString, At( "//", cString ) - 1 ), "" )
+               Left( cString, At( "//", cString ) - 1 ), "" )
             ENDIF
 
             cString := AllTrim( cString )
@@ -444,7 +444,7 @@ STATIC FUNCTION ExpHTML( gupar, guheads )
    ? "<HTML>" + CRLF + ;
       "<HEAD>" + CRLF + ;
       iif( guHeads[ 5, 2 ] == "Определена", ;  // for Russian
-   '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">' + CRLF, ;
+      '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">' + CRLF, ;
       "" )
    ? "<TITLE>List of Function Calls (" + ;
       iif( gupar=0, "all", "UNcalled only" ) + ")</TITLE>" + CRLF + ;
@@ -456,9 +456,9 @@ STATIC FUNCTION ExpHTML( gupar, guheads )
       iif( gupar=0, "all", "UNcalled only" ) + ")</center></H2>" + CRLF
    ? "<center>" + CRLF + "<table width=90% border=1 cellspacing=0>" + CRLF
    ? "<tr><th>" + guHeads[ 5, 2 ] + "</th>" + ;            // "Defined"
-   "<th>" + guHeads[ 3, 2 ] + "</th>" + ;            // "Name"
-   "<th>" + guHeads[ 4, 2 ] + "</th>" + ;            // "Type"
-   "<th>" + guHeads[ 6, 2 ] + "</th></tr>" + CRLF    // "Called from"
+      "<th>" + guHeads[ 3, 2 ] + "</th>" + ;            // "Name"
+      "<th>" + guHeads[ 4, 2 ] + "</th>" + ;            // "Type"
+      "<th>" + guHeads[ 6, 2 ] + "</th></tr>" + CRLF    // "Called from"
 
    FOR ii := 1 to len( agugu )
       IF gupar=1    // UNcalled only

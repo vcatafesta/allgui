@@ -74,7 +74,7 @@ FUNCTION printpie
 
    RETURN NIL
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 #pragma BEGINDUMP
 
@@ -84,4 +84,4 @@ HB_FUNC_TRANSLATE( SETDEFAULTPRINTER, WIN_PRINTERSETDEFAULT )
 
 #pragma ENDDUMP
 
-   #endif
+#endif

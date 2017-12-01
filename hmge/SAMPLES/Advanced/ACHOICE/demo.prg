@@ -261,7 +261,7 @@ FUNCTION _achoicelistchanged
 
    RETURN NIL
 
-   #define EM_SETSEL      177
+#define EM_SETSEL      177
 
 FUNCTION textboxeditsetsel(cParent,cControl,nStart,nEnd)
 

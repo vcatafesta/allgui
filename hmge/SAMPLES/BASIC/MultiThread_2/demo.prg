@@ -95,7 +95,7 @@ FUNCTION Main
 
    RETURN NIL
 
-   #define WM_APP 0x8000
+#define WM_APP 0x8000
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
@@ -109,11 +109,11 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
       ENDIF
       EXIT
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       DEFAULT
-      #else
+#else
    OTHERWISE
-      #endif
+#endif
       result := Events( hWnd, nMsg, wParam, lParam )
    END
 

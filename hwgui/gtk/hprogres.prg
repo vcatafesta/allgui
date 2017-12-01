@@ -37,7 +37,7 @@ CLASS VAR winclass   INIT "ProgressBar"
 
    METHOD Close()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,maxPos,nRange,bInit,bSize,bPaint,ctooltip ) CLASS HProgressBar
 

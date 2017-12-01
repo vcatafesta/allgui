@@ -759,7 +759,7 @@ FUNCTION TreeSetLineColor ( ControlName , ParentForm , aColor )
 
    RETURN TreeView_SetLineColor ( nControlHandle , aColor )
 
-   #define TVIS_EXPANDED   32
+#define TVIS_EXPANDED   32
 
 FUNCTION TreeItemIsExpand ( ControlName , ParentForm , nItem )
 

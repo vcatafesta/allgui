@@ -22,8 +22,8 @@ PROCEDURE Determine_The_Portion_Of_The_Picture()
 
    RETURN
 
-   #define SM_MOUSEPRESENT    19
-   #define SM_CMOUSEBUTTONS   43
+#define SM_MOUSEPRESENT    19
+#define SM_CMOUSEBUTTONS   43
 
 FUNCTION IsMousePresent()
 

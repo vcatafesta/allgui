@@ -77,9 +77,9 @@ PROCEDURE MakeMenu()
 
    RETURN
 
-   #define IDYES     1
-   #define IDNO      0
-   #define IDCANCEL -1
+#define IDYES     1
+#define IDNO      0
+#define IDCANCEL -1
 
 FUNCTION lReleaseCheck()
 
@@ -206,11 +206,11 @@ FUNCTION GetTitles( hOwnWnd )
       cTitle := GetWindowText( hWnd )
 
       IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;  // If it is an owner window
-         IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-         hWnd != hOwnWnd .AND.;              // If it is not this app
-         !EMPTY( cTitle ) .AND.;             // If the window has a title
-         !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-         !( cTitle == "Program Manager" )    // If it is not the Program Manager
+            IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+            hWnd != hOwnWnd .AND.;              // If it is not this app
+            !EMPTY( cTitle ) .AND.;             // If the window has a title
+            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+            !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
          AADD( aTasks, { cTitle, hWnd } )
       ENDIF

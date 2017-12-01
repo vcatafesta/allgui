@@ -99,7 +99,7 @@ CLASS TMonthCal FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
       fontsize, tooltip, notoday, notodaycircle, weeknumbers, ;
@@ -308,7 +308,7 @@ CLASS TMonthCalMulti FROM TMonthCal
 
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
       fontsize, tooltip, notoday, notodaycircle, weeknumbers, ;

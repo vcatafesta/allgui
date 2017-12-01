@@ -21,11 +21,11 @@ CLASS TGetBox FROM TControl
    METHOD lValid()
    METHOD VarGet()
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TGetBox:New() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TGetBox:New() Version 7.0
+   * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
       nClrFore, nClrBack, hFont, cControl, cWnd, cMsg,;

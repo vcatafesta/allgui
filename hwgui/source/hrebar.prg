@@ -43,7 +43,7 @@ CLASS hrebar INHERIT HControl
 
    METHOD CreateBands( pBar, pszText, clrFore, clrBack, pbmp, dwStyle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lvert ) CLASS hrebar

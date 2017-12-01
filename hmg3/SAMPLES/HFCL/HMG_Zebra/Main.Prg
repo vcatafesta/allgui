@@ -157,8 +157,8 @@ FUNCTION CreateBarCode
       aBarColor,;
       aBackColor,;
       barcode.checksum.value,;  // checksum
-   barcode.wide2_5.value,;  // wide2_5
-   barcode.wide3.value )  // wide3
+      barcode.wide2_5.value,;  // wide2_5
+      barcode.wide3.value )  // wide3
    IF hBitMap == 0
 
       RETURN NIL
@@ -208,8 +208,8 @@ FUNCTION CreateBarCodepng
       aBarColor,;
       aBackColor,;
       barcode.checksum.value,;  // checksum
-   barcode.wide2_5.value,;  // wide2_5
-   barcode.wide3.value )  // wide3
+      barcode.wide2_5.value,;  // wide2_5
+      barcode.wide3.value )  // wide3
    IF file( cImageFileName )
       _Execute ( GetActiveWindow() , , cImageFileName, , , 5 )
    ENDIF

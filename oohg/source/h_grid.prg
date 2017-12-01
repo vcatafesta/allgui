@@ -241,7 +241,7 @@ CLASS TGrid FROM TControl
    METHOD Up
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aHeaders, aWidths, ;
       aRows, value, fontname, fontsize, tooltip, change, dblclick, ;
@@ -1135,20 +1135,20 @@ METHOD ToExcel( cTitle, nItemFrom, nItemTo, nColFrom, nColTo ) CLASS TGrid
       nColTo := Len( ::aHeaders )
    ENDIF
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( oExcel := win_oleCreateObject( "Excel.Application" ) ) == Nil
       MsgStop( "Error: MS Excel not available. [" + win_oleErrorText()+ "]" )
 
       RETURN Self
    ENDIF
-   #else
+#else
    oExcel := TOleAuto():New( "Excel.Application" )
    IF Ole2TxtError() != "S_OK"
       MsgStop( "Excel not found", "Error" )
 
       RETURN Self
    ENDIF
-   #endif
+#endif
 
    oExcel:WorkBooks:Add()
    oSheet := oExcel:ActiveSheet()
@@ -1211,20 +1211,20 @@ METHOD ToOpenOffice( cTitle, nItemFrom, nItemTo, nColFrom, nColTo ) CLASS TGrid
    ENDIF
 
    // open service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF ( oSerMan := win_oleCreateObject( "com.sun.star.ServiceManager" ) ) == Nil
       MsgStop( "Error: OpenOffice not available. [" + win_oleErrorText()+ "]" )
 
       RETURN Self
    ENDIF
-   #else
+#else
    oSerMan := TOleAuto():New( "com.sun.star.ServiceManager" )
    IF Ole2TxtError() != "S_OK"
       MsgStop( "OpenOffice not found", "Error" )
 
       RETURN Self
    ENDIF
-   #endif
+#endif
 
    // open desktop service
    IF ( oDesk := oSerMan:CreateInstance( "com.sun.star.frame.Desktop" ) ) == Nil
@@ -3828,7 +3828,7 @@ CLASS TGridMulti FROM TGrid
 
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aHeaders, aWidths, ;
       aRows, value, fontname, fontsize, tooltip, change, dblclick, ;
@@ -4043,7 +4043,7 @@ CLASS TGridByCell FROM TGrid
 
    METHOD Value                   SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aHeaders, aWidths, ;
       aRows, value, fontname, fontsize, tooltip, change, dblclick, ;
@@ -5563,7 +5563,7 @@ CLASS TGridControl
 
    METHOD Visible                 SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD CreateWindow( uValue, nRow, nCol, nWidth, nHeight, cFontName, nFontSize, aKeys, oGrid ) CLASS TGridControl
 
@@ -5717,12 +5717,12 @@ CLASS TGridControlTextBox FROM TGridControl
 
    METHOD GridValue
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'TEXTBOX', cType, cPicture, cFunction, nOnFocusPos, lButtons, aImages, lLikeExcel, cEditKey, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'TEXTBOX', cType, cPicture, cFunction, nOnFocusPos, lButtons, aImages, lLikeExcel, cEditKey, lNoModal}
+   */
 
 METHOD New( cPicture, cFunction, cType, nOnFocusPos, lButtons, aImages, oGrid, lLikeExcel, cEditKey, lNoModal ) CLASS TGridControlTextBox
 
@@ -5984,12 +5984,12 @@ CLASS TGridControlTextBoxAction FROM TGridControlTextBox
 
    METHOD CreateControl
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'TEXTBOXACTION', cType, cPicture, cFunction, nOnFocusPos, aImages, lLikeExcel, cEditKey, lNoModal, bAction, bAction2}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'TEXTBOXACTION', cType, cPicture, cFunction, nOnFocusPos, aImages, lLikeExcel, cEditKey, lNoModal, bAction, bAction2}
+   */
 
 METHOD New( cPicture, cFunction, cType, nOnFocusPos, aImages, oGrid, lLikeExcel, cEditKey, lNoModal, bAction, bAction2 ) CLASS TGridControlTextBoxAction
 
@@ -6129,12 +6129,12 @@ CLASS TGridControlMemo FROM TGridControl
 
    METHOD GridValue
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'MEMO', cTitle, lCleanCRLF, nWidth, nHeight, lSize, lNoHScroll}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'MEMO', cTitle, lCleanCRLF, nWidth, nHeight, lSize, lNoHScroll}
+   */
 
 METHOD New( cTitle, lCleanCRLF, oGrid, nWidth, nHeight, lSize, lNoHScroll ) CLASS TGridControlMemo
 
@@ -6281,12 +6281,12 @@ CLASS TGridControlDatePicker FROM TGridControl
 
    METHOD GridValue( uValue ) BLOCK { |Self, uValue| Empty( Self ), DtoC( uValue ) }
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'DATEPICKER', lUpDown, lShowNone, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'DATEPICKER', lUpDown, lShowNone, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( lUpDown, lShowNone, lButtons, aImages, oGrid, lNoModal ) CLASS TGridControlDatePicker
 
@@ -6362,12 +6362,12 @@ CLASS TGridControlComboBox FROM TGridControl
 
    METHOD Refresh
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'COMBOBOX', aItems, aValues, cRetValType, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'COMBOBOX', aItems, aValues, cRetValType, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( aItems, oGrid, aValues, cRetValType, lButtons, aImages, lNoModal ) CLASS TGridControlComboBox
 
@@ -6505,12 +6505,12 @@ CLASS TGridControlComboBoxText FROM TGridControl
 
    METHOD ControlValue            SETGET
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'COMBOBOXTEXT', aItems, lIncremental, lWinSize, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'COMBOBOXTEXT', aItems, lIncremental, lWinSize, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( aItems, oGrid, lIncremental, lWinSize, lButtons, aImages, lNoModal ) CLASS TGridControlComboBoxText
 
@@ -6597,12 +6597,12 @@ CLASS TGridControlSpinner FROM TGridControl
 
    METHOD GridValue( uValue)      BLOCK { |Self, uValue| Empty( Self ), LTrim( Str( uValue ) ) }
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'SPINNER', nRangeMin, nRangeMax, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'SPINNER', nRangeMin, nRangeMax, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( nRangeMin, nRangeMax, lButtons, aImages, oGrid, lNoModal ) CLASS TGridControlSpinner
 
@@ -6657,12 +6657,12 @@ CLASS TGridControlCheckBox FROM TGridControl
 
    METHOD GridValue( uValue )     BLOCK { |Self, uValue| If( uValue, ::cTrue, ::cFalse ) }
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'CHECKBOX', cTrue, cFalse, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'CHECKBOX', cTrue, cFalse, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( cTrue, cFalse, lButtons, aImages, oGrid, lNoModal ) CLASS TGridControlCheckBox
 
@@ -6716,12 +6716,12 @@ CLASS TGridControlImageList FROM TGridControl
 
    METHOD ControlValue            SETGET
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'IMAGELIST', lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'IMAGELIST', lButtons, aImages, lNoModal}
+   */
 
 METHOD New( oGrid, lButtons, aImages, lNoModal ) CLASS TGridControlImageList
 
@@ -6789,12 +6789,12 @@ CLASS TGridControlImageData FROM TGridControl
 
    METHOD Enabled                 SETGET
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'IMAGEDATA', oData, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'IMAGEDATA', oData, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( oGrid, oData, lButtons, aImages, lNoModal ) CLASS TGridControlImageData
 
@@ -6895,12 +6895,12 @@ CLASS TGridControlLComboBox FROM TGridControl
 
    METHOD ControlValue            SETGET
 
-ENDCLASS
+   ENDCLASS
 
-/*
-COLUMNCONTROLS syntax:
-{'LCOMBOBOX', cTrue, cFalse, lButtons, aImages, lNoModal}
-*/
+   /*
+   COLUMNCONTROLS syntax:
+   {'LCOMBOBOX', cTrue, cFalse, lButtons, aImages, lNoModal}
+   */
 
 METHOD New( cTrue, cFalse, lButtons, aImages, oGrid, lNoModal ) CLASS TGridControlLComboBox
 

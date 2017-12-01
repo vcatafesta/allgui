@@ -75,8 +75,8 @@ PROCEDURE Main( lStartUp )
 
    RETURN
 
-   #define HALF_SIZE      173
-   #define FULL_SIZE      287
+#define HALF_SIZE      173
+#define FULL_SIZE      287
 
 STATIC PROCEDURE SetOptions()
 
@@ -494,7 +494,7 @@ STATIC FUNCTION cDaySuffix( nDay )
 
    RETURN IF(nDay = 1, "st", IF(nDay = 2, "nd", IF(nDay = 3, "rd", "th")))
 
-   #define MsgInfo( c, t ) MsgInfo( c, t, , .f. )
+#define MsgInfo( c, t ) MsgInfo( c, t, , .f. )
 
 STATIC FUNCTION MsgAbout()
 
@@ -598,7 +598,7 @@ CLASS TSocket
    VAR nSendTimeout    HIDDEN INIT -1
    VAR nReceiveTimeout HIDDEN INIT -1
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS TSocket
 

@@ -59,10 +59,10 @@ MEMVAR _TSB_aControlhWnd
 PROCEDURE ErrorSys
 
    ErrorBlock( { | oError | DefError( oError ) } )
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    Set( _SET_HBOUTLOG, GetStartUpFolder() + "\error.log" )
    Set( _SET_HBOUTLOGINFO, MiniGUIVersion() )
-   #endif
+#endif
 
    RETURN
 
@@ -180,9 +180,9 @@ STATIC PROCEDURE ShowError( cErrorMessage, oError )
    IF _lShowError
 
       _lShowError := .F.
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
       _TSB_aControlhWnd := {}
-      #endif
+#endif
       MsgStop( iif( _lShowDetailError(), cErrorMessage, ErrorMessage( oError ) ), 'Program Error', NIL, .F. )
 
       ErrorLevel( 1 )
@@ -196,13 +196,13 @@ STATIC PROCEDURE ShowError( cErrorMessage, oError )
 STATIC PROCEDURE ErrorLog( nHandle, oErr )
 
    STATIC _lAddError := .T.
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    LOCAL nCount
 
-   #else
+#else
    LOCAL nScope, nCount, tmp, cName, xValue
 
-   #endif
+#endif
 
    IF _lAddError
 
@@ -222,27 +222,27 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
       Html_LineText( nHandle, "Operating system...: " + OS() )
       Html_LineText( nHandle, "MiniGUI version....: " + MiniGUIVersion() )
       Html_LineText( nHandle, "Harbour version....: " + Version() )
-      #if ( __HARBOUR__ - 0 > 0x030200 )
+#if ( __HARBOUR__ - 0 > 0x030200 )
       Html_LineText( nHandle, "Harbour built on...: " + hb_Version( HB_VERSION_BUILD_DATE_STR ) )
-      #else
+#else
       Html_LineText( nHandle, "Harbour built on...: " + hb_BuildDate() )
-      #endif
+#endif
       Html_LineText( nHandle, "C/C++ compiler.....: " + hb_Compiler() )
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       Html_LineText( nHandle, "Multi Threading....: " + iif( Hb_MultiThread(), "YES", "NO" ) )
       Html_LineText( nHandle, "VM Optimization....: " + strvalue( hb_VMMode() ) )
 
       IF Type( "Select()" ) == "UI" .OR. Type( "Select()" ) == "N"
          Html_LineText( nHandle, "" )
          Html_LineText( nHandle, "Current Work Area..: " + strvalue( &("Select()") ) )
-         #else
+#else
          Html_LineText( nHandle, "Multi Threading....: " + iif( hb_mtvm(), "YES", "NO" ) )
 
          IF hb_IsFunction( "Select" )
             Html_LineText( nHandle, "" )
             Html_LineText( nHandle, "Current Work Area..: " + strvalue( Eval( hb_macroBlock( "Select()" ) ) ) )
-            #endif
+#endif
          ENDIF
 
          Html_LineText( nHandle, "" )
@@ -255,10 +255,10 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          Html_LineText( nHandle, "SET AUTORDER.......: " + strvalue( Set( _SET_AUTORDER ) ) )
          Html_LineText( nHandle, "SET AUTOSHARE......: " + strvalue( Set( _SET_AUTOSHARE ) ) )
 
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          Html_LineText( nHandle, "SET BACKGROUNDTASKS: " + strvalue( Set( _SET_BACKGROUNDTASKS ), .T. ) )
          Html_LineText( nHandle, "SET BACKGROUNDTICK.: " + strvalue( Set( _SET_BACKGROUNDTICK ), .T. ) )
-         #endif
+#endif
          Html_LineText( nHandle, "SET CENTURY........: " + strvalue( __SetCentury(), .T. ) )
          Html_LineText( nHandle, "SET COUNT..........: " + strvalue( Set( _SET_COUNT ) ) )
 
@@ -277,9 +277,9 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          Html_LineText( nHandle, "SET EOL............: " + strvalue( Asc( Set( _SET_EOL ) ) ) )
          Html_LineText( nHandle, "SET EPOCH..........: " + strvalue( Set( _SET_EPOCH ) ) )
          Html_LineText( nHandle, "SET ERRORLOG.......: " + strvalue( _GetErrorlogFile() ) )
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          Html_LineText( nHandle, "SET ERRORLOOP......: " + strvalue( Set( _SET_ERRORLOOP ) ) )
-         #endif
+#endif
          Html_LineText( nHandle, "SET EXACT..........: " + strvalue( Set( _SET_EXACT ), .T. ) )
          Html_LineText( nHandle, "SET EXCLUSIVE......: " + strvalue( Set( _SET_EXCLUSIVE ), .T. ) )
          Html_LineText( nHandle, "SET EXTRA..........: " + strvalue( Set( _SET_EXTRA ), .T. ) )
@@ -300,24 +300,24 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          Html_LineText( nHandle, "SET MFILEEXT.......: " + strvalue( Set( _SET_MFILEEXT ) ) )
 
          Html_LineText( nHandle, "SET OPTIMIZE.......: " + strvalue( Set( _SET_OPTIMIZE ), .T. ) )
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          Html_LineText( nHandle, "SET OUTPUTSAFETY...: " + strvalue( Set( _SET_OUTPUTSAFETY ), .T. ) )
-         #endif
+#endif
 
          Html_LineText( nHandle, "SET PATH...........: " + strvalue( Set( _SET_PATH ) ) )
          Html_LineText( nHandle, "SET PRINTER........: " + strvalue( Set( _SET_PRINTER ), .T. ) )
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          Html_LineText( nHandle, "SET PRINTERJOB.....: " + strvalue( Set( _SET_PRINTERJOB ) ) )
-         #endif
+#endif
          Html_LineText( nHandle, "SET PRINTFILE......: " + strvalue( Set( _SET_PRINTFILE ) ) )
 
          Html_LineText( nHandle, "SET SOFTSEEK.......: " + strvalue( Set( _SET_SOFTSEEK ), .T. ) )
 
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          Html_LineText( nHandle, "SET TRACE..........: " + strvalue( Set( _SET_TRACE ), .T. ) )
          Html_LineText( nHandle, "SET TRACEFILE......: " + strvalue( Set( _SET_TRACEFILE ) ) )
          Html_LineText( nHandle, "SET TRACESTACK.....: " + strvalue( Set( _SET_TRACESTACK ) ) )
-         #endif
+#endif
          Html_LineText( nHandle, "SET TRIMFILENAME...: " + strvalue( Set( _SET_TRIMFILENAME ) ) )
 
          Html_LineText( nHandle, "SET UNIQUE.........: " + strvalue( Set( _SET_UNIQUE ), .T. ) )
@@ -326,7 +326,7 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          Html_LineText( nHandle, PadC( " Detailed Work Area Items ", 79, "-" ) )
          Html_LineText( nHandle, "" )
 
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          IF Type( "Select()" ) == "UI" .OR. Type( "Select()" ) == "N"
             FOR nCount := 1 TO 250
                IF !Empty( ( nCount )->( &("Alias()" ) ) )
@@ -341,7 +341,7 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
                ENDIF
             NEXT
          ENDIF
-         #else
+#else
          hb_WAEval( {||
          IF hb_IsFunction( "Select" )
             Html_LineText( nHandle, "Work Area No ......: " + strvalue( Do( "Select" ) ) )
@@ -368,7 +368,7 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
 
          RETURN .T.
          } )
-         #endif
+#endif
          Html_LineText( nHandle, PadC( " Internal Error Handling Information ", 79, "-" ) )
          Html_LineText( nHandle, "" )
          Html_LineText( nHandle, "Subsystem Call ....: " + oErr:subsystem() )
@@ -379,13 +379,13 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          Html_LineText( nHandle, "Involved File .....: " + oErr:filename() )
          Html_LineText( nHandle, "Dos Error Code ....: " + strvalue( oErr:oscode() ) )
 
-         #ifdef __XHARBOUR__
-         #ifdef HB_THREAD_SUPPORT
+#ifdef __XHARBOUR__
+#ifdef HB_THREAD_SUPPORT
          Html_LineText( nHandle, "Running threads ...: " + strvalue( oErr:RunningThreads() ) )
          Html_LineText( nHandle, "VM thread ID ......: " + strvalue( oErr:VmThreadId() ) )
          Html_LineText( nHandle, "OS thread ID ......: " + strvalue( oErr:OsThreadId() ) )
-         #endif
-         #else
+#endif
+#else
          /* NOTE: Adapted from hb_mvSave() source in Harbour RTL. */
          Html_LineText( nHandle, "" )
          Html_LineText( nHandle, PadC( " Available Memory Variables ", 79, "+" ) )
@@ -404,7 +404,7 @@ STATIC PROCEDURE ErrorLog( nHandle, oErr )
          IF nCount > 0
             Html_LineText( nHandle, "" )
          ENDIF
-         #endif
+#endif
       ENDIF
 
       RETURN
@@ -436,7 +436,7 @@ FUNCTION _lShowDetailError( lNewValue )
 
    RETURN lOldValue
 
-   #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
    *-01-01-2003
    *-Author: Antonio Novo
    *-Create/Open the ErrorLog.Htm file
@@ -543,7 +543,7 @@ PROCEDURE HTML_END( HTMARCH )
 
    RETURN
 
-   #else
+#else
    *-01-01-2003
    *-Author: Antonio Novo
    *-Create/Open the ErrorLog.Htm file
@@ -649,7 +649,7 @@ PROCEDURE HTML_END( HTMARCH )
    ENDIF
 
    RETURN
-   #endif
+#endif
 
    // (JK) HMG 1.0 Build 6
 

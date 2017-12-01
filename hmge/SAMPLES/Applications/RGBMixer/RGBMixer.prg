@@ -257,7 +257,7 @@ STATIC FUNCTION MsgAbout()
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About " + PROGRAM, IDI_MAIN, .f. )
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
    /*
    * Harbour Project source code:
@@ -322,4 +322,4 @@ FUNCTION HexaToDec(cString)
 
    RETURN nNumber
 
-   #endif
+#endif

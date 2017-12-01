@@ -24,11 +24,11 @@ PROCEDURE main()
 
       cMsg := If( :TimedOut(), "Time out!", "Selected button #" + hb_NtoS( :SelectedButton() ) )
 
-      ENDWITH
+   ENDWITH
 
-      MsgInfo( cMsg, "Info" )
+   MsgInfo( cMsg, "Info" )
 
-      RETURN
+   RETURN
 
 STATIC FUNCTION CreateCustomDialog()
 
@@ -49,6 +49,6 @@ STATIC FUNCTION CreateCustomDialog()
       :CommonButtons := hb_bitOr( TDCBF_YES_BUTTON, TDCBF_NO_BUTTON )
       :EnableHyperlinks := .T.
 
-      ENDWITH
+   ENDWITH
 
-      RETURN oDialog
+   RETURN oDialog

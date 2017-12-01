@@ -32,7 +32,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD GetValue()  INLINE ::value := hwg_IsButtonChecked( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor,bGFocus ) CLASS HCheckButton

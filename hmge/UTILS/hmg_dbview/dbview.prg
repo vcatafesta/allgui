@@ -577,11 +577,11 @@ STATIC FUNCTION ModiStru( lNew )
       cDec  := hb_ntos( af0[1,4] )
       af  := dbStruct()
       FOR i := 1 TO Len(af)
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          af[i,5] := i
-         #else
+#else
          Aadd( af[i],i )
-         #endif
+#endif
       NEXT
    ENDIF
 

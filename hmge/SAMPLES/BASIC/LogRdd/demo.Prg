@@ -148,9 +148,9 @@ STATIC FUNCTION MyToString( cTag, cRDDName, cCmd, nWA, xPar1, xPar2, xPar3 )
       cString := Alias() + "->RecNo() = " + hb_ntos( RecNo() ) + " recalled"
    CASE cCmd == "PUTVALUE"
       // Parameters received: xPar1 = nField, xPar2 = xValue, xPar3 = xOldValue
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       HB_SYMBOL_UNUSED( xPar3 ) // Here don't log the previous value
-      #endif
+#endif
       cString := Alias() + "(" + hb_ntos( RecNo() ) + ")->" + PadR( FieldName( xPar1 ), 10 ) + " := " + hb_LogRddValueToText( xPar2 ) + " replaced"
    CASE cCmd == "ZAP"
       // Parameters received: none

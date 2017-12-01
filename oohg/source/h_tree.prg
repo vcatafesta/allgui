@@ -177,7 +177,7 @@ CLASS TTree FROM TControl
 
    METHOD BackColor          SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, row, col, width, height, change, ;
       tooltip, fontname, fontsize, gotfocus, lostfocus, dblclick, ;
@@ -1508,15 +1508,15 @@ METHOD CopyItem( ItemFrom, oTarget, ItemTo, aId ) CLASS TTree
    aItems := {}
 
    aAdd( aItems, { ItemFrom, ;                                                  // Id or Pos of the origin item
-   ::Item( ItemFrom ), ;                                        // value
-   ItemTo, ;                                                     // Id or Pos of the parent
-   if( ::ItemIds, ItemFrom, ::aTreeIdMap[ ItemFrom ] ), ;       // id of the origin item
-   ::ItemImages( ItemFrom ), ;                                  // images
-   ::CheckItem( ItemFrom ), ;                                   // checked
-   ::ItemReadonly( ItemFrom ), ;                                // readonly
-   ::BoldItem( ItemFrom ), ;                                    // bold
-   ! ::ItemEnabled( ItemFrom ), ;                               // disabled
-   ! ::ItemDraggable( ItemFrom ) } )                            // no drag
+      ::Item( ItemFrom ), ;                                        // value
+      ItemTo, ;                                                     // Id or Pos of the parent
+      if( ::ItemIds, ItemFrom, ::aTreeIdMap[ ItemFrom ] ), ;       // id of the origin item
+      ::ItemImages( ItemFrom ), ;                                  // images
+      ::CheckItem( ItemFrom ), ;                                   // checked
+      ::ItemReadonly( ItemFrom ), ;                                // readonly
+      ::BoldItem( ItemFrom ), ;                                    // bold
+      ! ::ItemEnabled( ItemFrom ), ;                               // disabled
+      ! ::ItemDraggable( ItemFrom ) } )                            // no drag
 
    // store it's children
    AddChildren( Self, FromHandle, TreeView_GetChild( ::hWnd, FromHandle ), aItems )
@@ -1619,15 +1619,15 @@ METHOD MoveItem( ItemFrom, oTarget, ItemTo, aId ) CLASS TTree
    aItems := {}
 
    aAdd( aItems, { ItemFrom, ;                                                  // Id or Pos of the origin item
-   ::Item( ItemFrom ), ;                                        // value
-   Nil, ;                                                       // Id or Pos of the parent
-   if( ::ItemIds, ItemFrom, ::aTreeIdMap[ ItemFrom ] ), ;       // id of the new item
-   ::ItemImages( ItemFrom ), ;                                  // images
-   ::CheckItem( ItemFrom ), ;                                   // checked
-   ::ItemReadonly( ItemFrom ), ;                                // readonly
-   ::BoldItem( ItemFrom ), ;                                    // bold
-   ! ::ItemEnabled( ItemFrom ), ;                               // disabled
-   ! ::ItemDraggable( ItemFrom ) } )                            // no drag
+      ::Item( ItemFrom ), ;                                        // value
+      Nil, ;                                                       // Id or Pos of the parent
+      if( ::ItemIds, ItemFrom, ::aTreeIdMap[ ItemFrom ] ), ;       // id of the new item
+      ::ItemImages( ItemFrom ), ;                                  // images
+      ::CheckItem( ItemFrom ), ;                                   // checked
+      ::ItemReadonly( ItemFrom ), ;                                // readonly
+      ::BoldItem( ItemFrom ), ;                                    // bold
+      ! ::ItemEnabled( ItemFrom ), ;                               // disabled
+      ! ::ItemDraggable( ItemFrom ) } )                            // no drag
 
    // store it's children
    AddChildren( Self, FromHandle, TreeView_GetChild( ::hWnd, FromHandle ), aItems )
@@ -1749,7 +1749,7 @@ STATIC FUNCTION AddChildren( Self, ParentHandle, ChildHandle, aItems )
             Self:ItemReadonly( NextItem ), ;
             Self:BoldItem( NextItem ), ;
             ! Self:ItemEnabled( NextItem ), ;                               // disabled
-         ! Self:ItemDraggable( NextItem ) } )                            // no drag
+            ! Self:ItemDraggable( NextItem ) } )                            // no drag
 
          // add sub-children
          AddChildren( Self, NextChild, TreeView_GetChild( Self:hWnd, NextChild ), aItems )

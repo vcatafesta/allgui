@@ -54,7 +54,7 @@
 
 CLASS TTab FROM TTabMulti
 
-ENDCLASS
+   ENDCLASS
 
 CLASS TTabDirect FROM TTabRaw
 
@@ -107,7 +107,7 @@ CLASS TTabDirect FROM TTabRaw
 
    METHOD Picture
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -572,7 +572,7 @@ CLASS TTabCombo FROM TMultiPage
 
    METHOD Define
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -614,7 +614,7 @@ CLASS TTabRadio FROM TMultiPage
 
    METHOD Define
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -660,7 +660,7 @@ CLASS TTabMulti FROM TMultiPage
 
    METHOD AddPage
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -784,7 +784,7 @@ CLASS TMultiPage FROM TControlGroup
 
    METHOD OnRClick                SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, FontColor, BackColor, ;
       FontName, FontSize, bold, italic, underline, strikeout, ;
@@ -1278,7 +1278,7 @@ CLASS TTabRaw FROM TControl
 
    METHOD TabsAreaHeight
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -1457,7 +1457,7 @@ CLASS TTabPage FROM TControlGroup
 
    METHOD AdjustResize
 
-ENDCLASS
+   ENDCLASS
 
 METHOD ContainerVisible() CLASS TTabPage
 
@@ -1522,7 +1522,7 @@ CLASS TTabPageInternal FROM TFormInternal
 
    METHOD SetFocus            BLOCK { |Self| ::Container:SetFocus() , ::Container:Value := ::Position , ::Super:SetFocus() , Self }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm ) CLASS TTabPageInternal
 

@@ -143,7 +143,7 @@ CLASS VAR Screen SHARED
 
    METHOD Paint()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
@@ -293,7 +293,7 @@ CLASS VAR aMessages INIT { ;
 
    METHOD GetMdiActive()  INLINE ::FindWindow( IIF( ::GetMain() != Nil, hwg_Sendmessage( ::GetMain():handle, WM_MDIGETACTIVE, 0, 0 ) , Nil ) )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,   ;
       oFont, bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
@@ -568,7 +568,7 @@ CLASS VAR aMessages INIT { ;
 
    METHOD SetParent( oParent ) INLINE ::oWndParent := oParent
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate, lModal ) CLASS HMDIChildWindow
 
@@ -723,7 +723,7 @@ CLASS HChildWindow INHERIT HWindow
 
    METHOD onEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
       bInit, bExit, bSize, bPaint, bGfocus, bLfocus, bOther, ;
@@ -857,7 +857,7 @@ FUNCTION hwg_ReleaseAllWindows( hWnd )
 
    RETURN - 1
 
-   #define  FLAG_CHECK      2
+#define  FLAG_CHECK      2
 
 STATIC FUNCTION onCommand( oWnd, wParam, lParam )
 

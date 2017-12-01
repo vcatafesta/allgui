@@ -25,9 +25,9 @@ History : July 2010; 1.st release
 */
 
 FUNC ACOUNT( ;                            // Count from an array.
-   aArry2Count ,;
+      aArry2Count ,;
       nFORColNo ,;  // For clause indise
-   bFORClaus )   // For clause block
+      bFORClaus )   // For clause block
 
    LOCAL l2Dim  := HB_ISARRAY( aArry2Count[ 1 ] ),;
       nIndis :=  0,;
@@ -73,10 +73,10 @@ FUNC ACOUNT( ;                            // Count from an array.
    */
 
    FUNC ASUM( ;                              // sum value(s) from an array.
-      aArry2Sum ,;
+         aArry2Sum ,;
          xFields,;     // Fields (columns) to sum
-      nFORColNo ,;  // For clause indise
-      bFORClaus )   // For clause block
+         nFORColNo ,;  // For clause indise
+         bFORClaus )   // For clause block
 
       LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ),;
          a1     := {},;
@@ -146,14 +146,14 @@ FUNC ACOUNT( ;                            // Count from an array.
       FUNC AAVERAGE( ;
             aArry2Sum ,;
             xFields,;     // Fields (columns) to sum
-         nFORColNo ,;  // For clause indise
-         bFORClaus )   // For clause block
+            nFORColNo ,;  // For clause indise
+            bFORClaus )   // For clause block
 
          LOCAL l2Dim  := HB_ISARRAY( aArry2Sum[ 1 ] ),;
             a1     := {},;
             nIndis :=  0,;
             nRowCo :=  0,;  // Row count to average
-         xRVal
+            xRVal
 
          IF HB_ISNIL( xFields )
             IF l2Dim
@@ -219,10 +219,10 @@ FUNC ACOUNT( ;                            // Count from an array.
          FUNC ATOTAL( ;
                aArry2Total ,;
                xFields,;     // Fields (columns) to sum
-            nONColNo ,;   // ON clause indise
-            bONClaus ,;   // ON clause block
-            nFORColNo ,;  // FOR clause indise
-            bFORClaus )   // FOR clause codeblock
+               nONColNo ,;   // ON clause indise
+               bONClaus ,;   // ON clause block
+               nFORColNo ,;  // FOR clause indise
+               bFORClaus )   // FOR clause codeblock
 
             LOCAL l2Dim  := HB_ISARRAY( aArry2Total[ 1 ] ),;
                a1     := {},;

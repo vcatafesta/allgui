@@ -66,7 +66,7 @@ CLASS TTimer FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, Interval, ProcedureName, lDisabled ) CLASS TTimer
 

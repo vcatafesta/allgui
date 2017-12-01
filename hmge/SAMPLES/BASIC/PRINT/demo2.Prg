@@ -114,13 +114,13 @@ FUNCTION _Print_My_Job(xPaper)
          ORIENTATION Main.RadioGroup_1.Value;
          PAPERSIZE xPaper[Main.Combo_Papers.Value];
          DEFAULTSOURCE PRINTER_BIN_AUTO;               // Select your own Paper Source
-      QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
+         QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
    ELSE
       SELECT PRINTER wPrinter TO lSuccess PREVIEW;
          ORIENTATION Main.RadioGroup_1.Value;
          PAPERSIZE xPaper[Main.Combo_Papers.Value];
          DEFAULTSOURCE PRINTER_BIN_AUTO;               // Select your own Paper Source
-      QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
+         QUALITY PRINTER_RES_MEDIUM                  // Select your own print quality
    ENDIF
 
    IF lSuccess == .F.

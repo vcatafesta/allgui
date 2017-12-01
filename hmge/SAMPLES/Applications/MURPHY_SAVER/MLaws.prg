@@ -314,13 +314,13 @@ FUNCTION MsgAbout()
    Donated to the public domain on 2001-04-03 by David G. Holm <dholm@jsd-llc.com>
    */
 
-   #define oF_ERROR_MIN          1
-   #define oF_CREATE_OBJECT      1
-   #define oF_OPEN_FILE          2
-   #define oF_READ_FILE          3
-   #define oF_CLOSE_FILE         4
-   #define oF_ERROR_MAX          4
-   #define oF_DEFAULT_READ_SIZE  4096
+#define oF_ERROR_MIN          1
+#define oF_CREATE_OBJECT      1
+#define oF_OPEN_FILE          2
+#define oF_READ_FILE          3
+#define oF_CLOSE_FILE         4
+#define oF_ERROR_MAX          4
+#define oF_DEFAULT_READ_SIZE  4096
 
 FUNCTION TFileRead()
 

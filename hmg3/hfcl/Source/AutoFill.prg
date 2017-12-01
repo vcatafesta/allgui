@@ -13,9 +13,9 @@ Enhanced by Roberto Lopez and Rathinagiri
 */        #include "hmg.ch"
 
 PROC AutoFill( ;              // Auto filling text box
-   aList,;       // Items list
-   nCaller,;     // NIL : OnChange, 1: UP, 2: Down
-   cControlName )
+      aList,;       // Items list
+      nCaller,;     // NIL : OnChange, 1: UP, 2: Down
+      cControlName )
 
    STATIC cLastVal := '',;
       n1Result := 0
@@ -23,8 +23,8 @@ PROC AutoFill( ;              // Auto filling text box
    LOCAL  cFrmName := '',;
       cTxBname := '',;
       cTxBValue := '',;     // Text Box Value
-   nCarePos  := 0,;  // Text Box CaretPos
-   cCurval   := ''
+      nCarePos  := 0,;  // Text Box CaretPos
+      cCurval   := ''
 
    cFrmName := thiswindow.name
    IF pcount() == 3

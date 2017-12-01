@@ -203,8 +203,8 @@ FUNCTION SetDefault(nI)
 
    RETURN PrnSetDefault( aAllPrinters[nI][1], aAllPrinters[nI][2] )
 
-   #define HWND_BROADCAST (-1)
-   #define WM_WININICHANGE           26    // 0x001A
+#define HWND_BROADCAST (-1)
+#define WM_WININICHANGE           26    // 0x001A
 
 PROCEDURE PrnSetDefault( cName, cPort )
 
@@ -254,8 +254,8 @@ FUNCTION GetDefPrinter()
       GETREGVAR( HKEY_CURRENT_CONFIG, ;
       "System\CurrentControlSet\Control\Print\Printers", "Default" ) )
 
-   #define WM_SYSCOMMAND   274
-   #define SC_CLOSE   61536
+#define WM_SYSCOMMAND   274
+#define SC_CLOSE   61536
 
 FUNCTION _ReleaseWindow (FormName)
 

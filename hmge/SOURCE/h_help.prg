@@ -200,12 +200,12 @@ FUNCTION HMG_ArrayToDBF( aData, cFieldList, bProgress )
 
    RETURN .T.
 
-   #ifdef __XHARBOUR__
-   #include "hbcompat.ch"
-   #else
-   #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
-   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-   #endif
+#ifdef __XHARBOUR__
+#include "hbcompat.ch"
+#else
+#xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
+#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+#endif
 
 STATIC FUNCTION ConvertType( uVal, cTypeDst )
 

@@ -82,4 +82,4 @@ STATIC FUNCTION MsgAbout()
       SubStr(MiniGuiVersion(), 1, 38) + CRLF + CRLF, ;
       "Acerca de ..." ) )
 
-   #include "H_V_CRS.PRG"
+#include "H_V_CRS.PRG"

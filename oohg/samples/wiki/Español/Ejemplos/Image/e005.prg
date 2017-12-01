@@ -31,7 +31,7 @@ FUNCTION Main
          HEIGHT 200 ;
          NORESIZE ;
          PICTURE "oohg.jpg" ;   // 95 x 95
-      ON CLICK AutoMsgBox("Image2") ;
+         ON CLICK AutoMsgBox("Image2") ;
          TOOLTIP "Soy oImage2, haz clic sobre mi." ;
          TRANSPARENT  // Esta cláusula es necesaria
       /*

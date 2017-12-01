@@ -293,7 +293,7 @@ FUNCTION EpiphanySunday(dDate)
 
    // MULTI-MESSAGE CONTRIBUTION taken from HMG Community //
 
-   #define NTrim( n ) LTRIM( STR( n, IF( n == INT( n ), 0, 2 ) ))
+#define NTrim( n ) LTRIM( STR( n, IF( n == INT( n ), 0, 2 ) ))
 
 FUNCTION Convert2String( xParam )
 

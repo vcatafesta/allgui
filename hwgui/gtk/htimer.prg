@@ -25,7 +25,7 @@ CLASS VAR aTimers   INIT {}
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oParent, nId, value, bAction ) CLASS HTimer
 

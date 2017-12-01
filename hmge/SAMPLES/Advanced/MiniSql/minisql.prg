@@ -70,7 +70,7 @@ PROCEDURE SqlErrorCheck ( nHandle )
 
    RETURN
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 #pragma BEGINDUMP
 
@@ -103,4 +103,4 @@ HB_FUNC_EXTERN( MYSQL_ESCAPE_STRING_FROM_FILE ); HB_FUNC( FILETOSQLBINARY ) { HB
 
 #pragma ENDDUMP
 
-   #endif
+#endif

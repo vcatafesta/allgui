@@ -128,11 +128,11 @@ STATIC PROCEDURE _EraseGifDef ( FormName, i )
    mVar := '_' + FormName + '_' + _HMG_aControlNames [i]
 
    IF __mvExist( mVar )
-      #ifndef _PUBLIC_RELEASE_
+#ifndef _PUBLIC_RELEASE_
       __mvPut( mVar, 0 )
-      #else
+#else
       __mvXRelease( mVar )
-      #endif
+#endif
    ENDIF
 
    _HMG_aControlDeleted        [i] := .T.
@@ -178,7 +178,7 @@ STATIC PROCEDURE _EraseGifDef ( FormName, i )
 
    RETURN
 
-   #include "hbclass.ch"
+#include "hbclass.ch"
 
 CLASS TGif
 
@@ -217,7 +217,7 @@ CLASS TGif
    METHOD DestroyGif( cControlName, cParentName )
    METHOD End() INLINE ::DestroyGif( ::hGif, ::cParentName )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlName, cParentName ) CLASS TGif
 
@@ -408,13 +408,13 @@ STATIC FUNCTION GifIsRunning( cControlName, cParentName )
    * Author: P.Chornyj <myorg63@mail.ru>
    */
 
-   #include "fileio.ch"
+#include "fileio.ch"
 
-   #ifndef __XHARBOUR__
-   #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
-   #endif
+#ifndef __XHARBOUR__
+#xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
+#endif
 
-   #define Alert( c ) MsgExclamation( c, "LoadGif", , .f. )
+#define Alert( c ) MsgExclamation( c, "LoadGif", , .f. )
 
    /*
    */
@@ -470,9 +470,9 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
          cFile := path + "\" + cFileNoExt( GIF ) + "_frame_" + StrZero( nImgCount, 4 ) + ".gif"
          nFileHandle := FCreate( cFile, FC_NORMAL )
          IF FError() <> 0
-            #ifdef _DEBUG_
+#ifdef _DEBUG_
             Alert( "Error while creating a temp file:" + Str( FError() ) )
-            #endif
+#endif
 
             RETURN FALSE
          ENDIF
@@ -481,17 +481,17 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
          imgHeader = Left( SubStr ( cStream, i -1, j - i ), 16 )
 
          IF FWrite( nFileHandle, cPicBuf ) <> Len( cPicBuf )
-            #ifdef _DEBUG_
+#ifdef _DEBUG_
             Alert( "Error while writing a file:" + Str( FError() ) )
-            #endif
+#endif
 
             RETURN FALSE
          ENDIF
 
          IF .NOT. FClose( nFileHandle )
-            #ifdef _DEBUG_
+#ifdef _DEBUG_
             Alert( "Error while closing a file:" + Str( FError() ) )
-            #endif
+#endif
 
             RETURN FALSE
          ENDIF
@@ -516,9 +516,9 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       cFile := path + "\" + cFileNoExt( GIF ) + "_frame_" + StrZero( nImgCount, 4 ) + ".gif"
       nFileHandle := FCreate( cFile, FC_NORMAL )
       IF FError() <> 0
-         #ifdef _DEBUG_
+#ifdef _DEBUG_
          Alert( "Error while creating a temp file:" + Str( FError() ) )
-         #endif
+#endif
 
          RETURN FALSE
       ENDIF
@@ -527,17 +527,17 @@ FUNCTION LoadGif( GIF, aGifInfo, aFrames, aImgInfo, path )
       imgHeader := Left( SubStr( cStream, i -1, Len( cStream ) - i ), 16 )
 
       IF FWrite( nFileHandle, cPicBuf ) <> Len( cPicBuf )
-         #ifdef _DEBUG_
+#ifdef _DEBUG_
          Alert( "Error while writing a file:" + Str( FError() ) )
-         #endif
+#endif
 
          RETURN FALSE
       ENDIF
 
       IF .NOT. FClose( nFileHandle )
-         #ifdef _DEBUG_
+#ifdef _DEBUG_
          Alert( "Error while closing a file:" + Str( FError() ) )
-         #endif
+#endif
 
          RETURN FALSE
       ENDIF

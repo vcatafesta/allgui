@@ -93,7 +93,7 @@ STATIC FUNCTION MsgAbout()
    RETURN MsgInfo( "Flash Player Version " + GetPlayerVersion() + CRLF + CRLF + ;
       "Using Flash Player from Adobe Inc." + CRLF + ;
       "http://www.adobe.com" + CRLF + CRLF + ;
-      "Thank you, Adobe!", "About", , .f. )
+   "Thank you, Adobe!", "About", , .f. )
 
 STATIC FUNCTION GetPlayerVersion()
 

@@ -254,7 +254,7 @@ CLASS RichText
    HIDDEN:
    DATA nFile INIT 1
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nScale, aHigh ) CLASS RichText
 
@@ -699,7 +699,7 @@ METHOD DefineTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
       nTblColumns TO 1, ;
       nTblRHgt TO NIL, ;
       aTableCWid  TO  Array( nTblColumns ), ; // see below
-   cRowBorder  TO  "NONE", ;
+      cRowBorder  TO  "NONE", ;
       cCellBorder  TO  "SINGLE", ;
       lTblNoSplit  TO  .F., ;
       nCellPct  TO  0, ;
@@ -1729,7 +1729,7 @@ METHOD DefNewTable( cTblHAlign, nTblFntNum, nTblFntSize, ;
       nTblColumns TO  1, ;
       nTblRHgt  TO  NIL, ;
       aTableCWid  TO  Array( nTblColumns ), ; // see below
-   cRowBorder  TO  "NONE", ;
+      cRowBorder  TO  "NONE", ;
       cCellBorder  TO  "SINGLE", ;
       lTblNoSplit  TO  .F., ;
       nCellPct  TO  0, ;
@@ -2267,7 +2267,7 @@ FUNCTION cFileExt( cFile )
 
    RETURN SubStr( cFile, At( '.', cFile ) + 1 )
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 STATIC FUNCTION CStr( xExp )
 
@@ -2304,13 +2304,13 @@ STATIC FUNCTION CStr( xExp )
 
       RETURN "{ " + xExp:ClassName() + " Object }"
    CASE cType == 'P'
-      #if defined( __XHARBOUR__ )
+#if defined( __XHARBOUR__ )
 
       RETURN NumToHex( xExp )
-      #else
+#else
 
       RETURN hb_NumToHex( xExp )
-      #endif
+#endif
    CASE cType == 'H'
 
       RETURN "{ Hash of " +  LTrim( Str( Len( xExp ) ) ) + " Items }"
@@ -2320,4 +2320,4 @@ STATIC FUNCTION CStr( xExp )
    ENDCASE
 
    RETURN ""
-   #endif
+#endif

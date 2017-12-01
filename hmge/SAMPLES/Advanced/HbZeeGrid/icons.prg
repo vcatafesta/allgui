@@ -85,7 +85,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    RETURN result
 
-   #translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
+#translate ICELL( <row>, <col> ) => zgm_GetCellIndex( h, <row>, <col> )
 
 PROCEDURE Grid_OnInit( h )
 

@@ -1020,7 +1020,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                            MoveWindow ( _HMG_SYSDATA [3] [x] [1]   , _HMG_SYSDATA [ 19 ] [x] - NewHPos            , _HMG_SYSDATA [ 18 ] [x] - NewPos , _HMG_SYSDATA [ 20 ] [x] - GetWindowWidth(_HMG_SYSDATA [3] [x] [2] )+1   , _HMG_SYSDATA [ 21 ] [x] , .t. )
                            MoveWindow ( _HMG_SYSDATA [3] [x] [2]   , _HMG_SYSDATA [ 19 ] [x] + _HMG_SYSDATA [ 20 ] [x] - GetWindowWidth(_HMG_SYSDATA [3] [x] [2] ) - NewHPos , _HMG_SYSDATA [ 18 ] [x] - NewPos , GetWindowWidth(_HMG_SYSDATA [3] [x] [2] )         , _HMG_SYSDATA [ 21 ] [x] , .t. )
 
-                           #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
                         ELSEIF _HMG_SYSDATA [1] [x] == 'BROWSE'
 
@@ -1029,7 +1029,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                            MoveWindow ( _HMG_SYSDATA [ 39 ] [x] [1]   , _HMG_SYSDATA [ 19 ] [x] + _HMG_SYSDATA [ 20 ] [x] - GETVSCROLLBARWIDTH()  - NewHPos   , _HMG_SYSDATA [ 18 ] [x] +_HMG_SYSDATA [ 21 ] [x] - GetHScrollBarHeight () - NewPos ,GetWindowWidth(_HMG_SYSDATA [ 39 ] [x][1])   , GetWindowHeight(_HMG_SYSDATA [ 39 ] [x][1])  , .t. )
                            ReDrawWindow ( _HMG_SYSDATA [3] [x] )
 
-                           #endif
+#endif
 
                         ELSEIF _HMG_SYSDATA [1] [x] == 'RADIOGROUP'
 
@@ -1093,7 +1093,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
          IF i > 0
 
-            #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
             IF _HMG_SYSDATA [1] [i] == 'BROWSE'
 
@@ -1171,7 +1171,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             ENDIF
 
-            #endif
+#endif
 
          ENDIF
 
@@ -1307,7 +1307,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                            MoveWindow ( _HMG_SYSDATA [3] [x] [1]   , _HMG_SYSDATA [ 19 ] [x] - NewHPos            , _HMG_SYSDATA [ 18 ] [x] - NewVPos , _HMG_SYSDATA [ 20 ] [x] - GetWindowWidth(_HMG_SYSDATA [3] [x] [2] )+1   , _HMG_SYSDATA [ 21 ] [x] , .t. )
                            MoveWindow ( _HMG_SYSDATA [3] [x] [2]   , _HMG_SYSDATA [ 19 ] [x] + _HMG_SYSDATA [ 20 ] [x] - GetWindowWidth(_HMG_SYSDATA [3] [x] [2] ) - NewHPos   , _HMG_SYSDATA [ 18 ] [x] - NewVPos , GetWindowWidth(_HMG_SYSDATA [3] [x] [2] ) , _HMG_SYSDATA [ 21 ] [x] , .t. )
 
-                           #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
                         ELSEIF _HMG_SYSDATA [1] [x] == 'BROWSE'
 
@@ -1316,7 +1316,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                            MoveWindow ( _HMG_SYSDATA [ 39 ] [x] [1]   , _HMG_SYSDATA [ 19 ] [x] + _HMG_SYSDATA [ 20 ] [x] - GETVSCROLLBARWIDTH() - NewHPos   , _HMG_SYSDATA [ 18 ] [x] +_HMG_SYSDATA [ 21 ][x] - GethScrollBarHeight() - NewVPos , GetWindowWidth(_HMG_SYSDATA [ 39 ] [x] [1])         , GetWindowHeight (_HMG_SYSDATA [ 39 ] [x][1]) , .t. )
                            ReDrawWindow ( _HMG_SYSDATA [3] [x] )
 
-                           #endif
+#endif
 
                         ELSEIF _HMG_SYSDATA [1] [x] == 'RADIOGROUP'
 
@@ -1526,7 +1526,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
       CASE nMsg == WM_SIZE
 
-         #if 0
+#if 0
 
          // REMOVE3
          /*
@@ -1579,7 +1579,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
          EndIf
          Next
          */
-         #else
+#else
 
          ControlCount := HMG_LEN ( _HMG_SYSDATA [ 3 ] )
 
@@ -1607,7 +1607,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
             ENDIF
 
             IF _HMG_SYSDATA [ 263 ] == .T.  .OR. ;   // _HMG_MainActive
-               _HMG_SYSDATA [ 68 ] [ i ] == .T.      // _HMG_aFormActive
+                  _HMG_SYSDATA [ 68 ] [ i ] == .T.      // _HMG_aFormActive
 
                IF wParam == SIZE_MAXIMIZED
                   _DoWindowEventProcedure ( _HMG_SYSDATA [ 103 ]  [i] , i , '' )   // On Maximize
@@ -1624,7 +1624,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
          ENDIF
 
-         #endif
+#endif
 
       CASE nMsg == WM_COMMAND
 
@@ -2094,7 +2094,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             * Browse Enter ..........................................
 
-            #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
             IF _HMG_SYSDATA [1] [i] = "BROWSE" .and. lparam == 0 .and. wparam == 1
 
@@ -2108,7 +2108,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             ENDIF
 
-            #endif
+#endif
 
             * Grid Enter ..........................................
 
@@ -2311,7 +2311,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             * Process Browse .....................................
 
-            #ifdef COMPILEBROWSE
+#ifdef COMPILEBROWSE
 
             IF (_HMG_SYSDATA [1] [i] = "BROWSE")
 
@@ -2613,7 +2613,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             ENDIF
 
-            #endif
+#endif
 
             * ToolBar DropDown Button Click .......................
 
@@ -2854,9 +2854,9 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      CASE GetGridvKey (lParam) == 83 // S
                         IF GetAltState() == -127 .or. GetAltState() == -128   // ALT
                            IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
-                              _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
-                              _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                              ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                                 _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
+                                 _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
+                                 ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
                               DataGridSave(i)
                            ENDIF
                         ELSE
@@ -2866,9 +2866,9 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                      CASE GetGridvKey (lParam) == 85 // U
                         IF GetAltState() == -127 .or. GetAltState() == -128   // ALT
                            IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
-                              _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
-                              _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                              ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                                 _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
+                                 _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
+                                 ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
                               DataGridClearBuffer(i)
                            ENDIF
                         ELSE
@@ -3039,8 +3039,8 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                IF GetNotifyCode ( lParam ) = LVN_ITEMCHANGED
 
                   //   OnCheckBoxClicked   (by Dr. Claudio Soto, December 2014)
-                  #define LVIS_UNCHECKED 0x1000
-                  #define LVIS_CHECKED   0x2000
+#define LVIS_UNCHECKED 0x1000
+#define LVIS_CHECKED   0x2000
                   IF GetGridNewState(lParam) == LVIS_UNCHECKED .OR. GetGridNewState(lParam) == LVIS_CHECKED
                      xTemp := { NIL, NIL }
                      xTemp[1] := _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 1 ]   // This.CellRowClicked
@@ -3356,8 +3356,8 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                IF GetNotifyCode (lParam) == NM_CUSTOMDRAW
 
                   IF ValType (_HMG_SYSDATA [40] [i] [1]) == "B" .OR. ;   // DynamicBackColor
-                     ValType (_HMG_SYSDATA [40] [i] [2]) == "B" .OR. ;   // DynamicForeColor
-                     ValType (_HMG_SYSDATA [40] [i] [3]) == "B"          // DynamicFont
+                        ValType (_HMG_SYSDATA [40] [i] [2]) == "B" .OR. ;   // DynamicForeColor
+                        ValType (_HMG_SYSDATA [40] [i] [3]) == "B"          // DynamicFont
 
                      SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
 
@@ -3454,7 +3454,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                ENDIF
                _hmg_OnHideFocusManagement(i)
 
-               #ifdef ALLOW_ONLY_ONE_MESSAGE_LOOP
+#ifdef ALLOW_ONLY_ONE_MESSAGE_LOOP
                // DestroyWindow(hWnd): Destroys the specified window.
                // The function sends WM_DESTROY and WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus from it.
                // The function also destroys the window's MENU, flushes the thread MESSAGE QUEUE, destroys TIMERS, removes CLIPBOARD ownership,
@@ -3464,7 +3464,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                // DestroyWindow also destroys MODELESS DIALOG BOXES created by the CreateDialog function.
 
                DestroyWindow ( _HMG_SYSDATA [ 67 ] [i] )   // _HMG_aFormHandles
-               #endif
+#endif
             ENDIF
 
          ENDIF
@@ -3500,7 +3500,7 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
 
             Tmp := NIL   // avoid warning message: defined variable but not used (need only ALLOW_ONLY_ONE_MESSAGE_LOOP is defined)
 
-            #ifndef ALLOW_ONLY_ONE_MESSAGE_LOOP
+#ifndef ALLOW_ONLY_ONE_MESSAGE_LOOP
 
             * If Window Was Multi-Activated, Determine If It Is The Last One.
             * If Yes, Post Quit Message To Finish The Message Loop
@@ -3522,13 +3522,13 @@ FUNCTION Events ( hWnd, nMsg, wParam, lParam )
                PostQuitMessage(0)
             ENDIF
 
-            #endif
+#endif
 
-            #ifdef ALLOW_ONLY_ONE_MESSAGE_LOOP
+#ifdef ALLOW_ONLY_ONE_MESSAGE_LOOP
             IF _HMG_SYSDATA [ 69 ] [i] == "A"   // Main Window
                PostQuitMessage(0)
             ENDIF
-            #endif
+#endif
 
             _HMG_SYSDATA [ 65 ] [i]   := .T.
             _HMG_SYSDATA [ 67 ] [i]   := 0

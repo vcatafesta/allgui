@@ -66,8 +66,8 @@ PROCEDURE Main()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.
 
 PROCEDURE AutoFill( ;        // Auto filling text box
-   aList,;      // Items list
-   nCaller )    // NIL : OnChange, 1: UP, 2: Down
+      aList,;      // Items list
+      nCaller )    // NIL : OnChange, 1: UP, 2: Down
 
    STATIC cLastVal := '',;
       n1Result := 0
@@ -75,8 +75,8 @@ PROCEDURE AutoFill( ;        // Auto filling text box
    LOCAL  cFrmName,;
       cTxBname,;
       cTxBValue,;        // Text Box Value
-   nCarePos,;         // Text Box CaretPos
-   cCurval := ''
+      nCarePos,;         // Text Box CaretPos
+      cCurval := ''
 
    cFrmName := thiswindow.name
    cTxBName := this.focusedcontrol

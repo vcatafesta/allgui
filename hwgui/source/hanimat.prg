@@ -38,7 +38,7 @@ CLASS VAR winclass   INIT "SysAnimate32"
 
    METHOD End() INLINE ::Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cFilename, lAutoPlay, lCenter, lTransparent, xResID ) CLASS HAnimation

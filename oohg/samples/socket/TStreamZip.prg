@@ -48,7 +48,7 @@ CLASS TStreamUnZip FROM TStreamBase
 
    // METHOD Write         INLINE 0   // No WRITE method.
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oStream ) CLASS TStreamUnZip
 

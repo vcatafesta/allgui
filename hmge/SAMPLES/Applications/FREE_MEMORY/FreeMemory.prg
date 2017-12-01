@@ -134,9 +134,9 @@ PROCEDURE Main( lStartUp )
 
 STATIC PROCEDURE OnClosePrg()
 
-   #ifdef PRO
+#ifdef PRO
    Ferase(cRunFile)
-   #endif
+#endif
    EndCpu()
 
    RETURN
@@ -966,19 +966,19 @@ STATIC PROCEDURE MemRecovery( cCommand )
       ENDIF
 
       IF !FILE( cRunFile )
-         #ifdef PRO
+#ifdef PRO
          MkFile( cRunFile )
-         #else
+#else
          MsgStop( cRunFile + ' is not found', 'Stop!', , .F. )
-         #endif
+#endif
       ENDIF
 
       IF FILE( cRunFile )
-         #ifdef PRO
+#ifdef PRO
          EXECUTE FILE cCommand WAIT HIDE
-         #else
+#else
          EXECUTE FILE cCommand WAIT MINIMIZE
-         #endif
+#endif
          DO EVENTS
       ENDIF
 

@@ -54,7 +54,7 @@ PROCEDURE Main()
       n2Type := 1
 
    LOCAL nMColumn :=  0, ;    // Menu Column No
-   nMRow    :=  0          // Menu Row No
+      nMRow    :=  0          // Menu Row No
 
    SET WRAP ON
    SET MESSAGE TO 58 CENTER
@@ -150,11 +150,11 @@ PROCEDURE FT_Widths( a1Type )               // Testing Field Widths
       aStru1 := {}, ;
       aStru2 := {}, ;
       aStru3 := { { 'FldType',     "C", 1, 0 }, ; // Type of field
-   { 'WidtSpec',    "N", 2, 0 }, ; // Specified width
-   { 'Dec_Spec',    "N", 2, 0 }, ; // Specified decimal
-   { 'WidtAppl',    "N", 2, 0 }, ; // Applied (by Harbour) width
-   { 'Dec_Max',     "N", 2, 0 }, ; // Computed maximum dec
-   { 'Result',      "C", 1, 0 } }
+      { 'WidtSpec',    "N", 2, 0 }, ; // Specified width
+      { 'Dec_Spec',    "N", 2, 0 }, ; // Specified decimal
+      { 'WidtAppl',    "N", 2, 0 }, ; // Applied (by Harbour) width
+      { 'Dec_Max',     "N", 2, 0 }, ; // Computed maximum dec
+      { 'Result',      "C", 1, 0 } }
 
    FOR nFldNo := 1 TO 32
       AAdd( aStru1, { "X" + StrZero( nFldNo, 2 ), cType, nFldNo, 0 } )
@@ -469,8 +469,8 @@ PROCEDURE SG_DayTime()                       // Set / Get test for DayTime field
    //  REPLACE Time_8  WITH ModTim          //  ==> 0000-00-00 00:00:00.000
 
    REPLACE DaTime  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
-   Time_8  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
-   Time_C  WITH Time()
+      Time_8  WITH ModTim, ;    //  ==> > 0000-00-00 00:00:00.000
+      Time_C  WITH Time()
 
    dbGoTop()
 

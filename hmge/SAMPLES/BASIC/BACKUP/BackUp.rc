@@ -29,24 +29,24 @@ FILETYPE 0x1
 {
 BLOCK "StringFileInfo"
 {
-	BLOCK "0C0904E4"
-	{
-		VALUE "CompanyName", "MiniGUI Team"
-		VALUE "FileDescription", "Backup utility."
-		VALUE "FileVersion", "1.3.0.0"
-		VALUE "InternalName", "BackUp"
-		VALUE "LegalCopyright", "Copyright © Grigory Filatov and Tsakalidis G. Evangelos\000"
-		VALUE "LegalTrademarks", "Harbour"
-		VALUE "OriginalFilename", "BackUp.exe"
-		VALUE "ProductName", "BackUp"
-		VALUE "ProductVersion", "1.0.0.0"
-		VALUE "Comments", "Freeware, but see add notes for conditions."
-		VALUE "Additional Notes", "Not for distribution without the authors permission"
-	}
+   BLOCK "0C0904E4"
+   {
+      VALUE "CompanyName", "MiniGUI Team"
+      VALUE "FileDescription", "Backup utility."
+      VALUE "FileVersion", "1.3.0.0"
+      VALUE "InternalName", "BackUp"
+      VALUE "LegalCopyright", "Copyright © Grigory Filatov and Tsakalidis G. Evangelos\000"
+      VALUE "LegalTrademarks", "Harbour"
+      VALUE "OriginalFilename", "BackUp.exe"
+      VALUE "ProductName", "BackUp"
+      VALUE "ProductVersion", "1.0.0.0"
+      VALUE "Comments", "Freeware, but see add notes for conditions."
+      VALUE "Additional Notes", "Not for distribution without the authors permission"
+   }
 }
 
 BLOCK "VarFileInfo"
 {
-	VALUE "Translation", 0x0409 0x04B0
+   VALUE "Translation", 0x0409 0x04B0
 }
 }

@@ -145,11 +145,11 @@ CLASS TSColumn
    METHOD SaveColor()                            //  JP 1.55
    METHOD RestColor()                            //  JP 1.55
 
-ENDCLASS
+   ENDCLASS
 
-*=============================================================================
-* METHOD TSColumn:New() Version 9.0 Nov/01/2009
-*=============================================================================
+   *=============================================================================
+   * METHOD TSColumn:New() Version 9.0 Nov/01/2009
+   *=============================================================================
 
 METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
       lBitMap, lEdit, bValid, lNoLite, cOrder, cFooting, ;
@@ -194,14 +194,14 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
       bValid    := {|| .T. }     , ;
       cValid    := "{|| .T. }"   , ;
       nEditMove := DT_MOVE_RIGHT , ;        // cursor movement after editing
-   lFixLite  := .F.           , ;        // for "double cursor" (permanent) efect (only when lCellBrw == .T.)
-   lSpinner     := .F.           , ;
+      lFixLite  := .F.           , ;        // for "double cursor" (permanent) efect (only when lCellBrw == .T.)
+      lSpinner     := .F.           , ;
       cPrevEdit    := ""            , ;
       cPostEdit    := ""            , ;
       cSpcHeading  := ""            , ;
       cDefData     := ""            , ;
       lTotal       := .F.           , ;     //V90
-   cName        := ""
+      cName        := ""
 
    IF ValType( cHeading ) == "O"
       ::uBmpHead := cHeading
@@ -238,26 +238,26 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
    IF oBrw == Nil
 
       DEFAULT aTmpColor[ 1 ]  := GetSysColor( COLOR_WINDOWTEXT ), ; // nClrText
-      aTmpColor[ 2 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrPane
-      aTmpColor[ 3 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrHeadFore
-      aTmpColor[ 4 ]  := GetSysColor( COLOR_BTNFACE )   , ; // nClrHeadBack
-      aTmpColor[ 5 ]  := GetSysColor( COLOR_HIGHLIGHTTEXT ), ; // nClrFocuFore
-      aTmpColor[ 6 ]  := GetSysColor( COLOR_HIGHLIGHT )     // nClrFocuBack
+         aTmpColor[ 2 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrPane
+         aTmpColor[ 3 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrHeadFore
+         aTmpColor[ 4 ]  := GetSysColor( COLOR_BTNFACE )   , ; // nClrHeadBack
+         aTmpColor[ 5 ]  := GetSysColor( COLOR_HIGHLIGHTTEXT ), ; // nClrFocuFore
+         aTmpColor[ 6 ]  := GetSysColor( COLOR_HIGHLIGHT )     // nClrFocuBack
 
       DEFAULT aTmpColor[ 7 ]  := GetSysColor( COLOR_WINDOWTEXT ), ; // nClrEditFore
-      aTmpColor[ 8 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrEditBack
-      aTmpColor[ 9 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrFootFore
-      aTmpColor[ 10 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrFootBack
-      aTmpColor[ 11 ] := CLR_HGRAY                      , ; // nClrSeleFore  NO focused
-      aTmpColor[ 12 ] := CLR_GRAY                       , ; // nClrSeleBack  NO focused
-      aTmpColor[ 13 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrOrdeFore
-      aTmpColor[ 14 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrLine
-      aTmpColor[ 15 ] := CLR_BLACK ,;
+         aTmpColor[ 8 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrEditBack
+         aTmpColor[ 9 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrFootFore
+         aTmpColor[ 10 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrFootBack
+         aTmpColor[ 11 ] := CLR_HGRAY                      , ; // nClrSeleFore  NO focused
+         aTmpColor[ 12 ] := CLR_GRAY                       , ; // nClrSeleBack  NO focused
+         aTmpColor[ 13 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrOrdeFore
+         aTmpColor[ 14 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrLine
+         aTmpColor[ 15 ] := CLR_BLACK ,;
          aTmpColor[ 16 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSupHeadFore
-      aTmpColor[ 17 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSupHeadBack
-      aTmpColor[ 18 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSpecHeadFore
-      aTmpColor[ 19 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSpecHeadBack
-      aTmpColor[ 20 ] := CLR_HRED                           // nClrSpecHeadActive
+         aTmpColor[ 17 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSupHeadBack
+         aTmpColor[ 18 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSpecHeadFore
+         aTmpColor[ 19 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSpecHeadBack
+         aTmpColor[ 20 ] := CLR_HRED                           // nClrSpecHeadActive
 
    ELSE
 
@@ -616,74 +616,74 @@ FUNCTION BiffRec( nOpCode, uData, nRow, nCol, lBorder, nAlign, nPic, nFont )
 
    CASE nOpCode == 9 // BOF record
       cHead := I2Bin( 9 ) + ; // opCode
-      I2Bin( 4 )     // body length
+         I2Bin( 4 )     // body length
       cBody := I2Bin( 2 ) + ; // excel version
-      I2Bin( 16 )    // file type (10h = worksheet)
+         I2Bin( 16 )    // file type (10h = worksheet)
 
    CASE nOpCode == 12 // 0Ch CALCCOUNT record
       cHead := I2Bin( 12 ) + ; // opCode
-      I2Bin( 2 )      // body length
+         I2Bin( 2 )      // body length
       cBody := I2Bin( uData )  // iteration count
 
    CASE nOpCode == 13 // 0Dh CALCMODE record
       cHead := I2Bin( 13 ) + ; // opCode
-      I2Bin( 2 )      // body length
+         I2Bin( 2 )      // body length
       cBody := I2Bin( uData )  // calculation mode
 
    CASE nOpCode == 66 // 42h CODEPAGE record
       cHead := I2Bin( 66 ) + ; // opCode
-      I2Bin( 2 )      // body length
+         I2Bin( 2 )      // body length
       cBody := I2Bin( uData )  // codepage identifier
 
    CASE nOpCode == 49 // 31h FONT record
       cHead := I2Bin( 49 ) + ; // opCode
-      I2Bin( 5 + Len( uData[ 1 ] ) ) // body length
+         I2Bin( 5 + Len( uData[ 1 ] ) ) // body length
       cBody := I2Bin( uData[ 2 ] * 20 ) + ;   // font height in 1/20ths of a point
-      I2Bin( nOr( If( uData[ 3 ], 1, 0 ), ; // lBold    //JP nOr
-      If( uData[ 4 ], 2, 0 ), ;   // lItalic
-      If( uData[ 5 ], 4, 0 ), ;   // lUnderline
-      If( uData[ 6 ], 8, 0 ) ) ) + ;  // lStrikeout
-      Chr( Len( uData[ 1 ] ) ) + ;          // length of cFaceName
-      uData[ 1 ]                            // cFaceName
+         I2Bin( nOr( If( uData[ 3 ], 1, 0 ), ; // lBold    //JP nOr
+         If( uData[ 4 ], 2, 0 ), ;   // lItalic
+         If( uData[ 5 ], 4, 0 ), ;   // lUnderline
+         If( uData[ 6 ], 8, 0 ) ) ) + ;  // lStrikeout
+         Chr( Len( uData[ 1 ] ) ) + ;          // length of cFaceName
+         uData[ 1 ]                            // cFaceName
 
    CASE nOpCode == 20 // 14h HEADER record
       cHead := I2Bin( 20 ) + ; // opCode
-      I2Bin( 1 + Len( uData ) ) // body length
+         I2Bin( 1 + Len( uData ) ) // body length
       cBody := Chr( Len( uData ) ) + ;
          uData
 
    CASE nOpCode == 21 // 15h FOOTER record
       cHead := I2Bin( 21 ) + ; // opCode
-      I2Bin( 1 + Len( uData ) ) // body length
+         I2Bin( 1 + Len( uData ) ) // body length
       cBody := Chr( Len( uData ) ) + ;
          uData
 
    CASE nOpCode == 36 // 24h COLWIDTH record
       DEFAULT nCol := nRow
       cHead := I2Bin( 36 ) + ;       // opCode
-      I2Bin( 4 )            // body length
+         I2Bin( 4 )            // body length
       cBody := Chr( nRow ) + ;       // first column
-      Chr( nCol ) + ;       // last column
-      I2BIN( uData * 256 )  // column width in 1/256ths of a character
+         Chr( nCol ) + ;       // last column
+         I2BIN( uData * 256 )  // column width in 1/256ths of a character
 
    CASE nOpCode == 31 // 1Fh FORMATCOUNT record
       cHead := I2Bin( 31 ) + ; // opCode
-      I2Bin( 2 )      // body length
+         I2Bin( 2 )      // body length
       cBody := I2BIN( uData )  // number of standard format records in file
 
    CASE nOpCode == 30 // 1Eh FORMAT record
       cHead := I2Bin( 30 ) + ; // opCode
-      I2Bin( 1 + Len( uData ) ) // body length
+         I2Bin( 1 + Len( uData ) ) // body length
       cBody := Chr( Len( uData ) ) + ;   // length of format string
-      uData                     // format string
+         uData                     // format string
 
    CASE nOpCode == 4 // 04h LABEL record
       uData := SubStr( uData, 1, Min( 255, Len( uData ) ) )
       cHead := I2Bin( 4 ) + ; // opCode
-      I2Bin( 8 + Len( uData ) ) // body length
+         I2Bin( 8 + Len( uData ) ) // body length
       cBody := I2Bin( nRow ) + ; // row number 0 based
-      I2Bin( nCol ) + ; // col number 0 based
-      aAttr[ 1 ]    + ;
+         I2Bin( nCol ) + ; // col number 0 based
+         aAttr[ 1 ]    + ;
          aAttr[ 2 ]    + ;
          aAttr[ 3 ]    + ;
          Chr( Len( uData ) ) + ;
@@ -691,7 +691,7 @@ FUNCTION BiffRec( nOpCode, uData, nRow, nCol, lBorder, nAlign, nPic, nFont )
 
    CASE nOpCode == 2 // 02h INTEGER record
       cHead := I2Bin( 2 ) + ; // opCode
-      I2Bin( 9 )     // body length
+         I2Bin( 9 )     // body length
       cBody := I2Bin( nRow ) + ;
          I2Bin( nCol ) + ;
          aAttr[ 1 ]    + ;
@@ -701,7 +701,7 @@ FUNCTION BiffRec( nOpCode, uData, nRow, nCol, lBorder, nAlign, nPic, nFont )
 
    CASE nOpCode == 3 // NUMBER record
       cHead := I2Bin( 3 ) + ; // opCode
-      I2Bin( 15 )    // body length
+         I2Bin( 15 )    // body length
       cBody := I2Bin( nRow ) + ;
          I2Bin( nCol ) + ;
          aAttr[ 1 ]    + ;
@@ -711,7 +711,7 @@ FUNCTION BiffRec( nOpCode, uData, nRow, nCol, lBorder, nAlign, nPic, nFont )
 
    CASE nOpCode == 10 // 0Ah EOF record
       cHead := I2Bin( 10 ) + ; // opcode
-      I2Bin( 0 )      // body length
+         I2Bin( 0 )      // body length
       cBody := ""
 
    END CASE

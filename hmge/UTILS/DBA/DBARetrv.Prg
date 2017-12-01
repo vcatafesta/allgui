@@ -14,7 +14,7 @@ PROC T_ListRecs()                             // Table List Records
       lIncRecN  := .F.,;
       lIncDelM  := .F.,;
       lHeading  := .F.,;  // SET( "HEADING" ) ???
-   aFldNums  := {},;
+      aFldNums  := {},;
       nCurResN  := RECN()
 
    LOCA aColumns  := {},;
@@ -49,16 +49,16 @@ PROC T_ListRecs()                             // Table List Records
    AEVAL( DBSTRUCT(), { | a1, i1 | cExpLst += a1[ 1 ] + IF( i1 < FCOUNT(), "; ", '') } )
 
    aComPars  := { cExpLst,;             // Expressions List
-   { .T., .T., .T. },;   // Del Mark, RecNo, Heads
-   {  1, '' },;          // FOR/WHILE, Express
-   {  2,  0 } }          // Scope ( ALL/REST/NEXT n/RECORD n )
+      { .T., .T., .T. },;   // Del Mark, RecNo, Heads
+      {  1, '' },;          // FOR/WHILE, Express
+      {  2,  0 } }          // Scope ( ALL/REST/NEXT n/RECORD n )
 
    aComOpts  := GFUComOpts( aComPars,;  // Values of options
-   'LIST',;   // Command's name
-   { 'ELS',;    // Expressions List
-   'DRH',;    // Del Mark, RecNo, Heads
-   'CND',;    // Cond (FOR/WHILE)
-   'SCP' } )  // Scope ( ALL/REST/NEXT n/RECORD n )
+      'LIST',;   // Command's name
+      { 'ELS',;    // Expressions List
+      'DRH',;    // Del Mark, RecNo, Heads
+      'CND',;    // Cond (FOR/WHILE)
+      'SCP' } )  // Scope ( ALL/REST/NEXT n/RECORD n )
    IF !EMPTY( aComOpts )
 
       cExpress := aComOpts[ 1 ]
@@ -207,7 +207,7 @@ PROC T_ListRecs()                             // Table List Records
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC T_DispEdit( ;                        // Table Display or Edit Record(s)
-      nOperat )   // 1: Display, 2: Edit
+         nOperat )   // 1: Display, 2: Edit
 
       LOCA lDispOnly := nOperat < 2,;
          aOperates := { 'Display', 'Edit' }
@@ -242,12 +242,12 @@ PROC T_ListRecs()                             // Table List Records
       AEVAL( DBSTRUCT(), { | a1, i1 | cExpLst += a1[ 1 ] + IF( i1 < FCOUNT(), "; ", '') } )
 
       aComPars  := { cExpLst,;             // Expressions List
-      {  '' } }             // FOR Express
+         {  '' } }             // FOR Express
 
       aComOpts  := GFUComOpts( aComPars,;  // Values of options
-      aOperates[ nOperat ],;   // Command's name
-      { 'ELS',;    // Expressions List
-      'FOR' } )  // FOR
+         aOperates[ nOperat ],;   // Command's name
+         { 'ELS',;    // Expressions List
+         'FOR' } )  // FOR
 
       IF !EMPTY( aComOpts )
 
@@ -307,10 +307,10 @@ PROC T_ListRecs()                             // Table List Records
             ENDIF lDispOnly
 
             aCdBloks := { { || DBGOTOP()   },;                                         // 1
-            { || DBSKIP() },;                                            // 2
-            { || DBSKIP(-1) },;                                          // 3
-            { || DBGOBOTTOM() },;                                        // 4
-            { || IF( EOF(), DBSKIP(-1), ) } }                            // 5
+               { || DBSKIP() },;                                            // 2
+               { || DBSKIP(-1) },;                                          // 3
+               { || DBGOBOTTOM() },;                                        // 4
+               { || IF( EOF(), DBSKIP(-1), ) } }                            // 5
 
             IF lDispOnly
                AADD( aCdBloks, { || RefrStBar() } )                                    // 6
@@ -330,17 +330,17 @@ PROC T_ListRecs()                             // Table List Records
             ENDIF
 
             ComboForm( cDETitle,;  // Combo Form's Title
-            aLabels ,;  // Field Name
-            aValues ,;  // Field Value : Value
-            aDTypes ,;  // Field Type
-            aWidths ,;  // Field Width
-            aDecims ,;  // Field Decimal
-            aROnlys ,;  // Read Onlies
-            aValids ,;  // Field Validity Code Blocks
-            aButtons,;  // Buttons
-            aCdBloks,;  // Actions : code blocks for Buttons
-            aRDBloks,;  // Data Read ( GET Blocks )
-            aWDBloks )  // Data Write ( PUT Blocks )
+               aLabels ,;  // Field Name
+               aValues ,;  // Field Value : Value
+               aDTypes ,;  // Field Type
+               aWidths ,;  // Field Width
+               aDecims ,;  // Field Decimal
+               aROnlys ,;  // Read Onlies
+               aValids ,;  // Field Validity Code Blocks
+               aButtons,;  // Buttons
+               aCdBloks,;  // Actions : code blocks for Buttons
+               aRDBloks,;  // Data Read ( GET Blocks )
+               aWDBloks )  // Data Write ( PUT Blocks )
 
             IF !EMPTY( cForClaus )
                SET FILTER TO
@@ -355,7 +355,7 @@ PROC T_ListRecs()                             // Table List Records
       *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
       PROC T_Arithm( ;                          // Table arithmetics
-         nAriType ) // 1: Sum, 2: Average, 3: Count
+            nAriType ) // 1: Sum, 2: Average, 3: Count
 
          LOCA aComPars  := {},;
             cCbFTitl  := '',;
@@ -391,23 +391,23 @@ PROC T_ListRecs()                             // Table List Records
             IF nAriType < 3 // SUM/AVER
 
                aComPars  := { cExpLst,;             // FIELDS list
-               {  1, ''  },;         // FOR/WHILE, Express
-               {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
+                  {  1, ''  },;         // FOR/WHILE, Express
+                  {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
 
                aComOpts  := GFUComOpts( aComPars,;  // Values of options
-               cCbFTitl,;  // Command's name
-               { 'FLS',;                  // Fields List
-               'CND',;                  // FOR Expression
-               'SCP' } )                // Scope
+                  cCbFTitl,;  // Command's name
+                  { 'FLS',;                  // Fields List
+                  'CND',;                  // FOR Expression
+                  'SCP' } )                // Scope
             ELSE // COUNT
 
                aComPars  := { {  1, ''  },;         // FOR/WHILE, Express
-               {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
+                  {  2,  0  } }         // Scope ( ALL/REST/NEXT n/RECORD n )
 
                aComOpts  := GFUComOpts( aComPars,;  // Values of options
-               cCbFTitl,;  // Command's name
-               { 'CND',;                  // FOR Expression
-               'SCP' } )                // Scope
+                  cCbFTitl,;  // Command's name
+                  { 'CND',;                  // FOR Expression
+                  'SCP' } )                // Scope
 
             ENDIF nAriType
 
@@ -469,7 +469,7 @@ PROC T_ListRecs()                             // Table List Records
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          PROC DispAriths( ;                        // Display arithmetic ( sum, average, count (?) ) results
-            nAriType,;
+               nAriType,;
                aFldNums,;
                aResults )
 

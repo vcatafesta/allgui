@@ -363,11 +363,11 @@ FUNCTION AutoType( Message )
    CASE cType = "H"
       cMessage := ":Hash:" + iif( _OOHG_AutoTypeNoSpaces, "", "   " )
    CASE cType = "P"
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       cMessage :=  ltrim( Hb_ValToStr( Message )) + " HexToNum()=> " + ltrim( str( HexToNum( substr( Hb_ValToStr( Message ), 3 ) ) ) ) + iif( _OOHG_AutoTypeNoSpaces, "", "   " )
-      #else
+#else
       cMessage :=  ltrim( Hb_ValToStr( Message )) + " Hb_HexToNum()=> " + ltrim( str( Hb_HexToNum( substr( Hb_ValToStr( Message ), 3 ) ) ) ) + iif( _OOHG_AutoTypeNoSpaces, "", "   " )
-      #endif
+#endif
    OTHERWISE
       cMessage := "<NIL>" + iif( _OOHG_AutoTypeNoSpaces, "", "   " )
    ENDCASE

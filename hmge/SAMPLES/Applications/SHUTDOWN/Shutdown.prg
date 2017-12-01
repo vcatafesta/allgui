@@ -350,9 +350,9 @@ PROCEDURE SetTimer()
 
       RETURN
 
-      #define GW_HWNDFIRST   0
-      #define GW_HWNDNEXT   2
-      #define GW_OWNER      4
+#define GW_HWNDFIRST   0
+#define GW_HWNDNEXT   2
+#define GW_OWNER      4
 
 PROCEDURE SetTimeExit( cTitle )
 
@@ -369,11 +369,11 @@ PROCEDURE SetTimeExit( cTitle )
       WHILE hWnd != 0                  // Loop through all the windows
          cAppTitle := GetWindowText( hWnd )
          IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.;   // If it is an owner window
-            IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-            hWnd != _HMG_MainHandle .AND.;      // If it is not this app
-            !EMPTY( cAppTitle ) .AND.;      // If the window has a title
-            !( "DOS Session" $ cAppTitle ) .AND.;   // If it is not DOS session
-            !( cAppTitle == "Program Manager" )   // If it is not the Program Manager
+               IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+               hWnd != _HMG_MainHandle .AND.;      // If it is not this app
+               !EMPTY( cAppTitle ) .AND.;      // If the window has a title
+               !( "DOS Session" $ cAppTitle ) .AND.;   // If it is not DOS session
+               !( cAppTitle == "Program Manager" )   // If it is not the Program Manager
 
             Aadd( aWnd, ALLTRIM(cAppTitle) )
          ENDIF
@@ -387,11 +387,11 @@ PROCEDURE SetTimeExit( cTitle )
 
    RETURN
 
-   #define EWX_LOGOFF   0
-   #define EWX_SHUTDOWN 1
-   #define EWX_REBOOT   2
-   #define EWX_FORCE    4
-   #define EWX_POWEROFF 8
+#define EWX_LOGOFF   0
+#define EWX_SHUTDOWN 1
+#define EWX_REBOOT   2
+#define EWX_FORCE    4
+#define EWX_POWEROFF 8
 
 PROCEDURE WinExit( nFlag )
 
@@ -498,11 +498,11 @@ PROCEDURE SetExitWindow( lActived )
       WHILE hWnd != 0                                 // Loop through all the windows
          cTitle := GetWindowText( hWnd )
          IF GetWindow( hWnd, GW_OWNER ) = 0 .AND.; // If it is an owner window
-            IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
-            hWnd != hOwnWnd .AND.;              // If it is not this app
-            !EMPTY( cTitle ) .AND.;             // If the window has a title
-            !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
-            !( cTitle == "Program Manager" )    // If it is not the Program Manager
+               IsWindowVisible( hWnd ) .AND.;      // If it is a visible window
+               hWnd != hOwnWnd .AND.;              // If it is not this app
+               !EMPTY( cTitle ) .AND.;             // If the window has a title
+               !( "DOS Session" $ cTitle ) .AND.;  // If it is not DOS session
+               !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
             Form_1.Combo_1.AddItem( cTitle )
          ENDIF
@@ -623,7 +623,7 @@ PROCEDURE GetLanguage( cIniFile )
 
    RETURN
 
-   #define MsgInfo( c, t ) MsgInfo( c, t, IDI_MAIN, .f. )
+#define MsgInfo( c, t ) MsgInfo( c, t, IDI_MAIN, .f. )
 
 FUNCTION MsgAbout()
 

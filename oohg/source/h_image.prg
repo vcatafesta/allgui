@@ -98,7 +98,7 @@ CLASS TImage FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, FileName, w, h, ProcedureName, ;
       HelpId, invisible, stretch, lWhiteBackground, lRtl, backcolor, ;

@@ -112,7 +112,7 @@ PROCEDURE DeleteItem()
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 FUNCTION LoadArray(;                      // Load a 1d Char array from a file
-   cFilName )
+      cFilName )
 
    LOCAL aRVal := {}
 
@@ -123,7 +123,7 @@ FUNCTION LoadArray(;                      // Load a 1d Char array from a file
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 PROCEDURE SaveArray(;                     // Save a 1d Char array to a file
-   cFilName,;
+      cFilName,;
       aC1dArray )
 
    LOCAL cText := CRLF

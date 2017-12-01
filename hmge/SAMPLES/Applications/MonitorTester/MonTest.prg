@@ -577,7 +577,7 @@ PROCEDURE OnTimer()
 
    RETURN
 
-   #define DARKGREEN   { 0 , 128 , 0 }
+#define DARKGREEN   { 0 , 128 , 0 }
 
 PROCEDURE DrawReadAbility()
 
@@ -763,8 +763,8 @@ STATIC PROCEDURE MsgAbout()
 
    RETURN
 
-   #define HWND_TOPMOST    (-1)
-   #define HWND_NOTOPMOST  (-2)
+#define HWND_TOPMOST    (-1)
+#define HWND_NOTOPMOST  (-2)
 
 STATIC PROCEDURE SetWndStyle( cForm, lStyle)
 

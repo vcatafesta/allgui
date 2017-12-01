@@ -153,7 +153,7 @@ CLASS TCombo FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, rows, value, fontname, ;
       fontsize, tooltip, changeprocedure, h, gotfocus, lostfocus, ;
@@ -1473,7 +1473,7 @@ CLASS TListCombo FROM TControl STATIC
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Container, hWnd ) CLASS TListCombo
 
@@ -1666,7 +1666,7 @@ CLASS TEditCombo FROM TControl STATIC
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Container, hWnd ) CLASS TEditCombo
 

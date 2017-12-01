@@ -93,9 +93,9 @@ FUNCTION STR2FONT
    Fclose( han )
 
    RETURN
-   #ENDSCRIPT
+#ENDSCRIPT
 
-   #SCRIPT WRITE
+#SCRIPT WRITE
    PRIVATE han, fname := oForm:path + oForm:filename, stroka, oCtrl
    PRIVATE aControls := oForm:oDlg:aControls, alen := Len( aControls ), i
 
@@ -139,4 +139,4 @@ FUNCTION STR2FONT
    Fwrite( han, "#ENDFORM " )
    Fwrite( han, _Chr(10 ) )
    Fclose( han )
-   #ENDSCRIPT
+#ENDSCRIPT

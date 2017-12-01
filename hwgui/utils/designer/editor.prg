@@ -40,7 +40,7 @@ CLASS VAR aKeyWords
 
    METHOD Add( name )  INLINE ( ::name:=name,Aadd(::aThemes,Self),Self )
 
-ENDCLASS
+   ENDCLASS
 
 FUNCTION LoadEdOptions( cFileName )
 
@@ -326,11 +326,11 @@ STATIC FUNCTION CreateHilight( cText,oTheme )
    LOCAL arr := {}, nPos, nLinePos := 1
 
    DO WHILE .T.
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       IF ( nPos := At( Chr(10), cText, nLinePos ) ) != 0 .OR. ( nPos := At( Chr(13), cText, nLinePos ) ) != 0
-         #else
+#else
          IF ( nPos := HB_At( Chr(10), cText, nLinePos ) ) != 0 .OR. ( nPos := HB_At( Chr(13), cText, nLinePos ) ) != 0
-            #endif
+#endif
             HiLightString( SubStr( cText,nLinePos,nPos-nLinePos ), arr, nLinePos,oTheme )
             nLinePos := nPos + 1
          ELSE
@@ -380,7 +380,7 @@ STATIC FUNCTION EditColors()
 
    LOCAL oDlg, i, j, temp, oBtn2
    LOCAL cText := "// The code sample" + Chr(10) + ;
-      "do while ++nItem < 120"+ Chr(10) + ;
+   "do while ++nItem < 120"+ Chr(10) + ;
       "  if aItems[ nItem ] == 'scheme'"+ Chr(10) + ;
       "    nFactor := 22.5"+ Chr(10) + ;
       "  endif"

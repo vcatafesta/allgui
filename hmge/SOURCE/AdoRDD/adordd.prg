@@ -52,35 +52,35 @@
 #include "hbusrrdd.ch"
 #xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
    BEGIN SEQUENCE
-   #xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
+#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
       RECOVER[USING < oErr > ] <- oErr->;;
       ErrorBlock( bError )
-   #else
-   #include "usrrdd.ch"
-   #endif
+#else
+#include "usrrdd.ch"
+#endif
 
-   #define WA_RECORDSET  1
-   #define WA_BOF        2
-   #define WA_EOF        3
-   #define WA_CONNECTION 4
-   #define WA_CATALOG    5
-   #define WA_TABLENAME  6
-   #define WA_ENGINE     7
-   #define WA_SERVER     8
-   #define WA_USERNAME   9
-   #define WA_PASSWORD  10
-   #define WA_QUERY     11
-   #define WA_LOCATEFOR 12
-   #define WA_SCOPEINFO 13
-   #define WA_SQLSTRUCT 14
+#define WA_RECORDSET  1
+#define WA_BOF        2
+#define WA_EOF        3
+#define WA_CONNECTION 4
+#define WA_CATALOG    5
+#define WA_TABLENAME  6
+#define WA_ENGINE     7
+#define WA_SERVER     8
+#define WA_USERNAME   9
+#define WA_PASSWORD  10
+#define WA_QUERY     11
+#define WA_LOCATEFOR 12
+#define WA_SCOPEINFO 13
+#define WA_SQLSTRUCT 14
 
-   #define WA_SIZE      14
+#define WA_SIZE      14
 
    ANNOUNCE ADORDD
 
    STATIC bError, s_cTableName, s_cEngine, s_cServer, s_cUserName, s_cPassword, s_cQuery := ""
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 STATIC FUNCTION hb_tokenGet( cText, nPos, cSep )
 
@@ -88,7 +88,7 @@ STATIC FUNCTION hb_tokenGet( cText, nPos, cSep )
 
    RETURN iif( nPos <= Len( aTokens ), aTokens[ nPos ], "" )
 
-   #endif
+#endif
 
 STATIC FUNCTION ADO_INIT( nRDD )
 
@@ -925,9 +925,9 @@ STATIC FUNCTION ADO_GETFIELDTYPE( nADOFieldType )
    CASE nADOFieldType == adChapter
 
    CASE nADOFieldType == adVarNumeric
-      #if 0
+#if 0
    CASE nADOFieldType == adArray
-      #endif
+#endif
 
    CASE nADOFieldType == adBoolean
       nDBFFieldType := HB_FT_LOGICAL

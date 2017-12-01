@@ -78,7 +78,7 @@ CLASS TMenu FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Parent, Name ) CLASS TMenu
 
@@ -142,7 +142,7 @@ CLASS TMenuMain FROM TMenu
 
    METHOD Release     BLOCK { |Self| ::Parent:oMenu := nil, ::Super:Release() }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Parent, Name ) CLASS TMenuMain
 
@@ -165,7 +165,7 @@ CLASS TMenuContext FROM TMenu
 
    METHOD Release     BLOCK { |Self| ::Parent:ContextMenu := nil, ::Super:Release() }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Parent, Name ) CLASS TMenuContext
 
@@ -183,7 +183,7 @@ CLASS TMenuNotify FROM TMenu
 
    METHOD Release     BLOCK { |Self| ::Parent:NotifyMenu := nil, ::Super:Release() }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Parent, Name ) CLASS TMenuNotify
 
@@ -201,7 +201,7 @@ CLASS TMenuDropDown FROM TMenu
 
    METHOD Release
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( Button, Parent, Name ) CLASS TMenuDropDown
 
@@ -283,7 +283,7 @@ CLASS TMenuItem FROM TControl
 
    METHOD DefaultItem( nItem ) BLOCK { |Self,nItem| SetMenuDefaultItem( ::Container:hWnd, nItem ) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD DefinePopUp( Caption, Name, checked, disabled, Parent, hilited, Image, ;
       lRight, lStretch, nBreak ) CLASS TMenuItem

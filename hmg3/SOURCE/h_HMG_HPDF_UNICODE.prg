@@ -45,9 +45,9 @@ FUNCTION _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontNa
 
    hDC := BT_CreateDC (hBitmap, BT_HDC_BITMAP, @BTstruct)
 
-   #define DT_LEFT     0
-   #define DT_CENTER   1
-   #define DT_RIGHT    2
+#define DT_LEFT     0
+#define DT_CENTER   1
+#define DT_RIGHT    2
    DO CASE
    CASE HMG_UPPER( cAlign ) == 'CENTER'
       nAlign := DT_CENTER

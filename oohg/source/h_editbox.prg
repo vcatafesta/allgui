@@ -72,7 +72,7 @@ CLASS TEdit FROM TText
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, value, fontname, ;
       fontsize, tooltip, maxlength, gotfocus, change, lostfocus, ;

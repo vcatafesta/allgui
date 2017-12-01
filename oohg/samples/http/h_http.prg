@@ -150,11 +150,11 @@ FUNCTION httpgeturl( Connection, cPage, uRet )
          cHeader += hb_OsNewLine()
 
          FOR i := 1 to Len( Connection:hHeaders )
-            #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
             cHeader += hGetKeyAt( Connection:hHeaders, i ) + ": " + hGetValueAt( Connection:hHeaders, i ) + hb_OsNewLine()
-            #else
+#else
             cHeader += hb_HKeyAt( Connection:hHeaders, i ) + ": " + hb_HValueAt( Connection:hHeaders, i ) + hb_OsNewLine()
-            #endif
+#endif
          NEXT
          cHeader += hb_OsNewLine()
 

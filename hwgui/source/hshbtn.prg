@@ -31,7 +31,7 @@ CLASS HShadeButton INHERIT HOwnButton
 
    METHOD END()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bClick, lFlat,              ;

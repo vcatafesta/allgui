@@ -45,7 +45,7 @@ PROCEDURE Main()
          ON RELEASE CloseTables()       ;
          FONT "MS Sans Serif" SIZE 8
 
-      #ifdef COMBOBOXEX
+#ifdef COMBOBOXEX
       @ 34, 10 COMBOBOXEX Combo_1 ;
          WIDTH Form_1.Width -52 HEIGHT 260 ;
          LISTWIDTH Form_1.Width -26 ;
@@ -60,14 +60,14 @@ PROCEDURE Main()
          WIDTH 21 ;
          HEIGHT 21 ;
          TOOLTIP "Search for item"
-      #else
+#else
       @ 34, 10 COMBOBOX Combo_1 ;
          WIDTH Form_1.Width -26 HEIGHT 260 ;
          DISPLAYEDIT ;
          ON DISPLAYCHANGE ( lSearch := .T. ) ;
          ON ENTER SearchItem( GetProperty( 'Form_1', 'Combo_1', 'DisplayValue' ) ) ;
          ON CHANGE ( lSearch := .F., SeekValues( aItems[ GetProperty( 'Form_1', 'Combo_1', 'Value' ) ][ 1 ] ) )
-      #endif
+#endif
       @ 6, 70 RADIOGROUP Radio_1 ;
          OPTIONS { 'Exxx number', 'Additive name' } ;
          VALUE nDirect ;

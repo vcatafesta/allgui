@@ -66,7 +66,7 @@ CLASS TFrame FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, y, x, w, h, caption, fontname, ;
       fontsize, opaque, bold, italic, underline, strikeout, ;

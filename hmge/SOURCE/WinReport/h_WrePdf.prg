@@ -1102,8 +1102,8 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
 
                _HMG_HPDF_PRINT( ;
                   if([LINE]$ Arrypar[1],&(Arrypar[1])+oWr:aStat[ 'Hbcompatible' ],eval(epar,ArryPar[1])+oWr:aStat[ 'Hbcompatible' ]) ;  // row
-               , eval(epar,ArryPar[2])  ;                                                // col
-               , _arg1 ;
+                  , eval(epar,ArryPar[2])  ;                                                // col
+                  , _arg1 ;
                   , if(ascan(arryPar,[SIZE])#0,min(_arg4,300) ,_HMG_HPDFDATA[ 1 ][9]);
                   , Aclr[1] ;
                   , Aclr[2] ;
@@ -1158,16 +1158,16 @@ FUNCTION RPdfPar(ArryPar,cmdline,section) // The core of Pff interpreter
          oWr:Putarray(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])) ;
             ,eval(epar,ArryPar[2]) ;
             ,oWr:MACROCOMPILE(ArryPar[4],.t.,cmdline,section)    ;            //arr
-         ,if(ascan(arryPar,[LEN])>0,oWr:macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
-         ,nil                                                           ;      //rowheight
-         ,nil                                                           ;      //vertalign
-         ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
-         ,nil                                                           ;      //abrushes
-         ,nil                                                           ;      //apens
-         ,if(ascan(arryPar,[FONT])>0,NIL,NIL)                           ;      //afonts
-         ,if(ascan(arryPar,[COLOR])> 0,oWr:UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
-         ,NIL                                                           ;      //abitmaps
-         ,nil )                                                                //userfun
+            ,if(ascan(arryPar,[LEN])>0,oWr:macrocompile(eval(chblk,arrypar,[LEN])),NIL) ; //awidths
+            ,nil                                                           ;      //rowheight
+            ,nil                                                           ;      //vertalign
+            ,(ascan(arryPar,[NOFRAME])>0)                                  ;      //noframes
+            ,nil                                                           ;      //abrushes
+            ,nil                                                           ;      //apens
+            ,if(ascan(arryPar,[FONT])>0,NIL,NIL)                           ;      //afonts
+            ,if(ascan(arryPar,[COLOR])> 0,oWr:UsaColor(eval(chblk,arrypar,[COLOR])),NIL);//afontscolor
+            ,NIL                                                           ;      //abitmaps
+            ,nil )                                                                //userfun
 
       CASE ascan(ArryPar,[BARCODE])=3
          oWr:DrawBarcode(if([LINE] $ Arrypar[1],&(Arrypar[1]),eval(epar,ArryPar[1])),eval(epar,ArryPar[2]);

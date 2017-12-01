@@ -1,6 +1,6 @@
 Tray Calendar minimizes to the Windows system tray.
 Tray Calendar's system tray icon shows the current
-day of the month. 
+day of the month.
 
 Clicking on the Tray Calendar icon brings up a
 virtual calendar.
@@ -16,7 +16,7 @@ you to today's date.
 Click on a date to create or change the notes for
 that date. Text may be entered into the edit box
 just below the calendar. Text may be any length up
-to 32,000 characters. 
+to 32,000 characters.
 
 To delete the notes for a day, simply click on the
 day and delete the notes from the edit field. When

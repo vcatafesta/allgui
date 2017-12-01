@@ -103,7 +103,7 @@ FUNCTION Main
 
    RETURN NIL
 
-   #define WM_COMMAND   0x0111
+#define WM_COMMAND   0x0111
 
 PROCEDURE OnComboAction
 

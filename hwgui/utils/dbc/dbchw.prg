@@ -81,14 +81,14 @@ FUNCTION Main( ... )
    PUBLIC cAppCpage := "RU1251", cDataCpage := "RU866"
    PUBLIC lWinChar := .F.
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    PUBLIC nQueryWndHandle := 0
    PUBLIC aDrivers := { "ADS_CDX", "ADS_NTX", "ADS_ADT" }
 
-   #else
+#else
    PUBLIC aDrivers := { "DBFCDX", "DBFNTX" }
 
-   #endif
+#endif
    PUBLIC nServerType := LOCAL_SERVER
    PUBLIC cServerPath := ""
    PUBLIC numdriv := 1
@@ -104,22 +104,22 @@ FUNCTION Main( ... )
       "SR646C","SRWIN","SV437C","SV850","SV850M","SVISO","SVWIN","TR857","TRISO", ;
       "TRWIN","UA1125","UA1251","UA866","UAKOI8","UTF16LE","UTF8","UTF8EX" }
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    rddRegister( "ADS", 1 )
    rddSetDefault( "ADS" )
    nServerType := ADS_LOCAL_SERVER
    AdsRightsCheck( .F. )
    SET CHARTYPE TO OEM
-   #else
+#else
    REQUEST DBFNTX
    REQUEST DBFCDX
    rddSetDefault( "DBFCDX" )
-   #ifdef RDD_LETO
+#ifdef RDD_LETO
    REQUEST LETO
    Rddsetdefault( "LETO" )
    nServerType := REMOTE_SERVER
-   #endif
-   #endif
+#endif
+#endif
 
    IF lShared
       SET EXCLUSIVE OFF
@@ -136,10 +136,10 @@ FUNCTION Main( ... )
    ENDIF
    hb_cdpSelect( cAppCpage )
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    AdsSetServerType( nServerType )
    AdsSetFileType( Iif( numdriv == 1,2,Iif( numdriv == 2,1,3 ) ) )
-   #endif
+#endif
 
    oBrwFont := HFont():Add( aBrwFont[1], Val(aBrwFont[2]), Val(aBrwFont[3]) )
 
@@ -214,15 +214,15 @@ FUNCTION Main( ... )
    MENUITEM "&Horizontally" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDITILE, MDITILE_HORIZONTAL, 0 )
    MENUITEM "&Cascade" ACTION hwg_Sendmessage( HWindow():GetMain():handle, WM_MDICASCADE, 0, 0 )
    ENDMENU
-   #ifdef RDD_LETO
-   #endif
-   #ifdef RDD_ADS
+#ifdef RDD_LETO
+#endif
+#ifdef RDD_ADS
    MENU TITLE  "&Query"
    MENUITEM "&New query" ACTION  Query( .F. )
    MENUITEM "&Open query" ACTION  OpenQuery()
    MENUITEM "&Edit query" ACTION  Query( .T. )
    ENDMENU
-   #endif
+#endif
    MENUITEM "&About" ACTION  About()
    ENDMENU
 
@@ -293,7 +293,7 @@ STATIC FUNCTION ReadIni( cPath )
             ENDIF
          ENDIF
       ENDIF
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       IF hb_hHaskey( hIni, "ADS" ) .AND. !Empty( aSect := hIni[ "ADS" ] )
          hb_hCaseMatch( aSect, .F. )
          IF hb_hHaskey( aSect, "serverpath" ) .AND. !Empty( cTmp := aSect[ "serverpath" ] )
@@ -303,8 +303,8 @@ STATIC FUNCTION ReadIni( cPath )
             nServerType := Iif( Lower(cTmp) == "remote", 6, 1 )
          ENDIF
       ENDIF
-      #endif
-      #ifdef RDD_LETO
+#endif
+#ifdef RDD_LETO
       IF hb_hHaskey( hIni, "LETO" ) .AND. !Empty( aSect := hIni[ "LETO" ] )
          hb_hCaseMatch( aSect, .F. )
          IF hb_hHaskey( aSect, "serverpath" ) .AND. !Empty( cTmp := aSect[ "serverpath" ] )
@@ -314,7 +314,7 @@ STATIC FUNCTION ReadIni( cPath )
             nServerType := Iif( Lower(cTmp) == "remote", REMOTE_SERVER, LOCAL_SERVER )
          ENDIF
       ENDIF
-      #endif
+#endif
    ENDIF
 
    RETURN NIL
@@ -570,13 +570,13 @@ FUNCTION OpenFile()
    LOCAL oDlg, cFile := "", alsname := "", pass
    LOCAL lExcl := !lShared, lRd := lRdonly, nCp := Ascan( aCpId, cDataCpage ), r1 := numdriv
 
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    LOCAL lAxl := AdsLocking(), lRemote := (nServerType == 6)
 
-   #else
+#else
    LOCAL lRemote := (nServerType == REMOTE_SERVER)
 
-   #endif
+#endif
    LOCAL oBtnFile, bBtnDis := {||Iif(lRemote,oBtnFile:Disable(),oBtnFile:Enable()),.T.}
    LOCAL bFileBtn := {||
 
@@ -591,12 +591,12 @@ FUNCTION OpenFile()
       SIZE 400,280   ;
       FONT oMainFont ON INIT bBtnDis
 
-   #if defined( RDD_ADS ) .OR. defined( RDD_LETO )
+#if defined( RDD_ADS ) .OR. defined( RDD_LETO )
    @ 10,10 SAY "Server " SIZE 60,22 STYLE SS_RIGHT
    @ 70,10 GET CHECKBOX lRemote CAPTION "Remote:" SIZE 80, 20 ON CLICK bBtnDis
    @ 150,10 GET cServerPath SIZE 240,24
    Atail( oDlg:aControls ):Anchor := ANCHOR_TOPABS+ANCHOR_LEFTABS+ANCHOR_RIGHTABS
-   #endif
+#endif
 
    @ 10,34 SAY "File name: " SIZE 80,22 STYLE SS_RIGHT
 
@@ -612,7 +612,7 @@ FUNCTION OpenFile()
    @ 20, 128 GET CHECKBOX lRd CAPTION "Readonly" SIZE 90, 20
 
    @ 210,92 GROUPBOX "" SIZE 180, 88
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    GET RADIOGROUP r1
    @ 220,104 RADIOBUTTON "AXS_CDX" SIZE 90, 20
    @ 220,128 RADIOBUTTON "AXS_NTX" SIZE 90, 20
@@ -637,19 +637,19 @@ END RADIOGROUP
 oDlg:Activate()
 
 IF oDlg:lResult
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    AdsSetServerType( nServerType := Iif( lRemote, 6, ADS_LOCAL_SERVER ) )
    numdriv := r1
    AdsSetFileType( Iif( numdriv == 1,2,Iif( numdriv == 2,1,3 ) ) )
    AdsLocking( lAxl )
-   #endif
-   #ifdef RDD_LETO
+#endif
+#ifdef RDD_LETO
    rddSetDefault( Iif( lRemote, "LETO", "DBFCDX" ) )
    nServerType := Iif( lRemote, REMOTE_SERVER, LOCAL_SERVER )
-   #endif
-   #if !defined ( RDD_ADS ) .AND. !defined( RDD_LETO )
+#endif
+#if !defined ( RDD_ADS ) .AND. !defined( RDD_LETO )
    rddSetDefault( Iif( ( numdriv := r1 ) == 1, "DBFCDX","DBFNTX" ) )
-   #endif
+#endif
    Set( _SET_EXCLUSIVE, lExcl )
    lShared := !lExcl
    lRdonly := lRd
@@ -850,11 +850,11 @@ FUNCTION ChildKill( oWindow )
          IF ValType( oBrw:cargo ) == "N"
             SELECT( oBrw:cargo )
             improc := oBrw:cargo
-            #ifdef RDD_ADS
+#ifdef RDD_ADS
             IF Alias() == "ADSSQL"
                nQueryWndHandle := 0
             ENDIF
-            #endif
+#endif
             FiClose()
             IF Len( HWindow():aWindows ) == 3
                hwg_Enablemenuitem( , 2, .F. , .F. )
@@ -953,11 +953,11 @@ STATIC FUNCTION Fiopen( fname, alsname, pass )
          ENDIF
       ENDIF
    ENDIF
-   #ifdef RDD_ADS
+#ifdef RDD_ADS
    IF pass != Nil
       AdsEnableEncryption( pass )
    ENDIF
-   #endif
+#endif
    aFiles[ improc, AF_NAME ] := Iif( fname != Nil, Upper( fname ), Alias() )
    aFiles[ improc, AF_EXCLU ] := Set( _SET_EXCLUSIVE )
    aFiles[ improc, AF_RDONLY ] := lRdonly

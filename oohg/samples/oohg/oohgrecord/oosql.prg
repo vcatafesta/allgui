@@ -61,7 +61,7 @@ CLASS ooMySql
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Skipper( nSkip ) CLASS ooMySql
 

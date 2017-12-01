@@ -23,7 +23,7 @@ FUNCTION Main()
       ON KEY F9  OF Form_1 ACTION ( Form_1.Tree_1.Value:= 1,;
          IF ( Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .T.,;
             Form_1.Tree_1.Collapse (Form_1.Tree_1.Value, .T.),;   // Collapse All
-         Form_1.Tree_1.Expand   (Form_1.Tree_1.Value, .T.)))   // Expand All
+            Form_1.Tree_1.Expand   (Form_1.Tree_1.Value, .T.)))   // Expand All
 
          DEFINE TREE Tree_1;
                AT 10,10;

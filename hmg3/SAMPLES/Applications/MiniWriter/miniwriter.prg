@@ -1162,7 +1162,7 @@ PROCEDURE MoveDialog ( nPos )
 
    LOCAL CharRowCol := Form_1.miniwrite_1.GetPosChar (nPos)
 
-   #define OFFSET_DLG 30
+#define OFFSET_DLG 30
 
    IF CharRowCol [1] <> -1 .AND. CharRowCol [2] <> -1
 
@@ -2134,7 +2134,7 @@ PROCEDURE INCRE_DECRE
          WIDTH 83 HEIGHT 20 ;
          VALUE '' ;
          ACTION ( FSNGI := INDENT_L.LINE_FIRST.VALUE , FSNGO := INDENT_L.LINE_FIRST.VALUE - INDENT_L.LINE_FIRST.VALUE - INDENT_L.LINE_FIRST.VALUE , INDENT_L.Release ) ; // ParagraphSet() , Parabull.Release
-      TOOLTIP '' ;
+         TOOLTIP '' ;
          TRANSPARENT
 
       @ 151, 116 LABEL RESPDEL_NO ;

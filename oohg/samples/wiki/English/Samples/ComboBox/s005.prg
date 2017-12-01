@@ -29,7 +29,7 @@ FUNCTION Main
          HEIGHT 100 ;
          ITEMS aItems ;
          VALUESOURCE (aValues) ;     // The parentheses are needed !!!
-      ON CHANGE oWnd:Label:Value := ;
+         ON CHANGE oWnd:Label:Value := ;
          "The combo's value is: " + oWnd:Combo:Value
 
       @ 60,10 LABEL Label ;

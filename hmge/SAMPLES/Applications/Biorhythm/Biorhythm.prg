@@ -900,8 +900,8 @@ FUNCTION GetTranslatorName(xcLang)
 
    RETURN xcLang
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif
 
    // End of file

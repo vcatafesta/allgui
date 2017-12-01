@@ -74,7 +74,7 @@ FUNCTION InvMDI()
 
    RETURN NIL
 
-   #define WM_MDIMAXIMIZE 0x0225
+#define WM_MDIMAXIMIZE 0x0225
 
 FUNCTION WinChildMaximize()
 

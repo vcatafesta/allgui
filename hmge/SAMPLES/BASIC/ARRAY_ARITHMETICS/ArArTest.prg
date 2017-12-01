@@ -139,9 +139,9 @@ PROC Main()
    *.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC ArArTest( ;            // Array arithmetics tests
-      nDim,;     // Array dimention : 1: Single, 2: Two dimension
-      nTest,;    // Test No : 1: Count, 2: Sum, 3: Average, 4: Total
-      nOptn  )   // Options
+         nDim,;     // Array dimention : 1: Single, 2: Two dimension
+         nTest,;    // Test No : 1: Count, 2: Sum, 3: Average, 4: Total
+         nOptn  )   // Options
 
       LOCAL aResults := {},;
          aDescrpt := {},;

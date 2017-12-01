@@ -100,7 +100,7 @@ PROCEDURE ExecTest( cFile )
 
    RETURN
 
-   #define SW_SHOW      5
+#define SW_SHOW      5
 
 STATIC FUNCTION Control( cString )
 

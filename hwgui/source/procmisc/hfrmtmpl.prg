@@ -50,7 +50,7 @@ STATIC aCtrls := { ;
    "HOwnButton():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,onPaint,onClick,flat,caption,TextColor,oFont,TextLeft,TextTop,widtht,heightt,BtnBitmap,lResource,BmpLeft,BmpTop,widthb,heightb,lTr,trColor,cTooltip)", ;
    "Hbrowse():New(BrwType,oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,onEnter,onGetfocus,onLostfocus,lNoVScroll,lNoBorder,lAppend,lAutoedit,onUpdate,onKeyDown,onPosChange,lMultiSelect)", ;
    "AddColumn(HColumn():New(cHeader,Fblock,cValType,nLength,nDec,lEdit,nJusHead, nJusLine, cPicture,bValid, bWhen, Items, ClrBlck, HeadClick ))", ;  //oBrw:AddColumn
-"HMonthCalendar():New(oPrnt,nId,dInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onChange,cTooltip,lNoToday,lNoTodayCircle,lWeekNumbers)", ;
+   "HMonthCalendar():New(oPrnt,nId,dInitValue,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onChange,cTooltip,lNoToday,lNoTodayCircle,lWeekNumbers)", ;
    "HTrackBar():New(oPrnt,nId,nInitValue,nStyle,nLeft,nTop,nWidth,nHeight,onInit,onSize,bPaint,cTooltip,onChange,onDrag,nLow,nHigh,lVertical,TickStyle,TickMarks)", ;
    "HTab():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,onPaint,Tabs,onChange,aImages,lResource)", ;
    "HTree():New(oPrnt,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont,onInit,onSize,TextColor,BackColor,aImages,lResource,lEditLabels,onTreeClick)", ;
@@ -125,7 +125,7 @@ CLASS HCtrlTmpl
 
    METHOD F( nId )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD F( nId ) CLASS HCtrlTmpl
 
@@ -178,7 +178,7 @@ CLASS VAR maxId    INIT 0
 
    METHOD Find( cId )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Read( fname, cId ) CLASS HFormTmpl
 
@@ -375,7 +375,7 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
 
    ELSEIF nMode == 1
 
-      #ifndef __LINUX__
+#ifndef __LINUX__
       IF lMdi
          INIT WINDOW ::oDlg MDI TITLE cTitle    ;
             At nLeft, nTop SIZE nWidth, nHeight ;
@@ -389,15 +389,15 @@ METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
             FONT oFont ;
             BACKGROUND BITMAP oBmp
       ELSE
-         #endif
+#endif
          INIT WINDOW ::oDlg MAIN TITLE cTitle    ;
             At nLeft, nTop SIZE nWidth, nHeight ;
             FONT oFont ;
             BACKGROUND BITMAP oBmp ;
             STYLE IIF( nstyle > 0 , nstyle, NIL )
-         #ifndef __LINUX__
+#ifndef __LINUX__
       ENDIF
-      #endif
+#endif
    ENDIF
 
    oDlg := ::oDlg
@@ -653,10 +653,10 @@ STATIC FUNCTION ReadCtrl( oCtrlDesc, oContainer, oForm )
 
    RETURN NIL
 
-   #define TBS_AUTOTICKS                1
-   #define TBS_TOP                      4
-   #define TBS_BOTH                     8
-   #define TBS_NOTICKS                 16
+#define TBS_AUTOTICKS                1
+#define TBS_TOP                      4
+#define TBS_BOTH                     8
+#define TBS_NOTICKS                 16
 
 STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
 
@@ -667,13 +667,13 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
    LOCAL cAliasdbf, caArray, nHeadRows := 1, nFootRows := 0, lDispHead := .T., lDispSep := .T., lSep3d := .F., ladjright := .T.
    LOCAL nheadColor := 0, nsepColor := 12632256, nLeftCol := 0, nfreeze := 0, nColumns := 0
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    LOCAL cKey := "" , cRelexpr := "", cLink := ""
 
-   #else
+#else
    LOCAL cKey := ""
 
-   #endif
+#endif
    MEMVAR oPrnt, nId, nStyle, nLeft, nTop
    MEMVAR onInit, lNoVScroll, lAppend, lAutoedit
    MEMVAR nWidth, nHeight, oFont, lNoBorder, bSetGet, ctoolTip
@@ -686,12 +686,12 @@ STATIC FUNCTION CreateCtrl( oParent, oCtrlTmpl, oForm )
    MEMVAR cValType, nDec, cPicture, lNoLines, lNoHeader, lMultiSelect, Items, nInterval, onAction
    MEMVAR nBitIp, nState, onClick, amenu, ccaption, hbmp, nBStyle, hIco
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    MEMVAR cLink, cRelexpr
    PRIVATE cLink := ""
    PRIVATE cRelexpr := ""
 
-   #endif
+#endif
    PUBLIC coName
 
    IF nCtrl == 0
@@ -1256,7 +1256,7 @@ CLASS HRepItem
 
    METHOD New( oParent )   INLINE ( ::oParent := oParent, AAdd( oParent:aControls, Self ), Self )
 
-ENDCLASS
+   ENDCLASS
 
 CLASS HRepTmpl
 
@@ -1290,7 +1290,7 @@ CLASS VAR maxId    INIT 0
 
    METHOD Close()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Read( fname, cId ) CLASS HRepTmpl
 
@@ -1404,11 +1404,11 @@ METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
          NEXT
       ENDIF
    NEXT
-   #ifdef __LINUX__
+#ifdef __LINUX__
    xTemp := hwg_gp_GetDeviceArea( oPrinter:hDC )
-   #else
+#else
    xTemp := hwg_GetDeviceArea( oPrinter:hDCPrn )
-   #endif
+#endif
    ::nKoefPix := ( ( xTemp[ 1 ] / xTemp[ 3 ] + xTemp[ 2 ] / xTemp[ 4 ] ) / 2 ) / 3.8
    oPrinter:SetMode( nOrientation )
    ::nKoefX := oPrinter:nWidth / nPWidth
@@ -1572,11 +1572,11 @@ METHOD PrintItem( oItem ) CLASS HRepTmpl
          ELSE
             nPenWidth := Round( ::nKoefPix, 0 )
          ENDIF
-         #ifdef __LINUX__
+#ifdef __LINUX__
          oItem:oPen := HGP_Pen():Add( nPenWidth )
-         #else
+#else
          oItem:oPen := HPen():Add( nPenType, nPenWidth )
-         #endif
+#endif
          // writelog( str(nPenWidth) + " " + str(::nKoefY) )
       ENDIF
       IF oItem:cClass == "label"

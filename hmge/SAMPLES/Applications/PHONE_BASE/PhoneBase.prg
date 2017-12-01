@@ -834,6 +834,6 @@ HB_FUNC( ENABLEPERMISSIONS )
 
 #pragma ENDDUMP
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif

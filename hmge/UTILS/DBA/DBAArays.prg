@@ -26,7 +26,7 @@ Revision : 23:360  28/07/1998
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 PROC MakSHArr(aShAr,;               // Make an arry for display
-   aArry,;
+      aArry,;
       nLvl,;
       lNumbered,;
       lRForm )
@@ -66,7 +66,7 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
    */
 
    FUNC Strg2Any( ;                          // String To Any Type
-      cStrg )
+         cStrg )
 
       LOCA xRVal := cStrg,;
          cStr2 := '',;
@@ -103,7 +103,7 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
 
       */
       FUNC ArMaxLen(;                             // Len of largest string in an array
-         aArry ,;
+            aArry ,;
             nIndc )
 
          LOCA nRVal := 0

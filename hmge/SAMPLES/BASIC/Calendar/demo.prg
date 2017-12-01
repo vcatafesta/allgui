@@ -164,19 +164,19 @@ FUNCTION Main()
 
       @ 310, 30 BUTTON ANTERIOR ;
          CAPTION '&Previous' ;  // '&Anterior'
-      WIDTH 80;
+         WIDTH 80;
          HEIGHT 28;
          ACTION Anterior()
 
       @ 310, 110 BUTTON HOY ;
          CAPTION '&Today' ;     // '&Hoy'
-      WIDTH 80;
+         WIDTH 80;
          HEIGHT 28;
          ACTION Hoy()
 
       @ 310, 190 BUTTON POSTERIOR ;
          CAPTION '&Next' ;      // '&Siguiente'
-      WIDTH 80;
+         WIDTH 80;
          HEIGHT 28;
          ACTION Posterior()
 

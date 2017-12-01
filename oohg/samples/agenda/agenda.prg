@@ -162,6 +162,6 @@ FUNCTION NoModulo()
    RETURN NIL
 
    *------------------------------ Arquivos --------------------------------------*
-   #include "Agenda2.PRG"
-   #include "CadGen.PRG"
-   #include "Funcoes.PRG"
+#include "Agenda2.PRG"
+#include "CadGen.PRG"
+#include "Funcoes.PRG"

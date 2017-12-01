@@ -557,7 +557,7 @@ FUNCTION MsgAbout()
       "This Program is Freeware!" + CRLF + ;
       padc("Copying is allowed!", 30), "About", IDI_MAIN, .F. )
 
-   #include "buffread.prg"
+#include "buffread.prg"
 
 #pragma BEGINDUMP
 

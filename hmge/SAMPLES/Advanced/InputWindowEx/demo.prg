@@ -266,4 +266,4 @@ PROCEDURE Main
 
                   RETURN
 
-                  #include "InputWindowEx.prg"
+#include "InputWindowEx.prg"

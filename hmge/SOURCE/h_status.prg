@@ -324,10 +324,10 @@ FUNCTION _SetStatusKeybrd ( BarName , FormName , Width , ToolTip , action )
 
    RETURN NIL
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    /* FOR EACH hb_enumIndex() */
-   #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-   #endif
+#xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
+#endif
 
 FUNCTION _IsOwnerDrawStatusBarItem( ParentHandle , ItemID , Value , lSet )
 

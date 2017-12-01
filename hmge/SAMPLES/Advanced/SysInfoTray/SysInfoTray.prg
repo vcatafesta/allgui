@@ -219,11 +219,11 @@ STATIC PROCEDURE SetMenuTheme()
 
    RETURN
 
-   #define WM_TASKBAR   WM_USER+1043
-   #define ID_TASKBAR   0
-   #define WM_MOUSEMOVE   512
-   #define WM_LBUTTONDOWN   513
-   #define WM_RBUTTONDOWN   516
+#define WM_TASKBAR   WM_USER+1043
+#define ID_TASKBAR   0
+#define WM_MOUSEMOVE   512
+#define WM_LBUTTONDOWN   513
+#define WM_RBUTTONDOWN   516
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
@@ -264,11 +264,11 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
          END
       ENDIF
       EXIT
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       DEFAULT
-      #else
+#else
    OTHERWISE
-      #endif
+#endif
       result := Events( hWnd, nMsg, wParam, lParam )
    END
 

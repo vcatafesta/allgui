@@ -321,15 +321,15 @@ FUNCTION RunUPX( cParam, nShow )
    LOCAL cUPXPrg := GetStartUpFolder() + "\upx.exe", nRet := 0
 
    IF !File( cUPXPrg )
-      #ifdef MAKE_UPX
+#ifdef MAKE_UPX
       Form_1.Statusbar.Item(1) := "Extract upx.exe, please wait..."
       MkFile( cUPXPrg )
       DO EVENTS
-      #else
+#else
       MsgAlert( "You should place the upx.exe at the program folder!" )
 
       RETURN nRet
-      #endif
+#endif
    ENDIF
    Form_1.Statusbar.Item(1) := IF("-d" $ cParam, "Dec", "C" ) + "ompress, please wait..."
 

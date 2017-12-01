@@ -78,8 +78,8 @@ PROCEDURE _DefineMyButton ( cName , nRow , nCol , cCaption , bAction , cParent )
 
    RETURN
 
-   #define WM_COMMAND      0x0111
-   #define BN_CLICKED      0
+#define WM_COMMAND      0x0111
+#define BN_CLICKED      0
 
 FUNCTION MyButtonEventhandler ( hWnd, nMsg, wParam, lParam )
 

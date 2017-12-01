@@ -58,11 +58,11 @@ PROCEDURE OnInit
 
    RETURN
 
-   #define NO_ERROR         0
+#define NO_ERROR         0
 
-   #define ERROR_CANCELLED         1223
-   #define ERROR_INVALID_FLAGS      1004
-   #define ERROR_NO_SUCH_LOGON_SESSION   1312
+#define ERROR_CANCELLED         1223
+#define ERROR_INVALID_FLAGS      1004
+#define ERROR_NO_SUCH_LOGON_SESSION   1312
 
 FUNCTION GetPassword( hWnd, cMessage, cCaption, hBitmap, cTargetName, /* @ */cUserName, /* @ */cPassword, lSave, nFlags )
 

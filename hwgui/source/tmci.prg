@@ -34,7 +34,7 @@ CLASS TMci
 
    METHOD SendStr( cMciStr )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cDevice, cFileName ) CLASS TMci
 

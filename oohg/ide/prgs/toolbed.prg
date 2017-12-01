@@ -58,7 +58,7 @@ CLASS TMyToolBarEditor
 
    METHOD Release
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddToolBar( cName ) CLASS TMyToolBarEditor
 
@@ -332,7 +332,7 @@ CLASS TMyToolBar
 
    METHOD WriteWhole
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddBtn() CLASS TMyToolBar
 
@@ -1095,7 +1095,7 @@ CLASS TMyTBBtn
 
    METHOD ReadTBBtnStringData
 
-ENDCLASS
+   ENDCLASS
 
 METHOD FmgOutput( nSpacing ) CLASS TMyTBBtn
 

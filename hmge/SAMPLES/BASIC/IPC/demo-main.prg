@@ -81,7 +81,7 @@ PROCEDURE RunNewExe( hHandleMain )
 
    RETURN
 
-   #define WM_CLOSE 0x0010
+#define WM_CLOSE 0x0010
 
 PROCEDURE CloseClient()
 
@@ -93,7 +93,7 @@ PROCEDURE CloseClient()
 
    RETURN
 
-   #define WM_COPYDATA 74
+#define WM_COPYDATA 74
 
 FUNCTION MyEventsHandler( hWnd, nMsg, wParam, lParam )
 

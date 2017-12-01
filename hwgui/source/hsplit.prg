@@ -41,7 +41,7 @@ CLASS VAR winclass INIT "STATIC"
 
    METHOD DragAll( lScroll )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, ;
       bSize, bDraw, color, bcolor, aLeft, aRight, lTransp, lScrolling ) CLASS HSplitter

@@ -62,7 +62,7 @@ CLASS HPager INHERIT HControl
 
    METHOD Pagergetbuttonstate() INLINE hwg_Pagergetbuttonstate( ::handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lvert ) CLASS HPager

@@ -434,12 +434,12 @@ FUNCTION Main()
 
    @ nY, nX BUTTONEX FRM_4 PICTURE 'n4' CAPTION ""          ;
       ACTION ( oWnd:SendMsg(1, This.FRM_1.Handle),    ; // Do_WindowEventProcedure  for FRM_1 key from win_1
-   oWnd:SendMsg(2, This.FRM_2.Handle),    ; // Do_WindowEventProcedure  for FRM_2 key from win_1
-   oWnd:SendMsg(1),                       ; // Do_WindowEventProcedure  for win_1 key from win_1
-   oWnd:SendMsg(2),                       ; // Do_WindowEventProcedure  for win_1 key from win_1
-   oWnd:GetObj( This.Handle ):SendMsg(1), ; // Do_ControlEventProcedure for FRM_4 key from FRM_4
-   oWnd:GetObj( This.Handle ):SendMsg(2), ; // Do_ControlEventProcedure for FRM_4 key from FRM_4
-   oBrw1:SetFocus() )                     ;
+      oWnd:SendMsg(2, This.FRM_2.Handle),    ; // Do_WindowEventProcedure  for FRM_2 key from win_1
+      oWnd:SendMsg(1),                       ; // Do_WindowEventProcedure  for win_1 key from win_1
+      oWnd:SendMsg(2),                       ; // Do_WindowEventProcedure  for win_1 key from win_1
+      oWnd:GetObj( This.Handle ):SendMsg(1), ; // Do_ControlEventProcedure for FRM_4 key from FRM_4
+      oWnd:GetObj( This.Handle ):SendMsg(2), ; // Do_ControlEventProcedure for FRM_4 key from FRM_4
+      oBrw1:SetFocus() )                     ;
       WIDTH 50 HEIGHT 50 ;
       TOOLTIP 'Test WM_USER+... message ( control and window events )' ;
       NOXPSTYLE NOTABSTOP
@@ -459,7 +459,7 @@ FUNCTION Main()
    WITH OBJECT oWnd:GetObj(cNam)
       :Cargo := 0
       :Event( 1, {|oc,kd,id| kd := Eval( oBrw1:GetColumn('KODS'):bData ), ;       // Get
-      id := Eval( oBrw1:GetColumn('ID'):bData ),  ;
+         id := Eval( oBrw1:GetColumn('ID'):bData ),  ;
          oc:Value := alltrim(cValToChar(id))+"-<"+ ;
          alltrim(cValToChar(kd))+">" } )
       :Event( 2, {|oc      | oc:Window:oCargo:Set(oc:Name, oc:Value) } )          // Put
@@ -472,7 +472,7 @@ FUNCTION Main()
 
    WITH OBJECT oWnd:GetObj(cNam)
       :Event( 1, {|oc,kl   | kl := Eval( oBrw1:GetColumn('KOLV'):bData ), ;        // Get
-      oc:Value := alltrim(cValToChar(kl)) } )
+         oc:Value := alltrim(cValToChar(kl)) } )
       :Event( 2, {|oc      | oc:Window:oCargo:Set(oc:Name, oc:Value) } )           // Put
       :Window:oCargo:Set(cNam, :Value )                                            // init value to oCargo
    END WITH
@@ -483,7 +483,7 @@ FUNCTION Main()
 
    WITH OBJECT oWnd:GetObj(cNam)
       :Event( 1, {|oc,cn   | cn := Eval( oBrw1:GetColumn('CENA'):bData ), ;        // Get
-      oc:Value := alltrim(cValToChar(cn)) } )
+         oc:Value := alltrim(cValToChar(cn)) } )
       :Event( 2, {|oc      | oc:Window:oCargo:Set(oc:Name, oc:Value) } )           // Put
       :Window:oCargo:Set(cNam, :Value )                                            // init value to oCargo
    END WITH

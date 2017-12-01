@@ -74,10 +74,10 @@ FUNCTION Prepare_InputWindow(nOption)
    nCol           := 0                                                        // Optional. Force to Center horizontally
    aBackColor     := {212,208,200}                                            // Optional
    aToolTips   := { "ToolTips 1","ToolTips 2","ToolTips 3", ;                 // Optional
-   "ToolTips 4","ToolTips 5","ToolTips 6", ;
+      "ToolTips 4","ToolTips 5","ToolTips 6", ;
       "ToolTips 7", "ToolTips 8","ToolTips 9" }
    aHotKeys       := { { 0, VK_ESCAPE, {|| ThisWindow.Release() } }, ;        // Optional
-   { 0, VK_UP, {|| InsertShiftTab() } }, ;
+      { 0, VK_UP, {|| InsertShiftTab() } }, ;
       { 0, VK_DOWN, {|| InsertTab() } } }
 
    /*         This must obey the same settings and sequences that are
@@ -101,7 +101,7 @@ FUNCTION Prepare_InputWindow(nOption)
    lControlBold   := .T.                                              // Optional
 
    aStyles        := {{nLabelWidth,lLabelBold,aLabelFColor,nAlign},;  // Need to be declared Bidimensional {{},{}}
-   {xControlWidth,lControlBold}}
+      {xControlWidth,lControlBold}}
 
    bCode          := {|| My_UDF()}                                    // Optional. Good to insert UDFs
 

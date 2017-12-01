@@ -745,7 +745,7 @@ FUNCTION _GridEx_GetCellVirtualValueByIndex ( i, nRow , nCol )
 
 FUNCTION _GridEx_DoHeaderCustomDraw ( i, lParam, nCol )
 
-   #define COLOR_BTNFACE   15   // ok
+#define COLOR_BTNFACE   15   // ok
    LOCAL DefaultBackColor := GetSysColor ( COLOR_BTNFACE )
    LOCAL DefaultForeColor := RGB (  0,   0,   0)   // BLACK
    LOCAL BackColor  := _HMG_SYSDATA [40] [i] [28]

@@ -25,7 +25,7 @@ PROCEDURE Main
          NOMAXIMIZE NOSIZE ;
          ON INIT ( ;
          CaptureImage() ;  // capture initialization
-      ) ;
+         ) ;
          ON RELEASE ( ;
          CloseWebCam() ;
          )
@@ -152,7 +152,7 @@ PROCEDURE CaptureImage
 
    RETURN
 
-   #define CF_BITMAP     2
+#define CF_BITMAP     2
 
 STATIC FUNCTION LoadFromClpbrd( hWnd, w, h )
 

@@ -96,7 +96,7 @@ CLASS TCustomer from TData
    Hidden:
    DATA lAdd as logical
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new()
 
@@ -232,7 +232,7 @@ METHOD _delete()
 
    RETURN self
 
-   #define WM_MDIMAXIMIZE 0x0225
+#define WM_MDIMAXIMIZE 0x0225
 
 FUNCTION WinChildMaximize()
 

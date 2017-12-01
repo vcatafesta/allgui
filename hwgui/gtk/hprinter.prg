@@ -14,15 +14,15 @@ STATIC crlf := e"\r\n"
 
 CLASS HPrinter
 
-   #if defined( __LINUX__ ) .AND. defined( __RUSSIAN__ )
+#if defined( __LINUX__ ) .AND. defined( __RUSSIAN__ )
 
 CLASS VAR cdp       SHARED  INIT "RUKOI8"
 
-   #else
+#else
 
 CLASS VAR cdp       SHARED
 
-   #endif
+#endif
    DATA hDC  INIT 0
    DATA cPrinterName   INIT "DEFAULT"
    DATA cdpIn
@@ -74,7 +74,7 @@ CLASS VAR cdp       SHARED
 
    METHOD GetTextWidth( cString, oFont )  INLINE hwg_gp_GetTextSize( ::hDC, cString, oFont:name, oFont:height )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cPrinter, lmm ) CLASS HPrinter
 
@@ -334,7 +334,7 @@ CLASS VAR aFonts   INIT {}
 
    METHOD RELEASE( lAll )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Add( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Font
 
@@ -410,7 +410,7 @@ CLASS VAR aPens   INIT {}
 
    METHOD Release()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Add( nWidth, style, color ) CLASS HGP_Pen
 

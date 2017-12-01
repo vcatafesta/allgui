@@ -148,7 +148,7 @@ CLASS TText FROM TLabel
 
    Empty( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( cControlName, cParentForm, nx, ny, nWidth, nHeight, cValue, ;
       cFontName, nFontSize, cToolTip, nMaxLength, lUpper, lLower, ;
@@ -846,7 +846,7 @@ CLASS TTextPicture FROM TText
 
    METHOD Events_Command
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( cControlName, cParentForm, nx, ny, nWidth, nHeight, uValue, ;
       cInputMask, cFontName, nFontSize, cToolTip, uLostFocus, ;
@@ -1576,7 +1576,7 @@ CLASS TTextNum FROM TText
 
    METHOD Events_Command
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( cControlName, cParentForm, nx, ny, nWidth, nHeight, cValue, ;
       cFontName, nFontSize, cToolTip, nMaxLength, lUpper, lLower, ;

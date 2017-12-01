@@ -31,7 +31,7 @@ CREATE CLASS TSimpleTaskDialog FUNCTION SimpleTaskDialog
    VAR    nCommonButtons               INIT       TDCBF_OK_BUTTON
    VAR    nMainIcon                    INIT       TD_NO_ICON
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cTitle, cInstruction, cContent, nCommonButtons, nMainIcon ) CLASS TSimpleTaskDialog
 
@@ -189,7 +189,7 @@ CREATE CLASS TTaskDialog FUNCTION TaskDialog
    VAR lTimeOut        READONLY INIT .F.
    VAR nTimeOutMS      READONLY INIT 0
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cTitle, cInstruction, cContent, cFooter, nCommonButtons, nMainIcon ) CLASS TTaskDialog
 

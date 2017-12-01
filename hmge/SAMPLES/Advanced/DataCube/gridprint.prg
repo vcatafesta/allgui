@@ -63,62 +63,62 @@ FUNCTION gridprint(cGrid,cWindow,fontsize,orientation,aHeaders,fontname1,showwin
    LOCAL maxcol1 := 0
    LOCAL i := 0
    PRIVATE msgarr := {"Nothing to print",;    //1
-   "No printers have been installed!",;  //2
-   "Print Wizard",;  //3
-   "Report Writer",; //4
-   "Columns",; //5
-   "Name of the Column",; //6
-   "Width (mm)",; //7
-   "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
-   "Edit Text Column Size",; //9
-   "Total Width :",; //10
-   "out of",;  //11
-   "Header 1",;  //12
-   "Header 2",; //13
-   "Header 3",; //14
-   "Footer 1",; //15
-   "Report Properties",; //16
-   "Font Size",; //17
-   "Lengthy Line",; //18
-   "Word Wrap",; //19
-   "Truncate",; //20
-   "Pagination",; //21
-   "Off",; //22
-   "Top",; //23
-   "Bottom",; //24
-   "Grid Lines",; //25
-   "Column",; //26
-   "Row",; //27
-   "Page Center",; //28
-   "Vertical",; //29
-   "Page/Printer",; //30
-   "Orientation",; //31
-   "Landscape",; //32
-   "Portrait",; //33
-   "Printer: ",; //34
-   "Page Size",; //35
-   "Page Width",; //36
-   "Page Height",; //37
-   "Margins (mm)",; //38
-   "Top",; //39
-   "Right",; //40
-   "Left",; //41
-   "Bottom",; //42
-   "Print",; //43
-   "Cancel",; //44
-   "Welcome to Print Wizard",; //45
-   "You had selected more columns than to fit in a page!",; //46
-   "You have to select a printer!",; //47
-   "Printer could not be selected! Check Availability of Printer.",; //48
-   "Page No. :",; //49
-   "Size :",; //50
-   "Done",; //51
-   "Size of Columns other than text type can not be modified!",; //52
-   "Justification constants not given properly.",; //53
-   "Whitespace",; //54
-   "Spread",; //55
-   "Apply",; //56
-   }
+      "No printers have been installed!",;  //2
+      "Print Wizard",;  //3
+      "Report Writer",; //4
+      "Columns",; //5
+      "Name of the Column",; //6
+      "Width (mm)",; //7
+      "Double Click a Column to toggle between selecting and not selecting for printing.",; //8
+      "Edit Text Column Size",; //9
+      "Total Width :",; //10
+      "out of",;  //11
+      "Header 1",;  //12
+      "Header 2",; //13
+      "Header 3",; //14
+      "Footer 1",; //15
+      "Report Properties",; //16
+      "Font Size",; //17
+      "Lengthy Line",; //18
+      "Word Wrap",; //19
+      "Truncate",; //20
+      "Pagination",; //21
+      "Off",; //22
+      "Top",; //23
+      "Bottom",; //24
+      "Grid Lines",; //25
+      "Column",; //26
+      "Row",; //27
+      "Page Center",; //28
+      "Vertical",; //29
+      "Page/Printer",; //30
+      "Orientation",; //31
+      "Landscape",; //32
+      "Portrait",; //33
+      "Printer: ",; //34
+      "Page Size",; //35
+      "Page Width",; //36
+      "Page Height",; //37
+      "Margins (mm)",; //38
+      "Top",; //39
+      "Right",; //40
+      "Left",; //41
+      "Bottom",; //42
+      "Print",; //43
+      "Cancel",; //44
+      "Welcome to Print Wizard",; //45
+      "You had selected more columns than to fit in a page!",; //46
+      "You have to select a printer!",; //47
+      "Printer could not be selected! Check Availability of Printer.",; //48
+      "Page No. :",; //49
+      "Size :",; //50
+      "Done",; //51
+      "Size of Columns other than text type can not be modified!",; //52
+      "Justification constants not given properly.",; //53
+      "Whitespace",; //54
+      "Spread",; //55
+      "Apply",; //56
+      }
 
    PRIVATE fontname := ""
    PRIVATE fontsizesstr := {}

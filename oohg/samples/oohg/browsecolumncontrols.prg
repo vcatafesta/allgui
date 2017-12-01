@@ -31,12 +31,12 @@ PROCEDURE MAIN
    USE browsecolumncontrols
 
    aReplaceField := { , ; // FieldBlock( "COMPUTER" )
-   { |a| SaveFullName( a ) }, ;
+      { |a| SaveFullName( a ) }, ;
       { |a| SaveIPAddress( a ) }, ;
       , ; // FieldBlock( "INETACCESS" )
-   , ; // FieldBlock( "GROUP" )
-   , ; // FieldBlock( "INSTALLED" )
-   } // FieldBlock( "LASTACCESS" )
+      , ; // FieldBlock( "GROUP" )
+      , ; // FieldBlock( "INSTALLED" )
+      } // FieldBlock( "LASTACCESS" )
 
    DEFINE WINDOW Main OBJ oMain AT 0,0 WIDTH 728 HEIGHT 250 ;
          TITLE "Browse COLUMNCONTROLS demo." MAIN
@@ -91,7 +91,7 @@ CLASS MyIpAddress FROM TGridControl // CLASS TGridControlIpAddress
 
    METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), LTrim(Str(uValue[1]))+"."+LTrim(Str(uValue[2]))+"."+LTrim(Str(uValue[3]))+"."+LTrim(Str(uValue[4])) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD CreateControl( uValue, cWindow, nRow, nCol, nWidth, nHeight ) CLASS MyIpAddress
 
@@ -139,7 +139,7 @@ CLASS MyRadioGroup FROM TGridControl // CLASS TGridControlRadioGroup
 
    METHOD GridValue(uValue) BLOCK { |Self,uValue| if( ( uValue >= 1 .AND. uValue <= Len( ::aItems ) ), ::aItems[ uValue ], "" ) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( aItems, nSpacing ) CLASS MyRadioGroup
 
@@ -189,7 +189,7 @@ CLASS MyFullName FROM TGridControl
 
    METHOD OnLostFocus       SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD CreateWindow( uValue, nRow, nCol, nWidth, nHeight, cFontName, nFontSize ) CLASS MyFullName
 

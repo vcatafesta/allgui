@@ -54,7 +54,7 @@ CLASS VAR winclass INIT "STATIC"
 
    METHOD SetCoor( xName,nValue )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
 
@@ -1189,9 +1189,9 @@ FUNCTION GetTextWidth( cString, oFont ,hdc)
 
    // :END LFB
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 FUNCTION hb_At( s1, s2, n )
 
    RETURN At( s1, s2, n )
-   #endif
+#endif

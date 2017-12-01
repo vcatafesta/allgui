@@ -114,7 +114,7 @@ CLASS VAR winclass INIT "COMBOBOX"
 
    METHOD MaxLength( nMaxLength ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, bLFocus, ;
@@ -884,7 +884,7 @@ METHOD Populate() CLASS HComboBox
 
    RETURN LongComboWidth
 
-   #define TRANSPARENT        1
+#define TRANSPARENT        1
 
 CLASS HCheckComboBox INHERIT HComboBox
 
@@ -939,7 +939,7 @@ CLASS VAR winclass  INIT "COMBOBOX"
 
    METHOD SkipItems( nNav )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;

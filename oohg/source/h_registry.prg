@@ -75,7 +75,7 @@ CLASS TReg32
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nKey, cRegKey, lShowError ) CLASS TReg32
 

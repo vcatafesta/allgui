@@ -26,7 +26,7 @@ FUNCTION AllNum(cVar)
 
    Return(lOk)
 
-   #ifndef DOS_ONLY
+#ifndef DOS_ONLY
 
 FUNCTION AllValid(oDlg)
 
@@ -83,7 +83,7 @@ FUNCTION FldValid(oFld)
 
    Return(lOk)
 
-   #endif
+#endif
 
 FUNCTION GenValid(uVar, Edits, Misc1, Misc2, lMsgs, lEmpty)
 
@@ -317,11 +317,11 @@ FUNCTION GenValid(uVar, Edits, Misc1, Misc2, lMsgs, lEmpty)
          LOOP
       CASE e == "DIR" //------------------------------------------- Directory
          cMsg := "Invalid directory"
-         #ifdef DOS_ONLY
+#ifdef DOS_ONLY
          lOk := .T. // We have no way to tell...
-         #else
+#else
          lOk := lIsDir(StripSlash(alltrim(uVar)))
-         #endif
+#endif
       CASE e == "FILE" //----------------------------------------------- File
          IF !GoodFile(uVar)
             cMsg := "Invalid filename"

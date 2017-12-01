@@ -113,11 +113,11 @@ CLASS TWndData
       ::oUserKeys     := iif( HB_ISOBJECT( ::oUserKeys     ), ::oUserKeys:Destroy()    , Nil ), ;
       ::nIndex := ::nParent   := ::cType   := ::cName  := ::cVar  := ::cChr  := Nil,            ;
       hmg_DelWindowObject( ::nHandle ), ::nHandle := Nil )
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    DESTRUCTOR DestroyObject()
-   #endif
+#endif
 
-ENDCLASS
+   ENDCLASS
 
 METHOD GetListType()  CLASS TWndData
 
@@ -170,14 +170,14 @@ METHOD DoEvent ( Key, nHandle )  CLASS TWndData
 
    RETURN       Do_ControlEventProcedure( ::oEvent:Get( Key ), o:Index, o, Key )
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 METHOD PROCEDURE DestroyObject()  CLASS TWndData
 
    ::Destroy()
 
    RETURN
-   #endif
+#endif
 
 CLASS TCnlData   INHERIT TWndData
 
@@ -245,11 +245,11 @@ CLASS TCnlData   INHERIT TWndData
       ::oHand         := iif( HB_ISOBJECT( ::oHand         ), ::oHand:Destroy()        , Nil ), ;
       ::nParent := ::nIndex := ::cName := ::cType := ::cVar := ::cChr := Nil,                   ;
       hmg_DelWindowObject( ::nHandle ), ::nHandle := Nil )
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    DESTRUCTOR DestroyObject()
-   #endif
+#endif
 
-ENDCLASS
+   ENDCLASS
 
 METHOD DoEvent ( Key, nHandle )  CLASS TCnlData
 
@@ -257,14 +257,14 @@ METHOD DoEvent ( Key, nHandle )  CLASS TCnlData
 
    RETURN Do_ControlEventProcedure( ::oEvent:Get( Key ), o:Index, o, Key )
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 METHOD PROCEDURE DestroyObject()  CLASS TCnlData
 
    ::Destroy()
 
    RETURN
-   #endif
+#endif
 
 CLASS TGetData   INHERIT TCnlData
 
@@ -287,7 +287,7 @@ CLASS TGetData   INHERIT TCnlData
       _GetValue( , ,       ::nIndex ) )
    METHOD Destroy()         INLINE ::oGetBox := ::Super:Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 CLASS TStbData   INHERIT TCnlData
 
@@ -312,7 +312,7 @@ CLASS TStbData   INHERIT TCnlData
    METHOD Action( nItem, bBlock ) INLINE _SetStatusItemAction( hb_defaultValue( nItem, 1 ), bBlock, ;
       ::oWin:nHandle )
 
-ENDCLASS
+   ENDCLASS
 
 CLASS TTsbData   INHERIT TCnlData
 
@@ -333,7 +333,7 @@ CLASS TTsbData   INHERIT TCnlData
    METHOD OnEvent( nMsg, wParam, lParam ) INLINE ::Tsb:HandleEvent( nMsg, wParam, lParam )
    METHOD Destroy()                       INLINE ::oTBrowse := ::Super:Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 CLASS TWmEData
 
@@ -353,7 +353,7 @@ CLASS TWmEData
    _METHOD Do( nMsg, wParam, lParam )
    _METHOD Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Do( nMsg, wParam, lParam )  CLASS TWmEData
 
@@ -417,7 +417,7 @@ CLASS TKeyData
    _METHOD Sum( Key, xSum )
    _METHOD Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Eval( Block ) CLASS TKeyData
 
@@ -514,7 +514,7 @@ CLASS TThrData
    _METHOD Sum( Key, xSum )
    _METHOD Destroy()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD SGD( n, k, v ) CLASS TThrData
 
@@ -674,7 +674,7 @@ FUNCTION oKeyData( Obj, Event )
 
    RETURN o
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 STATIC FUNCTION hb_HGetDef( hHash, xKey, xDef )
 
@@ -682,6 +682,6 @@ STATIC FUNCTION hb_HGetDef( hHash, xKey, xDef )
 
    RETURN iif( nPos > 0, HGetValueAt( hHash, nPos ), xDef )
 
-   #endif
+#endif
 
-   #endif
+#endif

@@ -69,9 +69,9 @@ CLASS TFtp
    CLASSDATA cHostAddress  HIDDEN
    CLASSDATA nHostPort     HIDDEN
 
-ENDCLASS
+   ENDCLASS
 
-// New
+   // New
 
 METHOD New() CLASS TFtp
 

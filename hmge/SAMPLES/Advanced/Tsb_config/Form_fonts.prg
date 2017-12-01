@@ -141,4 +141,3 @@ STATIC FUNCTION ChangeFont(nItem, aFonts)
    ENDIF
 
    RETURN NIL
-

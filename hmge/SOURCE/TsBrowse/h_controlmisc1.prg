@@ -11,11 +11,11 @@ FUNCTION cValToChar( xValue )
    CASE cType $  "CM";  cValue := xValue
    CASE cType == "N" ;  cValue := hb_ntos( xValue )
    CASE cType == "D" ;  cValue := DToC( xValue )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    CASE cType == "T" ;  cValue := DToC( TToD( xValue ) )
-      #else
+#else
    CASE cType == "T" ;  cValue := DToC( hb_TToD( xValue ) )
-      #endif
+#endif
    CASE cType == "L" ;  cValue := iif( xValue, "T", "F" )
    CASE cType == "A" ;  cValue := AToC( xValue )
    CASE cType $  "UE";  cValue := ""

@@ -92,7 +92,7 @@ CLASS TApplication
 
    METHOD Width      SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD BackColor( uColor ) CLASS TApplication
 

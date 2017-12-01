@@ -64,7 +64,7 @@ FUNCTION Main
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 FUNCTION HB_ValToExp ( lArray )
 
@@ -82,4 +82,4 @@ FUNCTION HB_ValToExp ( lArray )
 
    RETURN RetVal + '}'
 
-   #endif
+#endif

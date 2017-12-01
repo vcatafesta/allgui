@@ -125,9 +125,9 @@ PROCEDURE MakeMenu()
 
    RETURN
 
-   #define IDYES  1
-   #define IDNO  0
-   #define IDCANCEL -1
+#define IDYES  1
+#define IDNO  0
+#define IDCANCEL -1
 
 FUNCTION lReleaseCheck()
 
@@ -331,11 +331,11 @@ STATIC FUNCTION GetTitles( hOwnWnd )
       cTitle := GetWindowText( hWnd )
 
       IF IsWindowVisible( hWnd ) .AND. ;     // If it is a visible window OR
-         !Empty( cTitle ) .AND. ;            // If the window has a title
-         !"About" $ cTitle .AND. ;
+            !Empty( cTitle ) .AND. ;            // If the window has a title
+            !"About" $ cTitle .AND. ;
             hWnd != hOwnWnd .AND. ;             // If it is not this app
-         !( "DOS Session" $ cTitle ) .AND. ; // If it is not DOS session
-         !( cTitle == "Program Manager" )    // If it is not the Program Manager
+            !( "DOS Session" $ cTitle ) .AND. ; // If it is not DOS session
+            !( cTitle == "Program Manager" )    // If it is not the Program Manager
 
          GetFullFileNameByHandle( hWnd, @cExeName )
          AAdd( aTasks, { cTitle, hWnd, Upper( cExeName ) } )

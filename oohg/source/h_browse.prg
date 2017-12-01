@@ -225,7 +225,7 @@ CLASS TOBrowse FROM TXBrowse
    SetSelectedColors
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, nCol, nRow, nWidth, nHeight, aHeaders, aWidths, ;
       aFields, nValue, cFontName, nFontSize, cTooltip, bOnChange, ;
@@ -2409,7 +2409,7 @@ CLASS TOBrowseByCell FROM TOBrowse
    SetRangeColor
    */
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define3( ControlName, ParentForm, x, y, w, h, fontname, fontsize, ;
       tooltip, aHeadClick, nogrid, aImage, break, HelpId, bold, ;

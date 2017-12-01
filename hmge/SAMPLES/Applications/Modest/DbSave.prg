@@ -37,16 +37,16 @@ FUNCTION SaveData
    // Array of working params
 
    PRIVATE aParams := { 'SaveStru'   => .F., ;    // Keep of database structure
-   'SaveDesc'   => .F., ;    // Keep of description
-   'DeletedOff' => .T., ;    // Transfer the deleted records
-   'CreateBAK'  => .F., ;    // Create backup
-   'NewFile'    => .T., ;    // Flag: new file creation
-   'Path'       => '' , ;    // Path to preservation
-   'File'       => '' , ;    // File name (without path)
-   'Ext'        => '' , ;    // File extension
-   'RDD'        => '' , ;    // Database RDD
-   'TmpFile'    => ''   ;    // Temporary file
-   }
+      'SaveDesc'   => .F., ;    // Keep of description
+      'DeletedOff' => .T., ;    // Transfer the deleted records
+      'CreateBAK'  => .F., ;    // Create backup
+      'NewFile'    => .T., ;    // Flag: new file creation
+      'Path'       => '' , ;    // Path to preservation
+      'File'       => '' , ;    // File name (without path)
+      'Ext'        => '' , ;    // File extension
+      'RDD'        => '' , ;    // Database RDD
+      'TmpFile'    => ''   ;    // Temporary file
+      }
 
    LOAD WINDOW DbSave as wSave
 

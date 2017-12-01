@@ -68,12 +68,12 @@ PROC NewTableBD()                         // Build by defining a New Table and U
 
       WHILE !lDone
          aComPars  := { { SPAC( 256 ), "Table", "*.dbf", .F. },;  // Source FILE Name
-         { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
+            { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
 
          aComOpts  := GFUComOpts( aComPars,;  // Values of options
-         cCbFTitl,;  // Command's name
-         { { 'SFN',"S. Ext." },;      // Source file Name
-         { 'OFN',"New " } } )       // Output file expression
+            cCbFTitl,;  // Command's name
+            { { 'SFN',"S. Ext." },;      // Source file Name
+            { 'OFN',"New " } } )       // Output file expression
          IF !EMPTY( aComOpts )
             cStETNam  := aComOpts[ 1 ]
             IF STEXTValid( cStETNam )
@@ -119,8 +119,8 @@ PROC NewTableBD()                         // Build by defining a New Table and U
          aComPars  := { { SPAC( 256 ), "Table", "*.dbf", .F. } }  // Target FILE
 
          aComOpts  := GFUComOpts( aComPars,;  // Values of options
-         cCbFTitl,;  // Command's name
-         { { 'OFN',"New " } } )  // Output file expression
+            cCbFTitl,;  // Command's name
+            { { 'OFN',"New " } } )  // Output file expression
          IF !EMPTY( aComOpts )
             cNewTNam  := aComOpts[ 1 ]
             DBSELECTAR(0)                 // lowest numbered unoccupied work area
@@ -142,7 +142,7 @@ PROC NewTableBD()                         // Build by defining a New Table and U
          *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
          FUNC StExTValid( ;                        // Struct Extended file valid
-            cStETNam )
+               cStETNam )
 
             LOCA lRVal   := .T.,;
                nFlds   := 0,;

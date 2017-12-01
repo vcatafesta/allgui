@@ -404,7 +404,7 @@ FUNCTION Statistic()
 
    LOCAL cnt := {} , ;
       noldorder   := Presa->(indexord()), ; // original file index order
-   ntargetpos  := Presa->(recno())       // position of target file
+      ntargetpos  := Presa->(recno())       // position of target file
    LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] ,;
       aIniVal := { presa->data_in, date() },;
       aFmt    := { '99/99/99' , '99/99/99' },;
@@ -492,10 +492,10 @@ CREATE CLASS TAPPLICATION
    METHOD New()  CONSTRUCTOR
    METHOD IFDATA()
 
-ENDCLASS
+   ENDCLASS
 
-/*
-*/
+   /*
+   */
 
 METHOD New() CLASS TApplication
 
@@ -674,7 +674,7 @@ FUNCTION SaveParam(cIniFile, lForce)
    RETURN NIL
    /*
    */
-   #include "indici.prg"
+#include "indici.prg"
    /*
    */
 #pragma BEGINDUMP

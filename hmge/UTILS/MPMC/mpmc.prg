@@ -210,7 +210,7 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\dll.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\calldll.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\gtgui.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    Out := Out + ' echo $(HRB_LIB_DIR)\rtl.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\vm.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\rdd.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
@@ -227,7 +227,7 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\pcrepos.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\ct.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\libmisc.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-   #else
+#else
    Out := Out + ' echo $(HRB_LIB_DIR)\hbcplr.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbrtl.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbvm.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
@@ -246,7 +246,7 @@ PROCEDURE Build
    Out := Out + ' echo $(HRB_LIB_DIR)\hbct.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbmisc.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\hbole.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
-   #endif
+#endif
    Out := Out + ' echo $(HRB_LIB_DIR)\hbprinter.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\miniprint.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
    Out := Out + ' echo $(HRB_LIB_DIR)\socket.lib + >> b32.bc' + Chr( 13 ) + Chr ( 10 )
@@ -413,4 +413,3 @@ HB_FUNC ( SETCURRENTFOLDER )
 }
 
 #pragma ENDDUMP
-

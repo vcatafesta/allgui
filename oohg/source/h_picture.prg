@@ -111,7 +111,7 @@ CLASS TPicture FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, FileName, w, h, cBuffer, hBitMap, ;
       stretch, autofit, imagesize, BORDER, CLIENTEDGE, BackColor, ;

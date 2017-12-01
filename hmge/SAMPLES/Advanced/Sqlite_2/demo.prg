@@ -69,9 +69,9 @@ PROCEDURE OnInit()
 
    RETURN
 
-   #ifdef __XHARBOUR__
-   #xcommand OTHERWISE => DEFAULT
-   #endif
+#ifdef __XHARBOUR__
+#xcommand OTHERWISE => DEFAULT
+#endif
 
 PROCEDURE Test( n )
 
@@ -116,7 +116,7 @@ PROCEDURE Test( n )
 
    RETURN
 
-   #translate Alert( <c>, <t> ) => MsgExclamation( <c>, <t> )
+#translate Alert( <c>, <t> ) => MsgExclamation( <c>, <t> )
 
 FUNCTION ShowVersion()
 

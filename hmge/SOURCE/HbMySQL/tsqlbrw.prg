@@ -77,7 +77,7 @@ CREATE CLASS TBColumnSQL FROM TBColumn
 
    METHOD   New( cHeading, bBlock, oBrw )   // Saves inside column a copy of container browser
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHeading, bBlock, oBrw ) CLASS TBColumnSQL
 
@@ -141,7 +141,7 @@ CREATE CLASS TBrowseSQL FROM TBrowse
 
    METHOD   KeyboardHook( nKey )               // Where do all unknown keys go?
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable ) CLASS TBrowseSQL
 
@@ -378,7 +378,7 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
       CASE nKey == K_ENTER .AND. lCanEdit
          ::EditField()
 
-         #if 0
+#if 0
       CASE nKey == K_DEL
          IF lCanEdit
             IF ! ::oQuery:Delete( ::oCurRow )
@@ -391,7 +391,7 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
             ::inValidate()
             ::refreshAll():forceStable()
          ENDIF
-         #endif
+#endif
 
       OTHERWISE
          ::KeyboardHook( nKey )

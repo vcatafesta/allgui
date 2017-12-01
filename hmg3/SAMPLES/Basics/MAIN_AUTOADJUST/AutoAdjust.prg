@@ -5,8 +5,8 @@ FUNCTION AutoAdjust( cForm )
    LOCAL hWnd := GetFormHandle( cForm )
 
    LOCAL i,;                    // From no
-   k,;                    // Control no
-   ParentForm,;
+      k,;                    // Control no
+      ParentForm,;
       ControlCount,;
       ControlName,;
       ControlType,;
@@ -60,9 +60,9 @@ FUNCTION AutoAdjust( cForm )
             CASE ControlType $ "RADIOGROUP,TEXT,BUTTON"
                _SetControlSizePos( ControlName, ParentForm,;
                   _GetControlRow( ControlName, ParentForm ) * nDivh, ;   // row
-               _GetControlCol ( ControlName, ParentForm ) * nDivw ,;  // column
-               _GetControlWidth( ControlName, ParentForm ) * nDivw,;  // with
-               _GetControlHeight ( ControlName, ParentForm ) )        // height
+                  _GetControlCol ( ControlName, ParentForm ) * nDivw ,;  // column
+                  _GetControlWidth( ControlName, ParentForm ) * nDivw,;  // with
+                  _GetControlHeight ( ControlName, ParentForm ) )        // height
 
             CASE ControlType == "SLIDER"
                _SetControlSizePos ( ControlName, ParentForm,;
@@ -99,4 +99,4 @@ FUNCTION AutoAdjust( cForm )
 FUNCTION ISAPPXPTHEMED()
 
    RETURN ( OS_ISWINXP_OR_LATER() ;     // <= hrb\contrib/hbwin/legacycv.c
-   .AND. IsAppThemed() )       // <= HMG\h_window.prg
+      .AND. IsAppThemed() )       // <= HMG\h_window.prg

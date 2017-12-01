@@ -75,7 +75,7 @@ CREATE CLASS TMySQLRow
 
    METHOD MakePrimaryKeyWhere()                 // returns a WHERE x=y statement which uses primary key (if available)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( aRow, aFStruct, cTableName, cCollation) CLASS TMySQLRow
 
@@ -346,7 +346,7 @@ CREATE CLASS TMySQLQuery
    METHOD FieldDec( nNum, lFormat )     // How many decimals in field N
    METHOD FieldType( nNum )             // Clipper type of field N
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nSocket, cQuery, cCollation ) CLASS TMySQLQuery
 
@@ -426,12 +426,12 @@ METHOD Refresh() CLASS TMySQLQuery
       ::getRow( ::nCurRow )
 
    ELSE
-      #if 0
+#if 0
       ::aFieldStruct := {}
       ::nResultHandle := NIL
       ::nNumFields := 0
       ::nNumRows := 0
-      #endif
+#endif
       ::lError := .T.
 
    ENDIF
@@ -619,7 +619,7 @@ METHOD FieldPos( cFieldName ) CLASS TMySQLQuery
 
    nPos := AScan( ::aFieldStruct, {| aItem | Upper( aItem[ MYSQL_FS_NAME ] ) == cUpperName } )
 
-   #if 0
+#if 0
    nPos := 0
    DO WHILE ++nPos <= Len( ::aFieldStruct )
       IF Upper( ::aFieldStruct[ nPos ][ MYSQL_FS_NAME ] ) == cUpperName
@@ -631,7 +631,7 @@ METHOD FieldPos( cFieldName ) CLASS TMySQLQuery
    IF nPos > Len( ::aFieldStruct )
       nPos := 0
    ENDIF
-   #endif
+#endif
 
    RETURN nPos
 
@@ -787,7 +787,7 @@ CREATE CLASS TMySQLTable FROM TMySQLQuery
    METHOD Refresh()
    METHOD MakePrimaryKeyWhere()                     // returns a WHERE x=y statement which uses primary key (if available)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nSocket, cQuery, cTableName, cCollation ) CLASS TMySQLTable
 
@@ -1075,12 +1075,12 @@ METHOD Append( oRow, lRefresh ) CLASS TMySQLTable
          IF lRefresh
             ::refresh()
          ELSE
-            #if 0
+#if 0
             /* was same values from FieldGet( i ) ! */
             FOR i := 1 TO ::nNumFields
                ::aOldValue[ i ] := ::FieldGet( i )
             NEXT
-            #endif
+#endif
          ENDIF
 
          RETURN .T.
@@ -1258,14 +1258,14 @@ METHOD Refresh() CLASS TMySQLTABLE
       ::getRow( ::nCurRow )
 
    ELSE
-      #if 0
+#if 0
       ::aFieldStruct := {}
       ::nResultHandle := NIL
       ::nNumFields := 0
       ::nNumRows := 0
 
       ::aOldValue := {}
-      #endif
+#endif
       ::lError := .T.
    ENDIF
 
@@ -1338,7 +1338,7 @@ CREATE CLASS TMySQLServer
    METHOD sql_Rollback()                                   // Rollbacks transaction [mitja]
    METHOD sql_Version()                                    // server version as numeric [mitja]
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation ) CLASS TMySQLServer
 
@@ -1433,13 +1433,13 @@ METHOD CreateTable( cTable, aStruct, cPrimaryKey, cUniqueKey, cAuto ) CLASS TMyS
          EXIT
 
       CASE "N"
-         #if 0
+#if 0
          IF aStruct[ i ][ DBS_DEC ] == 0
             ::cCreateQuery += qText( aStruct[ i ][ DBS_NAME ] ) + " int(" + hb_ntos( aStruct[ i ][ DBS_LEN ] ) + ")" + Eval( cNN, aStruct[ i ] ) + iif( aStruct[ i ][ DBS_NAME ] == cPrimaryKey, " NOT NULL ", "" ) + iif( aStruct[ i ][ DBS_NAME ] == cAuto, " auto_increment ", "" ) + ","
          ELSE
             ::cCreateQuery += qText( aStruct[ i ][ DBS_NAME ] ) + " real(" + hb_ntos( aStruct[ i ][ DBS_LEN ] ) + "," + hb_ntos( aStruct[ i ][ DBS_DEC ] ) + ")" + Eval( cNN, aStruct[ i ] ) + ","
          ENDIF
-         #endif
+#endif
          IF aStruct[ i ][ DBS_DEC ] == 0 .AND. aStruct[ i ][ DBS_LEN ] <= 18
             DO CASE
             CASE aStruct[ i ][ DBS_LEN ] <= 2

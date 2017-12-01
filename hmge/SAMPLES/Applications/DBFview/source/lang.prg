@@ -6,7 +6,7 @@ FUNCTION GetLangArr()
 
    LOCAL aStr := { ;
       "&File", ;      // Main Menu
-   "&Open...", ;
+      "&Open...", ;
       "&Open in", ;
       "&Close", ;
       "&Save", ;
@@ -48,7 +48,7 @@ FUNCTION GetLangArr()
       "&Index", ;
       "&About", ;
       "Open", ;      // Tooltips
-   "Save", ;
+      "Save", ;
       "Toggle delete", ;
       "Find", ;
       "Go To", ;
@@ -61,15 +61,15 @@ FUNCTION GetLangArr()
       "Font Name", ;
       "Font Size", ;
       "Table", ;      // Child window
-   "Append &New", ;
+      "Append &New", ;
       "Append C&opy", ;
       "Record", ;
       "of", ;
       "already exists", ;  // Export
-   "Overwrite existing file?", ;
+      "Overwrite existing file?", ;
       "Sorry, you may open 12 files only!", ;
       "<all columns>", ;   // S&R
-   "Replace", ;
+      "Replace", ;
       "Search", ;
       "Look for", ;
       "Replace with", ;
@@ -85,19 +85,19 @@ FUNCTION GetLangArr()
       "Can not find the string", ;
       "There are no still such records!", ;
       "Go to", ;      // Go To
-   "&Top", ;
+      "&Top", ;
       "&Bottom", ;
       "Ro&w", ;
       "&Record", ;
       "OK", ;
       "Cancel", ;
       "Select language", ; // Lang
-   "Date format", ;
+      "Date format", ;
       "<no codepage set>", ; // CP
-   "Select codepage", ;
+      "Select codepage", ;
       "Select codepage for the current table", ;
       "Table properties", ;   // Prop
-   "File", ;
+      "File", ;
       "Size", ;
       "byte(s)", ;
       "Created", ;
@@ -111,8 +111,8 @@ FUNCTION GetLangArr()
       "Zaping the table permanently removes the ALL records", ;
       "Zap the table", ;
       "The file is not found", ; // Open
-   "Query", ;      // Query
-   "Field", ;
+      "Query", ;      // Query
+      "Field", ;
       "Comparison", ;
       "== Equal           ", ;
       "<> Not equal       ", ;

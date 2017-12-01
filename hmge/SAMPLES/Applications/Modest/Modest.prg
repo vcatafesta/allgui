@@ -89,18 +89,18 @@ PROCEDURE Main( cFile )
    // Array of working parameters
 
    PRIVATE aStat := { 'CurrMode'   => MODE_DEFAULT , ;    // Review mode
-   'FileName'   => ''           , ;    // Working file name
-   'RDD'        => DbSetDriver(), ;    // Current database RDD
-   'DefName'    => 'NEW'        , ;    // Field name prefix at adding
-   'DefType'    => TYPE_IS_CHAR , ;    // Field type (numbet in array) CORRECT_TYPES
-   'DefLen'     => 10           , ;    // Field length
-   'DefDec'     => 0            , ;    // Field decimal
-   'Expression' => THIS_VALUE   , ;    // Transformation rule
-   'ChStruct'   => .F.          , ;    // Structure is changed
-   'ChDescript' => .F.          , ;    // Description is changed
-   'Counter'    => 1            , ;    // Internal counter (for new field adding)
-   'Cargo'      => ''             ;    // Temporary saving of mixed datas
-   }
+      'FileName'   => ''           , ;    // Working file name
+      'RDD'        => DbSetDriver(), ;    // Current database RDD
+      'DefName'    => 'NEW'        , ;    // Field name prefix at adding
+      'DefType'    => TYPE_IS_CHAR , ;    // Field type (numbet in array) CORRECT_TYPES
+      'DefLen'     => 10           , ;    // Field length
+      'DefDec'     => 0            , ;    // Field decimal
+      'Expression' => THIS_VALUE   , ;    // Transformation rule
+      'ChStruct'   => .F.          , ;    // Structure is changed
+      'ChDescript' => .F.          , ;    // Description is changed
+      'Counter'    => 1            , ;    // Internal counter (for new field adding)
+      'Cargo'      => ''             ;    // Temporary saving of mixed datas
+      }
    PRIVATE oEditStru                                      // TBrowse-object
    PRIVATE aCollector := {}                               // Collector of fields
 
@@ -775,28 +775,28 @@ STATIC FUNCTION BackColors( nRow, nCol )
          // Row with changed values
 
          IF ( ( nCol == 2 ) .or. ;          // Field name (current and previous)
-            ( nCol == 6 )      ;
+               ( nCol == 6 )      ;
                )
             IF !( Eval( oEditStru : aColumns[ 2 ] : bData ) ==  Eval( oEditStru : aColumns[ 6 ] : bData ) )
                nColor := RGB( 128, 255, 0 )
             ENDIF
 
          ELSEIF ( ( nCol == 3 ) .or. ;      // Type (current and previous)
-            ( nCol == 7 )      ;
+               ( nCol == 7 )      ;
                )
             IF !( Eval( oEditStru : aColumns[ 3 ] : bData ) ==  Eval( oEditStru : aColumns[ 7 ] : bData ) )
                nColor := RGB( 128, 255, 0 )
             ENDIF
 
          ELSEIF ( ( nCol == 4 ) .or. ;      // Length (current and previous)
-            ( nCol == 8 )      ;
+               ( nCol == 8 )      ;
                )
             IF !( Eval( oEditStru : aColumns[ 4 ] : bData ) ==  Eval( oEditStru : aColumns[ 8 ] : bData ) )
                nColor := RGB( 128, 255, 0 )
             ENDIF
 
          ELSEIF ( ( nCol == 5 ) .or. ;      // Decimal
-            ( nCol == 9 )      ;
+               ( nCol == 9 )      ;
                )
             IF !( Eval( oEditStru : aColumns[ 5 ] : bData ) ==  Eval( oEditStru : aColumns[ 9 ] : bData ) )
                nColor := RGB( 128, 255, 0 )

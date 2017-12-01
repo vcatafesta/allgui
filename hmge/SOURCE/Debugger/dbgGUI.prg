@@ -98,33 +98,33 @@ FUNCTION DebuggerMessageBox( ... )
 
    RETURN nRet
 
-   #define TAB_CODE     1
-   #define TAB_STACK    2
-   #define TAB_WATCH    3
-   #define TAB_CALC     4
-   #define TAB_VARS     5
-   #define TAB_AREAS    6
-   #define TAB_CONFIG   7
-   #define TAB_ABOUT    8
+#define TAB_CODE     1
+#define TAB_STACK    2
+#define TAB_WATCH    3
+#define TAB_CALC     4
+#define TAB_VARS     5
+#define TAB_AREAS    6
+#define TAB_CONFIG   7
+#define TAB_ABOUT    8
 
-   #define BTN_NONE   0
-   #define BTN_BP     1
-   #define BTN_TP     2
-   #define BTN_WP     3
-   #define BTN_EDIT   4
+#define BTN_NONE   0
+#define BTN_BP     1
+#define BTN_TP     2
+#define BTN_WP     3
+#define BTN_EDIT   4
 
-   #define ID_animate         1
-   #define ID_step            2
-   #define ID_trace           3
-   #define ID_go              4
-   #define ID_tocursor        5
-   #define ID_next            6
-   #define ID_pause           7
-   #define ID_breakpoint      8
-   #define ID_tracepoint      9
-   #define ID_watchpoint      10
-   #define ID_configuration   11
-   #define ID_quit            12
+#define ID_animate         1
+#define ID_step            2
+#define ID_trace           3
+#define ID_go              4
+#define ID_tocursor        5
+#define ID_next            6
+#define ID_pause           7
+#define ID_breakpoint      8
+#define ID_tracepoint      9
+#define ID_watchpoint      10
+#define ID_configuration   11
+#define ID_quit            12
 
 PROCEDURE ProcInitGUIDebugger( lCreate )
 
@@ -145,8 +145,8 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
 
       SET FONT TO _GetSysFont(), 10
 
-      #define MIN_WIDTH  650
-      #define MIN_HEIGHT 550
+#define MIN_WIDTH  650
+#define MIN_HEIGHT 550
 
       DEFINE WINDOW _HMG_FormDebugger;
             AT 0,0;
@@ -349,7 +349,7 @@ PROCEDURE ProcInitGUIDebugger( lCreate )
                   PaintDoubleBuffer;
                   TOOLTIP "Press ENTER to copy expression for evaluate and press DELETE to delete item"
 
-               #define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
+#define TOOLTIP_CALC   "e.g. VarName, FuncName( param1, ... ), VarName := Value, Arr[i,1] := Value, etc."
 
                @ 0,0 LABEL Label_Calc VALUE "Enter the expression to evaluate:" AUTOSIZE FONT "Arial" SIZE 10 FONTCOLOR COLOR_Chocolate4 BOLD ITALIC;
                   TOOLTIP TOOLTIP_CALC
@@ -582,7 +582,7 @@ PROCEDURE ViewVars()
 
 PROCEDURE DisplayVars ( cVarName, xVarValue, aColor )
 
-   #define _GRIDNAME_ "GridVars2"
+#define _GRIDNAME_ "GridVars2"
    LOCAL cFormName := "_HMG_dbgVar_" + cVarName
    LOCAL cGridName := _GRIDNAME_
    LOCAL cTitle, nRow, aInfo
@@ -1601,7 +1601,7 @@ FUNCTION HMG_CompareHandle (Handle1, Handle2, nSubIndex1, nSubIndex2)
 
    RETURN .F.
 
-   #xtranslate UTF8_BOM => (HB_BCHAR (0xEF) + HB_BCHAR (0xBB) + HB_BCHAR (0xBF))
+#xtranslate UTF8_BOM => (HB_BCHAR (0xEF) + HB_BCHAR (0xBB) + HB_BCHAR (0xBF))
 
 FUNCTION HMG_IsUTF8WithBOM ( cString )
 

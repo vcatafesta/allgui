@@ -66,7 +66,7 @@ PROCEDURE SaveIni( nLen, cSet )
 
    RETURN
 
-   #define MsgInfo( c, t ) MsgInfo( c, t, , .F. )
+#define MsgInfo( c, t ) MsgInfo( c, t, , .F. )
 
 FUNCTION MsgAbout()
 

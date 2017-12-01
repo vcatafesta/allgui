@@ -93,11 +93,11 @@ FUNCTION IMAGE_GET_hBITMAP (cWinName, cImageName)
 
 PROCEDURE IMAGE_SHOW_hBITMAP (hWnd, hBitmap)
 
-   #define STM_SETIMAGE  0x0172
-   #define IMAGE_BITMAP   0
+#define STM_SETIMAGE  0x0172
+#define IMAGE_BITMAP   0
    SendMessage(hWnd, STM_SETIMAGE, IMAGE_BITMAP, hBitmap)
-   #undef  IMAGE_BITMAP
-   #undef  STM_SETIMAGE
+#undef  IMAGE_BITMAP
+#undef  STM_SETIMAGE
 
    RETURN
 

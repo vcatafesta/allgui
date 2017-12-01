@@ -76,7 +76,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
 
    METHOD Notify( lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
       bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;

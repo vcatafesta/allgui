@@ -16,7 +16,7 @@ FUNCTION Main
          CLIENTAREA 640, 480 ;
          TITLE 'Colored Tab Control Demo' ;
          ; // Init a colored label of the first Tab page
-      ON INIT SizePageBack( 1, .F. ) ;
+         ON INIT SizePageBack( 1, .F. ) ;
          ON SIZE SizeTest()
 
       DEFINE MAIN MENU

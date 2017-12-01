@@ -45,10 +45,10 @@ CLASS TTimer
    UNDECLARED METHOD GetByName( sName )
    UNDECLARED METHOD ObjectName() INLINE ::Name
 
-ENDCLASS
+   ENDCLASS
 
-/*
-*/
+   /*
+   */
 
 METHOD Init( nHandle, nInterval, bBlock, lStart ) CLASS TTimer
 

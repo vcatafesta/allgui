@@ -91,6 +91,6 @@ FUNCTION SZ2Str( cStr )
       IN KERNEL32.DLL ;
       ALIAS GetVolInfo
 
-   #ifdef __XHARBOUR__
-   #include <hex.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <hex.prg>
+#endif

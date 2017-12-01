@@ -64,18 +64,18 @@ PROCEDURE Main
 
    RETURN
 
-   #translate IFNOTCHAR( <exp1>,<exp2> ) ;
+#translate IFNOTCHAR( <exp1>,<exp2> ) ;
       => ;
       IF( VALTYPE( <exp1> ) != "C",<exp2>,<exp1> )
 
-   #define IS_DATE(x)                   (VALTYPE(x) == "D")
-   #define IS_LOGICAL(x)                (VALTYPE(x) == "L")
-   #define IS_NUMERIC(x)                (VALTYPE(x) == "N")
-   #define CASE_AT(x,y,z)               z[AT(x,y)+1]
-   #define TRIM_NUMBER(x)               LTRIM(STR(x))
-   #define NULL                         ""
+#define IS_DATE(x)                   (VALTYPE(x) == "D")
+#define IS_LOGICAL(x)                (VALTYPE(x) == "L")
+#define IS_NUMERIC(x)                (VALTYPE(x) == "N")
+#define CASE_AT(x,y,z)               z[AT(x,y)+1]
+#define TRIM_NUMBER(x)               LTRIM(STR(x))
+#define NULL                         ""
 
-   #define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
+#define XTOC(x)              CASE_AT(VALTYPE(x), "CNDLM", ;
       { NULL, ;
       x, ;
       IF(IS_NUMERIC(x),;

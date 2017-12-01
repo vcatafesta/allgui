@@ -54,7 +54,7 @@ CLASS VAR winclass   INIT "LISTBOX"
 
    METHOD onEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, aItems, oFont, ;
       bInit, bSize, bPaint, bChange, cTooltip, tColor, bcolor, bGFocus, bLFocus,bKeydown, bDblclick,bOther )  CLASS HListBox

@@ -813,8 +813,8 @@ PROCEDURE MsgAbout()
 
       @ 154, 200 HYPERLINK Label_8         ;
          VALUE "http://www.fasticon.com"      ;
-         ADDRESS "http://www.fasticon.com"   ;
-         WIDTH 120 HEIGHT 14         ;
+      ADDRESS "http://www.fasticon.com"   ;
+      WIDTH 120 HEIGHT 14         ;
          TRANSPARENT HANDCURSOR
 
       DEFINE BUTTONEX Button_1

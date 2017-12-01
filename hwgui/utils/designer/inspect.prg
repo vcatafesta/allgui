@@ -52,7 +52,7 @@ CLASS PBrowse INHERIT HBrowse
 
    METHOD HeaderOut( hDC )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
       bInit,bSize,bPaint,bEnter,bGfocus,bLfocus,lNoVScroll,     ;
@@ -146,10 +146,10 @@ METHOD Edit( wParam,lParam ) CLASS PBrowse
                hwg_SelectFile("Imagens Files( *.jpg;*.gif;*.bmp;*.ico )",;
                "*.jpg;*.gif;*.bmp;*.ico")))), ;
                IIF( !empty(varbuf), oGet:refresh(), NIL ) } //,;
-               *   VldBrwGet(oGet)} //,   hwg_Postmessage( oBtn:handle,WM_CLOSE,0,0 )}
-               // : END LFB
-               //varbuf := hwg_SelectFile( "All files ( *.* )","*.*" )
-               hwg_Setfocus( obtn:handle )
+            *   VldBrwGet(oGet)} //,   hwg_Postmessage( oBtn:handle,WM_CLOSE,0,0 )}
+            // : END LFB
+            //varbuf := hwg_SelectFile( "All files ( *.* )","*.*" )
+            hwg_Setfocus( obtn:handle )
             IF varbuf != NIL
                lRes := .T.
             ENDIF
@@ -663,11 +663,11 @@ FUNCTION ObjInspector(oObject )
    ENDIF
    //lData := .t.
    aClassMsgMtdo := __objGetMethodList(oObject)
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    aClassMsgProp := __objGetProperties( oObject, .t. )
-   #else
+#else
    aClassMsgProp := __ObjGetValueDiff( oObject)
-   #endif
+#endif
    FOR i = 1 TO len(aClassMsgProp)
       ctype := VALTYPE(aClassMsgProp[i,2])
       DO CASE

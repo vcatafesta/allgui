@@ -148,7 +148,7 @@ PROCEDURE BTExp_SetImageAdjust()
 PROCEDURE BTExp_OpenImgFile()                 // Open an Image file
 
    cImgFilName := Getfile( { {'All images','*.png; *.jpg; *.bmp; *.tif; *.gif'},;    // acFilter
-   {'PNG Files', '*.png'},;
+      {'PNG Files', '*.png'},;
       {'JPG Files', '*.jpg'},;
       {'BMP Files', '*.bmp'},;
       {'TIF Files', '*.tif'},;

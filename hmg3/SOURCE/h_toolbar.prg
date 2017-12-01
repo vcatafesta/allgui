@@ -380,8 +380,8 @@ FUNCTION _EndToolBar ()
    RETURN NIL
 
    // #define WM_USER     1024        // ok (MinGW)
-   #define WM_USER         0x0400        // ok
-   #define TB_SETHOTITEM    (WM_USER+72)   // ok
+#define WM_USER         0x0400        // ok
+#define TB_SETHOTITEM    (WM_USER+72)   // ok
 
 PROCEDURE _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , nButtonPos )
 

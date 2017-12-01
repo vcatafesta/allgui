@@ -236,11 +236,11 @@ FUNCTION SetSbBkColor( ParentHandle, aColor )
    LOCAL h, i
 
    FOR EACH h In _HMG_aControlContainerHandle
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       i := h:__enumIndex()
-      #else
+#else
       i := hb_enumindex()
-      #endif
+#endif
       IF _HMG_aControlType [i] == "ITEMMESSAGE" .AND. h == ParentHandle
          _HMG_aControlBkColor [i] := aColor
       ENDIF
@@ -264,108 +264,108 @@ FUNCTION SbAction()
 
    // from \SAMPLES\BASIC\BUTTONEX\demo4.prg
 
-   #define PBS_NORMAL 1
-   #define PBS_HOT 2
-   #define PBS_PRESSED 3
-   #define PBS_DISABLED 4
-   #define PBS_DEFAULTED 5
+#define PBS_NORMAL 1
+#define PBS_HOT 2
+#define PBS_PRESSED 3
+#define PBS_DISABLED 4
+#define PBS_DEFAULTED 5
 
-   #define ODT_BUTTON 4
-   #define ODS_SELECTED 1
-   #define ODS_GRAYED 2
-   #define ODS_DISABLED 4
-   #define ODS_CHECKED 8
-   #define ODS_FOCUS 16
-   #define ODS_DEFAULT 32
-   #define ODS_COMBOBOXEDIT 4096
-   #define ODS_HOTLIGHT 64
-   #define ODS_INACTIVE 128
-   #define DFCS_BUTTONPUSH 16
-   #define DFCS_INACTIVE 256
+#define ODT_BUTTON 4
+#define ODS_SELECTED 1
+#define ODS_GRAYED 2
+#define ODS_DISABLED 4
+#define ODS_CHECKED 8
+#define ODS_FOCUS 16
+#define ODS_DEFAULT 32
+#define ODS_COMBOBOXEDIT 4096
+#define ODS_HOTLIGHT 64
+#define ODS_INACTIVE 128
+#define DFCS_BUTTONPUSH 16
+#define DFCS_INACTIVE 256
 
-   #define COLOR_HIGHLIGHTTEXT 14
-   #define COLOR_BTNFACE 15
-   #define COLOR_BTNSHADOW 16
-   #define COLOR_GRAYTEXT 17
-   #define COLOR_BTNTEXT 18
-   #define COLOR_INACTIVECAPTIONTEXT 19
-   #define COLOR_BTNHIGHLIGHT 20
-   #define COLOR_3DDKSHADOW 21
-   #define COLOR_3DLIGHT 22
-   #define COLOR_INFOTEXT 23
-   #define COLOR_INFOBK 24
-   #define COLOR_HOTLIGHT 26
-   #define COLOR_GRADIENTACTIVECAPTION 27
-   #define COLOR_GRADIENTINACTIVECAPTION 28
-   #define COLOR_DESKTOP COLOR_BACKGROUND
-   #define COLOR_3DFACE COLOR_BTNFACE
-   #define COLOR_3DSHADOW COLOR_BTNSHADOW
-   #define COLOR_3DHIGHLIGHT COLOR_BTNHIGHLIGHT
-   #define COLOR_3DHILIGHT COLOR_BTNHIGHLIGHT
-   #define COLOR_BTNHILIGHT COLOR_BTNHIGHLIGHT
+#define COLOR_HIGHLIGHTTEXT 14
+#define COLOR_BTNFACE 15
+#define COLOR_BTNSHADOW 16
+#define COLOR_GRAYTEXT 17
+#define COLOR_BTNTEXT 18
+#define COLOR_INACTIVECAPTIONTEXT 19
+#define COLOR_BTNHIGHLIGHT 20
+#define COLOR_3DDKSHADOW 21
+#define COLOR_3DLIGHT 22
+#define COLOR_INFOTEXT 23
+#define COLOR_INFOBK 24
+#define COLOR_HOTLIGHT 26
+#define COLOR_GRADIENTACTIVECAPTION 27
+#define COLOR_GRADIENTINACTIVECAPTION 28
+#define COLOR_DESKTOP COLOR_BACKGROUND
+#define COLOR_3DFACE COLOR_BTNFACE
+#define COLOR_3DSHADOW COLOR_BTNSHADOW
+#define COLOR_3DHIGHLIGHT COLOR_BTNHIGHLIGHT
+#define COLOR_3DHILIGHT COLOR_BTNHIGHLIGHT
+#define COLOR_BTNHILIGHT COLOR_BTNHIGHLIGHT
 
-   #define DT_TOP 0
-   #define DT_LEFT 0
-   #define DT_CENTER 1
-   #define DT_RIGHT 2
-   #define DT_VCENTER 4
-   #define DT_BOTTOM 8
-   #define DT_SINGLELINE 32
+#define DT_TOP 0
+#define DT_LEFT 0
+#define DT_CENTER 1
+#define DT_RIGHT 2
+#define DT_VCENTER 4
+#define DT_BOTTOM 8
+#define DT_SINGLELINE 32
 
-   #define DFCS_PUSHED 512
-   #define DFCS_CHECKED 1024
-   #define DFCS_TRANSPARENT 2048
-   #define DFCS_HOT 4096
-   #define DFCS_ADJUSTRECT 8192
-   #define DFCS_FLAT 16384
-   #define DFCS_MONO 32768
-   #define TRANSPARENT   1
+#define DFCS_PUSHED 512
+#define DFCS_CHECKED 1024
+#define DFCS_TRANSPARENT 2048
+#define DFCS_HOT 4096
+#define DFCS_ADJUSTRECT 8192
+#define DFCS_FLAT 16384
+#define DFCS_MONO 32768
+#define TRANSPARENT   1
 
-   #define DST_COMPLEX          0
-   #define DST_TEXT             1
-   #define DST_PREFIXTEXT       2
-   #define DST_ICON             3
-   #define DST_BITMAP           4
+#define DST_COMPLEX          0
+#define DST_TEXT             1
+#define DST_PREFIXTEXT       2
+#define DST_ICON             3
+#define DST_BITMAP           4
    // State type
-   #define DSS_NORMAL           0
-   #define DSS_UNION           16  // Gray string appearance
-   #define DSS_DISABLED        32
-   #define DSS_MONO           128
-   #define DSS_HIDEPREFIX     512
-   #define DSS_PREFIXONLY    1024
-   #define DSS_RIGHT        32768
+#define DSS_NORMAL           0
+#define DSS_UNION           16  // Gray string appearance
+#define DSS_DISABLED        32
+#define DSS_MONO           128
+#define DSS_HIDEPREFIX     512
+#define DSS_PREFIXONLY    1024
+#define DSS_RIGHT        32768
    /*
    * Owner draw actions
    */
-   #define ODA_DRAWENTIRE    1
-   #define ODA_SELECT        2
-   #define ODA_FOCUS         4
-   #define WM_COMMAND      0x0111
-   #define WM_SETFOCUS       7
-   #define WM_DRAWITEM      43
-   #define WM_LBUTTONDOWN  513
-   #define WM_MOUSELEAVE   675
-   #define WM_MOUSEMOVE    512
+#define ODA_DRAWENTIRE    1
+#define ODA_SELECT        2
+#define ODA_FOCUS         4
+#define WM_COMMAND      0x0111
+#define WM_SETFOCUS       7
+#define WM_DRAWITEM      43
+#define WM_LBUTTONDOWN  513
+#define WM_MOUSELEAVE   675
+#define WM_MOUSEMOVE    512
 
    /* Ascpects for owner butons */
 
-   #define OBT_HORIZONTAL    0
-   #define OBT_VERTICAL      1
-   #define OBT_LEFTTEXT      2
-   #define OBT_UPTEXT        4
-   #define OBT_HOTLIGHT      8
-   #define OBT_FLAT          16
-   #define OBT_NOTRANSPARENT 32
-   #define OBT_NOXPSTYLE     64
-   #define OBT_ADJUST       128
+#define OBT_HORIZONTAL    0
+#define OBT_VERTICAL      1
+#define OBT_LEFTTEXT      2
+#define OBT_UPTEXT        4
+#define OBT_HOTLIGHT      8
+#define OBT_FLAT          16
+#define OBT_NOTRANSPARENT 32
+#define OBT_NOXPSTYLE     64
+#define OBT_ADJUST       128
 
-   #define BS_NOTIFY           0x00004000
-   #define BS_PUSHBUTTON       0x00000000
-   #define BS_FLAT             0x00008000
-   #define BS_BITMAP           0x00000080
-   #define WS_TABSTOP          0x00010000
-   #define WS_VISIBLE          0x10000000
-   #define WS_CHILD            0x40000000
+#define BS_NOTIFY           0x00004000
+#define BS_PUSHBUTTON       0x00000000
+#define BS_FLAT             0x00008000
+#define BS_BITMAP           0x00000080
+#define WS_TABSTOP          0x00010000
+#define WS_VISIBLE          0x10000000
+#define WS_CHILD            0x40000000
 
    * HMG 1.0 Experimental Build 9a (JK)
    * (C) 2005 Jacek Kubica <kubica@wssk.wroc.pl>

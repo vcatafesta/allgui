@@ -70,7 +70,7 @@ PROCEDURE CreateTabPage( cOption, cSubClass, lVertical, lCheckbox, cTitle )
 
       RETURN
 
-      #include "hbclass.ch"
+#include "hbclass.ch"
 
 CLASS TTabList FROM TMultiPage
 
@@ -79,7 +79,7 @@ CLASS TTabList FROM TMultiPage
 
    METHOD Define
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -135,7 +135,7 @@ CLASS TTabCheck FROM TMultiPage
 
    METHOD VerifyCaption
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -234,7 +234,7 @@ CLASS TTabSpinner FROM TMultiPage
 
    METHOD DeleteItem
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;
@@ -304,7 +304,7 @@ CLASS TTabSlider FROM TMultiPage
 
    METHOD DeleteItem
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aCaptions, aPageMap, ;
       value, fontname, fontsize, tooltip, change, Buttons, Flat, ;

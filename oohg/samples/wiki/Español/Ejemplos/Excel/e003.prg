@@ -63,7 +63,7 @@ FUNCTION MiProceso( oForm )
 
    ERASE (cExcel)
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel no está disponible. [' + win_oleErrorText() + ']' )
 
@@ -154,7 +154,7 @@ FUNCTION ConvertirADbf( oForm, cExcel )
 
    cDbf := CurDrive() + ':\' + CurDir() + "\TEST.DBF"
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel no está disponible. [' + win_oleErrorText() + ']' )
 

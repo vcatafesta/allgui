@@ -90,7 +90,7 @@ CLASS cLbl
       ( hb_HSet( ::aSub, Lower( cSub ), { FColor, lBold, lItalic, lUnderl, cTool, lHand, bAct } ) )
    METHOD Block()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( BColor, cFont, nSize ) CLASS cLbl
 

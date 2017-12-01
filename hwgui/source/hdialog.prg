@@ -66,7 +66,7 @@ CLASS VAR aModalDialogs  SHARED INIT { }
 
    METHOD RELEASE()  INLINE ::Close( ), Self := Nil
 
-ENDCLASS
+   ENDCLASS
 
 METHOD NEW( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSize, ;
       bPaint, bGfocus, bLfocus, bOther, lClipper, oBmp, oIcon, lExitOnEnter, nHelpId, ;
@@ -405,7 +405,7 @@ STATIC FUNCTION onEraseBk( oDlg, hDC )
 
    RETURN 0
 
-   #define  FLAG_CHECK      2
+#define  FLAG_CHECK      2
 
 STATIC FUNCTION onDlgCommand( oDlg, wParam, lParam )
 

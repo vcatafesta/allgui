@@ -75,7 +75,7 @@ PROCEDURE Main
 
    RETURN
 
-   #translate dbcreate(<file>, <struct>) => hb_dbcreatetemp(<file>, <struct>)
+#translate dbcreate(<file>, <struct>) => hb_dbcreatetemp(<file>, <struct>)
 
 PROCEDURE filltable ( nCount )
 

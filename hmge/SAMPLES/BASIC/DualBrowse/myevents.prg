@@ -1547,7 +1547,7 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
                   a := GetRc ( lParam )
 
                   IF a[1] >= 1 .AND. a[1] <= LEN( _HMG_aControlRangeMax[i] )  ;  // MaxBrowseRows
-                     .AND. a[2] >= 1 .AND. a[2] <= LEN( _HMG_aControlRangeMin[i] )  // MaxBrowseCols
+                        .AND. a[2] >= 1 .AND. a[2] <= LEN( _HMG_aControlRangeMin[i] )  // MaxBrowseCols
 
                      aTemp  := _HMG_aControlMiscData1 [i] [18]
                      aTemp2 := _HMG_aControlMiscData1 [i] [17]
@@ -1650,7 +1650,7 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
                   *     ENDIF
                   *   ENDIF
                CASE GetGridvKey( lParam ) == 65 ;           // A
-                  .AND. ( GetAltState() == -127 .OR. GetAltState() == -128 )  // ALT-A
+                     .AND. ( GetAltState() == -127 .OR. GetAltState() == -128 )  // ALT-A
                   IF _HMG_acontrolmiscdata1[i][2] == .T.
                      _BrowseEdit( _hmg_acontrolhandles[i], _HMG_acontrolmiscdata1[i][4], ;
                         _HMG_acontrolmiscdata1[i][5], _HMG_acontrolmiscdata1[i][3], ;
@@ -1991,11 +1991,11 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
                         _DoControlEventProcedure ( _HMG_aControlChangeProcedure [i] , i )
                      ENDIF
                      EXIT
-                     #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
                   OTHERWISE
-                     #else
+#else
                      DEFAULT
-                     #endif
+#endif
 
                      RETURN 1
                   ENDSWITCH

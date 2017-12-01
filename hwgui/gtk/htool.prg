@@ -49,7 +49,7 @@ CLASS HToolBar INHERIT HControl
 
    METHOD DisableButtons(n)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit, ;
       bSize,bPaint,ctooltip,tcolor,bcolor,lTransp ,aitem) CLASS hToolBar
@@ -113,22 +113,22 @@ METHOD INIT CLASS hToolBar
             IF aItem[4] == TBSTYLE_BUTTON
 
                aItem[11] := hwg_Createtoolbarbutton(::handle,aItem[1],aItem[6],.f.)
-               #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
                aItem[2] := hb_enumindex()
-               #else
+#else
                aItem[2] := aItem:__enumIndex()
-               #endif
+#endif
                hwg_Toolbar_setaction(aItem[11],aItem[7])
                IF !empty(aItem[8])
                   hwg_Addtooltip(::handle, aItem[11],aItem[8])
                ENDIF
             ELSEIF aitem[4] == TBSTYLE_SEP
                aItem[11] := hwg_Createtoolbarbutton(::handle,,,.t.)
-               #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
                aItem[2] := hb_enumindex()
-               #else
+#else
                aItem[2] := aItem:__enumIndex()
-               #endif
+#endif
             ENDIF
          NEXT
       ENDIF

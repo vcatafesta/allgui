@@ -173,8 +173,8 @@ FUNCTION Tool2Prg
 FUNCTION Browse2Prg
 
    PARAMETERS oCtrl
-   #define BRW_ARRAY 1
-   #define BRW_DATABASE 2
+#define BRW_ARRAY 1
+#define BRW_DATABASE 2
 
    PRIVATE cName := "", cBrowser := "", cAdd := "", temp , i, j, k, nColumns, caArray, cAlias, cTmpAlias, oCtrl1
    PRIVATE crelexpr, clink, cfilter, cKey, nType
@@ -917,7 +917,7 @@ FUNCTION Ctrl2Prg
                   temp := oCtrl:GetProp( "interval" ) //) != Nil
                   stroka := "ON INIT {|| " + cName + " := HTimer():New( " + cFormName + ",," + iif( temp != Nil, temp, '0' ) + "," + stroka + " )}"
                   FWrite( han, " ; //OBJECT TIMER " + _Chr( 10 ) + Space( 8 ) + stroka )
-               ELSE
+                  ELSE
                   IF lsubParameter
                      //temp :=  " {|" + temp + "| " +  cName +"("+ cFormParameters + ")  }"
                      FWrite( han, " ;" + _Chr( 10 ) + Space( 8 ) + cMethod + "{ ||" + cName + "(" + cFormParameters + ")  }"  )
@@ -936,7 +936,7 @@ FUNCTION Ctrl2Prg
                   //ON INIT {|| oTimer1 := HTimer():New( otESTE,,5000,{|| OtIMER1:END(),hwg_Msginfo('oi'),hwg_EndDialog() } )}
                   stroka := "ON INIT {|| " + cName + " := HTimer():New( " + cFormName + ",," + temp + "," + stroka + " )}"
                   FWrite( han, " ; //OBJECT TIMER " + _Chr( 10 ) + Space( 8 ) + stroka )
-               ELSE
+                  ELSE
 
                   IF lsubParameter
                      //temp :=  " {|" + temp + "| " +  cName +"("+ cFormParameters + ")  }"
@@ -1432,4 +1432,4 @@ FUNCTION Ctrl2Prg
    ENDDO
    FClose( han )
 
-   #endscript
+#endscript

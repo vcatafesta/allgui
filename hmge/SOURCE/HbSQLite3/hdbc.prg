@@ -66,7 +66,7 @@ CREATE CLASS hdbcSQLTConnection
    METHOD createStatement()
    METHOD prepareStatement( cSql )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( cDBFile, lCreateIfNotExist ) CLASS hdbcSQLTConnection
 
@@ -137,7 +137,7 @@ CREATE CLASS hdbcSQLTStatement
    METHOD executeUpdate( cSql )
    METHOD close()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( pDB, cSql ) CLASS hdbcSQLTStatement
 
@@ -208,7 +208,7 @@ CREATE CLASS hdbcSQLTPreparedStatement
    METHOD SetDate( n, x ) INLINE ::setString( n, DToS( x ) )
    METHOD SetBoolean( n, x ) INLINE ::setString( n, iif( x, "t", "f" ) )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( pDB, cSql ) CLASS hdbcSQLTPreparedStatement
 
@@ -333,7 +333,7 @@ CREATE CLASS hdbcSQLTResultSet
    METHOD updateDate( nField, dValue ) INLINE ::updateBuffer( nField, DToS( dValue ), "D" )
    METHOD updateBoolean( nField, lValue ) INLINE ::updateBuffer( nField, iif( lValue, "t", "f" ), "L" )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( pDB, pStmt ) CLASS hdbcSQLTResultSet
 
@@ -507,7 +507,7 @@ CREATE CLASS hdbcSQLTResultSetMetaData
    METHOD getColumnName( nColumn )
    METHOD getColumnDisplaySize( nColumn )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( pRes ) CLASS hdbcSQLTResultSetMetaData
 
@@ -541,7 +541,7 @@ CREATE CLASS hdbcSQLTDatabaseMetaData
    METHOD getTables()
    METHOD getPrimaryKeys()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD new( pDB ) CLASS hdbcSQLTDatabaseMetaData
 

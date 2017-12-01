@@ -22,14 +22,14 @@ PROCEDURE PrintTest8()
 
    LOCAL lSuccess := .F.,;
       nVMargin := 20,;    // Vertical margin
-   nHMargin := 20,;      // Horizontal margin
-   cFontName := "Verdana",;
+      nHMargin := 20,;      // Horizontal margin
+      cFontName := "Verdana",;
       nFontSize := 10,;   // In pixel
-   nLine_Num :=  0
+      nLine_Num :=  0
 
    LOCAL nPageLength := 210 - nHMargin * 2,;
       nPageHeigth := 297 - nVMargin * 3,;  // 1 Top Margin + 1 Column Headers + 1 Bottom margin
-   nChrsPerLin :=  80
+      nChrsPerLin :=  80
 
    LOCAL cItem2Prnt
 
@@ -40,7 +40,7 @@ PROCEDURE PrintTest8()
       nLineNo1Pag := 0
 
    PRIVATE nPrintRow :=  0,;   // Row ( line ) number in printed page
-   nPrintCol :=  0     // Column  number in printed page
+      nPrintCol :=  0     // Column  number in printed page
 
    USE .\DATA\EMPLOYE2
 

@@ -122,11 +122,11 @@ FUNCTION GetFirstActiveWindow()
    WHILE hWnd != 0                                                 // Loop through all the windows
 
       IF IsWindowVisible( hWnd ) .AND.;                       // If it is a visible window
-         hWnd != _HMG_MainHandle .AND.;                  // If it is not this app
-         ASCAN( aList, { |e| e[1] = hWnd } ) == 0 .AND.; // If the window is not shrinked
-         !EMPTY( GetWindowText( hWnd ) ) .AND.;          // If the window has a title
-         !IsIconic( hWnd ) .AND.;                        // If the window is not minimized
-         !( GetWindowText( hWnd ) == "Program Manager" ) // If it is not the Program Manager
+            hWnd != _HMG_MainHandle .AND.;                  // If it is not this app
+            ASCAN( aList, { |e| e[1] = hWnd } ) == 0 .AND.; // If the window is not shrinked
+            !EMPTY( GetWindowText( hWnd ) ) .AND.;          // If the window has a title
+            !IsIconic( hWnd ) .AND.;                        // If the window is not minimized
+            !( GetWindowText( hWnd ) == "Program Manager" ) // If it is not the Program Manager
 
          AADD( ahWnd, hWnd )
       ENDIF

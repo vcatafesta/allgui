@@ -112,14 +112,14 @@ PROCEDURE Init
 
    _HMG_aUserBlocks := Array ( 7 )
    _HMG_lOOPEnabled := .F.
-   #ifdef _OBJECT_
+#ifdef _OBJECT_
    _HMG_bOnFormInit       := {|nIndex, cVar  | Do_OnWndInit   ( nIndex, cVar ) }
    _HMG_bOnFormDestroy    := {|nIndex        | Do_OnWndRelease( nIndex ) }
    _HMG_bOnControlInit    := {|nIndex, cVar  | Do_OnCtlInit   ( nIndex, cVar ) }
    _HMG_bOnControlDestroy := {|nIndex        | Do_OnCtlRelease( nIndex ) }
    _HMG_bOnWndLaunch      := {|hWnd, nMsg, wParam, lParam| Do_OnWndLaunch( hWnd, nMsg, wParam, lParam ) }
    _HMG_bOnCtlLaunch      := {|hWnd, nMsg, wParam, lParam| Do_OnCtlLaunch( hWnd, nMsg, wParam, lParam ) }
-   #endif
+#endif
    _HMG_DateTextBoxActive := .F.
 
    _HMG_ThisFormName := Nil
@@ -291,12 +291,12 @@ PROCEDURE Init
    _HMG_BeginPagerActive     := .F.
    _HMG_ActivePagerForm      := 0
 
-   #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
    _HMG_ActiveTBrowseName    := ""
    _HMG_ActiveTBrowseHandle  := 0
    _HMG_BeginTBrowseActive   := .F.
-   #endif
-   #ifdef _PROPGRID_
+#endif
+#ifdef _PROPGRID_
    _HMG_ActivePropGridHandle := 0
    _HMG_ActiveCategoryHandle := 0
    _HMG_ActivePropGridIndex  := 0
@@ -304,7 +304,7 @@ PROCEDURE Init
    _HMG_PGLangButton         := {}
    _HMG_PGLangError          := {}
    _HMG_PGLangMessage        := {}
-   #endif
+#endif
    _HMG_BeginTabActive := .F.
    _HMG_ActiveTabPage  := 0
    _HMG_ActiveTabFullPageMap := {}
@@ -425,31 +425,31 @@ PROCEDURE Init
 
    _HMG_ListBoxDragNotification := _GetDDLMessage()
 
-   #ifdef _USERINIT_
+#ifdef _USERINIT_
    _HMG_aCustomEventProcedure := {}
    _HMG_aCustomPropertyProcedure := {}
    _HMG_aCustomMethodProcedure := {}
    _HMG_UserComponentProcess := .F.
-   #endif
+#endif
 
    _HMG_ParentWindowActive  := .F.
 
-   #ifdef _PANEL_
+#ifdef _PANEL_
    _HMG_LoadWindowRow  := -1
    _HMG_LoadWindowCol  := -1
    _HMG_LoadWindowWidth  := -1
    _HMG_LoadWindowHeight  := -1
-   #endif
-   #ifdef _HMG_COMPAT_
+#endif
+#ifdef _HMG_COMPAT_
    _HMG_StopWindowEventProcedure := {}
    _HMG_StopControlEventProcedure := {}
    _HMG_LastActiveFormIndex := 0
    _HMG_LastActiveControlIndex := 0
-   #endif
+#endif
 
-   #if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
+#if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
    InitCodePage()
-   #endif
+#endif
 
    InitMessages()
 
@@ -496,7 +496,7 @@ STATIC FUNCTION _hmg_Elapsed( dStart, dEnd, cTimeStart, cTimeEnd )
 
    RETURN aRetVal
 
-   #if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
+#if ! defined( __XHARBOUR__ ) && ( ( __HARBOUR__ - 0 ) > 0x030100 )
 
 STATIC PROCEDURE InitCodePage
 
@@ -564,7 +564,7 @@ STATIC PROCEDURE InitCodePage
 
    RETURN
 
-   #endif
+#endif
 
 FUNCTION _GetSysFont()
 
@@ -577,10 +577,10 @@ FUNCTION _GetSysFont()
 
 PROCEDURE InitMessages
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
    LOCAL cLang
 
-   #endif
+#endif
 
    // MISC MESSAGES (ENGLISH DEFAULT)
 
@@ -679,95 +679,95 @@ PROCEDURE InitMessages
 
    _HMG_aLangButton := {    ;
       "&Close",             ; // 1
-   "&New",               ; // 2
-   "&Modify",            ; // 3
-   "&Delete",            ; // 4
-   "&Find",              ; // 5
-   "&Print",             ; // 6
-   "&Cancel",            ; // 7
-   "&Ok",                ; // 8
-   "&Copy",              ; // 9
-   "&Activate Filter",   ; // 10
-   "&Deactivate Filter", ; // 11
-   "&Restore"            } // 12
+      "&New",               ; // 2
+      "&Modify",            ; // 3
+      "&Delete",            ; // 4
+      "&Find",              ; // 5
+      "&Print",             ; // 6
+      "&Cancel",            ; // 7
+      "&Ok",                ; // 8
+      "&Copy",              ; // 9
+      "&Activate Filter",   ; // 10
+      "&Deactivate Filter", ; // 11
+      "&Restore"            } // 12
    _HMG_aLangLabel := { ;
       "None",                       ; // 1
-   "Record",                     ; // 2
-   "Total",                      ; // 3
-   "Active order",               ; // 4
-   "Options",                    ; // 5
-   "New record",                 ; // 6
-   "Modify record",              ; // 7
-   "Select record",              ; // 8
-   "Find record",                ; // 9
-   "Print options",              ; // 10
-   "Available fields",           ; // 11
-   "Fields to print",            ; // 12
-   "Available printers",         ; // 13
-   "First record to print",      ; // 14
-   "Last record to print",       ; // 15
-   "Delete record",              ; // 16
-   "Preview",                    ; // 17
-   "View page thumbnails",       ; // 18
-   "Filter Condition: ",         ; // 19
-   "Filtered: ",                 ; // 20
-   "Filtering Options" ,         ; // 21
-   "Database Fields" ,           ; // 22
-   "Comparison Operator",        ; // 23
-   "Filter Value",               ; // 24
-   "Select Field To Filter",     ; // 25
-   "Select Comparison Operator", ; // 26
-   "Equal",                      ; // 27
-   "Not Equal",                  ; // 28
-   "Greater Than",               ; // 29
-   "Lower Than",                 ; // 30
-   "Greater or Equal Than",      ; // 31
-   "Lower or Equal Than"         } // 32
+      "Record",                     ; // 2
+      "Total",                      ; // 3
+      "Active order",               ; // 4
+      "Options",                    ; // 5
+      "New record",                 ; // 6
+      "Modify record",              ; // 7
+      "Select record",              ; // 8
+      "Find record",                ; // 9
+      "Print options",              ; // 10
+      "Available fields",           ; // 11
+      "Fields to print",            ; // 12
+      "Available printers",         ; // 13
+      "First record to print",      ; // 14
+      "Last record to print",       ; // 15
+      "Delete record",              ; // 16
+      "Preview",                    ; // 17
+      "View page thumbnails",       ; // 18
+      "Filter Condition: ",         ; // 19
+      "Filtered: ",                 ; // 20
+      "Filtering Options" ,         ; // 21
+      "Database Fields" ,           ; // 22
+      "Comparison Operator",        ; // 23
+      "Filter Value",               ; // 24
+      "Select Field To Filter",     ; // 25
+      "Select Comparison Operator", ; // 26
+      "Equal",                      ; // 27
+      "Not Equal",                  ; // 28
+      "Greater Than",               ; // 29
+      "Lower Than",                 ; // 30
+      "Greater or Equal Than",      ; // 31
+      "Lower or Equal Than"         } // 32
    _HMG_aLangUser := { ;
       CRLF + "Can't find an active area.   "  + CRLF + "Please select any area before call EDIT   " + CRLF,       ; // 1
-   "Type the field value (any text)",                                                                          ; // 2
-   "Type the field value (any number)",                                                                        ; // 3
-   "Select the date",                                                                                          ; // 4
-   "Check for true value",                                                                                     ; // 5
-   "Enter the field value",                                                                                    ; // 6
-   "Select any record and press OK",                                                                           ; // 7
-   CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
-   CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
-   CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
-   CRLF + "Record not found   " + CRLF,                                                                        ; // 11
-   "Select the field to include to list",                                                                      ; // 12
-   "Select the field to exclude from list",                                                                    ; // 13
-   "Select the printer",                                                                                       ; // 14
-   "Push button to include field",                                                                             ; // 15
-   "Push button to exclude field",                                                                             ; // 16
-   "Push button to select the first record to print",                                                          ; // 17
-   "Push button to select the last record to print",                                                           ; // 18
-   CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
-   CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
-   CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
-   CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
-   CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
-   CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
-   CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
-   "Ordered by",                                                                                               ; // 26
-   "From record",                                                                                              ; // 27
-   "To record",                                                                                                ; // 28
-   "Yes",                                                                                                      ; // 29
-   "No",                                                                                                       ; // 30
-   "Page:",                                                                                                    ; // 31
-   CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
-   "Filtered by",                                                                                              ; // 33
-   CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
-   CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
-   CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
-   CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
-   CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
-   CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
-   CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
-   CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
-   CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
+      "Type the field value (any text)",                                                                          ; // 2
+      "Type the field value (any number)",                                                                        ; // 3
+      "Select the date",                                                                                          ; // 4
+      "Check for true value",                                                                                     ; // 5
+      "Enter the field value",                                                                                    ; // 6
+      "Select any record and press OK",                                                                           ; // 7
+      CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
+      CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
+      CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
+      CRLF + "Record not found   " + CRLF,                                                                        ; // 11
+      "Select the field to include to list",                                                                      ; // 12
+      "Select the field to exclude from list",                                                                    ; // 13
+      "Select the printer",                                                                                       ; // 14
+      "Push button to include field",                                                                             ; // 15
+      "Push button to exclude field",                                                                             ; // 16
+      "Push button to select the first record to print",                                                          ; // 17
+      "Push button to select the last record to print",                                                           ; // 18
+      CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
+      CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
+      CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
+      CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
+      CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
+      CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
+      CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
+      "Ordered by",                                                                                               ; // 26
+      "From record",                                                                                              ; // 27
+      "To record",                                                                                                ; // 28
+      "Yes",                                                                                                      ; // 29
+      "No",                                                                                                       ; // 30
+      "Page:",                                                                                                    ; // 31
+      CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
+      "Filtered by",                                                                                              ; // 33
+      CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
+      CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
+      CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
+      CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
+      CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
+      CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
+      CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
+      CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
+      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
 
    IF _HMG_LANG_ID == 'FI'  // FINNISH - Language Is Not Supported By hb_langSelect() Function
       cLang := 'FI'
@@ -871,93 +871,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Zavøi",            ; // 1
-      "&Novı",             ; // 2
-      "Ú&prava",           ; // 3
-      "S&ma  ",           ; // 4
-      "Na&jdi",            ; // 5
-      "&Tisk",             ; // 6
-      "&Storno",           ; // 7
-      "&Ok",               ; // 8
-      "&Kopíruj",          ; // 9
-      "Aktivuj &filtr",    ; // 10
-      "&Vypni filtr",      ; // 11
-      "&Restore"           } // 12
+         "&Novı",             ; // 2
+         "Ú&prava",           ; // 3
+         "S&ma  ",           ; // 4
+         "Na&jdi",            ; // 5
+         "&Tisk",             ; // 6
+         "&Storno",           ; // 7
+         "&Ok",               ; // 8
+         "&Kopíruj",          ; // 9
+         "Aktivuj &filtr",    ; // 10
+         "&Vypni filtr",      ; // 11
+         "&Restore"           } // 12
       _HMG_aLangLabel := {            ;
          "ádnı",                        ; // 1
-      "Záznam",                       ; // 2
-      "Suma",                         ; // 3
-      "Aktivní tøídìní",              ; // 4
-      "Volby",                        ; // 5
-      "Novı záznam",                  ; // 6
-      "Uprav záznam",                 ; // 7
-      "Vyber záznam",                 ; // 8
-      "Najdi záznam",                 ; // 9
-      "Tiskni volby",                 ; // 10
-      "Dostupná pole",                ; // 11
-      "Pole k tisku",                 ; // 12
-      "Dostupné tiskárny",            ; // 13
-      "První záznam k tisku",         ; // 14
-      "Poslední záznam k tisku",      ; // 15
-      "Sma záznam",                  ; // 16
-      "Náhled",                       ; // 17
-      "Zobraz miniatury stran",       ; // 18
-      "Filtr: ",                      ; // 19
-      "Filtrován: ",                  ; // 20
-      "Volby filtru",                 ; // 21
-      "Pole databáze",                ; // 22
-      "Operátor porovnání",           ; // 23
-      "Hodnota filtru",               ; // 24
-      "Vyber pole do filtru",         ; // 25
-      "Vyber operátor porovnání",     ; // 26
-      "rovno",                        ; // 27
-      "nerovno",                      ; // 28
-      "vìtší ne",                    ; // 29
-      "menší ne",                    ; // 30
-      "vìtší nebo rovno ne",         ; // 31
-      "menší nebo rovno ne"          } // 32
+         "Záznam",                       ; // 2
+         "Suma",                         ; // 3
+         "Aktivní tøídìní",              ; // 4
+         "Volby",                        ; // 5
+         "Novı záznam",                  ; // 6
+         "Uprav záznam",                 ; // 7
+         "Vyber záznam",                 ; // 8
+         "Najdi záznam",                 ; // 9
+         "Tiskni volby",                 ; // 10
+         "Dostupná pole",                ; // 11
+         "Pole k tisku",                 ; // 12
+         "Dostupné tiskárny",            ; // 13
+         "První záznam k tisku",         ; // 14
+         "Poslední záznam k tisku",      ; // 15
+         "Sma záznam",                  ; // 16
+         "Náhled",                       ; // 17
+         "Zobraz miniatury stran",       ; // 18
+         "Filtr: ",                      ; // 19
+         "Filtrován: ",                  ; // 20
+         "Volby filtru",                 ; // 21
+         "Pole databáze",                ; // 22
+         "Operátor porovnání",           ; // 23
+         "Hodnota filtru",               ; // 24
+         "Vyber pole do filtru",         ; // 25
+         "Vyber operátor porovnání",     ; // 26
+         "rovno",                        ; // 27
+         "nerovno",                      ; // 28
+         "vìtší ne",                    ; // 29
+         "menší ne",                    ; // 30
+         "vìtší nebo rovno ne",         ; // 31
+         "menší nebo rovno ne"          } // 32
       _HMG_aLangUser := { ;
          CRLF + "Nelze najít aktivní oblast   "  + CRLF + "Prosím vyberte nìkterou pøed voláním EDIT   " + CRLF,         ; // 1
-      "Zadejte hodnotu pole (libovolnı text)",                                                                        ; // 2
-      "Zadejte hodnotu pole (libovolné èíslo)",                                                                       ; // 3
-      "Vyberte datum",                                                                                                ; // 4
-      "Zatrhnìte pro hodnotu true",                                                                                   ; // 5
-      "Zadejte hodnotu pole",                                                                                         ; // 6
-      "Vyberte jakıkoliv záznam s stisknìte OK",                                                                      ; // 7
-      CRLF + "Chcete smazat tento záznam  " + CRLF + "Jste si jist(a)?    " + CRLF,                                   ; // 8
-      CRLF + "Není vybráno ádné tøídìní   " + CRLF + "Prosím zvolte jedno   " + CRLF,                                ; // 9
-      CRLF + "Nelze hledat podle pole memo nebo logic   " + CRLF,                                                     ; // 10
-      CRLF + "Záznam nenalezen   " + CRLF,                                                                            ; // 11
-      "Vyberte pole k zaøazení do seznamu",                                                                           ; // 12
-      "Vyberte pole k vyøazení ze seznamu",                                                                           ; // 13
-      "Vyberte tiskárnu",                                                                                             ; // 14
-      "Stisknìte tlaèítko pro zaøazení pole",                                                                         ; // 15
-      "Stisknìtì tlaèítko k vyøazení pole",                                                                           ; // 16
-      "Stisknìte tlaèítko k vıbìru prvního záznamu k tisku",                                                          ; // 17
-      "Stisknìtì tlaèítko k vıbìru posledního záznamu k tisku",                                                       ; // 18
-      CRLF + "K zaøazení nezbıvají pole   " + CRLF,                                                                   ; // 19
-      CRLF + "První vıbìr pole k zaøazení   " + CRLF,                                                                 ; // 20
-      CRLF + "Nelze vyøadit další pole   " + CRLF,                                                                    ; // 21
-      CRLF + "První vıbìr pole k vyøazení   " + CRLF,                                                                 ; // 22
-      CRLF + "Nebylo vybráno ádné pole   " + CRLF + "Prosím vyberte pole pro zaøazení do tisku   " + CRLF,           ; // 23
-      CRLF + "Pøíliš mnoho polí   " + CRLF + "odeberte nìkterá pole   " + CRLF,                                       ; // 24
-      CRLF + "Tiskárna není pøipravena   " + CRLF,                                                                    ; // 25
-      "Tøídìno dle",                                                                                                  ; // 26
-      "Od záznamu",                                                                                                   ; // 27
-      "Do záznamu",                                                                                                   ; // 28
-      "Ano",                                                                                                          ; // 29
-      "Ne",                                                                                                           ; // 30
-      "Strana:",                                                                                                      ; // 31
-      CRLF + "Prosím vyberte tiskárnu   " + CRLF,                                                                     ; // 32
-      "Filtrováno dle",                                                                                               ; // 33
-      CRLF + "Filtr není aktivní    " + CRLF,                                                                         ; // 34
-      CRLF + "Nelze filtrovat podle memo    " + CRLF,                                                                 ; // 35
-      CRLF + "Vyberte pole do filtru    " + CRLF,                                                                     ; // 36
-      CRLF + "Vybarte operátor do filtru    " + CRLF,                                                                 ; // 37
-      CRLF + "Zadejte hodnotu do filtru    " + CRLF,                                                                  ; // 38
-      CRLF + "Není ádnı aktivní filtr    " + CRLF,                                                                   ; // 39
-      CRLF + "Deactivovat filtr?   " + CRLF,                                                                          ; // 40
-      CRLF + "Záznam uzamèen jinım uivatelem  " + CRLF,                                                              ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                     } // 42
+         "Zadejte hodnotu pole (libovolnı text)",                                                                        ; // 2
+         "Zadejte hodnotu pole (libovolné èíslo)",                                                                       ; // 3
+         "Vyberte datum",                                                                                                ; // 4
+         "Zatrhnìte pro hodnotu true",                                                                                   ; // 5
+         "Zadejte hodnotu pole",                                                                                         ; // 6
+         "Vyberte jakıkoliv záznam s stisknìte OK",                                                                      ; // 7
+         CRLF + "Chcete smazat tento záznam  " + CRLF + "Jste si jist(a)?    " + CRLF,                                   ; // 8
+         CRLF + "Není vybráno ádné tøídìní   " + CRLF + "Prosím zvolte jedno   " + CRLF,                                ; // 9
+         CRLF + "Nelze hledat podle pole memo nebo logic   " + CRLF,                                                     ; // 10
+         CRLF + "Záznam nenalezen   " + CRLF,                                                                            ; // 11
+         "Vyberte pole k zaøazení do seznamu",                                                                           ; // 12
+         "Vyberte pole k vyøazení ze seznamu",                                                                           ; // 13
+         "Vyberte tiskárnu",                                                                                             ; // 14
+         "Stisknìte tlaèítko pro zaøazení pole",                                                                         ; // 15
+         "Stisknìtì tlaèítko k vyøazení pole",                                                                           ; // 16
+         "Stisknìte tlaèítko k vıbìru prvního záznamu k tisku",                                                          ; // 17
+         "Stisknìtì tlaèítko k vıbìru posledního záznamu k tisku",                                                       ; // 18
+         CRLF + "K zaøazení nezbıvají pole   " + CRLF,                                                                   ; // 19
+         CRLF + "První vıbìr pole k zaøazení   " + CRLF,                                                                 ; // 20
+         CRLF + "Nelze vyøadit další pole   " + CRLF,                                                                    ; // 21
+         CRLF + "První vıbìr pole k vyøazení   " + CRLF,                                                                 ; // 22
+         CRLF + "Nebylo vybráno ádné pole   " + CRLF + "Prosím vyberte pole pro zaøazení do tisku   " + CRLF,           ; // 23
+         CRLF + "Pøíliš mnoho polí   " + CRLF + "odeberte nìkterá pole   " + CRLF,                                       ; // 24
+         CRLF + "Tiskárna není pøipravena   " + CRLF,                                                                    ; // 25
+         "Tøídìno dle",                                                                                                  ; // 26
+         "Od záznamu",                                                                                                   ; // 27
+         "Do záznamu",                                                                                                   ; // 28
+         "Ano",                                                                                                          ; // 29
+         "Ne",                                                                                                           ; // 30
+         "Strana:",                                                                                                      ; // 31
+         CRLF + "Prosím vyberte tiskárnu   " + CRLF,                                                                     ; // 32
+         "Filtrováno dle",                                                                                               ; // 33
+         CRLF + "Filtr není aktivní    " + CRLF,                                                                         ; // 34
+         CRLF + "Nelze filtrovat podle memo    " + CRLF,                                                                 ; // 35
+         CRLF + "Vyberte pole do filtru    " + CRLF,                                                                     ; // 36
+         CRLF + "Vybarte operátor do filtru    " + CRLF,                                                                 ; // 37
+         CRLF + "Zadejte hodnotu do filtru    " + CRLF,                                                                  ; // 38
+         CRLF + "Není ádnı aktivní filtr    " + CRLF,                                                                   ; // 39
+         CRLF + "Deactivovat filtr?   " + CRLF,                                                                          ; // 40
+         CRLF + "Záznam uzamèen jinım uivatelem  " + CRLF,                                                              ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                     } // 42
 
    CASE cLang == "HR"  // Croatian
       // CROATIAN
@@ -1053,93 +1053,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Close",             ; // 1
-      "&New",               ; // 2
-      "&Modify",            ; // 3
-      "&Delete",            ; // 4
-      "&Find",              ; // 5
-      "&Print",             ; // 6
-      "&Cancel",            ; // 7
-      "&Ok",                ; // 8
-      "&Copy",              ; // 9
-      "&Activate Filter",   ; // 10
-      "&Deactivate Filter", ; // 11
-      "&Restore"            } // 12
+         "&New",               ; // 2
+         "&Modify",            ; // 3
+         "&Delete",            ; // 4
+         "&Find",              ; // 5
+         "&Print",             ; // 6
+         "&Cancel",            ; // 7
+         "&Ok",                ; // 8
+         "&Copy",              ; // 9
+         "&Activate Filter",   ; // 10
+         "&Deactivate Filter", ; // 11
+         "&Restore"            } // 12
       _HMG_aLangLabel := {            ;
          "None",                         ; // 1
-      "Record",                       ; // 2
-      "Total",                        ; // 3
-      "Active order",                 ; // 4
-      "Options",                      ; // 5
-      "New record",                   ; // 6
-      "Modify record",                ; // 7
-      "Select record",                ; // 8
-      "Find record",                  ; // 9
-      "Print options",                ; // 10
-      "Available fields",             ; // 11
-      "Fields to print",              ; // 12
-      "Available printers",           ; // 13
-      "First record to print",        ; // 14
-      "Last record to print",         ; // 15
-      "Delete record",                ; // 16
-      "Preview",                      ; // 17
-      "View page thumbnails",         ; // 18
-      "Filter Condition: ",           ; // 19
-      "Filtered: ",                   ; // 20
-      "Filtering Options" ,           ; // 21
-      "Database Fields" ,             ; // 22
-      "Comparison Operator",          ; // 23
-      "Filter Value",                 ; // 24
-      "Select Field To Filter",       ; // 25
-      "Select Comparison Operator",   ; // 26
-      "Equal",                        ; // 27
-      "Not Equal",                    ; // 28
-      "Greater Than",                 ; // 29
-      "Lower Than",                   ; // 30
-      "Greater or Equal Than",        ; // 31
-      "Lower or Equal Than"           } // 32
+         "Record",                       ; // 2
+         "Total",                        ; // 3
+         "Active order",                 ; // 4
+         "Options",                      ; // 5
+         "New record",                   ; // 6
+         "Modify record",                ; // 7
+         "Select record",                ; // 8
+         "Find record",                  ; // 9
+         "Print options",                ; // 10
+         "Available fields",             ; // 11
+         "Fields to print",              ; // 12
+         "Available printers",           ; // 13
+         "First record to print",        ; // 14
+         "Last record to print",         ; // 15
+         "Delete record",                ; // 16
+         "Preview",                      ; // 17
+         "View page thumbnails",         ; // 18
+         "Filter Condition: ",           ; // 19
+         "Filtered: ",                   ; // 20
+         "Filtering Options" ,           ; // 21
+         "Database Fields" ,             ; // 22
+         "Comparison Operator",          ; // 23
+         "Filter Value",                 ; // 24
+         "Select Field To Filter",       ; // 25
+         "Select Comparison Operator",   ; // 26
+         "Equal",                        ; // 27
+         "Not Equal",                    ; // 28
+         "Greater Than",                 ; // 29
+         "Lower Than",                   ; // 30
+         "Greater or Equal Than",        ; // 31
+         "Lower or Equal Than"           } // 32
       _HMG_aLangUser := { ;
          CRLF + "Can't find an active area.   "  + CRLF + "Please select any area before call EDIT   " + CRLF,       ; // 1
-      "Type the field value (any text)",                                                                          ; // 2
-      "Type the field value (any number)",                                                                        ; // 3
-      "Select the date",                                                                                          ; // 4
-      "Check for true value",                                                                                     ; // 5
-      "Enter the field value",                                                                                    ; // 6
-      "Select any record and press OK",                                                                           ; // 7
-      CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
-      CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
-      CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
-      CRLF + "Record not found   " + CRLF,                                                                        ; // 11
-      "Select the field to include to list",                                                                      ; // 12
-      "Select the field to exclude from list",                                                                    ; // 13
-      "Select the printer",                                                                                       ; // 14
-      "Push button to include field",                                                                             ; // 15
-      "Push button to exclude field",                                                                             ; // 16
-      "Push button to select the first record to print",                                                          ; // 17
-      "Push button to select the last record to print",                                                           ; // 18
-      CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
-      CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
-      CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
-      CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
-      CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
-      CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
-      CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
-      "Ordered by",                                                                                               ; // 26
-      "From record",                                                                                              ; // 27
-      "To record",                                                                                                ; // 28
-      "Yes",                                                                                                      ; // 29
-      "No",                                                                                                       ; // 30
-      "Page:",                                                                                                    ; // 31
-      CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
-      "Filtered by",                                                                                              ; // 33
-      CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
-      CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
-      CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
-      CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
-      CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
-      CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
-      CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
-      CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
+         "Type the field value (any text)",                                                                          ; // 2
+         "Type the field value (any number)",                                                                        ; // 3
+         "Select the date",                                                                                          ; // 4
+         "Check for true value",                                                                                     ; // 5
+         "Enter the field value",                                                                                    ; // 6
+         "Select any record and press OK",                                                                           ; // 7
+         CRLF + "You are going to delete the active record   " + CRLF + "Are you sure?    " + CRLF,                  ; // 8
+         CRLF + "There isn't any active order   " + CRLF + "Please select one   " + CRLF,                            ; // 9
+         CRLF + "Can't do searches by fields memo or logic   " + CRLF,                                               ; // 10
+         CRLF + "Record not found   " + CRLF,                                                                        ; // 11
+         "Select the field to include to list",                                                                      ; // 12
+         "Select the field to exclude from list",                                                                    ; // 13
+         "Select the printer",                                                                                       ; // 14
+         "Push button to include field",                                                                             ; // 15
+         "Push button to exclude field",                                                                             ; // 16
+         "Push button to select the first record to print",                                                          ; // 17
+         "Push button to select the last record to print",                                                           ; // 18
+         CRLF + "No more fields to include   " + CRLF,                                                               ; // 19
+         CRLF + "First select the field to include   " + CRLF,                                                       ; // 20
+         CRLF + "No more fields to exlude   " + CRLF,                                                                ; // 21
+         CRLF + "First select th field to exclude   " + CRLF,                                                        ; // 22
+         CRLF + "You don't select any field   " + CRLF + "Please select the fields to include on print   " + CRLF,   ; // 23
+         CRLF + "Too many fields   " + CRLF + "Reduce number of fields   " + CRLF,                                   ; // 24
+         CRLF + "Printer not ready   " + CRLF,                                                                       ; // 25
+         "Ordered by",                                                                                               ; // 26
+         "From record",                                                                                              ; // 27
+         "To record",                                                                                                ; // 28
+         "Yes",                                                                                                      ; // 29
+         "No",                                                                                                       ; // 30
+         "Page:",                                                                                                    ; // 31
+         CRLF + "Please select a printer   " + CRLF,                                                                 ; // 32
+         "Filtered by",                                                                                              ; // 33
+         CRLF + "There is an active filter    " + CRLF,                                                              ; // 34
+         CRLF + "Can't filter by memo fields    " + CRLF,                                                            ; // 35
+         CRLF + "Select the field to filter    " + CRLF,                                                             ; // 36
+         CRLF + "Select any operator to filter    " + CRLF,                                                          ; // 37
+         CRLF + "Type any value to filter    " + CRLF,                                                               ; // 38
+         CRLF + "There isn't any active filter    " + CRLF,                                                          ; // 39
+         CRLF + "Deactivate filter?   " + CRLF,                                                                      ; // 40
+         CRLF + "Record locked by another user    " + CRLF,                                                          ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                 } // 42
 
    CASE cLang == "EU"  // Basque
       // BASQUE
@@ -1235,93 +1235,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {   ;
          "&Itxi",             ; // 1
-      "&Berria",           ; // 2
-      "&Aldatu",           ; // 3
-      "&Ezabatu",          ; // 4
-      "Bi&latu",           ; // 5
-      "In&primatu",        ; // 6
-      "&Utzi",             ; // 7
-      "&Ok",               ; // 8
-      "&Kopiatu",          ; // 9
-      "I&ragazkia Ezarri", ; // 10
-      "Ira&gazkia Kendu",  ; // 11
-      "&Restore"           } // 12
+         "&Berria",           ; // 2
+         "&Aldatu",           ; // 3
+         "&Ezabatu",          ; // 4
+         "Bi&latu",           ; // 5
+         "In&primatu",        ; // 6
+         "&Utzi",             ; // 7
+         "&Ok",               ; // 8
+         "&Kopiatu",          ; // 9
+         "I&ragazkia Ezarri", ; // 10
+         "Ira&gazkia Kendu",  ; // 11
+         "&Restore"           } // 12
       _HMG_aLangLabel := {                  ;
          "Bat ere ez",                      ; // 1
-      "Erregistroa",                        ; // 2
-      "Guztira",                            ; // 3
-      "Orden Aktiboa",                      ; // 4
-      "Aukerak",                            ; // 5
-      "Erregistro Berria",                  ; // 6
-      "Erregistroa Aldatu",                 ; // 7
-      "Erregistroa Aukeratu",               ; // 8
-      "Erregistroa Bilatu",                 ; // 9
-      "Inprimatze-aukerak",                 ; // 10
-      "Eremu Libreak",                      ; // 11
-      "Inprimatzeko Eremuak",               ; // 12
-      "Inprimagailu Libreak",               ; // 13
-      "Inprimatzeko Lehenengo Erregistroa", ; // 14
-      "Inprimatzeko Azken Erregistroa",     ; // 15
-      "Erregistroa Ezabatu",                ; // 16
-      "Aurreikusi",                         ; // 17
-      "Orrien Irudi Txikiak Ikusi",         ; // 18
-      "Iragazkiaren Baldintza: ",           ; // 19
-      "Iragazita: ",                        ; // 20
-      "Iragazte-aukerak" ,                  ; // 21
-      "Datubasearen Eremuak" ,              ; // 22
-      "Konparaketa Eragilea",               ; // 23
-      "Iragazkiaren Balioa",                ; // 24
-      "Iragazteko Eremua Aukeratu",         ; // 25
-      "Konparaketa Eragilea Aukeratu",      ; // 26
-      "Berdin",                             ; // 27
-      "Ezberdin",                           ; // 28
-      "Handiago",                           ; // 29
-      "Txikiago",                           ; // 30
-      "Handiago edo Berdin",                ; // 31
-      "Txikiago edo Berdin"                 } // 32
+         "Erregistroa",                        ; // 2
+         "Guztira",                            ; // 3
+         "Orden Aktiboa",                      ; // 4
+         "Aukerak",                            ; // 5
+         "Erregistro Berria",                  ; // 6
+         "Erregistroa Aldatu",                 ; // 7
+         "Erregistroa Aukeratu",               ; // 8
+         "Erregistroa Bilatu",                 ; // 9
+         "Inprimatze-aukerak",                 ; // 10
+         "Eremu Libreak",                      ; // 11
+         "Inprimatzeko Eremuak",               ; // 12
+         "Inprimagailu Libreak",               ; // 13
+         "Inprimatzeko Lehenengo Erregistroa", ; // 14
+         "Inprimatzeko Azken Erregistroa",     ; // 15
+         "Erregistroa Ezabatu",                ; // 16
+         "Aurreikusi",                         ; // 17
+         "Orrien Irudi Txikiak Ikusi",         ; // 18
+         "Iragazkiaren Baldintza: ",           ; // 19
+         "Iragazita: ",                        ; // 20
+         "Iragazte-aukerak" ,                  ; // 21
+         "Datubasearen Eremuak" ,              ; // 22
+         "Konparaketa Eragilea",               ; // 23
+         "Iragazkiaren Balioa",                ; // 24
+         "Iragazteko Eremua Aukeratu",         ; // 25
+         "Konparaketa Eragilea Aukeratu",      ; // 26
+         "Berdin",                             ; // 27
+         "Ezberdin",                           ; // 28
+         "Handiago",                           ; // 29
+         "Txikiago",                           ; // 30
+         "Handiago edo Berdin",                ; // 31
+         "Txikiago edo Berdin"                 } // 32
       _HMG_aLangUser := { ;
          CRLF + "Ezin da area aktiborik aurkitu.   "  + CRLF + "Mesedez aukeratu area EDIT deitu baino lehen   " + CRLF,  ; // 1
-      "Eremuaren balioa idatzi (edozein testu)",                                                                       ; // 2
-      "Eremuaren balioa idatzi (edozein zenbaki)",                                                                     ; // 3
-      "Data aukeratu",                                                                                                 ; // 4
-      "Markatu egiazko baliorako",                                                                                     ; // 5
-      "Eremuaren balioa sartu",                                                                                        ; // 6
-      "Edozein erregistro aukeratu eta OK sakatu",                                                                     ; // 7
-      CRLF + "Erregistro aktiboa ezabatuko duzu   " + CRLF + "Ziur zaude?    " + CRLF,                                 ; // 8
-      CRLF + "Ez dago orden aktiborik   " + CRLF + "Mesedez aukeratu bat   " + CRLF,                                   ; // 9
-      CRLF + "Memo edo eremu logikoen arabera ezin bilaketarik egin   " + CRLF,                                        ; // 10
-      CRLF + "Erregistroa ez da aurkitu   " + CRLF,                                                                    ; // 11
-      "Zerrendan sartzeko eremua aukeratu",                                                                            ; // 12
-      "Zerrendatik kentzeko eremua aukeratu",                                                                          ; // 13
-      "Inprimagailua aukeratu",                                                                                        ; // 14
-      "Sakatu botoia eremua sartzeko",                                                                                 ; // 15
-      "Sakatu botoia eremua kentzeko",                                                                                 ; // 16
-      "Sakatu botoia inprimatzeko lehenengo erregistroa aukeratzeko",                                                  ; // 17
-      "Sakatu botoia inprimatzeko azken erregistroa aukeratzeko",                                                      ; // 18
-      CRLF + "Sartzeko eremu gehiagorik ez   " + CRLF,                                                                 ; // 19
-      CRLF + "Lehenago aukeratu sartzeko eremua   " + CRLF,                                                            ; // 20
-      CRLF + "Kentzeko eremu gehiagorik ez   " + CRLF,                                                                 ; // 21
-      CRLF + "Lehenago aukeratu kentzeko eremua   " + CRLF,                                                            ; // 22
-      CRLF + "Ez duzu eremurik aukeratu  " + CRLF + "Mesedez aukeratu inprimaketan sartzeko eremuak   " + CRLF,        ; // 23
-      CRLF + "Eremu gehiegi   " + CRLF + "Murriztu eremu kopurua   " + CRLF,                                           ; // 24
-      CRLF + "Inprimagailua ez dago prest   " + CRLF,                                                                  ; // 25
-      "Ordenatuta honen arabera:",                                                                                     ; // 26
-      "Erregistro honetatik:",                                                                                         ; // 27
-      "Erregistro honetara:",                                                                                          ; // 28
-      "Bai",                                                                                                           ; // 29
-      "Ez",                                                                                                            ; // 30
-      "Orrialdea:",                                                                                                    ; // 31
-      CRLF + "Mesedez aukeratu inprimagailua   " + CRLF,                                                               ; // 32
-      "Iragazita honen arabera:",                                                                                      ; // 33
-      CRLF + "Iragazki aktiboa dago    " + CRLF,                                                                       ; // 34
-      CRLF + "Ezin iragazi Memo eremuen arabera    " + CRLF,                                                           ; // 35
-      CRLF + "Iragazteko eremua aukeratu    " + CRLF,                                                                  ; // 36
-      CRLF + "Iragazteko edozein eragile aukeratu    " + CRLF,                                                         ; // 37
-      CRLF + "Idatzi edozein balio iragazteko    " + CRLF,                                                             ; // 38
-      CRLF + "Ez dago iragazki aktiborik    " + CRLF,                                                                  ; // 39
-      CRLF + "Iragazkia kendu?   " + CRLF,                                                                             ; // 40
-      CRLF + "Record locked by another user    " + CRLF,                                                               ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                      } // 42
+         "Eremuaren balioa idatzi (edozein testu)",                                                                       ; // 2
+         "Eremuaren balioa idatzi (edozein zenbaki)",                                                                     ; // 3
+         "Data aukeratu",                                                                                                 ; // 4
+         "Markatu egiazko baliorako",                                                                                     ; // 5
+         "Eremuaren balioa sartu",                                                                                        ; // 6
+         "Edozein erregistro aukeratu eta OK sakatu",                                                                     ; // 7
+         CRLF + "Erregistro aktiboa ezabatuko duzu   " + CRLF + "Ziur zaude?    " + CRLF,                                 ; // 8
+         CRLF + "Ez dago orden aktiborik   " + CRLF + "Mesedez aukeratu bat   " + CRLF,                                   ; // 9
+         CRLF + "Memo edo eremu logikoen arabera ezin bilaketarik egin   " + CRLF,                                        ; // 10
+         CRLF + "Erregistroa ez da aurkitu   " + CRLF,                                                                    ; // 11
+         "Zerrendan sartzeko eremua aukeratu",                                                                            ; // 12
+         "Zerrendatik kentzeko eremua aukeratu",                                                                          ; // 13
+         "Inprimagailua aukeratu",                                                                                        ; // 14
+         "Sakatu botoia eremua sartzeko",                                                                                 ; // 15
+         "Sakatu botoia eremua kentzeko",                                                                                 ; // 16
+         "Sakatu botoia inprimatzeko lehenengo erregistroa aukeratzeko",                                                  ; // 17
+         "Sakatu botoia inprimatzeko azken erregistroa aukeratzeko",                                                      ; // 18
+         CRLF + "Sartzeko eremu gehiagorik ez   " + CRLF,                                                                 ; // 19
+         CRLF + "Lehenago aukeratu sartzeko eremua   " + CRLF,                                                            ; // 20
+         CRLF + "Kentzeko eremu gehiagorik ez   " + CRLF,                                                                 ; // 21
+         CRLF + "Lehenago aukeratu kentzeko eremua   " + CRLF,                                                            ; // 22
+         CRLF + "Ez duzu eremurik aukeratu  " + CRLF + "Mesedez aukeratu inprimaketan sartzeko eremuak   " + CRLF,        ; // 23
+         CRLF + "Eremu gehiegi   " + CRLF + "Murriztu eremu kopurua   " + CRLF,                                           ; // 24
+         CRLF + "Inprimagailua ez dago prest   " + CRLF,                                                                  ; // 25
+         "Ordenatuta honen arabera:",                                                                                     ; // 26
+         "Erregistro honetatik:",                                                                                         ; // 27
+         "Erregistro honetara:",                                                                                          ; // 28
+         "Bai",                                                                                                           ; // 29
+         "Ez",                                                                                                            ; // 30
+         "Orrialdea:",                                                                                                    ; // 31
+         CRLF + "Mesedez aukeratu inprimagailua   " + CRLF,                                                               ; // 32
+         "Iragazita honen arabera:",                                                                                      ; // 33
+         CRLF + "Iragazki aktiboa dago    " + CRLF,                                                                       ; // 34
+         CRLF + "Ezin iragazi Memo eremuen arabera    " + CRLF,                                                           ; // 35
+         CRLF + "Iragazteko eremua aukeratu    " + CRLF,                                                                  ; // 36
+         CRLF + "Iragazteko edozein eragile aukeratu    " + CRLF,                                                         ; // 37
+         CRLF + "Idatzi edozein balio iragazteko    " + CRLF,                                                             ; // 38
+         CRLF + "Ez dago iragazki aktiborik    " + CRLF,                                                                  ; // 39
+         CRLF + "Iragazkia kendu?   " + CRLF,                                                                             ; // 40
+         CRLF + "Record locked by another user    " + CRLF,                                                               ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                      } // 42
 
    CASE cLang == "FR"  // French
       // FRENCH
@@ -1415,93 +1415,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {  ;
          "&Fermer",          ; // 1
-      "&Nouveau",         ; // 2
-      "&Modifier",        ; // 3
-      "&Supprimer",       ; // 4
-      "&Trouver",         ; // 5
-      "&Imprimer",        ; // 6
-      "&Abandon",         ; // 7
-      "&Ok",              ; // 8
-      "&Copier",          ; // 9
-      "&Activer Filtre",  ; // 10
-      "&Déactiver Filtre",; // 11
-      "&Reconstituer"     } // 12
+         "&Nouveau",         ; // 2
+         "&Modifier",        ; // 3
+         "&Supprimer",       ; // 4
+         "&Trouver",         ; // 5
+         "&Imprimer",        ; // 6
+         "&Abandon",         ; // 7
+         "&Ok",              ; // 8
+         "&Copier",          ; // 9
+         "&Activer Filtre",  ; // 10
+         "&Déactiver Filtre",; // 11
+         "&Reconstituer"     } // 12
       _HMG_aLangLabel := {                       ;
          "Aucun",                                ; // 1
-      "Enregistrement",                          ; // 2
-      "Total",                                   ; // 3
-      "Ordre actif",                             ; // 4
-      "Options",                                 ; // 5
-      "Nouvel enregistrement",                   ; // 6
-      "Modifier enregistrement",                 ; // 7
-      "Selectionner enregistrement",             ; // 8
-      "Trouver enregistrement",                  ; // 9
-      "Imprimer options",                        ; // 10
-      "Champs disponibles",                      ; // 11
-      "Champs à imprimer",                       ; // 12
-      "Imprimantes connectées",                  ; // 13
-      "Premier enregistrement à imprimer",       ; // 14
-      "Dernier enregistrement à imprimer",       ; // 15
-      "Enregistrement supprimé",                 ; // 16
-      "Prévisualisation",                        ; // 17
-      "Aperçu pages",                            ; // 18
-      "Condition filtre : ",                     ; // 19
-      "Filtré : ",                               ; // 20
-      "Options de filtrage" ,                    ; // 21
-      "Champs de la Bdd" ,                       ; // 22
-      "Opérateurs de comparaison",               ; // 23
-      "Valeur du filtre",                        ; // 24
-      "Selectionner le champ à filtrer",         ; // 25
-      "Selectionner l'opérateur de comparaison", ; // 26
-      "Egal",                                    ; // 27
-      "Différent",                               ; // 28
-      "Plus grand",                              ; // 29
-      "Plus petit",                              ; // 30
-      "Plus grand ou égal",                      ; // 31
-      "Plus petit ou égal"                       } // 32
+         "Enregistrement",                          ; // 2
+         "Total",                                   ; // 3
+         "Ordre actif",                             ; // 4
+         "Options",                                 ; // 5
+         "Nouvel enregistrement",                   ; // 6
+         "Modifier enregistrement",                 ; // 7
+         "Selectionner enregistrement",             ; // 8
+         "Trouver enregistrement",                  ; // 9
+         "Imprimer options",                        ; // 10
+         "Champs disponibles",                      ; // 11
+         "Champs à imprimer",                       ; // 12
+         "Imprimantes connectées",                  ; // 13
+         "Premier enregistrement à imprimer",       ; // 14
+         "Dernier enregistrement à imprimer",       ; // 15
+         "Enregistrement supprimé",                 ; // 16
+         "Prévisualisation",                        ; // 17
+         "Aperçu pages",                            ; // 18
+         "Condition filtre : ",                     ; // 19
+         "Filtré : ",                               ; // 20
+         "Options de filtrage" ,                    ; // 21
+         "Champs de la Bdd" ,                       ; // 22
+         "Opérateurs de comparaison",               ; // 23
+         "Valeur du filtre",                        ; // 24
+         "Selectionner le champ à filtrer",         ; // 25
+         "Selectionner l'opérateur de comparaison", ; // 26
+         "Egal",                                    ; // 27
+         "Différent",                               ; // 28
+         "Plus grand",                              ; // 29
+         "Plus petit",                              ; // 30
+         "Plus grand ou égal",                      ; // 31
+         "Plus petit ou égal"                       } // 32
       _HMG_aLangUser := { ;
          CRLF + "Ne peut trouver une base active.   "  + CRLF + "Sélectionner une base avant la fonction EDIT  " + CRLF,            ; // 1
-      "Entrer la valeur du champ (du texte)",                                                                                       ; // 2
-      "Entrer la valeur du champ (un nombre)",                                                                                      ; // 3
-      "Sélectionner la date",                                                                                                       ; // 4
-      "Vérifier la valeur logique",                                                                                                 ; // 5
-      "Entrer la valeur du champ",                                                                                                  ; // 6
-      "Sélectionner un enregistrement et appuyer sur OK",                                                                           ; // 7
-      CRLF + "Vous voulez détruire l'enregistrement actif  " + CRLF + "Etes-vous sûre?   " + CRLF,                                  ; // 8
-      CRLF + "Il n'y a pas d'ordre actif   " + CRLF + "Sélectionner en un   " + CRLF,                                               ; // 9
-      CRLF + "Ne peut faire de recherche sur champ memo ou logique   " + CRLF,                                                      ; // 10
-      CRLF + "Enregistrement non trouvé  " + CRLF,                                                                                  ; // 11
-      "Sélectionner le champ à inclure à la liste",                                                                                 ; // 12
-      "Sélectionner le champ à exclure de la liste",                                                                                ; // 13
-      "Sélectionner l'imprimante",                                                                                                  ; // 14
-      "Appuyer sur le bouton pour inclure un champ",                                                                                ; // 15
-      "Appuyer sur le bouton pour exclure un champ",                                                                                ; // 16
-      "Appuyer sur le bouton pour sélectionner le premier enregistrement à imprimer",                                               ; // 17
-      "Appuyer sur le bouton pour sélectionner le dernier champ à imprimer",                                                        ; // 18
-      CRLF + "Plus de champs à inclure   " + CRLF,                                                                                  ; // 19
-      CRLF + "Sélectionner d'abord les champs à inclure   " + CRLF,                                                                 ; // 20
-      CRLF + "Plus de champs à exclure   " + CRLF,                                                                                  ; // 21
-      CRLF + "Sélectionner d'abord les champs à exclure   " + CRLF,                                                                 ; // 22
-      CRLF + "Vous n'avez sélectionné aucun champ   " + CRLF + "Sélectionner les champs à inclure dans l'impression   " + CRLF,     ; // 23
-      CRLF + "Trop de champs   " + CRLF + "Réduiser le nombre de champs   " + CRLF,                                                 ; // 24
-      CRLF + "Imprimante pas prête   " + CRLF,                                                                                      ; // 25
-      "Trié par",                                                                                                                   ; // 26
-      "De l'enregistrement",                                                                                                        ; // 27
-      "A l'enregistrement",                                                                                                         ; // 28
-      "Oui",                                                                                                                        ; // 29
-      "Non",                                                                                                                        ; // 30
-      "Page:",                                                                                                                      ; // 31
-      CRLF + "Sélectionner une imprimante   " + CRLF,                                                                               ; // 32
-      "Filtré par",                                                                                                                 ; // 33
-      CRLF + "Il y a un filtre actif    " + CRLF,                                                                                   ; // 34
-      CRLF + "Filtre impossible sur champ memo    " + CRLF,                                                                         ; // 35
-      CRLF + "Sélectionner un champ de filtre    " + CRLF,                                                                          ; // 36
-      CRLF + "Sélectionner un opérateur de filtre   " + CRLF,                                                                       ; // 37
-      CRLF + "Entrer une valeur au filtre    " + CRLF,                                                                              ; // 38
-      CRLF + "Il n'y a aucun filtre actif    " + CRLF,                                                                              ; // 39
-      CRLF + "Désactiver le filtre?   " + CRLF,                                                                                     ; // 40
-      CRLF + "Record locked by another user    " + CRLF,                                                                            ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                                   } // 42
+         "Entrer la valeur du champ (du texte)",                                                                                       ; // 2
+         "Entrer la valeur du champ (un nombre)",                                                                                      ; // 3
+         "Sélectionner la date",                                                                                                       ; // 4
+         "Vérifier la valeur logique",                                                                                                 ; // 5
+         "Entrer la valeur du champ",                                                                                                  ; // 6
+         "Sélectionner un enregistrement et appuyer sur OK",                                                                           ; // 7
+         CRLF + "Vous voulez détruire l'enregistrement actif  " + CRLF + "Etes-vous sûre?   " + CRLF,                                  ; // 8
+         CRLF + "Il n'y a pas d'ordre actif   " + CRLF + "Sélectionner en un   " + CRLF,                                               ; // 9
+         CRLF + "Ne peut faire de recherche sur champ memo ou logique   " + CRLF,                                                      ; // 10
+         CRLF + "Enregistrement non trouvé  " + CRLF,                                                                                  ; // 11
+         "Sélectionner le champ à inclure à la liste",                                                                                 ; // 12
+         "Sélectionner le champ à exclure de la liste",                                                                                ; // 13
+         "Sélectionner l'imprimante",                                                                                                  ; // 14
+         "Appuyer sur le bouton pour inclure un champ",                                                                                ; // 15
+         "Appuyer sur le bouton pour exclure un champ",                                                                                ; // 16
+         "Appuyer sur le bouton pour sélectionner le premier enregistrement à imprimer",                                               ; // 17
+         "Appuyer sur le bouton pour sélectionner le dernier champ à imprimer",                                                        ; // 18
+         CRLF + "Plus de champs à inclure   " + CRLF,                                                                                  ; // 19
+         CRLF + "Sélectionner d'abord les champs à inclure   " + CRLF,                                                                 ; // 20
+         CRLF + "Plus de champs à exclure   " + CRLF,                                                                                  ; // 21
+         CRLF + "Sélectionner d'abord les champs à exclure   " + CRLF,                                                                 ; // 22
+         CRLF + "Vous n'avez sélectionné aucun champ   " + CRLF + "Sélectionner les champs à inclure dans l'impression   " + CRLF,     ; // 23
+         CRLF + "Trop de champs   " + CRLF + "Réduiser le nombre de champs   " + CRLF,                                                 ; // 24
+         CRLF + "Imprimante pas prête   " + CRLF,                                                                                      ; // 25
+         "Trié par",                                                                                                                   ; // 26
+         "De l'enregistrement",                                                                                                        ; // 27
+         "A l'enregistrement",                                                                                                         ; // 28
+         "Oui",                                                                                                                        ; // 29
+         "Non",                                                                                                                        ; // 30
+         "Page:",                                                                                                                      ; // 31
+         CRLF + "Sélectionner une imprimante   " + CRLF,                                                                               ; // 32
+         "Filtré par",                                                                                                                 ; // 33
+         CRLF + "Il y a un filtre actif    " + CRLF,                                                                                   ; // 34
+         CRLF + "Filtre impossible sur champ memo    " + CRLF,                                                                         ; // 35
+         CRLF + "Sélectionner un champ de filtre    " + CRLF,                                                                          ; // 36
+         CRLF + "Sélectionner un opérateur de filtre   " + CRLF,                                                                       ; // 37
+         CRLF + "Entrer une valeur au filtre    " + CRLF,                                                                              ; // 38
+         CRLF + "Il n'y a aucun filtre actif    " + CRLF,                                                                              ; // 39
+         CRLF + "Désactiver le filtre?   " + CRLF,                                                                                     ; // 40
+         CRLF + "Record locked by another user    " + CRLF,                                                                            ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF                                   } // 42
 
    CASE cLang == "DE"  // German
       // GERMAN
@@ -1596,93 +1596,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {  ;
          "S&chließen",          ; // 1
-      "&Neu",                ; // 2
-      "&Bearbeiten",         ; // 3
-      "&Löschen",            ; // 4
-      "&Suchen",             ; // 5
-      "&Drucken",            ; // 6
-      "&Abbruch",            ; // 7
-      "&Ok",                 ; // 8
-      "&Kopieren",           ; // 9
-      "&Filter aktivieren",  ; // 10
-      "&Filter deaktivieren",; // 11
-      "&Wiederherstellen"    } // 12
+         "&Neu",                ; // 2
+         "&Bearbeiten",         ; // 3
+         "&Löschen",            ; // 4
+         "&Suchen",             ; // 5
+         "&Drucken",            ; // 6
+         "&Abbruch",            ; // 7
+         "&Ok",                 ; // 8
+         "&Kopieren",           ; // 9
+         "&Filter aktivieren",  ; // 10
+         "&Filter deaktivieren",; // 11
+         "&Wiederherstellen"    } // 12
       _HMG_aLangLabel := { ;
          "Keine",                                         ; // 1
-      "Datensatz",                                     ; // 2
-      "Gesamt",                                        ; // 3
-      "Aktive Sortierung",                             ; // 4
-      "Einstellungen",                                 ; // 5
-      "Neuer Datensatz",                               ; // 6
-      "Datensatz bearbeiten",                          ; // 7
-      "Datensatz auswählen",                           ; // 8
-      "Datensatz finden",                              ; // 9
-      "Druckeinstellungen",                            ; // 10
-      "Verfügbare Felder",                             ; // 11
-      "Zu druckende Felder",                           ; // 12
-      "Verfügbare Drucker",                            ; // 13
-      "Erster zu druckender Datensatz",                ; // 14
-      "Letzter zu druckender Datensatz",               ; // 15
-      "Datensatz löschen",                             ; // 16
-      "Vorschau",                                      ; // 17
-      "Übersicht",                                     ; // 18
-      "Filterbedingung: ",                             ; // 19
-      "Gefiltert: ",                                   ; // 20
-      "Filter-Einstellungen" ,                         ; // 21
-      "Datenbank-Felder" ,                             ; // 22
-      "Vergleichs-Operator",                           ; // 23
-      "Filterwert",                                    ; // 24
-      "Zu filterndes Feld auswählen",                  ; // 25
-      "Vergleichs-Operator auswählen",                 ; // 26
-      "Gleich",                                        ; // 27
-      "Ungleich",                                      ; // 28
-      "Größer als",                                    ; // 29
-      "Kleiner als",                                   ; // 30
-      "Größer oder gleich als",                        ; // 31
-      "Kleiner oder gleich als"                        } // 32
+         "Datensatz",                                     ; // 2
+         "Gesamt",                                        ; // 3
+         "Aktive Sortierung",                             ; // 4
+         "Einstellungen",                                 ; // 5
+         "Neuer Datensatz",                               ; // 6
+         "Datensatz bearbeiten",                          ; // 7
+         "Datensatz auswählen",                           ; // 8
+         "Datensatz finden",                              ; // 9
+         "Druckeinstellungen",                            ; // 10
+         "Verfügbare Felder",                             ; // 11
+         "Zu druckende Felder",                           ; // 12
+         "Verfügbare Drucker",                            ; // 13
+         "Erster zu druckender Datensatz",                ; // 14
+         "Letzter zu druckender Datensatz",               ; // 15
+         "Datensatz löschen",                             ; // 16
+         "Vorschau",                                      ; // 17
+         "Übersicht",                                     ; // 18
+         "Filterbedingung: ",                             ; // 19
+         "Gefiltert: ",                                   ; // 20
+         "Filter-Einstellungen" ,                         ; // 21
+         "Datenbank-Felder" ,                             ; // 22
+         "Vergleichs-Operator",                           ; // 23
+         "Filterwert",                                    ; // 24
+         "Zu filterndes Feld auswählen",                  ; // 25
+         "Vergleichs-Operator auswählen",                 ; // 26
+         "Gleich",                                        ; // 27
+         "Ungleich",                                      ; // 28
+         "Größer als",                                    ; // 29
+         "Kleiner als",                                   ; // 30
+         "Größer oder gleich als",                        ; // 31
+         "Kleiner oder gleich als"                        } // 32
       _HMG_aLangUser := { ;
          CRLF + "Kein aktiver Arbeitsbereich gefunden.   "  + CRLF + "Bitte einen Arbeitsbereich auswählen vor dem Aufruf von EDIT   " + CRLF,    ; // 1
-      "Einen Text eingeben (alphanumerisch)",                                                                                                     ; // 2
-      "Eine Zahl eingeben",                                                                                                                       ; // 3
-      "Datum auswählen",                                                                                                                          ; // 4
-      "Für positive Auswahl einen Haken setzen",                                                                                                  ; // 5
-      "Einen Text eingeben (alphanumerisch)",                                                                                                     ; // 6
-      "Einen Datensatz wählen und mit OK bestätigen",                                                                                             ; // 7
-      CRLF + "Sie sind im Begriff, den aktiven Datensatz zu löschen.   " + CRLF + "Sind Sie sicher?    " + CRLF,                                  ; // 8
-      CRLF + "Es ist keine Sortierung aktiv.   " + CRLF + "Bitte wählen Sie eine Sortierung   " + CRLF,                                           ; // 9
-      CRLF + "Suche nach den Feldern memo oder logisch nicht möglich.   " + CRLF,                                                                 ; // 10
-      CRLF + "Datensatz nicht gefunden   " + CRLF,                                                                                                ; // 11
-      "Bitte ein Feld zum Hinzufügen zur Liste wählen",                                                                                           ; // 12
-      "Bitte ein Feld zum Entfernen aus der Liste wählen ",                                                                                       ; // 13
-      "Drucker auswählen",                                                                                                                        ; // 14
-      "Schaltfläche  Feld hinzufügen",                                                                                                            ; // 15
-      "Schaltfläche  Feld Entfernen",                                                                                                             ; // 16
-      "Schaltfläche  Auswahl erster zu druckender Datensatz",                                                                                     ; // 17
-      "Schaltfläche  Auswahl letzte zu druckender Datensatz",                                                                                     ; // 18
-      CRLF + "Keine Felder zum Hinzufügen mehr vorhanden   " + CRLF,                                                                              ; // 19
-      CRLF + "Bitte erst ein Feld zum Hinzufügen wählen   " + CRLF,                                                                               ; // 20
-      CRLF + "Keine Felder zum Entfernen vorhanden   " + CRLF,                                                                                    ; // 21
-      CRLF + "Bitte ein Feld zum Entfernen wählen   " + CRLF,                                                                                     ; // 22
-      CRLF + "Kein Feld ausgewählt   " + CRLF + "Bitte die Felder für den Ausdruck auswählen   " + CRLF,                                          ; // 23
-      CRLF + "Zu viele Felder   " + CRLF + "Bitte Anzahl der Felder reduzieren   " + CRLF,                                                        ; // 24
-      CRLF + "Drucker nicht bereit   " + CRLF,                                                                                                    ; // 25
-      "Sortiert nach",                                                                                                                            ; // 26
-      "Von Datensatz",                                                                                                                            ; // 27
-      "Bis Datensatz",                                                                                                                            ; // 28
-      "Ja",                                                                                                                                       ; // 29
-      "Nein",                                                                                                                                     ; // 30
-      "Seite:",                                                                                                                                   ; // 31
-      CRLF + "Bitte einen Drucker wählen   " + CRLF,                                                                                              ; // 32
-      "Filtern nach",                                                                                                                             ; // 33
-      CRLF + "Es ist kein aktiver Filter vorhanden    " + CRLF,                                                                                   ; // 34
-      CRLF + "Kann nicht nach Memo-Feldern filtern    " + CRLF,                                                                                   ; // 35
-      CRLF + "Feld zum Filtern auswählen    " + CRLF,                                                                                             ; // 36
-      CRLF + "Einen Operator zum Filtern auswählen    " + CRLF,                                                                                   ; // 37
-      CRLF + "Bitte einen Wert für den Filter angeben    " + CRLF,                                                                                ; // 38
-      CRLF + "Es ist kein aktiver Filter vorhanden    " + CRLF,                                                                                   ; // 39
-      CRLF + "Filter deaktivieren?   " + CRLF,                                                                                                    ; // 40
-      CRLF + "Datensatz gesperrt durch anderen Benutzer    " + CRLF,                                                                              ; // 41
-      CRLF + "Gelöschten Datensatz wiederherstellen   " + CRLF + "Sind sie sicher?    " + CRLF                                                    } // 42
+         "Einen Text eingeben (alphanumerisch)",                                                                                                     ; // 2
+         "Eine Zahl eingeben",                                                                                                                       ; // 3
+         "Datum auswählen",                                                                                                                          ; // 4
+         "Für positive Auswahl einen Haken setzen",                                                                                                  ; // 5
+         "Einen Text eingeben (alphanumerisch)",                                                                                                     ; // 6
+         "Einen Datensatz wählen und mit OK bestätigen",                                                                                             ; // 7
+         CRLF + "Sie sind im Begriff, den aktiven Datensatz zu löschen.   " + CRLF + "Sind Sie sicher?    " + CRLF,                                  ; // 8
+         CRLF + "Es ist keine Sortierung aktiv.   " + CRLF + "Bitte wählen Sie eine Sortierung   " + CRLF,                                           ; // 9
+         CRLF + "Suche nach den Feldern memo oder logisch nicht möglich.   " + CRLF,                                                                 ; // 10
+         CRLF + "Datensatz nicht gefunden   " + CRLF,                                                                                                ; // 11
+         "Bitte ein Feld zum Hinzufügen zur Liste wählen",                                                                                           ; // 12
+         "Bitte ein Feld zum Entfernen aus der Liste wählen ",                                                                                       ; // 13
+         "Drucker auswählen",                                                                                                                        ; // 14
+         "Schaltfläche  Feld hinzufügen",                                                                                                            ; // 15
+         "Schaltfläche  Feld Entfernen",                                                                                                             ; // 16
+         "Schaltfläche  Auswahl erster zu druckender Datensatz",                                                                                     ; // 17
+         "Schaltfläche  Auswahl letzte zu druckender Datensatz",                                                                                     ; // 18
+         CRLF + "Keine Felder zum Hinzufügen mehr vorhanden   " + CRLF,                                                                              ; // 19
+         CRLF + "Bitte erst ein Feld zum Hinzufügen wählen   " + CRLF,                                                                               ; // 20
+         CRLF + "Keine Felder zum Entfernen vorhanden   " + CRLF,                                                                                    ; // 21
+         CRLF + "Bitte ein Feld zum Entfernen wählen   " + CRLF,                                                                                     ; // 22
+         CRLF + "Kein Feld ausgewählt   " + CRLF + "Bitte die Felder für den Ausdruck auswählen   " + CRLF,                                          ; // 23
+         CRLF + "Zu viele Felder   " + CRLF + "Bitte Anzahl der Felder reduzieren   " + CRLF,                                                        ; // 24
+         CRLF + "Drucker nicht bereit   " + CRLF,                                                                                                    ; // 25
+         "Sortiert nach",                                                                                                                            ; // 26
+         "Von Datensatz",                                                                                                                            ; // 27
+         "Bis Datensatz",                                                                                                                            ; // 28
+         "Ja",                                                                                                                                       ; // 29
+         "Nein",                                                                                                                                     ; // 30
+         "Seite:",                                                                                                                                   ; // 31
+         CRLF + "Bitte einen Drucker wählen   " + CRLF,                                                                                              ; // 32
+         "Filtern nach",                                                                                                                             ; // 33
+         CRLF + "Es ist kein aktiver Filter vorhanden    " + CRLF,                                                                                   ; // 34
+         CRLF + "Kann nicht nach Memo-Feldern filtern    " + CRLF,                                                                                   ; // 35
+         CRLF + "Feld zum Filtern auswählen    " + CRLF,                                                                                             ; // 36
+         CRLF + "Einen Operator zum Filtern auswählen    " + CRLF,                                                                                   ; // 37
+         CRLF + "Bitte einen Wert für den Filter angeben    " + CRLF,                                                                                ; // 38
+         CRLF + "Es ist kein aktiver Filter vorhanden    " + CRLF,                                                                                   ; // 39
+         CRLF + "Filter deaktivieren?   " + CRLF,                                                                                                    ; // 40
+         CRLF + "Datensatz gesperrt durch anderen Benutzer    " + CRLF,                                                                              ; // 41
+         CRLF + "Gelöschten Datensatz wiederherstellen   " + CRLF + "Sind sie sicher?    " + CRLF                                                    } // 42
 
    CASE cLang == "IT"  // Italian
       // ITALIAN
@@ -1776,93 +1776,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {  ;
          "&Chiudi",          ; // 1
-      "&Nuovo",           ; // 2
-      "&Modifica",        ; // 3
-      "&Elimina",         ; // 4
-      "&Trova",           ; // 5
-      "&Stampa",          ; // 6
-      "&Annulla",         ; // 7
-      "&Ok",              ; // 8
-      "C&opia",           ; // 9
-      "A&ttiva Filtro",   ; // 10
-      "&Disattiva Filtro",; // 11
-      "&Ripristina"       } // 12
+         "&Nuovo",           ; // 2
+         "&Modifica",        ; // 3
+         "&Elimina",         ; // 4
+         "&Trova",           ; // 5
+         "&Stampa",          ; // 6
+         "&Annulla",         ; // 7
+         "&Ok",              ; // 8
+         "C&opia",           ; // 9
+         "A&ttiva Filtro",   ; // 10
+         "&Disattiva Filtro",; // 11
+         "&Ripristina"       } // 12
       _HMG_aLangLabel := {                ;
          "Nessuno",                       ; // 1
-      "Record",                           ; // 2
-      "Totale",                           ; // 3
-      "Ordinamento attivo",               ; // 4
-      "Opzioni",                          ; // 5
-      "Nuovo record",                     ; // 6
-      "Modifica record",                  ; // 7
-      "Seleziona record",                 ; // 8
-      "Trova record",                     ; // 9
-      "Stampa opzioni",                   ; // 10
-      "Campi disponibili",                ; // 11
-      "Campi da stampare",                ; // 12
-      "Stampanti disponibili",            ; // 13
-      "Primo  record da stampare",        ; // 14
-      "Ultimo record da stampare",        ; // 15
-      "Cancella record",                  ; // 16
-      "Anteprima",                        ; // 17
-      "Visualizza pagina miniature",      ; // 18
-      "Condizioni Filtro: ",              ; // 19
-      "Filtrato: ",                       ; // 20
-      "Opzioni Filtro" ,                  ; // 21
-      "Campi del Database" ,              ; // 22
-      "Operatori di comparazione",        ; // 23
-      "Valore Filtro",                    ; // 24
-      "Seleziona campo da filtrare",      ; // 25
-      "Seleziona operatore comparazione", ; // 26
-      "Uguale",                           ; // 27
-      "Non Uguale",                       ; // 28
-      "Maggiore di",                      ; // 29
-      "Minore di",                        ; // 30
-      "Maggiore o uguale a",              ; // 31
-      "Minore o uguale a"                 } // 32
+         "Record",                           ; // 2
+         "Totale",                           ; // 3
+         "Ordinamento attivo",               ; // 4
+         "Opzioni",                          ; // 5
+         "Nuovo record",                     ; // 6
+         "Modifica record",                  ; // 7
+         "Seleziona record",                 ; // 8
+         "Trova record",                     ; // 9
+         "Stampa opzioni",                   ; // 10
+         "Campi disponibili",                ; // 11
+         "Campi da stampare",                ; // 12
+         "Stampanti disponibili",            ; // 13
+         "Primo  record da stampare",        ; // 14
+         "Ultimo record da stampare",        ; // 15
+         "Cancella record",                  ; // 16
+         "Anteprima",                        ; // 17
+         "Visualizza pagina miniature",      ; // 18
+         "Condizioni Filtro: ",              ; // 19
+         "Filtrato: ",                       ; // 20
+         "Opzioni Filtro" ,                  ; // 21
+         "Campi del Database" ,              ; // 22
+         "Operatori di comparazione",        ; // 23
+         "Valore Filtro",                    ; // 24
+         "Seleziona campo da filtrare",      ; // 25
+         "Seleziona operatore comparazione", ; // 26
+         "Uguale",                           ; // 27
+         "Non Uguale",                       ; // 28
+         "Maggiore di",                      ; // 29
+         "Minore di",                        ; // 30
+         "Maggiore o uguale a",              ; // 31
+         "Minore o uguale a"                 } // 32
       _HMG_aLangUser := { ;
          CRLF + "Nessuna area attiva.   "  + CRLF + "Selezionare un'area prima della chiamata a EDIT   " + CRLF,  ; // 1
-      "Digitare valore campo (testo)",                                                                         ; // 2
-      "Digitare valore campo (numerico)",                                                                      ; // 3
-      "Selezionare data",                                                                                      ; // 4
-      "Attivare per valore TRUE",                                                                              ; // 5
-      "Inserire valore campo",                                                                                 ; // 6
-      "Seleziona un record and premi OK",                                                                      ; // 7
-      CRLF + "Cancellazione record attivo   " + CRLF + "Sei sicuro?      " + CRLF,                             ; // 8
-      CRLF + "Nessun ordinamento attivo     " + CRLF + "Selezionarne uno " + CRLF,                             ; // 9
-      CRLF + "Ricerca non possibile su campi MEMO o LOGICI   " + CRLF,                                         ; // 10
-      CRLF + "Record non trovato   " + CRLF,                                                                   ; // 11
-      "Seleziona campo da includere nel listato",                                                              ; // 12
-      "Seleziona campo da escludere dal listato",                                                              ; // 13
-      "Selezionare la stampante",                                                                              ; // 14
-      "Premi per includere il campo",                                                                          ; // 15
-      "Premi per escludere il campo",                                                                          ; // 16
-      "Premi per selezionare il primo record da stampare",                                                     ; // 17
-      "Premi per selezionare l'ultimo record da stampare",                                                     ; // 18
-      CRLF + "Nessun altro campo da inserire   " + CRLF,                                                       ; // 19
-      CRLF + "Prima seleziona il campo da includere " + CRLF,                                                  ; // 20
-      CRLF + "Nessun altro campo da escludere       " + CRLF,                                                  ; // 21
-      CRLF + "Prima seleziona il campo da escludere " + CRLF,                                                  ; // 22
-      CRLF + "Nessun campo selezionato     " + CRLF + "Selezionare campi da includere nel listato   " + CRLF,  ; // 23
-      CRLF + "Troppi campi !   " + CRLF + "Redurre il numero di campi   " + CRLF,                              ; // 24
-      CRLF + "Stampante non pronta..!   " + CRLF,                                                              ; // 25
-      "Ordinato per",                                                                                          ; // 26
-      "Dal record",                                                                                            ; // 27
-      "Al  record",                                                                                            ; // 28
-      "Si",                                                                                                    ; // 29
-      "No",                                                                                                    ; // 30
-      "Pagina:",                                                                                               ; // 31
-      CRLF + "Selezionare una stampante   " + CRLF,                                                            ; // 32
-      "Filtrato per ",                                                                                         ; // 33
-      CRLF + "Esiste un filtro attivo     " + CRLF,                                                            ; // 34
-      CRLF + "Filtro non previsto per campi MEMO   " + CRLF,                                                   ; // 35
-      CRLF + "Selezionare campo da filtrare        " + CRLF,                                                   ; // 36
-      CRLF + "Selezionare un OPERATORE per filtro  " + CRLF,                                                   ; // 37
-      CRLF + "Digitare un valore per filtro        " + CRLF,                                                   ; // 38
-      CRLF + "Nessun filtro attivo    " + CRLF,                                                                ; // 39
-      CRLF + "Disattivare filtro ?   " + CRLF,                                                                 ; // 40
-      CRLF + "Record bloccato da altro utente" + CRLF,                                                         ; // 41
-      CRLF + "Ripristinare il record cancellato             " + CRLF + "Sei sicuro  ?    " + CRLF              } // 42
+         "Digitare valore campo (testo)",                                                                         ; // 2
+         "Digitare valore campo (numerico)",                                                                      ; // 3
+         "Selezionare data",                                                                                      ; // 4
+         "Attivare per valore TRUE",                                                                              ; // 5
+         "Inserire valore campo",                                                                                 ; // 6
+         "Seleziona un record and premi OK",                                                                      ; // 7
+         CRLF + "Cancellazione record attivo   " + CRLF + "Sei sicuro?      " + CRLF,                             ; // 8
+         CRLF + "Nessun ordinamento attivo     " + CRLF + "Selezionarne uno " + CRLF,                             ; // 9
+         CRLF + "Ricerca non possibile su campi MEMO o LOGICI   " + CRLF,                                         ; // 10
+         CRLF + "Record non trovato   " + CRLF,                                                                   ; // 11
+         "Seleziona campo da includere nel listato",                                                              ; // 12
+         "Seleziona campo da escludere dal listato",                                                              ; // 13
+         "Selezionare la stampante",                                                                              ; // 14
+         "Premi per includere il campo",                                                                          ; // 15
+         "Premi per escludere il campo",                                                                          ; // 16
+         "Premi per selezionare il primo record da stampare",                                                     ; // 17
+         "Premi per selezionare l'ultimo record da stampare",                                                     ; // 18
+         CRLF + "Nessun altro campo da inserire   " + CRLF,                                                       ; // 19
+         CRLF + "Prima seleziona il campo da includere " + CRLF,                                                  ; // 20
+         CRLF + "Nessun altro campo da escludere       " + CRLF,                                                  ; // 21
+         CRLF + "Prima seleziona il campo da escludere " + CRLF,                                                  ; // 22
+         CRLF + "Nessun campo selezionato     " + CRLF + "Selezionare campi da includere nel listato   " + CRLF,  ; // 23
+         CRLF + "Troppi campi !   " + CRLF + "Redurre il numero di campi   " + CRLF,                              ; // 24
+         CRLF + "Stampante non pronta..!   " + CRLF,                                                              ; // 25
+         "Ordinato per",                                                                                          ; // 26
+         "Dal record",                                                                                            ; // 27
+         "Al  record",                                                                                            ; // 28
+         "Si",                                                                                                    ; // 29
+         "No",                                                                                                    ; // 30
+         "Pagina:",                                                                                               ; // 31
+         CRLF + "Selezionare una stampante   " + CRLF,                                                            ; // 32
+         "Filtrato per ",                                                                                         ; // 33
+         CRLF + "Esiste un filtro attivo     " + CRLF,                                                            ; // 34
+         CRLF + "Filtro non previsto per campi MEMO   " + CRLF,                                                   ; // 35
+         CRLF + "Selezionare campo da filtrare        " + CRLF,                                                   ; // 36
+         CRLF + "Selezionare un OPERATORE per filtro  " + CRLF,                                                   ; // 37
+         CRLF + "Digitare un valore per filtro        " + CRLF,                                                   ; // 38
+         CRLF + "Nessun filtro attivo    " + CRLF,                                                                ; // 39
+         CRLF + "Disattivare filtro ?   " + CRLF,                                                                 ; // 40
+         CRLF + "Record bloccato da altro utente" + CRLF,                                                         ; // 41
+         CRLF + "Ripristinare il record cancellato             " + CRLF + "Sei sicuro  ?    " + CRLF              } // 42
 
    CASE cLang == "PL"  // Polish
       // POLISH
@@ -1956,94 +1956,94 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {          ;
          "&Zamknij",        ; // 1
-      "&Nowy",           ; // 2
-      "&Modyfikuj",      ; // 3
-      "&Kasuj",          ; // 4
-      "&ZnajdŸ",         ; // 5
-      "&Drukuj",         ; // 6
-      "&Porzuæ",         ; // 7
-      "&Ok",             ; // 8
-      "&Kopiuj",         ; // 9
-      "&Aktywuj Filtr",  ; // 10
-      "&Deaktywuj Filtr", ; // 11
-      "&Przywróæ"        } // 12
+         "&Nowy",           ; // 2
+         "&Modyfikuj",      ; // 3
+         "&Kasuj",          ; // 4
+         "&ZnajdŸ",         ; // 5
+         "&Drukuj",         ; // 6
+         "&Porzuæ",         ; // 7
+         "&Ok",             ; // 8
+         "&Kopiuj",         ; // 9
+         "&Aktywuj Filtr",  ; // 10
+         "&Deaktywuj Filtr", ; // 11
+         "&Przywróæ"        } // 12
 
       _HMG_aLangLabel := {                       ;
          "Brak",                        ; // 1
-      "Rekord",                      ; // 2
-      "Suma",                        ; // 3
-      "Aktywny indeks",              ; // 4
-      "Opcje",                       ; // 5
-      "Nowy rekord",                 ; // 6
-      "Modyfikuj rekord",            ; // 7
-      "Wybierz rekord",              ; // 8
-      "ZnajdŸ rekord",               ; // 9
-      "Opcje druku",                 ; // 10
-      "Dostêpne pola",               ; // 11
-      "Pola do druku",               ; // 12
-      "Dostêpne drukarki",           ; // 13
-      "Pierwszy rekord do druku",    ; // 14
-      "Ostatni rekord do druku",     ; // 15
-      "Skasuj rekord",               ; // 16
-      "Podgl¹d",                     ; // 17
-      "Poka¿ miniatury",             ; // 18
-      "Stan filtru: ",               ; // 19
-      "Filtrowane: ",                ; // 20
-      "Opcje filtrowania" ,          ; // 21
-      "Pola bazy danych" ,           ; // 22
-      "Operator porównania",         ; // 23
-      "Wartoœæ filtru",              ; // 24
-      "Wybierz pola do filtru",      ; // 25
-      "Wybierz operator porównania", ; // 26
-      "Równa siê",                   ; // 27
-      "Nie równa siê",               ; // 28
-      "Wiêkszy ",                    ; // 29
-      "Mniejszy ",                   ; // 30
-      "Wiêkszy lub równy ",          ; // 31
-      "Mniejszy lub równy"           } // 32
+         "Rekord",                      ; // 2
+         "Suma",                        ; // 3
+         "Aktywny indeks",              ; // 4
+         "Opcje",                       ; // 5
+         "Nowy rekord",                 ; // 6
+         "Modyfikuj rekord",            ; // 7
+         "Wybierz rekord",              ; // 8
+         "ZnajdŸ rekord",               ; // 9
+         "Opcje druku",                 ; // 10
+         "Dostêpne pola",               ; // 11
+         "Pola do druku",               ; // 12
+         "Dostêpne drukarki",           ; // 13
+         "Pierwszy rekord do druku",    ; // 14
+         "Ostatni rekord do druku",     ; // 15
+         "Skasuj rekord",               ; // 16
+         "Podgl¹d",                     ; // 17
+         "Poka¿ miniatury",             ; // 18
+         "Stan filtru: ",               ; // 19
+         "Filtrowane: ",                ; // 20
+         "Opcje filtrowania" ,          ; // 21
+         "Pola bazy danych" ,           ; // 22
+         "Operator porównania",         ; // 23
+         "Wartoœæ filtru",              ; // 24
+         "Wybierz pola do filtru",      ; // 25
+         "Wybierz operator porównania", ; // 26
+         "Równa siê",                   ; // 27
+         "Nie równa siê",               ; // 28
+         "Wiêkszy ",                    ; // 29
+         "Mniejszy ",                   ; // 30
+         "Wiêkszy lub równy ",          ; // 31
+         "Mniejszy lub równy"           } // 32
       _HMG_aLangUser := { ;
          CRLF + "Aktywny obszar nie odnaleziony   "  + CRLF + "Wybierz obszar przed wywo³aniem EDIT   " + CRLF,   ; // 1
-      "Poszukiwany ci¹g znaków (dowolny tekst)",                                                               ; // 2
-      "Poszukiwana wartoœæ (dowolna liczba)",                                                                  ; // 3
-      "Wybierz datê",                                                                                          ; // 4
-      "Check for true value",                                                                                  ; // 5
-      "WprowadŸ wartoœæ",                                                                                      ; // 6
-      "Wybierz dowolny rekord i naciœcij OK",                                                                  ; // 7
-      CRLF + "Wybra³eœ opcjê kasowania rekordu   " + CRLF + "Czy jesteœ pewien ?    " + CRLF,                  ; // 8
-      CRLF + "Brak aktywnych indeksów   " + CRLF + "Wybierz    " + CRLF,                                       ; // 9
-      CRLF + "Nie mo¿na szukaæ w polach typu MEMO lub LOGIC   " + CRLF,                                        ; // 10
-      CRLF + "Rekord nie znaleziony   " + CRLF,                                                                ; // 11
-      "Wybierz rekord który nale¿y dodaæ do listy",                                                            ; // 12
-      "Wybierz rekord który nale¿y wy³¹czyæ z listy",                                                          ; // 13
-      "Wybierz drukarkê",                                                                                      ; // 14
-      "Kliknij na przycisk by dodaæ pole",                                                                     ; // 15
-      "Kliknij na przycisk by odj¹æ pole",                                                                     ; // 16
-      "Kliknij, aby wybraæ pierwszy rekord do druku",                                                          ; // 17
-      "Kliknij, aby wybraæ ostatni rekord do druku",                                                           ; // 18
-      CRLF + "Brak pól do w³¹czenia   " + CRLF,                                                                ; // 19
-      CRLF + "Najpierw wybierz pola do w³¹czenia   " + CRLF,                                                   ; // 20
-      CRLF + "Brak pól do wy³¹czenia   " + CRLF,                                                               ; // 21
-      CRLF + "Najpierw wybierz pola do wy³¹czenia   " + CRLF,                                                  ; // 22
-      CRLF + "Nie wybra³eœ ¿adnych pól   " + CRLF + "Najpierw wybierz pola do w³¹czenia do wydruku   " + CRLF, ; // 23
-      CRLF + "Za wiele pól   " + CRLF + "Zredukuj liczbê pól   " + CRLF,                                       ; // 24
-      CRLF + "Drukarka nie gotowa   " + CRLF,                                                                  ; // 25
-      "Porz¹dek wg",                                                                                           ; // 26
-      "Od rekordu",                                                                                            ; // 27
-      "Do rekordu",                                                                                            ; // 28
-      "Tak",                                                                                                   ; // 29
-      "Nie",                                                                                                   ; // 30
-      "Strona:",                                                                                               ; // 31
-      CRLF + "Wybierz drukarkê   " + CRLF,                                                                     ; // 32
-      "Filtrowanie wg",                                                                                        ; // 33
-      CRLF + "Brak aktywnego filtru    " + CRLF,                                                               ; // 34
-      CRLF + "Nie mo¿na filtrowaæ wg. pól typu MEMO    " + CRLF,                                               ; // 35
-      CRLF + "Wybierz pola dla filtru    " + CRLF,                                                             ; // 36
-      CRLF + "Wybierz operator porównania dla filtru    " + CRLF,                                              ; // 37
-      CRLF + "Wpisz dowoln¹ wartoœæ dla filtru    " + CRLF,                                                    ; // 38
-      CRLF + "Brak aktywnego filtru    " + CRLF,                                                               ; // 39
-      CRLF + "Deaktywowaæ filtr?   " + CRLF,                                                                   ; // 40
-      CRLF + "Rekord zablokowany przez innego u¿ytkownika" + CRLF,                                             ; // 41
-      CRLF + "Czy przwróciæ skasowny   " + CRLF + "Czy jesteœ pewien?    " + CRLF                              } // 42
+         "Poszukiwany ci¹g znaków (dowolny tekst)",                                                               ; // 2
+         "Poszukiwana wartoœæ (dowolna liczba)",                                                                  ; // 3
+         "Wybierz datê",                                                                                          ; // 4
+         "Check for true value",                                                                                  ; // 5
+         "WprowadŸ wartoœæ",                                                                                      ; // 6
+         "Wybierz dowolny rekord i naciœcij OK",                                                                  ; // 7
+         CRLF + "Wybra³eœ opcjê kasowania rekordu   " + CRLF + "Czy jesteœ pewien ?    " + CRLF,                  ; // 8
+         CRLF + "Brak aktywnych indeksów   " + CRLF + "Wybierz    " + CRLF,                                       ; // 9
+         CRLF + "Nie mo¿na szukaæ w polach typu MEMO lub LOGIC   " + CRLF,                                        ; // 10
+         CRLF + "Rekord nie znaleziony   " + CRLF,                                                                ; // 11
+         "Wybierz rekord który nale¿y dodaæ do listy",                                                            ; // 12
+         "Wybierz rekord który nale¿y wy³¹czyæ z listy",                                                          ; // 13
+         "Wybierz drukarkê",                                                                                      ; // 14
+         "Kliknij na przycisk by dodaæ pole",                                                                     ; // 15
+         "Kliknij na przycisk by odj¹æ pole",                                                                     ; // 16
+         "Kliknij, aby wybraæ pierwszy rekord do druku",                                                          ; // 17
+         "Kliknij, aby wybraæ ostatni rekord do druku",                                                           ; // 18
+         CRLF + "Brak pól do w³¹czenia   " + CRLF,                                                                ; // 19
+         CRLF + "Najpierw wybierz pola do w³¹czenia   " + CRLF,                                                   ; // 20
+         CRLF + "Brak pól do wy³¹czenia   " + CRLF,                                                               ; // 21
+         CRLF + "Najpierw wybierz pola do wy³¹czenia   " + CRLF,                                                  ; // 22
+         CRLF + "Nie wybra³eœ ¿adnych pól   " + CRLF + "Najpierw wybierz pola do w³¹czenia do wydruku   " + CRLF, ; // 23
+         CRLF + "Za wiele pól   " + CRLF + "Zredukuj liczbê pól   " + CRLF,                                       ; // 24
+         CRLF + "Drukarka nie gotowa   " + CRLF,                                                                  ; // 25
+         "Porz¹dek wg",                                                                                           ; // 26
+         "Od rekordu",                                                                                            ; // 27
+         "Do rekordu",                                                                                            ; // 28
+         "Tak",                                                                                                   ; // 29
+         "Nie",                                                                                                   ; // 30
+         "Strona:",                                                                                               ; // 31
+         CRLF + "Wybierz drukarkê   " + CRLF,                                                                     ; // 32
+         "Filtrowanie wg",                                                                                        ; // 33
+         CRLF + "Brak aktywnego filtru    " + CRLF,                                                               ; // 34
+         CRLF + "Nie mo¿na filtrowaæ wg. pól typu MEMO    " + CRLF,                                               ; // 35
+         CRLF + "Wybierz pola dla filtru    " + CRLF,                                                             ; // 36
+         CRLF + "Wybierz operator porównania dla filtru    " + CRLF,                                              ; // 37
+         CRLF + "Wpisz dowoln¹ wartoœæ dla filtru    " + CRLF,                                                    ; // 38
+         CRLF + "Brak aktywnego filtru    " + CRLF,                                                               ; // 39
+         CRLF + "Deaktywowaæ filtr?   " + CRLF,                                                                   ; // 40
+         CRLF + "Rekord zablokowany przez innego u¿ytkownika" + CRLF,                                             ; // 41
+         CRLF + "Czy przwróciæ skasowny   " + CRLF + "Czy jesteœ pewien?    " + CRLF                              } // 42
 
    CASE cLang == "PT"  // Portuguese
       // PORTUGUESE
@@ -2136,91 +2136,91 @@ PROCEDURE InitMessages
       // EDIT EXTENDED
 
       _HMG_aLangButton    := { "&Sair",             ; // 1
-      "&Novo",             ; // 2
-      "&Alterar",          ; // 3
-      "&Eliminar",         ; // 4
-      "&Localizar",        ; // 5
-      "&Imprimir",         ; // 6
-      "&Cancelar",         ; // 7
-      "&Aceitar",          ; // 8
-      "&Copiar",           ; // 9
-      "&Ativar Filtro",    ; // 10
-      "&Desativar Filtro", ; // 11
-      "&Restaurar"         } // 12
+         "&Novo",             ; // 2
+         "&Alterar",          ; // 3
+         "&Eliminar",         ; // 4
+         "&Localizar",        ; // 5
+         "&Imprimir",         ; // 6
+         "&Cancelar",         ; // 7
+         "&Aceitar",          ; // 8
+         "&Copiar",           ; // 9
+         "&Ativar Filtro",    ; // 10
+         "&Desativar Filtro", ; // 11
+         "&Restaurar"         } // 12
       _HMG_aLangLabel     := {  "Nenhum",                             ; // 1
-      "Registro",                           ; // 2
-      "Total",                              ; // 3
-      "Índice ativo",                       ; // 4
-      "Opção",                              ; // 5
-      "Novo registro",                      ; // 6
-      "Modificar registro",                 ; // 7
-      "Selecionar registro",                ; // 8
-      "Localizar registro",                 ; // 9
-      "Opção de impressão",                 ; // 10
-      "Campos disponíveis",                 ; // 11
-      "Campos selecionados",                ; // 12
-      "Impressoras disponíveis",            ; // 13
-      "Primeiro registro a imprimir",       ; // 14
-      "Último registro a imprimir",         ; // 15
-      "Apagar registro",                    ; // 16
-      "Visualizar impressão",               ; // 17
-      "Páginas em miniatura",               ; // 18
-      "Condição do filtro: ",               ; // 19
-      "Filtrado: ",                         ; // 20
-      "Opções do filtro" ,                  ; // 21
-      "Campos da tabela" ,                  ; // 22
-      "Operador de comparação",             ; // 23
-      "Valor de comparação",                ; // 24
-      "Selecione o campo a filtrar",        ; // 25
-      "Selecione o operador de comparação", ; // 26
-      "Igual",                              ; // 27
-      "Diferente",                          ; // 28
-      "Maior que",                          ; // 29
-      "Menor que",                          ; // 30
-      "Maior ou igual que",                 ; // 31
-      "Menor ou igual que"                  } // 32
+         "Registro",                           ; // 2
+         "Total",                              ; // 3
+         "Índice ativo",                       ; // 4
+         "Opção",                              ; // 5
+         "Novo registro",                      ; // 6
+         "Modificar registro",                 ; // 7
+         "Selecionar registro",                ; // 8
+         "Localizar registro",                 ; // 9
+         "Opção de impressão",                 ; // 10
+         "Campos disponíveis",                 ; // 11
+         "Campos selecionados",                ; // 12
+         "Impressoras disponíveis",            ; // 13
+         "Primeiro registro a imprimir",       ; // 14
+         "Último registro a imprimir",         ; // 15
+         "Apagar registro",                    ; // 16
+         "Visualizar impressão",               ; // 17
+         "Páginas em miniatura",               ; // 18
+         "Condição do filtro: ",               ; // 19
+         "Filtrado: ",                         ; // 20
+         "Opções do filtro" ,                  ; // 21
+         "Campos da tabela" ,                  ; // 22
+         "Operador de comparação",             ; // 23
+         "Valor de comparação",                ; // 24
+         "Selecione o campo a filtrar",        ; // 25
+         "Selecione o operador de comparação", ; // 26
+         "Igual",                              ; // 27
+         "Diferente",                          ; // 28
+         "Maior que",                          ; // 29
+         "Menor que",                          ; // 30
+         "Maior ou igual que",                 ; // 31
+         "Menor ou igual que"                  } // 32
       _HMG_aLangUser      := {  CRLF + "Não há uma área ativa   "  + CRLF + "Por favor, selecione uma área antes de chamar a EDIT EXTENDED   " + CRLF, ; // 1
-      "Introduza o valor do campo (texto)",                                                                                  ; // 2
-      "Introduza o valor do campo (numérico)",                                                                               ; // 3
-      "Selecione a data",                                                                                                    ; // 4
-      "Ative o indicador para valor verdadeiro",                                                                             ; // 5
-      "Introduza o valor do campo",                                                                                          ; // 6
-      "Selecione um registro e tecle Ok",                                                                                    ; // 7
-      CRLF + "Confirma apagar o registro ativo   " + CRLF + "Tem certeza?     " + CRLF,                                      ; // 8
-      CRLF + "Não há um índice selecionado    " + CRLF + "Por favor, selecione um   " + CRLF,                                ; // 9
-      CRLF + "Não se pode realizar busca por campos tipo memo ou lógico   " + CRLF,                                          ; // 10
-      CRLF + "Registro não encontrado   " + CRLF,                                                                            ; // 11
-      "Selecione o campo a incluir na lista",                                                                                ; // 12
-      "Selecione o campo a excluir da lista",                                                                                ; // 13
-      "Selecione a impressora",                                                                                              ; // 14
-      "Pressione o botão para incluir o campo",                                                                              ; // 15
-      "Pressione o botão para excluir o campo",                                                                              ; // 16
-      "Pressione o botão para selecionar o primeiro registro a imprimir",                                                    ; // 17
-      "Pressione o botão para selecionar o último registro a imprimir",                                                      ; // 18
-      CRLF + "Foram incluídos todos os campos   " + CRLF,                                                                    ; // 19
-      CRLF + "Primeiro seleccione o campo a incluir   " + CRLF,                                                              ; // 20
-      CRLF + "Não há campos para excluir   " + CRLF,                                                                         ; // 21
-      CRLF + "Primeiro selecione o campo a excluir   " + CRLF,                                                               ; // 22
-      CRLF + "Não foi selecionado nenhum campo   " + CRLF,                                                                   ; // 23
-      CRLF + "A lista não cabe na página   " + CRLF + "Reduza o número de campos   " + CRLF,                                 ; // 24
-      CRLF + "A impressora não está disponível   " + CRLF,                                                                   ; // 25
-      "Ordenado por",                                                                                                        ; // 26
-      "Do registro",                                                                                                         ; // 27
-      "Até registro",                                                                                                        ; // 28
-      "Sim",                                                                                                                 ; // 29
-      "Não",                                                                                                                 ; // 30
-      "Página:",                                                                                                             ; // 31
-      CRLF + "Por favor, selecione uma impressora   " + CRLF,                                                                ; // 32
-      "Filtrado por",                                                                                                        ; // 33
-      CRLF + "Não há um filtro ativo    " + CRLF,                                                                            ; // 34
-      CRLF + "Não se pode filtrar por campos memo    " + CRLF,                                                               ; // 35
-      CRLF + "Selecione o campo a filtrar    " + CRLF,                                                                       ; // 36
-      CRLF + "Selecione o operador de comparação    " + CRLF,                                                                ; // 37
-      CRLF + "Introduza o valor do filtro    " + CRLF,                                                                       ; // 38
-      CRLF + "Não há nenhum filtro ativo    " + CRLF,                                                                        ; // 39
-      CRLF + "Eliminar o filtro ativo ?   " + CRLF,                                                                          ; // 40
-      CRLF + "Registro bloqueado por outro usuário    " + CRLF,                                                              ; // 41
-      CRLF + "Você vai restabelecer o registro apagado   " + CRLF + "Tem certeza ?    " + CRLF                               } // 42
+         "Introduza o valor do campo (texto)",                                                                                  ; // 2
+         "Introduza o valor do campo (numérico)",                                                                               ; // 3
+         "Selecione a data",                                                                                                    ; // 4
+         "Ative o indicador para valor verdadeiro",                                                                             ; // 5
+         "Introduza o valor do campo",                                                                                          ; // 6
+         "Selecione um registro e tecle Ok",                                                                                    ; // 7
+         CRLF + "Confirma apagar o registro ativo   " + CRLF + "Tem certeza?     " + CRLF,                                      ; // 8
+         CRLF + "Não há um índice selecionado    " + CRLF + "Por favor, selecione um   " + CRLF,                                ; // 9
+         CRLF + "Não se pode realizar busca por campos tipo memo ou lógico   " + CRLF,                                          ; // 10
+         CRLF + "Registro não encontrado   " + CRLF,                                                                            ; // 11
+         "Selecione o campo a incluir na lista",                                                                                ; // 12
+         "Selecione o campo a excluir da lista",                                                                                ; // 13
+         "Selecione a impressora",                                                                                              ; // 14
+         "Pressione o botão para incluir o campo",                                                                              ; // 15
+         "Pressione o botão para excluir o campo",                                                                              ; // 16
+         "Pressione o botão para selecionar o primeiro registro a imprimir",                                                    ; // 17
+         "Pressione o botão para selecionar o último registro a imprimir",                                                      ; // 18
+         CRLF + "Foram incluídos todos os campos   " + CRLF,                                                                    ; // 19
+         CRLF + "Primeiro seleccione o campo a incluir   " + CRLF,                                                              ; // 20
+         CRLF + "Não há campos para excluir   " + CRLF,                                                                         ; // 21
+         CRLF + "Primeiro selecione o campo a excluir   " + CRLF,                                                               ; // 22
+         CRLF + "Não foi selecionado nenhum campo   " + CRLF,                                                                   ; // 23
+         CRLF + "A lista não cabe na página   " + CRLF + "Reduza o número de campos   " + CRLF,                                 ; // 24
+         CRLF + "A impressora não está disponível   " + CRLF,                                                                   ; // 25
+         "Ordenado por",                                                                                                        ; // 26
+         "Do registro",                                                                                                         ; // 27
+         "Até registro",                                                                                                        ; // 28
+         "Sim",                                                                                                                 ; // 29
+         "Não",                                                                                                                 ; // 30
+         "Página:",                                                                                                             ; // 31
+         CRLF + "Por favor, selecione uma impressora   " + CRLF,                                                                ; // 32
+         "Filtrado por",                                                                                                        ; // 33
+         CRLF + "Não há um filtro ativo    " + CRLF,                                                                            ; // 34
+         CRLF + "Não se pode filtrar por campos memo    " + CRLF,                                                               ; // 35
+         CRLF + "Selecione o campo a filtrar    " + CRLF,                                                                       ; // 36
+         CRLF + "Selecione o operador de comparação    " + CRLF,                                                                ; // 37
+         CRLF + "Introduza o valor do filtro    " + CRLF,                                                                       ; // 38
+         CRLF + "Não há nenhum filtro ativo    " + CRLF,                                                                        ; // 39
+         CRLF + "Eliminar o filtro ativo ?   " + CRLF,                                                                          ; // 40
+         CRLF + "Registro bloqueado por outro usuário    " + CRLF,                                                              ; // 41
+         CRLF + "Você vai restabelecer o registro apagado   " + CRLF + "Tem certeza ?    " + CRLF                               } // 42
 
    CASE cLang == "RU"  // Russian
       // RUSSIAN
@@ -2320,93 +2320,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Çàêğûòü",           ; // 1
-      "&Ñîçäàòü",           ; // 2
-      "&Ïğàâêà",            ; // 3
-      "&Óäàëèòü",           ; // 4
-      "&Íàéòè",             ; // 5
-      "Ï&å÷àòü",            ; // 6
-      "Îò&ìåíà",            ; // 7
-      "&Îê",                ; // 8
-      "&Êîïèÿ",             ; // 9
-      "&Âêë. ôèëüòğ",       ; // 10
-      "Ñ&íÿòü ôèëüòğ",      ; // 11
-      "&Âîññòàíîâèòü"       } // 12
+         "&Ñîçäàòü",           ; // 2
+         "&Ïğàâêà",            ; // 3
+         "&Óäàëèòü",           ; // 4
+         "&Íàéòè",             ; // 5
+         "Ï&å÷àòü",            ; // 6
+         "Îò&ìåíà",            ; // 7
+         "&Îê",                ; // 8
+         "&Êîïèÿ",             ; // 9
+         "&Âêë. ôèëüòğ",       ; // 10
+         "Ñ&íÿòü ôèëüòğ",      ; // 11
+         "&Âîññòàíîâèòü"       } // 12
       _HMG_aLangLabel := { ;
          "Íåò",                          ; // 1
-      "Çàïèñü",                       ; // 2
-      "Âñåãî",                        ; // 3
-      "Óïîğÿäî÷åíèå",                 ; // 4
-      "Ïàğàìåòğû",                    ; // 5
-      "Íîâàÿ çàïèñü",                 ; // 6
-      "Èçìåíèòü çàïèñü",              ; // 7
-      "Âûáğàòü çàïèñü",               ; // 8
-      "Íàéòè çàïèñü",                 ; // 9
-      "Ïàğàìåòğû ïå÷àòè",             ; // 10
-      "Äîñòóïíûå ïîëÿ",               ; // 11
-      "Ïîëÿ äëÿ ïå÷àòè",              ; // 12
-      "Äîñòóïíûå ïğèíòåğû",           ; // 13
-      "Íà÷àòü ïå÷àòü ñ çàïèñè",       ; // 14
-      "Çàâåğøèòü ïå÷àòü çàïèñüş",     ; // 15
-      "Óäàëèòü çàïèñü",               ; // 16
-      "Ïğîñìîòğ",                     ; // 17
-      "Ñòğàíèöà ìèíèàòşğ",            ; // 18
-      "Óñëîâèå ôèëüòğà: ",            ; // 19
-      "Ôèëüòğ: ",                     ; // 20
-      "Ïàğàìåòğû ôèëüòğà" ,           ; // 21
-      "Ïîëÿ áàçû äàííûõ" ,            ; // 22
-      "Îïåğàòîğû ñğàâíåíèÿ",          ; // 23
-      "Çíà÷åíèå ôèëüòğà",             ; // 24
-      "Âûáîğ ïîëÿ äëÿ ôèëüòğà",       ; // 25
-      "Âûáîğ îïåğàòîğà ñğàâíåíèÿ",    ; // 26
-      "Ğàâíî",                        ; // 27
-      "Íå ğàâíî",                     ; // 28
-      "Áîëüøå",                       ; // 29
-      "Ìåíüøå",                       ; // 30
-      "Áîëüøå èëè ğàâíî",             ; // 31
-      "Ìåíüøå èëè ğàâíî"           }    // 32
+         "Çàïèñü",                       ; // 2
+         "Âñåãî",                        ; // 3
+         "Óïîğÿäî÷åíèå",                 ; // 4
+         "Ïàğàìåòğû",                    ; // 5
+         "Íîâàÿ çàïèñü",                 ; // 6
+         "Èçìåíèòü çàïèñü",              ; // 7
+         "Âûáğàòü çàïèñü",               ; // 8
+         "Íàéòè çàïèñü",                 ; // 9
+         "Ïàğàìåòğû ïå÷àòè",             ; // 10
+         "Äîñòóïíûå ïîëÿ",               ; // 11
+         "Ïîëÿ äëÿ ïå÷àòè",              ; // 12
+         "Äîñòóïíûå ïğèíòåğû",           ; // 13
+         "Íà÷àòü ïå÷àòü ñ çàïèñè",       ; // 14
+         "Çàâåğøèòü ïå÷àòü çàïèñüş",     ; // 15
+         "Óäàëèòü çàïèñü",               ; // 16
+         "Ïğîñìîòğ",                     ; // 17
+         "Ñòğàíèöà ìèíèàòşğ",            ; // 18
+         "Óñëîâèå ôèëüòğà: ",            ; // 19
+         "Ôèëüòğ: ",                     ; // 20
+         "Ïàğàìåòğû ôèëüòğà" ,           ; // 21
+         "Ïîëÿ áàçû äàííûõ" ,            ; // 22
+         "Îïåğàòîğû ñğàâíåíèÿ",          ; // 23
+         "Çíà÷åíèå ôèëüòğà",             ; // 24
+         "Âûáîğ ïîëÿ äëÿ ôèëüòğà",       ; // 25
+         "Âûáîğ îïåğàòîğà ñğàâíåíèÿ",    ; // 26
+         "Ğàâíî",                        ; // 27
+         "Íå ğàâíî",                     ; // 28
+         "Áîëüøå",                       ; // 29
+         "Ìåíüøå",                       ; // 30
+         "Áîëüøå èëè ğàâíî",             ; // 31
+         "Ìåíüøå èëè ğàâíî"           }    // 32
       _HMG_aLangUser := { ;
          CRLF + "Íå îáíàğóæåíà àêòèâíàÿ îáëàñòü."  + CRLF + "Âûáåğèòå ëşáóş îáëàñòü ïåğåä îáğàùåíèåì ê EDIT" + CRLF, ; // 1
-      "Ââåäèòå òåêñòîâîå çíà÷åíèÿ",                                                                               ; // 2
-      "Ââåäèòå ÷èñëî",                                                                                            ; // 3
-      "Óêàæèòå äàòó",                                                                                             ; // 4
-      "Ëîãè÷åñêîå çíà÷åíèå",                                                                                      ; // 5
-      "Ââåäèòå çíà÷åíèå ïîëÿ",                                                                                    ; // 6
-      "Âûáåğèòå ëşáóş çàïèñü è íàæìèòå OK",                                                                       ; // 7
-      CRLF + "Òåêóùàÿ çàïèñü áóäåò óäàëåíà " + CRLF + "Ïğîäîëæàòü ?    " + CRLF,                                  ; // 8
-      CRLF + "Íåò óïîğÿäî÷åíèÿ " + CRLF + "Âûáåğèòå îäíî èç ñóùåñòâóşùèõ " + CRLF,                                ; // 9
-      CRLF + "Ïîèñê â ïîëÿõ ïğèìå÷àíèé è ëîãè÷åñêèõ ïîëÿõ íå âûïîëíÿåòñÿ " + CRLF,                                ; // 10
-      CRLF + "Çàïèñü íå íàéäåíà  " + CRLF,                                                                        ; // 11
-      "Ïîëÿ äëÿ âêëş÷åíèå â ñïèñîê ïå÷àòè",                                                                       ; // 12
-      "Ñïèñîê ïîëåé äëÿ ïå÷àòè",                                                                                  ; // 13
-      "Âûáîğ ïğèíòåğà",                                                                                           ; // 14
-      "Íàæìèòå äëÿ ïåğåíîñà ïîëÿ â ñïèñîê ïå÷àòè",                                                                ; // 15
-      "Íàæìèòå äëÿ èñêëş÷åíèÿ ïîëÿ èç ñïèñêà ïå÷àòè",                                                             ; // 16
-      "Çàïèñü, ñ êîòîğîé íà÷èíàåòñÿ ïå÷àòü",                                                                      ; // 17
-      "Çàïèñü, íà êîòîğîé çàâåğøàåòñÿ ïå÷àòü",                                                                    ; // 18
-      CRLF + "Âêëş÷àåìûõ ïîëåé íåò " + CRLF,                                                                      ; // 19
-      CRLF + "Ïåğâîå ïîëå íà âêëş÷åíèå " + CRLF,                                                                  ; // 20
-      CRLF + "Èñêëş÷àåìûõ ïîëåé íåò " + CRLF,                                                                     ; // 21
-      CRLF + "Ïåğâîå ïîëå íà èñêëş÷åíèå " + CRLF,                                                                 ; // 22
-      CRLF + "Íåò âûáğàííûõ ïîëåé " + CRLF + "Ñôîğìèğóéòå ñïèñîê äëÿ ïå÷àòè " + CRLF,                             ; // 23
-      CRLF + "Ñëèøêîì ìíîãî ïîëåé " + CRLF + "Óìåíüøèòå èõ êîëè÷åñòâî " + CRLF,                                   ; // 24
-      CRLF + "Ïğèíòåğ íå ãîòîâ  " + CRLF,                                                                         ; // 25
-      "Óïîğÿäî÷åíèå ",                                                                                            ; // 26
-      "Îò çàïèñè ",                                                                                               ; // 27
-      "Äî çàïèñè ",                                                                                               ; // 28
-      "Äà",                                                                                                       ; // 29
-      "Íåò",                                                                                                      ; // 30
-      "Ñòğàíèöà:",                                                                                                ; // 31
-      CRLF + "Âûáåğèòå ïğèíòåğ  " + CRLF,                                                                         ; // 32
-      "Îòôèëüòğîâàíî ïî",                                                                                         ; // 33
-      CRLF + "İòî íå àêòèâíûé ôèëüòğ    " + CRLF,                                                                 ; // 34
-      CRLF + "Ïîëÿ ïğèìå÷àíèé íå ôèëüòğóşòñÿ  " + CRLF,                                                           ; // 35
-      CRLF + "Âûáåğèòå ïîëÿ äëÿ ôèëüòğà    " + CRLF,                                                              ; // 36
-      CRLF + "Âûáåğèòå ëşáîé îïåğàòîğ äëÿ ôèëüòğà" + CRLF,                                                        ; // 37
-      CRLF + "Íàáåğèòå ëşáîå çíà÷åíèå äëÿ ôèëüòğà" + CRLF,                                                        ; // 38
-      CRLF + "Íåò àêòèâíûõ ôèëüòğîâ   " + CRLF,                                                                   ; // 39
-      CRLF + "Ñíÿòü ôèëüòğ ?   " + CRLF,                                                                          ; // 40
-      CRLF + "Çàïèñü áëîêèğîâàíà äğóãèì ïîëüçîâàòåëåì " + CRLF,                                                   ; // 41
-      CRLF + "Òåêóùàÿ çàïèñü áóäåò âîññòàíîâëåíà " + CRLF + "Ïğîäîëæàòü ?    " + CRLF                             } // 42
+         "Ââåäèòå òåêñòîâîå çíà÷åíèÿ",                                                                               ; // 2
+         "Ââåäèòå ÷èñëî",                                                                                            ; // 3
+         "Óêàæèòå äàòó",                                                                                             ; // 4
+         "Ëîãè÷åñêîå çíà÷åíèå",                                                                                      ; // 5
+         "Ââåäèòå çíà÷åíèå ïîëÿ",                                                                                    ; // 6
+         "Âûáåğèòå ëşáóş çàïèñü è íàæìèòå OK",                                                                       ; // 7
+         CRLF + "Òåêóùàÿ çàïèñü áóäåò óäàëåíà " + CRLF + "Ïğîäîëæàòü ?    " + CRLF,                                  ; // 8
+         CRLF + "Íåò óïîğÿäî÷åíèÿ " + CRLF + "Âûáåğèòå îäíî èç ñóùåñòâóşùèõ " + CRLF,                                ; // 9
+         CRLF + "Ïîèñê â ïîëÿõ ïğèìå÷àíèé è ëîãè÷åñêèõ ïîëÿõ íå âûïîëíÿåòñÿ " + CRLF,                                ; // 10
+         CRLF + "Çàïèñü íå íàéäåíà  " + CRLF,                                                                        ; // 11
+         "Ïîëÿ äëÿ âêëş÷åíèå â ñïèñîê ïå÷àòè",                                                                       ; // 12
+         "Ñïèñîê ïîëåé äëÿ ïå÷àòè",                                                                                  ; // 13
+         "Âûáîğ ïğèíòåğà",                                                                                           ; // 14
+         "Íàæìèòå äëÿ ïåğåíîñà ïîëÿ â ñïèñîê ïå÷àòè",                                                                ; // 15
+         "Íàæìèòå äëÿ èñêëş÷åíèÿ ïîëÿ èç ñïèñêà ïå÷àòè",                                                             ; // 16
+         "Çàïèñü, ñ êîòîğîé íà÷èíàåòñÿ ïå÷àòü",                                                                      ; // 17
+         "Çàïèñü, íà êîòîğîé çàâåğøàåòñÿ ïå÷àòü",                                                                    ; // 18
+         CRLF + "Âêëş÷àåìûõ ïîëåé íåò " + CRLF,                                                                      ; // 19
+         CRLF + "Ïåğâîå ïîëå íà âêëş÷åíèå " + CRLF,                                                                  ; // 20
+         CRLF + "Èñêëş÷àåìûõ ïîëåé íåò " + CRLF,                                                                     ; // 21
+         CRLF + "Ïåğâîå ïîëå íà èñêëş÷åíèå " + CRLF,                                                                 ; // 22
+         CRLF + "Íåò âûáğàííûõ ïîëåé " + CRLF + "Ñôîğìèğóéòå ñïèñîê äëÿ ïå÷àòè " + CRLF,                             ; // 23
+         CRLF + "Ñëèøêîì ìíîãî ïîëåé " + CRLF + "Óìåíüøèòå èõ êîëè÷åñòâî " + CRLF,                                   ; // 24
+         CRLF + "Ïğèíòåğ íå ãîòîâ  " + CRLF,                                                                         ; // 25
+         "Óïîğÿäî÷åíèå ",                                                                                            ; // 26
+         "Îò çàïèñè ",                                                                                               ; // 27
+         "Äî çàïèñè ",                                                                                               ; // 28
+         "Äà",                                                                                                       ; // 29
+         "Íåò",                                                                                                      ; // 30
+         "Ñòğàíèöà:",                                                                                                ; // 31
+         CRLF + "Âûáåğèòå ïğèíòåğ  " + CRLF,                                                                         ; // 32
+         "Îòôèëüòğîâàíî ïî",                                                                                         ; // 33
+         CRLF + "İòî íå àêòèâíûé ôèëüòğ    " + CRLF,                                                                 ; // 34
+         CRLF + "Ïîëÿ ïğèìå÷àíèé íå ôèëüòğóşòñÿ  " + CRLF,                                                           ; // 35
+         CRLF + "Âûáåğèòå ïîëÿ äëÿ ôèëüòğà    " + CRLF,                                                              ; // 36
+         CRLF + "Âûáåğèòå ëşáîé îïåğàòîğ äëÿ ôèëüòğà" + CRLF,                                                        ; // 37
+         CRLF + "Íàáåğèòå ëşáîå çíà÷åíèå äëÿ ôèëüòğà" + CRLF,                                                        ; // 38
+         CRLF + "Íåò àêòèâíûõ ôèëüòğîâ   " + CRLF,                                                                   ; // 39
+         CRLF + "Ñíÿòü ôèëüòğ ?   " + CRLF,                                                                          ; // 40
+         CRLF + "Çàïèñü áëîêèğîâàíà äğóãèì ïîëüçîâàòåëåì " + CRLF,                                                   ; // 41
+         CRLF + "Òåêóùàÿ çàïèñü áóäåò âîññòàíîâëåíà " + CRLF + "Ïğîäîëæàòü ?    " + CRLF                             } // 42
 
    CASE cLang == "UK" .OR. cLang == "UA"  // Ukrainian
       // UKRAINIAN
@@ -2501,93 +2501,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Çàêğèòè",           ; // 1
-      "&Ñòâîğèòè",          ; // 2
-      "&Ïğàâêà",            ; // 3
-      "&Âèäàëèòè",          ; // 4
-      "Ç&íàéòè",            ; // 5
-      "&Äğóê",              ; // 6
-      "Ñ&êàñóâàòè",         ; // 7
-      "&Ãàğàçä",            ; // 8
-      "&Êîïiÿ",             ; // 9
-      "Âñò. &ôiëüòğ",       ; // 10
-      "Çíÿ&òè ôiëüòğ",      ; // 11
-      "Â³ä&íîâèòè"     }      // 12
+         "&Ñòâîğèòè",          ; // 2
+         "&Ïğàâêà",            ; // 3
+         "&Âèäàëèòè",          ; // 4
+         "Ç&íàéòè",            ; // 5
+         "&Äğóê",              ; // 6
+         "Ñ&êàñóâàòè",         ; // 7
+         "&Ãàğàçä",            ; // 8
+         "&Êîïiÿ",             ; // 9
+         "Âñò. &ôiëüòğ",       ; // 10
+         "Çíÿ&òè ôiëüòğ",      ; // 11
+         "Â³ä&íîâèòè"     }      // 12
       _HMG_aLangLabel := {                   ;
          "Íi",                              ; // 1
-      "Çàïèñ",                           ; // 2
-      "Âñüîãî",                          ; // 3
-      "Âïîğÿäêóâàííÿ",                   ; // 4
-      "Ïàğàìåòğè",                       ; // 5
-      "Íîâèé çàïèñ",                     ; // 6
-      "Çìiíèòè çàïèñ",                   ; // 7
-      "Âèáğàòè çàïèñ",                   ; // 8
-      "Çíàéòè çàïèñ",                    ; // 9
-      "Ïàğàìåòğè äğóêó",                 ; // 10
-      "Äîñòóïíi ïîëÿ",                   ; // 11
-      "Ïîëÿ äëÿ äğóêó",                  ; // 12
-      "Äîñòóïíi ïğèíòåğè",               ; // 13
-      "Ğîçïî÷àòè äğóê ç çàïèñó",         ; // 14
-      "Çàâåğøèòè äğóê çàïèñîì",          ; // 15
-      "Âèäàëèòè çàïèñ",                  ; // 16
-      "Ïåğåãëÿä",                        ; // 17
-      "Ñòîğiíêà ìiíiàòşğ",               ; // 18
-      "Óìîâà ôiëüòğó: ",                 ; // 19
-      "Ôiëüòğ: ",                        ; // 20
-      "Ïàğàìåòğè ôiëüòğó" ,              ; // 21
-      "Ïîëÿ áàçè äàíèõ" ,                ; // 22
-      "Îïåğàòîğè ñïiâñòàâëåííÿ",         ; // 23
-      "Çíà÷åííÿ ôiëüòğó",                ; // 24
-      "Âèáiğ ïîëÿ äëÿ ôèëüòğó",          ; // 25
-      "Âèáiğ îïåğàòîğà ñïiâñòàâëåííÿ",   ; // 26
-      "Äîğiâíşº",                        ; // 27
-      "Íå äîğiâíşº",                     ; // 28
-      "Áiëüøå",                          ; // 29
-      "Ìåíøå",                           ; // 30
-      "Áiëüøå àáî äîğiâíşº",             ; // 31
-      "Ìåíøå àáî äîğiâíşº"           }     // 32
+         "Çàïèñ",                           ; // 2
+         "Âñüîãî",                          ; // 3
+         "Âïîğÿäêóâàííÿ",                   ; // 4
+         "Ïàğàìåòğè",                       ; // 5
+         "Íîâèé çàïèñ",                     ; // 6
+         "Çìiíèòè çàïèñ",                   ; // 7
+         "Âèáğàòè çàïèñ",                   ; // 8
+         "Çíàéòè çàïèñ",                    ; // 9
+         "Ïàğàìåòğè äğóêó",                 ; // 10
+         "Äîñòóïíi ïîëÿ",                   ; // 11
+         "Ïîëÿ äëÿ äğóêó",                  ; // 12
+         "Äîñòóïíi ïğèíòåğè",               ; // 13
+         "Ğîçïî÷àòè äğóê ç çàïèñó",         ; // 14
+         "Çàâåğøèòè äğóê çàïèñîì",          ; // 15
+         "Âèäàëèòè çàïèñ",                  ; // 16
+         "Ïåğåãëÿä",                        ; // 17
+         "Ñòîğiíêà ìiíiàòşğ",               ; // 18
+         "Óìîâà ôiëüòğó: ",                 ; // 19
+         "Ôiëüòğ: ",                        ; // 20
+         "Ïàğàìåòğè ôiëüòğó" ,              ; // 21
+         "Ïîëÿ áàçè äàíèõ" ,                ; // 22
+         "Îïåğàòîğè ñïiâñòàâëåííÿ",         ; // 23
+         "Çíà÷åííÿ ôiëüòğó",                ; // 24
+         "Âèáiğ ïîëÿ äëÿ ôèëüòğó",          ; // 25
+         "Âèáiğ îïåğàòîğà ñïiâñòàâëåííÿ",   ; // 26
+         "Äîğiâíşº",                        ; // 27
+         "Íå äîğiâíşº",                     ; // 28
+         "Áiëüøå",                          ; // 29
+         "Ìåíøå",                           ; // 30
+         "Áiëüøå àáî äîğiâíşº",             ; // 31
+         "Ìåíøå àáî äîğiâíşº"           }     // 32
       _HMG_aLangUser := { ;
          CRLF + "Íå âèÿâëåíî àêòèâíî¿ îáëàñòi."  + CRLF + "Îáåğiòü áóäü-ÿêó îáëàñòü ïåğåä çâåğíåííÿì äî EDIT" + CRLF, ; // 1
-      "Ââåäiòü òåêñòîâå çíà÷åííÿ",                                                                                 ; // 2
-      "Ââåäiòü ÷èñëî",                                                                                             ; // 3
-      "Âêàæiòü äàòó",                                                                                              ; // 4
-      "Ëîãi÷íå çíà÷åííÿ",                                                                                          ; // 5
-      "Ââåäiòü çíà÷åííÿ ïîëÿ",                                                                                     ; // 6
-      "Îáåğiòü áóäü-ÿêèé çàïèñ i íàòèñíiòü OK",                                                                    ; // 7
-      CRLF + "Ïîòî÷íèé çàïèñ áóäå âèäàëåíî " + CRLF + "Ïğîäîâæèòè ?    " + CRLF,                                   ; // 8
-      CRLF + "Âiäñóòíº âïîğÿäêóâàíÿ " + CRLF + "Îáåğiòü îäíå ç iñíóş÷èõ " + CRLF,                                  ; // 9
-      CRLF + "Ïîøóê â ïîëÿõ ïğèìiòîê i ëîãi÷íèõ ïîëÿõ íå âèêîíóºòüñÿ " + CRLF,                                     ; // 10
-      CRLF + "Çàïèñ íå çíàéäåíî  " + CRLF,                                                                         ; // 11
-      "Ïîëÿ, äîñòóïíi äëÿ äğóêó",                                                                                  ; // 12
-      "Ñïèñîê ïîëiâ äëÿ äğóêó",                                                                                    ; // 13
-      "Âèáiğ ïğèíòåğó",                                                                                            ; // 14
-      "Íàòèñíiòü äëÿ ïåğåíåñåííÿ ïîëÿ â ñïèñîê äğóêó",                                                             ; // 15
-      "Íàòèñíiòü äëÿ âèëó÷åííÿ ïîëÿ ç ñïèñêó äğóêó",                                                               ; // 16
-      "Çàïèñ, ç ÿêîãî ğîçïî÷èíàºòüñÿ äğóê",                                                                        ; // 17
-      "Çàïèñ, ÿêèì çàâåğøóºòüñÿ äğóê",                                                                             ; // 18
-      CRLF + "Âiäñóòíi äîñòóïíi ïîëÿ " + CRLF,                                                                     ; // 19
-      CRLF + "Ïåğøå ïîëå äî âêëş÷åííÿ " + CRLF,                                                                    ; // 20
-      CRLF + "Âiäñóòíi ïîëÿ äëÿ âèêëş÷åííÿ " + CRLF,                                                               ; // 21
-      CRLF + "Ïåğøå ïîëå äëÿ âèëó÷åííÿ " + CRLF,                                                                   ; // 22
-      CRLF + "Âiäñóòíi âèáğàíi ïîëÿ " + CRLF + "Ñôîğìóéòå ñïèñîê äëÿ äğóêó " + CRLF,                               ; // 23
-      CRLF + "Çàíàäòî áàãàòî ïîëiâ " + CRLF + "Çìåíøiòü ¿õ êiëüêiñòü " + CRLF,                                     ; // 24
-      CRLF + "Ïğèíòåğ íå ïiäãîòîâàíî " + CRLF,                                                                     ; // 25
-      "Âïîğÿäêóâàííÿ ",                                                                                            ; // 26
-      "Âiä çàïèñó ",                                                                                               ; // 27
-      "Äî çàïèñó ",                                                                                                ; // 28
-      "Òàê",                                                                                                       ; // 29
-      "Íi",                                                                                                        ; // 30
-      "Ñòîğiíêà:",                                                                                                 ; // 31
-      CRLF + "Âèáåğiòü ïğèíòåğ  " + CRLF,                                                                          ; // 32
-      "Âiäôiëüòğîâàíî çà",                                                                                         ; // 33
-      CRLF + "Öå íå àêòèâíèé ôiëüòğ   " + CRLF,                                                                    ; // 34
-      CRLF + "Ïîëÿ ïğèìiòîê íå ôiëüòğóşòüñÿ  " + CRLF,                                                             ; // 35
-      CRLF + "Âêàæiòü ïîëÿ äëÿ ôiëüòğó    " + CRLF,                                                                ; // 36
-      CRLF + "Âêàæiòü îïåğàòîğ äëÿ ôiëüòğó" + CRLF,                                                                ; // 37
-      CRLF + "Âêàæiòü çíà÷åííÿ äëÿ ôiëüòğó" + CRLF,                                                                ; // 38
-      CRLF + "Âiäñóòíi àêòèâíi ôiëüòğè   " + CRLF,                                                                 ; // 39
-      CRLF + "Çíÿòè ôiëüòğ ?   " + CRLF,                                                                           ; // 40
-      CRLF + "Çàïèñ çàáëîêîâàíî iíøèì êîğèñòóâà÷åì " + CRLF,                                                       ; // 41
-      CRLF + "Ïîòî÷íèé çàïèñ áóäå â³äíîâëåíî " + CRLF + "Ïğîäîâæèòè ?    " + CRLF                                  } // 42
+         "Ââåäiòü òåêñòîâå çíà÷åííÿ",                                                                                 ; // 2
+         "Ââåäiòü ÷èñëî",                                                                                             ; // 3
+         "Âêàæiòü äàòó",                                                                                              ; // 4
+         "Ëîãi÷íå çíà÷åííÿ",                                                                                          ; // 5
+         "Ââåäiòü çíà÷åííÿ ïîëÿ",                                                                                     ; // 6
+         "Îáåğiòü áóäü-ÿêèé çàïèñ i íàòèñíiòü OK",                                                                    ; // 7
+         CRLF + "Ïîòî÷íèé çàïèñ áóäå âèäàëåíî " + CRLF + "Ïğîäîâæèòè ?    " + CRLF,                                   ; // 8
+         CRLF + "Âiäñóòíº âïîğÿäêóâàíÿ " + CRLF + "Îáåğiòü îäíå ç iñíóş÷èõ " + CRLF,                                  ; // 9
+         CRLF + "Ïîøóê â ïîëÿõ ïğèìiòîê i ëîãi÷íèõ ïîëÿõ íå âèêîíóºòüñÿ " + CRLF,                                     ; // 10
+         CRLF + "Çàïèñ íå çíàéäåíî  " + CRLF,                                                                         ; // 11
+         "Ïîëÿ, äîñòóïíi äëÿ äğóêó",                                                                                  ; // 12
+         "Ñïèñîê ïîëiâ äëÿ äğóêó",                                                                                    ; // 13
+         "Âèáiğ ïğèíòåğó",                                                                                            ; // 14
+         "Íàòèñíiòü äëÿ ïåğåíåñåííÿ ïîëÿ â ñïèñîê äğóêó",                                                             ; // 15
+         "Íàòèñíiòü äëÿ âèëó÷åííÿ ïîëÿ ç ñïèñêó äğóêó",                                                               ; // 16
+         "Çàïèñ, ç ÿêîãî ğîçïî÷èíàºòüñÿ äğóê",                                                                        ; // 17
+         "Çàïèñ, ÿêèì çàâåğøóºòüñÿ äğóê",                                                                             ; // 18
+         CRLF + "Âiäñóòíi äîñòóïíi ïîëÿ " + CRLF,                                                                     ; // 19
+         CRLF + "Ïåğøå ïîëå äî âêëş÷åííÿ " + CRLF,                                                                    ; // 20
+         CRLF + "Âiäñóòíi ïîëÿ äëÿ âèêëş÷åííÿ " + CRLF,                                                               ; // 21
+         CRLF + "Ïåğøå ïîëå äëÿ âèëó÷åííÿ " + CRLF,                                                                   ; // 22
+         CRLF + "Âiäñóòíi âèáğàíi ïîëÿ " + CRLF + "Ñôîğìóéòå ñïèñîê äëÿ äğóêó " + CRLF,                               ; // 23
+         CRLF + "Çàíàäòî áàãàòî ïîëiâ " + CRLF + "Çìåíøiòü ¿õ êiëüêiñòü " + CRLF,                                     ; // 24
+         CRLF + "Ïğèíòåğ íå ïiäãîòîâàíî " + CRLF,                                                                     ; // 25
+         "Âïîğÿäêóâàííÿ ",                                                                                            ; // 26
+         "Âiä çàïèñó ",                                                                                               ; // 27
+         "Äî çàïèñó ",                                                                                                ; // 28
+         "Òàê",                                                                                                       ; // 29
+         "Íi",                                                                                                        ; // 30
+         "Ñòîğiíêà:",                                                                                                 ; // 31
+         CRLF + "Âèáåğiòü ïğèíòåğ  " + CRLF,                                                                          ; // 32
+         "Âiäôiëüòğîâàíî çà",                                                                                         ; // 33
+         CRLF + "Öå íå àêòèâíèé ôiëüòğ   " + CRLF,                                                                    ; // 34
+         CRLF + "Ïîëÿ ïğèìiòîê íå ôiëüòğóşòüñÿ  " + CRLF,                                                             ; // 35
+         CRLF + "Âêàæiòü ïîëÿ äëÿ ôiëüòğó    " + CRLF,                                                                ; // 36
+         CRLF + "Âêàæiòü îïåğàòîğ äëÿ ôiëüòğó" + CRLF,                                                                ; // 37
+         CRLF + "Âêàæiòü çíà÷åííÿ äëÿ ôiëüòğó" + CRLF,                                                                ; // 38
+         CRLF + "Âiäñóòíi àêòèâíi ôiëüòğè   " + CRLF,                                                                 ; // 39
+         CRLF + "Çíÿòè ôiëüòğ ?   " + CRLF,                                                                           ; // 40
+         CRLF + "Çàïèñ çàáëîêîâàíî iíøèì êîğèñòóâà÷åì " + CRLF,                                                       ; // 41
+         CRLF + "Ïîòî÷íèé çàïèñ áóäå â³äíîâëåíî " + CRLF + "Ïğîäîâæèòè ?    " + CRLF                                  } // 42
 
    CASE cLang == "ES"  // Spanish
       // SPANISH
@@ -2681,94 +2681,94 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {            ;
          "&Cerrar",           ; // 1
-      "&Nuevo",            ; // 2
-      "&Modificar",        ; // 3
-      "&Eliminar",         ; // 4
-      "&Buscar",           ; // 5
-      "&Imprimir",         ; // 6
-      "&Cancelar",         ; // 7
-      "&Aceptar",          ; // 8
-      "&Copiar",           ; // 9
-      "&Activar Filtro",   ; // 10
-      "&Desactivar Filtro", ; // 11
-      "&Restaurar"         } // 12
+         "&Nuevo",            ; // 2
+         "&Modificar",        ; // 3
+         "&Eliminar",         ; // 4
+         "&Buscar",           ; // 5
+         "&Imprimir",         ; // 6
+         "&Cancelar",         ; // 7
+         "&Aceptar",          ; // 8
+         "&Copiar",           ; // 9
+         "&Activar Filtro",   ; // 10
+         "&Desactivar Filtro", ; // 11
+         "&Restaurar"         } // 12
 
       _HMG_aLangLabel := {                                 ;
          "Ninguno",                               ; // 1
-      "Registro",                              ; // 2
-      "Total",                                 ; // 3
-      "Indice activo",                         ; // 4
-      "Opciones",                              ; // 5
-      "Nuevo registro",                        ; // 6
-      "Modificar registro",                    ; // 7
-      "Seleccionar registro",                  ; // 8
-      "Buscar registro",                       ; // 9
-      "Opciones de impresión",                 ; // 10
-      "Campos disponibles",                    ; // 11
-      "Campos del listado",                    ; // 12
-      "Impresoras disponibles",                ; // 13
-      "Primer registro a imprimir",            ; // 14
-      "Ultimo registro a imprimir",            ; // 15
-      "Borrar registro",                       ; // 16
-      "Vista previa",                          ; // 17
-      "Páginas en miniatura",                  ; // 18
-      "Condición del filtro: ",                ; // 19
-      "Filtrado: ",                            ; // 20
-      "Opciones de filtrado" ,                 ; // 21
-      "Campos de la bdd" ,                     ; // 22
-      "Operador de comparación",               ; // 23
-      "Valor de comparación",                  ; // 24
-      "Seleccione el campo a filtrar",         ; // 25
-      "Seleccione el operador de comparación", ; // 26
-      "Igual",                                 ; // 27
-      "Distinto",                              ; // 28
-      "Mayor que",                             ; // 29
-      "Menor que",                             ; // 30
-      "Mayor o igual que",                     ; // 31
-      "Menor o igual que"                      } // 32
+         "Registro",                              ; // 2
+         "Total",                                 ; // 3
+         "Indice activo",                         ; // 4
+         "Opciones",                              ; // 5
+         "Nuevo registro",                        ; // 6
+         "Modificar registro",                    ; // 7
+         "Seleccionar registro",                  ; // 8
+         "Buscar registro",                       ; // 9
+         "Opciones de impresión",                 ; // 10
+         "Campos disponibles",                    ; // 11
+         "Campos del listado",                    ; // 12
+         "Impresoras disponibles",                ; // 13
+         "Primer registro a imprimir",            ; // 14
+         "Ultimo registro a imprimir",            ; // 15
+         "Borrar registro",                       ; // 16
+         "Vista previa",                          ; // 17
+         "Páginas en miniatura",                  ; // 18
+         "Condición del filtro: ",                ; // 19
+         "Filtrado: ",                            ; // 20
+         "Opciones de filtrado" ,                 ; // 21
+         "Campos de la bdd" ,                     ; // 22
+         "Operador de comparación",               ; // 23
+         "Valor de comparación",                  ; // 24
+         "Seleccione el campo a filtrar",         ; // 25
+         "Seleccione el operador de comparación", ; // 26
+         "Igual",                                 ; // 27
+         "Distinto",                              ; // 28
+         "Mayor que",                             ; // 29
+         "Menor que",                             ; // 30
+         "Mayor o igual que",                     ; // 31
+         "Menor o igual que"                      } // 32
       _HMG_aLangUser := { ;
          CRLF + "No hay un area activa   "  + CRLF + "Por favor seleccione un area antes de llamar a EDIT EXTENDED   " + CRLF,       ; // 1
-      "Introduzca el valor del campo (texto)",                                                                                      ; // 2
-      "Introduzca el valor del campo (numérico)",                                                                                    ; // 3
-      "Seleccione la fecha",                                                                                                      ; // 4
-      "Active la casilla para indicar un valor verdadero",                                                                                                 ; // 5
-      "Introduzca el valor del campo",                                                                                                ; // 6
-      "Seleccione un registro y pulse aceptar",                                                                                       ; // 7
-      CRLF + "Se dispone a borrar el registro activo   " + CRLF + "¿Esta seguro?    " + CRLF,                  ; // 8
-      CRLF + "No se ha seleccionado un indice   " + CRLF + "Por favor seleccione uno   " + CRLF,                            ; // 9
-      CRLF + "No se pueden realizar busquedad por campos tipo memo o lógico   " + CRLF,                                                   ; // 10
-      CRLF + "Registro no encontrado   " + CRLF,                                                                            ; // 11
-      "Seleccione el campo a incluir en el listado",                                                                                  ; // 12
-      "Seleccione el campo a excluir del listado",                                                                                ; // 13
-      "Seleccione la impresora",                                                                                                   ; // 14
-      "Pulse el botón para incluir el campo",                                                                                         ; // 15
-      "Pulse el botón para excluir el campo",                                                                                         ; // 16
-      "Pulse el botón para seleccionar el primer registro a imprimir",                                                                      ; // 17
-      "Pulse el botón para seleccionar el último registro a imprimir",                                                                       ; // 18
-      CRLF + "Ha incluido todos los campos   " + CRLF,                                                                   ; // 19
-      CRLF + "Primero seleccione el campo a incluir   " + CRLF,                                                           ; // 20
-      CRLF + "No hay campos para excluir   " + CRLF,                                                                    ; // 21
-      CRLF + "Primero seleccione el campo a excluir   " + CRLF,                                                            ; // 22
-      CRLF + "No ha seleccionado ningún campo   " + CRLF,                                              ; // 23
-      CRLF + "El listado no cabe en la página   " + CRLF + "Reduzca el numero de campos   " + CRLF,                                   ; // 24
-      CRLF + "La impresora no está disponible   " + CRLF,                                                                           ; // 25
-      "Ordenado por",                                                                                                           ; // 26
-      "Del registro",                                                                                                          ; // 27
-      "Al registro",                                                                                                            ; // 28
-      "Si",                                                                                                                  ; // 29
-      "No",                                                                                                                   ; // 30
-      "Página:",                                                                                                                ; // 31
-      CRLF + "Por favor seleccione una impresora   " + CRLF,                                                                     ; // 32
-      "Filtrado por",                                                                                                          ; // 33
-      CRLF + "No hay un filtro activo    " + CRLF,                                                                  ; // 34
-      CRLF + "No se puede filtrar por campos memo    " + CRLF,                                                                ; // 35
-      CRLF + "Seleccione el campo a filtrar    " + CRLF,                                                                 ; // 36
-      CRLF + "Seleccione el operador de comparación    " + CRLF,                                                              ; // 37
-      CRLF + "Introduzca el valor del filtro    " + CRLF,                                                                   ; // 38
-      CRLF + "No hay ningún filtro activo    " + CRLF,                                                              ; // 39
-      CRLF + "¿Eliminar el filtro activo?   " + CRLF,                                                                           ; // 40
-      CRLF + "Registro bloqueado por otro usuario    " + CRLF,                                                                   ; // 41
-      CRLF + "Se dispone a restaurar el registro suprimido   " + CRLF + "¿Esta seguro?    " + CRLF,                  } // 42
+         "Introduzca el valor del campo (texto)",                                                                                      ; // 2
+         "Introduzca el valor del campo (numérico)",                                                                                    ; // 3
+         "Seleccione la fecha",                                                                                                      ; // 4
+         "Active la casilla para indicar un valor verdadero",                                                                                                 ; // 5
+         "Introduzca el valor del campo",                                                                                                ; // 6
+         "Seleccione un registro y pulse aceptar",                                                                                       ; // 7
+         CRLF + "Se dispone a borrar el registro activo   " + CRLF + "¿Esta seguro?    " + CRLF,                  ; // 8
+         CRLF + "No se ha seleccionado un indice   " + CRLF + "Por favor seleccione uno   " + CRLF,                            ; // 9
+         CRLF + "No se pueden realizar busquedad por campos tipo memo o lógico   " + CRLF,                                                   ; // 10
+         CRLF + "Registro no encontrado   " + CRLF,                                                                            ; // 11
+         "Seleccione el campo a incluir en el listado",                                                                                  ; // 12
+         "Seleccione el campo a excluir del listado",                                                                                ; // 13
+         "Seleccione la impresora",                                                                                                   ; // 14
+         "Pulse el botón para incluir el campo",                                                                                         ; // 15
+         "Pulse el botón para excluir el campo",                                                                                         ; // 16
+         "Pulse el botón para seleccionar el primer registro a imprimir",                                                                      ; // 17
+         "Pulse el botón para seleccionar el último registro a imprimir",                                                                       ; // 18
+         CRLF + "Ha incluido todos los campos   " + CRLF,                                                                   ; // 19
+         CRLF + "Primero seleccione el campo a incluir   " + CRLF,                                                           ; // 20
+         CRLF + "No hay campos para excluir   " + CRLF,                                                                    ; // 21
+         CRLF + "Primero seleccione el campo a excluir   " + CRLF,                                                            ; // 22
+         CRLF + "No ha seleccionado ningún campo   " + CRLF,                                              ; // 23
+         CRLF + "El listado no cabe en la página   " + CRLF + "Reduzca el numero de campos   " + CRLF,                                   ; // 24
+         CRLF + "La impresora no está disponible   " + CRLF,                                                                           ; // 25
+         "Ordenado por",                                                                                                           ; // 26
+         "Del registro",                                                                                                          ; // 27
+         "Al registro",                                                                                                            ; // 28
+         "Si",                                                                                                                  ; // 29
+         "No",                                                                                                                   ; // 30
+         "Página:",                                                                                                                ; // 31
+         CRLF + "Por favor seleccione una impresora   " + CRLF,                                                                     ; // 32
+         "Filtrado por",                                                                                                          ; // 33
+         CRLF + "No hay un filtro activo    " + CRLF,                                                                  ; // 34
+         CRLF + "No se puede filtrar por campos memo    " + CRLF,                                                                ; // 35
+         CRLF + "Seleccione el campo a filtrar    " + CRLF,                                                                 ; // 36
+         CRLF + "Seleccione el operador de comparación    " + CRLF,                                                              ; // 37
+         CRLF + "Introduzca el valor del filtro    " + CRLF,                                                                   ; // 38
+         CRLF + "No hay ningún filtro activo    " + CRLF,                                                              ; // 39
+         CRLF + "¿Eliminar el filtro activo?   " + CRLF,                                                                           ; // 40
+         CRLF + "Registro bloqueado por otro usuario    " + CRLF,                                                                   ; // 41
+         CRLF + "Se dispone a restaurar el registro suprimido   " + CRLF + "¿Esta seguro?    " + CRLF,                  } // 42
 
    CASE cLang == "FI"  // Finnish
       // FINNISH
@@ -2865,95 +2865,95 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {            ;
          " Sulje",            ; // 1
-      " Uusi",             ; // 2
-      " Muuta",            ; // 3
-      " Poista",           ; // 4
-      " Hae",              ; // 5
-      " Tulosta",          ; // 6
-      " Keskeytä",         ; // 7
-      " Ok",               ; // 8
-      " Kopioi",           ; // 9
-      " Aktivoi suodin",   ; // 10
-      " Deaktivoi suodin", ; // 11
-      " Restore"           } // 12
+         " Uusi",             ; // 2
+         " Muuta",            ; // 3
+         " Poista",           ; // 4
+         " Hae",              ; // 5
+         " Tulosta",          ; // 6
+         " Keskeytä",         ; // 7
+         " Ok",               ; // 8
+         " Kopioi",           ; // 9
+         " Aktivoi suodin",   ; // 10
+         " Deaktivoi suodin", ; // 11
+         " Restore"           } // 12
 
       _HMG_aLangLabel := {                        ;
          "Ei mitään",                         ; // 1
-      "Tietue",                       ; // 2
-      "Yhteensä",                        ; // 3
-      "Aktiivinen lajittelu",                 ; // 4
-      "Optiot",                      ; // 5
-      "Uusi tietue",                   ; // 6
-      "Muuta tietue",                ; // 7
-      "Valitse tietue",                ; // 8
-      "Hae tietue",                  ; // 9
-      "Tulostus optiot",                ; // 10
-      "Valittavat kentät",               ; // 11
-      "Tulostettavat kentät",              ; // 12
-      "Valittavat tulostimet",           ; // 13
-      "Ensim. tulostettava tietue",        ; // 14
-      "Viim. tulostettava tietue",         ; // 15
-      "Poista tietue",                ; // 16
-      "Esikatselu",                      ; // 17
-      "Näytä sivujen miniatyyrit",         ; // 18
-      "Suodin ehto: ",           ; // 19
-      "Suodatettu: ",                   ; // 20
-      "Suodatus Optiot" ,           ; // 21
-      "Tietokanta kentät" ,             ; // 22
-      "Vertailu operaattori",        ; // 23
-      "Suodatus arvo",                 ; // 24
-      "Valitse suodatus kenttä",       ; // 25
-      "Valitse vertailu operaattori", ; // 26
-      "Yhtä kuin",                        ; // 27
-      "Erisuuri kuin",                    ; // 28
-      "Isompi kuin",                 ; // 29
-      "Pienempi kuin",                   ; // 30
-      "Isompi tai sama kuin",        ; // 31
-      "Pienempi tai sama kuin"           } // 32
+         "Tietue",                       ; // 2
+         "Yhteensä",                        ; // 3
+         "Aktiivinen lajittelu",                 ; // 4
+         "Optiot",                      ; // 5
+         "Uusi tietue",                   ; // 6
+         "Muuta tietue",                ; // 7
+         "Valitse tietue",                ; // 8
+         "Hae tietue",                  ; // 9
+         "Tulostus optiot",                ; // 10
+         "Valittavat kentät",               ; // 11
+         "Tulostettavat kentät",              ; // 12
+         "Valittavat tulostimet",           ; // 13
+         "Ensim. tulostettava tietue",        ; // 14
+         "Viim. tulostettava tietue",         ; // 15
+         "Poista tietue",                ; // 16
+         "Esikatselu",                      ; // 17
+         "Näytä sivujen miniatyyrit",         ; // 18
+         "Suodin ehto: ",           ; // 19
+         "Suodatettu: ",                   ; // 20
+         "Suodatus Optiot" ,           ; // 21
+         "Tietokanta kentät" ,             ; // 22
+         "Vertailu operaattori",        ; // 23
+         "Suodatus arvo",                 ; // 24
+         "Valitse suodatus kenttä",       ; // 25
+         "Valitse vertailu operaattori", ; // 26
+         "Yhtä kuin",                        ; // 27
+         "Erisuuri kuin",                    ; // 28
+         "Isompi kuin",                 ; // 29
+         "Pienempi kuin",                   ; // 30
+         "Isompi tai sama kuin",        ; // 31
+         "Pienempi tai sama kuin"           } // 32
 
       _HMG_aLangUser := { ;
          CRLF + "Työalue ei löydy.   "  + CRLF + "Valitse työaluetta ennenkun kutsut Edit  " + CRLF,       ; // 1
-      "Anna kenttä arvo (tekstiä)",                                  ; // 2
-      "Anna kenttä arvo (numeerinen)",                                  ; // 3
-      "Valitse päiväys",                            ; // 4
-      "Tarkista tosi arvo",                     ; // 5
-      "Anna kenttä arvo",                    ; // 6
-      "Valitse joku tietue ja paina OK",                                     ; // 7
-      CRLF + "Olet poistamassa aktiivinen tietue   " + CRLF + "Oletko varma?    " + CRLF,                  ; // 8
-      CRLF + "Ei aktiivista lajittelua   " + CRLF + "Valitse lajittelu   " + CRLF,                            ; // 9
-      CRLF + "En voi hakea memo tai loogiseten kenttien perusteella  " + CRLF, ; // 10
-      CRLF + "Tietue ei löydy   " + CRLF,                                                ; // 11
-      "Valitse listaan lisättävät kentät",                                                    ; // 12
-      "Valitse EI lisättävät kentät",                                        ; // 13
-      "Valitse tulostin",                   ; // 14
-      "Paina näppäin lisäätäksesi kenttä",                                                                  ; // 15
-      "Paina näppäin poistaaksesi kenttä",                                                       ; //16
-      "Paina näppäin valittaaksesi ensimmäinen tulostettava tietue",  ; // 17
-      "Paina näppäin valittaaksesi viimeinen tulostettava tietue",   ; // 18
-      CRLF + "Ei lisää kenttiä   " + CRLF,                                 ; // 19
-      CRLF + "Valitse ensin lisättävä kenttä   " + CRLF,                                                           ; //20
-      CRLF + "EI Lisää ohitettavia kenttiä   " + CRLF, ; // 21
-      CRLF + "Valitse ensin ohitettava kenttä   " + CRLF,                                                            ;//22
-      CRLF + "Et valinnut kenttiä   " + CRLF + "Valitse tulosteen kentät   " + CRLF,   ; // 23
-      CRLF + "Liikaa kenttiä   " + CRLF + "Vähennä kenttä lukumäärä   " + CRLF, ; // 24
-      CRLF + "Tulostin ei valmiina   " + CRLF,                                                  ; // 25
-      "Lajittelu",             ; // 26
-      "Tietueesta",              ; // 27
-      "Tietueeseen",                  ; // 28
-      "Kyllä",                ; // 29
-      "EI",       ; // 30
-      "Sivu:",          ; // 31
-      CRLF + "Valitse tulostin   " + CRLF,                                       ; // 32
-      "Lajittelu",            ; // 33
-      CRLF + "Aktiivinen suodin olemassa    " + CRLF,                                                          ; // 34
-      CRLF + "En voi suodattaa memo kenttiä    " + CRLF, ;// 35
-      CRLF + "Valitse suodattava kenttä    " + CRLF,                                                           ; // 36
-      CRLF + "Valitse suodatus operaattori    " + CRLF,                                                             ; //37
-      CRLF + "Anna suodatusarvo    " + CRLF,                                         ; // 38
-      CRLF + "Ei aktiivisia suotimia    " + CRLF,                                              ; // 39
-      CRLF + "Poista suodin?   " + CRLF,                                        ; // 40
-      CRLF + "Tietue lukittu    " + CRLF,                                                              ; // 41
-      CRLF + "Palautatko poistetun tietueen   " + CRLF + "Oletko varma?    " + CRLF  } // 42
+         "Anna kenttä arvo (tekstiä)",                                  ; // 2
+         "Anna kenttä arvo (numeerinen)",                                  ; // 3
+         "Valitse päiväys",                            ; // 4
+         "Tarkista tosi arvo",                     ; // 5
+         "Anna kenttä arvo",                    ; // 6
+         "Valitse joku tietue ja paina OK",                                     ; // 7
+         CRLF + "Olet poistamassa aktiivinen tietue   " + CRLF + "Oletko varma?    " + CRLF,                  ; // 8
+         CRLF + "Ei aktiivista lajittelua   " + CRLF + "Valitse lajittelu   " + CRLF,                            ; // 9
+         CRLF + "En voi hakea memo tai loogiseten kenttien perusteella  " + CRLF, ; // 10
+         CRLF + "Tietue ei löydy   " + CRLF,                                                ; // 11
+         "Valitse listaan lisättävät kentät",                                                    ; // 12
+         "Valitse EI lisättävät kentät",                                        ; // 13
+         "Valitse tulostin",                   ; // 14
+         "Paina näppäin lisäätäksesi kenttä",                                                                  ; // 15
+         "Paina näppäin poistaaksesi kenttä",                                                       ; //16
+         "Paina näppäin valittaaksesi ensimmäinen tulostettava tietue",  ; // 17
+         "Paina näppäin valittaaksesi viimeinen tulostettava tietue",   ; // 18
+         CRLF + "Ei lisää kenttiä   " + CRLF,                                 ; // 19
+         CRLF + "Valitse ensin lisättävä kenttä   " + CRLF,                                                           ; //20
+         CRLF + "EI Lisää ohitettavia kenttiä   " + CRLF, ; // 21
+         CRLF + "Valitse ensin ohitettava kenttä   " + CRLF,                                                            ;//22
+         CRLF + "Et valinnut kenttiä   " + CRLF + "Valitse tulosteen kentät   " + CRLF,   ; // 23
+         CRLF + "Liikaa kenttiä   " + CRLF + "Vähennä kenttä lukumäärä   " + CRLF, ; // 24
+         CRLF + "Tulostin ei valmiina   " + CRLF,                                                  ; // 25
+         "Lajittelu",             ; // 26
+         "Tietueesta",              ; // 27
+         "Tietueeseen",                  ; // 28
+         "Kyllä",                ; // 29
+         "EI",       ; // 30
+         "Sivu:",          ; // 31
+         CRLF + "Valitse tulostin   " + CRLF,                                       ; // 32
+         "Lajittelu",            ; // 33
+         CRLF + "Aktiivinen suodin olemassa    " + CRLF,                                                          ; // 34
+         CRLF + "En voi suodattaa memo kenttiä    " + CRLF, ;// 35
+         CRLF + "Valitse suodattava kenttä    " + CRLF,                                                           ; // 36
+         CRLF + "Valitse suodatus operaattori    " + CRLF,                                                             ; //37
+         CRLF + "Anna suodatusarvo    " + CRLF,                                         ; // 38
+         CRLF + "Ei aktiivisia suotimia    " + CRLF,                                              ; // 39
+         CRLF + "Poista suodin?   " + CRLF,                                        ; // 40
+         CRLF + "Tietue lukittu    " + CRLF,                                                              ; // 41
+         CRLF + "Palautatko poistetun tietueen   " + CRLF + "Oletko varma?    " + CRLF  } // 42
 
    CASE cLang == "NL"  // Dutch
       // DUTCH
@@ -3049,93 +3049,93 @@ PROCEDURE InitMessages
       // EDIT EXTENDED
       _HMG_aLangButton := {            ;
          "&Sluiten",          ; // 1
-      "&Nieuw",            ; // 2
-      "&Aanpassen",        ; // 3
-      "&Verwijderen",      ; // 4
-      "&Vind",             ; // 5
-      "&Print",            ; // 6
-      "&Annuleren",        ; // 7
-      "&Ok",               ; // 8
-      "&Kopieer",          ; // 9
-      "&Activeer filter",  ; // 10
-      "&Deactiveer filter", ; // 11
-      "&Restore"           } // 12
+         "&Nieuw",            ; // 2
+         "&Aanpassen",        ; // 3
+         "&Verwijderen",      ; // 4
+         "&Vind",             ; // 5
+         "&Print",            ; // 6
+         "&Annuleren",        ; // 7
+         "&Ok",               ; // 8
+         "&Kopieer",          ; // 9
+         "&Activeer filter",  ; // 10
+         "&Deactiveer filter", ; // 11
+         "&Restore"           } // 12
       _HMG_aLangLabel := {                            ;
          "Geen",                             ; // 1
-      "Regel",                            ; // 2
-      "Totaal",                           ; // 3
-      "Actieve volgorde",                 ; // 4
-      "Opties",                           ; // 5
-      "Nieuw regel",                      ; // 6
-      "Aanpassen regel",                  ; // 7
-      "Selecteer regel",                  ; // 8
-      "Vind regel",                       ; // 9
-      "Print opties",                     ; //10
-      "Beschikbare velden",               ; //11
-      "Velden te printen",                ; //12
-      "Beschikbare printers",             ; //13
-      "Eerste regel te printen",          ; //14
-      "Laatste regel te printen",         ; //15
-      "Verwijder regel",                  ; //16
-      "Voorbeeld",                        ; //17
-      "Laat pagina klein zien",           ; //18
-      "Filter condities: ",               ; //19
-      "Gefilterd: ",                      ; //20
-      "Filter opties" ,                   ; //21
-      "Database velden" ,                 ; //22
-      "Vergelijkings operator",           ; //23
-      "Filter waarde",                    ; //24
-      "Selecteer velden om te filteren",  ; //25
-      "Selecteer vergelijkings operator", ; //26
-      "Gelijk",                           ; //27
-      "Niet gelijk",                      ; //28
-      "Groter dan",                       ; //29
-      "Kleiner dan",                      ; //30
-      "Groter dan of gelijk aan",         ; //31
-      "Kleiner dan of gelijk aan"         } //32
+         "Regel",                            ; // 2
+         "Totaal",                           ; // 3
+         "Actieve volgorde",                 ; // 4
+         "Opties",                           ; // 5
+         "Nieuw regel",                      ; // 6
+         "Aanpassen regel",                  ; // 7
+         "Selecteer regel",                  ; // 8
+         "Vind regel",                       ; // 9
+         "Print opties",                     ; //10
+         "Beschikbare velden",               ; //11
+         "Velden te printen",                ; //12
+         "Beschikbare printers",             ; //13
+         "Eerste regel te printen",          ; //14
+         "Laatste regel te printen",         ; //15
+         "Verwijder regel",                  ; //16
+         "Voorbeeld",                        ; //17
+         "Laat pagina klein zien",           ; //18
+         "Filter condities: ",               ; //19
+         "Gefilterd: ",                      ; //20
+         "Filter opties" ,                   ; //21
+         "Database velden" ,                 ; //22
+         "Vergelijkings operator",           ; //23
+         "Filter waarde",                    ; //24
+         "Selecteer velden om te filteren",  ; //25
+         "Selecteer vergelijkings operator", ; //26
+         "Gelijk",                           ; //27
+         "Niet gelijk",                      ; //28
+         "Groter dan",                       ; //29
+         "Kleiner dan",                      ; //30
+         "Groter dan of gelijk aan",         ; //31
+         "Kleiner dan of gelijk aan"         } //32
       _HMG_aLangUser := { ;
          CRLF + "Kan geen actief werkgebied vinden   "  + CRLF + "Selecteer A.U.B. een actief werkgebied voor BEWERKEN aan te roepen   " + CRLF, ; // 1
-      "Geef de veld waarde (een tekst)", ; // 2
-      "Geef de veld waarde (een nummer)", ; // 3
-      "Selecteer de datum", ; // 4
-      "Controleer voor geldige waarde", ; // 5
-      "Geef de veld waarde", ; // 6
-      "Selecteer een regel en druk op OK", ; // 7
-      CRLF + "Je gaat het actieve regel verwijderen  " + CRLF + "Zeker weten?    " + CRLF, ; // 8
-      CRLF + "Er is geen actieve volgorde " + CRLF + "Selecteer er A.U.B. een   " + CRLF, ; // 9
-      CRLF + "Kan niet zoeken in memo of logische velden   " + CRLF, ; // 10
-      CRLF + "Regel niet gevonden   " + CRLF, ; // 11
-      "Selecteer het veld om in de lijst in te sluiten", ; // 12
-      "Selecteer het veld om uit de lijst te halen", ; // 13
-      "Selecteer de printer", ; // 14
-      "Druk op de knop om het veld in te sluiten", ; // 15
-      "Druk op de knop om het veld uit te sluiten", ; // 16
-      "Druk op de knop om het eerste veld te selecteren om te printen", ; // 17
-      "Druk op de knop om het laatste veld te selecteren om te printen", ; // 18
-      CRLF + "Geen velden meer om in te sluiten   " + CRLF, ; // 19
-      CRLF + "Selecteer eerst het veld om in te sluiten   " + CRLF, ; // 20
-      CRLF + "Geen velden meer om uit te sluiten   " + CRLF, ; // 21
-      CRLF + "Selecteer eerst het veld om uit te sluiten   " + CRLF, ; // 22
-      CRLF + "Je hebt geen velden geselecteerd   " + CRLF + "Selecteer A.U.B. de velden om in te sluiten om te printen   " + CRLF, ; // 23
-      CRLF + "Teveel velden   " + CRLF + "Selecteer minder velden   " + CRLF, ; // 24
-      CRLF + "Printer niet klaar   " + CRLF, ; // 25
-      "Volgorde op", ; // 26
-      "Van regel", ; // 27
-      "Tot regel", ; // 28
-      "Ja", ; // 29
-      "Nee", ; // 30
-      "Pagina:", ; // 31
-      CRLF + "Selecteer A.U.B. een printer " + CRLF, ; // 32
-      "Gefilterd op", ; // 33
-      CRLF + "Er is een actief filter    " + CRLF, ; // 34
-      CRLF + "Kan niet filteren op memo velden    " + CRLF, ; // 35
-      CRLF + "Selecteer het veld om op te filteren    " + CRLF, ; // 36
-      CRLF + "Selecteer een operator om te filteren    " + CRLF, ; // 37
-      CRLF + "Type een waarde om te filteren " + CRLF, ; // 38
-      CRLF + "Er is geen actief filter    " + CRLF, ; // 39
-      CRLF + "Deactiveer filter?   " + CRLF, ; // 40
-      CRLF + "Regel geblokkeerd door een andere gebuiker    " + CRLF, ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF } // 42
+         "Geef de veld waarde (een tekst)", ; // 2
+         "Geef de veld waarde (een nummer)", ; // 3
+         "Selecteer de datum", ; // 4
+         "Controleer voor geldige waarde", ; // 5
+         "Geef de veld waarde", ; // 6
+         "Selecteer een regel en druk op OK", ; // 7
+         CRLF + "Je gaat het actieve regel verwijderen  " + CRLF + "Zeker weten?    " + CRLF, ; // 8
+         CRLF + "Er is geen actieve volgorde " + CRLF + "Selecteer er A.U.B. een   " + CRLF, ; // 9
+         CRLF + "Kan niet zoeken in memo of logische velden   " + CRLF, ; // 10
+         CRLF + "Regel niet gevonden   " + CRLF, ; // 11
+         "Selecteer het veld om in de lijst in te sluiten", ; // 12
+         "Selecteer het veld om uit de lijst te halen", ; // 13
+         "Selecteer de printer", ; // 14
+         "Druk op de knop om het veld in te sluiten", ; // 15
+         "Druk op de knop om het veld uit te sluiten", ; // 16
+         "Druk op de knop om het eerste veld te selecteren om te printen", ; // 17
+         "Druk op de knop om het laatste veld te selecteren om te printen", ; // 18
+         CRLF + "Geen velden meer om in te sluiten   " + CRLF, ; // 19
+         CRLF + "Selecteer eerst het veld om in te sluiten   " + CRLF, ; // 20
+         CRLF + "Geen velden meer om uit te sluiten   " + CRLF, ; // 21
+         CRLF + "Selecteer eerst het veld om uit te sluiten   " + CRLF, ; // 22
+         CRLF + "Je hebt geen velden geselecteerd   " + CRLF + "Selecteer A.U.B. de velden om in te sluiten om te printen   " + CRLF, ; // 23
+         CRLF + "Teveel velden   " + CRLF + "Selecteer minder velden   " + CRLF, ; // 24
+         CRLF + "Printer niet klaar   " + CRLF, ; // 25
+         "Volgorde op", ; // 26
+         "Van regel", ; // 27
+         "Tot regel", ; // 28
+         "Ja", ; // 29
+         "Nee", ; // 30
+         "Pagina:", ; // 31
+         CRLF + "Selecteer A.U.B. een printer " + CRLF, ; // 32
+         "Gefilterd op", ; // 33
+         CRLF + "Er is een actief filter    " + CRLF, ; // 34
+         CRLF + "Kan niet filteren op memo velden    " + CRLF, ; // 35
+         CRLF + "Selecteer het veld om op te filteren    " + CRLF, ; // 36
+         CRLF + "Selecteer een operator om te filteren    " + CRLF, ; // 37
+         CRLF + "Type een waarde om te filteren " + CRLF, ; // 38
+         CRLF + "Er is geen actief filter    " + CRLF, ; // 39
+         CRLF + "Deactiveer filter?   " + CRLF, ; // 40
+         CRLF + "Regel geblokkeerd door een andere gebuiker    " + CRLF, ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF } // 42
 
    CASE cLang == "SL"  // Slovenian
       // SLOVENIAN
@@ -3233,93 +3233,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Zapri",             ; // 1
-      "&Nova",              ; // 2
-      "&Spremeni",          ; // 3
-      "&Briši",             ; // 4
-      "&Poišèi",            ; // 5
-      "&Natisni",           ; // 6
-      "&Prekini",           ; // 7
-      "&V redu",            ; // 8
-      "&Kopiraj",           ; // 9
-      "&Aktiviraj Filter",  ; // 10
-      "&Deaktiviraj Filter", ; // 11
-      "&Obnovi"             } // 12
+         "&Nova",              ; // 2
+         "&Spremeni",          ; // 3
+         "&Briši",             ; // 4
+         "&Poišèi",            ; // 5
+         "&Natisni",           ; // 6
+         "&Prekini",           ; // 7
+         "&V redu",            ; // 8
+         "&Kopiraj",           ; // 9
+         "&Aktiviraj Filter",  ; // 10
+         "&Deaktiviraj Filter", ; // 11
+         "&Obnovi"             } // 12
       _HMG_aLangLabel := {                 ;
          "Prazno",                        ; // 1
-      "Vrstica",                       ; // 2
-      "Skupaj",                        ; // 3
-      "Activni indeks",                ; // 4
-      "Monosti",                      ; // 5
-      "Nova vrstica",                  ; // 6
-      "Spreminjaj vrstico",            ; // 7
-      "Oznaèi vrstico",                ; // 8
-      "Najdi vrstico",                 ; // 9
-      "Monosti tiskanja",             ; // 10
-      "Polja na razpolago",            ; // 11
-      "Polja za tiskanje",             ; // 12
-      "Tiskalniki na razpolago",       ; // 13
-      "Prva vrstica za tiskanje",      ; // 14
-      "Zadnja vrstica za tiskanje",    ; // 15
-      "Briši vrstico",                 ; // 16
-      "Pregled",                       ; // 17
-      "Mini pregled strani",           ; // 18
-      "Pogoj za filter: ",             ; // 19
-      "Filtrirano: ",                  ; // 20
-      "Monosti filtra" ,              ; // 21
-      "Polja v datoteki" ,             ; // 22
-      "Operator za primerjavo",        ; // 23
-      "Vrednost filtra",               ; // 24
-      "Izberi polje za filter",        ; // 25
-      "Izberi operator za primerjavo", ; // 26
-      "Enako",                         ; // 27
-      "Neenako",                       ; // 28
-      "Veèje od",                      ; // 29
-      "Manjše od",                     ; // 30
-      "Veèje ali enako od",            ; // 31
-      "Manjše ali enako od"            } // 32
+         "Vrstica",                       ; // 2
+         "Skupaj",                        ; // 3
+         "Activni indeks",                ; // 4
+         "Monosti",                      ; // 5
+         "Nova vrstica",                  ; // 6
+         "Spreminjaj vrstico",            ; // 7
+         "Oznaèi vrstico",                ; // 8
+         "Najdi vrstico",                 ; // 9
+         "Monosti tiskanja",             ; // 10
+         "Polja na razpolago",            ; // 11
+         "Polja za tiskanje",             ; // 12
+         "Tiskalniki na razpolago",       ; // 13
+         "Prva vrstica za tiskanje",      ; // 14
+         "Zadnja vrstica za tiskanje",    ; // 15
+         "Briši vrstico",                 ; // 16
+         "Pregled",                       ; // 17
+         "Mini pregled strani",           ; // 18
+         "Pogoj za filter: ",             ; // 19
+         "Filtrirano: ",                  ; // 20
+         "Monosti filtra" ,              ; // 21
+         "Polja v datoteki" ,             ; // 22
+         "Operator za primerjavo",        ; // 23
+         "Vrednost filtra",               ; // 24
+         "Izberi polje za filter",        ; // 25
+         "Izberi operator za primerjavo", ; // 26
+         "Enako",                         ; // 27
+         "Neenako",                       ; // 28
+         "Veèje od",                      ; // 29
+         "Manjše od",                     ; // 30
+         "Veèje ali enako od",            ; // 31
+         "Manjše ali enako od"            } // 32
       _HMG_aLangUser := { ;
          CRLF + "Can't find an active area.   "  + CRLF + "Please select any area before call EDIT   " + CRLF,    ; // 1
-      "Vnesi vrednost (tekst)",                                                                                ; // 2
-      "Vnesi vrednost (številka)",                                                                             ; // 3
-      "Izberi datum",                                                                                          ; // 4
-      "Oznaèi za logièni DA",                                                                                  ; // 5
-      "Vnesi vrednost",                                                                                        ; // 6
-      "Izberi vrstico in pritisni <V redu>",                                                                   ; // 7
-      CRLF + "Pobrisali boste trenutno vrstico   " + CRLF + "Ste preprièani?    " + CRLF,                      ; // 8
-      CRLF + "Ni aktivnega indeksa   " + CRLF + "Prosimo, izberite ga   " + CRLF,                              ; // 9
-      CRLF + "Ne morem iskati po logiènih oz. memo poljih   " + CRLF,                                          ; // 10
-      CRLF + "Ne najdem vrstice   " + CRLF,                                                                    ; // 11
-      "Izberite polje, ki BO vkljuèeno na listo",                                                              ; // 12
-      "Izberite polje, ki NI vkljuèeno na listo",                                                              ; // 13
-      "Izberite tisklanik",                                                                                    ; // 14
-      "Pritisnite gumb za vkljuèitev polja",                                                                   ; // 15
-      "Pritisnite gumb za izkljuèitev polja",                                                                  ; // 16
-      "Pritisnite gumb za izbor prve vrstice za tiskanje",                                                     ; // 17
-      "Pritisnite gumb za izbor zadnje vrstice za tiskanje",                                                   ; // 18
-      CRLF + "Ni veè polj za dodajanje   " + CRLF,                                                             ; // 19
-      CRLF + "Najprej izberite ppolje za vkljuèitev   " + CRLF,                                                ; // 20
-      CRLF + "Ni veè polj za izkljuèitev   " + CRLF,                                                           ; // 21
-      CRLF + "Najprej izberite polje za izkljuèitev   " + CRLF,                                                ; // 22
-      CRLF + "Niste izbrali nobenega polja   " + CRLF + "Prosom, izberite polje za tiskalnje   " + CRLF,       ; // 23
-      CRLF + "Preveè polj   " + CRLF + "Zmanjšajte število polj   " + CRLF,                                    ; // 24
-      CRLF + "Tiskalnik ni pripravljen   " + CRLF,                                                             ; // 25
-      "Urejeno po",                                                                                            ; // 26
-      "Od vrstice",                                                                                            ; // 27
-      "do vrstice",                                                                                            ; // 28
-      "Ja",                                                                                                    ; // 29
-      "Ne",                                                                                                    ; // 30
-      "Stran:",                                                                                                ; // 31
-      CRLF + "Izberite tiskalnik   " + CRLF,                                                                   ; // 32
-      "Filtrirano z",                                                                                          ; // 33
-      CRLF + "Aktivni filter v uporabi    " + CRLF,                                                            ; // 34
-      CRLF + "Ne morem filtrirati z memo polji    " + CRLF,                                                    ; // 35
-      CRLF + "Izberi polje za filtriranje    " + CRLF,                                                         ; // 36
-      CRLF + "Izberi operator za filtriranje    " + CRLF,                                                      ; // 37
-      CRLF + "Vnesi vrednost za filtriranje    " + CRLF,                                                       ; // 38
-      CRLF + "Ni aktivnega filtra    " + CRLF,                                                                 ; // 39
-      CRLF + "Deaktiviram filter?   " + CRLF,                                                                  ; // 40
-      CRLF + "Vrstica zaklenjena - uporablja jo drug uporabnik    " + CRLF,                                    ; // 41
-      CRLF + "Obnovili boste pobrisano vrstico   " + CRLF + "Ste preprièani?    " + CRLF                       } // 42
+         "Vnesi vrednost (tekst)",                                                                                ; // 2
+         "Vnesi vrednost (številka)",                                                                             ; // 3
+         "Izberi datum",                                                                                          ; // 4
+         "Oznaèi za logièni DA",                                                                                  ; // 5
+         "Vnesi vrednost",                                                                                        ; // 6
+         "Izberi vrstico in pritisni <V redu>",                                                                   ; // 7
+         CRLF + "Pobrisali boste trenutno vrstico   " + CRLF + "Ste preprièani?    " + CRLF,                      ; // 8
+         CRLF + "Ni aktivnega indeksa   " + CRLF + "Prosimo, izberite ga   " + CRLF,                              ; // 9
+         CRLF + "Ne morem iskati po logiènih oz. memo poljih   " + CRLF,                                          ; // 10
+         CRLF + "Ne najdem vrstice   " + CRLF,                                                                    ; // 11
+         "Izberite polje, ki BO vkljuèeno na listo",                                                              ; // 12
+         "Izberite polje, ki NI vkljuèeno na listo",                                                              ; // 13
+         "Izberite tisklanik",                                                                                    ; // 14
+         "Pritisnite gumb za vkljuèitev polja",                                                                   ; // 15
+         "Pritisnite gumb za izkljuèitev polja",                                                                  ; // 16
+         "Pritisnite gumb za izbor prve vrstice za tiskanje",                                                     ; // 17
+         "Pritisnite gumb za izbor zadnje vrstice za tiskanje",                                                   ; // 18
+         CRLF + "Ni veè polj za dodajanje   " + CRLF,                                                             ; // 19
+         CRLF + "Najprej izberite ppolje za vkljuèitev   " + CRLF,                                                ; // 20
+         CRLF + "Ni veè polj za izkljuèitev   " + CRLF,                                                           ; // 21
+         CRLF + "Najprej izberite polje za izkljuèitev   " + CRLF,                                                ; // 22
+         CRLF + "Niste izbrali nobenega polja   " + CRLF + "Prosom, izberite polje za tiskalnje   " + CRLF,       ; // 23
+         CRLF + "Preveè polj   " + CRLF + "Zmanjšajte število polj   " + CRLF,                                    ; // 24
+         CRLF + "Tiskalnik ni pripravljen   " + CRLF,                                                             ; // 25
+         "Urejeno po",                                                                                            ; // 26
+         "Od vrstice",                                                                                            ; // 27
+         "do vrstice",                                                                                            ; // 28
+         "Ja",                                                                                                    ; // 29
+         "Ne",                                                                                                    ; // 30
+         "Stran:",                                                                                                ; // 31
+         CRLF + "Izberite tiskalnik   " + CRLF,                                                                   ; // 32
+         "Filtrirano z",                                                                                          ; // 33
+         CRLF + "Aktivni filter v uporabi    " + CRLF,                                                            ; // 34
+         CRLF + "Ne morem filtrirati z memo polji    " + CRLF,                                                    ; // 35
+         CRLF + "Izberi polje za filtriranje    " + CRLF,                                                         ; // 36
+         CRLF + "Izberi operator za filtriranje    " + CRLF,                                                      ; // 37
+         CRLF + "Vnesi vrednost za filtriranje    " + CRLF,                                                       ; // 38
+         CRLF + "Ni aktivnega filtra    " + CRLF,                                                                 ; // 39
+         CRLF + "Deaktiviram filter?   " + CRLF,                                                                  ; // 40
+         CRLF + "Vrstica zaklenjena - uporablja jo drug uporabnik    " + CRLF,                                    ; // 41
+         CRLF + "Obnovili boste pobrisano vrstico   " + CRLF + "Ste preprièani?    " + CRLF                       } // 42
 
    CASE cLang == "SK"  // Slovak
       // SLOVAK
@@ -3415,93 +3415,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Zatvor",           ; // 1
-      "&Novı",             ; // 2
-      "Ú&prava",           ; // 3
-      "Zr&uš",             ; // 4
-      "Ná&jdi",            ; // 5
-      "&Tlaè",             ; // 6
-      "&Storno",           ; // 7
-      "&Ok",               ; // 8
-      "&Kopíruj",          ; // 9
-      "Zapni &filter",     ; // 10
-      "&Vypni filter",     ; // 11
-      "O&bnov"       }       // 12
+         "&Novı",             ; // 2
+         "Ú&prava",           ; // 3
+         "Zr&uš",             ; // 4
+         "Ná&jdi",            ; // 5
+         "&Tlaè",             ; // 6
+         "&Storno",           ; // 7
+         "&Ok",               ; // 8
+         "&Kopíruj",          ; // 9
+         "Zapni &filter",     ; // 10
+         "&Vypni filter",     ; // 11
+         "O&bnov"       }       // 12
       _HMG_aLangLabel := {                     ;
          "iadna",                         ; // 1
-      "Veta",                           ; // 2
-      "Suma",                           ; // 3
-      "Aktívne zoradenie",              ; // 4
-      "Monosti",                       ; // 5
-      "Novı záznam",                    ; // 6
-      "Uprav záznam",                   ; // 7
-      "Vyber záznam",                   ; // 8
-      "Nájdi záznam",                   ; // 9
-      "Tlaè volby",                     ; // 10
-      "Dostupné ståpce",                ; // 11
-      "Ståpce pre tlaè",                ; // 12
-      "Dostupné tlaèiarne",             ; // 13
-      "Prvı záznam pre tlaè",           ; // 14
-      "Poslednı záznam pre tlaè",       ; // 15
-      "Vyma záznam",                   ; // 16
-      "Náh¾ad",                         ; // 17
-      "Zobraz miniatúry strán",         ; // 18
-      "Podmienky filtra: ",             ; // 19
-      "Filtrované: ",                   ; // 20
-      "Monosti filtra",                ; // 21
-      "Ståpce dátabázy",                ; // 22
-      "Operátor porovnanie",            ; // 23
-      "Hodnota filtra",                 ; // 24
-      "Vıber pola do filtra",           ; // 25
-      "Vıber operátora porovnania",     ; // 26
-      "rovná sa",                       ; // 27
-      "nerovná sa",                     ; // 28
-      "väèší ako",                      ; // 29
-      "menší ako",                      ; // 30
-      "väèší alebo rovnı ako",          ; // 31
-      "menší alebo rovnı ako"          }  // 32
+         "Veta",                           ; // 2
+         "Suma",                           ; // 3
+         "Aktívne zoradenie",              ; // 4
+         "Monosti",                       ; // 5
+         "Novı záznam",                    ; // 6
+         "Uprav záznam",                   ; // 7
+         "Vyber záznam",                   ; // 8
+         "Nájdi záznam",                   ; // 9
+         "Tlaè volby",                     ; // 10
+         "Dostupné ståpce",                ; // 11
+         "Ståpce pre tlaè",                ; // 12
+         "Dostupné tlaèiarne",             ; // 13
+         "Prvı záznam pre tlaè",           ; // 14
+         "Poslednı záznam pre tlaè",       ; // 15
+         "Vyma záznam",                   ; // 16
+         "Náh¾ad",                         ; // 17
+         "Zobraz miniatúry strán",         ; // 18
+         "Podmienky filtra: ",             ; // 19
+         "Filtrované: ",                   ; // 20
+         "Monosti filtra",                ; // 21
+         "Ståpce dátabázy",                ; // 22
+         "Operátor porovnanie",            ; // 23
+         "Hodnota filtra",                 ; // 24
+         "Vıber pola do filtra",           ; // 25
+         "Vıber operátora porovnania",     ; // 26
+         "rovná sa",                       ; // 27
+         "nerovná sa",                     ; // 28
+         "väèší ako",                      ; // 29
+         "menší ako",                      ; // 30
+         "väèší alebo rovnı ako",          ; // 31
+         "menší alebo rovnı ako"          }  // 32
       _HMG_aLangUser := { ;
          CRLF + "Nenájdená aktívna oblas   "  + CRLF + "Vyberte prosím pred volaním EDIT hociktorú oblas   " + CRLF,     ; // 1
-      "Zadajte hodnotu ståpca (¾ubovolnı text)",                                                          ; // 2
-      "Zadajte hodnotu ståpca (¾ubovolné èíslo)",                                                         ; // 3
-      "Vyberte dátum",                                                                                    ; // 4
-      "Zaškrtnite pre hodnotu 'true'",                                                                    ; // 5
-      "Zadajte hodnotu ståpca",                                                                           ; // 6
-      "Vyberte niektorú vetu a stlaète OK",                                                               ; // 7
-      CRLF + "Chcete zruši tento záznam   " + CRLF + "Ste si istı(á)?    " + CRLF,                       ; // 8
-      CRLF + "iadné zoradenie nie je aktívné   " + CRLF + "Prosím vyberte jedno   " + CRLF,              ; // 9
-      CRLF + "Nemôem h¾ada pod¾a ståpca typu memo alebo logical " + CRLF,                               ; // 10
-      CRLF + "Nenájdenı záznam   " + CRLF,                                                                ; // 11
-      "Vyberte ståpec k vloeniu do zoznamu",                                                             ; // 12
-      "Vyberte ståpec k odstráneniu zo zoznamu",                                                          ; // 13
-      "Vyberte tlaèiareò",                                                                                ; // 14
-      "Stlaète tlaèidlo zaloenia ståpca",                                                                ; // 15
-      "Stlaète tlaèidlo odstránenia ståpca",                                                              ; // 16
-      "Stlaète tlaèidlo - Prvı záznam pre tlaè",                                                          ; // 17
-      "Stlaète tlaèidlo - Poslednı záznam ptre tlaè",                                                     ; // 18
-      CRLF + "Nie je dostupnı ståpec k zaloeniu   " + CRLF,                                              ; // 19
-      CRLF + "Najprv vyberte ståpec k zaloeniu   " + CRLF,                                               ; // 20
-      CRLF + "Ïalší ståpec nemôete odstráni   " + CRLF,                                                 ; // 21
-      CRLF + "Najprv vyberte n. ståpec k odstráneniu   " + CRLF,                                          ; // 22
-      CRLF + "Nevybrali ste ani jeden stlpec   " + CRLF + "Prosím vyberte ståpce pre tlaè   " + CRLF,     ; // 23
-      CRLF + "Príliš ve¾a ståpcov   " + CRLF + "odstráòte niekteré ståpce   " + CRLF,                     ; // 24
-      CRLF + "Tlaèiareò nie je pripravená   " + CRLF,                                                     ; // 25
-      "Zoradené pod¾a",                                                                                   ; // 26
-      "Od záznamu",                                                                                       ; // 27
-      "Po záznam",                                                                                        ; // 28
-      "Áno",                                                                                              ; // 29
-      "Nie",                                                                                              ; // 30
-      "Strana:",                                                                                          ; // 31
-      CRLF + "Vyberte si tlaèiareò   " + CRLF,                                                            ; // 32
-      "Filtrované pod¾a",                                                                                 ; // 33
-      CRLF + "Aktivnı filter    " + CRLF,                                                                 ; // 34
-      CRLF + "Nemôete filtrova pod¾a ståpca typu memo    " + CRLF,                                      ; // 35
-      CRLF + "Vyberte ståpec do filtra    " + CRLF,                                                       ; // 36
-      CRLF + "Vyberte operátor do filtra    " + CRLF,                                                     ; // 37
-      CRLF + "Zadajte hodnotu do filtra    " + CRLF,                                                      ; // 38
-      CRLF + "iadny aktívny filter    " + CRLF,                                                          ; // 39
-      CRLF + "Deaktivova filter?   " + CRLF,                                                             ; // 40
-      CRLF + "Záznam blokovanı inım uívate¾om  " + CRLF,                                                 ; // 41
-      CRLF + "Chcete obnovi vymazané záznamy   " + CRLF + "Ste si istı(á)?    " + CRLF                   } // 42
+         "Zadajte hodnotu ståpca (¾ubovolnı text)",                                                          ; // 2
+         "Zadajte hodnotu ståpca (¾ubovolné èíslo)",                                                         ; // 3
+         "Vyberte dátum",                                                                                    ; // 4
+         "Zaškrtnite pre hodnotu 'true'",                                                                    ; // 5
+         "Zadajte hodnotu ståpca",                                                                           ; // 6
+         "Vyberte niektorú vetu a stlaète OK",                                                               ; // 7
+         CRLF + "Chcete zruši tento záznam   " + CRLF + "Ste si istı(á)?    " + CRLF,                       ; // 8
+         CRLF + "iadné zoradenie nie je aktívné   " + CRLF + "Prosím vyberte jedno   " + CRLF,              ; // 9
+         CRLF + "Nemôem h¾ada pod¾a ståpca typu memo alebo logical " + CRLF,                               ; // 10
+         CRLF + "Nenájdenı záznam   " + CRLF,                                                                ; // 11
+         "Vyberte ståpec k vloeniu do zoznamu",                                                             ; // 12
+         "Vyberte ståpec k odstráneniu zo zoznamu",                                                          ; // 13
+         "Vyberte tlaèiareò",                                                                                ; // 14
+         "Stlaète tlaèidlo zaloenia ståpca",                                                                ; // 15
+         "Stlaète tlaèidlo odstránenia ståpca",                                                              ; // 16
+         "Stlaète tlaèidlo - Prvı záznam pre tlaè",                                                          ; // 17
+         "Stlaète tlaèidlo - Poslednı záznam ptre tlaè",                                                     ; // 18
+         CRLF + "Nie je dostupnı ståpec k zaloeniu   " + CRLF,                                              ; // 19
+         CRLF + "Najprv vyberte ståpec k zaloeniu   " + CRLF,                                               ; // 20
+         CRLF + "Ïalší ståpec nemôete odstráni   " + CRLF,                                                 ; // 21
+         CRLF + "Najprv vyberte n. ståpec k odstráneniu   " + CRLF,                                          ; // 22
+         CRLF + "Nevybrali ste ani jeden stlpec   " + CRLF + "Prosím vyberte ståpce pre tlaè   " + CRLF,     ; // 23
+         CRLF + "Príliš ve¾a ståpcov   " + CRLF + "odstráòte niekteré ståpce   " + CRLF,                     ; // 24
+         CRLF + "Tlaèiareò nie je pripravená   " + CRLF,                                                     ; // 25
+         "Zoradené pod¾a",                                                                                   ; // 26
+         "Od záznamu",                                                                                       ; // 27
+         "Po záznam",                                                                                        ; // 28
+         "Áno",                                                                                              ; // 29
+         "Nie",                                                                                              ; // 30
+         "Strana:",                                                                                          ; // 31
+         CRLF + "Vyberte si tlaèiareò   " + CRLF,                                                            ; // 32
+         "Filtrované pod¾a",                                                                                 ; // 33
+         CRLF + "Aktivnı filter    " + CRLF,                                                                 ; // 34
+         CRLF + "Nemôete filtrova pod¾a ståpca typu memo    " + CRLF,                                      ; // 35
+         CRLF + "Vyberte ståpec do filtra    " + CRLF,                                                       ; // 36
+         CRLF + "Vyberte operátor do filtra    " + CRLF,                                                     ; // 37
+         CRLF + "Zadajte hodnotu do filtra    " + CRLF,                                                      ; // 38
+         CRLF + "iadny aktívny filter    " + CRLF,                                                          ; // 39
+         CRLF + "Deaktivova filter?   " + CRLF,                                                             ; // 40
+         CRLF + "Záznam blokovanı inım uívate¾om  " + CRLF,                                                 ; // 41
+         CRLF + "Chcete obnovi vymazané záznamy   " + CRLF + "Ste si istı(á)?    " + CRLF                   } // 42
 
    CASE cLang == "HU"  // Hungarian
       // HUNGARIAN
@@ -3597,93 +3597,93 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := { ;
          "&Zárd be",               ; // 1
-      "Ú&j",                    ; // 2
-      "Mó&dosítás",             ; // 3
-      "&Töröld",                ; // 4
-      "&Keresd",                ; // 5
-      "&Nyomtatás",             ; // 6
-      "&Mégse",                 ; // 7
-      "&Ok",                    ; // 8
-      "Máso&l",                 ; // 9
-      "Szûrõ &bekapcsolása",    ; // 10
-      "Szûrõ ki&kapcsolása",    ; // 11
-      "&Visszahív"       }        // 12
+         "Ú&j",                    ; // 2
+         "Mó&dosítás",             ; // 3
+         "&Töröld",                ; // 4
+         "&Keresd",                ; // 5
+         "&Nyomtatás",             ; // 6
+         "&Mégse",                 ; // 7
+         "&Ok",                    ; // 8
+         "Máso&l",                 ; // 9
+         "Szûrõ &bekapcsolása",    ; // 10
+         "Szûrõ ki&kapcsolása",    ; // 11
+         "&Visszahív"       }        // 12
       _HMG_aLangLabel := {                            ;
          "nincs",                                 ; // 1
-      "rekord",                                ; // 2
-      "Összeg",                                ; // 3
-      "Aktív rendezés",                        ; // 4
-      "Opciók",                                ; // 5
-      "Új rekord",                             ; // 6
-      "Rekord módosítása",                     ; // 7
-      "Rekord kiválasztása",                   ; // 8
-      "Rekord keresése",                       ; // 9
-      "Nyomtatási opciók",                     ; // 10
-      "Használható mezõk",                     ; // 11
-      "Nyomtatható mezõk",                     ; // 12
-      "Elérhetõ nyomtatók",                    ; // 13
-      "Nyomtatás elsõ rekordja",               ; // 14
-      "Nyomtatás utolsó rekordja",             ; // 15
-      "Rekord törlése",                        ; // 16
-      "Elönézet",                              ; // 17
-      "Oldalak miniatúraként",                 ; // 18
-      "Szûrõ feltétele: ",                     ; // 19
-      "Szûrve: ",                              ; // 20
-      "Szûrõ opciói",                          ; // 21
-      "Adatbázis mezõi",                       ; // 22
-      "Összehasonlító operátor",               ; // 23
-      "Szûrõ értéke",                          ; // 24
-      "Mezõk kiválasztása a szûrõhöz",         ; // 25
-      "Összehasonlító operáctor kiválasztása",  ; // 26
-      "egyenlõ",                               ; // 27
-      "nem egyenlõ",                           ; // 28
-      "nagyobb mint",                          ; // 29
-      "kisebb mint",                           ; // 30
-      "nagyobb vagy egyenlõ mint",             ; // 31
-      "kisebb vagy egyenlõ mint"          }      // 32
+         "rekord",                                ; // 2
+         "Összeg",                                ; // 3
+         "Aktív rendezés",                        ; // 4
+         "Opciók",                                ; // 5
+         "Új rekord",                             ; // 6
+         "Rekord módosítása",                     ; // 7
+         "Rekord kiválasztása",                   ; // 8
+         "Rekord keresése",                       ; // 9
+         "Nyomtatási opciók",                     ; // 10
+         "Használható mezõk",                     ; // 11
+         "Nyomtatható mezõk",                     ; // 12
+         "Elérhetõ nyomtatók",                    ; // 13
+         "Nyomtatás elsõ rekordja",               ; // 14
+         "Nyomtatás utolsó rekordja",             ; // 15
+         "Rekord törlése",                        ; // 16
+         "Elönézet",                              ; // 17
+         "Oldalak miniatúraként",                 ; // 18
+         "Szûrõ feltétele: ",                     ; // 19
+         "Szûrve: ",                              ; // 20
+         "Szûrõ opciói",                          ; // 21
+         "Adatbázis mezõi",                       ; // 22
+         "Összehasonlító operátor",               ; // 23
+         "Szûrõ értéke",                          ; // 24
+         "Mezõk kiválasztása a szûrõhöz",         ; // 25
+         "Összehasonlító operáctor kiválasztása",  ; // 26
+         "egyenlõ",                               ; // 27
+         "nem egyenlõ",                           ; // 28
+         "nagyobb mint",                          ; // 29
+         "kisebb mint",                           ; // 30
+         "nagyobb vagy egyenlõ mint",             ; // 31
+         "kisebb vagy egyenlõ mint"          }      // 32
       _HMG_aLangUser := { ;
          CRLF + "Nincs aktív munkaterület   "  + CRLF + "Kérem válasszon egy munkaterületet a SZERKESZTÉS hívása elõtt   " + CRLF,     ; // 1
-      "Adja meg a mezõ értékét (szöveget)",                                                                 ; // 2
-      "Adja meg a mezõ értékét (számot)",                                                                   ; // 3
-      "Válasszon dátumot",                                                                                  ; // 4
-      "Pipázza az igaz értéket",                                                                            ; // 5
-      "Adja meg a mezõ értékét",                                                                            ; // 6
-      "Válasszon egy rekordot és nyomjon OK",                                                               ; // 7
-      CRLF + "Aktív rekordot kívánja törölni   " + CRLF + "Biztos benne?    " + CRLF,                       ; // 8
-      CRLF + "Nincs aktív sorba rendezés   " + CRLF + "Kérem válasszon egyet   " + CRLF,                    ; // 9
-      CRLF + "Nem kereshetek memo vagy logikai mezõ után   " + CRLF,                                        ; // 10
-      CRLF + "Nincs rekord   " + CRLF,                                                                      ; // 11
-      "Válasszon a listához hozzáadandó mezõt",                                                             ; // 12
-      "Válasszon a listából kiveendõ mezõt",                                                                ; // 13
-      "Válasszon nyomtatót",                                                                                ; // 14
-      "Mezõ hozzáadás gombot nyomja meg",                                                                   ; // 15
-      "Mezõ tõrlése gombot nyomja meg",                                                                     ; // 16
-      "A nyomtatás elsõ rekordja gombot nyomja meg",                                                        ; // 17
-      "A nyomtatás utolsó rekordja gombot nyomja meg",                                                      ; // 18
-      CRLF + "Nincs több hozzáadható mezõ   " + CRLF,                                                       ; // 19
-      CRLF + "Elõször hozzáadandó mezõt válasszon   " + CRLF,                                               ; // 20
-      CRLF + "Nincs több kivehetõ mezõ   " + CRLF,                                                          ; // 21
-      CRLF + "Elõször az n. kiveendõ mezõt válassza ki   " + CRLF,                                          ; // 22
-      CRLF + "Egy mezõt sem választott ki   " + CRLF + "Kérem válassza ki a nyomtatandó mezõket   " + CRLF, ; // 23
-      CRLF + "Túl sok mezõ   " + CRLF + "Redukálja a mezõk számát   " + CRLF,                               ; // 24
-      CRLF + "A nyomtató nem kész   " + CRLF,                                                               ; // 25
-      "Rendezve",                                                                                           ; // 26
-      "Rekordtól",                                                                                          ; // 27
-      "Rekordig",                                                                                           ; // 28
-      "Igen",                                                                                               ; // 29
-      "Nem",                                                                                                ; // 30
-      "Oldal:",                                                                                             ; // 31
-      CRLF + "Kérem válasszon nyomtatót   " + CRLF,                                                         ; // 32
-      "Szûrve",                                                                                             ; // 33
-      CRLF + "Ez az aktív szürõ   " + CRLF,                                                                 ; // 34
-      CRLF + "Nem szürõhetõ memo mezõ alapján   " + CRLF,                                                   ; // 35
-      CRLF + "Válasszon mezõt a szürõhöz   " + CRLF,                                                        ; // 36
-      CRLF + "Válasszon operátort a szürõhöz   " + CRLF,                                                    ; // 37
-      CRLF + "Adjon értéket  a szürõhöz   " + CRLF,                                                         ; // 38
-      CRLF + "Nincs egy aktív szürõ   " + CRLF,                                                             ; // 39
-      CRLF + "A szürõ deaktiválása?   " + CRLF,                                                             ; // 40
-      CRLF + "A rekord blokkolva másik felhasználó által   " + CRLF,                                        ; // 41
-      CRLF + "Törölt rekordokat kíván visszahívni   " + CRLF + "Biztos benne ?    " + CRLF                  } // 42
+         "Adja meg a mezõ értékét (szöveget)",                                                                 ; // 2
+         "Adja meg a mezõ értékét (számot)",                                                                   ; // 3
+         "Válasszon dátumot",                                                                                  ; // 4
+         "Pipázza az igaz értéket",                                                                            ; // 5
+         "Adja meg a mezõ értékét",                                                                            ; // 6
+         "Válasszon egy rekordot és nyomjon OK",                                                               ; // 7
+         CRLF + "Aktív rekordot kívánja törölni   " + CRLF + "Biztos benne?    " + CRLF,                       ; // 8
+         CRLF + "Nincs aktív sorba rendezés   " + CRLF + "Kérem válasszon egyet   " + CRLF,                    ; // 9
+         CRLF + "Nem kereshetek memo vagy logikai mezõ után   " + CRLF,                                        ; // 10
+         CRLF + "Nincs rekord   " + CRLF,                                                                      ; // 11
+         "Válasszon a listához hozzáadandó mezõt",                                                             ; // 12
+         "Válasszon a listából kiveendõ mezõt",                                                                ; // 13
+         "Válasszon nyomtatót",                                                                                ; // 14
+         "Mezõ hozzáadás gombot nyomja meg",                                                                   ; // 15
+         "Mezõ tõrlése gombot nyomja meg",                                                                     ; // 16
+         "A nyomtatás elsõ rekordja gombot nyomja meg",                                                        ; // 17
+         "A nyomtatás utolsó rekordja gombot nyomja meg",                                                      ; // 18
+         CRLF + "Nincs több hozzáadható mezõ   " + CRLF,                                                       ; // 19
+         CRLF + "Elõször hozzáadandó mezõt válasszon   " + CRLF,                                               ; // 20
+         CRLF + "Nincs több kivehetõ mezõ   " + CRLF,                                                          ; // 21
+         CRLF + "Elõször az n. kiveendõ mezõt válassza ki   " + CRLF,                                          ; // 22
+         CRLF + "Egy mezõt sem választott ki   " + CRLF + "Kérem válassza ki a nyomtatandó mezõket   " + CRLF, ; // 23
+         CRLF + "Túl sok mezõ   " + CRLF + "Redukálja a mezõk számát   " + CRLF,                               ; // 24
+         CRLF + "A nyomtató nem kész   " + CRLF,                                                               ; // 25
+         "Rendezve",                                                                                           ; // 26
+         "Rekordtól",                                                                                          ; // 27
+         "Rekordig",                                                                                           ; // 28
+         "Igen",                                                                                               ; // 29
+         "Nem",                                                                                                ; // 30
+         "Oldal:",                                                                                             ; // 31
+         CRLF + "Kérem válasszon nyomtatót   " + CRLF,                                                         ; // 32
+         "Szûrve",                                                                                             ; // 33
+         CRLF + "Ez az aktív szürõ   " + CRLF,                                                                 ; // 34
+         CRLF + "Nem szürõhetõ memo mezõ alapján   " + CRLF,                                                   ; // 35
+         CRLF + "Válasszon mezõt a szürõhöz   " + CRLF,                                                        ; // 36
+         CRLF + "Válasszon operátort a szürõhöz   " + CRLF,                                                    ; // 37
+         CRLF + "Adjon értéket  a szürõhöz   " + CRLF,                                                         ; // 38
+         CRLF + "Nincs egy aktív szürõ   " + CRLF,                                                             ; // 39
+         CRLF + "A szürõ deaktiválása?   " + CRLF,                                                             ; // 40
+         CRLF + "A rekord blokkolva másik felhasználó által   " + CRLF,                                        ; // 41
+         CRLF + "Törölt rekordokat kíván visszahívni   " + CRLF + "Biztos benne ?    " + CRLF                  } // 42
 
    CASE cLang == "EL"  // Greek - Ellinika
       // GREEK - ÅËËÇÍÉÊÁ - EL
@@ -3780,94 +3780,94 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {   ;
          "&Êëåßóéìï",       ; // 1
-      "&Íİï",            ; // 2
-      "&Äéüñèùóç",       ; // 3
-      "&ÄéáãñáöŞ",       ; // 4
-      "&Åıñåóç",         ; // 5
-      "&Åêôığùóç",       ; // 6
-      "&Áêõñï",          ; // 7
-      "&Ok",             ; // 8
-      "&ÁíôéãñáöŞ",      ; // 9
-      "&Ößëôñï",         ; // 10
-      "&×ùñßò ößëôñï",   ; // 11
-      "&Restore"         } // 12
+         "&Íİï",            ; // 2
+         "&Äéüñèùóç",       ; // 3
+         "&ÄéáãñáöŞ",       ; // 4
+         "&Åıñåóç",         ; // 5
+         "&Åêôığùóç",       ; // 6
+         "&Áêõñï",          ; // 7
+         "&Ok",             ; // 8
+         "&ÁíôéãñáöŞ",      ; // 9
+         "&Ößëôñï",         ; // 10
+         "&×ùñßò ößëôñï",   ; // 11
+         "&Restore"         } // 12
       _HMG_aLangLabel := {                   ;
          "Êáíİíá",                       ; // 1
-      "ÅããñáöŞ",                      ; // 2
-      "Óıíïëï",                       ; // 3
-      "ÅíåñãŞ Ôáîéíüìçóç",            ; // 4
-      "Åğéëïãİò",                     ; // 5
-      "Íİá åããñáöŞ",                  ; // 6
-      "Äéüñè. åããñáöŞò",              ; // 7
-      "ÅğéëïãŞ åããñáöŞò",             ; // 8
-      "Åıñåóç",                       ; // 9
-      "ĞñïôéìŞóåéò åêôığùóçò",        ; // 10
-      "Äéáèİóéìá ğåäßá",              ; // 11
-      "Ğåäßá ãéÜ åêôığùóç",           ; // 12
-      "Äéáèİóéìïé åêôõğùôİò",         ; // 13
-      "Ğñşôç åããñáöŞ åêôõğ.",         ; // 14
-      "Ôåëåõôáßá åããñáöŞ åêôõğ.",     ; // 15
-      "ÄéáãñáöŞ åããñáöŞò",            ; // 16
-      "Ğñïåğéóêüğçóç",                ; // 17
-      "Ìéêñïãñáößåò óåëßäùí",         ; // 18
-      "Ïñïé Ößëôñïõ: ",               ; // 19
-      "Öéëôñáñéóìİíá: ",              ; // 20
-      "Åğéëïãİò ößëôñïõ" ,            ; // 21
-      "Ğåäßá âÜóçò äåäïìİíùí" ,       ; // 22
-      "ÔåëåóôŞò óıãêñéóçò",           ; // 23
-      "ÔéìŞ ößëôñïõ",                 ; // 24
-      "ÅğéëïãŞ ğåäßïõ ãéá ößëôñï",    ; // 25
-      "ÅğéëïãŞ ÔåëåóôŞ óıãêñéóçò",    ; // 26
-      "Éóïí",                         ; // 27
-      "Ï÷é Éóïí",                     ; // 28
-      "Ìåãáëßôåñï áğü",               ; // 29
-      "Ìéêñüôåñï áğü",                ; // 30
-      "Ìåãáëßôåñï Ş éóïí ìå",         ; // 31
-      "Ìéêñüôåñï Ş éóïí ìå"           } // 32
+         "ÅããñáöŞ",                      ; // 2
+         "Óıíïëï",                       ; // 3
+         "ÅíåñãŞ Ôáîéíüìçóç",            ; // 4
+         "Åğéëïãİò",                     ; // 5
+         "Íİá åããñáöŞ",                  ; // 6
+         "Äéüñè. åããñáöŞò",              ; // 7
+         "ÅğéëïãŞ åããñáöŞò",             ; // 8
+         "Åıñåóç",                       ; // 9
+         "ĞñïôéìŞóåéò åêôığùóçò",        ; // 10
+         "Äéáèİóéìá ğåäßá",              ; // 11
+         "Ğåäßá ãéÜ åêôığùóç",           ; // 12
+         "Äéáèİóéìïé åêôõğùôİò",         ; // 13
+         "Ğñşôç åããñáöŞ åêôõğ.",         ; // 14
+         "Ôåëåõôáßá åããñáöŞ åêôõğ.",     ; // 15
+         "ÄéáãñáöŞ åããñáöŞò",            ; // 16
+         "Ğñïåğéóêüğçóç",                ; // 17
+         "Ìéêñïãñáößåò óåëßäùí",         ; // 18
+         "Ïñïé Ößëôñïõ: ",               ; // 19
+         "Öéëôñáñéóìİíá: ",              ; // 20
+         "Åğéëïãİò ößëôñïõ" ,            ; // 21
+         "Ğåäßá âÜóçò äåäïìİíùí" ,       ; // 22
+         "ÔåëåóôŞò óıãêñéóçò",           ; // 23
+         "ÔéìŞ ößëôñïõ",                 ; // 24
+         "ÅğéëïãŞ ğåäßïõ ãéá ößëôñï",    ; // 25
+         "ÅğéëïãŞ ÔåëåóôŞ óıãêñéóçò",    ; // 26
+         "Éóïí",                         ; // 27
+         "Ï÷é Éóïí",                     ; // 28
+         "Ìåãáëßôåñï áğü",               ; // 29
+         "Ìéêñüôåñï áğü",                ; // 30
+         "Ìåãáëßôåñï Ş éóïí ìå",         ; // 31
+         "Ìéêñüôåñï Ş éóïí ìå"           } // 32
       _HMG_aLangUser := { ;
          CRLF + "Äåí õğÜñ÷åé åíåñãŞ ğåñéï÷Ş åñãáóßáò. "  + CRLF + ;
          "Åğéëİîôå ìéÜ ğåñéï÷Ş ğñßí áğü ôçí êëŞóç ôçò EDIT   " + CRLF,                                          ; // 1
-      "Äşóôå ìßá ôéìŞ ğåäßïõ (êåßìåíï)",                                                                         ; // 2
-      "Äşóôå ìßá ôéìŞ ğåäßïõ (áñéèìüò)",                                                                         ; // 3
-      "Åğéëİîôå çìåñ/íßá",                                                                                       ; // 4
-      "ÔóåêÜñåôå áí áëçèåıåé",                                                                                   ; // 5
-      "Äşóôå ôéìŞ ôïõ ğåäßïõ",                                                                                   ; // 6
-      "Åğéëİîôå ìßá åããñáöŞ & ğéİóôå OK",                                                                        ; // 7
-      CRLF + "Ç ôñİ÷ïõóá åããñáöŞ èá äéáãñáöåß   " + CRLF + "Åßóôå âİâáéïé?    " + CRLF,              ; // 8
-      CRLF + "Êáíİíá åíåñãü åõñåôŞñéï  " + CRLF + "Ğáñáêáëş åğéëİîáôå İíá   " + CRLF,                ; // 9
-      CRLF + "Äåí ãßíåôáé áíáæŞôçóç óå memo Ş logic ğåäßï " + CRLF,                                      ; // 10
-      CRLF + "Ç åããñáöŞ äåí âñİèçêå  " + CRLF,                                                           ; // 11
-      "Óõìğåñßëçøç ôïõ ğåäßïõ óôç ëßóôá",                                                                        ; // 12
-      "Åîáßñåóç ôïõ ğåäßïõ áğü ôçí ëßóôá",                                                                       ; // 13
-      "Åğéëİîôå åêôõğùôŞ",                                                                                       ; // 14
-      "Ğéİóôå ôï êïõìğß ãéÜ óõìğåñßëçøç ôïõ ğåäßïõ",                                                             ; // 15
-      "Ğéİóôå ôï êïõìğß ãéÜ åîáßñåóç ôïõ ğåäßïõ",                                                                ; // 16
-      "Ğéİóôå ôï êïõìğß ãéÜ åğéëïãŞ  åããñáöçò ãéá åêôõğùóç",                                                     ; // 17
-      "Push button to select the last record to print",                                                          ; // 18
-      CRLF + "Äåí õğÜñ÷ïõí Üëëá ğåäßá " + CRLF,                                                          ; // 19
-      CRLF + "Ğñşôá åğéëİîôå ğåäßï " + CRLF,                                                             ; // 20
-      CRLF + "Äåí õğÜñ÷ïõí Üëëá ğåäßá " + CRLF,                                                          ; // 21
-      CRLF + "Ğñşôá åğéëİîôå ğåäßï " + CRLF,                                                             ; // 22
-      CRLF + "Äåí İ÷ïõí åğéëåãåß ğåäßá " + CRLF + "Ğáñáêáëş åğéëİîôå ğåäßá ğñïò åêôığùóç   " + CRLF, ; // 23
-      CRLF + "ĞÜñá ğïëëÜ ğåäßá " + CRLF + "Ìåéşóôå ôïí áñéèìü ğåäßùí " + CRLF,                       ; // 24
-      CRLF + "Ï åêôõğùôŞò äåí åßíáé İôïéìïò " + CRLF,                                                    ; // 25
-      "Ôáîéíüìçóç áíÜ ",                                                                                         ; // 26
-      "Áğü åããñáöŞ",                                                                                             ; // 27
-      "Åùò åããñáöŞ",                                                                                             ; // 28
-      "Íáé",                                                                                                     ; // 29
-      "Ï÷é",                                                                                                     ; // 30
-      "Óåë.:",                                                                                                   ; // 31
-      CRLF + "Ğáñáêáëş åğéëİîôå åêôõğùôŞ " + CRLF,                                                       ; // 32
-      "Filtered by",                                                                                             ; // 33
-      CRLF + "ÕğÜñ÷åé åíåñãü ößëôñï " + CRLF,                                                            ; // 34
-      CRLF + "Áíİöéêôï ôï öéëôñÜñéóìá óå ğåäßï memo " + CRLF,                                            ; // 35
-      CRLF + "Åğéëİîôå ğåäßá ãéÜ ôï ößëôñï " + CRLF,                                                     ; // 36
-      CRLF + "Åğéëİîôå İíáí ôåëåóôŞ ãéÜ ôï ößëôñï " + CRLF,                                              ; // 37
-      CRLF + "Äşóôå ìßá ôéìŞ ãéá ôï ößëôñï " + CRLF,                                                     ; // 38
-      CRLF + "Äåí õğÜñ÷åé åíåñãü ößëôñï " + CRLF,                                                        ; // 39
-      CRLF + "ÊáôÜñãçóç ößëôñïõ;   " + CRLF,                                                             ; // 40
-      CRLF + "ÅããñáöŞ êëåéäùìİíç áğü Üëëï ÷ñŞóôç    " + CRLF,                                            ; // 41
-      CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF    } // 42
+         "Äşóôå ìßá ôéìŞ ğåäßïõ (êåßìåíï)",                                                                         ; // 2
+         "Äşóôå ìßá ôéìŞ ğåäßïõ (áñéèìüò)",                                                                         ; // 3
+         "Åğéëİîôå çìåñ/íßá",                                                                                       ; // 4
+         "ÔóåêÜñåôå áí áëçèåıåé",                                                                                   ; // 5
+         "Äşóôå ôéìŞ ôïõ ğåäßïõ",                                                                                   ; // 6
+         "Åğéëİîôå ìßá åããñáöŞ & ğéİóôå OK",                                                                        ; // 7
+         CRLF + "Ç ôñİ÷ïõóá åããñáöŞ èá äéáãñáöåß   " + CRLF + "Åßóôå âİâáéïé?    " + CRLF,              ; // 8
+         CRLF + "Êáíİíá åíåñãü åõñåôŞñéï  " + CRLF + "Ğáñáêáëş åğéëİîáôå İíá   " + CRLF,                ; // 9
+         CRLF + "Äåí ãßíåôáé áíáæŞôçóç óå memo Ş logic ğåäßï " + CRLF,                                      ; // 10
+         CRLF + "Ç åããñáöŞ äåí âñİèçêå  " + CRLF,                                                           ; // 11
+         "Óõìğåñßëçøç ôïõ ğåäßïõ óôç ëßóôá",                                                                        ; // 12
+         "Åîáßñåóç ôïõ ğåäßïõ áğü ôçí ëßóôá",                                                                       ; // 13
+         "Åğéëİîôå åêôõğùôŞ",                                                                                       ; // 14
+         "Ğéİóôå ôï êïõìğß ãéÜ óõìğåñßëçøç ôïõ ğåäßïõ",                                                             ; // 15
+         "Ğéİóôå ôï êïõìğß ãéÜ åîáßñåóç ôïõ ğåäßïõ",                                                                ; // 16
+         "Ğéİóôå ôï êïõìğß ãéÜ åğéëïãŞ  åããñáöçò ãéá åêôõğùóç",                                                     ; // 17
+         "Push button to select the last record to print",                                                          ; // 18
+         CRLF + "Äåí õğÜñ÷ïõí Üëëá ğåäßá " + CRLF,                                                          ; // 19
+         CRLF + "Ğñşôá åğéëİîôå ğåäßï " + CRLF,                                                             ; // 20
+         CRLF + "Äåí õğÜñ÷ïõí Üëëá ğåäßá " + CRLF,                                                          ; // 21
+         CRLF + "Ğñşôá åğéëİîôå ğåäßï " + CRLF,                                                             ; // 22
+         CRLF + "Äåí İ÷ïõí åğéëåãåß ğåäßá " + CRLF + "Ğáñáêáëş åğéëİîôå ğåäßá ğñïò åêôığùóç   " + CRLF, ; // 23
+         CRLF + "ĞÜñá ğïëëÜ ğåäßá " + CRLF + "Ìåéşóôå ôïí áñéèìü ğåäßùí " + CRLF,                       ; // 24
+         CRLF + "Ï åêôõğùôŞò äåí åßíáé İôïéìïò " + CRLF,                                                    ; // 25
+         "Ôáîéíüìçóç áíÜ ",                                                                                         ; // 26
+         "Áğü åããñáöŞ",                                                                                             ; // 27
+         "Åùò åããñáöŞ",                                                                                             ; // 28
+         "Íáé",                                                                                                     ; // 29
+         "Ï÷é",                                                                                                     ; // 30
+         "Óåë.:",                                                                                                   ; // 31
+         CRLF + "Ğáñáêáëş åğéëİîôå åêôõğùôŞ " + CRLF,                                                       ; // 32
+         "Filtered by",                                                                                             ; // 33
+         CRLF + "ÕğÜñ÷åé åíåñãü ößëôñï " + CRLF,                                                            ; // 34
+         CRLF + "Áíİöéêôï ôï öéëôñÜñéóìá óå ğåäßï memo " + CRLF,                                            ; // 35
+         CRLF + "Åğéëİîôå ğåäßá ãéÜ ôï ößëôñï " + CRLF,                                                     ; // 36
+         CRLF + "Åğéëİîôå İíáí ôåëåóôŞ ãéÜ ôï ößëôñï " + CRLF,                                              ; // 37
+         CRLF + "Äşóôå ìßá ôéìŞ ãéá ôï ößëôñï " + CRLF,                                                     ; // 38
+         CRLF + "Äåí õğÜñ÷åé åíåñãü ößëôñï " + CRLF,                                                        ; // 39
+         CRLF + "ÊáôÜñãçóç ößëôñïõ;   " + CRLF,                                                             ; // 40
+         CRLF + "ÅããñáöŞ êëåéäùìİíç áğü Üëëï ÷ñŞóôç    " + CRLF,                                            ; // 41
+         CRLF + "You are going to restore the deleted record   " + CRLF + "Are you sure?    " + CRLF    } // 42
 
    CASE cLang == "BG"  // Bulgarian
       // BULGARIAN
@@ -3961,96 +3961,96 @@ PROCEDURE InitMessages
 
       _HMG_aLangButton := {            ;
          "&Èçõîä",             ; // 1
-      "&Íîâ",               ; // 2
-      "&Ğåäàêòèğàíå",       ; // 3
-      "&Èçòğèé",            ; // 4
-      "&Íàìåğè",            ; // 5
-      "Ï&å÷àò",             ; // 6
-      "Îò&ìÿíà",            ; // 7
-      "&Îê",                ; // 8
-      "&Êîïèå",             ; // 9
-      "&Âêë. ôèëòúğ",       ; // 10
-      "Ìà&õíè ôèëòúğ",      ; // 11
-      "&Âúçñòàíîâè"     }     // 12
+         "&Íîâ",               ; // 2
+         "&Ğåäàêòèğàíå",       ; // 3
+         "&Èçòğèé",            ; // 4
+         "&Íàìåğè",            ; // 5
+         "Ï&å÷àò",             ; // 6
+         "Îò&ìÿíà",            ; // 7
+         "&Îê",                ; // 8
+         "&Êîïèå",             ; // 9
+         "&Âêë. ôèëòúğ",       ; // 10
+         "Ìà&õíè ôèëòúğ",      ; // 11
+         "&Âúçñòàíîâè"     }     // 12
       _HMG_aLangLabel := {            ;
          "Íÿìà",                         ; // 1
-      "Çàïèñ",                        ; // 2
-      "Âñè÷êî",                       ; // 3
-      "Ïîäğåäáà",                     ; // 4
-      "Ïàğàìåòğè",                    ; // 5
-      "Íîâ çàïèñ",                    ; // 6
-      "Ïğîìåíè çàïèñ",                ; // 7
-      "Èçáåğè çàïèñ",                 ; // 8
-      "Íàìåğè çàïèñ",                 ; // 9
-      "Ïàğàìåòğè çà ïå÷àò",           ; // 10
-      "Äîñòúïíè ïîëåòà",              ; // 11
-      "Ïîëåòà çà ïå÷àò",              ; // 12
-      "Äîñòóïíè ïğèíòåğè",            ; // 13
-      "Çàïî÷íè ïå÷àò îò çàïèñ",       ; // 14
-      "Çàâúğøè ïå÷àòà ñúñ çàïèñ",     ; // 15
-      "Èçòğèé çàïèñ",                 ; // 16
-      "Ïğåãëåä",                      ; // 17
-      "Ñòğàíèöà ñ ìèíèàòşğè",         ; // 18
-      "Óñëîâèå íà ôèëòúğà: ",         ; // 19
-      "Ôèëòúğ: ",                     ; // 20
-      "Ïàğàìåòğè íà ôèëòúğà" ,        ; // 21
-      "Ïîëåòà íà áàçàòà" ,            ; // 22
-      "Îïåğàòîğè çà ñğàâíåíèå",       ; // 23
-      "Çíà÷åíèå íà ôèëòúğà",          ; // 24
-      "Èçáîğ íà ïîëå çà ôèëòúğà",     ; // 25
-      "Èçáîğ íà îïåğàòîğ çà ñğàâíåíèå", ; // 26
-      "Ğàâíî",                        ; // 27
-      "Íå å ğàâíî",                   ; // 28
-      "Ïî-ãîëÿìî",                    ; // 29
-      "Ïî-ìàëêî",                     ; // 30
-      "Ïî-ãîëÿìî èëè ğàâíî",          ; // 31
-      "Ïî-ìàëêî èëè ğàâíî"         }    // 32
+         "Çàïèñ",                        ; // 2
+         "Âñè÷êî",                       ; // 3
+         "Ïîäğåäáà",                     ; // 4
+         "Ïàğàìåòğè",                    ; // 5
+         "Íîâ çàïèñ",                    ; // 6
+         "Ïğîìåíè çàïèñ",                ; // 7
+         "Èçáåğè çàïèñ",                 ; // 8
+         "Íàìåğè çàïèñ",                 ; // 9
+         "Ïàğàìåòğè çà ïå÷àò",           ; // 10
+         "Äîñòúïíè ïîëåòà",              ; // 11
+         "Ïîëåòà çà ïå÷àò",              ; // 12
+         "Äîñòóïíè ïğèíòåğè",            ; // 13
+         "Çàïî÷íè ïå÷àò îò çàïèñ",       ; // 14
+         "Çàâúğøè ïå÷àòà ñúñ çàïèñ",     ; // 15
+         "Èçòğèé çàïèñ",                 ; // 16
+         "Ïğåãëåä",                      ; // 17
+         "Ñòğàíèöà ñ ìèíèàòşğè",         ; // 18
+         "Óñëîâèå íà ôèëòúğà: ",         ; // 19
+         "Ôèëòúğ: ",                     ; // 20
+         "Ïàğàìåòğè íà ôèëòúğà" ,        ; // 21
+         "Ïîëåòà íà áàçàòà" ,            ; // 22
+         "Îïåğàòîğè çà ñğàâíåíèå",       ; // 23
+         "Çíà÷åíèå íà ôèëòúğà",          ; // 24
+         "Èçáîğ íà ïîëå çà ôèëòúğà",     ; // 25
+         "Èçáîğ íà îïåğàòîğ çà ñğàâíåíèå", ; // 26
+         "Ğàâíî",                        ; // 27
+         "Íå å ğàâíî",                   ; // 28
+         "Ïî-ãîëÿìî",                    ; // 29
+         "Ïî-ìàëêî",                     ; // 30
+         "Ïî-ãîëÿìî èëè ğàâíî",          ; // 31
+         "Ïî-ìàëêî èëè ğàâíî"         }    // 32
       _HMG_aLangUser := { ;
          CRLF + "Íå å íàìåğåíà àêòèâíà îáëàñò."  + CRLF + "Èçáåğåòå îáëàñò ïåğåäè èçâèêâàíåòî íà EDIT" + CRLF, ; // 1
-      "Âúâåäåòå òåêñò",                                                                                     ; // 2
-      "Âúâåäåòå ÷èñëî",                                                                                     ; // 3
-      "Âúâåäåòå äàòà",                                                                                      ; // 4
-      "Ëîãè÷åñêà ñòîéíîñò",                                                                                 ; // 5
-      "Âúâåäåòå ñîéíîñòòà íà ïîëåòî",                                                                       ; // 6
-      "Èçáåğåòå çàïèñ è íàòèñíåòå OK",                                                                      ; // 7
-      CRLF + "Òåêóùèÿò çàïèñ ùå áúäå èçòğèò " + CRLF + "Äà ïğîäúëæà ëè ?    " + CRLF,                       ; // 8
-      CRLF + "Íÿìà ïîäğåäáà " + CRLF + "Èçáåğåòå åäíà îò ñúùåñòâóâàùèòå" + CRLF,                            ; // 9
-      CRLF + "Òúğñåíå â MEMO ïîëåòàòà è ëîãè÷åñêèòå ïîëåòà íå ñå èçïúëíÿâà" + CRLF,                         ; // 10
-      CRLF + "Çàïèñà íå å íàìåğåí  " + CRLF,                                                                ; // 11
-      "Ïîëåòà çà âêëş÷âàíå â ñïèñúêà çà ïå÷àò",                                                             ; // 12
-      "Ñïèñúê ñ ïîëåòà çà ïå÷àò",                                                                           ; // 13
-      "Èçáîğ íà ïğèíòåğ",                                                                                   ; // 14
-      "Íàòèñíåòå çà ïåğåíîñ íà ïîëåòî â ñïèñúêà çà ïå÷àò",                                                  ; // 15
-      "Íàòèñíåòå çà èñêëş÷âàíå íà ïîëåòî îò ñïèñúêà çà ïå÷àò",                                              ; // 16
-      "Çàïèñ, îò êîéòî çàïî÷âà ïå÷àòà",                                                                     ; // 17
-      "Çàïèñ, äî êîéòî çàâúğøâà ïå÷àòà",                                                                    ; // 18
-      CRLF + "Âêëş÷åíè ïîëåòà íÿìà " + CRLF,                                                                ; // 19
-      CRLF + "Ïúğâî ïîëå çà âêëş÷âàíå " + CRLF,                                                             ; // 20
-      CRLF + "Ïîëåòà çà èçêëş÷âàíå íÿìà " + CRLF,                                                           ; // 21
-      CRLF + "Ïúğâî ïîëå çà èñêëş÷âàíå " + CRLF,                                                            ; // 22
-      CRLF + "Íÿìà èçáğàíè ïîëåòà " + CRLF + "Ôîğìèğàéòå ñïèñúê çà ïå÷àò " + CRLF,                          ; // 23
-      CRLF + "Ïğåêàëåíî ìíîãî ïîëåòà " + CRLF + "Íàìàëåòå òÿõíîòî êîëè÷åñòâî " + CRLF,                      ; // 24
-      CRLF + "Ïğèíòåğà íå å ãîòîâ  " + CRLF,                                                                ; // 25
-      "Ïîäğåäáà ",                                                                                          ; // 26
-      "Îò çàïèñ ",                                                                                          ; // 27
-      "Äî çàïèñ ",                                                                                          ; // 28
-      "Äà",                                                                                                 ; // 29
-      "Íå",                                                                                                 ; // 30
-      "Ñòğàíèöà:",                                                                                          ; // 31
-      CRLF + "Èçáåğåòå ïğèíòåğ  " + CRLF,                                                                   ; // 32
-      "Ôèëòğèğàíî ïî",                                                                                      ; // 33
-      CRLF + "Òîâà íå å àêòèâíåí ôèëòúğ    " + CRLF,                                                        ; // 34
-      CRLF + "MEMO Ïîëåòàòà íå ñå ôèëòğèğàò  " + CRLF,                                                      ; // 35
-      CRLF + "Èçáåğåòå ïîëåòà çà ôèëòúğà    " + CRLF,                                                       ; // 36
-      CRLF + "Èçáåğåòå îïåğàòîğ çà ôèëòúğà" + CRLF,                                                         ; // 37
-      CRLF + "Íàáåğåòå ñòîéíîñò çà ôèëòúğà" + CRLF,                                                         ; // 38
-      CRLF + "Íÿìà àêòèâíè ôèëòğè   " + CRLF,                                                               ; // 39
-      CRLF + "Ìàõíè ôèëòúğà ?   " + CRLF,                                                                   ; // 40
-      CRLF + "Çàïèñà å áëîêèğàí îò äğóã ïîòğåáèòåë " + CRLF,                                                ; // 41
-      CRLF + "Òåêóùèÿ çàïèñ ùå áúäå âúçñòàíîâåí " + CRLF + "Äà ïğîäúëæà ëè ?    " + CRLF                    } // 42
+         "Âúâåäåòå òåêñò",                                                                                     ; // 2
+         "Âúâåäåòå ÷èñëî",                                                                                     ; // 3
+         "Âúâåäåòå äàòà",                                                                                      ; // 4
+         "Ëîãè÷åñêà ñòîéíîñò",                                                                                 ; // 5
+         "Âúâåäåòå ñîéíîñòòà íà ïîëåòî",                                                                       ; // 6
+         "Èçáåğåòå çàïèñ è íàòèñíåòå OK",                                                                      ; // 7
+         CRLF + "Òåêóùèÿò çàïèñ ùå áúäå èçòğèò " + CRLF + "Äà ïğîäúëæà ëè ?    " + CRLF,                       ; // 8
+         CRLF + "Íÿìà ïîäğåäáà " + CRLF + "Èçáåğåòå åäíà îò ñúùåñòâóâàùèòå" + CRLF,                            ; // 9
+         CRLF + "Òúğñåíå â MEMO ïîëåòàòà è ëîãè÷åñêèòå ïîëåòà íå ñå èçïúëíÿâà" + CRLF,                         ; // 10
+         CRLF + "Çàïèñà íå å íàìåğåí  " + CRLF,                                                                ; // 11
+         "Ïîëåòà çà âêëş÷âàíå â ñïèñúêà çà ïå÷àò",                                                             ; // 12
+         "Ñïèñúê ñ ïîëåòà çà ïå÷àò",                                                                           ; // 13
+         "Èçáîğ íà ïğèíòåğ",                                                                                   ; // 14
+         "Íàòèñíåòå çà ïåğåíîñ íà ïîëåòî â ñïèñúêà çà ïå÷àò",                                                  ; // 15
+         "Íàòèñíåòå çà èñêëş÷âàíå íà ïîëåòî îò ñïèñúêà çà ïå÷àò",                                              ; // 16
+         "Çàïèñ, îò êîéòî çàïî÷âà ïå÷àòà",                                                                     ; // 17
+         "Çàïèñ, äî êîéòî çàâúğøâà ïå÷àòà",                                                                    ; // 18
+         CRLF + "Âêëş÷åíè ïîëåòà íÿìà " + CRLF,                                                                ; // 19
+         CRLF + "Ïúğâî ïîëå çà âêëş÷âàíå " + CRLF,                                                             ; // 20
+         CRLF + "Ïîëåòà çà èçêëş÷âàíå íÿìà " + CRLF,                                                           ; // 21
+         CRLF + "Ïúğâî ïîëå çà èñêëş÷âàíå " + CRLF,                                                            ; // 22
+         CRLF + "Íÿìà èçáğàíè ïîëåòà " + CRLF + "Ôîğìèğàéòå ñïèñúê çà ïå÷àò " + CRLF,                          ; // 23
+         CRLF + "Ïğåêàëåíî ìíîãî ïîëåòà " + CRLF + "Íàìàëåòå òÿõíîòî êîëè÷åñòâî " + CRLF,                      ; // 24
+         CRLF + "Ïğèíòåğà íå å ãîòîâ  " + CRLF,                                                                ; // 25
+         "Ïîäğåäáà ",                                                                                          ; // 26
+         "Îò çàïèñ ",                                                                                          ; // 27
+         "Äî çàïèñ ",                                                                                          ; // 28
+         "Äà",                                                                                                 ; // 29
+         "Íå",                                                                                                 ; // 30
+         "Ñòğàíèöà:",                                                                                          ; // 31
+         CRLF + "Èçáåğåòå ïğèíòåğ  " + CRLF,                                                                   ; // 32
+         "Ôèëòğèğàíî ïî",                                                                                      ; // 33
+         CRLF + "Òîâà íå å àêòèâíåí ôèëòúğ    " + CRLF,                                                        ; // 34
+         CRLF + "MEMO Ïîëåòàòà íå ñå ôèëòğèğàò  " + CRLF,                                                      ; // 35
+         CRLF + "Èçáåğåòå ïîëåòà çà ôèëòúğà    " + CRLF,                                                       ; // 36
+         CRLF + "Èçáåğåòå îïåğàòîğ çà ôèëòúğà" + CRLF,                                                         ; // 37
+         CRLF + "Íàáåğåòå ñòîéíîñò çà ôèëòúğà" + CRLF,                                                         ; // 38
+         CRLF + "Íÿìà àêòèâíè ôèëòğè   " + CRLF,                                                               ; // 39
+         CRLF + "Ìàõíè ôèëòúğà ?   " + CRLF,                                                                   ; // 40
+         CRLF + "Çàïèñà å áëîêèğàí îò äğóã ïîòğåáèòåë " + CRLF,                                                ; // 41
+         CRLF + "Òåêóùèÿ çàïèñ ùå áúäå âúçñòàíîâåí " + CRLF + "Äà ïğîäúëæà ëè ?    " + CRLF                    } // 42
 
    ENDCASE
 
-   #endif
+#endif
 
    RETURN

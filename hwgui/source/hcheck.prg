@@ -53,7 +53,7 @@ CLASS VAR winclass INIT "BUTTON"
 
    METHOD Value ( lValue ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctooltip, tcolor, bcolor, bGFocus, lEnter, lTransp, bLFocus ) CLASS HCheckButton

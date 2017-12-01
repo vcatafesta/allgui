@@ -1281,9 +1281,9 @@ PROCEDURE EditProgram
 
    RETURN
 
-   #ifndef __XHARBOUR__
-   # xtranslate At( < a >, < b >, [ < x, ... > ] ) => hb_At( < a >, < b >, < x > )
-   #endif
+#ifndef __XHARBOUR__
+# xtranslate At( < a >, < b >, [ < x, ... > ] ) => hb_At( < a >, < b >, < x > )
+#endif
 
 FUNCTION FileInPath( cFile )
 
@@ -3278,13 +3278,13 @@ FUNCTION DateTime( dDate, cTime )
 
 FUNCTION MemoWrite( cFile, cCont )
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    LOCAL lWrite := hb_MemoWrit( cFile, cCont )
 
-   #else
+#else
    LOCAL lWrite := MemoWrit( cFile, cCont, .N. )
 
-   #endif
+#endif
 
    RETURN lWrite
 
@@ -3687,4 +3687,3 @@ FUNCTION HelpText
       "}"
 
    RETURN cText
-

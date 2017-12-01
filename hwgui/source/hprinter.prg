@@ -90,7 +90,7 @@ CLASS HPrinter INHERIT HObject
 
    METHOD ChangePage( oSayPage, n, nPage ) HIDDEN
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cPrinter, lmm, nFormType, nBin, lLandScape, nCopies, lProprierties, hDCPrn ) CLASS HPrinter
 
@@ -422,7 +422,7 @@ METHOD Preview( cTitle, aBitmaps, aTooltips, aBootUser ) CLASS HPrinter
    @ 1, 31 LINE LENGTH oToolBar:nWidth - 1
 
    @ 3, 36 OWNERBUTTON oBtn OF oToolBar ON CLICK { || ::PrintMeta() } ;   // removed ::nCurrPage by Giuseppe Mastrangelo
-   SIZE oToolBar:nWidth - 6, 24 TEXT "Imprimir" FONT oFont         ;
+      SIZE oToolBar:nWidth - 6, 24 TEXT "Imprimir" FONT oFont         ;
       TOOLTIP IIf( aTooltips != NIL, aTooltips[ 2 ], "Imprimir Arquivo" )
    IF aBitmaps != NIL .AND. Len( aBitmaps ) > 2 .AND. aBitmaps[ 3 ] != NIL
       oBtn:oBitmap := IIf( aBitmaps[ 1 ], HBitmap():AddResource( aBitmaps[ 3 ] ), HBitmap():AddFile( aBitmaps[ 3 ] ) )
@@ -798,11 +798,11 @@ METHOD PlayMeta( oWnd ) CLASS HPrinter
       lRefreshVideo := .T.   // request a repaint
    ENDIF
 
-   #if 0
+#if 0
    // Draws a line from upper left to bottom right of the PAPER
    // used to check for PAPER dimension...
    hwg_Drawline( hDC, ::x1, ::y1, ::x2, ::y2 )
-   #endif
+#endif
 
    hwg_Endpaint( oWnd:handle, pps )
 

@@ -84,7 +84,7 @@ PROCEDURE ProcessNotifyDblClick()
 
    RETURN
 
-   #define WM_PAINT   15
+#define WM_PAINT   15
 
 STATIC FUNCTION refresh_it( hWnd )
 

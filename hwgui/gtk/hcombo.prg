@@ -51,7 +51,7 @@ CLASS VAR winclass   INIT "COMBOBOX"
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,aItems,oFont, ;
       bInit,bSize,bPaint,bChange,cToolt,lEdit,lText,bGFocus,tcolor,bcolor ) CLASS HComboBox

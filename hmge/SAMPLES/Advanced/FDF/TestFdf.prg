@@ -50,18 +50,18 @@ Mail: harbourminigui@gmail.com
 #include "hbusrrdd.ch"
 #xcommand TRY              => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
    BEGIN SEQUENCE
-   #xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
+#xcommand CATCH [<!oErr!>] => errorBlock( bError ) ;;
    RECOVER [USING <oErr>] <-oErr-> ;;
       errorBlock( bError )
-   #else
-   #include "usrrdd.ch"
-   #endif
+#else
+#include "usrrdd.ch"
+#endif
 
-   #translate Zaps(<x>) => Zapit(<x>)
+#translate Zaps(<x>) => Zapit(<x>)
 
-   #define IDI_MAIN 1001
-   #define VERSIONEFDF "%FDF-1.2"
-   #define CRLF   CHR(13)+CHR(10)
+#define IDI_MAIN 1001
+#define VERSIONEFDF "%FDF-1.2"
+#define CRLF   CHR(13)+CHR(10)
 
    MEMVAR FDF
    MEMVAR oBrw1, aData_Source, Stampanti
@@ -121,10 +121,10 @@ CREATE CLASS FdF
    METHOD CloseAcrobat()
    METHOD END()
 
-ENDCLASS
+   ENDCLASS
 
-/*
-*/
+   /*
+   */
 
 METHOD NewFdF() CLASS FdF
 
@@ -1102,9 +1102,9 @@ STATIC FUNCTION GetInstallAcrobat(hKey)
 
    RETURN cpathRes
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif
 
 #pragma BEGINDUMP
 

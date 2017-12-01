@@ -154,12 +154,12 @@ PROCEDURE Brw_3()
       oBrw3:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
          { CLR_BLACK, CLR_WHITE, CLR_BLACK, ;
          { CLR_WHITE, CLR_BLACK }, ; // degraded cursor background color
-      CLR_WHITE, CLR_BLACK } )  // text colors
+         CLR_WHITE, CLR_BLACK } )  // text colors
 
       oBrw3:SetColor( { 2, 4, 14 }, ;
          { { CLR_WHITE, CLR_NBLUE }, ;  // degraded cells background color
-      { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
-      { CLR_HRED, CLR_BLACK } } )  // degraded order column background color
+         { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
+         { CLR_HRED, CLR_BLACK } } )  // degraded order column background color
 
       oBrw3:nLineStyle := LINES_VERT
 
@@ -308,12 +308,12 @@ PROCEDURE CloseTables()
    RETURN
 
    //Demo files
-   #include "sbalign.prg"
-   #include "sbarray.prg"
-   #include "tsbtest.prg"
-   #include "sbsuperh.prg"
-   #include "sbexcel.prg"
-   #include "TestStop.prg"
-   #include "Sbrowse.prg"
-   #include "OneToMore.prg"
-   #include "AutoCols.prg"
+#include "sbalign.prg"
+#include "sbarray.prg"
+#include "tsbtest.prg"
+#include "sbsuperh.prg"
+#include "sbexcel.prg"
+#include "TestStop.prg"
+#include "Sbrowse.prg"
+#include "OneToMore.prg"
+#include "AutoCols.prg"

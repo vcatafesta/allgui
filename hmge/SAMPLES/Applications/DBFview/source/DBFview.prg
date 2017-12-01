@@ -51,11 +51,11 @@ MEMVAR lFirstFind, lFind, cFind, cFindStr, cField, cAlias, cReplStr, nCurRec
 
 PROCEDURE Main( cDBF, ... )
 
-   #else
+#else
 
 PROCEDURE Main( cDBF )
 
-   #endif
+#endif
    LOCAL hWnd := FindWindow( PROGRAM ), cChildForm, i, nStatusWidth, aDesk := GetDesktopArea()
    LOCAL cFont := "MS Sans Serif", nSize := 10, lBold := .F., lItalic := .F., aFntClr := {0,0,0}
    LOCAL nTop := aDesk[1], aPar, cDBF2Open := ""
@@ -1144,7 +1144,7 @@ STATIC PROCEDURE SaveToXls( cAlias, cFile )
 
    RETURN
 
-   #xtranslate fWriteLn( <xHandle>, <cString> ) ;
+#xtranslate fWriteLn( <xHandle>, <cString> ) ;
       => ;
       fWrite( <xHandle>, <cString> + CRLF )
 
@@ -3032,4 +3032,4 @@ FUNCTION MsgAbout()
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About " + PROGRAM )
 
-   #include "dbquery.prg"
+#include "dbquery.prg"

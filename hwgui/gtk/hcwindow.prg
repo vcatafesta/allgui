@@ -30,7 +30,7 @@ CLASS HObject
 
    // DATA classname
 
-ENDCLASS
+   ENDCLASS
 
 CLASS HCustomWindow INHERIT HObject
 
@@ -78,7 +78,7 @@ CLASS VAR oDefaultParent SHARED
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD FindControl( nId,nHandle ) CLASS HCustomWindow
 

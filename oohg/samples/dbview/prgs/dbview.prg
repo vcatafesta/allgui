@@ -262,9 +262,9 @@ PROCEDURE MakeBrowse()
          DOUBLEBUFFER                       ;
          NAVIGATEBYCELL                     ;
          SELECTEDCOLORS { WHITE, {65,105,225},           ;           // Cursor Fuente/Fondo
-      WHITE, {128,128,128},          ;           // Cursor ventana sin foco Fuente/Fondo
-      {106,90,205}, {135,206,250},   ;           // Fila resaltada  Fuente/Fondo
-      {105,105,105},{220,220,220} }              // Fila resaltada click en columna  Fuente/Fondo
+         WHITE, {128,128,128},          ;           // Cursor ventana sin foco Fuente/Fondo
+         {106,90,205}, {135,206,250},   ;           // Fila resaltada  Fuente/Fondo
+         {105,105,105},{220,220,220} }              // Fila resaltada click en columna  Fuente/Fondo
 
    ENDIF
 
@@ -1119,7 +1119,7 @@ PROCEDURE SaveToXls( cAlias, cFile )
 
    RETURN
 
-   #xtranslate fWriteLn( <xHandle>, <cString> ) ;
+#xtranslate fWriteLn( <xHandle>, <cString> ) ;
       => ;
       fWrite( <xHandle>, <cString> + CRLF )
 
@@ -1845,7 +1845,7 @@ STATIC PROCEDURE Search_Replace( lReplace )
             HEIGHT 24
             CAPTION "&Find Next"
             ACTION FindNext(Form_Find.Combo_1.DisplayValue, Form_Find.Combo_3.Value, ; //MigSoft
-            Form_Find.Check_1.Value, Form_Find.Check_2.Value)
+               Form_Find.Check_1.Value, Form_Find.Check_2.Value)
             TABSTOP .T.
             VISIBLE .T.
          END BUTTON
@@ -2493,9 +2493,9 @@ FUNCTION dbInsert( lBefore )
 
    */
 
-   #define DBS_NAME  1
-   #define FLD_BLK   1
-   #define FLD_VAL   2
+#define DBS_NAME  1
+#define FLD_BLK   1
+#define FLD_VAL   2
 
    LOCAL nRec     := recno() + 1
    LOCAL lSavDel  := SET( _SET_DELETED, .f. )

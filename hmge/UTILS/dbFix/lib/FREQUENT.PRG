@@ -158,7 +158,7 @@ FUNCTION XCommit(lExclusive)
 
    // Stubs for common FiveWin function calls:
 
-   #ifdef DOS_ONLY
+#ifdef DOS_ONLY
 
 FUNCTION CursorArrow()
 
@@ -204,4 +204,4 @@ FUNCTION SysRefresh()
 
    Return(NIL)
 
-   #endif
+#endif

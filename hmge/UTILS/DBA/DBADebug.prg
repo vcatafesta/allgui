@@ -451,7 +451,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
                               PROC FileWipe( ;                          // Wipe out file(s)
-                                 aFile )  // File(s) name
+                                    aFile )  // File(s) name
 
                                  LOCA nFInd := 0,;
                                     c1Fil := ''
@@ -685,7 +685,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                                                       LOCA nSInfoNo  := 0,;
                                                          cStatus   := '',;
                                                          cHaTahdt  := REPL( ".-._", 13 ) + ".",;  // Hatt-ý tahdid
-                                                      nWANo
+                                                         nWANo
 
                                                       FOR nWANo := 1 TO 255
                                                          SELECT( nWANo )

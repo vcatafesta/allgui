@@ -1860,8 +1860,8 @@ FUNCTION PObjeto_Properties(mTipoControl,mNameCtrl,aMousePos)
          {"COL"      ,aMousePos[2]    ,2,"V"},;
          {"NAME"     ,mNameCtrl       ,3,"V"},;
          {"VALUE"    ,"http//www.programer.com" ,4,"T"},;
-         {"ADDRESS"  ,"http//www.programer.com" ,4,"T"},;
-         {"WIDTH"    ,200             ,5,"V"},;
+      {"ADDRESS"  ,"http//www.programer.com" ,4,"T"},;
+      {"WIDTH"    ,200             ,5,"V"},;
          {"HEIGHT"   ,20              ,6,"V"}}
 
    ENDCASE

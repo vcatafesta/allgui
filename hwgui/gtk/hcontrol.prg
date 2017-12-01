@@ -59,7 +59,7 @@ CLASS HControl INHERIT HCustomWindow
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
       bSize, bPaint, ctoolt, tcolor, bcolor ) CLASS HControl
@@ -306,7 +306,7 @@ CLASS VAR winclass   INIT "msctls_statusbar32"
 
    METHOD SetText( t ) INLINE  hwg_WriteStatus( ::handle, , t )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint ) CLASS HStatus
 
@@ -355,7 +355,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD SetValue( value ) INLINE hwg_static_SetText( ::handle, value )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, bInit, ;
       bSize, bPaint, ctoolt, tcolor, bcolor, lTransp ) CLASS HStatic
@@ -405,7 +405,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD onEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFont, ;
       bInit, bSize, bPaint, bClick, ctoolt, tcolor, bcolor ) CLASS HButton
@@ -507,7 +507,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD Activate()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bcolor ) CLASS HGroup
@@ -543,7 +543,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Activate()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize ) CLASS HLine
 

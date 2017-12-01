@@ -66,7 +66,7 @@ CLASS TIpAddress FROM TLabel
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aValue, fontname, ;
       fontsize, tooltip, lostfocus, gotfocus, change, HelpId, ;

@@ -49,7 +49,7 @@ CREATE CLASS TPRINT
    METHOD printroundrectangle()
    METHOD version()  INLINE ::cversion
 
-ENDCLASS
+   ENDCLASS
 
 METHOD condenDOS() CLASS TPRINT
 

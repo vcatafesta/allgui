@@ -93,7 +93,7 @@ CLASS VAR winclass INIT "SYSLISTVIEW32"
 
    METHOD SETVIEW( style )  INLINE hwg_Listview_setview( ::handle, style )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint, bEnter, ;
       bGfocus, bLfocus, lNoScroll, lNoBord, bKeyDown, bPosChg, bDispInfo, ;

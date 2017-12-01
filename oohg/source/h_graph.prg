@@ -709,7 +709,7 @@ PROCEDURE GraphShow( parent, nTop, nLeft, nBottom, nRight, nHeight, nWidth, aDat
          FOR nJ := 1 To Len( aSeries )
             cName := "Data_Name_" + lTrim( Str( nI ) ) + lTrim( Str( nJ ) )
             @ nZero - ( aData[ nJ, nI ] / nMin + nDeep ), If( nType == 1, nPos - If( l3D, 8, 10 ), nPos + 10 ) ;       // BARS
-            LABEL &cName OF &parent ;
+               LABEL &cName OF &parent ;
                VALUE Transform( aData[ nJ, nI ], cPicture ) AUTOSIZE ;
                FONT "Arial" SIZE 8 BOLD TRANSPARENT
             nPos += If( nType == 1, nWide + nSep, 0 )                  // BARS

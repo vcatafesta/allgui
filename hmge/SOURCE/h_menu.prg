@@ -148,11 +148,11 @@ PROCEDURE _DefineMenuPopup ( Caption, Name, Image, Font )
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-         #ifndef _EMPTY_MENU_
+#ifndef _EMPTY_MENU_
          Name := 'DummyPopupName' + hb_ntos( k )
-         #else
+#else
          Name := ''
-         #endif
+#endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + FormName + '_' + Name
@@ -310,11 +310,11 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-         #ifndef _EMPTY_MENU_
+#ifndef _EMPTY_MENU_
          Name := 'DummyMenuName' + hb_ntos( k )
-         #else
+#else
          Name := ''
-         #endif
+#endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + _HMG_xMainMenuParentName + '_' + Name
@@ -408,11 +408,11 @@ PROCEDURE _DefineMenuItem ( caption, action, name, Image, checked, disabled, cMe
       k := _GetControlFree()
 
       IF ValType ( name ) == 'U'
-         #ifndef _EMPTY_MENU_
+#ifndef _EMPTY_MENU_
          Name := 'DummyMenuName' + hb_ntos( k )
-         #else
+#else
          Name := ''
-         #endif
+#endif
       ENDIF
       IF !Empty ( name )
          mVar := '_' + _HMG_xContextMenuParentName + '_' + Name

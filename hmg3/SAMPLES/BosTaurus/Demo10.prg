@@ -55,10 +55,10 @@ FUNCTION BT_aFILTER_BLUR (index, value, weight, add, bias)
    v := value
    aFILTER := ;
       {{  0,  v,  0,  0,  weight,  0,  0,  v,  0,  weight + add + v * 2,  bias},; // VERTICAL
-   {  0,  0,  0,  v,  weight,  v,  0,  0,  0,  weight + add + v * 2,  bias},; // HORIZONTAL
-   {  0,  0,  v,  0,  weight,  0,  v,  0,  0,  weight + add + v * 2,  bias},; // ANGLE45
-   {  v,  0,  0,  0,  weight,  0,  0,  0,  v,  weight + add + v * 2,  bias},; // ANGLE135
-   {  v,  v,  v,  v,  weight,  v,  v,  v,  v,  weight + add + v * 8,  bias}}  // ALLDIRECTIONS
+      {  0,  0,  0,  v,  weight,  v,  0,  0,  0,  weight + add + v * 2,  bias},; // HORIZONTAL
+      {  0,  0,  v,  0,  weight,  0,  v,  0,  0,  weight + add + v * 2,  bias},; // ANGLE45
+      {  v,  0,  0,  0,  weight,  0,  0,  0,  v,  weight + add + v * 2,  bias},; // ANGLE135
+      {  v,  v,  v,  v,  weight,  v,  v,  v,  v,  weight + add + v * 8,  bias}}  // ALLDIRECTIONS
 
    RETURN aFILTER [index]
 
@@ -76,10 +76,10 @@ FUNCTION BT_aFILTER_SHARPEN (index, value, weight, add, bias)
    v := value
    aFILTER := ;
       {{  0, -v,  0,  0,  weight,  0,  0, -v,  0,  weight + add - v * 2,  bias},; // VERTICAL
-   {  0,  0,  0, -v,  weight, -v,  0,  0,  0,  weight + add - v * 2,  bias},; // HORIZONTAL
-   {  0,  0, -v,  0,  weight,  0, -v,  0,  0,  weight + add - v * 2,  bias},; // ANGLE45
-   { -v,  0,  0,  0,  weight,  0,  0,  0, -v,  weight + add - v * 2,  bias},; // ANGLE135
-   { -v, -v, -v, -v,  weight, -v, -v, -v, -v,  weight + add - v * 8,  bias}}  // ALLDIRECTIONS
+      {  0,  0,  0, -v,  weight, -v,  0,  0,  0,  weight + add - v * 2,  bias},; // HORIZONTAL
+      {  0,  0, -v,  0,  weight,  0, -v,  0,  0,  weight + add - v * 2,  bias},; // ANGLE45
+      { -v,  0,  0,  0,  weight,  0,  0,  0, -v,  weight + add - v * 2,  bias},; // ANGLE135
+      { -v, -v, -v, -v,  weight, -v, -v, -v, -v,  weight + add - v * 8,  bias}}  // ALLDIRECTIONS
 
    RETURN aFILTER [index]
 
@@ -97,10 +97,10 @@ FUNCTION BT_aFILTER_EDGE (index, value, weight, add, bias)
    v := value
    aFILTER := ;
       {{  0,  v,  0,  0,  -weight,  0,  0,  v,  0,  -weight + add + v * 2,  bias},; // VERTICAL
-   {  0,  0,  0,  v,  -weight,  v,  0,  0,  0,  -weight + add + v * 2,  bias},; // HORIZONTAL
-   {  0,  0,  v,  0,  -weight,  0,  v,  0,  0,  -weight + add + v * 2,  bias},; // ANGLE45
-   {  v,  0,  0,  0,  -weight,  0,  0,  0,  v,  -weight + add + v * 2,  bias},; // ANGLE135
-   {  v,  v,  v,  v,  -weight,  v,  v,  v,  v,  -weight + add + v * 8,  bias}}  // ALLDIRECTIONS
+      {  0,  0,  0,  v,  -weight,  v,  0,  0,  0,  -weight + add + v * 2,  bias},; // HORIZONTAL
+      {  0,  0,  v,  0,  -weight,  0,  v,  0,  0,  -weight + add + v * 2,  bias},; // ANGLE45
+      {  v,  0,  0,  0,  -weight,  0,  0,  0,  v,  -weight + add + v * 2,  bias},; // ANGLE135
+      {  v,  v,  v,  v,  -weight,  v,  v,  v,  v,  -weight + add + v * 8,  bias}}  // ALLDIRECTIONS
 
    RETURN aFILTER [index]
 
@@ -120,26 +120,26 @@ FUNCTION BT_aFILTER_EMBOSS (index, value, weight, add, bias)
    v := value
    aFILTER := ;
       {{ -v,  0,  v, -v,  weight,  v, -v,  0,  v,  weight + add,  bias },; // Right          EAST
-   {  v,  v,  v,  0,  weight,  0, -v, -v, -v,  weight + add,  bias },; // Top            NORTH
-   {  0,  v,  v, -v,  weight,  v, -v, -v,  0,  weight + add,  bias },; // Top_Right      NORTH_EAST
-   {  v,  v,  0,  v,  weight, -v,  0, -v, -v,  weight + add,  bias },; // Top_Left       NORTH_WEST
-   { -v, -v, -v,  0,  weight,  0,  v,  v,  v,  weight + add,  bias },; // Bottom         SOUTH
-   { -v, -v,  0, -v,  weight,  v,  0,  v,  v,  weight + add,  bias },; // Bottom_Right   SOUTH_EAST
-   {  0, -v, -v,  v,  weight, -v,  v,  v,  0,  weight + add,  bias },; // Bottom_Left    SOUTH_WEST
-   {  v,  0, -v,  v,  weight, -v,  v,  0, -v,  weight + add,  bias }}  // Left           WEST
+      {  v,  v,  v,  0,  weight,  0, -v, -v, -v,  weight + add,  bias },; // Top            NORTH
+      {  0,  v,  v, -v,  weight,  v, -v, -v,  0,  weight + add,  bias },; // Top_Right      NORTH_EAST
+      {  v,  v,  0,  v,  weight, -v,  0, -v, -v,  weight + add,  bias },; // Top_Left       NORTH_WEST
+      { -v, -v, -v,  0,  weight,  0,  v,  v,  v,  weight + add,  bias },; // Bottom         SOUTH
+      { -v, -v,  0, -v,  weight,  v,  0,  v,  v,  weight + add,  bias },; // Bottom_Right   SOUTH_EAST
+      {  0, -v, -v,  v,  weight, -v,  v,  v,  0,  weight + add,  bias },; // Bottom_Left    SOUTH_WEST
+      {  v,  0, -v,  v,  weight, -v,  v,  0, -v,  weight + add,  bias }}  // Left           WEST
 
    RETURN aFILTER [index]
 
    // ******************************************************************************************************************************************
    // aFILTER :=                                      { k1, k2, k3, k4,    k5,    k6, k7, k8, k9,       Divisor,  Bias }
-   #define BT_Kernel3x3Filter_Blur(nWeight)           {  0,  2,  0,  2,  nWeight,  2,  0,  2,  0,   nWeight  +8,     0 } // Blur (Borrado)
-   #define BT_Kernel3x3Filter_GaussianBlur(nWeight)   {  1,  2,  1,  2,  nWeight,  2,  1,  2,  1,   nWeight +12,     0 } // Gaussian Blur (Borrado Gaussiano)
-   #define BT_Kernel3x3Filter_Sharpen(nWeight)        {  0, -1,  0, -1,  nWeight, -1,  0, -1,  0,   nWeight  -4,     0 } // Sharpen (Nitidez)
-   #define BT_Kernel3x3Filter_Smooth(nWeight)         {  1,  1,  1,  1,  nWeight,  1,  1,  1,  1,   nWeight  +8,     0 } // Smooth (Suavizado)
-   #define BT_Kernel3x3Filter_GaussianSmooth(nWeight) {  0,  1,  0,  1,  nWeight,  1,  0,  1,  0,   nWeight  +4,     0 } // Gaussian Smooth (Suavizado Gaussiano)
-   #define BT_Kernel3x3Filter_MeanRemoval(nWeight)    { -1, -1, -1, -1,  nWeight, -1, -1, -1, -1,   nWeight  -8,     0 } // Mean Removal
-   #define BT_Kernel3x3Filter_EdgeDetection1          {  1,  1,  1,  1,    -8,     1,  1,  1,  1,             0,     0 } // Detects Edges in All Directions
-   #define BT_Kernel3x3Filter_EdgeDetection2          {  1,  1,  1,  1,    -7,     1,  1,  1,  1,             1,     0 } // Detects Edges Execessively
+#define BT_Kernel3x3Filter_Blur(nWeight)           {  0,  2,  0,  2,  nWeight,  2,  0,  2,  0,   nWeight  +8,     0 } // Blur (Borrado)
+#define BT_Kernel3x3Filter_GaussianBlur(nWeight)   {  1,  2,  1,  2,  nWeight,  2,  1,  2,  1,   nWeight +12,     0 } // Gaussian Blur (Borrado Gaussiano)
+#define BT_Kernel3x3Filter_Sharpen(nWeight)        {  0, -1,  0, -1,  nWeight, -1,  0, -1,  0,   nWeight  -4,     0 } // Sharpen (Nitidez)
+#define BT_Kernel3x3Filter_Smooth(nWeight)         {  1,  1,  1,  1,  nWeight,  1,  1,  1,  1,   nWeight  +8,     0 } // Smooth (Suavizado)
+#define BT_Kernel3x3Filter_GaussianSmooth(nWeight) {  0,  1,  0,  1,  nWeight,  1,  0,  1,  0,   nWeight  +4,     0 } // Gaussian Smooth (Suavizado Gaussiano)
+#define BT_Kernel3x3Filter_MeanRemoval(nWeight)    { -1, -1, -1, -1,  nWeight, -1, -1, -1, -1,   nWeight  -8,     0 } // Mean Removal
+#define BT_Kernel3x3Filter_EdgeDetection1          {  1,  1,  1,  1,    -8,     1,  1,  1,  1,             0,     0 } // Detects Edges in All Directions
+#define BT_Kernel3x3Filter_EdgeDetection2          {  1,  1,  1,  1,    -7,     1,  1,  1,  1,             1,     0 } // Detects Edges Execessively
 
    // ******************************************************************************************************************************************
 

@@ -341,6 +341,6 @@ FUNCTION SaveChdPar(PGname,cForm)
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
-   #include <fileread.prg>
-   #endif
+#ifdef __XHARBOUR__
+#include <fileread.prg>
+#endif

@@ -35,8 +35,8 @@ FUNCTION Main
 
    RETURN NIL
 
-   #define hKey HKEY_CURRENT_USER
-   #define cKey 'Software\OOHG\EjemploRegistro\FormMain'
+#define hKey HKEY_CURRENT_USER
+#define cKey 'Software\OOHG\EjemploRegistro\FormMain'
 
 FUNCTION CargarReg
 

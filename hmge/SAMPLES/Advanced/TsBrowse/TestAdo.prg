@@ -35,7 +35,7 @@ FUNCTION TestAdo(met)
       :Source           := "SELECT * FROM CUSTOMER"
       :Open()
       :Sort             := :Fields( 0 ):Name
-   End With
+   END WITH
 
    IF ! _IsControlDefined ("Font_1","Main")
       DEFINE FONT Font_1  FONTNAME "Arial" SIZE 10

@@ -27,7 +27,7 @@
                or  special  damages,  even if the author has been advised of
                the possibility of such damages.
  ----------------------------------------------------------------------------
-        Copyright (c) 2003-2012 Grigory Filatov.  All Rights Reserved      
+        Copyright (c) 2003-2012 Grigory Filatov.  All Rights Reserved
 
                       E-Mail : gfilatov@inbox.ru
  ----------------------------------------------------------------------------

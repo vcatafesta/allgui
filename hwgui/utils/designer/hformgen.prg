@@ -79,7 +79,7 @@ CLASS VAR oDlgSelected
 
    METHOD End()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HFormGen
 

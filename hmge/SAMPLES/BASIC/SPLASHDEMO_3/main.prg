@@ -151,7 +151,7 @@ PROCEDURE _DefineSplashWindow( name, row, col, width, height, cbitmap, nTime, Re
    * Показ бегунка и надписи. Запуск функции из списка функций проверки при запуске программы.
    * Show the slider and labels. Running function from the function test is started.
    */
-   #define WM_PAINT   15
+#define WM_PAINT   15
 
 PROCEDURE _SplashDelay( name, nTime, nWidthImg )
 

@@ -79,22 +79,22 @@ PROCEDURE PrintPDF( cPFName )
    */
 
 PROCEDURE Text2PDF( ;                     // Build PDF from a text file
-   cPdfFName )
+      cPdfFName )
 
    LOCAL cTxtFNam :=  "AbtFonts.txt", ;
       lSuccess :=  .F. , ;
       nLineNo  :=   0, ;
       nItemCo  :=   0, ;    // Line count in text array
-   nItemNo  :=   0, ;    // Line in text array
-   nLineRow :=  30, ;    // 25 + 5
-   nLineCol :=  25, ;    // Left marj
-   nMaxPRow := 272, ;    // 297 - 25  // * 2 ) - 10
-   nMaxPCol := 185, ;    // 210 - 25
-   nLineSpc :=   5, ;    // Line Space  ( NO for "rectangled" text )
-   cTitle  := "About HMG-HPDF Fonts", ;
+      nItemNo  :=   0, ;    // Line in text array
+      nLineRow :=  30, ;    // 25 + 5
+      nLineCol :=  25, ;    // Left marj
+      nMaxPRow := 272, ;    // 297 - 25  // * 2 ) - 10
+      nMaxPCol := 185, ;    // 210 - 25
+      nLineSpc :=   5, ;    // Line Space  ( NO for "rectangled" text )
+      cTitle  := "About HMG-HPDF Fonts", ;
       nPageNo  :=   0, ;
       cFCode   :=  '', ;    // Format code
-   c1Font   :=  '', ;
+      c1Font   :=  '', ;
       cSamplStr :=  "ABCDEFGHIabcdefghi012345!#$%&+-@?", ;
       nLMargin, ;
       nTextWidth, ;

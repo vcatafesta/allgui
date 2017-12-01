@@ -93,7 +93,7 @@ CLASS TMyMenuEditor
 
    METHOD WriteSubclass
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddItem() CLASS TMyMenuEditor
 
@@ -1201,8 +1201,8 @@ METHOD Save() CLASS TMyMenuEditor
 
    // Length
    wVar := ::cMnName + ',' + ;                           //  30 + 1
-   ::cObj + ',' + ;                              //  30 + 1
-   ::cSubclass                                   //  30
+      ::cObj + ',' + ;                              //  30 + 1
+      ::cSubclass                                   //  30
    //  90 + 2
    ( ::cID )->( dbGoTop() )
    ( ::cID )->auxit  := SubStr(wVar, 1, Len( ( ::cID )->auxit ) )

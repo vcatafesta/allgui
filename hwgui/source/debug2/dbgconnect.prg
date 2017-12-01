@@ -151,17 +151,17 @@ FUNCTION hwg_dbg_New()
    handl2 := FCreate( cFile + ".d2" )
    FClose( handl2 )
 
-   #if defined( __PLATFORM__UNIX )
+#if defined( __PLATFORM__UNIX )
    IF Empty( cExe )
       cExe := Iif( File(cDebugger), "./", "" ) + cDebugger
    ENDIF
    lRun := __dbgProcessRun( cExe, "-c" + cFile )
-   #else
+#else
    IF Empty( cExe )
       cExe := cDebugger
    ENDIF
    lRun := ( ( hProcess := hb_processOpen( cExe + ' -c"' + cFile + '"' ) ) > 0 )
-   #endif
+#endif
    IF !lRun
       hwg_dbg_Alert( cExe + " isn't available..." )
    ELSE
@@ -446,7 +446,7 @@ STATIC FUNCTION Hex2Str( stroka )
 
    RETURN cRes
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 #pragma BEGINDUMP
 #include "hbapi.h"
 #include "hbapiitm.h"
@@ -456,4 +456,4 @@ HB_FUNC( HB_RELEASECPU )
    hb_releaseCPU(0);
 }
 #pragma ENDDUMP
-   #endif
+#endif

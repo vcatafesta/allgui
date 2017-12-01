@@ -1845,7 +1845,7 @@ PROCEDURE SplashDelay(met)
 
    RETURN
 
-   #include "l_richEditBox.prg"
+#include "l_richEditBox.prg"
 
-   #include "h_sliderEx.prg"
-   #include "Re_Undo.prg"
+#include "h_sliderEx.prg"
+#include "Re_Undo.prg"

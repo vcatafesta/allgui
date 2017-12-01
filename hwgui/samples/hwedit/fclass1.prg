@@ -82,14 +82,14 @@ CLASS FileMan
 
    METHOD Buffget( ld ) virtual
 
-ENDCLASS
+   ENDCLASS
 
-/* Method:  Init/New
-Params:  N/A
+   /* Method:  Init/New
+   Params:  N/A
 
-Returns: Self
-Purpose: Constructor
-*/
+   Returns: Self
+   Purpose: Constructor
+   */
 
 METHOD new() CLASS FileMan
 

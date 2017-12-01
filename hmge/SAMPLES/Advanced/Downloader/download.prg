@@ -38,7 +38,7 @@ FUNCTION Main
       @ 80,10 LABEL Label_1 ;
          WIDTH 440 HEIGHT 16 ;
          VALUE 'http://'+SITE_URL+FILE_URL ;
-         CENTERALIGN
+      CENTERALIGN
 
       @ 100,20 PROGRESSBAR Pg_1 ;
          RANGE 0,100 ;

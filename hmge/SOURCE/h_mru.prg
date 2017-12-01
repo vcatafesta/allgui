@@ -218,7 +218,7 @@ FUNCTION ClearMRUList()
 
    LOCAL n , cxMRU_Id
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    FOR EACH n IN aMRU_File DESCEND
       cxMRU_Id := n[ 3 ]
       IF n:__enumIsLast()
@@ -230,7 +230,7 @@ FUNCTION ClearMRUList()
       ELSE
          _RemoveMenuItem( cxMRU_Id , MRUParentForm )
       ENDIF
-      #else
+#else
       FOR n := Len( aMRU_File ) TO 1 STEP -1
          cxMRU_Id := aMRU_File[n,3]
          IF n > 1
@@ -242,7 +242,7 @@ FUNCTION ClearMRUList()
             aMRU_File := {}
             MRUCount := 0
          ENDIF
-         #endif
+#endif
       NEXT
 
       RETURN NIL

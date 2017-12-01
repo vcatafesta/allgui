@@ -68,13 +68,13 @@ FUNCTION _AppMain( p0, p1, p2 )
       ENDIF
    ENDIF
 
-   #ifdef INTEGRATED
+#ifdef INTEGRATED
    // #ifdef MODAL
    IF p0 == "-s" .OR. p0 == "/s"
       oDesigner:lSingleForm := .T.
    ENDIF
    // #endif
-   #endif
+#endif
 
    //IF !__mvExist( "cCurDir" )
    //   __mvPublic( "cCurDir" )
@@ -100,12 +100,12 @@ FUNCTION _AppMain( p0, p1, p2 )
       // :END LFB
    ENDIF
 
-   #ifdef INTEGRATED
+#ifdef INTEGRATED
    INIT DIALOG oDesigner:oMainWnd AT 0,0 SIZE 400,200 TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
       FONT oFont                          ;
       ON INIT {|o|StartDes(o,p0,p1)}   ;
       ON EXIT {||EndIde()}
-   #else
+#else
 
    //  INIT WINDOW oDesigner:oMainWnd MAIN AT 0,0 SIZE 280,200 TITLE iif(!oDesigner:lReport,"Form","Report")+" designer" ;
 
@@ -114,7 +114,7 @@ FUNCTION _AppMain( p0, p1, p2 )
       FONT oFont                                                ;
       ON EXIT {||EndIde()}
 
-   #endif
+#endif
 
    MENU OF oDesigner:oMainWnd
    MENU TITLE "&File"
@@ -336,18 +336,18 @@ FUNCTION _AppMain( p0, p1, p2 )
 
    HWG_InitCommonControlsEx()
 
-   #ifdef INTEGRATED
-   #ifdef MODAL
+#ifdef INTEGRATED
+#ifdef MODAL
    ACTIVATE DIALOG oDesigner:oMainWnd
    cResForm := oDesigner:cResForm
    oDesigner := NIL
-   #else
+#else
    ACTIVATE DIALOG oDesigner:oMainWnd NOMODAL
-   #endif
-   #else
+#endif
+#else
    StartDes( oDesigner:oMainWnd,p0,p1 )
    ACTIVATE WINDOW oDesigner:oMainWnd
-   #endif
+#endif
 
    RETURN cResForm
 
@@ -418,9 +418,9 @@ CLASS HDesigner
 
    METHOD New   INLINE Self
 
-ENDCLASS
+   ENDCLASS
 
-// -----------------
+   // -----------------
 
 STATIC FUNCTION StartDes( oDlg,p1,cForm )
 
@@ -435,7 +435,7 @@ STATIC FUNCTION StartDes( oDlg,p1,cForm )
          ELSE
             HFormGen():Open( cForm )
          ENDIF
-         #ifdef INTEGRATED
+#ifdef INTEGRATED
          // #ifdef MODAL
       ELSEIF p1 == "s"
          IF cForm == NIL
@@ -446,7 +446,7 @@ STATIC FUNCTION StartDes( oDlg,p1,cForm )
          Hwg_SetForegroundWindow( HFormGen():aForms[1]:oDlg:handle )
          hwg_Setfocus( HFormGen():aForms[1]:oDlg:handle )
          // #endif
-         #endif
+#endif
       ENDIF
    ENDIF
 
@@ -783,9 +783,9 @@ STATIC FUNCTION EndIde
       IF HDTheme():lChanged
          SaveEdOptions()
       ENDIF
-      #ifndef MODAL
+#ifndef MODAL
       oDesigner := Nil
-      #endif
+#endif
    ENDIF
 
    RETURN lRes

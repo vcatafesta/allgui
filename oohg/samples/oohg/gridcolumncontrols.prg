@@ -62,7 +62,7 @@ CLASS MyIpAddress FROM TGridControl // CLASS TGridControlIpAddress
 
    METHOD GridValue(uValue) BLOCK { |Self,uValue| Empty( Self ), LTrim(Str(uValue[1]))+"."+LTrim(Str(uValue[2]))+"."+LTrim(Str(uValue[3]))+"."+LTrim(Str(uValue[4])) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD CreateControl( uValue, cWindow, nRow, nCol, nWidth, nHeight ) CLASS MyIpAddress
 
@@ -110,7 +110,7 @@ CLASS MyRadioGroup FROM TGridControl // CLASS TGridControlRadioGroup
 
    METHOD GridValue(uValue) BLOCK { |Self,uValue| if( ( uValue >= 1 .AND. uValue <= Len( ::aItems ) ), ::aItems[ uValue ], "" ) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( aItems, nSpacing ) CLASS MyRadioGroup
 
@@ -160,7 +160,7 @@ CLASS MyFullName FROM TGridControl
 
    METHOD OnLostFocus       SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD CreateWindow( uValue, nRow, nCol, nWidth, nHeight, cFontName, nFontSize ) CLASS MyFullName
 

@@ -256,7 +256,7 @@ FUNCTION OpenTable()
       { 2, '1', '00:00', 'Begin of a new month' }, ;
       { 3, '6', '19:00', 'Go to a poker today.' }, ;
       { 4, '0', '10:00', 'Look at http://minisoft.tora.ru' }, ;
-      { 5, DToC( Date() ), '00:00', 'Program was installed in this day!' } }
+   { 5, DToC( Date() ), '00:00', 'Program was installed in this day!' } }
 
    IF File( PathApp + '\Dayly.dfn' ) = .F.
       dbCreate( PathApp + '\Dayly.dfn', aBase )
@@ -291,15 +291,15 @@ STATIC FUNCTION PrazdToArray( cYear )
       aPrRF := { { '01.01', [ New Year's Day]},;
          { '20.01', 'Inauguration Day' }, ;
          { '3-1-01', 'Birthday of Martin Luther King' }, ; //the third Monday in January
-      { '14.02', [ Valentine's Day]},;
+         { '14.02', [ Valentine's Day]},;
          { '3-1-02', [ Washington's Birthday]},; //the third Monday in February
-      { '0-1-05', 'Memorial Day' }, ;         //the last Monday in May
-      { '04.07', 'Independence Day' }, ;
+         { '0-1-05', 'Memorial Day' }, ;         //the last Monday in May
+         { '04.07', 'Independence Day' }, ;
          { '1-1-09', 'Labor Day' }, ;            //the first Monday in September
-      { '2-1-10', 'Columbus Day' }, ;         //the second Monday in October
-      { '11.11', 'Veterans Day' }, ;
+         { '2-1-10', 'Columbus Day' }, ;         //the second Monday in October
+         { '11.11', 'Veterans Day' }, ;
          { '4-4-11', 'Thanksgiving Day' }, ;     //the fourth Thursday in November
-      { '25.12', 'Christmas Day' } }
+         { '25.12', 'Christmas Day' } }
 
       FOR i = 1 TO Len( aPrRF )
          cDM := aPrRF[ i, 1 ]
@@ -1007,11 +1007,11 @@ FUNCTION ApplRun( cTime )
 
    //-------------------------------------------------------------\\
 
-   #define EWX_LOGOFF 0   // отключение от сети
-   #define EWX_SHUTDOWN 1
-   #define EWX_REBOOT 2
-   #define EWX_FORCE 4
-   #define EWX_POWEROFF 8
+#define EWX_LOGOFF 0   // отключение от сети
+#define EWX_SHUTDOWN 1
+#define EWX_REBOOT 2
+#define EWX_FORCE 4
+#define EWX_POWEROFF 8
 
    //-------------------------------------------------------------\\
 
@@ -1104,8 +1104,8 @@ FUNCTION ShutDnShow( nFlag, Tit )
 
    //-------------------------------------------------------------\\
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow( hWnd )
 

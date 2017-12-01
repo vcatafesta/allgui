@@ -30,11 +30,11 @@ PROCEDURE Main()
 
    RETURN
 
-   #ifdef __XHARBOUR__
-   #define ENUMINDEX hb_EnumIndex()
-   #else
-   #define ENUMINDEX aPart:__EnumIndex
-   #endif
+#ifdef __XHARBOUR__
+#define ENUMINDEX hb_EnumIndex()
+#else
+#define ENUMINDEX aPart:__EnumIndex
+#endif
 
 PROCEDURE Determine_the_portion_of_the_picture()
 

@@ -44,7 +44,7 @@ CLASS VAR winclass INIT "msctls_trackbar32"
 
    METHOD GetNumTics()  INLINE hwg_Sendmessage( ::handle, TBM_GETNUMTICS, 0, 0 )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, cTooltip, bChange, bDrag, nLow, nHigh, ;

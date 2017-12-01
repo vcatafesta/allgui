@@ -195,7 +195,7 @@ PROCEDURE ApplyStyles()
       MULTISELECT ! Form_1.Check1_9.Value
    END GRID
 
-   #define LVS_NOSCROLL        0x2000
+#define LVS_NOSCROLL        0x2000
    SetWindowStyle ( Form_1.Grid_1.Handle, LVS_NOSCROLL, Form_1.Check1_6.Value )
 
    ApplyStylesEx()

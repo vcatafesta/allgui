@@ -17,9 +17,9 @@
 
 PROCEDURE Main
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    EMPTY( _OOHG_ALLVARS )
-   #endif
+#endif
 
    DEFINE WINDOW Form_1 ;
          AT 0,0 ;

@@ -52,10 +52,10 @@ PROCEDURE Main
 
    RETURN
 
-   #endif   // #ifndef NO_SAMPLE
+#endif   // #ifndef NO_SAMPLE
 
-   #include "hbclass.ch"
-   #include "fileio.ch"
+#include "hbclass.ch"
+#include "fileio.ch"
 
    /*
    *  This is a template for ooHGRecord's subclasses (database class used
@@ -138,7 +138,7 @@ CLASS ooTextFile
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD GoTop() CLASS ooTextFile
 

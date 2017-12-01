@@ -42,7 +42,7 @@ CLASS VAR winclass   INIT "SysIPAddress32"
    HIDDEN:
    DATA  aValue           // Valor atual
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, aValue, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bGetFocus, bKillFocus ) CLASS HIPedit

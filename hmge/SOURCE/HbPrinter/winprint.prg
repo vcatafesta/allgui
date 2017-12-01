@@ -142,9 +142,9 @@ CLASS HBPrinter
    METHOD GetTextExtent( ctext, apoint, deffont )
    METHOD GetTextExtent_mm( ctext, apoint, deffont )
    METHOD End()
-   #ifdef _DEBUG_
+#ifdef _DEBUG_
    METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 )
-   #endif
+#endif
    METHOD Preview()
    METHOD PrevPrint( n1 )
    METHOD PrevShow()
@@ -153,7 +153,7 @@ CLASS HBPrinter
    METHOD PrintOption()
    METHOD GetVersion() INLINE ::Version
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New() CLASS HBPrinter
 
@@ -627,11 +627,11 @@ METHOD Convert( arr, lsize ) CLASS HBPrinter
       aret[ 1 ] := ( arr[ 1 ] ) * ::DEVCAPS[ 5 ] -if( lsize == NIL, ::DEVCAPS[ 9 ], 0 )
       aret[ 2 ] := ( arr[ 2 ] ) * ::DEVCAPS[ 6 ] -if( lsize == NIL, ::DEVCAPS[ 10 ], 0 )
       EXIT
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    OTHERWISE
-      #else
+#else
       DEFAULT
-      #endif
+#endif
       aret[ 1 ] := ( arr[ 1 ] ) * ::DEVCAPS[ 11 ]
       aret[ 2 ] := ( arr[ 2 ] ) * ::DEVCAPS[ 12 ]
    ENDSWITCH
@@ -1288,7 +1288,7 @@ STATIC FUNCTION str2arr( cList, cDelimiter )
 
    RETURN ( aList )
 
-   #ifdef HB_DYNLIB
+#ifdef HB_DYNLIB
 
 STATIC FUNCTION NumAt( cSearch, cString )
 
@@ -1300,7 +1300,7 @@ STATIC FUNCTION NumAt( cSearch, cString )
    ENDDO
 
    RETURN n
-   #endif
+#endif
 
 METHOD PrevThumb( nclick ) CLASS HBPrinter
 
@@ -1445,10 +1445,10 @@ METHOD PrevPrint( n1 ) CLASS HBPrinter
 
 STATIC FUNCTION LangInit
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
    LOCAL cLang
 
-   #endif
+#endif
    LOCAL aLang := { 'Preview', ;
       '&Cancel', ;
       '&Print', ;
@@ -1480,12 +1480,12 @@ STATIC FUNCTION LangInit
       'Printing ....', ;
       'Waiting for paper change...', ;
       'Sa&ve as...', ; // 31
-   'Save &All', ; // 32
-   'EMF Files', ; // 33
-   'All Files'                    ; // 34
-   }
+      'Save &All', ; // 32
+      'EMF Files', ; // 33
+      'All Files'                    ; // 34
+      }
 
-   #ifdef _MULTILINGUAL_
+#ifdef _MULTILINGUAL_
    cLang := Upper( Left( Set ( _SET_LANGUAGE ), 2 ) )
 
    // LANGUAGE IS NOT SUPPORTED BY hb_langSelect() FUNCTION
@@ -2103,7 +2103,7 @@ STATIC FUNCTION LangInit
          }
    ENDCASE
 
-   #endif
+#endif
 
    RETURN aLang
 
@@ -2352,7 +2352,7 @@ METHOD PrintOption() CLASS HBPrinter
 
    RETURN OKPrint
 
-   #ifdef _DEBUG_
+#ifdef _DEBUG_
 
 METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 ) CLASS HBPrinter
 
@@ -2387,7 +2387,7 @@ METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 ) CLASS HBPrinter
    SET DEVICE TO SCREEN
 
    RETURN self
-   #endif
+#endif
 
    /*
    * C-level

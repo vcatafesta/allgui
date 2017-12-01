@@ -75,7 +75,7 @@ CLASS TSlider FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, LO, HI, value, tooltip, ;
       change, vertical, noticks, both, top, left, HelpId, invisible, ;

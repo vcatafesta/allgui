@@ -44,7 +44,7 @@ CLASS VAR Hwnd SHARED
 
    METHOD End() INLINE  ::GetRefresh(), IIf( ::lCompacta, hwg_Postmessage( ::oFormCalc:Handle, WM_CLOSE, 0, 0 ),  )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCalculator
 

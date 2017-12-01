@@ -23,12 +23,12 @@ PROCEDURE main()
             // Wow! Again?!
          ENDIF
       ENDIF
-      ENDWITH
+   ENDWITH
 
-      RETURN
+   RETURN
 
-      /*
-      */
+   /*
+   */
 
 STATIC PROCEDURE ShowDialogResult( obj )
 
@@ -55,8 +55,8 @@ STATIC PROCEDURE ShowDialogResult( obj )
             :Flags       := TDF_ALLOW_DIALOG_CANCELLATION
             */
             :Execute()
-            ENDWITH
-            ENDWITH
-         ENDIF
+         ENDWITH
+      ENDWITH
+   ENDIF
 
-         RETURN
+   RETURN

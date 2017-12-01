@@ -57,8 +57,8 @@ FUNCTION Main(cBase)
 
       @  665,10 HYPERLINK cWeb;
          VALUE 'http://www.axis-soft.com.ar';
-         ADDRESS 'http://www.axis-soft.com.ar';
-         AUTOSIZE;
+      ADDRESS 'http://www.axis-soft.com.ar';
+      AUTOSIZE;
          FONT 'Tahoma';
          SIZE 14;
          BOLD;

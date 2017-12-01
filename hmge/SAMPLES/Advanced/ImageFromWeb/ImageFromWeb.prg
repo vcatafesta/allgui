@@ -29,10 +29,10 @@ STATIC scTmpDir
 FUNCTION Main()
 
    LOCAL aImg := { {"Eiffel Tower", "http://media.thisisinsider.com/images/58d919eaf2d0331b008b4bbd-960-720.jpg"}, ;
-      {"London Tower", "https://i2.wp.com/travelbluebook.com/wp-content/uploads/2016/02/Tower-of-London.jpg"}, ;
-      {"Pisa Tower",   "http://media1.britannica.com/eb-media/88/80588-004-0B5DCB41.jpg"}, ;
-      {"Taj Mahal",    "http://images.says.com/uploads/story_source/source_image/547108/2b63.jpg"}, ;
-      {"Tower Bridge", "http://www.goandco.co.uk/images/offices/tower-bridge.jpg"} }
+   {"London Tower", "https://i2.wp.com/travelbluebook.com/wp-content/uploads/2016/02/Tower-of-London.jpg"}, ;
+   {"Pisa Tower",   "http://media1.britannica.com/eb-media/88/80588-004-0B5DCB41.jpg"}, ;
+   {"Taj Mahal",    "http://images.says.com/uploads/story_source/source_image/547108/2b63.jpg"}, ;
+   {"Tower Bridge", "http://www.goandco.co.uk/images/offices/tower-bridge.jpg"} }
    LOCAL n
 
    SET FONT TO "MS Shell Dlg", 8

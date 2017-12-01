@@ -299,7 +299,7 @@ CLASS TForm FROM TWindow
 
    METHOD AddNotifyIcon
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, nominimize, nomaximize, nosize, ;
       nosysmenu, nocaption, InitProcedure, ReleaseProcedure, ;
@@ -1930,7 +1930,7 @@ CLASS TFormMain FROM TForm
 
    METHOD CheckInteractiveClose
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, nominimize, nomaximize, nosize, ;
       nosysmenu, nocaption, initprocedure, ReleaseProcedure, ;
@@ -2011,7 +2011,7 @@ CLASS TFormModal FROM TForm
 
    METHOD OnHideFocusManagement
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, Parent, nosize, nosysmenu, ;
       nocaption, InitProcedure, ReleaseProcedure, ;
@@ -2144,7 +2144,7 @@ CLASS TFormInternal FROM TForm
 
    METHOD ContainerCol        BLOCK { |Self| IF( ::Container != NIL, IF( ValidHandler( ::Container:ContainerhWndValue ), 0, ::Container:ContainerCol ) + ::Container:ColMargin, ::Parent:ColMargin ) + ::Col }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, oParent, aRGB, fontname, fontsize, ;
       ClickProcedure, MouseDragProcedure, MouseMoveProcedure, ;
@@ -2254,7 +2254,7 @@ CLASS TFormSplit FROM TFormInternal
 
    METHOD Define
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, w, h, break, grippertext, nocaption, title, aRGB, ;
       fontname, fontsize, gotfocus, lostfocus, virtualheight, ;
@@ -2319,7 +2319,7 @@ CLASS TFormMDIClient FROM TFormInternal
 
    METHOD ActiveChild
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, MouseDragProcedure, ;
       ClickProcedure, MouseMoveProcedure, aRGB, PaintProcedure, ;
@@ -2430,7 +2430,7 @@ CLASS TFormMDIChild FROM TFormInternal
 
    METHOD IsActive                          BLOCK { |Self| ::Parent:ActiveChild:hWnd == ::hWnd }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( FormName, Caption, x, y, w, h, nominimize, nomaximize, nosize, ;
       nosysmenu, nocaption, initprocedure, ReleaseProcedure, ;
@@ -2892,7 +2892,7 @@ FUNCTION SearchParentWindow( lInternal )
 
    RETURN uParent
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 STATIC FUNCTION RASCAN( aSource, bCode )
 
@@ -2904,7 +2904,7 @@ STATIC FUNCTION RASCAN( aSource, bCode )
    ENDDO
 
    RETURN nPos
-   #endif
+#endif
 
 FUNCTION GetWindowType( FormName )
 
@@ -3392,11 +3392,11 @@ FUNCTION inspector( oWind )
       aData := {}
       n:=''
 
-      #ifdef __XHARBOUR__
-      #define ENUMINDEX hb_enumindex()
-      #else
-      #define ENUMINDEX n:__enumindex
-      #endif
+#ifdef __XHARBOUR__
+#define ENUMINDEX hb_enumindex()
+#else
+#define ENUMINDEX n:__enumindex
+#endif
 
       FOR EACH n in aControlsNames
          s:=alltrim(n)
@@ -3420,7 +3420,7 @@ STATIC FUNCTION carga(oooBj,oGrd,oooBj_Data)
    LOCAL aData:={},n
 
    oGrd:DeleteAllItems()
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    try
       aData  := __objGetValueList( oooBj, .T. )
       IF len(aData)>1
@@ -3430,7 +3430,7 @@ STATIC FUNCTION carga(oooBj,oGrd,oooBj_Data)
       END IF
    CATCH
    end
-   #else
+#else
    BEGIN sequence
       aData  := __objGetValueList( oooBj,.T.)
       IF len(aData)>1
@@ -3439,7 +3439,7 @@ STATIC FUNCTION carga(oooBj,oGrd,oooBj_Data)
          NEXT
       END IF
    END SEQUENCE
-   #endif
+#endif
    oGrd:ColumnsBetterAutoFit()
    oooBj_Data:=aData // retorna en variable por referencia
 

@@ -38,9 +38,9 @@ FUNCTION Main()
          COMBOBOX cmb_Address ;
             FONT "Arial" SIZE 9 ;
             ITEMS {"http://www.oohg.org", ;
-            "http://oohg.wikia.com", ;
-            "http://sourceforge.net/projects/oohg/"} ;
-            VALUE 1 ;
+         "http://oohg.wikia.com", ;
+         "http://sourceforge.net/projects/oohg/"} ;
+         VALUE 1 ;
             ON ENTER Action() ;
             DISPLAYEDIT
 

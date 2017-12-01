@@ -664,7 +664,7 @@ FUNCTION DBRepair(cDbf, cLog, cDonor, cRDD, cJunkChar, ;
          nBytes := fread(hDbf, @cRecord, nRecLen)
 
          IF nBytes == 0 .or. ; // No more data?
-            (nBytes == 1 .and. left(cRecord, nBytes) == cEOF)
+               (nBytes == 1 .and. left(cRecord, nBytes) == cEOF)
             EXIT
          ENDIF
 
@@ -1055,10 +1055,10 @@ STATIC FUNCTION HasJunk(cText, lMemo, cJunkChar)
    LOCAL nLen, n, x
    LOCAL lJunk := .F.
 
-   #ifdef SHOWJUNK
+#ifdef SHOWJUNK
    LOCAL cJunk := ""
 
-   #endif
+#endif
 
    nLen := len(rtrim(cText))
 
@@ -1070,18 +1070,18 @@ STATIC FUNCTION HasJunk(cText, lMemo, cJunkChar)
             .T.)
          IF lJunk
             cText := InsDel(cText, x, 1, cJunkChar)
-            #ifdef SHOWJUNK
+#ifdef SHOWJUNK
             cJunk += Nstr(n) + " "
-            #endif
+#endif
          ENDIF
       ENDIF
    NEXT
 
-   #ifdef SHOWJUNK
+#ifdef SHOWJUNK
    IF lJunk
       LogText(cJunk)
    ENDIF
-   #endif
+#endif
 
    Return(lJunk)
 

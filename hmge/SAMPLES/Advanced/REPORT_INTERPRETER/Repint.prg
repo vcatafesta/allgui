@@ -313,7 +313,7 @@ FUNCTION azzera(y_campo)
 
    RETURN ritorno
 
-   #include "S_Mchoice.prg"
+#include "S_Mchoice.prg"
 
 STATIC FUNCTION AddFont
 

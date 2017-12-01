@@ -56,12 +56,12 @@ FUNCTION BrowStru(DBUstruct,aSqlStru,cTable,lNewTab, aSeq)
          oGrid_1:SetColor( { 1, 3, 5, 6, 13, 15, 17 }, ;
             { CLR_BLACK,  CLR_YELLOW,CLR_RED, -3, ;
             CLR_HGREEN, CLR_BLACK ,;  // text colors
-         CLR_YELLOW } )  // text superheader
+            CLR_YELLOW } )  // text superheader
          oGrid_1:SetColor( { 2, 4, 14 ,16 }, ;
             { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-         { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
-         { CLR_HGREEN, CLR_BLACK } ,;  // degraded order column background color
-         { CLR_WHITE, CLR_BLACK }  } ) // degraded superheaders backgroud color
+            { CLR_WHITE, CLR_BLACK }, ;  // degraded headers backgroud color
+            { CLR_HGREEN, CLR_BLACK } ,;  // degraded order column background color
+            { CLR_WHITE, CLR_BLACK }  } ) // degraded superheaders backgroud color
          oGrid_1:SetData( 3, ComboWBlock( oGrid_1, 3, 3 , aType ) )
          oGrid_1:SetColor( { 1, 2 }, {  CLR_BLACK, { || if( !oGrid_1:lPhantArrRow .and. (rtrim(Eval( oGrid_1:aColumns[ 5 ]:bData ))== 'FLOAT'.or. Eval( oGrid_1:aColumns[ 7 ]:bData ) == 0 ),{ CLR_WHITE,CLR_HGRAY },;
             { CLR_WHITE, CLR_HRED } ) } }, 6 )
@@ -585,7 +585,7 @@ FUNCTION AlterRec(oGrid,cTable,cKol,cType,Mod,aDbStru)
       cQuery += QueryCrea(cTable,3,cTable2,aDbStru)+CRLF
       cQuery += "DROP TABLE "+cTable+" ;" +CRLF
       cQuery += QueryNewTbl(oGrid,cTable) +CRLF//"CREATE TABLE t1(a,b);
-         adBStru :={}
+      adBStru :={}
       AEval( oGrid:aArray, {|x| aAdd(adBStru,{x[2],x[3],x[4],x[5]})})
       cQuery += QueryCrea(cTable2,3,cTable,aDbStru)+CRLF
       cQuery += "DROP TABLE "+ctable2 +";" +CRLF
@@ -673,6 +673,7 @@ FUNCTION QueryNewTbl(oGrid,cTable)
 FUNCTION BrowseTable(cTable, mod)
 
    LOCAL cSelect, bSetup , oBrw, aResult, aStruct
+
    cSelect := "SELECT * FROM "+cTable +" LIMIT 10 OFFSET 0 ;"
    aResult := SQLITE_QUERY( pDb, RTRIM( cSelect ) )
    IF EMPTY(LEN(aResult))

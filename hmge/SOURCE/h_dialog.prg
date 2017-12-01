@@ -274,9 +274,9 @@ FUNCTION _DefineDialog ( FormName, ParentForm, Id_resource , x , y , w , h , cap
       AAdd ( _HMG_aFormActivateId , 0 )
       AAdd ( _HMG_aFormMiscData1, {} )
       AAdd ( _HMG_aFormMiscData2, '' )
-      #ifdef _HMG_COMPAT_
+#ifdef _HMG_COMPAT_
       AAdd ( _HMG_StopWindowEventProcedure, .F. )
-      #endif
+#endif
 
    ENDIF
 

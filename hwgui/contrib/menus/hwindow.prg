@@ -22,7 +22,7 @@ CLASS HObject
 
    // DATA classname
 
-ENDCLASS
+   ENDCLASS
 
 CLASS HCustomWindow INHERIT HObject
 
@@ -69,7 +69,7 @@ CLASS VAR oDefaultParent SHARED
 
    METHOD Minimize() INLINE SendMessage(::handle,  WM_SYSCOMMAND, SC_MINIMIZE, 0)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD FindControl( nId,nHandle ) CLASS HCustomWindow
 
@@ -124,7 +124,7 @@ CLASS VAR szAppName  SHARED INIT "HwGUI_App"
 
    METHOD Close()   INLINE EndWindow()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
       bInit,bExit,bSize, ;
@@ -350,21 +350,21 @@ FUNCTION DefWndProc( hWnd, msg, wParam, lParam )
    ELSEIF msg == WM_SIZE
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem in aControls
          IF oItem:bSize != Nil
             Eval( oItem:bSize, ;
                oItem, LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #else
+#else
       FOR iCont := 1 TO nControls
          IF aControls[iCont]:bSize != Nil
             Eval( aControls[iCont]:bSize, ;
                aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #endif
+#endif
       aControls := GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
@@ -411,19 +411,19 @@ FUNCTION DefWndProc( hWnd, msg, wParam, lParam )
       //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem IN aControls
          IF __ObjHasMsg( oItem,"END" )
             oItem:End()
          ENDIF
       NEXT
-      #else
+#else
       FOR i := 1 TO nControls
          IF __ObjHasMsg( aControls[i],"END" )
             aControls[i]:End()
          ENDIF
       NEXT
-      #endif
+#endif
       HWindow():DelItem( oWnd )
       PostQuitMessage (0)
 
@@ -564,21 +564,21 @@ FUNCTION DefChildWndProc( hWnd, msg, wParam, lParam )
    ELSEIF msg == WM_SIZE
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem in aControls
          IF oItem:bSize != Nil
             Eval( oItem:bSize, ;
                oItem, LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #else
+#else
       FOR iCont := 1 TO nControls
          IF aControls[iCont]:bSize != Nil
             Eval( aControls[iCont]:bSize, ;
                aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #endif
+#endif
       aControls := GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
@@ -626,19 +626,19 @@ FUNCTION DefChildWndProc( hWnd, msg, wParam, lParam )
       //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Child - DESTROY",40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem IN aControls
          IF __ObjHasMsg( oItem,"END" )
             oItem:End()
          ENDIF
       NEXT
-      #else
+#else
       FOR i := 1 TO nControls
          IF __ObjHasMsg( aControls[i],"END" )
             aControls[i]:End()
          ENDIF
       NEXT
-      #endif
+#endif
       HWindow():DelItem( oWnd )
 
       // Return 0  // Default
@@ -774,21 +774,21 @@ FUNCTION DefMdiChildProc( hWnd, msg, wParam, lParam )
       IF ISOBJECT( oWnd )
          aControls := oWnd:aControls
          nControls := Len( aControls )
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          FOR EACH oItem in aControls
             IF oItem:bSize != Nil
                Eval( oItem:bSize, ;
                   oItem, LoWord( lParam ), HiWord( lParam ) )
             ENDIF
          NEXT
-         #else
+#else
          FOR iCont := 1 TO nControls
             IF aControls[iCont]:bSize != Nil
                Eval( aControls[iCont]:bSize, ;
                   aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
             ENDIF
          NEXT
-         #endif
+#endif
       ENDIF
    ELSEIF msg == WM_NCACTIVATE
       //WriteLog( "|DefMDIChild"+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10) )
@@ -873,19 +873,19 @@ FUNCTION DefMdiChildProc( hWnd, msg, wParam, lParam )
          ENDIF
          aControls := oWnd:aControls
          nControls := Len( aControls )
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          FOR EACH oItem in aControls
             IF __ObjHasMsg( oItem,"END" )
                oItem:End()
             ENDIF
          NEXT
-         #else
+#else
          FOR i := 1 TO nControls
             IF __ObjHasMsg( aControls[i],"END" )
                aControls[i]:End()
             ENDIF
          NEXT
-         #endif
+#endif
          // HWindow():DelItem( oWnd )  -> alterado por jamaj
          // Temos que eliminar em NC_DESTROY
       ENDIF
@@ -911,13 +911,13 @@ FUNCTION ReleaseAllWindows( oWnd, hWnd )
 
    //  Vamos mandar destruir as filhas
    // Destroi as CHILD's desta MAIN
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    FOR EACH oItem IN HWindow():aWindows
       IF oItem:oParent != Nil .AND. oItem:oParent:handle == hWnd
          SendMessage( oItem:handle,WM_CLOSE,0,0 )
       ENDIF
    NEXT
-   #else
+#else
    nCont := Len( HWindow():aWindows )
 
    FOR iCont := 1 TO nCont
@@ -928,7 +928,7 @@ FUNCTION ReleaseAllWindows( oWnd, hWnd )
       ENDIF
 
    NEXT
-   #endif
+#endif
 
    IF HWindow():GetMain() == oWnd
       EXITProcess(0)
@@ -1033,21 +1033,21 @@ FUNCTION DefMDIWndProc( hWnd, msg, wParam, lParam )
    ELSEIF msg == WM_SIZE
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem in aControls
          IF oItem:bSize != Nil
             Eval( oItem:bSize, ;
                oItem, LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #else
+#else
       FOR iCont := 1 TO nControls
          IF aControls[iCont]:bSize != Nil
             Eval( aControls[iCont]:bSize, ;
                aControls[iCont], LoWord( lParam ), HiWord( lParam ) )
          ENDIF
       NEXT
-      #endif
+#endif
       aControls := GetWindowRect( hWnd )
       oWnd:nWidth  := aControls[3]-aControls[1]
       oWnd:nHeight := aControls[4]-aControls[2]
@@ -1100,19 +1100,19 @@ FUNCTION DefMDIWndProc( hWnd, msg, wParam, lParam )
       //WriteLog( "|Window: "+Str(hWnd,10)+"|"+Str(msg,6)+"|"+Str(wParam,10)+"|"+Str(lParam,10)  + "|" + PadR("Main - DESTROY",40) + "|")
       aControls := oWnd:aControls
       nControls := Len( aControls )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       FOR EACH oItem IN aControls
          IF __ObjHasMsg( oItem,"END" )
             oItem:End()
          ENDIF
       NEXT
-      #else
+#else
       FOR i := 1 TO nControls
          IF __ObjHasMsg( aControls[i],"END" )
             aControls[i]:End()
          ENDIF
       NEXT
-      #endif
+#endif
       // HWindow():DelItem( oWnd )
 
       IF ISBLOCK(oWnd:bDestroy)

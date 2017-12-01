@@ -138,7 +138,7 @@ FUNCTION MinimizeIt()
 
    RETURN NIL
 
-   #define GW_OWNER      4
+#define GW_OWNER      4
 
 FUNCTION _HMG_ExternalAppGetHandle
 
@@ -155,8 +155,8 @@ FUNCTION _HMG_ExternalAppGetHandle
 
          GetFullFileNameByHandle (aWin [i], @cFullFileName)
          IF GetWindow( aWin [i], GW_OWNER ) = 0 .AND.;  // If it is an owner window
-            aWin [i] != Application.Handle .AND.;       // If it is not this app
-            UPPER (ExternalApp.FULLFILENAME) $ UPPER (cFullFileName)
+               aWin [i] != Application.Handle .AND.;       // If it is not this app
+               UPPER (ExternalApp.FULLFILENAME) $ UPPER (cFullFileName)
             hWnd := aWin [i]
             EXIT
          ENDIF

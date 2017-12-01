@@ -97,7 +97,7 @@ CLASS TAniGIF FROM TImage
 
    HB_SYMBOL_UNUSED( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, nCol, nRow, cFile, nWidth, nHeight, ;
       ProcedureName, nHelpId, lInvisible, lWhiteBack, lRtl, uBkClr, ;
@@ -198,8 +198,8 @@ METHOD Load( cGIF ) CLASS TAniGIF
       RETURN .F.
    ENDIF
    aInfo := { SubStr( cHeader, 4, 3 ), ;           // Gif version
-   Bin2W( SubStr( cHeader, 7, 2 ) ), ;  // Logical screen width
-   Bin2W( SubStr( cHeader, 9, 2 ) ) }   // Logical screen height
+      Bin2W( SubStr( cHeader, 7, 2 ) ), ;  // Logical screen width
+      Bin2W( SubStr( cHeader, 9, 2 ) ) }   // Logical screen height
 
    // frames
    aPictures := {}

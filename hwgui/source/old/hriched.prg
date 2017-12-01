@@ -12,18 +12,18 @@
 
 CLASS HRichEdit INHERIT HControl
 
-   #define ENM_DRAGDROPDONE 16
-   #define ENM_SCROLL 4
+#define ENM_DRAGDROPDONE 16
+#define ENM_SCROLL 4
 
-   #ifdef UNICODE
+#ifdef UNICODE
 
 CLASS VAR winclass INIT "RichEdit20W"
 
-   #else
+#else
 
 CLASS VAR winclass INIT "RichEdit20A"
 
-   #endif
+#endif
    DATA lChanged   INIT .F.
    DATA lSetFocus  INIT .T.
    DATA lAllowTabs INIT .F.
@@ -72,14 +72,14 @@ CLASS VAR winclass INIT "RichEdit20A"
 
    METHOD Print()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, bGfocus, bLfocus, ctooltip, ;
       tcolor, bcolor, bOther, lAllowTabs, bChange, lnoBorder ) CLASS HRichEdit
 
    nStyle := Hwg_BitOr( IIf( nStyle == Nil, 0, nStyle ), WS_CHILD + WS_VISIBLE + WS_TABSTOP + ; // WS_BORDER )
-   IIf( lNoBorder = Nil.OR. ! lNoBorder, WS_BORDER, 0 ) )
+      IIf( lNoBorder = Nil.OR. ! lNoBorder, WS_BORDER, 0 ) )
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, IIf( bcolor == Nil, hwg_Getsyscolor( COLOR_BTNHIGHLIGHT ), bcolor ) )
 

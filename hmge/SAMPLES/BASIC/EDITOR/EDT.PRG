@@ -263,11 +263,11 @@ PROCEDURE guardar()
    cArchivo := Putfile( { {"Texts", "*.txt"}, {"All Files", "*.*"} }, "Save to File", cLastSave, .t., cArchivo )
    IF !Empty( cArchivo )
       cVar   := Frm1.edit.Value
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       hb_Memowrit( IF(AT(".", cArchivo) > 0, cArchivo, cArchivo+".txt") , cVar )
-      #else
+#else
       Memowrit( IF(AT(".", cArchivo) > 0, cArchivo, cArchivo+".txt") , cVar , .F. )
-      #endif
+#endif
       cLastSave := cFilePath( cArchivo )
       lSaveNeeded := .F.
       ocultar()
@@ -275,8 +275,8 @@ PROCEDURE guardar()
 
    RETURN
 
-   #define MAX_LINE 146
-   #define MAX_PORT 98
+#define MAX_LINE 146
+#define MAX_PORT 98
 
 PROCEDURE print(lPrev)
 
@@ -402,6 +402,7 @@ PROCEDURE Acercade()
 PROCEDURE configuracion()
 
    LOCAL cCfg   := '.\edt.ini'
+
    cLastOpen := "" ; cLastSave := ""
    nTop :=0 ; nLeft := 0 ; nWidth := 94 ; nHeight := 40
    cFontName   := 'Arial'

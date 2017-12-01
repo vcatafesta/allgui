@@ -72,7 +72,7 @@ FUNCTION Query( lEdit )
 
          RETURN .F.
       ENDIF
-      #ifdef RDD_ADS
+#ifdef RDD_ADS
       IF !lConnected
          IF Empty( mypath )
             AdsConnect( "\" + CURDIR() + IIF( EMPTY( CURDIR() ), "", "\" ) )
@@ -125,7 +125,7 @@ FUNCTION Query( lEdit )
             RETURN .F.
          ENDIF
       ENDIF
-      #endif
+#endif
    ENDIF
 
    RETURN NIL

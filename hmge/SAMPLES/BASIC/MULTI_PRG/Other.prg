@@ -14,10 +14,10 @@ PROCEDURE InOtherPrg()
 
    RETURN
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 STATIC PROCEDURE TEST
 
    RETURN
 
-   #endif
+#endif

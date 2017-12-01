@@ -111,9 +111,9 @@ FUNCTION SetLinkBackColor()
 
    RETURN NIL
 
-   #ifndef __XHARBOUR__
-   #xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
-   #endif
+#ifndef __XHARBOUR__
+#xtranslate At(<a>,<b>,[<x,...>]) => hb_At(<a>,<b>,<x>)
+#endif
 
 FUNCTION GetFileInPath(cFile)
 

@@ -44,7 +44,7 @@ FUNCTION OnkeyAllEditBox()
       IF GetKeyState (VK_INSERT) <> 0
          CreateCaret (hWnd, 0, INT(nWidth), nHeight)
       ELSE
-         #define SM_CXBORDER 5
+#define SM_CXBORDER 5
          CreateCaret (hWnd, 0, GetSystemMetrics(SM_CXBORDER) , nHeight)
       ENDIF
       ShowCaret (hWnd)
@@ -62,7 +62,7 @@ FUNCTION EditBox_DBLCLICK()
 
    LOCAL nStart, nEnd
 
-   #define WM_LBUTTONDBLCLK 515
+#define WM_LBUTTONDBLCLK 515
    IF EventMSG() == WM_LBUTTONDBLCLK
       MsgInfo ("DBLCLICK")
    ENDIF

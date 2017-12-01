@@ -38,7 +38,7 @@ CLASS Config
    METHOD insertVars
    METHOD envVars
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Config:init()
 

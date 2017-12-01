@@ -74,8 +74,8 @@ PROCEDURE GoDraw()                       // Drawing lines by predefined styles
       nLinePenW
 
    LOCAL aPCCounts := { ;                       // Point & Corner Counts per Style
-   { 12, 48, 48, 32 },;       // Point Counts
-   { 12, 48,  3,  1 } }       // Corner Counts
+      { 12, 48, 48, 32 },;       // Point Counts
+      { 12, 48,  3,  1 } }       // Corner Counts
 
    LOCAL nPCount,;
       nCCount,;
@@ -111,26 +111,26 @@ PROCEDURE GoDraw()                       // Drawing lines by predefined styles
       nRatio      := nPCOunt / nCCOunt
       aParams     := { ;
          { ;                                       // Style 1
-      { 1,        2,       .1 },;             // nFactor
-      { 1,        nPCount,  1 },;             // nLineBeg
-      { 1,        nPCount,  1 };              // nCornCremnt
-      },;                                          // EOF Style 1
-      { ;                                       // Style 2
-      { 0,        3,       .5 },;             // nFactor
-      { 1,        nPCount,  1 },;             // nLineBeg
-      { 0,        nPCount,  nPCOunt / 4 };    // nCornCremnt
-      },;                                          // EOF Style 2
-      { ;                                       // Style 3
-      { 0,        8,        1 },;             // nFactor
-      { 1,        nRatio,   1 },;             // nLineBeg
-      { nRatio,   nPCount,  nRatio };         // nCornCremnt
-      },;                                          // EOF Style 3
-      { ;                                       // Style 4
-      { 2,        8,        1 },;             // nFactor
-      { 1,        nPCount,  1 },;             // nLineBeg
-      { nZStep-1, nPCount,  nZStep };         // nCornCremnt
-      };                                           // EOF Style 4
-      }                                            // EOF aParams
+         { 1,        2,       .1 },;             // nFactor
+         { 1,        nPCount,  1 },;             // nLineBeg
+         { 1,        nPCount,  1 };              // nCornCremnt
+         },;                                          // EOF Style 1
+         { ;                                       // Style 2
+         { 0,        3,       .5 },;             // nFactor
+         { 1,        nPCount,  1 },;             // nLineBeg
+         { 0,        nPCount,  nPCOunt / 4 };    // nCornCremnt
+         },;                                          // EOF Style 2
+         { ;                                       // Style 3
+         { 0,        8,        1 },;             // nFactor
+         { 1,        nRatio,   1 },;             // nLineBeg
+         { nRatio,   nPCount,  nRatio };         // nCornCremnt
+         },;                                          // EOF Style 3
+         { ;                                       // Style 4
+         { 2,        8,        1 },;             // nFactor
+         { 1,        nPCount,  1 },;             // nLineBeg
+         { nZStep-1, nPCount,  nZStep };         // nCornCremnt
+         };                                           // EOF Style 4
+         }                                            // EOF aParams
 
       nFactBeg := aParams[ nStyleNum, 1, 1 ]
       nFactEnd := aParams[ nStyleNum, 1, 2 ]

@@ -15,7 +15,7 @@ STATIC cDestinationFolder, nArchiveNameCreatingMethod, cArchiveName, nOverwriteA
 FUNCTION main
 
    LOCAL cFileKinds_FNam    := "FilKinds.lst",;   // File kinds file name
-   cFileKinds                             // File kinds string
+      cFileKinds                             // File kinds string
    aFileKinds := {}                               // File kinds array
    cDestinationFolder:=GetCurrentFolder()+"\_Backup"
    nArchiveNameCreatingMethod := 2
@@ -100,7 +100,7 @@ PROCEDURE CreateArchiveName
    END SWITCH
 
    RETURN
-   #command COMPRESS [ FILES ] <afiles> ;
+#command COMPRESS [ FILES ] <afiles> ;
       TO <zipfile> ;
       BLOCK <block>  ;
       [ <ovr: OVERWRITE> ] ;

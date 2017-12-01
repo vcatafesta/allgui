@@ -38,7 +38,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Rebuild( aValues )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
       bSize,ctoolt,tcolor,bcolor ) CLASS HGraph

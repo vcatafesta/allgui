@@ -100,19 +100,19 @@ STATIC FUNCTION CreateDatos()
    aDatos := Array( k )
    FOR i := 1 TO k
       aDatos[ i ] := { " ", ;                         // 1
-      i, ;                                         // 2
-      ntoc( i ) + "_123", ;                        // 3
-      Date() + i, ;                                // 4
-      PadR( "Test line - " + ntoc( i ), 20 ), ;    // 5
-      Round( ( 10000 -i ) * i / 3, 2 ), ;          // 6
-      100.00 * i, ;                                // 7
-      0.12, ;                                      // 8
-      Round( 100.00 * i * 0.12, 2 ), ;             // 9
-      Round( 1234567.00 / i, 3 ), ;                // 10
-      PadR( "Line " + StrZero( i, 5 ), 20 ), ;     // 11
-      Date(), ;                                    // 12
-      Time(), ;                                    // 13
-      i % 2 == 0 }                                 // 14
+         i, ;                                         // 2
+         ntoc( i ) + "_123", ;                        // 3
+         Date() + i, ;                                // 4
+         PadR( "Test line - " + ntoc( i ), 20 ), ;    // 5
+         Round( ( 10000 -i ) * i / 3, 2 ), ;          // 6
+         100.00 * i, ;                                // 7
+         0.12, ;                                      // 8
+         Round( 100.00 * i * 0.12, 2 ), ;             // 9
+         Round( 1234567.00 / i, 3 ), ;                // 10
+         PadR( "Line " + StrZero( i, 5 ), 20 ), ;     // 11
+         Date(), ;                                    // 12
+         Time(), ;                                    // 13
+         i % 2 == 0 }                                 // 14
    NEXT
 
    aHead  := AClone( aDatos[ 1 ] )

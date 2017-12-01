@@ -42,7 +42,7 @@ PROCEDURE Main
 
    RETURN
 
-   #define SW_SHOWNORMAL   1
+#define SW_SHOWNORMAL   1
 
 FUNCTION RunFile()
 

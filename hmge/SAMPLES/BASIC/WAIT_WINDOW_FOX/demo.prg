@@ -54,4 +54,4 @@ PROCEDURE test2( cTitle )
 
    RETURN
 
-   #include "WaitWindowFox.prg"
+#include "WaitWindowFox.prg"

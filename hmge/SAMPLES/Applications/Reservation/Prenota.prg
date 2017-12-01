@@ -173,7 +173,7 @@ FUNCTION Listato()
 
    LOCAL cnt := 0 , oldDb := alias(), ;
       noldorder   := Presa->(indexord()), ; // original file index order
-   ntargetpos  := Presa->(recno())       // position of target file
+      ntargetpos  := Presa->(recno())       // position of target file
    LOCAL aLbl    := {{ 'From day:' ,'to day:'},{'Dal giorno:','Al giorno' }}[alng] ,;
       aIniVal := { presa->data_in, date() },;
       aFmt    := { '99/99/99' , '99/99/99' },;

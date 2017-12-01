@@ -96,10 +96,10 @@ PROCEDURE GETITEM()
 
    RETURN
 
-   #ifndef __XHARBOUR__
-   #xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
-   #xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
-   #endif
+#ifndef __XHARBOUR__
+#xcommand TRY              => BEGIN SEQUENCE WITH {|__o| break(__o) }
+#xcommand CATCH [<!oErr!>] => RECOVER [USING <oErr>] <-oErr->
+#endif
 
 FUNCTION ExportToDBF( cDbf, aData, aStruct )
 

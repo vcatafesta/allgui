@@ -27,7 +27,7 @@ CLASS VAR oGroupCurrent
 
    METHOD Refresh()   INLINE Iif( ::bSetGet!=Nil,::SetValue(Eval(::bSetGet)),.T. )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( vari,bSetGet ) CLASS HRadioGroup
 
@@ -82,7 +82,7 @@ CLASS VAR winclass   INIT "BUTTON"
 
    METHOD onEvent( msg, wParam, lParam )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,bPaint,bClick,ctoolt,tcolor,bcolor ) CLASS HRadioButton

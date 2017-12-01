@@ -198,6 +198,7 @@ STATIC FUNCTION PrintMessage(cPrinter)
 FUNCTION WinGetPrinters()
 
    LOCAL aPrn := {}, nStart := 1, cPrinters, nStop, nPos, cPrn
+
    cPrinters := EnumPrinters()+';'
    nStop := LEN(cPrinters)+1
    DO WHILE nStart < nStop

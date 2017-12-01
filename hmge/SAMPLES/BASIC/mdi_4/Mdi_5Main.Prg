@@ -112,7 +112,7 @@ FUNCTION WinChildMaximize()
 
    ChildHandle := GetActiveMdiHandle()
    IF aScan ( _HMG_aFormHandles, ChildHandle ) > 0
-      #define WM_MDIMAXIMIZE 0x0225
+#define WM_MDIMAXIMIZE 0x0225
       SendMessage( _HMG_MainClientMDIHandle, WM_MDIMAXIMIZE, ChildHandle, 0 )
    END IF
 

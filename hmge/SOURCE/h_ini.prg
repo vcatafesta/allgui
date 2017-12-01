@@ -67,24 +67,24 @@ FUNCTION _SetGetLogFile( cFile )
 
    RETURN cOld
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
 
 FUNCTION _LogFile( lCrLf, ... )
 
-   #else
+#else
 
 FUNCTION _LogFile( ... )
 
-   #endif
+#endif
    LOCAL hFile, i, xVal, cTp
    LOCAL aParams := hb_AParams()
    LOCAL nParams := Len( aParams )
    LOCAL cFile := hb_defaultValue( _SetGetLogFile(), GetStartUpFolder() + "\_MsgLog.txt" )
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    LOCAL lCrLf
 
-   #endif
+#endif
    IF !Empty( cFile )
       hFile := iif( File( cFile ), FOpen( cFile, FO_READWRITE ), FCreate( cFile, FC_NORMAL ) )
       IF hFile == F_ERROR
@@ -93,9 +93,9 @@ FUNCTION _LogFile( ... )
       ENDIF
       FSeek( hFile, 0, FS_END )
       IF nParams > 1
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          lCrLf := aParams[ 1 ]
-         #endif
+#endif
          IF hb_defaultValue( lCrLf, .T. )
             FWrite( hFile, CRLF, 2 )
          ENDIF
@@ -105,11 +105,11 @@ FUNCTION _LogFile( ... )
             IF     cTp == 'C' ; xVal := iif( Empty( xVal ), "'" + "'", Trim( xVal ) )
             ELSEIF cTp == 'N' ; xVal := hb_ntos( xVal )
             ELSEIF cTp == 'L' ; xVal := iif( xVal, ".T.", ".F." )
-               #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
             ELSEIF cTp == 'D' ; xVal := DToC( xVal )
-               #else
+#else
             ELSEIF cTp == 'D' ; xVal := hb_DToC( xVal, 'DD.MM.YYYY' )
-               #endif
+#endif
             ELSEIF cTp == 'A' ; xVal := "ARRAY["  + hb_ntos( Len( xVal ) ) + "]"
             ELSEIF cTp == 'H' ; xVal :=  "HASH["  + hb_ntos( Len( xVal ) ) + "]"
             ELSEIF cTp == 'B' ; xVal := "'" + "B" + "'"
@@ -135,13 +135,13 @@ FUNCTION _BeginIni( cIniFile )
       cIniFile := ".\" + cIniFile
    ENDIF
 
-   #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
    hFile := iif( File( cIniFile ), FOpen( cIniFile, FO_READ + FO_SHARED ), FCreate( cIniFile ) )
    IF hFile == F_ERROR
-      #else
+#else
       hFile := hb_vfOpen( cIniFile, iif( hb_vfExists( cIniFile ), FO_READ + FO_SHARED, FO_CREAT + FO_READWRITE ) )
       IF hFile == NIL
-         #endif
+#endif
          MsgInfo( "Error opening a file INI. DOS ERROR: " + hb_ntos( FError() ) )
 
          Return( -1 )
@@ -149,11 +149,11 @@ FUNCTION _BeginIni( cIniFile )
          _HMG_ActiveIniFile := cIniFile
       ENDIF
 
-      #if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
+#if defined( __XHARBOUR__ ) .OR. ( __HARBOUR__ - 0 < 0x030200 )
       FClose( hFile )
-      #else
+#else
       hb_vfClose( hFile )
-      #endif
+#endif
 
       RETURN( 0 )
 

@@ -268,7 +268,7 @@ STATIC PROCEDURE RefreshStop( stop )
 
    RETURN
 
-   #define MM_MCINOTIFY        0x3B9           /* MCI */
+#define MM_MCINOTIFY        0x3B9           /* MCI */
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
@@ -287,11 +287,11 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
       EXIT
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       DEFAULT
-      #else
+#else
    OTHERWISE
-      #endif
+#endif
       result := Events( hWnd, nMsg, wParam, lParam )
    END
 

@@ -430,7 +430,7 @@ CLASS TWindow
 
    */
 
-ENDCLASS
+   ENDCLASS
 
 #pragma BEGINDUMP
 
@@ -1453,10 +1453,10 @@ METHOD Control( cControl ) CLASS TWindow
 
    RETURN IF( nPos > 0, ::aControls[ nPos ], nil )
 
-   #define HOTKEY_ID        1
-   #define HOTKEY_MOD       2
-   #define HOTKEY_KEY       3
-   #define HOTKEY_ACTION    4
+#define HOTKEY_ID        1
+#define HOTKEY_MOD       2
+#define HOTKEY_KEY       3
+#define HOTKEY_ACTION    4
 
 METHOD HotKey( nKey, nFlags, bAction ) CLASS TWindow
 
@@ -2909,17 +2909,17 @@ FUNCTION _OOHG_GetArrayItem( uaArray, nItem, uExtra1, uExtra2 )
 
 FUNCTION _OOHG_DeleteArrayItem( aArray, nItem )
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
    RETURN ADel( aArray, nItem, .T. )
-   #else
+#else
    IF HB_IsArray( aArray ) .AND. Len( aArray ) >= nItem
       ADel( aArray, nItem )
       ASize( aArray, Len( aArray ) - 1 )
    ENDIF
 
    RETURN aArray
-   #endif
+#endif
 
 FUNCTION _OOHG_SetKey( aKeys, nKey, nFlags, bAction, nId )
 
@@ -2997,7 +2997,7 @@ CLASS TDynamicValues
 
    ERROR HANDLER Error
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWnd ) CLASS TDynamicValues
 

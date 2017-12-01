@@ -46,7 +46,7 @@ CLASS HPanel INHERIT HControl, HScrollArea
 
    METHOD ResizeOffSet( nMode )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       bInit, bSize, bPaint, bcolor ) CLASS HPanel

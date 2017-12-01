@@ -296,10 +296,10 @@ STATIC FUNCTION _DefineTab ( ControlName, ParentFormName, x, y, w, h, aCaptions,
 
    RETURN NIL
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    /* FOR EACH hb_enumIndex() */
-   #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-   #endif
+#xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
+#endif
 
 FUNCTION InitDialogTab( ParentName, ControlHandle, k )
 
@@ -393,11 +393,11 @@ FUNCTION UpdateTab ( y )  // Internal Function
             IF _IsControlVisibleFromHandle ( w )
 
                CShowControl ( w )
-               #ifdef _PANEL_
+#ifdef _PANEL_
             ELSEIF _IsWindowVisibleFromHandle ( w )
 
                CShowControl ( w )
-               #endif
+#endif
             ENDIF
 
          ELSE
@@ -658,7 +658,7 @@ FUNCTION _DeleteTabPage ( ControlName , ParentForm , Position )
 
    RETURN NIL
 
-   #define DT_CENTER     1
+#define DT_CENTER     1
 
 FUNCTION OwnTabPaint ( lParam )
 

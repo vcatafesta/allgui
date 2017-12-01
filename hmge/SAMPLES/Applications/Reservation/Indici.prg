@@ -105,4 +105,3 @@ FUNCTION ErrTipo( dove ,label)
    RETURN .T.
    /*
    */
-

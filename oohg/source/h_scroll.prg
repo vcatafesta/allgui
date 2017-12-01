@@ -130,7 +130,7 @@ CLASS TScrollBar FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, RangeMin, RangeMax, ;
       change, lineup, linedown, pageup, pagedown, top, bottom, ;

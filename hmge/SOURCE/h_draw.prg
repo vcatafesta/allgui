@@ -229,7 +229,7 @@ FUNCTION drawpolybezier( window, apoints, penrgb, penwidth )
 
    RETURN NIL
 
-   #define COLOR_BTNFACE   15
+#define COLOR_BTNFACE   15
 
 FUNCTION HMG_DrawIcon( window, icon, row, col, w, h, rgb, transparent )
 

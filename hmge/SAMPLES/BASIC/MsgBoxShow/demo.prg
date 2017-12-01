@@ -10,8 +10,8 @@ PROCEDURE Main
 
    RETURN
 
-   #define IDI_MAIN 1001
-   #define MsgInfo( c, t ) MsgInfo( c, t, IDI_MAIN, .f. )
+#define IDI_MAIN 1001
+#define MsgInfo( c, t ) MsgInfo( c, t, IDI_MAIN, .f. )
 
 FUNCTION MsgAbout()
 
@@ -21,22 +21,22 @@ FUNCTION MsgAbout()
       padc("This program is Freeware!", 36) + CRLF + ;
       padc("Copying is allowed!", 40), 'About')
 
-   #define MB_OK                                 0
-   #define MB_OKCANCEL                           1
-   #define MB_ABORTRETRYIGNORE                   2
-   #define MB_YESNOCANCEL                        3
-   #define MB_YESNO                              4
-   #define MB_RETRYCANCEL                        5
-   #define MB_CANCELTRYCONTINUE                  6
-   #define MB_ICONHAND                          16
-   #define MB_ICONQUESTION                      32
-   #define MB_ICONEXCLAMATION                   48
-   #define MB_ICONASTERISK                      64
-   #define MB_USERICON                         128
-   #define MB_ICONWARNING              MB_ICONEXCLAMATION
-   #define MB_ICONERROR                MB_ICONHAND
-   #define MB_ICONINFORMATION          MB_ICONASTERISK
-   #define MB_ICONSTOP                 MB_ICONHAND
+#define MB_OK                                 0
+#define MB_OKCANCEL                           1
+#define MB_ABORTRETRYIGNORE                   2
+#define MB_YESNOCANCEL                        3
+#define MB_YESNO                              4
+#define MB_RETRYCANCEL                        5
+#define MB_CANCELTRYCONTINUE                  6
+#define MB_ICONHAND                          16
+#define MB_ICONQUESTION                      32
+#define MB_ICONEXCLAMATION                   48
+#define MB_ICONASTERISK                      64
+#define MB_USERICON                         128
+#define MB_ICONWARNING              MB_ICONEXCLAMATION
+#define MB_ICONERROR                MB_ICONHAND
+#define MB_ICONINFORMATION          MB_ICONASTERISK
+#define MB_ICONSTOP                 MB_ICONHAND
 
 FUNCTION TestMessage()
 

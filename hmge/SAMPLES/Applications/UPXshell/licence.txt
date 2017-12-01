@@ -9,8 +9,8 @@ Advanced Shell for UPX v.2.0 is Copyright © 2006 Grigory Filatov http://minigui.
 The Ultimate Packer for eXecutables (UPX) is Copyright © 1996-2004 Markus Oberhumer & Laszlo Molnar http://upx.sourceforge.net
 
 NO WARRANTIES
-The Author of this Software expressly disclaims any warranty for the SOFTWARE PRODUCT. 
-The SOFTWARE PRODUCT and any related documentation is provided "AS IS" without warranty of any kind, either express or implied, including, without limitation, the implied warranties or merchantability, fitness for a particular purpose, or noninfringement. 
+The Author of this Software expressly disclaims any warranty for the SOFTWARE PRODUCT.
+The SOFTWARE PRODUCT and any related documentation is provided "AS IS" without warranty of any kind, either express or implied, including, without limitation, the implied warranties or merchantability, fitness for a particular purpose, or noninfringement.
 The entire risk arising out of use or performance of the SOFTWARE PRODUCT remains with you.
 
 REGISTRATION

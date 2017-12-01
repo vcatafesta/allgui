@@ -485,10 +485,10 @@ CLASS TSBrowse FROM TControl
    DATA   aFormatPic                                 // array of picture clause
    DATA   aPopupCol     AS ARRAY INIT {}             // User PopUp menu in Columns ({0} -> all)
    DATA   aEditCellAdjust AS ARRAY INIT { 0,0,0,0 }  // array for correction of edit cell position
-   #ifdef __EXT_USERKEYS__
+#ifdef __EXT_USERKEYS__
    DATA   aUserKeys     INIT hb_Hash()
    DATA   lUserKeys     INIT .F.
-   #endif
+#endif
 
    DATA   bBof                                       // codeblock to check if we are before the first record
    DATA   bEof                                       // codeblock to check if we are beyond the last record
@@ -514,11 +514,11 @@ CLASS TSBrowse FROM TControl
    DATA   bRecLock                                   // custom function for locking record (with your own message)
    DATA   bRecNo                                     // retrieves or changes physical record position
    DATA   bSeekChange                                // used by seeking feature
-   #ifdef __EXT_SELECTION__
+#ifdef __EXT_SELECTION__
    DATA   bPreSelect                                 // to be evaluated before selection for
    // check of condition in select mode.
    // Must return .T. or .F.
-   #endif
+#endif
    DATA   bSelected                                  // to be evaluated in select mode
    DATA   bSetOrder                                  // used by seeking feature
    DATA   bTagOrder                                  // to restore index on GotFocus
@@ -966,9 +966,9 @@ CLASS TSBrowse FROM TControl
 
    METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax )
 
-   #ifdef __DEBUG__
+#ifdef __DEBUG__
    METHOD ShowSizes()
-   #endif
+#endif
 
    METHOD Skip( n )
 
@@ -1002,15 +1002,15 @@ CLASS TSBrowse FROM TControl
 
    METHOD GetCellInfo( nRowPos, nCell, lColSpecHd )  //BK
 
-   #ifdef __EXT_USERKEYS__
+#ifdef __EXT_USERKEYS__
    METHOD UserKeys( nKey, bKey, lCtrl, lShift )
-   #endif
+#endif
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TSBrowse:New() Version 9.0 Nov/30/2009
-* ============================================================================
+   * ============================================================================
+   * METHOD TSBrowse:New() Version 9.0 Nov/30/2009
+   * ============================================================================
 
 METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSizes, cParentWnd, ;
       bChange, bLDblClick, bRClick, cFont, nFontSize, ;
@@ -1055,26 +1055,26 @@ METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSize
    ENDIF
 
    DEFAULT aTmpColor[ 1 ]  := GetSysColor( COLOR_WINDOWTEXT ), ;  // nClrText
-   aTmpColor[ 2 ]  := GetSysColor( COLOR_WINDOW )    , ;  // nClrPane
-   aTmpColor[ 3 ]  := GetSysColor( COLOR_BTNTEXT )   , ;  // nClrHeadFore
-   aTmpColor[ 4 ]  := GetSysColor( COLOR_BTNFACE )   , ;  // nClrHeadBack
-   aTmpColor[ 5 ]  := GetSysColor( COLOR_CAPTIONTEXT ), ; // nClrForeFocu
-   aTmpColor[ 6 ]  := GetSysColor( COLOR_ACTIVECAPTION )  // nClrFocuBack
+      aTmpColor[ 2 ]  := GetSysColor( COLOR_WINDOW )    , ;  // nClrPane
+      aTmpColor[ 3 ]  := GetSysColor( COLOR_BTNTEXT )   , ;  // nClrHeadFore
+      aTmpColor[ 4 ]  := GetSysColor( COLOR_BTNFACE )   , ;  // nClrHeadBack
+      aTmpColor[ 5 ]  := GetSysColor( COLOR_CAPTIONTEXT ), ; // nClrForeFocu
+      aTmpColor[ 6 ]  := GetSysColor( COLOR_ACTIVECAPTION )  // nClrFocuBack
 
    DEFAULT aTmpColor[ 7 ]  := GetSysColor( COLOR_WINDOWTEXT ), ; // nClrEditFore
-   aTmpColor[ 8 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrEditBack
-   aTmpColor[ 9 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrFootFore
-   aTmpColor[ 10 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrFootBack
-   aTmpColor[ 11 ] := CLR_HGRAY                      , ; // nClrSeleFore inactive focused
-   aTmpColor[ 12 ] := CLR_GRAY                       , ; // nClrSeleBack inactive focused
-   aTmpColor[ 13 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrOrdeFore
-   aTmpColor[ 14 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrOrdeBack
-   aTmpColor[ 15 ] := GetSysColor( COLOR_BTNSHADOW ) , ; // nClrLine
-   aTmpColor[ 16 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSupHeadFore
-   aTmpColor[ 17 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSupHeadBack
-   aTmpColor[ 18 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSpecHeadFore
-   aTmpColor[ 19 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSpecHeadBack
-   aTmpColor[ 20 ] := CLR_HRED                           // nClrSpecHeadActive
+      aTmpColor[ 8 ]  := GetSysColor( COLOR_WINDOW )    , ; // nClrEditBack
+      aTmpColor[ 9 ]  := GetSysColor( COLOR_BTNTEXT )   , ; // nClrFootFore
+      aTmpColor[ 10 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrFootBack
+      aTmpColor[ 11 ] := CLR_HGRAY                      , ; // nClrSeleFore inactive focused
+      aTmpColor[ 12 ] := CLR_GRAY                       , ; // nClrSeleBack inactive focused
+      aTmpColor[ 13 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrOrdeFore
+      aTmpColor[ 14 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrOrdeBack
+      aTmpColor[ 15 ] := GetSysColor( COLOR_BTNSHADOW ) , ; // nClrLine
+      aTmpColor[ 16 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSupHeadFore
+      aTmpColor[ 17 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSupHeadBack
+      aTmpColor[ 18 ] := GetSysColor( COLOR_BTNTEXT )   , ; // nClrSpecHeadFore
+      aTmpColor[ 19 ] := GetSysColor( COLOR_BTNFACE )   , ; // nClrSpecHeadBack
+      aTmpColor[ 20 ] := CLR_HRED                           // nClrSpecHeadActive
 
    DEFAULT lUpdate         := .F., ;
       aColSizes       := {}, ;
@@ -1101,11 +1101,11 @@ METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSize
          cAlias  := "ADO_"
          ::oRSet := uAlias
       ENDIF
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    ELSEIF ValType( uAlias ) == "H"
       cAlias := "ARRAY"
       uAlias := aHash2Array( uAlias )
-      #endif
+#endif
    ENDIF
    IF _HMG_BeginWindowMDIActive
       ParentHandle :=  GetActiveMdiHandle()
@@ -1843,7 +1843,7 @@ METHOD Default() CLASS TSBrowse
 
          FOR nI := 1 TO nElements
             ::aColSizes[ nI ] := If( ValType( aFields[ nI ] ) != "C", 16, ; // Bitmap handle
-            ( nTxtWid * Max( Len( ::aHeaders[ nI ] ), Len( aFields[ nI ] ) ) + 1 ) )
+               ( nTxtWid * Max( Len( ::aHeaders[ nI ] ), Len( aFields[ nI ] ) ) + 1 ) )
          NEXT
 
       ENDIF
@@ -2348,14 +2348,14 @@ METHOD Destroy() CLASS TSBrowse
          ENDIF
       NEXT
    ENDIF
-   #ifndef _TSBFILTER7_
+#ifndef _TSBFILTER7_
    IF ::lFilterMode
       ::lFilterMode := .F.
       IF Select( ::cAlias ) != 0
          ::SetFilter()
       ENDIF
    ENDIF
-   #endif
+#endif
    ::hWnd := 0
 
    RETURN 0
@@ -2389,7 +2389,7 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
       cHeading, hBitMap, nLastCol, lMultiLine, nVertText, nClrTo, lOpaque, lBrush, nClrToS, nClrBackS, lOrder, lDescend, ;
       nMaxWidth    := ::nWidth() , ;
       aColSizes    := AClone( ::aColSizes ), ;   // use local copies for speed
-   nHeightHead  := ::nHeightHead, ;
+      nHeightHead  := ::nHeightHead, ;
       nHeightFoot  := ::nHeightFoot, ;
       nHeightSpecHd:= ::nHeightSpecHd
 
@@ -2445,23 +2445,23 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
    IF ::oPhant == Nil
       // "Phantom" column; :nPhantom hidden IVar
       ::oPhant := TSColumn():New(   "", ; // cHeading
-      {|| "" }, ; // bdata
-      nil, ; // cPicture
-      { nClrText, nClrPane,, ;
+         {|| "" }, ; // bdata
+         nil, ; // cPicture
+         { nClrText, nClrPane,, ;
          nClrBack,,,,,,nClrFore }, ; // aColors
-      nil, ; // aAlign
-      ::nPhantom, ; // nWidth
-      nil, ; // lBitMap
-      nil, ; // lEdit
-      nil, ; // bValid
-      .T., ; // lNoLite
-      nil, ; // cOrder
-      nil, ; // cFooting
-      nil, ; // bPrevEdit
-      nil, ; // bPostEdit
-      nil, ; // nEditMove
-      nil, ; // lFixLite
-      { l3DLook, l3DLook }, ;
+         nil, ; // aAlign
+         ::nPhantom, ; // nWidth
+         nil, ; // lBitMap
+         nil, ; // lEdit
+         nil, ; // bValid
+         .T., ; // lNoLite
+         nil, ; // cOrder
+         nil, ; // cFooting
+         nil, ; // bPrevEdit
+         nil, ; // bPostEdit
+         nil, ; // nEditMove
+         nil, ; // lFixLite
+         { l3DLook, l3DLook }, ;
          nil, ;
          Self  )
    ELSE
@@ -2578,36 +2578,36 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
          ENDIF
 
          TSDrawCell(      hWnd, ;  // 1
-         hDC, ;  // 2
-         0, ;  // 3
-         nStartCol, ;  // 4
-         aColSizes[ nJ ], ;  // 5
-         cHeading, ;  // 6
-         nAlign, ;  // 7
-         nClrFore, ;  // 8
-         nClrBack, ;  // 9
-         hFont, ;  // 10
-         hBitMap, ;  // 11
-         nHeightHead, ;  // 12
-         l3DLook, ;  // 13
-         1, ;  // 14 nLineStyle
-         nClrLine, ;  // 15
-         1, ;  // 16 1=Header 2=Footer 3=Super 4=Special
-         nHeightHead, ;  // 17
-         nHeightFoot, ;  // 18
-         nHeightSuper, ;  // 19
-         nHeightSpecHd, ;  // 20
-         lAdjBmp, ;  // 21
-         lMulTiLine, ;  // 22
-         nVAlign, ;  // 23
-         nVertText, ;  // 24
-         nClrTo, ;  // 25
-         lOpaque, ;  // 26
-         If( lBrush, ;
+            hDC, ;  // 2
+            0, ;  // 3
+            nStartCol, ;  // 4
+            aColSizes[ nJ ], ;  // 5
+            cHeading, ;  // 6
+            nAlign, ;  // 7
+            nClrFore, ;  // 8
+            nClrBack, ;  // 9
+            hFont, ;  // 10
+            hBitMap, ;  // 11
+            nHeightHead, ;  // 12
+            l3DLook, ;  // 13
+            1, ;  // 14 nLineStyle
+            nClrLine, ;  // 15
+            1, ;  // 16 1=Header 2=Footer 3=Super 4=Special
+            nHeightHead, ;  // 17
+            nHeightFoot, ;  // 18
+            nHeightSuper, ;  // 19
+            nHeightSpecHd, ;  // 20
+            lAdjBmp, ;  // 21
+            lMulTiLine, ;  // 22
+            nVAlign, ;  // 23
+            nVertText, ;  // 24
+            nClrTo, ;  // 25
+            lOpaque, ;  // 26
+            If( lBrush, ;
             nClrBack:hBrush, 0 ), ;  // 27
-         l3DText, ;  // 28  3D text
-         nClr3dL, ;  // 29  3D text light color
-         nClr3dS )   // 30  3D text shadow color
+            l3DText, ;  // 28  3D text
+            nClr3dL, ;  // 29  3D text light color
+            nClr3dS )   // 30  3D text shadow color
 
          nVAlign := 1
 
@@ -2682,36 +2682,36 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
          ENDIF
 
          TSDrawCell(     hWnd, ;  // 1
-         hDC, ;  // 2
-         0, ;  // 3
-         nStartCol, ;  // 4
-         aColSizes[nJ], ;  // 5
-         cHeading, ;  // 6
-         nAlign, ;  // 7
-         nClrFore, ;  // 8
-         nClrBackS, ;  // 9
-         hFont, ;  // 10
-         hBitMap, ;  // 11
-         0, ;  // 12  nHeightFoot
-         l3DLook, ;  // 13
-         1, ;  // 14  nLineStyle
-         nClrLine, ;  // 15
-         4, ;  // 16  1=Header 2=Footer 3=Super  4=Special
-         nHeightHead, ;  // 17
-         nHeightFoot, ;  // 18
-         nHeightSuper, ;  // 19
-         nHeightSpecHd, ;  // 20
-         lAdjBmp, ;  // 21
-         .f., ;  // 22
-         nVAlign, ;  // 23
-         0, ;  // 24 nVertText
-         nClrToS, ;  // 25
-         lOpaque, ;  // 26
-         If( lBrush, ;
+            hDC, ;  // 2
+            0, ;  // 3
+            nStartCol, ;  // 4
+            aColSizes[nJ], ;  // 5
+            cHeading, ;  // 6
+            nAlign, ;  // 7
+            nClrFore, ;  // 8
+            nClrBackS, ;  // 9
+            hFont, ;  // 10
+            hBitMap, ;  // 11
+            0, ;  // 12  nHeightFoot
+            l3DLook, ;  // 13
+            1, ;  // 14  nLineStyle
+            nClrLine, ;  // 15
+            4, ;  // 16  1=Header 2=Footer 3=Super  4=Special
+            nHeightHead, ;  // 17
+            nHeightFoot, ;  // 18
+            nHeightSuper, ;  // 19
+            nHeightSpecHd, ;  // 20
+            lAdjBmp, ;  // 21
+            .f., ;  // 22
+            nVAlign, ;  // 23
+            0, ;  // 24 nVertText
+            nClrToS, ;  // 25
+            lOpaque, ;  // 26
+            If( lBrush, ;
             nClrBackS:hBrush, 0 ), ;  // 27
-         l3DText, ;  // 28  3D text
-         nClr3dL, ;  // 29  3D text light color
-         nClr3dS )   // 30  3D text shadow color
+            l3DText, ;  // 28  3D text
+            nClr3dL, ;  // 29  3D text light color
+            nClr3dS )   // 30  3D text shadow color
 
       ENDIF
 
@@ -2773,36 +2773,36 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
          ENDIF
 
          TSDrawCell(     hWnd, ;  // 1
-         hDC, ;  // 2
-         ::nRowCount(), ;  // 3
-         nStartCol, ;  // 4
-         aColSizes[nJ], ;  // 5
-         cFooting, ;  // 6
-         nAlign, ;  // 7
-         nClrFore, ;  // 8
-         nClrBack, ;  // 9
-         hFont, ;  // 10
-         hBitMap, ;  // 11
-         nHeightFoot, ;  // 12
-         l3DLook, ;  // 13
-         1, ;  // 14  nLineStyle
-         nClrLine, ;  // 15
-         2, ;  // 16  1=Header 2=Footer 3=Super
-         nHeightHead, ;  // 17
-         nHeightFoot, ;  // 18
-         nHeightSuper, ;  // 19
-         nHeightSpecHd, ;  // 20
-         lAdjBmp, ;  // 21
-         lMultiLine, ;  // 22
-         nVAlign, ;  // 23
-         0, ;  // 24 nVertText
-         nClrTo, ;  // 25
-         lOpaque, ;  // 26
-         If( lBrush, ;
+            hDC, ;  // 2
+            ::nRowCount(), ;  // 3
+            nStartCol, ;  // 4
+            aColSizes[nJ], ;  // 5
+            cFooting, ;  // 6
+            nAlign, ;  // 7
+            nClrFore, ;  // 8
+            nClrBack, ;  // 9
+            hFont, ;  // 10
+            hBitMap, ;  // 11
+            nHeightFoot, ;  // 12
+            l3DLook, ;  // 13
+            1, ;  // 14  nLineStyle
+            nClrLine, ;  // 15
+            2, ;  // 16  1=Header 2=Footer 3=Super
+            nHeightHead, ;  // 17
+            nHeightFoot, ;  // 18
+            nHeightSuper, ;  // 19
+            nHeightSpecHd, ;  // 20
+            lAdjBmp, ;  // 21
+            lMultiLine, ;  // 22
+            nVAlign, ;  // 23
+            0, ;  // 24 nVertText
+            nClrTo, ;  // 25
+            lOpaque, ;  // 26
+            If( lBrush, ;
             nClrBack:hBrush, 0 ), ;  // 27
-         l3DText, ;  // 28  3D text
-         nClr3dL, ;  // 29  3D text light color
-         nClr3dS )   // 30  3D text shadow color
+            l3DText, ;  // 28  3D text
+            nClr3dL, ;  // 29  3D text light color
+            nClr3dS )   // 30  3D text shadow color
       ENDIF
 
       nStartCol += aColSizes[nJ]
@@ -2913,22 +2913,22 @@ METHOD DrawLine( xRow ) CLASS TSBrowse
       IF ::oPhant == Nil
          //  "Phantom" column; :nPhantom hidden IVar
          ::oPhant := TSColumn():New(        "", ; // cHeading
-         {|| "" }, ; // bdata
-         Nil, ; // cPicture
-         { nClrText, nClrBack }, ; // aColors
-         Nil, ; // aAlign
-         ::nPhantom, ; // nWidth
-         Nil, ; // lBitMap
-         Nil, ; // lEdit
-         Nil, ; // bValid
-         .T., ; // lNoLite
-         Nil, ; // cOrder
-         Nil, ; // cFooting
-         Nil, ; // bPrevEdit
-         Nil, ; // bPostEdit
-         Nil, ; // nEditMove
-         Nil, ; // lFixLite
-         { l3DLook }, ;
+            {|| "" }, ; // bdata
+            Nil, ; // cPicture
+            { nClrText, nClrBack }, ; // aColors
+            Nil, ; // aAlign
+            ::nPhantom, ; // nWidth
+            Nil, ; // lBitMap
+            Nil, ; // lEdit
+            Nil, ; // bValid
+            .T., ; // lNoLite
+            Nil, ; // cOrder
+            Nil, ; // cFooting
+            Nil, ; // bPrevEdit
+            Nil, ; // bPostEdit
+            Nil, ; // nEditMove
+            Nil, ; // lFixLite
+            { l3DLook }, ;
             Nil, ;
             Self )
       ELSE
@@ -3062,35 +3062,35 @@ METHOD DrawLine( xRow ) CLASS TSBrowse
          ENDIF
 
          TSDrawCell(                    hWnd, ; // 1
-         hDC, ; // 2
-         xRow, ; // 3
-         nStartCol , ; // 4
-         aColSizes[ nJ ], ; // 5
-         uData, ; // 6
-         nAlign , ; // 7
-         nClrFore, ; // 8
-         nClrBack, ; // 9
-         hFont, ; // 10
-         hBitMap, ; // 11
-         nHeightCell, ; // 12
-         oColumn:l3DLook, ; // 13
-         nLineStyle, ; // 14
-         nClrLine, ; // 15
-         0, ; // 16 header/footer/super
-         nHeightHead, ; // 17
-         nHeightFoot, ; // 18
-         nHeightSuper, ; // 19
-         nHeightSpecHd, ; // 20
-         lAdjBmp, ; // 21
-         lMultiline, ; // 22
-         nVAlign, ; // 23
-         nVertText, ; // 24
-         nClrTo, ; // 25
-         lOpaque, ; // 26
-         If( lBrush, nClrBack:hBrush, 0 ), ; // 27
-         l3DText, ;  // 28  3D text
-         nClr3dL, ;  // 29  3D text light color
-         nClr3dS )   // 30  3D text shadow color
+            hDC, ; // 2
+            xRow, ; // 3
+            nStartCol , ; // 4
+            aColSizes[ nJ ], ; // 5
+            uData, ; // 6
+            nAlign , ; // 7
+            nClrFore, ; // 8
+            nClrBack, ; // 9
+            hFont, ; // 10
+            hBitMap, ; // 11
+            nHeightCell, ; // 12
+            oColumn:l3DLook, ; // 13
+            nLineStyle, ; // 14
+            nClrLine, ; // 15
+            0, ; // 16 header/footer/super
+            nHeightHead, ; // 17
+            nHeightFoot, ; // 18
+            nHeightSuper, ; // 19
+            nHeightSpecHd, ; // 20
+            lAdjBmp, ; // 21
+            lMultiline, ; // 22
+            nVAlign, ; // 23
+            nVertText, ; // 24
+            nClrTo, ; // 25
+            lOpaque, ; // 26
+            If( lBrush, nClrBack:hBrush, 0 ), ; // 27
+            l3DText, ;  // 28  3D text
+            nClr3dL, ;  // 29  3D text light color
+            nClr3dS )   // 30  3D text shadow color
          nStartCol += aColSizes[ nJ ]
 
       NEXT
@@ -3171,7 +3171,7 @@ METHOD DrawSelect( xRow ) CLASS TSBrowse
       lSelected, ;
       nVertText := 0, ;
       nMaxWidth := ::nWidth(), ;    // use local copies for speed
-   nRowPos   := ::nRowPos, ;
+      nRowPos   := ::nRowPos, ;
       aColSizes := AClone( ::aColSizes ), ;
       hWnd      := ::hWnd, ;
       hDC       := ::hDc, ;
@@ -3222,22 +3222,22 @@ METHOD DrawSelect( xRow ) CLASS TSBrowse
       IF ::oPhant == Nil
          // "Phantom" column; :nPhantom hidden IVar
          ::oPhant := TSColumn():New(        "", ; // cHeading
-         {|| "" }, ; // bdata
-         nil, ; // cPicture
-         { nClrText, nClrBack }, ; // aColors
-         nil, ; // aAlign
-         ::nPhantom, ; // nWidth
-         nil, ; // lBitMap
-         nil, ; // lEdit
-         nil, ; // bValid
-         .T., ; // lNoLite
-         nil, ; // cOrder
-         nil, ; // cFooting
-         nil, ; // bPrevEdit
-         nil, ; // bPostEdit
-         nil, ; // nEditMove
-         nil, ; // lFixLite
-         {l3DLook}, ;
+            {|| "" }, ; // bdata
+            nil, ; // cPicture
+            { nClrText, nClrBack }, ; // aColors
+            nil, ; // aAlign
+            ::nPhantom, ; // nWidth
+            nil, ; // lBitMap
+            nil, ; // lEdit
+            nil, ; // bValid
+            .T., ; // lNoLite
+            nil, ; // cOrder
+            nil, ; // cFooting
+            nil, ; // bPrevEdit
+            nil, ; // bPostEdit
+            nil, ; // nEditMove
+            nil, ; // lFixLite
+            {l3DLook}, ;
             nil, ;
             Self )
       ELSE
@@ -3403,38 +3403,38 @@ METHOD DrawSelect( xRow ) CLASS TSBrowse
          ENDIF
 
          TSDrawCell(            hWnd, ; //  1
-         hDC, ; //  2
-         nRowPos, ; //  3
-         nStartCol, ; //  4
-         aColSizes[ nJ ], ; //  5
-         uData, ; //  6
-         nAlign, ; //  7
-         nClrFore, ; //  8
-         nClrBack, ; //  9
-         hFont, ; // 10
-         hBitMap, ; // 11
-         nHeightCell, ; // 12
-         l3DLook, ; // 13
-         nLineStyle, ; // 14
-         nClrLine, ; // 15
-         0, ; // 16 Header/Footer/Super
-         nHeightHead, ; // 17
-         nHeightFoot, ; // 18
-         nHeightSuper, ; // 19
-         nHeightSpecHd, ; // 20
-         lAdjBmp, ; // 21
-         lMulti, ; // 22 Multiline text
-         nVAlign, ; // 23
-         nVertText, ; // 24
-         nClrTo, ; // 25
-         lOpaque, ; // 26
-         If( lBrush, ;
+            hDC, ; //  2
+            nRowPos, ; //  3
+            nStartCol, ; //  4
+            aColSizes[ nJ ], ; //  5
+            uData, ; //  6
+            nAlign, ; //  7
+            nClrFore, ; //  8
+            nClrBack, ; //  9
+            hFont, ; // 10
+            hBitMap, ; // 11
+            nHeightCell, ; // 12
+            l3DLook, ; // 13
+            nLineStyle, ; // 14
+            nClrLine, ; // 15
+            0, ; // 16 Header/Footer/Super
+            nHeightHead, ; // 17
+            nHeightFoot, ; // 18
+            nHeightSuper, ; // 19
+            nHeightSpecHd, ; // 20
+            lAdjBmp, ; // 21
+            lMulti, ; // 22 Multiline text
+            nVAlign, ; // 23
+            nVertText, ; // 24
+            nClrTo, ; // 25
+            lOpaque, ; // 26
+            If( lBrush, ;
             nClrBack:hBrush, 0 ), ; // 27
-         l3DText, ; // 28  3D text
-         nClr3dL, ; // 29  3D text light color
-         nClr3dS, ; // 30  3D text shadow color
-         nCursor, ; // 31  Rect cursor
-         !(::lCellBrw .and. nJ != ::nCell) ) // 32  Invert color
+            l3DText, ; // 28  3D text
+            nClr3dL, ; // 29  3D text light color
+            nClr3dS, ; // 30  3D text shadow color
+            nCursor, ; // 31  Rect cursor
+            !(::lCellBrw .and. nJ != ::nCell) ) // 32  Invert color
 
          nStartCol += aColSizes[ nJ ]
 
@@ -3469,7 +3469,7 @@ METHOD DrawSuper() CLASS TSBrowse
       lMulti, nHAlign, nVAlign, nWidth, nS, nLineStyle, lBrush, ;
       nMaxWidth    := ::nWidth() , ;
       aColSizes    := AClone( ::aColSizes ), ;   // use local copies for speed
-   aSuperHead   := AClone( ::aSuperHead ), ;
+      aSuperHead   := AClone( ::aSuperHead ), ;
       nHeightHead  := ::nHeightHead, ;
       nHeightFoot  := ::nHeightFoot, ;
       nHeightSuper := ::nHeightSuper, ;
@@ -3637,36 +3637,36 @@ METHOD DrawSuper() CLASS TSBrowse
       ENDIF
 
       TSDrawCell(      hWnd, ;  // 1
-      hDC, ;  // 2
-      0, ;  // 3
-      nStartCol, ;  // 4
-      nWidth, ;  // 5
-      cHeading, ;  // 6
-      nHAlign, ;  // 7
-      nClrFore, ;  // 8
-      nClrBack, ;  // 9
-      hFont, ;  // 10
-      hBitMap, ;  // 11
-      nHeightHead, ;  // 12
-      l3DLook, ;  // 13
-      nLineStyle, ;  // 14
-      nClrLine, ;  // 15
-      3, ;  // 16 1=Header 2=Footer 3=Super
-      nHeightHead, ;  // 17
-      nHeightFoot, ;  // 18
-      nHeightSuper, ;  // 19
-      nHeightSpecHd, ;  // 20
-      lAdjBmp, ;  // 21
-      lMulTi, ;  // 22 Multiline text
-      nVAlign, ;  // 23
-      0, ;  // 24 nVertLine
-      nClrTo, ;  // 25
-      lOpaque, ;  // 26
-      If( lBrush, ;
+         hDC, ;  // 2
+         0, ;  // 3
+         nStartCol, ;  // 4
+         nWidth, ;  // 5
+         cHeading, ;  // 6
+         nHAlign, ;  // 7
+         nClrFore, ;  // 8
+         nClrBack, ;  // 9
+         hFont, ;  // 10
+         hBitMap, ;  // 11
+         nHeightHead, ;  // 12
+         l3DLook, ;  // 13
+         nLineStyle, ;  // 14
+         nClrLine, ;  // 15
+         3, ;  // 16 1=Header 2=Footer 3=Super
+         nHeightHead, ;  // 17
+         nHeightFoot, ;  // 18
+         nHeightSuper, ;  // 19
+         nHeightSpecHd, ;  // 20
+         lAdjBmp, ;  // 21
+         lMulTi, ;  // 22 Multiline text
+         nVAlign, ;  // 23
+         0, ;  // 24 nVertLine
+         nClrTo, ;  // 25
+         lOpaque, ;  // 26
+         If( lBrush, ;
          nClrBack:hBrush, 0 ), ;  // 27
-      l3DText, ;  // 28  3D text
-      nClr3dL, ;  // 29  3D text light color
-      nClr3dS )   // 30  3D text shadow color
+         l3DText, ;  // 28  3D text
+         nClr3dL, ;  // 29  3D text light color
+         nClr3dS )   // 30  3D text shadow color
 
       nStartCol += nWidth
 
@@ -5459,14 +5459,14 @@ METHOD GoDown() CLASS TSBrowse
                ENDIF
             ENDIF
          ENDIF
-         #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
       ELSEIF ::lFilterMode .and. ::nPrevRec != Nil
          ( ::cAlias )->( DbGoTo( ::nPrevRec ) )
-         #else
+#else
       ELSE
          Eval( ::bGoBottom )
          ::lHitBottom := .T.
-         #endif
+#endif
       ENDIF
 
       IF ! ::lAppendMode .and. ! ::lEditing
@@ -6064,7 +6064,7 @@ METHOD GoRight() CLASS TSBrowse
    IF ::lCellBrw
 
       IF ::nCell == Len( ::aColumns ) .and. ;  // avoid undesired displacement  //::GetColSizes()
-         ::IsColVisible( ::nCell )
+            ::IsColVisible( ::nCell )
 
          RETURN Self
       ENDIF
@@ -6128,7 +6128,7 @@ METHOD GoRight() CLASS TSBrowse
    ELSE
 
       IF ::nCell == Len( ::aColumns ) .and. ;  // avoid undesired displacement  //::GetColSizes()
-         ::IsColVisible( ::nCell )
+            ::IsColVisible( ::nCell )
 
          RETURN Self
       ENDIF
@@ -6483,7 +6483,7 @@ METHOD KeyDown( nKey, nFlags ) CLASS TSBrowse
    ::lNoPaint := .F.
    ::oWnd:nLastKey := ::nLastKey := ::nUserKey := nKey
 
-   #ifdef __EXT_USERKEYS__
+#ifdef __EXT_USERKEYS__
    IF ::lUserKeys
       uTemp := hb_ntos( nKey )
       uTemp += iif( _GetKeyState( VK_CONTROL ), "#", "" )
@@ -6507,7 +6507,7 @@ METHOD KeyDown( nKey, nFlags ) CLASS TSBrowse
       ENDIF
       uTemp := Nil
    ENDIF
-   #endif
+#endif
 
    IF ::bUserKeys != Nil
 
@@ -6720,7 +6720,7 @@ METHOD KeyDown( nKey, nFlags ) CLASS TSBrowse
 
    RETURN 0
 
-   #ifdef __EXT_USERKEYS__
+#ifdef __EXT_USERKEYS__
    * ============================================================================
    * METHOD TSBrowse:UserKeys()  by SergKis
    * ============================================================================
@@ -6756,7 +6756,7 @@ METHOD UserKeys( nKey, bKey, lCtrl, lShift ) CLASS TSBrowse
    ENDIF
 
    RETURN cKey
-   #endif
+#endif
 
    * ============================================================================
    * METHOD TSBrowse:Selection()  Version 9.0 Nov/30/2009
@@ -6766,7 +6766,7 @@ METHOD Selection() CLASS TSBrowse
 
    LOCAL uTemp, uVal
 
-   #ifdef __EXT_SELECTION__
+#ifdef __EXT_SELECTION__
    LOCAL lCan := .T.
 
    IF HB_IsBlock( ::bPreSelect )
@@ -6777,7 +6777,7 @@ METHOD Selection() CLASS TSBrowse
    ENDIF
 
    IF lCan
-      #endif
+#endif
       uVal := If( ::lIsDbf, ( ::cAlias )->( RecNo() ), ::nAt )
 
       IF ( uTemp := AScan( ::aSelected, uVal ) ) > 0
@@ -6798,9 +6798,9 @@ METHOD Selection() CLASS TSBrowse
          ENDIF
 
       ENDIF
-      #ifdef __EXT_SELECTION__
+#ifdef __EXT_SELECTION__
    ENDIF
-   #endif
+#endif
 
    RETURN Self
 
@@ -7211,10 +7211,10 @@ METHOD LDblClick( nRowPix, nColPix, nKeyFlags ) CLASS TSBrowse
          ENDIF
 
          RETURN 0
-         #ifndef __EXT_SELECTION__
+#ifndef __EXT_SELECTION__
       ELSEIF ::lCanSelect .and. ::bUserKeys == Nil  // Added 28.09.2012
          ::Selection()
-         #endif
+#endif
       ELSEIF ::bLDblClick != Nil
          Eval( ::bLDblClick, uPar1, uPar2, nKeyFlags, Self )
       ENDIF
@@ -7539,12 +7539,12 @@ METHOD HandleEvent( nMsg, nWParam, nLParam ) CLASS TSBrowse
       IF ix > 0
          PostMessage( _HMG_aControlHandles [ix], WM_KEYDOWN, VK_ESCAPE, 0 )
       ENDIF
-      #ifdef __EXT_SELECTION__
+#ifdef __EXT_SELECTION__
    ELSEIF nMsg == WM_LBUTTONDBLCLK .and. _GetKeyState( VK_SHIFT )
       IF ::lCanSelect .and. !::lEditable
          ::Selection()
       ENDIF
-      #endif
+#endif
    ELSEIF nMsg == WM_LBUTTONDBLCLK
 
       RETURN ::LDblClick( HiWord( nLParam ), LoWord( nLParam ), nWParam )
@@ -8055,7 +8055,7 @@ METHOD lIgnoreKey( nKey, nFlags ) CLASS TSBrowse
 
    LOCAL lIgnore := .F., ;
       nAsync := 2, ;                // key by itself
-   nIgnore := AScan( ::aKeyRemap, {|aRemap| aRemap[ 1 ] == nKey } )
+      nIgnore := AScan( ::aKeyRemap, {|aRemap| aRemap[ 1 ] == nKey } )
 
    HB_SYMBOL_UNUSED( nFlags )
 
@@ -9254,7 +9254,7 @@ METHOD PanLeft() CLASS TSBrowse
    ENDIF
 
    IF ! ::lCellBrw .and. ! ::lLockFreeze .and. ;  // for frozen columns
-      ::nFreeze > 0 .and. ::nCell - 1 == 1
+         ::nFreeze > 0 .and. ::nCell - 1 == 1
       ::nCell := ::nColPos := ::nFreeze
    ENDIF
 
@@ -9360,7 +9360,7 @@ METHOD PanRight() CLASS TSBrowse
    ENDIF
 
    IF ! ::lCellBrw .and. ;                       // for frozen columns
-      If( ::nFreeze > 0, ::IsColVis2( nCols ), ::IsColVisible( nCols ) )
+         If( ::nFreeze > 0, ::IsColVis2( nCols ), ::IsColVisible( nCols ) )
 
       ::nCell := nCols
 
@@ -9486,7 +9486,7 @@ METHOD PostEdit( uTemp, nCol, bValid ) CLASS TSBrowse
                   Eval( ::aColumns[ n ]:bData, e ) ), Nil ) } )
                ::DrawLine()
             ENDIF
-            #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
             IF ::lFilterMode .and. ::aColumns[ nCol ]:lIndexCol
 
                IF &( ( cAlias )->( IndexKey() ) ) >= ::uValue1 .and. ;
@@ -9503,9 +9503,9 @@ METHOD PostEdit( uTemp, nCol, bValid ) CLASS TSBrowse
             ELSE
                ::nLen++
             ENDIF
-            #else
+#else
             ::nLen++
-            #endif
+#endif
             ::lAppendMode := .F.
 
             IF ::nRowPos == 0 .and. ::lDrawHeaders
@@ -9542,7 +9542,7 @@ METHOD PostEdit( uTemp, nCol, bValid ) CLASS TSBrowse
 
          IF ( ::aColumns[ nCol ]:lIndexCol .and. ::lChanged ) .or. lAppend
             ::lNoPaint := .F.
-            #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
             IF ::lFilterMode
 
                IF &( ( cAlias )->( IndexKey() ) ) >= ::uValue1 .and. ;
@@ -9557,9 +9557,9 @@ METHOD PostEdit( uTemp, nCol, bValid ) CLASS TSBrowse
             ELSE
                ::UpStable()
             ENDIF
-            #else
+#else
             ::UpStable()
-            #endif
+#endif
          ENDIF
 
          ( cAlias )->( DbSkip( 0 ) )  // refresh relations just in case that a relation field changes
@@ -9950,10 +9950,10 @@ METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal 
       aWidths  := {}, ;
       aFormats := {}, ;
       hFont    := ::hFont
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    LOCAL cFilterBlock
 
-   #endif
+#endif
 
    DEFAULT cTitle     := ::oWnd:GetText(), ;
       lPreview   := .T., ;
@@ -10015,7 +10015,7 @@ METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal 
 
    NEXT
 
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    IF ::lIsDbf .AND. ::lFilterMode
 
       cFilterBlock := BuildFiltr( ::cField, ::uValue1, ::uValue2, SELF )
@@ -10024,7 +10024,7 @@ METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal 
       ( cAlias )->( DbGoTop() )
 
    ENDIF
-   #endif
+#endif
 
    IF ::lIsDbf
 
@@ -10040,11 +10040,11 @@ METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal 
       ( ::cAlias )->( DbGoTo( nRecNo ) )
    ENDIF
 
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    IF ::lIsDbf .AND. ::lFilterMode
       ( cAlias )->( DbClearFilter() )
    ENDIF
-   #endif
+#endif
 
    ::lHitTop := .F.
    ::SetFocus()
@@ -10700,11 +10700,11 @@ METHOD SetArray( aArray, lAutoCols, aHead, aSizes ) CLASS TSBrowse
       ELSEIF cType == "D"
          ::aDefValue[ nI ] := CToD( "" )
       ELSEIF cType == "T"
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          ::aDefValue[ nI ] := CToT( "" )
-         #else
+#else
          ::aDefValue[ nI ] := HB_CTOT("")
-         #endif
+#endif
       ELSEIF cType == "L"
          ::aDefValue[ nI ] := .F.
       ELSE                                // arrays, objects and codeblocks not allowed
@@ -10862,11 +10862,11 @@ METHOD SetArrayTo( aArray, uFontHF, aHead, aSizes, uFooter, aPicture, aAlign, aN
          aDefMaxLen [ nI ] := Len( aDefMaxVal [ nI ] )
          aDefAlign  [ nI ] := DT_CENTER
       ELSEIF cType == "T"
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
          ::aDefValue[ nI ] := CToT( "" )
-         #else
+#else
          ::aDefValue[ nI ] := HB_CTOT("")
-         #endif
+#endif
          aDefMaxVal [ nI ] := cValToChar( ::aArray[ 1, nI ] )
          aDefMaxLen [ nI ] := Len( aDefMaxVal [ nI ] )
          aDefAlign  [ nI ] := DT_LEFT
@@ -11480,7 +11480,7 @@ METHOD SetColumns( aData, aHeaders, aColSizes ) CLASS TSBrowse
 
       FOR n := 1 to nElements
          ::aColSizes[ n ] := If( ValType( aFields[ n ] ) != "C", 16,; // Bitmap handle
-         GetTextWidth( 0, Replicate( "B", Max( Len( ::aHeaders[ n ] ), ;
+            GetTextWidth( 0, Replicate( "B", Max( Len( ::aHeaders[ n ] ), ;
             Len( aFields[ n ] ) ) + 1 ), ;
             If( ! Empty( ::hFont ), ::hFont, 0 ) ) )
       NEXT
@@ -11678,7 +11678,7 @@ METHOD SetFilter( cField, uVal1, uVal2 ) CLASS TSBrowse
       ENDIF
 
    ENDIF
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    // Posibility of using FILTERs based on INDEXES!!!
 
    ::bGoTop := If( ::lFilterMode, {|| BrwGoTop( Self ) },;
@@ -11689,7 +11689,7 @@ METHOD SetFilter( cField, uVal1, uVal2 ) CLASS TSBrowse
 
    ::bSkip := If( ::lFilterMode, BuildSkip( ::cAlias, cField, uVal1, uVal2, Self ), ;
       {| n | ::dbSkipper( n ) } )
-   #else
+#else
    IF ::lFilterMode
       ( ::cAlias )->( OrdScope( 0, ::uValue1 ) )
       ( ::cAlias )->( OrdScope( 1, ::uValue2 ) )
@@ -11697,7 +11697,7 @@ METHOD SetFilter( cField, uVal1, uVal2 ) CLASS TSBrowse
       ( ::cAlias )->( OrdScope( 0, Nil ) )
       ( ::cAlias )->( OrdScope( 1, Nil ) )
    ENDIF
-   #endif
+#endif
    IF ::bLogicLen != Nil
       ::nLen := If( ::lIsDbf, ( ::cAlias )->( Eval( ::bLogicLen ) ), ;
          Eval( ::bLogicLen ) )
@@ -12120,7 +12120,7 @@ METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax ) CLASS TSBrowse
 
    RETURN Self
 
-   #ifdef __DEBUG__
+#ifdef __DEBUG__
    * ============================================================================
    * METHOD TSBrowse:ShowSizes() Version 9.0 Nov/30/2009
    * ============================================================================
@@ -12141,7 +12141,7 @@ METHOD ShowSizes() CLASS TSBrowse
    MsgInfo( cText, ::aMsg[ 26 ] )
 
    RETURN Self
-   #endif
+#endif
 
    * ============================================================================
    * METHOD TSBrowse:Skip() Version 9.0 Nov/30/2009
@@ -12659,7 +12659,7 @@ STATIC FUNCTION _aData( aFields )
 
    RETURN aFld
 
-   #ifdef __DEBUG__
+#ifdef __DEBUG__
    * ============================================================================
    * FUNCTION TSBrowse AClone() Version 9.0 Nov/30/2009
    * ============================================================================
@@ -12671,7 +12671,7 @@ STATIC FUNCTION AClone( aSource )
    AEval( aSource, { |e| AAdd( aTarget, e ) } )
 
    RETURN aTarget
-   #endif
+#endif
 
    * ============================================================================
    * FUNCTION TSBrowse:AutoHeaders() Version 9.0 Nov/30/2009
@@ -12764,7 +12764,7 @@ STATIC FUNCTION lASeek( uSeek, lSoft, oBrw )
 
    RETURN lFound
 
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    * ============================================================================
    * FUNCTION TSBrowse BrwGoBottom() Version 9.0 Nov/30/2009
    * Used by METHOD SetFilter() to set the bottom limit in an "Index Based"
@@ -12907,7 +12907,7 @@ STATIC FUNCTION BuildFiltr( cField, uValue1, uValue2, oTb )
    ENDCASE
 
    RETURN cFiltrBlock
-   #endif
+#endif
 
    * ============================================================================
    * FUNCTION TSBrowse BuildAutoSeek() Version 1.47 Adaption HMG
@@ -13059,7 +13059,7 @@ STATIC FUNCTION BuildAutoFilter( oTb )
 
    RETURN cFilterBlock
 
-   #ifdef _TSBFILTER7_
+#ifdef _TSBFILTER7_
    * ============================================================================
    * FUNCTION TSBrowse BrwGoto() Version 7.0 Jul/15/2004
    * Executes the action defined into the block created with FUNCTION BuildSkip()
@@ -13127,7 +13127,7 @@ STATIC FUNCTION BrwGoTo( n, bWhile, oTb )
    ENDCASE
 
    RETURN nSkipped
-   #endif
+#endif
 
    * ============================================================================
    * FUNCTION TSBrowse:DateSeek() Version 9.0 Nov/30/2009
@@ -13816,11 +13816,11 @@ CLASS TSBcell
 
    METHOD New()   INLINE ( Self )
 
-ENDCLASS
+   ENDCLASS
 
-* ===================================================================================================
-* METHOD TSBrowse:GetCellInfo() returns the cell coordinates for auxiliary TSBcell class
-* ===================================================================================================
+   * ===================================================================================================
+   * METHOD TSBrowse:GetCellInfo() returns the cell coordinates for auxiliary TSBcell class
+   * ===================================================================================================
 
 METHOD GetCellInfo( nRowPos, nCell, lColSpecHd ) CLASS TSBrowse
 
@@ -13925,7 +13925,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       cTmp := AllTrim( GetEnv( "TMP" ) )
 
    LOCAL aStock := { "42 4D F6 00 00 00 00 00 00 00 76 00 00 00 28 00" + ; // calendar
-   "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
       "00 00 80 00 00 00 C4 0E 00 00 C4 0E 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -13941,7 +13941,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "FF F7 FF FF FF 08 80 00 00 08 00 00 00 08 88 88" + ;
       "88 88 88 88 88 88", ;
       "42 4D F6 00 00 00 00 00 00 00 76 00 00 00 28 00" + ; // spinner
-   "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
       "00 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -13957,7 +13957,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "EE EE EE EE EE EF FE EE EE EE EE EE EE FF FF FF" + ;
       "FF FF FF FF FF FF", ;
       "42 4D F6 00 00 00 00 00 00 00 76 00 00 00 28 00" + ; // selector
-   "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 10 00 00 00 10 00 00 00 01 00 04 00 00 00" + ;
       "00 00 80 00 00 00 C4 0E 00 00 C4 0E 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -13973,7 +13973,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "77 70 77 77 77 77 77 77 77 77 77 77 77 77 77 77" + ;
       "77 77 77 77 77 77", ;
       "42 4D DE 00 00 00 00 00 00 00 76 00 00 00 28 00" + ;  // sort ascend
-   "00 00 0D 00 00 00 0D 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 0D 00 00 00 0D 00 00 00 01 00 04 00 00 00" + ;
       "00 00 68 00 00 00 00 00 00 00 00 00 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -13987,7 +13987,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "88 7F 88 88 80 00 88 88 88 88 88 88 80 00 88 88" + ;
       "88 88 88 88 80 00 88 88 88 88 88 88 80 00", ;
       "42 4D DE 00 00 00 00 00 00 00 76 00 00 00 28 00" + ;  // sort descend
-   "00 00 0D 00 00 00 0D 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 0D 00 00 00 0D 00 00 00 01 00 04 00 00 00" + ;
       "00 00 68 00 00 00 00 00 00 00 00 00 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -14001,7 +14001,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "77 77 77 F8 80 00 88 88 88 88 88 88 80 00 88 88" + ;
       "88 88 88 88 80 00 88 88 88 88 88 88 80 00", ;
       "42 4D 4E 01 00 00 00 00 00 00 76 00 00 00 28 00" + ;  // check box checked
-   "00 00 12 00 00 00 12 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 12 00 00 00 12 00 00 00 01 00 04 00 00 00" + ;
       "00 00 D8 00 00 00 00 00 00 00 00 00 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -14022,7 +14022,7 @@ FUNCTION StockBmp( uAnsi, oWnd, cPath, lNew )
       "00 00 F8 00 00 00 8F FF FF FF FF FF FF FF F8 00" + ;
       "00 00 88 88 88 88 88 88 88 88 88 00 00 00", ;
       "42 4D 4E 01 00 00 00 00 00 00 76 00 00 00 28 00" + ;  // check box unchecked
-   "00 00 12 00 00 00 12 00 00 00 01 00 04 00 00 00" + ;
+      "00 00 12 00 00 00 12 00 00 00 01 00 04 00 00 00" + ;
       "00 00 D8 00 00 00 00 00 00 00 00 00 00 00 00 00" + ;
       "00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 80" + ;
       "00 00 00 80 80 00 80 00 00 00 80 00 80 00 80 80" + ;
@@ -14220,10 +14220,10 @@ FUNCTION SBrowse( uAlias, cTitle, bSetUp, aCols, nWidth, nHeight, lSql ) // idea
       ENDIF
    ELSEIF ValType( uAlias ) $ 'BDLP'
       uAlias := { { uAlias } }
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    ELSEIF ValType( uAlias ) == "H"
       uAlias := aHash2Array( uAlias )
-      #endif
+#endif
    ENDIF
 
    cFormName := GetUniqueName( "SBrowse" )
@@ -14252,7 +14252,7 @@ FUNCTION SBrowse( uAlias, cTitle, bSetUp, aCols, nWidth, nHeight, lSql ) // idea
          IF lEdit
             AEval( :aColumns, { |o| o:lEdit := .T. } )
          ENDIF
-      End With
+      END WITH
 
    END TBROWSE
 
@@ -14296,7 +14296,7 @@ STATIC FUNCTION RecordBrowse( oBrw )
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
 
 STATIC FUNCTION aHash2Array( uAlias ) // a fivetechsoft sample routine
 
@@ -14315,4 +14315,4 @@ FUNCTION hb_HGetDef( hHash, xKey, xDef )
 
    RETURN iif( nPos > 0, HGetValueAt( hHash, nPos ), xDef )
 
-   #endif
+#endif

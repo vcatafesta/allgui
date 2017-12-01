@@ -100,7 +100,7 @@ CLASS TPlayer FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, file, col, row, w, h, noasw, noasm, ;
       noed, nom, noo, nop, sha, shm, shn, shp, HelpId, Invisible, ;
@@ -196,7 +196,7 @@ CLASS TAnimateBox FROM TControl
 
    METHOD Seek(Frame)        BLOCK { |Self,Frame| seekanimate( ::hWnd, Frame ) }
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, nCol, nRow, nWidth, nHeight, lAutoplay, ;
       lCenter, lTransparent, cFile, nHelpId, lInvisible, lNoTabStop, ;

@@ -48,7 +48,7 @@ CLASS TStreamUnZip FROM TStreamBase
 
    // METHOD Write         INLINE 0   // No WRITE method.
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oStream ) CLASS TStreamUnZip
 
@@ -385,15 +385,15 @@ FUNCTION Zip_GetHeader( oStream )
       hHeader:Size       := ASC( cBuffer[ 23 ] ) + ( ASC( cBuffer[ 24 ] ) * 256 ) + ( ASC( cBuffer[ 25 ] ) * 65536 ) + ( ASC( cBuffer[ 26 ] ) * 16777216 )
       hHeader:CompressedSize := ASC( cBuffer[ 19 ] ) + ( ASC( cBuffer[ 20 ] ) * 256 ) + ( ASC( cBuffer[ 21 ] ) * 65536 ) + ( ASC( cBuffer[ 22 ] ) * 16777216 )
       nAux := ASC( cBuffer[ 7 ] ) + ( ASC( cBuffer[ 8 ] ) * 256 )
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       hHeader:Encrypted  := ( hb_bitAnd( nAux, 0x0001 ) != 0 )
       hHeader:Descriptor := ( hb_bitAnd( nAux, 0x0008 ) != 0 )
       hHeader:Patched    := ( hb_bitAnd( nAux, 0x0020 ) != 0 )
-      #else
+#else
       hHeader:Encrypted  := ( ( nAux & 0x0001 ) != 0 )
       hHeader:Descriptor := ( ( nAux & 0x0008 ) != 0 )
       hHeader:Patched    := ( ( nAux & 0x0020 ) != 0 )
-      #endif
+#endif
       hHeader:VersionHi  := ASC( cBuffer[ 5 ] )
       hHeader:VersionLo  := ASC( cBuffer[ 6 ] )
       hHeader:CRC32      := ASC( cBuffer[ 15 ] ) + ( ASC( cBuffer[ 16 ] ) * 256 ) + ( ASC( cBuffer[ 17 ] ) * 65536 ) + ( ASC( cBuffer[ 18 ] ) * 16777216 )
@@ -435,15 +435,15 @@ FUNCTION Zip_GetCentralHeader( oStream )
       hHeader:Size       := ASC( cBuffer[ 25 ] ) + ( ASC( cBuffer[ 26 ] ) * 256 ) + ( ASC( cBuffer[ 27 ] ) * 65536 ) + ( ASC( cBuffer[ 28 ] ) * 16777216 )
       hHeader:CompressedSize := ASC( cBuffer[ 21 ] ) + ( ASC( cBuffer[ 22 ] ) * 256 ) + ( ASC( cBuffer[ 23 ] ) * 65536 ) + ( ASC( cBuffer[ 24 ] ) * 16777216 )
       nAux := ASC( cBuffer[ 9 ] ) + ( ASC( cBuffer[ 10 ] ) * 256 )
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       hHeader:Encrypted  := ( hb_bitAnd( nAux, 0x0001 ) != 0 )
       hHeader:Descriptor := ( hb_bitAnd( nAux, 0x0008 ) != 0 )
       hHeader:Patched    := ( hb_bitAnd( nAux, 0x0020 ) != 0 )
-      #else
+#else
       hHeader:Encrypted  := ( ( nAux & 0x0001 ) != 0 )
       hHeader:Descriptor := ( ( nAux & 0x0008 ) != 0 )
       hHeader:Patched    := ( ( nAux & 0x0020 ) != 0 )
-      #endif
+#endif
       hHeader:VersionHi  := ASC( cBuffer[ 7 ] )
       hHeader:VersionLo  := ASC( cBuffer[ 8 ] )
       hHeader:CRC32      := ASC( cBuffer[ 17 ] ) + ( ASC( cBuffer[ 18 ] ) * 256 ) + ( ASC( cBuffer[ 19 ] ) * 65536 ) + ( ASC( cBuffer[ 20 ] ) * 16777216 )

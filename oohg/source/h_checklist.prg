@@ -202,7 +202,7 @@ CLASS TCheckList FROM TGrid
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, aRows, v, fontname, ;
       fontsize, tooltip, change, gotfocus, lostfocus, aImage, just, ;

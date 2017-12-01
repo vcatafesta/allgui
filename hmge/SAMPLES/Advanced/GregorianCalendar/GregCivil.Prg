@@ -292,16 +292,16 @@ STATIC FUNCTION ButtonOk()
       **- accounting for EDSA revolution in 1986
       IF nYear < 1986
          aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
-         CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
-         CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
-         CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
-         CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
-         CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
-         CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
-         CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
-         CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
-         CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
-         }
+            CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
+            CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
+            CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
+            CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
+            CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
+            CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
+            CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
+            CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
+            CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
+            }
 
          *--> define holiday descriptions
          acHolidayDesc_ := { "New Year's Day",;
@@ -320,17 +320,17 @@ STATIC FUNCTION ButtonOk()
 
       ELSE
          aHolidays_ := { CTOD( "01/01/" + ALLTRIM( STR( nYear ) ) ),;  // New Year'S Day
-         CTOD( "02/25/" + ALLTRIM( STR( nYear ) ) ),;  // Edsa Revolution
-         CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
-         CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
-         CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
-         CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
-         CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
-         CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
-         CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
-         CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
-         CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
-         }
+            CTOD( "02/25/" + ALLTRIM( STR( nYear ) ) ),;  // Edsa Revolution
+            CTOD( "04/09/" + ALLTRIM( STR( nYear ) ) ),;  // Bataan Day
+            CTOD( "05/01/" + ALLTRIM( STR( nYear ) ) ),;  // Labor Day
+            CTOD( "05/06/" + ALLTRIM( STR( nYear ) ) ),;  // Araw ng Kagitingan
+            CTOD( "06/12/" + ALLTRIM( STR( nYear ) ) ),;  // Independence Day
+            CTOD( "08/27/" + ALLTRIM( STR( nYear ) ) ),;  // National Heroes Day
+            CTOD( "11/01/" + ALLTRIM( STR( nYear ) ) ),;  // All Saints Day
+            CTOD( "11/30/" + ALLTRIM( STR( nYear ) ) ),;  // Bonifacio Day
+            CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ),;  // Christmas Day
+            CTOD( "12/30/" + ALLTRIM( STR( nYear ) ) ) ;  // Rizal Day
+            }
 
          *--> define holiday descriptions
          acHolidayDesc_ := { "New Year's Day",;
@@ -357,47 +357,47 @@ STATIC FUNCTION ButtonOk()
       // code blocks confined in an array.                                     //
       adFeastDays_ := {;
          {| SolemnityofMary | CTOD( "1/1/"   + ALLTRIM( STR( nYear ) ) ) },;          // January 1
-      {| Septuagesima  | dEaster - 63 },;                                          // 3rd Sunday before Lent  or 9th Sunday
-      {| Quinquagesima | dEaster - 49 },;                                          // The Sunday before Ash Wednesday beginning of Lent
-      {| PresentationoftheLord  | CTOD( "2/2/"   + ALLTRIM( STR( nYear ) ) ) },;   // February 2
-      {| AshWednesday  | dEaster - 46 },;                                          // 7th Wednesday before Easter, first day of Lent
-      ;                                                                            // the day following the Mardi Gras (Fat Tuesday)
-      ;                                                                            // and the day of fasting and repentance.
-      {| TheAnnunciation        | CTOD( "3/25/"  + ALLTRIM( STR( nYear ) ) ) },;   // 25 March
-      {| PalmSunday | dEaster - 7 },;                                              // Sunday before Easter
-      {| dMThursday | dEaster - 3 },;
+         {| Septuagesima  | dEaster - 63 },;                                          // 3rd Sunday before Lent  or 9th Sunday
+         {| Quinquagesima | dEaster - 49 },;                                          // The Sunday before Ash Wednesday beginning of Lent
+         {| PresentationoftheLord  | CTOD( "2/2/"   + ALLTRIM( STR( nYear ) ) ) },;   // February 2
+         {| AshWednesday  | dEaster - 46 },;                                          // 7th Wednesday before Easter, first day of Lent
+         ;                                                                            // the day following the Mardi Gras (Fat Tuesday)
+         ;                                                                            // and the day of fasting and repentance.
+         {| TheAnnunciation        | CTOD( "3/25/"  + ALLTRIM( STR( nYear ) ) ) },;   // 25 March
+         {| PalmSunday | dEaster - 7 },;                                              // Sunday before Easter
+         {| dMThursday | dEaster - 3 },;
          {| dGFriday   | dEaster -2  },;
          {||  dEaster  },;
          {| RogationSunday | dEaster + 35 },;                                         // Solemn supplication ceremony prescribed by Church
-      {| Ascension  | dEaster + 39 },;                                             // Ascencion of Christ into heaven, observed on the
-      ;                                                                            // 40th day after Easter.
-      {| Pentecost | dEaster + 49 },;                                              // 7th Sunday after Easter; commemorates the
-      ;                                                                            // emanation of the Holy Spirit to the Apostles;
+         {| Ascension  | dEaster + 39 },;                                             // Ascencion of Christ into heaven, observed on the
+         ;                                                                            // 40th day after Easter.
+         {| Pentecost | dEaster + 49 },;                                              // 7th Sunday after Easter; commemorates the
+         ;                                                                            // emanation of the Holy Spirit to the Apostles;
          ;                                                                            // Jewish: 6th of Sivan to celebrate Moses receiving
-      ;                                                                            // the Ten Commandments;
+         ;                                                                            // the Ten Commandments;
          ;                                                                            // Scotland: Quarter day
-      {| TrinitySunday |  dEaster + 56 },;                                         // 8th Sunday after Easter
-      {| CorpusChristi |  dEaster + 60 },;                                         // Thursday after Trinity Sunday; first celebrated
-      ;                                                                            // in the year 1246 AD.
-      {| TransfigurationofJesus | CTOD( "8/6/"   + ALLTRIM( STR( nYear ) ) ) },;   // August 6
-      {| TheAssumptionofMary    | CTOD( "8/15/"  + ALLTRIM( STR( nYear ) ) ) },;   // August 15
-      {| BirthofVirginMary      | CTOD( "9/8/"   + ALLTRIM( STR( nYear ) ) ) },;   // September 8
-      {| Santacruzan            | CTOD( "9/14/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 14 (To commemorate St. Helena's quest for the Cross of Calvary)
-      {| CelebrationofHolyCross | CTOD( "9/18/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 18
-      {| TheMassoftheArchangels | CTOD( "9/29/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 29
-      {| AllSaintsDay           | CTOD( "11/1/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 1
-      {| AllSoulsDay            | CTOD( "11/2/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 2
-      ;
+         {| TrinitySunday |  dEaster + 56 },;                                         // 8th Sunday after Easter
+         {| CorpusChristi |  dEaster + 60 },;                                         // Thursday after Trinity Sunday; first celebrated
+         ;                                                                            // in the year 1246 AD.
+         {| TransfigurationofJesus | CTOD( "8/6/"   + ALLTRIM( STR( nYear ) ) ) },;   // August 6
+         {| TheAssumptionofMary    | CTOD( "8/15/"  + ALLTRIM( STR( nYear ) ) ) },;   // August 15
+         {| BirthofVirginMary      | CTOD( "9/8/"   + ALLTRIM( STR( nYear ) ) ) },;   // September 8
+         {| Santacruzan            | CTOD( "9/14/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 14 (To commemorate St. Helena's quest for the Cross of Calvary)
+         {| CelebrationofHolyCross | CTOD( "9/18/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 18
+         {| TheMassoftheArchangels | CTOD( "9/29/"  + ALLTRIM( STR( nYear ) ) ) },;   // September 29
+         {| AllSaintsDay           | CTOD( "11/1/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 1
+         {| AllSoulsDay            | CTOD( "11/2/"  + ALLTRIM( STR( nYear ) ) ) },;   // November 2
+         ;
          {|| FindSunday( CTOD( "11/20/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Christ the King, Sunday on or After November 20
-      ;//
-      ;// * Find or calculate the Sundays of Advent
-      {|| FindSunday( CTOD( "11/27/" + ALLTRIM( STR( nYear ) ) ) ) },;             // First Sunday of Advent on or after November 27
-      {|| FindSunday( CTOD( "12/4/"  + ALLTRIM( STR( nYear ) ) ) ) },;             // Second Sunday of Advent on or After December 4
-      {|| FindSunday( CTOD( "12/11/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Third Sunday of Advent on or after December 11
-      {|| FindSunday( CTOD( "12/18/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Fourth Sunday of Advent on or after December 18
-      {| ChristmasDay           | CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ) },;   // December 25
-      {| Epiphany1 | ChristmasDay + 12 },;                                         // 12 days after Christmas - Traditional Ephiphany Three Kings
-      {|| EpiphanySunday(ChristmasDay) } }                                         // 2nd Sunday after Christmas
+         ;//
+         ;// * Find or calculate the Sundays of Advent
+         {|| FindSunday( CTOD( "11/27/" + ALLTRIM( STR( nYear ) ) ) ) },;             // First Sunday of Advent on or after November 27
+         {|| FindSunday( CTOD( "12/4/"  + ALLTRIM( STR( nYear ) ) ) ) },;             // Second Sunday of Advent on or After December 4
+         {|| FindSunday( CTOD( "12/11/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Third Sunday of Advent on or after December 11
+         {|| FindSunday( CTOD( "12/18/" + ALLTRIM( STR( nYear ) ) ) ) },;             // Fourth Sunday of Advent on or after December 18
+         {| ChristmasDay           | CTOD( "12/25/" + ALLTRIM( STR( nYear ) ) ) },;   // December 25
+         {| Epiphany1 | ChristmasDay + 12 },;                                         // 12 days after Christmas - Traditional Ephiphany Three Kings
+         {|| EpiphanySunday(ChristmasDay) } }                                         // 2nd Sunday after Christmas
 
       acFeastDays_ := { "Solemnity of Mary",;
          "Septuagesima",;

@@ -52,7 +52,7 @@ FUNCTION Abrir
       RETURN NIL
    ENDIF
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel no está disponible. [' + win_oleErrorText()+ ']' )
 

@@ -43,12 +43,12 @@ FUNCTION Main()
       Brw_1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
          { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
          { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-      CLR_HGREEN, CLR_BLACK } )  // text colors
+         CLR_HGREEN, CLR_BLACK } )  // text colors
 
       Brw_1:SetColor( { 2, 4, 14 }, ;
          { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-      { CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
-      { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
+         { CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
+         { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
 
       Brw_1:nLineStyle := LINES_VERT
 
@@ -262,12 +262,12 @@ Brw_1:nHeightHead += 5
 Brw_1:SetColor( { 1, 3, 5, 6, 13, 15 }, ;
    { CLR_BLACK,  CLR_YELLOW, CLR_WHITE, ;
    { CLR_HBLUE, CLR_BLUE }, ; // degraded cursor background color
-CLR_HGREEN, CLR_BLACK } )  // text colors
+   CLR_HGREEN, CLR_BLACK } )  // text colors
 
 Brw_1:SetColor( { 2, 4, 14 }, ;
    { { CLR_WHITE, CLR_HGRAY }, ;  // degraded cells background color
-{ CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
-{ CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
+   { CLR_WHITE, CLR_BLACK }, ;    // degraded headers backgroud color
+   { CLR_HGREEN, CLR_BLACK } } )  // degraded order column background color
 
 Brw_1:nLineStyle := LINES_VERT
 Brw_1:aColumns[ 1 ]:cOrder := "FIRST"

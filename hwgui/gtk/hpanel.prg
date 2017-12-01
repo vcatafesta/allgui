@@ -27,7 +27,7 @@ CLASS HPanel INHERIT HControl
 
    METHOD Move( x1,y1,width,height )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight, ;
       bInit,bSize,bPaint,lDocked ) CLASS HPanel

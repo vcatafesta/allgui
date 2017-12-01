@@ -172,7 +172,7 @@ CREATE CLASS TREPORT FROM TPRINTBASE
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop,lgroupeject) CLASS TREPORT
 
@@ -946,101 +946,101 @@ METHOD leacoli(cname,npar) CLASS TREPORT
    *   - No traduce caracteres especiales CHR(xx)
    *   - Está deshabilitado el salto de hoja antes del reporte
 
-   #include "error.ch"
+#include "error.ch"
 
    ********* Parámetros del reporte ************
-   #define _RF_FIRSTCOL  0  // Offset Primer columna
-   #define _RF_FIRSTROW  1  // Offset Primer fila
-   #define _RF_ROWINC    4  // Interlineado
-   #define _RF_FONT      "Courier New"  // Font a usar (No usar proporcional!)
-   #define _RF_SIZECONDENSED 7   // Tamaño de font a usar cuando el ancho es mayor de 80 columnas (132)
-   #define _RF_SIZENORMAL   12   // Tamaño de font a usar cuando el ancho es menor de 80 columnas
-   #define _RF_ROWSINLETTER  60  // Cantidad de Filas máximo que soporta el tamaño carta. Si hay mas líneas, se usa Legal
+#define _RF_FIRSTCOL  0  // Offset Primer columna
+#define _RF_FIRSTROW  1  // Offset Primer fila
+#define _RF_ROWINC    4  // Interlineado
+#define _RF_FONT      "Courier New"  // Font a usar (No usar proporcional!)
+#define _RF_SIZECONDENSED 7   // Tamaño de font a usar cuando el ancho es mayor de 80 columnas (132)
+#define _RF_SIZENORMAL   12   // Tamaño de font a usar cuando el ancho es menor de 80 columnas
+#define _RF_ROWSINLETTER  60  // Cantidad de Filas máximo que soporta el tamaño carta. Si hay mas líneas, se usa Legal
 
    **** Constantes para el Nation Message ********
-   #define _RF_PAGENO       3     // Página
-   #define _RF_SUBTOTAL     4     // Subtotal
-   #define _RF_SUBSUBTOTAL  5     // SubSubtotal
-   #define _RF_TOTAL        6     // Total
+#define _RF_PAGENO       3     // Página
+#define _RF_SUBTOTAL     4     // Subtotal
+#define _RF_SUBSUBTOTAL  5     // SubSubtotal
+#define _RF_TOTAL        6     // Total
 
    ********** Tamaños de buffer *************
-   #define  SIZE_FILE_BUFF             1990
-   #define  SIZE_LENGTHS_BUFF          110
-   #define  SIZE_OFFSETS_BUFF          110
-   #define  SIZE_EXPR_BUFF             1440
-   #define  SIZE_FIELDS_BUFF           300
-   #define  SIZE_PARAMS_BUFF           24
+#define  SIZE_FILE_BUFF             1990
+#define  SIZE_LENGTHS_BUFF          110
+#define  SIZE_OFFSETS_BUFF          110
+#define  SIZE_EXPR_BUFF             1440
+#define  SIZE_FIELDS_BUFF           300
+#define  SIZE_PARAMS_BUFF           24
 
    **************** offsets *******************
-   #define  LENGTHS_OFFSET             5
-   #define  OFFSETS_OFFSET             115
-   #define  EXPR_OFFSET                225
-   #define  FIELDS_OFFSET              1665
-   #define  PARAMS_OFFSET              1965
-   #define  FIELD_WIDTH_OFFSET         1
-   #define  FIELD_TOTALS_OFFSET        6
-   #define  FIELD_DECIMALS_OFFSET      7
-   #define  FIELD_CONTENT_EXPR_OFFSET  9
-   #define  FIELD_HEADER_EXPR_OFFSET   11
-   #define  PAGE_HDR_OFFSET            1
-   #define  GRP_EXPR_OFFSET            3
-   #define  SUB_EXPR_OFFSET            5
-   #define  GRP_HDR_OFFSET             7
-   #define  SUB_HDR_OFFSET             9
-   #define  PAGE_WIDTH_OFFSET          11
-   #define  LNS_PER_PAGE_OFFSET        13
-   #define  LEFT_MRGN_OFFSET           15
-   #define  RIGHT_MGRN_OFFSET          17
-   #define  COL_COUNT_OFFSET           19
-   #define  DBL_SPACE_OFFSET           21
-   #define  SUMMARY_RPT_OFFSET         22
-   #define  PE_OFFSET                  23
-   #define  OPTION_OFFSET              24
+#define  LENGTHS_OFFSET             5
+#define  OFFSETS_OFFSET             115
+#define  EXPR_OFFSET                225
+#define  FIELDS_OFFSET              1665
+#define  PARAMS_OFFSET              1965
+#define  FIELD_WIDTH_OFFSET         1
+#define  FIELD_TOTALS_OFFSET        6
+#define  FIELD_DECIMALS_OFFSET      7
+#define  FIELD_CONTENT_EXPR_OFFSET  9
+#define  FIELD_HEADER_EXPR_OFFSET   11
+#define  PAGE_HDR_OFFSET            1
+#define  GRP_EXPR_OFFSET            3
+#define  SUB_EXPR_OFFSET            5
+#define  GRP_HDR_OFFSET             7
+#define  SUB_HDR_OFFSET             9
+#define  PAGE_WIDTH_OFFSET          11
+#define  LNS_PER_PAGE_OFFSET        13
+#define  LEFT_MRGN_OFFSET           15
+#define  RIGHT_MGRN_OFFSET          17
+#define  COL_COUNT_OFFSET           19
+#define  DBL_SPACE_OFFSET           21
+#define  SUMMARY_RPT_OFFSET         22
+#define  PE_OFFSET                  23
+#define  OPTION_OFFSET              24
 
    ********* Definiciones para el Array del reporte *************
-   #define RP_HEADER   1
-   #define RP_WIDTH    2
-   #define RP_LMARGIN  3
-   #define RP_RMARGIN  4
-   #define RP_LINES    5
-   #define RP_SPACING  6
-   #define RP_BEJECT   7
-   #define RP_AEJECT   8
-   #define RP_PLAIN    9
-   #define RP_SUMMARY  10
-   #define RP_COLUMNS  11
-   #define RP_GROUPS   12
-   #define RP_HEADING  13
+#define RP_HEADER   1
+#define RP_WIDTH    2
+#define RP_LMARGIN  3
+#define RP_RMARGIN  4
+#define RP_LINES    5
+#define RP_SPACING  6
+#define RP_BEJECT   7
+#define RP_AEJECT   8
+#define RP_PLAIN    9
+#define RP_SUMMARY  10
+#define RP_COLUMNS  11
+#define RP_GROUPS   12
+#define RP_HEADING  13
 
-   #define RP_COUNT    13
+#define RP_COUNT    13
 
    ******** Columnas ************
-   #define RC_EXP      1
-   #define RC_TEXT     2
-   #define RC_TYPE     3
-   #define RC_HEADER   4
-   #define RC_WIDTH    5
+#define RC_EXP      1
+#define RC_TEXT     2
+#define RC_TYPE     3
+#define RC_HEADER   4
+#define RC_WIDTH    5
 
-   #define RC_DECIMALS 6
-   #define RC_TOTAL    7
-   #define RC_PICT     8
+#define RC_DECIMALS 6
+#define RC_TOTAL    7
+#define RC_PICT     8
 
-   #define RC_COUNT    8
+#define RC_COUNT    8
 
    ****** Grupos ***********
-   #define RG_EXP      1
-   #define RG_TEXT     2
-   #define RG_TYPE     3
-   #define RG_HEADER   4
-   #define RG_AEJECT   5
+#define RG_EXP      1
+#define RG_TEXT     2
+#define RG_TYPE     3
+#define RG_HEADER   4
+#define RG_AEJECT   5
 
-   #define RG_COUNT    5
+#define RG_COUNT    5
 
    ********** Errores ************
-   #define  F_OK                       0   // Ok!
-   #define  F_EMPTY                   -3   // Archivo vacío
-   #define  F_ERROR                   -1   // Error desconocido
-   #define  F_NOEXIST                  2   // Archivo inexistente
+#define  F_OK                       0   // Ok!
+#define  F_EMPTY                   -3   // Archivo vacío
+#define  F_ERROR                   -1   // Error desconocido
+#define  F_NOEXIST                  2   // Archivo inexistente
 
    ////#include "oohg.ch"
 

@@ -136,8 +136,8 @@ PROCEDURE ReleaseCLButtonImageList ( cWindow, cControl )
 
    RETURN
 
-   #define WM_COMMAND  0x0111
-   #define BN_CLICKED  0
+#define WM_COMMAND  0x0111
+#define BN_CLICKED  0
 
 FUNCTION CLButtonEventhandler ( hWnd, nMsg, wParam, lParam )
 
@@ -163,7 +163,7 @@ FUNCTION CLButtonEventhandler ( hWnd, nMsg, wParam, lParam )
 
    RETURN RetVal
 
-   #define BCM_SETSHIELD      0x0000160C
+#define BCM_SETSHIELD      0x0000160C
 
 PROCEDURE CLButton_SetShield ( cWindow, cControl )
 
@@ -187,9 +187,9 @@ PROCEDURE CLButton_SetShield ( cWindow, cControl )
 
    RETURN
 
-   #define BS_COMMANDLINK     0x0000000E
-   #define BS_DEFCOMMANDLINK  0x0000000F
-   #define BM_SETSTYLE        244
+#define BS_COMMANDLINK     0x0000000E
+#define BS_DEFCOMMANDLINK  0x0000000F
+#define BM_SETSTYLE        244
 
 PROCEDURE CLButtonSetFocus ( cWindow, cControl )
 
@@ -502,4 +502,4 @@ HB_FUNC( CLBUTTON_SETIMAGE )
 
 #pragma ENDDUMP
 
-   #endif
+#endif

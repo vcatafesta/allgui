@@ -40,7 +40,7 @@ PROCEDURE Main
          JUSTIFY ;
          { GRID_JTFY_CENTER , GRID_JTFY_RIGHT , GRID_JTFY_LEFT } ;
          ; // Edition
-      EDIT INPLACE ;
+         EDIT INPLACE ;
          REPLACEFIELD { { |x,o| o:FieldPut( 1, x ) } , ;
          { |x,o| o:FieldPut( 1, x ) } , ;
          { |x,o| o:FieldPut( 1, x ) } }
@@ -51,9 +51,9 @@ PROCEDURE Main
 
    RETURN
 
-   #endif   // #ifndef NO_SAMPLE
+#endif   // #ifndef NO_SAMPLE
 
-   #include "hbclass.ch"
+#include "hbclass.ch"
 
    /*
    *  This is a template for ooHGRecord's subclasses (database class used
@@ -132,7 +132,7 @@ CLASS XBrowse_ODBC
 
    ERROR HANDLER FieldAssign
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Skipper( nSkip ) CLASS XBrowse_ODBC
 

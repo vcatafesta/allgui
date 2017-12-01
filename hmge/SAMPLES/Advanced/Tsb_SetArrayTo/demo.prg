@@ -196,11 +196,11 @@ STATIC FUNCTION CreateBrowseCnfCard(aDim,aBColor,cTabName,nTbrRow,nTbrCol,nTbrWi
    DEFINE TBROWSE &cTbrName     ;
       AT nTbrRow, nTbrCol     ;
       WIDTH  nTbrWidth + 2    ;  // + 2 - это что бы не срабатывал гор.скролинг
-   HEIGHT nTbrHeight       ;
+      HEIGHT nTbrHeight       ;
       FONT cFont SIZE nFontSize - 2 ;
       BACKCOLOR aTbrBackColor ;
       GRID  ;                   // это oBrw:lCellBrw := TRUE
-   EDIT                      // все колонки с lEdit := .T.
+      EDIT                      // все колонки с lEdit := .T.
 
    aFontHF := aFont[2]       //  bold  Header, Footer
 

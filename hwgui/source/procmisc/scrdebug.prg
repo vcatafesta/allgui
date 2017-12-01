@@ -42,10 +42,10 @@ FUNCTION hwg_scrDebug( aScript, iscr )
 
       oDlgFont := HFont():Add( "Georgia",0,-15,,204 )
       oScrFont := HFont():Add( "Courier New",0,-15,,204 )
-      #ifndef __LINUX__
+#ifndef __LINUX__
       oBmpCurr := HBitmap():AddStandard(OBM_RGARROWD)
       oBmpPoint:= HBitmap():AddStandard(OBM_CHECK)
-      #endif
+#endif
       INIT DIALOG oDlgDebug TITLE ("Script Debugger - "+aScript[1]) AT 210,10 SIZE 500,300 ;
          FONT oDlgFont STYLE WS_POPUP+WS_VISIBLE+WS_CAPTION+WS_SYSMENU+WS_SIZEBOX ;
          ON EXIT {|o|dlgDebugClose()}
@@ -76,13 +76,13 @@ FUNCTION hwg_scrDebug( aScript, iscr )
          ON SIZE {|o,x,y|o:Move(,,x)}
 
       oBrwScript:aArray := aScript[3]
-      #ifdef __LINUX__
+#ifdef __LINUX__
       oBrwScript:rowCount := 5
       oBrwScript:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,'>',Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,'*',' '))},"C",1,0 ) )
-      #else
+#else
       oBrwScript:AddColumn( HColumn():New( "",{|v,o|Iif(o:nCurrent==i_scr,1,Iif(aBreakPoints!=Nil.AND.Ascan(aBreakPoints[2],oBrwScript:nCurrent)!=0,2,0))},"N",1,0 ) )
       oBrwScript:aColumns[1]:aBitmaps := { { {|n|n==1},oBmpCurr },{ {|n|n==2},oBmpPoint } }
-      #endif
+#endif
       oBrwScript:AddColumn( HColumn():New( "",{|v,o|Left(o:aArray[o:nCurrent],4)},"C",4,0 ) )
       oBrwScript:AddColumn( HColumn():New( "",{|v,o|Substr(o:aArray[o:nCurrent],6)},"C",80,0 ) )
 
@@ -91,13 +91,13 @@ FUNCTION hwg_scrDebug( aScript, iscr )
       @ 0,240 PANEL oPanel OF oDlgDebug SIZE oDlgDebug:nWidth,64 ;
          ON SIZE {|o,x,y|o:Move(,y-64,x)}
 
-      #ifdef __LINUX__
+#ifdef __LINUX__
       @ 10,10 OWNERBUTTON TEXT "Add" SIZE 100, 24 OF oPanel ON CLICK {||AddWatch()}
       @ 10,36 OWNERBUTTON TEXT "Calculate" SIZE 100, 24 OF oPanel ON CLICK {||Calculate()}
-      #else
+#else
       @ 10,10 BUTTON "Add" SIZE 100, 24 OF oPanel ON CLICK {||AddWatch()}
       @ 10,36 BUTTON "Calculate" SIZE 100, 24 OF oPanel ON CLICK {||Calculate()}
-      #endif
+#endif
       @ 110,10 EDITBOX oEditExpr CAPTION "" SIZE 380,24 OF oPanel ON SIZE {|o,x,y|o:Move(,,x-120)}
       @ 110,36 EDITBOX oEditRes CAPTION "" SIZE 380,24 OF oPanel ON SIZE {|o,x,y|o:Move(,,x-120)}
 
@@ -168,10 +168,10 @@ STATIC FUNCTION dlgDebugClose()
    aWatches := {}
    oScrFont:Release()
    oDlgFont:Release()
-   #ifndef __LINUX__
+#ifndef __LINUX__
    oBmpCurr:Release()
    oBmpPoint:Release()
-   #endif
+#endif
 
    RETURN .T.
 
@@ -204,11 +204,11 @@ STATIC FUNCTION AddWatch()
 
    LOCAL xRes, bCodeblock, bOldError, lRes := .T.
 
-   #ifdef __LINUX__
+#ifdef __LINUX__
    IF !Empty( xRes := oEditExpr:GetText() )
-      #else
+#else
       IF !Empty( xRes := hwg_Getedittext( oEditExpr:oParent:handle, oEditExpr:id ) )
-         #endif
+#endif
          bOldError := ERRORBLOCK( { | e | MacroError(e) } )
          BEGIN SEQUENCE
             bCodeblock := &( "{||" + xRes + "}" )
@@ -272,11 +272,11 @@ STATIC FUNCTION Calculate()
 
    LOCAL xRes, bOldError, lRes := .T., cType
 
-   #ifdef __LINUX__
+#ifdef __LINUX__
    IF !Empty( xRes := oEditExpr:GetText() )
-      #else
+#else
       IF !Empty( xRes := hwg_Getedittext( oEditExpr:oParent:handle, oEditExpr:id ) )
-         #endif
+#endif
          bOldError := ERRORBLOCK( { | e | MacroError(e) } )
          BEGIN SEQUENCE
             xRes := &xRes

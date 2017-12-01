@@ -307,8 +307,8 @@ FUNCTION Change_Mode(nItem)
 
    RETURN NIL
 
-   #include "login_button_1_action.prg"
-   #include "main_button_4_action.prg"
+#include "login_button_1_action.prg"
+#include "main_button_4_action.prg"
 
    * This part of the code, was copied of TrayBalloon demo avaliable on HMG Extended
    * This source was writen by Grigory Filatov

@@ -1059,11 +1059,11 @@ FUNCTION _OOHG_HasMethod( obj, msg )
 
    LOCAL itm, aClsSel
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    aClsSel := obj:ClassSel( HB_MSGLISTPURE, HB_OO_CLSTP_EXPORTED, .T. )
-   #else
+#else
    aClsSel := obj:ClassFullSel( HB_MSGLISTPURE, HB_OO_CLSTP_EXPORTED )
-   #endif
+#endif
 
    FOR EACH itm in aClsSel
       IF itm[ HB_OO_DATA_TYPE ] == HB_OO_MSG_METHOD .or. itm[ HB_OO_DATA_TYPE ] == HB_OO_MSG_INLINE
@@ -1086,11 +1086,11 @@ FUNCTION _OOHG_HasData( obj, msg )
 
    LOCAL itm, aClsSel
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    aClsSel := obj:ClassSel( HB_MSGLISTPURE, HB_OO_CLSTP_EXPORTED, .T. )
-   #else
+#else
    aClsSel := obj:ClassFullSel( HB_MSGLISTPURE, HB_OO_CLSTP_EXPORTED )
-   #endif
+#endif
 
    FOR EACH itm in aClsSel
       IF itm[ HB_OO_DATA_TYPE ] == HB_OO_MSG_DATA
@@ -1272,7 +1272,7 @@ CLASS TControl FROM TWindow
 
    METHOD Cursor             SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Cursor( hCursor ) CLASS TControl
 
@@ -2695,7 +2695,7 @@ CLASS TControlGroup FROM TControl
 
    METHOD AddControl
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h, Invisible, lDisabled ) CLASS TControlGroup
 

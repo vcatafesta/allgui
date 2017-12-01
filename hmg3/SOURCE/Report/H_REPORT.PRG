@@ -210,7 +210,7 @@ CREATE CLASS _HMG_REPORT
 
    METHOD leacoli(cname,npar)
 
-ENDCLASS
+   ENDCLASS
 
 METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop) CLASS _HMG_REPORT
 

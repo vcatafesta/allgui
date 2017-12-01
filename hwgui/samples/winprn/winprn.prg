@@ -19,13 +19,13 @@ FUNCTION Main
 
    LOCAL oWinPrn, i
 
-   #ifdef __PLATFORM__Linux__
+#ifdef __PLATFORM__Linux__
    oWinPrn := HWinPrn():New( ,"RU866","RUKOI8" )
    oWinPrn:StartDoc( .T.,"/apps/a2.ps" )
-   #else
+#else
    oWinPrn := HWinPrn():New( ,"RU866","RU1251" )
    oWinPrn:StartDoc( .T. )
-   #endif
+#endif
 
    oWinPrn:PrintLine( oWinPrn:oFont:name + " " + Str(oWinPrn:oFont:height) + " " + Str(oWinPrn:nCharW) + " " + Str(oWinPrn:nLineHeight) )
    oWinPrn:PrintLine( "A123456789012345678901234567890123456789012345678901234567890123456789012345678Z" )

@@ -73,18 +73,18 @@ CLASS TPOP3
 
    CLASSDATA oSocket HIDDEN
 
-ENDCLASS
+   ENDCLASS
 
-/****m* TPop3/TPop3:new
-*  NAME
-*    new - class costructor
-*  SYNOPSIS
-*    TPop3():new()
-*  PURPOSE
-*    Create a new TPop3 object
-*  EXAMPLE
-*    oSock := TPop3():new()
-*/
+   /****m* TPop3/TPop3:new
+   *  NAME
+   *    new - class costructor
+   *  SYNOPSIS
+   *    TPop3():new()
+   *  PURPOSE
+   *    Create a new TPop3 object
+   *  EXAMPLE
+   *    oSock := TPop3():new()
+   */
 
 METHOD New() CLASS TPOP3
 

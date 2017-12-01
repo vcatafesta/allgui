@@ -251,25 +251,25 @@ FUNCTION rmatch(c,f)
 
    RETURN (ALLTRIM(c)=="" .or. UPPER(ALLTRIM(c))$UPPER(f))
 
-   #define NET_WAIT     0.5   // Seconds to wait between between retries
-   #define NET_SECS     2     // Number of seconds to continue retry
+#define NET_WAIT     0.5   // Seconds to wait between between retries
+#define NET_SECS     2     // Number of seconds to continue retry
 
-   #xtranslate sx_SetScope(<n>[,<cScope>]) => OrdScope(<n>[,<cScope>])
-   #xtranslate sx_ClrScope(<n>)            => OrdScope(<n>)
-   #xtranslate sx_TableName()              => dbf()
-   #xtranslate sx_iNDexName()              => OrdName()
-   #xtranslate sx_SetPass(<cPassWord>)     => TONE(10)
-   #xtranslate sx_I_IndexName()            => OrdBagName()     // Show index name
-   #xtranslate xx_I_TagName()              => OrdName()
+#xtranslate sx_SetScope(<n>[,<cScope>]) => OrdScope(<n>[,<cScope>])
+#xtranslate sx_ClrScope(<n>)            => OrdScope(<n>)
+#xtranslate sx_TableName()              => dbf()
+#xtranslate sx_iNDexName()              => OrdName()
+#xtranslate sx_SetPass(<cPassWord>)     => TONE(10)
+#xtranslate sx_I_IndexName()            => OrdBagName()     // Show index name
+#xtranslate xx_I_TagName()              => OrdName()
 
    //#xtranslate Sx_KeysIncluded()         =>
    //#xtranslate Sx_Step()                 =>
    //#xtranslate Sx_TagCount()             =>
    //#xtranslate Sx_TagInfo()              =>
 
-   #xtranslate Sx_Thermometer(nTag)      => TONE(10)
-   #xtranslate SwpRUnCmd(<cCommand>,<a>,<b>,<c>)      => __RUN(<cCommand>)
-   #xtranslate BliDemDte()                => date()+1000
+#xtranslate Sx_Thermometer(nTag)      => TONE(10)
+#xtranslate SwpRUnCmd(<cCommand>,<a>,<b>,<c>)      => __RUN(<cCommand>)
+#xtranslate BliDemDte()                => date()+1000
 
    /*
    ordkeycount()
@@ -286,7 +286,7 @@ FUNCTION rmatch(c,f)
    dbexist()
    */
 
-   #command INDEX ON <key> TAG <(tag)> [OF <(cdx)>]                           ;
+#command INDEX ON <key> TAG <(tag)> [OF <(cdx)>]                           ;
       [FOR <for>]                                                       ;
       [<all:   ALL>]                                                    ;
       [WHILE   <while>]                                                 ;

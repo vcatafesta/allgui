@@ -46,6 +46,7 @@ FUNCTION MAIN()
    PUBLIC aColorWinB, aColorWinF, aItems , aInputMask , aCaseConvert
    PUBLIC aControlList, aProperties , aControlsOrder
    PRIVATE aFilesDBF := {}
+
    M->aItems :={} ; m->aInputMask :={} ; m->aCaseConvert :={}; m->aControlList :={}
    m->aProperties := {}; m->aControlsOrder := {}
    m->aColorWinB := {0,255,255} ; m->aColorWinF := {0,0,0}
@@ -1022,7 +1023,7 @@ PROCEDURE KillControl()
    ENDIF
 
    RETURN
-   #if 0
+#if 0
 
 PROCEDURE VerControls()
 
@@ -1034,7 +1035,7 @@ PROCEDURE VerControls()
    ENDIF
 
    RETURN
-   #endif
+#endif
    /*
    */
 
@@ -3200,7 +3201,7 @@ PROCEDURE HMG_InfoControlWithCursor
    RETURN
    /*
    */
-   #If 0
+#If 0
 
 PROCEDURE MyControl()
 
@@ -3213,7 +3214,7 @@ PROCEDURE MyControl()
    SetProperty (  "Form_1", "Label_d", "VALUE", cControlName )
 
    RETURN
-   #endif
+#endif
    /*
    */
 
@@ -3466,7 +3467,7 @@ STATIC FUNCTION m_about()
    /*
    */
 
-   #xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
+#xcommand ON KEY SPACE [ OF <parent> ] ACTION <action> ;
       => ;
       _DefineHotKey ( <"parent"> , 0 , VK_SPACE , <{action}> )
 

@@ -74,7 +74,7 @@ FUNCTION ToExcel( oGrid )
    Form_1.StatusBar.Item( 1 ) := 'Creating TEST.XLS in base folder ...'
 
    // open a fresh copy of EXCEL.EXE
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oExcel := win_oleCreateObject( 'Excel.Application' ) ) == NIL
    MsgStop( 'Error: Excel not available. [' + win_oleErrorText()+ ']' )
 

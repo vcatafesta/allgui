@@ -218,5 +218,5 @@ PROCEDURE ReadFromClient( oSocket, aClients, oWnd )
 
    RETURN
 
-   #include "stream\TStream.prg"
-   #include "stream\TStreamSocket.prg"
+#include "stream\TStream.prg"
+#include "stream\TStreamSocket.prg"

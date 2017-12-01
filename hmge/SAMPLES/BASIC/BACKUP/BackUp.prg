@@ -175,9 +175,9 @@ FUNCTION do_backup(aSource)
    cTarget := cTargetFolder + cTargetPrefix + cTargetSuffix
    cZip := cTarget + cTargetExtension
 
-   #ifdef DEBUG
+#ifdef DEBUG
    msgMulty({cTarget, stod(substr(cTarget, -17, 8)), cZip, stod(substr(cZip, len(cTargetFolder + cTargetPrefix)+1, 8)), dToDay},'Target')
-   #endif
+#endif
 
    cPath := cFilePath( cZip )
    IF !lIsDir( cPath )
@@ -217,18 +217,18 @@ FUNCTION do_backup(aSource)
       IF cSub == 'yes'
          _aSubFolders( cDir, @aFolders ) // recursive subFolders aggregation
       ENDIF
-      #ifdef DEBUG
+#ifdef DEBUG
       msgMulty( aFolders, cDir )
-      #endif
+#endif
       FOR nJ := 1 to LEN(aFolders)
          aIncludeMask := hb_aTokens(LOWER(cIncludeMask), cMaskSeparator)
-         #ifdef DEBUG
+#ifdef DEBUG
          msgMulty( aIncludeMask, cDir )
-         #endif
+#endif
          tstMaskList(@aIncludeMask)
-         #ifdef DEBUG
+#ifdef DEBUG
          msgMulty( aIncludeMask, cDir )
-         #endif
+#endif
          FOR nK := 1 to LEN(aIncludeMask)
             cPath := cFilePath( aFolders[nJ] + '\' + aIncludeMask[nK] )
             IF !lIsDir( cPath )
@@ -454,15 +454,15 @@ FUNCTION maintainArchive()
    LOCAL aZipFiles := DIRECTORY(cTargetFolder + cTargetPrefix + '*' + cTargetExtension)
    LOCAL aZipsToDelete := {}, sD
 
-   #ifdef DEBUG
+#ifdef DEBUG
    msgMulty(aZipFiles,cTargetFolder + cTargetPrefix + '*' + cTargetExtension)
-   #endif
+#endif
    IF LEN(aZipFiles) > nMinBackUpsToKeep
       aeval(aZipFiles, {|x| sD := strtran(x[F_NAME],cTargetPrefix,''), IF(dToDay - stod(substr(sD,1,8)) > nMinDaysToKeep, aadd(aZipsToDelete,cTargetFolder+x[F_NAME]),Nil)})
    ENDIF
-   #ifdef DEBUG
+#ifdef DEBUG
    msgMulty(aZipsToDelete,'aZipsToDelete')
-   #endif
+#endif
    AEval( aZipsToDelete, { |file| myBackUp.Label_1.Value := LOWER( STRTRAN(cMsgDelete, "%1", file) ), Ferase( file ) } )
 
    RETURN NIL
@@ -576,7 +576,7 @@ FUNCTION sSplit(sIn, sDelim)
    END IF
 
    return(aRet)
-   #ifdef DEBUG
+#ifdef DEBUG
 
 STATIC FUNCTION xToString( xValue )
 
@@ -638,7 +638,7 @@ PROCEDURE MsgMulty( xMesaj, cTitle )
    ENDIF
 
    RETURN //  MsgMulty()
-   #endif
+#endif
 
 FUNCTION getFileDate(sFileName)
 

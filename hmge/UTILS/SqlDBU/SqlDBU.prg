@@ -763,9 +763,9 @@ FUNCTION SQLITE_COLUMNS_METADATA( db, cTable)
          cType  := upper(alltrim(sqlite3_column_decltype( stmt,nI)))
          aSize  := FieldSize(cType,cname,db, cTable)
 
-         #ifdef SQLITE_ENABLE_COLUMN_METADATA
+#ifdef SQLITE_ENABLE_COLUMN_METADATA
          aInfo  := sqlite3_table_column_metadata( db,,cTable,cName)
-         #endif
+#endif
 
          //VIEW cTable,cName,aInfo
          AADD( aFields, { cName, aCType[ nCType ],cType ,aSize[1],aSize[2],aInfo[3],aInfo[4],aInfo[5] } )
@@ -979,5 +979,5 @@ FUNCTION BackupDb()
 
    RETURN 1
 
-   #include 'SqlEdit.Prg'
-   #include 'SqlBrowse.Prg'
+#include 'SqlEdit.Prg'
+#include 'SqlBrowse.Prg'

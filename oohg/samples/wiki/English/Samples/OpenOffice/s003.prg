@@ -63,7 +63,7 @@ FUNCTION MyProcess( oForm )
    ERASE (cFile)
 
    // open service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oSerM := win_oleCreateObject( 'com.sun.star.ServiceManager' ) ) == NIL
    MsgStop( 'Error: OpenOffice not available. [' + win_oleErrorText()+ ']' )
 
@@ -199,7 +199,7 @@ FUNCTION ConvertToDbf( oForm, cFile )
    cDbf := HB_DirBase() + "TEST.DBF"
 
    // open service manager
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    IF( oSerM := win_oleCreateObject( 'com.sun.star.ServiceManager' ) ) == NIL
    MsgStop( 'Error: OpenOffice not available. [' + win_oleErrorText()+ ']' )
 

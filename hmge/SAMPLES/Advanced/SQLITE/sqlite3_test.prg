@@ -87,10 +87,10 @@ PROCEDURE t2()
 
    IF ! Empty( db )
 
-      #ifdef TRACE
+#ifdef TRACE
       sqlite3_profile( db, .t. )
       sqlite3_trace( db, .t. )
-      #endif
+#endif
       sqlite3_exec( db, "PRAGMA auto_vacuum=0" )
       sqlite3_exec( db, "PRAGMA page_size=4096" )
 

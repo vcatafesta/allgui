@@ -25,7 +25,7 @@ CLASS TVideo FROM hControl
 
    METHOD Play( nFrom, nTo ) INLINE  ::oMci:Play( nFrom, nTo, ::oparent:handle )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS TVideo
 

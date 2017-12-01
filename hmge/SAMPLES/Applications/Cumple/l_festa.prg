@@ -7,7 +7,7 @@ FUNCTION DiaFiesta(DFesta)
          DAY(DFesta)=19 .AND. MONTH(DFesta)=3  .OR. ;
          DAY(DFesta)=1  .AND. MONTH(DFesta)=5  .OR. ;
          DAY(DFesta)=6  .AND. MONTH(DFesta)=8  .OR. ; //fiesta aldaia
-      DAY(DFesta)=15 .AND. MONTH(DFesta)=8  .OR. ;
+         DAY(DFesta)=15 .AND. MONTH(DFesta)=8  .OR. ;
          DAY(DFesta)=9  .AND. MONTH(DFesta)=10 .OR. ;
          DAY(DFesta)=12 .AND. MONTH(DFesta)=10 .OR. ;
          DAY(DFesta)=1  .AND. MONTH(DFesta)=11 .OR. ;
@@ -15,13 +15,13 @@ FUNCTION DiaFiesta(DFesta)
          DAY(DFesta)=8  .AND. MONTH(DFesta)=12 .OR. ;
          DAY(DFesta)=25 .AND. MONTH(DFesta)=12 .OR. ;
          DFesta=FPascua-2 .OR. ; //Viernes Santo
-      DFesta=FPascua+1 .OR. ; //Lunes de Pascua
-      DFesta=FPascua+8 .OR. ; //2º Lunes de Pascua
-      DAY(DFesta)=24 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2005 .OR. ; //Jueves Santo
-      DAY(DFesta)=2  .AND. MONTH(DFesta)=5 .AND. YEAR(DFesta)=2005 .OR. ; //Dia del trabajador
-      DAY(DFesta)=17 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2006 .OR. ; //fiesta aldaia
-      DAY(DFesta)=13 .AND. MONTH(DFesta)=4 .AND. YEAR(DFesta)=2006 .OR. ; //Jueves Santo
-      DAY(DFesta)=20 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2008        //Jueves Santo
+         DFesta=FPascua+1 .OR. ; //Lunes de Pascua
+         DFesta=FPascua+8 .OR. ; //2º Lunes de Pascua
+         DAY(DFesta)=24 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2005 .OR. ; //Jueves Santo
+         DAY(DFesta)=2  .AND. MONTH(DFesta)=5 .AND. YEAR(DFesta)=2005 .OR. ; //Dia del trabajador
+         DAY(DFesta)=17 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2006 .OR. ; //fiesta aldaia
+         DAY(DFesta)=13 .AND. MONTH(DFesta)=4 .AND. YEAR(DFesta)=2006 .OR. ; //Jueves Santo
+         DAY(DFesta)=20 .AND. MONTH(DFesta)=3 .AND. YEAR(DFesta)=2008        //Jueves Santo
       DFesta2:=.T.
    ELSE
       DFesta2:=.F.

@@ -31,11 +31,11 @@ PROC T_MdfFormat()
                      LOCA aStruct  := DBSTRUCT(),;
                         aNewStru := {},;
                         aDBFInf  := { aOpnDatas[ nCurDatNo, 4 ],;                   // 1. file name
-                     LUPDATE(),;                                   // 2. Last Modification Date
-                     LASTREC(),;                                   // 3. Record Count
-                     RECSIZE(),;                                   // 4. Record Length
-                     FCOUNT() },;                                  // 5. Field Count
-                     cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
+                        LUPDATE(),;                                   // 2. Last Modification Date
+                        LASTREC(),;                                   // 3. Record Count
+                        RECSIZE(),;                                   // 4. Record Length
+                        FCOUNT() },;                                  // 5. Field Count
+                        cTablDir  := ExOPFFFS( aOpnDatas[ nCurDatNo, 3 ] ),;
                         cTmpFNam  := '',;
                         nWAreaNo  := SELE(),;
                         cCurFFNm  := aOpnDatas[ nCurDatNo, 3 ],;

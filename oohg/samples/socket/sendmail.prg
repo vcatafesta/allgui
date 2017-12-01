@@ -65,5 +65,5 @@ FUNCTION sendmail(email,nombre,cServer)
 
    RETURN
 
-   #define NO_SAMPLE
-   #include "TSmtpClient.prg"
+#define NO_SAMPLE
+#include "TSmtpClient.prg"

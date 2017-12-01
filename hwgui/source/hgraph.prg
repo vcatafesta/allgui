@@ -49,7 +49,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Rebuild( aValues, nType )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
       bSize, ctooltip, tcolor, bcolor ) CLASS HGraph

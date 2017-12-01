@@ -24,10 +24,10 @@ ANNOUNCE RDDSYS
 #ifndef __XHARBOUR__
 #xcommand TRY              => bError := ErrorBlock( {|oErr| break( oErr ) } ) ;;
    BEGIN SEQUENCE
-   #xcommand CATCH [<!oErr!>] => ErrorBlock( bError ) ;;
+#xcommand CATCH [<!oErr!>] => ErrorBlock( bError ) ;;
    RECOVER [USING <oErr> ] <-oErr->;;
       ErrorBlock( bError )
-   #endif
+#endif
 
 FUNCTION MAIN()
 

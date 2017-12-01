@@ -45,7 +45,7 @@ CLASS HPage INHERIT HObject
 
    METHOD Setcolor( tcolor, bcolor )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip ) CLASS HPage
 
@@ -193,7 +193,7 @@ CLASS VAR winclass   INIT "SysTabControl32"
    DATA  nActivate
    DATA  aControlsHide INIT {}
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       oFont, bInit, bSize, bPaint, aTabs, bChange, aImages, lResour, nBC, bClick, bGetFocus, bLostFocus, bRClick ) CLASS HTab
@@ -960,7 +960,7 @@ CLASS VAR winclass   INIT "STATIC"
 
    METHOD Refresh() VIRTUAL
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, tcolor, bColor ) CLASS HPaintTab
 

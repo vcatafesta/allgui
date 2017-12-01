@@ -224,7 +224,7 @@ PROCEDURE OnInit( cFile )
 
    RETURN
 
-   #xcommand ERASE WINDOW <windowname> ;
+#xcommand ERASE WINDOW <windowname> ;
       AT <nT>,<nL>   ;
       TO <nB>,<nR>   ;
       => EraseWindow(<"windowname">,<nT>,<nL>,<nB>,<nR>)
@@ -307,9 +307,9 @@ PROCEDURE Send2SP()
 
    RETURN
 
-   #define WM_VSCROLL   0x0115
-   #define SB_VERT   1
-   #define SB_PAGEDOWN   3
+#define WM_VSCROLL   0x0115
+#define SB_VERT   1
+#define SB_PAGEDOWN   3
 
 PROCEDURE ShowFinalRow()
 
@@ -401,7 +401,7 @@ PROCEDURE SaveNewSec( cSectionName, cNewEntries )
 
    RETURN
 
-   #xcommand DEL SECTION <cSection> TO <result>;
+#xcommand DEL SECTION <cSection> TO <result>;
       => ;
       <result> := _DelIniSection( <cSection> )
 
@@ -600,8 +600,8 @@ PROCEDURE SaveNewValue( cSectionName, cEntryName, cNewVal )
 
    RETURN
 
-   #define ITEM_NAME   1
-   #define ITEM_VALUE   2
+#define ITEM_NAME   1
+#define ITEM_VALUE   2
 
 PROCEDURE OpenIni( cOpenFile )
 

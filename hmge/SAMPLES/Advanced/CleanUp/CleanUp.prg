@@ -88,7 +88,7 @@ STATIC FUNCTION MsgAbout()
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About", IDI_MAIN, .f. )
 
-   #define DLL_TYPE_HRESULT      -4
+#define DLL_TYPE_HRESULT      -4
    DECLARE DLL_TYPE_BOOL Delete_IECache( DLL_TYPE_BOOL bDeleteCache, DLL_TYPE_BOOL bDeleteCacheIndex ) ;
       IN CLEANUP.DLL
 

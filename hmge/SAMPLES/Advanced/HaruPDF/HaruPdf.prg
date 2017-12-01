@@ -1030,11 +1030,11 @@ STATIC FUNCTION show_description( page, x, y, text )
    HPDF_Page_SetRGBFill(page, c[1], c[2], c[3])
 
    RETURN NIL
-   #define PAGE_WIDTH   420
-   #define PAGE_HEIGHT  400
-   #define CELL_WIDTH   20
-   #define CELL_HEIGHT  20
-   #define CELL_HEADER  10
+#define PAGE_WIDTH   420
+#define PAGE_HEIGHT  400
+#define CELL_WIDTH   20
+#define CELL_HEIGHT  20
+#define CELL_HEADER  10
 
 STATIC FUNCTION Page_CodePages( pdf )
 

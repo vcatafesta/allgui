@@ -32,11 +32,11 @@ CLASS TBtnBox FROM TControl
    METHOD GetVal()
    METHOD Command( nWParam, nLParam )
 
-ENDCLASS
+   ENDCLASS
 
-* ============================================================================
-* METHOD TBtnBox:New() Version 7.0
-* ============================================================================
+   * ============================================================================
+   * METHOD TBtnBox:New() Version 7.0
+   * ============================================================================
 
 METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
       nClrFore, nClrBack, hFont, cControl, cWnd, cMsg, bChanged, bValid,;

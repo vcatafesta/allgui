@@ -47,7 +47,7 @@ CLASS HObject
 
    METHOD Release()  INLINE ::DelObject( Self )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD DelObject( oCtrl ) CLASS HObject
 
@@ -134,7 +134,7 @@ CLASS VAR WindowsManifest INIT !EMPTY(hwg_Findresource( , 1 , RT_MANIFEST ) ) SH
 
    METHOD Release()        INLINE ::DelControl( Self )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD AddEvent( nEvent, oCtrl, bAction, lNotify, cMethName ) CLASS HCustomWindow
 
@@ -628,7 +628,7 @@ CLASS HScrollArea INHERIT HObject
 
    METHOD RedefineScrollbars()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD RedefineScrollbars() CLASS HScrollArea
 

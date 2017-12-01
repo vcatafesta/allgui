@@ -210,10 +210,10 @@ FUNCTION BT_aFILTER_BLUR( index, value, weight, add, bias )
 
    aFILTER := ;
       { { 0, v, 0, 0, weight, 0, 0,  v, 0, weight + add + v * 2, bias}, ; // VERTICAL
-   { 0, 0, 0, v, weight, v, 0,  0, 0, weight + add + v * 2, bias}, ; // HORIZONTAL
-   { 0, 0, v, 0, weight, 0, v,  0, 0, weight + add + v * 2, bias}, ; // ANGLE45
-   { v, 0, 0, 0, weight, 0, 0,  0, v, weight + add + v * 2, bias}, ; // ANGLE135
-   { v, v, v, v, weight, v, v,  v, v, weight + add + v * 8, bias} }  // ALLDIRECTIONS
+      { 0, 0, 0, v, weight, v, 0,  0, 0, weight + add + v * 2, bias}, ; // HORIZONTAL
+      { 0, 0, v, 0, weight, 0, v,  0, 0, weight + add + v * 2, bias}, ; // ANGLE45
+      { v, 0, 0, 0, weight, 0, 0,  0, v, weight + add + v * 2, bias}, ; // ANGLE135
+      { v, v, v, v, weight, v, v,  v, v, weight + add + v * 8, bias} }  // ALLDIRECTIONS
 
    RETURN aFILTER[ index ]
 
@@ -233,10 +233,10 @@ FUNCTION BT_aFILTER_SHARPEN( index, value, weight, add, bias )
 
    aFILTER := ;
       { {  0, -v,  0,  0, weight,  0,  0, -v,  0, weight + add - v * 2, bias}, ; // VERTICAL
-   {  0,  0,  0, -v, weight, -v,  0,  0,  0, weight + add - v * 2, bias}, ; // HORIZONTAL
-   {  0,  0, -v,  0, weight,  0, -v,  0,  0, weight + add - v * 2, bias}, ; // ANGLE45
-   { -v,  0,  0,  0, weight,  0,  0,  0, -v, weight + add - v * 2, bias}, ; // ANGLE135
-   { -v, -v, -v, -v, weight, -v, -v, -v, -v, weight + add - v * 8, bias} }  // ALLDIRECTIONS
+      {  0,  0,  0, -v, weight, -v,  0,  0,  0, weight + add - v * 2, bias}, ; // HORIZONTAL
+      {  0,  0, -v,  0, weight,  0, -v,  0,  0, weight + add - v * 2, bias}, ; // ANGLE45
+      { -v,  0,  0,  0, weight,  0,  0,  0, -v, weight + add - v * 2, bias}, ; // ANGLE135
+      { -v, -v, -v, -v, weight, -v, -v, -v, -v, weight + add - v * 8, bias} }  // ALLDIRECTIONS
 
    RETURN aFILTER[ index ]
 
@@ -256,10 +256,10 @@ FUNCTION BT_aFILTER_EDGE( index, value, weight, add, bias )
 
    aFILTER := ;
       { { 0, v, 0, 0, -weight, 0, 0, v, 0, -weight + add + v * 2, bias}, ; // VERTICAL
-   { 0, 0, 0, v, -weight, v, 0, 0, 0, -weight + add + v * 2, bias}, ; // HORIZONTAL
-   { 0, 0, v, 0, -weight, 0, v, 0, 0, -weight + add + v * 2, bias}, ; // ANGLE45
-   { v, 0, 0, 0, -weight, 0, 0, 0, v, -weight + add + v * 2, bias}, ; // ANGLE135
-   { v, v, v, v, -weight, v, v, v, v, -weight + add + v * 8, bias} }  // ALLDIRECTIONS
+      { 0, 0, 0, v, -weight, v, 0, 0, 0, -weight + add + v * 2, bias}, ; // HORIZONTAL
+      { 0, 0, v, 0, -weight, 0, v, 0, 0, -weight + add + v * 2, bias}, ; // ANGLE45
+      { v, 0, 0, 0, -weight, 0, 0, 0, v, -weight + add + v * 2, bias}, ; // ANGLE135
+      { v, v, v, v, -weight, v, v, v, v, -weight + add + v * 8, bias} }  // ALLDIRECTIONS
 
    RETURN aFILTER[ index ]
 
@@ -281,13 +281,13 @@ FUNCTION BT_aFILTER_EMBOSS( index, value, weight, add, bias )
 
    aFILTER := ;
       { { -v,  0,  v, -v, weight,  v, -v,  0,  v, weight + add, bias }, ; // Right          EAST
-   {  v,  v,  v,  0, weight,  0, -v, -v, -v, weight + add, bias }, ; // Top            NORTH
-   {  0,  v,  v, -v, weight,  v, -v, -v,  0, weight + add, bias }, ; // Top_Right      NORTH_EAST
-   {  v,  v,  0,  v, weight, -v,  0, -v, -v, weight + add, bias }, ; // Top_Left       NORTH_WEST
-   { -v, -v, -v,  0, weight,  0,  v,  v,  v, weight + add, bias }, ; // Bottom         SOUTH
-   { -v, -v,  0, -v, weight,  v,  0,  v,  v, weight + add, bias }, ; // Bottom_Right   SOUTH_EAST
-   {  0, -v, -v,  v, weight, -v,  v,  v,  0, weight + add, bias }, ; // Bottom_Left    SOUTH_WEST
-   {  v,  0, -v,  v, weight, -v,  v,  0, -v, weight + add, bias } }  // Left           WEST
+      {  v,  v,  v,  0, weight,  0, -v, -v, -v, weight + add, bias }, ; // Top            NORTH
+      {  0,  v,  v, -v, weight,  v, -v, -v,  0, weight + add, bias }, ; // Top_Right      NORTH_EAST
+      {  v,  v,  0,  v, weight, -v,  0, -v, -v, weight + add, bias }, ; // Top_Left       NORTH_WEST
+      { -v, -v, -v,  0, weight,  0,  v,  v,  v, weight + add, bias }, ; // Bottom         SOUTH
+      { -v, -v,  0, -v, weight,  v,  0,  v,  v, weight + add, bias }, ; // Bottom_Right   SOUTH_EAST
+      {  0, -v, -v,  v, weight, -v,  v,  v,  0, weight + add, bias }, ; // Bottom_Left    SOUTH_WEST
+      {  v,  0, -v,  v, weight, -v,  v,  0, -v, weight + add, bias } }  // Left           WEST
 
    RETURN aFILTER[ index ]
 

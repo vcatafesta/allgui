@@ -52,10 +52,10 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
    IF nOpTablCo < nMaxTablCo
 
       aTablNams := GetFile ( {{ "Table Files", "*.dbf" }} ,;    // File Select Filter
-      "Open Table" ,;               // Get File Window Title
-      cLastDDir,;                   // File Find Beginning folder
-      .T. ,;                        // Multiple Select
-      .T. )                         // Change Folder right
+         "Open Table" ,;               // Get File Window Title
+         cLastDDir,;                   // File Find Beginning folder
+         .T. ,;                        // Multiple Select
+         .T. )                         // Change Folder right
 
       IF !EMPTY( aTablNams )
          AEVAL( aTablNams, { | c1 | Open1Tabl( c1 ) } )
@@ -67,7 +67,7 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
    *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
    PROC Open1Tabl( ;                         // Open ( USE ) one table
-      cTablNam,;
+         cTablNam,;
          lWarnOpen )  // 6e27  Prepare for user preferences
 
       LOCA nDBFValid := DBValidate( cTablNam ),;
@@ -115,11 +115,11 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
          cTabAlia := "F" + STRZERO( nWorkArea, 3 )
 
          DBUSEAREA( .T. ,;        // <lNewArea>, (.T.) selects the lowest numbered unoccupied work area
-         cRDDName,;    // <cDriver>  ( 8830 )
-         cTablNam,;    // <cName>
-         cTabAlia,;    // <xcAlias>
-         .F.,;         // <lShared>
-         .F. )         // <lReadonly>
+            cRDDName,;    // <cDriver>  ( 8830 )
+            cTablNam,;    // <cName>
+            cTabAlia,;    // <xcAlias>
+            .F.,;         // <lShared>
+            .F. )         // <lReadonly>
 
          IF ALIAS() == cTabAlia // au lieu de USED()
 
@@ -137,14 +137,14 @@ PROC OpenTabl()                           // Open a Table (.dbf) file
             AADD( aOpnDatas[ nOpDataCo ],   cTabAlia )              // 2: Alias
             AADD( aOpnDatas[ nOpDataCo ],   cTablNam )              // 3: Full File Name
             AADD( aOpnDatas[ nOpDataCo ],   ExOFNFFP( cTablNam,;    // 4: Only File Name
-            .F., ;              // exlude Extn
-            .T. ) )             // Squeez name to 8
+               .F., ;              // exlude Extn
+               .T. ) )             // Squeez name to 8
             AADD( aOpnDatas[ nOpDataCo ], {;                        // 5: File Info
-            aDBStruct,;                  // 5.1 : Struct
-            aBrwFilds,;                  // 5.2 : Field List
-            aBrwHeads,;                  // 5.3 : Headings
-            aBrwWidts,;                  // 5.4 : Column Widths
-            aBrwJust  } )                // 5.5 : Justify
+               aDBStruct,;                  // 5.1 : Struct
+               aBrwFilds,;                  // 5.2 : Field List
+               aBrwHeads,;                  // 5.3 : Headings
+               aBrwWidts,;                  // 5.4 : Column Widths
+               aBrwJust  } )                // 5.5 : Justify
 
             nCurDatNo := LEN( aOpnDatas )  // Current Data No = Open Data Count
             AADD( aOpnTables, nCurDatNo )

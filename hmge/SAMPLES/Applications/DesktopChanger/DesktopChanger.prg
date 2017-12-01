@@ -54,7 +54,7 @@ PROCEDURE Main( cStart )
 
    lSplash := FILE(cPath + "WALLPAPERS\MGLOGO.GIF")
 
-   #ifdef PRO
+#ifdef PRO
    IF !FI_Init()
 
       RETURN
@@ -77,7 +77,7 @@ PROCEDURE Main( cStart )
          NOTIFYICON 'MAINICON' ;
          NOTIFYTOOLTIP PROGRAM ;
          ON NOTIFYCLICK IF(Used(), ChangeDesktop(), )
-      #else
+#else
 
       DEFINE WINDOW Form_1 ;
             AT 0,0 ;
@@ -91,7 +91,7 @@ PROCEDURE Main( cStart )
             NOTIFYICON 'MAINICON' ;
             NOTIFYTOOLTIP PROGRAM ;
             ON NOTIFYCLICK IF(Used(), ChangeDesktop(), )
-         #endif
+#endif
 
          DEFINE NOTIFY MENU
             ITEM '&Wallpaper Settings...'   ACTION Settings()
@@ -309,12 +309,12 @@ FUNCTION InitApp( cStart, lSplash )
 
    RETURN .T.
 
-   #define FILTER_BOX        0
-   #define FILTER_BICUBIC    1
-   #define FILTER_BILINEAR   2
-   #define FILTER_BSPLINE    3
-   #define FILTER_CATMULLROM 4
-   #define FILTER_LANCZOS3   5
+#define FILTER_BOX        0
+#define FILTER_BICUBIC    1
+#define FILTER_BILINEAR   2
+#define FILTER_BSPLINE    3
+#define FILTER_CATMULLROM 4
+#define FILTER_LANCZOS3   5
 
 FUNCTION ChangeDesktop( lDel, nNumber )
 
@@ -355,13 +355,13 @@ FUNCTION ChangeDesktop( lDel, nNumber )
 
    ELSE
 
-      #ifndef PRO
+#ifndef PRO
       IF !FILE( cRunFile )
          MsgStop( 'The Zoomer is not found', 'Stop!' )
 
          RETURN NIL
       ENDIF
-      #endif
+#endif
       lAutoFit := .F.
 
       DO CASE
@@ -379,7 +379,7 @@ FUNCTION ChangeDesktop( lDel, nNumber )
          FERASE( cWallpaper )
       ENDIF
 
-      #ifdef PRO
+#ifdef PRO
       handle := FI_Load( cFile )
 
       IF lAutoFit
@@ -403,13 +403,13 @@ FUNCTION ChangeDesktop( lDel, nNumber )
 
       FI_Save( handle, cWallpaper )
       FI_UnLoad( handle )
-      #else
+#else
       EXECUTE FILE cRunFile + " -t" + cScaling +   ;
          IF(lAutoFit, " -x" + NTRIM(x), "") +   ;
          " -b " + cFile + " " + cWallpaper       ;
          WAIT                      ;
          MINIMIZE
-      #endif
+#endif
    ENDIF
 
    SystemParametersInfo( SPI_SETDESKWALLPAPER, 0, @cWallpaper, SPIF_UPDATEINIFILE + SPIF_SENDWININICHANGE )
@@ -731,14 +731,14 @@ FUNCTION SetPicturePreview( nItem )
          FERASE( cWallPreview )
       ENDIF
 
-      #ifdef PRO
+#ifdef PRO
       handle := FI_Load( cFile )
 
       handle := FI_Rescale( handle, Form_2.CONTROL_12.Width, Form_2.CONTROL_12.Height, FILTER_BOX )
 
       FI_Save( handle, cWallPreview, 256 )
       FI_UnLoad( handle )
-      #else
+#else
       IF !FILE( cRunFile )
          MsgStop( 'The Zoomer is not found', 'Stop!' )
 
@@ -749,7 +749,7 @@ FUNCTION SetPicturePreview( nItem )
          " -x134 " + cFile + " " + cWallPreview   ;
          WAIT                  ;
          MINIMIZE
-      #endif
+#endif
 
       Form_2.CONTROL_12.Picture := cWallPreview
 
@@ -938,7 +938,7 @@ STATIC FUNCTION StartUp(lMode)
 
 FUNCTION MsgAbout()
 
-   #ifdef PRO
+#ifdef PRO
 
    RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
       "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
@@ -948,7 +948,7 @@ FUNCTION MsgAbout()
       "FreeImage.dll version: " + FI_Version() + CRLF + CRLF + ;
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About" )
-   #else
+#else
 
    RETURN MsgInfo( PROGRAM + VERSION + CRLF + ;
       "Copyright " + Chr(169) + COPYRIGHT + CRLF + CRLF + ;
@@ -957,7 +957,7 @@ FUNCTION MsgAbout()
       Substr(MiniGuiVersion(), 1, 38) + CRLF + ;
       padc("This program is Freeware!", 38) + CRLF + ;
       padc("Copying is allowed!", 40), "About" )
-   #endif
+#endif
 
 FUNCTION GetWallpapers()
 

@@ -107,7 +107,7 @@ CLASS HColumn INHERIT HObject
 
    METHOD Editable( lEditable ) SETGET
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cPict, bValid, bWhen, aItem, bColorBlock, bHeadClick, tcolor, bcolor, bClick ) CLASS HColumn
 
@@ -441,7 +441,7 @@ CLASS HBrowse INHERIT HControl
 
    METHOD AutoFit()
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
       bInit, bSize, bPaint, bEnter, bGfocus, bLfocus, lNoVScroll, ;
@@ -653,11 +653,11 @@ METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
       ELSEIF msg == WM_GETDLGCODE
          ::isMouseOver := .F.
          IF wParam = VK_ESCAPE   .AND. ;          // DIALOG MODAL
-            ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != NIL .AND. ! oParent:IsEnabled()
+               ( oParent := hwg_GetParentForm( Self ):FindControl( IDCANCEL ) ) != NIL .AND. ! oParent:IsEnabled()
 
             RETURN DLGC_WANTMESSAGE
          ELSEIF ( wParam = VK_ESCAPE .AND. hwg_GetParentForm( Self ):handle != ::oParent:Handle .AND. ::lEsc ) .OR. ; //! ::lAutoEdit
-            ( wParam = VK_RETURN .AND. hwg_GetParentForm( Self ):FindControl( IDOK ) != NIL )
+               ( wParam = VK_RETURN .AND. hwg_GetParentForm( Self ):FindControl( IDOK ) != NIL )
 
             RETURN - 1
          ENDIF
@@ -2270,14 +2270,14 @@ METHOD LineOut( nRow, nCol, hDC, lSelected, lClear ) CLASS HBrowse
                         ::y1 + ( ::height + 1 ) * ::nPaintRow - ( 1 + ::aMargin[ 3 ] ) , ;
                         ::aColumns[ ::nPaintCol ]:nJusLin + DT_NOPREFIX )
                      // Clipping rectangle
-                     #if 0
+#if 0
                      hwg_Rectangle( hDC, ;
                         x + ::aMargin[ 4 ], ;
                         ::y1 + ( ::height + 1 ) * ( ::nPaintRow - 1 ) + 1 + ::aMargin[ 1 ] , ;
                         x + xSize - ( 2 + ::aMargin[ 2 ] ) , ;
                         ::y1 + ( ::height + 1 ) * ::nPaintRow - ( 1 + ::aMargin[ 3 ] ) ;
                         )
-                     #endif
+#endif
                      IF ::aColumns[ ::nPaintCol ]:tColor != NIL //.AND. ( ::nPaintCol != ::colPos .OR. ! lSelected )
                         hwg_Settextcolor( hDC, oldT1Color )
                      ENDIF
@@ -2763,7 +2763,7 @@ ELSEIF nLine == 0
       hwg_Invalidaterect( ::handle, 0 )
    ELSEIF ::lDispHead .AND.  nLine >= - ::nHeadRows .AND. ;
          fif <= Len( ::aColumns ) //.AND. ;
-         ::aColumns[ fif ]:lHeadClick := .T.
+      ::aColumns[ fif ]:lHeadClick := .T.
       hwg_Invalidaterect( ::handle, 0, ::x1, ::y1 - ::nHeadHeight * ::nHeadRows, ::x2, ::y1 )
       IF ::aColumns[ fif ]:bHeadClick != NIL
          ::isMouseOver := .F.
@@ -2932,7 +2932,7 @@ METHOD MouseMove( wParam, lParam ) CLASS HBrowse
       hwg_Invalidaterect( ::handle, 0, axPosMouseOver[ 1 ], ::y1 - ::nHeadHeight * ::nHeadRows, axPosMouseOver[ 2 ] , ::y1 )
    ENDIF
    IF ::lDispHead .AND. ( yPos <= ::nHeadHeight * ::nHeadRows + 1 .OR. ; // ::height*::nHeadRows+1
-      ( ::lResizing .AND. yPos > ::y1 ) ) .AND. ;
+         ( ::lResizing .AND. yPos > ::y1 ) ) .AND. ;
          ( xPos >= ::x1 .AND. xPos <= Max( xDragMove, ::xAdjRight ) + 4 )
       IF wParam == MK_LBUTTON .AND. ::lResizing
          Hwg_SetCursor( oCursor )
@@ -3715,11 +3715,11 @@ STATIC FUNCTION HdrToken( cStr, nMaxLen, nCount )
 
    nMaxLen := nCount := 0
    cStr += ';'
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    DO WHILE ( nL := Len( __StrTkPtr( @cStr, @nPos, ";" ) ) ) != 0
-      #else
+#else
       DO WHILE ( nL := Len( hb_tokenPtr( @cStr, @nPos, ";" ) ) ) != 0
-         #endif
+#endif
          nMaxLen := Max( nMaxLen, nL )
          nCount ++
       ENDDO
@@ -3993,11 +3993,11 @@ STATIC FUNCTION LenVal( xVal, cType, cPict )
       END
       EXIT
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       DEFAULT
-      #else
+#else
    OTHERWISE
-      #endif
+#endif
       nLen := 0
 
    END

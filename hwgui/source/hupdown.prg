@@ -76,11 +76,11 @@ CLASS VAR winclass   INIT "EDIT"
    METHOD SetRange( nLower, nUpper )
 
    METHOD Move( x1, y1, width, height, nRepaint ) INLINE ;                             // + hwg_Getclientrect( ::hwndUpDown )[ 3 ] - 1
-   ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) ,;
+      ::Super:Move( x1, y1 , IIF( width != Nil, width, ::nWidth ), height, nRepaint  ) ,;
       hwg_Sendmessage( ::hwndUpDown, UDM_SETBUDDY, ::oEditUpDown:handle, 0 ),;
       IIF( ::lHide, ::Hide(), ::Show() )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       oFont, bInit,bSize,bPaint,bGfocus,bLfocus,ctooltip,tcolor,bcolor,;
@@ -299,7 +299,7 @@ CLASS HEditUpDown INHERIT HEdit
 
    METHOD Move()  VIRTUAL
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Init() CLASS HEditUpDown
 

@@ -100,8 +100,8 @@ FUNCTION _DefineGrid ( ControlName, ParentFormName, x, y, w, h, aHeaders, aWidth
       MsgMiniGuiError ( _HMG_BRWLangError[4] + ControlName + _HMG_BRWLangError[5] + ParentFormName + _HMG_BRWLangError[6], .F. )
    ENDIF
    /* Dr. Claudio Soto, April 2016 */
-   #define DEFAULT_COLUMNHEADER  "Column "
-   #define DEFAULT_COLUMNWIDTH   150
+#define DEFAULT_COLUMNHEADER  "Column "
+#define DEFAULT_COLUMNWIDTH   150
    IF ValType( aRows ) == "A" .AND. Len( aRows ) > 0
       IF ValType( aHeaders ) == "U" .AND. ValType( aWidths ) == "U"
          aHeaders := Array( Len( aRows[ 1 ] ) )
@@ -1615,7 +1615,7 @@ FUNCTION _DoGridCustomDraw ( i , a , lParam )
    LOCAL aTemp2
 
    IF a[1] >= 1 .AND. a[1] <= ListViewGetItemCount( _HMG_aControlHandles [i] ) .AND. ; // MaxGridRows
-      a[2] >= 1 .AND. a[2] <= ListView_GetColumnCount ( _HMG_aControlHandles [i] )     // MaxGridCols
+         a[2] >= 1 .AND. a[2] <= ListView_GetColumnCount ( _HMG_aControlHandles [i] )     // MaxGridCols
       aTemp  := _HMG_aControlMiscData1 [i, 22]
       aTemp2 := _HMG_aControlMiscData1 [i, 21]
       IF ValType ( aTemp ) == 'A' .AND. ValType ( aTemp2 ) <> 'A'

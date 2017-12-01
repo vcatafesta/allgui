@@ -125,8 +125,8 @@ PROCEDURE BTEx_OpenImgFile()                 // Open an Image file
       hBitmap
 
    LOCAL nImgWidth,;          // Width of bitmap
-   nImgHeight,;         // Height of bitmap
-   nAspRatio
+      nImgHeight,;         // Height of bitmap
+      nAspRatio
 
    IF ! EMPTY( cImgFileName )
 

@@ -62,7 +62,7 @@ CLASS TScrollButton FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, w, h ) CLASS TScrollButton
 

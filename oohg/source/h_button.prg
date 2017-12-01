@@ -96,7 +96,7 @@ CLASS TButton FROM TControl
 
    EMPTY( _OOHG_AllVars )
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, Caption, ProcedureName, w, h, ;
       fontname, fontsize, tooltip, GotFocus, LostFocus, flat, ;
@@ -657,7 +657,7 @@ CLASS TButtonCheck FROM TButton
 
    METHOD Events_Command
 
-ENDCLASS
+   ENDCLASS
 
 METHOD Define( ControlName, ParentForm, x, y, Caption, Value, fontname, ;
       fontsize, tooltip, changeprocedure, w, h, lostfocus, gotfocus, ;

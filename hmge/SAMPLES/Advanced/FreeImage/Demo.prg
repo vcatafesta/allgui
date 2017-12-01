@@ -39,11 +39,11 @@ STATIC aParams              // Массив рабочих параметров
 PROCEDURE Main
 
    aParams := { 'StartDir'  => GetCurrentFolder(), ;        // Текущий каталог
-   'pDB'       => nil               , ;        // Дескриптор базы
-   'ReadFiles' => .T.               , ;        // Перечитать список файлов
-   'SavePos'   => .F.               , ;        // Сохранять позицию в списке файлов
-   'Reload'    => .T.                 ;        // Признак необходимости перечитать БД
-   }
+      'pDB'       => nil               , ;        // Дескриптор базы
+      'ReadFiles' => .T.               , ;        // Перечитать список файлов
+      'SavePos'   => .F.               , ;        // Сохранять позицию в списке файлов
+      'Reload'    => .T.                 ;        // Признак необходимости перечитать БД
+      }
 
    IF Empty( aParams[ 'pDB' ] := OpenBase() )
       MsgStop( "Can't open/create " + DB_NAME, "Error" )

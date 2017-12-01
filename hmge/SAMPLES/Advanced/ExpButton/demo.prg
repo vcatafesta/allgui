@@ -255,8 +255,8 @@ FUNCTION ShowBtnDropMenu(cWin,cBut,HBtnDropMenu)
 
    //-------------------------------------------------------------------\\
 
-   #define HTCAPTION          2
-   #define WM_NCLBUTTONDOWN   161
+#define HTCAPTION          2
+#define WM_NCLBUTTONDOWN   161
 
 PROCEDURE MoveActiveWindow(hWnd)
 

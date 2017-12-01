@@ -149,16 +149,16 @@ FUNCTION _DefineGetBox ( ControlName, ParentFormName, x, y, w, h, Value, ;
    ENDIF
 
    IF _HMG_BeginWindowActive .OR. _HMG_BeginDialogActive
-      #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
       IF _HMG_BeginWindowMDIActive
          ParentFormHandle := GetActiveMdiHandle()
          ParentFormName := _GetWindowProperty ( ParentFormHandle, "PROP_FORMNAME" )
       ELSE
-         #endif
+#endif
          ParentFormName := iif( _HMG_BeginDialogActive, _HMG_ActiveDialogName, _HMG_ActiveFormName )
-         #ifdef _TSBROWSE_
+#ifdef _TSBROWSE_
       ENDIF
-      #endif
+#endif
       __defaultNIL( @FontName, _HMG_ActiveFontName )
       __defaultNIL( @FontSize, _HMG_ActiveFontSize )
    ENDIF
@@ -452,10 +452,10 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
          IF !Eval( oGet:preblock, oGet, .F. )
             IF oGet:VarGet() == oGet:UnTransform( oGet:Original )
                lAllowEdit := .F.
-               #ifdef __CLIPPER_COMPAT__
+#ifdef __CLIPPER_COMPAT__
                Tone( 400 )
                PostMessage( hWnd, WM_KEYDOWN, VK_DOWN, 0 )
-               #endif
+#endif
             ENDIF
          ENDIF
       ENDIF
@@ -857,9 +857,9 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
             ENDIF
 
             IF oGet:Rejected
-               #ifdef __CLIPPER_COMPAT__
+#ifdef __CLIPPER_COMPAT__
                Tone( 400 )
-               #endif
+#endif
             ELSE
                oGet:Assign()
                _HMG_aControlValue[i] := oGet:VarGet()
@@ -898,16 +898,16 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
    CASE nMsg == WM_LBUTTONDBLCLK
 
       IF wParam == MK_LBUTTON
-         #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
          IF Len( oGet:aKeyEvent ) > 0
 
             RETURN oGet:DoKeyEvent( nMsg )
          ELSE
-            #endif
+#endif
             SendMessage( _HMG_aControlhandles [i] , EM_SETSEL , 0 , -1 )
-            #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
          ENDIF
-         #endif
+#endif
       ENDIF
 
    CASE nMsg == WM_KEYDOWN
@@ -1134,11 +1134,11 @@ FUNCTION OGETEVENTS( hWnd, nMsg, wParam, lParam )
 
          RETURN( 0 )
 
-         #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       ELSE
 
          oGet:DoKeyEvent( wParam )
-         #endif
+#endif
       ENDIF
 
    CASE nMsg == WM_PASTE
@@ -1534,12 +1534,12 @@ STATIC FUNCTION _IsEditable( nPos, nId )
 
    RETURN .F.
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    /* SWITCH ... ; CASE ... ; DEFAULT ; ... ; END */
-   #xcommand DEFAULT => OTHERWISE
+#xcommand DEFAULT => OTHERWISE
    /* FOR EACH hb_enumIndex() */
-   #xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
-   #endif
+#xtranslate hb_enumIndex( <!v!> ) => <v>:__enumIndex()
+#endif
 
 STATIC FUNCTION _Input( cChar , nID )
 
@@ -1595,9 +1595,9 @@ STATIC FUNCTION _Input( cChar , nID )
    IF ! Empty( cPicMask )
 
       cPic := SubStr( cPicMask, oGet:pos, 1 )
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       IF ! Empty( cPic )
-         #endif
+#endif
          SWITCH cPic
          CASE "A"
             IF ! IsAlpha( cChar )
@@ -1643,9 +1643,9 @@ STATIC FUNCTION _Input( cChar , nID )
             DEFAULT
             cChar := Transform( cChar, cPic )
          ENDSWITCH
-         #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       ENDIF
-      #endif
+#endif
    ENDIF
 
    RETURN cChar

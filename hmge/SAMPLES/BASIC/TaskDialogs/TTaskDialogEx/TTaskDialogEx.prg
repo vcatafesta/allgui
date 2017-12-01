@@ -15,7 +15,7 @@ CREATE CLASS TTaskDialogEx FUNCTION TaskDialogEx FROM TaskDialog
    METHOD OnDestroyed( hWnd, nNotification, nWParam, nLParam )
    // and etc..
 
-ENDCLASS
+   ENDCLASS
 
 METHOD OnButtonClicked( hWnd, nNotification, nWParam, nLParam ) CLASS TTaskDialogEx
 
@@ -82,6 +82,6 @@ PROCEDURE main()
 
       :Execute()
 
-      ENDWITH
+   ENDWITH
 
-      RETURN
+   RETURN

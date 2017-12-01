@@ -40,7 +40,7 @@ PROCEDURE PrintStructure
       nLen
 
    PRIVATE nLine := SH_FIRST_LINE, ;        // Counter of printed rows
-   nPage := 1                       // Counter of pages
+      nPage := 1                       // Counter of pages
 
    // If field name is absent in the first row when it means that
    // the field's array is empty. The printing is not execute.

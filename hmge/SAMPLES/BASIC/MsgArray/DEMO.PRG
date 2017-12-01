@@ -50,7 +50,7 @@ PROCEDURE Main
 
    RETURN
 
-   #define MsgInfo( c ) MsgInfo( c, , , .f. )
+#define MsgInfo( c ) MsgInfo( c, , , .f. )
 
 FUNCTION OnClick()
 
@@ -162,7 +162,7 @@ FUNCTION MsgArray(aItems,aHeads,cText,cTitle,lCancel)
 
    RETURN If(lOk,nAt,0)
 
-   #define CLR_BLUE { 0, 0, 128 }
+#define CLR_BLUE { 0, 0, 128 }
 
    *******  IMPRIMIR ARRAY
 

@@ -267,8 +267,8 @@ PROCEDURE Capture_Desktop
 
 PROCEDURE Transform_Image
 
-   #define W_AUX 400
-   #define H_AUX 300
+#define W_AUX 400
+#define H_AUX 300
 
    IF Flag_Image = .F.
 
@@ -402,14 +402,14 @@ PROCEDURE SetBar (Bar)
    LOCAL VirtualHeight
    LOCAL VirtualWidth
 
-   #define SB_HORZ   0
-   #define SB_VERT   1
-   #define SB_LEFT   6
-   #define SB_TOP   6
-   #define SB_LINEUP   0
-   #define SB_ENDSCROLL   8
-   #define WM_VSCROLL  0x0115
-   #define WM_HSCROLL   276
+#define SB_HORZ   0
+#define SB_VERT   1
+#define SB_LEFT   6
+#define SB_TOP   6
+#define SB_LINEUP   0
+#define SB_ENDSCROLL   8
+#define WM_VSCROLL  0x0115
+#define WM_HSCROLL   276
 
    IF Form_1.View_2.Checked = .T.
       SetScrollPos ( hMainHandle, SB_VERT , 0 , .F. )

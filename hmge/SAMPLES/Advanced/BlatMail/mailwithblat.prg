@@ -226,16 +226,16 @@ CLASS BlatMail
    VAR lCommand INIT .F. HIDDEN  // command line has been initialized
    VAR cCommand HIDDEN        // common commands
 
-ENDCLASS
+   ENDCLASS
 
-* Initializes the BlatMail Class.  Loads DLL if that option is selected
-* Really doesn't do much if link library is used for blat
-* Calling Parameters:  None
-* Returns:  Self
+   * Initializes the BlatMail Class.  Loads DLL if that option is selected
+   * Really doesn't do much if link library is used for blat
+   * Calling Parameters:  None
+   * Returns:  Self
 
 METHOD New() CLASS BLATMAIL
 
-   #ifdef _use_CallDLL
+#ifdef _use_CallDLL
 
    IF nLoadedBlat=0
       hInstDLL:=LoadLibrary('BLAT.DLL')
@@ -246,11 +246,11 @@ METHOD New() CLASS BLATMAIL
 
    RETURN (IIF(hInstDLL>0,self,NIL))
 
-   #else
+#else
 
    RETURN (self)
 
-   #endif
+#endif
 
    * This routine sets standard command line setting to be used for subsequent mailings
    * Calling parameters: None
@@ -677,7 +677,7 @@ METHOD MailSend() CLASS BLATMAIL     // Actually send the mail
 
 METHOD BlatUnload(lAbsolute)  CLASS BLATMAIL
 
-   #ifdef _use_CallDLL
+#ifdef _use_CallDLL
 
    IF VALTYPE(lAbsolute)!='L'
       lAbsolute:=.F.
@@ -697,7 +697,7 @@ METHOD BlatUnload(lAbsolute)  CLASS BLATMAIL
       nLoadedBlat--
    ENDIF
 
-   #endif
+#endif
 
    RETURN (Self)
 
@@ -705,27 +705,27 @@ STATIC FUNCTION CallSend(cCommand)
 
    LOCAL nReturn
 
-   #ifdef _debug
+#ifdef _debug
    SET ALTE TO 'blatdebug.log' ADDITIVE
    SET ALTE ON
    QOUT(cCommand)
    SET ALTE TO
    SET ALTE OFF
-   #endif
+#endif
 
-   #ifdef _use_CallDLL
+#ifdef _use_CallDLL
 
    nReturn:=CallDLL(hInstDLL,GetProcAddress(hInstDLL,'cSend'),,3,10,cCommand)
 
-   #else
+#else
 
    nReturn:=BlatSend(cCommand)
 
-   #endif
+#endif
 
    RETURN nReturn
 
-   #ifndef _use_CallDLL
+#ifndef _use_CallDLL
 
 #pragma BEGINDUMP
 
@@ -747,4 +747,4 @@ HB_FUNC_STATIC( BLATSEND )
 
 #pragma ENDDUMP
 
-   #endif
+#endif

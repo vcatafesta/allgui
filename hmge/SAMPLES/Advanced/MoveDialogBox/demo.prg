@@ -41,7 +41,7 @@ FUNCTION MAIN
 
    RETURN NIL
 
-   #define WM_WINDOWPOSCHANGING   70
+#define WM_WINDOWPOSCHANGING   70
 
 FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
 
@@ -53,11 +53,11 @@ FUNCTION MyEvents ( hWnd, nMsg, wParam, lParam )
       _HMG_DialogBoxProcedure()
       EXIT
 
-      #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
       DEFAULT
-      #else
+#else
    OTHERWISE
-      #endif
+#endif
       result := Events( hWnd, nMsg, wParam, lParam )
    END
 
@@ -84,9 +84,9 @@ FUNCTION _HMG_DialogBoxProperty ( nRow, nCol, lCenter, Form, lSet )
 
    RETURN NIL
 
-   #define SWP_NOOWNERZORDER  0x0200
-   #define SWP_NOMOVE         0x0002
-   #define SWP_NOSIZE         0x0001
+#define SWP_NOOWNERZORDER  0x0200
+#define SWP_NOMOVE         0x0002
+#define SWP_NOSIZE         0x0001
 
 FUNCTION _HMG_DialogBoxProcedure()
 

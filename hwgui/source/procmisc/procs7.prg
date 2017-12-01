@@ -95,13 +95,13 @@ FUNCTION FIND_Z( stroka, symb )
 
    RETURN poz
 
-   #ifdef __WINDOWS__
+#ifdef __WINDOWS__
 
 FUNCTION Fchoice()
 
    RETURN 1
 
-   #endif
+#endif
 
 FUNCTION CutExten( fname )
 

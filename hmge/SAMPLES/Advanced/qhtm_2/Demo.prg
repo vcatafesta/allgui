@@ -119,13 +119,13 @@ PROCEDURE Main
    LOCAL cHTML := ''
 
    aParams := { 'StartDir'    => GetSpecialFolder( CSIDL_MYPICTURES ), ;        // Каталог "Мои рисунки"
-   'pDB'         => nil                                 , ;        // Дескриптор базы
-   'ReadFiles'   => .T.                                 , ;        // Перечитать список файлов
-   'SavePos'     => .F.                                 , ;        // Сохранять позицию в списке файлов
-   'Reload'      => .T.                                 , ;        // Признак необходимости перечитать БД
-   'TmpDir'      => ( GetTempFolder() + '\' )           , ;        // Каталог временных файлов
-   'TmpFilePict' => ''                                    ;        // Временный файл рисунка из базы
-   }
+      'pDB'         => nil                                 , ;        // Дескриптор базы
+      'ReadFiles'   => .T.                                 , ;        // Перечитать список файлов
+      'SavePos'     => .F.                                 , ;        // Сохранять позицию в списке файлов
+      'Reload'      => .T.                                 , ;        // Признак необходимости перечитать БД
+      'TmpDir'      => ( GetTempFolder() + '\' )           , ;        // Каталог временных файлов
+      'TmpFilePict' => ''                                    ;        // Временный файл рисунка из базы
+      }
 
    IF Empty( aParams[ 'pDB' ] := OpenBase() )
       MsgStop( "Can't open/create " + DB_NAME, 'Error' )

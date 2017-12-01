@@ -64,7 +64,7 @@ STATIC PROCEDURE RefreshPaint()
 
    RETURN
 
-   #define PS_SOLID  0
+#define PS_SOLID  0
 
 STATIC FUNCTION DrawCurves()
 
@@ -109,7 +109,7 @@ STATIC FUNCTION DrawCurves()
 
    RETURN NIL
 
-   #ifdef __XHARBOUR__
+#ifdef __XHARBOUR__
    /*
    Declaration of DLLs using syntax in CallDll.Lib borrowed from HMG official
    Carlos Britos
@@ -119,7 +119,7 @@ STATIC FUNCTION DrawCurves()
 
    DECLARE CreatePen( Style, Width, Color ) IN GDI32.DLL
 
-   #else
+#else
 
    DECLARE DLL_TYPE_LONG PolyBezier( DLL_TYPE_LONG hDC, DLL_TYPE_LPSTR Points, DLL_TYPE_LONG Amount ) ;
       IN GDI32.DLL
@@ -127,4 +127,4 @@ STATIC FUNCTION DrawCurves()
    DECLARE DLL_TYPE_LONG CreatePen( DLL_TYPE_LONG Style, DLL_TYPE_LONG Width, DLL_TYPE_LONG Color ) ;
       IN GDI32.DLL
 
-   #endif
+#endif

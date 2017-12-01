@@ -16,17 +16,17 @@ PROCEDURE main()
    LOCAL nResult, aXY, x, y, cMsg
 
    DELETE file cDiskFile
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    nResult := RCDataToFile( "IMAGE1", cMemFile, "PNG" )
-   #else
+#else
    nResult := RCDataToFile( "IMAGE1", cDiskFile, "PNG" )
-   #endif
+#endif
 
    IF nResult > 0
-      #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
       /* Now we can do something, f.e save to disk file */
       hb_vfCopyFile( cMemFile, cDiskFile )
-      #endif
+#endif
 
       IF hb_FileExists( cDiskFile )
          aXY  := hb_GetImageSize( cDiskFile )
@@ -40,8 +40,8 @@ PROCEDURE main()
       MsgInfo( "Code: " + hb_NtoS( nResult ), "Error" )
    ENDIF
 
-   #ifndef __XHARBOUR__
+#ifndef __XHARBOUR__
    hb_vfErase( cMemFile )
-   #endif
+#endif
 
    RETURN
