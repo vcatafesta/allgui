@@ -1,0 +1,13 @@
+-hblib
+-o${hb_install_prefix}/addons/hmge/lib/win/${hb_comp}/${hb_name}
+-hbx=${hb_install_prefix}/addons/hmge/${hb_name}.hbx
+-beep
+hmge.hbc
+
+bitmap.c
+brush.c
+core.c
+graphics.c
+image.c
+imageattr.c
+pen.c
