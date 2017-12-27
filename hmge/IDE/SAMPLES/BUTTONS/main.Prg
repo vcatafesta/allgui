@@ -1,0 +1,11 @@
+#include <minigui.ch>
+
+FUNCTION Main
+
+   SET TOOLTIPSTYLE BALLOON
+
+   LOAD WINDOW Main
+   CENTER WINDOW Main
+   ACTIVATE WINDOW Main
+
+   RETURN

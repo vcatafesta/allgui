@@ -1,0 +1,15 @@
+
+#include "minigui.ch"
+
+FUNCTION Main
+
+   LOAD WINDOW DEMO
+   ACTIVATE WINDOW DEMO
+
+   RETURN NIL
+
+PROCEDURE Play_Click
+
+   PLAY WAVE 'RESWAVE' FROM RESOURCE
+
+   RETURN
