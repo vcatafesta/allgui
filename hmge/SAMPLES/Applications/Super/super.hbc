@@ -1,4 +1,0 @@
-incpaths=${hb_curdir}
-libpaths=
-libs=hbziparc hbmzip minizip unicows
-
