@@ -1,0 +1,17 @@
+#
+# $Id: dbview.hbp $
+#
+
+-ifmgs
+
+prgs\dbview.prg
+prgs\Admindbf.Prg
+prgs\Showprop.prg
+prgs\creanew1.prg
+prgs\dbquery1.prg
+prgs\AboutWin.prg
+prgs\modistru.prg
+prgs\Indadmin.Prg
+prgs\Import.prg
+
+-ldflag=-L${HG_ROOT}\lib

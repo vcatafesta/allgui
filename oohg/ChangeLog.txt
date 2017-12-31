@@ -1,0 +1,1218 @@
+/*
+ * $Id:$
+ */
+
+/* Use this format for the entry headers:
+ * YYYY-MM-DD HH:MM UTC[-|+]hhmm Your Name or Username and/or <your_email@address>
+ * For example:
+ * 2002-12-01 23:12 UTC+0100 Foo Bar <foo.bar@foobar.org>
+ */
+
+2017-12-31 08:12 UTC-0300 Jose Quintas
+   * h_browse.prg
+   * h_combo.prg
+   * h_datepicker.prg
+   * h_graph.prg
+   * h_grid.prg
+   * h_listbox.prg
+   * h_menu.prg
+   * h_window.prg
+   * h_xbrowse.prg
+     * do not require hb_IsNil() from bad xhb.lib
+
+2017-12-18 20:01 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\ChangeLog_003.txt
+     ! Typo.
+   * core\buildapp.bat
+   * core\BuildApp30.bat
+   * core\BuildApp32.bat
+   * core\BuildApp_hbmk2.bat
+   * core\compile.bat
+   * core\compile30.bat
+   * core\compile32.bat
+   * core\compile_bcc.bat
+   * core\compile_MINGW.BAT
+   * core\compileXB.bat
+   * core\ofmt.bat
+   * core\oide.bat
+   * core\resources\CompileRes.bat
+   * core\resources\CompileRes_bcc.bat
+   * core\resources\CompileRes_mingw.bat
+   * core\source\buildlib.bat
+   * core\source\BuildLib30.bat
+   * core\source\BuildLib32.bat
+   * core\source\BuildLib_hbmk2.bat
+   * core\source\common_make.bat
+   * core\source\makelib.bat
+   * core\source\makelib_30.bat
+   * core\source\makelib_32.bat
+   * core\source\makelib_bcc.bat
+   * core\source\makelib_mingw.bat
+   * core\source\makelibXB.bat
+     * Run without adding C:\OOHG to PATH.
+     * Changed some remarks and labels to improve readability.
+
+   - core\compile_pc.bat
+   - core\compile_vc.bat
+   - core\source\makelib_pc.bat
+   - core\source\makelib_vc.bat
+
+   * core\compile_MINGW.BAT
+     !  Error: gcc: error : unrecognized option '-static-libstdc++'
+
+2017-11-17 20:44 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\*.*
+     * References to sourceforge changed to github.
+
+2017-11-15 17:32 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\source\h_controlmisc.prg
+     * Changed Empty( <var> ) to HB_SYMBOL_UNUSED( <var> ).
+     - Removed no longer used _dummy function.
+   * core\source\h_tooltip.prg
+     * Changed Empty( <var> ) to HB_SYMBOL_UNUSED( <var> ).
+
+2017-11-15 17:30 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\*.*
+   * core\resources\*.*
+   * core\source\*.c
+   * core\source\*.bat
+     * Id.
+
+2017-11-13 18:23 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\include\bostaurus.ch
+   * core\source\bostaurus.prg
+     * Id.
+
+2017-11-13 13:44 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+    * core\source\h_activex.prg
+    * core\source\h_anigif.prg
+    * core\source\h_application.prg
+    * core\source\h_browse.prg
+    * core\source\h_button.prg
+    * core\source\h_checkbox.prg
+    * core\source\h_checklist.prg
+    * core\source\h_combo.prg
+    * core\source\h_comm.prg
+    * core\source\h_controlmisc.prg
+    * core\source\h_crypt.prg
+    * core\source\h_cursor.prg
+    * core\source\h_datepicker.prg
+    * core\source\h_dialogs.prg
+    * core\source\h_dll.prg
+    * core\source\h_edit.prg
+    * core\source\h_edit_ex.prg
+    * core\source\h_editbox.prg
+    * core\source\h_error.prg
+    * core\source\h_font.prg
+    * core\source\h_form.prg
+    * core\source\h_frame.prg
+    * core\source\h_graph.prg
+    * core\source\h_grid.prg
+    * core\source\h_help.prg
+    * core\source\h_hotkey.prg
+    * core\source\h_hotkeybox.prg
+    * core\source\h_hyperlink.prg
+    * core\source\h_image.prg
+    * core\source\h_ini.prg
+    * core\source\h_init.prg
+    * core\source\h_internal.prg
+    * core\source\h_ipaddress.prg
+    * core\source\h_label.prg
+    * core\source\h_listbox.prg
+    * core\source\h_media.prg
+    * core\source\h_menu.prg
+    * core\source\h_monthcal.prg
+    * core\source\h_msgbox.prg
+    * core\source\h_notify.prg
+    * core\source\h_pdf.prg
+    * core\source\h_picture.prg
+    * core\source\h_print.prg
+    * core\source\h_progressbar.prg
+    * core\source\h_progressmeter.prg
+    * core\source\h_radio.prg
+    * core\source\h_registry.prg
+    * core\source\h_report.prg
+    * core\source\h_richeditbox.prg
+    * core\source\h_scroll.prg
+    * core\source\h_scrollbutton.prg
+    * core\source\h_scrsaver.prg
+    * core\source\h_slider.prg
+    * core\source\h_spinner.prg
+    * core\source\h_splitbox.prg
+    * core\source\h_status.prg
+    * core\source\h_tab.prg
+    * core\source\h_textarray.prg
+    * core\source\h_textbox.prg
+    * core\source\h_timer.prg
+    * core\source\h_toolbar.prg
+    * core\source\h_tooltip.prg
+    * core\source\h_tree.prg
+    * core\source\h_winapimisc.prg
+    * core\source\h_windows.prg
+    * core\source\h_xbrowse.prg
+    * core\source\h_zip.prg
+    * core\source\miniprint.prg
+    * core\source\winprint.prg
+      * Id.
+     ; Thanks to José M. C. Quintas.
+
+2017-11-13 21:56 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\source\h_grid.prg
+     * Some comments added.
+
+2017-11-10 18:14 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\include\i_app.ch
+     + Support for App.Errorlevel and App.DoEvents
+   * core\include\i_hmg_compat.ch
+     ! Wrong translation of DIALOG clause.
+   * core\include\i_pseudofunc.ch
+     + Translate for ooHGVersion and MiniGuiVersion pseudofunctions.
+   * core\include\i_var.ch
+     + Support for _OOHG_Errolevel var.
+   * core\source\h_application.prg
+     + Support for _OOHG_Errolevel var.
+     * Errorlevel is set to 1 in case of error.
+   * core\source\h_error.prg
+     * Errorlevel is set to 1 in case of error.
+     - Functions ooHGVersion and MiniGuiVersion.
+   * core\source\h_form.prg
+     Errorlevel is set to _OOHG_Errorlevel at app's exit.
+   * core\source\h_grid.prg
+   * core\source\h_internal.prg
+   * core\source\h_picture.prg
+   * core\source\h_textarray.prg
+     * Errorlevel is set to 1 in case of error.
+
+2017-11-03 17:20 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\*.*
+   * core\source\*.c
+     * COPYING changed to LICENSE.txt
+   * core\source\*.prg
+     * COPYING changed to LICENSE.txt
+     - Remove some commented out code.
+   * core\source\h_edit.prg
+     * Changed some comments.
+
+2017-11-02 21:14 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\BuildApp30.bat
+   * core\BuildApp32.bat
+   * core\ChangeLog_001.txt
+   * core\ChangeLog_002.txt
+   * core\ChangeLog_003.txt
+   * core\ChangeLog_004.txt
+   * core\ChangeLog_005.txt
+   * core\compile.bat
+   * core\compile30.bat
+   * core\compile32.bat
+   * core\compile_MINGW.BAT
+   * core\compile_pc.bat
+   * core\compile_vc.bat
+   * core\compileXB.bat
+   * core\ofmt.bat
+   * core\oide.bat
+   * core\oohg.hbc
+     * Id.
+
+2017-11-02 20:59 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   - core\oohgaux.bat
+
+2017-11-02 20:57 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\BuildApp_hbmk2.bat
+     !  Additional hbmk2 parameters are ignored.
+
+2017-11-02 18:30 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\BuildApp_hbmk2.bat
+     % Improved.
+     ! Do not try to compile an RC file if neither app's nor oohg's exist.
+     ! App's RC file is not compiled when oohg's doesn't exists.
+     * Now _temp.rc is part of the call to hbmk2.
+   * core\oohg.hbc
+     ! Lib bindings are dynamic instead of static.
+     * Resource file is not forced anymore into building chain.
+       To compile and app that has an RC file using hbmk2 you must add
+       'app.rc' to the command line or to the hbp file.
+       To make oohg's resources available to your app, you must include
+       (manually or using and #include directive) the content of oohg.rc
+       file into your app's RC file.
+       e.g.
+                   #include "C:\OOHG\RESOURCES\OOHG.RC"
+                   I1 PNG image.png
+                   ...
+
+2017-11-02 18:16 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\makelib_bcc.bat
+     * Command's output cleaned.
+     ! Label not found error.
+
+2017-11-02 18:13 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\makelib.bat
+     * References to compile*.bat changed to makelib*.bat
+
+2017-11-02 18:12 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\buildlib.bat
+     * References to compile*.bat changed to buildlib*.bat
+
+2017-11-02 18:10 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\compile.bat
+     * Error message.
+
+2017-11-02 18:09 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\compileXB.bat
+     * Format.
+
+2017-11-02 18:07 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\buildapp.bat
+     * References to compile*.bat changed to buildapp*.bat
+     * Some comments.
+
+2017-10-02 17:00 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\buildapp30.bat
+   * core\buildapp32.bat
+     * Content moved to buildapp.bat
+     * Now they call buildapp.bat
+   * core\buildapp.bat
+     * Added content from buildapp30.bat and buildapp32.bat
+
+   * core\compile30.bat
+   * core\compile32.bat
+   * core\compileXB.bat
+     * Content moved to compile.bat
+     * Now they call compile.bat
+   * core\compile.bat
+     * Added content from compile30.bat and compile32.bat
+
+   * core\compile_bcc.bat
+   * core\compile_pc.bat
+   * core\compile_vc.bat
+     % Improved.
+
+   * core\source\buildlib30.bat
+   * core\source\buildlib32.bat
+     * Content moved to source\buildlib.bat
+     * Now they call source\buildlib.bat
+   * core\source\buildlib.bat
+     * Added content from source\buildlib30.bat and source\buildlib32.bat
+
+   * core\source\makelib30.bat
+   * core\source\makelib32.bat
+   * core\source\makelibXB.bat
+     * Content moved to source\makelib.bat
+     * Now they call source\makelib.bat
+   * core\source\makelib.bat
+     * Added content from source\makelib30.bat and source\makelib32.bat
+
+   ; Thanks to José M. C. Quintas.
+
+2017-11-02 15:12 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_graph.prg
+     * Pacified xHarbour warning.
+
+2017-11-02 14:58 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   - core\source\xml.bat
+
+2017-11-02 14:56 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog_005.txt
+     ! Comment on oohg_hbxx.o files.
+
+2017-11-02 14:55 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\bostaurus.hbp
+   * core\source\hbprinter.hbp
+   * core\source\miniprint.hbp
+   * core\source\oohg.hbp
+     - Removed switch not supported by HB30.
+
+2017-10-30 19:26 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   + core\oohg_license_template.txt
+     * Improved as template.
+   * core\source\bostaurus.hbp
+   * core\source\hbprinter.hbp
+   * core\source\miniprint.hbp
+   * core\source\oohg.hbp
+     + Some flags.
+
+2017-10-29 12:20 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+
+   * core\include\i_altsyntax.ch
+   * core\include\i_browse.ch
+   * core\include\i_xbrowse.ch
+     + Added support for KEYSLIKECLIPPER clause.
+       See below.
+   * core\source\h_browse.prg
+     + Added support for KEYSLIKECLIPPER clause to TOBrowseByCell's methods.
+     + Added methods MoveToFirstCol, MoveToFirstVisibleCol, MoveToLastCol
+       and MoveToLastVisibleCol to class TOBrowseByCell.
+     * Methods Home and End of class TOBrowseByCell no longer move record
+       pointer when KEYSLIKECLIPPER clause is present. They just change the
+       selected cell to the first/last visible column on the current row.
+     + Added parameter lKeys to method EditCell of class TOBrowseByCell.
+       Set to .F. to stop processing exit keys after edition end.
+       It's like "edit this cell and stay here afterwards". Defaults to .T.
+     ! Method EditCell of class TOBrowseByCell was not refreshing after
+       appending a record.
+     + Added support for KEYSLIKECLIPPER clause to methods EditCell and
+       EditGrid of class TOBrowseByCell.
+   * core\source\h_xbrowse.prg
+     + Added support for KEYSLIKECLIPPER clause to TXBrowseByCell's methods.
+     * Changed Empty( <var> ) to HB_SYMBOL_UNUSED( <var> ).
+     + Added methods MoveToFirstCol, MoveToFirstVisibleCol, MoveToLastCol
+       and MoveToLastVisibleCol to class TXBrowseByCell.
+     * Methods Home and End of class TXBrowseByCell no longer move record
+       pointer when KEYSLIKECLIPPER clause is present. They just change the
+       selected cell to the first/last visible column on the current row.
+
+   ; Key's expected behavior in Clipper's Browse mode:
+
+       Key          Action
+       ------------------------------------------------------------------------
+       Up           Move up one row (previous record).
+       Down         Move down one row (next record).
+       Left         Move one column to the left (previous field).
+       Right        Move one column to the right (next field).
+       Ctrl+Left    Pan one column to the left.
+       Ctrl+Right   Pan one column to the right.
+       Home         Move to the leftmost visible column.
+       End          Move to the rightmost visible column.
+       Ctrl+Home    Move to the leftmost column.
+       Ctrl+End     Move to the rightmost column.
+       PgUp         Move to the previous screen.
+                    If cursor was on, lets say 4th row of 12 visible rows,
+                    pressing that key should show next 12 rows and position
+                    cursor on 4th of them. If there are no more rows to load,
+                    cursor should be placed at last row. Cursor should remain
+                    in the same column.
+       PgDn         Move to the next screen.
+                    If cursor was on, lets say 4th row of 12 visible rows,
+                    pressing that key should show previous 12 rows and position
+                    cursor on 4th of them. If there are no more rows to load,
+                    cursor should be placed at first row. Cursor should remain
+                    in the same column.
+       Ctrl+PgUp    Move to the first record.
+                    Cursor should remain in the same column.
+       Ctrl+PgDn    Move to the last record.
+                    Cursor should remain in the same column.
+
+2017-10-29 12:12 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\.gitignore
+     + resul.txt file.
+   * core\BuildApp_hbmk2.bat
+     * -q to -q0
+   * core\compile_bcc.bat
+   * core\compile_MINGW.bat
+   * core\compile_pc.bat
+   * core\compile_vc.bat
+     * -n to -n1
+   * core\source\common_make.bat
+     * -w2 to -w3.
+     + Added support for message redirection.
+   * core\source\makelib_bcc.bat
+   * core\source\xml.bat
+     * Improved message redirection to resul.txt file.
+
+2017-10-29 12:01 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_edit.prg
+   * core\source\h_edit_ex.prg
+   * core\source\h_graph.prg
+   * core\source\h_pdf.prg
+   * core\source\h_print.prg
+   * core\source\h_windows.prg
+     ! Some xHarbour's compiler warnings.
+
+2017-10-28 09:00 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_init.prg
+     * Message changed.
+
+2017-10-26 20:22 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\include\i_grid.ch
+     * Changed translations of commands SET GRIDFIXEDCONTROLS.
+     + Clause KEYSLIKECLIPPER. When present, keys behave like
+       Clipper's browse. Applies to TGridByCell only.
+   * core\include\i_pseudofunc.ch
+     + Added xtranslate for function SetGridFixedControls.
+   * core\include\i_var.ch
+     + Added xtranslate for pseudo var _OOHG_GridFixedControls.
+   * core\source\h_application.prg
+     * Added support for _OOHG_GridFixedControls.
+   * core\source\h_grid.prg
+     - STATIC var and function SetGridFixedControls were
+       substituted by TApplication method and pseudo-function.
+     + DATA lKeysLikeClipper.
+     + DATA lKeysOn. When .F. the editcontrols will ignore all
+       exit keys and user defined keys except ESCAPE and RETURN.
+     + MESSAGE End to class TGrid.
+     + MESSAGE Home to class TGrid.
+     + MESSAGE PanToLeft to class TGrid.
+     + MESSAGE PanToRight to class TGrid.
+     + New parameter klc to TGrid's methods Define, Define2
+       and Define4.
+     * Some comments.
+     * Some format.
+     * Changed Empty( <var> ) to HB_SYMBOL_UNUSED( <var> ).
+     + METHOD End to class TGridByCell.
+     + METHOD Home to class TGridByCell.
+     + METHOD End to class TGridByCell.
+     + METHOD MoveToFirstCol to class TGridByCell.
+     + METHOD MoveToFirstVisibleCol to class TGridByCell.
+     + METHOD MoveToLastCol to class TGridByCell.
+     + METHOD MoveToLastVisibleCol to class TGridByCell.
+     * Methods Right, Left, Up and Down of TGridByCell now
+       honor ::FullMove.
+     * Method Up accepts parameter lLast. When .T. the
+       column changes to the righmost one.
+     * Method EditCell of TGridByCell now uses methods to
+       move the selected cell.
+
+2017-10-26 20:08 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\winprint.prg
+     * Function MYCLOSEP is now STATIC.
+     - Function JK_ODD
+     * Funcion EF_RESETPRINTER renamed to RR_RESETPRINTER.
+
+2017-10-25 22:36 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+
+2017-10-25 22:35 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\i_altsyntax.ch
+     * Id.
+     + Clause EDITCELLVALUE to grid, browse and xbrowse.
+   * core\include\i_browse.ch
+     * Id.
+     + Clause EDITCELLVALUE.
+     * Changed translations of commands SET BROWSESYNC,
+       SET BROWSEFIXEDBLOCKS and SET BROWSEFIXEDCONTROLS.
+   * core\include\i_grid.ch
+     * Id.
+     + Clause EDITCELLVALUE.
+   * core\include\i_pseudofunc.ch
+     * Id.
+     + Added xtranslates for functions SetBrowseFixedBlocks,
+       SetBrowseFixedControls, SetBrowseSync, SetXBrowseFixedBlocks
+       and SetXBrowseFixedControls.
+   * core\include\i_var.ch
+     * Id.
+     + Added xtranslates for pseudo vars _OOHG_BrowseSyncStatus,
+       _OOHG_BrowseFixedBlocks, _OOHG_BrowseFixedControls,
+       _OOHG_XBrowseFixedBlocks and _OOHG_XBrowseFixedControls.
+   * core\include\i_xbrowse.ch
+     * Id.
+     + Clause EDITCELLVALUE.
+     * Changed translations of commands SET XBROWSEFIXEDBLOCKS and
+       SET XBROWSEFIXEDCONTROLS.
+   * core\source\h_application.prg
+     * Id.
+     * Added support for _OOHG_BrowseSyncStatus,
+       _OOHG_BrowseFixedBlocks, _OOHG_BrowseFixedControls,
+       _OOHG_XBrowseFixedBlocks and _OOHG_XBrowseFixedControls.
+     * Changed case style of some words according Harbour's syntax.
+   * core\source\h_browse.prg
+     * Id.
+     - STATIC vars and functions SetBrowseSync, SetBrowseFixedBlocks
+       and SetBrowseFixedBlocks were substituted by TApplication methods
+       and pseudo-functions. This should make the class thread safe.
+     * Changed some comments.
+     + Support for clause EDITCELLVALUE bCodeBlock.
+       The bCodeblock is evaluated by method EditCell2 just
+       before the cell edition starts.
+       The codeblock receives 3 parametes: nCol, nRow and uOldValue,
+       where nRow and nCol identify the cell that will be edited and
+       uOldValue is the 'face value' to show.
+       It should return uOldValue or another value of the same type.
+       Note that changes to uOldValue do not affect the data source.
+     * Changed Empty( <var> ) to HB_SYMBOL_UNUSED( <var> ).
+     + Default value for CheckBeforeEdit parameter at method Define3
+       of class TOBrowseByCell.
+     ! Method EditGrid of TOBrowseByCell when edition was ended
+       because of mouse exit.
+     % Method SetValue of class TOBrowseByCell.
+     * Methods Left and Right of TOBrowseByCell now return .T. if
+       and only if row and or col where changed.
+     * Changed some var names to improve readability.
+   * core\source\h_grid.prg
+     * Id.
+     + Support for clause EDITCELLVALUE bCodeBlock.
+       The bCodeblock is evaluated by method EditCell2 just
+       before the cell edition starts.
+       The codeblock receives 3 parametes: nCol, nRow and uOldValue,
+       where nRow and nCol identify the cell that will be edited and
+       uOldValue is the 'face value' to show.
+       It should return uOldValue or another value of the same type.
+       Note that changes to uOldValue do not affect the grid's cell.
+   * core\source\h_xbrowse.prg
+     * Id.
+     - STATIC vars and functions SetXBrowseFixedBlocks and
+       SetX BrowseFixedBlocks were substituted by TApplication methods
+       and pseudo-functions. This should make the class thread safe.
+     + Support for clause EDITCELLVALUE bCodeBlock.
+       The bCodeblock is evaluated by method EditCell2 just
+       before the cell edition starts.
+       The codeblock receives 3 parametes: nCol, nRow and uOldValue,
+       where nRow and nCol identify the cell that will be edited and
+       uOldValue is the 'face value' to show.
+       It should return uOldValue or another value of the same type.
+       Note that changes to uOldValue do not affect the data source.
+     * Some format.
+
+2017-10-25 22:31 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\winprint.prg
+     * hb_osnewline() replaced by Chr(13)+Chr(10).
+
+2017-10-25 22:22 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_init.prg
+     * ABM_CRLF and Chr(13) replaced by CRLF.
+     * Call to TApplication's method New replaced by Define.
+     * Some comments.
+     * Some messages.
+     * Changed case style of some words according Harbour's syntax.
+
+2017-10-25 22:01 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_edit_ex.prg
+     - Removed unneeded define.
+
+2017-10-25 20:42 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_form.prg
+     * Some format.
+     * Some comments.
+     - Removed unneeded code from function _ActivateAllWindows.
+
+2017-10-25 20:35 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_dll.prg
+     + Comment.
+
+2017-10-25 20:34 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_datepicker.prg
+     * Changed some format.
+     + Comment.
+
+2017-10-25 20:08 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_controlmisc.c
+     + Comment.
+
+2017-10-25 19:48 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\i_app.ch
+     - Wrong xtranslate.
+
+2017-10-24 21:03 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_activex.c
+     * Some unused code was commented out.
+     * Two global vars were made local.
+     * Some format.
+     * Use _OOHG_GlobalMutex to initialize static var.
+     ; Module is thread safe.
+
+2017-10-24 20:57 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_application.prg
+     * CLASSDATA changed to CLASSVAR to avoid inheritance.
+     + Hidden method CreateGlobalMutex to set a C level mutex
+       called _OOHG_GlobalMutex at startup. The purpose of this
+       mutex is to enable thread safe use of C static vars.
+
+2017-10-24 18:39 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\compile_bcc.bat
+     + Switch /H for harbour.
+     + Use D__XHARBOUR__ in bcc32 calls.
+   * core\ofmt.bat
+   * core\oide.bat
+     + Added variable to set path.
+   * core\README.md
+     + Link to GitHub.
+
+2017-10-24 18:38 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\bostaurus.hbp
+   * core\source\hbprinter.hbp
+   * core\source\miniprint.hbp
+   * core\source\oohg.hbp
+     * Some flags and comments.
+     ; Build will generate .hbx file. Thanks to José M. C. Quintas.
+
+2017-10-23 22:43 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\BuildApp_hbmk2.bat
+     * Id.
+     * Flag -norun changed by -run-
+   * core\ChangeLog_002.txt
+     ! Typo.
+   + core\oohg_license_template.txt
+   * core\source\h_msgbox.prg
+     * Function MsgInfoExt no longer creates it's window
+       with a fixed name.
+   * core\source\h_windows.prg
+     * Change made 2017-10-16 at 23:10 was reverted because
+       it generates a GPF under Harbour 3.4 and MinGW 7.1
+
+2017-10-21 00:08 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   + core\source\oohgaux.bat
+     ; To handle envvars.
+   * core\ChangeLog_002.txt
+   * core\ChangeLog_003.txt
+   * core\ChangeLog_004.txt
+   * core\include\bostaurus.ch
+   * core\include\i_dll.ch
+   * core\include\i_exec.ch
+   * core\include\i_label.ch
+   * core\include\i_misc.ch
+   * core\include\i_monthcal.ch
+   * core\include\i_picture.ch
+   * core\include\i_pseudofunc.ch
+   * core\include\i_registry.ch
+   * core\include\i_richeditbox.ch
+   * core\include\i_splitbox.ch
+   * core\include\i_timer.ch
+   * core\include\i_xbrowse.ch
+   * core\include\oohg.h
+   * core\source\bostaurus.prg
+   * core\source\c_dialogs.c
+   * core\source\c_font.c
+   * core\source\c_media.c
+   * core\source\c_msgbox.c
+   * core\source\c_progressbar.c
+   * core\source\c_scrsaver.c
+   * core\source\c_windows.c
+   * core\source\h_activex.prg
+   * core\source\h_anigif.prg
+   * core\source\h_application.prg
+   * core\source\h_browse.prg
+   * core\source\h_button.prg
+   * core\source\h_checkbox.prg
+   * core\source\h_checklist.prg
+   * core\source\h_combo.prg
+   * core\source\h_comm.prg
+   * core\source\h_controlmisc.prg
+   * core\source\h_crypt.prg
+   * core\source\h_cursor.prg
+   * core\source\h_datepicker.prg
+   * core\source\h_dialogs.prg
+   * core\source\h_dll.prg
+   * core\source\h_edit.prg
+   * core\source\h_editbox.prg
+   * core\source\h_edit_ex.prg
+   * core\source\h_error.prg
+   * core\source\h_font.prg
+   * core\source\h_form.prg
+   * core\source\h_frame.prg
+   * core\source\h_graph.prg
+   * core\source\h_grid.prg
+   * core\source\h_help.prg
+   * core\source\h_hotkey.prg
+   * core\source\h_hotkeybox.prg
+   * core\source\h_hyperlink.prg
+   * core\source\h_image.prg
+   * core\source\h_ini.prg
+   * core\source\h_init.prg
+   * core\source\h_internal.prg
+   * core\source\h_ipaddress.prg
+   * core\source\h_label.prg
+   * core\source\h_listbox.prg
+   * core\source\h_media.prg
+   * core\source\h_menu.prg
+   * core\source\h_monthcal.prg
+   * core\source\h_msgbox.prg
+   * core\source\h_notify.prg
+   * core\source\h_pdf.prg
+   * core\source\h_picture.prg
+   * core\source\h_print.prg
+   * core\source\h_progressbar.prg
+   * core\source\h_progressmeter.prg
+   * core\source\h_radio.prg
+   * core\source\h_registry.prg
+   * core\source\h_report.prg
+   * core\source\h_richeditbox.prg
+   * core\source\h_scroll.prg
+   * core\source\h_scrollbutton.prg
+   * core\source\h_scrsaver.prg
+   * core\source\h_slider.prg
+   * core\source\h_spinner.prg
+   * core\source\h_splitbox.prg
+   * core\source\h_status.prg
+   * core\source\h_tab.prg
+   * core\source\h_textarray.prg
+   * core\source\h_textbox.prg
+   * core\source\h_timer.prg
+   * core\source\h_toolbar.prg
+   * core\source\h_tooltip.prg
+   * core\source\h_tree.prg
+   * core\source\h_winapimisc.prg
+   * core\source\h_windows.prg
+   * core\source\h_xbrowse.prg
+   * core\source\h_zip.prg
+   * core\source\miniprint.prg
+   * core\source\winprint.prg
+     - Trailing spaces.
+     * Format.
+     ; Thanks to José M. C. Quintas.
+
+2017-10-20 11:11 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\winprint.ch
+     ! RTE: HBPRN not defined.
+
+2017-10-18 17:05 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\source\bostaurus.prg
+   * core\source\h_activex.prg
+   * core\source\h_application.prg
+   * core\source\h_browse.prg
+   * core\source\h_button.prg
+   * core\source\h_checkbox.prg
+   * core\source\h_crypt.prg
+   * core\source\h_datepicker.prg
+   * core\source\h_dll.prg
+   * core\source\h_edit.prg
+   * core\source\h_edit_ex.prg
+   * core\source\h_grid.prg
+   * core\source\h_image.prg
+   * core\source\h_monthcal.prg
+   * core\source\h_msgbox.prg
+   * core\source\h_print.prg
+   * core\source\h_progressbar.prg
+   * core\source\h_report.prg
+   * core\source\h_scrollbutton.prg
+   * core\source\h_splitbox.prg
+   * core\source\h_status.prg
+   * core\source\h_textbox.prg
+   * core\source\h_tree.prg
+   * core\source\h_windows.prg
+   * core\source\h_xbrowse.prg
+   * core\source\h_miniprint.prg
+   * core\source\h_winprint.prg
+     - Trailing spaces.
+     * Format.
+     ; Thanks to José M. C. Quintas.
+
+2017-10-18 15:47 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\resources\CompileRes_mingw.bat
+     ! Wrong label.
+
+2017-10-17 21:48 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+
+2017-10-17 21:47 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\.gitignore
+     + Some files.
+   + core\ofmt.bat
+     * Batch file to execute fmt.
+   + core\oide.bat
+     * Batch file to execute ide.
+   * core\oohg.hbc
+     - Remove unneeded directive.
+     ! Static building directive.
+   * core\source\h_application.prg
+     ! Typo that causes error "TApplication_MinObject" function not found
+       when building librares.
+
+2017-10-16 23:15 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ChangeLog.txt
+     * Updated.
+   * core\source\oohg.hbp
+     * Changed comment.
+
+2017-10-16 23:10 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_windows.prg
+     * Var _OOHG_LastSelf is now declared as __thread type.
+
+2017-10-16 23:08 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\h_controlmisc.prg
+     + Check for upper limit in control's ID.
+
+2017-10-16 23:05 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_edit.prg
+     + Define NO_HBPRN_DECLARATION to pacify warning.
+     - Call to function InitMessages.
+     * Commented out some unneeded code.
+
+2017-10-16 23:00 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_controlmisc.c
+   * core\source\c_gdiplus.c
+   * core\source\c_msgbox.c
+   * core\source\h_controlmisc.prg
+   * core\source\h_dll.prg
+   * core\source\h_edit.prg
+   * core\source\h_form.prg
+   * core\source\h_init.prg
+   * core\source\h_internal.prg
+   * core\source\h_picture.prg
+   * core\source\h_tooltip.prg
+   * core\source\h_tree.prg
+   * core\source\h_windows.prg
+   * core\source\h_xbrowse.prg
+   * core\source\winprint.prg
+      + TO*DO related to thread safety.
+
+2017-10-16 22:38 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\i_controlmisc.ch
+   * core\source\h_bostaurus.prg
+   * core\source\h_browse.prg
+   * core\source\h_checklist.prg
+   * core\source\h_combo.prg
+   * core\source\h_comm.prg
+   * core\source\h_controlsmisc.prg
+   * core\source\h_edit.prg
+   * core\source\h_edit_ex.prg
+   * core\source\h_form.prg
+   * core\source\h_frame.prg
+   * core\source\h_graph.prg
+   * core\source\h_grid.prg
+   * core\source\h_hotkey.prg
+   * core\source\h_hyperlink.prg
+   * core\source\h_init.prg
+   * core\source\h_msgbox.prg
+   * core\source\h_splitbox.prg
+   * core\source\h_tab.prg
+   * core\source\h_toolbar.prg
+   * core\source\h_tree.prg
+   * core\source\h_windows.prg
+   * core\source\h_windows.prg
+   * core\source\h_xbrowse.prg
+     * Changed case style of some words.
+
+2017-10-16 22:31 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_winapimisc.c
+     + Function CloseHandle.
+
+2017-10-16 21:51 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_cursor.c
+     * Function SetWindowCursor now returns .T. on success or .F. on error.
+
+2017-10-16 21:49 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_form.prg
+     + Added DATA uFormCursor with current cursor's name.
+     ! Method TForm:Cursor is now truly setget.
+     * Changed case style of some words.
+
+2017-10-16 21:45 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_form.prg
+     - Unneeded code in methods TFormInternal:Define and TFormSplit:Define.
+   * core\source\h_internal.prg
+     - Unneeded code in methods TInternal:Define.
+   * core\source\h_windows.prg
+     - Removed no longer needed function _OOHG_SetControlParent.
+
+2017-10-16 21:27 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_help.prg
+     - Removed some commented out code.
+
+2017-10-16 21:21 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\include\h_print.prg
+     * Static var at source level moved to local var.
+
+2017-10-16 21:18 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_msgbox.prg
+     * Changed "=" comparisons to "==".
+     + Check for NIL and types "T" and "S" in function AutoType.
+
+2017-10-16 21:05 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\incluce\i_app.ch
+     * Changed translation for Application.<property>.
+     + Added new properties.
+   * core\include\i_pseudofunc.ch
+     + Added translate for function _OOHG_SetMultiple.
+   * core\include\i_var.ch
+     * Changed translation for _OOHG_* vars.
+   * core\source\c_controlmisc.c
+     + TO*DO.
+   * core\source\h_application.prg
+     * Static var changed to CLASS VAR.
+     * Access to array of properties is now handled by methods
+       with mutex protection.
+     * Method New was renamed Define.
+   * core\source\h_controlsmisc.prg
+     - Static var _OOHG_lMultiple.
+     - Function _OOHG_SetMultiple.
+   ; This changes should make thread safe the access to _oohg_* var.
+
+2017-10-16 20:50 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\c_gdiplus.c
+     * Some format.
+
+2017-10-16 20:24 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_edit_ex.prg
+     - Call to function InitMessages.
+
+2017-10-16 09:36 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\compile_MINGW.bat
+   * core\oohg.hbc
+     + Set static building.
+   + README.md
+
+2017-10-15 21:15 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   + core\.gitattributes
+   + core\.gitignore
+
+2017-10-14 21:27 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\manual\*.*
+     ; Files moved to doc repository.
+
+2017-10-14 00:46 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\ide\*.*
+     ; Files moved to ide repository.
+
+2017-10-14 00:35 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\doc\*.*
+     ; Files moved to core\doc.
+   - core\doc
+   * core\ChangeLog.txt
+     ! Previous entries fixed.
+
+2017-10-12 20:45 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   - core\samples\dbview\*.*
+   - core\samples\http\*.*
+   - core\samples\mpm\*.*
+   - core\samples\oohg\*.*
+   - core\samples
+     ; Moved to a separated repository.
+
+2017-10-12 20:45 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   - core\distros\hb30mingw.iss
+   - core\distros\hb32mingw.iss
+   - core\distros\infoafter_bcc.txt
+   - core\distros\infoafter_mingw.txt
+   - core\distros\infobefore.txt
+   - core\distros\license.txt
+   - core\distros\lista.txt
+   - core\distros\makedistro.bat
+   - core\distros\makeexclude.txt
+   - core\distros\xhbbcc.iss
+   - core\distros
+     ; Moved to a separated repository.
+
+2017-10-12 20:20 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   + core\*.*
+     ; Initial upload to GitHub from SourceForge.
+
+2017-10-01 13:04 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * core\source\h_application.prg
+     ! Array access error on _OOHG_* vars.
+
+2017-10-01 12:52 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * include\i_var.ch
+     - References to _OOHG_AllVars array.
+     * Variables _OOHG_* are now defined as datas of TApplication
+       object.
+
+   * source\bostaurus.prg
+   * source\h_activex.prg
+   * source\h_anigif.prg
+   * source\h_application.prg
+   * source\h_button.prg
+   * source\h_checkbox.prg
+   * source\h_checklist.prg
+   * source\h_combo.prg
+   * source\h_comm.prg
+   * source\h_datepicker.prg
+   * source\h_dialogs.prg
+   * source\h_edit.prg
+   * source\h_editbox.prg
+   * source\h_error.prg
+   * source\h_frame.prg
+   * source\h_hotkey.prg
+   * source\h_hotkeybox.prg
+   * source\h_hyperlink.prg
+   * source\h_image.prg
+   * source\h_ini.prg
+   * source\h_init.prg
+   * source\h_internal.prg
+   * source\h_ipaddress.prg
+   * source\h_label.prg
+   * source\h_media.prg
+   * source\h_menu.prg
+   * source\h_monthcal.prg
+   * source\h_notify.prg
+   * source\h_picture.prg
+   * source\h_progressbar.prg
+   * source\h_progressmeter.prg
+   * source\h_radio.prg
+   * source\h_registry.prg
+   * source\h_report.prg
+   * source\h_richeditbox.prg
+   * source\h_scroll.prg
+   * source\h_scrollbutton.prg
+   * source\h_scrsaver.prg
+   * source\h_slider.prg
+   * source\h_spinner.prg
+   * source\h_splitbox.prg
+   * source\h_status.prg
+   * source\h_textarray.prg
+   * source\h_textbox.prg
+   * source\h_timer.prg
+   * source\h_toolbar.prg
+   * source\h_tooltip.prg
+   * source\h_xbrowse.prg
+   * source\winprint.prg
+     - EMPTY( _OOHG_AllVars ).
+
+   * source\h_application.prg
+     + Method New to initialize application wide variables.
+
+   * source\h_init.prg
+     - Initialization of application wide variables.
+     - Public var _OOHG_AllVars.
+     ! Errorlog errors in multithreaded apps.
+
+   * source\h_error.prg
+     + ProcFile() info to error messages.
+
+2017-10-01 11:33 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * .\BuildApp_hbmk2.bat
+     ! Order of parameters in hbmk2 call.
+   * source\h_tab.prg
+   * source\h_windows.prg
+     * Format.
+   * source\h_edit_ex.prg
+     - Unused public variable nImpLen.
+     * Var hbprn is now local.
+   * source\winprint.prg
+     - Defines for background modes.
+     * Some comments.
+     - EMPTY( hbprn ).
+   * include\winprint.ch
+     + Defines for background modes.
+
+2017-09-28 18:33 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * include\i_report.ch
+   * include\miniprint.ch
+   * include\winprint.ch
+   * manual\DO_REPORT.HTM
+   * manual\HBPRINTER_CONSTANTS.HTM
+   * manual\MINIPRINT_CONSTANTS.HTM
+     * Some comments on paper sizes.
+
+2017-09-14 18:56 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_grid.prg
+     * Method Justify now can change the justification of all columns
+       in a single call. Usage:
+       One column change:   oGrid:Justify( nItem, nJust, lRedraw ) -> nJust
+       All columns change:  oGrid:Justify( aJust, lRedraw ) -> aJust
+       One column retrieve: oGrid:Justify( nItem ) -> nJust
+       All columns retrive: oGrid:Justify() -> aJust
+     * Function SetGridColumnJustify now returns current justification.
+
+2017-09-14 17:48 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_combobox.prg
+     ! Incremental search text was not being reseted.
+     ! GotFocus event was being fired twice.
+     ! DisplayChange was not being fired.
+     * Some format.
+
+2017-09-13 19:33 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_image.prg
+   * source\h_internal.prg
+   * source\h_notify.prg
+   * source\h_picture.prg
+   * source\h_progressmeter.prg
+   * source\h_textarray.prg
+   * source\h_windows.prg
+     + Some comments.
+
+2017-09-13 19:29 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * include\i_hmg_compat.ch
+     + Some clauses to improve compatibility.
+
+2017-09-13 19:25 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * ide\prgs\formedit.prg
+     ! Statubar's items is displayed with wrong font after resetting
+       font to default values.
+     + Support for ON KEY, BKGNDCOLOR, DATEFORMAT and TIMEFORMAT clauses.
+   * ide\prgs\mgide.prg
+     * The items of the statusbar of method myInputWindow are now
+       more customizable.
+
+2017-09-13 19:20 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * doc\classes.txt
+   * doc\Maintenance.txt
+     * Updated.
+
+2017-09-13 18:02 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_browse.prg
+     ! RTE "CALIAS__ method not found" when Browse was defined with
+       FIXEDCONTROLS and FIXEDBLOCKS clauses.
+
+2017-09-09 13:58 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_grid.prg
+     + METHOD LastVisibleColumn( lEnd ): when lEnd is .F.
+       (default value) returns the number of the column shown at
+       grid's right side; when lEnd is .T. returns the number of the
+       rightmost column with it's right border visible.
+
+2017-09-09 12:34 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_windows.prg
+     + Support for writing _OOHG_CALLDUMP() output to a text file
+       named DumpLog.txt at the current folder.
+       Usage: _OOHG_CALLDUMP( uTitle, cOutput ) where
+       - uTitle: data (any type) to output. Defaults to NIL.
+       - cOutput: S to get screen output only, F to get file output
+         only, or B to get screen and file output simultaneously.
+         Defaults to S.
+
+2017-09-09 12:02 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * include\i_altsyntax.ch
+     + Added clause BKGNDCOLOR.
+   * include\i_monthcal.ch
+     + Support for BKGNDCOLOR clause.
+
+2017-09-09 11:37 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * include\i_altsyntax.ch
+   * include\i_datepicker.ch
+     + Added clause DATEFORMAT in DATEPICKER control.
+     + Added clause TIMEFORMAT in TIMEPICKER control.
+     * Parameters UPDOWN and RIGHTALIGN in call to TTimePick():Define
+       are now forced to .T. and .F. respectively.
+     ; TIMEPICKER control always has UPDOWN style.
+     ; TIMEPICKER control ignores RIGHTALIGN style.
+   * include\i_hmg_compat.ch
+     + PP rules to ignore BACKCOLOR, FONTCOLOR, TITLEBACKCOLOR,
+       TITLEFONTCOLOR and TRAILINGFONTCOLOR clauses of DATEPICKER control.
+     ; These clauses have no effect under when visual styles are on.
+     - Unneeded PP rule related to RADIOGROUP control.
+   * source\h_datepicker.prg
+     + Support for new clauses in DATEPICKER and TIMEPICKER controls.
+     + DATA cDateFormat and METHOD DateFormat in TDatePick class.
+     + DATA cTimeFormat METHOD TimeFormat in TTimePick class.
+     * TTimePick():Value for controls with SHOWNONE style will now
+       set the control to NULL if passed value is an empty string,
+       instead of setting it to 00:00:00.
+     * TTimePick():Value for controls with SHOWNONE style will now
+       set the control to NULL if passed value is NIL, instead of
+       setting it to current time.
+     + Function SetDatePickerDateFormat.
+     * Empty() replaced with HB_SYMBOL_UNUSED.
+
+2017-09-02 19:14 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_image.prg
+     ! Image can't be cleared.
+     ! Control disappears when an inexistent image is assigned.
+
+2017-09-01 17:55 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   * source\h_tab.prg
+     ! Save data block of controls inside a Tab was not being evaluated.
+
+2017-08-26 00:43 UTC-0300 Fernando Yurisich <fyurisich@oohg.org>
+   + .\ChangeLog_005.txt
+   * .\ChangeLog.txt
+     * Renamed to ChangeLog_005.txt and started a new one.
+   * manual\Changelog.htm
+     * Updated.
