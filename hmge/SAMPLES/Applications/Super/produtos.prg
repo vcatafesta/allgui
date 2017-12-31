@@ -42,7 +42,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -59,7 +59,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -76,7 +76,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_imprimir
          picture path_imagens+'imprimir.bmp'
          col 311
@@ -93,7 +93,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 413
@@ -110,7 +110,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_fornecedores
          picture path_imagens+'fornecedores.bmp'
          col 515
@@ -127,7 +127,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_compor
          picture path_imagens+'compor.bmp'
          col 617
@@ -144,7 +144,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 719
@@ -161,7 +161,7 @@ FUNCTION produtos()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_produtos
@@ -217,18 +217,18 @@ FUNCTION produtos()
          transparent .T.
       END LABEL
 
-      on key F5 action dados(1)
-      on key F6 action dados(2)
-      on key F7 action excluir()
-      on key F8 action relacao()
-      on key escape action thiswindow.release
+      ON KEY F5 ACTION dados(1)
+      ON KEY F6 ACTION dados(2)
+      ON KEY F7 ACTION excluir()
+      ON KEY F8 ACTION relacao()
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_produtos.maximize
    form_produtos.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION dados(parametro)
 
@@ -292,7 +292,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          produtos->(ordsetfocus('nome_longo'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -737,7 +737,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -750,9 +750,9 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -766,7 +766,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION compor_produto()
 
@@ -776,7 +776,7 @@ STATIC FUNCTION compor_produto()
    IF empty(x_nome_produto)
       msgexclamation('Escolha um produto','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    DEFINE WINDOW form_compor;
@@ -805,7 +805,7 @@ STATIC FUNCTION compor_produto()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 107
@@ -822,7 +822,7 @@ STATIC FUNCTION compor_produto()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 209
@@ -839,7 +839,7 @@ STATIC FUNCTION compor_produto()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE GRID grid_mprima_composicao
          parent form_compor
@@ -857,7 +857,7 @@ STATIC FUNCTION compor_produto()
          fontcolor BLUE
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -866,7 +866,7 @@ STATIC FUNCTION compor_produto()
    form_compor.center
    form_compor.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION incluir_composicao(parametro)
 
@@ -947,7 +947,7 @@ STATIC FUNCTION incluir_composicao(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_inccpo.width-100
@@ -960,16 +960,16 @@ STATIC FUNCTION incluir_composicao(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_inccpo.center
    form_inccpo.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_composicao(parametro)
 
@@ -984,7 +984,7 @@ STATIC FUNCTION gravar_composicao(parametro)
 
    filtra_composicao(parametro)
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION filtra_composicao(parametro)
 
@@ -1002,10 +1002,10 @@ STATIC FUNCTION filtra_composicao(parametro)
          IF produto_composto->id_produto <> parametro
             EXIT
          ENDIF
-      end
+      END
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir()
 
@@ -1020,7 +1020,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       produtos->(ordsetfocus('nome_longo'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Nome : '+alltrim(produtos->nome_longo),'Excluir')
          IF lock_reg()
@@ -1033,7 +1033,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_composicao()
 
@@ -1043,7 +1043,7 @@ STATIC FUNCTION excluir_composicao()
    IF empty(x_id_prod) .or. empty(x_id_mprima)
       msgexclamation('Selecione uma informação','Atenção')
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Confirma ?','Excluir')
          dbselectarea('produto_composto')
@@ -1057,12 +1057,12 @@ STATIC FUNCTION excluir_composicao()
                ENDIF
             ENDIF
             produto_composto->(dbskip())
-         end
+         END
          filtra_composicao(x_id_prod)
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relacao()
 
@@ -1102,14 +1102,14 @@ STATIC FUNCTION relacao()
 
             produtos->(dbskip())
 
-         end
+         END
 
          rodape()
 
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -1126,14 +1126,14 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,140 PRINT 'BAIXA EST.' FONT 'courier new' SIZE 010 BOLD
    @ 035,170 PRINT 'QTD. EST.' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar(parametro)
 
@@ -1150,7 +1150,7 @@ STATIC FUNCTION gravar(parametro)
    IF retorna
       msgalert('Preencha todos os campos','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF parametro == 1
@@ -1161,13 +1161,13 @@ STATIC FUNCTION gravar(parametro)
       IF found()
          msgalert('Este CÓDIGO JÁ EXISTE, tecle ENTER','Atenção')
 
-         return(nil)
+         RETURN NIL
       ELSE
          IF l_demo
             IF reccount() > _limite_registros
                msgstop('Limite de registros esgotado','Atenção')
 
-               return(nil)
+               RETURN NIL
             ENDIF
          ENDIF
          produtos->(dbappend())
@@ -1228,7 +1228,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pesquisar()
 
@@ -1253,13 +1253,13 @@ STATIC FUNCTION pesquisar()
          EXIT
       ENDIF
       produtos->(dbskip())
-   end
+   END
 
    IF lGridFreeze
       form_produtos.grid_produtos.enableupdate
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar()
 
@@ -1272,9 +1272,9 @@ STATIC FUNCTION atualizar()
    WHILE .not. eof()
       add item {iif(produtos->pizza,'Sim','Não'),iif(produtos->promocao,'Sim','Não'),iif(produtos->baixa,'Sim','Não'),alltrim(produtos->codigo),alltrim(produtos->cbarra),alltrim(produtos->nome_longo),str(produtos->qtd_estoq,6)} to grid_produtos of form_produtos
       produtos->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_categoria(cform,ctextbtn)
 
@@ -1308,7 +1308,7 @@ STATIC FUNCTION procura_categoria(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_categoria_produtos(value)
 
@@ -1367,9 +1367,9 @@ STATIC FUNCTION getcode_categoria_produtos(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=categoria_produtos->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1388,12 +1388,12 @@ STATIC FUNCTION find_categoria_produtos()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF categoria_produtos->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := categoria_produtos->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_subcategoria(cform,ctextbtn)
 
@@ -1427,7 +1427,7 @@ STATIC FUNCTION procura_subcategoria(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_subcategoria_produtos(value)
 
@@ -1486,9 +1486,9 @@ STATIC FUNCTION getcode_subcategoria_produtos(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=subcategoria_produtos->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1507,12 +1507,12 @@ STATIC FUNCTION find_subcategoria_produtos()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF subcategoria_produtos->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := subcategoria_produtos->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_imposto(cform,ctextbtn)
 
@@ -1546,7 +1546,7 @@ STATIC FUNCTION procura_imposto(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_impostos(value)
 
@@ -1605,9 +1605,9 @@ STATIC FUNCTION getcode_impostos(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=impostos->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1626,12 +1626,12 @@ STATIC FUNCTION find_impostos()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF impostos->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := impostos->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_mprima(cform,ctextbtn)
 
@@ -1665,7 +1665,7 @@ STATIC FUNCTION procura_mprima(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_materia_prima(value)
 
@@ -1724,9 +1724,9 @@ STATIC FUNCTION getcode_materia_prima(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=materia_prima->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1745,12 +1745,12 @@ STATIC FUNCTION find_materia_prima()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF materia_prima->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := materia_prima->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION fornecedores_produto()
 
@@ -1760,7 +1760,7 @@ STATIC FUNCTION fornecedores_produto()
    IF empty(x_nome_produto)
       msgexclamation('Escolha um produto','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    DEFINE WINDOW form_fornecedor_produto;
@@ -1789,7 +1789,7 @@ STATIC FUNCTION fornecedores_produto()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE GRID grid_fornecedor_produto
          parent form_fornecedor_produto
@@ -1807,7 +1807,7 @@ STATIC FUNCTION fornecedores_produto()
          fontcolor _preto_001
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1816,7 +1816,7 @@ STATIC FUNCTION fornecedores_produto()
    form_fornecedor_produto.center
    form_fornecedor_produto.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION filtra_fornecedor(parametro)
 
@@ -1834,6 +1834,6 @@ STATIC FUNCTION filtra_fornecedor(parametro)
       IF fornecedor <> x_old_fornecedor
          add item {acha_fornecedor_2(x_old_fornecedor)} to grid_fornecedor_produto of form_fornecedor_produto
       ENDIF
-   end
+   END
 
-   return(nil)
+   RETURN NIL

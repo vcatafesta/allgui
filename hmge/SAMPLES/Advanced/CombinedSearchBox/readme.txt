@@ -1,6 +1,5 @@
 @...COMBOSEARCHBOX / DEFINE COMBOSEARCHBOX : Define a Combined Search Box Control.
 
-
       @ <nRow> , <nCol> COMBOSEARCHBOX <ControlName>
 
             [ OF | PARENT <ParentWindowName> ]
@@ -39,7 +38,6 @@
 
             [ ITEMS <aItems> ]
 
-
       DEFINE COMBOSEARCHBOX <Controlname>
 
             <PropertyName>    <PropertyValue>
@@ -47,7 +45,6 @@
             <EventName> <EventProcedure> | <bBlock>
 
       END COMBOSEARCHBOX
-
 
 - Properties:
 

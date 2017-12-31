@@ -109,7 +109,7 @@ METHOD NEW( lType, nStyle, x, y, width, height, cTitle, oFont, bInit, bExit, bSi
    ENDIF
    ::lContainer := Hwg_Bitand( nStyle, DS_CONTROL ) > 0
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate( lNoModal, bOnActivate, nShow ) CLASS HDialog
 

@@ -256,7 +256,7 @@ METHOD New() CLASS HBDebugger
 
    ::lGo := ::lRunAtStartup
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HBDebugger
 
@@ -599,7 +599,7 @@ METHOD VarSetValue( aVar, uValue ) CLASS HBDebugger
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 FUNCTION __Dbg()
 

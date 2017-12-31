@@ -404,14 +404,14 @@ FUNCTION compras()
          bold;
          tooltip 'Sair desta tela sem gravar informações'
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_compras.center
    form_compras.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_fornecedor(cform,ctextbtn)
 
@@ -445,7 +445,7 @@ STATIC FUNCTION procura_fornecedor(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_fornecedor(value)
 
@@ -504,9 +504,9 @@ STATIC FUNCTION getcode_fornecedor(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=fornecedores->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -525,12 +525,12 @@ STATIC FUNCTION find_fornecedor()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF fornecedores->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := fornecedores->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_forma_pagamento(cform,ctextbtn)
 
@@ -564,7 +564,7 @@ STATIC FUNCTION procura_forma_pagamento(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_forma_pagamento(value)
 
@@ -623,9 +623,9 @@ STATIC FUNCTION getcode_forma_pagamento(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=formas_pagamento->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -644,12 +644,12 @@ STATIC FUNCTION find_forma_pagamento()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF formas_pagamento->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := formas_pagamento->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_produto_2()
 
@@ -669,22 +669,22 @@ STATIC FUNCTION procura_produto_2()
          IF msgyesno('Este código não é válido. Deseja procurar na lista ?','Atenção')
             mostra_listagem_produto_2()
 
-            return(nil)
+            RETURN NIL
          ELSE
             form_compras.tbox_produto.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ELSE
          setproperty('form_compras','label_nome_produto','value',produtos->nome_longo)
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ELSE
       mostra_listagem_produto_2()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_listagem_produto_2()
 
@@ -714,7 +714,7 @@ STATIC FUNCTION mostra_listagem_produto_2()
          ondblclick mostra_informacao_produto_2()
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -725,7 +725,7 @@ STATIC FUNCTION mostra_listagem_produto_2()
    form_pesquisa.center
    form_pesquisa.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION separa_produto_2()
 
@@ -740,9 +740,9 @@ STATIC FUNCTION separa_produto_2()
          add item {produtos->codigo,alltrim(produtos->nome_longo),trans(produtos->vlr_venda,'@E 999,999.99')} to grid_pesquisa of form_pesquisa
       ENDIF
       produtos->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_informacao_produto_2()
 
@@ -763,7 +763,7 @@ STATIC FUNCTION mostra_informacao_produto_2()
 
    form_pesquisa.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_mprima_2(cform,ctextbtn)
 
@@ -797,7 +797,7 @@ STATIC FUNCTION procura_mprima_2(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_materia_prima_2(value)
 
@@ -856,9 +856,9 @@ STATIC FUNCTION getcode_materia_prima_2(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=materia_prima->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -877,12 +877,12 @@ STATIC FUNCTION find_materia_prima_2()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF materia_prima->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := materia_prima->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_produto()
 
@@ -905,7 +905,7 @@ STATIC FUNCTION gravar_produto()
 
    form_compras.tbox_produto.setfocus
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualiza_produtos()
 
@@ -917,9 +917,9 @@ STATIC FUNCTION atualiza_produtos()
    WHILE .not. eof()
       add item {tmp_cpa1->id,acha_fornecedor(tmp_cpa1->fornecedor),acha_produto(tmp_cpa1->produto),trans(tmp_cpa1->qtd,'@R 999999'),trans(tmp_cpa1->vlr_unit,'@E 99,999.99'),trans(tmp_cpa1->qtd*tmp_cpa1->vlr_unit,'@E 999,999.99')} to grid_produtos of form_compras
       tmp_cpa1->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_produto()
 
@@ -936,11 +936,11 @@ STATIC FUNCTION excluir_produto()
          ENDIF
       ENDIF
       tmp_cpa1->(dbskip())
-   end
+   END
 
    atualiza_produtos()
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_mprima()
 
@@ -963,7 +963,7 @@ STATIC FUNCTION gravar_mprima()
 
    form_compras.tbox_mprima.setfocus
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualiza_mprima()
 
@@ -975,9 +975,9 @@ STATIC FUNCTION atualiza_mprima()
    WHILE .not. eof()
       add item {tmp_cpa2->id,acha_fornecedor(tmp_cpa2->fornecedor),acha_mprima(tmp_cpa2->mat_prima),trans(tmp_cpa2->qtd,'@R 99,999.999'),trans(tmp_cpa2->vlr_unit,'@E 99,999.99'),trans(tmp_cpa2->qtd*tmp_cpa2->vlr_unit,'@E 999,999.99')} to grid_materia_prima of form_compras
       tmp_cpa2->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_mprima()
 
@@ -994,11 +994,11 @@ STATIC FUNCTION excluir_mprima()
          ENDIF
       ENDIF
       tmp_cpa2->(dbskip())
-   end
+   END
 
    atualiza_mprima()
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION zera_temps()
 
@@ -1010,7 +1010,7 @@ STATIC FUNCTION zera_temps()
    ZAP
    PACK
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_compras()
 
@@ -1040,7 +1040,7 @@ STATIC FUNCTION gravar_compras()
    IF (x_dbf_1+x_dbf_2) == 2
       msginfo('Não existem informações a serem processadas','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    * clonar para as tabelas da rede
@@ -1065,7 +1065,7 @@ STATIC FUNCTION gravar_compras()
          tcompra1->(dbcommit())
          dbselectarea('tmp_cpa1')
          tmp_cpa1->(dbskip())
-      end
+      END
    ENDIF
 
    * matéria prima
@@ -1088,7 +1088,7 @@ STATIC FUNCTION gravar_compras()
          tcompra2->(dbcommit())
          dbselectarea('tmp_cpa2')
          tmp_cpa2->(dbskip())
-      end
+      END
    ENDIF
 
    * aumentar quantidade - produto
@@ -1109,7 +1109,7 @@ STATIC FUNCTION gravar_compras()
          ENDIF
          dbselectarea('tmp_cpa1')
          tmp_cpa1->(dbskip())
-      end
+      END
    ENDIF
 
    * aumentar quantidade - matéria prima
@@ -1130,7 +1130,7 @@ STATIC FUNCTION gravar_compras()
          ENDIF
          dbselectarea('tmp_cpa2')
          tmp_cpa2->(dbskip())
-      end
+      END
    ENDIF
 
    * contas a pagar - produtos
@@ -1165,7 +1165,7 @@ STATIC FUNCTION gravar_compras()
                contas_pagar->(dbcommit())
             NEXT x_i
          ENDIF
-      end
+      END
    ENDIF
 
    * contas a pagar - matéria prima
@@ -1200,11 +1200,11 @@ STATIC FUNCTION gravar_compras()
                contas_pagar->(dbcommit())
             NEXT x_i
          ENDIF
-      end
+      END
    ENDIF
 
    msginfo('Informações gravadas com sucesso, tecle ENTER','Mensagem')
 
    form_compras.release
 
-   return(nil)
+   RETURN NIL

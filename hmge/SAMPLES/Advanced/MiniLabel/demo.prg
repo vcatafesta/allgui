@@ -75,7 +75,7 @@ FUNCTION Print_eti()
 
    LOCAL ncopie, scelta
 
-   sele 1
+   SELE 1
    dbgotop()
    scelta:=popex("*.FLD","Print Template")
    IF !empty(scelta)

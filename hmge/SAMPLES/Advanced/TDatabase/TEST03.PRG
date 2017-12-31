@@ -17,7 +17,7 @@ FUNCTION main
    USE test
    WHILE lastrec() < 100000
       APPEND BLANK
-   end
+   END
    USE
 
    oDB:=tdata():new(,"test")

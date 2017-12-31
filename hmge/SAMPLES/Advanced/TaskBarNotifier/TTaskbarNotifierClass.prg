@@ -229,7 +229,7 @@ METHOD Init( sBitmapFile /*, sCloseBitmapFile*/ ) CLASS TTaskbarNotifier //EXPOR
    // Register object
    AAdd( ::aTaskbarNotifiers, @Self )
 
-   RETURN Self
+   RETURN SELF
 
    /*
    */
@@ -363,7 +363,7 @@ METHOD Show( strTitle, strContent, nTimeToShow, nTimeToStay, nTimeToHide ) CLASS
       EXIT
    END SWITCH
 
-   RETURN Self
+   RETURN SELF
 
    /*
    */

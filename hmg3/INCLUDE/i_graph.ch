@@ -216,7 +216,6 @@
    =>;
    printgraph ( <"windowname"> , <.lpreview.> , <.ldialog.> )
 
-
 #xtranslate GRAPH BITMAP PIE ;
                SIZE        <nWidth>, <nHeight> ;
                SERIEVALUES <aSerieValues> ;
@@ -232,7 +231,6 @@
                STOREIN     <hBitmapVar> ;
    => ;
    <hBitmapVar> := HMG_PieGraph( <nWidth>, <nHeight>, <aSerieValues>, <aSerieNames>, <aSerieColors>, <cTitle>, <aTitleColor>, <nDepth>, <l3DView>, <lShowXValues>, <lShowLegends>, <lNoBorder> )
-
 
 #xtranslate GRAPH BITMAP <nGraphType> ; // constants BARS | LINES | POINTS
                SIZE        <nWidth>, <nHeight> ;

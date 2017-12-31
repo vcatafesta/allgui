@@ -234,7 +234,7 @@ PROCEDURE LL_UseTable(;                        // Low-level USE (open) table
 
    WHILE .T.
 
-      IF HB_ISNIL( cTableNam )
+      IF cTableNam == NIL
 
          cTableNam := GetFile ( { { 'Tables', '*.dbf' }, { 'All Files', '*.*' } },;  // acFilter
             'Select Table',;   // cTitle

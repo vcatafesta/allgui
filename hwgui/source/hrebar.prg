@@ -59,7 +59,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ;
       ctooltip, tcolor, bcolor, lVert )  CLASS hrebar
@@ -73,7 +73,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, bSize, bPaint, ;
 
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS hrebar
 

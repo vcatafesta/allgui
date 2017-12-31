@@ -57,7 +57,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight,cCaptio
       // ::oParent:AddEvent( BN_SETFOCUS,::id,{|o,id|__When(o:FindControl(id))} )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HCheckButton
 

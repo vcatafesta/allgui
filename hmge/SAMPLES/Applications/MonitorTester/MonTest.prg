@@ -253,7 +253,7 @@ PROCEDURE VertLines()
          PENCOLOR BLACK
 
       i += nPixel
-   end
+   END
 
    RETURN
 
@@ -270,7 +270,7 @@ PROCEDURE HorizLines()
          PENCOLOR BLACK
 
       i += nPixel
-   end
+   END
 
    RETURN
 
@@ -287,7 +287,7 @@ PROCEDURE DrawGrid()
          PENCOLOR BLACK
 
       i += nPixel
-   end
+   END
 
    i := 0
    WHILE i < nScrHeight
@@ -297,7 +297,7 @@ PROCEDURE DrawGrid()
          PENCOLOR BLACK
 
       i += nPixel
-   end
+   END
 
    RETURN
 

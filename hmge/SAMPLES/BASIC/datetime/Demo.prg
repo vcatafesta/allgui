@@ -168,7 +168,7 @@ FUNCTION OPEN_TABLE()
       USE TEST NEW EXCLUSIVE
 
       FOR i=1 to 10
-         sele test
+         SELE test
          APPEND BLANK
          test->Datev := date()+i
          test->Timev := TIME()

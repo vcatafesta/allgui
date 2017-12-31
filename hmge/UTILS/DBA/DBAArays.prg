@@ -108,7 +108,7 @@ PROC MakSHArr(aShAr,;               // Make an arry for display
 
          LOCA nRVal := 0
 
-         IF ISNIL( nIndc )
+         IF nIndc == NIL
             AEVAL( aArry, { | x1 | nRVal := MAX( LEN( AnyToStr( x1 ) ), nRVal ) } )
          ELSE
             AEVAL( aArry, { | x1 | nRVal := MAX( ;

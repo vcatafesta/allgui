@@ -111,7 +111,7 @@ CLASS TSocket
 
 METHOD New() CLASS TSocket
 
-   RETURN Self
+   RETURN SELF
 
    // Connect to remore site
 

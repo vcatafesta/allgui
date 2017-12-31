@@ -129,7 +129,7 @@ METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint,
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HGridEx
 
@@ -325,7 +325,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
 
    ::style   := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
 
-   RETURN Self
+   RETURN SELF
 
 METHOD UpdateData() CLASS hGridex
 

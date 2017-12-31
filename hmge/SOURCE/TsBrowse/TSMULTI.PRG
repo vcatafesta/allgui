@@ -88,7 +88,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, hFont,;
       oWnd:AddControl( ::hWnd )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSMulti:Default() Version 7.0 Jul/15/2004

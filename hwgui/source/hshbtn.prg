@@ -49,7 +49,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::hShade := hwg_Shade_new( 0, 0, nWidth, nHeight, lFlat )
    hwg_Shade_set( ::hShade, shadeID, palette, granularity, highlight, coloring, shcolor )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Paint() CLASS HShadeButton
 

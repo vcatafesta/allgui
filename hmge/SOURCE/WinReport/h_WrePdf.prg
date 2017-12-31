@@ -194,7 +194,7 @@ FUNCTION PrPdfEsegui(_MainArea,_psd,db_arc,_prw)
          msgStop("No data to print! ","Attention")
       ENDIF
    OTHERWISE                              // Two Db List
-      sele (oWr:aStat [ 'area1' ])
+      SELE (oWr:aStat [ 'area1' ])
       IF !empty(atf)
          SET filter to &atf
       ENDIF
@@ -202,7 +202,7 @@ FUNCTION PrPdfEsegui(_MainArea,_psd,db_arc,_prw)
       IF lastrec()> 0
          lbody := eval(oWr:Valore,oWr:aBody[1])
          WHILE !eof()
-            sele (DB_ARC)
+            SELE (DB_ARC)
             StrFlt := oWr:aStat [ 'FldRel' ]+" = "+ oWr:aStat [ 'area1' ]+"->"+oWr:aStat [ 'FldRel' ]
             DBEVAL( {|| miocont++},{|| &strFLT} )
             miocnt := int(miocont/NOZERODIV(lbody))
@@ -212,13 +212,13 @@ FUNCTION PrPdfEsegui(_MainArea,_psd,db_arc,_prw)
             tpg += miocnt
             aadd(Amx_pg,miocnt)
             miocont := 0
-            sele (oWr:aStat [ 'area1' ])
+            SELE (oWr:aStat [ 'area1' ])
             dbskip()
          ENDDO
          GO TOP
          IF valtype (atail(amx_pg)) == "N"
             WHILE !eof()
-               sele (DB_ARC)
+               SELE (DB_ARC)
                SET filter to &strFLT
                miocont ++
                mx_pg  := aMx_pg[miocont]
@@ -231,7 +231,7 @@ FUNCTION PrPdfEsegui(_MainArea,_psd,db_arc,_prw)
                oWr:aStat [ 'EndDoc' ]:=.f.
                last_pag := .f.
                SET filter to
-               sele (oWr:aStat [ 'area1' ])
+               SELE (oWr:aStat [ 'area1' ])
                dbskip()
             ENDDO
          ENDIF

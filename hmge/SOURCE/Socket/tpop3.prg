@@ -91,7 +91,7 @@ METHOD New() CLASS TPOP3
    ::oSocket := TSocket():New()
    //::oSocket:SetDebug( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    // Connect to remore site
 

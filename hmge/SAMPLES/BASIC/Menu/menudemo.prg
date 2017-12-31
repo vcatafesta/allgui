@@ -19,10 +19,10 @@ PROCEDURE Main
             Item 'Save'        Action MsgInfo ( 'File:Save'  ) Image 'Free.Bmp'
             Item 'Print'       Action MsgInfo ( 'File:Print' ) Image 'Info.Bmp'
             Item 'Save As...'  Action MsgInfo ( 'File:Save As' ) Disabled
-            Separator
+            SEPARATOR
             Item 'Exit' Action Form_1.Release Image 'Exit.Bmp' Default
 
-         End Popup
+         END POPUP
 
          POPUP 'Test'
             Item 'Item 1' Action MsgInfo ( 'Item 1' )
@@ -44,25 +44,25 @@ PROCEDURE Main
                      Item 'Item 3.3.3.5' Action MsgInfo ( 'Item 3.3.3.5' )
                      Item 'Item 3.3.3.6' Action MsgInfo ( 'Item 3.3.3.6' )
 
-                  End Popup
+                  END POPUP
 
                   Item 'Item 3.3.4' Action MsgInfo ( 'Item 3.3.4' )
 
-               End Popup
+               END POPUP
 
-            End Popup
+            END POPUP
 
             Item 'Item 4' Action MsgInfo ( 'Item 4' ) Disabled
 
-         End Popup
+         END POPUP
 
          POPUP 'Help'
 
             Item 'About' Action MsgInfo ( MiniGuiVersion() )
 
-         End Popup
+         END POPUP
 
-      End Menu
+      END MENU
 
       DEFINE CONTEXT menu
 
@@ -72,36 +72,36 @@ PROCEDURE Main
 
             POPUP 'Context item 1.3'
                Item "Context item 1.3.1" Action MsgInfo( "Context item 1.3.1!" ) Image 'Info.Bmp'
-               Separator
+               SEPARATOR
                Item "Context item 1.3.2" Action MsgInfo( "Context item 1.3.2!" ) Checked
-            End Popup
+            END POPUP
 
-         End Popup
+         END POPUP
 
          Item "Context item 2 - Simple " Action MsgInfo( "Context item 2 - Simple!" ) Checked Default
          Item "Context item 3 - Disabled" Action MsgInfo( "Context item 3 - Disabled" ) Disabled
-         Separator
+         SEPARATOR
          POPUP "Context item 4"
             Item "Context item 4.1" Action MsgInfo( "Context item 4.1!" )
             Item "Context item 4.2" Action MsgInfo( "Context item 4.2!" )
             Item "Context item 4.3" Action MsgInfo( "Context item 4.3!" ) Disabled
-         End Popup
-      End Menu
+         END POPUP
+      END MENU
 
       Define notify menu
          Item 'About...' Action MsgInfo ( MiniGuiVersion() )
 
          POPUP 'Options'
             Item 'Autorun' Action ToggleAutorun() Name SetAuto Checked
-         End Popup
+         END POPUP
 
          POPUP 'Notify Icon' Image 'Info.Bmp'
             Item 'Get Notify Icon Name' Action MsgInfo ( Form_1.NotifyIcon )
             Item 'Change Notify Icon' Action Form_1.NotifyIcon := 'Demo2.ico'
-         End Popup
-         Separator
+         END POPUP
+         SEPARATOR
          Item 'Exit Application' Action Form_1.Release Image 'Exit.Bmp' Default
-      End Menu
+      END MENU
 
    END WINDOW
 

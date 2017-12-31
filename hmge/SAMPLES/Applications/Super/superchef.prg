@@ -91,18 +91,18 @@ FUNCTION main()
    REQUEST DBFCDX
    RDDSETDEFAULT('DBFCDX')
 
-   SET autoadjust on
+   SET AUTOADJUST ON
    SET DELETED ON
-   SET interactiveclose off
+   SET INTERACTIVECLOSE OFF
    SET DATE BRITISH
    SET CENTURY ON
    SET EPOCH TO 1960
-   SET browsesync on
+   SET BROWSESYNC ON
    SET MULTIPLE OFF warning
-   SET tooltipballoon on
-   SET navigation extended
-   SET codepage to portuguese
-   SET language to portuguese
+   SET TOOLTIPBALLOON ON
+   SET NAVIGATION EXTENDED
+   SET CODEPAGE TO portuguese
+   SET LANGUAGE TO portuguese
 
    SET MENUSTYLE EXTENDED
    SET MENUCURSOR FULL
@@ -160,7 +160,7 @@ FUNCTION main()
          width getdesktopwidth()
          picture path_imagens+'wallpaper.bmp'
          stretch .T.
-      end image
+      END IMAGE
 
       //se for cópia demo
       IF l_demo
@@ -183,70 +183,70 @@ FUNCTION main()
       * menu
       DEFINE MAIN MENU of form_main
          DEFINE POPUP 'Tabelas'
-            menuitem 'Fornecedores' action iif(libera(_a_006),fornecedores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_fornecedores.bmp'
-            menuitem 'Grupo de Fornecedores' action iif(libera(_a_007),grupo_fornecedores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_grupo_fornecedores.bmp'
-            separator
-            menuitem 'Matéria Prima' action iif(libera(_a_008),materia_prima(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_materia_prima.bmp'
-            separator
-            menuitem 'Categorias de Produtos' action iif(libera(_a_009),categoria_produtos(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_categorias.bmp'
-            menuitem 'Sub-Categorias de Produtos' action iif(libera(_a_010),subcategoria_produtos(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_subcategorias.bmp'
-            separator
-            menuitem 'Formas de Recebimento' action iif(libera(_a_011),formas_recebimento(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_formas_recebimento.bmp'
-            menuitem 'Formas de Pagamento' action iif(libera(_a_012),formas_pagamento(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_formas_pagamento.bmp'
-            separator
-            menuitem 'Unidades de Medida' action iif(libera(_a_013),unidades_medida(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_medidas.bmp'
-            menuitem 'Contas Bancárias' action iif(libera(_a_014),contas_bancarias(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_contas_bancarias.bmp'
-            menuitem 'Impostos e Alíquotas' action iif(libera(_a_015),impostos_aliquotas(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_impostos.bmp'
-            separator
-            menuitem 'Mesas da Pizzaria' action iif(libera(_a_016),mesas(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mesas.bmp'
-            menuitem 'Atendentes ou Garçons' action iif(libera(_a_017),atendentes(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_atendentes.bmp'
-            menuitem 'Motoboys ou Entregadores' action iif(libera(_a_018),motoboys_entregadores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_motoboys.bmp'
-            menuitem 'Operadores do Programa' action iif(libera(_a_019),operadores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_operadores.bmp'
-         end popup
+            MENUITEM 'Fornecedores' action iif(libera(_a_006),fornecedores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_fornecedores.bmp'
+            MENUITEM 'Grupo de Fornecedores' action iif(libera(_a_007),grupo_fornecedores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_grupo_fornecedores.bmp'
+            SEPARATOR
+            MENUITEM 'Matéria Prima' action iif(libera(_a_008),materia_prima(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_materia_prima.bmp'
+            SEPARATOR
+            MENUITEM 'Categorias de Produtos' action iif(libera(_a_009),categoria_produtos(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_categorias.bmp'
+            MENUITEM 'Sub-Categorias de Produtos' action iif(libera(_a_010),subcategoria_produtos(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_subcategorias.bmp'
+            SEPARATOR
+            MENUITEM 'Formas de Recebimento' action iif(libera(_a_011),formas_recebimento(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_formas_recebimento.bmp'
+            MENUITEM 'Formas de Pagamento' action iif(libera(_a_012),formas_pagamento(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_formas_pagamento.bmp'
+            SEPARATOR
+            MENUITEM 'Unidades de Medida' action iif(libera(_a_013),unidades_medida(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_medidas.bmp'
+            MENUITEM 'Contas Bancárias' action iif(libera(_a_014),contas_bancarias(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_contas_bancarias.bmp'
+            MENUITEM 'Impostos e Alíquotas' action iif(libera(_a_015),impostos_aliquotas(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_impostos.bmp'
+            SEPARATOR
+            MENUITEM 'Mesas da Pizzaria' action iif(libera(_a_016),mesas(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mesas.bmp'
+            MENUITEM 'Atendentes ou Garçons' action iif(libera(_a_017),atendentes(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_atendentes.bmp'
+            MENUITEM 'Motoboys ou Entregadores' action iif(libera(_a_018),motoboys_entregadores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_motoboys.bmp'
+            MENUITEM 'Operadores do Programa' action iif(libera(_a_019),operadores(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_operadores.bmp'
+         END POPUP
          DEFINE POPUP 'Relatórios'
-            menuitem 'Fechamento do dia de trabalho' action iif(libera(_a_020),fechamento_dia(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Movimentação do Caixa' action iif(libera(_a_021),movimentacao_caixa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Movimentação Bancária' action iif(libera(_a_022),movimentacao_bancaria(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Contas a Pagar por período' action iif(libera(_a_023),relatorio_cpag_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Contas a Pagar por fornecedor' action iif(libera(_a_024),relatorio_cpag_002(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Contas a Receber por período' action iif(libera(_a_025),relatorio_crec_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Contas a Receber por cliente' action iif(libera(_a_026),relatorio_crec_002(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Pizzas mais vendidas' action iif(libera(_a_027),relatorio_pizza_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Produtos mais vendidos' action iif(libera(_a_028),relatorio_produto_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Relação estoque mínimo' action iif(libera(_a_029),relatorio_estoque_minimo(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Posição do estoque (produtos)' action iif(libera(_a_030),posicao_estoque(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Posição do estoque (matéria prima)' action iif(libera(_a_031),posicao_mprima(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            separator
-            menuitem 'Comissão Motoboys/Entregadores' action iif(libera(_a_032),relatorio_motoboy(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-            menuitem 'Comissão Atendentes/Garçons' action iif(libera(_a_033),relatorio_garcon(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
-         end popup
+            MENUITEM 'Fechamento do dia de trabalho' action iif(libera(_a_020),fechamento_dia(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Movimentação do Caixa' action iif(libera(_a_021),movimentacao_caixa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Movimentação Bancária' action iif(libera(_a_022),movimentacao_bancaria(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Contas a Pagar por período' action iif(libera(_a_023),relatorio_cpag_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Contas a Pagar por fornecedor' action iif(libera(_a_024),relatorio_cpag_002(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Contas a Receber por período' action iif(libera(_a_025),relatorio_crec_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Contas a Receber por cliente' action iif(libera(_a_026),relatorio_crec_002(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Pizzas mais vendidas' action iif(libera(_a_027),relatorio_pizza_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Produtos mais vendidos' action iif(libera(_a_028),relatorio_produto_001(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Relação estoque mínimo' action iif(libera(_a_029),relatorio_estoque_minimo(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Posição do estoque (produtos)' action iif(libera(_a_030),posicao_estoque(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Posição do estoque (matéria prima)' action iif(libera(_a_031),posicao_mprima(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            SEPARATOR
+            MENUITEM 'Comissão Motoboys/Entregadores' action iif(libera(_a_032),relatorio_motoboy(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+            MENUITEM 'Comissão Atendentes/Garçons' action iif(libera(_a_033),relatorio_garcon(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_relatorios.bmp'
+         END POPUP
          DEFINE POPUP 'Financeiro'
-            menuitem 'Movimentação do Caixa' action iif(libera(_a_034),caixa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mov_caixa.bmp'
-            menuitem 'Movimentação Bancária' action iif(libera(_a_035),movimento_bancario(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mov_bancaria.bmp'
-            separator
-            menuitem 'Compras / Entrada Estoque' action iif(libera(_a_036),compras(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_compras.bmp'
-            separator
-            menuitem 'Contas a Pagar' action iif(libera(_a_037),cpag(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_pagar_receber.bmp'
-            menuitem 'Contas a Receber' action iif(libera(_a_038),crec(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_pagar_receber.bmp'
-         end popup
+            MENUITEM 'Movimentação do Caixa' action iif(libera(_a_034),caixa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mov_caixa.bmp'
+            MENUITEM 'Movimentação Bancária' action iif(libera(_a_035),movimento_bancario(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_mov_bancaria.bmp'
+            SEPARATOR
+            MENUITEM 'Compras / Entrada Estoque' action iif(libera(_a_036),compras(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_compras.bmp'
+            SEPARATOR
+            MENUITEM 'Contas a Pagar' action iif(libera(_a_037),cpag(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_pagar_receber.bmp'
+            MENUITEM 'Contas a Receber' action iif(libera(_a_038),crec(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_pagar_receber.bmp'
+         END POPUP
          DEFINE POPUP 'Ferramentas'
-            menuitem 'Cadastro da Pizzaria' action iif(libera(_a_040),empresa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_cadastro.bmp'
-            separator
-            menuitem 'Tamanhos de Pizza' action iif(libera(_a_039),tamanhos_pizza(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_tamanhos.bmp'
-            menuitem 'Bordas de Pizza' action bordas_pizza() image path_imagens+'img_borda.bmp'
-            menuitem 'Configurar Venda de Pizza' action configurar_venda() image path_imagens+'img_prevda.bmp'
-            separator
-            menuitem 'Incluir ou Excluir Promoção' action iif(libera(_a_041),promocao(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_promocoes.bmp'
-            menuitem 'Reajustar Preços de Produtos' action iif(libera(_a_042),reajuste(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_reajustar.bmp'
-            separator
-            menuitem 'Backup do Banco de Dados' action iif(libera(_a_043),backup(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_backup.bmp'
-         end popup
-      end menu
+            MENUITEM 'Cadastro da Pizzaria' action iif(libera(_a_040),empresa(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_cadastro.bmp'
+            SEPARATOR
+            MENUITEM 'Tamanhos de Pizza' action iif(libera(_a_039),tamanhos_pizza(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_tamanhos.bmp'
+            MENUITEM 'Bordas de Pizza' action bordas_pizza() image path_imagens+'img_borda.bmp'
+            MENUITEM 'Configurar Venda de Pizza' action configurar_venda() image path_imagens+'img_prevda.bmp'
+            SEPARATOR
+            MENUITEM 'Incluir ou Excluir Promoção' action iif(libera(_a_041),promocao(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_promocoes.bmp'
+            MENUITEM 'Reajustar Preços de Produtos' action iif(libera(_a_042),reajuste(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_reajustar.bmp'
+            SEPARATOR
+            MENUITEM 'Backup do Banco de Dados' action iif(libera(_a_043),backup(),msgexclamation('Este usuário não possui acesso','Mensagem')) image path_imagens+'img_backup.bmp'
+         END POPUP
+      END MENU
 
       * botões (toolbar)
       DEFINE BUTTONEX venda_delivery
@@ -267,7 +267,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX venda_mesas
          parent form_main
          picture path_imagens+'mesas.bmp'
@@ -286,7 +286,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX venda_balcao
          parent form_main
          picture path_imagens+'balcao.bmp'
@@ -305,7 +305,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX clientes
          parent form_main
          picture path_imagens+'clientes.bmp'
@@ -324,7 +324,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX produtos
          parent form_main
          picture path_imagens+'produtos.bmp'
@@ -343,7 +343,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX sair_programa
          parent form_main
          picture path_imagens+'sair_programa.bmp'
@@ -362,7 +362,7 @@ FUNCTION main()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       * frame
       DEFINE FRAME frame_main
@@ -583,7 +583,7 @@ FUNCTION main()
          width 054
          picture path_imagens+'bandeira_brasil.jpg'
          stretch .T.
-      end image
+      END IMAGE
 
       * suporte
       DEFINE IMAGE suporte
@@ -593,7 +593,7 @@ FUNCTION main()
          width 048
          picture path_imagens+'suporte.bmp'
          stretch .T.
-      end image
+      END IMAGE
       DEFINE LABEL suporte_001
          parent form_main
          col getdesktopwidth()-310
@@ -631,20 +631,20 @@ FUNCTION main()
          transparent .T.
       END LABEL
 
-      on key F5 action venda_delivery()
-      on key F6 action venda_mesas()
-      on key F7 action venda_balcao()
-      on key F8 action clientes()
+      ON KEY F5 ACTION venda_delivery()
+      ON KEY F6 ACTION venda_mesas()
+      ON KEY F7 ACTION venda_balcao()
+      ON KEY F8 ACTION clientes()
       on key F9 action produtos()
       on key F10 action mostra_entregas()
-      on key escape action form_main.release
+      ON KEY ESCAPE ACTION form_main.release
 
    END WINDOW
 
    form_main.maximize
    form_main.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cria_dbf_cdx()
 
@@ -1748,7 +1748,7 @@ STATIC FUNCTION cria_dbf_cdx()
    _tamanho_006 := tamanhos->nome
    _pedaco_006  := tamanhos->pedacos
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION open_dbf_cdx()
 
@@ -1873,7 +1873,7 @@ STATIC FUNCTION open_dbf_cdx()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION tamanhos_pizza()
 
@@ -1935,14 +1935,14 @@ STATIC FUNCTION tamanhos_pizza()
          fontcolor BLUE;
          on dblclick altera_tamanho()
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_tamanhos.center
    form_tamanhos.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION altera_tamanho()
 
@@ -1998,14 +1998,14 @@ STATIC FUNCTION altera_tamanho()
          numeric;
          on lostfocus grava_tamanho()
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_altera_tamanho.center
    form_altera_tamanho.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION grava_tamanho()
 
@@ -2022,7 +2022,7 @@ STATIC FUNCTION grava_tamanho()
    form_altera_tamanho.release
    form_tamanhos.browse_tamanhos.refresh
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION define_nomes()
 
@@ -2046,7 +2046,7 @@ STATIC FUNCTION define_nomes()
    _tamanho_006 := tamanhos->nome
    _pedaco_006  := tamanhos->pedacos
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION login()
 
@@ -2191,7 +2191,7 @@ STATIC FUNCTION login()
    form_login.center
    form_login.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION confirma_entrada()
 
@@ -2201,7 +2201,7 @@ STATIC FUNCTION confirma_entrada()
       msgalert('Senha não pode ser em branco','Atenção')
       form_login.tbox_senha.setfocus
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    dbselectarea('operadores')
@@ -2312,10 +2312,10 @@ STATIC FUNCTION confirma_entrada()
       msgexclamation('Senha não confere','Atenção')
       form_login.tbox_senha.setfocus
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION libera(parametro)
 
@@ -2401,7 +2401,7 @@ STATIC FUNCTION configurar_venda()
       fontname 'courier new'
       fontsize 12
       fontcolor BLACK
-   end comboboxex
+   END comboboxex
 
    @ 005,290 button btn_sair;
       parent form_configurar;
@@ -2416,14 +2416,14 @@ STATIC FUNCTION configurar_venda()
       width 100;
       height 030
 
-   on key escape action thiswindow.release
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_configurar.center
 form_configurar.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION gravar_config()
 
@@ -2438,7 +2438,7 @@ STATIC FUNCTION gravar_config()
 
    form_configurar.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION bordas_pizza()
 
@@ -2500,14 +2500,14 @@ STATIC FUNCTION bordas_pizza()
          fontcolor BLUE;
          on dblclick altera_borda()
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_bordas.center
    form_bordas.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION altera_borda()
 
@@ -2563,14 +2563,14 @@ STATIC FUNCTION altera_borda()
          numeric INPUTMASK "99,999.99";
          on lostfocus grava_borda()
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_altera_borda.center
    form_altera_borda.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION grava_borda()
 
@@ -2587,4 +2587,4 @@ STATIC FUNCTION grava_borda()
    form_altera_borda.release
    form_bordas.browse_bordas.refresh
 
-   return(nil)
+   RETURN NIL

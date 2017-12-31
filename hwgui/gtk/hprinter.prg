@@ -101,7 +101,7 @@ METHOD New( cPrinter, lmm ) CLASS HPrinter
       // hwg_WriteLog( "Printer:" + str(aPrnCoors[1])+str(aPrnCoors[2])+str(aPrnCoors[3])+str(aPrnCoors[4])+str(aPrnCoors[5])+str(aPrnCoors[6]) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetMode( nOrientation ) CLASS HPrinter
 
@@ -362,7 +362,7 @@ METHOD Add( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline ) CLASS HGP_Fo
 
    AAdd( ::aFonts, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Equal( fontName, nHeight , fnWeight, fdwItalic, fdwUnderline )
 
@@ -433,7 +433,7 @@ METHOD Add( nWidth, style, color ) CLASS HGP_Pen
    ::color  := color
    AAdd( ::aPens, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Release() CLASS HGP_Pen
 

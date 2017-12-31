@@ -26,7 +26,6 @@ Well, anyway I use this tool extensively considering the fact that I have not ye
 
 After I composed the UI (user interface) in HMG-IDE, I fire-up this tool and converts it into PRG source file.
 
-
 LIMITATION:
 
 As of the moment, this coverter works with HMG stable release. It also works with the latest release of HMG as long as the additional syntax is not used in the form definition in HMG-IDE.
@@ -57,7 +56,6 @@ SLIDER
 SPINNER
 TEXTBOX
 
-
 KNOWN BUGS:
 
 1. When defining TEXTBOX control in HMG-IDE, make sure that MAXLENGTH is defined, otherwise
@@ -81,7 +79,6 @@ Your comments and suggestions are most welcome.
 
 The syntax for @ commands is derived from the HMG manual.
 
-
 PACKAGE CONTENTS:
 
 FMG2PRG
@@ -96,7 +93,6 @@ FMG2PRG
    :----- TEST ----> contains frmMasterEntry.Fmg for testing or test it with your own .fmg
                      but make sure that you read the section "KNOWN BUGS".
                      SAMPLE and TEST folders are included for demonstration purposes only.
-
 
 ***********************************
 * IMPORTANT: POST CONVERSION TASK *
@@ -124,16 +120,10 @@ FMG2PRG
 5. Test the converted prg source file using HMG-IDE as a new project and build it.
    Please delete the line that says #define "dale-aid.ch"
 
-
 Thanks,
 
-
 Danny
-
 
 P.S.
 
 I was a bit ashamed to post the program on it's current state but somehow I believed it can be of help.
-
-
-

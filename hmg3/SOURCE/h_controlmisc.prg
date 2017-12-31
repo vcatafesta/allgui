@@ -5104,7 +5104,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          Value 1
          Options { _HMG_SYSDATA [ 371 ] [16] , _HMG_SYSDATA [ 371 ] [17] }
          OnChange if ( This.value == 1 , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .F.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .F. ) , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .T.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.SetFocus ) )
-      End RadioGroup
+      END RadioGroup
 
       DEFINE LABEL Label_1
          Row 84
@@ -5125,7 +5125,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          Value 1
          RangeMin 1
          RangeMax _HMG_SYSDATA [ 380 ]
-      End Spinner
+      END Spinner
 
       DEFINE LABEL Label_2
          Row 84
@@ -5146,7 +5146,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          Value _HMG_SYSDATA [ 380 ]
          RangeMin 1
          RangeMax _HMG_SYSDATA [ 380 ]
-      End Spinner
+      END Spinner
 
       DEFINE LABEL Label_4
          Row 115
@@ -5210,7 +5210,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          RangeMin 1
          RangeMax 999
          OnChange ( if ( IsControlDefined (CheckBox_1,_HMG_PRINTER_PRINTPAGES) , If ( This.Value > 1 , SetProperty( '_HMG_PRINTER_PRINTPAGES' , 'CheckBox_1','Enabled',.T.) , SetProperty( '_HMG_PRINTER_PRINTPAGES','CheckBox_1','Enabled', .F. ) ) , Nil ) )
-      End Spinner
+      END Spinner
 
       DEFINE CHECKBOX CheckBox_1
          Row 132
@@ -5261,7 +5261,7 @@ FUNCTION _HMG_PRINTER_SHOWPREVIEW()
          Value _HMG_SYSDATA [ 361 ]
          RangeMin 1
          RangeMax _HMG_SYSDATA [ 380 ]
-      End Spinner
+      END Spinner
 
       DEFINE BUTTON Ok
          Row 48

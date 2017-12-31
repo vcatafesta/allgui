@@ -17,7 +17,7 @@ proc main
          {"COL"    , "N" , 9 , 3} ,;
          {"WIDTH"  , "N" , 9 , 3} ,;
          {"HEIGHT" , "N" , 9 , 3} } )
-   end
+   END
 
    x_arq := 'arq.dbf'
 
@@ -25,7 +25,7 @@ proc main
       DBCREATE( x_arq , { ;
          {"NOME"   , "C" , 254 , 0} ,;
          {"IMAGEM" , "M" ,  10 , 0} } )
-   end
+   END
 
    USE &x_arq alias IMAGE new exclusive
    INDEX ON field->nome tag image to image
@@ -69,7 +69,7 @@ proc main
          Item "Exportar" Action f_exportar()
          Item "Apagar"   Action f_apagar()
          Item "Sair"     Action thiswindow.release
-      End Menu
+      END MENU
 
       Define timer timer_1 ;
          interval 250 ;
@@ -92,7 +92,7 @@ proc main
       LOCAL m_width
       LOCAL m_height
 
-      sele 0
+      SELE 0
       USE config
       IF lastrec() # 0
          m_row := FIELD->ROW
@@ -104,9 +104,9 @@ proc main
          m_col := 200
          m_width := 300
          m_height:= 400
-      end
+      END
       USE
-      sele &bkp_alias
+      SELE &bkp_alias
 
       DEFINE WINDOW Form_2 ;
             At m_row, m_col Width m_width Height m_height ;
@@ -141,7 +141,7 @@ proc main
 
             IF empty( lastrec() )
                retu nil
-            end
+            END
 
             repl NOME   with ''
             repl IMAGEM with ''
@@ -162,7 +162,7 @@ proc main
                form_2.title := ''
             ELSE
                browse_1_change()
-            end
+            END
 
             retu nil
 
@@ -179,20 +179,20 @@ proc main
 
                IF empty( lastrec() )
                   retu nil
-               end
+               END
 
                cFile := Putfile( a_arqs ,;
                   'Salvar Arquivo como...' , GetCurrentFolder() , .f. , m_novo )
 
                IF empty( cFile )
                   retu nil
-               end
+               END
 
                IF file( cFile )
                   MsgStop( "Arquivo já existe", "Erro", , .f. )
                ELSE
                   MemoWrit( cFile , UnMaskBinData( FIELD->IMAGEM ) )
-               end
+               END
 
                retu nil
 
@@ -218,12 +218,12 @@ proc main
                      IF .not. file('config.dbf')
 
                         RETURN
-                     end
+                     END
 
                      USE config
                      IF lastrec() = 0
                         APPEND BLANK
-                     end
+                     END
                      repl ROW    with form_2.row
                      repl COL    with form_2.col
                      repl WIDTH  with form_2.width
@@ -285,7 +285,7 @@ FUNCTION f_importar
          repl NOME   with substr( File_cas , m_rat + 1 )
       ELSE
          repl NOME   with File_cas
-      end
+      END
 
       repl IMAGEM with MaskBinData( MemoRead( File_cas ) )
 

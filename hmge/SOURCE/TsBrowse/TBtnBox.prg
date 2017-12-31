@@ -114,7 +114,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, ;
       oWnd:AddControl( ::hWnd )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TBtnBox:Default() Version 7.0

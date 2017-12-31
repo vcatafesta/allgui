@@ -168,36 +168,36 @@ PROCEDURE Main
       DEFINE MAIN MENU
 
          DEFINE POPUP 'File'
-            MenuItem 'Change folder' Action ChangeFolder()
-            Separator
-            MenuItem 'Exit Alt+X'    Action AppDone()
-         End Popup
+            MENUITEM 'Change folder' Action ChangeFolder()
+            SEPARATOR
+            MENUITEM 'Exit Alt+X'    Action AppDone()
+         END POPUP
 
          DEFINE POPUP 'View'
-            MenuItem 'Less save to disk' Action SetMarker() ;
+            MENUITEM 'Less save to disk' Action SetMarker() ;
                Name pdLess        ;
                Checked
-         End Popup
+         END POPUP
 
          DEFINE POPUP 'Record'
-            MenuItem 'Add files to base' Action AddToBase()
-            MenuItem 'Delete record'     Name pdDelete      ;
+            MENUITEM 'Add files to base' Action AddToBase()
+            MENUITEM 'Delete record'     Name pdDelete      ;
                Action DelRecord() ;
                Disabled
-         End Popup
+         END POPUP
 
          DEFINE POPUP 'Tests'
-            MenuItem 'Print'    Action DemoPrint()
-            Separator
-            MenuItem 'Web-form' Action DemoSubmit()
-         End Popup
+            MENUITEM 'Print'    Action DemoPrint()
+            SEPARATOR
+            MENUITEM 'Web-form' Action DemoSubmit()
+         END POPUP
 
          DEFINE POPUP 'Info'
-            MenuItem 'Get HTML title' Action GetHTMLTitle()
-            MenuItem 'Get sizes'      Action GetHTMLSize()
-         End Popup
+            MENUITEM 'Get HTML title' Action GetHTMLTitle()
+            MENUITEM 'Get sizes'      Action GetHTMLSize()
+         END POPUP
 
-      End Menu
+      END MENU
 
       @ LOGO_TOP, LOGO_LEFT QHTM HtmlLogo of wMain ;
          Resource 'TOPBAR'                          ;
@@ -247,8 +247,8 @@ PROCEDURE Main
          Border
 
       DEFINE CONTEXT menu control HtmlData
-         MenuItem 'View HTML source' action ViewSource()
-      End Menu
+         MENUITEM 'View HTML source' action ViewSource()
+      END MENU
 
       DEFINE STATUSBAR
          StatusItem aParams[ 'StartDir' ] Action ChangeFolder() Tooltip 'Current folder'
@@ -1141,7 +1141,7 @@ STATIC PROCEDURE PrintHTML( cHTMLFile )
 
 ENDIF
 
-End Doc
+END Doc
 
 QHTM_PrintDestroyContext( hContext )
 RELEASE PrintSys

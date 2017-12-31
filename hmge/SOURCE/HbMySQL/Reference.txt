@@ -340,4 +340,3 @@ CLASS TMySQLServer: Every available MySQL server
    METHOD   sql_Version()
 
    Server version as numeric
-

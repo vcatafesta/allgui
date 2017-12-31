@@ -104,7 +104,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
       ::oParent:AddEvent( EN_KILLFOCUS, Self, { | o | ::Valid( o ) }, , "onLostFocus" )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HRichEdit
 

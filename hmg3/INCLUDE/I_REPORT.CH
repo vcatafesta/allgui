@@ -97,7 +97,6 @@ easyreport  ( <ctitle> ,          ;
                 <aformats>            ,  ;
                 <npapersize>,<.lnoprop.> )
 
-
 #xcommand DO REPORT FORM <cfilerep> [ HEADING <cheading> ] => extreport(<"cfilerep">,<cheading> )
 
 #ifndef DMPAPER_FIRST

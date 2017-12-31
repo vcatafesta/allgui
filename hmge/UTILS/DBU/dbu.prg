@@ -134,46 +134,46 @@ FUNCTION MAIN()
          POPUP "&File"
             item " Create &New DBF" + Space(16) + 'Ctrl+N' ;
                action DBUcreanew()                 image 'MENUNEW'
-            separator
+            SEPARATOR
             item " &Open DBF file"  + Space(16) + 'Ctrl+O' ;
                action DBUopendbf()                 image 'MENUOPEN'
             item " &Close DBF"  ;
                action DBUclosedbf() name _DBUitem1 image 'MENUCLOSE'
-            separator
+            SEPARATOR
             item " Modiy Structure" + Space(16) + 'Ctrl+T' ;
                action DBUmodistruct() name _DBUitem7 image 'MENUSTRU'
-            separator
+            SEPARATOR
             item " E&xit" + Space(16) + 'Ctrl+X'           ;
                action _DBU.release()               image 'MENUEXIT'
             IF len(alltrim(_DBUlastfname)) > 0
-               separator
+               SEPARATOR
                item _DBUlastfname ;
                   action DBUopenlastdbf()
             ENDIF
-         end popup
+         END POPUP
 
          POPUP "&View"
             item " Browse Mode" + Space(16)+'Ctrl+B' ;
                action DBUbrowse1()  name _DBUitem9   image 'MENUBROW'
-            separator
+            SEPARATOR
             item " Edit Mode" + Space(16)+'Ctrl+E' ;
                action DBUedit1()      name _DBUitem8 image 'MENUEDIT'
-         end popup
+         END POPUP
 
          POPUP "&Index"
             item " Open index" ;
                action DBUopenindex() name _DBUitem3
             item " Change Active" ;
                action DBUchangeactiveindex() name _DBUitem4
-            separator
+            SEPARATOR
             item " Create new index" ;
                action DBUcreaindex() name _DBUitem2  image 'MENUINDEX'
             item " Reindex" ;
                action DBUreindex() name _DBUitem5    image 'MENUREIND'
-            separator
+            SEPARATOR
             item " Close index" ;
                action DBUcloseindex() name _DBUitem6 image 'MENUCLOIN'
-         end popup
+         END POPUP
 
          POPUP "&Edit"
             item " &Replace" + Space(16) + 'Ctrl+R' ;
@@ -182,34 +182,34 @@ FUNCTION MAIN()
                action DBUrecallrec() name _DBUitem10 image 'MENURECA'
             item " Pack"  + Space(16)+'Ctrl+K' ;
                action DBUpackdbf() name _DBUitem11   image 'MENUPACK'
-            separator
+            SEPARATOR
             item " Zap" + Space(16) + 'Ctrl+Z' ;
                action DBUzapdbf() name _DBUitem12    image 'MENUZAP'
-         end popup
+         END POPUP
 
          POPUP "&Utilities"
 
             item " Export OEM dbf to &Ansi" + Space(16) + 'Ctrl+A' ;
                action DBU_OEM2ANSI(.T.) name _DBUitem14 image 'MenuAnsi'
-            separator
+            SEPARATOR
             item " Export Ansi dbf to OE&M" + Space(16) + 'Ctrl+M' ;
                action DBU_OEM2ANSI(.F.) name _DBUitem15 image 'MenuOem'
 
-         end popup
+         END POPUP
 
          POPUP "&Help"
             item ' &Help ' + Space(16) + 'F1' ;
                action HELP() image 'MENUHELP'
-            separator
+            SEPARATOR
             item " About" ;
                action DBUaboutclick() image 'MENUQUEST'
             item ' Version' ;
                action MsgInfo ("Dbu version: " + DBU_VERSION      + CR_LF + ;
                "GUI Library : " + MiniGuiVersion() + CR_LF + ;
                "Compiler     : " + Version(), 'Versions') image 'MENUVER'
-         end popup
+         END POPUP
 
-      end menu
+      END MENU
 
       * (JK) & added to make use with ALT-key shortcut
 
@@ -237,11 +237,11 @@ FUNCTION MAIN()
             button _DBUclosefile caption "Close" picture "close" action DBUclosedbf()
             button _DBUmodify    caption "Modify" picture "modify" action DBUmodistruct()
             button _DBUprintstruct caption "Print" picture "print" action DBUprintstruct()
-         end toolbar
+         END toolbar
          DEFINE TOOLBAR _DBUMainTool2 buttonsize 48,35 flat // righttext
             button _DBUEditMode caption "Edit" picture "editmode" action DBUedit1()
             button _DBUbrowsemode caption "Browse" picture "browse" action DBUbrowse1()
-         end toolbar
+         END toolbar
          DEFINE TOOLBAR _DBUMainTool3 buttonsize 48,35 flat // righttext
             button _DBUindexfile caption "Index" picture "index" action DBUcreaindex() dropdown
             button _DBUfilterfile caption "Filter" picture "filter" action DBUfilterclick() check
@@ -250,11 +250,11 @@ FUNCTION MAIN()
             button _DBUpack caption "Pack" picture "pack" action DBUpackdbf()
             button _DBUzap caption "Zap" picture "zap" action DBUzapdbf()
             button _DBUrecallall caption "Rec(all)" picture "recall" action DBUrecallrec()
-         end toolbar
+         END toolbar
          DEFINE TOOLBAR _DBUMainTool4 buttonsize 48,35 flat // righttext
             button _DBUabout caption "About" picture "about" action DBUaboutclick()
             button _DBUexit  caption "Exit"  picture "exit" action _DBU.release
-         end toolbar
+         END toolbar
       END SPLITBOX
       define dropdown menu button _DBUindexfile
          item "Create" action DBUcreaindex() name _DBUitem2a
@@ -262,7 +262,7 @@ FUNCTION MAIN()
          item "Change Active" action DBUchangeactiveindex() name _DBUitem4a
          item "Reindex" action DBUreindex() name _DBUitem5a
          item "Close" action DBUcloseindex() name _DBUitem6a
-      end menu
+      END MENU
 
       DEFINE LABEL _DBUmaillabel
          row _DBUscrheight - 115
@@ -281,16 +281,16 @@ FUNCTION MAIN()
          handcursor .t.
          fontname "Arial"
          fontsize 9
-      end hyperlink
+      END hyperlink
 
       DEFINE CONTEXT menu of _DBU
-         menuitem "Create" action DBUcreanew()
-         menuitem "Open" action DBUopendbf()
-         menuitem "Close" action DBUclosedbf() name _DBUcontextclose
-         separator
-         menuitem "Edit" action DBUedit1() name _DBUcontextedit
-         menuitem "Browse" action DBUbrowse1() name _DBUcontextbrowse
-      end menu
+         MENUITEM "Create" action DBUcreanew()
+         MENUITEM "Open" action DBUopendbf()
+         MENUITEM "Close" action DBUclosedbf() name _DBUcontextclose
+         SEPARATOR
+         MENUITEM "Edit" action DBUedit1() name _DBUcontextedit
+         MENUITEM "Browse" action DBUbrowse1() name _DBUcontextbrowse
+      END MENU
 
    END WINDOW
 
@@ -306,7 +306,7 @@ FUNCTION MAIN()
          picture "splash"
          width 400
          height 400
-      end image
+      END IMAGE
 
    END WINDOW
 
@@ -746,7 +746,7 @@ FUNCTION DBUsetfilter
          height 100
          backcolor _DBUreddish
          value _DBUcondition
-      end editbox
+      END editbox
       DEFINE GRID _DBUfieldnames
          row 160
          col 30

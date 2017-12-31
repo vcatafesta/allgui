@@ -18,7 +18,7 @@ PROCEDURE Main()
 
    SET MULTIPLE OFF
 
-   SET InteractiveClose Off
+   SET INTERACTIVECLOSE OFF
 
    DEFINE WINDOW Form_0 ;
          AT 0,0 ;

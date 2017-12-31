@@ -144,7 +144,6 @@ extern "C" {
 
    } QHTM_DEFAULTS, FAR *LPQHTM_DEFAULTS;
 
-
    //
    //   Sent whenever a link is clicked.
    //   Set resReturnValue to FALSE to prevent QHTM from starting the user agent associated with the link.

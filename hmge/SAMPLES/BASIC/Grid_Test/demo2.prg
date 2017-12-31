@@ -29,7 +29,7 @@ FUNCTION Main
          value {1, 1}
       END GRID
 
-      on key escape action thiswindow.release()
+      ON KEY ESCAPE ACTION thiswindow.release()
 
    END WINDOW
 

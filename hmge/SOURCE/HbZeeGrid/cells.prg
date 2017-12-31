@@ -21,7 +21,7 @@ METHOD _Cells:Init( hGrid )
 
    ::hGrid := hGrid
 
-   RETURN self
+   RETURN SELF
 
 CREATE CLASS _Cell
 
@@ -45,7 +45,7 @@ METHOD _Cell:Init( hGrid, nIndex )
    ::hGrid  := hGrid
    ::nIndex := nIndex
 
-   RETURN self
+   RETURN SELF
 
 METHOD PROCEDURE _Cell:SetBColor( nClrIndex  )
 

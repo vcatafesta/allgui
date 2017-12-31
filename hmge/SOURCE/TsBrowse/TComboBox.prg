@@ -100,7 +100,7 @@ METHOD New( nRow, nCol, bSetGet, aGetData, nWidth, nHeight, oWnd, bChanged,;
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TComboBox:Default() Version 7.0 Jul/15/2004

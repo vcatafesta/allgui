@@ -234,7 +234,7 @@ PROCEDURE PrintGraph()
          SHOWXVALUES                              ;
          SHOWLEGENDS LEGENDSWIDTH 105 DATAMASK "9 999"      ;
          LIBRARY HBPRINT
-   end
+   END
 
    RETURN
 

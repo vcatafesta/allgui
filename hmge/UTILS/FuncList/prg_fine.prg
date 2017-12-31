@@ -107,7 +107,7 @@ PROCEDURE PRG_Fine( cFileInput, cFileOutput, nCaseFormat, aLangStrings )
 
       oFile : Close()
 
-   End
+   END
 
    cMsg += CRLF
    SetProperty( 'wConsole', 'edtConsole', 'Value', cMsg )

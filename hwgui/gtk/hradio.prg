@@ -41,7 +41,7 @@ METHOD New( vari,bSetGet ) CLASS HRadioGroup
       ::bSetGet := bSetGet
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD EndGroup( nSelected )  CLASS HRadioGroup
 
@@ -122,7 +122,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HRadioButton
 

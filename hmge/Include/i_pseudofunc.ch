@@ -655,7 +655,6 @@ hb_RandomInt( IFNUMERIC( <nMax>, <nMax>, 65535 ) )
 ////////////////////////////////////////////
 #ifndef HB_COMMON_CH_
    /* Type checking macros */
-   #translate ISNIL( <xValue> )       => ( <xValue> == NIL )
    #translate ISARRAY( <xValue> )     => hb_IsArray( <xValue> )
    #translate ISBLOCK( <xValue> )     => hb_IsBlock( <xValue> )
    #translate ISCHARACTER( <xValue> ) => hb_IsString( <xValue> )

@@ -138,7 +138,6 @@ Syntax:
 [ NOTABSTOP ]
 [ HELPID <nHelpId> ]
 
-
 ** GETBOX  supported PICTURE Format Functions
 
    Function     Type      Action
@@ -163,7 +162,6 @@ Syntax:
                        with comma and period reverse (European style).
                        an integer that specifies the width of the region.
 
-
 ** GETBOX  supported PICTURE Template Symbols
    ------------------------------------------------------------
    Template            Action
@@ -180,7 +178,6 @@ Syntax:
      *            Displays an asterisk in place of a leading space in a numeric
      .            Displays a decimal point
      ,            Displays a comma
-
 
 * FontColor and BackColor property can be defined as RGB array or array of RGBArrays
   for Enable ,ReadOnly and Focused (active) stage.

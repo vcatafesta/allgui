@@ -30,15 +30,15 @@ FUNCTION Addition_MainForms()
    DEFINE MAIN MENU OF Form_Main
       POPUP 'File'
          Item 'Dummy' Action MsgInfo('Sample')
-         Separator
+         SEPARATOR
          Item 'Exit' Action ReleaseAllWindows()
-      End Popup
+      END POPUP
       POPUP 'Setting'
          Item 'Dummy' Action MsgInfo('Sample')
-      End Popup
+      END POPUP
       POPUP 'Help'
          Item 'About' Action MsgInfo( MiniguiVersion() )
-      End Popup
+      END POPUP
    END MENU
 
    // добавить объект на форму / add an object to a form

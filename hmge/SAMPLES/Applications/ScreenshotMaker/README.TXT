@@ -2,7 +2,6 @@ ScreenshotMaker for Windows 9x/2k/XP
 Version 1.2 July 14, 2006
 (c) Grigory Filatov <gfilatov@inbox.ru>
 
-
 Description
 -----------
 ScreenshotMaker is a very simple program designed to make a screenshots
@@ -11,7 +10,6 @@ start the program.
 Left click on the tray icon to make a screenshot.
 Right click on the tray icon to activate the program's menu.
 You can use a timer for autoincremental screenshots.
-
 
 Usage
 -----
@@ -22,13 +20,11 @@ Usage
    menu, or the StartUp folder to run the program.
 
 
-
 Comments and suggestions
 ------------------------
 Although I can't promise there will be any new versions of this program, I
 would like to hear any comments or suggestions you may have.  I can be
 contacted at: gfilatov@inbox.ru
-
 
 Copying
 -------

@@ -61,7 +61,7 @@ METHOD New( oParent ) CLASS HHtml
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HHtml
 

@@ -73,7 +73,7 @@ FUNCTION ConnectGrid()
    IF oServer:NetErr()
       ? oServer:Error()
       QUIT
-   end
+   END
 
    IF oServer:TableExists('test')
       oServer:DeleteTable('Test')

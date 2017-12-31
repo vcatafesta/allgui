@@ -61,7 +61,7 @@ FUNCTION DBUedit1
             button _DBUprevious  caption "Previous"  picture "previous"  action DBUeditpreviousclick()
             button _DBUnext      caption "Next"      picture "next"      action DBUeditnextclick()
             button _DBUlast      caption "Last"      picture "last"      action DBUeditlastclick()
-         end toolbar
+         END toolbar
          DEFINE TOOLBAR _DBUedittoolbar1 buttonsize 48,35 flat // righttext
             button _DBUnewrec    caption "New"       picture "new"       action DBUeditnewrecclick()
             button _DBUsave      caption "Save"      picture "Save"      action DBUeditsaveclick()
@@ -69,7 +69,7 @@ FUNCTION DBUedit1
             button _DBUrecall    caption "Recall"    picture "recall"    action DBUeditrecallclick()
             button _DBUprint     caption "Print"     picture "print"     action DBUeditprint()
             button _DBUclose     caption "Exit"      picture "exit"      action _DBUedit.release
-         end toolbar
+         END toolbar
       END SPLITBOX
       DEFINE TAB _DBUrecord at 70,10 width _DBUwindowwidth - 20 height _DBUbuttonfirstrow - 90
          FOR _DBUi := 1 to _DBUpages
@@ -134,7 +134,7 @@ FUNCTION DBUedit1
                            fontbold .t.
                            width _DBUcontrolarr[_DBUj,4]
                            shownone .t.
-                        end datepicker
+                        END datepicker
                      CASE _DBUcontrolarr[_DBUj,5] == "L" // Logical
                         DEFINE CHECKBOX &_DBUControlName
                            row _DBUcontrolarr[_DBUj,1]

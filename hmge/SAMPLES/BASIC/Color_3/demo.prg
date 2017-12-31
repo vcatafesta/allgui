@@ -22,7 +22,7 @@ FUNCTION Main
    PRIVATE c_lbl_back  := {0, 255, 255}
    PRIVATE c_lbl_color := {0, 255, 255}
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    DEFINE WINDOW Form_cas ;
          AT 0,0 WIDTH 400 HEIGHT 400 ;

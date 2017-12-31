@@ -103,31 +103,31 @@ PROCEDURE Main()
 
       DEFINE MAIN MENU
          DEFINE POPUP " &File "
-            menuitem "  &Connect  "                ;
+            MENUITEM "  &Connect  "                ;
                action { || Connect() }        ;
                name mnuConnect
-            menuitem "  &Disconnect  "             ;
+            MENUITEM "  &Disconnect  "             ;
                action { || Disconnect() }     ;
                name mnuDisconnect
             SEPARATOR
-            menuitem "  &Export to DBF  "             ;
+            MENUITEM "  &Export to DBF  "             ;
                action { || SQL2Dbf() }     ;
                name mnusql2dbf
-            menuitem "  &Import from DBF  "           ;
+            MENUITEM "  &Import from DBF  "           ;
                action { || Dbf2Sql(.t.) }     ;
                name mnudbf2sql
             SEPARATOR
-            menuitem "  &Exit  "                   ;
+            MENUITEM "  &Exit  "                   ;
                action F_Main.Release     ;
                name mnuEnd
-         END popup
+         END POPUP
 
          DEFINE POPUP " &Help "
-            menuitem "About" ;
+            MENUITEM "About" ;
                action ShellAbout( "", PROGRAM+" v.2.0" + CRLF + "Cristobal Molla, Mitja Podgornik" )
-         END popup
+         END POPUP
 
-      END menu
+      END MENU
 
       DEFINE SPLITBOX
          DEFINE TOOLBAR Tbar_1 ;

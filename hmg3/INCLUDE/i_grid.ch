@@ -111,7 +111,6 @@
 #define LVSIL_SMALL    1
 #define LVSIL_STATE    2
 
-
 #define GRID_JTFY_LEFT           0
 #define GRID_JTFY_RIGHT          1
 #define GRID_JTFY_CENTER         2
@@ -124,7 +123,6 @@
 #define GRID_EDIT_INSERTCHAR    3
 #define GRID_EDIT_REPLACEALL    4
 
-
 #define GRID_GROUP_LEFT   0x01
 #define GRID_GROUP_CENTER 0x02
 #define GRID_GROUP_RIGHT  0x04
@@ -132,7 +130,6 @@
 #define GRID_GROUP_NORMAL    0x01
 #define GRID_GROUP_COLLAPSED 0x02
 #define GRID_GROUP_HIDDEN    0x04
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // GRID (STANDARD VERSION)
@@ -372,9 +369,7 @@ _DefineGrid ( <"name"> ,    ;
       <EditOption> ,;
       <.notrans.> , <.notransheader.> , <aDynamicFont> , <{OnCheckBoxClicked}> , <{OnInplaceEditEvent}> )
 
-
 ///////////////////////////////////////////////////////////////////////////////
-
 
 // GridEx ( by Dr. Claudio Soto )
 

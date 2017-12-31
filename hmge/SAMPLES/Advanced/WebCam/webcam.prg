@@ -49,7 +49,7 @@ PROCEDURE OnFormUnLoad()
 
 PROCEDURE StartClick()
 
-   IF !ISNIL(CamSource)
+   IF ! CamSource == NIL
       webcam.Label_0.Visible := .F.
 
       previewCamera()

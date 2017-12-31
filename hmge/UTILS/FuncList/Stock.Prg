@@ -50,7 +50,7 @@ PROCEDURE Main
       QUIT
    ENDIF
 
-   SET Navigation Extended
+   SET NAVIGATION EXTENDED
    SET Font To 'Tahoma', 9
 
    PRIVATE aOptions := ReadOptions()
@@ -80,7 +80,7 @@ PROCEDURE Main
          Button btnSave    Picture 'SAVE'    Action SaveList() Tooltip 'Save to file'
          Button btnEdit    Picture 'EDIT'    Action OpenFile() Tooltip 'Open in external editor'
          Button btnOptions Picture 'OPTIONS' Action Options()  Tooltip 'Settings'
-      End Toolbar
+      END Toolbar
 
       // Размеры элементов диалога условны, т.к. их изменение выполняется программно.
 
@@ -196,7 +196,7 @@ STATIC FUNCTION DirCheck
 
       lSuccess := .T.
 
-   End
+   END
 
    RETURN lSuccess
 
@@ -218,74 +218,74 @@ PROCEDURE BuildMenu( aStrings )
    DEFINE MAIN MENU of wStock
 
       DEFINE POPUP aStrings[ 1, 2 ]             // File
-         MenuItem aStrings[ 2, 2 ] ;
+         MENUITEM aStrings[ 2, 2 ] ;
             Action NewList()      ;
             Message aStrings[ 3, 2 ]
-         MenuItem aStrings[ 4, 2 ] ;
+         MENUITEM aStrings[ 4, 2 ] ;
             Action LoadList()     ;
             Message aStrings[ 5, 2 ]
-         MenuItem aStrings[ 6, 2 ] ;
+         MENUITEM aStrings[ 6, 2 ] ;
             Action SaveList()     ;
             Name SaveList         ;
             Message aStrings[ 7, 2 ]
-         Separator
-         MenuItem ( aStrings[ 8, 2 ]  + '   Alt+X' ) ;
+         SEPARATOR
+         MENUITEM ( aStrings[ 8, 2 ]  + '   Alt+X' ) ;
             Action ThisWindow.Release                     ;
             Message aStrings[ 9, 2 ]
-      End Popup
+      END POPUP
 
       DEFINE POPUP aStrings[ 10, 2 ]           // Edit
-         MenuItem aStrings[ 11, 2 ] ;
+         MENUITEM aStrings[ 11, 2 ] ;
             Action SetTitle()      ;
             Name SetTitle          ;
             Message aStrings[ 12, 2 ]
-         Separator
-         MenuItem aStrings[ 13, 2 ] ;
+         SEPARATOR
+         MENUITEM aStrings[ 13, 2 ] ;
             Action OpenFile()      ;
             Name OpenFile          ;
             Message aStrings[ 14, 2 ]
-         Separator
-         MenuItem aStrings[ 15, 2 ]                      ;
+         SEPARATOR
+         MENUITEM aStrings[ 15, 2 ]                      ;
             Action CopyToClipboard( GetNameFunction() ) ;
             Name CopyIt                                 ;
             Message aStrings[ 16, 2 ]
-      End Popup
+      END POPUP
 
       DEFINE POPUP aStrings[ 17, 2 ]           // Tools
-         MenuItem aStrings[ 18, 2 ] ;
+         MENUITEM aStrings[ 18, 2 ] ;
             Action Formater()      ;
             Name Reformatter       ;
             Message aStrings[ 19, 2 ]
-         MenuItem aStrings[ 20, 2 ]   ;
+         MENUITEM aStrings[ 20, 2 ]   ;
             Action CallsTable()      ;
             Name CallsTable          ;
             Message aStrings[ 21, 2 ]
-      End Popup
+      END POPUP
 
       DEFINE POPUP aStrings[ 22, 2 ]           // Service
          DEFINE POPUP aStrings[ 23, 2 ]
-            MenuItem aStrings[ 24, 2 ]  ;
+            MENUITEM aStrings[ 24, 2 ]  ;
                Action SelectLanguage() ;
                Message aStrings[ 25, 2 ]
-            Separator
-            MenuItem aStrings[ 26, 2 ]    ;
+            SEPARATOR
+            MENUITEM aStrings[ 26, 2 ]    ;
                Action MakeLangTemplate() ;
                Message aStrings[ 27, 2 ]
-         End Popup
+         END POPUP
 
-         Separator
-         MenuItem aStrings[ 28, 2 ] ;
+         SEPARATOR
+         MENUITEM aStrings[ 28, 2 ] ;
             Action Options()       ;
             Message aStrings[ 29, 2 ]
-      End Popup
+      END POPUP
 
       DEFINE POPUP '?'                         // ?
-         MenuItem aStrings[ 30, 2 ]        ;
+         MENUITEM aStrings[ 30, 2 ]        ;
             Action About( aStrings[ 30, 2 ] ) ;
             Message aStrings[ 31, 2 ]
-      End Popup
+      END POPUP
 
-   End Menu
+   END MENU
 
    RETURN
 

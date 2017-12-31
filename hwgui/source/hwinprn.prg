@@ -81,7 +81,7 @@ METHOD New( cPrinter, cpFrom, cpTo, nFormType, nBin, lLandScape, nCopies ) CLASS
    ::cpFrom := cpFrom
    ::cpTo   := cpTo
 
-   RETURN Self
+   RETURN SELF
 
 METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 

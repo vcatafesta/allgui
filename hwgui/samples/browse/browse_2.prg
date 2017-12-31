@@ -66,7 +66,7 @@ STATIC FUNCTION CreateDB()
 
    IF file('test.dbf')
       FErase('test.dbf')
-   end
+   END
    IF file("index01.ntx")
       fErase("index01.ntx")
    ENDIF

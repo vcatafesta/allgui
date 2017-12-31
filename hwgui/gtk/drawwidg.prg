@@ -92,7 +92,7 @@ METHOD Add( fontName, nWidth, nHeight ,fnWeight, fdwCharSet, fdwItalic, ;
 
    Aadd( ::aFonts,Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Select( oFont ) CLASS HFont
 
@@ -208,7 +208,7 @@ METHOD Add( nStyle,nWidth,nColor ) CLASS HPen
    ::color  := nColor
    Aadd( ::aPens, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Get( nStyle,nWidth,nColor ) CLASS HPen
 
@@ -311,7 +311,7 @@ METHOD Add( nColor ) CLASS HBrush
    ::color  := nColor
    Aadd( ::aBrushes,Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Release() CLASS HBrush
 
@@ -402,7 +402,7 @@ METHOD AddResource( name ) CLASS HBitmap
       RETURN NIL
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddFile( name,HDC ) CLASS HBitmap
 
@@ -437,7 +437,7 @@ METHOD AddFile( name,HDC ) CLASS HBitmap
       RETURN NIL
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Transparent( trColor )
 
@@ -456,7 +456,7 @@ METHOD AddWindow( oWnd,lFull ) CLASS HBitmap
    ::nHeight := aBmpSize[2]
    Aadd( ::aBitmaps,Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Release() CLASS HBitmap
 
@@ -535,7 +535,7 @@ METHOD AddResource( name ) CLASS HIcon
    ::name   := name
    Aadd( ::aIcons,Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddFile( name ) CLASS HIcon
 
@@ -570,7 +570,7 @@ METHOD AddFile( name ) CLASS HIcon
       RETURN NIL
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Release() CLASS HIcon
 

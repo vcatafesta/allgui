@@ -253,7 +253,7 @@ METHOD Read( fname, cId ) CLASS HFormTmpl
    SetDebugInfo( .F. )
    ppScript( ,.F. )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
 
@@ -1364,7 +1364,7 @@ METHOD Read( fname, cId ) CLASS HRepTmpl
    SetDebugInfo( .F. )
    ppScript( ,.F. )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
 

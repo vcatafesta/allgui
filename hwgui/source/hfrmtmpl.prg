@@ -249,7 +249,7 @@ METHOD Read( fname, cId ) CLASS HFormTmpl
    pp := NIL
    SetDebugInfo( .F. )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Show( nMode, p1, p2, p3 ) CLASS HFormTmpl
 
@@ -1362,7 +1362,7 @@ METHOD Read( fname, cId ) CLASS HRepTmpl
    pp := NIL
    SetDebugInfo( .F. )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Print( printer, lPreview, p1, p2, p3 ) CLASS HRepTmpl
 

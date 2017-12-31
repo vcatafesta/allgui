@@ -107,7 +107,7 @@ PROCEDURE PrintStructure
    NEXT
 
 END PAGE
-End Doc
+END Doc
 
 RELEASE font 'fTitle'
 RELEASE font 'fBase'

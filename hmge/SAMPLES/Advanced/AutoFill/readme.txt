@@ -1,6 +1,5 @@
 AutoFill() : Add auto filling feature to a TextBox Control.
 
-
 Usage :
 
    -  Build an array for words to filling in text box entry
@@ -11,9 +10,7 @@ Usage :
 
    - Specify  AFKeyRls( ) as ONLOSTFOCUS  procedure of TextBox
 
-
 Example :
-
 
 DEFINE TEXTBOX txbCountry
 

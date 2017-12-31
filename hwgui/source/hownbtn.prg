@@ -145,7 +145,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
    hwg_RegOwnBtn()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HOwnButton
 
@@ -278,7 +278,7 @@ METHOD Redefine( oWndParent, nId, bInit, bSize, bPaint, bClick, lflat, ;
    ::lTransp := IIf( lTr != Nil, lTr, .F. )
    hwg_RegOwnBtn()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Paint() CLASS HOwnButton
 

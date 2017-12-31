@@ -2,10 +2,6 @@ Este programa foi desenvolvido a partir do exemplo de definição de menus em temp
 Acredito que será bem útil para todos e agradeço a qualquer modificação que possa torna-lo melhor.
 o arquivo EDMenu.prg é o editor.
 
-
 Att.
 André Luiz Neto Cobas
 andrecobas@yahoo.com.br
-
-
-

@@ -96,7 +96,7 @@ PROC Main()
          nDigit   ,;
          cDigit
 
-      IF HB_ISNIL( nCaller )
+      IF nCaller == NIL
 
          IF AddFont() == 0
             MsgStop( "An error is occured at installing the font Lcdn.ttf", "Warning" )
@@ -192,7 +192,7 @@ PROC Main()
 
                aTmpColor := GetColor( aTmpColor )
 
-               IF !HB_ISNIL( aTmpColor[ 1 ] )
+               IF ! aTmpColor[ 1 ] == NIL
                   IF nCaller == 1 // Back Color
                      AFILL( aCCPrpArray, aTmpColor )
                      CCSetProp( cFrmName, "BackColor", aCCPrpArray )
@@ -203,11 +203,11 @@ PROC Main()
                   ELSEIF nCaller == 3 // Date ForeColor
                      frmCuckooClock.lblDate.FontColor := aTmpColor
                   ENDIF
-               ENDIF !HB_ISNIL( aTmpColor[ 1 ] )
+               ENDIF
             ENDIF
 
-         ENDIF nCaller > 0  // Colors
-      ENDIF HB_ISNIL( nCaller )
+         ENDIF
+      ENDIF
 
       IF lSound
          IF RIGHT( cCurTime, 2 ) == "00"

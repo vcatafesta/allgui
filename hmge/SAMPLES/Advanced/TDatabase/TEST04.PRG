@@ -35,7 +35,7 @@ FUNCTION main()
       WHILE oDB:recNo() <= oDB:lastRec()
          oDB:recall()
          oDB:skip()
-      end
+      END
    ENDIF
    oDB:close()
 
@@ -110,7 +110,7 @@ METHOD new()
    ENDIF
    ::lAdd:=.f.
 
-   RETURN self
+   RETURN SELF
 
 METHOD browse()
 
@@ -129,7 +129,7 @@ METHOD browse()
 
    Form_1.Btn_Open.Enabled := .f.
 
-   SET browsesync on
+   SET BROWSESYNC ON
 
    DEFINE WINDOW ChildMdi ;
          TITLE "Customer" ;
@@ -181,7 +181,7 @@ METHOD browse()
 
 END WINDOW
 
-RETURN self
+RETURN SELF
 
 METHOD add()
 
@@ -191,7 +191,7 @@ METHOD add()
    ::load()   // in case they cancel
    ::lAdd:=.f.
 
-   RETURN self
+   RETURN SELF
 
 METHOD edit()
 
@@ -222,7 +222,7 @@ METHOD edit()
    Edit.Center()
    Edit.Activate()
 
-   RETURN self
+   RETURN SELF
 
 METHOD _delete()
 
@@ -230,7 +230,7 @@ METHOD _delete()
       ::super:delete()
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 #define WM_MDIMAXIMIZE 0x0225
 

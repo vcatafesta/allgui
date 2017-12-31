@@ -82,6 +82,6 @@ FUNCTION App_OnEvents$_
       EXIT
    OTHERWISE
       nRes := Events$_
-   end
+   END
 
    RETURN nRes

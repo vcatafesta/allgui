@@ -33,7 +33,6 @@ ENTER       Change directory/run program/
             command line (if not empty and have focus).
 BACKSPACE   Change to parent directory (corresponds to cd ..)
 
-
 Command line: keys
 
 Here the layout for some keys:

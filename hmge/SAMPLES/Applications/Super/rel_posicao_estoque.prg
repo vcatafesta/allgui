@@ -78,7 +78,7 @@ FUNCTION posicao_estoque()
          tooltip 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_estoque_produtos.width-100
@@ -91,16 +91,16 @@ FUNCTION posicao_estoque()
          tooltip 'Sair desta tela'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_estoque_produtos.center
    form_estoque_produtos.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -140,14 +140,14 @@ STATIC FUNCTION relatorio()
 
             produtos->(dbskip())
 
-         end
+         END
 
          rodape()
 
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -161,11 +161,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,040 PRINT 'PRODUTO' FONT 'courier new' SIZE 010 BOLD
    @ 035,100 PRINT 'QTD.ESTOQUE' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

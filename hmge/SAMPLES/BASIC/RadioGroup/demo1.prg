@@ -18,14 +18,14 @@ FUNCTION Main
 
       DEFINE MAIN MENU
          DEFINE POPUP "&Properties"
-            MenuItem "Change value" action Win1.RadioGroup2.Value := 3
-            MenuItem "Get Value" action Msginfo(Win1.RadioGroup2.Value)
-            Separator
-            MenuItem "Change options" action SetRadioOptions('RadioGroup2','Win1',{"New Item 1","New Item 2","New Item 3","New Item 4"})
-            MenuItem "Change Spacing" action ChangeSpacing('RadioGroup2','Win1',32)
-            MenuItem "Set horizontal orientation" action sethorizontal('RadioGroup2','Win1')
-         End popup
-      End Menu
+            MENUITEM "Change value" action Win1.RadioGroup2.Value := 3
+            MENUITEM "Get Value" action Msginfo(Win1.RadioGroup2.Value)
+            SEPARATOR
+            MENUITEM "Change options" action SetRadioOptions('RadioGroup2','Win1',{"New Item 1","New Item 2","New Item 3","New Item 4"})
+            MENUITEM "Change Spacing" action ChangeSpacing('RadioGroup2','Win1',32)
+            MENUITEM "Set horizontal orientation" action sethorizontal('RadioGroup2','Win1')
+         END POPUP
+      END MENU
 
       @ 40,10 RadioGroup RadioGroup1;
          Options {"New 1","New 2","New 3"};

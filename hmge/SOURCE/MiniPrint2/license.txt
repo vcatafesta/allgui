@@ -17,7 +17,6 @@ the following conditions are met:
 
 - The origin of this software must not be misrepresented.
 
-
 Roberto Lopez
 http://sites.google.com/site/hmgweb/
 <mail.box.hmg@gmail.com>

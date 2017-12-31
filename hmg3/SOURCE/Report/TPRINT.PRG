@@ -258,7 +258,7 @@ METHOD BEGINDOC(cdoc) CLASS TPRINT
          SET DEVICE TO PRINT
       ENDCASE
 
-      RETURN self
+      RETURN SELF
 
 METHOD ENDDOC() CLASS TPRINT
 
@@ -310,7 +310,7 @@ CASE ::cprintlibrary="DOS"
    ENDIF
 ENDCASE
 
-RETURN self
+RETURN SELF
 
 METHOD SETCOLOR(atColor) CLASS TPRINT
 
@@ -327,7 +327,7 @@ METHOD beginPAGE() CLASS TPRINT
          @ 0,0 SAY ""
       ENDCASE
 
-      RETURN self
+      RETURN SELF
 
 METHOD ENDPAGE() CLASS TPRINT
 
@@ -338,7 +338,7 @@ CASE ::cprintlibrary="DOS"
    EJECT
 ENDCASE
 
-RETURN self
+RETURN SELF
 
 METHOD getdefprinter() CLASS TPRINT
 
@@ -448,7 +448,7 @@ METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen) CLASS TPRI
       ENDIF
    ENDCASE
 
-   RETURN self
+   RETURN SELF
 
 METHOD printimage(nlin,ncol,nlinf,ncolf,cimage) CLASS TPRINT
 

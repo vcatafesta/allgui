@@ -94,7 +94,7 @@ FUNCTION fechamento_dia()
          tooltip 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_fechamento.width-100
@@ -107,16 +107,16 @@ FUNCTION fechamento_dia()
          tooltip 'Sair desta tela'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_fechamento.center
    form_fechamento.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -195,7 +195,7 @@ STATIC FUNCTION relatorio()
 
             detalhamento_compras->(dbskip())
 
-         end
+         END
 
          @ linha,145 PRINT 'Total : R$' FONT 'courier new' SIZE 010 BOLD
          @ linha,160 PRINT trans(x_total_vendas,'@E 99,999.99') FONT 'courier new' SIZE 010 BOLD
@@ -312,7 +312,7 @@ STATIC FUNCTION relatorio()
                ENDIF
             ENDIF
 
-         end
+         END
 
          @ linha,090 PRINT 'Total do período : R$ ' FONT 'courier new' SIZE 010 BOLD
          @ linha,160 PRINT trans(x_soma_geral,'@E 999,999.99') FONT 'courier new' SIZE 010 BOLD
@@ -414,7 +414,7 @@ STATIC FUNCTION relatorio()
                ENDIF
             ENDIF
 
-         end
+         END
 
          @ linha,000 PRINT LINE TO linha,205 PENWIDTH 0.3 COLOR _preto_001
 
@@ -519,7 +519,7 @@ STATIC FUNCTION relatorio()
                ENDIF
             ENDIF
 
-         end
+         END
 
          @ linha,090 PRINT 'Total do período : R$ ' FONT 'courier new' SIZE 010 BOLD
          @ linha,160 PRINT trans(x_soma_geral,'@E 999,999.99') FONT 'courier new' SIZE 010 BOLD
@@ -650,7 +650,7 @@ STATIC FUNCTION relatorio()
                x_subtotal := 0
             ENDIF
 
-         end
+         END
 
          linha += 5
          IF linha >= u_linha
@@ -750,7 +750,7 @@ STATIC FUNCTION relatorio()
                x_subtotal := 0
             ENDIF
 
-         end
+         END
 
          linha += 5
          IF linha >= u_linha
@@ -779,7 +779,7 @@ STATIC FUNCTION relatorio()
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -792,11 +792,11 @@ STATIC FUNCTION cabecalho(p_pagina)
 
    @ 030,000 PRINT LINE TO 030,205 PENWIDTH 0.5 COLOR _preto_001
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

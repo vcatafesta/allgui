@@ -35,7 +35,7 @@ PROCEDURE Main
          action ( nId := m.g.ItemCount, m.g.AddItem( {"Person "+hb_ntos(++nId), Random(3), nId*1000} ) )
       END BUTTON
 
-      on key escape action thiswindow.release()
+      ON KEY ESCAPE ACTION thiswindow.release()
 
    END WINDOW
    m.center

@@ -19,7 +19,6 @@
 // +---------------------------------------+
 
 
-
 =====================================================================================
 Chr Tag
 ======================================================================================
@@ -41,7 +40,6 @@ string A string specifying the character of the voice.
 Remarks
 This tag is supported only for TTS-generated output. The range of values for the parameter
 may vary depending on the installed TTS engine
-
 
 =====================================================================================
 Ctx Tag
@@ -147,5 +145,3 @@ Description
 Resets all tags to the default settings.
 Syntax
 \Rst\
-
-

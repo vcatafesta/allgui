@@ -63,7 +63,7 @@ METHOD New( cWindowName , cProgId , nRow , nCol , nWidth , nHeight ) CLASS TActi
    ::nOldWinWidth := GetProperty( cWindowName , "width" )
    ::nOldWinHeight := GetProperty( cWindowName , "Height" )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Load() CLASS TActiveX
 

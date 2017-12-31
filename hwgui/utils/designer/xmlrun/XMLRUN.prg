@@ -482,7 +482,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 
       RETURN .f.
       //return iif(lKosong==NIL,.t.,.f.)
-   end
+   END
 
    //if (ctod(g:buffer)=ctod("  /  /  "))
 
@@ -499,7 +499,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
       hwg_Msgstop("Pengisian Tanggal Belum Benar!!!")
 
       RETURN .f.
-   end
+   END
 
    *:----------------6-------6-------7---------8----------9---
    *:kemungkinan   ddmmyy, dmmmyy, ddmmmyy, ddmmyyyy, ddmmmyyyy!
@@ -540,7 +540,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
 
       mm:=subst(cpress,3,2)+"."
 
-   end
+   END
 
    yy:=right(cPress,((len(c)-len(dd+mm))+nPot))
 
@@ -555,7 +555,7 @@ FUNCTION Usr2infStr(g,lKosong) && usr to informix str
    ELSE
       g:SetGet(d2infstr( ctod(dd+mm+yy) ))
       g:refresh()
-   end
+   END
 
    RETURN .t.
 

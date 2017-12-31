@@ -70,7 +70,7 @@ FUNCTION _GetWindowProp ( xParentForm, cPropName, lDirect )
    xParentForm := _GetFormHandle ( xParentForm, @cParentFormName )
 
    xValue := GetProp( xParentForm, cPropName, hb_defaultValue( lDirect, .F. ) )
-   IF HB_ISNIL( xValue )
+   IF xValue == NIL
       MsgMiniGuiError( "Property " + cPropName + " in Window " + cParentFormName + " is not defined." )
    ENDIF
 

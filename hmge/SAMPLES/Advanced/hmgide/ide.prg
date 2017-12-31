@@ -1328,7 +1328,7 @@ PROCEDURE ChangeControlProperties( oControl )
 
          aResult := GetColor( str2arr( cValue ) )
 
-         IF ISNIL( aResult[1] )
+         IF aResult[1] == NIL
 
             cResult := cValue
 

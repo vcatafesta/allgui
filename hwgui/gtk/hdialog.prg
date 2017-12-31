@@ -109,7 +109,7 @@ METHOD New( lType,nStyle,x,y,width,height,cTitle,oFont,bInit,bExit,bSize, ;
    ENDIF
    ::handle := Hwg_CreateDlg( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate( lNoModal ) CLASS HDialog
 

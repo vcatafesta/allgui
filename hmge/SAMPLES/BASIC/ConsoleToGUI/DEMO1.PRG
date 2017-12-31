@@ -38,7 +38,7 @@ FUNCTION Main()
          alltrim(cStreet2)+iif(!empty(cStreet2),";","")+alltrim(cCity)+" "+cState+"  "+cZipcode)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
    /****************************************************************************/
 

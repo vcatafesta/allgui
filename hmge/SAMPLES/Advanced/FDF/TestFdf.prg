@@ -254,7 +254,7 @@ METHOD SetFld(arg1) CLASS FdF
       ::AddFld("TXTTELEFONO",["TxtTelefono"] )
    ELSE
       IF file(::DirData+::DataSource)
-         sele 1
+         SELE 1
          USE &(::DirData+::DataSource) shared alias USEIT
          aEval( ::aEnact, {|x,y| if(! empty(trim(x[2])),;
             aadd(::aPdf,"<</T("+ alltrim(x[1]) +")/V("+ (macrocompile(x[2])) +")>>" );
@@ -360,7 +360,7 @@ METHOD END() CLASS FdF
    ::CloseAcrobat()
    Tpdf.release
 
-   RETURN self
+   RETURN SELF
    /*
    */
 
@@ -738,7 +738,7 @@ FUNCTION edita()
       oBrw1:SetAppendMode( .T. )
       oBrw1:SetDeleteMode( .T., .T.)
 
-   End TBROWSE
+   END TBROWSE
 ENDIF
 obrw1:refresh()
 
@@ -752,7 +752,7 @@ FUNCTION DbView()
 
    IF !IsWIndowDefined (Dbview)
       IF file(FdF:DirData+Fdf:DataSource)
-         sele 1
+         SELE 1
          USE &(FdF:DirData+FDF:DataSource) shared alias USEIT
          FOR nf =1 to Fcount()
             hXpr += "{||Showfield("+ ltrim(str(nf))+")},"
@@ -1048,7 +1048,7 @@ STATIC FUNCTION MACROCOMPILE(cStr, lMesg,cmdline,section)
 FUNCTION Test()
 
    IF file(FdF:DirData+FDF:DataSource)
-      sele 1
+      SELE 1
       USE &(FdF:DirData+FDF:DataSource) shared alias USEIT
       aeval(FdF:aEnact,{|x,y| if(! empty(trim(x[2]));
          ,MsgBox(macrocompile( x[2],.F. ),ltrim(str(y)));
@@ -1092,7 +1092,7 @@ STATIC FUNCTION GetInstallAcrobat(hKey)
          cPathRes := cname
       ENDIF
       oKey:Close()
-   End
+   END
 
    IF !empty(CpathRes)  // acrobat installed!
       Open registry oReg key HKEY_CLASSES_ROOT Section 'AcroExch.FDFDoc\shell\Printto\command'
@@ -1117,7 +1117,6 @@ STATIC FUNCTION GetInstallAcrobat(hKey)
 
 #ifndef __XHARBOUR__
    #define ISCHAR( n )           HB_ISCHAR( n )
-   #define ISNIL( n )            HB_ISNIL( n )
 #endif
 
 static BOOL s_bCntrDialog = FALSE;

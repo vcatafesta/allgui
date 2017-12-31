@@ -6,4 +6,3 @@ Enter topic text here.
 
 .topic 10000
 This is the famous HELP INDEX
-

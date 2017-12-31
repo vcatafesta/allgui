@@ -89,11 +89,9 @@ _DefineContextMenu( <"parent"> )
 =>;
 _DefineContextMenu( <"parent"> )
 
-
 #xcommand DEFINE CONTEXTMENU [ PARENT <parent> ] ;
 =>;
 _DefineContextMenu( <"parent"> )
-
 
 
 #xcommand DEFINE NOTIFY MENU [ OF <parent> ] ;
@@ -107,7 +105,6 @@ _DefineNotifyMenu( <"parent"> )
 #xcommand DEFINE NOTIFYMENU [ PARENT <parent> ] ;
 =>;
 _DefineNotifyMenu( <"parent"> )
-
 
 #xcommand DEFINE MAINMENU [ OF <parent> ] ;
 =>;
@@ -157,7 +154,6 @@ _DefineDropDownMenu( <"button"> , <"parent"> )
 =>;
 _DefineDropDownMenu( <"button"> , <"parent"> )
 
-
 // by Dr. Claudio Soto (March 2013)
 
 #xcommand RELEASE MAIN MENU     OF <parent>   =>   ReleaseMainMenu    ( <"parent"> )
@@ -171,7 +167,6 @@ _DefineDropDownMenu( <"button"> , <"parent"> )
 
 #xcommand RELEASE DROPDOWN MENU BUTTON      <button> OF <parent>   =>   ReleaseDropDownMenu ( <"button"> ,  <"parent"> )
 #xcommand RELEASE DROPDOWNMENU  OWNERBUTTON <button> OF <parent>   =>   ReleaseDropDownMenu ( <"button"> ,  <"parent"> )
-
 
 // by Dr. Claudio Soto (May 2013)
 

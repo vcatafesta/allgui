@@ -434,7 +434,7 @@ FUNCTION CheckMove()
             ENDIF
          NEXT
       NEXT
-   end
+   END
    lResult := ( aTempField[aDestCellPos[1], aDestCellPos[2]] < 0 )
    // If the wat to appointed place is not found, go out
    IF .not. lResult
@@ -651,7 +651,7 @@ FUNCTION CheckLine()
                ELSE
                   lLineFlag := .F.
                ENDIF
-            end
+            END
             IF nLineSize < 5
                LOOP
             ENDIF
@@ -681,7 +681,7 @@ FUNCTION CheckLine()
                   IF XX < 1 .or. XX > 9 .or. YY > 9
                      EXIT
                   ENDIF
-               end
+               END
                nFlash--
                // Redraw of field after ball's removing
                DrawGameField()
@@ -692,7 +692,7 @@ FUNCTION CheckLine()
                   DrawGameField()
                   inkey(.1)
                ENDIF
-            end
+            END
             // Increase the score
             nGameScore += nLineSize*(nLineSize-4)
             ShowScores()
@@ -729,7 +729,7 @@ PROCEDURE ProcessNextBalls()
          DO WHILE aGameField[X,Y] # 0
             X := Random(9)
             Y := Random(9)
-         end
+         END
       ENDIF
       aGameField[X,Y] := aNextBalls[nCnt] // Next ball's color is not exchange
    NEXT
@@ -760,7 +760,7 @@ PROCEDURE PrepareNextBalls()
       DO WHILE aGameField[X,Y] # 0
          X := Random(9)
          Y := Random(9)
-      end
+      END
       // Mark of ball's position on the field
       aGameField[X,Y] := aNextBalls[nCnt]+20
       aNextBallsPos[nCnt][1] := X

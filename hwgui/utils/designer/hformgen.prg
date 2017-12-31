@@ -111,7 +111,7 @@ METHOD New() CLASS HFormGen
    statusbarmsg(name)
    // :END LFB
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OpenR( fname )  CLASS HFormGen
 
@@ -173,7 +173,7 @@ METHOD Open( fname,cForm )  CLASS HFormGen
    statusbarmsg(fname)
    // : END LFB
 
-   RETURN Self
+   RETURN SELF
 
 METHOD End( lDlg,lCloseDes ) CLASS HFormGen
 

@@ -106,7 +106,7 @@ METHOD New( BColor, cFont, nSize ) CLASS cLbl
    IF nSize  != Nil; ::nSize  := nSize
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Def( cTxt, cChr ) CLASS cLbl
 
@@ -120,7 +120,7 @@ METHOD Def( cTxt, cChr ) CLASS cLbl
       ::aTxt := cTxt
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Out( nRow, nCol ) CLASS cLbl
 

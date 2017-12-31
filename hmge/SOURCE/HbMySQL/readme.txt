@@ -27,9 +27,7 @@ The Borland linker does not like the 'libmySQL.lib' library that comes with MySQ
 Error: 'LIBMYSQL.LIB' contains invalid OMF record, type 0x21 (possibly COFF)
 You can get around this problem by creating this lib from "dll" version of the library with implib command.
 
-
 8) 'libmysql.dll' must be copied to each MiniGUI app that uses MySQL server
-
 
 --
 Mitja Podgornik <yamamoto@rocketmail.com>

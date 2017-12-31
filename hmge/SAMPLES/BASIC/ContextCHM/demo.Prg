@@ -27,12 +27,12 @@ PROCEDURE Main
             ITEM '&Expensive Cars'   ACTION DisplayHelpTopic( 'expensivecars.htm' )
             SEPARATOR
             ITEM 'E&xit'      ACTION wDemo.Release
-         End Popup
+         END POPUP
          DEFINE POPUP 'Help'
             ITEM '&Context'      ACTION DISPLAY HELP CONTEXT HLP_1
             ITEM '&Index'      ACTION DISPLAY HELP CONTEXT HLP_INDEX
-         End Popup
-      End Menu
+         END POPUP
+      END MENU
 
       DEFINE BUTTON b1
          row 20

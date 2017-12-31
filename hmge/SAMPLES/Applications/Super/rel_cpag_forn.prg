@@ -20,7 +20,7 @@ FUNCTION relatorio_cpag_002()
    WHILE .not. eof()
       aadd(a_001,strzero(fornecedores->codigo,6)+' - '+fornecedores->nome)
       fornecedores->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_mov_cpag_forn;
          at 000,000;
@@ -67,7 +67,7 @@ FUNCTION relatorio_cpag_002()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -93,7 +93,7 @@ FUNCTION relatorio_cpag_002()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_mov_cpag_forn.width-100
@@ -106,16 +106,16 @@ FUNCTION relatorio_cpag_002()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
 
-   on key escape action thiswindow.release
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_mov_cpag_forn.center
 form_mov_cpag_forn.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -192,7 +192,7 @@ STATIC FUNCTION relatorio()
                linha += 5
             ENDIF
 
-         end
+         END
 
          @ linha,090 PRINT 'Total do período : R$ ' FONT 'courier new' SIZE 010 BOLD
          @ linha,160 PRINT trans(x_soma_geral,'@E 999,999.99') FONT 'courier new' SIZE 010 BOLD
@@ -206,7 +206,7 @@ STATIC FUNCTION relatorio()
    ordscope(1,0)
    contas_pagar->(dbgotop())
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -232,11 +232,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 046,040 PRINT 'OBSERVAÇÃO' FONT 'courier new' SIZE 010 BOLD
    @ 046,120 PRINT 'NÚMERO' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

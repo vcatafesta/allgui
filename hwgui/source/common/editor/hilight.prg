@@ -156,7 +156,7 @@ METHOD New( cFile, cSection ) CLASS Hilight
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Set( oEdit ) CLASS Hilight
 

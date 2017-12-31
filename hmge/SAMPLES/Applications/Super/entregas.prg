@@ -67,17 +67,17 @@ FUNCTION mostra_entregas()
          bold;
          action form_entrega.release
 
-      on key F5 action escolher_motoboy()
-      on key F6 action mudar_situacao()
+      ON KEY F5 ACTION escolher_motoboy()
+      ON KEY F6 ACTION mudar_situacao()
       on key F9 action atualizar_pedidos()
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_entrega.maximize
    form_entrega.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION escolher_motoboy()
 
@@ -139,14 +139,14 @@ STATIC FUNCTION escolher_motoboy()
          fontcolor BLUE;
          on dblclick grava_motoboy(motoboys->codigo,alltrim(motoboys->nome))
 
-      on key escape action form_escolhe.release
+      ON KEY ESCAPE ACTION form_escolhe.release
 
    END WINDOW
 
    form_escolhe.center
    form_escolhe.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION grava_motoboy(p_codigo,p_nome)
 
@@ -161,10 +161,10 @@ STATIC FUNCTION grava_motoboy(p_codigo,p_nome)
    ELSE
       msginfo('Não foi possível selecionar a informação, tecle ENTER','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mudar_situacao()
 
@@ -208,7 +208,7 @@ STATIC FUNCTION mudar_situacao()
          width 100;
          height 030
 
-      on key escape action form_situacao.release
+      ON KEY ESCAPE ACTION form_situacao.release
 
       @ 45,10 grid grid_situacao;
          of form_situacao;
@@ -226,7 +226,7 @@ STATIC FUNCTION mudar_situacao()
    form_situacao.center
    form_situacao.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_situacao()
 
@@ -239,7 +239,7 @@ STATIC FUNCTION mostra_situacao()
       add item {a_situacao[i]} to grid_situacao of form_situacao
    NEXT
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION grava_situacao()
 
@@ -255,10 +255,10 @@ STATIC FUNCTION grava_situacao()
    ELSE
       msginfo('Não foi possível selecionar a informação, tecle ENTER','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar_pedidos()
 
@@ -283,10 +283,10 @@ STATIC FUNCTION atualizar_pedidos()
             ENDIF
          ENDIF
          entrega->(dbskip())
-      end
+      END
    ENDIF
 
    entrega->(dbgotop())
    form_entrega.grid_entrega.refresh
 
-   return(nil)
+   RETURN NIL

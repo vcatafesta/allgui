@@ -34,7 +34,6 @@
   <id>,cmd,exit,<id>,!
   <id>,cmd,quit,<id>,!
 
-
   Following is a group of commands, which debugger sends to request some info
   or to set some mode. All this commands demands immediate answer. The answer
   must begin with the "b" symbol and <id>, which must be the same, as in
@@ -101,7 +100,6 @@
   Delete breakpoint:
   <id>,brp,del,<cPrgName>,<nLine>,<id>,!      =>    b<id>,ok,<nLine>,<id>,!
                                        (Wrong line) b<id>,err,<id>,!
-
 
   If the debugged program terminates, it send to debugger the following:
 

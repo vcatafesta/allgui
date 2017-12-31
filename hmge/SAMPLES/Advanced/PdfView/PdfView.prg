@@ -1002,7 +1002,7 @@ FUNCTION FileOpen(cFile, lAtPage, lNewTab)
    IF HB_IsLogical(lAtPage) .and. lAtPage
       nPage := InputPageNum()
 
-      IF HB_IsNIL(nPage)
+      IF nPage == NIL
 
          RETURN NIL
       ENDIF

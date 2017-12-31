@@ -168,7 +168,7 @@ METHOD New( oWndParent, xClass, aProp ) CLASS HControlGen
    ::Activate()
    ctrlOnSize( Self, ::oParent:nWidth, ::oParent:nHeight )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HControlGen
 

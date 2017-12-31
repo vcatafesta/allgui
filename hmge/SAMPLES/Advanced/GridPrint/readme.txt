@@ -4,14 +4,11 @@ HMG GridPrint is a small add-on functionality which can be attached to a HMG Gri
 It is an interface to HMG print facility to print the contents of a grid along with some additional features.
 It can be called by two ways, viz., method and command.
 
-
 Syntax for both the ways are,
-
 
 Method:
 
 <WindowName>.<ControlName>.Print( aHeaders )
-
 
 Command:
 
@@ -50,7 +47,6 @@ ColumnSum: Page-wise summation of some columns of the grid control can be achiev
            A two dimensional array with number of elements equal to the number of columns, in the following format,
            {{lSumReqdCol1,cTransformMask1},{lSumReqdCol2,cTransformMask2},{lSumReqdCol3,cTransformMask3}...} shall be passed.
 
-
 Sample:
 
 PRINT GRID grid_1;
@@ -62,7 +58,6 @@ PRINT GRID grid_1;
    SHOWWINDOW;
    MERGEHEADERS {{1,3,"Merged Header1"},{5,6,"Merged Header2"}};
    COLUMNSUM {{.f.,''},{.f.,''},{.t.,"99,999.99"},{.t.,"$ 999,999,999"},{.f.,''},{.f.,''}}
-
 
 GridPrint Window:
 
@@ -80,6 +75,5 @@ This window has many features to configure the report which are all self explana
 - Printer can be selected from a list
 - Standard page sizes or custom page size can be selected, so are the margins.
 - A blue print preview of the first page is shown before getting printed.
-
 
 S.Rathinagiri <srgiri@dataone.in>

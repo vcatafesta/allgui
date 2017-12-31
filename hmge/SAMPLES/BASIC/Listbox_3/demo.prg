@@ -121,7 +121,7 @@ FUNCTION loadlist(value,lmultiselect,lsort)
       onDblClick {|| MsgInfo("Double Click Action!")}
       multiselect lmultiselect
       SORT lsort
-   End ListBox
+   END ListBox
 
    win1.list1.SetArray(aItems)
    win1.list1.value := Value

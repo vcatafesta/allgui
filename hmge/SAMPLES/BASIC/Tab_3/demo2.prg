@@ -36,7 +36,7 @@ FUNCTION Main
 
       END TAB
 
-      on key escape action thiswindow.release()
+      ON KEY ESCAPE ACTION thiswindow.release()
 
    END WINDOW
 
@@ -93,7 +93,7 @@ FUNCTION addnewcontrol2(ctrl)
       width 180
       caption 'Click me'
       action MsgBox('Button action','Result')
-   end buttonex
+   END BUTTONEX
 
    tabsample.tab1.addcontrol(ctrl,2,80,10)
 

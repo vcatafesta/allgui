@@ -191,7 +191,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       SET( _SET_INSERT, ! ::lPicComplex )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HEdit
 
@@ -590,7 +590,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bInit, bSize, bPaint, ;
    ENDIF
    ::bColorOld := ::bcolor
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Value( Value )  CLASS HEdit
 

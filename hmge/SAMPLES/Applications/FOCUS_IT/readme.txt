@@ -2,7 +2,6 @@ Focus It for Windows 9x/2k/XP/Vista/7
 Version 1.1 September 20, 2012
 (c) 2003-2012 Grigory Filatov <gfilatov@inbox.ru>
 
-
 Description
 -----------
 Focus It is a very simple program designed to enables X-Mouse style window
@@ -18,13 +17,11 @@ right click.
 
 Remark: it works fine in WinXP but it precipitates window flashing in Win7.
 
-
 Comments and suggestions
 ------------------------
 Although I can't promise there will be any new versions of this program, I
 would like to hear any comments or suggestions you may have.
 I can be contacted at:  gfilatov@inbox.ru
-
 
 Copying
 -------

@@ -15,7 +15,6 @@ HB_ZipStoreFile( hZip, cFileName, [ cZipName ], ;
                  [ cPassword ], [ cComment ] ) --> nError
 HB_zipFileCRC32( cFileName ) --> nError
 
-
 HB_UnzipOpen( cFileName ) --> hUnzip
 HB_UnzipClose( hUnzip ) --> nError
 HB_UnzipGlobalInfo( hUnzip, @nEntries, @cGlobalComment ) --> nError
@@ -31,6 +30,5 @@ HB_UnzipFileOpen( hUnzip, [ cPassword ] ) --> nError
 HB_UnzipFileRead( hUnzip, @cBuf [, nLen ] ) --> nRead
 HB_UnzipFileClose( hUnzip ) --> nError
 HB_UnzipExtractCurrentFile( hUnzip, [ cFileName ], [ cPassword ] ) --> nError
-
 
 HB_ZipDeleteFile( cZipFile, cFileMask ) --> nError

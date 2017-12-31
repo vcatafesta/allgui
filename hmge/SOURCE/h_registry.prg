@@ -102,7 +102,7 @@ METHOD New( nKey, cRegKey, lShowError ) CLASS TReg32
       ::nHandle := nHandle
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Create( nKey, cRegKey, lShowError ) CLASS TReg32
 
@@ -124,7 +124,7 @@ METHOD Create( nKey, cRegKey, lShowError ) CLASS TReg32
       ::nHandle := nHandle
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Get( cRegVar, uVar ) CLASS TReg32
 

@@ -29,7 +29,7 @@ PROCEDURE Main( lStartUp )
       lWinRun := .T.
    ENDIF
 
-   SET InteractiveClose Off
+   SET INTERACTIVECLOSE OFF
 
    DEFAULT cFileIni TO GetWindowsFolder() + "\" + "SYSTEM.INI"
 

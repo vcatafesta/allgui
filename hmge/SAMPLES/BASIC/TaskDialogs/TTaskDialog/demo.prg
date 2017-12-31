@@ -98,7 +98,7 @@ STATIC PROCEDURE ShowResult( obj )
          msg, ;
          If( :AllowDialogCancellation(), "", " not" ), ;
          If( :EnableHyperlinks(), "enabled", "disabled" ), ;
-         If( HB_ISNIL( :VerificationText() ), " not", "" ), ;
+         If( :VerificationText() == NIL, " not", "" ), ;
          If( :VerificationChecked(), "", "un" ), ;
          :SelectedButton(), ;
          If( ! Empty( :Cargo ), :Cargo + " was pressed also", "" ), ;

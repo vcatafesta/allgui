@@ -116,7 +116,7 @@ METHOD New( nRow, nCol, bSetGet, oWnd, nWidth, nHeight, cPict, bValid,;
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TGetBox:HandleEvent() Version 7.0 Jul/15/2004

@@ -1291,7 +1291,7 @@ METHOD New( cControlName, nRow, nCol, nWidth, nHeight, bLine, aHeaders, aColSize
       ::Super:Refresh( .T. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:AddColumn() Version 9.0 Nov/30/2009
@@ -1377,7 +1377,7 @@ METHOD AddColumn( oColumn ) CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetColumn() Version 7.0 Oct/10/2007
@@ -1388,7 +1388,7 @@ METHOD SetColumn( oColumn, nCol ) CLASS TSBrowse
 
    ::InsColumn( nCol, oColumn )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:AddSuperHead() Version 9.0 Nov/30/2009
@@ -1544,7 +1544,7 @@ METHOD AddSuperHead( nFromCol, nToCol, uHead, nHeight, aColors, l3dLook, uFont, 
       ::lDrawSuperHd := .t.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:BiClr() Version 9.0 Nov/30/2009
@@ -1675,7 +1675,7 @@ METHOD ChangeFont( hFont, nColumn, nLevel ) CLASS TSBrowse
       ::Refresh( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DbSkipper() Version 9.0 Nov/30/2009
@@ -2024,7 +2024,7 @@ METHOD Default() CLASS TSBrowse
       ::nLen := If( ::bLogicLen == Nil, Eval( ::bLogicLen := {||( cAlias )->( LastRec() ) } ), Eval( ::bLogicLen ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:Del() Version 9.0 Nov/30/2009
@@ -2037,7 +2037,7 @@ METHOD Del( nItem ) CLASS TSBrowse
 
    IF ! ::lIsArr
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    hb_ADel( ::aArray, nItem, .T. )
@@ -2045,7 +2045,7 @@ METHOD Del( nItem ) CLASS TSBrowse
    ::nLen := Eval( ::bLogicLen )
    ::Refresh( .T., .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DelColumn() Version 9.0 Nov/30/2009
@@ -2416,7 +2416,7 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
 
    IF Empty( ::aColumns )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::aColSizes == Nil .or. Len( ::aColSizes ) < Len( ::aColumns )
@@ -2481,7 +2481,7 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
 
    IF Empty( ::aColumns )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ! Empty( ::aSuperHead ) .and. ! lFooters
@@ -2809,7 +2809,7 @@ METHOD DrawHeaders( lFooters ) CLASS TSBrowse
 
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DrawIcons() Version 9.0 Nov/30/2009
@@ -3097,7 +3097,7 @@ METHOD DrawLine( xRow ) CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DrawPressed() Version 9.0 Nov/30/2009
@@ -3116,11 +3116,11 @@ METHOD DrawPressed( nCell, lPressed ) CLASS TSBrowse
 
    IF Empty( nCell ) .or. nCell > Len( ::aColumns ) .or. ! ::lDrawHeaders
 
-      RETURN Self
+      RETURN SELF
    ELSEIF ! lPressed .and. ! ::aColumns[ nCell ]:l3DLookHead
       ::DrawHeaders()
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    hDC   := GetDC( ::hWnd )
@@ -3158,7 +3158,7 @@ METHOD DrawPressed( nCell, lPressed ) CLASS TSBrowse
       nKeyPressed := nCell
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DrawSelect()  Version 9.0 Nov/30/2009
@@ -3201,7 +3201,7 @@ METHOD DrawSelect( xRow ) CLASS TSBrowse
 
    IF Empty( ::aColumns ) .or. ! ::lEnabled
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF _HMG_MainClientMDIHandle != 0 .and. ! lFocused .and. ::hWndParent == GetActiveMdiHandle()
@@ -3457,7 +3457,7 @@ METHOD DrawSelect( xRow ) CLASS TSBrowse
 
    ::lDrawSelect := .F.
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:DrawSuper() Version 9.0 Nov/30/2009
@@ -4705,7 +4705,7 @@ METHOD ExcelOle( cXlsFile, lActivate, hProgress, cTitle, hFont, lSave, bExtern, 
       MsgStop( "Excel not available. [" + Ole2TxtError()+ "]", "Error" )
 
       RETURN NIL
-   End
+   END
 
    IF hProgress != Nil
       nCount -= 15
@@ -5247,7 +5247,7 @@ METHOD FreezeCol( lNext ) CLASS TSBrowse
       ::HiliteCell( ::nFreeze + 1 )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GetAllColsWidth() Version 9.0 Nov/30/2009
@@ -5340,7 +5340,7 @@ METHOD GoBottom() CLASS TSBrowse
    ENDIF
    IF ::nLen < 1
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::lAppendMode := .F.
@@ -5389,7 +5389,7 @@ METHOD GoBottom() CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GoDown() Version 9.0 Nov/30/2009
@@ -5407,7 +5407,7 @@ METHOD GoDown() CLASS TSBrowse
          ::nRowPos := 1
       ELSE
 
-         RETURN Self
+         RETURN SELF
       ENDIF
    ENDIF
 
@@ -5415,7 +5415,7 @@ METHOD GoDown() CLASS TSBrowse
 
    IF ::nLen <= nLines .and. ::lNoLiteBar
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::lNoLiteBar
@@ -5492,7 +5492,7 @@ METHOD GoDown() CLASS TSBrowse
          ::lAppendMode := .F.
          ::lHitTop := ::lHitBottom := .F.
 
-         RETURN Self
+         RETURN SELF
       ELSEIF ::lSelector .and. nFirst == 1
          nFirst++
       ENDIF
@@ -5525,7 +5525,7 @@ METHOD GoDown() CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GoEnd() Version 9.0 Nov/30/2009
@@ -5550,7 +5550,7 @@ METHOD GoEnd() CLASS TSBrowse
          ENDIF
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nLastCol := Len( ::aColumns )
@@ -5576,7 +5576,7 @@ METHOD GoEnd() CLASS TSBrowse
 
    IF nBegin == ::nCell
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::lCellBrw
@@ -5600,7 +5600,7 @@ METHOD GoEnd() CLASS TSBrowse
    ::nOldCell := ::nCell
    ::HiliteCell( ::nCell )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GoHome() Version 9.0 Nov/30/2009
@@ -5620,14 +5620,14 @@ METHOD GoHome() CLASS TSBrowse
          ENDIF
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::nCell := ::nColPos
 
    IF ::nCell == ::nOldCell
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::lCellBrw
@@ -5655,7 +5655,7 @@ METHOD GoHome() CLASS TSBrowse
    ::nOldCell := ::nCell
    ::HiliteCell( ::nCell )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GoLeft() Version 9.0 Nov/30/2009
@@ -5681,7 +5681,7 @@ METHOD GoLeft() CLASS TSBrowse
          ::oHScroll:SetPos( ::nOffset )
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::ResetSeek()
@@ -5704,7 +5704,7 @@ METHOD GoLeft() CLASS TSBrowse
 
       IF nSkip == 0
 
-         RETURN Self
+         RETURN SELF
       ENDIF
 
       WHILE ::nColPos > ( ::nFreeze + 1 ) .and. ! ::IsColVisible( nCell )
@@ -5753,7 +5753,7 @@ METHOD GoLeft() CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    // ============================================================================
    // METHOD TSBrowse:GoNext() Version 9.0 Nov/30/2009
@@ -5814,7 +5814,7 @@ METHOD GoNext() CLASS TSBrowse
 
       ::nOldCell := ::nCell
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    Aeval( ::aColumns, { | oCol, nCol | nFirst := If( ::IsEditable( nCol ) .and. nFirst == 0, ;
@@ -5822,7 +5822,7 @@ METHOD GoNext() CLASS TSBrowse
 
    IF nFirst == 0
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::IsColVisible( nFirst )
@@ -5865,7 +5865,7 @@ METHOD GoNext() CLASS TSBrowse
    ENDIF
    ::GoDown()
 
-   RETURN Self
+   RETURN SELF
 
    // ============================================================================
    // METHOD TSBrowse:GoPos() Version 9.0 Nov/30/2009
@@ -6056,7 +6056,7 @@ METHOD GoRight() CLASS TSBrowse
          ENDIF
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::ResetSeek()
@@ -6066,7 +6066,7 @@ METHOD GoRight() CLASS TSBrowse
       IF ::nCell == Len( ::aColumns ) .and. ;  // avoid undesired displacement  //::GetColSizes()
             ::IsColVisible( ::nCell )
 
-         RETURN Self
+         RETURN SELF
       ENDIF
 
       nCell := ::nCell
@@ -6082,7 +6082,7 @@ METHOD GoRight() CLASS TSBrowse
 
       IF nCell > Len( ::aColumns )
 
-         RETURN Self
+         RETURN SELF
       ENDIF
 
       WHILE nSkip > 0
@@ -6130,7 +6130,7 @@ METHOD GoRight() CLASS TSBrowse
       IF ::nCell == Len( ::aColumns ) .and. ;  // avoid undesired displacement  //::GetColSizes()
             ::IsColVisible( ::nCell )
 
-         RETURN Self
+         RETURN SELF
       ENDIF
 
       IF ::oHScroll != Nil
@@ -6139,7 +6139,7 @@ METHOD GoRight() CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GotFocus() Version 9.0 Nov/30/2009
@@ -6232,7 +6232,7 @@ METHOD GoTop() CLASS TSBrowse
 
    IF ::nLen < 1
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::lAppendMode := .F.
@@ -6291,7 +6291,7 @@ METHOD GoTop() CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:GoUp() Version 9.0 Nov/30/2009
@@ -6310,7 +6310,7 @@ METHOD GoUp() CLASS TSBrowse
          ::nRowPos--                             // for empty dbfs
       ELSE
 
-         RETURN Self
+         RETURN SELF
       ENDIF
    ENDIF
 
@@ -6318,7 +6318,7 @@ METHOD GoUp() CLASS TSBrowse
 
    IF ::nLen <= nLines .and. ::lNoLiteBar
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::lNoLiteBar
@@ -6395,7 +6395,7 @@ METHOD GoUp() CLASS TSBrowse
    ::lAppendMode := .F.
    ::nPrevRec := Nil
 
-   RETURN Self
+   RETURN SELF
 
    * ==============================================================================
    * METHOD TSBrowse:KeyChar()  Version 9.0 Nov/30/2009
@@ -6802,7 +6802,7 @@ METHOD Selection() CLASS TSBrowse
    ENDIF
 #endif
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:KeyUp()  Version 9.0 Nov/30/2009
@@ -7191,7 +7191,7 @@ METHOD LDblClick( nRowPix, nColPix, nKeyFlags ) CLASS TSBrowse
    ::oWnd:nLastKey := 0
    IF ! ::lEnabled
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ( nClickRow == ::nRowPos .and. nClickRow > 0 ) .or. ( nClickRow == ::nRowPos .and. ! ::lDrawHeaders )
@@ -7234,7 +7234,7 @@ METHOD LDblClick( nRowPix, nColPix, nKeyFlags ) CLASS TSBrowse
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:LoadFields() Version 9.0 Nov/30/2009
@@ -7354,7 +7354,7 @@ METHOD LoadFields( lEditable ) CLASS TSBrowse
       ::nLen := If( ::bLogicLen == Nil, Eval( ::bLogicLen := {||( cAlias )->( LastRec() ) } ), Eval( ::bLogicLen ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:nAtCol() Version 9.0 Nov/30/2009
@@ -7748,7 +7748,7 @@ METHOD HThumbDrag( nPos ) CLASS TSBrowse
          ENDIF
          ::oHScroll:GoBottom()
 
-         RETURN Self
+         RETURN SELF
       ENDIF
 
       IF ::lIsTxt
@@ -7784,7 +7784,7 @@ METHOD HThumbDrag( nPos ) CLASS TSBrowse
       ::Refresh( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:InsColumn() Version 9.0 Nov/30/2009
@@ -7978,7 +7978,7 @@ METHOD Insert( cItem, nAt ) CLASS TSBrowse
 
    ::Refresh( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:AddItem() Version 7.0 Oct/10/2007
@@ -8026,7 +8026,7 @@ METHOD AddItem( cItem ) CLASS TSBrowse    // delete in V90
 
    ::Refresh( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:lEditCol() Version 7.0 Jul/15/2004
@@ -8167,7 +8167,7 @@ METHOD LoadRecordSet() CLASS TSBrowse
       ENDIF
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:LoadRelated() Version 9.0 Nov/30/2009
@@ -8181,7 +8181,7 @@ METHOD LoadRelated( cAlias, lEditable, aNames, aHeaders ) CLASS TSBrowse
 
    IF Empty( cAlias )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    cAlias  := AllTrim( cAlias )
@@ -8233,7 +8233,7 @@ METHOD LoadRelated( cAlias, lEditable, aNames, aHeaders ) CLASS TSBrowse
 
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:Look3D() Version 9.0 Nov/30/2009
@@ -8278,7 +8278,7 @@ METHOD Look3D( lOnOff, nColumn, nLevel, lPhantom ) CLASS TSBrowse
 
    ::Refresh( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:LostFocus() Version 9.0 Nov/30/2009
@@ -8619,7 +8619,7 @@ METHOD MoveColumn( nColPos, nNewPos ) CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:PageDown() Version 9.0 Nov/30/2009
@@ -8782,7 +8782,7 @@ METHOD PageUp( nLines ) CLASS TSBrowse
          Eval( ::bChange, Self, VK_PRIOR )
       ENDIF
 
-      RETURN Self
+      RETURN SELF
 
    ENDIF
 
@@ -9097,7 +9097,7 @@ METHOD PanEnd() CLASS TSBrowse
          ::oHScroll:setPos( ::nAt )
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::nColPos := nCols
@@ -9138,7 +9138,7 @@ METHOD PanEnd() CLASS TSBrowse
 
    ::HiliteCell( nCols )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:PanHome() Version 9.0 Nov/30/2009
@@ -9159,7 +9159,7 @@ METHOD PanHome() CLASS TSBrowse
          ::oHScroll:setPos( ::nAt )
       ENDIF
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    FOR nEle := 1 To Len( ::aColumns )
@@ -9198,7 +9198,7 @@ METHOD PanHome() CLASS TSBrowse
 
    ::HiliteCell( ::nCell )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:PanLeft() Version 9.0 Nov/30/2009
@@ -9227,12 +9227,12 @@ METHOD PanLeft() CLASS TSBrowse
       ENDIF
       ::Refresh( .F. )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::nFreeze >= nCols
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    AEval( ::aColSizes, { | nSize | nWide += nSize } )
@@ -9284,7 +9284,7 @@ METHOD PanLeft() CLASS TSBrowse
       ::HiliteCell( ::nCell )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:PanRight() Version 9.0 Nov/30/2009
@@ -9316,12 +9316,12 @@ METHOD PanRight() CLASS TSBrowse
 
       ::Refresh( .F. )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::nFreeze >= nCols
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    AEval( ::aColSizes, {|nSize| nWide += nSize }, nPos )
@@ -9390,7 +9390,7 @@ METHOD PanRight() CLASS TSBrowse
 
    ::HiliteCell( ::nCell )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:Proper() Version 9.0 Nov/30/2009
@@ -10049,7 +10049,7 @@ METHOD Report( cTitle, aCols, lPreview, lMultiple, lLandscape, lFromPos, aTotal 
    ::lHitTop := .F.
    ::SetFocus()
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:Reset() Version 9.0 Nov/30/2009
@@ -10097,7 +10097,7 @@ METHOD Reset( lBottom ) CLASS TSBrowse
       Eval( ::bChange, Self, 0 )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:ResetVScroll() Version 9.0 Nov/30/2009
@@ -10132,7 +10132,7 @@ METHOD ResetVScroll( lInit ) CLASS TSBrowse
       ::oVScroll:SetPos( ::RelPos( ::nLogicPos() ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:ResetSeek() Version 9.0 Nov/30/2009
@@ -10271,7 +10271,7 @@ METHOD Seek( nKey ) CLASS TSBrowse
                ::cSeek := Left( cSeek, Len( cSeek ) - 1 )
             ENDIF
 
-            RETURN Self
+            RETURN SELF
 
          ELSEIF ! lFound
 
@@ -10285,7 +10285,7 @@ METHOD Seek( nKey ) CLASS TSBrowse
                   ( ::cAlias )->( DbGoTo( nRecNo ) )
                   ::cSeek := Left( cSeek, Len( cSeek ) - 1 )
 
-                  RETURN Self
+                  RETURN SELF
                ENDIF
 
             ENDIF
@@ -10293,7 +10293,7 @@ METHOD Seek( nKey ) CLASS TSBrowse
             ::cSeek := cSeek
             ( ::cAlias )->( DbGoto( nRecNo ) )
 
-            RETURN Self
+            RETURN SELF
          ELSE
             ::lHitBottom := ::lHitTop := .F.
 
@@ -10397,7 +10397,7 @@ METHOD Seek( nKey ) CLASS TSBrowse
             Tone( 500, 1 )
             ::cSeek := Left( cSeek, Len( cSeek ) - 1 )
 
-            RETURN Self
+            RETURN SELF
          ELSEIF ! lFound
             IF ::cOrderType == "N"
                lASeek( Val( cSeek ) * 10, .T., Self )
@@ -10409,14 +10409,14 @@ METHOD Seek( nKey ) CLASS TSBrowse
                   ::cSeek := Left( cSeek, Len( cSeek ) - 1 )
                   ::nAt := nRecNo
 
-                  RETURN Self
+                  RETURN SELF
                ENDIF
             ENDIF
 
             ::cSeek := cSeek
             ::nAt   := nRecNo
 
-            RETURN Self
+            RETURN SELF
          ELSE
             IF nRecNo != ::nAt .and. ::nLen > nLines
                nRecNo := ::nAt
@@ -10477,7 +10477,7 @@ METHOD Seek( nKey ) CLASS TSBrowse
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:Set3DText() Version 9.0 Nov/30/2009
@@ -10495,7 +10495,7 @@ METHOD Set3DText( lOnOff, lRaised, nColumn, nLevel, nClrLight, ;
 
    IF Empty( ::aColumns )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ! lOnOff
@@ -10532,7 +10532,7 @@ METHOD Set3DText( lOnOff, lRaised, nColumn, nLevel, nClrLight, ;
          ::aColumns[ nColumn ]:l3DTextFoot := Nil
       ENDIF
 
-      RETURN Self
+      RETURN SELF
 
    ENDIF
 
@@ -10595,7 +10595,7 @@ METHOD Set3DText( lOnOff, lRaised, nColumn, nLevel, nClrLight, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetAlign() Version 9.0 Nov/30/2009
@@ -10634,7 +10634,7 @@ METHOD SetAlign( nColumn, nLevel, nAlign ) CLASS TSBrowse
       ::Refresh( .T. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetAppendMode() Version 9.0 Nov/30/2009
@@ -10786,7 +10786,7 @@ METHOD SetArray( aArray, lAutoCols, aHead, aSizes ) CLASS TSBrowse
       ::Refresh()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
 
@@ -11057,7 +11057,7 @@ METHOD SetArrayTo( aArray, uFontHF, aHead, aSizes, uFooter, aPicture, aAlign, aN
       ::Refresh()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetBtnGet() Version 9.0 Nov/30/2009
@@ -11071,7 +11071,7 @@ METHOD SetBtnGet( nColumn, cResName, bAction, nBmpWidth ) CLASS TSBrowse
 
    IF nColumn == Nil .or. nColumn > Len( ::aColumns ) .or. nColumn <= 0
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::aColumns[ nColumn ]:cResName  := cResName
@@ -11079,7 +11079,7 @@ METHOD SetBtnGet( nColumn, cResName, bAction, nBmpWidth ) CLASS TSBrowse
    ::aColumns[ nColumn ]:nBmpWidth := nBmpWidth
    ::aColumns[ nColumn ]:lBtnGet   := .t.
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetColMsg() Version 9.0 Nov/30/2009
@@ -11089,7 +11089,7 @@ METHOD SetColMsg( cMsg, cEditMsg, nCol ) CLASS TSBrowse
 
    IF Empty( ::aColumns ) .or. ( cMsg == Nil .and. cEditMsg == Nil )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF nCol == Nil
@@ -11105,7 +11105,7 @@ METHOD SetColMsg( cMsg, cEditMsg, nCol ) CLASS TSBrowse
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetColor() Version 9.0 Nov/30/2009
@@ -11122,12 +11122,12 @@ METHOD SetColor( xColor1, xColor2, nColumn ) CLASS TSBrowse
    IF ( Empty( ::aColumns ) .and. nColumn > 0 )
 
       RETURN NIL
-   End
+   END
 
    IF Valtype( xColor1 ) == "A" .and.  Valtype( xColor2 ) == "A" .and. len ( xColor1 ) > len ( xColor2 )
 
       RETURN NIL
-   End
+   END
 
    IF Valtype( xColor1 ) == "N" .and. Valtype( xColor2 ) == "N" .and. nColumn == 0
 
@@ -11490,7 +11490,7 @@ METHOD SetColumns( aData, aHeaders, aColSizes ) CLASS TSBrowse
       ::oHScroll:nMax := ::GetColSizes()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetColSize() Version 9.0 Nov/30/2009
@@ -11518,7 +11518,7 @@ METHOD SetColSize( nCol, nWidth ) CLASS TSBrowse
       ::Refresh( .T. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetData() Version 9.0 Nov/30/2009
@@ -11559,7 +11559,7 @@ METHOD SetData( nColumn, bData, aList ) CLASS TSBrowse
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetDbf() Version 9.0 Nov/30/2009
@@ -11621,7 +11621,7 @@ METHOD SetDbf( cAlias ) CLASS TSBrowse
    ::nLen := Eval( ::bLogicLen )
    ::ResetVScroll( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetDeleteMode()  Version 9.0 Nov/30/2009
@@ -11637,7 +11637,7 @@ METHOD SetDeleteMode( lOnOff, lConfirm, bDelete, bPostDel ) CLASS TSBrowse
    ::bDelete    := bDelete
    ::bPostDel   := bPostDel
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetFilter() Version 7.0 Jul/15/2004
@@ -11802,7 +11802,7 @@ METHOD SetHeaders( nHeight, aCols, aTitles, aAlign , al3DLook, aFonts, aActions 
 
    ::DrawHeaders()
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetIndexCols() Version 9.0 Nov/30/2009
@@ -12066,7 +12066,7 @@ METHOD SetSelectMode( lOnOff, bSelected, uBmpSel, nColSel, nAlign ) CLASS TSBrow
    IF ::lCanSelect .and. ;
          ( uBmpSel == Nil .or. Empty( nColSel ) .or. nColSel > Len( ::aColumns ) )
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::lCanSelect .and. uBmpSel != Nil
@@ -12094,7 +12094,7 @@ METHOD SetSelectMode( lOnOff, bSelected, uBmpSel, nColSel, nAlign ) CLASS TSBrow
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SetSpinner() Version 9.0 Nov/30/2009
@@ -12108,7 +12108,7 @@ METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax ) CLASS TSBrowse
 
    IF nColumn == Nil .or. nColumn > Len( ::aColumns ) .or. nColumn <= 0
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::aColumns[ nColumn ]:lSpinner := lOnOff
@@ -12118,7 +12118,7 @@ METHOD SetSpinner( nColumn, lOnOff, bUp, bDown, bMin, bMax ) CLASS TSBrowse
    ::aColumns[ nColumn ]:bMax     := bMax
    ::aColumns[ nColumn ]:lBtnGet  := .t.
 
-   RETURN Self
+   RETURN SELF
 
 #ifdef __DEBUG__
    * ============================================================================
@@ -12140,7 +12140,7 @@ METHOD ShowSizes() CLASS TSBrowse
 
    MsgInfo( cText, ::aMsg[ 26 ] )
 
-   RETURN Self
+   RETURN SELF
 #endif
 
    * ============================================================================
@@ -12220,7 +12220,7 @@ METHOD SortArray( nCol, lDescend ) CLASS TSBrowse
    ::nAt := AScan( ::aArray, {|e| lAEqual( e, aLine ) } )
    CursorHand()
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SwitchCols() Version 9.0 Nov/30/2009
@@ -12253,7 +12253,7 @@ METHOD SwitchCols( nCol1, nCol2 ) CLASS TSBrowse
       ::Refresh( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:SyncChild() Version 9.0 Nov/30/2009
@@ -12279,7 +12279,7 @@ METHOD SyncChild( aoChildBrw, abAction ) CLASS TSBrowse
          oChild:reset() ), Nil ) } ) }
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:UpStable() Version 9.0 Nov/30/2009
@@ -12311,7 +12311,7 @@ METHOD UpStable() CLASS TSBrowse
          ::Refresh( .F. )
          ::ResetVScroll()
 
-         RETURN Self
+         RETURN SELF
       ELSE
          ( ::cAlias )->( DbGoto( nRecNo ) )
       ENDIF
@@ -12361,7 +12361,7 @@ METHOD UpStable() CLASS TSBrowse
       ::Refresh( If( ::nLen < nRows, .T., .F. ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBrowse:VertLine() Version 9.0 Nov/30/2009
@@ -13272,7 +13272,7 @@ METHOD SetRecordSet( oRSet ) CLASS TSBrowse
    ::nLen := Eval( ::bLogicLen )
    ::ResetVScroll( .T. )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * FUNCTION TSBrowse RSetSkip() Version 9.0 Nov/30/2009
@@ -13631,7 +13631,7 @@ METHOD UpAStable() CLASS TSBrowse
          ::Refresh( .F. )
          ::ResetVScroll()
 
-         RETURN Self
+         RETURN SELF
       ENDIF
    ENDIF
 
@@ -13676,7 +13676,7 @@ METHOD UpAStable() CLASS TSBrowse
       ::Refresh( If( ::nLen < nRows, .T., .F. ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * =================================================================================
    * METHOD TSBrowse:lSeek() Version 9.0 Nov/30/2009 dichotomic search with recordsets
@@ -13739,7 +13739,7 @@ METHOD UpRStable( nRecNo ) CLASS TSBrowse
          ::Refresh( .F. )
          ::ResetVScroll()
 
-         RETURN Self
+         RETURN SELF
       ELSE
          Eval( ::bGoToPos, nRecNo )
       ENDIF
@@ -13788,7 +13788,7 @@ METHOD UpRStable( nRecNo ) CLASS TSBrowse
       ::Refresh( If( ::nLen < nRows, .T., .F. ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ===================================================================================================
    * METHOD TSBrowse:nField() Version 9.0 Nov/30/2009 returns field number from field name in recordsets
@@ -14209,7 +14209,7 @@ FUNCTION SBrowse( uAlias, cTitle, bSetUp, aCols, nWidth, nHeight, lSql ) // idea
             uAlias := cAlias
          CATCH
             uAlias := { { uAlias } }
-         End
+         END
       ENDIF
    ELSEIF ValType( uAlias ) == 'N'
 

@@ -108,7 +108,7 @@ METHOD New( oWnd, nId, nStyle, x, y, width, height, oFont, bInit, bSize, bPaint,
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HGrid
 

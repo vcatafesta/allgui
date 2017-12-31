@@ -164,7 +164,7 @@ STATIC PROCEDURE fGoBack()
          WinDemo.BForward.Enabled := .t.
       CATCH
          WinDemo.BBack.Enabled := .f.
-      End
+      END
    ENDIF
 
    RETURN
@@ -177,7 +177,7 @@ STATIC PROCEDURE fGoForward()
          WinDemo.BBack.Enabled := .t.
       CATCH
          WinDemo.BForward.Enabled := .f.
-      End
+      END
    ENDIF
 
    RETURN

@@ -78,7 +78,7 @@ METHOD New() CLASS TFtp
    ::oSocket := TSocket():New()
    //::oSocket:bDebug := .t.
 
-   RETURN Self
+   RETURN SELF
 
    // Connect
 
@@ -170,4 +170,4 @@ METHOD List() CLASS TFtp
       */
    ENDIF
 
-   RETURN Self
+   RETURN SELF

@@ -170,7 +170,7 @@ METHOD New() CLASS HBPrinter
    ENDIF
    ::BasePageName := GetTempFolder() + "\" + StrZero( Seconds() * 100, 8 ) + "_HBP_print_preview_"
 
-   RETURN self
+   RETURN SELF
 
 METHOD SelectPrinter( cPrinter, lPrev ) CLASS HBPrinter
 
@@ -228,7 +228,7 @@ METHOD SetDevMode( what, newvalue ) CLASS HBPrinter
    rr_getdevicecaps( ::DEVCAPS, ::Fonts[ 3 ] )
    ::setunits( ::units )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetUserMode( what, value, value2 ) CLASS HBPrinter
 
@@ -236,7 +236,7 @@ METHOD SetUserMode( what, value, value2 ) CLASS HBPrinter
    rr_getdevicecaps( ::DEVCAPS, ::Fonts[ 3 ] )
    ::setunits( ::units )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD StartDoc( ldocname ) CLASS HBPrinter
 
@@ -248,7 +248,7 @@ METHOD StartDoc( ldocname ) CLASS HBPrinter
       rr_startdoc( ::DOCNAME )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD SetPage( orient, size, fontname ) CLASS HBPrinter
 
@@ -266,7 +266,7 @@ METHOD SetPage( orient, size, fontname ) CLASS HBPrinter
    rr_getdevicecaps( ::DEVCAPS, ::Fonts[ 3 ] )
    ::setunits( ::units )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Startpage() CLASS HBPrinter
 
@@ -286,7 +286,7 @@ METHOD Startpage() CLASS HBPrinter
       rr_selectfont( ::Fonts[ 1, 1 ] )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD Endpage() CLASS HBPrinter
 
@@ -297,7 +297,7 @@ METHOD Endpage() CLASS HBPrinter
       rr_endpage()
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD SaveMetaFiles( number, filename ) CLASS HBPrinter
 
@@ -310,7 +310,7 @@ METHOD SaveMetaFiles( number, filename ) CLASS HBPrinter
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD EndDoc() CLASS HBPrinter
 
@@ -321,7 +321,7 @@ METHOD EndDoc() CLASS HBPrinter
    ENDIF
    ::Printing := .F.
 
-   RETURN self
+   RETURN SELF
 
 METHOD SetTextColor( clr ) CLASS HBPrinter
 
@@ -376,7 +376,7 @@ METHOD DefineBrush( defname, lstyle, lcolor, lhatch ) CLASS HBPrinter
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    // BEGIN RL 2003-08-03
    IF ISARRAY ( lcolor )
@@ -389,7 +389,7 @@ METHOD DefineBrush( defname, lstyle, lcolor, lhatch ) CLASS HBPrinter
    AAdd( ::Brushes[ 1 ], rr_createbrush( lstyle, lcolor, lhatch ) )
    AAdd( ::Brushes[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD SelectBrush( defname ) CLASS HBPrinter
 
@@ -400,7 +400,7 @@ METHOD SelectBrush( defname ) CLASS HBPrinter
       ::Brushes[ 1, 1 ] := lhand
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD ModifyBrush( defname, lstyle, lcolor, lhatch ) CLASS HBPrinter
 
@@ -418,7 +418,7 @@ METHOD ModifyBrush( defname, lstyle, lcolor, lhatch ) CLASS HBPrinter
    IF lhand == 0 .OR. lpos == 0
       ::error := 1
 
-      RETURN self
+      RETURN SELF
    ENDIF
    // BEGIN RL 2003-08-03
    IF ISARRAY ( lcolor )
@@ -433,7 +433,7 @@ METHOD ModifyBrush( defname, lstyle, lcolor, lhatch ) CLASS HBPrinter
       ::selectbrush( ::Brushes[ 2, lpos ] )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefinePen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
 
@@ -441,7 +441,7 @@ METHOD DefinePen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    // BEGIN RL 2003-08-03
    IF ISARRAY ( lcolor )
@@ -454,7 +454,7 @@ METHOD DefinePen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
    AAdd( ::Pens[ 1 ], rr_createpen( lstyle, lwidth, lcolor ) )
    AAdd( ::Pens[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD ModifyPen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
 
@@ -472,7 +472,7 @@ METHOD ModifyPen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
    IF lhand == 0 .OR. lpos <= 1
       ::error := 1
 
-      RETURN self
+      RETURN SELF
    ENDIF
    // BEGIN RL 2003-08-03
    IF ISARRAY ( lcolor )
@@ -487,7 +487,7 @@ METHOD ModifyPen( defname, lstyle, lwidth, lcolor ) CLASS HBPrinter
       ::selectpen( ::Pens[ 2, lpos ] )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD SelectPen( defname ) CLASS HBPrinter
 
@@ -498,7 +498,7 @@ METHOD SelectPen( defname ) CLASS HBPrinter
       ::Pens[ 1, 1 ] := lhand
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefineFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, litalic, lunderline, lstrikeout ) CLASS HBPrinter
 
@@ -506,7 +506,7 @@ METHOD DefineFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, l
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    lfontname := if( lfontname == NIL, "", Upper( AllTrim( lfontname ) ) )
    DEFAULT lfontsize TO -1
@@ -520,7 +520,7 @@ METHOD DefineFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, l
    AAdd( ::Fonts[ 2 ], Upper( AllTrim( defname ) ) )
    AAdd( ::Fonts[ 4 ], { lfontname, lfontsize, lfontwidth, langle, lweight, litalic, lunderline, lstrikeout } )
 
-   RETURN self
+   RETURN SELF
 
 METHOD ModifyFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, lnweight, litalic, lnitalic, lunderline, lnunderline, lstrikeout, lnstrikeout ) CLASS HBPrinter
 
@@ -538,7 +538,7 @@ METHOD ModifyFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, l
    IF lhand == 0 .OR. lpos <= 1
       ::error := 1
 
-      RETURN self
+      RETURN SELF
    ENDIF
 
    iif(lfontname <> NIL , ::Fonts[4,lpos,1] := Upper(Alltrim(lfontname)), NIL)
@@ -561,7 +561,7 @@ METHOD ModifyFont( defname, lfontname, lfontsize, lfontwidth, langle, lweight, l
    ENDIF
    rr_deleteobjects( { 0, lhand } )
 
-   RETURN self
+   RETURN SELF
 
 METHOD SelectFont( defname ) CLASS HBPrinter
 
@@ -572,7 +572,7 @@ METHOD SelectFont( defname ) CLASS HBPrinter
       ::Fonts[ 1, 1 ] := lhand
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD SetUnits( newvalue, r, c ) CLASS HBPrinter
 
@@ -646,7 +646,7 @@ METHOD DrawText( row, col, torow, tocol, txt, style, defname ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    rr_drawtext( ::Convert( { row, col } ), ::Convert( { torow, tocol } ), txt, style, lhf )
 
-   RETURN self
+   RETURN SELF
 
 METHOD TEXTOUT( row, col, txt, defname ) CLASS HBPrinter
 
@@ -654,7 +654,7 @@ METHOD TEXTOUT( row, col, txt, defname ) CLASS HBPrinter
 
    rr_textout( txt, ::Convert( { row, col } ), lhf, numat( " ", txt ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Say( row, col, txt, defname, lcolor, lalign ) CLASS HBPrinter
 
@@ -695,7 +695,7 @@ METHOD Say( row, col, txt, defname, lcolor, lalign ) CLASS HBPrinter
       rr_settextcolor( ::textcolor )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefineImageList( defname, cpicture, nicons ) CLASS HBPrinter
 
@@ -703,7 +703,7 @@ METHOD DefineImageList( defname, cpicture, nicons ) CLASS HBPrinter
 
    IF lhi <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    hand := rr_createimagelist( cpicture, nicons, @w, @h )
    IF hand <> 0 .AND. w > 0 .AND. h > 0
@@ -711,7 +711,7 @@ METHOD DefineImageList( defname, cpicture, nicons ) CLASS HBPrinter
       AAdd( ::imagelists[ 2 ], Upper( AllTrim( defname ) ) )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD DrawImageList( defname, nicon, row, col, torow, tocol, lstyle, color ) CLASS HBPrinter
 
@@ -719,14 +719,14 @@ METHOD DrawImageList( defname, nicon, row, col, torow, tocol, lstyle, color ) CL
 
    IF Empty( lhi )
 
-      RETURN self
+      RETURN SELF
    ENDIF
    DEFAULT COLOR TO -1
    DEFAULT torow to ::maxrow
    DEFAULT tocol to ::maxcol
    ::error := rr_drawimagelist( lhi[ 1 ], nicon, ::convert( { row, col } ), ::convert( { torow - row, tocol - col } ), lhi[ 3 ], lhi[ 4 ], lstyle, color )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Rectangle( row, col, torow, tocol, defpen, defbrush ) CLASS HBPrinter
 
@@ -736,7 +736,7 @@ METHOD Rectangle( row, col, torow, tocol, defpen, defbrush ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_rectangle( ::convert( { row, col } ), ::convert( { torow, tocol } ), lhp, lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD FrameRect( row, col, torow, tocol, defbrush ) CLASS HBPrinter
 
@@ -746,7 +746,7 @@ METHOD FrameRect( row, col, torow, tocol, defbrush ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_framerect( ::convert( { row, col } ), ::convert( { torow, tocol } ), lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD RoundRect( row, col, torow, tocol, widthellipse, heightellipse, defpen, defbrush ) CLASS HBPrinter
 
@@ -756,7 +756,7 @@ METHOD RoundRect( row, col, torow, tocol, widthellipse, heightellipse, defpen, d
    DEFAULT tocol to ::maxcol
    ::error = rr_roundrect( ::convert( { row, col } ), ::convert( { torow, tocol } ), ::convert( { widthellipse, heightellipse } ), lhp, lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD FillRect( row, col, torow, tocol, defbrush ) CLASS HBPrinter
 
@@ -766,7 +766,7 @@ METHOD FillRect( row, col, torow, tocol, defbrush ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_fillrect( ::convert( { row, col } ), ::convert( { torow, tocol } ), lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD InvertRect( row, col, torow, tocol ) CLASS HBPrinter
 
@@ -774,7 +774,7 @@ METHOD InvertRect( row, col, torow, tocol ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_invertrect( ::convert( { row, col } ), ::convert( { torow, tocol } ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Ellipse( row, col, torow, tocol, defpen, defbrush ) CLASS HBPrinter
 
@@ -784,7 +784,7 @@ METHOD Ellipse( row, col, torow, tocol, defpen, defbrush ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_ellipse( ::convert( { row, col } ), ::convert( { torow, tocol } ), lhp, lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Arc( row, col, torow, tocol, rowsarc, colsarc, rowearc, colearc, defpen ) CLASS HBPrinter
 
@@ -794,7 +794,7 @@ METHOD Arc( row, col, torow, tocol, rowsarc, colsarc, rowearc, colearc, defpen )
    DEFAULT tocol to ::maxcol
    ::error = rr_arc( ::convert( { row, col } ), ::convert( { torow, tocol } ), ::convert( { rowsarc, colsarc } ), ::convert( { rowearc, colearc } ), lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD ArcTo( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen ) CLASS HBPrinter
 
@@ -804,7 +804,7 @@ METHOD ArcTo( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen
    DEFAULT tocol to ::maxcol
    ::error = rr_arcto( ::convert( { row, col } ), ::convert( { torow, tocol } ), ::convert( { rowrad1, colrad1 } ), ::convert( { rowrad2, colrad2 } ), lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Chord( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush ) CLASS HBPrinter
 
@@ -814,7 +814,7 @@ METHOD Chord( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen
    DEFAULT tocol to ::maxcol
    ::error = rr_chord( ::convert( { row, col } ), ::convert( { torow, tocol } ), ::convert( { rowrad1, colrad1 } ), ::convert( { rowrad2, colrad2 } ), lhp, lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Pie( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, defbrush ) CLASS HBPrinter
 
@@ -824,7 +824,7 @@ METHOD Pie( row, col, torow, tocol, rowrad1, colrad1, rowrad2, colrad2, defpen, 
    DEFAULT tocol to ::maxcol
    ::error = rr_pie( ::convert( { row, col } ), ::convert( { torow, tocol } ), ::convert( { rowrad1, colrad1 } ), ::convert( { rowrad2, colrad2 } ), lhp, lhb )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Polygon( apoints, defpen, defbrush, style ) CLASS HBPrinter
 
@@ -834,7 +834,7 @@ METHOD Polygon( apoints, defpen, defbrush, style ) CLASS HBPrinter
    AEval( apoints, {| x | temp := ::convert( x ), AAdd( apx, temp[ 2 ] ), AAdd( apy, temp[ 1 ] ) } )
    ::error := rr_polygon( apx, apy, lhp, lhb, style )
 
-   RETURN self
+   RETURN SELF
 
 METHOD PolyBezier( apoints, defpen ) CLASS HBPrinter
 
@@ -844,7 +844,7 @@ METHOD PolyBezier( apoints, defpen ) CLASS HBPrinter
    AEval( apoints, {| x | temp := ::convert( x ), AAdd( apx, temp[ 2 ] ), AAdd( apy, temp[ 1 ] ) } )
    ::error := rr_polybezier( apx, apy, lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD PolyBezierTo( apoints, defpen ) CLASS HBPrinter
 
@@ -854,7 +854,7 @@ METHOD PolyBezierTo( apoints, defpen ) CLASS HBPrinter
    AEval( apoints, {| x | temp := ::convert( x ), AAdd( apx, temp[ 2 ] ), AAdd( apy, temp[ 1 ] ) } )
    ::error := rr_polybezierto( apx, apy, lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Line( row, col, torow, tocol, defpen ) CLASS HBPrinter
 
@@ -864,7 +864,7 @@ METHOD Line( row, col, torow, tocol, defpen ) CLASS HBPrinter
    DEFAULT tocol to ::maxcol
    ::error = rr_line( ::convert( { row, col } ), ::convert( { torow, tocol } ), lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD LineTo( row, col, defpen ) CLASS HBPrinter
 
@@ -872,7 +872,7 @@ METHOD LineTo( row, col, defpen ) CLASS HBPrinter
 
    ::error = rr_lineto( ::convert( { row, col } ), lhp )
 
-   RETURN self
+   RETURN SELF
 
 METHOD GetTextExtent( ctext, apoint, deffont ) CLASS HBPrinter
 
@@ -880,7 +880,7 @@ METHOD GetTextExtent( ctext, apoint, deffont ) CLASS HBPrinter
 
    ::error = rr_gettextextent( ctext, apoint, lhf )
 
-   RETURN self
+   RETURN SELF
 
 METHOD GetTextExtent_mm( ctext, apoint, deffont ) CLASS HBPrinter
 
@@ -890,7 +890,7 @@ METHOD GetTextExtent_mm( ctext, apoint, deffont ) CLASS HBPrinter
    apoint[ 1 ] := 25.4 * apoint[ 1 ] / ::DevCaps[ 5 ]
    apoint[ 2 ] := 25.4 * apoint[ 2 ] / ::DevCaps[ 6 ]
 
-   RETURN self
+   RETURN SELF
 
 METHOD GetObjByName( defname, what, retpos ) CLASS HBPrinter
 
@@ -924,14 +924,14 @@ METHOD DefineRectRgn( defname, row, col, torow, tocol ) CLASS HBPrinter
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    DEFAULT torow to ::maxrow
    DEFAULT tocol to ::maxcol
    AAdd( ::Regions[ 1 ], rr_creatergn( ::convert( { row, col } ), ::convert( { torow, tocol } ), 1 ) )
    AAdd( ::Regions[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefineEllipticRgn( defname, row, col, torow, tocol ) CLASS HBPrinter
 
@@ -939,14 +939,14 @@ METHOD DefineEllipticRgn( defname, row, col, torow, tocol ) CLASS HBPrinter
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    DEFAULT torow to ::maxrow
    DEFAULT tocol to ::maxcol
    AAdd( ::Regions[ 1 ], rr_creatergn( ::convert( { row, col } ), ::convert( { torow, tocol } ), 2 ) )
    AAdd( ::Regions[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefineRoundRectRgn( defname, row, col, torow, tocol, widthellipse, heightellipse ) CLASS HBPrinter
 
@@ -954,14 +954,14 @@ METHOD DefineRoundRectRgn( defname, row, col, torow, tocol, widthellipse, height
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    DEFAULT torow to ::maxrow
    DEFAULT tocol to ::maxcol
    AAdd( ::Regions[ 1 ], rr_creatergn( ::convert( { row, col } ), ::convert( { torow, tocol } ), 3, ::convert( { widthellipse, heightellipse } ) ) )
    AAdd( ::Regions[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD DefinePolygonRgn( defname, apoints, style ) CLASS HBPrinter
 
@@ -970,13 +970,13 @@ METHOD DefinePolygonRgn( defname, apoints, style ) CLASS HBPrinter
 
    IF lhand <> 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    AEval( apoints, {| x | temp := ::convert( x ), AAdd( apx, temp[ 2 ] ), AAdd( apy, temp[ 1 ] ) } )
    AAdd( ::Regions[ 1 ], rr_createPolygonrgn( apx, apy, style ) )
    AAdd( ::Regions[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD CombineRgn( defname, reg1, reg2, style ) CLASS HBPrinter
 
@@ -985,12 +985,12 @@ METHOD CombineRgn( defname, reg1, reg2, style ) CLASS HBPrinter
 
    IF lhand <> 0 .OR. lr1 == 0 .OR. lr2 == 0
 
-      RETURN self
+      RETURN SELF
    ENDIF
    AAdd( ::Regions[ 1 ], rr_combinergn( lr1, lr2, style ) )
    AAdd( ::Regions[ 2 ], Upper( AllTrim( defname ) ) )
 
-   RETURN self
+   RETURN SELF
 
 METHOD SelectClipRgn( defname ) CLASS HBPrinter
 
@@ -1001,14 +1001,14 @@ METHOD SelectClipRgn( defname ) CLASS HBPrinter
       ::Regions[ 1, 1 ] := lhand
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD DeleteClipRgn() CLASS HBPrinter
 
    ::Regions[ 1, 1 ] := 0
    rr_deletecliprgn()
 
-   RETURN self
+   RETURN SELF
 
 METHOD SetViewPortOrg( row, col ) CLASS HBPrinter
 
@@ -1017,13 +1017,13 @@ METHOD SetViewPortOrg( row, col ) CLASS HBPrinter
    ::ViewPortOrg := ::convert( { row, col } )
    rr_setviewportorg( ::ViewPortOrg )
 
-   RETURN self
+   RETURN SELF
 
 METHOD GetViewPortOrg() CLASS HBPrinter
 
    rr_getviewportorg( ::ViewPortOrg )
 
-   RETURN self
+   RETURN SELF
 
 METHOD End() CLASS HBPrinter
 
@@ -1242,7 +1242,7 @@ METHOD Picture( row, col, torow, tocol, cpicture, extrow, extcol ) CLASS HBPrint
    lp3 := ::convert( { extrow, extcol } )
    rr_drawpicture( cpicture, lp1, lp2, lp3 )
 
-   RETURN self
+   RETURN SELF
 
 STATIC FUNCTION sayconvert( ltxt )
 
@@ -1308,20 +1308,20 @@ METHOD PrevThumb( nclick ) CLASS HBPrinter
 
    IF iloscstron == 1
 
-      RETURN self
+      RETURN SELF
    ENDIF
    IF nclick <> NIL
       page := ngroup * 15 + nclick
          ::prevshow()
          SetProperty ( 'hbpreview', 'combo_1', 'value', Page )
 
-         RETURN self
+         RETURN SELF
       ENDIF
       IF Int( ( page - 1 ) / 15 ) <> ngroup
          ngroup := Int( ( page - 1 ) / 15 )
       ELSE
 
-         RETURN self
+         RETURN SELF
       ENDIF
       spage := ngroup * 15
 
@@ -1341,7 +1341,7 @@ METHOD PrevThumb( nclick ) CLASS HBPrinter
          ENDIF
       NEXT
 
-      RETURN self
+      RETURN SELF
 
 METHOD PrevShow() CLASS HBPrinter
 
@@ -1382,7 +1382,7 @@ METHOD PrevShow() CLASS HBPrinter
    rr_scrollwindow( ahs[ 5, 7 ], -spos[ 1 ] * azoom[ 4 ], -spos[ 2 ] * azoom[ 3 ] )
    CShowControl( ahs[ 6, 7 ] )
 
-   RETURN self
+   RETURN SELF
 
 METHOD PrevPrint( n1 ) CLASS HBPrinter
 
@@ -1441,7 +1441,7 @@ METHOD PrevPrint( n1 ) CLASS HBPrinter
    ::printingemf := .F.
    ::Previewmode := .T.
 
-   RETURN self
+   RETURN SELF
 
 STATIC FUNCTION LangInit
 
@@ -2124,7 +2124,7 @@ METHOD Preview() CLASS HBPrinter
 
    IF !::PreviewMode .OR. Empty( ::metafiles )
 
-      RETURN self
+      RETURN SELF
    ENDIF
 
    FOR pi = 1 TO iloscstron
@@ -2300,7 +2300,7 @@ METHOD PrevClose( lEsc ) CLASS HBPrinter
    ::lEscaped := lEsc
    _ReleaseWindow ( "HBPREVIEW" )
 
-   RETURN self
+   RETURN SELF
 
 METHOD PrintOption() CLASS HBPrinter
 
@@ -2386,7 +2386,7 @@ METHOD ReportData( l_x1, l_x2, l_x3, l_x4, l_x5, l_x6 ) CLASS HBPrinter
    SET CONSOLE ON
    SET DEVICE TO SCREEN
 
-   RETURN self
+   RETURN SELF
 #endif
 
    /*

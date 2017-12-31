@@ -38,20 +38,20 @@ FUNCTION venda_delivery()
 
    PUBLIC _conta_sequencia := 100
 
-   sele bordas
+   SELE bordas
    GO TOP
    WHILE .not. eof()
       aadd(a_bordas,bordas->nome+'-'+trans(bordas->preco,'@E 999.99'))
       SKIP
-   end
+   END
 
-   sele montagem
+   SELE montagem
    ZAP
    PACK
-   sele temp_vendas
+   SELE temp_vendas
    ZAP
    PACK
-   sele tmp_tela
+   SELE tmp_tela
    ZAP
    PACK
 
@@ -206,7 +206,7 @@ FUNCTION venda_delivery()
       fontsize 12
       fontcolor BLUE
       onchange pega_tamanho()
-   end comboboxex
+   END comboboxex
 
    * grids
 
@@ -303,7 +303,7 @@ FUNCTION venda_delivery()
    fontsize 12
    fontcolor BLUE
    onchange adiciona_borda()
-end comboboxex
+END comboboxex
 @ 490,(410 + n_largura_grid + 10) label label_total_0;
    of form_delivery;
    width 250;
@@ -402,7 +402,7 @@ separa_pizza()
 separa_produto()
 
 on key F9 action fecha_pedido()
-on key escape action thiswindow.release
+ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
@@ -416,7 +416,7 @@ form_delivery.grid_pizzas.Header(8) := alltrim(_tamanho_006)
 form_delivery.maximize
 form_delivery.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION procura_cliente(cform,ctextbtn)
 
@@ -444,7 +444,7 @@ STATIC FUNCTION procura_cliente(cform,ctextbtn)
             historico_cliente(__codigo_cliente)
             form_delivery.cbo_tamanhos.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ENDIF
       IF .not. empty(creg)
@@ -464,7 +464,7 @@ STATIC FUNCTION procura_cliente(cform,ctextbtn)
             historico_cliente(__codigo_cliente)
             form_delivery.cbo_tamanhos.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ENDIF
    ELSE
@@ -500,12 +500,12 @@ STATIC FUNCTION procura_cliente(cform,ctextbtn)
             msgalert('Telefone não está cadastrado','Atenção')
             form_delivery.tbox_telefone.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
-      end
+      END
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_clientes(value)
 
@@ -564,9 +564,9 @@ STATIC FUNCTION getcode_clientes(value)
          readonly {.T.,.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (iif(empty(clientes->fixo),creg:=clientes->celular,creg:=clientes->fixo),thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -585,12 +585,12 @@ STATIC FUNCTION find_clientes()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF clientes->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := clientes->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_produto()
 
@@ -610,23 +610,23 @@ STATIC FUNCTION procura_produto()
          IF msgyesno('Este código não é válido. Deseja procurar na lista ?','Atenção')
             mostra_listagem_produto()
 
-            return(nil)
+            RETURN NIL
          ELSE
             form_delivery.tbox_produto.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ELSE
          setproperty('form_delivery','label_nome_produto','value',produtos->nome_longo)
          setproperty('form_delivery','tbox_preco','value',produtos->vlr_venda)
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ELSE
       mostra_listagem_produto()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_listagem_produto()
 
@@ -656,7 +656,7 @@ STATIC FUNCTION mostra_listagem_produto()
          ondblclick mostra_informacao_produto()
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -667,7 +667,7 @@ STATIC FUNCTION mostra_listagem_produto()
    form_pesquisa.center
    form_pesquisa.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION separa_produto()
 
@@ -682,9 +682,9 @@ STATIC FUNCTION separa_produto()
          add item {produtos->codigo,alltrim(produtos->nome_longo),trans(produtos->vlr_venda,'@E 999,999.99')} to grid_produtos of form_delivery
       ENDIF
       produtos->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_informacao_produto()
 
@@ -706,7 +706,7 @@ STATIC FUNCTION mostra_informacao_produto()
 
    form_pesquisa.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_pizza()
 
@@ -726,22 +726,22 @@ STATIC FUNCTION procura_pizza()
          IF msgyesno('Este código não é de uma Pizza. Deseja procurar na lista ?','Atenção')
             mostra_listagem_pizza()
 
-            return(nil)
+            RETURN NIL
          ELSE
             form_delivery.tbox_pizza.setfocus
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ELSE
          setproperty('form_delivery','label_nome_pizza','value',produtos->nome_longo)
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ELSE
       mostra_listagem_pizza()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_listagem_pizza()
 
@@ -771,7 +771,7 @@ STATIC FUNCTION mostra_listagem_pizza()
          ondblclick mostra_informacao()
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -782,7 +782,7 @@ STATIC FUNCTION mostra_listagem_pizza()
    form_pesquisa.center
    form_pesquisa.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION separa_pizza()
 
@@ -797,9 +797,9 @@ STATIC FUNCTION separa_pizza()
          add item {produtos->codigo,alltrim(produtos->nome_longo),alltrim(trans(produtos->val_tm_001,'@E 99,999.99')),alltrim(trans(produtos->val_tm_002,'@E 99,999.99')),alltrim(trans(produtos->val_tm_003,'@E 99,999.99')),alltrim(trans(produtos->val_tm_004,'@E 99,999.99')),alltrim(trans(produtos->val_tm_005,'@E 99,999.99')),alltrim(trans(produtos->val_tm_006,'@E 99,999.99'))} to grid_pizzas of form_delivery
       ENDIF
       produtos->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_informacao()
 
@@ -811,7 +811,7 @@ STATIC FUNCTION mostra_informacao()
 
    form_pesquisa.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION zera_tabelas()
 
@@ -823,7 +823,7 @@ STATIC FUNCTION zera_tabelas()
    ZAP
    PACK
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cadastrar_novo_cliente()
 
@@ -1120,7 +1120,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_incluir_novo_cliente.width-100
@@ -1133,9 +1133,9 @@ STATIC FUNCTION cadastrar_novo_cliente()
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1145,7 +1145,7 @@ STATIC FUNCTION cadastrar_novo_cliente()
    form_incluir_novo_cliente.center
    form_incluir_novo_cliente.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_novo_cliente()
 
@@ -1159,7 +1159,7 @@ STATIC FUNCTION gravar_novo_cliente()
    IF retorna
       msgalert('Preencha o campo nome','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    WHILE .T.
@@ -1175,7 +1175,7 @@ STATIC FUNCTION gravar_novo_cliente()
          msgexclamation('Servidor congestionado, tecle ENTER e aguarde','Atenção')
          LOOP
       ENDIF
-   end
+   END
    dbselectarea('clientes')
    clientes->(dbappend())
    clientes->codigo   := codigo
@@ -1205,7 +1205,7 @@ STATIC FUNCTION gravar_novo_cliente()
       form_delivery.tbox_telefone.setfocus
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_adicionar()
 
@@ -1223,7 +1223,7 @@ STATIC FUNCTION gravar_adicionar()
    form_delivery.tbox_pizza.value := ''
    form_delivery.tbox_pizza.setfocus
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_produto()
 
@@ -1246,14 +1246,14 @@ STATIC FUNCTION gravar_produto()
    form_delivery.tbox_produto.setfocus
    */
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_pizza()
 
    IF empty(tmp_pizza->nome)
       msgalert('Escolha o que deseja excluir primeiro','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF msgyesno('Excluir : '+alltrim(tmp_pizza->nome),'Excluir')
@@ -1264,14 +1264,14 @@ STATIC FUNCTION excluir_pizza()
    form_delivery.grid_pizzas.setfocus
    form_delivery.grid_pizzas.value := recno()
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_produto()
 
    IF empty(tmp_produto->nome)
       msgalert('Escolha o que deseja excluir primeiro','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF msgyesno('Excluir : '+alltrim(tmp_produto->nome),'Excluir')
@@ -1282,7 +1282,7 @@ STATIC FUNCTION excluir_produto()
    form_delivery.grid_produtos.setfocus
    form_delivery.grid_produtos.value := recno()
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION fecha_pizza()
 
@@ -1291,7 +1291,7 @@ STATIC FUNCTION fecha_pizza()
    IF eof()
       msgexclamation('Nenhuma pizza foi selecionada ainda','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    DEFINE WINDOW form_finaliza_pizza;
@@ -1362,7 +1362,7 @@ STATIC FUNCTION fecha_pizza()
          ondblclick pega_tamanho_valor_pizza()
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -1371,7 +1371,7 @@ STATIC FUNCTION fecha_pizza()
    form_finaliza_pizza.center
    form_finaliza_pizza.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION monta_informacao_pizza()
 
@@ -1390,9 +1390,9 @@ STATIC FUNCTION monta_informacao_pizza()
       ENDIF
       dbselectarea('tmp_pizza')
       tmp_pizza->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pega_tamanho_valor_pizza()
 
@@ -1404,10 +1404,10 @@ STATIC FUNCTION pega_tamanho_valor_pizza()
 
    IF x_coluna == 1
 
-      return(nil)
+      RETURN NIL
    ELSEIF x_coluna == 2
 
-      return(nil)
+      RETURN NIL
    ELSEIF x_coluna == 3
       x_nome_tamanho := alltrim(_tamanho_001)+' '+alltrim(str(_pedaco_001))+'ped'
    ELSEIF x_coluna == 4
@@ -1431,7 +1431,7 @@ STATIC FUNCTION pega_tamanho_valor_pizza()
          REPLACE preco with x_preco
       ENDIF
       tmp_pizza->(dbskip())
-   end
+   END
 
    _conta_pizza ++
 
@@ -1440,7 +1440,7 @@ STATIC FUNCTION pega_tamanho_valor_pizza()
    form_delivery.grid_pizzas.setfocus
    form_delivery.tbox_observacoes.setfocus
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION verifica_zero()
 
@@ -1449,10 +1449,10 @@ STATIC FUNCTION verifica_zero()
    IF empty(x_qtd)
       form_delivery.tbox_quantidade.setfocus
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION fecha_pedido()
 
@@ -1473,7 +1473,7 @@ STATIC FUNCTION fecha_pedido()
    IF eof()
       msgstop('Nenhuma venda foi realizada, tecle ENTER','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    INDEX ON sequencia to indseq for tipo == 1
@@ -1489,7 +1489,7 @@ STATIC FUNCTION fecha_pedido()
          x_valor_pizza := (x_valor_pizza+x_old_valor)
       ENDIF
 
-   end
+   END
 
    SET index to
 
@@ -1500,7 +1500,7 @@ STATIC FUNCTION fecha_pedido()
          x_valor_prod := (x_valor_prod+temp_vendas->subtotal)
       ENDIF
       temp_vendas->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_fecha_pedido;
          at 000,000;
@@ -1763,14 +1763,14 @@ STATIC FUNCTION fecha_pedido()
          action form_fecha_pedido.release;
          tooltip 'Clique aqui para voltar a vender'
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_fecha_pedido.center
    form_fecha_pedido.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION calcula_final(p_borda)
 
@@ -1800,7 +1800,7 @@ STATIC FUNCTION calcula_final(p_borda)
    setproperty('form_fecha_pedido','label_011_valor','value',trans(x_recebido,'@E 999,999.99'))
    setproperty('form_fecha_pedido','label_012_valor','value',trans(x_troco,'@E 999,999.99'))
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION fechamento_geral(p_borda)
 
@@ -1918,7 +1918,7 @@ STATIC FUNCTION fechamento_geral(p_borda)
          ENDIF
          dbselectarea('temp_vendas')
          temp_vendas->(dbskip())
-      end
+      END
    ENDIF
    SET index to
 
@@ -1954,11 +1954,11 @@ STATIC FUNCTION fechamento_geral(p_borda)
                IF produto_composto->id_produto <> x_old
                   EXIT
                ENDIF
-            end
+            END
          ENDIF
          dbselectarea('temp_vendas')
          temp_vendas->(dbskip())
-      end
+      END
    ENDIF
    SET index to
 
@@ -1996,7 +1996,7 @@ STATIC FUNCTION fechamento_geral(p_borda)
          detalhamento_compras->(dbcommit())
          dbselectarea('temp_vendas')
          temp_vendas->(dbskip())
-      end
+      END
    ENDIF
    SET index to
    * pizzas
@@ -2015,7 +2015,7 @@ STATIC FUNCTION fechamento_geral(p_borda)
          detalhamento_compras->(dbcommit())
          dbselectarea('temp_vendas')
          temp_vendas->(dbskip())
-      end
+      END
    ENDIF
    SET index to
 
@@ -2045,7 +2045,7 @@ STATIC FUNCTION fechamento_geral(p_borda)
    form_fecha_pedido.release
    form_delivery.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION historico_cliente(parametro)
 
@@ -2063,10 +2063,10 @@ STATIC FUNCTION historico_cliente(parametro)
          IF ultimas_compras->id_cliente <> parametro
             EXIT
          ENDIF
-      end
+      END
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION mostra_detalhamento()
 
@@ -2091,10 +2091,10 @@ STATIC FUNCTION mostra_detalhamento()
          IF detalhamento_compras->id_cliente <> parametro
             EXIT
          ENDIF
-      end
+      END
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pede_quantidade()
 
@@ -2136,14 +2136,14 @@ STATIC FUNCTION pede_quantidade()
          transparent;
          centeralign
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_pquantidade.center
    form_pquantidade.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pega_tamanho()
 
@@ -2154,14 +2154,14 @@ STATIC FUNCTION pega_tamanho()
 
    form_delivery.grid_pizzas.setfocus
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION adiciona_montagem()
 
    LOCAL x_codigo := valor_coluna('grid_pizzas','form_delivery',1)
    LOCAL x_nome   := valor_coluna('grid_pizzas','form_delivery',2)
 
-   sele montagem
+   SELE montagem
    APPEND BLANK
    REPLACE id with x_codigo
    REPLACE nome with x_nome
@@ -2170,7 +2170,7 @@ STATIC FUNCTION adiciona_montagem()
    form_delivery.grid_montagem.refresh
    form_delivery.grid_montagem.value := 1
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION transfere_produto_pedido(p_codigo,p_nome,p_unitario)
 
@@ -2181,7 +2181,7 @@ STATIC FUNCTION transfere_produto_pedido(p_codigo,p_nome,p_unitario)
    IF p_qtd == '0'
       msginfo('Quantidade não pode ser zero','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    dbselectarea('produtos')
@@ -2230,7 +2230,7 @@ STATIC FUNCTION transfere_produto_pedido(p_codigo,p_nome,p_unitario)
 
    form_pquantidade.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_sabor()
 
@@ -2268,7 +2268,7 @@ STATIC FUNCTION excluir_item_pedido()
          tmp_tela->(DbDelete())
       ENDIF
       SKIP
-   end
+   END
    PACK
    * nessa rotina pega o valor para diminuir *
    dbselectarea('temp_vendas')
@@ -2281,7 +2281,7 @@ STATIC FUNCTION excluir_item_pedido()
       IF temp_vendas->seq <> x_old_seq
          x_menos := ( x_menos + x_valor )
       ENDIF
-   end
+   END
    SET index to
    * nessa rotina apaga *
    dbselectarea('temp_vendas')
@@ -2291,7 +2291,7 @@ STATIC FUNCTION excluir_item_pedido()
          temp_vendas->(DbDelete())
       ENDIF
       SKIP
-   end
+   END
    PACK
 
    dbselectarea('temp_vendas')
@@ -2332,7 +2332,7 @@ STATIC FUNCTION fecha_montagem_pizza()
    IF eof()
       msginfo('Não existe(m) sabor(es) selecionado(s), tecle ENTER','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    WHILE .not. eof()
@@ -2366,7 +2366,7 @@ STATIC FUNCTION fecha_montagem_pizza()
       dbselectarea('montagem')
       montagem->(dbskip())
 
-   end
+   END
 
    dbselectarea('temp_cpz')
    INDEX ON preco to indpcpz descend
@@ -2406,7 +2406,7 @@ STATIC FUNCTION fecha_montagem_pizza()
       dbselectarea('montagem')
       montagem->(dbskip())
 
-   end
+   END
 
    *                                     *
    * grava para aparecer na tela somente *
@@ -2424,7 +2424,7 @@ STATIC FUNCTION fecha_montagem_pizza()
       dbselectarea('montagem')
       montagem->(dbskip())
 
-   end
+   END
    dbselectarea('tmp_tela')
    APPEND BLANK
    REPLACE seq with _conta_sequencia
@@ -2451,7 +2451,7 @@ STATIC FUNCTION fecha_montagem_pizza()
    form_delivery.grid_pedido.refresh
    form_delivery.grid_pedido.value := 1
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION imprimir_cupom(p_entregador,p_pedido,p_entrega,p_borda,p_desconto,p_total)
 
@@ -2507,7 +2507,7 @@ STATIC FUNCTION imprimir_cupom(p_entregador,p_pedido,p_entrega,p_borda,p_descont
             ? substr(tmp_tela->item,1,20)+' '+trans(tmp_tela->qtd,'@R 99999')+'   '+trans(tmp_tela->unitario,'@E 999.99')+'      '+trans(tmp_tela->subtotal,'@E 999.99')
          ENDIF
          SKIP
-      end
+      END
       ? ''
       ? 'BORDA'
       ? '*** '+x_borda+' ***'
@@ -2557,11 +2557,11 @@ STATIC FUNCTION imprimir_cupom(p_entregador,p_pedido,p_entrega,p_borda,p_descont
 
       msgexclamation('A IMPRESSORA está DESLIGADA, por favor verifique','Atenção')
 
-   End
+   END
 
    //     y_flag := .F.
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION adiciona_borda()
 
@@ -2578,4 +2578,4 @@ STATIC FUNCTION adiciona_borda()
 
    _preco_antes_borda := x_preco
 
-   return(nil)
+   RETURN NIL

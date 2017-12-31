@@ -13,7 +13,7 @@ FUNCTION Main
          title "JPEG Image From Resource" ;
          backcolor TEAL nosize
 
-      on key escape action win_1.release()
+      ON KEY ESCAPE ACTION win_1.release()
 
       DEFINE IMAGE image_1
          row 50
@@ -22,7 +22,7 @@ FUNCTION Main
          height 200
          picture 'OLGA'
          stretch .T.
-      end image
+      END IMAGE
 
    END WINDOW
 

@@ -62,15 +62,15 @@ PROCEDURE Main
       DEFINE MAIN MENU
 
          DEFINE POPUP 'File'
-            MenuItem 'Exit Alt+X' Action wMain.Release
-         End Popup
+            MENUITEM 'Exit Alt+X' Action wMain.Release
+         END POPUP
 
          DEFINE POPUP 'Test'
-            MenuItem 'QHTM_AddHTML()' Action TestAddHTML()
-            MenuItem 'QHTM_AddHTML2()' Action TestAddHTML2()
-         End Popup
+            MENUITEM 'QHTM_AddHTML()' Action TestAddHTML()
+            MENUITEM 'QHTM_AddHTML2()' Action TestAddHTML2()
+         END POPUP
 
-      End Menu
+      END MENU
 
       @ 0, 0 QHTM HTML_Intro                                                                         ;
          Value cIntro                                                                            ;

@@ -57,4 +57,4 @@ METHOD New( cResName, cPredef ) CLASS TCursor
       ::lPredef = .F.
    ENDIF
 
-   RETURN Self
+   RETURN SELF

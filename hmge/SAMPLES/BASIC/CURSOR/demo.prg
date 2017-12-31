@@ -36,18 +36,18 @@ FUNCTION Main
       DEFINE MAIN MENU
 
          DEFINE POPUP "Tests"
-            MenuItem "Set Cursor Arrow"     Action SetArrowCursor( Application.Handle )
-            MenuItem "Set Cursor Hand"      Action SetHandCursor( Application.Handle )
-            MenuItem "Set Cursor Wait"      Action SetWaitCursor( Application.Handle )
-            MenuItem "Set Cursor write.cur" Action Win_1.Cursor := 'write.cur'
-            Separator
-            MenuItem "Set Cursor Pos"       Action SetCursorPos( 380+Win_1.Col+GetBorderWidth(), 195+Win_1.Row+GetTitleHeight()+GetBorderHeight() )
-            MenuItem "Put Mouse to label 7" Action PutMouse("Lbl_7",,{165,60})
-            MenuItem "Get Cursor Row"       Action MsgInfo( GetCursorRow()-Win_1.Row-GetTitleHeight()-GetBorderHeight() )
-            MenuItem "Get Cursor Col"       Action MsgInfo( GetCursorCol()-Win_1.Col-GetBorderWidth() )
-         End Popup
+            MENUITEM "Set Cursor Arrow"     Action SetArrowCursor( Application.Handle )
+            MENUITEM "Set Cursor Hand"      Action SetHandCursor( Application.Handle )
+            MENUITEM "Set Cursor Wait"      Action SetWaitCursor( Application.Handle )
+            MENUITEM "Set Cursor write.cur" Action Win_1.Cursor := 'write.cur'
+            SEPARATOR
+            MENUITEM "Set Cursor Pos"       Action SetCursorPos( 380+Win_1.Col+GetBorderWidth(), 195+Win_1.Row+GetTitleHeight()+GetBorderHeight() )
+            MENUITEM "Put Mouse to label 7" Action PutMouse("Lbl_7",,{165,60})
+            MENUITEM "Get Cursor Row"       Action MsgInfo( GetCursorRow()-Win_1.Row-GetTitleHeight()-GetBorderHeight() )
+            MENUITEM "Get Cursor Col"       Action MsgInfo( GetCursorCol()-Win_1.Col-GetBorderWidth() )
+         END POPUP
 
-      End Menu
+      END MENU
 
       DEFINE LABEL Lbl_0
          Row       40

@@ -23,7 +23,6 @@ USE AT YOUR OWN RISK.
 
 I hope this code will help someone.
 
-
 Thank you for using CPUSpeed!
 
 Grigory Filatov

@@ -99,7 +99,7 @@ METHOD New( cHeading, block, type, length, dec, lEditable, nJusHead, nJusLin, cP
    ::bColorBlock := bColorBlock
    ::bHeadClick  := bHeadClick
 
-   RETURN Self
+   RETURN SELF
 
 CLASS HBrowse INHERIT HControl
 
@@ -263,7 +263,7 @@ METHOD New( lType,oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,oFont, ;
    ::InitBrw()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HBrowse
 
@@ -272,7 +272,7 @@ METHOD Activate CLASS HBrowse
       ::Init()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HBrowse
 

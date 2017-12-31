@@ -104,7 +104,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight,   ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HOwnButton
 

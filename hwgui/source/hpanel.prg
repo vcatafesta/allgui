@@ -84,7 +84,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    hwg_RegPanel()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor ) CLASS HPanel
 
@@ -99,7 +99,7 @@ METHOD Redefine( oWndParent, nId, nWidth, nHeight, bInit, bSize, bPaint, bcolor 
    ::lResizeY := ( ::nHeight == 0 )
    hwg_RegPanel()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HPanel
 

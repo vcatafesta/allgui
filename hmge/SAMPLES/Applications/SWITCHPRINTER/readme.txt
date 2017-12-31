@@ -40,4 +40,3 @@ on the SwitchPrinter.exe file.
 
 ________________________________
 (c) 2002-2004 by Grigory Filatov
-

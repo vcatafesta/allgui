@@ -19,7 +19,7 @@ FUNCTION movimento_bancario()
    WHILE .not. eof()
       aadd(a_001,strzero(bancos->codigo,6)+' - '+bancos->nome)
       bancos->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_movban;
          at 000,000;
@@ -47,7 +47,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -64,7 +64,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -81,7 +81,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -98,7 +98,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
@@ -115,7 +115,7 @@ FUNCTION movimento_bancario()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_movban
@@ -154,7 +154,7 @@ FUNCTION movimento_bancario()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    DEFINE LABEL rodape_001
       parent form_movban
@@ -211,17 +211,17 @@ FUNCTION movimento_bancario()
       transparent .T.
    END LABEL
 
-   on key F5 action dados(1)
-   on key F6 action dados(2)
-   on key F7 action excluir()
-   on key escape action thiswindow.release
+   ON KEY F5 ACTION dados(1)
+   ON KEY F6 ACTION dados(2)
+   ON KEY F7 ACTION excluir()
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_movban.center
 form_movban.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION dados(parametro)
 
@@ -253,7 +253,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          movimento_bancario->(ordsetfocus('data'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -387,7 +387,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -400,7 +400,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
    END WINDOW
 
@@ -410,7 +410,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir()
 
@@ -425,7 +425,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       movimento_bancario->(ordsetfocus('data'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Histórico : '+alltrim(movimento_bancario->historico),'Excluir')
          IF lock_reg()
@@ -438,7 +438,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar(parametro)
 
@@ -447,13 +447,13 @@ STATIC FUNCTION gravar(parametro)
    IF empty(form_dados.tbox_001.value)
       msginfo('Preencha a data','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF empty(form_dados.tbox_002.value)
       msginfo('Preencha o histórico','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF parametro == 1
@@ -468,7 +468,7 @@ STATIC FUNCTION gravar(parametro)
          ELSE
             EXIT
          ENDIF
-      end
+      END
       dbselectarea('movimento_bancario')
       movimento_bancario->(dbappend())
       movimento_bancario->id        := x_id
@@ -497,7 +497,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar()
 
@@ -522,9 +522,9 @@ STATIC FUNCTION atualizar()
    WHILE .not. eof()
       add item {movimento_bancario->id,dtoc(movimento_bancario->data),alltrim(movimento_bancario->historico),trans(movimento_bancario->entrada,'@E 999,999.99'),trans(movimento_bancario->saida,'@E 999,999.99')} to grid_movban of form_movban
       movimento_bancario->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_banco_2(cform,ctextbtn)
 
@@ -558,7 +558,7 @@ STATIC FUNCTION procura_banco_2(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_banco_2(value)
 
@@ -617,9 +617,9 @@ STATIC FUNCTION getcode_banco_2(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=bancos->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -638,9 +638,9 @@ STATIC FUNCTION find_banco_2()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF bancos->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := bancos->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL

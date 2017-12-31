@@ -44,7 +44,7 @@ FUNCTION aPrenota(risorsa)
    Presa->(OrdScope (1, dtos(risorsa)+LTRIM(STR(indice)) ))
    Presa->(DbSeek (dtos(risorsa)+LTRIM(STR(indice))) )
 
-   SET browsesync on
+   SET BROWSESYNC ON
 
    LOAD WINDOW prenota
    prenota.center
@@ -290,7 +290,7 @@ FUNCTION Prenuova(nuova)
       tot_ok := tot_ok .and. ok
       c1 ++
       dbskip()
-   end
+   END
    dbgoto(rcn)
 
    IF !tot_ok

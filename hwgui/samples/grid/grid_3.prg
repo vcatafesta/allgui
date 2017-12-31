@@ -105,7 +105,7 @@ FUNCTION OnDispInfo( o, x, y )
 
          IF PQLastrec(res) != 10
             lEof := .T.
-         end
+         END
 
          FOR i := 1 to PQLastrec(res)
             APPEND BLANK
@@ -131,7 +131,7 @@ FUNCTION OnDispInfo( o, x, y )
          result := dtoc(creation)
       ELSEIF y == 3
          result := descr
-      end
+      END
    ENDIF
 
    RETURN result

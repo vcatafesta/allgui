@@ -3,7 +3,7 @@ STATIC oConexion
 
 PROCEDURE inicio
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    oConexion = todbc():new('DBQ=bd1.mdb;Driver={Microsoft Access Driver (*.mdb)}')
    oConexion:Open()
@@ -63,7 +63,7 @@ PROCEDURE cargar_datos(n)
          form1.grid1.additem( oConexion:aRecordset[i] )
       NEXT
       form1.grid1.value := n
-   end
+   END
 
    oConexion:Close()
    form1.grid1.setfocus
@@ -78,7 +78,7 @@ PROCEDURE eventos(n)
    CASE n == 1 .or. n == 2
       IF n = 2
          cNombre := form1.grid1.cell( form1.grid1.value, 2 )
-      end
+      END
       DEFINE WINDOW form1a;
             at 0,0 width 350 height 120;
             title iif(n = 2,'Edicion','Agregar');
@@ -90,7 +90,7 @@ PROCEDURE eventos(n)
          @ 40,170 button button1 caption '&Aceptar' action grabar_datos( n ) width 80 height 20
          @ 40,250 button button2 caption '&Cerrar' action form1a.release width 80 height 20
 
-         on key escape action form1a.button2.onclick
+         ON KEY ESCAPE ACTION form1a.button2.onclick
       END WINDOW
       form1a.center
       ACTIVATE WINDOW form1a
@@ -107,10 +107,10 @@ PROCEDURE eventos(n)
             form1.grid1.value := iif(n > 1, n-1, 1)
             form1.statusbar.item(1) := "Registro "+;
                ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
-         end
+         END
          oConexion:Close()
          form1.grid1.setfocus
-      end
+      END
    ENDCASE
 
    RETURN
@@ -124,17 +124,17 @@ PROCEDURE grabar_datos(n)
    ELSE
       Cad := "UPDATE sucursal SET nombre='"+form1a.text1.value+;
          "' WHERE id="+str(form1.grid1.cell(form1.grid1.value,1))
-   end
+   END
    oConexion:Setsql( Cad )
    IF !oConexion:Open()
       msgstop('No se pudo actualizar la tabla Sucursal')
-   end
+   END
    oConexion:Close()
    IF n == 1
       cargar_datos( form1.grid1.itemcount+1 )
    ELSE
       form1.grid1.cell( form1.grid1.value, 2 ) := form1a.text1.value
-   end
+   END
    form1.statusbar.item(1) := "Registro "+;
       ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
    form1a.release

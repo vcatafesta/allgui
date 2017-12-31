@@ -2,14 +2,12 @@ ForceSaver for Windows 9x/2k/XP
 Version 1.0 August 24, 2004
 by Grigory Filatov <gfilatov@inbox.ru>
 
-
 Description
 -----------
 ForceSaver is a very simple program designed to start of default screen
 saver when you put the mouse cursor at top left corner of display.
 ForceSaver also places an icon in the System Tray when you start the
 program. Right click on the tray icon to activate the program's menu.
-
 
 Usage
 -----
@@ -21,18 +19,15 @@ Usage
    "Cmd line" field on the "Program" page of the shortcut properties to add
    the command-line options "/service" (without quotation marks).
 
-
 Notes
 -----
 * This program currently works as service only with Windows 9x/ME.
-
 
 Comments and suggestions
 ------------------------
 Although I can't promise there will be any new versions of this program, I
 would like to hear any comments or suggestions you may have.  I can be
 contacted at: gfilatov@inbox.ru
-
 
 Copying
 -------

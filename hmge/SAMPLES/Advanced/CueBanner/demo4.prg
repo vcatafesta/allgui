@@ -31,7 +31,7 @@ FUNCTION Main
       height 21
       cuebanner "Enter your full name here"
       action msgbox('Click!')
-   end btntextbox
+   END btntextbox
    DEFINE FRAME frm_1
       row 54
       col 10

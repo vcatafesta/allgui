@@ -35,7 +35,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,bInit, ;
 
    ::title   := ""
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HSayImage
 
@@ -91,7 +91,7 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
    ENDIF
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD INIT CLASS HSayBmp
 
@@ -161,4 +161,4 @@ METHOD New( oWndParent,nId,nLeft,nTop,nWidth,nHeight,Image,lRes,bInit, ;
       HIcon():AddFile( Image ), Image ) )
    ::Activate()
 
-   RETURN Self
+   RETURN SELF

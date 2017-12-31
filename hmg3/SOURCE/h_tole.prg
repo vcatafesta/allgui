@@ -115,7 +115,7 @@ METHOD New( xOle, cClass ) CLASS TOLEAUTO
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 FUNCTION CreateObject( xOle, cClass )
 
@@ -249,7 +249,7 @@ METHOD OleValueInc() CLASS TOLEAUTO
       RETURN ThrowOpError( 1086, "++", Self )
    END SEQUENCE
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OleValueDec() CLASS TOLEAUTO
 
@@ -260,7 +260,7 @@ METHOD OleValueDec() CLASS TOLEAUTO
       RETURN ThrowOpError( 1087, "--", Self )
    END SEQUENCE
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OleValueEqual( xArg ) CLASS TOLEAUTO
 

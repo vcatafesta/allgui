@@ -23,42 +23,42 @@ FUNCTION Main
                MENUITEM 'Test'        OnClick GetFile_Test()
                MENUITEM 'Extensions'  OnClick GetFile_Extensions()
                MENUITEM 'Multiselect' OnClick GetFile_Multiselect()
-            End popup
+            END POPUP
 
             POPUP 'GetFolder'
                MENUITEM 'No Params'     OnClick GetFolder_NoParams()
                MENUITEM 'Title and Path'  OnClick GetFolder_Params()
-            End Popup
+            END POPUP
 
             POPUP 'GetColor'
                MENUITEM 'Test'   ONCLICK GetColor_Test()
-            End Popup
+            END POPUP
 
             POPUP 'GetFont'
                MENUITEM 'Test'   ONCLICK GetFont_Test()
-            End Popup
+            END POPUP
 
             POPUP 'PutFile'
                MENUITEM 'Test'   ONCLICK PutFile_Test()
-            End Popup
+            END POPUP
 
             POPUP 'InputBox'
                MENUITEM 'Test'   ONCLICK InputBox_Test()
-            End Popup
+            END POPUP
 
             POPUP 'Create/Remove Folder'
                MENUITEM 'CreateFolder'   ONCLICK MsgInfo( If( CreateFolder( 'NewFolder' ), 'New Folder Creation is Successful', 'New Folder Creation Failed' ) )
                MENUITEM 'RemoveFolder'   ONCLICK MsgInfo( If( RemoveFolder( 'NewFolder' ), 'Folder Removal is Successful', 'Folder Removal Failed' ) )
-            End Popup
+            END POPUP
 
             POPUP 'Get/Set CurrentFolder'
                MENUITEM 'GetCurrentFolder'   ONCLICK MsgInfo( GetCurrentFolder() )
                MENUITEM 'SetCurrentFolder'   ONCLICK MsgInfo( If( SetCurrentFolder( '\minigui' ), '\minigui is the current folder', 'Folder not found!' ) )
-            End Popup
+            END POPUP
 
          END POPUP
 
-      End Menu
+      END MENU
 
       @ 10 , 10 EditBox Edit1 ;
          Width 365 ;

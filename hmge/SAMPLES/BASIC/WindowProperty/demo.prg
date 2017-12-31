@@ -157,7 +157,7 @@ PROCEDURE Win1_GetProperty()
       ENDIF
    END SEQUENCE
 
-   IF ! HB_ISNIL( xValue )
+   IF ! xValue == NIL
       Win1.Label1.Value := hb_ValToStr( xValue )
    ELSE
       Win1.Label1.Value := "Undefined."

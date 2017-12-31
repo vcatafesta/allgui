@@ -62,9 +62,9 @@ FUNCTION Main
             if(nGraph = 1, DrawBarGraph ( aSer ), ;
             if(nGraph = 2, DrawLinesGraph ( aSer ), ;
             DrawPointsGraph ( aSer ))) )
-      End CheckButton
+      END CheckButton
 
-      On Key ESCAPE Action ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
    END WINDOW
 

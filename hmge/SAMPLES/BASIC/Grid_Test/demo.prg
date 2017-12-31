@@ -52,46 +52,46 @@ FUNCTION Main
       DEFINE MAIN MENU
 
          DEFINE POPUP "&Properties"
-            MenuItem "Get Item (2,3)"                  action MsgInfo(oWindow.oGrid.Cell(2,3))
-            MenuItem "Set Item (2,2)"                  action oWindow.oGrid.Cell(2,2) := 1250.5
-            MenuItem "Get Item (2,7)"                  action MsgInfo(oWindow.oGrid.Cell(2,7))
-            MenuItem "Set Item (2,7)"                  action oWindow.oGrid.Cell(2,7) := 8
-            MenuItem "Get ItemCount"                   action MsgInfo(oWindow.oGrid.ItemCount)
-            Separator
-            MenuItem "Get Item (4)"                    action ShowItems(4)
-            MenuItem "Set Item (4)"                    action Aeval(aRows [9],{|x,i| oWindow.oGrid.Cell(4, i) := x})
-            MenuItem "Get Header (3)"                  action MsgInfo(oWindow.oGrid.Header(3))
-            MenuItem "Set Header (3)"                  action oWindow.oGrid.Header(3) := "New Header"
-            Separator
-            MenuItem "Show/Hide Headers"               action (showheader:=!showheader,LoadGrid({},isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow')))
-            MenuItem "Toggle Grid Lines"               action setgridlines('oGrid','oWindow',!isgridlines('oGrid','oWindow'))
-            MenuItem "Toggle MultiSelect"              action LoadGrid({},!isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow'))
-            MenuItem "Toggle CellNavigation"           action LoadGrid({},isGridMultiSelect('oGrid','oWindow'),!isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow'))
-            MenuItem "Toggle AllowEdit"                action LoadGrid({},isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),!isgrideditable('oGrid','oWindow'))
-            Separator
-            MenuItem "Get Value"                       action ShowGridValue()
-            MenuItem "Set Value"                       action SetGridValue()
-            Separator
-            MenuItem "Get All Items List"              action ShowAllItems()
-         End PopUp
+            MENUITEM "Get Item (2,3)"                  action MsgInfo(oWindow.oGrid.Cell(2,3))
+            MENUITEM "Set Item (2,2)"                  action oWindow.oGrid.Cell(2,2) := 1250.5
+            MENUITEM "Get Item (2,7)"                  action MsgInfo(oWindow.oGrid.Cell(2,7))
+            MENUITEM "Set Item (2,7)"                  action oWindow.oGrid.Cell(2,7) := 8
+            MENUITEM "Get ItemCount"                   action MsgInfo(oWindow.oGrid.ItemCount)
+            SEPARATOR
+            MENUITEM "Get Item (4)"                    action ShowItems(4)
+            MENUITEM "Set Item (4)"                    action Aeval(aRows [9],{|x,i| oWindow.oGrid.Cell(4, i) := x})
+            MENUITEM "Get Header (3)"                  action MsgInfo(oWindow.oGrid.Header(3))
+            MENUITEM "Set Header (3)"                  action oWindow.oGrid.Header(3) := "New Header"
+            SEPARATOR
+            MENUITEM "Show/Hide Headers"               action (showheader:=!showheader,LoadGrid({},isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow')))
+            MENUITEM "Toggle Grid Lines"               action setgridlines('oGrid','oWindow',!isgridlines('oGrid','oWindow'))
+            MENUITEM "Toggle MultiSelect"              action LoadGrid({},!isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow'))
+            MENUITEM "Toggle CellNavigation"           action LoadGrid({},isGridMultiSelect('oGrid','oWindow'),!isgridcelled('oGrid','oWindow'),isgrideditable('oGrid','oWindow'))
+            MENUITEM "Toggle AllowEdit"                action LoadGrid({},isGridMultiSelect('oGrid','oWindow'),isgridcelled('oGrid','oWindow'),!isgrideditable('oGrid','oWindow'))
+            SEPARATOR
+            MENUITEM "Get Value"                       action ShowGridValue()
+            MENUITEM "Set Value"                       action SetGridValue()
+            SEPARATOR
+            MENUITEM "Get All Items List"              action ShowAllItems()
+         END POPUP
 
          DEFINE POPUP "&Events"
-            MenuItem "Change OnChange Event"           action oWindow.oGrid.onChange := {|| MsgInfo("OnChange event now changed!")}
-            MenuItem "Change OnDblClick Event"         action iif(isgrideditable('oGrid','oWindow'),nil,oWindow.oGrid.onDblClick := {|| MsgInfo("OnDblClick event now changed!")})
-         End PopUp
+            MENUITEM "Change OnChange Event"           action oWindow.oGrid.onChange := {|| MsgInfo("OnChange event now changed!")}
+            MENUITEM "Change OnDblClick Event"         action iif(isgrideditable('oGrid','oWindow'),nil,oWindow.oGrid.onDblClick := {|| MsgInfo("OnDblClick event now changed!")})
+         END POPUP
 
          DEFINE POPUP "&Methods"
-            MenuItem "AddItem()"                       action AddNewRow()
-            MenuItem "DeleteItem(3)"                   action oWindow.oGrid.DeleteItem(3)
-            MenuItem "DeleteAllItems()"                action oWindow.oGrid.DeleteAllItems()
-            Separator
-            MenuItem "AddColumn(2)"                    action AddNewColumn('oGrid','oWindow',2)
-            MenuItem "DeleteColumn(2)"                 action DeleteColumn('oGrid','oWindow',2)
-            Separator
-            MenuItem "AddColumn(8)"                    action AddNewColumn('oGrid','oWindow',8)
-         End PopUp
+            MENUITEM "AddItem()"                       action AddNewRow()
+            MENUITEM "DeleteItem(3)"                   action oWindow.oGrid.DeleteItem(3)
+            MENUITEM "DeleteAllItems()"                action oWindow.oGrid.DeleteAllItems()
+            SEPARATOR
+            MENUITEM "AddColumn(2)"                    action AddNewColumn('oGrid','oWindow',2)
+            MENUITEM "DeleteColumn(2)"                 action DeleteColumn('oGrid','oWindow',2)
+            SEPARATOR
+            MENUITEM "AddColumn(8)"                    action AddNewColumn('oGrid','oWindow',8)
+         END POPUP
 
-      End Menu
+      END MENU
 
    END WINDOW
 

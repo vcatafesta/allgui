@@ -37,7 +37,7 @@ FUNCTION crec()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar_2
          picture path_imagens+'alterar.bmp'
          col 107
@@ -54,7 +54,7 @@ FUNCTION crec()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir_2
          picture path_imagens+'excluir.bmp'
          col 209
@@ -71,7 +71,7 @@ FUNCTION crec()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar_2
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -88,7 +88,7 @@ FUNCTION crec()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair_2
          picture path_imagens+'sair.bmp'
          col 413
@@ -105,7 +105,7 @@ FUNCTION crec()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE GRID grid_crec
          parent form_crec
@@ -178,14 +178,14 @@ FUNCTION crec()
          transparent .T.
       END LABEL
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_crec.center
    form_crec.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION dados_crec(parametro)
 
@@ -219,7 +219,7 @@ STATIC FUNCTION dados_crec(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          contas_receber->(ordsetfocus('data'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -384,7 +384,7 @@ STATIC FUNCTION dados_crec(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -397,7 +397,7 @@ STATIC FUNCTION dados_crec(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
    END WINDOW
 
@@ -407,7 +407,7 @@ STATIC FUNCTION dados_crec(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir_crec()
 
@@ -422,7 +422,7 @@ STATIC FUNCTION excluir_crec()
       msgexclamation('Selecione uma informação','Atenção')
       contas_receber->(ordsetfocus('data'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Histórico : '+alltrim(contas_receber->numero),'Excluir')
          IF lock_reg()
@@ -435,7 +435,7 @@ STATIC FUNCTION excluir_crec()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_crec(parametro)
 
@@ -453,13 +453,13 @@ STATIC FUNCTION gravar_crec(parametro)
          ELSE
             EXIT
          ENDIF
-      end
+      END
       dbselectarea('contas_receber')
       IF l_demo
          IF reccount() > _limite_registros
             msgstop('Limite de registros esgotado','Atenção')
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ENDIF
       contas_receber->(dbappend())
@@ -491,7 +491,7 @@ STATIC FUNCTION gravar_crec(parametro)
       atualizar_crec()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar_crec()
 
@@ -507,9 +507,9 @@ STATIC FUNCTION atualizar_crec()
    WHILE .not. eof()
       add item {contas_receber->id,dtoc(contas_receber->data),acha_cliente(contas_receber->cliente),acha_forma_recebimento(contas_receber->forma),trans(contas_receber->valor,'@E 999,999.99'),alltrim(contas_receber->numero),alltrim(contas_receber->obs)} to grid_crec of form_crec
       contas_receber->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_cliente(cform,ctextbtn)
 
@@ -543,7 +543,7 @@ STATIC FUNCTION procura_cliente(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_clientes(value)
 
@@ -602,9 +602,9 @@ STATIC FUNCTION getcode_clientes(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=clientes->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -623,12 +623,12 @@ STATIC FUNCTION find_clientes()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF clientes->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := clientes->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_forma_recebimento(cform,ctextbtn)
 
@@ -662,7 +662,7 @@ STATIC FUNCTION procura_forma_recebimento(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_formas_recebimento(value)
 
@@ -721,9 +721,9 @@ STATIC FUNCTION getcode_formas_recebimento(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=formas_recebimento->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -742,9 +742,9 @@ STATIC FUNCTION find_formas_recebimento()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF formas_recebimento->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := formas_recebimento->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL

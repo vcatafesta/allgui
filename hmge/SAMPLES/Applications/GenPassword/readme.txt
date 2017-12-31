@@ -7,7 +7,6 @@ Status: Freeware
 Author: Grigory Filatov, Ukraine
 E-Mail: gfilatov@inbox.ru
 
-
 What is Password Generator?
 ===========================
 

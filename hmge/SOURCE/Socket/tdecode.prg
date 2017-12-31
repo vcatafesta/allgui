@@ -91,7 +91,7 @@ METHOD New() CLASS TDecode
 
    ::cCharPos := "0123456789abcdef"
 
-   RETURN Self
+   RETURN SELF
 
    /****m* TDecode/TDecode:Decode
    *  NAME

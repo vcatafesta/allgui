@@ -96,7 +96,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                   FONTNAME "Courier New"
                   FONTSIZE 10
                   VALUE cDispArr
-               End EDITBOX // edtDispArr
+               END EDITBOX // edtDispArr
 
                DEFINE BUTTON cmdSave
                   ROW      0
@@ -432,7 +432,7 @@ PROC ToDo(cMesaj)    // Bu DispArry()'dan çaðrýldýðý için böyle oldu.
                                  cSeconds := STRTRAN( LTRIM( STR( SECONDS(), 8, 2 ) ), '.', '' )
                                  cRVal    := DTOS( DATE() ) + cSeconds
 
-                                 IF ISNIL( cExtentn )
+                                 IF cExtentn == NIL
                                     cRVal := LEFT( SUBS( cRVal, LEN( cRVal ) - 11 ), 8 ) + "." + RIGHT( cRVal, 3 )
                                  ELSE
                                     cRVal := SUBS( cRVal, LEN( cRVal ) - 8 ) + '.' + cExtentn

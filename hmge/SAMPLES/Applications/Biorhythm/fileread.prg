@@ -64,7 +64,7 @@ METHOD New( cFile, nSize ) CLASS TFileRead
    ::cBuffer   := ""                // and nothing has been read yet
    ::nReadSize := nSize             // But will be in this size chunks
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Open( nMode ) CLASS TFileRead
 
@@ -92,7 +92,7 @@ METHOD Open( nMode ) CLASS TFileRead
       ::cBuffer := ""               // Clear the readahead buffer
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD ReadLine() CLASS TFileRead
 
@@ -199,7 +199,7 @@ METHOD Close() CLASS TFileRead
       ::lEOF   := .T.               // So force an EOF condition
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Name() CLASS TFileRead
 

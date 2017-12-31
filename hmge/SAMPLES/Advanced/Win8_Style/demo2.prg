@@ -165,13 +165,13 @@ FUNCTION MyPopupImageMenu()
       STRETCH TRANSPARENT BACKGROUNDCOLOR Form_1.BackColor ;
       ACTION { || ShowBtnDropMenu('Form_1', This.Name,HBtn1DropMenu)}
    DEFINE CONTEXT MENU CONTROL Image_Menu
-      MenuItem 'COLOR_DESKTOP_DARK_CYAN    ' Action ( MyRefresh( COLOR_DESKTOP_DARK_CYAN    , NIL ) )
-      MenuItem 'COLOR_DESKTOP_DARK_GREEN   ' Action ( MyRefresh( COLOR_DESKTOP_DARK_GREEN   , NIL ) )
-      MenuItem 'COLOR_DESKTOP_DARK_PURPLE  ' Action ( MyRefresh( COLOR_DESKTOP_DARK_PURPLE  , NIL ) )
-      MenuItem 'COLOR_DESKTOP_DARK_YELLOW  ' Action ( MyRefresh( COLOR_DESKTOP_DARK_YELLOW  , NIL ) )
-      MenuItem 'COLOR_DESKTOP_BRIGHT_GREEN ' Action ( MyRefresh( COLOR_DESKTOP_BRIGHT_GREEN , NIL ) )
-      MenuItem 'COLOR_DESKTOP_YELLOW_ORANGE' Action ( MyRefresh( COLOR_DESKTOP_YELLOW_ORANGE, NIL ) )
-      Separator
+      MENUITEM 'COLOR_DESKTOP_DARK_CYAN    ' Action ( MyRefresh( COLOR_DESKTOP_DARK_CYAN    , NIL ) )
+      MENUITEM 'COLOR_DESKTOP_DARK_GREEN   ' Action ( MyRefresh( COLOR_DESKTOP_DARK_GREEN   , NIL ) )
+      MENUITEM 'COLOR_DESKTOP_DARK_PURPLE  ' Action ( MyRefresh( COLOR_DESKTOP_DARK_PURPLE  , NIL ) )
+      MENUITEM 'COLOR_DESKTOP_DARK_YELLOW  ' Action ( MyRefresh( COLOR_DESKTOP_DARK_YELLOW  , NIL ) )
+      MENUITEM 'COLOR_DESKTOP_BRIGHT_GREEN ' Action ( MyRefresh( COLOR_DESKTOP_BRIGHT_GREEN , NIL ) )
+      MENUITEM 'COLOR_DESKTOP_YELLOW_ORANGE' Action ( MyRefresh( COLOR_DESKTOP_YELLOW_ORANGE, NIL ) )
+      SEPARATOR
       IF Len( aPicture ) > 0
          FOR nI := 1 TO LEN(aPicture)
             cItemName := "IMAGE  ( " + aPicture[nI,1]+" )"
@@ -180,8 +180,8 @@ FUNCTION MyPopupImageMenu()
             MENUITEM cItemName ACTION  &cAction
          NEXT
       ENDIF
-      Separator
-      MenuItem 'Exit' Action MyExit() Image 'EXIT'
+      SEPARATOR
+      MENUITEM 'Exit' Action MyExit() Image 'EXIT'
    END MENU
    HBtn1DropMenu := _HMG_xContextMenuHandle
    SET CONTEXT MENU CONTROL Image_Menu OF Form_1 OFF

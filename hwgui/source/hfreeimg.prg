@@ -66,7 +66,7 @@ METHOD AddFile( name ) CLASS HFreeImage
    ::nHeight := hwg_Fi_getheight( ::handle )
    AAdd( ::aImages, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
 
@@ -79,7 +79,7 @@ METHOD AddFromVar( cImage, cType ) CLASS HFreeImage
    ::nHeight := hwg_Fi_getheight( ::handle )
    AAdd( ::aImages, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD FromBitmap( oBitmap ) CLASS HFreeImage
 
@@ -89,7 +89,7 @@ METHOD FromBitmap( oBitmap ) CLASS HFreeImage
    ::nHeight := hwg_Fi_getheight( ::handle )
    AAdd( ::aImages, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Draw( hDC, nLeft, nTop, nWidth, nHeight ) CLASS HFreeImage
 
@@ -170,7 +170,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, bInit, ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, Image, bInit, bSize, ctooltip ) CLASS HSayFImage
 
@@ -180,7 +180,7 @@ METHOD Redefine( oWndParent, nId, Image, bInit, bSize, ctooltip ) CLASS HSayFIma
 
    ::bPaint  := { | o, lpdis | o:Paint( lpdis ) }
 
-   RETURN Self
+   RETURN SELF
 
 METHOD ReplaceImage( Image, cType )
 
@@ -205,7 +205,7 @@ METHOD Paint( lpdis ) CLASS HSayFImage
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    EXIT PROCEDURE CleanImages
    LOCAL i

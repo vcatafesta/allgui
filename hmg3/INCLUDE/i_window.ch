@@ -487,7 +487,6 @@
    _DefineSplitChildWindow ( <"w">, <wi>, <h> , <.break.> , <grippertext> , <.nocaption.> , <title> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth> , <.focused.>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <cursor> , <titlebar> , <{PaintProcedure}>  ) ;;
 
 
-
    #xcommand LOAD WINDOW <w> ;
    => ;
    DECLARE WINDOW <w> ;;
@@ -508,7 +507,6 @@
    _HMG_SYSDATA \[ 237 \] := <w> ;;
    _HMG_SYSDATA \[ 238 \] := <h> ;;
    #include \<<n>.fmg\>
-
 
 #xcommand RELEASE WINDOW <name> ;
    =>;
@@ -699,11 +697,9 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
       => ;
    _DefineSplitChildWindow ( , <wi>, <h> , <.break.> , <grippertext> , <.nocaption.> , <title> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth> , <.focused.>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <cursor>, NIL,  , <{PaintProcedure}>  ) ;;
 
-
 #xtranslate WAIT WINDOW <message>         => WaitWindow ( <message> , .F. )
 #xtranslate WAIT WINDOW <message> NOWAIT  => WaitWindow ( <message> , .T. )
 #xtranslate WAIT CLEAR                    => WaitWindow ()
-
 
 #xtranslate SET TOOLTIPSTYLE BALLOON  => _HMG_SYSDATA \[55\] := .T.
 #xtranslate SET TOOLTIPSTYLE STANDARD => _HMG_SYSDATA \[55\] := .F.
@@ -753,7 +749,6 @@ EventCreate (<bCodeBlock>, <hWnd>, <nMsg>)
 #xtranslate CREATE EVENT CODEBLOCK <bCodeBlock> [HWND <hWnd>] [MSG <nMsg>] STOREINDEX <VarStoreIndex> =>;
 <VarStoreIndex> := EventCreate (<bCodeBlock>, <hWnd>, <nMsg>)
 
-
 // by Dr. Claudio Soto (July 2013)
 
 #define LWA_COLORKEY 0x01
@@ -767,7 +762,6 @@ SetLayeredWindowAttributes (GetFormHandle(<"FormName">), 0, 255, LWA_ALPHA)
 
 #xtranslate SET WINDOW <FormName> TRANSPARENT TO COLOR <aColor> =>;
 SetLayeredWindowAttributes (GetFormHandle(<"FormName">), RGB(<aColor>\[1\], <aColor>\[2\], <aColor>\[3\]), 0, LWA_COLORKEY)
-
 
 #define FLASHW_CAPTION 1
 #define FLASHW_TRAY 2

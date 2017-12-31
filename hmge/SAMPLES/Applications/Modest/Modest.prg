@@ -109,7 +109,7 @@ PROCEDURE Main( cFile )
 
    SET Font to 'Tahoma', 9
    SET MenuStyle Extended
-   SET Navigation Extended
+   SET NAVIGATION EXTENDED
 
    SetMenuTheme()
 
@@ -133,96 +133,96 @@ PROCEDURE Main( cFile )
       DEFINE MAIN MENU
 
          DEFINE POPUP '&File'
-            MenuItem '&New' Action NewFile()               ;
+            MENUITEM '&New' Action NewFile()               ;
                Image 'NEW_FILE'               ;
                Name pdNew                     ;
                Message 'Create new structure'
-            MenuItem '&Open' Action LoadFile() ;
+            MENUITEM '&Open' Action LoadFile() ;
                Image 'OPEN_FILE' ;
                Name pdOpen       ;
                Message 'Open file and load structure'
-            MenuItem '&Save' Action SaveData() ;
+            MENUITEM '&Save' Action SaveData() ;
                Image 'SAVE'      ;
                Name pdSave       ;
                Message 'Save structure and description'
-            Separator
-            MenuItem '&Print' Action PrintStructure() ;
+            SEPARATOR
+            MENUITEM '&Print' Action PrintStructure() ;
                Image 'PRINT'           ;
                Name pdPrint            ;
                Message 'Print structure and comments'
-            Separator
-            MenuItem 'E&xit Alt+X' Action { || Done(), ThisWindow.Release } ;
+            SEPARATOR
+            MENUITEM 'E&xit Alt+X' Action { || Done(), ThisWindow.Release } ;
                Image 'HBPRINT_CLOSE'                    ;
                Message 'Exit from application'
-         End Popup
+         END POPUP
 
          DEFINE POPUP '&Edit'
-            MenuItem '&Copy'  Action AddInCollector( MODE_COPY ) ;
+            MENUITEM '&Copy'  Action AddInCollector( MODE_COPY ) ;
                Image 'COPY'                       ;
                Name pdCopy                        ;
                Message 'Copy to Collector'
-            MenuItem 'C&ut'   Action AddInCollector( MODE_CUT ) ;
+            MENUITEM 'C&ut'   Action AddInCollector( MODE_CUT ) ;
                Image 'CUT'                       ;
                Name pdCut                        ;
                Message 'Cut to Collector'
-            MenuItem 'Paste (&After)' Action { || nShift := 1, PasteFromCollector() } ;
+            MENUITEM 'Paste (&After)' Action { || nShift := 1, PasteFromCollector() } ;
                Image 'PASTE'                                   ;
                Name pdPasteAfter                               ;
                Message 'Paste from Collector (after current)'
-            MenuItem 'Paste (&Before)' Action { || nShift := 0, PasteFromCollector() } ;
+            MENUITEM 'Paste (&Before)' Action { || nShift := 0, PasteFromCollector() } ;
                Name pdPasteBefore                              ;
                Message 'Paste from Collector (before current)'
-            Separator
-            MenuItem '&Description' Action EditGeneralDesc() ;
+            SEPARATOR
+            MENUITEM '&Description' Action EditGeneralDesc() ;
                Image 'EDIT_TEXT'        ;
                Name pdDescription       ;
                Message 'Modify database description'
-         End Popup
+         END POPUP
 
          DEFINE POPUP 'F&ield'
-            MenuItem '&Add' Action EditField( MODE_NEWFIELD ) ;
+            MENUITEM '&Add' Action EditField( MODE_NEWFIELD ) ;
                Image 'ADD_FIELD'                 ;
                Name pdAdd                        ;
                Message 'Add new field'
-            MenuItem '&Edit' Action EditField( MODE_EDITFIELD ) ;
+            MENUITEM '&Edit' Action EditField( MODE_EDITFIELD ) ;
                Image 'EDIT_FIELD'                 ;
                Name pdEdit                        ;
                Message 'Edit current field'
-            Separator
-            MenuItem '&Insert after' Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
+            SEPARATOR
+            MENUITEM '&Insert after' Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
                Image 'INS_FIELD'                                      ;
                Name pdInsertAfter                                    ;
                Message 'Insert field after current'
-            MenuItem 'Insert &before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
+            MENUITEM 'Insert &before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
                Name pdInsertBefore                                   ;
                Message 'Insert field before current'
-            Separator
-            MenuItem '&Delete' Action DelField() ;
+            SEPARATOR
+            MENUITEM '&Delete' Action DelField() ;
                Image 'DEL_FIELD' ;
                Name pdDelete     ;
                Message 'Delete/Undelete field'
-         End Popup
+         END POPUP
 
          DEFINE POPUP '&Service'
-            MenuItem '&Export to text' Action ExportToTXT() ;
+            MENUITEM '&Export to text' Action ExportToTXT() ;
                Name pdExport        ;
                Message 'Export description to text file'
-            Separator
-            MenuItem 'Clear &messages' Action ClearMsg() ;
+            SEPARATOR
+            MENUITEM 'Clear &messages' Action ClearMsg() ;
                Message 'Clear messages area'
-            MenuItem 'Clear &Collector' Action ClearCollector() ;
+            MENUITEM 'Clear &Collector' Action ClearCollector() ;
                Message 'Clear Collector'
-            Separator
-            MenuItem '&Options' Action Options() ;
+            SEPARATOR
+            MENUITEM '&Options' Action Options() ;
                Image 'OPTIONS'  ;
                Message 'Set parameters application'
-         End Popup
+         END POPUP
 
          DEFINE POPUP '?' Name ppHelp
-            MenuItem '&About me' Action AboutMe() Image 'ABOUT'
-         End Popup
+            MENUITEM '&About me' Action AboutMe() Image 'ABOUT'
+         END POPUP
 
-      End Menu
+      END MENU
 
       // Toolbar
 
@@ -242,12 +242,12 @@ PROCEDURE Main( cFile )
          Button btnPrint Picture 'PRINT'               ;
             Action PrintStructure()                ;
             Tooltip 'Print structure and comments' ;
-            Separator
+            SEPARATOR
          Button btnEditGeneral                        ;
             Picture 'EDIT_TEXT'                   ;
             Action EditGeneralDesc()              ;
             Tooltip 'Modify database description' ;
-            Separator
+            SEPARATOR
          Button btnAddField                       ;
             Picture 'ADD_FIELD'               ;
             Action EditField( MODE_NEWFIELD ) ;
@@ -265,7 +265,7 @@ PROCEDURE Main( cFile )
             Picture 'DEL_FIELD'    ;
             Action DelField()      ;
             Tooltip 'Delete field' ;
-            Separator
+            SEPARATOR
          Button btnCopy                            ;
             Picture 'COPY'                     ;
             Action AddInCollector( MODE_COPY ) ;
@@ -279,35 +279,35 @@ PROCEDURE Main( cFile )
             Action { || nShift := 1, PasteFromCollector() }        ;
             DropDown                                               ;
             Tooltip 'Paste from Collector after current (default)' ;
-            Separator
+            SEPARATOR
          Button btnOptions                           ;
             Picture 'OPTIONS'                    ;
             Action Options()                     ;
             Tooltip 'Set parameters application' ;
-            Separator
+            SEPARATOR
          Button btnAbout         ;
             Picture 'ABOUT'  ;
             Action AboutMe() ;
             Tooltip 'About me'
-      End Toolbar
+      END Toolbar
 
       // Dropdown menu for inserting a new field
 
       Define dropdown menu button btnInsField
-         MenuItem 'Insert after'  Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
+         MENUITEM 'Insert after'  Action { || nShift := 1, EditField( MODE_INSFIELD ) } ;
             Message 'Insert field after current'
-         MenuItem 'Insert before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
+         MENUITEM 'Insert before' Action { || nShift := 0, EditField( MODE_INSFIELD ) } ;
             Message 'Insert field before current'
-      End Menu
+      END MENU
 
       // Dropdown menu for inserting a field from collector
 
       Define dropdown menu button btnPaste
-         MenuItem 'Insert after'  Action { || nShift := 1, PasteFromCollector() } ;
+         MENUITEM 'Insert after'  Action { || nShift := 1, PasteFromCollector() } ;
             Message 'Paste from Collector (after current)'
-         MenuItem 'Insert before' Action { || nShift := 0, PasteFromCollector() } ;
+         MENUITEM 'Insert before' Action { || nShift := 0, PasteFromCollector() } ;
             Message 'Paste from Collector (before current)'
-      End Menu
+      END MENU
 
       // Status bar
       // Declaration is placed before others definitions of controls,
@@ -396,7 +396,7 @@ PROCEDURE Main( cFile )
          Title 'Old dec'                                      ;
          Size 50
 
-   End TBrowse
+   END TBrowse
 
    DEFINE TAB tbDescript ;
          At 40 + If(IsXPThemeActive(), 5, 0), 205 ;
@@ -1381,7 +1381,7 @@ STATIC PROCEDURE GetStructure( cFile )
    CATCH
       WriteMsg( MSG_ERROR_LOAD + cFile )
 
-   End
+   END
 
    // If array is empty when to do the initialization
 
@@ -2136,7 +2136,7 @@ STATIC FUNCTION CheckData
             CATCH
                WriteMsg( MSG_RULE_INCORRECT )
                lSuccess := .F.
-            End
+            END
 
          ENDIF
 
@@ -2144,7 +2144,7 @@ STATIC FUNCTION CheckData
 
       ChangeMaxLimit()
 
-   End
+   END
 
    RETURN lSuccess
 

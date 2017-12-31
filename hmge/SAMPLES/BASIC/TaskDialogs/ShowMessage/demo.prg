@@ -221,7 +221,7 @@ FUNCTION VerifyYesNo( cWindowTitle, cMainMessage, cContent )
 
    win_TaskDialog0( ,, cWindowTitle, cMainMessage, cContent, dwCommonButtons, TD_QUESTION, @nButton )
 
-   IF ! HB_ISNIL( nButton )
+   IF ! nButton == NIL
 
       RETURN nButton
    ENDIF
@@ -241,7 +241,7 @@ FUNCTION VerifyYesNoCancel( cWindowTitle, cMainMessage, cContent )
 
    win_TaskDialog0( ,, cWindowTitle, cMainMessage, cContent, dwCommonButtons, TD_QUESTION, @nButton )
 
-   IF ! HB_ISNIL( nButton )
+   IF ! nButton == NIL
 
       RETURN nButton
    ENDIF

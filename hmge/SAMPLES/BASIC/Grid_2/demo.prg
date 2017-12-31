@@ -93,20 +93,20 @@ FUNCTION Main
       FOR n_for=1 to m_itemcount
          IF form_1.grid_1.cell( n_for , 1 ) # 0
             form_1.grid_1.cell( n_for , 1 ) := 0
-         end
+         END
       NEXT
       form_1.grid_1.EnableUpdate
 
       IF pcount()=1
 
          RETURN
-      end
+      END
 
       a_result := form_1.grid_1.value
       IF len( a_result ) = 0
 
          RETURN
-      end
+      END
 
       form_1.grid_1.DisableUpdate
       FOR n_for=1 to len( a_result )
@@ -164,16 +164,16 @@ FUNCTION Main
                   a_grid = form_1.grid_1.value
                   IF len( a_grid ) = 0
                      EXIT
-                  end
+                  END
                   IF m_go = 0
                      m_go = a_grid[ 1 ]
-                  end
+                  END
                   Form_1.Grid_1.DeleteItem( a_grid[ 1 ] )
                ENDDO
 
                IF len( a_grid_value ) = 1 .and. m_itemcount = a_grid_value[ 1 ]
                   m_go = a_grid_value[ 1 ] - 1
-               end
+               END
 
                form_1.grid_1.setfocus
                form_1.grid_1.value := { m_go }
@@ -195,7 +195,7 @@ FUNCTION Main
                   IF len( a_result ) = 0
 
                      RETURN
-                  end
+                  END
 
                   x := ''
                   FOR n_for=1 to len( a_result )

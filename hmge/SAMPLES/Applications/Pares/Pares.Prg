@@ -22,9 +22,9 @@ FUNCTION Main
    AFill(aImagenCtrl,"")
    AFill(aObjetoCtrl,"")
 
-   SET Language To Spanish
+   SET LANGUAGE TO Spanish
    SET MULTIPLE OFF
-   SET Navigation Extended
+   SET NAVIGATION EXTENDED
 
    LOAD WINDOW Main
    SetProperty("Main","Sizable",.F.)

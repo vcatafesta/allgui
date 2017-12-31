@@ -12,18 +12,15 @@
   The program opens empty text file for notes as default.
   To replace this file use the Options point of the system tray icon popup menu.
 
-
   Platform
   --------
 
   Win 95/98/ME/NT/2000/XP
 
-
   Uninstalling
   ------------
 
   Please exit the program before uninstalling.
-
 
   Distribution
   ------------
@@ -34,7 +31,6 @@
   Hot File program is provided AS IS, without warranty of any kind.
   The author assumes no liability for damages, direct or indirect, which may
   result from the use of Hot File program.
-
 
   Contact Information
   -------------------

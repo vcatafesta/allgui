@@ -51,7 +51,7 @@ METHOD New( nRow, nCol, nWidth, nHeight, cFileName, oWnd, lNoBorder, nid ) CLASS
       ::oparent:AddControl( Self )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CLASS TVideo
 
@@ -64,7 +64,7 @@ METHOD ReDefine( nId, cFileName, oDlg, bWhen, bValid ) CLASS TVideo
 
    oDlg:AddControl( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Initiate( ) CLASS TVideo
 

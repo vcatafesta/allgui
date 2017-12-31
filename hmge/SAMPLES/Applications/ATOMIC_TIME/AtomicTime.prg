@@ -607,7 +607,7 @@ METHOD New() CLASS TSocket
    SocketNew( @cSok )
    ::m_hSocket := cSok
 
-   RETURN Self
+   RETURN SELF
 
    // Connect to remore site
 
@@ -807,7 +807,6 @@ METHOD SetCallBack( cFuncName ) CLASS TSocket
 #else
 #define HB_STORC( n, x, y ) hb_storvc( n, x, y )
 #define ISCHAR( n )         HB_ISCHAR( n )
-#define ISNIL( n )          HB_ISNIL( n )
 #define ISNUM( n )          HB_ISNUM( n )
 #endif
 

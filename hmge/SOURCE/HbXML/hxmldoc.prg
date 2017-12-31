@@ -46,7 +46,7 @@ METHOD New( cTitle, type, aAttr, cValue ) CLASS HXMLNode
       ::Add( cValue )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Add( xItem ) CLASS HXMLNode
 
@@ -235,7 +235,7 @@ METHOD New( encoding ) CLASS HXMLDoc
       Aadd( ::aAttr, { "encoding",encoding } )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Read( fname,buffer ) CLASS HXMLDoc
 

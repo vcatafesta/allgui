@@ -462,7 +462,7 @@ FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
          msgStop("No data to print! ","Attention")
       ENDIF
    OTHERWISE                              // Two Db List
-      sele (oWr:aStat [ 'area1' ])
+      SELE (oWr:aStat [ 'area1' ])
       IF !empty(atf)
          SET filter to &atf
       ENDIF
@@ -473,7 +473,7 @@ FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
          //              msgbox(alias()+CRLF+db_arc+CRLF+ordkey(ordbagname())+crlf+oWr:aStat [ 'area1' ]+CRLF+oWr:aStat [ 'FldRel' ],"453")
 
          WHILE !eof()
-            sele (DB_ARC)
+            SELE (DB_ARC)
             StrFlt := oWr:aStat [ 'FldRel' ]+" = "+ oWr:aStat [ 'area1' ]+"->"+oWr:aStat [ 'FldRel' ]
             DBEVAL( {|| miocont++},{|| &strFLT} )
             miocnt := int(miocont/NOZERODIV(lbody))
@@ -483,13 +483,13 @@ FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
             tpg += miocnt
             aadd(Amx_pg,miocnt)
             miocont := 0
-            sele (oWr:aStat [ 'area1' ])
+            SELE (oWr:aStat [ 'area1' ])
             dbskip()
          ENDDO
          GO TOP
          IF valtype (atail(amx_pg)) == "N"
             WHILE !eof()
-               sele (DB_ARC)
+               SELE (DB_ARC)
                SET filter to &strFLT
                miocont ++
                mx_pg  := aMx_pg[miocont]
@@ -502,7 +502,7 @@ FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
                oWr:aStat [ 'EndDoc' ]:=.F.
                last_pag := .F.
                SET filter to
-               sele (oWr:aStat [ 'area1' ])
+               SELE (oWr:aStat [ 'area1' ])
                dbskip()
             ENDDO
          ENDIF
@@ -516,7 +516,7 @@ FUNCTION StampeEsegui(_MainArea,_psd,db_arc,_prw)
       oWr:TheHead()
       oWr:TheFeet()
    ENDIF
-end doc
+END doc
 IF len(oWr:aStat [ 'ErrorLine' ]) > 0
    msgmulty(oWr:aStat [ 'ErrorLine' ],"Error summary report:")
 ENDIF
@@ -1293,7 +1293,7 @@ CREATE CLASS WREPORT
 
 METHOD New() CLASS WREPORT
 
-   RETURN self
+   RETURN SELF
    /*
    */
 
@@ -1600,7 +1600,7 @@ METHOD ChoiceDrv() CLASS WREPORT
 
    CASE oWr:PrnDrv = "PDF"
       ::dopdf()
-   End
+   END
 
    RETURN NIL
    /*
@@ -1869,7 +1869,7 @@ METHOD Traduci(elemento,ctrl,cmdline) CLASS WREPORT  // The interpreter
             ELSE
                cword += " "+TOKENNEXT(String)
             ENDIF
-         end
+         END
       ELSEIF left(cword,1)="[" .AND. "]" $ cWord
          cWord := substr(cword,at("[",cWord)+1,rat("]",cword)-2)
          cword := strtran(cword,chr(4),"/")
@@ -2729,7 +2729,7 @@ METHOD MEMOSAY(row,col,argm1,argl1,argf1,argcolor1,argalign,onlyone,arrypar) CLA
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
    /*
    */
 
@@ -3414,7 +3414,7 @@ METHOD TheHead() CLASS WREPORT
 
       CASE oWr:PrnDrv = "HBPR"
          START PAGE
-      End
+      END
 
       nPgr ++ ; nPag ++ ; nline := 0
 

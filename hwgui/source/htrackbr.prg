@@ -72,7 +72,7 @@ METHOD New( oWndParent, nId, vari, nStyle, nLeft, nTop, nWidth, nHeight, ;
    HWG_InitCommonControlsEx()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HTrackBar
 

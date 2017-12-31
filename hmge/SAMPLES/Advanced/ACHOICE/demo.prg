@@ -46,7 +46,7 @@ FUNCTION Main
       ongotfocus sample.label4.visible:=.t.
       onlostfocus sample.label4.visible:=.f.
       on enter iif(empty(sample.textbox2.value),doachoice(aCountries),sample.textbox3.setfocus)
-   end btntextbox
+   END btntextbox
    DEFINE LABEL label3
       row 70
       col 20
@@ -141,7 +141,7 @@ FUNCTION HMG_Achoice(nTop,nLeft,nBottom,nRight,aList,nDefault,lAnyWhere)
          items aList
          on change _achoicelistchanged()
          on dblclick _aChoiceSelected()
-      end listbox
+      END listbox
    END WINDOW
 
    ON KEY UP     OF _HMG_achoice ACTION _aChoiceDoUpKey()

@@ -84,7 +84,7 @@ PROCEDURE AutoFill( ;        // Auto filling text box
    cTxBValue := GetProperty( cFrmName, cTxBName, "Value" )     // Text Box Value
    nCarePos  := GetProperty( cFrmName, cTxBName, "CaretPos" )  // Text Box CaretPos
 
-   IF HB_ISNIL( nCaller )
+   IF nCaller == NIL
 
       IF !( cLastVal == cTxBValue )
 

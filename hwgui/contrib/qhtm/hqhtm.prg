@@ -58,7 +58,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,caption, ;
    ::oParent:AddControl( Self )
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HQhtm
 
@@ -93,7 +93,7 @@ METHOD Redefine( oWndParent,nId,caption,bInit,bSize,bLink,bSubmit,fname,resname 
    ::oParent:AddControl( Self )
    QHTM_INIT()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init CLASS HQhtm
 
@@ -168,7 +168,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont, ;
       bInit,bSize,,bClick,ctooltip )
    // ::classname:= "HQHTMBUTTON"
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent,nId,cCaption,oFont,bInit,bSize,bClick,ctooltip) CLASS HQhtmButton
 
@@ -176,7 +176,7 @@ METHOD Redefine( oWndParent,nId,cCaption,oFont,bInit,bSize,bClick,ctooltip) CLAS
    ::Super:Redefine( oWndParent,nId,,bInit,bSize,,bClick,ctooltip )
    // ::classname:= "HQHTMBUTTON"
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HQhtmButton
 

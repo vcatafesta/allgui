@@ -204,7 +204,7 @@ METHOD NEW( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,oFont, ;
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
    // Alterado por jamaj - added WND_CHILD support
 
 METHOD Activate( lShow ) CLASS HWindow

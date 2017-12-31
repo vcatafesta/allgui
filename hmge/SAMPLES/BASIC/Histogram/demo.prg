@@ -17,7 +17,7 @@ STATIC aSer, aClr, aSern, aYVal, cTit
 
 FUNCTION Main
 
-   SET Navigation extended
+   SET NAVIGATION EXTENDED
 
    LOAD WINDOW Grafico
    CENTER WINDOW Grafico

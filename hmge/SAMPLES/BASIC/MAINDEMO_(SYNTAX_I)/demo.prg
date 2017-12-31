@@ -104,26 +104,26 @@ FUNCTION Main
                ITEM 'Set Title Property'      ACTION Form_1.Title := 'New Title'
                ITEM 'Get Title Property'      ACTION MsgInfo ( Form_1.Title )
                SEPARATOR
-               menuitem "Set MinButton Property" action If(Form_1.MinButton, Form_1.MinButton := .f., Form_1.MinButton := .t.)
-               menuitem "Get MinButton Property" action MsgInfo(Form_1.MinButton)
+               MENUITEM "Set MinButton Property" action If(Form_1.MinButton, Form_1.MinButton := .f., Form_1.MinButton := .t.)
+               MENUITEM "Get MinButton Property" action MsgInfo(Form_1.MinButton)
                SEPARATOR
-               menuitem "Set MaxButton Property" action If(Form_1.MaxButton, Form_1.MaxButton := .f., Form_1.MaxButton := .t.)
-               menuitem "Get MaxButton Property" action MsgInfo(Form_1.MaxButton)
+               MENUITEM "Set MaxButton Property" action If(Form_1.MaxButton, Form_1.MaxButton := .f., Form_1.MaxButton := .t.)
+               MENUITEM "Get MaxButton Property" action MsgInfo(Form_1.MaxButton)
                SEPARATOR
-               menuitem "Set Sizable Property" action If(Form_1.Sizable, Form_1.Sizable := .f., Form_1.Sizable := .t.)
-               menuitem "Get Sizable Property" action MsgInfo(Form_1.Sizable)
+               MENUITEM "Set Sizable Property" action If(Form_1.Sizable, Form_1.Sizable := .f., Form_1.Sizable := .t.)
+               MENUITEM "Get Sizable Property" action MsgInfo(Form_1.Sizable)
                SEPARATOR
-               menuitem "Set SysMenu Property" action If(Form_1.SysMenu, Form_1.SysMenu := .f., Form_1.SysMenu := .t.)
-               menuitem "Get SysMenu Property" action MsgInfo(Form_1.SysMenu)
+               MENUITEM "Set SysMenu Property" action If(Form_1.SysMenu, Form_1.SysMenu := .f., Form_1.SysMenu := .t.)
+               MENUITEM "Get SysMenu Property" action MsgInfo(Form_1.SysMenu)
                SEPARATOR
-               menuitem "Set TitleBar Property" action If(Form_1.TitleBar, Form_1.TitleBar := .f., Form_1.TitleBar := .t.)
-               menuitem "Get TitleBar Property" action MsgInfo(Form_1.TitleBar)
+               MENUITEM "Set TitleBar Property" action If(Form_1.TitleBar, Form_1.TitleBar := .f., Form_1.TitleBar := .t.)
+               MENUITEM "Get TitleBar Property" action MsgInfo(Form_1.TitleBar)
                SEPARATOR
-               menuitem "Set TopMost Property" action If(Form_1.TopMost, Form_1.TopMost := .f., Form_1.TopMost := .t.)
-               menuitem "Get TopMost Property" action MsgInfo(Form_1.TopMost)
+               MENUITEM "Set TopMost Property" action If(Form_1.TopMost, Form_1.TopMost := .f., Form_1.TopMost := .t.)
+               MENUITEM "Get TopMost Property" action MsgInfo(Form_1.TopMost)
                SEPARATOR
-               menuitem "Set HelpButton Property" action If(Form_1.HelpButton, Form_1.HelpButton := .f., Form_1.HelpButton := .t.)
-               menuitem "Get HelpButton Property" action MsgInfo(Form_1.HelpButton)
+               MENUITEM "Set HelpButton Property" action If(Form_1.HelpButton, Form_1.HelpButton := .f., Form_1.HelpButton := .t.)
+               MENUITEM "Get HelpButton Property" action MsgInfo(Form_1.HelpButton)
             END POPUP
             SEPARATOR
             POPUP 'Set/Get &Controls Properties'

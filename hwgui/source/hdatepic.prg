@@ -98,7 +98,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
    ::oParent:AddEvent( DTN_DATETIMECHANGE, Self, { | | ::onChange( DTN_DATETIMECHANGE ) }, .T., "onChange" )
    ::oParent:AddEvent( DTN_CLOSEUP, Self, { | | ::onChange( DTN_CLOSEUP ) }, .T., "onClose" )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
       bGfocus, bLfocus, bChange, ctooltip, tcolor, bcolor, lShowTime ) CLASS  HDatePicker
@@ -125,7 +125,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, oFont, bSize, bInit, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HDatePicker
 

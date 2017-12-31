@@ -214,7 +214,6 @@ _DefineTree ( <"name"> , <"parent"> ,  ,  , <width> , <height> , <{change}> , <t
 =>;
 _DefineTree ( <"name"> , <"parent"> ,  ,  , <width> , <height> , <{change}> , <tooltip> , <fontname> , <fontsize> , <{gotfocus}> , <{lostfocus}> , <{dblclick}> , <.break.> , <value>  , <helpid>, <aImgNode>, <aImgItem>, .f. ,<.bold.>, <.italic.>, <.underline.>, <.strikeout.>  , <.itemids.> , <rootbutton> , <.Trans.> , <{OnExpand}> , <{OnCollapse}> , <aBackColor> , <aFontColor> , <DynamicBackColor> , <DynamicForeColor> , <DynamicFont>  )
 
-
 // by Dr. Claudio Soto (November 2013)
 
 #define _IS_TREE_NODE_   .T.

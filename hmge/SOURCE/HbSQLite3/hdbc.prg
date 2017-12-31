@@ -76,7 +76,7 @@ METHOD new( cDBFile, lCreateIfNotExist ) CLASS hdbcSQLTConnection
       raiseError( sqlite3_errmsg( ::pDb ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD close() CLASS hdbcSQLTConnection
 
@@ -144,7 +144,7 @@ METHOD new( pDB, cSql ) CLASS hdbcSQLTStatement
    ::pDB := pDB
    ::cSql := cSql
 
-   RETURN self
+   RETURN SELF
 
 METHOD executeQuery( cSql ) CLASS hdbcSQLTStatement
 
@@ -172,7 +172,7 @@ METHOD executeUpdate( cSql ) CLASS hdbcSQLTStatement
 
 METHOD close() CLASS hdbcSQLTStatement
 
-   IF ! HB_ISNIL( ::pRes )
+   IF ! ::pRes == NIL
 
       sqlite3_finalize( ::pRes )
 
@@ -215,7 +215,7 @@ METHOD new( pDB, cSql ) CLASS hdbcSQLTPreparedStatement
    ::pDB := pDB
    ::cSql := cSql
 
-   RETURN self
+   RETURN SELF
 
 METHOD executeQuery() CLASS hdbcSQLTPreparedStatement
 
@@ -349,7 +349,7 @@ METHOD new( pDB, pStmt ) CLASS hdbcSQLTResultSet
       ::lAfterLast := .F.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD close() CLASS hdbcSQLTResultSet
 
@@ -513,7 +513,7 @@ METHOD new( pRes ) CLASS hdbcSQLTResultSetMetaData
 
    ::pRes := pRes
 
-   RETURN Self
+   RETURN SELF
 
 METHOD getColumnCount() CLASS hdbcSQLTResultSetMetaData
 
@@ -547,7 +547,7 @@ METHOD new( pDB ) CLASS hdbcSQLTDatabaseMetaData
 
    ::pDB := pDB
 
-   RETURN Self
+   RETURN SELF
 
 METHOD getTables() CLASS hdbcSQLTDatabaseMetaData
 

@@ -53,7 +53,7 @@ METHOD Create( cFile, oTime, oResource, nWidth, nHeight, nStyle ) CLASS HSplash
    ::oDlg:Activate( otime < 0 )
    ::oTimer:END()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD CountSeconds( oTime, oDlg )
 

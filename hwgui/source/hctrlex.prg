@@ -100,7 +100,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    ::bDblClick := bDblClick
    ::oParent:AddEvent( STN_DBLCLK, Self, { || ::onDblClick() } )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, cTooltip, tcolor, bColor, lTransp, bClick, bDblClick, bOther ) CLASS HStaticEx
@@ -125,7 +125,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    ::bDblClick := bDblClick
    ::oParent:AddEvent( STN_DBLCLK, Self, { || ::onDblClick() } )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HStaticEx
 
@@ -332,7 +332,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       cTooltip, tcolor, bColor, cCaption, bGFocus ) CLASS HButtonX
@@ -354,7 +354,7 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HButtonX
 
@@ -569,7 +569,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
       tcolor, bColor, bGFocus )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       cTooltip, tcolor, bColor, cCaption, hBitmap, iStyle, hIcon, bGFocus, nPictureMargin ) CLASS HButtonEx
@@ -599,7 +599,7 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
    ::title := cCaption
    ::Caption := cCaption
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetBitmap( hBitMap ) CLASS HButtonEX
 
@@ -610,7 +610,7 @@ METHOD SetBitmap( hBitMap ) CLASS HButtonEX
       hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetIcon( hIcon ) CLASS HButtonEX
 
@@ -621,13 +621,13 @@ METHOD SetIcon( hIcon ) CLASS HButtonEX
       hwg_Redrawwindow( ::Handle, RDW_NOERASE + RDW_INVALIDATE + RDW_INTERNALPAINT )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD END() CLASS HButtonEX
 
    ::Super:END()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD INIT() CLASS HButtonEx
 
@@ -881,7 +881,7 @@ METHOD SetDefaultColor( tColor, bColor, lPaint ) CLASS HBUTTONEx
       hwg_Invalidaterect( ::handle, .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetColorEx( nIndex, nColor, lPaint ) CLASS HBUTTONEx
 
@@ -1207,7 +1207,7 @@ METHOD PAINTBK( hdc ) CLASS HBUTTONEx
    ENDIF
    hwg_Bitblt( hdc, 0, 0, rect[ 3 ] - rect[ 1 ], rect[ 4 ] - rect[ 4 ], ::m_dcBk:m_hDC, 0, 0, SRCCOPY )
 
-   RETURN Self
+   RETURN SELF
 
 CLASS HGroupEx INHERIT HGroup
 
@@ -1234,7 +1234,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
    ::Super:New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
       oFont, bInit, bSize, bPaint, tcolor, bColor )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HGroupEx
 

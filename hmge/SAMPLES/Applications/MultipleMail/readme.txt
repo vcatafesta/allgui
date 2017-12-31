@@ -7,7 +7,6 @@ For example, big foto, music, archives etc.
 You select the files for sending and program will create
 a mail for each file automatically and send it.
 
-
 Features:
 ~~~~~~~~~
 · Multiple file selection
@@ -16,7 +15,6 @@ Features:
 · Tuning of smtp-server and port
 · Show size for each file, total size and quantity of files
 · Without installation
-
 
 Distribution
 ~~~~~~~~~~~~
@@ -29,4 +27,3 @@ indirect, which may result from the use of Multiple Mail.
 
   To report a bug or to make a suggestion write to:
 gfilatov@inbox.ru
-

@@ -26,7 +26,7 @@ FUNCTION promocao()
    WHILE .not. eof()
       aadd(a_002,strzero(categoria_produtos->codigo,6)+' - '+categoria_produtos->nome)
       categoria_produtos->(dbskip())
-   end
+   END
 
    dbselectarea('subcategoria_produtos')
    subcategoria_produtos->(dbgotop())
@@ -34,7 +34,7 @@ FUNCTION promocao()
    WHILE .not. eof()
       aadd(a_003,strzero(subcategoria_produtos->codigo,6)+' - '+subcategoria_produtos->nome)
       subcategoria_produtos->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_promocao;
          at 000,000;
@@ -63,7 +63,7 @@ FUNCTION promocao()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    * fase 2
    @ 070,005 label lbl_002;
@@ -82,7 +82,7 @@ FUNCTION promocao()
    items a_002
    value 1
    listwidth 300
-end comboboxex
+END comboboxex
 
 * fase 3
 @ 130,005 label lbl_003;
@@ -101,7 +101,7 @@ height 400
 items a_003
 value 1
 listwidth 300
-end comboboxex
+END comboboxex
 
 * fase 4
 @ 200,005 label lbl_004;
@@ -235,14 +235,14 @@ END LABEL
    action (zera_acesso_2(),form_promocao.release);
    tooltip 'Clique aqui para sair'
 
-on key escape action thiswindow.release
+ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_promocao.center
 form_promocao.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION filtrar_informacoes_2()
 
@@ -257,7 +257,7 @@ STATIC FUNCTION filtrar_informacoes_2()
    IF empty(x_valor) .and. empty(x_percentual)
       msgalert('Você precisa digitar ou valor ou percentual para simular a promoção','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF x_categoria <> 1
@@ -342,7 +342,7 @@ STATIC FUNCTION filtrar_informacoes_2()
       ENDIF
       dbselectarea('produtos')
       produtos->(dbskip())
-   end
+   END
 
    * indexar as informações
    dbselectarea('tmp_reajuste')
@@ -386,7 +386,7 @@ STATIC FUNCTION filtrar_informacoes_2()
          ENDIF
       ENDIF
       tmp_reajuste->(dbskip())
-   end
+   END
 
    * alimentar o grid
    DELETE item all from grid_promocao of form_promocao
@@ -399,9 +399,9 @@ STATIC FUNCTION filtrar_informacoes_2()
          add item {tmp_reajuste->cod_prod,tmp_reajuste->nom_prod,trans(tmp_reajuste->pre_reaj,'@E 999,999.99')} to grid_promocao of form_promocao
       ENDIF
       tmp_reajuste->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar_reajuste_2()
 
@@ -445,7 +445,7 @@ STATIC FUNCTION gravar_reajuste_2()
       dbselectarea('tmp_reajuste')
       tmp_reajuste->(dbskip())
 
-   end
+   END
 
    IF x_flag
       msgstop('Nem todos produtos foram reajustados, confira','Atenção')
@@ -455,7 +455,7 @@ STATIC FUNCTION gravar_reajuste_2()
 
    form_promocao.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION tira_da_promocao()
 
@@ -479,19 +479,19 @@ STATIC FUNCTION tira_da_promocao()
       dbselectarea('tmp_reajuste')
       tmp_reajuste->(dbskip())
 
-   end
+   END
 
    msginfo('Processo completado com sucesso, tecle ENTER','Mensagem')
 
    form_promocao.release
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION zera_acesso_2()
 
    _conta_acesso_2 := 0
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION zera_temporario_2()
 
@@ -499,4 +499,4 @@ STATIC FUNCTION zera_temporario_2()
    ZAP
    PACK
 
-   return(nil)
+   RETURN NIL

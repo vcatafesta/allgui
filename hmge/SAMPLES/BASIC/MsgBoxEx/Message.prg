@@ -172,7 +172,7 @@ FUNCTION MsgBoxEx( cMsg, cTitle, nStyle, lNoSound )
       nStyle   := MB_ICONINFORMATION + MB_OK
       IF !(lNoSound); MessageBeep( MB_ICONINFORMATION ); endif
 
-   end
+   END
 
    nReturn   := MessageBox( cMsg, cTitle, nStyle )
 

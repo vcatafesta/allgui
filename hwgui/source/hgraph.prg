@@ -64,7 +64,7 @@ METHOD New( oWndParent, nId, aValues, nLeft, nTop, nWidth, nHeight, oFont, ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, aValues, oFont, ;
       bSize, ctooltip, tcolor, bcolor )  CLASS HGraph
@@ -75,7 +75,7 @@ METHOD Redefine( oWndParent, nId, aValues, oFont, ;
 
    ::aValues := aValues
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HGraph
 

@@ -198,7 +198,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
    ::oParent:AddEvent( CBN_DROPDOWN, Self, { | o, id | ::onDropDown( o:FindControl( id ) ) }, , "ondropdown" )
    ::oParent:AddEvent( CBN_CLOSEUP, Self, { || ::ldropshow := .F. }, , )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HComboBox
 
@@ -277,7 +277,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bP
    ::oParent:AddEvent( CBN_DROPDOWN, Self, { | o, id | ::onDropDown( o:FindControl( id ) ) }, , "ondropdown" )
    ::oParent:AddEvent( CBN_CLOSEUP, Self, { || ::ldropshow := .F. }, , )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD INIT() CLASS HComboBox
 
@@ -961,7 +961,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       bInit, bSize, bPaint, bChange, ctooltip, lEdit, lText, bGFocus, tcolor, bcolor, ;
       bValid, , nDisplay, nhItem, ncWidth )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bPaint, ;
       bChange, ctooltip, bGFocus, acheck ) CLASS hCheckComboBox
@@ -971,7 +971,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bP
    ::lResource := .T.
    ::acheck    := acheck
 
-   RETURN Self
+   RETURN SELF
 
 METHOD INIT() CLASS hCheckComboBox
 
@@ -1242,7 +1242,7 @@ METHOD RecalcText() CLASS hCheckComboBox
       ::m_bTextUpdated := TRUE
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Paint( lpDis ) CLASS hCheckComboBox
 
@@ -1357,7 +1357,7 @@ METHOD Paint( lpDis ) CLASS hCheckComboBox
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD MeasureItem( l ) CLASS hCheckComboBox
 
@@ -1387,7 +1387,7 @@ METHOD MeasureItem( l ) CLASS hCheckComboBox
       dc:END()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OnGetText( wParam, lParam ) CLASS hCheckComboBox
 

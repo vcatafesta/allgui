@@ -190,7 +190,7 @@ METHOD Init( cFile, nLen, lOptimize )
 
    fwrite( ::aReport[ HANDLE ], cTemp )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -271,7 +271,7 @@ METHOD AtSay( cString, nRow, nCol, cUnits, lExact, cId )
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -298,7 +298,7 @@ METHOD Normal()
       aadd( ::aReport[ FONTS ], { ::aReport[ FONTNAME ], ++::aReport[ NEXTOBJ ] } )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -325,7 +325,7 @@ METHOD Italic()
       aadd( ::aReport[ FONTS ], { ::aReport[ FONTNAME ], ++::aReport[ NEXTOBJ ] } )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -353,7 +353,7 @@ METHOD Bold()
       aadd( ::aReport[ FONTS ], { ::aReport[ FONTNAME ], ++::aReport[ NEXTOBJ ] } )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -381,7 +381,7 @@ METHOD BoldItalic()
       aadd( ::aReport[ FONTS ], { ::aReport[ FONTNAME ], ++::aReport[ NEXTOBJ ] } )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -397,7 +397,7 @@ METHOD BookAdd( cTitle, nLevel, nPage, nLine )
 
    aadd( ::aReport[ BOOKMARK ], { nLevel, ALLTRIM( cTitle ), 0, 0, 0, 0, 0, 0, nPage, IIF( nLevel == 1, ::aReport[ PAGEY ], ::aReport[ PAGEY ] - nLine * 72 / ::aReport[ LPI ] ) })
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -413,7 +413,7 @@ METHOD BookClose( )
 
    ::aReport[ BOOKMARK ] := nil
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -429,7 +429,7 @@ METHOD BookOpen( )
 
    ::aReport[ BOOKMARK ] := {}
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -499,7 +499,7 @@ METHOD Box( x1, y1, x2, y2, nBorder, nShade, cUnits, cColor, cId )
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -574,7 +574,7 @@ METHOD Center( cString, nRow, nCol, cUnits, lExact, cId )
    ENDIF
    ::AtSay( cString, ::R2M( nRow ), IIF( cUnits == "R", ::aReport[ PDFLEFT ] + ( ::aReport[ PAGEX ] / 72 * 25.4 - 2 * ::aReport[ PDFLEFT ] ) * nCol / ::aReport[ REPORTWIDTH ], nCol ) - nLen, "M", lExact )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -724,7 +724,7 @@ METHOD Close()
 
    ::aReport := nil
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -773,7 +773,7 @@ METHOD Image( cFile, nRow, nCol, cUnits, nHeight, nWidth, cId )
 
    aadd( ::aReport[ PAGEIMAGES ], { cFile, nRow, nCol, nHeight, nWidth } )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -869,7 +869,7 @@ METHOD NewPage( _cPageSize, _cPageOrient, _nLpi, _cFontName, _nFontType, _nFontS
    ::aReport[ FONTNAMEPREV ] := 0
    ::aReport[ FONTSIZEPREV ] := 0
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -917,7 +917,7 @@ METHOD PageSize( _cPageSize )
       ::aReport[ PAGEY ] := aSize[ nSize ][ 2 ] * 72
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -936,7 +936,7 @@ METHOD PageOrient( _cPageOrient )
    ::aReport[ PAGEORIENT ] := _cPageOrient
    ::PageSize( ::aReport[ PAGESIZE ] )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1008,7 +1008,7 @@ METHOD RJust( cString, nRow, nCol, cUnits, lExact, cId )
    ENDIF
    ::AtSay( cString, ::R2M( nRow ), IIF( cUnits == "R", ::aReport[ PDFLEFT ] + ( ::aReport[ PAGEX ] / 72 * 25.4 - 2 * ::aReport[ PDFLEFT ] ) * nCol / ::aReport[ REPORTWIDTH ] - nAdj, nCol ) - nLen, "M", lExact )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1048,7 +1048,7 @@ METHOD SetFont( _cFont, _nType, _nSize, cId )
       aadd( ::aReport[ FONTS ], { ::aReport[ FONTNAME ], ++::aReport[ NEXTOBJ ] } )
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1071,7 +1071,7 @@ METHOD SetLPI(_nLpi)
 
    ::PageSize( ::aReport[ PAGESIZE ] )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1276,7 +1276,7 @@ METHOD OpenHeader( cFile )
    ENDIF
    ::aReport[ MARGINS ] := .t.
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1293,7 +1293,7 @@ METHOD EditOnHeader()
    ::aReport[ HEADEREDIT ] := .t.
    ::aReport[ MARGINS ] := .t.
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1310,7 +1310,7 @@ METHOD EditOffHeader()
    ::aReport[ HEADEREDIT ] := .f.
    ::aReport[ MARGINS    ] := .t.
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1327,7 +1327,7 @@ METHOD CloseHeader()
    ::aReport[ HEADER ] := {}
    ::aReport[ MARGINS ] := .f.
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1375,7 +1375,7 @@ METHOD EnableHeader( cId )
       ::aReport[ MARGINS ] := .t.
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1398,7 +1398,7 @@ METHOD DisableHeader( cId )
       ::aReport[ MARGINS ] := .t.
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1419,7 +1419,7 @@ METHOD SaveHeader( cFile )
    cCmd := "copy temp.tmp " + cFile + " > nul"
    RunExternal( cCmd )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1530,7 +1530,7 @@ METHOD DrawHeader()
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1712,7 +1712,7 @@ METHOD Margins( nTop, nLeft, nBottom )
 
    ::aReport[ MARGINS ] := .f.
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -1817,7 +1817,7 @@ METHOD CreateHeader( _file, _size, _orient, _lpi, _width )
    ::EditOffHeader()
    ::SaveHeader( _file )
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -2249,7 +2249,7 @@ METHOD CheckLine( nRow )
    ENDIF
    ::aReport[ REPORTLINE ] := nRow
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -2416,7 +2416,7 @@ METHOD TextPrint( nI, nLeft, lParagraph, nJustify, nSpace, nNew, nLength, nLineL
    nLineLen := 0.00
    nLineLen += nSpace * nNew
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -2634,7 +2634,7 @@ METHOD ClosePage()
 
    ::aReport[ PAGEBUFFER ] := ""
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -2657,7 +2657,7 @@ METHOD FilePrint( cFile )
       break
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
 
@@ -2679,7 +2679,7 @@ METHOD Execute( cFile )
       break
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    //-------------------------\\
    //-------------------------\\

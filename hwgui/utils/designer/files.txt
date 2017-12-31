@@ -26,4 +26,3 @@ Files in directory:
 
     - resource/widgets.xml    -  configuration file with the widgets set for forms.
     - resource/repwidg.xml    -  configuration file with the widgets set for reports.
-

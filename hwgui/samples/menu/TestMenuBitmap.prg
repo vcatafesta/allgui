@@ -27,7 +27,7 @@ FUNCTION Main()
    MENUITEM "&New "    ID 1002 ACTION hwg_Msginfo("New")  BITMAP "\hwgui\samples\image\new_m.bmp"
    MENUITEM "&Open"    ID 1003 ACTION hwg_Msginfo("Open") BITMAP "\hwgui\samples\image\open_m.bmp"
    MENUITEM "&Demo"    ID 1004 ACTION Test()
-   separator
+   SEPARATOR
    MENUITEM "&Bitmap and a Text"  ID 1005 ACTION Test()
    ENDMENU
    ENDMENU

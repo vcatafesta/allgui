@@ -47,7 +47,7 @@ METHOD New( cTitle, cInstruction, cContent, nCommonButtons, nMainIcon ) CLASS TS
       ::nMainIcon := nMainIcon
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Execute() CLASS TSimpleTaskDialog
 
@@ -206,7 +206,7 @@ METHOD New( cTitle, cInstruction, cContent, cFooter, nCommonButtons, nMainIcon )
       ::aConfig[ TDC_MAINICON ] := nMainIcon
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    Shows the dialog.

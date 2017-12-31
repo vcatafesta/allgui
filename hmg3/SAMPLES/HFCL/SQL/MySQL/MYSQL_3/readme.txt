@@ -10,5 +10,4 @@ MySql versions.
 If you experience problems with older versions of this libraries, please
 upgrade it.
 
-
 Roberto.

@@ -155,7 +155,7 @@ METHOD New( oPorta ) CLASS PrintDos
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Comando( oComm1, oComm2, oComm3, oComm4, oComm5, oComm6, oComm7, ;
       oComm8, oComm9, oComm10 )  CLASS PrintDos

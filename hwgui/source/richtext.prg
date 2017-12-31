@@ -347,7 +347,7 @@ METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nS
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
    **************************  END OF New()  ***************************
 
 METHOD PageSetup( nLeft, nRight, nTop, nBottom, nWidth, nHeight, ;

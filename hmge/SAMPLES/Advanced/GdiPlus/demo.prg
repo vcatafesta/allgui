@@ -68,44 +68,44 @@ STATIC PROCEDURE s_CreateMenu()
 #xtranslate _PICT_INFO => aPictInfo[BM_WIDTH], aPictInfo[BM_HEIGHT]
 
                IF "jpeg" $ aMimeType[i]
-                  menuitem '&Save as '+ aMimeType[i] action;
+                  MENUITEM '&Save as '+ aMimeType[i] action;
                      MsgInfo( iif( gSave( hPicture, cPicture+".jpeg", _PICT_INFO, "image/jpeg", 90 ), "Saved", "Failure" ), "Result" )
                ENDIF
 
                IF "gif" $ aMimeType[i]
-                  menuitem '&Save as '+ aMimeType[i] action ;
+                  MENUITEM '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".gif", _PICT_INFO, "image/gif", 100 ), "Saved", "Failure" ), "Result" )
                ENDIF
 
                IF "tif" $ aMimeType[i]
-                  menuitem '&Save as '+ aMimeType[i] action ;
+                  MENUITEM '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".tif", _PICT_INFO, "image/tiff", 100 ), "Saved", "Failure" ), "Result" )
                ENDIF
 
                IF "png" $ aMimeType[i]
-                  menuitem '&Save as '+ aMimeType[i] action ;
+                  MENUITEM '&Save as '+ aMimeType[i] action ;
                      MsgInfo( iif( gSave( hPicture, cPicture+".png", _PICT_INFO, "image/png", 100 ), "Saved", "Failure" ), "Result" )
                ENDIF
             ENDIF
          NEXT
 
-         separator
+         SEPARATOR
 
-         menuitem "E&xit" action ( DeleteObject( hPicture ), ThisWindow.Release )
-      end popup
+         MENUITEM "E&xit" action ( DeleteObject( hPicture ), ThisWindow.Release )
+      END POPUP
 
       DEFINE POPUP "&?"
-         menuitem '&Get number of image coders' action ;
+         MENUITEM '&Get number of image coders' action ;
             MsgInfo( "Number of image coders"  + c1Tab + ": " + NTrim( gPlusGetEncodersNum() ), "Info" )
 
-         menuitem '&Get size of image coders array in bytes' action ;
+         MENUITEM '&Get size of image coders array in bytes' action ;
             MsgInfo( "Size of image coders array (in bytes)"  + c1Tab + ": " + NTrim( gPlusGetEncodersSize() ), "Info" )
 
          MENUITEM "&BMP Info"  ACTION s_GetImageInfo( GetStartupFolder() + "\demo.bmp" )
          MENUITEM "&JPEG Info" ACTION s_GetImageInfo( GetStartupFolder() + "\rainbow.jpg" )
          MENUITEM "&PNG Info"  ACTION s_GetImageInfo( GetStartupFolder() + "\demo.png" )
-      end popup
-   end menu
+      END POPUP
+   END MENU
 
    RETURN
 

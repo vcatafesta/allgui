@@ -75,7 +75,7 @@ STATIC FUNCTION DrawCurves()
    LOCAL nI, hPen, hOldPen
    LOCAL cPoints
 
-   IF HB_ISNIL( nHeight )
+   IF nHeight == NIL
       nHeight := Form_1.Height -20
       nWidth  := Form_1.Width  -20
    ENDIF

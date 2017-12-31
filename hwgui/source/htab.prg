@@ -55,7 +55,7 @@ METHOD New( cCaption, nPage, lEnabled, tcolor, bcolor, cTooltip ) CLASS HPage
    ::Tooltip := cTooltip
    ::Setcolor( tColor, bColor )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Setcolor( tcolor, bColor ) CLASS HPage
 
@@ -231,7 +231,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    HWG_InitCommonControlsEx()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HTab
 
@@ -259,7 +259,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    ::brush := hwg_GetBackColorParent( Self, .T. )
    ::oPaint := HPaintTab():New( Self, , 0, 0, 0, 0 ) //, ::oFont )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HTab
 
@@ -973,7 +973,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, tcolor, bColor ) CLAS
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HPaintTab
 

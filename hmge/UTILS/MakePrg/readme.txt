@@ -45,7 +45,6 @@ null string for <message>:
 
    makeprg myfile.prg "" /g
 
-
 Configuration files:
 --------------------
 The application searches for a configuration file.  It searches
@@ -100,7 +99,6 @@ name provided the section actually exists.
   example:
   [default]
   mode=console
-
 
 --------------------
 [vars]
@@ -157,7 +155,6 @@ Predefined macros:
   DATETIME - Date in dd-MMM-yyyy HH:MM:SS format, e.g.
              14-May-2004 12:34:53
 
-
 Using Macros:
 ------------------
 To use a macro in the header section, bound the macro with '$$' signs:
@@ -177,4 +174,3 @@ Further, you can reference environment variables in the same way:
 
 Note that neither user-defined macros nor environment variable
 references are case sensitive.
-

@@ -168,7 +168,7 @@ FUNCTION DrawMeter(day)
          TRANSPARENT
    NEXT
 
-   sele 1
+   SELE 1
    IF ! used()
       opentable()
    ENDIF
@@ -209,7 +209,7 @@ FUNCTION DrawMeter(day)
             IF min(TIMETOSEC(alltrim(1->time_in)+":00:00"),avl)= TIMETOSEC(alltrim(1->time_in)+":00:00")
                n0 ++
             ENDIF
-         End
+         END
       NEXT
    ENDIF
 
@@ -566,7 +566,7 @@ METHOD IFDATA() CLASS TApplication
    ENDIF
    archivio:= oFatt:DataPath+ uTmp+"PresaNew.DbF"
    opentable()
-   sele 1
+   SELE 1
    APPEND from (archivio)
    IF File(Archivio)
       status := DELETEFILE(archivio)

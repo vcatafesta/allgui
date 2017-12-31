@@ -82,7 +82,6 @@ STATIC nHandle
 
 ...Mainline...
 
-
 IF OpenOk()
 
    DOProcessing()
@@ -148,7 +147,6 @@ UnInt_Port( nHandle )
 
 Return NIL
 
-
 Any further contributions to this library are most welcome.
 
 Ned Robertson
@@ -156,4 +154,3 @@ XpertCTI, LLC
 Richmond, VA  USA
 
 July 21, 2003
-

@@ -46,7 +46,7 @@ METHOD New( cDevice, cFileName ) CLASS TMci
    ::cFileName = cFileName
    ::cBuffer   = Space( BUF_SIZE )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SendStr( cMciStr ) CLASS TMci
 

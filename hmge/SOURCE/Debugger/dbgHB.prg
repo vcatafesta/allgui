@@ -252,7 +252,7 @@ METHOD New() CLASS HMGDebugger
 
    t_oDebugger := Self
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HMGDebugger
 

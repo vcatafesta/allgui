@@ -104,5 +104,3 @@ el conjunto de ‘widgets’
      'GET', tienen una propiedad 'Varname' - el nombre de  la
      correspondiente variable, que se declarará también  como
      'Privado' en el principio de HFormTmpl ():Show().
-
-

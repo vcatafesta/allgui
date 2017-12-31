@@ -5,7 +5,6 @@
                     Simple SQL Interface for Harbour
 
 
-
 1. Introduction
 
    Simple SQL interface implements accessing SQL query result via RDD interface. It is not intended to be replacement for "transparent" move of DBFCDX application to SQL world.
@@ -79,9 +78,7 @@ all query (it could contain millions of records!) will be cached.
  before readonly DO WHILE ! EOF() loops? :)
 
 
-
 2. Architecture
-
 
              +-------------+
              |             |
@@ -95,7 +92,6 @@ all query (it could contain millions of records!) will be cached.
              | SQLBASE RDD |    |   SDD   |
              |             |<---|         |
              +-------------+    +---------+
-
 
    SQLBASE RDD implements basic functionality for accessing SQL query result
 via RDD interface. This RDD could be used, if indexing of query result is not
@@ -114,7 +110,6 @@ exchange interface between SQLBASE and SQL server.
    A few additional functions are also implemented, ex. HB_SQLCONNECT().
 Usualy these functions are just a shorter version of corresponding RDDINFO()
 call.
-
 
 
 3. Modifying database

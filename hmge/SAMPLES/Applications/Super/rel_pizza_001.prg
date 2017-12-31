@@ -26,7 +26,7 @@ FUNCTION relatorio_pizza_001()
          aadd(a_001,produtos->nome_longo)
       ENDIF
       produtos->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_pizzas_001;
          at 000,000;
@@ -73,7 +73,7 @@ FUNCTION relatorio_pizza_001()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -99,7 +99,7 @@ FUNCTION relatorio_pizza_001()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_pizzas_001.width-100
@@ -112,16 +112,16 @@ FUNCTION relatorio_pizza_001()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
 
-   on key escape action thiswindow.release
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_pizzas_001.center
 form_pizzas_001.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -179,7 +179,7 @@ STATIC FUNCTION relatorio()
                   dbselectarea('detalhamento_compras')
                   x_soma_qtd := 0
                ENDIF
-            end
+            END
             dbselectarea('tmp_pizza_relatorio')
             INDEX ON qtd to indp002 descend
             GO TOP
@@ -199,7 +199,7 @@ STATIC FUNCTION relatorio()
                   cabecalho(pagina)
                   linha := p_linha
                ENDIF
-            end
+            END
          ELSE
             dbselectarea('detalhamento_compras')
             INDEX ON id_prod to indp001 for data >= x_de .and. data <= x_ate .and. qtd == 0
@@ -221,7 +221,7 @@ STATIC FUNCTION relatorio()
                   dbselectarea('detalhamento_compras')
                   x_soma_qtd := 0
                ENDIF
-            end
+            END
             dbselectarea('tmp_pizza_relatorio')
             INDEX ON qtd to indp002 for alltrim(produto) == alltrim(x_nome_pizza)
             GO TOP
@@ -241,7 +241,7 @@ STATIC FUNCTION relatorio()
                   cabecalho(pagina)
                   linha := p_linha
                ENDIF
-            end
+            END
          ENDIF
 
          rodape()
@@ -249,7 +249,7 @@ STATIC FUNCTION relatorio()
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -274,11 +274,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 041,020 PRINT 'PIZZA' FONT 'courier new' SIZE 010 BOLD
    @ 041,100 PRINT 'QUANTIDADE' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

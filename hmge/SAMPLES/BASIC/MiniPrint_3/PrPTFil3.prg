@@ -51,7 +51,7 @@ FUNCTION  PPTFComf(;                      // Print plain text file, Comfortable 
 
    LOCAL nPBarIncr
 
-   IF HB_ISNIL( aShPrgsOp )
+   IF aShPrgsOp == NIL
       aShPrgsOp := ARRAY( 4 )
       AFILL( aShPrgsOp, .F. )
    ENDIF

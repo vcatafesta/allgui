@@ -9,7 +9,6 @@ This software is provided "as-is," without any express or implied warranty.
 In no event shall the author be held liable for any damages arising from the
 use of this software.
 
-
 I've decided to create a simple and easy way to access mysql server from
 my applications. The result is MiniSql.
 
@@ -74,7 +73,6 @@ Samples:
       INSERT INTO TEST SET NAME = "&cVar2"
 
    UNLOCK TABLES
-
 
 Enjoy!
 

@@ -895,7 +895,7 @@ STATIC FUNCTION cBios_( nFunction, nBytes )
 
       IF ( nPeek := PeekByte( nFunction, n ) ) < 32
          EXIT
-      End
+      END
 
       cBiosInfo += Chr( nPeek )
 

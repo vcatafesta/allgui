@@ -185,7 +185,7 @@ FUNCTION xPadR( cText, nPixels, cChar )
 
    WHILE GetTextWidth( , cText ) < nPixels
       cText += cChar
-   end
+   END
 
    RETURN cText
 
@@ -195,7 +195,7 @@ FUNCTION xPadL( cText, nPixels, cChar )
 
    WHILE GetTextWidth( , cText ) < nPixels
       cText := cChar + cText
-   end
+   END
 
    RETURN cText
 

@@ -71,7 +71,7 @@ METHOD New(oParent,cName,nBitIp,nId,bState,bStyle,cText,bClick,ctip,aMenu) CLASS
 
    //  ::oParent:oParent:AddEvent( BN_CLICKED, Self, {|| ::ONCLICK()},,"click" )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Caption( cText )  CLASS HToolButton
 
@@ -241,7 +241,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, btnWidth, oFo
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, aItem )  CLASS hToolBar
@@ -259,7 +259,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    ::nIndent := 1
    ::lResource := .T.
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS hToolBar
 
@@ -586,7 +586,7 @@ METHOD init() CLASS htoolbarex
    hwg_Settoolhandle( ::handle )
    hwg_Sethook()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD ExecuteTool( nid ) CLASS htoolbarex
 

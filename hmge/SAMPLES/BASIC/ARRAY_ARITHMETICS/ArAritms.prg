@@ -83,14 +83,14 @@ FUNC ACOUNT( ;                            // Count from an array.
          nIndis :=  0,;
          xRVal
 
-      IF HB_ISNIL( xFields )
+      IF xFields == NIL
          IF l2Dim
             xFields := {}
             AEVAL( aArry2Sum[ 1 ], { | x1, i1 | IF( HB_ISNUMERIC( x1 ), AADD( xFields, i1 ), ) } )
          ENDIF l2Dim
       ELSEIF HB_ISNUMERIC( xFields ) .AND. l2Dim
          xFields := { xFields }
-      ENDIF HB_ISNIL( xFields )
+      ENDIF
 
       DEFAULT  nFORColNo TO 1,;
          bFORClaus TO { || .T.}
@@ -155,14 +155,14 @@ FUNC ACOUNT( ;                            // Count from an array.
             nRowCo :=  0,;  // Row count to average
             xRVal
 
-         IF HB_ISNIL( xFields )
+         IF xFields == NIL
             IF l2Dim
                xFields := {}
                AEVAL( aArry2Sum[ 1 ], { | x1, i1 | IF( HB_ISNUMERIC( x1 ), AADD( xFields, i1 ), ) } )
             ENDIF l2Dim
          ELSEIF HB_ISNUMERIC( xFields ) .AND. l2Dim
             xFields := { xFields }
-         ENDIF HB_ISNIL( xFields )
+         ENDIF
 
          DEFAULT  nFORColNo TO 1,;
             bFORClaus TO { || .T.}
@@ -232,14 +232,14 @@ FUNC ACOUNT( ;                            // Count from an array.
                c1Key  := '',;
                nSTInd :=  0     // Sub-total indise
 
-            IF HB_ISNIL( xFields )
+            IF xFields == NIL
                IF l2Dim
                   xFields := {}
                   AEVAL( aArry2Total[ 1 ], { | x1, i1 | IF( HB_ISNUMERIC( x1 ), AADD( xFields, i1 ), ) } )
                ENDIF l2Dim
             ELSEIF HB_ISNUMERIC( xFields ) .AND. l2Dim
                xFields := { xFields }
-            ENDIF HB_ISNIL( xFields )
+            ENDIF
 
             DEFAULT  nONColNo  TO 0,;
                bONClaus  TO { || .T.},;

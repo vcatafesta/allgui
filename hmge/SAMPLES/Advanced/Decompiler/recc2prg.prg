@@ -183,7 +183,7 @@ FUNCTION dcp_load_array(cFilename)
       ENDIF
       cGlobalString:=cTempString
       cTempString:=""
-   end
+   END
    aadd(aTemp,aCode)
    aadd(aTemp,cFilename)
 
@@ -426,7 +426,7 @@ FUNCTION dcp_split_code(aReturn,cNewFileName)
          ELSE
             EXIT   //end of array
          ENDIF
-      end
+      END
       i:=0
       aGlobalVar[j]:=aVar
       lDeclaration:=.t.
@@ -497,7 +497,7 @@ STATIC FUNCTION dcp_FindLastRow(aCode)
          Msginfo("No source code found","Trace Message in FindLastRow")
          EXIT
       ENDIF
-   end
+   END
 
    RETURN nLastRow
 
@@ -795,7 +795,7 @@ STATIC FUNCTION dcp_f80(aCode,nIndex,aVar,aStack,cStringa,lDeclaration)
          aStack:=aTemp[1]
          xReturn:=aTemp[2]
          aadd(aStringa,dcp_FormatVarType(xReturn,if(Valtype(xReturn)="A",.t.,.f.)))
-      end
+      END
       cNewString:=dcp_mask_convert(aStringa,aVar,nVar,aCode,nIndex)
    ENDIF
    aadd(aReturn,aStack)
@@ -817,7 +817,7 @@ STATIC FUNCTION dcp_f51(aCode,nIndex)
          cStringa:=substr(cStringa,1,LEN(cStringa)-1)
          EXIT
       ENDIF
-   end
+   END
    aadd(aReturn,cStringa)
    aadd(aReturn,i)
 

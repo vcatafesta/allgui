@@ -39,7 +39,6 @@ PrintPreview()   - Print preview.
 Print()      - Report printing. You may use only PrintPreview()
       or only Print().
 
-
 4. SYSTEM REQUIREMENTS
  - x86-based personal computer (486 minimum);
  - Microsoft Windows XP;
@@ -62,4 +61,3 @@ http://www.catchysoft.com/report_generator.html
 9. HOW TO CONTACT US
 You can contact us using this online form:
 http://www.catchysoft.com/support.html
-

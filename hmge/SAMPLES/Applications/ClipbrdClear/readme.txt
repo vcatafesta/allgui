@@ -7,7 +7,6 @@ Status: Freeware
 Author: Grigory Filatov, Ukraine
 E-Mail: gfilatov@inbox.ru
 
-
 What is ClipbrdClear?
 =====================
 
@@ -31,7 +30,6 @@ Also, there are some command line switches that change behaviour of the program:
            you want to clear the clipboard just click the shortcut and you are done.
            Useful when you want to use the program occassinally. It does not consume
            system resources that way and gives you more room in the tray area for other applications.
-
 
 Installation
 ============

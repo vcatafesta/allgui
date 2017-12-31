@@ -81,14 +81,14 @@ FUNCTION DBUbrowse1()
             button _DBUprevious  caption "Previous"  picture "previous"  action DBUBrowsepreviousclick()
             button _DBUnext      caption "Next"      picture "next"      action DBUBrowsenextclick()
             button _DBUlast      caption "Last"      picture "last"      action DBUBrowselastclick()
-         end toolbar
+         END toolbar
          DEFINE TOOLBAR _DBUedittoolbar1 buttonsize 48,35 flat // righttext
             button _DBUEditRec   caption "Edit"      picture "editmode"  action DBUbrowse2edit()
             button _DBUdelrec    caption "Delete"    picture "delete"    action DBUBrowsedelrecclick()
             button _DBUrecall    caption "Recall"    picture "recall"    action DBUBrowserecallclick()
             button _DBUprint     caption "Print"     picture "print"     action DBUbrowseprint()
             button _DBUclose     caption "Exit"      picture "exit"      action _DBUBrowse.release
-         end toolbar
+         END toolbar
       END SPLITBOX
 
       DEFINE BROWSE _DBUrecord
@@ -112,7 +112,7 @@ FUNCTION DBUbrowse1()
          lock .t.
          inplaceedit .t.
          on change DBUbrowsechanged()
-      end browse
+      END browse
 
       DEFINE BUTTON _DBUbrowsegotobutton
          row nWBrowseHeight - IF(IsXPThemeActive(), 90, 80)

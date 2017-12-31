@@ -139,7 +139,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
       ::backstyle := TRANSPARENT
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, ctooltip, tcolor, bcolor, lTransp, cLink, vColor, lColor, hColor )  CLASS HStaticLink
@@ -179,7 +179,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       ::backstyle := TRANSPARENT
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD INIT() CLASS HStaticLink
 

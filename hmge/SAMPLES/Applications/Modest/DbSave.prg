@@ -429,7 +429,7 @@ STATIC FUNCTION DoSave
 
       lSuccess := .T.
 
-   End
+   END
 
    IF lSuccess
 
@@ -506,7 +506,7 @@ STATIC FUNCTION CreateEmpty
       lSuccess := .T.
    CATCH
       WriteMsg( MSG_ERROR_CREATE + cFile )
-   End
+   END
 
    RETURN lSuccess
 
@@ -535,7 +535,7 @@ STATIC FUNCTION Transfer
       lSuccess := .F.
       Finally
       DbCloseAll()
-   End
+   END
 
    RETURN lSuccess
 
@@ -692,7 +692,7 @@ STATIC FUNCTION EqnType( nField, nElem )
          xVar  := Eval( cRule )
       CATCH
          xVar := nil
-      End
+      END
 
    ENDIF
 
@@ -784,7 +784,7 @@ STATIC FUNCTION SaveXML
 
    CATCH
       lSuccess := .F.
-   End
+   END
 
    RETURN lSuccess
 

@@ -89,7 +89,7 @@ METHOD New( oWndParent, nId, nStyle, nStyleEx, nLeft, nTop, nWidth, nHeight, ;
    hwg_Regnice()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, nStyleEx, ;
       bInit, bClick, ;
@@ -113,7 +113,7 @@ METHOD Redefine( oWndParent, nId, nStyleEx, ;
 
    hwg_Regnice()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HNiceButton
 
@@ -181,21 +181,21 @@ METHOD Create( ) CLASS HNICEButton
    hwg_Setwindowrgn( ::Handle, Region, .T. )
    hwg_Invalidaterect( ::Handle, 0, 0 )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Size( ) CLASS HNICEButton
 
    ::State := OBTN_NORMAL
    hwg_Invalidaterect( ::Handle, 0, 0 )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Moving( ) CLASS HNICEButton
 
    ::State := .f.
    hwg_Invalidaterect( ::Handle, 0, 0 )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD MouseMove( wParam, lParam ) CLASS HNICEButton
 
@@ -224,7 +224,7 @@ METHOD MouseMove( wParam, lParam ) CLASS HNICEButton
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD MUp( ) CLASS HNICEButton
 
@@ -242,7 +242,7 @@ METHOD MUp( ) CLASS HNICEButton
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD MDown() CLASS HNICEButton
 
@@ -254,7 +254,7 @@ METHOD MDown() CLASS HNICEButton
       hwg_SetNiceBtnSelected( Self )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD PAINT() CLASS HNICEButton
 
@@ -303,7 +303,7 @@ METHOD PAINT() CLASS HNICEButton
 
    hwg_Endpaint( ::Handle, ps )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD END () CLASS HNiceButton
 

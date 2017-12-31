@@ -28,16 +28,16 @@ FUNCTION main
             item "Login as &Admin" action loginattempt( 1 )
             item "Login as &User" action loginattempt( 2 )
             item "Login as &Guest" action loginattempt( 3 )
-            separator
+            SEPARATOR
             item "E&xit" action sample.release
-         END Popup
+         END POPUP
 
          POPUP "&Test"
             item "Check &Permissions" action CheckPermissions()
             item "Show &User List" action ShowUserList() name UserList
-         END Popup
+         END POPUP
 
-      End Menu
+      END MENU
 
    END WINDOW
 

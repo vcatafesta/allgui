@@ -7,7 +7,6 @@ Status: FREEWARE
 Author: Grigory Filatov, Ukraine
 E-Mail: gfilatov@inbox.ru
 
-
 What is RGB-Mixer?
 ==================
 
@@ -24,7 +23,6 @@ and stepping 51 (Netscape 216 color palette).
 The color last tuned is saved into a "RGBMixer.ini" file inside the
 current directory.
 The settings are saved to disk on program shutdown.
-
 
 Installation
 ============

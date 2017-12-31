@@ -139,7 +139,7 @@ FUNCTION dataxtract(cWindow,cGrid)
          button calc picture "cube1" action createreport(.t.) tooltip "Refresh/Create Data Cube (F5)" autosize
          button print1 picture "print1" action cubeprint() tooltip "Print Data Cube (Ctrl+P)" autosize
          button close1 picture "close" action xtract.release() tooltip "Exit Data Cube (Esc)" autosize
-      end toolbar
+      END toolbar
 
       DEFINE LABEL available
          row 45

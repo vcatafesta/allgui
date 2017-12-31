@@ -23,7 +23,7 @@ FUNCTION Main
    REQUEST DBFCDX
    RDDSETDEFAULT( "DBFCDX" )
    SET DELETED ON
-   SET BrowseSync ON
+   SET BROWSESYNC ON
    lOpz        := .F.
    aOptions    := {}
    abFunctions := {}
@@ -162,7 +162,7 @@ FUNCTION Main
                value 1
                Width 200
                On Change Change_Cfg(2)
-            End ListBox
+            END ListBox
             DEFINE HYPERLINK H1
                ROW             370
                COL             25

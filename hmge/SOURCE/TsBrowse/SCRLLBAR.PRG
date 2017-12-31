@@ -154,7 +154,7 @@ METHOD New( nRow, nCol, nMin, nMax, nPgStep, lVertical, oWnd, nWidth, nHeight,;
       ::CheckDots()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBScrlBar:WinNew() Version 5.0 27/Feb/2002
@@ -195,7 +195,7 @@ METHOD WinNew( nMin, nMax, nPgStep, lVertical, oWnd, bUpAction,;
    ::SetRange( nMin, nMax )
    ::SetPos( nMin )
 
-   RETURN Self
+   RETURN SELF
 
    * ============================================================================
    * METHOD TSBScrlBar:HandleEvent() Version 5.0 27/Feb/2002

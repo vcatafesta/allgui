@@ -44,7 +44,7 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
    ::tag := hwg_SetTimer( ::id, ::value )
    AAdd( ::aTimers, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD End() CLASS HTimer
 

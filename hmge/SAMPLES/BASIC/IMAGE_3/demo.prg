@@ -16,7 +16,7 @@ FUNCTION Main
          title "JPEG Image From URL" ;
          backcolor { 204, 220, 240 } nosize
 
-      on key escape action win_1.release()
+      ON KEY ESCAPE ACTION win_1.release()
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 100,16 FLAT
 
@@ -39,7 +39,7 @@ FUNCTION Main
          height 600
          picture cURL2
          stretch .T.
-      end image
+      END IMAGE
 
    END WINDOW
 

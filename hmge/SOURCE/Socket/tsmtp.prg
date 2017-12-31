@@ -124,7 +124,7 @@ METHOD New() CLASS TSMTP
    //::oSocket:SetDebug( .T. )
    ::ClearData()
 
-   RETURN Self
+   RETURN SELF
 
    // Connect to remore site
 

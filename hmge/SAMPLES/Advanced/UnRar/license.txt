@@ -14,5 +14,4 @@
 
       Thank you for your interest in RAR and unrar.dll.
 
-
                                             Alexander L. Roshal

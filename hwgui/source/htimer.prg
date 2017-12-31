@@ -62,7 +62,7 @@ METHOD New( oParent, nId, value, bAction ) CLASS HTimer
    AAdd( ::aTimers, Self )
    ::oParent:AddObject( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HTimer
 

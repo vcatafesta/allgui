@@ -310,42 +310,42 @@ PROCEDURE SetBaseLang
 
       DO CASE
       CASE ( cName == 'SPANISH' )
-         SET language to Spanish
+         SET LANGUAGE TO Spanish
 
       CASE ( cName == 'FRENCH' )
-         SET language to French
+         SET LANGUAGE TO French
 
       CASE ( cName == 'PORTUGUESE' )
-         SET language to Portuguese
+         SET LANGUAGE TO Portuguese
 
       CASE ( cName == 'ITALIAN' )
-         SET language to Italian
+         SET LANGUAGE TO Italian
 
       CASE ( cName == 'GERMAN' )
-         SET language to German
+         SET LANGUAGE TO German
 
       CASE ( cName == 'POLISH' )
-         SET language to Polish
+         SET LANGUAGE TO Polish
 
       CASE ( cName == 'FINNISH' )
-         SET language to Finnish
+         SET LANGUAGE TO Finnish
 
       CASE ( cName == 'DUTCH' )
-         SET language to Dutch
+         SET LANGUAGE TO Dutch
 
       CASE ( cName == 'RUSSIAN' )
-         SET language to Russian
+         SET LANGUAGE TO Russian
 
          //      Case ( cName == 'UKRAINIAN' )
          //        Set language to Ukrainian
 
       OTHERWISE
-         SET language to English
+         SET LANGUAGE TO English
 
       ENDCASE
 
    ELSE
-      SET language to English
+      SET LANGUAGE TO English
 
    ENDIF
 
@@ -493,7 +493,7 @@ PROCEDURE MakeLangTemplate
       cString := StrTran( aStrings[ 11, 2 ], '%N', ( CRLF + TEMPLATE_FILE ) )
       MsgInfo( cString, aStrings[ 10, 2 ] )
 
-   End
+   END
 
    RETURN
 

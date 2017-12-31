@@ -97,7 +97,7 @@ METHOD New() CLASS THttp
    ::oSocket    := TSocket():New()
    ::cUserAgent := "THttp/Harbour (http://www.baccan.it; MSIE 6.0)"
 
-   RETURN Self
+   RETURN SELF
 
    /****m* THttp/THttp:Connect
    *  NAME

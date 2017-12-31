@@ -1601,7 +1601,7 @@ STATIC FUNCTION print_grid( pdf, page )
       ENDIF
 
       y += 5
-   End
+   END
 
    /* Draw vertical lines */
    x := 0
@@ -1633,7 +1633,7 @@ STATIC FUNCTION print_grid( pdf, page )
       ENDIF
 
       x += 5
-   End
+   END
 
    /* Draw horizontal text */
 
@@ -1647,7 +1647,7 @@ STATIC FUNCTION print_grid( pdf, page )
       ENDIF
 
       y += 5
-   End
+   END
 
    /* Draw virtical text */
 
@@ -1667,7 +1667,7 @@ STATIC FUNCTION print_grid( pdf, page )
       ENDIF
 
       x += 5
-   End
+   END
 
    HPDF_Page_SetGrayFill (page, 0)
    HPDF_Page_SetGrayStroke (page, 0)

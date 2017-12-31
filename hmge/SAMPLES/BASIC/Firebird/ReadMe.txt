@@ -28,7 +28,6 @@ External Server :
 
     ...;DBNAME=192.168.1.20:C:\Data\EMPLOYEE.FDB;')
 
-
 Of course you must always install the ODBC driver on the
 client machine.
 
@@ -41,13 +40,3 @@ and update the grid.
 Greats
 Hugo Rozas
 hugo.rozas@gmail.com
-
-
-
-
-
-
-
-
-
-

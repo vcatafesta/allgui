@@ -85,7 +85,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
       OTHERWISE
          result := Events( hWnd, nMsg, wParam, lParam )
-      end
+      END
       EXIT
 
    CASE WM_SIZE
@@ -96,7 +96,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    OTHERWISE
       result := Events( hWnd, nMsg, wParam, lParam )
-   end
+   END
 
    RETURN result
 

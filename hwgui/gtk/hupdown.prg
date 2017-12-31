@@ -72,7 +72,7 @@ METHOD New( oWndParent,nId,vari,bSetGet,nStyle,nLeft,nTop,nWidth,nHeight, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HUpDown
 

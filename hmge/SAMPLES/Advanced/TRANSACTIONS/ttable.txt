@@ -64,7 +64,6 @@ FUNCTION GetTable( cAlias )
 
    RETURN oDB
 
-
 /****
 *
 *     CLASS HBField()
@@ -281,7 +280,6 @@ CREATE CLASS HBTable
    ERROR HANDLER OnError( uParam )
 
 ENDCLASS
-
 
 CREATE CLASS HBOrder
 

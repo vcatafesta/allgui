@@ -53,7 +53,7 @@ METHOD New( oWndParent,nId,aValues,nLeft,nTop,nWidth,nHeight,oFont, ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HGraph
 

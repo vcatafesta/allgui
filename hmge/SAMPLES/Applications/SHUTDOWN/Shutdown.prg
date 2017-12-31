@@ -280,7 +280,7 @@ PROCEDURE SetTimer()
 
    cLabel := IF(nMode == 1, aLabel[19], IF(nMode == 2, aLabel[20], aLabel[21]))
 
-   SET InteractiveClose Off
+   SET INTERACTIVECLOSE OFF
 
    IF lStayOnTop
       DEFINE WINDOW Form_2 AT 0,0 WIDTH 250 HEIGHT IF(Empty(cWindow), 162, 206) ;
@@ -344,7 +344,7 @@ PROCEDURE SetTimer()
          WinExit(nMode)
       ELSE
          RELEASE cTimeExit
-         SET InteractiveClose On
+         SET INTERACTIVECLOSE ON
          Form_1.Show
       ENDIF
 

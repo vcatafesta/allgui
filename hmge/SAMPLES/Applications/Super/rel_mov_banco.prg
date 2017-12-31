@@ -20,7 +20,7 @@ FUNCTION movimentacao_bancaria()
    WHILE .not. eof()
       aadd(a_001,strzero(bancos->codigo,4)+' - '+bancos->nome)
       bancos->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_mov_banco;
          at 000,000;
@@ -67,7 +67,7 @@ FUNCTION movimentacao_bancaria()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -93,7 +93,7 @@ FUNCTION movimentacao_bancaria()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_mov_banco.width-100
@@ -106,16 +106,16 @@ FUNCTION movimentacao_bancaria()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
 
-   on key escape action thiswindow.release
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_mov_banco.center
 form_mov_banco.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -179,7 +179,7 @@ STATIC FUNCTION relatorio()
                linha += 5
             ENDIF
 
-         end
+         END
 
          rodape()
 
@@ -190,7 +190,7 @@ STATIC FUNCTION relatorio()
    ordscope(1,0)
    movimento_bancario->(dbgotop())
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -215,11 +215,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 041,130 PRINT 'SAÍDAS' FONT 'courier new' SIZE 010 BOLD
    @ 041,160 PRINT 'SALDO' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

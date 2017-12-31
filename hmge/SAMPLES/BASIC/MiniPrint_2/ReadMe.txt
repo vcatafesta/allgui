@@ -16,5 +16,4 @@ Main goal of this "HMG Print Samples" work is showing as far as easy using HMG M
 
 Happy HMG'ing :D
 
-
 Bicahi Esgici <esgici @ gmail.com>

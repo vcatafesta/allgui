@@ -335,7 +335,7 @@ STATIC FUNCTION GetRunArray( hKey )
 
          aAdd( aRun, { 0, cName, cPath } )
 
-      End
+      END
 
       oReg:Close()
 
@@ -366,7 +366,7 @@ STATIC FUNCTION GetMSConfigArray( cKey )
 
       oKey:Close()
 
-   End
+   END
 
    oReg:Close()
 

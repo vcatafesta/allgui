@@ -349,7 +349,7 @@ PROCEDURE MA_LoadItems()
             IF !EMPTY( c1Line )
                a1Row  := HB_ATOKENS( c1Line, FFFDELIMITER )
                ASIZE( a1Row, 3 )
-               AEVAL( a1Row, { | x1, i1 | a1Row[ i1 ] := IF( HB_ISNIL( x1 ), '', LTRIM( x1 ) ) } )
+               AEVAL( a1Row, { | x1, i1 | a1Row[ i1 ] := IF( x1 == NIL, '', LTRIM( x1 ) ) } )
                AADD( a1Row, ++n1Line )
                AADD( aData, a1Row  )
             ENDIF !EMPTY( c1Line )
@@ -368,7 +368,7 @@ PROCEDURE MA_LoadItems()
    ENDIF !EMPTY( cDataFNam ...
 
    FOR EACH a1Row IN aData
-      AEVAL( a1Row, { | x1, i1 | IF( HB_ISNIL( x1 ), a1Row[ i1 ] := '', ) } )
+      AEVAL( a1Row, { | x1, i1 | IF( x1 == NIL, a1Row[ i1 ] := '', ) } )
    NEXT
 
    MA_FillGrid()

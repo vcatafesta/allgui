@@ -24,11 +24,11 @@ PROCEDURE DrawBorder(;                             // Draw a border around any c
    HB_DEFAULT( @nPenWidth, 1 )
    HB_DEFAULT( @nSpace, 0 )
 
-   IF HB_ISNIL( aUpColor )
+   IF aUpColor == NIL
       aUpColor := BLACK
    ENDIF
 
-   IF HB_ISNIL( aDnColor )
+   IF aDnColor == NIL
       aDnColor := BLACK
    ENDIF
 

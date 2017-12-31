@@ -209,7 +209,7 @@ STATIC PROCEDURE BuildTree
 
       Node wMain.BtnTextBox_1.Value Images { 'STRUCTURE' }
          ScanDir( cPath )
-      End Node
+      END Node
       wMain.StatusBar.Item( 1 ) := ''
 
       // Восстановить исходное значение системной переменной PATH (если она
@@ -318,7 +318,7 @@ STATIC PROCEDURE ScanDir( cPath )
 
                Node xItem
                   ScanDir( cPath + xItem )
-               End Node
+               END Node
 
                Do Events
 
@@ -357,7 +357,7 @@ STATIC PROCEDURE ScanDir( cPath )
 
       ENDIF
 
-   End
+   END
 
    RETURN
 
@@ -405,7 +405,7 @@ STATIC PROCEDURE GetArc( cPath, cFile )
             aFileList := Iif( ( cExt == 'ZIP' ), HB_GetFilesInZip( cPath + cFile ), ArcIndex( cPath + cFile ) )
          CATCH
             aFileList := {}
-         End
+         END
 
          IF !Empty( aFileList )
 
@@ -413,7 +413,7 @@ STATIC PROCEDURE GetArc( cPath, cFile )
                FOR EACH cItem in aFileList
                   TreeItem cItem
                NEXT
-            End Node
+            END Node
 
          ELSE
             TreeItem cFile

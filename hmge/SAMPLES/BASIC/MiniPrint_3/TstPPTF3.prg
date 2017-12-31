@@ -298,7 +298,7 @@ PROCEDURE UpdaSBar( ... )                 // Update Status Bar
       aParams := ARRAY( 4 )
    ENDIF
 
-   AEVAL( aParams, { | x1, i1 | IF( HB_ISNIL( x1 ),, aSBarVals[ i1 ] := x1 )} )
+   AEVAL( aParams, { | x1, i1 | IF( x1 == NIL,, aSBarVals[ i1 ] := x1 )} )
 
    frmPPTFile.StatusBar.Item( 1 ) := HL_ShrinkString( aSBarVals[ 1 ], 40 )         // cPTFilName / c1Line
    frmPPTFile.StatusBar.Item( 2 ) := xPADC( aSBarVals[ 2 ], 20 )                    // cDefaPrinter

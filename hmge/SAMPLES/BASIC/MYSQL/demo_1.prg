@@ -147,14 +147,14 @@ PROCEDURE ShowQuery ()
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Operations'
-            MenuItem 'New Query' Action ( cSearch := AllTrim ( InputBox ( "Enter Search String" , "Query By Name") ) , DoQuery ( cSearch ) )
-            MenuItem 'Append Row' Action AppendRow()
-            MenuItem 'Edit Row' Action EditRow()
-            MenuItem 'Delete Row' Action DeleteRow()
-            Separator
-            MenuItem 'Refresh' Action DoQuery ( cSearch )
-         End Popup
-      End Menu
+            MENUITEM 'New Query' Action ( cSearch := AllTrim ( InputBox ( "Enter Search String" , "Query By Name") ) , DoQuery ( cSearch ) )
+            MENUITEM 'Append Row' Action AppendRow()
+            MENUITEM 'Edit Row' Action EditRow()
+            MENUITEM 'Delete Row' Action DeleteRow()
+            SEPARATOR
+            MENUITEM 'Refresh' Action DoQuery ( cSearch )
+         END POPUP
+      END MENU
 
       DEFINE GRID Grid_1
          Row 0

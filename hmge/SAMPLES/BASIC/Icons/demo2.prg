@@ -53,9 +53,9 @@ PROCEDURE main()
 
       DEFINE MAIN MENU
          DEFINE POPUP "&File"
-            menuitem "E&xit" action ThisWindow.Release
-         end popup
-      end menu
+            MENUITEM "E&xit" action ThisWindow.Release
+         END POPUP
+      END MENU
    END WINDOW
 
    draw icon in window Form_Main at 0, 0 hicon hIcon width w height h

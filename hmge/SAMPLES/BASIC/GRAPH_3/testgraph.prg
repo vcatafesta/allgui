@@ -52,7 +52,7 @@ FUNCTION Main
          Action DrawPointsGraph ( aSer )
       END BUTTON
 
-      On Key ESCAPE Action ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
    END WINDOW
 

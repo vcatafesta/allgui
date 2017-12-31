@@ -60,7 +60,6 @@
    #define _HMG_VERSION_PATCH_          ""         // if "" --> not exist patch in this version
 #endif
 
-
 #ifndef _HMG_OFFICIAL_
    #define _HMG_OFFICIAL_
 #endif

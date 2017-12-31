@@ -41,7 +41,6 @@ CLASS TDataBase
    DATA   aStruct                AS ARRAY
    DATA   Cargo
 
-
    METHOD New(  ncArea, cFile, cDriver, lShared, lReadOnly )  CONSTRUCTOR
    METHOD Open( ncArea, cFile, cDriver, lShared, lReadOnly )  CONSTRUCTOR
 
@@ -197,7 +196,6 @@ CLASS TData FROM TDataBase
    METHOD Use()
 
 ENDCLASS
-
 
 Description
 ```````````

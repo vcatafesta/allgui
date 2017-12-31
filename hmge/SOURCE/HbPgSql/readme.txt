@@ -9,11 +9,9 @@ original libpq.lib in this map (MSVC COFF type) to Borland OMF type (../Harbour/
 
 All headers and libpq.lib are from PostgreSQL version 8.4
 
-
 5.5.2011
 
 Mitja Podgornik
-
 
 Updated:
 

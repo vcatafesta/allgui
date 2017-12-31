@@ -21,7 +21,7 @@ PROCEDURE main()
          POPUP 'Freeze'
             ITEM 'Freeze update' ACTION Form_1.Tree_1.DisableUpdate
             ITEM 'Unfreeze update' ACTION Form_1.Tree_1.EnableUpdate
-         End POPUP
+         END POPUP
          POPUP 'Colors'
             ITEM 'Set FontColor to RED' ACTION Form_1.Tree_1.Fontcolor:=RED
             ITEM 'Set FontColor to BLACK' ACTION Form_1.Tree_1.Fontcolor:=BLACK
@@ -47,7 +47,7 @@ PROCEDURE main()
             ITEM 'Set indent to 30' ACTION Form_1.Tree_1.Indent:=30
             ITEM 'Set indent to default' ACTION Form_1.Tree_1.Indent := 0
             Item 'Get indent value ' ACTION msgbox(str( Form_1.Tree_1.Indent),"Indent")
-         End POPUP
+         END POPUP
 
       END MENU
 

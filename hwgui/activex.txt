@@ -65,13 +65,11 @@ let's just say they use INTERFACEs. Some INTERFACEs are "standard"
 (must be allways present), others are specific to specific objects.
 
 
-
 As you may easily try, you can use TOleAuto from a text mode application
 and the called external application opens a... different window!
 
 This is OLE1 - fully supported by xHarbour but with the external window
 limitation.
-
 
 With the advent of Visual Basic Microsoft developed OLE2: this time the
 external object can be started "in-place" in the form of the calling program!
@@ -86,7 +84,6 @@ New components were developed by independent software house and sold on
 the market. And they still sell well !
 Visual Basic/C++ can transparently handle win32 and OLE objects.
 And they can easily create OLE2 objects.
-
 
 Back to my work.
 Since I didn't know anything about OLE, I started reading texts from the
@@ -146,11 +143,9 @@ I put a :Move() in rmsample code at start time, to have the object show itself.
 I told you this because you may probably use rmsample to test other OLE2 objects,
 and they may have similar problems....
 
-
 Finally, I discovered that some users of hwgui are Harbour users... so I switched to
 oohg source code, modyfying it where necessary. But I was not able to make it 100%
 harbour compatible... please test it.
-
 
 ------------
 
@@ -161,13 +156,11 @@ source\activex\h_activex.prg
 samples\rmsample.prg
 samples\rmchart.ch
 
-
 h_activex.prg contains code for HACTIVEX class.
 c_activex.c contains the initialization code and the event management code
 
 In rmsample.prg I created a class to better handle the events... it's perhaps not
 the best code.... there are some comments.
-
 
 
 Just to add something on event handling.

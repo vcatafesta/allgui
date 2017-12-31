@@ -14,7 +14,7 @@ STATIC oConnection
 
 PROCEDURE start
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    oConnection = todbc():new('DRIVER=Firebird/InterBase(r) driver;UID=SYSDBA;PWD=masterkey;DBNAME=EMPLOYEE.FDB;')
    oConnection:Open()
@@ -79,7 +79,7 @@ PROCEDURE load_data(n)
          form1.grid1.additem( oConnection:aRecordset[i] )
       NEXT
       form1.grid1.value := n
-   end
+   END
 
    oConnection:Close()
    form1.grid1.setfocus
@@ -97,7 +97,7 @@ PROCEDURE events_(n)
          cF_Name := form1.grid1.cell( form1.grid1.value, 2 )
          cL_Name := form1.grid1.cell( form1.grid1.value, 3 )
          cSalary := form1.grid1.cell( form1.grid1.value, 4 )
-      end
+      END
       DEFINE WINDOW form1a;
             at 0,0 width 270 height 220;
             title iif(n = 2,'Edit','Add');
@@ -115,7 +115,7 @@ PROCEDURE events_(n)
          @ 150,60 button button1 caption '&Save' action save_data( n ) width 80 height 20
          @ 150,150 button button2 caption '&Close' action form1a.release width 80 height 20
 
-         on key escape action form1a.button2.onclick
+         ON KEY ESCAPE ACTION form1a.button2.onclick
       END WINDOW
       form1a.center
       ACTIVATE WINDOW form1a
@@ -132,10 +132,10 @@ PROCEDURE events_(n)
             form1.grid1.value := iif(n > 1, n-1, 1)
             form1.statusbar.item(1) := "Register "+;
                ltrim(str(form1.grid1.value))+" of "+alltrim(str(form1.grid1.itemcount))
-         end
+         END
          oConnection:Close()
          form1.grid1.setfocus
-      end
+      END
    ENDCASE
    Form1.Grid1.SetFocus()
 
@@ -150,7 +150,7 @@ PROCEDURE save_data(n)
          cID := "null"
       ELSE
          cID := "'"+Alltrim(Str(form1a.text1.value))+"'"
-      end
+      END
       Str := "INSERT INTO Employee (EMP_NO,FIRST_NAME,LAST_NAME,SALARY) VALUES ("+cID+;
          ",'"+form1a.text2.value+;
          "','"+form1a.text3.value+;
@@ -165,11 +165,11 @@ PROCEDURE save_data(n)
          " SALARY='" + Str(form1a.text4.value) + "'" + ;
          " WHERE Emp_No=" + cID
       //msgstop( Str )
-   end
+   END
    oConnection:Setsql( Str )
    IF !oConnection:Open()
       msgstop("Can't update Employee table")
-   end
+   END
    oConnection:Close()
    IF n == 1
       load_data( form1.grid1.itemcount+1 )
@@ -178,7 +178,7 @@ PROCEDURE save_data(n)
       form1.grid1.cell( form1.grid1.value, 2 ) := form1a.text2.value
       form1.grid1.cell( form1.grid1.value, 3 ) := form1a.text3.value
       form1.grid1.cell( form1.grid1.value, 4 ) := form1a.text4.value
-   end
+   END
    form1.statusbar.item(1) := "Register "+;
       ltrim(str(form1.grid1.value))+" de "+alltrim(str(form1.grid1.itemcount))
    form1a.release

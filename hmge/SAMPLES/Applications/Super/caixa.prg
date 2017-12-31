@@ -37,7 +37,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -54,7 +54,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -71,7 +71,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 311
@@ -88,7 +88,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 413
@@ -105,7 +105,7 @@ FUNCTION caixa()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_caixa
@@ -180,17 +180,17 @@ FUNCTION caixa()
          transparent .T.
       END LABEL
 
-      on key F5 action dados(1)
-      on key F6 action dados(2)
-      on key F7 action excluir()
-      on key escape action thiswindow.release
+      ON KEY F5 ACTION dados(1)
+      ON KEY F6 ACTION dados(2)
+      ON KEY F7 ACTION excluir()
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_caixa.center
    form_caixa.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION dados(parametro)
 
@@ -220,7 +220,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          caixa->(ordsetfocus('data'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -328,7 +328,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -341,7 +341,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
    END WINDOW
 
@@ -351,7 +351,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir()
 
@@ -366,7 +366,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       caixa->(ordsetfocus('data'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Histórico : '+alltrim(caixa->historico),'Excluir')
          IF lock_reg()
@@ -379,7 +379,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar(parametro)
 
@@ -388,13 +388,13 @@ STATIC FUNCTION gravar(parametro)
    IF empty(form_dados.tbox_001.value)
       msginfo('Preencha a data','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF empty(form_dados.tbox_002.value)
       msginfo('Preencha o histórico','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF parametro == 1
@@ -409,7 +409,7 @@ STATIC FUNCTION gravar(parametro)
          ELSE
             EXIT
          ENDIF
-      end
+      END
       dbselectarea('caixa')
       caixa->(dbappend())
       caixa->id        := x_id
@@ -436,7 +436,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar()
 
@@ -457,6 +457,6 @@ STATIC FUNCTION atualizar()
    WHILE .not. eof()
       add item {caixa->id,dtoc(caixa->data),alltrim(caixa->historico),trans(caixa->entrada,'@E 999,999.99'),trans(caixa->saida,'@E 999,999.99')} to grid_caixa of form_caixa
       caixa->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL

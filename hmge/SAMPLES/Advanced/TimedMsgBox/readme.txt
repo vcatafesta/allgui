@@ -35,7 +35,6 @@ All the parameters are optional.
 
 I hope to have made what appreciate to all the Minigui community!
 
-
 He reescrito mi función para que los mensajes midan el tiempo
 para rendir más la termina y los trabaja.
 
@@ -71,7 +70,6 @@ Todos os parâmetros são opcionais.
 
 Eu espero ter feito o que apreciam a toda a comunidade de Minigui!
 
-
 J'ai récrit ma fonction pour que les messages chronomètrent
 afin de rendre plus elle la termine et cela les fonctionne.
 
@@ -106,7 +104,6 @@ MsgT ([ Sekunden ], [ Meldung ], [ Name ], [ Art ])
 Alle Parameter sind wahlweise freigestellt.
 
 Ich hoffe, gebildet zu haben, was zur ganzer Gemeinschaft Minigui schätzen!
-
 
 
 Pierpaolo Martinello pier@-NOSPAM-.bmm.it

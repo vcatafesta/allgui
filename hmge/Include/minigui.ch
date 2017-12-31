@@ -221,8 +221,8 @@
 #include "i_chklabel.ch"
 
 #ifdef _MIXEDMODE_
-  ANNOUNCE HB_GTSYS
-  REQUEST HB_GT_WIN_DEFAULT
+  //ANNOUNCE HB_GTSYS
+  //REQUEST HB_GT_WIN_DEFAULT
 #endif
 
 #endif /* __HMG__ */

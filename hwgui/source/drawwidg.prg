@@ -79,7 +79,7 @@ METHOD Add( fontName, nWidth, nHeight , fnWeight, ;
 
    AAdd( ::aFonts, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SELECT( oFont, nCharSet  ) CLASS HFont
 
@@ -195,7 +195,7 @@ METHOD Add( nStyle, nWidth, nColor ) CLASS HPen
    ::color  := nColor
    AAdd( ::aPens, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Get( nStyle, nWidth, nColor ) CLASS HPen
 
@@ -309,7 +309,7 @@ METHOD Add( nColor, nHatch ) CLASS HBrush
    ::color  := nColor
    AAdd( ::aBrushes, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD RELEASE() CLASS HBrush
 
@@ -416,7 +416,7 @@ METHOD AddResource( name, nFlags, lOEM, nWidth, nHeight ) CLASS HBitmap
    ::nFlags  :=  nFlags
    AAdd( ::aBitmaps, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddStandard( nId ) CLASS HBitmap
 
@@ -447,7 +447,7 @@ METHOD AddStandard( nId ) CLASS HBitmap
    ::nHeight := aBmpSize[ 2 ]
    AAdd( ::aBitmaps, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight ) CLASS HBitmap
 
@@ -500,7 +500,7 @@ METHOD AddFile( name, hDC, lTranparent, nWidth, nHeight ) CLASS HBitmap
    ::nHeight := aBmpSize[ 2 ]
    AAdd( ::aBitmaps, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddWindow( oWnd, lFull ) CLASS HBitmap
 
@@ -513,7 +513,7 @@ METHOD AddWindow( oWnd, lFull ) CLASS HBitmap
    ::nHeight := aBmpSize[ 2 ]
    AAdd( ::aBitmaps, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD RELEASE() CLASS HBitmap
 
@@ -617,7 +617,7 @@ METHOD AddResource( name, nWidth, nHeight, nFlags, lOEM ) CLASS HIcon
 
    AAdd( ::aIcons, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddFile( name, nWidth, nHeight ) CLASS HIcon
 
@@ -663,7 +663,7 @@ METHOD AddFile( name, nWidth, nHeight ) CLASS HIcon
 
    AAdd( ::aIcons, Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD RELEASE() CLASS HIcon
 

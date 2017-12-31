@@ -334,7 +334,7 @@ METHOD New( cFileName, aFontData, aFontFam, aFontChar, nFontSize, nFontColor, nS
       // that must be closed at the end of the report.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
    /* *************************  END OF New()  ************************** */
 
 METHOD PageSetup( nLeft, nRight, nTop, nBottom, nWidth, nHeight, ;

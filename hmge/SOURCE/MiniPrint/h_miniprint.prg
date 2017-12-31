@@ -194,7 +194,7 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
          Value 1
          Options { _hmg_printer_usermessages [16] , _hmg_printer_usermessages [17] }
          OnChange iif ( This.value == 1 , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .F. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .F.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .F. ) , ( _HMG_PRINTER_PRINTPAGES.Label_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Label_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_2.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Combo_1.Enabled := .T.  , _HMG_PRINTER_PRINTPAGES.Label_4.Enabled := .T. , _HMG_PRINTER_PRINTPAGES.Spinner_1.SetFocus ) )
-      End RadioGroup
+      END RadioGroup
 
       DEFINE LABEL Label_1
          Row 84
@@ -215,7 +215,7 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
          Value 1
          RangeMin 1
          RangeMax _hmg_printer_PageCount
-      End Spinner
+      END Spinner
 
       DEFINE LABEL Label_2
          Row 84
@@ -236,7 +236,7 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
          Value _hmg_printer_PageCount
          RangeMin 1
          RangeMax _hmg_printer_PageCount
-      End Spinner
+      END Spinner
 
       DEFINE LABEL Label_4
          Row 115
@@ -300,7 +300,7 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
          RangeMin 1
          RangeMax 999
          OnChange iif ( IsControlDefined (CheckBox_1,_HMG_PRINTER_PRINTPAGES) , iif ( This.Value > 1 , SetProperty( '_HMG_PRINTER_PRINTPAGES' , 'CheckBox_1','Enabled',.T.) , SetProperty( '_HMG_PRINTER_PRINTPAGES','CheckBox_1','Enabled', .F. ) ) , Nil )
-      End Spinner
+      END Spinner
 
       DEFINE CHECKBOX CheckBox_1
          Row 132
@@ -346,7 +346,7 @@ PROCEDURE _HMG_PRINTER_SHOWPREVIEW
          Value _hmg_printer_CurrentPageNumber
          RangeMin 1
          RangeMax _hmg_printer_PageCount
-      End Spinner
+      END Spinner
 
       DEFINE BUTTON Ok
          Row 48

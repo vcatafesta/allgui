@@ -4,7 +4,6 @@
 
  * Bos Taurus, (c) 2012-2016 by Dr. Claudio Soto, <srvet@adinet.com>, http://srvet.blogspot.com
 
-
  ************************************
  * BOS TAURUS 1.0.6   2016/04/26
  ************************************
@@ -17,7 +16,6 @@
       - BT_DrawArc
       - BT_DrawChord
       - BT_DrawPie
-
 
    - New UNDOCUMENTED Functions ( added in 2015/01/18 )
 
@@ -45,7 +43,6 @@
       - BT_ImageListExtractIcon (hImageList, nIndex) --> hIcon
       - BT_DirectoryInfo ( [nCSIDL | cPath] , [nTypeList] , @nIndexRoot, @CSIDL_Name ) --> { { Data1, Data2, Data3, ... } , ... }
 
-
  ************************************
  * BOS TAURUS 1.0.5   2014/04/19
  ************************************
@@ -61,7 +58,6 @@
       Static Link Library (.LIB) on MiniGUI (no need to compile the source code of BT library before using).
 
     - Updated BosTaurus-FunctionsReferenceGuide.PDF with changes made.
-
 
 
  ************************************
@@ -81,7 +77,6 @@
     - Added Demo13
 
 
-
  ************************************
  * BOS TAURUS 1.0.3   2012/12/12
  ************************************
@@ -93,7 +88,6 @@
     - Added Demo12
 
 
-
  ************************************
  * BOS TAURUS 1.0.2   2012/11/09
  ************************************
@@ -103,7 +97,6 @@
     - Updated BosTaurus-FunctionsReferenceGuide.PDF with changes made.
 
     - Added Demo11
-
 
 
  ************************************
@@ -133,7 +126,6 @@
         - BosTaurus_SOURCE.rar
              - Folder HMG      // HMG Oficial
              - Folder MiniGUI  // HMG Extended
-
 
 
  ************************************
@@ -207,11 +199,9 @@
         - BosTaurus_ChangeLog.TXT
         - Demo1...9
 
-
 ----------------------------
   (c) Dr. Claudio Soto
    srvet@adinet.com.uy
  http://srvet.blogspot.com
        from Uruguay
 ----------------------------
-

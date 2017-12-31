@@ -15,7 +15,7 @@ FUNCTION Main
    PRIVATE cNewTable := ''
    PRIVATE lOpened := .f.
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
    SET DATE ital
    SET CENTURY ON
 
@@ -91,7 +91,7 @@ FUNCTION Main
                row 170
                col 10
                width 330
-            end progressbar
+            END progressbar
             DEFINE LABEL status
                row 200
                col 10
@@ -167,7 +167,7 @@ FUNCTION Main
                row 170
                col 10
                width 330
-            end progressbar
+            END progressbar
             DEFINE LABEL status1
                row 200
                col 10

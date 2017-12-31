@@ -90,8 +90,8 @@ PROCEDURE Main()
    PUBLIC aFolders      := {"C:\",GetMyDocumentsFolder()}
 
    fInitPublicArrays()
-   SET Navigation Extended
-   SET Language To English
+   SET NAVIGATION EXTENDED
+   SET LANGUAGE TO English
    SET MULTIPLE OFF
 
    LOAD WINDOW Form_Wbt

@@ -455,7 +455,7 @@ METHOD New( cHeading, bData, cPicture, aColors, aAlign, nWidth, ;
       ::lIndexCol := .T.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    *=============================================================================
    * METHOD TSColumn:Load() Version 7.0 15/Jul/2004

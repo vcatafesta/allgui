@@ -139,7 +139,7 @@ PROCEDURE Table_Browse()
          MODAL;
          FONT 'Arial' SIZE 10
 
-      ON KEY Escape ACTION ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
       @ 20,20 BROWSE brwBrowse1                           ;
          WIDTH 460                                ;

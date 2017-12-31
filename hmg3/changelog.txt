@@ -740,7 +740,6 @@
       - New Demo11 in hfcl\samples\BosTaurus folder.
    - Fixed HFCL HMG_HPDF TTF font loading bug.
 
-
 - HMG 3.0.46 (Test) 2012/11/06
    - Update to latest Harbour Nightly Build (18443 2012-11-05)
    - New
@@ -763,7 +762,6 @@
    - Fix
       - Number of warnings while compiling the HMG library is now reduced to only six. Great thanks to Claudio Soto.
       - Hardcoded Path name references in batch files. Now HMG can be installed any path (having no spaces).
-
 
 - HMG 3.0.45 (Test) 2012/10/22
    - New Bos Taurus Graphics Library with many useful graphics functions in HFCL. For details please see HFCL Doc folder. (Contributed by Claudio Soto.)
@@ -828,7 +826,6 @@
    - Fixed Memory Leak Problem (Thanks to Grigory Filatov)
    - Changed the program editor to Notepad++
 
-
 - HMG 3.0.36 (Test) 2011/05/31 Changelog:
    - Built using latest Harbour Nightly Build (2011/03/16)
    - Fixed theme, manifest and resource in buildapp.bat (Thanks to Grigory Filatov)
@@ -868,7 +865,6 @@
    - Fixed: Problem in IDE closing object ispector or project manager
    with alt+F4.
 
-
 - HMG 3.0.34 Changelog:
 
    - New: Data-Bound Grid methods: 'DisableUpdate' and 'EnableUpdate'
@@ -904,7 +900,6 @@
    are required to allow users to handle certain situations when using
    data-bound Grid.
 
-
 - HMG 3.0.33 Changelog:
 
    - Fixed: Grid 'ColumnWhen' property problems. Reported by Claudio.
@@ -916,7 +911,6 @@
    control definition). Reported by radohabjan.
 
    - Fixed: Setting recno property in filtered Grid.
-
 
 - HMG 3.0.32 Changelog:
 
@@ -937,7 +931,6 @@
    -Fixed: Grid justification not working for the first column (caused
    by a limitation of WinApi ListView control). From OOHG Grid
    implementation. Proposed by Grigory Filatov.
-
 
 - HMG 3.0.31 Changelog:
 
@@ -960,7 +953,6 @@
    - Fixed: Problem with Grid ColumnValid (introduced in 3.0.30).
    Reported by Rathinagiri.
 
-
 - HMG 3.0.30 Changelog:
 
    - Fixed: Problems with windows handling introduced in 3.0.29
@@ -979,7 +971,6 @@
    and expressions (ColumnFields). Already published in 3.0.29b patch.
    Reported by Marek. Samples: \samples\grid.36 and \samples\grid.37.
 
-
 - HMG 3.0.29 Changelog:
 
    English:
@@ -992,7 +983,6 @@
    structure or outside specifiying Parent's name (exactly as a control).
    Panel windows are automatically activated through its parent, so
    explicit activation is not required.
-
 
       DEFINE WINDOW Win_1 ;
          ROW 0 ;
@@ -1019,9 +1009,7 @@
 
       ACTIVATE WINDOW Win_1
 
-
    Samples: \samples\panel.* and \samples\external.windows\panel.
-
 
    - New: Chinese language support for IDE. Contributed by ouyang.
 
@@ -1030,7 +1018,6 @@
 
    - Fixed: data-bound grid 'BackColor' and 'FontColor' properties not
    working. Reported by mustafa.
-
 
    Español:
    -------
@@ -1046,7 +1033,6 @@
    Las ventanas tipo PANEL, son autom'áticamente activadas a través de su
    'parent', por lo cual una activación explícita no es requerida.
 
-
       DEFINE WINDOW Win_1 ;
          ROW 0 ;
          COL 0 ;
@@ -1072,7 +1058,6 @@
 
       ACTIVATE WINDOW Win_1
 
-
    Ejemplos: \samples\panel.* and \samples\external.windows\panel.
 
    - Nuevo: IDE. Soporte para lenguaje Chino. Contribucón de ouyang.
@@ -1082,7 +1067,6 @@
 
    - Solucionado: Problemas con las propiedades 'BackColor' and 'FontColor' de data-bound grid.
    Reportado por mustafa.
-
 
 
 - HMG 3.0.28 Changelog:
@@ -1100,7 +1084,6 @@
 
    - Fixed: Problems with a report sample. Reported by Claudio Tedesco.
 
-
    Español:
    -------
 
@@ -1116,7 +1099,6 @@
    - Solucionado: Problemas ejemplo de report. Reportado por Claudio
    Tedesco.
 
-
 - HMG 3.0.27 Changelog:
 
    English:
@@ -1128,7 +1110,6 @@
    - New: DidabledbackColor and DisabledFontColor for TextBox control.
    Sample: \samples\TextBox.1.
 
-
    Español:
    -------
 
@@ -1137,7 +1118,6 @@
 
    - Nuevo: Propiedades DisabledBackColor y DisabledForeColor para el
    control TextBox. Ejemplo: \samples\TextBox.1.
-
 
 - HMG 3.0.26 Changelog:
 
@@ -1158,7 +1138,6 @@
 
    - Updated: HFCL to version 0.95a.
 
-
    Español:
    -------
 
@@ -1177,7 +1156,6 @@
 
    - Actializado: HFCL a la versión 0.95a.
 
-
 - HMG 3.0.25 Changelog:
 
    English:
@@ -1189,13 +1167,11 @@
 
    The following properties are available while this method is executing:
 
-
       - This.EditBuffer: Array of one element per edited cell.
 
       The elements has the following structure:
 
       { nLogicalRow , nLogicalCol , xValue , nRecNo }
-
 
       - This.AppendBuffer: Array of one element per appended record.
 
@@ -1203,16 +1179,13 @@
 
       { xFieldValue 1 , ... , xFieldValue n }
 
-
       - This.MarkBuffer: Array of one element per record marked to be deleted or recalled.
 
       The elements has the following structure:
 
       { nLogicalRow , nRecNo , cMark ( 'D' or 'R' ) }
 
-
    Sample: \samples\grid.34
-
 
    - New: PsPad freeware editor. This is the program editor that I use with
    IDE and from the command line.
@@ -1224,7 +1197,6 @@
    PsPAd is, from this release, the default program editor for IDE, instead
    NotePad.
 
-
    Español:
    -------
 
@@ -1235,13 +1207,11 @@
    Las siguientes propiedades están disponibles mientras este método
    se ejecuta:
 
-
       - This.EditBuffer: Array (un elemento por cada celda editada).
 
       Los elementos tienen la siguiente estructura:
 
       { nLogicalRow , nLogicalCol , xValue , nRecNo }
-
 
       - This.AppendBuffer: Array (un elemento por cada registro agregado).
 
@@ -1249,16 +1219,13 @@
 
       { xFieldValue 1 , ... , xFieldValue n }
 
-
       - This.MarkBuffer: Array (un elemento por cada registro marcado para ser eliminado o recuperado).
 
       Los elementos tienen la siguiente estructura:
 
       { nLogicalRow , nRecNo , cMark ( 'D' or 'R' ) }
 
-
    Ejemplo: \samples\grid.34
-
 
    - Nuevo: PsPad freeware editor. Es un editor de programas que uso para
    trabajar desde IDE y línea de comando.
@@ -1269,7 +1236,6 @@
 
    Desde esta versión, PsPAd es el editor de m'ódulos por defecto para
    IDE en lugar de NotePad.
-
 
 - HMG 3.0.24 Changelog:
 
@@ -1283,7 +1249,6 @@
       * From this release filtered tables (set filter / set deleted /
        index...for) records can be deleted and recalled.
 
-
    Español:
    -------
 
@@ -1294,7 +1259,6 @@
       * Desde esta versión las tablas filtradass (set filter /
       set deleted / index...for) pueden usar los métodos 'Delete' y
       'Recall'.
-
 
 - HMG 3.0.23 Changelog:
 
@@ -1337,13 +1301,11 @@
       'SqlMix' and 'PgRdd' ('SqlMix' and 'PgRdd' will be implemented
       in future releases).
 
-
    - Fixed: Problem with 'Capture' method. Reported by Claudio.
 
    - Modified: Fix on Textbox (introduced in 3.0.20) temporarily reverted
    (again) since it created new problems (more research is needed to solve
    the original problem without create 'colateral damage').
-
 
    Español:
    -------
@@ -1392,7 +1354,6 @@
    más investigación de para solucionar el problema original sin crear
    'daño colateral'.
 
-
 - HMG 3.0.22 Changelog:
 
    English:
@@ -1429,7 +1390,6 @@
 
    - Nuevo: Ejemplo 'Player.2' por Mustafá López.
 
-
 - HMG 3.0.21 Changelog:
 
    English:
@@ -1448,7 +1408,6 @@
 
    - Updated: HFCL. Contributed by Rathinagiri.
 
-
    Español:
    --------
 
@@ -1463,7 +1422,6 @@
    - Nuevo: Ejemplos GRID.31 y GRID.32.
 
    - Actualizado: HFCL. Gracias a Rathinagiri.
-
 
 - HMG 3.0.20 Changelog:
 
@@ -1499,7 +1457,6 @@
       - 'Refresh' Method.
       - 'Delete' Method.
       - 'Recall' Method.
-
 
       In 'Buffered' mode, adding a record, store it in a temporary
       (1 record buffer). This buffer is flushed when you add another
@@ -1635,7 +1592,6 @@
    - Modified: From this release, BROWSE is considered a compatibility
    (obsolete)  control and therefore not recommended. It is superseded
    by the GRID control.
-
 
    Español:
    --------
@@ -1774,7 +1730,6 @@
 
    [/d] : Debug mode (gui and console)
 
-
    <filelist.hbp> : Un archivo de texto con la lista de programas del proyecto.
    <configfile.hbc>: Un archivo de texto con información de configuración
    (librerías adicionales y paths de include y librerías adicionales).
@@ -1807,7 +1762,6 @@
    Reportado por Luis Vazquez.
 
 - HMG 2.9.5 Changelog:
-
 
    English:
    --------
@@ -1892,9 +1846,7 @@
 
    Ejemplo Completo: \hmg\samples\report.advanced\demo8.prg
 
-
 - HMG 2.9.4 Changelog:
-
 
    English:
    --------
@@ -1902,16 +1854,13 @@
    - Fixed. Multiple buttons having 'default button' style. Reported by
    Vanguarda. Thanks to Grigory Filatov for help.
 
-
    Español:
    --------
 
    - Solucionado: Multiples botones con el estilo 'botón por defecto'.
     Reportado por Vanguarda. Gracias a Grigory Filatov por la ayuda.
 
-
 - HMG 2.9.3 Changelog:
-
 
    English:
    --------
@@ -1924,7 +1873,6 @@
    - Fixed. Various errors in documentation.
 
    - Fixed. Browse bug. Reported by Vanguarda.
-
 
    Español:
    --------
@@ -1939,9 +1887,7 @@
 
    - Solucionado: Bug en Browse. Reportado por Vanguarda.
 
-
 - HMG 2.9.2 Changelog:
-
 
    English:
    --------
@@ -1981,7 +1927,6 @@
       - OPEN (NOOPEN)
       - PLAYBAR (NOPLAYBAR)
 
-
    Español:
    --------
 
@@ -2019,7 +1964,6 @@
       - MENU (NOMENU)
       - OPEN (NOOPEN)
       - PLAYBAR (NOPLAYBAR)
-
 
 - HMG 2.9.1 Changelog:
 
@@ -2060,7 +2004,6 @@
    [Enter] will move selected cell cursor to right.
 
    - Modified: Finished documentation.
-
 
    Español:
    --------
@@ -2103,7 +2046,6 @@
 
    - Modificado: Documentación finalizada.
 
-
 - HMG 2.8.8 Changelog:
 
    English:
@@ -2124,7 +2066,6 @@
 
    - Solucionado: WAIT WINDOW. Algunas teclas y botones del mouse no
    ocultan la ventana.
-
 
 - HMG 2.8.6 Changelog:
 
@@ -2149,7 +2090,6 @@
    será un array numérico de dos elementos   (Fila,Columna).
 
    Ejemplo: \hmg\samples\grid_21,\hmg\samples\grid_22,\hmg\samples\grid_23.
-
 
 - HMG 2.7.2 Changelog:
 
@@ -2185,7 +2125,6 @@
 
    - Fixed: This.cellValue bug. Thanks to Grigory Filatov.
 
-
    Español:
    --------
 
@@ -2195,15 +2134,12 @@
 
    - Solucionado: Bug en This.CellValue. Gracias a Grigory Filatov.
 
-
 - HMG 2.7.0 Changelog:
-
 
    English:
    --------
 
    - New: WAIT WINDOW command.
-
 
       This command shows a window with a custom message and pauses
       program execution until a key is pressed or mouse is clicked.
@@ -2236,7 +2172,6 @@
          WAIT CLEAR
 
       More Samples: \hmg\samples\wait_window
-
 
    - New: 'System' object. It will aloow to read (and write when possible)
    various operating system properties.
@@ -2278,7 +2213,6 @@
 
          MsgInfo(System.DefaultPrinter)
 
-
    More samples: \hmg\samples\clipboard.
 
    - Modified: Grid Control: 'This.CellValue' is writable now, so, you can
@@ -2305,12 +2239,10 @@
 
    - Fixed: DRAW GRAPH (pie type) problem with low values (about 0%).
 
-
    Español:
    --------
 
    - Nuevo: comando WAIT WINDOW.
-
 
       Este comando muestra una ventana con un mensaje personalizado
       y pausa la ejecución del programa hasta que se pulsa cualquier
@@ -2388,7 +2320,6 @@
 
          MsgInfo(System.DefaultPrinter)
 
-
    More samples: \hmg\samples\clipboard.
 
    - Modificado: Control Grid: 'This.CellValue' puede ser modificado.
@@ -2417,9 +2348,7 @@
    - Solucionado: Problemas con DRAW GRAPH (tipo PIE) con valores bajos
    (cercanos al 0%).
 
-
 - HMG 2.6.7 Changelog:
-
 
    English:
    --------
@@ -2431,7 +2360,6 @@
 
    - Fixed: Problem with libhbmysql.a. Reported by Osvaldo Tambutti.
 
-
    Español:
    --------
 
@@ -2442,9 +2370,7 @@
 
    - Solucionado: Problema con libhbmysql.a. Reportado por Osvaldo Tambutti.
 
-
 - HMG 2.6.6 Changelog:
-
 
    English:
    --------
@@ -2474,7 +2400,6 @@
       Window.SplitBox.ToolBar.Button
 
    Samples: \hmg\samples\containers.
-
 
    Español:
    --------
@@ -2507,9 +2432,7 @@
 
    Ejemplos: \hmg\samples\containers.
 
-
 - HMG 2.6.5 Changelog:
-
 
    English:
    --------
@@ -2530,9 +2453,7 @@
 
    - Modificado: Documentación.
 
-
 - HMG 2.6.4 Changelog:
-
 
    English:
    --------
@@ -2540,16 +2461,13 @@
    - Fixed: 'Caption' property not working for ToolBar buttons. Reported
    by Grigory Filatov.
 
-
    Español:
    --------
 
    - Solucionado: Problemas con la propiedad 'Caption' en los botones
    de ToolBar. Reportado por Grigory Filatov.
 
-
 - HMG 2.6.3 Changelog:
-
 
    English:
    --------
@@ -2563,7 +2481,6 @@
    - Fixed: 'Caption' property not working for ToolBar buttons.
 
    - Fixed: Problem in print preview introduced in 2.6.2.
-
 
    Español:
    --------
@@ -2581,9 +2498,7 @@
    - Solucionado: Problema en la vista previa de impresión introducido
    en la versión 2.6.2.
 
-
 - HMG 2.6.2 Changelog:
-
 
    English:
    --------
@@ -2603,9 +2518,7 @@
    - Solucionado: Los cambios en la propiedad Value del control CheckBox
    no ejecutan el procedimiento OnChange. Reportado por Grigory Filatov.
 
-
 - HMG 2.6.1 Changelog:
-
 
    English:
    --------
@@ -2625,9 +2538,7 @@
    - Solucionado: Los cambios en la propiedad Value del control Tab
    no ejecutan el procedimiento OnChange. Reportado por: Gert Winderlich.
 
-
 - HMG 2.6.0 Changelog:
-
 
    English:
    --------
@@ -2646,9 +2557,7 @@
    - Solucionado: Sintáxis extendida para el control TAB
    (c:\hmg\samples\tab).
 
-
 - HMG 2.5.9 Changelog:
-
 
    English:
    --------
@@ -2674,9 +2583,7 @@
          MULTILINE      .T.
       END BUTTON
 
-
    More samples:\hmg\samples\button_2
-
 
    Español:
    --------
@@ -2704,24 +2611,19 @@
 
    Más ejemplos:\hmg\samples\button_2
 
-
 - HMG 2.5.8 Changelog:
-
 
    English:
    --------
 
    - Fixed: Problems with 'HeaderImages' in XP.
 
-
    Español:
    --------
 
    - Solucionado: Problemas con la propiedad 'HeaderImages' en XP.
 
-
 - HMG 2.5.7 Changelog:
-
 
    English:
    --------
@@ -2742,7 +2644,6 @@
    - Modified: WholeDropdown ToolBar buttons shortcuts opens the menu
    now.
 
-
    Español:
    --------
 
@@ -2762,9 +2663,7 @@
    - Modificado: Los atajos de teclado en los botones 'WholeDropDown',
         ahore abren el menu asociado al botón.
 
-
 - HMG 2.5.6 Changelog:
-
 
    English:
    --------
@@ -2777,7 +2676,6 @@
    resourcenames (one for each column).
    To change a header's image at runtime you must specify the column
    position as argument.
-
 
    Sample (Control definition):
 
@@ -2793,11 +2691,9 @@
          HEADERIMAGES   { '00.bmp' , '01.bmp' , '02.bmp' }
       END GRID
 
-
    Sample (Set image at runtime):
 
    Form_1.Grid_1.HeaderImages(1) :=  '03.bmp'
-
 
    Sample (Get Image at runtime):
 
@@ -2805,12 +2701,10 @@
 
    More Samples: \hmg\samples\grid_18, \hmg\samples\browse_6
 
-
    - Fixed: ComboBox with images not working on Win9x systems. Thanks to
    Grigory for the report.
 
    - Fixed: Misc errors in reference doc. Thanks to Esgici.
-
 
    Español:
    --------
@@ -2823,7 +2717,6 @@
    o recursos (uno por cada columna).
    Para cambiar la imagen del header en tiempo de ejecución debe
    especificarse la posición de la columna como argumento.
-
 
    Ejemplo (Definición del control):
 
@@ -2839,11 +2732,9 @@
          HEADERIMAGES   { '00.bmp' , '01.bmp' , '02.bmp' }
       END GRID
 
-
    Ejemplo (Establecer la imagen en tiempo de ejecución):
 
    Form_1.Grid_1.HeaderImages(1) :=  '03.bmp'
-
 
    Ejemplo (Obtener el nombre de la imagen en tiempo de ejecución)
 
@@ -2851,16 +2742,13 @@
 
    Más ejemplos: \hmg\samples\grid_18, \hmg\samples\browse_6
 
-
    - Solucionado: Problemas con ComboBox con imágenes en sistemas Win9x.
    Gracias a Grigory por el reporte.
 
    - Fixed: Misc errors in reference doc. Thanks to Esgici.
 
 
-
 - HMG 2.5.5 Changelog:
-
 
    English:
    --------
@@ -2945,9 +2833,7 @@
 
       Win1.Combo2.AddItem( { 3 , 'Hello!' } )
 
-
    More Sanples: \hmg\samples\combo_5
-
 
    Español:
    --------
@@ -3040,9 +2926,7 @@
 
    Más Ejemplos: \hmg\samples\combo_5
 
-
 - HMG 2.5.4 Changelog:
-
 
    English:
    --------
@@ -3065,7 +2949,6 @@
 
    - Modified: Ctrl+W can be used instead [Enter] in InputBox()
    function and browse field edit.
-
 
    Español:
    --------
@@ -3091,7 +2974,6 @@
 
    - Modificado: Ctrl+W puede usarse en lugar de [Enter] en la función
    InputBox() y en la edición de Browse.
-
 
 - HMG 2.5.3 Changelog:
 
@@ -3121,7 +3003,6 @@
 
    Samples: \hmg\samples\browse_5\
 
-
    Español:
    --------
 
@@ -3150,7 +3031,6 @@
    blanco.
 
    Ejemplos: \hmg\samples\browse_5\
-
 
 - HMG 2.5.2 Changelog:
 
@@ -3183,7 +3063,6 @@
    por el reporte).
 
    - Solucionado: Referencia. User components.
-
 
 - HMG 2.5.1 Changelog:
 
@@ -3263,7 +3142,6 @@
 
    Más ejemplos: \hmg\samples\activex.
 
-
 - HMG 2.5.0 Changelog:
 
    English:
@@ -3319,7 +3197,6 @@
 
    Take a look at \hmg\samples\registry.
 
-
    Español:
    --------
 
@@ -3374,7 +3251,6 @@
    RegistryWrite("HKEY_CURRENT_USER\Control Panel\Desktop\Wallpaper","New")
 
    Más ejemplos \hmg\samples\registry.
-
 
 - HMG 2.0.032 Changelog:
 
@@ -4050,7 +3926,6 @@
             | HUNGARIAN | POLISH | PORTUGUESE | RUSSIAN
             | SERBIAN | SLOVENIAN
 
-
 - HMG 2.0.017 Changelog:
 
    English:
@@ -4090,7 +3965,6 @@
 
    - Solucionado: Control DATEPICKER. Problemas con el evento OnChange
    (reportado por Chris).
-
 
 - HMG 2.0.016 Changelog:
 
@@ -4223,7 +4097,6 @@
 
    - Solucionado: Problemas de configuración en el ejemplo CONTROL FINANCIERO.
 
-
 - HMG 2.0.012 Changelog:
 
    English:
@@ -4324,7 +4197,6 @@
    (**) Based encodigo publicado en el sitio de Marcos Antonio Gambeta
    (http://geocities.yahoo.com.br/marcosgambeta).
 
-
 - HMG 2.0.011 Changelog:
 
    English:
@@ -4355,7 +4227,6 @@
    largos.
 
    - Nuevo: Cláusulas opcionales RIGHT y CENTER para el comando @...PRINT.
-
 
 - HMG 2.0.010 Changelog:
 
@@ -4635,7 +4506,6 @@
    by default anymore. You must add it as optional libraries in
    'Preferences' window.
 
-
 - HMG 2.0 ALPHA BUILD 006 Changelog:
 
    - Fixed: 'This.Cell()' object reference not working.
@@ -4662,7 +4532,6 @@
 
            - New properties (introduced in 2.0) dor GRID and BROWSE
       controls are supported now.
-
 
 - HMG 2.0 ALPHA BUILD 005 Changelog:
 
@@ -5042,4 +4911,3 @@
 Roberto Lopez
 http://sites.google.com/site/hmgweb
 <mail.box.hmg@gmail.com>
-

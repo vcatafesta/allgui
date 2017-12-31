@@ -16,14 +16,9 @@ HMG can be downloaded at:
 
    http://www.hmgforum.com
 
-
 Copyright (C) 2002-2010 Roberto Lopez. All rights reserved.
-
 
 Enjoy!
 
 --
 Roberto Lopez <mail.box.hmg@gmail.com>
-
-
-

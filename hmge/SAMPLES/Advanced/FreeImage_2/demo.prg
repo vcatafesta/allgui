@@ -70,21 +70,21 @@ PROCEDURE Main
       DEFINE MAIN MENU
 
          DEFINE POPUP '&File'
-            MenuItem '&Open'       Action OpenImgFile()
-            Separator
-            MenuItem 'E&xit Alt+X' Action ReleaseAllWindows()
-         End Popup
+            MENUITEM '&Open'       Action OpenImgFile()
+            SEPARATOR
+            MENUITEM 'E&xit Alt+X' Action ReleaseAllWindows()
+         END POPUP
 
          // !!! Все пункты меню связаны с именем соответствующего ресурса
 
          DEFINE POPUP '&Resourse'
-            MenuItem 'Bird      (png)' Action OpenImgRes( PNG_BIRD     , 'PNG' )
-            MenuItem 'Sea       (png)' Action OpenImgRes( PNG_SEA      , 'PNG' )
-            MenuItem 'Town      (jpg)' Action OpenImgRes( JPG_TOWN     , 'JPG' )
-            MenuItem 'Waterfall (jpg)' Action OpenImgRes( JPG_WATERFALL, 'JPG' )
-         End Popup
+            MENUITEM 'Bird      (png)' Action OpenImgRes( PNG_BIRD     , 'PNG' )
+            MENUITEM 'Sea       (png)' Action OpenImgRes( PNG_SEA      , 'PNG' )
+            MENUITEM 'Town      (jpg)' Action OpenImgRes( JPG_TOWN     , 'JPG' )
+            MENUITEM 'Waterfall (jpg)' Action OpenImgRes( JPG_WATERFALL, 'JPG' )
+         END POPUP
 
-      End menu
+      END MENU
 
       @ ( FI_TOP - 25 ), ( FI_LEFT - 25 ) Frame frmFile             ;
          Caption 'File'            ;
@@ -157,7 +157,7 @@ STATIC PROCEDURE ShowFile
       nHandleFileImg := nil
    ENDIF
 
-   IF IsNil( cFileImg )
+   IF cFileImg == NIL
 
       RETURN
    ELSE

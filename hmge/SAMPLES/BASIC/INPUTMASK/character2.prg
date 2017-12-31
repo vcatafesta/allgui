@@ -38,7 +38,7 @@ FUNCTION Main
             ITEM 'Set Text_1 Value  0.' ACTION Form_1.Text_1.Value := ' 0.'
             ITEM 'Set Text_3 Value simpson' ACTION Form_1.Text_3.Value := 'simpson'
             ITEM 'Set Text_4 Value homer' ACTION Form_1.Text_4.Value := 'homer'
-            SEPARAToR
+            SEPARATOR
             ITEM 'Set Text_1 Focus' ACTION Form_1.Text_1.SetFocus
             ITEM 'Set Text_1 Focus' ACTION _SetFocus('Text_1','Form_1')
          END POPUP

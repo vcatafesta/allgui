@@ -16,7 +16,6 @@
 
   History : 2009-6 : First Release
 
-
   Notes :
 
    - 'CuckooClock' uses "LcdD" font and this font is in LCDN.TTF font file.
@@ -35,6 +34,3 @@
      HB_LANGSELECT( "xx" )
 
      and replace "xx" in it with your language code.
-
-
-

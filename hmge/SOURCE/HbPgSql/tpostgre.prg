@@ -116,7 +116,7 @@ METHOD New( cHost, cDatabase, cUser, cPass, nPort, cSchema, hCustom ) CLASS TPQs
       ENDIF
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD PROCEDURE Destroy() CLASS TPQserver
 
@@ -506,7 +506,7 @@ METHOD New( pDB, cQuery, lAllCols, cSchema, res ) CLASS TPQquery
 
    ::Refresh( res == NIL )
 
-   RETURN self
+   RETURN SELF
 
 METHOD Destroy() CLASS TPQquery
 
@@ -1186,7 +1186,7 @@ METHOD New( row, old, struct ) CLASS TPQrow
    ::aOld := old
    ::aStruct := struct
 
-   RETURN self
+   RETURN SELF
 
 METHOD FieldGet( nField ) CLASS TPQrow
 

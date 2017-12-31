@@ -79,7 +79,6 @@ FUNCTION RunBrowseForFolder( nfolder, nflag, cTitle, cInitPath, lCenter )
 
 #ifndef __XHARBOUR__
    #define ISCHAR( n )           HB_ISCHAR( n )
-   #define ISNIL( n )            HB_ISNIL( n )
 #endif
 
 static BOOL s_bCntrDialog = FALSE;

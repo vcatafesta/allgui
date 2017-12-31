@@ -1148,7 +1148,6 @@ HB_FUNC( GETDRIVETYPE )
 
 #ifndef __XHARBOUR__
    #define ISBYREF( n )          HB_ISBYREF( n )
-   #define ISNIL( n )            HB_ISNIL( n )
 #endif
 
 HB_FUNC( GETVOLUMEINFORMATION )

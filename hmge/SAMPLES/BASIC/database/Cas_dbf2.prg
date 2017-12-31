@@ -117,7 +117,7 @@ FUNCTION Main
 
       IF n_item < 2
          retu nil
-      end
+      END
 
       nn := form_1.ListBox_2.value
       xx := form_1.ListBox_2.item( nn )
@@ -127,7 +127,7 @@ FUNCTION Main
          form_1.listbox_2.item( nn   ) := form_1.listbox_2.item( nn + n_op )
          form_1.listbox_2.item( nn + n_op ) := xx
          form_1.listbox_2.value := nn + n_op
-      end
+      END
 
       IF n_op = -1 .and. nn = 1
          x1 := form_1.listbox_2.item( 1 )
@@ -135,7 +135,7 @@ FUNCTION Main
          form_1.listbox_2.item( 1 )      := x2
          form_1.listbox_2.item( n_item ) := x1
          form_1.listbox_2.value          := n_item
-      end
+      END
 
       IF n_op = 1 .and. nn = n_item
          x1 := form_1.listbox_2.item( n_item )
@@ -143,7 +143,7 @@ FUNCTION Main
          form_1.listbox_2.item( n_item ) := x2
          form_1.listbox_2.item( 1 )      := x1
          form_1.listbox_2.value          := 1
-      end
+      END
 
       retu nil
 
@@ -179,18 +179,18 @@ FUNCTION Main
                IF xx $ x_for
                   msginfo('Campo "'+x_for+'" JA EXISTE, POSICAO: '+alltrim(str(n_for)),'AVISO')
                   retu nil
-               end
+               END
             NEXT
 
             IF type(xx) = 'N'
                xx := 'str('+xx+')'
-            end
+            END
             IF type(xx) = 'D'
                xx := 'dtoc('+xx+')'
-            end
+            END
             IF type(xx) = 'L'
                xx := "iif(" + xx + ", '.T.','.f.' )"
-            end
+            END
 
             form_1.ListBox_2.AddItem( xx )
             form_1.ListBox_2.value := form_1.listbox_2.itemcount
@@ -230,7 +230,7 @@ PROCEDURE CloseTables()
          form_1.browse_1.value := recno()
          msgstop( "Busca cancelada" )
          retu nil
-      end
+      END
 
       IF type(x_campo) = 'N'
          x_macro := m_entrada +'='+ x_campo
@@ -240,7 +240,7 @@ PROCEDURE CloseTables()
          x_macro := m_entrada +'='+ x_campo
       ELSE
          x_macro := [upper("] + m_entrada + [")] + " $ upper(" + x_campo + ")"
-      end
+      END
 
       SET index to
       ferase("TMP.CDX")
@@ -250,7 +250,7 @@ PROCEDURE CloseTables()
 
       IF form_1.combo_1.value # 0
          x_campo := a_fields[ form_1.combo_1.value ]
-      end
+      END
 
       IF form_1.listbox_2.ItemCount # 0
          x_campo := ''
@@ -258,7 +258,7 @@ PROCEDURE CloseTables()
             x_campo += form_1.listbox_2.item( n_for ) + '+'
          NEXT
          x_campo := left( x_campo , len(x_campo)-1 )
-      end
+      END
 
       *msginfo( x_campo , 'campos' )
 
@@ -359,7 +359,7 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
                   IF n_rat # 0  && D:\\
                      File_mp3 = stuff( File_mp3 , n_rat , 2 , '\' )
-                  end
+                  END
 
                NEXT
 
@@ -476,7 +476,7 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
                         IF form_1.combo_1.value # 0
                            x_campo := a_fields[ form_1.combo_1.value ]
-                        end
+                        END
 
                         x_macro := '.t.'
 

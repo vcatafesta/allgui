@@ -27,10 +27,10 @@ PROCEDURE Main
             Item 'Save'      Action MsgInfo ( 'File:Save'  )
             Item 'Print'      Action MsgInfo ( 'File:Print' )
             Item 'Save As...'   Action MsgInfo ( 'File:Save As' ) Disabled
-            Separator
+            SEPARATOR
             Item 'Exit' Action Form_1.Release
 
-         End Popup
+         END POPUP
 
          POPUP 'Test'
             Item 'Item 1' Action MsgInfo ( 'Item 1' )
@@ -42,15 +42,15 @@ PROCEDURE Main
 
             Item 'Item 3.1' Action MsgInfo ( 'Item 3.1' ) BreakMenu Separator
             Item 'Item 3.2' Action MsgInfo ( 'Item 3.2' )
-            Separator
+            SEPARATOR
             Item 'Item 3.3' Action MsgInfo ( 'Item 3.3' )
 
-            MenuItem 'Item 3.3.1' Action MsgInfo ( 'Item 3.3.1' ) BreakMenu
-            MenuItem 'Item 3.3.2' Action MsgInfo ( 'Item 3.3.2' )
+            MENUITEM 'Item 3.3.1' Action MsgInfo ( 'Item 3.3.1' ) BreakMenu
+            MENUITEM 'Item 3.3.2' Action MsgInfo ( 'Item 3.3.2' )
 
-         End Popup
+         END POPUP
 
-      End Menu
+      END MENU
 
       DEFINE CONTEXT menu
          Item 'Open'   Action MsgInfo ( 'File:Open'  )
@@ -58,29 +58,29 @@ PROCEDURE Main
          POPUP 'Save'
             Item 'Save'    Action MsgInfo ( 'File:Save'  )
             Item 'Save As...' Action MsgInfo ( 'File:Save As' ) Disabled
-         End Popup
+         END POPUP
 
          Item 'Print'   Action MsgInfo ( 'File:Print' )
-         Separator
+         SEPARATOR
          Item 'Exit'   Action Form_1.Release
 
          Item 'Item 1' Action MsgInfo ( 'Item 1' ) BreakMenu Separator
          Item 'Item 2' Action MsgInfo ( 'Item 2' )
          Item 'Item 3' Action MsgInfo ( 'Item 3' )
 
-      End menu
+      END MENU
 
       Define notify menu
          Item '1st file' Action MsgInfo ( '1st file opened' )
          Item '2nd file' Action MsgInfo ( '2nd file opened' )
 
          Item 'About' Action MsgInfo ( 'About dialog' ) BreakMenu Separator
-         Separator
+         SEPARATOR
          Item 'Options' Action MsgInfo ( 'Options dialog' )
-         Separator
+         SEPARATOR
          Item 'Exit' Action Form_1.Release
 
-      End menu
+      END MENU
 
    END WINDOW
 

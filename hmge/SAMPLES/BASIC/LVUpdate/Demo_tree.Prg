@@ -19,7 +19,7 @@ FUNCTION main()
          POPUP 'Freeze'
             ITEM 'Freeze update' ACTION Form_1.Tree_1.DisableUpdate
             ITEM 'Unfreeze update' ACTION Form_1.Tree_1.EnableUpdate
-         End POPUP
+         END POPUP
       END MENU
 
       DEFINE CONTEXT MENU

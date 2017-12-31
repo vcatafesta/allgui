@@ -9,7 +9,7 @@
 
 FUNCTION main
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    DEFINE WINDOW form_1 ;
          at 0,0 width 500 height 350 ;

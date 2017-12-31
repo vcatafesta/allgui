@@ -43,7 +43,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -60,7 +60,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -77,7 +77,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_imprimir
          picture path_imagens+'imprimir.bmp'
          col 311
@@ -94,7 +94,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 413
@@ -111,7 +111,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 515
@@ -128,7 +128,7 @@ FUNCTION fornecedores()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_fornecedores
@@ -184,18 +184,18 @@ FUNCTION fornecedores()
          transparent .T.
       END LABEL
 
-      on key F5 action dados(1)
-      on key F6 action dados(2)
-      on key F7 action excluir()
-      on key F8 action relacao()
-      on key escape action thiswindow.release
+      ON KEY F5 ACTION dados(1)
+      ON KEY F6 ACTION dados(2)
+      ON KEY F7 ACTION excluir()
+      ON KEY F8 ACTION relacao()
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_fornecedores.center
    form_fornecedores.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION dados(parametro)
 
@@ -241,7 +241,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          fornecedores->(ordsetfocus('nome'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -504,7 +504,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -517,7 +517,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
    END WINDOW
 
@@ -527,7 +527,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir()
 
@@ -542,7 +542,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       fornecedores->(ordsetfocus('nome'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Nome : '+alltrim(fornecedores->nome),'Excluir')
          IF lock_reg()
@@ -555,7 +555,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relacao()
 
@@ -595,14 +595,14 @@ STATIC FUNCTION relacao()
 
             fornecedores->(dbskip())
 
-         end
+         END
 
          rodape()
 
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -619,14 +619,14 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,130 PRINT 'TEL.CELULAR' FONT 'courier new' SIZE 010 BOLD
    @ 035,160 PRINT 'CIDADE' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar(parametro)
 
@@ -643,7 +643,7 @@ STATIC FUNCTION gravar(parametro)
    IF retorna
       msgalert('Preencha todos os campos','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF parametro == 1
@@ -660,13 +660,13 @@ STATIC FUNCTION gravar(parametro)
             msgexclamation('Servidor congestionado, tecle ENTER e aguarde','Atenção')
             LOOP
          ENDIF
-      end
+      END
       dbselectarea('fornecedores')
       IF l_demo
          IF reccount() > _limite_registros
             msgstop('Limite de registros esgotado','Atenção')
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ENDIF
       fornecedores->(dbappend())
@@ -710,7 +710,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pesquisar()
 
@@ -735,13 +735,13 @@ STATIC FUNCTION pesquisar()
          EXIT
       ENDIF
       fornecedores->(dbskip())
-   end
+   END
 
    IF lGridFreeze
       form_fornecedores.grid_fornecedores.enableupdate
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar()
 
@@ -754,9 +754,9 @@ STATIC FUNCTION atualizar()
    WHILE .not. eof()
       add item {str(fornecedores->codigo),alltrim(fornecedores->nome),alltrim(fornecedores->fixo),alltrim(fornecedores->celular)} to grid_fornecedores of form_fornecedores
       fornecedores->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_grupo_fornecedores(cform,ctextbtn)
 
@@ -790,7 +790,7 @@ STATIC FUNCTION procura_grupo_fornecedores(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_grupo_fornecedores(value)
 
@@ -849,9 +849,9 @@ STATIC FUNCTION getcode_grupo_fornecedores(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=grupo_fornecedores->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -870,9 +870,9 @@ STATIC FUNCTION find_grupo_fornecedores()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF grupo_fornecedores->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := grupo_fornecedores->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL

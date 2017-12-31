@@ -3,7 +3,6 @@ GUILIB.CH:
 
 . Added the clause MESSAGE in the command "MENUITEM ..."
 
-
 HWINDOW.PRG:
 ------------
 
@@ -29,7 +28,6 @@ HWINDOW.PRG:
          endif
       EndIf
       Return 0
-
 
 MENU.PRG:
 ---------

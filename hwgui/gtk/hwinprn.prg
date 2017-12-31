@@ -86,7 +86,7 @@ METHOD New( cPrinter, cpFrom, cpTo ) CLASS HWinPrn
       ::oPrinter:cdpIn := cpTo
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD InitValues( lElite, lCond, nLineInch, lBold, lItalic, lUnder ) CLASS HWinPrn
 

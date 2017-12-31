@@ -165,7 +165,7 @@ PROCEDURE WinExit
       lAsk2Save := .t.
       lTrayTasks := .t.
 
-      SET InteractiveClose Off
+      SET INTERACTIVECLOSE OFF
 
       DEFINE WINDOW Splash ;
             AT 0,0 ;

@@ -72,7 +72,7 @@ CREATE CLASS TODBCField
 
 METHOD New() CLASS TODBCField
 
-   RETURN Self
+   RETURN SELF
 
    // Class TODBC
    // Manages ODBC access
@@ -174,7 +174,7 @@ METHOD New( cODBCStr, cUserName, cPassword, lCache ) CLASS TODBC
       SQLDriverConnect( ::hDbc, ::cODBCStr, @::cODBCRes )  // Connects to Driver
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD SetAutoCommit( lEnable ) CLASS TODBC
 

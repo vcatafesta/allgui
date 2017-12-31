@@ -272,7 +272,7 @@ METHOD TPageScript:Init()
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #Abort() -> Self
@@ -284,7 +284,7 @@ METHOD TPageScript:Abort()
    DllCall(::hDll, DLL_STDCALL, "PSAbort")
    ::lFromDialog := .f.
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #QRCode(<n>, <n>, <c>, [<n>]) -> NIL
@@ -429,7 +429,7 @@ METHOD TPageScript:Bitmap(nTop, nLeft, nBottom, nRight, cBitmap, nTransColor, lK
       DllCall(::hDll, DLL_STDCALL, "PSBitmap", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), cBitmap, nTransColor, iif(lKeepRatio, 1, 0))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #Ellipse(<n>, <n>, <n>, <n>, [<n>, <n>, <n>, <n>]) -> Self
@@ -446,7 +446,7 @@ METHOD TPageScript:Ellipse(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, n
 
    DllCall(::hDll, DLL_STDCALL, "PSEllipseEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern)
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #EllipseEx(<n>, <n>, <n>, <n>) -> Self
@@ -457,7 +457,7 @@ METHOD TPageScript:EllipseEx(nTop, nLeft, nBottom, nRight)
 
    DllCall(::hDll, DLL_STDCALL, "PSEllipse", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight))
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #EndDoc() -> Self
@@ -474,7 +474,7 @@ METHOD TPageScript:EndDoc()
    DllCall(::hDll, DLL_STDCALL, "PSEndDoc")
    ::lFromDialog := .f.
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #EndRawDoc() -> Self
@@ -547,7 +547,7 @@ METHOD TPageScript:Frame(nTop, nLeft, nBottom, nRight, nThick, nBorderColor, nFi
 
    DllCall(::hDll, DLL_STDCALL, "PSFrameEx", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), PSFtoI(nThick), nBorderColor, nFillColor, nPattern, nRadius)
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #FrameEx(<n>, <n>, <n>, <n>) -> Self
@@ -560,7 +560,7 @@ METHOD TPageScript:FrameEx(nTop, nLeft, nBottom, nRight, nRadius)
 
    DllCall(::hDll, DLL_STDCALL, "PSFrame", PSFtoI(nTop), PSFtoI(nLeft), PSFtoI(nBottom), PSFtoI(nRight), nRadius)
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #GetAsciiToAnsi() -> lValue
@@ -1538,7 +1538,7 @@ METHOD TPageScript:SetAsciiToAnsi(lValue)
       DllCall(::hDll, DLL_STDCALL, "PSSetAsciiToAnsi", iif(lValue, 1, 0))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetBorder([<n>, <n>]) -> Self
@@ -1555,7 +1555,7 @@ METHOD TPageScript:SetBorder(nThickness, nBorderColor)
       DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetBorderColor(<n>) -> Self
@@ -1568,7 +1568,7 @@ METHOD TPageScript:SetBorderColor(nBorderColor)
       DllCall(::hDll, DLL_STDCALL, "PSSetBorderColor", nBorderColor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetBorderThickness(<n>) -> Self
@@ -1581,7 +1581,7 @@ METHOD TPageScript:SetBorderThickness(nThickness)
       DllCall(::hDll, DLL_STDCALL, "PSSetBorderThickness", PSFtoI(nThickness))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetClipperComp(<l>) -> Self
@@ -1594,7 +1594,7 @@ METHOD TPageScript:SetClipperComp(lClipper)
       ::lClipper := lClipper
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetCoorSystem(<n>) -> Self
@@ -1607,7 +1607,7 @@ METHOD TPageScript:SetCoorSystem(nCoor)
       DllCall(::hDll, DLL_STDCALL, "PSSetCoorSystem", nCoor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetCopies([<n>]) -> Self
@@ -1620,7 +1620,7 @@ METHOD TPageScript:SetCopies(nCopies)
       DllCall(::hDll, DLL_STDCALL, "PSSetCopies", nCopies)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetCPI(<n>) -> Self
@@ -1633,7 +1633,7 @@ METHOD TPageScript:SetCPI(nCPI)
       DllCall(::hDll, DLL_STDCALL, "PSSetCPI", nCPI)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetDevice(<n>) -> Self
@@ -1650,7 +1650,7 @@ METHOD TPageScript:SetDevice(nDevice)
       DllCall(::hDll, DLL_STDCALL, "PSSetDevice", nDevice)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetDirectPrint(<c>) -> Self
@@ -1663,7 +1663,7 @@ METHOD TPageScript:SetDirectPrint(lDirect)
       DllCall(::hDll, DLL_STDCALL, "PSSetDirectPrint", iif(lDirect, 1, 0))
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetDecimalSep(<c>) -> Self
@@ -1676,7 +1676,7 @@ METHOD TPageScript:SetDecimalSep(cSep)
       DllCall(::hDll, DLL_STDCALL, "PSSetDecimalSep", Asc(cSep))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetDuplex([<n>]) -> Self
@@ -1689,7 +1689,7 @@ METHOD TPageScript:SetDuplex(nDuplex)
       DllCall(::hDll, DLL_STDCALL, "PSSetDuplex", nDuplex)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFileName(<c>) -> Self
@@ -1702,7 +1702,7 @@ METHOD TPageScript:SetFileName(cFileName)
       DllCall(::hDll, DLL_STDCALL, "PSSetFileName", cFileName)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFill(<n>, [<n>]) -> Self
@@ -1719,7 +1719,7 @@ METHOD TPageScript:SetFill(nFillColor, nFillPattern)
       DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFillColor(<n>) -> Self
@@ -1732,7 +1732,7 @@ METHOD TPageScript:SetFillColor(nFillColor)
       DllCall(::hDll, DLL_STDCALL, "PSSetFillColor", nFillColor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFillPattern(<n>) -> Self
@@ -1745,7 +1745,7 @@ METHOD TPageScript:SetFillPattern(nFillPattern)
       DllCall(::hDll, DLL_STDCALL, "PSSetFillPattern", nFillPattern)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont([<n>, <n>, <n>, <n>, <n>]) -> Self
@@ -1778,7 +1778,7 @@ METHOD TPageScript:SetFontAttributes(cFont, nStyle, nSize, nTFColor, nTBColor, n
       DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1791,7 +1791,7 @@ METHOD TPageScript:SetFontAngle(nAngle)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontAngle" , nAngle)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1804,7 +1804,7 @@ METHOD TPageScript:SetFontBColor(nTBColor)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontBColor", nTBColor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1817,7 +1817,7 @@ METHOD TPageScript:SetFontFColor(nTFColor)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontFColor", nTFColor)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1830,7 +1830,7 @@ METHOD TPageScript:SetFontName(cFont)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontName"  , cFont)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1843,7 +1843,7 @@ METHOD TPageScript:SetFontSize(nSize)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontSize"  , PSFtoI(nSize))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetFont() -> Self
@@ -1856,7 +1856,7 @@ METHOD TPageScript:SetFontStyle(nStyle)
       DllCall(::hDll, DLL_STDCALL, "PSSetFontStyle" , nStyle)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetJustify(<n>) -> Self
@@ -1869,7 +1869,7 @@ METHOD TPageScript:SetJustify(nJustify)
       DllCall(::hDll, DLL_STDCALL, "PSSetJustify" , nJustify)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetLPI(<n>) -> Self
@@ -1882,7 +1882,7 @@ METHOD TPageScript:SetLPI(nLPI)
       DllCall(::hDll, DLL_STDCALL, "PSSetLPI", nLPI)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetOrientation(<n>) -> Self
@@ -1895,7 +1895,7 @@ METHOD TPageScript:SetOrientation(nOrientation)
       DllCall(::hDll, DLL_STDCALL, "PSSetOrientation", nOrientation)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPaperBin(<n>) -> Self
@@ -1908,7 +1908,7 @@ METHOD TPageScript:SetPaperBin(nPaperBin)
       DllCall(::hDll, DLL_STDCALL, "PSSetPaperBin", nPaperBin)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFCharSet(<n>) -> Self
@@ -1921,7 +1921,7 @@ METHOD TPageScript:SetPDFCharSet(nCharSet)
       DllCall(::hDll, DLL_STDCALL, "PSSetPDFCharSet", nCharSet)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFOwnerPassword(<c>) -> Self
@@ -1934,7 +1934,7 @@ METHOD TPageScript:SetPDFOwnerPassword(cPassword)
       DllCall(::hDll, DLL_STDCALL, "PSSetPDFOwnerPassword", cPassword)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFEncoding(<n>) -> Self
@@ -1954,7 +1954,7 @@ METHOD TPageScript:SetPDFEncoding(nEncoding)
       DllCall(::hDll, DLL_STDCALL,"PSSetPDFEncoding",nEncoding)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFVersion(<n>) -> Self
@@ -1971,7 +1971,7 @@ METHOD TPagescript:SetPDFVersion(nVersion)
       DllCall(::hDll,DLL_STDCALL,"PSSetPDFVersion",nVersion)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #ShowPDF(<l>) -> Self
@@ -1984,7 +1984,7 @@ METHOD TPageScript:ShowPDF(lShow)
       DllCall(::hDll,DLL_STDCALL,"PSShowPDF",iif(lShow, 1, 0))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPDFEmbeddedPDFFonts(<n>) -> Self
@@ -2000,7 +2000,7 @@ METHOD TPageScript:SetPDFEmbeddedFonts(nEmbedded)
       DllCall(::hDll,DLL_STDCALL,"PSSetPDFEmbeddedFonts",nEmbedded)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPageSize(<n>) -> Self
@@ -2013,7 +2013,7 @@ METHOD TPageScript:SetPageSize(nPageSize)
       DllCall(::hDll, DLL_STDCALL, "PSSetPageSize", nPageSize)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPrinter(<n>) -> Self
@@ -2026,7 +2026,7 @@ METHOD TPageScript:SetPrinter(nPrinter)
       DllCall(::hDll, DLL_STDCALL, "PSSetPrinter", nPrinter - 1)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWState(<n>) -> Self
@@ -2040,7 +2040,7 @@ METHOD TPageScript:SetPWState(nState)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWState", nState)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWPosition(<n>, <n>) -> Self
@@ -2054,7 +2054,7 @@ METHOD TPageScript:SetPWPosition(nLeft, nTop)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWPosition", nLeft, nTop)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWSize(<n>, <n>) -> Self
@@ -2068,7 +2068,7 @@ METHOD TPageScript:SetPWSize(nWidth, nHeight)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWSize", nWidth, nHeight)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWBounds(<n>, <n>, <n>, <n>) -> Self
@@ -2082,7 +2082,7 @@ METHOD TPageScript:SetPWBounds(nLeft, nTop, nWidth, nHeight)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWBounds", nLeft, nTop, nWidth, nHeight)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWColors(<n>, <n>, <n>, <n>) -> Self
@@ -2096,7 +2096,7 @@ METHOD TPageScript:SetPWColors(nBackground, nPaper, nShadow, nToolbar)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWColors", nBackground, nPaper, nShadow, nToolbar)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetPWZoomLevel(<n>) -> Self
@@ -2110,7 +2110,7 @@ METHOD TPageScript:SetPWZoomLevel(nZoomLevel)
       DllCall(::hDll, DLL_STDCALL, "PSSetPWZoomLevel", nZoomLevel)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetRowCol(<n>, <n>) -> Self
@@ -2123,7 +2123,7 @@ METHOD TPageScript:SetRowCol(nRow, nCol)
       DllCall(::hDll, DLL_STDCALL, "PSSetRowCol", nRow, nCol)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetTitle(<c>) -> Self
@@ -2136,7 +2136,7 @@ METHOD TPageScript:SetTitle(cTitle)
       DllCall(::hDll, DLL_STDCALL, "PSSetTitle", cTitle)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetUnit(<n>) -> Self
@@ -2150,7 +2150,7 @@ METHOD TPageScript:SetUnit(nUnit)
       DllCall(::hDll, DLL_STDCALL, "PSSetUnit", nUnit)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetUseDIB(<l>) -> Self
@@ -2163,7 +2163,7 @@ METHOD TPageScript:SetUseDIB(lUseDIB)
       DllCall(::hDll, DLL_STDCALL, "PSSetUseDIB", iif(lUseDIB, 1, 0))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #SetXerox(<l>) -> Self
@@ -2177,7 +2177,7 @@ METHOD TPageScript:SetXerox(lXerox)
       DllCall(::hDll, DLL_STDCALL, "PSSetXerox", iif(lXerox, 1, 0))
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*-----------------------------------------------------------------------------
    Method .....: #PSTextBox(<n>, <n>, <n>, <n>, <x>, [<n>, <c>, <n>, <n>, <n>, <n>,

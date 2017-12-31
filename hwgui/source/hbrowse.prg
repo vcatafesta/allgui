@@ -131,7 +131,7 @@ METHOD New( cHeading, block, Type, length, dec, lEditable, nJusHead, nJusLin, cP
    ::bcolor    := bcolor
    ::bClick    := bClick
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Visible( lVisible ) CLASS HColumn
 
@@ -496,7 +496,7 @@ METHOD New( lType, oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont,
    ::InitBrw( , .F. )
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HBrowse
 
@@ -915,7 +915,7 @@ METHOD Redefine( lType, oWndParent, nId, oFont, bInit, bSize, bPaint, bEnter, bG
    hwg_RegBrowse()
    ::InitBrw()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD FindBrowse( nId ) CLASS HBrowse
 

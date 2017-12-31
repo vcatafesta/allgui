@@ -144,7 +144,7 @@ METHOD New( oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,oFont, ;
 
    ::AddItem( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddItem( oWnd ) CLASS HWindow
 
@@ -225,7 +225,7 @@ METHOD New( lType,oIcon,clr,nStyle,x,y,width,height,cTitle,cMenu,nPos,   ;
       Eval( ::bInit, Self )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate( lShow, lMaximize, lMinimize ) CLASS HMainWindow
 

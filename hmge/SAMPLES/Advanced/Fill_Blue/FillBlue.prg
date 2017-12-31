@@ -40,7 +40,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
       EXIT
    OTHERWISE
       nResult := Events( hWnd, nMsg, wParam, lParam )
-   end
+   END
 
    RETURN nResult
 

@@ -437,7 +437,6 @@
 
 #xcommand HORIZONTAL          <horizontal>         => _HMG_SYSDATA \[ 357 \]  := <horizontal>
 
-
 /*----------------------------------------------------------------------------
 Frame
 ---------------------------------------------------------------------------*/
@@ -592,7 +591,6 @@ List Box
    _HMG_SYSDATA \[ 487 \]      := NIL      ;;
    _HMG_SYSDATA \[ 429 \]      := NIL
 
-
 #xcommand END ANIMATEBOX;
    =>;
    _DefineAnimateBox(;
@@ -628,7 +626,6 @@ List Box
    _HMG_SYSDATA \[ 498 \]      := .F.      ;;
    _HMG_SYSDATA \[ 499 \]   := .F.      ;;
    _HMG_SYSDATA \[ 429 \]      := NIL
-
 
 #xcommand END PLAYER;
    =>;
@@ -693,7 +690,6 @@ Progress Bar
       _HMG_SYSDATA \[ 430 \],;
       _HMG_SYSDATA \[ 434 \] , _HMG_SYSDATA \[ 457 \] , _HMG_SYSDATA \[ 399 \] )
 
-
 /*----------------------------------------------------------------------------
 Radio Group
 ---------------------------------------------------------------------------*/
@@ -750,7 +746,6 @@ Radio Group
       _HMG_SYSDATA \[ 458 \] , ;
       _HMG_SYSDATA \[ 463 \] , ;
       _HMG_SYSDATA \[ 441 \] , _HMG_SYSDATA \[ 357 \] )
-
 
 /*----------------------------------------------------------------------------
 Slider
@@ -930,7 +925,6 @@ Month Calendar
    _HMG_SYSDATA \[ 414 \]   := .F.      ;;
    _HMG_SYSDATA \[ 415 \]   := .F.
 
-
 #xcommand END MONTHCALENDAR;
    =>;
    _DefineMonthCal (;
@@ -1095,7 +1089,6 @@ Image
       _HMG_SYSDATA \[ 409 \],;
       _HMG_SYSDATA \[ 444 \],;
       _HMG_SYSDATA \[ 424 \] )
-
 
 /*----------------------------------------------------------------------------
 Check Box/Button
@@ -1373,7 +1366,6 @@ Datepicker
                 _HMG_SYSDATA \[ 385 \] , _HMG_SYSDATA \[ 437 \] , _HMG_SYSDATA \[ 500 \] )
 
 
-
 /*----------------------------------------------------------------------------
 Timepicker  ( by Dr. Claudio Soto, April 2013 )
 ---------------------------------------------------------------------------*/
@@ -1472,7 +1464,6 @@ Edit Box
         _HMG_SYSDATA \[ 385 \]             := NIL ;;
    _HMG_SYSDATA \[ 398 \]         := .F.          ;;
    _HMG_SYSDATA \[ 394 \]         := .F.
-
 
 #xcommand END EDITBOX ;
    =>;
@@ -1699,7 +1690,6 @@ IP Address
 /*----------------------------------------------------------------------------
 Grid
 ---------------------------------------------------------------------------*/
-
 
 #xcommand DEFINE GRID <name> ;
    =>;
@@ -1955,7 +1945,6 @@ Hyperlink
         _HMG_SYSDATA \[ 430 \]     := .F.          ;;
    _HMG_SYSDATA \[ 440 \]   := .F.   ;;
    _HMG_SYSDATA \[ 393 \]   := .F.
-
 
 #xcommand END HYPERLINK ;
    =>;

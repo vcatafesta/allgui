@@ -96,7 +96,7 @@ PROCEDURE Main
          Action DrawPointsGraph(aSer,aYvalAll,aColor)
       END BUTTON
 
-      On Key ESCAPE Action ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
    END WINDOW
 

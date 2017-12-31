@@ -61,7 +61,7 @@ METHOD New( oWndParent,nId,nStyle,nLeft,nTop,nWidth,nHeight,cCaption,oFont,bInit
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS hToolBar
 
@@ -148,7 +148,7 @@ METHOD AddButton(nBitIp,nId,bState,bStyle,cText,bClick,c,aMenu) CLASS hToolBar
    DEFAULT ctext to ""
    AAdd( ::aItem ,{ nBitIp, nId, bState, bStyle, 0, cText, bClick, c, aMenu, hMenu ,0} )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD onEvent( msg, wParam, lParam )  CLASS HToolbar
 
@@ -182,7 +182,7 @@ METHOD EnableAllButtons() class htoolbar
       hwg_Enablewindow( xItem[ 11 ], .T. )
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
 METHOD DisableAllButtons() class htoolbar
 
@@ -192,16 +192,16 @@ METHOD DisableAllButtons() class htoolbar
       hwg_Enablewindow( xItem[ 11 ], .F. )
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
 METHOD EnableButtons(n) class htoolbar
 
    hwg_Enablewindow( ::aItem[n, 11 ], .T. )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD DisableButtons(n) class htoolbar
 
    hwg_Enablewindow( ::aItem[n, 11 ], .T. )
 
-   RETURN Self
+   RETURN SELF

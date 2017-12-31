@@ -214,7 +214,7 @@ METHOD New( cName, lMenu, cFile, lSound, lWait, cFontName, nFontSize ) CLASS TMs
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    =================================================================
@@ -401,7 +401,7 @@ METHOD WaitEnd() CLASS TMsAgent
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    ==================================================================

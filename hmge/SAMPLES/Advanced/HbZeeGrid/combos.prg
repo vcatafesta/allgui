@@ -74,7 +74,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
                FOR i := 0 TO 99
                   zgm_ComboAddString( hG, "Harbour #" + hb_NtoS( i ) )
                NEXT i
-            end
+            END
          ENDIF
          EXIT
 
@@ -91,7 +91,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
       OTHERWISE
          result := Events( hWnd, nMsg, wParam, lParam )
-      end
+      END
       EXIT
 
    CASE WM_SIZE
@@ -102,7 +102,7 @@ FUNCTION App_OnEvents( hWnd, nMsg, wParam, lParam )
 
    OTHERWISE
       result := Events( hWnd, nMsg, wParam, lParam )
-   end
+   END
 
    RETURN result
 

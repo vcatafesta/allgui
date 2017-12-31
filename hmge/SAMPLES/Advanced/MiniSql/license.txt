@@ -25,4 +25,3 @@ to be covered by the GNU General Public License.
 
 Your use of that executable is in no way restricted on account of linking the
 MiniSql library code into it.
-

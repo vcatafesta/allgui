@@ -47,7 +47,6 @@ SendMessage (hWndC, WM_CAP_DRIVER_CONNECT, 0 /* wIndex */, 0L);
 
 SendMessage (hWndC, WM_CAP_SEQUENCE, 0, 0L);
 
-
 A macro interface is also available that provides an alternative to using
 the SendMessage function and improves the readability of an application.
 The following example uses the macro interface to add video capture to an
@@ -60,7 +59,6 @@ capDriverConnect (hWndC, 0);
 
 capCaptureSequence (hWndC);
 
-
 After your application creates a capture window of the AVICap window class
 and connects it to a video driver, the capture window is ready to capture
 data. At this point, your application can simply send the WM_CAP_SEQUENCE
@@ -72,7 +70,6 @@ following events occurs:
 - The user presses the ESC key or a mouse button
 - Your application stops or aborts capture operation
 - The disk becomes full
-
 
 In an application, you can stop streaming captured data to a file by sending
 the WM_CAP_STOP (or the capCaptureStop macro) message to a capture window.
@@ -112,7 +109,6 @@ typedef struct {
     BOOL  fDisableWriteCache;
     UINT  AVStreamMaster;
 } CAPTUREPARMS;
-
 
 The capture rate is the number of frames that are captured each second of a
 capture session. You can retrieve the current capture rate by using the
@@ -202,7 +198,6 @@ specifying an integer for the wParam parameter of the WM_CAP_DRIVER_CONNECT
 message. The integer is an index that identifies a video capture driver
 listed in the registry or in the [drivers] section of the SYSTEM.INI file.
 Use zero for the first index entry.
-
 
 You can retrieve the name and version of an installed capture driver by
 using the the capGetDriverDescription function. Your application can use
@@ -330,7 +325,6 @@ There are three messages to control the preview operation.
    enable or disable scaling of the preview video.
 
 
-
 When preview and scaling are both enabled, the captured video frame is
 stretched to the dimensions of the capture window. Enabling preview mode
 automatically disables overlay mode.
@@ -362,7 +356,6 @@ and allows you to perform the following tasks:
 - Specify whether an MCI device (VCR or videodisc) is used during capture.
 - Specify keyboard or mouse control for ending streaming.
 - Specify the type of video averaging applied during capture.
-
 
 
 You can retrieve the current capture settings within the CAPTUREPARMS
@@ -481,7 +474,6 @@ You can control the audio portion of a capture operation in three ways:
 - Include or exclude audio from the capture operation.
 - Request a specific number of audio buffers.
 - Request that audio buffers be a specific size.
-
 
 
 You can retrieve the settings for audio buffers by using the
@@ -722,4 +714,3 @@ the capSetCallbackOnYield macro to send this message.
 
 The following topics describe the different callback functions, the
 notifications sent to the functions, and their uses.
-

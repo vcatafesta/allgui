@@ -55,7 +55,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
    HWG_InitCommonControlsEx()
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HAnimation
 
@@ -96,20 +96,20 @@ METHOD Play( nFrom, nTo, nRep ) CLASS HAnimation
    nRep  := IIf( nRep  == Nil, - 1, nRep  )
    hwg_Animate_Play( ::handle, nFrom, nTo, nRep )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Seek( nFrame ) CLASS HAnimation
 
    nFrame := IIf( nFrame == Nil, 0, nFrame )
    hwg_Animate_Seek( ::handle, nFrame )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Stop() CLASS HAnimation
 
    hwg_Animate_Stop( ::handle )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Close() CLASS HAnimation
 

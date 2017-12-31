@@ -16,14 +16,14 @@ PROCEDURE main()
 
       DEFINE MAIN MENU
          DEFINE POPUP "&File"
-            menuitem '&Open' action( ;
+            MENUITEM '&Open' action( ;
                Form_Main.Image_1.Picture := ;
                GetFile( { {'Bmp Files', '*.bmp'} }, 'Open a File', GetCurrentFolder(), .f., .t. ) ;
                )
-            separator
-            menuitem "E&xit" action ThisWindow.Release
-         end popup
-      end menu
+            SEPARATOR
+            MENUITEM "E&xit" action ThisWindow.Release
+         END POPUP
+      END MENU
 
       @ 20, 20 image Image_1 ;
          picture 'DEMO' ;

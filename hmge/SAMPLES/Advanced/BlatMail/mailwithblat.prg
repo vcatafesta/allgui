@@ -508,7 +508,7 @@ METHOD SetProfile(cProfile) CLASS BLATMAIL
 
    ::cProfile=cActualProfile
 
-   RETURN Self
+   RETURN SELF
 
    * This routine actually sends the mail out.
    * Calling Parameters: None

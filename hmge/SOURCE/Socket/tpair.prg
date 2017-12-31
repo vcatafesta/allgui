@@ -66,4 +66,4 @@ METHOD New( cKey, cValue ) CLASS TPair
    ::cKey   := cKey
    ::cValue := cValue
 
-   RETURN Self
+   RETURN SELF

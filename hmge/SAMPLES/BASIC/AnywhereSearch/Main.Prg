@@ -12,7 +12,7 @@ FUNCTION Main
    LOCAL cActiveControl := 'tree1'
    PUBLIC _cAnywhereSearchStr := ''
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    asort( aCountries )
    asort( aCities )
@@ -63,9 +63,9 @@ FUNCTION Main
             treeitem 'Child 3'
             node 'Sub-Parent 1'
                treeitem 'Child 4'
-            end node
-         end node
-      end tree
+            END node
+         END node
+      END tree
       DEFINE LISTBOX list1
          row 40
          col 210
@@ -77,7 +77,7 @@ FUNCTION Main
          items aCountries
          value { 1 }
          on gotfocus ( cActiveControl := this.name, main.Radio.Value := 2 )
-      end listbox
+      END listbox
       DEFINE COMBOBOX combo1
          row 250
          col 10

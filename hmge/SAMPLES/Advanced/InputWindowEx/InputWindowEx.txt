@@ -33,7 +33,6 @@ InputWindowEx() Argument Description :
    <aButOKCancelCaptions>  Character array containing captions with button descriptions
    <bCodeBlock>      External codeblock
 
-
  An automatic control creation is compatible with InputWindow() function :
 
    Initial Value Type  -  Format Type     -     Control Created

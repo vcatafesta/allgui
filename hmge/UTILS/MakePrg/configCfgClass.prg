@@ -36,7 +36,7 @@ METHOD ConfigCls:init(cFile)
 
    ::imp := MemoRead(cFile)
 
-   RETURN self
+   RETURN SELF
 
 METHOD ConfigCls:findHeader()
 

@@ -151,7 +151,7 @@ PROCEDURE Main
 
       END TAB
 
-      On Key Escape Action ThisWindow.Release()
+      ON KEY ESCAPE ACTION ThisWindow.Release()
 
    END WINDOW
 

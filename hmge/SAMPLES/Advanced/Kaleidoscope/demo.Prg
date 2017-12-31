@@ -29,7 +29,7 @@ FUNCTION main
          rangemin 1
          rangemax 999
          value 3
-      end spinner
+      END spinner
       DEFINE FRAME shapes
          row 40
          col 505
@@ -116,7 +116,7 @@ FUNCTION main
          width 130
          handcursor .t.
          address "http://sprott.physics.wisc.edu/pickover/ekscop.html"
-      end hyperlink
+      END hyperlink
       define hyperlink email
          row 430
          col 510
@@ -124,8 +124,8 @@ FUNCTION main
          width 130
          handcursor .t.
          address "srgiri@dataone.in"
-      end hyperlink
-      on key escape action thiswindow.release()
+      END hyperlink
+      ON KEY ESCAPE ACTION thiswindow.release()
    END WINDOW
    k.show1.value := .t.
    k.center
@@ -367,7 +367,7 @@ FUNCTION showstereowindow
             action s.release()
          END BUTTON
 
-         on key escape action thiswindow.release()
+         ON KEY ESCAPE ACTION thiswindow.release()
       END WINDOW
       s.center
       s.activate

@@ -51,7 +51,7 @@ METHOD New( cTitle, lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCal
    ::Title := IIF( cTitle == Nil, ::Title, cTitle )
    ::DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD DefineStyle( lCompacta, nLeft, nTop, nWidth, nHeight, bcolor ) CLASS HCalculator
 

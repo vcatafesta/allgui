@@ -101,7 +101,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
    ::Setcolor( tcolor, bColor )
    ::oParent:AddControl( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD NewId() CLASS HControl
 
@@ -472,7 +472,7 @@ METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint, bRClic
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HStatus
 
@@ -507,7 +507,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
    ::style := ::nLeft := ::nTop := ::nWidth := ::nHeight := 0
    ::aParts := aParts
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Notify( lParam ) CLASS HStatus
 
@@ -663,7 +663,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       bSize, bPaint, cTooltip, tcolor, bColor, lTransp ) CLASS HStatic
@@ -683,7 +683,7 @@ METHOD Redefine( oWndParent, nId, cCaption, oFont, bInit, ;
       ::extStyle := Hwg_BitOr( ::extStyle, WS_EX_TRANSPARENT )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HStatic
 
@@ -750,7 +750,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HButton
 
@@ -775,7 +775,7 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ;
       ::oParent:AddEvent( 0, ::id, bClick )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HButton
 
@@ -809,7 +809,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
    ::title := cCaption
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HGroup
 
@@ -869,7 +869,7 @@ METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, bInit, tcolor, 
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HLine
 

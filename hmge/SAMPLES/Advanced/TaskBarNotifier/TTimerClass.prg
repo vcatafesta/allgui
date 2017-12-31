@@ -70,7 +70,7 @@ METHOD Init( nHandle, nInterval, bBlock, lStart ) CLASS TTimer
    //register object
    AAdd( ::aTimers, @Self )
 
-   RETURN Self
+   RETURN SELF
 
    /*
    */
@@ -100,7 +100,7 @@ METHOD Start() CLASS TTimer
    IF ( !::lEnabled )
       ::ID := _GetId()
 
-      IF ( Hb_IsNil( ::WndHandle ) )
+      IF ::WndHandle == NIL
          ::ID := _InitTimer( ::WndHandle, ::ID, ::nInterval, lTimerProc )
       ELSE
          _InitTimer( ::WndHandle, ::ID, ::nInterval, lTimerProc )
@@ -109,7 +109,7 @@ METHOD Start() CLASS TTimer
       ::lEnabled := TRUE
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    */
@@ -122,7 +122,7 @@ METHOD Stop() CLASS TTimer
       ::lEnabled := FALSE
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    */
@@ -163,7 +163,7 @@ METHOD ExecTimerProc( ... )
       Hb_ExecFromArray( ::pTimerProc, { ... } )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /*
    UTILYZE

@@ -1,7 +1,6 @@
 AtomicTime v1.1
 ===============
 
-
 Description
 -----------
 AtomicTime is a very simple time synchronizing program that retrieves the
@@ -23,12 +22,10 @@ accurate time possible but it is usually good enough to always be within
 about half a second of "true" time. Network latency is accommodated in the
 calculations involved in setting your computer clock.
 
-
 Requirements
 ------------
 Works on Win2K, WinNT, Win98, WinME, WinXP.
 Should work on Win95 but not tested.
-
 
 Installation
 ------------
@@ -36,7 +33,6 @@ Unzip all the files into one directory. That's all!
 No dll's or other complicated files to be installed!
 After this you can run AtomicTime by double clicking on the AtomicTime.exe
 file.
-
 
 Usage
 -----
@@ -56,7 +52,6 @@ time by clicking in the "Exit after time has been synced" checkbox. If you
 have this option set, the next time you start the program you can prevent
 the program from exiting by de-selecting this same checkbox.
 
-
 Disclaimer
 ----------
 This product is supplied AS IS.
@@ -68,7 +63,6 @@ your PC caused by any actions when using this product.
 If you have a minute to drop me an e-mail I will be happy if you share in it
 your opinion about the program.
 
-
 Distribution
 ------------
 You may NOT distribute this software by any type of media or network device or
@@ -77,12 +71,10 @@ package of this software.
 You are not allowed to use this software for any commercial purposes. Personal
 use, unlimited and unrestricted, is allowed.
 
-
 Contacts
 --------
 In case you have any questions about this product please direct them to one (or
 better both) of my e-mail addresses: gfilatov@inbox.ru, gfilatov@front.ru.
-
 
 Best regards,
 Grigory Filatov

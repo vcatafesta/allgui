@@ -36,12 +36,12 @@ PROCEDURE buildmenu()
    DEFINE MAIN MENU OF Win_1
 
       POPUP "&File"
-         MenuItem 'Open'  Action MsgInfo ( 'File:Open'  )
-         MenuItem 'Save'  Action MsgInfo ( 'File:Save'  )
-         MenuItem 'Print' Action MsgInfo ( 'File:Print' )
-         MenuItem 'Save As...' Action MsgInfo ( 'File:Save As' ) Name SaveAs Disabled
-         Separator
-         MenuItem 'Exit'  Action Win_1.Release
+         MENUITEM 'Open'  Action MsgInfo ( 'File:Open'  )
+         MENUITEM 'Save'  Action MsgInfo ( 'File:Save'  )
+         MENUITEM 'Print' Action MsgInfo ( 'File:Print' )
+         MENUITEM 'Save As...' Action MsgInfo ( 'File:Save As' ) Name SaveAs Disabled
+         SEPARATOR
+         MENUITEM 'Exit'  Action Win_1.Release
       END POPUP
 
       POPUP "&Option"

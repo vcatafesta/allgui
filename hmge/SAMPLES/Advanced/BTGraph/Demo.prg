@@ -38,7 +38,7 @@ FUNCTION Main
          width 600
          height 600
          stretch .T.
-      end image
+      END IMAGE
    END WINDOW
    graph.graphtype.value := 1
    graph.center

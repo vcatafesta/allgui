@@ -118,7 +118,7 @@ STATIC FUNCTION BrowseUpdate( oBrow, colpos)
    ELSE
       oBrow:DoHScroll( SB_LINERIGHT )
       oBrow:Edit()
-   end
+   END
 
    oBrowse:RefreshLine()
 
@@ -136,7 +136,7 @@ STATIC FUNCTION CreateDB()
 
    IF file('browse_1.dbf')
       FErase('browse_1.dbf')
-   end
+   END
 
    DBCreate('browse_1', {{'code', 'N', 6, 0},;
       {'desc', 'C', 40, 0},;

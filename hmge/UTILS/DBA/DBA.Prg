@@ -90,8 +90,8 @@ PROC Main( cOpFName )
             FOR nMItem := 1 TO LEN( aMnuItems )
                c1Item  := aMnuItems[ nMItem, 1 ]
                b1Item  := aMnuItems[ nMItem, 2 ]
-               IF ISNIL( b1Item )
-                  b1Item := { || !ISNIL( _GetControlAction( c1Item, "frmDBAMain" ) ) }
+               IF b1Item == NIL
+                  b1Item := { || ! _GetControlAction( c1Item, "frmDBAMain" ) == NIL }
                ENDIF
                SetProperty ( cMWinName, c1Item, "ENABLED", EVAL( b1Item  ) )
             NEXT nMItem
@@ -171,7 +171,7 @@ PROC Main( cOpFName )
                               cRecsStr := '',;
                               c1FFName := ''
 
-                           IF ISNIL( aCurrents )
+                           IF aCurrents == NIL
                               IF FILE( cRecsFNm )
                                  cRecsStr := MEMOREAD( cRecsFNm )
                                  IF EMPTY( cRecsStr )
@@ -184,13 +184,13 @@ PROC Main( cOpFName )
                                  ENDIF
                               ELSE
                                  MsgBox( "Recorded recent data file not found" )
-                              ENDIF ISNIL( cLastFile )
+                              ENDIF
                            ELSE
                               AEVAL( aCurrents, { | a1 | cRecsStr += a1[ 3 ] + CRLF } )
                               MEMOWRIT( cRecsFNm, cRecsStr )
-                           ENDIF ISNIL( aCurrents )
+                           ENDIF
 
-                           RETU // Recents()
+                           RETURN // Recents()
 
                            *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
@@ -206,7 +206,7 @@ PROC Main( cOpFName )
 
                               DEFAULT cFoldType TO 'D'
 
-                              IF ISNIL( cLastFile )  // Program first running
+                              IF cLastFile == NIL  // Program first running
                                  IF FILE( cLUDsFNm )
                                     cLUFStrg  := MEMOREAD( cLUDsFNm )
                                     cLastCDir := ExtrcSIS( cLUFStrg, '<C>', CRLF )
@@ -226,9 +226,9 @@ PROC Main( cOpFName )
                                  cLUFStrg := '<C>' + cLastCDir + CRLF + ;
                                     '<D>' + cLastDDir + CRLF
                                  MEMOWRIT( cLUDsFNm, cLUFStrg )
-                              ENDIF ISNIL( cLastFile )
+                              ENDIF
 
-                              RETU // LastUsed()
+                              RETURN // LastUsed()
 
                               *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
@@ -245,7 +245,7 @@ PROC Main( cOpFName )
 
                                     LOCA lRVal := .F.
 
-                                    IF ISNIL( xCaller )
+                                    IF xCaller == NIL
                                        IF lPref0103
                                           lRVal := MsgYesNo( "Are You Sure ? " )
                                        ELSE
@@ -260,7 +260,7 @@ PROC Main( cOpFName )
                                           Recents( aOpnDatas )
                                           ClosData("A","A")  // Bu ilerde lâzým olacak ( non-dbf'leri kapatmadan önce "save" sormak için.)
                                        ENDIF
-                                       IF ISNIL( xCaller )
+                                       IF xCaller == NIL
                                           frmDBAMain.Release
                                        ENDIF
                                     ENDIF

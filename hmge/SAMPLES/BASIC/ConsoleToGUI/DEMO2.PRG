@@ -92,7 +92,7 @@ FUNCTION Main()
          action f1.release()
       END BUTTON
 
-      ON KEY ESCAPE Action f1 .b2. onclick()
+      ON KEY ESCAPE ACTION f1 .b2. onclick()
 
    END WINDOW
 

@@ -85,7 +85,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
 
    ::oParent:AddControl( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD NewId() CLASS HControl
 
@@ -317,7 +317,7 @@ METHOD New( oWndParent, nId, nStyle, oFont, aParts, bInit, bSize, bPaint ) CLASS
    ::aParts  := aParts
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HStatus
 
@@ -370,7 +370,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HStatic
 
@@ -428,7 +428,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
       hwg_SetSignal( ::handle, "clicked", WM_LBUTTONUP, 0, 0 )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HButton
 
@@ -475,7 +475,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize, bPaint, bClick, cTooltip, ;
       tcolor, bColor )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HButtonEX
 
@@ -519,7 +519,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, ;
    ::title   := cCaption
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HGroup
 
@@ -561,7 +561,7 @@ METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize ) CLASS HLine
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate CLASS HLine
 

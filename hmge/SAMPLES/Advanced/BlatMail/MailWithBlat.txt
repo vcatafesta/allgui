@@ -3,7 +3,6 @@
 
 MailWithBlat.PRG contains an object which can be used to send email with BLAT.
 
-
 BLAT (currently at version 2.6.2) is a long established program for sending email
 using the SMTP protocol.  (BLAT can also be used to send messages to News Readers
 but I have not included those functions in this object.)  MailWithBlat handles all

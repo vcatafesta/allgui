@@ -101,7 +101,7 @@ METHOD New( oWndParent, nId, vari, bSetGet, nStyle, nLeft, nTop, nWidth, nHeight
       ::oParent:AddEvent( LBN_DBLCLK, self, {|| ::onDblClick() } )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HListBox
 
@@ -135,7 +135,7 @@ METHOD Redefine( oWndParent, nId, vari, bSetGet, aItems, oFont, bInit, bSize, bP
       ::oParent:AddEvent( LBN_SELCHANGE, Self, { | o, id | ::Valid( o:FindControl( id ) ) }, "onChange" )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HListBox
 
@@ -261,7 +261,7 @@ METHOD AddItems( p ) CLASS HListBox
    //   NEXT
    hwg_Listboxsetstring( ::handle, ::value )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD DeleteItem( nPos ) CLASS HListBox
 

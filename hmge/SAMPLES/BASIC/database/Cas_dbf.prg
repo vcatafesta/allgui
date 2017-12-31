@@ -112,7 +112,7 @@ PROCEDURE CloseTables()
          form_1.browse_1.value := recno()
          MsgStop( "Busca cancelada" )
          retu nil
-      end
+      END
 
       IF type(x_campo) = 'N'
          x_macro := m_entrada +'='+ x_campo
@@ -122,7 +122,7 @@ PROCEDURE CloseTables()
          x_macro := m_entrada +'='+ x_campo
       ELSE
          x_macro := [upper("] + m_entrada + [")] + " $ upper(" + x_campo + ")"
-      end
+      END
 
       SET index to
       ferase("TMP.CDX")
@@ -132,7 +132,7 @@ PROCEDURE CloseTables()
 
       IF form_1.combo_1.value # 0
          x_campo := a_fields[ form_1.combo_1.value ]
-      end
+      END
 
       IF form_1.combo_2.value = 2   && ascending / descending
          INDEX ON  &x_campo  TAG CAS_TAG to TMP ;
@@ -231,7 +231,7 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
                   IF n_rat # 0  && D:\\
                      File_mp3 = stuff( File_mp3 , n_rat , 2 , '\' )
-                  end
+                  END
 
                NEXT
 
@@ -343,7 +343,7 @@ FUNCTION cas_Progress( m_pos , t_time , t_inicio )
 
                         IF form_1.combo_1.value # 0
                            x_campo := a_fields[ form_1.combo_1.value ]
-                        end
+                        END
 
                         x_macro := '.t.'
 

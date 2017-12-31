@@ -43,7 +43,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_alterar
          picture path_imagens+'alterar.bmp'
          col 107
@@ -60,7 +60,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_excluir
          picture path_imagens+'excluir.bmp'
          col 209
@@ -77,7 +77,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_imprimir
          picture path_imagens+'imprimir.bmp'
          col 311
@@ -94,7 +94,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_atualizar
          picture path_imagens+'atualizar.bmp'
          col 413
@@ -111,7 +111,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_fornecedores
          picture path_imagens+'fornecedores.bmp'
          col 515
@@ -128,7 +128,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_sair
          picture path_imagens+'sair.bmp'
          col 617
@@ -145,7 +145,7 @@ FUNCTION materia_prima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE SPLITBOX
          DEFINE GRID grid_materia_prima
@@ -201,18 +201,18 @@ FUNCTION materia_prima()
          transparent .T.
       END LABEL
 
-      on key F5 action dados(1)
-      on key F6 action dados(2)
-      on key F7 action excluir()
-      on key F8 action relacao()
-      on key escape action thiswindow.release
+      ON KEY F5 ACTION dados(1)
+      ON KEY F6 ACTION dados(2)
+      ON KEY F7 ACTION excluir()
+      ON KEY F8 ACTION relacao()
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_materia_prima.center
    form_materia_prima.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION dados(parametro)
 
@@ -242,7 +242,7 @@ STATIC FUNCTION dados(parametro)
          msgexclamation('Selecione uma informação','Atenção')
          materia_prima->(ordsetfocus('nome'))
 
-         return(nil)
+         RETURN NIL
       ENDIF
    ENDIF
 
@@ -359,7 +359,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Confirmar as informações digitadas'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_voltar.bmp'
          col form_dados.width-100
@@ -372,7 +372,7 @@ STATIC FUNCTION dados(parametro)
          tooltip 'Sair desta tela sem gravar informações'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
    END WINDOW
 
@@ -382,7 +382,7 @@ STATIC FUNCTION dados(parametro)
    form_dados.center
    form_dados.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION excluir()
 
@@ -397,7 +397,7 @@ STATIC FUNCTION excluir()
       msgexclamation('Selecione uma informação','Atenção')
       materia_prima->(ordsetfocus('nome'))
 
-      return(nil)
+      RETURN NIL
    ELSE
       IF msgyesno('Nome : '+alltrim(materia_prima->nome),'Excluir')
          IF lock_reg()
@@ -410,7 +410,7 @@ STATIC FUNCTION excluir()
       ENDIF
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relacao()
 
@@ -450,14 +450,14 @@ STATIC FUNCTION relacao()
 
             materia_prima->(dbskip())
 
-         end
+         END
 
          rodape()
 
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -474,14 +474,14 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,150 PRINT 'PREÇO R$' FONT 'courier new' SIZE 010 BOLD
    @ 035,180 PRINT 'QTD.' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION gravar(parametro)
 
@@ -501,7 +501,7 @@ STATIC FUNCTION gravar(parametro)
    IF retorna
       msgalert('Preencha todos os campos','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    IF parametro == 1
@@ -518,13 +518,13 @@ STATIC FUNCTION gravar(parametro)
             msgexclamation('Servidor congestionado, tecle ENTER e aguarde','Atenção')
             LOOP
          ENDIF
-      end
+      END
       dbselectarea('materia_prima')
       IF l_demo
          IF reccount() > _limite_registros
             msgstop('Limite de registros esgotado','Atenção')
 
-            return(nil)
+            RETURN NIL
          ENDIF
       ENDIF
       materia_prima->(dbappend())
@@ -552,7 +552,7 @@ STATIC FUNCTION gravar(parametro)
       atualizar()
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION pesquisar()
 
@@ -577,13 +577,13 @@ STATIC FUNCTION pesquisar()
          EXIT
       ENDIF
       materia_prima->(dbskip())
-   end
+   END
 
    IF lGridFreeze
       form_materia_prima.grid_materia_prima.enableupdate
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION atualizar()
 
@@ -596,9 +596,9 @@ STATIC FUNCTION atualizar()
    WHILE .not. eof()
       add item {str(materia_prima->codigo),alltrim(materia_prima->nome),acha_unidade(materia_prima->unidade),trans(materia_prima->preco,'@E 999,999.99'),trans(materia_prima->qtd,'@R 99,999.999')} to grid_materia_prima of form_materia_prima
       materia_prima->(dbskip())
-   end
+   END
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION procura_unidade(cform,ctextbtn)
 
@@ -632,7 +632,7 @@ STATIC FUNCTION procura_unidade(cform,ctextbtn)
       setproperty(cform,ctextbtn,'value',creg)
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION getcode_unidade(value)
 
@@ -691,9 +691,9 @@ STATIC FUNCTION getcode_unidade(value)
          readonly {.T.,.T.}
          justify {BROWSE_JTFY_LEFT,BROWSE_JTFY_LEFT}
          on dblclick (creg:=unidade_medida->codigo,thiswindow.release)
-      end browse
+      END browse
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -712,12 +712,12 @@ STATIC FUNCTION find_unidade()
 
    IF pesquisa == ''
 
-      return(nil)
+      RETURN NIL
    ELSEIF unidade_medida->(dbseek(pesquisa))
       form_pesquisa.browse_pesquisa.value := unidade_medida->(recno())
    ENDIF
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION fornecedores_mprima()
 
@@ -727,7 +727,7 @@ STATIC FUNCTION fornecedores_mprima()
    IF empty(x_nome_mprima)
       msgexclamation('Escolha uma matéria prima','Atenção')
 
-      return(nil)
+      RETURN NIL
    ENDIF
 
    DEFINE WINDOW form_fornecedor_mprima;
@@ -756,7 +756,7 @@ STATIC FUNCTION fornecedores_mprima()
          flat .T.
          noxpstyle .T.
          backcolor _branco_001
-      end buttonex
+      END BUTTONEX
 
       DEFINE GRID grid_fornecedor_mprima
          parent form_fornecedor_mprima
@@ -774,7 +774,7 @@ STATIC FUNCTION fornecedores_mprima()
          fontcolor _preto_001
       END GRID
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
@@ -783,7 +783,7 @@ STATIC FUNCTION fornecedores_mprima()
    form_fornecedor_mprima.center
    form_fornecedor_mprima.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION filtra_fornecedor(parametro)
 
@@ -801,6 +801,6 @@ STATIC FUNCTION filtra_fornecedor(parametro)
       IF fornecedor <> x_old_fornecedor
          add item {acha_fornecedor_2(x_old_fornecedor)} to grid_fornecedor_mprima of form_fornecedor_mprima
       ENDIF
-   end
+   END
 
-   return(nil)
+   RETURN NIL

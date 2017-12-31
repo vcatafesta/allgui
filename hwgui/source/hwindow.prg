@@ -208,7 +208,7 @@ METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
    ENDIF
    ::bSetForm := bSetForm
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddItem( oWnd ) CLASS HWindow
 
@@ -343,7 +343,7 @@ METHOD New( lType, oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, nPos,
    ENDIF
    ::rect := hwg_Getwindowrect( ::handle )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate( lShow, lMaximized, lMinimized, lCentered, bActivate ) CLASS HMainWindow
 
@@ -750,7 +750,7 @@ METHOD New( oIcon, clr, nStyle, x, y, width, height, cTitle, cMenu, oFont, ;
    ENDIF
    */
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate( lShow, lMaximized, lMinimized,lCentered, bActivate, lModal ) CLASS HChildWindow
 

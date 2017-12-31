@@ -365,7 +365,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                        EXIT FOR
                                     ENDIF
 
-                                 ENDIF !ISNIL( a1Valid )
+                                 ENDIF
                               NEXT nVInd
 
                               RETU lRVal // CFCAccept()
@@ -579,27 +579,27 @@ FUNC GFUSList( ;                          // Get From User a Selection List
                                        ASIZE( aValids, LEN( aValues ) )
 
                                        ASIZE( aDTypes, LEN( aValues ) )
-                                       AEVAL( aDTypes, { | x1, i1 | IF( ISNIL( x1 ), aDTypes[ i1 ] := VALTYPE( aValues[ i1 ] ), ) } )
+                                       AEVAL( aDTypes, { | x1, i1 | IF( x1 == NIL, aDTypes[ i1 ] := VALTYPE( aValues[ i1 ] ), ) } )
 
                                        ASIZE( aROnlys, LEN( aValues ) )
-                                       AEVAL( aROnlys, { | x1, i1 | IF( ISNIL( x1 ), aROnlys[ i1 ] := .F., ) } )
+                                       AEVAL( aROnlys, { | x1, i1 | IF( x1 == NIL, aROnlys[ i1 ] := .F., ) } )
 
                                        IF !EMPTY( aButtons )
                                           AEVAL( aButtons, { | a1 | ASIZE( a1, 8 ) } )
-                                          AEVAL( aButtons, { | a1, i1 | IF( ISNIL( a1[ 4 ] ), aButtons[ i1, 4 ] := .F.,  ),;   // Apply Acceptences
-                                             IF( ISNIL( a1[ 5 ] ), aButtons[ i1, 5 ] := .F.,  ),;   // Save Before
-                                             IF( ISNIL( a1[ 6 ] ), aButtons[ i1, 6 ] := {},   ),;   // Code Blocks
-                                             IF( ISNIL( a1[ 7 ] ), aButtons[ i1, 7 ] := .F.,  ),;   // Release After
-                                             IF( ISNIL( a1[ 8 ] ), aButtons[ i1, 8 ] :=  0,   ) } ) // Associate with
+                                          AEVAL( aButtons, { | a1, i1 | IF( a1[ 4 ] == NIL, aButtons[ i1, 4 ] := .F.,  ),;   // Apply Acceptences
+                                             IF( a1[ 5 ] == NIL, aButtons[ i1, 5 ] := .F.,  ),;   // Save Before
+                                             IF( a1[ 6 ] == NIL, aButtons[ i1, 6 ] := {},   ),;   // Code Blocks
+                                             IF( a1[ 7 ] == NIL, aButtons[ i1, 7 ] := .F.,  ),;   // Release After
+                                             IF( a1[ 8 ] == NL, aButtons[ i1, 8 ] :=  0,   ) } ) // Associate with
                                           AEVAL( aButtons, { | a1 | nButnAsCo += IF( a1[ 8 ] > 0, 1, 0 ) } )
                                        ENDIF !EMPTY( aButtons )
 
                                        ASIZE( aWidths, LEN( aValues ) )
-                                       AEVAL( aWidths, { | x1, i1 | IF( ISNIL( x1 ), aWidths[ i1 ] := ;
+                                       AEVAL( aWidths, { | x1, i1 | IF( x1 == NIL, aWidths[ i1 ] := ;
                                           IF( VALTYPE( aValues[ i1 ] ) == "C", LEN( aValues[ i1 ] ) + 2, 0 ), ) } )
 
                                        ASIZE( aDecims, LEN( aValues ) )
-                                       AEVAL( aDecims, { | x1, i1 | IF( ISNIL( x1 ), aDecims[ i1 ] := 0, ) } )
+                                       AEVAL( aDecims, { | x1, i1 | IF( x1 == NIL, aDecims[ i1 ] := 0, ) } )
 
                                        nValMaxLen := CFMValLn( , aDTypes, aWidths, aDecims, aValues ) - 3
 
@@ -781,7 +781,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
 
                                           AEVAL( aButtons, { | a1 | nBtnTotSz += ;
                                              IF( a1[ 8 ] > 0, 0,;
-                                             IF( ISNIL( a1[ 1 ] ), LEN( a1[ 2 ] ) * 8 + 4, a1[ 1 ] + 4 )) } )
+                                             IF( a1[ 1 ] == NIL, LEN( a1[ 2 ] ) * 8 + 4, a1[ 1 ] + 4 )) } )
 
                                           nBtnSpace := ( nFrmWidth - nBtnTotSz - IF( lVirtHeig, 20, 0 ) ) / ((LEN(aButtons)-nButnAsCo)+ 1 )
 
@@ -793,7 +793,7 @@ FUNC GFUSList( ;                          // Get From User a Selection List
 
                                              a1Button   := aButtons[ nButtonNo ]
 
-                                             lBtnPictr  := !ISNIL( a1Button[ 1 ] )
+                                             lBtnPictr  := ! a1Button[ 1 ] == NIL
 
                                              cButnCapt  := aButtons[ nButtonNo, 2 ]
                                              cButnTTip  := aButtons[ nButtonNo, 3 ]

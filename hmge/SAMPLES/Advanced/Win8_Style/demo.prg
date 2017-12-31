@@ -154,9 +154,9 @@ FUNCTION MyPopup()
    // add an object to a form
    DEFINE MAIN MENU OF Form_1
       POPUP 'File'
-         Separator
+         SEPARATOR
          Item 'Exit' Action MyExit() Image 'EXIT'
-      End Popup
+      END POPUP
       POPUP '&BackColor WINDOW'
          Item 'COLOR_DESKTOP_DARK_CYAN    ' Action ( Form_1.BackColor := COLOR_DESKTOP_DARK_CYAN    ,MyRefresh() )
          Item 'COLOR_DESKTOP_DARK_GREEN   ' Action ( Form_1.BackColor := COLOR_DESKTOP_DARK_GREEN   ,MyRefresh() )
@@ -164,13 +164,13 @@ FUNCTION MyPopup()
          Item 'COLOR_DESKTOP_DARK_YELLOW  ' Action ( Form_1.BackColor := COLOR_DESKTOP_DARK_YELLOW  ,MyRefresh() )
          Item 'COLOR_DESKTOP_BRIGHT_GREEN ' Action ( Form_1.BackColor := COLOR_DESKTOP_BRIGHT_GREEN ,MyRefresh() )
          Item 'COLOR_DESKTOP_YELLOW_ORANGE' Action ( Form_1.BackColor := COLOR_DESKTOP_YELLOW_ORANGE,MyRefresh() )
-      End Popup
+      END POPUP
       POPUP '&Property'
          Item 'Hide STATUSBAR' Action ( Form_1.Statusbar.Visible := .F. , lStatusBar := .F.)
          Item 'Show STATUSBAR' Action ( Form_1.Statusbar.Visible := .T. , lStatusBar := .T.)
-         Separator
+         SEPARATOR
          Item 'Hide MENU'      Action ( ClearMenu() )
-      End Popup
+      END POPUP
    END MENU
 
    RETURN NIL

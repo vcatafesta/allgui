@@ -280,7 +280,7 @@ METHOD New( cFileName, nTop, nLeft, nBottom, nRight, nDelay, aBKColor, cControlN
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD PlayGif( cControlName, cParentName ) CLASS TGif
 

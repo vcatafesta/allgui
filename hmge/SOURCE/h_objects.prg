@@ -667,7 +667,7 @@ FUNCTION oKeyData( Obj, Event )
 
    LOCAL o
 
-   IF     HB_ISNIL    ( Event )            ; o := TKeyData():New():Def( Obj )
+   IF     Event == NIL                     ; o := TKeyData():New():Def( Obj )
    ELSEIF HB_ISLOGICAL( Event ) .AND. Event; o := TWmEData():New( Obj )
    ELSE                                    ; o := TThrData():New():Def( Obj, hb_mtvm() )
    ENDIF

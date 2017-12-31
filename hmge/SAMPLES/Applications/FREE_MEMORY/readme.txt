@@ -21,4 +21,3 @@ indirect, which may result from the use of FreeMemory.
 
   To report a bug or to make a suggestion write to:
 gfilatov@inbox.ru
-

@@ -55,7 +55,7 @@ METHOD New( oWndParent, nLeft, nTop, nRight, nBottom, lPress, nStyle ) CLASS HRe
       ::oLine4 = HRect_Line():New( oWndParent, , .t., nRight, nTop,    nBottom - nTop, , nCor2 )
    ENDCASE
 
-   RETURN Self
+   RETURN SELF
 
 CLASS HRect_Line INHERIT HControl
 
@@ -89,7 +89,7 @@ METHOD New( oWndParent, nId, lVert, nLeft, nTop, nLength, bSize, nColor ) CLASS 
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HRect_Line
 
@@ -202,7 +202,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, bSize, tcolor, bColor
       //    ::oPen := HPen():Add( PS_SOLID, 5, hwg_Getsyscolor( COLOR_3DHILIGHT ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HDrawShape
 
@@ -345,7 +345,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, ncStyle, bSiz
    ENDIF
    ::oPen := HPen():Add( PS_SOLID, 1, hwg_Getsyscolor( COLOR_3DHILIGHT ) )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HContainer
 

@@ -110,7 +110,7 @@ FUNCTION dia_da_semana(p_data,p_tipo)
       return(cData)
    ENDIF
 
-   return(nil)
+   RETURN NIL
    *________________________________________________________________________________________________
 
 FUNCTION check_window()
@@ -467,7 +467,7 @@ FUNCTION acha_atendente(parametro)
 
 FUNCTION DbfVazio( cParametro )
 
-   sele (cParametro )
+   SELE (cParametro )
 
    IF Eof()
       msgexclamation('A tabela '+alltrim(upper(cParametro))+' está vazia','Atenção')

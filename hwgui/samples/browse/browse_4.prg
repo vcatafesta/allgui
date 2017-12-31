@@ -16,13 +16,13 @@ FUNCTION Main
 
    IF !File("browse_4.dbf")
       dBCreate("browse_4.dbf", aField)
-   end
+   END
    USE browse_4 Exclusiv alias TESTE  NEW
    FOR i:=1 to 200
       APPEND BLANK
       Teste->CODIGO:=i
       TESTE->NOME:= 'NOME '+ALLTRIM(STR(I))
-   end
+   END
    GO TOP
    INIT DIALOG oDlg CLIPPER NOEXIT TITLE "Browse MultiSelect";
       AT 218,143 SIZE 487,270 FONT HFont():Add( "Arial",0,-11)

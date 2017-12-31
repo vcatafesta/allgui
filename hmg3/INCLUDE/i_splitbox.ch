@@ -71,7 +71,6 @@
 =>;
    _DefineSplitBox( <"parent"> , <.bottom.> , <.horizontal.> )
 
-
 #xcommand END SPLITBOX ;
 =>;
    _EndSplitBox()

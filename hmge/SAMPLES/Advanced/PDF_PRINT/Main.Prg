@@ -12,7 +12,7 @@ FUNCTION Main
          action pdf_create()
          DEFAULT .t.
       END BUTTON
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
    END WINDOW
    main.center
    main.activate

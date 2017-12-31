@@ -1121,7 +1121,7 @@ PROCEDURE SetTimer()
 
    IF !aget[14]
 
-      SET InteractiveClose Off
+      SET INTERACTIVECLOSE OFF
 
       DEFINE WINDOW Form_2 AT 0,0 WIDTH 250 HEIGHT IF(Empty(cWindow), 162, 206) ;
             TITLE "Shutdown attivato!" ;
@@ -1164,11 +1164,11 @@ PROCEDURE SetTimer()
       WinExit(nMode)
    ELSE
       RELEASE m->cTimeExit
-      SET InteractiveClose On
+      SET INTERACTIVECLOSE ON
       Form_1.Show
    ENDIF
 
-   SET InteractiveClose ON
+   SET INTERACTIVECLOSE ON
 
    RETURN
    /*

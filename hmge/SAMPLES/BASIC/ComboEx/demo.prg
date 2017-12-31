@@ -475,7 +475,6 @@ FUNCTION HMG_GetVolumeName(cPath)
 #else
 #define HB_STORC( n, x, y ) hb_storvc( n, x, y )
 #define ISBYREF( n )        HB_ISBYREF( n )
-#define ISNIL( n )          HB_ISNIL( n )
 #endif
 
 HB_FUNC ( GETDRIVES )

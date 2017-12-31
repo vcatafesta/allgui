@@ -29,7 +29,7 @@ METHOD NEW( nWnd ) CLASS HPAINTDC
    ::m_hWnd := nWnd
    ::Attach( hwg_Beginpaint( ::m_hWnd, ::m_ps ) )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD END () CLASS HPAINTDC
 
@@ -107,19 +107,19 @@ METHOD NEW( ) CLASS HDC
    ::m_hDC       := NIL
    ::m_hAttribDC := NIL
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Moveto( x1, y1 ) CLASS HDC
 
    hwg_Moveto( ::m_hDC, x1, y1 )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Lineto( x1, y1 ) CLASS HDC
 
    hwg_Lineto( ::m_hDC, x1, y1 )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Attach( hDC ) CLASS HDC
 
@@ -337,7 +337,7 @@ METHOD NEW( nWnd ) CLASS HCLIENTDC
    ::m_hWnd := nWnd
    ::Attach( hwg_Getdc( ::m_hWnd ) )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD END () CLASS HCLIENTDC
 

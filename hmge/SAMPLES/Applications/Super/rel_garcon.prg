@@ -20,7 +20,7 @@ FUNCTION relatorio_garcon()
    WHILE .not. eof()
       aadd(a_001,strzero(atendentes->codigo,4)+' - '+atendentes->nome)
       atendentes->(dbskip())
-   end
+   END
 
    DEFINE WINDOW form_comissao_garcon;
          at 000,000;
@@ -67,7 +67,7 @@ FUNCTION relatorio_garcon()
       height 200
       items a_001
       value 1
-   end comboboxex
+   END comboboxex
 
    * linha separadora
    DEFINE LABEL linha_rodape
@@ -93,7 +93,7 @@ FUNCTION relatorio_garcon()
       tooltip 'Gerar o relatório'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
    DEFINE BUTTONEX button_cancela
       picture path_imagens+'img_sair.bmp'
       col form_comissao_garcon.width-100
@@ -106,16 +106,16 @@ FUNCTION relatorio_garcon()
       tooltip 'Sair desta tela'
       flat .F.
       noxpstyle .T.
-   end buttonex
+   END BUTTONEX
 
-   on key escape action thiswindow.release
+   ON KEY ESCAPE ACTION thiswindow.release
 
 END WINDOW
 
 form_comissao_garcon.center
 form_comissao_garcon.activate
 
-return(nil)
+RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -177,7 +177,7 @@ STATIC FUNCTION relatorio()
                x_subtotal := 0
             ENDIF
 
-         end
+         END
 
          linha += 5
          @ linha,070 PRINT 'Total COMISSÕES : R$ '+trans(x_total,'@E 9,999.99') FONT 'courier new' SIZE 010
@@ -187,7 +187,7 @@ STATIC FUNCTION relatorio()
       END PRINTPAGE
    END PRINTDOC
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -210,11 +210,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 041,060 PRINT 'HORA' FONT 'courier new' SIZE 010 BOLD
    @ 041,100 PRINT 'VALOR R$' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

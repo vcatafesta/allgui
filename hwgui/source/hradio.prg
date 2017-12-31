@@ -74,7 +74,7 @@ METHOD New( vari, bSetGet, bInit, bClick, bGFocus, nStyle ) CLASS HRadioGroup
    ENDIF
    ::bSetGet := bSetGet
 
-   RETURN Self
+   RETURN SELF
 
 METHOD NewRg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeight, ;
       cCaption, oFont, bInit, bSize,tcolor, bColor,bClick,;
@@ -100,7 +100,7 @@ METHOD NewRg( oWndParent, nId, nStyle, vari, bSetGet, nLeft, nTop, nWidth, nHeig
    ENDIF
    ::bSetGet := bSetGet
 
-   RETURN Self
+   RETURN SELF
 
 METHOD EndGroup( nSelected )  CLASS HRadioGroup
 
@@ -287,7 +287,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, cCaption, oFo
       // ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HRadioButton
 
@@ -357,7 +357,7 @@ METHOD Redefine( oWndParent, nId, oFont, bInit, bSize, bPaint, bClick, ctooltip,
       // ENDIF
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD onEvent( msg, wParam, lParam ) CLASS HRadioButton
 

@@ -113,7 +113,7 @@ hwg_SetEvent( ::handle,"focus_in_event",WM_SETFOCUS,0,0 )
 hwg_SetEvent( ::handle,"focus_out_event",WM_KILLFOCUS,0,0 )
 hwg_SetEvent( ::handle,"key_press_event",0,0,0 )
 
-RETURN Self
+RETURN SELF
 
 METHOD Activate CLASS HEdit
 

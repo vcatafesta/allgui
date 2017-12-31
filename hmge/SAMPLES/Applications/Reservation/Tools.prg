@@ -218,7 +218,7 @@ PROCEDURE AzzeraDb(ARG1,start,stop)
    LOCAL archivio:=if (arg1=Nil,alias(),upper(arg1)) , old_sele:=select()
 
    DEFAULT start to 1, stop to .f.
-   sele &archivio
+   SELE &archivio
    //msg(archivio,[archivio])
    GO TOP
    DO WHILE !eof()
@@ -293,7 +293,6 @@ FUNCTION Trueval(string)
 
 #ifndef __XHARBOUR__
    #define ISBYREF( n )          HB_ISBYREF( n )
-   #define ISNIL( n )            HB_ISNIL( n )
 #endif
 
 HB_FUNC ( _HMG_PRINTER_GETPRINTABLEAREAPHYSICALWIDTH)

@@ -63,7 +63,7 @@ FUNCTION Main
          rightalign .t.
          rangemin 1
          rangemax 200
-      end spinner
+      END spinner
       DEFINE LABEL heightlabel
          row 100
          col 10
@@ -79,7 +79,7 @@ FUNCTION Main
          increment 10
          rangemin 10
          rangemax 2000
-      end spinner
+      END spinner
       DEFINE CHECKBOX showdigits
          row 130
          col 10

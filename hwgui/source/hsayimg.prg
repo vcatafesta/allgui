@@ -51,13 +51,13 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, bInit, ;
    ::bDblClick := bDblClick
    ::oParent:AddEvent( STN_DBLCLK, Self, { || ::onDblClick() } )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, bInit, bSize, ctooltip ) CLASS HSayImage
 
    ::Super:New( oWndParent, nId, 0, 0, 0, 0, 0,, bInit, bSize,, ctooltip )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HSayImage
 
@@ -142,7 +142,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
    ENDIF
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp ) CLASS HSayBmp
 
@@ -158,7 +158,7 @@ METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip, lTransp 
       IIf( ValType( xImage ) == "C",     ;
       HBitmap():AddFile( xImage ), xImage ) )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HSayBmp
 
@@ -251,7 +251,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, Image, lRes, bInit, ;
    ENDIF
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip ) CLASS HSayIcon
 
@@ -265,7 +265,7 @@ METHOD Redefine( oWndParent, nId, xImage, lRes, bInit, bSize, ctooltip ) CLASS H
          HIcon():AddFile( xImage ), xImage ) )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HSayIcon
 

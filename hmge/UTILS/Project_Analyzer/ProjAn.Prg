@@ -60,7 +60,7 @@ STATIC FUNCTION GetPrjFile()
       {'Mpm File','*.mpm'}, {'Hbp File','*.hbp'}, {'All Files','*.*'}}, ;
       'Select a project file', wMain.txt_PrjFile.Value)
 
-   SET DEFAULT to (ApplicPath)
+   SET DEFAULT TO (ApplicPath)
    IF empty(c_File)
 
       RETURN NIL

@@ -194,7 +194,7 @@ METHOD New( oTree, oParent, oPrev, oNext, cTitle, bAction, aImages, lchecked, bC
    ::image1 := im1
    ::image2 := im2
 
-   RETURN Self
+   RETURN SELF
 
 METHOD AddNode( cTitle, oPrev, oNext, bAction, aImages, lCheck, bClick ) CLASS HTreeNode
 
@@ -380,7 +380,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, bInit,
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Init() CLASS HTree
 

@@ -482,7 +482,7 @@ FUNCTION MyScreen(nOption)
 
    dbCloseAll()
 
-   SET navigation extended
+   SET NAVIGATION EXTENDED
    SET DELETED ON
 
    cDbF := aFilesDBF[nOption]
@@ -694,7 +694,7 @@ PROCEDURE AddFields()
    WHILE !Eof()
       Win_1.grid_1.additem(scatter())
       dbskip()
-   End
+   END
    Win_1.grid_1.enableupdate
 
    RETURN

@@ -10,7 +10,7 @@
 
 FUNCTION Main()
 
-   SET language to ENGLISH    // GAL (changed from SPANISH")
+   SET LANGUAGE TO ENGLISH    // GAL (changed from SPANISH")
 
    SET CENTURY ON
    SET DATE ANSI
@@ -32,10 +32,10 @@ FUNCTION Main()
             item 'Do Report Test2' action PrintTest2()
             item 'Do Report Test3' action PrintTest3()
             item 'Do Report Test4' action PrintTest4()
-            separator
+            SEPARATOR
             item 'Exit'            action ThisWindow.Release
-         end popup
-      end menu
+         END POPUP
+      END MENU
 
    END WINDOW
 

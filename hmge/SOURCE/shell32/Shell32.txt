@@ -14,4 +14,3 @@
 
  Author:   Grigory Filatov
  EMail:    gfilatov@inbox.ru
-

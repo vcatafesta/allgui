@@ -217,10 +217,6 @@ FUNCTION RangeSelRTF(ControlHandle)
 #define HB_STORNL( n, x, y )  hb_storvnl( n, x, y )
 #endif
 
-#ifndef __XHARBOUR__
-   #define ISNIL( n )            HB_ISNIL( n )
-#endif
-
 static BOOL IsWinxpSp1Min(void)
 {
    char *pch;

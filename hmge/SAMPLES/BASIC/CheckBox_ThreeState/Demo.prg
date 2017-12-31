@@ -14,7 +14,7 @@ FUNCTION Main
          MAIN
 
       ON KEY ALT+X  action ThisWindow.Release
-      ON KEY ESCAPE action ThisWindow.Release
+      ON KEY ESCAPE ACTION ThisWindow.Release
 
       DEFINE STATUSBAR
          STATUSITEM '[x] Harbour Power Ready!'

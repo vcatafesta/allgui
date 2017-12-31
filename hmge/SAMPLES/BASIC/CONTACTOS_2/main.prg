@@ -11,7 +11,7 @@ STATIC Nuevo := .F.
 FUNCTION Main
 
    SET delete on
-   SET browsesync on
+   SET BROWSESYNC ON
    SET CENTURY ON
    SET DATE french
 

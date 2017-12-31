@@ -283,14 +283,14 @@ PROCEDURE PrMiniEsegui(_MainArea,_psd,db_arc,_prw)
             ENDDO
          ENDIF
       ELSE
-         sele (oWr:aStat [ 'area1' ])
+         SELE (oWr:aStat [ 'area1' ])
          IF !empty(atf)
             SET filter to &atf
          ENDIF
          Dbgotop()
          lbody:=eval(oWr:Valore,oWr:aBody[1])
          WHILE !eof()
-            sele (DB_ARC)
+            SELE (DB_ARC)
             StrFlt:= oWr:aStat [ 'FldRel' ]+" = "+ oWr:aStat [ 'area1' ]+"->"+oWr:aStat [ 'FldRel' ]
             DBEVAL( {|| miocont++},{|| &strFLT} )
             miocnt:= int(miocont/NOZERODIV(lbody))
@@ -301,12 +301,12 @@ PROCEDURE PrMiniEsegui(_MainArea,_psd,db_arc,_prw)
             //msg(zaps(tpg)+crlf+zaps(miocnt),[Tpg1])
             aadd(Amx_pg,miocnt)
             miocont := 0
-            sele (oWr:aStat [ 'area1' ])
+            SELE (oWr:aStat [ 'area1' ])
             dbskip()
          ENDDO
          GO TOP
          WHILE !eof()
-            sele (DB_ARC)
+            SELE (DB_ARC)
             SET filter to &strFLT
             miocont ++
             mx_pg:=aMx_pg[miocont]
@@ -319,7 +319,7 @@ PROCEDURE PrMiniEsegui(_MainArea,_psd,db_arc,_prw)
             oWr:aStat [ 'EndDoc' ]:=.f.
             last_pag:=.f.
             SET filter to
-            sele (oWr:aStat [ 'area1' ])
+            SELE (oWr:aStat [ 'area1' ])
             dbskip()
          ENDDO
       ENDIF

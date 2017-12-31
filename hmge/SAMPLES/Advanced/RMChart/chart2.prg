@@ -78,7 +78,7 @@ STATIC PROCEDURE fOpenActivex()
          :TextColor   := Black
          :FontSize    := 11
          :Bold        := TRUE
-      End
+      END
 
       // Add grid to region 1
       :AddGrid()
@@ -91,7 +91,7 @@ STATIC PROCEDURE fOpenActivex()
          :Top         := 0
          :Width       := 0
          :Height      := 0
-      End
+      END
 
       // Add data axis to region 1
       :AddDataAxis()
@@ -108,7 +108,7 @@ STATIC PROCEDURE fOpenActivex()
          :DecimalDigits  := 0
          :AxisUnit       := " $"
          :AxisText       := "Miles de Dólares\9b"
-      End
+      END
 
       // Add label axis to region 1
       :AddLabelAxis()
@@ -124,7 +124,7 @@ STATIC PROCEDURE fOpenActivex()
          :LineStyle     := RMC_LINESTYLESOLID
          :AxisText      := "Primer semestre"
          :LabelString   := "Enero*Febrero*Marzo*Abril*Mayo*Junio"
-      End
+      END
 
       // Add legend to region 1
       :AddLegend()
@@ -137,7 +137,7 @@ STATIC PROCEDURE fOpenActivex()
          :Fontsize            := 8
          :Bold                := FALSE
          :LegendString        := "Citibank*Boston*BBVA*Santander"
-      End
+      END
 
       // Add Series 1 to region 1
       :AddBarSeries()
@@ -153,7 +153,7 @@ STATIC PROCEDURE fOpenActivex()
          :PointsPerColumn     := 1
          :HatchMode           := RMC_HATCHBRUSH_OFF
          :DataString          := "10000*10000*16000*12000*20000*10000"
-      End
+      END
 
       // Add Series 2 to region 1
       :AddBarSeries()
@@ -169,7 +169,7 @@ STATIC PROCEDURE fOpenActivex()
          :PointsPerColumn     := 1
          :HatchMode           := RMC_HATCHBRUSH_OFF
          :DataString          := "5000*7000*4000*15000*10000*10000"
-      End
+      END
 
       // Add Series 3 to region 1
       :AddBarSeries()
@@ -185,7 +185,7 @@ STATIC PROCEDURE fOpenActivex()
          :PointsPerColumn     := 1
          :HatchMode           := RMC_HATCHBRUSH_OFF
          :DataString          := "10000*3000*12000*10000*5000*20000"
-      End
+      END
 
       // Add Series 4 to region 1
       :AddBarSeries()
@@ -201,9 +201,9 @@ STATIC PROCEDURE fOpenActivex()
          :PointsPerColumn     := 1
          :HatchMode           := RMC_HATCHBRUSH_OFF
          :DataString          := "5000*9000*12000*6000*10000*5000"
-      End
+      END
 
-   End
+   END
 
    oChart:Draw()
 

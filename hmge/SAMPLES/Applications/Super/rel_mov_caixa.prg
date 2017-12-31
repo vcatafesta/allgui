@@ -67,7 +67,7 @@ FUNCTION movimentacao_caixa()
          tooltip 'Gerar o relatório'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
       DEFINE BUTTONEX button_cancela
          picture path_imagens+'img_sair.bmp'
          col form_mov_caixa.width-100
@@ -80,16 +80,16 @@ FUNCTION movimentacao_caixa()
          tooltip 'Sair desta tela'
          flat .F.
          noxpstyle .T.
-      end buttonex
+      END BUTTONEX
 
-      on key escape action thiswindow.release
+      ON KEY ESCAPE ACTION thiswindow.release
 
    END WINDOW
 
    form_mov_caixa.center
    form_mov_caixa.activate
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION relatorio()
 
@@ -149,7 +149,7 @@ STATIC FUNCTION relatorio()
                linha += 5
             ENDIF
 
-         end
+         END
 
          rodape()
 
@@ -160,7 +160,7 @@ STATIC FUNCTION relatorio()
    ordscope(1,0)
    caixa->(dbgotop())
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION cabecalho(p_pagina)
 
@@ -180,11 +180,11 @@ STATIC FUNCTION cabecalho(p_pagina)
    @ 035,130 PRINT 'SAÍDAS' FONT 'courier new' SIZE 010 BOLD
    @ 035,160 PRINT 'SALDO' FONT 'courier new' SIZE 010 BOLD
 
-   return(nil)
+   RETURN NIL
 
 STATIC FUNCTION rodape()
 
    @ 275,000 PRINT LINE TO 275,205 PENWIDTH 0.5 COLOR _preto_001
    @ 276,010 PRINT 'impresso em '+dtoc(date())+' as '+time() FONT 'courier new' SIZE 008
 
-   return(nil)
+   RETURN NIL

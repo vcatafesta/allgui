@@ -31,7 +31,7 @@ PROCEDURE Seteos()
 
    SET CENTURY ON
    SET DATE french
-   SET navigation extended
+   SET NAVIGATION EXTENDED
 
    RETURN
 
@@ -50,7 +50,7 @@ PROCEDURE ConectaMDB()
    CATCH e
       MsgStop("Operation: "+e:operation+"-"+"Description: "+e:Description+chr(10)+vMat(e:Args),"Error")
       ExitProcess(0)
-   End
+   END
 
    RETURN
 

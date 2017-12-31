@@ -116,7 +116,7 @@ METHOD New( vt, xVal ) CLASS VTWrapper
 
    //TraceLog( vt, ::vt, xVal, ::Value )
 
-   RETURN Self
+   RETURN SELF
 
 CLASS VTArrayWrapper FROM VTWrapper
 
@@ -216,7 +216,7 @@ METHOD New( uObj, cClass, cLicense ) CLASS TOleAuto
             oErr:SubCode       := -1
             oErr:SubSystem     := OLEExceptionSource()
 
-            RETURN Self //Throw( oErr )
+            RETURN SELF //Throw( oErr )
          ELSE
             oErr := ErrorNew()
             oErr:Args          := HB_aParams()
@@ -230,7 +230,7 @@ METHOD New( uObj, cClass, cLicense ) CLASS TOleAuto
             oErr:SubCode       := -1
             oErr:SubSystem     := "TOleAuto"
 
-            RETURN Self //Throw( oErr )
+            RETURN SELF //Throw( oErr )
          ENDIF
       ENDIF
 
@@ -260,7 +260,7 @@ METHOD New( uObj, cClass, cLicense ) CLASS TOleAuto
       RETURN Throw( oErr )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    // Destructor!
 
@@ -321,7 +321,7 @@ METHOD GetActiveObject( cClass ) CLASS TOleAuto
       ::hObj := 0
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OleCollection( xIndex, xValue ) CLASS TOleAuto
 
@@ -489,7 +489,7 @@ METHOD OleValueInc() CLASS TOleAuto
       RETURN Throw( oErr )
    END
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OleValueDec() CLASS TOleAuto
 
@@ -513,7 +513,7 @@ METHOD OleValueDec() CLASS TOleAuto
       RETURN Throw( oErr )
    END
 
-   RETURN Self
+   RETURN SELF
 
 METHOD OleValuePower( xArg ) CLASS TOleAuto
 

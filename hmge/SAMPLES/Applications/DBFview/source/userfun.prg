@@ -38,7 +38,7 @@ FUNCTION _GetIniSections()
    while( asc(cVar) <> 0 .and. (n := at(chr(0), cVar)) > 0 )
    aadd(aSections, left(cVar, n - 1))
    cVar := substr(cVar, n + 1)
-end
+END
 
 RETURN aSections
 

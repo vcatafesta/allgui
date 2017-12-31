@@ -2,7 +2,6 @@
                      Simple SQL Interface for Harbour
 
 
-
 1. Introduction
 
     Simple SQL interface implements accessing SQL query result via RDD
@@ -78,9 +77,7 @@ all query (it could contain millions of records!) will be cached.
   before readonly DO WHILE ! EOF() loops? :)
 
 
-
 2. Architecture
-
 
               +-------------+
               |             |
@@ -94,7 +91,6 @@ all query (it could contain millions of records!) will be cached.
               | SQLBASE RDD |    |   SDD   |
               |             |<---|         |
               +-------------+    +---------+
-
 
     SQLBASE RDD implements basic functionality for accessing SQL query result
 via RDD interface. This RDD could be used, if indexing of query result is not
@@ -115,7 +111,6 @@ Usualy these functions are just a shorter version of corresponding RDDINFO()
 call.
 
 
-
 3. Modifying database
 
     SSI presents a query result via RDD interface and generates no hidden
@@ -128,7 +123,6 @@ used to create an "empty query result" but no table is created on SQL server.
 So, SSI can also be used as implementation of "array RDD".
     The programmer must call SQL command explicitly to modify SQL tables.
 SSI provides a method to detect which cached rows was changed or appended.
-
 
 Mindaugas Kavaliauskas <dbtopas at dbtopas.lt>
 ===================================================================

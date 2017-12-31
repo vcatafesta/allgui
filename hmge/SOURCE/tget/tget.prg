@@ -220,7 +220,7 @@ METHOD New( nRow, nCol, bVarBlock, cVarName, cPicture, cColorSpec ) CLASS Get
       ::cDelimit      := Set( _SET_DELIMCHARS )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -230,7 +230,7 @@ METHOD Assign() CLASS Get
       ::VarPut( ::UnTransform(), .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -243,7 +243,7 @@ METHOD UpdateBuffer() CLASS Get
       ::PutMask( ::VarGet() )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -255,7 +255,7 @@ METHOD Reform() CLASS Get
       ::Buffer := ::PutMask( ::xVarGet, .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 #endif
 
@@ -324,7 +324,7 @@ METHOD Display( lForced ) CLASS Get
 
    SetCursor( nOldCursor )
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -333,7 +333,7 @@ METHOD ColorDisp( cColorSpec ) CLASS Get
    ::ColorSpec := cColorSpec
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -358,7 +358,7 @@ METHOD End() CLASS Get
       ::Display( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -370,7 +370,7 @@ METHOD Home() CLASS Get
       ::Display( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -387,7 +387,7 @@ METHOD Reset() CLASS Get
       ::Display()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -399,7 +399,7 @@ METHOD Undo() CLASS Get
       ::Changed := .F.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -410,7 +410,7 @@ METHOD SetFocus() CLASS Get
 
    IF ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    lWasNIL := ::Buffer == NIL
@@ -451,7 +451,7 @@ METHOD SetFocus() CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -480,7 +480,7 @@ METHOD KillFocus() CLASS Get
    ::Original := NIL
    ::Buffer   := NIL
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -661,7 +661,7 @@ METHOD OverStrike( cChar ) CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::cType == "N" .AND. ! ::lEdit .AND. ::Clear
@@ -671,7 +671,7 @@ METHOD OverStrike( cChar ) CLASS Get
    IF ::Pos > ::nMaxEdit
       ::Rejected := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    cChar := ::Input( cChar )
@@ -679,7 +679,7 @@ METHOD OverStrike( cChar ) CLASS Get
    IF cChar == ""
       ::Rejected := .T.
 
-      RETURN Self
+      RETURN SELF
    ELSE
       ::Rejected := .F.
    ENDIF
@@ -712,7 +712,7 @@ METHOD OverStrike( cChar ) CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -723,7 +723,7 @@ METHOD Insert( cChar ) CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nMaxEdit := ::nMaxEdit
@@ -735,7 +735,7 @@ METHOD Insert( cChar ) CLASS Get
    IF ::Pos > ::nMaxEdit
       ::Rejected := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    cChar := ::Input( cChar )
@@ -743,7 +743,7 @@ METHOD Insert( cChar ) CLASS Get
    IF cChar == ""
       ::Rejected := .T.
 
-      RETURN Self
+      RETURN SELF
    ELSE
       ::Rejected := .F.
    ENDIF
@@ -791,7 +791,7 @@ METHOD Insert( cChar ) CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -801,7 +801,7 @@ METHOD _Right( lDisplay ) CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    DEFAULT lDisplay TO .T.
@@ -812,7 +812,7 @@ METHOD _Right( lDisplay ) CLASS Get
    IF ::Pos == ::nMaxEdit
       ::TypeOut := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nPos := ::Pos + 1
@@ -831,7 +831,7 @@ METHOD _Right( lDisplay ) CLASS Get
       ::Display( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -841,7 +841,7 @@ METHOD _Left( lDisplay ) CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    DEFAULT lDisplay TO .T.
@@ -852,7 +852,7 @@ METHOD _Left( lDisplay ) CLASS Get
    IF ::Pos == ::FirstEditable()
       ::TypeOut := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nPos := ::Pos -1
@@ -871,7 +871,7 @@ METHOD _Left( lDisplay ) CLASS Get
       ::Display( .F. )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -881,7 +881,7 @@ METHOD WordLeft() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::TypeOut := .F.
@@ -890,7 +890,7 @@ METHOD WordLeft() CLASS Get
    IF ::Pos == ::FirstEditable()
       ::TypeOut := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nPos := ::Pos -1
@@ -921,7 +921,7 @@ METHOD WordLeft() CLASS Get
 
    ::Display( .F. )
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -931,7 +931,7 @@ METHOD WordRight() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::TypeOut := .F.
@@ -940,7 +940,7 @@ METHOD WordRight() CLASS Get
    IF ::Pos == ::nMaxEdit
       ::TypeOut := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    nPos := ::Pos + 1
@@ -965,7 +965,7 @@ METHOD WordRight() CLASS Get
 
    ::Display( .F. )
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -973,7 +973,7 @@ METHOD ToDecPos() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF ::Pos == ::FirstEditable()
@@ -997,7 +997,7 @@ METHOD ToDecPos() CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1270,7 +1270,7 @@ METHOD BackSpace( lDisplay ) CLASS Get
             ::Display()
          ENDIF
 
-         RETURN Self
+         RETURN SELF
 
       ENDIF
 
@@ -1282,7 +1282,7 @@ METHOD BackSpace( lDisplay ) CLASS Get
       ::Delete( lDisplay )
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1325,7 +1325,7 @@ METHOD _Delete( lDisplay ) CLASS Get
       ::Display()
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1351,7 +1351,7 @@ METHOD DeleteAll() CLASS Get
    ::Buffer := ::PutMask( xValue, .T. )
    ::Pos    := ::FirstEditable()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1361,7 +1361,7 @@ METHOD DelEnd() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::Pos := ::nMaxEdit
@@ -1373,7 +1373,7 @@ METHOD DelEnd() CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1383,7 +1383,7 @@ METHOD DelLeft() CLASS Get
    ::Delete( .F. )
    ::Right()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1393,7 +1393,7 @@ METHOD DelRight() CLASS Get
    ::Delete( .F. )
    ::Left()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1404,7 +1404,7 @@ METHOD DelWordLeft() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    IF !( SubStr( ::Buffer, ::Pos, 1 ) == " " )
@@ -1426,7 +1426,7 @@ METHOD DelWordLeft() CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 
@@ -1434,7 +1434,7 @@ METHOD DelWordRight() CLASS Get
 
    IF ! ::HasFocus
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    ::TypeOut := .F.
@@ -1443,7 +1443,7 @@ METHOD DelWordRight() CLASS Get
    IF ::Pos == ::nMaxEdit
       ::TypeOut := .T.
 
-      RETURN Self
+      RETURN SELF
    ENDIF
 
    DO WHILE ::Pos <= ::nMaxEdit .AND. !( SubStr( ::Buffer, ::Pos, 1 ) == " " )
@@ -1456,7 +1456,7 @@ METHOD DelWordRight() CLASS Get
 
    ::Display()
 
-   RETURN Self
+   RETURN SELF
 
    /* ------------------------------------------------------------------------- */
 

@@ -61,26 +61,26 @@ FUNCTION main()
             item '&Open...'+_TAB+'Ctrl+O'      action { || IF( nAbierto==_CERRADO .OR. EMPTY(Frm1.edit.Value), abrir(), ) }
             item '&Save as...'+_TAB+'Ctrl+S'   action { || IF( nAbierto=_ABIERTO, guardar(), ) }
             item '&Close'+_TAB+'Ctrl+C'      action { || IF( nAbierto==_ABIERTO, ocultar(), ) }
-            separator
+            SEPARATOR
             item 'Pre&view Print...'+_TAB+'Ctrl+V'   action IF( nAbierto==_ABIERTO, print(.t.), )
             item '&Print...'+_TAB+'Ctrl+P'      action IF( nAbierto==_ABIERTO, print(.f.), )
-            separator
+            SEPARATOR
             item 'E&xit'+_TAB+'Ctrl+X' action Salir()
-         end popup
+         END POPUP
          POPUP 'Opt&ions'
             item '&Default font'+_TAB+'Ctrl+D'   action (Frm1.edit.fontname := 'Arial',Frm1.edit.fontsize := 10,;
                Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
             item 'O&EM font'+_TAB+'Ctrl+E'      action (Frm1.edit.fontname := 'Terminal',Frm1.edit.fontsize := 12,;
                Frm1.edit.fontbold := .f.,Frm1.edit.fontitalic := .f.,Frm1.edit.fontUnderline := .f.,Frm1.edit.fontStrikeout := .f.)
-            separator
+            SEPARATOR
             item 'Word Wrap'         action (lWordWrap:=!lWordWrap,Frm1.WordWrap.Checked := lWordWrap,;
                Frm1.edit.release,lCreated := .f.,nuevo(),frm1.tmr1.enabled := .t.) name WordWrap
             item 'Set fon&t...'+_TAB+'Ctrl+T'   action Selecfont()
-         end popup
+         END POPUP
          POPUP '&Help'
             item '&About'+_TAB+'Ctrl+A' action Acercade()
-         end popup
-      End menu
+         END POPUP
+      END MENU
 
       DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 24, 18 FLAT RIGHTTEXT
 
@@ -168,7 +168,7 @@ PROCEDURE editor()
       backcolor   { 240, 240, 241 }
       HScrollBar   !lWordWrap
       onchange   (lSaveNeeded := .T., Frm1.Button_3.Enabled := lSaveNeeded)
-   End editbox
+   END editbox
 
    setfocus edit of frm1
    lCreated := .t.

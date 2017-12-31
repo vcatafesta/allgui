@@ -34,7 +34,6 @@ of the 'Select Source' File menu item.
 At the lowest level, there are functions to send individual triplets to the
 Source Manager or to the currently open Data Source.
 
-
 EZTWAIN is specifically designed to simplify the use of TWAIN in three cases:
 
 ** When the development language is not a mainstream C/C++ compiler - for
@@ -57,7 +56,6 @@ EZTWAIN is specifically designed to simplify the use of TWAIN in three cases:
    EZTWAIN functions should produce results in an hour or two, and then the
    high-level calls can be refined into calls to functions at lower and
    lower levels as needed to achieve more exotic effects.
-
 
 -- Contents of the EZTwain Classic package (eztw1.zip)
 
@@ -97,7 +95,6 @@ VC\RELEASE\TWERP32.EXE          pre-built Twerp sample app
 VC\TWERP32\TWERP32.DSP          MSVC 6 project file for Twerp
 VFP\EZTWAIN.PRG                 declarations for Visual FoxPro
 
-
 -- Using EZTwain Classic
 
 The EZTWAIN interface was designed to have easy-to-remember names; to
@@ -113,7 +110,6 @@ during execution.
 
 For Microsoft Visual C++, these issues are taken care of if you open the
 included project files - all the necessary files are found automatically.
-
 
 For other development platforms, you will have to study your documentation
 to learn three things:
@@ -143,7 +139,6 @@ but this can cause problems if two applications are installed with
 different versions of eztw32.dll - we recommend trying to install the
 eztw32.dll in the application folder if that's possible.
 
-
 -- How should I design TWAIN support into my program?
 
 Start out by calling TWAIN_SelectImageSource - this call is simple, and
@@ -165,7 +160,6 @@ modeless Data Sources to function properly, you will have to dig into
 the source code for EZTWAIN and make lower level calls, or adapt the
 EZTWAIN code to create your own DLL.
 
-
 -- What to do with problems, questions and suggestions
 
 If you have a specific problem to report, or a question or suggestion for
@@ -176,7 +170,6 @@ If you can't find any helpful information in the existing posts, start
 a new thread in the EZTwain Classic forum, or send an e-mail to:
 
             support@dosadi.com
-
 
 July 10th, 2008
 Spike McLarty

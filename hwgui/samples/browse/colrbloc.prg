@@ -261,7 +261,7 @@ STATIC FUNCTION CriaDbf()
             FIELD->FIELD1 := -i
          ELSE
             FIELD->FIELD1 := i
-         end
+         END
       END
       FIELD->FIELD2 := "Field2 " + STRZERO(i,4)
       FIELD->FIELD3 := DATE() + i

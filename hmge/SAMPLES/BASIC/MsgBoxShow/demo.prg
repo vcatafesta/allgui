@@ -61,7 +61,7 @@ FUNCTION TestMessage()
       EXIT
    CASE 6
       nStyle := MB_RETRYCANCEL
-   end
+   END
 
    SWITCH icon
    CASE 2
@@ -75,7 +75,7 @@ FUNCTION TestMessage()
       EXIT
    CASE 5
       nStyle += MB_ICONQUESTION
-   end
+   END
 
    MESSAGEBOXINDIRECT( , message, title, nStyle )
 
@@ -101,6 +101,6 @@ FUNCTION ChangeImage()
       EXIT
    CASE 5
       Demo.Image_1.Picture := "QUES"
-   end
+   END
 
    RETURN NIL

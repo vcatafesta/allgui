@@ -84,7 +84,7 @@ METHOD New( cHeading, bBlock, oBrw ) CLASS TBColumnSQL
    ::super:New( cHeading, bBlock )
    ::oBrw := oBrw
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Block() CLASS TBColumnSQL
 
@@ -189,7 +189,7 @@ METHOD New( nTop, nLeft, nBottom, nRight, oServer, oQuery, cTable ) CLASS TBrows
       ::AddColumn( oCol )
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
 STATIC FUNCTION Skipper( nSkip, oQuery )
 
@@ -301,7 +301,7 @@ METHOD EditField() CLASS TBrowseSQL
 
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
 
@@ -398,7 +398,7 @@ METHOD BrowseTable( lCanEdit, aExitKeys ) CLASS TBrowseSQL
       ENDCASE
    ENDDO
 
-   RETURN Self
+   RETURN SELF
 
    // Empty method to be subclassed
 
@@ -406,4 +406,4 @@ METHOD KeyboardHook( nKey ) CLASS TBrowseSQL
 
    HB_SYMBOL_UNUSED( nKey )
 
-   RETURN Self
+   RETURN SELF

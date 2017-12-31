@@ -54,7 +54,7 @@ METHOD Config:init()
    ::aImp[2] := ConfigCls():new(GetEnv('USERPROFILE')+'\Application Data\MakePrg\MakePrg.cfg')
    ::aImp[3] := ConfigCls():new(cPath)
 
-   RETURN self
+   RETURN SELF
 
 METHOD Config:write(cFile, cMode, cMsg)
 
@@ -94,7 +94,7 @@ METHOD Config:write(cFile, cMode, cMsg)
       FClose(nH)
    ENDIF
 
-   RETURN self
+   RETURN SELF
 
 METHOD Config:findHeader()
 

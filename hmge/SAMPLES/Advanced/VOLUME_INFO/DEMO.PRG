@@ -56,7 +56,6 @@ PROCEDURE Main
 
 #ifndef __XHARBOUR__
    #define ISBYREF( n )          HB_ISBYREF( n )
-   #define ISNIL( n )            HB_ISNIL( n )
 #endif
 
 static char * u2Hex( WORD wWord )

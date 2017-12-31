@@ -1,6 +1,5 @@
 #command EXIT <x> => exit
 
-#translate ISNIL(  <xVal> )   => ( <xVal> == NIL )
 #translate ISARRY( <xVal> )   => ( VALTYPE( <xVal> ) == "A" )
 #translate ISBLOK( <xVal> )   => ( VALTYPE( <xVal> ) == "B" )
 #translate ISCHAR( <xVal> )   => ( VALTYPE( <xVal> ) == "C" )

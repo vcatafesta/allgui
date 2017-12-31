@@ -90,12 +90,12 @@ PROCEDURE ShowQuery()
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Operations'
-            MenuItem 'Edit Row' Action EditRow( nHandle )
-            MenuItem 'Delete Row' Action DeleteRow( nHandle )
-            Separator
-            MenuItem 'Refresh' Action UpdateGrid( nHandle )
-         End Popup
-      End Menu
+            MENUITEM 'Edit Row' Action EditRow( nHandle )
+            MENUITEM 'Delete Row' Action DeleteRow( nHandle )
+            SEPARATOR
+            MENUITEM 'Refresh' Action UpdateGrid( nHandle )
+         END POPUP
+      END MENU
 
       DEFINE GRID Grid_1
          Row 0

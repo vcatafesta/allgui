@@ -44,7 +44,7 @@ STATIC FUNCTION Hb_ProcessFile( ArchiveName, cPassWord, cPath, File, Operation )
    LOCAL aFileList := {}, aFile := {}
 
    IF File( ArchiveName )
-      IF ( HB_ISNIL( File ) )
+      IF File == NIL
          lSuccess := Hb_RProcessFiles( Operation, ArchiveName, cPassWord, cPath )
       ELSE
          aFileList := Hb_RGetFileNamesList( ArchiveName, cPassWord )

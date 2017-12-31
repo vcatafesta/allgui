@@ -99,7 +99,7 @@ METHOD New( aRow, aFStruct, cTableName, cCollation) CLASS TMySQLRow
       ::cMyCollation := SET(_SET_CODEPAGE)
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD FieldGet( cnField ) CLASS TMySQLRow
 
@@ -400,7 +400,7 @@ METHOD New( nSocket, cQuery, cCollation ) CLASS TMySQLQuery
       ::lError := .T.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Refresh() CLASS TMySQLQuery
 
@@ -597,7 +597,7 @@ METHOD Destroy() CLASS TMySQLQuery
 
    ::nResultHandle := NIL
 
-   RETURN Self
+   RETURN SELF
 
 METHOD FCount() CLASS TMySQLQuery
 
@@ -802,7 +802,7 @@ METHOD New( nSocket, cQuery, cTableName, cCollation ) CLASS TMySQLTable
       AAdd( ::aOldValue, ::FieldGet( i ) )
    NEXT
 
-   RETURN Self
+   RETURN SELF
 
 METHOD GetRow( nRow ) CLASS TMySQLTable
 
@@ -1359,13 +1359,13 @@ METHOD New( cServer, cUser, cPassword, nPort, nFlags, cCollation ) CLASS TMySQLS
       ::lError := .T.
    ENDIF
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Destroy() CLASS TMySQLServer
 
    ::nSocket := NIL
 
-   RETURN Self
+   RETURN SELF
 
 METHOD sql_commit() CLASS TMySQLServer
 

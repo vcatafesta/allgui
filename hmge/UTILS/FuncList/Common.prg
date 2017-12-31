@@ -137,7 +137,7 @@ FUNCTION CheckPath( cPath, lCreate )
 
       lSuccess := .T.
 
-   End
+   END
 
    // Return to current folder
 

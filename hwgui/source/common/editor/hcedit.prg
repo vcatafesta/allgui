@@ -314,7 +314,7 @@ METHOD New( oWndParent, nId, nStyle, nLeft, nTop, nWidth, nHeight, oFont, ;
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Open( cFileName, cPageIn, cPageOut ) CLASS HCEdit
 

@@ -43,20 +43,20 @@ PROCEDURE Main
          MENUITEM "Drop Menu 2" ACTION MsgInfo("Button Drop Menu 2", "Pressed")
          MENUITEM "Drop Menu 3" ACTION MsgInfo("Button Drop Menu 3", "Pressed")
 
-         Separator
+         SEPARATOR
 
          POPUP 'More actions'  // Level 2
-            MenuItem 'Action 1' Action MsgInfo( 'Action 1', 'Pressed' )
-            MenuItem 'Action 2' Action MsgInfo( 'Action 2', 'Pressed' )
-            MenuItem 'Action 3' Action MsgInfo( 'Action 3', 'Pressed' )
+            MENUITEM 'Action 1' Action MsgInfo( 'Action 1', 'Pressed' )
+            MENUITEM 'Action 2' Action MsgInfo( 'Action 2', 'Pressed' )
+            MENUITEM 'Action 3' Action MsgInfo( 'Action 3', 'Pressed' )
 
             POPUP '... and more'   // Level 3
-               MenuItem 'Something 1' Action MsgInfo( 'Something 1', 'Pressed' )
-               MenuItem 'Something 2' Action MsgInfo( 'Something 2', 'Pressed' )
-               MenuItem 'Something 3' Action MsgInfo( 'Something 3', 'Pressed' )
-            End Popup
+               MENUITEM 'Something 1' Action MsgInfo( 'Something 1', 'Pressed' )
+               MENUITEM 'Something 2' Action MsgInfo( 'Something 2', 'Pressed' )
+               MENUITEM 'Something 3' Action MsgInfo( 'Something 3', 'Pressed' )
+            END POPUP
 
-         End Popup
+         END POPUP
 
       END MENU
 

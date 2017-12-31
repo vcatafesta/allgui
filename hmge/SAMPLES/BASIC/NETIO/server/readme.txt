@@ -55,7 +55,6 @@ Client side functions:
       enough to chose from existing connections. If server is not
       given then default connection is chosen.
 
-
    netio_GetConnection( [<cServer>], [<nPort>], [<nTimeOut>], ;
                         [<cPasswd>], [<nCompressionLevel>], [<nStrategy>] )
          -> <pConnection> | NIL
@@ -63,10 +62,8 @@ Client side functions:
       RPC calls and stream functions when <pConnection> is passed as
       parameter to these functions.
 
-
    netio_Disconnect( [<cServer>], [<nPort>] ) -> <lOK>
       Close the connection created by netio_Connect()
-
 
    netio_Decode( [@]<cFullName>, [@<cServer>], [@<nPort>], [@<nTimeOut>], ;
                  [@<cPasswd>], [@<nCompressionLevel>], [@<nStrategy>] )
@@ -75,10 +72,8 @@ Client side functions:
       Return .T. if <cFullName> contains any connection settings.
       <cFullName> does not need to be prefixed with "net:"
 
-
    netio_TimeOut( <pConnection> [, <nTimeOut>] ) -> [<nTimeOut>]
       Get/Set client side timeout for messages
-
 
    netio_SetPath( <pConnection> [, <cPath>] ) -> [<cPrevPath>]
       Set/Get path prefix for automatic file redirection to HBNETIO.
@@ -90,27 +85,22 @@ Client side functions:
          /* open "/data/table" on HBNETIO server */
          use "//myserver/myshare/data/table"
 
-
    netio_ProcExists( [<pConnection>,] <cProcName> ) -> <lExists>
       Check if function or procedure exists on the server side.
-
 
    netio_ProcExec( [<pConnection>,] <cProcName> [, <params,...>] ) -> <lSent>
       Execute function or procedure on server the side do not wait for
       confirmation from the server.
-
 
    netio_ProcExecW( [<pConnection>,] <cProcName> [, <params,...>] )
          -> <lExecuted>
       Execute function or procedure on the server side and wait for
       confirmation from the server.
 
-
    netio_FuncExec( [<pConnection>,] <cFuncName> [, <params,...>] )
          -> <xFuncRetVal>
       Execute function on the server side and wait for function return
       value sent by the server.
-
 
    netio_OpenDataStream( [<pConnection>,] <cStreamFuncName> [, <params,...>] )
          -> <nStreamID>
@@ -140,7 +130,6 @@ Client side functions:
       as string.
       If stream was open by netio_OpenItemStream() then data is returned
       as array of items received from the server.
-
 
 
 Server side functions:

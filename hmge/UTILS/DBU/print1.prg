@@ -64,7 +64,7 @@ FUNCTION DBUeditprint
 NEXT _DBUi
 @ _DBUrow,_DBUcol,_DBUrow,_DBUmaxcol1 line
 END PAGE
-end doc
+END doc
 RELEASE printsys
 
 RETURN NIL
@@ -85,7 +85,7 @@ FUNCTION DBUbrowseprint
    _DBUmaxportraitcol := hbprnmaxcol - 4
    SET page orientation DMORIENT_LANDSCAPE paperSize DMPAPER_A4 font "f0"
    _DBUmaxlandscapecol := hbprnmaxcol - 4
-end doc
+END doc
 RELEASE printsys
 _DBUfontsizesstr := {"8","9","10","11","12","14","16","18","20","22","24","26","28","36","48","72"}
 _DBUmaxcol1 := _DBUmaxlandscapecol
@@ -115,7 +115,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       height 400
       items _DBUfieldnamearr
       multiselect .t.
-   end listbox
+   END listbox
    DEFINE BUTTON _DBUfieldadd
       row 100
       col 260
@@ -157,7 +157,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       width 200
       height 400
       multiselect .t.
-   end listbox
+   END listbox
    DEFINE LABEL _DBUorientationlabel
       row 30
       col 600
@@ -173,7 +173,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       options {"Landscape","Portrait"}
       on change DBUorientationchange()
       value 1
-   end radiogroup
+   END radiogroup
    DEFINE LABEL _DBUselectprinterlabel
       row 170
       col 600
@@ -188,7 +188,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       height 100
       items _DBUavailableprinters
       value ascan(_DBUavailableprinters,_DBUcurrentprinter)
-   end listbox
+   END listbox
    DEFINE LABEL _DBUselectfontsizelabel
       row 310
       col 600
@@ -204,7 +204,7 @@ DEFINE WINDOW _DBUprintfields at 0,0 width 800 height 540 title "Select Print Fi
       items _DBUfontsizesstr
       on change DBUfontsizechanged()
       value 5
-   end listbox
+   END listbox
    DEFINE BUTTON _DBUbrowseprint1
       row 260
       col 260
@@ -354,7 +354,7 @@ FUNCTION DBUfontsizechanged
    _DBUmaxportraitcol := hbprnmaxcol - 4
    SET page orientation DMORIENT_LANDSCAPE paperSize DMPAPER_A4 font "f0"
    _DBUmaxlandscapecol := hbprnmaxcol - 4
-end doc
+END doc
 RELEASE printsys
 DBUorientationchange()
 
@@ -497,7 +497,7 @@ FOR _DBUi := 1 to len(_DBUlinesrefarr)
    @ _DBUfirstrow,_DBUlinesrefarr[_DBUi],_DBUlastrow,_DBUlinesrefarr[_DBUi] line
 NEXT _DBUi
 END PAGE
-end doc
+END doc
 RELEASE printsys
 _DBUprintfields.release
 
@@ -593,7 +593,7 @@ FOR _DBUi := 1 to len(_DBUlinesrefarr)
    @ _DBUfirstrow,_DBUlinesrefarr[_DBUi],_DBUlastrow,_DBUlinesrefarr[_DBUi] line
 NEXT _DBUi
 END PAGE
-end doc
+END doc
 RELEASE printsys
 
 RETURN NIL

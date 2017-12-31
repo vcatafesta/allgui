@@ -645,7 +645,7 @@ FUNCTION ABM2( cArea, cTitulo, aNombreCampo, ;
          button tbbListado caption _HMG_aLangButton[ 6 ]  ;
             picture "MINIGUI_EDIT_PRINT"  ;
             action  {|| ABM2Imprimir() }
-      end toolbar
+      END toolbar
 
    END WINDOW
 
@@ -948,7 +948,7 @@ STATIC FUNCTION ABM2Editar( lNuevo )
             button tbbCopiar   caption _HMG_aLangButton[ 9 ]          ;
                picture "MINIGUI_EDIT_COPY"          ;
                action  ABM2EditarCopiar()
-         end toolbar
+         END toolbar
 
          // Define la ventana donde van contenidos los controles de edición.
          DEFINE WINDOW wndABM2EditNuevoSplit             ;
@@ -1303,7 +1303,7 @@ STATIC FUNCTION ABM2Seleccionar()
             action  {|| lSalida := .t.,                                       ;
             nReg    := wndSeleccionar .brwSeleccionar. Value,       ;
             wndSeleccionar.Release }
-      end toolbar
+      END toolbar
 
       // Define la barra de estado de la ventana de selección.
       DEFINE STATUSBAR font _GetSysFont() size 9
@@ -1494,7 +1494,7 @@ STATIC FUNCTION ABM2Buscar()
             action  {|| lSalida := .t.,                         ;
             xValor := wndABMBuscar .conBuscar. Value,           ;
             wndABMBuscar.Release }
-      end toolbar
+      END toolbar
 
       // Define la barra de estado de la ventana de busqueda.
       DEFINE STATUSBAR font _GetSysFont() size 9
@@ -1653,7 +1653,7 @@ STATIC FUNCTION ABM2ActivarFiltro()
          button tbbAceptarFil  caption _HMG_aLangButton[ 8 ]           ;
             picture "MINIGUI_EDIT_OK"         ;
             action  {|| ABM2EstableceFiltro() }
-      end toolbar
+      END toolbar
 
       // Define la barra de estado de la ventana de filtrado.
       DEFINE STATUSBAR font _GetSysFont() size 9
@@ -2024,7 +2024,7 @@ STATIC FUNCTION ABM2Imprimir()
             picture "MINIGUI_EDIT_OK"                 ;
             action  ABM2Listado( aImpresoras )
 
-      end toolbar
+      END toolbar
 
       // Define la barra de estado de la ventana de formato de listado.
       DEFINE STATUSBAR font _GetSysFont() size 9

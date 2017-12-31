@@ -63,7 +63,7 @@ METHOD New( oWndParent, nId, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bInit
 
    ::Activate()
 
-   RETURN Self
+   RETURN SELF
 
 METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPercent ) CLASS HProgressBar
 
@@ -102,7 +102,7 @@ METHOD NewBox( cTitle, nLeft, nTop, nWidth, nHeight, maxPos, nRange, bExit, lPer
    ::Activate()
    ::oParent:AddControl( Self )
 
-   RETURN Self
+   RETURN SELF
 
 METHOD Activate() CLASS HProgressBar
 

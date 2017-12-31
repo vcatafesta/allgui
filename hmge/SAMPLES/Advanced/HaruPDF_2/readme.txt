@@ -2,11 +2,9 @@ PDFClass
 
 Class to make report in Matrix or PDF using Harupdf (fixed size)
 
-
 Constructor
 
 PDFClass():New()
-
 
 Description
 
@@ -25,7 +23,6 @@ Check printer codes to compress/expand - example uses Chr(15)/Chr(18)
 Check how to open txt/pdf - example uses some Windows default
 
 MyTempFile() need a unique name, change it by your function for temporary files
-
 
 Data
 
@@ -65,7 +62,6 @@ Data
 
 :nTopMargin
 
-
 Methods
 
 :AddPage()
@@ -104,11 +100,9 @@ Methods
 
 :SetType( nPrinterType )
 
-
 Library
 
 www.harbourdoc.com.br
-
 
 Author
 

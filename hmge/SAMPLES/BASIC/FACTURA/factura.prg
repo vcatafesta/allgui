@@ -19,7 +19,7 @@ PROCEDURE main()
    SET AUTOPEN OFF //no abrir los indices automaticamente
 
    ***DATOS DE INICIALIZACION***
-   SET Navigation Extended //TAB y ENTER
+   SET NAVIGATION EXTENDED //TAB y ENTER
    SET DATE FORMAT "dd-mm-yyyy"
    SET EPOCH TO YEAR(DATE())-50
 
