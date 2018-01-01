@@ -11,4 +11,5 @@ libpaths=${hb_install_prefix}/addons/hwgui/lib/win/${hb_comp}
 gui=yes
 
 libs=hwgui_core hwgui_hbxml hwgui_contrib hwgui_debug hwgui_procmisc hwgui_hbactivex
+libs=hbwin.hbc
 {hblib}cflags=-DHWG_USE_POINTER_ITEM

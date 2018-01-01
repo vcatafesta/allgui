@@ -18,21 +18,21 @@ FUNCTION Main()
 
    INIT WINDOW oMain MAIN TITLE "Teste" ;
       AT 0,0 ;//BACKGROUND BITMAP OBMP;
-      SIZE hwg_Getdesktopwidth(), hwg_Getdesktopheight() - 28
+      SIZE 1024, 768 // hwg_Getdesktopwidth(), hwg_Getdesktopheight() - 28
 
    MENU OF oMain
-   MENU TITLE "Samples"
-   MENUITEM "&Exit"    ID 1001 ACTION oMain:Close()   BITMAP "\hwgui\samples\image\exit_m.bmp"
-   SEPARATOR
-   MENUITEM "&New "    ID 1002 ACTION hwg_Msginfo("New")  BITMAP "\hwgui\samples\image\new_m.bmp"
-   MENUITEM "&Open"    ID 1003 ACTION hwg_Msginfo("Open") BITMAP "\hwgui\samples\image\open_m.bmp"
-   MENUITEM "&Demo"    ID 1004 ACTION Test()
-   SEPARATOR
-   MENUITEM "&Bitmap and a Text"  ID 1005 ACTION Test()
-   ENDMENU
+      MENU TITLE "…xemplos"
+         MENUITEM "&Sair da aplicaÁ„o"    ID 1001 ACTION oMain:Close()   BITMAP "..\image\exit_m.bmp"
+         SEPARATOR
+         MENUITEM "&Nova „„„"    ID 1002 ACTION hwg_Msginfo("New")  BITMAP "..\image\new_m.bmp"
+         MENUITEM "&Abrir ÈÈÈÈ"    ID 1003 ACTION hwg_Msginfo("Open") BITMAP "..\image\open_m.bmp"
+         MENUITEM "&Demo de XÌcara"    ID 1004 ACTION Test()
+         SEPARATOR
+         MENUITEM "&Bitmap and a Text"  ID 1005 ACTION Test()
+      ENDMENU
    ENDMENU
    //The number ID is very important to use bitmap in menu
-   MENUITEMBITMAP oMain ID 1005 BITMAP "\hwgui\samples\image\logo.bmp"
+   MENUITEMBITMAP oMain ID 1005 BITMAP "..\image\logo.bmp"
    //Hwg_InsertBitmapMenu(oMain:Menu, 1005, "\hwgui\sourceoBmp:handle)   //do not use bitmap empty
    ACTIVATE WINDOW oMain
 

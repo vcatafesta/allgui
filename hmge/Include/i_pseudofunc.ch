@@ -764,7 +764,7 @@ cFilePath( <cFile> ) + "\" + cFileNoExt( <cFile> ) + <cExt>
 #endif
 
 #if ( __HARBOUR__ - 0 > 0x030200 )
-   #xtranslate hb_oemtoansi( <x> )        => win_oemtoansi( <x> )
+   #xtranslate hb_oemtoansi( <x> )        => <x>
 #endif
 #  xtranslate IsDirectory( <c> )          => hb_DirExists( <c> )
 #  xtranslate GetComputerName()           => NetName()
